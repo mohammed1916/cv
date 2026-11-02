@@ -1,0 +1,13 @@
+{
+  "number": 3994,
+  "title": "Minimum Adjacent Swaps to Partition Array",
+  "source": "https://leetcode.com/problems/minimum-adjacent-swaps-to-partition-array/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Use adjacent swaps to arrange three contiguous value groups: values below a, then values in [a,b], then values above b. Any group may be empty and internal order is unrestricted. Return the minimum swaps modulo1000000007.",
+  "officialConstraints": "Length1..100000; values1..10^9; 1<=a<b<=10^9.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

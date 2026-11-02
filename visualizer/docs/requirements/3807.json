@@ -1,0 +1,14 @@
+{
+  "number": 3807,
+  "title": "Minimum Cost to Repair Edges to Traverse a Graph",
+  "source": "https://leetcode.doocs.org/en/lc/3807/",
+  "officialUrl": "https://leetcode.com/problems/minimum-cost-to-repair-edges-to-traverse-a-graph/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Every edge in an undirected graph starts damaged and has a repair cost. Choose a nonnegative threshold and repair all edges costing at most that threshold. Return the smallest threshold permitting a path from node zero to node n-1 using at most k edges, or -1 if impossible.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

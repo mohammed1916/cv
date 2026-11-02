@@ -1,0 +1,13 @@
+{
+  "number": 3987,
+  "title": "Minimum Total Cost to Process All Elements",
+  "source": "https://leetcode.com/problems/minimum-total-cost-to-process-all-elements/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Start with k resource units and process array demands left to right, consuming each demand. Whenever needed, purchase another k units; the first purchase costs one, the second two, and so forth. Return the minimum total purchase cost modulo1000000007. The initial k units are free and the refill size stays fixed.",
+  "officialConstraints": "Length1..100000; demands and k each1..10^9.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

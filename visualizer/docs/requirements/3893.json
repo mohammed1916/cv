@@ -1,0 +1,14 @@
+{
+  "number": 3893,
+  "title": "Maximum Team Size with Overlapping Intervals",
+  "source": "https://leetcode.doocs.org/en/lc/3893/",
+  "officialUrl": "https://leetcode.com/problems/maximum-team-size-with-overlapping-intervals/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Employee intervals are closed, so endpoint contact is overlap. A valid team has at least one member whose interval overlaps every other member's interval. Return the largest team size; the other members need not overlap one another.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

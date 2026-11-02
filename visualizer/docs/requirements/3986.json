@@ -1,0 +1,13 @@
+{
+  "number": 3986,
+  "title": "Number of Elapsed Seconds Between Two Times",
+  "source": "https://leetcode.com/problems/number-of-elapsed-seconds-between-two-times/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Given valid 24-hour start and end timestamps formatted HH:MM:SS on the same day, return elapsed seconds. End is guaranteed not earlier than start, so no midnight wrap is required.",
+  "officialConstraints": "Both strings length8; hours0..23, minutes/seconds0..59; end>=start.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

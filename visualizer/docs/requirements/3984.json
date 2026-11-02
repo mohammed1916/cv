@@ -1,0 +1,13 @@
+{
+  "number": 3984,
+  "title": "Divisible Game",
+  "source": "https://leetcode.com/problems/divisible-game/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Choose an integer k>1 and a nonempty contiguous array interval. Values divisible by k contribute positively to the score, while all other selected values contribute negatively. Maximize this score, breaking ties by the smallest k. Return optimum score times that chosen k modulo 1000000007.",
+  "officialConstraints": "Length 1..1000; positive values 1..10^6.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

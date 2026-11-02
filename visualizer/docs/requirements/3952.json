@@ -1,0 +1,13 @@
+{
+  "number": 3952,
+  "title": "Maximum Total Value of Covered Indices",
+  "source": "https://leetcode.com/problems/maximum-total-value-of-covered-indices/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "A binary string marks initial tokens on an array. Each token may move left by one position at most once, or remain. After all choices, score each occupied index's array value once, regardless of token multiplicity. Return the maximum score. A token initially at zero cannot move left.",
+  "officialConstraints": "Equal array/string length 1..100000; array values 1..100000; string binary.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

@@ -1,0 +1,16 @@
+{
+  "number": 3957,
+  "title": "Maximum Sum of M Non-Overlapping Subarrays II",
+  "source": "https://leetcode.com/problems/maximum-sum-of-m-non-overlapping-subarrays-ii/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Select between one and m disjoint contiguous subarrays of nums, each of length from l through r inclusive. Return the greatest total sum of their elements. Selecting no subarray is not allowed, even if all values are negative.",
+  "officialConstraints": [
+    "1 <= n <= 100000; values are -100000..100000.",
+    "1 <= m <= n; 1 <= l <= r <= n."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

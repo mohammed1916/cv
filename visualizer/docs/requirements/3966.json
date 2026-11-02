@@ -1,0 +1,13 @@
+{
+  "number": 3966,
+  "title": "Count Good Integers in a Range",
+  "source": "https://leetcode.com/problems/count-good-integers-in-a-range/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Count integers in the inclusive range [l,r] whose consecutive decimal digits always differ by at most k in absolute value. Use their ordinary decimal representations without artificial leading zeros.",
+  "officialConstraints": "10<=l<=r<=10^15; k 0..9.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

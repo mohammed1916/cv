@@ -1,0 +1,13 @@
+{
+  "number": 3980,
+  "title": "Minimum Operations to Transform Binary String",
+  "source": "https://leetcode.com/problems/minimum-operations-to-transform-binary-string/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Transform s1 into equal-length binary string s2 using either a single 0-to-1 change or a simultaneous change of an adjacent 11 pair into 00. Each operation costs one and may be repeated in any order. Return the minimum count, or -1 if impossible.",
+  "officialConstraints": "Equal binary-string lengths 1..100000.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

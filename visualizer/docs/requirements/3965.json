@@ -1,0 +1,13 @@
+{
+  "number": 3965,
+  "title": "Finish Time of Tasks I",
+  "source": "https://leetcode.com/problems/finish-time-of-tasks-i/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Tasks form a tree rooted at zero, with directed parent-child edges and base durations. A leaf finishes at its base duration. A nonleaf finishes at twice its latest child finish minus its earliest child finish plus its own base duration. Return the root's finish time.",
+  "officialConstraints": "1..100000 tasks, exactly n-1 edges forming a valid rooted tree; base durations 1..100000; every finish time is less than 2^53.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

@@ -1,0 +1,14 @@
+{
+  "number": 3778,
+  "title": "Minimum Distance Excluding One Maximum Weighted Edge",
+  "source": "https://leetcode.ca/2026-01-26-3778-Minimum-Distance-Excluding-One-Maximum-Weighted-Edge/",
+  "officialUrl": "https://leetcode.com/problems/minimum-distance-excluding-one-maximum-weighted-edge/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "In a connected simple undirected graph with positive edge weights, price a path by its edge-weight sum minus one maximum-weight edge. If the maximum repeats, subtract it only once. Return the minimum such cost from node zero to node n-1.",
+  "requirementsVerified": false,
+  "officialConstraints": "Numeric bounds and full interface require review against the current official statement.",
+  "examples": [],
+  "exampleStatus": "No source examples copied; independently author and check teaching examples."
+}

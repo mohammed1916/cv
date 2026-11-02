@@ -1,0 +1,13 @@
+{
+  "number": 4020,
+  "title": "Elevator Requests I",
+  "source": "https://leetcode.com/problems/elevator-requests-i/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "An elevator starts at floor zero and serves the requested floors in their given order, moving one floor per second and spending no time at a stop. Return the total travel time, with repeated current-floor requests costing zero.",
+  "officialConstraints": "1..100 floors;1..100 requests; floor indices0..n-1.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

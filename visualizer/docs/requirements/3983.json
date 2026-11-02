@@ -1,0 +1,13 @@
+{
+  "number": 3983,
+  "title": "Subsequence After One Replacement",
+  "source": "https://leetcode.com/problems/subsequence-after-one-replacement/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Change at most one character of s to any lowercase letter. Return whether the resulting s can be a subsequence of t. The optional change is in s, not t, and no deletion from s is allowed except the implicit choice of positions in t.",
+  "officialConstraints": "Both lowercase strings have lengths 1..100000.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

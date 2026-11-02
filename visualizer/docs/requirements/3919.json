@@ -1,0 +1,13 @@
+{
+  "number": 3919,
+  "title": "Minimum Cost to Move Between Indices",
+  "source": "https://leetcode.com/problems/minimum-cost-to-move-between-indices/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Given strictly increasing nums, each index has a closest adjacent neighbor by value difference, choosing the lower index on ties. A move can go to any index for the absolute value difference, or to the closest neighbor for cost one. For each [start,end] query return the minimum total travel cost; directions can have different costs.",
+  "officialConstraints": "Length 2..100000; values -10^9..10^9; 1..100000 queries with valid zero-based endpoints.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

@@ -1,0 +1,13 @@
+{
+  "number": 3968,
+  "title": "Maximum Manhattan Distance After All Moves",
+  "source": "https://leetcode.com/problems/maximum-manhattan-distance-after-all-moves/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Starting at the origin, follow U,D,L,R unit steps. Replace each underscore independently with any one of those directions. Maximize the final Manhattan distance after the entire string, not the maximum encountered along the way.",
+  "officialConstraints": "Move-string length 1..100000; alphabet U,D,L,R,_.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

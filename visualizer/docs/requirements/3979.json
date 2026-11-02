@@ -1,0 +1,13 @@
+{
+  "number": 3979,
+  "title": "Maximum Valid Pair Sum",
+  "source": "https://leetcode.com/problems/maximum-valid-pair-sum/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Among index pairs i<j separated by at least k positions, maximize nums[i]+nums[j]. Return that sum; separation means j-i>=k.",
+  "officialConstraints": "Length 2..100000; values 1..10^9; k 1..n-1.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

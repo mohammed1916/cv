@@ -1,0 +1,15 @@
+{
+  "number": 4022,
+  "title": "K-th Digit in Infinite String",
+  "source": "https://leetcode.com/problems/k-th-digit-in-infinite-string/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Form an infinite digit string from positive integers grouped by their tens block b. Even-numbered blocks list their integers ascending; odd-numbered blocks list them descending. The first block omits zero. Concatenate their decimal representations without separators and return the digit at one-based position k.",
+  "officialConstraints": [
+    "1 <= k <= 1000000000000000."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

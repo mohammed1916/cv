@@ -1,0 +1,14 @@
+{
+  "number": 3061,
+  "title": "Calculate Trapping Rain Water",
+  "source": "https://leetcode.doocs.org/en/lc/3061/",
+  "officialUrl": "https://leetcode.com/problems/calculate-trapping-rain-water/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Heights(id,height) lists unit-width landscape bars in sequential id order. Compute the total water retained between them after rain. Return a single total_trapped_water value; water above each bar is bounded by the smaller of the highest bars to its left and right.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

@@ -1,0 +1,13 @@
+{
+  "number": 3939,
+  "title": "Count Non Adjacent Subsets in a Rooted Tree",
+  "source": "https://leetcode.com/problems/count-non-adjacent-subsets-in-a-rooted-tree/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "A tree rooted at zero has parent[i]<i and positive node values. Count nonempty selected-node subsets with sum divisible by k and no parent-child pair both selected. Return the count modulo 1000000007.",
+  "officialConstraints": "1..1000 nodes; parent[0]=-1; other parents valid and smaller than child index; values 1..10^9; k 1..100.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

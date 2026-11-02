@@ -1,0 +1,13 @@
+{
+  "number": 4023,
+  "title": "Elevator Requests II",
+  "source": "https://leetcode.com/problems/elevator-requests-ii/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "All distinct requested floors are requested at time zero. Starting at start, move one floor per second up or down until all are visited. Each request contributes its first-visit time to the penalty; a request at start contributes zero. Choose movement minimizing the sum of those completion times and return that sum.",
+  "officialConstraints": "Floors1..10^9;1..1500 distinct requested valid floors; start valid.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

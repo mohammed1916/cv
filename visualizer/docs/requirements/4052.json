@@ -1,0 +1,16 @@
+{
+  "number": 4052,
+  "title": "Cyclically Shift Rows and Columns",
+  "source": "https://leetcode.com/problems/cyclically-shift-rows-and-columns/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "In an n-by-n grid, first cyclically shift each row i left by rowShift[i] positions. Then shift each column j of that intermediate grid upward by colShift[j] positions. Return the final grid.",
+  "officialConstraints": [
+    "1 <= n <= 10; grid entries are 1..100.",
+    "Both shift arrays have length n; shifts are 0..n-1."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

@@ -1,0 +1,13 @@
+{
+  "number": 3996,
+  "title": "Even Number of Knight Moves",
+  "source": "https://leetcode.com/problems/even-number-of-knight-moves/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "On a standard 8-by-8 board, determine whether a knight can reach target from start using an even number of legal moves. Zero moves is even; all intermediate cells must remain on the board.",
+  "officialConstraints": "start and target each contain two coordinates in0..7.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

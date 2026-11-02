@@ -1,0 +1,14 @@
+{
+  "number": 3735,
+  "title": "Lexicographically Smallest String After Reverse II",
+  "source": "https://leetcode.doocs.org/en/lc/3735/",
+  "officialUrl": "https://leetcode.com/problems/lexicographically-smallest-string-after-reverse-ii/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Perform exactly one operation on a lowercase string: reverse a nonempty prefix or a nonempty suffix. Length-one reversal is allowed. Return the lexicographically smallest result.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

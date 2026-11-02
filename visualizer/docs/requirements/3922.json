@@ -1,0 +1,13 @@
+{
+  "number": 3922,
+  "title": "Minimum Flips to Make Binary String Coherent",
+  "source": "https://leetcode.com/problems/minimum-flips-to-make-binary-string-coherent/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Flip individual bits of a binary string at cost one each. Return the fewest flips needed to eliminate both 011 and 110 as subsequences. These are subsequence prohibitions, not just adjacent-pattern prohibitions.",
+  "officialConstraints": "Binary-string length 1..100000.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

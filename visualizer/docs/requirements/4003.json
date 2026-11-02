@@ -1,0 +1,13 @@
+{
+  "number": 4003,
+  "title": "Minimum Cost Path with Alternating Directions III",
+  "source": "https://leetcode.com/problems/minimum-cost-path-with-alternating-directions-iii/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Begin at grid cell(0,0), paying entrance cost1, and reach the bottom-right. Entering(i,j) costs(i+1)(j+1). Actions start at one: right/down are preferred on odd actions, left/up on even. A nonpreferred move also pays penalty at its departure cell. Waiting pays that cell's penalty. Every move or wait advances action parity. Return minimum total cost including initial entry.",
+  "officialConstraints": "Dimensions1..100000; total cells2..100000; penalty matches grid shape and lies0..100000.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

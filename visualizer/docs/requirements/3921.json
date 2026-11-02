@@ -1,0 +1,13 @@
+{
+  "number": 3921,
+  "title": "Score Validator",
+  "source": "https://leetcode.com/problems/score-validator/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Process an event list with score and wicket counter initially zero. Numeric tokens 0,1,2,3,4,6 add their value to score; WD and NB add one; W adds one only to the counter. Stop immediately when the counter reaches ten or input ends. Return [score,counter]; ignore remaining tokens after the tenth W.",
+  "officialConstraints": "1..1000 events, each from the listed nine token strings.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

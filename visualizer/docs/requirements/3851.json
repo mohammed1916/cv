@@ -1,0 +1,14 @@
+{
+  "number": 3851,
+  "title": "Maximum Requests Without Violating the Limit",
+  "source": "https://leetcode.doocs.org/en/lc/3851/",
+  "officialUrl": "https://leetcode.com/problems/maximum-requests-without-violating-the-limit/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Each request records a user and time. Keep as many requests as possible while ensuring that each user's count in every inclusive interval [t,t+window] is at most k. You may drop arbitrary requests. Return the largest total retained.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

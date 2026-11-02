@@ -1,0 +1,13 @@
+{
+  "number": 3945,
+  "title": "Digit Frequency Score",
+  "source": "https://leetcode.com/problems/digit-frequency-score/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "For each decimal digit value d in n, multiply d by its number of occurrences and add these products. Return the score; equivalently each digit occurrence contributes its digit value once.",
+  "officialConstraints": "1<=n<=1000000000.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

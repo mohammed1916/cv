@@ -1,0 +1,13 @@
+{
+  "number": 3964,
+  "title": "Minimum Lights to Illuminate a Road",
+  "source": "https://leetcode.com/problems/minimum-lights-to-illuminate-a-road/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "A positive lights[i] marks an existing bulb covering positions i-lights[i] through i+lights[i], clipped to the road. Zero marks no bulb. Add bulbs anywhere, each covering its position and immediate neighbors. Return the minimum additions making every road position illuminated.",
+  "officialConstraints": "Road length 1..100000; existing radii 0..road length.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

@@ -1,0 +1,13 @@
+{
+  "number": 3988,
+  "title": "Create Grid With Exactly K Paths I",
+  "source": "https://leetcode.com/problems/create-grid-with-exactly-k-paths-i/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Construct an m-by-n grid of '.' free cells and '#' obstacles with exactly k free-cell paths from top-left to bottom-right using only right/down steps. Return any valid grid, or an empty array if impossible.",
+  "officialConstraints": "m,n each1..10; k1..4.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

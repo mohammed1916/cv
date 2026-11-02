@@ -1,0 +1,13 @@
+{
+  "number": 3962,
+  "title": "Maximum Subarray Sum After at Most K Swaps",
+  "source": "https://leetcode.com/problems/maximum-subarray-sum-after-at-most-k-swaps/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Swap arbitrary pairs of array positions at most k times, then choose a nonempty contiguous subarray. Return the largest sum achievable. Zero swaps are permitted; swapping is not restricted to adjacent indices.",
+  "officialConstraints": "Length 1..1500; values -100000..100000; k 0..length.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

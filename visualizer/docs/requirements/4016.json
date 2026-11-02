@@ -1,0 +1,13 @@
+{
+  "number": 4016,
+  "title": "Maximum Area of Two Non-Overlapping Square Submatrices",
+  "source": "https://leetcode.com/problems/maximum-area-of-two-non-overlapping-square-submatrices/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Choose two cell-disjoint all-one square submatrices of the same side length. Return the largest possible area of each square, not their combined area. Return zero if two nonempty qualifying squares cannot be chosen.",
+  "officialConstraints": "Binary matrix with1..500 rows and columns.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

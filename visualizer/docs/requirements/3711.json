@@ -1,0 +1,14 @@
+{
+  "number": 3711,
+  "title": "Maximum Transactions Without Negative Balance",
+  "source": "https://leetcode.doocs.org/en/lc/3711/",
+  "officialUrl": "https://leetcode.com/problems/maximum-transactions-without-negative-balance/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Process signed transactions in their original order starting with balance zero. You may skip transactions, but every retained prefix must leave a nonnegative balance. Return the maximum number retained.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

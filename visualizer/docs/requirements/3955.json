@@ -1,0 +1,13 @@
+{
+  "number": 3955,
+  "title": "Valid Binary Strings With Cost Limit",
+  "source": "https://leetcode.com/problems/valid-binary-strings-with-cost-limit/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Return every length-n binary string with no adjacent ones and with the sum of zero-based indices containing ones at most k. Return strings in any order. A one at index zero costs zero but still participates in adjacency restrictions.",
+  "officialConstraints": "n 1..12; k 0..n(n-1)/2.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

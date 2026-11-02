@@ -1,0 +1,14 @@
+{
+  "number": 3647,
+  "title": "Maximum Weight in Two Bags",
+  "source": "https://leetcode.doocs.org/en/lc/3647/",
+  "officialUrl": "https://leetcode.com/problems/maximum-weight-in-two-bags/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Place each item in at most one of two bags with capacities w1 and w2, or leave it unused. Maximize the sum of packed weights while respecting each capacity separately. Return that sum.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

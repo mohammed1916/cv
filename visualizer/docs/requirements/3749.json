@@ -1,0 +1,14 @@
+{
+  "number": 3749,
+  "title": "Evaluate Valid Expressions",
+  "source": "https://leetcode.ca/2025-12-28-3749-Evaluate-Valid-Expressions/",
+  "officialUrl": "https://leetcode.com/problems/evaluate-valid-expressions/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Evaluate a valid nested expression consisting of signed integer literals and add(a,b), sub(a,b), mul(a,b), or div(a,b). Arguments can themselves be expressions. Return its integer result. All divisions are exact and intermediate results fit a long integer.",
+  "requirementsVerified": false,
+  "officialConstraints": "Numeric bounds and full interface require review against the current official statement.",
+  "examples": [],
+  "exampleStatus": "No source examples copied; independently author and check teaching examples."
+}

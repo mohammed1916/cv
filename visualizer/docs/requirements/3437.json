@@ -1,0 +1,14 @@
+{
+  "number": 3437,
+  "title": "Permutations III",
+  "source": "https://leetcode.doocs.org/en/lc/3437/",
+  "officialUrl": "https://leetcode.com/problems/permutations-iii/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Return every permutation of 1..n in which adjacent entries have opposite parity. Sort the resulting permutations lexicographically.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

@@ -1,0 +1,15 @@
+{
+  "number": 4036,
+  "title": "Lexicographically Largest String After Pair Transformations",
+  "source": "https://leetcode.com/problems/lexicographically-largest-string-after-pair-transformations/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "For each x in nums, start with x copies of a. Repeatedly you may replace two adjacent equal letters by the next alphabet letter; zz cannot be merged. Return the lexicographically greatest obtainable string for every x.",
+  "officialConstraints": [
+    "1..100000 inputs; 1 <= x <= 100000000."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

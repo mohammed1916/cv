@@ -1,0 +1,14 @@
+{
+  "number": 3540,
+  "title": "Minimum Time to Visit All Houses",
+  "source": "https://leetcode.doocs.org/en/lc/3540/",
+  "officialUrl": "https://leetcode.com/problems/minimum-time-to-visit-all-houses/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Houses form a cycle. From house i, going forward to (i+1) modulo n costs forward[i]; going backward to (i-1) modulo n costs backward[i]. Start at house zero and visit the query houses in order. Return the smallest total travel time.",
+  "requirementsVerified": false,
+  "officialConstraints": "Numeric bounds and full interface require review against the current official statement.",
+  "examples": [],
+  "exampleStatus": "No source examples copied; independently author and check teaching examples."
+}

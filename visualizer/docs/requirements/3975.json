@@ -1,0 +1,13 @@
+{
+  "number": 3975,
+  "title": "Filter Occupied Intervals",
+  "source": "https://leetcode.com/problems/filter-occupied-intervals/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Merge inclusive integer occupied intervals whenever they overlap or are consecutive, then remove all integer points in the inclusive free interval. Return the remaining maximal intervals sorted increasingly, or an empty list if nothing remains. Removing an interior interval can split an occupied interval into two.",
+  "officialConstraints": "1..50000 occupied intervals; endpoints and free endpoints in 1..10^9, with start<=end.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

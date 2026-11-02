@@ -1,0 +1,14 @@
+{
+  "number": 4042,
+  "title": "Valid K-Unique Subarrays II",
+  "source": "https://leetcode.doocs.org/en/lc/4042/",
+  "officialUrl": "https://leetcode.com/problems/valid-k-unique-subarrays-ii/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Answer q inclusive-range queries. A range is valid when it has exactly k distinct values and all frequencies are even. Start with [l0,r0]. After each answer, set g=l+r if true, otherwise r-l; compute next endpoints (l XOR g)%n and (r XOR g)%n from the old endpoints, then sort the two endpoints. Return all Boolean answers. Later ranges may be singletons.",
+  "requirementsVerified": false,
+  "officialConstraints": "Numeric bounds and full interface require review against the current official statement.",
+  "examples": [],
+  "exampleStatus": "No source examples copied; independently author and check teaching examples."
+}

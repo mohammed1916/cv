@@ -1,0 +1,13 @@
+{
+  "number": 4009,
+  "title": "Minimum Possible Maximum Waiting Time",
+  "source": "https://leetcode.com/problems/minimum-possible-maximum-waiting-time/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Cars become eligible in order: the first at time zero, each later car when its predecessor starts fueling. Assign each eligible car to one of two dispensers with enough remaining fuel; it must wait for that dispenser if busy and start immediately once free. Demand determines both fuel consumed and service seconds. If neither dispenser can serve a car, processing stops. First maximize cars served, then minimize their largest eligibility-to-start wait. Return that wait, or -1 if none are served.",
+  "officialConstraints": "1..50 cars; demands1..20; exactly two fuel capacities, each1..50.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

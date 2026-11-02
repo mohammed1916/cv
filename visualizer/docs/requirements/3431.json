@@ -1,0 +1,14 @@
+{
+  "number": 3431,
+  "title": "Minimum Unlocked Indices to Sort Nums",
+  "source": "https://leetcode.doocs.org/en/lc/3431/",
+  "officialUrl": "https://leetcode.com/problems/minimum-unlocked-indices-to-sort-nums/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "nums contains only 1,2,3 and locked is binary. An adjacent swap i,i+1 is permitted only when nums[i]-nums[i+1]=1 and locked[i]=0. You may unlock an index by setting its flag to zero. Return the fewest unlocks allowing ascending sorting, or -1 if impossible. Locks belong to indices, not traveling values.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

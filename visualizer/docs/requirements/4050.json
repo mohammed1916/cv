@@ -1,0 +1,15 @@
+{
+  "number": 4050,
+  "title": "Minimum Days to Score Exactly N Points",
+  "source": "https://leetcode.com/problems/minimum-days-to-score-exactly-n-points/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Starting at score zero, each day either score or skip. Consecutive scoring days earn 1,2,3,... points; a skipped day earns zero and resets the next scoring day to one. Return the minimum elapsed days, including skips, to reach exactly n points.",
+  "officialConstraints": [
+    "1 <= n <= 100000."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

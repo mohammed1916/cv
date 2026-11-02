@@ -1,0 +1,13 @@
+{
+  "number": 4006,
+  "title": "Count Valid Prefixes",
+  "source": "https://leetcode.com/problems/count-valid-prefixes/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Count nonempty prefixes of a binary string whose characters can be rearranged into a string with alternating bits. The prefix itself need not already alternate.",
+  "officialConstraints": "Binary-string length1..100.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

@@ -1,0 +1,13 @@
+{
+  "number": 3961,
+  "title": "Maximize Sum of Device Ratings",
+  "source": "https://leetcode.com/problems/maximize-sum-of-device-ratings/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Each device starts with n units and its rating is its minimum unit capacity, or zero if empty. Any device can be chosen as a source at most once, removing exactly one of its then-current units and transferring it to another device. Receiving units is unrestricted and does not use the source allowance. Maximize the sum of final device ratings.",
+  "officialConstraints": "1..100000 devices and initial units per device; total initial units <=200000; capacities 1..100000.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

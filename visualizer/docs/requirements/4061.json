@@ -1,0 +1,15 @@
+{
+  "number": 4061,
+  "title": "Minimum Queen Moves to Reach Target",
+  "source": "https://leetcode.com/problems/minimum-queen-moves-to-reach-target/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "On an empty eight-by-eight chessboard, return the minimum queen moves between source and target. A move travels a positive distance along one row, column or diagonal while staying on the board. Equal endpoints require zero moves.",
+  "officialConstraints": [
+    "Both coordinates are pairs with components 1..8."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

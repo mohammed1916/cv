@@ -1,0 +1,14 @@
+{
+  "number": 3476,
+  "title": "Maximize Profit from Task Assignment",
+  "source": "https://leetcode.doocs.org/en/lc/3476/",
+  "officialUrl": "https://leetcode.com/problems/maximize-profit-from-task-assignment/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Each worker can perform at most one task whose required skill equals that worker's skill exactly. Each task has a profit and may be assigned once. One extra worker can perform any task regardless of skill. Maximize total profit across all assignments.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

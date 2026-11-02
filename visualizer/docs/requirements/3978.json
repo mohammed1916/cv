@@ -1,0 +1,15 @@
+{
+  "number": 3978,
+  "title": "Unique Middle Element",
+  "source": "https://leetcode.com/problems/unique-middle-element/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "For an odd-length array, return whether the value at its middle index occurs exactly once in the whole array.",
+  "officialConstraints": [
+    "Odd length from 1..100; values 1..100."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

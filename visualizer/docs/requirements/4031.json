@@ -1,0 +1,15 @@
+{
+  "number": 4031,
+  "title": "Find All Numbers Disappeared in an Array II",
+  "source": "https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array-ii/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Return all integers absent from nums within inclusive range [lower,upper], grouped into maximal consecutive endpoint ranges. Sort the ranges increasingly; return an empty list when nothing is missing.",
+  "officialConstraints": [
+    "1..100000 elements, each 1..100000; 1 <= lower <= upper <= 100000."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

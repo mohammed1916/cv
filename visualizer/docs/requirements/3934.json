@@ -1,0 +1,13 @@
+{
+  "number": 3934,
+  "title": "Smallest Unique Subarray",
+  "source": "https://leetcode.com/problems/smallest-unique-subarray/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Return the shortest length of a contiguous nonempty sequence that occurs at exactly one starting position in the array. Equal-length subarrays match only when all corresponding values agree. Occurrences may overlap; the entire array guarantees an answer.",
+  "officialConstraints": "Length 1..100000; values 1..100000.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

@@ -1,0 +1,14 @@
+{
+  "number": 3089,
+  "title": "Find Bursty Behavior",
+  "source": "https://leetcode.doocs.org/en/lc/3089/",
+  "officialUrl": "https://leetcode.com/problems/find-bursty-behavior/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Posts(post_id,user_id,post_date) has unique post_id. Analyze only February 1 through 28, 2024, treating this period as four weeks. Find users whose largest seven-consecutive-day posting count is at least twice their average weekly count in that period. Return users in ascending ID order. Verify the requested output statistics and column names before implementation.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

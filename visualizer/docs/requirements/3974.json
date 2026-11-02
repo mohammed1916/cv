@@ -1,0 +1,13 @@
+{
+  "number": 3974,
+  "title": "Maximum Total Sum of K Selected Elements",
+  "source": "https://leetcode.com/problems/maximum-total-sum-of-k-selected-elements/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Select exactly k array occurrences and process them in any order. At each step add either the value itself or its product with the current multiplier. Decrease the multiplier by one after every processed occurrence regardless of that choice; it may become nonpositive. Return the maximum total.",
+  "officialConstraints": "Length 1..100000; positive values <=100000; k 1..length; initial multiplier 1..100000.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

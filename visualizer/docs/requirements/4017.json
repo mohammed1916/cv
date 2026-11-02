@@ -1,0 +1,16 @@
+{
+  "number": 4017,
+  "title": "Peaks in Array II",
+  "source": "https://leetcode.com/problems/peaks-in-array-ii/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Maintain nums under point replacements. A peak subarray has length at least three and contains an interior element strictly larger than both neighbors. For query [1,l,r], count subarrays wholly inside inclusive range [l,r] that contain at least one such peak; count a subarray once even if it has several peaks. Query [2,index,val] replaces one array element. Return answers to type-1 queries in order.",
+  "officialConstraints": [
+    "3 <= n <= 100000; values and replacement values are 0..100000.",
+    "1..100000 queries; 0 <= l < r < n; replacement indices are valid."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

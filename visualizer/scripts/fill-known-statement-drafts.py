@@ -27,6 +27,8 @@ for item in items:
         body = draft['task']
         constraints = 'The structural/domain rules stated above are part of this remembered draft. Exact current official numeric bounds and omitted interface details are NOT verified. Do not invent them or substitute visualization limits.'
         provenance = 'Independently composed from model knowledge. Not scraped, not a recovered original statement, and not independently verified against the current official page.'
+        if draft.get('supportingSources'):
+            provenance = 'Independently written draft with partial public-reference review. Not recovered original text or complete official-source verification.\nReferences: ' + ', '.join(draft['supportingSources']) + '\nReview: ' + draft.get('sourceReview', 'Current official bounds and completeness remain pending.')
         examples = draft.get('example', 'No example supplied in this draft; author and independently validate a teaching example before publication.')
         pitfalls = draft.get('pitfalls', 'Verify the domain, API/output format, edge cases and exact bounds before marking requirements complete.')
     else:

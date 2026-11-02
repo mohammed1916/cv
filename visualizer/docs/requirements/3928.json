@@ -1,0 +1,13 @@
+{
+  "number": 3928,
+  "title": "Minimum Cost to Buy Apples II",
+  "source": "https://leetcode.com/problems/minimum-cost-to-buy-apples-ii/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Each shop sells apples for its listed price. Roads are bidirectional and carry an empty-trip cost plus an apple-carrying multiplier. For every starting shop, minimize purchase price plus travel to a chosen shop empty and travel back carrying apples. The outbound and return paths may differ; buying locally requires no travel. Return one minimum per start.",
+  "officialConstraints": "1..1000 shops; prices 1..10^9; at most min(n(n-1)/2,2000) distinct non-self roads; road cost 1..10^9 and multiplier 1..100; zero-based valid shop IDs.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

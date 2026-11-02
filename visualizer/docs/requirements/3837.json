@@ -1,0 +1,14 @@
+{
+  "number": 3837,
+  "title": "Delayed Count of Equal Elements",
+  "source": "https://leetcode.doocs.org/en/lc/3837/",
+  "officialUrl": "https://leetcode.com/problems/delayed-count-of-equal-elements/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "For each index i, count indices j strictly greater than i+k with nums[j]=nums[i]. Return the counts in index order. The strict distance condition excludes j=i+k.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

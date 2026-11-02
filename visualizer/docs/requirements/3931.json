@@ -1,0 +1,13 @@
+{
+  "number": 3931,
+  "title": "Check Adjacent Digit Differences",
+  "source": "https://leetcode.com/problems/check-adjacent-digit-differences/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Return whether every consecutive pair of characters in a decimal digit string differs numerically by no more than two. Compare digit values rather than character positions.",
+  "officialConstraints": "Digit-string length 2..100.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

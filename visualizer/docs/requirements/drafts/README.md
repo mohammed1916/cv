@@ -12,12 +12,26 @@ The four official pages checked during this fill (156, 157, 161, 163) displayed 
 
 Website content still requires independent authorship and validation; this reference workflow does not automatically publish any text or examples.
 
-## Continued fill checkpoint — 2026-11-02
+## Historical intermediate checkpoint — 2026-11-02
 
-The next pass added **430 files**: 427 additional knowledge-based drafts and three newly sourced requirement notes (4039, 4040, 4043). Current inbox: **520 non-empty / 569 empty** out of 1,089. The non-empty files contain 511 knowledge drafts, eight inherited/new source-note renderings and one preserved supplied text (175.txt). This is text coverage, not 520 verified complete requirements.
+The next pass added **430 files**: 427 additional knowledge-based drafts and three newly sourced requirement notes (4039, 4040, 4043). Inbox at that checkpoint: **520 non-empty / 569 empty** out of 1,089. The non-empty files contain 511 knowledge drafts, eight inherited/new source-note renderings and one preserved supplied text (175.txt). This is text coverage, not 520 verified complete requirements.
 
 Run `python3 scripts/audit-manual-statement-inbox.py` for [the local per-ID status report](../../../local-reference/leetcode/INBOX-STATUS.md). Automated triage currently distinguishes 332 drafts awaiting source verification and 179 drafts with explicit caveats/rule gaps; these are conservative text-based labels, not a human completeness audit. All remembered numeric bounds remain unverified unless separately sourced.
 
 The official pages for 4039, 4040 and 4043 were readable via the web tool. Their independent notes contain source-checked constraints and newly authored examples; no official example was copied into a website preset. Individual attempts for 4041, 4042, 4071, 4072 and 4073 failed through that tool. These failures are route-specific, not proof of permanent inaccessibility. Continue with available sources and other entries.
 
 Next work is to resolve the explicit rule gaps (especially hidden interfaces, JavaScript timing and SQL schemas), continue drafting known empty entries and source unknown ones. Never infer a complete problem from a title, mark an explicitly incomplete draft as ready, or make the user transcribe the full remainder. Some descriptions deliberately identify the missing rule rather than inventing it; they remain open.
+
+## Latest checkpoint — all numbered files populated, 2026-11-02
+
+Added the remaining **569 files**: 343 original drafts and 226 source-backed reference-note renderings. The inbox now contains **1,089 non-empty files and zero empty files**: 854 drafts, 234 source-note renderings and the preserved user-supplied 175.txt. This completes initial text population, not requirements verification or implementation.
+
+Of the 226 notes added in this pass, 137 came from readable official pages and 89 from attributed public community references. Two official-page notes (3764, 3924) retain explicit ambiguities and do not claim complete requirements verification. Community notes remain unverified against the official source; some also need exact schemas, interfaces, bounds or tie rules. Knowledge drafts are not full original statements. The historical archive remains 2,984 non-empty recovered statements.
+
+The conservative inbox audit reports **533 drafts awaiting source verification**, **321 drafts with explicit caveats/rule gaps**, **234 source notes awaiting completeness review**, and **one supplied text awaiting review**. A caveat can be an interface check or a more serious missing mathematical rule; read the actual file. Some old drafts explicitly lack a contract and must not be implemented from their tentative schema or title. Zero empty files does not mean zero missing requirements.
+
+Access finding: try the official base URL `https://leetcode.com/problems/<slug>/` when `/description/` fails. That recovered all 31 remaining free entries in this pass. A failed fetch is route-specific. Public reference URLs are recorded honestly; they are not labelled official verification. Source examples were not copied into these new notes or website presets.
+
+Spot review corrected three remembered contracts before handoff: 3004 requires a complete descendant subtree rooted in the tree at zero; 3018 permits an initial subsequence and removes endpoints greater than or equal to each query; 3595 has one singleton, one doubleton and all other values occurring three times, returning both exceptional values in O(n) time/O(1) space. These corrections demonstrate why the remaining drafts still need source review.
+
+Next: use `local-reference/leetcode/INBOX-STATUS.md` and `inbox-status.json`, resolve the explicit gaps, then apply the full catalogue completion gates. Do not ask the user to fill the former 999-file backlog. Do not publish reference prose/examples or promote text presence to solver/browser verification. No algorithm, preset or browser playback was changed or tested in this statement-writing pass.

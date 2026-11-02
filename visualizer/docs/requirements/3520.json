@@ -1,0 +1,14 @@
+{
+  "number": 3520,
+  "title": "Minimum Threshold for Inversion Pairs Count",
+  "source": "https://leetcode.ca/2025-05-13-3520-Minimum-Threshold-for-Inversion-Pairs-Count/",
+  "officialUrl": "https://leetcode.com/problems/minimum-threshold-for-inversion-pairs-count/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Find the smallest threshold x for which at least k index pairs i<j satisfy 0 < nums[i]-nums[j] <= x. Return -1 if there are fewer than k inversions altogether.",
+  "requirementsVerified": false,
+  "officialConstraints": "Numeric bounds and full interface require review against the current official statement.",
+  "examples": [],
+  "exampleStatus": "No source examples copied; independently author and check teaching examples."
+}

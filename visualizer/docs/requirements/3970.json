@@ -1,0 +1,13 @@
+{
+  "number": 3970,
+  "title": "Shortest Path With At Most K Consecutive Identical Characters",
+  "source": "https://leetcode.com/problems/shortest-path-with-at-most-k-consecutive-identical-characters/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Find a minimum-weight directed path from vertex zero to n-1 such that the node-label string along the path has no run longer than k of an identical character. Include the starting node's label. Return -1 if no valid path exists.",
+  "officialConstraints": "1..50000 vertices; 0..50000 directed non-self edges; weights 1..10000; lowercase node labels; k 1..50.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

@@ -1,0 +1,14 @@
+{
+  "number": 3384,
+  "title": "Team Dominance by Pass Success",
+  "source": "https://leetcode.doocs.org/en/lc/3384/",
+  "officialUrl": "https://leetcode.com/problems/team-dominance-by-pass-success/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Teams(player_id,team_name) maps players to teams. Passes(pass_from,time_stamp,pass_to), keyed by sender and time, records match passes. For each sending team and half, score +1 when the receiver is on the same team and -1 otherwise. Half one includes 00:00 through 45:00; half two is 45:01 through 90:00. Return team_name, half_number and dominance_score in ascending team/half order. Verify whether zero-pass team/half rows must be emitted.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

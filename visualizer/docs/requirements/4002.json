@@ -1,0 +1,13 @@
+{
+  "number": 4002,
+  "title": "Count Valid Sequences",
+  "source": "https://leetcode.com/problems/count-valid-sequences/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Count ordered length-k sequences of positive integers summing to n and having even product. Return the count modulo1000000007. Rearrangements count separately when any position differs.",
+  "officialConstraints": "n1..500000; k1..n.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

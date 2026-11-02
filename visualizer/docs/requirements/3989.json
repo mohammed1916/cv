@@ -1,0 +1,13 @@
+{
+  "number": 3989,
+  "title": "Maximum Consistent Columns in a Grid",
+  "source": "https://leetcode.com/problems/maximum-consistent-columns-in-a-grid/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Remove columns, preserving at least one and their original order, so in every row each adjacent retained column pair differs by at most limit. Return the maximum number of columns retainable. The same column selection applies to all rows.",
+  "officialConstraints": "Rows and columns1..250; values -100000..100000; limit0..100000.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

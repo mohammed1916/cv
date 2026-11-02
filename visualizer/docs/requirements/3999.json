@@ -1,0 +1,13 @@
+{
+  "number": 3999,
+  "title": "Minimum Number of String Groups Through Transformations",
+  "source": "https://leetcode.com/problems/minimum-number-of-string-groups-through-transformations/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Transform a string by independently cyclically rotating its even-index and odd-index character subsequences, then interleaving them back into their original parity positions. Partition words into the fewest groups where every pair is related by such a transformation. Return the group count; characters cannot switch index parity.",
+  "officialConstraints": "1..100000 lowercase words; individual and total length at most500000; no empty words.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

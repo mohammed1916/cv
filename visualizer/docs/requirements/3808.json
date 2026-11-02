@@ -1,0 +1,13 @@
+{
+  "number": 3808,
+  "title": "Find Emotionally Consistent Users",
+  "source": "https://leetcode.com/problems/find-emotionally-consistent-users/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "SQL: reactions(user_id,content_id,reaction), unique by user/content. Keep users who reacted to at least five content items and have one reaction type accounting for at least 60 percent of their reactions. Return user_id,dominant_reaction,reaction_ratio, rounding the fraction to two decimals. Sort ratio descending then user_id ascending. The 60-percent rule prevents a tie for dominant type.",
+  "officialConstraints": "IDs are integers and reaction is text; primary key (user_id,content_id).",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

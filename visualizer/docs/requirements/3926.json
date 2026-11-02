@@ -1,0 +1,13 @@
+{
+  "number": 3926,
+  "title": "Count Valid Word Occurrences",
+  "source": "https://leetcode.com/problems/count-valid-word-occurrences/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Join the chunks without inserting separators. A hyphen belongs to a word only when its immediate neighbors in the joined text are lowercase letters. Words are maximal runs of lowercase letters and such joining hyphens; all other characters separate words. For each query, return its exact whole-word occurrence count, preserving query order.",
+  "officialConstraints": "1..100000 chunks and queries; each string length 1..100000; total chunk length and total query length each <=100000. Chunks use lowercase letters, spaces and hyphens. Queries use lowercase letters and hyphens, with no leading/trailing or consecutive hyphens.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

@@ -1,0 +1,15 @@
+{
+  "number": 4056,
+  "title": "Number of Intersecting Interval Pairs I",
+  "source": "https://leetcode.com/problems/number-of-intersecting-interval-pairs-i/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Count unordered pairs of closed intervals having a nonempty intersection. Sharing only an endpoint counts as an intersection; each pair of different indices is counted once.",
+  "officialConstraints": [
+    "2..100 intervals; integer endpoints satisfy 0 <= start <= end <= 100."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

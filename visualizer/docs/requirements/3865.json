@@ -1,0 +1,14 @@
+{
+  "number": 3865,
+  "title": "Reverse K Subarrays",
+  "source": "https://leetcode.doocs.org/en/lc/3865/",
+  "officialUrl": "https://leetcode.com/problems/reverse-k-subarrays/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Partition nums into k equal-length contiguous blocks and reverse every block independently. The length is divisible by k. Return the resulting array.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

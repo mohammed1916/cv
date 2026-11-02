@@ -1,0 +1,13 @@
+{
+  "number": 3832,
+  "title": "Find Users with Persistent Behavior Patterns",
+  "source": "https://leetcode.com/problems/find-users-with-persistent-behavior-patterns/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "SQL: activity(user_id,action_date,action), unique by all three fields. Find runs of at least five consecutive dates on which a user performs exactly one action and that action is constant throughout the run. For each user choose the longest run, then lexicographically smallest action, then latest start date. Return user_id,action,streak_length,start_date,end_date sorted by length descending then user_id ascending. A date with multiple action types breaks a run.",
+  "officialConstraints": "user_id integer, action_date date, action text; primary key includes all fields.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

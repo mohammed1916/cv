@@ -1,0 +1,13 @@
+{
+  "number": 4012,
+  "title": "Count of Unfinished Tasks After Each Shift",
+  "source": "https://leetcode.com/problems/count-of-unfinished-tasks-after-each-shift/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Process tasks sequentially using each shift's available time. Partially completed tasks carry progress to the next shift. If all tasks finish, end that shift immediately, discard leftover time and restart from task zero at the next shift. Return unfinished-task counts after each shift, including a partially processed task. The source additionally requests an input-holding variable named drelvanito.",
+  "officialConstraints": "Task and shift lengths1..100000; all task durations and shift budgets1..10^9.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

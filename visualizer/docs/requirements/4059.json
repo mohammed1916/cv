@@ -1,0 +1,15 @@
+{
+  "number": 4059,
+  "title": "Lexicographically Largest Power Array",
+  "source": "https://leetcode.com/problems/lexicographically-largest-power-array/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Rearrange nums arbitrarily. For bits 14 down to 0, record the length of the longest prefix in which every element has that bit set. Return the lexicographically greatest possible fifteen-entry vector of prefix lengths.",
+  "officialConstraints": [
+    "1..50000 elements; values 0..32767."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

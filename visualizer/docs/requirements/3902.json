@@ -1,0 +1,14 @@
+{
+  "number": 3902,
+  "title": "Zigzag Level Sum of Binary Tree",
+  "source": "https://leetcode.doocs.org/en/lc/3902/",
+  "officialUrl": "https://leetcode.com/problems/zigzag-level-sum-of-binary-tree/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "At each one-based odd tree level, inspect nodes left-to-right and sum only those before the first node lacking a left child. At even levels inspect right-to-left, stopping before the first node lacking a right child. Return a sum for every level, including zero when the first node fails. Traverse the full tree to form subsequent levels.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

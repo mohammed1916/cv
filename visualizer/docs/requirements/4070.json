@@ -1,0 +1,15 @@
+{
+  "number": 4070,
+  "title": "Minimum Rotations to Dial a Number I",
+  "source": "https://leetcode.com/problems/minimum-rotations-to-dial-a-number-i/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "A circular dial holds digits zero through nine in order and starts at zero. Dial s left to right, rotating either way; each adjacent step costs one and dialing the current digit costs zero. Return the minimum total steps.",
+  "officialConstraints": [
+    "s consists of exactly ten decimal digits."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

@@ -1,0 +1,15 @@
+{
+  "number": 3950,
+  "title": "Exactly One Consecutive Set Bits Pair",
+  "source": "https://leetcode.com/problems/exactly-one-consecutive-set-bits-pair/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Return whether n has exactly one occurrence of adjacent 1 bits in its binary representation. Count overlapping pairs separately, so a run of three 1 bits contributes two pairs.",
+  "officialConstraints": [
+    "0 <= n <= 100000."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

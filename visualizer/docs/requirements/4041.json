@@ -1,0 +1,15 @@
+{
+  "number": 4041,
+  "title": "Minimum Operations to Form Subset Sum II",
+  "source": "https://leetcode.com/problems/minimum-operations-to-form-subset-sum-ii/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "One operation replaces one array value x with either 2*x or floor(x/2). Operations may be mixed and repeated. Return the fewest operations that allow some subset of the transformed elements to sum to the given target, or -1 if impossible.",
+  "officialConstraints": [
+    "1..100 elements, each 1..500; target sum 1..5000."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

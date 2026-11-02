@@ -1,0 +1,13 @@
+{
+  "number": 4015,
+  "title": "Weighted Sum of a Tree",
+  "source": "https://leetcode.com/problems/weighted-sum-of-a-tree/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "A parent array defines a tree rooted at zero. Root depth is one and height is the maximum depth. Give node i weight nums[i]*(height-depth[i]+1), and return the sum of all node weights.",
+  "officialConstraints": "1..100000 nodes; parent[0]=-1 and remaining parents valid; input is a rooted tree; values1..10^6.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

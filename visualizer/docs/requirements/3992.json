@@ -1,0 +1,13 @@
+{
+  "number": 3992,
+  "title": "Rearrange String to Avoid Character Pair",
+  "source": "https://leetcode.com/problems/rearrange-string-to-avoid-character-pair/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Rearrange all characters of s so every occurrence of y precedes every occurrence of x. Return any permutation satisfying this; other characters are unrestricted. This global ordering is stronger than merely avoiding an adjacent pair.",
+  "officialConstraints": "Lowercase s length1..100; x and y are distinct lowercase letters.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

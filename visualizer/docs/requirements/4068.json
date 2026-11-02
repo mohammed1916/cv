@@ -1,0 +1,16 @@
+{
+  "number": 4068,
+  "title": "Maximize Meeting Earnings with Idle Gaps",
+  "source": "https://leetcode.com/problems/maximize-meeting-earnings-with-idle-gaps/",
+  "officialUrl": "https://leetcode.com/problems/maximize-meeting-earnings-with-idle-gaps/",
+  "sourceKind": "official-page-via-web-tool",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Choose a nonempty set of nonoverlapping meetings with half-open time intervals. Earn their revenues plus the length of every gap between chronologically consecutive chosen meetings. Earn nothing before the first or after the last. Return the maximum total earnings.",
+  "requirementsVerified": true,
+  "officialConstraints": [
+    "1..100000 meetings; 0 <= start < end <= 1000000000; revenue 1..1000000000."
+  ],
+  "examples": [],
+  "exampleStatus": "No source examples copied; independently author and check teaching examples."
+}

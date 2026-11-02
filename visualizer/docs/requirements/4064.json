@@ -1,0 +1,15 @@
+{
+  "number": 4064,
+  "title": "Longest Subarray Divisible by K with At Most One Negation II",
+  "source": "https://leetcode.com/problems/longest-subarray-divisible-by-k-with-at-most-one-negation-ii/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Find the longest contiguous subarray whose sum is divisible by k either unchanged or after negating one element within it. Negating x replaces it with -x. Return zero if no nonempty subarray qualifies.",
+  "officialConstraints": [
+    "1 <= nums.length <= 100000; -100000 <= nums[i] <= 100000; 1 <= k <= 3000."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

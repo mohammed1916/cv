@@ -1,0 +1,16 @@
+{
+  "number": 4014,
+  "title": "Minimum Total Price After Applying Discounts",
+  "source": "https://leetcode.com/problems/minimum-total-price-after-applying-discounts/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Assign percentage discounts to items to minimize the total price. Each discount and each item may participate in at most one assignment; leaving an item undiscounted is allowed. Discount d changes price p to p*(100-d)/100 without rounding. Return the minimum total.",
+  "officialConstraints": [
+    "Both arrays have 1..100000 entries; prices 1..100000; percentages 1..100.",
+    "Answers accepted within 0.00001 of the actual value."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

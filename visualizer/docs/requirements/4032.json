@@ -1,0 +1,15 @@
+{
+  "number": 4032,
+  "title": "Longest Subarray With at Most K Distinct Prime Factors",
+  "source": "https://leetcode.com/problems/longest-subarray-with-at-most-k-distinct-prime-factors/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "For a contiguous subarray, collect the distinct primes dividing any of its elements. Return the longest subarray with at most k primes in this union, or zero if none qualifies.",
+  "officialConstraints": [
+    "1..100000 elements, each 2..100000; 1 <= k <= 10000."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

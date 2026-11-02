@@ -1,0 +1,13 @@
+{
+  "number": 3954,
+  "title": "Sum of Compatible Numbers in Range I",
+  "source": "https://leetcode.com/problems/sum-of-compatible-numbers-in-range-i/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Sum positive integers x at distance at most k from n for which the bitwise AND of n and x is zero. The distance bound is inclusive and zero itself is excluded.",
+  "officialConstraints": "n and k each 1..100.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

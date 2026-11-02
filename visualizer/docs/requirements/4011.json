@@ -1,0 +1,13 @@
+{
+  "number": 4011,
+  "title": "Count Subarrays With Even Odd Ratio I",
+  "source": "https://leetcode.com/problems/count-subarrays-with-even-odd-ratio-i/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Count contiguous nonempty subarrays with at least one odd value and even-count/odd-count <= a/b. Compare ratios exactly, including equality, rather than using floating-point rounding.",
+  "officialConstraints": "Length1..1000; values1..1000; a,b1..1000.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

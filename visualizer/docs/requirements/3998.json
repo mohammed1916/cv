@@ -1,0 +1,13 @@
+{
+  "number": 3998,
+  "title": "Transform Binary String Using Subsequence Sort",
+  "source": "https://leetcode.com/problems/transform-binary-string-using-subsequence-sort/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Given binary s and same-length patterns containing 0,1,?, decide separately for each pattern whether some replacement of its question marks is reachable from s. An operation chooses any subsequence of current s and sorts its selected values nondecreasingly back into the same positions. All other positions stay unchanged; operations may repeat or be omitted.",
+  "officialConstraints": "Length1..2000; 1..2000 patterns, each matching s's length.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

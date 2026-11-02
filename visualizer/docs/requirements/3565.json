@@ -1,0 +1,14 @@
+{
+  "number": 3565,
+  "title": "Sequential Grid Path Cover",
+  "source": "https://leetcode.doocs.org/en/lc/3565/",
+  "officialUrl": "https://leetcode.com/problems/sequential-grid-path-cover/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "A grid contains each label 1 through k once; all other cells are zero. Find a four-direction path visiting every cell exactly once and encountering the labeled cells in increasing label order. Start anywhere. Return its complete coordinate sequence, or an empty list if impossible; any valid path is accepted.",
+  "requirementsVerified": false,
+  "officialConstraints": "Numeric bounds and full interface require review against the current official statement.",
+  "examples": [],
+  "exampleStatus": "No source examples copied; independently author and check teaching examples."
+}

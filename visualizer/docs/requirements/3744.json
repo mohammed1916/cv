@@ -1,0 +1,14 @@
+{
+  "number": 3744,
+  "title": "Find Kth Character in Expanded String",
+  "source": "https://leetcode.ca/2025-12-23-3744-Find-Kth-Character-in-Expanded-String/",
+  "officialUrl": "https://leetcode.com/problems/find-kth-character-in-expanded-string/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Expand each word independently: repeat its first letter once, second twice, and so on. Keep one space between expanded words. Given a valid zero-based index k, return that character of the expanded string, which can be a space.",
+  "requirementsVerified": false,
+  "officialConstraints": "Numeric bounds and full interface require review against the current official statement.",
+  "examples": [],
+  "exampleStatus": "No source examples copied; independently author and check teaching examples."
+}

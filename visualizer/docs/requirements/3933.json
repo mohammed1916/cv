@@ -1,0 +1,13 @@
+{
+  "number": 3933,
+  "title": "Largest Local Values in a Matrix II",
+  "source": "https://leetcode.com/problems/largest-local-values-in-a-matrix-ii/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "For each positive cell with value x, inspect in-bounds cells at row and column offsets of magnitude at most x, except the four positions where both magnitudes equal x. Count the positive cells for which no inspected value exceeds x. Equal values are allowed; zero cells are never counted.",
+  "officialConstraints": "Rectangular matrix with 1..200 rows and columns; values 0..200.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

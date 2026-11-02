@@ -1,0 +1,14 @@
+{
+  "number": 3555,
+  "title": "Smallest Subarray to Sort in Every Sliding Window",
+  "source": "https://leetcode.doocs.org/en/lc/3555/",
+  "officialUrl": "https://leetcode.com/problems/smallest-subarray-to-sort-in-every-sliding-window/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "For each length-k contiguous window, find the shortest contiguous segment inside that window whose sorting makes the entire window nondecreasing. Return zero for an already sorted window. Return all window answers in start-index order.",
+  "requirementsVerified": false,
+  "officialConstraints": "Numeric bounds and full interface require review against the current official statement.",
+  "examples": [],
+  "exampleStatus": "No source examples copied; independently author and check teaching examples."
+}

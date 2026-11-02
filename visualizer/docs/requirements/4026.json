@@ -1,0 +1,13 @@
+{
+  "number": 4026,
+  "title": "Maximum Gap Between Stations",
+  "source": "https://leetcode.com/problems/maximum-gap-between-stations/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Assign workers, in order, to strictly increasing station indices whose letters match their skills. Maximize the largest index difference between consecutive assigned workers and return it. For one worker return zero; a complete assignment is guaranteed.",
+  "officialConstraints": "Lowercase skill/station strings;1<=workers<=stations<=100000.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

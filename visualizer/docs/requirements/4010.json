@@ -1,0 +1,13 @@
+{
+  "number": 4010,
+  "title": "Maximize Pair Strength Using GCD",
+  "source": "https://leetcode.com/problems/maximize-pair-strength-using-gcd/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Choose two distinct array positions. Their pair strength is their product divided by the square of their gcd. Return the maximum strength over all pairs; repeated equal values at different indices remain eligible.",
+  "officialConstraints": "Length2..2000; values1..100000.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

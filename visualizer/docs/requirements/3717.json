@@ -1,0 +1,14 @@
+{
+  "number": 3717,
+  "title": "Minimum Operations to Make the Array Beautiful",
+  "source": "https://leetcode.ca/2025-11-26-3717-Minimum-Operations-to-Make-the-Array-Beautiful/",
+  "officialUrl": "https://leetcode.com/problems/minimum-operations-to-make-the-array-beautiful/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Increment individual array elements other than index zero, one unit per operation. Make every element after the first divisible by its predecessor. Return the minimum operations; the first value cannot change.",
+  "requirementsVerified": false,
+  "officialConstraints": "Numeric bounds and full interface require review against the current official statement.",
+  "examples": [],
+  "exampleStatus": "No source examples copied; independently author and check teaching examples."
+}

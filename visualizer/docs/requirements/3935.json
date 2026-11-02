@@ -1,0 +1,14 @@
+{
+  "number": 3935,
+  "title": "Power Update After K-th Largest Insertion I",
+  "source": "https://leetcode.doocs.org/en/lc/3935/",
+  "officialUrl": "https://leetcode.com/problems/power-update-after-k-th-largest-insertion-i/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "For each [value,k] query, insert value into nums, take the kth largest current element x, and update p to p^x modulo 1000000007. Return successive p values. This variant promises a difference below ten between consecutive k values; confirm whether that bound is absolute before exploiting it.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

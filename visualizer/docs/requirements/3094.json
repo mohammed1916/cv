@@ -1,0 +1,14 @@
+{
+  "number": 3094,
+  "title": "Guess the Number Using Bitwise Questions II",
+  "source": "https://leetcode.doocs.org/en/lc/3094/",
+  "officialUrl": "https://leetcode.com/problems/guess-the-number-using-bitwise-questions-ii/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Recover the original hidden 30-bit integer n. Calling commonBits(num) first counts equal bit positions in n and num across all 30 bits, then mutates n to n XOR num, then returns the count. Queries must also be 30-bit nonnegative integers. Return the initial value, not the final mutated value.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

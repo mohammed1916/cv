@@ -1,0 +1,14 @@
+{
+  "number": 3831,
+  "title": "Median of a Binary Search Tree Level",
+  "source": "https://leetcode.doocs.org/en/lc/3831/",
+  "officialUrl": "https://leetcode.com/problems/median-of-a-binary-search-tree-level/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Return the upper median of values on a specified zero-based level of a binary search tree. For an odd count use the middle value; for an even count use the larger middle value. Return -1 if that level is absent.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

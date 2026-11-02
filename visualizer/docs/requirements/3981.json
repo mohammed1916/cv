@@ -1,0 +1,13 @@
+{
+  "number": 3981,
+  "title": "Count Distinct Ways to Form Target from Two Strings",
+  "source": "https://leetcode.com/problems/count-distinct-ways-to-form-target-from-two-strings/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Construct target by assigning every target character to a matching occurrence in either word1 or word2. Within each source, selected indices must strictly increase. At least one character must come from each source. Count assignments differing in source or index at any target position, modulo 1000000007.",
+  "officialConstraints": "All three strings have lengths 1..100 and use lowercase English letters.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

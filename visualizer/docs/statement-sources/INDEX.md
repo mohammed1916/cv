@@ -1,6 +1,6 @@
 # LeetCode statement source directory
 
-4073 problems from the repository catalog dated 2026-10-05T09:48:48.663Z. 214 local requirement summaries; 147 source-attempt records without summaries.
+4073 problems from the repository catalog dated 2026-10-05T09:48:48.663Z. 440 local requirement summaries; 146 source-attempt records without summaries.
 
 This provides official statement links for every catalog entry, not full statement text for every entry. Unfetched links are not certified accessible. Paid statements may require authorized access. Notes are paraphrased requirements; some older notes omit examples. Implementation and verification remain separate.
 
@@ -2991,14 +2991,14 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 2981 | [Find Longest Special Substring That Occurs Thrice I](https://leetcode.com/problems/find-longest-special-substring-that-occurs-thrice-i/description/) | Free in snapshot | [Requirement summary](../requirements/2981.json) |
 | 2982 | [Find Longest Special Substring That Occurs Thrice II](https://leetcode.com/problems/find-longest-special-substring-that-occurs-thrice-ii/description/) | Free in snapshot | [Requirement summary](../requirements/2982.json) |
 | 2983 | [Palindrome Rearrangement Queries](https://leetcode.com/problems/palindrome-rearrangement-queries/description/) | Free in snapshot | [Requirement summary](../requirements/2983.json) |
-| 2984 | [Find Peak Calling Hours for Each City](https://leetcode.com/problems/find-peak-calling-hours-for-each-city/description/) | Paid in snapshot | Not cached |
+| 2984 | [Find Peak Calling Hours for Each City](https://leetcode.com/problems/find-peak-calling-hours-for-each-city/description/) | Paid in snapshot | [Requirement summary](../requirements/2984.json) |
 | 2985 | [Calculate Compressed Mean](https://leetcode.com/problems/calculate-compressed-mean/description/) | Paid in snapshot | Not cached |
 | 2986 | [Find Third Transaction](https://leetcode.com/problems/find-third-transaction/description/) | Paid in snapshot | Not cached |
 | 2987 | [Find Expensive Cities](https://leetcode.com/problems/find-expensive-cities/description/) | Paid in snapshot | Not cached |
 | 2988 | [Manager of the Largest Department](https://leetcode.com/problems/manager-of-the-largest-department/description/) | Paid in snapshot | Not cached |
 | 2989 | [Class Performance](https://leetcode.com/problems/class-performance/description/) | Paid in snapshot | Not cached |
 | 2990 | [Loan Types](https://leetcode.com/problems/loan-types/description/) | Paid in snapshot | Not cached |
-| 2991 | [Top Three Wineries ](https://leetcode.com/problems/top-three-wineries/description/) | Paid in snapshot | Not cached |
+| 2991 | [Top Three Wineries ](https://leetcode.com/problems/top-three-wineries/description/) | Paid in snapshot | [Requirement summary](../requirements/2991.json) |
 | 2992 | [Number of Self-Divisible Permutations](https://leetcode.com/problems/number-of-self-divisible-permutations/description/) | Paid in snapshot | Not cached |
 | 2993 | [Friday Purchases I](https://leetcode.com/problems/friday-purchases-i/description/) | Paid in snapshot | Not cached |
 | 2994 | [Friday Purchases II ](https://leetcode.com/problems/friday-purchases-ii/description/) | Paid in snapshot | Not cached |
@@ -3068,10 +3068,10 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3058 | [Friends With No Mutual Friends](https://leetcode.com/problems/friends-with-no-mutual-friends/description/) | Paid in snapshot | Not cached |
 | 3059 | [Find All Unique Email Domains](https://leetcode.com/problems/find-all-unique-email-domains/description/) | Paid in snapshot | Not cached |
 | 3060 | [User Activities within Time Bounds](https://leetcode.com/problems/user-activities-within-time-bounds/description/) | Paid in snapshot | Not cached |
-| 3061 | [Calculate Trapping Rain Water](https://leetcode.com/problems/calculate-trapping-rain-water/description/) | Paid in snapshot | Not cached |
+| 3061 | [Calculate Trapping Rain Water](https://leetcode.com/problems/calculate-trapping-rain-water/description/) | Paid in snapshot | [Requirement summary](../requirements/3061.json) |
 | 3062 | [Winner of the Linked List Game](https://leetcode.com/problems/winner-of-the-linked-list-game/description/) | Paid in snapshot | Not cached |
 | 3063 | [Linked List Frequency](https://leetcode.com/problems/linked-list-frequency/description/) | Paid in snapshot | Not cached |
-| 3064 | [Guess the Number Using Bitwise Questions I](https://leetcode.com/problems/guess-the-number-using-bitwise-questions-i/description/) | Paid in snapshot | Not cached |
+| 3064 | [Guess the Number Using Bitwise Questions I](https://leetcode.com/problems/guess-the-number-using-bitwise-questions-i/description/) | Paid in snapshot | [Requirement summary](../requirements/3064.json) |
 | 3065 | [Minimum Operations to Exceed Threshold Value I](https://leetcode.com/problems/minimum-operations-to-exceed-threshold-value-i/description/) | Free in snapshot | [Requirement summary](../requirements/3065.json) |
 | 3066 | [Minimum Operations to Exceed Threshold Value II](https://leetcode.com/problems/minimum-operations-to-exceed-threshold-value-ii/description/) | Free in snapshot | Not cached |
 | 3067 | [Count Pairs of Connectable Servers in a Weighted Tree Network](https://leetcode.com/problems/count-pairs-of-connectable-servers-in-a-weighted-tree-network/description/) | Free in snapshot | Not cached |
@@ -3085,7 +3085,7 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3075 | [Maximize Happiness of Selected Children](https://leetcode.com/problems/maximize-happiness-of-selected-children/description/) | Free in snapshot | Not cached |
 | 3076 | [Shortest Uncommon Substring in an Array](https://leetcode.com/problems/shortest-uncommon-substring-in-an-array/description/) | Free in snapshot | Not cached |
 | 3077 | [Maximum Strength of K Disjoint Subarrays](https://leetcode.com/problems/maximum-strength-of-k-disjoint-subarrays/description/) | Free in snapshot | Not cached |
-| 3078 | [Match Alphanumerical Pattern in Matrix I](https://leetcode.com/problems/match-alphanumerical-pattern-in-matrix-i/description/) | Paid in snapshot | Not cached |
+| 3078 | [Match Alphanumerical Pattern in Matrix I](https://leetcode.com/problems/match-alphanumerical-pattern-in-matrix-i/description/) | Paid in snapshot | [Requirement summary](../requirements/3078.json) |
 | 3079 | [Find the Sum of Encrypted Integers](https://leetcode.com/problems/find-the-sum-of-encrypted-integers/description/) | Free in snapshot | [Requirement summary](../requirements/3079.json) |
 | 3080 | [Mark Elements on Array by Performing Queries](https://leetcode.com/problems/mark-elements-on-array-by-performing-queries/description/) | Free in snapshot | Not cached |
 | 3081 | [Replace Question Marks in String to Minimize Its Value](https://leetcode.com/problems/replace-question-marks-in-string-to-minimize-its-value/description/) | Free in snapshot | Not cached |
@@ -3096,12 +3096,12 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3086 | [Minimum Moves to Pick K Ones](https://leetcode.com/problems/minimum-moves-to-pick-k-ones/description/) | Free in snapshot | [Requirement summary](../requirements/3086.json) |
 | 3087 | [Find Trending Hashtags](https://leetcode.com/problems/find-trending-hashtags/description/) | Paid in snapshot | Not cached |
 | 3088 | [Make String Anti-palindrome](https://leetcode.com/problems/make-string-anti-palindrome/description/) | Paid in snapshot | Not cached |
-| 3089 | [Find Bursty Behavior](https://leetcode.com/problems/find-bursty-behavior/description/) | Paid in snapshot | Not cached |
+| 3089 | [Find Bursty Behavior](https://leetcode.com/problems/find-bursty-behavior/description/) | Paid in snapshot | [Requirement summary](../requirements/3089.json) |
 | 3090 | [Maximum Length Substring With Two Occurrences](https://leetcode.com/problems/maximum-length-substring-with-two-occurrences/description/) | Free in snapshot | Not cached |
 | 3091 | [Apply Operations to Make Sum of Array Greater Than or Equal to k](https://leetcode.com/problems/apply-operations-to-make-sum-of-array-greater-than-or-equal-to-k/description/) | Free in snapshot | Not cached |
 | 3092 | [Most Frequent IDs](https://leetcode.com/problems/most-frequent-ids/description/) | Free in snapshot | Not cached |
 | 3093 | [Longest Common Suffix Queries](https://leetcode.com/problems/longest-common-suffix-queries/description/) | Free in snapshot | Not cached |
-| 3094 | [Guess the Number Using Bitwise Questions II](https://leetcode.com/problems/guess-the-number-using-bitwise-questions-ii/description/) | Paid in snapshot | Not cached |
+| 3094 | [Guess the Number Using Bitwise Questions II](https://leetcode.com/problems/guess-the-number-using-bitwise-questions-ii/description/) | Paid in snapshot | [Requirement summary](../requirements/3094.json) |
 | 3095 | [Shortest Subarray With OR at Least K I](https://leetcode.com/problems/shortest-subarray-with-or-at-least-k-i/description/) | Free in snapshot | Not cached |
 | 3096 | [Minimum Levels to Gain More Points](https://leetcode.com/problems/minimum-levels-to-gain-more-points/description/) | Free in snapshot | Not cached |
 | 3097 | [Shortest Subarray With OR at Least K II](https://leetcode.com/problems/shortest-subarray-with-or-at-least-k-ii/description/) | Free in snapshot | Not cached |
@@ -3276,7 +3276,7 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3266 | [Final Array State After K Multiplication Operations II](https://leetcode.com/problems/final-array-state-after-k-multiplication-operations-ii/description/) | Free in snapshot | Not cached |
 | 3267 | [Count Almost Equal Pairs II](https://leetcode.com/problems/count-almost-equal-pairs-ii/description/) | Free in snapshot | [Requirement summary](../requirements/3267.json) |
 | 3268 | [Find Overlapping Shifts II](https://leetcode.com/problems/find-overlapping-shifts-ii/description/) | Paid in snapshot | Not cached |
-| 3269 | [Constructing Two Increasing Arrays](https://leetcode.com/problems/constructing-two-increasing-arrays/description/) | Paid in snapshot | Not cached |
+| 3269 | [Constructing Two Increasing Arrays](https://leetcode.com/problems/constructing-two-increasing-arrays/description/) | Paid in snapshot | [Requirement summary](../requirements/3269.json) |
 | 3270 | [Find the Key of the Numbers](https://leetcode.com/problems/find-the-key-of-the-numbers/description/) | Free in snapshot | Not cached |
 | 3271 | [Hash Divided String](https://leetcode.com/problems/hash-divided-string/description/) | Free in snapshot | Not cached |
 | 3272 | [Find the Count of Good Integers](https://leetcode.com/problems/find-the-count-of-good-integers/description/) | Free in snapshot | [Requirement summary](../requirements/3272.json) |
@@ -3286,7 +3286,7 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3276 | [Select Cells in Grid With Maximum Score](https://leetcode.com/problems/select-cells-in-grid-with-maximum-score/description/) | Free in snapshot | Not cached |
 | 3277 | [Maximum XOR Score Subarray Queries](https://leetcode.com/problems/maximum-xor-score-subarray-queries/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3277.json) |
 | 3278 | [Find Candidates for Data Scientist Position II](https://leetcode.com/problems/find-candidates-for-data-scientist-position-ii/description/) | Paid in snapshot | Not cached |
-| 3279 | [Maximum Total Area Occupied by Pistons](https://leetcode.com/problems/maximum-total-area-occupied-by-pistons/description/) | Paid in snapshot | Not cached |
+| 3279 | [Maximum Total Area Occupied by Pistons](https://leetcode.com/problems/maximum-total-area-occupied-by-pistons/description/) | Paid in snapshot | [Requirement summary](../requirements/3279.json) |
 | 3280 | [Convert Date to Binary](https://leetcode.com/problems/convert-date-to-binary/description/) | Free in snapshot | Not cached |
 | 3281 | [Maximize Score of Numbers in Ranges](https://leetcode.com/problems/maximize-score-of-numbers-in-ranges/description/) | Free in snapshot | Not cached |
 | 3282 | [Reach End of Array With Max Score](https://leetcode.com/problems/reach-end-of-array-with-max-score/description/) | Free in snapshot | Not cached |
@@ -3346,12 +3346,12 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3336 | [Find the Number of Subsequences With Equal GCD](https://leetcode.com/problems/find-the-number-of-subsequences-with-equal-gcd/description/) | Free in snapshot | Not cached |
 | 3337 | [Total Characters in String After Transformations II](https://leetcode.com/problems/total-characters-in-string-after-transformations-ii/description/) | Free in snapshot | Not cached |
 | 3338 | [Second Highest Salary II](https://leetcode.com/problems/second-highest-salary-ii/description/) | Paid in snapshot | Not cached |
-| 3339 | [Find the Number of K-Even Arrays](https://leetcode.com/problems/find-the-number-of-k-even-arrays/description/) | Paid in snapshot | Not cached |
+| 3339 | [Find the Number of K-Even Arrays](https://leetcode.com/problems/find-the-number-of-k-even-arrays/description/) | Paid in snapshot | [Requirement summary](../requirements/3339.json) |
 | 3340 | [Check Balanced String](https://leetcode.com/problems/check-balanced-string/description/) | Free in snapshot | [Requirement summary](../requirements/3340.json) |
 | 3341 | [Find Minimum Time to Reach Last Room I](https://leetcode.com/problems/find-minimum-time-to-reach-last-room-i/description/) | Free in snapshot | Not cached |
 | 3342 | [Find Minimum Time to Reach Last Room II](https://leetcode.com/problems/find-minimum-time-to-reach-last-room-ii/description/) | Free in snapshot | Not cached |
 | 3343 | [Count Number of Balanced Permutations](https://leetcode.com/problems/count-number-of-balanced-permutations/description/) | Free in snapshot | Not cached |
-| 3344 | [Maximum Sized Array](https://leetcode.com/problems/maximum-sized-array/description/) | Paid in snapshot | Not cached |
+| 3344 | [Maximum Sized Array](https://leetcode.com/problems/maximum-sized-array/description/) | Paid in snapshot | [Requirement summary](../requirements/3344.json) |
 | 3345 | [Smallest Divisible Digit Product I](https://leetcode.com/problems/smallest-divisible-digit-product-i/description/) | Free in snapshot | Not cached |
 | 3346 | [Maximum Frequency of an Element After Performing Operations I](https://leetcode.com/problems/maximum-frequency-of-an-element-after-performing-operations-i/description/) | Free in snapshot | Not cached |
 | 3347 | [Maximum Frequency of an Element After Performing Operations II](https://leetcode.com/problems/maximum-frequency-of-an-element-after-performing-operations-ii/description/) | Free in snapshot | Not cached |
@@ -3360,13 +3360,13 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3350 | [Adjacent Increasing Subarrays Detection II](https://leetcode.com/problems/adjacent-increasing-subarrays-detection-ii/description/) | Free in snapshot | Not cached |
 | 3351 | [Sum of Good Subsequences](https://leetcode.com/problems/sum-of-good-subsequences/description/) | Free in snapshot | Not cached |
 | 3352 | [Count K-Reducible Numbers Less Than N](https://leetcode.com/problems/count-k-reducible-numbers-less-than-n/description/) | Free in snapshot | Not cached |
-| 3353 | [Minimum Total Operations](https://leetcode.com/problems/minimum-total-operations/description/) | Paid in snapshot | Not cached |
+| 3353 | [Minimum Total Operations](https://leetcode.com/problems/minimum-total-operations/description/) | Paid in snapshot | [Requirement summary](../requirements/3353.json) |
 | 3354 | [Make Array Elements Equal to Zero](https://leetcode.com/problems/make-array-elements-equal-to-zero/description/) | Free in snapshot | Not cached |
 | 3355 | [Zero Array Transformation I](https://leetcode.com/problems/zero-array-transformation-i/description/) | Free in snapshot | Not cached |
 | 3356 | [Zero Array Transformation II](https://leetcode.com/problems/zero-array-transformation-ii/description/) | Free in snapshot | Not cached |
 | 3357 | [Minimize the Maximum Adjacent Element Difference](https://leetcode.com/problems/minimize-the-maximum-adjacent-element-difference/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3357.json) |
 | 3358 | [Books with NULL Ratings](https://leetcode.com/problems/books-with-null-ratings/description/) | Paid in snapshot | Not cached |
-| 3359 | [Find Sorted Submatrices With Maximum Element at Most K](https://leetcode.com/problems/find-sorted-submatrices-with-maximum-element-at-most-k/description/) | Paid in snapshot | Not cached |
+| 3359 | [Find Sorted Submatrices With Maximum Element at Most K](https://leetcode.com/problems/find-sorted-submatrices-with-maximum-element-at-most-k/description/) | Paid in snapshot | [Requirement summary](../requirements/3359.json) |
 | 3360 | [Stone Removal Game](https://leetcode.com/problems/stone-removal-game/description/) | Free in snapshot | Not cached |
 | 3361 | [Shift Distance Between Two Strings](https://leetcode.com/problems/shift-distance-between-two-strings/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3361.json) |
 | 3362 | [Zero Array Transformation III](https://leetcode.com/problems/zero-array-transformation-iii/description/) | Free in snapshot | Not cached |
@@ -3376,7 +3376,7 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3366 | [Minimum Array Sum](https://leetcode.com/problems/minimum-array-sum/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3366.json) |
 | 3367 | [Maximize Sum of Weights after Edge Removals](https://leetcode.com/problems/maximize-sum-of-weights-after-edge-removals/description/) | Free in snapshot | Not cached |
 | 3368 | [First Letter Capitalization](https://leetcode.com/problems/first-letter-capitalization/description/) | Paid in snapshot | Not cached |
-| 3369 | [Design an Array Statistics Tracker ](https://leetcode.com/problems/design-an-array-statistics-tracker/description/) | Paid in snapshot | Not cached |
+| 3369 | [Design an Array Statistics Tracker ](https://leetcode.com/problems/design-an-array-statistics-tracker/description/) | Paid in snapshot | [Requirement summary](../requirements/3369.json) |
 | 3370 | [Smallest Number With All Set Bits](https://leetcode.com/problems/smallest-number-with-all-set-bits/description/) | Free in snapshot | Not cached |
 | 3371 | [Identify the Largest Outlier in an Array](https://leetcode.com/problems/identify-the-largest-outlier-in-an-array/description/) | Free in snapshot | Not cached |
 | 3372 | [Maximize the Number of Target Nodes After Connecting Trees I](https://leetcode.com/problems/maximize-the-number-of-target-nodes-after-connecting-trees-i/description/) | Free in snapshot | [Requirement summary](../requirements/3372.json) |
@@ -3391,14 +3391,14 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3381 | [Maximum Subarray Sum With Length Divisible by K](https://leetcode.com/problems/maximum-subarray-sum-with-length-divisible-by-k/description/) | Free in snapshot | Not cached |
 | 3382 | [Maximum Area Rectangle With Point Constraints II](https://leetcode.com/problems/maximum-area-rectangle-with-point-constraints-ii/description/) | Free in snapshot | Not cached |
 | 3383 | [Minimum Runes to Add to Cast Spell](https://leetcode.com/problems/minimum-runes-to-add-to-cast-spell/description/) | Paid in snapshot | Not cached |
-| 3384 | [Team Dominance by Pass Success](https://leetcode.com/problems/team-dominance-by-pass-success/description/) | Paid in snapshot | Not cached |
+| 3384 | [Team Dominance by Pass Success](https://leetcode.com/problems/team-dominance-by-pass-success/description/) | Paid in snapshot | [Requirement summary](../requirements/3384.json) |
 | 3385 | [Minimum Time to Break Locks II](https://leetcode.com/problems/minimum-time-to-break-locks-ii/description/) | Paid in snapshot | Not cached |
 | 3386 | [Button with Longest Push Time](https://leetcode.com/problems/button-with-longest-push-time/description/) | Free in snapshot | [Requirement summary](../requirements/3386.json) |
 | 3387 | [Maximize Amount After Two Days of Conversions](https://leetcode.com/problems/maximize-amount-after-two-days-of-conversions/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3387.json) |
 | 3388 | [Count Beautiful Splits in an Array](https://leetcode.com/problems/count-beautiful-splits-in-an-array/description/) | Free in snapshot | Not cached |
 | 3389 | [Minimum Operations to Make Character Frequencies Equal](https://leetcode.com/problems/minimum-operations-to-make-character-frequencies-equal/description/) | Free in snapshot | [Requirement summary](../requirements/3389.json) |
-| 3390 | [Longest Team Pass Streak](https://leetcode.com/problems/longest-team-pass-streak/description/) | Paid in snapshot | Not cached |
-| 3391 | [Design a 3D Binary Matrix with Efficient Layer Tracking](https://leetcode.com/problems/design-a-3d-binary-matrix-with-efficient-layer-tracking/description/) | Paid in snapshot | Not cached |
+| 3390 | [Longest Team Pass Streak](https://leetcode.com/problems/longest-team-pass-streak/description/) | Paid in snapshot | [Requirement summary](../requirements/3390.json) |
+| 3391 | [Design a 3D Binary Matrix with Efficient Layer Tracking](https://leetcode.com/problems/design-a-3d-binary-matrix-with-efficient-layer-tracking/description/) | Paid in snapshot | [Requirement summary](../requirements/3391.json) |
 | 3392 | [Count Subarrays of Length Three With a Condition](https://leetcode.com/problems/count-subarrays-of-length-three-with-a-condition/description/) | Free in snapshot | Not cached |
 | 3393 | [Count Paths With the Given XOR Value](https://leetcode.com/problems/count-paths-with-the-given-xor-value/description/) | Free in snapshot | Not cached |
 | 3394 | [Check if Grid can be Cut into Sections](https://leetcode.com/problems/check-if-grid-can-be-cut-into-sections/description/) | Free in snapshot | Not cached |
@@ -3408,7 +3408,7 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3398 | [Smallest Substring With Identical Characters I](https://leetcode.com/problems/smallest-substring-with-identical-characters-i/description/) | Free in snapshot | Not cached |
 | 3399 | [Smallest Substring With Identical Characters II](https://leetcode.com/problems/smallest-substring-with-identical-characters-ii/description/) | Free in snapshot | Not cached |
 | 3400 | [Maximum Number of Matching Indices After Right Shifts](https://leetcode.com/problems/maximum-number-of-matching-indices-after-right-shifts/description/) | Paid in snapshot | Not cached |
-| 3401 | [Find Circular Gift Exchange Chains](https://leetcode.com/problems/find-circular-gift-exchange-chains/description/) | Paid in snapshot | Not cached |
+| 3401 | [Find Circular Gift Exchange Chains](https://leetcode.com/problems/find-circular-gift-exchange-chains/description/) | Paid in snapshot | [Requirement summary](../requirements/3401.json) |
 | 3402 | [Minimum Operations to Make Columns Strictly Increasing](https://leetcode.com/problems/minimum-operations-to-make-columns-strictly-increasing/description/) | Free in snapshot | Not cached |
 | 3403 | [Find the Lexicographically Largest String From the Box I](https://leetcode.com/problems/find-the-lexicographically-largest-string-from-the-box-i/description/) | Free in snapshot | Not cached |
 | 3404 | [Count Special Subsequences](https://leetcode.com/problems/count-special-subsequences/description/) | Free in snapshot | Not cached |
@@ -3438,13 +3438,13 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3428 | [Maximum and Minimum Sums of at Most Size K Subsequences](https://leetcode.com/problems/maximum-and-minimum-sums-of-at-most-size-k-subsequences/description/) | Free in snapshot | [Requirement summary](../requirements/3428.json) |
 | 3429 | [Paint House IV](https://leetcode.com/problems/paint-house-iv/description/) | Free in snapshot | [Requirement summary](../requirements/3429.json) |
 | 3430 | [Maximum and Minimum Sums of at Most Size K Subarrays](https://leetcode.com/problems/maximum-and-minimum-sums-of-at-most-size-k-subarrays/description/) | Free in snapshot | Not cached |
-| 3431 | [Minimum Unlocked Indices to Sort Nums](https://leetcode.com/problems/minimum-unlocked-indices-to-sort-nums/description/) | Paid in snapshot | Not cached |
+| 3431 | [Minimum Unlocked Indices to Sort Nums](https://leetcode.com/problems/minimum-unlocked-indices-to-sort-nums/description/) | Paid in snapshot | [Requirement summary](../requirements/3431.json) |
 | 3432 | [Count Partitions with Even Sum Difference](https://leetcode.com/problems/count-partitions-with-even-sum-difference/description/) | Free in snapshot | Not cached |
 | 3433 | [Count Mentions Per User](https://leetcode.com/problems/count-mentions-per-user/description/) | Free in snapshot | Not cached |
 | 3434 | [Maximum Frequency After Subarray Operation](https://leetcode.com/problems/maximum-frequency-after-subarray-operation/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3434.json) |
 | 3435 | [Frequencies of Shortest Supersequences](https://leetcode.com/problems/frequencies-of-shortest-supersequences/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3435.json) |
 | 3436 | [Find Valid Emails](https://leetcode.com/problems/find-valid-emails/description/) | Free in snapshot | Not cached |
-| 3437 | [Permutations III](https://leetcode.com/problems/permutations-iii/description/) | Paid in snapshot | Not cached |
+| 3437 | [Permutations III](https://leetcode.com/problems/permutations-iii/description/) | Paid in snapshot | [Requirement summary](../requirements/3437.json) |
 | 3438 | [Find Valid Pair of Adjacent Digits in String](https://leetcode.com/problems/find-valid-pair-of-adjacent-digits-in-string/description/) | Free in snapshot | Not cached |
 | 3439 | [Reschedule Meetings for Maximum Free Time I](https://leetcode.com/problems/reschedule-meetings-for-maximum-free-time-i/description/) | Free in snapshot | Not cached |
 | 3440 | [Reschedule Meetings for Maximum Free Time II](https://leetcode.com/problems/reschedule-meetings-for-maximum-free-time-ii/description/) | Free in snapshot | Not cached |
@@ -3473,7 +3473,7 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3463 | [Check If Digits Are Equal in String After Operations II](https://leetcode.com/problems/check-if-digits-are-equal-in-string-after-operations-ii/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3463.json) |
 | 3464 | [Maximize the Distance Between Points on a Square](https://leetcode.com/problems/maximize-the-distance-between-points-on-a-square/description/) | Free in snapshot | Not cached |
 | 3465 | [Find Products with Valid Serial Numbers](https://leetcode.com/problems/find-products-with-valid-serial-numbers/description/) | Free in snapshot | Not cached |
-| 3466 | [Maximum Coin Collection ](https://leetcode.com/problems/maximum-coin-collection/description/) | Paid in snapshot | Not cached |
+| 3466 | [Maximum Coin Collection ](https://leetcode.com/problems/maximum-coin-collection/description/) | Paid in snapshot | [Requirement summary](../requirements/3466.json) |
 | 3467 | [Transform Array by Parity](https://leetcode.com/problems/transform-array-by-parity/description/) | Free in snapshot | Not cached |
 | 3468 | [Find the Number of Copy Arrays](https://leetcode.com/problems/find-the-number-of-copy-arrays/description/) | Free in snapshot | Not cached |
 | 3469 | [Find Minimum Cost to Remove Array Elements](https://leetcode.com/problems/find-minimum-cost-to-remove-array-elements/description/) | Free in snapshot | Not cached |
@@ -3483,7 +3483,7 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3473 | [Sum of K Subarrays With Length at Least M](https://leetcode.com/problems/sum-of-k-subarrays-with-length-at-least-m/description/) | Free in snapshot | Not cached |
 | 3474 | [Lexicographically Smallest Generated String](https://leetcode.com/problems/lexicographically-smallest-generated-string/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3474.json) |
 | 3475 | [DNA Pattern Recognition ](https://leetcode.com/problems/dna-pattern-recognition/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3475.json) |
-| 3476 | [Maximize Profit from Task Assignment](https://leetcode.com/problems/maximize-profit-from-task-assignment/description/) | Paid in snapshot | Not cached |
+| 3476 | [Maximize Profit from Task Assignment](https://leetcode.com/problems/maximize-profit-from-task-assignment/description/) | Paid in snapshot | [Requirement summary](../requirements/3476.json) |
 | 3477 | [Fruits Into Baskets II](https://leetcode.com/problems/fruits-into-baskets-ii/description/) | Free in snapshot | Not cached |
 | 3478 | [Choose K Elements With Maximum Sum](https://leetcode.com/problems/choose-k-elements-with-maximum-sum/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3478.json) |
 | 3479 | [Fruits Into Baskets III](https://leetcode.com/problems/fruits-into-baskets-iii/description/) | Free in snapshot | Not cached |
@@ -3503,7 +3503,7 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3493 | [Properties Graph](https://leetcode.com/problems/properties-graph/description/) | Free in snapshot | Not cached |
 | 3494 | [Find the Minimum Amount of Time to Brew Potions](https://leetcode.com/problems/find-the-minimum-amount-of-time-to-brew-potions/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3494.json) |
 | 3495 | [Minimum Operations to Make Array Elements Zero](https://leetcode.com/problems/minimum-operations-to-make-array-elements-zero/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3495.json) |
-| 3496 | [Maximize Score After Pair Deletions](https://leetcode.com/problems/maximize-score-after-pair-deletions/description/) | Paid in snapshot | Not cached |
+| 3496 | [Maximize Score After Pair Deletions](https://leetcode.com/problems/maximize-score-after-pair-deletions/description/) | Paid in snapshot | [Requirement summary](../requirements/3496.json) |
 | 3497 | [Analyze Subscription Conversion ](https://leetcode.com/problems/analyze-subscription-conversion/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3497.json) |
 | 3498 | [Reverse Degree of a String](https://leetcode.com/problems/reverse-degree-of-a-string/description/) | Free in snapshot | Not cached |
 | 3499 | [Maximize Active Section with Trade I](https://leetcode.com/problems/maximize-active-section-with-trade-i/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3499.json) |
@@ -3513,12 +3513,12 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3503 | [Longest Palindrome After Substring Concatenation I](https://leetcode.com/problems/longest-palindrome-after-substring-concatenation-i/description/) | Free in snapshot | Not cached |
 | 3504 | [Longest Palindrome After Substring Concatenation II](https://leetcode.com/problems/longest-palindrome-after-substring-concatenation-ii/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3504.json) |
 | 3505 | [Minimum Operations to Make Elements Within K Subarrays Equal](https://leetcode.com/problems/minimum-operations-to-make-elements-within-k-subarrays-equal/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3505.json) |
-| 3506 | [Find Time Required to Eliminate Bacterial Strains](https://leetcode.com/problems/find-time-required-to-eliminate-bacterial-strains/description/) | Paid in snapshot | Not cached |
+| 3506 | [Find Time Required to Eliminate Bacterial Strains](https://leetcode.com/problems/find-time-required-to-eliminate-bacterial-strains/description/) | Paid in snapshot | [Requirement summary](../requirements/3506.json) |
 | 3507 | [Minimum Pair Removal to Sort Array I](https://leetcode.com/problems/minimum-pair-removal-to-sort-array-i/description/) | Free in snapshot | Not cached |
 | 3508 | [Implement Router](https://leetcode.com/problems/implement-router/description/) | Free in snapshot | Not cached |
 | 3509 | [Maximum Product of Subsequences With an Alternating Sum Equal to K](https://leetcode.com/problems/maximum-product-of-subsequences-with-an-alternating-sum-equal-to-k/description/) | Free in snapshot | Not cached |
 | 3510 | [Minimum Pair Removal to Sort Array II](https://leetcode.com/problems/minimum-pair-removal-to-sort-array-ii/description/) | Free in snapshot | Not cached |
-| 3511 | [Make a Positive Array](https://leetcode.com/problems/make-a-positive-array/description/) | Paid in snapshot | Not cached |
+| 3511 | [Make a Positive Array](https://leetcode.com/problems/make-a-positive-array/description/) | Paid in snapshot | [Requirement summary](../requirements/3511.json) |
 | 3512 | [Minimum Operations to Make Array Sum Divisible by K](https://leetcode.com/problems/minimum-operations-to-make-array-sum-divisible-by-k/description/) | Free in snapshot | Not cached |
 | 3513 | [Number of Unique XOR Triplets I](https://leetcode.com/problems/number-of-unique-xor-triplets-i/description/) | Free in snapshot | Not cached |
 | 3514 | [Number of Unique XOR Triplets II](https://leetcode.com/problems/number-of-unique-xor-triplets-ii/description/) | Free in snapshot | Not cached |
@@ -3527,13 +3527,13 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3517 | [Smallest Palindromic Rearrangement I](https://leetcode.com/problems/smallest-palindromic-rearrangement-i/description/) | Free in snapshot | Not cached |
 | 3518 | [Smallest Palindromic Rearrangement II](https://leetcode.com/problems/smallest-palindromic-rearrangement-ii/description/) | Free in snapshot | Not cached |
 | 3519 | [Count Numbers with Non-Decreasing Digits ](https://leetcode.com/problems/count-numbers-with-non-decreasing-digits/description/) | Free in snapshot | Not cached |
-| 3520 | [Minimum Threshold for Inversion Pairs Count](https://leetcode.com/problems/minimum-threshold-for-inversion-pairs-count/description/) | Paid in snapshot | Not cached |
+| 3520 | [Minimum Threshold for Inversion Pairs Count](https://leetcode.com/problems/minimum-threshold-for-inversion-pairs-count/description/) | Paid in snapshot | [Requirement summary](../requirements/3520.json) |
 | 3521 | [Find Product Recommendation Pairs](https://leetcode.com/problems/find-product-recommendation-pairs/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3521.json) |
 | 3522 | [Calculate Score After Performing Instructions](https://leetcode.com/problems/calculate-score-after-performing-instructions/description/) | Free in snapshot | Not cached |
 | 3523 | [Make Array Non-decreasing](https://leetcode.com/problems/make-array-non-decreasing/description/) | Free in snapshot | Not cached |
 | 3524 | [Find X Value of Array I](https://leetcode.com/problems/find-x-value-of-array-i/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3524.json) |
 | 3525 | [Find X Value of Array II](https://leetcode.com/problems/find-x-value-of-array-ii/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3525.json) |
-| 3526 | [Range XOR Queries with Subarray Reversals](https://leetcode.com/problems/range-xor-queries-with-subarray-reversals/description/) | Paid in snapshot | Not cached |
+| 3526 | [Range XOR Queries with Subarray Reversals](https://leetcode.com/problems/range-xor-queries-with-subarray-reversals/description/) | Paid in snapshot | [Requirement summary](../requirements/3526.json) |
 | 3527 | [Find the Most Common Response](https://leetcode.com/problems/find-the-most-common-response/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3527.json) |
 | 3528 | [Unit Conversion I](https://leetcode.com/problems/unit-conversion-i/description/) | Free in snapshot | Not cached |
 | 3529 | [Count Cells in Overlapping Horizontal and Vertical Substrings](https://leetcode.com/problems/count-cells-in-overlapping-horizontal-and-vertical-substrings/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3529.json) |
@@ -3542,12 +3542,12 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3532 | [Path Existence Queries in a Graph I](https://leetcode.com/problems/path-existence-queries-in-a-graph-i/description/) | Free in snapshot | Not cached |
 | 3533 | [Concatenated Divisibility](https://leetcode.com/problems/concatenated-divisibility/description/) | Free in snapshot | Not cached |
 | 3534 | [Path Existence Queries in a Graph II](https://leetcode.com/problems/path-existence-queries-in-a-graph-ii/description/) | Free in snapshot | Not cached |
-| 3535 | [Unit Conversion II](https://leetcode.com/problems/unit-conversion-ii/description/) | Paid in snapshot | Not cached |
+| 3535 | [Unit Conversion II](https://leetcode.com/problems/unit-conversion-ii/description/) | Paid in snapshot | [Requirement summary](../requirements/3535.json) |
 | 3536 | [Maximum Product of Two Digits](https://leetcode.com/problems/maximum-product-of-two-digits/description/) | Free in snapshot | Not cached |
 | 3537 | [Fill a Special Grid](https://leetcode.com/problems/fill-a-special-grid/description/) | Free in snapshot | Not cached |
 | 3538 | [Merge Operations for Minimum Travel Time](https://leetcode.com/problems/merge-operations-for-minimum-travel-time/description/) | Free in snapshot | Not cached |
 | 3539 | [Find Sum of Array Product of Magical Sequences](https://leetcode.com/problems/find-sum-of-array-product-of-magical-sequences/description/) | Free in snapshot | Not cached |
-| 3540 | [Minimum Time to Visit All Houses](https://leetcode.com/problems/minimum-time-to-visit-all-houses/description/) | Paid in snapshot | Not cached |
+| 3540 | [Minimum Time to Visit All Houses](https://leetcode.com/problems/minimum-time-to-visit-all-houses/description/) | Paid in snapshot | [Requirement summary](../requirements/3540.json) |
 | 3541 | [Find Most Frequent Vowel and Consonant](https://leetcode.com/problems/find-most-frequent-vowel-and-consonant/description/) | Free in snapshot | Not cached |
 | 3542 | [Minimum Operations to Convert All Elements to Zero](https://leetcode.com/problems/minimum-operations-to-convert-all-elements-to-zero/description/) | Free in snapshot | Not cached |
 | 3543 | [Maximum Weighted K-Edge Path](https://leetcode.com/problems/maximum-weighted-k-edge-path/description/) | Free in snapshot | Not cached |
@@ -3562,7 +3562,7 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3552 | [Grid Teleportation Traversal](https://leetcode.com/problems/grid-teleportation-traversal/description/) | Free in snapshot | Not cached |
 | 3553 | [Minimum Weighted Subgraph With the Required Paths II](https://leetcode.com/problems/minimum-weighted-subgraph-with-the-required-paths-ii/description/) | Free in snapshot | Not cached |
 | 3554 | [Find Category Recommendation Pairs](https://leetcode.com/problems/find-category-recommendation-pairs/description/) | Free in snapshot | Not cached |
-| 3555 | [Smallest Subarray to Sort in Every Sliding Window](https://leetcode.com/problems/smallest-subarray-to-sort-in-every-sliding-window/description/) | Paid in snapshot | Not cached |
+| 3555 | [Smallest Subarray to Sort in Every Sliding Window](https://leetcode.com/problems/smallest-subarray-to-sort-in-every-sliding-window/description/) | Paid in snapshot | [Requirement summary](../requirements/3555.json) |
 | 3556 | [Sum of Largest Prime Substrings](https://leetcode.com/problems/sum-of-largest-prime-substrings/description/) | Free in snapshot | Not cached |
 | 3557 | [Find Maximum Number of Non Intersecting Substrings](https://leetcode.com/problems/find-maximum-number-of-non-intersecting-substrings/description/) | Free in snapshot | Not cached |
 | 3558 | [Number of Ways to Assign Edge Weights I](https://leetcode.com/problems/number-of-ways-to-assign-edge-weights-i/description/) | Free in snapshot | Not cached |
@@ -3572,7 +3572,7 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3562 | [Maximum Profit from Trading Stocks with Discounts](https://leetcode.com/problems/maximum-profit-from-trading-stocks-with-discounts/description/) | Free in snapshot | Not cached |
 | 3563 | [Lexicographically Smallest String After Adjacent Removals](https://leetcode.com/problems/lexicographically-smallest-string-after-adjacent-removals/description/) | Free in snapshot | Not cached |
 | 3564 | [Seasonal Sales Analysis](https://leetcode.com/problems/seasonal-sales-analysis/description/) | Free in snapshot | Not cached |
-| 3565 | [Sequential Grid Path Cover](https://leetcode.com/problems/sequential-grid-path-cover/description/) | Paid in snapshot | Not cached |
+| 3565 | [Sequential Grid Path Cover](https://leetcode.com/problems/sequential-grid-path-cover/description/) | Paid in snapshot | [Requirement summary](../requirements/3565.json) |
 | 3566 | [Partition Array into Two Equal Product Subsets](https://leetcode.com/problems/partition-array-into-two-equal-product-subsets/description/) | Free in snapshot | Not cached |
 | 3567 | [Minimum Absolute Difference in Sliding Submatrix](https://leetcode.com/problems/minimum-absolute-difference-in-sliding-submatrix/description/) | Free in snapshot | Not cached |
 | 3568 | [Minimum Moves to Clean the Classroom](https://leetcode.com/problems/minimum-moves-to-clean-the-classroom/description/) | Free in snapshot | Not cached |
@@ -3603,7 +3603,7 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3593 | [Minimum Increments to Equalize Leaf Paths](https://leetcode.com/problems/minimum-increments-to-equalize-leaf-paths/description/) | Free in snapshot | Not cached |
 | 3594 | [Minimum Time to Transport All Individuals](https://leetcode.com/problems/minimum-time-to-transport-all-individuals/description/) | Free in snapshot | Not cached |
 | 3595 | [Once Twice](https://leetcode.com/problems/once-twice/description/) | Paid in snapshot | Not cached |
-| 3596 | [Minimum Cost Path with Alternating Directions I](https://leetcode.com/problems/minimum-cost-path-with-alternating-directions-i/description/) | Paid in snapshot | Not cached |
+| 3596 | [Minimum Cost Path with Alternating Directions I](https://leetcode.com/problems/minimum-cost-path-with-alternating-directions-i/description/) | Paid in snapshot | [Requirement summary](../requirements/3596.json) |
 | 3597 | [Partition String ](https://leetcode.com/problems/partition-string/description/) | Free in snapshot | Not cached |
 | 3598 | [Longest Common Prefix Between Adjacent Strings After Removals](https://leetcode.com/problems/longest-common-prefix-between-adjacent-strings-after-removals/description/) | Free in snapshot | Not cached |
 | 3599 | [Partition Array to Minimize XOR](https://leetcode.com/problems/partition-array-to-minimize-xor/description/) | Free in snapshot | Not cached |
@@ -3623,7 +3623,7 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3613 | [Minimize Maximum Component Cost](https://leetcode.com/problems/minimize-maximum-component-cost/description/) | Free in snapshot | Not cached |
 | 3614 | [Process String with Special Operations II](https://leetcode.com/problems/process-string-with-special-operations-ii/description/) | Free in snapshot | Not cached |
 | 3615 | [Longest Palindromic Path in Graph](https://leetcode.com/problems/longest-palindromic-path-in-graph/description/) | Free in snapshot | Not cached |
-| 3616 | [Number of Student Replacements](https://leetcode.com/problems/number-of-student-replacements/description/) | Paid in snapshot | Not cached |
+| 3616 | [Number of Student Replacements](https://leetcode.com/problems/number-of-student-replacements/description/) | Paid in snapshot | [Requirement summary](../requirements/3616.json) |
 | 3617 | [Find Students with Study Spiral Pattern](https://leetcode.com/problems/find-students-with-study-spiral-pattern/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3617.json) |
 | 3618 | [Split Array by Prime Indices](https://leetcode.com/problems/split-array-by-prime-indices/description/) | Free in snapshot | Not cached |
 | 3619 | [Count Islands With Total Value Divisible by K](https://leetcode.com/problems/count-islands-with-total-value-divisible-by-k/description/) | Free in snapshot | Not cached |
@@ -3638,7 +3638,7 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3628 | [Maximum Number of Subsequences After One Inserting](https://leetcode.com/problems/maximum-number-of-subsequences-after-one-inserting/description/) | Free in snapshot | Not cached |
 | 3629 | [Minimum Jumps to Reach End via Prime Teleportation](https://leetcode.com/problems/minimum-jumps-to-reach-end-via-prime-teleportation/description/) | Free in snapshot | Not cached |
 | 3630 | [Partition Array for Maximum XOR and AND](https://leetcode.com/problems/partition-array-for-maximum-xor-and-and/description/) | Free in snapshot | Not cached |
-| 3631 | [Sort Threats by Severity and Exploitability](https://leetcode.com/problems/sort-threats-by-severity-and-exploitability/description/) | Paid in snapshot | Not cached |
+| 3631 | [Sort Threats by Severity and Exploitability](https://leetcode.com/problems/sort-threats-by-severity-and-exploitability/description/) | Paid in snapshot | [Requirement summary](../requirements/3631.json) |
 | 3632 | [Subarrays with XOR at Least K](https://leetcode.com/problems/subarrays-with-xor-at-least-k/description/) | Paid in snapshot | Not cached |
 | 3633 | [Earliest Finish Time for Land and Water Rides I](https://leetcode.com/problems/earliest-finish-time-for-land-and-water-rides-i/description/) | Free in snapshot | Not cached |
 | 3634 | [Minimum Removals to Balance Array](https://leetcode.com/problems/minimum-removals-to-balance-array/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3634.json) |
@@ -3648,13 +3648,13 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3638 | [Maximum Balanced Shipments](https://leetcode.com/problems/maximum-balanced-shipments/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3638.json) |
 | 3639 | [Minimum Time to Activate String](https://leetcode.com/problems/minimum-time-to-activate-string/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3639.json) |
 | 3640 | [Trionic Array II](https://leetcode.com/problems/trionic-array-ii/description/) | Free in snapshot | Not cached |
-| 3641 | [Longest Semi-Repeating Subarray](https://leetcode.com/problems/longest-semi-repeating-subarray/description/) | Paid in snapshot | Not cached |
+| 3641 | [Longest Semi-Repeating Subarray](https://leetcode.com/problems/longest-semi-repeating-subarray/description/) | Paid in snapshot | [Requirement summary](../requirements/3641.json) |
 | 3642 | [Find Books with Polarized Opinions](https://leetcode.com/problems/find-books-with-polarized-opinions/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3642.json) |
 | 3643 | [Flip Square Submatrix Vertically](https://leetcode.com/problems/flip-square-submatrix-vertically/description/) | Free in snapshot | Not cached |
 | 3644 | [Maximum K to Sort a Permutation](https://leetcode.com/problems/maximum-k-to-sort-a-permutation/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3644.json) |
 | 3645 | [Maximum Total from Optimal Activation Order](https://leetcode.com/problems/maximum-total-from-optimal-activation-order/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3645.json) |
 | 3646 | [Next Special Palindrome Number](https://leetcode.com/problems/next-special-palindrome-number/description/) | Free in snapshot | Not cached |
-| 3647 | [Maximum Weight in Two Bags](https://leetcode.com/problems/maximum-weight-in-two-bags/description/) | Paid in snapshot | Not cached |
+| 3647 | [Maximum Weight in Two Bags](https://leetcode.com/problems/maximum-weight-in-two-bags/description/) | Paid in snapshot | [Requirement summary](../requirements/3647.json) |
 | 3648 | [Minimum Sensors to Cover Grid](https://leetcode.com/problems/minimum-sensors-to-cover-grid/description/) | Free in snapshot | Not cached |
 | 3649 | [Number of Perfect Pairs](https://leetcode.com/problems/number-of-perfect-pairs/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3649.json) |
 | 3650 | [Minimum Cost Path with Edge Reversals](https://leetcode.com/problems/minimum-cost-path-with-edge-reversals/description/) | Free in snapshot | Not cached |
@@ -3669,17 +3669,17 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3659 | [Partition Array Into K-Distinct Groups](https://leetcode.com/problems/partition-array-into-k-distinct-groups/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3659.json) |
 | 3660 | [Jump Game IX](https://leetcode.com/problems/jump-game-ix/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3660.json) |
 | 3661 | [Maximum Walls Destroyed by Robots](https://leetcode.com/problems/maximum-walls-destroyed-by-robots/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3661.json) |
-| 3662 | [Filter Characters by Frequency](https://leetcode.com/problems/filter-characters-by-frequency/description/) | Paid in snapshot | Not cached |
+| 3662 | [Filter Characters by Frequency](https://leetcode.com/problems/filter-characters-by-frequency/description/) | Paid in snapshot | [Requirement summary](../requirements/3662.json) |
 | 3663 | [Find The Least Frequent Digit](https://leetcode.com/problems/find-the-least-frequent-digit/description/) | Free in snapshot | Not cached |
 | 3664 | [Two-Letter Card Game](https://leetcode.com/problems/two-letter-card-game/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3664.json) |
 | 3665 | [Twisted Mirror Path Count](https://leetcode.com/problems/twisted-mirror-path-count/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3665.json) |
 | 3666 | [Minimum Operations to Equalize Binary String](https://leetcode.com/problems/minimum-operations-to-equalize-binary-string/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3666.json) |
-| 3667 | [Sort Array By Absolute Value](https://leetcode.com/problems/sort-array-by-absolute-value/description/) | Paid in snapshot | Not cached |
+| 3667 | [Sort Array By Absolute Value](https://leetcode.com/problems/sort-array-by-absolute-value/description/) | Paid in snapshot | [Requirement summary](../requirements/3667.json) |
 | 3668 | [Restore Finishing Order](https://leetcode.com/problems/restore-finishing-order/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3668.json) |
 | 3669 | [Balanced K-Factor Decomposition](https://leetcode.com/problems/balanced-k-factor-decomposition/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3669.json) |
 | 3670 | [Maximum Product of Two Integers With No Common Bits](https://leetcode.com/problems/maximum-product-of-two-integers-with-no-common-bits/description/) | Free in snapshot | Not cached |
 | 3671 | [Sum of Beautiful Subsequences](https://leetcode.com/problems/sum-of-beautiful-subsequences/description/) | Free in snapshot | Not cached |
-| 3672 | [Sum of Weighted Modes in Subarrays](https://leetcode.com/problems/sum-of-weighted-modes-in-subarrays/description/) | Paid in snapshot | Not cached |
+| 3672 | [Sum of Weighted Modes in Subarrays](https://leetcode.com/problems/sum-of-weighted-modes-in-subarrays/description/) | Paid in snapshot | [Requirement summary](../requirements/3672.json) |
 | 3673 | [Find Zombie Sessions](https://leetcode.com/problems/find-zombie-sessions/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3673.json) |
 | 3674 | [Minimum Operations to Equalize Array](https://leetcode.com/problems/minimum-operations-to-equalize-array/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3674.json) |
 | 3675 | [Minimum Operations to Transform String](https://leetcode.com/problems/minimum-operations-to-transform-string/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3675.json) |
@@ -3694,7 +3694,7 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3684 | [Maximize Sum of At Most K Distinct Elements](https://leetcode.com/problems/maximize-sum-of-at-most-k-distinct-elements/description/) | Free in snapshot | Not cached |
 | 3685 | [Subsequence Sum After Capping Elements](https://leetcode.com/problems/subsequence-sum-after-capping-elements/description/) | Free in snapshot | Not cached |
 | 3686 | [Number of Stable Subsequences](https://leetcode.com/problems/number-of-stable-subsequences/description/) | Free in snapshot | Not cached |
-| 3687 | [Library Late Fee Calculator](https://leetcode.com/problems/library-late-fee-calculator/description/) | Paid in snapshot | Not cached |
+| 3687 | [Library Late Fee Calculator](https://leetcode.com/problems/library-late-fee-calculator/description/) | Paid in snapshot | [Requirement summary](../requirements/3687.json) |
 | 3688 | [Bitwise OR of Even Numbers in an Array](https://leetcode.com/problems/bitwise-or-of-even-numbers-in-an-array/description/) | Free in snapshot | Not cached |
 | 3689 | [Maximum Total Subarray Value I](https://leetcode.com/problems/maximum-total-subarray-value-i/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3689.json) |
 | 3690 | [Split and Merge Array Transformation](https://leetcode.com/problems/split-and-merge-array-transformation/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3690.json) |
@@ -3718,13 +3718,13 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3708 | [Longest Fibonacci Subarray](https://leetcode.com/problems/longest-fibonacci-subarray/description/) | Free in snapshot | Not cached |
 | 3709 | [Design Exam Scores Tracker](https://leetcode.com/problems/design-exam-scores-tracker/description/) | Free in snapshot | Not cached |
 | 3710 | [Maximum Partition Factor](https://leetcode.com/problems/maximum-partition-factor/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3710.json) |
-| 3711 | [Maximum Transactions Without Negative Balance](https://leetcode.com/problems/maximum-transactions-without-negative-balance/description/) | Paid in snapshot | Not cached |
+| 3711 | [Maximum Transactions Without Negative Balance](https://leetcode.com/problems/maximum-transactions-without-negative-balance/description/) | Paid in snapshot | [Requirement summary](../requirements/3711.json) |
 | 3712 | [Sum of Elements With Frequency Divisible by K](https://leetcode.com/problems/sum-of-elements-with-frequency-divisible-by-k/description/) | Free in snapshot | Not cached |
 | 3713 | [Longest Balanced Substring I](https://leetcode.com/problems/longest-balanced-substring-i/description/) | Free in snapshot | Not cached |
 | 3714 | [Longest Balanced Substring II](https://leetcode.com/problems/longest-balanced-substring-ii/description/) | Free in snapshot | Not cached |
 | 3715 | [Sum of Perfect Square Ancestors](https://leetcode.com/problems/sum-of-perfect-square-ancestors/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3715.json) |
 | 3716 | [Find Churn Risk Customers](https://leetcode.com/problems/find-churn-risk-customers/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3716.json) |
-| 3717 | [Minimum Operations to Make the Array Beautiful](https://leetcode.com/problems/minimum-operations-to-make-the-array-beautiful/description/) | Paid in snapshot | Not cached |
+| 3717 | [Minimum Operations to Make the Array Beautiful](https://leetcode.com/problems/minimum-operations-to-make-the-array-beautiful/description/) | Paid in snapshot | [Requirement summary](../requirements/3717.json) |
 | 3718 | [Smallest Missing Multiple of K](https://leetcode.com/problems/smallest-missing-multiple-of-k/description/) | Free in snapshot | Not cached |
 | 3719 | [Longest Balanced Subarray I](https://leetcode.com/problems/longest-balanced-subarray-i/description/) | Free in snapshot | Not cached |
 | 3720 | [Lexicographically Smallest Permutation Greater Than Target](https://leetcode.com/problems/lexicographically-smallest-permutation-greater-than-target/description/) | Free in snapshot | Not cached |
@@ -3737,12 +3737,12 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3727 | [Maximum Alternating Sum of Squares](https://leetcode.com/problems/maximum-alternating-sum-of-squares/description/) | Free in snapshot | Not cached |
 | 3728 | [Stable Subarrays With Equal Boundary and Interior Sum](https://leetcode.com/problems/stable-subarrays-with-equal-boundary-and-interior-sum/description/) | Free in snapshot | Not cached |
 | 3729 | [Count Distinct Subarrays Divisible by K in Sorted Array](https://leetcode.com/problems/count-distinct-subarrays-divisible-by-k-in-sorted-array/description/) | Free in snapshot | Not cached |
-| 3730 | [Maximum Calories Burnt from Jumps](https://leetcode.com/problems/maximum-calories-burnt-from-jumps/description/) | Paid in snapshot | Not cached |
+| 3730 | [Maximum Calories Burnt from Jumps](https://leetcode.com/problems/maximum-calories-burnt-from-jumps/description/) | Paid in snapshot | [Requirement summary](../requirements/3730.json) |
 | 3731 | [Find Missing Elements](https://leetcode.com/problems/find-missing-elements/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3731.json) |
 | 3732 | [Maximum Product of Three Elements After One Replacement](https://leetcode.com/problems/maximum-product-of-three-elements-after-one-replacement/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3732.json) |
 | 3733 | [Minimum Time to Complete All Deliveries](https://leetcode.com/problems/minimum-time-to-complete-all-deliveries/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3733.json) |
 | 3734 | [Lexicographically Smallest Palindromic Permutation Greater Than Target](https://leetcode.com/problems/lexicographically-smallest-palindromic-permutation-greater-than-target/description/) | Free in snapshot | Not cached |
-| 3735 | [Lexicographically Smallest String After Reverse II](https://leetcode.com/problems/lexicographically-smallest-string-after-reverse-ii/description/) | Paid in snapshot | Not cached |
+| 3735 | [Lexicographically Smallest String After Reverse II](https://leetcode.com/problems/lexicographically-smallest-string-after-reverse-ii/description/) | Paid in snapshot | [Requirement summary](../requirements/3735.json) |
 | 3736 | [Minimum Moves to Equal Array Elements III](https://leetcode.com/problems/minimum-moves-to-equal-array-elements-iii/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3736.json) |
 | 3737 | [Count Subarrays With Majority Element I](https://leetcode.com/problems/count-subarrays-with-majority-element-i/description/) | Free in snapshot | Not cached |
 | 3738 | [Longest Non-Decreasing Subarray After Replacing at Most One Element](https://leetcode.com/problems/longest-non-decreasing-subarray-after-replacing-at-most-one-element/description/) | Free in snapshot | Not cached |
@@ -3751,12 +3751,12 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3741 | [Minimum Distance Between Three Equal Elements II](https://leetcode.com/problems/minimum-distance-between-three-equal-elements-ii/description/) | Free in snapshot | Not cached |
 | 3742 | [Maximum Path Score in a Grid](https://leetcode.com/problems/maximum-path-score-in-a-grid/description/) | Free in snapshot | Not cached |
 | 3743 | [Maximize Cyclic Partition Score](https://leetcode.com/problems/maximize-cyclic-partition-score/description/) | Free in snapshot | Not cached |
-| 3744 | [Find Kth Character in Expanded String](https://leetcode.com/problems/find-kth-character-in-expanded-string/description/) | Paid in snapshot | Not cached |
+| 3744 | [Find Kth Character in Expanded String](https://leetcode.com/problems/find-kth-character-in-expanded-string/description/) | Paid in snapshot | [Requirement summary](../requirements/3744.json) |
 | 3745 | [Maximize Expression of Three Elements](https://leetcode.com/problems/maximize-expression-of-three-elements/description/) | Free in snapshot | Not cached |
 | 3746 | [Minimum String Length After Balanced Removals](https://leetcode.com/problems/minimum-string-length-after-balanced-removals/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3746.json) |
 | 3747 | [Count Distinct Integers After Removing Zeros](https://leetcode.com/problems/count-distinct-integers-after-removing-zeros/description/) | Free in snapshot | Not cached |
 | 3748 | [Count Stable Subarrays](https://leetcode.com/problems/count-stable-subarrays/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3748.json) |
-| 3749 | [Evaluate Valid Expressions](https://leetcode.com/problems/evaluate-valid-expressions/description/) | Paid in snapshot | Not cached |
+| 3749 | [Evaluate Valid Expressions](https://leetcode.com/problems/evaluate-valid-expressions/description/) | Paid in snapshot | [Requirement summary](../requirements/3749.json) |
 | 3750 | [Minimum Number of Flips to Reverse Binary String](https://leetcode.com/problems/minimum-number-of-flips-to-reverse-binary-string/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3750.json) |
 | 3751 | [Total Waviness of Numbers in Range I](https://leetcode.com/problems/total-waviness-of-numbers-in-range-i/description/) | Free in snapshot | Not cached |
 | 3752 | [Lexicographically Smallest Negated Permutation that Sums to Target](https://leetcode.com/problems/lexicographically-smallest-negated-permutation-that-sums-to-target/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3752.json) |
@@ -3765,13 +3765,13 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3755 | [Find Maximum Balanced XOR Subarray Length](https://leetcode.com/problems/find-maximum-balanced-xor-subarray-length/description/) | Free in snapshot | Not cached |
 | 3756 | [Concatenate Non-Zero Digits and Multiply by Sum II](https://leetcode.com/problems/concatenate-non-zero-digits-and-multiply-by-sum-ii/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3756.json) |
 | 3757 | [Number of Effective Subsequences](https://leetcode.com/problems/number-of-effective-subsequences/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3757.json) |
-| 3758 | [Convert Number Words to Digits](https://leetcode.com/problems/convert-number-words-to-digits/description/) | Paid in snapshot | Not cached |
+| 3758 | [Convert Number Words to Digits](https://leetcode.com/problems/convert-number-words-to-digits/description/) | Paid in snapshot | [Requirement summary](../requirements/3758.json) |
 | 3759 | [Count Elements With at Least K Greater Values](https://leetcode.com/problems/count-elements-with-at-least-k-greater-values/description/) | Free in snapshot | Not cached |
 | 3760 | [Maximum Substrings With Distinct Start](https://leetcode.com/problems/maximum-substrings-with-distinct-start/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3760.json) |
 | 3761 | [Minimum Absolute Distance Between Mirror Pairs](https://leetcode.com/problems/minimum-absolute-distance-between-mirror-pairs/description/) | Free in snapshot | Not cached |
 | 3762 | [Minimum Operations to Equalize Subarrays](https://leetcode.com/problems/minimum-operations-to-equalize-subarrays/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3762.json) |
-| 3763 | [Maximum Total Sum with Threshold Constraints](https://leetcode.com/problems/maximum-total-sum-with-threshold-constraints/description/) | Paid in snapshot | Not cached |
-| 3764 | [Most Common Course Pairs](https://leetcode.com/problems/most-common-course-pairs/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3764.json) |
+| 3763 | [Maximum Total Sum with Threshold Constraints](https://leetcode.com/problems/maximum-total-sum-with-threshold-constraints/description/) | Paid in snapshot | [Requirement summary](../requirements/3763.json) |
+| 3764 | [Most Common Course Pairs](https://leetcode.com/problems/most-common-course-pairs/description/) | Free in snapshot | [Requirement summary](../requirements/3764.json) |
 | 3765 | [Complete Prime Number](https://leetcode.com/problems/complete-prime-number/description/) | Free in snapshot | Not cached |
 | 3766 | [Minimum Operations to Make Binary Palindrome](https://leetcode.com/problems/minimum-operations-to-make-binary-palindrome/description/) | Free in snapshot | Not cached |
 | 3767 | [Maximize Points After Choosing K Tasks](https://leetcode.com/problems/maximize-points-after-choosing-k-tasks/description/) | Free in snapshot | Not cached |
@@ -3780,12 +3780,12 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3770 | [Largest Prime from Consecutive Prime Sum](https://leetcode.com/problems/largest-prime-from-consecutive-prime-sum/description/) | Free in snapshot | Not cached |
 | 3771 | [Total Score of Dungeon Runs](https://leetcode.com/problems/total-score-of-dungeon-runs/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3771.json) |
 | 3772 | [Maximum Subgraph Score in a Tree](https://leetcode.com/problems/maximum-subgraph-score-in-a-tree/description/) | Free in snapshot | Not cached |
-| 3773 | [Maximum Number of Equal Length Runs](https://leetcode.com/problems/maximum-number-of-equal-length-runs/description/) | Paid in snapshot | Not cached |
+| 3773 | [Maximum Number of Equal Length Runs](https://leetcode.com/problems/maximum-number-of-equal-length-runs/description/) | Paid in snapshot | [Requirement summary](../requirements/3773.json) |
 | 3774 | [Absolute Difference Between Maximum and Minimum K Elements](https://leetcode.com/problems/absolute-difference-between-maximum-and-minimum-k-elements/description/) | Free in snapshot | Not cached |
 | 3775 | [Reverse Words With Same Vowel Count](https://leetcode.com/problems/reverse-words-with-same-vowel-count/description/) | Free in snapshot | Not cached |
 | 3776 | [Minimum Moves to Balance Circular Array](https://leetcode.com/problems/minimum-moves-to-balance-circular-array/description/) | Free in snapshot | Not cached |
 | 3777 | [Minimum Deletions to Make Alternating Substring](https://leetcode.com/problems/minimum-deletions-to-make-alternating-substring/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3777.json) |
-| 3778 | [Minimum Distance Excluding One Maximum Weighted Edge](https://leetcode.com/problems/minimum-distance-excluding-one-maximum-weighted-edge/description/) | Paid in snapshot | Not cached |
+| 3778 | [Minimum Distance Excluding One Maximum Weighted Edge](https://leetcode.com/problems/minimum-distance-excluding-one-maximum-weighted-edge/description/) | Paid in snapshot | [Requirement summary](../requirements/3778.json) |
 | 3779 | [Minimum Number of Operations to Have Distinct Elements](https://leetcode.com/problems/minimum-number-of-operations-to-have-distinct-elements/description/) | Free in snapshot | [Attempt only; no statement](../requirements/3779.json) |
 | 3780 | [Maximum Sum of Three Numbers Divisible by Three](https://leetcode.com/problems/maximum-sum-of-three-numbers-divisible-by-three/description/) | Free in snapshot | Not cached |
 | 3781 | [Maximum Score After Binary Swaps](https://leetcode.com/problems/maximum-score-after-binary-swaps/description/) | Free in snapshot | Not cached |
@@ -3799,8 +3799,8 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3789 | [Minimum Cost to Acquire Required Items](https://leetcode.com/problems/minimum-cost-to-acquire-required-items/description/) | Free in snapshot | [Requirement summary](../requirements/3789.json) |
 | 3790 | [Smallest All-Ones Multiple](https://leetcode.com/problems/smallest-all-ones-multiple/description/) | Free in snapshot | Not cached |
 | 3791 | [Number of Balanced Integers in a Range](https://leetcode.com/problems/number-of-balanced-integers-in-a-range/description/) | Free in snapshot | Not cached |
-| 3792 | [Sum of Increasing Product Blocks](https://leetcode.com/problems/sum-of-increasing-product-blocks/description/) | Paid in snapshot | Not cached |
-| 3793 | [Find Users with High Token Usage](https://leetcode.com/problems/find-users-with-high-token-usage/description/) | Free in snapshot | Not cached |
+| 3792 | [Sum of Increasing Product Blocks](https://leetcode.com/problems/sum-of-increasing-product-blocks/description/) | Paid in snapshot | [Requirement summary](../requirements/3792.json) |
+| 3793 | [Find Users with High Token Usage](https://leetcode.com/problems/find-users-with-high-token-usage/description/) | Free in snapshot | [Requirement summary](../requirements/3793.json) |
 | 3794 | [Reverse String Prefix](https://leetcode.com/problems/reverse-string-prefix/description/) | Free in snapshot | Not cached |
 | 3795 | [Minimum Subarray Length With Distinct Sum At Least K](https://leetcode.com/problems/minimum-subarray-length-with-distinct-sum-at-least-k/description/) | Free in snapshot | Not cached |
 | 3796 | [Find Maximum Value in a Constrained Sequence](https://leetcode.com/problems/find-maximum-value-in-a-constrained-sequence/description/) | Free in snapshot | Not cached |
@@ -3809,13 +3809,13 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3799 | [Word Squares II](https://leetcode.com/problems/word-squares-ii/description/) | Free in snapshot | Not cached |
 | 3800 | [Minimum Cost to Make Two Binary Strings Equal](https://leetcode.com/problems/minimum-cost-to-make-two-binary-strings-equal/description/) | Free in snapshot | [Requirement summary](../requirements/3800.json) |
 | 3801 | [Minimum Cost to Merge Sorted Lists](https://leetcode.com/problems/minimum-cost-to-merge-sorted-lists/description/) | Free in snapshot | Not cached |
-| 3802 | [Number of Ways to Paint Sheets](https://leetcode.com/problems/number-of-ways-to-paint-sheets/description/) | Paid in snapshot | Not cached |
+| 3802 | [Number of Ways to Paint Sheets](https://leetcode.com/problems/number-of-ways-to-paint-sheets/description/) | Paid in snapshot | [Requirement summary](../requirements/3802.json) |
 | 3803 | [Count Residue Prefixes](https://leetcode.com/problems/count-residue-prefixes/description/) | Free in snapshot | Not cached |
 | 3804 | [Number of Centered Subarrays](https://leetcode.com/problems/number-of-centered-subarrays/description/) | Free in snapshot | Not cached |
 | 3805 | [Count Caesar Cipher Pairs](https://leetcode.com/problems/count-caesar-cipher-pairs/description/) | Free in snapshot | Not cached |
 | 3806 | [Maximum Bitwise AND After Increment Operations](https://leetcode.com/problems/maximum-bitwise-and-after-increment-operations/description/) | Free in snapshot | Not cached |
-| 3807 | [Minimum Cost to Repair Edges to Traverse a Graph](https://leetcode.com/problems/minimum-cost-to-repair-edges-to-traverse-a-graph/description/) | Paid in snapshot | Not cached |
-| 3808 | [Find Emotionally Consistent Users](https://leetcode.com/problems/find-emotionally-consistent-users/description/) | Free in snapshot | Not cached |
+| 3807 | [Minimum Cost to Repair Edges to Traverse a Graph](https://leetcode.com/problems/minimum-cost-to-repair-edges-to-traverse-a-graph/description/) | Paid in snapshot | [Requirement summary](../requirements/3807.json) |
+| 3808 | [Find Emotionally Consistent Users](https://leetcode.com/problems/find-emotionally-consistent-users/description/) | Free in snapshot | [Requirement summary](../requirements/3808.json) |
 | 3809 | [Best Reachable Tower](https://leetcode.com/problems/best-reachable-tower/description/) | Free in snapshot | Not cached |
 | 3810 | [Minimum Operations to Reach Target Array](https://leetcode.com/problems/minimum-operations-to-reach-target-array/description/) | Free in snapshot | Not cached |
 | 3811 | [Number of Alternating XOR Partitions](https://leetcode.com/problems/number-of-alternating-xor-partitions/description/) | Free in snapshot | Not cached |
@@ -3824,12 +3824,12 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3814 | [Maximum Capacity Within Budget](https://leetcode.com/problems/maximum-capacity-within-budget/description/) | Free in snapshot | Not cached |
 | 3815 | [Design Auction System](https://leetcode.com/problems/design-auction-system/description/) | Free in snapshot | Not cached |
 | 3816 | [Lexicographically Smallest String After Deleting Duplicate Characters](https://leetcode.com/problems/lexicographically-smallest-string-after-deleting-duplicate-characters/description/) | Free in snapshot | Not cached |
-| 3817 | [Good Indices in a Digit String](https://leetcode.com/problems/good-indices-in-a-digit-string/description/) | Paid in snapshot | Not cached |
+| 3817 | [Good Indices in a Digit String](https://leetcode.com/problems/good-indices-in-a-digit-string/description/) | Paid in snapshot | [Requirement summary](../requirements/3817.json) |
 | 3818 | [Minimum Prefix Removal to Make Array Strictly Increasing](https://leetcode.com/problems/minimum-prefix-removal-to-make-array-strictly-increasing/description/) | Free in snapshot | Not cached |
 | 3819 | [Rotate Non Negative Elements](https://leetcode.com/problems/rotate-non-negative-elements/description/) | Free in snapshot | Not cached |
 | 3820 | [Pythagorean Distance Nodes in a Tree](https://leetcode.com/problems/pythagorean-distance-nodes-in-a-tree/description/) | Free in snapshot | Not cached |
 | 3821 | [Find Nth Smallest Integer With K One Bits](https://leetcode.com/problems/find-nth-smallest-integer-with-k-one-bits/description/) | Free in snapshot | Not cached |
-| 3822 | [Design Order Management System](https://leetcode.com/problems/design-order-management-system/description/) | Paid in snapshot | Not cached |
+| 3822 | [Design Order Management System](https://leetcode.com/problems/design-order-management-system/description/) | Paid in snapshot | [Requirement summary](../requirements/3822.json) |
 | 3823 | [Reverse Letters Then Special Characters in a String](https://leetcode.com/problems/reverse-letters-then-special-characters-in-a-string/description/) | Free in snapshot | Not cached |
 | 3824 | [Minimum K to Reduce Array Within Limit](https://leetcode.com/problems/minimum-k-to-reduce-array-within-limit/description/) | Free in snapshot | Not cached |
 | 3825 | [Longest Strictly Increasing Subsequence With Non-Zero Bitwise AND](https://leetcode.com/problems/longest-strictly-increasing-subsequence-with-non-zero-bitwise-and/description/) | Free in snapshot | Not cached |
@@ -3838,13 +3838,13 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3828 | [Final Element After Subarray Deletions](https://leetcode.com/problems/final-element-after-subarray-deletions/description/) | Free in snapshot | Not cached |
 | 3829 | [Design Ride Sharing System](https://leetcode.com/problems/design-ride-sharing-system/description/) | Free in snapshot | Not cached |
 | 3830 | [Longest Alternating Subarray After Removing At Most One Element](https://leetcode.com/problems/longest-alternating-subarray-after-removing-at-most-one-element/description/) | Free in snapshot | Not cached |
-| 3831 | [Median of a Binary Search Tree Level](https://leetcode.com/problems/median-of-a-binary-search-tree-level/description/) | Paid in snapshot | Not cached |
-| 3832 | [Find Users with Persistent Behavior Patterns](https://leetcode.com/problems/find-users-with-persistent-behavior-patterns/description/) | Free in snapshot | Not cached |
+| 3831 | [Median of a Binary Search Tree Level](https://leetcode.com/problems/median-of-a-binary-search-tree-level/description/) | Paid in snapshot | [Requirement summary](../requirements/3831.json) |
+| 3832 | [Find Users with Persistent Behavior Patterns](https://leetcode.com/problems/find-users-with-persistent-behavior-patterns/description/) | Free in snapshot | [Requirement summary](../requirements/3832.json) |
 | 3833 | [Count Dominant Indices](https://leetcode.com/problems/count-dominant-indices/description/) | Free in snapshot | Not cached |
 | 3834 | [Merge Adjacent Equal Elements](https://leetcode.com/problems/merge-adjacent-equal-elements/description/) | Free in snapshot | Not cached |
 | 3835 | [Count Subarrays With Cost Less Than or Equal to K](https://leetcode.com/problems/count-subarrays-with-cost-less-than-or-equal-to-k/description/) | Free in snapshot | Not cached |
 | 3836 | [Maximum Score Using Exactly K Pairs](https://leetcode.com/problems/maximum-score-using-exactly-k-pairs/description/) | Free in snapshot | Not cached |
-| 3837 | [Delayed Count of Equal Elements](https://leetcode.com/problems/delayed-count-of-equal-elements/description/) | Paid in snapshot | Not cached |
+| 3837 | [Delayed Count of Equal Elements](https://leetcode.com/problems/delayed-count-of-equal-elements/description/) | Paid in snapshot | [Requirement summary](../requirements/3837.json) |
 | 3838 | [Weighted Word Mapping](https://leetcode.com/problems/weighted-word-mapping/description/) | Free in snapshot | Not cached |
 | 3839 | [Number of Prefix Connected Groups](https://leetcode.com/problems/number-of-prefix-connected-groups/description/) | Free in snapshot | Not cached |
 | 3840 | [House Robber V](https://leetcode.com/problems/house-robber-v/description/) | Free in snapshot | Not cached |
@@ -3853,12 +3853,12 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3843 | [First Element with Unique Frequency](https://leetcode.com/problems/first-element-with-unique-frequency/description/) | Free in snapshot | Not cached |
 | 3844 | [Longest Almost-Palindromic Substring](https://leetcode.com/problems/longest-almost-palindromic-substring/description/) | Free in snapshot | Not cached |
 | 3845 | [Maximum Subarray XOR with Bounded Range](https://leetcode.com/problems/maximum-subarray-xor-with-bounded-range/description/) | Free in snapshot | Not cached |
-| 3846 | [Total Distance to Type a String Using One Finger](https://leetcode.com/problems/total-distance-to-type-a-string-using-one-finger/description/) | Paid in snapshot | Not cached |
+| 3846 | [Total Distance to Type a String Using One Finger](https://leetcode.com/problems/total-distance-to-type-a-string-using-one-finger/description/) | Paid in snapshot | [Requirement summary](../requirements/3846.json) |
 | 3847 | [Find the Score Difference in a Game](https://leetcode.com/problems/find-the-score-difference-in-a-game/description/) | Free in snapshot | Not cached |
 | 3848 | [Check Digitorial Permutation](https://leetcode.com/problems/check-digitorial-permutation/description/) | Free in snapshot | Not cached |
 | 3849 | [Maximum Bitwise XOR After Rearrangement](https://leetcode.com/problems/maximum-bitwise-xor-after-rearrangement/description/) | Free in snapshot | Not cached |
 | 3850 | [Count Sequences to K](https://leetcode.com/problems/count-sequences-to-k/description/) | Free in snapshot | Not cached |
-| 3851 | [Maximum Requests Without Violating the Limit](https://leetcode.com/problems/maximum-requests-without-violating-the-limit/description/) | Paid in snapshot | Not cached |
+| 3851 | [Maximum Requests Without Violating the Limit](https://leetcode.com/problems/maximum-requests-without-violating-the-limit/description/) | Paid in snapshot | [Requirement summary](../requirements/3851.json) |
 | 3852 | [Smallest Pair With Different Frequencies](https://leetcode.com/problems/smallest-pair-with-different-frequencies/description/) | Free in snapshot | Not cached |
 | 3853 | [Merge Close Characters](https://leetcode.com/problems/merge-close-characters/description/) | Free in snapshot | Not cached |
 | 3854 | [Minimum Operations to Make Array Parity Alternating](https://leetcode.com/problems/minimum-operations-to-make-array-parity-alternating/description/) | Free in snapshot | Not cached |
@@ -3867,12 +3867,12 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3857 | [Minimum Cost to Split into Ones](https://leetcode.com/problems/minimum-cost-to-split-into-ones/description/) | Free in snapshot | Not cached |
 | 3858 | [Minimum Bitwise OR From Grid](https://leetcode.com/problems/minimum-bitwise-or-from-grid/description/) | Free in snapshot | Not cached |
 | 3859 | [Count Subarrays With K Distinct Integers](https://leetcode.com/problems/count-subarrays-with-k-distinct-integers/description/) | Free in snapshot | Not cached |
-| 3860 | [Unique Email Groups](https://leetcode.com/problems/unique-email-groups/description/) | Paid in snapshot | Not cached |
+| 3860 | [Unique Email Groups](https://leetcode.com/problems/unique-email-groups/description/) | Paid in snapshot | [Requirement summary](../requirements/3860.json) |
 | 3861 | [Minimum Capacity Box](https://leetcode.com/problems/minimum-capacity-box/description/) | Free in snapshot | Not cached |
 | 3862 | [Find the Smallest Balanced Index](https://leetcode.com/problems/find-the-smallest-balanced-index/description/) | Free in snapshot | Not cached |
 | 3863 | [Minimum Operations to Sort a String](https://leetcode.com/problems/minimum-operations-to-sort-a-string/description/) | Free in snapshot | Not cached |
 | 3864 | [Minimum Cost to Partition a Binary String](https://leetcode.com/problems/minimum-cost-to-partition-a-binary-string/description/) | Free in snapshot | Not cached |
-| 3865 | [Reverse K Subarrays](https://leetcode.com/problems/reverse-k-subarrays/description/) | Paid in snapshot | Not cached |
+| 3865 | [Reverse K Subarrays](https://leetcode.com/problems/reverse-k-subarrays/description/) | Paid in snapshot | [Requirement summary](../requirements/3865.json) |
 | 3866 | [First Unique Even Element](https://leetcode.com/problems/first-unique-even-element/description/) | Free in snapshot | Not cached |
 | 3867 | [Sum of GCD of Formed Pairs](https://leetcode.com/problems/sum-of-gcd-of-formed-pairs/description/) | Free in snapshot | Not cached |
 | 3868 | [Minimum Cost to Equalize Arrays Using Swaps](https://leetcode.com/problems/minimum-cost-to-equalize-arrays-using-swaps/description/) | Free in snapshot | Not cached |
@@ -3881,12 +3881,12 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3871 | [Count Commas in Range II](https://leetcode.com/problems/count-commas-in-range-ii/description/) | Free in snapshot | Not cached |
 | 3872 | [Longest Arithmetic Sequence After Changing At Most One Element](https://leetcode.com/problems/longest-arithmetic-sequence-after-changing-at-most-one-element/description/) | Free in snapshot | Not cached |
 | 3873 | [Maximum Points Activated with One Addition](https://leetcode.com/problems/maximum-points-activated-with-one-addition/description/) | Free in snapshot | Not cached |
-| 3874 | [Valid Subarrays With Exactly One Peak](https://leetcode.com/problems/valid-subarrays-with-exactly-one-peak/description/) | Paid in snapshot | Not cached |
+| 3874 | [Valid Subarrays With Exactly One Peak](https://leetcode.com/problems/valid-subarrays-with-exactly-one-peak/description/) | Paid in snapshot | [Requirement summary](../requirements/3874.json) |
 | 3875 | [Construct Uniform Parity Array I](https://leetcode.com/problems/construct-uniform-parity-array-i/description/) | Free in snapshot | Not cached |
 | 3876 | [Construct Uniform Parity Array II](https://leetcode.com/problems/construct-uniform-parity-array-ii/description/) | Free in snapshot | Not cached |
 | 3877 | [Minimum Removals to Achieve Target XOR](https://leetcode.com/problems/minimum-removals-to-achieve-target-xor/description/) | Free in snapshot | Not cached |
 | 3878 | [Count Good Subarrays](https://leetcode.com/problems/count-good-subarrays/description/) | Free in snapshot | Not cached |
-| 3879 | [Maximum Distinct Path Sum in a Binary Tree](https://leetcode.com/problems/maximum-distinct-path-sum-in-a-binary-tree/description/) | Paid in snapshot | Not cached |
+| 3879 | [Maximum Distinct Path Sum in a Binary Tree](https://leetcode.com/problems/maximum-distinct-path-sum-in-a-binary-tree/description/) | Paid in snapshot | [Requirement summary](../requirements/3879.json) |
 | 3880 | [Minimum Absolute Difference Between Two Values](https://leetcode.com/problems/minimum-absolute-difference-between-two-values/description/) | Free in snapshot | [Requirement summary](../requirements/3880.json) |
 | 3881 | [Direction Assignments with Exactly K Visible People](https://leetcode.com/problems/direction-assignments-with-exactly-k-visible-people/description/) | Free in snapshot | Not cached |
 | 3882 | [Minimum XOR Path in a Grid](https://leetcode.com/problems/minimum-xor-path-in-a-grid/description/) | Free in snapshot | Not cached |
@@ -3895,12 +3895,12 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3885 | [Design Event Manager](https://leetcode.com/problems/design-event-manager/description/) | Free in snapshot | Not cached |
 | 3886 | [Sum of Sortable Integers](https://leetcode.com/problems/sum-of-sortable-integers/description/) | Free in snapshot | Not cached |
 | 3887 | [Incremental Even-Weighted Cycle Queries](https://leetcode.com/problems/incremental-even-weighted-cycle-queries/description/) | Free in snapshot | Not cached |
-| 3888 | [Minimum Operations to Make All Grid Elements Equal](https://leetcode.com/problems/minimum-operations-to-make-all-grid-elements-equal/description/) | Paid in snapshot | Not cached |
+| 3888 | [Minimum Operations to Make All Grid Elements Equal](https://leetcode.com/problems/minimum-operations-to-make-all-grid-elements-equal/description/) | Paid in snapshot | [Requirement summary](../requirements/3888.json) |
 | 3889 | [Mirror Frequency Distance](https://leetcode.com/problems/mirror-frequency-distance/description/) | Free in snapshot | Not cached |
 | 3890 | [Integers With Multiple Sum of Two Cubes](https://leetcode.com/problems/integers-with-multiple-sum-of-two-cubes/description/) | Free in snapshot | Not cached |
 | 3891 | [Minimum Increase to Maximize Special Indices](https://leetcode.com/problems/minimum-increase-to-maximize-special-indices/description/) | Free in snapshot | Not cached |
 | 3892 | [Minimum Operations to Achieve At Least K Peaks](https://leetcode.com/problems/minimum-operations-to-achieve-at-least-k-peaks/description/) | Free in snapshot | Not cached |
-| 3893 | [Maximum Team Size with Overlapping Intervals](https://leetcode.com/problems/maximum-team-size-with-overlapping-intervals/description/) | Paid in snapshot | Not cached |
+| 3893 | [Maximum Team Size with Overlapping Intervals](https://leetcode.com/problems/maximum-team-size-with-overlapping-intervals/description/) | Paid in snapshot | [Requirement summary](../requirements/3893.json) |
 | 3894 | [Traffic Signal Color](https://leetcode.com/problems/traffic-signal-color/description/) | Free in snapshot | [Requirement summary](../requirements/3894.json) |
 | 3895 | [Count Digit Appearances](https://leetcode.com/problems/count-digit-appearances/description/) | Free in snapshot | [Requirement summary](../requirements/3895.json) |
 | 3896 | [Minimum Operations to Transform Array into Alternating Prime](https://leetcode.com/problems/minimum-operations-to-transform-array-into-alternating-prime/description/) | Free in snapshot | [Requirement summary](../requirements/3896.json) |
@@ -3909,12 +3909,12 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3899 | [Angles of a Triangle](https://leetcode.com/problems/angles-of-a-triangle/description/) | Free in snapshot | [Requirement summary](../requirements/3899.json) |
 | 3900 | [Longest Balanced Substring After One Swap](https://leetcode.com/problems/longest-balanced-substring-after-one-swap/description/) | Free in snapshot | Not cached |
 | 3901 | [Good Subsequence Queries](https://leetcode.com/problems/good-subsequence-queries/description/) | Free in snapshot | Not cached |
-| 3902 | [Zigzag Level Sum of Binary Tree](https://leetcode.com/problems/zigzag-level-sum-of-binary-tree/description/) | Paid in snapshot | Not cached |
+| 3902 | [Zigzag Level Sum of Binary Tree](https://leetcode.com/problems/zigzag-level-sum-of-binary-tree/description/) | Paid in snapshot | [Requirement summary](../requirements/3902.json) |
 | 3903 | [Smallest Stable Index I](https://leetcode.com/problems/smallest-stable-index-i/description/) | Free in snapshot | Not cached |
 | 3904 | [Smallest Stable Index II](https://leetcode.com/problems/smallest-stable-index-ii/description/) | Free in snapshot | Not cached |
 | 3905 | [Multi Source Flood Fill](https://leetcode.com/problems/multi-source-flood-fill/description/) | Free in snapshot | [Requirement summary](../requirements/3905.json) |
 | 3906 | [Count Good Integers on a Grid Path](https://leetcode.com/problems/count-good-integers-on-a-grid-path/description/) | Free in snapshot | Not cached |
-| 3907 | [Count Smaller Elements With Opposite Parity](https://leetcode.com/problems/count-smaller-elements-with-opposite-parity/description/) | Paid in snapshot | Not cached |
+| 3907 | [Count Smaller Elements With Opposite Parity](https://leetcode.com/problems/count-smaller-elements-with-opposite-parity/description/) | Paid in snapshot | [Requirement summary](../requirements/3907.json) |
 | 3908 | [Valid Digit Number](https://leetcode.com/problems/valid-digit-number/description/) | Free in snapshot | [Requirement summary](../requirements/3908.json) |
 | 3909 | [Compare Sums of Bitonic Parts](https://leetcode.com/problems/compare-sums-of-bitonic-parts/description/) | Free in snapshot | [Requirement summary](../requirements/3909.json) |
 | 3910 | [Count Connected Subgraphs with Even Node Sum](https://leetcode.com/problems/count-connected-subgraphs-with-even-node-sum/description/) | Free in snapshot | [Requirement summary](../requirements/3910.json) |
@@ -3923,161 +3923,161 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3913 | [Sort Vowels by Frequency](https://leetcode.com/problems/sort-vowels-by-frequency/description/) | Free in snapshot | [Requirement summary](../requirements/3913.json) |
 | 3914 | [Minimum Operations to Make Array Non Decreasing](https://leetcode.com/problems/minimum-operations-to-make-array-non-decreasing/description/) | Free in snapshot | [Requirement summary](../requirements/3914.json) |
 | 3915 | [Maximum Sum of Alternating Subsequence With Distance at Least K](https://leetcode.com/problems/maximum-sum-of-alternating-subsequence-with-distance-at-least-k/description/) | Free in snapshot | [Requirement summary](../requirements/3915.json) |
-| 3916 | [Number of ZigZag Arrays III](https://leetcode.com/problems/number-of-zigzag-arrays-iii/description/) | Paid in snapshot | Not cached |
-| 3917 | [Count Indices With Opposite Parity](https://leetcode.com/problems/count-indices-with-opposite-parity/description/) | Free in snapshot | Not cached |
-| 3918 | [Sum of Primes Between Number and Its Reverse](https://leetcode.com/problems/sum-of-primes-between-number-and-its-reverse/description/) | Free in snapshot | Not cached |
-| 3919 | [Minimum Cost to Move Between Indices](https://leetcode.com/problems/minimum-cost-to-move-between-indices/description/) | Free in snapshot | Not cached |
-| 3920 | [Maximize Fixed Points After Deletions](https://leetcode.com/problems/maximize-fixed-points-after-deletions/description/) | Free in snapshot | Not cached |
-| 3921 | [Score Validator](https://leetcode.com/problems/score-validator/description/) | Free in snapshot | Not cached |
-| 3922 | [Minimum Flips to Make Binary String Coherent](https://leetcode.com/problems/minimum-flips-to-make-binary-string-coherent/description/) | Free in snapshot | Not cached |
-| 3923 | [Minimum Generations to Target Point](https://leetcode.com/problems/minimum-generations-to-target-point/description/) | Free in snapshot | Not cached |
-| 3924 | [Minimum Threshold Path With Limited Heavy Edges](https://leetcode.com/problems/minimum-threshold-path-with-limited-heavy-edges/description/) | Free in snapshot | Not cached |
-| 3925 | [Concatenate Array With Reverse](https://leetcode.com/problems/concatenate-array-with-reverse/description/) | Free in snapshot | Not cached |
-| 3926 | [Count Valid Word Occurrences](https://leetcode.com/problems/count-valid-word-occurrences/description/) | Free in snapshot | Not cached |
-| 3927 | [Minimize Array Sum Using Divisible Replacements](https://leetcode.com/problems/minimize-array-sum-using-divisible-replacements/description/) | Free in snapshot | Not cached |
-| 3928 | [Minimum Cost to Buy Apples II](https://leetcode.com/problems/minimum-cost-to-buy-apples-ii/description/) | Free in snapshot | Not cached |
-| 3929 | [Minimum Partition Score II](https://leetcode.com/problems/minimum-partition-score-ii/description/) | Paid in snapshot | Not cached |
-| 3930 | [Power Update After K-th Largest Insertion II](https://leetcode.com/problems/power-update-after-k-th-largest-insertion-ii/description/) | Paid in snapshot | Not cached |
-| 3931 | [Check Adjacent Digit Differences](https://leetcode.com/problems/check-adjacent-digit-differences/description/) | Free in snapshot | Not cached |
-| 3932 | [Count K-th Roots in a Range](https://leetcode.com/problems/count-k-th-roots-in-a-range/description/) | Free in snapshot | Not cached |
-| 3933 | [Largest Local Values in a Matrix II](https://leetcode.com/problems/largest-local-values-in-a-matrix-ii/description/) | Free in snapshot | Not cached |
-| 3934 | [Smallest Unique Subarray](https://leetcode.com/problems/smallest-unique-subarray/description/) | Free in snapshot | Not cached |
-| 3935 | [Power Update After K-th Largest Insertion I](https://leetcode.com/problems/power-update-after-k-th-largest-insertion-i/description/) | Paid in snapshot | Not cached |
-| 3936 | [Minimum Swaps to Move Zeros to End](https://leetcode.com/problems/minimum-swaps-to-move-zeros-to-end/description/) | Free in snapshot | Not cached |
-| 3937 | [Minimum Operations to Make Array Modulo Alternating I](https://leetcode.com/problems/minimum-operations-to-make-array-modulo-alternating-i/description/) | Free in snapshot | Not cached |
-| 3938 | [Maximum Path Intersection Sum in a Grid](https://leetcode.com/problems/maximum-path-intersection-sum-in-a-grid/description/) | Free in snapshot | Not cached |
-| 3939 | [Count Non Adjacent Subsets in a Rooted Tree](https://leetcode.com/problems/count-non-adjacent-subsets-in-a-rooted-tree/description/) | Free in snapshot | Not cached |
-| 3940 | [Limit Occurrences in Sorted Array](https://leetcode.com/problems/limit-occurrences-in-sorted-array/description/) | Free in snapshot | Not cached |
-| 3941 | [Password Strength](https://leetcode.com/problems/password-strength/description/) | Free in snapshot | Not cached |
-| 3942 | [Minimum Operations to Sort a Permutation](https://leetcode.com/problems/minimum-operations-to-sort-a-permutation/description/) | Free in snapshot | Not cached |
-| 3943 | [Number of Pairs After Increment](https://leetcode.com/problems/number-of-pairs-after-increment/description/) | Free in snapshot | Not cached |
-| 3944 | [Minimum Operations to Make Array Modulo Alternating II](https://leetcode.com/problems/minimum-operations-to-make-array-modulo-alternating-ii/description/) | Paid in snapshot | Not cached |
-| 3945 | [Digit Frequency Score](https://leetcode.com/problems/digit-frequency-score/description/) | Free in snapshot | Not cached |
-| 3946 | [Maximum Number of Items From Sale I](https://leetcode.com/problems/maximum-number-of-items-from-sale-i/description/) | Free in snapshot | Not cached |
-| 3947 | [Maximum Number of Items From Sale II](https://leetcode.com/problems/maximum-number-of-items-from-sale-ii/description/) | Free in snapshot | Not cached |
-| 3948 | [Lexicographically Maximum MEX Array](https://leetcode.com/problems/lexicographically-maximum-mex-array/description/) | Free in snapshot | Not cached |
-| 3949 | [Subtree Inversion Sum II](https://leetcode.com/problems/subtree-inversion-sum-ii/description/) | Paid in snapshot | Not cached |
-| 3950 | [Exactly One Consecutive Set Bits Pair](https://leetcode.com/problems/exactly-one-consecutive-set-bits-pair/description/) | Free in snapshot | Not cached |
-| 3951 | [Minimum Energy to Maintain Brightness](https://leetcode.com/problems/minimum-energy-to-maintain-brightness/description/) | Free in snapshot | Not cached |
-| 3952 | [Maximum Total Value of Covered Indices](https://leetcode.com/problems/maximum-total-value-of-covered-indices/description/) | Free in snapshot | Not cached |
-| 3953 | [Maximum Score with Co-Prime Element](https://leetcode.com/problems/maximum-score-with-co-prime-element/description/) | Free in snapshot | Not cached |
-| 3954 | [Sum of Compatible Numbers in Range I](https://leetcode.com/problems/sum-of-compatible-numbers-in-range-i/description/) | Free in snapshot | Not cached |
-| 3955 | [Valid Binary Strings With Cost Limit](https://leetcode.com/problems/valid-binary-strings-with-cost-limit/description/) | Free in snapshot | Not cached |
-| 3956 | [Maximum Sum of M Non-Overlapping Subarrays I](https://leetcode.com/problems/maximum-sum-of-m-non-overlapping-subarrays-i/description/) | Free in snapshot | Not cached |
-| 3957 | [Maximum Sum of M Non-Overlapping Subarrays II](https://leetcode.com/problems/maximum-sum-of-m-non-overlapping-subarrays-ii/description/) | Free in snapshot | Not cached |
-| 3958 | [Minimum Cost to Split into Ones II](https://leetcode.com/problems/minimum-cost-to-split-into-ones-ii/description/) | Paid in snapshot | Not cached |
-| 3959 | [Check Good Integer](https://leetcode.com/problems/check-good-integer/description/) | Free in snapshot | Not cached |
-| 3960 | [Frequency Balance Subarray](https://leetcode.com/problems/frequency-balance-subarray/description/) | Free in snapshot | Not cached |
-| 3961 | [Maximize Sum of Device Ratings](https://leetcode.com/problems/maximize-sum-of-device-ratings/description/) | Free in snapshot | Not cached |
-| 3962 | [Maximum Subarray Sum After at Most K Swaps](https://leetcode.com/problems/maximum-subarray-sum-after-at-most-k-swaps/description/) | Free in snapshot | Not cached |
-| 3963 | [Create Grid With Exactly One Path](https://leetcode.com/problems/create-grid-with-exactly-one-path/description/) | Free in snapshot | Not cached |
-| 3964 | [Minimum Lights to Illuminate a Road](https://leetcode.com/problems/minimum-lights-to-illuminate-a-road/description/) | Free in snapshot | Not cached |
-| 3965 | [Finish Time of Tasks I](https://leetcode.com/problems/finish-time-of-tasks-i/description/) | Free in snapshot | Not cached |
-| 3966 | [Count Good Integers in a Range](https://leetcode.com/problems/count-good-integers-in-a-range/description/) | Free in snapshot | Not cached |
-| 3967 | [Finish Time of Tasks II](https://leetcode.com/problems/finish-time-of-tasks-ii/description/) | Paid in snapshot | Not cached |
-| 3968 | [Maximum Manhattan Distance After All Moves](https://leetcode.com/problems/maximum-manhattan-distance-after-all-moves/description/) | Free in snapshot | Not cached |
-| 3969 | [Valid Subarrays With Matching Sum Digits I](https://leetcode.com/problems/valid-subarrays-with-matching-sum-digits-i/description/) | Free in snapshot | Not cached |
-| 3970 | [Shortest Path With At Most K Consecutive Identical Characters](https://leetcode.com/problems/shortest-path-with-at-most-k-consecutive-identical-characters/description/) | Free in snapshot | Not cached |
-| 3971 | [Maximum Total Value](https://leetcode.com/problems/maximum-total-value/description/) | Free in snapshot | Not cached |
-| 3972 | [Valid Subarrays With Matching Sum Digits II](https://leetcode.com/problems/valid-subarrays-with-matching-sum-digits-ii/description/) | Paid in snapshot | Not cached |
-| 3973 | [Distinct Gate Paths to LCA](https://leetcode.com/problems/distinct-gate-paths-to-lca/description/) | Paid in snapshot | Not cached |
-| 3974 | [Maximum Total Sum of K Selected Elements](https://leetcode.com/problems/maximum-total-sum-of-k-selected-elements/description/) | Free in snapshot | Not cached |
-| 3975 | [Filter Occupied Intervals](https://leetcode.com/problems/filter-occupied-intervals/description/) | Free in snapshot | Not cached |
-| 3976 | [Maximum Subarray Sum After Multiplier](https://leetcode.com/problems/maximum-subarray-sum-after-multiplier/description/) | Free in snapshot | Not cached |
-| 3977 | [Minimum Time to Reach Target With Limited Power](https://leetcode.com/problems/minimum-time-to-reach-target-with-limited-power/description/) | Free in snapshot | Not cached |
-| 3978 | [Unique Middle Element](https://leetcode.com/problems/unique-middle-element/description/) | Free in snapshot | Not cached |
-| 3979 | [Maximum Valid Pair Sum](https://leetcode.com/problems/maximum-valid-pair-sum/description/) | Free in snapshot | Not cached |
-| 3980 | [Minimum Operations to Transform Binary String](https://leetcode.com/problems/minimum-operations-to-transform-binary-string/description/) | Free in snapshot | Not cached |
-| 3981 | [Count Distinct Ways to Form Target from Two Strings](https://leetcode.com/problems/count-distinct-ways-to-form-target-from-two-strings/description/) | Free in snapshot | Not cached |
-| 3982 | [Sum of Integers with Maximum Digit Range](https://leetcode.com/problems/sum-of-integers-with-maximum-digit-range/description/) | Free in snapshot | Not cached |
-| 3983 | [Subsequence After One Replacement](https://leetcode.com/problems/subsequence-after-one-replacement/description/) | Free in snapshot | Not cached |
-| 3984 | [Divisible Game](https://leetcode.com/problems/divisible-game/description/) | Free in snapshot | Not cached |
-| 3985 | [Palindromic Subarray Sum](https://leetcode.com/problems/palindromic-subarray-sum/description/) | Free in snapshot | Not cached |
-| 3986 | [Number of Elapsed Seconds Between Two Times](https://leetcode.com/problems/number-of-elapsed-seconds-between-two-times/description/) | Free in snapshot | Not cached |
-| 3987 | [Minimum Total Cost to Process All Elements](https://leetcode.com/problems/minimum-total-cost-to-process-all-elements/description/) | Free in snapshot | Not cached |
-| 3988 | [Create Grid With Exactly K Paths I](https://leetcode.com/problems/create-grid-with-exactly-k-paths-i/description/) | Free in snapshot | Not cached |
-| 3989 | [Maximum Consistent Columns in a Grid](https://leetcode.com/problems/maximum-consistent-columns-in-a-grid/description/) | Free in snapshot | Not cached |
-| 3990 | [Create Grid With Exactly K Paths II](https://leetcode.com/problems/create-grid-with-exactly-k-paths-ii/description/) | Paid in snapshot | Not cached |
-| 3991 | [Sort Array Using Prefix Reversals](https://leetcode.com/problems/sort-array-using-prefix-reversals/description/) | Paid in snapshot | Not cached |
-| 3992 | [Rearrange String to Avoid Character Pair](https://leetcode.com/problems/rearrange-string-to-avoid-character-pair/description/) | Free in snapshot | Not cached |
-| 3993 | [Maximum Value of an Alternating Sequence](https://leetcode.com/problems/maximum-value-of-an-alternating-sequence/description/) | Free in snapshot | Not cached |
-| 3994 | [Minimum Adjacent Swaps to Partition Array](https://leetcode.com/problems/minimum-adjacent-swaps-to-partition-array/description/) | Free in snapshot | Not cached |
-| 3995 | [Minimum Cost to Convert String III](https://leetcode.com/problems/minimum-cost-to-convert-string-iii/description/) | Free in snapshot | Not cached |
-| 3996 | [Even Number of Knight Moves](https://leetcode.com/problems/even-number-of-knight-moves/description/) | Free in snapshot | Not cached |
-| 3997 | [Count Dominant Nodes in a Binary Tree](https://leetcode.com/problems/count-dominant-nodes-in-a-binary-tree/description/) | Free in snapshot | Not cached |
-| 3998 | [Transform Binary String Using Subsequence Sort](https://leetcode.com/problems/transform-binary-string-using-subsequence-sort/description/) | Free in snapshot | Not cached |
-| 3999 | [Minimum Number of String Groups Through Transformations](https://leetcode.com/problems/minimum-number-of-string-groups-through-transformations/description/) | Free in snapshot | Not cached |
-| 4000 | [Largest Integer With Given Digit Sum](https://leetcode.com/problems/largest-integer-with-given-digit-sum/description/) | Free in snapshot | Not cached |
-| 4001 | [Aggregate Two Time Series](https://leetcode.com/problems/aggregate-two-time-series/description/) | Free in snapshot | Not cached |
-| 4002 | [Count Valid Sequences](https://leetcode.com/problems/count-valid-sequences/description/) | Free in snapshot | Not cached |
-| 4003 | [Minimum Cost Path with Alternating Directions III](https://leetcode.com/problems/minimum-cost-path-with-alternating-directions-iii/description/) | Free in snapshot | Not cached |
-| 4004 | [Minimum Moves to Balance Circular Array II](https://leetcode.com/problems/minimum-moves-to-balance-circular-array-ii/description/) | Paid in snapshot | Not cached |
-| 4005 | [Minimum Operations to Make Array Equal III](https://leetcode.com/problems/minimum-operations-to-make-array-equal-iii/description/) | Paid in snapshot | Not cached |
-| 4006 | [Count Valid Prefixes](https://leetcode.com/problems/count-valid-prefixes/description/) | Free in snapshot | Not cached |
-| 4007 | [Widest Possible Fence](https://leetcode.com/problems/widest-possible-fence/description/) | Free in snapshot | Not cached |
-| 4008 | [Minimum Initial Strength to Defeat All Monsters](https://leetcode.com/problems/minimum-initial-strength-to-defeat-all-monsters/description/) | Free in snapshot | Not cached |
-| 4009 | [Minimum Possible Maximum Waiting Time](https://leetcode.com/problems/minimum-possible-maximum-waiting-time/description/) | Free in snapshot | Not cached |
-| 4010 | [Maximize Pair Strength Using GCD](https://leetcode.com/problems/maximize-pair-strength-using-gcd/description/) | Free in snapshot | Not cached |
-| 4011 | [Count Subarrays With Even Odd Ratio I](https://leetcode.com/problems/count-subarrays-with-even-odd-ratio-i/description/) | Free in snapshot | Not cached |
-| 4012 | [Count of Unfinished Tasks After Each Shift](https://leetcode.com/problems/count-of-unfinished-tasks-after-each-shift/description/) | Free in snapshot | Not cached |
-| 4013 | [Count Subarrays With Even Odd Ratio II](https://leetcode.com/problems/count-subarrays-with-even-odd-ratio-ii/description/) | Free in snapshot | Not cached |
-| 4014 | [Minimum Total Price After Applying Discounts](https://leetcode.com/problems/minimum-total-price-after-applying-discounts/description/) | Free in snapshot | Not cached |
-| 4015 | [Weighted Sum of a Tree](https://leetcode.com/problems/weighted-sum-of-a-tree/description/) | Free in snapshot | Not cached |
-| 4016 | [Maximum Area of Two Non-Overlapping Square Submatrices](https://leetcode.com/problems/maximum-area-of-two-non-overlapping-square-submatrices/description/) | Free in snapshot | Not cached |
-| 4017 | [Peaks in Array II](https://leetcode.com/problems/peaks-in-array-ii/description/) | Free in snapshot | Not cached |
-| 4018 | [Total Sum of Interaction Cost in Tree Groups II](https://leetcode.com/problems/total-sum-of-interaction-cost-in-tree-groups-ii/description/) | Paid in snapshot | Not cached |
-| 4019 | [Merge Close Characters II](https://leetcode.com/problems/merge-close-characters-ii/description/) | Paid in snapshot | Not cached |
-| 4020 | [Elevator Requests I](https://leetcode.com/problems/elevator-requests-i/description/) | Free in snapshot | Not cached |
-| 4021 | [Minimum Operations to Make a Rotated Palindrome I](https://leetcode.com/problems/minimum-operations-to-make-a-rotated-palindrome-i/description/) | Free in snapshot | Not cached |
-| 4022 | [K-th Digit in Infinite String](https://leetcode.com/problems/k-th-digit-in-infinite-string/description/) | Free in snapshot | Not cached |
-| 4023 | [Elevator Requests II](https://leetcode.com/problems/elevator-requests-ii/description/) | Free in snapshot | Not cached |
-| 4024 | [Nearest Available Drone](https://leetcode.com/problems/nearest-available-drone/description/) | Free in snapshot | Not cached |
-| 4025 | [Minimize the Maximum Waiting Time at Synchronized Traffic Lights](https://leetcode.com/problems/minimize-the-maximum-waiting-time-at-synchronized-traffic-lights/description/) | Free in snapshot | Not cached |
-| 4026 | [Maximum Gap Between Stations](https://leetcode.com/problems/maximum-gap-between-stations/description/) | Free in snapshot | Not cached |
-| 4027 | [Elevator Requests III](https://leetcode.com/problems/elevator-requests-iii/description/) | Free in snapshot | Not cached |
-| 4028 | [Minimum Operations to Make a Rotated Palindrome II](https://leetcode.com/problems/minimum-operations-to-make-a-rotated-palindrome-ii/description/) | Paid in snapshot | Not cached |
-| 4029 | [Elevator Requests IV](https://leetcode.com/problems/elevator-requests-iv/description/) | Paid in snapshot | Not cached |
-| 4030 | [Check ASCII Palindromic](https://leetcode.com/problems/check-ascii-palindromic/description/) | Free in snapshot | Not cached |
-| 4031 | [Find All Numbers Disappeared in an Array II](https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array-ii/description/) | Free in snapshot | Not cached |
-| 4032 | [Longest Subarray With at Most K Distinct Prime Factors](https://leetcode.com/problems/longest-subarray-with-at-most-k-distinct-prime-factors/description/) | Free in snapshot | Not cached |
-| 4033 | [Valid K-Unique Subarrays I](https://leetcode.com/problems/valid-k-unique-subarrays-i/description/) | Free in snapshot | Not cached |
-| 4034 | [Minimum Bishop Moves to Reach Target](https://leetcode.com/problems/minimum-bishop-moves-to-reach-target/description/) | Free in snapshot | Not cached |
-| 4035 | [Maximum Valid Split Positions I](https://leetcode.com/problems/maximum-valid-split-positions-i/description/) | Free in snapshot | Not cached |
-| 4036 | [Lexicographically Largest String After Pair Transformations](https://leetcode.com/problems/lexicographically-largest-string-after-pair-transformations/description/) | Free in snapshot | Not cached |
-| 4037 | [Maximum Valid Split Positions II](https://leetcode.com/problems/maximum-valid-split-positions-ii/description/) | Free in snapshot | Not cached |
-| 4038 | [Count Integers Appearing in a Single Block](https://leetcode.com/problems/count-integers-appearing-in-a-single-block/description/) | Free in snapshot | Not cached |
+| 3916 | [Number of ZigZag Arrays III](https://leetcode.com/problems/number-of-zigzag-arrays-iii/description/) | Paid in snapshot | [Requirement summary](../requirements/3916.json) |
+| 3917 | [Count Indices With Opposite Parity](https://leetcode.com/problems/count-indices-with-opposite-parity/description/) | Free in snapshot | [Requirement summary](../requirements/3917.json) |
+| 3918 | [Sum of Primes Between Number and Its Reverse](https://leetcode.com/problems/sum-of-primes-between-number-and-its-reverse/description/) | Free in snapshot | [Requirement summary](../requirements/3918.json) |
+| 3919 | [Minimum Cost to Move Between Indices](https://leetcode.com/problems/minimum-cost-to-move-between-indices/description/) | Free in snapshot | [Requirement summary](../requirements/3919.json) |
+| 3920 | [Maximize Fixed Points After Deletions](https://leetcode.com/problems/maximize-fixed-points-after-deletions/description/) | Free in snapshot | [Requirement summary](../requirements/3920.json) |
+| 3921 | [Score Validator](https://leetcode.com/problems/score-validator/description/) | Free in snapshot | [Requirement summary](../requirements/3921.json) |
+| 3922 | [Minimum Flips to Make Binary String Coherent](https://leetcode.com/problems/minimum-flips-to-make-binary-string-coherent/description/) | Free in snapshot | [Requirement summary](../requirements/3922.json) |
+| 3923 | [Minimum Generations to Target Point](https://leetcode.com/problems/minimum-generations-to-target-point/description/) | Free in snapshot | [Requirement summary](../requirements/3923.json) |
+| 3924 | [Minimum Threshold Path With Limited Heavy Edges](https://leetcode.com/problems/minimum-threshold-path-with-limited-heavy-edges/description/) | Free in snapshot | [Requirement summary](../requirements/3924.json) |
+| 3925 | [Concatenate Array With Reverse](https://leetcode.com/problems/concatenate-array-with-reverse/description/) | Free in snapshot | [Requirement summary](../requirements/3925.json) |
+| 3926 | [Count Valid Word Occurrences](https://leetcode.com/problems/count-valid-word-occurrences/description/) | Free in snapshot | [Requirement summary](../requirements/3926.json) |
+| 3927 | [Minimize Array Sum Using Divisible Replacements](https://leetcode.com/problems/minimize-array-sum-using-divisible-replacements/description/) | Free in snapshot | [Requirement summary](../requirements/3927.json) |
+| 3928 | [Minimum Cost to Buy Apples II](https://leetcode.com/problems/minimum-cost-to-buy-apples-ii/description/) | Free in snapshot | [Requirement summary](../requirements/3928.json) |
+| 3929 | [Minimum Partition Score II](https://leetcode.com/problems/minimum-partition-score-ii/description/) | Paid in snapshot | [Requirement summary](../requirements/3929.json) |
+| 3930 | [Power Update After K-th Largest Insertion II](https://leetcode.com/problems/power-update-after-k-th-largest-insertion-ii/description/) | Paid in snapshot | [Requirement summary](../requirements/3930.json) |
+| 3931 | [Check Adjacent Digit Differences](https://leetcode.com/problems/check-adjacent-digit-differences/description/) | Free in snapshot | [Requirement summary](../requirements/3931.json) |
+| 3932 | [Count K-th Roots in a Range](https://leetcode.com/problems/count-k-th-roots-in-a-range/description/) | Free in snapshot | [Requirement summary](../requirements/3932.json) |
+| 3933 | [Largest Local Values in a Matrix II](https://leetcode.com/problems/largest-local-values-in-a-matrix-ii/description/) | Free in snapshot | [Requirement summary](../requirements/3933.json) |
+| 3934 | [Smallest Unique Subarray](https://leetcode.com/problems/smallest-unique-subarray/description/) | Free in snapshot | [Requirement summary](../requirements/3934.json) |
+| 3935 | [Power Update After K-th Largest Insertion I](https://leetcode.com/problems/power-update-after-k-th-largest-insertion-i/description/) | Paid in snapshot | [Requirement summary](../requirements/3935.json) |
+| 3936 | [Minimum Swaps to Move Zeros to End](https://leetcode.com/problems/minimum-swaps-to-move-zeros-to-end/description/) | Free in snapshot | [Requirement summary](../requirements/3936.json) |
+| 3937 | [Minimum Operations to Make Array Modulo Alternating I](https://leetcode.com/problems/minimum-operations-to-make-array-modulo-alternating-i/description/) | Free in snapshot | [Requirement summary](../requirements/3937.json) |
+| 3938 | [Maximum Path Intersection Sum in a Grid](https://leetcode.com/problems/maximum-path-intersection-sum-in-a-grid/description/) | Free in snapshot | [Requirement summary](../requirements/3938.json) |
+| 3939 | [Count Non Adjacent Subsets in a Rooted Tree](https://leetcode.com/problems/count-non-adjacent-subsets-in-a-rooted-tree/description/) | Free in snapshot | [Requirement summary](../requirements/3939.json) |
+| 3940 | [Limit Occurrences in Sorted Array](https://leetcode.com/problems/limit-occurrences-in-sorted-array/description/) | Free in snapshot | [Requirement summary](../requirements/3940.json) |
+| 3941 | [Password Strength](https://leetcode.com/problems/password-strength/description/) | Free in snapshot | [Requirement summary](../requirements/3941.json) |
+| 3942 | [Minimum Operations to Sort a Permutation](https://leetcode.com/problems/minimum-operations-to-sort-a-permutation/description/) | Free in snapshot | [Requirement summary](../requirements/3942.json) |
+| 3943 | [Number of Pairs After Increment](https://leetcode.com/problems/number-of-pairs-after-increment/description/) | Free in snapshot | [Requirement summary](../requirements/3943.json) |
+| 3944 | [Minimum Operations to Make Array Modulo Alternating II](https://leetcode.com/problems/minimum-operations-to-make-array-modulo-alternating-ii/description/) | Paid in snapshot | [Requirement summary](../requirements/3944.json) |
+| 3945 | [Digit Frequency Score](https://leetcode.com/problems/digit-frequency-score/description/) | Free in snapshot | [Requirement summary](../requirements/3945.json) |
+| 3946 | [Maximum Number of Items From Sale I](https://leetcode.com/problems/maximum-number-of-items-from-sale-i/description/) | Free in snapshot | [Requirement summary](../requirements/3946.json) |
+| 3947 | [Maximum Number of Items From Sale II](https://leetcode.com/problems/maximum-number-of-items-from-sale-ii/description/) | Free in snapshot | [Requirement summary](../requirements/3947.json) |
+| 3948 | [Lexicographically Maximum MEX Array](https://leetcode.com/problems/lexicographically-maximum-mex-array/description/) | Free in snapshot | [Requirement summary](../requirements/3948.json) |
+| 3949 | [Subtree Inversion Sum II](https://leetcode.com/problems/subtree-inversion-sum-ii/description/) | Paid in snapshot | [Requirement summary](../requirements/3949.json) |
+| 3950 | [Exactly One Consecutive Set Bits Pair](https://leetcode.com/problems/exactly-one-consecutive-set-bits-pair/description/) | Free in snapshot | [Requirement summary](../requirements/3950.json) |
+| 3951 | [Minimum Energy to Maintain Brightness](https://leetcode.com/problems/minimum-energy-to-maintain-brightness/description/) | Free in snapshot | [Requirement summary](../requirements/3951.json) |
+| 3952 | [Maximum Total Value of Covered Indices](https://leetcode.com/problems/maximum-total-value-of-covered-indices/description/) | Free in snapshot | [Requirement summary](../requirements/3952.json) |
+| 3953 | [Maximum Score with Co-Prime Element](https://leetcode.com/problems/maximum-score-with-co-prime-element/description/) | Free in snapshot | [Requirement summary](../requirements/3953.json) |
+| 3954 | [Sum of Compatible Numbers in Range I](https://leetcode.com/problems/sum-of-compatible-numbers-in-range-i/description/) | Free in snapshot | [Requirement summary](../requirements/3954.json) |
+| 3955 | [Valid Binary Strings With Cost Limit](https://leetcode.com/problems/valid-binary-strings-with-cost-limit/description/) | Free in snapshot | [Requirement summary](../requirements/3955.json) |
+| 3956 | [Maximum Sum of M Non-Overlapping Subarrays I](https://leetcode.com/problems/maximum-sum-of-m-non-overlapping-subarrays-i/description/) | Free in snapshot | [Requirement summary](../requirements/3956.json) |
+| 3957 | [Maximum Sum of M Non-Overlapping Subarrays II](https://leetcode.com/problems/maximum-sum-of-m-non-overlapping-subarrays-ii/description/) | Free in snapshot | [Requirement summary](../requirements/3957.json) |
+| 3958 | [Minimum Cost to Split into Ones II](https://leetcode.com/problems/minimum-cost-to-split-into-ones-ii/description/) | Paid in snapshot | [Requirement summary](../requirements/3958.json) |
+| 3959 | [Check Good Integer](https://leetcode.com/problems/check-good-integer/description/) | Free in snapshot | [Requirement summary](../requirements/3959.json) |
+| 3960 | [Frequency Balance Subarray](https://leetcode.com/problems/frequency-balance-subarray/description/) | Free in snapshot | [Requirement summary](../requirements/3960.json) |
+| 3961 | [Maximize Sum of Device Ratings](https://leetcode.com/problems/maximize-sum-of-device-ratings/description/) | Free in snapshot | [Requirement summary](../requirements/3961.json) |
+| 3962 | [Maximum Subarray Sum After at Most K Swaps](https://leetcode.com/problems/maximum-subarray-sum-after-at-most-k-swaps/description/) | Free in snapshot | [Requirement summary](../requirements/3962.json) |
+| 3963 | [Create Grid With Exactly One Path](https://leetcode.com/problems/create-grid-with-exactly-one-path/description/) | Free in snapshot | [Requirement summary](../requirements/3963.json) |
+| 3964 | [Minimum Lights to Illuminate a Road](https://leetcode.com/problems/minimum-lights-to-illuminate-a-road/description/) | Free in snapshot | [Requirement summary](../requirements/3964.json) |
+| 3965 | [Finish Time of Tasks I](https://leetcode.com/problems/finish-time-of-tasks-i/description/) | Free in snapshot | [Requirement summary](../requirements/3965.json) |
+| 3966 | [Count Good Integers in a Range](https://leetcode.com/problems/count-good-integers-in-a-range/description/) | Free in snapshot | [Requirement summary](../requirements/3966.json) |
+| 3967 | [Finish Time of Tasks II](https://leetcode.com/problems/finish-time-of-tasks-ii/description/) | Paid in snapshot | [Requirement summary](../requirements/3967.json) |
+| 3968 | [Maximum Manhattan Distance After All Moves](https://leetcode.com/problems/maximum-manhattan-distance-after-all-moves/description/) | Free in snapshot | [Requirement summary](../requirements/3968.json) |
+| 3969 | [Valid Subarrays With Matching Sum Digits I](https://leetcode.com/problems/valid-subarrays-with-matching-sum-digits-i/description/) | Free in snapshot | [Requirement summary](../requirements/3969.json) |
+| 3970 | [Shortest Path With At Most K Consecutive Identical Characters](https://leetcode.com/problems/shortest-path-with-at-most-k-consecutive-identical-characters/description/) | Free in snapshot | [Requirement summary](../requirements/3970.json) |
+| 3971 | [Maximum Total Value](https://leetcode.com/problems/maximum-total-value/description/) | Free in snapshot | [Requirement summary](../requirements/3971.json) |
+| 3972 | [Valid Subarrays With Matching Sum Digits II](https://leetcode.com/problems/valid-subarrays-with-matching-sum-digits-ii/description/) | Paid in snapshot | [Requirement summary](../requirements/3972.json) |
+| 3973 | [Distinct Gate Paths to LCA](https://leetcode.com/problems/distinct-gate-paths-to-lca/description/) | Paid in snapshot | [Requirement summary](../requirements/3973.json) |
+| 3974 | [Maximum Total Sum of K Selected Elements](https://leetcode.com/problems/maximum-total-sum-of-k-selected-elements/description/) | Free in snapshot | [Requirement summary](../requirements/3974.json) |
+| 3975 | [Filter Occupied Intervals](https://leetcode.com/problems/filter-occupied-intervals/description/) | Free in snapshot | [Requirement summary](../requirements/3975.json) |
+| 3976 | [Maximum Subarray Sum After Multiplier](https://leetcode.com/problems/maximum-subarray-sum-after-multiplier/description/) | Free in snapshot | [Requirement summary](../requirements/3976.json) |
+| 3977 | [Minimum Time to Reach Target With Limited Power](https://leetcode.com/problems/minimum-time-to-reach-target-with-limited-power/description/) | Free in snapshot | [Requirement summary](../requirements/3977.json) |
+| 3978 | [Unique Middle Element](https://leetcode.com/problems/unique-middle-element/description/) | Free in snapshot | [Requirement summary](../requirements/3978.json) |
+| 3979 | [Maximum Valid Pair Sum](https://leetcode.com/problems/maximum-valid-pair-sum/description/) | Free in snapshot | [Requirement summary](../requirements/3979.json) |
+| 3980 | [Minimum Operations to Transform Binary String](https://leetcode.com/problems/minimum-operations-to-transform-binary-string/description/) | Free in snapshot | [Requirement summary](../requirements/3980.json) |
+| 3981 | [Count Distinct Ways to Form Target from Two Strings](https://leetcode.com/problems/count-distinct-ways-to-form-target-from-two-strings/description/) | Free in snapshot | [Requirement summary](../requirements/3981.json) |
+| 3982 | [Sum of Integers with Maximum Digit Range](https://leetcode.com/problems/sum-of-integers-with-maximum-digit-range/description/) | Free in snapshot | [Requirement summary](../requirements/3982.json) |
+| 3983 | [Subsequence After One Replacement](https://leetcode.com/problems/subsequence-after-one-replacement/description/) | Free in snapshot | [Requirement summary](../requirements/3983.json) |
+| 3984 | [Divisible Game](https://leetcode.com/problems/divisible-game/description/) | Free in snapshot | [Requirement summary](../requirements/3984.json) |
+| 3985 | [Palindromic Subarray Sum](https://leetcode.com/problems/palindromic-subarray-sum/description/) | Free in snapshot | [Requirement summary](../requirements/3985.json) |
+| 3986 | [Number of Elapsed Seconds Between Two Times](https://leetcode.com/problems/number-of-elapsed-seconds-between-two-times/description/) | Free in snapshot | [Requirement summary](../requirements/3986.json) |
+| 3987 | [Minimum Total Cost to Process All Elements](https://leetcode.com/problems/minimum-total-cost-to-process-all-elements/description/) | Free in snapshot | [Requirement summary](../requirements/3987.json) |
+| 3988 | [Create Grid With Exactly K Paths I](https://leetcode.com/problems/create-grid-with-exactly-k-paths-i/description/) | Free in snapshot | [Requirement summary](../requirements/3988.json) |
+| 3989 | [Maximum Consistent Columns in a Grid](https://leetcode.com/problems/maximum-consistent-columns-in-a-grid/description/) | Free in snapshot | [Requirement summary](../requirements/3989.json) |
+| 3990 | [Create Grid With Exactly K Paths II](https://leetcode.com/problems/create-grid-with-exactly-k-paths-ii/description/) | Paid in snapshot | [Requirement summary](../requirements/3990.json) |
+| 3991 | [Sort Array Using Prefix Reversals](https://leetcode.com/problems/sort-array-using-prefix-reversals/description/) | Paid in snapshot | [Requirement summary](../requirements/3991.json) |
+| 3992 | [Rearrange String to Avoid Character Pair](https://leetcode.com/problems/rearrange-string-to-avoid-character-pair/description/) | Free in snapshot | [Requirement summary](../requirements/3992.json) |
+| 3993 | [Maximum Value of an Alternating Sequence](https://leetcode.com/problems/maximum-value-of-an-alternating-sequence/description/) | Free in snapshot | [Requirement summary](../requirements/3993.json) |
+| 3994 | [Minimum Adjacent Swaps to Partition Array](https://leetcode.com/problems/minimum-adjacent-swaps-to-partition-array/description/) | Free in snapshot | [Requirement summary](../requirements/3994.json) |
+| 3995 | [Minimum Cost to Convert String III](https://leetcode.com/problems/minimum-cost-to-convert-string-iii/description/) | Free in snapshot | [Requirement summary](../requirements/3995.json) |
+| 3996 | [Even Number of Knight Moves](https://leetcode.com/problems/even-number-of-knight-moves/description/) | Free in snapshot | [Requirement summary](../requirements/3996.json) |
+| 3997 | [Count Dominant Nodes in a Binary Tree](https://leetcode.com/problems/count-dominant-nodes-in-a-binary-tree/description/) | Free in snapshot | [Requirement summary](../requirements/3997.json) |
+| 3998 | [Transform Binary String Using Subsequence Sort](https://leetcode.com/problems/transform-binary-string-using-subsequence-sort/description/) | Free in snapshot | [Requirement summary](../requirements/3998.json) |
+| 3999 | [Minimum Number of String Groups Through Transformations](https://leetcode.com/problems/minimum-number-of-string-groups-through-transformations/description/) | Free in snapshot | [Requirement summary](../requirements/3999.json) |
+| 4000 | [Largest Integer With Given Digit Sum](https://leetcode.com/problems/largest-integer-with-given-digit-sum/description/) | Free in snapshot | [Requirement summary](../requirements/4000.json) |
+| 4001 | [Aggregate Two Time Series](https://leetcode.com/problems/aggregate-two-time-series/description/) | Free in snapshot | [Requirement summary](../requirements/4001.json) |
+| 4002 | [Count Valid Sequences](https://leetcode.com/problems/count-valid-sequences/description/) | Free in snapshot | [Requirement summary](../requirements/4002.json) |
+| 4003 | [Minimum Cost Path with Alternating Directions III](https://leetcode.com/problems/minimum-cost-path-with-alternating-directions-iii/description/) | Free in snapshot | [Requirement summary](../requirements/4003.json) |
+| 4004 | [Minimum Moves to Balance Circular Array II](https://leetcode.com/problems/minimum-moves-to-balance-circular-array-ii/description/) | Paid in snapshot | [Requirement summary](../requirements/4004.json) |
+| 4005 | [Minimum Operations to Make Array Equal III](https://leetcode.com/problems/minimum-operations-to-make-array-equal-iii/description/) | Paid in snapshot | [Requirement summary](../requirements/4005.json) |
+| 4006 | [Count Valid Prefixes](https://leetcode.com/problems/count-valid-prefixes/description/) | Free in snapshot | [Requirement summary](../requirements/4006.json) |
+| 4007 | [Widest Possible Fence](https://leetcode.com/problems/widest-possible-fence/description/) | Free in snapshot | [Requirement summary](../requirements/4007.json) |
+| 4008 | [Minimum Initial Strength to Defeat All Monsters](https://leetcode.com/problems/minimum-initial-strength-to-defeat-all-monsters/description/) | Free in snapshot | [Requirement summary](../requirements/4008.json) |
+| 4009 | [Minimum Possible Maximum Waiting Time](https://leetcode.com/problems/minimum-possible-maximum-waiting-time/description/) | Free in snapshot | [Requirement summary](../requirements/4009.json) |
+| 4010 | [Maximize Pair Strength Using GCD](https://leetcode.com/problems/maximize-pair-strength-using-gcd/description/) | Free in snapshot | [Requirement summary](../requirements/4010.json) |
+| 4011 | [Count Subarrays With Even Odd Ratio I](https://leetcode.com/problems/count-subarrays-with-even-odd-ratio-i/description/) | Free in snapshot | [Requirement summary](../requirements/4011.json) |
+| 4012 | [Count of Unfinished Tasks After Each Shift](https://leetcode.com/problems/count-of-unfinished-tasks-after-each-shift/description/) | Free in snapshot | [Requirement summary](../requirements/4012.json) |
+| 4013 | [Count Subarrays With Even Odd Ratio II](https://leetcode.com/problems/count-subarrays-with-even-odd-ratio-ii/description/) | Free in snapshot | [Requirement summary](../requirements/4013.json) |
+| 4014 | [Minimum Total Price After Applying Discounts](https://leetcode.com/problems/minimum-total-price-after-applying-discounts/description/) | Free in snapshot | [Requirement summary](../requirements/4014.json) |
+| 4015 | [Weighted Sum of a Tree](https://leetcode.com/problems/weighted-sum-of-a-tree/description/) | Free in snapshot | [Requirement summary](../requirements/4015.json) |
+| 4016 | [Maximum Area of Two Non-Overlapping Square Submatrices](https://leetcode.com/problems/maximum-area-of-two-non-overlapping-square-submatrices/description/) | Free in snapshot | [Requirement summary](../requirements/4016.json) |
+| 4017 | [Peaks in Array II](https://leetcode.com/problems/peaks-in-array-ii/description/) | Free in snapshot | [Requirement summary](../requirements/4017.json) |
+| 4018 | [Total Sum of Interaction Cost in Tree Groups II](https://leetcode.com/problems/total-sum-of-interaction-cost-in-tree-groups-ii/description/) | Paid in snapshot | [Requirement summary](../requirements/4018.json) |
+| 4019 | [Merge Close Characters II](https://leetcode.com/problems/merge-close-characters-ii/description/) | Paid in snapshot | [Requirement summary](../requirements/4019.json) |
+| 4020 | [Elevator Requests I](https://leetcode.com/problems/elevator-requests-i/description/) | Free in snapshot | [Requirement summary](../requirements/4020.json) |
+| 4021 | [Minimum Operations to Make a Rotated Palindrome I](https://leetcode.com/problems/minimum-operations-to-make-a-rotated-palindrome-i/description/) | Free in snapshot | [Requirement summary](../requirements/4021.json) |
+| 4022 | [K-th Digit in Infinite String](https://leetcode.com/problems/k-th-digit-in-infinite-string/description/) | Free in snapshot | [Requirement summary](../requirements/4022.json) |
+| 4023 | [Elevator Requests II](https://leetcode.com/problems/elevator-requests-ii/description/) | Free in snapshot | [Requirement summary](../requirements/4023.json) |
+| 4024 | [Nearest Available Drone](https://leetcode.com/problems/nearest-available-drone/description/) | Free in snapshot | [Requirement summary](../requirements/4024.json) |
+| 4025 | [Minimize the Maximum Waiting Time at Synchronized Traffic Lights](https://leetcode.com/problems/minimize-the-maximum-waiting-time-at-synchronized-traffic-lights/description/) | Free in snapshot | [Requirement summary](../requirements/4025.json) |
+| 4026 | [Maximum Gap Between Stations](https://leetcode.com/problems/maximum-gap-between-stations/description/) | Free in snapshot | [Requirement summary](../requirements/4026.json) |
+| 4027 | [Elevator Requests III](https://leetcode.com/problems/elevator-requests-iii/description/) | Free in snapshot | [Requirement summary](../requirements/4027.json) |
+| 4028 | [Minimum Operations to Make a Rotated Palindrome II](https://leetcode.com/problems/minimum-operations-to-make-a-rotated-palindrome-ii/description/) | Paid in snapshot | [Requirement summary](../requirements/4028.json) |
+| 4029 | [Elevator Requests IV](https://leetcode.com/problems/elevator-requests-iv/description/) | Paid in snapshot | [Requirement summary](../requirements/4029.json) |
+| 4030 | [Check ASCII Palindromic](https://leetcode.com/problems/check-ascii-palindromic/description/) | Free in snapshot | [Requirement summary](../requirements/4030.json) |
+| 4031 | [Find All Numbers Disappeared in an Array II](https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array-ii/description/) | Free in snapshot | [Requirement summary](../requirements/4031.json) |
+| 4032 | [Longest Subarray With at Most K Distinct Prime Factors](https://leetcode.com/problems/longest-subarray-with-at-most-k-distinct-prime-factors/description/) | Free in snapshot | [Requirement summary](../requirements/4032.json) |
+| 4033 | [Valid K-Unique Subarrays I](https://leetcode.com/problems/valid-k-unique-subarrays-i/description/) | Free in snapshot | [Requirement summary](../requirements/4033.json) |
+| 4034 | [Minimum Bishop Moves to Reach Target](https://leetcode.com/problems/minimum-bishop-moves-to-reach-target/description/) | Free in snapshot | [Requirement summary](../requirements/4034.json) |
+| 4035 | [Maximum Valid Split Positions I](https://leetcode.com/problems/maximum-valid-split-positions-i/description/) | Free in snapshot | [Requirement summary](../requirements/4035.json) |
+| 4036 | [Lexicographically Largest String After Pair Transformations](https://leetcode.com/problems/lexicographically-largest-string-after-pair-transformations/description/) | Free in snapshot | [Requirement summary](../requirements/4036.json) |
+| 4037 | [Maximum Valid Split Positions II](https://leetcode.com/problems/maximum-valid-split-positions-ii/description/) | Free in snapshot | [Requirement summary](../requirements/4037.json) |
+| 4038 | [Count Integers Appearing in a Single Block](https://leetcode.com/problems/count-integers-appearing-in-a-single-block/description/) | Free in snapshot | [Requirement summary](../requirements/4038.json) |
 | 4039 | [Sum of Decoded Numbers](https://leetcode.com/problems/sum-of-decoded-numbers/description/) | Free in snapshot | [Requirement summary](../requirements/4039.json) |
 | 4040 | [Minimum Operations to Form Subset Sum I](https://leetcode.com/problems/minimum-operations-to-form-subset-sum-i/description/) | Free in snapshot | [Requirement summary](../requirements/4040.json) |
-| 4041 | [Minimum Operations to Form Subset Sum II](https://leetcode.com/problems/minimum-operations-to-form-subset-sum-ii/description/) | Free in snapshot | Not cached |
-| 4042 | [Valid K-Unique Subarrays II](https://leetcode.com/problems/valid-k-unique-subarrays-ii/description/) | Paid in snapshot | Not cached |
+| 4041 | [Minimum Operations to Form Subset Sum II](https://leetcode.com/problems/minimum-operations-to-form-subset-sum-ii/description/) | Free in snapshot | [Requirement summary](../requirements/4041.json) |
+| 4042 | [Valid K-Unique Subarrays II](https://leetcode.com/problems/valid-k-unique-subarrays-ii/description/) | Paid in snapshot | [Requirement summary](../requirements/4042.json) |
 | 4043 | [Count Rotations With Exactly K Equal Adjacent Pairs](https://leetcode.com/problems/count-rotations-with-exactly-k-equal-adjacent-pairs/description/) | Free in snapshot | [Requirement summary](../requirements/4043.json) |
-| 4044 | [Count Good Cyclic Rotations](https://leetcode.com/problems/count-good-cyclic-rotations/description/) | Free in snapshot | Not cached |
-| 4045 | [Count Robot Groups](https://leetcode.com/problems/count-robot-groups/description/) | Free in snapshot | Not cached |
-| 4046 | [Minimum Cost Path With At Most K Turns](https://leetcode.com/problems/minimum-cost-path-with-at-most-k-turns/description/) | Free in snapshot | Not cached |
-| 4047 | [Minimum Operations to Make XOR of All Elements Zero](https://leetcode.com/problems/minimum-operations-to-make-xor-of-all-elements-zero/description/) | Paid in snapshot | Not cached |
-| 4048 | [Count Values With Equally Spaced Occurrences I](https://leetcode.com/problems/count-values-with-equally-spaced-occurrences-i/description/) | Free in snapshot | Not cached |
-| 4049 | [Count Values With Equally Spaced Occurrences II](https://leetcode.com/problems/count-values-with-equally-spaced-occurrences-ii/description/) | Free in snapshot | Not cached |
-| 4050 | [Minimum Days to Score Exactly N Points](https://leetcode.com/problems/minimum-days-to-score-exactly-n-points/description/) | Free in snapshot | Not cached |
-| 4051 | [Count Subarrays with Distant Sums](https://leetcode.com/problems/count-subarrays-with-distant-sums/description/) | Free in snapshot | Not cached |
-| 4052 | [Cyclically Shift Rows and Columns](https://leetcode.com/problems/cyclically-shift-rows-and-columns/description/) | Free in snapshot | Not cached |
-| 4053 | [Minimum Operations to Make Every Element Palindromic](https://leetcode.com/problems/minimum-operations-to-make-every-element-palindromic/description/) | Free in snapshot | Not cached |
-| 4054 | [Count Shadow Pairs I](https://leetcode.com/problems/count-shadow-pairs-i/description/) | Free in snapshot | Not cached |
-| 4055 | [Count Shadow Pairs II](https://leetcode.com/problems/count-shadow-pairs-ii/description/) | Free in snapshot | Not cached |
-| 4056 | [Number of Intersecting Interval Pairs I](https://leetcode.com/problems/number-of-intersecting-interval-pairs-i/description/) | Free in snapshot | Not cached |
-| 4057 | [Number of Intersecting Interval Pairs II](https://leetcode.com/problems/number-of-intersecting-interval-pairs-ii/description/) | Free in snapshot | Not cached |
-| 4058 | [Maximum Pulse Value After One Subarray Rotation](https://leetcode.com/problems/maximum-pulse-value-after-one-subarray-rotation/description/) | Free in snapshot | Not cached |
-| 4059 | [Lexicographically Largest Power Array](https://leetcode.com/problems/lexicographically-largest-power-array/description/) | Free in snapshot | Not cached |
-| 4060 | [Count Evenly Good Integers](https://leetcode.com/problems/count-evenly-good-integers/description/) | Paid in snapshot | Not cached |
-| 4061 | [Minimum Queen Moves to Reach Target](https://leetcode.com/problems/minimum-queen-moves-to-reach-target/description/) | Free in snapshot | Not cached |
-| 4062 | [Transform Array Using Pair Operations](https://leetcode.com/problems/transform-array-using-pair-operations/description/) | Free in snapshot | Not cached |
-| 4063 | [Longest Subarray Divisible by K with At Most One Negation I](https://leetcode.com/problems/longest-subarray-divisible-by-k-with-at-most-one-negation-i/description/) | Free in snapshot | Not cached |
-| 4064 | [Longest Subarray Divisible by K with At Most One Negation II](https://leetcode.com/problems/longest-subarray-divisible-by-k-with-at-most-one-negation-ii/description/) | Free in snapshot | Not cached |
-| 4065 | [Rearrange Array by Removing Distinct Values](https://leetcode.com/problems/rearrange-array-by-removing-distinct-values/description/) | Free in snapshot | Not cached |
-| 4066 | [Maximum Equal Adjacent Pairs After at Most One Replacement](https://leetcode.com/problems/maximum-equal-adjacent-pairs-after-at-most-one-replacement/description/) | Free in snapshot | Not cached |
-| 4067 | [Longest Subarray With Restricted Pair Sums](https://leetcode.com/problems/longest-subarray-with-restricted-pair-sums/description/) | Free in snapshot | Not cached |
-| 4068 | [Maximize Meeting Earnings with Idle Gaps](https://leetcode.com/problems/maximize-meeting-earnings-with-idle-gaps/description/) | Free in snapshot | Not cached |
-| 4069 | [Best Time to Buy and Sell Stock with Cooldown II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown-ii/description/) | Paid in snapshot | Not cached |
-| 4070 | [Minimum Rotations to Dial a Number I](https://leetcode.com/problems/minimum-rotations-to-dial-a-number-i/description/) | Free in snapshot | Not cached |
-| 4071 | [Minimum Rotations to Dial a Number II](https://leetcode.com/problems/minimum-rotations-to-dial-a-number-ii/description/) | Free in snapshot | Not cached |
-| 4072 | [Maximum Alternating Subarray Sum With One Deletion](https://leetcode.com/problems/maximum-alternating-subarray-sum-with-one-deletion/description/) | Free in snapshot | Not cached |
-| 4073 | [Count Good Strings](https://leetcode.com/problems/count-good-strings/description/) | Free in snapshot | Not cached |
+| 4044 | [Count Good Cyclic Rotations](https://leetcode.com/problems/count-good-cyclic-rotations/description/) | Free in snapshot | [Requirement summary](../requirements/4044.json) |
+| 4045 | [Count Robot Groups](https://leetcode.com/problems/count-robot-groups/description/) | Free in snapshot | [Requirement summary](../requirements/4045.json) |
+| 4046 | [Minimum Cost Path With At Most K Turns](https://leetcode.com/problems/minimum-cost-path-with-at-most-k-turns/description/) | Free in snapshot | [Requirement summary](../requirements/4046.json) |
+| 4047 | [Minimum Operations to Make XOR of All Elements Zero](https://leetcode.com/problems/minimum-operations-to-make-xor-of-all-elements-zero/description/) | Paid in snapshot | [Requirement summary](../requirements/4047.json) |
+| 4048 | [Count Values With Equally Spaced Occurrences I](https://leetcode.com/problems/count-values-with-equally-spaced-occurrences-i/description/) | Free in snapshot | [Requirement summary](../requirements/4048.json) |
+| 4049 | [Count Values With Equally Spaced Occurrences II](https://leetcode.com/problems/count-values-with-equally-spaced-occurrences-ii/description/) | Free in snapshot | [Requirement summary](../requirements/4049.json) |
+| 4050 | [Minimum Days to Score Exactly N Points](https://leetcode.com/problems/minimum-days-to-score-exactly-n-points/description/) | Free in snapshot | [Requirement summary](../requirements/4050.json) |
+| 4051 | [Count Subarrays with Distant Sums](https://leetcode.com/problems/count-subarrays-with-distant-sums/description/) | Free in snapshot | [Requirement summary](../requirements/4051.json) |
+| 4052 | [Cyclically Shift Rows and Columns](https://leetcode.com/problems/cyclically-shift-rows-and-columns/description/) | Free in snapshot | [Requirement summary](../requirements/4052.json) |
+| 4053 | [Minimum Operations to Make Every Element Palindromic](https://leetcode.com/problems/minimum-operations-to-make-every-element-palindromic/description/) | Free in snapshot | [Requirement summary](../requirements/4053.json) |
+| 4054 | [Count Shadow Pairs I](https://leetcode.com/problems/count-shadow-pairs-i/description/) | Free in snapshot | [Requirement summary](../requirements/4054.json) |
+| 4055 | [Count Shadow Pairs II](https://leetcode.com/problems/count-shadow-pairs-ii/description/) | Free in snapshot | [Requirement summary](../requirements/4055.json) |
+| 4056 | [Number of Intersecting Interval Pairs I](https://leetcode.com/problems/number-of-intersecting-interval-pairs-i/description/) | Free in snapshot | [Requirement summary](../requirements/4056.json) |
+| 4057 | [Number of Intersecting Interval Pairs II](https://leetcode.com/problems/number-of-intersecting-interval-pairs-ii/description/) | Free in snapshot | [Requirement summary](../requirements/4057.json) |
+| 4058 | [Maximum Pulse Value After One Subarray Rotation](https://leetcode.com/problems/maximum-pulse-value-after-one-subarray-rotation/description/) | Free in snapshot | [Requirement summary](../requirements/4058.json) |
+| 4059 | [Lexicographically Largest Power Array](https://leetcode.com/problems/lexicographically-largest-power-array/description/) | Free in snapshot | [Requirement summary](../requirements/4059.json) |
+| 4060 | [Count Evenly Good Integers](https://leetcode.com/problems/count-evenly-good-integers/description/) | Paid in snapshot | [Requirement summary](../requirements/4060.json) |
+| 4061 | [Minimum Queen Moves to Reach Target](https://leetcode.com/problems/minimum-queen-moves-to-reach-target/description/) | Free in snapshot | [Requirement summary](../requirements/4061.json) |
+| 4062 | [Transform Array Using Pair Operations](https://leetcode.com/problems/transform-array-using-pair-operations/description/) | Free in snapshot | [Requirement summary](../requirements/4062.json) |
+| 4063 | [Longest Subarray Divisible by K with At Most One Negation I](https://leetcode.com/problems/longest-subarray-divisible-by-k-with-at-most-one-negation-i/description/) | Free in snapshot | [Requirement summary](../requirements/4063.json) |
+| 4064 | [Longest Subarray Divisible by K with At Most One Negation II](https://leetcode.com/problems/longest-subarray-divisible-by-k-with-at-most-one-negation-ii/description/) | Free in snapshot | [Requirement summary](../requirements/4064.json) |
+| 4065 | [Rearrange Array by Removing Distinct Values](https://leetcode.com/problems/rearrange-array-by-removing-distinct-values/description/) | Free in snapshot | [Requirement summary](../requirements/4065.json) |
+| 4066 | [Maximum Equal Adjacent Pairs After at Most One Replacement](https://leetcode.com/problems/maximum-equal-adjacent-pairs-after-at-most-one-replacement/description/) | Free in snapshot | [Requirement summary](../requirements/4066.json) |
+| 4067 | [Longest Subarray With Restricted Pair Sums](https://leetcode.com/problems/longest-subarray-with-restricted-pair-sums/description/) | Free in snapshot | [Requirement summary](../requirements/4067.json) |
+| 4068 | [Maximize Meeting Earnings with Idle Gaps](https://leetcode.com/problems/maximize-meeting-earnings-with-idle-gaps/description/) | Free in snapshot | [Requirement summary](../requirements/4068.json) |
+| 4069 | [Best Time to Buy and Sell Stock with Cooldown II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown-ii/description/) | Paid in snapshot | [Requirement summary](../requirements/4069.json) |
+| 4070 | [Minimum Rotations to Dial a Number I](https://leetcode.com/problems/minimum-rotations-to-dial-a-number-i/description/) | Free in snapshot | [Requirement summary](../requirements/4070.json) |
+| 4071 | [Minimum Rotations to Dial a Number II](https://leetcode.com/problems/minimum-rotations-to-dial-a-number-ii/description/) | Free in snapshot | [Requirement summary](../requirements/4071.json) |
+| 4072 | [Maximum Alternating Subarray Sum With One Deletion](https://leetcode.com/problems/maximum-alternating-subarray-sum-with-one-deletion/description/) | Free in snapshot | [Requirement summary](../requirements/4072.json) |
+| 4073 | [Count Good Strings](https://leetcode.com/problems/count-good-strings/description/) | Free in snapshot | [Requirement summary](../requirements/4073.json) |

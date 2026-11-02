@@ -1,0 +1,14 @@
+{
+  "number": 3967,
+  "title": "Finish Time of Tasks II",
+  "source": "https://leetcode.ca/2026-08-03-3967-Finish-Time-of-Tasks-II/",
+  "officialUrl": "https://leetcode.com/problems/finish-time-of-tasks-ii/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Choose a root for the task tree. A leaf finishes in its baseTime. For a non-leaf, let earliest and latest be the minimum and maximum child finish times; its finish time is 2*latest-earliest+baseTime. Return the smallest root finish time over all root choices.",
+  "requirementsVerified": false,
+  "officialConstraints": "Numeric bounds and full interface require review against the current official statement.",
+  "examples": [],
+  "exampleStatus": "No source examples copied; independently author and check teaching examples."
+}

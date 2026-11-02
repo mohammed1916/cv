@@ -1,0 +1,16 @@
+{
+  "number": 4025,
+  "title": "Minimize the Maximum Waiting Time at Synchronized Traffic Lights",
+  "source": "https://leetcode.com/problems/minimize-the-maximum-waiting-time-at-synchronized-traffic-lights/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Traffic lights share a cycle of length period and all begin green at time zero. Light i stays green for green[i] time units in every cycle. Assign each arriving car to any light; simultaneous arrivals do not form queues. A car arriving at remainder r waits zero if r < green[i], otherwise period-r. Minimize the largest waiting time among all cars.",
+  "officialConstraints": [
+    "2 <= period <= 1000000000; 1..10000 lights; 1 <= green[i] < period.",
+    "1..100000 arrivals, each between 1 and 1000000000."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

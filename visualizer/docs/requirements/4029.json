@@ -1,0 +1,14 @@
+{
+  "number": 4029,
+  "title": "Elevator Requests IV",
+  "source": "https://leetcode.doocs.org/en/lc/4029/",
+  "officialUrl": "https://leetcode.com/problems/elevator-requests-iv/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "An elevator starts at floor start at time zero. Each second it may move one floor up/down or wait. A request [arrival,floor] completes instantly whenever the elevator occupies that floor at or after arrival. Requests need not be served in input order. Return the earliest time by which all requests can be completed.",
+  "requirementsVerified": false,
+  "officialConstraints": "Numeric bounds and full interface require review against the current official statement.",
+  "examples": [],
+  "exampleStatus": "No source examples copied; independently author and check teaching examples."
+}

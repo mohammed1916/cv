@@ -1,0 +1,13 @@
+{
+  "number": 3920,
+  "title": "Maximize Fixed Points After Deletions",
+  "source": "https://leetcode.com/problems/maximize-fixed-points-after-deletions/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Delete any number of elements while retaining the order of survivors, then index them from zero. Maximize how many surviving positions have value equal to their new index. Return that count; deleting nothing is permitted.",
+  "officialConstraints": "Length 1..100000; values 0..100000.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

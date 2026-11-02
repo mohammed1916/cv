@@ -1,0 +1,14 @@
+{
+  "number": 3662,
+  "title": "Filter Characters by Frequency",
+  "source": "https://leetcode.ca/2025-10-02-3662-Filter-Characters-by-Frequency/",
+  "officialUrl": "https://leetcode.com/problems/filter-characters-by-frequency/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Keep all occurrences of characters whose total frequency in s is strictly below k, preserving their original order. Return the filtered string, possibly empty.",
+  "requirementsVerified": false,
+  "officialConstraints": "Numeric bounds and full interface require review against the current official statement.",
+  "examples": [],
+  "exampleStatus": "No source examples copied; independently author and check teaching examples."
+}

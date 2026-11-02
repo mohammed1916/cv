@@ -1,0 +1,13 @@
+{
+  "number": 3976,
+  "title": "Maximum Subarray Sum After Multiplier",
+  "source": "https://leetcode.com/problems/maximum-subarray-sum-after-multiplier/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Choose exactly one nonempty contiguous interval and either multiply all its elements by positive k or divide all by k, rounding division toward zero. After that one mandatory operation, return the largest sum of any nonempty subarray. The scoring subarray need not equal or overlap the modified interval.",
+  "officialConstraints": "Length 1..100000; values -100000..100000; k 1..100000.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

@@ -1,0 +1,14 @@
+{
+  "number": 3907,
+  "title": "Count Smaller Elements With Opposite Parity",
+  "source": "https://leetcode.doocs.org/en/lc/3907/",
+  "officialUrl": "https://leetcode.com/problems/count-smaller-elements-with-opposite-parity/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "For each index i, count later indices j whose value is strictly smaller than nums[i] and has opposite parity. Return the counts in index order.",
+  "requirementsVerified": false,
+  "officialConstraints": "Numeric bounds and full interface require review against the current official statement.",
+  "examples": [],
+  "exampleStatus": "No source examples copied; independently author and check teaching examples."
+}

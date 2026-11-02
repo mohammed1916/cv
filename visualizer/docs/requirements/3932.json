@@ -1,0 +1,13 @@
+{
+  "number": 3932,
+  "title": "Count K-th Roots in a Range",
+  "source": "https://leetcode.com/problems/count-k-th-roots-in-a-range/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Count distinct integers in the inclusive interval [l,r] expressible as x^k for an integer x. Return a count of values, not possible roots; zero and one qualify where in range.",
+  "officialConstraints": "0<=l<=r<=10^9; 1<=k<=30.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

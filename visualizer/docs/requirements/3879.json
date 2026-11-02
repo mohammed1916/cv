@@ -1,0 +1,14 @@
+{
+  "number": 3879,
+  "title": "Maximum Distinct Path Sum in a Binary Tree",
+  "source": "https://leetcode.doocs.org/en/lc/3879/",
+  "officialUrl": "https://leetcode.com/problems/maximum-distinct-path-sum-in-a-binary-tree/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "In a binary tree, choose any nonempty simple connected path whose node values are pairwise distinct. The path can start and end anywhere. Return the greatest sum of its node values.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

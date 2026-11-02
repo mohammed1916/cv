@@ -1,0 +1,15 @@
+{
+  "number": 4066,
+  "title": "Maximum Equal Adjacent Pairs After at Most One Replacement",
+  "source": "https://leetcode.com/problems/maximum-equal-adjacent-pairs-after-at-most-one-replacement/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "At most once choose distinct values x and y and replace every occurrence of x with y. Return the maximum resulting count of equal adjacent pairs.",
+  "officialConstraints": [
+    "2..100000 elements, each 1..1000000000."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

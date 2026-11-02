@@ -1,0 +1,13 @@
+{
+  "number": 4013,
+  "title": "Count Subarrays With Even Odd Ratio II",
+  "source": "https://leetcode.com/problems/count-subarrays-with-even-odd-ratio-ii/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Count nonempty subarrays with positive odd-element count and even-count/odd-count <= a/b. Equality qualifies; use exact rational comparison. This variant has substantially larger bounds than variant I.",
+  "officialConstraints": "Length1..100000; values,a,b each1..10^9.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

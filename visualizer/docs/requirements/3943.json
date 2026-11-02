@@ -1,0 +1,13 @@
+{
+  "number": 3943,
+  "title": "Number of Pairs After Increment",
+  "source": "https://leetcode.com/problems/number-of-pairs-after-increment/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Maintain nums2 while nums1 stays fixed. Query [1,x,y,val] adds val to every nums2 position in the inclusive range x..y. Query [2,total] counts index pairs, one from each array, whose current values sum to total. Return one count per type-2 query in chronological order, counting duplicates by indices.",
+  "officialConstraints": "nums1 length 1..5; nums2 length 1..50000; initial values 1..100000. There are 1..50000 queries. Update endpoints are valid, val 1..100000; target total 1..1000000000.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

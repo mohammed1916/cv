@@ -1,0 +1,13 @@
+{
+  "number": 3948,
+  "title": "Lexicographically Maximum MEX Array",
+  "source": "https://leetcode.com/problems/lexicographically-maximum-mex-array/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Repeatedly remove a nonempty prefix of the remaining array and append its smallest absent nonnegative integer (MEX) to the result, until no elements remain. Return the lexicographically greatest possible result. Compare first differing values; if one result is a prefix of the other, the longer is greater.",
+  "officialConstraints": "Length 1..100000; values 0..100000.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

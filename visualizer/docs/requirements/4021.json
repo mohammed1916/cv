@@ -1,0 +1,13 @@
+{
+  "number": 4021,
+  "title": "Minimum Operations to Make a Rotated Palindrome I",
+  "source": "https://leetcode.com/problems/minimum-operations-to-make-a-rotated-palindrome-i/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Make a lowercase string palindromic using any sequence of single-character cyclic alphabet increments (z becomes a) and whole-string one-position left rotations. Every increment or rotation costs one. Return minimum total operations; rotations are not free.",
+  "officialConstraints": "Length2..2000; lowercase English letters.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

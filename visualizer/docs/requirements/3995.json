@@ -1,0 +1,13 @@
+{
+  "number": 3995,
+  "title": "Minimum Cost to Convert String III",
+  "source": "https://leetcode.com/problems/minimum-cost-to-convert-string-iii/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Transform source into target using matching substring-replacement rules of equal pattern/replacement length. A pattern '*' matches any one character. Applying a rule costs its listed cost plus its wildcard count. Each character position may be used in at most one application, so applications cannot overlap or rewrite already-used positions. Return minimum cost, or -1 if impossible.",
+  "officialConstraints": "Equal lowercase input lengths1..5000; 1..200 rules; rule length1..20, at least one literal lowercase pattern letter and at most5 wildcards; replacements lowercase; base costs1..1000.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

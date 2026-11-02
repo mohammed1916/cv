@@ -1,0 +1,16 @@
+{
+  "number": 4046,
+  "title": "Minimum Cost Path With At Most K Turns",
+  "source": "https://leetcode.com/problems/minimum-cost-path-with-at-most-k-turns/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Find a minimum-cost four-direction path from the top-left to the bottom-right of grid using at most k turns. A turn changes movement direction between consecutive moves; the first move is not a turn. Pay the value of every visited cell, including both endpoints and repeated visits. Return the minimum total, or -1 if impossible.",
+  "officialConstraints": [
+    "1 <= rows, columns <= 75; 0 <= grid[i][j] <= 1000.",
+    "0 <= k < min(rows, columns)."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

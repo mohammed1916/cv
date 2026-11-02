@@ -1,0 +1,13 @@
+{
+  "number": 4001,
+  "title": "Aggregate Two Time Series",
+  "source": "https://leetcode.com/problems/aggregate-two-time-series/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "At each timestamp appearing in either sorted time series, add the two series' values. If a series lacks that timestamp, use its next later observation's value, or zero if none follows. Return sorted timestamp/sum pairs. This is forward-looking fill, not carry-forward from the past.",
+  "officialConstraints": "Each series has1..100000 pairs, timestamps and values1..10^9; timestamps strictly increase within each input.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

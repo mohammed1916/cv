@@ -1,0 +1,13 @@
+{
+  "number": 3997,
+  "title": "Count Dominant Nodes in a Binary Tree",
+  "source": "https://leetcode.com/problems/count-dominant-nodes-in-a-binary-tree/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Count nodes in a complete binary tree whose value equals the maximum value in their own rooted subtree. Include the node itself in that maximum, so leaves qualify and equal-valued descendants do not disqualify a node.",
+  "officialConstraints": "1..100000 nodes; values1..10^9; tree guaranteed complete.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

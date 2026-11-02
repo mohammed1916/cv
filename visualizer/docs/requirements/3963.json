@@ -1,0 +1,13 @@
+{
+  "number": 3963,
+  "title": "Create Grid With Exactly One Path",
+  "source": "https://leetcode.com/problems/create-grid-with-exactly-one-path/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Return any m-by-n grid of free cells '.' and obstacles '#' having exactly one free-cell path from top-left to bottom-right when each step moves right or down. Both endpoints must be usable. Any grid meeting the path-count condition is acceptable.",
+  "officialConstraints": "m and n each 1..25.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

@@ -1619,5 +1619,1125 @@
   },
   "2898": {
     "task": "Given stock prices indexed by day, choose a subsequence whose price differences equal the corresponding day-index differences, so all selected price-minus-index values agree. Maximize the sum of chosen prices and return it. Verify one-based versus zero-based notation and whether all prices are positive."
+  },
+  "1083": {
+    "task": "SQL: Product(product_id, product_name, unit_price) and Sales(seller_id, product_id, buyer_id, sale_date, quantity, price). Return buyer_id for buyers who bought S8 but never bought iPhone. Other purchases do not disqualify them. Verify the exact product-name literals against the current source."
+  },
+  "1084": {
+    "task": "SQL: Product(product_id, product_name, unit_price) and Sales(seller_id, product_id, buyer_id, sale_date, quantity, price). Return product_id and product_name for products sold during 2019-01-01 through 2019-03-31 inclusive and never sold outside that interval. Products with no sales do not qualify."
+  },
+  "1097": {
+    "task": "SQL: Activity(player_id, device_id, event_date, games_played). A player's install date is their earliest activity date. For each install date, report install_dt, number of installs, and Day1_retention: the fraction of that install cohort active on the next calendar day, rounded to two decimals. Do not group retention by the return date."
+  },
+  "1098": {
+    "task": "SQL: Books(book_id,name,available_from) and Orders(order_id,book_id,quantity,dispatch_date). Relative to 2019-06-23, return books available for at least one month that sold fewer than ten copies in the preceding year. Include eligible books with no orders. Verify exact inclusive date boundaries before certification."
+  },
+  "1107": {
+    "task": "SQL: Traffic(user_id,activity,activity_date). A user's first login is their earliest record with activity='login' across all history. Report login_date and user_count for first logins within the 90-day window ending 2019-06-30. Determine first login before restricting to that window; verify the inclusive start date."
+  },
+  "1112": {
+    "task": "SQL: Enrollments(student_id,course_id,grade), keyed by student/course. Return each student's course with their highest grade; choose the smallest course_id among tied grades. Return student_id, course_id and grade ordered by student_id."
+  },
+  "1113": {
+    "task": "SQL: Actions(user_id,post_id,action_date,action,extra). For reports on 2019-07-04, return report_reason and report_count, counting distinct reported posts for each reason stored in extra. Repeated reports of the same post/reason do not increase that reason's count."
+  },
+  "1126": {
+    "task": "SQL: Events(business_id,event_type,occurrences). For each event type, compute average occurrences across businesses with a row for that type. Return businesses whose occurrences exceed the corresponding average for more than one event type. Equality does not qualify."
+  },
+  "1127": {
+    "task": "SQL: Spending(user_id,spend_date,platform,amount), with platform mobile or desktop. For each date, classify users into mobile-only, desktop-only or both. Return spend_date, platform, total_amount and total_users for all three categories, including zero totals. A user using both platforms belongs only to both, with spending from both included."
+  },
+  "1132": {
+    "task": "SQL: Actions(user_id,post_id,action_date,action,extra) and Removals(post_id,remove_date). For each day with spam reports, compute the percentage of distinct spam-reported posts that were eventually removed. Average those daily percentages and round to two decimals as average_daily_percent. Removal need not occur on the reporting day."
+  },
+  "1141": {
+    "task": "SQL: Activity(user_id,session_id,activity_date,activity_type). Report day and active_users for each day in the 30-day interval ending 2019-07-27 inclusive. A user with any activity that day counts once. Omit dates with no active users."
+  },
+  "1142": {
+    "task": "SQL: Activity(user_id,session_id,activity_date,activity_type). For the 30-day interval ending 2019-07-27 inclusive, return average_sessions_per_user: distinct sessions in the window divided by distinct active users, rounded to two decimals. Return zero when no user is active. Multiple activity records from one session count once."
+  },
+  "1148": {
+    "task": "SQL: Views(article_id,author_id,viewer_id,view_date). Return distinct author IDs, under id, for authors who viewed at least one of their own articles. Sort by id ascending."
+  },
+  "1149": {
+    "task": "SQL: Views(article_id,author_id,viewer_id,view_date). Return distinct viewer IDs under id for people who viewed more than one distinct article on the same date. Repeated views of one article do not suffice. Sort id ascending."
+  },
+  "1158": {
+    "task": "SQL: Users(user_id,join_date,favorite_brand), Orders(order_id,order_date,item_id,buyer_id,seller_id) and Items(item_id,item_brand). Return every user's buyer_id, join_date and count of orders they placed as buyer in calendar year 2019. Include users with no such orders, using zero."
+  },
+  "1159": {
+    "task": "SQL: Users(user_id,join_date,favorite_brand), Orders(order_id,order_date,item_id,buyer_id,seller_id) and Items(item_id,item_brand). For every user as seller, determine whether their second sold item chronologically has their favorite brand. Return seller_id and the required yes/no flag; sellers with fewer than two sales get no. Verify tie guarantees and the exact output-column name."
+  },
+  "1164": {
+    "task": "SQL: Products(product_id,new_price,change_date). Products initially cost 10. Return each product's price as of 2019-08-16, using its latest change on or before that date, or 10 if no qualifying change exists. Include products whose first change is later."
+  },
+  "1173": {
+    "task": "SQL: Delivery(delivery_id,customer_id,order_date,customer_pref_delivery_date). A delivery is immediate when the preferred date equals order_date. Return immediate_percentage over all deliveries, rounded to two decimals."
+  },
+  "1174": {
+    "task": "SQL: Delivery(delivery_id,customer_id,order_date,customer_pref_delivery_date). Restrict to each customer's first order, then return the percentage whose preferred delivery date equals the order date, rounded to two decimals. Verify the guarantee that each customer has a unique first order."
+  },
+  "1179": {
+    "task": "SQL: Department(id,revenue,month). Pivot month values into columns Jan_Revenue through Dec_Revenue, returning one row per id. Missing month values become NULL. Verify uniqueness of an id/month pair before choosing aggregation behavior."
+  },
+  "1193": {
+    "task": "SQL: Transactions(id,country,state,amount,trans_date), where state is approved or declined. For each calendar month and country, return month, country, trans_count, approved_count, trans_total_amount and approved_total_amount. Counts and approved sums use only approved rows where specified; NULL country forms its own group."
+  },
+  "1194": {
+    "task": "SQL: Players(player_id,group_id) and Matches(match_id,first_player,second_player,first_score,second_score). Sum every player's points from either match position. Return each group's winning player; highest total wins, with smaller player_id breaking ties. Include players with no matches using zero points."
+  },
+  "1204": {
+    "task": "SQL: Queue(person_id,person_name,weight,turn). People board a bus in turn order, with maximum total weight 1000. Return person_name of the last person in the longest boarding prefix whose cumulative weight fits. Later lighter people cannot skip an earlier person who would exceed capacity."
+  },
+  "1205": {
+    "task": "SQL: Transactions(id,country,state,amount,trans_date) and Chargebacks(trans_id,trans_date). For each month/country, report approved transaction counts/amounts by transaction date and chargeback counts/amounts by chargeback date. Include groups occurring in either stream. Verify exact output columns and whether multiple chargebacks per transaction are permitted."
+  },
+  "1211": {
+    "task": "SQL: Queries(query_name,result,position,rating). For each query_name, return quality as the average of rating/position, and poor_query_percentage as the percentage of rows with rating below 3. Round both to two decimals; retain repeated query records as observations. Verify the handling of NULL query names."
+  },
+  "1212": {
+    "task": "SQL: Teams(team_id,team_name) and Matches(match_id,host_team,guest_team,host_goals,guest_goals). Award three points for a win, one each for a draw and zero for a loss. Return every team's team_id, team_name and num_points, ordered by points descending then team_id ascending. Include teams with no matches."
+  },
+  "1225": {
+    "task": "SQL: Failed(fail_date) and Succeeded(success_date) describe one task outcome per calendar date. Within 2019, group adjacent dates with the same outcome into maximal runs. Return period_state, start_date and end_date ordered by start_date. State labels are failed and succeeded."
+  },
+  "1241": {
+    "task": "SQL: Submissions(sub_id,parent_id) contains posts with NULL parent_id and comments referring to posts; rows may be duplicated. For every distinct post, return post_id and number_of_comments, counting distinct comment IDs associated with it. Include zero-comment posts and sort post_id ascending."
+  },
+  "1251": {
+    "task": "SQL: Prices(product_id,start_date,end_date,price) has nonoverlapping date ranges per product; UnitsSold(product_id,purchase_date,units) records sales. Return each product's weighted average selling price, sum(price*units)/sum(units), rounded to two decimals. Match purchases to inclusive price ranges. Include products with no sales as average_price zero under the remembered current contract."
+  },
+  "1264": {
+    "task": "SQL: Friendship(user1_id,user2_id) stores undirected friendships and Likes(user_id,page_id) stores page likes. Recommend to user 1 distinct pages liked by any friend but not already liked by user 1. Return recommended_page. Treat friendships from either endpoint direction."
+  },
+  "1270": {
+    "task": "SQL: Employees(employee_id,employee_name,manager_id). Return employees reporting directly or indirectly to employee 1, excluding employee 1. Follow manager relationships rather than matching only immediate managers. Verify the self-manager/root and hierarchy-depth guarantees."
+  },
+  "1280": {
+    "task": "SQL: Students(student_id,student_name), Subjects(subject_name), Examinations(student_id,subject_name). Return every student/subject combination with attended_exams equal to the number of matching examination records, including zero. Duplicate examination rows represent separate attendances. Sort by student_id then subject_name."
+  },
+  "1285": {
+    "task": "SQL: Logs(log_id) contains unique integer IDs. Group consecutive IDs into maximal runs and return start_id and end_id for each run, sorted by start_id."
+  },
+  "1294": {
+    "task": "SQL: Countries(country_id,country_name) and Weather(country_id,weather_state,day). For each country with observations in November 2019, average weather_state. Return country_name and weather_type: Cold for average <=15, Hot for >=25, otherwise Warm."
+  },
+  "1303": {
+    "task": "SQL: Employee(employee_id,team_id). Return employee_id and team_size for every employee, with team_size counting all rows sharing that employee's team_id."
+  },
+  "1308": {
+    "task": "SQL: Scores(player_name,gender,day,score_points). For each gender and day, return gender, day and total, the cumulative score_points for that gender through that day. Sort by gender then day; verify the uniqueness of gender/day records."
+  },
+  "1321": {
+    "task": "SQL: Customer(customer_id,name,visited_on,amount) records restaurant payments. Aggregate per date, then for each date with a full seven-day window return visited_on, the seven-day amount and average_amount divided by seven, rounded to two decimals. Sort by date. Verify the guarantee that every intervening calendar day has data."
+  },
+  "1322": {
+    "task": "SQL: Ads(ad_id,user_id,action), where action is Clicked, Viewed or Ignored. Return each ad_id and ctr as 100*clicked/(clicked+viewed), rounded to two decimals; ignored records are excluded from the denominator. With no clicks or views, ctr is zero. Sort ctr descending then ad_id ascending."
+  },
+  "1327": {
+    "task": "SQL: Products(product_id,product_name,product_category) and Orders(product_id,order_date,unit). Return product_name and summed unit for products ordered at least 100 units in February 2020."
+  },
+  "1336": {
+    "task": "SQL: Visits(user_id,visit_date) and Transactions(user_id,transaction_date,amount). For every visit, count transaction records by that user on that date. Produce a histogram transactions_count/visits_count containing every integer count from zero through the largest observed count, using zero for missing buckets."
+  },
+  "1341": {
+    "task": "SQL: Movies(movie_id,title), Users(user_id,name), MovieRating(movie_id,user_id,rating,created_at). Return two rows under results: the user rating the most movies, ties by lexicographically smallest name, and the movie with highest average rating in February 2020, ties by lexicographically smallest title."
+  },
+  "1350": {
+    "task": "SQL: Departments(id,name) and Students(id,name,department_id). Return id and name for students whose department_id has no matching department. Verify null department semantics before treating NULL as an invalid reference."
+  },
+  "1355": {
+    "task": "SQL: Friends(id,name,activity) and Activities(id,name). Count participants per activity and return activities whose participant count is neither the minimum nor maximum. Tied minimum/maximum groups are all excluded. Verify whether zero-participant activities are included in the population."
+  },
+  "1364": {
+    "task": "SQL: Customers(customer_id,customer_name,email), Contacts(user_id,contact_name,contact_email), Invoices(invoice_id,user_id,price). For every invoice, return invoice_id, customer_name, price, contacts_cnt and trusted_contacts_cnt, where trusted contacts have emails belonging to registered customers. Include customers with no contacts and sort by invoice_id. Verify contact-email uniqueness assumptions."
+  },
+  "1369": {
+    "task": "SQL: UserActivity(username,activity,startDate,endDate). Return each user's second-most-recent activity by time, or their only activity if they have just one. Return all original columns. Verify nonoverlap and timestamp-tie guarantees before selecting an ordering."
+  },
+  "1378": {
+    "task": "SQL: Employees(id,name) and EmployeeUNI(id,unique_id). Return unique_id and name for every employee, with NULL unique_id when no mapping exists."
+  },
+  "1384": {
+    "task": "SQL: Product(product_id,product_name) and Sales(product_id,period_start,period_end,average_daily_sales). For each product/year touched by a sales period, return product_id, product_name, report_year and total_amount as inclusive days in that year times daily sales. Sort by product_id and report_year. Handle leap years and verify allowed year range."
+  },
+  "1393": {
+    "task": "SQL: Stocks(stock_name,operation,operation_day,price) records Buy and Sell transactions. Return each stock_name and capital_gain_loss, adding sale prices and subtracting purchase prices across its records."
+  },
+  "1398": {
+    "task": "SQL: Customers(customer_id,customer_name) and Orders(order_id,customer_id,product_name). Return customers who bought both products A and B but never C. Return customer_id and customer_name ordered by customer_id; repeated purchases do not affect qualification."
+  },
+  "1407": {
+    "task": "SQL: Users(id,name) and Rides(id,user_id,distance). Return each user's name and total travelled_distance, including zero for users without rides. Sort distance descending then name ascending."
+  },
+  "1412": {
+    "task": "SQL: Student(student_id,student_name) and Exam(exam_id,student_id,score). A quiet student took at least one exam and never achieved either the minimum or maximum score in any exam they took. Return their id/name ordered by student_id. All ties for an exam's extremes are disqualifying."
+  },
+  "1421": {
+    "task": "SQL: NPV(id,year,npv) and Queries(id,year). Return id, year and npv for every query; missing id/year combinations have npv zero."
+  },
+  "1435": {
+    "task": "SQL: Sessions(session_id,duration), with duration in seconds. Count sessions in minute-duration bins [0-5>, [5-10>, [10-15> and 15 or more, including empty bins. Verify the exact required bin labels and boundary convention before certification."
+  },
+  "1440": {
+    "task": "SQL: Variables(name,value) and Expressions(left_operand,operator,right_operand). Look up each named operand and evaluate its comparison (<,>,=). Return the original expression columns plus value as the string true or false. Verify permitted operator spellings."
+  },
+  "1445": {
+    "task": "SQL: Sales(sale_date,fruit,sold_num), with fruit apples or oranges. For each date, return sale_date and diff as apples sold minus oranges sold, ordered by date. Verify whether both fruit records are guaranteed each date before substituting zero."
+  },
+  "1454": {
+    "task": "SQL: Accounts(id,name) and Logins(id,login_date). Return id/name for users logging in on at least five consecutive calendar dates. Multiple logins on the same date count as one day. Sort id ascending."
+  },
+  "1459": {
+    "task": "SQL: Points(id,x_value,y_value). Each pair of distinct points can define opposite corners of an axis-aligned rectangle. Return p1, p2 and area for positive-area rectangles, with p1<p2. Sort area descending then p1,p2 ascending."
+  },
+  "1468": {
+    "task": "SQL: Salaries(company_id,employee_id,employee_name,salary). Compute each company's maximum salary, then apply one tax rate to every employee in that company: zero below 1000, 24% from 1000 through 10000, otherwise 49%. Return original identifiers/name and salary after tax rounded to an integer. Verify threshold inclusivity and rounding against the source."
+  },
+  "1479": {
+    "task": "SQL: Orders(order_id,customer_id,order_date,item_id,quantity) and Items(item_id,item_name,item_category). Return each item_category and seven weekday columns containing quantities ordered on that weekday, including zero totals. Sort by category; verify weekday column names."
+  },
+  "1484": {
+    "task": "SQL: Activities(sell_date,product). For each date, return sell_date, num_sold as the number of distinct products and products as their alphabetically sorted comma-separated names. Duplicate same-day product rows count once. Sort by sell_date."
+  },
+  "1495": {
+    "task": "SQL: TVProgram(program_date,content_id,channel) and Content(content_id,title,Kids_content,content_type). Return distinct titles of kid-friendly movies broadcast in June 2020. Verify the literals marking kids content and movie type."
+  },
+  "1501": {
+    "task": "SQL: Person(id,name,phone_number), Country(name,country_code) and Calls(caller_id,callee_id,duration). Infer each person's country from the phone prefix. Return countries whose average call duration, considering residents participating as caller or callee, exceeds the overall average call duration. Verify whether same-country calls contribute twice to country participation."
+  },
+  "1511": {
+    "task": "SQL: Customers(customer_id,name,country), Product(product_id,description,price) and Orders(order_id,customer_id,product_id,order_date,quantity). Return customer_id/name for customers spending at least 100 in each of June and July 2020. Spending is price times quantity; the two months must each meet the threshold."
+  },
+  "1517": {
+    "task": "SQL: Users(user_id,name,mail). Return rows whose mail has a valid prefix followed by @leetcode.com: prefix starts with a letter and remaining characters are letters, digits, underscore, period or hyphen. Verify case sensitivity and the exact domain spelling before choosing a regex collation."
+  },
+  "1527": {
+    "task": "SQL: Patients(patient_id,patient_name,conditions), where conditions is a space-separated list of diagnosis codes. Return rows with a condition whose code begins DIAB1. Match the start of a code, not the same substring embedded later in another code."
+  },
+  "1532": {
+    "task": "SQL: Customers(customer_id,name) and Orders(order_id,order_date,customer_id,cost). Return up to the three most recent orders per customer, with customer_name, customer_id, order_id and order_date. Sort by customer_name, customer_id and order_date descending. Verify date-tie guarantees."
+  },
+  "1543": {
+    "task": "SQL: Sales(sale_id,product_name,sale_date). Normalize product names by trimming surrounding spaces and lowercasing, then count records by normalized name and calendar month. Return product_name, sale_date as YYYY-MM and total, sorted by product_name then month."
+  },
+  "1549": {
+    "task": "SQL: Customers(customer_id,name), Orders(order_id,order_date,customer_id,product_id) and Products(product_id,product_name,price). Return each product's most recent order date records, retaining all ties, with product_name, product_id, order_id and order_date. Sort product_name, product_id and order_id ascending."
+  },
+  "1555": {
+    "task": "SQL: Users(user_id,user_name,credit) and Transactions(trans_id,paid_by,paid_to,amount,transacted_on). Calculate each user's final credit after outgoing and incoming transfers. Return user_id,user_name,credit and credit_limit_breached as Yes if final credit is negative, otherwise No. Include users with no transfers."
+  },
+  "1565": {
+    "task": "SQL: Orders(order_id,order_date,customer_id,invoice). For each month, count distinct orders and distinct customers among records with invoice greater than 20. Return month, order_count and customer_count. Verify the strict threshold and required ordering."
+  },
+  "1571": {
+    "task": "SQL: Warehouse(name,product_id,units) and Products(product_id,product_name,Width,Length,Height). Return each warehouse_name and volume, summing units*Width*Length*Height for all products stored there. Verify exact column capitalization."
+  },
+  "1581": {
+    "task": "SQL: Visits(visit_id,customer_id) and Transactions(transaction_id,visit_id,amount). Return customer_id and count_no_trans for customers with visits having no associated transaction, counting such visits. A visit with multiple transactions is still not a no-transaction visit."
+  },
+  "1587": {
+    "task": "SQL: Users(account,name) and Transactions(trans_id,account,amount,transacted_on), where negative amounts are withdrawals. Return name and balance for accounts with total transaction amount greater than 10000."
+  },
+  "1596": {
+    "task": "SQL: Customers(customer_id,name), Orders(order_id,order_date,customer_id,product_id) and Products(product_id,product_name,price). For each customer with orders, return every product tied for their largest order count, with customer_id, product_id and product_name."
+  },
+  "1607": {
+    "task": "SQL: Customer(customer_id,customer_name), Orders(order_id,sale_date,order_cost,customer_id,seller_id) and Seller(seller_id,seller_name). Return names of sellers with no sales in calendar year 2020, ordered by seller_name. Sales in other years do not disqualify them."
+  },
+  "1613": {
+    "task": "SQL: Customers(customer_id,customer_name). Return ids from 1 through the largest existing customer_id that do not appear in the table, sorted ascending, under ids. Verify the maximum-bound guarantee before using a bounded number generator."
+  },
+  "1623": {
+    "task": "SQL: SchoolA, SchoolB and SchoolC each contain student_id and student_name. Return triplets choosing one student from each school with pairwise distinct IDs and pairwise distinct names. Verify output-column aliases in the source."
+  },
+  "1633": {
+    "task": "SQL: Users(user_id,user_name) and Register(contest_id,user_id). Return contest_id and percentage of all users registered for that contest, rounded to two decimals. Sort percentage descending then contest_id ascending."
+  },
+  "1635": {
+    "task": "SQL: Drivers(driver_id,join_date), Rides(ride_id,user_id,requested_at), AcceptedRides(ride_id,driver_id,ride_distance,ride_duration). For each month 1 through 12 in 2020, return month, active_drivers joined by that month's end and accepted_rides requested in that month. Include zero-count months and drivers who joined before 2020."
+  },
+  "1645": {
+    "task": "Using Drivers, Rides and AcceptedRides, return each 2020 month's working_percentage: distinct drivers accepting at least one ride requested that month divided by drivers active by month end, times 100 and rounded to two decimals. A month with no active drivers has zero. Verify monthly event-date attribution."
+  },
+  "1651": {
+    "task": "Using Drivers, Rides and AcceptedRides, report rolling three-month average accepted-ride distance and duration for windows starting in each month January through October 2020. Sum accepted rides requested in each three-month window, divide each total by three and round to two decimals. Months without rides contribute zero."
+  },
+  "1661": {
+    "task": "SQL: Activity(machine_id,process_id,activity_type,timestamp), with one start and one end per process. For each machine, return machine_id and average processing_time as mean(end-start), rounded to three decimals. Pair records by both machine and process."
+  },
+  "1667": {
+    "task": "SQL: Users(user_id,name). Return user_id and name normalized to uppercase first character and lowercase remaining characters, ordered by user_id. Verify that names are nonempty and alphabetic."
+  },
+  "1677": {
+    "task": "SQL: Product(product_id,name) and Invoice(invoice_id,product_id,rest,paid,canceled,refunded). Return every product's name and summed rest, paid, canceled and refunded amounts, including zeros for products without invoice rows. Sort by name."
+  },
+  "1683": {
+    "task": "SQL: Tweets(tweet_id,content). Return tweet_id for tweets whose content exceeds 15 characters. Verify the source's character set before substituting byte length for character length."
+  },
+  "1693": {
+    "task": "SQL: DailySales(date_id,make_name,lead_id,partner_id). For each date_id and make_name, return distinct counts unique_leads and unique_partners. Repeated lead/partner rows do not increase either count."
+  },
+  "1699": {
+    "task": "SQL: Calls(from_id,to_id,duration). Group calls between each unordered pair of people, counting calls in both directions and summing durations. Return person1<person2, call_count and total_duration."
+  },
+  "1709": {
+    "task": "SQL: UserVisits(user_id,visit_date). For each user, find the largest day gap between consecutive visits or between their last visit and 2021-01-01. Return user_id and biggest_window ordered by user_id. Verify the fixed observation-end date and date bounds."
+  },
+  "1715": {
+    "task": "SQL: Boxes(box_id,chest_id,apple_count,orange_count) and Chests(chest_id,apple_count,orange_count). Return total apple_count and orange_count in all boxes, including contents of the optionally referenced chest. A box without a chest still contributes its own fruit."
+  },
+  "1729": {
+    "task": "SQL: Followers(user_id,follower_id). Return user_id and followers_count, counting each user's follower rows and sorting by user_id. Verify uniqueness of user/follower pairs."
+  },
+  "1731": {
+    "task": "SQL: Employees(employee_id,name,reports_to,age). Return every employee with at least one direct report, including employee_id, name, reports_count and average_age of those direct reports rounded to the nearest integer. Sort by employee_id."
+  },
+  "1741": {
+    "task": "SQL: Employees(emp_id,event_day,in_time,out_time). Sum out_time-in_time for each employee/date, returning day, emp_id and total_time. Multiple nonoverlapping work periods contribute separately."
+  },
+  "1747": {
+    "task": "SQL: LogInfo(account_id,ip_address,login,logout). Return distinct account_id values with overlapping sessions from different IP addresses. Verify whether touching endpoint times count as overlap; the exact inclusive interval convention matters."
+  },
+  "1757": {
+    "task": "SQL: Products(product_id,low_fats,recyclable), with flags Y/N. Return product_id where both low_fats and recyclable are Y."
+  },
+  "1767": {
+    "task": "SQL: Tasks(task_id,subtasks_count) and Executed(task_id,subtask_id). Each task has subtasks numbered 1 through subtasks_count. Return every task/subtask pair missing from Executed."
+  },
+  "1777": {
+    "task": "SQL: Products(product_id,store,price), with stores store1,store2,store3. Pivot to one row per product_id and a price column per store, using NULL when that store has no price."
+  },
+  "1783": {
+    "task": "SQL: Players(player_id,player_name) and Championships(year,Wimbledon,Fr_open,US_open,Au_open). Count championship wins across all four tournament columns and return player_id, player_name and grand_slams_count for players with at least one win."
+  },
+  "1789": {
+    "task": "SQL: Employee(employee_id,department_id,primary_flag). Return each employee's primary department marked Y, or their only department when they have just one association even if its flag is N."
+  },
+  "1795": {
+    "task": "SQL: Products(product_id,store1,store2,store3). Unpivot non-NULL prices into product_id, store and price rows. Do not emit rows for missing store prices."
+  },
+  "1809": {
+    "task": "SQL: Playback(session_id,customer_id,start_time,end_time) and Ads(ad_id,customer_id,timestamp). Return session_id for playback sessions during which that customer saw no ad. Use the source's inclusive playback interval convention."
+  },
+  "1811": {
+    "task": "SQL: Contests(contest_id,gold_medal,silver_medal,bronze_medal) and Users(user_id,mail,name). Return name/mail for users winning any medal in at least three consecutive contest IDs or winning at least three gold medals overall. Deduplicate users satisfying both criteria."
+  },
+  "1821": {
+    "task": "SQL: Customers(customer_id,year,revenue), keyed by customer/year. Return customer_id for records in 2021 with revenue greater than zero. Verify the fixed target year rather than substituting today's year."
+  },
+  "1831": {
+    "task": "SQL: Transactions(transaction_id,day,amount). Return transaction IDs tied for the greatest amount on each calendar day, ignoring time within the day for grouping. Sort transaction_id ascending."
+  },
+  "1841": {
+    "task": "SQL: Teams(team_id,team_name) and Matches(home_team_id,away_team_id,home_team_goals,away_team_goals). Return each team's matches played, points, goals_for, goals_against and goal_diff along with team_name. Award 3/1/0 points for win/draw/loss; sort points descending, goal_diff descending then team_name ascending. Verify inclusion of teams without matches."
+  },
+  "1843": {
+    "task": "SQL: Accounts(account_id,max_income) and Transactions(transaction_id,account_id,type,amount,day). An account is suspicious when its incoming-credit total exceeds max_income in two consecutive calendar months. Return distinct account_id values. Sum only incoming transactions, not net income; verify the type literal and strict threshold."
+  },
+  "1853": {
+    "task": "SQL: Days(day). Format each date as weekday name, comma, month name, numeric day, comma and year. Verify exact capitalization, spacing and leading-zero rules against the requested output format."
+  },
+  "1867": {
+    "task": "SQL: OrdersDetails(order_id,product_id,quantity). Return order_id values whose maximum item quantity exceeds the greatest per-order average item quantity across all orders. Compare against the global maximum of averages, not merely that order's own average."
+  },
+  "1873": {
+    "task": "SQL: Employees(employee_id,name,salary). Return employee_id and bonus equal to salary when employee_id is odd and name does not start with M, otherwise zero. Sort by employee_id; verify case assumptions."
+  },
+  "1875": {
+    "task": "SQL: Employees(employee_id,name,salary). Keep employees whose salary is shared by at least one other employee. Assign team_id by ascending distinct shared salary, starting at one, and return original employee columns plus team_id ordered by team_id then employee_id."
+  },
+  "1890": {
+    "task": "SQL: Logins(user_id,time_stamp). Return each user's latest login within calendar year 2020 as last_stamp. Omit users with no 2020 login."
+  },
+  "1892": {
+    "task": "SQL: Friendship(user1_id,user2_id) and Likes(user_id,page_id). For every user, recommend pages liked by at least one friend but not already liked by that user, with user_id, page_id and friends_likes counting distinct liking friends. Friendships are undirected."
+  },
+  "1907": {
+    "task": "SQL: Accounts(account_id,income). Return all three categories with accounts_count: Low Salary below 20000, Average Salary from 20000 through 50000 inclusive, and High Salary above 50000. Include zero-count categories."
+  },
+  "1917": {
+    "task": "SQL: Listens(user_id,song_id,day) and Friendship(user1_id,user2_id). Recommend two users to each other when they listened to at least three distinct common songs on the same day and are not already friends. Return directed user_id/recommended_id pairs without duplicates; mere common listening across different dates is insufficient."
+  },
+  "1919": {
+    "task": "SQL: Listens(user_id,song_id,day) and Friendship(user1_id,user2_id). Return existing friend pairs who listened to at least three distinct common songs on the same day. Preserve the source's canonical user1_id<user2_id ordering and deduplicate across qualifying days."
+  },
+  "1934": {
+    "task": "SQL: Signups(user_id,time_stamp) and Confirmations(user_id,time_stamp,action). For every signed-up user, return confirmation_rate as confirmed events divided by all confirmation events, rounded to two decimals. Users with no confirmation events have zero. Verify confirmed/timeout action spellings."
+  },
+  "1939": {
+    "task": "SQL: Confirmations(user_id,time_stamp,action). Return distinct user IDs with two confirmation requests at most 24 hours apart. Compare actual timestamps, not only calendar dates; verify whether exactly 24 hours qualifies."
+  },
+  "1949": {
+    "task": "SQL: Friendship(user1_id,user2_id) stores undirected friendships. Return existing friend pairs having at least three common friends, along with common_friend count. A common friend must be adjacent to both endpoints; preserve canonical pair ordering."
+  },
+  "1951": {
+    "task": "SQL: Relations(user_id,follower_id). For every unordered pair of users, count their common followers. Return all pairs tied for the greatest count, as user1_id<user2_id. Verify whether zero-common-follower pairs are included when the maximum is zero."
+  },
+  "1965": {
+    "task": "SQL: Employees(employee_id,name) and Salaries(employee_id,salary). Return employee IDs present in exactly one table, indicating missing name or salary information. Sort employee_id ascending."
+  },
+  "1972": {
+    "task": "SQL: Calls(caller_id,recipient_id,call_time). Treat a call as involving both users. Return users whose first and last call on at least one date were with the same other person. Deduplicate users across days and verify timestamp-tie guarantees."
+  },
+  "1978": {
+    "task": "SQL: Employees(employee_id,name,manager_id,salary). Return employee IDs with salary below 30000 and a non-NULL manager_id absent from the employee table. Sort employee_id ascending. A NULL manager is not a departed manager."
+  },
+  "1988": {
+    "task": "SQL: Schools(school_id,capacity) and Exam(score,student_count). For each school, choose the smallest score cutoff whose corresponding student_count does not exceed capacity. Return school_id and score; use -1 when no cutoff is feasible. Verify whether student_count is already cumulative at or above score in the schema."
+  },
+  "1990": {
+    "task": "SQL: Experiments(experiment_id,platform,experiment_name). Return every combination of the three listed platforms Android/IOS/Web and experiments Reading/Sports/Programming, with num_experiments including zeros. Verify exact category literals."
+  },
+  "2004": {
+    "task": "SQL: Candidates(employee_id,experience,salary). With a total budget of 70000, hire as many Senior candidates as possible first, preferring cheaper candidates; then hire as many Junior candidates as the remaining budget permits. Return experience and accepted_candidates, including zeros for either category. Verify tie assumptions."
+  },
+  "2010": {
+    "task": "Using Candidates(employee_id,experience,salary) and budget 70000, select the maximum affordable number of Seniors first, then the maximum Juniors with the remaining budget, by increasing salary within category. Return the hired employee IDs rather than category counts. Verify salary-tie selection rules."
+  },
+  "2020": {
+    "task": "SQL: Subscriptions(account_id,start_date,end_date) and Streams(session_id,account_id,stream_date). Count distinct accounts with a subscription active at some point in 2021 but no stream in 2021. Return accounts_count. A subscription overlaps the year if its interval intersects that calendar year."
+  },
+  "2026": {
+    "task": "SQL: Problems(problem_id,likes,dislikes). Return problem IDs with like percentage strictly less than 60%, computed from likes/(likes+dislikes). Sort problem_id ascending. Verify the positive-total guarantee."
+  },
+  "2041": {
+    "task": "SQL: Candidates(candidate_id,name,years_of_exp,interview_id) and Rounds(interview_id,round_id,score). Return candidate_id for candidates with at least two years of experience and total interview-round score greater than 15. Verify both thresholds and strictness."
+  },
+  "2051": {
+    "task": "SQL: Members(member_id,name), Visits(visit_id,member_id,visit_date), Purchases(visit_id,charged_amount). Classify members by purchase-conversion rate across their visits, retaining members with no visits. The exact conversion definition, thresholds and category labels must be source-checked; this draft does not assert those details."
+  },
+  "2066": {
+    "task": "SQL: Transactions(account_id,day,type,amount). Return account_id, day and balance as cumulative deposits minus withdrawals for each account in chronological order. Verify transaction type literals and per-account/day uniqueness before selecting a window frame."
+  },
+  "2072": {
+    "task": "SQL: NewYork(student_id,score) and California(student_id,score). Count students with score at least 90 at each university. Return winner as New York University, California University or No Winner on a tie. Verify the exact threshold and result strings."
+  },
+  "2082": {
+    "task": "SQL: Store(bill_id,customer_id,amount). Return rich_count, the number of distinct customers with at least one bill amount greater than 500. Summing smaller purchases is not sufficient."
+  },
+  "2084": {
+    "task": "SQL: Orders(order_id,customer_id,order_type). For each customer, if any type-0 order exists, retain only their type-0 rows; otherwise retain their type-1 rows. Return all columns of retained orders."
+  },
+  "2112": {
+    "task": "SQL: Flights(departure_airport,arrival_airport,flights_count). For each airport, sum both arriving and departing flight counts. Return all airport IDs tied for greatest total traffic."
+  },
+  "2118": {
+    "task": "SQL: Terms(power,factor) gives polynomial terms. Build one equation string with terms in descending power order, explicit signs, appropriate X/exponent notation and '=0'. Verify exact formatting for coefficients \u00b11, powers 0/1 and zero terms; these output details cannot be inferred safely."
+  },
+  "2142": {
+    "task": "SQL: Buses(bus_id,arrival_time) and Passengers(passenger_id,arrival_time). Each passenger boards the earliest bus arriving no earlier than them; capacity is unlimited in this variant. Return bus_id and passengers_cnt for every bus, including zero, ordered by bus_id. A passenger may board only once."
+  },
+  "2153": {
+    "task": "SQL: Buses(bus_id,arrival_time,capacity) and Passengers(passenger_id,arrival_time). Process buses chronologically and board the earliest-arriving waiting passengers up to each capacity. Return bus_id and passengers_cnt for every bus; unboarded passengers remain for later buses. Verify simultaneous-arrival tie rules."
+  },
+  "2159": {
+    "task": "SQL: Data(first_col,second_col). Return first_col independently sorted ascending and second_col independently sorted descending, paired by resulting row position. Original row associations must not be preserved."
+  },
+  "2173": {
+    "task": "SQL: Matches(player_id,match_day,result). Return every player's longest consecutive winning-match streak as longest_streak, ordered by player_id. Draws or losses break a streak; days with no match do not. Players without wins have zero."
+  },
+  "2175": {
+    "task": "SQL: TeamPoints(team_id,name,points) and PointsChange(team_id,points_change). Rank teams by descending points with the specified name tie-break, then recompute after applying changes. Return each team's name and rank_diff as old rank minus new rank. Verify rank style and exact tie rules."
+  },
+  "2199": {
+    "task": "SQL: Keywords(topic_id,word) and Posts(post_id,content). Assign each post every topic whose keyword occurs as a whole word, case-insensitively, and return post_id with a sorted comma-separated topic list. Use Ambiguous! when no topic matches. Verify exact punctuation, token boundaries and output-column name."
+  },
+  "2205": {
+    "task": "SQL: Purchases(user_id,time_stamp,amount). Implement the requested stored function counting distinct users with an individual purchase of at least minAmount inside the supplied date interval. Verify function signature, interval inclusivity and whether it returns a count or IDs; this draft is not complete without that API."
+  },
+  "2228": {
+    "task": "SQL: Purchases(purchase_id,user_id,purchase_date). Return distinct user IDs with at least two purchases within seven days of one another, sorted by user_id. Verify whether an exact seven-day difference qualifies; same-day different purchases are separate events."
+  },
+  "2230": {
+    "task": "SQL: Purchases(user_id,time_stamp,amount). Return users qualifying for the supplied discount rule based on purchases during a requested interval. The exact difference from problem 2205, function signature and thresholds need source verification; do not implement by copying the adjacent title's contract."
+  },
+  "2238": {
+    "task": "SQL: Rides(ride_id,driver_id,passenger_id). For each person appearing as a driver, return driver_id and cnt, the number of rides in which that person appeared as passenger. Include drivers who were never passengers with zero."
+  },
+  "2252": {
+    "task": "SQL: Products(product_id,store,price). Produce a dynamic pivot with one row per product and one price column per distinct store. Store names are not known in advance. Verify stored-procedure signature, ordering and identifier escaping before implementation."
+  },
+  "2253": {
+    "task": "SQL: a Products table has product_id and dynamically named store-price columns. Unpivot existing non-NULL prices into product_id,store,price rows without hard-coding store names. Verify stored-procedure signature and schema-discovery constraints."
+  },
+  "2292": {
+    "task": "SQL: Orders(order_id,product_id,quantity,purchase_date). Return product IDs with at least three orders in each of two consecutive calendar years. Count orders, not summed quantity; a gap between qualifying years does not qualify."
+  },
+  "2298": {
+    "task": "SQL: Tasks(task_id,assignee_id,submit_date). Return weekend_cnt and working_cnt, counting submissions on Saturday/Sunday versus Monday-Friday. Use the calendar date's weekday, not locale-specific numeric assumptions."
+  },
+  "2308": {
+    "task": "SQL: Genders(user_id,gender). Arrange rows by ascending user_id within each gender, interleaving the specified gender groups round-robin. The exact gender order, allowed categories and equal-size guarantee require source verification."
+  },
+  "2314": {
+    "task": "SQL: Weather(city_id,day,degree). For each city, return its highest observed degree and the earliest day on which that maximum occurred. Return city_id, day and degree ordered by city_id."
+  },
+  "2324": {
+    "task": "SQL: Sales(sale_id,product_id,user_id,quantity) and Product(product_id,price). Return user_id and product_id for products tied for each user's greatest total spending, where spending sums quantity*price across that user's purchases. Verify exact schema and output aliases."
+  },
+  "2329": {
+    "task": "SQL: Sales(sale_id,product_id,user_id,quantity) and Product(product_id,price). Return each user's total spending, summing quantity*price over all sales, ordered by spending descending with the specified user-ID tie-break. Verify the schema/ordering contract before certification."
+  },
+  "2339": {
+    "task": "SQL: Teams(team_name). Return every ordered pair of different teams as home_team and away_team so each pair plays once in each hosting direction. A team must not play itself."
+  },
+  "2346": {
+    "task": "SQL: Students(student_id,department_id,mark). For each student, compute their percentile rank within the department from descending marks, with equal marks sharing rank. Return student_id,department_id and percentage rounded to two decimals. Verify the singleton-department rule and exact percent-rank formula."
+  },
+  "2362": {
+    "task": "SQL: Products(product_id,price) and Purchases(invoice_id,product_id,quantity). Choose the invoice with greatest total price*quantity, ties by smallest invoice_id. Return its product_id, quantity and line price (quantity*unit price) for all lines. Verify the expected price-column semantics."
+  },
+  "2372": {
+    "task": "SQL: Salesperson(salesperson_id,name), Customer(customer_id,salesperson_id) and Sales(sale_id,customer_id,price). Return every salesperson's salesperson_id,name and total, summing prices of sales made by their customers, including zero for no sales."
+  },
+  "2377": {
+    "task": "SQL: Olympic(country,gold_medals,silver_medals,bronze_medals). Return all rows ordered by gold descending, then silver descending, then bronze descending, then country ascending."
+  },
+  "2388": {
+    "task": "SQL: CoffeeShop(id,drink). Fill each NULL drink with the closest preceding non-NULL drink in the table's defined row order. Return id and filled drink. Verify that id defines that order and the first row is non-NULL before selecting a window solution."
+  },
+  "2394": {
+    "task": "SQL: Employees(employee_id,needed_hours) and Logs(employee_id,in_time,out_time). Round each session's elapsed time up to a whole minute, sum minutes per employee and return IDs whose total is below needed_hours*60. Include employees without logs. Verify the per-session rounding rule."
+  },
+  "2474": {
+    "task": "SQL: Orders(order_id,customer_id,order_date,price). Return customer IDs whose annual total spending is strictly increasing across consecutive years in their observed history. Verify minimum history length and whether missing years disqualify them rather than being skipped."
+  },
+  "2480": {
+    "task": "SQL: Elements(symbol,type,electrons). Return valid metal/nonmetal pairs that can form the specified chemical bond, using the source's electron rule. The exact element fields, bonding criterion and output aliases are not reliably known from memory; this draft needs the source."
+  },
+  "2494": {
+    "task": "SQL: HallEvents(hall_id,start_day,end_day). Within each hall, merge overlapping inclusive event intervals and return maximal merged intervals. Verify whether directly adjacent nonoverlapping dates must also merge; do not silently treat adjacency as overlap."
+  },
+  "2504": {
+    "task": "SQL: Person(person_id,name,profession). Return person_id and a display name combining name with the first profession letter in parentheses, such as Name(P). Sort as required by the source; verify spacing and ordering rather than inventing presentation rules."
+  },
+  "2668": {
+    "task": "SQL: Salary(employee_id,name,salary), where repeated employee records represent salary increases. Return the latest salary record per employee by choosing their greatest salary, ordered by employee_id. This inference relies on the source guarantee that salaries only increase, not an implicit timestamp."
+  },
+  "2669": {
+    "task": "SQL: SpotifyRanking(id,artist,track,position). Count how many ranking records each artist appears in and return artist and occurrences, sorted by occurrences descending and artist ascending. Verify whether distinct tracks rather than rows are requested."
+  },
+  "2686": {
+    "task": "SQL: Delivery(delivery_id,customer_id,order_date,customer_pref_delivery_date). For each order_date, return the percentage of deliveries whose preferred date equals order_date, rounded to two decimals, ordered by date. All orders on the date form the denominator."
+  },
+  "2687": {
+    "task": "SQL: Bikes(ride_id,bike_number,start_time,end_time). Return bike_number and latest end_time for every bike, sorted by that latest time descending. Verify the required alias for the returned timestamp."
+  },
+  "2688": {
+    "task": "SQL: Users(user_id,item,created_at,amount). Return distinct user IDs with a repeat purchase within seven days of another purchase. Verify the exact input table name, date versus timestamp semantics and inclusive day boundary."
+  },
+  "2701": {
+    "task": "SQL: Transactions(transaction_id,customer_id,transaction_date,amount). Return maximal customer runs spanning at least three consecutive dates with strictly increasing daily transaction amounts. Verify the one-transaction-per-customer/day guarantee and exact start/end output columns before certification."
+  },
+  "2720": {
+    "task": "SQL: Friends(user1,user2) stores friendships. Treat them as undirected and return each user's friend count divided by total distinct users, times 100, rounded to two decimals. Verify the exact denominator and output-column names, including whether isolated users are represented."
+  },
+  "2738": {
+    "task": "SQL: Files(file_name,content). Count whole-word occurrences of the specified words bull and bear across content, respecting the source's case/word-boundary rules, and return a row for each word including zero. Verify whether the task counts files containing a word or every occurrence; this distinction remains unresolved."
+  },
+  "2752": {
+    "task": "SQL: Transactions(transaction_id,customer_id,transaction_date,amount). Find each customer's longest run of consecutive transaction dates, counting each date once, and return customers tied for the greatest run across all customers. Verify whether the requested measure is transaction count or consecutive days before certification."
+  },
+  "2783": {
+    "task": "SQL: Flights(flight_id,capacity) and Passengers(passenger_id,flight_id). For each flight, return booked_cnt limited by capacity and waitlist_cnt for excess passengers. Include flights without bookings; verify the required output aliases."
+  },
+  "2793": {
+    "task": "SQL: Flights(flight_id,capacity) and Passengers(passenger_id,flight_id,booking_time). Order bookings within each flight chronologically and label the first capacity passengers Confirmed and the rest Waitlist. Return passenger_id and Status, with the source's ordering and exact labels; verify booking-time tie guarantees."
+  },
+  "2820": {
+    "task": "SQL: Votes(voter,candidate). Each voter contributes one total vote split equally among all candidates they voted for; ignore NULL candidate choices. Return all candidates tied for greatest total vote, ordered alphabetically. Verify duplicate voter/candidate guarantees before assigning fractional shares."
+  },
+  "2837": {
+    "task": "SQL: Users(user_id,name) and Rides(ride_id,user_id,distance). Return each user_id,name and traveled distance sum, including zero for no rides, sorted by user_id. Verify the exact distance-total alias."
+  },
+  "2853": {
+    "task": "SQL: Salaries(employee_id,employee_name,salary,department). Return the absolute difference between the largest salary in Marketing and the largest in Engineering. Verify department spelling/case and whether both departments are guaranteed to exist."
+  },
+  "2854": {
+    "task": "SQL: Steps(user_id,steps_count,steps_date). Return each qualifying date's average steps over that date and the preceding two consecutive calendar dates for the same user, rounded to two decimals. Omit windows with missing dates; a three-row window across a gap is invalid."
+  },
+  "2893": {
+    "task": "SQL: Orders(order_id,customer_id,order_type) or a time-stamped order schema supplies interval aggregates. The exact schema, interval construction and requested outputs are not reliably known from memory. Do not implement from the title or confuse this problem with order-type filtering; obtain its statement first."
+  },
+  "2922": {
+    "task": "SQL: Users(user_id,join_date,favorite_brand), Orders(order_id,order_date,item_id,buyer_id,seller_id), Items(item_id,item_brand). Identify sellers meeting the stated brand-diversity sales criterion. The exact criterion and output are unresolved from memory; this is not an implementation-ready specification."
+  },
+  "2978": {
+    "task": "SQL: Coordinates(X,Y). Return pairs (X,Y) having a counterpart (Y,X), with X<=Y; diagonal pairs require two distinct input rows. Return each qualifying pair once, sorted by X then Y. Verify duplicate-count handling from the source."
+  },
+  "2985": {
+    "task": "SQL: Orders(order_id,item_count,order_occurrences) or the source's compressed-count schema represents repeated order sizes. Return the weighted mean of items per order, sum(item_count*frequency)/sum(frequency), rounded to two decimals. Verify exact column names and whether order_id is present."
+  },
+  "2986": {
+    "task": "SQL: Transactions(user_id,spend,transaction_date). Return each user's third transaction only when its spending exceeds each of the first two transactions. Include user_id, third_transaction_spend and third_transaction_date; verify chronological tie guarantees."
+  },
+  "2987": {
+    "task": "SQL: Listings(listing_id,city,price). Return cities whose average listing price exceeds the overall average across all listings, sorted by city. The overall mean is row-weighted, not the unweighted mean of city means."
+  },
+  "2988": {
+    "task": "SQL: Employees(emp_id,emp_name,dep_id,position). Return managers of the department(s) with the greatest employee count. Verify exact manager-position literal, whether ties are retained, and output columns before certification."
+  },
+  "2989": {
+    "task": "SQL: Scores(student_id,student_name,assignment1,assignment2,assignment3). Compute each student's total assignment score and return the difference between the greatest and least totals. Verify exact column names and the output alias."
+  },
+  "2990": {
+    "task": "SQL: Loans(loan_id,user_id,loan_type). Return users who have both a Mortgage loan and a Refinance loan, ordered by user_id. Other loan types do not disqualify them; verify the type literals."
+  },
+  "2993": {
+    "task": "SQL: Purchases(user_id,purchase_date,amount_spend). For Fridays in November 2023, aggregate spending per date and report its week-of-month number, purchase_date and total_amount. Verify the required date range and numbering convention; do not substitute the current month."
+  },
+  "2994": {
+    "task": "SQL: Purchases(user_id,purchase_date,amount_spend). Return every Friday in November 2023, including dates without purchases with total zero, along with its week-of-month number and spending sum. This variant differs from reporting only observed purchase dates."
+  },
+  "2995": {
+    "task": "SQL: Sessions(user_id,session_start,session_end,session_id,session_type). Find users whose first session was a Viewer session and return their later Streamer session count. Verify whether users with no subsequent streams are included and the required tie/output rules."
+  },
+  "3050": {
+    "task": "SQL: Toppings(topping_name,cost). Generate every combination of three distinct topping names, list names alphabetically within a comma-separated pizza description, and sum their costs. Sort total_cost descending then pizza ascending. Verify exact separator formatting."
+  },
+  "3051": {
+    "task": "SQL: Candidates(candidate_id,skill). Return candidates who have all three required skills Python, Tableau and PostgreSQL, ordered by candidate_id. Additional skills do not disqualify a candidate."
+  },
+  "3052": {
+    "task": "SQL: Inventory(item_id,item_type,item_category,square_footage). With the stated warehouse capacity, maximize the number of complete prime-eligible item sets first, then complete non-prime sets from remaining space. Verify the fixed capacity, category grouping and output counts before certification."
+  },
+  "3053": {
+    "task": "SQL: Triangles(A,B,C). Classify each row as Not A Triangle if triangle inequalities fail, otherwise Equilateral, Isosceles or Scalene according to equal side lengths. Invalid-triangle classification takes precedence. Verify the exact output alias/string capitalization."
+  },
+  "3054": {
+    "task": "SQL: Tree(N,P). Return each node as Root when its parent is NULL, Inner when it has children, otherwise Leaf. Sort by N. Root takes precedence for a one-node tree; verify schema aliases against this variant."
+  },
+  "3055": {
+    "task": "SQL: Fraud(policy_id,state,fraud_score). Return policies in the top five percent of fraud scores within each state according to the source's percentile/rank rule. Exact treatment of ties, rounding and small state groups requires source verification."
+  },
+  "3056": {
+    "task": "SQL: Activities(activity_id,user_id,activity_type,time_spent,activity_date) and Age(age_bucket,user_id). For each age bucket, compute percentages of time spent sending and opening snaps out of sending+opening time, rounded to two decimals. Other activity types do not enter the denominator; verify exact type literals."
+  },
+  "3057": {
+    "task": "SQL: Project(project_id,employee_id,workload) and Employees(employee_id,name,team). Return employees whose workload on a project exceeds their team's average employee workload, including employee/name and project details as specified. The precise averaging population and output fields need source verification."
+  },
+  "3058": {
+    "task": "SQL: Friends(user_id1,user_id2) stores undirected friendships. Return existing friend pairs with no common friend. Normalize endpoints and deduplicate pairs; a common friend must be distinct from both endpoints."
+  },
+  "3059": {
+    "task": "SQL: Emails(id,email). Extract each distinct email domain with the requested suffix and count matching records per domain. The exact suffix, case handling and output ordering must be checked against the source rather than inferred from the title."
+  },
+  "3060": {
+    "task": "SQL: Sessions(session_id,user_id,session_type,start_time,end_time). Identify users whose repeated sessions satisfy the stated elapsed-time bound. The exact activity-type, interval comparison and threshold are not reliably known; obtain the source before implementation."
+  },
+  "3087": {
+    "task": "SQL: Tweets(tweet_id,user_id,tweet_date,tweet). Extract hashtags and return the top three by occurrence count in the specified month, with the source's tie ordering. Verify the exact month, hashtag grammar and whether each tweet contains one or several tags."
+  },
+  "3103": {
+    "task": "SQL: Tweets(tweet_id,user_id,tweet_date,tweet). Count hashtags when a tweet may contain multiple tags and return the requested top-ranked tags. Verify date filtering, repeated-tag treatment and tie ordering; do not copy the single-hashtag variant's assumptions."
+  },
+  "3118": {
+    "task": "SQL: Purchases(user_id,purchase_date,amount_spend) and Users(user_id,membership). For the specified November 2023 Fridays, aggregate spending by membership category, including required zero-value combinations. Verify the exact membership groups, date range and output columns."
+  },
+  "3124": {
+    "task": "SQL: Contacts(id,first_name,last_name) and Calls(contact_id,type,duration). Return the longest three calls for each call type, with formatted duration and contact name. Verify tie treatment, input/output type labels and exact duration/name formatting."
+  },
+  "3126": {
+    "task": "SQL: Servers(server_id,status_time,session_status) records start/stop events. Pair events for each server, sum all running seconds across servers and return total whole days of uptime. Verify allowed event order, unclosed-session behavior and floor/rounding requirement."
+  },
+  "3140": {
+    "task": "SQL: Cinema(seat_id,free). Return the longest run or runs of adjacent free seats as the source specifies. Exact output requires confirming whether to return endpoint IDs, every seat in tied longest runs, or run length; this draft is incomplete."
+  },
+  "3150": {
+    "task": "SQL: Tweets(tweet_id,content). Return invalid tweets based on the task's length, hashtag and mention limits. The exact limits and counting grammar are not reliably known; do not reuse the fifteen-character rule of problem 1683 without a source."
+  },
+  "3156": {
+    "task": "SQL: Tasks(task_id,employee_id,start_time,end_time). For each employee, calculate total time covered by at least one task and their maximum simultaneous-task count. Overlaps must not be double-counted in covered time. Verify output units, rounding and endpoint concurrency semantics."
+  },
+  "3166": {
+    "task": "SQL: ParkingTransactions(transaction_id,car_id,lot_id,entry_time,exit_time,fee_paid). Return per-car total fees, average hourly rate and the lot where it spent the most time. Verify rate weighting, rounding and lot tie-break rules before certification."
+  },
+  "3172": {
+    "task": "SQL: Emails(email_id,user_id,signup_date) and Texts(text_id,email_id,signup_action,action_date). Return users whose Verified text action occurred on the calendar day after signup. Deduplicate users and verify whether exact 24-hour differences or calendar dates are intended."
+  },
+  "3182": {
+    "task": "SQL: Students(student_id,name,major), Courses(course_id,name,credits,major) and Enrollments(student_id,course_id,semester,grade). Identify students meeting the source's all-required-course grade criterion. Exact grade threshold, course matching and repeated-enrollment treatment need source verification."
+  },
+  "3188": {
+    "task": "Using Students, Courses and Enrollments, identify students meeting the extended major-course, elective-course and GPA requirements. The exact thresholds and required/elective definitions are not reliably known; this draft is not implementation-ready."
+  },
+  "3198": {
+    "task": "SQL: Cities(state,city). Return each state and its alphabetically ordered comma-separated city list, sorted by state. Verify separator spacing and uniqueness of city rows."
+  },
+  "3204": {
+    "task": "SQL: user_permissions(user_id,permissions). Return the bitwise AND and bitwise OR of permissions over all users. Verify the exact required output aliases and behavior for an empty table."
+  },
+  "3214": {
+    "task": "SQL: user_transactions(transaction_id,product_id,spend,transaction_date). Aggregate annual spending per product, report current-year spend, prior-year spend and percentage growth rounded as specified. Verify whether prior-year means the preceding calendar year or preceding observed year and how zero/missing prior spend is handled."
+  },
+  "3220": {
+    "task": "SQL: transactions(transaction_id,amount,transaction_date). For each date, separately sum odd-valued and even-valued transaction amounts, using zero when a category is absent. Return transaction_date and both sums sorted by date."
+  },
+  "3230": {
+    "task": "SQL: Transactions(transaction_id,customer_id,product_id,transaction_date,amount) and Products(product_id,category,price). Produce each customer's spending, transaction count, distinct-category count and most-purchased category. Verify tie-breaks, average/rounding requirements and exact output schema before implementation."
+  },
+  "3236": {
+    "task": "SQL: Employees(employee_id,employee_name,manager_id,salary). Starting at the CEO, compute hierarchy level and aggregate subordinate metrics required by the source. The exact salary aggregation, descendant-count definition and sorting rules must be verified; do not infer them solely from the title."
+  },
+  "3246": {
+    "task": "SQL: TeamStats(team_id,team_name,matches_played,wins,draws,losses). Compute points as 3*wins+draws and rank teams by points descending using the specified tie ranking. Verify whether rank gaps and team-name tie-breaks are required."
+  },
+  "3252": {
+    "task": "Using TeamStats, compute league points and rankings with the additional variant-II output. The exact additional placement tiers or ranking tie rules must be source-checked; do not treat variants I and II as identical."
+  },
+  "3262": {
+    "task": "SQL: EmployeeShifts(employee_id,start_time,end_time). Return employees with overlapping shift pairs and the number of overlaps. Verify whether touching endpoints overlap and whether each unordered pair counts once."
+  },
+  "3268": {
+    "task": "SQL: EmployeeShifts(employee_id,start_time,end_time). Compute the source's extended overlap statistics per employee. Exact requirements for maximum concurrent shifts, overlap duration and inclusion of nonoverlapping employees need source verification."
+  },
+  "3278": {
+    "task": "SQL: Candidates(candidate_id,skill,proficiency) and Projects(project_id,skill,importance). Rank candidates for each project based on skill coverage and the prescribed proficiency/importance score. The exact scoring formula, eligibility rule and tie-break are not recalled reliably; obtain the source."
+  },
+  "3293": {
+    "task": "SQL: Products(product_id,price) and Discounts(category,discount) or the exact source schema. Compute product prices after applicable discounts. Exact category matching, discount units and rounding are unresolved; do not implement using these provisional field names."
+  },
+  "3308": {
+    "task": "SQL: Drivers(driver_id,name), Vehicles(vehicle_id,driver_id,type) and Trips(trip_id,vehicle_id,distance,duration,rating). Rank drivers within the required grouping by aggregate performance. Exact metrics, grouping, thresholds and ties require the statement; this draft is incomplete."
+  },
+  "3322": {
+    "task": "Using league team statistics, produce the third variant's points, ranking and additional categorization. Exact schema, category thresholds and tie rules are not reliably known; do not derive this variant from its title."
+  },
+  "3328": {
+    "task": "SQL: Cities(state,city). Group cities by state and produce the required formatted lists and qualifying-state filters. The variant-II filtering condition and sort criteria need source verification; do not assume it is merely the same as 3198."
+  },
+  "3338": {
+    "task": "SQL: Employees(emp_id,name,salary,dept). Return the second-highest distinct salary within each department with the source's required employee details. Verify whether departments without two distinct salaries are omitted and whether all tied employees appear."
+  },
+  "3358": {
+    "task": "SQL: Books(book_id,title,author,published_year,rating). Return books with NULL ratings, rather than numerical zero ratings. Verify exact selected columns and output ordering against the source."
+  },
+  "3368": {
+    "task": "SQL: content records include text to normalize with an uppercase initial character and lowercase remaining characters. Verify whether capitalization applies to each word or only the entire string and the exact input/output columns; these are not determined by the title."
+  },
+  "3374": {
+    "task": "SQL: normalize text capitalization with the variant-II handling of word separators such as hyphens. Exact delimiter rules, preservation of whitespace and output columns require source verification."
+  },
+  "3415": {
+    "task": "SQL: Products(product_id,product_name,description). Return products whose description contains the required pattern of three consecutive digits. Verify whether longer digit runs qualify and whether serial-prefix/suffix constraints are present."
+  },
+  "3421": {
+    "task": "SQL: Scores(student_id,subject,score,exam_date). Compare each student's first and latest score in each subject and return improved cases. Verify whether at least two exam dates are required and the exact output aliases/order."
+  },
+  "3436": {
+    "task": "SQL: Users(user_id,email). Return users with email addresses satisfying the specific allowed-name and domain pattern. The exact prefix characters and domain restrictions differ across email-validation problems; source verification is required."
+  },
+  "3450": {
+    "task": "SQL: Students(student_id,bench_id). Return the largest number of distinct students assigned to one bench. Repeated student/bench rows should be deduplicated under the remembered contract; verify exact output alias."
+  },
+  "3451": {
+    "task": "SQL: logs(log_id,ip,status_code). Identify invalid IPv4 strings using the source's octet-count, leading-zero and numeric-range rules, then report each invalid IP with its occurrence count in the required order. Verify malformed-character handling and selected output columns."
+  },
+  "3465": {
+    "task": "SQL: products(product_id,product_name,description). Return products containing a serial number matching the specified prefix, digit groups and boundaries. The exact serial-number pattern is not reliably known; do not invent a regex from the title."
+  },
+  "3475": {
+    "task": "SQL: Samples(sample_id,dna_sequence,species). For each sample, compute flags for the task's start/end codons, repeated-character run and other DNA patterns. The exact patterns and flag column names need the official requirements."
+  },
+  "3482": {
+    "task": "SQL: Employees(employee_id,employee_name,manager_id,salary,department). Compute hierarchical levels, descendant team sizes and salary budgets as defined by the task, including the root. Verify whether metrics include the employee, tie ordering and root assumptions."
+  },
+  "3497": {
+    "task": "SQL: user_activity(user_id,activity_date,activity_type,activity_duration). Compare each converted user's average activity duration during free-trial and paid phases. Verify phase labels, aggregation, required rounding and which users qualify as converted."
+  },
+  "3521": {
+    "task": "SQL: ProductPurchases(user_id,product_id,quantity) and ProductInfo(product_id,category,price). Recommend product pairs based on their common purchasing users. Exact minimum common-user count, category constraints and sort order need source verification."
+  },
+  "3554": {
+    "task": "SQL: product purchase and category tables support category-pair recommendations. Aggregate distinct shared purchasers and apply the task's thresholds and ordering. Exact schema, threshold and whether same-category pairs are excluded remain unverified."
+  },
+  "3564": {
+    "task": "SQL: sales and products tables record dates, quantities, prices and categories. Group revenue/sales by the task's seasons and select the leading category per season using prescribed tie-breaks. Verify season definitions, metric priority and exact output columns."
+  },
+  "3570": {
+    "task": "SQL: library_books(book_id,title,author,genre,publication_year,total_copies) and borrowing_records(record_id,book_id,borrower_name,borrow_date,return_date). Find books whose currently unreturned borrow count exhausts all copies. Verify the exact schema and whether count must equal or may exceed total_copies."
+  },
+  "3580": {
+    "task": "SQL: employees and performance_reviews contain review dates and ratings. Find employees whose most recent three reviews strictly improve and report the requested improvement. Verify the minimum review count, date ties and whether improvement is latest-minus-earliest among those three."
+  },
+  "3586": {
+    "task": "SQL: patients and covid_tests describe dated positive/negative results. Find patients recovering from a positive test to a later negative and report the requested recovery duration. The exact first-positive/first-negative pairing and output ordering need source verification."
+  },
+  "3601": {
+    "task": "SQL: drivers and trips contain trip dates, distances and fuel consumption. Compare drivers' early- and late-period fuel efficiency under the specified split and return improvements. Verify whether efficiency is average trip ratios or total distance divided by total fuel, and the exact date split."
+  },
+  "3611": {
+    "task": "SQL: employees and meetings describe scheduled intervals. Identify overbooked employees using the task's overlap or working-hours definition. Exact thresholds, time units and qualifying counts are not reliably known; source required."
+  },
+  "3617": {
+    "task": "SQL: student study sessions record subjects, dates and duration. Detect the specified study-spiral pattern. Exact cycle length, subject order, time constraints and repetition threshold are unresolved; do not infer them from the title."
+  },
+  "3626": {
+    "task": "SQL: store inventory and product tables support identifying stores with the specified imbalance between product prices and stock levels. Exact comparison, ties and minimum assortment size must be sourced before implementation."
+  },
+  "3642": {
+    "task": "SQL: books and review tables support identifying titles with polarized opinions. Exact minimum-review count, high/low rating thresholds, spread metric and sorting require source verification."
+  },
+  "3657": {
+    "task": "SQL: customers and transaction history support identifying loyal customers. The task's spending, recency, activity-window and refund criteria are not reliably known. Obtain the source before writing an implementation."
+  },
+  "3673": {
+    "task": "SQL: sessions or event logs support detecting zombie sessions. The exact session-duration, activity and conversion conditions are not reliably known; a title-only reconstruction would be speculative."
+  },
+  "3705": {
+    "task": "SQL: customer orders support identifying golden-hour customers. The qualifying hour windows, minimum order count and ratio thresholds are not recalled reliably; source required."
+  },
+  "3716": {
+    "task": "SQL: subscription/customer activity supports finding churn-risk customers. The exact inactivity window, subscription status and risk thresholds are not reliably known; source required."
+  },
+  "1516": {
+    "task": "Move node p and its subtree to the end of node q's child list in an N-ary tree with unique node values. If p is already a direct child of q, leave the tree unchanged. If q lies inside p's subtree, detach q first and put it in p's former position, then attach p beneath q, so no nodes are lost and no cycle is introduced. Return the possibly changed root.",
+    "supportingSources": [
+      "https://leetcode.doocs.org/en/lc/1516/"
+    ],
+    "sourceReview": "Public reference consulted for core rules; incomplete official-source verification."
+  },
+  "1666": {
+    "task": "Reroot a binary tree at a specified leaf. Along the original leaf-to-root path, reverse each parent link: the old parent becomes the current node's left child, moving an existing off-path left child to the right when necessary. Remove the old downward links. Update all parent pointers and return the leaf as the new root.",
+    "supportingSources": [
+      "https://leetcode.doocs.org/en/lc/1666/"
+    ],
+    "sourceReview": "Public reference consulted for core rules; incomplete official-source verification."
+  },
+  "1714": {
+    "task": "For each query [start,step], sum nums[start], nums[start+step], and so on while the index remains inside nums. Return the query sums modulo 1000000007. Queries do not modify the array.",
+    "supportingSources": [
+      "https://leetcode.doocs.org/en/lc/1714/"
+    ],
+    "sourceReview": "Public reference consulted for core rules; incomplete official-source verification."
+  },
+  "1924": {
+    "task": "Given planar tree coordinates, find a circle of minimum radius enclosing every point, with boundary points allowed. Return its center coordinates and radius. Floating-point tolerance and exact output ordering require interface verification.",
+    "supportingSources": [
+      "https://leetcode.doocs.org/en/lc/1924/"
+    ],
+    "sourceReview": "Public reference consulted for core rules; incomplete official-source verification."
+  },
+  "1956": {
+    "task": "Each entry in points seeds a distinct virus variant on an infinite integer grid at day zero; several variants may start together. Each day every variant spreads independently to four neighboring cells while remaining in infected cells. Return the earliest integer day when some cell contains at least k distinct variants.",
+    "supportingSources": [
+      "https://leetcode.doocs.org/en/lc/1956/"
+    ],
+    "sourceReview": "Public reference consulted for core rules; incomplete official-source verification."
+  },
+  "2005": {
+    "task": "A Fibonacci tree of order zero is empty; order one is a single node; order n has a root with subtrees of orders n-2 and n-1. Alice and Bob alternate removing a chosen node and all its descendants, with Alice first. The player who removes the root loses. Return whether Alice wins under optimal play for the supplied order.",
+    "supportingSources": [
+      "https://leetcode.doocs.org/en/lc/2005/"
+    ],
+    "sourceReview": "Public reference consulted for core rules; incomplete official-source verification."
+  },
+  "2113": {
+    "task": "Begin with nums. At successive seconds remove the leftmost remaining element until the array is empty, then restore removed elements in their original order until the original array is reconstructed; repeat this cycle. For each [time,index] query return the element at that index at the specified time, or -1 when the index does not exist. Verify the exact restoration direction and time-zero convention before implementation."
+  },
+  "2143": {
+    "task": "For each nonempty contiguous index range of two equal-length arrays, choose exactly one of nums1[i] and nums2[i] at every index. Count choices for which the sum selected from nums1 equals the sum selected from nums2. Different endpoints or different array choices at any index count separately, even when selected values match. Return the total modulo 1000000007.",
+    "supportingSources": [
+      "https://leetcode.doocs.org/en/lc/2143/"
+    ],
+    "sourceReview": "Public reference consulted for core rules; incomplete official-source verification."
+  },
+  "2189": {
+    "task": "Build a house using exactly n cards. A row of t upright two-card triangles uses t-1 horizontal cards between them. Every upper triangle must stand on a horizontal card below, and rows are packed leftward. Count distinct sequences of row sizes forming a valid house; differing triangle counts in any row distinguish houses.",
+    "supportingSources": [
+      "https://leetcode.doocs.org/en/lc/2189/"
+    ],
+    "sourceReview": "Public reference consulted for core rules; incomplete official-source verification."
+  },
+  "2198": {
+    "task": "Count ordered triples of pairwise distinct indices such that the sum of their three positive values is divisible by exactly one of those three values. Equal-valued elements still have different indices, and divisibility is checked separately for each selected element."
+  },
+  "2524": {
+    "task": "For a length-k subarray, sum x raised to its frequency for every distinct value x, then reduce the sum modulo 1000000007. Return the largest resulting residue among all length-k windows. Compare reduced scores, not unreduced powers.",
+    "supportingSources": [
+      "https://leetcode.doocs.org/en/lc/2524/"
+    ],
+    "sourceReview": "Public reference consulted for core rules; incomplete official-source verification."
+  },
+  "2613": {
+    "task": "Treat corresponding entries of nums1 and nums2 as planar points. Return indices [i,j], i<j, minimizing abs(nums1[i]-nums1[j])+abs(nums2[i]-nums2[j]). Among equal-distance pairs choose the lexicographically smallest index pair.",
+    "supportingSources": [
+      "https://leetcode.doocs.org/en/lc/2613/"
+    ],
+    "sourceReview": "Public reference consulted for core rules; incomplete official-source verification."
+  },
+  "2647": {
+    "task": "An equilateral triangle of side n is divided into n squared unit triangles. Row i has 2i-1 triangles, indexed from one. Choose an initial set to color red; subsequently any white triangle with at least two red side-sharing neighbors becomes red. Return coordinates of a smallest initial set that eventually colors the entire triangle. Any optimal set is accepted.",
+    "supportingSources": [
+      "https://leetcode.doocs.org/en/lc/2647/"
+    ],
+    "sourceReview": "Public reference consulted for core rules; incomplete official-source verification."
+  },
+  "2753": {
+    "task": "Count houses on an unknown circular street using the supplied Street interface and an upper bound k on the house count. At least one door starts open. Available actions are closeDoor(), isDoorOpen(), and moveRight(); you cannot inspect the hidden house array or open doors. Return the exact number of houses.",
+    "supportingSources": [
+      "https://leetcode.doocs.org/en/lc/2753/"
+    ],
+    "sourceReview": "Public reference consulted for core rules; incomplete official-source verification."
+  },
+  "2792": {
+    "task": "In a binary tree, count nodes having at least k nodes of strictly smaller value in their own subtree. A subtree includes its root, but the root cannot qualify as smaller than itself. Equal values do not contribute to the smaller-node count.",
+    "supportingSources": [
+      "https://leetcode.doocs.org/en/lc/2792/"
+    ],
+    "sourceReview": "Public reference consulted for core rules; incomplete official-source verification."
+  },
+  "2819": {
+    "task": "For each independent query [k,m], select exactly m chocolates. Bob pays min(price,k) for each chosen chocolate and Alice pays the remainder. Minimize Bob's total payment minus Alice's total payment. Return the minimum relative loss for each query; negative answers are valid.",
+    "supportingSources": [
+      "https://leetcode.doocs.org/en/lc/2819/"
+    ],
+    "sourceReview": "Public reference consulted for core rules; incomplete official-source verification."
+  },
+  "2868": {
+    "task": "Alice and Bob have sorted lists of distinct lowercase words. Alice opens with her smallest word. Thereafter players alternate choosing a word from their own list lexicographically larger than the previous word, whose first letter is either the same or the immediately following alphabet letter. A player without a legal word loses. Return whether Alice wins with optimal play.",
+    "supportingSources": [
+      "https://leetcode.doocs.org/en/lc/2868/"
+    ],
+    "sourceReview": "Public reference consulted for core rules; incomplete official-source verification."
+  },
+  "2907": {
+    "task": "Choose indices i<j<k with strictly increasing prices. Maximize profits[i]+profits[j]+profits[k], and return -1 if no valid triplet exists. Prices and profits correspond to the same ordered items.",
+    "supportingSources": [
+      "https://leetcode.doocs.org/en/lc/2907/"
+    ],
+    "sourceReview": "Public reference consulted for core rules; incomplete official-source verification."
+  },
+  "2912": {
+    "task": "On an n-by-m grid, each move goes to a different cell in the same row or column, with no limit on distance. Count sequences of exactly k moves from source to destination, modulo 1000000007. Remaining in place is not a move; positions use the supplied one-based coordinates.",
+    "supportingSources": [
+      "https://leetcode.doocs.org/en/lc/2912/"
+    ],
+    "sourceReview": "Public reference consulted for core rules; incomplete official-source verification."
+  },
+  "2921": {
+    "task": "Choose indices i<j<k with strictly increasing prices and maximize the sum of their profits. Return -1 if no qualifying triplet exists. This variant needs an efficient implementation for larger inputs; verify its numeric bounds separately from problem 2907.",
+    "supportingSources": [
+      "https://leetcode.doocs.org/en/lc/2921/"
+    ],
+    "sourceReview": "Public reference consulted for core rules; incomplete official-source verification."
+  },
+  "2927": {
+    "task": "Distribute n identical candies among three distinguishable children, giving each between zero and limit candies inclusive. Return the number of ordered triples of amounts whose sum is n."
+  },
+  "2936": {
+    "task": "A nondecreasing hidden integer array is accessible only through a supplied BigArray interface providing size() and at(index). Return the number of maximal contiguous blocks of equal values. Do not inspect the hidden backing array; exploit its sorted order when the virtual array is very large."
+  },
+  "2941": {
+    "task": "Among contiguous subarrays of length at least k, maximize the product of the subarray's greatest common divisor and its element sum. Return that maximum product."
+  },
+  "2950": {
+    "task": "Assign lowercase letters weights: a,b map to 1; c,d,e to 2; f,g,h to 3; i,j,k to 4; l,m,n to 5; o,p,q to 6; r,s,t to 7; u,v,w to 8; x,y,z to 9. Count nonempty substrings whose weight sum is divisible by their length."
+  },
+  "2955": {
+    "task": "For each inclusive range [l,r] of a string, count nonempty substrings wholly inside that range whose first and last characters are equal. Single-character substrings qualify. Return one count per query."
+  },
+  "2964": {
+    "task": "Count triples of indices i<j<k whose element sum is divisible by the supplied positive divisor d. Triples are distinguished by their indices, including when values repeat."
+  },
+  "2969": {
+    "task": "Fruits are ordered and have purchase prices. Buying fruit i using one-based indexing makes the next i fruits available free. You may still buy a free-eligible fruit to obtain its own offer. Return the minimum cost to obtain all fruits. This is the larger-input variant of the fruit-offer task."
+  },
+  "2979": {
+    "task": "Two distinct prime coin denominations are available in unlimited quantities. Return the largest positive integer cost that cannot be paid using a nonnegative integer number of either coin."
+  },
+  "2992": {
+    "task": "Count permutations of integers 1 through n such that gcd(position,value)=1 at every one-based position. Return the number of qualifying permutations.",
+    "supportingSources": [
+      "https://leetcode.ca/2024-01-07-2992-Number-of-Self-Divisible-Permutations/"
+    ]
+  },
+  "3004": {
+    "task": "Root the given tree at node zero. Return the largest complete descendant subtree whose nodes all have the same color. All descendants must be included; an arbitrary connected monochromatic component is not sufficient.",
+    "supportingSources": [
+      "https://leetcode.doocs.org/en/lc/3004/"
+    ],
+    "sourceReview": "Core corrected from public reference; exact official bounds remain pending."
+  },
+  "3009": {
+    "task": "Join points (i,y[i]) consecutively to form a piecewise-linear chart. Find the maximum number of distinct intersection points between the chart and a horizontal line. Adjacent y values differ, and intersections at shared vertices count once."
+  },
+  "3018": {
+    "task": "Optionally replace nums with any subsequence before processing queries. Process queries in order by removing a current endpoint whose value is greater than or equal to the query value. Stop when neither endpoint qualifies or nums is empty. Maximize the number processed by choosing the initial subsequence and endpoint removals.",
+    "supportingSources": [
+      "https://algo.monster/liteproblems/3018"
+    ],
+    "sourceReview": "Core corrected from public reference; exact official bounds remain pending."
+  },
+  "3023": {
+    "task": "A supplied infinite binary stream exposes next(), consuming one bit per call. Find the zero-based starting position of the first occurrence of the given binary pattern. The stream guarantees an occurrence; do not directly inspect its hidden representation."
+  },
+  "3032": {
+    "task": "Count integers in the inclusive range [a,b] whose decimal digits are all distinct. Leading zeros are not part of the usual decimal representation."
+  },
+  "3037": {
+    "task": "Use only next() on a supplied infinite binary stream to find the zero-based index of the first occurrence of a binary pattern. An occurrence is guaranteed. This variant requires efficient pattern matching for larger patterns and streams."
+  },
+  "3062": {
+    "task": "A linked list has even length. Compare each consecutive pair: the first node belongs to the even-index team and the second to the odd-index team. The larger value wins one point; ties score neither. Return the winning team's label, or the tie label, using the required output spelling."
+  },
+  "3063": {
+    "task": "Given a linked list, construct a new list containing one node for each distinct input value, with that new node holding the value's occurrence count. The output counts may appear in any order; they are frequencies, not the original distinct values."
+  },
+  "3073": {
+    "task": "Choose i<j<k with nums[i]<nums[j]<nums[k]. Maximize nums[i]-nums[j]+nums[k]. Return the greatest attainable value; verify the required no-triplet sentinel against the interface."
+  },
+  "3088": {
+    "task": "Rearrange a string to the lexicographically smallest anti-palindrome, meaning mirrored positions contain different characters. Return the failure sentinel if no rearrangement satisfies this rule. Verify odd-length treatment and the exact sentinel before implementation."
+  },
+  "3104": {
+    "task": "Find the longest proper, nonempty substring such that every occurrence in the whole string of each character it contains lies inside that substring. The whole string is excluded. Return the maximum length, or -1 if no such substring exists."
+  },
+  "3109": {
+    "task": "For a permutation of 1..n, return its zero-based rank among all such permutations in lexicographic order, modulo 1000000007."
+  },
+  "3119": {
+    "task": "A road string contains potholes marked x and intact positions marked period. Fixing a contiguous group of k potholes costs k+1. With the given budget, maximize the number repaired; you may repair part of a larger run."
+  },
+  "3125": {
+    "task": "Given positive n, find the largest integer x with 0<=x<n and (x & n)=0. Return x."
+  },
+  "3135": {
+    "task": "Given two strings, one operation inserts or removes a character at either end of either string. Return the minimum operations needed to make the strings equal. Characters inside a retained substring cannot be removed directly."
+  },
+  "3141": {
+    "task": "For each input number, return its maximum Hamming distance to any number in the same array, considering m-bit binary representations. Hamming distance counts differing bit positions."
+  },
+  "3155": {
+    "task": "For each independent data center, you know its server count, initial money, sale proceeds per server, and upgrade cost per server. Sell some servers to fund upgrades of other servers; sold servers cannot be upgraded. Return the maximum upgraded count for every center."
+  },
+  "3157": {
+    "task": "Return the one-based level of a binary tree with the smallest sum of node values. If several levels tie, choose the smallest level number."
+  },
+  "3167": {
+    "task": "A compressed string consists of lowercase letters followed by positive decimal frequencies, and a letter may appear in several groups. Sum frequencies per letter and emit one group per present letter in alphabetical order."
+  },
+  "3173": {
+    "task": "Given nums, return an array of length nums.length-1 whose entry i is nums[i] bitwise OR nums[i+1]."
+  },
+  "3183": {
+    "task": "Count ways to make amount n with unlimited coins of denominations 1,2,6 and at most two coins of denomination 4. Coin order does not distinguish ways. Return the count modulo 1000000007."
+  },
+  "3189": {
+    "task": "On an n-by-n board containing n rooks, move a rook one horizontal or vertical square per move. Minimize the total moves needed to place exactly one rook in every row and column. Return the minimum count."
+  },
+  "3199": {
+    "task": "Choose one element from each of three arrays. Count index triples for which the XOR of the three values has an even number of set bits. Equal values at different indices are separate choices."
+  },
+  "3205": {
+    "task": "Start at index zero and jump only to a later index until reaching the final index. A jump i to j scores (j-i)*nums[j]. Return the greatest total score."
+  },
+  "3215": {
+    "task": "Count index triples selecting one element from each of three arrays such that their XOR has even popcount. Return the total; this variant has larger inputs than problem 3199."
+  },
+  "3221": {
+    "task": "Starting at index zero, reach the final index by forward jumps. Jumping i to j earns (j-i)*nums[j]. Return the maximum sum of jump scores; use the larger-input constraints for this variant."
+  },
+  "3231": {
+    "task": "Repeatedly remove a strictly increasing subsequence from nums. Return the minimum number of such removals required to empty the array. A subsequence preserves order but need not be contiguous."
+  },
+  "3237": {
+    "task": "Windows are ordered from most to least recent. Process a sequence of window IDs: activating an ID moves that window to the front while preserving all other windows' relative order. Return the final window order."
+  },
+  "3247": {
+    "task": "Count nonempty subsequences of nums whose element sum is odd, modulo 1000000007. Choices of different indices count separately."
+  },
+  "3253": {
+    "task": "Build target from an empty string by repeatedly appending any word from words and paying its associated cost. Words may be reused. Return the minimum cost for exactly target, or -1 if impossible."
+  },
+  "3263": {
+    "task": "Given the head of a doubly linked list, return its values in forward order by following next pointers."
+  },
+  "3284": {
+    "task": "A consecutive subarray changes by exactly +1 at every step or exactly -1 at every step. Sum the element sums of all such contiguous subarrays, including singletons once. Return the total modulo 1000000007.",
+    "supportingSources": [
+      "https://leetcode.doocs.org/en/lc/3284/"
+    ],
+    "sourceReview": "Public reference consulted for core rules; incomplete official-source verification."
+  },
+  "3294": {
+    "task": "Given an arbitrary node in a doubly linked list, return the complete list as an array in head-to-tail order. First recover the head through prev pointers, then traverse next pointers."
+  },
+  "3299": {
+    "task": "Sum the element sums of all nonempty subsequences whose adjacent values consistently increase by one or consistently decrease by one. Single-element subsequences qualify and count once. Return the total modulo 1000000007."
+  },
+  "3313": {
+    "task": "For each possible initially marked node of a tree, marking spreads to adjacent nodes once per time unit. Return a node that becomes marked last for every starting node. Any farthest node is acceptable when tied."
+  },
+  "3323": {
+    "task": "Given intervals and a maximum length k for one added interval, choose that interval to minimize the number of connected interval groups. Overlapping intervals, including shared endpoints, belong to the same connected group. Return the minimum group count."
+  },
+  "3329": {
+    "task": "Count substrings containing at least one character whose frequency is at least k. Each substring counts once even if multiple characters meet the threshold."
+  },
+  "3383": {
+    "task": "Given directed transformations between runes, choose the fewest additional starting runes so every rune can be reached from the initial runes or the added runes. Return that minimum number; follow edges only in their specified direction."
+  },
+  "3385": {
+    "task": "Locks have strengths. Energy starts at zero and grows by the current factor per unit time, initially factor one. Opening a lock requires its strength in energy, resets energy to zero, and increases the factor by one. Choose the opening order minimizing total time; return that time."
+  },
+  "3400": {
+    "task": "Two arrays have equal length. Cyclically rotate one to the right any number of times. Return the largest count of equal values at matching indices after a rotation."
+  },
+  "3406": {
+    "task": "Split a string into exactly numFriends nonempty contiguous parts in every possible way, collect all resulting parts, and return the lexicographically largest collected string. This variant requires an efficient solution for larger strings."
+  },
+  "3416": {
+    "task": "Count length-five index subsequences whose middle element is the unique mode: its frequency is strictly greater than every other value's frequency among those five elements. Return the count modulo 1000000007."
+  },
+  "3422": {
+    "task": "Choose a contiguous subarray of length k. Each operation increments or decrements one selected value by one. Return the minimum number of operations needed to make all k values equal, minimizing over the window and target value."
+  },
+  "3460": {
+    "task": "You may remove at most one character from the first string. Return the maximum possible length of its common prefix with the second string after that removal."
+  },
+  "3481": {
+    "task": "Replacement pairs map keys to strings that may themselves contain percent-delimited key references. Recursively substitute every reference in the input text until none remain. References are valid and substitution dependencies are acyclic. Return the expanded text."
+  },
+  "3491": {
+    "task": "Given phone-number strings, return whether no number is a prefix of another number in the collection. Duplicate strings violate the prefix-free property."
+  },
+  "3549": {
+    "task": "Given coefficient arrays of two polynomials, return coefficients of their product, combining all pairs of terms whose degrees add to the same degree. Preserve the input convention for coefficient ordering; verify that convention before implementation."
+  },
+  "3571": {
+    "task": "Given two strings, return the shortest string containing both as contiguous substrings. Break equal-length ties lexicographically. One input may already contain the other."
+  },
+  "3581": {
+    "task": "Write each digit of a supplied integer using its English digit name, concatenate those names, and count letters having odd total frequency. Return the number of such letters."
+  },
+  "3595": {
+    "task": "Exactly one integer occurs once, exactly one occurs twice, and every other distinct integer occurs three times. Return [the single-occurrence value, the double-occurrence value]. The solution must use O(n) time and O(1) extra space.",
+    "supportingSources": [
+      "https://leetcode.ca/2025-07-27-3595-Once-Twice/"
+    ],
+    "sourceReview": "Core corrected from public reference; exact official bounds remain pending."
+  },
+  "3610": {
+    "task": "Return the fewest prime numbers, with repetition allowed, whose sum equals target. Return -1 when no such representation exists."
+  },
+  "3632": {
+    "task": "Count contiguous nonempty subarrays whose bitwise XOR is at least k. Compare numeric XOR values, not their popcounts."
+  },
+  "3656": {
+    "task": "Given proposed vertex degrees, determine whether an undirected simple graph can realize them. Self-loops and parallel edges are forbidden; disconnected graphs are allowed."
+  },
+  "3682": {
+    "task": "Given two arrays, find common values whose sum of their indices in the two arrays is minimum. Return all minimizers. Verify duplicate handling and result ordering against the exact interface."
+  },
+  "3696": {
+    "task": "Given an array of words, return the largest distance j-i between indices i<j whose words differ. Return zero if no such pair exists."
+  },
+  "3706": {
+    "task": "Return the greatest index distance between unequal words in the array, or zero when every word is equal. This variant has larger input limits than problem 3696."
+  },
+  "3787": {
+    "task": "Given an unweighted tree, return two vertices whose distance equals the tree diameter. Tie-breaking and required endpoint order must be verified before implementation."
   }
 }

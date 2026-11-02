@@ -1,0 +1,15 @@
+{
+  "number": 4051,
+  "title": "Count Subarrays with Distant Sums",
+  "source": "https://leetcode.com/problems/count-subarrays-with-distant-sums/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Count nonempty contiguous subarrays whose sum differs from goal by at least k in absolute value.",
+  "officialConstraints": [
+    "1..100000 elements; elements and goal are -1000000000..1000000000; k is 0..1000000000."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

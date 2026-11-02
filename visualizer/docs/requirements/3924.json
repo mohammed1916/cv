@@ -1,0 +1,14 @@
+{
+  "number": 3924,
+  "title": "Minimum Threshold Path With Limited Heavy Edges",
+  "source": "https://leetcode.com/problems/minimum-threshold-path-with-limited-heavy-edges/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "In an undirected weighted graph, an edge is heavy when its weight exceeds a chosen integer threshold. Find the smallest threshold permitting a source-to-target path with at most k heavy edges, or -1 if no path can exist. The retrieved text does not state a lower bound on threshold; clarify that boundary when a path uses at most k edges before certifying the solver.",
+  "officialConstraints": "1..1000 vertices; 0..1000 edges; valid endpoint IDs; weights 1..10^9; 0<=k<=edge count.",
+  "requirementsVerified": false,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets.",
+  "reviewStatus": "core-rules-sourced-but-explicit-ambiguity-remains"
+}

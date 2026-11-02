@@ -1,0 +1,15 @@
+{
+  "number": 4058,
+  "title": "Maximum Pulse Value After One Subarray Rotation",
+  "source": "https://leetcode.com/problems/maximum-pulse-value-after-one-subarray-rotation/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "The pulse of an array is its alternating sum, starting positive at index zero. You may once left-rotate a contiguous segment of length at least two by one position, or make no change. Return the greatest pulse obtainable.",
+  "officialConstraints": [
+    "1..100000 elements; values -1000000000..1000000000."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

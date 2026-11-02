@@ -1,0 +1,13 @@
+{
+  "number": 3938,
+  "title": "Maximum Path Intersection Sum in a Grid",
+  "source": "https://leetcode.com/problems/maximum-path-intersection-sum-in-a-grid/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Choose one right/down path from the top-left to bottom-right of a grid and another right/up path from bottom-left to top-right. Score the sum of values in cells shared by both paths, counting each shared cell once. Maximize this sum and return it; values may be negative.",
+  "officialConstraints": "2..1000 rows and columns; total cells 4..500000; cell values -100..100.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

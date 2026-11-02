@@ -1,0 +1,16 @@
+{
+  "number": 4033,
+  "title": "Valid K-Unique Subarrays I",
+  "source": "https://leetcode.com/problems/valid-k-unique-subarrays-i/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "For every inclusive range query [l,r], return whether that subarray has exactly k distinct values and each value occurs an even number of times. Return Boolean answers in query order.",
+  "officialConstraints": [
+    "2 <= n <= 100000; values 1..100000; 1 <= k <= n.",
+    "1..100000 queries; 0 <= l < r < n."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

@@ -1,0 +1,14 @@
+{
+  "number": 3391,
+  "title": "Design a 3D Binary Matrix with Efficient Layer Tracking",
+  "source": "https://leetcode.doocs.org/en/lc/3391/",
+  "officialUrl": "https://leetcode.com/problems/design-a-3d-binary-matrix-with-efficient-layer-tracking/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Implement Matrix3D(n), initially all zero, with setCell(x,y,z), unsetCell(x,y,z), and largestMatrix(). The query returns the x-layer with the most ones, choosing the largest x on a tie. Repeated sets or unsets must not double-count a cell.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

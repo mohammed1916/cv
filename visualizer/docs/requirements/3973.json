@@ -1,0 +1,14 @@
+{
+  "number": 3973,
+  "title": "Distinct Gate Paths to LCA",
+  "source": "https://leetcode.ca/2026-08-10-3973-Distinct-Gate-Paths-to-LCA/",
+  "officialUrl": "https://leetcode.com/problems/distinct-gate-paths-to-lca/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "For each query, two people independently ascend from given tree nodes to their LCA with red or blue cards. Each upward edge consumes a choice of one gate instance at its departing node: red/blue gates require and retain that color; white gates accept either and flip it. Parallel gate instances count separately. Count pairs of successful gate sequences modulo 1000000007, treating a person already at the LCA as having one way. Return the bitwise XOR of all query counts. Gates at the destination LCA are not traversed.",
+  "requirementsVerified": false,
+  "officialConstraints": "Numeric bounds and full interface require review against the current official statement.",
+  "examples": [],
+  "exampleStatus": "No source examples copied; independently author and check teaching examples."
+}

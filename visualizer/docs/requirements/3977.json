@@ -1,0 +1,13 @@
+{
+  "number": 3977,
+  "title": "Minimum Time to Reach Target With Limited Power",
+  "source": "https://leetcode.com/problems/minimum-time-to-reach-target-with-limited-power/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "A signal travels directed edges, paying each edge's time and consuming cost[u] power when departing u. It may depart only with sufficient remaining power; arrival itself is free. From source with initial power, return [minimum arrival time, greatest remaining power among minimum-time paths] for target. Return [-1,-1] if unreachable. When source equals target, return [0,initial power].",
+  "officialConstraints": "1..1000 vertices; up to1000 edges; travel times 1..10^9; initial power 1..1000; departure costs 1..2000; valid vertex IDs.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

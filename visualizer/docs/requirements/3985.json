@@ -1,0 +1,13 @@
+{
+  "number": 3985,
+  "title": "Palindromic Subarray Sum",
+  "source": "https://leetcode.com/problems/palindromic-subarray-sum/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Among nonempty contiguous array segments whose value sequence is a palindrome, return the largest element sum. Singletons qualify; this is not a subsequence problem.",
+  "officialConstraints": "Length 1..100000; values 1..10^9.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

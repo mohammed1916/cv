@@ -1,0 +1,15 @@
+{
+  "number": 4067,
+  "title": "Longest Subarray With Restricted Pair Sums",
+  "source": "https://leetcode.com/problems/longest-subarray-with-restricted-pair-sums/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Return the longest contiguous subarray containing no three distinct indices whose values satisfy nums[i] + nums[j] = nums[k]. Equal values at different indices remain separate elements.",
+  "officialConstraints": [
+    "1 <= nums.length <= 1000; 1 <= nums[i] <= 500."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

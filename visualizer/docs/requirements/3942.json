@@ -1,0 +1,13 @@
+{
+  "number": 3942,
+  "title": "Minimum Operations to Sort a Permutation",
+  "source": "https://leetcode.com/problems/minimum-operations-to-sort-a-permutation/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Given a permutation of 0 through n-1, sort it increasingly using only a whole-array reversal or a one-position left rotation. Each costs one operation. Return the minimum operations, or -1 if these operations cannot produce sorted order.",
+  "officialConstraints": "Length 1..100000; each value from 0..n-1 occurs once.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

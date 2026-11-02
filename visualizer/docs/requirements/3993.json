@@ -1,0 +1,13 @@
+{
+  "number": 3993,
+  "title": "Maximum Value of an Alternating Sequence",
+  "source": "https://leetcode.com/problems/maximum-value-of-an-alternating-sequence/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Construct an integer sequence of length n starting at s, with strict up/down comparisons alternating and each adjacent absolute difference at most m. Either initial direction is permitted; length one is valid. Return the largest element that can appear in any such sequence.",
+  "officialConstraints": "n and s1..10^9; m1..100000.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

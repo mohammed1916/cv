@@ -1,0 +1,15 @@
+{
+  "number": 4038,
+  "title": "Count Integers Appearing in a Single Block",
+  "source": "https://leetcode.com/problems/count-integers-appearing-in-a-single-block/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Count distinct values in nums whose occurrences form exactly one contiguous block. A value appearing once qualifies; a value that reappears after a different value does not.",
+  "officialConstraints": [
+    "1 <= nums.length <= 100; 1 <= nums[i] <= 100."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

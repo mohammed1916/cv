@@ -3,10 +3,29 @@
   "title": "Most Common Course Pairs",
   "source": "https://leetcode.com/problems/most-common-course-pairs/description/",
   "checkedOn": "2026-11-02",
-  "sourceKind": "access-attempt-failed",
-  "contentKind": "none",
-  "summary": null,
-  "accessAttempt": {"method": "web-fetch agent", "error": "not attempted: concurrent subagent limit reached on batch launch; a 403 was observed for 3716 and 3722"},
-  "missingInformation": "Full official statement, constraints and examples are required before any implementation.",
-  "implementationStatus": "skipped-no-verified-requirements"
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "SQL: course_completions(user_id,course_id,course_name,completion_date,course_rating), unique by user/course. Keep users with at least five courses and mean rating at least four. Order each qualifying user's completions by date and count consecutive ordered course-name pairs. Return first_course, second_course, transition_count, sorted by count descending then both names ascending. Same-day ordering is not specified in the retrieved text and needs resolution if such inputs are allowed.",
+  "officialConstraints": "Ratings are 1..5; user_id, course_id and rating are integers; course_name is text; completion_date is a date.",
+  "requirementsVerified": false,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets.",
+  "previousSourceRecord": {
+    "number": 3764,
+    "title": "Most Common Course Pairs",
+    "source": "https://leetcode.com/problems/most-common-course-pairs/description/",
+    "checkedOn": "2026-11-02",
+    "sourceKind": "access-attempt-failed",
+    "contentKind": "none",
+    "summary": null,
+    "accessAttempt": {
+      "method": "web-fetch agent",
+      "error": "not attempted: concurrent subagent limit reached on batch launch; a 403 was observed for 3716 and 3722"
+    },
+    "missingInformation": "Full official statement, constraints and examples are required before any implementation.",
+    "implementationStatus": "skipped-no-verified-requirements",
+    "requirementsVerified": false,
+    "reviewStatus": "core-rules-sourced-but-explicit-ambiguity-remains"
+  },
+  "reviewStatus": "core-rules-sourced-but-explicit-ambiguity-remains"
 }

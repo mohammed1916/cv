@@ -1,0 +1,13 @@
+{
+  "number": 4027,
+  "title": "Elevator Requests III",
+  "source": "https://leetcode.com/problems/elevator-requests-iii/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Each request gives an arrival time and floor. An elevator starts at a given floor at time zero and can move one floor per second or wait. A request is fulfilled when the elevator is on its floor at or after arrival, not by an earlier visit. Return the earliest time by which every request can be fulfilled.",
+  "officialConstraints": "Floors1..10^9;1..16 requests; arrival times0..10^9; all requested and start floors valid.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

@@ -1,0 +1,13 @@
+{
+  "number": 3918,
+  "title": "Sum of Primes Between Number and Its Reverse",
+  "source": "https://leetcode.com/problems/sum-of-primes-between-number-and-its-reverse/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Reverse the decimal digits of n, interpreting the result as an integer. Return the sum of primes in the inclusive interval between n and its reversal, regardless of which endpoint is smaller. Leading zeros disappear when interpreting the reversed number.",
+  "officialConstraints": "1 <= n <= 1000.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

@@ -1,0 +1,15 @@
+{
+  "number": 4065,
+  "title": "Rearrange Array by Removing Distinct Values",
+  "source": "https://leetcode.com/problems/rearrange-array-by-removing-distinct-values/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Repeatedly remove one occurrence of every distinct value still present in nums. During each round, append the removed values to the answer in increasing order. Return the concatenation of all rounds.",
+  "officialConstraints": [
+    "1 <= nums.length <= 100; 1 <= nums[i] <= 100."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

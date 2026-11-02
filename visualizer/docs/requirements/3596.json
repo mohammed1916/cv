@@ -1,0 +1,14 @@
+{
+  "number": 3596,
+  "title": "Minimum Cost Path with Alternating Directions I",
+  "source": "https://leetcode.doocs.org/en/lc/3596/",
+  "officialUrl": "https://leetcode.com/problems/minimum-cost-path-with-alternating-directions-i/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Start at grid cell (0,0), paying its entry cost. Each entry to (i,j) costs (i+1)*(j+1). Movement alternates: first move right/down, next left/up, and so on, always staying in the grid. Return the minimum cost to reach the opposite corner, or -1 if unreachable. The reference wording about the initial entry's move number is inconsistent; its worked example uses the first displacement as odd. Resolve that wording before certifying requirements.",
+  "requirementsVerified": false,
+  "officialConstraints": "Numeric bounds and full interface require review against the current official statement.",
+  "examples": [],
+  "exampleStatus": "No source examples copied; independently author and check teaching examples."
+}

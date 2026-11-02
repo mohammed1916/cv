@@ -1,0 +1,14 @@
+{
+  "number": 3369,
+  "title": "Design an Array Statistics Tracker ",
+  "source": "https://leetcode.doocs.org/en/lc/3369/",
+  "officialUrl": "https://leetcode.com/problems/design-an-array-statistics-tracker/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Implement StatisticsTracker with addNumber, removeFirstAddedNumber, getMean, getMedian and getMode. Removal is FIFO. Mean is rounded downward; median is the upper middle value for even size; tied modes choose the smallest value. Initialize empty and answer statistics over the current multiset.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

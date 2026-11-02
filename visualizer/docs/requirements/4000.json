@@ -1,0 +1,13 @@
+{
+  "number": 4000,
+  "title": "Largest Integer With Given Digit Sum",
+  "source": "https://leetcode.com/problems/largest-integer-with-given-digit-sum/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Return the greatest nonnegative integer with at most n decimal digits and digit sum s, or -1 if impossible. Digit sum zero allows integer zero.",
+  "officialConstraints": "n1..5; s0..100.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

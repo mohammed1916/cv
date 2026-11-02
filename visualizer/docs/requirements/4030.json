@@ -1,0 +1,15 @@
+{
+  "number": 4030,
+  "title": "Check ASCII Palindromic",
+  "source": "https://leetcode.com/problems/check-ascii-palindromic/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Replace each character with the eight-bit binary encoding of its ASCII value, retaining leading zeros, and concatenate in string order. Return whether that bit string is a palindrome.",
+  "officialConstraints": [
+    "1..100 lowercase English letters."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

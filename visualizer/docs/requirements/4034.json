@@ -1,0 +1,15 @@
+{
+  "number": 4034,
+  "title": "Minimum Bishop Moves to Reach Target",
+  "source": "https://leetcode.com/problems/minimum-bishop-moves-to-reach-target/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "On an empty eight-by-eight board, find the fewest bishop moves from source to target. Each move travels a positive distance along one diagonal while remaining on the board. Return -1 if unreachable.",
+  "officialConstraints": [
+    "Coordinates use 1..8; source and target differ."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

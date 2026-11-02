@@ -1,0 +1,13 @@
+{
+  "number": 3937,
+  "title": "Minimum Operations to Make Array Modulo Alternating I",
+  "source": "https://leetcode.com/problems/minimum-operations-to-make-array-modulo-alternating-i/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Each operation adds or subtracts one from one element. Minimize operations so all even-indexed elements have one remainder modulo k, all odd-indexed elements have another remainder, and the two remainders are distinct in 0..k-1. Return the minimum cost.",
+  "officialConstraints": "Length 1..100; initial values 1..10^9; k in 2..100.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

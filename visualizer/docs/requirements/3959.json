@@ -1,0 +1,13 @@
+{
+  "number": 3959,
+  "title": "Check Good Integer",
+  "source": "https://leetcode.com/problems/check-good-integer/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "For a positive integer, subtract its digit sum from the sum of squared digit values. Return whether the difference is at least fifty.",
+  "officialConstraints": "1<=n<=1000000000.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

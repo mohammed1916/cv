@@ -1,0 +1,14 @@
+{
+  "number": 3730,
+  "title": "Maximum Calories Burnt from Jumps",
+  "source": "https://leetcode.doocs.org/en/lc/3730/",
+  "officialUrl": "https://leetcode.com/problems/maximum-calories-burnt-from-jumps/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Start on the ground at height zero and visit every block exactly once in any order, without returning to ground. Each jump from height a to b earns (a-b)^2 calories, including the initial jump. Return the maximum total.",
+  "requirementsVerified": false,
+  "officialConstraints": "Numeric bounds and full interface require review against the current official statement.",
+  "examples": [],
+  "exampleStatus": "No source examples copied; independently author and check teaching examples."
+}

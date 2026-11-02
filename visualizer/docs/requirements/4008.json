@@ -1,0 +1,13 @@
+{
+  "number": 4008,
+  "title": "Minimum Initial Strength to Defeat All Monsters",
+  "source": "https://leetcode.com/problems/minimum-initial-strength-to-defeat-all-monsters/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Fight monsters in input order with nonnegative initial strength. Inclusive range boosts add temporary bonuses during the eligibility check only. Defeat monster i when current strength plus applicable boosts is at least its strength; afterward set current strength to max(0,current-monster strength). Return the least initial strength that defeats all monsters. Bonuses never replenish persistent strength.",
+  "officialConstraints": "1..50000 monsters, strengths1..10^9; 0..50000 valid boost ranges with positive boost values<=10^9.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

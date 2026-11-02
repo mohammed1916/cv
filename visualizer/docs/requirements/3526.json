@@ -1,0 +1,14 @@
+{
+  "number": 3526,
+  "title": "Range XOR Queries with Subarray Reversals",
+  "source": "https://leetcode.doocs.org/en/lc/3526/",
+  "officialUrl": "https://leetcode.com/problems/range-xor-queries-with-subarray-reversals/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Maintain nums under queries [1,index,value] for assignment, [2,left,right] for inclusive range XOR, and [3,left,right] for in-place inclusive range reversal. Return only XOR-query results, in encounter order; changes persist.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

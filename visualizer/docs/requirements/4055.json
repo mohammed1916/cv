@@ -1,0 +1,15 @@
+{
+  "number": 4055,
+  "title": "Count Shadow Pairs II",
+  "source": "https://leetcode.com/problems/count-shadow-pairs-ii/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Count index pairs i < j with nums[i] < nums[j] for which no intervening value lies strictly between the two endpoint values. Intervening values equal to either endpoint are allowed.",
+  "officialConstraints": [
+    "3 <= nums.length <= 50000; 1 <= nums[i] <= 1000000000."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

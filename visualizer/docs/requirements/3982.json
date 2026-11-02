@@ -1,0 +1,13 @@
+{
+  "number": 3982,
+  "title": "Sum of Integers with Maximum Digit Range",
+  "source": "https://leetcode.com/problems/sum-of-integers-with-maximum-digit-range/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "For each integer, subtract its smallest decimal digit from its largest. Find the greatest such digit range in the array and sum every array occurrence achieving it. Return that sum, counting repeated integers separately.",
+  "officialConstraints": "Length 1..100; values 10..100000.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

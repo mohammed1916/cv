@@ -1,0 +1,14 @@
+{
+  "number": 3641,
+  "title": "Longest Semi-Repeating Subarray",
+  "source": "https://leetcode.ca/2025-09-11-3641-Longest-Semi-Repeating-Subarray/",
+  "officialUrl": "https://leetcode.com/problems/longest-semi-repeating-subarray/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Return the longest contiguous subarray in which at most k distinct values occur more than once. Count repeated value types, not the number of extra occurrences; a value occurring many times contributes one repeated type.",
+  "requirementsVerified": false,
+  "officialConstraints": "Numeric bounds and full interface require review against the current official statement.",
+  "examples": [],
+  "exampleStatus": "No source examples copied; independently author and check teaching examples."
+}

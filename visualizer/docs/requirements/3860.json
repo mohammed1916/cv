@@ -1,0 +1,14 @@
+{
+  "number": 3860,
+  "title": "Unique Email Groups",
+  "source": "https://leetcode.doocs.org/en/lc/3860/",
+  "officialUrl": "https://leetcode.com/problems/unique-email-groups/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Normalize each email by lowercasing both parts; in its local part also remove dots and discard the first plus sign and everything following it. Domain dots remain meaningful. Return the number of distinct normalized addresses.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

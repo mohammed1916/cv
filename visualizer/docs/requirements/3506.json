@@ -1,0 +1,14 @@
+{
+  "number": 3506,
+  "title": "Find Time Required to Eliminate Bacterial Strains",
+  "source": "https://leetcode.doocs.org/en/lc/3506/",
+  "officialUrl": "https://leetcode.com/problems/find-time-required-to-eliminate-bacterial-strains/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "One initial cell can either spend splitTime splitting into two cells, or eliminate one bacterial strain in its specified time and become exhausted. Split descendants work concurrently; a strain can only be handled by one cell. Return the minimum completion time for all strains.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

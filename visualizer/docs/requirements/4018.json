@@ -1,0 +1,14 @@
+{
+  "number": 4018,
+  "title": "Total Sum of Interaction Cost in Tree Groups II",
+  "source": "https://leetcode.doocs.org/en/lc/4018/",
+  "officialUrl": "https://leetcode.com/problems/total-sum-of-interaction-cost-in-tree-groups-ii/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "For an unweighted tree with a group label per node, sum the number of edges on the path between every unordered pair of distinct nodes sharing a group label. Return the total.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

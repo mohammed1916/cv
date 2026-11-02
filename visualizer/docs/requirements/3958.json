@@ -1,0 +1,14 @@
+{
+  "number": 3958,
+  "title": "Minimum Cost to Split into Ones II",
+  "source": "https://leetcode.doocs.org/en/lc/3958/",
+  "officialUrl": "https://leetcode.com/problems/minimum-cost-to-split-into-ones-ii/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Starting with n, repeatedly split a positive integer x into positive a,b with a+b=x, paying a*b. Return the minimum total cost to finish with n ones.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

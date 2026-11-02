@@ -1,0 +1,14 @@
+{
+  "number": 3972,
+  "title": "Valid Subarrays With Matching Sum Digits II",
+  "source": "https://leetcode.ca/2026-08-09-3972-Valid-Subarrays-With-Matching-Sum-Digits-II/",
+  "officialUrl": "https://leetcode.com/problems/valid-subarrays-with-matching-sum-digits-ii/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Count nonempty contiguous subarrays whose positive element sum has decimal first and last digits both equal to x.",
+  "requirementsVerified": false,
+  "officialConstraints": "Numeric bounds and full interface require review against the current official statement.",
+  "examples": [],
+  "exampleStatus": "No source examples copied; independently author and check teaching examples."
+}

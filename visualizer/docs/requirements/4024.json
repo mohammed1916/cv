@@ -1,0 +1,15 @@
+{
+  "number": 4024,
+  "title": "Nearest Available Drone",
+  "source": "https://leetcode.com/problems/nearest-available-drone/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Drone i has a position and a maximum travel range. A drone reaches the target when its Manhattan distance is within that range. Return the reachable drone of minimum distance, breaking ties by smaller index, or -1 if none can reach.",
+  "officialConstraints": [
+    "1..100 drones; all coordinates -25..25; ranges 1..100."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

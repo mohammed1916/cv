@@ -1,0 +1,13 @@
+{
+  "number": 3953,
+  "title": "Maximum Score with Co-Prime Element",
+  "source": "https://leetcode.com/problems/maximum-score-with-co-prime-element/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "You may replace array elements by positive integers no greater than maxVal, paying one per changed element. Afterward choose one index whose value is coprime to every other final value. Maximize that chosen value minus the total number of modified elements. Unchanged elements need not be restricted by maxVal unless they already satisfy that bound.",
+  "officialConstraints": "Length 1..100000; original values 1..100000; maxVal 1..100000.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

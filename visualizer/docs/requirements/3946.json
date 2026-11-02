@@ -1,0 +1,13 @@
+{
+  "number": 3946,
+  "title": "Maximum Number of Items From Sale I",
+  "source": "https://leetcode.com/problems/maximum-number-of-items-from-sale-i/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Items have a divisibility factor and a price; unlimited copies may be purchased within budget. Buying at least one copy of type i grants one free copy of every different type j whose factor is divisible by i's factor. Further purchases of i do not repeat these grants, but different purchased types can independently grant copies of the same j. Maximize purchased plus free copies. Free copies do not trigger further grants.",
+  "officialConstraints": "1..1000 types; factors, prices and budget 1..1500.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

@@ -1,0 +1,13 @@
+{
+  "number": 3951,
+  "title": "Minimum Energy to Maintain Brightness",
+  "source": "https://leetcode.com/problems/minimum-energy-to-maintain-brightness/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "There are n bulbs on a line; an active bulb illuminates itself and adjacent positions and costs one energy per integer time unit. During every time covered by any inclusive requested interval, illuminate at least brightness distinct positions. Bulb states may change independently each time, with no switching cost. Return minimum total energy; uncovered times need no light.",
+  "officialConstraints": "n 1..10^6; brightness 1..n; 1..100000 intervals with 0<=start<=end<=10^9.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

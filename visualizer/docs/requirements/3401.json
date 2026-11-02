@@ -1,0 +1,14 @@
+{
+  "number": 3401,
+  "title": "Find Circular Gift Exchange Chains",
+  "source": "https://leetcode.doocs.org/en/lc/3401/",
+  "officialUrl": "https://leetcode.com/problems/find-circular-gift-exchange-chains/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "SecretSanta(giver_id,receiver_id,gift_value) records directed gifts with unique giver/receiver pairs. Find circular exchange chains where every participating employee gives to and receives from exactly one other participant. Report chain_length and total_gift_value, deduplicating identical result pairs across chains. Order by length descending then value descending. Confirm whether the one-in/one-out restriction applies globally or within a candidate chain.",
+  "requirementsVerified": false,
+  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "examples": [],
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+}

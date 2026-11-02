@@ -1,0 +1,15 @@
+{
+  "number": 4072,
+  "title": "Maximum Alternating Subarray Sum With One Deletion",
+  "source": "https://leetcode.com/problems/maximum-alternating-subarray-sum-with-one-deletion/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Delete at most one array element, then choose a nonempty contiguous subarray of the result. Reindex that subarray from zero and take its alternating sum starting positive. Return the maximum possible sum.",
+  "officialConstraints": [
+    "1..100000 elements; values -100000..100000."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

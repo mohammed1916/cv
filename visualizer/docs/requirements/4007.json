@@ -1,0 +1,13 @@
+{
+  "number": 4007,
+  "title": "Widest Possible Fence",
+  "source": "https://leetcode.com/problems/widest-possible-fence/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Build the widest equal-height fence using original width-one planks. Each final plank is either one unchanged original or the combination of exactly two originals, with summed height and width one. Each original may be used at most once; unused originals are allowed. Return the greatest number of equal-height final planks.",
+  "officialConstraints": "1..1000 originals; heights1..10^9.",
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

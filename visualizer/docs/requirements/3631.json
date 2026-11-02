@@ -1,0 +1,14 @@
+{
+  "number": 3631,
+  "title": "Sort Threats by Severity and Exploitability",
+  "source": "https://leetcode.doocs.org/en/lc/3631/",
+  "officialUrl": "https://leetcode.com/problems/sort-threats-by-severity-and-exploitability/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-02",
+  "contentKind": "independently-written-requirements",
+  "summary": "Each threat is [id,severity,exploitability], with unique ID. Return threats sorted by 2*severity+exploitability descending, breaking score ties by ascending ID.",
+  "requirementsVerified": false,
+  "officialConstraints": "Numeric bounds and full interface require review against the current official statement.",
+  "examples": [],
+  "exampleStatus": "No source examples copied; independently author and check teaching examples."
+}

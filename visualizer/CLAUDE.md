@@ -1,6 +1,6 @@
 # Assistant-owned requirement drafting
 
-The user explicitly asked the assistant to fill missing requirement files itself. Use known algorithm knowledge for clearly labelled original drafts, then verify uncertain details; do not delegate the whole backlog to the user. Read [draft coverage and continuation](docs/requirements/drafts/README.md): the latest inbox checkpoint has 520 non-empty files and 569 empty files; text presence is not verification. Run `python3 scripts/audit-manual-statement-inbox.py` for per-ID status. Never overwrite non-empty user pastes, and never count unverified drafts as recovered official statements.
+The user explicitly asked the assistant to fill missing requirement files itself. Use known algorithm knowledge for clearly labelled original drafts, then verify uncertain details; do not delegate the whole backlog to the user. Read [draft coverage and continuation](docs/requirements/drafts/README.md): all 1,089 numbered inbox files now contain text (569 added in the latest pass). These comprise 854 drafts, 234 source-note renderings and one preserved user paste; text presence is not verification. There are no empty files to ask the user to transcribe wholesale. Resolve the per-ID rule gaps and verification gates next. Run `python3 scripts/audit-manual-statement-inbox.py` for per-ID status. Never overwrite non-empty user pastes, and never count unverified drafts as recovered official statements.
 
 # Website content rule — user instruction
 

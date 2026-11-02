@@ -1,0 +1,16 @@
+{
+  "number": 4045,
+  "title": "Count Robot Groups",
+  "source": "https://leetcode.com/problems/count-robot-groups/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "Robots start at strictly increasing positions and move right at their given constant speeds. Whenever adjacent robots or groups are within distance, they merge. Connected simultaneous merges form one group. A merged group uses the current position and speed of its rightmost member and never separates. Return the eventual number of groups after all possible merges.",
+  "officialConstraints": [
+    "1..100000 robots; positions, speeds and distance are between 1 and 1000000000.",
+    "Position and speed arrays have equal lengths; positions are strictly increasing."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}

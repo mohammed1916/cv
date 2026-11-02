@@ -1,0 +1,15 @@
+{
+  "number": 4062,
+  "title": "Transform Array Using Pair Operations",
+  "source": "https://leetcode.com/problems/transform-array-using-pair-operations/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "summary": "You may repeatedly select two distinct source indices i,j and any integer delta, replacing their values simultaneously by source[i]+source[j]-delta and delta. Return whether source can become target exactly.",
+  "officialConstraints": [
+    "Equal array lengths 2..100000; initial values -1000000000..1000000000."
+  ],
+  "requirementsVerified": true,
+  "examples": [],
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+}
