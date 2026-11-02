@@ -1,3 +1,7 @@
+# Assistant-owned requirement drafting
+
+The user explicitly asked the assistant to fill missing requirement files itself. Use known algorithm knowledge for clearly labelled original drafts, then verify uncertain details; do not delegate the whole backlog to the user. Read [draft coverage and continuation](docs/requirements/drafts/README.md). Never overwrite non-empty user pastes, and never count unverified drafts as recovered official statements.
+
 # Website content rule — user instruction
 
 **Do not publish LeetCode statement text or its examples on our website.** Cached material is for local reference. Use independently authored explanations, example inputs, walkthroughs, diagrams and narration. Audit existing presets as well as new work. Read [the reference/public-content boundary](docs/statement-sources/WEBSITE-CONTENT-RULES.md). This overrides older instructions to preserve examples when those examples were copied from LeetCode.

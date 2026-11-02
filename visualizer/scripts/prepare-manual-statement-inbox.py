@@ -27,14 +27,16 @@ write_list('FREE.md', free, 'Free problems missing full statements')
 write_list('PAID.md', paid, 'Paid problems missing full statements')
 (inbox / 'README.md').write_text(f'''# Paste missing problem statements here
 
-Start with [FREE.md](FREE.md): **{len(free)} free problems**. [PAID.md](PAID.md) lists **{len(paid)} paid problems**; only paste those you can legitimately access.
+The assistant should fill known problems and source available requirements first; the user is not required to transcribe this entire backlog. Existing AI-authored drafts are explicitly unverified and are not official statement copies.
 
-There are **{len(items)} numbered `.txt` files**, one for each missing statement in the recovered archive inventory. Each list links both the official page and the matching file.
+[FREE.md](FREE.md) lists **{len(free)} free problems**. [PAID.md](PAID.md) lists **{len(paid)} paid problems**; only paste those you can legitimately access.
+
+There are **{len(items)} numbered `.txt` files**, some now containing explicitly labelled AI drafts, one for each missing statement in the recovered archive inventory. Each list links both the official page and the matching file.
 
 1. Open the official problem page from the list.
 2. Copy the full description, examples, constraints and any follow-up. Copying the whole page is also fine; unrelated navigation can be removed during review. Do not include passwords, cookies or other private account information.
 3. Paste into `<problem-number>.txt` and save. For example, problem 156 goes in `156.txt`.
-4. Work in any batch size. Tell the assistant which files you filled, or simply say “review the pasted statements.” Existing content will never be overwritten by the setup script.
+4. User pastes are optional supplementation, not a prerequisite for all work. Work in any batch size. Tell the assistant which files you filled, or simply say “review the pasted statements.” Existing content will never be overwritten by the setup script.
 
 Diagrams may not survive text copying. If a statement depends on one, save its image alongside the text (for example `156-diagram.png`) and mention that filename in the text file. Do not fill inaccessible files with login or error pages.
 
