@@ -1,9 +1,9 @@
 export const meta = {
-  number: "2453",
-  title: "Destroy Sequential Targets",
-  slug: "destroy-sequential-targets",
-  difficulty: "Medium",
-  tags: ["Array", "Hash Table", "Counting"],
-  description: "Group targets by remainder modulo space, take the largest group, and seed with its smallest target.",
-  accent: "#0ea5e9",
+  number: '2453',
+  title: 'Destroy Sequential Targets',
+  slug: 'destroy-sequential-targets',
+  difficulty: 'Medium',
+  tags: ['Array', 'Hash Table', 'Greedy', 'Counting'],
+  description: 'Group targets by their remainder modulo space, pick the largest group, and return its smallest member.',
+  accent: '#b45309',
 }

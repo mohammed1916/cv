@@ -1,67 +1,41 @@
-const PYTHON_LINES = [
-  "def minimumOperations(nums):",
-  "    seen = set()",
-  "    for v in nums:",
-  "        if v > 0:",
-  "            seen.add(v)",
-  "    return len(seen)",
-];
-
-const CODE_LINES = [
-  "FUNCTION minimumOperations(nums)",
-  "  seen <- empty set",
-  "  FOR each value v in nums",
-  "    IF v > 0 THEN",
-  "      add v to seen",
-  "  RETURN the size of seen",
-];
-
-const MAX_VALUES = 50;
-
-export const python = PYTHON_LINES.join("\n");
-export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }));
-
-// Pseudocode line -> Python line doing the same action.
-export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6 };
-
 export function parseInput(text) {
-  let obj;
-  try {
-    obj = typeof text === "string" ? JSON.parse(text) : text;
-  } catch {
-    throw new Error('Input must be a JSON object such as {"nums": [1,5,0,3,5]}');
-  }
-  if (!obj || typeof obj !== "object" || Array.isArray(obj)) throw new Error("Input must be a JSON object with a nums key");
-  const { nums } = obj;
-  if (!Array.isArray(nums)) throw new Error("nums must be an array of integers");
-  if (nums.length < 1 || nums.length > MAX_VALUES) {
-    throw new Error(`nums must contain between 1 and ${MAX_VALUES} entries for this visualization`);
-  }
-  nums.forEach((value, index) => {
-    if (!Number.isInteger(value) || value < 0) throw new Error(`nums[${index}] must be a non-negative integer`);
-  });
-  return { nums };
+  const input = JSON.parse(text)
+  if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Use an object with nums.')
+  const { nums } = input
+  if (!Array.isArray(nums) || nums.length < 1 || nums.length > 24) throw new Error('nums has 1 to 24 entries.')
+  if (!nums.every(x => Number.isInteger(x) && x >= 0 && x <= 100)) throw new Error('Each entry is an integer from 0 to 100.')
+  return { nums }
 }
 
-export function buildTrace(input) {
-  const { nums } = input.nums ? input : parseInput(input);
-  const seen = new Set();
-  const frames = [];
-  const snap = (phase, activeLine, message, extra = {}) => frames.push({
-    phase, activeLine, message, i: -1, pythonLine: pythonLineMap[activeLine], seen: [...seen].sort((a, b) => a - b), ...extra,
-  });
-
-  snap("setup", 2, "Start with an empty set of nonzero values.");
+export function buildTrace({ nums }) {
+  const seen = new Set()
+  const frames = []
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('empty set'), at: -1, seen: [], result: null, message: `Scan ${nums.length} entries for distinct positive values.` })
   for (let i = 0; i < nums.length; i++) {
-    const v = nums[i];
-    snap("scan", 3, `Read value ${v} at index ${i}.`, { i });
-    snap("check", 4, v > 0 ? `${v} is nonzero.` : `${v} is zero, so it is skipped.`, { i });
-    if (v > 0) {
-      seen.add(v);
-      snap("record", 5, `Add ${v} to the set.`, { i });
+    const x = nums[i]
+    if (x > 0) {
+      const fresh = !seen.has(x)
+      seen.add(x)
+      frames.push({ pythonLine: 5, phase: fresh ? 'new' : 'repeat', activeLine: L('add x'), at: i, seen: [...seen], result: null, message: fresh ? `${x} is a new distinct positive value.` : `${x} was already counted.` })
+    } else {
+      frames.push({ pythonLine: 4, phase: 'skip', activeLine: L('if x > 0'), at: i, seen: [...seen], result: null, message: `${x} is zero and needs no operation.` })
     }
   }
-  const result = seen.size;
-  snap("done", 6, `Return ${result} distinct nonzero value(s).`, { result });
-  return { input: nums, result, frames };
+  frames.push({ pythonLine: 6, phase: 'done', activeLine: L('return'), at: -1, seen: [...seen], result: seen.size, message: `${seen.size} operation${seen.size === 1 ? '' : 's'} clear the array.` })
+  return { input: { nums }, result: seen.size, frames }
 }
+
+export const code = `minimum operations to make every entry zero
+  seen = empty set
+  for each x in nums
+    if x is positive then add x to seen
+  return the size of seen`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def minimum_operations(nums):
+    seen = set()
+    for x in nums:
+        if x > 0:
+            seen.add(x)
+    return len(seen)
+`

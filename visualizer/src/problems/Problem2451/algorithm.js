@@ -1,95 +1,63 @@
-const PYTHON_LINES = [
-  "def oddString(words):",
-  "    groups = {}",
-  "    for i, word in enumerate(words):",
-  "        diff = tuple(ord(b) - ord(a) for a, b in zip(word, word[1:]))",
-  "        groups.setdefault(diff, []).append(i)",
-  "    for indices in groups.values():",
-  "        if len(indices) == 1:",
-  "            return words[indices[0]]",
-  '    return ""',
-];
+const LOWER = /^[a-z]+$/
 
-const CODE_LINES = [
-  "FUNCTION oddString(words)",
-  "  groups <- empty map from difference array to list of indices",
-  "  FOR each index i",
-  "    diff <- differences between adjacent letters of words[i]",
-  "    append i to groups[diff]",
-  "  FOR each group in insertion order",
-  "    IF the group holds exactly one index THEN RETURN that word",
-  "  RETURN empty string",
-];
-
-const MAX_WORDS = 50;
-const MAX_LENGTH = 20;
-
-export const python = PYTHON_LINES.join("\n");
-export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }));
-
-// Pseudocode line -> Python line doing the same action.
-export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 9 };
+export function diffKey(word) {
+  return Array.from({ length: word.length - 1 }, (_, i) => word.charCodeAt(i + 1) - word.charCodeAt(i)).join(',')
+}
 
 export function parseInput(text) {
-  let obj;
-  try {
-    obj = typeof text === "string" ? JSON.parse(text) : text;
-  } catch {
-    throw new Error('Input must be a JSON object such as {"words": ["adc","wzy","abc"]}');
-  }
-  if (!obj || typeof obj !== "object" || Array.isArray(obj)) throw new Error("Input must be a JSON object with a words key");
-  const { words } = obj;
-  if (!Array.isArray(words)) throw new Error("words must be an array of strings");
-  if (words.length < 3 || words.length > MAX_WORDS) {
-    throw new Error(`words must contain between 3 and ${MAX_WORDS} entries for this visualization`);
-  }
-  const length = String(words[0]).length;
-  words.forEach((word, index) => {
-    if (typeof word !== "string") throw new Error(`words[${index}] must be a string`);
-    if (!/^[a-z]+$/.test(word)) throw new Error(`words[${index}] must contain lowercase letters only`);
-    if (word.length < 2 || word.length > MAX_LENGTH) throw new Error(`words[${index}] must have length 2 to ${MAX_LENGTH}`);
-    if (word.length !== length) throw new Error("All words must have the same length");
-  });
-  return { words };
+  const input = JSON.parse(text)
+  if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Use an object with words.')
+  const { words } = input
+  if (!Array.isArray(words) || words.length < 3 || words.length > 10) throw new Error('words has 3 to 10 entries.')
+  if (!words.every(w => typeof w === 'string' && w.length >= 2 && w.length <= 8 && LOWER.test(w))) throw new Error('Each word has 2 to 8 lowercase letters.')
+  if (new Set(words.map(w => w.length)).size !== 1) throw new Error('All words must have the same length.')
+  const counts = new Map()
+  for (const w of words) counts.set(diffKey(w), (counts.get(diffKey(w)) || 0) + 1)
+  if ([...counts.values()].filter(c => c === 1).length !== 1) throw new Error('Exactly one difference pattern must be unique.')
+  return { words }
 }
 
-function differenceKey(word) {
-  const diff = [];
-  for (let k = 0; k + 1 < word.length; k++) diff.push(word.charCodeAt(k + 1) - word.charCodeAt(k));
-  return diff;
+export function buildTrace({ words }) {
+  const frames = []
+  const counts = new Map()
+  const keys = words.map(diffKey)
+  frames.push({ pythonLine: PL('counts = {}'), phase: 'setup', activeLine: CL('counts <-'), at: -1, key: null, counts: [], message: 'Start with no difference patterns counted.' })
+  keys.forEach((key, i) => {
+    frames.push({ pythonLine: PL('key = tuple'), phase: 'diff', activeLine: CL('key <-'), at: i, key, counts: [...counts], message: `${words[i]} has adjacent differences ${key}.` })
+    counts.set(key, (counts.get(key) || 0) + 1)
+    frames.push({ pythonLine: PL('counts[key] = '), phase: 'tally', activeLine: CL('add one'), at: i, key, counts: [...counts], message: `Pattern ${key} is now seen ${counts.get(key)} time${counts.get(key) === 1 ? '' : 's'}.` })
+  })
+  let answer = null
+  for (let i = 0; i < words.length && answer === null; i++) {
+    const seen = counts.get(keys[i])
+    frames.push({ pythonLine: PL('if counts[keys[i]] == 1'), phase: 'check', activeLine: CL('IF counts'), at: i, key: keys[i], counts: [...counts], message: `${words[i]} has a pattern seen ${seen} time${seen === 1 ? '' : 's'}.` })
+    if (seen === 1) answer = words[i]
+  }
+  frames.push({ pythonLine: PL('return word'), phase: 'done', activeLine: CL('RETURN word'), at: words.indexOf(answer), key: answer === null ? null : keys[words.indexOf(answer)], counts: [...counts], message: `${answer} is the odd string.` })
+  return { input: { words }, result: answer, frames }
 }
 
-export function buildTrace(input) {
-  const { words } = input.words ? input : parseInput(input);
-  const groups = new Map();
-  const frames = [];
-  const groupsView = () => Object.fromEntries([...groups].map(([key, idxs]) => [key, [...idxs]]));
-  const snap = (phase, activeLine, message, extra = {}) => frames.push({
-    phase, activeLine, pythonLine: { setup: 2, scan: 3, diff: 4, group: 5, search: 6, found: 8, done: 9 }[phase], message, i: -1, groups: groupsView(), ...extra,
-  });
+export const code = `FUNCTION oddString(words)
+  counts <- empty map from difference pattern to count
+  FOR each word in words
+    key <- differences between neighbouring letters
+    add one to counts[key]
+  FOR each word in words
+    IF counts[key of this word] equals 1 THEN RETURN word
+  RETURN empty string`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const CL = s => { const i = code.findIndex(c => c.text.includes(s)); if (i < 0) throw new Error(`missing ${s}`); return i + 1 }
 
-  snap("setup", 2, "Start with no groups of difference arrays.");
-  for (let i = 0; i < words.length; i++) {
-    snap("scan", 3, `Read words[${i}] = ${words[i]}.`, { i });
-    const diff = differenceKey(words[i]);
-    const key = diff.join(",");
-    snap("diff", 4, `Differences of ${words[i]}: [${diff.join(", ")}].`, { i, key });
-    if (!groups.has(key)) groups.set(key, []);
-    groups.get(key).push(i);
-    snap("group", 5, `Add index ${i} to the group [${diff.join(", ")}].`, { i, key });
-  }
-
-  let result = "";
-  let found = -1;
-  for (const [key, indices] of groups) {
-    snap("search", 6, `Check the group [${key}] with ${indices.length} word(s).`, { key });
-    if (indices.length === 1) {
-      found = indices[0];
-      result = words[found];
-      snap("found", 7, `The group [${key}] has one word, so ${result} is the odd one.`, { i: found, key, result });
-      break;
-    }
-  }
-  if (found === -1) snap("done", 8, "No group has exactly one word.", { result });
-  return { input: words, result, frames };
-}
+export const python = `def odd_string(words):
+    counts = {}
+    keys = []
+    for word in words:
+        key = tuple(ord(b) - ord(a) for a, b in zip(word, word[1:]))
+        keys.append(key)
+        counts[key] = counts.get(key, 0) + 1
+    for i, word in enumerate(words):
+        if counts[keys[i]] == 1:
+            return word
+    return ""
+`
+const PY = python.split('\n')
+const PL = s => { const i = PY.findIndex(l => l.includes(s)); if (i < 0) throw new Error(`missing ${s}`); return i + 1 }

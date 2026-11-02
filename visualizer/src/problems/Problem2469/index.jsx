@@ -1,41 +1,33 @@
-import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
-import IndexedSequence from "../../components/shared/IndexedSequence";
-import { code, python, parseInput, buildTrace } from "./algorithm";
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
-  number: "2469",
+  number: '2469',
   phases: [
-    { id: "setup", label: "Setup", description: "Read the Celsius temperature." },
-    { id: "kelvin", label: "Kelvin", description: "Add 273.15 to get Kelvin." },
-    { id: "fahrenheit", label: "Fahrenheit", description: "Multiply by 1.8 and add 32 to get Fahrenheit." },
-    { id: "done", label: "Result", description: "Return the Kelvin and Fahrenheit pair." },
+    { id: 'kelvin', label: 'Kelvin', description: 'Shift the scale by 273.15.' },
+    { id: 'fahrenheit', label: 'Fahrenheit', description: 'Scale by 1.80 and add 32.' },
+    { id: 'done', label: 'Result', description: 'Return both values.' },
   ],
-  parse: parseInput,
-  build: buildTrace,
-  code,
-  python,
-  inputLabel: 'JSON {"celsius": 36.50}',
-  url: "https://leetcode.com/problems/convert-the-temperature/",
-  complexity: "O(1) time and O(1) space. The visualization accepts Celsius values from 0 to 1000 with at most two decimals.",
+  parse: parseInput, build: buildTrace, code, python,
+  inputLabel: 'JSON {"celsius": 36.5}',
+  url: 'https://leetcode.com/problems/convert-the-temperature/',
+  complexity: 'O(1) time and O(1) space.',
   examples: [
-    { label: "Example 1", input: '{"celsius":36.50}' },
-    { label: "Example 2", input: '{"celsius":122.11}' },
+    { label: 'Example 1', input: '{"celsius":36.5}' },
+    { label: 'Freezing', input: '{"celsius":0}' },
   ],
-};
+}
 
-export default function ConvertTemperatureVisualizer() {
-  return (
-    <AlgorithmWorkspace
-      definition={definition}
-      renderVisual={({ step }) => (
-        <IndexedSequence
-          label="result"
-          length={2}
-          active={-1}
-          valueAt={index => `${["Kelvin", "Fahrenheit"][index]}: ${step.values[index] ?? "-"}`}
-        />
-      )}
-      renderReasoning={({ step }) => <p>{step.message}</p>}
-    />
-  );
+export default function ConvertTheTemperature() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <dl className="algorithm-readout" aria-label="Converted temperature">
+      <dt>Celsius</dt><dd>{run.input.celsius}</dd>
+      <dt>Kelvin</dt><dd>{step.kelvin === null ? '...' : step.kelvin.toFixed(5)}</dd>
+      <dt>Fahrenheit</dt><dd>{step.fahrenheit === null ? '...' : step.fahrenheit.toFixed(5)}</dd>
+    </dl>
+    <p role="status">{step.message}</p>
+  </>} renderReasoning={() => <>
+    <p>Kelvin is Celsius shifted by 273.15. Fahrenheit is Celsius multiplied by 1.80 and then shifted by 32.</p>
+    <p>Each conversion is a single formula, so the answer is computed directly.</p>
+  </>} />
 }

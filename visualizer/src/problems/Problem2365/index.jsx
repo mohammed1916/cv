@@ -1,47 +1,33 @@
-import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
-import IndexedSequence from "../../components/shared/IndexedSequence";
-import { code, python, pythonLineMap, parseInput, buildTrace } from "./algorithm";
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
-  number: "2365",
   phases: [
-    { id: "setup", label: "Setup", description: "Start on day 0 with no task types recorded." },
-    { id: "scan", label: "Scan", description: "Take the next task in order." },
-    { id: "advance", label: "Day", description: "Advance the calendar by one day." },
-    { id: "check", label: "Cooldown", description: "Check whether the same task type must wait." },
-    { id: "wait", label: "Wait", description: "Insert idle days until the task is allowed." },
-    { id: "record", label: "Record", description: "Record the day this task type ran." },
-    { id: "done", label: "Result", description: "Report the total number of days." },
+    { id: 'start', label: 'Start', description: 'Day zero, nothing has run.' },
+    { id: 'next', label: 'Next task', description: 'Take the next task in order.' },
+    { id: 'tick', label: 'Next day', description: 'Advance to the next free day.' },
+    { id: 'wait', label: 'Wait', description: 'Too soon after the last run, so jump ahead.' },
+    { id: 'run', label: 'Run', description: 'Record the day this task runs.' },
+    { id: 'done', label: 'Result', description: 'The last day used is the answer.' },
   ],
-  parse: parseInput,
-  build: buildTrace,
-  code,
-  python,
-  pythonLineMap,
-  inputLabel: 'JSON {"tasks": [1,2,1,2,3,1], "space": 3}',
-  url: "https://leetcode.com/problems/task-scheduler-ii/",
-  complexity: "O(n) time and O(n) space for n tasks. The visualization caps n at 50 and space at 20.",
-  examples: [{ label: "Example 1", input: '{"tasks":[1,2,1,2,3,1],"space":3}' }],
-};
+  parse: parseInput, build: buildTrace, code, python,
+  inputLabel: 'Object with tasks (integers 1 to 20) and space (1 to 20)',
+  url: 'https://leetcode.com/problems/task-scheduler-ii/',
+  complexity: 'O(n) time and O(k) space for n tasks with k distinct types.',
+  examples: [
+    { label: 'Example', input: '{"tasks":[1,2,1,2,3,1],"space":3}' },
+    { label: 'Tight', input: '{"tasks":[5,5,5],"space":1}' },
+  ],
+}
 
-export default function TaskSchedulerIIVisualizer() {
-  return (
-    <AlgorithmWorkspace
-      definition={definition}
-      renderVisual={({ run, step }) => (
-        <>
-          <IndexedSequence
-            label="tasks"
-            length={run.input.length}
-            active={step.i ?? -1}
-            valueAt={index => run.input[index]}
-            roleAt={index => (index < (step.i ?? 0) ? "done" : "")}
-          />
-          <p>Current day: {step.day}</p>
-          <p>Last day each task type ran: {Object.entries(step.last).map(([t, d]) => `${t}→${d}`).join(", ") || "none yet"}</p>
-        </>
-      )}
-      renderReasoning={({ step }) => <p>{step.message}</p>}
-    />
-  );
+export default function TaskSchedulerII() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="Tasks" length={run.input.tasks.length} valueAt={i => run.input.tasks[i]} active={step.at}
+      roleAt={i => (i < step.at ? 'done' : '')} />
+    <output aria-label="Calendar">{`day ${step.day}, task ${step.task ?? '-'}, last days ${Object.entries(step.last).map(([t, d]) => `${t}:${d}`).join(' ') || 'none'}`}</output>
+  </>} renderReasoning={() => <>
+    <p>Tasks run in order, one per day. A task may run again only when more than space days have passed since its last run.</p>
+    <p>When it is too soon, the calendar jumps to the first allowed day instead of stepping one day at a time.</p>
+  </>} />
 }

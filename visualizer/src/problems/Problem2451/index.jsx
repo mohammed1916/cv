@@ -1,49 +1,35 @@
-import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
-import IndexedSequence from "../../components/shared/IndexedSequence";
-import { code, python, pythonLineMap, parseInput, buildTrace } from "./algorithm";
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import FrequencyCountTable from '../../components/shared/FrequencyCountTable'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
-  number: "2451",
+  number: '2451',
   phases: [
-    { id: "setup", label: "Setup", description: "Start with no groups." },
-    { id: "scan", label: "Scan", description: "Visit each word in order." },
-    { id: "diff", label: "Differences", description: "Compute the adjacent letter differences." },
-    { id: "group", label: "Group", description: "File the word's index under its difference array." },
-    { id: "search", label: "Search", description: "Look for a group with exactly one word." },
-    { id: "found", label: "Result", description: "Return the word with the odd difference array." },
+    { id: 'setup', label: 'Setup', description: 'Start with no patterns counted.' },
+    { id: 'diff', label: 'Differences', description: 'Compute the adjacent letter differences of a word.' },
+    { id: 'tally', label: 'Tally', description: 'Count the pattern once more.' },
+    { id: 'check', label: 'Check', description: 'Look for a word whose pattern appears once.' },
+    { id: 'done', label: 'Result', description: 'Return the odd word.' },
   ],
-  parse: parseInput,
-  build: buildTrace,
-  code,
-  python,
-  pythonLineMap,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'JSON {"words": ["adc","wzy","abc"]}',
-  url: "https://leetcode.com/problems/odd-string-difference/",
-  complexity: "O(n * m) time and O(n * m) space for n words of length m. The visualization caps n at 50 and m at 20.",
-  examples: [{ label: "Example 1", input: '{"words":["adc","wzy","abc"]}' }],
-};
+  url: 'https://leetcode.com/problems/odd-string-difference/',
+  complexity: 'O(n * L) time and O(n * L) space for n words of length L. The visualization caps input at 10 words of up to 8 letters.',
+  examples: [
+    { label: 'Example 1', input: '{"words":["adc","wzy","abc"]}' },
+    { label: 'Example 2', input: '{"words":["aaa","bob","ccc","ddd"]}' },
+  ],
+}
 
-export default function OddStringDifferenceVisualizer() {
-  return (
-    <AlgorithmWorkspace
-      definition={definition}
-      renderVisual={({ run, step }) => (
-        <>
-          <IndexedSequence
-            label="words"
-            length={run.input.length}
-            active={step.i ?? -1}
-            valueAt={index => run.input[index]}
-            roleAt={index => (step.result && run.input[index] === step.result ? "odd" : "")}
-          />
-          <ul>
-            {Object.entries(step.groups).map(([key, idxs]) => (
-              <li key={key}>[{key}] → indices {idxs.join(", ")}</li>
-            ))}
-          </ul>
-        </>
-      )}
-      renderReasoning={({ step }) => <p>{step.message}</p>}
-    />
-  );
+export default function OddStringDifference() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="words" length={run.input.words.length} valueAt={i => run.input.words[i]} active={step.at}
+      roleAt={i => (step.phase === 'done' && i === step.at ? 'odd' : '')} />
+    <FrequencyCountTable title="Difference patterns" entries={step.counts} active={step.key} emptyText="No pattern counted yet." />
+    <output aria-label="Odd string check">{step.message}</output>
+  </>} renderReasoning={() => <>
+    <p>Two words are alike when every adjacent pair of letters moves by the same amount. The difference pattern captures that movement, and it does not depend on the starting letter.</p>
+    <p>Count each pattern in a map. Exactly one word has a pattern that appears once, and that word is the answer.</p>
+  </>} />
 }

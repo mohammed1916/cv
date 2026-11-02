@@ -1,52 +1,43 @@
-import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
-import IndexedSequence from "../../components/shared/IndexedSequence";
-import { code, python, parseInput, buildTrace } from "./algorithm";
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
-  number: "2452",
+  number: '2452',
   phases: [
-    { id: "setup", label: "Setup", description: "Start with an empty result list." },
-    { id: "query", label: "Query", description: "Take the next query word in order." },
-    { id: "word", label: "Dictionary", description: "Pick a dictionary word to compare with." },
-    { id: "reset", label: "Reset", description: "Start the mismatch count." },
-    { id: "count", label: "Count", description: "Count the positions where the two words differ." },
-    { id: "check", label: "Check", description: "Decide whether at most two letters differ." },
-    { id: "record", label: "Record", description: "Keep the query and stop checking its other words." },
-    { id: "done", label: "Result", description: "Return the kept queries in their original order." },
+    { id: 'setup', label: 'Setup', description: 'Start with an empty result list.' },
+    { id: 'query', label: 'Query', description: 'Take the next query in order.' },
+    { id: 'word', label: 'Dictionary', description: 'Pick a dictionary word to compare with.' },
+    { id: 'reset', label: 'Reset', description: 'Start the mismatch count.' },
+    { id: 'count', label: 'Count', description: 'Count a position where the letters differ.' },
+    { id: 'check', label: 'Check', description: 'Decide whether at most two letters differ.' },
+    { id: 'record', label: 'Record', description: 'Keep the query and stop checking its other words.' },
+    { id: 'done', label: 'Result', description: 'Return the kept queries in their original order.' },
   ],
-  parse: parseInput,
-  build: buildTrace,
-  code,
-  python,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'JSON {"queries": ["word","note"], "dictionary": ["wood","joke"]}',
-  url: "https://leetcode.com/problems/words-within-two-edits-of-dictionary/",
-  complexity: "O(q * d * L) time and O(1) extra space beyond the result, for q queries, d dictionary words and word length L. The visualization caps each list at 50 words of up to 20 letters.",
-  examples: [{ label: "Example 1", input: '{"queries":["word","note","ants","wood"],"dictionary":["wood","joke","moat"]}' }],
-};
+  url: 'https://leetcode.com/problems/words-within-two-edits-of-dictionary/',
+  complexity: 'O(q * d * L) time and O(q) extra space for q queries, d dictionary words and word length L. The visualization caps each list at 8 words of up to 8 letters.',
+  examples: [
+    { label: 'Example 1', input: '{"queries":["word","note","ants","wood"],"dictionary":["wood","joke","moat"]}' },
+    { label: 'Example 2', input: '{"queries":["yes"],"dictionary":["not"]}' },
+  ],
+}
 
-export default function WordsWithinTwoEditsVisualizer() {
-  return (
-    <AlgorithmWorkspace
-      definition={definition}
-      renderVisual={({ run, step }) => (
-        <>
-          <IndexedSequence
-            label="queries"
-            length={run.input.queries.length}
-            active={step.q ?? -1}
-            valueAt={index => run.input.queries[index]}
-            roleAt={index => (run.result.includes(run.input.queries[index]) && index <= (step.q ?? -1) ? "counted" : "")}
-          />
-          <IndexedSequence
-            label="dictionary"
-            length={run.input.dictionary.length}
-            active={step.w ?? -1}
-            valueAt={index => run.input.dictionary[index]}
-          />
-          <p>Differing positions for this pair: {step.diff ?? 0}. Kept so far: {step.result.join(", ") || "none"}</p>
-        </>
-      )}
-      renderReasoning={({ step }) => <p>{step.message}</p>}
-    />
-  );
+export default function WordsWithinTwoEdits() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const query = step.q >= 0 ? run.input.queries[step.q] : ''
+    const word = step.w >= 0 ? run.input.dictionary[step.w] : ''
+    return <>
+      <IndexedSequence label="query" length={run.input.queries[0].length} valueAt={i => query[i] ?? ''} active={step.at}
+        roleAt={i => (query && word && query[i] !== word[i] ? 'differs' : '')} />
+      <IndexedSequence label="dictionary" length={run.input.dictionary.length} valueAt={i => run.input.dictionary[i]} active={step.w}
+        roleAt={i => (step.q >= 0 && i === step.w && step.phase === 'record' ? 'kept' : '')} />
+      <output aria-label="Edit count">{`query ${query || '-'}, word ${word || '-'}, differences ${step.diff}`}</output>
+      <p role="status">{step.message}</p>
+    </>
+  }} renderReasoning={() => <>
+    <p>A query belongs in the answer when some dictionary word matches it in at most two positions. Words are the same length, so compare position by position.</p>
+    <p>As soon as one dictionary word works, the query is kept and the remaining words are skipped.</p>
+  </>} />
 }

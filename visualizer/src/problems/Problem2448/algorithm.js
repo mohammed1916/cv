@@ -1,81 +1,53 @@
-const PYTHON_LINES = [
-  "def minCost(nums, cost):",
-  '    best = float("inf")',
-  "    for target in nums:",
-  "        total = 0",
-  "        for k in range(len(nums)):",
-  "            total += abs(nums[k] - target) * cost[k]",
-  "        best = min(best, total)",
-  "    return best",
-];
-
-const CODE_LINES = [
-  "FUNCTION minCost(nums, cost)",
-  "  best <- infinity",
-  "  FOR each candidate target t taken from nums",
-  "    total <- 0",
-  "    FOR each index k",
-  "      total <- total + |nums[k] - t| * cost[k]",
-  "    best <- smaller of best and total",
-  "  RETURN best",
-];
-
-const MAX_LENGTH = 50;
-const MAX_VALUE = 1000;
-
-export const python = PYTHON_LINES.join("\n");
-export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }));
-
-// Pseudocode line -> Python line doing the same action.
-export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8 };
-
 export function parseInput(text) {
-  let obj;
-  try {
-    obj = typeof text === "string" ? JSON.parse(text) : text;
-  } catch {
-    throw new Error('Input must be a JSON object such as {"nums": [1,3,5,2], "cost": [2,3,1,14]}');
-  }
-  if (!obj || typeof obj !== "object" || Array.isArray(obj)) throw new Error("Input must be a JSON object with nums and cost keys");
-  const { nums, cost } = obj;
-  if (!Array.isArray(nums) || !Array.isArray(cost)) throw new Error("nums and cost must both be arrays of integers");
-  if (nums.length < 1 || nums.length > MAX_LENGTH) {
-    throw new Error(`nums must contain between 1 and ${MAX_LENGTH} entries for this visualization`);
-  }
-  if (cost.length !== nums.length) throw new Error("cost must have the same length as nums");
-  nums.forEach((value, index) => {
-    if (!Number.isInteger(value) || value < 0 || value > MAX_VALUE) throw new Error(`nums[${index}] must be an integer from 0 to ${MAX_VALUE}`);
-  });
-  cost.forEach((price, index) => {
-    if (!Number.isInteger(price) || price < 0 || price > MAX_VALUE) throw new Error(`cost[${index}] must be an integer from 0 to ${MAX_VALUE}`);
-  });
-  return { nums, cost };
+  const input = JSON.parse(text)
+  if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Use an object with nums and cost.')
+  const { nums, cost } = input
+  if (!Array.isArray(nums) || !Array.isArray(cost) || nums.length < 1 || nums.length > 12 || nums.length !== cost.length) throw new Error('nums and cost have the same length, 1 to 12.')
+  if (!nums.every(x => Number.isInteger(x) && x >= 1 && x <= 50)) throw new Error('Each nums value is an integer from 1 to 50.')
+  if (!cost.every(c => Number.isInteger(c) && c >= 1 && c <= 100)) throw new Error('Each cost is an integer from 1 to 100.')
+  return { nums, cost }
 }
 
-export function buildTrace(input) {
-  const { nums, cost } = input.nums ? input : parseInput(input);
-  const n = nums.length;
-  const frames = [];
-  let best = Infinity;
-  const snap = (phase, activeLine, message, extra = {}) => frames.push({
-    phase, activeLine, pythonLine: { setup: 2, candidate: 3, reset: 4, sum: 6, update: 7, done: 8 }[phase], message, i: -1, k: -1, target: null, total: 0,
-    best: Number.isFinite(best) ? best : null, ...extra,
-  });
-
-  snap("setup", 2, "Start with no best cost.");
-  for (let i = 0; i < n; i++) {
-    const target = nums[i];
-    snap("candidate", 3, `Try target ${target} (taken from index ${i}).`, { i, target });
-    let total = 0;
-    snap("reset", 4, `Total cost for target ${target} starts at 0.`, { i, target });
-    for (let k = 0; k < n; k++) {
-      const term = Math.abs(nums[k] - target) * cost[k];
-      total += term;
-      snap("sum", 6, `|${nums[k]} - ${target}| * ${cost[k]} = ${term}, total is now ${total}.`, { i, k, target, total });
+export function buildTrace({ nums, cost }) {
+  const frames = []
+  const pairs = nums.map((x, i) => ({ x, c: cost[i] })).sort((a, b) => a.x - b.x || a.c - b.c)
+  const total = cost.reduce((s, c) => s + c, 0)
+  const sorted = pairs.map(p => `${p.x}/${p.c}`)
+  frames.push({ pythonLine: 2, phase: 'sort', activeLine: L('sort by value'), at: -1, sorted, running: 0, total, target: null, result: null, message: `Sort ${nums.length} pairs by value; total cost weight ${total}.` })
+  let running = 0
+  let target = pairs[0].x
+  for (let i = 0; i < pairs.length; i++) {
+    running += pairs[i].c
+    frames.push({ pythonLine: 6, phase: 'accumulate', activeLine: L('running +='), at: i, sorted, running, total, target: null, result: null, message: `Weight up to value ${pairs[i].x} is ${running} of ${total}.` })
+    if (2 * running >= total) {
+      target = pairs[i].x
+      frames.push({ pythonLine: 8, phase: 'median', activeLine: L('target = value'), at: i, sorted, running, total, target, result: null, message: `Half the weight is reached at value ${target}; use it as the target.` })
+      break
     }
-    best = Math.min(best, total);
-    snap("update", 7, `Total ${total} for target ${target}; best is ${best}.`, { i, target, total });
   }
-  snap("done", 8, `Minimum cost is ${best}.`, { result: best });
-  return { input: nums, cost, result: best, frames };
+  const result = pairs.reduce((s, p) => s + p.c * Math.abs(p.x - target), 0)
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return sum'), at: -1, sorted, running, total, target, result, message: `Cost to move every value to ${target} is ${result}.` })
+  return { input: { nums, cost }, result, frames }
 }
+
+export const code = `minimum cost to make all values equal
+  sort the pairs (value, cost) by value
+  total = sum of all costs
+  running = 0
+  for each pair in sorted order
+    running += cost
+    if 2 times running is at least total then target = value and stop
+  return the sum of cost times the distance from value to target`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def min_cost_to_make_equal(nums, cost):
+    pairs = sorted(zip(nums, cost))
+    total = sum(cost)
+    running = 0
+    for value, c in pairs:
+        running += c
+        if 2 * running >= total:
+            target = value
+            break
+    return sum(c * abs(x - target) for x, c in pairs)
+`

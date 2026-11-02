@@ -1,43 +1,30 @@
-import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
-import IndexedSequence from "../../components/shared/IndexedSequence";
-import { code, python, parseInput, buildTrace } from "./algorithm";
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
-  number: "2481",
+  number: '2481',
   phases: [
-    { id: "check", label: "Check", description: "Check special cases and parity of n." },
-    { id: "even", label: "Parity", description: "Decide whether n is even." },
-    { id: "done", label: "Result", description: "Return the number of cuts." },
+    { id: 'check', label: 'Check', description: 'Test whether one piece is needed.' },
+    { id: 'even', label: 'Even', description: 'Even n uses diameters through the centre.' },
+    { id: 'odd', label: 'Odd', description: 'Odd n needs one cut per piece.' },
+    { id: 'done', label: 'Result', description: 'Return the number of cuts.' },
   ],
-  parse: parseInput,
-  build: buildTrace,
-  code,
-  python,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'JSON {"n": 4}',
-  url: "https://leetcode.com/problems/minimum-cuts-to-divide-a-circle/",
-  complexity: "O(1) time and O(1) space. The visualization accepts n from 1 to 100.",
+  url: 'https://leetcode.com/problems/minimum-cuts-to-divide-a-circle/',
+  complexity: 'O(1) time and O(1) space.',
   examples: [
-    { label: "Example 1", input: '{"n":4}' },
-    { label: "Example 2", input: '{"n":3}' },
+    { label: 'Example 1', input: '{"n":4}' },
+    { label: 'Example 2', input: '{"n":3}' },
   ],
-};
+}
 
-export default function MinimumCutsCircleVisualizer() {
-  return (
-    <AlgorithmWorkspace
-      definition={definition}
-      renderVisual={({ run }) => (
-        <>
-          <IndexedSequence
-            label="slices"
-            length={run.input.n}
-            active={-1}
-            valueAt={index => index + 1}
-          />
-          <p>Slices to make: {run.input.n}. Cuts needed: {run.result}.</p>
-        </>
-      )}
-      renderReasoning={({ step }) => <p>{step.message}</p>}
-    />
-  );
+export default function MinimumCutsToDivideACircle() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <output aria-label="Cuts">{`n = ${run.input.n}, cuts = ${step.result === null ? '...' : step.result}`}</output>
+    <p role="status">{step.message}</p>
+  </>} renderReasoning={() => <>
+    <p>With an even count, every cut is a diameter through the centre, and two diameters give four equal pieces, so n/2 diameters give n pieces.</p>
+    <p>With an odd count, no line through the centre can split the circle into n equal pieces with fewer than n cuts, so the answer is n. One piece needs no cut at all.</p>
+  </>} />
 }

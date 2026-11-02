@@ -1,52 +1,31 @@
-import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
-import IndexedSequence from "../../components/shared/IndexedSequence";
-import { code, python, pythonLineMap, parseInput, buildTrace } from "./algorithm";
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
-  number: "2448",
   phases: [
-    { id: "setup", label: "Setup", description: "Start with no best cost." },
-    { id: "candidate", label: "Candidate", description: "Pick a value from nums as the target." },
-    { id: "reset", label: "Reset", description: "Start the total for this target at zero." },
-    { id: "sum", label: "Sum", description: "Add the cost of moving each element to the target." },
-    { id: "update", label: "Compare", description: "Keep the smaller total." },
-    { id: "done", label: "Result", description: "Report the minimum total cost." },
+    { id: 'sort', label: 'Sort', description: 'Order the value and cost pairs by value.' },
+    { id: 'accumulate', label: 'Weight', description: 'Add costs from the smallest value up.' },
+    { id: 'median', label: 'Median', description: 'Half of the total cost is reached.' },
+    { id: 'done', label: 'Result', description: 'Sum the cost of moving every value.' },
   ],
-  parse: parseInput,
-  build: buildTrace,
-  code,
-  python,
-  pythonLineMap,
-  inputLabel: 'JSON {"nums": [1,3,5,2], "cost": [2,3,1,14]}',
-  url: "https://leetcode.com/problems/minimum-cost-to-make-array-equal/",
-  complexity: "O(n^2) time and O(1) extra space for n elements. The visualization caps n at 50.",
-  examples: [{ label: "Example 1", input: '{"nums":[1,3,5,2],"cost":[2,3,1,14]}' }],
-};
+  parse: parseInput, build: buildTrace, code, python,
+  inputLabel: 'Object with nums and cost of the same length (values 1 to 50, costs 1 to 100)',
+  url: 'https://leetcode.com/problems/minimum-cost-to-make-array-equal/',
+  complexity: 'O(n log n) time with the sort; the weighted median is found in one pass.',
+  examples: [
+    { label: 'Example', input: '{"nums":[1,3,5,2],"cost":[2,3,1,14]}' },
+    { label: 'Equal', input: '{"nums":[2,2,2],"cost":[4,1,9]}' },
+  ],
+}
 
-export default function MinimumCostEqualVisualizer() {
-  return (
-    <AlgorithmWorkspace
-      definition={definition}
-      renderVisual={({ run, step }) => (
-        <>
-          <IndexedSequence
-            label="nums (candidate targets)"
-            length={run.input.length}
-            active={step.i ?? -1}
-            valueAt={index => run.input[index]}
-            roleAt={index => (index === step.i ? "target" : "")}
-          />
-          <IndexedSequence
-            label="cost"
-            length={run.cost.length}
-            active={step.k ?? -1}
-            valueAt={index => run.cost[index]}
-            roleAt={index => (index === step.k ? "compared" : "")}
-          />
-          <p>Target: {step.target ?? "none"} · Total: {step.total} · Best: {step.best ?? "none yet"}</p>
-        </>
-      )}
-      renderReasoning={({ step }) => <p>{step.message}</p>}
-    />
-  );
+export default function MinimumCostToMakeArrayEqual() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="Sorted value/cost" length={step.sorted.length} valueAt={i => step.sorted[i]} active={step.at}
+      roleAt={i => (step.target !== null && i === step.at ? 'target' : i < step.at ? 'counted' : '')} />
+    <output aria-label="Weighted median">{`running ${step.running} of ${step.total}, target ${step.target ?? 'pending'}, cost ${step.result ?? 'pending'}`}</output>
+  </>} renderReasoning={() => <>
+    <p>Moving one value by one step costs its weight, so the total cost is a weighted sum of distances to the target.</p>
+    <p>The best target is the weighted median: the first value, in sorted order, where at least half the total weight has been reached.</p>
+  </>} />
 }

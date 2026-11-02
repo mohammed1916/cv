@@ -1,90 +1,52 @@
-const PYTHON_LINES = [
-  "def averageValue(nums):",
-  "    total = 0",
-  "    count = 0",
-  "    for x in nums:",
-  "        if x % 6 == 0:",
-  "            total += x",
-  "            count += 1",
-  "    if count == 0:",
-  "        return 0",
-  "    return total // count",
-];
-
-const CODE_LINES = [
-  "FUNCTION averageValue(nums)",
-  "  total <- 0",
-  "  count <- 0",
-  "  FOR each value x in nums",
-  "    IF x is divisible by 6 THEN",
-  "      add x to total and add one to count",
-  "  IF count is 0 THEN",
-  "    RETURN 0",
-  "  RETURN total divided by count, rounded down",
-];
-
-const MAX_VALUES = 50;
-const MAX_VALUE = 1000;
-
-export const python = PYTHON_LINES.join("\n");
-export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }));
-
-const py = key => {
-  const index = PYTHON_LINES.findIndex(line => line.includes(key));
-  if (index < 0) throw new Error(`Python line for "${key}" is missing`);
-  return index + 1;
-};
-
 export function parseInput(text) {
-  let obj;
-  try {
-    obj = typeof text === "string" ? JSON.parse(text) : text;
-  } catch {
-    throw new Error('Input must be a JSON object such as {"nums": [1,3,6,10,12,15]}');
-  }
-  if (!obj || typeof obj !== "object" || Array.isArray(obj)) throw new Error("Input must be a JSON object with a nums key");
-  const { nums } = obj;
-  if (!Array.isArray(nums)) throw new Error("nums must be an array of integers");
-  if (nums.length < 1 || nums.length > MAX_VALUES) throw new Error(`nums must contain between 1 and ${MAX_VALUES} entries for this visualization`);
-  nums.forEach((value, index) => {
-    if (!Number.isInteger(value) || value < 1 || value > MAX_VALUE) throw new Error(`nums[${index}] must be an integer from 1 to ${MAX_VALUE}`);
-  });
-  return { nums };
+  const input = JSON.parse(text)
+  if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Use an object with nums.')
+  const { nums } = input
+  if (!Array.isArray(nums) || nums.length < 1 || nums.length > 50) throw new Error('nums has 1 to 50 integers.')
+  if (!nums.every(x => Number.isInteger(x) && x >= 1 && x <= 1000)) throw new Error('Each num is an integer from 1 to 1000.')
+  return { nums }
 }
 
-export function buildTrace(input) {
-  const { nums } = input.nums ? input : parseInput(input);
-  let total = 0;
-  let count = 0;
-  const frames = [];
-  const snap = (phase, activeLine, pyKey, message, extra = {}) => frames.push({
-    phase, activeLine, pythonLine: py(pyKey), message, i: -1, total, count, counted: [], ...extra,
-  });
-  const counted = [];
-
-  snap("setup", 2, "total = 0", "Start with a sum of 0 and a count of 0.");
-  snap("setup", 2, "count = 0", "The count of multiples of 6 starts at 0.");
-  for (let i = 0; i < nums.length; i++) {
-    const x = nums[i];
-    snap("scan", 3, "for x in nums", `Read value ${x} at index ${i}.`, { i });
-    const hit = x % 6 === 0;
-    snap("check", 4, "if x % 6 == 0", hit ? `${x} is divisible by 2 and by 3, so it counts.` : `${x} is not divisible by both 2 and 3.`, { i });
+export function buildTrace({ nums }) {
+  const frames = []
+  let total = 0
+  let count = 0
+  frames.push({ pythonLine: PL('total = 0'), phase: 'setup', activeLine: CL('total <-'), at: -1, total, count, message: 'Start with an empty sum and no matches.' })
+  nums.forEach((x, i) => {
+    frames.push({ pythonLine: PL('for x in nums'), phase: 'scan', activeLine: CL('FOR each x'), at: i, total, count, message: `Look at ${x}.` })
+    const hit = x % 6 === 0
+    frames.push({ pythonLine: PL('if x % 6 == 0'), phase: 'check', activeLine: CL('IF x is even'), at: i, total, count, message: `${x} is ${hit ? 'even and divisible by 3' : 'not both even and divisible by 3'}.` })
     if (hit) {
-      total += x;
-      counted.push(i);
-      snap("record", 5, "total += x", `Add ${x} to the total, now ${total}.`, { i, total, counted: [...counted] });
-      count += 1;
-      snap("record", 6, "count += 1", `The count is now ${count}.`, { i, total, count, counted: [...counted] });
+      total += x
+      count += 1
+      frames.push({ pythonLine: PL('total += x'), phase: 'add', activeLine: CL('add x to total'), at: i, total, count, message: `Add ${x}; sum ${total}, count ${count}.` })
     }
-  }
-
-  if (count === 0) {
-    snap("check", 7, "if count == 0", "No value qualifies, so the average is 0.", { total, count, counted: [...counted] });
-    snap("done", 8, "return 0", "Return 0.", { result: 0, total, count, counted: [...counted] });
-    return { input: nums, result: 0, frames };
-  }
-  snap("check", 7, "if count == 0", `The count is ${count}, so there is an average to take.`, { total, count, counted: [...counted] });
-  const result = Math.floor(total / count);
-  snap("done", 9, "return total // count", `Return ${total} divided by ${count}, rounded down, which is ${result}.`, { result, total, count, counted: [...counted] });
-  return { input: nums, result, frames };
+  })
+  const result = count === 0 ? 0 : Math.floor(total / count)
+  frames.push({ pythonLine: count === 0 ? PL('return 0') : PL('return total // count'), phase: 'done', activeLine: CL(count === 0 ? 'IF count equals 0' : 'RETURN floor'), at: -1, total, count, message: count === 0 ? 'No such numbers, so the answer is 0.' : `Floor of ${total} / ${count} is ${result}.` })
+  return { input: { nums }, result, frames }
 }
+
+export const code = `FUNCTION averageValue(nums)
+  total <- 0
+  count <- 0
+  FOR each x in nums
+    IF x is even and divisible by 3 THEN
+      add x to total and one to count
+  IF count equals 0 THEN RETURN 0
+  RETURN floor(total / count)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const CL = s => { const i = code.findIndex(c => c.text.includes(s)); if (i < 0) throw new Error(`missing ${s}`); return i + 1 }
+
+export const python = `def average_value(nums):
+    total = 0
+    count = 0
+    for x in nums:
+        if x % 6 == 0:
+            total += x
+            count += 1
+    if count == 0:
+        return 0
+    return total // count
+`
+const PY = python.split('\n')
+const PL = s => { const i = PY.findIndex(l => l.includes(s)); if (i < 0) throw new Error(`missing ${s}`); return i + 1 }
