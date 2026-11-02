@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import IndexedSequence from '../../components/shared/IndexedSequence'
+import BulbBoard from './BulbBoard'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -19,11 +19,7 @@ const definition = {
 }
 
 export default function ToggleLightBulbs() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="bulbs" length={run.input.bulbs.length} valueAt={i => run.input.bulbs[i]} active={step.at}
-      roleAt={i => (step.at >= 0 && i === step.at ? 'window' : '')} />
-    <output aria-label="Lit bulbs">{`on: ${step.lit && step.lit.length ? step.lit.join(', ') : 'none'}`}</output>
-  </>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <BulbBoard run={run} step={step} />} renderReasoning={() => <>
     <p>Each entry flips exactly one bulb. A bulb that is flipped an even number of times ends off, and an odd number of times ends on.</p>
     <p>Keeping one boolean per bulb makes each flip a constant-time update.</p>
   </>} />

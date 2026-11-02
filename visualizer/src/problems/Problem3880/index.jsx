@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import IndexedSequence from '../../components/shared/IndexedSequence'
+import NearestOppositeView from './NearestOppositeView'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -24,11 +24,7 @@ const definition = {
 }
 
 export default function MinimumAbsoluteDifferenceBetweenTwoValues() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} active={step.at}
-      roleAt={i => (step.partner !== undefined && i === step.partner ? 'window' : '')} />
-    <output aria-label="Smallest gap">{`best = ${step.best === null || step.best === undefined ? 'none' : step.best} · last 1 at ${step.last[1]} · last 2 at ${step.last[2]}`}</output>
-  </>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <NearestOppositeView run={run} step={step} />} renderReasoning={() => <>
     <p>A 1 and a 2 form a pair with the nearest opposite value seen before them, so only the latest index of each value needs to be remembered.</p>
     <p>Each index is checked once against the other value, giving a linear scan.</p>
   </>} />
