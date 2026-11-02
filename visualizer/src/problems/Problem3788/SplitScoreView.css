@@ -1,0 +1,16 @@
+.split-view { display: grid; gap: 0.75rem; }
+.split-section { border: 1px solid currentColor; border-radius: 0.5rem; padding: 0.6rem 0.8rem; opacity: 0.97; }
+.split-section h3 { margin: 0 0 0.4rem; font-size: 0.95rem; }
+.split-row { display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: stretch; }
+.split-cell { display: grid; justify-items: center; min-width: 3.6rem; padding: 0.35rem 0.4rem; border: 1px dashed currentColor; border-radius: 0.4rem; }
+.split-cell strong { font-size: 1.05rem; }
+.split-cell span { font-size: 0.72rem; }
+.split-cell.is-current { border-style: solid; border-width: 2px; font-weight: 700; }
+.split-cell.is-candidate { outline: 2px dotted currentColor; outline-offset: 2px; }
+.split-cell[data-filled="no"] { opacity: 0.5; }
+.split-cell[data-role="prefix"] { background: rgba(15, 118, 110, 0.14); }
+.split-cell[data-role="suffix"] { background: rgba(180, 83, 9, 0.14); }
+.split-boundary { display: flex; align-items: center; padding: 0 0.3rem; border-left: 3px double currentColor; border-right: 3px double currentColor; font-size: 0.75rem; font-weight: 700; }
+.split-boundary span { writing-mode: vertical-rl; }
+.split-note, .split-verdict { font-size: 0.85rem; margin: 0.4rem 0 0; }
+.split-retained { border-width: 2px; }

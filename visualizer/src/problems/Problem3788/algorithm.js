@@ -5,55 +5,151 @@ export function parseInput(text) {
   return { nums }
 }
 
+// Pseudocode and Python lookups fail fast when a referenced line is missing.
+const L = s => {
+  const index = code.findIndex(c => c.text.includes(s))
+  if (index < 0) throw new Error(`Missing pseudocode line: ${s}`)
+  return index + 1
+}
+const P = s => {
+  const index = python.split('\n').findIndex(line => line.includes(s))
+  if (index < 0) throw new Error(`Missing python line: ${s}`)
+  return index + 1
+}
+
 export function buildTrace({ nums }) {
   const n = nums.length
-  const suffixMin = Array(n).fill(0)
+  // sufVal[i] and sufSrc[i] are the smallest value at or after i and the index it came from.
+  const sufVal = Array(n).fill(null)
+  const sufSrc = Array(n).fill(null)
   const frames = []
-  const push = (pythonLine, phase, activeText, extra) => frames.push({
-    pythonLine, phase, activeLine: L(activeText), at: -1, split: -1, suffixFrom: -1,
-    prefix: null, suffixMin: null, score: null, best: null, ok: null, ...extra,
+  let best = null
+  let bestSplit = -1
+  let bestPrefix = null
+  let bestSuffixMin = null
+  let prefix = null
+
+  // Each frame stores copies of every array and scalar it displays, so back and seek never read later state.
+  const push = (activeText, pythonText, phase, extra) => frames.push({
+    phase,
+    activeLine: L(activeText),
+    pythonLine: P(pythonText),
+    at: -1,
+    split: -1,
+    prefix: null,
+    sufMin: null,
+    sufMinFrom: null,
+    score: null,
+    ok: null,
+    sufVal: [...sufVal],
+    sufSrc: [...sufSrc],
+    best,
+    bestSplit,
+    bestPrefix,
+    bestSuffixMin,
+    ...extra,
   })
 
-  push(2, 'start', 'let n be the length', { message: `The array has ${n} values.` })
+  push('let n be the length', 'n = len(nums)', 'start', { message: `The array has ${n} values, so there are ${n - 1} possible splits.` })
 
-  suffixMin[n - 1] = nums[n - 1]
-  push(4, 'suffix', 'build suffix_min', { at: n - 1, suffixFrom: n - 1, suffixMin: suffixMin[n - 1], message: `suffix_min[${n - 1}] = ${suffixMin[n - 1]}, the last value alone.` })
+  sufVal[n - 1] = nums[n - 1]
+  sufSrc[n - 1] = n - 1
+  push('suffix_min[n - 1] = nums[n - 1]', 'suffix_min[n - 1] = nums[n - 1]', 'suffix', {
+    at: n - 1,
+    message: `suffix_min[${n - 1}] = ${nums[n - 1]}, the last value alone (source index ${n - 1}).`,
+  })
+
   for (let i = n - 2; i >= 0; i--) {
-    suffixMin[i] = Math.min(nums[i], suffixMin[i + 1])
-    push(6, 'suffix', 'build suffix_min', { at: i, suffixFrom: i, suffixMin: suffixMin[i], message: `suffix_min[${i}] = min(${nums[i]}, ${suffixMin[i + 1]}) = ${suffixMin[i]}.` })
+    const useCurrent = nums[i] <= sufVal[i + 1]
+    sufVal[i] = useCurrent ? nums[i] : sufVal[i + 1]
+    sufSrc[i] = useCurrent ? i : sufSrc[i + 1]
+    push('suffix_min[i] = min(nums[i], suffix_min[i + 1])', 'suffix_min[i] = min(nums[i], suffix_min[i + 1])', 'suffix', {
+      at: i,
+      message: `suffix_min[${i}] = min(nums[${i}] = ${nums[i]}, suffix_min[${i + 1}] = ${sufVal[i + 1]}) = ${sufVal[i]}, from index ${sufSrc[i]}.`,
+    })
   }
 
-  let best = null
-  let prefix = 0
-  push(7, 'prefix', 'set best to none', { suffixFrom: 0, best, prefix, message: 'No best score yet; the prefix sum starts at 0.' })
+  prefix = 0
+  push('set best to none and prefix to 0', 'best = None', 'prefix', {
+    message: 'No retained optimum yet, and the prefix sum starts at 0.',
+  })
 
   for (let k = 0; k < n - 1; k++) {
     prefix += nums[k]
-    push(10, 'prefix', 'add nums[k] to prefix', { at: k, split: k, suffixFrom: 0, prefix, message: `Prefix through index ${k} totals ${prefix}.` })
-    const score = prefix - suffixMin[k + 1]
-    push(11, 'score', 'score is prefix minus suffix_min', { at: k + 1, split: k, suffixFrom: 0, prefix, suffixMin: suffixMin[k + 1], score, best, message: `Score ${prefix} - ${suffixMin[k + 1]} = ${score}.` })
+    push('add nums[k] to prefix', 'prefix += nums[k]', 'prefix', {
+      at: k,
+      split: k,
+      prefix,
+      message: `Split after index ${k}: the prefix nums[0..${k}] now sums to ${prefix}.`,
+    })
+
+    const suffixMin = sufVal[k + 1]
+    const score = prefix - suffixMin
+    push('score is prefix minus suffix_min[k + 1]', 'score = prefix - suffix_min[k + 1]', 'score', {
+      at: k + 1,
+      split: k,
+      prefix,
+      sufMin: suffixMin,
+      sufMinFrom: sufSrc[k + 1],
+      score,
+      message: `Candidate for split ${k}: ${prefix} - suffix min ${suffixMin} (from index ${sufSrc[k + 1]}) = ${score}.`,
+    })
+
     const improves = best === null || score > best
-    push(12, 'score', 'if best is none or score is greater', { at: k + 1, split: k, suffixFrom: 0, prefix, suffixMin: suffixMin[k + 1], score, best, ok: improves, message: improves ? `${score} is the best so far.` : `${score} does not beat ${best}.` })
+    push('if best is none or score is greater than best', 'if best is None or score > best:', 'score', {
+      at: k + 1,
+      split: k,
+      prefix,
+      sufMin: suffixMin,
+      sufMinFrom: sufSrc[k + 1],
+      score,
+      ok: improves,
+      message: improves
+        ? `${score} beats the retained optimum${best === null ? ' (there is none yet)' : ` ${best}`}.`
+        : `${score} does not beat the retained optimum ${best}, so the optimum is kept.`,
+    })
+
     if (improves) {
       best = score
-      push(13, 'improve', 'then best = score', { at: k + 1, split: k, suffixFrom: 0, prefix, suffixMin: suffixMin[k + 1], score, best, ok: true, message: `Best is now ${best}.` })
+      bestSplit = k
+      bestPrefix = prefix
+      bestSuffixMin = suffixMin
+      push('then best = score', 'best = score', 'improve', {
+        at: k + 1,
+        split: k,
+        prefix,
+        sufMin: suffixMin,
+        sufMinFrom: sufSrc[k + 1],
+        score,
+        ok: true,
+        message: `Retained optimum is now ${best}, from split ${bestSplit}.`,
+      })
     }
   }
 
-  push(14, 'done', 'return best', { suffixFrom: 0, prefix, best, ok: true, message: `Maximum score is ${best}.` })
+  push('return best', 'return best', 'done', {
+    split: bestSplit,
+    prefix: bestPrefix,
+    sufMin: bestSuffixMin,
+    score: best,
+    ok: true,
+    message: `Maximum score is ${best}, from split after index ${bestSplit}: prefix ${bestPrefix} minus suffix min ${bestSuffixMin}.`,
+  })
   return { input: { nums }, result: best, frames }
 }
 
 export const code = `maximum score of a split of nums
   let n be the length of nums
-  build suffix_min where suffix_min[i] is the smallest value from index i to the end
+  suffix_min[n - 1] = nums[n - 1]
+  for i from n - 2 down to 0
+    suffix_min[i] = min(nums[i], suffix_min[i + 1])
   set best to none and prefix to 0
-  for each split k from 0 to n minus 2
+  for each split k from 0 to n - 2
     add nums[k] to prefix
     score is prefix minus suffix_min[k + 1]
-    if best is none or score is greater than best then best = score
+    if best is none or score is greater than best
+    then best = score
   return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def maximum_score_of_a_split(nums):
     n = len(nums)
