@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import IndexedSequence from '../../components/shared/IndexedSequence'
+import PrefixRemovalView from './PrefixRemovalView'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -17,16 +17,13 @@ const definition = {
     { label: 'Example', input: '[1, 3, 2, 4]' },
     { label: 'Already increasing', input: '[1, 2, 3]' },
     { label: 'Decreasing', input: '[5, 4, 3]' },
+    { label: 'Equal at boundary', input: '[1, 2, 2, 3]' },
   ],
 }
 
 export default function MinimumPrefixRemoval() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} active={step.k ?? -1}
-      roleAt={i => (step.k !== undefined && i >= step.k ? 'window' : (step.cmp !== undefined && i === step.cmp ? 'window' : ''))} />
-    <output aria-label="Suffix start">{`suffix starts at ${step.k ?? 'none'}, remove ${step.k ?? 0} prefix element${step.k === 1 ? '' : 's'}`}</output>
-  </>} renderReasoning={() => <>
-    <p>The suffix must be strictly increasing. Starting at the end and moving left, the suffix can keep growing as long as each new element is smaller than the one after it.</p>
-    <p>The first pair that breaks the order fixes the start of the suffix, and everything before it must be removed.</p>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <PrefixRemovalView run={run} step={step} />} renderReasoning={() => <>
+    <p>The retained suffix must be strictly increasing. Starting at the end and moving left, the suffix grows while each pair is strictly increasing: nums[k-1] &lt; nums[k].</p>
+    <p>The first pair that is not strictly increasing (including equal values) stops the scan. Its right side becomes the suffix start, and everything before it is the removed prefix. Before the scan finishes, that count is provisional.</p>
   </>} />
 }

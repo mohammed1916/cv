@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { buildTrace, parseInput } from './algorithm.js'
+import { buildTrace, parseInput, code, python } from './algorithm.js'
 
 const solve = nums => buildTrace({ nums }).result
 
@@ -14,6 +14,35 @@ test('3818 edge cases', () => {
   assert.equal(solve([7]), 0)
   assert.equal(solve([2, 2]), 1)
   assert.equal(solve([-5, 1, 0]), 2)
+})
+
+test('3818 already increasing: no violation, result 0', () => {
+  const trace = buildTrace({ nums: [1, 2, 3, 4] })
+  assert.equal(trace.result, 0)
+  assert.ok(trace.frames.every(f => f.verdict !== 'violation'))
+  assert.equal(trace.frames.at(-1).k, 0)
+})
+
+test('3818 descending: stops at the first violation from the right', () => {
+  const trace = buildTrace({ nums: [5, 4, 3] })
+  assert.equal(trace.result, 2)
+  const violations = trace.frames.filter(f => f.verdict === 'violation')
+  assert.equal(violations.length, 1)
+  assert.deepEqual([violations[0].leftValue, violations[0].rightValue], [4, 3])
+})
+
+test('3818 equality at the boundary counts as a violation (strict increase)', () => {
+  const trace = buildTrace({ nums: [1, 2, 2, 3] })
+  assert.equal(trace.result, 2)
+  const violation = trace.frames.find(f => f.verdict === 'violation')
+  assert.deepEqual([violation.left, violation.right, violation.leftValue, violation.rightValue], [1, 2, 2, 2])
+})
+
+test('3818 one-element array has no comparisons and result 0', () => {
+  const trace = buildTrace({ nums: [7] })
+  assert.equal(trace.result, 0)
+  assert.ok(trace.frames.every(f => f.verdict === ''))
+  assert.equal(trace.frames.at(-1).phase, 'done')
 })
 
 test('3818 rejects malformed input', () => {
@@ -41,9 +70,18 @@ test('3818 random inputs match a brute-force oracle', () => {
   }
 })
 
-test('3818 trace ends on the result and every frame has a python line', () => {
-  const trace = buildTrace({ nums: [4, 1, 2, 3] })
-  assert.equal(trace.result, 1)
-  assert.equal(trace.frames.at(-1).phase, 'done')
-  assert.ok(trace.frames.every(f => Number.isInteger(f.pythonLine) && f.pythonLine >= 1))
+test('3818 frames keep provisional state, valid line references and a final done frame', () => {
+  const codeLines = code.length
+  const pyLines = python.trim().split('\n').length
+  for (const nums of [[4, 1, 2, 3], [1, 3, 2, 4], [7], [2, 2], [1, 2, 3]]) {
+    const trace = buildTrace({ nums })
+    assert.equal(trace.frames.at(-1).phase, 'done')
+    assert.equal(trace.frames.at(-1).k, trace.result)
+    assert.ok(trace.frames.slice(0, -1).every(f => f.phase !== 'done'))
+    for (const f of trace.frames) {
+      assert.ok(Number.isInteger(f.activeLine) && f.activeLine >= 1 && f.activeLine <= codeLines)
+      assert.ok(Number.isInteger(f.pythonLine) && f.pythonLine >= 1 && f.pythonLine <= pyLines)
+      assert.ok(f.k >= 0 && f.k < nums.length)
+    }
+  }
 })

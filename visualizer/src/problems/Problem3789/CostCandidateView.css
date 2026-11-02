@@ -1,0 +1,16 @@
+.cost-view { display: grid; gap: 12px; font-size: 14px; }
+.cost-view__caption, .cost-view__note { margin: 0; opacity: 0.85; }
+.cost-view__table-wrap { overflow-x: auto; }
+.cost-view__table { border-collapse: collapse; width: 100%; min-width: 640px; }
+.cost-view__table th, .cost-view__table td { border: 1px solid currentColor; padding: 4px 6px; text-align: right; }
+.cost-view__row--best { font-weight: 700; outline: 2px solid currentColor; }
+.cost-view__row--current { font-style: italic; }
+.cost-view__bars { display: grid; gap: 10px; }
+.cost-bar__head { display: flex; justify-content: space-between; gap: 8px; }
+.cost-bar__track { position: relative; display: flex; height: 26px; border: 1px solid currentColor; overflow: hidden; }
+.cost-bar__seg { display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; font-size: 12px; overflow: hidden; }
+.cost-bar__seg--both { background: #0f766e; color: #fff; }
+.cost-bar__seg--single { background: #94a3b8; color: #000; }
+.cost-bar__seg--excess { background: repeating-linear-gradient(45deg, #f59e0b 0 4px, #fcd34d 4px 8px); color: #000; }
+.cost-bar__need { position: absolute; top: 0; bottom: 0; border-left: 2px dashed currentColor; padding-left: 2px; font-size: 11px; }
+.cost-view__plan { display: grid; gap: 4px; border-left: 4px solid #0f766e; padding: 6px 10px; }
