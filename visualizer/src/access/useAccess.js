@@ -1,15 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth, googleSignIn, emailSignIn, accessCall, backendEnabled } from "./firebase";
-
-const EMAIL_ERRORS = {
-  "auth/invalid-email": "Enter a valid email address.",
-  "auth/invalid-credential": "Email or password is incorrect.",
-  "auth/user-disabled": "This account has been disabled.",
-  "auth/too-many-requests": "Too many attempts. Wait a few minutes and try again.",
-  "auth/operation-not-allowed": "Email sign-in is not enabled yet. Please use Google.",
-  "auth/network-request-failed": "Network error. Check your connection and retry.",
-};
+import { auth, googleSignIn, accessCall, backendEnabled } from "./firebase";
 
 export function useAccess() {
   const [user, setUser] = useState(null);
@@ -71,17 +62,6 @@ export function useAccess() {
       setBusy(false);
     }
   };
-  const loginWithEmail = async (email, password) => {
-    setError("");
-    setBusy(true);
-    try {
-      await emailSignIn(email.trim(), password);
-    } catch (err) {
-      setError(EMAIL_ERRORS[err.code] || "Email sign-in could not complete. Please try again.");
-    } finally {
-      setBusy(false);
-    }
-  };
   const logout = async () => {
     try {
       await signOut(auth);
@@ -121,7 +101,6 @@ export function useAccess() {
     setError,
     busy,
     login,
-    loginWithEmail,
     logout,
     refresh,
     startTrial,

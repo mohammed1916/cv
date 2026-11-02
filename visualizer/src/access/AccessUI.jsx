@@ -17,19 +17,10 @@ export function AccessDialog({ title, onClose, children }) {
   </dialog>, document.body);
 }
 
-export function EmailSignIn({ access }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  function submit(event) {
-    event.preventDefault();
-    access.loginWithEmail(email, password);
-  }
-  return <form className="email-signin" onSubmit={submit}>
-    <p>Or sign in with email and password</p>
-    <input type="email" autoComplete="username" placeholder="Email" aria-label="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-    <input type="password" autoComplete="current-password" placeholder="Password" aria-label="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-    <button className="access-primary" type="submit" disabled={access.busy}>Sign in</button>
-  </form>;
+export function GoogleSignIn({ access }) {
+  return <div className="access-signin">
+    <button className="access-primary" disabled={access.busy} onClick={access.login}>Continue with Google</button>
+  </div>;
 }
 
 let checkoutScript;
@@ -100,8 +91,7 @@ export function Plans({ access, reason }) {
       </section>
     </div>
     {!access.user && <>
-      <button className="access-primary" disabled={access.busy} onClick={access.login}>Continue with Google</button>
-      <EmailSignIn access={access} />
+      <GoogleSignIn access={access} />
     </>}
     {access.user && <button onClick={access.refresh}>Refresh access</button>}
     <p role="status">{message || access.error}</p>
@@ -138,7 +128,7 @@ export function PlaygroundGate({ access, onPlans, children }) {
   }, [access.user, retry, sessionId]);
   const allowed = lease && lease.validUntil > now;
   if (!access.ready) return <div className="access-gate">Checking sign-in…</div>;
-  if (!access.user) return <div className="access-gate"><h2>Your daily coding practice</h2><p>Sign in with Google for 30 minutes of free playground use every day.</p><button className="access-primary" onClick={access.login} disabled={access.busy}>Continue with Google</button><EmailSignIn access={access} /><p role="alert">{access.error}</p></div>;
+  if (!access.user) return <div className="access-gate"><h2>Your daily coding practice</h2><p>Sign in with Google for 30 minutes of free playground use every day.</p><GoogleSignIn access={access} /><p role="alert">{access.error}</p></div>;
   if (!backendEnabled) return <div className="access-gate"><h2>Playground account access is being set up</h2><p>Daily usage tracking is not available yet. Free problem visualizers and the tutorial are available now.</p></div>;
   return <div className="playground-access-wrap">
     {allowed && <div className="playground-allowance" role="status">{lease.pro ? (lease.trialActive ? 'Free trial · Unlimited playground' : 'Pro · Unlimited playground') : `${Math.ceil((lease.remainingSeconds + Math.max(0, (lease.validUntil - now) / 1000)) / 60)} min left today · Resets midnight IST`}{!lease.pro && <button onClick={onPlans}>Get Pro</button>}</div>}

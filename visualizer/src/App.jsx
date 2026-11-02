@@ -33,7 +33,6 @@ import { useAccess } from "./access/useAccess";
 import { isFreeProblem, accessLabel, PLANS } from "./access/policy";
 import {
   AccessDialog,
-  EmailSignIn,
   Plans,
   PlaygroundGate,
 } from "./access/AccessUI";
@@ -1318,14 +1317,15 @@ export default function App() {
                         Use Google to keep your daily playground allowance and
                         Pro access linked to your account.
                       </p>
-                      <button
-                        className="access-primary"
-                        disabled={access.busy}
-                        onClick={access.login}
-                      >
-                        Continue with Google
-                      </button>
-                      <EmailSignIn access={access} />
+                      <div className="access-signin">
+                        <button
+                          className="access-primary"
+                          disabled={access.busy}
+                          onClick={access.login}
+                        >
+                          Continue with Google
+                        </button>
+                      </div>
                     </>
                   )}
                   <p role="alert">{access.error}</p>
