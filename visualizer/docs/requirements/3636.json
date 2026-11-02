@@ -1,0 +1,17 @@
+{
+  "number": 3636,
+  "title": "Threshold Majority Queries",
+  "source": "https://leetcode.com/problems/threshold-majority-queries/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-blocked",
+  "contentKind": "none",
+  "summary": null,
+  "attempt": {
+    "method": "web-fetch agent (WebFetch)",
+    "url": "https://leetcode.com/problems/threshold-majority-queries/description/",
+    "result": "HTTP 403",
+    "date": "2026-11-02"
+  },
+  "missing": "Full statement (rules, constraints, examples, pitfalls) not retrieved. No requirement was inferred from the title.",
+  "implementationStatus": "blocked-no-statement"
+}

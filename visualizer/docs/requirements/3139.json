@@ -1,0 +1,82 @@
+{
+  "number": 3139,
+  "title": "Minimum Cost to Equalize Array",
+  "source": "https://leetcode.com/problems/minimum-cost-to-equalize-array/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "paraphrased-requirements-with-example-data",
+  "requirementsVerified": true,
+  "summary": "Make all array values equal using either a unit increment at one index costing cost1, or simultaneous unit increments at two distinct indices costing cost2. Minimize the actual total cost, then return it modulo 1000000007.",
+  "officialConstraints": "1..100000 entries; array values, cost1 and cost2 are positive integers at most 1000000.",
+  "examples": [
+    {
+      "input": {
+        "nums": [
+          4,
+          1
+        ],
+        "cost1": 5,
+        "cost2": 2
+      },
+      "output": 15
+    },
+    {
+      "input": {
+        "nums": [
+          2,
+          3,
+          3,
+          3,
+          5
+        ],
+        "cost1": 2,
+        "cost2": 1
+      },
+      "output": 6
+    },
+    {
+      "input": {
+        "nums": [
+          3,
+          5,
+          3
+        ],
+        "cost1": 1,
+        "cost2": 3
+      },
+      "output": 4
+    }
+  ],
+  "pitfalls": [
+    "A paired operation must affect distinct indices. Do not minimize reduced residues. The best final value need not equal the original maximum."
+  ],
+  "previousAccessFailure": {
+    "number": 3139,
+    "title": "Minimum Cost to Equalize Array",
+    "source": "https://leetcode.com/problems/minimum-cost-to-equalize-array/description/",
+    "checkedOn": "2026-11-02",
+    "sourceKind": "access-attempt-failed",
+    "contentKind": "none",
+    "summary": null,
+    "attempts": [
+      {
+        "method": "WebFetch (direct)",
+        "url": "https://leetcode.com/problems/minimum-cost-to-equalize-array/description/",
+        "error": "HTTP 403 Forbidden"
+      },
+      {
+        "method": "web-fetch agent",
+        "url": "https://leetcode.com/problems/minimum-cost-to-equalize-array/description/",
+        "error": "Concurrent subagent limit reached; not retried"
+      },
+      {
+        "method": "WebSearch (leetcode.com domain)",
+        "url": "https://leetcode.com/problems/minimum-cost-to-equalize-array/description/",
+        "error": "search snippet only; not a full statement"
+      }
+    ],
+    "missing": "Full official statement (rules, constraints, examples with exact input/output, pitfalls).",
+    "implementationStatus": "blocked-access; not implemented"
+  },
+  "implementationStatus": "not-certified-by-this-source-note"
+}

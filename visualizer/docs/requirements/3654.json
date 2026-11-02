@@ -1,0 +1,17 @@
+{
+  "number": 3654,
+  "title": "Minimum Sum After Divisible Sum Deletions",
+  "source": "https://leetcode.com/problems/minimum-sum-after-divisible-sum-deletions/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-blocked",
+  "contentKind": "none",
+  "summary": null,
+  "attempt": {
+    "method": "web-fetch agent (WebFetch)",
+    "url": "https://leetcode.com/problems/minimum-sum-after-divisible-sum-deletions/description/",
+    "result": "not attempted (concurrency limit)",
+    "date": "2026-11-02"
+  },
+  "missing": "Full statement (rules, constraints, examples, pitfalls) not retrieved. No requirement was inferred from the title.",
+  "implementationStatus": "blocked-no-statement"
+}

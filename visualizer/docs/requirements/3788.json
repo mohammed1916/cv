@@ -1,0 +1,47 @@
+{
+  "number": 3788,
+  "title": "Maximum Score of a Split",
+  "source": "https://leetcode.com/problems/maximum-score-of-a-split/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "paraphrased-requirements-with-example-data",
+  "summary": "Split nums into a nonempty prefix and nonempty suffix. Score the split as the prefix total minus the smallest suffix value. Return the greatest score among all split positions.",
+  "officialConstraints": "Array length 2 through 100000; integer values from -1000000000 through 1000000000.",
+  "examples": [
+    {
+      "input": {
+        "nums": [
+          10,
+          -1,
+          3,
+          -4,
+          -5
+        ]
+      },
+      "output": 17
+    },
+    {
+      "input": {
+        "nums": [
+          -7,
+          -5,
+          3
+        ]
+      },
+      "output": -2
+    },
+    {
+      "input": {
+        "nums": [
+          1,
+          1
+        ]
+      },
+      "output": 0
+    }
+  ],
+  "pitfalls": [
+    "The suffix contribution is its minimum, not its sum. Negative answers are valid. Totals may exceed 32-bit range."
+  ],
+  "implementationStatus": "not-certified-by-this-source-note"
+}

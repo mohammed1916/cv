@@ -1,0 +1,20 @@
+{
+  "number": 3698,
+  "title": "Split Array With Minimum Difference",
+  "source": "https://leetcode.com/problems/split-array-with-minimum-difference/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "access-attempt-failed",
+  "contentKind": "none",
+  "summary": null,
+  "attempt": {
+    "method": "web-fetch agent (WebFetch)",
+    "urls": [
+      "https://leetcode.com/problems/split-array-with-minimum-difference/description/"
+    ],
+    "error": "HTTP 403 Forbidden; response body not retrieved"
+  },
+  "officialConstraints": null,
+  "examples": [],
+  "pitfalls": [],
+  "implementationStatus": "blocked-no-statement"
+}

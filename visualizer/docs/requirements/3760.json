@@ -1,0 +1,12 @@
+{
+  "number": 3760,
+  "title": "Maximum Substrings With Distinct Start",
+  "source": "https://leetcode.com/problems/maximum-substrings-with-distinct-start/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "access-attempt-failed",
+  "contentKind": "none",
+  "summary": null,
+  "accessAttempt": {"method": "web-fetch agent", "error": "not attempted: concurrent subagent limit reached on batch launch; a 403 was observed for 3716 and 3722"},
+  "missingInformation": "Full official statement, constraints and examples are required before any implementation.",
+  "implementationStatus": "skipped-no-verified-requirements"
+}

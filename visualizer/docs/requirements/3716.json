@@ -1,0 +1,12 @@
+{
+  "number": 3716,
+  "title": "Find Churn Risk Customers",
+  "source": "https://leetcode.com/problems/find-churn-risk-customers/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "access-attempt-failed",
+  "contentKind": "none",
+  "summary": null,
+  "accessAttempt": {"method": "web-fetch agent", "error": "web-fetch returned HTTP 403 Forbidden with no body"},
+  "missingInformation": "Full official statement, constraints and examples are required before any implementation.",
+  "implementationStatus": "skipped-no-verified-requirements"
+}

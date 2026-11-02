@@ -1,0 +1,20 @@
+{
+  "number": 3683,
+  "title": "Earliest Time to Finish One Task",
+  "source": "https://leetcode.com/problems/earliest-time-to-finish-one-task/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "access-attempt-failed",
+  "contentKind": "none",
+  "summary": null,
+  "attempt": {
+    "method": "web-fetch agent (WebFetch)",
+    "urls": [
+      "https://leetcode.com/problems/earliest-time-to-finish-one-task/description/"
+    ],
+    "error": "HTTP 403 Forbidden; response body not retrieved"
+  },
+  "officialConstraints": null,
+  "examples": [],
+  "pitfalls": [],
+  "implementationStatus": "blocked-no-statement"
+}

@@ -1,5 +1,7 @@
 # Development documentation
 
+- [LeetCode statement source directory](statement-sources/INDEX.md): official links for all stored entries and local requirement summaries.
+
 - [Current Claude catalog handoff](CLAUDE-CATALOG-HANDOFF.md): start here for the 4,073-problem completion task.
 
 - [Basics track](basics-track.md): free lessons, shared algorithms, and verification.

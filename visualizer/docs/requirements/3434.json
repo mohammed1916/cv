@@ -1,0 +1,28 @@
+{
+  "number": 3434,
+  "title": "Maximum Frequency After Subarray Operation",
+  "source": "https://leetcode.com/problems/maximum-frequency-after-subarray-operation/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "access-attempt-failed",
+  "contentKind": "none",
+  "summary": null,
+  "attempts": [
+    {
+      "method": "WebFetch (direct)",
+      "url": "https://leetcode.com/problems/maximum-frequency-after-subarray-operation/description/",
+      "error": "HTTP 403 Forbidden"
+    },
+    {
+      "method": "web-fetch agent",
+      "url": "https://leetcode.com/problems/maximum-frequency-after-subarray-operation/description/",
+      "error": "Concurrent subagent limit reached; not retried"
+    },
+    {
+      "method": "WebSearch (leetcode.com domain)",
+      "url": "https://leetcode.com/problems/maximum-frequency-after-subarray-operation/description/",
+      "error": "search snippet only; not a full statement"
+    }
+  ],
+  "missing": "Full official statement (rules, constraints, examples with exact input/output, pitfalls).",
+  "implementationStatus": "blocked-access; not implemented"
+}

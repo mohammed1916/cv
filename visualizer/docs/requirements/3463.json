@@ -1,0 +1,28 @@
+{
+  "number": 3463,
+  "title": "Check If Digits Are Equal in String After Operations II",
+  "source": "https://leetcode.com/problems/check-if-digits-are-equal-in-string-after-operations-ii/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "access-attempt-failed",
+  "contentKind": "none",
+  "summary": null,
+  "attempts": [
+    {
+      "method": "WebFetch (direct)",
+      "url": "https://leetcode.com/problems/check-if-digits-are-equal-in-string-after-operations-ii/description/",
+      "error": "HTTP 403 Forbidden"
+    },
+    {
+      "method": "web-fetch agent",
+      "url": "https://leetcode.com/problems/check-if-digits-are-equal-in-string-after-operations-ii/description/",
+      "error": "Concurrent subagent limit reached; not retried"
+    },
+    {
+      "method": "WebSearch (leetcode.com domain)",
+      "url": "https://leetcode.com/problems/check-if-digits-are-equal-in-string-after-operations-ii/description/",
+      "error": "search snippet only; not a full statement"
+    }
+  ],
+  "missing": "Full official statement (rules, constraints, examples with exact input/output, pitfalls).",
+  "implementationStatus": "blocked-access; not implemented"
+}

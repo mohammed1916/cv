@@ -1,0 +1,57 @@
+{
+  "number": 3797,
+  "title": "Count Routes to Climb a Rectangular Grid",
+  "source": "https://leetcode.com/problems/count-routes-to-climb-a-rectangular-grid/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "paraphrased-requirements-with-example-data",
+  "summary": "Count routes through available dot cells of a rectangular grid, starting on its bottom row and ending on its top row. A move goes to a different available cell in the same row or the immediately preceding row, with Euclidean distance at most d. Two horizontal moves cannot be consecutive. Return the route count modulo 1000000007.",
+  "officialConstraints": "Rows and columns each range from 1 through 750; d is an integer from 1 through 750; cells are dot or hash.",
+  "examples": [
+    {
+      "input": {
+        "grid": [
+          "..",
+          "#."
+        ],
+        "d": 1
+      },
+      "output": 2
+    },
+    {
+      "input": {
+        "grid": [
+          "..",
+          "#."
+        ],
+        "d": 2
+      },
+      "output": 4
+    },
+    {
+      "input": {
+        "grid": [
+          "#"
+        ],
+        "d": 750
+      },
+      "output": 0
+    },
+    {
+      "input": {
+        "grid": [
+          ".."
+        ],
+        "d": 1
+      },
+      "output": 4
+    }
+  ],
+  "pitfalls": [
+    "A horizontal move is allowed on the top row before finishing. The one-row example includes singleton routes and both horizontal directions. Do not count staying in the same cell as a move."
+  ],
+  "interpretationNotes": [
+    "Distinct-cell moves and singleton routes are confirmed by the official one-row example; the prose alone is less explicit."
+  ],
+  "implementationStatus": "not-certified-by-this-source-note"
+}

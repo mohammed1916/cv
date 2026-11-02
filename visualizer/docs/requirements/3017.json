@@ -2,12 +2,68 @@
   "number": 3017,
   "title": "Count the Number of Houses at a Certain Distance II",
   "source": "https://leetcode.com/problems/count-the-number-of-houses-at-a-certain-distance-ii/",
-  "checkedOn": "2026-10-30",
-  "sourceKind": "search summaries only; official page not fetched",
-  "sourceUrls": [],
-  "summary": null,
-  "officialConstraints": "unverified: constraints not retrieved",
-  "examples": [],
-  "visualizationNotes": "not built: Skipped: the constraints were not retrieved, and sources disagree on the problem number (3017, 3310, 3271). Algorithm requires n up to 10^5 and was not built.",
-  "requirementsVerified": false
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "paraphrased-requirements-with-example-data",
+  "requirementsVerified": true,
+  "summary": "Count ordered pairs of distinct houses by shortest-path distance. Houses 1 through n form a path; add an undirected edge between x and y. Return n counts, where output index k-1 counts pairs at distance k. x and y may coincide.",
+  "officialConstraints": "2 <= n <= 100000; x and y are house indices in 1..n.",
+  "examples": [
+    {
+      "input": {
+        "n": 3,
+        "x": 1,
+        "y": 3
+      },
+      "output": [
+        6,
+        0,
+        0
+      ]
+    },
+    {
+      "input": {
+        "n": 5,
+        "x": 2,
+        "y": 4
+      },
+      "output": [
+        10,
+        8,
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "input": {
+        "n": 4,
+        "x": 1,
+        "y": 1
+      },
+      "output": [
+        6,
+        4,
+        2,
+        0
+      ]
+    }
+  ],
+  "pitfalls": [
+    "Count both directions, not unordered pairs. Self-pairs are excluded. An O(n²) solver does not meet the full domain."
+  ],
+  "previousAccessFailure": {
+    "number": 3017,
+    "title": "Count the Number of Houses at a Certain Distance II",
+    "source": "https://leetcode.com/problems/count-the-number-of-houses-at-a-certain-distance-ii/",
+    "checkedOn": "2026-10-30",
+    "sourceKind": "search summaries only; official page not fetched",
+    "sourceUrls": [],
+    "summary": null,
+    "officialConstraints": "unverified: constraints not retrieved",
+    "examples": [],
+    "visualizationNotes": "not built: Skipped: the constraints were not retrieved, and sources disagree on the problem number (3017, 3310, 3271). Algorithm requires n up to 10^5 and was not built.",
+    "requirementsVerified": false
+  },
+  "implementationStatus": "not-certified-by-this-source-note"
 }

@@ -1,0 +1,21 @@
+{
+  "number": 3505,
+  "title": "Minimum Operations to Make Elements Within K Subarrays Equal",
+  "source": "https://leetcode.com/problems/minimum-operations-to-make-elements-within-k-subarrays-equal/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "access-attempt-failed",
+  "contentKind": "none",
+  "summary": null,
+  "attempts": [
+    {
+      "method": "web-fetch agent (WebFetch)",
+      "url": "https://leetcode.com/problems/minimum-operations-to-make-elements-within-k-subarrays-equal/description/",
+      "error": "HTTP 403 Forbidden, body not retrieved"
+    }
+  ],
+  "officialConstraints": null,
+  "examples": [],
+  "pitfalls": [],
+  "implementationStatus": "blocked-statement-unavailable",
+  "note": "Official statement could not be read on 2026-11-02; no requirements were inferred from the title. No src/problems folder created."
+}

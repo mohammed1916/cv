@@ -1,0 +1,73 @@
+{
+  "number": 3149,
+  "title": "Find the Minimum Cost Array Permutation",
+  "source": "https://leetcode.com/problems/find-the-minimum-cost-array-permutation/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "paraphrased-requirements-with-example-data",
+  "requirementsVerified": true,
+  "summary": "Given nums, itself a permutation of 0..n-1, return a permutation perm minimizing the cyclic score sum over i of abs(perm[i] - nums[perm[(i+1) mod n]]). Resolve equal scores by lexicographically smallest perm.",
+  "officialConstraints": "2 <= n <= 14; nums contains every integer 0..n-1 exactly once.",
+  "examples": [
+    {
+      "input": {
+        "nums": [
+          1,
+          0,
+          2
+        ]
+      },
+      "output": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "input": {
+        "nums": [
+          0,
+          2,
+          1
+        ]
+      },
+      "output": [
+        0,
+        2,
+        1
+      ]
+    }
+  ],
+  "pitfalls": [
+    "The score uses nums indexed by the NEXT permutation entry; it is not adjacent differences of nums. Include the closing cyclic edge. Return the permutation, not just its score."
+  ],
+  "previousAccessFailure": {
+    "number": 3149,
+    "title": "Find the Minimum Cost Array Permutation",
+    "source": "https://leetcode.com/problems/find-the-minimum-cost-array-permutation/description/",
+    "checkedOn": "2026-11-02",
+    "sourceKind": "access-attempt-failed",
+    "contentKind": "none",
+    "summary": null,
+    "attempts": [
+      {
+        "method": "WebFetch (direct)",
+        "url": "https://leetcode.com/problems/find-the-minimum-cost-array-permutation/description/",
+        "error": "HTTP 403 Forbidden"
+      },
+      {
+        "method": "web-fetch agent",
+        "url": "https://leetcode.com/problems/find-the-minimum-cost-array-permutation/description/",
+        "error": "Concurrent subagent limit reached; not retried"
+      },
+      {
+        "method": "WebSearch (leetcode.com domain)",
+        "url": "https://leetcode.com/problems/find-the-minimum-cost-array-permutation/description/",
+        "error": "search snippet only; not a full statement"
+      }
+    ],
+    "missing": "Full official statement (rules, constraints, examples with exact input/output, pitfalls).",
+    "implementationStatus": "blocked-access; not implemented"
+  },
+  "implementationStatus": "not-certified-by-this-source-note"
+}

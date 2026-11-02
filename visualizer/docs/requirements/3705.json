@@ -1,0 +1,20 @@
+{
+  "number": 3705,
+  "title": "Find Golden Hour Customers",
+  "source": "https://leetcode.com/problems/find-golden-hour-customers/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "access-attempt-failed",
+  "contentKind": "none",
+  "summary": null,
+  "attempt": {
+    "method": "web-fetch agent (WebFetch)",
+    "urls": [
+      "https://leetcode.com/problems/find-golden-hour-customers/description/"
+    ],
+    "error": "HTTP 403 Forbidden; response body not retrieved"
+  },
+  "officialConstraints": null,
+  "examples": [],
+  "pitfalls": [],
+  "implementationStatus": "blocked-no-statement"
+}

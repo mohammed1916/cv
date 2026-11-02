@@ -1,0 +1,46 @@
+{
+  "number": 3789,
+  "title": "Minimum Cost to Acquire Required Items",
+  "source": "https://leetcode.com/problems/minimum-cost-to-acquire-required-items/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "paraphrased-requirements-with-example-data",
+  "summary": "Purchase units that supply only requirement 1, only requirement 2, or both requirements at once, costing cost1, cost2, and costBoth respectively. Minimize total spending while supplying at least need1 and need2 units; oversupply is allowed.",
+  "officialConstraints": "Each cost is an integer from 1 through 1000000. Each need is an integer from 0 through 1000000000.",
+  "examples": [
+    {
+      "input": {
+        "cost1": 3,
+        "cost2": 2,
+        "costBoth": 1,
+        "need1": 3,
+        "need2": 2
+      },
+      "output": 3
+    },
+    {
+      "input": {
+        "cost1": 5,
+        "cost2": 4,
+        "costBoth": 15,
+        "need1": 2,
+        "need2": 3
+      },
+      "output": 22
+    },
+    {
+      "input": {
+        "cost1": 5,
+        "cost2": 4,
+        "costBoth": 15,
+        "need1": 0,
+        "need2": 0
+      },
+      "output": 0
+    }
+  ],
+  "pitfalls": [
+    "Do not require exact quantities. Buying extra combined units can be cheapest. Both needs can be zero."
+  ],
+  "implementationStatus": "not-certified-by-this-source-note"
+}

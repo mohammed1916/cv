@@ -1,0 +1,17 @@
+{
+  "number": 3664,
+  "title": "Two-Letter Card Game",
+  "source": "https://leetcode.com/problems/two-letter-card-game/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-blocked",
+  "contentKind": "none",
+  "summary": null,
+  "attempt": {
+    "method": "web-fetch agent (WebFetch)",
+    "url": "https://leetcode.com/problems/two-letter-card-game/description/",
+    "result": "not attempted (concurrency limit)",
+    "date": "2026-11-02"
+  },
+  "missing": "Full statement (rules, constraints, examples, pitfalls) not retrieved. No requirement was inferred from the title.",
+  "implementationStatus": "blocked-no-statement"
+}

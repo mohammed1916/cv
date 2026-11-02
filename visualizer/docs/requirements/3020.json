@@ -2,12 +2,52 @@
   "number": 3020,
   "title": "Find the Maximum Number of Elements in Subset",
   "source": "https://leetcode.com/problems/find-the-maximum-number-of-elements-in-subset/",
-  "checkedOn": "2026-10-30",
-  "sourceKind": "search summaries only; official page not fetched",
-  "sourceUrls": [],
-  "summary": null,
-  "officialConstraints": "unverified: constraints not retrieved",
-  "examples": [],
-  "visualizationNotes": "not built: Skipped: the statement is incomplete. Only one example and the pattern description were retrieved; no constraints were found.",
-  "requirementsVerified": false
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "paraphrased-requirements-with-example-data",
+  "requirementsVerified": true,
+  "summary": "Choose occurrences from nums and arrange the selected values as an odd-length palindrome. Starting at x, repeatedly square to reach its single central value, then mirror the outward values. Maximize selected occurrence count; a singleton is valid.",
+  "officialConstraints": "2..100000 positive integers, each at most 1000000000.",
+  "examples": [
+    {
+      "input": {
+        "nums": [
+          5,
+          4,
+          1,
+          2,
+          2
+        ]
+      },
+      "output": 3
+    },
+    {
+      "input": {
+        "nums": [
+          1,
+          3,
+          2,
+          4
+        ]
+      },
+      "output": 1
+    }
+  ],
+  "pitfalls": [
+    "Use multiplicities, not distinct-set membership. Ones require special handling because squaring one does not advance. Exponents double, rather than increase by one."
+  ],
+  "previousAccessFailure": {
+    "number": 3020,
+    "title": "Find the Maximum Number of Elements in Subset",
+    "source": "https://leetcode.com/problems/find-the-maximum-number-of-elements-in-subset/",
+    "checkedOn": "2026-10-30",
+    "sourceKind": "search summaries only; official page not fetched",
+    "sourceUrls": [],
+    "summary": null,
+    "officialConstraints": "unverified: constraints not retrieved",
+    "examples": [],
+    "visualizationNotes": "not built: Skipped: the statement is incomplete. Only one example and the pattern description were retrieved; no constraints were found.",
+    "requirementsVerified": false
+  },
+  "implementationStatus": "not-certified-by-this-source-note"
 }

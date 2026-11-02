@@ -1,0 +1,46 @@
+{
+  "number": 3800,
+  "title": "Minimum Cost to Make Two Binary Strings Equal",
+  "source": "https://leetcode.com/problems/minimum-cost-to-make-two-binary-strings-equal/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "paraphrased-requirements-with-example-data",
+  "summary": "Make equal-length binary strings s and t identical at minimum cost. Allowed operations: flip one bit in either string for flipCost; swap two distinct positions within either one string for swapCost; exchange s[i] and t[i] at the same index for crossCost. Operations may be repeated in any order.",
+  "officialConstraints": "String length 1 through 100000; each cost is a positive integer at most 1000000000; strings contain only 0 and 1.",
+  "examples": [
+    {
+      "input": {
+        "s": "01000",
+        "t": "10111",
+        "flipCost": 10,
+        "swapCost": 2,
+        "crossCost": 2
+      },
+      "output": 16
+    },
+    {
+      "input": {
+        "s": "001",
+        "t": "110",
+        "flipCost": 2,
+        "swapCost": 100,
+        "crossCost": 100
+      },
+      "output": 6
+    },
+    {
+      "input": {
+        "s": "1010",
+        "t": "1010",
+        "flipCost": 5,
+        "swapCost": 5,
+        "crossCost": 5
+      },
+      "output": 0
+    }
+  ],
+  "pitfalls": [
+    "Cross-string swaps must use the same index. Within-string swaps can use any two distinct indices. Both strings may change."
+  ],
+  "implementationStatus": "not-certified-by-this-source-note"
+}

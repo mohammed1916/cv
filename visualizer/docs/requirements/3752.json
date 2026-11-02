@@ -1,0 +1,12 @@
+{
+  "number": 3752,
+  "title": "Lexicographically Smallest Negated Permutation that Sums to Target",
+  "source": "https://leetcode.com/problems/lexicographically-smallest-negated-permutation-that-sums-to-target/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "access-attempt-failed",
+  "contentKind": "none",
+  "summary": null,
+  "accessAttempt": {"method": "web-fetch agent", "error": "not attempted: concurrent subagent limit reached on batch launch; a 403 was observed for 3716 and 3722"},
+  "missingInformation": "Full official statement, constraints and examples are required before any implementation.",
+  "implementationStatus": "skipped-no-verified-requirements"
+}

@@ -1,0 +1,12 @@
+{
+  "number": 3722,
+  "title": "Lexicographically Smallest String After Reverse",
+  "source": "https://leetcode.com/problems/lexicographically-smallest-string-after-reverse/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "access-attempt-failed",
+  "contentKind": "none",
+  "summary": null,
+  "accessAttempt": {"method": "web-fetch agent", "error": "web-fetch returned HTTP 403 Forbidden with no body"},
+  "missingInformation": "Full official statement, constraints and examples are required before any implementation.",
+  "implementationStatus": "skipped-no-verified-requirements"
+}
