@@ -1,0 +1,9 @@
+.ac-view { display: grid; gap: 12px; padding: 12px 0; font-size: 14px; }
+.ac-empty { color: #475569; margin: 0; }
+.ac-args { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.ac-arg { display: grid; justify-items: center; min-width: 84px; padding: 8px 10px; border-radius: 10px; border: 2px dashed #cbd5e1; background: #f8fafc; opacity: 0.6; }
+.ac-arg--counted { opacity: 1; border-style: solid; border-color: #16a34a; background: #f0fdf4; }
+.ac-arg--current { box-shadow: 0 0 0 3px #bbf7d0; }
+.ac-arg--undefined .ac-arg-value { font-style: italic; color: #7c3aed; }
+.ac-arg-index { font-size: 11px; color: #64748b; }
+.ac-counter { justify-self: start; padding: 6px 12px; border-radius: 999px; background: #1e293b; color: #f8fafc; font-weight: 700; }

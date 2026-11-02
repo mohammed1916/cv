@@ -1,0 +1,8 @@
+.ek-view { display: grid; gap: 12px; padding: 12px 0; font-size: 14px; }
+.ek-empty, .ek-kind { color: #475569; margin: 0; }
+.ek-box { min-height: 56px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 10px; border: 2px dashed #94a3b8; border-radius: 10px; }
+.ek-chip { padding: 4px 10px; border-radius: 999px; background: #e0f2fe; color: #075985; font-family: ui-monospace, monospace; }
+.ek-none { color: #64748b; font-style: italic; }
+.ek-count { justify-self: start; padding: 6px 12px; border-radius: 999px; background: #e2e8f0; font-weight: 700; }
+.ek-count--yes { background: #dcfce7; color: #166534; }
+.ek-count--no { background: #fee2e2; color: #991b1b; }
