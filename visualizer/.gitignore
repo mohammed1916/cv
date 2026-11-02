@@ -28,3 +28,6 @@ dist-ssr
 
 .env
 .firebase/
+
+# Local historical reference archive; reproducible from Git via recovery script.
+/local-reference/

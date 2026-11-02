@@ -1,3 +1,7 @@
+# Full statement archive recovered — read this first
+
+The repository previously contained full statements. They were deleted in September, but **2,984 non-empty statements have now been recovered locally**. Read [recovery evidence and access instructions](docs/statement-sources/RECOVERY.md), then use [the local full-text index](local-reference/leetcode/README.md) before attempting web fetches. The summary index is not the complete inventory of locally available requirements.
+
 # Current task: complete every LeetCode visualizer
 
 Start with [the authoritative completion contract](docs/CATALOG-COMPLETION-CONTRACT.md). It defines full per-problem requirements, proper visual teaching, completion gates, continuous execution, source fallbacks, held-work preservation and session checkpoints. All legacy conversion, partial repair, missing implementations and browser acceptance are already in scope.

@@ -4,6 +4,10 @@ Authoritative continuation requirements, 2026-11-02. User objective: solve and p
 
 This document defines the work, not a claim it is finished. No prompt can override context limits, unavailable tools or inaccessible statements. At a session boundary, leave a precise durable checkpoint and resume from it next session. Do not describe exhaustion of a batch or one failed fetch as exhaustion of the task.
 
+## Recovered full statements: correction to the previous inventory
+
+Read [archive recovery evidence](statement-sources/RECOVERY.md) first. Full source text is locally available for 2,984 catalog entries at `local-reference/leetcode/raw/<slug>.json`. It was recovered byte-for-byte from historical Git, outside the app public directory. The prior inventory counted only summaries and missed this deleted archive. Prefer the local full text before retrying network access. There remain 304 free and 785 paid catalog entries without full cached text; summaries and full-text coverage are separate dimensions. A historical statement still needs review for changes or ambiguities.
+
 ## Read order and precedence
 
 1. This contract, then [latest nine-problem review](reviews/2026-11-02-latest-visualization-review.md). Fix its correctness and broken-preset defects before propagating their patterns.

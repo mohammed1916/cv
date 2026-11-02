@@ -2,14 +2,13 @@
 
 Start with [INDEX.md](INDEX.md) or [index.json](index.json). Both cover all **4,073 entries in the repository's stored catalog**, including paid entries. This is not a claim that 4,073 is today's live LeetCode total.
 
-As checked on 2026-11-02:
+## Full statements recovered locally
 
-- **210** entries have a local requirement summary. These include inherited notes of varying provenance/completeness, not 210 newly verified official statements.
-- **147** have an access-attempt record but no summary. Do not treat those records as statement caches.
-- **3,716** have an official statement link and no local requirement file.
-- Total: 210 + 147 + 3716 = 4073.
+**The earlier inventory missed a deleted full-text archive.** See [recovery evidence](RECOVERY.md) and [the recovered statement directory](../../local-reference/leetcode/README.md). It now contains **2,984 non-empty historical full statements** from this repository. These are the actual stored HTML descriptions and example-testcase fields, not our short paraphrases. Prefer these local files before attempting a fetch.
 
-Full statement text for every problem is **not** stored here. The directory links to the official text and indexes short local requirement summaries. Access metadata comes from the stored catalog and may change. Inherited source notes must be read and assessed before implementation.
+Of 4,073 stored catalog entries, 304 free and 785 paid entries still lack full cached text. The empty archived record for 271 is counted as missing. Access labels are from the catalog snapshot, not live entitlement checks.
+
+This directory's `INDEX.md`/`index.json` separately index **211 requirement summaries**, 147 attempt-only notes and 3,715 link-only records. Those figures describe the summary layer, not the recovered full-text layer. Some entries have both. Do not add the counts together or assume a link-only entry has no full local statement.
 
 ## Latest continuation
 
