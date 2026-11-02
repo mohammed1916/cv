@@ -2,7 +2,7 @@
   "catalogPath": "public/data/leetcodeCatalog.json",
   "catalogGeneratedAt": "2026-10-05T09:48:48.663Z",
   "count": 4073,
-  "cachedRequirements": 211,
+  "cachedRequirements": 214,
   "sourceAttemptsWithoutSummary": 147,
   "warning": "Source directory, not a full-text statement archive or implementation certification. Catalog membership and paid flags are the stored snapshot, not a live inventory. Cached notes vary in completeness; read the note and official page.",
   "entries": [
@@ -67281,14 +67281,24 @@
       "difficulty": "Medium",
       "paidOnly": false,
       "officialStatement": "https://leetcode.com/problems/sum-of-decoded-numbers/description/",
-      "sourceStatus": "link-only-not-fetched",
-      "sourceKind": null,
-      "requirementsVerified": null,
-      "requirementsFile": null,
-      "checkedOn": null,
-      "summary": null,
-      "constraints": null,
-      "examples": null
+      "sourceStatus": "requirements-summary-cached",
+      "sourceKind": "official-page-via-web-tool",
+      "requirementsVerified": true,
+      "requirementsFile": "docs/requirements/4039.json",
+      "checkedOn": "2026-11-02",
+      "summary": "For each encoded integer, its last decimal digit gives a split width. Remove that digit, split the remaining digits after the specified width, and interpret the two parts as positive integers x and y. Sum x raised to y across the array, modulo 1000000007.",
+      "constraints": "Array length 1..100000; 100 < encoded value < 10^15; width 1..9; 1 <= x,y < 10^9. Each encoding is valid and neither decoded part has leading zeros.",
+      "examples": [
+        {
+          "input": {
+            "nums": [
+              421
+            ]
+          },
+          "output": 16,
+          "kind": "independently-authored"
+        }
+      ]
     },
     {
       "number": "4040",
@@ -67297,14 +67307,26 @@
       "difficulty": "Medium",
       "paidOnly": false,
       "officialStatement": "https://leetcode.com/problems/minimum-operations-to-form-subset-sum-i/description/",
-      "sourceStatus": "link-only-not-fetched",
-      "sourceKind": null,
-      "requirementsVerified": null,
-      "requirementsFile": null,
-      "checkedOn": null,
-      "summary": null,
-      "constraints": null,
-      "examples": null
+      "sourceStatus": "requirements-summary-cached",
+      "sourceKind": "official-page-via-web-tool",
+      "requirementsVerified": true,
+      "requirementsFile": "docs/requirements/4040.json",
+      "checkedOn": "2026-11-02",
+      "summary": "An operation doubles one current array value or replaces it by its floor-divided-by-two value. For each individual element, all doublings must precede any divisions. Minimize total operations so some subset of final elements sums to the requested sum. Return -1 if impossible.",
+      "constraints": "Array length 1..100; each original value 1..500; target sum 1..5000.",
+      "examples": [
+        {
+          "input": {
+            "nums": [
+              3,
+              7
+            ],
+            "sum": 6
+          },
+          "output": 1,
+          "kind": "independently-authored"
+        }
+      ]
     },
     {
       "number": "4041",
@@ -67345,14 +67367,23 @@
       "difficulty": "Easy",
       "paidOnly": false,
       "officialStatement": "https://leetcode.com/problems/count-rotations-with-exactly-k-equal-adjacent-pairs/description/",
-      "sourceStatus": "link-only-not-fetched",
-      "sourceKind": null,
-      "requirementsVerified": null,
-      "requirementsFile": null,
-      "checkedOn": null,
-      "summary": null,
-      "constraints": null,
-      "examples": null
+      "sourceStatus": "requirements-summary-cached",
+      "sourceKind": "official-page-via-web-tool",
+      "requirementsVerified": true,
+      "requirementsFile": "docs/requirements/4043.json",
+      "checkedOn": "2026-11-02",
+      "summary": "For each prefix length from zero through n-1, move that prefix to the end of the string. Count rotation positions whose resulting linear string has exactly k equal neighboring character pairs. Only pairs at indices i and i+1 for i<n-1 contribute.",
+      "constraints": "Lowercase English string of length 2..100; 0 <= k <= n-1.",
+      "examples": [
+        {
+          "input": {
+            "s": "aabb",
+            "k": 2
+          },
+          "output": 2,
+          "kind": "independently-authored"
+        }
+      ]
     },
     {
       "number": "4044",

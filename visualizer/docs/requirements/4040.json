@@ -1,0 +1,27 @@
+{
+  "summary": "An operation doubles one current array value or replaces it by its floor-divided-by-two value. For each individual element, all doublings must precede any divisions. Minimize total operations so some subset of final elements sums to the requested sum. Return -1 if impossible.",
+  "officialConstraints": "Array length 1..100; each original value 1..500; target sum 1..5000.",
+  "examples": [
+    {
+      "input": {
+        "nums": [
+          3,
+          7
+        ],
+        "sum": 6
+      },
+      "output": 1,
+      "kind": "independently-authored"
+    }
+  ],
+  "semanticPitfalls": [
+    "The multiplication-before-division restriction is per element. A subset need not include every element. Do not assume variant II has the same bounds."
+  ],
+  "number": 4040,
+  "title": "Minimum Operations to Form Subset Sum I",
+  "source": "https://leetcode.com/problems/minimum-operations-to-form-subset-sum-i/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "requirementsVerified": true
+}

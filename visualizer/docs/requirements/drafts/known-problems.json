@@ -4,88 +4,1620 @@
     "example": "Authored example: level-order [8,4,12,2,6] becomes [2,6,4,null,null,12,8].",
     "pitfalls": "Preserve node identity and all nodes. This is not ordinary left-right mirroring. Exact current numeric bounds have not been verified; the bounds quoted in the conversation should not be treated as sourced."
   },
-  "157": {"task": "Implement read(buf, n) using a supplied read4(buf4) function. read4 consumes up to four successive characters from a file, stores them in buf4, and returns the number actually read; fewer than four means end of file. Copy at most n characters into buf and return the count copied. This variant makes one read request against the file.", "example": "Authored example: file 'planet', request 4, returns 4 with 'plan'.", "pitfalls": "Do not copy beyond n or beyond the number read. The read4 implementation is supplied, not yours to replace."},
-  "158": {"task": "Implement read(buf, n) using read4, with repeated read calls on the same reader. Each read must return the next at most n characters without losing or repeating data. Preserve any characters fetched by read4 but not consumed by the current request for the next request.", "example": "Authored example: file 'planet', requests 2, 3, 3 produce 'pl', 'ane', 't' with counts 2, 3, 1.", "pitfalls": "Buffered leftovers belong to the reader instance and survive calls. Resetting the buffer per call is incorrect."},
-  "159": {"task": "Given a string, return the maximum length of a contiguous substring containing at most two distinct characters. An empty string has answer zero.", "example": "Authored example: 'abaccc' gives 4, from 'accc'.", "pitfalls": "Repeated copies of a character count as one distinct character. A subsequence is not a substring."},
-  "161": {"task": "Given two strings, return whether exactly one edit converts one into the other. One edit is inserting one character, deleting one character, or replacing one character. Equal strings return false because zero edits is not exactly one.", "example": "Authored example: 'plane' and 'plans' return true; 'plane' and 'plane' return false."},
-  "163": {"task": "Given a sorted array of distinct integers and an inclusive interval [lower, upper] containing them, return the maximal inclusive intervals of integers in that range absent from the array. List the intervals in increasing order and omit empty intervals.", "example": "Authored example: nums=[2,5,9], lower=1, upper=10 gives [[1,1],[3,4],[6,8],[10,10]].", "pitfalls": "The current output adapter should be verified: historical versions used formatted strings whereas newer versions use endpoint pairs."},
-  "170": {"task": "Design a structure with add(number), which stores another occurrence of a number, and find(value), which reports whether two stored occurrences sum to value. The two occurrences must be distinct, but their numeric values may be equal.", "example": "Authored example: after add(4), find(8) is false; after another add(4), find(8) is true."},
-  "175": {"task": "SQL: Person(personId, lastName, firstName) has primary key personId. Address(addressId, personId, city, state) has primary key addressId and associates an address with a person. Return firstName, lastName, city and state for every person. If a person has no matching address, city and state are NULL. No result order is required.", "pitfalls": "Keep people without addresses; an inner join loses them."},
-  "176": {"task": "SQL: Employee(id, salary), with id as primary key. Return the second-highest distinct salary in a one-column, one-row result named SecondHighestSalary. Return NULL when there are fewer than two distinct salaries.", "example": "Authored example: salaries 40, 70, 70, 90 yield 70."},
-  "177": {"task": "SQL: Employee(id, salary), with id as primary key. Implement getNthHighestSalary(N), returning the Nth-highest distinct salary. Return NULL if fewer than N distinct salary values exist.", "pitfalls": "Ranks are among distinct salaries, not individual employees. Verify exact SQL function signature in the target dialect."},
-  "178": {"task": "SQL: Scores(id, score), with id as primary key. Return each score and its dense rank in descending score order. Equal scores receive the same rank; the next lower distinct score receives the next consecutive integer. Use result columns score and rank."},
-  "180": {"task": "SQL: Logs(id, num), with id ordering the records. Return distinct values appearing at least three consecutive times, under the output column ConsecutiveNums.", "pitfalls": "Confirm current consecutive-ID guarantees before choosing an adjacency predicate; a remembered schema does not establish whether gaps are allowed."},
-  "181": {"task": "SQL: Employee(id, name, salary, managerId), with id as primary key and managerId referring to an employee's manager. Return employee names whose salary is greater than their own manager's salary, under column Employee. Employees without a manager do not qualify."},
-  "182": {"task": "SQL: Person(id, email), with id as primary key. Return each email occurring in more than one row, once, under column Email. No result order is required.", "pitfalls": "Check the current source's null and case guarantees before relying on collation-specific behavior."},
-  "183": {"task": "SQL: Customers(id, name) and Orders(id, customerId), each with id as primary key. Return names of customers with no order, under column Customers. A customer with multiple orders must not appear."},
-  "184": {"task": "SQL: Employee(id, name, salary, departmentId) and Department(id, name), each keyed by id. Return Department, Employee and Salary for employees with the highest salary in their own department. Include all ties; no result order is required."},
-  "185": {"task": "SQL: Employee(id, name, salary, departmentId) and Department(id, name), each keyed by id. Return Department, Employee and Salary for every employee whose salary is one of the three highest distinct salary values in that employee's department. Include all tied employees."},
-  "186": {"task": "Given a mutable character array representing words separated by single spaces, reverse the order of words in place while retaining each word's character order. Use constant auxiliary space. The assumed input has no leading or trailing spaces.", "example": "Authored example: characters of 'red green blue' become characters of 'blue green red'."},
-  "192": {"task": "Shell: read words from words.txt, count the occurrences of each word across all lines, and output word/count pairs in descending count order. Treat whitespace as separators.", "pitfalls": "Verify the source's character restrictions and tie guarantees; do not invent a tie order."},
-  "193": {"task": "Shell: read file.txt and output only lines matching either phone-number layout ddd-ddd-dddd or (ddd) ddd-dddd, where each d is a decimal digit. Match the entire line, not a substring.", "example": "Authored examples: '415-620-9381' and '(415) 620-9381' qualify; '415 620 9381' does not."},
-  "194": {"task": "Shell: transpose a whitespace-delimited rectangular text table in file.txt. Each output line corresponds to an original column and contains its entries in original row order, separated by spaces.", "pitfalls": "Assume equal column counts only after confirming that guarantee; preserve row and column order."},
-  "195": {"task": "Shell: output the tenth line of file.txt. If the file contains fewer than ten lines, output no line. Line numbering starts at one."},
-  "196": {"task": "SQL: Person(id, email), with id as primary key. Delete duplicate-email rows so that only the row with the smallest id remains for each email. Modify the table rather than returning a SELECT result.", "pitfalls": "Verify email null/case guarantees and the target SQL dialect before writing the deletion."},
-  "197": {"task": "SQL: Weather(id, recordDate, temperature), with unique record dates. Return ids whose temperature exceeds that of the previous calendar day. A previous row is not enough if dates have a gap; a missing prior calendar day yields no qualifying comparison."},
-  "243": {"task": "Given a list of words and two different target words known to occur in it, return the smallest absolute difference between an index of the first word and an index of the second.", "example": "Authored example: ['oak','elm','pine','oak','elm'], targets 'oak','elm', gives 1."},
-  "244": {"task": "Build a WordDistance object from a list of words, then answer repeated shortest(word1, word2) queries. Each query asks for the minimum index distance between the two distinct target words, both of which occur in the original list.", "pitfalls": "Preprocessing is shared across queries; this differs from solving just one query."},
-  "245": {"task": "Given a word list and two target words, return the minimum distance between distinct positions containing those targets. Unlike the simpler version, the targets may be equal. If equal, compare two different occurrences; the input guarantees enough occurrences."},
-  "246": {"task": "Given a decimal digit string, decide whether rotating its displayed digits by 180 degrees produces the same string. The valid digit mappings are 0 to 0, 1 to 1, 6 to 9, 8 to 8 and 9 to 6; other digits are invalid.", "example": "Authored example: '619' is valid; '612' is not."},
-  "247": {"task": "Given a length n, generate all length-n decimal representations unchanged by a 180-degree rotation. Use digit pairs 00, 11, 69, 88 and 96; a center digit can only be 0, 1 or 8. Multi-digit results must not begin with zero. Return results in any order."},
-  "248": {"task": "Given nonnegative decimal bounds low and high as strings, count numbers in their inclusive range unchanged under a 180-degree rotation. Use the digit mapping 0/0, 1/1, 6/9, 8/8 and 9/6; disallow leading zeros except for the number zero itself.", "pitfalls": "Compare long numeric strings by length and lexicographic order rather than unsafe floating-point conversion."},
-  "249": {"task": "Group lowercase strings by cyclic uniform letter shifts: two strings belong together if applying the same shift modulo 26 to every letter of one produces the other. Return all groups; group order and member order are unrestricted.", "example": "Authored example: 'bdf' and 'egi' belong together; 'beg' does not belong to that group."},
-  "250": {"task": "Given a binary tree, count rooted subtrees in which every node has the same value. A leaf is a qualifying subtree. The empty tree contributes zero.", "pitfalls": "A qualifying subtree must include all descendants of its root, not an arbitrary selected subset."},
-  "251": {"task": "Implement a Vector2D iterator over a list of integer lists. next() returns the next integer in row-major order; hasNext() reports whether another integer remains without consuming it. Skip empty inner lists. Calls to next are assumed valid."},
-  "252": {"task": "Given meeting intervals [start, end], decide whether one person can attend them all without overlap. A meeting ending exactly when another starts is compatible.", "example": "Authored example: [[2,5],[5,8],[9,11]] returns true."},
-  "253": {"task": "Given meeting intervals, return the fewest rooms needed so every meeting can take place. Intervals overlap when one starts before another ends; a room is reusable at its meeting's end time.", "example": "Authored example: [[2,7],[3,5],[5,9]] requires 2 rooms."},
-  "254": {"task": "Given a positive integer n, return unique ways to write it as a product of at least two integers greater than one. Exclude the one-factor representation [n]. Represent each combination in nondecreasing order so different permutations are not duplicated.", "example": "Authored example: 18 gives [2,9], [3,6] and [2,3,3]."},
-  "255": {"task": "Given a sequence of distinct integers, determine whether it could be the preorder traversal of a binary search tree with strict ordering: every left descendant is smaller than its root and every right descendant is greater. Return a boolean.", "pitfalls": "Checking only adjacent values is insufficient; ancestor lower bounds remain active."},
-  "256": {"task": "Paint a row of houses using three colors. costs[i][c] is the cost of painting house i with color c. Adjacent houses must have different colors. Return the minimum total cost of painting every house.", "example": "Authored example: costs=[[4,2,7],[3,8,5]] has minimum cost 5."},
-  "259": {"task": "Given an integer array and a target, count index triples i < j < k whose values sum to strictly less than the target. Count triples of indices even when values repeat.", "example": "Authored example: [1,2,3,4], target=8 gives 2."},
-  "261": {"task": "Given n vertices numbered 0 through n-1 and a list of undirected edges, decide whether they form a tree. A tree is connected and has no cycle; a single isolated vertex is a tree.", "pitfalls": "Do not assume connectivity merely from edge count."},
-  "265": {"task": "Paint n houses in a row using k colors, with costs[i][c] giving each choice's cost. Adjacent houses cannot share a color. Return the minimum total cost.", "pitfalls": "Exact input guarantees concerning k=1 and infeasible instances require source verification; do not silently select a failure convention."},
-  "266": {"task": "Given a string, return whether its characters can be rearranged into a palindrome. Every occurrence must be used exactly once.", "example": "Authored example: 'aabbc' returns true; 'aabbcd' returns false."},
-  "267": {"task": "Given a string, generate every distinct palindrome obtainable by rearranging all its characters. If none exists, return an empty list. Result order is unrestricted.", "example": "Authored example: 'aacc' gives 'acca' and 'caac'."},
-  "269": {"task": "Given words sorted according to an unknown alphabet over lowercase letters, return one ordering of all distinct observed letters consistent with that word order. If no ordering is possible, return an empty string. When several orderings work, any is acceptable. Lexicographic order compares the first differing character; a proper prefix precedes a longer word.", "pitfalls": "A longer word before its own prefix is invalid; include letters with no precedence edge."},
-  "270": {"task": "Given a binary search tree and a real target, return the node value closest to the target. Under the commonly used current rule, equal-distance candidates choose the smaller value.", "pitfalls": "The tie rule is remembered rather than source-verified in this draft and must be checked before certification."},
-  "271": {"task": "Design encode(strings) and decode(encoded) so any list of strings can be converted into one string and recovered exactly. Preserve list order, empty strings and the distinction between an empty list and a one-element list containing an empty string. Do not assume a delimiter character is absent from the input.", "example": "Authored example: ['', 'a|b', '007'] must round-trip unchanged.", "pitfalls": "The encoded representation is your choice. Verify the official character domain and permitted library restrictions before final certification."},
-  "272": {"task": "Given a binary search tree, a real target and k, return the k node values closest to the target. k does not exceed the number of nodes. Output order need not be sorted.", "pitfalls": "Verify whether the source guarantees a unique closest set and its tie treatment before certifying equal-distance boundary cases."},
-  "276": {"task": "Count ways to paint n fence posts using k colors such that no three consecutive posts have the same color. Adjacent posts may share a color, but runs longer than two are forbidden. Return the total number of assignments.", "example": "Authored example: n=3, k=2 gives 6."},
-  "277": {"task": "Among n people numbered 0 through n-1, find a celebrity using a supplied knows(a,b) query. A celebrity knows no other person and is known by every other person. Return the celebrity's index, or -1 if none exists.", "pitfalls": "The knows query is supplied. Exclude self-relations from the definition and verify a candidate against both conditions."},
-  "280": {"task": "Rearrange an integer array in place so nums[0] <= nums[1] >= nums[2] <= nums[3] and so on. Return any arrangement satisfying the alternating non-strict inequalities, preserving all values and multiplicities."},
-  "281": {"task": "Implement an iterator over two integer lists that alternates taking the next element from each while both have elements. Once one is exhausted, continue through the other. next returns one element and hasNext reports whether any remain.", "example": "Authored example: [3,8,9] and [4] produce 3,4,8,9."},
-  "285": {"task": "Given a binary search tree with distinct values and a node p in it, return the node that follows p in inorder traversal. Return null when p has no successor. The return value is a node reference, not just an integer."},
-  "286": {"task": "Update a grid containing walls (-1), gates (0) and empty rooms (2147483647). Replace each empty room with its shortest four-direction path distance to any gate without crossing a wall. Leave unreachable empty rooms unchanged and preserve gates and walls."},
-  "288": {"task": "Build a dictionary checker using abbreviations formed by keeping a word's first and last letters and replacing the intervening characters with their count; words of length at most two remain unchanged. isUnique(word) is true when no different dictionary word shares its abbreviation. Repeated copies of the same dictionary word do not by themselves destroy uniqueness."},
-  "291": {"task": "Given a pattern and a string, decide whether each distinct pattern character can be assigned a nonempty substring so that concatenating assignments in pattern order gives the entire string. Equal pattern characters use equal substrings, and different pattern characters must use different substrings.", "example": "Authored example: pattern 'xyx', string 'catdogcat', returns true."},
-  "293": {"task": "Given a string containing '+' and '-', return all distinct strings obtainable by changing exactly one adjacent '++' pair into '--'. If no move exists, return an empty list."},
-  "294": {"task": "Two players alternate replacing one adjacent '++' pair by '--' in a string of pluses and minuses. A player with no legal move loses. Given the starting string, decide whether the first player can force a win against optimal play."},
-  "296": {"task": "Given a binary grid where 1 marks a person's home, choose an integer grid location minimizing the total Manhattan distance to all homes. Return that minimum total distance. Manhattan distance is absolute row difference plus absolute column difference.", "pitfalls": "Do not confuse the objective with minimizing the largest individual distance."},
-  "298": {"task": "Given a binary tree, return the maximum number of nodes in a downward parent-to-child path whose values increase by exactly one at each step. The path may start at any node, but cannot turn upward.", "example": "Authored example: a chain 4→5→6 has length 3; 6→5 does not extend it."},
-  "302": {"task": "Given a binary image and the coordinates of one black pixel, find the area of the smallest axis-aligned rectangle containing every black pixel. Black pixels form one connected component under four-direction adjacency. Return width times height.", "pitfalls": "The supplied pixel is black. Include both endpoint rows and columns in dimensions."},
-  "305": {"task": "Start with an m-by-n water grid. For each position in a sequence, turn that cell into land and report the current number of four-direction-connected land components. Activating an already-land cell does not change the grid or count. Return one count per operation."},
-  "308": {"task": "Implement NumMatrix(matrix) with update(row,col,val), which replaces one cell, and sumRegion(row1,col1,row2,col2), which returns the sum over the inclusive axis-aligned rectangle between the given corners. Updates affect all subsequent queries."},
-  "311": {"task": "Given compatible integer matrices A of shape m-by-k and B of shape k-by-n, compute their matrix product C, where C[i][j] is the sum over t of A[i][t]*B[t][j]. The matrices are sparse; exploit zeros where useful while returning the full result matrix."},
-  "314": {"task": "Return a binary tree's values grouped by vertical columns from leftmost to rightmost. Root has column zero; left and right children change column by minus or plus one. Within each column, list nodes from top to bottom; nodes sharing a row and column retain left-to-right traversal order.", "pitfalls": "Do not apply the value-sorting tie rule of the different vertical traversal problem."},
-  "317": {"task": "A grid contains empty land (0), buildings (1) and obstacles (2). Choose an empty cell reachable from every building through four-direction steps over empty land. Minimize the sum of distances from all buildings and return it; return -1 if no such empty cell exists. Buildings and obstacles cannot be traversed as intermediate cells."},
-  "320": {"task": "Generate all generalized abbreviations of a word by replacing any chosen runs of consecutive characters with their lengths, retaining the other characters. Adjacent abbreviated positions form one count rather than adjacent separate numbers. Return all results in any order."},
-  "323": {"task": "Given n vertices numbered 0 through n-1 and undirected edges, return the number of connected components, including isolated vertices."},
-  "325": {"task": "Given an integer array and target k, return the largest length of a contiguous subarray with sum exactly k. Values may be negative. Return zero if no nonempty qualifying subarray exists."},
-  "333": {"task": "Given a binary tree, return the number of nodes in its largest rooted subtree that is a binary search tree. A selected subtree includes all descendants of its root. BST ordering is strict on both sides.", "pitfalls": "Validate descendant ranges, not only direct parent-child comparisons."},
-  "339": {"task": "Given a recursively nested list of integers, return the sum of each integer times its nesting depth. Integers in the outermost list have depth one; each nested list increases depth by one."},
-  "340": {"task": "Given a string and integer k, return the maximum length of a contiguous substring containing at most k distinct characters. For k=0, the answer is zero."},
-  "346": {"task": "Implement a moving-average stream with a fixed positive window size. Each next(value) adds a value and returns the arithmetic mean of the most recent at most size values. Before size values have arrived, average all values seen."},
-  "348": {"task": "Design a game on an n-by-n board with players 1 and 2. move(row,col,player) places the player's mark in an empty cell and returns that player if the move completes a full row, column or diagonal, otherwise zero. Moves are valid and the game receives no further moves after a win.", "pitfalls": "Only the two main diagonals are winning diagonals; use the supplied player rather than assuming an unverified move schedule."},
-  "351": {"task": "Count unlock patterns on a 3-by-3 keypad using between m and n distinct keys inclusive. A move that passes through another key is allowed only if that intervening key has already been visited. Keys cannot repeat. Different ordered sequences are different patterns."},
-  "353": {"task": "Implement a snake game in a width-by-height grid. The snake starts at (row 0, column 0), length one. Food positions become active in the supplied order. move(direction) advances one cell using U/D/L/R. Eating the active food grows the snake and increments the score. Return the score after a legal move, or -1 upon wall/body collision.", "pitfalls": "On a non-growing move, the previous tail vacates its cell and can be entered legally. Verify the post-game-over call convention before certification."},
-  "356": {"task": "Given points in a plane, decide whether there is a vertical line x=c such that reflecting the set of point locations across it leaves the set unchanged.", "pitfalls": "Duplicate-point treatment should be checked against the exact source before using multiplicities as a requirement."},
-  "358": {"task": "Rearrange all characters of a string so equal characters occur at positions whose difference is at least k. Return any valid rearrangement, or an empty string if none exists. All original occurrences must be used exactly once."},
-  "359": {"task": "Implement shouldPrintMessage(timestamp,message) for log calls arriving in nondecreasing timestamp order. Return true if the message has not been printed in the preceding ten seconds; otherwise return false. A rejected call does not reset the time at which that message was last printed.", "example": "Authored example: the same message at times 3, 8, 13 returns true, false, true."},
-  "360": {"task": "Given an integer array sorted in ascending order and coefficients a,b,c, apply f(x)=a*x*x+b*x+c to every element and return the transformed values in ascending order. The intended algorithm runs in linear time."},
-  "361": {"task": "A grid has walls W, enemies E and empty cells 0. Place one bomb in an empty cell to kill enemies in its row and column until a wall blocks each direction. Return the maximum number killed by one placement."},
-  "362": {"task": "Design hit(timestamp) and getHits(timestamp) for calls in nondecreasing time order. hit records one event; multiple hits may share a timestamp. getHits returns the number recorded in the preceding 300-second window, including the current second and excluding events exactly 300 seconds old."},
-  "366": {"task": "Repeatedly collect all current leaves of a binary tree and remove them until the tree is empty. Return the groups in removal-round order. Values within a round may be returned in any order; preserve duplicate node values."},
-  "369": {"task": "A nonempty singly linked list stores a nonnegative integer's decimal digits with the most significant digit first. Add one and return the head of the resulting digit list, creating a new leading node when needed.", "example": "Authored example: 4→9→9 becomes 5→0→0."},
-  "370": {"task": "Start with a zero-filled array of given length. For each update [start,end,increment], add increment to every element in that inclusive index interval. Return the final array after all updates."},
-  "379": {"task": "Manage phone numbers 0 through maxNumbers-1. get() allocates and returns any available number, or -1 if none remain. check(number) reports availability. release(number) makes an allocated number available again; releasing one already available must not create duplicate capacity."}
+  "157": {
+    "task": "Implement read(buf, n) using a supplied read4(buf4) function. read4 consumes up to four successive characters from a file, stores them in buf4, and returns the number actually read; fewer than four means end of file. Copy at most n characters into buf and return the count copied. This variant makes one read request against the file.",
+    "example": "Authored example: file 'planet', request 4, returns 4 with 'plan'.",
+    "pitfalls": "Do not copy beyond n or beyond the number read. The read4 implementation is supplied, not yours to replace."
+  },
+  "158": {
+    "task": "Implement read(buf, n) using read4, with repeated read calls on the same reader. Each read must return the next at most n characters without losing or repeating data. Preserve any characters fetched by read4 but not consumed by the current request for the next request.",
+    "example": "Authored example: file 'planet', requests 2, 3, 3 produce 'pl', 'ane', 't' with counts 2, 3, 1.",
+    "pitfalls": "Buffered leftovers belong to the reader instance and survive calls. Resetting the buffer per call is incorrect."
+  },
+  "159": {
+    "task": "Given a string, return the maximum length of a contiguous substring containing at most two distinct characters. An empty string has answer zero.",
+    "example": "Authored example: 'abaccc' gives 4, from 'accc'.",
+    "pitfalls": "Repeated copies of a character count as one distinct character. A subsequence is not a substring."
+  },
+  "161": {
+    "task": "Given two strings, return whether exactly one edit converts one into the other. One edit is inserting one character, deleting one character, or replacing one character. Equal strings return false because zero edits is not exactly one.",
+    "example": "Authored example: 'plane' and 'plans' return true; 'plane' and 'plane' return false."
+  },
+  "163": {
+    "task": "Given a sorted array of distinct integers and an inclusive interval [lower, upper] containing them, return the maximal inclusive intervals of integers in that range absent from the array. List the intervals in increasing order and omit empty intervals.",
+    "example": "Authored example: nums=[2,5,9], lower=1, upper=10 gives [[1,1],[3,4],[6,8],[10,10]].",
+    "pitfalls": "The current output adapter should be verified: historical versions used formatted strings whereas newer versions use endpoint pairs."
+  },
+  "170": {
+    "task": "Design a structure with add(number), which stores another occurrence of a number, and find(value), which reports whether two stored occurrences sum to value. The two occurrences must be distinct, but their numeric values may be equal.",
+    "example": "Authored example: after add(4), find(8) is false; after another add(4), find(8) is true."
+  },
+  "175": {
+    "task": "SQL: Person(personId, lastName, firstName) has primary key personId. Address(addressId, personId, city, state) has primary key addressId and associates an address with a person. Return firstName, lastName, city and state for every person. If a person has no matching address, city and state are NULL. No result order is required.",
+    "pitfalls": "Keep people without addresses; an inner join loses them."
+  },
+  "176": {
+    "task": "SQL: Employee(id, salary), with id as primary key. Return the second-highest distinct salary in a one-column, one-row result named SecondHighestSalary. Return NULL when there are fewer than two distinct salaries.",
+    "example": "Authored example: salaries 40, 70, 70, 90 yield 70."
+  },
+  "177": {
+    "task": "SQL: Employee(id, salary), with id as primary key. Implement getNthHighestSalary(N), returning the Nth-highest distinct salary. Return NULL if fewer than N distinct salary values exist.",
+    "pitfalls": "Ranks are among distinct salaries, not individual employees. Verify exact SQL function signature in the target dialect."
+  },
+  "178": {
+    "task": "SQL: Scores(id, score), with id as primary key. Return each score and its dense rank in descending score order. Equal scores receive the same rank; the next lower distinct score receives the next consecutive integer. Use result columns score and rank."
+  },
+  "180": {
+    "task": "SQL: Logs(id, num), with id ordering the records. Return distinct values appearing at least three consecutive times, under the output column ConsecutiveNums.",
+    "pitfalls": "Confirm current consecutive-ID guarantees before choosing an adjacency predicate; a remembered schema does not establish whether gaps are allowed."
+  },
+  "181": {
+    "task": "SQL: Employee(id, name, salary, managerId), with id as primary key and managerId referring to an employee's manager. Return employee names whose salary is greater than their own manager's salary, under column Employee. Employees without a manager do not qualify."
+  },
+  "182": {
+    "task": "SQL: Person(id, email), with id as primary key. Return each email occurring in more than one row, once, under column Email. No result order is required.",
+    "pitfalls": "Check the current source's null and case guarantees before relying on collation-specific behavior."
+  },
+  "183": {
+    "task": "SQL: Customers(id, name) and Orders(id, customerId), each with id as primary key. Return names of customers with no order, under column Customers. A customer with multiple orders must not appear."
+  },
+  "184": {
+    "task": "SQL: Employee(id, name, salary, departmentId) and Department(id, name), each keyed by id. Return Department, Employee and Salary for employees with the highest salary in their own department. Include all ties; no result order is required."
+  },
+  "185": {
+    "task": "SQL: Employee(id, name, salary, departmentId) and Department(id, name), each keyed by id. Return Department, Employee and Salary for every employee whose salary is one of the three highest distinct salary values in that employee's department. Include all tied employees."
+  },
+  "186": {
+    "task": "Given a mutable character array representing words separated by single spaces, reverse the order of words in place while retaining each word's character order. Use constant auxiliary space. The assumed input has no leading or trailing spaces.",
+    "example": "Authored example: characters of 'red green blue' become characters of 'blue green red'."
+  },
+  "192": {
+    "task": "Shell: read words from words.txt, count the occurrences of each word across all lines, and output word/count pairs in descending count order. Treat whitespace as separators.",
+    "pitfalls": "Verify the source's character restrictions and tie guarantees; do not invent a tie order."
+  },
+  "193": {
+    "task": "Shell: read file.txt and output only lines matching either phone-number layout ddd-ddd-dddd or (ddd) ddd-dddd, where each d is a decimal digit. Match the entire line, not a substring.",
+    "example": "Authored examples: '415-620-9381' and '(415) 620-9381' qualify; '415 620 9381' does not."
+  },
+  "194": {
+    "task": "Shell: transpose a whitespace-delimited rectangular text table in file.txt. Each output line corresponds to an original column and contains its entries in original row order, separated by spaces.",
+    "pitfalls": "Assume equal column counts only after confirming that guarantee; preserve row and column order."
+  },
+  "195": {
+    "task": "Shell: output the tenth line of file.txt. If the file contains fewer than ten lines, output no line. Line numbering starts at one."
+  },
+  "196": {
+    "task": "SQL: Person(id, email), with id as primary key. Delete duplicate-email rows so that only the row with the smallest id remains for each email. Modify the table rather than returning a SELECT result.",
+    "pitfalls": "Verify email null/case guarantees and the target SQL dialect before writing the deletion."
+  },
+  "197": {
+    "task": "SQL: Weather(id, recordDate, temperature), with unique record dates. Return ids whose temperature exceeds that of the previous calendar day. A previous row is not enough if dates have a gap; a missing prior calendar day yields no qualifying comparison."
+  },
+  "243": {
+    "task": "Given a list of words and two different target words known to occur in it, return the smallest absolute difference between an index of the first word and an index of the second.",
+    "example": "Authored example: ['oak','elm','pine','oak','elm'], targets 'oak','elm', gives 1."
+  },
+  "244": {
+    "task": "Build a WordDistance object from a list of words, then answer repeated shortest(word1, word2) queries. Each query asks for the minimum index distance between the two distinct target words, both of which occur in the original list.",
+    "pitfalls": "Preprocessing is shared across queries; this differs from solving just one query."
+  },
+  "245": {
+    "task": "Given a word list and two target words, return the minimum distance between distinct positions containing those targets. Unlike the simpler version, the targets may be equal. If equal, compare two different occurrences; the input guarantees enough occurrences."
+  },
+  "246": {
+    "task": "Given a decimal digit string, decide whether rotating its displayed digits by 180 degrees produces the same string. The valid digit mappings are 0 to 0, 1 to 1, 6 to 9, 8 to 8 and 9 to 6; other digits are invalid.",
+    "example": "Authored example: '619' is valid; '612' is not."
+  },
+  "247": {
+    "task": "Given a length n, generate all length-n decimal representations unchanged by a 180-degree rotation. Use digit pairs 00, 11, 69, 88 and 96; a center digit can only be 0, 1 or 8. Multi-digit results must not begin with zero. Return results in any order."
+  },
+  "248": {
+    "task": "Given nonnegative decimal bounds low and high as strings, count numbers in their inclusive range unchanged under a 180-degree rotation. Use the digit mapping 0/0, 1/1, 6/9, 8/8 and 9/6; disallow leading zeros except for the number zero itself.",
+    "pitfalls": "Compare long numeric strings by length and lexicographic order rather than unsafe floating-point conversion."
+  },
+  "249": {
+    "task": "Group lowercase strings by cyclic uniform letter shifts: two strings belong together if applying the same shift modulo 26 to every letter of one produces the other. Return all groups; group order and member order are unrestricted.",
+    "example": "Authored example: 'bdf' and 'egi' belong together; 'beg' does not belong to that group."
+  },
+  "250": {
+    "task": "Given a binary tree, count rooted subtrees in which every node has the same value. A leaf is a qualifying subtree. The empty tree contributes zero.",
+    "pitfalls": "A qualifying subtree must include all descendants of its root, not an arbitrary selected subset."
+  },
+  "251": {
+    "task": "Implement a Vector2D iterator over a list of integer lists. next() returns the next integer in row-major order; hasNext() reports whether another integer remains without consuming it. Skip empty inner lists. Calls to next are assumed valid."
+  },
+  "252": {
+    "task": "Given meeting intervals [start, end], decide whether one person can attend them all without overlap. A meeting ending exactly when another starts is compatible.",
+    "example": "Authored example: [[2,5],[5,8],[9,11]] returns true."
+  },
+  "253": {
+    "task": "Given meeting intervals, return the fewest rooms needed so every meeting can take place. Intervals overlap when one starts before another ends; a room is reusable at its meeting's end time.",
+    "example": "Authored example: [[2,7],[3,5],[5,9]] requires 2 rooms."
+  },
+  "254": {
+    "task": "Given a positive integer n, return unique ways to write it as a product of at least two integers greater than one. Exclude the one-factor representation [n]. Represent each combination in nondecreasing order so different permutations are not duplicated.",
+    "example": "Authored example: 18 gives [2,9], [3,6] and [2,3,3]."
+  },
+  "255": {
+    "task": "Given a sequence of distinct integers, determine whether it could be the preorder traversal of a binary search tree with strict ordering: every left descendant is smaller than its root and every right descendant is greater. Return a boolean.",
+    "pitfalls": "Checking only adjacent values is insufficient; ancestor lower bounds remain active."
+  },
+  "256": {
+    "task": "Paint a row of houses using three colors. costs[i][c] is the cost of painting house i with color c. Adjacent houses must have different colors. Return the minimum total cost of painting every house.",
+    "example": "Authored example: costs=[[4,2,7],[3,8,5]] has minimum cost 5."
+  },
+  "259": {
+    "task": "Given an integer array and a target, count index triples i < j < k whose values sum to strictly less than the target. Count triples of indices even when values repeat.",
+    "example": "Authored example: [1,2,3,4], target=8 gives 2."
+  },
+  "261": {
+    "task": "Given n vertices numbered 0 through n-1 and a list of undirected edges, decide whether they form a tree. A tree is connected and has no cycle; a single isolated vertex is a tree.",
+    "pitfalls": "Do not assume connectivity merely from edge count."
+  },
+  "265": {
+    "task": "Paint n houses in a row using k colors, with costs[i][c] giving each choice's cost. Adjacent houses cannot share a color. Return the minimum total cost.",
+    "pitfalls": "Exact input guarantees concerning k=1 and infeasible instances require source verification; do not silently select a failure convention."
+  },
+  "266": {
+    "task": "Given a string, return whether its characters can be rearranged into a palindrome. Every occurrence must be used exactly once.",
+    "example": "Authored example: 'aabbc' returns true; 'aabbcd' returns false."
+  },
+  "267": {
+    "task": "Given a string, generate every distinct palindrome obtainable by rearranging all its characters. If none exists, return an empty list. Result order is unrestricted.",
+    "example": "Authored example: 'aacc' gives 'acca' and 'caac'."
+  },
+  "269": {
+    "task": "Given words sorted according to an unknown alphabet over lowercase letters, return one ordering of all distinct observed letters consistent with that word order. If no ordering is possible, return an empty string. When several orderings work, any is acceptable. Lexicographic order compares the first differing character; a proper prefix precedes a longer word.",
+    "pitfalls": "A longer word before its own prefix is invalid; include letters with no precedence edge."
+  },
+  "270": {
+    "task": "Given a binary search tree and a real target, return the node value closest to the target. Under the commonly used current rule, equal-distance candidates choose the smaller value.",
+    "pitfalls": "The tie rule is remembered rather than source-verified in this draft and must be checked before certification."
+  },
+  "271": {
+    "task": "Design encode(strings) and decode(encoded) so any list of strings can be converted into one string and recovered exactly. Preserve list order, empty strings and the distinction between an empty list and a one-element list containing an empty string. Do not assume a delimiter character is absent from the input.",
+    "example": "Authored example: ['', 'a|b', '007'] must round-trip unchanged.",
+    "pitfalls": "The encoded representation is your choice. Verify the official character domain and permitted library restrictions before final certification."
+  },
+  "272": {
+    "task": "Given a binary search tree, a real target and k, return the k node values closest to the target. k does not exceed the number of nodes. Output order need not be sorted.",
+    "pitfalls": "Verify whether the source guarantees a unique closest set and its tie treatment before certifying equal-distance boundary cases."
+  },
+  "276": {
+    "task": "Count ways to paint n fence posts using k colors such that no three consecutive posts have the same color. Adjacent posts may share a color, but runs longer than two are forbidden. Return the total number of assignments.",
+    "example": "Authored example: n=3, k=2 gives 6."
+  },
+  "277": {
+    "task": "Among n people numbered 0 through n-1, find a celebrity using a supplied knows(a,b) query. A celebrity knows no other person and is known by every other person. Return the celebrity's index, or -1 if none exists.",
+    "pitfalls": "The knows query is supplied. Exclude self-relations from the definition and verify a candidate against both conditions."
+  },
+  "280": {
+    "task": "Rearrange an integer array in place so nums[0] <= nums[1] >= nums[2] <= nums[3] and so on. Return any arrangement satisfying the alternating non-strict inequalities, preserving all values and multiplicities."
+  },
+  "281": {
+    "task": "Implement an iterator over two integer lists that alternates taking the next element from each while both have elements. Once one is exhausted, continue through the other. next returns one element and hasNext reports whether any remain.",
+    "example": "Authored example: [3,8,9] and [4] produce 3,4,8,9."
+  },
+  "285": {
+    "task": "Given a binary search tree with distinct values and a node p in it, return the node that follows p in inorder traversal. Return null when p has no successor. The return value is a node reference, not just an integer."
+  },
+  "286": {
+    "task": "Update a grid containing walls (-1), gates (0) and empty rooms (2147483647). Replace each empty room with its shortest four-direction path distance to any gate without crossing a wall. Leave unreachable empty rooms unchanged and preserve gates and walls."
+  },
+  "288": {
+    "task": "Build a dictionary checker using abbreviations formed by keeping a word's first and last letters and replacing the intervening characters with their count; words of length at most two remain unchanged. isUnique(word) is true when no different dictionary word shares its abbreviation. Repeated copies of the same dictionary word do not by themselves destroy uniqueness."
+  },
+  "291": {
+    "task": "Given a pattern and a string, decide whether each distinct pattern character can be assigned a nonempty substring so that concatenating assignments in pattern order gives the entire string. Equal pattern characters use equal substrings, and different pattern characters must use different substrings.",
+    "example": "Authored example: pattern 'xyx', string 'catdogcat', returns true."
+  },
+  "293": {
+    "task": "Given a string containing '+' and '-', return all distinct strings obtainable by changing exactly one adjacent '++' pair into '--'. If no move exists, return an empty list."
+  },
+  "294": {
+    "task": "Two players alternate replacing one adjacent '++' pair by '--' in a string of pluses and minuses. A player with no legal move loses. Given the starting string, decide whether the first player can force a win against optimal play."
+  },
+  "296": {
+    "task": "Given a binary grid where 1 marks a person's home, choose an integer grid location minimizing the total Manhattan distance to all homes. Return that minimum total distance. Manhattan distance is absolute row difference plus absolute column difference.",
+    "pitfalls": "Do not confuse the objective with minimizing the largest individual distance."
+  },
+  "298": {
+    "task": "Given a binary tree, return the maximum number of nodes in a downward parent-to-child path whose values increase by exactly one at each step. The path may start at any node, but cannot turn upward.",
+    "example": "Authored example: a chain 4\u21925\u21926 has length 3; 6\u21925 does not extend it."
+  },
+  "302": {
+    "task": "Given a binary image and the coordinates of one black pixel, find the area of the smallest axis-aligned rectangle containing every black pixel. Black pixels form one connected component under four-direction adjacency. Return width times height.",
+    "pitfalls": "The supplied pixel is black. Include both endpoint rows and columns in dimensions."
+  },
+  "305": {
+    "task": "Start with an m-by-n water grid. For each position in a sequence, turn that cell into land and report the current number of four-direction-connected land components. Activating an already-land cell does not change the grid or count. Return one count per operation."
+  },
+  "308": {
+    "task": "Implement NumMatrix(matrix) with update(row,col,val), which replaces one cell, and sumRegion(row1,col1,row2,col2), which returns the sum over the inclusive axis-aligned rectangle between the given corners. Updates affect all subsequent queries."
+  },
+  "311": {
+    "task": "Given compatible integer matrices A of shape m-by-k and B of shape k-by-n, compute their matrix product C, where C[i][j] is the sum over t of A[i][t]*B[t][j]. The matrices are sparse; exploit zeros where useful while returning the full result matrix."
+  },
+  "314": {
+    "task": "Return a binary tree's values grouped by vertical columns from leftmost to rightmost. Root has column zero; left and right children change column by minus or plus one. Within each column, list nodes from top to bottom; nodes sharing a row and column retain left-to-right traversal order.",
+    "pitfalls": "Do not apply the value-sorting tie rule of the different vertical traversal problem."
+  },
+  "317": {
+    "task": "A grid contains empty land (0), buildings (1) and obstacles (2). Choose an empty cell reachable from every building through four-direction steps over empty land. Minimize the sum of distances from all buildings and return it; return -1 if no such empty cell exists. Buildings and obstacles cannot be traversed as intermediate cells."
+  },
+  "320": {
+    "task": "Generate all generalized abbreviations of a word by replacing any chosen runs of consecutive characters with their lengths, retaining the other characters. Adjacent abbreviated positions form one count rather than adjacent separate numbers. Return all results in any order."
+  },
+  "323": {
+    "task": "Given n vertices numbered 0 through n-1 and undirected edges, return the number of connected components, including isolated vertices."
+  },
+  "325": {
+    "task": "Given an integer array and target k, return the largest length of a contiguous subarray with sum exactly k. Values may be negative. Return zero if no nonempty qualifying subarray exists."
+  },
+  "333": {
+    "task": "Given a binary tree, return the number of nodes in its largest rooted subtree that is a binary search tree. A selected subtree includes all descendants of its root. BST ordering is strict on both sides.",
+    "pitfalls": "Validate descendant ranges, not only direct parent-child comparisons."
+  },
+  "339": {
+    "task": "Given a recursively nested list of integers, return the sum of each integer times its nesting depth. Integers in the outermost list have depth one; each nested list increases depth by one."
+  },
+  "340": {
+    "task": "Given a string and integer k, return the maximum length of a contiguous substring containing at most k distinct characters. For k=0, the answer is zero."
+  },
+  "346": {
+    "task": "Implement a moving-average stream with a fixed positive window size. Each next(value) adds a value and returns the arithmetic mean of the most recent at most size values. Before size values have arrived, average all values seen."
+  },
+  "348": {
+    "task": "Design a game on an n-by-n board with players 1 and 2. move(row,col,player) places the player's mark in an empty cell and returns that player if the move completes a full row, column or diagonal, otherwise zero. Moves are valid and the game receives no further moves after a win.",
+    "pitfalls": "Only the two main diagonals are winning diagonals; use the supplied player rather than assuming an unverified move schedule."
+  },
+  "351": {
+    "task": "Count unlock patterns on a 3-by-3 keypad using between m and n distinct keys inclusive. A move that passes through another key is allowed only if that intervening key has already been visited. Keys cannot repeat. Different ordered sequences are different patterns."
+  },
+  "353": {
+    "task": "Implement a snake game in a width-by-height grid. The snake starts at (row 0, column 0), length one. Food positions become active in the supplied order. move(direction) advances one cell using U/D/L/R. Eating the active food grows the snake and increments the score. Return the score after a legal move, or -1 upon wall/body collision.",
+    "pitfalls": "On a non-growing move, the previous tail vacates its cell and can be entered legally. Verify the post-game-over call convention before certification."
+  },
+  "356": {
+    "task": "Given points in a plane, decide whether there is a vertical line x=c such that reflecting the set of point locations across it leaves the set unchanged.",
+    "pitfalls": "Duplicate-point treatment should be checked against the exact source before using multiplicities as a requirement."
+  },
+  "358": {
+    "task": "Rearrange all characters of a string so equal characters occur at positions whose difference is at least k. Return any valid rearrangement, or an empty string if none exists. All original occurrences must be used exactly once."
+  },
+  "359": {
+    "task": "Implement shouldPrintMessage(timestamp,message) for log calls arriving in nondecreasing timestamp order. Return true if the message has not been printed in the preceding ten seconds; otherwise return false. A rejected call does not reset the time at which that message was last printed.",
+    "example": "Authored example: the same message at times 3, 8, 13 returns true, false, true."
+  },
+  "360": {
+    "task": "Given an integer array sorted in ascending order and coefficients a,b,c, apply f(x)=a*x*x+b*x+c to every element and return the transformed values in ascending order. The intended algorithm runs in linear time."
+  },
+  "361": {
+    "task": "A grid has walls W, enemies E and empty cells 0. Place one bomb in an empty cell to kill enemies in its row and column until a wall blocks each direction. Return the maximum number killed by one placement."
+  },
+  "362": {
+    "task": "Design hit(timestamp) and getHits(timestamp) for calls in nondecreasing time order. hit records one event; multiple hits may share a timestamp. getHits returns the number recorded in the preceding 300-second window, including the current second and excluding events exactly 300 seconds old."
+  },
+  "366": {
+    "task": "Repeatedly collect all current leaves of a binary tree and remove them until the tree is empty. Return the groups in removal-round order. Values within a round may be returned in any order; preserve duplicate node values."
+  },
+  "369": {
+    "task": "A nonempty singly linked list stores a nonnegative integer's decimal digits with the most significant digit first. Add one and return the head of the resulting digit list, creating a new leading node when needed.",
+    "example": "Authored example: 4\u21929\u21929 becomes 5\u21920\u21920."
+  },
+  "370": {
+    "task": "Start with a zero-filled array of given length. For each update [start,end,increment], add increment to every element in that inclusive index interval. Return the final array after all updates."
+  },
+  "379": {
+    "task": "Manage phone numbers 0 through maxNumbers-1. get() allocates and returns any available number, or -1 if none remain. check(number) reports availability. release(number) makes an allocated number available again; releasing one already available must not create duplicate capacity."
+  },
+  "262": {
+    "task": "SQL: Trips(id, client_id, driver_id, city_id, status, request_at) records trips; Users(users_id, banned, role) records users. For each date from 2013-10-01 through 2013-10-03 with eligible trips, calculate the fraction of trips cancelled by either party among trips whose client and driver are both not banned. Round to two decimal places and return Day and Cancellation Rate.",
+    "pitfalls": "Check exact enum spellings and date-range convention against the source before certification. Filter both participants before computing either numerator or denominator."
+  },
+  "364": {
+    "task": "Given a recursively nested list of integers, find the greatest depth at which an integer occurs. Weight an integer at depth d by maxDepth-d+1 and return the sum of weighted values. Outermost integers have depth one.",
+    "example": "Authored example: [3,[2,[4]]] gives 3*3+2*2+4=17.",
+    "pitfalls": "Empty nested lists must not silently increase the maximum integer depth."
+  },
+  "408": {
+    "task": "Determine whether an abbreviation describes a word. Letters must match literally in order; a sequence of digits skips that many word characters. Skip counts must be positive and cannot have leading zeros. The abbreviation must consume the word exactly.",
+    "example": "Authored example: word 'planet', abbreviation 'p4t' is valid; 'p04t' is invalid."
+  },
+  "411": {
+    "task": "Given a target word and a dictionary, return a shortest generalized abbreviation of the target that is not also an abbreviation of any dictionary word. Only dictionary words with the target's length can conflict. Abbreviation length counts each retained letter and each numeric run as one unit, regardless of the number of decimal digits in that run. Any minimum-length answer is acceptable.",
+    "pitfalls": "The optimization measure is abbreviation token count, not necessarily the encoded string's character count."
+  },
+  "418": {
+    "task": "Given a sentence as an ordered list of words and a screen of rows by cols character cells, repeat the sentence as many complete times as possible while preserving word order. Words cannot be split across lines, and adjacent words on a line need a space. Return the number of complete sentence repetitions that fit."
+  },
+  "422": {
+    "task": "Given a list of strings, decide whether its kth row and kth column are identical for every applicable index k. Rows may have different lengths; every character at (i,j) must have a matching character at (j,i), and missing counterparts invalidate the square."
+  },
+  "425": {
+    "task": "Given distinct words of equal length n, return all word squares consisting of n words whose row i equals column i. A supplied word may be reused in constructing a square. Return squares in any order.",
+    "pitfalls": "Do not impose a use-once constraint unless a current source explicitly changes the domain."
+  },
+  "426": {
+    "task": "Convert a binary search tree in place into a sorted circular doubly linked list, reusing each node's left pointer as previous and right pointer as next. Return the smallest node as head. Its previous pointer must link to the largest node, and the largest node's next pointer must link to the head. Return null for an empty tree."
+  },
+  "428": {
+    "task": "Design serialize(root) and deserialize(data) for an ordered N-ary tree. Serialization produces a string; deserialization must reconstruct all node values and the exact ordered child relationships. Preserve empty trees and nodes with no children. Choose your own unambiguous encoding rather than depending on a global in-memory registry."
+  },
+  "431": {
+    "task": "Design encode(root) and decode(root) mapping an ordered N-ary tree to a binary tree and back. The round trip must preserve values and the ordering and membership of every node's children, including empty trees. The encoding format is your choice; encode returns a binary tree, not a string."
+  },
+  "439": {
+    "task": "Evaluate a valid nested ternary expression using true/false conditions and single-character operands. The grammar uses condition ? trueBranch : falseBranch and associates to the right. Return the single-character result, respecting nesting rather than evaluating left to right.",
+    "pitfalls": "Verify the exact permitted operand characters in the source; remembered versions use digits and T/F."
+  },
+  "444": {
+    "task": "Given a permutation nums of 1 through n and a collection of subsequences, decide whether nums is the only possible ordering of all n values that contains every supplied sequence as a subsequence. Return false for contradictory order constraints, missing coverage, multiple possible orders, or a uniquely implied order different from nums."
+  },
+  "465": {
+    "task": "Each transaction [payer, receiver, amount] transfers money between two people. After computing all people's net balances, find the minimum number of additional transfers needed to settle every balance. Transfers may be between any people; the objective is the number of transfers, not their total value."
+  },
+  "469": {
+    "task": "Given polygon vertices listed in boundary order, determine whether the polygon is convex: its interior does not turn inward at any vertex. Collinear successive edges should not by themselves be treated as a turn in the opposite direction.",
+    "pitfalls": "Verify assumptions about distinct vertices, polygon simplicity and degeneracy before certifying an orientation-only test."
+  },
+  "471": {
+    "task": "Encode a string using expressions k[encodedSubstring] for k repetitions of a substring, allowing nesting and literal characters. Return an encoding with minimum character length, or the original text when encoding does not shorten it. Any shortest answer is acceptable.",
+    "pitfalls": "Encoding length includes digits and brackets; recursive compression can beat a single top-level repeated block."
+  },
+  "484": {
+    "task": "Given a pattern of I and D with length n, return the lexicographically smallest permutation of integers 1 through n+1 whose adjacent values increase at each I and decrease at each D."
+  },
+  "487": {
+    "task": "Given a binary array, return the greatest possible length of a contiguous run of ones after changing at most one zero to one. The flip is optional.",
+    "example": "Authored example: [1,0,1,1,0,1] gives 4."
+  },
+  "489": {
+    "task": "Control a robot through supplied move, turnLeft, turnRight and clean methods to clean every reachable open cell in an unknown room. move advances one cell in its current direction if unblocked and reports success; turns change direction by 90 degrees. The robot starts in an open cell, initially facing up. You receive no room map or absolute starting coordinates.",
+    "pitfalls": "The hidden room may contain inaccessible cells; only the starting component must be cleaned. Backtracking must restore physical position and orientation."
+  },
+  "490": {
+    "task": "A ball in a maze of open cells and walls moves in a chosen cardinal direction until blocked, then may choose another direction. Determine whether it can stop at the destination from its starting cell. Passing over the destination without stopping does not count."
+  },
+  "499": {
+    "task": "A ball rolls in a grid until hitting a wall or falling into a designated hole. Find a route from its starting cell to the hole minimizing the number of cells travelled. Among equal-distance routes, return the lexicographically smallest direction string using d, l, r and u. Return 'impossible' if the hole cannot be reached.",
+    "pitfalls": "Unlike a normal stopping destination, the hole halts rolling immediately, even before a wall."
+  },
+  "505": {
+    "task": "A ball rolls through empty maze cells in a cardinal direction until the next step would hit a wall. It may change direction only when stopped. Return the minimum number of cell steps needed to stop at the destination, or -1 if impossible. Rolling across the destination without stopping does not complete the route."
+  },
+  "510": {
+    "task": "Given a node in a binary search tree where each node has left, right and parent pointers, return its inorder successor node, or null if it has none. You are not given the root."
+  },
+  "511": {
+    "task": "SQL: Activity(player_id, device_id, event_date, games_played), keyed by player_id and event_date, records daily player activity. Return player_id and first_login, the earliest event_date for each player."
+  },
+  "512": {
+    "task": "SQL: Activity(player_id, device_id, event_date, games_played), keyed by player_id and event_date. Return player_id and device_id for the device used on each player's earliest activity date."
+  },
+  "527": {
+    "task": "Given distinct lowercase words, initially abbreviate each as its first letter, omitted-letter count, and final letter. If abbreviations collide, increase the retained prefix length for the conflicting words until their abbreviations differ. Keep a word unchanged whenever its abbreviation would not be shorter. Return results in the original word order."
+  },
+  "531": {
+    "task": "Given a grid of B and W pixels, count black pixels whose row and column each contain exactly one black pixel."
+  },
+  "533": {
+    "task": "Given a B/W picture and integer target, count black pixels whose row and column each contain exactly target black pixels and for which every row containing a black pixel in that column is identical to the pixel's own row."
+  },
+  "534": {
+    "task": "SQL: Activity(player_id, device_id, event_date, games_played), keyed by player_id and event_date. For each activity record, return player_id, event_date and games_played_so_far, the cumulative number of games played by that player through that date inclusive."
+  },
+  "536": {
+    "task": "Construct a binary tree from a string containing a signed integer root value followed by up to two parenthesized child descriptions. The first child group is the left subtree and the second is the right subtree; subtrees use the same recursive format. An empty input represents an empty tree.",
+    "pitfalls": "Check the exact permitted empty-child syntax before certifying a parser."
+  },
+  "544": {
+    "task": "Given n teams numbered by strength from 1 to n, where n is a power of two and 1 is strongest, construct a tournament bracket. Each round pairs the strongest remaining team with the weakest remaining team, then the next strongest with the next weakest. Represent a match as '(left,right)' and return the full nested bracket string."
+  },
+  "545": {
+    "task": "Return a binary tree's boundary in anticlockwise order: root, non-leaf left boundary from top down, all leaves from left to right, then non-leaf right boundary from bottom up. On the left boundary prefer left children and otherwise right; on the right boundary prefer right and otherwise left. Do not include a node twice."
+  },
+  "548": {
+    "task": "Given an integer array, determine whether indices i<j<k can be removed so that the four nonempty intervening subarrays nums[0:i], nums[i+1:j], nums[j+1:k] and nums[k+1:n] have equal sums. Return a boolean; values at the three cut indices are excluded from every sum."
+  },
+  "549": {
+    "task": "Given a binary tree, return the maximum number of nodes on a simple path whose values change consistently by +1 or consistently by -1 at every step. The path may go from a child through an ancestor to another child, but cannot revisit nodes.",
+    "pitfalls": "Unlike the downward-only version, join increasing and decreasing arms through a common node."
+  },
+  "550": {
+    "task": "SQL: Activity(player_id, device_id, event_date, games_played). Return fraction, rounded to two decimals, of distinct players who logged in on the calendar day immediately following their first login. Use all distinct players as the denominator."
+  },
+  "555": {
+    "task": "Given a list of strings in a fixed cyclic order, independently keep or reverse each string, concatenate them, and choose a cut position in that cyclic concatenation. Return the lexicographically largest resulting linear string. You may not permute the original string order."
+  },
+  "562": {
+    "task": "Given a binary matrix, return the length of its longest uninterrupted line of ones in any horizontal, vertical, main-diagonal or anti-diagonal direction. Return zero if no one exists."
+  },
+  "568": {
+    "task": "Given a directed flight matrix between cities and vacation-day counts for each city and week, maximize total vacation days across all weeks. Start in city 0. At the start of each week, either stay or take a direct available flight; then receive that destination city's vacation days for the week. Return the maximum total."
+  },
+  "569": {
+    "task": "SQL: Employee(id, company, salary). For each company, return the employee row or two rows occupying the median position(s) when ordered by salary and then id. Return id, company and salary. For an even company size, include both middle employees rather than averaging their salaries."
+  },
+  "570": {
+    "task": "SQL: Employee(id, name, department, managerId). Return names of employees who have at least five direct reports. Count direct managerId references, not all descendants in the management hierarchy."
+  },
+  "571": {
+    "task": "SQL: Numbers(num, frequency) represents a multiset where each num occurs frequency times. Return the median of the expanded multiset as median, rounded to one decimal place. Do not treat every distinct num as occurring once."
+  },
+  "573": {
+    "task": "Given a rectangular grid, a tree, a squirrel's starting position and nut positions, collect all nuts at the tree while minimizing total Manhattan travel distance. The squirrel carries one nut at a time. It starts at its own position, travels to a nut, takes it to the tree, and repeats until all nuts are delivered. Return the minimum distance."
+  },
+  "574": {
+    "task": "SQL: Candidate(id, name) and Vote(id, candidateId). Return the name of the candidate receiving the most votes. The remembered problem guarantees one winner; verify that guarantee before defining tie handling."
+  },
+  "577": {
+    "task": "SQL: Employee(empId, name, supervisor, salary) and Bonus(empId, bonus). Return name and bonus for employees whose bonus is less than 1000, including employees with no bonus record, for whom bonus is NULL."
+  },
+  "578": {
+    "task": "SQL: SurveyLog(id, action, question_id, answer_id, q_num, timestamp) records question displays, answers and skips. Return survey_log, the question ID with the greatest answer count divided by display count. Break tied rates by smallest question ID.",
+    "pitfalls": "Verify current action literals, denominator guarantees and tie rule; do not count a skip as an answer."
+  },
+  "579": {
+    "task": "SQL: Employee(id, month, salary). For each employee and recorded month other than that employee's latest recorded month, report the sum of salary in that month and the preceding two calendar months. Missing months contribute nothing. Return id, month, salary ordered by id ascending and month descending.",
+    "pitfalls": "A three-row window is not equivalent to three calendar months when months are missing."
+  },
+  "580": {
+    "task": "SQL: Student(student_id, student_name, gender, dept_id) and Department(dept_id, dept_name). Return dept_name and student_number for every department, including zero-student departments. Sort by student_number descending, then dept_name ascending."
+  },
+  "582": {
+    "task": "Given parallel lists pid and ppid describing processes and their parent process IDs, return every process terminated by killing a specified process: that process and all its descendants. Result order is unrestricted."
+  },
+  "584": {
+    "task": "SQL: Customer(id, name, referee_id). Return names of customers not referred by customer 2, including rows with a NULL referee_id."
+  },
+  "585": {
+    "task": "SQL: Insurance(pid, tiv_2015, tiv_2016, lat, lon). Sum tiv_2016 for policies whose tiv_2015 is shared by at least one other policy and whose latitude/longitude pair is unique among policies. Round the result to two decimal places under tiv_2016."
+  },
+  "586": {
+    "task": "SQL: Orders(order_number, customer_number). Return the customer_number of the customer placing the most orders. The remembered problem guarantees a unique maximum; verify that before handling ties."
+  },
+  "588": {
+    "task": "Design an in-memory file system supporting ls(path), mkdir(path), addContentToFile(filePath,content) and readContentFromFile(filePath). Paths are absolute. ls on a directory returns child names sorted lexicographically; ls on a file returns its filename alone. mkdir creates missing intermediate directories. Adding content creates the file if absent and otherwise appends. Reading returns the complete stored content.",
+    "pitfalls": "Confirm valid-call/path guarantees before defining errors for nonexistent paths or file-directory conflicts."
+  },
+  "595": {
+    "task": "SQL: World(name, continent, area, population, gdp). Return name, population and area for countries with area at least 3000000 or population at least 25000000. Either condition suffices."
+  },
+  "596": {
+    "task": "SQL: Courses(student, class), keyed by student and class. Return classes having at least five enrolled students."
+  },
+  "597": {
+    "task": "SQL: FriendRequest(sender_id, send_to_id, request_date) and RequestAccepted(requester_id, accepter_id, accept_date). Return accept_rate, the number of distinct accepted ordered user pairs divided by the number of distinct requested ordered user pairs, rounded to two decimals. Return 0.00 when there are no requests.",
+    "pitfalls": "Repeated events for the same ordered pair count once in each set. Acceptance events need not correspond to a request row in the stored data."
+  },
+  "601": {
+    "task": "SQL: Stadium(id, visit_date, people), with id increasing with date. Return id, visit_date and people for rows belonging to a run of at least three consecutive IDs, each with people at least 100. Sort by visit_date ascending. Include every row of a qualifying run."
+  },
+  "602": {
+    "task": "SQL: RequestAccepted(requester_id, accepter_id, accept_date). Treat each accepted request as an undirected friendship and return id and num for the person with the most friends. The remembered problem guarantees a unique maximum; verify duplicate-edge guarantees before counting rows."
+  },
+  "603": {
+    "task": "SQL: Cinema(seat_id, free). Return seat_id for each free seat that has an immediately adjacent free seat, where adjacent IDs differ by one. Sort ascending by seat_id."
+  },
+  "604": {
+    "task": "Implement a StringIterator over a run-length-encoded string containing letter/count groups. next returns the next decompressed character, or a space if exhausted. hasNext reports whether any character remains. Counts can contain multiple digits; do not expand the entire sequence eagerly."
+  },
+  "607": {
+    "task": "SQL: SalesPerson(sales_id, name, salary, commission_rate, hire_date), Company(com_id, name, city), and Orders(order_id, order_date, com_id, sales_id, amount). Return names of salespeople who have no order with the company named RED, including salespeople with no orders at all."
+  },
+  "608": {
+    "task": "SQL: Tree(id, p_id). Classify each node as Root if its parent is NULL, Leaf if it has no children, otherwise Inner. Return id and type. Root classification takes precedence for a one-node tree."
+  },
+  "610": {
+    "task": "SQL: Triangle(x,y,z). Return x,y,z and triangle, containing 'Yes' if those lengths form a non-degenerate triangle and 'No' otherwise. Each pair of sides must sum to strictly more than the third."
+  },
+  "612": {
+    "task": "SQL: Point2D(x,y) contains distinct plane locations. Return the smallest Euclidean distance between any two different points, rounded to two decimals, under shortest."
+  },
+  "613": {
+    "task": "SQL: Point(x) contains distinct positions on a line. Return the smallest absolute difference between two different positions under shortest."
+  },
+  "614": {
+    "task": "SQL: Follow(followee,follower) records follower following followee. Return follower and num for users who both follow somebody and are followed by somebody, with num their own follower count. Sort by follower ascending.",
+    "pitfalls": "Check duplicate-pair guarantees before counting; the two roles are directional."
+  },
+  "615": {
+    "task": "SQL: Salary(id, employee_id, amount, pay_date) and Employee(employee_id, department_id). For each department and month with salary data, compare that department's average payment with the company-wide average for the same month. Return pay_month, department_id and comparison as 'higher', 'lower' or 'same'."
+  },
+  "616": {
+    "task": "Given a string and a list of words, wrap all characters belonging to any occurrence of any listed word in HTML bold tags. Merge overlapping and adjacent covered regions into a single '<b>...</b>' region. Return the resulting string without altering uncovered characters."
+  },
+  "618": {
+    "task": "SQL: Student(name, continent) contains students from America, Asia and Europe. Sort names within each continent alphabetically, then place the first name from each in the first result row, second names in the second, and so on. Return columns America, Asia and Europe, using NULL where a continent has no corresponding name.",
+    "pitfalls": "Verify the source's size guarantees rather than assuming all continents have equal counts."
+  },
+  "619": {
+    "task": "SQL: MyNumbers(num) may contain duplicate numbers. Return the largest value occurring exactly once, under num. If none exists, return one row containing NULL."
+  },
+  "620": {
+    "task": "SQL: Cinema(id, movie, description, rating). Return all columns for movies with odd id and description other than 'boring'. Sort by rating descending."
+  },
+  "625": {
+    "task": "Given a positive integer a, find the smallest positive integer whose decimal digits multiply to a. Return zero if no such integer exists or if the smallest answer exceeds the signed 32-bit integer limit. For a=1, return 1."
+  },
+  "626": {
+    "task": "SQL: Seat(id, student) uses consecutive IDs starting at one. Swap the students in each pair of adjacent seat IDs (1 with 2, 3 with 4, etc.). Leave the final student unchanged if the count is odd. Return id and student ordered by id."
+  },
+  "627": {
+    "task": "SQL: Salary(id, name, sex, salary). Update the table in place, swapping 'm' and 'f' in sex in one UPDATE statement, without a temporary table. Preserve the other columns."
+  },
+  "631": {
+    "task": "Implement an Excel-like integer grid with set(row,column,value), get(row,column) and sum(row,column,references). A sum formula refers to cells or inclusive rectangular ranges, returns its current total, and remains live so dependency changes update it. Overlapping or repeated references contribute repeatedly. Setting a value replaces any formula previously stored in that cell.",
+    "pitfalls": "Verify constructor limits, column naming and the acyclic-formula guarantee. Do not treat sum as a one-time calculation."
+  },
+  "634": {
+    "task": "Given n, count permutations of 1 through n in which no value remains at its original one-based position. Return the count modulo 1000000007."
+  },
+  "635": {
+    "task": "Implement a log store with put(id,timestamp) and retrieve(start,end,granularity). Timestamps have year:month:day:hour:minute:second fields. Retrieve IDs whose timestamps, truncated to the requested granularity, lie in the inclusive truncated range. Granularity is one of Year, Month, Day, Hour, Minute or Second; result order is unrestricted."
+  },
+  "642": {
+    "task": "Build an autocomplete system from sentences and historical counts. Each input character extends the current query prefix and returns up to three matching sentences ordered by descending count, then lexicographically ascending. Input '#' finishes the sentence, increments its stored count, clears the query, and returns an empty list. Spaces are ordinary sentence characters."
+  },
+  "644": {
+    "task": "Given an integer array and k, return the maximum arithmetic mean of any contiguous subarray having length at least k. The remembered numeric acceptance tolerance is 1e-5; verify it against the source before certification.",
+    "pitfalls": "The optimum need not have exactly k elements."
+  },
+  "651": {
+    "task": "Starting from an empty screen, maximize the number of A characters obtainable with at most n keystrokes. Available actions are type A, select all, copy the selection, and paste the clipboard at the end. Each action uses one keystroke. Return the largest possible count."
+  },
+  "656": {
+    "task": "An array gives the cost to land on each index; -1 marks a blocked index. Starting at the first index, jump forward between 1 and maxJump positions to reach the last. Minimize the sum of visited costs including endpoints. Return the lexicographically smallest optimal path using one-based indices, or an empty list when unreachable."
+  },
+  "660": {
+    "task": "Form the increasing sequence of positive integers whose decimal representations contain no digit 9. Given a one-based position n, return the nth integer in that sequence."
+  },
+  "663": {
+    "task": "Given a binary tree, decide whether removing exactly one existing edge can split it into two nonempty trees with equal sums of node values. A one-node tree cannot be split."
+  },
+  "666": {
+    "task": "A small binary tree is encoded as three-digit integers: hundreds is depth, tens is the one-based position in the full binary level, and units is node value. Return the sum of the node-value totals along all root-to-leaf paths. Root depth is one; child positions of p are 2p-1 and 2p on the next level."
+  },
+  "681": {
+    "task": "Given a valid 24-hour time in HH:MM format, find the next time strictly later in cyclic daily order that can be displayed using only digits appearing in the input. Each available digit may be reused any number of times. If necessary, wrap to the next day."
+  },
+  "683": {
+    "task": "bulbs is a permutation giving the one-based position activated on each day, with days also one-based. Return the earliest day when two active bulbs have exactly k inactive positions between them. Activations persist. Return -1 if this never occurs."
+  },
+  "694": {
+    "task": "Given a binary grid, count distinct shapes of four-direction-connected islands. Two shapes are equivalent if one can be translated to the other. Rotation and reflection do not count as equivalences."
+  },
+  "702": {
+    "task": "Search for target in a strictly increasing integer array exposed only through ArrayReader.get(index), with unknown length. Out-of-range reads return the supplied sentinel (commonly 2147483647). Return the index if present, otherwise -1.",
+    "pitfalls": "Verify the exact sentinel and value bounds to ensure the sentinel cannot equal a valid target."
+  },
+  "708": {
+    "task": "Given any node in a sorted circular singly linked list and a value, insert one new node while preserving circular sorted order. The supplied node need not be the minimum. Return the original supplied node, or the new self-linked node if the list was empty. Any valid insertion position among duplicates is acceptable."
+  },
+  "711": {
+    "task": "Count distinct shapes of four-direction-connected islands in a binary grid, treating translation, rotation by multiples of 90 degrees, and reflection as equivalent. Return the number of shape equivalence classes."
+  },
+  "716": {
+    "task": "Implement a MaxStack with push, pop, top, peekMax and popMax. peekMax returns the maximum value. popMax removes and returns the maximum value closest to the top when several maxima exist, preserving the order of other elements. Non-push operations are assumed to be called on nonempty state."
+  },
+  "723": {
+    "task": "Given a candy board with zero representing empty cells, repeatedly remove all horizontal or vertical runs of at least three identical nonzero values simultaneously, then let remaining candies fall downward within each column. Continue until no such run remains and return the stable board."
+  },
+  "727": {
+    "task": "Given strings s1 and s2, return the shortest contiguous substring of s1 containing s2 as a subsequence. For equal-length choices, use the earliest starting substring. Return an empty string if none exists."
+  },
+  "734": {
+    "task": "Given two word sequences and a list of similar word pairs, decide whether the sequences are similar position by position. They must have equal length. Identical words are always similar, given pairs are symmetric, and similarity is not transitive."
+  },
+  "737": {
+    "task": "Given two word sequences and similar word pairs, decide whether the sequences are similar position by position. Lengths must match. Similarity is reflexive, symmetric and transitive, so words connected through a chain of pairs are similar."
+  },
+  "742": {
+    "task": "Given a binary tree with distinct node values and the value of a target node, return the value of a leaf at minimum edge distance from that node. Paths may use parent as well as child edges. Any closest leaf is acceptable if several tie."
+  },
+  "750": {
+    "task": "Given a binary grid, count axis-aligned rectangles whose four corner cells are all 1. Each rectangle uses two distinct rows and two distinct columns; interior and other boundary cells do not matter."
+  },
+  "751": {
+    "task": "Given an IPv4 start address and count n, cover exactly n consecutive addresses beginning there using as few CIDR blocks as possible. No block may include an address outside the requested interval. Return the blocks as address/prefix strings.",
+    "pitfalls": "Handle IPv4 arithmetic as unsigned values; verify the no-overflow range guarantee."
+  },
+  "755": {
+    "task": "Given terrain heights, pour volume units of water one at a time at index k. A unit first seeks a lower reachable position to the left without climbing, settling at the nearest lowest reachable level; if none, try the analogous rightward path; if neither lowers its level, settle at k. Increment the selected height and return the final heights.",
+    "pitfalls": "Plateau traversal and tie behavior require careful source verification before implementation; do not replace the process with unrestricted global minimum filling."
+  },
+  "758": {
+    "task": "Given words and a string s, mark every character covered by any occurrence of any word. Return s with maximal contiguous marked regions wrapped in '<b>' and '</b>'; merge adjacent and overlapping regions."
+  },
+  "759": {
+    "task": "Each employee has sorted non-overlapping busy intervals. Return the sorted finite intervals of positive length during which all employees are free. Do not return the unbounded time before all work or after all work, and do not return zero-length gaps."
+  },
+  "760": {
+    "task": "Given two integer arrays that are anagrams, return a mapping from each index of the first array to an index in the second containing the same value. Duplicates may exist; any valid mapping satisfying the problem's occurrence rules is acceptable.",
+    "pitfalls": "Verify whether repeated use of an index is permitted in the current specification; a one-to-one occurrence mapping is always a safe construction when arrays are anagrams."
+  },
+  "772": {
+    "task": "Evaluate a valid arithmetic expression containing nonnegative integer literals, spaces, parentheses and binary +, -, * and /. Use normal precedence and truncate division toward zero. Return the integer result.",
+    "pitfalls": "Check the current grammar's unary-sign support and range guarantees rather than guessing from a different calculator variant."
+  },
+  "774": {
+    "task": "Given sorted gas-station positions on a line, add k stations at arbitrary real positions so the greatest distance between adjacent stations is as small as possible. Return that minimum achievable maximum gap. Verify the source's numeric tolerance before certification."
+  },
+  "776": {
+    "task": "Split a binary search tree around target into two BSTs: all values <= target and all values > target. Return their roots, preserving the original parent-child relationships whenever both nodes remain in the same output tree. Reuse nodes rather than duplicating them."
+  },
+  "800": {
+    "task": "Given an RGB color '#RRGGBB', return the closest shorthand-representable color, meaning each channel's two hex digits are equal. Minimize the sum of squared differences of the three channel values and return the six-digit hexadecimal representation."
+  },
+  "1045": {
+    "task": "SQL: Customer(customer_id, product_key) records purchases, possibly repeated; Product(product_key) lists products. Return customer_id for customers who bought every listed product at least once. Duplicate purchases do not substitute for a missing product."
+  },
+  "1050": {
+    "task": "SQL: ActorDirector(actor_id, director_id, timestamp), keyed by timestamp, records collaborations. Return actor_id and director_id pairs with at least three collaboration records."
+  },
+  "1055": {
+    "task": "Given source and target strings, form target by concatenating subsequences of source, each taken independently from the same source. Return the minimum number of subsequences needed, or -1 if any target character cannot be obtained."
+  },
+  "1056": {
+    "task": "Given a nonnegative integer, rotate its decimal digits by 180 degrees using 0\u21940, 1\u21941, 6\u21949 and 8\u21948. Return true only if every digit is rotatable and the resulting integer differs from the original. Leading zeros in the rotated representation do not affect its numeric value."
+  },
+  "1057": {
+    "task": "Assign bikes to workers by repeatedly choosing the available worker/bike pair with smallest Manhattan distance. Break ties by worker index, then bike index. Once assigned, neither participates again. Return each worker's assigned bike index; there are at least as many bikes as workers."
+  },
+  "1058": {
+    "task": "Given nonnegative decimal price strings and an integer target, round each price either down or up to an integer so the rounded values sum to target. Minimize the sum of absolute rounding errors. Return that minimum error formatted to three decimals, or '-1' if no selection reaches the target."
+  },
+  "1059": {
+    "task": "Given a directed graph and source/destination vertices, determine whether every path starting at source eventually terminates at destination. Reject reachable cycles, any reachable dead end other than destination, and a destination that can continue along an outgoing edge. At least one terminating route must exist."
+  },
+  "1060": {
+    "task": "Given a strictly increasing integer array and positive k, return the kth missing integer when counting upward starting at the array's first value. Missing values before the first element are not counted, and the answer can exceed the last element."
+  },
+  "1062": {
+    "task": "Given a string, return the greatest length of a substring that occurs at least twice. The two occurrences may overlap. Return zero if no nonempty substring repeats."
+  },
+  "1063": {
+    "task": "Given an integer array, count nonempty contiguous subarrays in which the first element is no greater than any other element of that subarray. Equal values are allowed."
+  },
+  "1064": {
+    "task": "Given a strictly increasing integer array, return the smallest zero-based index i with arr[i]=i. Return -1 if none exists."
+  },
+  "1065": {
+    "task": "Given a text and a list of words, return all inclusive index pairs [start,end] for occurrences of any listed word in the text. Overlapping occurrences count. Sort by start, then end."
+  },
+  "1066": {
+    "task": "Assign one distinct bike to every worker to minimize the sum of Manhattan distances. There are at least as many bikes as workers. Return the minimum total distance; unlike the greedy campus-bike variant, optimize the complete assignment globally."
+  },
+  "1067": {
+    "task": "Given a decimal digit d and positive inclusive bounds low and high, count all occurrences of d in the ordinary decimal representations of integers in that range. Count repeated digits within one number separately and do not count artificial leading zeros."
+  },
+  "1068": {
+    "task": "SQL: Sales(sale_id, product_id, year, quantity, price), keyed by sale_id and year, and Product(product_id, product_name). Return product_name, year and price for each sales record."
+  },
+  "1069": {
+    "task": "SQL: Sales(sale_id, product_id, year, quantity, price). Return product_id and total_quantity, summing quantity across all records for each product sold."
+  },
+  "1070": {
+    "task": "SQL: Sales(sale_id, product_id, year, quantity, price). Return product_id, first_year, quantity and price for each sales record in that product's earliest year of sales. If multiple records occur in that earliest year, retain them rather than arbitrarily choosing one."
+  },
+  "1075": {
+    "task": "SQL: Project(project_id, employee_id) and Employee(employee_id, name, experience_years). Return project_id and average_years, the mean experience of the project's employees rounded to two decimals. Verify the source's non-NULL experience guarantee."
+  },
+  "1076": {
+    "task": "SQL: Project(project_id, employee_id). Return project_id for every project tied for the largest number of assigned employees."
+  },
+  "1077": {
+    "task": "SQL: Project(project_id, employee_id) and Employee(employee_id, name, experience_years). Return project_id and employee_id for every employee tied for greatest experience within each project."
+  },
+  "1082": {
+    "task": "SQL: Sales(seller_id, product_id, buyer_id, sale_date, quantity, price). Return seller_id for every seller tied for the greatest total sale price across their sales records.",
+    "pitfalls": "The recorded price is the sale amount in this task; do not multiply by quantity without verifying the schema's meaning."
+  },
+  "1085": {
+    "task": "Given an integer array, select its smallest value and sum that value's decimal digits. Return 1 if the sum is even, otherwise 0. The remembered input domain is positive integers; verify exact bounds before certification."
+  },
+  "1086": {
+    "task": "Given [studentId, score] records, return each student's integer average of their five highest scores. Every student has at least five records. Return [studentId, average] pairs ordered by studentId. Repeated score values are separate records."
+  },
+  "1087": {
+    "task": "Expand a string containing literal letters and non-nested brace groups of comma-separated alternatives. Choose one alternative from each group and concatenate with the literals. Return all expanded strings in lexicographic order. Verify the source's uniqueness and grammar guarantees before handling duplicate alternatives."
+  },
+  "1088": {
+    "task": "Count integers from 1 through n inclusive that become a different valid integer after 180-degree digit rotation. Only digits 0,1,6,8,9 are valid; reverse digit order and swap 6 with 9. Numbers unchanged by rotation do not qualify."
+  },
+  "1099": {
+    "task": "Given an integer array and k, return the greatest sum of two values at different indices that is strictly less than k. Return -1 if no qualifying pair exists. Verify the nonnegative input domain before interpreting -1 as the failure sentinel."
+  },
+  "1100": {
+    "task": "Given a string and positive k, count contiguous substrings of length exactly k containing no repeated character. Count occurrences by position, not only distinct substring values."
+  },
+  "1101": {
+    "task": "Given timestamped friendships between n people, return the earliest timestamp at which everyone is connected through direct or indirect friendships. Friendship edges persist. Process events in chronological order regardless of input order. Return -1 if full connectivity never occurs."
+  },
+  "1102": {
+    "task": "Given an integer grid, consider paths from its top-left cell to its bottom-right using four-direction moves. A path's score is its smallest visited value, including endpoints. Return the greatest score achievable by any path."
+  },
+  "1118": {
+    "task": "Given a Gregorian year and month, return that month's number of days, applying the leap-year rule: divisible by four, except centuries not divisible by four hundred."
+  },
+  "1119": {
+    "task": "Given a lowercase English string, remove every occurrence of a,e,i,o,u and return the remaining characters in their original order."
+  },
+  "1120": {
+    "task": "Given a nonempty binary tree, return the largest arithmetic mean of node values over any rooted subtree, where a subtree includes its root and all descendants. Verify the numerical error tolerance before certifying output comparisons."
+  },
+  "1121": {
+    "task": "Given a nondecreasing array and positive k, decide whether all its elements can be partitioned into one or more disjoint strictly increasing subsequences, each with length at least k. Every occurrence must be assigned exactly once; subsequences retain original index order."
+  },
+  "1133": {
+    "task": "Given an integer array, return the largest value appearing exactly once, or -1 if there is none. Frequency is counted over the entire array."
+  },
+  "1134": {
+    "task": "Given a positive integer with d decimal digits, return whether it equals the sum of each digit raised to the dth power. This is the Armstrong-number condition."
+  },
+  "1135": {
+    "task": "Given n cities and weighted undirected candidate connections, connect all cities with minimum total edge cost. Return that cost or -1 if connectivity is impossible. City numbering in the remembered interface is 1 through n."
+  },
+  "1136": {
+    "task": "Given n courses and directed prerequisite pairs, find the minimum number of semesters needed to finish them. Any number of courses can be taken in parallel in one semester, provided all prerequisites were completed in previous semesters. Return -1 if a prerequisite cycle prevents completion."
+  },
+  "1150": {
+    "task": "Given a sorted integer array and target, return whether target occurs strictly more than half the array's length."
+  },
+  "1151": {
+    "task": "Given a binary array, find the minimum number of swaps of arbitrary pairs of positions needed to make all ones occupy one contiguous block. The array is linear, not circular; swaps need not be adjacent."
+  },
+  "1152": {
+    "task": "Given aligned username, timestamp and website arrays, find the length-three website sequence visited by the largest number of distinct users in chronological order. Visits need not be consecutive, but indices/times must respect the ordering. Each user contributes at most one vote per sequence. Break ties lexicographically and return the three website names. Verify the source's equal-timestamp guarantees."
+  },
+  "1153": {
+    "task": "Given two equal-length lowercase strings, decide whether the first can be transformed into the second by repeatedly choosing two letters and replacing every occurrence of the first chosen letter with the second. Transformations are global, not position-specific. Zero operations are allowed."
+  },
+  "1165": {
+    "task": "A keyboard string lists all 26 lowercase letters in their physical one-dimensional order. A finger starts at index zero. Return the total absolute index distance travelled while typing the given word."
+  },
+  "1166": {
+    "task": "Design a path-value store with createPath(path,value) and get(path). Creating succeeds only when the path does not exist and its immediate parent exists, except that top-level paths have the implicit root as parent. get returns the stored value or -1 if absent. A failed creation must not create intermediate paths. Verify permitted path/value domains."
+  },
+  "1167": {
+    "task": "Repeatedly join two sticks, paying the sum of their lengths and replacing them with one stick of that summed length. Return the minimum total cost of joining all sticks into one. A single stick costs zero."
+  },
+  "1168": {
+    "task": "There are n houses. A house can obtain water from a well built there at its listed cost or through bidirectional pipes to another supplied house. Given well costs and candidate pipe costs, return the minimum total cost to supply every house."
+  },
+  "1176": {
+    "task": "Given daily calorie values, window length k, lower and upper, score every consecutive k-day window: -1 if its sum is below lower, +1 if above upper, otherwise 0. Return the sum of scores across all windows."
+  },
+  "1180": {
+    "task": "Given a string, count nonempty contiguous substrings containing only one distinct character. Different positions count separately, even if their text matches."
+  },
+  "1181": {
+    "task": "Given phrases, combine two different input positions when the last word of the first equals the first word of the second. Keep that shared word only once at the join. Return distinct resulting phrases in lexicographic order. Equal phrase text at different positions can participate."
+  },
+  "1182": {
+    "task": "An array contains colors 1,2,3. For each [index,color] query, return the minimum absolute index distance to an occurrence of that color, or -1 if absent. Preserve query order."
+  },
+  "1183": {
+    "task": "Choose zero/one values for a width-by-height grid so every sideLength-by-sideLength subgrid contains at most maxOnes ones. Return the maximum possible total ones in the whole grid. Verify the exact dimension feasibility guarantees before treating small grids as unconstrained."
+  },
+  "1188": {
+    "task": "Implement a thread-safe bounded blocking queue. enqueue blocks while the queue is full; dequeue blocks while it is empty, removes and returns the oldest item. size reports its current length. Never exceed capacity or lose/duplicate elements under concurrent calls. Constructor receives a positive capacity."
+  },
+  "1195": {
+    "task": "Coordinate four threads for integers 1 through n in order. One prints 'fizz' for multiples of 3 only, one 'buzz' for multiples of 5 only, one 'fizzbuzz' for multiples of both, and one the number otherwise. Each thread uses the supplied callback for its responsibility. Output must match the sequential Fizz Buzz order regardless of scheduling."
+  },
+  "1196": {
+    "task": "Given apple weights and a basket capacity of 5000, select as many apples as possible without total weight exceeding capacity. Return the maximum number selected."
+  },
+  "1197": {
+    "task": "On an infinite chessboard, a knight starts at (0,0). Return the fewest knight moves needed to reach (x,y). Each move changes one coordinate by two and the other by one, with independent signs."
+  },
+  "1198": {
+    "task": "Given a matrix whose rows are strictly increasing, return the smallest value appearing in every row, or -1 if none exists."
+  },
+  "1199": {
+    "task": "Each block takes its listed time for one worker to build. Start with one worker. A worker may either build one block and finish, or spend split time creating two workers; workers operate in parallel. Return the minimum elapsed time to finish all blocks. A worker cannot build multiple blocks sequentially."
+  },
+  "1213": {
+    "task": "Given three strictly increasing integer arrays, return their common elements in ascending order."
+  },
+  "1214": {
+    "task": "Given roots of two binary search trees and target, return whether a value from the first tree and a value from the second sum to target. One node must come from each tree."
+  },
+  "1215": {
+    "task": "Return all integers in the inclusive range [low,high] whose adjacent decimal digits differ by exactly one. Single-digit numbers qualify. Return them in increasing order without artificial leading zeros."
+  },
+  "1216": {
+    "task": "Given a string and k, return whether deleting at most k characters can leave a palindrome. Remaining characters retain their relative order; substitutions and reordering are not allowed."
+  },
+  "1226": {
+    "task": "Implement a dining-philosophers coordinator for five philosophers around a circular table. A philosopher must acquire both neighboring forks before eating, and release both afterward using the supplied pick/eat/put callbacks. Concurrent requests must be safe and make progress without deadlock. Verify the exact fork-index mapping and starvation requirements before certification."
+  },
+  "1228": {
+    "task": "An arithmetic progression had exactly one non-endpoint element removed. Given the remaining ordered array, return the missing value. The common difference may be negative or zero."
+  },
+  "1229": {
+    "task": "Given two people's available time intervals and a required duration, return the earliest interval of exactly that duration contained within an availability interval of each person. Return an empty list if none exists. Inputs may need sorting; availability intervals for each person do not overlap."
+  },
+  "1230": {
+    "task": "Independent coins have the supplied probabilities of heads. Return the probability of obtaining exactly target heads after tossing every coin once. Verify the required floating-point tolerance."
+  },
+  "1231": {
+    "task": "Partition a sweetness array into k+1 nonempty contiguous pieces using k cuts. You receive a piece with minimum total sweetness; maximize that minimum total. Return the largest achievable minimum piece sum."
+  },
+  "1236": {
+    "task": "Using a supplied HtmlParser.getUrls(url), return all pages reachable from startUrl that have the same hostname as startUrl. Do not revisit a URL and do not crawl links on other hostnames. Output order is unrestricted. Parse hostname boundaries correctly rather than using an arbitrary URL-prefix match."
+  },
+  "1242": {
+    "task": "Perform the same-host reachable-page crawl starting from startUrl using a supplied HtmlParser, with concurrent fetching. Return each reachable same-host URL once. Shared visited state must prevent duplicate work/races, and completion must wait for all discovered work, not just the initial queue."
+  },
+  "1243": {
+    "task": "Repeatedly update an array simultaneously: each non-endpoint strictly smaller than both neighbors increases by one; each strictly greater than both decreases by one; other elements stay unchanged. Endpoints never change. Stop when the array stabilizes and return it. Each round reads the previous round, not partially updated neighbors."
+  },
+  "1244": {
+    "task": "Implement a leaderboard with addScore(playerId,score), top(k) and reset(playerId). Adding increments an existing score or creates a new player. top returns the sum of the largest k player scores. reset removes the player's accumulated score so subsequent addition starts anew. Verify valid-call guarantees for k and resets."
+  },
+  "1245": {
+    "task": "Given an undirected tree as edges, return its diameter measured in number of edges on the longest simple path. A one-node tree has diameter zero."
+  },
+  "1246": {
+    "task": "Given an integer array, one move removes any nonempty contiguous palindromic segment. Remaining elements close the gap. Return the minimum number of moves needed to remove the whole array."
+  },
+  "1256": {
+    "task": "Encode nonnegative integers with the sequence 0\u2192empty string, 1\u2192'0', 2\u2192'1', 3\u2192'00', 4\u2192'01', 5\u2192'10', 6\u2192'11', and so on in length-first binary order. Return the encoding of num; equivalently, write num+1 in binary and drop its leading one."
+  },
+  "1257": {
+    "task": "Region lists describe a containment tree: the first region in each list contains the remaining regions directly. Given two region names, return the smallest region containing both. A region contains itself; verify the source's uniqueness guarantee."
+  },
+  "1258": {
+    "task": "Given synonym pairs and a space-separated sentence, replace each word with itself or any word in its transitive synonym group. Return all distinct resulting sentences in lexicographic order, preserving word order and single spaces."
+  },
+  "1259": {
+    "task": "An even number of people sit around a circle. Pair everyone with exactly one other person so drawn handshake chords do not cross. Return the number of pairings modulo 1000000007."
+  },
+  "1265": {
+    "task": "Given an immutable singly linked list whose nodes expose printValue and getNext, print the values in reverse order. Do not modify links or access hidden node fields. Calls must print each node exactly once in reverse traversal order."
+  },
+  "1271": {
+    "task": "Convert a positive decimal integer supplied as a string into uppercase hexadecimal. Replace hex digit 0 with O and 1 with I. If any remaining digit 2 through 9 occurs, return 'ERROR'; otherwise return the transformed string. Hex letters A through F remain unchanged."
+  },
+  "1272": {
+    "task": "Given sorted disjoint intervals and one interval to remove, subtract the removal interval from each input interval and return the remaining pieces in order. Intervals use half-open endpoints [start,end); discard empty pieces."
+  },
+  "1273": {
+    "task": "A rooted tree is specified by parent indices and node values. Delete every subtree whose total value is zero and return the number of nodes remaining. Compute subtree sums over the original descendant structure; deleting a zero-sum subtree does not change its ancestors' sums."
+  },
+  "1274": {
+    "task": "Using a supplied Sea.hasShips(topRight,bottomLeft) query over inclusive integer-coordinate rectangles, count ships within a given rectangle. You cannot inspect individual ship positions directly. The source imposes an oracle-call budget and a small total-ship bound; verify their exact values before certification."
+  },
+  "1279": {
+    "task": "Coordinate cars crossing an intersection of two roads through supplied turnGreen and crossCar callbacks. Only one road can have a green light at a time. A car may cross only when its road is green; change lights only when necessary and synchronize concurrent arrivals. Verify the initial green road and direction-to-road mapping."
+  },
+  "1426": {
+    "task": "Given an integer array, count occurrences of values x for which x+1 appears somewhere in the array. Count repeated occurrences of x separately; x+1 only needs to exist once."
+  },
+  "1427": {
+    "task": "Apply shift operations to a string: direction 0 rotates left and direction 1 rotates right by the specified amount. Return the final string after all operations; shifts wrap around and may exceed the string length."
+  },
+  "1428": {
+    "task": "A binary matrix has each row sorted in nondecreasing order and is accessible only through BinaryMatrix.get and dimensions. Return the smallest column index containing a 1, or -1 if none exists. Respect the source's query budget; verify its exact limit."
+  },
+  "1429": {
+    "task": "Design FirstUnique from an initial integer stream. showFirstUnique returns the earliest-arriving value whose current frequency is one, or -1 if absent. add(value) appends a new stream occurrence and updates uniqueness. A value that repeats never becomes unique again in this append-only stream."
+  },
+  "1430": {
+    "task": "Given a binary tree and an integer array, return whether some root-to-leaf path has exactly the array's values in order. Matching a prefix that ends at a non-leaf is insufficient."
+  },
+  "1469": {
+    "task": "Given a binary tree, return the values of nodes that are their parent's only child. The root is not lonely because it has no parent. Output order is unrestricted."
+  },
+  "1474": {
+    "task": "Starting at the head of a singly linked list, repeatedly retain m nodes and then delete the next n nodes until the list ends. Return the head of the resulting list, preserving the retained nodes' order."
+  },
+  "1485": {
+    "task": "Deep-copy a binary tree whose nodes also have a random pointer to any tree node or null. Preserve every left, right and random relationship using new nodes only; no copied pointer may refer back into the original tree."
+  },
+  "1490": {
+    "task": "Deep-copy an ordered N-ary tree. Allocate new nodes preserving all values and the exact order of each node's children. Return null for a null root."
+  },
+  "1500": {
+    "task": "Design a chunk-sharing system. join(ownedChunks) assigns the smallest available positive user ID; leave(userID) removes that user and frees its ID. request(userID,chunkID) returns the sorted IDs of current owners. If at least one owner exists, the requester becomes an owner too. If no owner exists, ownership does not change. Verify valid-request guarantees."
+  },
+  "1506": {
+    "task": "Given an unordered list of every node in one N-ary tree, where each node exposes its children, return the root node. Return an actual supplied node, not a new node with the same value."
+  },
+  "1522": {
+    "task": "Given an N-ary tree, return its diameter measured as the largest number of edges on a simple path between any two nodes. The path need not pass through the root."
+  },
+  "1533": {
+    "task": "An opaque array contains equal values except for one larger value. ArrayReader.compareSub compares sums of two inclusive index ranges and reports greater/equal/less, and length reports array size. Find the larger element's index within the allowed query count. Verify method result conventions and the exact query budget."
+  },
+  "1538": {
+    "task": "An opaque binary array exposes a query over four distinct indices. It reports 4 if all four bits agree, 2 for a three-to-one split, and 0 for a two-to-two split. Return any index containing the strict majority bit, or -1 if zeros and ones tie. Respect the source's query limit and verify minimum-length guarantees."
+  },
+  "1548": {
+    "task": "Given an undirected graph with a name at each vertex and a target sequence of names, choose a graph walk with one vertex per target position. Consecutive vertices must be adjacent. Minimize the number of positions where the vertex name differs from the corresponding target name. Return any minimum-mismatch vertex-index path; vertices may repeat."
+  },
+  "1554": {
+    "task": "Given equal-length strings, return whether two strings differ in exactly one position. The strings are remembered as distinct; verify that domain guarantee before using a masked-pattern collision without further checks."
+  },
+  "1564": {
+    "task": "Boxes may be reordered and pushed into a warehouse from the left, one at a time. Each room has a ceiling height; a box can occupy a room only if it fits through every room along its entry path. Each room holds at most one box. Return the maximum number that can be stored."
+  },
+  "1570": {
+    "task": "Construct sparse-vector objects and implement dotProduct(other). Return the sum of coordinatewise products over equal-length vectors, exploiting sparsity where useful. Missing sparse entries represent zero."
+  },
+  "1580": {
+    "task": "Boxes may be reordered and inserted into a warehouse from either end. A box must fit under every room ceiling traversed from its chosen entrance, and each room holds at most one box. Return the maximum number that can be stored. This differs from the left-entry-only variant."
+  },
+  "1586": {
+    "task": "Implement a BST iterator supporting hasNext/next and hasPrev/prev in inorder order. The initial cursor is before the first element; next advances and returns, while prev moves back and returns. hasPrev is false before a previous returned position exists. Verify valid-call guarantees rather than inventing wraparound behavior."
+  },
+  "1597": {
+    "task": "Build a binary expression tree from an infix arithmetic string with digits, parentheses and +,-,*,/. Leaves are operands; internal nodes are operators with left/right operands. Respect standard precedence and left associativity among operators of equal precedence. Verify unary operators and operand-width grammar before certification."
+  },
+  "1602": {
+    "task": "Given a binary tree and a node u in it, return the next node immediately to u's right on the same level, or null if u is the level's rightmost node. Return the node reference."
+  },
+  "1612": {
+    "task": "Given two expression trees whose internal nodes are addition and whose leaves are variables, determine whether they produce the same result for every assignment of variable values. Reordering and regrouping additions is allowed; repeated variable occurrences contribute multiplicity."
+  },
+  "1618": {
+    "task": "Given text, available font sizes and a screen width/height, use FontInfo.getWidth(fontSize,char) and getHeight(fontSize) to find the largest available size fitting the complete text on one line. Return -1 if none fits. Character widths add; do not wrap text. Verify the font-metric monotonicity guarantee."
+  },
+  "1628": {
+    "task": "Given a valid postfix arithmetic expression, build an expression tree whose evaluate method computes its integer result. Support +,-,*,/ with division truncated toward zero. Operand order matters for subtraction and division. The design should allow operators to be encapsulated by nodes rather than changing evaluation callers."
+  },
+  "1634": {
+    "task": "Each polynomial is a linked list of nonzero coefficient/power terms in descending power order. Return a linked list for their sum in the same order, merging equal powers and omitting terms whose summed coefficient is zero."
+  },
+  "1644": {
+    "task": "Given a binary tree and node references p and q that may not belong to it, return their lowest common ancestor only if both nodes are present. Otherwise return null. Compare node identity, not merely equal values."
+  },
+  "1650": {
+    "task": "Given two nodes in the same binary tree with parent pointers, return their lowest common ancestor using those pointers. No root is supplied; a node is an ancestor of itself."
+  },
+  "1660": {
+    "task": "One binary-tree node has an invalid right pointer referencing another node to its right at the same depth. Remove the defective node and its genuine subtree from its parent while preserving the separately referenced valid target subtree. Return the corrected root. Do not follow the corrupt pointer as though it were an actual child."
+  },
+  "1676": {
+    "task": "Given a binary tree and a list of distinct node references known to occur in it, return the lowest common ancestor of every supplied node. A node is an ancestor of itself."
+  },
+  "1682": {
+    "task": "Find the maximum length of a palindromic subsequence of a string that has even length and no equal adjacent characters except the central pair. Return zero if no nonempty valid subsequence exists."
+  },
+  "1692": {
+    "task": "Distribute n distinct candies among k nonempty unlabeled bags. Count partitions of the candies into exactly k nonempty groups, modulo 1000000007. Swapping whole bags does not create a new distribution."
+  },
+  "1698": {
+    "task": "Given a string, count its distinct nonempty contiguous substrings. Equal text at different positions counts only once."
+  },
+  "1708": {
+    "task": "Given an integer array and k, return its lexicographically largest contiguous subarray of length k. The remembered domain has distinct values; verify that before relying only on first-element comparisons."
+  },
+  "1724": {
+    "task": "Build a query structure over a weighted undirected graph. Each query(p,q,limit) asks whether some path connects p and q using only edges with weight strictly less than limit. Queries may arrive in any order; equal-to-limit edges are forbidden."
+  },
+  "1730": {
+    "task": "In a grid, '*' is the starting position, '#' is food, 'O' is walkable and 'X' is blocked. Return the fewest four-direction steps to any food, or -1 if none is reachable. Verify uniqueness of the starting cell and the exact character contract."
+  },
+  "1740": {
+    "task": "Given a binary tree with unique node values and two values known to be present, return the number of edges in the path between their nodes."
+  },
+  "1746": {
+    "task": "Given an integer array, replace exactly one selected element by its square and then choose a nonempty contiguous subarray. Return the greatest achievable subarray sum. The squared element may be chosen as part of the maximizing segment; handle negative values without treating an empty segment as a valid answer."
+  },
+  "1756": {
+    "task": "Implement MRUQueue initialized with values 1 through n. fetch(k) removes the kth current element using one-based indexing, appends it at the end, and returns its value. Every call uses the queue order resulting from previous calls."
+  },
+  "1762": {
+    "task": "Buildings lie in a row with the ocean to their right. Return indices in ascending order of buildings taller than every building to their right. Equal-height buildings block the view; the rightmost building always qualifies."
+  },
+  "1772": {
+    "task": "Given feature names and user-response strings, rank features by the number of distinct responses mentioning that feature as a word. Multiple mentions within one response count once. Preserve original feature order for equal popularity. Verify case and tokenization assumptions."
+  },
+  "1778": {
+    "task": "Explore an unknown grid through GridMaster.canMove, move and isTarget. Return the minimum number of steps from the original position to the target, or -1 if unreachable. You cannot inspect a map directly. Exploration must track relative coordinates and physically backtrack so the discovered map is accurate."
+  },
+  "1788": {
+    "task": "Given flower beauty values, choose a subsequence of at least two flowers whose first and last values are equal. Maximize the sum of selected values and return it. Intermediate flowers may be omitted but their order cannot change. Verify the guarantee that some matching endpoint pair exists."
+  },
+  "1794": {
+    "task": "Given two strings, choose equal nonempty substrings, one from each, minimizing the absolute difference between their starting indices. Return the number of starting-index pairs that achieve this smallest difference and admit such a match. A length-one match is sufficient to witness a pair; do not count multiple lengths for one pair. Verify this remembered pair-count interpretation against the source."
+  },
+  "1804": {
+    "task": "Implement a trie with insert(word), countWordsEqualTo(word), countWordsStartingWith(prefix) and erase(word). Store duplicate insertions with multiplicity. erase removes one occurrence, and calls are assumed to erase an existing occurrence. Prefix counts include every stored occurrence."
+  },
+  "1810": {
+    "task": "Explore an unknown grid using a GridMaster interface with movement feasibility, target detection and movement costs. Find the minimum total cost from the original position to the target, or -1 if unreachable. Movement costs depend on the entered cell in the remembered contract; verify that interface detail before recording directed edges."
+  },
+  "1820": {
+    "task": "Given a binary compatibility matrix between two groups, select the largest set of compatible pairs so no person belongs to more than one pair. Return the maximum matching size, not a greedy pairing count."
+  },
+  "1826": {
+    "task": "Two sensors should record the same sequence, but one dropped a value and shifted subsequent observations left, ending with an arbitrary replacement value. Given both equal-length readings, identify which sensor is faulty, returning 1 or 2, or -1 if the available readings do not determine the faulty sensor uniquely. Verify the exact replacement-value guarantees and ambiguity rules."
+  },
+  "1836": {
+    "task": "Given an unsorted linked list, remove every node whose value occurs more than once anywhere in the original list. Retain only globally unique values in original order; do not keep one representative of duplicates."
+  },
+  "1842": {
+    "task": "Given a numeric string that is already a palindrome, return the smallest larger palindrome obtainable by rearranging exactly its digits. Return an empty string if no larger palindrome is possible. Preserve digit multiplicities and length."
+  },
+  "1852": {
+    "task": "For each contiguous window of length k in an integer array, return its number of distinct values. Preserve window order."
+  },
+  "1858": {
+    "task": "Given a list of words, return the longest word for which every nonempty prefix is also in the list. Break equal-length ties lexicographically; return an empty string if none qualifies."
+  },
+  "1868": {
+    "task": "Two run-length-encoded arrays represent equal-length integer sequences using [value,frequency] pairs. Multiply the expanded sequences coordinatewise and return a run-length encoding of the products. Merge adjacent equal products and avoid expanding the inputs."
+  },
+  "1874": {
+    "task": "Given two equal-length integer arrays, reorder their elements to minimize the sum of pairwise products at matching positions. Return that minimum product sum; preserve all occurrences."
+  },
+  "1885": {
+    "task": "Given equal-length arrays nums1 and nums2, count index pairs i<j for which nums1[i]+nums1[j] is strictly greater than nums2[i]+nums2[j]. Equal sums do not qualify."
+  },
+  "1891": {
+    "task": "Given ribbon lengths and positive k, cut ribbons into integer-length pieces, discarding leftovers, to obtain at least k equal-length pieces. Return the greatest positive piece length possible, or zero if no positive length yields k pieces."
+  },
+  "1902": {
+    "task": "Insert distinct values into an initially empty BST in the supplied order. Return the depth of the final tree, measured in nodes from the root to the deepest leaf. Verify the source's value/permutation guarantees before choosing an indexed predecessor structure."
+  },
+  "1908": {
+    "task": "Several heaps contain stones. Players alternate removing any positive number from a single heap, and a player with no move loses. Given initial heap sizes and optimal play, return whether the first player wins."
+  },
+  "1918": {
+    "task": "Given a positive integer array and k, consider the sums of all nonempty contiguous subarrays, retaining duplicates from different positions. Return the kth smallest sum in that multiset."
+  },
+  "1933": {
+    "task": "Given a digit string, decide whether it can be partitioned into same-digit blocks such that exactly one block has length two and every other block has length three. Blocks must be contiguous and consume the whole string."
+  },
+  "1940": {
+    "task": "Given multiple sorted arrays of distinct integers, return their longest common subsequence. Because each is increasing, this is the sorted list of values present in every array. Verify the distinctness guarantee before treating the inputs as sets."
+  },
+  "1950": {
+    "task": "For each window size k from 1 through n, find the minimum in every length-k contiguous subarray, then take the maximum of those minima. Return these n maxima in increasing window-size order."
+  },
+  "1966": {
+    "task": "Count elements in an unsorted array that can always be found by a standard binary-search procedure regardless of pivot choices. Such an element must exceed every value to its left and be smaller than every value to its right. Verify the source's distinct-value guarantee before applying strict comparisons."
+  },
+  "1973": {
+    "task": "Count binary-tree nodes whose value equals the sum of values of all their proper descendants. A leaf's descendant sum is zero, so a zero-valued leaf qualifies."
+  },
+  "1983": {
+    "task": "Given two equal-length binary arrays, find the greatest length of an index interval whose element sum in the first array equals the sum over the same interval in the second. Return zero if there is no qualifying nonempty interval."
+  },
+  "1989": {
+    "task": "A binary team array marks players as catchers or runners. Each catcher can catch at most one runner within absolute index distance dist, and each runner can be caught at most once. Return the greatest number of caught runners. Verify which bit denotes each team in the source before wiring the adapter."
+  },
+  "1999": {
+    "task": "Given positive k and two allowed decimal digits, return the smallest integer strictly greater than k that is divisible by k and uses only those digits. Return -1 if no representable answer exists within the specified bound. Verify the exact integer cap and whether the two digits may coincide."
+  },
+  "2015": {
+    "task": "Given buildings as [start,end,height] intervals, return maximal consecutive street segments on which the integer average height of covering buildings is constant. Omit uncovered segments and merge adjacent equal-average segments. Use half-open intervals and floor division for the average; verify the remembered rounding convention against the source."
+  },
+  "2021": {
+    "task": "Each street light at position p with range r illuminates the inclusive integer interval [p-r,p+r]. Return the smallest integer position covered by the maximum number of lights."
+  },
+  "2031": {
+    "task": "Given a binary array, count nonempty contiguous subarrays containing strictly more ones than zeros. Return the count modulo 1000000007."
+  },
+  "2036": {
+    "task": "For a contiguous nonempty subarray, define its alternating sum by adding its first element, subtracting its second, adding its third, and so on. Return the largest such sum over all contiguous subarrays. Signs restart positive at each chosen start."
+  },
+  "2046": {
+    "task": "A linked list is sorted by absolute node value. Rearrange it into ascending actual-value order, retaining every node. Return the new head; negative values must be placed before nonnegative ones in numeric order."
+  },
+  "2052": {
+    "task": "Given a sentence with single spaces and a line width k, break it into lines without splitting words or reordering them. A non-final line costs the square of its unused character positions; the final line costs zero. Return the minimum total cost. Verify the guarantee that each word fits on a line."
+  },
+  "2061": {
+    "task": "A robot starts at the top-left of a grid facing right. At each step it cleans its current open cell, moves forward if the next cell is open and in bounds, otherwise turns right by 90 degrees. Return the number of distinct cells cleaned before its position-and-direction state repeats. Verify starting-cell guarantees."
+  },
+  "2067": {
+    "task": "Given a lowercase string and count, count nonempty contiguous substrings in which every character present occurs exactly count times. Characters absent from the substring impose no condition. Count positional occurrences, not just distinct substring texts."
+  },
+  "2077": {
+    "task": "Given an undirected graph, count distinct three-room cycles. Each triangle counts once regardless of starting vertex or traversal direction. Verify that edges are simple and undirected before using degree intersections."
+  },
+  "2083": {
+    "task": "Given a string, count nonempty contiguous substrings whose first and last characters are equal. Single-character substrings qualify; count occurrences by endpoints."
+  },
+  "2093": {
+    "task": "Given a weighted undirected road graph, travel from city 0 to city n-1 with at most discounts coupons. A coupon halves one traversed road's toll using integer division, with at most one coupon per traversal. Return the minimum total toll, or -1 if unreachable."
+  },
+  "2098": {
+    "task": "Choose a subsequence of exactly k elements from an integer array with an even total sum, maximizing that sum. Return the maximum sum, or -1 if no such subsequence exists. Verify the nonnegative domain before treating -1 as an unambiguous failure marker."
+  },
+  "2107": {
+    "task": "Given a sequence of candy flavors, give away exactly k consecutive candies. Return the largest number of distinct flavors among the remaining candies. The removed block is contiguous; the retained candies may lie on both sides."
+  },
+  "2123": {
+    "task": "Given a binary grid, remove the minimum number of 1 cells so that no two remaining 1s share a horizontal or vertical edge. Return that minimum removal count. Diagonal neighbors do not conflict."
+  },
+  "2128": {
+    "task": "Given a binary matrix, decide whether it can become all zeros by any sequence of whole-row flips and whole-column flips. A flip replaces every bit on the chosen row or column by its complement."
+  },
+  "2137": {
+    "task": "Buckets contain given nonnegative water quantities. When transferring x units from one bucket, the receiving bucket gains only x*(1-loss/100). Determine the greatest common water level achievable in all buckets. Return a real value within the source's specified tolerance; verify tolerance and loss bounds."
+  },
+  "2152": {
+    "task": "Given points in a plane, return the fewest straight lines whose union contains every point. Lines may have any orientation and may cover several collinear points; a line can cover a single otherwise isolated point."
+  },
+  "2158": {
+    "task": "Each day requests painting a half-open interval [start,end). Previously painted portions remain painted. Return the amount of previously unpainted length painted on each day, in chronological order."
+  },
+  "2168": {
+    "task": "Given a digit string, count distinct substring texts in which every digit present has equal frequency. Different occurrences of the same substring text count only once; absent digits do not matter."
+  },
+  "2174": {
+    "task": "Given a binary grid, one operation selects a cell currently containing 1 and changes every cell in its row and column to 0. Return the minimum operations to clear all ones. This is clearing, not toggling; verify this variant's operation before sharing code with 2128."
+  },
+  "2184": {
+    "task": "Build a wall of given height and width using unlimited bricks of allowed widths in each row. Rows must exactly fill the width, and internal vertical seams cannot align between adjacent rows. Count distinct walls modulo 1000000007. Outer boundaries do not count as forbidden seams."
+  },
+  "2204": {
+    "task": "Given a connected undirected graph with exactly one cycle, return each vertex's shortest distance in edges to any vertex on that cycle. Cycle vertices have distance zero. Verify the simple-graph and unique-cycle guarantees."
+  },
+  "2214": {
+    "task": "A sequence of levels inflicts the given positive damage amounts. You may use armor once to reduce one level's damage by at most armor, never below zero. Find the minimum initial health that keeps health strictly positive after every level. All levels must be completed in order."
+  },
+  "2219": {
+    "task": "For each array index, take the larger of the inclusive prefix sum ending there and inclusive suffix sum beginning there. Return the largest such score over all indices. Values may be negative; an empty prefix or suffix is not an option."
+  },
+  "2229": {
+    "task": "Determine whether an integer array contains exactly one occurrence of each integer in some consecutive interval. Duplicates make the answer false, even when the maximum-minus-minimum span has the right size."
+  },
+  "2237": {
+    "task": "Street positions are numbered 0 through n-1. Each light [position,range] contributes brightness one to positions within its inclusive range. Count positions whose total brightness meets or exceeds requirement[i]. Clip illumination to the street endpoints."
+  },
+  "2247": {
+    "task": "Given an undirected weighted graph of cities and highways, find the greatest total highway cost of a simple trip using exactly k highways and therefore k+1 distinct cities. Return -1 if no such trip exists."
+  },
+  "2254": {
+    "task": "Design a video platform with upload, remove, watch, like, dislike and getLikesAndDislikes/getViews operations. Upload assigns the smallest available nonnegative ID; removal frees it. watch returns the requested inclusive substring and increments views for an existing video. Return the prescribed missing-video sentinels for absent IDs. Verify exact method signatures and sentinels before certification."
+  },
+  "2263": {
+    "task": "Given an integer array, change any element by +1 or -1 per operation. Return the fewest operations needed to make the array either nondecreasing or nonincreasing. Equal adjacent values are allowed; choose the cheaper orientation."
+  },
+  "2268": {
+    "task": "Assign the lowercase alphabet to nine phone keys, each supporting up to three letters. A letter in the first, second or third slot costs that many presses. Given a string, choose the assignment minimizing total keypresses and return that minimum."
+  },
+  "2277": {
+    "task": "Given an undirected tree and queries [start,end,node], return for each query the vertex on the unique start-to-end path closest in edge distance to node. The tree structure makes that nearest path vertex unique."
+  },
+  "2282": {
+    "task": "People occupy a grid with given heights. For each person, count people visible looking right in the same row and down in the same column. A target is visible when every intervening height is strictly less than both endpoint heights. Verify distinct-height assumptions before handling equal blockers."
+  },
+  "2291": {
+    "task": "Given current stock prices, future sale prices and a budget, buy at most one share of each stock so total purchase cost is at most budget. Return the maximum profit obtainable by selling the chosen shares at their future prices. Buying nothing is allowed."
+  },
+  "2297": {
+    "task": "From index i, a jump to j>i is allowed when nums[i]<=nums[j] and every intermediate value is smaller than nums[i], or when nums[i]>nums[j] and every intermediate value is at least nums[i]. Jumping costs costs[j]. Find the minimum cost to reach the last index from the first; the starting cost is not paid. Verify these exact inequalities before certification."
+  },
+  "2307": {
+    "task": "Equations specify positive ratios between named variables. Determine whether the equations contain a contradiction with any ratios implied by the others. Return a boolean, using the source's specified floating-point comparison tolerance. An equation connecting already-connected variables must agree with their implied ratio."
+  },
+  "2313": {
+    "task": "A binary expression tree uses leaves 0/1 and operators OR, AND, XOR and NOT. Return the minimum number of leaf-bit flips needed to make the root evaluate to a requested boolean result. NOT has one child. Verify the numeric encoding of each operator before parsing nodes."
+  },
+  "2323": {
+    "task": "Given equal-length arrays of job workloads and worker speeds, assign one worker to each job. A worker's time is the ceiling of workload divided by speed. Minimize the maximum completion time over all assignments and return it."
+  },
+  "2330": {
+    "task": "Given a string, decide whether changing at most two characters to arbitrary letters can make it a palindrome. Changing a character costs one regardless of the replacement; insertion, deletion and rearrangement are not allowed."
+  },
+  "2340": {
+    "task": "Using adjacent swaps, make an array valid by moving an occurrence of its minimum to the first position and an occurrence of its maximum to the last. Return the minimum number of swaps; other elements have no required final order."
+  },
+  "2345": {
+    "task": "Mountains are isosceles right triangles with peaks (x,y), ground at y=0 and slopes \u00b11. Count peaks not covered by another mountain, including its boundary. Identical mountains hide each other rather than contributing multiple visible peaks. Verify this duplicate convention against the source."
+  },
+  "2355": {
+    "task": "A row of shelves holds books[i] books. Choose a contiguous segment and take a positive number from each chosen shelf, never exceeding its supply, with taken counts strictly increasing from left to right. Return the maximum total books obtainable."
+  },
+  "2361": {
+    "task": "Travel through successive stops on regular and express train lines. Starting on the regular line at stop zero, switching to express costs expressCost; switching back costs zero. Each segment has separate regular and express costs. Return the cheapest total cost to reach each subsequent stop, allowing either line on arrival."
+  },
+  "2371": {
+    "task": "Replace a grid of distinct values with positive integers so every row and column preserves its original strict value ordering. Minimize the largest assigned integer and return any grid achieving that minimum. A whole-grid total order is not required."
+  },
+  "2378": {
+    "task": "A rooted tree has a weight on each parent-child edge. Select edges with maximum total weight subject to no vertex touching more than one selected edge. Selecting no edges is allowed. Return the optimum weighted matching total."
+  },
+  "2387": {
+    "task": "Given a matrix with an odd total number of elements and each row sorted, return its median value, counting all occurrences. Rows need not be ordered relative to one another."
+  },
+  "2393": {
+    "task": "Count nonempty contiguous subarrays of an integer array whose values are strictly increasing from left to right. Every singleton qualifies."
+  },
+  "2403": {
+    "task": "Monsters have required powers. Your energy starts at zero and grows by a current rate each day, initially one. Killing a monster requires accumulated energy at least its power, resets energy to zero and increases the growth rate by one. Choose the killing order to minimize total days. Verify exact day/action timing before certification."
+  },
+  "2408": {
+    "task": "Implement an in-memory SQL-like store for named tables with fixed column counts. insertRow appends a row with a table-local increasing row ID starting at one; deleted IDs are not reused. deleteRow removes a row. selectCell returns a chosen column from a row. Verify one-based column indexing and valid-operation guarantees."
+  },
+  "2417": {
+    "task": "An integer is fair when its decimal representation has equally many odd and even digits. Given positive n, return the smallest fair integer greater than or equal to n. Leading zeros are not part of a representation."
+  },
+  "2422": {
+    "task": "Given a positive integer array, one operation replaces two adjacent elements with their sum. Return the minimum number of operations needed to make the resulting array a palindrome. Length one always qualifies."
+  },
+  "2431": {
+    "task": "Fruits have prices and tastiness values; each fruit can be bought once. With a money budget and at most maxCoupons coupons, each halving one fruit's price using integer division, maximize total tastiness. At most one coupon applies to a fruit. Verify parameter names and exact rounding before certification."
+  },
+  "2436": {
+    "task": "Partition an integer array into the fewest contiguous nonempty subarrays such that the gcd of every element in each subarray is greater than one. Return the minimum count. Verify the input guarantee ensuring a valid split, or the required failure output if one-valued elements occur."
+  },
+  "2445": {
+    "task": "A complete binary tree with nodes numbered 1 through n initially has value zero everywhere. Each query toggles the value of every node in the queried node's subtree. Return how many nodes have value one after all queries. Children of i are 2i and 2i+1 when within n."
+  },
+  "2450": {
+    "task": "Given a binary string and a fixed window length k, an operation flips all bits in any length-k contiguous window. Return the number of distinct binary strings reachable after any number of operations, modulo 1000000007. Verify that zero operations is included and k does not exceed length."
+  },
+  "2459": {
+    "task": "An array is a permutation of 0 through n-1, where zero denotes an empty slot. One move swaps zero with another item. Return the minimum moves to reach either sorted occupied-item order with zero first ([0,1,...]) or zero last ([1,2,...,0]). Verify the two accepted target configurations."
+  },
+  "2464": {
+    "task": "Split an integer array into contiguous nonempty pieces so the gcd of the first and last value of every piece is greater than one. Return the minimum number of pieces, or -1 if impossible. Interior values do not participate in that piece's endpoint condition."
+  },
+  "2473": {
+    "task": "An undirected road graph has travel costs, and each city sells an apple at a given price. For each starting city, choose where to buy one apple and return home. Outbound road cost is normal; return road cost is multiplied by k. Return the minimum total cost for every starting city, including buying locally with no travel. Verify the return-cost multiplier convention."
+  },
+  "2479": {
+    "task": "Given a rooted tree with positive node values, choose two disjoint rooted subtrees and maximize the bitwise XOR of their subtree sums. Return zero if no such pair exists. Disjoint means neither selected root is an ancestor of the other."
+  },
+  "2489": {
+    "task": "Given a binary string and positive ratio parameters, count contiguous substrings whose numbers of zeros and ones have the requested fixed ratio. The exact parameter ordering must be verified before implementing the adapter; do not infer which parameter belongs to which bit."
+  },
+  "2495": {
+    "task": "Given an integer array, count nonempty contiguous subarrays whose product is even. Products need not be materialized: a product is even exactly when the subarray contains an even value."
+  },
+  "2505": {
+    "task": "Given a nonnegative integer array, consider the sum of every subsequence, including all choices of indices. Return the bitwise OR of these sums. Duplicated values remain independently selectable. Verify the result's required integer width."
+  },
+  "2510": {
+    "task": "Given a binary matrix, determine whether a path from top-left to bottom-right moving only right or down contains equally many zeros and ones, counting both endpoints."
+  },
+  "2519": {
+    "task": "An index is k-big when at least k elements strictly smaller than nums[i] occur before it and at least k strictly smaller elements occur after it. Count such indices; occurrences count separately."
+  },
+  "2533": {
+    "task": "Count binary strings with lengths in [minLength,maxLength] that can be constructed by appending blocks of zeroGroup zeros or oneGroup ones in any order. Return the count modulo 1000000007. Verify the exact named-parameter order in the source."
+  },
+  "2534": {
+    "task": "People arrive at integer times to use one door, taking one second each, with direction 0 for entering and 1 for exiting. When both directions wait, reuse the previous second's direction if the door was used; if it was idle, exiting has priority. Within a direction, earlier input index wins. Return each person's crossing time."
+  },
+  "2539": {
+    "task": "Count nonempty subsequences of a lowercase string such that every character appearing in the subsequence appears the same number of times. Count different index selections separately and return the result modulo 1000000007."
+  },
+  "2548": {
+    "task": "Items have prices and weights. Fill a bag of capacity at most capacity, allowing fractional quantities of an item, to maximize total price. Return -1 if the available total weight cannot fill the requested capacity. Verify whether the task requires the bag exactly full, the item-field order and numeric tolerance before certification."
+  },
+  "2557": {
+    "task": "Choose distinct integers from 1 through n excluding banned values, with total sum at most maxSum. Return the maximum number selectable. Banned duplicates do not ban extra numbers; bounds require an approach that need not enumerate the whole range."
+  },
+  "2590": {
+    "task": "Design a task manager with addTask, getAllTasks, getTasksForTag and completeTask. Tasks have globally assigned increasing IDs, user ownership, descriptions, due dates and tags. Queries return only uncompleted tasks for that user ordered by due date, optionally restricted by tag. Completion by a different user must not complete the task. Verify tie guarantees and exact method signatures."
+  },
+  "2599": {
+    "task": "Reorder an integer array by repeatedly taking one element and moving it to the end. Return the fewest such operations needed so every prefix sum is nonnegative. Relative order of unmoved elements is preserved. Verify the guarantee that the total sum is nonnegative."
+  },
+  "2604": {
+    "task": "Hens and grains occupy positions on a line. Hens move simultaneously at unit speed and can consume grains they reach. Return the minimum elapsed time until every grain has been eaten, assigning any number of grains to each hen. A hen may change direction; grains do not move."
+  },
+  "2618": {
+    "task": "Implement checkIfInstanceOfClass(obj,classFunction), returning whether the object belongs to the supplied class or an ancestor class through the prototype chain. Handle null/undefined and invalid class arguments without throwing. The remembered contract also recognizes primitive values through their wrapper classes; verify that behavior before using plain instanceof alone."
+  },
+  "2619": {
+    "task": "Add Array.prototype.last, returning the array's final element or -1 when empty. Do not mutate the array."
+  },
+  "2620": {
+    "task": "Implement createCounter(n), returning a function that yields n on its first call and increments the returned integer by one on each subsequent call. Each counter has independent state."
+  },
+  "2621": {
+    "task": "Implement async sleep(millis), returning a promise that resolves after approximately the requested delay. The resolved value is unspecified; avoid blocking the event loop."
+  },
+  "2622": {
+    "task": "Implement TimeLimitedCache with set(key,value,duration), get(key) and count(). Keys expire duration milliseconds after their latest set. set returns whether an unexpired value already existed and replaces its value/expiry. get returns -1 for absent or expired keys; count includes only unexpired entries. Old timers must not delete newer replacements."
+  },
+  "2623": {
+    "task": "Implement memoize(fn), returning a function caching fn's result by its argument list. Repeated calls with the same arguments must not recompute fn; argument order matters. The simpler task uses the supplied numeric-function cases; verify supported domains rather than claiming arbitrary-object equality."
+  },
+  "2624": {
+    "task": "Add snail(rowsCount,colsCount) to Array. If the dimensions do not multiply to the input length, return []. Otherwise fill a rowsCount-by-colsCount matrix column by column, alternating top-to-bottom and bottom-to-top. Preserve every input occurrence exactly once."
+  },
+  "2625": {
+    "task": "Given a nested array and depth n, return a new array flattened by at most n nested levels. With n=0 preserve the top-level nesting. Do not use the built-in flat method; preserve value order."
+  },
+  "2626": {
+    "task": "Implement reduce(nums,fn,init), applying fn(accumulator,currentValue) from left to right starting at init and returning the final accumulator. An empty array returns init. Do not call the built-in Array.reduce."
+  },
+  "2627": {
+    "task": "Implement debounce(fn,t), returning a function that schedules fn for t milliseconds after the latest call and cancels any prior pending invocation. Invoke with the most recent call's arguments; a quiet interval permits one invocation. Verify any required this-binding contract."
+  },
+  "2628": {
+    "task": "Implement areDeeplyEqual(o1,o2) for JSON-compatible values. Compare primitive values, array length/order and corresponding elements, and object key sets/values recursively. Object key order does not matter. Arrays and ordinary objects are different kinds; null is not an object to traverse."
+  },
+  "2629": {
+    "task": "Given an array of unary functions, return their right-to-left composition: the last function receives the input first. An empty function list produces the identity function."
+  },
+  "2630": {
+    "task": "Implement memoize(fn) for arbitrary argument values using argument identity rather than JSON serialization. A cached result is reused only when each argument matches the corresponding previous argument by the specified strict-identity semantics. Argument order and argument count matter; verify the source's NaN and this-binding expectations."
+  },
+  "2631": {
+    "task": "Add Array.prototype.groupBy(fn). Apply fn to each element to obtain its group key and return an object mapping keys to arrays of original elements in their original relative order. Do not use a built-in groupBy implementation."
+  },
+  "2632": {
+    "task": "Implement curry(fn), allowing a function's required arguments to be supplied over successive calls, with each call able to supply multiple arguments. Invoke fn once enough arguments have accumulated and return its result. Before then, return a function accepting more arguments. Verify over-application and zero-argument-function behavior."
+  },
+  "2633": {
+    "task": "Serialize a JSON-compatible value into a valid JSON string without JSON.stringify. Support null, booleans, finite numbers, strings, arrays and objects. Preserve array order and emit correct punctuation/string quoting. Verify the source's string-escape restrictions; do not assume arbitrary strings contain no escapes unless stated."
+  },
+  "2634": {
+    "task": "Implement filter(arr,fn), returning elements for which fn(value,index) is truthy, in their original order. Do not use Array.filter and do not mutate the input."
+  },
+  "2635": {
+    "task": "Implement map(arr,fn), returning fn(value,index) for each input element in order. Do not use Array.map and do not mutate the input."
+  },
+  "2636": {
+    "task": "Given functions that return promises and a concurrency limit n, execute all while at most n function calls are still unresolved. Start another as soon as a slot frees. Return a promise resolving when every task finishes. Verify the source's rejection guarantees before choosing an error policy."
+  },
+  "2637": {
+    "task": "Implement timeLimit(fn,t), returning an async wrapper. Forward its arguments to fn. Resolve or reject with fn's outcome if it settles in time; otherwise reject with 'Time Limit Exceeded' after t milliseconds. Clear obsolete timers and avoid unhandled late rejections."
+  },
+  "2638": {
+    "task": "Given distinct integers and positive k, count subsets that do not contain two numbers whose absolute difference is k. Include the empty subset. Verify the source's modulo or integer-range requirements before fixing the output type."
+  },
+  "2648": {
+    "task": "Implement a generator producing the infinite Fibonacci sequence 0,1,1,2,3,5,..., yielding one number per next() request and maintaining state between yields."
+  },
+  "2649": {
+    "task": "Implement a generator that traverses a nested array of integers depth-first from left to right and yields each integer. Empty arrays yield nothing; do not yield array containers."
+  },
+  "2650": {
+    "task": "Implement a cancellable runner for a generator that yields promises. Resume it with resolved values and throw rejection reasons back into the generator. Return a cancellation function and a completion promise. Cancellation throws 'Cancelled' into the generator so it can handle the event; complete with its return value or uncaught error. Verify cancellation race rules against the source."
+  },
+  "2655": {
+    "task": "Given an inclusive integer range [0,n-1] and covered inclusive subranges, return the maximal uncovered ranges in increasing order. Merge overlapping or adjacent covered ranges before identifying gaps. Verify the input endpoint convention."
+  },
+  "2664": {
+    "task": "Given board dimensions and a start square, construct a knight's tour visiting every square exactly once and label squares by visit order starting at zero. Return a valid labeling; verify whether the input guarantees a tour and what failure result is required otherwise."
+  },
+  "2665": {
+    "task": "Implement createCounter(init) returning increment, decrement and reset methods sharing one value. Increment/decrement change it by one and return the new value; reset restores init and returns it."
+  },
+  "2666": {
+    "task": "Implement once(fn), returning a wrapper that invokes fn only on its first call and returns that result. Later calls return undefined without invoking fn again. Preserve the first call's arguments."
+  },
+  "2667": {
+    "task": "Implement createHelloWorld(), returning a function that returns the exact string 'Hello World' regardless of supplied arguments."
+  },
+  "2674": {
+    "task": "Given a nonempty circular singly linked list, split it into two circular lists preserving original order. The first receives ceil(n/2) nodes starting at the original head and the second receives the remainder. Verify minimum-length guarantees and the required representation of an empty second half."
+  },
+  "2675": {
+    "task": "Given an array of JSON objects, create a matrix whose first row contains the lexicographically sorted union of all flattened leaf paths using dot separators. Subsequent rows contain each object's leaf value for each path, or an empty string when absent. Arrays contribute numeric path components; null is a leaf. Verify empty-container treatment and dot-containing-key guarantees."
+  },
+  "2676": {
+    "task": "Implement throttle(fn,t). The first call invokes immediately. During the next t milliseconds, suppress calls but remember the latest arguments; at the boundary invoke once with those arguments if any arrived, then start another t-window. Continue until no pending call remains. Verify exact boundary scheduling and this-binding expectations."
+  },
+  "2677": {
+    "task": "Split an array into consecutive chunks of positive size, with a possibly shorter final chunk. Preserve order and return an empty list for empty input. Do not invent padding values."
+  },
+  "2689": {
+    "task": "A rope tree stores literal strings at leaves and concatenations at internal nodes, with length metadata. Return the kth character of the represented string using the metadata to avoid full expansion. Verify whether k is one-based and exactly which subtree length each node stores before implementing navigation."
+  },
+  "2690": {
+    "task": "Implement createInfiniteObject(), returning an object for which calling any string-named property as a method returns that property's name. A Proxy can implement dynamic methods without predeclaring their names. Verify symbol-property behavior only if included in the source domain."
+  },
+  "2691": {
+    "task": "Implement the specified immutable-update helper so applying changes produces a new value while leaving the original unchanged and sharing unchanged substructures where required. The exact helper API and supported mutation syntax are not reliably known from memory; this is an incomplete draft and must not be implemented from the title alone."
+  },
+  "2692": {
+    "task": "Create a wrapper that prevents mutations to an object and nested objects/arrays while allowing reads. Block assignment, deletion and mutating collection methods according to the source's contract. The exact required exception strings and supported operations need source verification; this draft is incomplete."
+  },
+  "2693": {
+    "task": "Implement a custom callPolyfill method for functions, invoking the function with the supplied context as this and forwarding remaining arguments. Preserve its return value without using the forbidden built-in call/apply/bind operations. Verify primitive/null-context semantics and allowed language features."
+  },
+  "2694": {
+    "task": "Implement EventEmitter.subscribe(eventName,callback), returning an object with unsubscribe, and emit(eventName,args), returning callback results in subscription order. Multiple subscriptions coexist; unsubscribing removes only that subscription. No subscribers yields an empty result array."
+  },
+  "2695": {
+    "task": "Implement ArrayWrapper around a numeric array. Numeric coercion, such as adding two wrappers, yields the sum of stored elements. String coercion yields bracketed comma-separated values, such as '[4,7]'. An empty wrapper converts numerically to zero and textually to '[]'."
+  },
+  "2700": {
+    "task": "Given two JSON-compatible objects, return their differing values at shared keys as [oldValue,newValue], recursively retaining nested shared-key differences. Keys present on only one side are ignored. Arrays compare shared numeric indices. Verify how differing container types are represented in the expected result."
+  },
+  "2702": {
+    "task": "Given positive integers and x>y, an operation chooses one element to reduce by x while reducing every other element by y. Return the minimum operations needed to make all values nonpositive. Elements may go below zero."
+  },
+  "2703": {
+    "task": "Implement argumentsLength(...args), returning how many arguments were passed, including explicit undefined values."
+  },
+  "2704": {
+    "task": "Implement expect(val) with toBe(other) and notToBe(other), using strict equality. Successful assertions return true. Failed toBe throws Error('Not Equal'); failed notToBe throws Error('Equal')."
+  },
+  "2705": {
+    "task": "Recursively compact a JSON object or array by removing properties/elements with falsy values. Preserve truthy nested containers while compacting their contents, preserve array order and do not treat an empty object or array as falsy."
+  },
+  "2714": {
+    "task": "Given a weighted graph, source, destination and k, find the minimum travel cost when up to k traversed edges may be taken at zero cost. Each free hop is optional. Verify graph directionality and unreachable-output conventions before certification."
+  },
+  "2715": {
+    "task": "Implement cancellable(fn,args,t), scheduling fn(...args) after t milliseconds and returning a function that cancels the pending invocation when called before it runs. Cancellation after execution must not run fn again."
+  },
+  "2721": {
+    "task": "Implement promiseAll(functions), invoking every zero-argument promise-returning function and returning a promise for their resolved values in input order. Reject upon a task rejection; resolve to [] for no functions. Do not use Promise.all."
+  },
+  "2722": {
+    "task": "Join two arrays of objects by id. Keep every distinct id; when both arrays contain it, merge properties with the second array overriding collisions. Return objects sorted by numeric id. Verify the guarantee that each individual input has unique ids."
+  },
+  "2723": {
+    "task": "Given two promises resolving to numbers, return a promise resolving to the sum of their values after both resolve."
+  },
+  "2724": {
+    "task": "Sort an array by the numeric values returned from a provided fn, in ascending order. Return the sorted array. Verify whether fn is guaranteed to produce unique keys before assuming ties cannot occur."
+  },
+  "2725": {
+    "task": "Implement cancellable(fn,args,t), invoking fn(...args) immediately and every t milliseconds afterward. Return a function stopping future interval invocations when called. This differs from the one-shot timeout-cancellation problem."
+  },
+  "2726": {
+    "task": "Implement a Calculator supporting chainable add, subtract, multiply, divide and power operations on its stored value, plus getResult. Each arithmetic method returns the calculator itself. Dividing by zero throws Error('Division by zero is not allowed')."
+  },
+  "2727": {
+    "task": "Return whether a JSON object or array contains no own enumerable keys/elements. Empty arrays and empty objects return true; objects with a key whose value is null are not empty."
+  },
+  "2728": {
+    "task": "A street is a circular doubly linked collection of houses exposed through door-open/close and left/right movement methods. Count the houses using only that interface. Verify the allowed methods, initial door states and the provided upper-bound parameter; this draft does not supply those hidden-interface details."
+  },
+  "2737": {
+    "task": "Given a directed weighted graph, a starting vertex and a set of marked vertices, return the minimum path cost from the start to any marked vertex, or -1 if none is reachable. Starting at a marked vertex has cost zero."
+  },
+  "2743": {
+    "task": "Given a string, count nonempty contiguous substrings with no repeated character. Count positional occurrences even if their text is equal."
+  },
+  "2754": {
+    "task": "Implement a function-binding utility that returns a function invoking the original with a fixed this context and any prebound arguments followed by call-time arguments. Verify the exact required prototype method name, constructor behavior and built-in restrictions before certification."
+  },
+  "2755": {
+    "task": "Deep-merge two JSON-compatible values. Recursively merge matching object keys and array indices; when types do not both support recursive merging, the second value replaces the first. Retain first-only keys/indices and include second-only ones. Verify null handling and whether mutation of inputs is permitted."
+  },
+  "2756": {
+    "task": "Implement request batching so calls made within the specified time window are collected into one underlying batch query and each caller receives the corresponding result. The exact batch timing, API signature and error routing are not reliably known from memory; obtain the source before implementation."
+  },
+  "2757": {
+    "task": "Implement a generator over a circular array starting at a specified index. Yield the current element; each next(jump) moves by that signed jump before the next yield, wrapping modulo array length. Verify the default jump and initial next-argument behavior required by the source."
+  },
+  "2758": {
+    "task": "Add a nextDay method to a Date object that returns the following calendar date formatted YYYY-MM-DD. Verify the required timezone/local-versus-UTC semantics before using millisecond arithmetic across daylight-saving transitions."
+  },
+  "2759": {
+    "task": "Parse a JSON string into its corresponding JavaScript value without JSON.parse or eval. Support the source's stated JSON grammar, including nested arrays/objects and primitive values. Verify any restricted grammar guarantees; do not silently ignore escapes or number syntax."
+  },
+  "2764": {
+    "task": "Given a sequence of [node,parent] pairs describing a binary tree traversal, determine whether it can be a preorder traversal of the described tree. Each subtree must occupy one contiguous segment and every parent precede its children. Verify sentinel, distinctness and child-order assumptions before certification."
+  },
+  "2773": {
+    "task": "A special binary tree has extra leaf links connecting leaves in a doubly linked chain instead of ordinary null child pointers. Return the genuine tree height without following those leaf links as descendants. Verify the exact head/tail linkage convention and whether height counts edges or nodes."
+  },
+  "2774": {
+    "task": "Implement an upper-bound search over a sorted numeric array to return the last index whose value equals target, or -1 if absent. Verify the requested method name and whether the problem instead defines an insertion index; the remembered version returns the final occurrence."
+  },
+  "2775": {
+    "task": "Recursively replace undefined values with null in a nested object/array while preserving other values and structure. Verify the source's mutation requirement and whether sparse array holes count as values to replace."
+  },
+  "2776": {
+    "task": "Convert a callback-style asynchronous function into a promise-returning one. Forward arguments and translate callback success/error into resolution/rejection. Verify the exact callback argument convention before implementing: an error-first callback cannot be assumed from the title alone."
+  },
+  "2777": {
+    "task": "Implement a generator yielding formatted dates from a given start through a given end at the specified day step. Verify whether endpoints are inclusive, the exact format, timezone semantics and allowed step signs before certification."
+  },
+  "2782": {
+    "task": "An opaque CategoryHandler.haveSameCategory(a,b) reports whether two indexed elements belong to the same hidden category. Given the number of elements, return the number of distinct categories using only this equivalence query. Verify the query-call limit if one is specified."
+  },
+  "2794": {
+    "task": "Given parallel keys and values arrays, return an object formed by pairing them. When a key occurs more than once, keep its first paired value in the remembered specification. Verify the duplicate rule and key string-coercion behavior before certification."
+  },
+  "2795": {
+    "task": "Execute all supplied promise-returning functions concurrently and return an outcome record for each in input order, preserving both successes and failures instead of rejecting the entire operation. Verify the exact expected result-record schema before implementation."
+  },
+  "2796": {
+    "task": "Implement a string repeat method returning n consecutive copies of the original string without using the built-in repeat. For n=0 return an empty string. Verify nonnegative-integer input guarantees."
+  },
+  "2797": {
+    "task": "Implement partial(fn,args), where '_' placeholders in the stored argument list are filled left to right from later call arguments; remaining call arguments are appended. Return fn's result from the assembled argument list. Verify behavior when fewer arguments than placeholders are supplied."
+  },
+  "2802": {
+    "task": "A lucky number uses only decimal digits 4 and 7. Given positive k, return the kth lucky number in increasing numeric order, starting 4,7,44,47,74,77,... . Use an integer representation large enough for the official bounds."
+  },
+  "2803": {
+    "task": "Implement a generator yielding factorial values in sequence while maintaining its running product. Verify whether the source starts at 0! or 1!; both equal one but determine whether the first two yields repeat one."
+  },
+  "2804": {
+    "task": "Implement Array.prototype.forEach with a callback and optional thisArg, invoking the callback in array order with value, index and the array. Return undefined. Verify the required treatment of holes and concurrent length changes; full native semantics should not be assumed absent a specification."
+  },
+  "2805": {
+    "task": "Implement a custom recurring timer whose successive delays follow the supplied delay/period formula and expose cancellation. The exact timing recurrence and API are not reliably known from memory, so this is an incomplete draft pending the source."
+  },
+  "2814": {
+    "task": "In a grid, water spreads to neighboring traversable cells each minute while a traveler moves one step per minute from start to destination. Return the shortest safe travel time or -1. Verify terrain symbols, whether destination floods, and whether flooding happens before movement; these details materially change reachability."
+  },
+  "2821": {
+    "task": "Given promises and a delay, return corresponding promises whose outcomes are delayed as specified. Verify whether delay begins at invocation or each original settlement, and whether rejections are delayed; the title alone does not settle these timing rules."
+  },
+  "2822": {
+    "task": "Invert a JSON object by using each original value's string representation as a key and its original key as the value. If several original keys map to the same inverted key, retain all such keys in an array. Verify array ordering and the supported primitive-value domain."
+  },
+  "2823": {
+    "task": "Recursively filter a nested JSON object/array by a predicate, retaining qualifying leaves and their necessary container structure and removing empty results. Verify whether the predicate applies to containers, the empty-root sentinel and whether arrays preserve holes; this draft is incomplete without that contract."
+  },
+  "2832": {
+    "task": "For each element of an integer array, return the length of the largest contiguous range containing its index in which it is a maximum. Verify whether equal values are allowed in that range or the element must be the unique/strict maximum before selecting stack comparisons."
+  },
+  "2838": {
+    "task": "Heroes and monsters have strengths, and each monster has a coin reward. For each hero, return the total coins from monsters the hero can defeat independently of other heroes. Verify whether defeat uses strength >= or >; do not infer it from the title."
+  },
+  "2847": {
+    "task": "Given a positive integer n, return the smallest positive integer whose decimal digits multiply to n, or the source's failure sentinel when impossible. Verify whether the result is returned as a string and whether n=1 returns '1' before implementing the adapter."
+  },
+  "2852": {
+    "task": "A grid contains nonnegative values and blocked cells. For each unblocked cell, its remoteness is the sum of values of unblocked cells it cannot reach by four-direction moves avoiding blocked cells. Return the sum of remoteness across all unblocked cells. Verify the blocked sentinel and numeric bounds."
+  },
+  "2863": {
+    "task": "Find the maximum length of a contiguous subarray of length at least two whose first element is strictly greater than its last element. Return zero if none exists. Interior values impose no ordering condition."
+  },
+  "2877": {
+    "task": "Pandas: given student_data as rows of [student_id,age], create and return a DataFrame with columns student_id and age in that order. Preserve row order."
+  },
+  "2878": {
+    "task": "Pandas: given a DataFrame, return a two-element list containing its row count and column count, in that order."
+  },
+  "2879": {
+    "task": "Pandas: return the first three rows of the supplied employees DataFrame, preserving all columns and original row order. If fewer than three rows exist, return all rows."
+  },
+  "2880": {
+    "task": "Pandas: from a students DataFrame with student_id, name and age, select the record with student_id equal to 101 and return only name and age columns. Verify the target ID against the source before certification."
+  },
+  "2881": {
+    "task": "Pandas: add a bonus column to an employees DataFrame, with each bonus equal to twice that employee's salary. Return the DataFrame with the new column and existing columns retained."
+  },
+  "2882": {
+    "task": "Pandas: remove duplicate rows based on the email column, retaining the first occurrence for each email and preserving retained-row order. Other columns are not part of the duplicate key."
+  },
+  "2883": {
+    "task": "Pandas: remove student rows with missing name values and return the remaining DataFrame. Do not remove a row merely because another column is missing."
+  },
+  "2884": {
+    "task": "Pandas: double every value in the employees DataFrame's salary column and return the updated table with its other columns retained."
+  },
+  "2885": {
+    "task": "Pandas: rename students columns id\u2192student_id, first\u2192first_name, last\u2192last_name and age\u2192age_in_years, returning the DataFrame without changing data values. Verify those exact source column names before certification."
+  },
+  "2886": {
+    "task": "Pandas: convert the grade column of the students DataFrame to integer dtype and return the table. Verify missing-value and conversion guarantees; do not invent rounding rules for nonintegral grades."
+  },
+  "2887": {
+    "task": "Pandas: fill missing values in the products DataFrame's quantity column with zero, leaving existing quantities and other columns unchanged."
+  },
+  "2888": {
+    "task": "Pandas: vertically concatenate df1 and df2 into one DataFrame, retaining all rows in input-table order. Verify whether the expected index must be reset or is ignored by the evaluator."
+  },
+  "2889": {
+    "task": "Pandas: pivot weather data so rows correspond to month, columns to city and cells contain temperature. Verify the source's duplicate city/month guarantee before choosing pivot rather than an aggregation."
+  },
+  "2890": {
+    "task": "Pandas: reshape sales data from one row per product with separate quarter columns into long form with product, quarter and sales. Preserve the quarter labels as values; verify exact input column names and output order requirements."
+  },
+  "2891": {
+    "task": "Pandas: using chained operations, select animals heavier than 100 from a table of animal names and weights, sort by weight descending, and return only the name column. Verify the exact table/column names and strict threshold against the source."
+  },
+  "2892": {
+    "task": "Repeatedly replace two adjacent elements by their product only when that product is at most k. Return the minimum possible final array length. Verify the positive-integer domain, because zeros or negatives would change the greedy grouping argument."
+  },
+  "2898": {
+    "task": "Given stock prices indexed by day, choose a subsequence whose price differences equal the corresponding day-index differences, so all selected price-minus-index values agree. Maximize the sum of chosen prices and return it. Verify one-based versus zero-based notation and whether all prices are positive."
+  }
 }

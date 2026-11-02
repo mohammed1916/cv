@@ -1,0 +1,24 @@
+{
+  "summary": "For each prefix length from zero through n-1, move that prefix to the end of the string. Count rotation positions whose resulting linear string has exactly k equal neighboring character pairs. Only pairs at indices i and i+1 for i<n-1 contribute.",
+  "officialConstraints": "Lowercase English string of length 2..100; 0 <= k <= n-1.",
+  "examples": [
+    {
+      "input": {
+        "s": "aabb",
+        "k": 2
+      },
+      "output": 2,
+      "kind": "independently-authored"
+    }
+  ],
+  "semanticPitfalls": [
+    "Count rotation positions, even when resulting texts coincide. Do not count the last/first characters as a linear adjacent pair."
+  ],
+  "number": 4043,
+  "title": "Count Rotations With Exactly K Equal Adjacent Pairs",
+  "source": "https://leetcode.com/problems/count-rotations-with-exactly-k-equal-adjacent-pairs/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "requirementsVerified": true
+}

@@ -1,0 +1,25 @@
+{
+  "summary": "For each encoded integer, its last decimal digit gives a split width. Remove that digit, split the remaining digits after the specified width, and interpret the two parts as positive integers x and y. Sum x raised to y across the array, modulo 1000000007.",
+  "officialConstraints": "Array length 1..100000; 100 < encoded value < 10^15; width 1..9; 1 <= x,y < 10^9. Each encoding is valid and neither decoded part has leading zeros.",
+  "examples": [
+    {
+      "input": {
+        "nums": [
+          421
+        ]
+      },
+      "output": 16,
+      "kind": "independently-authored"
+    }
+  ],
+  "semanticPitfalls": [
+    "Compute modular powers, not the full enormous power. Encoded integers fit JavaScript safe-integer range, but multiplication during modular exponentiation may not."
+  ],
+  "number": 4039,
+  "title": "Sum of Decoded Numbers",
+  "source": "https://leetcode.com/problems/sum-of-decoded-numbers/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "independently-written-requirements",
+  "requirementsVerified": true
+}

@@ -1,6 +1,6 @@
 # LeetCode statement source directory
 
-4073 problems from the repository catalog dated 2026-10-05T09:48:48.663Z. 211 local requirement summaries; 147 source-attempt records without summaries.
+4073 problems from the repository catalog dated 2026-10-05T09:48:48.663Z. 214 local requirement summaries; 147 source-attempt records without summaries.
 
 This provides official statement links for every catalog entry, not full statement text for every entry. Unfetched links are not certified accessible. Paid statements may require authorized access. Notes are paraphrased requirements; some older notes omit examples. Implementation and verification remain separate.
 
@@ -4046,11 +4046,11 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 4036 | [Lexicographically Largest String After Pair Transformations](https://leetcode.com/problems/lexicographically-largest-string-after-pair-transformations/description/) | Free in snapshot | Not cached |
 | 4037 | [Maximum Valid Split Positions II](https://leetcode.com/problems/maximum-valid-split-positions-ii/description/) | Free in snapshot | Not cached |
 | 4038 | [Count Integers Appearing in a Single Block](https://leetcode.com/problems/count-integers-appearing-in-a-single-block/description/) | Free in snapshot | Not cached |
-| 4039 | [Sum of Decoded Numbers](https://leetcode.com/problems/sum-of-decoded-numbers/description/) | Free in snapshot | Not cached |
-| 4040 | [Minimum Operations to Form Subset Sum I](https://leetcode.com/problems/minimum-operations-to-form-subset-sum-i/description/) | Free in snapshot | Not cached |
+| 4039 | [Sum of Decoded Numbers](https://leetcode.com/problems/sum-of-decoded-numbers/description/) | Free in snapshot | [Requirement summary](../requirements/4039.json) |
+| 4040 | [Minimum Operations to Form Subset Sum I](https://leetcode.com/problems/minimum-operations-to-form-subset-sum-i/description/) | Free in snapshot | [Requirement summary](../requirements/4040.json) |
 | 4041 | [Minimum Operations to Form Subset Sum II](https://leetcode.com/problems/minimum-operations-to-form-subset-sum-ii/description/) | Free in snapshot | Not cached |
 | 4042 | [Valid K-Unique Subarrays II](https://leetcode.com/problems/valid-k-unique-subarrays-ii/description/) | Paid in snapshot | Not cached |
-| 4043 | [Count Rotations With Exactly K Equal Adjacent Pairs](https://leetcode.com/problems/count-rotations-with-exactly-k-equal-adjacent-pairs/description/) | Free in snapshot | Not cached |
+| 4043 | [Count Rotations With Exactly K Equal Adjacent Pairs](https://leetcode.com/problems/count-rotations-with-exactly-k-equal-adjacent-pairs/description/) | Free in snapshot | [Requirement summary](../requirements/4043.json) |
 | 4044 | [Count Good Cyclic Rotations](https://leetcode.com/problems/count-good-cyclic-rotations/description/) | Free in snapshot | Not cached |
 | 4045 | [Count Robot Groups](https://leetcode.com/problems/count-robot-groups/description/) | Free in snapshot | Not cached |
 | 4046 | [Minimum Cost Path With At Most K Turns](https://leetcode.com/problems/minimum-cost-path-with-at-most-k-turns/description/) | Free in snapshot | Not cached |
