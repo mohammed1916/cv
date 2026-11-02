@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { buildTrace, parseInput, python } from './algorithm.js'
+import { buildTrace, code, parseInput, python } from './algorithm.js'
 
 const MOD = 1000000007n
 const solve = (grid, d) => buildTrace({ grid, d }).result
@@ -10,6 +10,58 @@ test('3797 official examples', () => {
   assert.equal(solve(['..', '#.'], 2), 4)
   assert.equal(solve(['#'], 750), 0)
   assert.equal(solve(['..'], 1), 4)
+})
+
+test('3797 single row gives four paths at d = 1', () => {
+  assert.equal(solve(['..'], 1), 4)
+})
+
+test('3797 two-row example gives 2 at d = 1 and 4 at d = 2', () => {
+  assert.equal(solve(['..', '#.'], 1), 2)
+  assert.equal(solve(['..', '#.'], 2), 4)
+})
+
+test('3797 frames carry array snapshots and sideways windows', () => {
+  const { frames } = buildTrace({ grid: ['..', '#.'], d: 2 })
+  for (const f of frames) {
+    assert.equal(f.arrivals.length, 2)
+    assert.equal(f.sideways.length, 2)
+    assert.equal(f.nextArrivals.length, 2)
+    assert.equal(f.both.length, 2)
+  }
+  const sideways = frames.filter(f => f.window?.kind === 'sideways')
+  assert.ok(sideways.length > 0)
+  for (const f of sideways) {
+    assert.equal(f.window.value, (f.window.windowSum - f.window.self + 1000000007) % 1000000007)
+  }
+  // The retained table keeps the final top row, not only the last merged count.
+  const last = frames.at(-1)
+  assert.equal(last.phase, 'done')
+  assert.equal(last.result, 4)
+})
+
+test('3797 sideways moves never chain: sideways sums read arrivals only', () => {
+  const { frames } = buildTrace({ grid: ['...'], d: 2 })
+  for (const f of frames.filter(f => f.window?.kind === 'sideways')) {
+    assert.deepEqual(f.window.source, 'arrivals')
+    assert.equal(f.window.self, f.arrivals[f.window.col])
+  }
+})
+
+test('3797 each frame maps to the expected pseudocode and python text', () => {
+  const { frames } = buildTrace({ grid: ['..', '#.'], d: 1 })
+  const expectedCode = {
+    start: ['set the vertical reach', 'each available bottom cell starts'],
+    row: ['for each row'],
+    side: ['sideways count of each'],
+    down: ['vertical step gives'],
+    done: ['if this is the top row'],
+  }
+  for (const f of frames) {
+    const text = code[f.activeLine - 1].text
+    assert.ok(expectedCode[f.phase].some(s => text.includes(s)), `${f.phase} -> ${text}`)
+    assert.ok(python.split('\n')[f.pythonLine - 1].trim().length > 0)
+  }
 })
 
 test('3797 parses the example inputs', () => {

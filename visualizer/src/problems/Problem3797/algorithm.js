@@ -19,7 +19,8 @@ export function parseInput(text) {
 const mod = x => ((x % MOD) + MOD) % MOD
 
 // Largest column offset k with k * k + 1 <= d * d, since a vertical step covers one row.
-function verticalReach(d) {
+// This is floor(sqrt(d * d - 1)) for d >= 1.
+export function verticalReach(d) {
   let reach = 0
   while ((reach + 1) * (reach + 1) + 1 <= d * d) reach++
   return reach
@@ -29,54 +30,89 @@ export function buildTrace({ grid, d }) {
   const rows = grid.length
   const cols = grid[0].length
   const reach = verticalReach(d)
+  // Full-grid snapshot used by the visualization only; the solver itself keeps O(cols) arrays per row.
   const table = grid.map(row => [...row].map(ch => (ch === '#' ? '#' : null)))
   const frames = []
-  const frame = (marker, phase, activeMarker, message, row = -1, cell = null, result = null) => {
-    frames.push({ pythonLine: PL(marker), phase, activeLine: L(activeMarker), message, row, cell, result, table: table.map(line => [...line]) })
+  const snap = a => [...a]
+
+  // Every frame carries copies of the arrays it describes, so any step can be shown without replaying earlier steps.
+  // `ways` is read at call time and is the arrivals array of the current row.
+  let ways = Array(cols).fill(0)
+  let side = Array(cols).fill(0)
+  let both = Array(cols).fill(0)
+  let nxt = Array(cols).fill(0)
+  const frame = (marker, phase, activeMarker, message, extra = {}) => {
+    frames.push({
+      pythonLine: PL(marker),
+      phase,
+      activeLine: L(activeMarker),
+      message,
+      row: extra.row ?? -1,
+      cell: extra.cell ?? null,
+      result: extra.result ?? null,
+      d,
+      reach,
+      window: extra.window ?? null,
+      arrivals: snap(ways),
+      sideways: snap(side),
+      both: snap(both),
+      nextArrivals: snap(nxt),
+      table: table.map(line => [...line]),
+    })
   }
 
-  frame('reach = 0', 'start', 'set the vertical reach', `Vertical steps reach ${reach} column${reach === 1 ? '' : 's'} either side (d = ${d}).`)
+  frame('reach = 0', 'start', 'set the vertical reach', `Vertical steps reach ${reach} column${reach === 1 ? '' : 's'} either side (d = ${d}, sideways reach ${d}).`)
 
-  let ways = Array(cols).fill(0)
   for (let c = 0; c < cols; c++) {
     if (grid[rows - 1][c] !== '.') continue
     ways[c] = 1
     table[rows - 1][c] = 1
-    frame('ways[c] = 1', 'start', 'each available bottom cell starts', `Bottom cell [${rows - 1},${c}] begins one route.`, rows - 1, { row: rows - 1, col: c })
+    frame('ways[c] = 1', 'start', 'each available bottom cell starts', `Bottom cell [${rows - 1},${c}] begins one route.`, { row: rows - 1, cell: { row: rows - 1, col: c } })
   }
 
   for (let r = rows - 1; r >= 0; r--) {
     const prefix = [0]
     for (let c = 0; c < cols; c++) prefix.push(mod(prefix[c] + ways[c]))
-    const side = Array(cols).fill(0)
-    frame('side = [0] * cols', 'row', 'for each row from the bottom', `Row ${r}: sideways moves use the routes that arrived by a step or a start.`, r)
+    side = Array(cols).fill(0)
+    frame('side = [0] * cols', 'row', 'for each row from the bottom', `Row ${r}: sideways sums read arrivals only, so a sideways count is never moved again.`, { row: r })
     for (let c = 0; c < cols; c++) {
       if (grid[r][c] !== '.') continue
       const lo = Math.max(0, c - d)
       const hi = Math.min(cols, c + d + 1)
-      side[c] = mod(prefix[hi] - prefix[lo] - ways[c])
+      const windowSum = mod(prefix[hi] - prefix[lo])
+      side[c] = mod(windowSum - ways[c])
       table[r][c] = mod(ways[c] + side[c])
-      frame('side[c] = (prefix', 'side', 'sideways count of each', `[${r},${c}] holds ${table[r][c]} route(s) after sideways moves within distance ${d}.`, r, { row: r, col: c })
+      frame('side[c] = (prefix', 'side', 'sideways count of each', `[${r},${c}] gets ${side[c]} sideways route(s): arrivals in columns ${lo}..${hi - 1} sum to ${windowSum}, minus its own ${ways[c]}.`, {
+        row: r,
+        cell: { row: r, col: c },
+        window: { kind: 'sideways', row: r, col: c, lo, hi, source: 'arrivals', windowSum, self: ways[c], value: side[c] },
+      })
     }
 
     if (r === 0) {
       let total = 0
       for (let c = 0; c < cols; c++) total = mod(total + ways[c] + side[c])
-      frame('return sum', 'done', 'if this is the top row', `Routes ending on the top row total ${total}.`, 0, null, total)
+      both = ways.map((w, c) => mod(w + side[c]))
+      frame('return sum', 'done', 'if this is the top row', `Routes ending on the top row total ${total}.`, { row: 0, result: total })
       return { input: { grid, d }, result: total, frames }
     }
 
-    const both = ways.map((w, c) => mod(w + side[c]))
+    both = ways.map((w, c) => mod(w + side[c]))
     const pre = [0]
     for (let c = 0; c < cols; c++) pre.push(mod(pre[c] + both[c]))
-    const nxt = Array(cols).fill(0)
+    nxt = Array(cols).fill(0)
     for (let c = 0; c < cols; c++) {
       if (grid[r - 1][c] !== '.') continue
       const lo = Math.max(0, c - reach)
       const hi = Math.min(cols, c + reach + 1)
-      nxt[c] = mod(pre[hi] - pre[lo])
+      const windowSum = mod(pre[hi] - pre[lo])
+      nxt[c] = windowSum
       table[r - 1][c] = nxt[c]
-      frame('nxt[c] = (pre[', 'down', 'vertical step gives', `[${r - 1},${c}] receives ${nxt[c]} route(s) stepping up from row ${r}.`, r - 1, { row: r - 1, col: c })
+      frame('nxt[c] = (pre[', 'down', 'vertical step gives', `[${r - 1},${c}] receives ${nxt[c]} route(s) from row ${r}: routes in columns ${lo}..${hi - 1} that can step up (reach ${reach}).`, {
+        row: r - 1,
+        cell: { row: r - 1, col: c },
+        window: { kind: 'step', row: r, col: c, lo, hi, source: 'both', windowSum, value: nxt[c], targetRow: r - 1 },
+      })
     }
     ways = nxt
   }
@@ -88,11 +124,16 @@ export const code = `count routes from the bottom row up to the top row
   each available bottom cell starts with one route
   for each row from the bottom row up to the top row
     the sideways count of each available cell sums routes in this row within distance d, not counting the cell itself
+    a sideways count is never summed again, so sideways moves cannot chain
     if this is the top row then return the sum of routes on it
     the routes that can step up are the routes in this row, sideways or not
     the vertical step gives each available cell above the sum of those routes within the reach columns
   return 0`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const L = s => {
+  const index = code.findIndex(c => c.text.includes(s))
+  if (index < 0) throw new Error(`Missing pseudocode line: ${s}`)
+  return index + 1
+}
 
 export const python = `def count_routes(grid, d):
     MOD = 1000000007
@@ -133,4 +174,8 @@ export const python = `def count_routes(grid, d):
     return 0
 `
 const PY_LINES = python.split('\n')
-const PL = s => PY_LINES.findIndex(line => line.includes(s)) + 1
+const PL = s => {
+  const index = PY_LINES.findIndex(line => line.includes(s))
+  if (index < 0) throw new Error(`Missing python line: ${s}`)
+  return index + 1
+}

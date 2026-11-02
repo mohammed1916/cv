@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import MatrixGrid from '../../components/shared/MatrixGrid'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import RouteGridView from './RouteGridView'
 
 const definition = {
   phases: [
@@ -22,15 +22,10 @@ const definition = {
 }
 
 export default function CountRoutesToClimbGrid() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
-    const matrix = step.table.map(line => line.map(value => (value === null ? '-' : value)))
-    return <>
-      <MatrixGrid matrix={matrix} label="Routes per cell (# is blocked, - is not yet known)" activeCell={step.cell} cellWidth={52} cellHeight={48} />
-      <output aria-label="Route count">{`d = ${run.input.d}, answer ${step.result ?? 'pending'}`}</output>
-    </>
-  }} renderReasoning={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <RouteGridView run={run} step={step} />} renderReasoning={({ step }) => <>
     <p>{step.message}</p>
-    <p>Every route ends on the top row. A cell's routes are the routes that stepped up into it plus the routes that moved sideways within its row, and a sideways move can only follow a route that did not just move sideways.</p>
-    <p>Prefix sums over each row give every window of sideways or upward moves in constant time.</p>
+    <p>Every route ends on the top row. Arrivals are routes that reached a cell by a start or a step up. Sideways counts add the arrivals within distance d in the same row, excluding the cell itself.</p>
+    <p>A sideways count is never summed again, so a sideways move cannot follow another sideways move. Only arrivals and sideways counts together can step up.</p>
+    <p>Prefix sums over each row give every window in constant time.</p>
   </>} />
 }
