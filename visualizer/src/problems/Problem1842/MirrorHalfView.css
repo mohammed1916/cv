@@ -1,0 +1,19 @@
+.mir-view { display: grid; gap: 12px; font: 500 14px system-ui, sans-serif; color: #0f172a; }
+.mir-row { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.mir-label { width: 72px; font-weight: 700; color: #334155; }
+.mir-digit { width: 40px; height: 40px; display: grid; place-items: center; border: 2px solid #94a3b8; border-radius: 8px; background: #f8fafc; font: 700 18px ui-monospace, monospace; position: relative; }
+.mir-digit--pivot { border-color: #dc2626; background: #fee2e2; }
+.mir-digit--swap { border-color: #7c3aed; background: #ede9fe; }
+.mir-digit--mirror { border-color: #cbd5e1; background: #f1f5f9; color: #475569; }
+.mir-digit--middle { border-color: #0ea5e9; background: #e0f2fe; }
+.mir-digit small { position: absolute; bottom: -15px; font-size: 10px; color: #475569; font-weight: 600; }
+.mir-message { color: #334155; }
+@media (prefers-color-scheme: dark) {
+  .mir-view { color: #e2e8f0; }
+  .mir-label, .mir-message, .mir-digit small { color: #cbd5e1; }
+  .mir-digit { background: #1e293b; border-color: #64748b; color: #e2e8f0; }
+  .mir-digit--pivot { background: #7f1d1d; border-color: #f87171; }
+  .mir-digit--swap { background: #4c1d95; border-color: #a78bfa; }
+  .mir-digit--mirror { background: #0f172a; color: #94a3b8; }
+  .mir-digit--middle { background: #0c4a6e; border-color: #38bdf8; }
+}
