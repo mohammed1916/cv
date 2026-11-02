@@ -51,6 +51,10 @@ Prefer an accessible official page. If direct HTTP returns 403, try available we
 
 Regenerate the source directory with `node scripts/build-statement-source-index.mjs` after source-note changes. Its generated links are discovery metadata, not verification evidence.
 
+## Reference material versus website content
+
+The user explicitly requires that LeetCode examples are not used on the website. Follow [the website content rules](statement-sources/WEBSITE-CONTENT-RULES.md): source statements and examples are reference material, while public explanations, presets, diagrams and walkthroughs must be independently authored. Audit existing examples, including recent review reproduction cases, before using them as public presets. Official-example validation is separate from website content. Preserve useful authored examples, not copied ones. Do not claim that changing examples guarantees legal compliance.
+
 ## Implementation and educational requirements
 
 Each standard algorithm entry needs `meta.js`, `index.jsx`, `algorithm.js`, `algorithm.test.mjs`, plus its requirement record. Provide `parseInput`, deterministic `buildTrace`, genuine language-neutral `code`, and complete executable `python`, wired into the shared workspace. Check the repository's current adapter/export contracts before editing. Preserve compatible existing exports/imports and useful examples. Do not rename an export without checking consumers.
@@ -86,7 +90,7 @@ For category exceptions, document an appropriate runnable/testable language and 
 
 1. Requirements are sufficient and provenance is recorded; unresolved mathematical rules are not hidden.
 2. Implementation, metadata and unique route exist and use the intended shared contract; no empty placeholder or duplicate legacy route.
-3. Official examples and meaningful edge/adversarial cases pass. Independent exhaustive/random small-case oracle or property checks cover the actual risk; do not copy the optimized solver into its oracle. Four tests are not a quota that guarantees correctness.
+3. Official examples are checked as reference validation without publishing them in the website. Independently authored website examples and meaningful edge/adversarial cases pass. Independent exhaustive/random small-case oracle or property checks cover the actual risk; do not copy the optimized solver into its oracle. Four tests are not a quota that guarantees correctness.
 4. Python is executable and agrees with the solution on representative and boundary cases. Check alternate valid outputs by validity/optimality, not arbitrary sample equality (for example balanced trees in 108/109).
 5. Pseudocode is genuinely language-neutral; every phase/branch's highlighting is valid and semantically correct in each supported language.
 6. Every actual routed preset parses and runs. Frame invariants, snapshots, narration, dependency visibility and final state are checked. Include branches not reached by the presets.

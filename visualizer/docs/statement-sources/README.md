@@ -1,5 +1,7 @@
 # Readable problem requirements for Claude
 
+**Reference only:** Do not copy source statements or examples into the website. Follow [the user’s website content rules](WEBSITE-CONTENT-RULES.md).
+
 Start with [INDEX.md](INDEX.md) or [index.json](index.json). Both cover all **4,073 entries in the repository's stored catalog**, including paid entries. This is not a claim that 4,073 is today's live LeetCode total.
 
 ## Full statements recovered locally

@@ -1,3 +1,7 @@
+# Website content rule — user instruction
+
+**Do not publish LeetCode statement text or its examples on our website.** Cached material is for local reference. Use independently authored explanations, example inputs, walkthroughs, diagrams and narration. Audit existing presets as well as new work. Read [the reference/public-content boundary](docs/statement-sources/WEBSITE-CONTENT-RULES.md). This overrides older instructions to preserve examples when those examples were copied from LeetCode.
+
 # Full statement archive recovered — read this first
 
 The repository previously contained full statements. They were deleted in September, but **2,984 non-empty statements have now been recovered locally**. Read [recovery evidence and access instructions](docs/statement-sources/RECOVERY.md), then use [the local full-text index](local-reference/leetcode/README.md) before attempting web fetches. The summary index is not the complete inventory of locally available requirements.
