@@ -1,0 +1,13 @@
+.merge-view { display: grid; gap: 12px; }
+.merge-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.merge-tile { display: inline-flex; flex-direction: column; align-items: center; min-width: 48px; padding: 8px 6px; border-radius: 10px; border: 2px solid #cbd5e1; background: #f8fafc; color: #0f172a; }
+.merge-tile--left { background: #dbeafe; border-color: #2563eb; }
+.merge-tile--right { background: #ffedd5; border-color: #ea580c; }
+.merge-tile--mid { background: #f1f5f9; }
+.merge-value { font-size: 20px; font-weight: 800; }
+.merge-index { font-size: 11px; opacity: 0.7; }
+.merge-state { display: flex; flex-wrap: wrap; gap: 14px; margin: 0; }
+.merge-state div { min-width: 120px; }
+.merge-state dt { font-size: 12px; opacity: 0.75; }
+.merge-state dd { margin: 0; font-weight: 700; font-size: 18px; }
+.merge-note, .merge-empty { margin: 0; font-size: 13px; opacity: 0.8; }

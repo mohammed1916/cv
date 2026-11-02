@@ -1,0 +1,13 @@
+.letter-view { display: grid; gap: 12px; }
+.letter-bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.letter-row { display: grid; grid-template-columns: 24px minmax(80px, 240px) 40px auto; gap: 8px; align-items: center; font-size: 14px; }
+.letter-name { font-weight: 800; text-align: center; }
+.letter-bar { display: block; height: 14px; border-radius: 4px; background: linear-gradient(90deg, #fca5a5, #b91c1c); }
+.letter-count { font-variant-numeric: tabular-nums; }
+.letter-term { font-size: 12px; opacity: 0.6; font-variant-numeric: tabular-nums; }
+.letter-term--on { opacity: 1; font-weight: 700; color: #7f1d1d; }
+.letter-state { display: flex; flex-wrap: wrap; gap: 14px; margin: 0; }
+.letter-state div { min-width: 110px; }
+.letter-state dt { font-size: 12px; opacity: 0.75; }
+.letter-state dd { margin: 0; font-weight: 700; font-size: 18px; }
+.letter-note, .letter-empty { margin: 0; font-size: 13px; opacity: 0.8; }

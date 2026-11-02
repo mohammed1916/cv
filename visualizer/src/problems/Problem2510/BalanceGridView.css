@@ -1,0 +1,11 @@
+.balance-view { display: grid; gap: 10px; }
+.balance-grid { display: grid; gap: 6px; overflow-x: auto; }
+.balance-cell { display: grid; gap: 4px; justify-items: center; padding: 8px 6px; border-radius: 10px; border: 2px solid #cbd5e1; background: #f8fafc; color: #0f172a; min-width: 84px; }
+.balance-cell--zero { background: #ecfeff; }
+.balance-cell--one { background: #fdf4ff; }
+.balance-cell--filled { border-color: #4f46e5; }
+.balance-cell--active { outline: 3px solid #f59e0b; outline-offset: 1px; }
+.balance-cell__value { font-size: 20px; font-weight: 800; }
+.balance-cell__set { font-size: 12px; font-variant-numeric: tabular-nums; }
+.balance-note, .balance-empty, .balance-verdict { margin: 0; font-size: 13px; opacity: 0.85; }
+.balance-verdict { font-weight: 700; opacity: 1; }

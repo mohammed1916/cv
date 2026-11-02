@@ -1,0 +1,14 @@
+.fair-view { display: grid; gap: 12px; }
+.fair-start, .fair-note, .fair-empty { margin: 0; font-size: 14px; }
+.fair-note { opacity: 0.8; font-size: 13px; }
+.fair-digits { display: flex; flex-wrap: wrap; gap: 8px; }
+.fair-digit { display: inline-flex; flex-direction: column; align-items: center; min-width: 56px; padding: 8px 10px; border-radius: 10px; border: 2px solid #94a3b8; background: #f8fafc; color: #0f172a; }
+.fair-digit__value { font-size: 24px; font-weight: 800; }
+.fair-digit__tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+.fair-digit--odd { background: #fef3c7; border-color: #d97706; }
+.fair-digit--even { background: #dbeafe; border-color: #2563eb; }
+.fair-digit--idle { font-size: 13px; border-style: dashed; }
+.fair-tally { display: flex; flex-wrap: wrap; gap: 14px; margin: 0; }
+.fair-tally div { min-width: 110px; }
+.fair-tally dt { font-size: 12px; opacity: 0.75; }
+.fair-tally dd { margin: 0; font-weight: 700; font-size: 18px; }

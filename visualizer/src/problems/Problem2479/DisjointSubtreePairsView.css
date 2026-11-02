@@ -1,0 +1,12 @@
+.disjoint-view { display: grid; gap: 10px; }
+.disjoint-view svg { width: 100%; max-width: 560px; }
+.disjoint-edge { stroke: #94a3b8; stroke-width: 2; }
+.disjoint-node circle { fill: #f1f5f9; stroke: #64748b; stroke-width: 2; }
+.disjoint-node--pair circle { fill: #fde68a; stroke: #b45309; stroke-width: 3; }
+.disjoint-node--active circle { stroke: #2563eb; stroke-width: 4; }
+.disjoint-id { font-size: 10px; text-anchor: middle; fill: #475569; }
+.disjoint-sum { font-size: 13px; font-weight: 800; text-anchor: middle; fill: #0f172a; }
+.disjoint-table { border-collapse: collapse; font-size: 13px; }
+.disjoint-table th, .disjoint-table td { border: 1px solid #cbd5e1; padding: 4px 8px; text-align: left; }
+.disjoint-row--active { background: #fef3c7; }
+.disjoint-legend, .disjoint-empty { margin: 0; font-size: 13px; opacity: 0.85; }

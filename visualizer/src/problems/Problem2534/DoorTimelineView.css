@@ -1,0 +1,12 @@
+.door-view { display: grid; gap: 12px; }
+.door-track { display: flex; flex-wrap: wrap; gap: 6px; }
+.door-slot { display: grid; justify-items: center; min-width: 64px; padding: 6px; border-radius: 8px; border: 2px dashed #cbd5e1; background: #f8fafc; color: #0f172a; font-size: 13px; }
+.door-slot--enter { background: #dcfce7; border: 2px solid #16a34a; }
+.door-slot--exit { background: #ffedd5; border: 2px solid #ea580c; }
+.door-slot--idle { color: #64748b; }
+.door-slot--now { outline: 3px solid #f59e0b; outline-offset: 1px; }
+.door-second { font-size: 11px; opacity: 0.7; }
+.door-what { font-weight: 700; }
+.door-queues { display: flex; flex-wrap: wrap; gap: 16px; }
+.door-queues h4 { margin: 0 0 4px; font-size: 13px; }
+.door-queues p, .door-answer, .door-empty { margin: 0; font-size: 13px; }

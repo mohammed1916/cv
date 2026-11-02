@@ -1,0 +1,15 @@
+.toggle-view { display: grid; gap: 8px; }
+.toggle-view svg { width: 100%; max-width: 560px; }
+.toggle-edge { stroke: #94a3b8; stroke-width: 2; }
+.toggle-node circle { fill: #f1f5f9; stroke: #64748b; stroke-width: 2; }
+.toggle-node--zero circle { fill: #f8fafc; }
+.toggle-node--one circle { fill: #fde68a; stroke: #b45309; stroke-width: 2.5; }
+.toggle-node--active circle { stroke: #2563eb; stroke-width: 4; }
+.toggle-id { font-size: 9px; text-anchor: middle; fill: #475569; }
+.toggle-value { font-size: 13px; font-weight: 800; text-anchor: middle; fill: #0f172a; }
+.toggle-mark { font-size: 12px; fill: #dc2626; }
+.toggle-state { display: flex; gap: 14px; margin: 0; }
+.toggle-state div { min-width: 110px; }
+.toggle-state dt { font-size: 12px; opacity: 0.75; }
+.toggle-state dd { margin: 0; font-weight: 700; font-size: 18px; }
+.toggle-queries, .toggle-note, .toggle-empty { margin: 0; font-size: 13px; opacity: 0.85; }

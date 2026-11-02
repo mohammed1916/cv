@@ -1,0 +1,11 @@
+.tm-view { display: grid; gap: 8px; }
+.tm-view svg { width: 100%; max-height: 520px; }
+.tm-edge { stroke: #94a3b8; stroke-width: 2; }
+.tm-edge--active { stroke: #f59e0b; stroke-width: 4; }
+.tm-weight { font-size: 12px; fill: #334155; font-weight: 600; }
+.tm-node circle { fill: #f1f5f9; stroke: #64748b; stroke-width: 2; }
+.tm-node--done circle { fill: #d1fae5; stroke: #059669; }
+.tm-node--active circle { fill: #fef3c7; stroke: #f59e0b; stroke-width: 4; }
+.tm-id { font-size: 14px; font-weight: 700; text-anchor: middle; fill: #0f172a; }
+.tm-values { font-size: 11px; text-anchor: middle; fill: #334155; }
+.tm-legend, .tm-empty { margin: 0; font-size: 13px; opacity: 0.8; }

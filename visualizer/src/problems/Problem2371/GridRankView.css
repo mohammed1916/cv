@@ -1,0 +1,10 @@
+.rank-view { display: grid; gap: 10px; }
+.rank-grid { display: grid; gap: 6px; align-items: stretch; overflow-x: auto; }
+.rank-corner, .rank-head { font-size: 12px; font-weight: 600; text-align: center; padding: 4px; }
+.rank-head--active { color: #b45309; }
+.rank-cell { display: grid; gap: 2px; text-align: center; padding: 8px 4px; border: 1px solid #94a3b8; border-radius: 8px; background: #f8fafc; color: #0f172a; }
+.rank-cell--placed { background: #ede9fe; border-color: #7c3aed; }
+.rank-cell--active { outline: 3px solid #f59e0b; outline-offset: 1px; }
+.rank-original { font-size: 18px; font-weight: 700; }
+.rank-assigned { font-size: 12px; opacity: 0.85; }
+.rank-legend, .rank-empty { margin: 0; font-size: 13px; opacity: 0.8; }
