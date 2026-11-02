@@ -1,0 +1,218 @@
+.hr-view {
+  --hr-ink: #0f172a;
+  --hr-muted: #475569;
+  --hr-axis: #94a3b8;
+  --hr-open: #dc2626;
+  --hr-idle: #cbd5e1;
+  --hr-reach: rgba(14, 116, 144, 0.12);
+  --hr-reach-line: #0e7490;
+  --hr-ok: #15803d;
+  --hr-fail: #b91c1c;
+  color: var(--hr-ink);
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.hr-empty {
+  color: var(--hr-muted);
+}
+
+.hr-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.hr-badge {
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: 13px;
+  color: #fff;
+}
+
+.hr-badge--ok { background: var(--hr-ok); }
+.hr-badge--fail { background: var(--hr-fail); }
+
+/* Track: hens, grains and runs share one number line. */
+.hr-track {
+  position: relative;
+  height: 150px;
+  margin: 0 12px;
+}
+
+.hr-axis {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 84px;
+  height: 2px;
+  background: var(--hr-axis);
+}
+
+.hr-reach {
+  position: absolute;
+  top: 8px;
+  bottom: 28px;
+  background: var(--hr-reach);
+  border: 1px dashed var(--hr-reach-line);
+  border-radius: 6px;
+  color: var(--hr-reach-line);
+  font-size: 11px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: hidden;
+  min-width: 2px;
+}
+
+.hr-bar {
+  position: absolute;
+  top: 78px;
+  height: 14px;
+  border-radius: 7px;
+  opacity: 0.85;
+  min-width: 2px;
+}
+
+.hr-grain {
+  position: absolute;
+  top: 74px;
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1px var(--hr-axis);
+}
+
+.hr-grain span {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: var(--hr-muted);
+}
+
+.hr-grain--open { background: var(--hr-open); }
+.hr-grain--idle { background: var(--hr-idle); }
+
+.hr-hen {
+  position: absolute;
+  top: 36px;
+  transform: translateX(-50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 12px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.3);
+}
+
+.hr-hen--active {
+  outline: 3px solid #facc15;
+  outline-offset: 2px;
+}
+
+.hr-hen-0 { background: #0369a1; }
+.hr-hen-1 { background: #c2410c; }
+.hr-hen-2 { background: #6d28d9; }
+.hr-hen-3 { background: #0f766e; }
+.hr-hen-4 { background: #be185d; }
+.hr-hen-5 { background: #854d0e; }
+
+.hr-bar.hr-hen-0, .hr-bar.hr-hen-1, .hr-bar.hr-hen-2, .hr-bar.hr-hen-3, .hr-bar.hr-hen-4, .hr-bar.hr-hen-5 {
+  background: currentColor;
+}
+
+.hr-bar.hr-hen-0 { background: #7dd3fc; }
+.hr-bar.hr-hen-1 { background: #fdba74; }
+.hr-bar.hr-hen-2 { background: #c4b5fd; }
+.hr-bar.hr-hen-3 { background: #5eead4; }
+.hr-bar.hr-hen-4 { background: #f9a8d4; }
+.hr-bar.hr-hen-5 { background: #fde047; }
+
+/* Time search strip. */
+.hr-search__track {
+  position: relative;
+  height: 12px;
+  background: #e2e8f0;
+  border-radius: 6px;
+}
+
+.hr-search__range {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: #7dd3fc;
+  border-radius: 6px;
+}
+
+.hr-search__mid {
+  position: absolute;
+  top: -6px;
+  transform: translateX(-50%);
+  background: #0f172a;
+  color: #fff;
+  font-size: 11px;
+  border-radius: 4px;
+  padding: 0 4px;
+}
+
+.hr-search__labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--hr-muted);
+  margin-top: 4px;
+}
+
+.hr-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.hr-table th,
+.hr-table td {
+  text-align: left;
+  padding: 4px 6px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.hr-row--active {
+  background: rgba(250, 204, 21, 0.2);
+}
+
+.hr-chip {
+  display: inline-block;
+  border-radius: 6px;
+  padding: 0 6px;
+  color: #fff;
+}
+
+.hr-chip.hr-hen-0 { background: #0369a1; }
+.hr-chip.hr-hen-1 { background: #c2410c; }
+.hr-chip.hr-hen-2 { background: #6d28d9; }
+.hr-chip.hr-hen-3 { background: #0f766e; }
+.hr-chip.hr-hen-4 { background: #be185d; }
+.hr-chip.hr-hen-5 { background: #854d0e; }
+
+@media (prefers-color-scheme: dark) {
+  .hr-view {
+    --hr-ink: #e2e8f0;
+    --hr-muted: #94a3b8;
+    --hr-axis: #64748b;
+    --hr-idle: #475569;
+    --hr-reach: rgba(56, 189, 248, 0.16);
+    --hr-reach-line: #7dd3fc;
+  }
+  .hr-search__track { background: #1e293b; }
+  .hr-table th, .hr-table td { border-bottom-color: #334155; }
+}

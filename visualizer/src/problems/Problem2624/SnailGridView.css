@@ -1,0 +1,155 @@
+.sg-view {
+  --sg-ink: #0f172a;
+  --sg-muted: #475569;
+  --sg-line: #cbd5e1;
+  --sg-fill: #dcfce7;
+  --sg-fill-ink: #14532d;
+  --sg-odd: #e0f2fe;
+  --sg-cursor: #f59e0b;
+  --sg-next: #2563eb;
+  --sg-bad: #b91c1c;
+  color: var(--sg-ink);
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.sg-empty,
+.sg-legend {
+  color: var(--sg-muted);
+  font-size: 13px;
+  margin: 0;
+}
+
+.sg-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sg-badge {
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: 13px;
+  background: #334155;
+  color: #fff;
+}
+
+.sg-badge--bad { background: var(--sg-bad); }
+
+.sg-mismatch {
+  border: 2px dashed var(--sg-bad);
+  border-radius: 10px;
+  padding: 14px;
+  color: var(--sg-bad);
+  font-weight: 600;
+}
+
+.sg-input {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+}
+
+.sg-input__label {
+  font-size: 13px;
+  color: var(--sg-muted);
+  margin-right: 4px;
+}
+
+.sg-input__cell {
+  min-width: 30px;
+  text-align: center;
+  padding: 3px 6px;
+  border: 1px solid var(--sg-line);
+  border-radius: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.sg-input__cell--used {
+  opacity: 0.4;
+  text-decoration: line-through;
+}
+
+.sg-input__cell--next {
+  border: 2px solid var(--sg-next);
+  font-weight: 700;
+}
+
+.sg-grid-wrap {
+  overflow-x: auto;
+}
+
+.sg-col-heads,
+.sg-grid {
+  display: grid;
+  gap: 6px;
+}
+
+.sg-col-heads {
+  margin-bottom: 4px;
+}
+
+.sg-col-head {
+  text-align: center;
+  font-size: 12px;
+  color: var(--sg-muted);
+}
+
+.sg-col-head--active {
+  color: var(--sg-next);
+  font-weight: 700;
+}
+
+.sg-cell {
+  min-height: 44px;
+  border: 1px solid var(--sg-line);
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  font-variant-numeric: tabular-nums;
+}
+
+.sg-cell--empty {
+  color: var(--sg-muted);
+  border-style: dashed;
+}
+
+.sg-cell--filled {
+  background: var(--sg-fill);
+  color: var(--sg-fill-ink);
+}
+
+.sg-cell--odd.sg-cell--filled {
+  background: var(--sg-odd);
+}
+
+.sg-cell small {
+  position: absolute;
+  right: 4px;
+  bottom: 2px;
+  font-size: 10px;
+  color: var(--sg-muted);
+}
+
+.sg-cell--cursor {
+  outline: 3px solid var(--sg-cursor);
+  outline-offset: 1px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .sg-view {
+    --sg-ink: #e2e8f0;
+    --sg-muted: #94a3b8;
+    --sg-line: #475569;
+    --sg-fill: #14532d;
+    --sg-fill-ink: #dcfce7;
+    --sg-odd: #0c4a6e;
+    --sg-next: #93c5fd;
+  }
+}

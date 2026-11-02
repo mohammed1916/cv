@@ -1,0 +1,125 @@
+.de-view {
+  --de-ink: #0f172a;
+  --de-muted: #475569;
+  --de-line: #cbd5e1;
+  --de-box: #f8fafc;
+  --de-ok: #15803d;
+  --de-ok-bg: #dcfce7;
+  --de-bad: #b91c1c;
+  --de-bad-bg: #fee2e2;
+  --de-neutral: #334155;
+  color: var(--de-ink);
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.de-empty {
+  color: var(--de-muted);
+  margin: 0;
+}
+
+.de-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.de-badge {
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: 13px;
+  color: #fff;
+  background: var(--de-neutral);
+}
+
+.de-badge--equal { background: var(--de-ok); }
+.de-badge--different { background: var(--de-bad); }
+
+.de-pair {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.de-box {
+  margin: 0;
+  border: 1px solid var(--de-line);
+  border-radius: 10px;
+  background: var(--de-box);
+  padding: 8px;
+  min-width: 0;
+}
+
+.de-box figcaption {
+  font-size: 12px;
+  color: var(--de-muted);
+  margin-bottom: 4px;
+}
+
+.de-box pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 13px;
+}
+
+.de-sign {
+  align-self: center;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.de-tree h4 {
+  margin: 0 0 6px;
+  font-size: 14px;
+}
+
+.de-tree ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.de-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  border-left: 3px solid var(--de-line);
+  border-radius: 6px;
+  padding: 3px 8px;
+  font-size: 13px;
+}
+
+.de-row--ok { border-left-color: var(--de-ok); background: var(--de-ok-bg); }
+.de-row--bad { border-left-color: var(--de-bad); background: var(--de-bad-bg); }
+
+.de-kind {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--de-muted);
+  min-width: 42px;
+}
+
+.de-result {
+  margin-left: auto;
+  font-weight: 600;
+}
+
+@media (prefers-color-scheme: dark) {
+  .de-view {
+    --de-ink: #e2e8f0;
+    --de-muted: #94a3b8;
+    --de-line: #475569;
+    --de-box: #1e293b;
+    --de-ok-bg: #14532d;
+    --de-bad-bg: #7f1d1d;
+    --de-neutral: #475569;
+  }
+}
