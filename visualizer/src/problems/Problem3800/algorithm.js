@@ -11,39 +11,64 @@ export function parseInput(text) {
   return { s, t, flipCost, swapCost, crossCost }
 }
 
+// Price of one tested number of mixed pairs, split into the parts a learner can check.
+function breakdownFor(mixed, typeA, typeB, mixedCost, sameCost, flipCost) {
+  const a = typeA - mixed
+  const b = typeB - mixed
+  const mixedPart = mixed * mixedCost
+  const aPairs = Math.floor(a / 2)
+  const aSingle = a % 2
+  const bPairs = Math.floor(b / 2)
+  const bSingle = b % 2
+  const aPart = aPairs * sameCost + aSingle * flipCost
+  const bPart = bPairs * sameCost + bSingle * flipCost
+  return { mixed, a, b, mixedPart, aPairs, aSingle, bPairs, bSingle, aPart, bPart, total: mixedPart + aPart + bPart }
+}
+
 export function buildTrace({ s, t, flipCost, swapCost, crossCost }) {
   const frames = []
-  let typeA = 0
-  let typeB = 0
-  frames.push({ pythonLine: at('type_a = 0'), phase: 'start', activeLine: L('count type A mismatches'), index: -1, mixed: -1, best: null, message: 'Start with no mismatches counted.' })
-  for (let i = 0; i < s.length; i++) {
-    let kind
-    if (s[i] === '0' && t[i] === '1') { typeA++; kind = 'A' }
-    else if (s[i] === '1' && t[i] === '0') { typeB++; kind = 'B' }
-    else kind = 'same'
-    const message = kind === 'A' ? `Index ${i}: s has 0 and t has 1, a type A mismatch.`
-      : kind === 'B' ? `Index ${i}: s has 1 and t has 0, a type B mismatch.`
-      : `Index ${i}: the bits already agree.`
-    frames.push({ pythonLine: at('if s[i] == \'0\' and t[i] == \'1\''), phase: 'scan', activeLine: L('for each index'), index: i, mixed: -1, best: null, kind, message })
-  }
+  const n = s.length
+  // Classification of every index, computed up front but revealed only as the scan reaches it.
+  const allKinds = Array.from({ length: n }, (_, i) => {
+    if (s[i] === '0' && t[i] === '1') return 'A'
+    if (s[i] === '1' && t[i] === '0') return 'B'
+    return 'same'
+  })
+  const revealed = i => allKinds.map((k, j) => (j <= i ? k : null))
+  const typeA = allKinds.filter(k => k === 'A').length
+  const typeB = allKinds.filter(k => k === 'B').length
   const mixedCost = Math.min(swapCost, 2 * flipCost)
   const sameCost = Math.min(2 * flipCost, crossCost + swapCost)
-  frames.push({ pythonLine: at('mixed_cost = min'), phase: 'costs', activeLine: L('mixed pair cost = min'), index: -1, mixed: -1, best: null, typeA, typeB, mixedCost, sameCost, message: `Mixed pair costs ${mixedCost}; same-type pair costs ${sameCost}.` })
-  frames.push({ pythonLine: at('best = None'), phase: 'costs', activeLine: L('best = nothing'), index: -1, mixed: -1, best: null, typeA, typeB, mixedCost, sameCost, message: 'No candidate is recorded yet.' })
+  const counts = { typeA: 0, typeB: 0 }
+
+  frames.push({ pythonLine: at('type_a = 0'), phase: 'start', activeLine: L('count type A mismatches'), index: -1, mixed: -1, best: null, kinds: revealed(-1), counts: { ...counts }, tested: [], winner: null, message: 'Start with no mismatches counted. Every position is still unprocessed.' })
+  for (let i = 0; i < n; i++) {
+    const kind = allKinds[i]
+    if (kind === 'A') counts.typeA++
+    if (kind === 'B') counts.typeB++
+    const message = kind === 'A' ? `Index ${i}: s has 0 and t has 1, so it is a type A mismatch.`
+      : kind === 'B' ? `Index ${i}: s has 1 and t has 0, so it is a type B mismatch.`
+      : `Index ${i}: the bits already agree, so it is not a mismatch.`
+    frames.push({ pythonLine: at(kind === 'B' ? 'elif s[i] == \'1\' and t[i] == \'0\'' : 'if s[i] == \'0\' and t[i] == \'1\''), phase: 'scan', activeLine: L('for each index'), index: i, mixed: -1, best: null, kind, kinds: revealed(i), counts: { ...counts }, tested: [], winner: null, message })
+  }
+  frames.push({ pythonLine: at('mixed_cost = min'), phase: 'costs', activeLine: L('mixed pair cost = min'), index: -1, mixed: -1, best: null, kinds: revealed(n), counts: { typeA, typeB }, typeA, typeB, mixedCost, sameCost, tested: [], winner: null, message: `Mixed pair costs min(${swapCost}, 2 times ${flipCost}) = ${mixedCost}; same-type pair costs min(2 times ${flipCost}, ${crossCost} plus ${swapCost}) = ${sameCost}.` })
+  frames.push({ pythonLine: at('best = None'), phase: 'costs', activeLine: L('best = nothing'), index: -1, mixed: -1, best: null, kinds: revealed(n), counts: { typeA, typeB }, typeA, typeB, mixedCost, sameCost, tested: [], winner: null, message: 'No candidate is recorded yet.' })
+
   let best = null
+  let winner = null
+  const tested = []
   for (let mixed = 0; mixed <= Math.min(typeA, typeB); mixed++) {
-    const a = typeA - mixed
-    const b = typeB - mixed
-    let cost = mixed * mixedCost
-    cost += Math.floor(a / 2) * sameCost + (a % 2) * flipCost
-    cost += Math.floor(b / 2) * sameCost + (b % 2) * flipCost
-    frames.push({ pythonLine: at('cost = mixed * mixed_cost'), phase: 'try', activeLine: L('cost = m times mixed pair cost'), index: -1, mixed, best, typeA, typeB, cost, message: `Pair ${mixed} mixed mismatch${mixed === 1 ? '' : 'es'} and price the rest: total ${cost}.` })
+    const breakdown = breakdownFor(mixed, typeA, typeB, mixedCost, sameCost, flipCost)
+    const cost = breakdown.total
+    tested.push(breakdown)
+    frames.push({ pythonLine: at('cost = mixed * mixed_cost'), phase: 'try', activeLine: L('cost = m times mixed pair cost'), index: -1, mixed, best, typeA, typeB, mixedCost, sameCost, cost, breakdown, kinds: revealed(n), counts: { typeA, typeB }, tested: tested.slice(), winner, message: `Try ${mixed} mixed pair${mixed === 1 ? '' : 's'}: ${breakdown.mixedPart} for mixed pairs, ${breakdown.aPart} for the ${breakdown.a} left of type A, ${breakdown.bPart} for the ${breakdown.b} left of type B, total ${cost}.` })
     if (best === null || cost < best) {
       best = cost
-      frames.push({ pythonLine: at('best = cost'), phase: 'best', activeLine: L('keep the cheapest'), index: -1, mixed, best, typeA, typeB, cost, message: `New best is ${best}.` })
+      winner = breakdown
+      frames.push({ pythonLine: at('best = cost'), phase: 'best', activeLine: L('keep the cheapest'), index: -1, mixed, best, typeA, typeB, mixedCost, sameCost, cost, breakdown, kinds: revealed(n), counts: { typeA, typeB }, tested: tested.slice(), winner, message: `New best is ${best} with ${mixed} mixed pair${mixed === 1 ? '' : 's'}.` })
     }
   }
-  frames.push({ pythonLine: at('return best'), phase: 'done', activeLine: L('return best'), index: -1, mixed: -1, best, typeA, typeB, message: `Minimum cost is ${best}.` })
+  frames.push({ pythonLine: at('return best'), phase: 'done', activeLine: L('return best'), index: -1, mixed: winner.mixed, best, typeA, typeB, mixedCost, sameCost, kinds: revealed(n), counts: { typeA, typeB }, tested: tested.slice(), winner, message: `Minimum cost is ${best}, from ${winner.mixed} mixed pair${winner.mixed === 1 ? '' : 's'}.` })
   return { input: { s, t, flipCost, swapCost, crossCost }, result: best, frames }
 }
 
@@ -60,7 +85,11 @@ export const code = `minimum cost to make s and t equal
     add pairs of same type and a single flip for an odd one, for a and for b
     keep the cheapest cost in best
   return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const L = s => {
+  const line = code.findIndex(c => c.text.includes(s)) + 1
+  if (line === 0) throw new Error(`Missing pseudocode line: ${s}`)
+  return line
+}
 
 export const python = `def min_cost_to_equal(s, t, flip_cost, swap_cost, cross_cost):
     type_a = 0
@@ -84,4 +113,8 @@ export const python = `def min_cost_to_equal(s, t, flip_cost, swap_cost, cross_c
     return best
 `
 const PY_LINES = python.split('\n')
-const at = s => PY_LINES.findIndex(line => line.includes(s)) + 1
+const at = s => {
+  const line = PY_LINES.findIndex(line => line.includes(s)) + 1
+  if (line === 0) throw new Error(`Missing python line: ${s}`)
+  return line
+}

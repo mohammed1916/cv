@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import IndexedSequence from '../../components/shared/IndexedSequence'
+import View3800 from './View3800'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -23,15 +23,9 @@ const definition = {
 }
 
 export default function MinimumCostToMakeTwoBinaryStringsEqual() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="s" length={run.input.s.length} valueAt={i => run.input.s[i]} active={step.index}
-      roleAt={i => (run.input.s[i] !== run.input.t[i] ? 'mismatch' : '')} />
-    <IndexedSequence label="t" length={run.input.t.length} valueAt={i => run.input.t[i]} active={step.index}
-      roleAt={i => (run.input.s[i] !== run.input.t[i] ? 'mismatch' : '')} />
-    <output aria-label="Pairing state">{`type A ${step.typeA ?? '?'}, type B ${step.typeB ?? '?'}, mixed pairs ${step.mixed >= 0 ? step.mixed : 'none'}, best ${step.best ?? 'none'}`}</output>
-  </>} renderReasoning={() => <>
-    <p>Only indices where the bits disagree matter. Type A has s 0 and t 1; type B has s 1 and t 0.</p>
-    <p>A mixed pair is fixed by one within-string swap or by two flips. A same-type pair is fixed by two flips or by a cross swap plus a within-string swap. A lone mismatch needs one flip.</p>
-    <p>Try every number of mixed pairs and keep the cheapest total.</p>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <View3800 run={run} step={step} />} renderReasoning={() => <>
+    <p>Only indices where the bits disagree matter. Type A has s 0 and t 1; type B has s 1 and t 0. Positions are classified only as the scan reaches them.</p>
+    <p>A mixed pair (one A with one B) is fixed by one within-string swap or by two flips. A same-type pair is fixed by two flips or by a cross swap plus a within-string swap. A lone leftover mismatch needs one flip.</p>
+    <p>Try every number of mixed pairs, price the leftovers, and keep the cheapest total. The winning breakdown stays visible at the result.</p>
   </>} />
 }

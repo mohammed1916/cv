@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { buildTrace, parseInput, python } from './algorithm.js'
+import { buildTrace, parseInput, code, python } from './algorithm.js'
 
 const solve = (s, t, flipCost, swapCost, crossCost) => buildTrace({ s, t, flipCost, swapCost, crossCost }).result
 
@@ -24,6 +24,64 @@ test('3800 trace frames carry the python line they execute', () => {
     assert.ok(typeof frame.phase === 'string' && typeof frame.message === 'string' && typeof frame.activeLine === 'number')
   }
   assert.ok(frames.some(f => lines[f.pythonLine - 1].includes('return best')))
+})
+
+test('3800 scan frames reveal classification only up to the current index', () => {
+  const { frames } = buildTrace({ s: '0110', t: '1001', flipCost: 3, swapCost: 4, crossCost: 1 })
+  const scans = frames.filter(f => f.phase === 'scan')
+  assert.equal(scans.length, 4)
+  scans.forEach((f, i) => {
+    f.kinds.forEach((k, j) => {
+      if (j > i) assert.equal(k, null, `index ${j} leaked at scan ${i}`)
+      else assert.notEqual(k, null, `index ${j} missing at scan ${i}`)
+    })
+  })
+  assert.ok(frames.filter(f => f.phase === 'start').every(f => f.kinds.every(k => k === null)))
+})
+
+test('3800 persists the winning breakdown to the result and matches the optimum', () => {
+  const cases = [
+    ['01000', '10111', 10, 2, 2, 16],
+    ['001', '110', 2, 100, 100, 6],
+    ['1010', '1010', 5, 5, 5, 0],
+  ]
+  for (const [s, t, flipCost, swapCost, crossCost, expected] of cases) {
+    const { frames, result } = buildTrace({ s, t, flipCost, swapCost, crossCost })
+    const done = frames.at(-1)
+    assert.equal(done.phase, 'done')
+    assert.equal(result, expected)
+    assert.ok(done.winner, 'done frame keeps the winner')
+    assert.equal(done.winner.total, result)
+    assert.equal(done.winner.mixedPart + done.winner.aPart + done.winner.bPart, result)
+    // The winner stays visible from the point it is recorded to the end.
+    const firstBest = frames.findIndex(f => f.phase === 'best')
+    if (firstBest >= 0) assert.ok(frames.slice(firstBest).every(f => f.winner && f.winner.total === f.best))
+    // Each tested count is listed and the winner is the cheapest of them.
+    assert.equal(done.tested.length, Math.min(done.typeA, done.typeB) + 1)
+    assert.equal(Math.min(...done.tested.map(b => b.total)), result)
+    assert.equal(done.tested.find(b => b.mixed === done.winner.mixed).total, result)
+  }
+})
+
+test('3800 winning breakdown reproduces the official example 1 split', () => {
+  const { frames } = buildTrace({ s: '01000', t: '10111', flipCost: 10, swapCost: 2, crossCost: 2 })
+  const done = frames.at(-1)
+  assert.equal(done.winner.mixed, 1)
+  assert.equal(done.winner.total, 16)
+})
+
+test('3800 every frame line refers to a real pseudocode and python line', () => {
+  const pyLines = python.split('\n')
+  for (const input of [
+    { s: '01000', t: '10111', flipCost: 10, swapCost: 2, crossCost: 2 },
+    { s: '1111', t: '0000', flipCost: 1, swapCost: 3, crossCost: 2 },
+  ]) {
+    const { frames } = buildTrace(input)
+    for (const f of frames) {
+      assert.ok(f.activeLine >= 1 && f.activeLine <= code.length, JSON.stringify(f))
+      assert.ok(f.pythonLine >= 1 && f.pythonLine <= pyLines.length, JSON.stringify(f))
+    }
+  }
 })
 
 // Independent oracle: Dijkstra over every (s, t) pair of strings, using every allowed operation.
