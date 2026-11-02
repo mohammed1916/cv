@@ -1,15 +1,11 @@
-# Latest unblock checkpoint — 2026-11-02
+# Current task: complete every LeetCode visualizer
 
-Read [the source and held-work follow-up](docs/reviews/2026-11-02-claude-unblock.md) first: five more official requirement records are available, and comparative tests show that neither a blanket restore nor blind acceptance of the held work is justified. Continue all three queues without asking again whether legacy conversion is in scope.
+Start with [the authoritative completion contract](docs/CATALOG-COMPLETION-CONTRACT.md). It defines full per-problem requirements, proper visual teaching, completion gates, continuous execution, source fallbacks, held-work preservation and session checkpoints. All legacy conversion, partial repair, missing implementations and browser acceptance are already in scope.
 
-# Latest clarification — 2026-11-02
+Then read [the latest nine-problem review](docs/reviews/2026-11-02-latest-visualization-review.md): 38 solver tests pass, but 9/25 routed presets fail parsing or frame-line checks. Problem 3880 has an official-domain error and an invalid default. The review provides concrete visual designs and acceptance cases for all nine; fix these issues before copying their patterns.
 
-The user wants **all LeetCode problems solved**. Legacy conversion is already in scope, not a separate job requiring a new request. Start with [the statement source directory and continuation instructions](docs/statement-sources/README.md). It indexes every stored catalog entry and includes five newly sourced recent problems. Do not block on model recall or a single failed WebFetch; use the documented source fallbacks. Preserve and reconcile working-tree changes rather than blanket-restoring folders.
+Read [source/held-work evidence](docs/reviews/2026-11-02-claude-unblock.md), [statement sourcing workflow](docs/statement-sources/README.md), and [the historical detailed handoff](docs/CLAUDE-CATALOG-HANDOFF.md) for prior repairs and the original acceptance queue. Historical counts and HEADs must be reconciled with current code. The new contract supersedes historical skip-tests or legacy-out-of-scope guidance.
 
-# Current catalog completion task
+Preserve the dirty working tree. The 36 held tracked files are in 12 folders, with 12 test files; compare and merge rather than blanket restore. A blocked source blocks that entry, not all work. Continue the next ready queue without repeatedly asking whether to proceed. At a session limit, checkpoint exact remaining work for resumption; never claim unrun verification or full completion.
 
-Read [the complete Claude catalog handoff](docs/CLAUDE-CATALOG-HANDOFF.md) first. It records the current user objective, uncommitted Codex repairs, exact evidence, the 56-problem acceptance queue, completion gates, and the full legacy/missing backlog. Its current validation requirements supersede the historical skip-tests guidance in `docs/catalog-work-plan.md`. Preserve the existing working-tree changes.
-
-# Review follow-up
-
-Before changing shared algorithm visualizations, read [the recent-commit review](docs/reviews/2026-10-27-recent-commits.md). It records three reproduced issues, their fix criteria, and verification commands at commit `31acf7741`. Re-check findings against current code before fixing them; update their status when resolved.
+Before modifying shared views, consult [the October 27 review](docs/reviews/2026-10-27-recent-commits.md) and retain its regression checks. Recheck old findings against current source rather than assuming they remain open.

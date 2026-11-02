@@ -1,0 +1,21 @@
+{
+  "number": 3880,
+  "title": "Minimum Absolute Difference Between Two Values",
+  "source": "https://leetcode.com/problems/minimum-absolute-difference-between-two-values/description/",
+  "checkedOn": "2026-11-02",
+  "sourceKind": "official-page-via-web-tool",
+  "contentKind": "paraphrased-requirements-with-example-data",
+  "summary": "Given an array containing 0, 1 and 2, find the smallest absolute index difference between an occurrence of 1 and an occurrence of 2. Return -1 if no such pair exists.",
+  "officialConstraints": "1 <= nums.length <= 100; every entry is an integer in [0, 2].",
+  "examples": [
+    {"input": {"nums": [1, 0, 0, 2, 0, 1]}, "output": 2},
+    {"input": {"nums": [1, 0, 1, 0]}, "output": -1}
+  ],
+  "semanticPitfalls": [
+    "Zeros are valid input but never endpoints of a valid pair.",
+    "The minimized quantity is the index difference, not the value difference.",
+    "Either missing endpoint value means return -1.",
+    "The current visualization cap of 20 is not the official maximum length of 100."
+  ],
+  "implementationReview": "At cff33e863 the parser rejects zeros, the default preset contains 3, and pair frames have activeLine 0. This sourced note does not certify the implementation. See docs/reviews/2026-11-02-latest-visualization-review.md."
+}

@@ -1,6 +1,6 @@
 # LeetCode statement source directory
 
-4073 problems from the repository catalog dated 2026-10-05T09:48:48.663Z. 210 local requirement summaries; 147 source-attempt records without summaries.
+4073 problems from the repository catalog dated 2026-10-05T09:48:48.663Z. 211 local requirement summaries; 147 source-attempt records without summaries.
 
 This provides official statement links for every catalog entry, not full statement text for every entry. Unfetched links are not certified accessible. Paid statements may require authorized access. Notes are paraphrased requirements; some older notes omit examples. Implementation and verification remain separate.
 
@@ -3887,7 +3887,7 @@ Read [the sourcing workflow](README.md). Machine-readable equivalent: [index.jso
 | 3877 | [Minimum Removals to Achieve Target XOR](https://leetcode.com/problems/minimum-removals-to-achieve-target-xor/description/) | Free in snapshot | Not cached |
 | 3878 | [Count Good Subarrays](https://leetcode.com/problems/count-good-subarrays/description/) | Free in snapshot | Not cached |
 | 3879 | [Maximum Distinct Path Sum in a Binary Tree](https://leetcode.com/problems/maximum-distinct-path-sum-in-a-binary-tree/description/) | Paid in snapshot | Not cached |
-| 3880 | [Minimum Absolute Difference Between Two Values](https://leetcode.com/problems/minimum-absolute-difference-between-two-values/description/) | Free in snapshot | Not cached |
+| 3880 | [Minimum Absolute Difference Between Two Values](https://leetcode.com/problems/minimum-absolute-difference-between-two-values/description/) | Free in snapshot | [Requirement summary](../requirements/3880.json) |
 | 3881 | [Direction Assignments with Exactly K Visible People](https://leetcode.com/problems/direction-assignments-with-exactly-k-visible-people/description/) | Free in snapshot | Not cached |
 | 3882 | [Minimum XOR Path in a Grid](https://leetcode.com/problems/minimum-xor-path-in-a-grid/description/) | Free in snapshot | Not cached |
 | 3883 | [Count Non Decreasing Arrays With Given Digit Sums](https://leetcode.com/problems/count-non-decreasing-arrays-with-given-digit-sums/description/) | Free in snapshot | Not cached |

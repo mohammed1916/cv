@@ -1,6 +1,6 @@
 # Claude handoff: complete the 4,073-problem catalog
 
-**2026-11-02 continuation:** Read [the statement directory and current unblock instructions](statement-sources/README.md) first. The objective is every LeetCode problem, including legacy conversion. Current observed HEAD is `35f0307ff`; baseline/count/uncommitted-state claims below describe 2026-10-28 and must be reconciled against current code, not assumed current.
+**2026-11-02 authoritative continuation:** Read [the completion contract](CATALOG-COMPLETION-CONTRACT.md) and [latest visualization review](reviews/2026-11-02-latest-visualization-review.md) first. They supply current requirements, continuous-work instructions and concrete recent defects. The sections below are the historical 2026-10-28 repair record; their HEAD, counts and dirty-state descriptions must be reconciled with the checkout, not assumed current.
 
 Updated 2026-10-28. Read this first for catalog completion. This is an implementation handoff, not a claim that the catalog or the 17 partial repairs are finished.
 
