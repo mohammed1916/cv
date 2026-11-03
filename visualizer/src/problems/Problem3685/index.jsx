@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/subsequence-sum-after-capping-elements/',
   complexity: 'O(n^2 k) time with the subset-sum table for each cap. The visualization caps n at 20 and k at 200.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[4,3,2,4],"k":5}' },
-    { label: 'Example 2', input: '{"nums":[1,2,3,4,5],"k":3}' },
+    { label: 'Example 1', input: '{"nums":[6,1,5,2],"k":6}' },
+    { label: 'Example 2', input: '{"nums":[9,4,4,7],"k":8}' },
   ],
 }
 

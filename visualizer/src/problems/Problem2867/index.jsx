@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-valid-paths-in-a-tree/',
   complexity: 'O(n^2) time in this walk-per-node version. The visualization caps n at 10.',
   examples: [
-    { label: 'Example', input: '{"n":5,"edges":[[1,2],[1,3],[2,4],[2,5]]}' },
+    { label: 'Example', input: '{"n":6,"edges":[[2,1],[2,3],[2,4],[4,5],[4,6]]}' },
     { label: 'Path', input: '{"n":3,"edges":[[1,2],[2,3]]}' },
   ],
 }

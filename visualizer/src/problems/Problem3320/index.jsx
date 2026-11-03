@@ -16,8 +16,8 @@ const definition = {
   url: 'https://leetcode.com/problems/count-the-number-of-winning-sequences/',
   complexity: 'O(n^2) time and O(n) space for string length n (score differences are at most n). The visualization caps s at 10 characters.',
   examples: [
-    { label: 'Example 1', input: '{"s": "FFF"}' },
-    { label: 'Example 2', input: '{"s": "FWEFW"}' },
+    { label: 'Example 1', input: '{"s": "WEF"}' },
+    { label: 'Example 2', input: '{"s": "EWFFE"}' },
   ],
 }
 

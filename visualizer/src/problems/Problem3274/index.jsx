@@ -19,8 +19,8 @@ const definition = {
   url: 'https://leetcode.com/problems/check-if-two-chessboard-squares-have-the-same-color/',
   complexity: 'O(1) time and O(1) space.',
   examples: [
-    { label: 'Example 1', input: '{"coordinate1": "a1", "coordinate2": "c3"}' },
-    { label: 'Example 2', input: '{"coordinate1": "a1", "coordinate2": "h3"}' },
+    { label: 'Example 1', input: '{"coordinate1": "e4", "coordinate2": "b7"}' },
+    { label: 'Example 2', input: '{"coordinate1": "d5", "coordinate2": "g3"}' },
   ],
 }
 

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/count-the-number-of-houses-at-a-certain-distance-ii/',
   complexity: 'O(n^2) time in this trace, using the three-way shortest distance for each pair. The contest limit needs an O(n) counting method.',
   examples: [
-    { label: 'Example 1', input: '{"n":3,"x":1,"y":3}' },
-    { label: 'Example 2', input: '{"n":5,"x":2,"y":4}' },
+    { label: 'Example 1', input: '{"n":7,"x":2,"y":6}' },
+    { label: 'Example 2', input: '{"n":6,"x":1,"y":4}' },
   ],
 }
 

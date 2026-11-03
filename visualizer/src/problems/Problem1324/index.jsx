@@ -15,12 +15,12 @@ const definition = {
   code,
   python,
   pythonLineMap,
-  inputLabel: 'Sentence s (e.g. {"s":"HOW ARE YOU"})',
+  inputLabel: 'Sentence s (e.g. {"s":"A BRIGHT TEA"})',
   url: "https://leetcode.com/problems/print-words-vertically/",
   complexity: "O(n) time and O(n) space for the 200-character limit, where n is the length of s.",
   examples: [
-    { label: "HOW ARE YOU", input: JSON.stringify({ s: "HOW ARE YOU" }) },
-    { label: "TO BE OR NOT TO BE", input: JSON.stringify({ s: "TO BE OR NOT TO BE" }) },
+    { label: "A BRIGHT TEA", input: '{"s":"A BRIGHT TEA"}' },
+    { label: "LATE NIGHT WALK", input: '{"s":"LATE NIGHT WALK"}' },
   ],
 };
 

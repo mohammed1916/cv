@@ -22,7 +22,7 @@ export const python = `def sumCounts(nums):
 
 export function parseInput(text) {
   let data
-  try { data = JSON.parse(text) } catch { throw new Error('Input must be a JSON object such as {"nums": [1,2,1]}') }
+  try { data = JSON.parse(text) } catch { throw new Error('Input must be a JSON object such as {"nums": [2,5,2,5]}') }
   if (!data || typeof data !== 'object' || Array.isArray(data)) throw new Error('Input must be a JSON object with key nums')
   const { nums } = data
   if (!Array.isArray(nums) || nums.length < 1 || nums.length > 50) throw new Error('nums must be an array of 1 to 50 integers for the visualization')

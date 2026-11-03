@@ -58,7 +58,7 @@ export function parseInput(text) {
   try {
     data = JSON.parse(text);
   } catch {
-    throw new Error('Input must be JSON, for example {"s": "FWEFW"}');
+    throw new Error('Input must be JSON, for example {"s": "EWFFE"}');
   }
   if (!data || typeof data !== 'object' || Array.isArray(data)) throw new Error('Input must be a JSON object with s');
   const { s } = data;
@@ -82,7 +82,7 @@ export function buildTrace(input) {
   });
 
   for (let b = 0; b < 3; b++) dp[b][gain(moves[b], s[0]) + offset] = 1;
-  snap('start', 12, at('dp[b][gain(moves[b], s[0])'), `Round 1 for Alice's ${s[0]}: Bob can play each move once.`, 'Each first move starts a sequence with its own score difference.');
+  snap('start', 4, at('dp[b][gain(moves[b], s[0])'), `Round 1 for Alice's ${s[0]}: Bob can play each move once.`, 'Each first move starts a sequence with its own score difference.');
 
   for (let i = 1; i < n; i++) {
     state.round = i;
@@ -99,7 +99,7 @@ export function buildTrace(input) {
       }
     }
     dp = next;
-    snap('round', 15, at('new = [[0]'), `Round ${i + 1} against ${s[i]} is complete.`, `Bob cannot repeat the previous move, so each row counts sequences ending in that move.`);
+    snap('round', 10, at('new = [[0]'), `Round ${i + 1} against ${s[i]} is complete.`, `Bob cannot repeat the previous move, so each row counts sequences ending in that move.`);
   }
 
   state.answer = 0;

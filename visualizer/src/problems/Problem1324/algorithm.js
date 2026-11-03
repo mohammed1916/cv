@@ -2,7 +2,7 @@ const SENTENCE_PATTERN = /^[A-Z]+(?: [A-Z]+)*$/
 
 export function parseInput(text) {
   let obj
-  try { obj = typeof text === 'string' ? JSON.parse(text) : text } catch { throw new Error('Use a JSON object like {"s":"HOW ARE YOU"}.') }
+  try { obj = typeof text === 'string' ? JSON.parse(text) : text } catch { throw new Error('Use a JSON object like {"s":"A BRIGHT TEA"}.') }
   if (!obj || typeof obj !== 'object' || typeof obj.s !== 'string') throw new Error('Use an object with a string field s.')
   if (obj.s.length < 1 || obj.s.length > 200) throw new Error('s must be 1 to 200 characters long.')
   if (!SENTENCE_PATTERN.test(obj.s)) throw new Error('s must be uppercase letters with single spaces between words (no leading, trailing or double spaces).')
