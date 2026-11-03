@@ -1,0 +1,86 @@
+.wda-view {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px 12px 12px;
+  box-sizing: border-box;
+  overflow-x: auto;
+}
+
+.wda-empty,
+.wda-key {
+  margin: 0;
+  opacity: 0.75;
+  font-size: 0.9rem;
+}
+
+.wda-track {
+  position: relative;
+  height: 130px;
+  flex: none;
+}
+
+.wda-tile {
+  position: absolute;
+  top: 34px;
+  width: 64px;
+  height: 64px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(127, 127, 127, 0.5);
+  border-radius: 10px;
+}
+
+.wda-tile--anchor,
+.wda-tile--anchor-end {
+  border-color: #2563eb;
+  background: rgba(37, 99, 235, 0.16);
+}
+
+.wda-tile--scan {
+  border-color: #d97706;
+  background: rgba(217, 119, 6, 0.2);
+}
+
+.wda-tile--hit {
+  border-color: #15803d;
+  background: rgba(21, 128, 61, 0.22);
+}
+
+.wda-word {
+  font-family: ui-monospace, monospace;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.wda-index {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+.wda-bracket {
+  position: absolute;
+  top: 6px;
+  height: 22px;
+  border: 2px solid #7c3aed;
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #7c3aed;
+}
+
+.wda-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}

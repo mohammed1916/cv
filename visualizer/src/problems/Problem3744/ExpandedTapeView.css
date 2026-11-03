@@ -1,0 +1,75 @@
+.et-view {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  box-sizing: border-box;
+  overflow-x: auto;
+}
+
+.et-empty,
+.et-key {
+  margin: 0;
+  opacity: 0.75;
+  font-size: 0.9rem;
+}
+
+.et-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+  border: 1px solid rgba(127, 127, 127, 0.35);
+  border-radius: 8px;
+}
+
+.et-group--current {
+  border: 2px solid #d97706;
+  background: rgba(217, 119, 6, 0.1);
+}
+
+.et-group--passed {
+  opacity: 0.45;
+}
+
+.et-word {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.et-cells {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.et-cell {
+  min-width: 22px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background: rgba(37, 99, 235, 0.14);
+  font-family: ui-monospace, monospace;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.et-cell--space {
+  background: rgba(127, 127, 127, 0.12);
+  font-weight: 400;
+}
+
+.et-cell--target {
+  outline: 3px solid #7c3aed;
+  background: rgba(124, 58, 237, 0.25);
+}
+
+.et-readout {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  font-weight: 600;
+}

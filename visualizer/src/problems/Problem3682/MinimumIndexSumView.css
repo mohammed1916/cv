@@ -1,0 +1,107 @@
+.mis-view {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 12px;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+.mis-empty,
+.mis-none,
+.mis-key {
+  opacity: 0.75;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.mis-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow-x: auto;
+}
+
+.mis-label {
+  width: 56px;
+  flex: none;
+  font-weight: 600;
+  font-family: ui-monospace, monospace;
+}
+
+.mis-cells {
+  display: flex;
+  gap: 6px;
+}
+
+.mis-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 42px;
+  padding: 6px 4px;
+  border: 2px solid rgba(127, 127, 127, 0.45);
+  border-radius: 8px;
+}
+
+.mis-cell--current {
+  border-color: #d97706;
+  background: rgba(217, 119, 6, 0.18);
+}
+
+.mis-cell--partner {
+  border-color: #0f766e;
+  background: rgba(15, 118, 110, 0.18);
+}
+
+.mis-cell--repeat {
+  opacity: 0.4;
+}
+
+.mis-cell--answer {
+  border-color: #7c3aed;
+  background: rgba(124, 58, 237, 0.2);
+}
+
+.mis-value {
+  font-weight: 700;
+  font-family: ui-monospace, monospace;
+}
+
+.mis-index {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+.mis-readout {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.95rem;
+}
+
+.mis-best {
+  font-weight: 600;
+}
+
+.mis-answer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.mis-chip {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(124, 58, 237, 0.22);
+  font-family: ui-monospace, monospace;
+  font-weight: 700;
+}
+
+.mis-seen {
+  margin-left: auto;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}

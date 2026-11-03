@@ -1,0 +1,84 @@
+.es-view {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 12px;
+  box-sizing: border-box;
+  overflow-x: auto;
+}
+
+.es-empty,
+.es-key,
+.es-none {
+  margin: 0;
+  opacity: 0.75;
+  font-size: 0.9rem;
+}
+
+.es-tape {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  font-family: ui-monospace, monospace;
+  font-size: 1.05rem;
+}
+
+.es-char {
+  min-width: 14px;
+  text-align: center;
+  padding: 3px 1px;
+  border-bottom: 2px solid transparent;
+}
+
+.es-char--read {
+  opacity: 0.45;
+}
+
+.es-char--cursor {
+  border-bottom-color: #d97706;
+  font-weight: 800;
+}
+
+.es-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.es-frame {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border: 2px solid #2563eb;
+  border-radius: 8px;
+  background: rgba(37, 99, 235, 0.08);
+  font-size: 0.9rem;
+}
+
+.es-op {
+  font-family: ui-monospace, monospace;
+  font-weight: 800;
+  color: #2563eb;
+}
+
+.es-arg {
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: rgba(21, 128, 61, 0.18);
+  font-family: ui-monospace, monospace;
+}
+
+.es-pending {
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.es-readout {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  font-weight: 600;
+}
