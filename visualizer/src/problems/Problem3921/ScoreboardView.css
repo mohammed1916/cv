@@ -1,0 +1,12 @@
+.scoreboard__totals { display: flex; gap: 24px; margin-bottom: 12px; }
+.scoreboard__totals p { display: grid; margin: 0; }
+.scoreboard__totals span { font-size: 12px; opacity: 0.75; }
+.scoreboard__totals strong { font-size: 28px; font-variant-numeric: tabular-nums; }
+.scoreboard__pips { display: flex; gap: 6px; list-style: none; padding: 0; margin: 0 0 14px; }
+.scoreboard__pips li { display: grid; place-items: center; width: 28px; height: 28px; border: 1px solid rgba(127, 127, 127, 0.6); border-radius: 50%; font-size: 12px; font-weight: 700; }
+.scoreboard__pips li.is-out { background: #b91c1c; border-color: #b91c1c; color: #fff; }
+.scoreboard__tokens { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 0 0 12px; }
+.scoreboard__tokens li { min-width: 40px; padding: 6px 8px; text-align: center; border: 1px solid rgba(127, 127, 127, 0.5); border-radius: 6px; font-family: ui-monospace, monospace; }
+.scoreboard__tokens .is-read { opacity: 0.6; }
+.scoreboard__tokens .is-current { border: 2px solid #2563eb; font-weight: 700; }
+.scoreboard__tokens .is-ignored { opacity: 0.35; text-decoration: line-through; }

@@ -1,0 +1,11 @@
+.divisor__present { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0 0 12px; }
+.divisor__present span { font-size: 13px; opacity: 0.8; margin-right: 4px; }
+.divisor__value { padding: 2px 8px; border: 1px solid rgba(127, 127, 127, 0.5); border-radius: 6px; }
+.divisor__row { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0 0 12px; }
+.divisor__cell { display: grid; justify-items: center; min-width: 56px; padding: 8px 6px; border: 1px solid rgba(127, 127, 127, 0.5); border-radius: 8px; }
+.divisor__cell span { font-size: 12px; opacity: 0.75; }
+.divisor__cell.is-current { border: 2px solid #2563eb; font-weight: 700; }
+.divisor__cell.is-done { opacity: 0.6; }
+.divisor__test { padding: 8px 10px; border-radius: 6px; border: 1px dashed rgba(127, 127, 127, 0.6); }
+.divisor__test.is-yes { border: 2px solid #0f766e; }
+.divisor__test.is-no { border: 2px solid #b91c1c; }

@@ -1,0 +1,10 @@
+.gap-graph svg { width: 100%; height: auto; max-width: 640px; }
+.gap-graph__axis { stroke: rgba(127, 127, 127, 0.6); stroke-width: 2; }
+.gap-graph__arc { fill: none; stroke: rgba(127, 127, 127, 0.5); stroke-width: 1.5; stroke-dasharray: 4 4; }
+.gap-graph__arc.is-current-link { stroke: #0f766e; stroke-dasharray: none; stroke-width: 2.5; }
+.gap-graph__arc.is-relax { stroke: #b45309; stroke-dasharray: none; stroke-width: 3.5; }
+.gap-graph__node { fill: rgba(127, 127, 127, 0.15); stroke: currentColor; stroke-width: 1.5; }
+.gap-graph .is-current .gap-graph__node { fill: #0f766e; }
+.gap-graph .is-query .gap-graph__node { stroke: #b45309; stroke-width: 3; }
+.gap-graph__label { font-size: 12px; font-weight: 700; fill: currentColor; }
+.gap-graph__value, .gap-graph__dist { font-size: 11px; fill: currentColor; opacity: 0.8; }

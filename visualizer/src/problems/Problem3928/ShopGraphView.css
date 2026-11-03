@@ -1,0 +1,11 @@
+.shop-graph svg { width: 100%; height: auto; max-width: 380px; }
+.shop-graph__road { stroke: rgba(127, 127, 127, 0.6); stroke-width: 2; }
+.shop-graph__edge { font-size: 11px; fill: currentColor; opacity: 0.85; }
+.shop-graph__shop { fill: rgba(127, 127, 127, 0.15); stroke: currentColor; stroke-width: 1.5; }
+.shop-graph__label { font-size: 13px; font-weight: 700; fill: currentColor; }
+.shop-graph__price { font-size: 11px; fill: currentColor; opacity: 0.85; }
+.shop-graph .is-start .shop-graph__shop { stroke: #2563eb; stroke-width: 3; }
+.shop-graph .is-buy .shop-graph__shop { fill: #0f766e; }
+.shop-graph__table { border-collapse: collapse; margin: 10px 0; font-variant-numeric: tabular-nums; }
+.shop-graph__table th, .shop-graph__table td { padding: 4px 8px; border-bottom: 1px solid rgba(127, 127, 127, 0.3); text-align: right; }
+.shop-graph__table .is-current { font-weight: 700; }

@@ -1,0 +1,8 @@
+.zero-swap__row { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0 0 10px; }
+.zero-swap__cell { display: grid; justify-items: center; min-width: 52px; padding: 8px 6px; border: 1px solid rgba(127, 127, 127, 0.5); border-radius: 8px; }
+.zero-swap__cell span, .zero-swap__cell em { font-size: 12px; opacity: 0.75; font-style: normal; }
+.zero-swap__cell.is-tail { background: rgba(127, 127, 127, 0.08); }
+.zero-swap__cell.is-misplaced-zero { border: 2px dashed #b45309; }
+.zero-swap__cell.is-misplaced-value { border: 2px dashed #2563eb; }
+.zero-swap__cell.is-swapped { border: 2px solid #0f766e; font-weight: 700; }
+.zero-swap__boundary { font-size: 13px; opacity: 0.85; }

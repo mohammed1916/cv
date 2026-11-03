@@ -1,0 +1,8 @@
+.generation__title { margin: 0 0 6px; font-size: 16px; }
+.generation__group h4 { margin: 10px 0 4px; font-size: 13px; opacity: 0.85; }
+.generation ul { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 0; }
+.generation__chip { padding: 4px 8px; border: 1px solid rgba(127, 127, 127, 0.5); border-radius: 999px; font-family: ui-monospace, monospace; font-size: 13px; }
+.generation__chip.is-new { border: 2px solid #0f766e; font-weight: 700; }
+.generation__chip.is-repeat { opacity: 0.6; }
+.generation__chip.is-target { background: #b45309; border-color: #b45309; color: #fff; }
+.generation__note { font-size: 13px; opacity: 0.85; }

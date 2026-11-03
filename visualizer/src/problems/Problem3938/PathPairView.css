@@ -1,0 +1,6 @@
+.path-pair__grid { border-collapse: collapse; margin-bottom: 10px; }
+.path-pair__grid td { width: 44px; height: 44px; text-align: center; border: 1px solid rgba(127, 127, 127, 0.4); font-variant-numeric: tabular-nums; }
+.path-pair__grid td.is-a { background: rgba(37, 99, 235, 0.22); }
+.path-pair__grid td.is-b { background: rgba(180, 83, 9, 0.22); }
+.path-pair__grid td.is-shared { background: #0f766e; color: #fff; font-weight: 700; }
+.path-pair__legend { font-size: 13px; opacity: 0.85; }

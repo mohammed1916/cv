@@ -1,0 +1,9 @@
+.window-compare__row { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0 0 12px; }
+.window-compare__row li { display: grid; justify-items: center; min-width: 48px; padding: 8px 6px; border: 1px solid rgba(127, 127, 127, 0.5); border-radius: 8px; }
+.window-compare__row li span { font-size: 12px; opacity: 0.75; }
+.window-compare__row .is-start-window { border: 2px solid #2563eb; background: rgba(37, 99, 235, 0.12); }
+.window-compare__row .is-other-window { border: 2px dashed #b45309; }
+.window-compare__facts { display: flex; flex-wrap: wrap; gap: 14px; margin: 0; }
+.window-compare__facts div { display: grid; }
+.window-compare__facts dt { font-size: 12px; opacity: 0.75; }
+.window-compare__facts dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; }

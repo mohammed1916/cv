@@ -1,0 +1,7 @@
+.budget-row__types { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0 0 12px; }
+.budget-row__types li { display: grid; gap: 2px; min-width: 120px; padding: 8px; border: 1px solid rgba(127, 127, 127, 0.5); border-radius: 8px; font-size: 13px; }
+.budget-row__types li.is-current { border: 2px solid #0e7490; }
+.budget-row__cells { display: flex; gap: 4px; align-items: flex-end; list-style: none; padding: 0; margin: 0 0 10px; overflow-x: auto; }
+.budget-row__cells li { display: grid; justify-items: center; min-width: 24px; font-size: 12px; font-variant-numeric: tabular-nums; }
+.budget-row__cells i { display: block; width: 16px; background: #0e7490; border-radius: 3px 3px 0 0; }
+.budget-row__cells li.is-target strong { text-decoration: underline; }

@@ -1,0 +1,8 @@
+.parity-count__row { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0 0 16px; }
+.parity-count__cell { display: grid; justify-items: center; gap: 2px; min-width: 56px; padding: 8px 6px; border: 1px solid rgba(127, 127, 127, 0.5); border-radius: 8px; }
+.parity-count__cell--source { border: 2px solid #0f766e; font-weight: 700; }
+.parity-count__cell--target { border: 2px dashed #b45309; }
+.parity-count__cell--later { opacity: 0.85; }
+.parity-count__index, .parity-count__badge { font-size: 12px; opacity: 0.75; }
+.parity-count__answer { display: flex; flex-wrap: wrap; gap: 8px; font-variant-numeric: tabular-nums; }
+.parity-count__answer .is-current { font-weight: 700; text-decoration: underline; }

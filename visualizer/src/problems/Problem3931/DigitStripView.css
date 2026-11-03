@@ -1,0 +1,8 @@
+.digit-strip__row { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0 0 12px; }
+.digit-strip__tile { display: grid; justify-items: center; min-width: 48px; padding: 8px 6px; border: 1px solid rgba(127, 127, 127, 0.5); border-radius: 8px; }
+.digit-strip__tile strong { font-size: 22px; }
+.digit-strip__tile span { font-size: 12px; opacity: 0.75; }
+.digit-strip__tile.is-pair { border: 2px solid #2563eb; }
+.digit-strip__gap { padding: 8px 10px; border-radius: 6px; border: 1px dashed rgba(127, 127, 127, 0.6); }
+.digit-strip__gap.is-ok { border: 2px solid #0f766e; }
+.digit-strip__gap.is-bad { border: 2px solid #b91c1c; }
