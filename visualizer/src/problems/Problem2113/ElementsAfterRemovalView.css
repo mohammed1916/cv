@@ -1,0 +1,120 @@
+.ear-view {
+  --ear-remove: #64748b;
+  --ear-restore: #2563eb;
+  --ear-present: #0f766e;
+  --ear-asked: #b45309;
+  --ear-ink: #0f172a;
+  --ear-muted: #475569;
+  --ear-card: #ffffff;
+  display: grid;
+  gap: 0.75rem;
+  color: var(--ear-ink);
+}
+
+@media (prefers-color-scheme: dark) {
+  .ear-view {
+    --ear-remove: #94a3b8;
+    --ear-restore: #60a5fa;
+    --ear-present: #5eead4;
+    --ear-asked: #fbbf24;
+    --ear-ink: #e2e8f0;
+    --ear-muted: #94a3b8;
+    --ear-card: #0f172a;
+  }
+}
+
+.ear-view__caption {
+  margin: 0;
+  font-weight: 600;
+}
+
+.ear-view__cycle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.ear-view__tick {
+  min-width: 1.9rem;
+  padding: 0.15rem 0.3rem;
+  border-radius: 4px;
+  border: 1px solid currentColor;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--ear-ink);
+}
+
+.ear-view__tick--remove {
+  border-style: solid;
+  background: color-mix(in srgb, var(--ear-remove) 18%, transparent);
+}
+
+.ear-view__tick--restore {
+  border-style: dashed;
+  background: color-mix(in srgb, var(--ear-restore) 18%, transparent);
+}
+
+.ear-view__tick.is-now {
+  outline: 3px solid var(--ear-asked);
+  outline-offset: 1px;
+  font-weight: 700;
+}
+
+.ear-view__row-label {
+  font-size: 0.8rem;
+  color: var(--ear-muted);
+}
+
+.ear-view__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  min-height: 4.5rem;
+}
+
+.ear-view__cell {
+  display: grid;
+  justify-items: center;
+  gap: 0.15rem;
+  min-width: 4.25rem;
+  padding: 0.5rem 0.4rem;
+  border-radius: 8px;
+  background: var(--ear-card);
+  border: 2px solid var(--ear-muted);
+}
+
+.ear-view__cell.is-present {
+  border-color: var(--ear-present);
+}
+
+.ear-view__cell.is-gone {
+  border-style: dashed;
+  opacity: 0.55;
+}
+
+.ear-view__cell--array.is-queried {
+  border-color: var(--ear-asked);
+  box-shadow: 0 0 0 2px var(--ear-asked);
+}
+
+.ear-view__cell--missing {
+  border-color: var(--ear-asked);
+  border-style: dotted;
+}
+
+.ear-view__cell small,
+.ear-view__badge {
+  font-size: 0.72rem;
+  color: var(--ear-muted);
+}
+
+.ear-view__badge--answer {
+  color: var(--ear-asked);
+  font-weight: 700;
+}
+
+.ear-view__empty {
+  align-self: center;
+  color: var(--ear-muted);
+  font-style: italic;
+}

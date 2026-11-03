@@ -1,0 +1,89 @@
+.tcv {
+  --tcv-pick-0: #2563eb;
+  --tcv-pick-1: #c2410c;
+  --tcv-pick-2: #7c3aed;
+  --tcv-ok: #0f766e;
+  --tcv-no: #64748b;
+  --tcv-ink: #0f172a;
+  --tcv-muted: #475569;
+  --tcv-card: #ffffff;
+  display: grid;
+  gap: 0.9rem;
+  color: var(--tcv-ink);
+}
+
+@media (prefers-color-scheme: dark) {
+  .tcv {
+    --tcv-pick-0: #93c5fd;
+    --tcv-pick-1: #fdba74;
+    --tcv-pick-2: #c4b5fd;
+    --tcv-ok: #5eead4;
+    --tcv-no: #94a3b8;
+    --tcv-ink: #e2e8f0;
+    --tcv-muted: #94a3b8;
+    --tcv-card: #0f172a;
+  }
+}
+
+.tcv__tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tcv__tile {
+  display: grid;
+  justify-items: center;
+  gap: 0.2rem;
+  min-width: 4.8rem;
+  padding: 0.6rem 0.4rem;
+  border-radius: 8px;
+  border: 1px solid var(--tcv-muted);
+  background: var(--tcv-card);
+}
+
+.tcv__tile small {
+  color: var(--tcv-muted);
+  font-size: 0.72rem;
+}
+
+.tcv__tile strong {
+  font-size: 1.2rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.tcv__tile.is-pick {
+  border-width: 3px;
+}
+
+.tcv__tile.is-pick-0 { border-color: var(--tcv-pick-0); }
+.tcv__tile.is-pick-1 { border-color: var(--tcv-pick-1); }
+.tcv__tile.is-pick-2 { border-color: var(--tcv-pick-2); }
+
+.tcv__mark {
+  font-size: 0.7rem;
+  padding: 0.1rem 0.35rem;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+}
+
+.tcv__mark--divides {
+  color: var(--tcv-ok);
+  font-weight: 700;
+}
+
+.tcv__mark--no {
+  color: var(--tcv-no);
+}
+
+.tcv__sum,
+.tcv__tally {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.25rem;
+  font-size: 0.95rem;
+}
+
+.tcv__tally {
+  color: var(--tcv-muted);
+}
