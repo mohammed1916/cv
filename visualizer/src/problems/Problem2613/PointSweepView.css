@@ -1,0 +1,47 @@
+.ps-view {
+  --ps-now: #b45309;
+  --ps-now-fill: #fde68a;
+  --ps-partner: #7c3aed;
+  --ps-partner-fill: #ddd6fe;
+  --ps-seen: #0369a1;
+  --ps-seen-fill: #bae6fd;
+  --ps-ahead-fill: #f1f5f9;
+  --ps-a: #15803d;
+  --ps-b: #be123c;
+  --ps-best: #15803d;
+  --ps-edge: #94a3b8;
+  --ps-ink: #0f172a;
+  --ps-muted: #475569;
+  color: var(--ps-ink);
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  .ps-view {
+    --ps-now-fill: #78350f;
+    --ps-partner-fill: #4c1d95;
+    --ps-seen-fill: #0c4a6e;
+    --ps-ahead-fill: #1e293b;
+    --ps-edge: #64748b;
+    --ps-ink: #e2e8f0;
+    --ps-muted: #94a3b8;
+  }
+}
+
+.ps-rule, .ps-note { margin: 0; font-size: 14px; color: var(--ps-muted); }
+.ps-plot { width: 100%; max-width: 320px; height: auto; justify-self: center; }
+.ps-axis { stroke: var(--ps-edge); stroke-width: 1; }
+.ps-region { fill-opacity: 0.18; stroke-dasharray: 4 3; }
+.ps-region--a { fill: var(--ps-a); stroke: var(--ps-a); }
+.ps-region--b { fill: var(--ps-b); stroke: var(--ps-b); }
+.ps-best { stroke: var(--ps-best); stroke-width: 3; }
+.ps-point circle { fill: var(--ps-ahead-fill); stroke: var(--ps-edge); stroke-width: 2; }
+.ps-point text { font-size: 10px; text-anchor: middle; fill: var(--ps-ink); font-weight: 700; }
+.ps-point--seen circle { fill: var(--ps-seen-fill); stroke: var(--ps-seen); }
+.ps-point--now circle { fill: var(--ps-now-fill); stroke: var(--ps-now); stroke-width: 3; }
+.ps-point--partner circle { fill: var(--ps-partner-fill); stroke: var(--ps-partner); stroke-width: 3; }
+.ps-point--ahead { opacity: 0.6; }
+.ps-best-text { font-weight: 700; }
