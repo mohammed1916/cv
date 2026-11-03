@@ -1,10 +1,34 @@
-import authoredExamples0 from '../../config/examples/collection--1414.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/later.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '1414',
+  phases, parse: parseInput, build: buildTrace, code, python,
+  inputLabel: 'Target value k (integer)',
+  url: 'https://leetcode.com/problems/find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k/',
+  complexity: 'O(log k) time for the greedy picks and Fibonacci list, since the values grow exponentially.',
+  examples: [
+    { label: 'Target 7', input: '7' },
+    { label: 'Target 19', input: '19' },
+    { label: 'Exact Fibonacci', input: '21' },
+  ],
+}
 
-const definition = { ...definitions[1414], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function FibonacciSumCount() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
+    const { remaining, picks, fibs, chosen } = step.snapshot
+    return <>
+      <p>Remaining: <strong>{remaining}</strong> · Picks so far: {picks.length ? picks.join(' + ') : 'none'}</p>
+      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+        {fibs.map(f => <div key={f} style={{
+          padding: '6px 10px', borderRadius: 6, fontFamily: 'monospace',
+          border: '2px solid', borderColor: f === chosen ? '#0891b2' : '#94a3b8',
+          background: f === chosen ? '#cffafe' : undefined,
+        }}>{f}</div>)}
+      </div>
+    </>
+  }} renderReasoning={() => <>
+    <p><strong>Take the largest fit.</strong> Fibonacci values grow fast, so the largest value not above the remainder leaves the smallest remainder to cover.</p>
+    <p><strong>Why this is fewest.</strong> Every Fibonacci value up to k is a valid choice, and the greedy count matches the exhaustive optimum on every target tested.</p>
+  </>} />
+}

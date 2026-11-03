@@ -1,10 +1,38 @@
-import authoredExamples0 from '../../config/examples/collection--1426.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/later.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '1426',
+  phases, parse: parseInput, build: buildTrace, code, python,
+  inputLabel: 'List of integers (JSON)',
+  url: 'https://leetcode.com/problems/counting-elements/',
+  complexity: 'O(n) expected time and O(n) space: build one set, then one lookup per occurrence.',
+  examples: [
+    { label: 'Chain with duplicates', input: '[1,1,2]' },
+    { label: 'Mixed values', input: '[1,3,2,3,5,0]' },
+    { label: 'No successors', input: '[7,7,9,9]' },
+  ],
+}
 
-const definition = { ...definitions[1426], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function CountingElements() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const values = run.input
+    const { current, present, count, value, successor, hit, counted } = step.snapshot
+    const presentSet = new Set(present)
+    return <>
+      <div role="img" aria-label="Occurrences checked" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+        {values.map((v, i) => <div key={i} data-index={i} style={{
+          minWidth: 48, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
+          border: `${i === current ? 2 : 1}px solid ${i === current ? 'var(--text)' : 'var(--border)'}`,
+          background: i === current && counted ? '#bbf7d0' : i === current ? 'var(--surface2)' : 'transparent', color: '#1c1917',
+        }}>{v}<div><small>{i}</small></div></div>)}
+      </div>
+      <p>{value === undefined ? 'Set of values built from the array.' : `Checking ${value}: successor ${successor} ${hit ? 'is present' : 'is absent'}.`}</p>
+      <p>Set contents: {[...presentSet].sort((a, b) => a - b).join(', ')}</p>
+      <p><strong>Count: {count}</strong></p>
+    </>
+  }} renderReasoning={({ step }) => <>
+    <p><strong>Lookup, not search:</strong> a set answers whether a value is present without scanning the array again.</p>
+    <p><strong>Occurrences count:</strong> each element is judged on its own, so repeated values add to the total.</p>
+  </>} />
+}

@@ -1,10 +1,42 @@
-import authoredExamples0 from '../../config/examples/collection--1423.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import { phases, parseInput, buildTrace, code, python, pythonLineMap } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/later.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  phases,
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  pythonLineMap,
+  inputLabel: 'JSON object with "cards" and "k" (e.g. {"cards": [3, 1, 6, 8, 2, 9], "k": 3})',
+  url: 'https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/',
+  complexity: 'O(k) time and O(1) extra space: the window of left and right cards is updated by one swap per step.',
+  examples: [
+    { label: 'Sample', input: '{"cards": [3, 1, 6, 8, 2, 9], "k": 3}' },
+    { label: 'Four cards', input: '{"cards": [5, 7, 1, 9], "k": 2}' },
+    { label: 'Take all', input: '{"cards": [4, 4, 4], "k": 3}' },
+  ],
+}
 
-const definition = { ...definitions[1423], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+function CardsScene({ run, step }) {
+  const { cards } = run.input
+  const snap = step.snapshot
+  const n = cards.length
+  const role = i => (i < snap.leftCount ? 'left' : i >= n - snap.rightCount ? 'right' : 'unused')
+  return <>
+    <IndexedSequence label="Cards in a row" length={n} valueAt={i => cards[i]} active={snap.added >= 0 ? snap.added : -1}
+      roleAt={role} />
+    <p>Taken from left: {snap.leftCount} · from right: {snap.rightCount} · total: {snap.total} · best: {snap.best}</p>
+  </>
+}
+
+export default function CardPoints() {
+  return (
+    <AlgorithmWorkspace
+      definition={definition}
+      renderVisual={({ run, step }) => <CardsScene run={run} step={step} />}
+      renderReasoning={({ step }) => <p>{phases.find(p => p.id === step.phase)?.description}</p>}
+    />
+  )
+}

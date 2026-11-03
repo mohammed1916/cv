@@ -1,10 +1,43 @@
-import authoredExamples0 from '../../config/examples/collection--1460.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/later.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '1460',
+  phases, parse: parseInput, build: buildTrace, code, python,
+  inputLabel: 'Object with target and arr (JSON)',
+  url: 'https://leetcode.com/problems/make-two-arrays-equal-by-reversing-subarrays/',
+  complexity: 'O(n) expected time and O(n) space: one tally pass over each array and one check of the balances.',
+  examples: [
+    { label: 'Reordered', input: '{"target":[1,2,3,4],"arr":[2,4,1,3]}' },
+    { label: 'Repeated value', input: '{"target":[5,1,5,2],"arr":[2,5,1,1]}' },
+    { label: 'Equal', input: '{"target":[3],"arr":[3]}' },
+  ],
+}
 
-const definition = { ...definitions[1460], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+const sign = n => (n > 0 ? `+${n}` : String(n))
+
+export default function ReverseToEqual() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
+    const { entries, side, index, mismatch } = step.snapshot
+    const sorted = [...entries].sort((a, b) => a.value - b.value)
+    return <>
+      <p>{side === null ? 'Balances after the passes so far.' : `Reading ${side === 'target' ? 'target' : 'arr'}[${index}].`}</p>
+      <table aria-label="Balance per value" style={{ borderCollapse: 'collapse', fontFamily: 'monospace' }}>
+        <thead><tr><th>value</th><th>target minus arr so far</th><th>zero?</th></tr></thead>
+        <tbody>
+          {sorted.length === 0 && <tr><td colSpan={3}>no values yet</td></tr>}
+          {sorted.map(({ value, count }) => <tr key={value} style={{
+            background: mismatch && mismatch.value === value ? '#fecaca' : 'transparent',
+          }}>
+            <td style={{ padding: '2px 10px' }}>{value}</td>
+            <td style={{ padding: '2px 10px', textAlign: 'right' }}>{sign(count)}</td>
+            <td style={{ padding: '2px 10px' }}>{count === 0 ? 'yes' : 'no'}</td>
+          </tr>)}
+        </tbody>
+      </table>
+    </>
+  }} renderReasoning={() => <>
+    <p><strong>Why order is free:</strong> reversing a two-element subarray swaps neighbours, and neighbouring swaps can produce any arrangement.</p>
+    <p><strong>What must match:</strong> how many times each value appears. A single balance per value captures this, so every balance must end at zero.</p>
+  </>} />
+}

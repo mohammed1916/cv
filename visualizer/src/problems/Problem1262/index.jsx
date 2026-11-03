@@ -1,10 +1,41 @@
-import authoredExamples0 from '../../config/examples/collection--1262.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/more.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '1262',
+  phases, parse: parseInput, build: buildTrace, code, python,
+  inputLabel: 'Array of positive integers (JSON)',
+  url: 'https://leetcode.com/problems/greatest-sum-divisible-by-three/',
+  complexity: 'O(n) time for n numbers, because each number updates three remainder slots. O(1) extra space.',
+  examples: [
+    { label: 'Mixed', input: '[3,6,5,1,8]' },
+    { label: 'Single', input: '[4]' },
+    { label: 'Equal', input: '[2,2,2]' },
+  ],
+}
 
-const definition = { ...definitions[1262], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+const SLOT_NAMES = ['remainder 0', 'remainder 1', 'remainder 2']
+
+export default function GreatestSumDivisibleByThree() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
+    const { nums, best, index, x } = step.snapshot
+    return <>
+      <div aria-label="Numbers" style={{ display: 'flex', gap: 6, flexWrap: 'wrap', fontFamily: 'monospace' }}>
+        {nums.map((v, i) => <div key={i} style={{
+          minWidth: 40, textAlign: 'center', padding: 4, border: '1px solid var(--border)',
+          background: i === index ? 'var(--surface2)' : 'transparent', fontWeight: i === index ? 700 : 400,
+        }}>{v}</div>)}
+      </div>
+      <div aria-label="Best sum per remainder" style={{ display: 'flex', gap: 10, marginTop: 12 }}>
+        {best.map((v, r) => <div key={r} data-slot={r} style={{ minWidth: 120, border: `${r === 0 ? 2 : 1}px solid ${r === 0 ? 'var(--text)' : 'var(--border)'}`, padding: 8, fontFamily: 'monospace' }}>
+          <div>{SLOT_NAMES[r]}</div>
+          <strong>{v === null ? 'none' : v}</strong>
+        </div>)}
+      </div>
+      {x !== undefined && <p>Current number {x} adds to each reachable remainder class.</p>}
+    </>
+  }} renderReasoning={() => <>
+    <p><strong>Only remainders matter:</strong> for each remainder mod 3 we keep the largest sum that achieves it. Any larger sum with the same remainder can only do better later, so earlier, smaller choices are dropped.</p>
+    <p><strong>Transition:</strong> taking a number x moves a selection from remainder r to remainder (r + x) mod 3, adding x to its sum. Skipping keeps the old value.</p>
+  </>} />
+}
