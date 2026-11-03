@@ -1,0 +1,32 @@
+{
+  "number": 1285,
+  "title": "Find the Start and End Number of Continuous Ranges",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1285.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/find-the-start-and-end-number-of-continuous-ranges/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Group consecutive log_id values into maximal runs and return start_id and end_id for each run, ordered by start_id.",
+  "inputFormat": "Logs(log_id) with unique integer IDs.",
+  "outputFormat": "start_id, end_id per run.",
+  "officialConstraints": "unknown",
+  "tieRules": "Ordered by start_id ascending.",
+  "edgeRules": "Unique IDs guaranteed by the draft; sign and size bounds are not stated.",
+  "examples": {
+    "label": "authored-reference",
+    "note": "IDs 1, 2, 3, 5. Expected: (1, 3), (5, 5). [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "maximal run definition",
+    "output columns",
+    "ordering"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)"
+  ],
+  "questions": [],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

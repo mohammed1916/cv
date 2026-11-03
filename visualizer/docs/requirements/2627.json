@@ -1,0 +1,44 @@
+{
+  "number": 2627,
+  "title": "Debounce",
+  "source": "https://leetcode.com/problems/debounce/description/",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft-knowledge-derived",
+  "contentKind": "original-requirements-summary",
+  "problemClass": "JavaScript timer",
+  "summary": "debounce(fn, t) returns a function that schedules fn to run t ms after the latest call, cancelling any prior pending invocation; invokes with the arguments of the most recent call.",
+  "inputFormat": "debounce(fn, t: integer) -> (...args) => void",
+  "outputFormat": "fn called once per quiet interval with latest arguments",
+  "officialConstraints": "unknown (official constraints not retrieved)",
+  "tieRules": "latest call wins",
+  "edgeRules": [
+    "a call during the wait resets the timer",
+    "one invocation per quiet interval",
+    "this-binding not stated in draft"
+  ],
+  "examples": [
+    {
+      "sequence": "calls at 0, 50, 100 ms with t=100",
+      "output": "one invocation at 200 ms with the 100 ms arguments",
+      "authored": true
+    }
+  ],
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Official page fetch on 2026-11-03 returned HTTP 403 (WebFetch); statement not retrieved this pass. Recovered-archive index lists missing-statement for this ID.",
+  "factsPresent": [
+    "title",
+    "task summary from manual draft",
+    "signature/semantics from draft"
+  ],
+  "factsMissing": [
+    "this-binding requirement",
+    "timing tolerance",
+    "whether a pending call survives a new arrival with different arguments"
+  ],
+  "questions": [
+    "Does the official checker require this-binding to be preserved?"
+  ],
+  "nextAction": "Confirm this-binding and timing tolerance on official page.",
+  "signature": "debounce(fn, t: integer) -> (...args) => void"
+}

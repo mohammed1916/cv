@@ -1,0 +1,37 @@
+{
+  "number": "2026",
+  "title": "Low-Quality Problems",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "archiveStatus": "missing-statement (no raw file in local-reference/leetcode/raw)",
+  "officialUrl": "https://leetcode.com/problems/low-quality-problems/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return problems whose like percentage (likes / (likes + dislikes)) is strictly below 60 percent.",
+  "inputFormat": "Problems(problem_id, likes, dislikes); likes + dislikes is positive (guarantee to verify).",
+  "outputFormat": "Column problem_id, sorted ascending.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Comparison is strict, on the unrounded percentage.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "text": "authored-reference: likes 3 dislikes 2 (60 percent) excluded; likes 2 dislikes 2 (50 percent) included."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "percentage formula",
+    "strict threshold",
+    "ascending order"
+  ],
+  "factsMissing": [
+    "official statement text (archive status missing-statement; no raw file)",
+    "official confirmation of this summary (requirementsVerified false)",
+    "whether the positive-total guarantee is official",
+    "rounding before comparison (none stated)"
+  ],
+  "questions": [
+    "Is the sum likes + dislikes guaranteed positive, and is the comparison on the unrounded value?"
+  ],
+  "nextAction": "Fetch official page https://leetcode.com/problems/low-quality-problems/description/ and confirm each listed fact; then set requirementsVerified."
+}

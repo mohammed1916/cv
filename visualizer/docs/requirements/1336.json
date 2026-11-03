@@ -1,0 +1,36 @@
+{
+  "number": 1336,
+  "title": "Number of Transactions per Visit",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1336.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/number-of-transactions-per-visit/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each visit, count the transactions by the same user on the same date. Build a histogram of those counts that contains every integer from zero to the largest observed count, using zero for missing buckets.",
+  "inputFormat": "Visits(user_id, visit_date); Transactions(user_id, transaction_date, amount).",
+  "outputFormat": "transactions_count, visits_count.",
+  "officialConstraints": "unknown",
+  "tieRules": "Ordering is not stated; the draft describes ascending buckets from zero.",
+  "edgeRules": "A visit with no transactions falls in bucket 0. Behaviour when there are no visits is not stated.",
+  "examples": {
+    "label": "authored-reference",
+    "note": "Visits (1,d1), (1,d2), (2,d1); transactions: two for (1,d1). Expected: (0, 2), (1, 0), (2, 1). [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "same-day counting",
+    "zero-filled histogram"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)",
+    "ordering",
+    "empty-visit behaviour"
+  ],
+  "questions": [
+    "Is the output sorted ascending by transactions_count? The draft does not state it.",
+    "What is returned when there are no visits?"
+  ],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

@@ -1,21 +1,54 @@
 {
   "number": 3521,
   "title": "Find Product Recommendation Pairs",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
   "source": "https://leetcode.com/problems/find-product-recommendation-pairs/description/",
-  "checkedOn": "2026-11-02",
-  "sourceKind": "access-attempt-failed",
-  "contentKind": "none",
-  "summary": null,
-  "attempts": [
-    {
-      "method": "web-fetch agent (WebFetch)",
-      "url": "https://leetcode.com/problems/find-product-recommendation-pairs/description/",
-      "error": "HTTP 403 Forbidden, body not retrieved"
-    }
-  ],
-  "officialConstraints": null,
+  "summary": "SQL. ProductPurchases(user_id, product_id, quantity) and ProductInfo(product_id, category, price). Recommend product pairs by common purchasing users.",
+  "inputFormat": "ProductPurchases and ProductInfo as above.",
+  "outputFormat": "Unknown: columns and ordering.",
+  "officialConstraints": "unknown",
+  "tieRules": "Unknown minimum common-user count and category constraint.",
+  "edgeRules": "Unknown.",
   "examples": [],
-  "pitfalls": [],
-  "implementationStatus": "blocked-statement-unavailable",
-  "note": "Official statement could not be read on 2026-11-02; no requirements were inferred from the title. No src/problems folder created."
+  "requirementsVerified": false,
+  "factsPresent": [
+    "title",
+    "task category (SQL)",
+    "manual draft summary"
+  ],
+  "factsMissing": [
+    "officialConstraints",
+    "exact output columns and ordering",
+    "tie rules",
+    "edge rules",
+    "authored examples",
+    "official verification (official page HTTP 403 on 2026-11-03)"
+  ],
+  "questions": [
+    "What is the minimum number of common users, does a same-category restriction apply, and what is the sort order?"
+  ],
+  "nextAction": "Obtain the official statement (official page returned HTTP 403 to WebFetch on 2026-11-03) or a readable community reproduction; then fill outputFormat, ties and edges and author validation examples labelled authored-reference.",
+  "priorNote": {
+    "number": 3521,
+    "title": "Find Product Recommendation Pairs",
+    "source": "https://leetcode.com/problems/find-product-recommendation-pairs/description/",
+    "checkedOn": "2026-11-02",
+    "sourceKind": "access-attempt-failed",
+    "contentKind": "none",
+    "summary": null,
+    "attempts": [
+      {
+        "method": "web-fetch agent (WebFetch)",
+        "url": "https://leetcode.com/problems/find-product-recommendation-pairs/description/",
+        "error": "HTTP 403 Forbidden, body not retrieved"
+      }
+    ],
+    "officialConstraints": null,
+    "examples": [],
+    "pitfalls": [],
+    "implementationStatus": "blocked-statement-unavailable",
+    "note": "Official statement could not be read on 2026-11-02; no requirements were inferred from the title. No src/problems folder created."
+  }
 }

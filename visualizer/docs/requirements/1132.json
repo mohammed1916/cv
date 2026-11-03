@@ -1,0 +1,62 @@
+{
+  "number": "1132",
+  "title": "Reported Posts II",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/reported-posts-ii/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "For each day with spam reports, compute the percentage of that day's distinct spam-reported posts that were removed at any time. Average the daily percentages across days and round to two decimals, returned as average_daily_percent.",
+  "inputFormat": "Actions(user_id, post_id, action_date, action, extra); Removals(post_id, remove_date).",
+  "outputFormat": "One column average_daily_percent with two decimals.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable: a single value.",
+  "edgeRules": "The removal need not occur on the reporting day. Daily percentages are averaged with equal weight per day.",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "actions": [
+        [
+          1,
+          1,
+          "2019-07-01",
+          "report",
+          "spam"
+        ],
+        [
+          2,
+          2,
+          "2019-07-01",
+          "report",
+          "spam"
+        ]
+      ],
+      "removals": [
+        [
+          1,
+          "2019-07-02"
+        ]
+      ],
+      "expected": [
+        [
+          50.0
+        ]
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "SQL task statement"
+  ],
+  "factsMissing": [
+    "'spam' literal in extra and report action literal",
+    "percentage scale (draft says percentage; 50.00 in example implies 0-100 scale)",
+    "days with no removals"
+  ],
+  "questions": [
+    "Is the percentage on a 0 to 100 scale? The draft says percentage; confirm.",
+    "What value is returned when no day has spam reports? Not stated."
+  ],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

@@ -1,0 +1,40 @@
+{
+  "number": "1435",
+  "title": "Create a Session Bar Chart",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Bucket session durations (given in seconds) into four minute-based bins and count sessions per bin, including bins with zero sessions.",
+  "inputFormat": "SQL. Sessions(session_id, duration) with duration in seconds (int), session_id primary key.",
+  "outputFormat": "SQL result with a bin label and a total count per bin, one row for each of the four bins, including empty bins.",
+  "officialConstraints": "unknown",
+  "tieRules": "Bins are half-open: [0,5) minutes, [5,10), [10,15), and 15 minutes or more. A duration of exactly 300 seconds lands in [5-10>.",
+  "edgeRules": "Empty bins are reported with total 0. Duration 0 belongs to the first bin.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "durations 0, 299, 300, 900, 1200 seconds",
+      "expected": "[0-5> 2, [5-10> 1, [10-15> 1, 15 or more 1"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "bin definitions in minutes",
+    "empty-bin requirement",
+    "half-open boundary convention (draft-derived)"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "exact bin label strings",
+    "output column names",
+    "row ordering"
+  ],
+  "questions": [
+    "Confirm the exact label strings for the four bins and the output column names, since the draft says to verify them.",
+    "Confirm whether the boundary at exactly 300 seconds belongs to [5-10> as the half-open convention implies."
+  ],
+  "nextAction": "Check the official statement for labels, column names, ordering and boundary.",
+  "officialUrl": "https://leetcode.com/problems/create-a-session-bar-chart/description/"
+}

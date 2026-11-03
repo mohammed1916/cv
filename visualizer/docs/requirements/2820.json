@@ -1,0 +1,30 @@
+{
+  "number": "2820",
+  "title": "Election Results",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialConstraints": "unknown",
+  "examples": [],
+  "requirementsVerified": false,
+  "summary": "Each voter contributes one vote split equally among the candidates they voted for, ignoring NULL candidate choices. Return the candidates tied for the greatest total, ordered alphabetically.",
+  "inputFormat": "Votes(voter, candidate).",
+  "outputFormat": "candidate rows tied for the greatest total (column name and fractional value format not recorded).",
+  "tieRules": "All candidates tied for the greatest total are returned, alphabetical order.",
+  "edgeRules": "Duplicate voter/candidate rows and NULL candidates are not fully settled.",
+  "factsPresent": [
+    "Equal split per voter across voted candidates",
+    "NULL candidates ignored",
+    "Ties returned alphabetically"
+  ],
+  "factsMissing": [
+    "Duplicate voter/candidate guarantee",
+    "Output column name and value precision"
+  ],
+  "questions": [
+    "Can a voter appear twice for the same candidate, and what precision is the output value?",
+    "What exact output column name is required?"
+  ],
+  "nextAction": "Obtain the official statement (recovered raw archive has none for this ID); confirm the listed missing facts, then set requirementsVerified only if an official page confirms them. Official base URL in the manual draft; not fetched in this pass.",
+  "examplesNote": "No authored example in this pass; authored-reference examples to be added after the statement is confirmed."
+}

@@ -1,0 +1,37 @@
+{
+  "number": "2704",
+  "title": "To Be Or Not To Be",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/to-be-or-not-to-be/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Implement expect(value) with toBe(other) and notToBe(other) using strict equality. Successful assertions return true; failures throw an Error.",
+  "inputFormat": "expect(value) receives any value; toBe and notToBe receive any value.",
+  "outputFormat": "true on success; a thrown Error on failure.",
+  "officialConstraints": "unknown",
+  "tieRules": "not applicable",
+  "edgeRules": "Strict equality (===) is required. The draft lists error messages 'Not Equal' and 'Equal' from memory, not from a verified source.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "expect(5).toBe(5)",
+      "output": "true (authored-reference)",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "strict-equality rule",
+    "success return value",
+    "failure-throws rule"
+  ],
+  "factsMissing": [
+    "official error messages",
+    "official example"
+  ],
+  "questions": [
+    "Are the thrown error messages exactly 'Not Equal' and 'Equal', and must they be Error instances?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

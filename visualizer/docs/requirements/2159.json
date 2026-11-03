@@ -1,0 +1,31 @@
+{
+  "number": "2159",
+  "title": "Order Two Columns Independently",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "SQL: sort first_col ascending and second_col descending independently, then pair them by resulting row position.",
+  "inputFormat": "Data(first_col,second_col).",
+  "outputFormat": "Two columns first_col and second_col with the same row count.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Original row pairing is not preserved.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "table and columns",
+    "ascending/descending rule"
+  ],
+  "factsMissing": [
+    "official page text (HTTP 403 on fetch, not verified)",
+    "official numeric bounds",
+    "authored examples",
+    "output row order"
+  ],
+  "questions": [
+    "Confirm the output row ordering and column names."
+  ],
+  "nextAction": "Fetch official page or obtain a readable copy; then confirm the listed questions and author examples.",
+  "provenance": "Manual draft local-reference/leetcode/manual/2159.txt (knowledge-derived, not a recovered statement). Official URL https://leetcode.com/problems/<slug>/description/ returned HTTP 403 on 2026-11-03; no recovered raw statement exists in the archive.",
+  "officialUrl": "https://leetcode.com/problems/order-two-columns-independently/description/"
+}

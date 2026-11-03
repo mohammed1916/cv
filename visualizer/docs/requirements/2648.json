@@ -1,0 +1,40 @@
+{
+  "number": 2648,
+  "title": "Generate Fibonacci Sequence",
+  "source": "https://leetcode.com/problems/generate-fibonacci-sequence/description/",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft-knowledge-derived",
+  "contentKind": "original-requirements-summary",
+  "problemClass": "JavaScript generator",
+  "summary": "Implement a generator yielding the infinite Fibonacci sequence 0, 1, 1, 2, 3, 5, ... one number per next() request, keeping state between yields.",
+  "inputFormat": "function* fibGenerator() -> Generator<number>",
+  "outputFormat": "one yielded value per next()",
+  "officialConstraints": "unknown (official constraints not retrieved)",
+  "tieRules": "not applicable",
+  "edgeRules": [
+    "sequence starts 0, 1, 1, ..."
+  ],
+  "examples": [
+    {
+      "sequence": "next() x5",
+      "output": "0,1,1,2,3",
+      "authored": true
+    }
+  ],
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Official page fetch on 2026-11-03 returned HTTP 403 (WebFetch); statement not retrieved this pass. Recovered-archive index lists missing-statement for this ID.",
+  "factsPresent": [
+    "title",
+    "task summary from manual draft",
+    "signature/semantics from draft"
+  ],
+  "factsMissing": [
+    "maximum value before precision loss (unknown)"
+  ],
+  "questions": [
+    "Are values expected as BigInt beyond Number precision?"
+  ],
+  "nextAction": "Confirm numeric type on official page.",
+  "signature": "function* fibGenerator() -> Generator<number>"
+}

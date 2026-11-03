@@ -4,11 +4,15 @@
   "source": "https://leetcode.doocs.org/en/lc/3269/",
   "officialUrl": "https://leetcode.com/problems/constructing-two-increasing-arrays/",
   "sourceKind": "public-community-reference",
-  "checkedOn": "2026-11-02",
+  "checkedOn": "2026-11-03",
   "contentKind": "independently-written-requirements",
-  "summary": "Replace zeros in two binary arrays with positive even integers and ones with positive odd integers. Both resulting arrays must be strictly increasing, and no integer may occur more than once across both arrays combined. Minimize the largest assigned integer and return it.",
+  "summary": "Replace each 0 with a positive even integer and each 1 with a positive odd integer. Each resulting array must be strictly increasing. Every assigned integer must be distinct across BOTH arrays. Return the smallest achievable maximum assigned integer, not the arrays.",
   "requirementsVerified": false,
-  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "officialConstraints": "Official-page confirmation pending. See constraintsReportedBySource for the bounds in the community reproduction.",
   "examples": [],
-  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples.",
+  "clarification": "Authored example: nums1=[0,0], nums2=[1,1]. Assign [2,4] and [1,3], giving answer 4. Four distinct positive integers require a maximum of at least 4.",
+  "constraintsReportedBySource": "nums1 length 0..1000; nums2 length 1..1000; both binary.",
+  "verificationStatus": "community-reproduction-read; official text not independently confirmed",
+  "questionResolution": "Specific CLAUDE-QUESTIONS.md question answered; source confidence recorded separately."
 }

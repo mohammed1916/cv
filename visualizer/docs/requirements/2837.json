@@ -1,0 +1,28 @@
+{
+  "number": "2837",
+  "title": "Total Traveled Distance",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialConstraints": "unknown",
+  "examples": [],
+  "requirementsVerified": false,
+  "summary": "Return each user_id, name and the sum of their traveled distance, including zero for users with no rides, sorted by user_id.",
+  "inputFormat": "Users(user_id, name); Rides(ride_id, user_id, distance).",
+  "outputFormat": "user_id, name and total distance (alias not recorded).",
+  "tieRules": "Sorted by user_id.",
+  "edgeRules": "Users without rides must appear with zero.",
+  "factsPresent": [
+    "Sum of distance per user",
+    "Zero for users with no rides",
+    "Sort by user_id"
+  ],
+  "factsMissing": [
+    "Exact distance-total alias"
+  ],
+  "questions": [
+    "What is the exact alias for the distance total?"
+  ],
+  "nextAction": "Obtain the official statement (recovered raw archive has none for this ID); confirm the listed missing facts, then set requirementsVerified only if an official page confirms them. Official base URL in the manual draft; not fetched in this pass.",
+  "examplesNote": "No authored example in this pass; authored-reference examples to be added after the statement is confirmed."
+}

@@ -1,0 +1,65 @@
+{
+  "number": "1142",
+  "title": "User Activity for the Past 30 Days II",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/user-activity-for-the-past-30-days-ii/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "For the same 30-day interval ending 2019-07-27 inclusive, return average_sessions_per_user: the number of distinct session_id values in the window divided by the number of distinct active users, rounded to two decimals. Return 0 when no user is active.",
+  "inputFormat": "Activity(user_id, session_id, activity_date, activity_type).",
+  "outputFormat": "One column average_sessions_per_user with two decimals.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable: a single value.",
+  "edgeRules": "Multiple rows of one session count once. Return zero when no user is active.",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "activity": [
+        [
+          1,
+          1,
+          "2019-07-20",
+          "x"
+        ],
+        [
+          1,
+          1,
+          "2019-07-21",
+          "y"
+        ],
+        [
+          1,
+          2,
+          "2019-07-21",
+          "z"
+        ],
+        [
+          2,
+          3,
+          "2019-07-22",
+          "w"
+        ]
+      ],
+      "expected": [
+        [
+          1.33
+        ]
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "SQL task statement"
+  ],
+  "factsMissing": [
+    "output row order (single row)",
+    "interval boundaries (see 1141)",
+    "exact decimal form"
+  ],
+  "questions": [
+    "Does the interval start at 2019-06-28 (30 days inclusive)? Confirm, as in 1141."
+  ],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

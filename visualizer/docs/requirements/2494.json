@@ -1,0 +1,29 @@
+{
+  "number": "2494",
+  "title": "Merge Overlapping Events in the Same Hall",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialConstraints": "unknown",
+  "examples": [],
+  "requirementsVerified": false,
+  "summary": "Within each hall, merge overlapping inclusive date intervals and return the maximal merged intervals.",
+  "inputFormat": "HallEvents(hall_id, start_day, end_day); intervals are inclusive.",
+  "outputFormat": "Rows of hall_id with merged start_day and end_day (column names and ordering not recorded).",
+  "tieRules": "Not applicable beyond interval merging; output ordering not recorded.",
+  "edgeRules": "Whether directly adjacent non-overlapping dates merge is not settled by the draft. Do not treat adjacency as overlap without the source.",
+  "factsPresent": [
+    "Intervals are inclusive",
+    "Merging is per hall"
+  ],
+  "factsMissing": [
+    "Adjacency rule (end_day+1 = next start_day)",
+    "Output column aliases and ordering"
+  ],
+  "questions": [
+    "For intervals [1,3] and [4,6] in the same hall, must they merge into [1,6]?",
+    "Required output columns and row ordering?"
+  ],
+  "nextAction": "Obtain the official statement (recovered raw archive has none for this ID); confirm the listed missing facts, then set requirementsVerified only if an official page confirms them. Official base URL in the manual draft; not fetched in this pass.",
+  "examplesNote": "No authored example in this pass; authored-reference examples to be added after the statement is confirmed."
+}

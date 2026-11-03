@@ -1,0 +1,75 @@
+{
+  "number": "1193",
+  "title": "Monthly Transactions I",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/monthly-transactions-i/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "For each calendar month and country, return the month (YYYY-MM), country, trans_count, approved_count, trans_total_amount and approved_total_amount. trans_count counts all transactions; approved_count and approved_total_amount use only rows with state 'approved'. A NULL country forms its own group.",
+  "inputFormat": "Transactions(id, country, state, amount, trans_date), state is 'approved' or 'declined'.",
+  "outputFormat": "Columns month, country, trans_count, approved_count, trans_total_amount, approved_total_amount; one row per (month, country) that has transactions.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable: one row per group.",
+  "edgeRules": "A NULL country is one group. Groups with no approved rows return approved_count 0 and approved_total_amount 0 (assumed; the draft says approved sums use only approved rows, confirm the zero case).",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "transactions": [
+        [
+          121,
+          "US",
+          "approved",
+          1000,
+          "2018-12-18"
+        ],
+        [
+          122,
+          "US",
+          "declined",
+          2000,
+          "2018-12-19"
+        ],
+        [
+          123,
+          "US",
+          "approved",
+          2000,
+          "2019-01-01"
+        ]
+      ],
+      "expected": [
+        [
+          "2018-12",
+          "US",
+          2,
+          1,
+          3000,
+          1000
+        ],
+        [
+          "2019-01",
+          "US",
+          1,
+          1,
+          2000,
+          2000
+        ]
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "SQL task statement"
+  ],
+  "factsMissing": [
+    "month output format (YYYY-MM assumed, not stated)",
+    "zero-value convention for empty approved sums",
+    "output row order"
+  ],
+  "questions": [
+    "What is the month string format (YYYY-MM?) and what value appears for groups with no approved rows: 0 or NULL?"
+  ],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

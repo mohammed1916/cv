@@ -1,0 +1,37 @@
+{
+  "number": "1454",
+  "title": "Active Users",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Find accounts that have logins on at least five consecutive calendar days. Several logins on one day count as one.",
+  "inputFormat": "SQL. Accounts(id, name) with primary key id. Logins(id, login_date) with login_date a date; duplicate (id, login_date) rows are possible.",
+  "outputFormat": "SQL result: id and name for each qualifying account, sorted by id ascending.",
+  "officialConstraints": "unknown",
+  "tieRules": "Each account appears once.",
+  "edgeRules": "Logins on the same day are counted once. A run of at least five consecutive days is required.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "user 7 logs in on 1-5 and 1-5 again; user 8 logs in on 1-2,1-3,1-4,1-5",
+      "expected": "7 only"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "consecutive-day rule",
+    "duplicate logins count once",
+    "ordering by id"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "whether 'at least five consecutive' is measured in calendar days exactly as stated"
+  ],
+  "questions": [
+    "Confirm the duration rule (at least five consecutive calendar days) in the official statement."
+  ],
+  "nextAction": "Confirm rule wording against the official statement.",
+  "officialUrl": "https://leetcode.com/problems/active-users/description/"
+}

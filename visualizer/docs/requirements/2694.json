@@ -1,0 +1,39 @@
+{
+  "number": "2694",
+  "title": "Event Emitter",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/event-emitter/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Implement an event emitter with subscribe(eventName, callback) returning an object with unsubscribe(), and emit(eventName, args) returning the callback results in subscription order.",
+  "inputFormat": "subscribe: string event name and callback; emit: string event name and an argument list.",
+  "outputFormat": "subscribe returns an object with unsubscribe(); emit returns an array of callback results.",
+  "officialConstraints": "unknown",
+  "tieRules": "Callbacks run in subscription order.",
+  "edgeRules": "With no subscribers, emit returns an empty array. Unsubscribing removes only that subscription.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "subscribe 'x' a, subscribe 'x' b, emit 'x' with args",
+      "output": "[result of a, result of b] (authored-reference)",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "subscription-order rule",
+    "empty-result rule",
+    "unsubscribe scope"
+  ],
+  "factsMissing": [
+    "official numeric bounds",
+    "official example",
+    "behaviour when a subscriber unsubscribes or adds a subscriber during emit"
+  ],
+  "questions": [
+    "If a callback unsubscribes another subscriber during emit, is that subscriber still called in the current emit?",
+    "Must the same callback registered twice be called twice?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

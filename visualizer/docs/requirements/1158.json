@@ -1,0 +1,66 @@
+{
+  "number": "1158",
+  "title": "Market Analysis I",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/market-analysis-i/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "For every user, return the buyer_id, join_date and the number of orders the user placed as a buyer in calendar year 2019. Users with no such orders get 0.",
+  "inputFormat": "Users(user_id, join_date, favorite_brand); Orders(order_id, order_date, item_id, buyer_id, seller_id); Items(item_id, item_brand).",
+  "outputFormat": "Columns buyer_id, join_date, orders_in_2019; one row per user.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable: one row per user.",
+  "edgeRules": "Only orders with order_date in calendar year 2019 count. Users with no orders get 0.",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "users": [
+        [
+          1,
+          "2018-02-09",
+          "Lenovo"
+        ],
+        [
+          2,
+          "2018-03-12",
+          "Samsung"
+        ]
+      ],
+      "orders": [
+        [
+          1,
+          "2019-08-01",
+          1,
+          1,
+          2
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          "2018-02-09",
+          1
+        ],
+        [
+          2,
+          "2018-03-12",
+          0
+        ]
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "SQL task statement"
+  ],
+  "factsMissing": [
+    "the output column name orders_in_2019 (draft gives no name)",
+    "output row order"
+  ],
+  "questions": [
+    "What is the required output column name for the order count? The draft says only 'count'."
+  ],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

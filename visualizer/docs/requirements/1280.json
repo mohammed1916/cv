@@ -1,0 +1,35 @@
+{
+  "number": 1280,
+  "title": "Students and Examinations",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1280.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/students-and-examinations/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return every student and every subject combination with attended_exams equal to the number of matching examination records, including zero counts. Each duplicate examination row is a separate attendance.",
+  "inputFormat": "Students(student_id, student_name); Subjects(subject_name); Examinations(student_id, subject_name).",
+  "outputFormat": "Output columns are not fully stated; expected student_id, student_name, subject_name, attended_exams.",
+  "officialConstraints": "unknown",
+  "tieRules": "Sorted by student_id then subject_name.",
+  "edgeRules": "Duplicate examination rows count separately.",
+  "examples": {
+    "label": "authored-reference",
+    "note": "Student 1 Alice; subjects Math, Physics; exams (1, Math) twice. Expected: (1, Alice, Math, 2), (1, Alice, Physics, 0). [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "cross-join rule",
+    "duplicate attendance rule",
+    "ordering"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)",
+    "exact output columns"
+  ],
+  "questions": [
+    "Are student_name and the full output column list required, or only the counts? The draft does not list them."
+  ],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

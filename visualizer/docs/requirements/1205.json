@@ -1,0 +1,38 @@
+{
+  "number": 1205,
+  "title": "Monthly Transactions II",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1205.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/monthly-transactions-ii/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each month and country, report approved transactions by transaction date and chargebacks by chargeback date. A chargeback's amount is the amount of the transaction it refers to. Groups present in either stream are included.",
+  "inputFormat": "Transactions(id, country, state, amount, trans_date); Chargebacks(trans_id, trans_date).",
+  "outputFormat": "Per month and country: approved_count, approved_amount, chargeback_count, chargeback_amount. Exact column names need confirmation.",
+  "officialConstraints": "unknown",
+  "tieRules": "No tie rule; ordering is not stated in the draft.",
+  "edgeRules": "Groups appearing only in Chargebacks or only in Transactions must still appear; missing counts are zero.",
+  "examples": {
+    "label": "authored-reference",
+    "note": "Transaction 1 (US, approved, 1000, 2020-01-01); Chargeback (trans_id 1, 2020-01-03). Expected: 2020-01 US approved_count 1, approved_amount 1000, chargeback_count 1, chargeback_amount 1000. [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "two input tables",
+    "approved and chargeback definitions",
+    "inclusion of groups from either stream"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)",
+    "multiple-chargeback rule",
+    "output column names and ordering",
+    "month format"
+  ],
+  "questions": [
+    "Can one transaction have more than one chargeback row? The draft asks to verify this and it changes the count and amount rule.",
+    "Exact output column names, the month format and the row ordering are not stated."
+  ],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

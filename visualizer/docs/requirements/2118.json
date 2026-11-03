@@ -1,0 +1,35 @@
+{
+  "number": "2118",
+  "title": "Build the Equation",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "SQL: combine polynomial terms into one equation string in descending power order, ending with '=0'.",
+  "inputFormat": "Terms(power,factor) with power and factor per term.",
+  "outputFormat": "One string: signed terms in descending power, X and exponent notation, '=0' suffix.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Coefficients of +1/-1 and power 0/1 formatting, and zero terms, are not settled by the manual draft.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "table and columns",
+    "descending power order",
+    "'=0' suffix"
+  ],
+  "factsMissing": [
+    "official page text (HTTP 403 on fetch, not verified)",
+    "official numeric bounds",
+    "authored examples",
+    "coefficient 1 omission rule",
+    "leading sign rule",
+    "zero-factor term handling",
+    "output column name"
+  ],
+  "questions": [
+    "Confirm: is a coefficient of 1 or -1 omitted before X; how is a negative leading term written; are zero-factor terms dropped; what is the output column name?"
+  ],
+  "nextAction": "Fetch official page or obtain a readable copy; then confirm the listed questions and author examples.",
+  "provenance": "Manual draft local-reference/leetcode/manual/2118.txt (knowledge-derived, not a recovered statement). Official URL https://leetcode.com/problems/<slug>/description/ returned HTTP 403 on 2026-11-03; no recovered raw statement exists in the archive.",
+  "officialUrl": "https://leetcode.com/problems/build-the-equation/description/"
+}

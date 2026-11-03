@@ -1,0 +1,37 @@
+{
+  "number": "2020",
+  "title": "Number of Accounts That Did Not Stream",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "archiveStatus": "missing-statement (no raw file in local-reference/leetcode/raw)",
+  "officialUrl": "https://leetcode.com/problems/number-of-accounts-that-did-not-stream/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Count accounts with a subscription overlapping calendar year 2021 that have no stream in 2021.",
+  "inputFormat": "Subscriptions(account_id, start_date, end_date); Streams(session_id, account_id, stream_date).",
+  "outputFormat": "Single row accounts_count.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "A subscription overlaps 2021 if its interval intersects the calendar year; whether end dates are inclusive and whether NULL end dates are allowed is not stated.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "text": "authored-reference: account 1 subscribed 2020-06..2021-03 with no 2021 stream -> counted."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "overlap definition",
+    "no-stream condition",
+    "distinct account count"
+  ],
+  "factsMissing": [
+    "official statement text (archive status missing-statement; no raw file)",
+    "official confirmation of this summary (requirementsVerified false)",
+    "inclusive end_date convention",
+    "NULL end_date handling"
+  ],
+  "questions": [
+    "Is end_date inclusive, and can end_date be NULL?"
+  ],
+  "nextAction": "Fetch official page https://leetcode.com/problems/number-of-accounts-that-did-not-stream/description/ and confirm each listed fact; then set requirementsVerified."
+}

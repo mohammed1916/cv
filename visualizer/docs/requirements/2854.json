@@ -1,0 +1,29 @@
+{
+  "number": "2854",
+  "title": "Rolling Average Steps",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialConstraints": "unknown",
+  "examples": [],
+  "requirementsVerified": false,
+  "summary": "For each qualifying date, return the average steps over that date and the two preceding consecutive calendar dates for the same user, rounded to two decimals. Windows containing a missing date are omitted.",
+  "inputFormat": "Steps(user_id, steps_count, steps_date).",
+  "outputFormat": "Date and rolling average (column names not recorded), ordered by date.",
+  "tieRules": "Not recorded.",
+  "edgeRules": "A window spanning a calendar gap is not valid and is omitted. Whether one row per user per date is guaranteed is not recorded.",
+  "factsPresent": [
+    "Three-day consecutive window",
+    "Two decimal rounding",
+    "Windows with gaps omitted"
+  ],
+  "factsMissing": [
+    "Output column names and ordering",
+    "Guarantee of one row per user per date"
+  ],
+  "questions": [
+    "Is there at most one row per user per date, and what output columns and ordering are required?"
+  ],
+  "nextAction": "Obtain the official statement (recovered raw archive has none for this ID); confirm the listed missing facts, then set requirementsVerified only if an official page confirms them. Official base URL in the manual draft; not fetched in this pass.",
+  "examplesNote": "No authored example in this pass; authored-reference examples to be added after the statement is confirmed."
+}

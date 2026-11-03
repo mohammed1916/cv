@@ -1,0 +1,37 @@
+{
+  "number": "1843",
+  "title": "Suspicious Bank Accounts",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "archiveStatus": "missing-statement (no raw file in local-reference/leetcode/raw)",
+  "officialUrl": "https://leetcode.com/problems/suspicious-bank-accounts/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "An account is suspicious when its total incoming credit exceeds its max_income in two consecutive calendar months.",
+  "inputFormat": "Accounts(account_id, max_income); Transactions(transaction_id, account_id, type, amount, day). Incoming credit is the type literal for credit transactions (literal to be confirmed).",
+  "outputFormat": "Distinct account_id values.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Threshold comparison is strict (>), per the draft's note to verify strictness.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "text": "authored-reference: total incoming credit 500 in Jan and 600 in Feb with max_income 400 -> suspicious."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "incoming credit sum",
+    "monthly aggregation",
+    "two consecutive months"
+  ],
+  "factsMissing": [
+    "official statement text (archive status missing-statement; no raw file)",
+    "official confirmation of this summary (requirementsVerified false)",
+    "exact type literal for incoming credit",
+    "whether the threshold is strict"
+  ],
+  "questions": [
+    "What is the exact type literal for incoming transactions, and is the threshold strict?"
+  ],
+  "nextAction": "Fetch official page https://leetcode.com/problems/suspicious-bank-accounts/description/ and confirm each listed fact; then set requirementsVerified."
+}

@@ -1,21 +1,54 @@
 {
   "number": 3475,
   "title": "DNA Pattern Recognition",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
   "source": "https://leetcode.com/problems/dna-pattern-recognition/description/",
-  "checkedOn": "2026-11-02",
-  "sourceKind": "access-attempt-failed",
-  "contentKind": "none",
-  "summary": null,
-  "attempts": [
-    {
-      "method": "web-fetch agent (WebFetch)",
-      "url": "https://leetcode.com/problems/dna-pattern-recognition/description/",
-      "error": "HTTP 403 Forbidden, body not retrieved"
-    }
-  ],
-  "officialConstraints": null,
+  "summary": "SQL. Samples(sample_id, dna_sequence, species). For each sample compute flags for start/end codons, repeated-character runs and other DNA patterns.",
+  "inputFormat": "Samples(sample_id, dna_sequence, species).",
+  "outputFormat": "Unknown: flag column names and order.",
+  "officialConstraints": "unknown",
+  "tieRules": "Pattern definitions unknown.",
+  "edgeRules": "Unknown.",
   "examples": [],
-  "pitfalls": [],
-  "implementationStatus": "blocked-statement-unavailable",
-  "note": "Official statement could not be read on 2026-11-02; no requirements were inferred from the title. No src/problems folder created."
+  "requirementsVerified": false,
+  "factsPresent": [
+    "title",
+    "task category (SQL)",
+    "manual draft summary"
+  ],
+  "factsMissing": [
+    "officialConstraints",
+    "exact output columns and ordering",
+    "tie rules",
+    "edge rules",
+    "authored examples",
+    "official verification (official page HTTP 403 on 2026-11-03)"
+  ],
+  "questions": [
+    "What exact patterns define each flag, and what are the flag column names and ordering?"
+  ],
+  "nextAction": "Obtain the official statement (official page returned HTTP 403 to WebFetch on 2026-11-03) or a readable community reproduction; then fill outputFormat, ties and edges and author validation examples labelled authored-reference.",
+  "priorNote": {
+    "number": 3475,
+    "title": "DNA Pattern Recognition",
+    "source": "https://leetcode.com/problems/dna-pattern-recognition/description/",
+    "checkedOn": "2026-11-02",
+    "sourceKind": "access-attempt-failed",
+    "contentKind": "none",
+    "summary": null,
+    "attempts": [
+      {
+        "method": "web-fetch agent (WebFetch)",
+        "url": "https://leetcode.com/problems/dna-pattern-recognition/description/",
+        "error": "HTTP 403 Forbidden, body not retrieved"
+      }
+    ],
+    "officialConstraints": null,
+    "examples": [],
+    "pitfalls": [],
+    "implementationStatus": "blocked-statement-unavailable",
+    "note": "Official statement could not be read on 2026-11-02; no requirements were inferred from the title. No src/problems folder created."
+  }
 }

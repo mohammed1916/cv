@@ -1,0 +1,90 @@
+{
+  "number": 3242,
+  "title": "Design Neighbor Sum Service",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "recovered-raw",
+  "sourceFile": "local-reference/leetcode/raw/design-neighbor-sum-service.json",
+  "officialUrl": "https://leetcode.com/problems/design-neighbor-sum-service/description/",
+  "contentKind": "original-requirements-summary",
+  "category": "design",
+  "summary": "Design a class that stores a square n x n grid (n from 3 to 10) whose cells hold distinct integers in [0, n*n - 1]. Because there are exactly n*n cells and n*n distinct values in that range, every value appears exactly once, so every lookup target exists. The class needs two query methods: adjacentSum(value) returns the sum of the values directly above, below, left and right of the cell holding value (only cells inside the grid count); diagonalSum(value) returns the sum of the values in the four diagonal cells of that position (again only cells inside the grid count). Each query is answered from the stored grid.",
+  "inputFormat": "Constructor: NeighborSum(grid) with grid an n x n integer matrix. Method calls: adjacentSum(value) and diagonalSum(value) with value an integer in [0, n*n - 1].",
+  "outputFormat": "Constructor returns nothing (null in the call trace). adjacentSum and diagonalSum each return one integer: the sum of the qualifying neighbour values. For n >= 3 every cell has at least one adjacent neighbour and at least one diagonal neighbour inside the grid, so the sum is over a non-empty set of cells.",
+  "officialConstraints": [
+    "3 <= n == grid.length == grid[0].length <= 10",
+    "0 <= grid[i][j] <= n*n - 1",
+    "All grid[i][j] are distinct",
+    "value passed to adjacentSum and diagonalSum is in [0, n*n - 1]",
+    "At most 2 * n*n calls in total to adjacentSum and diagonalSum"
+  ],
+  "constraintsReportedBySource": "Recovered raw statement lists the constraints above; not yet confirmed on the official page in this pass.",
+  "tieRules": "Not applicable: each query returns a single sum; no ties.",
+  "edgeRules": [
+    "Neighbour cells outside the grid contribute nothing (corner and edge cells have fewer than four adjacent or diagonal neighbours).",
+    "The queried cell itself is never included in its own sum.",
+    "Because values are distinct and cover [0, n*n - 1], the queried value is always present in the grid; no 'value not found' behaviour is specified."
+  ],
+  "examples": [
+    {
+      "label": "authored-reference (validation only, not for website presets)",
+      "grid": [
+        [
+          8,
+          0,
+          1
+        ],
+        [
+          2,
+          3,
+          4
+        ],
+        [
+          5,
+          6,
+          7
+        ]
+      ],
+      "calls": [
+        [
+          "adjacentSum",
+          3
+        ],
+        [
+          "diagonalSum",
+          3
+        ],
+        [
+          "adjacentSum",
+          8
+        ],
+        [
+          "diagonalSum",
+          8
+        ]
+      ],
+      "expectedOutputs": [
+        12,
+        21,
+        2,
+        3
+      ],
+      "explanation": "Value 3 sits at row 1, column 1. Adjacent cells are 0 (above), 2 (left), 4 (right), 6 (below): 12. Diagonal cells are 8, 1, 5, 7: 21. Value 8 sits at row 0, column 0. Adjacent cells are 0 (right) and 2 (below): 2. Diagonal cell is 3 only: 3."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "Class name and method names (NeighborSum, adjacentSum, diagonalSum)",
+    "Constructor input shape and value range",
+    "Definition of adjacent (4-direction) and diagonal (4-direction) neighbours",
+    "Return type (sum of neighbour values)",
+    "Grid size range and distinct-value range",
+    "Call-count limit (2 * n*n total)",
+    "Boundary behaviour (out-of-grid cells excluded, implied by definition)"
+  ],
+  "factsMissing": [
+    "Official page confirmation of the statement text (only the recovered raw copy was read; no official fetch in this pass)",
+    "Manual draft file local-reference/leetcode/manual/3242.txt does not exist in the repository, so no separate draft was compared"
+  ],
+  "questions": [],
+  "nextAction": "Confirm the constraints and method contracts against the official page https://leetcode.com/problems/design-neighbor-sum-service/description/ (set requirementsVerified to true only if confirmed). No user question is needed for the statement itself."
+}

@@ -1,0 +1,36 @@
+{
+  "number": "2758",
+  "title": "Next Day",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/next-day/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Add a nextDay method to Date that returns the following calendar date formatted YYYY-MM-DD.",
+  "inputFormat": "A Date object.",
+  "outputFormat": "A string YYYY-MM-DD for the following calendar day.",
+  "officialConstraints": "unknown",
+  "tieRules": "not applicable",
+  "edgeRules": "The timezone semantics (local versus UTC) are not verified; millisecond arithmetic across daylight-saving transitions must be avoided per the draft.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "new Date('2024-02-28')",
+      "output": "'2024-02-29' (authored-reference)",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "calendar next-day rule",
+    "YYYY-MM-DD format"
+  ],
+  "factsMissing": [
+    "local versus UTC rule",
+    "official example and bounds"
+  ],
+  "questions": [
+    "Must the nextDay result use local-time or UTC calendar fields for the date components?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

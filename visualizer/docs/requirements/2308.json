@@ -1,0 +1,33 @@
+{
+  "number": "2308",
+  "title": "Arrange Table by Gender",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "SQL: arrange rows with user_id ascending within each gender, interleaving gender groups round-robin.",
+  "inputFormat": "Genders(user_id,gender).",
+  "outputFormat": "Rows (user_id, gender) in the interleaved order; gender cycle order not confirmed.",
+  "officialConstraints": "unknown",
+  "tieRules": "Within each gender, ascending user_id.",
+  "edgeRules": "Equal group sizes guaranteed per manual draft (verify).",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "table and columns",
+    "round-robin interleave",
+    "ascending user_id within group"
+  ],
+  "factsMissing": [
+    "official page text (HTTP 403 on fetch, not verified)",
+    "official numeric bounds",
+    "authored examples",
+    "gender order in the cycle",
+    "allowed gender values",
+    "equal-size guarantee"
+  ],
+  "questions": [
+    "Confirm the gender order in the round-robin cycle and the allowed gender values."
+  ],
+  "nextAction": "Fetch official page or obtain a readable copy; then confirm the listed questions and author examples.",
+  "provenance": "Manual draft local-reference/leetcode/manual/2308.txt (knowledge-derived, not a recovered statement). Official URL https://leetcode.com/problems/<slug>/description/ returned HTTP 403 on 2026-11-03; no recovered raw statement exists in the archive."
+}

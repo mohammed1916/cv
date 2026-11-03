@@ -1,0 +1,36 @@
+{
+  "number": 1384,
+  "title": "Total Sales Amount by Year",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1384.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/total-sales-amount-by-year/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each product and each year touched by a sales period, return total_amount as the number of inclusive calendar days of that period falling in that year times average_daily_sales.",
+  "inputFormat": "Product(product_id, product_name); Sales(product_id, period_start, period_end, average_daily_sales).",
+  "outputFormat": "product_id, product_name, report_year, total_amount.",
+  "officialConstraints": "unknown",
+  "tieRules": "Sorted by product_id then report_year.",
+  "edgeRules": "Leap-year day counts apply. The allowed year range is not confirmed by the draft.",
+  "examples": {
+    "label": "authored-reference",
+    "note": "Product 1 Phone, period 2019-01-01 to 2019-03-31 (90 days), daily 100: (1, Phone, 2019, 9000). [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "inclusive day count",
+    "per-year split",
+    "leap-year rule",
+    "ordering"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)",
+    "allowed year range"
+  ],
+  "questions": [
+    "What is the allowed range of years in Sales periods? The draft asks to verify it."
+  ],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

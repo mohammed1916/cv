@@ -1,0 +1,38 @@
+{
+  "number": "2755",
+  "title": "Deep Merge of Two Objects",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/deep-merge-of-two-objects/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Deep-merge two JSON-compatible values: recursively merge matching object keys and array indices; when both values are not mergeable, the second value replaces the first.",
+  "inputFormat": "Two JSON-compatible values (objects, arrays, primitives, null).",
+  "outputFormat": "A merged JSON-compatible value.",
+  "officialConstraints": "unknown",
+  "tieRules": "Second value wins for non-mergeable pairs.",
+  "edgeRules": "First-only and second-only keys/indices are retained. Null handling and whether inputs may be mutated are not verified.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "{a:1,b:{c:1}} with {b:{d:2}}",
+      "output": "{a:1,b:{c:1,d:2}} (authored-reference)",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "recursive merge rule",
+    "replacement rule for non-mergeable pairs",
+    "first-only and second-only retention"
+  ],
+  "factsMissing": [
+    "null handling rule",
+    "input mutation permission",
+    "official example and bounds"
+  ],
+  "questions": [
+    "Is null treated as a replaceable primitive, and must the inputs be left unmodified?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

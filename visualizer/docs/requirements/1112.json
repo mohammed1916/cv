@@ -1,0 +1,67 @@
+{
+  "number": "1112",
+  "title": "Highest Grade For Each Student",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/highest-grade-for-each-student/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "For each student, return the course with that student's highest grade. When a student's highest grade is shared by several courses, return the smallest course_id among them.",
+  "inputFormat": "Enrollments(student_id, course_id, grade), keyed by (student_id, course_id).",
+  "outputFormat": "Columns student_id, course_id, grade; one row per student, ordered by student_id.",
+  "officialConstraints": "unknown",
+  "tieRules": "Ties on the highest grade are broken by the smallest course_id.",
+  "edgeRules": "Students with a single enrollment return that enrollment.",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "enrollments": [
+        [
+          1,
+          2,
+          70
+        ],
+        [
+          1,
+          3,
+          95
+        ],
+        [
+          1,
+          5,
+          95
+        ],
+        [
+          2,
+          2,
+          80
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          3,
+          95
+        ],
+        [
+          2,
+          2,
+          80
+        ]
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "SQL task statement"
+  ],
+  "factsMissing": [
+    "output row order (draft says by student_id)",
+    "whether the output is sorted"
+  ],
+  "questions": [
+    "Is the ordering by student_id required (the draft states it), and is it ascending? Confirm."
+  ],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

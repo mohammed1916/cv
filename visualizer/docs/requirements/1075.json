@@ -1,0 +1,71 @@
+{
+  "number": "1075",
+  "title": "Project Employees I",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/project-employees-i/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "For each project, return the average experience_years of its employees, rounded to two decimals, under the name average_years.",
+  "inputFormat": "Project(project_id, employee_id): assignments, keyed by (project_id, employee_id). Employee(employee_id, name, experience_years).",
+  "outputFormat": "Columns project_id and average_years (decimal, two places); one row per project.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable: one row per project_id.",
+  "edgeRules": "Rounding is to two decimals. The draft asks to verify the source's non-NULL experience guarantee; this is unconfirmed.",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "project": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "employee": [
+        [
+          1,
+          "Khaled",
+          3
+        ],
+        [
+          2,
+          "Ali",
+          2
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          2.5
+        ],
+        [
+          2,
+          3.0
+        ]
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "SQL task statement"
+  ],
+  "factsMissing": [
+    "official rounding wording (two decimals is in the draft)",
+    "non-NULL guarantee for experience_years",
+    "output order"
+  ],
+  "questions": [
+    "Is experience_years guaranteed non-NULL? The draft asks for verification and nothing confirms it.",
+    "Is the output row order required?"
+  ],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

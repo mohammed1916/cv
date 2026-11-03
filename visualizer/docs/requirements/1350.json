@@ -1,0 +1,35 @@
+{
+  "number": 1350,
+  "title": "Students With Invalid Departments",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1350.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/students-with-invalid-departments/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return id and name of students whose department_id has no matching row in Departments.",
+  "inputFormat": "Departments(id, name); Students(id, name, department_id).",
+  "outputFormat": "id, name.",
+  "officialConstraints": "unknown",
+  "tieRules": "No tie rule; ordering not stated.",
+  "edgeRules": "NULL department_id is not yet decided: the draft asks whether NULL counts as an invalid reference.",
+  "examples": {
+    "label": "authored-reference",
+    "note": "Student 1 in department 1 (present) is excluded; student 2 in department 99 (absent) is returned. [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "missing-reference rule",
+    "output columns"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)",
+    "NULL department_id rule",
+    "ordering"
+  ],
+  "questions": [
+    "Should a student with a NULL department_id be returned as having an invalid department?"
+  ],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

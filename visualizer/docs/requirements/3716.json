@@ -2,11 +2,35 @@
   "number": 3716,
   "title": "Find Churn Risk Customers",
   "source": "https://leetcode.com/problems/find-churn-risk-customers/description/",
-  "checkedOn": "2026-11-02",
+  "checkedOn": "2026-11-03",
   "sourceKind": "access-attempt-failed",
-  "contentKind": "none",
-  "summary": null,
-  "accessAttempt": {"method": "web-fetch agent", "error": "web-fetch returned HTTP 403 Forbidden with no body"},
-  "missingInformation": "Full official statement, constraints and examples are required before any implementation.",
-  "implementationStatus": "skipped-no-verified-requirements"
+  "contentKind": "original-requirements-summary",
+  "problemClass": "SQL",
+  "summary": "SQL problem; the task criteria are not recorded in any retrieved source. No requirement is inferred from the title.",
+  "inputFormat": "unknown",
+  "outputFormat": "unknown",
+  "officialConstraints": "unknown",
+  "tieRules": "unknown",
+  "edgeRules": "unknown",
+  "examples": [],
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Official page fetch on 2026-11-03 returned HTTP 403 (WebFetch); statement not retrieved this pass. Recovered-archive index lists missing-statement for this ID.",
+  "factsPresent": [
+    "title",
+    "problem class (SQL)"
+  ],
+  "factsMissing": [
+    "inactivity window",
+    "subscription-status condition",
+    "risk threshold",
+    "output columns and ordering",
+    "tie rule",
+    "table keys and types"
+  ],
+  "questions": [
+    "Which inactivity window, subscription status and risk threshold define a churn-risk customer, and what are the output columns and ordering?"
+  ],
+  "nextAction": "Obtain the full official statement (blocked 403) or a verified community reproduction, then write the SQL contract.",
+  "previousSourceRecord": "existing note recorded HTTP 403 with no body; no statement content was available"
 }

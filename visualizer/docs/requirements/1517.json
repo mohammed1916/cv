@@ -1,0 +1,37 @@
+{
+  "number": "1517",
+  "title": "Find Users With Valid E-Mails",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return users whose mail has a valid prefix followed by @leetcode.com.",
+  "inputFormat": "SQL. Users(user_id, name, mail) with mail text.",
+  "outputFormat": "SQL result: user_id, name and mail for valid rows.",
+  "officialConstraints": "unknown",
+  "tieRules": "Unknown.",
+  "edgeRules": "Prefix must start with a letter; later characters may be letters, digits, underscore, period or hyphen. Domain is exactly '@leetcode.com'.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "'a_1@leetcode.com', '1a@leetcode.com', 'b@leetcode.org'",
+      "expected": "only a_1@leetcode.com"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "prefix character rule",
+    "exact domain"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "case sensitivity of letters and of the domain",
+    "output ordering"
+  ],
+  "questions": [
+    "Is the match case-sensitive, and is any ordering required?"
+  ],
+  "nextAction": "Confirm case sensitivity.",
+  "officialUrl": "https://leetcode.com/problems/find-users-with-valid-e-mails/description/"
+}

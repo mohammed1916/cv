@@ -1,0 +1,38 @@
+{
+  "number": 1204,
+  "title": "Last Person to Fit in the Bus",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1204.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/last-person-to-fit-in-the-bus/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Process people in ascending turn order, accumulating weight. The answer is the name of the last person in the longest prefix whose cumulative weight does not exceed the 1000 limit. Once a person would exceed the limit, no later person may board.",
+  "inputFormat": "Queue(person_id, person_name, weight, turn); turn orders the boarding sequence.",
+  "outputFormat": "A single person_name.",
+  "officialConstraints": "unknown",
+  "tieRules": "Boarding order is strictly by turn; no tie handling is described in the draft.",
+  "edgeRules": "Later lighter people cannot skip an earlier person who would exceed capacity.",
+  "examples": {
+    "label": "authored-reference",
+    "note": "Weights 250,175,350,500 at turns 1..4: cumulative 250, 425, 775, then 1275 exceeds 1000. Expected: the person at turn 3. [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "boarding rule",
+    "limit value 1000",
+    "no-skip rule",
+    "example authored"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)",
+    "inclusive vs exclusive limit",
+    "turn uniqueness guarantee"
+  ],
+  "questions": [
+    "Is a total equal to exactly 1000 allowed to board (the draft says the limit is 1000 and that a prefix must fit, which implies <=)? Confirm the inclusive bound against the official statement.",
+    "Is turn guaranteed unique and contiguous? The draft does not state it."
+  ],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

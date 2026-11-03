@@ -1,0 +1,38 @@
+{
+  "number": "2004",
+  "title": "The Number of Seniors and Juniors to Join the Company",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "archiveStatus": "missing-statement (no raw file in local-reference/leetcode/raw)",
+  "officialUrl": "https://leetcode.com/problems/the-number-of-seniors-and-juniors-to-join-the-company/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "With a budget of 70000, hire as many Seniors as possible, cheapest first, then Juniors from the remaining budget.",
+  "inputFormat": "Candidates(employee_id, experience, salary) with experience 'Senior' or 'Junior'.",
+  "outputFormat": "Columns experience, accepted_candidates for both categories, including zeros.",
+  "officialConstraints": "unknown",
+  "tieRules": "Assumed ascending salary order for ties; tie rule to confirm.",
+  "edgeRules": "Whether the hiring stops at the first unaffordable senior or skips to a cheaper one is not stated.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "text": "authored-reference: seniors 10000,20000 and juniors 15000 with budget 70000 -> both seniors hired, junior hired from remaining 40000."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "budget 70000",
+    "seniors first",
+    "cheaper first",
+    "zeros included"
+  ],
+  "factsMissing": [
+    "official statement text (archive status missing-statement; no raw file)",
+    "official confirmation of this summary (requirementsVerified false)",
+    "whether the senior pass stops at the first candidate that does not fit or continues",
+    "tie rule for equal salaries"
+  ],
+  "questions": [
+    "In the Senior pass, does hiring stop at the first unaffordable candidate or skip to later cheaper ones?"
+  ],
+  "nextAction": "Fetch official page https://leetcode.com/problems/the-number-of-seniors-and-juniors-to-join-the-company/description/ and confirm each listed fact; then set requirementsVerified."
+}

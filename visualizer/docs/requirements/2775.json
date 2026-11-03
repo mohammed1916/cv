@@ -1,0 +1,37 @@
+{
+  "number": "2775",
+  "title": "Undefined to Null",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/undefined-to-null/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Recursively replace undefined values with null in a nested object or array, preserving other values and structure.",
+  "inputFormat": "A JSON-like value that may contain undefined.",
+  "outputFormat": "A value with undefined replaced by null.",
+  "officialConstraints": "unknown",
+  "tieRules": "not applicable",
+  "edgeRules": "Whether the input must be mutated or copied, and whether sparse array holes count as undefined, are not verified.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "{a: undefined, b: [undefined, 1]}",
+      "output": "{a: null, b: [null, 1]} (authored-reference)",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "recursive replacement rule",
+    "structure preserved"
+  ],
+  "factsMissing": [
+    "mutation requirement",
+    "sparse-hole rule",
+    "official example"
+  ],
+  "questions": [
+    "Must the function return a new structure or mutate the input, and are sparse array holes replaced with null?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

@@ -1,0 +1,29 @@
+{
+  "number": "3052",
+  "title": "Maximize Items",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "With a fixed warehouse capacity, maximise complete prime-eligible item sets first, then complete non-prime sets from the remaining space.",
+  "inputFormat": "Inventory(item_id, item_type, item_category, square_footage).",
+  "outputFormat": "Count of prime-eligible item sets and non-prime sets (labels from draft, unverified).",
+  "officialConstraints": "unknown",
+  "tieRules": "Prime sets are allocated first; non-prime sets use the leftover space.",
+  "edgeRules": "Set composition (how many items per category form one complete set) and the 'prime-eligible' definition.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "SQL input table names and columns (from manual draft)",
+    "primary task rule (from manual draft)",
+    "official page reference https://leetcode.com/problems/maximize-items/description/"
+  ],
+  "factsMissing": [
+    "official statement not fetched or confirmed",
+    "exact output column names and row order",
+    "authored validation example"
+  ],
+  "questions": [
+    "The fixed warehouse capacity value, the definition of one complete set, and the exact output columns and order."
+  ],
+  "nextAction": "Fetch the official /description/ page for this problem and confirm the summary, then record the exact output columns, ordering and tie rules; author and validate a teaching example (labelled authored-reference)."
+}

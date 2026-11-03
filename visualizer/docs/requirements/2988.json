@@ -1,0 +1,29 @@
+{
+  "number": "2988",
+  "title": "Manager of the Largest Department",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialConstraints": "unknown",
+  "examples": [],
+  "requirementsVerified": false,
+  "summary": "Return the managers of the department(s) with the greatest number of employees.",
+  "inputFormat": "Employees(emp_id, emp_name, dep_id, position).",
+  "outputFormat": "Manager name and department id (columns not recorded).",
+  "tieRules": "Ties on the greatest employee count are retained by the draft wording; to be confirmed.",
+  "edgeRules": "Exact manager-position literal is unknown.",
+  "factsPresent": [
+    "Greatest employee count per department",
+    "Managers identified by position"
+  ],
+  "factsMissing": [
+    "Exact manager position literal",
+    "Whether ties are retained",
+    "Output columns"
+  ],
+  "questions": [
+    "What is the exact manager position literal, are tied departments retained, and what output columns are required?"
+  ],
+  "nextAction": "Obtain the official statement (recovered raw archive has none for this ID); confirm the listed missing facts, then set requirementsVerified only if an official page confirms them. Official base URL in the manual draft; not fetched in this pass.",
+  "examplesNote": "No authored example in this pass; authored-reference examples to be added after the statement is confirmed."
+}

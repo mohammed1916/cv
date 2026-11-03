@@ -1,0 +1,33 @@
+{
+  "number": 1327,
+  "title": "List the Products Ordered in a Period",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1327.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/list-the-products-ordered-in-a-period/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return each product name with the summed unit count for orders placed in February 2020, keeping only products whose total is at least 100.",
+  "inputFormat": "Products(product_id, product_name, product_category); Orders(product_id, order_date, unit).",
+  "outputFormat": "product_name, unit (the summed value).",
+  "officialConstraints": "unknown",
+  "tieRules": "No tie rule; ordering not stated.",
+  "edgeRules": "Only the February 2020 window applies (inclusive of all dates in that month).",
+  "examples": {
+    "label": "authored-reference",
+    "note": "Product A with orders 60 and 50 in February 2020 is returned with 110; product B with total 40 is not. [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "date window",
+    "threshold 100",
+    "output columns"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)",
+    "ordering"
+  ],
+  "questions": [],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

@@ -1,0 +1,32 @@
+{
+  "number": 1412,
+  "title": "Find the Quiet Students in All Exams",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1412.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/find-the-quiet-students-in-all-exams/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "A quiet student took at least one exam and in no exam they took achieved either the minimum or the maximum score for that exam. Return id and name of quiet students ordered by student_id.",
+  "inputFormat": "Student(student_id, student_name); Exam(exam_id, student_id, score).",
+  "outputFormat": "student_id, student_name.",
+  "officialConstraints": "unknown",
+  "tieRules": "All students tied at an exam's minimum or maximum are disqualified for that exam.",
+  "edgeRules": "Extremes are computed across all students who took that exam.",
+  "examples": {
+    "label": "authored-reference",
+    "note": "Exam 1: Ann 10, Bob 20, Cara 15; Cara has no other exam. Expected: Cara only. [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "quiet definition",
+    "tie disqualification",
+    "ordering"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)"
+  ],
+  "questions": [],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

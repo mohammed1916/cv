@@ -1,0 +1,42 @@
+{
+  "number": 2623,
+  "title": "Memoize",
+  "source": "https://leetcode.com/problems/memoize/description/",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft-knowledge-derived",
+  "contentKind": "original-requirements-summary",
+  "problemClass": "JavaScript higher-order function",
+  "summary": "memoize(fn) returns a function caching fn's result by its argument list; repeated calls with the same arguments must not recompute fn; argument order matters.",
+  "inputFormat": "memoize(fn) -> memoized function",
+  "outputFormat": "same value as fn for the same arguments",
+  "officialConstraints": "unknown (official constraints not retrieved)",
+  "tieRules": "not applicable",
+  "edgeRules": [
+    "argument order matters",
+    "cache by argument list, not JSON serialization for this variant (assumed from the draft)"
+  ],
+  "examples": [
+    {
+      "sequence": "f(2,3) then f(2,3)",
+      "output": "fn called once",
+      "authored": true
+    }
+  ],
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Official page fetch on 2026-11-03 returned HTTP 403 (WebFetch); statement not retrieved this pass. Recovered-archive index lists missing-statement for this ID.",
+  "factsPresent": [
+    "title",
+    "task summary from manual draft",
+    "signature/semantics from draft"
+  ],
+  "factsMissing": [
+    "supported argument types for this version",
+    "whether fn may be called with zero arguments"
+  ],
+  "questions": [
+    "Which argument domains (numbers only, or arbitrary values) does this version guarantee?"
+  ],
+  "nextAction": "Confirm supported argument domain on official page.",
+  "signature": "memoize(fn) -> memoized function"
+}

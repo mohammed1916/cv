@@ -1,0 +1,38 @@
+{
+  "number": "2715",
+  "title": "Timeout Cancellation",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/timeout-cancellation/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Implement cancellable(fn, args, t): schedule fn(...args) after t milliseconds and return a function that cancels the pending call if invoked before it runs.",
+  "inputFormat": "fn: a function; args: an argument array; t: a non-negative integer delay in milliseconds.",
+  "outputFormat": "A cancel function. The scheduled call's return value is not stated.",
+  "officialConstraints": "unknown",
+  "tieRules": "not applicable",
+  "edgeRules": "Cancelling after execution must not run fn again. t = 0 behaviour and whether cancel returns a value are not stated.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "fn adds args, t = 50, cancel at 20 ms",
+      "output": "fn never runs (authored-reference)",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "delay in milliseconds",
+    "cancel-before-run rule",
+    "no re-run after execution"
+  ],
+  "factsMissing": [
+    "official return value of cancel",
+    "behaviour for t = 0",
+    "official bounds and example"
+  ],
+  "questions": [
+    "Must the returned cancel function return anything, and is a t = 0 call still deferred (asynchronous) or run synchronously?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

@@ -1,0 +1,36 @@
+{
+  "number": "1783",
+  "title": "Grand Slam Titles",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "archiveStatus": "missing-statement (no raw file in local-reference/leetcode/raw)",
+  "officialUrl": "https://leetcode.com/problems/grand-slam-titles/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Count championship wins for each player across four tournament columns; return players with at least one win.",
+  "inputFormat": "Players(player_id, player_name); Championships(year, Wimbledon, Fr_open, US_open, Au_open) whose cells hold player_id values.",
+  "outputFormat": "Columns player_id, player_name, grand_slams_count for players with count >= 1.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not stated.",
+  "edgeRules": "A player winning in multiple years counts each win.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "text": "authored-reference: player 1 wins in 2020 Wimbledon and 2021 US_open -> grand_slams_count 2."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "counting across four columns",
+    "filter count >= 1"
+  ],
+  "factsMissing": [
+    "official statement text (archive status missing-statement; no raw file)",
+    "official confirmation of this summary (requirementsVerified false)",
+    "output ordering",
+    "NULL championship cell handling"
+  ],
+  "questions": [
+    "Is the output ordering specified?"
+  ],
+  "nextAction": "Fetch official page https://leetcode.com/problems/grand-slam-titles/description/ and confirm each listed fact; then set requirementsVerified."
+}

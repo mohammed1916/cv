@@ -1,0 +1,29 @@
+{
+  "number": "3126",
+  "title": "Server Utilization Time",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Pair start and stop events for each server, sum all running time across servers, and return the total number of whole days of uptime.",
+  "inputFormat": "Servers(server_id, status_time, session_status) with start and stop events.",
+  "outputFormat": "One total number of whole days.",
+  "officialConstraints": "unknown",
+  "tieRules": "Unknown.",
+  "edgeRules": "Unpaired start events and the floor rule are not confirmed.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "SQL input table names and columns (from manual draft)",
+    "primary task rule (from manual draft)",
+    "official page reference https://leetcode.com/problems/server-utilization-time/description/"
+  ],
+  "factsMissing": [
+    "official statement not fetched or confirmed",
+    "exact output column names and row order",
+    "authored validation example"
+  ],
+  "questions": [
+    "Are unclosed sessions ignored, and is the day count floor(total_seconds / 86400)?"
+  ],
+  "nextAction": "Fetch the official /description/ page for this problem and confirm the summary, then record the exact output columns, ordering and tie rules; author and validate a teaching example (labelled authored-reference)."
+}

@@ -1,0 +1,28 @@
+{
+  "number": "2893",
+  "title": "Calculate Orders Within Each Interval",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialConstraints": "unknown",
+  "examples": [],
+  "requirementsVerified": false,
+  "summary": "Interval aggregate query over an order schema. The draft does not know the schema, interval construction or requested outputs.",
+  "inputFormat": "Unknown: the draft says the exact schema is not reliably known.",
+  "outputFormat": "Unknown.",
+  "tieRules": "Unknown.",
+  "edgeRules": "Unknown.",
+  "factsPresent": [
+    "Category is SQL interval aggregation"
+  ],
+  "factsMissing": [
+    "Schema",
+    "Interval construction",
+    "Output columns, ordering and ties"
+  ],
+  "questions": [
+    "What is the exact schema, how are intervals defined, and what output columns and ordering are required?"
+  ],
+  "nextAction": "Blocked on the statement; do not implement from the title. Obtain the official statement (recovered raw archive has none for this ID); confirm the listed missing facts, then set requirementsVerified only if an official page confirms them. Official base URL in the manual draft; not fetched in this pass.",
+  "examplesNote": "No authored example in this pass; authored-reference examples to be added after the statement is confirmed."
+}

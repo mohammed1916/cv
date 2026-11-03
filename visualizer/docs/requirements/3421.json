@@ -1,0 +1,33 @@
+{
+  "number": 3421,
+  "title": "Find Students Who Improved",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "source": "https://leetcode.com/problems/find-students-who-improved/description/",
+  "summary": "SQL. Scores(student_id, subject, score, exam_date). Compare each student's first and latest score per subject and return improved cases.",
+  "inputFormat": "Scores(student_id, subject, score, exam_date).",
+  "outputFormat": "Unknown: output columns and order.",
+  "officialConstraints": "unknown",
+  "tieRules": "Unknown whether at least two exam dates are required.",
+  "edgeRules": "Unknown.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "title",
+    "task category (SQL)",
+    "manual draft summary"
+  ],
+  "factsMissing": [
+    "officialConstraints",
+    "exact output columns and ordering",
+    "tie rules",
+    "edge rules",
+    "authored examples",
+    "official verification (official page HTTP 403 on 2026-11-03)"
+  ],
+  "questions": [
+    "Is a student with only one exam in a subject excluded? What are the output aliases and ordering?"
+  ],
+  "nextAction": "Obtain the official statement (official page returned HTTP 403 to WebFetch on 2026-11-03) or a readable community reproduction; then fill outputFormat, ties and edges and author validation examples labelled authored-reference."
+}

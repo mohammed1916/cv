@@ -1,0 +1,30 @@
+{
+  "number": "2720",
+  "title": "Popularity Percentage",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialConstraints": "unknown",
+  "examples": [],
+  "requirementsVerified": false,
+  "summary": "Treat Friends rows as undirected. For each user, return the friend count divided by the total number of distinct users, times 100, rounded to two decimals.",
+  "inputFormat": "Friends(user1, user2).",
+  "outputFormat": "user and percentage (names not recorded).",
+  "tieRules": "Not recorded.",
+  "edgeRules": "Whether the denominator counts users appearing in Friends only or all users, and whether isolated users appear, is not settled.",
+  "factsPresent": [
+    "Undirected friendships",
+    "Two decimal percentage"
+  ],
+  "factsMissing": [
+    "Denominator definition",
+    "Output column names and ordering",
+    "Treatment of isolated users"
+  ],
+  "questions": [
+    "What is the denominator (distinct users in Friends only, or all users), and are isolated users returned?",
+    "What exact output column names and ordering?"
+  ],
+  "nextAction": "Obtain the official statement (recovered raw archive has none for this ID); confirm the listed missing facts, then set requirementsVerified only if an official page confirms them. Official base URL in the manual draft; not fetched in this pass.",
+  "examplesNote": "No authored example in this pass; authored-reference examples to be added after the statement is confirmed."
+}

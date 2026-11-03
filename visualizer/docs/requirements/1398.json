@@ -1,0 +1,32 @@
+{
+  "number": 1398,
+  "title": "Customers Who Bought Products A and B but Not C",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1398.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/customers-who-bought-products-a-and-b-but-not-c/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return customers who purchased both product A and product B and never purchased product C. Repeat purchases do not change qualification.",
+  "inputFormat": "Customers(customer_id, customer_name); Orders(order_id, customer_id, product_name).",
+  "outputFormat": "customer_id, customer_name.",
+  "officialConstraints": "unknown",
+  "tieRules": "Ordered by customer_id.",
+  "edgeRules": "Qualification uses distinct product presence, not counts.",
+  "examples": {
+    "label": "authored-reference",
+    "note": "Ann buys A and B; Bob buys A, B and C. Expected: only Ann. [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "set-membership rule",
+    "output columns",
+    "ordering"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)"
+  ],
+  "questions": [],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

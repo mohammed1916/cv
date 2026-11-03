@@ -1,0 +1,37 @@
+{
+  "number": "1747",
+  "title": "Leetflex Banned Accounts",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "archiveStatus": "missing-statement (no raw file in local-reference/leetcode/raw)",
+  "officialUrl": "https://leetcode.com/problems/leetflex-banned-accounts/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return accounts that have two sessions which overlap in time and were made from different IP addresses.",
+  "inputFormat": "LogInfo(account_id, ip_address, login, logout) with session timestamps.",
+  "outputFormat": "Distinct account_id values, one per banned account.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Sessions from the same IP address do not count. Whether sessions that only touch at an endpoint overlap is not settled in the draft.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "text": "authored-reference: account 1 sessions 10-20 (IP a) and 15-25 (IP b) -> banned; sessions 10-20 and 20-30 with different IPs -> depends on inclusive rule."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "overlap of two sessions",
+    "different-IP condition",
+    "distinct output"
+  ],
+  "factsMissing": [
+    "official statement text (archive status missing-statement; no raw file)",
+    "official confirmation of this summary (requirementsVerified false)",
+    "whether login equal to another session's logout counts as overlap",
+    "output ordering"
+  ],
+  "questions": [
+    "Does a session whose login equals another session's logout count as overlapping?"
+  ],
+  "nextAction": "Fetch official page https://leetcode.com/problems/leetflex-banned-accounts/description/ and confirm each listed fact; then set requirementsVerified."
+}

@@ -5,12 +5,33 @@
   "otherSources": [
     "https://walkccc.me/LeetCode/problems/2424/"
   ],
-  "summary": "Design class: upload(video) and longest() reporting the longest uploaded prefix 1..k.",
-  "officialConstraints": "Up to 2*10^5 calls combined (snippet).",
+  "summary": "Design a video upload tracker for videos 1..n: upload records a video; longest returns the largest i such that videos 1..i have all been uploaded (0 if video 1 is missing).",
+  "officialConstraints": "n up to 10^5; video in 1..n; at most 2*10^5 calls in total; at least one longest call (from the recovered statement).",
   "examples": [],
   "visualizationNotes": "SKIPPED: design (stream of method calls) without a sourced example input/output format.",
-  "checkedOn": "2026-10-29",
+  "checkedOn": "2026-11-03",
   "requirementsVerified": false,
-  "sourceKind": "search-snippets-only (official leetcode.com page returns 403 to WebFetch)",
-  "skipped": true
+  "sourceKind": "recovered-raw",
+  "skipped": true,
+  "contentKind": "original-requirements-summary",
+  "rawFile": "local-reference/leetcode/raw/longest-uploaded-prefix.json",
+  "officialUrl": "https://leetcode.com/problems/longest-uploaded-prefix/description/",
+  "inputFormat": "Constructor takes n; upload takes a video number; longest takes nothing.",
+  "outputFormat": "longest returns an integer; upload returns nothing.",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Videos are distinct, each in 1..n.",
+  "factsPresent": [
+    "Prefix definition",
+    "Operations",
+    "Constraints"
+  ],
+  "factsMissing": [
+    "Official page confirmation"
+  ],
+  "questions": [],
+  "nextAction": "Official page confirmation pending. Recovered statement is complete for the requirements; examples are not copied to the website.",
+  "previous_summary": "Design class: upload(video) and longest() reporting the longest uploaded prefix 1..k.",
+  "previous_officialConstraints": "Up to 2*10^5 calls combined (snippet).",
+  "previous_requirementsVerified": false,
+  "previous_sourceKind": "search-snippets-only (official leetcode.com page returns 403 to WebFetch)"
 }

@@ -1,0 +1,30 @@
+{
+  "number": "2793",
+  "title": "Status of Flight Tickets",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialConstraints": "unknown",
+  "examples": [],
+  "requirementsVerified": false,
+  "summary": "Within each flight, order bookings chronologically; the first capacity passengers are Confirmed and the rest are Waitlist.",
+  "inputFormat": "Flights(flight_id, capacity); Passengers(passenger_id, flight_id, booking_time).",
+  "outputFormat": "passenger_id and Status with labels Confirmed or Waitlist.",
+  "tieRules": "Booking-time ties must be resolved by a rule the draft does not state.",
+  "edgeRules": "Ties in booking_time; exact ordering of output rows not recorded.",
+  "factsPresent": [
+    "Chronological order per flight",
+    "First capacity passengers Confirmed, rest Waitlist"
+  ],
+  "factsMissing": [
+    "Tie-break rule for equal booking_time",
+    "Output ordering",
+    "Exact label spelling"
+  ],
+  "questions": [
+    "How are equal booking_time values ordered within a flight?",
+    "What row ordering and exact labels are required?"
+  ],
+  "nextAction": "Obtain the official statement (recovered raw archive has none for this ID); confirm the listed missing facts, then set requirementsVerified only if an official page confirms them. Official base URL in the manual draft; not fetched in this pass.",
+  "examplesNote": "No authored example in this pass; authored-reference examples to be added after the statement is confirmed."
+}

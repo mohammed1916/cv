@@ -1,0 +1,28 @@
+{
+  "number": "2987",
+  "title": "Find Expensive Cities",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialConstraints": "unknown",
+  "examples": [],
+  "requirementsVerified": false,
+  "summary": "Return cities whose average listing price exceeds the overall average price across all listings, sorted by city.",
+  "inputFormat": "Listings(listing_id, city, price).",
+  "outputFormat": "city rows sorted by city.",
+  "tieRules": "Sorted alphabetically by city.",
+  "edgeRules": "The overall average is row-weighted, not an average of city averages.",
+  "factsPresent": [
+    "Row-weighted overall average",
+    "Strict comparison"
+  ],
+  "factsMissing": [
+    "Rounding of averages (if any)",
+    "Output column name"
+  ],
+  "questions": [
+    "Is the comparison against the row-weighted overall average and is any rounding required?"
+  ],
+  "nextAction": "Obtain the official statement (recovered raw archive has none for this ID); confirm the listed missing facts, then set requirementsVerified only if an official page confirms them. Official base URL in the manual draft; not fetched in this pass.",
+  "examplesNote": "No authored example in this pass; authored-reference examples to be added after the statement is confirmed."
+}

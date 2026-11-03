@@ -1,0 +1,75 @@
+{
+  "number": 2590,
+  "title": "Design a Todo List",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "draftFile": "local-reference/leetcode/manual/2590.txt",
+  "officialUrl": "https://leetcode.com/problems/design-a-todo-list/description/",
+  "summary": "Design a per-user task manager: addTask creates a task with an increasing global id, description, due date and tags; getAllTasks and getTasksForTag return uncompleted tasks for that user ordered by due date; completeTask completes a task only for the user who owns it.",
+  "inputFormat": "addTask takes user id, description, due date and tags; getAllTasks takes user id; getTasksForTag takes user id and tag; completeTask takes user id and task id.",
+  "outputFormat": "addTask returns the task id; the list queries return task descriptions ordered by due date; completeTask return value not recorded.",
+  "officialConstraints": "unknown",
+  "tieRules": "Tasks are ordered by due date; tie ordering is not recorded.",
+  "edgeRules": "A different user cannot complete the task (draft).",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "addTask(1,'Finish report',5,['work']) -> 1; addTask(1,'Buy milk',2,['home']) -> 2; getAllTasks(1); completeTask(2,1); completeTask(1,1); getAllTasks(1)",
+      "output": "1, 2, ['Buy milk','Finish report'], no effect, completed, ['Buy milk']",
+      "note": "Conditional on the return values of completeTask not being specified."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "Owner-only completion",
+    "Uncompleted tasks only",
+    "Order by due date"
+  ],
+  "factsMissing": [
+    "Tie ordering for equal due dates",
+    "Return values of completeTask",
+    "Whether due dates are unique per user",
+    "Official bounds"
+  ],
+  "questions": [
+    "Can two tasks of the same user share a due date, and how are they ordered in the list results?",
+    "What does completeTask return, and does it return anything when the user is wrong?"
+  ],
+  "nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it.",
+  "previous_sourceKind": "manual-draft",
+  "previous_contentKind": "original-requirements-summary",
+  "previous_draftFile": "local-reference/leetcode/manual/2590.txt",
+  "previous_officialUrl": "https://leetcode.com/problems/design-a-todo-list/description/",
+  "previous_summary": "Design a per-user task manager: addTask creates a task with an increasing global id, description, due date and tags; getAllTasks and getTasksForTag return uncompleted tasks for that user ordered by due date; completeTask completes a task only for the user who owns it.",
+  "previous_inputFormat": "addTask takes user id, description, due date and tags; getAllTasks takes user id; getTasksForTag takes user id and tag; completeTask takes user id and task id.",
+  "previous_outputFormat": "addTask returns the task id; the list queries return task descriptions ordered by due date; completeTask return value not recorded.",
+  "previous_officialConstraints": "unknown",
+  "previous_tieRules": "Tasks are ordered by due date; tie ordering is not recorded.",
+  "previous_edgeRules": "A different user cannot complete the task (draft).",
+  "previous_examples": [
+    {
+      "label": "authored-reference",
+      "input": "addTask(1,'Finish report',5,['work']) -> 1; addTask(1,'Buy milk',2,['home']) -> 2; getAllTasks(1); completeTask(2,1); completeTask(1,1); getAllTasks(1)",
+      "output": "1, 2, ['Buy milk','Finish report'], no effect, completed, ['Buy milk']",
+      "note": "Conditional on the return values of completeTask not being specified."
+    }
+  ],
+  "previous_requirementsVerified": false,
+  "previous_factsPresent": [
+    "Owner-only completion",
+    "Uncompleted tasks only",
+    "Order by due date"
+  ],
+  "previous_factsMissing": [
+    "Tie ordering for equal due dates",
+    "Return values of completeTask",
+    "Whether due dates are unique per user",
+    "Official bounds"
+  ],
+  "previous_questions": [
+    "Can two tasks of the same user share a due date, and how are they ordered in the list results?",
+    "What does completeTask return, and does it return anything when the user is wrong?"
+  ],
+  "previous_nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it."
+}

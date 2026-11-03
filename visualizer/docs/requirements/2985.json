@@ -1,0 +1,28 @@
+{
+  "number": "2985",
+  "title": "Calculate Compressed Mean",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialConstraints": "unknown",
+  "examples": [],
+  "requirementsVerified": false,
+  "summary": "Compute the weighted mean of items per order: sum(item_count * frequency) / sum(frequency), rounded to two decimals.",
+  "inputFormat": "Orders with item_count and an occurrence/frequency column (exact name not known from the draft).",
+  "outputFormat": "One value (alias not recorded).",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Whether order_id is present, and exact frequency column name, are not settled.",
+  "factsPresent": [
+    "Weighted mean formula",
+    "Two decimal rounding"
+  ],
+  "factsMissing": [
+    "Exact column names",
+    "Output alias"
+  ],
+  "questions": [
+    "What are the exact column names for item count and frequency, and the output alias?"
+  ],
+  "nextAction": "Obtain the official statement (recovered raw archive has none for this ID); confirm the listed missing facts, then set requirementsVerified only if an official page confirms them. Official base URL in the manual draft; not fetched in this pass.",
+  "examplesNote": "No authored example in this pass; authored-reference examples to be added after the statement is confirmed."
+}

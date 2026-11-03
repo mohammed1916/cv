@@ -1,0 +1,35 @@
+{
+  "number": "1809",
+  "title": "Ad-Free Sessions",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "archiveStatus": "missing-statement (no raw file in local-reference/leetcode/raw)",
+  "officialUrl": "https://leetcode.com/problems/ad-free-sessions/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return sessions during which the session's customer saw no ad, using the playback interval.",
+  "inputFormat": "Playback(session_id, customer_id, start_time, end_time); Ads(ad_id, customer_id, timestamp).",
+  "outputFormat": "Distinct session_id values.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Ad time exactly at a boundary: draft says to use the source's inclusive convention, which is not stated in the draft.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "text": "authored-reference: session 1 from 10 to 20; ad at 20 -> depends on inclusive rule."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "ad-in-session test by same customer"
+  ],
+  "factsMissing": [
+    "official statement text (archive status missing-statement; no raw file)",
+    "official confirmation of this summary (requirementsVerified false)",
+    "whether the interval is inclusive at start_time and end_time",
+    "output ordering"
+  ],
+  "questions": [
+    "Are both start_time and end_time inclusive when testing ad timestamps?"
+  ],
+  "nextAction": "Fetch official page https://leetcode.com/problems/ad-free-sessions/description/ and confirm each listed fact; then set requirementsVerified."
+}

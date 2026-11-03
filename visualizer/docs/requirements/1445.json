@@ -1,0 +1,37 @@
+{
+  "number": "1445",
+  "title": "Apples & Oranges",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each date, subtract the oranges sold from the apples sold and return the difference.",
+  "inputFormat": "SQL. Sales(sale_date, fruit, sold_num) with primary key (sale_date, fruit); fruit is 'apples' or 'oranges'.",
+  "outputFormat": "SQL result: sale_date and diff (apples minus oranges), ordered by sale_date.",
+  "officialConstraints": "unknown",
+  "tieRules": "One row per date.",
+  "edgeRules": "Unknown whether a date can have only one fruit row; if so the missing fruit would be treated as 0.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "2020-05-01 apples 10, oranges 8; 2020-05-02 apples 15, oranges 15",
+      "expected": "2020-05-01 2; 2020-05-02 0"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "fruit values",
+    "diff formula",
+    "date ordering"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "whether both fruit rows are guaranteed for every date"
+  ],
+  "questions": [
+    "Does the official statement guarantee both an apples and an oranges row for every date? If not, what value is used for the missing fruit?"
+  ],
+  "nextAction": "Confirm the guarantee on both-fruit rows and the output ordering.",
+  "officialUrl": "https://leetcode.com/problems/apples-oranges/description/"
+}

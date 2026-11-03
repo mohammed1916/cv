@@ -1,0 +1,29 @@
+{
+  "number": "2668",
+  "title": "Find Latest Salaries",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialConstraints": "unknown",
+  "examples": [],
+  "requirementsVerified": false,
+  "summary": "Salary rows record increases for an employee. Return the latest salary per employee, taken as the greatest salary, ordered by employee_id.",
+  "inputFormat": "Salary(employee_id, name, salary); repeated employee_id rows are raises.",
+  "outputFormat": "employee_id, name and latest salary per employee (aliases not recorded).",
+  "tieRules": "Not applicable; one row per employee.",
+  "edgeRules": "The draft relies on a source guarantee that salaries only increase; no timestamp is used.",
+  "factsPresent": [
+    "Repeated rows represent increases",
+    "Latest = greatest salary per employee"
+  ],
+  "factsMissing": [
+    "Confirmation of the monotonic-increase guarantee in the source",
+    "Output column names"
+  ],
+  "questions": [
+    "Does the source guarantee that salary only increases for an employee, so the maximum is the latest?",
+    "Required output columns and ordering?"
+  ],
+  "nextAction": "Obtain the official statement (recovered raw archive has none for this ID); confirm the listed missing facts, then set requirementsVerified only if an official page confirms them. Official base URL in the manual draft; not fetched in this pass.",
+  "examplesNote": "No authored example in this pass; authored-reference examples to be added after the statement is confirmed."
+}

@@ -1,0 +1,79 @@
+{
+  "number": "1159",
+  "title": "Market Analysis II",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/market-analysis-ii/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "For every seller, determine whether the second item they sold (in order of order_date) has the seller's own favorite_brand. Return the seller_id and a yes/no flag. Sellers with fewer than two sales get 'no'.",
+  "inputFormat": "Users(user_id, join_date, favorite_brand); Orders(order_id, order_date, item_id, buyer_id, seller_id); Items(item_id, item_brand).",
+  "outputFormat": "Columns seller_id and a yes/no flag; one row per user who is a seller.",
+  "officialConstraints": "unknown",
+  "tieRules": "The flag column name is not stated in the draft (it says 'the required yes/no flag').",
+  "edgeRules": "Ties on order_date are not resolved by the draft; the second item is ambiguous when two sales share a date.",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "users": [
+        [
+          1,
+          "2019-01-01",
+          "Lenovo"
+        ],
+        [
+          2,
+          "2019-02-09",
+          "Samsung"
+        ]
+      ],
+      "items": [
+        [
+          1,
+          "Lenovo"
+        ],
+        [
+          2,
+          "Samsung"
+        ]
+      ],
+      "orders": [
+        [
+          1,
+          "2019-08-01",
+          1,
+          2,
+          1
+        ],
+        [
+          2,
+          "2019-08-02",
+          2,
+          2,
+          1
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          "yes"
+        ]
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "SQL task statement"
+  ],
+  "factsMissing": [
+    "output flag column name and literals (draft says yes/no)",
+    "tie rule for equal order_date",
+    "output row order"
+  ],
+  "questions": [
+    "What is the output column name for the flag, and are the literals 'yes' and 'no' exactly as stated? The draft says yes/no.",
+    "How are two sales on the same order_date ordered for 'second item'? The draft does not state a tie-breaker."
+  ],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

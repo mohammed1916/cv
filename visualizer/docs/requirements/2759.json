@@ -1,0 +1,38 @@
+{
+  "number": "2759",
+  "title": "Convert JSON String to Object",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/convert-json-string-to-object/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Parse a JSON string into the corresponding JavaScript value without using JSON.parse or eval, supporting nested arrays, objects and primitives.",
+  "inputFormat": "A JSON-formatted string.",
+  "outputFormat": "The parsed JavaScript value.",
+  "officialConstraints": "unknown",
+  "tieRules": "Object key order is not stated.",
+  "edgeRules": "Escape handling and number syntax must not be silently ignored. Whether invalid JSON must throw is not stated.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "'{\"a\":[1,true,null]}'",
+      "output": "{a:[1,true,null]} (authored-reference)",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "no JSON.parse or eval",
+    "nested arrays, objects and primitives"
+  ],
+  "factsMissing": [
+    "escape-sequence set required",
+    "number syntax required (exponents, negatives)",
+    "invalid-input behaviour",
+    "official example"
+  ],
+  "questions": [
+    "Which escape sequences and number forms must be supported, and must malformed input throw?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

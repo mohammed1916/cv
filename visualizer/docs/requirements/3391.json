@@ -4,11 +4,31 @@
   "source": "https://leetcode.doocs.org/en/lc/3391/",
   "officialUrl": "https://leetcode.com/problems/design-a-3d-binary-matrix-with-efficient-layer-tracking/",
   "sourceKind": "public-community-reference",
-  "checkedOn": "2026-11-02",
-  "contentKind": "independently-written-requirements",
+  "checkedOn": "2026-11-03",
+  "contentKind": "original-requirements-summary",
   "summary": "Implement Matrix3D(n), initially all zero, with setCell(x,y,z), unsetCell(x,y,z), and largestMatrix(). The query returns the x-layer with the most ones, choosing the largest x on a tie. Repeated sets or unsets must not double-count a cell.",
   "requirementsVerified": false,
   "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
   "examples": [],
-  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples.",
+  "previousContentKind": "independently-written-requirements",
+  "tieRules": "Given in the existing note summary.",
+  "edgeRules": "Given in the existing note summary.",
+  "factsPresent": [
+    "Method list",
+    "Tie and ordering rules from the existing note"
+  ],
+  "factsMissing": [
+    "Official bounds",
+    "Return types",
+    "Official confirmation"
+  ],
+  "nextAction": "Community reproduction only; fetch the official page and answer the questions.",
+  "questions": [
+    "What are the bounds on n and on the coordinates?",
+    "What does largestMatrix return when no cell is set (is the largest x returned by the tie rule)?",
+    "Are the coordinates 0-based?"
+  ],
+  "inputFormat": "Integer n; setCell and unsetCell take x, y, z.",
+  "outputFormat": "largestMatrix returns the x-layer index."
 }

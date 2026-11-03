@@ -1,0 +1,73 @@
+{
+  "number": 2804,
+  "title": "Array Prototype ForEach",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "draftFile": "local-reference/leetcode/manual/2804.txt",
+  "officialUrl": "https://leetcode.com/problems/array-prototype-foreach/description/",
+  "summary": "Implement forEach on arrays: call the callback once per element in index order with (value, index, array), using the optional thisArg as the callback's this, and return undefined.",
+  "inputFormat": "A callback function and an optional thisArg, applied to an array (the array is the receiver).",
+  "outputFormat": "undefined.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Holes and length changes during iteration are named in the draft but their rule is not stated.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "[1,2,3] with a callback that records (value,index)",
+      "output": "records [[1,0],[2,1],[3,2]] and returns undefined",
+      "note": "For validation only; not a source example."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "Callback arguments (value, index, array)",
+    "Order (index ascending)",
+    "Return undefined"
+  ],
+  "factsMissing": [
+    "Whether sparse holes are skipped",
+    "Whether the iteration length is fixed at call start",
+    "Official bounds"
+  ],
+  "questions": [
+    "Does the statement require skipping missing indices (holes), as the native method does?",
+    "Is the iteration length fixed when the call starts, so elements appended by the callback are not visited?"
+  ],
+  "nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it.",
+  "previous_sourceKind": "manual-draft",
+  "previous_contentKind": "original-requirements-summary",
+  "previous_draftFile": "local-reference/leetcode/manual/2804.txt",
+  "previous_officialUrl": "https://leetcode.com/problems/array-prototype-foreach/description/",
+  "previous_summary": "Implement forEach on arrays: call the callback once per element in index order with (value, index, array), using the optional thisArg as the callback's this, and return undefined.",
+  "previous_inputFormat": "A callback function and an optional thisArg, applied to an array (the array is the receiver).",
+  "previous_outputFormat": "undefined.",
+  "previous_officialConstraints": "unknown",
+  "previous_tieRules": "Not applicable.",
+  "previous_edgeRules": "Holes and length changes during iteration are named in the draft but their rule is not stated.",
+  "previous_examples": [
+    {
+      "label": "authored-reference",
+      "input": "[1,2,3] with a callback that records (value,index)",
+      "output": "records [[1,0],[2,1],[3,2]] and returns undefined",
+      "note": "For validation only; not a source example."
+    }
+  ],
+  "previous_requirementsVerified": false,
+  "previous_factsPresent": [
+    "Callback arguments (value, index, array)",
+    "Order (index ascending)",
+    "Return undefined"
+  ],
+  "previous_factsMissing": [
+    "Whether sparse holes are skipped",
+    "Whether the iteration length is fixed at call start",
+    "Official bounds"
+  ],
+  "previous_questions": [
+    "Does the statement require skipping missing indices (holes), as the native method does?",
+    "Is the iteration length fixed when the call starts, so elements appended by the callback are not visited?"
+  ],
+  "previous_nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it."
+}

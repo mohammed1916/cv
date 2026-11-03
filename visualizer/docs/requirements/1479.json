@@ -1,0 +1,38 @@
+{
+  "number": "1479",
+  "title": "Sales by Day of the Week",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Count quantities ordered on each weekday for each item category, with zero totals for days with no sales.",
+  "inputFormat": "SQL. Orders(order_id, customer_id, order_date, item_id, quantity); Items(item_id, item_name, item_category).",
+  "outputFormat": "SQL result: item_category and seven weekday columns Monday to Sunday with summed quantities; sorted by item_category.",
+  "officialConstraints": "unknown",
+  "tieRules": "One row per category; sorted by category ascending.",
+  "edgeRules": "Days with no orders give 0 (not NULL). Weekday taken from order_date.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "Books, Monday order qty 2, Tuesday qty 3",
+      "expected": "Books: Monday 2, Tuesday 3, others 0"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "weekday column set",
+    "zero totals",
+    "category sort"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "exact weekday column names",
+    "sort direction (draft says sort by category)"
+  ],
+  "questions": [
+    "Confirm the exact weekday column names and whether categories sort ascending."
+  ],
+  "nextAction": "Confirm column names against the official statement.",
+  "officialUrl": "https://leetcode.com/problems/sales-by-day-of-the-week/description/"
+}

@@ -1,0 +1,49 @@
+{
+  "number": "1148",
+  "title": "Article Views I",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/article-views-i/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "Return the distinct author IDs, under column id, of authors who viewed at least one of their own articles.",
+  "inputFormat": "Views(article_id, author_id, viewer_id, view_date).",
+  "outputFormat": "One column id; one row per author.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable: distinct ids.",
+  "edgeRules": "Self-view means author_id equals viewer_id on the same row.",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "views": [
+        [
+          1,
+          3,
+          5,
+          "2019-08-01"
+        ],
+        [
+          2,
+          7,
+          7,
+          "2019-08-01"
+        ]
+      ],
+      "expected": [
+        [
+          7
+        ]
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "SQL task statement"
+  ],
+  "factsMissing": [
+    "output row order (draft says sort by id ascending)"
+  ],
+  "questions": [],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

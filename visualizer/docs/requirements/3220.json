@@ -1,0 +1,29 @@
+{
+  "number": "3220",
+  "title": "Odd and Even Transactions",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each transaction date, sum the amounts with odd values and those with even values; use 0 when a category is absent.",
+  "inputFormat": "transactions(transaction_id, amount, transaction_date).",
+  "outputFormat": "transaction_date with odd-sum and even-sum (names not stated), ordered by date.",
+  "officialConstraints": "unknown",
+  "tieRules": "Sort by transaction_date ascending.",
+  "edgeRules": "Parity of negative amounts and whether dates with no transactions appear are not stated.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "SQL input table names and columns (from manual draft)",
+    "primary task rule (from manual draft)",
+    "official page reference https://leetcode.com/problems/odd-and-even-transactions/description/"
+  ],
+  "factsMissing": [
+    "official statement not fetched or confirmed",
+    "exact output column names and row order",
+    "authored validation example"
+  ],
+  "questions": [
+    "Output column names, handling of negative amounts for parity, and whether a date with no transactions is listed."
+  ],
+  "nextAction": "Fetch the official /description/ page for this problem and confirm the summary, then record the exact output columns, ordering and tie rules; author and validate a teaching example (labelled authored-reference)."
+}

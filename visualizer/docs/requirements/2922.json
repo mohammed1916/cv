@@ -1,0 +1,28 @@
+{
+  "number": "2922",
+  "title": "Market Analysis III",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialConstraints": "unknown",
+  "examples": [],
+  "requirementsVerified": false,
+  "summary": "Identify sellers meeting a brand-diversity sales criterion across Users, Orders and Items tables. The criterion is not known from the draft.",
+  "inputFormat": "Users(user_id, join_date, favorite_brand); Orders(order_id, order_date, item_id, buyer_id, seller_id); Items(item_id, item_brand).",
+  "outputFormat": "Unknown.",
+  "tieRules": "Unknown.",
+  "edgeRules": "Unknown.",
+  "factsPresent": [
+    "Table list and join keys are given"
+  ],
+  "factsMissing": [
+    "Exact sales criterion",
+    "Output columns and ordering",
+    "Date filter if any"
+  ],
+  "questions": [
+    "What exact condition on a seller's sales (brand diversity, date range) qualifies, and what output columns are required?"
+  ],
+  "nextAction": "The draft says it is not implementation-ready. Obtain the official statement (recovered raw archive has none for this ID); confirm the listed missing facts, then set requirementsVerified only if an official page confirms them. Official base URL in the manual draft; not fetched in this pass.",
+  "examplesNote": "No authored example in this pass; authored-reference examples to be added after the statement is confirmed."
+}

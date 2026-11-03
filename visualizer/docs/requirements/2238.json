@@ -1,0 +1,30 @@
+{
+  "number": "2238",
+  "title": "Number of Times a Driver Was a Passenger",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "SQL: for each person who appears as a driver, count rides where that same person is the passenger; drivers never passengers count 0.",
+  "inputFormat": "Rides(ride_id,driver_id,passenger_id).",
+  "outputFormat": "driver_id and cnt (names from manual draft); ordering not stated.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Zero counts included.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "table and columns",
+    "zero count rule"
+  ],
+  "factsMissing": [
+    "official page text (HTTP 403 on fetch, not verified)",
+    "official numeric bounds",
+    "authored examples",
+    "output ordering"
+  ],
+  "questions": [
+    "Confirm the output ordering."
+  ],
+  "nextAction": "Fetch official page or obtain a readable copy; then confirm the listed questions and author examples.",
+  "provenance": "Manual draft local-reference/leetcode/manual/2238.txt (knowledge-derived, not a recovered statement). Official URL https://leetcode.com/problems/<slug>/description/ returned HTTP 403 on 2026-11-03; no recovered raw statement exists in the archive."
+}

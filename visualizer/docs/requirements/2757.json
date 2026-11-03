@@ -1,0 +1,39 @@
+{
+  "number": "2757",
+  "title": "Generate Circular Array Values",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/generate-circular-array-values/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Implement a generator over a circular array starting at a given index. Each next(jump) moves by the signed jump, wraps modulo the length, and yields the element at the new position.",
+  "inputFormat": "An array and a starting index; next(jump) takes a signed integer jump.",
+  "outputFormat": "Generator results (the current element) with wrapping.",
+  "officialConstraints": "unknown",
+  "tieRules": "not applicable",
+  "edgeRules": "The default jump and the value used by the first next() call are not verified.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "[1,2,3], start 0, next(1), next(-2)",
+      "output": "2, then 2 (authored-reference)",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "wrap modulo length",
+    "signed jump",
+    "yield after moving"
+  ],
+  "factsMissing": [
+    "default jump for the first next()",
+    "whether the start element is yielded before any move",
+    "official example"
+  ],
+  "questions": [
+    "What is the first value yielded: the start element before any jump, or the element after the first next(jump)?",
+    "What is the default jump when next() is called without an argument?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

@@ -2,12 +2,35 @@
   "number": 3808,
   "title": "Find Emotionally Consistent Users",
   "source": "https://leetcode.com/problems/find-emotionally-consistent-users/description/",
-  "checkedOn": "2026-11-02",
-  "sourceKind": "official-page-via-web-tool",
-  "contentKind": "independently-written-requirements",
-  "summary": "SQL: reactions(user_id,content_id,reaction), unique by user/content. Keep users who reacted to at least five content items and have one reaction type accounting for at least 60 percent of their reactions. Return user_id,dominant_reaction,reaction_ratio, rounding the fraction to two decimals. Sort ratio descending then user_id ascending. The 60-percent rule prevents a tie for dominant type.",
-  "officialConstraints": "IDs are integers and reaction is text; primary key (user_id,content_id).",
-  "requirementsVerified": true,
+  "checkedOn": "2026-11-03",
+  "sourceKind": "community-or-prior-note",
+  "contentKind": "original-requirements-summary",
+  "problemClass": "SQL",
+  "summary": "Keep users who reacted to at least five content items and whose most common reaction type accounts for at least 60 percent of their reactions; return user_id, dominant_reaction, reaction_ratio (fraction rounded to two decimals), sorted by ratio descending then user_id ascending.",
+  "inputFormat": "reactions(user_id int, content_id int, reaction text), primary key (user_id, content_id).",
+  "outputFormat": "user_id, dominant_reaction, reaction_ratio (2 decimals).",
+  "officialConstraints": "IDs integers; reaction text; key (user_id, content_id).",
+  "tieRules": "Sort reaction_ratio descending then user_id ascending. The 60 percent threshold means at most one reaction type can qualify.",
+  "edgeRules": "Tie for dominant type cannot qualify under the 60 percent rule.",
   "examples": [],
-  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Prior note recorded an official-page-via-web-tool check on 2026-11-02 (official page via web tool; prior note marked requirementsVerified true). Not reconfirmed this pass: official page returns 403 on 2026-11-03.",
+  "factsPresent": [
+    "reactions counted per user over distinct content_id",
+    "ratio = count(dominant) / total reactions"
+  ],
+  "factsMissing": [
+    "table schema",
+    "threshold",
+    "ratio definition",
+    "output columns and ordering"
+  ],
+  "questions": [
+    "whether 'reacted to at least five content items' counts distinct content_id (the key already makes rows unique per content)"
+  ],
+  "nextAction": "Confirm on the official statement that the five-item count is per distinct content_id and that the ratio is over that user's reaction rows.",
+  "previousSourceRecord": {
+    "requirementsVerifiedClaimedByPriorNote": true
+  }
 }

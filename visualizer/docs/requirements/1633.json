@@ -1,0 +1,38 @@
+{
+  "number": "1633",
+  "title": "Percentage of Users Attended a Contest",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each contest, return the percentage of all users who registered for it, rounded to two decimals.",
+  "inputFormat": "SQL. Users(user_id, user_name); Register(contest_id, user_id).",
+  "outputFormat": "SQL result: contest_id and percentage; sorted by percentage descending, then contest_id ascending.",
+  "officialConstraints": "unknown",
+  "tieRules": "Sort: percentage descending, contest_id ascending.",
+  "edgeRules": "Percentage = distinct registrants / number of users * 100. Empty Users table handling not stated.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "2 users, contest 209 has 2 registrants",
+      "expected": "209 100.00"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "percentage formula",
+    "rounding to 2 decimals",
+    "sort order"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "behaviour when Users is empty",
+    "rounding mode"
+  ],
+  "questions": [
+    "What is returned when there are no users?"
+  ],
+  "nextAction": "Confirm empty-user rule.",
+  "officialUrl": "https://leetcode.com/problems/percentage-of-users-attended-a-contest/description/"
+}

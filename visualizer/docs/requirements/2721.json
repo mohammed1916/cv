@@ -1,0 +1,38 @@
+{
+  "number": "2721",
+  "title": "Execute Asynchronous Functions in Parallel",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/execute-asynchronous-functions-in-parallel/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Implement promiseAll(functions): call each zero-argument promise-returning function immediately and return a promise resolving to the array of results in input order.",
+  "inputFormat": "An array of zero-argument functions, each returning a promise.",
+  "outputFormat": "A promise resolving to an array of values in input order.",
+  "officialConstraints": "unknown",
+  "tieRules": "Results keep input order regardless of completion order.",
+  "edgeRules": "Reject when any task rejects. Empty input resolves to []. Promise.all must not be used.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "[() => resolve(1 after 20ms), () => resolve(2 after 10ms)]",
+      "output": "[1, 2] (authored-reference)",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "input-order rule",
+    "rejection rule",
+    "empty-array rule",
+    "Promise.all forbidden"
+  ],
+  "factsMissing": [
+    "official rejection-reason pass-through rule",
+    "official bounds and example"
+  ],
+  "questions": [
+    "On rejection, must the returned promise reject with the first rejection reason by time, and is a rejected task's error passed through unchanged?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

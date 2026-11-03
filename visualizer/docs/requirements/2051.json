@@ -1,0 +1,38 @@
+{
+  "number": "2051",
+  "title": "The Category of Each Member in the Store",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "archiveStatus": "missing-statement (no raw file in local-reference/leetcode/raw)",
+  "officialUrl": "https://leetcode.com/problems/the-category-of-each-member-in-the-store/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Classify each member by purchase-conversion rate across visits, keeping members with no visits.",
+  "inputFormat": "Members(member_id, name); Visits(visit_id, member_id, visit_date); Purchases(visit_id, charged_amount).",
+  "outputFormat": "Member category per member.",
+  "officialConstraints": "unknown",
+  "tieRules": "Category thresholds and labels not stated in the draft.",
+  "edgeRules": "Members with no visits must be retained; zero-visit category not stated.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "text": "authored-reference: 4 visits with 2 purchases -> conversion 50 percent (formula only; labels unknown)."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "conversion formula (purchases over visits, to confirm)",
+    "retain members with no visits"
+  ],
+  "factsMissing": [
+    "official statement text (archive status missing-statement; no raw file)",
+    "official confirmation of this summary (requirementsVerified false)",
+    "category labels",
+    "exact thresholds",
+    "category for zero visits",
+    "output columns and ordering"
+  ],
+  "questions": [
+    "What are the category labels, the thresholds, and the category for a member with no visits?"
+  ],
+  "nextAction": "Fetch official page https://leetcode.com/problems/the-category-of-each-member-in-the-store/description/ and confirm each listed fact; then set requirementsVerified."
+}

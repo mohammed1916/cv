@@ -1,0 +1,32 @@
+{
+  "number": "2329",
+  "title": "Product Sales Analysis V",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "SQL: total spending per user (sum of quantity times price), ordered by spending descending with a user-ID tie-break.",
+  "inputFormat": "Sales(sale_id,product_id,user_id,quantity) and Product(product_id,price).",
+  "outputFormat": "user_id and spending.",
+  "officialConstraints": "unknown",
+  "tieRules": "Ties on spending broken by user_id; direction not stated in draft.",
+  "edgeRules": "Not applicable.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "two tables",
+    "spend formula",
+    "ordering by spending descending"
+  ],
+  "factsMissing": [
+    "official page text (HTTP 403 on fetch, not verified)",
+    "official numeric bounds",
+    "authored examples",
+    "user_id tie-break direction",
+    "output names"
+  ],
+  "questions": [
+    "Confirm the user_id tie-break direction and output column names."
+  ],
+  "nextAction": "Fetch official page or obtain a readable copy; then confirm the listed questions and author examples.",
+  "provenance": "Manual draft local-reference/leetcode/manual/2329.txt (knowledge-derived, not a recovered statement). Official URL https://leetcode.com/problems/<slug>/description/ returned HTTP 403 on 2026-11-03; no recovered raw statement exists in the archive."
+}

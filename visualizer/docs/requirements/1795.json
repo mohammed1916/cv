@@ -1,0 +1,36 @@
+{
+  "number": "1795",
+  "title": "Rearrange Products Table",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "archiveStatus": "missing-statement (no raw file in local-reference/leetcode/raw)",
+  "officialUrl": "https://leetcode.com/problems/rearrange-products-table/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Unpivot store prices into one row per (product, store) with a non-NULL price.",
+  "inputFormat": "Products(product_id, store1, store2, store3) with nullable price columns.",
+  "outputFormat": "Rows product_id, store, price; NULL prices omitted.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "NULL prices produce no output row.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "text": "authored-reference: product 0 with store1 95 and store2 NULL -> one row (0, 'store1', 95)."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "unpivot shape",
+    "NULL-filter rule"
+  ],
+  "factsMissing": [
+    "official statement text (archive status missing-statement; no raw file)",
+    "official confirmation of this summary (requirementsVerified false)",
+    "exact store label text emitted (e.g. 'store1')",
+    "output ordering"
+  ],
+  "questions": [
+    "Is the store label emitted as the column name, and what is the output ordering?"
+  ],
+  "nextAction": "Fetch official page https://leetcode.com/problems/rearrange-products-table/description/ and confirm each listed fact; then set requirementsVerified."
+}

@@ -1,0 +1,67 @@
+{
+  "number": 1195,
+  "title": "Fizz Buzz Multithreaded",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "draftFile": "local-reference/leetcode/manual/1195.txt",
+  "officialUrl": "https://leetcode.com/problems/fizz-buzz-multithreaded/description/",
+  "summary": "Four threads cooperate to print FizzBuzz for 1..n in order: one prints 'fizz' for multiples of 3 only, one 'buzz' for multiples of 5 only, one 'fizzbuzz' for multiples of both, and one prints numbers otherwise; each uses its supplied callback.",
+  "inputFormat": "n and four callbacks (printFizz, printBuzz, printFizzBuzz, printNumber); callback argument shapes are not recorded.",
+  "outputFormat": "The callbacks are invoked in order 1..n; no return value.",
+  "officialConstraints": "unknown",
+  "tieRules": "Output order equals sequential FizzBuzz order.",
+  "edgeRules": "Callback argument types are not recorded.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "n=5",
+      "output": "1, 2, fizz, 4, buzz",
+      "note": "Authored; order check only."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "Four responsibilities",
+    "Sequential output order"
+  ],
+  "factsMissing": [
+    "Exact callback signatures (whether printNumber receives the integer)",
+    "Official bounds for n"
+  ],
+  "questions": [
+    "What are the exact callback signatures, including whether printNumber receives the integer value?"
+  ],
+  "nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it.",
+  "previous_sourceKind": "manual-draft",
+  "previous_contentKind": "original-requirements-summary",
+  "previous_draftFile": "local-reference/leetcode/manual/1195.txt",
+  "previous_officialUrl": "https://leetcode.com/problems/fizz-buzz-multithreaded/description/",
+  "previous_summary": "Four threads cooperate to print FizzBuzz for 1..n in order: one prints 'fizz' for multiples of 3 only, one 'buzz' for multiples of 5 only, one 'fizzbuzz' for multiples of both, and one prints numbers otherwise; each uses its supplied callback.",
+  "previous_inputFormat": "n and four callbacks (printFizz, printBuzz, printFizzBuzz, printNumber); callback argument shapes are not recorded.",
+  "previous_outputFormat": "The callbacks are invoked in order 1..n; no return value.",
+  "previous_officialConstraints": "unknown",
+  "previous_tieRules": "Output order equals sequential FizzBuzz order.",
+  "previous_edgeRules": "Callback argument types are not recorded.",
+  "previous_examples": [
+    {
+      "label": "authored-reference",
+      "input": "n=5",
+      "output": "1, 2, fizz, 4, buzz",
+      "note": "Authored; order check only."
+    }
+  ],
+  "previous_requirementsVerified": false,
+  "previous_factsPresent": [
+    "Four responsibilities",
+    "Sequential output order"
+  ],
+  "previous_factsMissing": [
+    "Exact callback signatures (whether printNumber receives the integer)",
+    "Official bounds for n"
+  ],
+  "previous_questions": [
+    "What are the exact callback signatures, including whether printNumber receives the integer value?"
+  ],
+  "previous_nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it."
+}

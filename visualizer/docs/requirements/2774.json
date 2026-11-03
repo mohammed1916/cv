@@ -1,0 +1,37 @@
+{
+  "number": "2774",
+  "title": "Array Upper Bound",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/array-upper-bound/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Given a sorted numeric array and a target, return the last index whose value equals target, or -1 if absent.",
+  "inputFormat": "A sorted numeric array and a target number.",
+  "outputFormat": "The last index of target, or -1.",
+  "officialConstraints": "unknown",
+  "tieRules": "With duplicates, the last index is returned (per the draft).",
+  "edgeRules": "Absent target returns -1. The requested method name and whether an insertion index is intended are not verified.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "[1,2,2,2,3], target 2",
+      "output": "3 (authored-reference)",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "last occurrence rule",
+    "-1 for absent target",
+    "sorted input"
+  ],
+  "factsMissing": [
+    "official method name or function signature",
+    "official example and bounds"
+  ],
+  "questions": [
+    "Is the required API a standalone function or an Array prototype method, and is the result the last index of an equal value (not an insertion point)?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

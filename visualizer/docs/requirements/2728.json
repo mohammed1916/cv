@@ -1,0 +1,39 @@
+{
+  "number": "2728",
+  "title": "Count Houses in a Circular Street",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/count-houses-in-a-circular-street/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Count the houses of a hidden circular street using only a Street interface of door and movement operations.",
+  "inputFormat": "A Street object exposing door-open/close and left/right movement methods; no direct access to the house array.",
+  "outputFormat": "The exact number of houses.",
+  "officialConstraints": "unknown",
+  "tieRules": "not applicable",
+  "edgeRules": "Allowed methods, initial door states and any upper-bound parameter are not settled by the draft.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "unknown",
+      "output": "unknown",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task intent: count using only the interface",
+    "circular street"
+  ],
+  "factsMissing": [
+    "exact list of Street methods and their return values",
+    "initial door states",
+    "upper-bound parameter",
+    "official example"
+  ],
+  "questions": [
+    "What exact Street methods are available (names, arguments, return values) and what are the initial door states?",
+    "Is there an upper bound on the number of houses that the algorithm may rely on?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

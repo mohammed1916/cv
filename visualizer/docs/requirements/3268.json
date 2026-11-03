@@ -1,0 +1,33 @@
+{
+  "number": 3268,
+  "title": "Find Overlapping Shifts II",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "source": "https://leetcode.com/problems/find-overlapping-shifts-ii/description/",
+  "summary": "SQL. Table EmployeeShifts(employee_id, start_time, end_time). Compute per-employee overlap statistics (maximum concurrent shifts, overlap duration) as the source defines them.",
+  "inputFormat": "EmployeeShifts(employee_id, start_time, end_time)",
+  "outputFormat": "Unknown: statistic column names and order.",
+  "officialConstraints": "unknown",
+  "tieRules": "Unknown definitions of maximum concurrency and overlap duration units.",
+  "edgeRules": "Unknown whether non-overlapping employees are included.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "title",
+    "task category (SQL)",
+    "manual draft summary"
+  ],
+  "factsMissing": [
+    "officialConstraints",
+    "exact output columns and ordering",
+    "tie rules",
+    "edge rules",
+    "authored examples",
+    "official verification (official page HTTP 403 on 2026-11-03)"
+  ],
+  "questions": [
+    "What exactly is maximum concurrent shifts (counted at instants or intervals), what unit is overlap duration, and are non-overlapping employees included?"
+  ],
+  "nextAction": "Obtain the official statement (official page returned HTTP 403 to WebFetch on 2026-11-03) or a readable community reproduction; then fill outputFormat, ties and edges and author validation examples labelled authored-reference."
+}

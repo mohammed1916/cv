@@ -1,0 +1,35 @@
+{
+  "number": 1341,
+  "title": "Movie Rating",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1341.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/movie-rating/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return two results: the user who rated the most movies (ties broken by lexicographically smallest name), and the movie with the highest average rating in February 2020 (ties broken by lexicographically smallest title).",
+  "inputFormat": "Movies(movie_id, title); Users(user_id, name); MovieRating(movie_id, user_id, rating, created_at).",
+  "outputFormat": "One column named results with two rows: a user name and a movie title.",
+  "officialConstraints": "unknown",
+  "tieRules": "Ties: smallest name for users, smallest title for movies.",
+  "edgeRules": "The February 2020 window applies only to the movie average.",
+  "examples": {
+    "label": "authored-reference",
+    "note": "Ann rated two movies and Bob rated one: Ann is the first result. [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "two result rows",
+    "tie rules",
+    "February window"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)",
+    "exact output shape and row order"
+  ],
+  "questions": [
+    "Is the output column named results, and is the user row first?"
+  ],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

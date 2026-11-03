@@ -1,0 +1,38 @@
+{
+  "number": "2796",
+  "title": "Repeat String",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/repeat-string/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return a string formed by n consecutive copies of the input string, without using the built-in repeat method. For n = 0 return an empty string.",
+  "inputFormat": "A string and a nonnegative integer n.",
+  "outputFormat": "The concatenated string.",
+  "officialConstraints": "unknown",
+  "tieRules": "not applicable",
+  "edgeRules": "Nonnegative integer input guarantee is to be verified. Empty input string behaviour is not stated.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "'ab', 3",
+      "output": "'ababab' (authored-reference)",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "n copies",
+    "n = 0 gives empty string",
+    "String.prototype.repeat forbidden"
+  ],
+  "factsMissing": [
+    "official input guarantees",
+    "empty-string input rule",
+    "official example"
+  ],
+  "questions": [
+    "Is n guaranteed to be a nonnegative integer, and is the empty input string allowed?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

@@ -1,0 +1,29 @@
+{
+  "number": "2995",
+  "title": "Viewers Turned Streamers",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each user whose earliest session (by session_start) is of type Viewer, count that user's later sessions of type Streamer.",
+  "inputFormat": "Sessions(user_id, session_start, session_end, session_id, session_type); session_type takes Viewer or Streamer.",
+  "outputFormat": "Output user_id and a streamer session count for qualifying users.",
+  "officialConstraints": "unknown",
+  "tieRules": "Order by first-session start and session_start; ties in session_start are not resolved by the draft.",
+  "edgeRules": "Whether users whose first session is Viewer but who have no later Streamer session are included with count 0.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "SQL input table names and columns (from manual draft)",
+    "primary task rule (from manual draft)",
+    "official page reference https://leetcode.com/problems/viewers-turned-streamers/description/"
+  ],
+  "factsMissing": [
+    "official statement not fetched or confirmed",
+    "exact output column names and row order",
+    "authored validation example"
+  ],
+  "questions": [
+    "Output column names and row order; tie rule for equal session_start values determining the 'first' session."
+  ],
+  "nextAction": "Fetch the official /description/ page for this problem and confirm the summary, then record the exact output columns, ordering and tie rules; author and validate a teaching example (labelled authored-reference)."
+}

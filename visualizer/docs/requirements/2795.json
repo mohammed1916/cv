@@ -1,0 +1,37 @@
+{
+  "number": "2795",
+  "title": "Parallel Execution of Promises for Individual Results Retrieval",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/parallel-execution-of-promises-for-individual-results-retrieval/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Execute all promise-returning functions concurrently and return an outcome record for each in input order, keeping both successes and failures.",
+  "inputFormat": "An array of zero-argument promise-returning functions.",
+  "outputFormat": "An array of outcome records in input order. The record schema is not verified.",
+  "officialConstraints": "unknown",
+  "tieRules": "Outcome order follows input order.",
+  "edgeRules": "The operation does not reject as a whole; failures are preserved in their records.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "[() => 1, () => throw 'x']",
+      "output": "[{status:'fulfilled',value:1}, {status:'rejected',reason:'x'}] (authored-reference)",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "concurrent execution",
+    "input-order records",
+    "failures preserved"
+  ],
+  "factsMissing": [
+    "exact record schema (keys and status strings)",
+    "official example"
+  ],
+  "questions": [
+    "What exact keys and status strings must each outcome record have?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

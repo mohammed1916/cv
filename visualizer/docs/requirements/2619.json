@@ -1,0 +1,47 @@
+{
+  "number": 2619,
+  "title": "Array Prototype Last",
+  "source": "https://leetcode.com/problems/array-prototype-last/description/",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft-knowledge-derived",
+  "contentKind": "original-requirements-summary",
+  "problemClass": "JavaScript API",
+  "summary": "Add Array.prototype.last returning the final element, or -1 when the array is empty; the array is not mutated.",
+  "inputFormat": "Array.prototype.last() -> any",
+  "outputFormat": "final element, or -1 if length 0",
+  "officialConstraints": "unknown (official constraints not retrieved)",
+  "tieRules": "not applicable",
+  "edgeRules": [
+    "empty array returns -1",
+    "falsy final element (0, '', null) is returned as-is, not treated as empty"
+  ],
+  "examples": [
+    {
+      "input": "[1,2,3]",
+      "output": "3",
+      "authored": true
+    },
+    {
+      "input": "[]",
+      "output": "-1",
+      "authored": true
+    }
+  ],
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Official page fetch on 2026-11-03 returned HTTP 403 (WebFetch); statement not retrieved this pass. Recovered-archive index lists missing-statement for this ID.",
+  "factsPresent": [
+    "title",
+    "task summary from manual draft",
+    "signature/semantics from draft"
+  ],
+  "factsMissing": [
+    "whether values equal to -1 are a special case (no rule stated)",
+    "sparse-array behavior"
+  ],
+  "questions": [
+    "Does the official statement treat an array whose last element is -1 as ambiguous, or any other special value?"
+  ],
+  "nextAction": "Confirm return value on official page when accessible.",
+  "signature": "Array.prototype.last() -> any"
+}

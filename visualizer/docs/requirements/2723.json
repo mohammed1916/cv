@@ -1,0 +1,37 @@
+{
+  "number": "2723",
+  "title": "Add Two Promises",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/add-two-promises/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Given two promises that resolve to numbers, return a promise resolving to the sum of the values.",
+  "inputFormat": "Two promises resolving to numbers.",
+  "outputFormat": "A promise resolving to their sum.",
+  "officialConstraints": "unknown",
+  "tieRules": "not applicable",
+  "edgeRules": "Rejection behaviour is not stated in the draft.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "promise(2), promise(3)",
+      "output": "promise(5) (authored-reference)",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "sum rule",
+    "numeric resolution"
+  ],
+  "factsMissing": [
+    "rejection propagation rule",
+    "official example",
+    "official bounds"
+  ],
+  "questions": [
+    "If either input promise rejects, must the result promise reject with the same reason?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

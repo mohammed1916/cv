@@ -1,0 +1,65 @@
+{
+  "number": "1084",
+  "title": "Sales Analysis III",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/sales-analysis-iii/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "Return product_id and product_name for products that were sold in the interval 2019-01-01 to 2019-03-31 inclusive and were never sold outside that interval.",
+  "inputFormat": "Product(product_id, product_name, unit_price); Sales(seller_id, product_id, buyer_id, sale_date, quantity, price); sale_date is a date.",
+  "outputFormat": "Columns product_id and product_name; one row per qualifying product.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable: distinct products.",
+  "edgeRules": "A product with no sales does not qualify. Interval is inclusive at both ends.",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "product": [
+        [
+          1,
+          "Nokia"
+        ],
+        [
+          2,
+          "Apple"
+        ]
+      ],
+      "sales": [
+        [
+          1,
+          1,
+          "2019-01-01"
+        ],
+        [
+          2,
+          2,
+          "2019-03-31"
+        ],
+        [
+          2,
+          2,
+          "2019-04-01"
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          "Nokia"
+        ]
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "SQL task statement"
+  ],
+  "factsMissing": [
+    "output row order"
+  ],
+  "questions": [
+    "Is output order required? The draft is silent."
+  ],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

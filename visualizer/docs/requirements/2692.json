@@ -1,0 +1,39 @@
+{
+  "number": "2692",
+  "title": "Make Object Immutable",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/make-object-immutable/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return a wrapper over an object (and nested objects/arrays) that allows reads but blocks writes, deletions and mutating collection operations.",
+  "inputFormat": "Unknown: the input is a JSON-like object or array; the exact input domain is not in the draft.",
+  "outputFormat": "A read-only view; reads return the same values as the source; blocked writes raise an error.",
+  "officialConstraints": "unknown",
+  "tieRules": "unknown",
+  "edgeRules": "Nested objects and arrays must also be blocked. Whether blocked operations throw or are silently ignored is not stated.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "unknown",
+      "output": "unknown",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task intent: block assignment, deletion and mutating methods",
+    "nested blocking stated"
+  ],
+  "factsMissing": [
+    "exact error value or message thrown on blocked writes",
+    "list of mutating array methods covered",
+    "official bounds",
+    "source example"
+  ],
+  "questions": [
+    "When a blocked assignment, delete or mutating array method is attempted, what exact value is thrown (type and message), or is it ignored?",
+    "Which array methods count as mutating and must be blocked?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

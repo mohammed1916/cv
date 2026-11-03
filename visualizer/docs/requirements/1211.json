@@ -1,0 +1,39 @@
+{
+  "number": 1211,
+  "title": "Queries Quality and Percentage",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1211.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/queries-quality-and-percentage/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each query_name compute quality as the average of rating divided by position, and poor_query_percentage as the percentage of rows whose rating is below 3. Both values are rounded to two decimals; repeated records count as separate observations.",
+  "inputFormat": "Queries(query_name, result, position, rating).",
+  "outputFormat": "Per query_name: quality and poor_query_percentage, both to two decimals.",
+  "officialConstraints": "unknown",
+  "tieRules": "No tie rule.",
+  "edgeRules": "NULL query_name handling and position values that are zero are not stated; the draft asks to verify NULL names.",
+  "examples": {
+    "label": "authored-reference",
+    "note": "Query Dog rows (rating 5, position 1) and (rating 2, position 2): quality = (5/1 + 2/2)/2 = 3.00, poor_query_percentage = 50.00. [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "quality formula",
+    "poor-query threshold 3",
+    "rounding to two decimals"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)",
+    "NULL query_name rule",
+    "position bound",
+    "rounding tie method",
+    "output column names and ordering"
+  ],
+  "questions": [
+    "How are rows with a NULL query_name grouped or excluded?",
+    "Is position guaranteed to be positive? The draft does not state the bound."
+  ],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

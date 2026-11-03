@@ -1,0 +1,60 @@
+{
+  "number": 2254,
+  "title": "Design Video Sharing Platform",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "draftFile": "local-reference/leetcode/manual/2254.txt",
+  "officialUrl": "https://leetcode.com/problems/design-video-sharing-platform/description/",
+  "summary": "Design a video platform with upload, remove, watch, like, dislike, getLikesAndDislikes and getViews. upload assigns the smallest free nonnegative id; remove frees it; watch returns the substring between two minute indexes and increments views for an existing video.",
+  "inputFormat": "upload takes video content; remove, like, dislike, getLikesAndDislikes and getViews take a video id; watch takes an id and start and end minute indexes.",
+  "outputFormat": "Return values depend on the method; the missing-video sentinels are not recorded.",
+  "officialConstraints": "unknown",
+  "tieRules": "Smallest free id is reused after removal.",
+  "edgeRules": "The missing-video sentinel for each method and the watch substring bounds are not recorded.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "Smallest free nonnegative id",
+    "watch substring and view increment",
+    "Like and dislike counters"
+  ],
+  "factsMissing": [
+    "Sentinel return for each method when the video is absent",
+    "watch range bounds and clamping",
+    "Return types of getLikesAndDislikes and getViews",
+    "Official bounds"
+  ],
+  "questions": [
+    "What sentinel does each method return when the video id is absent (for example for watch, getLikesAndDislikes and getViews)?",
+    "What are the watch minute bounds, and does watch clamp an end index beyond the content?"
+  ],
+  "nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it.",
+  "previous_sourceKind": "manual-draft",
+  "previous_contentKind": "original-requirements-summary",
+  "previous_draftFile": "local-reference/leetcode/manual/2254.txt",
+  "previous_officialUrl": "https://leetcode.com/problems/design-video-sharing-platform/description/",
+  "previous_summary": "Design a video platform with upload, remove, watch, like, dislike, getLikesAndDislikes and getViews. upload assigns the smallest free nonnegative id; remove frees it; watch returns the substring between two minute indexes and increments views for an existing video.",
+  "previous_inputFormat": "upload takes video content; remove, like, dislike, getLikesAndDislikes and getViews take a video id; watch takes an id and start and end minute indexes.",
+  "previous_outputFormat": "Return values depend on the method; the missing-video sentinels are not recorded.",
+  "previous_officialConstraints": "unknown",
+  "previous_tieRules": "Smallest free id is reused after removal.",
+  "previous_edgeRules": "The missing-video sentinel for each method and the watch substring bounds are not recorded.",
+  "previous_requirementsVerified": false,
+  "previous_factsPresent": [
+    "Smallest free nonnegative id",
+    "watch substring and view increment",
+    "Like and dislike counters"
+  ],
+  "previous_factsMissing": [
+    "Sentinel return for each method when the video is absent",
+    "watch range bounds and clamping",
+    "Return types of getLikesAndDislikes and getViews",
+    "Official bounds"
+  ],
+  "previous_questions": [
+    "What sentinel does each method return when the video id is absent (for example for watch, getLikesAndDislikes and getViews)?",
+    "What are the watch minute bounds, and does watch clamp an end index beyond the content?"
+  ],
+  "previous_nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it."
+}

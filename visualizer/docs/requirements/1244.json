@@ -1,0 +1,69 @@
+{
+  "number": 1244,
+  "title": "Design A Leaderboard",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "draftFile": "local-reference/leetcode/manual/1244.txt",
+  "officialUrl": "https://leetcode.com/problems/design-a-leaderboard/description/",
+  "summary": "Design a leaderboard: addScore adds to a player's score (creating the player if needed), top(K) returns the sum of the K largest scores, and reset sets a player's score back to zero so later additions start afresh.",
+  "inputFormat": "addScore takes playerId and score; top takes K; reset takes playerId.",
+  "outputFormat": "top returns an integer sum; addScore and reset return nothing.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Whether K can exceed the number of players, and whether reset of an unknown player is valid, are not recorded.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "addScore(1,73), addScore(2,56), addScore(3,39), top(2)? after reset(1), addScore(2,51), top(2)",
+      "output": "after reset, top(2) = 146",
+      "note": "Authored; conditional on K not exceeding players."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "Sum of top K",
+    "Reset removes accumulated score"
+  ],
+  "factsMissing": [
+    "Whether K is guaranteed not to exceed the number of players",
+    "Whether reset of an unseen player is valid",
+    "Official bounds"
+  ],
+  "questions": [
+    "Is K guaranteed to be no larger than the number of players, and is reset called only for players that exist?"
+  ],
+  "nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it.",
+  "previous_sourceKind": "manual-draft",
+  "previous_contentKind": "original-requirements-summary",
+  "previous_draftFile": "local-reference/leetcode/manual/1244.txt",
+  "previous_officialUrl": "https://leetcode.com/problems/design-a-leaderboard/description/",
+  "previous_summary": "Design a leaderboard: addScore adds to a player's score (creating the player if needed), top(K) returns the sum of the K largest scores, and reset sets a player's score back to zero so later additions start afresh.",
+  "previous_inputFormat": "addScore takes playerId and score; top takes K; reset takes playerId.",
+  "previous_outputFormat": "top returns an integer sum; addScore and reset return nothing.",
+  "previous_officialConstraints": "unknown",
+  "previous_tieRules": "Not applicable.",
+  "previous_edgeRules": "Whether K can exceed the number of players, and whether reset of an unknown player is valid, are not recorded.",
+  "previous_examples": [
+    {
+      "label": "authored-reference",
+      "input": "addScore(1,73), addScore(2,56), addScore(3,39), top(2)? after reset(1), addScore(2,51), top(2)",
+      "output": "after reset, top(2) = 146",
+      "note": "Authored; conditional on K not exceeding players."
+    }
+  ],
+  "previous_requirementsVerified": false,
+  "previous_factsPresent": [
+    "Sum of top K",
+    "Reset removes accumulated score"
+  ],
+  "previous_factsMissing": [
+    "Whether K is guaranteed not to exceed the number of players",
+    "Whether reset of an unseen player is valid",
+    "Official bounds"
+  ],
+  "previous_questions": [
+    "Is K guaranteed to be no larger than the number of players, and is reset called only for players that exist?"
+  ],
+  "previous_nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it."
+}

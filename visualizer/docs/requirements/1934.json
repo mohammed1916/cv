@@ -1,0 +1,37 @@
+{
+  "number": "1934",
+  "title": "Confirmation Rate",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "archiveStatus": "missing-statement (no raw file in local-reference/leetcode/raw)",
+  "officialUrl": "https://leetcode.com/problems/confirmation-rate/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "For every signed-up user, the rate of confirmed events among all confirmation events, rounded to two decimals; zero when no events.",
+  "inputFormat": "Signups(user_id, time_stamp); Confirmations(user_id, time_stamp, action) with action 'confirmed' or 'timeout' (spelling to verify).",
+  "outputFormat": "Columns user_id, confirmation_rate with two decimal places.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Users with no confirmation events get 0.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "text": "authored-reference: 2 confirmed + 1 timeout -> 0.67; no events -> 0.00."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "rate definition",
+    "zero for no events",
+    "two-decimal rounding"
+  ],
+  "factsMissing": [
+    "official statement text (archive status missing-statement; no raw file)",
+    "official confirmation of this summary (requirementsVerified false)",
+    "rounding mode for ties at the third decimal",
+    "output ordering"
+  ],
+  "questions": [
+    "What rounding mode applies to the second decimal, and is output ordering specified?"
+  ],
+  "nextAction": "Fetch official page https://leetcode.com/problems/confirmation-rate/description/ and confirm each listed fact; then set requirementsVerified."
+}

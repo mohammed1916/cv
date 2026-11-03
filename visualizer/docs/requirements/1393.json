@@ -1,0 +1,33 @@
+{
+  "number": 1393,
+  "title": "Capital Gain/Loss",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1393.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/capital-gainloss/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each stock_name return capital_gain_loss, the sum of Sell prices minus the sum of Buy prices across its records.",
+  "inputFormat": "Stocks(stock_name, operation, operation_day, price) where operation is Buy or Sell.",
+  "outputFormat": "stock_name, capital_gain_loss.",
+  "officialConstraints": "unknown",
+  "tieRules": "No tie rule; ordering not stated.",
+  "edgeRules": "Stocks with only Buy rows produce negative values; the draft's contract for this case is implied, not stated.",
+  "examples": {
+    "label": "authored-reference",
+    "note": "Acme Buy 100 then Sell 150: 50. Beta Buy 200 only: -200. [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "sum definition",
+    "output columns"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)",
+    "ordering",
+    "all-buy stock inclusion"
+  ],
+  "questions": [],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

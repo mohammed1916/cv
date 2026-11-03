@@ -1,0 +1,43 @@
+{
+  "number": 2621,
+  "title": "Sleep",
+  "source": "https://leetcode.com/problems/sleep/description/",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft-knowledge-derived",
+  "contentKind": "original-requirements-summary",
+  "problemClass": "JavaScript async/timer",
+  "summary": "Implement async sleep(millis) returning a promise that resolves after approximately millis milliseconds without blocking the event loop.",
+  "inputFormat": "sleep(millis: integer) -> Promise<any>",
+  "outputFormat": "resolves after about millis ms; resolved value unspecified",
+  "officialConstraints": "unknown (official constraints not retrieved)",
+  "tieRules": "resolved value unspecified",
+  "edgeRules": [
+    "millis = 0 resolves on the next timer tick (assumed)",
+    "resolution is approximate"
+  ],
+  "examples": [
+    {
+      "input": "millis=100",
+      "output": "resolves after ~100 ms",
+      "authored": true
+    }
+  ],
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Official page fetch on 2026-11-03 returned HTTP 403 (WebFetch); statement not retrieved this pass. Recovered-archive index lists missing-statement for this ID.",
+  "factsPresent": [
+    "title",
+    "task summary from manual draft",
+    "signature/semantics from draft"
+  ],
+  "factsMissing": [
+    "tolerance for 'approximately'",
+    "resolved value",
+    "whether rejection is ever expected"
+  ],
+  "questions": [
+    "What timing tolerance does the official checker allow?"
+  ],
+  "nextAction": "Confirm timing tolerance on official page.",
+  "signature": "sleep(millis: integer) -> Promise<any>"
+}

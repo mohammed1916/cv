@@ -1,0 +1,26 @@
+{
+  "number": "2377",
+  "title": "Sort the Olympic Table",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "SQL: order the medal table by gold descending, silver descending, bronze descending, then country ascending.",
+  "inputFormat": "Olympic(country,gold_medals,silver_medals,bronze_medals).",
+  "outputFormat": "All rows and columns in the specified order.",
+  "officialConstraints": "unknown",
+  "tieRules": "Full ordering given by the four keys.",
+  "edgeRules": "Not applicable.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "table and columns",
+    "complete sort key order"
+  ],
+  "factsMissing": [
+    "official page text (HTTP 403, not verified)",
+    "authored examples"
+  ],
+  "questions": [],
+  "nextAction": "Fetch official page if possible; otherwise accept as the sorting rule stated in the manual draft.",
+  "provenance": "Manual draft local-reference/leetcode/manual/2377.txt (knowledge-derived, not a recovered statement). Official URL https://leetcode.com/problems/<slug>/description/ returned HTTP 403 on 2026-11-03; no recovered raw statement exists in the archive."
+}

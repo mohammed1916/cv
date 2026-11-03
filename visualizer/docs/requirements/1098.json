@@ -1,0 +1,70 @@
+{
+  "number": "1098",
+  "title": "Unpopular Books",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/unpopular-books/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "Relative to 2019-06-23, return books that have been available for at least one month and that sold fewer than ten copies in the year before that date. Books with no orders in that year qualify.",
+  "inputFormat": "Books(book_id, name, available_from); Orders(order_id, book_id, quantity, dispatch_date).",
+  "outputFormat": "Columns book_id and name; one row per qualifying book.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable: one row per book.",
+  "edgeRules": "The one-month and one-year windows and their inclusive or exclusive boundaries are not stated in the draft; the draft asks to verify them. Books with no orders count as zero sales.",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "books": [
+        [
+          1,
+          "Kalila",
+          "2019-05-01"
+        ],
+        [
+          2,
+          "Old",
+          "2019-06-01"
+        ],
+        [
+          3,
+          "New",
+          "2019-06-20"
+        ]
+      ],
+      "orders": [
+        [
+          1,
+          1,
+          5,
+          "2018-08-01"
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          "Kalila"
+        ],
+        [
+          2,
+          "Old"
+        ]
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "SQL task statement"
+  ],
+  "factsMissing": [
+    "exact boundary of the one-month availability window",
+    "exact boundary of the one-year sales window",
+    "output row order"
+  ],
+  "questions": [
+    "Does 'available for at least one month' mean available_from is on or before 2019-05-23, or a different cut-off? The draft gives no boundary.",
+    "Are dispatch dates in the year window inclusive at both ends?"
+  ],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

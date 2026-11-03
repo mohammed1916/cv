@@ -1,0 +1,59 @@
+{
+  "number": "1141",
+  "title": "User Activity for the Past 30 Days I",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/user-activity-for-the-past-30-days-i/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "For each day in the 30-day interval ending 2019-07-27 inclusive, return the day and the number of distinct users with any activity that day. Days with no active users are omitted.",
+  "inputFormat": "Activity(user_id, session_id, activity_date, activity_type).",
+  "outputFormat": "Columns day and active_users; one row per day with at least one active user.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable: one row per day.",
+  "edgeRules": "The 30-day interval is 2019-06-28 to 2019-07-27 inclusive (30 days); the draft states 'inclusive' so this follows the draft.",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "activity": [
+        [
+          1,
+          1,
+          "2019-07-20",
+          "open_session"
+        ],
+        [
+          1,
+          1,
+          "2019-07-20",
+          "scroll_down"
+        ],
+        [
+          2,
+          2,
+          "2019-07-20",
+          "end_session"
+        ]
+      ],
+      "expected": [
+        [
+          "2019-07-20",
+          2
+        ]
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "SQL task statement"
+  ],
+  "factsMissing": [
+    "output row order",
+    "whether 30 days inclusive yields 2019-06-28 through 2019-07-27"
+  ],
+  "questions": [
+    "Does the interval start at 2019-06-28 (30 days inclusive) or at 2019-06-27? Confirm the inclusive start."
+  ],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

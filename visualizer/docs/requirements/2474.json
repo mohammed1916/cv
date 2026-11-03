@@ -1,0 +1,31 @@
+{
+  "number": "2474",
+  "title": "Customers With Strictly Increasing Purchases",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialConstraints": "unknown",
+  "examples": [],
+  "requirementsVerified": false,
+  "summary": "For each customer, total spending per calendar year from the Orders table. Return customer IDs whose yearly totals strictly increase across consecutive years of their observed history.",
+  "inputFormat": "Orders(order_id, customer_id, order_date, price); order_id is the key.",
+  "outputFormat": "Customer ID rows for qualifying customers (column name and ordering not yet recorded).",
+  "tieRules": "Not stated in the draft.",
+  "edgeRules": "Whether a missing calendar year is a break or is skipped is not settled by the draft.",
+  "factsPresent": [
+    "Task reads Orders with order_date and price",
+    "Strict increase is the required comparison"
+  ],
+  "factsMissing": [
+    "Minimum number of years of history",
+    "Whether a year with no orders disqualifies a customer or is skipped",
+    "Output column name and row ordering"
+  ],
+  "questions": [
+    "Exact minimum number of yearly totals required for a customer to qualify?",
+    "When a calendar year has no orders for a customer, does the customer fail, or are the adjacent observed years compared?",
+    "Required output column name and ordering?"
+  ],
+  "nextAction": "Obtain the official statement (recovered raw archive has none for this ID); confirm the listed missing facts, then set requirementsVerified only if an official page confirms them. Official base URL in the manual draft; not fetched in this pass.",
+  "examplesNote": "No authored example in this pass; authored-reference examples to be added after the statement is confirmed."
+}

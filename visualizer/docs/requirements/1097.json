@@ -1,0 +1,72 @@
+{
+  "number": "1097",
+  "title": "Game Play Analysis V",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/game-play-analysis-v/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "Each player's install date is their earliest event_date. For each install date, report the number of installs and the Day1 retention: the fraction of that cohort active on the following calendar day, rounded to two decimals.",
+  "inputFormat": "Activity(player_id, device_id, event_date, games_played).",
+  "outputFormat": "Columns install_dt, installs, Day1_retention; one row per install date.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable: one row per install date.",
+  "edgeRules": "Retention counts players whose activity includes the day after install. Return date does not group the result.",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "activity": [
+        [
+          1,
+          2,
+          "2016-03-01",
+          5
+        ],
+        [
+          1,
+          2,
+          "2016-03-02",
+          6
+        ],
+        [
+          2,
+          3,
+          "2016-03-02",
+          6
+        ],
+        [
+          3,
+          1,
+          "2016-03-02",
+          9
+        ]
+      ],
+      "expected": [
+        [
+          "2016-03-01",
+          1,
+          1.0
+        ],
+        [
+          "2016-03-02",
+          2,
+          0.0
+        ]
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "SQL task statement"
+  ],
+  "factsMissing": [
+    "output row order",
+    "exact rounding type of Day1_retention (draft says two decimals)"
+  ],
+  "questions": [
+    "Is output row order required? The draft is silent.",
+    "Is Day1_retention returned as a decimal with two places or as a fraction? The draft says rounded to two decimals; confirm the exact output form."
+  ],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

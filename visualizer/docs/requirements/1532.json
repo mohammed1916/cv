@@ -1,0 +1,37 @@
+{
+  "number": "1532",
+  "title": "The Most Recent Three Orders",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each customer, return up to three most recent orders with the customer's name.",
+  "inputFormat": "SQL. Customers(customer_id, name); Orders(order_id, order_date, customer_id, cost).",
+  "outputFormat": "SQL result: customer_name, customer_id, order_id, order_date; sorted by customer_name, customer_id, then order_date descending.",
+  "officialConstraints": "unknown",
+  "tieRules": "Tie-breaking when two orders share the same date is not stated in the draft.",
+  "edgeRules": "Customers with fewer than three orders return all their orders.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "customer Ann orders on 2020-01-01, 2020-02-01, 2020-03-01, 2020-04-01",
+      "expected": "Ann's 2020-04-01, 2020-03-01, 2020-02-01"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "three-order limit",
+    "sort keys"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "what to return when order dates tie (which orders qualify)",
+    "output columns order"
+  ],
+  "questions": [
+    "When two orders for one customer share a date, are both kept or is one chosen, and how is it broken?"
+  ],
+  "nextAction": "Confirm date-tie rule.",
+  "officialUrl": "https://leetcode.com/problems/the-most-recent-three-orders/description/"
+}

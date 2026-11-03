@@ -1,0 +1,43 @@
+{
+  "number": 2636,
+  "title": "Promise Pool",
+  "source": "https://leetcode.com/problems/promise-pool/description/",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft-knowledge-derived",
+  "contentKind": "original-requirements-summary",
+  "problemClass": "JavaScript concurrency",
+  "summary": "Given functions that return promises and a concurrency limit n, execute all while at most n are unresolved at a time; start another as soon as a slot frees; return a promise that resolves when every task finishes.",
+  "inputFormat": "promisePool(functions: Array<() => Promise>, n: integer) -> Promise",
+  "outputFormat": "promise resolving when all tasks settle or finish",
+  "officialConstraints": "unknown (official constraints not retrieved)",
+  "tieRules": "order of starts follows array order",
+  "edgeRules": [
+    "at most n concurrent unresolved calls",
+    "a freed slot starts the next task immediately"
+  ],
+  "examples": [
+    {
+      "sequence": "3 tasks of 100 ms, n=2",
+      "output": "total about 200 ms",
+      "authored": true
+    }
+  ],
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Official page fetch on 2026-11-03 returned HTTP 403 (WebFetch); statement not retrieved this pass. Recovered-archive index lists missing-statement for this ID.",
+  "factsPresent": [
+    "title",
+    "task summary from manual draft",
+    "signature/semantics from draft"
+  ],
+  "factsMissing": [
+    "rejection policy: whether the pool rejects on first error or continues",
+    "resolved value shape",
+    "n=0 or n>tasks"
+  ],
+  "questions": [
+    "When one task rejects, does the pool reject immediately or wait for others?"
+  ],
+  "nextAction": "Confirm rejection guarantee on official page.",
+  "signature": "promisePool(functions: Array<() => Promise>, n: integer) -> Promise"
+}

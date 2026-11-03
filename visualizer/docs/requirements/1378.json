@@ -1,0 +1,33 @@
+{
+  "number": 1378,
+  "title": "Replace Employee ID With The Unique Identifier",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1378.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/replace-employee-id-with-the-unique-identifier/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return unique_id and name for every employee. When an employee has no entry in EmployeeUNI, unique_id is NULL.",
+  "inputFormat": "Employees(id, name); EmployeeUNI(id, unique_id).",
+  "outputFormat": "unique_id, name.",
+  "officialConstraints": "unknown",
+  "tieRules": "No tie rule; ordering not stated.",
+  "edgeRules": "Missing mapping yields NULL unique_id, not exclusion.",
+  "examples": {
+    "label": "authored-reference",
+    "note": "Employee 1 Alice mapped to 11; employee 2 Bob unmapped. Expected: (11, Alice), (NULL, Bob). [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "left-join rule",
+    "NULL rule",
+    "output columns"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)",
+    "ordering"
+  ],
+  "questions": [],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

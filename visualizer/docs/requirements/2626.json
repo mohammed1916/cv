@@ -1,0 +1,41 @@
+{
+  "number": 2626,
+  "title": "Array Reduce Transformation",
+  "source": "https://leetcode.com/problems/array-reduce-transformation/description/",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft-knowledge-derived",
+  "contentKind": "original-requirements-summary",
+  "problemClass": "JavaScript array function",
+  "summary": "reduce(nums, fn, init) applies fn(accumulator, currentValue) left to right starting at init and returns the final accumulator; empty array returns init; built-in Array.reduce must not be called.",
+  "inputFormat": "reduce(nums: number[], fn: (acc, val) => any, init: any) -> any",
+  "outputFormat": "final accumulator",
+  "officialConstraints": "unknown (official constraints not retrieved)",
+  "tieRules": "not applicable",
+  "edgeRules": [
+    "empty array returns init",
+    "left-to-right order"
+  ],
+  "examples": [
+    {
+      "input": "[1,2,3], sum, init=0",
+      "output": "6",
+      "authored": true
+    }
+  ],
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Official page fetch on 2026-11-03 returned HTTP 403 (WebFetch); statement not retrieved this pass. Recovered-archive index lists missing-statement for this ID.",
+  "factsPresent": [
+    "title",
+    "task summary from manual draft",
+    "signature/semantics from draft"
+  ],
+  "factsMissing": [
+    "whether fn receives an index argument"
+  ],
+  "questions": [
+    "Does fn receive only (acc, val)?"
+  ],
+  "nextAction": "Confirm callback arguments on official page.",
+  "signature": "reduce(nums: number[], fn: (acc, val) => any, init: any) -> any"
+}

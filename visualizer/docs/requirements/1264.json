@@ -1,0 +1,33 @@
+{
+  "number": 1264,
+  "title": "Page Recommendations",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1264.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/page-recommendations/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Friendships are undirected: a row (user1_id, user2_id) links both users. Recommend to user 1 each distinct page liked by at least one friend of user 1 that user 1 has not already liked.",
+  "inputFormat": "Friendship(user1_id, user2_id); Likes(user_id, page_id).",
+  "outputFormat": "A single column recommended_page with distinct values.",
+  "officialConstraints": "unknown",
+  "tieRules": "No ordering rule is stated in the draft.",
+  "edgeRules": "Friendship rows must be checked in both directions.",
+  "examples": {
+    "label": "authored-reference",
+    "note": "Friendships (1,2) and (3,1); user 2 likes page 10, user 3 likes page 11, user 1 likes page 11. Expected: 10. [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "undirected friendship rule",
+    "exclusion of user 1's likes",
+    "distinct output column"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)",
+    "ordering of output rows"
+  ],
+  "questions": [],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

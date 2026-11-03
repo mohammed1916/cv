@@ -1,0 +1,35 @@
+{
+  "number": 1364,
+  "title": "Number of Trusted Contacts of a Customer",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1364.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/number-of-trusted-contacts-of-a-customer/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "For every invoice return invoice_id, customer_name, price, contacts_cnt (contacts of the invoice's user) and trusted_contacts_cnt (contacts whose email belongs to a registered customer). Customers with no contacts are included.",
+  "inputFormat": "Customers(customer_id, customer_name, email); Contacts(user_id, contact_name, contact_email); Invoices(invoice_id, user_id, price).",
+  "outputFormat": "invoice_id, customer_name, price, contacts_cnt, trusted_contacts_cnt.",
+  "officialConstraints": "unknown",
+  "tieRules": "Ordered by invoice_id.",
+  "edgeRules": "The draft asks to verify contact-email uniqueness; duplicates would change the counts.",
+  "examples": {
+    "label": "authored-reference",
+    "note": "Customers 1 Alice a@x and 2 Bob b@x; user 1 has contacts b@x and c@x; invoice 10 by user 1 price 50. Expected: (10, Alice, 50, 2, 1). [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "trusted contact rule",
+    "counts",
+    "ordering"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)",
+    "contact-email uniqueness"
+  ],
+  "questions": [
+    "Can one user have the same contact_email twice? If so, is each row counted in contacts_cnt?"
+  ],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

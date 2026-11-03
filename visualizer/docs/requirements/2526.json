@@ -6,11 +6,32 @@
   "sources": [
     "https://leetcode.doocs.org/en/lc/2526/"
   ],
-  "checkedOn": "2026-10-29",
-  "sourceKind": "search-snippets",
-  "summary": "DataStream(value, k) with consec(num): true if the last k integers all equal value.",
-  "officialConstraints": "Constraints not retrieved from an official or mirror statement.",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "recovered-raw",
+  "summary": "Design a stream checker: consec(num) appends num and returns true only when the most recent k integers are all equal to value; it returns false while fewer than k integers have arrived.",
+  "officialConstraints": "1 <= value, num <= 10^9; 1 <= k <= 10^5; at most 10^5 calls to consec (from the recovered statement).",
   "examples": [],
   "visualizationNotes": "Design class; example text in the retrieved snippet was internally inconsistent.",
-  "requirementsVerified": false
+  "requirementsVerified": false,
+  "contentKind": "original-requirements-summary",
+  "rawFile": "local-reference/leetcode/raw/find-consecutive-integers-from-a-data-stream.json",
+  "officialUrl": "https://leetcode.com/problems/find-consecutive-integers-from-a-data-stream/description/",
+  "inputFormat": "Constructor takes value and k; consec takes num.",
+  "outputFormat": "consec returns a boolean.",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Fewer than k integers returns false.",
+  "factsPresent": [
+    "Window rule",
+    "Boolean output",
+    "Constraints"
+  ],
+  "factsMissing": [
+    "Official page confirmation"
+  ],
+  "questions": [],
+  "nextAction": "Official page confirmation pending. Recovered statement is complete for the requirements; examples are not copied to the website.",
+  "previous_sourceKind": "search-snippets",
+  "previous_summary": "DataStream(value, k) with consec(num): true if the last k integers all equal value.",
+  "previous_officialConstraints": "Constraints not retrieved from an official or mirror statement.",
+  "previous_requirementsVerified": false
 }

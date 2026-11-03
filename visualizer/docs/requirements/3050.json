@@ -1,0 +1,29 @@
+{
+  "number": "3050",
+  "title": "Pizza Toppings Cost Analysis",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Form every combination of three distinct topping names; describe each pizza by its three names sorted alphabetically and joined by a separator; total_cost is the sum of the three costs.",
+  "inputFormat": "Toppings(topping_name, cost).",
+  "outputFormat": "Columns pizza and total_cost (names from draft, unverified).",
+  "officialConstraints": "unknown",
+  "tieRules": "Sort by total_cost descending, then pizza ascending.",
+  "edgeRules": "Uniqueness of topping_name; each pizza is a set of three distinct names.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "SQL input table names and columns (from manual draft)",
+    "primary task rule (from manual draft)",
+    "official page reference https://leetcode.com/problems/pizza-toppings-cost-analysis/description/"
+  ],
+  "factsMissing": [
+    "official statement not fetched or confirmed",
+    "exact output column names and row order",
+    "authored validation example"
+  ],
+  "questions": [
+    "Exact separator between topping names (comma with or without space) and output column names."
+  ],
+  "nextAction": "Fetch the official /description/ page for this problem and confirm the summary, then record the exact output columns, ordering and tie rules; author and validate a teaching example (labelled authored-reference)."
+}

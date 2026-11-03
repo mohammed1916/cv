@@ -1,0 +1,29 @@
+{
+  "number": "2783",
+  "title": "Flight Occupancy and Waitlist Analysis",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialConstraints": "unknown",
+  "examples": [],
+  "requirementsVerified": false,
+  "summary": "For each flight, return booked_cnt (passengers up to capacity) and waitlist_cnt (excess passengers), including flights with no bookings.",
+  "inputFormat": "Flights(flight_id, capacity); Passengers(passenger_id, flight_id).",
+  "outputFormat": "flight_id, booked_cnt, waitlist_cnt (aliases as named in the draft; confirm).",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Flights without bookings must appear with zero counts.",
+  "factsPresent": [
+    "booked_cnt capped by capacity",
+    "waitlist_cnt is the excess",
+    "Flights with no bookings included"
+  ],
+  "factsMissing": [
+    "Confirmation of exact aliases",
+    "Row ordering"
+  ],
+  "questions": [
+    "Are the output aliases exactly booked_cnt and waitlist_cnt, and what row ordering is required?"
+  ],
+  "nextAction": "Obtain the official statement (recovered raw archive has none for this ID); confirm the listed missing facts, then set requirementsVerified only if an official page confirms them. Official base URL in the manual draft; not fetched in this pass.",
+  "examplesNote": "No authored example in this pass; authored-reference examples to be added after the statement is confirmed."
+}

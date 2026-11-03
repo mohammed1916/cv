@@ -1,0 +1,18 @@
+{
+  "number": 3416,
+  "title": "Subsequences with a Unique Middle Mode II",
+  "contentKind": "independently-written-requirements",
+  "requirementsVerified": false,
+  "examples": [],
+  "exampleStatus": "Source examples not copied; worked illustrations are independently authored in clarification.",
+  "summary": "Count increasing selections of five indices. In their resulting sequence, the third value must occur strictly more often than every other value. Count index selections, even when their value sequences coincide. Return the count modulo 1000000007.",
+  "clarification": "Authored example: [7,4,7,9,7] has one five-index selection; its middle value 7 occurs three times, so answer 1. [4,4,7,7,9] has a frequency tie, so answer 0.",
+  "source": "https://leetcode.doocs.org/en/lc/3416/",
+  "officialUrl": "https://leetcode.com/problems/subsequences-with-a-unique-middle-mode-ii/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-03",
+  "constraintsReportedBySource": "5<=length<=100000; -1000000000<=nums[i]<=1000000000.",
+  "verificationStatus": "community-reproduction-read; official text not independently confirmed",
+  "officialConstraints": "Official-page confirmation pending. See constraintsReportedBySource for the bounds in the community reproduction.",
+  "questionResolution": "Specific CLAUDE-QUESTIONS.md question answered; source confidence recorded separately."
+}

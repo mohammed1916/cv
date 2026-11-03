@@ -1,0 +1,29 @@
+{
+  "number": "3140",
+  "title": "Consecutive Available Seats II",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Find the longest run or runs of adjacent free seats.",
+  "inputFormat": "Cinema(seat_id, free) where free indicates an available seat.",
+  "outputFormat": "Unknown: the draft does not say whether to return endpoints, every seat, or the run length.",
+  "officialConstraints": "unknown",
+  "tieRules": "Unknown.",
+  "edgeRules": "Free flag encoding and treatment of multiple tied longest runs.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "SQL input table names and columns (from manual draft)",
+    "primary task rule (from manual draft)",
+    "official page reference https://leetcode.com/problems/consecutive-available-seats-ii/description/"
+  ],
+  "factsMissing": [
+    "official statement not fetched or confirmed",
+    "exact output column names and row order",
+    "authored validation example"
+  ],
+  "questions": [
+    "For tied longest runs, output all seats of every run, or only some? Exact output columns and order."
+  ],
+  "nextAction": "Fetch the official /description/ page for this problem and confirm the summary, then record the exact output columns, ordering and tie rules; author and validate a teaching example (labelled authored-reference)."
+}

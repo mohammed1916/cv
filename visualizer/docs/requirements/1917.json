@@ -1,0 +1,37 @@
+{
+  "number": "1917",
+  "title": "Leetcodify Friends Recommendations",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "archiveStatus": "missing-statement (no raw file in local-reference/leetcode/raw)",
+  "officialUrl": "https://leetcode.com/problems/leetcodify-friends-recommendations/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Recommend two users to each other when they are not friends and share at least three distinct songs listened to on the same day.",
+  "inputFormat": "Listens(user_id, song_id, day); Friendship(user1_id, user2_id).",
+  "outputFormat": "Directed user_id / recommended_id pairs without duplicates.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Common listening on different days does not count.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "text": "authored-reference: users 1 and 2 both listen to songs a,b,c on day D and are not friends -> (1,2) and (2,1)."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "same-day three-distinct-song rule",
+    "not already friends",
+    "directed output"
+  ],
+  "factsMissing": [
+    "official statement text (archive status missing-statement; no raw file)",
+    "official confirmation of this summary (requirementsVerified false)",
+    "whether both directions must be output",
+    "output ordering"
+  ],
+  "questions": [
+    "Must both (a,b) and (b,a) be returned for a qualifying pair?"
+  ],
+  "nextAction": "Fetch official page https://leetcode.com/problems/leetcodify-friends-recommendations/description/ and confirm each listed fact; then set requirementsVerified."
+}

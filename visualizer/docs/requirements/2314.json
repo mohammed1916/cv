@@ -1,0 +1,28 @@
+{
+  "number": "2314",
+  "title": "The First Day of the Maximum Recorded Degree in Each City",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "SQL: for each city, the maximum degree and the earliest day when that maximum occurred.",
+  "inputFormat": "Weather(city_id,day,degree).",
+  "outputFormat": "city_id, day, degree ordered by city_id ascending.",
+  "officialConstraints": "unknown",
+  "tieRules": "Earliest day among ties of the maximum.",
+  "edgeRules": "Not applicable.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "table and columns",
+    "earliest day tie rule",
+    "ordering"
+  ],
+  "factsMissing": [
+    "official page text (HTTP 403 on fetch, not verified)",
+    "official numeric bounds",
+    "authored examples"
+  ],
+  "questions": [],
+  "nextAction": "Fetch official page or obtain a readable copy; then confirm the listed questions and author examples.",
+  "provenance": "Manual draft local-reference/leetcode/manual/2314.txt (knowledge-derived, not a recovered statement). Official URL https://leetcode.com/problems/<slug>/description/ returned HTTP 403 on 2026-11-03; no recovered raw statement exists in the archive."
+}

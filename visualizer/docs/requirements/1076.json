@@ -1,0 +1,65 @@
+{
+  "number": "1076",
+  "title": "Project Employees II",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/project-employees-ii/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "Count the employees assigned to each project and return every project_id tied for the largest count.",
+  "inputFormat": "Project(project_id, employee_id): one row per assignment.",
+  "outputFormat": "One column project_id; one row per project tied for the maximum number of employees.",
+  "officialConstraints": "unknown",
+  "tieRules": "All projects that tie for the maximum are returned; ties are not broken.",
+  "edgeRules": "If the table is empty, the result is empty (assumed; not stated).",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "project": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          5
+        ]
+      ],
+      "expected": [
+        [
+          2
+        ]
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "SQL task statement"
+  ],
+  "factsMissing": [
+    "output row order",
+    "empty-table behaviour"
+  ],
+  "questions": [
+    "Is output order required? The draft does not say.",
+    "Can an (project_id, employee_id) pair repeat? The draft does not state the key, so duplicate-count handling is unknown."
+  ],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

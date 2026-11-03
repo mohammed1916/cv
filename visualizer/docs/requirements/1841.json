@@ -1,0 +1,37 @@
+{
+  "number": "1841",
+  "title": "League Statistics",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "archiveStatus": "missing-statement (no raw file in local-reference/leetcode/raw)",
+  "officialUrl": "https://leetcode.com/problems/league-statistics/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each team, compute matches played, points, goals for, goals against and goal difference, with 3 points for a win, 1 for a draw.",
+  "inputFormat": "Teams(team_id, team_name); Matches(home_team_id, away_team_id, home_team_goals, away_team_goals).",
+  "outputFormat": "Columns team_id, team_name, matches_played, points, goals_for, goals_against, goal_diff; sorted by points desc, goal_diff desc, team_name asc.",
+  "officialConstraints": "unknown",
+  "tieRules": "Sort keys as above.",
+  "edgeRules": "Teams without matches: draft says verify inclusion.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "text": "authored-reference: team A beats B 2-1 -> A: 3 points, goal_diff +1; B: 0 points, goal_diff -1."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "points scheme",
+    "sort order",
+    "goal difference"
+  ],
+  "factsMissing": [
+    "official statement text (archive status missing-statement; no raw file)",
+    "official confirmation of this summary (requirementsVerified false)",
+    "whether teams with no matches appear (with zeros)",
+    "required output column names"
+  ],
+  "questions": [
+    "Do teams with no matches appear in the result, and with which values?"
+  ],
+  "nextAction": "Fetch official page https://leetcode.com/problems/league-statistics/description/ and confirm each listed fact; then set requirementsVerified."
+}

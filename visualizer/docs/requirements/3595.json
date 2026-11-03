@@ -1,0 +1,18 @@
+{
+  "number": 3595,
+  "title": "Once Twice",
+  "contentKind": "independently-written-requirements",
+  "requirementsVerified": false,
+  "examples": [],
+  "exampleStatus": "Source examples not copied; worked illustrations are independently authored in clarification.",
+  "summary": "Exactly one distinct value occurs once, another occurs twice, and every remaining distinct value occurs three times. Return [valueOccurringOnce,valueOccurringTwice]. O(n) time and O(1) auxiliary space are explicit requirements in the reproduced statement. This is frequency identification, not construction.",
+  "clarification": "Authored example: [11,-4,8,11,8,11] returns [-4,8].",
+  "source": "https://leetcode.doocs.org/en/lc/3595/",
+  "officialUrl": "https://leetcode.com/problems/once-twice/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-03",
+  "constraintsReportedBySource": "3<=length<=100000; length divisible by 3; values signed 32-bit integers.",
+  "verificationStatus": "community-reproduction-read; official text not independently confirmed",
+  "officialConstraints": "Official-page confirmation pending. See constraintsReportedBySource for the bounds in the community reproduction.",
+  "questionResolution": "Specific CLAUDE-QUESTIONS.md question answered; source confidence recorded separately."
+}

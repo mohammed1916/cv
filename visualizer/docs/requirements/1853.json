@@ -1,0 +1,36 @@
+{
+  "number": "1853",
+  "title": "Convert Date Format",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "archiveStatus": "missing-statement (no raw file in local-reference/leetcode/raw)",
+  "officialUrl": "https://leetcode.com/problems/convert-date-format/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Format each day as weekday name, comma, month name, day, comma and year.",
+  "inputFormat": "Days(day) with date values.",
+  "outputFormat": "One formatted string per date; required exact text pattern and spacing to be confirmed.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Leading-zero rule for the day: draft says verify, not stated.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "text": "authored-reference: 2020-01-03 -> weekday, January 3, 2020 (pattern shown as written in this draft)."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "component order",
+    "comma placement"
+  ],
+  "factsMissing": [
+    "official statement text (archive status missing-statement; no raw file)",
+    "official confirmation of this summary (requirementsVerified false)",
+    "exact output format string and day leading-zero rule",
+    "output ordering"
+  ],
+  "questions": [
+    "What exact output string format is required, including whether the day has a leading zero?"
+  ],
+  "nextAction": "Fetch official page https://leetcode.com/problems/convert-date-format/description/ and confirm each listed fact; then set requirementsVerified."
+}

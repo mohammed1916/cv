@@ -1,0 +1,35 @@
+{
+  "number": "1892",
+  "title": "Page Recommendations II",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "archiveStatus": "missing-statement (no raw file in local-reference/leetcode/raw)",
+  "officialUrl": "https://leetcode.com/problems/page-recommendations-ii/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each user, recommend pages liked by at least one friend and not already liked by that user, with the count of distinct liking friends.",
+  "inputFormat": "Friendship(user1_id, user2_id) (undirected); Likes(user_id, page_id).",
+  "outputFormat": "Columns user_id, page_id, friends_likes.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Friendships are undirected; count distinct friends.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "text": "authored-reference: user 1 friends with 2 and 3, both like page 9, user 1 does not -> (1, 9, 2)."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "recommendation rule",
+    "distinct friend count"
+  ],
+  "factsMissing": [
+    "official statement text (archive status missing-statement; no raw file)",
+    "official confirmation of this summary (requirementsVerified false)",
+    "output ordering"
+  ],
+  "questions": [
+    "Is output ordering specified?"
+  ],
+  "nextAction": "Fetch official page https://leetcode.com/problems/page-recommendations-ii/description/ and confirm each listed fact; then set requirementsVerified."
+}

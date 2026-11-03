@@ -1,0 +1,33 @@
+{
+  "number": 3580,
+  "title": "Find Consistently Improving Employees",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "source": "https://leetcode.com/problems/find-consistently-improving-employees/description/",
+  "summary": "SQL. employees and performance_reviews with review dates and ratings. Find employees whose most recent three reviews strictly improve and report the improvement.",
+  "inputFormat": "employees and performance_reviews as above.",
+  "outputFormat": "Unknown.",
+  "officialConstraints": "unknown",
+  "tieRules": "Unknown minimum review count, date tie handling and whether improvement is latest minus earliest among the three.",
+  "edgeRules": "Unknown.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "title",
+    "task category (SQL)",
+    "manual draft summary"
+  ],
+  "factsMissing": [
+    "officialConstraints",
+    "exact output columns and ordering",
+    "tie rules",
+    "edge rules",
+    "authored examples",
+    "official verification (official page HTTP 403 on 2026-11-03)"
+  ],
+  "questions": [
+    "What is the minimum review count, how are same-date reviews ordered, what is the improvement metric, and what are the output columns?"
+  ],
+  "nextAction": "Obtain the official statement (official page returned HTTP 403 to WebFetch on 2026-11-03) or a readable community reproduction; then fill outputFormat, ties and edges and author validation examples labelled authored-reference."
+}

@@ -1,0 +1,34 @@
+{
+  "number": "1875",
+  "title": "Group Employees of the Same Salary",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "archiveStatus": "missing-statement (no raw file in local-reference/leetcode/raw)",
+  "officialUrl": "https://leetcode.com/problems/group-employees-of-the-same-salary/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Keep employees whose salary is shared with at least one other employee and assign a team number by ascending shared salary.",
+  "inputFormat": "Employees(employee_id, name, salary).",
+  "outputFormat": "Original employee columns plus team_id, ordered by team_id then employee_id.",
+  "officialConstraints": "unknown",
+  "tieRules": "Equal salaries share one team_id; team_id is the dense rank of the shared salary, starting at 1.",
+  "edgeRules": "Employees with unique salaries are excluded.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "text": "authored-reference: salaries 50,50,70,90,90 -> teams 1 (50) and 2 (90); salary 70 excluded."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "shared-salary filter",
+    "dense ranking",
+    "output order"
+  ],
+  "factsMissing": [
+    "official statement text (archive status missing-statement; no raw file)",
+    "official confirmation of this summary (requirementsVerified false)",
+    "none material"
+  ],
+  "questions": [],
+  "nextAction": "Fetch official page https://leetcode.com/problems/group-employees-of-the-same-salary/description/ and confirm each listed fact; then set requirementsVerified."
+}

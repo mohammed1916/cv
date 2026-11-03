@@ -1,0 +1,36 @@
+{
+  "number": "1951",
+  "title": "All the Pairs With the Maximum Number of Common Followers",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "archiveStatus": "missing-statement (no raw file in local-reference/leetcode/raw)",
+  "officialUrl": "https://leetcode.com/problems/all-the-pairs-with-the-maximum-number-of-common-followers/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "For every unordered pair of users, count common followers; return all pairs tied for the maximum count.",
+  "inputFormat": "Relations(user_id, follower_id): follower_id follows user_id.",
+  "outputFormat": "Columns user1_id, user2_id with user1_id < user2_id.",
+  "officialConstraints": "unknown",
+  "tieRules": "All pairs tied for the maximum count are returned.",
+  "edgeRules": "Whether zero-common-follower pairs appear when the maximum is zero is not settled.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "text": "authored-reference: users 1 and 2 share followers 5 and 6 (count 2), no other pair reaches 2 -> (1,2)."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "pair counting",
+    "tie inclusion"
+  ],
+  "factsMissing": [
+    "official statement text (archive status missing-statement; no raw file)",
+    "official confirmation of this summary (requirementsVerified false)",
+    "whether pairs with zero common followers are returned when maximum is zero",
+    "output ordering"
+  ],
+  "questions": [
+    "If the maximum common-follower count is 0, are all pairs returned?"
+  ],
+  "nextAction": "Fetch official page https://leetcode.com/problems/all-the-pairs-with-the-maximum-number-of-common-followers/description/ and confirm each listed fact; then set requirementsVerified."
+}

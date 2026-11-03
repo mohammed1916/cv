@@ -1,0 +1,37 @@
+{
+  "number": "1421",
+  "title": "NPV Queries",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Given a table of yearly net present values keyed by (id, year), answer every query row (id, year) with its npv; a query with no matching npv row returns 0.",
+  "inputFormat": "SQL. NPV(id, year, npv) with primary key (id, year); Queries(id, year) with primary key (id, year). Both int.",
+  "outputFormat": "SQL result with columns id, year, npv for every row of Queries.",
+  "officialConstraints": "unknown",
+  "tieRules": "None stated in draft; output has no duplicate queries because Queries key is (id, year).",
+  "edgeRules": "Missing (id, year) pairs produce npv = 0 (not NULL).",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "NPV: (1,2018,100). Queries: (1,2018),(1,2019)",
+      "expected": "(1,2018,100),(1,2019,0)"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "table keys",
+    "column names",
+    "missing-pair rule"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "row ordering of the output"
+  ],
+  "questions": [
+    "Does the official output need a specific ordering, or may rows come back in any order?"
+  ],
+  "nextAction": "Confirm the official statement and output ordering; then set requirementsVerified.",
+  "officialUrl": "https://leetcode.com/problems/npv-queries/description/"
+}

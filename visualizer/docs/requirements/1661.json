@@ -1,0 +1,37 @@
+{
+  "number": "1661",
+  "title": "Average Time of Process per Machine",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each machine, average the time each process takes, where each process has one start and one end record.",
+  "inputFormat": "SQL. Activity(machine_id, process_id, activity_type, timestamp) with activity_type 'start' or 'end'.",
+  "outputFormat": "SQL result: machine_id and processing_time = average of (end - start), rounded to three decimals.",
+  "officialConstraints": "unknown",
+  "tieRules": "Unknown ordering.",
+  "edgeRules": "Pair start and end by machine_id and process_id.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "machine 0 process 0: start 0.712, end 1.520; process 1: start 3.140, end 4.120",
+      "expected": "machine 0 processing_time 0.894"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "pairing rule",
+    "average and rounding"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "output ordering",
+    "rounding mode"
+  ],
+  "questions": [
+    "What ordering and rounding mode does the official output use?"
+  ],
+  "nextAction": "Confirm rounding and ordering.",
+  "officialUrl": "https://leetcode.com/problems/average-time-of-process-per-machine/description/"
+}

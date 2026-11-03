@@ -1,0 +1,38 @@
+{
+  "number": "1468",
+  "title": "Calculate Salaries",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Each company's maximum salary sets the rate for all its employees: 0% below 1000, 24% from 1000 to 10000, 49% above 10000. Return salary after tax.",
+  "inputFormat": "SQL. Salaries(company_id, employee_id, employee_name, salary); (company_id, employee_id) primary key, salary int.",
+  "outputFormat": "SQL result: company_id, employee_id, employee_name and salary after tax rounded to an integer.",
+  "officialConstraints": "unknown",
+  "tieRules": "Tax bracket is decided by the company's maximum salary, not each employee's salary (draft-derived wording).",
+  "edgeRules": "Threshold inclusivity: 1000 and 10000 are in the 24% bracket (draft-derived). Rounding to nearest integer.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "company 1: salaries 2000 (e1), 500 (e2); max 2000 so 24%",
+      "expected": "e1 1520; e2 380"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "bracket rates",
+    "company-maximum rule",
+    "integer rounding"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "rounding mode for .5 values (round half up or half to even)",
+    "whether a salary exactly 1000 or 10000 uses the 24% bracket"
+  ],
+  "questions": [
+    "Confirm threshold inclusivity at 1000 and 10000 and the rounding mode for halves."
+  ],
+  "nextAction": "Verify brackets and rounding against the official statement.",
+  "officialUrl": "https://leetcode.com/problems/calculate-salaries/description/"
+}

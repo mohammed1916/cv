@@ -1,0 +1,44 @@
+{
+  "number": 2675,
+  "title": "Array of Objects to Matrix",
+  "source": "https://leetcode.com/problems/array-of-objects-to-matrix/description/",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft-knowledge-derived",
+  "contentKind": "original-requirements-summary",
+  "problemClass": "JavaScript data transformation",
+  "summary": "Given an array of JSON objects, build a matrix whose first row is the lexicographically sorted union of all flattened leaf paths joined with dots; subsequent rows give each object's leaf value for each path, or empty string when absent. Arrays contribute numeric path components; null is a leaf.",
+  "inputFormat": "jsonArrayToMatrix(arr: object[]) -> (string|number|boolean|null)[][]",
+  "outputFormat": "matrix: header row then one row per object",
+  "officialConstraints": "unknown (official constraints not retrieved)",
+  "tieRules": "not applicable",
+  "edgeRules": [
+    "null is a leaf value",
+    "arrays use numeric path components",
+    "missing path -> empty string"
+  ],
+  "examples": [
+    {
+      "input": "[{a:{b:1}},{a:2}]",
+      "output": "[[\"a\",\"a.b\"],[\"\",\"1\"],[\"2\",\"\"]]",
+      "authored": true
+    }
+  ],
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Official page fetch on 2026-11-03 returned HTTP 403 (WebFetch); statement not retrieved this pass. Recovered-archive index lists missing-statement for this ID.",
+  "factsPresent": [
+    "title",
+    "task summary from manual draft",
+    "signature/semantics from draft"
+  ],
+  "factsMissing": [
+    "empty object or empty array treatment (leaf or no leaf)",
+    "keys containing dots"
+  ],
+  "questions": [
+    "Does an empty nested object or array produce a column?",
+    "Can keys contain '.'?"
+  ],
+  "nextAction": "Confirm empty-container and dot-key rules on official page.",
+  "signature": "jsonArrayToMatrix(arr: object[]) -> (string|number|boolean|null)[][]"
+}

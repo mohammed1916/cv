@@ -1,0 +1,37 @@
+{
+  "number": "1511",
+  "title": "Customer Order Frequency",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return customers who spent at least 100 in June 2020 and at least 100 in July 2020. Spending is price times quantity.",
+  "inputFormat": "SQL. Customers(customer_id, name, country); Product(product_id, description, price); Orders(order_id, customer_id, product_id, order_date, quantity).",
+  "outputFormat": "SQL result: customer_id and name.",
+  "officialConstraints": "unknown",
+  "tieRules": "Each qualifying customer appears once.",
+  "edgeRules": "Both months must independently meet the threshold; a customer with no orders in a month fails.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "customer 1: June spend 120, July spend 90",
+      "expected": "customer 1 excluded (July below 100)"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "spending formula",
+    "two-month condition",
+    "2020 date filter"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "output ordering"
+  ],
+  "questions": [
+    "Does the official output require an ordering?"
+  ],
+  "nextAction": "Confirm output ordering.",
+  "officialUrl": "https://leetcode.com/problems/customer-order-frequency/description/"
+}

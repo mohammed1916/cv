@@ -1,0 +1,41 @@
+{
+  "number": 2631,
+  "title": "Group By",
+  "source": "https://leetcode.com/problems/group-by/description/",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft-knowledge-derived",
+  "contentKind": "original-requirements-summary",
+  "problemClass": "JavaScript array function",
+  "summary": "Add Array.prototype.groupBy(fn): apply fn to each element to get its key and return an object mapping keys to arrays of original elements in original relative order; built-in groupBy must not be used.",
+  "inputFormat": "Array.prototype.groupBy(fn: (item) => string|number|symbol) -> object",
+  "outputFormat": "object of key -> array",
+  "officialConstraints": "unknown (official constraints not retrieved)",
+  "tieRules": "not applicable",
+  "edgeRules": [
+    "original relative order within each group",
+    "key coercion to property key rules"
+  ],
+  "examples": [
+    {
+      "input": "[1,2,3,4], x => x % 2",
+      "output": "{1:[1,3], 0:[2,4]}",
+      "authored": true
+    }
+  ],
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Official page fetch on 2026-11-03 returned HTTP 403 (WebFetch); statement not retrieved this pass. Recovered-archive index lists missing-statement for this ID.",
+  "factsPresent": [
+    "title",
+    "task summary from manual draft",
+    "signature/semantics from draft"
+  ],
+  "factsMissing": [
+    "whether keys other than strings/numbers are allowed"
+  ],
+  "questions": [
+    "Which key types does the official test allow?"
+  ],
+  "nextAction": "Confirm key types on official page.",
+  "signature": "Array.prototype.groupBy(fn: (item) => string|number|symbol) -> object"
+}

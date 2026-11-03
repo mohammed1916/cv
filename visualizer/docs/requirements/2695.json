@@ -1,0 +1,38 @@
+{
+  "number": "2695",
+  "title": "Array Wrapper",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/array-wrapper/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Wrap a numeric array so that numeric coercion (for example adding two wrappers) yields the sum of its elements, and string coercion yields bracketed comma-separated values.",
+  "inputFormat": "A numeric array passed to the constructor.",
+  "outputFormat": "valueOf-style numeric sum; toString-style text such as '[4,7]'.",
+  "officialConstraints": "unknown",
+  "tieRules": "not applicable",
+  "edgeRules": "Empty wrapper converts to 0 numerically and '[]' textually. Element bounds unknown.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "[1,2] wrapper + [3] wrapper",
+      "output": "numeric 6; String(wrapper) '[1,2]' (authored-reference)",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "numeric sum rule",
+    "string format rule",
+    "empty-array rule"
+  ],
+  "factsMissing": [
+    "official numeric bounds",
+    "official example",
+    "whether negative or non-integer elements occur"
+  ],
+  "questions": [
+    "Are the stored elements guaranteed to be integers within a numeric bound, and is the sum required to be exact for large values?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

@@ -1,0 +1,29 @@
+{
+  "number": "2752",
+  "title": "Customers with Maximum Number of Transactions on Consecutive Days",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialConstraints": "unknown",
+  "examples": [],
+  "requirementsVerified": false,
+  "summary": "For each customer, find the longest run of consecutive transaction dates, counting each date once, and return customers tied for the greatest run.",
+  "inputFormat": "Transactions(transaction_id, customer_id, transaction_date, amount).",
+  "outputFormat": "customer_id rows for customers tied on the greatest run (column names not recorded).",
+  "tieRules": "Ties all returned.",
+  "edgeRules": "Whether the measure is consecutive days or transaction count is unresolved; duplicate dates counted once.",
+  "factsPresent": [
+    "Longest run of consecutive dates",
+    "Ties returned"
+  ],
+  "factsMissing": [
+    "Measure: consecutive days versus transaction count",
+    "Output columns and ordering"
+  ],
+  "questions": [
+    "Is the measure the longest run of consecutive days, or a count of transactions in that run?",
+    "Required output columns and ordering?"
+  ],
+  "nextAction": "Obtain the official statement (recovered raw archive has none for this ID); confirm the listed missing facts, then set requirementsVerified only if an official page confirms them. Official base URL in the manual draft; not fetched in this pass.",
+  "examplesNote": "No authored example in this pass; authored-reference examples to be added after the statement is confirmed."
+}

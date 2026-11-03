@@ -1,0 +1,41 @@
+{
+  "number": 2629,
+  "title": "Function Composition",
+  "source": "https://leetcode.com/problems/function-composition/description/",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft-knowledge-derived",
+  "contentKind": "original-requirements-summary",
+  "problemClass": "JavaScript function utility",
+  "summary": "Given an array of unary functions, return their right-to-left composition: the last function receives the input first. An empty list produces the identity function.",
+  "inputFormat": "compose(functions: Array<(x) => any>) -> (x) => any",
+  "outputFormat": "composed function",
+  "officialConstraints": "unknown (official constraints not retrieved)",
+  "tieRules": "not applicable",
+  "edgeRules": [
+    "empty list returns identity",
+    "right-to-left application"
+  ],
+  "examples": [
+    {
+      "input": "[f, g] applied to x",
+      "output": "f(g(x))",
+      "authored": true
+    }
+  ],
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Official page fetch on 2026-11-03 returned HTTP 403 (WebFetch); statement not retrieved this pass. Recovered-archive index lists missing-statement for this ID.",
+  "factsPresent": [
+    "title",
+    "task summary from manual draft",
+    "signature/semantics from draft"
+  ],
+  "factsMissing": [
+    "numeric domain or type restrictions on inputs"
+  ],
+  "questions": [
+    "Are inputs and outputs guaranteed to be numbers?"
+  ],
+  "nextAction": "Confirm input types on official page.",
+  "signature": "compose(functions: Array<(x) => any>) -> (x) => any"
+}

@@ -1,0 +1,31 @@
+{
+  "number": "2388",
+  "title": "Change Null Values in a Table to the Previous Value",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "SQL: replace each NULL drink with the closest preceding non-NULL drink in id order; the first row is non-NULL.",
+  "inputFormat": "CoffeeShop(id,drink).",
+  "outputFormat": "id and filled drink.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Ordering is by id (manual draft says verify that id defines the order).",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "table and columns",
+    "fill-forward rule",
+    "first row non-NULL"
+  ],
+  "factsMissing": [
+    "official page text (HTTP 403 on fetch, not verified)",
+    "official numeric bounds",
+    "authored examples",
+    "output ordering"
+  ],
+  "questions": [
+    "Confirm whether the output must be ordered by id."
+  ],
+  "nextAction": "Fetch official page or obtain a readable copy; then confirm the listed questions and author examples.",
+  "provenance": "Manual draft local-reference/leetcode/manual/2388.txt (knowledge-derived, not a recovered statement). Official URL https://leetcode.com/problems/<slug>/description/ returned HTTP 403 on 2026-11-03; no recovered raw statement exists in the archive."
+}

@@ -1,0 +1,32 @@
+{
+  "number": "2252",
+  "title": "Dynamic Pivoting of a Table",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Stored-procedure contract: pivot Products so each distinct store becomes a price column, one row per product; store names are unknown in advance.",
+  "inputFormat": "Products(product_id,store,price).",
+  "outputFormat": "One row per product_id with one price column per store (column ordering not stated).",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Identifier escaping and unknown-store names must be handled.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "table and columns",
+    "dynamic columns"
+  ],
+  "factsMissing": [
+    "official page text (HTTP 403 on fetch, not verified)",
+    "official numeric bounds",
+    "authored examples",
+    "procedure name and signature",
+    "column ordering",
+    "missing store value (NULL) convention"
+  ],
+  "questions": [
+    "Confirm the stored-procedure name, signature, column ordering, and the value used where a product has no price for a store."
+  ],
+  "nextAction": "Fetch official page or obtain a readable copy; then confirm the listed questions and author examples.",
+  "provenance": "Manual draft local-reference/leetcode/manual/2252.txt (knowledge-derived, not a recovered statement). Official URL https://leetcode.com/problems/<slug>/description/ returned HTTP 403 on 2026-11-03; no recovered raw statement exists in the archive."
+}

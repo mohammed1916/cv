@@ -1,0 +1,29 @@
+{
+  "number": "2978",
+  "title": "Symmetric Coordinates",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialConstraints": "unknown",
+  "examples": [],
+  "requirementsVerified": false,
+  "summary": "Return pairs (X, Y) that have a counterpart (Y, X) in Coordinates, with X <= Y, each qualifying pair once, sorted by X then Y. A diagonal pair (X, X) needs two distinct input rows.",
+  "inputFormat": "Coordinates(X, Y).",
+  "outputFormat": "X and Y pairs, sorted by X then Y.",
+  "tieRules": "Sort by X then Y ascending.",
+  "edgeRules": "Duplicate-count handling for repeated rows is not settled.",
+  "factsPresent": [
+    "Symmetric pair with X <= Y",
+    "Diagonal requires two rows",
+    "Each pair once"
+  ],
+  "factsMissing": [
+    "Duplicate row handling",
+    "Output column names"
+  ],
+  "questions": [
+    "If (X, X) appears twice, does it qualify once, and what output column names are required?"
+  ],
+  "nextAction": "Obtain the official statement (recovered raw archive has none for this ID); confirm the listed missing facts, then set requirementsVerified only if an official page confirms them. Official base URL in the manual draft; not fetched in this pass.",
+  "examplesNote": "No authored example in this pass; authored-reference examples to be added after the statement is confirmed."
+}

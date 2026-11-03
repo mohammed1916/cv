@@ -1,0 +1,38 @@
+{
+  "number": "1501",
+  "title": "Countries You Can Safely Invest In",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Assign each person a country from the phone-number prefix. Return the countries whose average call duration, over calls involving their residents, is above the overall average call duration.",
+  "inputFormat": "SQL. Person(id, name, phone_number); Country(name, country_code); Calls(caller_id, callee_id, duration).",
+  "outputFormat": "SQL result: country name for each qualifying country.",
+  "officialConstraints": "unknown",
+  "tieRules": "Overall average is taken across all calls (draft-derived).",
+  "edgeRules": "Country assignment uses the phone prefix matching country_code. Same-country calls count for both participants (draft asks to verify).",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "one country whose residents' calls average 10 vs overall 8",
+      "expected": "that country"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "country by phone prefix",
+    "compare to overall average"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "exact prefix rule (separator, multi-digit codes)",
+    "whether same-country calls count twice in the country average",
+    "output ordering"
+  ],
+  "questions": [
+    "How is the country prefix matched against phone_number, and are both caller and callee rows counted when both are in the same country?"
+  ],
+  "nextAction": "Confirm prefix rule and double-count rule.",
+  "officialUrl": "https://leetcode.com/problems/countries-you-can-safely-invest-in/description/"
+}

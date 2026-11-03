@@ -4,11 +4,30 @@
   "source": "https://leetcode.doocs.org/en/lc/3822/",
   "officialUrl": "https://leetcode.com/problems/design-order-management-system/",
   "sourceKind": "public-community-reference",
-  "checkedOn": "2026-11-02",
-  "contentKind": "independently-written-requirements",
+  "checkedOn": "2026-11-03",
+  "contentKind": "original-requirements-summary",
   "summary": "Implement OrderManagementSystem with addOrder(id,type,price), modifyOrder(id,newPrice), cancelOrder(id), and getOrdersAtPrice(type,price). Added IDs are unique; modifications and cancellations target active orders. Return IDs of all active matching orders in any order, or an empty list. Types are buy and sell.",
   "requirementsVerified": false,
   "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
   "examples": [],
-  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples.",
+  "previousContentKind": "independently-written-requirements",
+  "tieRules": "Given in the existing note summary.",
+  "edgeRules": "Given in the existing note summary.",
+  "factsPresent": [
+    "Method list",
+    "Tie and ordering rules from the existing note"
+  ],
+  "factsMissing": [
+    "Official bounds",
+    "Return types",
+    "Official confirmation"
+  ],
+  "nextAction": "Community reproduction only; fetch the official page and answer the questions.",
+  "questions": [
+    "What do addOrder, modifyOrder and cancelOrder return, and what happens for a missing or inactive id?",
+    "What are the price and id bounds?"
+  ],
+  "inputFormat": "addOrder takes id, type ('buy' or 'sell') and price; modifyOrder takes id and newPrice; cancelOrder takes id; getOrdersAtPrice takes type and price.",
+  "outputFormat": "getOrdersAtPrice returns a list of active order ids (any order)."
 }

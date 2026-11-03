@@ -1,0 +1,58 @@
+{
+  "number": "1173",
+  "title": "Immediate Food Delivery I",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/immediate-food-delivery-i/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "A delivery is immediate when customer_pref_delivery_date equals order_date. Return immediate_percentage: the percentage of all deliveries that are immediate, rounded to two decimals.",
+  "inputFormat": "Delivery(delivery_id, customer_id, order_date, customer_pref_delivery_date).",
+  "outputFormat": "One column immediate_percentage with two decimals.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable: a single value.",
+  "edgeRules": "The denominator is all deliveries (not only first orders).",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "delivery": [
+        [
+          1,
+          1,
+          "2019-08-01",
+          "2019-08-02"
+        ],
+        [
+          2,
+          2,
+          "2019-08-02",
+          "2019-08-02"
+        ],
+        [
+          3,
+          3,
+          "2019-08-11",
+          "2019-08-11"
+        ]
+      ],
+      "expected": [
+        [
+          66.67
+        ]
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "SQL task statement"
+  ],
+  "factsMissing": [
+    "scale of the percentage (0-100 assumed by the example, not stated)",
+    "output for an empty table"
+  ],
+  "questions": [
+    "Is the percentage on a 0 to 100 scale, and what is returned for an empty Delivery table? Not stated."
+  ],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

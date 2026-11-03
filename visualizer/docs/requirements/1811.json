@@ -1,0 +1,37 @@
+{
+  "number": "1811",
+  "title": "Find Interview Candidates",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "archiveStatus": "missing-statement (no raw file in local-reference/leetcode/raw)",
+  "officialUrl": "https://leetcode.com/problems/find-interview-candidates/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return name and mail of users who won any medal in three consecutive contest IDs, or won at least three gold medals overall.",
+  "inputFormat": "Contests(contest_id, gold_medal, silver_medal, bronze_medal); Users(user_id, mail, name).",
+  "outputFormat": "Columns name, mail for qualifying users, each once.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Consecutive means consecutive contest_id values, not consecutive rows; the draft does not state this.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "text": "authored-reference: user wins medals in contests 5,6,7 -> qualifies; user with 3 gold in non-consecutive contests -> qualifies."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "gold-count criterion",
+    "any-medal consecutive criterion",
+    "deduplication"
+  ],
+  "factsMissing": [
+    "official statement text (archive status missing-statement; no raw file)",
+    "official confirmation of this summary (requirementsVerified false)",
+    "exact meaning of consecutive contest IDs (difference of 1 in contest_id)",
+    "output ordering"
+  ],
+  "questions": [
+    "Does 'consecutive contest IDs' mean contest_id values differing by exactly 1?"
+  ],
+  "nextAction": "Fetch official page https://leetcode.com/problems/find-interview-candidates/description/ and confirm each listed fact; then set requirementsVerified."
+}

@@ -1,0 +1,29 @@
+{
+  "number": "3124",
+  "title": "Find Longest Calls",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each call type, return the three longest calls with a formatted duration and the contact's name.",
+  "inputFormat": "Contacts(id, first_name, last_name) and Calls(contact_id, type, duration).",
+  "outputFormat": "Per type: up to three calls with formatted duration and contact name (format not stated).",
+  "officialConstraints": "unknown",
+  "tieRules": "Ranking by duration descending.",
+  "edgeRules": "Tie treatment at the third position and the formatted duration string are not stated.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "SQL input table names and columns (from manual draft)",
+    "primary task rule (from manual draft)",
+    "official page reference https://leetcode.com/problems/find-longest-calls/description/"
+  ],
+  "factsMissing": [
+    "official statement not fetched or confirmed",
+    "exact output column names and row order",
+    "authored validation example"
+  ],
+  "questions": [
+    "Tie rule for equal durations, the exact duration format and the name format."
+  ],
+  "nextAction": "Fetch the official /description/ page for this problem and confirm the summary, then record the exact output columns, ordering and tie rules; author and validate a teaching example (labelled authored-reference)."
+}

@@ -1,0 +1,38 @@
+{
+  "number": 1270,
+  "title": "All People Report to the Given Manager",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1270.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/all-people-report-to-the-given-manager/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return every employee who reports to employee 1 directly or indirectly, excluding employee 1 itself. Follow manager_id chains rather than only immediate managers.",
+  "inputFormat": "Employees(employee_id, employee_name, manager_id).",
+  "outputFormat": "Output columns are not stated in the draft (at least the employee identifier is expected).",
+  "officialConstraints": "unknown",
+  "tieRules": "No tie rule; ordering not stated.",
+  "edgeRules": "Hierarchy depth and self-manager/root guarantees are unverified.",
+  "examples": {
+    "label": "authored-reference",
+    "note": "Employee 2 reports to 1, 3 to 2, 4 to 3. Expected: employees 2, 3 and 4. [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "transitive reporting rule",
+    "exclusion of employee 1"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)",
+    "depth bound",
+    "self-manager/root guarantee",
+    "output columns",
+    "ordering"
+  ],
+  "questions": [
+    "What is the guaranteed maximum depth of the reporting hierarchy? The draft asks to verify it and it determines whether a recursive walk is needed.",
+    "Which output columns and row ordering are required?"
+  ],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

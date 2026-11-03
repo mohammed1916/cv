@@ -1,0 +1,18 @@
+{
+  "number": 2189,
+  "title": "Number of Ways to Build House of Cards",
+  "contentKind": "independently-written-requirements",
+  "requirementsVerified": false,
+  "examples": [],
+  "exampleStatus": "Source examples not copied; worked illustrations are independently authored in clarification.",
+  "summary": "Use exactly n cards in one or more rows. Each triangle uses two cards; every adjacent pair in a row has one horizontal card between them. Each triangle above the bottom row must stand on a horizontal card below. Place triangles at the leftmost available positions. Count houses distinguished by their row card counts.",
+  "clarification": "Consequently, a row of t triangles uses 3*t-1 cards, and an upper row has at most t-1 triangles. Row sizes strictly decrease upward; arbitrary ordered compositions are wrong. Authored example n=7: two triangles below cost 5 and one above costs 2, giving one house. No single row costs 7, and three rows require at least 8+5+2=15.",
+  "source": "https://leetcode.doocs.org/en/lc/2189/",
+  "officialUrl": "https://leetcode.com/problems/number-of-ways-to-build-house-of-cards/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-03",
+  "constraintsReportedBySource": "1<=n<=500.",
+  "verificationStatus": "community-reproduction-read; official text not independently confirmed",
+  "officialConstraints": "Official-page confirmation pending. See constraintsReportedBySource for the bounds in the community reproduction.",
+  "questionResolution": "Specific CLAUDE-QUESTIONS.md question answered; source confidence recorded separately."
+}

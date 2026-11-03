@@ -1,0 +1,64 @@
+{
+  "number": "1069",
+  "title": "Product Sales Analysis II",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/product-sales-analysis-ii/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "Return each product_id with the sum of quantity over all its Sales rows, across every year.",
+  "inputFormat": "Sales(sale_id, product_id, year, quantity, price).",
+  "outputFormat": "Columns product_id and total_quantity; one row per product that has sales.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable: one row per product_id.",
+  "edgeRules": "Products with no Sales rows do not appear, because the draft describes products sold.",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "sales": [
+        [
+          1,
+          100,
+          2008,
+          10
+        ],
+        [
+          2,
+          100,
+          2009,
+          12
+        ],
+        [
+          7,
+          200,
+          2011,
+          15
+        ]
+      ],
+      "expected": [
+        [
+          100,
+          22
+        ],
+        [
+          200,
+          15
+        ]
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "SQL task statement",
+    "table columns from draft"
+  ],
+  "factsMissing": [
+    "output row order",
+    "whether products never sold appear with 0 (draft says products sold, so they do not)"
+  ],
+  "questions": [
+    "Are products with no sales required to appear with total_quantity 0, or to be omitted? The draft says sold products only; confirm."
+  ],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

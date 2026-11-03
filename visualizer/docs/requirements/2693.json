@@ -1,0 +1,39 @@
+{
+  "number": "2693",
+  "title": "Call Function with Custom Context",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/call-function-with-custom-context/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Add a callPolyfill method to functions that invokes the function with a supplied this-context and forwarded arguments, returning the function's return value.",
+  "inputFormat": "A function f, a context value, and zero or more further arguments.",
+  "outputFormat": "The return value of f invoked with this = context and the forwarded arguments.",
+  "officialConstraints": "unknown",
+  "tieRules": "not applicable",
+  "edgeRules": "The built-in call, apply and bind must not be used. Behaviour for null/undefined and primitive contexts is not stated.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "this = {x: 1}, args (2)",
+      "output": "function returns this.x + arg, result 3 (authored-reference)",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task intent: custom context with forwarded arguments",
+    "forbidden built-ins listed"
+  ],
+  "factsMissing": [
+    "official required method name and attachment (Function.prototype or other)",
+    "null/undefined context semantics",
+    "primitive context semantics (boxed or raw)",
+    "official bounds"
+  ],
+  "questions": [
+    "For a null or undefined context, must this be the global object, undefined, or the context unchanged?",
+    "Must primitive contexts be passed unboxed to the function?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

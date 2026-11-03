@@ -1,0 +1,29 @@
+{
+  "number": "2142",
+  "title": "The Number of Passengers in Each Bus I",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "SQL: each passenger boards the earliest bus whose arrival time is not earlier than the passenger's arrival time; capacity unlimited; return every bus including zero counts.",
+  "inputFormat": "Buses(bus_id,arrival_time) and Passengers(passenger_id,arrival_time).",
+  "outputFormat": "bus_id and passengers_cnt, ordered by bus_id ascending.",
+  "officialConstraints": "unknown",
+  "tieRules": "Passenger arriving at exactly a bus time boards that bus (the 'no earlier than' wording).",
+  "edgeRules": "A passenger boards at most once; buses with no boarding return 0.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "two tables",
+    "earliest bus >= arrival",
+    "output names and ordering"
+  ],
+  "factsMissing": [
+    "official page text (HTTP 403 on fetch, not verified)",
+    "official numeric bounds",
+    "authored examples"
+  ],
+  "questions": [],
+  "nextAction": "Fetch official page or obtain a readable copy; then confirm the listed questions and author examples.",
+  "provenance": "Manual draft local-reference/leetcode/manual/2142.txt (knowledge-derived, not a recovered statement). Official URL https://leetcode.com/problems/<slug>/description/ returned HTTP 403 on 2026-11-03; no recovered raw statement exists in the archive.",
+  "officialUrl": "https://leetcode.com/problems/the-number-of-passengers-in-each-bus-i/description/"
+}

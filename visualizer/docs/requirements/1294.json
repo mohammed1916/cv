@@ -1,0 +1,36 @@
+{
+  "number": 1294,
+  "title": "Weather Type in Each Country",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1294.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/weather-type-in-each-country/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each country with observations in November 2019, average the weather_state values and classify: Cold if the average is at most 15, Hot if at least 25, otherwise Warm.",
+  "inputFormat": "Countries(country_id, country_name); Weather(country_id, weather_state, day).",
+  "outputFormat": "country_name, weather_type.",
+  "officialConstraints": "unknown",
+  "tieRules": "Thresholds are inclusive at 15 (Cold) and 25 (Hot).",
+  "edgeRules": "Countries with no November 2019 observations are excluded.",
+  "examples": {
+    "label": "authored-reference",
+    "note": "USA values 10 and 12: average 11 gives Cold. Japan values 25 and 30: average 27.5 gives Hot. [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "date filter",
+    "threshold rules",
+    "classification labels"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)",
+    "rounding before classification",
+    "ordering"
+  ],
+  "questions": [
+    "Is the average rounded before the threshold test? The draft does not say."
+  ],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

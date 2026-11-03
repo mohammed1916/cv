@@ -1,0 +1,34 @@
+{
+  "number": "1831",
+  "title": "Maximum Transaction Each Day",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "archiveStatus": "missing-statement (no raw file in local-reference/leetcode/raw)",
+  "officialUrl": "https://leetcode.com/problems/maximum-transaction-each-day/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each calendar day, return the transaction IDs tied for the largest amount that day, ignoring time of day.",
+  "inputFormat": "Transactions(transaction_id, day, amount) where day contains a time component.",
+  "outputFormat": "Column transaction_id, sorted ascending.",
+  "officialConstraints": "unknown",
+  "tieRules": "All transactions tied for the day's maximum are returned.",
+  "edgeRules": "Time component is ignored for grouping.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "text": "authored-reference: two transactions on 2020-01-01 at 09:00 and 17:00 with amounts 50 and 50 -> both returned."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "per-day grouping",
+    "ties included",
+    "sort by transaction_id"
+  ],
+  "factsMissing": [
+    "official statement text (archive status missing-statement; no raw file)",
+    "official confirmation of this summary (requirementsVerified false)",
+    "none material"
+  ],
+  "questions": [],
+  "nextAction": "Fetch official page https://leetcode.com/problems/maximum-transaction-each-day/description/ and confirm each listed fact; then set requirementsVerified."
+}

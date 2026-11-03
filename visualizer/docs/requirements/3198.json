@@ -1,0 +1,29 @@
+{
+  "number": "3198",
+  "title": "Find Cities in Each State",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return each state with its cities as an alphabetically sorted, comma-separated list.",
+  "inputFormat": "Cities(state, city).",
+  "outputFormat": "state and a city list (columns not stated).",
+  "officialConstraints": "unknown",
+  "tieRules": "Sort by state ascending; city list sorted alphabetically.",
+  "edgeRules": "Duplicate city rows and separator spacing are not stated.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "SQL input table names and columns (from manual draft)",
+    "primary task rule (from manual draft)",
+    "official page reference https://leetcode.com/problems/find-cities-in-each-state/description/"
+  ],
+  "factsMissing": [
+    "official statement not fetched or confirmed",
+    "exact output column names and row order",
+    "authored validation example"
+  ],
+  "questions": [
+    "Exact separator string (comma with or without space), output column names, and whether duplicates appear."
+  ],
+  "nextAction": "Fetch the official /description/ page for this problem and confirm the summary, then record the exact output columns, ordering and tie rules; author and validate a teaching example (labelled authored-reference)."
+}

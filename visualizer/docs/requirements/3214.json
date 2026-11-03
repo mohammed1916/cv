@@ -1,0 +1,29 @@
+{
+  "number": "3214",
+  "title": "Year on Year Growth Rate",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each product, compare current-year spend with prior-year spend and report the percentage growth rounded to two decimals.",
+  "inputFormat": "user_transactions(transaction_id, product_id, spend, transaction_date).",
+  "outputFormat": "Per product: current spend, prior spend and growth percentage (names not stated).",
+  "officialConstraints": "unknown",
+  "tieRules": "Unknown.",
+  "edgeRules": "Which years count as current and prior, and zero or missing prior spend, are not stated.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "SQL input table names and columns (from manual draft)",
+    "primary task rule (from manual draft)",
+    "official page reference https://leetcode.com/problems/year-on-year-growth-rate/description/"
+  ],
+  "factsMissing": [
+    "official statement not fetched or confirmed",
+    "exact output column names and row order",
+    "authored validation example"
+  ],
+  "questions": [
+    "Is prior year the preceding calendar year, how is zero or missing prior spend handled, and what are the output column names and order?"
+  ],
+  "nextAction": "Fetch the official /description/ page for this problem and confirm the summary, then record the exact output columns, ordering and tie rules; author and validate a teaching example (labelled authored-reference)."
+}

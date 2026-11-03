@@ -1,0 +1,65 @@
+{
+  "number": "1107",
+  "title": "New Users Daily Count",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/new-users-daily-count/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "Each user's first login is their earliest login across all history. Report, for first logins that fall within the 90 days ending 2019-06-30, the login_date and the number of users (user_count) whose first login was on that date.",
+  "inputFormat": "Traffic(user_id, activity, activity_date); activity is 'login' or 'logout'.",
+  "outputFormat": "Columns login_date and user_count; one row per login date in the window that has first logins.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable: one row per date.",
+  "edgeRules": "First login is found before applying the window. The 90-day window's inclusive start (2019-04-01 if the window includes both ends) is not confirmed by the draft.",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "traffic": [
+        [
+          1,
+          "login",
+          "2019-04-01"
+        ],
+        [
+          1,
+          "login",
+          "2019-06-30"
+        ],
+        [
+          2,
+          "login",
+          "2019-03-01"
+        ],
+        [
+          2,
+          "login",
+          "2019-06-30"
+        ]
+      ],
+      "expected": [
+        [
+          "2019-04-01",
+          1
+        ],
+        [
+          "2019-06-30",
+          1
+        ]
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "SQL task statement"
+  ],
+  "factsMissing": [
+    "inclusive start of the 90-day window",
+    "output row order"
+  ],
+  "questions": [
+    "Does the window start on 2019-04-01 (90 inclusive days ending 2019-06-30), or a different day? Confirm the inclusive start."
+  ],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

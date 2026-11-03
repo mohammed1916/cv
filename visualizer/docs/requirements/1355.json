@@ -1,0 +1,37 @@
+{
+  "number": 1355,
+  "title": "Activity Participants",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1355.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/activity-participants/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Count participants per activity and return the activities whose count is neither the minimum nor the maximum count. All activities tied at the minimum or maximum are excluded.",
+  "inputFormat": "Friends(id, name, activity); Activities(id, name).",
+  "outputFormat": "Output column for the activity is not stated; the activity name is expected.",
+  "officialConstraints": "unknown",
+  "tieRules": "All tied minimum or maximum groups are excluded.",
+  "edgeRules": "Activities with zero participants may or may not belong to the population; the draft asks to verify this.",
+  "examples": {
+    "label": "authored-reference",
+    "note": "Counts Tennis 1, Yoga 3, Swim 2, Football 2: minimum 1 and maximum 3 are excluded, leaving Swim and Football. [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "min/max exclusion",
+    "tie handling"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)",
+    "zero-participant population",
+    "output columns",
+    "ordering"
+  ],
+  "questions": [
+    "Are activities with zero participants included in the population for min and max?",
+    "What is the exact output column and row order?"
+  ],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

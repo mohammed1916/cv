@@ -2,12 +2,35 @@
   "number": 3832,
   "title": "Find Users with Persistent Behavior Patterns",
   "source": "https://leetcode.com/problems/find-users-with-persistent-behavior-patterns/description/",
-  "checkedOn": "2026-11-02",
-  "sourceKind": "official-page-via-web-tool",
-  "contentKind": "independently-written-requirements",
-  "summary": "SQL: activity(user_id,action_date,action), unique by all three fields. Find runs of at least five consecutive dates on which a user performs exactly one action and that action is constant throughout the run. For each user choose the longest run, then lexicographically smallest action, then latest start date. Return user_id,action,streak_length,start_date,end_date sorted by length descending then user_id ascending. A date with multiple action types breaks a run.",
-  "officialConstraints": "user_id integer, action_date date, action text; primary key includes all fields.",
-  "requirementsVerified": true,
+  "checkedOn": "2026-11-03",
+  "sourceKind": "community-or-prior-note",
+  "contentKind": "original-requirements-summary",
+  "problemClass": "SQL",
+  "summary": "Find runs of at least five consecutive dates on which a user performs exactly one action and that action is constant; for each user choose the longest run, then lexicographically smallest action, then latest start date; return user_id, action, streak_length, start_date, end_date sorted by length descending then user_id ascending.",
+  "inputFormat": "activity(user_id int, action_date date, action text), unique by all three fields.",
+  "outputFormat": "user_id, action, streak_length, start_date, end_date.",
+  "officialConstraints": "user_id integer; action_date date; action text.",
+  "tieRules": "Longest run, then lexicographically smallest action, then latest start date.",
+  "edgeRules": "A date with more than one action type breaks a run.",
   "examples": [],
-  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Prior note recorded an official-page-via-web-tool check on 2026-11-02 (official page via web tool; prior note marked requirementsVerified true). Not reconfirmed this pass: official page returns 403 on 2026-11-03.",
+  "factsPresent": [
+    "run = consecutive calendar dates with exactly one distinct action each day",
+    "minimum length 5"
+  ],
+  "factsMissing": [
+    "table schema",
+    "run definition",
+    "selection rule",
+    "output columns and ordering"
+  ],
+  "questions": [
+    "whether 'consecutive dates' means calendar days (no gaps) rather than consecutive rows; the note implies calendar days"
+  ],
+  "nextAction": "Confirm on the official statement that consecutive means no calendar-day gaps.",
+  "previousSourceRecord": {
+    "requirementsVerifiedClaimedByPriorNote": true
+  }
 }

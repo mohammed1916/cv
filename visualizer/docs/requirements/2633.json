@@ -1,0 +1,44 @@
+{
+  "number": 2633,
+  "title": "Convert Object to JSON String",
+  "source": "https://leetcode.com/problems/convert-object-to-json-string/description/",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft-knowledge-derived",
+  "contentKind": "original-requirements-summary",
+  "problemClass": "JavaScript serialization",
+  "summary": "Serialize a JSON-compatible value into a valid JSON string without JSON.stringify; support null, booleans, finite numbers, strings, arrays and objects; preserve array order and correct punctuation and quoting.",
+  "inputFormat": "jsonStringify(value: JSON-compatible) -> string",
+  "outputFormat": "valid JSON text",
+  "officialConstraints": "unknown (official constraints not retrieved)",
+  "tieRules": "not applicable",
+  "edgeRules": [
+    "strings need escape handling",
+    "finite numbers only per draft",
+    "array order preserved"
+  ],
+  "examples": [
+    {
+      "input": "{\"a\":[1,true,null]}",
+      "output": "{\"a\":[1,true,null]}",
+      "authored": true
+    }
+  ],
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Official page fetch on 2026-11-03 returned HTTP 403 (WebFetch); statement not retrieved this pass. Recovered-archive index lists missing-statement for this ID.",
+  "factsPresent": [
+    "title",
+    "task summary from manual draft",
+    "signature/semantics from draft"
+  ],
+  "factsMissing": [
+    "whether strings contain escapes (quotes, backslashes, control characters)",
+    "whether undefined/functions/NaN appear"
+  ],
+  "questions": [
+    "Do test strings contain characters that require JSON escaping?",
+    "Is key order within objects required to follow insertion order?"
+  ],
+  "nextAction": "Confirm string escape and key order requirements on official page.",
+  "signature": "jsonStringify(value: JSON-compatible) -> string"
+}

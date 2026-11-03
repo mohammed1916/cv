@@ -1,13 +1,18 @@
 {
   "number": 3980,
   "title": "Minimum Operations to Transform Binary String",
-  "source": "https://leetcode.com/problems/minimum-operations-to-transform-binary-string/description/",
-  "checkedOn": "2026-11-02",
+  "source": "https://leetcode.com/problems/minimum-operations-to-transform-binary-string/",
+  "checkedOn": "2026-11-03",
   "sourceKind": "official-page-via-web-tool",
   "contentKind": "independently-written-requirements",
-  "summary": "Transform s1 into equal-length binary string s2 using either a single 0-to-1 change or a simultaneous change of an adjacent 11 pair into 00. Each operation costs one and may be repeated in any order. Return the minimum count, or -1 if impossible.",
+  "summary": "Yes: a 0-to-1 operation may create an adjacent 11 pair for a subsequent simultaneous 11-to-00 operation. Operations may be repeated in any order, including temporarily changing a position that already matches the target. Each operation costs one. Return minimum cost or -1.",
   "officialConstraints": "Equal binary-string lengths 1..100000.",
   "requirementsVerified": true,
   "examples": [],
-  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets.",
+  "clarification": "Derived reachability, not an additional statement restriction: for n>=2 every state is reachable from every other state. Any adjacent pair can be made 00 by first filling its zeros with ones, then clearing it. Clear successive pairs across the string, then set target ones. At n=1, only 1 to 0 is impossible.",
+  "officialUrl": "https://leetcode.com/problems/minimum-operations-to-transform-binary-string/",
+  "constraintsReportedBySource": "Equal binary-string lengths 1..100000.",
+  "verificationStatus": "official-page-read",
+  "questionResolution": "Specific CLAUDE-QUESTIONS.md question answered; source confidence recorded separately."
 }

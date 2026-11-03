@@ -1,0 +1,34 @@
+{
+  "number": "2346",
+  "title": "Compute the Rank as a Percentage",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "SQL: for each student, percentile rank within the department by descending marks; equal marks share rank; output percentage rounded to two decimals.",
+  "inputFormat": "Students(student_id,department_id,mark).",
+  "outputFormat": "student_id, department_id, percentage (rounded to 2 decimals).",
+  "officialConstraints": "unknown",
+  "tieRules": "Equal marks share a rank; the rank style is not confirmed.",
+  "edgeRules": "Single-student departments: percentage rule (from knowledge, 0) not confirmed.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "table and columns",
+    "percentile formula",
+    "two-decimal rounding"
+  ],
+  "factsMissing": [
+    "official page text (HTTP 403 on fetch, not verified)",
+    "official numeric bounds",
+    "authored examples",
+    "exact percent-rank formula",
+    "singleton department value",
+    "rank style",
+    "output ordering"
+  ],
+  "questions": [
+    "Confirm the percentile formula (rank-1)/(N-1)*100 or equivalent, the singleton value, and the rank style for ties."
+  ],
+  "nextAction": "Fetch official page or obtain a readable copy; then confirm the listed questions and author examples.",
+  "provenance": "Manual draft local-reference/leetcode/manual/2346.txt (knowledge-derived, not a recovered statement). Official URL https://leetcode.com/problems/<slug>/description/ returned HTTP 403 on 2026-11-03; no recovered raw statement exists in the archive."
+}

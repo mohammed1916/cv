@@ -1,13 +1,18 @@
 {
   "number": 3984,
   "title": "Divisible Game",
-  "source": "https://leetcode.com/problems/divisible-game/description/",
-  "checkedOn": "2026-11-02",
+  "source": "https://leetcode.com/problems/divisible-game/",
+  "checkedOn": "2026-11-03",
   "sourceKind": "official-page-via-web-tool",
   "contentKind": "independently-written-requirements",
-  "summary": "Choose an integer k>1 and a nonempty contiguous array interval. Values divisible by k contribute positively to the score, while all other selected values contribute negatively. Maximize this score, breaking ties by the smallest k. Return optimum score times that chosen k modulo 1000000007.",
-  "officialConstraints": "Length 1..1000; positive values 1..10^6.",
+  "summary": "For a chosen k>1 and nonempty contiguous interval, each divisible value contributes +nums[i] to the score difference; every other selected value contributes -nums[i], not -1. Maximize the difference, then choose the smallest k attaining it. Return difference*k modulo 1000000007, normalized to a nonnegative residue.",
+  "officialConstraints": "1<=length<=1000; 1<=nums[i]<=1000000.",
   "requirementsVerified": true,
   "examples": [],
-  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets.",
+  "clarification": "Authored illustration: for fixed k=3 and interval [9,5,12], the difference is 9-5+12=16. This illustrates scoring; it is not a claim that this interval and k are globally optimal.",
+  "officialUrl": "https://leetcode.com/problems/divisible-game/",
+  "constraintsReportedBySource": "1<=length<=1000; 1<=nums[i]<=1000000.",
+  "verificationStatus": "official-page-read",
+  "questionResolution": "Specific CLAUDE-QUESTIONS.md question answered; source confidence recorded separately."
 }

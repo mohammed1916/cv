@@ -1,0 +1,35 @@
+{
+  "number": 1308,
+  "title": "Running Total for Different Genders",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1308.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/running-total-for-different-genders/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each gender and day, return the running total of score_points for that gender through that day.",
+  "inputFormat": "Scores(player_name, gender, day, score_points).",
+  "outputFormat": "gender, day, total (cumulative sum).",
+  "officialConstraints": "unknown",
+  "tieRules": "Ordered by gender, then day.",
+  "edgeRules": "The draft asks to verify uniqueness of gender/day records; duplicates would change the running total rule.",
+  "examples": {
+    "label": "authored-reference",
+    "note": "F day 1 score 10, F day 2 score 5. Expected: (F, 1, 10), (F, 2, 15). [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "running sum rule",
+    "output columns",
+    "ordering"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)",
+    "gender/day uniqueness"
+  ],
+  "questions": [
+    "Can one gender have more than one row for the same day? If yes, should the totals be summed for that day first?"
+  ],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

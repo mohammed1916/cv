@@ -1,0 +1,71 @@
+{
+  "number": 2821,
+  "title": "Delay the Resolution of Each Promise",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "draftFile": "local-reference/leetcode/manual/2821.txt",
+  "officialUrl": "https://leetcode.com/problems/delay-the-resolution-of-each-promise/description/",
+  "summary": "Given an array of promises and a delay in milliseconds, return an array of promises whose outcomes (fulfilment value or rejection reason) are postponed by that delay.",
+  "inputFormat": "An array of promises and an integer millisecond delay.",
+  "outputFormat": "An array of promises in the same order as the input.",
+  "officialConstraints": "unknown",
+  "tieRules": "Output order equals input order.",
+  "edgeRules": "Whether rejections are delayed and whether the delay runs from call time or from each original settlement is not stated in the draft.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "[Promise resolving 4] with delay 50",
+      "output": "the returned promise fulfils with 4 after 50 ms",
+      "note": "Valid under either timing rule because the original settles immediately."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "Output is an array of promises in input order",
+    "Delay in milliseconds"
+  ],
+  "factsMissing": [
+    "Whether rejections are delayed by the same amount",
+    "Whether the delay starts at call time or at each original settlement",
+    "Official bounds"
+  ],
+  "questions": [
+    "Are rejections delayed by the same amount as fulfilments?",
+    "Does the delay start when the function is called or when each original promise settles?"
+  ],
+  "nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it.",
+  "previous_sourceKind": "manual-draft",
+  "previous_contentKind": "original-requirements-summary",
+  "previous_draftFile": "local-reference/leetcode/manual/2821.txt",
+  "previous_officialUrl": "https://leetcode.com/problems/delay-the-resolution-of-each-promise/description/",
+  "previous_summary": "Given an array of promises and a delay in milliseconds, return an array of promises whose outcomes (fulfilment value or rejection reason) are postponed by that delay.",
+  "previous_inputFormat": "An array of promises and an integer millisecond delay.",
+  "previous_outputFormat": "An array of promises in the same order as the input.",
+  "previous_officialConstraints": "unknown",
+  "previous_tieRules": "Output order equals input order.",
+  "previous_edgeRules": "Whether rejections are delayed and whether the delay runs from call time or from each original settlement is not stated in the draft.",
+  "previous_examples": [
+    {
+      "label": "authored-reference",
+      "input": "[Promise resolving 4] with delay 50",
+      "output": "the returned promise fulfils with 4 after 50 ms",
+      "note": "Valid under either timing rule because the original settles immediately."
+    }
+  ],
+  "previous_requirementsVerified": false,
+  "previous_factsPresent": [
+    "Output is an array of promises in input order",
+    "Delay in milliseconds"
+  ],
+  "previous_factsMissing": [
+    "Whether rejections are delayed by the same amount",
+    "Whether the delay starts at call time or at each original settlement",
+    "Official bounds"
+  ],
+  "previous_questions": [
+    "Are rejections delayed by the same amount as fulfilments?",
+    "Does the delay start when the function is called or when each original promise settles?"
+  ],
+  "previous_nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it."
+}

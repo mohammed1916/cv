@@ -1,0 +1,43 @@
+{
+  "number": 2630,
+  "title": "Memoize II",
+  "source": "https://leetcode.com/problems/memoize-ii/description/",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft-knowledge-derived",
+  "contentKind": "original-requirements-summary",
+  "problemClass": "JavaScript higher-order function",
+  "summary": "memoize(fn) for arbitrary argument values using argument identity rather than JSON serialization; a cached result is reused only when each argument matches the previous argument by the specified equality.",
+  "inputFormat": "memoize(fn) -> memoized function",
+  "outputFormat": "same value as fn when argument identity matches",
+  "officialConstraints": "unknown (official constraints not retrieved)",
+  "tieRules": "not applicable",
+  "edgeRules": [
+    "argument order and count matter",
+    "NaN equality rule not stated in draft",
+    "this-binding not stated"
+  ],
+  "examples": [
+    {
+      "sequence": "f({}) then f({}) with different objects",
+      "output": "fn called twice",
+      "authored": true
+    }
+  ],
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Official page fetch on 2026-11-03 returned HTTP 403 (WebFetch); statement not retrieved this pass. Recovered-archive index lists missing-statement for this ID.",
+  "factsPresent": [
+    "title",
+    "task summary from manual draft",
+    "signature/semantics from draft"
+  ],
+  "factsMissing": [
+    "the exact equality rule (strict identity or SameValueZero) for NaN",
+    "this-binding expectations"
+  ],
+  "questions": [
+    "Does NaN match NaN as an argument, and is this-binding preserved?"
+  ],
+  "nextAction": "Confirm equality semantics on official page.",
+  "signature": "memoize(fn) -> memoized function"
+}

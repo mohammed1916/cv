@@ -1,0 +1,37 @@
+{
+  "number": "1581",
+  "title": "Customer Who Visited but Did Not Make Any Transactions",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each customer, count visits that have no transaction linked to them.",
+  "inputFormat": "SQL. Visits(visit_id, customer_id); Transactions(transaction_id, visit_id, amount).",
+  "outputFormat": "SQL result: customer_id and count_no_trans.",
+  "officialConstraints": "unknown",
+  "tieRules": "A visit with several transactions is not a no-transaction visit.",
+  "edgeRules": "Only customers with at least one no-transaction visit are returned (draft-derived).",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "customer 23 visits 1 and 2, visit 2 has a transaction",
+      "expected": "customer 23 count 1"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "no-transaction visit definition",
+    "counting visits"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "output ordering",
+    "whether customers with zero no-transaction visits are shown"
+  ],
+  "questions": [
+    "Is any output ordering required, and are customers with no no-transaction visits excluded?"
+  ],
+  "nextAction": "Confirm ordering and exclusion.",
+  "officialUrl": "https://leetcode.com/problems/customer-who-visited-but-did-not-make-any-transactions/description/"
+}

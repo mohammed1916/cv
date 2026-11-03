@@ -1,0 +1,38 @@
+{
+  "number": "2725",
+  "title": "Interval Cancellation",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/interval-cancellation/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Implement cancellable(fn, args, t): call fn(...args) immediately and then every t milliseconds; return a function that stops all future calls.",
+  "inputFormat": "fn: a function; args: an argument array; t: a positive integer interval in milliseconds.",
+  "outputFormat": "A cancel function. The return values of fn calls are not stated.",
+  "officialConstraints": "unknown",
+  "tieRules": "not applicable",
+  "edgeRules": "Behaviour when cancel is called before the first immediate call is not stated; t = 0 is not stated.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "fn logs, t = 50, cancel at 120 ms",
+      "output": "fn runs at 0, 50, 100 ms (authored-reference)",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "immediate first call",
+    "repeated calls every t ms",
+    "cancel stops future calls"
+  ],
+  "factsMissing": [
+    "official cancel return value",
+    "t = 0 behaviour",
+    "official bounds and example"
+  ],
+  "questions": [
+    "Is the first call synchronous (before cancellable returns), and must t be strictly positive?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

@@ -1,0 +1,54 @@
+{
+  "number": 1226,
+  "title": "The Dining Philosophers",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "draftFile": "local-reference/leetcode/manual/1226.txt",
+  "officialUrl": "https://leetcode.com/problems/the-dining-philosophers/description/",
+  "summary": "Five philosophers sit around a table; each must pick up both neighbouring forks before eating, then put them down. A coordinator must make concurrent wantsToEat calls safe and avoid deadlock with the supplied pick, eat and put callbacks.",
+  "inputFormat": "Philosopher index 0 to 4 and the callbacks for picking and putting forks and for eating; the fork-index mapping is not recorded.",
+  "outputFormat": "No return value; callbacks are invoked in a valid order.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Fork-to-philosopher mapping is not recorded; starvation rule is not recorded.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "Five philosophers",
+    "Two-fork rule",
+    "Deadlock-free requirement"
+  ],
+  "factsMissing": [
+    "Exact fork-index mapping (left fork index and right fork index for each philosopher)",
+    "Exact wantsToEat signature"
+  ],
+  "questions": [
+    "What is the exact fork-index mapping for each philosopher's left and right fork, and what is the wantsToEat signature?"
+  ],
+  "nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it.",
+  "previous_sourceKind": "manual-draft",
+  "previous_contentKind": "original-requirements-summary",
+  "previous_draftFile": "local-reference/leetcode/manual/1226.txt",
+  "previous_officialUrl": "https://leetcode.com/problems/the-dining-philosophers/description/",
+  "previous_summary": "Five philosophers sit around a table; each must pick up both neighbouring forks before eating, then put them down. A coordinator must make concurrent wantsToEat calls safe and avoid deadlock with the supplied pick, eat and put callbacks.",
+  "previous_inputFormat": "Philosopher index 0 to 4 and the callbacks for picking and putting forks and for eating; the fork-index mapping is not recorded.",
+  "previous_outputFormat": "No return value; callbacks are invoked in a valid order.",
+  "previous_officialConstraints": "unknown",
+  "previous_tieRules": "Not applicable.",
+  "previous_edgeRules": "Fork-to-philosopher mapping is not recorded; starvation rule is not recorded.",
+  "previous_requirementsVerified": false,
+  "previous_factsPresent": [
+    "Five philosophers",
+    "Two-fork rule",
+    "Deadlock-free requirement"
+  ],
+  "previous_factsMissing": [
+    "Exact fork-index mapping (left fork index and right fork index for each philosopher)",
+    "Exact wantsToEat signature"
+  ],
+  "previous_questions": [
+    "What is the exact fork-index mapping for each philosopher's left and right fork, and what is the wantsToEat signature?"
+  ],
+  "previous_nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it."
+}

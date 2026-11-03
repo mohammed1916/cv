@@ -1,0 +1,60 @@
+{
+  "number": "1164",
+  "title": "Product Price at a Given Date",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/product-price-at-a-given-date/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "Return each product's price as of 2019-08-16, using its latest change on or before that date. Products with no qualifying change have price 10. Products whose first change comes after the date are included with price 10.",
+  "inputFormat": "Products(product_id, new_price, change_date): one row per price change, keyed by (product_id, change_date).",
+  "outputFormat": "Columns product_id and price; one row per product that ever appears in Products, plus default-price products.",
+  "officialConstraints": "unknown",
+  "tieRules": "The latest change_date on or before 2019-08-16 wins; a change on exactly 2019-08-16 counts.",
+  "edgeRules": "Products whose first change is after 2019-08-16 get 10. The default price is 10 per the draft.",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "products": [
+        [
+          1,
+          20,
+          "2019-08-14"
+        ],
+        [
+          1,
+          30,
+          "2019-08-17"
+        ],
+        [
+          2,
+          35,
+          "2019-08-16"
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          20
+        ],
+        [
+          2,
+          35
+        ]
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "SQL task statement"
+  ],
+  "factsMissing": [
+    "set of products returned (draft says 'each product'; products that never changed are not listed in Products)",
+    "output row order"
+  ],
+  "questions": [
+    "Must products that have no row in Products at all also appear with price 10? The draft speaks only of products in the table; confirm."
+  ],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

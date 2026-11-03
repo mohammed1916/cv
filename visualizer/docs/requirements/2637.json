@@ -1,0 +1,43 @@
+{
+  "number": 2637,
+  "title": "Promise Time Limit",
+  "source": "https://leetcode.com/problems/promise-time-limit/description/",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft-knowledge-derived",
+  "contentKind": "original-requirements-summary",
+  "problemClass": "JavaScript timer/promise",
+  "summary": "timeLimit(fn, t) returns an async wrapper forwarding its arguments to fn; resolves or rejects with fn's outcome if it settles within t ms, otherwise rejects with 'Time Limit Exceeded' after t ms; clears obsolete timers and avoids unhandled late rejections.",
+  "inputFormat": "timeLimit(fn, t: integer) -> async (...args) => any",
+  "outputFormat": "fn's value or rejection, or rejection 'Time Limit Exceeded'",
+  "officialConstraints": "unknown (official constraints not retrieved)",
+  "tieRules": "not applicable",
+  "edgeRules": [
+    "exact error value 'Time Limit Exceeded'",
+    "late rejection must not be unhandled",
+    "timer cleared when fn settles first"
+  ],
+  "examples": [
+    {
+      "sequence": "fn takes 200 ms, t=100",
+      "output": "rejects with 'Time Limit Exceeded' at 100 ms",
+      "authored": true
+    }
+  ],
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Official page fetch on 2026-11-03 returned HTTP 403 (WebFetch); statement not retrieved this pass. Recovered-archive index lists missing-statement for this ID.",
+  "factsPresent": [
+    "title",
+    "task summary from manual draft",
+    "signature/semantics from draft"
+  ],
+  "factsMissing": [
+    "whether the error is a string or Error object",
+    "tie when fn settles exactly at t"
+  ],
+  "questions": [
+    "At exactly t ms, which settles first?"
+  ],
+  "nextAction": "Confirm error type and tie-at-t rule on official page.",
+  "signature": "timeLimit(fn, t: integer) -> async (...args) => any"
+}

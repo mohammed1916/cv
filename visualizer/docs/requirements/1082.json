@@ -1,0 +1,75 @@
+{
+  "number": "1082",
+  "title": "Sales Analysis I",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/sales-analysis-i/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "Compute each seller's total sale price, summing the price column over the seller's sales. Return every seller_id whose total equals the largest such total.",
+  "inputFormat": "Sales(seller_id, product_id, buyer_id, sale_date, quantity, price).",
+  "outputFormat": "One column seller_id; one row per seller tied for the maximum total.",
+  "officialConstraints": "unknown",
+  "tieRules": "All sellers tied at the maximum total are returned.",
+  "edgeRules": "The draft says 'total sale price', so the sum is over the price column as given, not price times quantity. Confirm against the official column meaning.",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "sales": [
+        [
+          1,
+          1,
+          1,
+          "2019-01-21",
+          2,
+          2000
+        ],
+        [
+          1,
+          2,
+          2,
+          "2019-02-17",
+          1,
+          800
+        ],
+        [
+          2,
+          2,
+          3,
+          "2019-06-02",
+          1,
+          800
+        ],
+        [
+          3,
+          3,
+          4,
+          "2019-05-13",
+          2,
+          2800
+        ]
+      ],
+      "expected": [
+        [
+          1
+        ],
+        [
+          3
+        ]
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "SQL task statement"
+  ],
+  "factsMissing": [
+    "whether the total is price alone or price times quantity (draft says total sale price; the example above uses price as stored)",
+    "output row order"
+  ],
+  "questions": [
+    "Is the sum over the price column as stored, or price multiplied by quantity? The draft says 'total sale price'; confirm which."
+  ],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

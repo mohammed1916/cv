@@ -1,0 +1,41 @@
+{
+  "number": 2665,
+  "title": "Counter II",
+  "source": "https://leetcode.com/problems/counter-ii/description/",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft-knowledge-derived",
+  "contentKind": "original-requirements-summary",
+  "problemClass": "JavaScript design",
+  "summary": "createCounter(init) returns an object with increment, decrement and reset methods sharing one value; increment and decrement change it by one and return the new value; reset restores init and returns it.",
+  "inputFormat": "createCounter(init: integer) -> {increment(), decrement(), reset()}",
+  "outputFormat": "each method returns the current integer value",
+  "officialConstraints": "unknown (official constraints not retrieved)",
+  "tieRules": "not applicable",
+  "edgeRules": [
+    "methods share one state",
+    "reset returns init"
+  ],
+  "examples": [
+    {
+      "sequence": "init=5: increment, decrement, reset",
+      "output": "6, 5, 5",
+      "authored": true
+    }
+  ],
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Official page fetch on 2026-11-03 returned HTTP 403 (WebFetch); statement not retrieved this pass. Recovered-archive index lists missing-statement for this ID.",
+  "factsPresent": [
+    "title",
+    "task summary from manual draft",
+    "signature/semantics from draft"
+  ],
+  "factsMissing": [
+    "integer range of init"
+  ],
+  "questions": [
+    "Are inputs guaranteed integers?"
+  ],
+  "nextAction": "Confirm input domain on official page.",
+  "signature": "createCounter(init: integer) -> {increment(), decrement(), reset()}"
+}

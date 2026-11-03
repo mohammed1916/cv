@@ -1,0 +1,18 @@
+{
+  "number": 2534,
+  "title": "Time Taken to Cross the Door",
+  "contentKind": "independently-written-requirements",
+  "requirementsVerified": false,
+  "examples": [],
+  "exampleStatus": "Source examples not copied; worked illustrations are independently authored in clarification.",
+  "summary": "state=0 means entering and 1 exiting. Crossing takes one second. When both directions wait, reuse the previous second's direction; after an idle second prefer exiting. Within one direction, smallest person index goes first. If only one direction waits, serve it. Return each person's crossing start time.",
+  "clarification": "The questioned draft is correct: arrival=[0,1,1], state=[0,1,0] gives [0,2,1]. Person 0 enters at t=0; person 2 enters at t=1 because entering was used at t=0; person 1 exits at t=2. This is a worked draft case, not a claim that it is an official sample.",
+  "source": "https://leetcode.doocs.org/en/lc/2534/",
+  "officialUrl": "https://leetcode.com/problems/time-taken-to-cross-the-door/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-03",
+  "constraintsReportedBySource": "1<=n<=100000; arrival and state length n; arrival sorted, values 0..n; state binary.",
+  "verificationStatus": "community-reproduction-read; official text not independently confirmed",
+  "officialConstraints": "Official-page confirmation pending. See constraintsReportedBySource for the bounds in the community reproduction.",
+  "questionResolution": "Specific CLAUDE-QUESTIONS.md question answered; source confidence recorded separately."
+}

@@ -1,0 +1,29 @@
+{
+  "number": "3182",
+  "title": "Find Top Scoring Students",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Identify students who meet the grade criterion across all required courses.",
+  "inputFormat": "Students(student_id, name, major), Courses(course_id, name, credits, major) and Enrollments(student_id, course_id, semester, grade).",
+  "outputFormat": "Student identifiers and names (columns not stated).",
+  "officialConstraints": "unknown",
+  "tieRules": "Unknown.",
+  "edgeRules": "Grade threshold, the definition of required courses, and treatment of repeated enrollments are not stated.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "SQL input table names and columns (from manual draft)",
+    "primary task rule (from manual draft)",
+    "official page reference https://leetcode.com/problems/find-top-scoring-students/description/"
+  ],
+  "factsMissing": [
+    "official statement not fetched or confirmed",
+    "exact output column names and row order",
+    "authored validation example"
+  ],
+  "questions": [
+    "Which courses are required for each student, the grade threshold, and how repeated enrollments are handled."
+  ],
+  "nextAction": "Fetch the official /description/ page for this problem and confirm the summary, then record the exact output columns, ordering and tie rules; author and validate a teaching example (labelled authored-reference)."
+}

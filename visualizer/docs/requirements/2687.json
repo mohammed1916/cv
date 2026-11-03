@@ -1,0 +1,28 @@
+{
+  "number": "2687",
+  "title": "Bikes Last Time Used",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialConstraints": "unknown",
+  "examples": [],
+  "requirementsVerified": false,
+  "summary": "For each bike_number, return the latest end_time across its rides, sorted by that latest time descending.",
+  "inputFormat": "Bikes(ride_id, bike_number, start_time, end_time).",
+  "outputFormat": "bike_number and the latest end_time (alias not recorded).",
+  "tieRules": "Sorted by latest end_time descending; tie order not recorded.",
+  "edgeRules": "Not stated.",
+  "factsPresent": [
+    "Max end_time per bike",
+    "Sort descending by that value"
+  ],
+  "factsMissing": [
+    "Output alias for the timestamp",
+    "Tie-break order"
+  ],
+  "questions": [
+    "What exact alias is required for the latest end_time, and how are equal latest times ordered?"
+  ],
+  "nextAction": "Obtain the official statement (recovered raw archive has none for this ID); confirm the listed missing facts, then set requirementsVerified only if an official page confirms them. Official base URL in the manual draft; not fetched in this pass.",
+  "examplesNote": "No authored example in this pass; authored-reference examples to be added after the statement is confirmed."
+}

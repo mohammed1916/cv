@@ -1,0 +1,18 @@
+{
+  "number": 3385,
+  "title": "Minimum Time to Break Locks II",
+  "contentKind": "independently-written-requirements",
+  "requirementsVerified": false,
+  "examples": [],
+  "exampleStatus": "Source examples not copied; worked illustrations are independently authored in clarification.",
+  "summary": "Energy starts at zero and grows by X each minute, initially X=1. A lock can break once energy reaches its strength. Breaking resets energy to zero and increments X by exactly one. Choose any lock order and return minimum total minutes. There is no separate K increment input in this variant.",
+  "clarification": "Derived cost for the j-th lock (one-based) is ceil(strength/j); minimize the sum over permutations. Authored example strengths [8,2]: breaking 2 then 8 costs 2+4=6; the other order costs 8+1=9, so answer 6.",
+  "source": "https://leetcode.doocs.org/en/lc/3385/",
+  "officialUrl": "https://leetcode.com/problems/minimum-time-to-break-locks-ii/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-03",
+  "constraintsReportedBySource": "1<=number of locks<=80; 1<=strength[i]<=1000000.",
+  "verificationStatus": "community-reproduction-read; official text not independently confirmed",
+  "officialConstraints": "Official-page confirmation pending. See constraintsReportedBySource for the bounds in the community reproduction.",
+  "questionResolution": "Specific CLAUDE-QUESTIONS.md question answered; source confidence recorded separately."
+}

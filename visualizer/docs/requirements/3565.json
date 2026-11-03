@@ -4,11 +4,15 @@
   "source": "https://leetcode.doocs.org/en/lc/3565/",
   "officialUrl": "https://leetcode.com/problems/sequential-grid-path-cover/",
   "sourceKind": "public-community-reference",
-  "checkedOn": "2026-11-02",
+  "checkedOn": "2026-11-03",
   "contentKind": "independently-written-requirements",
-  "summary": "A grid contains each label 1 through k once; all other cells are zero. Find a four-direction path visiting every cell exactly once and encountering the labeled cells in increasing label order. Start anywhere. Return its complete coordinate sequence, or an empty list if impossible; any valid path is accepted.",
+  "summary": "Input is grid and k. Start at any cell. Visit all cells exactly once by side-adjacent moves, encountering nonzero labels in order 1 through k. Return m*n zero-based [row,column] pairs, or [] if no such path exists. The statement specifies validity, not a prescribed construction or a separate closed-form impossibility criterion.",
   "requirementsVerified": false,
-  "officialConstraints": "Numeric bounds and full interface require review against the current official statement.",
+  "officialConstraints": "Official-page confirmation pending. See constraintsReportedBySource for the bounds in the community reproduction.",
   "examples": [],
-  "exampleStatus": "No source examples copied; independently author and check teaching examples."
+  "exampleStatus": "No source examples copied; independently author and check teaching examples.",
+  "clarification": "Authored example: grid=[[2,0,1]], k=2 permits [[0,2],[0,1],[0,0]]. Grid [[1,3,2]], k=3 is impossible: a path covering a single row must traverse it from an endpoint, and neither direction visits labels in order.",
+  "constraintsReportedBySource": "1<=m,n<=5; 1<=k<=m*n; entries 0..k; each label 1..k occurs exactly once.",
+  "verificationStatus": "community-reproduction-read; official text not independently confirmed",
+  "questionResolution": "Specific CLAUDE-QUESTIONS.md question answered; source confidence recorded separately."
 }

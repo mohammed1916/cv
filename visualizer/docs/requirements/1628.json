@@ -1,0 +1,73 @@
+{
+  "number": 1628,
+  "title": "Design an Expression Tree With Evaluate Function",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "draftFile": "local-reference/leetcode/manual/1628.txt",
+  "officialUrl": "https://leetcode.com/problems/design-an-expression-tree-with-evaluate-function/description/",
+  "summary": "From a valid postfix expression of integers and the operators + - * /, build an expression tree whose root evaluates to the integer result, with division truncated toward zero and operand order preserved for - and /.",
+  "inputFormat": "A postfix token list of integers and operators; the exact builder and node interface names are not recorded.",
+  "outputFormat": "An integer result from evaluate.",
+  "officialConstraints": "unknown",
+  "tieRules": "Division truncates toward zero.",
+  "edgeRules": "Division by zero handling and the number of tokens are not recorded.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "['3','4','+','2','*','7','/']",
+      "output": "2",
+      "note": "(3+4)*2/7 = 2 with truncation."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "Operators + - * /",
+    "Truncate division",
+    "Operand order"
+  ],
+  "factsMissing": [
+    "Exact builder and node class/method names and signatures",
+    "Division-by-zero guarantee",
+    "Official bounds"
+  ],
+  "questions": [
+    "What are the exact class and method names and signatures for building the tree and evaluating it?",
+    "Is division by zero excluded by the statement?"
+  ],
+  "nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it.",
+  "previous_sourceKind": "manual-draft",
+  "previous_contentKind": "original-requirements-summary",
+  "previous_draftFile": "local-reference/leetcode/manual/1628.txt",
+  "previous_officialUrl": "https://leetcode.com/problems/design-an-expression-tree-with-evaluate-function/description/",
+  "previous_summary": "From a valid postfix expression of integers and the operators + - * /, build an expression tree whose root evaluates to the integer result, with division truncated toward zero and operand order preserved for - and /.",
+  "previous_inputFormat": "A postfix token list of integers and operators; the exact builder and node interface names are not recorded.",
+  "previous_outputFormat": "An integer result from evaluate.",
+  "previous_officialConstraints": "unknown",
+  "previous_tieRules": "Division truncates toward zero.",
+  "previous_edgeRules": "Division by zero handling and the number of tokens are not recorded.",
+  "previous_examples": [
+    {
+      "label": "authored-reference",
+      "input": "['3','4','+','2','*','7','/']",
+      "output": "2",
+      "note": "(3+4)*2/7 = 2 with truncation."
+    }
+  ],
+  "previous_requirementsVerified": false,
+  "previous_factsPresent": [
+    "Operators + - * /",
+    "Truncate division",
+    "Operand order"
+  ],
+  "previous_factsMissing": [
+    "Exact builder and node class/method names and signatures",
+    "Division-by-zero guarantee",
+    "Official bounds"
+  ],
+  "previous_questions": [
+    "What are the exact class and method names and signatures for building the tree and evaluating it?",
+    "Is division by zero excluded by the statement?"
+  ],
+  "previous_nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it."
+}

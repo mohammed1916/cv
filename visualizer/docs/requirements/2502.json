@@ -7,16 +7,38 @@
     "https://leetcode.com/problems/design-memory-allocator/description/",
     "https://leetcode.doocs.org/en/lc/2502/"
   ],
-  "checkedOn": "2026-10-29",
-  "sourceKind": "search-snippets",
-  "summary": "Design class Allocator(n): allocate(size, mID) returns leftmost start index of size free units or -1; freeMemory(mID) frees units and returns count.",
-  "officialConstraints": "1 <= n, size, mID <= 1000; at most 1000 calls",
-  "examples": [
+  "checkedOn": "2026-11-03",
+  "sourceKind": "recovered-raw",
+  "summary": "Design a memory allocator over n units: allocate reserves the leftmost run of size consecutive free units for an id and returns its first index or -1; freeMemory releases all units with an id, even across several blocks, and returns how many were freed.",
+  "officialConstraints": "1 <= n, size, mID <= 1000; at most 1000 calls to allocate and freeMemory (from the recovered statement).",
+  "examples": [],
+  "visualizationNotes": "Operation sequence, not a single input; the full example call list was not retrieved in full.",
+  "requirementsVerified": false,
+  "contentKind": "original-requirements-summary",
+  "rawFile": "local-reference/leetcode/raw/design-memory-allocator.json",
+  "officialUrl": "https://leetcode.com/problems/design-memory-allocator/description/",
+  "inputFormat": "Constructor takes n; allocate takes size and mID; freeMemory takes mID.",
+  "outputFormat": "allocate returns the first index or -1; freeMemory returns the count of freed units.",
+  "tieRules": "Leftmost block is chosen.",
+  "edgeRules": "freeMemory of an unused id returns 0.",
+  "factsPresent": [
+    "Leftmost rule",
+    "Return values",
+    "Constraints"
+  ],
+  "factsMissing": [
+    "Official page confirmation"
+  ],
+  "questions": [],
+  "nextAction": "Official page confirmation pending. Recovered statement is complete for the requirements; examples are not copied to the website.",
+  "previous_sourceKind": "search-snippets",
+  "previous_summary": "Design class Allocator(n): allocate(size, mID) returns leftmost start index of size free units or -1; freeMemory(mID) frees units and returns count.",
+  "previous_officialConstraints": "1 <= n, size, mID <= 1000; at most 1000 calls",
+  "previous_examples": [
     {
       "input": "partial: outputs [null,0,1,2,1,3,1,6,3,-1,0] only",
       "output": null
     }
   ],
-  "visualizationNotes": "Operation sequence, not a single input; the full example call list was not retrieved in full.",
-  "requirementsVerified": false
+  "previous_requirementsVerified": false
 }

@@ -2,30 +2,36 @@
   "number": 3764,
   "title": "Most Common Course Pairs",
   "source": "https://leetcode.com/problems/most-common-course-pairs/description/",
-  "checkedOn": "2026-11-02",
-  "sourceKind": "official-page-via-web-tool",
-  "contentKind": "independently-written-requirements",
-  "summary": "SQL: course_completions(user_id,course_id,course_name,completion_date,course_rating), unique by user/course. Keep users with at least five courses and mean rating at least four. Order each qualifying user's completions by date and count consecutive ordered course-name pairs. Return first_course, second_course, transition_count, sorted by count descending then both names ascending. Same-day ordering is not specified in the retrieved text and needs resolution if such inputs are allowed.",
-  "officialConstraints": "Ratings are 1..5; user_id, course_id and rating are integers; course_name is text; completion_date is a date.",
-  "requirementsVerified": false,
+  "checkedOn": "2026-11-03",
+  "sourceKind": "community-or-prior-note",
+  "contentKind": "original-requirements-summary",
+  "problemClass": "SQL",
+  "summary": "For each user with at least five courses and mean course rating at least four, order completions by date and count consecutive ordered course-name pairs; return first_course, second_course, transition_count, sorted by count descending then both names ascending.",
+  "inputFormat": "course_completions(user_id int, course_id int, course_name text, completion_date date, course_rating int 1..5), unique by (user_id, course_id).",
+  "outputFormat": "first_course, second_course, transition_count.",
+  "officialConstraints": "user_id, course_id, rating integers; ratings 1..5; course_name text; completion_date date.",
+  "tieRules": "Sort by transition_count descending, then first_course ascending, then second_course ascending.",
+  "edgeRules": "Same-day completions: the note says ordering is unspecified when two completions share a date.",
   "examples": [],
-  "exampleStatus": "Author and independently check examples; no source examples copied into public presets.",
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Prior note recorded an official-page-via-web-tool check on 2026-11-02 (official page via web tool). Not reconfirmed this pass: official page returns 403 on 2026-11-03.",
+  "factsPresent": [
+    "user filter: count(courses) >= 5 and avg(rating) >= 4",
+    "consecutive pairs only within a qualifying user's ordered sequence"
+  ],
+  "factsMissing": [
+    "table schema",
+    "user filter thresholds",
+    "pair definition",
+    "output columns and ordering"
+  ],
+  "questions": [
+    "Which deterministic tie-break orders two completions with the same completion_date, and are such inputs permitted?"
+  ],
+  "nextAction": "Confirm the same-day rule on the official statement or a verified reproduction, then record the answer here.",
   "previousSourceRecord": {
-    "number": 3764,
-    "title": "Most Common Course Pairs",
-    "source": "https://leetcode.com/problems/most-common-course-pairs/description/",
-    "checkedOn": "2026-11-02",
     "sourceKind": "access-attempt-failed",
-    "contentKind": "none",
-    "summary": null,
-    "accessAttempt": {
-      "method": "web-fetch agent",
-      "error": "not attempted: concurrent subagent limit reached on batch launch; a 403 was observed for 3716 and 3722"
-    },
-    "missingInformation": "Full official statement, constraints and examples are required before any implementation.",
-    "implementationStatus": "skipped-no-verified-requirements",
-    "requirementsVerified": false,
-    "reviewStatus": "core-rules-sourced-but-explicit-ambiguity-remains"
-  },
-  "reviewStatus": "core-rules-sourced-but-explicit-ambiguity-remains"
+    "note": "earlier 3764 record reported 403 for the same URL"
+  }
 }

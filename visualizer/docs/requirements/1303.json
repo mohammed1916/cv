@@ -1,0 +1,32 @@
+{
+  "number": 1303,
+  "title": "Find the Team Size",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1303.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/find-the-team-size/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "For every employee return employee_id and the number of rows sharing that employee's team_id, including the employee itself.",
+  "inputFormat": "Employee(employee_id, team_id).",
+  "outputFormat": "employee_id, team_size.",
+  "officialConstraints": "unknown",
+  "tieRules": "No tie rule; ordering not stated.",
+  "edgeRules": "No special edge rule stated.",
+  "examples": {
+    "label": "authored-reference",
+    "note": "Rows (1,8), (2,8), (3,5). Expected: (1,2), (2,2), (3,1). [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "count rule",
+    "output columns"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)",
+    "ordering"
+  ],
+  "questions": [],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

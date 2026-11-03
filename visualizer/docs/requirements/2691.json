@@ -1,0 +1,39 @@
+{
+  "number": "2691",
+  "title": "Immutability Helper",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/immutability-helper/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Provide a helper that applies a set of changes to a value and returns a new value, leaving the original unchanged and sharing unchanged substructure.",
+  "inputFormat": "Unknown: the helper's constructor/function signature and the mutation-command syntax are not in the draft.",
+  "outputFormat": "The updated value as a new object; the original input must remain unchanged.",
+  "officialConstraints": "unknown",
+  "tieRules": "unknown",
+  "edgeRules": "Sharing of unchanged substructure is stated as 'where required' only.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "unknown",
+      "output": "unknown",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task intent: non-mutating update returning a new value",
+    "official URL recorded"
+  ],
+  "factsMissing": [
+    "exact API signature",
+    "supported update command syntax",
+    "official numeric bounds",
+    "example from source"
+  ],
+  "questions": [
+    "What exact helper API (function or class name, arguments) and which update-command syntax must be supported?",
+    "Must unchanged substructures be reference-identical (===) to the original, or only deep-equal?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

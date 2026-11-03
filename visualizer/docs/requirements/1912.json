@@ -2,16 +2,36 @@
   "number": 1912,
   "title": "Design Movie Rental System",
   "source": "https://leetcode.com/problems/design-movie-rental-system/",
-  "checkedOn": "2026-10-29",
-  "sourceKind": "search-snippets (official page returns 403 to WebFetch)",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "recovered-raw",
   "sourceUrls": [
     "https://leetcode.com/problems/design-movie-rental-system/",
     "https://leetcode.doocs.org/en/lc/1912/",
     "https://www.algo.monster/liteproblems/1912"
   ],
-  "summary": "Design class with search (cheapest 5 unrented shops), rent, drop, and report (cheapest 5 rented). Constraints partly retrieved (1<=n<=3*10^5, 1<=entries.length<=1e5); no official example set retrieved. Operation-based input is not a single-function problem.",
-  "officialConstraints": null,
+  "summary": "Design a movie rental system across n shops: search returns up to five cheapest shops with an unrented copy of a movie (by price, then shop id); rent and drop change a copy's rented state; report returns up to five cheapest rented copies as [shop, movie] (by price, then shop, then movie).",
+  "officialConstraints": "n up to 3*10^5; entries up to 10^5; movie and price up to 10^4; at most 10^5 calls in total (from the recovered statement).",
   "examples": [],
   "requirementsVerified": false,
-  "visualizationNotes": "Not built: full statement, constraints and examples were not verifiably obtained."
+  "visualizationNotes": "Not built: full statement, constraints and examples were not verifiably obtained.",
+  "contentKind": "original-requirements-summary",
+  "rawFile": "local-reference/leetcode/raw/design-movie-rental-system.json",
+  "officialUrl": "https://leetcode.com/problems/design-movie-rental-system/description/",
+  "inputFormat": "Constructor takes n and a list of [shop, movie, price] entries; search takes a movie id; rent and drop take shop and movie; report takes nothing.",
+  "outputFormat": "search returns a list of shop ids; report returns a list of [shop, movie] pairs; rent and drop return nothing.",
+  "tieRules": "Price ascending, then shop ascending; report then movie ascending.",
+  "edgeRules": "Rent is called only for unrented copies and drop only for previously rented copies.",
+  "factsPresent": [
+    "Operations and ordering",
+    "Constraints",
+    "Rent/drop preconditions"
+  ],
+  "factsMissing": [
+    "Official page confirmation"
+  ],
+  "questions": [],
+  "nextAction": "Official page confirmation pending. Recovered statement is complete for the requirements; examples are not copied to the website.",
+  "previous_sourceKind": "search-snippets (official page returns 403 to WebFetch)",
+  "previous_summary": "Design class with search (cheapest 5 unrented shops), rent, drop, and report (cheapest 5 rented). Constraints partly retrieved (1<=n<=3*10^5, 1<=entries.length<=1e5); no official example set retrieved. Operation-based input is not a single-function problem.",
+  "previous_requirementsVerified": false
 }

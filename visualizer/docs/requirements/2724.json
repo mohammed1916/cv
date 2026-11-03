@@ -1,0 +1,38 @@
+{
+  "number": "2724",
+  "title": "Sort By",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/sort-by/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Sort an array by the numeric key returned from fn(element), in ascending order, and return the sorted array.",
+  "inputFormat": "An array and a function fn that returns a number for each element.",
+  "outputFormat": "The sorted array in ascending key order.",
+  "officialConstraints": "unknown",
+  "tieRules": "Ties are not settled by the draft; stability for equal keys is unknown.",
+  "edgeRules": "Whether fn is guaranteed to produce unique keys is not stated.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "[{x:2},{x:1}], fn = o => o.x",
+      "output": "[{x:1},{x:2}] (authored-reference)",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "ascending order by numeric key",
+    "return sorted array"
+  ],
+  "factsMissing": [
+    "tie rule for equal keys (stable or unspecified)",
+    "whether mutation of input is allowed",
+    "official bounds"
+  ],
+  "questions": [
+    "When two elements have equal keys, must their original relative order be preserved (stable sort)?",
+    "May the input array be mutated, or must a new array be returned?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

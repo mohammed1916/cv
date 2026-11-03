@@ -1,0 +1,42 @@
+{
+  "number": 2620,
+  "title": "Counter",
+  "source": "https://leetcode.com/problems/counter/description/",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft-knowledge-derived",
+  "contentKind": "original-requirements-summary",
+  "problemClass": "JavaScript closure",
+  "summary": "createCounter(n) returns a function that yields n on its first call and n+1, n+2, ... on subsequent calls; each counter has independent state.",
+  "inputFormat": "createCounter(n: integer) -> () => integer",
+  "outputFormat": "integer per call",
+  "officialConstraints": "unknown (official constraints not retrieved)",
+  "tieRules": "not applicable",
+  "edgeRules": [
+    "independent state per createCounter call",
+    "negative n allowed? unknown"
+  ],
+  "examples": [
+    {
+      "input": "n=10, calls x3",
+      "output": "10, 11, 12",
+      "authored": true
+    }
+  ],
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Official page fetch on 2026-11-03 returned HTTP 403 (WebFetch); statement not retrieved this pass. Recovered-archive index lists missing-statement for this ID.",
+  "factsPresent": [
+    "title",
+    "task summary from manual draft",
+    "signature/semantics from draft"
+  ],
+  "factsMissing": [
+    "integer range of n",
+    "negative n"
+  ],
+  "questions": [
+    "official constraints for n"
+  ],
+  "nextAction": "Confirm integer domain and range on official page.",
+  "signature": "createCounter(n: integer) -> () => integer"
+}

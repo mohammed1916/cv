@@ -1,0 +1,32 @@
+{
+  "number": "2253",
+  "title": "Dynamic Unpivoting of a Table",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Stored-procedure contract: convert wide store-price columns into product_id, store, price rows, keeping only non-NULL prices, without hard-coding store names.",
+  "inputFormat": "Products with product_id and dynamically named store-price columns.",
+  "outputFormat": "Rows of (product_id, store, price); row ordering not stated.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "NULL prices omitted.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "table shape",
+    "non-NULL rule",
+    "schema discovery"
+  ],
+  "factsMissing": [
+    "official page text (HTTP 403 on fetch, not verified)",
+    "official numeric bounds",
+    "authored examples",
+    "procedure name and signature",
+    "row ordering"
+  ],
+  "questions": [
+    "Confirm the procedure name, signature, and the output row ordering."
+  ],
+  "nextAction": "Fetch official page or obtain a readable copy; then confirm the listed questions and author examples.",
+  "provenance": "Manual draft local-reference/leetcode/manual/2253.txt (knowledge-derived, not a recovered statement). Official URL https://leetcode.com/problems/<slug>/description/ returned HTTP 403 on 2026-11-03; no recovered raw statement exists in the archive."
+}

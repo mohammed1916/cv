@@ -1,0 +1,29 @@
+{
+  "number": "3060",
+  "title": "User Activities within Time Bounds",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Identify users whose repeated sessions satisfy a stated elapsed-time bound.",
+  "inputFormat": "Sessions(session_id, user_id, session_type, start_time, end_time).",
+  "outputFormat": "Users meeting the condition (columns not stated).",
+  "officialConstraints": "unknown",
+  "tieRules": "Unknown.",
+  "edgeRules": "The activity-type literal, the interval comparison and the threshold are not stated.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "SQL input table names and columns (from manual draft)",
+    "primary task rule (from manual draft)",
+    "official page reference https://leetcode.com/problems/user-activities-within-time-bounds/description/"
+  ],
+  "factsMissing": [
+    "official statement not fetched or confirmed",
+    "exact output column names and row order",
+    "authored validation example"
+  ],
+  "questions": [
+    "What session_type literal qualifies, the threshold value, and whether the comparison is on each session or on total elapsed time."
+  ],
+  "nextAction": "Fetch the official /description/ page for this problem and confirm the summary, then record the exact output columns, ordering and tie rules; author and validate a teaching example (labelled authored-reference)."
+}

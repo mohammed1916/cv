@@ -1,0 +1,36 @@
+{
+  "number": "1571",
+  "title": "Warehouse Manager",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Compute each warehouse's total volume: sum of units times product width, length and height across all products stored there.",
+  "inputFormat": "SQL. Warehouse(name, product_id, units); Products(product_id, product_name, Width, Length, Height).",
+  "outputFormat": "SQL result: warehouse_name and volume.",
+  "officialConstraints": "unknown",
+  "tieRules": "One row per warehouse.",
+  "edgeRules": "Column capitalization of Width, Length and Height must match the source.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "warehouse A: product 1 units 2, dims 2x3x4",
+      "expected": "A volume 48"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "volume formula",
+    "one row per warehouse"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "exact output column names and row ordering"
+  ],
+  "questions": [
+    "Confirm output column names (warehouse_name, volume) and ordering."
+  ],
+  "nextAction": "Confirm output names.",
+  "officialUrl": "https://leetcode.com/problems/warehouse-manager/description/"
+}

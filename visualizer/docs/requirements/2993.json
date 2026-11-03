@@ -1,0 +1,29 @@
+{
+  "number": "2993",
+  "title": "Friday Purchases I",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialConstraints": "unknown",
+  "examples": [],
+  "requirementsVerified": false,
+  "summary": "For Fridays in November 2023, aggregate spending per purchase date and report its week-of-month number, purchase_date and total_amount.",
+  "inputFormat": "Purchases(user_id, purchase_date, amount_spend).",
+  "outputFormat": "week_of_month, purchase_date, total_amount.",
+  "tieRules": "Not recorded.",
+  "edgeRules": "Date range is November 2023; week-of-month numbering convention not confirmed; only dates with purchases appear in this variant.",
+  "factsPresent": [
+    "Date range Nov 2023",
+    "Fridays only",
+    "Sum of amount_spend per date"
+  ],
+  "factsMissing": [
+    "Week-of-month numbering convention",
+    "Output ordering"
+  ],
+  "questions": [
+    "What week-of-month numbering convention is required, and what output ordering?"
+  ],
+  "nextAction": "Obtain the official statement (recovered raw archive has none for this ID); confirm the listed missing facts, then set requirementsVerified only if an official page confirms them. Official base URL in the manual draft; not fetched in this pass.",
+  "examplesNote": "No authored example in this pass; authored-reference examples to be added after the statement is confirmed."
+}

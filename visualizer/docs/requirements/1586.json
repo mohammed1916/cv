@@ -1,0 +1,69 @@
+{
+  "number": 1586,
+  "title": "Binary Search Tree Iterator II",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "draftFile": "local-reference/leetcode/manual/1586.txt",
+  "officialUrl": "https://leetcode.com/problems/binary-search-tree-iterator-ii/description/",
+  "summary": "Implement an iterator over a binary search tree in inorder that supports next, prev, hasNext and hasPrev. The cursor starts before the first element; next moves forward and returns the value, prev moves back and returns the value.",
+  "inputFormat": "The constructor takes the tree root; methods take no arguments.",
+  "outputFormat": "next and prev return the value at the new cursor; hasNext and hasPrev return booleans.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "The draft says verify valid-call guarantees; the statement's rule for calling next or prev at the ends is not recorded.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "tree with inorder [1,2,3]: next, next, prev, hasPrev, next",
+      "output": "1, 2, 1, false, 2",
+      "note": "Authored validation of cursor behaviour."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "Inorder traversal",
+    "Cursor starts before first",
+    "Boolean hasNext/hasPrev"
+  ],
+  "factsMissing": [
+    "Calls to next/prev at the ends (guarantee or behaviour)",
+    "Official bounds"
+  ],
+  "questions": [
+    "Does the statement guarantee that next and prev are called only when hasNext or hasPrev is true?"
+  ],
+  "nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it.",
+  "previous_sourceKind": "manual-draft",
+  "previous_contentKind": "original-requirements-summary",
+  "previous_draftFile": "local-reference/leetcode/manual/1586.txt",
+  "previous_officialUrl": "https://leetcode.com/problems/binary-search-tree-iterator-ii/description/",
+  "previous_summary": "Implement an iterator over a binary search tree in inorder that supports next, prev, hasNext and hasPrev. The cursor starts before the first element; next moves forward and returns the value, prev moves back and returns the value.",
+  "previous_inputFormat": "The constructor takes the tree root; methods take no arguments.",
+  "previous_outputFormat": "next and prev return the value at the new cursor; hasNext and hasPrev return booleans.",
+  "previous_officialConstraints": "unknown",
+  "previous_tieRules": "Not applicable.",
+  "previous_edgeRules": "The draft says verify valid-call guarantees; the statement's rule for calling next or prev at the ends is not recorded.",
+  "previous_examples": [
+    {
+      "label": "authored-reference",
+      "input": "tree with inorder [1,2,3]: next, next, prev, hasPrev, next",
+      "output": "1, 2, 1, false, 2",
+      "note": "Authored validation of cursor behaviour."
+    }
+  ],
+  "previous_requirementsVerified": false,
+  "previous_factsPresent": [
+    "Inorder traversal",
+    "Cursor starts before first",
+    "Boolean hasNext/hasPrev"
+  ],
+  "previous_factsMissing": [
+    "Calls to next/prev at the ends (guarantee or behaviour)",
+    "Official bounds"
+  ],
+  "previous_questions": [
+    "Does the statement guarantee that next and prev are called only when hasNext or hasPrev is true?"
+  ],
+  "previous_nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it."
+}

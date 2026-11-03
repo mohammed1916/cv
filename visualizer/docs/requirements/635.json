@@ -1,0 +1,73 @@
+{
+  "number": 635,
+  "title": "Design Log Storage System",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "draftFile": "local-reference/leetcode/manual/635.txt",
+  "officialUrl": "https://leetcode.com/problems/design-log-storage-system/description/",
+  "summary": "Design a log store with put(id, timestamp) and retrieve(start, end, granularity), where timestamps have year:month:day:hour:minute:second fields. retrieve returns the ids whose timestamp, truncated to the granularity, lies in the inclusive range formed by truncating start and end to the same granularity.",
+  "inputFormat": "put takes an integer id and a timestamp string 'YYYY:MM:DD:HH:MM:SS'; retrieve takes two timestamp strings and a granularity in {Year, Month, Day, Hour, Minute, Second}.",
+  "outputFormat": "retrieve returns a list of ids; the draft says the order is unrestricted (not verified).",
+  "officialConstraints": "unknown",
+  "tieRules": "Result order is stated as unrestricted in the draft only.",
+  "edgeRules": "Id uniqueness and timestamp ranges are not recorded.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "put(1,'2017:01:01:23:59:59'), put(2,'2017:01:01:22:59:59'), put(3,'2016:01:01:00:00:00'); retrieve('2016:01:01:01:01:01','2017:01:01:23:00:00','Hour')",
+      "output": "{1,2} in any order",
+      "note": "Id 3 is excluded because its hour 00 is before the truncated start 01."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "Timestamp format",
+    "Granularity values",
+    "Inclusive truncated range rule"
+  ],
+  "factsMissing": [
+    "Official result ordering",
+    "Whether ids are unique",
+    "Official bounds for timestamps and calls"
+  ],
+  "questions": [
+    "Is the retrieve result order unrestricted (any order), or ordered by id or time?",
+    "Is each id put at most once?"
+  ],
+  "nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it.",
+  "previous_sourceKind": "manual-draft",
+  "previous_contentKind": "original-requirements-summary",
+  "previous_draftFile": "local-reference/leetcode/manual/635.txt",
+  "previous_officialUrl": "https://leetcode.com/problems/design-log-storage-system/description/",
+  "previous_summary": "Design a log store with put(id, timestamp) and retrieve(start, end, granularity), where timestamps have year:month:day:hour:minute:second fields. retrieve returns the ids whose timestamp, truncated to the granularity, lies in the inclusive range formed by truncating start and end to the same granularity.",
+  "previous_inputFormat": "put takes an integer id and a timestamp string 'YYYY:MM:DD:HH:MM:SS'; retrieve takes two timestamp strings and a granularity in {Year, Month, Day, Hour, Minute, Second}.",
+  "previous_outputFormat": "retrieve returns a list of ids; the draft says the order is unrestricted (not verified).",
+  "previous_officialConstraints": "unknown",
+  "previous_tieRules": "Result order is stated as unrestricted in the draft only.",
+  "previous_edgeRules": "Id uniqueness and timestamp ranges are not recorded.",
+  "previous_examples": [
+    {
+      "label": "authored-reference",
+      "input": "put(1,'2017:01:01:23:59:59'), put(2,'2017:01:01:22:59:59'), put(3,'2016:01:01:00:00:00'); retrieve('2016:01:01:01:01:01','2017:01:01:23:00:00','Hour')",
+      "output": "{1,2} in any order",
+      "note": "Id 3 is excluded because its hour 00 is before the truncated start 01."
+    }
+  ],
+  "previous_requirementsVerified": false,
+  "previous_factsPresent": [
+    "Timestamp format",
+    "Granularity values",
+    "Inclusive truncated range rule"
+  ],
+  "previous_factsMissing": [
+    "Official result ordering",
+    "Whether ids are unique",
+    "Official bounds for timestamps and calls"
+  ],
+  "previous_questions": [
+    "Is the retrieve result order unrestricted (any order), or ordered by id or time?",
+    "Is each id put at most once?"
+  ],
+  "previous_nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it."
+}

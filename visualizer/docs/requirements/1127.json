@@ -1,0 +1,75 @@
+{
+  "number": "1127",
+  "title": "User Purchase Platform",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/user-purchase-platform/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "For each spend_date, classify each user as mobile-only, desktop-only, or both, based on the platforms they spent on that date. Return spend_date, platform, total_amount and total_users for all three categories, including zero totals. A user using both platforms belongs only to 'both', with spending from both included.",
+  "inputFormat": "Spending(user_id, spend_date, platform, amount), platform is 'mobile' or 'desktop'.",
+  "outputFormat": "Columns spend_date, platform (mobile, desktop, both), total_amount, total_users; three rows per date.",
+  "officialConstraints": "unknown",
+  "tieRules": "Each user belongs to exactly one category per date.",
+  "edgeRules": "A date with no mobile-only users still returns the mobile row with total_amount 0 and total_users 0.",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "spending": [
+        [
+          1,
+          "2019-07-01",
+          "mobile",
+          100
+        ],
+        [
+          1,
+          "2019-07-01",
+          "desktop",
+          100
+        ],
+        [
+          2,
+          "2019-07-01",
+          "mobile",
+          50
+        ]
+      ],
+      "expected": [
+        [
+          "2019-07-01",
+          "mobile",
+          50,
+          1
+        ],
+        [
+          "2019-07-01",
+          "desktop",
+          0,
+          0
+        ],
+        [
+          "2019-07-01",
+          "both",
+          200,
+          1
+        ]
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "SQL task statement"
+  ],
+  "factsMissing": [
+    "which dates are included (all dates present, per draft)",
+    "output row order",
+    "category labels literal ('mobile', 'desktop', 'both')"
+  ],
+  "questions": [
+    "Which spend_dates are returned: only dates that appear in Spending, or a fixed range? The draft says every date; confirm.",
+    "Is output order required?"
+  ],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

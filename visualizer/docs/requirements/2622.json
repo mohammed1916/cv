@@ -1,0 +1,43 @@
+{
+  "number": 2622,
+  "title": "Cache With Time Limit",
+  "source": "https://leetcode.com/problems/cache-with-time-limit/description/",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft-knowledge-derived",
+  "contentKind": "original-requirements-summary",
+  "problemClass": "JavaScript design/timer",
+  "summary": "TimeLimitedCache with set(key,value,duration), get(key), count(). Keys expire duration ms after their latest set. set returns whether an unexpired value already existed and replaces value and expiry. get returns -1 for absent or expired keys. count includes only unexpired entries. Old timers must not delete newer replacements.",
+  "inputFormat": "new TimeLimitedCache(); set(key, value, duration) -> boolean; get(key) -> value|-1; count() -> integer",
+  "outputFormat": "set: boolean (true if an unexpired key existed); get: value or -1; count: unexpired entries",
+  "officialConstraints": "unknown (official constraints not retrieved)",
+  "tieRules": "not applicable",
+  "edgeRules": [
+    "replacement resets expiry from the new set",
+    "stale timer must not delete newer value",
+    "expired key treated as absent"
+  ],
+  "examples": [
+    {
+      "sequence": "set(1,42,50) at 0ms; get(1) at 20ms; count() at 20ms",
+      "output": "set returns false; get returns 42; count returns 1",
+      "authored": true
+    }
+  ],
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Official page fetch on 2026-11-03 returned HTTP 403 (WebFetch); statement not retrieved this pass. Recovered-archive index lists missing-statement for this ID.",
+  "factsPresent": [
+    "title",
+    "task summary from manual draft",
+    "signature/semantics from draft"
+  ],
+  "factsMissing": [
+    "whether time is measured in real ms or a simulated clock",
+    "precision of expiry boundary (expire at exactly duration?)"
+  ],
+  "questions": [
+    "Is a key expired at exactly t = set_time + duration, or only after?"
+  ],
+  "nextAction": "Confirm boundary condition on official page.",
+  "signature": "new TimeLimitedCache(); set(key, value, duration) -> boolean; get(key) -> value|-1; count() -> integer"
+}

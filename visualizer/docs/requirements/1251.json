@@ -1,0 +1,38 @@
+{
+  "number": 1251,
+  "title": "Average Selling Price",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1251.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/average-selling-price/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each product, compute the weighted average price: sum(price times units) divided by sum(units), where each sale is matched to the price row whose inclusive date range contains the purchase date. Round to two decimals.",
+  "inputFormat": "Prices(product_id, start_date, end_date, price) with non-overlapping ranges per product; UnitsSold(product_id, purchase_date, units).",
+  "outputFormat": "product_id, average_price (two decimals).",
+  "officialConstraints": "unknown",
+  "tieRules": "No tie rule; ordering not stated.",
+  "edgeRules": "Products with no sales: the draft says average_price is zero under a remembered contract, which is unconfirmed. Rounding method for half values is not stated.",
+  "examples": {
+    "label": "authored-reference",
+    "note": "Product 1 price 10 from 2019-01-01 to 2019-01-31; sales 2019-01-05 units 2 and 2019-01-10 units 3: (10*2 + 10*3)/5 = 10.00. [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "weighted average formula",
+    "inclusive date matching",
+    "two-decimal rounding"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)",
+    "no-sales behaviour",
+    "rounding rule for half values",
+    "ordering"
+  ],
+  "questions": [
+    "For a product with no units sold, is average_price 0 or no row? The draft marks this as remembered, not confirmed.",
+    "What rounding rule applies to half values at the second decimal?"
+  ],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

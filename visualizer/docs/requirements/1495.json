@@ -1,0 +1,38 @@
+{
+  "number": "1495",
+  "title": "Friendly Movies Streamed Last Month",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "List the distinct titles of kid-friendly movies broadcast in June 2020.",
+  "inputFormat": "SQL. TVProgram(program_date, content_id, channel); Content(content_id, title, Kids_content, content_type). Kids_content and content_type are text flags.",
+  "outputFormat": "SQL result: distinct title values.",
+  "officialConstraints": "unknown",
+  "tieRules": "Distinct titles; ordering not stated in draft.",
+  "edgeRules": "Broadcasts in June 2020 only (program_date between 2020-06-01 and 2020-06-30 inclusive).",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "content A kids 'Y' movie, broadcast 2020-06-10; content B kids 'N'",
+      "expected": "A"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "kids and movie filters",
+    "June 2020 window",
+    "distinct"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "literal values for Kids_content ('Y') and content_type ('Movies')",
+    "output ordering"
+  ],
+  "questions": [
+    "What are the exact literal values for kid-friendly content and for the movie type?"
+  ],
+  "nextAction": "Confirm literals and ordering.",
+  "officialUrl": "https://leetcode.com/problems/friendly-movies-streamed-last-month/description/"
+}

@@ -1,0 +1,43 @@
+{
+  "number": 2650,
+  "title": "Design Cancellable Function",
+  "source": "https://leetcode.com/problems/design-cancellable-function/description/",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft-knowledge-derived",
+  "contentKind": "original-requirements-summary",
+  "problemClass": "JavaScript generator/promise",
+  "summary": "Implement a cancellable runner for a generator that yields promises: resume with resolved values, throw rejection reasons into the generator; return a cancellation function and a completion promise. Cancellation throws 'Cancelled' into the generator; completes with return value or uncaught error.",
+  "inputFormat": "cancellable(generatorFunction) -> [cancelFn, promise]",
+  "outputFormat": "cancelFn: () => void; promise: resolves with return value or rejects with uncaught error",
+  "officialConstraints": "unknown (official constraints not retrieved)",
+  "tieRules": "cancel versus resolution race not decided by draft",
+  "edgeRules": [
+    "cancel throws 'Cancelled' into generator",
+    "generator may catch and return a value",
+    "race between cancel and promise settlement"
+  ],
+  "examples": [
+    {
+      "sequence": "generator yields one promise, cancel called while pending",
+      "output": "generator receives 'Cancelled'",
+      "authored": true
+    }
+  ],
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Official page fetch on 2026-11-03 returned HTTP 403 (WebFetch); statement not retrieved this pass. Recovered-archive index lists missing-statement for this ID.",
+  "factsPresent": [
+    "title",
+    "task summary from manual draft",
+    "signature/semantics from draft"
+  ],
+  "factsMissing": [
+    "cancel after completion behavior",
+    "race ordering when cancel and resolution coincide"
+  ],
+  "questions": [
+    "If the pending promise resolves after cancel is called, which wins?"
+  ],
+  "nextAction": "Confirm cancellation race rule on official page.",
+  "signature": "cancellable(generatorFunction) -> [cancelFn, promise]"
+}

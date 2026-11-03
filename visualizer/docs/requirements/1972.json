@@ -1,0 +1,37 @@
+{
+  "number": "1972",
+  "title": "First and Last Call On the Same Day",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "archiveStatus": "missing-statement (no raw file in local-reference/leetcode/raw)",
+  "officialUrl": "https://leetcode.com/problems/first-and-last-call-on-the-same-day/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return users whose first and last call on at least one calendar date involved the same other person.",
+  "inputFormat": "Calls(caller_id, recipient_id, call_time); a call involves both users.",
+  "outputFormat": "Distinct user IDs.",
+  "officialConstraints": "unknown",
+  "tieRules": "Timestamp ties for first and last calls not settled.",
+  "edgeRules": "A date with a single call: whether it counts is not stated.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "text": "On day D: user A calls B at 09:00, A calls C at 18:00, and B calls A at 20:00. A first and last calls are both with B, so A qualifies. Without the 20:00 call, A would not qualify."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "first/last per user per day",
+    "same-counterparty rule",
+    "distinct users"
+  ],
+  "factsMissing": [
+    "official statement text (archive status missing-statement; no raw file)",
+    "official confirmation of this summary (requirementsVerified false)",
+    "timestamp tie handling",
+    "single-call dates"
+  ],
+  "questions": [
+    "Does a date with only one call qualify, and how are equal call_time values ordered?"
+  ],
+  "nextAction": "Fetch official page https://leetcode.com/problems/first-and-last-call-on-the-same-day/description/ and confirm each listed fact; then set requirementsVerified."
+}

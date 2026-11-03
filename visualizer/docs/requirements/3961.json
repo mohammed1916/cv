@@ -1,13 +1,18 @@
 {
   "number": 3961,
   "title": "Maximize Sum of Device Ratings",
-  "source": "https://leetcode.com/problems/maximize-sum-of-device-ratings/description/",
-  "checkedOn": "2026-11-02",
+  "source": "https://leetcode.com/problems/maximize-sum-of-device-ratings/",
+  "checkedOn": "2026-11-03",
   "sourceKind": "official-page-via-web-tool",
   "contentKind": "independently-written-requirements",
-  "summary": "Each device starts with n units and its rating is its minimum unit capacity, or zero if empty. Any device can be chosen as a source at most once, removing exactly one of its then-current units and transferring it to another device. Receiving units is unrestricted and does not use the source allowance. Maximize the sum of final device ratings.",
-  "officialConstraints": "1..100000 devices and initial units per device; total initial units <=200000; capacities 1..100000.",
+  "summary": "Input is a rectangular units matrix: m devices initially have n units each. Rating is minimum unit capacity, or zero when empty. Any device can be used as a source at most once, transferring exactly one current unit to any different device. Receiving is unlimited, including after acting as a source, and consumes no source allowance. Maximize total final rating; doing nothing is allowed.",
+  "officialConstraints": "1<=m,n<=100000; m*n<=200000; capacities 1..100000.",
   "requirementsVerified": true,
   "examples": [],
-  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets.",
+  "clarification": "There is no receiver slot limit and no obligation to preserve each receiver's rating. A transfer may reduce one rating while increasing the total. Units are not discarded. Their capacities are attributes of individual units, not storage limits.",
+  "officialUrl": "https://leetcode.com/problems/maximize-sum-of-device-ratings/",
+  "constraintsReportedBySource": "1<=m,n<=100000; m*n<=200000; capacities 1..100000.",
+  "verificationStatus": "official-page-read",
+  "questionResolution": "Specific CLAUDE-QUESTIONS.md question answered; source confidence recorded separately."
 }

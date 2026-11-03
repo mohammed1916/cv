@@ -4,11 +4,31 @@
   "source": "https://leetcode.doocs.org/en/lc/3369/",
   "officialUrl": "https://leetcode.com/problems/design-an-array-statistics-tracker/",
   "sourceKind": "public-community-reference",
-  "checkedOn": "2026-11-02",
-  "contentKind": "independently-written-requirements",
+  "checkedOn": "2026-11-03",
+  "contentKind": "original-requirements-summary",
   "summary": "Implement StatisticsTracker with addNumber, removeFirstAddedNumber, getMean, getMedian and getMode. Removal is FIFO. Mean is rounded downward; median is the upper middle value for even size; tied modes choose the smallest value. Initialize empty and answer statistics over the current multiset.",
   "requirementsVerified": false,
   "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
   "examples": [],
-  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples.",
+  "previousContentKind": "independently-written-requirements",
+  "tieRules": "Given in the existing note summary.",
+  "edgeRules": "Given in the existing note summary.",
+  "factsPresent": [
+    "Method list",
+    "Tie and ordering rules from the existing note"
+  ],
+  "factsMissing": [
+    "Official bounds",
+    "Return types",
+    "Official confirmation"
+  ],
+  "nextAction": "Community reproduction only; fetch the official page and answer the questions.",
+  "questions": [
+    "Are the integer value bounds and call count stated?",
+    "Is removeFirstAddedNumber guaranteed to be called only on a non-empty tracker?",
+    "What are the return types of getMean and getMedian?"
+  ],
+  "inputFormat": "Integers for addNumber; no argument for getters and removeFirstAddedNumber.",
+  "outputFormat": "getMean (rounded down), getMedian (upper middle for even size), getMode (smallest value among ties)."
 }

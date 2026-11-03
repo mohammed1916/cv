@@ -1,0 +1,36 @@
+{
+  "number": "1789",
+  "title": "Primary Department for Each Employee",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "archiveStatus": "missing-statement (no raw file in local-reference/leetcode/raw)",
+  "officialUrl": "https://leetcode.com/problems/primary-department-for-each-employee/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return each employee's primary department; if an employee has only one department association, return it regardless of its flag.",
+  "inputFormat": "Employee(employee_id, department_id, primary_flag) with flag Y or N.",
+  "outputFormat": "Columns employee_id, department_id.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Single association returned even when flag is N.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "text": "authored-reference: employee 1 has (dept 2, N) and (dept 3, Y) -> dept 3; employee 2 has only (dept 5, N) -> dept 5."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "Y-flag rule",
+    "single-association exception"
+  ],
+  "factsMissing": [
+    "official statement text (archive status missing-statement; no raw file)",
+    "official confirmation of this summary (requirementsVerified false)",
+    "whether multiple Y rows can exist and how to resolve them",
+    "output ordering"
+  ],
+  "questions": [
+    "Can an employee with more than one association have zero or several Y flags, and what should be returned?"
+  ],
+  "nextAction": "Fetch official page https://leetcode.com/problems/primary-department-for-each-employee/description/ and confirm each listed fact; then set requirementsVerified."
+}

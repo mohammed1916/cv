@@ -1,0 +1,36 @@
+{
+  "number": "1613",
+  "title": "Find the Missing IDs",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return every id from 1 up to the largest existing customer_id that is not present in the table.",
+  "inputFormat": "SQL. Customers(customer_id, customer_name) with customer_id values 1 to some maximum.",
+  "outputFormat": "SQL result: column ids sorted ascending.",
+  "officialConstraints": "unknown",
+  "tieRules": "Sorted ascending.",
+  "edgeRules": "Only ids from 1 through max(customer_id) are considered. Behaviour on an empty table is not stated.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "ids 1, 2, 4",
+      "expected": "3"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "id range",
+    "missing ids"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "behaviour when the table is empty (no maximum)"
+  ],
+  "questions": [
+    "What should be returned when Customers is empty?"
+  ],
+  "nextAction": "Confirm empty-table rule.",
+  "officialUrl": "https://leetcode.com/problems/find-the-missing-ids/description/"
+}

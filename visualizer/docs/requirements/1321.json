@@ -1,0 +1,36 @@
+{
+  "number": 1321,
+  "title": "Restaurant Growth",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1321.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/restaurant-growth/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Aggregate payments per visited_on date, then for each date with a full seven-day window return the total amount over the seven days ending on that date and the average (that total divided by seven), rounded to two decimals.",
+  "inputFormat": "Customer(customer_id, name, visited_on, amount).",
+  "outputFormat": "visited_on, amount (seven-day total), average_amount (to two decimals).",
+  "officialConstraints": "unknown",
+  "tieRules": "Ordered by visited_on.",
+  "edgeRules": "The draft asks whether every intervening calendar day has data; the window rule depends on it.",
+  "examples": {
+    "label": "authored-reference",
+    "note": "Days 1 to 7 with amounts 1 to 7, one customer each. Expected for day 7: amount 28, average 4.00; no row for days 1 to 6. [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "seven-day window",
+    "division by seven",
+    "ordering"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)",
+    "every-day guarantee",
+    "rounding rule"
+  ],
+  "questions": [
+    "If a calendar day inside the window has no rows, is the window still valid? The draft asks to verify the every-day guarantee."
+  ],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

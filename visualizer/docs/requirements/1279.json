@@ -1,0 +1,58 @@
+{
+  "number": 1279,
+  "title": "Traffic Light Controlled Intersection",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "draftFile": "local-reference/leetcode/manual/1279.txt",
+  "officialUrl": "https://leetcode.com/problems/traffic-light-controlled-intersection/description/",
+  "summary": "Two roads cross. Cars from the four directions cross only when their road has a green light; a turnGreen callback changes the light only when needed; concurrent arrivals must be synchronised.",
+  "inputFormat": "carCrossesIntersection-style call with car id, direction and the turnGreen and crossCar callbacks; exact argument shapes are not recorded.",
+  "outputFormat": "No return value; the callbacks are invoked in a valid order.",
+  "officialConstraints": "unknown",
+  "tieRules": "Only one road is green at a time.",
+  "edgeRules": "The initial green road and direction-to-road mapping are not recorded.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "Two roads",
+    "One green road at a time",
+    "Synchronised concurrent arrivals"
+  ],
+  "factsMissing": [
+    "Initial green road",
+    "Direction-to-road mapping",
+    "Exact callback signatures"
+  ],
+  "questions": [
+    "Which road is green initially, and which road each direction (1 to 4) belongs to?",
+    "What are the exact turnGreen and crossCar callback argument lists?"
+  ],
+  "nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it.",
+  "previous_sourceKind": "manual-draft",
+  "previous_contentKind": "original-requirements-summary",
+  "previous_draftFile": "local-reference/leetcode/manual/1279.txt",
+  "previous_officialUrl": "https://leetcode.com/problems/traffic-light-controlled-intersection/description/",
+  "previous_summary": "Two roads cross. Cars from the four directions cross only when their road has a green light; a turnGreen callback changes the light only when needed; concurrent arrivals must be synchronised.",
+  "previous_inputFormat": "carCrossesIntersection-style call with car id, direction and the turnGreen and crossCar callbacks; exact argument shapes are not recorded.",
+  "previous_outputFormat": "No return value; the callbacks are invoked in a valid order.",
+  "previous_officialConstraints": "unknown",
+  "previous_tieRules": "Only one road is green at a time.",
+  "previous_edgeRules": "The initial green road and direction-to-road mapping are not recorded.",
+  "previous_requirementsVerified": false,
+  "previous_factsPresent": [
+    "Two roads",
+    "One green road at a time",
+    "Synchronised concurrent arrivals"
+  ],
+  "previous_factsMissing": [
+    "Initial green road",
+    "Direction-to-road mapping",
+    "Exact callback signatures"
+  ],
+  "previous_questions": [
+    "Which road is green initially, and which road each direction (1 to 4) belongs to?",
+    "What are the exact turnGreen and crossCar callback argument lists?"
+  ],
+  "previous_nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it."
+}

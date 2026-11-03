@@ -1,0 +1,39 @@
+{
+  "number": "1440",
+  "title": "Evaluate Boolean Expression",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Each expression compares two named variables with one operator. Look up each operand's value and return the expression with its boolean result.",
+  "inputFormat": "SQL. Variables(name, value) with name primary key and value int. Expressions(left_operand, operator, right_operand); operands name variables.",
+  "outputFormat": "SQL result: left_operand, operator, right_operand and value, where value is the string 'true' or 'false'.",
+  "officialConstraints": "unknown",
+  "tieRules": "No ties; one output row per expression.",
+  "edgeRules": "Operators are <, > and =. Operand names are assumed to exist in Variables.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "x=5, y=3; expression x > y",
+      "expected": "x, >, y, true"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "operator set",
+    "lookup of both operands",
+    "result columns"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "ordering of output rows",
+    "whether an operand can be missing from Variables"
+  ],
+  "questions": [
+    "Confirm the permitted operator spellings and whether an operand missing from Variables can occur.",
+    "Confirm the output row ordering."
+  ],
+  "nextAction": "Check official statement for operator set, value literal format and row order.",
+  "officialUrl": "https://leetcode.com/problems/evaluate-boolean-expression/description/"
+}

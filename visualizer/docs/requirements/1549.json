@@ -1,0 +1,37 @@
+{
+  "number": "1549",
+  "title": "The Most Recent Orders for Each Product",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each product, return every order that has the product's most recent order date, keeping ties.",
+  "inputFormat": "SQL. Customers(customer_id, name); Orders(order_id, order_date, customer_id, product_id); Products(product_id, product_name, price).",
+  "outputFormat": "SQL result: product_name, product_id, order_id, order_date; sorted by product_name, product_id, order_id ascending.",
+  "officialConstraints": "unknown",
+  "tieRules": "All orders tied at the most recent date are returned.",
+  "edgeRules": "Customers table is listed in draft but its role is not stated.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "product P: orders 1 and 2 on 2020-05-01, order 3 on 2020-04-01",
+      "expected": "orders 1 and 2"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "latest date per product",
+    "ties kept",
+    "sort"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "whether the Customers table is used (the draft lists it without a rule)"
+  ],
+  "questions": [
+    "Is any Customers filter applied, or is it irrelevant?"
+  ],
+  "nextAction": "Confirm Customers role.",
+  "officialUrl": "https://leetcode.com/problems/the-most-recent-orders-for-each-product/description/"
+}

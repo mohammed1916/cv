@@ -2,12 +2,34 @@
   "number": 3793,
   "title": "Find Users with High Token Usage",
   "source": "https://leetcode.com/problems/find-users-with-high-token-usage/description/",
-  "checkedOn": "2026-11-02",
-  "sourceKind": "official-page-via-web-tool",
-  "contentKind": "independently-written-requirements",
-  "summary": "SQL: prompts(user_id,prompt,tokens), unique by user/prompt. For each user, count prompts and average their token counts. Keep users with at least three prompts and at least one token count strictly above their own unrounded average. Return user_id,prompt_count,avg_tokens, with the average rounded to two decimals. Sort average descending then user_id ascending.",
-  "officialConstraints": "user_id and tokens are integers; prompt is text; primary key is (user_id,prompt).",
-  "requirementsVerified": true,
+  "checkedOn": "2026-11-03",
+  "sourceKind": "community-or-prior-note",
+  "contentKind": "original-requirements-summary",
+  "problemClass": "SQL",
+  "summary": "For each user with at least three prompts, average their token counts; keep users with at least one token count strictly above their own unrounded average. Return user_id, prompt_count, avg_tokens rounded to two decimals, sorted by average descending then user_id ascending.",
+  "inputFormat": "prompts(user_id int, prompt text, tokens int), primary key (user_id, prompt).",
+  "outputFormat": "user_id, prompt_count, avg_tokens (2 decimals).",
+  "officialConstraints": "user_id and tokens integers; prompt text; key (user_id, prompt).",
+  "tieRules": "Sort avg_tokens descending then user_id ascending. Strictly-above comparison uses the unrounded average.",
+  "edgeRules": "Filter uses the unrounded average, not the rounded value.",
   "examples": [],
-  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Prior note recorded an official-page-via-web-tool check on 2026-11-02 (official page via web tool; prior note marked requirementsVerified true). Not reconfirmed this pass: official page returns 403 on 2026-11-03.",
+  "factsPresent": [
+    "prompt_count >= 3 per user",
+    "at least one tokens value strictly above the user's average"
+  ],
+  "factsMissing": [
+    "table schema",
+    "filter rule",
+    "rounding and sort rules"
+  ],
+  "questions": [
+    "none for the stated rules; any question concerns a tokens value equal to the average (strict comparison already excludes it)"
+  ],
+  "nextAction": "Confirm on the official statement that the average filter is strict and computed on unrounded values.",
+  "previousSourceRecord": {
+    "requirementsVerifiedClaimedByPriorNote": true
+  }
 }

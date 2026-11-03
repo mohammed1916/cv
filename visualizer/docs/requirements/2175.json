@@ -1,0 +1,33 @@
+{
+  "number": "2175",
+  "title": "The Change in Global Rankings",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "SQL: rank teams by points (descending) then name; apply points changes; report old rank minus new rank per team.",
+  "inputFormat": "TeamPoints(team_id,name,points) and PointsChange(team_id,points_change).",
+  "outputFormat": "name and rank_diff (old rank minus new rank).",
+  "officialConstraints": "unknown",
+  "tieRules": "Rank definition for ties is not stated (manual draft says verify rank style).",
+  "edgeRules": "Tie-break by name is given.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "two tables",
+    "name tie-break",
+    "rank_diff sign"
+  ],
+  "factsMissing": [
+    "official page text (HTTP 403 on fetch, not verified)",
+    "official numeric bounds",
+    "authored examples",
+    "rank style for ties (competition or dense)",
+    "output ordering"
+  ],
+  "questions": [
+    "Confirm the rank style for equal points (RANK-style or DENSE_RANK-style) and the output ordering."
+  ],
+  "nextAction": "Fetch official page or obtain a readable copy; then confirm the listed questions and author examples.",
+  "provenance": "Manual draft local-reference/leetcode/manual/2175.txt (knowledge-derived, not a recovered statement). Official URL https://leetcode.com/problems/<slug>/description/ returned HTTP 403 on 2026-11-03; no recovered raw statement exists in the archive.",
+  "officialUrl": "https://leetcode.com/problems/the-change-in-global-rankings/description/"
+}

@@ -1,0 +1,28 @@
+{
+  "number": "2986",
+  "title": "Find Third Transaction",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialConstraints": "unknown",
+  "examples": [],
+  "requirementsVerified": false,
+  "summary": "For each user, return the third transaction only when its spend exceeds both of the first two transactions.",
+  "inputFormat": "Transactions(user_id, spend, transaction_date).",
+  "outputFormat": "user_id, third_transaction_spend, third_transaction_date.",
+  "tieRules": "Chronological order by transaction_date; ties on equal dates are not settled.",
+  "edgeRules": "Users with fewer than three transactions are excluded.",
+  "factsPresent": [
+    "Third transaction chronologically",
+    "Spend greater than the first two"
+  ],
+  "factsMissing": [
+    "Tie rule for equal transaction_date",
+    "Output ordering"
+  ],
+  "questions": [
+    "How are transactions with equal transaction_date ordered, and what row ordering is required?"
+  ],
+  "nextAction": "Obtain the official statement (recovered raw archive has none for this ID); confirm the listed missing facts, then set requirementsVerified only if an official page confirms them. Official base URL in the manual draft; not fetched in this pass.",
+  "examplesNote": "No authored example in this pass; authored-reference examples to be added after the statement is confirmed."
+}

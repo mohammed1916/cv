@@ -1,0 +1,29 @@
+{
+  "number": "3236",
+  "title": "CEO Subordinate Hierarchy",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Starting from the CEO (manager_id NULL), compute each employee's hierarchy level and aggregate subordinate metrics.",
+  "inputFormat": "Employees(employee_id, employee_name, manager_id, salary).",
+  "outputFormat": "Per employee: level and subordinate aggregates (metrics not stated).",
+  "officialConstraints": "unknown",
+  "tieRules": "Unknown.",
+  "edgeRules": "Which subordinate metrics (count of direct reports, count of all descendants, total salary) and the level definition are not stated.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "SQL input table names and columns (from manual draft)",
+    "primary task rule (from manual draft)",
+    "official page reference https://leetcode.com/problems/ceo-subordinate-hierarchy/description/"
+  ],
+  "factsMissing": [
+    "official statement not fetched or confirmed",
+    "exact output column names and row order",
+    "authored validation example"
+  ],
+  "questions": [
+    "Exact subordinate metrics (for example descendant count or total salary), level definition, and output columns and order."
+  ],
+  "nextAction": "Fetch the official /description/ page for this problem and confirm the summary, then record the exact output columns, ordering and tie rules; author and validate a teaching example (labelled authored-reference)."
+}

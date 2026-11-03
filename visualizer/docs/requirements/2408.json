@@ -1,0 +1,73 @@
+{
+  "number": 2408,
+  "title": "Design SQL",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "draftFile": "local-reference/leetcode/manual/2408.txt",
+  "officialUrl": "https://leetcode.com/problems/design-sql/description/",
+  "summary": "Design an in-memory table store: named tables with a fixed number of columns; insertRow appends a row with a table-local increasing id starting at 1 (deleted ids are not reused); deleteRow removes a row; selectCell returns one cell by one-based column index.",
+  "inputFormat": "A table list with column counts; insertRow takes a table name and row values; deleteRow takes a table name and row id; selectCell takes a table name, row id and one-based column id.",
+  "outputFormat": "insertRow returns the new row id; selectCell returns the stored string cell value; deleteRow returns nothing.",
+  "officialConstraints": "unknown",
+  "tieRules": "Row ids increase and are never reused.",
+  "edgeRules": "One-based column indexing (draft). Behaviour on a deleted or missing row is not recorded.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "table with 2 columns: insertRow ['a','b'] -> 1; insertRow ['c','d'] -> 2; selectCell(2,2) -> 'd'; deleteRow(1); insertRow -> 3",
+      "output": "1, 2, 'd', 3",
+      "note": "Conditional on insertRow returning the id, which is not recorded."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "One-based column index",
+    "Row ids not reused",
+    "Fixed column count"
+  ],
+  "factsMissing": [
+    "Exact constructor and method signatures and return values",
+    "Behaviour when the row was deleted or is absent",
+    "Official bounds"
+  ],
+  "questions": [
+    "What exact constructor and method signatures and return values does the statement specify for insertRow, deleteRow and selectCell?",
+    "What does selectCell return for a deleted row?"
+  ],
+  "nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it.",
+  "previous_sourceKind": "manual-draft",
+  "previous_contentKind": "original-requirements-summary",
+  "previous_draftFile": "local-reference/leetcode/manual/2408.txt",
+  "previous_officialUrl": "https://leetcode.com/problems/design-sql/description/",
+  "previous_summary": "Design an in-memory table store: named tables with a fixed number of columns; insertRow appends a row with a table-local increasing id starting at 1 (deleted ids are not reused); deleteRow removes a row; selectCell returns one cell by one-based column index.",
+  "previous_inputFormat": "A table list with column counts; insertRow takes a table name and row values; deleteRow takes a table name and row id; selectCell takes a table name, row id and one-based column id.",
+  "previous_outputFormat": "insertRow returns the new row id; selectCell returns the stored string cell value; deleteRow returns nothing.",
+  "previous_officialConstraints": "unknown",
+  "previous_tieRules": "Row ids increase and are never reused.",
+  "previous_edgeRules": "One-based column indexing (draft). Behaviour on a deleted or missing row is not recorded.",
+  "previous_examples": [
+    {
+      "label": "authored-reference",
+      "input": "table with 2 columns: insertRow ['a','b'] -> 1; insertRow ['c','d'] -> 2; selectCell(2,2) -> 'd'; deleteRow(1); insertRow -> 3",
+      "output": "1, 2, 'd', 3",
+      "note": "Conditional on insertRow returning the id, which is not recorded."
+    }
+  ],
+  "previous_requirementsVerified": false,
+  "previous_factsPresent": [
+    "One-based column index",
+    "Row ids not reused",
+    "Fixed column count"
+  ],
+  "previous_factsMissing": [
+    "Exact constructor and method signatures and return values",
+    "Behaviour when the row was deleted or is absent",
+    "Official bounds"
+  ],
+  "previous_questions": [
+    "What exact constructor and method signatures and return values does the statement specify for insertRow, deleteRow and selectCell?",
+    "What does selectCell return for a deleted row?"
+  ],
+  "previous_nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it."
+}

@@ -1,0 +1,33 @@
+{
+  "number": 3262,
+  "title": "Find Overlapping Shifts",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "source": "https://leetcode.com/problems/find-overlapping-shifts/description/",
+  "summary": "SQL. Table EmployeeShifts(employee_id, start_time, end_time). Return employees having overlapping shift pairs, with the number of overlapping pairs.",
+  "inputFormat": "EmployeeShifts(employee_id, start_time, end_time)",
+  "outputFormat": "Unknown: output column names and order.",
+  "officialConstraints": "unknown",
+  "tieRules": "Unknown whether touching endpoints (one ends when the other starts) count as overlap; unknown whether an unordered pair counts once.",
+  "edgeRules": "Unknown whether employees with no overlap appear.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "title",
+    "task category (SQL)",
+    "manual draft summary"
+  ],
+  "factsMissing": [
+    "officialConstraints",
+    "exact output columns and ordering",
+    "tie rules",
+    "edge rules",
+    "authored examples",
+    "official verification (official page HTTP 403 on 2026-11-03)"
+  ],
+  "questions": [
+    "Is an end time equal to another shift's start time an overlap? Is each unordered pair counted once? Exact output columns and ordering?"
+  ],
+  "nextAction": "Obtain the official statement (official page returned HTTP 403 to WebFetch on 2026-11-03) or a readable community reproduction; then fill outputFormat, ties and edges and author validation examples labelled authored-reference."
+}

@@ -1,0 +1,36 @@
+{
+  "number": "1777",
+  "title": "Product's Price for Each Store",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "archiveStatus": "missing-statement (no raw file in local-reference/leetcode/raw)",
+  "officialUrl": "https://leetcode.com/problems/products-price-for-each-store/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Pivot product prices so each product has one row with a column for each of three stores, NULL where a store has no price.",
+  "inputFormat": "Products(product_id, store, price) with stores store1, store2, store3.",
+  "outputFormat": "Columns product_id, store1, store2, store3.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Missing store price becomes NULL.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "text": "authored-reference: product 0 price 95 in store1 only -> (0, 95, NULL, NULL)."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "pivot shape",
+    "NULL for missing store"
+  ],
+  "factsMissing": [
+    "official statement text (archive status missing-statement; no raw file)",
+    "official confirmation of this summary (requirementsVerified false)",
+    "uniqueness of (product_id, store)",
+    "output ordering"
+  ],
+  "questions": [
+    "Is (product_id, store) guaranteed unique? Is output ordering specified?"
+  ],
+  "nextAction": "Fetch official page https://leetcode.com/problems/products-price-for-each-store/description/ and confirm each listed fact; then set requirementsVerified."
+}

@@ -1,0 +1,37 @@
+{
+  "number": 1369,
+  "title": "Get the Second Most Recent Activity",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1369.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/get-the-second-most-recent-activity/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each username return the second most recent activity; if the user has only one activity, return that one. All original columns are returned.",
+  "inputFormat": "UserActivity(username, activity, startDate, endDate).",
+  "outputFormat": "All original columns for the selected row per user.",
+  "officialConstraints": "unknown",
+  "tieRules": "The draft asks to choose the ordering key and tie rule (startDate or endDate); not yet decided.",
+  "edgeRules": "Activities for one user do not overlap (draft guarantee, unverified).",
+  "examples": {
+    "label": "authored-reference",
+    "note": "Alice with activities starting 2020-01-01, 2020-01-05, 2020-02-01: second most recent by start is the 2020-01-05 row. Bob with one activity returns it. [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "second-recent rule",
+    "single-activity rule",
+    "column set"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)",
+    "ordering key",
+    "timestamp tie rule",
+    "non-overlap guarantee"
+  ],
+  "questions": [
+    "Is 'most recent' ordered by startDate or by endDate, and how are equal timestamps broken?"
+  ],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

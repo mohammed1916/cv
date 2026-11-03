@@ -1,0 +1,38 @@
+{
+  "number": "2726",
+  "title": "Calculator with Method Chaining",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/calculator-with-method-chaining/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Implement a Calculator with a stored numeric value and chainable add, subtract, multiply, divide and power methods, plus getResult().",
+  "inputFormat": "A constructor value; method arguments are numbers.",
+  "outputFormat": "Each arithmetic method returns the Calculator itself; getResult returns the stored number.",
+  "officialConstraints": "unknown",
+  "tieRules": "not applicable",
+  "edgeRules": "Dividing by zero throws Error('Division by zero is not allowed') according to the draft from memory. Floating-point comparison tolerance is not stated.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "new Calculator(10).add(5).multiply(2).getResult()",
+      "output": "30 (authored-reference)",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "chaining returns the instance",
+    "getResult returns stored value",
+    "divide-by-zero error rule"
+  ],
+  "factsMissing": [
+    "official error message",
+    "floating-point tolerance",
+    "official bounds and example"
+  ],
+  "questions": [
+    "Must the division-by-zero error message be exactly 'Division by zero is not allowed'?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

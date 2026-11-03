@@ -1,0 +1,37 @@
+{
+  "number": "1484",
+  "title": "Group Sold Products By The Date",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each date, count distinct products sold and list them alphabetically in one comma-separated string.",
+  "inputFormat": "SQL. Activities(sell_date, product); duplicate (sell_date, product) rows are possible.",
+  "outputFormat": "SQL result: sell_date, num_sold (distinct products), products (sorted names joined by commas); sorted by sell_date.",
+  "officialConstraints": "unknown",
+  "tieRules": "Product names within a date sorted alphabetically ascending.",
+  "edgeRules": "Same-day duplicate product rows count once.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "2020-05-30 Basketball, Baseball, Basketball",
+      "expected": "2020-05-30 2 Baseball,Basketball"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "distinct count",
+    "alphabetical order",
+    "date ordering"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "separator spacing (draft says comma-separated only)"
+  ],
+  "questions": [
+    "Confirm whether the separator is ',' with no space, as the official statement describes."
+  ],
+  "nextAction": "Confirm separator format.",
+  "officialUrl": "https://leetcode.com/problems/group-sold-products-by-the-date/description/"
+}

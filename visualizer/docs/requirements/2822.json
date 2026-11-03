@@ -1,0 +1,71 @@
+{
+  "number": 2822,
+  "title": "Inversion of Object",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "draftFile": "local-reference/leetcode/manual/2822.txt",
+  "officialUrl": "https://leetcode.com/problems/inversion-of-object/description/",
+  "summary": "Invert a JSON-compatible object: each new key is the string form of an original value; its value is the original key when that value occurs once, and an array of all such original keys when several keys share it.",
+  "inputFormat": "A JSON-compatible object whose values are primitive values (domain not verified).",
+  "outputFormat": "A new object keyed by String(value).",
+  "officialConstraints": "unknown",
+  "tieRules": "Duplicate original keys for the same value must all be kept in an array; the array order is not stated.",
+  "edgeRules": "Whether a single occurrence is a bare string or a one-element array is not stated.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "{a:1, b:1}",
+      "output": "{\"1\": [\"a\", \"b\"]}",
+      "note": "Duplicates only, so the single-occurrence question does not affect it."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "Key rule (String of the value)",
+    "Duplicates kept as an array"
+  ],
+  "factsMissing": [
+    "Whether a single occurrence maps to a bare key string or to a one-element array",
+    "Array order for duplicates",
+    "Allowed value types"
+  ],
+  "questions": [
+    "When a value occurs exactly once, is the mapped value the bare original key string or a one-element array?",
+    "What order do the duplicate original keys appear in the array?"
+  ],
+  "nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it.",
+  "previous_sourceKind": "manual-draft",
+  "previous_contentKind": "original-requirements-summary",
+  "previous_draftFile": "local-reference/leetcode/manual/2822.txt",
+  "previous_officialUrl": "https://leetcode.com/problems/inversion-of-object/description/",
+  "previous_summary": "Invert a JSON-compatible object: each new key is the string form of an original value; its value is the original key when that value occurs once, and an array of all such original keys when several keys share it.",
+  "previous_inputFormat": "A JSON-compatible object whose values are primitive values (domain not verified).",
+  "previous_outputFormat": "A new object keyed by String(value).",
+  "previous_officialConstraints": "unknown",
+  "previous_tieRules": "Duplicate original keys for the same value must all be kept in an array; the array order is not stated.",
+  "previous_edgeRules": "Whether a single occurrence is a bare string or a one-element array is not stated.",
+  "previous_examples": [
+    {
+      "label": "authored-reference",
+      "input": "{a:1, b:1}",
+      "output": "{\"1\": [\"a\", \"b\"]}",
+      "note": "Duplicates only, so the single-occurrence question does not affect it."
+    }
+  ],
+  "previous_requirementsVerified": false,
+  "previous_factsPresent": [
+    "Key rule (String of the value)",
+    "Duplicates kept as an array"
+  ],
+  "previous_factsMissing": [
+    "Whether a single occurrence maps to a bare key string or to a one-element array",
+    "Array order for duplicates",
+    "Allowed value types"
+  ],
+  "previous_questions": [
+    "When a value occurs exactly once, is the mapped value the bare original key string or a one-element array?",
+    "What order do the duplicate original keys appear in the array?"
+  ],
+  "previous_nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it."
+}

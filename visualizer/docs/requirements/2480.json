@@ -1,0 +1,29 @@
+{
+  "number": "2480",
+  "title": "Form a Chemical Bond",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialConstraints": "unknown",
+  "examples": [],
+  "requirementsVerified": false,
+  "summary": "Return valid metal/nonmetal element pairs that can form the stated chemical bond under the source electron rule.",
+  "inputFormat": "Elements table; exact column list is not known from the draft.",
+  "outputFormat": "Unknown; the draft does not give output columns.",
+  "tieRules": "Unknown.",
+  "edgeRules": "Unknown.",
+  "factsPresent": [
+    "Task category is SQL and the problem is a pairing query"
+  ],
+  "factsMissing": [
+    "Elements column list and types",
+    "Bonding criterion (electron rule)",
+    "Output columns, ordering and tie behaviour"
+  ],
+  "questions": [
+    "What are the exact Elements columns and the electron/type rule that decides a valid metal-nonmetal pair?",
+    "What output columns and row ordering does the source require?"
+  ],
+  "nextAction": "Do not implement from the title; the draft itself says the statement must be obtained. Obtain the official statement (recovered raw archive has none for this ID); confirm the listed missing facts, then set requirementsVerified only if an official page confirms them. Official base URL in the manual draft; not fetched in this pass.",
+  "examplesNote": "No authored example in this pass; authored-reference examples to be added after the statement is confirmed."
+}

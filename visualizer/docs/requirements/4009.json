@@ -1,13 +1,18 @@
 {
   "number": 4009,
   "title": "Minimum Possible Maximum Waiting Time",
-  "source": "https://leetcode.com/problems/minimum-possible-maximum-waiting-time/description/",
-  "checkedOn": "2026-11-02",
+  "source": "https://leetcode.com/problems/minimum-possible-maximum-waiting-time/",
+  "checkedOn": "2026-11-03",
   "sourceKind": "official-page-via-web-tool",
   "contentKind": "independently-written-requirements",
-  "summary": "Cars become eligible in order: the first at time zero, each later car when its predecessor starts fueling. Assign each eligible car to one of two dispensers with enough remaining fuel; it must wait for that dispenser if busy and start immediately once free. Demand determines both fuel consumed and service seconds. If neither dispenser can serve a car, processing stops. First maximize cars served, then minimize their largest eligibility-to-start wait. Return that wait, or -1 if none are served.",
-  "officialConstraints": "1..50 cars; demands1..20; exactly two fuel capacities, each1..50.",
+  "summary": "Car 0 becomes eligible at 0; car i becomes eligible when car i-1 STARTS service. Choose either dispenser with enough remaining fuel, even if the other becomes free sooner. No dispenser-index tie-break exists. Assignment cannot change. Start immediately when the chosen dispenser is free; service lasts demand[i] seconds and consumes that fuel at its start. If neither dispenser has enough fuel, stop without skipping the car. Maximize the served prefix length FIRST, then minimize the largest eligibility-to-start wait; return -1 if none served.",
+  "officialConstraints": "1..50 cars; each demand 1..20; exactly two fuel capacities, each 1..50.",
   "requirementsVerified": true,
   "examples": [],
-  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets.",
+  "clarification": "Accounting: eligible[0]=0; eligible[i]=start[i-1]; start[i]=max(eligible[i],freeAt[chosen]); wait[i]=start[i]-eligible[i]. Fuel is never replenished. A free but insufficient dispenser cannot serve the car.",
+  "officialUrl": "https://leetcode.com/problems/minimum-possible-maximum-waiting-time/",
+  "constraintsReportedBySource": "1..50 cars; each demand 1..20; exactly two fuel capacities, each 1..50.",
+  "verificationStatus": "official-page-read",
+  "questionResolution": "Specific CLAUDE-QUESTIONS.md question answered; source confidence recorded separately."
 }

@@ -1,0 +1,38 @@
+{
+  "number": "1555",
+  "title": "Bank Account Summary",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Compute each user's final balance after transfers, and flag whether it is negative.",
+  "inputFormat": "SQL. Users(user_id, user_name, credit); Transactions(trans_id, paid_by, paid_to, amount, transacted_on).",
+  "outputFormat": "SQL result: user_id, user_name, credit (final balance), credit_limit_breached ('Yes' if final < 0 else 'No').",
+  "officialConstraints": "unknown",
+  "tieRules": "Unknown.",
+  "edgeRules": "Users with no transfers keep their starting credit. final = credit - outgoing + incoming.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "user 1 credit 100, pays 150 to user 2",
+      "expected": "user 1 final -50, Yes"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "balance formula",
+    "Yes/No flag",
+    "users without transfers"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "output ordering",
+    "whether credit column is the original or final value"
+  ],
+  "questions": [
+    "Is the output credit the final balance, and what row ordering is required?"
+  ],
+  "nextAction": "Confirm output credit meaning and ordering.",
+  "officialUrl": "https://leetcode.com/problems/bank-account-summary/description/"
+}

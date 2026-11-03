@@ -1,0 +1,29 @@
+{
+  "number": "3172",
+  "title": "Second Day Verification",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return users whose Verified text action occurred on the calendar day after their signup.",
+  "inputFormat": "Emails(email_id, user_id, signup_date) and Texts(text_id, email_id, signup_action, action_date).",
+  "outputFormat": "Distinct user_id list (column names not stated).",
+  "officialConstraints": "unknown",
+  "tieRules": "Unknown.",
+  "edgeRules": "Literal values of signup_action and whether 24-hour difference or calendar date is used.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "SQL input table names and columns (from manual draft)",
+    "primary task rule (from manual draft)",
+    "official page reference https://leetcode.com/problems/second-day-verification/description/"
+  ],
+  "factsMissing": [
+    "official statement not fetched or confirmed",
+    "exact output column names and row order",
+    "authored validation example"
+  ],
+  "questions": [
+    "Is the test a calendar-date difference of 1 or a 24-hour interval, and what exact signup_action literals mark signup and verification?"
+  ],
+  "nextAction": "Fetch the official /description/ page for this problem and confirm the summary, then record the exact output columns, ordering and tie rules; author and validate a teaching example (labelled authored-reference)."
+}

@@ -1,0 +1,69 @@
+{
+  "number": 1500,
+  "title": "Design a File Sharing System",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "draftFile": "local-reference/leetcode/manual/1500.txt",
+  "officialUrl": "https://leetcode.com/problems/design-a-file-sharing-system/description/",
+  "summary": "Design a chunk-sharing system: join assigns the smallest free positive user id; leave frees a user id; request returns the sorted owners of a chunk and, if at least one owner exists, makes the requester an owner too.",
+  "inputFormat": "join takes a list of owned chunk ids; leave takes a user id; request takes a user id and a chunk id.",
+  "outputFormat": "join returns the assigned user id; leave returns nothing; request returns a sorted list of user ids.",
+  "officialConstraints": "unknown",
+  "tieRules": "Smallest available positive user id is assigned on join; owners are returned sorted.",
+  "edgeRules": "If there are no owners, ownership does not change (draft).",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "join([1]) -> 1; join([2]) -> 2; join([]) -> 3; request(3,1); request(2,1)",
+      "output": "1 2 3; [1]; [1,3]",
+      "note": "Conditional: assumes the returned list is taken before the requester gains ownership."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "Smallest free positive id",
+    "Owners returned sorted",
+    "No owner means no change"
+  ],
+  "factsMissing": [
+    "Whether the returned list is captured before or after the requester is added",
+    "Official call and bound limits"
+  ],
+  "questions": [
+    "Is the owner list returned by request taken before the requester is added, and does it include the requester when already an owner?"
+  ],
+  "nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it.",
+  "previous_sourceKind": "manual-draft",
+  "previous_contentKind": "original-requirements-summary",
+  "previous_draftFile": "local-reference/leetcode/manual/1500.txt",
+  "previous_officialUrl": "https://leetcode.com/problems/design-a-file-sharing-system/description/",
+  "previous_summary": "Design a chunk-sharing system: join assigns the smallest free positive user id; leave frees a user id; request returns the sorted owners of a chunk and, if at least one owner exists, makes the requester an owner too.",
+  "previous_inputFormat": "join takes a list of owned chunk ids; leave takes a user id; request takes a user id and a chunk id.",
+  "previous_outputFormat": "join returns the assigned user id; leave returns nothing; request returns a sorted list of user ids.",
+  "previous_officialConstraints": "unknown",
+  "previous_tieRules": "Smallest available positive user id is assigned on join; owners are returned sorted.",
+  "previous_edgeRules": "If there are no owners, ownership does not change (draft).",
+  "previous_examples": [
+    {
+      "label": "authored-reference",
+      "input": "join([1]) -> 1; join([2]) -> 2; join([]) -> 3; request(3,1); request(2,1)",
+      "output": "1 2 3; [1]; [1,3]",
+      "note": "Conditional: assumes the returned list is taken before the requester gains ownership."
+    }
+  ],
+  "previous_requirementsVerified": false,
+  "previous_factsPresent": [
+    "Smallest free positive id",
+    "Owners returned sorted",
+    "No owner means no change"
+  ],
+  "previous_factsMissing": [
+    "Whether the returned list is captured before or after the requester is added",
+    "Official call and bound limits"
+  ],
+  "previous_questions": [
+    "Is the owner list returned by request taken before the requester is added, and does it include the requester when already an owner?"
+  ],
+  "previous_nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it."
+}

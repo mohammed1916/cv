@@ -1,0 +1,38 @@
+{
+  "number": "1543",
+  "title": "Fix Product Name Format",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Normalize product names by trimming surrounding spaces and lowercasing, then count sales per name and calendar month.",
+  "inputFormat": "SQL. Sales(sale_id, product_name, sale_date).",
+  "outputFormat": "SQL result: product_name (normalized), sale_date as YYYY-MM, total; sorted by product_name then month.",
+  "officialConstraints": "unknown",
+  "tieRules": "Groups by normalized name and month.",
+  "edgeRules": "Trims surrounding spaces only (draft wording); whitespace type not specified.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "' Apple ' 2020-05-01; 'apple' 2020-05-30",
+      "expected": "apple 2020-05 2"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "normalization",
+    "YYYY-MM format",
+    "sort"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "whether only spaces are trimmed or all whitespace",
+    "month format exactness"
+  ],
+  "questions": [
+    "Does trimming cover only spaces or all whitespace characters?"
+  ],
+  "nextAction": "Confirm trim rule.",
+  "officialUrl": "https://leetcode.com/problems/fix-product-name-format/description/"
+}

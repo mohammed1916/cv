@@ -1,0 +1,36 @@
+{
+  "number": "1919",
+  "title": "Leetcodify Similar Friends",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "archiveStatus": "missing-statement (no raw file in local-reference/leetcode/raw)",
+  "officialUrl": "https://leetcode.com/problems/leetcodify-similar-friends/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return existing friend pairs who share at least three distinct songs listened to on the same day.",
+  "inputFormat": "Listens(user_id, song_id, day); Friendship(user1_id, user2_id).",
+  "outputFormat": "Pairs user1_id, user2_id with user1_id < user2_id, deduplicated.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Canonical ordering of pairs; duplicates across qualifying days removed.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "text": "authored-reference: friends 1 and 4 share songs a,b,c on day D1 -> (1,4) once."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "friend-pair test",
+    "same-day rule",
+    "canonical pair order"
+  ],
+  "factsMissing": [
+    "official statement text (archive status missing-statement; no raw file)",
+    "official confirmation of this summary (requirementsVerified false)",
+    "whether input friendship rows are guaranteed user1_id < user2_id"
+  ],
+  "questions": [
+    "Are friendship rows guaranteed to have user1_id < user2_id?"
+  ],
+  "nextAction": "Fetch official page https://leetcode.com/problems/leetcodify-similar-friends/description/ and confirm each listed fact; then set requirementsVerified."
+}

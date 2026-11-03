@@ -1,0 +1,69 @@
+{
+  "number": 1188,
+  "title": "Design Bounded Blocking Queue",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "draftFile": "local-reference/leetcode/manual/1188.txt",
+  "officialUrl": "https://leetcode.com/problems/design-bounded-blocking-queue/description/",
+  "summary": "Implement a thread-safe bounded FIFO queue of the given capacity: enqueue blocks while full, dequeue blocks while empty and returns the oldest element, and size reports the current length.",
+  "inputFormat": "A positive integer capacity; enqueue takes an element; dequeue and size take no arguments.",
+  "outputFormat": "dequeue returns the element; size returns an integer; enqueue returns nothing (not recorded).",
+  "officialConstraints": "unknown",
+  "tieRules": "Dequeue returns the oldest element (FIFO).",
+  "edgeRules": "Blocking when full or empty is stated; no element is lost or duplicated under concurrent calls.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "capacity 2: enqueue 1, enqueue 2, size -> 2, dequeue -> 1, enqueue 3, size -> 2",
+      "output": "2, 1, 2",
+      "note": "Single-threaded validation only; blocking is not shown."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "FIFO",
+    "Blocking when full or empty",
+    "Capacity never exceeded"
+  ],
+  "factsMissing": [
+    "Exact method return types",
+    "Official bounds"
+  ],
+  "questions": [
+    "Are the return types of enqueue, dequeue and size exactly as the authored sequence assumes?"
+  ],
+  "nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it.",
+  "previous_sourceKind": "manual-draft",
+  "previous_contentKind": "original-requirements-summary",
+  "previous_draftFile": "local-reference/leetcode/manual/1188.txt",
+  "previous_officialUrl": "https://leetcode.com/problems/design-bounded-blocking-queue/description/",
+  "previous_summary": "Implement a thread-safe bounded FIFO queue of the given capacity: enqueue blocks while full, dequeue blocks while empty and returns the oldest element, and size reports the current length.",
+  "previous_inputFormat": "A positive integer capacity; enqueue takes an element; dequeue and size take no arguments.",
+  "previous_outputFormat": "dequeue returns the element; size returns an integer; enqueue returns nothing (not recorded).",
+  "previous_officialConstraints": "unknown",
+  "previous_tieRules": "Dequeue returns the oldest element (FIFO).",
+  "previous_edgeRules": "Blocking when full or empty is stated; no element is lost or duplicated under concurrent calls.",
+  "previous_examples": [
+    {
+      "label": "authored-reference",
+      "input": "capacity 2: enqueue 1, enqueue 2, size -> 2, dequeue -> 1, enqueue 3, size -> 2",
+      "output": "2, 1, 2",
+      "note": "Single-threaded validation only; blocking is not shown."
+    }
+  ],
+  "previous_requirementsVerified": false,
+  "previous_factsPresent": [
+    "FIFO",
+    "Blocking when full or empty",
+    "Capacity never exceeded"
+  ],
+  "previous_factsMissing": [
+    "Exact method return types",
+    "Official bounds"
+  ],
+  "previous_questions": [
+    "Are the return types of enqueue, dequeue and size exactly as the authored sequence assumes?"
+  ],
+  "previous_nextAction": "Fetch the official base URL and /description/ to confirm the statement, then answer the listed questions from it."
+}

@@ -2,16 +2,36 @@
   "number": 3657,
   "title": "Find Loyal Customers",
   "source": "https://leetcode.com/problems/find-loyal-customers/description/",
-  "checkedOn": "2026-11-02",
-  "sourceKind": "official-page-blocked",
-  "contentKind": "none",
-  "summary": null,
-  "attempt": {
-    "method": "web-fetch agent (WebFetch)",
-    "url": "https://leetcode.com/problems/find-loyal-customers/description/",
-    "result": "not attempted (concurrency limit)",
-    "date": "2026-11-02"
-  },
-  "missing": "Full statement (rules, constraints, examples, pitfalls) not retrieved. No requirement was inferred from the title.",
-  "implementationStatus": "blocked-no-statement"
+  "checkedOn": "2026-11-03",
+  "sourceKind": "access-attempt-failed",
+  "contentKind": "original-requirements-summary",
+  "problemClass": "SQL",
+  "summary": "SQL problem; the task criteria are not recorded in any retrieved source. No requirement is inferred from the title.",
+  "inputFormat": "unknown",
+  "outputFormat": "unknown",
+  "officialConstraints": "unknown",
+  "tieRules": "unknown",
+  "edgeRules": "unknown",
+  "examples": [],
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Official page fetch on 2026-11-03 returned HTTP 403 (WebFetch); statement not retrieved this pass. Recovered-archive index lists missing-statement for this ID.",
+  "factsPresent": [
+    "title",
+    "problem class (SQL)"
+  ],
+  "factsMissing": [
+    "spending threshold rule",
+    "recency rule",
+    "activity-window rule",
+    "refund-handling rule",
+    "output column names and ordering",
+    "tie rule",
+    "table keys and types"
+  ],
+  "questions": [
+    "Which exact spending, recency, activity-window and refund conditions define a loyal customer, and what is the output column list and ordering?"
+  ],
+  "nextAction": "Obtain the full official statement (blocked 403) or a verified community reproduction, then write the SQL contract.",
+  "previousSourceRecord": "existing note recorded HTTP 403 with no body; no statement content was available"
 }

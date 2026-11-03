@@ -1,0 +1,38 @@
+{
+  "number": "1635",
+  "title": "Hopper Company Queries I",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each month of 2020, count drivers who had joined by the end of that month and rides accepted that were requested in that month.",
+  "inputFormat": "SQL. Drivers(driver_id, join_date); Rides(ride_id, user_id, requested_at); AcceptedRides(ride_id, driver_id, ride_distance, ride_duration).",
+  "outputFormat": "SQL result: month (1 to 12), active_drivers, accepted_rides; sorted by month ascending.",
+  "officialConstraints": "unknown",
+  "tieRules": "Months ordered 1 to 12.",
+  "edgeRules": "Months with no accepted rides or no drivers still appear with 0. Drivers who joined before 2020 count as active.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "driver joined 2019-12-01, accepted ride requested 2020-01-05",
+      "expected": "month 1: active 1, rides 1"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "cumulative active drivers",
+    "zero months",
+    "pre-2020 joins"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "whether accepted_rides is limited to requests in 2020 (only the month is stated)",
+    "whether end-of-month join is inclusive"
+  ],
+  "questions": [
+    "Is accepted_rides restricted to rides requested in 2020, and is a join on the last day counted?"
+  ],
+  "nextAction": "Confirm year restriction and inclusivity.",
+  "officialUrl": "https://leetcode.com/problems/hopper-company-queries-i/description/"
+}

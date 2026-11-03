@@ -1,0 +1,34 @@
+{
+  "number": "1677",
+  "title": "Product's Worth Over Invoices",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each product, sum rest, paid, canceled and refunded across its invoices, including zero for products without invoices.",
+  "inputFormat": "SQL. Product(product_id, name); Invoice(invoice_id, product_id, rest, paid, canceled, refunded).",
+  "outputFormat": "SQL result: name, rest, paid, canceled, refunded summed per product; sorted by name ascending.",
+  "officialConstraints": "unknown",
+  "tieRules": "Sorted by name ascending.",
+  "edgeRules": "Products with no invoices return 0 for each sum.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "product Apple: invoices rest 1, paid 2; no invoice for Pear",
+      "expected": "Apple 1 2 0 0; Pear 0 0 0 0"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "sum columns",
+    "zero for missing invoices",
+    "sort"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)"
+  ],
+  "questions": [],
+  "nextAction": "Confirm against official statement.",
+  "officialUrl": "https://leetcode.com/problems/products-worth-over-invoices/description/"
+}

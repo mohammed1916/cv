@@ -1,0 +1,37 @@
+{
+  "number": "1867",
+  "title": "Orders With Maximum Quantity Above Average",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "archiveStatus": "missing-statement (no raw file in local-reference/leetcode/raw)",
+  "officialUrl": "https://leetcode.com/problems/orders-with-maximum-quantity-above-average/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return order IDs whose maximum item quantity is greater than the greatest per-order average item quantity.",
+  "inputFormat": "OrdersDetails(order_id, product_id, quantity).",
+  "outputFormat": "Distinct order_id values.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Comparison is with the global maximum of per-order averages, not the order's own average.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "text": "authored-reference: order 1 quantities 2,8 (max 8); order 2 quantities 5 (avg 5); global max average 5 -> order 1 returned."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "per-order max",
+    "global max of per-order averages",
+    "strict comparison"
+  ],
+  "factsMissing": [
+    "official statement text (archive status missing-statement; no raw file)",
+    "official confirmation of this summary (requirementsVerified false)",
+    "whether the comparison is strict",
+    "output ordering"
+  ],
+  "questions": [
+    "Is the comparison strictly greater, and is output ordering specified?"
+  ],
+  "nextAction": "Fetch official page https://leetcode.com/problems/orders-with-maximum-quantity-above-average/description/ and confirm each listed fact; then set requirementsVerified."
+}

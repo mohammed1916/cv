@@ -1,0 +1,36 @@
+{
+  "number": "2797",
+  "title": "Partial Function with Placeholders",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/partial-function-with-placeholders/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Implement partial(fn, args): '_' placeholders in the stored argument list are filled left to right from later call arguments; remaining call arguments are appended.",
+  "inputFormat": "A function, a stored argument list containing '_' placeholders, and later call arguments.",
+  "outputFormat": "fn's return value for the assembled argument list.",
+  "officialConstraints": "unknown",
+  "tieRules": "not applicable",
+  "edgeRules": "Behaviour when fewer call arguments than placeholders are supplied is not verified.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "partial(f, [1,'_',3]) called with (2,4)",
+      "output": "f(1,2,3,4) (authored-reference)",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "placeholders filled left to right",
+    "remaining arguments appended"
+  ],
+  "factsMissing": [
+    "rule when a placeholder has no supplied argument",
+    "official example"
+  ],
+  "questions": [
+    "If fewer call arguments are supplied than placeholders, is the placeholder passed as the literal '_' or as undefined?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

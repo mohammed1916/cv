@@ -1,0 +1,33 @@
+{
+  "number": "2205",
+  "title": "The Number of Users That Are Eligible for Discount",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Stored-function contract: count distinct users with at least one purchase amount >= minAmount inside the supplied date interval.",
+  "inputFormat": "Purchases(user_id,time_stamp,amount) and function inputs (minAmount, start date, end date; order and types from knowledge, unverified).",
+  "outputFormat": "A count (integer) per manual draft; confirm.",
+  "officialConstraints": "unknown",
+  "tieRules": "Distinct users counted once.",
+  "edgeRules": "Interval inclusivity not settled.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "table and columns",
+    "count of distinct users",
+    "minAmount condition"
+  ],
+  "factsMissing": [
+    "official page text (HTTP 403 on fetch, not verified)",
+    "official numeric bounds",
+    "authored examples",
+    "function signature",
+    "interval inclusivity",
+    "count vs ids"
+  ],
+  "questions": [
+    "Confirm the function name and parameter order and types, and whether the date interval endpoints are inclusive."
+  ],
+  "nextAction": "Fetch official page or obtain a readable copy; then confirm the listed questions and author examples.",
+  "provenance": "Manual draft local-reference/leetcode/manual/2205.txt (knowledge-derived, not a recovered statement). Official URL https://leetcode.com/problems/<slug>/description/ returned HTTP 403 on 2026-11-03; no recovered raw statement exists in the archive."
+}

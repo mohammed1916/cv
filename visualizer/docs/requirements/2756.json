@@ -1,0 +1,38 @@
+{
+  "number": "2756",
+  "title": "Query Batching",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/query-batching/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Collect calls made within a time window into one underlying batch query and route each result to its caller.",
+  "inputFormat": "Unknown: API signature, batch timing and call arguments are not in the draft.",
+  "outputFormat": "Unknown: per-caller results and error routing are not in the draft.",
+  "officialConstraints": "unknown",
+  "tieRules": "unknown",
+  "edgeRules": "Batch timing, error routing and maximum batch size are not stated.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "unknown",
+      "output": "unknown",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task intent: batching within a time window"
+  ],
+  "factsMissing": [
+    "API signature",
+    "time-window length and unit",
+    "batch-size limit",
+    "error routing",
+    "official example"
+  ],
+  "questions": [
+    "What is the exact function signature for the batched query, the window length in milliseconds, and how is an error from the batch delivered to each caller?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

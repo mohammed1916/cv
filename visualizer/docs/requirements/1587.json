@@ -1,0 +1,36 @@
+{
+  "number": "1587",
+  "title": "Bank Account Summary II",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return the name and balance for accounts whose total transaction amount is greater than 10000.",
+  "inputFormat": "SQL. Users(account, name); Transactions(trans_id, account, amount, transacted_on); negative amounts are withdrawals.",
+  "outputFormat": "SQL result: name and balance (sum of amounts).",
+  "officialConstraints": "unknown",
+  "tieRules": "Unknown.",
+  "edgeRules": "Accounts with no transactions are not included (sum would be NULL).",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "account 1 amounts 6000 and 5000 (total 11000)",
+      "expected": "name, 11000"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "balance sum",
+    "greater than 10000 strictly"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "output ordering"
+  ],
+  "questions": [
+    "Is the threshold strict, and is an ordering required?"
+  ],
+  "nextAction": "Confirm threshold and ordering.",
+  "officialUrl": "https://leetcode.com/problems/bank-account-summary-ii/description/"
+}

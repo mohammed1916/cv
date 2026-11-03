@@ -1,0 +1,65 @@
+{
+  "number": "1179",
+  "title": "Reformat Department Table",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/reformat-department-table/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "Pivot the month values of Department into columns Jan_Revenue through Dec_Revenue, returning one row per department id. A month with no row for that id yields NULL in that column.",
+  "inputFormat": "Department(id, revenue, month) where month is one of 'Jan' through 'Dec'; (id, month) is assumed unique.",
+  "outputFormat": "Columns id, Jan_Revenue, Feb_Revenue, ... Dec_Revenue; one row per id.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable: one row per id.",
+  "edgeRules": "Missing month values become NULL. Uniqueness of (id, month) is to be verified; if not unique, the aggregation rule is not stated.",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "department": [
+        [
+          1,
+          8000,
+          "Jan"
+        ],
+        [
+          1,
+          9000,
+          "Feb"
+        ],
+        [
+          2,
+          6000,
+          "Jan"
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          8000,
+          9000,
+          null
+        ],
+        [
+          2,
+          6000,
+          null,
+          null
+        ]
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "SQL task statement"
+  ],
+  "factsMissing": [
+    "aggregation rule if (id, month) is not unique",
+    "output row order",
+    "column order"
+  ],
+  "questions": [
+    "If one (id, month) pair has more than one revenue row, is the value summed or is it an error? The draft asks for verification; nothing confirms uniqueness."
+  ],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

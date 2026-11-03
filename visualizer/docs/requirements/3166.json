@@ -1,0 +1,29 @@
+{
+  "number": "3166",
+  "title": "Calculate Parking Fees and Duration",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Per car, compute total fees, average hourly rate, and the lot where the car spent the most time.",
+  "inputFormat": "ParkingTransactions(transaction_id, car_id, lot_id, entry_time, exit_time, fee_paid).",
+  "outputFormat": "Per car: total fee, average hourly rate and lot (column names not stated).",
+  "officialConstraints": "unknown",
+  "tieRules": "Unknown.",
+  "edgeRules": "How the average hourly rate is weighted, rounding, and the lot tie-break rule are not stated.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "SQL input table names and columns (from manual draft)",
+    "primary task rule (from manual draft)",
+    "official page reference https://leetcode.com/problems/calculate-parking-fees-and-duration/description/"
+  ],
+  "factsMissing": [
+    "official statement not fetched or confirmed",
+    "exact output column names and row order",
+    "authored validation example"
+  ],
+  "questions": [
+    "Define average hourly rate (total fee divided by total hours, or mean of per-visit rates), rounding, and the tie-break for lots."
+  ],
+  "nextAction": "Fetch the official /description/ page for this problem and confirm the summary, then record the exact output columns, ordering and tie rules; author and validate a teaching example (labelled authored-reference)."
+}

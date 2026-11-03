@@ -1,0 +1,37 @@
+{
+  "number": "1709",
+  "title": "Biggest Window Between Visits",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "archiveStatus": "missing-statement (no raw file in local-reference/leetcode/raw)",
+  "officialUrl": "https://leetcode.com/problems/biggest-window-between-visits/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each user, the largest gap in days between consecutive visits, including the gap from the user's last visit to the fixed observation date 2021-01-01.",
+  "inputFormat": "UserVisits(user_id, visit_date) with dates in 2020 (visit_date bounds to be confirmed).",
+  "outputFormat": "Columns user_id, biggest_window; ordered by user_id.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable to a single value per user.",
+  "edgeRules": "A user with one visit has the gap from that visit to 2021-01-01. The end date is fixed at 2021-01-01, not the max visit date.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "text": "authored-reference: visits 2020-01-01 and 2020-01-04 -> gaps 3 and 363 (to 2021-01-01) -> biggest_window 363."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "gap definition (consecutive visits plus last visit to fixed end date)",
+    "output columns",
+    "output ordering"
+  ],
+  "factsMissing": [
+    "official statement text (archive status missing-statement; no raw file)",
+    "official confirmation of this summary (requirementsVerified false)",
+    "exact day-difference convention (whether 2021-01-01 itself is counted)",
+    "whether a visit on 2021-01-01 is allowed"
+  ],
+  "questions": [
+    "Confirm the day-count convention: is the gap the difference in calendar days? Is a visit dated 2021-01-01 allowed, and how is it treated?"
+  ],
+  "nextAction": "Fetch official page https://leetcode.com/problems/biggest-window-between-visits/description/ and confirm each listed fact; then set requirementsVerified."
+}

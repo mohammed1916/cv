@@ -1,0 +1,68 @@
+{
+  "number": "1113",
+  "title": "Reported Posts",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/reported-posts/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "For reports made on 2019-07-04, count the distinct posts reported for each reason. The reason is the value stored in extra. Repeated reports of the same post for the same reason count once.",
+  "inputFormat": "Actions(user_id, post_id, action_date, action, extra); action is 'report' or 'view' etc.; extra holds the reason for reports.",
+  "outputFormat": "Columns report_reason and report_count; one row per reason that has reports on that date.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable: one row per reason.",
+  "edgeRules": "Only rows with action 'report' on 2019-07-04 are counted; the draft names the date but the action literal is not stated.",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "actions": [
+        [
+          1,
+          10,
+          "2019-07-04",
+          "report",
+          "spam"
+        ],
+        [
+          2,
+          10,
+          "2019-07-04",
+          "report",
+          "spam"
+        ],
+        [
+          3,
+          11,
+          "2019-07-04",
+          "report",
+          "racism"
+        ]
+      ],
+      "expected": [
+        [
+          "spam",
+          1
+        ],
+        [
+          "racism",
+          1
+        ]
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "SQL task statement"
+  ],
+  "factsMissing": [
+    "the action literal that marks a report",
+    "output row order",
+    "handling of NULL extra"
+  ],
+  "questions": [
+    "Which action value marks a report? The draft does not state the literal.",
+    "Are rows with NULL extra counted under a NULL reason, or excluded? Not stated."
+  ],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

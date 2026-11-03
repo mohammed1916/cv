@@ -1,0 +1,74 @@
+{
+  "number": "1083",
+  "title": "Sales Analysis II",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/sales-analysis-ii/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "Return buyer_id for every buyer who bought product 'S8' and never bought product 'iPhone'. Other purchases do not disqualify the buyer.",
+  "inputFormat": "Product(product_id, product_name, unit_price); Sales(seller_id, product_id, buyer_id, sale_date, quantity, price). Product names are matched by exact literals.",
+  "outputFormat": "One column buyer_id; one row per qualifying buyer.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable: distinct buyers.",
+  "edgeRules": "A buyer with no sales does not qualify. The draft asks to check the exact product-name literals.",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "product": [
+        [
+          1,
+          "S8"
+        ],
+        [
+          2,
+          "iPhone"
+        ],
+        [
+          3,
+          "Galaxy"
+        ]
+      ],
+      "sales": [
+        [
+          1,
+          1,
+          10
+        ],
+        [
+          2,
+          2,
+          10
+        ],
+        [
+          1,
+          3,
+          11
+        ],
+        [
+          3,
+          1,
+          12
+        ]
+      ],
+      "expected": [
+        [
+          11
+        ]
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "SQL task statement"
+  ],
+  "factsMissing": [
+    "exact product-name literals (draft asks to verify)",
+    "output row order"
+  ],
+  "questions": [
+    "Are the names 'S8' and 'iPhone' the exact literals in the official table? The draft asks for this check and nothing confirms it."
+  ],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

@@ -1,0 +1,37 @@
+{
+  "number": "1527",
+  "title": "Patients With a Condition",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return patients who have at least one diagnosis code beginning with DIAB1.",
+  "inputFormat": "SQL. Patients(patient_id, patient_name, conditions) where conditions is a space-separated list of codes.",
+  "outputFormat": "SQL result: patient_id, patient_name and conditions for matching patients.",
+  "officialConstraints": "unknown",
+  "tieRules": "No ties rule stated.",
+  "edgeRules": "Match the start of a code, not a substring inside a later code (draft-derived). 'XDIAB1' does not count.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "'DIAB100 ACNE' and 'ACNE DIAB1'",
+      "expected": "first row yes (DIAB100 starts with DIAB1); second no"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "prefix rule",
+    "space-separated codes"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "whether the code must match a whole token starting with DIAB1 (e.g. 'DIAB100')",
+    "output ordering"
+  ],
+  "questions": [
+    "Does a code such as DIAB100 count, and is there an ordering for the output?"
+  ],
+  "nextAction": "Confirm token-start rule.",
+  "officialUrl": "https://leetcode.com/problems/patients-with-a-condition/description/"
+}

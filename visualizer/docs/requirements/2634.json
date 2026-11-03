@@ -1,0 +1,41 @@
+{
+  "number": 2634,
+  "title": "Filter Elements from Array",
+  "source": "https://leetcode.com/problems/filter-elements-from-array/description/",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft-knowledge-derived",
+  "contentKind": "original-requirements-summary",
+  "problemClass": "JavaScript array function",
+  "summary": "filter(arr, fn) returns elements for which fn(value, index) is truthy in original order; must not use Array.filter or mutate input.",
+  "inputFormat": "filter(arr: any[], fn: (value, index) => any) -> any[]",
+  "outputFormat": "new array of matched elements",
+  "officialConstraints": "unknown (official constraints not retrieved)",
+  "tieRules": "not applicable",
+  "edgeRules": [
+    "original order",
+    "truthy test on fn return value"
+  ],
+  "examples": [
+    {
+      "input": "[0,1,2,3], x => x>1",
+      "output": "[2,3]",
+      "authored": true
+    }
+  ],
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Official page fetch on 2026-11-03 returned HTTP 403 (WebFetch); statement not retrieved this pass. Recovered-archive index lists missing-statement for this ID.",
+  "factsPresent": [
+    "title",
+    "task summary from manual draft",
+    "signature/semantics from draft"
+  ],
+  "factsMissing": [
+    "whether fn receives the array argument as well"
+  ],
+  "questions": [
+    "Is a third argument passed to fn?"
+  ],
+  "nextAction": "Confirm callback arguments on official page.",
+  "signature": "filter(arr: any[], fn: (value, index) => any) -> any[]"
+}

@@ -1,0 +1,33 @@
+{
+  "number": 1212,
+  "title": "Team Scores in Football Tournament",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1212.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/team-scores-in-football-tournament/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Each win gives 3 points, each draw 1 point and each loss 0 points. Return every team with its team_id, team_name and num_points, including teams with no matches.",
+  "inputFormat": "Teams(team_id, team_name); Matches(match_id, host_team, guest_team, host_goals, guest_goals).",
+  "outputFormat": "Columns team_id, team_name, num_points.",
+  "officialConstraints": "unknown",
+  "tieRules": "Ordered by num_points descending, then team_id ascending.",
+  "edgeRules": "Teams with no matches have num_points 0.",
+  "examples": {
+    "label": "authored-reference",
+    "note": "Teams 1 A, 2 B, 3 C; match host 1 guest 2 goals 3-1. Expected rows: (1, A, 3), (2, B, 0), (3, C, 0). [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "point values",
+    "output columns",
+    "ordering",
+    "zero-match inclusion"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)"
+  ],
+  "questions": [],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

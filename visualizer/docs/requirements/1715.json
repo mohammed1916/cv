@@ -1,0 +1,36 @@
+{
+  "number": "1715",
+  "title": "Count Apples and Oranges",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "archiveStatus": "missing-statement (no raw file in local-reference/leetcode/raw)",
+  "officialUrl": "https://leetcode.com/problems/count-apples-and-oranges/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Total apples and oranges across all boxes, where a box whose chest reference is set also contributes its chest's fruit.",
+  "inputFormat": "Boxes(box_id, chest_id, apple_count, orange_count) with nullable chest_id; Chests(chest_id, apple_count, orange_count).",
+  "outputFormat": "A single row with total apple_count and orange_count.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "A box with NULL chest_id contributes only its own fruit.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "text": "authored-reference: box apples 1 oranges 2 with chest apples 3 oranges 4; box with no chest apples 5 oranges 0 -> apples 9, oranges 6."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "summation rule",
+    "null chest behaviour"
+  ],
+  "factsMissing": [
+    "official statement text (archive status missing-statement; no raw file)",
+    "official confirmation of this summary (requirementsVerified false)",
+    "output column names",
+    "whether a box referencing a missing chest id is possible"
+  ],
+  "questions": [
+    "What are the required output column names for the two totals?"
+  ],
+  "nextAction": "Fetch official page https://leetcode.com/problems/count-apples-and-oranges/description/ and confirm each listed fact; then set requirementsVerified."
+}

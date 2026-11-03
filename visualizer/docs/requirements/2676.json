@@ -1,0 +1,43 @@
+{
+  "number": 2676,
+  "title": "Throttle",
+  "source": "https://leetcode.com/problems/throttle/description/",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft-knowledge-derived",
+  "contentKind": "original-requirements-summary",
+  "problemClass": "JavaScript timer",
+  "summary": "throttle(fn, t): first call invokes immediately; during the next t ms calls are suppressed but the latest arguments are remembered; at the window boundary fn is invoked once with the remembered arguments if any arrived, and another t-window starts; continues until no pending call remains.",
+  "inputFormat": "throttle(fn, t: integer) -> (...args) => void",
+  "outputFormat": "fn invoked at leading edge and at trailing boundaries",
+  "officialConstraints": "unknown (official constraints not retrieved)",
+  "tieRules": "latest arguments win",
+  "edgeRules": [
+    "leading call immediate",
+    "trailing call uses latest arguments",
+    "window restarts after trailing invocation"
+  ],
+  "examples": [
+    {
+      "sequence": "t=100: call at 0, 50, 120",
+      "output": "invokes at 0 and at 100 with the 50 ms args, then window restarts",
+      "authored": true
+    }
+  ],
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Official page fetch on 2026-11-03 returned HTTP 403 (WebFetch); statement not retrieved this pass. Recovered-archive index lists missing-statement for this ID.",
+  "factsPresent": [
+    "title",
+    "task summary from manual draft",
+    "signature/semantics from draft"
+  ],
+  "factsMissing": [
+    "exact boundary scheduling (inclusive/exclusive)",
+    "this-binding"
+  ],
+  "questions": [
+    "At exactly t ms after the window opens, does a pending call fire?"
+  ],
+  "nextAction": "Confirm boundary scheduling on official page.",
+  "signature": "throttle(fn, t: integer) -> (...args) => void"
+}

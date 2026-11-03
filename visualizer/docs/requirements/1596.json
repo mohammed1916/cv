@@ -1,0 +1,37 @@
+{
+  "number": "1596",
+  "title": "The Most Frequently Ordered Products for Each Customer",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each customer, return every product tied for that customer's highest number of orders.",
+  "inputFormat": "SQL. Customers(customer_id, name); Orders(order_id, order_date, customer_id, product_id); Products(product_id, product_name, price).",
+  "outputFormat": "SQL result: customer_id, product_id, product_name.",
+  "officialConstraints": "unknown",
+  "tieRules": "All products tied for the maximum order count are returned.",
+  "edgeRules": "Customers with no orders are not returned.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "customer 1 orders product A twice, product B once",
+      "expected": "customer 1 product A"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "max count per customer",
+    "ties kept"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "whether count is distinct order_id or row count",
+    "output ordering"
+  ],
+  "questions": [
+    "Is the count per product the number of orders or of rows, and what ordering is required?"
+  ],
+  "nextAction": "Confirm count definition and ordering.",
+  "officialUrl": "https://leetcode.com/problems/the-most-frequently-ordered-products-for-each-customer/description/"
+}

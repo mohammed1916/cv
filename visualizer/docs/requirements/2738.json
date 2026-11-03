@@ -1,0 +1,30 @@
+{
+  "number": "2738",
+  "title": "Count Occurrences in Text",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialConstraints": "unknown",
+  "examples": [],
+  "requirementsVerified": false,
+  "summary": "Count whole-word occurrences of bull and bear across the content of files, returning a row for each word including zero counts.",
+  "inputFormat": "Files(file_name, content).",
+  "outputFormat": "One row per word with its count (column names not recorded).",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Case sensitivity and word-boundary rule are not settled. Whether the count is files containing the word or total occurrences is unresolved.",
+  "factsPresent": [
+    "Whole-word match of bull and bear",
+    "Zero count rows included"
+  ],
+  "factsMissing": [
+    "Whether the count is files or occurrences",
+    "Case rule",
+    "Output column names"
+  ],
+  "questions": [
+    "Is the count the number of occurrences or the number of files containing the word?",
+    "Is matching case-sensitive, and what are the output column names?"
+  ],
+  "nextAction": "Obtain the official statement (recovered raw archive has none for this ID); confirm the listed missing facts, then set requirementsVerified only if an official page confirms them. Official base URL in the manual draft; not fetched in this pass.",
+  "examplesNote": "No authored example in this pass; authored-reference examples to be added after the statement is confirmed."
+}

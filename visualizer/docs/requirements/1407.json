@@ -1,0 +1,32 @@
+{
+  "number": 1407,
+  "title": "Top Travellers",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1407.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/top-travellers/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return each user's name and travelled_distance, the sum of ride distances, with 0 for users without rides.",
+  "inputFormat": "Users(id, name); Rides(id, user_id, distance).",
+  "outputFormat": "name, travelled_distance.",
+  "officialConstraints": "unknown",
+  "tieRules": "Sorted by travelled_distance descending, then name ascending.",
+  "edgeRules": "Users with no rides have distance 0.",
+  "examples": {
+    "label": "authored-reference",
+    "note": "Alice rides 120 and 80; Bob has none. Expected: (Alice, 200), (Bob, 0). [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "sum rule",
+    "zero rule",
+    "ordering"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)"
+  ],
+  "questions": [],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

@@ -1,0 +1,62 @@
+{
+  "number": "1045",
+  "title": "Customers Who Bought All Products",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/customers-who-bought-all-products/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "Return customer_id for every customer whose purchases cover every product_key listed in Product. Repeated purchases of one product do not count toward another.",
+  "inputFormat": "Customer(customer_id, product_key): purchase rows, may repeat. Product(product_key): one row per listed product.",
+  "outputFormat": "One column customer_id; one row per qualifying customer.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable: each customer appears once.",
+  "edgeRules": "Duplicate purchases never substitute for a missing product. Customers who bought nothing do not qualify unless Product is empty (not stated).",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "customer": [
+        [
+          1,
+          "A"
+        ],
+        [
+          1,
+          "A"
+        ],
+        [
+          1,
+          "B"
+        ],
+        [
+          2,
+          "A"
+        ]
+      ],
+      "product": [
+        "A",
+        "B"
+      ],
+      "expectedCustomerIds": [
+        1
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "SQL task statement",
+    "output column name",
+    "duplicate-purchase rule"
+  ],
+  "factsMissing": [
+    "row order of the output",
+    "behaviour when Product is empty",
+    "uniqueness of product_key in Product"
+  ],
+  "questions": [
+    "What order must the output rows follow? The draft says nothing; the rule is needed before tests can compare row order.",
+    "When Product has no rows, do customers with any purchase qualify, or does the result become empty? The rule is not stated."
+  ],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

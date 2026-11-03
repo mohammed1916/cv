@@ -1,0 +1,18 @@
+{
+  "number": 2647,
+  "title": "Color the Triangle Red",
+  "contentKind": "independently-written-requirements",
+  "requirementsVerified": false,
+  "examples": [],
+  "exampleStatus": "Source examples not copied; worked illustrations are independently authored in clarification.",
+  "summary": "The triangular board contains n*n initially white unit triangles. Neighbors share an edge. Choose initial red cells; repeatedly turn a white cell red when it has at least two red neighbors. Return coordinates of a MINIMUM-CARDINALITY initial set that eventually colors the whole board. Any optimal set is accepted.",
+  "clarification": "Authored worked example n=4: seed (1,1),(2,3),(3,2),(4,1),(4,3),(4,5),(4,7). Then color (2,2),(2,1),(4,2),(3,1),(4,4),(3,3),(3,4),(4,6),(3,5). Each step has two red neighbors. Optimality: the board has 16 cells and 18 adjacency edges. Each nonseed needs two edges to earlier red cells; each edge can count at most once. Thus 2*(16-k)<=18, so k>=7, achieved here.",
+  "source": "https://leetcode.doocs.org/en/lc/2647/",
+  "officialUrl": "https://leetcode.com/problems/color-the-triangle-red/",
+  "sourceKind": "public-community-reference",
+  "checkedOn": "2026-11-03",
+  "constraintsReportedBySource": "1<=n<=1000; row r has 2*r-1 unit triangles; coordinates are one-based.",
+  "verificationStatus": "community-reproduction-read; official text not independently confirmed",
+  "officialConstraints": "Official-page confirmation pending. See constraintsReportedBySource for the bounds in the community reproduction.",
+  "questionResolution": "Specific CLAUDE-QUESTIONS.md question answered; source confidence recorded separately."
+}

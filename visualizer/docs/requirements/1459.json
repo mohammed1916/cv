@@ -1,0 +1,38 @@
+{
+  "number": "1459",
+  "title": "Rectangles Area",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Each pair of distinct points defines an axis-aligned rectangle with them as opposite corners. Return every pair that gives a positive area.",
+  "inputFormat": "SQL. Points(id, x_value, y_value), id primary key, values int.",
+  "outputFormat": "SQL result with p1, p2 and area; sorted by area descending, then p1 and p2 ascending.",
+  "officialConstraints": "unknown",
+  "tieRules": "Sort: area descending, p1 ascending, p2 ascending. Each unordered pair appears once.",
+  "edgeRules": "Pairs sharing an x or y value have zero area and are excluded. area = |x1-x2| * |y1-y2|.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "points (1,1),(3,4),(3,1)",
+      "expected": "(1,1)-(3,4) area 6 only; (1,1)-(3,1) has zero height and is excluded"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "area formula",
+    "positive-area requirement",
+    "sort keys"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "exact representation of p1 and p2 in output (draft gives only 'p1<p2')",
+    "meaning of p1<p2 (by id or by coordinates)"
+  ],
+  "questions": [
+    "What is the exact output format of p1 and p2, and what does 'p1<p2' compare: point id or coordinates?"
+  ],
+  "nextAction": "Confirm output format of p1/p2 and the p1<p2 comparison.",
+  "officialUrl": "https://leetcode.com/problems/rectangles-area/description/"
+}

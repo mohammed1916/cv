@@ -1,0 +1,36 @@
+{
+  "number": "2776",
+  "title": "Convert Callback Based Function to Promise Based Function",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/convert-callback-based-function-to-promise-based-function/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Convert a callback-style asynchronous function into one returning a promise, forwarding arguments and mapping callback success or error to resolution or rejection.",
+  "inputFormat": "A callback-style function and its arguments.",
+  "outputFormat": "A promise-returning function.",
+  "officialConstraints": "unknown",
+  "tieRules": "not applicable",
+  "edgeRules": "The callback argument convention (error-first or success-only) is not verified.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "cb-style f(x, cb) calling cb(null, x*2)",
+      "output": "promise resolving to x*2 (authored-reference)",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "argument forwarding",
+    "success to resolve, error to reject"
+  ],
+  "factsMissing": [
+    "exact callback argument convention",
+    "official example"
+  ],
+  "questions": [
+    "Does the callback receive (error, value) with error as the first argument, or is a different convention used?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

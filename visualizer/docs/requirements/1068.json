@@ -1,0 +1,85 @@
+{
+  "number": "1068",
+  "title": "Product Sales Analysis I",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/product-sales-analysis-i/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "For every Sales row, return the product name, year and price, looking up the name from Product by product_id.",
+  "inputFormat": "Sales(sale_id, product_id, year, quantity, price), keyed by (sale_id, year); Product(product_id, product_name).",
+  "outputFormat": "Columns product_name, year, price; one row per Sales record.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable: no aggregation.",
+  "edgeRules": "A sale whose product_id has no Product row is not stated (inner or outer join); the draft does not say.",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "sales": [
+        [
+          1,
+          100,
+          2008,
+          10,
+          5000
+        ],
+        [
+          2,
+          100,
+          2009,
+          12,
+          5000
+        ],
+        [
+          7,
+          200,
+          2011,
+          15,
+          9000
+        ]
+      ],
+      "product": [
+        [
+          100,
+          "Nokia"
+        ],
+        [
+          200,
+          "Apple"
+        ]
+      ],
+      "expected": [
+        [
+          "Nokia",
+          2008,
+          5000
+        ],
+        [
+          "Nokia",
+          2009,
+          5000
+        ],
+        [
+          "Apple",
+          2011,
+          9000
+        ]
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "SQL task statement",
+    "table columns from draft"
+  ],
+  "factsMissing": [
+    "row order",
+    "unmatched product_id handling"
+  ],
+  "questions": [
+    "Which row order is required, if any?",
+    "If a Sales row has no matching Product row, must it be dropped or returned with a NULL name? The draft is silent."
+  ],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

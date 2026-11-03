@@ -1,0 +1,33 @@
+{
+  "number": "2112",
+  "title": "The Airport With the Most Traffic",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "SQL: total each airport's traffic as flights departing plus flights arriving; return every airport tied for the highest total.",
+  "inputFormat": "Flights(departure_airport,arrival_airport,flights_count).",
+  "outputFormat": "airport_id (name from manual draft is absent; confirm) and traffic total for tied airports.",
+  "officialConstraints": "unknown",
+  "tieRules": "All airports with the maximum total are returned.",
+  "edgeRules": "Airports appearing only as arrivals or only as departures still count.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "table and columns",
+    "sum both sides",
+    "tie returns all"
+  ],
+  "factsMissing": [
+    "official page text (HTTP 403 on fetch, not verified)",
+    "official numeric bounds",
+    "authored examples",
+    "output column name",
+    "output ordering"
+  ],
+  "questions": [
+    "Confirm the output column name and whether rows must be ordered by airport_id."
+  ],
+  "nextAction": "Fetch official page or obtain a readable copy; then confirm the listed questions and author examples.",
+  "provenance": "Manual draft local-reference/leetcode/manual/2112.txt (knowledge-derived, not a recovered statement). Official URL https://leetcode.com/problems/<slug>/description/ returned HTTP 403 on 2026-11-03; no recovered raw statement exists in the archive.",
+  "officialUrl": "https://leetcode.com/problems/the-airport-with-the-most-traffic/description/"
+}

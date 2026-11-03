@@ -1,0 +1,79 @@
+{
+  "number": "1077",
+  "title": "Project Employees III",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/project-employees-iii/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "Within each project, find the greatest experience_years among its employees and return every (project_id, employee_id) whose experience equals that maximum. All tied employees are returned.",
+  "inputFormat": "Project(project_id, employee_id); Employee(employee_id, name, experience_years).",
+  "outputFormat": "Columns project_id and employee_id; one row per tied top employee in each project.",
+  "officialConstraints": "unknown",
+  "tieRules": "All employees tied at the project maximum are returned.",
+  "edgeRules": "Employees assigned to no project do not appear.",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "project": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "employee": [
+        [
+          1,
+          "A",
+          3
+        ],
+        [
+          2,
+          "B",
+          3
+        ],
+        [
+          3,
+          "C",
+          5
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ]
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "SQL task statement"
+  ],
+  "factsMissing": [
+    "output row order",
+    "guarantee of non-NULL experience_years"
+  ],
+  "questions": [
+    "Is output order required? The draft is silent.",
+    "Is experience_years guaranteed non-NULL? Not confirmed."
+  ],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

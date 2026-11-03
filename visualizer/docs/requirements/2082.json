@@ -1,0 +1,30 @@
+{
+  "number": "2082",
+  "title": "The Number of Rich Customers",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "SQL: count distinct customers who have at least one bill with amount strictly greater than 500.",
+  "inputFormat": "Store(bill_id,customer_id,amount).",
+  "outputFormat": "One row, rich_count (name from manual draft).",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable (single count).",
+  "edgeRules": "Summing small purchases does not qualify; only a single bill above 500 counts.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "table and columns",
+    "condition amount > 500",
+    "distinct customers",
+    "output name rich_count"
+  ],
+  "factsMissing": [
+    "official page text (HTTP 403 on fetch, not verified)",
+    "official numeric bounds",
+    "authored examples"
+  ],
+  "questions": [],
+  "nextAction": "Fetch official page or obtain a readable copy; then confirm the listed questions and author examples.",
+  "provenance": "Manual draft local-reference/leetcode/manual/2082.txt (knowledge-derived, not a recovered statement). Official URL https://leetcode.com/problems/<slug>/description/ returned HTTP 403 on 2026-11-03; no recovered raw statement exists in the archive.",
+  "officialUrl": "https://leetcode.com/problems/the-number-of-rich-customers/description/"
+}

@@ -4,11 +4,15 @@
   "source": "https://leetcode.doocs.org/en/lc/4004/",
   "officialUrl": "https://leetcode.com/problems/minimum-moves-to-balance-circular-array-ii/",
   "sourceKind": "public-community-reference",
-  "checkedOn": "2026-11-02",
+  "checkedOn": "2026-11-03",
   "contentKind": "independently-written-requirements",
-  "summary": "People occupy a circular array of integer balances. A move transfers one unit to a neighboring person. Return the fewest moves that make all balances nonnegative, or -1 if impossible. This variant may contain multiple deficits; do not assume only one negative balance.",
+  "summary": "One move transfers one unit from a person to either circular neighbor. Minimize moves until every balance is nonnegative. Multiple negative entries are allowed, and final balances need not be equal. Return -1 if impossible. There is no prescribed minimum-move formula in the statement.",
   "requirementsVerified": false,
-  "officialConstraints": "Not fully checked against the current official statement. Numeric bounds and interface details require review.",
+  "officialConstraints": "Official-page confirmation pending. See constraintsReportedBySource for the bounds in the community reproduction.",
   "examples": [],
-  "exampleStatus": "No source examples copied. Author and independently validate teaching examples."
+  "exampleStatus": "No source examples copied. Author and independently validate teaching examples.",
+  "clarification": "Derived feasibility: a negative total is impossible by conservation; a nonnegative total is sufficient because surplus can be routed along the connected ring. Authored example [3,-1,0,-2] needs three moves: send one unit from 0 to 1 and two from 0 to 3. Three deficit units give a matching lower bound.",
+  "constraintsReportedBySource": "1<=n<=1000; -100000<=balance[i]<=100000.",
+  "verificationStatus": "community-reproduction-read; official text not independently confirmed",
+  "questionResolution": "Specific CLAUDE-QUESTIONS.md question answered; source confidence recorded separately."
 }

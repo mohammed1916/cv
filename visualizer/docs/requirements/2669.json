@@ -1,0 +1,29 @@
+{
+  "number": "2669",
+  "title": "Count Artist Occurrences On Spotify Ranking List",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialConstraints": "unknown",
+  "examples": [],
+  "requirementsVerified": false,
+  "summary": "Count how many ranking records each artist appears in, returning artist and occurrences sorted by occurrences descending, then artist ascending.",
+  "inputFormat": "SpotifyRanking(id, artist, track, position).",
+  "outputFormat": "artist and occurrences.",
+  "tieRules": "Equal counts ordered by artist ascending.",
+  "edgeRules": "Whether repeated tracks are counted once or every row is counted is not settled by the draft.",
+  "factsPresent": [
+    "Count per artist",
+    "Sort: occurrences descending, artist ascending"
+  ],
+  "factsMissing": [
+    "Whether distinct tracks or rows are counted",
+    "Output alias for the count"
+  ],
+  "questions": [
+    "Does one occurrence mean one row, or one distinct track per artist?",
+    "What is the exact output column name for the count?"
+  ],
+  "nextAction": "Obtain the official statement (recovered raw archive has none for this ID); confirm the listed missing facts, then set requirementsVerified only if an official page confirms them. Official base URL in the manual draft; not fetched in this pass.",
+  "examplesNote": "No authored example in this pass; authored-reference examples to be added after the statement is confirmed."
+}

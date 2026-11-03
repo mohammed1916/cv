@@ -1,0 +1,33 @@
+{
+  "number": "1607",
+  "title": "Sellers With No Sales",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return names of sellers who had no sales in calendar year 2020.",
+  "inputFormat": "SQL. Customer(customer_id, customer_name); Orders(order_id, sale_date, order_cost, customer_id, seller_id); Seller(seller_id, seller_name).",
+  "outputFormat": "SQL result: seller_name for qualifying sellers, sorted by seller_name ascending.",
+  "officialConstraints": "unknown",
+  "tieRules": "Each seller appears once.",
+  "edgeRules": "Sales in other years do not disqualify a seller.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "seller X sold in 2019 only",
+      "expected": "X included"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "2020 window",
+    "sort by seller_name"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)"
+  ],
+  "questions": [],
+  "nextAction": "Confirm against official statement.",
+  "officialUrl": "https://leetcode.com/problems/sellers-with-no-sales/description/"
+}

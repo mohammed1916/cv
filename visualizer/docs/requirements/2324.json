@@ -1,0 +1,32 @@
+{
+  "number": "2324",
+  "title": "Product Sales Analysis IV",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "SQL: per user, the products with the greatest total spending (sum of quantity times price); include all tied products.",
+  "inputFormat": "Sales(sale_id,product_id,user_id,quantity) and Product(product_id,price).",
+  "outputFormat": "user_id and product_id (output aliases to confirm).",
+  "officialConstraints": "unknown",
+  "tieRules": "All products tied at the user's maximum are returned.",
+  "edgeRules": "Not applicable.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "two tables",
+    "spend = quantity*price",
+    "tie inclusion"
+  ],
+  "factsMissing": [
+    "official page text (HTTP 403 on fetch, not verified)",
+    "official numeric bounds",
+    "authored examples",
+    "output ordering",
+    "exact output aliases"
+  ],
+  "questions": [
+    "Confirm output ordering and exact aliases."
+  ],
+  "nextAction": "Fetch official page or obtain a readable copy; then confirm the listed questions and author examples.",
+  "provenance": "Manual draft local-reference/leetcode/manual/2324.txt (knowledge-derived, not a recovered statement). Official URL https://leetcode.com/problems/<slug>/description/ returned HTTP 403 on 2026-11-03; no recovered raw statement exists in the archive."
+}

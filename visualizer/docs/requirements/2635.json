@@ -1,0 +1,41 @@
+{
+  "number": 2635,
+  "title": "Apply Transform Over Each Element in Array",
+  "source": "https://leetcode.com/problems/apply-transform-over-each-element-in-array/description/",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft-knowledge-derived",
+  "contentKind": "original-requirements-summary",
+  "problemClass": "JavaScript array function",
+  "summary": "map(arr, fn) returns fn(value, index) for each element in order; must not use Array.map or mutate input.",
+  "inputFormat": "map(arr: any[], fn: (value, index) => any) -> any[]",
+  "outputFormat": "new array of transformed values",
+  "officialConstraints": "unknown (official constraints not retrieved)",
+  "tieRules": "not applicable",
+  "edgeRules": [
+    "order preserved",
+    "no mutation"
+  ],
+  "examples": [
+    {
+      "input": "[1,2], (x,i)=>x+i",
+      "output": "[1,3]",
+      "authored": true
+    }
+  ],
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Official page fetch on 2026-11-03 returned HTTP 403 (WebFetch); statement not retrieved this pass. Recovered-archive index lists missing-statement for this ID.",
+  "factsPresent": [
+    "title",
+    "task summary from manual draft",
+    "signature/semantics from draft"
+  ],
+  "factsMissing": [
+    "whether fn receives the array argument"
+  ],
+  "questions": [
+    "Is a third argument passed to fn?"
+  ],
+  "nextAction": "Confirm callback arguments on official page.",
+  "signature": "map(arr: any[], fn: (value, index) => any) -> any[]"
+}

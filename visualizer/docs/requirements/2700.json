@@ -1,0 +1,40 @@
+{
+  "number": "2700",
+  "title": "Differences Between Two Objects",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/differences-between-two-objects/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Compare two JSON-compatible values and return the differing values at shared keys as [oldValue, newValue], recursing into nested shared keys.",
+  "inputFormat": "Two JSON-compatible objects (or arrays).",
+  "outputFormat": "An object containing only the differing shared keys, each mapped to [obj1Value, obj2Value]; nested differences retained.",
+  "officialConstraints": "unknown",
+  "tieRules": "not applicable",
+  "edgeRules": "Keys present on only one side are ignored. Arrays compare shared numeric indices. How a differing container type (object versus array) is represented is not stated.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "{a:1,b:{c:2}} vs {a:2,b:{c:3}}",
+      "output": "{a:[1,2], b:{c:[2,3]}} (authored-reference)",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "shared-key rule",
+    "one-sided key rule",
+    "array index rule",
+    "return shape for differing values"
+  ],
+  "factsMissing": [
+    "representation when one side is an array and the other an object",
+    "whether equal values are omitted",
+    "official bounds and example"
+  ],
+  "questions": [
+    "When obj1 is an array and obj2 is an object at a shared key, what is the expected representation: [array, object] or omitted?",
+    "Are equal nested values omitted entirely from the result, or kept as empty objects?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

@@ -1,0 +1,42 @@
+{
+  "number": 2690,
+  "title": "Infinite Method Object",
+  "source": "https://leetcode.com/problems/infinite-method-object/description/",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft-knowledge-derived",
+  "contentKind": "original-requirements-summary",
+  "problemClass": "JavaScript Proxy/API",
+  "summary": "createInfiniteObject() returns an object for which calling any string-named property as a method returns that property's name.",
+  "inputFormat": "createInfiniteObject() -> object",
+  "outputFormat": "property name string when called as method",
+  "officialConstraints": "unknown (official constraints not retrieved)",
+  "tieRules": "not applicable",
+  "edgeRules": [
+    "any string property name works",
+    "symbol-property behavior not stated"
+  ],
+  "examples": [
+    {
+      "sequence": "obj.foo()",
+      "output": "'foo'",
+      "authored": true
+    }
+  ],
+  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "requirementsVerified": false,
+  "sourceAttempt": "Official page fetch on 2026-11-03 returned HTTP 403 (WebFetch); statement not retrieved this pass. Recovered-archive index lists missing-statement for this ID.",
+  "factsPresent": [
+    "title",
+    "task summary from manual draft",
+    "signature/semantics from draft"
+  ],
+  "factsMissing": [
+    "symbol property behavior",
+    "whether non-method access returns something"
+  ],
+  "questions": [
+    "Are Symbol-keyed properties in the domain?"
+  ],
+  "nextAction": "Confirm property domain on official page.",
+  "signature": "createInfiniteObject() -> object"
+}

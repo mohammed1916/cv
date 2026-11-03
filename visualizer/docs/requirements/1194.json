@@ -1,0 +1,36 @@
+{
+  "number": 1194,
+  "title": "Tournament Winners",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1194.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/tournament-winners/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each group, sum every player's points over both match positions (first_player with first_score, second_player with second_score) and return the group's player with the highest total. Players with no matches score zero.",
+  "inputFormat": "Players(player_id, group_id) with player_id unique; Matches(match_id, first_player, second_player, first_score, second_score) with match_id unique.",
+  "outputFormat": "One row per group: the winning player for that group.",
+  "officialConstraints": "unknown",
+  "tieRules": "Highest total wins; equal totals are broken by the smaller player_id.",
+  "edgeRules": "Players absent from Matches count as zero points and remain eligible to win.",
+  "examples": {
+    "label": "authored-reference",
+    "note": "Players 1(g1), 2(g1), 3(g2); Match 1: first 1 score 15, second 2 score 20. Expected: g1 -> player 2 (20 points), g2 -> player 3 (0 points). [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "input tables and columns",
+    "winner rule",
+    "tie rule",
+    "zero-match rule"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)",
+    "output column names and ordering"
+  ],
+  "questions": [
+    "Exact output column names and row order are not stated in the draft; confirm them from the official statement."
+  ],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

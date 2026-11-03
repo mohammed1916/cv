@@ -1,0 +1,37 @@
+{
+  "number": "2803",
+  "title": "Factorial Generator",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/factorial-generator/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Implement a generator yielding factorial values in sequence while maintaining the running product.",
+  "inputFormat": "Unknown: the generator takes no argument in the draft; the sequence bound is not stated.",
+  "outputFormat": "Successive factorial values.",
+  "officialConstraints": "unknown",
+  "tieRules": "not applicable",
+  "edgeRules": "Whether the first yield is 0! or 1! is not verified; both equal 1, so the first two yields could repeat.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "first yields",
+      "output": "1, 1, 2, 6 (authored-reference)",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "generator yields factorials",
+    "running product maintained"
+  ],
+  "factsMissing": [
+    "starting index (0! or 1!)",
+    "whether the sequence is unbounded",
+    "official example"
+  ],
+  "questions": [
+    "Does the generator start at 0! or 1!, and is the sequence infinite or bounded?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

@@ -1,0 +1,31 @@
+{
+  "number": "2228",
+  "title": "Users With Two Purchases Within Seven Days",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "SQL: return distinct users who have two purchases whose dates differ by at most seven days; same-day distinct purchases count as separate events.",
+  "inputFormat": "Purchases(purchase_id,user_id,purchase_date).",
+  "outputFormat": "Distinct user_id ordered ascending.",
+  "officialConstraints": "unknown",
+  "tieRules": "Same-day purchases are distinct events (per manual draft).",
+  "edgeRules": "Exact seven-day difference qualifies per draft; not settled.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "table and columns",
+    "distinct users",
+    "same-day separate events"
+  ],
+  "factsMissing": [
+    "official page text (HTTP 403 on fetch, not verified)",
+    "official numeric bounds",
+    "authored examples",
+    "whether difference <= 7 or < 7"
+  ],
+  "questions": [
+    "Confirm whether a difference of exactly seven days qualifies (<= 7) or only less than seven."
+  ],
+  "nextAction": "Fetch official page or obtain a readable copy; then confirm the listed questions and author examples.",
+  "provenance": "Manual draft local-reference/leetcode/manual/2228.txt (knowledge-derived, not a recovered statement). Official URL https://leetcode.com/problems/<slug>/description/ returned HTTP 403 on 2026-11-03; no recovered raw statement exists in the archive."
+}

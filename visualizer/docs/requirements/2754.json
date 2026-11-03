@@ -1,0 +1,37 @@
+{
+  "number": "2754",
+  "title": "Bind Function to Context",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/bind-function-to-context/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Implement a bind-like utility that returns a function invoking the original with a fixed this-context, prebound arguments, followed by call-time arguments.",
+  "inputFormat": "A function, a context value, and prebound arguments.",
+  "outputFormat": "A new function whose call invokes the original with the bound this and the combined arguments.",
+  "officialConstraints": "unknown",
+  "tieRules": "not applicable",
+  "edgeRules": "The required prototype method name, constructor (new) behaviour and built-in restrictions are not verified.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "f(a,b){return this.x+a+b}, bound with {x:1}, arg 2 then call with 3",
+      "output": "6 (authored-reference)",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "fixed context rule",
+    "prebound then call-time argument order"
+  ],
+  "factsMissing": [
+    "exact method name and attachment",
+    "behaviour when the bound function is used with new",
+    "official example"
+  ],
+  "questions": [
+    "Must the bound function support being called with new, and what is the exact method name to add?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

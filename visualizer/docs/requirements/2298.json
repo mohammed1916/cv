@@ -1,0 +1,31 @@
+{
+  "number": "2298",
+  "title": "Tasks Count in the Weekend",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "SQL: count task submissions on Saturday/Sunday as weekend_cnt and on Monday-Friday as working_cnt.",
+  "inputFormat": "Tasks(task_id,assignee_id,submit_date).",
+  "outputFormat": "One row with weekend_cnt and working_cnt.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Weekday must come from the calendar date.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "table and columns",
+    "weekday split",
+    "output names"
+  ],
+  "factsMissing": [
+    "official page text (HTTP 403 on fetch, not verified)",
+    "official numeric bounds",
+    "authored examples",
+    "whether counts are per task row or distinct tasks"
+  ],
+  "questions": [
+    "Confirm whether submissions are counted per row or per distinct task_id."
+  ],
+  "nextAction": "Fetch official page or obtain a readable copy; then confirm the listed questions and author examples.",
+  "provenance": "Manual draft local-reference/leetcode/manual/2298.txt (knowledge-derived, not a recovered statement). Official URL https://leetcode.com/problems/<slug>/description/ returned HTTP 403 on 2026-11-03; no recovered raw statement exists in the archive."
+}

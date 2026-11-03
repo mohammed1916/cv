@@ -1,0 +1,30 @@
+{
+  "number": "2853",
+  "title": "Highest Salaries Difference",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialConstraints": "unknown",
+  "examples": [],
+  "requirementsVerified": false,
+  "summary": "Return the absolute difference between the largest salary in Marketing and the largest salary in Engineering.",
+  "inputFormat": "Salaries(employee_id, employee_name, salary, department).",
+  "outputFormat": "One value (alias not recorded).",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Department spelling and case, and whether both departments always exist, are not settled.",
+  "factsPresent": [
+    "Max salary per named department",
+    "Absolute difference"
+  ],
+  "factsMissing": [
+    "Department literal spelling/case",
+    "Guarantee that both departments exist",
+    "Output alias"
+  ],
+  "questions": [
+    "Are the department literals exactly Marketing and Engineering, and are both always present?",
+    "What output alias is required?"
+  ],
+  "nextAction": "Obtain the official statement (recovered raw archive has none for this ID); confirm the listed missing facts, then set requirementsVerified only if an official page confirms them. Official base URL in the manual draft; not fetched in this pass.",
+  "examplesNote": "No authored example in this pass; authored-reference examples to be added after the statement is confirmed."
+}

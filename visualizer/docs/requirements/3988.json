@@ -1,13 +1,18 @@
 {
   "number": 3988,
   "title": "Create Grid With Exactly K Paths I",
-  "source": "https://leetcode.com/problems/create-grid-with-exactly-k-paths-i/description/",
-  "checkedOn": "2026-11-02",
+  "source": "https://leetcode.com/problems/create-grid-with-exactly-k-paths-i/",
+  "checkedOn": "2026-11-03",
   "sourceKind": "official-page-via-web-tool",
   "contentKind": "independently-written-requirements",
-  "summary": "Construct an m-by-n grid of '.' free cells and '#' obstacles with exactly k free-cell paths from top-left to bottom-right using only right/down steps. Return any valid grid, or an empty array if impossible.",
-  "officialConstraints": "m,n each1..10; k1..4.",
+  "summary": "Inputs m,n,k fix the output dimensions. Return an array of m strings, each length n, containing only . and #. A path uses only free cells, starts top-left, ends bottom-right, and moves right or down. Exactly k distinct paths must exist. Return [] only when no valid grid exists. Any valid grid is accepted; no prescribed construction is part of the requirements.",
+  "officialConstraints": "1<=m,n<=10; 1<=k<=4.",
   "requirementsVerified": true,
   "examples": [],
-  "exampleStatus": "Author and independently check examples; no source examples copied into public presets."
+  "exampleStatus": "Author and independently check examples; no source examples copied into public presets.",
+  "clarification": "Authored example: m=3,n=2,k=3 permits [\"..\",\"..\",\"..\"], whose paths are RDD, DRD, DDR. With m=2,n=1,k=3, return [] because even the fully open grid has only one path.",
+  "officialUrl": "https://leetcode.com/problems/create-grid-with-exactly-k-paths-i/",
+  "constraintsReportedBySource": "1<=m,n<=10; 1<=k<=4.",
+  "verificationStatus": "official-page-read",
+  "questionResolution": "Specific CLAUDE-QUESTIONS.md question answered; source confidence recorded separately."
 }

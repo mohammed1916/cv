@@ -1,0 +1,37 @@
+{
+  "number": "2066",
+  "title": "Account Balance",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "archiveStatus": "missing-statement (no raw file in local-reference/leetcode/raw)",
+  "officialUrl": "https://leetcode.com/problems/account-balance/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each account, return the cumulative balance (deposits minus withdrawals) at each day, in chronological order.",
+  "inputFormat": "Transactions(account_id, day, type, amount); type literals to verify (e.g. Deposit, Withdraw).",
+  "outputFormat": "Columns account_id, day, balance; ordered by account_id then day.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Per-account, per-day uniqueness not confirmed; the draft asks to check it before choosing a window frame.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "text": "authored-reference: account 1 deposits 100 on day 1, withdraws 30 on day 2 -> balances 100 and 70."
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "cumulative sum per account",
+    "deposit/withdraw sign rule",
+    "chronological order"
+  ],
+  "factsMissing": [
+    "official statement text (archive status missing-statement; no raw file)",
+    "official confirmation of this summary (requirementsVerified false)",
+    "exact type literals",
+    "whether a day can have multiple transactions per account and how to order them"
+  ],
+  "questions": [
+    "What are the exact type literals, and can one account have several transactions on the same day?"
+  ],
+  "nextAction": "Fetch official page https://leetcode.com/problems/account-balance/description/ and confirm each listed fact; then set requirementsVerified."
+}

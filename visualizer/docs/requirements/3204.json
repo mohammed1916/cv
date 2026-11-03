@@ -1,0 +1,29 @@
+{
+  "number": "3204",
+  "title": "Bitwise User Permissions Analysis",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Return the bitwise AND and bitwise OR of permissions across all users.",
+  "inputFormat": "user_permissions(user_id, permissions) with integer permission masks.",
+  "outputFormat": "One row with the AND and OR aggregates (aliases not stated).",
+  "officialConstraints": "unknown",
+  "tieRules": "Unknown.",
+  "edgeRules": "Behaviour on an empty table (NULL or 0) is not stated.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "SQL input table names and columns (from manual draft)",
+    "primary task rule (from manual draft)",
+    "official page reference https://leetcode.com/problems/bitwise-user-permissions-analysis/description/"
+  ],
+  "factsMissing": [
+    "official statement not fetched or confirmed",
+    "exact output column names and row order",
+    "authored validation example"
+  ],
+  "questions": [
+    "Required output aliases and the result for an empty table."
+  ],
+  "nextAction": "Fetch the official /description/ page for this problem and confirm the summary, then record the exact output columns, ordering and tie rules; author and validate a teaching example (labelled authored-reference)."
+}

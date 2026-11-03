@@ -1,0 +1,67 @@
+{
+  "number": "1050",
+  "title": "Actors and Directors Who Cooperated At Least Three Times",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/actors-and-directors-who-cooperated-at-least-three-times/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "Return the (actor_id, director_id) pairs that have at least three collaboration records.",
+  "inputFormat": "ActorDirector(actor_id, director_id, timestamp): one row per collaboration event; timestamp is not part of the answer.",
+  "outputFormat": "Columns actor_id and director_id; one row per pair meeting the threshold.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable: each pair appears once.",
+  "edgeRules": "Counts are over all rows for the pair, so the timestamp does not matter. Exactly three rows qualify; two do not.",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "rows": [
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          2,
+          1,
+          4
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          1
+        ]
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "table and column names",
+    "threshold of three"
+  ],
+  "factsMissing": [
+    "row order of the output",
+    "whether timestamp duplicates are possible (the draft says the table is keyed by timestamp, which conflicts with multiple rows per pair; confirm the key)"
+  ],
+  "questions": [
+    "The draft says ActorDirector is keyed by timestamp, yet a pair can have many rows. Which column set is the primary key? Without it, uniqueness assumptions cannot be checked."
+  ],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

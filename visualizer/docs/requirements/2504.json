@@ -1,0 +1,29 @@
+{
+  "number": "2504",
+  "title": "Concatenate the Name and the Profession",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialConstraints": "unknown",
+  "examples": [],
+  "requirementsVerified": false,
+  "summary": "For each person, return person_id and a display name formed from name and the first letter of profession in parentheses, for example Name(P).",
+  "inputFormat": "Person(person_id, name, profession).",
+  "outputFormat": "person_id and a display string (column alias and sort order not recorded).",
+  "tieRules": "Sort order not recorded.",
+  "edgeRules": "Case of the letter and handling of NULL profession not stated.",
+  "factsPresent": [
+    "Display form Name(X) where X is the first letter of profession"
+  ],
+  "factsMissing": [
+    "Exact display format and spacing",
+    "Sort order",
+    "Handling of NULL profession"
+  ],
+  "questions": [
+    "What exact display string format is required (spacing, case of the letter)?",
+    "Required sort order and how NULL professions are handled?"
+  ],
+  "nextAction": "Obtain the official statement (recovered raw archive has none for this ID); confirm the listed missing facts, then set requirementsVerified only if an official page confirms them. Official base URL in the manual draft; not fetched in this pass.",
+  "examplesNote": "No authored example in this pass; authored-reference examples to be added after the statement is confirmed."
+}

@@ -1,0 +1,36 @@
+{
+  "number": 1225,
+  "title": "Report Contiguous Dates",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1225.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/report-contiguous-dates/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "Within 2019, group adjacent calendar dates that share the same outcome (failed or succeeded) into maximal runs. Return period_state, start_date and end_date for each run, ordered by start_date.",
+  "inputFormat": "Failed(fail_date) and Succeeded(success_date), one row per date in each table.",
+  "outputFormat": "period_state (failed or succeeded), start_date, end_date.",
+  "officialConstraints": "unknown",
+  "tieRules": "Runs are ordered by start_date.",
+  "edgeRules": "Adjacent means consecutive calendar days; the draft does not say whether a date can appear in both tables.",
+  "examples": {
+    "label": "authored-reference",
+    "note": "Failed 2019-01-01 and 2019-01-02; Succeeded 2019-01-03. Expected: (failed, 2019-01-01, 2019-01-02), (succeeded, 2019-01-03, 2019-01-03). [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "2019 filter",
+    "run definition",
+    "output columns",
+    "ordering"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)",
+    "overlap of dates between tables"
+  ],
+  "questions": [
+    "Can one calendar date appear in both Failed and Succeeded? The run rule depends on the answer."
+  ],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

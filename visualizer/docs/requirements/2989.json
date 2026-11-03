@@ -1,0 +1,28 @@
+{
+  "number": "2989",
+  "title": "Class Performance",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialConstraints": "unknown",
+  "examples": [],
+  "requirementsVerified": false,
+  "summary": "For each student, compute the total of three assignment scores, then return the difference between the greatest and the least total.",
+  "inputFormat": "Scores(student_id, student_name, assignment1, assignment2, assignment3).",
+  "outputFormat": "One value (alias not recorded).",
+  "tieRules": "Not applicable.",
+  "edgeRules": "NULL score handling not recorded.",
+  "factsPresent": [
+    "Sum of three assignments per student",
+    "Max minus min of totals"
+  ],
+  "factsMissing": [
+    "Output alias",
+    "NULL score handling"
+  ],
+  "questions": [
+    "What is the exact output alias, and how are NULL assignment scores treated?"
+  ],
+  "nextAction": "Obtain the official statement (recovered raw archive has none for this ID); confirm the listed missing facts, then set requirementsVerified only if an official page confirms them. Official base URL in the manual draft; not fetched in this pass.",
+  "examplesNote": "No authored example in this pass; authored-reference examples to be added after the statement is confirmed."
+}

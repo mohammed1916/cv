@@ -1,0 +1,36 @@
+{
+  "number": "1623",
+  "title": "All Valid Triplets That Can Represent a Country",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Choose one student from each of three schools so that all three student_ids differ and all three student_names differ.",
+  "inputFormat": "SQL. SchoolA, SchoolB and SchoolC each have student_id and student_name.",
+  "outputFormat": "SQL result with one row per valid triplet; column aliases from the source.",
+  "officialConstraints": "unknown",
+  "tieRules": "Unknown.",
+  "edgeRules": "IDs pairwise distinct and names pairwise distinct across the three schools.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "validationOnly": true,
+      "input": "A: (1,Ann); B: (2,Ann), (3,Bob); C: (4,Cat)",
+      "expected": "valid (1,Ann),(3,Bob),(4,Cat) only; (1,Ann),(2,Ann) fails names"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "distinct ids and names rule"
+  ],
+  "factsMissing": [
+    "official page at base URL and /description/ not fetched in this pass",
+    "no recovered raw statement (index status missing-statement)",
+    "exact output column aliases",
+    "output ordering"
+  ],
+  "questions": [
+    "What output column names and ordering are required?"
+  ],
+  "nextAction": "Confirm aliases.",
+  "officialUrl": "https://leetcode.com/problems/all-valid-triplets-that-can-represent-a-country/description/"
+}

@@ -1,0 +1,33 @@
+{
+  "number": 3338,
+  "title": "Second Highest Salary II",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "source": "https://leetcode.com/problems/second-highest-salary-ii/description/",
+  "summary": "SQL. Employees(emp_id, name, salary, dept). Return the second-highest distinct salary per department with required employee details.",
+  "inputFormat": "Employees(emp_id, name, salary, dept).",
+  "outputFormat": "Unknown: returned columns.",
+  "officialConstraints": "unknown",
+  "tieRules": "Unknown whether all tied employees appear.",
+  "edgeRules": "Unknown whether departments with fewer than two distinct salaries are omitted or shown as null.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "title",
+    "task category (SQL)",
+    "manual draft summary"
+  ],
+  "factsMissing": [
+    "officialConstraints",
+    "exact output columns and ordering",
+    "tie rules",
+    "edge rules",
+    "authored examples",
+    "official verification (official page HTTP 403 on 2026-11-03)"
+  ],
+  "questions": [
+    "For a department with fewer than two distinct salaries, is it omitted or returned as null? Do all employees tied on the second salary appear? Exact output columns?"
+  ],
+  "nextAction": "Obtain the official statement (official page returned HTTP 403 to WebFetch on 2026-11-03) or a readable community reproduction; then fill outputFormat, ties and edges and author validation examples labelled authored-reference."
+}

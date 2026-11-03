@@ -1,0 +1,70 @@
+{
+  "number": "1070",
+  "title": "Product Sales Analysis III",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "officialUrl": "https://leetcode.com/problems/product-sales-analysis-iii/description/",
+  "rawStatement": "missing: not in local-reference/leetcode/raw (index marks Missing)",
+  "summary": "For each product, find its earliest sale year, then return every Sales row for that product in that year: product_id, first_year, quantity and price. All rows from the earliest year are kept, not one chosen.",
+  "inputFormat": "Sales(sale_id, product_id, year, quantity, price).",
+  "outputFormat": "Columns product_id, first_year, quantity, price; one row per Sales row in a product's earliest year.",
+  "officialConstraints": "unknown",
+  "tieRules": "If several rows fall in the earliest year, all are returned (ties are kept).",
+  "edgeRules": "A product with one earliest-year sale returns one row.",
+  "examples": [
+    {
+      "kind": "authored-reference",
+      "sales": [
+        [
+          1,
+          100,
+          2008,
+          10,
+          5000
+        ],
+        [
+          2,
+          100,
+          2008,
+          12,
+          5000
+        ],
+        [
+          7,
+          100,
+          2009,
+          15,
+          9000
+        ]
+      ],
+      "expected": [
+        [
+          100,
+          2008,
+          10,
+          5000
+        ],
+        [
+          100,
+          2008,
+          12,
+          5000
+        ]
+      ]
+    }
+  ],
+  "requirementsVerified": false,
+  "provenance": "Derived from the local manual draft (model-authored, source verification pending) and general SQL knowledge; official page not fetched in this pass.",
+  "factsPresent": [
+    "SQL task statement",
+    "table columns from draft"
+  ],
+  "factsMissing": [
+    "output row order"
+  ],
+  "questions": [
+    "Is output order required? The draft is silent."
+  ],
+  "nextAction": "Fetch the official /description/ page to confirm the table schema, output columns, row order and any rounding rule; then mark requirementsVerified true or record the exact differing rule."
+}

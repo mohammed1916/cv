@@ -1,0 +1,36 @@
+{
+  "number": 1322,
+  "title": "Ads Performance",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceNote": "AI-authored requirements draft local-reference/leetcode/manual/1322.txt; no recovered raw statement exists in the archive (index status missing-statement).",
+  "officialUrl": "https://leetcode.com/problems/ads-performance/description/",
+  "contentKind": "original-requirements-summary",
+  "summary": "For each ad_id compute ctr as 100 times clicked divided by (clicked plus viewed), rounded to two decimals. Ignored records are excluded from the denominator. With no clicks or views, ctr is zero.",
+  "inputFormat": "Ads(ad_id, user_id, action) where action is Clicked, Viewed or Ignored.",
+  "outputFormat": "ad_id, ctr.",
+  "officialConstraints": "unknown",
+  "tieRules": "Sorted by ctr descending, then ad_id ascending.",
+  "edgeRules": "An ad with only Ignored rows is an open question (the draft says ctr is zero when there are no clicks or views, which implies it is included).",
+  "examples": {
+    "label": "authored-reference",
+    "note": "Ad 1 with one Clicked and one Viewed: ctr 50.00. Ad 2 with only Ignored: ctr 0.00. [authored-reference]"
+  },
+  "requirementsVerified": false,
+  "factsPresent": [
+    "task",
+    "ctr formula",
+    "ignored exclusion",
+    "zero rule",
+    "ordering"
+  ],
+  "factsMissing": [
+    "official statement text (not recovered; not checked on the official page)",
+    "official numeric bounds and interface details (not verified)",
+    "inclusion of all-ignored ads"
+  ],
+  "questions": [
+    "Is an ad whose records are all Ignored included in the output?"
+  ],
+  "nextAction": "Open the official base problem URL and confirm every rule listed in summary, inputFormat, outputFormat and tieRules; then set requirementsVerified true."
+}

@@ -1,0 +1,37 @@
+{
+  "number": "2794",
+  "title": "Create Object from Two Arrays",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/create-object-from-two-arrays/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Given parallel keys and values arrays, return an object that pairs them. When a key repeats, keep its first paired value.",
+  "inputFormat": "Two arrays of equal length: keys and values.",
+  "outputFormat": "An object mapping each key to its value.",
+  "officialConstraints": "unknown",
+  "tieRules": "Duplicate keys: the first paired value is kept (per the draft, not verified).",
+  "edgeRules": "Key string coercion for non-string keys is not verified.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "keys ['a','b','a'], values [1,2,3]",
+      "output": "{a:1, b:2} (authored-reference)",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "pairing rule",
+    "first duplicate kept (draft)"
+  ],
+  "factsMissing": [
+    "official duplicate rule",
+    "key coercion behaviour",
+    "official example"
+  ],
+  "questions": [
+    "For a repeated key, is the first or the last value kept, and how are non-string keys (numbers, objects) converted?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}

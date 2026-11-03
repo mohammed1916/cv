@@ -1,0 +1,29 @@
+{
+  "number": "3054",
+  "title": "Binary Tree Nodes",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "Label each node Root when its parent is NULL, Inner when it has at least one child, otherwise Leaf.",
+  "inputFormat": "Tree(N, P) where P is the parent of N, NULL for the root.",
+  "outputFormat": "Columns N and a type label (names from draft).",
+  "officialConstraints": "unknown",
+  "tieRules": "Order by N ascending.",
+  "edgeRules": "A single-node tree is labelled Root (Root precedence).",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "SQL input table names and columns (from manual draft)",
+    "primary task rule (from manual draft)",
+    "official page reference https://leetcode.com/problems/binary-tree-nodes/description/"
+  ],
+  "factsMissing": [
+    "official statement not fetched or confirmed",
+    "exact output column names and row order",
+    "authored validation example"
+  ],
+  "questions": [
+    "Confirm the actual column names of this variant and the output alias."
+  ],
+  "nextAction": "Fetch the official /description/ page for this problem and confirm the summary, then record the exact output columns, ordering and tie rules; author and validate a teaching example (labelled authored-reference)."
+}

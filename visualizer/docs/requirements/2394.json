@@ -1,0 +1,32 @@
+{
+  "number": "2394",
+  "title": "Employees With Deductions",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "SQL: round each session's elapsed time up to a whole minute, sum minutes per employee, and return IDs whose total is below needed_hours times 60; include employees without logs.",
+  "inputFormat": "Employees(employee_id,needed_hours) and Logs(employee_id,in_time,out_time).",
+  "outputFormat": "employee_id list.",
+  "officialConstraints": "unknown",
+  "tieRules": "Not applicable.",
+  "edgeRules": "Employees without logs total 0 and are included when needed_hours is positive.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "two tables",
+    "minutes sum",
+    "strict below rule"
+  ],
+  "factsMissing": [
+    "official page text (HTTP 403 on fetch, not verified)",
+    "official numeric bounds",
+    "authored examples",
+    "per-session rounding rule confirmed (knowledge: ceiling to whole minute)",
+    "output ordering"
+  ],
+  "questions": [
+    "Confirm the per-session rounding (ceiling to a whole minute) and whether output must be ordered by employee_id."
+  ],
+  "nextAction": "Fetch official page or obtain a readable copy; then confirm the listed questions and author examples.",
+  "provenance": "Manual draft local-reference/leetcode/manual/2394.txt (knowledge-derived, not a recovered statement). Official URL https://leetcode.com/problems/<slug>/description/ returned HTTP 403 on 2026-11-03; no recovered raw statement exists in the archive."
+}

@@ -1,0 +1,34 @@
+{
+  "number": "2199",
+  "title": "Finding the Topic of Each Post",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "contentKind": "original-requirements-summary",
+  "summary": "SQL: assign each post every topic whose keyword appears as a whole word, case-insensitively; return a sorted topic list per post, or 'Ambiguous!' when none match.",
+  "inputFormat": "Keywords(topic_id,word) and Posts(post_id,content).",
+  "outputFormat": "post_id and a comma-separated topic list; output column name not stated.",
+  "officialConstraints": "unknown",
+  "tieRules": "Topic list ordering is 'sorted' per manual draft; exact sort key not stated.",
+  "edgeRules": "Whole-word and punctuation boundaries are not settled.",
+  "examples": [],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "two tables",
+    "case-insensitive whole-word match",
+    "'Ambiguous!' fallback"
+  ],
+  "factsMissing": [
+    "official page text (HTTP 403 on fetch, not verified)",
+    "official numeric bounds",
+    "authored examples",
+    "separator string",
+    "output column name",
+    "token boundary rule",
+    "topic sort key"
+  ],
+  "questions": [
+    "Confirm the separator in the topic list, the output column name, the token boundary (punctuation counts as separator?), and whether topic sort is by topic_id or by topic name."
+  ],
+  "nextAction": "Fetch official page or obtain a readable copy; then confirm the listed questions and author examples.",
+  "provenance": "Manual draft local-reference/leetcode/manual/2199.txt (knowledge-derived, not a recovered statement). Official URL https://leetcode.com/problems/<slug>/description/ returned HTTP 403 on 2026-11-03; no recovered raw statement exists in the archive."
+}

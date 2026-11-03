@@ -1,0 +1,39 @@
+{
+  "number": "2777",
+  "title": "Date Range Generator",
+  "checkedOn": "2026-11-03",
+  "sourceKind": "manual-draft",
+  "sourceUrl": "https://leetcode.com/problems/date-range-generator/description/",
+  "provenance": "knowledge-derived AI draft (local-reference/leetcode/manual); no recovered raw statement in archive; official page not fetched in this pass",
+  "contentKind": "original-requirements-summary",
+  "summary": "Implement a generator yielding formatted dates from a start date through an end date at a given day step.",
+  "inputFormat": "A start date, an end date, and a day step.",
+  "outputFormat": "Formatted date strings, one per yield.",
+  "officialConstraints": "unknown",
+  "tieRules": "not applicable",
+  "edgeRules": "Endpoint inclusivity, exact format, timezone semantics and allowed step signs are not verified.",
+  "examples": [
+    {
+      "label": "authored-reference",
+      "input": "2024-01-01 to 2024-01-03, step 1",
+      "output": "'2024-01-01','2024-01-02','2024-01-03' (authored-reference)",
+      "note": "for validation only; not a source example"
+    }
+  ],
+  "requirementsVerified": false,
+  "factsPresent": [
+    "generator yields dates",
+    "day step"
+  ],
+  "factsMissing": [
+    "endpoint inclusivity",
+    "output format",
+    "timezone rule",
+    "negative or zero step rule",
+    "official example"
+  ],
+  "questions": [
+    "Are both endpoints inclusive, what is the exact output format, and are negative or zero steps allowed?"
+  ],
+  "nextAction": "Fetch the official statement at sourceUrl and confirm the API, return/throw behaviour and edge rules; then update factsMissing and set requirementsVerified only if confirmed."
+}
