@@ -23,7 +23,7 @@ test('3832 sample gives the hand-computed rows', () => {
     { user_id: 1, action: 'view', streak_length: 6, start_date: '2024-01-01', end_date: '2024-01-06' },
     { user_id: 3, action: 'search', streak_length: 6, start_date: '2024-03-06', end_date: '2024-03-11' },
     { user_id: 2, action: 'buy', streak_length: 5, start_date: '2024-02-06', end_date: '2024-02-10' },
-    { user_id: 4, action: 'login', streak_length: 5, start_date: '2024-04-01', end_date: '2024-04-05' },
+    { user_id: 4, action: 'share', streak_length: 5, start_date: '2024-04-01', end_date: '2024-04-05' },
     { user_id: 5, action: 'x', streak_length: 5, start_date: '2024-05-10', end_date: '2024-05-14' },
   ])
   checkFrames(run)

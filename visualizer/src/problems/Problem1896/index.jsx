@@ -123,7 +123,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-cost-to-change-the-final-value-of-expression/',
   complexity: 'One pass over the tokens with a constant number of cases per node. The sample grammar reads operators left to right inside each parenthesised group.',
   examples: [
-    { label: 'Example', input: '{"expression":"1&(0|1)"}' },
+    { label: 'Example', input: '{"expression":"1|(0&1)"}' },
     { label: 'Nested', input: '{"expression":"((0&1)|1)"}' },
   ],
 }

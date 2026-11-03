@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { earliestAndLatest } from './algorithm.js'
 
 test('1900 two players that open as a pair meet in round 1', () => {
-  assert.deepEqual(earliestAndLatest(5, 1, 5), [1, 1])
+  assert.deepEqual(earliestAndLatest(6, 2, 5), [1, 1])
   assert.deepEqual(earliestAndLatest(4, 2, 3), [1, 1])
 })
 

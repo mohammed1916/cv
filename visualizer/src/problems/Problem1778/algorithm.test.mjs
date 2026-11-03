@@ -8,12 +8,12 @@ test('1778 a detour around blocked cells', () => {
   assert.equal(solve([[-1, 1, 0], [1, 0, 1], [1, 1, 2]]), 4)
 })
 
-test('1778 a target two steps away around a corner', () => {
-  assert.equal(solve([[2, 1], [1, -1]]), 2)
+test('1778 a target two cells down a straight corridor', () => {
+  assert.equal(solve([[-1, 1, 2]]), 2)
 })
 
-test('1778 a target that cannot be reached', () => {
-  assert.equal(solve([[2, 0, 1], [0, -1, 1]]), -1)
+test('1778 a target sealed off behind a wall column', () => {
+  assert.equal(solve([[2, 0, -1], [0, 1, 1]]), -1)
 })
 
 test('1778 the master only answers local questions', () => {

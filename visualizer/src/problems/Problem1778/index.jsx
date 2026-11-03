@@ -124,7 +124,7 @@ const definition = {
   complexity: 'Exploration visits each reachable cell and each edge a constant number of times; the search after exploration is breadth-first. The visual shows the full grid only for learning, the robot sees only neighbours.',
   examples: [
     { label: 'Example', input: '{"grid":[[1,1,0],[1,0,1],[1,1,1]],"target":[2,2]}' },
-    { label: 'Unreachable', input: '{"grid":[[1,0],[0,1]],"target":[1,1]}' },
+    { label: 'Walled off', input: '{"grid":[[1,0,1],[1,0,1]],"target":[0,2]}' },
   ],
 }
 

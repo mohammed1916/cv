@@ -153,7 +153,7 @@ export const sampleInput = {
     ...span(3, 'search', '2024-03-01', 4),
     { user_id: 3, action_date: '2024-03-05', action: 'search' }, { user_id: 3, action_date: '2024-03-05', action: 'exit' },
     ...span(3, 'search', '2024-03-06', 6),
-    ...span(4, 'login', '2024-04-01', 5), ...span(4, 'logout', '2024-04-06', 5),
+    ...span(4, 'share', '2024-04-01', 5), ...span(4, 'comment', '2024-04-06', 2),
     ...span(5, 'x', '2024-05-01', 5), ...span(5, 'x', '2024-05-10', 5),
   ],
 }

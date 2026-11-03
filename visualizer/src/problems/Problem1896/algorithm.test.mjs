@@ -25,7 +25,7 @@ function bruteForce(text) {
 }
 
 test('1896 a single operator inside a group', () => {
-  assert.equal(minCostToChangeFinalValue('1&(0|1)'), 1)
+  assert.equal(minCostToChangeFinalValue('1&(0&1)'), 1)
 })
 
 test('1896 a lone digit costs one edit', () => {
