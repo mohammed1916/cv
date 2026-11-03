@@ -1,0 +1,77 @@
+.great-tree {
+  display: grid;
+  gap: 12px;
+  color: var(--text, #1f2937);
+}
+.great-tree-svg {
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+  justify-self: center;
+}
+.great-tree-svg .edge {
+  stroke: #94a3b8;
+  stroke-width: 2;
+}
+.great-tree-svg .node circle {
+  fill: #f1f5f9;
+  stroke: #64748b;
+  stroke-width: 2;
+}
+.great-tree-svg .node-value {
+  fill: #0f172a;
+  font-weight: 700;
+  font-size: 14px;
+}
+.great-tree-svg .node-mark {
+  font-size: 16px;
+  font-weight: 700;
+}
+.great-tree-svg .node.current circle {
+  fill: #ddd6fe;
+  stroke: #6d28d9;
+  stroke-width: 4;
+}
+.great-tree-svg .node.counted circle {
+  fill: #d1fae5;
+  stroke: #047857;
+}
+.great-tree-svg .node.counted .node-mark {
+  fill: #047857;
+}
+.great-tree-svg .node.skipped circle {
+  fill: #e2e8f0;
+  stroke: #64748b;
+  stroke-dasharray: 4 3;
+}
+.great-tree-svg .node.skipped .node-mark {
+  fill: #b91c1c;
+}
+.great-tree-readout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #f1f5f9;
+}
+.great-tree-count {
+  font-weight: 700;
+}
+.great-tree-values {
+  margin: 0;
+  font-family: ui-monospace, monospace;
+  font-size: 0.9rem;
+}
+@media (prefers-color-scheme: dark) {
+  .great-tree { color: #e2e8f0; }
+  .great-tree-svg .edge { stroke: #64748b; }
+  .great-tree-svg .node circle { fill: #1e293b; stroke: #94a3b8; }
+  .great-tree-svg .node-value { fill: #f8fafc; }
+  .great-tree-svg .node.current circle { fill: #4c1d95; stroke: #c4b5fd; }
+  .great-tree-svg .node.counted circle { fill: #064e3b; stroke: #34d399; }
+  .great-tree-svg .node.counted .node-mark { fill: #6ee7b7; }
+  .great-tree-svg .node.skipped circle { fill: #334155; }
+  .great-tree-svg .node.skipped .node-mark { fill: #fca5a5; }
+  .great-tree-readout { background: #1e293b; }
+}

@@ -1,0 +1,87 @@
+.category-view {
+  display: grid;
+  gap: 14px;
+  color: var(--text, #1f2937);
+}
+.category-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.category-tile {
+  display: grid;
+  justify-items: center;
+  min-width: 52px;
+  padding: 8px 6px;
+  border: 2px solid #94a3b8;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+.category-tile .tile-index {
+  font-weight: 700;
+}
+.category-tile .tile-mark {
+  font-size: 0.8rem;
+}
+.category-tile.current {
+  outline: 3px solid #f59e0b;
+  outline-offset: 2px;
+}
+.category-tile.compared {
+  border-style: dashed;
+  border-color: #2563eb;
+}
+.category-tile.g1 { background: #ccfbf1; border-color: #0f766e; }
+.category-tile.g2 { background: #dbeafe; border-color: #1d4ed8; }
+.category-tile.g3 { background: #fee2e2; border-color: #b91c1c; }
+.category-tile.g4 { background: #ede9fe; border-color: #6d28d9; }
+.category-tile.g5 { background: #fef9c3; border-color: #a16207; }
+.category-tile.g6 { background: #fce7f3; border-color: #be185d; }
+.category-tile.g7 { background: #e0f2fe; border-color: #0369a1; }
+.category-tile.g8 { background: #ecfccb; border-color: #4d7c0f; }
+.category-query {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  align-items: baseline;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #f1f5f9;
+}
+.query-answer.yes { color: #047857; font-weight: 700; }
+.query-answer.no { color: #b91c1c; font-weight: 700; }
+.category-groups {
+  display: grid;
+  gap: 8px;
+}
+.category-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  align-items: baseline;
+  padding: 8px 12px;
+  border-left: 6px solid #94a3b8;
+  border-radius: 6px;
+  background: #f8fafc;
+}
+.category-group.g1 { border-color: #0f766e; }
+.category-group.g2 { border-color: #1d4ed8; }
+.category-group.g3 { border-color: #b91c1c; }
+.category-group.g4 { border-color: #6d28d9; }
+.category-group.g5 { border-color: #a16207; }
+.category-group.g6 { border-color: #be185d; }
+.category-group.g7 { border-color: #0369a1; }
+.category-group.g8 { border-color: #4d7c0f; }
+.group-rep,
+.group-members,
+.query-count,
+.empty-note {
+  color: #475569;
+  font-size: 0.9rem;
+}
+@media (prefers-color-scheme: dark) {
+  .category-view { color: #e2e8f0; }
+  .category-tile { background: #1e293b; }
+  .category-query, .category-group { background: #1e293b; }
+  .group-rep, .group-members, .query-count, .empty-note { color: #cbd5e1; }
+}
