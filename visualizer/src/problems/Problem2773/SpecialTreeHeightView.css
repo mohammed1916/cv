@@ -1,0 +1,52 @@
+.st-view {
+  --st-ink: #0f172a;
+  --st-muted: #475569;
+  --st-edge: #94a3b8;
+  --st-node-fill: #f8fafc;
+  --st-current: #7c3aed;
+  --st-current-fill: #ede9fe;
+  --st-pending: #0369a1;
+  --st-pending-fill: #e0f2fe;
+  --st-visited: #15803d;
+  --st-visited-fill: #dcfce7;
+  --st-chain: #b45309;
+  color: var(--st-ink);
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  .st-view:not([data-theme="light"]) {
+    --st-ink: #e2e8f0;
+    --st-muted: #94a3b8;
+    --st-edge: #475569;
+    --st-node-fill: #111827;
+    --st-current: #c4b5fd;
+    --st-current-fill: #4c1d95;
+    --st-pending: #7dd3fc;
+    --st-pending-fill: #0c4a6e;
+    --st-visited: #4ade80;
+    --st-visited-fill: #14532d;
+    --st-chain: #fbbf24;
+  }
+}
+
+.st-title { margin: 0; font-size: 0.95rem; }
+.st-empty { color: var(--st-muted); margin: 0; }
+.st-svg { width: 100%; height: auto; max-width: 560px; }
+.st-edge { stroke: var(--st-edge); stroke-width: 2; }
+.st-edge--dim { opacity: 0.45; }
+.st-chain { fill: none; stroke: var(--st-chain); stroke-width: 2; stroke-dasharray: 6 5; }
+.st-chain-label { fill: var(--st-chain); font-size: 12px; }
+.st-node circle { fill: var(--st-node-fill); stroke: var(--st-edge); stroke-width: 2.5; }
+.st-node text { fill: var(--st-ink); font-size: 14px; font-weight: 700; }
+.st-node--visited circle { fill: var(--st-visited-fill); stroke: var(--st-visited); }
+.st-node--pending circle { fill: var(--st-pending-fill); stroke: var(--st-pending); stroke-dasharray: 4 3; }
+.st-node--current circle { fill: var(--st-current-fill); stroke: var(--st-current); stroke-width: 4; }
+.st-node--leaf text { font-style: italic; }
+.st-tag { fill: var(--st-pending); font-size: 11px; font-weight: 600; }
+.st-readout p { margin: 2px 0; color: var(--st-muted); font-size: 0.92rem; }
+.st-readout strong { color: var(--st-ink); }
+.st-message { display: block; font-weight: 600; }
