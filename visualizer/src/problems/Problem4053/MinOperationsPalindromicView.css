@@ -1,0 +1,95 @@
+.mop-view {
+  display: grid;
+  gap: 14px;
+  padding: 12px;
+  color: inherit;
+}
+
+.mop-empty {
+  opacity: 0.75;
+}
+
+.mop-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mop-card {
+  display: grid;
+  gap: 6px;
+  min-width: 96px;
+  padding: 10px;
+  border: 1px solid rgba(127, 127, 127, 0.35);
+  border-radius: 10px;
+}
+
+.mop-card--current {
+  border-color: #b45309;
+  box-shadow: 0 0 0 2px rgba(180, 83, 9, 0.35);
+}
+
+.mop-card--done .mop-cost {
+  font-weight: 600;
+}
+
+.mop-kind {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.8;
+}
+
+.mop-digits {
+  display: flex;
+  gap: 4px;
+}
+
+.mop-digit {
+  display: inline-grid;
+  place-items: center;
+  min-width: 26px;
+  height: 28px;
+  border-radius: 6px;
+  background: rgba(127, 127, 127, 0.15);
+  font-variant-numeric: tabular-nums;
+}
+
+.mop-ladder {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+}
+
+.mop-ladder p {
+  margin: 0;
+}
+
+.mop-chip {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px dashed rgba(127, 127, 127, 0.6);
+}
+
+.mop-chip--chosen {
+  border-style: solid;
+  border-color: #b45309;
+  font-weight: 600;
+}
+
+.mop-chip--none {
+  opacity: 0.6;
+}
+
+.mop-total {
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .mop-view {
+    padding: 8px 16px;
+  }
+}

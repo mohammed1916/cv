@@ -1,0 +1,78 @@
+.at-view {
+  display: grid;
+  gap: 12px;
+  padding: 12px;
+  color: inherit;
+  overflow-x: auto;
+}
+
+.at-empty,
+.at-none,
+.at-caption,
+.at-stats p {
+  margin: 0;
+}
+
+.at-empty,
+.at-none {
+  opacity: 0.75;
+}
+
+.at-strip {
+  display: flex;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.at-value {
+  display: grid;
+  justify-items: center;
+  min-width: 48px;
+  padding: 6px 4px;
+  border: 1px solid rgba(127, 127, 127, 0.4);
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.at-value--pair {
+  border-color: #b45309;
+  background: rgba(180, 83, 9, 0.15);
+}
+
+.at-index {
+  font-size: 0.7rem;
+  font-weight: 400;
+  opacity: 0.6;
+}
+
+.at-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.at-table {
+  border-collapse: collapse;
+  min-width: 220px;
+}
+
+.at-table th,
+.at-table td {
+  padding: 4px 12px;
+  border-bottom: 1px solid rgba(127, 127, 127, 0.3);
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+}
+
+.at-table--top td {
+  font-weight: 700;
+  color: #15803d;
+}
+
+@media (max-width: 600px) {
+  .at-view {
+    padding: 8px 16px;
+  }
+}

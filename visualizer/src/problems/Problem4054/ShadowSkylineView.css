@@ -1,0 +1,94 @@
+.ss-view {
+  display: grid;
+  gap: 12px;
+  padding: 12px;
+  color: inherit;
+}
+
+.ss-empty {
+  opacity: 0.75;
+}
+
+.ss-skyline {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 260px;
+  padding: 8px 8px 0;
+  border-bottom: 2px solid rgba(127, 127, 127, 0.5);
+}
+
+.ss-level {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 2px dashed #0ea5e9;
+  pointer-events: none;
+}
+
+.ss-level span {
+  position: absolute;
+  right: 4px;
+  top: -20px;
+  font-size: 0.75rem;
+  color: #0369a1;
+}
+
+.ss-col {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  min-width: 26px;
+}
+
+.ss-value,
+.ss-index {
+  font-size: 0.75rem;
+  line-height: 1.2;
+}
+
+.ss-index {
+  opacity: 0.7;
+  padding-bottom: 2px;
+}
+
+.ss-bar {
+  width: 100%;
+  border-radius: 6px 6px 0 0;
+  background: rgba(127, 127, 127, 0.35);
+}
+
+.ss-col--anchor .ss-bar {
+  background: #0369a1;
+}
+
+.ss-col--scan .ss-bar {
+  background: #94a3b8;
+  outline: 2px dashed #64748b;
+}
+
+.ss-col--pair .ss-bar {
+  background: #15803d;
+}
+
+.ss-col--passed .ss-bar {
+  background: rgba(127, 127, 127, 0.2);
+}
+
+.ss-note {
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .ss-view {
+    padding: 8px 16px;
+  }
+
+  .ss-skyline {
+    gap: 4px;
+  }
+}

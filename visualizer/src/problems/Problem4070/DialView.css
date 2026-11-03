@@ -1,0 +1,93 @@
+.dial-view {
+  display: grid;
+  gap: 12px;
+  padding: 12px;
+  color: inherit;
+  justify-items: center;
+}
+
+.dial-empty,
+.dial-caption {
+  margin: 0;
+  text-align: center;
+}
+
+.dial-empty {
+  opacity: 0.75;
+}
+
+.dial-svg {
+  width: min(260px, 80vw);
+  height: auto;
+}
+
+.dial-face {
+  fill: rgba(127, 127, 127, 0.08);
+  stroke: rgba(127, 127, 127, 0.5);
+  stroke-width: 2;
+}
+
+.dial-digit {
+  fill: var(--dial-digit-fill, #ffffff);
+  stroke: rgba(127, 127, 127, 0.6);
+  stroke-width: 1.5;
+}
+
+.dial-digit--from {
+  stroke: #b45309;
+  stroke-width: 3;
+}
+
+.dial-digit--to {
+  fill: #0369a1;
+  stroke: #0369a1;
+}
+
+.dial-label {
+  font-size: 14px;
+  font-weight: 700;
+  fill: currentColor;
+}
+
+.dial-digit--to + .dial-label {
+  fill: #ffffff;
+}
+
+.dial-pointer {
+  stroke: rgba(127, 127, 127, 0.8);
+  stroke-width: 2;
+}
+
+.dial-turn {
+  stroke: #0369a1;
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.dial-string {
+  display: flex;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dial-char {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid rgba(127, 127, 127, 0.4);
+  font-variant-numeric: tabular-nums;
+}
+
+.dial-char--done {
+  opacity: 0.5;
+}
+
+.dial-char--current {
+  border-color: #0369a1;
+  box-shadow: 0 0 0 2px rgba(3, 105, 161, 0.35);
+  font-weight: 700;
+}

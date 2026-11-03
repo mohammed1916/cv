@@ -1,0 +1,92 @@
+.pt-view {
+  display: grid;
+  gap: 12px;
+  padding: 12px;
+  color: inherit;
+  overflow-x: auto;
+}
+
+.pt-empty {
+  opacity: 0.75;
+}
+
+.pt-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pt-label {
+  min-width: 72px;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.pt-cells {
+  display: flex;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pt-cell {
+  display: grid;
+  justify-items: center;
+  min-width: 52px;
+  padding: 6px 4px;
+  border: 1px solid rgba(127, 127, 127, 0.4);
+  border-radius: 8px;
+}
+
+.pt-value {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.pt-index {
+  font-size: 0.7rem;
+  opacity: 0.6;
+}
+
+.pt-cell--pair {
+  border-color: #b45309;
+  background: rgba(180, 83, 9, 0.15);
+}
+
+.pt-cell--match {
+  border-color: #15803d;
+  background: rgba(21, 128, 61, 0.12);
+}
+
+.pt-sums {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 0;
+}
+
+.pt-sums dt {
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+
+.pt-sums dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.pt-caption {
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .pt-view {
+    padding: 8px 16px;
+  }
+
+  .pt-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

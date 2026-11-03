@@ -1,0 +1,98 @@
+.sr-view {
+  display: grid;
+  gap: 12px;
+  padding: 12px;
+  color: inherit;
+  overflow-x: auto;
+}
+
+.sr-empty,
+.sr-caption {
+  margin: 0;
+}
+
+.sr-empty {
+  opacity: 0.75;
+}
+
+.sr-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sr-label {
+  min-width: 150px;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.sr-cells {
+  display: flex;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sr-cell {
+  display: grid;
+  justify-items: center;
+  min-width: 30px;
+  padding: 4px 2px;
+  border: 1px solid rgba(127, 127, 127, 0.4);
+  border-radius: 6px;
+}
+
+.sr-digit {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-index {
+  font-size: 0.65rem;
+  opacity: 0.6;
+}
+
+.sr-cell--suffix {
+  background: rgba(180, 83, 9, 0.12);
+  border-color: #b45309;
+}
+
+.sr-cell--start {
+  box-shadow: inset 3px 0 0 #b45309;
+}
+
+.sr-cell--preview {
+  background: rgba(21, 128, 61, 0.12);
+  border-color: #15803d;
+}
+
+.sr-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 0;
+}
+
+.sr-stats dt {
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+
+.sr-stats dd {
+  margin: 0;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 600px) {
+  .sr-view {
+    padding: 8px 16px;
+  }
+
+  .sr-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
