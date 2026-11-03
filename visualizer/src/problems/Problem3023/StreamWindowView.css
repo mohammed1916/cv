@@ -1,0 +1,85 @@
+.streamWindow {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 0.5rem 0;
+}
+
+.swRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.3rem;
+}
+
+.swLabel {
+  min-width: 4.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.swCell {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2.2rem;
+  border: 2px solid #cbd5e1;
+  border-radius: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.swCell small {
+  position: absolute;
+  top: -1rem;
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: #64748b;
+}
+
+.swPattern {
+  border-color: #7c3aed;
+  background: #f5f3ff;
+}
+
+.swInWindow {
+  background: #dbeafe;
+  border-color: #2563eb;
+}
+
+.swLast {
+  box-shadow: 0 0 0 3px #facc15;
+}
+
+.swActive-match {
+  background: #bbf7d0;
+  border-color: #15803d;
+}
+
+.swActive-mismatch {
+  background: #fecaca;
+  border-color: #b91c1c;
+}
+
+.swActive-none {
+  border-color: #f59e0b;
+}
+
+.swStatus {
+  margin: 0;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.swNote {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #475569;
+}
