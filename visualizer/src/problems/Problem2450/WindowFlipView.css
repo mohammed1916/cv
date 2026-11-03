@@ -1,0 +1,21 @@
+.flip-view { display: grid; gap: 10px; }
+.flip-view__string { display: grid;  gap: 4px; }
+.flip-view__bit { display: grid; justify-items: center; padding: 6px 2px; border: 2px solid #cbd5e1; border-radius: 6px; background: #f8fafc; color: #0f172a; }
+.flip-view__bit.is-in-window { background: #dbeafe; border-color: #2563eb; }
+.flip-view__bit.is-pivot { border: 3px solid #b45309; }
+.flip-view__index { font-size: 10px; color: #475569; }
+.flip-view__windows { display: grid;  gap: 4px; }
+.flip-view__window { padding: 4px 2px; border-radius: 4px; background: #e2e8f0; color: #334155; font-size: 12px; text-align: center; }
+.flip-view__window.is-counted { background: #bbf7d0; color: #14532d; }
+.flip-view__window.is-pivot { outline: 2px solid #b45309; }
+.flip-view__note { margin: 0; font-size: 14px; color: #1e293b; }
+.flip-view output { font-weight: 600; color: #14532d; }
+@media (prefers-color-scheme: dark) {
+  .flip-view__bit { background: #1e293b; color: #f8fafc; border-color: #475569; }
+  .flip-view__bit.is-in-window { background: #1e3a8a; border-color: #60a5fa; }
+  .flip-view__index { color: #cbd5e1; }
+  .flip-view__window { background: #334155; color: #e2e8f0; }
+  .flip-view__window.is-counted { background: #14532d; color: #dcfce7; }
+  .flip-view__note { color: #e2e8f0; }
+  .flip-view output { color: #86efac; }
+}

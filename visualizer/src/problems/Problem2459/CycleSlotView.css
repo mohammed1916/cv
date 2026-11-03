@@ -1,0 +1,21 @@
+.slot-view { display: grid; gap: 10px; }
+.slot-view__row { display: grid; grid-template-columns: repeat(auto-fit, minmax(84px, 1fr)); gap: 6px; }
+.slot-view__cell { display: grid; justify-items: center; gap: 2px; padding: 8px 4px; border: 2px solid #cbd5e1; border-radius: 8px; background: #f8fafc; color: #0f172a; font-size: 14px; }
+.slot-view__cell.is-zero { background: #fef3c7; border-color: #b45309; }
+.slot-view__cell.is-in-cycle { border-color: #1d4ed8; box-shadow: inset 0 0 0 2px #1d4ed8; }
+.slot-view__index, .slot-view__slot { font-size: 11px; color: #475569; }
+.slot-view__target, .slot-view__cycle { margin: 0; font-size: 14px; color: #1e293b; }
+.slot-view__totals { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.slot-view__totals li { padding: 4px 10px; border-radius: 999px; background: #e2e8f0; color: #0f172a; font-size: 13px; }
+.slot-view__totals li.is-active { background: #dbeafe; font-weight: 600; }
+.slot-view output { font-weight: 600; color: #14532d; }
+@media (prefers-color-scheme: dark) {
+  .slot-view__cell { background: #1e293b; color: #f8fafc; border-color: #475569; }
+  .slot-view__cell.is-zero { background: #78350f; border-color: #fbbf24; }
+  .slot-view__cell.is-in-cycle { border-color: #60a5fa; box-shadow: inset 0 0 0 2px #60a5fa; }
+  .slot-view__index, .slot-view__slot { color: #cbd5e1; }
+  .slot-view__target, .slot-view__cycle { color: #e2e8f0; }
+  .slot-view__totals li { background: #334155; color: #f8fafc; }
+  .slot-view__totals li.is-active { background: #1e3a8a; }
+  .slot-view output { color: #86efac; }
+}
