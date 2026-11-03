@@ -1,0 +1,18 @@
+.chocolate-split { display: grid; gap: 0.75rem; }
+.chocolate-split__bars { position: relative; display: flex; align-items: flex-end; gap: 0.6rem; height: 14rem; padding: 0.5rem 0.5rem 1.5rem; border-bottom: 2px solid #475569; }
+.chocolate-split__bar { position: relative; flex: 1; max-width: 3.2rem; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: stretch; opacity: 0.55; }
+.chocolate-split__bar.is-computed { opacity: 1; }
+.chocolate-split__bar.is-active { outline: 3px solid #f59e0b; outline-offset: 2px; }
+.chocolate-split__alice { background: #fcd34d; border: 1px solid #b45309; display: grid; place-items: center; font-size: 0.7rem; min-height: 0; }
+.chocolate-split__bob { background: #60a5fa; border: 1px solid #1e40af; display: grid; place-items: center; font-size: 0.7rem; color: #0f172a; min-height: 0; }
+.chocolate-split__bar small { position: absolute; bottom: -1.3rem; left: 0; right: 0; text-align: center; font-weight: 600; }
+.chocolate-split__line { position: absolute; left: 0; right: 0; border-top: 2px dashed #dc2626; pointer-events: none; }
+.chocolate-split__line span { position: absolute; right: 0; top: -1.2rem; font-size: 0.75rem; color: #dc2626; font-weight: 600; }
+.chocolate-split__values { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.chocolate-split__chip { padding: 0.2rem 0.5rem; border-radius: 999px; background: #e2e8f0; color: #0f172a; font-variant-numeric: tabular-nums; }
+.chocolate-split__chip.is-taken { background: #15803d; color: #f0fdf4; }
+.chocolate-split__legend, .chocolate-split output { margin: 0; font-size: 0.9rem; color: #334155; }
+@media (prefers-color-scheme: dark) {
+  .chocolate-split__chip { background: #334155; color: #e2e8f0; }
+  .chocolate-split__legend, .chocolate-split output { color: #cbd5e1; }
+}

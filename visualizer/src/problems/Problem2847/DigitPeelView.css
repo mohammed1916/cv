@@ -1,0 +1,18 @@
+.digit-peel { display: grid; gap: 0.75rem; }
+.digit-peel__remaining { display: flex; align-items: baseline; gap: 0.6rem; }
+.digit-peel__remaining strong { font-size: 2rem; font-variant-numeric: tabular-nums; color: #0f172a; }
+.digit-peel__tries { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.digit-peel__try { min-width: 2.2rem; text-align: center; padding: 0.35rem 0.5rem; border-radius: 8px; background: #e2e8f0; color: #0f172a; font-weight: 600; }
+.digit-peel__try.is-active { outline: 3px solid #f59e0b; }
+.digit-peel__try.is-divides { background: #5eead4; }
+.digit-peel__digits { display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; }
+.digit-peel__digits b { background: #1e3a8a; color: #eff6ff; padding: 0.2rem 0.55rem; border-radius: 6px; }
+.digit-peel__result, .digit-peel__legend, .digit-peel output { margin: 0; font-size: 0.92rem; color: #334155; }
+.digit-peel__result { font-weight: 700; color: #0f172a; }
+@media (prefers-color-scheme: dark) {
+  .digit-peel__remaining strong, .digit-peel__result { color: #f1f5f9; }
+  .digit-peel__try { background: #334155; color: #e2e8f0; }
+  .digit-peel__try.is-divides { background: #0f766e; color: #f0fdfa; }
+  .digit-peel__digits b { background: #1d4ed8; }
+  .digit-peel__legend, .digit-peel output { color: #cbd5e1; }
+}

@@ -1,0 +1,20 @@
+.hero-search { display: grid; gap: 0.75rem; }
+.hero-search__row { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.hero-search__monster { position: relative; min-width: 4.2rem; padding: 0.45rem 0.4rem 1.1rem; border: 2px solid #94a3b8; border-radius: 8px; background: #f1f5f9; display: grid; gap: 0.1rem; text-align: center; color: #0f172a; }
+.hero-search__monster strong { font-size: 1.1rem; }
+.hero-search__monster span { font-size: 0.78rem; }
+.hero-search__monster small { position: absolute; bottom: 0.2rem; left: 0; right: 0; font-size: 0.65rem; color: #475569; }
+.hero-search__monster.is-window { border-style: dashed; border-color: #2563eb; }
+.hero-search__monster.is-mid { background: #ddd6fe; border-color: #6d28d9; }
+.hero-search__monster.is-beaten { background: #ccfbf1; border-color: #0f766e; }
+.hero-search__prefix { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; font-size: 0.9rem; }
+.hero-search__prefix b { background: #e2e8f0; color: #0f172a; padding: 0.1rem 0.4rem; border-radius: 6px; font-variant-numeric: tabular-nums; }
+.hero-search__prefix b.is-cut { outline: 2px solid #b45309; }
+.hero-search__hero, .hero-search__legend, .hero-search output { margin: 0; font-size: 0.9rem; color: #334155; }
+@media (prefers-color-scheme: dark) {
+  .hero-search__monster { background: #1e293b; color: #e2e8f0; border-color: #475569; }
+  .hero-search__monster small, .hero-search__hero, .hero-search__legend, .hero-search output { color: #cbd5e1; }
+  .hero-search__prefix b { background: #334155; color: #e2e8f0; }
+  .hero-search__monster.is-beaten { background: #134e4a; }
+  .hero-search__monster.is-mid { background: #4c1d95; }
+}

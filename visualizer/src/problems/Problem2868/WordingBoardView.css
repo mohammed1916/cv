@@ -1,0 +1,26 @@
+.wording-board { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem 1rem; align-items: start; }
+.wording-board__side h4 { margin: 0 0 0.35rem; font-size: 0.95rem; color: #0f172a; }
+.wording-board__list { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.wording-board__word { padding: 0.3rem 0.55rem; border-radius: 8px; background: #e2e8f0; border: 2px solid transparent; color: #0f172a; font-weight: 600; }
+.wording-board__side:first-child .wording-board__word { background: #fde68a; }
+.wording-board__side:last-child .wording-board__word { background: #bfdbfe; }
+.wording-board__word.is-legal { border-color: #15803d; box-shadow: 0 0 0 2px #bbf7d0; }
+.wording-board__word.is-tried { border-color: #f59e0b; }
+.wording-board__word.is-played { text-decoration: line-through; opacity: 0.55; }
+.wording-board__centre { grid-column: 1 / -1; display: grid; justify-items: center; gap: 0.3rem; padding: 0.6rem; border: 1px dashed #94a3b8; border-radius: 10px; }
+.wording-board__centre strong { font-size: 1.6rem; color: #0f172a; }
+.wording-board__label, .wording-board__turn { font-size: 0.8rem; color: #475569; }
+.wording-board__verdict { font-weight: 700; color: #7c2d12; }
+.wording-board__chain { display: flex; flex-wrap: wrap; gap: 0.3rem; list-style: none; padding: 0; margin: 0.3rem 0 0; }
+.wording-board__chain li { background: #f1f5f9; border-radius: 6px; padding: 0.1rem 0.4rem; color: #0f172a; font-size: 0.85rem; }
+.wording-board__legend, .wording-board output { grid-column: 1 / -1; margin: 0; font-size: 0.9rem; color: #334155; }
+@media (max-width: 640px) { .wording-board { grid-template-columns: 1fr; } }
+@media (prefers-color-scheme: dark) {
+  .wording-board__side h4, .wording-board__centre strong, .wording-board__word { color: #f1f5f9; }
+  .wording-board__side:first-child .wording-board__word { background: #78350f; }
+  .wording-board__side:last-child .wording-board__word { background: #1e3a8a; }
+  .wording-board__centre { border-color: #475569; }
+  .wording-board__label, .wording-board__turn, .wording-board__legend, .wording-board output { color: #cbd5e1; }
+  .wording-board__verdict { color: #fdba74; }
+  .wording-board__chain li { background: #1e293b; color: #e2e8f0; }
+}
