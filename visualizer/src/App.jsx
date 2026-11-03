@@ -635,7 +635,7 @@ function HomePage({
   const [catalogError, setCatalogError] = useState("");
   const [search, setSearch] = useState("");
   const [difficulty, setDifficulty] = useState("All");
-  const [status, setStatus] = useState("Implemented");
+  const [status, setStatus] = useState("All");
   const [activeTag, setActiveTag] = useState("All");
   const [visibleCount, setVisibleCount] = useState(60);
 
@@ -644,7 +644,7 @@ function HomePage({
     if (nextTrack === track) return;
     setSearch("");
     setDifficulty("All");
-    setStatus("Implemented");
+    setStatus("All");
     setActiveTag("All");
     setVisibleCount(60);
     onTrackChange(nextTrack);
@@ -949,7 +949,7 @@ function HomePage({
                     </span>
                   ))}
                 </div>
-                <span className="card-arrow">{p.implemented ? "→" : "⋯"}</span>
+                {p.implemented ? <span className="card-arrow">→</span> : <span className="card-access-label">Not implemented yet</span>}
               </div>
             </motion.button>
           ) : (
@@ -978,7 +978,7 @@ function HomePage({
                     </span>
                   ))}
                 </div>
-                <span className="card-arrow">{p.implemented ? "→" : "⋯"}</span>
+                {p.implemented ? <span className="card-arrow">→</span> : <span className="card-access-label">Not implemented yet</span>}
               </div>
             </button>
           ),
