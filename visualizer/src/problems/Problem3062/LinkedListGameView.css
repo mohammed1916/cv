@@ -1,0 +1,16 @@
+.llg { display: grid; gap: 12px; }
+.llg__caption { margin: 0; font-size: 0.9rem; opacity: 0.8; }
+.llg__list { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.llg__node { display: grid; gap: 2px; min-width: 84px; padding: 8px; border: 2px solid rgba(127, 127, 127, 0.4); border-radius: 10px; text-align: center; }
+.llg__node--even { border-top: 6px solid #2563eb; }
+.llg__node--odd { border-top: 6px solid #b45309; }
+.llg__node.is-active { outline: 3px solid currentColor; outline-offset: 2px; }
+.llg__node.is-win { background: rgba(22, 163, 74, 0.18); }
+.llg__index, .llg__team { font-size: 0.75rem; opacity: 0.75; }
+.llg__value { font-size: 1.4rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.llg__score { display: flex; gap: 12px; flex-wrap: wrap; }
+.llg__tally { display: grid; padding: 8px 14px; border-radius: 10px; border: 1px solid rgba(127, 127, 127, 0.4); min-width: 130px; }
+.llg__tally--even strong { color: #2563eb; }
+.llg__tally--odd strong { color: #b45309; }
+.llg__tally span { font-size: 1.5rem; font-weight: 700; }
+.llg__outcome { margin: 0; font-weight: 600; }

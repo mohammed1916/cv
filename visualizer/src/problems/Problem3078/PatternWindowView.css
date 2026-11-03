@@ -1,0 +1,12 @@
+.pwv { display: grid; gap: 14px; }
+.pwv figure { margin: 0; display: grid; gap: 6px; justify-items: start; }
+.pwv figcaption, .pwv__label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.75; }
+.pwv table { border-collapse: separate; border-spacing: 4px; }
+.pwv td { width: 34px; height: 34px; text-align: center; font-weight: 700; border: 2px solid rgba(127, 127, 127, 0.35); border-radius: 8px; }
+.pwv td.is-window { background: rgba(37, 99, 235, 0.14); border-color: #2563eb; }
+.pwv td.is-current { background: #b45309; color: #fff; border-color: #b45309; }
+.pwv__board, .pwv__pattern { display: inline-grid; }
+.pwv__map { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.pwv__chip { padding: 4px 10px; border-radius: 999px; border: 1px solid #16a34a; background: rgba(22, 163, 74, 0.14); font-weight: 600; }
+.pwv__none { font-size: 0.9rem; opacity: 0.8; }
+.pwv__answer { margin: 0; font-weight: 600; }

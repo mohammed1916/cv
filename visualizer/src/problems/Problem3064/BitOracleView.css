@@ -1,0 +1,16 @@
+.bov { display: grid; gap: 12px; }
+.bov__probe { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.bov__label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.75; }
+.bov__probe code { padding: 6px 10px; border-radius: 8px; border: 1px solid rgba(127, 127, 127, 0.4); }
+.bov__strip { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 6px; list-style: none; margin: 0; padding: 0; }
+.bov__bit { display: grid; justify-items: center; gap: 2px; padding: 6px 2px; border-radius: 8px; border: 2px solid rgba(127, 127, 127, 0.35); }
+.bov__pos { font-size: 0.7rem; opacity: 0.75; }
+.bov__digit { font-size: 1.1rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.bov__bit--one { background: rgba(22, 163, 74, 0.2); border-color: #16a34a; }
+.bov__bit--zero { background: rgba(127, 127, 127, 0.1); }
+.bov__bit--current { border-color: #2563eb; outline: 3px solid #2563eb; outline-offset: 1px; }
+.bov__legend, .bov__answer { margin: 0; font-size: 0.9rem; }
+.bov__swatch { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin: 0 4px 0 10px; vertical-align: middle; }
+.bov__swatch--one { background: rgba(22, 163, 74, 0.5); }
+.bov__swatch--zero { background: rgba(127, 127, 127, 0.3); }
+.bov__swatch--current { border: 2px solid #2563eb; }

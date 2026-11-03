@@ -1,0 +1,12 @@
+.ssv { display: grid; gap: 12px; }
+.ssv__cells { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; }
+.ssv__cell { display: grid; justify-items: center; gap: 2px; min-width: 36px; padding: 6px 4px; border: 2px solid rgba(127, 127, 127, 0.35); border-radius: 8px; }
+.ssv__cell.is-inside { background: rgba(37, 99, 235, 0.14); border-color: #2563eb; }
+.ssv__cell.is-start { border-color: #b45309; }
+.ssv__cell.is-end { outline: 2px solid #2563eb; outline-offset: 1px; }
+.ssv__pos, .ssv__mark { font-size: 0.7rem; opacity: 0.8; min-height: 1em; }
+.ssv__ch { font-size: 1.3rem; font-weight: 700; }
+.ssv__table { border-collapse: collapse; font-size: 0.9rem; }
+.ssv__table th, .ssv__table td { padding: 3px 14px 3px 0; text-align: left; }
+.ssv__table tr.is-start-letter { font-weight: 700; color: #b45309; }
+.ssv__status { margin: 0; font-weight: 600; }

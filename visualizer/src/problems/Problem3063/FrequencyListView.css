@@ -1,0 +1,11 @@
+.flv { display: grid; gap: 14px; }
+.flv__title { margin: 0 0 6px; font-size: 0.95rem; }
+.flv__row { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.flv__node { min-width: 44px; padding: 8px 10px; text-align: center; font-weight: 700; border: 2px solid rgba(127, 127, 127, 0.4); border-radius: 10px; }
+.flv__node.is-current { outline: 3px solid #2563eb; outline-offset: 2px; }
+.flv__node--result { border-color: #16a34a; background: rgba(22, 163, 74, 0.14); }
+.flv__table { border-collapse: collapse; }
+.flv__table th, .flv__table td { padding: 4px 12px 4px 0; text-align: left; }
+.flv__table tr.is-current { font-weight: 700; }
+.flv__bar { display: inline-block; height: 10px; margin-right: 8px; background: #16a34a; border-radius: 4px; vertical-align: middle; }
+.flv__empty, .flv__note { margin: 0; font-size: 0.9rem; opacity: 0.8; }
