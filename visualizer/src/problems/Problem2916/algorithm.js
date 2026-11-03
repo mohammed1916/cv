@@ -22,7 +22,7 @@ export function buildTrace({ nums }) {
       frames.push({ pythonLine: P('total = (total + len(seen) ** 2) % MOD'), phase: 'extend', activeLine: L('add the square'), at: right, left, distinct: seen.size, total, message: `Subarray ${left}..${right} has ${seen.size} distinct value${seen.size === 1 ? '' : 's'}; running total ${total}.` })
     }
   }
-  frames.push({ pythonLine: P('return total'), phase: 'done', activeLine: L('return the total'), at: -1, left: -1, distinct: 0, total, message: `Sum of squared distinct counts: ${total}.` })
+  frames.push({ pythonLine: P('return total'), phase: 'done', activeLine: L('return total'), at: -1, left: -1, distinct: 0, total, message: `Sum of squared distinct counts: ${total}.` })
   return { input: { nums }, result: total, frames }
 }
 

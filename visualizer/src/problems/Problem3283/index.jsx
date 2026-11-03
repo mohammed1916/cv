@@ -16,9 +16,9 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-number-of-moves-to-kill-all-pawns/',
   complexity: 'O(2^n * n^2) time and O(2^n * n) space for n pawns, plus n+1 breadth-first searches on the 50 x 50 board. The visualization caps positions at 6 pawns.',
   examples: [
-    { label: 'Example 1', input: '{"kx": 1, "ky": 1, "positions": [[0, 0]]}' },
-    { label: 'Example 2', input: '{"kx": 0, "ky": 2, "positions": [[1, 1], [2, 2], [3, 3]]}' },
-    { label: 'Example 3', input: '{"kx": 0, "ky": 0, "positions": [[1, 2], [2, 4]]}' },
+    { label: 'Example 1', input: '{"kx": 2, "ky": 1, "positions": [[0, 0]]}' },
+    { label: 'Example 2', input: '{"kx": 0, "ky": 0, "positions": [[2, 1], [1, 2], [3, 3]]}' },
+    { label: 'Example 3', input: '{"kx": 3, "ky": 3, "positions": [[1, 4], [5, 2]]}' },
   ],
 }
 

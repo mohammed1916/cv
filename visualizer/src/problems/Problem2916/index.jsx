@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/subarrays-distinct-element-sum-of-squares-ii/',
   complexity: 'This reference scans every subarray: O(n^2) time with a set per left end. The visualization caps nums at 8 values.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,1]}' },
-    { label: 'Example 2', input: '{"nums":[1,1]}' },
+    { label: 'Example 1', input: '{"nums":[3,1,3,2]}' },
+    { label: 'Example 2', input: '{"nums":[5,9,9,5]}' },
   ],
 }
 

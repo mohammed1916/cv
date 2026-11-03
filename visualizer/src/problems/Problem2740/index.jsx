@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-value-of-the-partition/',
   complexity: 'O(n log n) time for the sort, O(n) extra space for the sorted copy.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,3,2,4]}' },
-    { label: 'Example 2', input: '{"nums":[100,1,10]}' },
+    { label: 'Example 1', input: '{"nums":[7,20,11,9]}' },
+    { label: 'Example 2', input: '{"nums":[90,4,15,23]}' },
   ],
 }
 

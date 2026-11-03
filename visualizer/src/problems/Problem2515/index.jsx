@@ -18,9 +18,9 @@ const definition = {
   url: 'https://leetcode.com/problems/shortest-distance-to-target-string-in-a-circular-array/',
   complexity: 'O(n) time and O(1) extra space for n words. The visualization caps the array at 100 words.',
   examples: [
-    { label: 'Wraps the other way', input: '{"words": ["hello","i","am","leetcode","hello"], "target": "hello", "startIndex": 1}' },
-    { label: 'One step left', input: '{"words": ["a","b","leetcode"], "target": "leetcode", "startIndex": 0}' },
-    { label: 'Not present', input: '{"words": ["i","eat","leetcode"], "target": "ate", "startIndex": 0}' },
+    { label: 'Wraps the other way', input: '{"words": ["p","q","r","s","t","u","v","w"], "target": "p", "startIndex": 7}' },
+    { label: 'Halfway round', input: '{"words": ["one","two","three","four","five","six"], "target": "four", "startIndex": 0}' },
+    { label: 'Not present', input: '{"words": ["cat","dog","cat","bird"], "target": "fish", "startIndex": 2}' },
   ],
 }
 

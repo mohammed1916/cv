@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-balanced-integers-in-a-range/',
   complexity: 'O(range * digits) time in this visualization. The problem allows values up to 10^15, which needs digit dynamic programming. The visualization caps the range at 301 values.',
   examples: [
-    { label: 'Example 1', input: '{"low":1,"high":100}' },
-    { label: 'Example 2', input: '{"low":120,"high":129}' },
+    { label: 'Example 1', input: '{"low":2000,"high":2019}' },
+    { label: 'Example 2', input: '{"low":1100,"high":1199}' },
   ],
 }
 

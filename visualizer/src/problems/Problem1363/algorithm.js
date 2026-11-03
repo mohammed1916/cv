@@ -46,10 +46,10 @@ export const code = [
 export const pythonLineMap = { 1: 3, 2: 5, 3: 13, 4: 16, 5: 15, 6: 21, 7: 23, 8: 25 };
 
 export const examples = [
-  { label: "[8,1,9]", input: '{"digits":[8,1,9]}' },
-  { label: "[8,6,7,1,0]", input: '{"digits":[8,6,7,1,0]}' },
-  { label: "[1]", input: '{"digits":[1]}' },
-  { label: "All zeros", input: '{"digits":[0,0,0,0,0,0]}' },
+  { label: "[7,4,2,9]", input: '{"digits":[7,4,2,9]}' },
+  { label: "[5,3,0,6,2,4]", input: '{"digits":[5,3,0,6,2,4]}' },
+  { label: "[2,8]", input: '{"digits":[2,8]}' },
+  { label: "Zeros after a drop", input: '{"digits":[4,0,0,0,0]}' },
 ];
 
 export function parseInput(text) {

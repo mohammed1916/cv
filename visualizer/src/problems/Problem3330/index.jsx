@@ -17,9 +17,9 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-original-typed-string-i/',
   complexity: 'O(n) time and O(1) extra space for word length n (at most 100).',
   examples: [
-    { label: 'Example 1', input: '{"word": "abbcccc"}' },
-    { label: 'Example 2', input: '{"word": "abcd"}' },
-    { label: 'Example 3', input: '{"word": "aaaa"}' },
+    { label: 'Example 1', input: '{"word": "gigaaatt"}' },
+    { label: 'Example 2', input: '{"word": "quiz"}' },
+    { label: 'Example 3', input: '{"word": "ooooooo"}' },
   ],
 }
 
