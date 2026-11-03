@@ -1,0 +1,11 @@
+.clockspan { display: flex; flex-direction: column; gap: 16px; padding: 16px; background: var(--surface, #0f172a); color: var(--text, #f8fafc); }
+.clockspan__pair { display: flex; flex-wrap: wrap; gap: 14px; align-items: stretch; justify-content: center; }
+.clockspan__col { flex: 1 1 200px; max-width: 280px; display: flex; flex-direction: column; gap: 8px; padding: 14px; border: 2px solid var(--border, #334155); border-radius: 10px; background: var(--surface2, #1e293b); }
+.clockspan__col--active { border-color: #38bdf8; box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25); }
+.clockspan__label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted, #94a3b8); }
+.clockspan__clock { font-family: ui-monospace, monospace; font-size: 26px; font-weight: 700; }
+.clockspan__parts { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.6; }
+.clockspan__pending { font-size: 13px; color: var(--text-muted, #94a3b8); }
+.clockspan__arrow { align-self: center; font-size: 13px; color: var(--text-muted, #94a3b8); }
+.clockspan__result { padding: 12px; border-radius: 8px; background: var(--surface2, #1e293b); text-align: center; font-size: 15px; }
+.clockspan__result--show { border: 1px solid #38bdf8; }

@@ -1,0 +1,11 @@
+.pairsum { display: flex; flex-direction: column; gap: 14px; padding: 16px; background: var(--surface, #0f172a); color: var(--text, #f8fafc); }
+.pairsum__row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.pairsum__cell { position: relative; min-width: 56px; padding: 10px 6px 14px; text-align: center; border: 2px solid var(--border, #334155); border-radius: 8px; background: var(--surface2, #1e293b); }
+.pairsum__cell--allowed { background: rgba(124, 58, 237, 0.18); }
+.pairsum__cell--prefix { border-color: #a78bfa; box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.35); }
+.pairsum__cell--right { border-color: #f59e0b; }
+.pairsum__index { display: block; font-size: 11px; color: var(--text-muted, #94a3b8); }
+.pairsum__value { display: block; font-size: 19px; font-weight: 700; }
+.pairsum__tag { position: absolute; left: 50%; bottom: -10px; transform: translateX(-50%); font-size: 10px; padding: 1px 6px; border-radius: 999px; background: #f59e0b; color: #111827; }
+.pairsum__tag--prefix { background: #a78bfa; }
+.pairsum__legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 14px; }

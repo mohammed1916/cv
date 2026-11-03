@@ -1,0 +1,15 @@
+.race { display: flex; flex-direction: column; gap: 14px; padding: 16px; background: var(--surface, #0f172a); color: var(--text, #f8fafc); overflow-x: auto; }
+.race__row { display: flex; align-items: center; gap: 6px; }
+.race__label { width: 24px; font-size: 13px; color: var(--text-muted, #94a3b8); }
+.race__cell { min-width: 34px; padding: 6px 4px; text-align: center; border-radius: 6px; border: 2px solid var(--border, #334155); background: var(--surface2, #1e293b); }
+.race__idx { display: block; font-size: 10px; color: var(--text-muted, #94a3b8); }
+.race__ch { display: block; font-family: ui-monospace, monospace; font-size: 18px; font-weight: 700; }
+.race__cell--t { border-color: #fb923c; }
+.race__cell--bad { border-color: #ef4444; background: rgba(239, 68, 68, 0.25); }
+.race__cell--now { box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.45); }
+.race__hint, .race__msg { margin: 0; font-size: 14px; color: var(--text-muted, #94a3b8); }
+.race__counts { display: flex; flex-wrap: wrap; gap: 14px; font-size: 14px; }
+.race__answers { display: flex; flex-wrap: wrap; gap: 8px; }
+.race__ans { padding: 4px 10px; border-radius: 999px; background: var(--surface2, #1e293b); border: 1px solid var(--border, #334155); font-family: ui-monospace, monospace; font-size: 13px; }
+.race__ans--yes { background: #065f46; color: #d1fae5; }
+.race__ans--no { background: #7f1d1d; color: #fee2e2; }

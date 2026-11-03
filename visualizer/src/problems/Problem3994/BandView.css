@@ -1,0 +1,14 @@
+.bands { display: flex; flex-direction: column; gap: 14px; padding: 16px; background: var(--surface, #0f172a); color: var(--text, #f8fafc); }
+.bands__row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.bands__cell { min-width: 64px; padding: 8px 6px; text-align: center; border-radius: 8px; border: 2px solid transparent; background: var(--surface2, #1e293b); }
+.bands__cell--g0 { border-color: #38bdf8; }
+.bands__cell--g1 { border-color: #a3e635; }
+.bands__cell--g2 { border-color: #f472b6; }
+.bands__cell--now { box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.5); }
+.bands__index { display: block; font-size: 11px; color: var(--text-muted, #94a3b8); }
+.bands__value { display: block; font-size: 20px; font-weight: 700; }
+.bands__band { display: block; font-size: 11px; color: var(--text-muted, #94a3b8); }
+.bands__counts { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+.bands__count { display: flex; flex-direction: column; gap: 4px; padding: 10px; border-radius: 8px; background: var(--surface2, #1e293b); border: 1px solid var(--border, #334155); font-size: 13px; }
+.bands__count--active { border-color: #facc15; }
+.bands__legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 14px; }

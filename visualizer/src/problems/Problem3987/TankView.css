@@ -1,0 +1,11 @@
+.tank { display: flex; flex-direction: column; gap: 14px; padding: 16px; background: var(--surface, #0f172a); color: var(--text, #f8fafc); }
+.tank__stage { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; }
+.tank__gauge { position: relative; width: 90px; height: 180px; border: 3px solid var(--border, #475569); border-radius: 10px; background: var(--surface2, #1e293b); overflow: hidden; }
+.tank__level { position: absolute; left: 0; right: 0; bottom: 0; background: linear-gradient(#38bdf8, #0369a1); transition: height 0.2s; }
+.tank__need { position: absolute; left: 0; right: 0; border-top: 2px dashed #f59e0b; }
+.tank__need span { position: absolute; right: 4px; top: -18px; font-size: 11px; color: #fbbf24; }
+.tank__stats { display: grid; grid-template-columns: repeat(2, minmax(120px, 1fr)); gap: 8px 16px; font-size: 14px; }
+.tank__demands { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.tank__chip { min-width: 40px; padding: 6px 10px; text-align: center; border-radius: 6px; border: 1px solid var(--border, #334155); background: var(--surface2, #1e293b); }
+.tank__chip--done { opacity: 0.45; }
+.tank__chip--now { border-color: #f59e0b; box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.4); }

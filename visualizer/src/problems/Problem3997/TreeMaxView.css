@@ -1,0 +1,9 @@
+.treemax { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 16px; background: var(--surface, #0f172a); color: var(--text, #f8fafc); }
+.treemax__level { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.treemax__node { min-width: 70px; padding: 8px 6px; text-align: center; border-radius: 10px; border: 2px solid var(--border, #334155); background: var(--surface2, #1e293b); display: flex; flex-direction: column; gap: 2px; }
+.treemax__node strong { font-size: 20px; }
+.treemax__idx { font-size: 11px; color: var(--text-muted, #94a3b8); }
+.treemax__best { font-size: 11px; color: var(--text-muted, #94a3b8); }
+.treemax__node--now { border-color: #facc15; box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.35); }
+.treemax__node--dom { background: rgba(16, 185, 129, 0.25); border-color: #34d399; }
+.treemax__legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 14px; justify-content: center; }

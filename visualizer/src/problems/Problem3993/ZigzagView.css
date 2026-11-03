@@ -1,0 +1,10 @@
+.zigzag { display: flex; flex-direction: column; gap: 14px; padding: 16px; background: var(--surface, #0f172a); color: var(--text, #f8fafc); }
+.zigzag__plot { display: flex; align-items: stretch; gap: 6px; height: 200px; padding: 8px; border-bottom: 2px solid var(--border, #475569); overflow-x: auto; }
+.zigzag__slot { flex: 1 0 44px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.zigzag__track { position: relative; flex: 1; width: 100%; }
+.zigzag__bar { position: absolute; bottom: 0; left: 6px; right: 6px; min-height: 4px; border-radius: 6px 6px 0 0; background: #4ade80; display: flex; justify-content: center; align-items: flex-end; }
+.zigzag__bar span { font-size: 12px; font-weight: 700; color: #052e16; transform: translateY(-2px); }
+.zigzag__bar--best { background: #facc15; }
+.zigzag__bar--current { outline: 2px solid #f8fafc; }
+.zigzag__index { font-size: 11px; color: var(--text-muted, #94a3b8); }
+.zigzag__legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 14px; }
