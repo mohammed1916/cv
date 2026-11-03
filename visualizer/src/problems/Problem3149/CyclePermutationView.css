@@ -1,0 +1,126 @@
+.cycle-view {
+  display: grid;
+  gap: 0.9rem;
+  color: var(--text, #1f2937);
+}
+
+.cycle-view__ring {
+  position: relative;
+  width: min(100%, 22rem);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+}
+
+.cycle-view__lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.cycle-view__lines line {
+  stroke: #0f766e;
+  stroke-width: 1.2;
+}
+
+.cycle-view__lines .cycle-view__closing {
+  stroke: #b45309;
+  stroke-dasharray: 3 2;
+}
+
+.cycle-view__node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 4.6rem;
+  border: 2px solid #94a3b8;
+  border-radius: 0.6rem;
+  background: var(--surface, #ffffff);
+  padding: 0.3rem 0.2rem;
+  text-align: center;
+  font-size: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.cycle-view__node--placed {
+  background: #ccfbf1;
+  border-color: #0f766e;
+}
+
+.cycle-view__node--candidate {
+  border-style: dashed;
+  border-color: #b45309;
+}
+
+.cycle-view__node--chosen {
+  box-shadow: 0 0 0 3px #f59e0b;
+  border-color: #b45309;
+  background: #fef3c7;
+}
+
+.cycle-view__value {
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.cycle-view__meta,
+.cycle-view__cost {
+  color: #334155;
+}
+
+.cycle-view__cost {
+  font-weight: 700;
+  color: #7c2d12;
+}
+
+.cycle-view__path {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cycle-view__path li {
+  border: 1px solid #0f766e;
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.cycle-view__path .cycle-view__back {
+  border-style: dashed;
+  border-color: #b45309;
+  font-weight: 600;
+}
+
+.cycle-view__facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.cycle-view__facts div {
+  border: 1px solid var(--border, #cbd5e1);
+  border-radius: 0.5rem;
+  padding: 0.45rem 0.6rem;
+}
+
+.cycle-view__facts dt {
+  font-size: 0.75rem;
+  color: #475569;
+}
+
+.cycle-view__facts dd {
+  margin: 0.15rem 0 0;
+  font-weight: 700;
+}
+
+.cycle-view__message {
+  margin: 0;
+  font-size: 0.9rem;
+}

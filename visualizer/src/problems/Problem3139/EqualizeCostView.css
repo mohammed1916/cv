@@ -1,0 +1,111 @@
+.equalize-view {
+  display: grid;
+  gap: 0.9rem;
+  color: var(--text, #1f2937);
+}
+
+.equalize-view__chart {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  height: 14rem;
+  padding: 0.5rem 0.5rem 0;
+  border-bottom: 2px solid var(--border, #94a3b8);
+  overflow-x: auto;
+}
+
+.equalize-view__column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  min-width: 2.6rem;
+  justify-content: flex-end;
+}
+
+.equalize-view__stack {
+  width: 2.2rem;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
+}
+
+.equalize-view__base {
+  background: #0f766e;
+  color: #ffffff;
+  border-radius: 0.3rem 0.3rem 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-weight: 700;
+  font-size: 0.8rem;
+  min-height: 1.4rem;
+}
+
+.equalize-view__deficit {
+  background: repeating-linear-gradient(135deg, #fde68a, #fde68a 5px, #fcd34d 5px, #fcd34d 10px);
+  border: 1px dashed #b45309;
+  color: #7c2d12;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 0.9rem;
+}
+
+.equalize-view__index {
+  font-size: 0.75rem;
+  margin-top: 0.2rem;
+}
+
+.equalize-view__target {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 2px dashed #b91c1c;
+  color: #b91c1c;
+  font-size: 0.75rem;
+  font-weight: 700;
+  pointer-events: none;
+  padding-left: 0.25rem;
+  transform: translateY(-100%);
+}
+
+.equalize-view__facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.equalize-view__facts div {
+  border: 1px solid var(--border, #cbd5e1);
+  border-radius: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  background: var(--surface, #ffffff);
+}
+
+.equalize-view__facts dt {
+  font-size: 0.75rem;
+  color: #475569;
+}
+
+.equalize-view__facts dd {
+  margin: 0.15rem 0 0;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.equalize-view__message {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .equalize-view__facts div {
+    background: #111827;
+    border-color: #334155;
+  }
+}
