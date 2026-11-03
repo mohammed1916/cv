@@ -1,0 +1,17 @@
+.reroot-view { display: grid; gap: 12px; }
+.reroot-tree { width: 100%; max-height: 340px; height: auto; }
+.reroot-edge { stroke: #64748b; stroke-width: 2; }
+.reroot-edge.right { stroke-dasharray: 6 4; }
+.reroot-node circle { fill: #e2e8f0; stroke: #1e293b; stroke-width: 2; }
+.reroot-node text { font-family: ui-monospace, monospace; font-size: 14px; fill: #0f172a; }
+.reroot-node.is-leaf circle { fill: #dcfce7; }
+.reroot-node.is-cur circle { fill: #93c5fd; stroke: #1d4ed8; stroke-width: 4; }
+.reroot-node.is-prev circle { fill: #ddd6fe; stroke: #6d28d9; stroke-width: 3; }
+.reroot-node.is-parent circle { fill: #fde68a; stroke: #b45309; stroke-width: 3; }
+.reroot-node.is-other circle { fill: #99f6e4; stroke: #0f766e; stroke-width: 3; }
+.reroot-node.is-root circle { fill: #bbf7d0; stroke: #166534; stroke-width: 4; }
+.reroot-state { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
+.reroot-state div { border: 1px solid #94a3b8; border-radius: 8px; padding: 4px 10px; min-width: 88px; }
+.reroot-state dt { font-size: 0.75rem; opacity: 0.8; }
+.reroot-state dd { margin: 0; font-family: ui-monospace, monospace; font-weight: 600; }
+.reroot-label { margin: 0; font-weight: 600; }
