@@ -1,10 +1,38 @@
-import authoredExamples0 from '../../config/examples/collection--1658.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/progress.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '1658',
+  phases, parse: parseInput, build: buildTrace, code, python,
+  inputLabel: 'Object with nums and x (JSON)',
+  url: 'https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero/',
+  complexity: 'O(n) time and O(1) extra space: a sliding window finds the longest middle block whose sum is total minus x.',
+  examples: [
+    { label: 'Ends sum to x', input: '{"nums":[2,3,1,5,4],"x":6}' },
+    { label: 'Middle block', input: '{"nums":[1,1,4,2,3],"x":5}' },
+    { label: 'Too large', input: '{"nums":[5,6,7,8,9],"x":4}' },
+  ],
+}
 
-const definition = { ...definitions[1658], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+const cell = { width: 34, height: 34, boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)' }
+
+export default function MinimumOperations() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const { nums } = run.input
+    const { left, right, window, target, best } = step.snapshot
+    const inBlock = i => left !== null && right !== null && i >= left && i <= right && left <= right
+    return <>
+      <div role="img" aria-label="Array with the middle block highlighted" style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+        {nums.map((value, i) => <div key={i} data-index={i} style={{
+          ...cell, background: inBlock(i) ? '#bbf7d0' : 'transparent', color: inBlock(i) ? '#1c1917' : 'var(--text)',
+          outline: left === i || right === i ? '2px solid var(--primary)' : 'none',
+        }}><div>{value}</div><small>{i}</small></div>)}
+      </div>
+      <p>Target block sum: {target} · current block sum: {window} · longest matching block: {best}</p>
+      <p>{run.result === -1 ? 'No block matches, so the answer is -1.' : `Answer: ${run.result}`}</p>
+    </>
+  }} renderReasoning={() => <>
+    <p><strong>Complement view:</strong> removing a prefix and a suffix leaves one contiguous middle block. Keeping the longest such block minimises removals.</p>
+    <p><strong>Sliding window:</strong> every value is positive, so growing the block increases its sum and shrinking from the left decreases it. One pass with two pointers finds the longest block.</p>
+  </>} />
+}

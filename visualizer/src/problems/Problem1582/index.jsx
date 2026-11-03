@@ -1,10 +1,44 @@
-import authoredExamples0 from '../../config/examples/collection--1582.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import { buildTrace, parseInput, code, python, pythonLineMap, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/continuing.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '1582',
+  phases, parse: parseInput, build: buildTrace, code, python, pythonLineMap,
+  inputLabel: 'Object with mat (JSON)',
+  url: 'https://leetcode.com/problems/special-positions-in-a-binary-matrix/',
+  complexity: 'O(m * n) time and O(m + n) extra space for the row and column tallies.',
+  examples: [
+    { label: 'Sample A', input: '{"mat":[[1,0,0],[0,0,1],[1,0,0]]}' },
+    { label: 'Full row', input: '{"mat":[[1,1],[0,0]]}' },
+    { label: 'Scattered', input: '{"mat":[[0,1,0,0],[0,0,0,1],[1,0,0,0]]}' },
+  ],
+}
 
-const definition = { ...definitions[1582], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function SpecialPositions() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const { mat } = run.input
+    const { rows, cols, special, i, j } = step.snapshot
+    const found = new Set(special.map(([a, b]) => `${a},${b}`))
+    return <>
+      <table aria-label="Matrix with tallies" style={{ borderCollapse: 'collapse', fontFamily: 'monospace' }}>
+        <thead><tr><th />{cols.map((c, col) => <th key={col}>col {col}<br />{c}</th>)}<th>row sum</th></tr></thead>
+        <tbody>{mat.map((row, r) => <tr key={r}>
+          <th>row {r}</th>
+          {row.map((v, c) => {
+            const key = `${r},${c}`
+            const current = r === i && c === j
+            return <td key={c} data-cell={key} style={{
+              width: 44, height: 40, textAlign: 'center', border: current ? '2px solid var(--text)' : '1px solid var(--border)',
+              background: found.has(key) ? '#bbf7d0' : 'transparent', color: '#1c1917',
+            }}>{v}</td>
+          })}
+          <td>{rows[r]}</td>
+        </tr>)}</tbody>
+      </table>
+      <p>{found.size} special cell(s) so far.</p>
+    </>
+  }} renderReasoning={({ step }) => <>
+    <p><strong>Tally first:</strong> a 1 is special only when its row and its column contain no other 1.</p>
+    <p><strong>Then check:</strong> precomputed tallies make each cell a constant-time test.</p>
+  </>} />
+}

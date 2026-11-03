@@ -1,135 +1,106 @@
-const MOD = 1000000007n
+export const phases = [
+  { id: 'start', label: 'Start', description: 'Begin with an empty sequence, multiplier 1 and offset 0, all modulo a prime.' },
+  { id: 'append', label: 'Append', description: 'Store the value divided by the current multiplier, so that the transform gives back the real value.' },
+  { id: 'addAll', label: 'addAll', description: 'Add to the offset instead of touching every stored value.' },
+  { id: 'multAll', label: 'multAll', description: 'Scale the multiplier and the offset instead of touching every stored value.' },
+  { id: 'getIndex', label: 'getIndex', description: 'Apply the multiplier and offset to the stored value at the index.' },
+  { id: 'done', label: 'Complete', description: 'Report every getIndex answer in order.' },
+]
 
-function powMod(base, exp) {
-  let result = 1n
-  let b = ((base % MOD) + MOD) % MOD
-  let e = exp
-  while (e > 0n) {
-    if (e & 1n) result = (result * b) % MOD
-    b = (b * b) % MOD
-    e >>= 1n
-  }
+const MOD = 1000000007n
+const OP_NAMES = ['append', 'addAll', 'multAll', 'getIndex']
+
+export function parseInput(text) {
+  const input = JSON.parse(text)
+  if (!input || typeof input !== 'object' || Array.isArray(input) || !Array.isArray(input.ops)) throw new Error('Use an object such as {"ops": [["append", 2], ["addAll", 3], ["getIndex", 0]]}.')
+  if (input.ops.length < 1 || input.ops.length > 40) throw new Error('Give between 1 and 40 operations.')
+  const ops = input.ops.map((entry, index) => {
+    if (!Array.isArray(entry) || entry.length !== 2) throw new Error(`Operation ${index + 1} must be a [name, value] pair.`)
+    const [name, value] = entry
+    if (!OP_NAMES.includes(name)) throw new Error(`Operation ${index + 1}: name must be append, addAll, multAll or getIndex.`)
+    if (!Number.isInteger(value)) throw new Error(`Operation ${index + 1}: the value must be an integer.`)
+    if (name === 'getIndex' && value < 0) throw new Error(`Operation ${index + 1}: an index cannot be negative.`)
+    if ((name === 'append' || name === 'addAll') && (value < 0 || value >= 1000000007)) throw new Error(`Operation ${index + 1}: values run from 0 to 1000000006.`)
+    if (name === 'multAll' && (value < 1 || value > 1000)) throw new Error(`Operation ${index + 1}: multAll uses a factor from 1 to 1000.`)
+    return [name, value]
+  })
+  return { ops }
+}
+
+// Lines of the solver the story points at (1-based, matching `code` below).
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(line => line.includes(s)) + 1
+
+const powMod = (base, exp) => {
+  let result = 1n, b = base % MOD, e = exp
+  while (e > 0n) { if (e & 1n) result = (result * b) % MOD; b = (b * b) % MOD; e >>= 1n }
   return result
 }
 
-const OPS = ['append', 'addAll', 'multAll', 'getIndex']
-
-export function parseInput(text) {
-  const data = JSON.parse(text)
-  if (!data || typeof data !== 'object' || !Array.isArray(data.ops)) {
-    throw new Error('Use an object with an ops array, for example {"ops":[["append",2],["addAll",3],["getIndex",0]]}.')
-  }
-  if (data.ops.length < 1 || data.ops.length > 40) throw new Error('ops must have 1 to 40 operations.')
-  data.ops.forEach((op, i) => {
-    if (!Array.isArray(op) || op.length !== 2 || !OPS.includes(op[0]) || !Number.isInteger(op[1])) {
-      throw new Error(`Operation ${i + 1} must be [name, integer] with name append, addAll, multAll or getIndex.`)
-    }
-    const [name, arg] = op
-    if (name === 'getIndex') {
-      if (arg < 0 || arg > 100000) throw new Error(`Operation ${i + 1}: getIndex index must be 0 to 100000.`)
-    } else if (arg < 1 || arg > 100) {
-      throw new Error(`Operation ${i + 1}: ${name} value must be 1 to 100.`)
-    }
-  })
-  if (!data.ops.some(([name]) => name === 'append' || name === 'getIndex' || name === 'addAll' || name === 'multAll')) {
-    throw new Error('Add at least one operation.')
-  }
-  return { ops: data.ops.map(([name, arg]) => [name, arg]) }
-}
-
-export function buildTrace(input) {
-  // stored[i] is kept so that the real value is (stored[i] * mul + add) mod p.
-  const stored = []
-  let mul = 1n
-  let add = 0n
-  const results = []
+export function buildTrace({ ops }) {
   const frames = []
-  const snapshot = () => stored.map(v => Number((v * mul + add) % MOD))
-  const pack = (phase, activeLine, pythonLine, message, extra = {}) => frames.push({
-    phase,
-    activeLine,
-    pythonLine,
-    message,
-    length: stored.length,
-    values: snapshot(),
-    stored: stored.map(v => Number(v)),
-    mul: Number(mul),
-    add: Number(add),
-    results: [...results],
-    ...extra,
-  })
+  const at = (pseudo, py) => ({ activeLine: L(pseudo), pythonLine: P(py) })
+  const raw = []          // stored values, each divided by the multiplier at the time it was appended
+  let mul = 1n, add = 0n  // one shared multiplier and offset for the whole sequence
+  const answers = []
+  const real = () => raw.map(r => Number((r * mul + add) % MOD))
+  const snap = (op, arg, message) => ({ op, arg, mul: Number(mul), add: Number(add), stored: raw.map(Number), values: real(), results: [...answers], done: false, message })
 
-  pack('start', 2, 1, `Start with an empty sequence, multiplier 1 and offset 0. Values are stored as raw numbers and the real value is raw * multiplier + offset.`)
-  input.ops.forEach(([name, arg], index) => {
-    const step = index + 1
+  frames.push({ phase: 'start', ...at('seq = empty list', 'MOD = 10**9 + 7'),
+    message: 'The sequence is empty, the multiplier is 1 and the offset is 0.', snapshot: snap('start', null, 'Start') })
+
+  ops.forEach(([name, value], index) => {
     if (name === 'append') {
-      const raw = ((BigInt(arg) - add) % MOD + MOD) % MOD * powMod(mul, MOD - 2n) % MOD
-      stored.push(raw)
-      pack('append', 5, 23, `Operation ${step}: append ${arg}. Stored raw ${Number(raw)} so that it reads ${arg} right now.`, { op: name, arg, index: stored.length - 1 })
+      const stored = ((BigInt(value) - add) % MOD + MOD) % MOD * powMod(mul, MOD - 2n) % MOD
+      raw.push(stored)
+      frames.push({ phase: 'append', ...at('if name is append', "if name == 'append'"),
+        message: `Append ${value}. Stored as ${Number(stored)} so that ${Number(stored)} * ${Number(mul)} + ${Number(add)} gives ${value} modulo the prime.`,
+        snapshot: snap(name, value, `Append ${value}`) })
     } else if (name === 'addAll') {
-      add = (add + BigInt(arg)) % MOD
-      pack('addAll', 7, 25, `Operation ${step}: addAll ${arg}. The offset grows to ${Number(add)}. No stored value is touched.`, { op: name, arg })
+      add = (add + BigInt(value)) % MOD
+      frames.push({ phase: 'addAll', ...at('if name is addAll', "elif name == 'addAll'"),
+        message: `addAll ${value}: the offset becomes ${Number(add)}. No stored value is touched.`, snapshot: snap(name, value, 'addAll') })
     } else if (name === 'multAll') {
-      mul = mul * BigInt(arg) % MOD
-      add = add * BigInt(arg) % MOD
-      pack('multAll', 9, 27, `Operation ${step}: multAll ${arg}. The multiplier becomes ${Number(mul)} and the offset becomes ${Number(add)}.`, { op: name, arg })
+      mul = mul * BigInt(value) % MOD
+      add = add * BigInt(value) % MOD
+      frames.push({ phase: 'multAll', ...at('if name is multAll', "elif name == 'multAll'"),
+        message: `multAll ${value}: the multiplier becomes ${Number(mul)} and the offset ${Number(add)}. Still no stored value is touched.`, snapshot: snap(name, value, 'multAll') })
     } else {
-      if (arg >= stored.length) {
-        results.push(-1)
-        pack('getIndex', 11, 29, `Operation ${step}: getIndex ${arg} is outside the length ${stored.length}, so the answer is -1.`, { op: name, arg, answer: -1 })
-      } else {
-        const answer = Number((stored[arg] * mul + add) % MOD)
-        results.push(answer)
-        pack('getIndex', 12, 29, `Operation ${step}: getIndex ${arg} applies the transform to raw ${Number(stored[arg])} and returns ${answer}.`, { op: name, arg, answer })
-      }
+      const answer = value >= raw.length ? -1 : Number((raw[value] * mul + add) % MOD)
+      answers.push(answer)
+      frames.push({ phase: 'getIndex', ...at('if name is getIndex', 'answers.append(-1'),
+        message: answer === -1 ? `getIndex ${value}: there is no element at that index, so the answer is -1.` : `getIndex ${value}: stored ${Number(raw[value])} times ${Number(mul)}, plus ${Number(add)}, gives ${answer}.`,
+        snapshot: snap(name, value, 'getIndex') })
     }
   })
-  pack('done', 13, 30, `Every operation is processed. The getIndex answers are [${results.join(', ')}].`, { done: true })
-  return { input, result: results, frames }
+
+  frames.push({ phase: 'done', ...at('return answers', 'return answers'),
+    message: `Answers in order: [${answers.join(', ')}].`, snapshot: { ...snap(null, null, 'Complete'), results: [...answers], done: true } })
+  return { input: { ops }, result: answers, frames }
 }
 
 export const code = `fancy sequence (ops):
-  start with an empty sequence, multiplier 1 and offset 0
-  for each operation in order
-    if the operation is append(val)
-      store (val - offset) divided by multiplier, modulo p
-    if the operation is addAll(inc)
-      add inc to the offset
-    if the operation is multAll(m)
-      multiply the multiplier and the offset by m
-    if the operation is getIndex(idx)
-      if idx is at least the length, the answer is -1
-      else the answer is stored[idx] times multiplier plus offset, modulo p
-  return the list of answers`.split('\n').map((text, index) => ({ line: index + 1, text }))
+  seq = empty list of raw values
+  mul, add = 1, 0
+  for name, x in ops:
+    if name is append: push (x - add) / mul
+    if name is addAll: add = add + x
+    if name is multAll: mul, add = mul * x, add * x
+    if name is getIndex: answer -1 if x >= len(seq), else seq[x] * mul + add
+  return answers`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
-export const python = `MOD = 10**9 + 7
-class Fancy:
-    def __init__(self):
-        self.stored = []
-        self.mul = 1
-        self.add = 0
-    def append(self, val):
-        self.stored.append((val - self.add) * pow(self.mul, MOD - 2, MOD) % MOD)
-    def addAll(self, inc):
-        self.add = (self.add + inc) % MOD
-    def multAll(self, m):
-        self.mul = self.mul * m % MOD
-        self.add = self.add * m % MOD
-    def getIndex(self, idx):
-        if idx >= len(self.stored):
-            return -1
-        return (self.stored[idx] * self.mul + self.add) % MOD
-def fancy_sequence(ops):
-    f = Fancy()
-    out = []
-    for name, arg in ops:
-        if name == "append":
-            f.append(arg)
-        elif name == "addAll":
-            f.addAll(arg)
-        elif name == "multAll":
-            f.multAll(arg)
+export const python = `def fancy_ops(ops):
+    MOD = 10**9 + 7
+    seq, mul, add, answers = [], 1, 0, []
+    for name, x in ops:
+        if name == 'append':
+            seq.append((x - add) * pow(mul, MOD - 2, MOD) % MOD)
+        elif name == 'addAll':
+            add = (add + x) % MOD
+        elif name == 'multAll':
+            mul = mul * x % MOD
+            add = add * x % MOD
         else:
-            out.append(f.getIndex(arg))
-    return out
+            answers.append(-1 if x >= len(seq) else (seq[x] * mul + add) % MOD)
+    return answers
 `

@@ -1,10 +1,27 @@
-import authoredExamples0 from '../../config/examples/collection--1636.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
+import { phases, parseInput, buildTrace, code, python } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/progress.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  phases, parse: parseInput, build: buildTrace, code, python,
+  inputLabel: 'Numbers (JSON with nums)',
+  url: 'https://leetcode.com/problems/sort-array-by-increasing-frequency/',
+  complexity: 'O(n log n) time and O(n) space. The visualization accepts up to 20 values.',
+  examples: [
+    { label: 'Mixed counts', input: '{"nums":[4,1,1,7,4,9,9,9,2]}' },
+    { label: 'One value', input: '{"nums":[5,5,5]}' },
+    { label: 'Negatives', input: '{"nums":[-2,3,-2,3,0]}' },
+  ],
+}
 
-const definition = { ...definitions[1636], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function SortByIncreasingFrequency() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="Input" length={run.input.nums.length} valueAt={i => run.input.nums[i]} />
+    <StackLane title="Count pairs (value:count)" items={(step.keys?.length ? step.keys : step.tally).map(t => `${t.value}:${t.count}`)} />
+    <StackLane title="Placed so far" items={step.placed.map(String)} />
+  </>} renderReasoning={({ step }) => <>
+    <p>Counting first turns each value into a single key. Sorting keys by count, then by value descending, decides the order of whole groups.</p>
+    <p>Repeated values stay together because every copy shares the same key.</p>
+  </>} />
+}

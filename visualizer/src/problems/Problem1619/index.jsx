@@ -1,10 +1,44 @@
-import authoredExamples0 from '../../config/examples/collection--1619.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/progress.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '1619',
+  phases, parse: parseInput, build: buildTrace, code, python,
+  inputLabel: 'Object with arr, 20, 40 integers from 0 to 1000 (JSON)',
+  url: 'https://leetcode.com/problems/mean-of-array-after-removing-some-elements/',
+  complexity: 'O(n log n) time for the sort and O(n) for the sum, with O(n) extra space for the sorted copy.',
+  examples: [
+    { label: 'Twenty values', input: JSON.stringify({ arr: [4, 9, 1, 7, 3, 8, 2, 6, 5, 0, 100, 12, 11, 10, 13, 14, 15, 16, 17, 18] }) },
+    { label: 'Flat values', input: JSON.stringify({ arr: Array(20).fill(7) }) },
+    { label: 'Forty values', input: JSON.stringify({ arr: Array.from({ length: 40 }, (_, i) => (i * 37) % 101) }) },
+  ],
+}
 
-const definition = { ...definitions[1619], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function TrimmedMeanVisualizer() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const snap = step.snapshot
+    const values = snap.sorted ?? run.input.arr
+    const n = values.length
+    const removed = new Set([...snap.removedLow.map(v => `low:${v}`), ...snap.removedHigh.map(v => `high:${v}`)])
+    const lowCount = snap.removedLow.length
+    const highCount = snap.removedHigh.length
+    return <>
+      <div role="img" aria-label={snap.sorted ? 'Sorted values' : 'Input values'} style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+        {values.map((value, index) => {
+          const dropped = snap.sorted && (index < lowCount || index >= n - highCount)
+          const kept = snap.kept && snap.sorted && index >= snap.k && index < n - snap.k
+          return <div key={index} data-index={index} style={{
+            minWidth: 36, padding: '4px 6px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
+            border: '1px solid var(--border)', color: '#1c1917',
+            background: dropped ? '#fecaca' : kept ? '#bbf7d0' : 'transparent', opacity: dropped ? 0.6 : 1,
+          }}>{value}</div>
+        })}
+      </div>
+      <p>{`Removed ${lowCount} from the bottom and ${highCount} from the top (${removed.size} values total). Five percent of ${n} is ${snap.k}.`}</p>
+      {snap.kept && <output aria-label="Running total">{`Running total ${snap.total} over ${snap.kept.length} kept values`}</output>}
+    </>
+  }} renderReasoning={({ step }) => <>
+    <p><strong>Sort first:</strong> the smallest and largest values are exactly the ones at the two ends of the sorted list, so removing them is just slicing.</p>
+    <p><strong>Average what is left:</strong> divide the sum of the kept values by how many were kept, not by the original length.</p>
+  </>} />
+}

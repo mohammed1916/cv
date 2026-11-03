@@ -1,3 +1,11 @@
+export const phases = [
+  { id: "setup", label: "Setup", description: "Build the partner map and the rank table." },
+  { id: "scan", label: "Scan", description: "Visit each friend in order." },
+  { id: "check", label: "Check", description: "Test candidates ranked above the current partner." },
+  { id: "record", label: "Record", description: "Mark a friend unhappy when a candidate prefers them." },
+  { id: "done", label: "Result", description: "Report the number of unhappy friends." },
+];
+
 export const CODE = [
   "FUNCTION countUnhappyFriends(n, preferences, pairs)",
   "    partner ← array of size n",
@@ -72,7 +80,7 @@ export function buildTrace({ n, preferences, pairs }) {
   preferences.forEach((row, u) => row.forEach((w, pos) => { rank[u][w] = pos; }));
   const unhappy = Array(n).fill(false);
   const frames = [];
-  const snap = extra => ({ partner: partner.slice(), unhappy: unhappy.slice(), x: -1, u: -1, ...extra });
+  const snap = extra => ({ snapshot: { partner: partner.slice(), unhappy: unhappy.slice(), x: -1, u: -1, ...extra } });
 
   frames.push({ phase: "setup", activeLine: 3, message: "Pair each friend with partner[x] and partner[y].", ...snap({}) });
   frames.push({ phase: "setup", activeLine: 4, message: "Rank table built: rank[u][w] is the position of w in u's list.", ...snap({}) });
