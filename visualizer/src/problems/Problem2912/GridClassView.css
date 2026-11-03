@@ -1,0 +1,84 @@
+.grid-class-view {
+  display: grid;
+  gap: 12px;
+  color: inherit;
+}
+
+.grid-class-rule {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.grid-class-board {
+  display: grid;
+  gap: 4px;
+  max-width: 560px;
+}
+
+.grid-class-cell {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 48px;
+  border-radius: 6px;
+  border: 1px solid rgba(127, 127, 127, 0.4);
+  font-size: 0.8rem;
+}
+
+.grid-class-cell.is-d {
+  background: rgba(180, 83, 9, 0.28);
+  font-weight: 700;
+}
+
+.grid-class-cell.is-r {
+  background: rgba(29, 78, 216, 0.18);
+}
+
+.grid-class-cell.is-c {
+  background: rgba(15, 118, 110, 0.2);
+}
+
+.grid-class-cell.is-o {
+  background: rgba(127, 127, 127, 0.1);
+}
+
+.grid-class-coord {
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  font-size: 0.6rem;
+  opacity: 0.7;
+}
+
+.grid-class-tag {
+  font-weight: 700;
+}
+
+.grid-class-source {
+  position: absolute;
+  bottom: 2px;
+  right: 4px;
+  font-size: 0.6rem;
+  padding: 0 3px;
+  border-radius: 4px;
+  background: #b45309;
+  color: #fff;
+}
+
+.grid-class-counts {
+  border-collapse: collapse;
+  justify-self: start;
+  min-width: 260px;
+}
+
+.grid-class-counts th,
+.grid-class-counts td {
+  padding: 4px 10px;
+  border-bottom: 1px solid rgba(127, 127, 127, 0.35);
+  text-align: left;
+}
+
+.grid-class-message {
+  font-weight: 600;
+}

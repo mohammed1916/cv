@@ -1,0 +1,80 @@
+.range-letter-view {
+  display: grid;
+  gap: 12px;
+  color: inherit;
+}
+
+.range-rule {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.range-strip {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.range-cell {
+  display: grid;
+  justify-items: center;
+  min-width: 34px;
+  padding: 5px 4px;
+  border-radius: 6px;
+  border: 1px solid rgba(127, 127, 127, 0.4);
+  background: rgba(127, 127, 127, 0.08);
+  opacity: 0.6;
+}
+
+.range-cell.is-inside {
+  opacity: 1;
+  background: rgba(14, 116, 144, 0.16);
+  border-color: #0e7490;
+}
+
+.range-cell.is-counted {
+  background: rgba(14, 116, 144, 0.36);
+  font-weight: 700;
+}
+
+.range-index {
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+.range-table {
+  border-collapse: collapse;
+  justify-self: start;
+  min-width: 220px;
+}
+
+.range-table th,
+.range-table td {
+  padding: 4px 10px;
+  border-bottom: 1px solid rgba(127, 127, 127, 0.35);
+  text-align: left;
+}
+
+.range-table .is-current th,
+.range-table .is-current td {
+  font-weight: 700;
+  color: #0e7490;
+}
+
+.range-answer {
+  margin: 0;
+  font-weight: 700;
+}
+
+.range-answers {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.range-message {
+  font-weight: 600;
+}

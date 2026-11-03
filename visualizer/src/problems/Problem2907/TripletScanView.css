@@ -1,0 +1,73 @@
+.triplet-scan-view {
+  display: grid;
+  gap: 12px;
+  color: inherit;
+}
+
+.triplet-rule {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.triplet-table {
+  border-collapse: collapse;
+  width: 100%;
+  overflow-x: auto;
+  display: block;
+}
+
+.triplet-table th,
+.triplet-table td {
+  padding: 6px 10px;
+  border: 1px solid rgba(127, 127, 127, 0.35);
+  text-align: center;
+  min-width: 44px;
+}
+
+.triplet-table td.is-middle {
+  background: rgba(180, 83, 9, 0.2);
+  font-weight: 700;
+}
+
+.triplet-table td.is-scan {
+  outline: 3px dashed #1d4ed8;
+  outline-offset: -3px;
+}
+
+.triplet-table td.is-best {
+  background: rgba(15, 118, 110, 0.22);
+  font-weight: 700;
+}
+
+.triplet-role {
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+
+.triplet-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0;
+}
+
+.triplet-facts div {
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(127, 127, 127, 0.1);
+}
+
+.triplet-facts dt {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.triplet-facts dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+.triplet-message {
+  font-weight: 600;
+}

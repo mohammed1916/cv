@@ -1,0 +1,82 @@
+.weight-run-view {
+  display: grid;
+  gap: 12px;
+  color: inherit;
+}
+
+.weight-rule {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.weight-table {
+  border-collapse: collapse;
+  display: block;
+  overflow-x: auto;
+}
+
+.weight-table th,
+.weight-table td {
+  padding: 5px 9px;
+  border: 1px solid rgba(127, 127, 127, 0.35);
+  text-align: center;
+  min-width: 36px;
+}
+
+.weight-table .is-current {
+  background: rgba(190, 18, 60, 0.18);
+  font-weight: 700;
+}
+
+.weight-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+}
+
+.weight-facts div {
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(127, 127, 127, 0.1);
+}
+
+.weight-facts dt {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.weight-facts dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+.weight-seen-label {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.weight-seen ul {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.weight-seen li {
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(127, 127, 127, 0.12);
+}
+
+.weight-seen li.is-current {
+  background: rgba(190, 18, 60, 0.22);
+  font-weight: 700;
+}
+
+.weight-message {
+  font-weight: 600;
+}

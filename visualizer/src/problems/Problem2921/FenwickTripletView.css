@@ -1,0 +1,84 @@
+.fenwick-triplet-view {
+  display: grid;
+  gap: 12px;
+  color: inherit;
+}
+
+.fenwick-rule {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.fenwick-table {
+  border-collapse: collapse;
+  display: block;
+  overflow-x: auto;
+}
+
+.fenwick-table th,
+.fenwick-table td {
+  padding: 5px 9px;
+  border: 1px solid rgba(127, 127, 127, 0.35);
+  text-align: center;
+  min-width: 40px;
+}
+
+.fenwick-table .is-current {
+  background: rgba(29, 78, 216, 0.18);
+  font-weight: 700;
+}
+
+.fenwick-table .is-best {
+  background: rgba(15, 118, 110, 0.22);
+  font-weight: 700;
+}
+
+.fenwick-tree {
+  display: grid;
+  gap: 6px;
+}
+
+.fenwick-label {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.fenwick-tree ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.fenwick-tree li {
+  display: grid;
+  justify-items: center;
+  min-width: 56px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 2px solid #1d4ed8;
+  background: rgba(29, 78, 216, 0.1);
+}
+
+.fenwick-tree li.is-empty {
+  border-style: dashed;
+  background: transparent;
+  opacity: 0.7;
+}
+
+.fenwick-rank {
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+.fenwick-message {
+  font-weight: 600;
+}
+
+.fenwick-best {
+  margin: 0;
+  font-weight: 700;
+}

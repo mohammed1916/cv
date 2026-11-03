@@ -1,0 +1,64 @@
+.band-window-view {
+  display: grid;
+  gap: 12px;
+  color: inherit;
+}
+
+.band-rule {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.band-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.band-cell {
+  display: grid;
+  place-items: center;
+  min-width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  border: 1px solid rgba(127, 127, 127, 0.4);
+  font-weight: 600;
+  background: rgba(127, 127, 127, 0.08);
+}
+
+.band-cell.is-band {
+  background: rgba(15, 118, 110, 0.28);
+  border-color: #0f766e;
+}
+
+.band-cell.is-third-ok {
+  box-shadow: inset 0 -4px 0 #b45309;
+}
+
+.band-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+}
+
+.band-facts div {
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(127, 127, 127, 0.1);
+}
+
+.band-facts dt {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.band-facts dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+.band-message {
+  font-weight: 600;
+}

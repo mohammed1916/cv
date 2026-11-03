@@ -1,0 +1,77 @@
+.cost-grid-view {
+  display: grid;
+  gap: 12px;
+  color: inherit;
+}
+
+.cost-rule {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.cost-grid {
+  display: grid;
+  gap: 3px;
+}
+
+.cost-cell {
+  display: grid;
+  place-items: center;
+  min-height: 26px;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  background: rgba(127, 127, 127, 0.1);
+  opacity: 0.55;
+}
+
+.cost-cell.is-payable {
+  background: rgba(15, 118, 110, 0.3);
+  opacity: 1;
+}
+
+.cost-cell.is-gap {
+  background: rgba(190, 18, 60, 0.28);
+  opacity: 1;
+}
+
+.cost-cell.is-current {
+  outline: 2px solid #1d4ed8;
+  outline-offset: -2px;
+  font-weight: 700;
+  opacity: 1;
+}
+
+.cost-cell.is-answer {
+  outline: 3px solid #b45309;
+  outline-offset: -3px;
+  font-weight: 700;
+  opacity: 1;
+}
+
+.cost-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+}
+
+.cost-facts div {
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(127, 127, 127, 0.1);
+}
+
+.cost-facts dt {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.cost-facts dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+.cost-message {
+  font-weight: 600;
+}
