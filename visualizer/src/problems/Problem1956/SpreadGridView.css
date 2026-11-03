@@ -1,0 +1,21 @@
+.spread-grid { display: grid; gap: 12px; padding: 12px 0; }
+.spread-grid svg { width: 100%; max-width: 520px; height: auto; }
+.spread-grid__cell { fill: #f8fafc; stroke: #cbd5e1; }
+.spread-grid__cell.is-reach { fill: #ccfbf1; }
+.spread-grid__cell.is-probe { fill: #fde68a; stroke: #92400e; stroke-width: 2; }
+.spread-grid__seed circle { fill: #64748b; }
+.spread-grid__seed.is-in circle { fill: #be185d; }
+.spread-grid__seed text { fill: #fff; font-size: 10px; font-weight: 700; }
+.spread-grid__probe-label { font-size: 11px; font-weight: 700; fill: #78350f; }
+.spread-grid__facts { display: flex; flex-wrap: wrap; gap: 12px; margin: 0; }
+.spread-grid__facts div { border: 1px solid #94a3b8; border-radius: 8px; padding: 6px 10px; }
+.spread-grid__facts dt { font-size: 0.75rem; color: #475569; }
+.spread-grid__facts dd { margin: 0; font-weight: 700; }
+.spread-grid__track { position: relative; height: 10px; background: #e2e8f0; border-radius: 6px; }
+.spread-grid__span { position: absolute; top: 0; bottom: 0; background: #0f766e; border-radius: 6px; }
+.spread-grid__mid { position: absolute; top: -5px; bottom: -5px; width: 3px; background: #be185d; }
+@media (prefers-color-scheme: dark) {
+  .spread-grid__cell { fill: #0f172a; stroke: #334155; }
+  .spread-grid__cell.is-reach { fill: #134e4a; }
+  .spread-grid__track { background: #1e293b; }
+}
