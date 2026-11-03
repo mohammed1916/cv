@@ -1,4 +1,4 @@
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { isFreeProblem } from "../access/policy";
 import ProblemInfoPanel from "./ProblemInfoPanel";
@@ -19,6 +19,7 @@ export default function ProblemNavigation({
 }) {
   const dialog = useRef(null);
   const current = useRef(null);
+  const [query, setQuery] = useState("");
 
   const ordered = useMemo(
     () =>
@@ -33,6 +34,15 @@ export default function ProblemNavigation({
   );
 
   const index = ordered.findIndex((item) => item.id === problem.id);
+
+  const normalizedQuery = query.trim().toLowerCase();
+  const visibleItems = normalizedQuery
+    ? ordered.filter((item) =>
+        `${item.number} ${item.title} ${item.slug} ${(item.tags || []).join(" ")}`
+          .toLowerCase()
+          .includes(normalizedQuery),
+      )
+    : ordered;
 
   const locked = (item) => !pro && !isFreeProblem(item);
 
@@ -129,8 +139,17 @@ export default function ProblemNavigation({
               </button>
             </header>
 
+            <input
+              type="search"
+              className="problem-list-search"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Search by number, title, slug, or tag"
+              aria-label="Search problems"
+            />
+
             <nav aria-label="Problem list">
-              {ordered.map((item) => (
+              {visibleItems.map((item) => (
                 <button
                   key={item.id}
                   ref={item.id === problem.id ? current : undefined}

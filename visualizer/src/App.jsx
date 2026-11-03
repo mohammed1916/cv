@@ -476,6 +476,7 @@ function SettingsMenu({
 
 function ProblemPage({
   problem,
+  problems,
   onSelect,
   pro,
   onBack,
@@ -538,7 +539,7 @@ function ProblemPage({
       </header>
       <ProblemNavigation
         problem={problem}
-        problems={ALL_PROBLEMS}
+        problems={problems}
         pro={pro}
         onSelect={onSelect}
       />
@@ -1002,6 +1003,31 @@ function HomePage({
 /* ── Root App ────────────────────────────────────────────────────────── */
 export default function App() {
   const access = useAccess();
+  const [navCatalog, setNavCatalog] = useState([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    loadLeetCodeCatalog()
+      .then((payload) => {
+        if (cancelled) return;
+        setNavCatalog(Array.isArray(payload?.problems) ? payload.problems : []);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const navProblems = useMemo(
+    () =>
+      navCatalog.length
+        ? mergeCatalog(
+            navCatalog,
+            ALL_PROBLEMS.filter((problem) => problem.implemented),
+          )
+        : ALL_PROBLEMS,
+    [navCatalog],
+  );
   const [dialog, setDialog] = useState(null);
   const [tourStep, setTourStep] = useState(null);
   const [lockedTitle, setLockedTitle] = useState("");
@@ -1201,6 +1227,7 @@ export default function App() {
     <ProblemPage
       key={active.id}
       problem={active}
+      problems={navProblems}
       onSelect={selectProblem}
       pro={access.pro}
       onBack={goBack}
