@@ -1,0 +1,128 @@
+.pg-view {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  color: var(--text, #1f2937);
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--border, #d6dbe3);
+  border-radius: 12px;
+  overflow-x: auto;
+}
+
+.pg-row-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  color: var(--muted, #5b6472);
+}
+
+.pg-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pg-slot {
+  display: grid;
+  justify-items: center;
+  min-width: 44px;
+  padding: 6px 8px;
+  border: 2px dashed var(--border, #b8c0cc);
+  border-radius: 8px;
+}
+
+.pg-slot--filled {
+  border-style: solid;
+  border-color: #0f766e;
+  background: #ccfbf1;
+}
+
+.pg-slot--current {
+  outline: 3px solid #1d4ed8;
+  outline-offset: 2px;
+}
+
+.pg-index {
+  font-size: 0.7rem;
+  color: var(--muted, #5b6472);
+}
+
+.pg-value {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.pg-chip {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  min-width: 44px;
+  padding: 6px 8px;
+  font-weight: 700;
+  border: 1px solid #94a3b8;
+  border-radius: 999px;
+  background: #f8fafc;
+}
+
+.pg-chip small {
+  font-size: 0.65rem;
+  font-weight: 500;
+}
+
+.pg-chip--used {
+  opacity: 0.35;
+  background: #e2e8f0;
+  text-decoration: line-through;
+}
+
+.pg-chip--tested {
+  border-color: #1d4ed8;
+  background: #dbeafe;
+}
+
+.pg-chip--rejected {
+  border-color: #b91c1c;
+  background: #fee2e2;
+  color: #7f1d1d;
+}
+
+.pg-chip i {
+  position: absolute;
+  top: -6px;
+  right: -4px;
+  font-style: normal;
+  font-weight: 800;
+  color: #b91c1c;
+}
+
+.pg-verdict {
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  font-size: 0.92rem;
+}
+
+.pg-verdict--ok {
+  background: #dcfce7;
+  color: #14532d;
+}
+
+.pg-verdict--no {
+  background: #fee2e2;
+  color: #7f1d1d;
+}
+
+.pg-count {
+  font-weight: 700;
+}
+
+.pg-empty {
+  margin: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .pg-view {
+    color: #e5e7eb;
+    background: #111827;
+    border-color: #374151;
+  }
+}

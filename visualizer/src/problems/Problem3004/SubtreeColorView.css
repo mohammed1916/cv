@@ -1,0 +1,104 @@
+.sc-view {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  color: var(--text, #1f2937);
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--border, #d6dbe3);
+  border-radius: 12px;
+  overflow-x: auto;
+}
+
+.sc-view svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.sc-edge {
+  stroke: #94a3b8;
+  stroke-width: 2;
+}
+
+.sc-edge--active {
+  stroke: #1d4ed8;
+  stroke-width: 4;
+  stroke-dasharray: 6 4;
+}
+
+.sc-node circle {
+  stroke: #ffffff;
+  stroke-width: 2;
+}
+
+.sc-node--current circle {
+  stroke: #111827;
+  stroke-width: 4;
+}
+
+.sc-node--best circle {
+  stroke: #facc15;
+  stroke-width: 5;
+}
+
+.sc-node--mixed .sc-meta {
+  fill: #b91c1c;
+}
+
+.sc-id {
+  fill: #ffffff;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.sc-meta {
+  fill: var(--muted, #374151);
+  font-size: 12px;
+}
+
+.sc-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: var(--muted, #5b6472);
+}
+
+.sc-swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 4px;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.sc-swatch--best {
+  background: #facc15;
+}
+
+.sc-swatch--current {
+  background: #111827;
+}
+
+.sc-swatch--mixed {
+  background: #b91c1c;
+}
+
+.sc-best {
+  font-weight: 700;
+}
+
+.sc-empty {
+  margin: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .sc-view {
+    color: #e5e7eb;
+    background: #111827;
+    border-color: #374151;
+  }
+  :root:not([data-theme="light"]) .sc-meta {
+    fill: #d1d5db;
+  }
+}
