@@ -12,16 +12,16 @@ export function buildTrace({ nums }) {
   const n = nums.length
   const frames = []
   const count = Array(n + 1).fill(0)
-  frames.push({ pythonLine: PL('count = [0] * (n + 1)'), phase: 'start', activeLine: L('count how many students'), k: -1, count: [...count], less: 0, ways: 0, message: 'Count how many students have each value.' })
+  frames.push({ pythonLine: PL('count = [0] * (n + 1)'), phase: 'start', activeLine: L('count[v] = number'), k: -1, count: [...count], less: 0, ways: 0, message: 'Count how many students have each value.' })
   for (const x of nums) {
     count[x] += 1
-    frames.push({ pythonLine: PL('count[x] += 1'), phase: 'count', activeLine: L('count how many students'), k: -1, count: [...count], less: 0, ways: 0, message: `A student with value ${x} is counted.` })
+    frames.push({ pythonLine: PL('count[x] += 1'), phase: 'count', activeLine: L('count[v] = number'), k: -1, count: [...count], less: 0, ways: 0, message: `A student with value ${x} is counted.` })
   }
   let ways = 0
   let less = 0
   for (let k = 0; k <= n; k++) {
     const valid = less === k && count[k] === 0
-    frames.push({ pythonLine: PL('if less == k and count[k] == 0:'), phase: 'check', activeLine: L('if exactly k students'), k, count: [...count], less, ways, valid, message: `Group size ${k}: ${less} students have a value below ${k}, and ${count[k]} have exactly ${k}. ${valid ? 'Valid.' : 'Invalid.'}` })
+    frames.push({ pythonLine: PL('if less == k and count[k] == 0:'), phase: 'check', activeLine: L('if less is k'), k, count: [...count], less, ways, valid, message: `Group size ${k}: ${less} students have a value below ${k}, and ${count[k]} have exactly ${k}. ${valid ? 'Valid.' : 'Invalid.'}` })
     if (valid) {
       ways += 1
       frames.push({ pythonLine: PL('ways += 1'), phase: 'check', activeLine: L('add one way'), k, count: [...count], less, ways, valid, message: `Size ${k} is one way to make everyone happy.` })

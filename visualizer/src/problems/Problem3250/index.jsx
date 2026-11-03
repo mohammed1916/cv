@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-count-of-monotonic-pairs-i/',
   complexity: 'O(n * V^2) time for this trace and O(n * V) space; the Python version uses prefix sums for O(n * V). The visualization caps nums at 6 values from 0 to 6.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[2,3,2]}' },
-    { label: 'Example 2', input: '{"nums":[5,5,5,5]}' },
+    { label: 'Dip then rise', input: '{"nums":[3,1,4,4]}' },
+    { label: 'Flat run', input: '{"nums":[6,6,6]}' },
   ],
 }
 

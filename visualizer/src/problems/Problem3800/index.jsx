@@ -18,7 +18,7 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"0110","t":"1001","flipCost":4,"swapCost":3,"crossCost":1}' },
     { label: 'Example 2', input: '{"s":"11","t":"00","flipCost":1,"swapCost":9,"crossCost":2}' },
-    { label: 'Equal', input: '{"s":"1010","t":"1010","flipCost":5,"swapCost":5,"crossCost":5}' },
+    { label: 'Equal', input: '{"s":"110010","t":"110010","flipCost":7,"swapCost":2,"crossCost":4}' },
   ],
 }
 

@@ -22,19 +22,19 @@ function parseJson(text) {
   try {
     return JSON.parse(text);
   } catch {
-    throw new Error('Input must be valid JSON, e.g. {"date":"20th Oct 2052"}');
+    throw new Error('Input must be valid JSON, e.g. {"date":"11th Mar 1987"}');
   }
 }
 
 export function parseInput(text) {
   const input = typeof text === "string" ? parseJson(text) : text;
   if (!input || typeof input !== "object" || Array.isArray(input)) {
-    throw new Error('Input must be a JSON object with a date string, e.g. {"date":"20th Oct 2052"}');
+    throw new Error('Input must be a JSON object with a date string, e.g. {"date":"11th Mar 1987"}');
   }
   const { date } = input;
-  if (typeof date !== "string") throw new Error("date must be a string such as 20th Oct 2052");
+  if (typeof date !== "string") throw new Error("date must be a string such as 11th Mar 1987");
   const match = /^(\d{1,2})(st|nd|rd|th) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (\d{4})$/.exec(date);
-  if (!match) throw new Error('date must look like "20th Oct 2052": ordinal day, three-letter month, four-digit year');
+  if (!match) throw new Error('date must look like "11th Mar 1987": ordinal day, three-letter month, four-digit year');
   const day = Number(match[1]);
   const year = Number(match[4]);
   if (day < 1 || day > 31) throw new Error(`day ${day} must be between 1 and 31`);

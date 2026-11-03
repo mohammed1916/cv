@@ -18,8 +18,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-k-th-character-in-string-game-ii/',
   complexity: 'O(m) time and O(1) extra space for m operations (m at most 100). The visualization shows the full operation list.',
   examples: [
-    { label: 'Example 1', input: '{"k": 5, "operations": [0, 0, 0]}' },
-    { label: 'Example 2', input: '{"k": 10, "operations": [0, 1, 0, 1]}' },
+    { label: 'Example 1', input: '{"k": 7, "operations": [1, 0, 1]}' },
+    { label: 'Example 2', input: '{"k": 11, "operations": [1, 1, 0, 1]}' },
   ],
 }
 

@@ -49,7 +49,7 @@ export function parseInput(text) {
     try {
       data = JSON.parse(text);
     } catch {
-      throw new Error('Input must be JSON, e.g. {"nums": [2,1,5,1,1]}');
+      throw new Error('Input must be JSON, e.g. {"nums": [3,1,6]}');
     }
   }
   if (!data || typeof data !== "object" || Array.isArray(data)) {
@@ -140,6 +140,6 @@ export function buildTrace(input) {
 }
 
 export const sampleInputs = [
-  { label: "Example 1", input: { nums: [2, 1, 5, 1, 1] } },
-  { label: "Example 2", input: { nums: [1, 4, 7, 10] } },
+  { label: "Example 1", input: { nums: [5, 1, 2, 2, 8] } },
+  { label: "Example 2", input: { nums: [9, 3, 3, 4, 10, 2] } },
 ];

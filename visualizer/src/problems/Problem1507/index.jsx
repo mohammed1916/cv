@@ -11,13 +11,13 @@ const definition = {
     { id: 'done', label: 'Result', description: 'Assemble YYYY-MM-DD.' },
   ],
   parse: parseInput, build: buildTrace, code, python, pythonLineMap,
-  inputLabel: 'Date (JSON object with date, e.g. {"date":"20th Oct 2052"})',
+  inputLabel: 'Date (JSON object with date, e.g. {"date":"11th Mar 1987"})',
   url: 'https://leetcode.com/problems/reformat-date/',
   complexity: 'O(1) time and O(1) space because the date has three fixed parts.',
   examples: [
-    { label: 'Oct 20', input: '{"date":"20th Oct 2052"}' },
-    { label: 'Jun 6', input: '{"date":"6th Jun 1933"}' },
-    { label: 'May 26', input: '{"date":"26th May 1960"}' },
+    { label: 'Mar 11 (teen ordinal)', input: '{"date":"11th Mar 1987"}' },
+    { label: 'Sep 23 (rd ordinal)', input: '{"date":"23rd Sep 2041"}' },
+    { label: 'Dec 1 (st ordinal)', input: '{"date":"1st Dec 1999"}' },
   ],
 }
 

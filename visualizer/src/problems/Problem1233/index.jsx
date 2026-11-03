@@ -15,12 +15,12 @@ const definition = {
   code,
   python,
   pythonLineMap,
-  inputLabel: 'Folder paths (e.g. {"folder":["/a","/a/b","/c/d","/c/d/e","/c/f"]})',
+  inputLabel: 'Folder paths (e.g. {"folder":["/src/app/ui","/src","/src/app","/lib/io","/lib"]})',
   url: "https://leetcode.com/problems/remove-sub-folders-from-the-filesystem/",
   complexity: "O(n log n) time for sorting plus the total path length, and O(n) extra space. The visualization accepts up to 64 paths.",
   examples: [
-    { label: "Nested folders", input: JSON.stringify({ folder: ["/a", "/a/b", "/c/d", "/c/d/e", "/c/f"] }) },
-    { label: "Prefix is not a parent", input: JSON.stringify({ folder: ["/a/b/c", "/a/b/ca", "/a/b/d"] }) },
+    { label: "Nested folders", input: '{"folder": ["/src/app/ui", "/src", "/src/app", "/lib/io", "/src/appx", "/lib/io/tmp/x", "/lib"]}' },
+    { label: "Prefix is not a parent", input: '{"folder": ["/app/log", "/app/logs", "/app/log/archive", "/app/cache"]}' },
   ],
 };
 

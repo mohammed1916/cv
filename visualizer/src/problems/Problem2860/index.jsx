@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/happy-students/',
   complexity: 'O(n) time with a counting array of size n + 1.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,1]}' },
-    { label: 'Example 2', input: '{"nums":[6,0,3,3,6,7,2,7]}' },
+    { label: 'Two groups', input: '{"nums":[4,4,1,0,4,2]}' },
+    { label: 'Single group', input: '{"nums":[2,3,0,1,4]}' },
   ],
 }
 

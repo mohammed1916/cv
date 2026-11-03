@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
 import IndexedSequence from "../../components/shared/IndexedSequence";
-import { code, python, pythonLineMap, parseInput, buildTrace, sampleInputs } from "./algorithm";
+import { code, python, pythonLineMap, parseInput, buildTrace } from "./algorithm";
 
 const definition = {
   phases: [
@@ -18,7 +18,10 @@ const definition = {
   inputLabel: 'JSON {"nums": [...]}',
   url: "https://leetcode.com/problems/maximize-consecutive-elements-in-an-array-after-modification/",
   complexity: "O(n log n) time for the sort and O(n) extra space. The visualization caps nums at 30 values up to 60.",
-  examples: sampleInputs.map(({ label, input }) => ({ label, input: JSON.stringify(input) })),
+  examples: [
+    { label: "Example 1", input: '{"nums": [5, 1, 2, 2, 8]}' },
+    { label: "Example 2", input: '{"nums": [9, 3, 3, 4, 10, 2]}' },
+  ],
 };
 
 export default function MaximizeConsecutiveVisualizer() {

@@ -15,12 +15,12 @@ const definition = {
   build: buildTrace,
   code,
   python,
-  inputLabel: 'JSON object with nums and k (e.g. {"nums": [1,2,3,4,5], "k": 3})',
+  inputLabel: 'JSON object with nums and k (e.g. {"nums": [4,9,2,9,6], "k": 4})',
   url: "https://leetcode.com/problems/maximum-sum-with-exactly-k-elements/",
   complexity: "O(n + k) time and O(1) extra space. The visualization caps nums and k at 100.",
   examples: [
-    { label: "nums = [1,2,3,4,5], k = 3", input: '{"nums": [1, 2, 3, 4, 5], "k": 3}' },
-    { label: "nums = [5,5,5], k = 2", input: '{"nums": [5, 5, 5], "k": 2}' },
+    { label: "nums = [4,9,2,9,6], k = 4 (repeated maximum)", input: '{"nums": [4, 9, 2, 9, 6], "k": 4}' },
+    { label: "nums = [20,20,20,20,4], k = 6 (tied block)", input: '{"nums": [20, 20, 20, 20, 4], "k": 6}' },
   ],
 };
 

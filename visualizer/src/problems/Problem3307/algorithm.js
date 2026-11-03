@@ -34,7 +34,7 @@ export function parseInput(text) {
   try {
     data = JSON.parse(text);
   } catch {
-    throw new Error('Input must be JSON, for example {"k": 5, "operations": [0, 0, 0]}');
+    throw new Error('Input must be JSON, for example {"k": 4, "operations": [1, 0]}');
   }
   if (!data || typeof data !== 'object' || Array.isArray(data)) throw new Error('Input must be a JSON object with k and operations');
   const { k, operations } = data;

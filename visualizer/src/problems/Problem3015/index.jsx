@@ -12,11 +12,12 @@ const definition = {
   build: buildTrace,
   code,
   python,
-  inputLabel: "JSON object: {\"n\": 5, \"x\": 2, \"y\": 4} (2 to 30 houses for this view)",
+  inputLabel: "JSON object: {\"n\": 6, \"x\": 2, \"y\": 5} (2 to 30 houses for this view)",
   url: "https://leetcode.com/problems/count-the-number-of-houses-at-a-certain-distance-i/",
   complexity: "O(n^2) time and O(n) space. The visualization caps n at 30; LeetCode allows n up to 100.",
   examples: [
-    { label: "n=5, x=2, y=4", input: "{\"n\": 5, \"x\": 2, \"y\": 4}" },
+    { label: "n=6, x=2, y=5", input: "{\"n\": 6, \"x\": 2, \"y\": 5}" },
+    { label: "n=4, x=1, y=4", input: "{\"n\": 4, \"x\": 1, \"y\": 4}" },
   ],
 }
 
