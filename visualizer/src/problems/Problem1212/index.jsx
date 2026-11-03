@@ -1,0 +1,37 @@
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import { buildTrace, parseInput, code, sql, python, phases } from './algorithm'
+
+const cell = { border: '1px solid currentColor', padding: '4px 8px', textAlign: 'left' }
+
+function RowTable({ label, columns = [], rows = [] }) {
+  return <div>
+    <p><strong>{label}</strong></p>
+    <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 14 }}>
+      <thead><tr>{columns.map(column => <th key={column} style={cell}>{column}</th>)}</tr></thead>
+      <tbody>{rows.length ? rows.map((row, index) => <tr key={index}>
+        {columns.map(column => <td key={column} style={cell}>{String(row[column] ?? '')}</td>)}
+      </tr>) : <tr><td style={cell} colSpan={Math.max(1, columns.length)}>No rows yet</td></tr>}</tbody>
+    </table>
+  </div>
+}
+
+const definition = {
+  phases, parse: parseInput, build: buildTrace, code, sql, python,
+  inputLabel: 'Object with teams (team_id, team_name) and matches (host_team, guest_team, host_goals, guest_goals)',
+  url: 'https://leetcode.com/problems/team-scores-in-football-tournament/',
+  complexity: 'O(T + M log T) for T teams and M matches. The visualization caps the tables at small sizes.',
+  examples: [
+    { label: 'Four teams', input: '{"teams":[{"team_id":10,"team_name":"Ash"},{"team_id":20,"team_name":"Birch"},{"team_id":30,"team_name":"Cedar"},{"team_id":40,"team_name":"Dune"}],"matches":[{"match_id":1,"host_team":10,"guest_team":20,"host_goals":2,"guest_goals":2},{"match_id":2,"host_team":30,"guest_team":10,"host_goals":0,"guest_goals":3},{"match_id":3,"host_team":20,"guest_team":30,"host_goals":1,"guest_goals":0}]}' },
+    { label: 'No matches', input: '{"teams":[{"team_id":1,"team_name":"Oak"},{"team_id":2,"team_name":"Pine"}],"matches":[]}' },
+  ],
+}
+
+export default function TeamScoresInFootballTournament() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <RowTable label={`Working standings (${step.phase})`} columns={step.columns} rows={step.rows} />
+    {step.phase === 'done' && <RowTable label="Result" columns={run.columns} rows={run.result} />}
+  </>} renderReasoning={() => <>
+    <p>Every match is worth points to each side: a win gives 3, a draw gives 1 to both teams, and a loss gives 0.</p>
+    <p>Because the points are gathered from both the host and guest columns, each team is checked once per appearance. Joining the totals back onto the teams table keeps teams with no matches at zero.</p>
+  </>} />
+}
