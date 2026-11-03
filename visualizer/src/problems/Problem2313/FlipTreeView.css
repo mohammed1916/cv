@@ -1,0 +1,57 @@
+.ft-view {
+  --ft-ink: #0f172a;
+  --ft-muted: #475569;
+  --ft-leaf: #0369a1;
+  --ft-leaf-fill: #e0f2fe;
+  --ft-op: #7c2d12;
+  --ft-op-fill: #ffedd5;
+  --ft-done: #15803d;
+  --ft-current: #7e22ce;
+  --ft-edge: #94a3b8;
+  color: var(--ft-ink);
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  .ft-view {
+    --ft-ink: #e2e8f0;
+    --ft-muted: #94a3b8;
+    --ft-leaf: #7dd3fc;
+    --ft-leaf-fill: #0c4a6e;
+    --ft-op: #fdba74;
+    --ft-op-fill: #7c2d12;
+    --ft-done: #4ade80;
+    --ft-current: #d8b4fe;
+    --ft-edge: #64748b;
+  }
+}
+
+.ft-title { margin: 0; font-size: 1.05rem; }
+.ft-status, .ft-message, .ft-empty { margin: 2px 0; color: var(--ft-muted); }
+.ft-stage { overflow-x: auto; }
+.ft-svg { width: 100%; max-width: 620px; height: auto; display: block; margin: 0 auto; }
+
+.ft-edge { stroke: var(--ft-edge); stroke-width: 2; }
+.ft-edge--done { stroke: var(--ft-done); }
+
+.ft-node circle { stroke-width: 2; stroke: var(--ft-muted); fill: var(--ft-cell, #f8fafc); }
+.ft-node--leaf circle { fill: var(--ft-leaf-fill); stroke: var(--ft-leaf); }
+.ft-node--op circle { fill: var(--ft-op-fill); stroke: var(--ft-op); }
+.ft-node--done circle { stroke: var(--ft-done); stroke-width: 3; }
+.ft-node--current circle { stroke: var(--ft-current); stroke-width: 5; }
+
+.ft-label { font-size: 13px; font-weight: 700; fill: var(--ft-ink); }
+.ft-pair { font-size: 11px; fill: var(--ft-muted); }
+
+.ft-legend {
+  list-style: none; margin: 0; padding: 0; display: grid; gap: 4px;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); font-size: 0.85rem; color: var(--ft-muted);
+}
+.ft-swatch { display: inline-block; width: 14px; height: 14px; border-radius: 50%; margin-right: 6px; vertical-align: -2px; border: 2px solid var(--ft-muted); }
+.ft-swatch--leaf { background: var(--ft-leaf-fill); border-color: var(--ft-leaf); }
+.ft-swatch--op { background: var(--ft-op-fill); border-color: var(--ft-op); }
+.ft-swatch--done { border-color: var(--ft-done); border-width: 3px; }
+.ft-swatch--current { border-color: var(--ft-current); border-width: 4px; }
