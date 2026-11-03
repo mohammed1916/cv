@@ -1,0 +1,12 @@
+.ss-view { display: grid; gap: 0.75rem; padding: 0.5rem 0; }
+.ss-empty, .ss-caption, .ss-status { margin: 0; }
+.ss-range { position: relative; height: 1.2rem; border-radius: 999px; background: rgba(148, 163, 184, 0.3); overflow: hidden; }
+.ss-range__fill { position: absolute; top: 0; bottom: 0; background: rgba(15, 118, 110, 0.25); }
+.ss-range__lo { position: absolute; top: 0; bottom: 0; width: 3px; background: #0f766e; }
+.ss-range__probe { position: absolute; top: -0.2rem; bottom: -0.2rem; width: 3px; background: #f59e0b; }
+.ss-monsters { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; margin: 0; padding: 0; }
+.ss-monster { border: 2px solid #94a3b8; border-radius: 0.5rem; padding: 0.4rem 0.6rem; display: grid; gap: 0.2rem; min-width: 6rem; }
+.ss-monster--active { border-color: #0f766e; background: rgba(15, 118, 110, 0.12); }
+.ss-monster--fail { border-color: #b91c1c; background: rgba(185, 28, 28, 0.12); }
+.ss-monster__need { font-weight: 700; }
+.ss-monster__boost, .ss-monster__now { font-size: 0.8rem; opacity: 0.85; }

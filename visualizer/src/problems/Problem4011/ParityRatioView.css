@@ -1,0 +1,16 @@
+.pr-view { display: grid; gap: 0.75rem; padding: 0.5rem 0; }
+.pr-empty, .pr-target, .pr-verdict { margin: 0; }
+.pr-target { font-weight: 600; }
+.pr-row { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.pr-cell { width: 3.2rem; border-radius: 0.4rem; border: 2px solid transparent; padding: 0.35rem 0.2rem; text-align: center; display: grid; gap: 0.15rem; }
+.pr-cell--even { background: rgba(120, 113, 108, 0.18); }
+.pr-cell--odd { background: rgba(37, 99, 235, 0.18); }
+.pr-cell--range { border-color: #f59e0b; }
+.pr-value { font-weight: 700; font-variant-numeric: tabular-nums; }
+.pr-kind { font-size: 0.7rem; opacity: 0.8; }
+.pr-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr)); gap: 0.5rem; margin: 0; }
+.pr-cards div { border: 1px solid #94a3b8; border-radius: 0.5rem; padding: 0.5rem; }
+.pr-cards dt { font-size: 0.75rem; opacity: 0.75; }
+.pr-cards dd { margin: 0.25rem 0 0; font-weight: 700; }
+.pr-verdict--yes { color: #0f766e; font-weight: 600; }
+.pr-verdict--no { color: #b91c1c; font-weight: 600; }

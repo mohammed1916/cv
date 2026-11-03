@@ -1,0 +1,9 @@
+.db-view { display: grid; gap: 0.75rem; padding: 0.5rem 0; }
+.db-empty, .db-target, .db-caption, .db-status { margin: 0; }
+.db-target { font-weight: 600; }
+.db-skips { margin: 0; padding-left: 1.2rem; font-size: 0.9rem; }
+.db-block { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.db-number { display: inline-flex; padding: 0.3rem 0.4rem; border: 1px solid #94a3b8; border-radius: 0.4rem; font-variant-numeric: tabular-nums; }
+.db-number--active { border-color: #0f766e; background: rgba(15, 118, 110, 0.12); }
+.db-digit { font-weight: 600; }
+.db-digit--hit { color: #fff; background: #f59e0b; border-radius: 0.2rem; padding: 0 0.1rem; }
