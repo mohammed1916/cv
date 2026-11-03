@@ -1,0 +1,76 @@
+.gtv {
+  display: grid;
+  gap: 12px;
+  color: var(--code-text, #1f2937);
+}
+
+.gtv-grid {
+  display: inline-grid;
+  gap: 4px;
+  justify-self: start;
+}
+
+.gtv-row {
+  display: flex;
+  gap: 4px;
+}
+
+.gtv-cell {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  width: 56px;
+  height: 56px;
+  border: 2px solid #cbd5e1;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.gtv-cell--reached {
+  background: #ecfdf5;
+  border-color: #6ee7b7;
+}
+
+.gtv-cell--next {
+  border-style: dashed;
+  border-color: #0369a1;
+}
+
+.gtv-cell--now {
+  outline: 3px solid #f59e0b;
+  outline-offset: 1px;
+}
+
+.gtv-cell--goal {
+  border-color: #7c3aed;
+  border-width: 3px;
+}
+
+.gtv-value {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.gtv-best {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.gtv-arrow {
+  position: absolute;
+  top: 0;
+  right: 3px;
+  font-size: 14px;
+  color: #b45309;
+}
+
+.gtv-key,
+.gtv-facts {
+  margin: 0;
+  font-size: 13px;
+}
+
+.gtv-facts {
+  padding-left: 18px;
+}

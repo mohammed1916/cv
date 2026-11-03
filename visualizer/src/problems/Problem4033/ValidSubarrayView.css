@@ -1,0 +1,102 @@
+.vsk {
+  display: grid;
+  gap: 16px;
+  color: var(--code-text, #1f2937);
+}
+
+.vsk-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.vsk-cell {
+  display: grid;
+  justify-items: center;
+  min-width: 44px;
+  padding: 6px 8px;
+  border: 2px solid #cbd5e1;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.vsk-cell--in {
+  border-color: #0f766e;
+  background: #ccfbf1;
+}
+
+.vsk-cell--now {
+  outline: 3px solid #f59e0b;
+  outline-offset: 2px;
+}
+
+.vsk-index {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.vsk-value {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.vsk-table ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.vsk-odd {
+  color: #b45309;
+  font-weight: 600;
+}
+
+.vsk-even {
+  color: #047857;
+}
+
+.vsk-muted {
+  color: #64748b;
+}
+
+.vsk-yes {
+  color: #047857;
+  font-weight: 700;
+}
+
+.vsk-no {
+  color: #b91c1c;
+  font-weight: 700;
+}
+
+.vsk-answers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.vsk-chip {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #cbd5e1;
+  font-size: 13px;
+}
+
+.vsk-chip--yes {
+  border-color: #047857;
+  color: #047857;
+}
+
+.vsk-chip--no {
+  border-color: #b91c1c;
+  color: #b91c1c;
+}
+
+.vsk-chip--now {
+  box-shadow: 0 0 0 2px #f59e0b;
+}
+
+@media (max-width: 480px) {
+  .vsk-cell {
+    min-width: 36px;
+  }
+}

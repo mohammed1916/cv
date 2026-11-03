@@ -1,0 +1,76 @@
+.ssv {
+  display: grid;
+  gap: 12px;
+  color: var(--code-text, #1f2937);
+}
+
+.ssv-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.ssv-cell {
+  display: grid;
+  justify-items: center;
+  min-width: 40px;
+  padding: 4px 6px;
+  border: 2px solid #cbd5e1;
+  border-radius: 6px;
+  background: #f8fafc;
+}
+
+.ssv-cell--unknown {
+  color: #94a3b8;
+  border-style: dashed;
+}
+
+.ssv-cell--now {
+  outline: 3px solid #f59e0b;
+  outline-offset: 1px;
+}
+
+.ssv-cell--new {
+  background: #dcfce7;
+  border-color: #047857;
+}
+
+.ssv-total {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.ssv-days {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.ssv-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.ssv-day {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ssv-day--score {
+  background: #0f766e;
+  color: #ffffff;
+}
+
+.ssv-day--skip {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+.ssv-line,
+.ssv-key {
+  margin: 0;
+  font-size: 13px;
+}

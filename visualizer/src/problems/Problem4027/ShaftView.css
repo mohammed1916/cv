@@ -1,0 +1,97 @@
+.shf {
+  color: var(--code-text, #1f2937);
+}
+
+.shf-layout {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.shf-shaft {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 4px solid #475569;
+}
+
+.shf-floor {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 4px 8px;
+  border-bottom: 1px dashed #cbd5e1;
+  font-size: 13px;
+}
+
+.shf-floor--start {
+  background: #eff6ff;
+}
+
+.shf-floor--from {
+  background: #fef9c3;
+}
+
+.shf-floor--to {
+  background: #ecfdf5;
+  font-weight: 700;
+}
+
+.shf-num {
+  min-width: 64px;
+  color: #475569;
+}
+
+.shf-tag {
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: #1d4ed8;
+  color: #ffffff;
+}
+
+.shf-req {
+  padding: 2px 8px;
+  border: 1px solid #b45309;
+  border-radius: 999px;
+  color: #92400e;
+}
+
+.shf-req--done {
+  border-color: #047857;
+  color: #047857;
+  text-decoration: line-through;
+}
+
+.shf-table table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 14px;
+}
+
+.shf-table th,
+.shf-table td {
+  text-align: left;
+  padding: 4px 8px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.shf-row-now td {
+  background: #fef3c7;
+  font-weight: 700;
+}
+
+.shf-muted,
+.shf-msg {
+  margin: 4px 0;
+  font-size: 13px;
+  color: #475569;
+}
+
+@media (max-width: 560px) {
+  .shf-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

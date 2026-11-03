@@ -1,0 +1,54 @@
+.pl {
+  display: grid;
+  gap: 10px;
+  color: var(--code-text, #1f2937);
+}
+
+.pl-svg {
+  width: 100%;
+  height: auto;
+  max-width: 560px;
+}
+
+.pl-axis {
+  stroke: #94a3b8;
+  stroke-width: 2;
+}
+
+.pl-band {
+  fill: rgba(245, 158, 11, 0.22);
+  stroke: #b45309;
+  stroke-dasharray: 4 3;
+}
+
+.pl-dot {
+  fill: #0f766e;
+}
+
+.pl-dot--close {
+  fill: #b45309;
+}
+
+.pl-current {
+  fill: none;
+  stroke: #7c3aed;
+  stroke-width: 3;
+}
+
+.pl-now text,
+.pl-caption {
+  font-size: 12px;
+  fill: #334155;
+}
+
+.pl-facts {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 14px;
+}
+
+.pl-note {
+  margin: 0;
+  font-size: 13px;
+  color: #475569;
+}
