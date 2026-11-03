@@ -1,0 +1,23 @@
+.ledger-view { display: grid; gap: 12px; padding: 12px; }
+.ledger-view__centers { display: grid; gap: 6px; }
+.ledger-view__center {
+  display: grid; grid-template-columns: 90px 1fr auto; gap: 8px; align-items: center;
+  padding: 6px 10px; border-radius: 10px; border: 2px solid var(--border, #cbd5e1);
+}
+.ledger-view__center.is-current { border-color: #1d4ed8; background: rgba(29, 78, 216, 0.06); }
+.ledger-view__name { font-weight: 700; }
+.ledger-view__meta, .ledger-view__result { font-size: 0.9rem; }
+.ledger-view__tiles { display: flex; flex-wrap: wrap; gap: 4px; }
+.ledger-view__tile {
+  display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 6px;
+  font-weight: 700; font-size: 0.85rem; border: 1px solid var(--border, #94a3b8);
+  background: var(--surface, #f8fafc); color: var(--muted, #64748b);
+}
+.ledger-view__tile.is-upgrade { background: #1d4ed8; color: #eff6ff; border-color: #1d4ed8; }
+.ledger-view__tile.is-sell { background: #fef3c7; color: #78350f; border-color: #b45309; }
+.ledger-view__ledger { margin: 0; font-variant-numeric: tabular-nums; }
+@media (prefers-color-scheme: dark) {
+  .ledger-view__tile { background: #1e293b; color: #94a3b8; border-color: #475569; }
+  .ledger-view__tile.is-upgrade { background: #60a5fa; color: #0f172a; border-color: #60a5fa; }
+  .ledger-view__tile.is-sell { background: #451a03; color: #fde68a; border-color: #d97706; }
+}

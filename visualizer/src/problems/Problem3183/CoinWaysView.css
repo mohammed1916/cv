@@ -1,0 +1,19 @@
+.coin-ways { display: grid; gap: 12px; padding: 12px; }
+.coin-ways__strip { display: flex; flex-wrap: wrap; gap: 4px; }
+.coin-ways__cell {
+  display: grid; place-items: center; min-width: 44px; padding: 4px 6px; border-radius: 8px;
+  border: 1px solid var(--border, #cbd5e1); background: var(--surface, #f8fafc); color: var(--text, #0f172a);
+  font-variant-numeric: tabular-nums;
+}
+.coin-ways__cell small { color: var(--muted, #64748b); font-size: 0.75rem; }
+.coin-ways__cell b { font-size: 0.95rem; }
+.coin-ways__cell.is-current { outline: 3px solid #9333ea; outline-offset: 2px; background: #f3e8ff; }
+.coin-ways__cell.is-read { border: 2px solid #9333ea; font-weight: 700; }
+.coin-ways__fours { margin: 0; padding-left: 18px; display: grid; gap: 2px; font-variant-numeric: tabular-nums; }
+.coin-ways__total { font-weight: 700; }
+.coin-ways__status, .coin-ways__caption { margin: 0; }
+@media (prefers-color-scheme: dark) {
+  .coin-ways__cell { background: #1e293b; color: #e2e8f0; border-color: #475569; }
+  .coin-ways__cell.is-current { background: #3b0764; }
+  .coin-ways__cell.is-read { border-color: #c084fc; }
+}
