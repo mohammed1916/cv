@@ -31,3 +31,5 @@ dist-ssr
 
 # Local historical reference archive; reproducible from Git via recovery script.
 /local-reference/
+
+solution
