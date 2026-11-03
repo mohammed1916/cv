@@ -1,0 +1,83 @@
+.mcs-view {
+  display: grid;
+  gap: 14px;
+  color: var(--text, #1f2937);
+}
+
+.mcs-empty { color: var(--muted, #6b7280); }
+
+.mcs-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.mcs-letter {
+  display: grid;
+  justify-items: center;
+  min-width: 34px;
+  padding: 6px 4px 4px;
+  border: 2px solid #94a3b8;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.mcs-letter--word { background: #dbeafe; border-color: #1d4ed8; }
+.mcs-letter--cursor { outline: 3px solid #b45309; outline-offset: 2px; }
+.mcs-letter__char { font-family: ui-monospace, monospace; font-size: 1.1rem; font-weight: 700; }
+.mcs-letter__index { font-size: 0.7rem; color: #475569; }
+
+.mcs-cells {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.mcs-cell {
+  display: grid;
+  justify-items: center;
+  min-width: 46px;
+  padding: 6px 8px;
+  border: 2px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.mcs-cell--unreachable { color: #64748b; background: #f1f5f9; }
+.mcs-cell--source { border-color: #b45309; }
+.mcs-cell--target { border-style: dashed; border-color: #1d4ed8; }
+.mcs-cell--updated { background: #dcfce7; border-color: #15803d; }
+.mcs-cell__index { font-size: 0.7rem; color: #475569; }
+.mcs-cell__value { font-variant-numeric: tabular-nums; }
+
+.mcs-words {
+  display: grid;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mcs-word {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 10px;
+  border-left: 4px solid #cbd5e1;
+  border-radius: 6px;
+  background: #f8fafc;
+  font-family: ui-monospace, monospace;
+}
+
+.mcs-word--match { border-left-color: #15803d; background: #dcfce7; }
+.mcs-word--miss { border-left-color: #b91c1c; background: #fee2e2; }
+.mcs-word__cost { font-family: inherit; color: #475569; }
+
+@media (prefers-color-scheme: dark) {
+  .mcs-letter, .mcs-cell, .mcs-word { background: #1e293b; }
+  .mcs-letter--word { background: #1e3a8a; }
+  .mcs-cell--unreachable { background: #0f172a; }
+  .mcs-cell--updated { background: #14532d; }
+  .mcs-word--match { background: #14532d; }
+  .mcs-word--miss { background: #7f1d1d; }
+}
