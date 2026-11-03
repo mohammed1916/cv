@@ -6,6 +6,7 @@ import PrerequisiteButton from './components/PrerequisiteButton';
 import LiveTutorial from './access/LiveTutorial';
 import { TUTORIAL_STEPS } from './access/tutorialSteps';
 import React, {
+  useDeferredValue,
   useEffect,
   useMemo,
   useState,
@@ -29,6 +30,7 @@ const ChatDrawer = React.lazy(() => import("./components/Chatbot/ChatDrawer"));
 import "./App.css";
 import { TRACKS } from "./data/implementedProblems";
 import { mergeCatalog } from './data/catalogCoverage';
+import { loadLeetCodeCatalog } from './data/leetcodeCatalogLoader';
 import { useAccess } from "./access/useAccess";
 import { isFreeProblem, accessLabel, PLANS } from "./access/policy";
 import {
@@ -658,13 +660,7 @@ function HomePage({
 
     let cancelled = false;
 
-    fetch("/data/leetcodeCatalog.json")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Catalog load failed: ${response.status}`);
-        }
-        return response.json();
-      })
+    loadLeetCodeCatalog()
       .then((payload) => {
         if (cancelled) return;
         const nextCatalogProblems = Array.isArray(payload?.problems)
@@ -703,7 +699,8 @@ function HomePage({
     ).sort();
   }, [allProblems]);
 
-  const normalizedSearch = search.trim().toLowerCase();
+  const deferredSearch = useDeferredValue(search);
+  const normalizedSearch = deferredSearch.trim().toLowerCase();
 
   const filtered = allProblems.filter((problem) => {
     if (difficulty !== "All" && problem.difficulty !== difficulty) return false;

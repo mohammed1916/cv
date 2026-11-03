@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import LayoutControls from "./LayoutControls";
 import { TRACKS, BASICS_PROBLEMS, buildCatalogProblems } from "../data/implementedProblems";
+import { loadLeetCodeCatalog } from "../data/leetcodeCatalogLoader";
 
 export default function HomePage({
   track,
@@ -25,13 +26,7 @@ export default function HomePage({
 
     let cancelled = false;
 
-    fetch("/data/leetcodeCatalog.json")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Catalog load failed: ${response.status}`);
-        }
-        return response.json();
-      })
+    loadLeetCodeCatalog()
       .then((payload) => {
         if (cancelled) return;
         const nextCatalogProblems = Array.isArray(payload?.problems)
