@@ -1,0 +1,10 @@
+.timeline-view { display: grid; gap: 8px; padding: 8px; }
+.timeline-view svg { width: 100%; max-width: 620px; height: auto; justify-self: center; }
+.timeline-view__name { font-size: 13px; font-weight: 600; fill: currentColor; }
+.timeline-view__label { font-size: 11px; fill: currentColor; }
+.timeline-view__axis { stroke: currentColor; opacity: 0.3; }
+.timeline-view__slot { fill: rgba(37, 99, 235, 0.22); stroke: #1d4ed8; stroke-width: 1.5; }
+.timeline-view__slot.is-pointer { fill: rgba(124, 58, 237, 0.4); stroke: #6d28d9; stroke-width: 2.5; }
+.timeline-view__overlap { fill: rgba(22, 163, 74, 0.16); stroke: #15803d; stroke-dasharray: 4 3; }
+.timeline-view__meeting { fill: rgba(245, 158, 11, 0.55); stroke: #b45309; }
+.timeline-view output { text-align: center; font-variant-numeric: tabular-nums; }

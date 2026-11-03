@@ -1,0 +1,12 @@
+.rounds-view { display: grid; gap: 10px; padding: 8px; overflow-x: auto; }
+.rounds-view table { border-collapse: separate; border-spacing: 4px; margin: 0 auto; font-variant-numeric: tabular-nums; }
+.rounds-view th { font-size: 12px; font-weight: 500; opacity: 0.7; padding: 2px 6px; }
+.rounds-view td { min-width: 38px; text-align: center; padding: 6px 4px; border: 1px solid currentColor; border-radius: 6px; opacity: 0.9; }
+.rounds-view td.is-endpoint { background: rgba(100, 116, 139, 0.18); }
+.rounds-view td.is-changed { background: rgba(13, 148, 136, 0.22); font-weight: 700; }
+.rounds-view td.is-deciding { outline: 3px solid #7c3aed; outline-offset: 1px; }
+.rounds-view td.is-rise sup { color: #15803d; }
+.rounds-view td.is-fall sup { color: #b91c1c; }
+.rounds-view td.is-hold sup { color: #64748b; }
+.rounds-view tr.is-current-round th { opacity: 1; font-weight: 700; }
+.rounds-view output { text-align: center; }

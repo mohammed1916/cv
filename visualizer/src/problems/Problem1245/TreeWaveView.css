@@ -1,0 +1,13 @@
+.wave-view { display: grid; gap: 8px; padding: 8px; }
+.wave-view__label { margin: 0; text-align: center; font-weight: 600; }
+.wave-view svg { width: 100%; max-width: 560px; height: auto; justify-self: center; }
+.wave-view__edge { stroke: currentColor; stroke-opacity: 0.35; stroke-width: 2; }
+.wave-view__edge.is-path { stroke: #15803d; stroke-opacity: 1; stroke-width: 4; }
+.wave-view__node circle { fill: transparent; stroke: currentColor; stroke-opacity: 0.5; stroke-width: 2; }
+.wave-view__node.is-reached circle { fill: rgba(37, 99, 235, 0.18); stroke-opacity: 1; }
+.wave-view__node.is-current circle { fill: rgba(245, 158, 11, 0.5); stroke: #b45309; stroke-opacity: 1; stroke-width: 3; }
+.wave-view__node.is-far circle { stroke: #7c3aed; stroke-width: 3; stroke-opacity: 1; }
+.wave-view__node.is-path circle { fill: rgba(22, 163, 74, 0.35); stroke: #15803d; stroke-opacity: 1; }
+.wave-view__id { font-size: 12px; font-weight: 700; fill: currentColor; }
+.wave-view__dist { font-size: 10px; fill: currentColor; opacity: 0.8; }
+.wave-view output { text-align: center; font-variant-numeric: tabular-nums; }

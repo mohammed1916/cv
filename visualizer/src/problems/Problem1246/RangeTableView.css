@@ -1,0 +1,14 @@
+.range-view { display: grid; gap: 12px; padding: 8px; overflow-x: auto; }
+.range-view__strip { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 0 auto; justify-content: center; }
+.range-view__strip li { display: grid; justify-items: center; min-width: 38px; padding: 4px 6px; border: 1px solid currentColor; border-radius: 6px; opacity: 0.7; }
+.range-view__strip li.in-range { background: rgba(124, 58, 237, 0.2); opacity: 1; border-color: #7c3aed; }
+.range-view__strip small { font-size: 10px; opacity: 0.7; }
+.range-view table { border-collapse: separate; border-spacing: 3px; margin: 0 auto; font-variant-numeric: tabular-nums; }
+.range-view th { font-size: 11px; font-weight: 500; opacity: 0.7; padding: 2px 4px; }
+.range-view td { min-width: 32px; height: 30px; text-align: center; border: 1px solid rgba(100, 116, 139, 0.4); border-radius: 5px; }
+.range-view td.is-empty { border-color: transparent; }
+.range-view td.is-filled { background: rgba(13, 148, 136, 0.18); }
+.range-view td.is-active { outline: 3px solid #f59e0b; outline-offset: 1px; font-weight: 700; }
+.range-view__candidates ul { margin: 4px 0; padding-left: 18px; }
+.range-view__candidates li.is-best { font-weight: 700; color: #15803d; }
+.range-view__answer { font-weight: 700; }

@@ -1,0 +1,13 @@
+.split-view { display: grid; gap: 10px; padding: 8px; justify-items: center; }
+.split-view svg { width: 100%; max-width: 300px; height: auto; }
+.split-view__point circle { fill: transparent; stroke: currentColor; stroke-opacity: 0.4; stroke-width: 2; }
+.split-view__point text { font-size: 11px; fill: currentColor; }
+.split-view__point.is-active circle { fill: rgba(37, 99, 235, 0.16); stroke-opacity: 0.9; }
+.split-view__point.is-zero circle { stroke: #b45309; stroke-width: 3; stroke-opacity: 1; }
+.split-view__point.is-partner circle { fill: rgba(245, 158, 11, 0.5); stroke: #b45309; stroke-opacity: 1; }
+.split-view__chord { stroke: #7c3aed; stroke-width: 3; }
+.split-view__arc { font-size: 12px; fill: currentColor; }
+.split-view table { border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 13px; }
+.split-view th, .split-view td { padding: 3px 10px; border-bottom: 1px solid rgba(100, 116, 139, 0.3); }
+.split-view tr.is-row td, .split-view tr.is-row th { font-weight: 700; background: rgba(124, 58, 237, 0.12); }
+.split-view output { text-align: center; font-variant-numeric: tabular-nums; }

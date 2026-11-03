@@ -1,0 +1,14 @@
+.choice-view { display: grid; gap: 12px; padding: 8px; }
+.choice-view__label { display: inline-block; min-width: 5.5em; font-size: 12px; opacity: 0.7; text-transform: uppercase; }
+.choice-view__groups, .choice-view__sentences { display: flex; flex-wrap: wrap; gap: 6px; align-items: flex-start; }
+.choice-view__group { padding: 3px 9px; border-radius: 999px; border: 1px solid #0d9488; color: #0f766e; font-size: 13px; }
+.choice-view__empty { opacity: 0.6; font-style: italic; }
+.choice-view__columns { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.choice-view__column { margin: 0; min-width: 96px; padding: 6px; border: 1px solid rgba(100, 116, 139, 0.45); border-radius: 10px; text-align: center; }
+.choice-view__column.is-deciding { border: 2px solid #7c3aed; background: rgba(124, 58, 237, 0.07); }
+.choice-view__column figcaption { font-weight: 700; font-size: 13px; margin-bottom: 4px; }
+.choice-view__column ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.choice-view__column li { padding: 3px 6px; border-radius: 6px; font-size: 13px; opacity: 0.8; }
+.choice-view__column li.is-picked { background: rgba(245, 158, 11, 0.45); font-weight: 700; opacity: 1; }
+.choice-view__sentences ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 3px; font-size: 13px; }
+.choice-view output { text-align: center; font-variant-numeric: tabular-nums; }

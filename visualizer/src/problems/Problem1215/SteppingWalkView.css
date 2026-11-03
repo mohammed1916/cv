@@ -1,0 +1,12 @@
+.walk-view { display: grid; gap: 12px; padding: 8px; }
+.walk-view__range { margin: 0; font-weight: 600; }
+.walk-view__label { display: inline-block; min-width: 4.5em; font-size: 12px; opacity: 0.7; text-transform: uppercase; }
+.walk-view__walk, .walk-view__queue, .walk-view__result { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.walk-view__digit { display: inline-grid; place-items: center; width: 34px; height: 34px; border: 2px solid currentColor; border-radius: 8px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.walk-view__digit.is-last { background: rgba(245, 158, 11, 0.35); border-color: #b45309; }
+.walk-view__child { padding: 4px 10px; border: 1px dashed #0d9488; border-radius: 999px; color: #0f766e; font-variant-numeric: tabular-nums; }
+.walk-view__chip { padding: 2px 9px; border: 1px solid currentColor; border-radius: 6px; opacity: 0.85; font-variant-numeric: tabular-nums; }
+.walk-view__chip.is-reported { background: rgba(37, 99, 235, 0.18); border-color: #1d4ed8; opacity: 1; }
+.walk-view__badge { padding: 2px 8px; border-radius: 999px; font-size: 12px; background: rgba(100, 116, 139, 0.2); }
+.walk-view__badge.is-skip { background: rgba(220, 38, 38, 0.18); color: #b91c1c; }
+.walk-view__empty { opacity: 0.6; font-style: italic; }

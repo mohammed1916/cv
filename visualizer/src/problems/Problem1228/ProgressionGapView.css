@@ -1,0 +1,11 @@
+.gap-view { display: grid; gap: 14px; padding: 8px; }
+.gap-view__label { margin: 0 0 6px; font-size: 13px; opacity: 0.75; }
+.gap-view__row { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 0; }
+.gap-view__cell { display: grid; justify-items: center; min-width: 48px; padding: 6px 8px; border: 2px solid currentColor; border-radius: 8px; opacity: 0.85; font-variant-numeric: tabular-nums; }
+.gap-view__cell small { font-size: 11px; opacity: 0.7; }
+.gap-view__cell.in-bracket { background: rgba(100, 116, 139, 0.15); }
+.gap-view__cell.is-mid { border-color: #7c3aed; background: rgba(124, 58, 237, 0.25); font-weight: 700; opacity: 1; }
+.gap-view__cell.is-present { background: rgba(37, 99, 235, 0.14); }
+.gap-view__cell.is-missing { border-style: dashed; color: #b45309; }
+.gap-view__cell.is-answer { background: rgba(245, 158, 11, 0.35); border-style: solid; font-weight: 700; opacity: 1; }
+.gap-view output { text-align: center; font-variant-numeric: tabular-nums; }

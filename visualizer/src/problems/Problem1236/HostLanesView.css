@@ -1,0 +1,20 @@
+.lanes-view { display: grid; gap: 12px; padding: 8px; }
+.lanes-view__host-note { margin: 0; font-weight: 600; }
+.lanes-view__lanes { display: flex; flex-wrap: wrap; gap: 12px; }
+.lanes-view__lane { flex: 1 1 200px; border: 1px solid currentColor; border-radius: 10px; padding: 8px 10px; }
+.lanes-view__lane.is-outside { opacity: 0.55; border-style: dashed; }
+.lanes-view__lane h4 { margin: 0 0 6px; font-size: 13px; }
+.lanes-view__lane ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.lanes-view__lane li { display: flex; justify-content: space-between; gap: 6px; padding: 3px 8px; border-radius: 6px; border: 1px solid transparent; }
+.lanes-view__lane li.is-visited { background: rgba(37, 99, 235, 0.16); }
+.lanes-view__lane li.is-queued { border-style: dashed; border-color: #0d9488; }
+.lanes-view__lane li.is-current { background: rgba(245, 158, 11, 0.4); border-color: #b45309; font-weight: 700; }
+.lanes-view__lane li.is-unseen { opacity: 0.5; }
+.lanes-view__lane em { font-style: normal; font-size: 11px; color: #b45309; }
+.lanes-view__label { margin: 0 0 4px; font-size: 13px; opacity: 0.75; }
+.lanes-view__links ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.lanes-view__links li { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; }
+.lanes-view__links li.is-new span { color: #0f766e; font-weight: 600; }
+.lanes-view__links li.is-seen span { opacity: 0.7; }
+.lanes-view__links li.is-other-host { opacity: 0.6; text-decoration: line-through; }
+.lanes-view output { text-align: center; font-variant-numeric: tabular-nums; }
