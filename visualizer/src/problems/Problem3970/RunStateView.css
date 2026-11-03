@@ -1,0 +1,26 @@
+.run-state { display: grid; gap: 12px; }
+.run-state svg { width: 100%; max-width: 640px; height: auto; }
+.run-state circle { fill: #f8fafc; stroke: #64748b; stroke-width: 2; }
+.run-state__vertex--current circle { fill: #fde68a; stroke: #b45309; stroke-width: 3; }
+.run-state text { font-size: 12px; fill: #0f172a; }
+.run-state__weight { font-size: 11px; fill: #334155; }
+.run-state__edge { fill: none; stroke: #94a3b8; stroke-width: 2; }
+.run-state__edge--hot { stroke: #b45309; stroke-width: 3; }
+.run-state__arrow { fill: #94a3b8; }
+.run-state__table { border-collapse: collapse; }
+.run-state__table th, .run-state__table td { border: 1px solid #cbd5e1; padding: 4px 10px; text-align: center; }
+.run-state__cell--current { background: #fde68a; font-weight: 700; }
+.run-state__cell--done { color: #14532d; }
+.run-state__message { margin: 0; }
+@media (prefers-color-scheme: dark) {
+  .run-state circle { fill: #1e293b; stroke: #94a3b8; }
+  .run-state__vertex--current circle { fill: #713f12; stroke: #fbbf24; }
+  .run-state text { fill: #e2e8f0; }
+  .run-state__weight { fill: #cbd5e1; }
+  .run-state__edge { stroke: #64748b; }
+  .run-state__edge--hot { stroke: #fbbf24; }
+  .run-state__arrow { fill: #64748b; }
+  .run-state__table th, .run-state__table td { border-color: #475569; }
+  .run-state__cell--current { background: #713f12; }
+  .run-state__cell--done { color: #bbf7d0; }
+}

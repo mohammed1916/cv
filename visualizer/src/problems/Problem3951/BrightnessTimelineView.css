@@ -1,0 +1,18 @@
+.brightness { display: grid; gap: 12px; }
+.brightness__timeline { display: flex; flex-wrap: wrap; gap: 4px; }
+.brightness__time { min-width: 30px; padding: 6px 4px; text-align: center; border-radius: 6px; border: 1px solid #cbd5e1; background: #f8fafc; color: #334155; font-size: 0.8rem; }
+.brightness__time--on { background: #bfdbfe; border-color: #2563eb; color: #1e3a8a; }
+.brightness__time--hot { outline: 3px solid #f59e0b; }
+.brightness__caption { margin: 0; font-weight: 600; }
+.brightness__bulbs { display: flex; flex-wrap: wrap; gap: 6px; }
+.brightness__bulb { display: grid; justify-items: center; min-width: 46px; padding: 6px; border-radius: 8px; border: 1px solid #94a3b8; background: #f1f5f9; color: #0f172a; }
+.brightness__bulb--lit { background: #fef9c3; border-color: #ca8a04; }
+.brightness__bulb--active { background: #fde047; border: 2px solid #a16207; font-weight: 700; }
+.brightness__bulb small { color: #475569; }
+@media (prefers-color-scheme: dark) {
+  .brightness__time { background: #1e293b; color: #cbd5e1; border-color: #475569; }
+  .brightness__time--on { background: #1e3a8a; color: #dbeafe; border-color: #60a5fa; }
+  .brightness__bulb { background: #1e293b; color: #e2e8f0; border-color: #475569; }
+  .brightness__bulb--lit { background: #422006; }
+  .brightness__bulb--active { background: #854d0e; }
+}

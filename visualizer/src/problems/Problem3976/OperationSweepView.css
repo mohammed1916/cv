@@ -1,0 +1,16 @@
+.op-sweep { display: grid; gap: 12px; }
+.op-sweep__row { display: flex; flex-wrap: wrap; gap: 6px; }
+.op-sweep__cell { display: grid; justify-items: center; min-width: 58px; padding: 6px; border-radius: 8px; border: 2px solid #cbd5e1; background: #f8fafc; color: #0f172a; font-weight: 700; }
+.op-sweep__cell small { font-weight: 600; color: #7c2d12; font-size: 0.75rem; }
+.op-sweep__cell i { font-style: normal; font-weight: 400; font-size: 0.7rem; color: #475569; }
+.op-sweep__cell--current { outline: 3px solid #2563eb; }
+.op-sweep__cell--best { background: #dcfce7; border-color: #16a34a; }
+.op-sweep__op, .op-sweep__message { margin: 0; }
+.op-sweep__state { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; margin: 0; }
+.op-sweep__state dd { margin: 0; font-weight: 700; }
+@media (prefers-color-scheme: dark) {
+  .op-sweep__cell { background: #1e293b; color: #e2e8f0; border-color: #475569; }
+  .op-sweep__cell small { color: #fdba74; }
+  .op-sweep__cell i { color: #94a3b8; }
+  .op-sweep__cell--best { background: #14532d; border-color: #22c55e; }
+}

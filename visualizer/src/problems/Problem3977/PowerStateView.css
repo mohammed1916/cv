@@ -1,0 +1,20 @@
+.power-state { display: grid; gap: 12px; }
+.power-state table { border-collapse: collapse; }
+.power-state th, .power-state td { border: 1px solid #cbd5e1; padding: 4px 10px; text-align: center; }
+.power-state th small { display: block; font-weight: 400; color: #475569; }
+.power-state__row--current th { background: #fef3c7; }
+.power-state__cell--current { background: #fde68a; font-weight: 700; }
+.power-state__cell--done { color: #14532d; }
+.power-state__edges { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.power-state__edges li { padding: 2px 8px; border-radius: 999px; background: #e2e8f0; font-size: 0.85rem; }
+.power-state__edge--hot { background: #fde68a !important; font-weight: 700; }
+.power-state__message { margin: 0; }
+@media (prefers-color-scheme: dark) {
+  .power-state th, .power-state td { border-color: #475569; }
+  .power-state th small { color: #94a3b8; }
+  .power-state__row--current th { background: #451a03; }
+  .power-state__cell--current { background: #713f12; }
+  .power-state__cell--done { color: #bbf7d0; }
+  .power-state__edges li { background: #334155; }
+  .power-state__edge--hot { background: #713f12 !important; }
+}
