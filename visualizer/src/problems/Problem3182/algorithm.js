@@ -1,0 +1,122 @@
+// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// The criterion (every required course taken, every required grade at least 90) is as remembered and is labelled for verification.
+export const sql = `WITH required AS (
+  SELECT s.student_id, c.course_id
+  FROM Students s
+  JOIN Courses c ON c.major = s.major
+),
+required_count AS (
+  SELECT student_id, COUNT(*) AS required_courses
+  FROM required
+  GROUP BY student_id
+),
+scored AS (
+  SELECT r.student_id,
+         COUNT(DISTINCT e.course_id) AS taken,
+         MIN(e.grade) AS lowest_grade
+  FROM required r
+  JOIN Enrollments e ON e.student_id = r.student_id AND e.course_id = r.course_id
+  GROUP BY r.student_id
+)
+SELECT s.student_id, s.name
+FROM Students s
+JOIN required_count rc ON rc.student_id = s.student_id
+JOIN scored sc ON sc.student_id = s.student_id
+WHERE sc.taken = rc.required_courses
+  AND sc.lowest_grade >= 90
+ORDER BY s.student_id`
+
+export const code = sql.split('\n').map((text, index) => ({ line: index + 1, text }))
+const SQL = key => {
+  const index = code.findIndex(line => line.text.includes(key))
+  if (index < 0) throw new Error(`Missing SQL line: ${key}`)
+  return index + 1
+}
+
+export const python = `def top_scoring(students, courses, enrollments):
+    required = students.merge(courses, on="major")[["student_id", "course_id"]]
+    required_count = required.groupby("student_id").size().rename("required_courses")
+    mine = required.merge(enrollments, on=["student_id", "course_id"])
+    scored = mine.groupby("student_id").agg(taken=("course_id", "nunique"), lowest=("grade", "min"))
+    joined = students.set_index("student_id").join(required_count).join(scored)
+    kept = joined[(joined["taken"] == joined["required_courses"]) & (joined["lowest"] >= 90)]
+    return kept.reset_index()[["student_id", "name"]].sort_values("student_id").to_dict("records")`
+const PY_LINES = python.split('\n')
+const PY = key => {
+  const index = PY_LINES.findIndex(line => line.includes(key))
+  if (index < 0) throw new Error(`Missing Python line: ${key}`)
+  return index + 1
+}
+
+const frame = (phase, sqlKey, pyKey, message, columns, rows) => ({
+  phase, activeLine: SQL(sqlKey), pythonLine: PY(pyKey), message, columns, rows: rows.map(row => ({ ...row })),
+})
+
+export const phases = [
+  { id: 'load', label: 'Load', description: 'Read the students, courses and enrollments.' },
+  { id: 'pairs', label: 'Required', description: 'Pair each student with the courses of their major.' },
+  { id: 'count', label: 'Count', description: 'Count the required courses per student.' },
+  { id: 'grade', label: 'Grades', description: 'Check each student has every required course at 90 or above.' },
+  { id: 'done', label: 'Result', description: 'Return the top scoring students.' },
+]
+
+const STUDENT_COLUMNS = ['student_id', 'name', 'major']
+const COURSE_COLUMNS = ['course_id', 'name', 'credits', 'major']
+const ENROLL_COLUMNS = ['student_id', 'course_id', 'semester', 'grade']
+
+function tableRows(input, name, columns) {
+  const rows = input[name]
+  if (!Array.isArray(rows) || rows.length < 1 || rows.length > 12) throw new Error(`${name} needs 1 to 12 rows.`)
+  for (const row of rows) {
+    if (!row || typeof row !== 'object' || columns.some(column => !(column in row))) throw new Error(`${name} rows need ${columns.join(', ')}.`)
+  }
+  return rows.map(row => Object.fromEntries(columns.map(column => [column, row[column]])))
+}
+
+export function parseInput(text) {
+  const input = JSON.parse(text)
+  if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Use an object with Students, Courses and Enrollments tables.')
+  const Students = tableRows(input, 'Students', STUDENT_COLUMNS)
+  const Courses = tableRows(input, 'Courses', COURSE_COLUMNS)
+  const Enrollments = tableRows(input, 'Enrollments', ENROLL_COLUMNS)
+  for (const row of Students) if (!Number.isInteger(row.student_id)) throw new Error('student_id is an integer.')
+  for (const row of Courses) if (!Number.isInteger(row.course_id)) throw new Error('course_id is an integer.')
+  for (const row of Enrollments) {
+    if (!Number.isInteger(row.student_id) || !Number.isInteger(row.course_id)) throw new Error('student_id and course_id are integers.')
+    if (!Number.isInteger(row.grade) || row.grade < 0 || row.grade > 100) throw new Error('grade is an integer from 0 to 100.')
+  }
+  return { Students, Courses, Enrollments }
+}
+
+export function buildTrace(input) {
+  const { Students, Courses, Enrollments } = input
+  const frames = []
+  frames.push(frame('load', 'FROM Students', 'def ', `Load ${Students.length} students, ${Courses.length} courses and ${Enrollments.length} enrollments.`, STUDENT_COLUMNS, Students))
+
+  const required = []
+  for (const student of Students) {
+    for (const course of Courses) {
+      if (course.major === student.major) required.push({ student_id: student.student_id, course_id: course.course_id })
+    }
+  }
+  frames.push(frame('pairs', 'JOIN Courses', 'required = ', `${required.length} required pair${required.length === 1 ? '' : 's'} match a student's major.`, ['student_id', 'course_id'], required))
+
+  const counts = Students.map(student => ({ student_id: student.student_id, required_courses: required.filter(pair => pair.student_id === student.student_id).length }))
+  frames.push(frame('count', 'required_count AS', 'required_count = ', 'Count the required courses for each student; zero means no requirement to meet.', ['student_id', 'required_courses'], counts))
+
+  const summary = []
+  const result = []
+  for (const student of Students) {
+    const need = required.filter(pair => pair.student_id === student.student_id)
+    const mine = Enrollments.filter(row => row.student_id === student.student_id && need.some(pair => pair.course_id === row.course_id))
+    const taken = new Set(mine.map(row => row.course_id)).size
+    const lowest = mine.length ? Math.min(...mine.map(row => row.grade)) : null
+    const kept = need.length > 0 && taken === need.length && lowest !== null && lowest >= 90
+    summary.push({ student_id: student.student_id, required_courses: need.length, taken, lowest_grade: lowest ?? '', kept: kept ? 'yes' : 'no' })
+    if (kept) result.push({ student_id: student.student_id, name: student.name })
+    frames.push(frame('grade', 'scored AS', 'scored = ', `${student.name}: ${taken} of ${need.length} required taken, ${kept ? 'qualifies' : 'does not qualify'}.`, ['student_id', 'required_courses', 'taken', 'lowest_grade', 'kept'], summary))
+  }
+  result.sort((a, b) => a.student_id - b.student_id)
+  frames.push(frame('done', 'ORDER BY s.student_id', 'return', `Return ${result.length} student${result.length === 1 ? '' : 's'}.`, ['student_id', 'name'], result))
+  return { input, result, frames }
+}

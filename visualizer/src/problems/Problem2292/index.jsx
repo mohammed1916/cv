@@ -1,0 +1,33 @@
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import { meta } from './meta'
+import { buildTrace, parseInput, code, sql, python, phases } from './algorithm'
+
+const inputLabel = 'Orders table with purchase dates'
+const complexity = 'O(n) to count orders, then a short check of neighbouring years. The visualizer accepts up to 30 rows per table.'
+const examples = [{
+  label: 'Sample',
+  input: '{"Orders":[{"order_id":1,"product_id":1,"quantity":1,"purchase_date":"2019-03-01"},{"order_id":2,"product_id":1,"quantity":1,"purchase_date":"2019-06-01"},{"order_id":3,"product_id":1,"quantity":1,"purchase_date":"2019-09-01"},{"order_id":4,"product_id":1,"quantity":1,"purchase_date":"2020-01-10"},{"order_id":5,"product_id":1,"quantity":1,"purchase_date":"2020-02-10"},{"order_id":6,"product_id":1,"quantity":1,"purchase_date":"2020-03-10"},{"order_id":7,"product_id":2,"quantity":5,"purchase_date":"2019-01-01"},{"order_id":8,"product_id":2,"quantity":1,"purchase_date":"2019-02-01"},{"order_id":9,"product_id":2,"quantity":1,"purchase_date":"2019-03-01"},{"order_id":10,"product_id":2,"quantity":1,"purchase_date":"2021-01-01"},{"order_id":11,"product_id":2,"quantity":1,"purchase_date":"2021-02-01"},{"order_id":12,"product_id":2,"quantity":1,"purchase_date":"2021-03-01"},{"order_id":13,"product_id":3,"quantity":1,"purchase_date":"2020-01-01"},{"order_id":14,"product_id":3,"quantity":1,"purchase_date":"2020-02-01"},{"order_id":15,"product_id":3,"quantity":1,"purchase_date":"2020-03-01"},{"order_id":16,"product_id":3,"quantity":1,"purchase_date":"2020-04-01"},{"order_id":17,"product_id":3,"quantity":1,"purchase_date":"2021-05-01"},{"order_id":18,"product_id":3,"quantity":1,"purchase_date":"2022-01-01"},{"order_id":19,"product_id":3,"quantity":1,"purchase_date":"2022-02-01"},{"order_id":20,"product_id":3,"quantity":1,"purchase_date":"2022-03-01"},{"order_id":21,"product_id":4,"quantity":1,"purchase_date":"2021-01-01"},{"order_id":22,"product_id":4,"quantity":1,"purchase_date":"2022-01-01"},{"order_id":23,"product_id":4,"quantity":1,"purchase_date":"2023-01-01"},{"order_id":24,"product_id":4,"quantity":1,"purchase_date":"2021-06-01"},{"order_id":25,"product_id":4,"quantity":1,"purchase_date":"2021-09-01"},{"order_id":26,"product_id":4,"quantity":1,"purchase_date":"2022-06-01"},{"order_id":27,"product_id":4,"quantity":1,"purchase_date":"2022-09-01"}]}',
+}]
+
+const definition = {
+  number: meta.number,
+  phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel,
+  url: `https://leetcode.com/problems/${meta.slug}/`,
+  complexity, examples,
+}
+
+function Rows({ columns = [], rows = [] }) {
+  return <div style={{ overflowX: 'auto' }}>
+    <table>
+      <thead><tr>{columns.map(column => <th key={column} scope="col">{column}</th>)}</tr></thead>
+      <tbody>{rows.map((row, index) => <tr key={index}>{columns.map(column => <td key={column}>{String(row[column] ?? '')}</td>)}</tr>)}</tbody>
+    </table>
+  </div>
+}
+
+export default function KnowledgeDerivedSqlVisual() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <Rows columns={step.columns} rows={step.rows} />
+    <output aria-label="Query output">{step.phase === 'done' ? `Output rows: ${run.result.length}` : step.message}</output>
+  </>} renderReasoning={() => <p>Orders are counted per product and year, years with at least three orders are kept, and a product qualifies when one kept year is directly followed by another. Quantity is not used.</p>} />
+}
