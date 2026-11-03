@@ -1,0 +1,34 @@
+.faulty-view { display: grid; gap: 0.9rem; padding: 0.75rem; color: #1f2937; }
+.faulty-view__legend { display: flex; flex-wrap: wrap; gap: 0.4rem; font-size: 0.8rem; }
+.faulty-key { padding: 0.15rem 0.5rem; border-radius: 999px; border: 1px solid #94a3b8; }
+.faulty-key--same { background: #dcfce7; }
+.faulty-key--shift { background: #dbeafe; }
+.faulty-key--bad { background: #fee2e2; }
+.faulty-key--free { background: #fef3c7; }
+.faulty-key--dropped { background: #e5e7eb; text-decoration: line-through; }
+.faulty-key--source { background: #ede9fe; }
+.faulty-row__title { margin: 0 0 0.3rem; font-weight: 600; }
+.faulty-row__role { margin: 0.3rem 0 0; font-size: 0.8rem; opacity: 0.8; }
+.faulty-row__cells { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; margin: 0; padding: 0; }
+.faulty-cell { min-width: 3.4rem; display: grid; justify-items: center; gap: 0.15rem; padding: 0.4rem 0.3rem;
+  border: 2px solid #cbd5e1; border-radius: 0.5rem; background: #f8fafc; }
+.faulty-cell__index { font-size: 0.7rem; opacity: 0.7; }
+.faulty-cell__value { font-weight: 700; font-size: 1.05rem; }
+.faulty-cell__label { font-size: 0.65rem; min-height: 0.9rem; }
+.faulty-cell--same { background: #dcfce7; border-color: #16a34a; }
+.faulty-cell--shift { background: #dbeafe; border-color: #2563eb; }
+.faulty-cell--bad { background: #fee2e2; border-color: #dc2626; }
+.faulty-cell--free { background: #fef3c7; border-color: #d97706; border-style: dashed; }
+.faulty-cell--dropped { background: #e5e7eb; border-color: #6b7280; border-style: dashed; text-decoration: line-through; }
+.faulty-cell--source { background: #ede9fe; border-color: #7c3aed; }
+.faulty-view__status { margin: 0; font-size: 0.9rem; }
+@media (prefers-color-scheme: dark) {
+  .faulty-view { color: #e5e7eb; }
+  .faulty-cell { background: #1e293b; border-color: #475569; }
+  .faulty-cell--same { background: #14532d; }
+  .faulty-cell--shift { background: #1e3a8a; }
+  .faulty-cell--bad { background: #7f1d1d; }
+  .faulty-cell--free { background: #78350f; }
+  .faulty-cell--dropped { background: #374151; }
+  .faulty-cell--source { background: #4c1d95; }
+}

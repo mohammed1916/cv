@@ -1,0 +1,39 @@
+.differ-one { display: grid; gap: 14px; color: var(--text, #1f2937); }
+
+.differ-one__words { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+
+.differ-one__word {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  border: 2px solid #cbd5e1;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.differ-one__label { min-width: 2ch; font-weight: 700; color: #64748b; }
+.differ-one__letters { display: inline-flex; gap: 4px; font-family: ui-monospace, monospace; font-size: 18px; }
+.differ-one__letter { padding: 2px 6px; border-radius: 4px; background: #e2e8f0; }
+.differ-one__letter--probe { background: #fde68a; font-weight: 700; outline: 2px solid #b45309; }
+
+.differ-one__word--current { border-color: #0f766e; background: #ccfbf1; }
+.differ-one__word--pair { border-color: #15803d; background: #dcfce7; border-width: 3px; }
+
+.differ-one__keys h3 { margin: 0 0 6px; font-size: 15px; }
+.differ-one__keys ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; }
+.differ-one__key { display: flex; gap: 8px; font-size: 14px; }
+.differ-one__key code { font-family: ui-monospace, monospace; font-size: 16px; }
+.differ-one__key--hit { color: #15803d; font-weight: 700; }
+.differ-one__empty, .differ-one__probe { margin: 0; font-size: 14px; }
+.differ-one__probe code { font-family: ui-monospace, monospace; }
+
+@media (prefers-color-scheme: dark) {
+  .differ-one { color: #e2e8f0; }
+  .differ-one__word { background: #0f172a; border-color: #334155; }
+  .differ-one__letter { background: #1e293b; color: #e2e8f0; }
+  .differ-one__letter--probe { background: #854d0e; outline-color: #fcd34d; }
+  .differ-one__word--current { background: #134e4a; border-color: #5eead4; }
+  .differ-one__word--pair { background: #14532d; border-color: #86efac; }
+  .differ-one__key--hit { color: #86efac; }
+}
