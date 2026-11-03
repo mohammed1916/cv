@@ -15,10 +15,10 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-swaps-to-avoid-forbidden-values/description/',
   complexity: 'O(n) time and O(n) space with hash maps. The visualization caps the length at 12.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,3],"forbidden":[3,2,1]}' },
-    { label: 'Example 2', input: '{"nums":[4,6,6,5],"forbidden":[4,6,5,5]}' },
-    { label: 'Example 3', input: '{"nums":[7,7],"forbidden":[8,7]}' },
-    { label: 'Example 4', input: '{"nums":[1,2],"forbidden":[2,1]}' },
+    { label: 'Example 1', input: '{"nums":[1,1,2],"forbidden":[1,2,2]}' },
+    { label: 'Example 2', input: '{"nums":[3,3,3,1],"forbidden":[3,1,1,3]}' },
+    { label: 'Example 3', input: '{"nums":[5,5],"forbidden":[6,5]}' },
+    { label: 'Example 4', input: '{"nums":[2,4],"forbidden":[4,2]}' },
   ],
 }
 

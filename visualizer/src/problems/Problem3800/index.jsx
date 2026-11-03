@@ -16,8 +16,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-cost-to-make-two-binary-strings-equal/',
   complexity: 'O(n) time to classify mismatches, then O(min(a, b)) candidates. The visualization caps the strings at 40 characters.',
   examples: [
-    { label: 'Example 1', input: '{"s":"01000","t":"10111","flipCost":10,"swapCost":2,"crossCost":2}' },
-    { label: 'Example 2', input: '{"s":"001","t":"110","flipCost":2,"swapCost":100,"crossCost":100}' },
+    { label: 'Example 1', input: '{"s":"0110","t":"1001","flipCost":4,"swapCost":3,"crossCost":1}' },
+    { label: 'Example 2', input: '{"s":"11","t":"00","flipCost":1,"swapCost":9,"crossCost":2}' },
     { label: 'Equal', input: '{"s":"1010","t":"1010","flipCost":5,"swapCost":5,"crossCost":5}' },
   ],
 }

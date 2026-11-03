@@ -18,8 +18,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-absolute-difference-between-two-values/',
   complexity: 'O(n) time and O(1) space. The official length is up to 100; the visualization caps nums at 20 entries.',
   examples: [
-    { label: 'Example', input: '{"nums":[1,0,0,2,0,1]}' },
-    { label: 'No pair', input: '{"nums":[1,0,1,0]}' },
+    { label: 'Example', input: '{"nums":[0,1,2,0,1]}' },
+    { label: 'No pair', input: '{"nums":[2,0,0,1]}' },
   ],
 }
 

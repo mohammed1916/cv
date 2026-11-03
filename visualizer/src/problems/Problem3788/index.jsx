@@ -16,9 +16,9 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-score-of-a-split/',
   complexity: 'O(n) time and O(n) space for the solver. The trace stores a copy of the suffix row in every frame, so trace memory is O(n²); the visualization caps the array at 20 values.',
   examples: [
-    { label: 'Example 1', input: '[10,-1,3,-4,-5]' },
-    { label: 'Example 2', input: '[-7,-5,3]' },
-    { label: 'Example 3', input: '[1,1]' },
+    { label: 'Example 1', input: '[6,-2,4,-3,-1]' },
+    { label: 'Example 2', input: '[-5,2,-4]' },
+    { label: 'Example 3', input: '[3,3,3]' },
   ],
 }
 

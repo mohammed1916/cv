@@ -15,9 +15,9 @@ const definition = {
   url: 'https://leetcode.com/problems/count-routes-to-climb-a-rectangular-grid/',
   complexity: 'O(rows * cols) time per run with prefix sums, and O(cols) extra space per row. The official limit is 750 by 750 with d up to 750; the visualization caps the grid at 8 by 8 and keeps d up to 750.',
   examples: [
-    { label: 'Example 1', input: '{"grid":["..","#."],"d":1}' },
-    { label: 'Example 2', input: '{"grid":["..","#."],"d":2}' },
-    { label: 'Single row', input: '{"grid":[".."],"d":1}' },
+    { label: 'Example 1', input: '{"grid":["..."],"d":2}' },
+    { label: 'Example 2', input: '{"grid":["..","..","#."],"d":1}' },
+    { label: 'Single row', input: '{"grid":["#..",".#."],"d":2}' },
   ],
 }
 
