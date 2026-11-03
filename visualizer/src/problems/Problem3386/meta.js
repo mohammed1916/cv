@@ -4,5 +4,5 @@ export const meta = {
   slug: "button-with-longest-push-time",
   tags: ["Array", "Simulation"],
   accent: "#ef4444",
-  description: "Button with Longest Push Time: teaching model with invented sample data.",
+  description: 'Shows how a single scan through button press events keeps track of the longest push time seen so far. The sample is an invented list of button presses with their times.',
 }

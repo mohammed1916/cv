@@ -1,5 +1,5 @@
 export const meta = {
   number: '1571', title: "Warehouse Manager", slug: 'warehouse-manager', difficulty: 'Easy',
   tags: ["Database","Join"], accent: '#b45309',
-  description: "Warehouse Manager: teaching model with invented sample data.",
+  description: 'Walks through joining warehouse stock rows to product sizes and multiplying width, length and height to get volume per warehouse. The sample is an invented warehouse and product inventory.',
 }
