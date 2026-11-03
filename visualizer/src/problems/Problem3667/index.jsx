@@ -1,0 +1,28 @@
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import AbsSelectionView from './AbsSelectionView'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
+
+const definition = {
+  number: '3667',
+  phases,
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  inputLabel: 'Integer array (e.g. [-4, -1, 0, 2, 10])',
+  url: 'https://leetcode.com/problems/sort-array-by-absolute-value/',
+  complexity: 'O(n²) time and O(n) space for this selection-style trace on n values. The visualization caps the array at 10 values with magnitudes up to 20; the official bounds are not verified here.',
+  examples: [
+    { label: 'Mixed signs', input: '[-4, -1, 0, 2, 10]' },
+    { label: 'Equal magnitudes', input: '[5, -5, 5]' },
+    { label: 'Single value', input: '[7]' },
+  ],
+}
+
+export default function Problem3667Visualizer() {
+  return <AlgorithmWorkspace
+    definition={definition}
+    renderVisual={({ run, step }) => <AbsSelectionView run={run} step={step} />}
+    renderReasoning={({ step }) => <p>{step.message}</p>}
+  />
+}

@@ -1,0 +1,22 @@
+.letter-parity-view { margin: 0; display: grid; gap: 10px; color: var(--text, #1f2937); }
+.letter-parity-view__digits { display: flex; gap: 6px; }
+.digit { display: grid; place-items: center; width: 34px; height: 34px; border: 2px solid #cbd5e1; border-radius: 8px; font-weight: 700; font-family: ui-monospace, monospace; }
+.digit--done { background: #fef9c3; }
+.digit--current { border-color: #a16207; background: #fde68a; }
+.letter-parity-view__word, .letter-parity-view__count { margin: 0; font-size: 13px; }
+.letter-parity-view__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(52px, 1fr)); gap: 6px; }
+.letter-cell { display: grid; place-items: center; padding: 6px 2px; border: 2px solid #e2e8f0; border-radius: 8px; background: #f8fafc; }
+.letter-cell b { font-size: 16px; }
+.letter-cell small { font-size: 10px; color: #64748b; }
+.letter-cell--odd { border-color: #a16207; background: #fef9c3; }
+.letter-cell--odd small { color: #713f12; font-weight: 700; }
+.letter-cell--current { outline: 3px solid #b45309; }
+@media (prefers-color-scheme: dark) {
+  .letter-parity-view { color: #e5e7eb; }
+  .digit { border-color: #334155; }
+  .digit--done { background: #422006; }
+  .digit--current { background: #78350f; }
+  .letter-cell { background: #111827; border-color: #334155; }
+  .letter-cell--odd { background: #422006; border-color: #fbbf24; }
+  .letter-cell--odd small { color: #fde68a; }
+}

@@ -1,0 +1,10 @@
+.coin-row { display: grid; gap: 12px; }
+.coin-row__chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.coin-row__chips li { border: 1px solid var(--accent, #b45309); border-radius: 999px; padding: 2px 9px; font-variant-numeric: tabular-nums; }
+.coin-row__cells { display: grid; grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); gap: 6px; margin: 0; padding: 0; list-style: none; }
+.coin-row__cells li { border: 1px solid currentColor; border-radius: 6px; padding: 4px; text-align: center; opacity: 0.55; }
+.coin-row__cells li[data-state="filled"] { opacity: 1; }
+.coin-row__cells li[data-state="current"] { opacity: 1; outline: 3px solid var(--accent, #b45309); }
+.coin-row__cells li[data-state="source"] { opacity: 1; background: rgba(180, 83, 9, 0.15); }
+.coin-row__cells span { display: block; font-size: 0.75rem; }
+.coin-row__cells strong { font-size: 1.05rem; }

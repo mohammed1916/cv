@@ -1,0 +1,9 @@
+.arrival-line { display: grid; gap: 12px; }
+.arrival-line__row { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.arrival-line__card { min-width: 56px; border: 2px solid currentColor; border-radius: 10px; padding: 6px 8px; text-align: center; opacity: 0.6; }
+.arrival-line__card span { display: block; font-size: 0.7rem; }
+.arrival-line__card strong { font-size: 1.2rem; font-variant-numeric: tabular-nums; }
+.arrival-line__card[data-role="current"] { opacity: 1; outline: 3px solid #0f766e; }
+.arrival-line__card[data-role="selected"] { opacity: 1; background: rgba(15, 118, 110, 0.18); }
+.arrival-line__card[data-role="replaced"] { opacity: 1; background: rgba(15, 118, 110, 0.35); }
+.arrival-line__count { font-size: 1.1rem; margin: 0; }

@@ -1,0 +1,18 @@
+.polynomial-view { margin: 0; display: grid; gap: 10px; color: var(--text, #1f2937); overflow-x: auto; }
+.poly-row { display: flex; gap: 6px; align-items: stretch; min-width: max-content; }
+.poly-row__label { width: 58px; font-size: 12px; font-weight: 700; align-self: center; text-transform: uppercase; }
+.poly-cell { display: grid; place-items: center; min-width: 48px; padding: 6px 4px; border: 2px solid #cbd5e1; border-radius: 8px; background: #f8fafc; }
+.poly-cell b { font-size: 16px; }
+.poly-cell small { font-size: 10px; color: #64748b; }
+.poly-row--a .poly-cell--active { border-color: #be185d; background: #fce7f3; }
+.poly-row--b .poly-cell--active { border-color: #7c3aed; background: #ede9fe; }
+.poly-row--result .poly-cell--target { border-color: #b45309; background: #fef3c7; }
+.polynomial-view__equation { margin: 0; font-size: 13px; }
+@media (prefers-color-scheme: dark) {
+  .polynomial-view { color: #e5e7eb; }
+  .poly-cell { background: #111827; border-color: #334155; }
+  .poly-cell small { color: #94a3b8; }
+  .poly-row--a .poly-cell--active { background: #500724; }
+  .poly-row--b .poly-cell--active { background: #2e1065; }
+  .poly-row--result .poly-cell--target { background: #78350f; }
+}

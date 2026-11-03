@@ -1,0 +1,10 @@
+.freq-filter { display: grid; gap: 12px; }
+.freq-filter__totals { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; }
+.freq-filter__totals li { border: 1px solid currentColor; border-radius: 999px; padding: 2px 10px; font-variant-numeric: tabular-nums; }
+.freq-filter__totals li[data-rare="no"] { background: rgba(147, 51, 234, 0.18); font-weight: 600; }
+.freq-filter__row { display: flex; flex-wrap: wrap; gap: 4px; list-style: none; margin: 0; padding: 0; }
+.freq-filter__tile { width: 34px; height: 40px; display: grid; place-items: center; border: 2px solid currentColor; border-radius: 6px; opacity: 0.45; font-family: ui-monospace, monospace; font-size: 1.1rem; }
+.freq-filter__tile[data-state="keep"] { opacity: 1; background: rgba(147, 51, 234, 0.2); }
+.freq-filter__tile[data-state="drop"] { opacity: 0.35; text-decoration: line-through; }
+.freq-filter__tile[data-state="current"] { opacity: 1; outline: 3px solid #7e22ce; }
+.freq-filter__output { font-family: ui-monospace, monospace; font-size: 1.1rem; margin: 0; }

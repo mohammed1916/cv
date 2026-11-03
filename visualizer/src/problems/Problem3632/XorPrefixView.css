@@ -1,0 +1,10 @@
+.xor-prefix { display: grid; gap: 12px; }
+.xor-prefix__row { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; }
+.xor-prefix__cell { min-width: 74px; border: 2px solid currentColor; border-radius: 8px; padding: 6px; text-align: center; opacity: 0.6; }
+.xor-prefix__cell span { display: block; font-size: 0.7rem; }
+.xor-prefix__cell strong { display: block; font-variant-numeric: tabular-nums; }
+.xor-prefix__cell code { font-size: 0.75rem; }
+.xor-prefix__cell[data-role="start"] { opacity: 1; outline: 3px solid #4338ca; }
+.xor-prefix__cell[data-role="end"] { opacity: 1; outline: 3px solid #7c3aed; }
+.xor-prefix__cell[data-role="hit"] { opacity: 1; background: rgba(67, 56, 202, 0.2); }
+.xor-prefix__readout { font-size: 1.05rem; margin: 0; }

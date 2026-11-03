@@ -1,0 +1,19 @@
+.overlap-view { margin: 0; display: grid; gap: 10px; color: var(--text, #1f2937); }
+.overlap-view__words { display: flex; flex-wrap: wrap; gap: 8px; }
+.word { border-radius: 6px; padding: 3px 8px; font-family: ui-monospace, monospace; font-size: 13px; border: 1px solid #cbd5e1; }
+.word--first { border-color: #1d4ed8; }
+.word--second { border-color: #15803d; }
+.overlap-view__strip { display: flex; flex-wrap: wrap; gap: 3px; min-height: 44px; padding: 8px; border: 1px solid #e2e8f0; border-radius: 8px; }
+.letter { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 6px; font-family: ui-monospace, monospace; font-weight: 700; }
+.letter--first { background: #dbeafe; color: #1e3a8a; }
+.letter--second { background: #dcfce7; color: #14532d; }
+.letter--shared { background: #fde68a; color: #78350f; outline: 2px solid #b45309; }
+.overlap-view__empty, .overlap-view__key { font-size: 13px; margin: 0; }
+.overlap-view__list { margin: 0; padding-left: 18px; font-size: 13px; font-family: ui-monospace, monospace; }
+@media (prefers-color-scheme: dark) {
+  .overlap-view { color: #e5e7eb; }
+  .letter--first { background: #1e3a8a; color: #dbeafe; }
+  .letter--second { background: #14532d; color: #dcfce7; }
+  .letter--shared { background: #78350f; color: #fef3c7; outline-color: #fbbf24; }
+  .word, .overlap-view__strip { border-color: #334155; }
+}

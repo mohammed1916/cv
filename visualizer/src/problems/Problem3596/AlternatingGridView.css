@@ -1,0 +1,16 @@
+.alternating-grid-view { margin: 0; display: grid; gap: 8px; color: var(--text, #1f2937); overflow-x: auto; }
+.alternating-grid-view__grid { display: grid; gap: 4px; min-width: max-content; }
+.alternating-grid-view .cell { display: grid; gap: 1px; justify-items: center; padding: 6px 4px; border: 2px solid #cbd5e1; border-radius: 8px; background: #f8fafc; font-size: 12px; }
+.alternating-grid-view .cell b { font-family: ui-monospace, monospace; font-size: 12px; }
+.alternating-grid-view .cell small { font-size: 10px; color: #64748b; }
+.alternating-grid-view .cell--settled { background: #cffafe; border-color: #0e7490; }
+.alternating-grid-view .cell--current { background: #fde68a; border-color: #b45309; }
+.alternating-grid-view .cell--target { outline: 2px dashed #0e7490; }
+.alternating-grid-view__note, .alternating-grid-view__key { margin: 0; font-size: 13px; }
+@media (prefers-color-scheme: dark) {
+  .alternating-grid-view { color: #e5e7eb; }
+  .alternating-grid-view .cell { background: #111827; border-color: #334155; }
+  .alternating-grid-view .cell small { color: #94a3b8; }
+  .alternating-grid-view .cell--settled { background: #164e63; }
+  .alternating-grid-view .cell--current { background: #78350f; }
+}

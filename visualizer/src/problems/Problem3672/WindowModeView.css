@@ -1,0 +1,9 @@
+.window-mode { display: grid; gap: 12px; }
+.window-mode__row { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; }
+.window-mode__cell { min-width: 34px; border: 2px solid currentColor; border-radius: 6px; padding: 4px 6px; text-align: center; opacity: 0.45; }
+.window-mode__cell[data-in="yes"] { opacity: 1; background: rgba(180, 83, 9, 0.16); }
+.window-mode__cell[data-mode="yes"] { outline: 3px solid #b45309; }
+.window-mode__table { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.window-mode__table li { border: 1px solid currentColor; border-radius: 6px; padding: 2px 8px; font-variant-numeric: tabular-nums; }
+.window-mode__table li[data-mode="yes"] { background: rgba(180, 83, 9, 0.28); font-weight: 600; }
+.window-mode__readout { margin: 0; font-size: 1.05rem; }

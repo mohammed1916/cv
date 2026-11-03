@@ -1,0 +1,8 @@
+.two-bags { display: grid; gap: 12px; }
+.two-bags__grid { border-collapse: collapse; margin: 0; }
+.two-bags__grid th { font-size: 0.7rem; font-weight: 500; padding: 2px 6px; }
+.two-bags__grid td { width: 34px; height: 34px; border: 1px solid currentColor; text-align: center; font-variant-numeric: tabular-nums; }
+.two-bags__grid td[data-state="reachable"] { background: rgba(2, 132, 199, 0.22); font-weight: 600; }
+.two-bags__grid td[data-state="new"] { background: rgba(2, 132, 199, 0.55); }
+.two-bags__grid td[data-state="origin"] { outline: 2px solid #0369a1; }
+.two-bags__readout { margin: 0; font-size: 1.05rem; }

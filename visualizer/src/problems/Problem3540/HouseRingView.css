@@ -1,0 +1,27 @@
+.house-ring-view { margin: 0; display: grid; gap: 10px; justify-items: center; color: var(--text, #1f2937); }
+.house-ring-view svg { width: min(100%, 300px); height: auto; }
+.house-ring-view__track { fill: none; stroke: #cbd5e1; stroke-width: 6; }
+.house-ring-view .house circle { fill: #f5f3ff; stroke: #7c3aed; stroke-width: 2; }
+.house-ring-view .house text { font-size: 11px; text-anchor: middle; fill: #1e1b4b; font-weight: 700; }
+.house-ring-view .house--query circle { fill: #ede9fe; stroke-width: 3; }
+.house-ring-view .house--here circle { fill: #fde68a; stroke: #b45309; stroke-width: 4; }
+.house-ring-view__order { font-size: 9px !important; fill: #6d28d9 !important; font-weight: 600 !important; }
+.house-ring-view__move { font-size: 12px; text-anchor: middle; fill: #5b21b6; font-weight: 700; }
+.house-ring-view__table { display: grid; gap: 3px; font-size: 12px; width: 100%; overflow-x: auto; }
+.house-ring-view__row { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(48px, 1fr); gap: 3px; }
+.house-ring-view__row span { border: 1px solid #e2e8f0; border-radius: 4px; padding: 3px 4px; text-align: center; }
+.house-ring-view__row--head span { font-weight: 700; background: #f8fafc; }
+.house-ring-view .cell--settled { background: #ede9fe; }
+.house-ring-view .cell--current { background: #fde68a; border-color: #b45309; font-weight: 700; }
+.house-ring-view__note { margin: 0; font-size: 13px; }
+@media (prefers-color-scheme: dark) {
+  .house-ring-view { color: #e5e7eb; }
+  .house-ring-view .house circle { fill: #1e1b4b; }
+  .house-ring-view .house text { fill: #f5f3ff; }
+  .house-ring-view .house--query circle { fill: #2e1065; }
+  .house-ring-view__order { fill: #c4b5fd !important; }
+  .house-ring-view__row span { border-color: #334155; }
+  .house-ring-view__row--head span { background: #111827; }
+  .house-ring-view .cell--settled { background: #2e1065; }
+  .house-ring-view .cell--current { background: #78350f; }
+}

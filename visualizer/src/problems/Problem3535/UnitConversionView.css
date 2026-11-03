@@ -1,0 +1,22 @@
+.unit-conversion-view { margin: 0; display: grid; gap: 12px; justify-items: center; color: var(--text, #1f2937); }
+.unit-conversion-view svg { width: min(100%, 320px); height: auto; }
+.unit-conversion-view .edge line { stroke: #94a3b8; stroke-width: 2; }
+.unit-conversion-view .edge text { font-size: 10px; fill: #475569; text-anchor: middle; }
+.unit-conversion-view .edge--active line { stroke: #0f766e; stroke-width: 4; }
+.unit-conversion-view .edge--active text { fill: #0f766e; font-weight: 700; }
+.unit-conversion-view .unit circle { fill: #f1f5f9; stroke: #64748b; stroke-width: 2; }
+.unit-conversion-view .unit--valued circle { fill: #ccfbf1; stroke: #0f766e; }
+.unit-conversion-view .unit--current circle { fill: #fde68a; stroke: #b45309; stroke-width: 3; }
+.unit-conversion-view .unit-name { font-size: 11px; font-weight: 700; text-anchor: middle; fill: #0f172a; }
+.unit-conversion-view .unit-amount { font-size: 10px; text-anchor: middle; fill: #134e4a; }
+.unit-conversion-view__queries { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.query { border: 1px solid #cbd5e1; border-radius: 6px; padding: 3px 8px; font-size: 13px; }
+.query--done { border-color: #0f766e; background: #ccfbf1; }
+@media (prefers-color-scheme: dark) {
+  .unit-conversion-view { color: #e5e7eb; }
+  .unit-conversion-view .unit circle { fill: #1f2937; }
+  .unit-conversion-view .unit--valued circle { fill: #134e4a; }
+  .unit-conversion-view .unit-name { fill: #f8fafc; }
+  .unit-conversion-view .unit-amount { fill: #99f6e4; }
+  .unit-conversion-view .edge text { fill: #cbd5e1; }
+}
