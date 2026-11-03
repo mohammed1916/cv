@@ -1,0 +1,131 @@
+.brace-view {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  background: var(--surface, #0f172a);
+  color: var(--text, #f8fafc);
+  font-family: inherit;
+}
+
+.brace-view__empty,
+.brace-view__none {
+  color: var(--text-muted, #94a3b8);
+  font-size: 14px;
+}
+
+.brace-view__heading {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted, #94a3b8);
+}
+
+.brace-view__groups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.brace-view__group {
+  min-width: 96px;
+  padding: 10px;
+  border: 2px solid var(--border, #334155);
+  border-radius: 8px;
+  background: var(--surface2, #1e293b);
+}
+
+.brace-view__group.is-deciding {
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.25);
+}
+
+.brace-view__group-label {
+  font-size: 13px;
+  margin-bottom: 8px;
+  font-family: ui-monospace, monospace;
+}
+
+.brace-view__options {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.brace-view__chip {
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px dashed var(--border, #475569);
+  font-family: ui-monospace, monospace;
+  font-size: 14px;
+}
+
+.brace-view__chip.is-chosen {
+  background: #0f766e;
+  border-style: solid;
+  color: #ffffff;
+}
+
+.brace-view__chip.is-trying {
+  background: #f59e0b;
+  border-style: solid;
+  color: #111827;
+}
+
+.brace-view__prefix {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-height: 40px;
+  align-items: center;
+}
+
+.brace-view__tile {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background: #0f766e;
+  color: #ffffff;
+  font-family: ui-monospace, monospace;
+  font-size: 16px;
+}
+
+.brace-view__tile.is-pending {
+  background: transparent;
+  color: #f59e0b;
+  border: 2px dashed #f59e0b;
+}
+
+.brace-view__results {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.brace-view__result {
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: var(--surface2, #1e293b);
+  font-family: ui-monospace, monospace;
+  font-size: 14px;
+}
+
+.brace-view__result.is-new {
+  background: #f59e0b;
+  color: #111827;
+}
+
+@media (max-width: 480px) {
+  .brace-view { padding: 16px; }
+  .brace-view__group { min-width: 0; flex: 1 1 120px; }
+}
