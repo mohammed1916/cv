@@ -1,0 +1,49 @@
+.gq-view {
+  --gq-ink: #0f172a;
+  --gq-muted: #475569;
+  --gq-cell: #f8fafc;
+  --gq-line: #cbd5e1;
+  --gq-cur: #2563eb;
+  --gq-cur-fill: #dbeafe;
+  --gq-square: #ea580c;
+  --gq-fail: #b91c1c;
+  --gq-fail-fill: #fee2e2;
+  --gq-done: #15803d;
+  color: var(--gq-ink);
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  .gq-view {
+    --gq-ink: #e2e8f0;
+    --gq-muted: #94a3b8;
+    --gq-cell: #1e293b;
+    --gq-line: #334155;
+    --gq-cur: #93c5fd;
+    --gq-cur-fill: #1e3a8a;
+    --gq-square: #fdba74;
+    --gq-fail: #f87171;
+    --gq-fail-fill: #7f1d1d;
+    --gq-done: #4ade80;
+  }
+}
+
+.gq-view svg { width: 100%; height: auto; display: block; max-width: 420px; }
+.gq-empty, .gq-rule, .gq-total { margin: 0; color: var(--gq-muted); font-size: 0.92rem; }
+.gq-message { margin: 0; font-weight: 600; }
+.gq-cell rect { fill: var(--gq-cell); stroke: var(--gq-line); stroke-width: 2; }
+.gq-cell--cur rect { fill: var(--gq-cur-fill); stroke: var(--gq-cur); stroke-width: 3; }
+.gq-cell--fail rect { fill: var(--gq-fail-fill); stroke: var(--gq-fail); stroke-width: 3; }
+.gq-cell--done .gq-need { fill: var(--gq-done); }
+.gq-value { font-size: 20px; font-weight: 700; fill: var(--gq-ink); }
+.gq-need { font-size: 11px; fill: var(--gq-muted); }
+.gq-square rect { fill: none; stroke: var(--gq-square); stroke-width: 3; stroke-dasharray: 6 3; }
+.gq-square text { font-size: 13px; font-weight: 700; fill: var(--gq-square); }
+.gq-legend { display: flex; flex-wrap: wrap; gap: 12px; list-style: none; padding: 0; margin: 0; font-size: 0.85rem; color: var(--gq-muted); }
+.gq-swatch { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 4px; vertical-align: middle; border: 2px solid; }
+.gq-swatch--cur { background: var(--gq-cur-fill); border-color: var(--gq-cur); }
+.gq-swatch--square { border-color: var(--gq-square); border-style: dashed; }
+.gq-swatch--fail { background: var(--gq-fail-fill); border-color: var(--gq-fail); }

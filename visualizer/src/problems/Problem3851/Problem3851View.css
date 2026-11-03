@@ -1,0 +1,52 @@
+.rq-view {
+  --rq-ink: #0f172a;
+  --rq-muted: #475569;
+  --rq-keep: #15803d;
+  --rq-keep-fill: #dcfce7;
+  --rq-drop: #b91c1c;
+  --rq-drop-fill: #fee2e2;
+  --rq-cur: #1d4ed8;
+  --rq-compare: #a16207;
+  --rq-band: rgba(29, 78, 216, 0.10);
+  --rq-line: #94a3b8;
+  color: var(--rq-ink);
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  .rq-view {
+    --rq-ink: #e2e8f0;
+    --rq-muted: #94a3b8;
+    --rq-keep: #4ade80;
+    --rq-keep-fill: #14532d;
+    --rq-drop: #f87171;
+    --rq-drop-fill: #7f1d1d;
+    --rq-cur: #93c5fd;
+    --rq-compare: #facc15;
+    --rq-band: rgba(147, 197, 253, 0.14);
+    --rq-line: #475569;
+  }
+}
+
+.rq-view svg { width: 100%; height: auto; display: block; }
+.rq-empty, .rq-rule, .rq-total { margin: 0; color: var(--rq-muted); font-size: 0.95rem; }
+.rq-label { font-size: 14px; font-weight: 600; fill: var(--rq-ink); }
+.rq-axis { stroke: var(--rq-line); stroke-width: 2; }
+.rq-band { fill: var(--rq-band); }
+.rq-current-row { fill: none; stroke: var(--rq-cur); stroke-dasharray: 4 3; }
+.rq-req circle { fill: transparent; stroke: var(--rq-muted); stroke-width: 2; }
+.rq-req--keep circle { fill: var(--rq-keep-fill); stroke: var(--rq-keep); }
+.rq-req--drop circle { fill: var(--rq-drop-fill); stroke: var(--rq-drop); }
+.rq-req--cur circle { stroke: var(--rq-cur); stroke-width: 3; }
+.rq-mark { font-size: 13px; font-weight: 700; fill: var(--rq-ink); }
+.rq-time { font-size: 11px; fill: var(--rq-muted); }
+.rq-compare { fill: none; stroke: var(--rq-compare); stroke-width: 2; }
+.rq-legend { display: flex; flex-wrap: wrap; gap: 12px; list-style: none; padding: 0; margin: 0; font-size: 0.85rem; color: var(--rq-muted); }
+.rq-swatch { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 4px; vertical-align: middle; border: 2px solid; }
+.rq-swatch--keep { background: var(--rq-keep-fill); border-color: var(--rq-keep); }
+.rq-swatch--drop { background: var(--rq-drop-fill); border-color: var(--rq-drop); }
+.rq-swatch--cur { border-color: var(--rq-cur); }
+.rq-swatch--compare { border-color: var(--rq-compare); border-radius: 2px; }

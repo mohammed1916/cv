@@ -1,0 +1,38 @@
+.pk-view {
+  --pk-ink: #0f172a;
+  --pk-muted: #475569;
+  --pk-bar: #94a3b8;
+  --pk-peak: #7c3aed;
+  --pk-cur: #ea580c;
+  --pk-window: rgba(234, 88, 12, 0.10);
+  --pk-wall: #0f766e;
+  color: var(--pk-ink);
+  display: grid;
+  gap: 8px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  .pk-view {
+    --pk-ink: #e2e8f0;
+    --pk-muted: #94a3b8;
+    --pk-bar: #475569;
+    --pk-peak: #c4b5fd;
+    --pk-cur: #fdba74;
+    --pk-window: rgba(253, 186, 116, 0.14);
+    --pk-wall: #5eead4;
+  }
+}
+
+.pk-view svg { width: 100%; height: auto; display: block; }
+.pk-empty, .pk-rule, .pk-total { margin: 0; color: var(--pk-muted); font-size: 0.92rem; }
+.pk-message { margin: 0; font-weight: 600; }
+.pk-window { fill: var(--pk-window); }
+.pk-wall { stroke: var(--pk-wall); stroke-width: 2; stroke-dasharray: 5 4; }
+.pk-bar rect { fill: var(--pk-bar); }
+.pk-bar--peak rect { fill: var(--pk-peak); }
+.pk-bar--cur rect { fill: var(--pk-cur); stroke: var(--pk-ink); stroke-width: 2; }
+.pk-val { font-size: 13px; font-weight: 700; fill: var(--pk-ink); }
+.pk-idx { font-size: 11px; fill: var(--pk-muted); }
+.pk-tag { font-size: 11px; font-weight: 700; fill: var(--pk-peak); }

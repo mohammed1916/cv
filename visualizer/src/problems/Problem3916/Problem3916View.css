@@ -1,0 +1,40 @@
+.zz-view {
+  --zz-ink: #0f172a;
+  --zz-muted: #475569;
+  --zz-line: #cbd5e1;
+  --zz-head: #e2e8f0;
+  --zz-cur: #ea580c;
+  --zz-cur-fill: #ffedd5;
+  --zz-up: #0369a1;
+  --zz-down: #be185d;
+  color: var(--zz-ink);
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  .zz-view {
+    --zz-ink: #e2e8f0;
+    --zz-muted: #94a3b8;
+    --zz-line: #334155;
+    --zz-head: #1e293b;
+    --zz-cur: #fdba74;
+    --zz-cur-fill: #7c2d12;
+    --zz-up: #7dd3fc;
+    --zz-down: #f9a8d4;
+  }
+}
+
+.zz-empty, .zz-rule, .zz-total { margin: 0; color: var(--zz-muted); font-size: 0.92rem; }
+.zz-message { margin: 0; font-weight: 600; }
+.zz-table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+.zz-table th, .zz-table td { border: 1px solid var(--zz-line); padding: 8px 6px; text-align: center; }
+.zz-table thead th { background: var(--zz-head); color: var(--zz-ink); }
+.zz-table tbody th { text-align: left; color: var(--zz-muted); font-weight: 600; white-space: nowrap; }
+.zz-table tbody tr:first-child th { color: var(--zz-up); }
+.zz-table tbody tr:last-child th { color: var(--zz-down); }
+.zz-col--cur { outline: 2px solid var(--zz-cur); }
+.zz-cell { font-variant-numeric: tabular-nums; font-weight: 700; }
+.zz-cell--cur { background: var(--zz-cur-fill); outline: 2px solid var(--zz-cur); }

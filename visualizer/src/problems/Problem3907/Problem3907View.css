@@ -1,0 +1,56 @@
+.ps-view {
+  --ps-ink: #0f172a;
+  --ps-muted: #475569;
+  --ps-cell: #f1f5f9;
+  --ps-line: #cbd5e1;
+  --ps-cur: #ea580c;
+  --ps-cur-fill: #ffedd5;
+  --ps-seen: #64748b;
+  --ps-even: #0369a1;
+  --ps-even-fill: #e0f2fe;
+  --ps-odd: #7c3aed;
+  --ps-odd-fill: #ede9fe;
+  --ps-smaller: #15803d;
+  color: var(--ps-ink);
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  .ps-view {
+    --ps-ink: #e2e8f0;
+    --ps-muted: #94a3b8;
+    --ps-cell: #1e293b;
+    --ps-line: #334155;
+    --ps-cur: #fdba74;
+    --ps-cur-fill: #7c2d12;
+    --ps-seen: #94a3b8;
+    --ps-even: #7dd3fc;
+    --ps-even-fill: #0c4a6e;
+    --ps-odd: #c4b5fd;
+    --ps-odd-fill: #4c1d95;
+    --ps-smaller: #4ade80;
+  }
+}
+
+.ps-view svg { width: 100%; height: auto; display: block; }
+.ps-empty, .ps-note { margin: 0; color: var(--ps-muted); font-size: 0.9rem; }
+.ps-message, .ps-count { margin: 0; font-weight: 600; }
+.ps-cell rect { fill: var(--ps-cell); stroke: var(--ps-line); stroke-width: 2; }
+.ps-cell--cur rect { fill: var(--ps-cur-fill); stroke: var(--ps-cur); stroke-width: 3; }
+.ps-cell--seen .ps-value { fill: var(--ps-seen); }
+.ps-value { font-size: 18px; font-weight: 700; fill: var(--ps-ink); }
+.ps-index { font-size: 11px; fill: var(--ps-muted); }
+.ps-result { font-size: 14px; font-weight: 700; fill: var(--ps-smaller); }
+.ps-shelves { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ps-shelf { border: 2px solid var(--ps-line); border-radius: 10px; padding: 8px; min-height: 90px; }
+.ps-shelf h3 { margin: 0 0 6px; font-size: 0.9rem; color: var(--ps-muted); }
+.ps-shelf ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.ps-shelf:first-child { border-color: var(--ps-even); }
+.ps-shelf:last-child { border-color: var(--ps-odd); }
+.ps-shelf--opposite { box-shadow: inset 0 0 0 2px var(--ps-cur); }
+.ps-val { padding: 2px 8px; border-radius: 6px; background: var(--ps-cell); font-weight: 700; color: var(--ps-ink); }
+.ps-val--smaller { background: var(--ps-cur-fill); color: var(--ps-smaller); border: 1px solid var(--ps-smaller); }
+.ps-empty-slot { color: var(--ps-muted); font-style: italic; }

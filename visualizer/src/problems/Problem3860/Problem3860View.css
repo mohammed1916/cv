@@ -1,0 +1,54 @@
+.eg-view {
+  --eg-ink: #0f172a;
+  --eg-muted: #475569;
+  --eg-panel: #f8fafc;
+  --eg-line: #cbd5e1;
+  --eg-cur: #2563eb;
+  --eg-cur-fill: #dbeafe;
+  --eg-new: #15803d;
+  --eg-new-fill: #dcfce7;
+  --eg-seen: #a16207;
+  --eg-seen-fill: #fef9c3;
+  color: var(--eg-ink);
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  .eg-view {
+    --eg-ink: #e2e8f0;
+    --eg-muted: #94a3b8;
+    --eg-panel: #1e293b;
+    --eg-line: #334155;
+    --eg-cur: #93c5fd;
+    --eg-cur-fill: #1e3a8a;
+    --eg-new: #4ade80;
+    --eg-new-fill: #14532d;
+    --eg-seen: #facc15;
+    --eg-seen-fill: #713f12;
+  }
+}
+
+.eg-columns { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.eg-panel { background: var(--eg-panel); border: 1px solid var(--eg-line); border-radius: 10px; padding: 12px; min-width: 0; }
+.eg-panel h3 { margin: 0 0 8px; font-size: 0.95rem; }
+.eg-empty, .eg-total { margin: 0; color: var(--eg-muted); font-size: 0.92rem; }
+.eg-total { color: var(--eg-ink); font-weight: 600; }
+.eg-list, .eg-buckets { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.eg-row, .eg-bucket { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 8px; overflow-wrap: anywhere; }
+.eg-row--cur { background: var(--eg-cur-fill); outline: 2px solid var(--eg-cur); }
+.eg-row--past { color: var(--eg-muted); }
+.eg-row--todo { color: var(--eg-muted); opacity: 0.7; }
+.eg-icon { width: 1.2em; text-align: center; font-weight: 700; }
+.eg-facts { display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; margin: 0; }
+.eg-facts dt { color: var(--eg-muted); font-size: 0.85rem; }
+.eg-facts dd { margin: 0; }
+.eg-badge { display: inline-block; margin: 10px 0 0; padding: 4px 10px; border-radius: 999px; font-weight: 600; font-size: 0.9rem; }
+.eg-badge--new { background: var(--eg-new-fill); color: var(--eg-new); }
+.eg-badge--seen { background: var(--eg-seen-fill); color: var(--eg-seen); }
+.eg-bucket { justify-content: space-between; background: transparent; border: 1px dashed var(--eg-line); overflow-wrap: anywhere; }
+.eg-bucket--cur { background: var(--eg-cur-fill); border: 2px solid var(--eg-cur); }
+.eg-count { min-width: 1.8em; text-align: center; border-radius: 999px; background: var(--eg-line); padding: 0 6px; font-weight: 700; }
+code { overflow-wrap: anywhere; word-break: break-word; }
