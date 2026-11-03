@@ -1,0 +1,98 @@
+.exp-view {
+  --exp-ink: #0f172a;
+  --exp-muted: #475569;
+  --exp-card: #f8fafc;
+  --exp-frame: #e0e7ff;
+  --exp-new: #fde68a;
+  --exp-hit: #bbf7d0;
+  color: var(--exp-ink);
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  .exp-view {
+    --exp-ink: #e2e8f0;
+    --exp-muted: #94a3b8;
+    --exp-card: #1e293b;
+    --exp-frame: #312e81;
+    --exp-new: #713f12;
+    --exp-hit: #14532d;
+  }
+}
+
+.exp-block {
+  background: var(--exp-card);
+  border: 1px solid #94a3b8;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.exp-block h3 {
+  font-size: 0.9rem;
+  margin: 0 0 6px;
+}
+
+.exp-text,
+.exp-output {
+  font-family: ui-monospace, monospace;
+  font-size: 1rem;
+  word-break: break-all;
+}
+
+.exp-stack {
+  display: grid;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.exp-frame {
+  background: var(--exp-frame);
+  border-radius: 6px;
+  padding: 4px 8px;
+  margin-left: 16px;
+  font-family: ui-monospace, monospace;
+}
+
+.exp-frame--root {
+  margin-left: 0;
+  font-weight: 700;
+}
+
+.exp-frame--new {
+  background: var(--exp-new);
+  outline: 2px solid #ca8a04;
+}
+
+.exp-memo {
+  border-collapse: collapse;
+  font-family: ui-monospace, monospace;
+  font-size: 0.9rem;
+}
+
+.exp-memo th,
+.exp-memo td {
+  border: 1px solid #94a3b8;
+  padding: 3px 8px;
+  text-align: left;
+}
+
+.exp-memo--hit {
+  background: var(--exp-hit);
+}
+
+.exp-memo--new {
+  background: var(--exp-new);
+}
+
+.exp-note,
+.exp-empty,
+.exp-summary {
+  color: var(--exp-muted);
+  margin: 0;
+  font-size: 0.9rem;
+}

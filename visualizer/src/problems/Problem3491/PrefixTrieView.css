@@ -1,0 +1,113 @@
+.trie-view {
+  --trie-ink: #0f172a;
+  --trie-muted: #475569;
+  --trie-node: #e2e8f0;
+  --trie-end: #bfdbfe;
+  --trie-path: #fde68a;
+  --trie-ok: #bbf7d0;
+  --trie-bad: #fecaca;
+  color: var(--trie-ink);
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  .trie-view {
+    --trie-ink: #e2e8f0;
+    --trie-muted: #94a3b8;
+    --trie-node: #334155;
+    --trie-end: #1e3a8a;
+    --trie-path: #713f12;
+    --trie-ok: #14532d;
+    --trie-bad: #7f1d1d;
+  }
+}
+
+.trie-numbers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.trie-number {
+  border: 1px solid #94a3b8;
+  border-radius: 6px;
+  font-family: ui-monospace, monospace;
+  padding: 3px 8px;
+}
+
+.trie-number--done {
+  color: var(--trie-muted);
+}
+
+.trie-number--current {
+  background: var(--trie-path);
+  outline: 2px solid #ca8a04;
+}
+
+.trie-root-wrap {
+  overflow-x: auto;
+}
+
+.trie-children {
+  list-style: none;
+  margin: 0;
+  padding-left: 18px;
+  border-left: 1px dashed #94a3b8;
+}
+
+.trie-children--root {
+  border-left: none;
+  padding-left: 0;
+}
+
+.trie-item {
+  padding: 3px 0;
+}
+
+.trie-node {
+  background: var(--trie-node);
+  border-radius: 6px;
+  display: inline-block;
+  font-family: ui-monospace, monospace;
+  min-width: 26px;
+  padding: 2px 8px;
+  text-align: center;
+}
+
+.trie-node--end {
+  background: var(--trie-end);
+  font-weight: 700;
+}
+
+.trie-node--path {
+  background: var(--trie-path);
+  outline: 2px solid #ca8a04;
+}
+
+.trie-status {
+  font-weight: 600;
+  margin: 0;
+}
+
+.trie-status[data-result="true"] {
+  background: var(--trie-ok);
+  border-radius: 6px;
+  padding: 6px 8px;
+}
+
+.trie-status[data-result="false"] {
+  background: var(--trie-bad);
+  border-radius: 6px;
+  padding: 6px 8px;
+}
+
+.trie-empty,
+.trie-empty-root,
+.trie-legend {
+  color: var(--trie-muted);
+  font-size: 0.85rem;
+  margin: 0;
+}

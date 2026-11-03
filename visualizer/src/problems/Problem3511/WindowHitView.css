@@ -1,0 +1,87 @@
+.win-view {
+  --win-ink: #0f172a;
+  --win-muted: #475569;
+  --win-cell: #f8fafc;
+  --win-window: #bfdbfe;
+  --win-replaced: #fecaca;
+  --win-current: #fde68a;
+  color: var(--win-ink);
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  .win-view {
+    --win-ink: #e2e8f0;
+    --win-muted: #94a3b8;
+    --win-cell: #1e293b;
+    --win-window: #1e3a8a;
+    --win-replaced: #7f1d1d;
+    --win-current: #713f12;
+  }
+}
+
+.win-array {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.win-cell {
+  align-items: center;
+  background: var(--win-cell);
+  border: 1px solid #94a3b8;
+  border-radius: 6px;
+  display: inline-flex;
+  flex-direction: column;
+  font-family: ui-monospace, monospace;
+  min-width: 40px;
+  padding: 4px 6px;
+}
+
+.win-cell small {
+  color: var(--win-muted);
+  font-size: 0.65rem;
+}
+
+.win-cell--window {
+  background: var(--win-window);
+}
+
+.win-cell--replaced {
+  background: var(--win-replaced);
+  border-style: dashed;
+}
+
+.win-list {
+  display: grid;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.win-item {
+  border-radius: 6px;
+  font-family: ui-monospace, monospace;
+  font-size: 0.9rem;
+  padding: 4px 8px;
+}
+
+.win-item--current {
+  background: var(--win-current);
+  outline: 2px solid #ca8a04;
+}
+
+.win-item--done {
+  color: var(--win-muted);
+}
+
+.win-summary,
+.win-empty {
+  color: var(--win-muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
