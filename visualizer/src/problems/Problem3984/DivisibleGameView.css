@@ -1,0 +1,22 @@
+.divisible-game { margin: 0; display: grid; gap: 0.7rem; color: var(--text, #1f2937); }
+.divisible-game__k { margin: 0; font-weight: 600; }
+.divisible-game__row { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.divisible-game__cell { min-width: 3.4rem; border: 2px solid #94a3b8; border-radius: 0.5rem; padding: 0.35rem; text-align: center; background: #f8fafc; }
+.divisible-game__cell.is-plus { background: #dcfce7; border-color: #15803d; }
+.divisible-game__cell.is-minus { background: #fee2e2; border-color: #b91c1c; }
+.divisible-game__cell.is-current { box-shadow: 0 0 0 3px #bfdbfe; border-color: #1d4ed8; }
+.divisible-game__value { display: block; font-weight: 700; font-variant-numeric: tabular-nums; }
+.divisible-game__sign { display: block; font-size: 0.8rem; font-family: ui-monospace, monospace; }
+.divisible-game__stats { margin: 0; display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.divisible-game__stats > div { border: 1px solid #cbd5e1; border-radius: 0.5rem; padding: 0.4rem 0.6rem; min-width: 7rem; }
+.divisible-game__stats dt { font-size: 0.75rem; color: #475569; }
+.divisible-game__stats dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+.divisible-game__legend { margin: 0; font-size: 0.8rem; color: #475569; }
+@media (prefers-color-scheme: dark) {
+  .divisible-game { --text: #e5e7eb; }
+  .divisible-game__cell { background: #1e293b; border-color: #64748b; }
+  .divisible-game__cell.is-plus { background: #14532d; border-color: #4ade80; }
+  .divisible-game__cell.is-minus { background: #7f1d1d; border-color: #f87171; }
+  .divisible-game__stats > div { border-color: #475569; }
+  .divisible-game__stats dt, .divisible-game__legend { color: #cbd5e1; }
+}

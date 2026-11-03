@@ -1,0 +1,18 @@
+.shift-queue { margin: 0; display: grid; gap: 0.7rem; color: var(--text, #1f2937); }
+.shift-queue__tasks { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.4rem; }
+.shift-queue__task { display: grid; grid-template-columns: 4.5rem 1fr 5rem; align-items: center; gap: 0.5rem; }
+.shift-queue__name, .shift-queue__need { font-size: 0.85rem; font-variant-numeric: tabular-nums; }
+.shift-queue__bar { display: block; height: 1.1rem; border: 2px solid #94a3b8; border-radius: 0.3rem; background: #f1f5f9; overflow: hidden; }
+.shift-queue__bar i { display: block; height: 100%; background: #be185d; opacity: 0.55; }
+.shift-queue__task.is-done .shift-queue__bar { background: #fce7f3; border-color: #be185d; }
+.shift-queue__task.is-current .shift-queue__bar { border-color: #1d4ed8; box-shadow: 0 0 0 3px #bfdbfe; }
+.shift-queue__budget { display: grid; gap: 0.25rem; font-size: 0.9rem; }
+.shift-queue__gauge { display: block; height: 0.6rem; border-radius: 999px; background: #e2e8f0; overflow: hidden; }
+.shift-queue__gauge i { display: block; height: 100%; background: #0f766e; }
+.shift-queue__counts { margin: 0; font-family: ui-monospace, monospace; font-size: 0.9rem; }
+@media (prefers-color-scheme: dark) {
+  .shift-queue { --text: #e5e7eb; }
+  .shift-queue__bar { background: #1e293b; border-color: #64748b; }
+  .shift-queue__task.is-done .shift-queue__bar { background: #4a1d35; }
+  .shift-queue__gauge { background: #334155; }
+}

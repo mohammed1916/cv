@@ -1,0 +1,22 @@
+.task-tree { margin: 0; display: grid; gap: 0.6rem; color: var(--text, #1f2937); max-width: 320px; }
+.task-tree svg { width: 100%; height: auto; }
+.task-tree__edge { stroke: #94a3b8; stroke-width: 2; }
+.task-tree__node circle { fill: #f1f5f9; stroke: #64748b; stroke-width: 2; }
+.task-tree__node.is-done circle { fill: #e0e7ff; stroke: #4338ca; }
+.task-tree__node.is-root circle { stroke: #b45309; stroke-width: 4; }
+.task-tree__node.is-current circle { stroke: #1d4ed8; stroke-width: 4; }
+.task-tree__id { font-size: 10px; text-anchor: middle; fill: #475569; }
+.task-tree__time { font-size: 12px; font-weight: 700; text-anchor: middle; fill: #1f2937; }
+.task-tree__stats { margin: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.task-tree__stats > div { border: 1px solid #cbd5e1; border-radius: 0.5rem; padding: 0.3rem 0.5rem; min-width: 5.5rem; }
+.task-tree__stats dt { font-size: 0.72rem; color: #475569; }
+.task-tree__stats dd { margin: 0; font-weight: 700; }
+.task-tree__legend { margin: 0; font-size: 0.78rem; color: #475569; }
+@media (prefers-color-scheme: dark) {
+  .task-tree { --text: #e5e7eb; }
+  .task-tree__node circle { fill: #1e293b; stroke: #94a3b8; }
+  .task-tree__node.is-done circle { fill: #312e81; stroke: #a5b4fc; }
+  .task-tree__time { fill: #f8fafc; }
+  .task-tree__id, .task-tree__stats dt, .task-tree__legend { fill: #cbd5e1; color: #cbd5e1; }
+  .task-tree__stats > div { border-color: #475569; }
+}

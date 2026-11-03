@@ -1,0 +1,18 @@
+.prefix-reversal { margin: 0; display: grid; gap: 0.7rem; color: var(--text, #1f2937); }
+.prefix-reversal__line { display: grid; gap: 0.25rem; }
+.prefix-reversal__label { font-size: 0.8rem; color: #475569; }
+.prefix-reversal__tiles { list-style: none; margin: 0; padding: 0; display: flex; gap: 0.35rem; flex-wrap: wrap; }
+.prefix-reversal__tile { width: 2.4rem; height: 2.4rem; display: grid; place-items: center; border: 2px solid #94a3b8; border-radius: 0.4rem; font-weight: 700; background: #f8fafc; }
+.prefix-reversal__tile.is-reversed { background: #cffafe; border-color: #0e7490; }
+.prefix-reversal__tile.is-placed { border-color: #15803d; }
+.prefix-reversal__stats { margin: 0; display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.prefix-reversal__stats > div { border: 1px solid #cbd5e1; border-radius: 0.5rem; padding: 0.4rem 0.6rem; min-width: 7rem; }
+.prefix-reversal__stats dt { font-size: 0.75rem; color: #475569; }
+.prefix-reversal__stats dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+@media (prefers-color-scheme: dark) {
+  .prefix-reversal { --text: #e5e7eb; }
+  .prefix-reversal__tile { background: #1e293b; border-color: #64748b; }
+  .prefix-reversal__tile.is-reversed { background: #164e63; border-color: #22d3ee; }
+  .prefix-reversal__label, .prefix-reversal__stats dt { color: #cbd5e1; }
+  .prefix-reversal__stats > div { border-color: #475569; }
+}

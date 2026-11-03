@@ -1,0 +1,20 @@
+.digit-window { margin: 0; display: grid; gap: 0.7rem; color: var(--text, #1f2937); }
+.digit-window__row { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.digit-window__cell { width: 2.6rem; border: 2px solid #94a3b8; border-radius: 0.4rem; text-align: center; padding: 0.3rem 0; background: #f8fafc; }
+.digit-window__cell span { display: block; font-weight: 700; font-variant-numeric: tabular-nums; }
+.digit-window__cell small { display: block; font-size: 0.7rem; color: #64748b; }
+.digit-window__cell.is-inside { background: #fef9c3; border-color: #a16207; }
+.digit-window__cell.is-start { box-shadow: inset 4px 0 0 #1d4ed8; }
+.digit-window__cell.is-end { box-shadow: inset -4px 0 0 #1d4ed8; }
+.digit-window__check { margin: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.digit-window__check > div { border: 1px solid #cbd5e1; border-radius: 0.5rem; padding: 0.3rem 0.5rem; min-width: 5.5rem; }
+.digit-window__check dt { font-size: 0.72rem; color: #475569; }
+.digit-window__check dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+.digit-window__note { margin: 0; font-size: 0.85rem; }
+@media (prefers-color-scheme: dark) {
+  .digit-window { --text: #e5e7eb; }
+  .digit-window__cell { background: #1e293b; border-color: #64748b; }
+  .digit-window__cell.is-inside { background: #422006; border-color: #facc15; }
+  .digit-window__check > div { border-color: #475569; }
+  .digit-window__check dt, .digit-window__cell small { color: #cbd5e1; }
+}
