@@ -1,0 +1,36 @@
+.og-view {
+  --og-ink: #0f172a;
+  --og-muted: #475569;
+  --og-line: #cbd5e1;
+  --og-new: #fde68a;
+  --og-bar: #0e7490;
+  --og-over: #b91c1c;
+  color: var(--og-ink);
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  .og-view {
+    --og-ink: #e2e8f0;
+    --og-muted: #94a3b8;
+    --og-line: #475569;
+    --og-new: #78350f;
+    --og-bar: #22d3ee;
+    --og-over: #fca5a5;
+  }
+}
+
+.og-view__caption { margin: 0; color: var(--og-muted); font-size: 13px; }
+.og-view__grid { border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.og-view__grid td { border: 1px solid var(--og-line); width: 34px; height: 34px; text-align: center; }
+.og-view__new { background: var(--og-new); font-weight: 700; }
+.og-view__gauge { height: 14px; border: 1px solid var(--og-line); border-radius: 7px; overflow: hidden; }
+.og-view__fill { height: 100%; background: var(--og-bar); transition: width 0.2s; }
+.og-view__fill--over { background: var(--og-over); }
+.og-view__stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px; margin: 0; }
+.og-view__stats div { border: 1px solid var(--og-line); border-radius: 8px; padding: 6px 8px; }
+.og-view__stats dt { color: var(--og-muted); font-size: 12px; }
+.og-view__stats dd { margin: 0; font-weight: 600; }

@@ -1,0 +1,38 @@
+.rg-view {
+  --rg-ink: #0f172a;
+  --rg-muted: #475569;
+  --rg-line: #94a3b8;
+  --rg-active: #2563eb;
+  --rg-ring: #0f172a;
+  --rg-need: #b91c1c;
+  color: var(--rg-ink);
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  .rg-view {
+    --rg-ink: #e2e8f0;
+    --rg-muted: #94a3b8;
+    --rg-line: #64748b;
+    --rg-active: #93c5fd;
+    --rg-ring: #f8fafc;
+    --rg-need: #fca5a5;
+  }
+}
+
+.rg-view svg { width: 100%; max-width: 420px; height: auto; justify-self: center; overflow: visible; }
+.rg-view text { fill: #0f172a; font-size: 13px; font-weight: 700; }
+.rg-view__group { fill: var(--rg-muted) !important; font-size: 11px !important; font-weight: 500 !important; }
+.rg-view__edge { stroke: var(--rg-line); stroke-width: 2; }
+.rg-view__edge--active { stroke: var(--rg-active); stroke-width: 3.5; }
+.rg-view__arrowhead { fill: var(--rg-line); }
+.rg-view__node--initial circle { stroke: var(--rg-ring); stroke-width: 4; }
+.rg-view__node--source circle { stroke: var(--rg-need); stroke-width: 3; stroke-dasharray: 5 4; }
+.rg-view__legend { margin: 0; color: var(--rg-muted); font-size: 13px; }
+.rg-view__stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px; margin: 0; }
+.rg-view__stats div { border: 1px solid var(--rg-line); border-radius: 8px; padding: 6px 8px; }
+.rg-view__stats dt { color: var(--rg-muted); font-size: 12px; }
+.rg-view__stats dd { margin: 0; font-weight: 600; }
