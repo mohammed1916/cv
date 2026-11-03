@@ -1,0 +1,112 @@
+.kf-view {
+  display: grid;
+  gap: 0.75rem;
+  color: var(--text, #1f2937);
+  font-family: inherit;
+}
+
+.kf-empty {
+  margin: 0;
+  padding: 1rem;
+  color: var(--muted, #6b7280);
+}
+
+.kf-svg {
+  width: 100%;
+  max-width: 1100px;
+  height: auto;
+  overflow: visible;
+}
+
+.kf-axis {
+  stroke: var(--muted, #6b7280);
+  stroke-width: 2;
+}
+
+.kf-node circle {
+  fill: #ffffff;
+  stroke: #475569;
+  stroke-width: 2;
+}
+
+.kf-node text {
+  fill: #1f2937;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.kf-node .kf-tag {
+  font-size: 10px;
+  font-weight: 500;
+  fill: #475569;
+}
+
+.kf-node--done circle {
+  fill: #dcfce7;
+  stroke: #15803d;
+}
+
+.kf-node--current circle {
+  fill: #fde68a;
+  stroke: #b45309;
+  stroke-width: 3;
+}
+
+.kf-conflict path {
+  fill: none;
+  stroke: #9ca3af;
+  stroke-width: 1.5;
+  stroke-dasharray: 4 3;
+}
+
+.kf-conflict text {
+  font-size: 11px;
+  fill: #6b7280;
+}
+
+.kf-conflict--active path {
+  stroke: #b91c1c;
+  stroke-width: 2.5;
+  stroke-dasharray: none;
+}
+
+.kf-conflict--active text {
+  fill: #b91c1c;
+  font-weight: 700;
+}
+
+.kf-counters p,
+.kf-total {
+  margin: 0;
+  font-weight: 600;
+}
+
+.kf-chains {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.kf-chain {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.4rem 0.6rem;
+  border-left: 4px solid #15803d;
+  background: #f0fdf4;
+  border-radius: 6px;
+}
+
+.kf-chain--empty {
+  border-left-color: #9ca3af;
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .kf-chain {
+    background: #14532d;
+  }
+}
