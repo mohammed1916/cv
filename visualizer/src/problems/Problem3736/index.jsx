@@ -1,0 +1,30 @@
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import { buildTrace, parseInput, code, python } from './algorithm'
+
+const definition = {
+  phases: [
+    { id: 'scan', label: 'Target', description: 'Find the largest value; it is the level everything climbs to.' },
+    { id: 'raise', label: 'Raise', description: 'Add the gap between the target and this value.' },
+    { id: 'done', label: 'Result', description: 'Report the accumulated moves.' },
+  ],
+  parse: parseInput, build: buildTrace, code, python,
+  inputLabel: 'JSON array of integers (1 to 12 values, each from 1 to 100)',
+  url: 'https://leetcode.com/problems/minimum-moves-to-equal-array-elements-iii/',
+  complexity: 'O(n) time and O(1) extra space.',
+  examples: [
+    { label: 'Example', input: '[2,1,3]' },
+    { label: 'Equal values', input: '[4,4,5]' },
+  ],
+}
+
+export default function MinimumMovesToEqualArrayElementsIII() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} active={step.at}
+      roleAt={i => (i === step.at ? 'window' : '')} />
+    <output aria-label="Climb check">{`target ${step.target}, total moves ${step.total}`}</output>
+  </>} renderReasoning={() => <>
+    <p>Only increases are allowed, so the final level must be at least the largest value. Reaching the largest value itself is the cheapest choice.</p>
+    <p>Each value therefore costs exactly the difference from the largest, and the total is the sum of those differences.</p>
+  </>} />
+}

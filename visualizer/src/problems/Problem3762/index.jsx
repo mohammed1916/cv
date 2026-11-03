@@ -1,0 +1,33 @@
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import { buildTrace, parseInput, code, python } from './algorithm'
+
+const definition = {
+  phases: [
+    { id: 'window', label: 'Piece', description: 'Take the values of this query.' },
+    { id: 'mismatch', label: 'Mismatch', description: 'Two values have different remainders, so the answer is -1.' },
+    { id: 'median', label: 'Median', description: 'Divide by k, sort the levels and pay the distance to the middle level.' },
+    { id: 'done', label: 'Result', description: 'Every query has its answer.' },
+  ],
+  parse: parseInput, build: buildTrace, code, python,
+  inputLabel: 'Object with nums, k and queries ([l, r] pairs)',
+  url: 'https://leetcode.com/problems/minimum-operations-to-equalize-subarrays/',
+  complexity: 'O(q * w log w) time for q queries of window length w, in the teaching version. A faster version would use prefix counts of remainder changes and order statistics. The visualization caps nums at 10 values.',
+  examples: [
+    { label: 'Example', input: '{"nums":[2,5,8,11],"k":3,"queries":[[0,3],[1,2]]}' },
+    { label: 'Mismatch', input: '{"nums":[2,5,6,9],"k":3,"queries":[[0,2],[2,3]]}' },
+  ],
+}
+
+export default function MinimumOperationsToEqualizeSubarrays() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} active={step.at}
+      roleAt={i => (step.span && i >= step.span[0] && i <= step.span[1] ? 'window' : '')} />
+    <output aria-label="Equalizing cost">{step.level
+      ? `Levels ${step.level.join(', ')}; target ${step.mid}; cost ${step.answer}`
+      : step.answer === -1 ? 'Remainders differ: -1' : `k = ${run.input.k}`}</output>
+  </>} renderReasoning={() => <>
+    <p>Each operation moves a value by k, so values can meet only when they share a remainder mod k. Dividing by k turns each value into a level.</p>
+    <p>The median level minimizes the total distance to a common level, so its sum of distances is the cost.</p>
+  </>} />
+}
