@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/vowel-spellchecker/',
   complexity: 'O(total length) time with hash lookups. The visualization caps input at 10 words and 10 queries.',
   examples: [
-    { label: 'Example 1', input: '{"wordlist":["KiTe","kite","hare","Hare"],"queries":["kite","Kite","KiTe","Hare","HARE","Hear","hear","keti","keet","keto"]}' },
+    { label: 'Example 1', input: '{"wordlist":["Mouse","mouse","rat"],"queries":["MOUSE","rat","Rot","RAT"]}' },
   ],
 }
 

@@ -1,8 +1,8 @@
 {
   "number": "485",
   "title": "Max Consecutive Ones",
-  "goal": "Solve Max Consecutive Ones: Given a binary array nums, return the maximum number of consecutive 1's in the array.",
-  "strategy": "Given a binary array nums, return the maximum number of consecutive 1's in the array.",
+  "goal": "Solve Max Consecutive Ones: track the current run of ones and keep the longest run seen.",
+  "strategy": "Track the current run of ones; a zero resets the run and the longest run is kept.",
   "phases": [
     "init",
     "scan",

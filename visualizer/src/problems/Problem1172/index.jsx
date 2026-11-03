@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/dinner-plate-stacks/',
   complexity: 'O(log n) per push and popAtStack with a min heap of stacks that have room. The visualization caps input at 15 operations.',
   examples: [
-    { label: 'Example', input: '{"capacity":2,"operations":["push","push","push","push","push","popAtStack","push","push","popAtStack","popAtStack","pop","pop","pop","pop","pop"],"arguments":[[1],[2],[3],[4],[5],[0],[20],[21],[0],[2],[],[],[],[],[]]}' },
+    { label: 'Example', input: '{"capacity":3,"operations":["push","push","push","push","popAtStack","pop","push","popAtStack","pop","pop"],"arguments":[[4],[6],[8],[9],[1],[],[7],[0],[],[]]}' },
   ],
 }
 

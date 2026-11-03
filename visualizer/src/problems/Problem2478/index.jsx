@@ -25,7 +25,7 @@ export default function NumberOfBeautifulPartitions() {
       activeCell={step.parts > 0 ? { row: step.end, column: step.parts } : null} />
     <output aria-label="Result">{step.total === null ? `Ending at digit ${step.end} of ${run.input.s.length}` : `Answer: ${step.total}`}</output>
   </>} renderReasoning={() => <>
-    <p>A beautiful part starts with a prime digit and ends with a non-prime digit, so a cut is allowed only where the digit before it is non-prime.</p>
+    <p>A valid part opens with a prime digit and closes with a non-prime digit, so a cut is legal only after a non-prime digit.</p>
     <p>Each cell adds up the ways to finish the earlier prefix with one fewer part, using only starts that leave the part long enough.</p>
   </>} />
 }

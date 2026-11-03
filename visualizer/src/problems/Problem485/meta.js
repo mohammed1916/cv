@@ -4,6 +4,6 @@ export const meta = {
   slug: "max-consecutive-ones",
   difficulty: "Easy",
   tags: ["Array"],
-  description: "Given a binary array nums, return the maximum number of consecutive 1's in the array.",
+  description: "Track the current run of ones and keep the longest run seen; a zero resets the run.",
   accent: "#f97316",
 }

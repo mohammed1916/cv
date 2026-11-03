@@ -4,6 +4,6 @@ export const meta = {
   slug: 'maximum-depth-of-n-ary-tree',
   difficulty: 'Easy',
   tags: ['Tree', 'DFS', 'BFS', 'Recursion'],
-  description: 'Given an n-ary tree, find its maximum depth. The maximum depth is the number of nodes along the longest path from the root node to the farthest leaf node.',
+  description: 'Measure an n-ary tree by recursing into every child and keeping the deepest branch, counting the current node.',
   accent: '#22c55e',
 }

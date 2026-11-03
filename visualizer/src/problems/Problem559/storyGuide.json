@@ -1,8 +1,8 @@
 {
   "number": "559",
   "title": "Maximum Depth of N-ary Tree",
-  "goal": "Solve Maximum Depth of N-ary Tree: Given an n-ary tree, find its maximum depth. The maximum depth is the number of nodes along the longest path from the root node to the farthest leaf node.",
-  "strategy": "Given an n-ary tree, find its maximum depth. The maximum depth is the number of nodes along the longest path from the root node to the farthest leaf node.",
+  "goal": "Solve Maximum Depth of N-ary Tree: recurse into children and keep the deepest branch, counting the current node.",
+  "strategy": "Recurse into every child; each node adds one level to the deepest branch beneath it.",
   "phases": [
     "check",
     "loop",
