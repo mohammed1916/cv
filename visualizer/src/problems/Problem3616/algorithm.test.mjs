@@ -45,3 +45,11 @@ test('3616 matches a prefix-minimum oracle on random lists', () => {
     assert.equal(solve(ranks), expected, JSON.stringify(ranks))
   }
 })
+
+// Equal ranks identify different students: ties must preserve the first selection.
+test('3616 retains selected student identity across ties and immutable frames', () => {
+  const trace = buildTrace([7, 7, 4, 4, 9])
+  const resolved = trace.frames.filter(f => ['setup', 'keep', 'replace', 'done'].includes(f.phase))
+  assert.deepEqual(resolved.map(f => f.selectedIndex), [0, 0, 2, 2, 2, 2])
+  assert.ok(buildTrace([7, 7, 7]).frames.every(f => f.selectedIndex === 0))
+})

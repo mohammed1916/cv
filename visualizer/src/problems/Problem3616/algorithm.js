@@ -62,19 +62,21 @@ export function parseInput(text) {
 
 export function buildTrace(ranks) {
   let selected = ranks[0]
+  let selectedIndex = 0
   let count = 0
-  const frames = [{ pythonLine: P('selected = ranks[0]'), phase: 'setup', activeLine: L('selected ← ranks[0]'), index: 0, selected, count, message: `Student 0 with rank ${selected} is selected first.` }]
+  const frames = [{ pythonLine: P('selected = ranks[0]'), phase: 'setup', activeLine: L('selected ← ranks[0]'), index: 0, selected, selectedIndex, count, message: `Student 0 with rank ${selected} is selected first.` }]
   for (let i = 1; i < ranks.length; i++) {
     const rank = ranks[i]
-    frames.push({ pythonLine: P('for rank in'), phase: 'scan', activeLine: L('FOR each later rank'), index: i, selected, count, message: `Compare arrival ${i} (rank ${rank}) with selected rank ${selected}.` })
+    frames.push({ pythonLine: P('for rank in'), phase: 'scan', activeLine: L('FOR each later rank'), index: i, selected, selectedIndex, count, message: `Compare arrival ${i} (rank ${rank}) with selected rank ${selected}.` })
     if (rank < selected) {
       selected = rank
+      selectedIndex = i
       count += 1
-      frames.push({ pythonLine: P('selected = rank'), phase: 'replace', activeLine: L('selected ← rank; count'), index: i, selected, count, message: `${rank} is strictly better, so it replaces the selection. Count is ${count}.` })
+      frames.push({ pythonLine: P('selected = rank'), phase: 'replace', activeLine: L('selected ← rank; count'), index: i, selected, selectedIndex, count, message: `${rank} is strictly better, so it replaces the selection. Count is ${count}.` })
     } else {
-      frames.push({ pythonLine: P('if rank < selected'), phase: 'keep', activeLine: L('ELSE keep selected'), index: i, selected, count, message: `${rank} is not strictly better, so the selection stays.` })
+      frames.push({ pythonLine: P('if rank < selected'), phase: 'keep', activeLine: L('ELSE keep selected'), index: i, selected, selectedIndex, count, message: `${rank} is not strictly better, so the selection stays.` })
     }
   }
-  frames.push({ pythonLine: P('return count'), phase: 'done', activeLine: L('RETURN count'), index: ranks.length - 1, selected, count, message: `${count} replacement${count === 1 ? '' : 's'}.` })
+  frames.push({ pythonLine: P('return count'), phase: 'done', activeLine: L('RETURN count'), index: ranks.length - 1, selected, selectedIndex, count, message: `${count} replacement${count === 1 ? '' : 's'}.` })
   return { input: ranks, result: count, frames }
 }

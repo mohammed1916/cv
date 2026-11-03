@@ -1,3 +1,7 @@
+# Latest manual-run review — 2026-11-03
+
+Read [the latest review and continuation](docs/reviews/2026-11-03-manual-run-review.md). The reviewed commit range contains 223 changed folders, 1,071 passing tests and 612 passing preset/line checks. Browser access works on port 3010; only targeted 3616 interactions were checked. Its selected-student identity bug is fixed. Duplicate catalogue React keys and full browser acceptance remain open. The five loose files were identical 3616 duplicates and are preserved outside src. SQL/API/Promise/concurrency/design work remains in scope.
+
 # Assistant-owned requirement drafting
 
 The user explicitly asked the assistant to fill missing requirement files itself. Use known algorithm knowledge for clearly labelled original drafts, then verify uncertain details; do not delegate the whole backlog to the user. Read [draft coverage and continuation](docs/requirements/drafts/README.md): all 1,089 numbered inbox files now contain text (569 added in the latest pass). These comprise 854 drafts, 234 source-note renderings and one preserved user paste; text presence is not verification. There are no empty files to ask the user to transcribe wholesale. Resolve the per-ID rule gaps and verification gates next. Run `python3 scripts/audit-manual-statement-inbox.py` for per-ID status. Never overwrite non-empty user pastes, and never count unverified drafts as recovered official statements.
