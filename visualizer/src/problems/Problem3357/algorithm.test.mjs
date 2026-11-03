@@ -21,9 +21,9 @@ function brute(nums) {
 }
 
 test('3357 worked cases', () => {
-  assert.equal(solve([1, 2, -1, 10, 8]), 4)
-  assert.equal(solve([-1, -1, -1]), 0)
-  assert.equal(solve([-1, 10, -1, 8]), 1)
+  assert.equal(solve([2, -1, 7, -1, 13]), 3)
+  assert.equal(solve([-1, -1, -1, -1]), 0)
+  assert.equal(solve([-1, 6, -1, 11]), 3)
 })
 
 test('3357 agrees with exhaustive search on small inputs', () => {

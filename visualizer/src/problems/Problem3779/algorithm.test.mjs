@@ -5,9 +5,9 @@ import { buildTrace, parseInput } from './algorithm.js'
 const solve = nums => buildTrace(nums).result
 
 test('3779 hand-checked small cases', () => {
-  assert.equal(solve([3, 8, 3, 6, 5, 8]), 1)
-  assert.equal(solve([2, 2]), 1)
-  assert.equal(solve([4, 3, 5, 1, 2]), 0)
+  assert.equal(solve([7, 7, 1]), 1)
+  assert.equal(solve([6, 1, 6, 2, 9, 9, 4]), 2)
+  assert.equal(solve([1, 2, 3, 4, 5]), 0)
   assert.equal(solve([9]), 0)
 })
 

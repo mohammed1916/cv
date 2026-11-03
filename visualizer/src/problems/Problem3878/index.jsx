@@ -12,8 +12,8 @@ const definition = {
   url: 'https://leetcode.com/problems/count-good-subarrays/',
   complexity: 'This visual tries every subarray: O(n^2) windows with an O(n) membership check. The visual caps nums at 12 values.',
   examples: [
-    { label: 'Example', input: '{"nums":[4,2,3]}' },
-    { label: 'Repeats', input: '{"nums":[1,3,1]}' },
+    { label: 'Example', input: '{"nums":[5,1,4]}' },
+    { label: 'Repeats', input: '{"nums":[2,2,6]}' },
   ],
 }
 

@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/counter/',
   complexity: 'O(k) time for k calls and O(k) space for the recorded answers.',
   examples: [
-    { label: 'Positive', input: '{"init":10,"calls":3}' },
-    { label: 'Negative', input: '{"init":-2,"calls":4}' },
+    { label: 'Positive', input: '{"init":7,"calls":4}' },
+    { label: 'Negative', input: '{"init":-5,"calls":3}' },
   ],
 }
 

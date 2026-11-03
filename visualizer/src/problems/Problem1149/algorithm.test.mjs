@@ -21,10 +21,10 @@ const sample = examples[0].input
 const run = text => buildTrace(parseInput(text))
 
 test('1149 finds viewers with two distinct articles on one date', () => {
-  assert.deepEqual(run(sample).result, [{ id: 5 }, { id: 9 }])
+  assert.deepEqual(run(sample).result, [{ id: 11 }, { id: 14 }])
   assertFrames(run(sample))
 })
 
-test('1149 repeated views of one article do not qualify', () => {
+test('1149 two views of one article on one day count once', () => {
   assert.deepEqual(run('{"views":[{"article_id":1,"author_id":2,"viewer_id":4,"view_date":"2019-08-01"},{"article_id":1,"author_id":2,"viewer_id":4,"view_date":"2019-08-01"}]}').result, [])
 })

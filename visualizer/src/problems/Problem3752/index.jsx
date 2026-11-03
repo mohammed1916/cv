@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/lexicographically-smallest-negated-permutation-that-sums-to-target/',
   complexity: 'Exponential in this visualization because each feasibility check enumerates subset sums; the caps keep it small.',
   examples: [
-    { label: 'Example', input: '{"n":3,"target":0}' },
+    { label: 'Example', input: '{"n":4,"target":2}' },
     { label: 'Impossible', input: '{"n":2,"target":2}' },
   ],
 }

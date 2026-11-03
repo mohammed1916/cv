@@ -30,7 +30,7 @@ export function buildTrace({ nums, k }) {
       frames.push({ pythonLine: P('if cost <= k'), phase: ok ? 'fits' : 'too-costly', activeLine: L('if the cost'), at: l, end: r, cost, count, message: `nums[${l}..${r}] needs ${cost} increment(s): ${ok ? 'counts' : 'too many'}.` })
     }
   }
-  frames.push({ pythonLine: P('return count'), phase: 'done', activeLine: L('return the count'), at: -1, end: -1, cost: null, count, result: count, message: `${count} subarray(s) can be made non-decreasing.` })
+  frames.push({ pythonLine: P('return count'), phase: 'done', activeLine: L('return the count'), at: -1, end: -1, cost: null, count, result: count, message: `${count} subarray(s) reach a sorted run within k increments.` })
   return { input: { nums, k }, result: count, frames }
 }
 

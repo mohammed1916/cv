@@ -15,7 +15,7 @@ const definition = {
   complexity: 'O(n log n) time for the sort; the loop moves two pointers across the sorted list.',
   examples: [
     { label: 'Invented example', input: '{"enemies":[5,1,4],"energy":4}' },
-    { label: 'Single enemy', input: '{"enemies":[2],"energy":10}' },
+    { label: 'Single enemy', input: '{"enemies":[6],"energy":13}' },
   ],
 }
 

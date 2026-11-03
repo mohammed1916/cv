@@ -24,7 +24,7 @@ export default function MaximumPointsActivatedWithOneAddition() {
       <strong>Group {index + 1}</strong>: {group.map(([x, y]) => `(${x}, ${y})`).join(' ')}</li>)}</ul>
     <output aria-label="Best total">{step.best === null ? `Groups so far: ${step.groups.length}` : `Best activation count: ${step.best}`}</output>
   </>} renderReasoning={() => <>
-    <p>Points that share an x value or a y value activate each other, so they form one group that is linked through shared coordinates.</p>
+    <p>Two points on the same vertical or horizontal line pass activation along, so any chain of such links ends up in one cluster.</p>
     <p>Adding a point at a chosen x and y links two groups, and the activated total is their sizes plus the new point, so the best choice uses the two largest groups.</p>
   </>} />
 }

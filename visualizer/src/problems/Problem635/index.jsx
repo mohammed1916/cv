@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/design-log-storage-system/',
   complexity: 'O(n) per retrieve, where n is the number of stored logs. The visualization caps the input at 20 operations.',
   examples: [
-    { label: 'Day range', input: '{"ops":[["put",1,"2017:01:01:23:59:59"],["put",2,"2017:01:02:22:00:00"],["retrieve","2017:01:01:00:00:00","2017:01:02:23:59:59","Day"]]}' },
+    { label: 'Day range', input: '{"ops":[["put",1,"2018:03:09:23:59:59"],["put",2,"2018:03:10:22:00:00"],["retrieve","2018:03:09:00:00:00","2018:03:10:23:59:59","Day"]]}' },
     { label: 'Hour range', input: '{"ops":[["put",3,"2016:07:14:10:05:00"],["put",4,"2016:07:14:12:00:00"],["retrieve","2016:07:14:10:00:00","2016:07:14:11:00:00","Hour"]]}' },
   ],
 }

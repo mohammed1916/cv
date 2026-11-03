@@ -21,7 +21,7 @@ const definition = {
   url: 'https://leetcode.com/problems/average-selling-price/',
   complexity: 'O(P + S) work after matching each sale to its price range, where P and S are the row counts. The visualization caps each list at 12 rows.',
   examples: [
-    { label: 'Two products', input: '{"prices":[{"product_id":1,"start_date":"2019-02-17","end_date":"2019-02-28","price":5},{"product_id":1,"start_date":"2019-03-01","end_date":"2019-03-22","price":20},{"product_id":2,"start_date":"2019-02-01","end_date":"2019-02-20","price":15},{"product_id":2,"start_date":"2019-02-21","end_date":"2019-03-31","price":30},{"product_id":3,"start_date":"2019-01-01","end_date":"2019-12-31","price":99}],"units_sold":[{"product_id":1,"purchase_date":"2019-02-25","units":100},{"product_id":1,"purchase_date":"2019-03-01","units":15},{"product_id":2,"purchase_date":"2019-02-10","units":200},{"product_id":2,"purchase_date":"2019-02-28","units":30}]}' },
+    { label: 'Two products', input: '{"prices":[{"product_id":1,"start_date":"2020-04-01","end_date":"2020-04-10","price":8},{"product_id":1,"start_date":"2020-04-11","end_date":"2020-04-30","price":12},{"product_id":2,"start_date":"2020-04-01","end_date":"2020-04-20","price":4},{"product_id":3,"start_date":"2020-01-01","end_date":"2020-12-31","price":99}],"units_sold":[{"product_id":1,"purchase_date":"2020-04-03","units":6},{"product_id":1,"purchase_date":"2020-04-15","units":2},{"product_id":2,"purchase_date":"2020-04-09","units":5}]}' },
     { label: 'Boundary days', input: '{"prices":[{"product_id":4,"start_date":"2020-01-01","end_date":"2020-01-01","price":7}],"units_sold":[{"product_id":4,"purchase_date":"2020-01-01","units":3}]}' },
   ],
 }

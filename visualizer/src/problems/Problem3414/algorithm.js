@@ -28,7 +28,7 @@ export function buildTrace({ intervals }) {
   const frame = (fields) => frames.push({ chosen: chosen.slice(), best: snapshot(), bestScore: best ? best.score : 0, ...fields })
   const score = () => chosen.reduce((sum, i) => sum + intervals[i][2], 0)
 
-  frame({ pythonLine: 3, phase: 'start', activeLine: L('try every set'), at: -1, message: `Consider sets of up to 4 non-overlapping intervals out of ${intervals.length}.` })
+  frame({ pythonLine: 3, phase: 'start', activeLine: L('try every set'), at: -1, message: `Consider every group of at most four intervals that share no point, out of ${intervals.length}.` })
 
   const dfs = (start) => {
     for (let i = start; i < intervals.length; i++) {
@@ -52,7 +52,7 @@ export function buildTrace({ intervals }) {
   return { input: { intervals }, result: best.chosen, score: best.score, frames }
 }
 
-export const code = `choose up to 4 non-overlapping intervals with the largest weight sum
+export const code = `pick at most four intervals that share no point, maximising total weight
   start with an empty set and an empty best
   for each set of indices in increasing order, up to 4 long
     if the set has no overlapping pair

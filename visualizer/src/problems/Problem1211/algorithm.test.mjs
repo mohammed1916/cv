@@ -22,7 +22,7 @@ test('1211 sample gives the hand-computed rows', () => {
   assert.deepEqual(run.result, [
     { query_name: 'Bird', quality: 1.5, poor_query_percentage: 0 },
     { query_name: 'Cat', quality: 1, poor_query_percentage: 50 },
-    { query_name: 'Dog', quality: 2.67, poor_query_percentage: 33.33 },
+    { query_name: 'Dog', quality: 2.17, poor_query_percentage: 33.33 },
   ])
   checkFrames(run)
 })

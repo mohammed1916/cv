@@ -19,7 +19,7 @@ function oracle(n, edges) {
 }
 
 test('3887 worked example', () => {
-  assert.equal(buildTrace(parseInput('{"n":3,"edges":[[0,1,1],[1,2,1],[0,2,1]]}')).result, 2)
+  assert.equal(buildTrace(parseInput('{"n":3,"edges":[[0,1,0],[1,2,1],[0,2,1]]}')).result, 3)
 })
 
 test('3887 an even triangle is accepted and an odd one is rejected', () => {

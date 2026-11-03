@@ -3,9 +3,9 @@ import assert from 'node:assert/strict'
 import { buildTrace, countMaxBeauty, parseInput } from './algorithm.js'
 
 test('2842 worked examples', () => {
-  assert.equal(countMaxBeauty('bcca', 2), 4n)
-  assert.equal(countMaxBeauty('abbbdd', 2), 6n)
-  assert.equal(buildTrace({ s: 'abbbdd', k: 2 }).result, '6')
+  assert.equal(countMaxBeauty('wwwtxxyy', 2), 12n)
+  assert.equal(countMaxBeauty('gggeeff', 2), 12n)
+  assert.equal(buildTrace({ s: 'gggeeff', k: 2 }).result, '12')
 })
 
 test('2842 too few distinct letters gives zero', () => {

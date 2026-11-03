@@ -2,12 +2,12 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { buildTrace, parseInput, phases, code, python } from './algorithm.js'
 
-const SAMPLE = '{"users":[{"user_id":1,"user_name":"Ana"},{"user_id":2,"user_name":"Ben"},{"user_id":3,"user_name":"Cy"},{"user_id":4,"user_name":"Dee"}],"register":[{"contest_id":215,"user_id":1},{"contest_id":215,"user_id":2},{"contest_id":215,"user_id":3},{"contest_id":209,"user_id":2},{"contest_id":209,"user_id":3},{"contest_id":211,"user_id":1},{"contest_id":211,"user_id":4},{"contest_id":208,"user_id":1},{"contest_id":208,"user_id":2},{"contest_id":208,"user_id":3},{"contest_id":208,"user_id":4}]}'
+const SAMPLE = '{"users":[{"user_id":1,"user_name":"Ruth"},{"user_id":2,"user_name":"Sam"},{"user_id":3,"user_name":"Theo"},{"user_id":4,"user_name":"Uma"}],"register":[{"contest_id":415,"user_id":1},{"contest_id":415,"user_id":2},{"contest_id":415,"user_id":3},{"contest_id":409,"user_id":2},{"contest_id":409,"user_id":3},{"contest_id":411,"user_id":1},{"contest_id":411,"user_id":4},{"contest_id":408,"user_id":1},{"contest_id":408,"user_id":2},{"contest_id":408,"user_id":3},{"contest_id":408,"user_id":4}]}'
 const EXPECTED = [
-  { contest_id: 208, percentage: 100 },
-  { contest_id: 215, percentage: 75 },
-  { contest_id: 209, percentage: 50 },
-  { contest_id: 211, percentage: 50 },
+  { contest_id: 408, percentage: 100 },
+  { contest_id: 415, percentage: 75 },
+  { contest_id: 409, percentage: 50 },
+  { contest_id: 411, percentage: 50 },
 ]
 
 test('1633 percentages of all users, sorted by percentage then contest', () => {

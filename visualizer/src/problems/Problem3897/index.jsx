@@ -12,7 +12,7 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-value-of-concatenated-binary-segments/',
   complexity: 'O(n log n) comparisons with big-integer arithmetic. The visual caps each count at 8 and n at 8.',
   examples: [
-    { label: 'Example', input: '{"nums1":[1,2],"nums0":[1,0]}' },
+    { label: 'Example', input: '{"nums1":[2,0,1],"nums0":[1,3,0]}' },
     { label: 'Three segments', input: '{"nums1":[0,3,1],"nums0":[2,0,1]}' },
   ],
 }

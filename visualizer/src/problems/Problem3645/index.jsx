@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-total-from-optimal-activation-order/description/',
   complexity: 'Teaching search over activation states: at most 2^n activated sets times the possible maximum counts, memoized.',
   examples: [
-    { label: 'Invented example', input: '{"value":[4,6,2],"limit":[2,1,3]}' },
+    { label: 'Invented example', input: '{"value":[4,6,2],"limit":[1,3,2]}' },
     { label: 'Single element', input: '{"value":[7],"limit":[1]}' },
   ],
 }

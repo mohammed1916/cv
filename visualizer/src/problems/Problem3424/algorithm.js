@@ -33,7 +33,7 @@ export function buildTrace({ arr, brr, k }) {
   return { input: { arr, brr, k }, result, direct, split, frames }
 }
 
-export const code = `minimum cost to make arr equal to brr
+export const code = `cheapest way to align arr with brr
   cost without any split is the sum of position gaps
   sort both arrays
   best pairing cost is the sum of sorted gaps

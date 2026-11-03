@@ -54,12 +54,12 @@ export const inputLabel = 'JSON object with a views table'
 export const complexity = 'Linear in the view rows, plus sorting the distinct author ids.'
 const COLS = ['article_id', 'author_id', 'viewer_id', 'view_date']
 const SAMPLE = { views: [
-  { article_id: 1, author_id: 3, viewer_id: 5, view_date: '2019-08-01' },
-  { article_id: 2, author_id: 7, viewer_id: 7, view_date: '2019-08-01' },
-  { article_id: 2, author_id: 7, viewer_id: 6, view_date: '2019-08-02' },
-  { article_id: 1, author_id: 3, viewer_id: 3, view_date: '2019-08-03' },
-  { article_id: 4, author_id: 1, viewer_id: 1, view_date: '2019-08-03' },
-  { article_id: 5, author_id: 1, viewer_id: 6, view_date: '2019-08-04' },
+  { article_id: 11, author_id: 4, viewer_id: 9, view_date: '2019-08-01' },
+  { article_id: 12, author_id: 8, viewer_id: 8, view_date: '2019-08-01' },
+  { article_id: 12, author_id: 8, viewer_id: 6, view_date: '2019-08-02' },
+  { article_id: 11, author_id: 4, viewer_id: 4, view_date: '2019-08-03' },
+  { article_id: 13, author_id: 2, viewer_id: 2, view_date: '2019-08-03' },
+  { article_id: 14, author_id: 2, viewer_id: 6, view_date: '2019-08-04' },
 ] }
 export const examples = [{ label: 'Teaching sample', input: JSON.stringify(SAMPLE) }]
 

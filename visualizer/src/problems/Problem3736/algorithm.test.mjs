@@ -5,8 +5,8 @@ import { buildTrace, parseInput } from './algorithm.js'
 const solve = nums => buildTrace(nums).result
 
 test('3736 worked examples', () => {
-  assert.equal(solve([2, 1, 3]), 3)
-  assert.equal(solve([4, 4, 5]), 2)
+  assert.equal(solve([3, 7, 4]), 7)
+  assert.equal(solve([2, 2, 8, 5]), 15)
   assert.equal(solve([7]), 0)
 })
 

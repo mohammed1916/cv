@@ -12,9 +12,9 @@ const definition = {
   url: 'https://leetcode.com/problems/mirror-frequency-distance/',
   complexity: 'O(n) to count plus a constant number of mirror pairs. The visual caps s at 60 characters.',
   examples: [
-    { label: 'Example A', input: '{"s":"ab1z9"}' },
-    { label: 'Example B', input: '{"s":"4m7n"}' },
-    { label: 'Example C', input: '{"s":"byby"}' },
+    { label: 'Example A', input: '{"s":"aaz9"}' },
+    { label: 'Example B', input: '{"s":"0912"}' },
+    { label: 'Example C', input: '{"s":"qqqtt"}' },
   ],
 }
 

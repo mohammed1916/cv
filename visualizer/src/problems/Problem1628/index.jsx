@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/design-an-expression-tree-with-evaluate-function/',
   complexity: 'O(n) for n tokens. Each operator combines the two newest subtrees, so the stack never grows past the number of leaves.',
   examples: [
-    { label: 'Example', input: '{"postfix":["3","4","+","2","*","7","-"]}' },
+    { label: 'Example', input: '{"postfix":["6","3","+","5","*","4","-"]}' },
     { label: 'Division', input: '{"postfix":["9","2","/","1","+"]}' },
   ],
 }

@@ -6,8 +6,8 @@ const solve = (edges, nums) => buildTrace({ edges, nums }).result
 
 test('3486 hand-checked case', () => {
   // Path 0-1-2 has values 1,2,1 (one repeat) and length 2 + 3 = 5 over 3 nodes.
-  // Path 0-1-3 has length 3 over 3 nodes; no path beats [5, 3].
-  assert.deepEqual(solve([[0, 1, 2], [1, 2, 3], [1, 3, 1]], [1, 2, 1, 3]), [5, 3])
+  // Path 0-1-3 has values 1,2,3 (no repeat) and length 2 + 4 = 6 over 3 nodes; that beats [5, 3].
+  assert.deepEqual(solve([[0, 1, 2], [1, 2, 3], [1, 3, 4]], [1, 2, 1, 3]), [6, 3])
 })
 
 test('3486 a value that appears three times ends the path', () => {
@@ -20,9 +20,9 @@ test('3486 a single edge is a path of its own length', () => {
 })
 
 test('3486 the final trace frame reports the result', () => {
-  const trace = buildTrace({ edges: [[0, 1, 2], [1, 2, 3], [1, 3, 1]], nums: [1, 2, 1, 3] })
-  assert.deepEqual(trace.result, [5, 3])
-  assert.equal(trace.frames.at(-1).bestLen, 5)
+  const trace = buildTrace({ edges: [[0, 1, 2], [1, 2, 3], [1, 3, 4]], nums: [1, 2, 1, 3] })
+  assert.deepEqual(trace.result, [6, 3])
+  assert.equal(trace.frames.at(-1).bestLen, 6)
 })
 
 test('3486 rejects malformed input', () => {

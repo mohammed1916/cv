@@ -18,8 +18,8 @@ function oracle(n, pos, k) {
 }
 
 test('3881 worked examples', () => {
-  assert.equal(buildTrace(parseInput('{"n":3,"pos":1,"k":0}')).result, 2)
-  assert.equal(buildTrace(parseInput('{"n":3,"pos":2,"k":1}')).result, 4)
+  assert.equal(buildTrace(parseInput('{"n":4,"pos":1,"k":1}')).result, 6)
+  assert.equal(buildTrace(parseInput('{"n":4,"pos":3,"k":2}')).result, 6)
 })
 
 test('3881 matches an exhaustive oracle on small inputs', () => {

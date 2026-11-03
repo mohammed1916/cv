@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/apply-transform-over-each-element-in-array/',
   complexity: 'O(n) time and O(n) space for n elements.',
   examples: [
-    { label: 'Three', input: '{"arr":[1,2,3]}' },
+    { label: 'Three', input: '{"arr":[5,0,4]}' },
     { label: 'Negative', input: '{"arr":[-1]}' },
   ],
 }

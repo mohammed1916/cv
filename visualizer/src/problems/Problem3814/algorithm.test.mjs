@@ -13,7 +13,7 @@ function brute({ costs, capacity, budget }) {
 }
 
 test('3814 worked cases', () => {
-  assert.equal(solve({ costs: [4, 8, 5, 3], capacity: [1, 5, 2, 7], budget: 8 }), 8)
+  assert.equal(solve({ costs: [6, 2, 9, 4], capacity: [3, 7, 2, 5], budget: 10 }), 12)
   assert.equal(solve({ costs: [5, 5], capacity: [3, 4], budget: 5 }), 0)
   assert.equal(solve({ costs: [2, 3, 9], capacity: [4, 1, 20], budget: 10 }), 20)
 })

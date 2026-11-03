@@ -24,14 +24,14 @@ export const phases = [
 
 export const sample = {
   Stocks: [
-    { stock_name: 'Leetcode', operation: 'Buy', operation_day: 1, price: 1000 },
-    { stock_name: 'Corona Masks', operation: 'Buy', operation_day: 2, price: 10 },
-    { stock_name: 'Leetcode', operation: 'Sell', operation_day: 5, price: 6000 },
-    { stock_name: 'Handbags', operation: 'Buy', operation_day: 17, price: 30000 },
-    { stock_name: 'Corona Masks', operation: 'Sell', operation_day: 3, price: 1010 },
-    { stock_name: 'Corona Masks', operation: 'Buy', operation_day: 4, price: 1000 },
-    { stock_name: 'Corona Masks', operation: 'Sell', operation_day: 5, price: 500 },
-    { stock_name: 'Handbags', operation: 'Sell', operation_day: 6, price: 7000 },
+    { stock_name: 'Gadgets', operation: 'Buy', operation_day: 1, price: 800 },
+    { stock_name: 'Tea', operation: 'Buy', operation_day: 2, price: 25 },
+    { stock_name: 'Gadgets', operation: 'Sell', operation_day: 6, price: 5200 },
+    { stock_name: 'Bikes', operation: 'Buy', operation_day: 9, price: 22000 },
+    { stock_name: 'Tea', operation: 'Sell', operation_day: 4, price: 40 },
+    { stock_name: 'Tea', operation: 'Buy', operation_day: 7, price: 35 },
+    { stock_name: 'Tea', operation: 'Sell', operation_day: 8, price: 60 },
+    { stock_name: 'Bikes', operation: 'Sell', operation_day: 12, price: 19000 },
   ],
 }
 

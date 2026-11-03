@@ -22,7 +22,7 @@ export default function MinimumOperationsToSortAString() {
     <ul aria-label="Reachable strings">{step.level.map((text, index) => <li key={index}><code>{text}</code></li>)}</ul>
     <output aria-label="Operation count">{`Operations so far: ${step.ops} · strings in this level: ${step.count}`}</output>
   </>} renderReasoning={() => <>
-    <p>One operation sorts a substring that is not the whole string. The search keeps every string reachable after the same number of operations and stops at the first level that contains the sorted string.</p>
+    <p>A move re-sorts a stretch of letters, as long as that stretch is shorter than the whole word. The search keeps every string reachable after the same number of operations and stops at the first level that contains the sorted string.</p>
     <p>Strings already seen are skipped, so each string is expanded once.</p>
   </>} />
 }

@@ -22,9 +22,9 @@ const run = text => buildTrace(parseInput(text))
 
 test('1141 counts distinct active users per day inside the 30-day window', () => {
   assert.deepEqual(run(sample).result, [
-    { day: '2019-06-28', active_users: 1 },
-    { day: '2019-07-20', active_users: 2 },
-    { day: '2019-07-21', active_users: 2 },
+    { day: '2019-06-29', active_users: 1 },
+    { day: '2019-07-18', active_users: 2 },
+    { day: '2019-07-19', active_users: 2 },
   ])
   assertFrames(run(sample))
 })

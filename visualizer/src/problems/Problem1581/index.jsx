@@ -2,9 +2,9 @@ import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python, sql, phases } from './algorithm'
 
 const INPUT_LABEL = "Object with visits and transactions lists"
-const EXAMPLE = "{\"visits\":[{\"visit_id\":1,\"customer_id\":23},{\"visit_id\":2,\"customer_id\":9},{\"visit_id\":4,\"customer_id\":30},{\"visit_id\":5,\"customer_id\":54},{\"visit_id\":6,\"customer_id\":96},{\"visit_id\":7,\"customer_id\":54},{\"visit_id\":8,\"customer_id\":54}],\"transactions\":[{\"transaction_id\":2,\"visit_id\":5,\"amount\":310},{\"transaction_id\":3,\"visit_id\":5,\"amount\":300},{\"transaction_id\":9,\"visit_id\":5,\"amount\":200},{\"transaction_id\":12,\"visit_id\":1,\"amount\":910},{\"transaction_id\":13,\"visit_id\":2,\"amount\":970}]}"
+const EXAMPLE = "{\"visits\":[{\"visit_id\":3,\"customer_id\":14},{\"visit_id\":4,\"customer_id\":7},{\"visit_id\":6,\"customer_id\":41},{\"visit_id\":9,\"customer_id\":7},{\"visit_id\":10,\"customer_id\":88},{\"visit_id\":11,\"customer_id\":7}],\"transactions\":[{\"transaction_id\":21,\"visit_id\":9,\"amount\":45},{\"transaction_id\":22,\"visit_id\":9,\"amount\":60},{\"transaction_id\":23,\"visit_id\":3,\"amount\":12},{\"transaction_id\":24,\"visit_id\":10,\"amount\":80}]}"
 const COMPLEXITY = 'The lesson runs a few passes over the sample tables; the parser caps each table at a small size.'
-const REASONING = ["A left join keeps every visit, and the rows without a transaction are the ones to count.","Visit 5 has three transactions but is not silent: it is one visit with activity, so it is excluded once."]
+const REASONING = ["A left join keeps every visit, and the rows without a transaction are the ones to count.","Visit 9 has two transactions but is not silent: it is one visit with activity, so it is excluded once."]
 
 const definition = {
   number: '1581',

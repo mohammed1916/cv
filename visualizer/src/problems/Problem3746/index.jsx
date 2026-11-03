@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-string-length-after-balanced-removals/',
   complexity: 'O(n) time and O(1) extra space.',
   examples: [
-    { label: 'Mixed', input: 'aabbab' },
-    { label: 'All a', input: 'aaaa' },
+    { label: 'Mixed', input: 'aabaa' },
+    { label: 'All a', input: 'bbbab' },
   ],
 }
 

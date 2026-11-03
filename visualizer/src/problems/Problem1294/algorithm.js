@@ -58,21 +58,21 @@ export const phases = [
 ]
 export const sample = {
   countries: [
-    { country_id: 2, country_name: 'USA' },
-    { country_id: 3, country_name: 'Australia' },
-    { country_id: 7, country_name: 'Peru' },
-    { country_id: 5, country_name: 'China' },
+    { country_id: 11, country_name: 'Norway' },
+    { country_id: 12, country_name: 'Chile' },
+    { country_id: 13, country_name: 'Kenya' },
+    { country_id: 14, country_name: 'Japan' },
   ],
   weather: [
-    { country_id: 2, weather_state: 15, day: '2019-11-01' },
-    { country_id: 2, weather_state: 20, day: '2019-11-10' },
-    { country_id: 3, weather_state: 30, day: '2019-11-05' },
-    { country_id: 3, weather_state: 28, day: '2019-11-06' },
-    { country_id: 3, weather_state: 27, day: '2019-11-20' },
-    { country_id: 7, weather_state: 5, day: '2019-11-03' },
-    { country_id: 7, weather_state: 10, day: '2019-11-04' },
-    { country_id: 7, weather_state: 40, day: '2019-12-01' },
-    { country_id: 5, weather_state: 30, day: '2019-10-31' },
+    { country_id: 11, weather_state: 12, day: '2019-11-02' },
+    { country_id: 11, weather_state: 19, day: '2019-11-09' },
+    { country_id: 12, weather_state: 33, day: '2019-11-04' },
+    { country_id: 12, weather_state: 29, day: '2019-11-12' },
+    { country_id: 12, weather_state: 26, day: '2019-11-25' },
+    { country_id: 13, weather_state: 4, day: '2019-11-06' },
+    { country_id: 13, weather_state: 9, day: '2019-11-07' },
+    { country_id: 13, weather_state: 40, day: '2019-12-02' },
+    { country_id: 14, weather_state: 22, day: '2019-10-30' },
   ],
 }
 

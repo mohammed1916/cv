@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-stable-subarrays/',
   complexity: 'O(n * q) time for this visualization, which caps the sizes. A prefix-based method is needed for the full limits.',
   examples: [
-    { label: 'Example', input: '{"nums":[3,1,2],"queries":[[0,1],[1,2],[0,2]]}' },
+    { label: 'Example', input: '{"nums":[2,4,1,3],"queries":[[0,2],[1,3]]}' },
     { label: 'Sorted run', input: '{"nums":[1,2,2,1],"queries":[[0,3]]}' },
   ],
 }

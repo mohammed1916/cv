@@ -74,9 +74,9 @@ const ITEM_COLS = ['item_id', 'item_brand']
 const ORDER_COLS = ['order_id', 'order_date', 'item_id', 'buyer_id', 'seller_id']
 const SAMPLE = {
   users: [
-    { user_id: 1, join_date: '2018-01-01', favorite_brand: 'Lenovo' },
+    { user_id: 1, join_date: '2018-04-11', favorite_brand: 'Dell' },
     { user_id: 2, join_date: '2018-02-01', favorite_brand: 'Samsung' },
-    { user_id: 3, join_date: '2018-03-01', favorite_brand: 'Samsung' },
+    { user_id: 3, join_date: '2018-06-18', favorite_brand: 'Samsung' },
   ],
   items: [
     { item_id: 10, item_brand: 'Lenovo' },
@@ -133,7 +133,7 @@ export function buildTrace(input) {
       second_item_fav_brand: brand !== undefined && brand === user.favorite_brand ? 'yes' : 'no',
     }
   })
-  frames.push(frameAt('compare', 'CASE WHEN s.item_brand', 'merged["second_item_fav_brand"]', 'Sellers with fewer than two sales get no.', ['seller_id', 'item_brand', 'favorite_brand', 'second_item_fav_brand'], compared))
+  frames.push(frameAt('compare', 'CASE WHEN s.item_brand', 'merged["second_item_fav_brand"]', 'A seller with a single sale has no second sale to compare, so it gets no.', ['seller_id', 'item_brand', 'favorite_brand', 'second_item_fav_brand'], compared))
   const result = compared
     .map(row => ({ seller_id: row.seller_id, second_item_fav_brand: row.second_item_fav_brand }))
     .sort((a, b) => a.seller_id - b.seller_id)

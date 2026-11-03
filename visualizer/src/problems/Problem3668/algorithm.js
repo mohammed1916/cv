@@ -4,7 +4,7 @@ export function parseInput(text) {
   const { order, friends } = input
   if (!Array.isArray(order) || order.length < 1 || order.length > 12) throw new Error('order is a list of 1 to 12 IDs (the visualization caps it at 12).')
   const n = order.length
-  if (new Set(order).size !== n || order.some(v => !Number.isInteger(v) || v < 1 || v > n)) throw new Error('order must hold every ID from 1 to n exactly once.')
+  if (new Set(order).size !== n || order.some(v => !Number.isInteger(v) || v < 1 || v > n)) throw new Error('order needs one distinct ID per position, each from 1 to n.')
   if (!Array.isArray(friends) || friends.length < 1 || friends.length > Math.min(8, n)) throw new Error('friends has 1 to min(8, n) IDs.')
   if (friends.some((v, i) => !Number.isInteger(v) || v < 1 || v > n || (i > 0 && v <= friends[i - 1]))) throw new Error('friends is a strictly increasing list of IDs from 1 to n.')
   return { order, friends }

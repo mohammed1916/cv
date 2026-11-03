@@ -19,21 +19,21 @@ function checkFrames(result) {
 }
 
 const sample = JSON.stringify({
-  teams: [{ team_id: 10, team_name: 'Ash' }, { team_id: 20, team_name: 'Birch' }, { team_id: 30, team_name: 'Cedar' }, { team_id: 40, team_name: 'Dune' }],
+  teams: [{ team_id: 3, team_name: 'Ash' }, { team_id: 5, team_name: 'Birch' }, { team_id: 6, team_name: 'Cedar' }, { team_id: 8, team_name: 'Dune' }],
   matches: [
-    { match_id: 1, host_team: 10, guest_team: 20, host_goals: 2, guest_goals: 2 },
-    { match_id: 2, host_team: 30, guest_team: 10, host_goals: 0, guest_goals: 3 },
-    { match_id: 3, host_team: 20, guest_team: 30, host_goals: 1, guest_goals: 0 },
+    { match_id: 1, host_team: 3, guest_team: 5, host_goals: 2, guest_goals: 2 },
+    { match_id: 2, host_team: 6, guest_team: 3, host_goals: 0, guest_goals: 3 },
+    { match_id: 3, host_team: 5, guest_team: 6, host_goals: 1, guest_goals: 0 },
   ],
 })
 
 test('1212 sample standings match the hand computation', () => {
   const result = run(sample)
   assert.deepEqual(result.result, [
-    { team_id: 10, team_name: 'Ash', num_points: 4 },
-    { team_id: 20, team_name: 'Birch', num_points: 4 },
-    { team_id: 30, team_name: 'Cedar', num_points: 0 },
-    { team_id: 40, team_name: 'Dune', num_points: 0 },
+    { team_id: 3, team_name: 'Ash', num_points: 4 },
+    { team_id: 5, team_name: 'Birch', num_points: 4 },
+    { team_id: 6, team_name: 'Cedar', num_points: 0 },
+    { team_id: 8, team_name: 'Dune', num_points: 0 },
   ])
   checkFrames(result)
 })

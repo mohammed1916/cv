@@ -5,8 +5,8 @@ import { buildTrace, parseInput } from './algorithm.js'
 const solve = (nums, queries) => buildTrace({ nums, queries }).result
 
 test('3489 hand-checked cases', () => {
-  assert.equal(solve([2, 0, 2], [[0, 2, 1], [0, 2, 1], [1, 1, 3]]), 2)
-  assert.equal(solve([4, 3, 2, 1], [[1, 3, 2], [0, 2, 1]]), -1)
+  assert.equal(solve([1, 0, 1], [[0, 2, 1], [2, 2, 2]]), 1)
+  assert.equal(solve([5, 2, 2], [[0, 2, 1]]), -1)
   // After two queries index 0 can reach 3 (1 + 2), but index 1 has no covering query yet.
   // The third query covers index 1 with val 1, so the first working prefix is 3.
   assert.equal(solve([3, 1], [[0, 0, 1], [0, 0, 2], [1, 1, 1]]), 3)
@@ -17,7 +17,7 @@ test('3489 an already zero array needs no queries', () => {
 })
 
 test('3489 the final trace frame reports the result', () => {
-  const trace = buildTrace({ nums: [2, 0, 2], queries: [[0, 2, 1], [0, 2, 1], [1, 1, 3]] })
+  const trace = buildTrace({ nums: [1, 0, 1], queries: [[0, 2, 1], [2, 2, 2]] })
   assert.equal(trace.frames.at(-1).k, trace.result)
 })
 

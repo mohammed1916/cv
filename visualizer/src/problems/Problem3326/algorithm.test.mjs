@@ -6,7 +6,7 @@ const solve = nums => buildTrace({ nums }).result
 
 test('3326 worked cases on invented data', () => {
   assert.equal(solve([12, 9]), 1)
-  assert.equal(solve([7, 7, 6]), -1)
+  assert.equal(solve([11, 5, 6]), -1)
   assert.equal(solve([1, 1, 1]), 0)
 })
 

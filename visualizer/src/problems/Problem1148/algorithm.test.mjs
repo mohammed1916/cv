@@ -21,7 +21,7 @@ const sample = examples[0].input
 const run = text => buildTrace(parseInput(text))
 
 test('1148 returns authors who viewed one of their own articles, sorted', () => {
-  assert.deepEqual(run(sample).result, [{ id: 1 }, { id: 3 }, { id: 7 }])
+  assert.deepEqual(run(sample).result, [{ id: 2 }, { id: 4 }, { id: 8 }])
   assertFrames(run(sample))
 })
 

@@ -24,8 +24,8 @@ function oracle(s) {
 }
 
 test('3900 worked examples', () => {
-  assert.equal(buildTrace(parseInput('{"s":"100001"}')).result, 4)
-  assert.equal(buildTrace(parseInput('{"s":"111"}')).result, 0)
+  assert.equal(buildTrace(parseInput('{"s":"1001000"}')).result, 4)
+  assert.equal(buildTrace(parseInput('{"s":"0011"}')).result, 4)
 })
 
 test('3900 matches the swap oracle on random binary strings', () => {

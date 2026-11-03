@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-frequency-after-subarray-operation/description/',
   complexity: 'O(n * d) time for n values with d distinct values. The visualization caps nums at 12 values.',
   examples: [
-    { label: 'Invented row', input: JSON.stringify({ nums: [1, 2, 3, 4, 5, 6], k: 1 }) },
-    { label: 'Repeated k', input: JSON.stringify({ nums: [10, 2, 3, 4, 5, 5, 4, 3, 2, 2], k: 10 }) },
+    { label: 'Invented row', input: JSON.stringify({ nums: [4, 8, 4, 2, 7, 4], k: 4 }) },
+    { label: 'Repeated k', input: JSON.stringify({ nums: [9, 3, 9, 6, 3, 3], k: 9 }) },
   ],
 }
 

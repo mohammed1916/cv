@@ -2,7 +2,7 @@ import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python, sql, phases } from './algorithm'
 
 const INPUT_LABEL = "Object with users and register lists"
-const EXAMPLE = "{\"users\":[{\"user_id\":1,\"user_name\":\"Ana\"},{\"user_id\":2,\"user_name\":\"Ben\"},{\"user_id\":3,\"user_name\":\"Cy\"},{\"user_id\":4,\"user_name\":\"Dee\"}],\"register\":[{\"contest_id\":215,\"user_id\":1},{\"contest_id\":215,\"user_id\":2},{\"contest_id\":215,\"user_id\":3},{\"contest_id\":209,\"user_id\":2},{\"contest_id\":209,\"user_id\":3},{\"contest_id\":211,\"user_id\":1},{\"contest_id\":211,\"user_id\":4},{\"contest_id\":208,\"user_id\":1},{\"contest_id\":208,\"user_id\":2},{\"contest_id\":208,\"user_id\":3},{\"contest_id\":208,\"user_id\":4}]}"
+const EXAMPLE = "{\"users\":[{\"user_id\":1,\"user_name\":\"Ruth\"},{\"user_id\":2,\"user_name\":\"Sam\"},{\"user_id\":3,\"user_name\":\"Theo\"},{\"user_id\":4,\"user_name\":\"Uma\"}],\"register\":[{\"contest_id\":415,\"user_id\":1},{\"contest_id\":415,\"user_id\":2},{\"contest_id\":415,\"user_id\":3},{\"contest_id\":409,\"user_id\":2},{\"contest_id\":409,\"user_id\":3},{\"contest_id\":411,\"user_id\":1},{\"contest_id\":411,\"user_id\":4},{\"contest_id\":408,\"user_id\":1},{\"contest_id\":408,\"user_id\":2},{\"contest_id\":408,\"user_id\":3},{\"contest_id\":408,\"user_id\":4}]}"
 const COMPLEXITY = 'The lesson runs a few passes over the sample tables; the parser caps each table at a small size.'
 const REASONING = ["The denominator is the whole user table, not just the people who registered for a given contest.","Sorting uses the computed percentage first and the contest id second, so equal percentages stay in a stable order."]
 

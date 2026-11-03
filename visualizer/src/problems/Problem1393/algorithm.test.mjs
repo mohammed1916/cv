@@ -18,9 +18,9 @@ function checkFrames(run) {
 test('1393 nets sells against buys for each stock', () => {
   const run = buildTrace(parseInput(JSON.stringify(sample)))
   assert.deepEqual(run.result, [
-    { stock_name: 'Corona Masks', capital_gain_loss: 500 },
-    { stock_name: 'Handbags', capital_gain_loss: -23000 },
-    { stock_name: 'Leetcode', capital_gain_loss: 5000 },
+    { stock_name: 'Bikes', capital_gain_loss: -3000 },
+    { stock_name: 'Gadgets', capital_gain_loss: 4400 },
+    { stock_name: 'Tea', capital_gain_loss: 40 },
   ])
   checkFrames(run)
 })

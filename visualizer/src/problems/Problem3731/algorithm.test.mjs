@@ -5,9 +5,9 @@ import { buildTrace, parseInput } from './algorithm.js'
 const solve = nums => buildTrace({ nums }).result
 
 test('3731 hand-checked cases', () => {
-  assert.deepEqual(solve([1, 4, 2, 5]), [3])
+  assert.deepEqual(solve([6, 2, 9, 3]), [4, 5, 7, 8])
   assert.deepEqual(solve([7, 8, 6, 9]), [])
-  assert.deepEqual(solve([5, 1]), [2, 3, 4])
+  assert.deepEqual(solve([7, 4]), [5, 6])
   assert.deepEqual(solve([10, 12]), [11])
 })
 

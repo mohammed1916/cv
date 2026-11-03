@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/binary-search-tree-iterator-ii/',
   complexity: 'O(1) per call in this array model, where the in-order values stand in for the tree walk.',
   examples: [
-    { label: 'Example', input: '{"values":[2,5,9,12,20],"ops":["next","next","hasNext","prev","next","next","next","next","hasPrevious"]}' },
+    { label: 'Example', input: '{"values":[2,5,9,12,20],"ops":["next","hasNext","next","next","prev","hasPrevious","next","next","hasNext"]}' },
   ],
 }
 

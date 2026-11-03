@@ -24,7 +24,7 @@ function brute(nums, k) {
 
 test('3826 worked cases', () => {
   assert.equal(solve({ nums: [1, 2, 3], k: 1 }), 21)
-  assert.equal(solve({ nums: [5, 1, 2, 1], k: 2 }), 25)
+  assert.equal(solve({ nums: [4, 2, 3, 1], k: 2 }), 31)
 })
 
 test('3826 matches a brute force for every k', () => {

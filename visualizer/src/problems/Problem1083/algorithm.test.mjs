@@ -16,14 +16,14 @@ function checkFrames(trace) {
   }
 }
 
-test('1083 sample keeps S8 buyers who never bought the second product', () => {
+test('1083 sample keeps Kettle buyers who never bought the second product', () => {
   const trace = run(examples[0].input)
   checkFrames(trace)
   assert.deepEqual(trace.result, [{ buyer_id: 10 }, { buyer_id: 12 }])
 })
 
 test('1083 a buyer of the second product only is not returned', () => {
-  const trace = run('{"Product":[{"product_id":1,"product_name":"S8"},{"product_id":2,"product_name":"iPhone"}],"Sales":[{"product_id":2,"buyer_id":7}]}')
+  const trace = run('{"Product":[{"product_id":1,"product_name":"Kettle"},{"product_id":2,"product_name":"Toaster"}],"Sales":[{"product_id":2,"buyer_id":7}]}')
   checkFrames(trace)
   assert.deepEqual(trace.result, [])
 })

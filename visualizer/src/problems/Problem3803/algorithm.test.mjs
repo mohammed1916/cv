@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { buildTrace, parseInput, solve } from './algorithm.js'
 
 test('3803 worked cases', () => {
-  assert.equal(solve('abc'), 2)
+  assert.equal(solve('mmm'), 1)
   assert.equal(solve('a'), 1)
 })
 

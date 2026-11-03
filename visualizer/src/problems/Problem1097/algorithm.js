@@ -47,7 +47,7 @@ export const inputLabel = 'Object with an Activity table'
 export const complexity = 'O(n) with a set of (player, day) pairs for the next-day check. The visualizer caps the table at 12 rows.'
 export const examples = [{
   label: 'Sample',
-  input: '{"Activity":[{"player_id":1,"device_id":2,"event_date":"2016-03-01","games_played":5},{"player_id":1,"device_id":2,"event_date":"2016-03-02","games_played":6},{"player_id":1,"device_id":2,"event_date":"2017-06-25","games_played":1},{"player_id":2,"device_id":3,"event_date":"2017-06-25","games_played":4},{"player_id":3,"device_id":1,"event_date":"2016-03-02","games_played":3},{"player_id":3,"device_id":1,"event_date":"2016-03-03","games_played":2},{"player_id":4,"device_id":4,"event_date":"2016-03-02","games_played":7}]}',
+  input: '{"Activity":[{"player_id":11,"device_id":5,"event_date":"2018-05-10","games_played":4},{"player_id":11,"device_id":5,"event_date":"2018-05-11","games_played":2},{"player_id":12,"device_id":6,"event_date":"2018-05-11","games_played":3},{"player_id":13,"device_id":7,"event_date":"2019-02-28","games_played":1},{"player_id":14,"device_id":8,"event_date":"2018-05-12","games_played":7},{"player_id":14,"device_id":8,"event_date":"2018-05-13","games_played":2}]}',
 }]
 
 function tableRows(input, name, columns) {

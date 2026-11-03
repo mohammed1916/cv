@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/check-if-digits-are-equal-in-string-after-operations-ii/',
   complexity: 'Simulation takes O(n^2) time here because the visualization caps s at 12 digits. The full problem needs a faster counting method for long strings.',
   examples: [
-    { label: 'Equal', input: '{"s":"3902"}' },
-    { label: 'Different', input: '{"s":"1234"}' },
+    { label: 'Equal', input: '{"s":"9999"}' },
+    { label: 'Different', input: '{"s":"5678"}' },
   ],
 }
 

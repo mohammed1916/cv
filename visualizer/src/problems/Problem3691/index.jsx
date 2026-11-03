@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-total-subarray-value-ii/',
   complexity: 'Heap selection over one chain per left end, with range values computed directly. The visualization caps length at 8 and k at 20.',
   examples: [
-    { label: 'Small', input: '{"nums":[1,3,2],"k":2}' },
-    { label: 'Four values', input: '{"nums":[4,2,5,1],"k":3}' },
+    { label: 'Small', input: '{"nums":[2,7,4,1],"k":2}' },
+    { label: 'Four values', input: '{"nums":[6,0,3,9],"k":3}' },
   ],
 }
 

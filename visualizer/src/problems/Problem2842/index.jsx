@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/count-k-subsequences-of-a-string-with-maximum-beauty/',
   complexity: 'O(n + sigma log sigma) time for n characters over an alphabet of size sigma.',
   examples: [
-    { label: 'Example', input: '{"s":"bcca","k":2}' },
-    { label: 'Tied letters', input: '{"s":"abbbdd","k":2}' },
+    { label: 'Example', input: '{"s":"wwwtxxyy","k":2}' },
+    { label: 'Tied letters', input: '{"s":"gggeeff","k":2}' },
   ],
 }
 

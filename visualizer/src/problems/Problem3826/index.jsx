@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-partition-score/',
   complexity: 'O(k * n^2) time and O(k * n) space; prefix sums make each block cost constant time.',
   examples: [
-    { label: 'Two blocks', input: '{"nums":[5,1,2,1],"k":2}' },
+    { label: 'Two blocks', input: '{"nums":[4,2,3,1],"k":2}' },
     { label: 'One block', input: '{"nums":[1,2,3],"k":1}' },
   ],
 }

@@ -23,8 +23,8 @@ function oracle(nums) {
 }
 
 test('3886 worked examples', () => {
-  assert.equal(buildTrace(parseInput('{"nums":[3,1,2]}')).result, 3)
-  assert.equal(buildTrace(parseInput('{"nums":[7,6,5]}')).result, 0)
+  assert.equal(buildTrace(parseInput('{"nums":[4,5,1,2]}')).result, 4)
+  assert.equal(buildTrace(parseInput('{"nums":[2,1,3,4]}')).result, 2)
 })
 
 test('3886 matches the rotation oracle on small arrays', () => {

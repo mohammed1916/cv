@@ -20,9 +20,9 @@ test('1075 sample averages and rounds each project', () => {
   const trace = run(examples[0].input)
   checkFrames(trace)
   assert.deepEqual(trace.result, [
-    { project_id: 1, average_years: '5.00' },
-    { project_id: 2, average_years: '4.00' },
-    { project_id: 3, average_years: '7.50' },
+    { project_id: 5, average_years: '6.50' },
+    { project_id: 6, average_years: '3.33' },
+    { project_id: 7, average_years: '7.50' },
   ])
 })
 

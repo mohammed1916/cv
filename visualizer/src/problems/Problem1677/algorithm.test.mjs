@@ -2,11 +2,11 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { buildTrace, parseInput, phases, code, python } from './algorithm.js'
 
-const SAMPLE = '{"Product":[{"product_id":1,"name":"LC Phone"},{"product_id":2,"name":"LC T-Shirt"},{"product_id":3,"name":"LC Book"}],"Invoice":[{"invoice_id":1,"product_id":1,"rest":10,"paid":30,"canceled":15,"refunded":20},{"invoice_id":2,"product_id":1,"rest":20,"paid":40,"canceled":30,"refunded":10},{"invoice_id":3,"product_id":2,"rest":20,"paid":40,"canceled":20,"refunded":20}]}'
+const SAMPLE = '{"Product":[{"product_id":1,"name":"Kettle"},{"product_id":2,"name":"Lamp"},{"product_id":3,"name":"Apron"}],"Invoice":[{"invoice_id":1,"product_id":1,"rest":12,"paid":26,"canceled":14,"refunded":18},{"invoice_id":2,"product_id":1,"rest":22,"paid":38,"canceled":28,"refunded":12},{"invoice_id":3,"product_id":2,"rest":18,"paid":44,"canceled":22,"refunded":16}]}'
 const EXPECTED = [
-  { name: 'LC Book', rest: 0, paid: 0, canceled: 0, refunded: 0 },
-  { name: 'LC Phone', rest: 30, paid: 70, canceled: 45, refunded: 30 },
-  { name: 'LC T-Shirt', rest: 20, paid: 40, canceled: 20, refunded: 20 },
+  { name: 'Apron', rest: 0, paid: 0, canceled: 0, refunded: 0 },
+  { name: 'Kettle', rest: 34, paid: 64, canceled: 42, refunded: 30 },
+  { name: 'Lamp', rest: 18, paid: 44, canceled: 22, refunded: 16 },
 ]
 
 test('1677 sums per product and keeps products without invoices as zeros', () => {

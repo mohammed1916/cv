@@ -22,7 +22,7 @@ const run = text => buildTrace(parseInput(text))
 
 test('1164 uses the newest change on or before the date, otherwise 10', () => {
   assert.deepEqual(run(sample).result, [
-    { product_id: 1, price: 50 },
+    { product_id: 1, price: 40 },
     { product_id: 2, price: 10 },
     { product_id: 3, price: 20 },
   ])

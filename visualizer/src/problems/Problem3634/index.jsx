@@ -29,7 +29,7 @@ export default function MinimumRemovalsToBalanceArray() {
       <output aria-label="Balance check">{`minimum ${step.i >= 0 ? run.sorted[step.i] : 'none'}, top of run ${step.i >= 0 ? run.input.k * run.sorted[step.i] + run.sorted[step.i] : 'none'}, best run ${step.best ?? 0}`}</output>
     </>
   }} renderReasoning={() => <>
-    <p>After sorting, a run is balanced exactly when its largest value minus its smallest is at most k times its smallest, so the largest value may reach (k + 1) times the smallest. The smallest value is the left end, so the right end only moves forward.</p>
+    <p>After sorting, a run is balanced exactly when the spread between its largest and smallest value stays within k times the smallest, so the largest value may reach (k + 1) times the smallest. The smallest value is the left end, so the right end only moves forward.</p>
     <p>Each value is passed by the right pointer at most once, so the whole scan is linear after the sort.</p>
   </>} />
 }

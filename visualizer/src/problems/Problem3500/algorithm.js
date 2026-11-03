@@ -48,7 +48,7 @@ export function parseInput(text) {
 const shown = v => (v === Infinity ? '∞' : String(v))
 
 // Knowledge-derived model: layer i holds the best cost of splitting a prefix into i subarrays.
-// The i-th subarray adds k*i to the prefix sum of nums at its end, multiplied by its cost sum.
+// Subarray number i is charged the prefix total at its right end plus k times i, then scaled by its cost total.
 export function buildTrace({ nums, cost, k }) {
   const n = nums.length
   const P = [0]

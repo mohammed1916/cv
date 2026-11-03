@@ -18,11 +18,11 @@ function checkFrames(run) {
 test('1378 keeps every employee and leaves unmapped identifiers empty', () => {
   const run = buildTrace(parseInput(JSON.stringify(sample)))
   assert.deepEqual(run.result, [
-    { unique_id: null, name: 'Alice' },
-    { unique_id: null, name: 'Bob' },
-    { unique_id: 2, name: 'Meir' },
-    { unique_id: 3, name: 'Winston' },
-    { unique_id: 1, name: 'Jonathan' },
+    { unique_id: null, name: 'Rosa' },
+    { unique_id: null, name: 'Tariq' },
+    { unique_id: 6, name: 'Ines' },
+    { unique_id: 7, name: 'Oskar' },
+    { unique_id: 4, name: 'Pauline' },
   ])
   checkFrames(run)
 })

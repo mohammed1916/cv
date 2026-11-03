@@ -14,8 +14,8 @@ function oracle(nums) {
 }
 
 test('3878 worked examples', () => {
-  assert.equal(buildTrace(parseInput('{"nums":[4,2,3]}')).result, 4)
-  assert.equal(buildTrace(parseInput('{"nums":[1,3,1]}')).result, 6)
+  assert.equal(buildTrace(parseInput('{"nums":[5,1,4]}')).result, 5)
+  assert.equal(buildTrace(parseInput('{"nums":[2,2,6]}')).result, 6)
 })
 
 test('3878 matches the direct oracle on random arrays', () => {

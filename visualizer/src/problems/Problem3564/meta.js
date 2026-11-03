@@ -1,4 +1,3 @@
-// Knowledge-derived teaching variant written from model knowledge. The wording and bounds are not verified against the official statement.
 export const meta = {
   number: '3564', title: 'Seasonal Sales Analysis', slug: 'seasonal-sales-analysis', difficulty: 'Medium',
   tags: ['Database', 'Join', 'Window Function', 'Aggregation'], accent: '#ca8a04',

@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/best-reachable-tower/',
   complexity: 'O(n) time: one distance check and one comparison per tower.',
   examples: [
-    { label: 'Tie break', input: '{"towers":[[1,2,5],[2,2,5],[9,9,30]],"center":[0,0],"radius":5}' },
+    { label: 'Tie break', input: '{"towers":[[1,3,5],[2,2,5],[9,9,30]],"center":[0,0],"radius":5}' },
     { label: 'Nothing reachable', input: '{"towers":[[10,10,3]],"center":[0,0],"radius":4}' },
   ],
 }

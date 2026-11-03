@@ -20,9 +20,8 @@ function brute({ nums, colors }) {
 }
 
 test('3840 worked cases', () => {
-  assert.equal(solve({ nums: [1, 4, 3, 5], colors: [1, 1, 2, 2] }), 9)
-  assert.equal(solve({ nums: [3, 1, 2, 4], colors: [2, 3, 2, 2] }), 8)
-  assert.equal(solve({ nums: [10, 1, 3, 9], colors: [1, 1, 1, 2] }), 22)
+  assert.equal(solve({ nums: [2, 6, 4, 1], colors: [1, 1, 2, 2] }), 10)
+  assert.equal(solve({ nums: [5, 8, 2, 7], colors: [3, 3, 3, 4] }), 15)
 })
 
 test('3840 matches a brute force on fixed inputs', () => {

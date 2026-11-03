@@ -90,7 +90,7 @@ export function buildTrace(input) {
   }
   push('aggregate', 'GROUP BY t.team_id', 'groupby', 'Each team keeps its summed points; teams without matches stay at zero.')
   rows.sort((a, b) => b.num_points - a.num_points || a.team_id - b.team_id)
-  push('order', 'ORDER BY num_points', 'sort_values', 'Sort by points descending, then team id ascending.')
+  push('order', 'ORDER BY num_points', 'sort_values', 'Rank by points, highest first; equal points fall back to the smaller team id.')
   push('done', 'SELECT t.team_id', 'return out', 'Report the standings.')
   return { input, result: copy(rows), columns: COLUMNS, frames }
 }

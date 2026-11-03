@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/design-event-manager/',
   complexity: 'This visual scans the active map on each poll: O(n) per poll. A heap with lazy updates would make polls faster on large inputs.',
   examples: [
-    { label: 'Example', input: '{"events":[[5,7],[2,7],[9,4]],"ops":[["poll"],["update",9,7],["poll"],["poll"],["poll"],["poll"]]}' },
+    { label: 'Example', input: '{"events":[[3,2],[8,5],[6,5]],"ops":[["poll"],["update",3,9],["poll"],["poll"],["poll"]]}' },
   ],
 }
 

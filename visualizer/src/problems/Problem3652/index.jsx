@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/best-time-to-buy-and-sell-stock-using-strategy/',
   complexity: 'O(n * k) time here for clarity; a sliding update reaches O(n).',
   examples: [
-    { label: 'Example', input: '{"prices":[4,2,8],"strategy":[-1,0,1],"k":2}' },
+    { label: 'Example', input: '{"prices":[6,1,9],"strategy":[1,0,-1],"k":2}' },
     { label: 'Flat', input: '{"prices":[3,7],"strategy":[1,1],"k":2}' },
   ],
 }

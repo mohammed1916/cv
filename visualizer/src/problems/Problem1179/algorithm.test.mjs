@@ -23,10 +23,10 @@ const run = text => buildTrace(parseInput(text))
 test('1179 pivots months into columns and leaves gaps as NULL', () => {
   const result = run(sample).result
   assert.equal(result.length, 3)
-  assert.deepEqual(result[0], { id: 1, Jan_Revenue: 8000, Feb_Revenue: 7000, Mar_Revenue: 6000, Apr_Revenue: null, May_Revenue: null, Jun_Revenue: null, Jul_Revenue: null, Aug_Revenue: null, Sep_Revenue: null, Oct_Revenue: null, Nov_Revenue: null, Dec_Revenue: null })
-  assert.equal(result[1].Dec_Revenue, 5000)
+  assert.deepEqual(result[0], { id: 1, Jan_Revenue: 4100, Feb_Revenue: 3800, Mar_Revenue: 6200, Apr_Revenue: null, May_Revenue: null, Jun_Revenue: null, Jul_Revenue: null, Aug_Revenue: null, Sep_Revenue: null, Oct_Revenue: null, Nov_Revenue: null, Dec_Revenue: null })
+  assert.equal(result[1].Dec_Revenue, 5100)
   assert.equal(result[1].Feb_Revenue, null)
-  assert.equal(result[2].Feb_Revenue, 10000)
+  assert.equal(result[2].Feb_Revenue, 9300)
   assertFrames(run(sample))
 })
 

@@ -5,8 +5,8 @@ import { buildTrace, parseInput } from './algorithm.js'
 const solve = n => buildTrace(n).result
 
 test('3750 worked examples', () => {
-  assert.equal(solve(7), 0)
-  assert.equal(solve(10), 4)
+  assert.equal(solve(6), 2)
+  assert.equal(solve(13), 2)
 })
 
 // Brute force: every bit position that differs from its counterpart in the reversed string must flip once.

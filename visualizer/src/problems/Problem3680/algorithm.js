@@ -24,7 +24,7 @@ export function buildTrace({ n }) {
   const place = () => {
     if (plan.length === total) {
       result = plan.map(pair => pair.slice())
-      frames.push({ pythonLine: 7, phase: 'found', activeLine: L('if all matches are placed'), at: plan.length - 1, slots: slots(), ok: true, message: 'Every ordered pair is placed and no team plays on consecutive days.' })
+      frames.push({ pythonLine: 7, phase: 'found', activeLine: L('if all matches are placed'), at: plan.length - 1, slots: slots(), ok: true, message: 'All fixtures are placed, and each day avoids the teams from the day before.' })
       return true
     }
     const prev = plan[plan.length - 1]

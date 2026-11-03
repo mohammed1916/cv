@@ -12,9 +12,9 @@ function oracle(s) {
 }
 
 test('3889 worked examples', () => {
-  assert.equal(buildTrace(parseInput('{"s":"ab1z9"}')).result, 3)
-  assert.equal(buildTrace(parseInput('{"s":"4m7n"}')).result, 2)
-  assert.equal(buildTrace(parseInput('{"s":"byby"}')).result, 0)
+  assert.equal(buildTrace(parseInput('{"s":"aaz9"}')).result, 2)
+  assert.equal(buildTrace(parseInput('{"s":"0912"}')).result, 2)
+  assert.equal(buildTrace(parseInput('{"s":"qqqtt"}')).result, 5)
 })
 
 test('3889 mirror is an involution on letters and digits', () => {

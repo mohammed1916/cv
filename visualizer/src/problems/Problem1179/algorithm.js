@@ -58,12 +58,12 @@ export const inputLabel = 'JSON object with a department table of monthly revenu
 export const complexity = 'Linear in the rows, with a fixed 12 columns per department.'
 const COLS = ['id', 'revenue', 'month']
 const SAMPLE = { department: [
-  { id: 1, revenue: 8000, month: 'Jan' },
-  { id: 1, revenue: 7000, month: 'Feb' },
-  { id: 1, revenue: 6000, month: 'Mar' },
-  { id: 2, revenue: 9000, month: 'Jan' },
-  { id: 2, revenue: 5000, month: 'Dec' },
-  { id: 3, revenue: 10000, month: 'Feb' },
+  { id: 1, revenue: 4100, month: 'Jan' },
+  { id: 1, revenue: 3800, month: 'Feb' },
+  { id: 1, revenue: 6200, month: 'Mar' },
+  { id: 2, revenue: 2700, month: 'Jan' },
+  { id: 2, revenue: 5100, month: 'Dec' },
+  { id: 3, revenue: 9300, month: 'Feb' },
 ] }
 export const examples = [{ label: 'Teaching sample', input: JSON.stringify(SAMPLE) }]
 

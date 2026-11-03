@@ -5,9 +5,9 @@ import { buildTrace, parseInput } from './algorithm.js'
 const spreadOf = parts => Math.max(...parts) - Math.min(...parts)
 
 test('3669 worked example', () => {
-  const parts = buildTrace({ n: 100, k: 2 }).result
-  assert.deepEqual(parts, [10, 10])
-  assert.deepEqual(buildTrace({ n: 44, k: 3 }).result, [2, 2, 11])
+  const parts = buildTrace({ n: 96, k: 2 }).result
+  assert.deepEqual(parts, [8, 12])
+  assert.deepEqual(buildTrace({ n: 72, k: 3 }).result, [3, 4, 6])
 })
 
 test('3669 rejects out-of-range input', () => {

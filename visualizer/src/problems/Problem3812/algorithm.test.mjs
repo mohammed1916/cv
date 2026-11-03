@@ -35,11 +35,11 @@ test('3812 matches a brute force on small trees with feasible and infeasible tar
 })
 
 test('3812 an odd number of mismatches is impossible', () => {
-  assert.deepEqual(solve({ n: 3, edges: [[0, 1], [1, 2]], start: '000', target: '100' }), [-1])
+  assert.deepEqual(solve({ n: 3, edges: [[1, 0], [2, 1]], start: '001', target: '110' }), [-1])
 })
 
 test('3812 every frame names a Python and pseudocode line', () => {
-  for (const frame of buildTrace({ n: 3, edges: [[0, 1], [1, 2]], start: '010', target: '111' }).frames) assert.ok(frame.pythonLine > 0 && frame.activeLine > 0)
+  for (const frame of buildTrace({ n: 3, edges: [[0, 1], [1, 2]], start: '011', target: '111' }).frames) assert.ok(frame.pythonLine > 0 && frame.activeLine > 0)
 })
 
 test('3812 rejects a disconnected edge list', () => {

@@ -24,8 +24,8 @@ function oracle(nums1, nums2) {
 }
 
 test('3690 worked examples', () => {
-  assert.equal(solve([3, 1, 2], [1, 2, 3]), 1)
-  assert.equal(solve([1, 2, 3], [3, 1, 2]), 1)
+  assert.equal(solve([2, 3, 1, 4], [1, 4, 2, 3]), 1)
+  assert.equal(solve([1, 2, 3, 4, 5], [5, 4, 3, 2, 1]), 3)
   assert.equal(solve([1, 2, 3], [1, 2, 3]), 0)
 })
 

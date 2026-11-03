@@ -22,8 +22,8 @@ function oracle(nums) {
 }
 
 test('3891 worked examples', () => {
-  assert.equal(buildTrace(parseInput('{"nums":[1,2,2]}')).result, 1)
-  assert.equal(buildTrace(parseInput('{"nums":[2,1,1,3]}')).result, 2)
+  assert.equal(buildTrace(parseInput('{"nums":[3,3,1,3]}')).result, 1)
+  assert.equal(buildTrace(parseInput('{"nums":[4,4,1,2]}')).result, 1)
 })
 
 test('3891 matches the exhaustive oracle on small arrays', () => {

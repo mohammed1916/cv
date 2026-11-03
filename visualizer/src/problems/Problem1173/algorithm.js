@@ -53,11 +53,11 @@ export const inputLabel = 'JSON object with a deliveries table'
 export const complexity = 'Linear in the delivery rows.'
 const COLS = ['delivery_id', 'customer_id', 'order_date', 'customer_pref_delivery_date']
 const SAMPLE = { deliveries: [
-  { delivery_id: 1, customer_id: 1, order_date: '2019-08-01', customer_pref_delivery_date: '2019-08-02' },
-  { delivery_id: 2, customer_id: 2, order_date: '2019-08-02', customer_pref_delivery_date: '2019-08-02' },
-  { delivery_id: 3, customer_id: 3, order_date: '2019-08-03', customer_pref_delivery_date: '2019-08-05' },
-  { delivery_id: 4, customer_id: 1, order_date: '2019-08-04', customer_pref_delivery_date: '2019-08-04' },
-  { delivery_id: 5, customer_id: 4, order_date: '2019-08-05', customer_pref_delivery_date: '2019-08-09' },
+  { delivery_id: 1, customer_id: 1, order_date: '2020-05-11', customer_pref_delivery_date: '2020-05-13' },
+  { delivery_id: 2, customer_id: 2, order_date: '2020-05-13', customer_pref_delivery_date: '2020-05-13' },
+  { delivery_id: 3, customer_id: 3, order_date: '2020-05-14', customer_pref_delivery_date: '2020-05-18' },
+  { delivery_id: 4, customer_id: 1, order_date: '2020-05-16', customer_pref_delivery_date: '2020-05-16' },
+  { delivery_id: 5, customer_id: 4, order_date: '2020-05-18', customer_pref_delivery_date: '2020-05-22' },
 ] }
 export const examples = [{ label: 'Teaching sample', input: JSON.stringify(SAMPLE) }]
 

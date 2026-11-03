@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/filter-elements-from-array/',
   complexity: 'O(n) time and O(n) space for the kept list.',
   examples: [
-    { label: 'Mixed', input: '{"arr":[0,10,20,30]}' },
+    { label: 'Mixed', input: '{"arr":[4,1,9,0,12]}' },
     { label: 'Dropped', input: '{"arr":[0,1,2]}' },
   ],
 }

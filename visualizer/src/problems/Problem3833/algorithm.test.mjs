@@ -13,7 +13,7 @@ function brute(nums) {
 }
 
 test('3833 worked cases', () => {
-  assert.equal(solve({ nums: [5, 4, 3] }), 2)
+  assert.equal(solve({ nums: [6, 4, 3] }), 2)
   assert.equal(solve({ nums: [1, 9, 2, 2] }), 1)
   assert.equal(solve({ nums: [7] }), 0)
 })

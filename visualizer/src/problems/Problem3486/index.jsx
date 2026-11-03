@@ -16,7 +16,7 @@ const definition = {
   url: 'https://leetcode.com/problems/longest-special-path-ii/',
   complexity: 'O(n * depth) time in this walk-up model; the visualization caps n at 10.',
   examples: [
-    { label: 'Example', input: '{"edges":[[0,1,2],[1,2,3],[1,3,1]],"nums":[1,2,1,3]}' },
+    { label: 'Example', input: '{"edges":[[0,1,2],[1,2,3],[1,3,4]],"nums":[1,2,1,3]}' },
     { label: 'Path', input: '{"edges":[[0,1,4]],"nums":[7,7]}' },
   ],
 }

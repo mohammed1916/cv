@@ -6,7 +6,7 @@ const solve = nums => buildTrace({ nums }).result
 
 test('3674 worked examples', () => {
   assert.equal(solve([1, 2]), 1)
-  assert.equal(solve([5, 5, 5]), 0)
+  assert.equal(solve([4, 4, 4]), 0)
 })
 
 test('3674 rejects values outside the cap', () => {

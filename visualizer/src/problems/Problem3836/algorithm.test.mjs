@@ -25,9 +25,8 @@ function brute(a, b, k) {
 }
 
 test('3836 worked cases', () => {
-  assert.equal(solve({ nums1: [1, 3, 2], nums2: [4, 5, 1], k: 2 }), 22)
-  assert.equal(solve({ nums1: [-2, 0, 5], nums2: [-3, 4, -1, 2], k: 2 }), 26)
-  assert.equal(solve({ nums1: [-3, -2], nums2: [1, 2], k: 2 }), -7)
+  assert.equal(solve({ nums1: [2, 4, 1], nums2: [3, 1, 5, 2], k: 2 }), 26)
+  assert.equal(solve({ nums1: [-4, 1, -2], nums2: [2, -1, 3], k: 2 }), 7)
 })
 
 test('3836 matches a brute force on fixed lists', () => {

@@ -21,8 +21,8 @@ function oracle(nums, k) {
 }
 
 test('3892 worked examples', () => {
-  assert.equal(buildTrace(parseInput('{"nums":[2,1,2],"k":1}')).result, 1)
-  assert.equal(buildTrace(parseInput('{"nums":[4,5,3,6],"k":2}')).result, 0)
+  assert.equal(buildTrace(parseInput('{"nums":[3,1,3],"k":1}')).result, 1)
+  assert.equal(buildTrace(parseInput('{"nums":[1,5,2,6,3],"k":2}')).result, 0)
 })
 
 test('3892 too many peaks is impossible', () => {

@@ -19,7 +19,7 @@ function checkFrames(trace) {
 test('1050 sample keeps only pairs with three or more records', () => {
   const trace = run(examples[0].input)
   checkFrames(trace)
-  assert.deepEqual(trace.result, [{ actor_id: 1, director_id: 1 }, { actor_id: 2, director_id: 1 }])
+  assert.deepEqual(trace.result, [{ actor_id: 4, director_id: 9 }, { actor_id: 6, director_id: 8 }])
 })
 
 test('1050 a pair with exactly two records is dropped', () => {

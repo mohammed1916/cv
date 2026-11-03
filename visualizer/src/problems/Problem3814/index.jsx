@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-capacity-within-budget/',
   complexity: 'O(n^2) for this visual trace; the same idea with a pointer gives O(n log n) overall.',
   examples: [
-    { label: 'Pairs', input: '{"costs":[4,8,5,3],"capacity":[1,5,2,7],"budget":8}' },
+    { label: 'Pairs', input: '{"costs":[6,2,9,4],"capacity":[3,7,2,5],"budget":10}' },
     { label: 'Too expensive', input: '{"costs":[5,5],"capacity":[3,4],"budget":5}' },
   ],
 }

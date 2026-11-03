@@ -12,8 +12,8 @@ const definition = {
   url: 'https://leetcode.com/problems/sum-of-perfect-square-ancestors/',
   complexity: 'O(n * sqrt(max value)) for the square-free parts plus O(n) for the tree walk.',
   examples: [
-    { label: 'Example', input: '{"n":4,"edges":[[0,1],[0,2],[2,3]],"nums":[3,12,27,3]}' },
-    { label: 'Path', input: '{"n":3,"edges":[[0,1],[1,2]],"nums":[5,20,7]}' },
+    { label: 'Example', input: '{"n":4,"edges":[[0,3],[3,1],[0,2]],"nums":[2,8,2,18]}' },
+    { label: 'Path', input: '{"n":3,"edges":[[0,2],[2,1]],"nums":[8,2,18]}' },
   ],
 }
 

@@ -40,12 +40,12 @@ export const phases = [
 ]
 export const sample = {
   employee: [
-    { employee_id: 1, team_id: 8 },
-    { employee_id: 2, team_id: 8 },
-    { employee_id: 3, team_id: 8 },
-    { employee_id: 4, team_id: 7 },
-    { employee_id: 5, team_id: 2 },
-    { employee_id: 6, team_id: 7 },
+    { employee_id: 11, team_id: 40 },
+    { employee_id: 12, team_id: 40 },
+    { employee_id: 13, team_id: 40 },
+    { employee_id: 14, team_id: 50 },
+    { employee_id: 15, team_id: 60 },
+    { employee_id: 16, team_id: 50 },
   ],
 }
 

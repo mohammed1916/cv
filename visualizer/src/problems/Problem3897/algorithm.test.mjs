@@ -21,7 +21,7 @@ function oracle(nums1, nums0) {
 }
 
 test('3897 worked example', () => {
-  assert.equal(buildTrace(parseInput('{"nums1":[1,2],"nums0":[1,0]}')).result, 14)
+  assert.equal(buildTrace(parseInput('{"nums1":[2,0,1],"nums0":[1,3,0]}')).result, 112)
 })
 
 test('3897 matches a brute force over all orderings on small inputs', () => {

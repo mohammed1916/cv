@@ -5,8 +5,8 @@ import { buildTrace, parseInput } from './algorithm.js'
 const solve = grid => buildTrace({ grid }).result
 
 test('3225 worked examples', () => {
-  assert.equal(solve([[0, 0, 0, 0, 0], [0, 0, 3, 0, 0], [0, 1, 0, 0, 0], [5, 0, 0, 3, 0], [0, 0, 0, 0, 2]]), 11)
-  assert.equal(solve([[10, 9, 0, 0, 15], [7, 1, 0, 8, 0], [5, 20, 0, 11, 0], [0, 0, 0, 1, 2], [8, 12, 1, 10, 3]]), 94)
+  assert.equal(solve([[2, 0, 4], [0, 3, 0], [5, 1, 0]]), 11)
+  assert.equal(solve([[7, 1, 0, 2], [3, 0, 6, 0], [0, 4, 9, 1], [2, 5, 0, 3]]), 29)
 })
 
 test('3225 a single cell never scores', () => {

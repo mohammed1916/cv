@@ -5,7 +5,7 @@ import { meta } from './meta'
 const inputLabel = 'JSON object with a Tree list of {N, P} rows'
 const complexity = 'O(n) time with a set of parent ids, where n is the number of nodes.'
 const examples = [
-  { label: 'Teaching sample', input: JSON.stringify({ Tree: [{ N: 1, P: 2 }, { N: 2, P: 5 }, { N: 3, P: 2 }, { N: 4, P: 1 }, { N: 5, P: null }] }) },
+  { label: 'Teaching sample', input: JSON.stringify({ Tree: [{ N: 7, P: null }, { N: 3, P: 7 }, { N: 9, P: 3 }, { N: 4, P: 7 }] }) },
   { label: 'Single node', input: JSON.stringify({ Tree: [{ N: 1, P: null }] }) },
 ]
 

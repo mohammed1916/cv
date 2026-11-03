@@ -67,7 +67,7 @@ const definition = {
   url: 'https://leetcode.com/problems/find-consecutive-integers-from-a-data-stream/',
   complexity: 'Each number is added and removed from the window once, so every answer costs constant time and the window holds at most k numbers.',
   examples: [
-    { label: 'Example', input: '{"value":4,"k":3,"stream":[4,4,4,5,4,4,4]}' },
+    { label: 'Example', input: '{"value":7,"k":2,"stream":[7,3,7,7,7,2,7]}' },
   ],
 }
 

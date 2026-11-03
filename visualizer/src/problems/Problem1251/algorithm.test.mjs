@@ -18,14 +18,14 @@ function checkFrames(result) {
   assert.deepEqual(result.frames.at(-1).rows, result.result)
 }
 
-const sample = '{"prices":[{"product_id":1,"start_date":"2019-02-17","end_date":"2019-02-28","price":5},{"product_id":1,"start_date":"2019-03-01","end_date":"2019-03-22","price":20},{"product_id":2,"start_date":"2019-02-01","end_date":"2019-02-20","price":15},{"product_id":2,"start_date":"2019-02-21","end_date":"2019-03-31","price":30},{"product_id":3,"start_date":"2019-01-01","end_date":"2019-12-31","price":99}],"units_sold":[{"product_id":1,"purchase_date":"2019-02-25","units":100},{"product_id":1,"purchase_date":"2019-03-01","units":15},{"product_id":2,"purchase_date":"2019-02-10","units":200},{"product_id":2,"purchase_date":"2019-02-28","units":30}]}'
+const sample = '{"prices":[{"product_id":1,"start_date":"2020-04-01","end_date":"2020-04-10","price":8},{"product_id":1,"start_date":"2020-04-11","end_date":"2020-04-30","price":12},{"product_id":2,"start_date":"2020-04-01","end_date":"2020-04-20","price":4},{"product_id":3,"start_date":"2020-01-01","end_date":"2020-12-31","price":99}],"units_sold":[{"product_id":1,"purchase_date":"2020-04-03","units":6},{"product_id":1,"purchase_date":"2020-04-15","units":2},{"product_id":2,"purchase_date":"2020-04-09","units":5}]}'
 
 test('1251 sample averages match the hand computation', () => {
   const result = run(sample)
-  // Product 1: (100*5 + 15*20) / 115 = 800 / 115 = 6.96. Product 2: (200*15 + 30*30) / 230 = 3900 / 230 = 16.96.
+  // Product 1: (6*8 + 2*12) / 8 = 9. Product 2: 5*4 / 5 = 4. Product 3 has no sales.
   assert.deepEqual(result.result, [
-    { product_id: 1, average_price: 6.96 },
-    { product_id: 2, average_price: 16.96 },
+    { product_id: 1, average_price: 9 },
+    { product_id: 2, average_price: 4 },
     { product_id: 3, average_price: 0 },
   ])
   checkFrames(result)

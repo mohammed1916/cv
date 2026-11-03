@@ -12,8 +12,8 @@ const definition = {
   url: 'https://leetcode.com/problems/sum-of-sortable-integers/',
   complexity: 'This visual tries each rotation of each block: at most n times k checks per divisor. The visual caps nums at 12 values.',
   examples: [
-    { label: 'Example A', input: '{"nums":[3,1,2]}' },
-    { label: 'Example B', input: '{"nums":[7,6,5]}' },
+    { label: 'Example A', input: '{"nums":[4,5,1,2]}' },
+    { label: 'Example B', input: '{"nums":[2,1,3,4]}' },
   ],
 }
 

@@ -20,8 +20,8 @@ function oracle({ n, edges, nums }) {
 }
 
 test('3715 invented examples', () => {
-  assert.equal(solve({ n: 4, edges: [[0, 1], [0, 2], [2, 3]], nums: [3, 12, 27, 3] }), 4)
-  assert.equal(solve({ n: 3, edges: [[0, 1], [1, 2]], nums: [5, 20, 7] }), oracle({ n: 3, edges: [[0, 1], [1, 2]], nums: [5, 20, 7] }))
+  assert.equal(solve({ n: 4, edges: [[0, 3], [3, 1], [0, 2]], nums: [2, 8, 2, 18] }), 4)
+  assert.equal(solve({ n: 3, edges: [[0, 2], [2, 1]], nums: [8, 2, 18] }), oracle({ n: 3, edges: [[0, 2], [2, 1]], nums: [8, 2, 18] }))
 })
 
 test('3715 square-free part and oracle agreement on a deeper tree', () => {

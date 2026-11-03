@@ -2,7 +2,7 @@ import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python, sql, phases } from './algorithm'
 
 const INPUT_LABEL = "Object with Product and Invoice lists"
-const EXAMPLE = "{\"Product\":[{\"product_id\":1,\"name\":\"LC Phone\"},{\"product_id\":2,\"name\":\"LC T-Shirt\"},{\"product_id\":3,\"name\":\"LC Book\"}],\"Invoice\":[{\"invoice_id\":1,\"product_id\":1,\"rest\":10,\"paid\":30,\"canceled\":15,\"refunded\":20},{\"invoice_id\":2,\"product_id\":1,\"rest\":20,\"paid\":40,\"canceled\":30,\"refunded\":10},{\"invoice_id\":3,\"product_id\":2,\"rest\":20,\"paid\":40,\"canceled\":20,\"refunded\":20}]}"
+const EXAMPLE = "{\"Product\":[{\"product_id\":1,\"name\":\"Kettle\"},{\"product_id\":2,\"name\":\"Lamp\"},{\"product_id\":3,\"name\":\"Apron\"}],\"Invoice\":[{\"invoice_id\":1,\"product_id\":1,\"rest\":12,\"paid\":26,\"canceled\":14,\"refunded\":18},{\"invoice_id\":2,\"product_id\":1,\"rest\":22,\"paid\":38,\"canceled\":28,\"refunded\":12},{\"invoice_id\":3,\"product_id\":2,\"rest\":18,\"paid\":44,\"canceled\":22,\"refunded\":16}]}"
 const COMPLEXITY = 'The lesson runs a few passes over the sample tables; the parser caps each table at a small size.'
 const REASONING = ["A left join keeps products with no invoices, and coalescing turns their empty sums into zero.","Totals are per product, so the outer table decides which rows exist and the invoice table only adds amounts."]
 

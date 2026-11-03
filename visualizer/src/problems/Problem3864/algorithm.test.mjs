@@ -5,7 +5,7 @@ import { buildTrace, parseInput } from './algorithm.js'
 const solve = (s, encCost, flatCost) => buildTrace(parseInput(JSON.stringify({ s, encCost, flatCost }))).result
 
 test('3864 invented example with a split', () => {
-  assert.equal(solve('1010', 2, 1), 6)
+  assert.equal(solve('1100', 2, 1), 5)
 })
 
 test('3864 a string with no sensitive element costs one flat charge', () => {

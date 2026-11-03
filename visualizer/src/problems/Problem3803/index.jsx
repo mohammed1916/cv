@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-residue-prefixes/',
   complexity: 'O(n) time with a set of at most 26 letters.',
   examples: [
-    { label: 'Short word', input: '{"s":"abc"}' },
+    { label: 'Short word', input: '{"s":"xyz"}' },
     { label: 'Repeats', input: '{"s":"aabbaa"}' },
   ],
 }

@@ -16,7 +16,7 @@ const definition = {
   url: 'https://leetcode.com/problems/concatenate-non-zero-digits-and-multiply-by-sum-ii/',
   complexity: 'O(m + q) time after the prefix arrays, with products kept modulo 1000000007. The visualization caps s at 20 digits.',
   examples: [
-    { label: 'Example', input: '{"s":"3014","queries":[[0,3],[1,1]]}' },
+    { label: 'Example', input: '{"s":"3014","queries":[[0,2],[1,3]]}' },
     { label: 'Longer', input: '{"s":"907060","queries":[[0,5],[2,4]]}' },
   ],
 }
@@ -24,7 +24,13 @@ const definition = {
 export default function ConcatenateNonZeroDigitsAndMultiplyBySumII() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="s" length={run.input.s.length} valueAt={i => run.input.s[i]} active={step.at}
-      roleAt={i => (step.span && i >= step.span[0] && i <= step.span[1] ? 'window' : '')} />
+      roleAt={i => {
+        if (!step.span) return ''
+        const [l, r] = step.span
+        if (i === l) return 'l'
+        if (i === r) return 'r'
+        return i > l && i < r ? 'window' : ''
+      }} />
     <output aria-label="Query reading">{step.x === null
       ? `Window ${step.span ? `${step.span[0]} to ${step.span[1]}` : 'not chosen yet'}`
       : `x = ${step.x}, digit sum = ${step.sum}, answer = ${step.answer}`}</output>

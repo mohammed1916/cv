@@ -15,8 +15,8 @@ function oracle(nums, k) {
 }
 
 test('3691 worked examples', () => {
-  assert.equal(solve([1, 3, 2], 2), 4)
-  assert.equal(solve([4, 2, 5, 1], 3), 12)
+  assert.equal(solve([2, 7, 4, 1], 2), 12)
+  assert.equal(solve([6, 0, 3, 9], 3), 24)
 })
 
 test('3691 random inputs match a sort-all oracle', () => {

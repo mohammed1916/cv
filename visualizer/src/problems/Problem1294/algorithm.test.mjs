@@ -5,12 +5,12 @@ import { buildTrace, parseInput, phases, sample } from './algorithm.js'
 const run = buildTrace(parseInput(JSON.stringify(sample)))
 
 test('1294 labels countries by their November average', () => {
-  // Australia: (30 + 28 + 27) / 3 = 28.33 -> Hot. Peru: (5 + 10) / 2 = 7.5 -> Cold. USA: (15 + 20) / 2 = 17.5 -> Warm.
-  // China has only an October reading, so it is absent.
+  // Chile: (33 + 29 + 26) / 3 = 29.33 -> Hot. Kenya: (4 + 9) / 2 = 6.5 -> Cold. Norway: (12 + 19) / 2 = 15.5 -> Warm.
+  // Japan has only an October reading, so it is absent.
   assert.deepEqual(run.result, [
-    { country_name: 'Australia', weather_type: 'Hot' },
-    { country_name: 'Peru', weather_type: 'Cold' },
-    { country_name: 'USA', weather_type: 'Warm' },
+    { country_name: 'Chile', weather_type: 'Hot' },
+    { country_name: 'Kenya', weather_type: 'Cold' },
+    { country_name: 'Norway', weather_type: 'Warm' },
   ])
 })
 

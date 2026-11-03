@@ -6,7 +6,7 @@ const inputLabel = 'Object with a Triangles table'
 const complexity = 'O(t) for t rows, with a constant number of comparisons per row. The visualizer caps Triangles at 12 rows.'
 const examples = [{
   label: 'Sample',
-  input: '{"Triangles":[{"A":20,"B":20,"C":23},{"A":20,"B":20,"C":20},{"A":20,"B":21,"C":22},{"A":13,"B":14,"C":30},{"A":5,"B":5,"C":10},{"A":3,"B":4,"C":5}]}',
+  input: '{"Triangles":[{"A":7,"B":7,"C":7},{"A":6,"B":8,"C":8},{"A":4,"B":9,"C":6},{"A":2,"B":3,"C":9},{"A":6,"B":6,"C":12}]}',
 }]
 
 const definition = {

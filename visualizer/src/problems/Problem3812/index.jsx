@@ -15,7 +15,7 @@ const definition = {
   complexity: 'O(n) time: one traversal and one pass over the nodes.',
   examples: [
     { label: 'Path', input: '{"n":4,"edges":[[0,1],[1,2],[2,3]],"start":"0000","target":"0110"}' },
-    { label: 'Odd mismatch', input: '{"n":3,"edges":[[0,1],[1,2]],"start":"000","target":"100"}' },
+    { label: 'Odd mismatch', input: '{"n":3,"edges":[[1,0],[2,1]],"start":"001","target":"110"}' },
   ],
 }
 

@@ -17,9 +17,9 @@ function brute(num, t, bound) {
 }
 
 test('3348 small worked cases', () => {
-  assert.equal(solve('1234', 256), '1488')
-  assert.equal(solve('12355', 50), '12355')
-  assert.equal(solve('11111', 26), '-1')
+  assert.equal(solve('3579', 30), '3581')
+  assert.equal(solve('2468', 64), '2468')
+  assert.equal(solve('7', 11), '-1')
 })
 
 test('3348 t with another prime factor is impossible', () => {

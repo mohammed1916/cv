@@ -13,7 +13,7 @@ const definition = {
   complexity: 'O(n^2) time in this direct version, which builds all 2n candidates.',
   examples: [
     { label: 'Example', input: '"gfec"' },
-    { label: 'Reverse', input: '"zyx"' },
+    { label: 'Reverse', input: '"mkj"' },
   ],
 }
 

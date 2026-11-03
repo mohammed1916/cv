@@ -3,8 +3,8 @@ import assert from 'node:assert/strict'
 import { buildTrace, parseInput } from './algorithm.js'
 
 test('3885 polls respect priority, tie breaking, and updates', () => {
-  const input = parseInput('{"events":[[5,7],[2,7],[9,4]],"ops":[["poll"],["update",9,7],["poll"],["poll"],["poll"],["poll"]]}')
-  assert.deepEqual(buildTrace(input).result, [2, 5, 9, -1, -1])
+  const input = parseInput('{"events":[[3,2],[8,5],[6,5]],"ops":[["poll"],["update",3,9],["poll"],["poll"],["poll"]]}')
+  assert.deepEqual(buildTrace(input).result, [6, 3, 8, -1])
 })
 
 test('3885 rejects malformed operations', () => {

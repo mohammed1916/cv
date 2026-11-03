@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-cost-to-partition-a-binary-string/',
   complexity: 'Each segment is priced once with memoisation, so the work is about the number of segments. The visual caps s at 16 characters.',
   examples: [
-    { label: 'Example', input: '{"s":"1010","encCost":2,"flatCost":1}' },
+    { label: 'Example', input: '{"s":"1100","encCost":2,"flatCost":1}' },
     { label: 'Halves win', input: '{"s":"0110","encCost":3,"flatCost":2}' },
   ],
 }

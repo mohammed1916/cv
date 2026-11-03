@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/first-unique-number/',
   complexity: 'O(1) per add and O(k) per query, where k is the number of distinct values seen. The visualization caps the input at 20 operations.',
   examples: [
-    { label: 'Example', input: '{"ops":[["add",2],["first"],["add",3],["first"],["add",2],["first"],["add",5],["first"]]}' },
+    { label: 'Example', input: '{"ops":[["add",7],["first"],["add",4],["first"],["add",7],["first"],["add",9],["first"]]}' },
   ],
 }
 

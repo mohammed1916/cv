@@ -18,14 +18,14 @@ function checkFrames(result) {
   assert.deepEqual(result.frames.at(-1).rows, result.result)
 }
 
-const sample = '{"submissions":[{"sub_id":1,"parent_id":null},{"sub_id":2,"parent_id":null},{"sub_id":3,"parent_id":1},{"sub_id":4,"parent_id":1},{"sub_id":3,"parent_id":1},{"sub_id":5,"parent_id":2},{"sub_id":6,"parent_id":null}]}'
+const sample = '{"submissions":[{"sub_id":21,"parent_id":null},{"sub_id":22,"parent_id":null},{"sub_id":23,"parent_id":21},{"sub_id":24,"parent_id":21},{"sub_id":23,"parent_id":21},{"sub_id":25,"parent_id":22},{"sub_id":26,"parent_id":null}]}'
 
 test('1241 sample counts match the hand computation', () => {
   const result = run(sample)
   assert.deepEqual(result.result, [
-    { post_id: 1, number_of_comments: 2 },
-    { post_id: 2, number_of_comments: 1 },
-    { post_id: 6, number_of_comments: 0 },
+    { post_id: 21, number_of_comments: 2 },
+    { post_id: 22, number_of_comments: 1 },
+    { post_id: 26, number_of_comments: 0 },
   ])
   checkFrames(result)
 })

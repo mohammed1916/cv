@@ -5,8 +5,8 @@ import { buildTrace, parseInput } from './algorithm.js'
 const solve = s => buildTrace(s).result
 
 test('3746 worked examples', () => {
-  assert.equal(solve('aabbab'), 0)
-  assert.equal(solve('aaaa'), 4)
+  assert.equal(solve('aabaa'), 3)
+  assert.equal(solve('bbbab'), 3)
   assert.equal(solve('ab'), 0)
 })
 

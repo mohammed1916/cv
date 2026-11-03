@@ -22,10 +22,10 @@ const run = text => buildTrace(parseInput(text))
 
 test('1193 summarises each month and country, with NULL country as its own group', () => {
   assert.deepEqual(run(sample).result, [
-    { month: '2018-12', country: 'US', trans_count: 2, approved_count: 1, trans_total_amount: 3000, approved_total_amount: 1000 },
-    { month: '2019-01', country: 'DE', trans_count: 2, approved_count: 1, trans_total_amount: 2300, approved_total_amount: 2000 },
-    { month: '2019-01', country: 'US', trans_count: 1, approved_count: 1, trans_total_amount: 2000, approved_total_amount: 2000 },
-    { month: '2019-01', country: null, trans_count: 1, approved_count: 1, trans_total_amount: 500, approved_total_amount: 500 },
+    { month: '2018-12', country: 'US', trans_count: 2, approved_count: 1, trans_total_amount: 3400, approved_total_amount: 1100 },
+    { month: '2019-01', country: 'DE', trans_count: 2, approved_count: 1, trans_total_amount: 3000, approved_total_amount: 2600 },
+    { month: '2019-01', country: 'US', trans_count: 1, approved_count: 1, trans_total_amount: 1700, approved_total_amount: 1700 },
+    { month: '2019-01', country: null, trans_count: 1, approved_count: 1, trans_total_amount: 450, approved_total_amount: 450 },
   ])
   assertFrames(run(sample))
 })

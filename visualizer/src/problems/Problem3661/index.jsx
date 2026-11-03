@@ -15,7 +15,7 @@ const definition = {
   complexity: 'Sorting plus a two-state DP over the robots. Each interval count scans the walls in this teaching version.',
   examples: [
     { label: 'Three robots', input: '{"robots":[6,15,20],"distance":[4,3,2],"walls":[3,5,9,18,21,22]}' },
-    { label: 'Blocked shot', input: '{"robots":[1,2],"distance":[100,1],"walls":[10]}' },
+    { label: 'Blocked shot', input: '{"robots":[2,9],"distance":[9,1],"walls":[4,5,12]}' },
   ],
 }
 

@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-operations-to-reach-target-array/',
   complexity: 'O(n) per operation, and one operation per distinct mismatched value. The visualization stays small (n up to 8).',
   examples: [
-    { label: 'Two values', input: '{"nums":[1,2,3],"target":[2,1,3]}' },
-    { label: 'Repeated value', input: '{"nums":[4,1,4],"target":[5,1,4]}' },
+    { label: 'Two values', input: '{"nums":[2,4,2],"target":[4,2,3]}' },
+    { label: 'Repeated value', input: '{"nums":[3,1,3],"target":[4,1,2]}' },
   ],
 }
 

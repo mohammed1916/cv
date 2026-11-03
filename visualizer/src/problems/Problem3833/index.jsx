@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-dominant-indices/',
   complexity: 'O(n) time and O(1) extra space: one pass with a running suffix sum.',
   examples: [
-    { label: 'Decreasing', input: '{"nums":[5,4,3]}' },
+    { label: 'Decreasing', input: '{"nums":[6,4,3]}' },
     { label: 'Spike', input: '{"nums":[1,9,2,2]}' },
   ],
 }

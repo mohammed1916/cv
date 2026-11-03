@@ -26,6 +26,6 @@ export default function CountSubarraysWithKDistinctIntegers() {
     <output aria-label="Window counts">{step.l === null ? `Valid subarrays so far: ${step.count}` : `Window ${step.l} to ${step.r}: ${step.freq.map(([v, c]) => `${v} x${c}`).join(', ')} · total ${step.count}`}</output>
   </>} renderReasoning={() => <>
     <p>For each start, the window grows to the right and the program keeps a count for every value inside it.</p>
-    <p>A window is valid when it holds exactly k different values and every one of them appears at least m times.</p>
+    <p>A window scores when its distinct count reaches k and none of those values shows up fewer than m times.</p>
   </>} />
 }

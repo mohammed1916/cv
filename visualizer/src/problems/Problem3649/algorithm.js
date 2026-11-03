@@ -29,17 +29,17 @@ export function buildTrace({ nums }) {
         message: `Pair (${i}, ${j}) = (${a}, ${b}): min ${lowDiff} <= ${lowAbs} and max ${highDiff} >= ${highAbs} is ${perfect ? 'true' : 'false'}.` })
     }
   }
-  frames.push({ pythonLine: lineOf(PY_LINES, 'return len'), phase: 'done', activeLine: L('return the number of distinct'), pair: null, verdict: null, count: seen.size, message: `${seen.size} distinct perfect value pair${seen.size === 1 ? '' : 's'}.` })
+  frames.push({ pythonLine: lineOf(PY_LINES, 'return len'), phase: 'done', activeLine: L('report how many unique'), pair: null, verdict: null, count: seen.size, message: `${seen.size} unique qualifying value pair${seen.size === 1 ? '' : 's'}.` })
   return { input: { nums }, result: seen.size, frames }
 }
 
-export const code = `count distinct perfect value pairs
+export const code = `tally unique qualifying value pairs
   start with no pairs
   for each index pair i less than j
     let a and b be the two values
     check the two inequalities on their absolute values and sums
     if perfect then record the value pair
-  return the number of distinct perfect value pairs`.split('\n').map((text, index) => ({ line: index + 1, text }))
+  report how many unique qualifying value pairs there are`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def count_perfect_pairs(nums):

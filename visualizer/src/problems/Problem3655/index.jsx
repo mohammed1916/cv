@@ -16,7 +16,7 @@ const definition = {
   complexity: 'Simulates every visited index, so the work is the total number of stride steps across queries. The visualization caps the input size.',
   examples: [
     { label: 'Stride two', input: '{"nums":[3,5,2,7],"queries":[[0,3,2,2],[1,1,1,3]]}' },
-    { label: 'Single query', input: '{"nums":[1,1,1,1],"queries":[[0,3,1,5]]}' },
+    { label: 'Single query', input: '{"nums":[9,2,9,2],"queries":[[0,3,1,5]]}' },
   ],
 }
 

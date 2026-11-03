@@ -11,8 +11,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-operations-to-achieve-at-least-k-peaks/',
   complexity: 'This visual enumerates subsets of positions: O(2^n * n). A dynamic programme around the circle would be needed for large inputs. The visual caps nums at 10 values.',
   examples: [
-    { label: 'Example A', input: '{"nums":[2,1,2],"k":1}' },
-    { label: 'Example B', input: '{"nums":[4,5,3,6],"k":2}' },
+    { label: 'Example A', input: '{"nums":[3,1,3],"k":1}' },
+    { label: 'Example B', input: '{"nums":[1,5,2,6,3],"k":2}' },
   ],
 }
 

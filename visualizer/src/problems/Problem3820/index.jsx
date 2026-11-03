@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/pythagorean-distance-nodes-in-a-tree/',
   complexity: 'O(n) time: three breadth-first searches and one pass over the nodes.',
   examples: [
-    { label: 'Star', input: '{"n":4,"edges":[[0,1],[0,2],[0,3]],"x":1,"y":2,"z":3}' },
-    { label: 'Path', input: '{"n":4,"edges":[[0,1],[1,2],[2,3]],"x":0,"y":3,"z":2}' },
+    { label: 'Star', input: '{"n":5,"edges":[[0,1],[0,2],[0,3],[3,4]],"x":1,"y":2,"z":4}' },
+    { label: 'Path', input: '{"n":5,"edges":[[4,0],[0,1],[1,2],[2,3]],"x":4,"y":3,"z":2}' },
   ],
 }
 

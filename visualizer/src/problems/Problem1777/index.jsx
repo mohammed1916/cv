@@ -6,7 +6,7 @@ const inputLabel = 'Array of Products rows'
 const complexity = 'One pass over the rows with one output row per product. The visualizer caps the input at 12 rows.'
 const examples = [{
   label: 'Sample',
-  input: '[{"product_id":1,"store":"store1","price":95},{"product_id":1,"store":"store3","price":105},{"product_id":2,"store":"store2","price":70},{"product_id":3,"store":"store1","price":80},{"product_id":3,"store":"store2","price":85},{"product_id":3,"store":"store3","price":90}]',
+  input: '[{"product_id":7,"store":"store1","price":120},{"product_id":7,"store":"store3","price":135},{"product_id":8,"store":"store2","price":64},{"product_id":9,"store":"store1","price":88},{"product_id":9,"store":"store2","price":91},{"product_id":9,"store":"store3","price":97}]',
 }]
 
 const definition = {

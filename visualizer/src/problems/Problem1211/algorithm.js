@@ -92,12 +92,12 @@ export function buildTrace(input) {
 
 export const sampleInput = {
   queries: [
-    { query_name: 'Dog', result: 'Golden', position: 1, rating: 5 },
-    { query_name: 'Dog', result: 'Shepherd', position: 2, rating: 2 },
-    { query_name: 'Dog', result: 'Poodle', position: 3, rating: 6 },
-    { query_name: 'Cat', result: 'Siamese', position: 1, rating: 1 },
-    { query_name: 'Cat', result: 'Persian', position: 4, rating: 4 },
-    { query_name: 'Bird', result: 'Parrot', position: 2, rating: 3 },
+    { query_name: 'Dog', result: 'Beagle', position: 1, rating: 4 },
+    { query_name: 'Dog', result: 'Boxer', position: 2, rating: 1 },
+    { query_name: 'Dog', result: 'Terrier', position: 3, rating: 6 },
+    { query_name: 'Cat', result: 'Burmese', position: 1, rating: 1 },
+    { query_name: 'Cat', result: 'Abyssinian', position: 4, rating: 4 },
+    { query_name: 'Bird', result: 'Macaw', position: 2, rating: 3 },
     { query_name: null, result: 'Unknown', position: 5, rating: 1 },
   ],
 }

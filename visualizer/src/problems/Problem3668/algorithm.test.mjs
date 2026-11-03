@@ -5,8 +5,8 @@ import { buildTrace, parseInput } from './algorithm.js'
 const solve = (order, friends) => buildTrace({ order, friends }).result
 
 test('3668 worked examples', () => {
-  assert.deepEqual(solve([3, 1, 2, 5, 4], [1, 3, 4]), [3, 1, 4])
-  assert.deepEqual(solve([1, 4, 5, 3, 2], [2, 5]), [5, 2])
+  assert.deepEqual(solve([2, 5, 1, 4, 3], [1, 4]), [1, 4])
+  assert.deepEqual(solve([6, 3, 1, 2, 5, 4], [2, 6]), [6, 2])
 })
 
 test('3668 rejects a friend list that is not increasing', () => {

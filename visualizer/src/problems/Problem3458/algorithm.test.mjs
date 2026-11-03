@@ -15,8 +15,8 @@ test('3458 a whole-string block is not allowed', () => {
 })
 
 test('3458 zero blocks is always possible, and no block exists when letters repeat across the cut', () => {
-  assert.equal(solve('abeabe', 0), true)
-  assert.equal(solve('abeabe', 1), false)
+  assert.equal(solve('pqrpqr', 0), true)
+  assert.equal(solve('pqrpqr', 1), false)
 })
 
 test('3458 rejects k outside 0 to 26', () => {

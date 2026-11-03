@@ -38,7 +38,7 @@ export const inputLabel = 'Object with Project and Employee tables'
 export const complexity = 'O(n + m) with a lookup map from employee to experience. The visualizer caps each table at 12 rows.'
 export const examples = [{
   label: 'Sample',
-  input: '{"Project":[{"project_id":1,"employee_id":1},{"project_id":1,"employee_id":2},{"project_id":1,"employee_id":3},{"project_id":2,"employee_id":1},{"project_id":2,"employee_id":4},{"project_id":3,"employee_id":2},{"project_id":3,"employee_id":4}],"Employee":[{"employee_id":1,"name":"Ana","experience_years":3},{"employee_id":2,"name":"Ben","experience_years":10},{"employee_id":3,"name":"Cy","experience_years":2},{"employee_id":4,"name":"Dee","experience_years":5}]}',
+  input: '{"Project":[{"project_id":5,"employee_id":1},{"project_id":5,"employee_id":2},{"project_id":6,"employee_id":3},{"project_id":6,"employee_id":4},{"project_id":6,"employee_id":1},{"project_id":7,"employee_id":2},{"project_id":7,"employee_id":4}],"Employee":[{"employee_id":1,"name":"Ana","experience_years":3},{"employee_id":2,"name":"Ben","experience_years":10},{"employee_id":3,"name":"Cy","experience_years":2},{"employee_id":4,"name":"Dee","experience_years":5}]}',
 }]
 
 function tableRows(input, name, columns) {

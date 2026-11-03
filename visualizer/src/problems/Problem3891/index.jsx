@@ -12,8 +12,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-increase-to-maximize-special-indices/',
   complexity: 'O(n) time for the costs and the two-step DP. The visual caps nums at 12 values.',
   examples: [
-    { label: 'Example A', input: '{"nums":[1,2,2]}' },
-    { label: 'Example B', input: '{"nums":[2,1,1,3]}' },
+    { label: 'Example A', input: '{"nums":[3,3,1,3]}' },
+    { label: 'Example B', input: '{"nums":[4,4,1,2]}' },
   ],
 }
 

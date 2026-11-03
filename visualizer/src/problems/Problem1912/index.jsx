@@ -113,7 +113,7 @@ const definition = {
   url: 'https://leetcode.com/problems/design-movie-rental-system/',
   complexity: 'The visualization rebuilds sorted views per operation for clarity; the class form keeps sorted sets updated so each query takes logarithmic time.',
   examples: [
-    { label: 'Example', input: '{"entries":[[0,1,5],[0,2,6],[1,1,4],[2,1,3]],"ops":[["search",1],["rent",1,1],["report"],["drop",1,1],["search",1]]}' },
+    { label: 'Example', input: '{"entries":[[0,4,8],[0,5,9],[1,4,6],[2,4,2]],"ops":[["search",4],["rent",2,4],["report"],["drop",2,4],["search",4]]}' },
   ],
 }
 

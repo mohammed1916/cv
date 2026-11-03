@@ -2,11 +2,11 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { buildTrace, parseInput, phases, code, python } from './algorithm.js'
 
-const SAMPLE = '{"customer":[{"customer_id":1,"customer_name":"Ana"}],"seller":[{"seller_id":1,"seller_name":"Alice"},{"seller_id":2,"seller_name":"Bob"},{"seller_id":3,"seller_name":"Charlie"},{"seller_id":4,"seller_name":"Dana"}],"orders":[{"order_id":1,"sale_date":"2020-03-01","order_cost":1000,"customer_id":1,"seller_id":2},{"order_id":2,"sale_date":"2019-12-30","order_cost":500,"customer_id":1,"seller_id":1},{"order_id":3,"sale_date":"2021-01-03","order_cost":300,"customer_id":1,"seller_id":3}]}'
+const SAMPLE = '{"customer":[{"customer_id":1,"customer_name":"Noor"}],"seller":[{"seller_id":1,"seller_name":"Ilse"},{"seller_id":2,"seller_name":"Jun"},{"seller_id":3,"seller_name":"Kofi"},{"seller_id":4,"seller_name":"Mira"}],"orders":[{"order_id":1,"sale_date":"2020-03-01","order_cost":1000,"customer_id":1,"seller_id":2},{"order_id":2,"sale_date":"2019-12-30","order_cost":500,"customer_id":1,"seller_id":1},{"order_id":3,"sale_date":"2021-01-03","order_cost":300,"customer_id":1,"seller_id":3}]}'
 const EXPECTED = [
-  { seller_name: 'Alice' },
-  { seller_name: 'Charlie' },
-  { seller_name: 'Dana' },
+  { seller_name: 'Ilse' },
+  { seller_name: 'Kofi' },
+  { seller_name: 'Mira' },
 ]
 
 test('1607 sellers with no 2020 sale, sorted by name', () => {

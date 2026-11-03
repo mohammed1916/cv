@@ -5,7 +5,7 @@ import { buildTrace, parseInput } from './algorithm.js'
 const solve = text => buildTrace(parseInput(text)).result
 
 test('2635 transforms each value with its index', () => {
-  assert.deepEqual(solve('{"arr":[1,2,3]}'), [2, 5, 8])
+  assert.deepEqual(solve('{"arr":[5,0,4]}'), [10, 1, 10])
 })
 
 test('2635 an empty array maps to an empty array', () => {

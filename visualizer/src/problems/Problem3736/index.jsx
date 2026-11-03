@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-moves-to-equal-array-elements-iii/',
   complexity: 'O(n) time and O(1) extra space.',
   examples: [
-    { label: 'Example', input: '[2,1,3]' },
-    { label: 'Equal values', input: '[4,4,5]' },
+    { label: 'Example', input: '[3,7,4]' },
+    { label: 'Equal values', input: '[2,2,8,5]' },
   ],
 }
 

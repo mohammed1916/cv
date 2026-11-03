@@ -35,6 +35,6 @@ test('3655 random inputs match the naive oracle', () => {
 })
 
 test('3655 rejects a query whose range leaves the array', () => {
-  assert.throws(() => parseInput('{"nums":[1,2],"queries":[[0,2,1,3]]}'))
+  assert.throws(() => parseInput('{"nums":[1,2],"queries":[[0,2,3,3]]}'))
   assert.throws(() => parseInput('{"nums":[1,2],"queries":[[1,0,1,3]]}'))
 })

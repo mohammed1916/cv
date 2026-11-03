@@ -12,8 +12,8 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-prefix-connected-groups/',
   complexity: 'O(total length) time with a hash map from prefix to count.',
   examples: [
-    { label: 'Two groups', input: '{"words":["apple","apply","banana","bandit"],"k":2}' },
-    { label: 'Short words', input: '{"words":["bat","dog","dog","doggy","bat"],"k":3}' },
+    { label: 'Two groups', input: '{"words":["ant","anvil","bee","beetle","cat"],"k":2}' },
+    { label: 'Short words', input: '{"words":["sun","sunny","sea","tea","sea"],"k":3}' },
   ],
 }
 

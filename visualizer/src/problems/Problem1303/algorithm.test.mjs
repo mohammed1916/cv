@@ -5,14 +5,14 @@ import { buildTrace, parseInput, phases, sample } from './algorithm.js'
 const run = buildTrace(parseInput(JSON.stringify(sample)))
 
 test('1303 each employee gets the size of their team', () => {
-  // Team 8 has three employees, team 7 has two, team 2 has one.
+  // Team 40 has three employees, team 50 has two, team 60 has one.
   assert.deepEqual(run.result, [
-    { employee_id: 1, team_size: 3 },
-    { employee_id: 2, team_size: 3 },
-    { employee_id: 3, team_size: 3 },
-    { employee_id: 4, team_size: 2 },
-    { employee_id: 5, team_size: 1 },
-    { employee_id: 6, team_size: 2 },
+    { employee_id: 11, team_size: 3 },
+    { employee_id: 12, team_size: 3 },
+    { employee_id: 13, team_size: 3 },
+    { employee_id: 14, team_size: 2 },
+    { employee_id: 15, team_size: 1 },
+    { employee_id: 16, team_size: 2 },
   ])
 })
 

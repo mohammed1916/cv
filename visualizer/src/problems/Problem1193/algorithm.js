@@ -65,12 +65,12 @@ export const inputLabel = 'JSON object with a transactions table'
 export const complexity = 'Linear in the transaction rows, plus sorting the month and country groups.'
 const COLS = ['id', 'country', 'state', 'amount', 'trans_date']
 const SAMPLE = { transactions: [
-  { id: 1, country: 'US', state: 'approved', amount: 1000, trans_date: '2018-12-18' },
-  { id: 2, country: 'US', state: 'declined', amount: 2000, trans_date: '2018-12-19' },
-  { id: 3, country: 'US', state: 'approved', amount: 2000, trans_date: '2019-01-01' },
-  { id: 4, country: 'DE', state: 'approved', amount: 2000, trans_date: '2019-01-07' },
-  { id: 5, country: null, state: 'approved', amount: 500, trans_date: '2019-01-08' },
-  { id: 6, country: 'DE', state: 'declined', amount: 300, trans_date: '2019-01-09' },
+  { id: 1, country: 'US', state: 'approved', amount: 1100, trans_date: '2018-12-11' },
+  { id: 2, country: 'US', state: 'declined', amount: 2300, trans_date: '2018-12-14' },
+  { id: 3, country: 'US', state: 'approved', amount: 1700, trans_date: '2019-01-04' },
+  { id: 4, country: 'DE', state: 'approved', amount: 2600, trans_date: '2019-01-09' },
+  { id: 5, country: null, state: 'approved', amount: 450, trans_date: '2019-01-12' },
+  { id: 6, country: 'DE', state: 'declined', amount: 400, trans_date: '2019-01-15' },
 ] }
 export const examples = [{ label: 'Teaching sample', input: JSON.stringify(SAMPLE) }]
 

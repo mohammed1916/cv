@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-xor-score-subarray-queries/description/',
   complexity: 'O(n^2 + q) time and O(n^2) space. The visualization caps nums at 12 values.',
   examples: [
-    { label: 'Example', input: '{"nums":[2,8,4,32,16,1],"queries":[[0,2],[1,4],[0,5]]}' },
-    { label: 'Short', input: '{"nums":[0,7,3],"queries":[[0,2],[1,2]]}' },
+    { label: 'Example', input: '{"nums":[3,6,10,1],"queries":[[0,1],[1,3],[0,3]]}' },
+    { label: 'Short', input: '{"nums":[4,4,9],"queries":[[0,2],[1,1]]}' },
   ],
 }
 

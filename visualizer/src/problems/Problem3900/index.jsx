@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/longest-balanced-substring-after-one-swap/',
   complexity: 'This visual checks every window: O(n^2) with counting inside each window. A prefix-count scan would be faster for large strings. The visual caps s at 20 characters.',
   examples: [
-    { label: 'Example A', input: '{"s":"100001"}' },
-    { label: 'Example B', input: '{"s":"111"}' },
+    { label: 'Example A', input: '{"s":"1001000"}' },
+    { label: 'Example B', input: '{"s":"0011"}' },
   ],
 }
 

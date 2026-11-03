@@ -5,7 +5,7 @@ import { buildTrace, parseInput } from './algorithm.js'
 const solve = (nums1, nums2, k) => buildTrace({ nums1, nums2, k }).result
 
 test('3478 hand-checked case', () => {
-  assert.deepEqual(solve([3, 1, 3, 2], [5, 2, 7, 4], 2), [6, 0, 6, 2])
+  assert.deepEqual(solve([2, 6, 4, 1], [3, 8, 5, 9], 2), [9, 14, 12, 0])
   assert.deepEqual(solve([1, 5, 3], [4, 6, 2], 3), [0, 6, 4])
 })
 
@@ -14,7 +14,7 @@ test('3478 equal nums1 values never count each other', () => {
 })
 
 test('3478 the final trace frame reports the result', () => {
-  const trace = buildTrace({ nums1: [3, 1, 3, 2], nums2: [5, 2, 7, 4], k: 2 })
+  const trace = buildTrace({ nums1: [2, 6, 4, 1], nums2: [3, 8, 5, 9], k: 2 })
   assert.deepEqual(trace.frames.at(-1).answer, trace.result)
 })
 

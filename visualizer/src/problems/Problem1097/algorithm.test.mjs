@@ -20,9 +20,10 @@ test('1097 sample groups players by install date with next-day retention', () =>
   const trace = run(examples[0].input)
   checkFrames(trace)
   assert.deepEqual(trace.result, [
-    { install_dt: '2016-03-01', installs: 1, Day1_retention: '1.00' },
-    { install_dt: '2016-03-02', installs: 2, Day1_retention: '0.50' },
-    { install_dt: '2017-06-25', installs: 1, Day1_retention: '0.00' },
+    { install_dt: '2018-05-10', installs: 1, Day1_retention: '1.00' },
+    { install_dt: '2018-05-11', installs: 1, Day1_retention: '0.00' },
+    { install_dt: '2018-05-12', installs: 1, Day1_retention: '1.00' },
+    { install_dt: '2019-02-28', installs: 1, Day1_retention: '0.00' },
   ])
 })
 

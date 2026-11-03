@@ -15,9 +15,9 @@ const definition = {
   url: 'https://leetcode.com/problems/smallest-divisible-digit-product-ii/description/',
   complexity: 'Teaching model: prefix scan with memoised fewest-digit counts over exponent vectors. The visualization caps t at 1000000.',
   examples: [
-    { label: 'Raise a digit', input: '{"num":"1234","t":256}' },
-    { label: 'Already fits', input: '{"num":"12355","t":50}' },
-    { label: 'Impossible', input: '{"num":"11111","t":26}' },
+    { label: 'Raise a digit', input: '{"num":"3579","t":30}' },
+    { label: 'Already fits', input: '{"num":"2468","t":64}' },
+    { label: 'Impossible', input: '{"num":"7","t":11}' },
   ],
 }
 

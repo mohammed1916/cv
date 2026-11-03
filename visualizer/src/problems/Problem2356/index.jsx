@@ -59,7 +59,7 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-unique-subjects-taught-by-each-teacher/',
   complexity: 'One pass over the rows with a set per teacher. Repeated (teacher, subject) rows collapse inside the set.',
   examples: [
-    { label: 'Example', input: '{"Teacher":[[1,2,3],[1,2,4],[1,3,3],[2,4,1],[2,4,1],[2,1,1]]}' },
+    { label: 'Example', input: '{"Teacher":[[7,3,2],[7,5,2],[7,3,6],[8,4,1],[8,9,1],[9,2,5],[9,2,5]]}' },
   ],
 }
 

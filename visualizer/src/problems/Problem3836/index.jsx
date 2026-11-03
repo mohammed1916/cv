@@ -12,8 +12,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-score-using-exactly-k-pairs/',
   complexity: 'O(k * n * m) time and O(k * n * m) space for the full table shown.',
   examples: [
-    { label: 'Two pairs', input: '{"nums1":[1,3,2],"nums2":[4,5,1],"k":2}' },
-    { label: 'Negatives', input: '{"nums1":[-3,-2],"nums2":[1,2],"k":2}' },
+    { label: 'Two pairs', input: '{"nums1":[2,4,1],"nums2":[3,1,5,2],"k":2}' },
+    { label: 'Negatives', input: '{"nums1":[-4,1,-2],"nums2":[2,-1,3],"k":2}' },
   ],
 }
 

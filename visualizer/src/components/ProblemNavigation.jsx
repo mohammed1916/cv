@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { isFreeProblem } from "../access/policy";
 import ProblemInfoPanel from "./ProblemInfoPanel";
 import "./ProblemNavigation.css";
+import "./ProblemNavigation.list.css";
 
 const category = (problem) =>
   problem.tags.includes("Basics")

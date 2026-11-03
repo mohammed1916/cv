@@ -6,7 +6,7 @@ const solve = nums => buildTrace({ nums }).result
 
 test('3660 worked examples', () => {
   assert.deepEqual(solve([2, 1, 3]), [2, 2, 3])
-  assert.deepEqual(solve([2, 3, 1]), [3, 3, 3])
+  assert.deepEqual(solve([4, 1, 3, 2]), [4, 4, 4, 4])
 })
 
 test('3660 a peak passes its value to both neighbours', () => {

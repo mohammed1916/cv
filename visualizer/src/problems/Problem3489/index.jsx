@@ -16,7 +16,7 @@ const definition = {
   url: 'https://leetcode.com/problems/zero-array-transformation-iv/',
   complexity: 'O(k * n * cap) time for k queries, n indices and cap = max(nums); the visualization caps the sizes.',
   examples: [
-    { label: 'Example', input: '{"nums":[2,0,2],"queries":[[0,2,1],[0,2,1],[1,1,3]]}' },
+    { label: 'Example', input: '{"nums":[1,0,1],"queries":[[0,2,1],[2,2,2]]}' },
     { label: 'Needs three', input: '{"nums":[3,1],"queries":[[0,0,1],[0,0,2],[1,1,1]]}' },
   ],
 }

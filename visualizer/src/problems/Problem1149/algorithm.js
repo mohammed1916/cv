@@ -60,15 +60,14 @@ export const inputLabel = 'JSON object with a views table'
 export const complexity = 'Linear in the view rows, with one hash group per viewer and date.'
 const COLS = ['article_id', 'author_id', 'viewer_id', 'view_date']
 const SAMPLE = { views: [
-  { article_id: 1, author_id: 3, viewer_id: 5, view_date: '2019-08-01' },
-  { article_id: 2, author_id: 7, viewer_id: 5, view_date: '2019-08-01' },
-  { article_id: 1, author_id: 3, viewer_id: 6, view_date: '2019-08-02' },
-  { article_id: 1, author_id: 3, viewer_id: 6, view_date: '2019-08-02' },
-  { article_id: 3, author_id: 7, viewer_id: 8, view_date: '2019-08-03' },
-  { article_id: 4, author_id: 1, viewer_id: 8, view_date: '2019-08-04' },
-  { article_id: 2, author_id: 7, viewer_id: 9, view_date: '2019-08-01' },
-  { article_id: 2, author_id: 7, viewer_id: 9, view_date: '2019-08-01' },
-  { article_id: 5, author_id: 1, viewer_id: 9, view_date: '2019-08-01' },
+  { article_id: 7, author_id: 2, viewer_id: 11, view_date: '2020-03-05' },
+  { article_id: 8, author_id: 2, viewer_id: 11, view_date: '2020-03-05' },
+  { article_id: 7, author_id: 2, viewer_id: 12, view_date: '2020-03-06' },
+  { article_id: 7, author_id: 2, viewer_id: 12, view_date: '2020-03-06' },
+  { article_id: 9, author_id: 4, viewer_id: 13, view_date: '2020-03-07' },
+  { article_id: 9, author_id: 4, viewer_id: 13, view_date: '2020-03-08' },
+  { article_id: 8, author_id: 4, viewer_id: 14, view_date: '2020-03-09' },
+  { article_id: 9, author_id: 4, viewer_id: 14, view_date: '2020-03-09' },
 ] }
 export const examples = [{ label: 'Teaching sample', input: JSON.stringify(SAMPLE) }]
 
@@ -91,7 +90,7 @@ export function buildTrace(input) {
   const grouped = [...groups.values()].map(group => ({ viewer_id: group.viewer_id, view_date: group.view_date, distinct_articles: group.articles.size }))
   frames.push(frameAt('group', 'GROUP BY viewer_id, view_date', 'per_day = views', 'Count the distinct articles each viewer saw on each date.', ['viewer_id', 'view_date', 'distinct_articles'], grouped))
   const busy = grouped.filter(row => row.distinct_articles > 1)
-  frames.push(frameAt('filter', 'HAVING COUNT', 'busy = per_day', 'Repeated views of one article do not qualify.', ['viewer_id', 'view_date', 'distinct_articles'], busy))
+  frames.push(frameAt('filter', 'HAVING COUNT', 'busy = per_day', 'Two views of one article on one day count as a single article.', ['viewer_id', 'view_date', 'distinct_articles'], busy))
   const ids = [...new Set(busy.map(row => row.viewer_id))].map(id => ({ id }))
   frames.push(frameAt('distinct', 'SELECT DISTINCT viewer_id', 'ids = busy', 'Keep one row per qualifying viewer.', ['id'], ids))
   const result = [...ids].sort((a, b) => a.id - b.id)

@@ -16,9 +16,9 @@ function brute({ words, k }) {
 }
 
 test('3839 worked cases', () => {
-  assert.equal(solve({ words: ['apple', 'apply', 'banana', 'bandit'], k: 2 }), 2)
-  assert.equal(solve({ words: ['car', 'cat', 'cartoon'], k: 3 }), 1)
-  assert.equal(solve({ words: ['bat', 'dog', 'dog', 'doggy', 'bat'], k: 3 }), 2)
+  assert.equal(solve({ words: ['ant', 'anvil', 'bee', 'beetle', 'cat'], k: 2 }), 2)
+  assert.equal(solve({ words: ['fox', 'foxes', 'bird'], k: 3 }), 1)
+  assert.equal(solve({ words: ['sun', 'sunny', 'sea', 'tea', 'sea'], k: 3 }), 2)
 })
 
 test('3839 matches a union-find brute force', () => {

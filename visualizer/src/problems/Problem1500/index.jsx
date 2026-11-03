@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/design-a-file-sharing-system/',
   complexity: 'O(U) per join for U users in this scan version, and O(U) per request. A heap of free ids would make join faster.',
   examples: [
-    { label: 'Example', input: '{"ops":[["join",[1,2]],["join",[2,3]],["request",2,1],["leave",1],["join",[9]],["request",2,3]]}' },
+    { label: 'Example', input: '{"ops":[["join",[5,6]],["join",[6]],["request",2,5],["leave",1],["join",[8]],["request",2,6]]}' },
   ],
 }
 

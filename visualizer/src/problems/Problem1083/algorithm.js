@@ -2,12 +2,12 @@
 export const sql = `SELECT DISTINCT s.buyer_id
 FROM Sales s
 JOIN Product p ON p.product_id = s.product_id
-WHERE p.product_name = 'S8'
+WHERE p.product_name = 'Kettle'
   AND s.buyer_id NOT IN (
     SELECT s2.buyer_id
     FROM Sales s2
     JOIN Product p2 ON p2.product_id = s2.product_id
-    WHERE p2.product_name = 'iPhone'
+    WHERE p2.product_name = 'Toaster'
   )
 ORDER BY s.buyer_id`
 
@@ -21,8 +21,8 @@ const SQL = key => {
 export const python = `def s8_not_iphone(product, sales):
     names = product.set_index("product_id")["product_name"]
     named = sales.assign(product_name=sales["product_id"].map(names))
-    s8 = set(named.loc[named["product_name"] == "S8", "buyer_id"])
-    iphone = set(named.loc[named["product_name"] == "iPhone", "buyer_id"])
+    s8 = set(named.loc[named["product_name"] == "Kettle", "buyer_id"])
+    iphone = set(named.loc[named["product_name"] == "Toaster", "buyer_id"])
     return [{"buyer_id": b} for b in sorted(s8 - iphone)]`
 const PY_LINES = python.split('\n')
 const PY = key => {
@@ -47,7 +47,7 @@ export const inputLabel = 'Object with Product and Sales tables'
 export const complexity = 'O(n + m) with set membership for the two product names. The visualizer caps each table at 12 rows.'
 export const examples = [{
   label: 'Sample',
-  input: '{"Product":[{"product_id":1,"product_name":"S8","unit_price":699},{"product_id":2,"product_name":"iPhone","unit_price":999},{"product_id":3,"product_name":"Pixel","unit_price":500}],"Sales":[{"seller_id":1,"product_id":1,"buyer_id":10,"sale_date":"2019-01-01","quantity":1,"price":699},{"seller_id":1,"product_id":2,"buyer_id":11,"sale_date":"2019-01-02","quantity":1,"price":999},{"seller_id":2,"product_id":1,"buyer_id":11,"sale_date":"2019-01-03","quantity":1,"price":699},{"seller_id":2,"product_id":3,"buyer_id":12,"sale_date":"2019-01-04","quantity":1,"price":500},{"seller_id":3,"product_id":1,"buyer_id":12,"sale_date":"2019-01-05","quantity":2,"price":699}]}',
+  input: '{"Product":[{"product_id":1,"product_name":"Kettle","unit_price":699},{"product_id":2,"product_name":"Toaster","unit_price":999},{"product_id":3,"product_name":"Pixel","unit_price":500}],"Sales":[{"seller_id":1,"product_id":1,"buyer_id":10,"sale_date":"2019-01-01","quantity":1,"price":699},{"seller_id":1,"product_id":2,"buyer_id":11,"sale_date":"2019-01-02","quantity":1,"price":999},{"seller_id":2,"product_id":1,"buyer_id":11,"sale_date":"2019-01-03","quantity":1,"price":699},{"seller_id":2,"product_id":3,"buyer_id":12,"sale_date":"2019-01-04","quantity":1,"price":500},{"seller_id":3,"product_id":1,"buyer_id":12,"sale_date":"2019-01-05","quantity":2,"price":699}]}',
 }]
 
 function tableRows(input, name, columns) {
@@ -77,10 +77,10 @@ export function buildTrace(input) {
   const named = Sales.map(sale => ({ buyer_id: sale.buyer_id, product_id: sale.product_id, product_name: names.get(sale.product_id) ?? '' }))
   frames.push(frame('names', 'JOIN Product p', 'named =', 'Attach the product name to each sale.', ['buyer_id', 'product_id', 'product_name'], named))
 
-  const s8 = [...new Set(named.filter(row => row.product_name === 'S8').map(row => row.buyer_id))].sort((a, b) => a - b)
-  const iphone = new Set(named.filter(row => row.product_name === 'iPhone').map(row => row.buyer_id))
-  const candidates = s8.map(buyer_id => ({ buyer_id, product_name: 'S8' }))
-  frames.push(frame('scan', "p.product_name = 'S8'", 's8 =', `Collect ${s8.length} buyers of S8.`, ['buyer_id', 'product_name'], candidates))
+  const s8 = [...new Set(named.filter(row => row.product_name === 'Kettle').map(row => row.buyer_id))].sort((a, b) => a - b)
+  const iphone = new Set(named.filter(row => row.product_name === 'Toaster').map(row => row.buyer_id))
+  const candidates = s8.map(buyer_id => ({ buyer_id, product_name: 'Kettle' }))
+  frames.push(frame('scan', "p.product_name = 'Kettle'", 's8 =', `Collect ${s8.length} buyers of Kettle.`, ['buyer_id', 'product_name'], candidates))
 
   const excluded = candidates.map(row => ({ buyer_id: row.buyer_id, bought_iphone: iphone.has(row.buyer_id) ? 'yes' : 'no', kept: iphone.has(row.buyer_id) ? 'no' : 'yes' }))
   frames.push(frame('exclude', 'NOT IN', 'iphone =', 'Remove buyers who also bought the second product.', ['buyer_id', 'bought_iphone', 'kept'], excluded))

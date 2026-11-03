@@ -5,11 +5,11 @@ import { buildTrace, parseInput } from './algorithm.js'
 const solve = (arr, brr, k) => buildTrace({ arr, brr, k }).result
 
 test('3424 a worked case uses one split plus sorted pairing', () => {
-  assert.equal(solve([-7, 9, 5], [7, -2, -5], 2), 13)
+  assert.equal(solve([-6, 3, 8], [4, -2, 1], 3), 13)
 })
 
 test('3424 equal arrays cost nothing', () => {
-  assert.equal(solve([2, 1], [2, 1], 0), 0)
+  assert.equal(solve([4, 7], [4, 7], 0), 0)
   assert.equal(solve([5, 5], [5, 5], 3), 0)
 })
 

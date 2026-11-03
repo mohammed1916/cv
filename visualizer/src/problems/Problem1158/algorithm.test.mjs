@@ -22,10 +22,10 @@ const run = text => buildTrace(parseInput(text))
 
 test('1158 counts 2019 purchases for every user, including zeros', () => {
   assert.deepEqual(run(sample).result, [
-    { buyer_id: 1, join_date: '2018-02-09', orders_2019: 2 },
-    { buyer_id: 2, join_date: '2018-03-01', orders_2019: 0 },
-    { buyer_id: 3, join_date: '2019-01-19', orders_2019: 1 },
-    { buyer_id: 4, join_date: '2019-06-10', orders_2019: 1 },
+    { buyer_id: 1, join_date: '2017-05-12', orders_2019: 2 },
+    { buyer_id: 2, join_date: '2017-06-03', orders_2019: 0 },
+    { buyer_id: 3, join_date: '2019-02-14', orders_2019: 1 },
+    { buyer_id: 4, join_date: '2019-07-21', orders_2019: 1 },
   ])
   assertFrames(run(sample))
 })

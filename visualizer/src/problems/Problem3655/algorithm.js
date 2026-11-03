@@ -31,7 +31,7 @@ export function buildTrace({ nums, queries }) {
     }
   })
   const result = values.reduce((acc, x) => acc ^ x, 0n)
-  frames.push({ phase: 'done', query: null, at: -1, values: snapshot(), pythonLine: P('return result'), activeLine: L('return the XOR'), message: `XOR of all values is ${result}.` })
+  frames.push({ phase: 'done', query: null, at: -1, values: snapshot(), pythonLine: P('return result'), activeLine: L('return the XOR'), message: `XOR over all values is ${result}.` })
   return { input: { nums, queries }, result: Number(result), frames }
 }
 
@@ -41,7 +41,7 @@ export const code = [
   'while idx is at most r',
   'multiply nums at idx by v modulo 1000000007',
   'add k to idx',
-  'return the XOR of all nums',
+  'return the XOR over all nums',
 ].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 

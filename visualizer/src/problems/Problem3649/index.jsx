@@ -23,7 +23,7 @@ export default function NumberOfPerfectPairs() {
     <IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]}
       active={step.pair ? step.pair[1] : -1}
       roleAt={i => step.pair && (i === step.pair[0] || i === step.pair[1]) ? (step.verdict ? 'perfect' : 'pair') : ''} />
-    <output aria-label="Perfect pair count">{`distinct perfect value pairs: ${step.count}`}</output>
+    <output aria-label="Perfect pair count">{`unique qualifying value pairs: ${step.count}`}</output>
   </>} renderReasoning={({ step }) => <>
     <p>For absolute values p and q, the two quantities |a - b| and |a + b| are |p - q| and p + q in some order, so the test reduces to whether the larger absolute value is at most twice the smaller.</p>
     <p>{step.verdict === null ? 'The visualization still checks each pair directly against the statement inequalities.' : step.verdict ? 'This pair satisfies both inequalities.' : 'This pair fails one of the inequalities.'}</p>

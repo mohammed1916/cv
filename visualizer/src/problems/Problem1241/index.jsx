@@ -21,7 +21,7 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-comments-per-post/',
   complexity: 'O(n) after removing duplicates for n rows. The visualization caps the table at 12 rows.',
   examples: [
-    { label: 'Posts and replies', input: '{"submissions":[{"sub_id":1,"parent_id":null},{"sub_id":2,"parent_id":null},{"sub_id":3,"parent_id":1},{"sub_id":4,"parent_id":1},{"sub_id":3,"parent_id":1},{"sub_id":5,"parent_id":2},{"sub_id":6,"parent_id":null}]}' },
+    { label: 'Posts and replies', input: '{"submissions":[{"sub_id":21,"parent_id":null},{"sub_id":22,"parent_id":null},{"sub_id":23,"parent_id":21},{"sub_id":24,"parent_id":21},{"sub_id":23,"parent_id":21},{"sub_id":25,"parent_id":22},{"sub_id":26,"parent_id":null}]}' },
     { label: 'Single post', input: '{"submissions":[{"sub_id":9,"parent_id":null}]}' },
   ],
 }

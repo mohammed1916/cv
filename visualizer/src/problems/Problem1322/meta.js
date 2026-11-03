@@ -1,4 +1,3 @@
-// Knowledge-derived: the description, sample rows and walkthrough were written for this visualizer.
 // Difficulty is recorded from memory and not yet verified against the official page.
 export const meta = {
   number: '1322', title: 'Ads Performance', slug: 'ads-performance', difficulty: 'Easy',

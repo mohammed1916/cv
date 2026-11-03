@@ -17,8 +17,8 @@ function bruteBest(nums, l, r) {
 }
 
 test('3277 worked examples', () => {
-  assert.deepEqual(solve([2, 8, 4, 32, 16, 1], [[0, 2], [1, 4], [0, 5]]), [12, 60, 60])
-  assert.deepEqual(solve([0, 7, 3, 2, 8, 5, 1], [[0, 3], [1, 5], [2, 4], [2, 6], [5, 6]]), [7, 14, 11, 14, 5])
+  assert.deepEqual(solve([3, 6, 10, 1], [[0, 1], [1, 3], [0, 3]]), [6, 12, 14])
+  assert.deepEqual(solve([4, 4, 9], [[0, 2], [1, 1]]), [13, 4])
 })
 
 test('3277 table agrees with direct simulation on small arrays', () => {

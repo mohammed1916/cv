@@ -1,5 +1,5 @@
 export const meta = {
-  number: '3875', title: 'Construct Uniform Parity Array I', slug: 'construct-uniform-parity-array-i', difficulty: 'Unverified',
+  number: '3875', title: 'Construct Uniform Parity Array I', slug: 'construct-uniform-parity-array-i', difficulty: 'Easy',
   tags: ['Array', 'Math', 'Parity'], accent: '#0f766e',
-  description: 'Each slot keeps its value or subtracts another value, and all slots must share one parity. Teaching model is knowledge-derived: an odd helper turns every even value odd, so the answer is always true.',
+  description: 'Every position either keeps its number or takes away a different number from the list; the goal is one shared parity across the result.',
 }

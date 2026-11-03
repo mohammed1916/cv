@@ -42,7 +42,7 @@ export const code = `minimum removals to balance the array
   sort the values
   set j to 0 and best to 0
   for each smallest kept value i
-    while j is inside the array and sorted at j minus sorted at i is at most k times sorted at i
+    while j is inside the array and sorted at j minus sorted at i is no more than k times sorted at i
       move j forward
     if j minus i is larger than best then record it
   return the length minus best`.split('\n').map((text, index) => ({ line: index + 1, text }))

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { buildTrace, parseInput, phases } from './algorithm.js'
 
 const PHASE_IDS = new Set(phases.map(phase => phase.id))
-const SAMPLE = '{"Tree":[{"N":1,"P":2},{"N":2,"P":5},{"N":3,"P":2},{"N":4,"P":1},{"N":5,"P":null}]}'
+const SAMPLE = '{"Tree":[{"N":7,"P":null},{"N":3,"P":7},{"N":9,"P":3},{"N":4,"P":7}]}'
 
 function assertFrames(trace) {
   assert.ok(trace.frames.length > 1)
@@ -21,11 +21,10 @@ function assertFrames(trace) {
 test('3054 labels the sample tree Root, Inner and Leaf', () => {
   const trace = buildTrace(parseInput(SAMPLE))
   assert.deepEqual(trace.result, [
-    { N: 1, type: 'Inner' },
-    { N: 2, type: 'Inner' },
-    { N: 3, type: 'Leaf' },
+    { N: 3, type: 'Inner' },
     { N: 4, type: 'Leaf' },
-    { N: 5, type: 'Root' },
+    { N: 7, type: 'Root' },
+    { N: 9, type: 'Leaf' },
   ])
   assertFrames(trace)
 })

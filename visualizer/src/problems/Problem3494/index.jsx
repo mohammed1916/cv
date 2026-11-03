@@ -15,7 +15,7 @@ const definition = {
   complexity: 'O(n * m) time and O(n + m) space for n wizards and m potions.',
   examples: [
     { label: 'Example', input: '{"skill":[2,3,1],"mana":[4,2]}' },
-    { label: 'One potion', input: '{"skill":[1,1,1],"mana":[1]}' },
+    { label: 'One potion', input: '{"skill":[3,1],"mana":[2]}' },
   ],
 }
 

@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/counter-ii/',
   complexity: 'O(1) per call. The closure holds one number.',
   examples: [
-    { label: 'Mixed calls', input: '{"init":5,"ops":["increment","decrement","reset","increment"]}' },
+    { label: 'Mixed calls', input: '{"init":3,"ops":["increment","decrement","reset","increment"]}' },
     { label: 'Only decrements', input: '{"init":-2,"ops":["decrement","decrement"]}' },
   ],
 }

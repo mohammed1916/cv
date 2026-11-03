@@ -1,5 +1,5 @@
 // Teaching model (knowledge-derived): try candidate k values from large to small and
-// search every arrangement reachable by swaps whose values AND to exactly k.
+// explore every arrangement reachable by trades where the bitwise AND of the traded pair equals k.
 const lineOf = (lines, text) => lines.findIndex(line => line.includes(text)) + 1
 
 export function parseInput(text) {
@@ -14,7 +14,7 @@ export function parseInput(text) {
   return { nums }
 }
 
-// Breadth-first search over arrangements; a swap is allowed when the two values AND to k.
+// Breadth-first search over arrangements; a trade is allowed when the bitwise AND of its pair is k.
 function sortsWith(nums, k) {
   const goal = nums.map((_, i) => i).join(',')
   const seen = new Set([nums.join(',')])
@@ -39,16 +39,16 @@ export function buildTrace({ nums }) {
   const n = nums.length
   const sorted = nums.every((v, i) => v === i)
   const frames = []
-  frames.push({ pythonLine: PL('if all('), phase: 'start', activeLine: L('already sorted'), arrangement: nums, k: null, message: sorted ? 'The permutation is already sorted.' : 'Try candidate k values from the largest down.' })
+  frames.push({ pythonLine: PL('if all('), phase: 'start', activeLine: L('already in order'), arrangement: nums, k: null, message: sorted ? 'The permutation is already sorted.' : 'Try candidate k values from the largest down.' })
   if (sorted) {
-    frames.push({ pythonLine: PL('return 0'), phase: 'done', activeLine: L('already sorted'), arrangement: nums, k: 0, answer: 0, message: 'Already sorted, so the answer is 0.' })
+    frames.push({ pythonLine: PL('return 0'), phase: 'done', activeLine: L('already in order'), arrangement: nums, k: 0, answer: 0, message: 'Already sorted, so the answer is 0.' })
     return { input: { nums }, result: 0, frames }
   }
   let answer = null
   for (let k = n - 1; k >= 0 && answer === null; k--) {
     const { ok, explored } = sortsWith(nums, k)
     frames.push({ pythonLine: PL('for k in range'), phase: 'try', activeLine: L('for each candidate k'), arrangement: nums, k, explored, ok,
-      message: `k = ${k}: ${ok ? 'the array can be sorted' : 'sorting is unreachable'} (${explored} arrangements explored).` })
+      message: `k = ${k}: ${ok ? 'the arrangement reaches sorted order' : 'sorting is unreachable'} (${explored} arrangements explored).` })
     if (ok) answer = k
   }
   const result = answer ?? 0
@@ -57,9 +57,9 @@ export function buildTrace({ nums }) {
 }
 
 export const code = `maximum k that lets swaps sort the permutation
-  if nums is already sorted then return 0
+  when nums is already in order then return 0
   for each candidate k from n minus 1 down to 0
-    search every arrangement reachable by swaps where the two values AND to k
+    explore every arrangement reachable by trades whose pair ANDs to k
     if the search reaches the sorted array then return k
   return 0`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1

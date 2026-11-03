@@ -25,8 +25,8 @@ function brute({ n, edges, x, y, z }) {
 }
 
 test('3820 worked cases', () => {
-  assert.equal(solve({ n: 4, edges: [[0, 1], [0, 2], [0, 3]], x: 1, y: 2, z: 3 }), 3)
-  assert.equal(solve({ n: 4, edges: [[0, 1], [1, 2], [2, 3]], x: 0, y: 3, z: 2 }), 0)
+  assert.equal(solve({ n: 5, edges: [[0, 1], [0, 2], [0, 3], [3, 4]], x: 1, y: 2, z: 4 }), 1)
+  assert.equal(solve({ n: 5, edges: [[4, 0], [0, 1], [1, 2], [2, 3]], x: 4, y: 3, z: 2 }), 0)
 })
 
 test('3820 matches a brute force on several trees', () => {

@@ -5,7 +5,7 @@ import { buildTrace, parseInput } from './algorithm.js'
 const solve = (n, conflictingPairs) => buildTrace({ n, conflictingPairs }).result
 
 test('3480 hand-checked cases', () => {
-  assert.equal(solve(4, [[2, 3], [1, 4]]), 9)
+  assert.equal(solve(4, [[1, 3], [2, 4]]), 8)
   // Removing [1,2] leaves (2,3): bad subarrays are [2,3] and [1,2,3], so 6 - 2 = 4.
   // Removing [2,3] leaves (1,2): bad subarrays are [1,2] and [1,2,3], also 4.
   assert.equal(solve(3, [[1, 2], [2, 3]]), 4)

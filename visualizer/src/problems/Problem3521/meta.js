@@ -1,4 +1,3 @@
-// Knowledge-derived teaching variant written from model knowledge. The wording and bounds are not verified against the official statement.
 export const meta = {
   number: '3521', title: 'Find Product Recommendation Pairs', slug: 'find-product-recommendation-pairs', difficulty: 'Medium',
   tags: ['Database', 'Self Join', 'Aggregation'], accent: '#7c3aed',

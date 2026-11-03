@@ -41,5 +41,7 @@
 .algorithm-sequence__cell small, .algorithm-sequence__cell span { font-size: .65rem; color: var(--text-muted); }
 .algorithm-sequence__cell.is-active { outline: 2px solid var(--primary); outline-offset: 1px; }
 .algorithm-sequence__cell[data-role="written"], .algorithm-sequence__cell[data-role="shifted"] { border-color: var(--success); }
+.algorithm-sequence__cell[data-role="window"] { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 14%, var(--surface2)); }
+.algorithm-sequence__cell[data-role="l"], .algorithm-sequence__cell[data-role="r"] { border: 2px solid var(--primary); font-weight: 700; }
 .algorithm-sequence nav { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 8px; }
 @container (max-width: 300px) { .algorithm-sequence__cell { min-width: 42px; } }

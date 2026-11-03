@@ -16,7 +16,7 @@ function oracle(s) {
 
 test('3722 invented examples', () => {
   assert.equal(solve('gfec'), oracle('gfec'))
-  assert.equal(solve('zyx'), 'xyz')
+  assert.equal(solve('mkj'), 'jkm')
 })
 
 test('3722 matches the oracle', () => {

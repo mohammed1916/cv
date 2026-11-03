@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { buildTrace, parseInput, solve } from './algorithm.js'
 
 test('3809 worked cases', () => {
-  assert.deepEqual(solve({ towers: [[1, 2, 5], [2, 2, 5], [9, 9, 30]], center: [0, 0], radius: 5 }), [1, 2])
+  assert.deepEqual(solve({ towers: [[1, 3, 5], [2, 2, 5], [9, 9, 30]], center: [0, 0], radius: 5 }), [1, 3])
   assert.deepEqual(solve({ towers: [[10, 10, 3]], center: [0, 0], radius: 4 }), [-1, -1])
   assert.deepEqual(solve({ towers: [[3, 0, 7], [0, 3, 7], [1, 1, 2]], center: [0, 0], radius: 3 }), [0, 3])
 })

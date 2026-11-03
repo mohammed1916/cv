@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/construct-uniform-parity-array-ii/',
   complexity: 'O(n) time and O(n) space for the constructed array.',
   examples: [
-    { label: 'Odd helper works', input: '{"nums1":[1,4,7]}' },
-    { label: 'Fails', input: '{"nums1":[2,3]}' },
+    { label: 'Odd helper works', input: '{"nums1":[3,6,9]}' },
+    { label: 'Fails', input: '{"nums1":[5,4]}' },
   ],
 }
 

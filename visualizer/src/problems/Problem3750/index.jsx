@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-number-of-flips-to-reverse-binary-string/',
   complexity: 'O(log n) time and O(log n) space for the binary string.',
   examples: [
-    { label: 'Palindrome', input: '7' },
-    { label: 'Alternating', input: '10' },
+    { label: 'Palindrome', input: '6' },
+    { label: 'Alternating', input: '13' },
   ],
 }
 

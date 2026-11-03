@@ -63,8 +63,8 @@ export const inputLabel = 'JSON object with a products table of price changes'
 export const complexity = 'Sorting the changes by date, O(n log n) for n changes.'
 const COLS = ['product_id', 'new_price', 'change_date']
 const SAMPLE = { products: [
-  { product_id: 1, new_price: 50, change_date: '2019-08-14' },
-  { product_id: 1, new_price: 60, change_date: '2019-08-17' },
+  { product_id: 1, new_price: 40, change_date: '2019-08-12' },
+  { product_id: 1, new_price: 55, change_date: '2019-08-17' },
   { product_id: 2, new_price: 35, change_date: '2019-08-18' },
   { product_id: 3, new_price: 15, change_date: '2019-08-10' },
   { product_id: 3, new_price: 20, change_date: '2019-08-16' },

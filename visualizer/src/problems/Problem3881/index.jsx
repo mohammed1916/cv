@@ -12,8 +12,8 @@ const definition = {
   url: 'https://leetcode.com/problems/direction-assignments-with-exactly-k-visible-people/',
   complexity: 'O(k) binomial terms once the coefficients are known. The visual caps n at 30.',
   examples: [
-    { label: 'Example A', input: '{"n":3,"pos":1,"k":0}' },
-    { label: 'Example B', input: '{"n":3,"pos":2,"k":1}' },
+    { label: 'Example A', input: '{"n":4,"pos":1,"k":1}' },
+    { label: 'Example B', input: '{"n":4,"pos":3,"k":2}' },
   ],
 }
 

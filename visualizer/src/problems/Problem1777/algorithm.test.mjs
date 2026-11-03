@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { buildTrace, parseInput, phases, code } from './algorithm.js'
 
 const ids = phases.map(phase => phase.id)
-const sample = '[{"product_id":1,"store":"store1","price":95},{"product_id":1,"store":"store3","price":105},{"product_id":2,"store":"store2","price":70},{"product_id":3,"store":"store1","price":80},{"product_id":3,"store":"store2","price":85},{"product_id":3,"store":"store3","price":90}]'
+const sample = '[{"product_id":7,"store":"store1","price":120},{"product_id":7,"store":"store3","price":135},{"product_id":8,"store":"store2","price":64},{"product_id":9,"store":"store1","price":88},{"product_id":9,"store":"store2","price":91},{"product_id":9,"store":"store3","price":97}]'
 
 function checkFrames(trace) {
   assert.equal(trace.frames.at(-1).phase, 'done')
@@ -20,9 +20,9 @@ test('pivot puts one row per product with NULL for missing stores', () => {
   const trace = buildTrace(parseInput(sample))
   checkFrames(trace)
   assert.deepEqual(trace.result, [
-    { product_id: 1, store1: 95, store2: null, store3: 105 },
-    { product_id: 2, store1: null, store2: 70, store3: null },
-    { product_id: 3, store1: 80, store2: 85, store3: 90 },
+    { product_id: 7, store1: 120, store2: null, store3: 135 },
+    { product_id: 8, store1: null, store2: 64, store3: null },
+    { product_id: 9, store1: 88, store2: 91, store3: 97 },
   ])
 })
 

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-partition-factor/',
   complexity: 'Binary search over distinct distances with a bipartiteness check per probe. The visualization caps the point count at 8.',
   examples: [
-    { label: 'Square corners', input: '{"points":[[0,0],[0,2],[2,0],[2,2]]}' },
-    { label: 'Three points', input: '{"points":[[0,0],[0,1],[10,0]]}' },
+    { label: 'Four points', input: '{"points":[[0,0],[3,1],[1,4],[4,4]]}' },
+    { label: 'Three points', input: '{"points":[[1,1],[1,4],[7,2]]}' },
   ],
 }
 

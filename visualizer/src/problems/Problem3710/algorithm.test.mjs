@@ -22,8 +22,8 @@ function oracle(points) {
 }
 
 test('3710 worked examples', () => {
-  assert.equal(solve([[0, 0], [0, 2], [2, 0], [2, 2]]), 4)
-  assert.equal(solve([[0, 0], [0, 1], [10, 0]]), 11)
+  assert.equal(solve([[0, 0], [3, 1], [1, 4], [4, 4]]), 5)
+  assert.equal(solve([[1, 1], [1, 4], [7, 2]]), 8)
 })
 
 test('3710 two points give factor 0', () => {

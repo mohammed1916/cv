@@ -20,16 +20,16 @@ export const phases = [
 
 export const sample = {
   Employees: [
-    { id: 1, name: 'Alice' },
-    { id: 7, name: 'Bob' },
-    { id: 11, name: 'Meir' },
-    { id: 90, name: 'Winston' },
-    { id: 3, name: 'Jonathan' },
+    { id: 4, name: 'Rosa' },
+    { id: 8, name: 'Tariq' },
+    { id: 15, name: 'Ines' },
+    { id: 62, name: 'Oskar' },
+    { id: 9, name: 'Pauline' },
   ],
   EmployeeUNI: [
-    { id: 3, unique_id: 1 },
-    { id: 11, unique_id: 2 },
-    { id: 90, unique_id: 3 },
+    { id: 9, unique_id: 4 },
+    { id: 15, unique_id: 6 },
+    { id: 62, unique_id: 7 },
   ],
 }
 

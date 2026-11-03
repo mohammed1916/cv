@@ -1,4 +1,3 @@
-// Knowledge-derived teaching variant written from model knowledge. The wording and bounds are not verified against the official statement.
 export const meta = {
   number: '3570', title: 'Find Books with No Available Copies', slug: 'find-books-with-no-available-copies', difficulty: 'Easy',
   tags: ['Database', 'Left Join', 'Aggregation'], accent: '#0369a1',

@@ -16,7 +16,7 @@ const definition = {
   url: 'https://leetcode.com/problems/maximize-subarrays-after-removing-one-conflicting-pair/',
   complexity: 'O(m * (n + m)) time for m pairs and n elements; the visualization caps n at 10.',
   examples: [
-    { label: 'Example', input: '{"n":4,"conflictingPairs":[[2,3],[1,4]]}' },
+    { label: 'Example', input: '{"n":4,"conflictingPairs":[[1,3],[2,4]]}' },
     { label: 'Three pairs', input: '{"n":5,"conflictingPairs":[[1,3],[2,4],[3,5]]}' },
   ],
 }

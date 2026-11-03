@@ -4,7 +4,7 @@ import { buildTrace, parseInput } from './algorithm.js'
 
 const solve = n => buildTrace({ n }).result
 
-// Checks the rules from first principles: n(n-1) matches, each ordered pair once, no team on consecutive days.
+// Independent check: the right fixture count, each ordered fixture once, and no shared team between adjacent days.
 function isValid(n, schedule) {
   if (schedule.length !== n * (n - 1)) return false
   const seen = new Set()

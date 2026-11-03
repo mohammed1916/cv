@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/partition-array-into-k-distinct-groups/',
   complexity: 'O(n) time and O(n) space for the counts.',
   examples: [
-    { label: 'Example', input: '{"nums":[3,5,2,2],"k":2}' },
+    { label: 'Example', input: '{"nums":[4,1,4,3],"k":2}' },
     { label: 'Too many copies', input: '{"nums":[2,2,2,1],"k":2}' },
   ],
 }

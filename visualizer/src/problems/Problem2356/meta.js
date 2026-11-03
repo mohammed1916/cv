@@ -1,5 +1,5 @@
 export const meta = {
   number: '2356', title: 'Number of Unique Subjects Taught by Each Teacher', slug: 'number-of-unique-subjects-taught-by-each-teacher', difficulty: 'Easy',
   tags: ['Database', 'Aggregation', 'SQL'], accent: '#0e7490',
-  description: 'Count the distinct subjects each teacher covers from a table with repeated rows. Teaching model is knowledge-derived: group rows by teacher, collect the subjects into a set, and report the set size.',
+  description: 'Count the distinct subjects each teacher covers from a table with repeated rows.',
 }

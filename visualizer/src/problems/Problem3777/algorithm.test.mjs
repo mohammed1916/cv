@@ -5,9 +5,9 @@ import { buildTrace, parseInput } from './algorithm.js'
 const solve = (s, queries) => buildTrace({ s, queries }).result
 
 test('3777 hand-checked small cases', () => {
-  assert.deepEqual(solve('ABA', [[2, 0, 2]]), [0])
+  assert.deepEqual(solve('ABAB', [[2, 0, 3]]), [0])
   assert.deepEqual(solve('AAA', [[2, 0, 2]]), [2])
-  assert.deepEqual(solve('ABB', [[2, 0, 2], [1, 2], [2, 0, 2]]), [1, 0])
+  assert.deepEqual(solve('ABBA', [[2, 0, 3], [1, 1], [2, 0, 3]]), [1, 1])
 })
 
 // Independent oracle: try every kept subset of the substring and keep the longest alternating one.

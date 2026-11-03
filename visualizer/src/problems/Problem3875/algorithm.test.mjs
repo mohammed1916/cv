@@ -14,8 +14,8 @@ function oracle(nums) {
 }
 
 test('3875 worked examples', () => {
-  assert.equal(buildTrace(parseInput('{"nums1":[2,3]}')).result, true)
-  assert.equal(buildTrace(parseInput('{"nums1":[4,6]}')).result, true)
+  assert.equal(buildTrace(parseInput('{"nums1":[5,8,11]}')).result, true)
+  assert.equal(buildTrace(parseInput('{"nums1":[6,10]}')).result, true)
 })
 
 test('3875 the answer is always true, matching a brute force oracle on small sets', () => {

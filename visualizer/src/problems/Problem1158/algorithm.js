@@ -61,10 +61,10 @@ const USER_COLS = ['user_id', 'join_date', 'favorite_brand']
 const ORDER_COLS = ['order_id', 'order_date', 'item_id', 'buyer_id', 'seller_id']
 const SAMPLE = {
   users: [
-    { user_id: 1, join_date: '2018-02-09', favorite_brand: 'Lenovo' },
-    { user_id: 2, join_date: '2018-03-01', favorite_brand: 'Samsung' },
-    { user_id: 3, join_date: '2019-01-19', favorite_brand: 'Apple' },
-    { user_id: 4, join_date: '2019-06-10', favorite_brand: 'Samsung' },
+    { user_id: 1, join_date: '2017-05-12', favorite_brand: 'Dell' },
+    { user_id: 2, join_date: '2017-06-03', favorite_brand: 'Acer' },
+    { user_id: 3, join_date: '2019-02-14', favorite_brand: 'Apple' },
+    { user_id: 4, join_date: '2019-07-21', favorite_brand: 'Acer' },
   ],
   orders: [
     { order_id: 1, order_date: '2019-08-01', item_id: 10, buyer_id: 1, seller_id: 2 },

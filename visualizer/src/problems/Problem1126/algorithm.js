@@ -66,10 +66,10 @@ export const inputLabel = 'JSON object with an events table'
 export const complexity = 'Linear in the number of event rows after one pass to compute the averages.'
 const COLS = ['business_id', 'event_type', 'occurrences']
 const SAMPLE = { events: [
-  { business_id: 1, event_type: 'reviews', occurrences: 7 },
-  { business_id: 1, event_type: 'ads', occurrences: 11 },
-  { business_id: 1, event_type: 'page views', occurrences: 3 },
-  { business_id: 2, event_type: 'reviews', occurrences: 3 },
+  { business_id: 1, event_type: 'reviews', occurrences: 8 },
+  { business_id: 1, event_type: 'ads', occurrences: 5 },
+  { business_id: 1, event_type: 'page views', occurrences: 2 },
+  { business_id: 2, event_type: 'reviews', occurrences: 2 },
   { business_id: 2, event_type: 'ads', occurrences: 7 },
   { business_id: 3, event_type: 'reviews', occurrences: 3 },
   { business_id: 3, event_type: 'ads', occurrences: 1 },

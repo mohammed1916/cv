@@ -27,7 +27,7 @@ export default function GenerateSchedule() {
       roleAt={i => (i < step.at + 1 && step.slots[i] !== '·' ? 'placed' : '')} />
     <output aria-label="Schedule status">{`${run.input.n} teams, ${step.slots.filter(slot => slot !== '·').length} of ${step.slots.length} matches placed, ${step.ok === false ? 'backtracking' : step.ok ? 'complete' : 'searching'}`}</output>
   </>} renderReasoning={() => <>
-    <p>Each team plays every other team twice, once at home and once away, so there are n(n-1) ordered pairs to place.</p>
+    <p>Every pair of distinct teams gives two fixtures, one with each side hosting. Counting them all leaves n(n-1) fixtures to fit onto days.</p>
     <p>Place one pair per day. If the pair shares a team with the previous day, skip it. When no pair fits, undo the last placement and try another.</p>
   </>} />
 }

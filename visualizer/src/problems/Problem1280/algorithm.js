@@ -42,20 +42,20 @@ export const phases = [
 ]
 export const sample = {
   students: [
-    { student_id: 1, student_name: 'Alice' },
-    { student_id: 2, student_name: 'Bob' },
-    { student_id: 13, student_name: 'John' },
+    { student_id: 21, student_name: 'Mira' },
+    { student_id: 22, student_name: 'Tomas' },
+    { student_id: 35, student_name: 'Priya' },
   ],
-  subjects: ['Math', 'Physics', 'Programming'],
+  subjects: ['Biology', 'Chemistry', 'History'],
   exams: [
-    { student_id: 1, subject_name: 'Math' },
-    { student_id: 1, subject_name: 'Physics' },
-    { student_id: 1, subject_name: 'Physics' },
-    { student_id: 1, subject_name: 'Programming' },
-    { student_id: 2, subject_name: 'Programming' },
-    { student_id: 2, subject_name: 'Programming' },
-    { student_id: 13, subject_name: 'Physics' },
-    { student_id: 13, subject_name: 'Programming' },
+    { student_id: 21, subject_name: 'Biology' },
+    { student_id: 21, subject_name: 'Chemistry' },
+    { student_id: 21, subject_name: 'Chemistry' },
+    { student_id: 21, subject_name: 'History' },
+    { student_id: 22, subject_name: 'History' },
+    { student_id: 22, subject_name: 'History' },
+    { student_id: 35, subject_name: 'Chemistry' },
+    { student_id: 35, subject_name: 'History' },
   ],
 }
 

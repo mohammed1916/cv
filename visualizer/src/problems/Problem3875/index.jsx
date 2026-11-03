@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/construct-uniform-parity-array-i/',
   complexity: 'O(n) time and O(n) space for the constructed array.',
   examples: [
-    { label: 'Mixed', input: '{"nums1":[2,3]}' },
-    { label: 'All even', input: '{"nums1":[4,6]}' },
+    { label: 'Mixed', input: '{"nums1":[5,8,11]}' },
+    { label: 'All even', input: '{"nums1":[6,10]}' },
   ],
 }
 
