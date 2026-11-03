@@ -1,24 +1,26 @@
 {
   "number": "1184",
   "title": "Distance Between Bus Stops",
-  "goal": "Find the shorter route between two stops on a circular bus line.",
-  "strategy": "The two routes partition all edges. Sum the interval between the ordered stop indices and compare it with total minus that interval.",
+  "goal": "Pick the shorter of the two arcs between two stops on a loop of edge lengths.",
+  "strategy": "The two arcs use every edge exactly once. Sum the loop once, sum the forward arc, and subtract to get the other arc.",
   "phases": [
     "start",
-    "inspect",
-    "update",
+    "circle",
+    "forward",
+    "compare",
     "done"
   ],
   "phasePurposes": {
-    "start": "Find the shorter route between two stops on a circular bus line.",
-    "inspect": "The two routes partition all edges. Sum the interval between the ordered stop indices and compare it with total minus that interval.",
-    "update": "The two routes partition all edges. Sum the interval between the ordered stop indices and compare it with total minus that interval.",
-    "done": "Find the shorter route between two stops on a circular bus line."
+    "start": "The two arcs use every edge exactly once. Sum the loop once, sum the forward arc, and subtract to get the other arc.",
+    "circle": "The two arcs use every edge exactly once. Sum the loop once, sum the forward arc, and subtract to get the other arc.",
+    "forward": "The two arcs use every edge exactly once. Sum the loop once, sum the forward arc, and subtract to get the other arc.",
+    "compare": "The two arcs use every edge exactly once. Sum the loop once, sum the forward arc, and subtract to get the other arc.",
+    "done": "Pick the shorter of the two arcs between two stops on a loop of edge lengths."
   },
   "edgeCases": [
-    "Same stop needs no travel",
-    "Equal routes",
-    "Zero-weight edges"
+    "Same stop gives zero",
+    "Equal arcs",
+    "Zero-length edges"
   ],
   "checks": [],
   "inputRules": [
@@ -26,6 +28,6 @@
   ],
   "verification": {
     "status": "not-run",
-    "reason": "User requested implementation without tests or builds."
+    "reason": "Unit tests cover this algorithm module; the browser view has not been checked."
   }
 }

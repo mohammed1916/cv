@@ -1,10 +1,41 @@
-import authoredExamples0 from '../../config/examples/collection--1216.js';
+import { Fragment } from 'react'
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import { buildTrace, parseInput, code, python, phases, inputLabel, complexity, examples } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/choiceTablesBatch.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  phases, parse: parseInput, build: buildTrace, code, python, inputLabel, complexity, examples,
+  url: 'https://leetcode.com/problems/valid-palindrome-iii/',
+}
 
-const definition = { ...definitions[1216], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+const cell = { width: 34, height: 34, boxSizing: 'border-box', display: 'grid', placeItems: 'center', border: '1px solid var(--border)', fontFamily: 'monospace', fontSize: '.8rem' }
+
+export default function ValidPalindromeIII() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const { s } = run.input
+    const n = s.length
+    const { table, i, j } = step.snapshot
+    return <>
+      <div aria-label="Interval table" role="img" style={{ display: 'grid', gridTemplateColumns: `34px repeat(${n}, 34px)`, gap: 3, width: 'max-content' }}>
+        <span />
+        {[...s].map((ch, col) => <span key={`h${col}`} style={{ textAlign: 'center', fontFamily: 'monospace' }}>{ch}</span>)}
+        {table.map((row, r) => <Fragment key={`row${r}`}>
+          <span style={{ fontFamily: 'monospace', alignSelf: 'center' }}>{s[r]}</span>
+          {row.map((value, col) => {
+            const current = r === i && col === j
+            const filled = col >= r
+            return <span key={`${r}-${col}`} data-cell={`${r},${col}`} style={{
+              ...cell,
+              background: current ? '#facc15' : filled ? 'var(--surface2)' : 'transparent',
+              color: current ? '#1c1917' : 'var(--text)',
+              visibility: filled ? 'visible' : 'hidden',
+            }}>{filled ? value : ''}</span>
+          })}
+        </Fragment>)}
+      </div>
+      <p>Rows are start positions, columns are end positions. A cell holds the fewest deletions that make that substring a palindrome.</p>
+    </>
+  }} renderReasoning={({ step }) => <>
+    <p><strong>Why intervals:</strong> the cost of an interval depends only on the cost of smaller intervals inside it. Filling by increasing length guarantees those are ready.</p>
+    {step.snapshot.cost !== undefined && <p>Cost for the whole string: {step.snapshot.cost}.</p>}
+  </>} />
+}

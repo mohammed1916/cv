@@ -8,5 +8,5 @@ export const meta = {
     "Design"
   ],
   "accent": "#0891b2",
-  "description": "After each streamed character, determine whether any dictionary word is a current suffix."
+  "description": "Match streamed letters against stored words by walking a reversed trie."
 };

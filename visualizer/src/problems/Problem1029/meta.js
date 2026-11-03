@@ -8,5 +8,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Send exactly half the people to each city at minimum total cost."
+  "description": "Rank people by the cost gap and fill each city with half of them."
 };

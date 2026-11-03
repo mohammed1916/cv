@@ -1,27 +1,22 @@
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
 import IndexedSequence from "../../components/shared/IndexedSequence";
-import { code, python, pythonLineMap, parseInput, buildTrace } from "./algorithm";
+import { code, python, pythonLineMap, phases, parseInput, buildTrace } from "./algorithm";
 
 const definition = {
-  phases: [
-    { id: "setup", label: "Setup", description: "Start with an empty set of flagged transactions." },
-    { id: "scan", label: "Scan", description: "Visit each transaction in order." },
-    { id: "check", label: "Amount", description: "Flag transactions whose amount is over 1000." },
-    { id: "compare", label: "Compare", description: "Look for a same-name transaction in another city within 60 minutes." },
-    { id: "done", label: "Result", description: "Return the flagged transactions." },
-  ],
+  number: "1169",
+  phases,
   parse: parseInput,
   build: buildTrace,
   code,
   python,
   pythonLineMap,
-  inputLabel: 'JSON {"transactions": ["alice,20,800,mtv", ...]}',
+  inputLabel: 'JSON {"transactions": ["name,time,amount,city", ...]}',
   url: "https://leetcode.com/problems/invalid-transactions/description/",
   complexity: "O(n^2) time and O(n) space for n transactions. The visualization caps n at 50.",
   examples: [
-    { label: "Example 1", input: '{"transactions":["alice,20,800,mtv","alice,50,100,beijing"]}' },
-    { label: "Example 2", input: '{"transactions":["alice,20,800,mtv","alice,50,1200,mtv"]}' },
-    { label: "Example 3", input: '{"transactions":["alice,20,800,mtv","bob,50,1200,mtv"]}' },
+    { label: "Large amount", input: '{"transactions":["mia,5,1500,oslo","mia,900,20,oslo"]}' },
+    { label: "Close trips", input: '{"transactions":["ren,10,300,kyoto","ren,40,200,kyoto","ren,100,400,lima"]}' },
+    { label: "Same city", input: '{"transactions":["sam,0,90,nara","sam,30,90,nara"]}' },
   ],
 };
 
@@ -33,9 +28,9 @@ export default function InvalidTransactionsVisualizer() {
         <IndexedSequence
           label="Transactions"
           length={run.input.length}
-          active={step.i ?? -1}
+          active={step.snapshot.i ?? -1}
           valueAt={index => run.input[index]}
-          roleAt={index => (step.flagged || []).includes(index) ? "invalid" : index === step.j ? "compared" : ""}
+          roleAt={index => (step.snapshot.flagged || []).includes(index) ? "invalid" : index === step.snapshot.j ? "compared" : ""}
         />
       )}
       renderReasoning={({ step }) => <p>{step.message}</p>}

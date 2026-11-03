@@ -96,6 +96,14 @@ def zero_even_odd(n):
         t.join()
     return "".join(out)`
 
+export const phases = [
+  { id: 'start', label: 'Start', description: 'Start the zero, odd and even threads.' },
+  { id: 'zero', label: 'zero', description: 'zero() waits for its permit and prints 0.' },
+  { id: 'odd', label: 'odd', description: 'odd() prints the next odd number when released.' },
+  { id: 'even', label: 'even', description: 'even() prints the next even number when released.' },
+  { id: 'done', label: 'Return', description: 'Return the full sequence.' },
+]
+
 export const code = [
   "SHARED zeroPermit = 1, oddPermit = 0, evenPermit = 0",
   "FOR i = 1 TO n in the zero thread",

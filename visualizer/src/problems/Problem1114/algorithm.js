@@ -102,6 +102,13 @@ def print_in_order(nums):
         t.join()
     return "".join(out)`
 
+export const phases = [
+  { id: 'arrive', label: 'Arrive', description: 'A thread calls its method.' },
+  { id: 'wait', label: 'Wait', description: 'The method waits for the previous word to print.' },
+  { id: 'print', label: 'Print', description: 'The method prints its word and releases the next waiting method.' },
+  { id: 'done', label: 'Return', description: 'Return the full printed text.' },
+]
+
 export const code = [
   "SHARED firstDone = false, secondDone = false",
   "METHOD first()",

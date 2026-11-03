@@ -1,3 +1,11 @@
+export const phases = [
+  { id: "setup", label: "Setup", description: "Start with an empty set of flagged transactions." },
+  { id: "scan", label: "Scan", description: "Visit each transaction in order." },
+  { id: "check", label: "Amount", description: "Flag transactions whose amount is over 1000." },
+  { id: "compare", label: "Compare", description: "Look for a same-name transaction in another city within 60 minutes." },
+  { id: "done", label: "Result", description: "Return the flagged transactions." },
+];
+
 const PYTHON_LINES = [
   "def invalidTransactions(transactions):",
   "    parsed = []",
@@ -66,8 +74,9 @@ export function buildTrace(input) {
   const n = parsed.length;
   const flagged = new Set();
   const frames = [];
-  const snap = (phase, activeLine, message, extra = {}) => frames.push({
-    phase, activeLine, message, i: -1, j: -1, flagged: [...flagged].sort((a, b) => a - b), ...extra,
+  const snap = (phase, activeLine, message, { pythonLine, ...extra } = {}) => frames.push({
+    phase, activeLine, message, pythonLine,
+    snapshot: { i: -1, j: -1, matched: false, flagged: [...flagged].sort((a, b) => a - b), ...extra },
   });
 
   snap("setup", 2, "Start with no flagged transactions.", { pythonLine: 6 });

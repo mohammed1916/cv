@@ -1,8 +1,8 @@
 {
   "number": "1027",
   "title": "Longest Arithmetic Subsequence",
-  "goal": "Find the longest arithmetic subsequence with one constant consecutive difference.",
-  "strategy": "Each ending index owns a map from difference to best length. A pair extends an earlier subsequence with the same difference, or begins a new two-element subsequence when none exists.",
+  "goal": "Track equally spaced runs taken in index order and report the longest run.",
+  "strategy": "For each end index, keep the best run length for every difference seen so far.",
   "phases": [
     "start",
     "inspect",
@@ -10,10 +10,10 @@
     "done"
   ],
   "phasePurposes": {
-    "start": "Find the longest arithmetic subsequence with one constant consecutive difference.",
-    "inspect": "Each ending index owns a map from difference to best length. A pair extends an earlier subsequence with the same difference, or begins a new two-element subsequence when none exists.",
-    "update": "Each ending index owns a map from difference to best length. A pair extends an earlier subsequence with the same difference, or begins a new two-element subsequence when none exists.",
-    "done": "Find the longest arithmetic subsequence with one constant consecutive difference."
+    "start": "Begin with single values.",
+    "inspect": "Measure one earlier-to-current gap.",
+    "update": "Record the extended run under that gap.",
+    "done": "Report the longest run."
   },
   "edgeCases": [
     "Repeated equal values use difference zero",

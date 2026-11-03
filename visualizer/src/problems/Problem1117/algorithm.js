@@ -13,7 +13,7 @@ export function parseInput(text) {
   try {
     input = JSON.parse(text)
   } catch {
-    throw new Error('Input must be JSON, for example {"water":"HOH"}.')
+    throw new Error('Input must be JSON, for example {"water":"HHOHOH"}.')
   }
   if (input === null || typeof input !== "object" || Array.isArray(input)) {
     throw new Error('Input must be a JSON object with a "water" key.')
@@ -123,6 +123,14 @@ def build_h2o(water):
     for t in threads:
         t.join()
     return "".join(out)`
+
+export const phases = [
+  { id: 'arrive', label: 'Arrive', description: 'A hydrogen or oxygen thread starts.' },
+  { id: 'wait', label: 'Wait', description: 'The thread waits for a free permit for its element.' },
+  { id: 'barrier', label: 'Barrier', description: 'The thread holds a permit and waits until a full molecule has gathered.' },
+  { id: 'release', label: 'Release', description: 'The barrier opens and the group prints its atoms.' },
+  { id: 'done', label: 'Return', description: 'Return the released atoms in order.' },
+]
 
 export const code = [
   "SHARED hPermits = 2, oPermits = 1, barrier waits for 3 threads",

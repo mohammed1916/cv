@@ -1,8 +1,8 @@
 {
   "number": "1029",
   "title": "Two City Scheduling",
-  "goal": "Send exactly half the people to each city at minimum total cost.",
-  "strategy": "Compare each person by their relative A-versus-B cost, not their cheapest absolute cost. Give A seats to the smallest differences.",
+  "goal": "Split an even group between two cities while keeping the combined cost low.",
+  "strategy": "Rank people by how much more city B costs than city A, then fill city A with the favoured half.",
   "phases": [
     "start",
     "inspect",
@@ -10,10 +10,10 @@
     "done"
   ],
   "phasePurposes": {
-    "start": "Send exactly half the people to each city at minimum total cost.",
-    "inspect": "Compare each person by their relative A-versus-B cost, not their cheapest absolute cost. Give A seats to the smallest differences.",
-    "update": "Compare each person by their relative A-versus-B cost, not their cheapest absolute cost. Give A seats to the smallest differences.",
-    "done": "Send exactly half the people to each city at minimum total cost."
+    "start": "Read the cost pairs.",
+    "inspect": "Compare the two costs of each person.",
+    "update": "Fill the first half for A and the rest for B.",
+    "done": "Report the total."
   },
   "edgeCases": [
     "Two people must split between cities",

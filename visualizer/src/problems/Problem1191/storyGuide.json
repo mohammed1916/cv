@@ -1,24 +1,26 @@
 {
   "number": "1191",
   "title": "K-Concatenation Maximum Sum",
-  "goal": "Find the maximum subarray sum in k concatenated copies, allowing an empty subarray.",
-  "strategy": "At most two copies are needed to capture a boundary-crossing suffix and prefix. Additional complete middle copies help only if one copy has positive total.",
+  "goal": "Find the largest contiguous sum in the array repeated k times, where an empty run counts as 0.",
+  "strategy": "Compare runs inside one copy with runs crossing a boundary. Middle copies add value only when a copy has positive total.",
   "phases": [
     "start",
-    "inspect",
-    "update",
+    "one-copy",
+    "totals",
+    "combine",
     "done"
   ],
   "phasePurposes": {
-    "start": "Find the maximum subarray sum in k concatenated copies, allowing an empty subarray.",
-    "inspect": "At most two copies are needed to capture a boundary-crossing suffix and prefix. Additional complete middle copies help only if one copy has positive total.",
-    "update": "At most two copies are needed to capture a boundary-crossing suffix and prefix. Additional complete middle copies help only if one copy has positive total.",
-    "done": "Find the maximum subarray sum in k concatenated copies, allowing an empty subarray."
+    "start": "Compare runs inside one copy with runs crossing a boundary. Middle copies add value only when a copy has positive total.",
+    "one-copy": "Compare runs inside one copy with runs crossing a boundary. Middle copies add value only when a copy has positive total.",
+    "totals": "Compare runs inside one copy with runs crossing a boundary. Middle copies add value only when a copy has positive total.",
+    "combine": "Compare runs inside one copy with runs crossing a boundary. Middle copies add value only when a copy has positive total.",
+    "done": "Find the largest contiguous sum in the array repeated k times, where an empty run counts as 0."
   },
   "edgeCases": [
     "Negative total makes extra copies unhelpful",
-    "All negative allows the empty subarray",
-    "One copy has no wraparound"
+    "All negative values give 0",
+    "One copy has no boundary"
   ],
   "checks": [],
   "inputRules": [
@@ -26,6 +28,6 @@
   ],
   "verification": {
     "status": "not-run",
-    "reason": "User requested implementation without tests or builds."
+    "reason": "Unit tests cover this algorithm module; the browser view has not been checked."
   }
 }

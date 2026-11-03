@@ -16,12 +16,12 @@ const definition = {
   code,
   python,
   pythonLineMap,
-  inputLabel: 'JSON object with water: H and O letters, length 3n, 2n H and n O (e.g. {"water":"HOH"})',
+  inputLabel: 'JSON object with water: H and O letters, length 3n, 2n H and n O (e.g. {"water":"HHOHOH"})',
   url: "https://leetcode.com/problems/building-h2o/",
   complexity: "O(n) time and O(n) space for n molecules. Playback uses a fixed arrival order; any valid order forms groups of two H and one O.",
   examples: [
-    { label: "HOH", input: '{"water":"HOH"}' },
-    { label: "OOHHHH", input: '{"water":"OOHHHH"}' },
+    { label: "HHOHOH", input: '{"water":"HHOHOH"}' },
+    { label: "OHHHOH", input: '{"water":"OHHHOH"}' },
   ],
 };
 

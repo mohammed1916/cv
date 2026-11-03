@@ -81,6 +81,14 @@ def foo_bar(n):
         t.join()
     return "".join(out)`
 
+export const phases = [
+  { id: 'setup', label: 'Setup', description: 'Create the two permits.' },
+  { id: 'start', label: 'Start', description: 'Start both threads.' },
+  { id: 'foo', label: 'foo', description: 'The foo thread waits for its permit, prints foo, and releases bar.' },
+  { id: 'bar', label: 'bar', description: 'The bar thread waits for its permit, prints bar, and releases foo.' },
+  { id: 'done', label: 'Return', description: 'Return the printed text.' },
+]
+
 export const code = [
   "SHARED fooPermit = 1, barPermit = 0",
   "FOR EACH round in the foo thread",

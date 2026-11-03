@@ -5,7 +5,7 @@ export const meta = {
   difficulty: 'Hard',
   tags: ['Array', 'Hash Table', 'Depth-First Search', 'Breadth-First Search'],
   accent: '#0d9488',
-  description: 'Determine whether a path exists across a million-by-million grid with at most 200 blocked cells. Explore only far enough to prove neither endpoint is enclosed.',
+  description: 'Use two capped searches to test enclosure on a very large grid.',
 };
 
 export default meta;

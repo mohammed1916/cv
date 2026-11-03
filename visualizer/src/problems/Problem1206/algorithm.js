@@ -104,6 +104,26 @@ def skiplistOperations(operations, args):
 
 export const pythonLineMap = { 1: 66, 2: 68, 3: 70, 4: 73, 5: 75, 6: 76 }
 
+export const phases = [
+  { id: 'start', label: 'Start', description: 'Create an empty skiplist.' },
+  { id: 'add', label: 'Add', description: 'Insert a value at its sorted position.' },
+  { id: 'search', label: 'Search', description: 'Check whether a value is present.' },
+  { id: 'erase', label: 'Erase', description: 'Remove one copy of a value if present.' },
+  { id: 'done', label: 'Result', description: 'Return the results of every call.' },
+]
+
+export const inputLabel = 'Calls as JSON with operations and args (e.g. {"operations":["add","search"],"args":[1,1]})'
+export const complexity = 'The real skiplist runs in expected O(log n) per call. The visualization shows the sorted bottom level and accepts up to 40 calls.'
+export const examples = [
+  {
+    label: 'Add, search, erase',
+    input: JSON.stringify({
+      operations: ['add', 'add', 'add', 'search', 'add', 'search', 'erase', 'erase', 'search'],
+      args: [1, 2, 3, 0, 4, 1, 0, 1, 1],
+    }),
+  },
+]
+
 function lowerBound(list, value) {
   let lo = 0
   let hi = list.length
@@ -121,7 +141,7 @@ export function buildTrace(input) {
   const results = []
   const frames = []
   const push = (phase, activeLine, message, extra = {}) =>
-    frames.push({ phase, activeLine, message, values: [...values], results: [...results], ...extra })
+    frames.push({ phase, activeLine, message, values: [...values], results: [...results], snapshot: { values: [...values], results: [...results] }, ...extra })
 
   push('start', 1, 'Start with an empty skiplist. The bottom level is an empty sorted list.')
   operations.forEach((op, index) => {

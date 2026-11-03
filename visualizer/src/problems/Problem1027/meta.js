@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Find the longest arithmetic subsequence with one constant consecutive difference."
+  "description": "Track the best run for each difference ending at every index."
 };

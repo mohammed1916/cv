@@ -1,0 +1,27 @@
+{
+  "number": "1036",
+  "title": "Escape a Large Maze",
+  "goal": "Decide whether a route exists on a huge grid where only a few cells are blocked.",
+  "strategy": "A region enclosed by k walls holds at most k(k − 1)/2 cells, so two limited searches are enough.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count the walls.",
+    "inspect": "Expand from one end within the limit.",
+    "update": "Compare against the enclosure bound.",
+    "done": "Report yes or no."
+  },
+  "edgeCases": [],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "Algorithm tests were run by the conversion agent; the page itself is not browser-verified."
+  }
+}

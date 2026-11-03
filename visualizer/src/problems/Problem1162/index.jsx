@@ -1,10 +1,51 @@
-import authoredExamples0 from '../../config/examples/collection--1162.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import { phases, parseInput, buildTrace, code, python, pythonLineMap } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/dp.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+function DistanceGrid({ snapshot }) {
+  const { grid, dist, current, reached, best } = snapshot
+  const n = grid.length
+  const key = (r, c) => `${r},${c}`
+  const reachedSet = new Set((reached || []).map(([r, c]) => key(r, c)))
+  const bestKey = best ? key(...best) : null
+  return <div>
+    <div style={{ display: 'grid', gridTemplateColumns: `repeat(${n}, 44px)`, gap: 4 }}>
+      {grid.flatMap((row, r) => row.map((value, c) => {
+        const k = key(r, c)
+        const isCurrent = current && current[0] === r && current[1] === c
+        return <div key={k} style={{
+          height: 44, borderRadius: 4, border: '1px solid currentColor', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column',
+          background: value === 1 ? 'rgba(120,113,108,0.35)' : 'rgba(14,165,233,0.12)',
+          outline: isCurrent ? '3px solid #f59e0b' : reachedSet.has(k) ? '2px dashed #0891b2' : bestKey === k ? '2px solid #16a34a' : 'none',
+        }}>
+          <small>{value === 1 ? 'land' : 'water'}</small>
+          <strong>{dist[r][c] === -1 ? '·' : dist[r][c]}</strong>
+        </div>
+      }))}
+    </div>
+    <p>Amber: cell being expanded. Dashed: newly reached. Green: farthest water so far.</p>
+  </div>
+}
 
-const definition = { ...definitions[1162], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+const definition = {
+  phases,
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  pythonLineMap,
+  inputLabel: 'Grid as JSON rows, e.g. [[1,0],[0,0]] (1 = land, 0 = water)',
+  complexity: 'O(n²) time and space for an n by n grid. The trace accepts grids up to 6 by 6.',
+  examples: [
+    { label: 'Three land cells', input: '[[1,0,1],[0,0,0],[1,0,0]]' },
+    { label: 'Corner land', input: '[[1,0],[0,0]]' },
+    { label: 'All water', input: '[[0,0],[0,0]]' },
+  ],
+}
+
+export default function LandDistanceWorkspace() {
+  return <AlgorithmWorkspace
+    definition={definition}
+    renderVisual={({ step }) => <DistanceGrid snapshot={step.snapshot} />}
+    renderReasoning={({ step }) => <p>{step.message}</p>}
+  />
+}

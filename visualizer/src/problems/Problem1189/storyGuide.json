@@ -1,24 +1,24 @@
 {
   "number": "1189",
   "title": "Maximum Number of Balloons",
-  "goal": "Count complete copies of balloon obtainable from the available letters.",
-  "strategy": "Each copy needs two l characters and two o characters. Divide each letter supply by its demand and take the bottleneck.",
+  "goal": "Count how many complete copies of a fixed five-letter word the text can supply.",
+  "strategy": "Each copy needs a fixed number of each letter. Divide supply by demand per letter and take the smallest quotient.",
   "phases": [
     "start",
-    "inspect",
-    "update",
+    "count",
+    "limit",
     "done"
   ],
   "phasePurposes": {
-    "start": "Count complete copies of balloon obtainable from the available letters.",
-    "inspect": "Each copy needs two l characters and two o characters. Divide each letter supply by its demand and take the bottleneck.",
-    "update": "Each copy needs two l characters and two o characters. Divide each letter supply by its demand and take the bottleneck.",
-    "done": "Count complete copies of balloon obtainable from the available letters."
+    "start": "Each copy needs a fixed number of each letter. Divide supply by demand per letter and take the smallest quotient.",
+    "count": "Each copy needs a fixed number of each letter. Divide supply by demand per letter and take the smallest quotient.",
+    "limit": "Each copy needs a fixed number of each letter. Divide supply by demand per letter and take the smallest quotient.",
+    "done": "Count how many complete copies of a fixed five-letter word the text can supply."
   },
   "edgeCases": [
-    "Missing a required letter",
-    "Only one pair of l letters limits production",
-    "Unrelated characters"
+    "A required letter is absent",
+    "Two l letters allow one copy",
+    "Unrelated characters are ignored"
   ],
   "checks": [],
   "inputRules": [
@@ -26,6 +26,6 @@
   ],
   "verification": {
     "status": "not-run",
-    "reason": "User requested implementation without tests or builds."
+    "reason": "Unit tests cover this algorithm module; the browser view has not been checked."
   }
 }

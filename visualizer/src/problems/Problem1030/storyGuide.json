@@ -1,8 +1,8 @@
 {
   "number": "1030",
   "title": "Matrix Cells in Distance Order",
-  "goal": "List every matrix cell in nondecreasing distance from a chosen center.",
-  "strategy": "Manhattan distance is the sum of row and column offsets. Sorting by it groups equal-distance rings; tie order is unrestricted.",
+  "goal": "Order every grid position by its distance from a chosen position.",
+  "strategy": "Expand outward in breadth-first waves from the centre; each wave is one more step of distance.",
   "phases": [
     "start",
     "inspect",
@@ -10,10 +10,10 @@
     "done"
   ],
   "phasePurposes": {
-    "start": "List every matrix cell in nondecreasing distance from a chosen center.",
-    "inspect": "Manhattan distance is the sum of row and column offsets. Sorting by it groups equal-distance rings; tie order is unrestricted.",
-    "update": "Manhattan distance is the sum of row and column offsets. Sorting by it groups equal-distance rings; tie order is unrestricted.",
-    "done": "List every matrix cell in nondecreasing distance from a chosen center."
+    "start": "Begin at the centre.",
+    "inspect": "Pop the nearest unlisted cell.",
+    "update": "Queue its unseen neighbours.",
+    "done": "Report the order."
   },
   "edgeCases": [
     "Only one cell",

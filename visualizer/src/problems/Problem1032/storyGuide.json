@@ -1,8 +1,8 @@
 {
   "number": "1032",
   "title": "Stream of Characters",
-  "goal": "After each streamed character, determine whether any dictionary word is a current suffix.",
-  "strategy": "A reversed-word trie lets each query walk backward from the newest character. Stop at the first terminal or missing edge, retaining only the longest useful suffix.",
+  "goal": "Report after each streamed letter whether a stored word has just been completed.",
+  "strategy": "Store reversed words in a trie and walk backwards through the newest letters.",
   "phases": [
     "start",
     "inspect",
@@ -10,10 +10,10 @@
     "done"
   ],
   "phasePurposes": {
-    "start": "After each streamed character, determine whether any dictionary word is a current suffix.",
-    "inspect": "A reversed-word trie lets each query walk backward from the newest character. Stop at the first terminal or missing edge, retaining only the longest useful suffix.",
-    "update": "A reversed-word trie lets each query walk backward from the newest character. Stop at the first terminal or missing edge, retaining only the longest useful suffix.",
-    "done": "After each streamed character, determine whether any dictionary word is a current suffix."
+    "start": "Store reversed words.",
+    "inspect": "Read the newest letter.",
+    "update": "Walk backwards through the trie.",
+    "done": "Report the answers."
   },
   "edgeCases": [
     "One-letter matches are immediate",

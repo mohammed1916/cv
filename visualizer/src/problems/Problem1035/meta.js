@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Draw the largest number of equal-value connections without crossings."
+  "description": "Build a prefix table of the best non-crossing matches."
 };

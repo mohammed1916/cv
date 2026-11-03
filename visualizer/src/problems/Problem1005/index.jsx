@@ -1,10 +1,35 @@
-import authoredExamples0 from '../../config/examples/collection--1005.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/base.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '1005',
+  phases, parse: parseInput, build: buildTrace, code, python,
+  inputLabel: 'Object with nums and k (JSON)',
+  url: 'https://leetcode.com/problems/maximize-sum-of-array-after-k-negations/',
+  complexity: 'O(n log n) time for the sort, and O(n) space for the working copy.',
+  examples: [
+    { label: 'Flips then parity', input: '{"nums":[3,-7,-2,6],"k":3}' },
+    { label: 'Odd leftover', input: '{"nums":[5,-1,2],"k":2}' },
+    { label: 'Single negative', input: '{"nums":[-3],"k":2}' },
+  ],
+}
 
-const definition = { ...definitions[1005], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function MaximizeSum() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const { values, flipped, remaining, sum } = step.snapshot
+    return <>
+      <div aria-label="Working values" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+        {values.map((v, i) => <div key={i} style={{
+          minWidth: 48, textAlign: 'center', fontFamily: 'monospace', padding: '6px 8px', boxSizing: 'border-box', color: '#1c1917',
+          border: `${flipped.includes(i) ? 2 : 1}px solid ${flipped.includes(i) ? 'var(--text)' : 'var(--border)'}`,
+          background: flipped.includes(i) ? '#fde68a' : 'transparent',
+        }}>{v}</div>)}
+      </div>
+      <p>{`Flips remaining: ${remaining}`}{sum !== null ? `, current sum: ${sum}` : ''}</p>
+    </>
+  }} renderReasoning={({ step }) => <>
+    <p>{step.message}</p>
+    <p><strong>Greedy choice:</strong> a flip gains twice the magnitude of a negative value, so flipping the most negative values first is best.</p>
+    <p><strong>Parity:</strong> two flips on the same value cancel, so an odd leftover must still touch one value; the smallest magnitude costs least.</p>
+  </>} />
+}

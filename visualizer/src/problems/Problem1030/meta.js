@@ -8,5 +8,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "List every matrix cell in nondecreasing distance from a chosen center."
+  "description": "Expand outward from the centre in waves of growing distance."
 };
