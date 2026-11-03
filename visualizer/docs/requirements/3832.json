@@ -3,34 +3,37 @@
   "title": "Find Users with Persistent Behavior Patterns",
   "source": "https://leetcode.com/problems/find-users-with-persistent-behavior-patterns/description/",
   "checkedOn": "2026-11-03",
-  "sourceKind": "community-or-prior-note",
+  "sourceKind": "user-paste (local reference: local-reference/leetcode/user-pastes-326/3832.txt)",
   "contentKind": "original-requirements-summary",
   "problemClass": "SQL",
   "summary": "Find runs of at least five consecutive dates on which a user performs exactly one action and that action is constant; for each user choose the longest run, then lexicographically smallest action, then latest start date; return user_id, action, streak_length, start_date, end_date sorted by length descending then user_id ascending.",
-  "inputFormat": "activity(user_id int, action_date date, action text), unique by all three fields.",
-  "outputFormat": "user_id, action, streak_length, start_date, end_date.",
-  "officialConstraints": "user_id integer; action_date date; action text.",
-  "tieRules": "Longest run, then lexicographically smallest action, then latest start date.",
-  "edgeRules": "A date with more than one action type breaks a run.",
+  "inputFormat": "activity(user_id int, action_date date, action varchar); primary key (user_id, action_date, action).",
+  "outputFormat": "Columns: user_id, action, streak_length, start_date, end_date. One row per qualifying user. Ordered by streak_length descending, then user_id ascending.",
+  "officialConstraints": "Schema types as above; action_date values are calendar dates. Other bounds: unknown.",
+  "tieRules": "Per user: longest qualifying run first; then lexicographically smallest action; then latest start date (as the statement says).",
+  "edgeRules": "A date with more than one action row for the user breaks a run. A run is consecutive calendar dates (day gap of exactly 1) with the same single action. Only runs of length 5 or more qualify.",
   "examples": [],
-  "exampleStatus": "authored-reference (validation only; not for publication as source examples)",
+  "exampleStatus": "reference-only (user paste); not for publication; authored examples to be written for the website",
   "requirementsVerified": false,
-  "sourceAttempt": "Prior note recorded an official-page-via-web-tool check on 2026-11-02 (official page via web tool; prior note marked requirementsVerified true). Not reconfirmed this pass: official page returns 403 on 2026-11-03.",
+  "sourceAttempt": "User paste of the statement with schemas and example (2026-11-03). Official page returns 403 to WebFetch on 2026-11-03, so official confirmation is pending.",
   "factsPresent": [
-    "run = consecutive calendar dates with exactly one distinct action each day",
-    "minimum length 5"
+    "run = consecutive calendar dates with exactly one action each day, same action throughout",
+    "minimum length 5",
+    "schema and primary key",
+    "output columns and ordering",
+    "tie order as stated"
   ],
   "factsMissing": [
-    "table schema",
-    "run definition",
-    "selection rule",
-    "output columns and ordering"
+    "whether the statement's tie-break 'latest start date' is correct: both user solutions pick the earliest start date",
+    "whether the lexicographic action tie-break is required: neither user solution applies it"
   ],
   "questions": [
-    "whether 'consecutive dates' means calendar days (no gaps) rather than consecutive rows; the note implies calendar days"
+    "Confirm the final tie-break: statement says latest start date after lexicographically smallest action; user's MySQL and pandas solutions both use earliest start date. Which is correct?",
+    "Confirm that the lexicographically smallest action tie-break applies when two runs of the same length exist for one user; neither user solution uses it."
   ],
-  "nextAction": "Confirm on the official statement that consecutive means no calendar-day gaps.",
+  "nextAction": "Resolve the two tie-break questions; then the requirement is complete and can be verified against the official statement.",
   "previousSourceRecord": {
     "requirementsVerifiedClaimedByPriorNote": true
-  }
+  },
+  "officialUrl": "https://leetcode.com/problems/find-users-with-persistent-behavior-patterns/"
 }
