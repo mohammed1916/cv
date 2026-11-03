@@ -1,0 +1,21 @@
+.spaced-sum { display: grid; gap: 12px; color: var(--text, #1f2937); font-size: 14px; }
+.spaced-sum__query { font-weight: 600; }
+.spaced-sum__row { display: flex; flex-wrap: wrap; gap: 6px; }
+.spaced-sum__cell {
+  min-width: 52px; padding: 6px 4px; border-radius: 8px; text-align: center;
+  border: 2px solid #cbd5e1; background: #f8fafc; display: grid; gap: 2px;
+}
+.spaced-sum__cell.is-target { border-style: dashed; border-color: #b45309; }
+.spaced-sum__cell.is-visited { background: #0f766e; color: #fff; border-color: #0f766e; }
+.spaced-sum__cell.is-current { outline: 3px solid #b45309; outline-offset: 2px; }
+.spaced-sum__index { font-size: 11px; opacity: 0.7; }
+.spaced-sum__value { font-weight: 700; font-size: 16px; }
+.spaced-sum__mark { font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; }
+.spaced-sum__legend { margin: 0; font-size: 12px; opacity: 0.8; }
+.spaced-sum__stats { display: flex; gap: 16px; margin: 0; }
+.spaced-sum__stats div { display: grid; }
+.spaced-sum__stats dt { font-size: 12px; opacity: 0.7; }
+.spaced-sum__stats dd { margin: 0; font-weight: 700; font-size: 18px; }
+.spaced-sum__answers { margin: 0; padding-left: 20px; }
+.spaced-sum__answers li.is-done { font-weight: 700; color: #0f766e; }
+@media (max-width: 480px) { .spaced-sum__cell { min-width: 44px; } }
