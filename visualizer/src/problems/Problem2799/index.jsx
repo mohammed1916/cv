@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/count-complete-subarrays-in-an-array/',
   complexity: 'O(n) expected time with a frequency map. The visualization caps input at 12 values.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,3,1,2,2]}' },
-    { label: 'Equal values', input: '{"nums":[5,5,5,5]}' },
+    { label: 'Example 1', input: '{"nums":[1,2,3,1,2,3]}' },
+    { label: 'Equal values', input: '{"nums":[6,6,6]}' },
   ],
 }
 

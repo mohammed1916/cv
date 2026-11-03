@@ -454,7 +454,7 @@ const withMessages = frames => frames.map(frame => ({ ...frame, message: frame.m
 export function parseInput(text) {
   let data = text
   if (typeof text === "string") {
-    try { data = JSON.parse(text.trim()) } catch { throw new Error('Input must be JSON, e.g. {"gas": [1,2,3,4,5], "cost": [3,4,5,1,2]}.') }
+    try { data = JSON.parse(text.trim()) } catch { throw new Error('Input must be JSON, e.g. {"gas": [2,5,1,3], "cost": [3,2,4,1]}.') }
   }
   if (!data || typeof data !== "object" || !Array.isArray(data.gas) || !Array.isArray(data.cost)) throw new Error('Input must be an object with "gas" and "cost" arrays.')
   const { gas, cost } = data

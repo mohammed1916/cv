@@ -7,17 +7,17 @@ import "./GasStationVisualizer.css";
 
 const DEFAULT_EXAMPLES = [
   {
-    label: "Example 1 (Start 3)",
+    label: "Example 1 (Start 1)",
     values: {
-      gas: "[1, 2, 3, 4, 5]",
-      cost: "[3, 4, 5, 1, 2]",
+      gas: "[2, 5, 1, 3]",
+      cost: "[3, 2, 4, 1]",
     },
   },
   {
     label: "Example 2 (Impossible)",
     values: {
-      gas: "[2, 3, 4]",
-      cost: "[3, 4, 3]",
+      gas: "[3, 1, 4]",
+      cost: "[4, 2, 3]",
     },
   },
   {

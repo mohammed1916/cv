@@ -35,7 +35,7 @@ export function parseInput(text) {
   try {
     data = JSON.parse(text)
   } catch {
-    throw new Error('Input must be valid JSON, for example {"length": 1000, "width": 35, "height": 700, "mass": 300}')
+    throw new Error('Input must be valid JSON, for example {"length": 400, "width": 90, "height": 60, "mass": 120}')
   }
   if (!data || typeof data !== 'object' || Array.isArray(data)) throw new Error('Input must be a JSON object')
   for (const key of ['length', 'width', 'height']) {

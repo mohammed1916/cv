@@ -22,8 +22,8 @@ export const code = [
 export const pythonLineMap = { 1: 2, 2: 4, 3: 5, 4: 6, 5: 8 };
 
 export const examples = [
-  { label: "[3,2,4,1,5]", input: '{"flips":[3,2,4,1,5]}' },
-  { label: "[4,1,2,3]", input: '{"flips":[4,1,2,3]}' },
+  { label: "[2,1,3,5,4]", input: '{"flips":[2,1,3,5,4]}' },
+  { label: "[2,4,1,3]", input: '{"flips":[2,4,1,3]}' },
   { label: "Single", input: '{"flips":[1]}' },
 ];
 
@@ -32,7 +32,7 @@ export function parseInput(text) {
   try {
     data = typeof text === "string" ? JSON.parse(text) : text;
   } catch {
-    throw new Error('Input must be a JSON object, e.g. {"flips":[3,2,4,1,5]}');
+    throw new Error('Input must be a JSON object, e.g. {"flips":[2,4,1,3]}');
   }
   if (data === null || typeof data !== "object" || Array.isArray(data)) throw new Error("Input must be a JSON object with a flips array");
   const { flips } = data;

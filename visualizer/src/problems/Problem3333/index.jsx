@@ -18,9 +18,9 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-original-typed-string-ii/',
   complexity: 'O(n * k) time and O(k) space for n runs, using prefix sums over lengths below k. The visualization caps word length at 40 and k at 40.',
   examples: [
-    { label: 'Example 1', input: '{"word": "aabbccdd", "k": 7}' },
-    { label: 'Example 2', input: '{"word": "aabbccdd", "k": 8}' },
-    { label: 'Example 3', input: '{"word": "aaabbb", "k": 3}' },
+    { label: 'Example 1', input: '{"word": "mmnnnoop", "k": 6}' },
+    { label: 'Example 2', input: '{"word": "mmnnnoop", "k": 8}' },
+    { label: 'Example 3', input: '{"word": "abbbcc", "k": 2}' },
   ],
 }
 

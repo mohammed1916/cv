@@ -17,12 +17,12 @@ const definition = {
   code,
   python,
   pythonLineMap,
-  inputLabel: 'JSON object with nums, a permutation of [1, 2, 3] (e.g. {"nums":[1,3,2]})',
+  inputLabel: 'JSON object with nums, a permutation of [1, 2, 3] (e.g. {"nums":[2,1,3]})',
   url: "https://leetcode.com/problems/print-in-order/",
   complexity: "Each method waits at most once. Real thread timing is unpredictable; the playback replays one deterministic arrival order.",
   examples: [
-    { label: "nums = [1,2,3]", input: '{"nums":[1,2,3]}' },
-    { label: "nums = [1,3,2]", input: '{"nums":[1,3,2]}' },
+    { label: "nums = [2,1,3]", input: '{"nums":[2,1,3]}' },
+    { label: "nums = [3,2,1]", input: '{"nums":[3,2,1]}' },
   ],
 };
 

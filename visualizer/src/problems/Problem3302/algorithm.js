@@ -64,7 +64,7 @@ export function parseInput(text) {
   try {
     data = JSON.parse(text);
   } catch {
-    throw new Error('Input must be JSON, for example {"word1": "vbcca", "word2": "abc"}');
+    throw new Error('Input must be JSON, for example {"word1": "bzcdbc", "word2": "bcd"}');
   }
   if (!data || typeof data !== 'object' || Array.isArray(data)) {
     throw new Error('Input must be a JSON object with word1 and word2');

@@ -14,12 +14,12 @@ const definition = {
   build: buildTrace,
   code,
   python,
-  inputLabel: 'Box object (JSON, e.g. {"length": 1000, "width": 35, "height": 700, "mass": 300})',
+  inputLabel: 'Box object (JSON, e.g. {"length": 400, "width": 90, "height": 60, "mass": 120})',
   url: 'https://leetcode.com/problems/categorize-box-according-to-criteria/',
   complexity: 'O(1) time and O(1) space: a fixed number of comparisons.',
   examples: [
-    { label: 'Heavy only', input: '{"length": 1000, "width": 35, "height": 700, "mass": 300}' },
-    { label: 'Neither', input: '{"length": 200, "width": 50, "height": 800, "mass": 50}' },
+    { label: 'Heavy only', input: '{"length": 400, "width": 90, "height": 60, "mass": 120}' },
+    { label: 'Neither', input: '{"length": 300, "width": 20, "height": 40, "mass": 12}' },
   ],
 }
 

@@ -18,10 +18,10 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-lexicographically-smallest-valid-sequence/',
   complexity: 'O(n + m) time and O(n + m) space for word1 length n and word2 length m. The visualization caps word1 at 30 characters.',
   examples: [
-    { label: 'Example 1', input: '{"word1": "vbcca", "word2": "abc"}' },
-    { label: 'Example 2', input: '{"word1": "bacdc", "word2": "abc"}' },
-    { label: 'Example 3', input: '{"word1": "aaaaaa", "word2": "aaabc"}' },
-    { label: 'Example 4', input: '{"word1": "abc", "word2": "ab"}' },
+    { label: 'Example 1', input: '{"word1": "bzcdbc", "word2": "bcd"}' },
+    { label: 'Example 2', input: '{"word1": "zzmmp", "word2": "mp"}' },
+    { label: 'Example 3', input: '{"word1": "bbbaa", "word2": "cccc"}' },
+    { label: 'Example 4', input: '{"word1": "xbzd", "word2": "bd"}' },
   ],
 }
 

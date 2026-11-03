@@ -19,7 +19,7 @@ const definition = {
   code,
   python,
   pythonLineMap,
-  inputLabel: "Gas and cost (JSON object, e.g. {\"gas\": [1,2,3,4,5], \"cost\": [3,4,5,1,2]})",
+  inputLabel: "Gas and cost (JSON object, e.g. {\"gas\": [2,5,1,3], \"cost\": [3,2,4,1]})",
   url: "https://leetcode.com/problems/gas-station/",
   complexity: "O(n) time and O(1) space for n stations. The visualization caps the trip at 40 stations.",
   examples: getExamples("gas-station").map(({ label, gas, cost }) => ({ label, input: JSON.stringify({ gas, cost }) })),

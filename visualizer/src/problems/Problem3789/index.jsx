@@ -20,7 +20,7 @@ const definition = {
     { label: 'Example 1', input: '{"cost1":4,"cost2":3,"costBoth":2,"need1":4,"need2":1}' },
     { label: 'Example 2', input: '{"cost1":6,"cost2":5,"costBoth":20,"need1":3,"need2":3}' },
     { label: 'Expensive combined', input: '{"cost1":3,"cost2":2,"costBoth":10,"need1":4,"need2":5}' },
-    { label: 'Zero needs', input: '{"cost1":5,"cost2":4,"costBoth":15,"need1":0,"need2":0}' },
+    { label: 'Zero needs', input: '{"cost1":7,"cost2":6,"costBoth":11,"need1":0,"need2":0}' },
   ],
 }
 

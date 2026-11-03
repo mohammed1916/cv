@@ -11,7 +11,7 @@ export function parseInput(text) {
   try {
     input = JSON.parse(text)
   } catch {
-    throw new Error('Input must be JSON, for example {"nums":[1,2,3]}.')
+    throw new Error('Input must be JSON, for example {"nums":[2,1,3]}.')
   }
   if (input === null || typeof input !== "object" || Array.isArray(input)) {
     throw new Error('Input must be a JSON object with a "nums" key.')

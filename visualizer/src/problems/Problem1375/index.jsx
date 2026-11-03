@@ -8,7 +8,7 @@ const definition = {
     { id: 'done', label: 'Result', description: 'Report how many steps leave a prefix of ones.' },
   ],
   parse: parseInput, build: buildTrace, code, python, pythonLineMap,
-  inputLabel: 'Flips (JSON object with flips, e.g. {"flips":[3,2,4,1,5]})',
+  inputLabel: 'Flips (JSON object with flips, e.g. {"flips":[2,4,1,3]})',
   url: 'https://leetcode.com/problems/number-of-times-binary-string-is-prefix-aligned/',
   complexity: 'O(n) time and O(n) space for the visualized bit string. The visualization caps n at 50.',
   examples,

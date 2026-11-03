@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-subarrays-that-match-a-pattern-ii/',
   complexity: 'O(n + m) time with KMP, O(m) extra space. The visualization caps nums at 12 values.',
   examples: [
-    { label: 'Example', input: '{"nums":[1,4,4,1,3,5,5,3],"pattern":[1,0,-1]}' },
+    { label: 'Example', input: '{"nums":[5,1,4,4,0,3,-2,1],"pattern":[-1,1]}' },
     { label: 'Run', input: '{"nums":[1,2,3,4,5],"pattern":[1,1]}' },
   ],
 }
