@@ -1,0 +1,48 @@
+.br-view {
+  display: grid;
+  gap: 0.6rem;
+  color: var(--text, #1f2937);
+}
+
+.br-scroll {
+  overflow-x: auto;
+}
+
+.br-grid {
+  border-collapse: collapse;
+  font-family: ui-monospace, monospace;
+  font-size: 0.8rem;
+}
+
+.br-grid th,
+.br-grid td {
+  border: 1px solid #cbd5e1;
+  padding: 0.25rem 0.4rem;
+  text-align: center;
+  min-width: 1.8rem;
+}
+
+.br-col--ended {
+  color: #9ca3af;
+  text-decoration: line-through;
+}
+
+.br-on {
+  background: #dbeafe;
+  font-weight: 700;
+}
+
+.br-off {
+  opacity: 0.55;
+}
+
+.br-row--new th {
+  background: #fef3c7;
+}
+
+.br-readout,
+.br-empty {
+  margin: 0;
+  font-size: 0.85rem;
+  font-family: ui-monospace, monospace;
+}

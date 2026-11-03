@@ -1,0 +1,66 @@
+.sg-view {
+  display: grid;
+  gap: 0.8rem;
+  color: var(--text, #1f2937);
+}
+
+.sg-caption,
+.sg-readout,
+.sg-empty {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.sg-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sg-tile {
+  display: grid;
+  justify-items: center;
+  min-width: 2.6rem;
+  padding: 0.4rem 0.5rem;
+  border: 2px solid #94a3b8;
+  border-radius: 8px;
+  background: var(--surface, #f8fafc);
+  font-family: ui-monospace, monospace;
+}
+
+.sg-tile span {
+  font-weight: 700;
+}
+
+.sg-tile small {
+  font-size: 0.65rem;
+  opacity: 0.7;
+}
+
+.sg-tile--removed {
+  border-style: dashed;
+  color: #9ca3af;
+  text-decoration: line-through;
+}
+
+.sg-split {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.5rem 0.7rem;
+  border-radius: 8px;
+  background: #fee2e2;
+  font-size: 0.85rem;
+}
+
+.sg-split--match {
+  background: #dcfce7;
+}
+
+.sg-bar {
+  font-weight: 700;
+}

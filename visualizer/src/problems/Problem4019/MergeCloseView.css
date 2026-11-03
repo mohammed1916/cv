@@ -1,0 +1,69 @@
+.mc-view {
+  display: grid;
+  gap: 0.9rem;
+  color: var(--text, #1f2937);
+}
+
+.mc-rule,
+.mc-removed,
+.mc-empty {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.mc-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mc-tile {
+  display: grid;
+  justify-items: center;
+  min-width: 2.4rem;
+  padding: 0.4rem 0.5rem;
+  border: 2px solid #cbd5e1;
+  border-radius: 8px;
+  background: var(--surface, #f8fafc);
+}
+
+.mc-tile--left {
+  border-color: #0f766e;
+  background: #ccfbf1;
+}
+
+.mc-tile--right {
+  border-color: #b45309;
+  background: #fef3c7;
+}
+
+.mc-char {
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-family: ui-monospace, monospace;
+}
+
+.mc-index {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+.mc-gap {
+  font-size: 0.85rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  background: #f1f5f9;
+}
+
+.mc-gap--match {
+  background: #dcfce7;
+  color: #14532d;
+}
+
+.mc-gap--miss {
+  background: #fee2e2;
+  color: #7f1d1d;
+}

@@ -1,0 +1,60 @@
+.bd-view {
+  display: grid;
+  gap: 0.8rem;
+  color: var(--text, #1f2937);
+}
+
+.bd-caption,
+.bd-note,
+.bd-empty {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.bd-bits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bd-bit {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid #cbd5e1;
+  border-radius: 6px;
+  font-family: ui-monospace, monospace;
+  font-weight: 700;
+  background: var(--surface, #f8fafc);
+}
+
+.bd-bit--one {
+  background: #ede9fe;
+  border-color: #6d28d9;
+}
+
+.bd-readout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 0;
+}
+
+.bd-readout div {
+  min-width: 6.5rem;
+}
+
+.bd-readout dt {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.bd-readout dd {
+  margin: 0;
+  font-weight: 700;
+  font-family: ui-monospace, monospace;
+}

@@ -1,0 +1,83 @@
+.rc-view {
+  display: grid;
+  gap: 0.8rem;
+  color: var(--text, #1f2937);
+}
+
+.rc-caption,
+.rc-empty,
+.rc-readout {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.rc-letters {
+  display: flex;
+  gap: 0.35rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+}
+
+.rc-letter {
+  display: grid;
+  justify-items: center;
+  min-width: 2.4rem;
+  padding: 0.35rem 0.45rem;
+  border: 2px solid #cbd5e1;
+  border-radius: 8px;
+  background: var(--surface, #f8fafc);
+  font-family: ui-monospace, monospace;
+}
+
+.rc-letter--paired {
+  border-color: #6d28d9;
+  background: #ede9fe;
+}
+
+.rc-letter span {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.rc-letter small {
+  font-size: 0.65rem;
+  opacity: 0.75;
+}
+
+.rc-pairs {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.85rem;
+}
+
+.rc-bars {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.rc-bar {
+  position: relative;
+  height: 1.4rem;
+  border-radius: 6px;
+  background: #f1f5f9;
+  overflow: hidden;
+}
+
+.rc-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: #94a3b8;
+}
+
+.rc-bar--current .rc-fill {
+  background: #6d28d9;
+}
+
+.rc-text {
+  position: relative;
+  padding-left: 0.5rem;
+  font-size: 0.8rem;
+  line-height: 1.4rem;
+}

@@ -1,0 +1,75 @@
+.tg-view {
+  display: grid;
+  gap: 0.75rem;
+  color: var(--text, #1f2937);
+}
+
+.tg-view svg {
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  background: var(--surface, #f8fafc);
+  border-radius: 8px;
+}
+
+.tg-edge {
+  stroke: #94a3b8;
+  stroke-width: 2;
+}
+
+.tg-edge--active {
+  stroke: #f59e0b;
+  stroke-width: 4;
+}
+
+.tg-node {
+  stroke: #ffffff;
+  stroke-width: 2;
+}
+
+.tg-node--current {
+  stroke: #111827;
+  stroke-width: 4;
+}
+
+.tg-node--done {
+  opacity: 0.65;
+}
+
+.tg-label {
+  fill: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.tg-sub {
+  fill: var(--text, #1f2937);
+  font-size: 10px;
+}
+
+.tg-readout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 0;
+}
+
+.tg-readout div {
+  min-width: 7rem;
+}
+
+.tg-readout dt {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.tg-readout dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+.tg-legend,
+.tg-empty {
+  font-size: 0.85rem;
+  margin: 0;
+}

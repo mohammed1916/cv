@@ -1,0 +1,72 @@
+.dw-view {
+  display: grid;
+  gap: 0.8rem;
+  color: var(--text, #1f2937);
+}
+
+.dw-caption,
+.dw-note,
+.dw-empty {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.dw-digits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dw-digits li {
+  display: grid;
+  justify-items: center;
+  min-width: 2.6rem;
+  padding: 0.4rem 0.5rem;
+  border: 2px solid #cbd5e1;
+  border-radius: 8px;
+  background: var(--surface, #f8fafc);
+}
+
+.dw-digit {
+  font-size: 1.3rem;
+  font-weight: 700;
+  font-family: ui-monospace, monospace;
+}
+
+.dw-digits small {
+  font-size: 0.7rem;
+  opacity: 0.75;
+}
+
+.dw-digit--now {
+  border-color: #b45309;
+  outline: 3px solid #f59e0b;
+}
+
+.dw-digit--past {
+  background: #ecfdf5;
+}
+
+.dw-readout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 0;
+}
+
+.dw-readout div {
+  min-width: 7rem;
+}
+
+.dw-readout dt {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.dw-readout dd {
+  margin: 0;
+  font-weight: 700;
+}

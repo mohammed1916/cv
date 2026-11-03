@@ -1,0 +1,70 @@
+.tt-view {
+  display: grid;
+  gap: 0.7rem;
+  color: var(--text, #1f2937);
+}
+
+.tt-view svg {
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  background: var(--surface, #f8fafc);
+  border-radius: 8px;
+}
+
+.tt-bar {
+  fill: #94a3b8;
+}
+
+.tt-bar--buy {
+  fill: #0f766e;
+}
+
+.tt-bar--sell {
+  fill: #b45309;
+}
+
+.tt-arc {
+  fill: none;
+  stroke: #6d28d9;
+  stroke-width: 2.5;
+  stroke-dasharray: 5 4;
+}
+
+.tt-ready {
+  fill: #e0e7ff;
+  opacity: 0.6;
+}
+
+.tt-day,
+.tt-price {
+  font-size: 10px;
+  fill: var(--text, #1f2937);
+}
+
+.tt-readout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 0;
+}
+
+.tt-readout div {
+  min-width: 6.5rem;
+}
+
+.tt-readout dt {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.tt-readout dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+.tt-note,
+.tt-empty {
+  margin: 0;
+  font-size: 0.85rem;
+}
