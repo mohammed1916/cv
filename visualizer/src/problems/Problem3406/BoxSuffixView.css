@@ -1,0 +1,135 @@
+.box-suffix {
+  --bs-ink: #1f2937;
+  --bs-muted: #6b7280;
+  --bs-cell: #ffffff;
+  --bs-edge: #cbd5e1;
+  --bs-shared: #fde68a;
+  --bs-shared-edge: #b45309;
+  --bs-answer: #dcfce7;
+  --bs-answer-edge: #15803d;
+  --bs-whole: #e0f2fe;
+  --bs-whole-edge: #0369a1;
+  color: var(--bs-ink);
+  padding: 16px;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .box-suffix {
+    --bs-ink: #e5e7eb;
+    --bs-muted: #9ca3af;
+    --bs-cell: #111827;
+    --bs-edge: #374151;
+    --bs-shared: #713f12;
+    --bs-shared-edge: #fcd34d;
+    --bs-answer: #14532d;
+    --bs-answer-edge: #86efac;
+    --bs-whole: #0c4a6e;
+    --bs-whole-edge: #7dd3fc;
+  }
+}
+
+:root[data-theme="dark"] .box-suffix {
+  --bs-ink: #e5e7eb;
+  --bs-muted: #9ca3af;
+  --bs-cell: #111827;
+  --bs-edge: #374151;
+  --bs-shared: #713f12;
+  --bs-shared-edge: #fcd34d;
+  --bs-answer: #14532d;
+  --bs-answer-edge: #86efac;
+  --bs-whole: #0c4a6e;
+  --bs-whole-edge: #7dd3fc;
+}
+
+.box-suffix__caption {
+  margin: 0 0 12px;
+  font-weight: 600;
+}
+
+.box-suffix__word {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.box-suffix__cell {
+  position: relative;
+  min-width: 42px;
+  padding: 18px 8px 16px;
+  text-align: center;
+  background: var(--bs-cell);
+  border: 2px solid var(--bs-edge);
+  border-radius: 8px;
+}
+
+.box-suffix__cell--shared {
+  background: var(--bs-shared);
+  border-color: var(--bs-shared-edge);
+}
+
+.box-suffix__cell--answer {
+  background: var(--bs-answer);
+  border-color: var(--bs-answer-edge);
+}
+
+.box-suffix__cell--whole {
+  background: var(--bs-whole);
+  border-color: var(--bs-whole-edge);
+}
+
+.box-suffix__pointer {
+  position: absolute;
+  top: 1px;
+  left: 0;
+  right: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--bs-shared-edge);
+}
+
+.box-suffix__letter {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.box-suffix__index {
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  right: 0;
+  font-size: 0.65rem;
+  color: var(--bs-muted);
+}
+
+.box-suffix__compare {
+  margin-top: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9rem;
+}
+
+.box-suffix__bracket {
+  position: relative;
+  height: 28px;
+  margin-top: 14px;
+}
+
+.box-suffix__span {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  padding: 4px 6px;
+  font-size: 0.8rem;
+  border: 2px solid var(--bs-answer-edge);
+  border-radius: 6px;
+  background: var(--bs-answer);
+  white-space: nowrap;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.box-suffix__answer {
+  margin: 12px 0 0;
+}
