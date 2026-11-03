@@ -1,0 +1,92 @@
+.rv {
+  --rv-ink: #0f172a;
+  --rv-muted: #64748b;
+  --rv-bar: #7c3aed;
+  --rv-line: #cbd5e1;
+  color: var(--rv-ink);
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.rv-empty,
+.rv-muted {
+  color: var(--rv-muted);
+}
+
+.rv-tape {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.rv-cell {
+  align-items: center;
+  border: 2px solid var(--hue, var(--rv-line));
+  border-radius: 6px;
+  display: inline-flex;
+  font-family: ui-monospace, monospace;
+  font-size: 18px;
+  height: 34px;
+  justify-content: center;
+  width: 30px;
+}
+
+.rv-cell--current {
+  box-shadow: 0 0 0 3px #facc15;
+}
+
+.rv-runs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.rv-chip {
+  background: color-mix(in srgb, var(--hue) 18%, transparent);
+  border: 1px solid var(--hue);
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: 14px;
+}
+
+.rv-chip--current {
+  font-weight: 700;
+}
+
+.rv-tally {
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.rv-tally th,
+.rv-tally td {
+  padding: 4px 8px;
+  text-align: left;
+}
+
+.rv-bar {
+  background: var(--rv-bar);
+  border-radius: 4px;
+  display: inline-block;
+  height: 12px;
+}
+
+.rv-best td,
+.rv-best th {
+  font-weight: 700;
+}
+
+.rv-best-badge {
+  font-weight: 700;
+}
+
+@media (prefers-color-scheme: dark) {
+  .rv {
+    --rv-ink: #e2e8f0;
+    --rv-muted: #94a3b8;
+    --rv-bar: #a78bfa;
+    --rv-line: #475569;
+  }
+}

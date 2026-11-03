@@ -1,0 +1,78 @@
+.bp {
+  --bp-ink: #0f172a;
+  --bp-muted: #64748b;
+  --bp-line: #cbd5e1;
+  --bp-active: #facc15;
+  color: var(--bp-ink);
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.bp-empty {
+  color: var(--bp-muted);
+}
+
+.bp-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.bp-block {
+  border: 2px solid var(--hue, var(--bp-line));
+  border-radius: 10px;
+  display: grid;
+  gap: 6px;
+  min-width: 96px;
+  padding: 8px;
+}
+
+.bp-block header,
+.bp-block footer {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.bp-block--active {
+  box-shadow: 0 0 0 3px var(--bp-active);
+}
+
+.bp-block--upcoming {
+  border-style: dashed;
+  border-color: var(--bp-line);
+  color: var(--bp-muted);
+}
+
+.bp-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.bp-value {
+  background: color-mix(in srgb, var(--hue, #64748b) 16%, transparent);
+  border-radius: 4px;
+  font-family: ui-monospace, monospace;
+  padding: 1px 5px;
+}
+
+.bp-live,
+.bp-message {
+  margin: 0;
+  font-size: 14px;
+}
+
+.bp-total {
+  font-weight: 700;
+}
+
+@media (prefers-color-scheme: dark) {
+  .bp {
+    --bp-ink: #e2e8f0;
+    --bp-muted: #94a3b8;
+    --bp-line: #475569;
+    --bp-active: #fde047;
+  }
+}

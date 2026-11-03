@@ -1,0 +1,70 @@
+.ss {
+  --ss-ink: #0f172a;
+  --ss-muted: #64748b;
+  --ss-a: #2563eb;
+  --ss-a-fill: #dbeafe;
+  --ss-b: #ea580c;
+  --ss-b-fill: #ffedd5;
+  color: var(--ss-ink);
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.ss-empty,
+.ss-muted {
+  color: var(--ss-muted);
+}
+
+.ss-row h3 {
+  font-size: 15px;
+  margin: 0 0 6px;
+}
+
+.ss-sheets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.ss-sheet {
+  align-items: center;
+  border-radius: 4px;
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 700;
+  height: 36px;
+  justify-content: center;
+  width: 34px;
+}
+
+.ss-sheet--a {
+  background: var(--ss-a-fill);
+  border: 2px solid var(--ss-a);
+  color: var(--ss-a);
+}
+
+.ss-sheet--b {
+  background: var(--ss-b-fill);
+  border: 2px solid var(--ss-b);
+  color: var(--ss-b);
+}
+
+.ss-count,
+.ss-summary,
+.ss-message {
+  font-size: 14px;
+  margin: 4px 0 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .ss {
+    --ss-ink: #e2e8f0;
+    --ss-muted: #94a3b8;
+    --ss-a: #93c5fd;
+    --ss-a-fill: #1e3a8a;
+    --ss-b: #fdba74;
+    --ss-b-fill: #7c2d12;
+  }
+}

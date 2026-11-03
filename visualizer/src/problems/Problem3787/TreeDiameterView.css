@@ -1,0 +1,76 @@
+.td {
+  --td-ink: #0f172a;
+  --td-muted: #64748b;
+  --td-edge: #94a3b8;
+  --td-node: #e2e8f0;
+  --td-current: #facc15;
+  --td-source: #38bdf8;
+  --td-end: #16a34a;
+  color: var(--td-ink);
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.td-empty {
+  color: var(--td-muted);
+}
+
+.td svg {
+  height: auto;
+  max-width: 360px;
+  width: 100%;
+}
+
+.td-edge {
+  stroke: var(--td-edge);
+  stroke-width: 2;
+}
+
+.td-node {
+  fill: var(--td-node);
+  stroke: var(--td-ink);
+  stroke-width: 1.5;
+}
+
+.td-node--source {
+  fill: var(--td-source);
+}
+
+.td-node--current {
+  fill: var(--td-current);
+}
+
+.td-node--end {
+  stroke: var(--td-end);
+  stroke-width: 4;
+}
+
+.td-id {
+  fill: var(--td-ink);
+  font-size: 13px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.td-dist {
+  fill: var(--td-muted);
+  font-size: 11px;
+  text-anchor: middle;
+}
+
+.td-queue,
+.td-message {
+  margin: 0;
+  font-size: 14px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .td {
+    --td-ink: #e2e8f0;
+    --td-muted: #94a3b8;
+    --td-edge: #64748b;
+    --td-node: #1e293b;
+  }
+}

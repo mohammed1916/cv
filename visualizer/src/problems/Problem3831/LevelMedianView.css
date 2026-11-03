@@ -1,0 +1,72 @@
+.lm {
+  --lm-ink: #0f172a;
+  --lm-muted: #64748b;
+  --lm-edge: #94a3b8;
+  --lm-node: #e2e8f0;
+  --lm-level: #bfdbfe;
+  --lm-current: #facc15;
+  --lm-found: #16a34a;
+  color: var(--lm-ink);
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.lm-empty {
+  color: var(--lm-muted);
+}
+
+.lm svg {
+  height: auto;
+  max-width: 420px;
+  width: 100%;
+}
+
+.lm-edge {
+  stroke: var(--lm-edge);
+  stroke-width: 2;
+}
+
+.lm-node {
+  fill: var(--lm-node);
+  stroke: var(--lm-ink);
+  stroke-width: 1.5;
+}
+
+.lm-node--level {
+  fill: var(--lm-level);
+}
+
+.lm-node--current {
+  fill: var(--lm-current);
+}
+
+.lm-node--found {
+  stroke: var(--lm-found);
+  stroke-width: 4;
+}
+
+.lm-label {
+  fill: var(--lm-ink);
+  font-size: 12px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.lm-found,
+.lm-sorted,
+.lm-message {
+  font-size: 14px;
+  margin: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .lm {
+    --lm-ink: #e2e8f0;
+    --lm-muted: #94a3b8;
+    --lm-edge: #64748b;
+    --lm-node: #1e293b;
+    --lm-level: #1e3a8a;
+  }
+}

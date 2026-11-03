@@ -1,0 +1,92 @@
+.wg {
+  --wg-ink: #0f172a;
+  --wg-muted: #64748b;
+  --wg-edge: #94a3b8;
+  --wg-node: #e2e8f0;
+  --wg-current: #facc15;
+  --wg-target: #16a34a;
+  --wg-done: #dbeafe;
+  color: var(--wg-ink);
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.wg-empty {
+  color: var(--wg-muted);
+}
+
+.wg svg {
+  height: auto;
+  max-width: 320px;
+  width: 100%;
+}
+
+.wg-edge {
+  stroke: var(--wg-edge);
+  stroke-width: 2;
+}
+
+.wg-weight {
+  fill: var(--wg-muted);
+  font-size: 12px;
+  text-anchor: middle;
+}
+
+.wg-node {
+  fill: var(--wg-node);
+  stroke: var(--wg-ink);
+  stroke-width: 1.5;
+}
+
+.wg-node--current {
+  fill: var(--wg-current);
+}
+
+.wg-node--target {
+  stroke: var(--wg-target);
+  stroke-width: 3;
+}
+
+.wg-label {
+  fill: var(--wg-ink);
+  font-size: 13px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.wg-table {
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.wg-table th,
+.wg-table td {
+  border: 1px solid var(--wg-edge);
+  padding: 4px 10px;
+  text-align: center;
+}
+
+.wg-done {
+  background: var(--wg-done);
+}
+
+.wg-focus {
+  font-weight: 700;
+  outline: 2px solid var(--wg-current);
+}
+
+.wg-message {
+  margin: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .wg {
+    --wg-ink: #e2e8f0;
+    --wg-muted: #94a3b8;
+    --wg-edge: #64748b;
+    --wg-node: #1e293b;
+    --wg-done: #1e3a5f;
+  }
+}
