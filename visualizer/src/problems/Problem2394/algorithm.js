@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough. The sample tables are invented for this visualization.
 export const phases = [
   { id: 'load', label: 'Load', description: 'Read the employees and their log sessions.' },
   { id: 'session', label: 'Sessions', description: 'Round each session up to whole minutes.' },

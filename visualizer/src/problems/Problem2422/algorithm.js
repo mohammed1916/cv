@@ -1,12 +1,30 @@
 const CODE = [
-  'FUNCTION minOperations(nums)',
-  '    i ← 0, j ← last index',
-  '    left ← nums[i], right ← nums[j], ops ← 0',
-  '    WHILE i < j',
-  '        IF left equals right THEN move i inward, j inward, and reset left and right',
-  '        ELSE IF left < right THEN merge the left end with its neighbour, ops ← ops + 1',
-  '        ELSE merge the right end with its neighbour, ops ← ops + 1',
-  '    RETURN ops',
+  'function minOperations(nums) {',
+  '  let i = 0',
+  '  let j = nums.length - 1',
+  '  let left = nums[i]',
+  '  let right = nums[j]',
+  '  let ops = 0',
+  '  while (i < j) {',
+  '    if (left === right) {',
+  '      i += 1',
+  '      j -= 1',
+  '      if (i < j) {',
+  '        left = nums[i]',
+  '        right = nums[j]',
+  '      }',
+  '    } else if (left < right) {',
+  '      i += 1',
+  '      left += nums[i]',
+  '      ops += 1',
+  '    } else {',
+  '      j -= 1',
+  '      right += nums[j]',
+  '      ops += 1',
+  '    }',
+  '  }',
+  '  return ops',
+  '}',
 ]
 
 const PY = [
@@ -32,7 +50,7 @@ const PY = [
 ]
 
 const at = (lines, text) => {
-  const index = lines.findIndex(line => line.trim() === text.trim())
+  const index = lines.findIndex(line => line.includes(text.trim()))
   if (index < 0) throw new Error(`Missing trace line: ${text}`)
   return index + 1
 }
@@ -62,9 +80,9 @@ export function buildTrace(nums) {
   let ops = 0
   const frames = []
   const snap = (phase, activeLine, pythonLine, message) => frames.push({ pythonLine, phase, activeLine, i, j, left, right, ops, nums: [...nums], message })
-  snap('start', codeLine('i ← 0, j ← last index'), pyLine('i, j = 0, len(nums) - 1'), `Pointers start at both ends. The left group is ${left} and the right group is ${right}.`)
+  snap('start', codeLine('let i = 0'), pyLine('i, j = 0, len(nums) - 1'), `Pointers start at both ends. The left group is ${left} and the right group is ${right}.`)
   while (i < j) {
-    snap('compare', codeLine('WHILE i < j'), pyLine('while i < j:'), `Compare left group ${left} with right group ${right}.`)
+    snap('compare', codeLine('while (i < j)'), pyLine('while i < j:'), `Compare left group ${left} with right group ${right}.`)
     if (left === right) {
       i += 1
       j -= 1
@@ -72,20 +90,20 @@ export function buildTrace(nums) {
         left = nums[i]
         right = nums[j]
       }
-      snap('match', codeLine('IF left equals right THEN move i inward, j inward, and reset left and right'), pyLine('i += 1'), i < j ? `They match, so both ends step inward. New groups are ${left} and ${right}.` : 'They match and the pointers meet. The rest is a palindrome.')
+      snap('match', codeLine('if (left === right)'), pyLine('if left == right:'), i < j ? `They match, so both ends step inward. New groups are ${left} and ${right}.` : 'They match and the pointers meet. The rest is a palindrome.')
     } else if (left < right) {
       i += 1
       left += nums[i]
       ops += 1
-      snap('merge', codeLine('ELSE IF left < right THEN merge the left end with its neighbour, ops ← ops + 1'), pyLine('left += nums[i]'), `${left - nums[i]} is smaller, so it merges with its neighbour ${nums[i]} to make ${left}. Operations: ${ops}.`)
+      snap('merge', codeLine('} else if (left < right) {'), pyLine('elif left < right:'), `${left - nums[i]} is smaller, so it merges with its neighbour ${nums[i]} to make ${left}. Operations: ${ops}.`)
     } else {
       j -= 1
       right += nums[j]
       ops += 1
-      snap('merge', codeLine('ELSE merge the right end with its neighbour, ops ← ops + 1'), pyLine('right += nums[j]'), `${right - nums[j]} is smaller, so it merges with its neighbour ${nums[j]} to make ${right}. Operations: ${ops}.`)
+      snap('merge', codeLine('right += nums[j]'), pyLine('right += nums[j]'), `${right - nums[j]} is smaller, so it merges with its neighbour ${nums[j]} to make ${right}. Operations: ${ops}.`)
     }
   }
-  snap('done', codeLine('RETURN ops'), pyLine('return ops'), `The array becomes a palindrome after ${ops} merge${ops === 1 ? '' : 's'}.`)
+  snap('done', codeLine('return ops'), pyLine('return ops'), `The array becomes a palindrome after ${ops} merge${ops === 1 ? '' : 's'}.`)
   return { input: nums, result: ops, frames }
 }
 

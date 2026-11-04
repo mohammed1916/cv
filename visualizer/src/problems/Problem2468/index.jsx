@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
 import IndexedSequence from "../../components/shared/IndexedSequence";
+import AnswerRangeBar from "../../components/shared/AnswerRangeBar";
 import { code, python, parseInput, buildTrace } from "./algorithm";
 
 const definition = {
@@ -26,20 +27,45 @@ const definition = {
   examples: [{ label: "Example 1", input: '{"message":"short message","limit":15}' }],
 };
 
+// Feasible for the current part count, or not, once the trace has decided it.
+function verdictOf(step) {
+  if (step.phase === "accept" || step.phase === "part") return true;
+  if (step.phase === "reject" || step.phase === "skip") return false;
+  if (step.phase === "done") return Array.isArray(step.result) && step.result.length > 0;
+  return null;
+}
+
 export default function SplitMessageVisualizer() {
   return (
     <AlgorithmWorkspace
       definition={definition}
       renderVisual={({ run, step }) => (
         <>
+          <AnswerRangeBar
+            title="Part counts still to try"
+            min={1}
+            max={Math.max(1, run.input.message.length)}
+            low={Math.min(step.k || 1, run.input.message.length)}
+            high={Math.max(1, run.input.message.length)}
+            probe={step.k > 0 ? step.k : null}
+            verdict={verdictOf(step)}
+          />
+          <dl className="algorithm-readout" aria-label="Capacity for this part count">
+            <div><dt>Parts k</dt><dd>{step.k}</dd></div>
+            <div><dt>Room per part before index digits</dt><dd>{step.base}</dd></div>
+            <div><dt>Digit total of 1..k</dt><dd>{step.digitTotal ?? "-"}</dd></div>
+          </dl>
           <IndexedSequence
-            label="message"
+            label="message (characters placed so far)"
             length={run.input.message.length}
             active={step.pos ?? -1}
             valueAt={index => (run.input.message[index] === " " ? "_" : run.input.message[index])}
-            roleAt={index => (index < (step.pos ?? 0) ? "counted" : "")}
+            roleAt={index => (index < (step.pos ?? 0) ? "placed" : "")}
           />
-          <p>Parts built so far: {step.parts.join(" | ") || "none"}</p>
+          <ol aria-label="Parts built so far">
+            {step.parts.map((part, index) => <li key={index}><code>{part}</code></li>)}
+          </ol>
+          <p>{step.message}</p>
         </>
       )}
       renderReasoning={({ step }) => <p>{step.message}</p>}

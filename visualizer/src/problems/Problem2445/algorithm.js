@@ -1,12 +1,13 @@
 const CODE = [
-  'FUNCTION countOnes(n, queries)',
-  '    mark ← n + 1 zeros',
-  '    FOR each x in queries',
-  '        mark[x] ← 1 - mark[x]   (a toggle on x also reaches its whole subtree)',
-  '    parity ← n + 1 zeros',
-  '    FOR i from 1 to n in increasing order',
-  '        parity[i] ← parity[floor(i / 2)] XOR mark[i]',
-  '    RETURN the number of i with parity[i] = 1',
+  'function countOnes(n, queries) {',
+  '  const mark = Array(n + 1).fill(0)',
+  '  for (const x of queries) mark[x] ^= 1',
+  '  const parity = Array(n + 1).fill(0)',
+  '  for (let i = 1; i <= n; i++) {',
+  '    parity[i] = parity[Math.floor(i / 2)] ^ mark[i]',
+  '  }',
+  '  return parity.slice(1).reduce((a, b) => a + b, 0)',
+  '}',
 ]
 
 const PY = [
@@ -21,7 +22,7 @@ const PY = [
 ]
 
 const at = (lines, text) => {
-  const index = lines.findIndex(line => line.trim() === text.trim())
+  const index = lines.findIndex(line => line.includes(text.trim()))
   if (index < 0) throw new Error(`Missing trace line: ${text}`)
   return index + 1
 }
@@ -49,17 +50,17 @@ export function buildTrace({ n, queries }) {
   const mark = Array(n + 1).fill(0)
   const parity = Array(n + 1).fill(0)
   const frames = []
-  frames.push({ pythonLine: pyLine('mark = [0] * (n + 1)'), phase: 'start', activeLine: codeLine('mark ← n + 1 zeros'), node: null, mark: [...mark], parity: null, shownUpTo: 0, message: `A complete binary tree with ${n} nodes. Every node starts at 0.` })
+  frames.push({ pythonLine: pyLine('mark = [0] * (n + 1)'), phase: 'start', activeLine: codeLine('const mark = Array(n + 1).fill(0)'), node: null, mark: [...mark], parity: null, shownUpTo: 0, message: `A complete binary tree with ${n} nodes. Every node starts at 0.` })
   for (const x of queries) {
     mark[x] ^= 1
-    frames.push({ pythonLine: pyLine('mark[x] ^= 1'), phase: 'mark', activeLine: codeLine('mark[x] ← 1 - mark[x]   (a toggle on x also reaches its whole subtree)'), node: x, mark: [...mark], parity: null, shownUpTo: 0, message: `Query ${x} toggles node ${x} and its subtree.` })
+    frames.push({ pythonLine: pyLine('mark[x] ^= 1'), phase: 'mark', activeLine: codeLine('for (const x of queries) mark[x] ^= 1'), node: x, mark: [...mark], parity: null, shownUpTo: 0, message: `Query ${x} toggles node ${x} and its subtree.` })
   }
   for (let i = 1; i <= n; i++) {
     parity[i] = parity[Math.floor(i / 2)] ^ mark[i]
-    frames.push({ pythonLine: pyLine('parity[i] = parity[i // 2] ^ mark[i]'), phase: 'walk', activeLine: codeLine('parity[i] ← parity[floor(i / 2)] XOR mark[i]'), node: i, mark: [...mark], parity: parity.map((v, k) => (k <= i ? v : null)), shownUpTo: i, message: `Node ${i} takes parent ${Math.floor(i / 2) || 'none'}'s parity ${Math.floor(i / 2) ? parity[Math.floor(i / 2)] : 0} XOR its mark ${mark[i]}, giving ${parity[i]}.` })
+    frames.push({ pythonLine: pyLine('parity[i] = parity[i // 2] ^ mark[i]'), phase: 'walk', activeLine: codeLine('parity[i] = parity[Math.floor(i / 2)] ^ mark[i]'), node: i, mark: [...mark], parity: parity.map((v, k) => (k <= i ? v : null)), shownUpTo: i, message: `Node ${i} takes parent ${Math.floor(i / 2) || 'none'}'s parity ${Math.floor(i / 2) ? parity[Math.floor(i / 2)] : 0} XOR its mark ${mark[i]}, giving ${parity[i]}.` })
   }
   const ones = parity.slice(1).reduce((a, b) => a + b, 0)
-  frames.push({ pythonLine: pyLine('return sum(parity[1:])'), phase: 'done', activeLine: codeLine('RETURN the number of i with parity[i] = 1'), node: null, mark: [...mark], parity: [...parity], shownUpTo: n, message: `${ones} node${ones === 1 ? ' has' : 's have'} value one.` })
+  frames.push({ pythonLine: pyLine('return sum(parity[1:])'), phase: 'done', activeLine: codeLine('return parity.slice(1)'), node: null, mark: [...mark], parity: [...parity], shownUpTo: n, message: `${ones} node${ones === 1 ? ' has' : 's have'} value one.` })
   return { input: { n, queries }, result: ones, parity: parity.slice(1), frames }
 }
 

@@ -24,38 +24,58 @@ export function parseInput(text) {
   return Object.fromEntries(KEYS.map(key => [key, data[key]]))
 }
 
+const CODE = [
+  'function countDaysTogether(arriveAlice, leaveAlice, arriveBob, leaveBob) {',
+  '  const aliceArrive = dayNumber(arriveAlice)',
+  '  const aliceLeave = dayNumber(leaveAlice)',
+  '  const bobArrive = dayNumber(arriveBob)',
+  '  const bobLeave = dayNumber(leaveBob)',
+  '  const latestArrival = Math.max(aliceArrive, bobArrive)',
+  '  const earliestDeparture = Math.min(aliceLeave, bobLeave)',
+  '  return Math.max(0, earliestDeparture - latestArrival + 1)',
+  '}',
+]
+
+const PY = [
+  'def count_days_together(arriveAlice, leaveAlice, arriveBob, leaveBob):',
+  '    month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]',
+  '',
+  '    def day_number(text):',
+  '        month, day = int(text[:2]), int(text[3:5])',
+  '        return sum(month_days[:month - 1]) + day',
+  '',
+  '    alice_arrive = day_number(arriveAlice)',
+  '    alice_leave = day_number(leaveAlice)',
+  '    bob_arrive = day_number(arriveBob)',
+  '    bob_leave = day_number(leaveBob)',
+  '    latest_arrival = max(alice_arrive, bob_arrive)',
+  '    earliest_departure = min(alice_leave, bob_leave)',
+  '    return max(0, earliest_departure - latest_arrival + 1)',
+]
+
+const at = (lines, text) => {
+  const index = lines.findIndex(line => line.includes(text.trim()))
+  if (index < 0) throw new Error(`Missing trace line: ${text}`)
+  return index + 1
+}
+const codeLine = text => at(CODE, text)
+const pyLine = text => at(PY, text)
+
 export function buildTrace(input) {
   const { arriveAlice, leaveAlice, arriveBob, leaveBob } = input
   const aa = dayNumber(arriveAlice)
   const la = dayNumber(leaveAlice)
   const ab = dayNumber(arriveBob)
   const lb = dayNumber(leaveBob)
-  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set alice arrival'), days: { aa, la, ab, lb }, latest: null, earliest: null, message: 'Convert each date to its day of the year.' }]
+  const frames = [{ phase: 'start', pythonLine: pyLine('alice_arrive = day_number(arriveAlice)'), activeLine: codeLine('const aliceArrive = dayNumber(arriveAlice)'), days: { aa, la, ab, lb }, latest: null, earliest: null, message: 'Convert each date to its day of the year.' }]
   const latest = Math.max(aa, ab)
-  frames.push({ phase: 'arrival', pythonLine: 8, activeLine: L('set latest arrival'), days: { aa, la, ab, lb }, latest, earliest: null, message: `The later arrival is day ${latest}.` })
+  frames.push({ phase: 'arrival', pythonLine: pyLine('latest_arrival = max'), activeLine: codeLine('const latestArrival = Math.max(aliceArrive, bobArrive)'), days: { aa, la, ab, lb }, latest, earliest: null, message: `The later arrival is day ${latest}.` })
   const earliest = Math.min(la, lb)
-  frames.push({ phase: 'departure', pythonLine: 9, activeLine: L('set earliest departure'), days: { aa, la, ab, lb }, latest, earliest, message: `The earlier departure is day ${earliest}.` })
+  frames.push({ phase: 'departure', pythonLine: pyLine('earliest_departure = min'), activeLine: codeLine('const earliestDeparture = Math.min(aliceLeave, bobLeave)'), days: { aa, la, ab, lb }, latest, earliest, message: `The earlier departure is day ${earliest}.` })
   const result = Math.max(0, earliest - latest + 1)
-  frames.push({ phase: 'done', pythonLine: 10, activeLine: L('return the larger of 0'), days: { aa, la, ab, lb }, latest, earliest, message: `Days together: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: pyLine('return max(0'), activeLine: codeLine('return Math.max(0, earliestDeparture - latestArrival + 1)'), days: { aa, la, ab, lb }, latest, earliest, message: `Days together: ${result}.` })
   return { input, result, frames }
 }
 
-export const code = `count the days both people are together
-  set alice arrival and departure to the day numbers of her dates
-  set bob arrival and departure to the day numbers of his dates
-  set latest arrival to the larger of the two arrival days
-  set earliest departure to the smaller of the two departure days
-  return the larger of 0 and earliest departure minus latest arrival plus 1`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-
-export const python = `def count_days_together(arriveAlice, leaveAlice, arriveBob, leaveBob):
-    month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-
-    def day_number(text):
-        month, day = int(text[:2]), int(text[3:5])
-        return sum(month_days[:month - 1]) + day
-
-    latest_arrival = max(day_number(arriveAlice), day_number(arriveBob))
-    earliest_departure = min(day_number(leaveAlice), day_number(leaveBob))
-    return max(0, earliest_departure - latest_arrival + 1)
-`
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+export const python = PY.join('\n') + '\n'

@@ -16,7 +16,8 @@ export default function EndMergeView({ run, step }) {
           const inLeft = k <= i && !done;
           const inRight = k >= j && !done;
           const cls = ["merge-tile", inLeft ? "merge-tile--left" : "", inRight ? "merge-tile--right" : "", !inLeft && !inRight && !done ? "merge-tile--mid" : ""].join(" ");
-          return <span role="listitem" key={k} className={cls}><span className="merge-value">{v}</span><span className="merge-index">{k}</span></span>;
+          const pointer = !done ? [k === i ? "l" : "", k === j ? "r" : ""].filter(Boolean).join(" ") : "";
+          return <span role="listitem" key={k} className={cls}><span className="merge-pointer" aria-label={pointer ? `pointer ${pointer}` : undefined} style={{ fontSize: 12, fontWeight: 700, color: "var(--primary)", minHeight: 16 }}>{pointer}</span><span className="merge-value">{v}</span><span className="merge-index">{k}</span></span>;
         })}
       </div>
       <dl className="merge-state">

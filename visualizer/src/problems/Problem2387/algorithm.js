@@ -1,12 +1,18 @@
 const CODE = [
-  'FUNCTION median(matrix)',
-  '    total ← rows × cols ; need ← (total + 1) / 2',
-  '    lo ← smallest first value of any row, hi ← largest last value of any row',
-  '    WHILE lo < hi',
-  '        mid ← (lo + hi) / 2 rounded down',
-  '        count ← number of values ≤ mid, counted row by row',
-  '        IF count ≥ need THEN hi ← mid ELSE lo ← mid + 1',
-  '    RETURN lo',
+  'function median(grid) {',
+  '  const total = grid.length * grid[0].length',
+  '  const need = (total + 1) / 2',
+  '  let lo = Math.min(...grid.map(row => row[0]))',
+  '  let hi = Math.max(...grid.map(row => row[row.length - 1]))',
+  '  while (lo < hi) {',
+  '    const mid = Math.floor((lo + hi) / 2)',
+  '    let count = 0',
+  '    for (const row of grid) count += countAtMost(row, mid)',
+  '    if (count >= need) hi = mid',
+  '    else lo = mid + 1',
+  '  }',
+  '  return lo',
+  '}',
 ]
 
 const PY = [
@@ -27,7 +33,7 @@ const PY = [
 ]
 
 const at = (lines, text) => {
-  const index = lines.findIndex(line => line.trim() === text.trim())
+  const index = lines.findIndex(line => line.includes(text.trim()))
   if (index < 0) throw new Error(`Missing trace line: ${text}`)
   return index + 1
 }
@@ -73,25 +79,25 @@ export function buildTrace(grid) {
   let hi = Math.max(...grid.map(row => row[row.length - 1]))
   const frames = []
   const base = (extra) => ({ lo, hi, need, ...extra })
-  frames.push({ pythonLine: pyLine('lo = min(row[0] for row in grid)'), phase: 'start', activeLine: codeLine('lo ← smallest first value of any row, hi ← largest last value of any row'), mid: null, perRow: [], count: null, lo, hi, need, rows: grid, message: `Total ${total} values, so the median is the ${need}th smallest. The answer lies between ${lo} and ${hi}.` })
+  frames.push({ pythonLine: pyLine('lo = min(row[0] for row in grid)'), phase: 'start', activeLine: codeLine('let lo = Math.min'), mid: null, perRow: [], count: null, lo, hi, need, rows: grid, message: `Total ${total} values, so the median is the ${need}th smallest. The answer lies between ${lo} and ${hi}.` })
   while (lo < hi) {
     const mid = Math.floor((lo + hi) / 2)
-    frames.push(base({ pythonLine: pyLine('mid = (lo + hi) // 2'), phase: 'probe', activeLine: codeLine('mid ← (lo + hi) / 2 rounded down'), mid, perRow: [], count: null, rows: grid, message: `Try mid = ${mid}.` }))
+    frames.push(base({ pythonLine: pyLine('mid = (lo + hi) // 2'), phase: 'probe', activeLine: codeLine('const mid = Math.floor'), mid, perRow: [], count: null, rows: grid, message: `Try mid = ${mid}.` }))
     const perRow = []
     for (const row of grid) {
       perRow.push(countAtMost(row, mid))
-      frames.push(base({ pythonLine: pyLine('count = sum(bisect_right(row, mid) for row in grid)'), phase: 'count', activeLine: codeLine('count ← number of values ≤ mid, counted row by row'), mid, perRow: [...perRow], count: null, rows: grid, message: `This row has ${perRow[perRow.length - 1]} value${perRow[perRow.length - 1] === 1 ? '' : 's'} at most ${mid}.` }))
+      frames.push(base({ pythonLine: pyLine('count = sum(bisect_right(row, mid) for row in grid)'), phase: 'count', activeLine: codeLine('for (const row of grid) count'), mid, perRow: [...perRow], count: null, rows: grid, message: `This row has ${perRow[perRow.length - 1]} value${perRow[perRow.length - 1] === 1 ? '' : 's'} at most ${mid}.` }))
     }
     const count = perRow.reduce((a, b) => a + b, 0)
     if (count >= need) {
       hi = mid
-      frames.push(base({ pythonLine: pyLine('hi = mid'), phase: 'decide', activeLine: codeLine('IF count ≥ need THEN hi ← mid ELSE lo ← mid + 1'), mid, perRow, count, rows: grid, message: `${count} values are at most ${mid}, which reaches ${need}. The median is at most ${mid}.` }))
+      frames.push(base({ pythonLine: pyLine('hi = mid'), phase: 'decide', activeLine: codeLine('if (count >= need) hi = mid'), mid, perRow, count, rows: grid, message: `${count} values are at most ${mid}, which reaches ${need}. The median is at most ${mid}.` }))
     } else {
       lo = mid + 1
-      frames.push(base({ pythonLine: pyLine('lo = mid + 1'), phase: 'decide', activeLine: codeLine('IF count ≥ need THEN hi ← mid ELSE lo ← mid + 1'), mid, perRow, count, rows: grid, message: `${count} values are at most ${mid}, short of ${need}. The median is above ${mid}.` }))
+      frames.push(base({ pythonLine: pyLine('lo = mid + 1'), phase: 'decide', activeLine: codeLine('else lo = mid + 1'), mid, perRow, count, rows: grid, message: `${count} values are at most ${mid}, short of ${need}. The median is above ${mid}.` }))
     }
   }
-  frames.push(base({ pythonLine: pyLine('return lo'), phase: 'done', activeLine: codeLine('RETURN lo'), mid: null, perRow: [], count: null, rows: grid, message: `The range has collapsed. The median is ${lo}.` }))
+  frames.push(base({ pythonLine: pyLine('return lo'), phase: 'done', activeLine: codeLine('return lo'), mid: null, perRow: [], count: null, rows: grid, message: `The range has collapsed. The median is ${lo}.` }))
   return { input: grid, result: lo, frames }
 }
 

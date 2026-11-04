@@ -1,11 +1,14 @@
 const CODE = [
-  'FUNCTION closestFair(n)',
-  '    x ← n',
-  '    WHILE true',
-  '        odd ← number of odd digits in x',
-  '        even ← number of even digits in x',
-  '        IF odd equals even THEN RETURN x',
-  '        x ← x + 1',
+  'function closestFair(n) {',
+  '  let x = n',
+  '  while (true) {',
+  '    const digits = String(x).split("").map(Number)',
+  '    const odd = digits.filter(d => d % 2 === 1).length',
+  '    const even = digits.length - odd',
+  '    if (odd === even) return x',
+  '    x += 1',
+  '  }',
+  '}',
 ]
 
 const PY = [
@@ -21,7 +24,7 @@ const PY = [
 ]
 
 const at = (lines, text) => {
-  const index = lines.findIndex(line => line.trim() === text.trim())
+  const index = lines.findIndex(line => line.includes(text.trim()))
   if (index < 0) throw new Error(`Missing trace line: ${text}`)
   return index + 1
 }
@@ -47,13 +50,13 @@ function digitsOf(x) {
 export function buildTrace(n) {
   const frames = []
   let x = n
-  frames.push({ pythonLine: pyLine('x = n'), phase: 'start', activeLine: codeLine('x ← n'), candidate: x, digits: [], odd: 0, even: 0, message: `Start at ${n} and test each candidate upward.` })
+  frames.push({ pythonLine: pyLine('x = n'), phase: 'start', activeLine: codeLine('let x = n'), candidate: x, digits: [], odd: 0, even: 0, message: `Start at ${n} and test each candidate upward.` })
   for (;;) {
     const digits = digitsOf(x)
     const odd = digits.filter(d => d % 2 === 1).length
     const even = digits.length - odd
     const fair = odd === even
-    frames.push({ pythonLine: pyLine('if odd == even:'), phase: fair ? 'found' : 'check', activeLine: codeLine(fair ? 'IF odd equals even THEN RETURN x' : 'odd ← number of odd digits in x'), candidate: x, digits, odd, even, fair, message: fair ? `${x} has ${odd} odd and ${even} even digits, so it is fair.` : `${x} has ${odd} odd and ${even} even digit${even === 1 ? '' : 's'}. Not fair; try ${x + 1}.` })
+    frames.push({ pythonLine: pyLine(fair ? 'if odd == even:' : 'odd = sum('), phase: fair ? 'found' : 'check', activeLine: codeLine(fair ? 'if (odd === even) return x' : 'const odd = digits.filter'), candidate: x, digits, odd, even, fair, message: fair ? `${x} has ${odd} odd and ${even} even digits, so it is fair.` : `${x} has ${odd} odd and ${even} even digit${even === 1 ? '' : 's'}. Not fair; try ${x + 1}.` })
     if (fair) break
     x += 1
   }

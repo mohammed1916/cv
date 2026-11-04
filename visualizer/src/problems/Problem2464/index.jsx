@@ -11,7 +11,7 @@ const definition = {
   python,
   inputLabel: "Array of integers (e.g. [3,5,6])",
   url: "https://leetcode.com/problems/minimum-subarrays-in-a-valid-split/description/",
-  complexity: "O(n^2) gcd checks for n values, with O(n) space for the prefix table. The visualization caps the array at 12 values of 1 to 30; the official bounds are not verified in this draft.",
+  complexity: "O(n^2) gcd checks for n values, with O(n) space for the prefix table. The visualization caps the array at 12 values of 1 to 30.",
   examples: [
     { label: "Example", input: "[3,5,6]" },
     { label: "Singletons", input: "[2,3,5]" },

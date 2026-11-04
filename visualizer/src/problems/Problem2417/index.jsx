@@ -11,7 +11,7 @@ const definition = {
   python,
   inputLabel: "Positive integer n (e.g. 2)",
   url: "https://leetcode.com/problems/closest-fair-integer/description/",
-  complexity: "O(d * k) time for k candidates tested, each with d digits. The visualization caps n at 1000 and walks upward one candidate at a time; the official bounds are not verified in this draft.",
+  complexity: "O(d * k) time for k candidates tested, each with d digits. The visualization caps n at 1000 and walks upward one candidate at a time.",
   examples: [
     { label: "Example", input: "2" },
     { label: "Already fair", input: "10" },

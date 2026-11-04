@@ -1,0 +1,91 @@
+.bit-grid {
+  display: grid;
+  gap: 10px;
+  color: var(--text);
+}
+
+.bit-grid__scroll {
+  overflow-x: auto;
+}
+
+.bit-grid table {
+  border-collapse: separate;
+  border-spacing: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+.bit-grid th,
+.bit-grid td {
+  min-width: 34px;
+  padding: 6px 4px;
+  text-align: center;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.bit-grid th {
+  color: var(--text-muted, var(--text));
+  font-weight: 600;
+  text-align: right;
+  padding-right: 8px;
+}
+
+.bit-grid thead th {
+  text-align: center;
+}
+
+.bit-grid td {
+  background: var(--surface2);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.bit-grid .is-current {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.bit-grid .bit-cell--match {
+  background: var(--primary-glow);
+  border-color: var(--primary);
+  font-weight: 700;
+}
+
+.bit-grid .bit-cell--fill {
+  background: var(--surface3, var(--surface2));
+  border-color: var(--primary);
+  border-style: dashed;
+  font-weight: 700;
+}
+
+.bit-grid .bit-cell--open {
+  opacity: 0.85;
+}
+
+.bit-grid__state {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0;
+}
+
+.bit-grid__state div {
+  display: grid;
+  gap: 2px;
+}
+
+.bit-grid__state dt {
+  font-size: 0.8rem;
+  color: var(--text-muted, var(--text));
+}
+
+.bit-grid__state dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+.bit-grid__note {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-muted, var(--text));
+}

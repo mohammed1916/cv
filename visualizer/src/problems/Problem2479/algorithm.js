@@ -1,12 +1,25 @@
 const CODE = [
-  'FUNCTION maxXorDisjoint(values, edges)',
-  '    root the tree at node 0 and record each parent',
-  '    sum[v] ← values[v] plus the sums of its children, computed from the leaves up',
-  '    best ← 0',
-  '    FOR each pair of nodes u < v',
-  '        IF neither u nor v is an ancestor of the other THEN',
-  '            best ← max(best, sum[u] XOR sum[v])',
-  '    RETURN best',
+  'function maxXorDisjoint(values, edges) {',
+  '  const n = values.length',
+  '  const adj = Array.from({ length: n }, () => [])',
+  '  for (const [a, b] of edges) { adj[a].push(b); adj[b].push(a) }',
+  '  const parent = Array(n).fill(-1)',
+  '  const order = [0]',
+  '  for (let i = 0; i < order.length; i++) {',
+  '    const v = order[i]',
+  '    for (const w of adj[v]) if (w !== parent[v]) { parent[w] = v; order.push(w) }',
+  '  }',
+  '  const sums = [...values]',
+  '  for (const v of order.slice(1).reverse()) sums[parent[v]] += sums[v]',
+  '  const isAncestor = (a, b) => { for (let x = b; x !== -1; x = parent[x]) if (x === a) return true; return false }',
+  '  let best = 0',
+  '  for (let u = 0; u < n; u++) {',
+  '    for (let v = u + 1; v < n; v++) {',
+  '      if (!isAncestor(u, v) && !isAncestor(v, u)) best = Math.max(best, sums[u] ^ sums[v])',
+  '    }',
+  '  }',
+  '  return best',
+  '}',
 ]
 
 const PY = [
@@ -41,7 +54,7 @@ const PY = [
 ]
 
 const at = (lines, text) => {
-  const index = lines.findIndex(line => line.trim() === text.trim())
+  const index = lines.findIndex(line => line.includes(text.trim()))
   if (index < 0) throw new Error(`Missing trace line: ${text}`)
   return index + 1
 }
@@ -91,7 +104,7 @@ export function buildTrace({ values, edges }) {
   const sums = [...values]
   const frames = []
   const isAnc = (a, b) => { for (let x = b; x !== -1; x = parent[x]) if (x === a) return true; return false }
-  frames.push({ pythonLine: pyLine('order = [0]'), phase: 'start', activeLine: codeLine('root the tree at node 0 and record each parent'), node: null, pair: null, sums: null, candidates: [], best: 0, message: `Root the tree at 0. Parents: ${parent.map((p, v) => (v === 0 ? '-' : `${v}<-${p}`)).slice(1).join(', ') || 'none'}.` })
+  frames.push({ pythonLine: pyLine('order = [0]'), phase: 'start', activeLine: codeLine('const order = [0]'), node: null, pair: null, sums: null, candidates: [], best: 0, message: `Root the tree at 0. Parents: ${parent.map((p, v) => (v === 0 ? '-' : `${v}<-${p}`)).slice(1).join(', ') || 'none'}.` })
   for (const v of [...order].reverse().slice(0, n - 1)) {
     sums[parent[v]] += sums[v]
   }
@@ -100,7 +113,7 @@ export function buildTrace({ values, edges }) {
   for (const v of [...order].reverse()) {
     built[v] = values[v]
     for (const w of adj[v]) if (w !== parent[v]) built[v] += built[w]
-    frames.push({ pythonLine: pyLine('sums[parent[v]] += sums[v]'), phase: 'sums', activeLine: codeLine('sum[v] ← values[v] plus the sums of its children, computed from the leaves up'), node: v, pair: null, sums: built.map(x => x), candidates: [], best: 0, message: `Subtree of ${v} sums to ${built[v]}.` })
+    frames.push({ pythonLine: pyLine('sums[parent[v]] += sums[v]'), phase: 'sums', activeLine: codeLine('for (const v of order.slice(1).reverse())'), node: v, pair: null, sums: built.map(x => x), candidates: [], best: 0, message: `Subtree of ${v} sums to ${built[v]}.` })
   }
   let best = 0
   const candidates = []
@@ -113,9 +126,9 @@ export function buildTrace({ values, edges }) {
     } else {
       candidates.push({ u, v, xor: null, related: true })
     }
-    frames.push({ pythonLine: pyLine('best = max(best, sums[u] ^ sums[v])'), phase: 'pair', activeLine: codeLine(related ? 'IF neither u nor v is an ancestor of the other THEN' : 'best ← max(best, sum[u] XOR sum[v])'), node: null, pair: [u, v], sums: [...sums], candidates: candidates.map(c => ({ ...c })), best, message: related ? `Nodes ${u} and ${v} are in an ancestor relation, so they cannot both be chosen.` : `Nodes ${u} and ${v} are disjoint: ${sums[u]} XOR ${sums[v]} = ${x}. Best so far ${best}.` })
+    frames.push({ pythonLine: pyLine('best = max(best, sums[u] ^ sums[v])'), phase: 'pair', activeLine: codeLine(related ? 'if (!isAncestor(u, v) && !isAncestor(v, u))' : 'best = Math.max(best, sums[u] ^ sums[v])'), node: null, pair: [u, v], sums: [...sums], candidates: candidates.map(c => ({ ...c })), best, message: related ? `Nodes ${u} and ${v} are in an ancestor relation, so they cannot both be chosen.` : `Nodes ${u} and ${v} are disjoint: ${sums[u]} XOR ${sums[v]} = ${x}. Best so far ${best}.` })
   }
-  frames.push({ pythonLine: pyLine('return best'), phase: 'done', activeLine: codeLine('RETURN best'), node: null, pair: null, sums: [...sums], candidates: candidates.map(c => ({ ...c })), best, message: `The best XOR of two disjoint subtree sums is ${best}.` })
+  frames.push({ pythonLine: pyLine('return best'), phase: 'done', activeLine: codeLine('return best'), node: null, pair: null, sums: [...sums], candidates: candidates.map(c => ({ ...c })), best, message: `The best XOR of two disjoint subtree sums is ${best}.` })
   return { input: { values, edges }, result: best, sums: [...sums], frames }
 }
 

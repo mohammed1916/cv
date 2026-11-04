@@ -11,7 +11,7 @@ const definition = {
   python,
   inputLabel: 'Object with n and queries (e.g. {"n":5,"queries":[1,2]})',
   url: "https://leetcode.com/problems/number-of-nodes-with-value-one/description/",
-  complexity: "O(n + q) time and O(n) space for n nodes and q queries, using the parent rule 2i and 2i+1. The visualization caps n at 31 and q at 10; the official bounds are not verified in this draft.",
+  complexity: "O(n + q) time and O(n) space for n nodes and q queries, using the parent rule 2i and 2i+1. The visualization caps n at 31 and q at 10.",
   examples: [
     { label: "Example", input: '{"n":5,"queries":[1,2]}' },
     { label: "Repeat", input: '{"n":7,"queries":[2,2,3]}' },

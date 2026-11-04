@@ -11,7 +11,7 @@ const definition = {
   python,
   inputLabel: "Array of positive integers (e.g. [4,3,2,1,2,3,1])",
   url: "https://leetcode.com/problems/merge-operations-to-turn-array-into-a-palindrome/description/",
-  complexity: "O(n) time and O(1) extra space for n values. The visualization caps the array at 12 values of at most 100; the official bounds are not verified in this draft.",
+  complexity: "O(n) time and O(1) extra space for n values. The visualization caps the array at 12 values of at most 100.",
   examples: [
     { label: "Example", input: "[4,3,2,1,2,3,1]" },
     { label: "Already palindrome", input: "[1,2,1]" },

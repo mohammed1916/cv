@@ -1,3 +1,35 @@
+const CODE = [
+  'function numberOfCuts(n) {',
+  '  if (n === 1) return 0',
+  '  if (n % 2 === 0) return n / 2',
+  '  return n',
+  '}',
+]
+
+const PY = [
+  'def number_of_cuts(n):',
+  '    if n == 1:',
+  '        return 0',
+  '    if n % 2 == 0:',
+  '        return n // 2',
+  '    return n',
+]
+
+const at = (lines, text) => {
+  const index = lines.findIndex(line => line.includes(text.trim()))
+  if (index < 0) throw new Error(`Missing trace line: ${text}`)
+  return index + 1
+}
+const codeLine = text => at(CODE, text)
+const pyLine = text => at(PY, text)
+
+export const phases = [
+  { id: 'check', label: 'Check', description: 'Test whether one piece is needed.' },
+  { id: 'even', label: 'Even', description: 'Even n uses diameters through the centre.' },
+  { id: 'odd', label: 'Odd', description: 'Odd n needs one cut per piece.' },
+  { id: 'done', label: 'Result', description: 'Return the number of cuts.' },
+]
+
 export function parseInput(text) {
   const input = JSON.parse(text)
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Use an object with n.')
@@ -8,33 +40,20 @@ export function parseInput(text) {
 
 export function buildTrace({ n }) {
   const frames = []
-  frames.push({ pythonLine: PL('if n == 1'), phase: 'check', activeLine: CL('IF n equals 1'), n, result: null, message: `Is n = ${n} equal to 1?` })
+  frames.push({ pythonLine: pyLine('if n == 1'), phase: 'check', activeLine: codeLine('if (n === 1)'), n, result: null, cutKind: null, message: `Is n = ${n} equal to 1?` })
   let result
   if (n === 1) {
     result = 0
-    frames.push({ pythonLine: PL('return 0'), phase: 'done', activeLine: CL('RETURN 0'), n, result, message: 'A single piece needs no cuts.' })
+    frames.push({ pythonLine: pyLine('return 0'), phase: 'done', activeLine: codeLine('if (n === 1) return 0'), n, result, cutKind: 'none', message: 'A single piece needs no cuts.' })
   } else if (n % 2 === 0) {
     result = n / 2
-    frames.push({ pythonLine: PL('return n // 2'), phase: 'even', activeLine: CL('IF n is even'), n, result, message: `Even: ${n / 2} diameters through the centre.` })
+    frames.push({ pythonLine: pyLine('if n % 2 == 0'), phase: 'even', activeLine: codeLine('if (n % 2 === 0)'), n, result, cutKind: 'diameter', message: `Even: ${n / 2} diameters through the centre give ${n} equal pieces.` })
   } else {
     result = n
-    frames.push({ pythonLine: PL('return n'), phase: 'odd', activeLine: CL('ELSE'), n, result, message: `Odd: each of the ${n} cuts must be a full line.` })
+    frames.push({ pythonLine: pyLine('return n'), phase: 'odd', activeLine: codeLine('return n'), n, result, cutKind: 'radius', message: `Odd: each of the ${n} cuts must be a radius, since no diameter gives an odd number of equal pieces.` })
   }
   return { input: { n }, result, frames }
 }
 
-export const code = `FUNCTION numberOfCuts(n)
-  IF n equals 1 THEN RETURN 0
-  IF n is even THEN RETURN n / 2
-  ELSE RETURN n`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const CL = s => { const i = code.findIndex(c => c.text.includes(s)); if (i < 0) throw new Error(`missing ${s}`); return i + 1 }
-
-export const python = `def number_of_cuts(n):
-    if n == 1:
-        return 0
-    if n % 2 == 0:
-        return n // 2
-    return n
-`
-const PY = python.split('\n')
-const PL = s => { const i = PY.findIndex(l => l.includes(s)); if (i < 0) throw new Error(`missing ${s}`); return i + 1 }
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+export const python = PY.join('\n') + '\n'
