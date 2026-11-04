@@ -454,7 +454,7 @@ function SettingsMenu({
           </p>
           <p>
             &copy; {new Date().getFullYear()}{" "}
-            <a href="https://teemtreat.com">teemtreat.com</a>
+            <a href="https://visualizer.pro">visualizer.pro</a>
           </p>
           <a href="/privacy.html">Privacy Policy</a>
           <p

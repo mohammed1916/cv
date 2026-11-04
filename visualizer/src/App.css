@@ -95,6 +95,7 @@ body.chat-select-mode .trie-state svg g:hover {
 }
 
 .settings-summary {
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
