@@ -25,7 +25,7 @@ export default function TimeBasedKeyValueStore() {
     <IndexedSequence label={step.key ? `Entries for ${step.key} (time, value)` : 'Entries'} length={step.entries.length}
       active={step.mid ?? step.found ?? -1}
       valueAt={i => `${step.entries[i][0]}:${step.entries[i][1]}`}
-      roleAt={i => (step.found !== null && i === step.found ? 'match' : step.low !== null && i >= step.low && i <= step.high ? 'read' : '')} />
+      roleAt={i => (step.found !== null && i === step.found ? 'match' : step.low === null ? '' : i === step.low ? 'lo' : i === step.high ? 'hi' : i > step.low && i < step.high ? 'read' : '')} />
     <output aria-label="Status">{step.message}</output>
   </>} renderReasoning={() => <>
     <p>Timestamps for a key only increase, so its list is already sorted. A get is then a binary search for the last timestamp at or before the query.</p>

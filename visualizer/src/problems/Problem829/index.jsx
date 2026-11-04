@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -19,6 +20,11 @@ export default function ConsecutiveNumbersSum() {
     const shown = run.hits.filter(h => h.k <= step.k)
     return <>
       <output aria-label="Current length">{step.k ? `Trying k = ${step.k}: (${run.input} - ${step.k * (step.k - 1) / 2}) / ${step.k}${step.rest !== undefined ? ` = ${step.rest / step.k}` : ''}` : 'No k tried yet'}</output>
+      {step.k > 0 && <RecordStateTable label={`Lengths tried so far (n = ${run.input})`} columns={['k', 'rest = n - k(k-1)/2', 'rest / k', 'works']} activeRow={step.k - 1}
+        rows={Array.from({ length: step.k }, (_, i) => i + 1).map(k => {
+          const rest = run.input - k * (k - 1) / 2
+          return { k, 'rest = n - k(k-1)/2': rest, 'rest / k': rest % k === 0 ? rest / k : 'not whole', works: rest % k === 0 ? 'yes' : 'no' }
+        })} />}
       <IndexedSequence label="Valid runs found (length k: start..end)" length={shown.length} active={step.phase === 'hit' ? shown.length - 1 : -1}
         valueAt={i => `${shown[i].k}: ${shown[i].a}..${shown[i].a + shown[i].k - 1}`} />
       <output aria-label="Count">Ways found: {step.count}</output>

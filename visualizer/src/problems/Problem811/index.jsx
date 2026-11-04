@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import HashMapView from '../../components/shared/HashMapView'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -22,6 +23,7 @@ export default function SubdomainVisitCount() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="cpdomains" length={run.input.length} active={step.index} valueAt={i => run.input[i]} roleAt={i => i < step.index ? 'done' : ''} />
     <IndexedSequence label="Hash map counts (insertion order)" length={step.entries.length} active={step.entries.findIndex(([d]) => d === step.sub)} valueAt={i => `${step.entries[i][0]}: ${step.entries[i][1]}`} />
+    <HashMapView maps={[{ name: 'counts', isSet: false, keyLabel: 'domain', valueLabel: 'count', entries: step.entries }]} />
   </>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>
     <p><strong>Why suffixes:</strong> "a.b.c" is visited whenever "b.c" or "c" is visited as its parent, so the count flows up every dot boundary, and a hash map merges entries that share a suffix.</p>

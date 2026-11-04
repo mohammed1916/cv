@@ -22,8 +22,8 @@ const definition = {
 
 export default function MaxConsecutiveOnes() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="Binary array" length={run.input.nums.length} valueAt={i => run.input.nums[i]} active={step.right}
-      roleAt={i => (step.right >= 0 && i >= step.left && i <= step.right ? 'window' : '')} />
+    <IndexedSequence label="Binary array (l = left edge, current = right edge r)" length={run.input.nums.length} valueAt={i => run.input.nums[i]} active={step.right}
+      roleAt={i => (step.right < 0 ? '' : i === step.left ? 'l' : i >= step.left && i <= step.right ? 'window' : '')} />
     <output aria-label="Window">{`Window ${step.left}-${step.right}, zeros ${step.zeros} of at most ${run.input.k}, best ${step.best}`}</output>
   </>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>

@@ -19,12 +19,14 @@ const definition = {
 }
 
 export default function SimilarRgb() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label={`Candidate shorthand values for ${step.channel === null ? 'the channel' : ['red', 'green', 'blue'][step.channel]} (digit d gives 17 * d)`} length={16} active={step.channel === null || step.digit === null ? -1 : step.digit}
+      valueAt={d => d * 17} roleAt={d => step.value !== null && d === Math.round(step.value / 17) ? 'closest' : ''} />
     <IndexedSequence label="Chosen digits (red, green, blue)" length={3} active={step.channel ?? -1}
       valueAt={i => (step.digits[i] === undefined ? '-' : step.digits[i].toString(16) + step.digits[i].toString(16))} />
     <output aria-label="Channel">{step.value === null ? step.message : `Channel value ${step.value} → ${step.digit * 17}`}</output>
   </>} renderReasoning={() => <>
     <p>The channels do not affect each other, so the closest color is the closest value for each channel separately.</p>
-    <p>A shorthand value is 17 times a digit, so each channel has just 16 candidates to compare.</p>
+    <p>A shorthand value is 17 times a digit, so each channel has just 16 candidates to compare. Dividing a channel by 17 and rounding gives the nearest candidate directly.</p>
   </>} />
 }

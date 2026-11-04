@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import IndexedSequence from '../../components/shared/IndexedSequence'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -23,10 +23,9 @@ const definition = {
 export default function NthMagicalNumber() {
   return <AlgorithmWorkspace definition={definition}
     renderVisual={({ run, step }) => {
-      const vals = [step.lo, step.mid === null ? '–' : step.mid, step.hi]
-      const names = ['lo', 'mid', 'hi']
+      const domainHi = run.input.n * Math.min(run.input.a, run.input.b)
       return <>
-        <IndexedSequence label="Binary search window (lo, mid, hi)" length={3} valueAt={i => vals[i]} active={step.mid === null ? -1 : 1} roleAt={i => names[i]} />
+        <AnswerRangeBar title="Search for the n-th magical number" min={1} max={domainHi} low={step.lo} high={step.hi} probe={step.mid} verdict={step.count === null ? null : step.count >= run.input.n ? 'enough: hi moves down' : 'too few: lo moves up'} />
         <output aria-label="Count at mid">{step.count === null ? `Looking for the ${run.input.n}-th multiple of ${run.input.a} or ${run.input.b}.` : `count(${step.mid}) = ${step.count} vs target n = ${run.input.n}`}</output>
         {step.phase === 'done' && <output aria-label="Result">Answer {run.answer}, mod 1e9+7 = {run.result}</output>}
       </>

@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -22,6 +23,8 @@ export default function ReorderLogFiles() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
     <IndexedSequence label="Logs" length={step.order.length} active={step.index ?? -1} valueAt={i => step.order[i]}
       roleAt={i => step.kinds[i] === 'letter' ? 'match' : step.kinds[i] === 'digit' ? 'dropped' : ''} />
+    <RecordStateTable label="Sort keys of the letter-logs (content first, identifier breaks ties)" columns={['content', 'identifier']}
+      rows={step.order.filter((_, i) => step.kinds[i] === 'letter').map(log => { const sp = log.indexOf(' '); return { content: log.slice(sp + 1), identifier: log.slice(0, sp) } })} />
   </>} renderReasoning={() => <>
     <p>Letter logs compare by everything after the identifier; the identifier only breaks ties. Digit logs are never compared, so a stable partition keeps their order.</p>
     <p>Keying each letter log as (content, identifier, original) lets one plain sort implement both rules.</p>

@@ -22,11 +22,13 @@ const definition = {
 }
 export default function SplitArraySameAverage() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="nums" length={run.input.length} active={step.index} valueAt={i => run.input[i]} roleAt={i => i < step.index ? 'used' : ''} />
-    <IndexedSequence label="Number of reachable sums dp[j] (index = subset size j)" length={step.sizes.length} active={step.k} valueAt={j => step.sizes[j]} roleAt={j => step.ks.includes(j) ? 'candidate' : ''} />
+    <IndexedSequence label="nums (shaded = already absorbed into the sets)" length={run.input.length} active={step.index} valueAt={i => run.input[i]} roleAt={i => i <= step.index ? 'used' : ''} />
+    <IndexedSequence label="Reachable sum count per subset size j" length={step.sizes.length} active={step.k} valueAt={j => step.sizes[j]} roleAt={j => step.ks.includes(j) ? 'candidate' : ''} />
+    {step.sums && step.sums.length > 0 && <IndexedSequence label={`Reachable sums with exactly ${step.k} items (sorted)`} length={step.sums.length} active={step.sums.indexOf(step.target)} valueAt={i => step.sums[i]} roleAt={i => step.sums[i] === step.target ? 'target' : ''} />}
     {step.target !== null && <output aria-label="Target">k = {step.k}, target sum = {step.target}: {step.found ? 'reachable' : 'not reachable'}</output>}
   </>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>
     <p><strong>Key identity:</strong> if A has k elements with sum s and the whole array has sum T over n items, then avg(A) = avg(B) = T/n, so s = T*k/n. One part is at most n/2 in size, so only k up to n/2 is tried.</p>
+    <p>The sorted sums row lists every total that k items can reach. The split exists when the highlighted target is in that row.</p>
   </>} />
 }

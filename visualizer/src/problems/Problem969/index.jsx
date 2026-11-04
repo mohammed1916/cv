@@ -21,7 +21,7 @@ const definition = {
 
 export default function PancakeSorting() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <IndexedSequence label="Array" length={step.array.length} active={step.flip === null ? -1 : step.flip - 1} valueAt={i => step.array[i]} />
+    <IndexedSequence label="Array (values already in final place are marked)" length={step.array.length} active={step.flip === null ? -1 : step.flip - 1} valueAt={i => step.array[i]} roleAt={i => (step.array[i] === i + 1 ? 'in place' : '')} />
     <output aria-label="Flips">{step.flip === null ? step.message : `Flip the first ${step.flip}`}</output>
   </>} renderReasoning={() => <>
     <p>Each step places one value at its final position. Reverse the prefix up to the largest value so it reaches the front, then reverse the prefix up to its place, which moves it to the end of the unsorted part.</p>

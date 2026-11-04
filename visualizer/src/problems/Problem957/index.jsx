@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import HashMapView from '../../components/shared/HashMapView'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -22,6 +23,7 @@ const definition = {
 export default function PrisonCells() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
     <IndexedSequence label="Cells (1 = occupied)" length={8} valueAt={i => step.cells[i]} roleAt={i => step.cells[i] ? 'match' : ''} />
+    <HashMapView maps={[{ name: 'seen', isSet: false, keyLabel: 'state', valueLabel: 'first day', entries: (step.seen ?? []).map(([k, d]) => [k, d]) }]} />
     <output aria-label="Day">Day {step.day}; target day {step.n}{step.cycle ? `; cycle length ${step.cycle}` : ''}</output>
   </>} renderReasoning={() => <>
     <p>The end cells become empty after one day and stay empty, leaving 6 interior cells and at most 64 possible states. The sequence of states is therefore eventually periodic.</p>

@@ -21,10 +21,10 @@ export function buildTrace(nums) {
     push('decide', L('if x is 0'), 'Total XOR is 0 before Alice moves, so she wins immediately.', { x, pythonLine: 5 })
   } else if (even) {
     result = true
-    push('decide', L('if x is 0'), `XOR is ${x} (nonzero) and n = ${nums.length} is even. If every erase made the XOR 0 for Alice, all numbers would equal the total, and an even count of equal numbers XORs to 0, a contradiction. So Alice always has a safe move; the game ends exactly when the board is empty after Bob's turn, and with even n Bob is the one forced to erase the last number.`, { x, pythonLine: 5 })
+    push('decide', L('if x is 0'), `XOR is ${x} (nonzero) and n = ${nums.length} is even. If every number were equal to the total XOR, then the n equal numbers would XOR to 0 when n is even, contradicting the nonzero total. So Alice always has an erase that keeps the XOR nonzero, and Bob is the one who runs out of safe moves.`, { x, pythonLine: 5 })
   } else {
     result = false
-    push('decide', L('if x is 0'), `XOR is ${x} (nonzero) and n = ${nums.length} is odd. By symmetry Bob can always keep a safe move, and Alice is the one forced to take the last number, which leaves XOR 0.`, { x, pythonLine: 5 })
+    push('decide', L('if x is 0'), `XOR is ${x} (nonzero) and n = ${nums.length} is odd. Here the parity works against Alice: with an odd count, the standard argument shows Bob can always answer with a move that keeps the XOR nonzero, so Alice is the one left facing XOR 0.`, { x, pythonLine: 5 })
   }
   push('done', result ? L('return true') : L('return false'), result ? 'Alice wins.' : 'Alice loses.', { x, pythonLine: 5 })
   return { input: nums, result, frames }

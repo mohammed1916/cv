@@ -21,8 +21,8 @@ const definition = {
 export default function MostProfitAssigningWork() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Jobs sorted by difficulty (difficulty/profit)" length={run.jobs.length} active={step.phase === 'absorb' ? step.i : -1}
-      valueAt={i => `${run.jobs[i][0]}/${run.jobs[i][1]}`} roleAt={i => i < step.i || (step.phase === 'absorb' && i === step.i) ? 'unlocked' : ''} />
-    <IndexedSequence label="Workers sorted by ability" length={run.workers.length} active={step.w} valueAt={i => run.workers[i]} roleAt={i => i < step.w || step.phase === 'done' ? 'paid' : ''} />
+      valueAt={i => `${run.jobs[i][0]}/${run.jobs[i][1]}`} roleAt={i => i === step.i && step.phase === 'absorb' ? 'job pointer' : i < step.i ? 'unlocked' : ''} />
+    <IndexedSequence label="Workers sorted by ability" length={run.workers.length} active={step.w} valueAt={i => run.workers[i]} roleAt={i => i === step.w ? 'worker pointer' : i < step.w || step.phase === 'done' ? 'paid' : ''} />
     <output aria-label="Profit">Best reachable profit {step.best} | total {step.total}</output>
   </>} renderReasoning={() => <>
     <p>Any worker may take any job at or below their ability, and the same job can be reused. So each worker simply wants the highest profit among jobs they can do.</p>

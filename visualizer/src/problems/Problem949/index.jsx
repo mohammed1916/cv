@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -23,6 +24,11 @@ const definition = {
 export default function LargestTime() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
     <IndexedSequence label="Ordering as H H : M M" length={4} valueAt={i => step.perm[i]} roleAt={() => step.phase === 'invalid' ? 'dropped' : step.phase === 'better' ? 'match' : ''} />
+    <RecordStateTable label="Current ordering read as HH:MM" columns={['hours', 'minutes', 'valid time']} rows={[(() => {
+      const [h1, h2, m1, m2] = step.perm
+      const hours = h1 * 10 + h2, mins = m1 * 10 + m2
+      return { hours: `${h1}${h2} (${hours})`, minutes: `${m1}${m2} (${mins})`, 'valid time': hours < 24 && mins < 60 ? 'yes' : 'no' }
+    })()]} />
     <output aria-label="Best time">Best so far: {step.bestText || 'none'}{step.idx ? ` (ordering ${step.idx} of 24)` : ''}</output>
   </>} renderReasoning={() => <>
     <p>A time is the pair (hours, minutes); comparing total minutes since midnight compares times correctly, so it is enough to keep the maximum.</p>

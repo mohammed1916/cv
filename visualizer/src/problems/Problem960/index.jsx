@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import DPDependencyView from '../../components/shared/DPDependencyView'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -22,6 +23,8 @@ export default function DeleteColumnsIII() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Columns" length={run.cols} active={step.column ?? -1} valueAt={i => `col ${i}`} />
     <IndexedSequence label="Longest kept chain ending at each column" length={run.cols} active={step.column ?? -1} valueAt={i => step.dp[i]} />
+    {step.column !== null && <DPDependencyView title="Chain ending at this column" shape="linear" values={step.dp} target={step.column}
+      sources={step.from !== null && step.from !== undefined && step.from >= 0 ? [{ cell: step.from, note: 'kept before this column', chosen: true }] : []} />}
     <output aria-label="Result">{step.message}</output>
   </>} renderReasoning={() => <>
     <p>Keeping columns in order is valid only if every row is sorted across the kept columns. That condition is checked between consecutive kept columns, so a longest-chain DP over columns finds the answer.</p>

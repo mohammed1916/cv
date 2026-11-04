@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import CoordinatePlane from '../../components/shared/CoordinatePlane'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -21,6 +22,11 @@ const definition = {
 export default function MinimumAreaRectangleII() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Points" length={run.input.length} valueAt={i => run.input[i].join(', ')} />
+    <CoordinatePlane title="Corner (active), arms (kept) and closing corner (excluded)" points={[
+      ...run.input.map(([x, y]) => ({ x, y, role: '' })),
+      ...(step.corner ? [{ x: step.corner[0], y: step.corner[1], label: 'corner', role: 'active' }] : []),
+      ...(step.arms ? step.arms.map(([x, y]) => ({ x, y, label: 'arm', role: 'kept' })) : []),
+    ]} />
     <output aria-label="Best area">
       {step.best === null ? step.message : `Best so far: ${step.best === Infinity ? 'none' : step.best.toFixed(3)}`}
     </output>

@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, runsOf, code, python } from './algorithm'
 
 const definition = {
@@ -26,6 +27,12 @@ export default function ExpressiveWords() {
     return <>
       <IndexedSequence label="Target runs" length={S.length} active={step.run} valueAt={i => `${S[i][0]}x${S[i][1]}`} />
       {step.word >= 0 && <IndexedSequence label={`Word "${run.input.words[step.word]}" runs`} length={step.wordRuns.length} active={step.run} valueAt={i => `${step.wordRuns[i][0]}x${step.wordRuns[i][1]}`} />}
+      {step.word >= 0 && step.wordRuns.length > 0 && <RecordStateTable label="Run pairs compared (target run stretches the word run)" columns={['pair', 'target', 'word', 'verdict']} activeRow={step.run}
+        rows={S.slice(0, Math.min(S.length, step.wordRuns.length)).map(([a, x], i) => {
+          const [b, y] = step.wordRuns[i]
+          const verdict = a !== b ? 'letters differ' : x < y ? 'too short' : x === y ? 'equal' : x < 3 ? 'needs 3 or more' : 'stretched'
+          return { pair: i, target: `${a} x${x}`, word: `${b} x${y}`, verdict }
+        })} />}
       <IndexedSequence label="Stretchy result per word" length={run.input.words.length} active={step.word} valueAt={i => run.input.words[i]} roleAt={i => step.results[i] === null ? '' : step.results[i] ? 'yes' : 'no'} />
     </>
   }} renderReasoning={({ step }) => <>

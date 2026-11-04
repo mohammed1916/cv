@@ -28,7 +28,7 @@ export function buildTrace(nums) {
     for (const k of ks) {
       const target = (total * k) / n
       const found = dp[k].has(target)
-      push('check', L('is in dp[k]'), `k = ${k}: need a subset of size ${k} with sum ${total}*${k}/${n} = ${target}. ${found ? 'It is reachable.' : 'It is not reachable.'}`, { k, target, found, pythonLine: 13 })
+      push('check', L('is in dp[k]'), `k = ${k}: need a subset of size ${k} with sum ${total}*${k}/${n} = ${target}. ${found ? 'It is reachable.' : 'It is not reachable.'}`, { k, target, found, sums: [...dp[k]].sort((a, b) => a - b), pythonLine: 13 })
       if (found) { result = true; break }
     }
   }

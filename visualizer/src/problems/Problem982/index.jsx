@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import HashMapView from '../../components/shared/HashMapView'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -23,6 +24,7 @@ export default function TriplesAndZero() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
     <IndexedSequence label="Pair AND values (value : count)" length={step.pairs.length}
       valueAt={i => `${step.pairs[i][0]} : ${step.pairs[i][1]}`} />
+    <HashMapView maps={[{ name: 'pairs', isSet: false, keyLabel: 'pair AND', valueLabel: 'ordered pairs', entries: step.pairs }]} />
     <output aria-label="Total">{`Running total: ${step.total}${step.value === null ? '' : `, matching value ${step.value}`}`}</output>
   </>} renderReasoning={() => <>
     <p>Looping over every triple is cubic. Instead, count the AND of each pair once; a triple is zero exactly when the pair’s AND shares no bit with the third number.</p>

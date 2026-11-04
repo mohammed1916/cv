@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import HashMapView from '../../components/shared/HashMapView'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -25,6 +26,7 @@ export default function WordSubsets() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="words2 (merged into requirements)" length={run.input.words2.length} active={step.b} valueAt={i => run.input.words2[i]} roleAt={i => i < step.b ? 'merged' : ''} />
     <IndexedSequence label="Required letter counts (max over words2)" length={step.need.length} valueAt={i => `${step.need[i].ch} x${step.need[i].n}`} />
+    <HashMapView maps={[{ name: 'need', isSet: false, keyLabel: 'letter', valueLabel: 'required count', entries: step.need.map(x => [x.ch, x.n]) }]} />
     <IndexedSequence label="words1" length={run.input.words1.length} active={step.word} valueAt={i => run.input.words1[i]}
       roleAt={i => step.passed.includes(i) ? 'universal' : step.failed.includes(i) ? 'rejected' : ''} />
   </>} renderReasoning={({ step }) => <>
