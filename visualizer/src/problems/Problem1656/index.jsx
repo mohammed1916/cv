@@ -8,8 +8,8 @@ const definition = {
   url: 'https://leetcode.com/problems/design-an-ordered-stream/',
   complexity: 'O(n) total time across all insertions: the pointer only moves forward, and each slot is released once.',
   examples: [
-    { label: 'Scrambled arrivals', input: '{"n":5,"inserts":[[3,"c"],[1,"a"],[2,"b"],[5,"e"],[4,"d"]]}' },
-    { label: 'Exact order', input: '{"n":3,"inserts":[[1,"x"],[2,"y"],[3,"z"]]}' },
+    { label: 'Scrambled arrivals', input: '{"n":4,"inserts":[[2,"m"],[4,"p"],[1,"k"],[3,"x"]]}' },
+    { label: 'Exact order', input: '{"n":3,"inserts":[[3,"q"],[1,"o"],[2,"r"]]}' },
     { label: 'First slot late', input: '{"n":4,"inserts":[[4,"d"],[3,"c"],[1,"a"],[2,"b"]]}' },
   ],
 }

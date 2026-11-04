@@ -1,4 +1,3 @@
-// Knowledge-derived SQL lesson. The sample tables are invented for this visualization.
 export const sql = `select u.name, sum(t.amount) as balance
 from Users u
 join Transactions t on t.account = u.account

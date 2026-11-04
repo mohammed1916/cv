@@ -1,19 +1,10 @@
 .lca2-view { display: grid; gap: 10px; }
 .lca2-view svg { width: 100%; max-width: 560px; height: auto; }
-.lca2-node circle { fill: #f8fafc; stroke: #94a3b8; stroke-width: 2; }
-.lca2-node text { font: 600 13px system-ui, sans-serif; fill: #0f172a; text-anchor: middle; dominant-baseline: central; }
-.lca2-node--target circle { fill: #dbeafe; stroke: #2563eb; stroke-width: 3; }
-.lca2-node--current circle { fill: #fef9c3; stroke: #ca8a04; stroke-width: 3; }
-.lca2-node--answer circle { fill: #dcfce7; stroke: #15803d; stroke-width: 4; }
-.lca2-edge { stroke: #94a3b8; stroke-width: 2; }
-.lca2-legend { font: 500 13px system-ui, sans-serif; color: #334155; display: flex; flex-wrap: wrap; gap: 12px; }
-.lca2-result { font: 600 14px system-ui, sans-serif; color: #0f172a; }
-@media (prefers-color-scheme: dark) {
-  .lca2-node circle { fill: #1e293b; stroke: #64748b; }
-  .lca2-node text { fill: #e2e8f0; }
-  .lca2-node--target circle { fill: #1e3a8a; stroke: #60a5fa; }
-  .lca2-node--current circle { fill: #713f12; stroke: #facc15; }
-  .lca2-node--answer circle { fill: #14532d; stroke: #4ade80; }
-  .lca2-edge { stroke: #64748b; }
-  .lca2-legend, .lca2-result { color: #cbd5e1; }
-}
+.lca2-node circle { fill: var(--surface2); stroke: var(--border); stroke-width: 2; }
+.lca2-node text { font: 600 13px system-ui, sans-serif; fill: var(--text); text-anchor: middle; dominant-baseline: central; }
+.lca2-node--target circle { fill: color-mix(in srgb, var(--primary) 22%, transparent); stroke: var(--primary); stroke-width: 3; }
+.lca2-node--current circle { fill: color-mix(in srgb, var(--accent, var(--primary)) 25%, transparent); stroke: var(--accent, var(--primary)); stroke-width: 3; }
+.lca2-node--answer circle { fill: color-mix(in srgb, var(--success) 25%, transparent); stroke: var(--success); stroke-width: 4; }
+.lca2-edge { stroke: var(--border); stroke-width: 2; }
+.lca2-legend { font: 500 13px system-ui, sans-serif; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 12px; }
+.lca2-result { font: 600 14px system-ui, sans-serif; color: var(--text); }

@@ -9,13 +9,13 @@ const definition = {
   build: buildTrace,
   code,
   python,
-  inputLabel: 'Object with root (level-order list), p and q, e.g. {"root":[3,5,1,6,2,0,8],"p":5,"q":1}',
+  inputLabel: 'Object with root (level-order list), p and q, e.g. {"root":[3,5,1,6,2,0,8],"p":2,"q":10}',
   url: "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree-iii/",
   complexity: "O(h) time and O(1) extra space, where h is the height. The visualization caps the tree at 15 nodes.",
   examples: [
-    { label: "Two branches", input: '{"root":[3,5,1,6,2,0,8,null,null,7,4],"p":5,"q":1}' },
-    { label: "Descendant", input: '{"root":[3,5,1,6,2,0,8,null,null,7,4],"p":5,"q":4}' },
-    { label: "Deep pair", input: '{"root":[3,5,1,6,2,0,8,null,null,7,4],"p":7,"q":4}' },
+    { label: "Two branches", input: '{"root":[9,4,12,2,6,10,15],"p":2,"q":10}' },
+    { label: "Descendant", input: '{"root":[9,4,12,2,6,10,15],"p":6,"q":4}' },
+    { label: "Deep pair", input: '{"root":[9,4,12,2,6,10,15],"p":15,"q":12}' },
   ],
 };
 

@@ -6,19 +6,21 @@ export const phases = [
   { id: "done", label: "Result", description: "Report the number of unhappy friends." },
 ];
 
-export const CODE = [
-  "FUNCTION countUnhappyFriends(n, preferences, pairs)",
-  "    partner ← array of size n",
-  "    FOR each pair [x, y]: partner[x] ← y and partner[y] ← x",
-  "    rank[u][w] ← position of w in preferences[u], for every u",
-  "    unhappy ← 0",
-  "    FOR each friend x FROM 0 THROUGH n − 1",
-  "        FOR each u in preferences[x] before partner[x]",
-  "            IF u prefers x over partner[u]",
-  "                unhappy ← unhappy + 1 and stop checking x",
-  "    RETURN unhappy",
-];
-export const code = CODE.map((text, index) => ({ line: index + 1, text }));
+export const code = [
+  "function countUnhappyFriends(n, preferences, pairs) {",
+  "  const partner = new Array(n);",
+  "  for (const [x, y] of pairs) { partner[x] = y; partner[y] = x; }",
+  "  const rank = preferences.map(() => new Array(n));",
+  "  let unhappy = 0;",
+  "  for (let x = 0; x < n; x++) {",
+  "    for (const u of preferences[x]) {",
+  "      if (u === partner[x]) break;",
+  "      if (rank[u][x] < rank[u][partner[u]]) { unhappy++; break; }",
+  "    }",
+  "  }",
+  "  return unhappy;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }));
 
 export const python = `def unhappyFriends(n, preferences, pairs):
     partner = [0] * n
@@ -39,8 +41,7 @@ export const python = `def unhappyFriends(n, preferences, pairs):
                 break
     return unhappy`;
 
-// Pseudocode activeLine -> Python line doing the same action.
-export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 6, 5: 10, 6: 11, 7: 12, 8: 15, 9: 16, 10: 18 };
+export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 6, 5: 10, 6: 11, 7: 12, 8: 13, 9: 15, 10: 15, 11: 15, 12: 18, 13: 18 };
 
 const LIMIT = 40;
 
@@ -90,10 +91,10 @@ export function buildTrace({ n, preferences, pairs }) {
     frames.push({ phase: "scan", activeLine: 6, message: `Friend ${x} is paired with ${partner[x]}. Look at friends ${x} ranks above that partner.`, ...snap({ x }) });
     for (const u of preferences[x]) {
       if (u === partner[x]) {
-        frames.push({ phase: "check", activeLine: 7, message: `Reached partner ${u}; no more candidates for friend ${x}.`, ...snap({ x, u }) });
+        frames.push({ phase: "check", activeLine: 8, message: `Reached partner ${u}; no more candidates for friend ${x}.`, ...snap({ x, u }) });
         break;
       }
-      frames.push({ phase: "check", activeLine: 8, message: `${x} prefers ${u} over partner ${partner[x]}. Does ${u} prefer ${x} over partner ${partner[u]}?`, ...snap({ x, u }) });
+      frames.push({ phase: "check", activeLine: 9, message: `${x} prefers ${u} over partner ${partner[x]}. Does ${u} prefer ${x} over partner ${partner[u]}?`, ...snap({ x, u }) });
       if (rank[u][x] < rank[u][partner[u]]) {
         unhappy[x] = true;
         count++;
@@ -102,6 +103,6 @@ export function buildTrace({ n, preferences, pairs }) {
       }
     }
   }
-  frames.push({ phase: "done", activeLine: 10, message: `Return ${count} unhappy friends.`, ...snap({}) });
+  frames.push({ phase: "done", activeLine: 12, message: `Return ${count} unhappy friends.`, ...snap({}) });
   return { input: { n, preferences, pairs }, result: count, frames };
 }

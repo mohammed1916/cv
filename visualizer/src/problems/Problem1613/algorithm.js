@@ -1,4 +1,3 @@
-// Knowledge-derived SQL lesson. The sample tables are invented for this visualization.
 export const sql = `with recursive numbers as (
   select 1 as id
   union all

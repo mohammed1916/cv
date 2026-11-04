@@ -18,7 +18,7 @@ function Row({ label, terms, activeIndex, pointerLabel, className = "" }) {
   );
 }
 
-// Two term lists with pointers i and j, and the result built so far.
+// Two term lists: l walks poly1 and r walks poly2, and the result built so far.
 export default function Problem1634View({ run, step }) {
   const { poly1, poly2 } = run.input;
   const terms1 = poly1.map(t => t);
@@ -26,8 +26,8 @@ export default function Problem1634View({ run, step }) {
   const merged = step.phase === "match";
   return (
     <section className="poly-view" aria-label="Adding two polynomials term by term">
-      <Row label="poly1" terms={terms1} activeIndex={step.i < terms1.length ? step.i : -1} pointerLabel="i" />
-      <Row label="poly2" terms={terms2} activeIndex={step.j < terms2.length ? step.j : -1} pointerLabel="j" />
+      <Row label="poly1" terms={terms1} activeIndex={step.i < terms1.length ? step.i : -1} pointerLabel="l" />
+      <Row label="poly2" terms={terms2} activeIndex={step.j < terms2.length ? step.j : -1} pointerLabel="r" />
       <div className={`poly-row poly-result`}>
         <span className="poly-row-label">result</span>
         {step.result.length === 0 && <span className="poly-message">(nothing yet)</span>}

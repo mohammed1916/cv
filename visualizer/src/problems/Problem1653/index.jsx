@@ -8,7 +8,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-deletions-to-make-string-balanced/',
   complexity: 'O(n) time and O(1) space: one scan keeps the cheapest balanced cost and the count of earlier b characters.',
   examples: [
-    { label: 'Mixed string', input: '{"s":"aababbab"}' },
+    { label: 'Mixed string', input: '{"s":"abbaabb"}' },
     { label: 'Starts with b', input: '{"s":"bbaa"}' },
     { label: 'Already balanced', input: '{"s":"aabb"}' },
   ],

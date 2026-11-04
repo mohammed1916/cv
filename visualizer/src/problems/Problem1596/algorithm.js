@@ -1,4 +1,3 @@
-// Knowledge-derived SQL lesson. The sample tables are invented for this visualization.
 export const sql = `with counts as (
   select o.customer_id, o.product_id, count(*) as order_count
   from Orders o

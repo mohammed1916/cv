@@ -5,22 +5,25 @@ export const phases = [
   { id: 'done', label: 'Count', description: 'Return how many deletions were fair.' },
 ]
 
-const codeText = `ways to make fair (nums):
-  evenTotal = sum of values at even indices
-  oddTotal = sum of values at odd indices
-  leftEven = leftOdd = 0, fair = 0
-  for each index i:
-    evenAfter = evenTotal - leftEven, minus nums[i] if i is even
-    oddAfter = oddTotal - leftOdd, minus nums[i] if i is odd
-    newEven = leftEven + oddAfter
-    newOdd = leftOdd + evenAfter
-    if newEven == newOdd: fair = fair + 1
-    add nums[i] to leftEven or leftOdd by parity
-  return fair`
+export const code = [
+  "function waysToMakeFair(nums) {",
+  "  let evenTotal = 0, oddTotal = 0;",
+  "  nums.forEach((v, i) => { if (i % 2 === 0) evenTotal += v; else oddTotal += v; });",
+  "  let leftEven = 0, leftOdd = 0, fair = 0;",
+  "  for (let i = 0; i < nums.length; i++) {",
+  "    const v = nums[i];",
+  "    const evenAfter = evenTotal - leftEven - (i % 2 === 0 ? v : 0);",
+  "    const oddAfter = oddTotal - leftOdd - (i % 2 === 1 ? v : 0);",
+  "    const newEven = leftEven + oddAfter;",
+  "    const newOdd = leftOdd + evenAfter;",
+  "    if (newEven === newOdd) fair++;",
+  "    if (i % 2 === 0) leftEven += v; else leftOdd += v;",
+  "  }",
+  "  return fair;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 
-export const code = codeText.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-const pythonText = `def ways_to_make_fair(nums):
+export const python = `def ways_to_make_fair(nums):
     even_total = sum(nums[0::2])
     odd_total = sum(nums[1::2])
     left_even = left_odd = fair = 0
@@ -38,9 +41,9 @@ const pythonText = `def ways_to_make_fair(nums):
     return fair
 `
 
-export const python = pythonText
-const L = s => codeText.split('\n').findIndex(line => line.includes(s)) + 1
-const P = s => pythonText.split('\n').findIndex(line => line.includes(s)) + 1
+const PY = python.split('\n')
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => PY.findIndex(line => line.includes(s)) + 1
 
 export function parseInput(text) {
   const input = JSON.parse(text)
@@ -56,7 +59,7 @@ export function buildTrace(nums) {
   let oddTotal = 0
   nums.forEach((value, i) => { if (i % 2 === 0) evenTotal += value; else oddTotal += value })
   const frames = [{
-    phase: 'start', activeLine: L('evenTotal = sum'), pythonLine: P('even_total = sum'),
+    phase: 'start', activeLine: L('let evenTotal = 0'), pythonLine: P('even_total = sum'),
     snapshot: { index: null, newEven: null, newOdd: null, fair: null, count: 0, evenTotal, oddTotal },
     message: `Even-index total ${evenTotal}, odd-index total ${oddTotal}.`,
   }]
@@ -70,14 +73,14 @@ export function buildTrace(nums) {
     const newEven = leftEven + oddAfter
     const newOdd = leftOdd + evenAfter
     frames.push({
-      phase: 'scan', activeLine: L('evenAfter = evenTotal'), pythonLine: P('even_after = '),
+      phase: 'scan', activeLine: L('const evenAfter'), pythonLine: P('even_after = '),
       snapshot: { index: i, newEven, newOdd, fair: null, count, evenTotal, oddTotal },
       message: `Delete index ${i} (${value}). Even-index sum becomes ${newEven}; odd-index sum becomes ${newOdd}.`,
     })
     const fair = newEven === newOdd
     if (fair) count += 1
     frames.push({
-      phase: 'decide', activeLine: L('if newEven == newOdd'), pythonLine: P('if new_even == new_odd'),
+      phase: 'decide', activeLine: L('if (newEven === newOdd)'), pythonLine: P('if new_even == new_odd'),
       snapshot: { index: i, newEven, newOdd, fair, count, evenTotal, oddTotal },
       message: fair ? `Sums match, so deleting index ${i} is fair. Count is ${count}.` : `Sums differ, so index ${i} is not fair.`,
     })

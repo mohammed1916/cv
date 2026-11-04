@@ -8,7 +8,7 @@ const definition = {
   url: 'https://leetcode.com/problems/special-positions-in-a-binary-matrix/',
   complexity: 'O(m * n) time and O(m + n) extra space for the row and column tallies.',
   examples: [
-    { label: 'Sample A', input: '{"mat":[[1,0,0],[0,0,1],[1,0,0]]}' },
+    { label: 'Diagonal pair', input: '{"mat":[[0,1],[1,0]]}' },
     { label: 'Full row', input: '{"mat":[[1,1],[0,0]]}' },
     { label: 'Scattered', input: '{"mat":[[0,1,0,0],[0,0,0,1],[1,0,0,0]]}' },
   ],
@@ -29,7 +29,7 @@ export default function SpecialPositions() {
             const current = r === i && c === j
             return <td key={c} data-cell={key} style={{
               width: 44, height: 40, textAlign: 'center', border: current ? '2px solid var(--text)' : '1px solid var(--border)',
-              background: found.has(key) ? '#bbf7d0' : 'transparent', color: '#1c1917',
+              background: found.has(key) ? 'color-mix(in srgb, var(--success) 35%, transparent)' : 'transparent', color: 'var(--text)',
             }}>{v}</td>
           })}
           <td>{rows[r]}</td>

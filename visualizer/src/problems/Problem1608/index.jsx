@@ -1,4 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -39,6 +41,8 @@ export default function SpecialValue() {
     const { nums, x, count } = step.snapshot
     return <>
       <ThresholdBars nums={nums} x={x} />
+      <AnswerRangeBar title="Candidate range for x" min={0} max={nums.length} low={x ?? 0} high={nums.length} probe={count === null ? null : x} verdict={count === x} />
+      <AnswerRangeBar title="Candidate range for x" min={0} max={nums.length} low={x ?? 0} high={nums.length} probe={count === null ? null : x} verdict={count === x} />
       <p>{x === null ? `Candidates run from 0 to the array length, ${nums.length}.` : `Candidate x = ${x}.`}</p>
       <p>{count === null ? 'No count yet.' : `Entries at least x: ${count}. The candidate matches when this equals x.`}</p>
     </>

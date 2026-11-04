@@ -17,21 +17,22 @@ export function parseInput(text) {
   return { rows, cols }
 }
 
-export const code = `fill matrix (rows, cols):
-  rowLeft = copy of rows
-  colLeft = copy of cols
-  grid = zeros, one cell per row and column
-  i = 0, j = 0
-  while i < m and j < n:
-    v = min(rowLeft[i], colLeft[j])
-    grid[i][j] = v
-    rowLeft[i] -= v
-    colLeft[j] -= v
-    if rowLeft[i] == 0:
-      i += 1
-    else:
-      j += 1
-  return grid`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function findValidMatrix(rows, cols) {",
+  "  const rowLeft = [...rows], colLeft = [...cols];",
+  "  const grid = rows.map(() => cols.map(() => 0));",
+  "  let i = 0, j = 0;",
+  "  while (i < rows.length && j < cols.length) {",
+  "    const v = Math.min(rowLeft[i], colLeft[j]);",
+  "    grid[i][j] = v;",
+  "    rowLeft[i] -= v;",
+  "    colLeft[j] -= v;",
+  "    if (rowLeft[i] === 0) i++;",
+  "    else j++;",
+  "  }",
+  "  return grid;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def fill_matrix(rows, cols):
     row_left, col_left = list(rows), list(cols)
@@ -61,19 +62,19 @@ export function buildTrace({ rows, cols }) {
   let j = 0
   const snap = (placed) => ({ rowLeft: [...rowLeft], colLeft: [...colLeft], grid: grid.map(r => [...r]), i, j, placed })
   const total = rows.reduce((a, b) => a + b, 0)
-  const frames = [at('start', 'grid = zeros', 'grid = [[0]', `Totals match at ${total}. Fill the grid from the top-left, one cell at a time.`, snap(null))]
+  const frames = [at('start', 'const grid = rows.map', 'grid = [[0]', `Totals match at ${total}. Fill the grid from the top-left, one cell at a time.`, snap(null))]
   while (i < rows.length && j < cols.length) {
     const v = Math.min(rowLeft[i], colLeft[j])
-    frames.push(at('compare', 'v = min', 'v = min', `Row ${i + 1} still needs ${rowLeft[i]} and column ${j + 1} still needs ${colLeft[j]}. The smaller is ${v}.`, snap(null)))
+    frames.push(at('compare', 'const v = Math.min', 'v = min', `Row ${i + 1} still needs ${rowLeft[i]} and column ${j + 1} still needs ${colLeft[j]}. The smaller is ${v}.`, snap(null)))
     grid[i][j] = v
     rowLeft[i] -= v
     colLeft[j] -= v
     frames.push(at('place', 'grid[i][j] = v', 'grid[i][j] = v', `Cell (${i + 1}, ${j + 1}) receives ${v}. Row ${i + 1} now needs ${rowLeft[i]}, column ${j + 1} needs ${colLeft[j]}.`, snap({ i, j, v })))
     if (rowLeft[i] === 0) {
-      frames.push(at('advance', 'i += 1', 'i += 1', `Row ${i + 1} is satisfied, so move down to row ${i + 2}.`, snap({ i, j, v })))
+      frames.push(at('advance', 'if (rowLeft[i] === 0)', 'i += 1', `Row ${i + 1} is satisfied, so move down to row ${i + 2}.`, snap({ i, j, v })))
       i += 1
     } else {
-      frames.push(at('advance', 'j += 1', 'j += 1', `Column ${j + 1} is satisfied, so move right to column ${j + 2}.`, snap({ i, j, v })))
+      frames.push(at('advance', 'else j++', 'j += 1', `Column ${j + 1} is satisfied, so move right to column ${j + 2}.`, snap({ i, j, v })))
       j += 1
     }
   }

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-one-bit-operations-to-make-integers-zero/',
   complexity: 'O(log n) time and O(1) space. The visualization caps n at 1023.',
   examples: [
-    { label: 'Example 1', input: '{"n":3}' },
-    { label: 'Example 2', input: '{"n":6}' },
+    { label: 'Five', input: '{"n":5}' },
+    { label: 'Nine', input: '{"n":9}' },
   ],
 }
 

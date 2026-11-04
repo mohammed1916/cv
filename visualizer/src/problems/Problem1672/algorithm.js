@@ -17,7 +17,7 @@ export function parseInput(text) {
 }
 
 // Pseudocode line numbers used by activeLine, and Python line numbers used by pythonLine.
-const C = { start: 2, loop: 3, total: 4, check: 5, keep: 5, done: 6 }
+const C = { start: 2, loop: 3, total: 4, check: 5, keep: 5, done: 7 }
 const PY = { start: 2, loop: 3, total: 4, check: 5, keep: 6, done: 7 }
 
 export function buildTrace(accounts) {
@@ -44,13 +44,16 @@ export function buildTrace(accounts) {
   return { input: accounts, result: best, frames }
 }
 
-export const code = `richest (accounts):
-  best = 0
-  for each customer row in accounts:
-    total = sum of the row
-    if total > best:
-      best = total
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function maximumWealth(accounts) {",
+  "  let best = 0;",
+  "  for (const row of accounts) {",
+  "    const total = row.reduce((sum, v) => sum + v, 0);",
+  "    if (total > best) best = total;",
+  "  }",
+  "  return best;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def max_wealth(accounts):
     best = 0

@@ -31,40 +31,57 @@ export function buildTrace(input) {
     const build = name => ({ name, alive: alive.has(name), children: children.get(name).map(build) })
     return build(king)
   }
-  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('track the family tree'), op: null, visit: null, answer: null, family: snapshot(), message: `${king} is the king and is alive.` }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('const children = new Map'), op: null, visit: null, answer: null, family: snapshot(), message: `${king} is the king and is alive.` }]
   for (const op of operations) {
     if (op[0] === 'birth') {
       children.get(op[1]).push(op[2])
       children.set(op[2], [])
       alive.add(op[2])
-      frames.push({ phase: 'birth', pythonLine: 14, activeLine: L('if the operation is birth'), op, visit: null, answer: null, family: snapshot(), message: `${op[2]} is born to ${op[1]} and becomes the youngest child.` })
+      frames.push({ phase: 'birth', pythonLine: 14, activeLine: L("op[0] === 'birth'"), op, visit: null, answer: null, family: snapshot(), message: `${op[2]} is born to ${op[1]} and becomes the youngest child.` })
     } else if (op[0] === 'death') {
       alive.delete(op[1])
-      frames.push({ phase: 'death', pythonLine: 16, activeLine: L('if the operation is death'), op, visit: null, answer: null, family: snapshot(), message: `${op[1]} dies and is skipped in future orders.` })
+      frames.push({ phase: 'death', pythonLine: 16, activeLine: L("op[0] === 'death'"), op, visit: null, answer: null, family: snapshot(), message: `${op[1]} dies and is skipped in future orders.` })
     } else {
       const order = []
       const walk = name => {
         if (alive.has(name)) order.push(name)
-        frames.push({ phase: 'walk', pythonLine: alive.has(name) ? 7 : 6, activeLine: L('a walk visits a name'), op, visit: name, answer: null, family: snapshot(), message: `Visit ${name}${alive.has(name) ? ', who is alive, so add the name' : ', who is dead, so skip the name'}.` })
+        frames.push({ phase: 'walk', pythonLine: alive.has(name) ? 7 : 6, activeLine: L('if (alive.has(name))'), op, visit: name, answer: null, family: snapshot(), message: `Visit ${name}${alive.has(name) ? ', who is alive, so add the name' : ', who is dead, so skip the name'}.` })
         for (const child of children.get(name)) walk(child)
       }
       walk(king)
       answers.push(order)
-      frames.push({ phase: 'order', pythonLine: 20, activeLine: L('if the operation is order'), op, visit: null, answer: order, family: snapshot(), message: `Inheritance order: ${order.join(', ')}.` })
+      frames.push({ phase: 'order', pythonLine: 20, activeLine: L('walk(king, out)'), op, visit: null, answer: order, family: snapshot(), message: `Inheritance order: ${order.join(', ')}.` })
     }
   }
-  frames.push({ phase: 'done', pythonLine: 21, activeLine: L('return all answers'), op: null, visit: null, answer: null, family: snapshot(), message: `${answers.length} order request(s) answered.` })
+  frames.push({ phase: 'done', pythonLine: 21, activeLine: L('return answers'), op: null, visit: null, answer: null, family: snapshot(), message: `${answers.length} order request(s) answered.` })
   return { input, result: answers, frames }
 }
 
-export const code = `track the family tree from the king, with children kept in birth order
-  set king alive and give the king an empty children list
-  repeat for each operation in the given order
-    if the operation is birth then append the child to the parent children list and mark the child alive
-    if the operation is death then mark that person as not alive
-    if the operation is order then answer with a walk from the king
-  a walk visits a name, adds it to the answer if alive, then visits each child in birth order
-  return all answers in the order they were asked`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function throneInheritance(king, operations) {",
+  "  const children = new Map([[king, []]]);",
+  "  const alive = new Set([king]);",
+  "  const answers = [];",
+  "  const walk = (name, out) => {",
+  "    if (alive.has(name)) out.push(name);",
+  "    for (const child of children.get(name)) walk(child, out);",
+  "  };",
+  "  for (const op of operations) {",
+  "    if (op[0] === 'birth') {",
+  "      children.get(op[1]).push(op[2]);",
+  "      children.set(op[2], []);",
+  "      alive.add(op[2]);",
+  "    } else if (op[0] === 'death') {",
+  "      alive.delete(op[1]);",
+  "    } else {",
+  "      const out = [];",
+  "      walk(king, out);",
+  "      answers.push(out);",
+  "    }",
+  "  }",
+  "  return answers;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def throne_inheritance(king, operations):

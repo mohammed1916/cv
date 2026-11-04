@@ -6,20 +6,24 @@ export const phases = [
   { id: 'done', label: 'Answer', description: 'Removals equal the values outside the longest block, or -1 if no block fits.' },
 ]
 
-const codeText = `min operations to reduce x (nums, x):
-  target = sum(nums) - x
-  if target < 0: return -1
-  best = 0, left = 0, window = 0
-  for right in each index:
-    window = window + nums[right]
-    while window > target: shrink from the left
-    if window == target: best = longest block
-  if best == 0 and target > 0: return -1
-  return length - best`
+export const code = [
+  "function minOperations(nums, x) {",
+  "  const total = nums.reduce((sum, v) => sum + v, 0);",
+  "  const target = total - x;",
+  "  if (target < 0) return -1;",
+  "  let best = 0, left = 0, window = 0;",
+  "  for (let right = 0; right < nums.length; right++) {",
+  "    window += nums[right];",
+  "    while (window > target) window -= nums[left++];",
+  "    if (window === target) best = Math.max(best, right - left + 1);",
+  "  }",
+  "  if (best === 0 && target > 0) return -1;",
+  "  return nums.length - best;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
-export const code = codeText.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-const pythonText = `def min_operations(nums, x):
+export const python = `def min_operations(nums, x):
     target = sum(nums) - x
     if target < 0:
         return -1
@@ -35,10 +39,7 @@ const pythonText = `def min_operations(nums, x):
         return -1
     return len(nums) - best
 `
-
-export const python = pythonText
-const L = s => codeText.split('\n').findIndex(line => line.includes(s)) + 1
-const P = s => pythonText.split('\n').findIndex(line => line.includes(s)) + 1
+const P = s => python.split('\n').findIndex(line => line.includes(s)) + 1
 
 export function parseInput(text) {
   const input = JSON.parse(text)
@@ -55,7 +56,7 @@ export function buildTrace({ nums, x }) {
   const target = total - x
   const snap = extra => ({ left: null, right: null, window: 0, target, best: 0, ...extra })
   const frames = [{
-    phase: 'start', activeLine: L('target = sum'), pythonLine: P('target = sum'),
+    phase: 'start', activeLine: L('const target = total - x'), pythonLine: P('target = sum'),
     snapshot: snap({}),
     message: `Total ${total}. Removing ${x} from the ends keeps a middle block summing to ${target}.`,
   }]
@@ -71,7 +72,7 @@ export function buildTrace({ nums, x }) {
   for (let right = 0; right < n; right++) {
     window += nums[right]
     frames.push({
-      phase: 'window', activeLine: L('window = window + nums'), pythonLine: P('window += value'),
+      phase: 'window', activeLine: L('window += nums[right]'), pythonLine: P('window += value'),
       snapshot: snap({ left, right, window, best }),
       message: `Add index ${right} (${nums[right]}). Block [${left}..${right}] sums to ${window}.`,
     })
@@ -81,7 +82,7 @@ export function buildTrace({ nums, x }) {
     }
     if (left > 0 && window <= target) {
       frames.push({
-        phase: 'shrink', activeLine: L('while window > target'), pythonLine: P('while window > target'),
+        phase: 'shrink', activeLine: L('while (window > target)'), pythonLine: P('while window > target'),
         snapshot: snap({ left, right, window, best }),
         message: `Block sum is now ${window} after dropping from the left. The block is [${left}..${right}].`,
       })
@@ -89,7 +90,7 @@ export function buildTrace({ nums, x }) {
     if (window === target) {
       best = Math.max(best, right - left + 1)
       frames.push({
-        phase: 'record', activeLine: L('if window == target'), pythonLine: P('if window == target'),
+        phase: 'record', activeLine: L('if (window === target)'), pythonLine: P('if window == target'),
         snapshot: snap({ left, right, window, best }),
         message: `Block [${left}..${right}] sums to ${target}, so it can stay. Longest block is ${best} values.`,
       })
@@ -98,7 +99,7 @@ export function buildTrace({ nums, x }) {
 
   const result = best === 0 && target > 0 ? -1 : n - best
   frames.push({
-    phase: 'done', activeLine: L(result === -1 ? 'return -1' : 'return length'), pythonLine: P(result === -1 ? 'return -1' : 'return len'),
+    phase: 'done', activeLine: L(result === -1 ? 'return -1' : 'return nums.length - best'), pythonLine: P(result === -1 ? 'return -1' : 'return len'),
     snapshot: snap({ best }),
     message: result === -1
       ? 'No block of the array sums to the target, so the answer is -1.'

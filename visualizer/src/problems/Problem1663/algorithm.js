@@ -4,17 +4,19 @@ export const phases = [
   { id: 'done', label: 'Answer', description: 'Every position is filled. Reading the letters left to right gives the smallest string.' },
 ]
 
-const codeText = `smallest string (n, k):
-  chars = n empty slots
-  for position i from n - 1 down to 0:
-    value = min(26, k - i)
-    chars[i] = letter number value
-    k = k - value
-  return the joined chars`
+export const code = [
+  "function getSmallestString(n, k) {",
+  "  const chars = new Array(n).fill('a');",
+  "  for (let i = n - 1; i >= 0; i--) {",
+  "    const value = Math.min(26, k - i);",
+  "    chars[i] = String.fromCharCode(96 + value);",
+  "    k -= value;",
+  "  }",
+  "  return chars.join('');",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 
-export const code = codeText.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-const pythonText = `def smallest_string(n, k):
+export const python = `def smallest_string(n, k):
     chars = [""] * n
     for i in range(n - 1, -1, -1):
         value = min(26, k - i)
@@ -23,9 +25,9 @@ const pythonText = `def smallest_string(n, k):
     return "".join(chars)
 `
 
-export const python = pythonText
-const L = s => codeText.split('\n').findIndex(line => line.includes(s)) + 1
-const P = s => pythonText.split('\n').findIndex(line => line.includes(s)) + 1
+const PY = python.split('\n')
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => PY.findIndex(line => line.includes(s)) + 1
 
 export function parseInput(text) {
   const input = JSON.parse(text)
@@ -41,7 +43,7 @@ const letter = value => String.fromCharCode(96 + value)
 export function buildTrace({ n, k }) {
   const chars = Array(n).fill('?')
   const frames = [{
-    phase: 'start', activeLine: L('chars = n empty'), pythonLine: P('chars = [""] * n'),
+    phase: 'start', activeLine: L('new Array(n).fill'), pythonLine: P('chars = [""] * n'),
     snapshot: { chars: chars.slice(), budget: k, value: null, position: null },
     message: `Total value ${k} across ${n} positions. Each letter is worth its alphabet index from 1 to 26.`,
   }]
@@ -51,14 +53,14 @@ export function buildTrace({ n, k }) {
     chars[i] = letter(value)
     budget -= value
     frames.push({
-      phase: 'place', activeLine: L('value = min(26'), pythonLine: P('value = min(26'),
+      phase: 'place', activeLine: L('const value = Math.min(26'), pythonLine: P('value = min(26'),
       snapshot: { chars: chars.slice(), budget, value, position: i },
       message: `Position ${i}: ${i} earlier positions still need one unit each, so this one takes ${value} ("${chars[i]}"). Budget left ${budget}.`,
     })
   }
   const result = chars.join('')
   frames.push({
-    phase: 'done', activeLine: L('return the joined'), pythonLine: P('return "".join(chars)'),
+    phase: 'done', activeLine: L('return chars.join'), pythonLine: P('return "".join(chars)'),
     snapshot: { chars: chars.slice(), budget, value: null, position: null },
     message: `Answer "${result}". Its values sum to ${k}.`,
   })

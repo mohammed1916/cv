@@ -16,7 +16,7 @@ export function parseInput(text) {
 }
 
 // Pseudocode line numbers used by activeLine, and Python line numbers used by pythonLine.
-const C = { start: 2, loop: 4, read: 5, pop: 6, popAct: 7, skip: 8, push: 9, done: 10 }
+const C = { start: 2, loop: 4, read: 5, pop: 6, popAct: 6, skip: 7, push: 7, done: 9 }
 const PY = { start: 2, loop: 4, read: 4, pop: 5, popAct: 6, skip: 7, push: 8, done: 9 }
 
 export function buildTrace({ values, k }) {
@@ -45,16 +45,18 @@ export function buildTrace({ values, k }) {
   return { input: { values, k }, result: [...stack], frames }
 }
 
-export const code = `most competitive (values, k):
-  stack = empty list
-  n = length of values
-  for i from 0 to n - 1:
-    x = values[i]
-    while stack not empty and top > x and size - 1 + (n - i) >= k:
-      pop the top
-    if size of stack < k:
-      push x
-  return stack`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function mostCompetitive(values, k) {",
+  "  const stack = [];",
+  "  const n = values.length;",
+  "  for (let i = 0; i < n; i++) {",
+  "    const x = values[i];",
+  "    while (stack.length && stack[stack.length - 1] > x && stack.length - 1 + (n - i) >= k) stack.pop();",
+  "    if (stack.length < k) stack.push(x);",
+  "  }",
+  "  return stack;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def most_competitive(nums, k):
     stack = []

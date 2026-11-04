@@ -15,7 +15,7 @@ export function parseInput(text) {
 }
 
 // Pseudocode line numbers used by activeLine, and Python line numbers used by pythonLine.
-const C = { header: 1, loop: 2, candidate: 3, test: 4, found: 5, zero: 6 }
+const C = { header: 1, loop: 2, candidate: 3, test: 4, found: 4, zero: 6 }
 const PY = { header: 1, loop: 2, candidate: 3, test: 4, found: 5, zero: 6 }
 
 export function buildTrace({ sequence, word }) {
@@ -42,12 +42,15 @@ export function buildTrace({ sequence, word }) {
   return { input: { sequence, word }, result, frames }
 }
 
-export const code = `max repeating (sequence, word):
-  for k from len(sequence) // len(word) down to 0:
-    candidate = word repeated k times
-    if candidate is inside sequence:
-      return k
-  return 0`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function maxRepeating(sequence, word) {",
+  "  for (let k = Math.floor(sequence.length / word.length); k >= 0; k--) {",
+  "    const candidate = word.repeat(k);",
+  "    if (sequence.includes(candidate)) return k;",
+  "  }",
+  "  return 0;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def max_repeating(sequence, word):
     for k in range(len(sequence) // len(word), -1, -1):

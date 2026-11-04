@@ -6,17 +6,22 @@ export const phases = [
   { id: 'done', label: 'Decide', description: 'Return true only when both checks pass.' },
 ]
 
-const codeText = `close strings (word1, word2):
-  tally the letters of word1 and word2
-  if the sets of distinct letters differ:
-    return false
-  if the sorted tally values differ:
-    return false
-  return true`
+export const code = [
+  "function closeStrings(word1, word2) {",
+  "  const count1 = {}, count2 = {};",
+  "  for (const ch of word1) count1[ch] = (count1[ch] || 0) + 1;",
+  "  for (const ch of word2) count2[ch] = (count2[ch] || 0) + 1;",
+  "  const letters1 = Object.keys(count1).sort(), letters2 = Object.keys(count2).sort();",
+  "  if (letters1.join('') !== letters2.join('')) return false;",
+  "  const freq1 = Object.values(count1).sort((a, b) => a - b);",
+  "  const freq2 = Object.values(count2).sort((a, b) => a - b);",
+  "  if (freq1.join(',') !== freq2.join(',')) return false;",
+  "  return true;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
-export const code = codeText.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-const pythonText = `from collections import Counter
+export const python = `from collections import Counter
 
 def close_strings(word1, word2):
     count1 = Counter(word1)
@@ -25,10 +30,7 @@ def close_strings(word1, word2):
         return False
     return sorted(count1.values()) == sorted(count2.values())
 `
-
-export const python = pythonText
-const L = s => codeText.split('\n').findIndex(line => line.includes(s)) + 1
-const P = s => pythonText.split('\n').findIndex(line => line.includes(s)) + 1
+const P = s => python.split('\n').findIndex(line => line.includes(s)) + 1
 
 export function parseInput(text) {
   const input = JSON.parse(text)
@@ -59,18 +61,18 @@ export function buildTrace({ word1, word2 }) {
   const snap = extra => ({ table: null, sameLetters: null, sameFreq: null, freq1: null, freq2: null, ...extra })
 
   const frames = [{
-    phase: 'start', activeLine: L('close strings'), pythonLine: P('def close_strings'),
+    phase: 'start', activeLine: L('function closeStrings'), pythonLine: P('def close_strings'),
     snapshot: snap({}),
     message: `Compare "${word1}" and "${word2}". The answer depends on the letter set and on the sorted letter counts.`,
   }, {
-    phase: 'tally', activeLine: L('tally the letters'), pythonLine: P('count1 = Counter'),
+    phase: 'tally', activeLine: L('for (const ch of word1)'), pythonLine: P('count1 = Counter'),
     snapshot: snap({ table }),
     message: `word1 uses ${letters1.length} distinct letters and word2 uses ${letters2.length}.`,
   }]
 
   if (!sameLetters) {
     frames.push({
-      phase: 'letters', activeLine: L('if the sets'), pythonLine: P('if set(count1)'),
+      phase: 'letters', activeLine: L("letters1.join('')"), pythonLine: P('if set(count1)'),
       snapshot: snap({ table, sameLetters: false }),
       message: `The letter sets differ, so no sequence of moves can connect these words.`,
     })
@@ -83,12 +85,12 @@ export function buildTrace({ word1, word2 }) {
   }
 
   frames.push({
-    phase: 'letters', activeLine: L('if the sets'), pythonLine: P('if set(count1)'),
+    phase: 'letters', activeLine: L("letters1.join('')"), pythonLine: P('if set(count1)'),
     snapshot: snap({ table, sameLetters: true }),
     message: 'Both words use the same distinct letters, so the letter check passes.',
   })
   frames.push({
-    phase: 'frequencies', activeLine: L('if the sorted'), pythonLine: P('return sorted'),
+    phase: 'frequencies', activeLine: L("freq1.join("), pythonLine: P('return sorted'),
     snapshot: snap({ table, sameLetters: true, freq1, freq2, sameFreq }),
     message: sameFreq
       ? `Sorted counts are [${freq1.join(', ')}] in both words, so the frequency check passes.`

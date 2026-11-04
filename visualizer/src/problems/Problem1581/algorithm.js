@@ -1,4 +1,3 @@
-// Knowledge-derived SQL lesson. The sample tables are invented for this visualization.
 export const sql = `select v.customer_id, count(*) as count_no_trans
 from Visits v
 left join Transactions t on t.visit_id = v.visit_id

@@ -5,24 +5,45 @@ export const phases = [
   { id: 'done', label: 'Decide', description: 'Return true only when every position matched and both arrays ended together.' },
 ]
 
-const codeText = `arrays equivalent (word1, word2):
-  i = j = 0 (chunk and character in word1), k = m = 0 (in word2)
-  while both arrays still have characters:
-    pull the next character a from word1 and b from word2
-    if a is not b: return false
-  return both arrays are exhausted`
+export const code = [
+  "function arrayStringsAreEqual(word1, word2) {",
+  "  let i = 0, j = 0;",
+  "  let k = 0, m = 0;",
+  "  while (i < word1.length && j < word2.length) {",
+  "    const a = word1[i][k];",
+  "    const b = word2[j][m];",
+  "    if (a !== b) return false;",
+  "    k++; m++;",
+  "    if (k === word1[i].length) { i++; k = 0; }",
+  "    if (m === word2[j].length) { j++; m = 0; }",
+  "  }",
+  "  return i === word1.length && j === word2.length;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 
-export const code = codeText.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-const pythonText = `def array_strings_are_equal(word1, word2):
-    chars1 = "".join(word1)
-    chars2 = "".join(word2)
-    return chars1 == chars2
+export const python = `def array_strings_are_equal(word1, word2):
+    i = j = 0
+    k = m = 0
+    while i < len(word1) and j < len(word2):
+        a = word1[i][k]
+        b = word2[j][m]
+        if a != b:
+            return False
+        k += 1
+        m += 1
+        if k == len(word1[i]):
+            i += 1
+            k = 0
+        if m == len(word2[j]):
+            j += 1
+            m = 0
+    return i == len(word1) and j == len(word2)
 `
 
-export const python = pythonText
-const L = s => codeText.split('\n').findIndex(line => line.includes(s)) + 1
-const P = s => pythonText.split('\n').findIndex(line => line.includes(s)) + 1
+const PY = python.split('\n')
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => PY.findIndex(line => line.includes(s)) + 1
+
 
 export function parseInput(text) {
   const input = JSON.parse(text)
@@ -45,7 +66,7 @@ export function buildTrace({ word1, word2 }) {
   const s1 = characterStream(word1)
   const s2 = characterStream(word2)
   const frames = [{
-    phase: 'start', activeLine: L('arrays equivalent'), pythonLine: P('def array_strings'),
+    phase: 'start', activeLine: L('function arrayStringsAreEqual'), pythonLine: P('def array_strings'),
     snapshot: { left: null, right: null, matched: 0, mismatch: false },
     message: `word1 spells ${s1.length} characters and word2 spells ${s2.length}. Compare them in order.`,
   }]
@@ -57,36 +78,36 @@ export function buildTrace({ word1, word2 }) {
     const b = s2[t] ?? null
     if (a === null || b === null) {
       frames.push({
-        phase: 'pull', activeLine: L('pull the next character'), pythonLine: P('chars2 ='),
+        phase: 'pull', activeLine: L('const a = word1[i][k]'), pythonLine: P('a = word1[i][k]'),
         snapshot: { left: a, right: b, matched, mismatch: false },
         message: a === null ? 'word1 has run out while word2 still has characters.' : 'word2 has run out while word1 still has characters.',
       })
-      frames.push({ phase: 'done', activeLine: L('return false'), pythonLine: P('return chars1 == chars2'), snapshot: { left: a, right: b, matched, mismatch: true }, message: 'The total lengths differ, so the arrays are not equivalent. Return false.' })
+      frames.push({ phase: 'done', activeLine: L('return false'), pythonLine: P('return i == len(word1)'), snapshot: { left: a, right: b, matched, mismatch: true }, message: 'The total lengths differ, so the arrays are not equivalent. Return false.' })
       return { input: { word1, word2 }, result: false, frames }
     }
     frames.push({
-      phase: 'pull', activeLine: L('pull the next character'), pythonLine: P('chars1 ='),
+      phase: 'pull', activeLine: L('const a = word1[i][k]'), pythonLine: P('k = m = 0'),
       snapshot: { left: a, right: b, matched, mismatch: false },
       message: `word1 gives "${a.ch}" from chunk ${a.chunk}, word2 gives "${b.ch}" from chunk ${b.chunk}.`,
     })
     if (a.ch !== b.ch) {
       frames.push({
-        phase: 'compare', activeLine: L('if a is not b'), pythonLine: P('return chars1 == chars2'),
+        phase: 'compare', activeLine: L('if (a !== b)'), pythonLine: P('return i == len(word1)'),
         snapshot: { left: a, right: b, matched, mismatch: true },
         message: `"${a.ch}" and "${b.ch}" differ at position ${t}, so the arrays are not equivalent.`,
       })
-      frames.push({ phase: 'done', activeLine: L('return false'), pythonLine: P('return chars1 == chars2'), snapshot: { left: a, right: b, matched, mismatch: true }, message: 'Return false.' })
+      frames.push({ phase: 'done', activeLine: L('return false'), pythonLine: P('return i == len(word1)'), snapshot: { left: a, right: b, matched, mismatch: true }, message: 'Return false.' })
       return { input: { word1, word2 }, result: false, frames }
     }
     matched += 1
     frames.push({
-      phase: 'compare', activeLine: L('if a is not b'), pythonLine: P('return chars1 == chars2'),
+      phase: 'compare', activeLine: L('if (a !== b)'), pythonLine: P('return i == len(word1)'),
       snapshot: { left: a, right: b, matched, mismatch: false },
       message: `Both spell "${a.ch}" at position ${t}. ${matched} characters match so far.`,
     })
   }
   frames.push({
-    phase: 'done', activeLine: L('return both arrays are exhausted'), pythonLine: P('return chars1 == chars2'),
+    phase: 'done', activeLine: L('return i === word1.length'), pythonLine: P('return i == len(word1)'),
     snapshot: { left: null, right: null, matched, mismatch: false },
     message: `Both arrays are exhausted after ${matched} matching characters. Return true.`,
   })

@@ -8,8 +8,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-deletions-to-make-character-frequencies-unique/',
   complexity: 'O(n + k log k) time where k is the alphabet size: count letters, sort frequencies, then take the largest free value for each.',
   examples: [
-    { label: 'Sample aaabbbcc', input: '{"s":"aaabbbcc"}' },
-    { label: 'Already unique', input: '{"s":"aaabbc"}' },
+    { label: 'Sample aaabbbcc', input: '{"s":"aaabbbbcc"}' },
+    { label: 'Already unique', input: '{"s":"zzzyyyxx"}' },
     { label: 'Single letters', input: '{"s":"abcdef"}' },
   ],
 }

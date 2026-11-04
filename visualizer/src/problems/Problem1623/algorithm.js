@@ -1,4 +1,3 @@
-// Knowledge-derived SQL lesson. The sample tables are invented for this visualization.
 export const sql = `select a.student_id as member_A, b.student_id as member_B, c.student_id as member_C
 from SchoolA a
 join SchoolB b on b.student_id <> a.student_id

@@ -55,9 +55,9 @@ const definition = {
   url: "https://leetcode.com/problems/strange-printer-ii/",
   complexity: "O(C * m * n) time for C colors on an m x n grid, plus O(C^2) for the graph. The visualization caps the grid at 12 x 12 and colors at 24.",
   examples: [
-    { label: "Example 1", input: JSON.stringify({ targetGrid: [[1, 1, 1, 1], [1, 2, 2, 1], [1, 2, 2, 1], [1, 1, 1, 1]] }) },
-    { label: "Example 2", input: JSON.stringify({ targetGrid: [[1, 1, 1, 1], [1, 1, 3, 3], [1, 1, 3, 4], [5, 5, 1, 4]] }) },
-    { label: "Example 3", input: JSON.stringify({ targetGrid: [[1, 2, 1], [2, 1, 2], [1, 2, 1]] }) },
+    { label: "Example 1", input: JSON.stringify({ targetGrid: [[3, 3, 3], [3, 4, 3], [3, 3, 3]] }) },
+    { label: "Example 2", input: JSON.stringify({ targetGrid: [[1, 2], [2, 1]] }) },
+    { label: "Example 3", input: JSON.stringify({ targetGrid: [[5, 6, 5], [6, 6, 6]] }) },
   ],
 };
 

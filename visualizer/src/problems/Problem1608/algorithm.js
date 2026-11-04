@@ -15,14 +15,16 @@ export function parseInput(text) {
   return nums
 }
 
-export const code = `special value (nums):
-  n = length of nums
-  for x = 0 to n:
-    count = 0
-    for v in nums:
-      if v >= x: count += 1
-    if count == x: return x
-  return -1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function specialValue(nums) {",
+  "  const n = nums.length;",
+  "  for (let x = 0; x <= n; x++) {",
+  "    const count = nums.filter(v => v >= x).length;",
+  "    if (count === x) return x;",
+  "  }",
+  "  return -1;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def special_value(nums):
     n = len(nums)
@@ -40,17 +42,17 @@ const at = (phase, pseudo, py, message, snapshot) => ({ phase, activeLine: L(pse
 export function buildTrace(nums) {
   const n = nums.length
   const snap = (x, count) => ({ nums, x, count })
-  const frames = [at('start', 'n = length', 'n = len(nums)', `The array has ${n} entries, so the answer can only be between 0 and ${n}.`, snap(null, null))]
+  const frames = [at('start', 'const n = nums.length', 'n = len(nums)', `The array has ${n} entries, so the answer can only be between 0 and ${n}.`, snap(null, null))]
   for (let x = 0; x <= n; x++) {
-    frames.push(at('candidate', 'for x = 0 to n', 'for x in range', `Candidate x = ${x}. Count the entries that are at least ${x}.`, snap(x, null)))
+    frames.push(at('candidate', 'for (let x = 0', 'for x in range', `Candidate x = ${x}. Count the entries that are at least ${x}.`, snap(x, null)))
     const count = nums.filter(v => v >= x).length
-    frames.push(at('count', 'if v >= x', 'count = sum(', `${count} entries are at least ${x}.`, snap(x, count)))
+    frames.push(at('count', 'filter(v => v >= x)', 'count = sum(', `${count} entries are at least ${x}.`, snap(x, count)))
     if (count === x) {
-      frames.push(at('match', 'if count == x', 'if count == x', `${count} equals x = ${x}, so the answer is ${x}.`, snap(x, count)))
-      frames.push(at('done', 'return x', 'return x', `Return ${x}, the first candidate whose count matches.`, snap(x, count)))
+      frames.push(at('match', 'if (count === x)', 'if count == x', `${count} equals x = ${x}, so the answer is ${x}.`, snap(x, count)))
+      frames.push(at('done', 'return x;', 'return x', `Return ${x}, the first candidate whose count matches.`, snap(x, count)))
       return { input: nums, result: x, frames }
     }
-    frames.push(at('miss', 'for x = 0 to n', 'for x in range', `${count} is not ${x}, so this candidate fails.`, snap(x, count)))
+    frames.push(at('miss', 'for (let x = 0', 'for x in range', `${count} is not ${x}, so this candidate fails.`, snap(x, count)))
   }
   frames.push(at('done', 'return -1', 'return -1', 'No candidate from 0 to n matches its own count, so the answer is -1.', snap(null, null)))
   return { input: nums, result: -1, frames }

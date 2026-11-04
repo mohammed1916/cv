@@ -30,7 +30,7 @@ const definition = {
   url: 'https://leetcode.com/problems/throne-inheritance/',
   complexity: 'birth and death take O(1) time; an order request takes O(n) time for n people.',
   examples: [
-    { label: 'Example', input: '{"king":"king","operations":[["birth","king","andy"],["birth","king","bob"],["birth","king","catherine"],["birth","andy","matthew"],["birth","bob","alex"],["birth","bob","asha"],["order"],["death","bob"],["order"]]}' },
+    { label: 'Invented family', input: '{"king":"ruth","operations":[["birth","ruth","ivo"],["birth","ruth","lena"],["birth","ivo","tom"],["order"],["death","lena"],["birth","lena","ada"],["order"]]}' },
   ],
 }
 

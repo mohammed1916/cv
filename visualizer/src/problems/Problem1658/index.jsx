@@ -9,8 +9,8 @@ const definition = {
   complexity: 'O(n) time and O(1) extra space: a sliding window finds the longest middle block whose sum is total minus x.',
   examples: [
     { label: 'Ends sum to x', input: '{"nums":[2,3,1,5,4],"x":6}' },
-    { label: 'Middle block', input: '{"nums":[1,1,4,2,3],"x":5}' },
-    { label: 'Too large', input: '{"nums":[5,6,7,8,9],"x":4}' },
+    { label: 'Middle block', input: '{"nums":[4,1,3,2,5],"x":6}' },
+    { label: 'Too large', input: '{"nums":[6,2,8,3],"x":9}' },
   ],
 }
 

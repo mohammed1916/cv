@@ -26,40 +26,61 @@ export function buildTrace({ n, edges }) {
   const decisions = Array(edges.length).fill('pending')
   let kept = 0
   const order = edges.map((_, i) => i).sort((a, b) => edges[b][0] - edges[a][0] || a - b)
-  const frames = [{ phase: 'start', pythonLine: 17, activeLine: L('make two union-find structures'), edge: -1, decisions: [...decisions], groups: [...groups], kept, message: `Alice and Bob each start with ${n} separate nodes.` }]
+  const frames = [{ phase: 'start', pythonLine: 17, activeLine: L('const pa = Array'), edge: -1, decisions: [...decisions], groups: [...groups], kept, message: `Alice and Bob each start with ${n} separate nodes.` }]
   for (const idx of order) {
     const [t, u, v] = edges[idx]
     let line
     if (t === 3) {
-      line = 'merge it in both structures'
+      line = 'const a = unite'
       const a = unite(pa, u, v)
       const b = unite(pb, u, v)
       if (a) groups[0]--
       if (b) groups[1]--
       if (a || b) { kept++; decisions[idx] = 'kept' } else decisions[idx] = 'removed'
     } else if (t === 1) {
-      line = 'keep it if it joins two groups in Alice'
+      line = 'if (unite(pa'
       if (unite(pa, u, v)) { groups[0]--; kept++; decisions[idx] = 'kept' } else decisions[idx] = 'removed'
     } else {
-      line = 'keep it if it joins two groups in Bob'
+      line = 'if (unite(pb'
       if (unite(pb, u, v)) { groups[1]--; kept++; decisions[idx] = 'kept' } else decisions[idx] = 'removed'
     }
     frames.push({ phase: 'edge', pythonLine: t === 3 ? (decisions[idx] === 'kept' ? 28 : 27) : t === 1 ? (decisions[idx] === 'kept' ? 32 : 30) : (decisions[idx] === 'kept' ? 36 : 34), activeLine: L(line), edge: idx, decisions: [...decisions], groups: [...groups], kept, message: `Edge ${idx} (type ${t}, ${u}-${v}) is ${decisions[idx]}.` })
   }
   const ok = groups[0] === 1 && groups[1] === 1
   const result = ok ? edges.length - kept : -1
-  frames.push({ phase: 'done', pythonLine: ok ? 38 : 39, activeLine: L('return the number of edges minus kept'), edge: -1, decisions: [...decisions], groups: [...groups], kept, message: ok ? `Both can reach every node; remove ${result} edges.` : 'Alice or Bob cannot reach every node, so the answer is -1.' })
+  frames.push({ phase: 'done', pythonLine: ok ? 38 : 39, activeLine: L('return edges.length - kept'), edge: -1, decisions: [...decisions], groups: [...groups], kept, message: ok ? `Both can reach every node; remove ${result} edges.` : 'Alice or Bob cannot reach every node, so the answer is -1.' })
   return { input: { n, edges }, result, frames }
 }
 
-export const code = `most edges that can be removed while Alice and Bob both still reach every node
-  make two union-find structures, one for Alice and one for Bob
-  set kept to 0
-  for each type 3 edge, which both can use
-    merge it in both structures, and keep the edge if either merge joined two groups
-  for each type 1 edge, which only Alice can use, keep it if it joins two groups in Alice structure
-  for each type 2 edge, which only Bob can use, keep it if it joins two groups in Bob structure
-  if Alice and Bob each have one group then return the number of edges minus kept, otherwise return -1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function maxNumEdgesToRemove(n, edges) {
+  const pa = Array.from({ length: n + 1 }, (_, i) => i);
+  const pb = Array.from({ length: n + 1 }, (_, i) => i);
+  const find = (p, x) => { while (p[x] !== x) x = p[x]; return x; };
+  const unite = (p, u, v) => {
+    const ru = find(p, u), rv = find(p, v);
+    if (ru === rv) return false;
+    p[ru] = rv;
+    return true;
+  };
+  let groupsA = n, groupsB = n;
+  let kept = 0;
+  const sorted = [...edges].sort((a, b) => b[0] - a[0]);
+  for (const [t, u, v] of sorted) {
+    if (t === 3) {
+      const a = unite(pa, u, v);
+      const b = unite(pb, u, v);
+      if (a) groupsA--;
+      if (b) groupsB--;
+      if (a || b) kept++;
+    } else if (t === 1) {
+      if (unite(pa, u, v)) { groupsA--; kept++; }
+    } else {
+      if (unite(pb, u, v)) { groupsB--; kept++; }
+    }
+  }
+  if (groupsA === 1 && groupsB === 1) return edges.length - kept;
+  return -1;
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def max_removable(n, edges):

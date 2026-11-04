@@ -8,7 +8,7 @@ const definition = {
   url: 'https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent/',
   complexity: 'O(n) time and O(1) extra space: walk both chunk lists with two cursors, or join and compare once.',
   examples: [
-    { label: 'Same text, different chunks', input: '{"word1":["ab","c"],"word2":["a","bc"]}' },
+    { label: 'Same text, different chunks', input: '{"word1":["xy","z"],"word2":["x","yz"]}' },
     { label: 'Same length, different letter', input: '{"word1":["ab","c"],"word2":["ac","b"]}' },
     { label: 'Longer second array', input: '{"word1":["ab"],"word2":["abc"]}' },
   ],

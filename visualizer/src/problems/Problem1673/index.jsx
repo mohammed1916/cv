@@ -8,7 +8,7 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-most-competitive-subsequence/',
   complexity: 'O(n) time and O(n) space: every value is pushed and popped at most once.',
   examples: [
-    { label: 'Sample A', input: '{"values":[3,5,2,6],"k":2}' },
+    { label: 'Sample A', input: '{"values":[4,1,5,2],"k":2}' },
     { label: 'Pops', input: '{"values":[9,8,1,7],"k":2}' },
     { label: 'Whole array', input: '{"values":[4,2,9],"k":3}' },
   ],

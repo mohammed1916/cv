@@ -15,9 +15,9 @@ const definition = {
   url: 'https://leetcode.com/problems/alert-using-same-key-card-three-or-more-times-in-a-one-hour-period/',
   complexity: 'O(n log n) time for sorting each worker’s swipes. The visualization caps input at 20 swipes.',
   examples: [
-    { label: 'Example 1', input: '{"keyName":["daniel","daniel","daniel","luis","luis","luis","luis"],"keyTime":["10:00","10:40","11:00","09:00","11:00","13:00","15:00"]}' },
-    { label: 'Example 3', input: '{"keyName":["john","john","john"],"keyTime":["23:58","23:59","00:01"]}' },
-    { label: 'Example 4', input: '{"keyName":["leslie","leslie","leslie","clare","clare","clare","clare"],"keyTime":["13:00","13:20","14:00","18:00","18:51","19:30","19:49"]}' },
+    { label: 'Morning run', input: '{"keyName":["ava","ava","ava","ben","ben"],"keyTime":["08:05","08:30","09:04","12:00","12:30"]}' },
+    { label: 'Exactly an hour', input: '{"keyName":["mia","mia","mia","mia"],"keyTime":["07:00","08:01","08:59","09:01"]}' },
+    { label: 'Two alerts', input: '{"keyName":["kai","kai","kai","eli","eli","eli"],"keyTime":["18:00","18:45","18:59","06:00","06:20","06:40"]}' },
   ],
 }
 

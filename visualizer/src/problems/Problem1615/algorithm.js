@@ -25,19 +25,26 @@ export function parseInput(text) {
   return { n, roads }
 }
 
-export const code = `maximal rank (n, roads):
-  degree = zeros for each city
-  linked = empty set of city pairs
-  for each road (a, b):
-    degree[a] += 1 ; degree[b] += 1
-    linked add sorted pair (a, b)
-  best = 0
-  for each pair a < b:
-    rank = degree[a] + degree[b]
-    if (a, b) is in linked:
-      rank -= 1
-    best = max(best, rank)
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function maximalNetworkRank(n, roads) {",
+  "  const degree = new Array(n).fill(0);",
+  "  const linked = new Set();",
+  "  for (const [a, b] of roads) {",
+  "    degree[a]++;",
+  "    degree[b]++;",
+  "    linked.add(`${Math.min(a, b)}-${Math.max(a, b)}`);",
+  "  }",
+  "  let best = 0;",
+  "  for (let a = 0; a < n; a++) {",
+  "    for (let b = a + 1; b < n; b++) {",
+  "      let rank = degree[a] + degree[b];",
+  "      if (linked.has(`${a}-${b}`)) rank -= 1;",
+  "      best = Math.max(best, rank);",
+  "    }",
+  "  }",
+  "  return best;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def maximal_network_rank(n, roads):
     degree = [0] * n
@@ -65,26 +72,26 @@ export function buildTrace({ n, roads }) {
   const linked = new Set()
   const snap = (pair, rank, shared) => ({ n, degree: [...degree], pair, rank, shared, best, roads: roads.length })
   let best = 0
-  const frames = [at('start', 'degree = zeros', 'degree = [0]', `${n} cities and ${roads.length} roads. Start with every degree at 0.`, snap(null, null, null))]
+  const frames = [at('start', 'const degree = new Array', 'degree = [0]', `${n} cities and ${roads.length} roads. Start with every degree at 0.`, snap(null, null, null))]
   for (const [a, b] of roads) {
     degree[a] += 1
     degree[b] += 1
     linked.add(`${Math.min(a, b)}-${Math.max(a, b)}`)
-    frames.push(at('count', 'degree[a] += 1', 'degree[a] += 1', `Road ${a}-${b}: city ${a} has degree ${degree[a]} and city ${b} has degree ${degree[b]}.`, snap(null, null, null)))
+    frames.push(at('count', 'degree[a]++', 'degree[a] += 1', `Road ${a}-${b}: city ${a} has degree ${degree[a]} and city ${b} has degree ${degree[b]}.`, snap(null, null, null)))
   }
   for (let a = 0; a < n; a++) {
     for (let b = a + 1; b < n; b++) {
       let rank = degree[a] + degree[b]
-      frames.push(at('pair', 'rank = degree[a]', 'rank = degree[a]', `Pair ${a} and ${b}: degrees ${degree[a]} + ${degree[b]} give ${rank}.`, snap([a, b], rank, null)))
+      frames.push(at('pair', 'let rank = degree[a]', 'rank = degree[a]', `Pair ${a} and ${b}: degrees ${degree[a]} + ${degree[b]} give ${rank}.`, snap([a, b], rank, null)))
       const shared = linked.has(`${a}-${b}`)
       if (shared) {
         rank -= 1
         frames.push(at('direct', 'rank -= 1', 'rank -= 1', `Cities ${a} and ${b} share a road. It was counted in both degrees, so the rank becomes ${rank}.`, snap([a, b], rank, true)))
       }
       best = Math.max(best, rank)
-      frames.push(at('best', 'best = max', 'best = max', `Best rank after pair ${a}-${b} is ${best}.`, snap([a, b], rank, shared)))
+      frames.push(at('best', 'best = Math.max', 'best = max', `Best rank after pair ${a}-${b} is ${best}.`, snap([a, b], rank, shared)))
     }
   }
-  frames.push(at('done', 'return best', 'return best', `The largest rank over all pairs is ${best}.`, snap(null, null, null)))
+  frames.push(at('done', 'return best;', 'return best', `The largest rank over all pairs is ${best}.`, snap(null, null, null)))
   return { input: { n, roads }, result: best, frames }
 }

@@ -5,18 +5,23 @@ export const phases = [
   { id: 'done', label: 'All chunks', description: 'Return one chunk per insertion, in arrival order.' },
 ]
 
-export const code = `ordered stream (n, inserts):
-  slots = n empty positions, ids 1 to n
-  pointer = 1
-  outputs = empty list
-  for each (key, value) in inserts:
-    store value at slots[key]
-    chunk = empty list
-    while pointer <= n and slots[pointer] is filled:
-      append slots[pointer] to chunk
-      pointer = pointer + 1
-    add chunk to outputs
-  return outputs`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function orderedStream(n, inserts) {",
+  "  const slots = new Array(n + 1).fill(null);",
+  "  let pointer = 1;",
+  "  const output = [];",
+  "  for (const [key, value] of inserts) {",
+  "    slots[key] = value;",
+  "    const chunk = [];",
+  "    while (pointer <= n && slots[pointer] !== null) {",
+  "      chunk.push(slots[pointer]);",
+  "      pointer++;",
+  "    }",
+  "    output.push(chunk);",
+  "  }",
+  "  return output;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def ordered_stream(n, inserts):
     slots = [None] * (n + 1)
@@ -62,20 +67,20 @@ export function buildTrace({ n, inserts }) {
   const push = (phase, pcNeedle, pyNeedle, message, snapshot) =>
     frames.push({ phase, activeLine: pc(pcNeedle), pythonLine: py(pyNeedle), message, snapshot })
 
-  push('start', 'slots = n empty', 'slots = [None]', `Slots 1 to ${n} are empty; the pointer waits at slot 1.`, snap(null, null, []))
+  push('start', 'new Array(n + 1)', 'slots = [None]', `Slots 1 to ${n} are empty; the pointer waits at slot 1.`, snap(null, null, []))
   for (const [key, value] of inserts) {
     slots[key] = value
-    push('store', 'store value at', 'slots[key] = value', `Value ${value} arrives for id ${key}.`, snap(key, value, []))
+    push('store', 'slots[key] = value', 'slots[key] = value', `Value ${value} arrives for id ${key}.`, snap(key, value, []))
     const chunk = []
     while (pointer <= n && slots[pointer] !== null) {
       chunk.push(slots[pointer])
       pointer += 1
     }
     output.push(chunk)
-    push('release', 'while pointer', 'while pointer', chunk.length === 0
+    push('release', 'while (pointer', 'while pointer', chunk.length === 0
       ? `Slot ${pointer} is still empty, so nothing is released.`
       : `Slots up to ${pointer - 1} are filled; release ${chunk.join(', ')}.`, snap(key, value, chunk))
   }
-  push('done', 'return outputs', 'return output', 'Every insertion has produced its chunk.', snap(null, null, []))
+  push('done', 'return output;', 'return output', 'Every insertion has produced its chunk.', snap(null, null, []))
   return { input: { n, inserts }, result: output, frames }
 }

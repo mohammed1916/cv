@@ -2,16 +2,16 @@
 // Input: { root: level-order list (null = missing child), p, q }. Both values are in the tree and unique.
 // The root is not supplied to the algorithm: it only walks parent pointers, and the tree is built from the list for display.
 
-const CODE_TEXT = `FUNCTION lowestCommonAncestor(p, q)
-    a ← p, b ← q
-    WHILE a is not b
-        IF a has a parent, move a up to its parent
-        ELSE move a to q
-        IF b has a parent, move b up to its parent
-        ELSE move b to p
-    RETURN a`
-
-export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function lowestCommonAncestor(p, q) {",
+  "  let a = p, b = q;",
+  "  while (a !== b) {",
+  "    a = a.parent !== null ? a.parent : q;",
+  "    b = b.parent !== null ? b.parent : p;",
+  "  }",
+  "  return a;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `class Node:
     def __init__(self, val):
@@ -80,7 +80,7 @@ export function buildTrace({ root, p, q }) {
   const frames = []
   let a = idP
   let b = idQ
-  frames.push({ pythonLine: P('a, b = p, q'), phase: 'start', activeLine: L('a ← p, b ← q'), a, b, message: `Walker A starts at ${p}, walker B starts at ${q}.` })
+  frames.push({ pythonLine: P('a, b = p, q'), phase: 'start', activeLine: L('let a = p, b = q;'), a, b, message: `Walker A starts at ${p}, walker B starts at ${q}.` })
   let steps = 0
   while (a !== b) {
     steps += 1
@@ -92,9 +92,9 @@ export function buildTrace({ root, p, q }) {
     const message = `A ${aHasParent ? `moves up to ${root[na]}` : `has no parent, so it jumps to ${q}`}; B ${bHasParent ? `moves up to ${root[nb]}` : `has no parent, so it jumps to ${p}`}.`
     a = na
     b = nb
-    frames.push({ pythonLine: P('a = a.parent if'), phase: switched ? 'walk' : 'walk', activeLine: L(aHasParent ? 'IF a has a parent' : 'ELSE move a to q'), a, b, switched, message, step: steps })
+    frames.push({ pythonLine: P('a = a.parent if'), phase: switched ? 'walk' : 'walk', activeLine: L('a = a.parent !== null'), a, b, switched, message, step: steps })
   }
   const answer = root[a]
-  frames.push({ pythonLine: P('return a'), phase: 'found', activeLine: L('RETURN a'), a, b, message: `The walkers meet at ${answer}, the lowest common ancestor.` })
+  frames.push({ pythonLine: P('return a'), phase: 'found', activeLine: L('return a;'), a, b, message: `The walkers meet at ${answer}, the lowest common ancestor.` })
   return { input: { root, p, q }, tree: nodes, result: answer, frames }
 }

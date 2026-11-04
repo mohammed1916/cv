@@ -5,13 +5,20 @@ export const phases = [
   { id: 'done', label: 'Result', description: 'Return the completed output list.' },
 ]
 
-export const code = `defuse the bomb (code, k):
-  n = length of code
-  result = n zeros
-  for each position i:
-    choose window indices from k
-    result[i] = sum of code over window
-  return result`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function decrypt(code, k) {",
+  "  const n = code.length;",
+  "  const result = new Array(n).fill(0);",
+  "  for (let i = 0; i < n; i++) {",
+  "    let window = [];",
+  "    if (k > 0) window = Array.from({ length: k }, (_, j) => (i + j + 1) % n);",
+  "    else if (k < 0) window = Array.from({ length: -k }, (_, j) => (i - j - 1 + n) % n);",
+  "    result[i] = window.reduce((sum, j) => sum + code[j], 0);",
+  "  }",
+  "  return result;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def decrypt(code, k):
     n = len(code)
@@ -54,15 +61,15 @@ export function buildTrace({ code: values, k }) {
     return { window: [], pyNeedle: 'window = []' }
   }
 
-  push('start', 'result = n zeros', 'result = [0] * n', `Prepare ${n} output positions, all empty for now.`, snap(null, [], null))
+  push('start', 'const result = new Array(n)', 'result = [0] * n', `Prepare ${n} output positions, all empty for now.`, snap(null, [], null))
   for (let i = 0; i < n; i++) {
     const { window, pyNeedle } = describe(i)
-    push('inspect', 'choose window', pyNeedle,
+    push('inspect', 'let window', pyNeedle,
       window.length === 0 ? `k is ${k}, so position ${i} reads no neighbours.`
         : `Position ${i} reads indices ${window.join(', ')} from the unchanged input.`, snap(i, window, null))
     const sum = window.reduce((total, j) => total + values[j], 0)
     result[i] = sum
-    push('update', 'result[i] = sum', 'result[i] = sum', `Position ${i} receives ${sum}.`, snap(i, window, sum))
+    push('update', 'result[i] = window.reduce', 'result[i] = sum', `Position ${i} receives ${sum}.`, snap(i, window, sum))
   }
   push('done', 'return result', 'return result', 'Every position is filled from the original values.', snap(null, [], null))
   return { input: { code: values, k }, result: [...result], frames }

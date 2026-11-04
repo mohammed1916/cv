@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/remove-max-number-of-edges-to-keep-graph-fully-traversable/',
   complexity: 'O(E alpha(n)) time with two union-find structures after sorting edges by type. The visualization caps input at 6 nodes and 10 edges.',
   examples: [
-    { label: 'Example 1', input: '{"n":4,"edges":[[3,1,2],[3,2,3],[1,1,3],[1,2,4],[1,1,2],[2,3,4]]}' },
-    { label: 'Example 2', input: '{"n":4,"edges":[[3,1,2],[3,2,3],[1,1,4],[2,1,4]]}' },
+    { label: 'Invented mesh', input: '{"n":5,"edges":[[3,1,2],[1,2,3],[2,3,4],[1,4,5],[2,1,5],[3,4,5]]}' },
+    { label: 'Two islands', input: '{"n":4,"edges":[[1,1,2],[2,3,4],[3,1,4]]}' },
   ],
 }
 

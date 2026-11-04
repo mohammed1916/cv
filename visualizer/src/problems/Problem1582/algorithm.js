@@ -6,14 +6,18 @@ export const phases = [
   { id: 'done', label: 'Result', description: 'Return the number of special cells.' },
 ]
 
-export const code = `FUNCTION countSpecial(mat)
-    rows ← ones in each row of mat
-    cols ← ones in each column of mat
-    count ← 0
-    FOR each cell (i, j)
-        IF mat[i][j] = 1 AND rows[i] = 1 AND cols[j] = 1
-            count ← count + 1
-    RETURN count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function numSpecial(mat) {
+  const m = mat.length, n = mat[0].length;
+  const rows = mat.map(row => row.reduce((a, b) => a + b, 0));
+  const cols = Array.from({ length: n }, (_, j) => mat.reduce((a, row) => a + row[j], 0));
+  let count = 0;
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      if (mat[i][j] === 1 && rows[i] === 1 && cols[j] === 1) count++;
+    }
+  }
+  return count;
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def numSpecial(mat):
     m, n = len(mat), len(mat[0])
@@ -26,7 +30,7 @@ export const python = `def numSpecial(mat):
                 count += 1
     return count`
 
-export const pythonLineMap = { 1: 1, 2: 3, 3: 4, 4: 5, 5: 7, 6: 9, 7: 10, 8: 11 }
+export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 8, 10: 9, 11: 10, 12: 10 }
 
 export function parseInput(text) {
   let input
@@ -50,20 +54,20 @@ export function buildTrace({ mat }) {
   const special = []
   const snap = (extra = {}) => ({ rows: rows.slice(), cols: cols.slice(), special: special.map(p => p.slice()), i: -1, j: -1, ...extra })
   const frames = []
-  frames.push({ phase: 'setup', activeLine: 2, message: `Row tallies are ${rows.join(', ')}; column tallies are ${cols.join(', ')}.`, snapshot: snap() })
-  frames.push({ phase: 'setup', activeLine: 3, message: 'Column tallies are ready. Next, check each cell against them.', snapshot: snap() })
-  frames.push({ phase: 'scan', activeLine: 4, message: 'Start with count = 0.', snapshot: snap() })
+  frames.push({ phase: 'setup', activeLine: 3, message: `Row tallies are ${rows.join(', ')}; column tallies are ${cols.join(', ')}.`, snapshot: snap() })
+  frames.push({ phase: 'setup', activeLine: 4, message: 'Column tallies are ready. Next, check each cell against them.', snapshot: snap() })
+  frames.push({ phase: 'scan', activeLine: 5, message: 'Start with count = 0.', snapshot: snap() })
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
       const isOne = mat[i][j] === 1
       const ok = isOne && rows[i] === 1 && cols[j] === 1
-      frames.push({ phase: 'check', activeLine: 6, message: `Cell (${i}, ${j}) holds ${mat[i][j]}. ${!isOne ? 'Not a 1, so it cannot be special.' : `Row ${i} has ${rows[i]} one(s) and column ${j} has ${cols[j]}.`}`, snapshot: snap({ i, j }) })
+      frames.push({ phase: 'check', activeLine: 8, message: `Cell (${i}, ${j}) holds ${mat[i][j]}. ${!isOne ? 'Not a 1, so it cannot be special.' : `Row ${i} has ${rows[i]} one(s) and column ${j} has ${cols[j]}.`}`, snapshot: snap({ i, j }) })
       if (ok) {
         special.push([i, j])
-        frames.push({ phase: 'record', activeLine: 7, message: `Cell (${i}, ${j}) is the only 1 in its row and column, so count it.`, snapshot: snap({ i, j }) })
+        frames.push({ phase: 'record', activeLine: 8, message: `Cell (${i}, ${j}) is the only 1 in its row and column, so count it.`, snapshot: snap({ i, j }) })
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: 8, message: `Return ${special.length}.`, snapshot: snap() })
+  frames.push({ phase: 'done', activeLine: 11, message: `Return ${special.length}.`, snapshot: snap() })
   return { input: { mat }, result: special.length, frames }
 }

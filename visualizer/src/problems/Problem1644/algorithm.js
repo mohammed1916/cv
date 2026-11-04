@@ -1,23 +1,20 @@
-// LeetCode 1644: Lowest Common Ancestor of a Binary Tree II.
-// Input: { root: level-order list (null = missing child), p, q }. Values are unique, so a node is identified by its value.
-// A value that is not in the tree means that node does not belong, and the answer is null.
-
-const CODE_TEXT = `FUNCTION lowestCommonAncestor(root, p, q)
-    foundP ← false, foundQ ← false
-    FUNCTION visit(node)
-        IF node is empty, RETURN empty
-        left ← visit(node.left)
-        right ← visit(node.right)
-        IF node is p, set foundP to true
-        IF node is q, set foundQ to true
-        IF node is p or node is q, RETURN node
-        IF left and right are both present, RETURN node
-        RETURN whichever of left or right is present
-    result ← visit(root)
-    IF foundP and foundQ are both true, RETURN result
-    RETURN null`
-
-export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function lowestCommonAncestor(root, p, q) {",
+  "  let foundP = false, foundQ = false;",
+  "  const visit = node => {",
+  "    if (node === null) return null;",
+  "    const left = visit(node.left);",
+  "    const right = visit(node.right);",
+  "    if (node.val === p) foundP = true;",
+  "    if (node.val === q) foundQ = true;",
+  "    if (node.val === p || node.val === q) return node;",
+  "    if (left !== null && right !== null) return node;",
+  "    return left !== null ? left : right;",
+  "  };",
+  "  const result = visit(root);",
+  "  return foundP && foundQ ? result : null;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -102,7 +99,7 @@ export function buildTrace({ root, p, q }) {
   const nodes = buildNodes(root)
   const state = { p, q, foundP: false, foundQ: false }
   const frames = []
-  frames.push({ pythonLine: P('found = {'), phase: 'start', activeLine: L('foundP ← false'), current: null, returned: null, foundP: false, foundQ: false, message: `Look for p = ${p} and q = ${q} in one post-order walk.` })
+  frames.push({ pythonLine: P('found = {'), phase: 'start', activeLine: L('let foundP = false'), current: null, returned: null, foundP: false, foundQ: false, message: `Look for p = ${p} and q = ${q} in one post-order walk.` })
   const visit = id => {
     if (id === null) return null
     const node = nodes[id]
@@ -118,17 +115,17 @@ export function buildTrace({ root, p, q }) {
     let why
     if (isP || isQ) {
       returned = id
-      line = L('IF node is p or node is q, RETURN node')
+      line = L('if (node.val === p || node.val === q) return node;')
       py = P('if node.val == p or node.val == q:')
       why = `${node.val} is a target, so it is returned.`
     } else if (left !== null && right !== null) {
       returned = id
-      line = L('IF left and right are both present')
+      line = L('if (left !== null && right !== null)')
       py = P('if left is not None and right is not None:')
       why = `Both sides report a target, so ${node.val} is the candidate.`
     } else {
       returned = left !== null ? left : right
-      line = L('RETURN whichever of left or right is present')
+      line = L('return left !== null ? left : right;')
       py = P('return left if left is not None else right')
       why = returned === null ? `Nothing below ${node.val} is a target.` : `Pass ${nodes[returned].val} up from below ${node.val}.`
     }
@@ -138,6 +135,6 @@ export function buildTrace({ root, p, q }) {
   const result = visit(0)
   const answerId = state.foundP && state.foundQ ? result : null
   const answer = answerId === null ? null : nodes[answerId].val
-  frames.push({ pythonLine: P('if found["p"] and found["q"]'), phase: 'answer', activeLine: L('IF foundP and foundQ'), current: null, returned: answerId, foundP: state.foundP, foundQ: state.foundQ, message: answer === null ? 'A target is missing from the tree, so the answer is null.' : `Both targets found. LCA is ${answer}.` })
+  frames.push({ pythonLine: P('if found["p"] and found["q"]'), phase: 'answer', activeLine: L('return foundP && foundQ'), current: null, returned: answerId, foundP: state.foundP, foundQ: state.foundQ, message: answer === null ? 'A target is missing from the tree, so the answer is null.' : `Both targets found. LCA is ${answer}.` })
   return { input: { root, p, q }, tree: nodes, result: answer, frames }
 }

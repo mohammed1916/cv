@@ -1,4 +1,3 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
 export const sql = `-- Windows start at months 1 to 10 of 2020 and cover the next three months.
 WITH Rides2020 AS (
   SELECT MONTH(r.requested_at) AS month, a.ride_distance, a.ride_duration

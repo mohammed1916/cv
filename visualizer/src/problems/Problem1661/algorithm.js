@@ -1,4 +1,3 @@
-// Knowledge-derived SQL lesson. The sample tables are invented for this visualization.
 export const sql = `select s.machine_id, round(avg(e.timestamp - s.timestamp), 3) as processing_time
 from Activity s
 join Activity e on e.machine_id = s.machine_id and e.process_id = s.process_id

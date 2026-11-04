@@ -6,18 +6,21 @@ export const phases = [
   { id: 'done', label: 'Result', description: 'Return the minimum total removal time.' },
 ]
 
-export const code = `FUNCTION minCost(colors, neededTime)
-    total ← 0
-    i ← 0
-    WHILE i < length of colors
-        j ← i; groupSum ← 0; best ← 0
-        WHILE j < length AND colors[j] = colors[i]
-            groupSum ← groupSum + neededTime[j]
-            best ← max(best, neededTime[j])
-            j ← j + 1
-        total ← total + groupSum − best
-        i ← j
-    RETURN total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minCost(colors, neededTime) {
+  let total = 0;
+  let i = 0;
+  while (i < colors.length) {
+    let j = i, groupSum = 0, best = 0;
+    while (j < colors.length && colors[j] === colors[i]) {
+      groupSum += neededTime[j];
+      best = Math.max(best, neededTime[j]);
+      j++;
+    }
+    total += groupSum - best;
+    i = j;
+  }
+  return total;
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def minCost(colors, neededTime):
     total = 0
@@ -34,7 +37,7 @@ export const python = `def minCost(colors, neededTime):
         i = j
     return total`
 
-export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 8, 7: 9, 8: 10, 9: 11, 10: 12, 11: 13, 12: 14 }
+export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 8, 7: 9, 8: 10, 9: 11, 10: 11, 11: 12, 12: 13, 13: 13, 14: 14 }
 
 export function parseInput(text) {
   let input
@@ -72,9 +75,9 @@ export function buildTrace({ colors, neededTime }) {
     for (let k = i; k < j; k++) if (k !== best) removed.push(k)
     const pay = groupSum - neededTime[best]
     total += pay
-    frames.push({ phase: 'remove', activeLine: 10, message: `Keep index ${best}; pay ${pay} to remove the rest. Total is ${total}.`, snapshot: snap({ start: i, end: j - 1, best, total }) })
+    frames.push({ phase: 'remove', activeLine: 11, message: `Keep index ${best}; pay ${pay} to remove the rest. Total is ${total}.`, snapshot: snap({ start: i, end: j - 1, best, total }) })
     i = j
   }
-  frames.push({ phase: 'done', activeLine: 12, message: `Return ${total}.`, snapshot: snap({ total }) })
+  frames.push({ phase: 'done', activeLine: 14, message: `Return ${total}.`, snapshot: snap({ total }) })
   return { input: { colors, neededTime }, result: total, frames }
 }

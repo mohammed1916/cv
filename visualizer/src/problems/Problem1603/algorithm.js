@@ -17,16 +17,21 @@ export function parseInput(text) {
 
 const NAMES = ['', 'big', 'medium', 'small']
 
-export const code = `parking system (slots, cars):
-  left = copy of slots
-  answers = empty list
-  for each car type in cars:
-    if left[type - 1] > 0:
-      left[type - 1] -= 1
-      append true to answers
-    else:
-      append false to answers
-  return answers`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function parkingSystem(slots, cars) {",
+  "  const left = [...slots];",
+  "  const answers = [];",
+  "  for (const type of cars) {",
+  "    if (left[type - 1] > 0) {",
+  "      left[type - 1]--;",
+  "      answers.push(true);",
+  "    } else {",
+  "      answers.push(false);",
+  "    }",
+  "  }",
+  "  return answers;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def parking_system(slots, cars):
     left = list(slots)
@@ -48,18 +53,18 @@ export function buildTrace({ slots, cars }) {
   const left = [...slots]
   const answers = []
   const snap = (type, verdict) => ({ left: [...left], type, verdict, answers: [...answers] })
-  const frames = [at('start', 'left = copy', 'left = list(', `Three counters hold the free slots: big ${slots[0]}, medium ${slots[1]}, small ${slots[2]}.`, snap(null, null))]
+  const frames = [at('start', 'const left = [...slots]', 'left = list(', `Three counters hold the free slots: big ${slots[0]}, medium ${slots[1]}, small ${slots[2]}.`, snap(null, null))]
   for (let i = 0; i < cars.length; i++) {
     const type = cars[i]
     const name = NAMES[type]
-    frames.push(at('check', 'if left[type - 1] > 0', 'if left[car - 1] > 0', `Request ${i + 1} is a ${name} car. Only the ${name} counter (${left[type - 1]} free) matters.`, snap(type, null)))
+    frames.push(at('check', 'if (left[type - 1] > 0)', 'if left[car - 1] > 0', `Request ${i + 1} is a ${name} car. Only the ${name} counter (${left[type - 1]} free) matters.`, snap(type, null)))
     if (left[type - 1] > 0) {
       left[type - 1] -= 1
       answers.push(true)
-      frames.push(at('accept', 'left[type - 1] -= 1', 'left[car - 1] -= 1', `Accept: one ${name} slot is taken, ${left[type - 1]} left for that type.`, snap(type, true)))
+      frames.push(at('accept', 'left[type - 1]--', 'left[car - 1] -= 1', `Accept: one ${name} slot is taken, ${left[type - 1]} left for that type.`, snap(type, true)))
     } else {
       answers.push(false)
-      frames.push(at('reject', 'append false', 'answers.append(False)', `Reject: no ${name} slot is free. The other counters are unchanged.`, snap(type, false)))
+      frames.push(at('reject', 'answers.push(false)', 'answers.append(False)', `Reject: no ${name} slot is free. The other counters are unchanged.`, snap(type, false)))
     }
   }
   frames.push(at('done', 'return answers', 'return answers', `Answers in request order: ${answers.map(String).join(', ')}.`, snap(null, null)))

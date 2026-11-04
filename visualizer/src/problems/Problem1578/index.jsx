@@ -44,7 +44,7 @@ export default function ColourfulRope() {
                 minWidth: 56, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace', color: 'var(--text)',
                 border: `${k === j ? 2 : 1}px solid ${k === j ? 'var(--text)' : 'var(--border)'}`,
                 background: isRemoved ? DROP : isKept ? KEEP : 'var(--surface2)', opacity: seen || start < 0 ? 1 : 0.55 }}>
-                <div>{run2.color} · {cost}</div><small>{k}{isKept ? ' keep' : ''}</small>
+                <div>{run2.color} · {cost}</div><small>{`${k === start && active ? 'l ' : ''}${k === j ? 'r ' : ''}${k}${isKept ? ' keep' : ''}`}</small>
               </div>
             })}
           </div>

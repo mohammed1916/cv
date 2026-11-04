@@ -9,8 +9,8 @@ const definition = {
   complexity: 'O(n) time and O(n) space: one backward pass places the largest letter each position can take.',
   examples: [
     { label: 'Small budget', input: '{"n":2,"k":2}' },
-    { label: 'Mixed letters', input: '{"n":5,"k":73}' },
-    { label: 'Full alphabet', input: '{"n":3,"k":27}' },
+    { label: 'Mixed letters', input: '{"n":4,"k":30}' },
+    { label: 'Full alphabet', input: '{"n":6,"k":60}' },
   ],
 }
 

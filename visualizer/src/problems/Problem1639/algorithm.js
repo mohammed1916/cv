@@ -21,29 +21,37 @@ export function buildTrace({ words, target }) {
   const dp = Array.from({ length: m + 1 }, () => Array(length + 1).fill(0))
   for (let k = 0; k <= length; k++) dp[0][k] = 1
   const snap = () => dp.map(row => [...row])
-  const frames = [{ phase: 'count', pythonLine: 8, activeLine: L('count how many words have each letter'), i: -1, k: -1, dp: snap(), columns: countsAt, message: `Each word has ${length} column(s); count the letters in each column.` }]
-  frames.push({ phase: 'base', pythonLine: 11, activeLine: L('set the empty-prefix row'), i: 0, k: -1, dp: snap(), columns: countsAt, message: 'An empty target can be built in exactly one way, so row 0 is all ones.' })
+  const frames = [{ phase: 'count', pythonLine: 8, activeLine: L('cnt[k][word.charCodeAt(k) - 97]++'), i: -1, k: -1, dp: snap(), columns: countsAt, message: `Each word has ${length} column(s); count the letters in each column.` }]
+  frames.push({ phase: 'base', pythonLine: 11, activeLine: L('dp[0][k] = 1'), i: 0, k: -1, dp: snap(), columns: countsAt, message: 'An empty target can be built in exactly one way, so row 0 is all ones.' })
   for (let i = 1; i <= m; i++) {
     for (let k = 1; k <= length; k++) {
       const skip = dp[i][k - 1]
       const use = dp[i - 1][k - 1] * cnt[k - 1][target.charCodeAt(i - 1) - 97]
       dp[i][k] = (skip + use) % MOD
-      frames.push({ phase: 'fill', pythonLine: 15, activeLine: L('add the ways that use'), i, k, dp: snap(), columns: countsAt, message: `Building ${target.slice(0, i)} from the first ${k} column(s): skip column ${k - 1} gives ${skip}, use it for ${target[i - 1]} gives ${use}.` })
+      frames.push({ phase: 'fill', pythonLine: 15, activeLine: L('dp[i][k] = (dp[i][k - 1]'), i, k, dp: snap(), columns: countsAt, message: `Building ${target.slice(0, i)} from the first ${k} column(s): skip column ${k - 1} gives ${skip}, use it for ${target[i - 1]} gives ${use}.` })
     }
   }
   const result = dp[m][length]
-  frames.push({ phase: 'done', pythonLine: 16, activeLine: L('return the ways for the full target'), i: m, k: length, dp: snap(), columns: countsAt, result, message: `Ways to build ${target}: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 16, activeLine: L('return dp[m][length];'), i: m, k: length, dp: snap(), columns: countsAt, result, message: `Ways to build ${target}: ${result}.` })
   return { input: { words, target }, result, frames }
 }
 
-export const code = `count the ways to build the target from the words
-  count how many words have each letter in each column
-  set the empty-prefix row to one way in every column
-  for each prefix length i of the target from 1 up
-    for each column count k from 1 up
-      add the ways that skip column k minus one
-      add the ways that use column k minus one for letter i of the target, times its count
-  return the ways for the full target across every column`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function numWays(words, target) {",
+  "  const length = words[0].length;",
+  "  const m = target.length;",
+  "  const cnt = Array.from({ length }, () => new Array(26).fill(0));",
+  "  for (const word of words) for (let k = 0; k < length; k++) cnt[k][word.charCodeAt(k) - 97]++;",
+  "  const dp = Array.from({ length: m + 1 }, () => new Array(length + 1).fill(0));",
+  "  for (let k = 0; k <= length; k++) dp[0][k] = 1;",
+  "  for (let i = 1; i <= m; i++) {",
+  "    for (let k = 1; k <= length; k++) {",
+  "      dp[i][k] = (dp[i][k - 1] + dp[i - 1][k - 1] * cnt[k - 1][target.charCodeAt(i - 1) - 97]) % MOD;",
+  "    }",
+  "  }",
+  "  return dp[m][length];",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def num_ways_to_form_target(words, target):

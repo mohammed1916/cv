@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-ways-to-form-a-target-string-given-a-dictionary/',
   complexity: 'O(m * L + w * L) time for m target letters, L columns and w words. The visualization caps each side at 6.',
   examples: [
-    { label: 'Four columns', input: '{"words":["acca","bbbb","caca"],"target":"aba"}' },
-    { label: 'Repeated letters', input: '{"words":["abba"],"target":"baab"}' },
+    { label: 'Four columns', input: '{"words":["xy","yx"],"target":"xyx"}' },
+    { label: 'Repeated letters', input: '{"words":["abc","cba"],"target":"bca"}' },
   ],
 }
 

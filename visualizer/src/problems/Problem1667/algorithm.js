@@ -24,7 +24,7 @@ export function fixName(name) {
 }
 
 // Pseudocode line numbers used by activeLine, and Python line numbers used by pythonLine.
-const C = { start: 2, loop: 3, rewrite: 4, append: 5, sort: 6, done: 7 }
+const C = { start: 2, loop: 3, rewrite: 4, append: 4, sort: 6, done: 7 }
 const PY = { start: 2, loop: 3, rewrite: 4, append: 4, sort: 5, done: 6 }
 
 export function buildTrace(rows) {
@@ -45,13 +45,16 @@ export function buildTrace(rows) {
   return { input: rows, result: output, frames }
 }
 
-export const code = `fix names (users):
-  output = empty list
-  for each row in users:
-    name = first letter uppercase + remaining letters lowercase
-    append (user_id, name) to output
-  sort output by user_id ascending
-  return output`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function fixNames(users) {",
+  "  const out = [];",
+  "  for (const row of users) {",
+  "    out.push({ user_id: row.user_id, name: row.name[0].toUpperCase() + row.name.slice(1).toLowerCase() });",
+  "  }",
+  "  out.sort((a, b) => a.user_id - b.user_id);",
+  "  return out;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def fix_names(users):
     out = []

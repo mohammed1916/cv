@@ -1,4 +1,3 @@
-// Knowledge-derived SQL lesson. The sample tables are invented for this visualization.
 export const sql = `select w.name as warehouse_name,
        sum(w.units * p.Width * p.Length * p.Height) as volume
 from Warehouse w

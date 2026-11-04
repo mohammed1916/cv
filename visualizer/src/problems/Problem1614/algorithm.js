@@ -22,17 +22,23 @@ export function parseInput(text) {
   return expr
 }
 
-export const code = `max nesting depth (expr):
-  depth = 0
-  best = 0
-  for each character ch in expr:
-    if ch == '(':
-      depth += 1
-      best = max(best, depth)
-    else if ch == ')':
-      depth -= 1
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function maxDepth(expr) {",
+  "  let depth = 0;",
+  "  let best = 0;",
+  "  for (const ch of expr) {",
+  "    if (ch === '(') {",
+  "      depth++;",
+  "      best = Math.max(best, depth);",
+  "    } else if (ch === ')') {",
+  "      depth--;",
+  "    }",
+  "  }",
+  "  return best;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 export const python = `def max_depth(expr):
     depth = 0
     best = 0
@@ -45,7 +51,6 @@ export const python = `def max_depth(expr):
     return best
 `
 
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 const at = (phase, pseudo, py, message, snapshot) => ({ phase, activeLine: L(pseudo), pythonLine: P(py), message, snapshot })
 
@@ -53,20 +58,20 @@ export function buildTrace(expr) {
   let depth = 0
   let best = 0
   const snap = (index, ch) => ({ expr, index, ch, depth, best })
-  const frames = [at('start', 'depth = 0', 'depth = 0', `Walk the expression left to right with depth 0. The expression has ${expr.length} characters.`, snap(null, null))]
+  const frames = [at('start', 'let depth = 0', 'depth = 0', `Walk the expression left to right with depth 0. The expression has ${expr.length} characters.`, snap(null, null))]
   for (let i = 0; i < expr.length; i++) {
     const ch = expr[i]
     if (ch === '(') {
       depth += 1
       best = Math.max(best, depth)
-      frames.push(at('open', 'depth += 1', 'depth += 1', `"(" at position ${i + 1} opens a group. Depth is now ${depth}; best is ${best}.`, snap(i, ch)))
+      frames.push(at('open', 'depth++', 'depth += 1', `"(" at position ${i + 1} opens a group. Depth is now ${depth}; best is ${best}.`, snap(i, ch)))
     } else if (ch === ')') {
       depth -= 1
-      frames.push(at('close', 'depth -= 1', 'depth -= 1', `")" at position ${i + 1} closes a group. Depth falls to ${depth}; best stays ${best}.`, snap(i, ch)))
+      frames.push(at('close', 'depth--', 'depth -= 1', `")" at position ${i + 1} closes a group. Depth falls to ${depth}; best stays ${best}.`, snap(i, ch)))
     } else {
-      frames.push(at('other', 'for each character', 'for ch in expr', `"${ch}" at position ${i + 1} does not change depth, which stays ${depth}.`, snap(i, ch)))
+      frames.push(at('other', 'for (const ch of expr)', 'for ch in expr', `"${ch}" at position ${i + 1} does not change depth, which stays ${depth}.`, snap(i, ch)))
     }
   }
-  frames.push(at('done', 'return best', 'return best', `The deepest point reached has depth ${best}.`, snap(null, null)))
+  frames.push(at('done', 'return best;', 'return best', `The deepest point reached has depth ${best}.`, snap(null, null)))
   return { input: expr, result: best, frames }
 }

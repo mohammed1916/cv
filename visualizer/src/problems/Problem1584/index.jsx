@@ -8,7 +8,7 @@ const definition = {
   url: 'https://leetcode.com/problems/min-cost-to-connect-all-points/',
   complexity: 'O(n^2) time and O(n) space with Prim\'s algorithm and Manhattan distances. The visualization caps n at 15.',
   examples: [
-    { label: 'Triangle', input: '{"points":[[0,0],[2,2],[3,10],[5,2],[7,0]]}' },
+    { label: 'Square corners', input: '{"points":[[1,1],[5,1],[1,6],[4,4]]}' },
     { label: 'Line', input: '{"points":[[1,1],[4,1],[7,1]]}' },
     { label: 'Single point', input: '{"points":[[3,-2]]}' },
   ],

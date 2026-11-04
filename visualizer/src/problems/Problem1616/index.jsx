@@ -24,7 +24,7 @@ function Row({ name, text, i, j, segment }) {
         minWidth: 30, textAlign: 'center', fontFamily: 'monospace', padding: '4px 6px', boxSizing: 'border-box',
         border: `${pointer ? 2 : 1}px solid ${pointer ? 'var(--text)' : 'var(--border)'}`,
         background: inSegment ? (segment.isPalindrome ? 'color-mix(in srgb, var(--success) 30%, transparent)' : 'color-mix(in srgb, var(--error) 25%, transparent)') : 'transparent', color: 'var(--text)',
-      }}>{letter}<small style={{ display: 'block', color: 'var(--text-muted)' }}>{index === i ? 'i' : index === j ? 'j' : index}</small></div>
+      }}>{letter}<small style={{ display: 'block', color: 'var(--text-muted)' }}>{index === i ? 'l' : index === j ? 'r' : index}</small></div>
     })}
   </div>
 }
@@ -38,7 +38,7 @@ export default function SplitPalindromeVisualizer() {
     return <>
       <Row name={xName} text={x ?? a} i={i} j={j} segment={segment} />
       <Row name={yName} text={y ?? b} i={i} j={j} segment={segment} />
-      <p style={{ color: 'var(--text)' }}>{pass ? `${pass}: pointers i and j at ${i} and ${j}.` : 'Both strings are shown in full before any split is tried.'}</p>
+      <p style={{ color: 'var(--text)' }}>{pass ? `${pass}: pointers l and r at ${i} and ${j}.` : 'Both strings are shown in full before any split is tried.'}</p>
     </>
   }} renderReasoning={({ step }) => <>
     <p><strong>Two pointers from the outside:</strong> a palindrome built from a prefix of one string and a suffix of the other has matching characters at mirrored positions, so matching from both ends first is forced.</p>

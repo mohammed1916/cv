@@ -1,4 +1,3 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
 export const sql = `-- Months 1 to 12 of 2020 are generated, each with its last day as month_end.
 WITH Available AS (
   SELECT m.month, COUNT(d.driver_id) AS available

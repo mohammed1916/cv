@@ -12,12 +12,12 @@ export function parseInput(text) {
 export function buildTrace({ postfix }) {
   const stack = []
   const trees = []
-  const frames = [{ phase: 'start', pythonLine: PL('stack = []'), activeLine: L('start with an empty stack'), state: [], trees: [], message: 'The stack of subtrees is empty.' }]
+  const frames = [{ phase: 'start', pythonLine: PL('stack = []'), activeLine: L('const stack = []'), state: [], trees: [], message: 'The stack of subtrees is empty.' }]
   for (const tok of postfix) {
     if (!OPS.includes(tok)) {
       stack.push(Number(tok))
       trees.push({ label: tok, value: Number(tok), children: [] })
-      frames.push({ phase: 'leaf', pythonLine: PL('stack.append(int(tok))'), activeLine: L('if the token is a number'), state: stack.map(String), trees: [...trees], message: `Push leaf ${tok}.` })
+      frames.push({ phase: 'leaf', pythonLine: PL('stack.append(int(tok))'), activeLine: L('stack.push(Number(tok))'), state: stack.map(String), trees: [...trees], message: `Push leaf ${tok}.` })
       continue
     }
     if (stack.length < 2) throw new Error(`Operator ${tok} needs two operands.`)
@@ -30,20 +30,31 @@ export function buildTrace({ postfix }) {
     const line = tok === '+' ? PL('stack.append(left + right)') : tok === '-' ? PL('stack.append(left - right)') : tok === '*' ? PL('stack.append(left * right)') : PL('stack.append(int(left / right))')
     stack.push(value)
     trees.push({ label: tok, value, children: [leftTree, rightTree] })
-    frames.push({ phase: 'combine', pythonLine: line, activeLine: L('pop the right and left'), state: stack.map(String), trees: [...trees], message: `${left} ${tok} ${right} = ${value}.` })
+    frames.push({ phase: 'combine', pythonLine: line, activeLine: L('const right = stack.pop()'), state: stack.map(String), trees: [...trees], message: `${left} ${tok} ${right} = ${value}.` })
   }
   if (stack.length !== 1) throw new Error('The tokens do not form one expression.')
-  frames.push({ phase: 'done', pythonLine: PL('return stack[0]'), activeLine: L('return its value'), state: stack.map(String), trees: [...trees], message: `The tree evaluates to ${stack[0]}.` })
+  frames.push({ phase: 'done', pythonLine: PL('return stack[0]'), activeLine: L('return stack[0]'), state: stack.map(String), trees: [...trees], message: `The tree evaluates to ${stack[0]}.` })
   return { input: { postfix }, result: stack[0], frames }
 }
 
-export const code = `expression tree from postfix tokens
-  start with an empty stack of subtrees
-  for each token in order
-    if the token is a number then push a leaf
-    otherwise pop the right and left subtrees, combine them under the operator and push the result
-  evaluate the single remaining tree
-  return its value`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function evaluateExpressionTree(postfix) {",
+  "  const stack = [];",
+  "  for (const tok of postfix) {",
+  "    if (!OPS.includes(tok)) {",
+  "      stack.push(Number(tok));",
+  "    } else {",
+  "      const right = stack.pop();",
+  "      const left = stack.pop();",
+  "      if (tok === '+') stack.push(left + right);",
+  "      else if (tok === '-') stack.push(left - right);",
+  "      else if (tok === '*') stack.push(left * right);",
+  "      else stack.push(Math.trunc(left / right));",
+  "    }",
+  "  }",
+  "  return stack[0];",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def evaluate_postfix(tokens):

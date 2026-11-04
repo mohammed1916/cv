@@ -34,7 +34,7 @@ const definition = {
   complexity: "O(n^2) time and O(n^2) space for n friends. The visualization caps n at 40.",
   examples: [
     { label: "Sample A", input: JSON.stringify({ n: 4, preferences: [[2, 1, 3], [2, 0, 3], [0, 1, 3], [0, 1, 2]], pairs: [[0, 1], [2, 3]] }) },
-    { label: "Two friends", input: JSON.stringify({ n: 2, preferences: [[1], [0]], pairs: [[0, 1]] }) },
+    { label: "Four friends, crossed", input: JSON.stringify({ n: 4, preferences: [[1, 3, 2], [0, 2, 3], [1, 3, 0], [0, 1, 2]], pairs: [[0, 2], [1, 3]] }) },
     { label: "Four friends", input: JSON.stringify({ n: 4, preferences: [[3, 1, 2], [0, 2, 3], [1, 0, 3], [2, 1, 0]], pairs: [[0, 3], [1, 2]] }) },
   ],
 };

@@ -1,4 +1,3 @@
-// Knowledge-derived SQL lesson. The sample tables are invented for this visualization.
 export const sql = `select p.name,
        coalesce(sum(i.rest), 0) as rest,
        coalesce(sum(i.paid), 0) as paid,

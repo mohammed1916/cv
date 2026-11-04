@@ -25,7 +25,7 @@ export default function DefuseTheBomb() {
             minWidth: 52, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
             border: `${i === index ? 2 : 1}px solid ${i === index ? 'var(--text)' : 'var(--border)'}`,
             background: chosen ? 'color-mix(in srgb, var(--info) 30%, transparent)' : 'transparent', color: 'var(--text)',
-          }}><div>{v}</div><small>{i}</small></div>
+          }}><div>{v}</div><small>{i}{window?.length && i === window[0] ? ' l' : ''}{window?.length && i === window[window.length - 1] ? ' r' : ''}</small></div>
         })}
       </div>
       <p>{index === null ? 'Each position reads the unchanged input.' : `Position ${index} reads ${window.length ? `indices ${window.join(', ')}` : 'nothing'}${sum !== null ? `, sum ${sum}` : ''}.`}</p>

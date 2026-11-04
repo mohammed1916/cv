@@ -4,20 +4,31 @@
 // and further right. Real children are one level deeper, so a right pointer that lands on a node already seen at the
 // same depth is the defect. The defective node (and its genuine subtree) is detached from its parent.
 
-const CODE_TEXT = `FUNCTION correctBinaryTree(root)
-    depth[root] ← 0, parent[root] ← empty
-    queue ← [root]
-    WHILE queue is not empty
-        node ← pop the front of queue
-        IF node.right already has a depth equal to depth of node
-            detach node from its parent
-            RETURN root
-        FOR each present child of node that is not yet seen
-            depth[child] ← depth of node plus 1, parent[child] ← node
-            push child onto queue
-    RETURN root`
-
-export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function correctBinaryTree(root) {",
+  "  const depth = new Map([[root, 0]]);",
+  "  const parent = new Map([[root, null]]);",
+  "  const queue = [root];",
+  "  for (let h = 0; h < queue.length; h++) {",
+  "    const node = queue[h];",
+  "    const d = depth.get(node);",
+  "    if (node.right !== null && depth.get(node.right) === d) {",
+  "      const up = parent.get(node);",
+  "      if (up.left === node) up.left = null;",
+  "      else up.right = null;",
+  "      return root;",
+  "    }",
+  "    for (const child of [node.left, node.right]) {",
+  "      if (child !== null && !depth.has(child)) {",
+  "        depth.set(child, d + 1);",
+  "        parent.set(child, node);",
+  "        queue.push(child);",
+  "      }",
+  "    }",
+  "  }",
+  "  return root;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `from collections import deque
 
@@ -132,7 +143,7 @@ export function buildTrace({ root, bad }) {
   const queue = [0]
   const frames = []
   let defect = null
-  frames.push({ pythonLine: P('queue = deque([root])'), phase: 'start', activeLine: L('queue ← [root]'), current: 0, defect: null, removed: null, seen: [0], message: 'Walk the tree level by level from the root, without following a pointer that points sideways.' })
+  frames.push({ pythonLine: P('queue = deque([root])'), phase: 'start', activeLine: L('const queue = [root]'), current: 0, defect: null, removed: null, seen: [0], message: 'Walk the tree level by level from the root, without following a pointer that points sideways.' })
   while (queue.length && defect === null) {
     const id = queue.shift()
     const d = depth.get(id)
@@ -140,10 +151,10 @@ export function buildTrace({ root, bad }) {
     const rightSeen = node.right !== null && depth.has(node.right) && depth.get(node.right) === d
     if (rightSeen) {
       defect = id
-      frames.push({ pythonLine: P('if node.right is not None and depth.get'), phase: 'defect', activeLine: L('IF node.right already has a depth equal'), current: id, defect: id, removed: null, seen: [...depth.keys()], message: `${node.val}.right points to ${nodes[node.right].val}, which is already at depth ${d}. That pointer is the defect.` })
+      frames.push({ pythonLine: P('if node.right is not None and depth.get'), phase: 'defect', activeLine: L('if (node.right !== null && depth.get'), current: id, defect: id, removed: null, seen: [...depth.keys()], message: `${node.val}.right points to ${nodes[node.right].val}, which is already at depth ${d}. That pointer is the defect.` })
       break
     }
-    frames.push({ pythonLine: P('node = queue.popleft()'), phase: 'visit', activeLine: L('node ← pop the front of queue'), current: id, defect: null, removed: null, seen: [...depth.keys()], message: `Visit ${node.val} at depth ${d}.` })
+    frames.push({ pythonLine: P('node = queue.popleft()'), phase: 'visit', activeLine: L('const node = queue[h]'), current: id, defect: null, removed: null, seen: [...depth.keys()], message: `Visit ${node.val} at depth ${d}.` })
     for (const c of [node.left, node.right]) {
       if (c !== null && !depth.has(c)) {
         depth.set(c, d + 1)
@@ -157,9 +168,9 @@ export function buildTrace({ root, bad }) {
     const up = parent.get(defect)
     if (nodes[up].left === defect) nodes[up].left = null
     else nodes[up].right = null
-    frames.push({ pythonLine: P('up.left = None'), phase: 'detach', activeLine: L('detach node from its parent'), current: up, defect, removed: defect, seen: [...depth.keys()], message: `Detach ${nodes[defect].val} (with its genuine subtree) from ${nodes[up].val}. ${badTo} keeps its real parent.` })
+    frames.push({ pythonLine: P('up.left = None'), phase: 'detach', activeLine: L('const up = parent.get(node)'), current: up, defect, removed: defect, seen: [...depth.keys()], message: `Detach ${nodes[defect].val} (with its genuine subtree) from ${nodes[up].val}. ${badTo} keeps its real parent.` })
   }
   const result = serialize(nodes, finalRoot)
-  frames.push({ pythonLine: P('return root'), phase: 'done', activeLine: L('RETURN root'), current: null, defect, removed: defect, seen: [...depth.keys()], message: `Corrected tree: [${result.map(v => v === null ? 'null' : v).join(', ')}].` })
+  frames.push({ pythonLine: P('return root'), phase: 'done', activeLine: L('return root;'), current: null, defect, removed: defect, seen: [...depth.keys()], message: `Corrected tree: [${result.map(v => v === null ? 'null' : v).join(', ')}].` })
   return { input: { root, bad: [badFrom, badTo] }, result, frames }
 }

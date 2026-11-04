@@ -26,23 +26,23 @@ export function buildTrace({ arr }) {
   const at = (pseudo, py) => ({ activeLine: L(pseudo), pythonLine: P(py) })
   const base = { sorted: null, removedLow: [], removedHigh: [], kept: null, total: 0 }
 
-  frames.push({ phase: 'start', ...at('n = len(arr)', 'n = len(arr)'),
+  frames.push({ phase: 'start', ...at('const n = arr.length', 'n = len(arr)'),
     message: `There are ${n} values. Five percent of ${n} is ${k}, so the ${k} smallest and ${k} largest values are dropped.`,
     snapshot: { ...base, input: arr, k } })
 
   const sorted = [...arr].sort((p, q) => p - q)
-  frames.push({ phase: 'sort', ...at('sort arr', 'arr = sorted(arr)'),
+  frames.push({ phase: 'sort', ...at('const sorted = [...arr]', 'arr = sorted(arr)'),
     message: `Sorted: [${sorted.join(', ')}].`, snapshot: { ...base, sorted, k } })
 
   const removedLow = [], removedHigh = []
   for (let t = 0; t < k; t++) {
     removedLow.push(sorted[t])
-    frames.push({ phase: 'trim', ...at('kept = arr[k', 'kept = arr[k'),
+    frames.push({ phase: 'trim', ...at('const kept = sorted.slice', 'kept = arr[k'),
       message: `Drop ${sorted[t]} from the bottom end.`, snapshot: { ...base, sorted, k, removedLow: [...removedLow], removedHigh: [...removedHigh] } })
   }
   for (let t = 0; t < k; t++) {
     removedHigh.push(sorted[n - 1 - t])
-    frames.push({ phase: 'trim', ...at('kept = arr[k', 'kept = arr[k'),
+    frames.push({ phase: 'trim', ...at('const kept = sorted.slice', 'kept = arr[k'),
       message: `Drop ${sorted[n - 1 - t]} from the top end.`, snapshot: { ...base, sorted, k, removedLow: [...removedLow], removedHigh: [...removedHigh] } })
   }
 
@@ -50,26 +50,29 @@ export function buildTrace({ arr }) {
   let total = 0
   for (const value of kept) {
     total += value
-    frames.push({ phase: 'sum', ...at('total += v', 'total += v'),
+    frames.push({ phase: 'sum', ...at('for (const v of kept)', 'total += v'),
       message: `Add ${value}; the running total is ${total}.`,
       snapshot: { sorted, k, removedLow, removedHigh, kept, total } })
   }
 
   const mean = total / kept.length
-  frames.push({ phase: 'done', ...at('return total / len(kept)', 'return total / len(kept)'),
+  frames.push({ phase: 'done', ...at('return total / kept.length', 'return total / len(kept)'),
     message: `${total} divided by ${kept.length} kept values gives ${mean.toFixed(5)}.`,
     snapshot: { sorted, k, removedLow, removedHigh, kept, total, mean } })
   return { input: { arr }, result: mean, frames }
 }
 
-export const code = `trimmed mean (arr):
-  n = len(arr)
-  k = n / 20
-  sort arr
-  kept = arr[k : n - k]
-  total = 0
-  for v in kept: total += v
-  return total / len(kept)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function trimmedMean(arr) {",
+  "  const n = arr.length;",
+  "  const k = n / 20;",
+  "  const sorted = [...arr].sort((p, q) => p - q);",
+  "  const kept = sorted.slice(k, n - k);",
+  "  let total = 0;",
+  "  for (const v of kept) total += v;",
+  "  return total / kept.length;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def trimmed_mean(arr):
     n = len(arr)

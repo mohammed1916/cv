@@ -5,15 +5,20 @@ export const phases = [
   { id: 'done', label: 'Minimum', description: 'Return the cheapest number of deletions for the whole string.' },
 ]
 
-export const code = `min deletions to balance (s):
-  deleted = 0
-  b_count = 0
-  for each character ch in s:
-    if ch is b:
-      b_count = b_count + 1
-    else:
-      deleted = min(deleted + 1, b_count)
-  return deleted`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function minimumDeletions(s) {",
+  "  let deleted = 0;",
+  "  let bCount = 0;",
+  "  for (const ch of s) {",
+  "    if (ch === 'b') {",
+  "      bCount++;",
+  "    } else {",
+  "      deleted = Math.min(deleted + 1, bCount);",
+  "    }",
+  "  }",
+  "  return deleted;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def minimum_deletions(s):
     deleted = 0
@@ -48,18 +53,18 @@ export function buildTrace({ s }) {
   push('start', 'deleted = 0', 'deleted = 0', 'No deletions yet and no b characters seen.', snap(null, null, null))
   for (let i = 0; i < s.length; i++) {
     const ch = s[i]
-    push('inspect', 'for each character', 'for ch in s', `Read ${ch} at position ${i}.`, snap(i, ch, null))
+    push('inspect', 'for (const ch of s)', 'for ch in s', `Read ${ch} at position ${i}.`, snap(i, ch, null))
     if (ch === 'b') {
       bCount += 1
-      push('update', 'b_count = b_count + 1', "if ch == 'b'", `b adds to the count of earlier b characters (now ${bCount}); no deletion is needed.`, snap(i, ch, 'keep b'))
+      push('update', 'bCount++', "if ch == 'b'", `b adds to the count of earlier b characters (now ${bCount}); no deletion is needed.`, snap(i, ch, 'keep b'))
     } else {
       const deleteThis = deleted + 1
       const deleteEarlierB = bCount
       deleted = Math.min(deleteThis, deleteEarlierB)
       const choice = deleteThis <= deleteEarlierB ? 'delete this a' : 'delete earlier b characters'
-      push('update', 'deleted = min(', 'deleted = min', `Deleting this a costs ${deleteThis}; deleting the ${deleteEarlierB} earlier b characters costs ${deleteEarlierB}. Keep ${deleted}.`, snap(i, ch, choice))
+      push('update', 'deleted = Math.min(', 'deleted = min', `Deleting this a costs ${deleteThis}; deleting the ${deleteEarlierB} earlier b characters costs ${deleteEarlierB}. Keep ${deleted}.`, snap(i, ch, choice))
     }
   }
-  push('done', 'return deleted', 'return deleted', `Minimum deletions: ${deleted}.`, snap(null, null, null))
+  push('done', 'return deleted;', 'return deleted', `Minimum deletions: ${deleted}.`, snap(null, null, null))
   return { input: { s }, result: deleted, frames }
 }

@@ -6,15 +6,18 @@ export const phases = [
   { id: 'done', label: 'Result', description: 'Return the total.' },
 ]
 
-export const code = `FUNCTION sumOddLengthSubarrays(arr)
-    n ← length of arr
-    total ← 0
-    FOR each index i
-        left ← i + 1
-        right ← n − i
-        odd ← floor((left × right + 1) / 2)
-        total ← total + arr[i] × odd
-    RETURN total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function sumOddLengthSubarrays(arr) {",
+  "  const n = arr.length;",
+  "  let total = 0;",
+  "  for (let i = 0; i < n; i++) {",
+  "    const left = i + 1, right = n - i;",
+  "    const odd = Math.floor((left * right + 1) / 2);",
+  "    total += arr[i] * odd;",
+  "  }",
+  "  return total;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def sumOddLengthSubarrays(arr):
     n = len(arr)
@@ -25,7 +28,7 @@ export const python = `def sumOddLengthSubarrays(arr):
         total += value * odd
     return total`
 
-export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 5, 7: 5, 8: 6, 9: 6, 10: 6 }
+export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 7, 9: 8, 10: 8 }
 
 export function parseInput(text) {
   let input
@@ -44,16 +47,16 @@ export function buildTrace({ arr }) {
   const frames = []
   const snap = extra => ({ i: -1, left: 0, right: 0, odd: 0, total, ...extra })
   frames.push({ phase: 'setup', activeLine: 2, message: `Array length ${n}. Total starts at 0.`, snapshot: snap() })
-  frames.push({ phase: 'setup', activeLine: 3, message: 'Each position is weighted by how many odd-length subarrays cover it.', snapshot: snap() })
+  frames.push({ phase: 'setup', activeLine: 4, message: 'Each position is weighted by how many odd-length subarrays cover it.', snapshot: snap() })
   for (let i = 0; i < n; i++) {
     const left = i + 1
     const right = n - i
     const odd = Math.floor((left * right + 1) / 2)
     frames.push({ phase: 'scan', activeLine: 5, message: `Position ${i} (value ${arr[i]}): ${left} choices for the start and ${right} for the end.`, snapshot: snap({ i, left, right }) })
-    frames.push({ phase: 'count', activeLine: 8, message: `Of the ${left * right} start-end pairs covering ${i}, ${odd} give an odd length.`, snapshot: snap({ i, left, right, odd }) })
+    frames.push({ phase: 'count', activeLine: 6, message: `Of the ${left * right} start-end pairs covering ${i}, ${odd} give an odd length.`, snapshot: snap({ i, left, right, odd }) })
     total += arr[i] * odd
-    frames.push({ phase: 'add', activeLine: 9, message: `Add ${arr[i]} x ${odd} = ${arr[i] * odd}; total is now ${total}.`, snapshot: snap({ i, left, right, odd }) })
+    frames.push({ phase: 'add', activeLine: 7, message: `Add ${arr[i]} x ${odd} = ${arr[i] * odd}; total is now ${total}.`, snapshot: snap({ i, left, right, odd }) })
   }
-  frames.push({ phase: 'done', activeLine: 10, message: `Return ${total}.`, snapshot: snap({ total }) })
+  frames.push({ phase: 'done', activeLine: 9, message: `Return ${total}.`, snapshot: snap({ total }) })
   return { input: { arr }, result: total, frames }
 }

@@ -31,7 +31,7 @@ export default function TrimmedMeanVisualizer() {
             minWidth: 36, padding: '4px 6px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
             border: '1px solid var(--border)', color: 'var(--text)',
             background: dropped ? 'color-mix(in srgb, var(--error) 25%, transparent)' : kept ? 'color-mix(in srgb, var(--success) 28%, transparent)' : 'transparent', opacity: dropped ? 0.6 : 1,
-          }}>{value}</div>
+          }}>{value}{snap.sorted && index === snap.k ? <small> l</small> : null}{snap.sorted && index === n - snap.k - 1 ? <small> r</small> : null}</div>
         })}
       </div>
       <p style={{ color: 'var(--text)' }}>{`Red values are dropped (${lowCount} from the bottom, ${highCount} from the top). Green values are kept. Removed ${lowCount} from the bottom and ${highCount} from the top (${removed.size} values total). Five percent of ${n} is ${snap.k}.`}</p>

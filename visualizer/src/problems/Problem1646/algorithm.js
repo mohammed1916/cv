@@ -5,16 +5,20 @@ export const phases = [
   { id: 'done', label: 'Maximum', description: 'Return the largest value written through index n.' },
 ]
 
-export const code = `get maximum generated (n):
-  if n is 0, return 0
-  values = [0, 1]
-  best = 1
-  for i from 2 to n:
-    half = i // 2
-    value = values[half] for even i, else values[half] + values[half + 1]
-    append value
-    best = max(best, value)
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function getMaximumGenerated(n) {",
+  "  if (n === 0) return 0;",
+  "  const values = [0, 1];",
+  "  let best = 1;",
+  "  for (let i = 2; i <= n; i++) {",
+  "    const half = Math.floor(i / 2);",
+  "    const value = i % 2 === 0 ? values[half] : values[half] + values[half + 1];",
+  "    values.push(value);",
+  "    best = Math.max(best, value);",
+  "  }",
+  "  return best;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def get_maximum_generated(n):
     if n == 0:
@@ -49,7 +53,7 @@ export function buildTrace({ n }) {
     frames.push({ phase, activeLine: pc(pcNeedle), pythonLine: py(pyNeedle), message, snapshot })
 
   if (n === 0) {
-    push('start', 'if n is 0', 'if n == 0', 'n is 0, so the only value is index 0, which holds 0.', snap(0, null, null))
+    push('start', 'if (n === 0)', 'if n == 0', 'n is 0, so the only value is index 0, which holds 0.', snap(0, null, null))
     push('done', 'return best', 'return best', 'Return 0.', snap(null, null, null))
     return { input: { n }, result: 0, frames }
   }
@@ -59,12 +63,12 @@ export function buildTrace({ n }) {
     const half = Math.floor(i / 2)
     const even = i % 2 === 0
     const value = even ? values[half] : values[half] + values[half + 1]
-    push('inspect', 'half = i', 'half = i',
+    push('inspect', 'const half = Math.floor(i', 'half = i',
       even ? `Index ${i} is even, so it copies index ${half}.`
         : `Index ${i} is odd, so it adds indices ${half} and ${half + 1}.`, snap(i, half, null))
     values.push(value)
     if (value > best) best = value
-    push('update', 'append value', 'values.append',
+    push('update', 'values.push(value)', 'values.append',
       `Index ${i} receives ${value}; the largest value so far is ${best}.`, snap(i, half, value))
   }
   push('done', 'return best', 'return best', `The largest value through index ${n} is ${best}.`, snap(null, null, null))
