@@ -25,9 +25,10 @@ export default function QuarterValue() {
             minWidth: 40, padding: '6px 4px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
             border: `${inRun ? 2 : 1}px solid ${inRun ? 'var(--text)' : 'var(--border)'}`,
             background: found !== null && i >= start && i < end ? '#bbf7d0' : inRun ? 'var(--surface2)' : 'transparent', color: '#1c1917',
-          }}><div>{v}</div><small>{i}</small></div>
+          }}><div>{v}</div><small>{i}</small><div style={{ fontSize: 11, color: 'var(--text)' }}>{start === i ? 'i' : ''}{start !== null && end - 1 === i ? ' j-1' : ''}</div></div>
         })}
       </div>
+      {start !== null && <p>Window for the current run: i = {start}, j = {end} (the run is arr[i] to arr[j-1]).</p>}
       <p>{start === null ? 'No run is being measured.' : `Run of ${end - start} equal values (threshold: more than ${n / 4}).`}</p>
       {found !== null && <p><strong>Answer:</strong> {found}</p>}
     </>

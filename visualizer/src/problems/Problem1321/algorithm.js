@@ -1,4 +1,4 @@
-// Knowledge-derived walkthrough written for this visualizer. The sample tables are invented.
+// Walkthrough of the query stages on invented sample rows. The sample tables are invented.
 const SQL_TEXT = `WITH daily AS (
   SELECT visited_on, SUM(amount) AS day_amount
   FROM Customer

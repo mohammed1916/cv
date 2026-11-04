@@ -5,7 +5,7 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python,
   inputLabel: 'Log ids as JSON',
   url: 'https://leetcode.com/problems/find-the-start-and-end-number-of-continuous-ranges/',
-  complexity: 'Knowledge-derived walkthrough: one sort, then one pass that either extends or closes the current run.',
+  complexity: 'Walkthrough: one sort, then one pass that either extends or closes the current run.',
   examples: [{ label: 'Sample ids', input: JSON.stringify(sample) }],
 }
 
@@ -23,7 +23,7 @@ export default function FindTheStartAndEndNumberOfContinuousRanges() {
     <h3>Ids and runs</h3>
     <RowTable rows={step.rows} />
   </>} renderReasoning={() => <>
-    <p>Knowledge-derived walkthrough written for this visualizer. The ids are invented.</p>
+    <p>Walkthrough of the query stages on invented sample rows. The ids are invented.</p>
     <p>Once the ids are sorted, a run is unbroken exactly when each id is one more than the one before it.</p>
     <p>The SQL version uses the classic trick of subtracting the row number: consecutive ids share the same difference, which becomes the group key.</p>
   </>} />

@@ -1,4 +1,4 @@
-// Knowledge-derived teaching model. Sample tables and wording are original.
+// Stage-by-stage teaching model. Sample tables and wording are original.
 const lineIn = (source, text) => {
   const index = source.split('\n').findIndex(line => line.includes(text))
   if (index < 0) throw new Error(`No line contains: ${text}`)

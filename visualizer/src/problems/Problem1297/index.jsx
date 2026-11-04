@@ -15,9 +15,22 @@ const definition = {
 }
 
 export default function MaxOccurrences() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { window, end, sub, distinct, maxLetters, minSize, best, counts } = step.snapshot
+    const text = run.input.s
+    const l = end >= minSize - 1 ? end - minSize + 1 : null
+    const r = end >= 0 ? end : null
     return <>
+      <div role="img" aria-label="String with the sliding window" style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+        {[...text].map((ch, i) => {
+          const inWindow = l !== null && i >= l && i <= r
+          return <div key={i} data-index={i} style={{
+            minWidth: 30, padding: '4px 6px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace', color: '#1c1917',
+            border: `${i === r ? 2 : 1}px solid ${inWindow ? 'var(--text)' : 'var(--border)'}`,
+            background: inWindow ? 'var(--surface2)' : 'transparent',
+          }}><div>{ch}</div><small>{i === l ? 'l' : ''}{i === r ? ' r' : ''}</small></div>
+        })}
+      </div>
       <p>Window of letters: {window.length === 0 ? 'empty' : window.map(([ch, c]) => `${ch}×${c}`).join(', ')} · distinct {distinct} of at most {maxLetters}</p>
       <p>Current text: <code>{sub ?? '—'}</code> (ends at position {end}; target length {minSize})</p>
       <table aria-label="Substring counts" style={{ fontFamily: 'monospace', borderCollapse: 'collapse' }}>

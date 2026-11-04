@@ -5,7 +5,7 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python,
   inputLabel: 'Countries and weather readings as JSON',
   url: 'https://leetcode.com/problems/weather-type-in-each-country/',
-  complexity: 'Knowledge-derived walkthrough: one filter pass, one average per country, and one label per country.',
+  complexity: 'Walkthrough: one filter pass, one average per country, and one label per country.',
   examples: [{ label: 'Sample readings', input: JSON.stringify(sample) }],
 }
 
@@ -23,7 +23,7 @@ export default function WeatherTypeInEachCountry() {
     <h3>Readings and labels</h3>
     <RowTable rows={step.rows} />
   </>} renderReasoning={() => <>
-    <p>Knowledge-derived walkthrough written for this visualizer. The readings are invented.</p>
+    <p>Walkthrough of the query stages on invented sample rows. The readings are invented.</p>
     <p>Only November 2019 readings are averaged, so a reading from another month never changes a country’s label.</p>
     <p>A country with no November readings does not appear in the result at all.</p>
   </>} />

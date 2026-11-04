@@ -1,4 +1,4 @@
-// Knowledge-derived teaching model: the tables, SQL and pandas steps are written for this site.
+// Stage-by-stage teaching model: the tables, SQL and pandas steps are written for this site.
 const SQL = `(SELECT u.name AS results
 FROM MovieRating r JOIN Users u ON u.user_id = r.user_id
 GROUP BY u.user_id, u.name

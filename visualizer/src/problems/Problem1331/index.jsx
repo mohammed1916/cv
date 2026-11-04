@@ -8,7 +8,7 @@ const definition = {
   url: 'https://leetcode.com/problems/rank-transform-of-an-array/',
   complexity: 'O(n log n) time for sorting the distinct values, and O(n) space for the rank table.',
   examples: [
-    { label: 'Distinct', input: '[40,10,20,30]' },
+    { label: 'Distinct', input: '[4,10,20,3]' },
     { label: 'Repeats', input: '[5,5,-3,5,0]' },
     { label: 'Mixed', input: '[7,-1,7,2]' },
   ],

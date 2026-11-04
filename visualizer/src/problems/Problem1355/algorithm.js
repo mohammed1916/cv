@@ -1,4 +1,4 @@
-// Knowledge-derived teaching model: the tables, SQL and pandas steps are written for this site.
+// Stage-by-stage teaching model: the tables, SQL and pandas steps are written for this site.
 // Rule used here: only activities with at least one participant form the population.
 const SQL = `WITH counts AS (
   SELECT a.name AS activity, COUNT(f.id) AS participants

@@ -20,6 +20,7 @@ export default function CoveredIntervals() {
     const width = 100 / 101
     return <>
       <div role="img" aria-label="Intervals on a number line" style={{ position: 'relative', height: 28 + order.length * 22, border: '1px solid var(--border)' }}>
+        {maxEnd !== null && <div aria-label={`Furthest kept end ${maxEnd}`} style={{ position: 'absolute', top: 0, bottom: 0, left: `${maxEnd * width}%`, borderLeft: '2px dashed var(--primary)' }} />}
         {order.map((it, row) => {
           const isKept = kept.includes(it.index)
           const isCurrent = it.index === current

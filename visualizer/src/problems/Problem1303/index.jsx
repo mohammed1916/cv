@@ -5,7 +5,7 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python,
   inputLabel: 'Employee table as JSON',
   url: 'https://leetcode.com/problems/find-the-team-size/',
-  complexity: 'Knowledge-derived walkthrough: one count per team, then one lookup per employee.',
+  complexity: 'Walkthrough: one count per team, then one lookup per employee.',
   examples: [{ label: 'Sample employees', input: JSON.stringify(sample) }],
 }
 
@@ -23,7 +23,7 @@ export default function FindTheTeamSize() {
     <h3>Team sizes</h3>
     <RowTable rows={step.rows} />
   </>} renderReasoning={() => <>
-    <p>Knowledge-derived walkthrough written for this visualizer. The table is invented.</p>
+    <p>Walkthrough of the query stages on invented sample rows. The table is invented.</p>
     <p>The team size is computed once per team and then reused for every employee on that team.</p>
     <p>A team of one still reports a size of one.</p>
   </>} />

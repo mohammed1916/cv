@@ -5,7 +5,7 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python,
   inputLabel: 'Score rows as JSON',
   url: 'https://leetcode.com/problems/running-total-for-different-genders/',
-  complexity: 'Knowledge-derived walkthrough: one pass to group by gender and day, then one running sum per gender.',
+  complexity: 'Walkthrough: one pass to group by gender and day, then one running sum per gender.',
   examples: [{ label: 'Sample scores', input: JSON.stringify(sample) }],
 }
 
@@ -23,7 +23,7 @@ export default function RunningTotalForDifferentGenders() {
     <h3>Daily and running totals</h3>
     <RowTable rows={step.rows} />
   </>} renderReasoning={() => <>
-    <p>Knowledge-derived walkthrough written for this visualizer. The scores are invented.</p>
+    <p>Walkthrough of the query stages on invented sample rows. The scores are invented.</p>
     <p>Several players can score on the same day, so the rows are first summed per gender and day.</p>
     <p>The running total then restarts for each gender and only moves forward through the dates.</p>
   </>} />

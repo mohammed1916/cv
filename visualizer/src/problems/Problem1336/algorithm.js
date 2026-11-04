@@ -1,4 +1,4 @@
-// Knowledge-derived walkthrough written for this visualizer. The sample tables are invented.
+// Walkthrough of the query stages on invented sample rows. The sample tables are invented.
 const SQL_TEXT = `WITH per_visit AS (
   SELECT v.user_id, v.visit_date,
          COUNT(t.amount) AS transactions_count

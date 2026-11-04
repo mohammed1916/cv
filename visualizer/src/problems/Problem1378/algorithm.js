@@ -1,4 +1,4 @@
-// Knowledge-derived walkthrough written for this visualizer. The sample tables are invented.
+// Walkthrough of the query stages on invented sample rows. The sample tables are invented.
 const SQL_TEXT = `SELECT u.unique_id, e.name
 FROM Employees AS e
 LEFT JOIN EmployeeUNI AS u ON u.id = e.id`

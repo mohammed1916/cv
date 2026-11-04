@@ -1,4 +1,4 @@
-// Knowledge-derived walkthrough written for this visualizer. The sample tables are invented.
+// Walkthrough of the query stages on invented sample rows. The sample tables are invented.
 const SQL_TEXT = `WITH counts AS (
   SELECT ad_id,
          SUM(CASE WHEN action = 'Clicked' THEN 1 ELSE 0 END) AS clicked,

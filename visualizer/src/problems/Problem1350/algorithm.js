@@ -1,4 +1,4 @@
-// Knowledge-derived teaching model: the tables, SQL and pandas steps are written for this site.
+// Stage-by-stage teaching model: the tables, SQL and pandas steps are written for this site.
 // Rule used here: a NULL department_id is not a reference to a missing department, so that row is skipped.
 const SQL = `SELECT s.id, s.name
 FROM Students s

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -15,7 +16,7 @@ const definition = {
 }
 
 export default function ClosestCap() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { arr, target, low, high, mid, midSum, lowSum, belowSum } = step.snapshot
     return <>
       <div role="img" aria-label="Array with cap applied" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -26,6 +27,8 @@ export default function ClosestCap() {
           </div>
         })}
       </div>
+      <AnswerRangeBar title="Cap search" min={0} max={Math.max(...run.input.arr)} low={low} high={high}
+        probe={mid} verdict={mid !== null ? midSum >= target : null} />
       <p>Search range: {low} to {high}{mid !== null ? ` · probe ${mid} gives sum ${midSum}` : ''}</p>
       <p>Target {target}{lowSum !== undefined && lowSum !== null ? ` · cap ${low} sums to ${lowSum}` : ''}{belowSum !== undefined && belowSum !== null ? ` · cap ${low - 1} sums to ${belowSum}` : ''}</p>
     </>

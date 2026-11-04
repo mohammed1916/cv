@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import GraphTraversalView from '../../components/shared/GraphTraversalView'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -20,8 +21,14 @@ const definition = {
 }
 
 export default function FrogPosition() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => (
-    <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const tags = {}
+    step.prob.slice(1).forEach((p, i) => { if (p > 0) tags[i] = p.toFixed(3) })
+    const visited = step.prob.slice(1).map((p, i) => (p > 0 ? i : -1)).filter(i => i >= 0)
+    return <>
+      <GraphTraversalView title="Tree from vertex 1" n={run.n} edges={run.edges.map(([a, b]) => [a - 1, b - 1])}
+        labels={Array.from({ length: run.n }, (_, i) => String(i + 1))} current={step.vertex - 1} visited={visited} tags={tags}
+        notes={[`Target ${run.target} after ${run.t} seconds.`]} />
       <table aria-label="Probability by vertex">
         <tbody>
           {step.prob.slice(1).map((p, i) => (
@@ -34,7 +41,7 @@ export default function FrogPosition() {
       </table>
       <output aria-label="Target">{`Target ${run.target} after ${run.t} seconds`}</output>
     </>
-  )} renderReasoning={() => <>
+  }} renderReasoning={() => <>
     <p>The frog never returns to a visited vertex, so the tree rooted at vertex 1 fixes every path.</p>
     <p>A vertex with children gives its probability away at the next second, while a leaf keeps it for the rest of the time.</p>
   </>} />

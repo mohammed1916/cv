@@ -24,7 +24,7 @@ export default function WindowAverages() {
           minWidth: 44, padding: '6px 8px', textAlign: 'center', fontFamily: 'monospace', color: '#1c1917',
           border: `${inWindow(i) ? 2 : 1}px solid var(--border)`,
           background: inWindow(i) ? (ok === false ? '#fecaca' : ok ? '#bbf7d0' : '#bfdbfe') : 'transparent',
-        }}><div>{value}</div><small>{i}</small></div>)}
+        }}><div>{value}</div><small>{i}{start === i ? ' l' : ''}{start !== null && start !== undefined && start + k - 1 === i ? ' r' : ''}</small></div>)}
       </div>
       <p>Target sum: <strong>{target}</strong>{sum !== null && sum !== undefined ? <> · window sum: <strong>{sum}</strong></> : null} · counted: <strong>{count}</strong></p>
     </>

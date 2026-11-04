@@ -26,6 +26,10 @@ export default function VerbalArithmetic() {
         </tbody>
       </table>
       <p>{step.snapshot.leading.length ? `Leading letters: ${step.snapshot.leading.join(', ')}` : 'No leading-zero restriction applies.'}</p>
+      <p aria-label="Search depth">Search depth: letter {Math.min(step.snapshot.index + 1, letters.length)} of {letters.length}{step.snapshot.sum !== null && step.snapshot.sum !== undefined ? ` · weighted sum ${step.snapshot.sum}` : ''}</p>
+      <ol aria-label="Assignments on the current branch" style={{ fontFamily: 'monospace' }}>
+        {letters.filter(c => digit[c] !== undefined).map(c => <li key={c}>{c} = {digit[c]}</li>)}
+      </ol>
     </>
   }} renderReasoning={() => <>
     <p><strong>Weights:</strong> a letter's weight is its place values in the words minus its place values in the result. The sum is zero exactly when the words add up.</p>

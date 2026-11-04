@@ -5,7 +5,7 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python,
   inputLabel: 'Students, subjects and exams as JSON',
   url: 'https://leetcode.com/problems/students-and-examinations/',
-  complexity: 'Knowledge-derived walkthrough: a grid of students times subjects, then one increment per examination row.',
+  complexity: 'Walkthrough: a grid of students times subjects, then one increment per examination row.',
   examples: [{ label: 'Sample school', input: JSON.stringify(sample) }],
 }
 
@@ -23,7 +23,7 @@ export default function StudentsAndExaminations() {
     <h3>Student and subject pairs</h3>
     <RowTable rows={step.rows} />
   </>} renderReasoning={() => <>
-    <p>Knowledge-derived walkthrough written for this visualizer. The school is invented.</p>
+    <p>Walkthrough of the query stages on invented sample rows. The school is invented.</p>
     <p>The cross join makes sure a student who never sat a subject still appears with zero.</p>
     <p>Each examination row is counted separately, so two attempts at the same subject count as two.</p>
   </>} />
