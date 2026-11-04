@@ -37,7 +37,8 @@ function oneLetterChanges(word) {
 
 export function buildTrace({ beginWord, endWord, wordList }) {
   const dict = new Set(wordList)
-  const snap = (extra = {}) => ({ beginWord, endWord, dict: [...dict], ...extra })
+  const layers = [[beginWord]]
+  const snap = (extra = {}) => ({ beginWord, endWord, dict: [...dict], layers: layers.map(l => [...l]), ...extra })
   const frames = [{
     phase: 'start', activeLine: L('dict = set(words)'), pythonLine: P('dict_ = set(words)'), snapshot: snap({ layer: [beginWord] }),
     message: `Begin at ${beginWord} and aim for ${endWord}. Only words from the list can be used as intermediate steps.`,
@@ -77,6 +78,7 @@ export function buildTrace({ beginWord, endWord, wordList }) {
     }
     layer = next
     depth++
+    layers.push([...layer])
     frames.push({
       phase: 'expand', activeLine: L('layer = nxt'), pythonLine: P('layer = nxt'),
       snapshot: snap({ layer: [...layer], depth }),

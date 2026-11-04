@@ -20,7 +20,7 @@ export function parseInput(text) {
 
 export function buildTrace(tokens) {
   const stack = []
-  const snap = (token, operands = null, value = null) => ({ stack: [...stack], token, operands, value })
+  const snap = (token, operands = null, value = null, index = -1) => ({ stack: [...stack], token, operands, value, index })
   const frames = [{
     phase: 'start', activeLine: L('stack = empty list'), pythonLine: P('stack = []'), snapshot: snap(null),
     message: 'The stack is empty. Read the tokens from left to right.',
@@ -38,13 +38,13 @@ export function buildTrace(tokens) {
       if (Math.abs(value) > 1e9) throw new Error('An intermediate value is too large for this visual.')
       stack.push(value)
       frames.push({
-        phase: 'apply', activeLine: L('result = left op right'), pythonLine: P('stack.append(result)'), snapshot: snap(token, [left, right], value),
+        phase: 'apply', activeLine: L('result = left op right'), pythonLine: P('stack.append(result)'), snapshot: snap(token, [left, right], value, i),
         message: `${token} takes ${left} (left) and ${right} (right). ${token === '/' ? 'Division truncates toward zero. ' : ''}The result ${value} goes back on the stack.`,
       })
     } else {
       stack.push(Number(token))
       frames.push({
-        phase: 'push', activeLine: L('push the integer t'), pythonLine: P('stack.append(int(token))'), snapshot: snap(token),
+        phase: 'push', activeLine: L('push the integer t'), pythonLine: P('stack.append(int(token))'), snapshot: snap(token, null, null, i),
         message: `${token} is a number, so it goes on the stack.`,
       })
     }

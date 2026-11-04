@@ -58,14 +58,16 @@ export function parseInput(text) {
 /** Level-order array to nodes; missing entries mean there is no child at that position. */
 function build(values) {
   if (!values.length || values[0] === null) return null
-  const root = { val: values[0], left: null, right: null }
+  let nextId = 0
+  const make = val => ({ id: nextId++, val, left: null, right: null })
+  const root = make(values[0])
   const queue = [root]
   let i = 1
   while (queue.length && i < values.length) {
     const node = queue.shift()
-    if (values[i] !== null) { node.left = { val: values[i], left: null, right: null }; queue.push(node.left) }
+    if (values[i] !== null) { node.left = make(values[i]); queue.push(node.left) }
     i += 1
-    if (i < values.length && values[i] !== null) { node.right = { val: values[i], left: null, right: null }; queue.push(node.right) }
+    if (i < values.length && values[i] !== null) { node.right = make(values[i]); queue.push(node.right) }
     i += 1
   }
   return root
@@ -75,14 +77,16 @@ export function buildTrace(values) {
   const frames = []
   const root = build(values)
   const out = []
+  const outIds = []
   const stack = root ? [root] : []
-  const snap = (current, pushed = []) => ({ stack: stack.map(n => n.val), output: [...out], current, pushed })
+  const snap = (current, pushed = [], currentId = null) => ({ tree: root, stack: stack.map(n => n.val), stackIds: stack.map(n => n.id), output: [...out], outputIds: [...outIds], current, currentId, pushed })
 
   frames.push({ phase: 'setup', activeLine: lineAt('stack, out ='), message: root ? `The root ${root.val} goes on the stack.` : 'The tree is empty, so the traversal returns an empty list.', snapshot: snap(null) })
   while (stack.length) {
     const node = stack.pop()
     out.push(node.val)
-    frames.push({ phase: 'visit', activeLine: lineAt('out.append(node.val)'), message: `Pop ${node.val} and record it. Output is now [${out.join(', ')}].`, snapshot: snap(node.val) })
+    outIds.push(node.id)
+    frames.push({ phase: 'visit', activeLine: lineAt('out.append(node.val)'), message: `Pop ${node.val} and record it. Output is now [${out.join(', ')}].`, snapshot: snap(node.val, [], node.id) })
     const pushed = []
     const parts = []
     if (node.right) { stack.push(node.right); pushed.push(node.right.val); parts.push(`right child ${node.right.val}`) }
@@ -92,7 +96,7 @@ export function buildTrace(values) {
       message: parts.length
         ? `Push ${parts.join(', then ')}. ${node.left ? 'The left child is on top, so it is visited next.' : 'The right child is visited next.'}`
         : `Node ${node.val} has no children, so nothing is pushed.`,
-      snapshot: snap(node.val, pushed),
+      snapshot: snap(node.val, pushed, node.id),
     })
   }
   frames.push({ phase: 'answer', activeLine: lineAt('return out'), message: `Preorder traversal: [${out.join(', ')}].`, snapshot: snap(null) })

@@ -21,6 +21,7 @@ export function buildTrace(values) {
   while (fast + 2 < n) {
     slow += 1
     fast += 2
+    frames.push({ phase: 'split', activeLine: L('fast and slow'), pythonLine: P('split = '), snapshot: snap(), message: `Slow moves to index ${slow} while fast moves to index ${fast}.` })
   }
   const split = slow + 1
   frames.push({ phase: 'split', activeLine: L('fast and slow'), pythonLine: P('split = '), snapshot: snap({ split }), message: `The pointers stop with the first half holding ${split} value${split === 1 ? '' : 's'}; the rest form the second half.` })

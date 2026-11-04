@@ -19,7 +19,7 @@ const cellStyle = (value, active) => ({
   width: 34, height: 30, boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace', fontSize: '.8rem',
   border: `${active ? 2 : 1}px solid ${active ? 'var(--text)' : 'var(--border)'}`,
   background: value === true ? '#bbf7d0' : value === false ? '#fecaca' : 'transparent',
-  color: '#1c1917', display: 'grid', placeItems: 'center',
+  color: value === true || value === false ? '#1c1917' : 'var(--text)', display: 'grid', placeItems: 'center',
 })
 
 export default function RegexMatching() {

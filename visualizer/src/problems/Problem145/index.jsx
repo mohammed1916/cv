@@ -1,5 +1,24 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import { useMemo } from 'react'
+import TreeDiagram from '../../components/shared/TreeDiagram'
+import { layoutTree } from '../../components/shared/treeLayout'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
+
+function treeDrawing(root) {
+  if (!root) return { positions: new Map(), edges: [], nodes: [] }
+  const { positions, edges } = layoutTree(root)
+  const nodes = []
+  const walk = node => { if (!node) return; nodes.push({ id: node.id, val: node.value }); walk(node.left); walk(node.right) }
+  walk(root)
+  return { positions, nodes, edges: edges.map(e => ({ fromId: e.from, toId: e.to })) }
+}
+
+function PostorderTree({ snapshot }) {
+  const { tree, stackIds = [], outputIds = [], currentId = null } = snapshot
+  const drawing = useMemo(() => treeDrawing(tree), [tree])
+  return <TreeDiagram positions={drawing.positions} edges={drawing.edges} nodes={drawing.nodes}
+    activeIds={new Set(currentId === null ? [] : [currentId])} visitedIds={new Set(outputIds)} queueIds={new Set(stackIds)} />
+}
 
 const definition = {
   number: '145',
@@ -18,6 +37,7 @@ export default function BinaryTreePostorderTraversal() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
     const { stack, output, current } = step.snapshot
     return <>
+      <PostorderTree snapshot={step.snapshot} />
       <p>Stack (top on the right)</p>
       <div role="list" aria-label="Stack" style={{ display: 'flex', gap: 6, flexWrap: 'wrap', minHeight: 40 }}>
         {stack.length === 0 && <span>empty</span>}

@@ -79,33 +79,39 @@ export function buildTrace(values) {
   const frames = []
   const output = []
   const stack = [{ node: root, finished: false }]
-  const snap = current => ({
+  const outputIds = []
+  const snap = (current, currentId = null) => ({
+    tree: root,
     stack: stack.map(({ node, finished }) => node ? { id: node.id, value: node.value, finished } : null),
+    stackIds: stack.filter(({ node }) => node).map(({ node }) => node.id),
     output: output.slice(),
+    outputIds: outputIds.slice(),
     current,
+    currentId,
   })
-  const add = (phase, c, p, message, current = null) => frames.push({ phase, activeLine: C(c), pythonLine: P(p), message, snapshot: snap(current) })
+  const add = (phase, c, p, message, current = null, currentId = null) => frames.push({ phase, activeLine: C(c), pythonLine: P(p), message, snapshot: snap(current, currentId) })
 
   add('start', 'stack = [', 'stack = [', `The root ${root.value} starts the stack, not yet expanded.`)
   while (stack.length) {
     const { node, finished } = stack.pop()
     add('pop', 'node, finished = stack', 'node, finished = stack',
       node ? `Pop node ${node.value}${finished ? ', which is finished' : ', which is not yet expanded'}.` : 'Pop an empty child.',
-      node ? node.value : null)
+      node ? node.value : null, node ? node.id : null)
     if (node === null) {
       add('empty', 'if node is', 'if node is', 'An empty child is dropped.')
       continue
     }
     if (finished) {
       output.push(node.value)
-      add('emit', 'output.append', 'output.append', `Emit ${node.value}: both of its subtrees were emitted before it.`, node.value)
+      outputIds.push(node.id)
+      add('emit', 'output.append', 'output.append', `Emit ${node.value}: both of its subtrees were emitted before it.`, node.value, node.id)
       continue
     }
     stack.push({ node, finished: true })
     stack.push({ node: node.right, finished: false })
     stack.push({ node: node.left, finished: false })
     add('schedule', 'push((node, true))', 'append((node, True))',
-      `Node ${node.value} waits until its children are done. Its left child ${node.left ? node.left.value : 'empty'} is on top.`)
+      `Node ${node.value} waits until its children are done. Its left child ${node.left ? node.left.value : 'empty'} is on top.`, node.value, node.id)
   }
   add('done', 'return output', 'return output', `Postorder is ${output.join(', ')}.`)
   return { input: values, result: output, frames }

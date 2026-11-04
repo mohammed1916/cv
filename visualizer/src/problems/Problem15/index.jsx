@@ -1,3 +1,4 @@
+import PointerRail from '../../components/shared/PointerRail'
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
@@ -16,19 +17,16 @@ const definition = {
 
 export default function ThreeSum() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
-    const { sorted, i, left, right, total, triple, triples } = step.snapshot
+    const { sorted, i, left, right, total, triples } = step.snapshot
     return <>
-      <div role="img" aria-label="Sorted values with pointers" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        {sorted.map((value, idx) => {
-          const role = [idx === i && 'anchor', idx === left && 'left', idx === right && 'right'].filter(Boolean).join(' / ')
-          const inTriple = triple && triple.includes(value) && (idx === i || idx === left || idx === right)
-          return <div key={idx} data-index={idx} style={{
-            minWidth: 52, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
-            border: `${role ? 2 : 1}px solid ${role ? 'var(--text)' : 'var(--border)'}`,
-            background: inTriple ? '#bbf7d0' : 'transparent', color: inTriple ? '#1c1917' : undefined,
-          }}><div>{value}</div><small>{role}</small></div>
-        })}
-      </div>
+      <PointerRail title="Sorted values: anchor, left and right" values={sorted}
+        pointers={[
+          i !== null && i !== undefined && i >= 0 && { id: 'anchor', label: `i ${i}`, index: i, tone: 'primary' },
+          left !== null && left !== undefined && { id: 'left', label: `L ${left}`, index: left, tone: 'info' },
+          right !== null && right !== undefined && { id: 'right', label: `R ${right}`, index: right, tone: 'warning' },
+        ].filter(Boolean)}
+        range={left !== null && left !== undefined ? { start: left, end: right } : null}
+        note="Anchor i is fixed; L and R scan the rest of the sorted values." />
       <p>{total === null ? 'No sum yet.' : `Current sum: ${total}`}</p>
       <p>Triples found: {triples.length === 0 ? 'none yet' : triples.map(t => `[${t.join(', ')}]`).join(' ')}</p>
     </>

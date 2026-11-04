@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import LinkedListLane from '../../components/shared/LinkedListLane'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -14,24 +15,30 @@ const definition = {
   ],
 }
 
+function lane(values, prefix) {
+  return values.map((value, index) => ({ id: `${prefix}${index}`, value }))
+}
+
 export default function ReorderList() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const values = run.input
-    const { split, second = [], result = [], step: current } = step.snapshot
+    const { split, second = [], result = [], step: current, slow, fast } = step.snapshot
+    const original = lane(values, 'o')
+    const pointers = []
+    if (slow !== undefined && values.length > 0) pointers.push({ id: `o${slow}`, label: 'slow', tone: 'info' })
+    if (fast !== undefined && values.length > 0 && fast < values.length) pointers.push({ id: `o${fast}`, label: 'fast', tone: 'warning' })
+    const roles = {}
+    if (split !== undefined) for (let i = split; i < values.length; i++) roles[`o${i}`] = 'visited'
+    const reversedNodes = lane(second, 'r')
+    const woven = lane(result, 'w')
     return <>
-      <div role="img" aria-label="Front half and reversed back half" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        {values.map((v, i) => {
-          const front = split !== undefined && i < split
-          const isCurrent = current !== undefined && i === current
-          return <div key={i} data-index={i} style={{
-            minWidth: 48, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
-            border: `${isCurrent ? 2 : 1}px solid ${isCurrent ? 'var(--text)' : 'var(--border)'}`,
-            background: front ? '#e0e7ff' : '#fce7f3', color: '#1c1917',
-          }}>{v}<div><small>{i}</small></div></div>
-        })}
-      </div>
-      {split !== undefined && <p>Front half: {values.slice(0, split).join(', ')} | Reversed back half: {second.join(', ') || 'none'}</p>}
-      <p>Woven so far: <code>{result.join(', ') || '(nothing yet)'}</code></p>
+      <LinkedListLane title="Original order" nodes={original} pointers={pointers} roles={roles}
+        note={split === undefined ? 'Fast pointer moves two places per slow move.' : `First half: indices 0 to ${split - 1}. Shaded: second half.`} />
+      {split !== undefined && <LinkedListLane title="Second half reversed" nodes={reversedNodes}
+        note="Its last value is taken first when weaving." />}
+      {result.length > 0 && <LinkedListLane title="Woven result" nodes={woven}
+        pointers={current !== undefined ? [{ id: `w${result.length - 1}`, label: 'latest', tone: 'primary' }] : []}
+        note="Front, back, front, back." />}
     </>
   }} renderReasoning={({ step }) => <>
     <p><strong>Three steps:</strong> find the middle, reverse the second half, then alternate between the two halves.</p>

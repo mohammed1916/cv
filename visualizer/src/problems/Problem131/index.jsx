@@ -1,3 +1,4 @@
+import PointerRail from "../../components/shared/PointerRail";
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
 import { getExamples } from "../../config/examplesRegistry";
 import PartitionStory from "./PartitionStory";
@@ -34,7 +35,19 @@ export default function PalindromePartitioningVisualizer() {
     <AlgorithmWorkspace
       definition={definition}
       renderVisual={({ run, step }) => (
-        <PartitionStory story={run} step={step} />
+        <>
+          <PointerRail
+            title="Candidate piece"
+            values={run.s.split("")}
+            pointers={[
+              step.start !== null && step.start !== undefined && step.start < run.s.length && { id: "l", label: `l ${step.start}`, index: step.start, tone: "info" },
+              step.end !== null && step.end !== undefined && step.end - 1 >= 0 && step.end - 1 < run.s.length && { id: "r", label: `r ${step.end - 1}`, index: step.end - 1, tone: "warning" },
+            ].filter(Boolean)}
+            range={step.start !== null && step.start !== undefined && step.end !== null && step.end !== undefined ? { start: step.start, end: step.end - 1 } : null}
+            note="l and r mark the ends of the candidate piece; the piece must read the same both ways."
+          />
+          <PartitionStory story={run} step={step} />
+        </>
       )}
       renderReasoning={({ step }) => <p>{step.explanation ?? step.message}</p>}
     />

@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-const node = { minWidth: 44, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', color: '#1c1917' }
+import LinkedListLane from '../../components/shared/LinkedListLane'
 
 const definition = {
   number: '147',
@@ -20,15 +20,13 @@ export default function InsertionSortList() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
     const s = step.snapshot
     return <>
-      <div role="img" aria-label="Linked list" style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'flex-end' }}>
-        {s.list.map(item => {
-          const tags = [item.id === s.prevId && 'prev', item.id === s.curId && 'cur', item.id === s.posId && 'pos'].filter(Boolean)
-          return <div key={item.id} data-node={item.id} style={{
-            ...node, border: `${tags.length ? 2 : 1}px solid ${item.id === s.curId ? 'var(--text)' : 'var(--border)'}`,
-            background: item.id === s.curId ? '#fde68a' : item.id === s.posId ? '#bbf7d0' : 'transparent',
-          }}><div>{item.value}</div><small>{tags.join(' ')}</small></div>
-        })}
-      </div>
+      <LinkedListLane title="Working list" nodes={s.list.map(item => ({ id: item.id, value: item.value }))}
+        pointers={[
+          s.prevId !== null && s.prevId !== undefined && { id: s.prevId, label: 'prev', tone: 'info' },
+          s.curId !== null && s.curId !== undefined && { id: s.curId, label: 'cur', tone: 'warning' },
+          s.posId !== null && s.posId !== undefined && { id: s.posId, label: 'pos', tone: 'primary' },
+        ].filter(Boolean)}
+        roles={{ ...(s.curId != null ? { [s.curId]: 'active' } : {}), ...(s.posId != null ? { [s.posId]: 'match' } : {}) }} />
       <p>Nodes up to <strong>prev</strong> are the sorted part. <strong>cur</strong> is the node being placed.</p>
     </>
   }} renderReasoning={() => <>

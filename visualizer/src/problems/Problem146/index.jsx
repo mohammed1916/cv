@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import LinkedListLane from '../../components/shared/LinkedListLane'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -14,25 +15,15 @@ const definition = {
   ],
 }
 
-const slot = {
-  minWidth: 64, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace', color: 'inherit',
-}
-
 export default function LRUCache() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
     const { capacity, order, size, command, key, hit, value, evicted, outputs } = step.snapshot
     return <>
       <p><strong>Recency list</strong> (most recent on the left, least recent on the right). Slots used: {size} of {capacity}.</p>
-      <div role="img" aria-label="Recency list from most to least recent" style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
-        {order.length === 0 && <span>empty</span>}
-        {order.map((k, i) => <div key={k} style={{
-          ...slot,
-          border: `${k === key ? 2 : 1}px solid ${k === evicted ? '#dc2626' : k === key ? 'var(--text)' : 'var(--border)'}`,
-          background: i === 0 ? 'var(--surface2)' : 'transparent',
-        }}>
-          <div>key {k}</div><small>{k === key && value !== undefined ? `value ${value}` : ' '}</small>
-        </div>)}
-      </div>
+      <LinkedListLane title="Recency list" nodes={order.map(k => ({ id: `k${k}`, value: k }))}
+        pointers={order.length ? [{ id: `k${order[0]}`, label: 'MRU', tone: 'info' }, { id: `k${order[order.length - 1]}`, label: 'LRU', tone: 'warning' }] : []}
+        roles={{ ...(key !== null && key !== undefined ? { [`k${key}`]: 'active' } : {}), ...(evicted !== undefined ? { [`k${evicted}`]: 'removed' } : {}) }}
+        note={`Slots used: ${size} of ${capacity}. Head is most recent, tail is least recent.`} />
       <p>{command === null ? 'Ready for the first operation.' : `${command === 'get' ? `get(${key})` : `put(${key}, ${value})`}: ${hit === undefined ? '' : hit ? 'key present' : 'key absent'}${evicted !== undefined ? `, key ${evicted} evicted` : ''}.`}</p>
       <p style={{ fontFamily: 'monospace' }}>outputs: [{outputs.map(o => (o === null ? 'null' : o)).join(', ')}]</p>
     </>

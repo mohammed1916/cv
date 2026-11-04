@@ -13,7 +13,7 @@ test('143 sample lists are reordered by alternating ends', () => {
 
 test('143 every split point is reached in the trace', () => {
   const { frames } = buildTrace([5, 6, 7])
-  const split = frames.find(f => f.phase === 'split')
+  const split = frames.filter(f => f.phase === 'split').at(-1)
   assert.equal(split.snapshot.split, 2)
   assert.equal(frames.at(-1).phase, 'done')
   const ids = new Set(phases.map(p => p.id))
