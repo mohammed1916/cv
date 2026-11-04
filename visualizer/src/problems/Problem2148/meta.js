@@ -7,5 +7,5 @@ export const meta = {
     "Array"
   ],
   "accent": "#0891b2",
-  "description": "Count elements having both a strictly smaller and a strictly larger value somewhere in the array."
+  "description": "Count the values that have some other value strictly below and some other value strictly above them. The visual sorts the array and marks the minimum and maximum values that never qualify."
 };

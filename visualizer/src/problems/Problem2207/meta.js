@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Insert one character to maximize occurrences of a two-character subsequence."
+  "description": "Insert one character into a string to maximise the number of occurrences of a two-character subsequence. The visual counts the subsequence matches before and after each candidate insertion."
 };

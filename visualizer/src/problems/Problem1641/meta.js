@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Count nondecreasing strings of length n made from the five vowels."
+  "description": "Count sorted strings of a given length built from the five vowels. The visual lays out a grid of counts per vowel and per length, building each row from the previous one."
 };

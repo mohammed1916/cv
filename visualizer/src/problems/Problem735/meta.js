@@ -7,5 +7,5 @@ export const meta = {
     "Stack"
   ],
   "accent": "#0891b2",
-  "description": "Return the surviving asteroids after all collisions."
+  "description": "Find which asteroids survive after neighbouring pairs moving in opposite directions collide. The visual pushes asteroids onto a stack and pops smaller ones on impact."
 };

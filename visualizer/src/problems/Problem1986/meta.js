@@ -8,5 +8,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Finish every task using the fewest bounded work sessions."
+  "description": "Pack tasks into the fewest work sessions that each respect a fixed time limit. The visual tries task-to-session assignments and shows each session filling up."
 };

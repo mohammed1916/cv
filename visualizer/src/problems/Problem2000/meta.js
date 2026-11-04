@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Reverse the prefix ending at the first occurrence of ch."
+  "description": "Reverse the prefix of a word up to the first occurrence of a given character. The visual points at the first match and reverses the segment before it."
 };

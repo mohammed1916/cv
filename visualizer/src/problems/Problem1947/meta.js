@@ -8,5 +8,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Pair students and mentors to maximize agreement across answers."
+  "description": "Pair students with mentors to maximize the total number of matching answers. The visual shows a grid of match scores between students and mentors with the chosen pairing highlighted.",
 };

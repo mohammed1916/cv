@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Find the shortest distance between two distinct points on a line."
+  "description": "Find the smallest gap between two different positions on a number line. The visual sorts the positions and compares each neighbouring pair."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Compute the dot product of two vectors using their nonzero entries."
+  "description": "Compute a dot product of two vectors by storing only their nonzero entries and matching indices. The visual pairs the stored entries from each vector.",
 };

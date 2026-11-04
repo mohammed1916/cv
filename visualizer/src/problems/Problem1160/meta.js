@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Sum the lengths of words constructible from the supplied character multiset."
+  "description": "Given a bag of letters, add up the lengths of the words that can be spelled from it with each letter used at most once. The visual compares each word's letter counts against the bag."
 };

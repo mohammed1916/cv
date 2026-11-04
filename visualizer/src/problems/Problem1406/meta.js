@@ -8,5 +8,5 @@ export const meta = {
     "Game Theory"
   ],
   "accent": "#0891b2",
-  "description": "Determine the winner when players optimally take one to three leading stones."
+  "description": "Decide the winner when each turn removes one to three stones from the front of a row and both players play their best. The visual shows a table of best score differences from each starting index."
 };

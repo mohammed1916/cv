@@ -7,5 +7,5 @@ export const meta = {
     "Recursion"
   ],
   "accent": "#0891b2",
-  "description": "Find the kth bit in the recursively mirrored and inverted binary sequence."
+  "description": "Locate a bit in a recursively built binary string by mapping its position back through the halving structure. The visual shows the string expanding and the position tracing back.",
 };

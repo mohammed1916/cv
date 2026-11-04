@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Read a run-length encoded string one character at a time without expanding it."
+  "description": "Iterate over a compressed string of character and count pairs one character at a time, without ever building the full expansion. The visual shows a cursor advancing through the runs and a remaining-count display for the current run."
 };

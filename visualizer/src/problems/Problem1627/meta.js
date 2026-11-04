@@ -7,5 +7,5 @@ export const meta = {
     "Union Find"
   ],
   "accent": "#0891b2",
-  "description": "Answer which city pairs are connected through links sharing a divisor greater than the threshold."
+  "description": "Connect cities that share a common divisor above a threshold and answer whether pairs end up in the same group. The visual shows multiples linking into components as the threshold changes."
 };

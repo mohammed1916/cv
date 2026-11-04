@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Count die sequences obeying a separate maximum consecutive-run length for each face."
+  "description": "Count die-roll sequences of a given length in which each face may appear only a limited number of times in a row. The visual tracks a table of counts by face and current run length."
 };

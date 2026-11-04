@@ -8,5 +8,5 @@ export const meta = {
     "Game Theory"
   ],
   "accent": "#0891b2",
-  "description": "Minimize the points the second robot can collect after the first robot moves."
+  "description": "Two robots move through a two-row grid collecting points, and the second robot's score must be minimized. The visual shows the row totals split at each column where the first robot turns."
 };

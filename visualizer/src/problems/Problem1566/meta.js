@@ -7,5 +7,5 @@ export const meta = {
     "Array"
   ],
   "accent": "#0891b2",
-  "description": "Detect a consecutive pattern of length m repeated at least k times without overlap."
+  "description": "Detect whether a pattern of given length repeats enough consecutive times without overlapping by counting matches in a sliding run. The visual highlights the repeating block.",
 };

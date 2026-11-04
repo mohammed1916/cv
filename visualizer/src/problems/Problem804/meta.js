@@ -7,5 +7,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Count distinct Morse encodings of the supplied lowercase words."
+  "description": "Translate each word letter by letter into Morse code and count how many distinct code strings appear. The visual appends each letter's code and fills a set of unique results."
 };

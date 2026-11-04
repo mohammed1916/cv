@@ -8,5 +8,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Count subsets whose product is a product of distinct primes."
+  "description": "Count subsets whose product uses only distinct primes. The visual encodes each number as a prime bitmask and shows the bitmask transitions."
 };

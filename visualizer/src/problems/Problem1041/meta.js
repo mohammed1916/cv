@@ -7,5 +7,5 @@ export const meta = {
     "Simulation"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether indefinitely repeating the robot program stays bounded."
+  "description": "Decide whether a robot repeating a movement program stays within a bounded region. Its path is traced over repeated passes to see whether it returns to the origin or turns to a new heading."
 };

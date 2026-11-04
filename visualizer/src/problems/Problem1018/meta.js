@@ -8,5 +8,5 @@ export const meta = {
     "Array"
   ],
   "accent": "#0891b2",
-  "description": "Report which binary prefixes are divisible by five."
+  "description": "For each prefix of a binary string, report whether the number it spells is divisible by five. The remainder tracks the value modulo five as each bit is read."
 };

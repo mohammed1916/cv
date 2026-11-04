@@ -7,5 +7,5 @@ export const meta = {
     "Math"
   ],
   "accent": "#0891b2",
-  "description": "Find the minimum worst-case moves to determine the critical floor using two eggs."
+  "description": "Find the fewest drops needed with two eggs to identify the critical floor among n floors. The visual shows a column of floors with a drop marker that moves up and a counter for eggs and moves used.",
 };

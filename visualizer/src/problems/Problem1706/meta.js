@@ -8,5 +8,5 @@ export const meta = {
     "Simulation"
   ],
   "accent": "#0891b2",
-  "description": "Find the exit column of a ball dropped above each column, or minus one when trapped."
+  "description": "Drop a ball into each top column of a grid of deflecting boards and report the exit column or minus one if it gets trapped. The visual traces the ball's path through the grid."
 };

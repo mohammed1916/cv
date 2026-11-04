@@ -8,5 +8,5 @@ export const meta = {
     "Binary Tree"
   ],
   "accent": "#0891b2",
-  "description": "Find whether two distinct tree nodes sum to k."
+  "description": "Decide whether two different nodes in a search tree sum to a given target. The visual walks the tree in sorted order and uses a set of seen values to look for the complement."
 };

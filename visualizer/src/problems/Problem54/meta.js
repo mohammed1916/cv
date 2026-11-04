@@ -1,1 +1,1 @@
-export const meta = { number: '54', title: 'Spiral Matrix', slug: 'spiral-matrix', difficulty: 'Medium', tags: ['Array', 'Matrix'] }
+export const meta = { number: '54', title: 'Spiral Matrix', slug: 'spiral-matrix', difficulty: 'Medium', tags: ['Array', 'Matrix'], description: "Return the matrix values in clockwise spiral order. The visual traverses the outer edges in turn and shrinks the boundary after each side." }

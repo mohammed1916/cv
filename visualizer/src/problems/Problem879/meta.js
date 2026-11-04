@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Count job subsets using at most n people and earning at least minProfit."
+  "description": "Count groups of jobs whose total headcount stays within a limit and whose total profit reaches a target. The visual fills a table of people used against profit reached."
 };

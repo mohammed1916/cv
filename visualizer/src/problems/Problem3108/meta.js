@@ -7,5 +7,5 @@ export const meta = {
     "Union Find"
   ],
   "accent": "#0891b2",
-  "description": "Answer minimum bitwise-AND walk costs between queried vertices."
+  "description": "Find the cheapest walk between queried vertices in a weighted graph, where a walk's cost is the bitwise AND of the edge weights it uses. The visual shows connected components and the AND masks along each path."
 };

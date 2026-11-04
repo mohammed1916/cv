@@ -8,5 +8,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Take the most apples without exceeding weight five thousand."
+  "description": "Choose as many apples as possible from a row without the total weight exceeding the basket limit, taking the lightest apples first. The visual sorts the weights and fills a basket bar until the next apple would overflow it."
 };

@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Group file paths whose stored contents are identical."
+  "description": "Group file paths that hold exactly the same content and return only the groups with more than one file. The visual hashes each file's content into a bucket and shows the buckets that collect duplicates."
 };

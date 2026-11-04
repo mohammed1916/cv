@@ -7,5 +7,5 @@ export const meta = {
     "Math"
   ],
   "accent": "#0891b2",
-  "description": "Equalize the first n odd numbers with minimum paired increment/decrement operations."
+  "description": "Find the minimum operations to make the sequence of odd values equal by pairing values around the middle target. The visual shows each pair moving toward the mean.",
 };

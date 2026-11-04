@@ -7,5 +7,5 @@ export const meta = {
     "Simulation"
   ],
   "accent": "#0891b2",
-  "description": "Replace each circular-array value with the sum of its requested neighboring values."
+  "description": "Replace each position in a circular array with the sum of a window of neighbours, forward, backward or zero depending on a signed shift. The visual slides a highlighted window across the ring."
 };

@@ -8,5 +8,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Count pairs whose value product is divisible by k."
+  "description": "Count pairs of array positions whose value product is divisible by k. The visual groups values by their gcd with k and matches complementary groups."
 };

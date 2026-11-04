@@ -7,5 +7,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Find the terminal city of a directed itinerary."
+  "description": "Find the city that has no outgoing route in a list of directed paths. The visual draws the route chain and highlights the endpoint with no departing edge."
 };

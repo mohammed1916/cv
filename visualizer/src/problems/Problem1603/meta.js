@@ -7,5 +7,5 @@ export const meta = {
     "Design"
   ],
   "accent": "#0891b2",
-  "description": "Process parking requests with separate fixed capacities for three car types."
+  "description": "Process parking requests against three separate capacity counters, one per car type. The visual shows each counter decreasing as cars arrive.",
 };

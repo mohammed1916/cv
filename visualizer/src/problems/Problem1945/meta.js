@@ -8,5 +8,5 @@ export const meta = {
     "Simulation"
   ],
   "accent": "#0891b2",
-  "description": "Convert letters to alphabet positions and apply k digit-sum transformations."
+  "description": "Convert each letter to its alphabet position, join the digits, and apply a digit-sum step k times. The visual turns letters into number tiles and shows each round of digit summing shrinking the value.",
 };

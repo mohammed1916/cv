@@ -8,5 +8,5 @@ export const meta = {
     "Counting"
   ],
   "accent": "#0891b2",
-  "description": "Minimize the number of distinct integers after exactly k removals."
+  "description": "Remove exactly k items to leave the fewest distinct values. The visual groups equal values and removes the smallest groups first."
 };

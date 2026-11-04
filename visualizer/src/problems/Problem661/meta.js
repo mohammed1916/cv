@@ -8,5 +8,5 @@ export const meta = {
     "Matrix"
   ],
   "accent": "#0891b2",
-  "description": "Replace each pixel with the floored average of its valid surrounding 3×3 neighborhood."
+  "description": "Give each cell the rounded-down average of itself and the neighbours inside the grid. The visual highlights a 3x3 window and shows the averaged value settling into a new grid."
 };

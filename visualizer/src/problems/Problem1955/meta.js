@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Count subsequences consisting of nonempty runs of zeroes, ones, then twos."
+  "description": "Count subsequences made of nonempty blocks of zeros, then ones, then twos. The visual scans the string with three running counters, one for each phase, updated as each character is read.",
 };

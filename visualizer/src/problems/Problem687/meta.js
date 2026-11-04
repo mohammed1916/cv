@@ -8,5 +8,5 @@ export const meta = {
     "Binary Tree"
   ],
   "accent": "#0891b2",
-  "description": "Find the greatest number of edges on a path whose node values are all equal."
+  "description": "Find the longest path in a tree where every node on the path has the same value. The visual grows matching chains from each node and joins two chains at a top node."
 };

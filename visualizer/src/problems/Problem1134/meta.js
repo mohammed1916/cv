@@ -7,5 +7,5 @@ export const meta = {
     "Math"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether a number equals the sum of its digits raised to its digit count."
+  "description": "Decide whether a number equals the sum of its digits, each raised to the power of the digit count. The digits are raised and summed one at a time."
 };

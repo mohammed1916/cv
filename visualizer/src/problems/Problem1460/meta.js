@@ -7,5 +7,5 @@ export const meta = {
     "Counting"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether reversing subarrays can transform one array into the other."
+  "description": "Decide whether reversing subarrays can turn one array into the other. The visual compares the sorted contents and element counts of the two arrays."
 };

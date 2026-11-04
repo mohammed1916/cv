@@ -8,5 +8,5 @@ export const meta = {
     "Simulation"
   ],
   "accent": "#0891b2",
-  "description": "Rotate every rectangular ring counterclockwise by k positions."
+  "description": "Rotate every concentric rectangular ring of a grid counterclockwise by k positions. The visual draws each ring in its own color and animates each one turning by its step count.",
 };

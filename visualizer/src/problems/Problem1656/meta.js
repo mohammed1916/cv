@@ -7,5 +7,5 @@ export const meta = {
     "Design"
   ],
   "accent": "#0891b2",
-  "description": "Emit consecutive ordered-stream values as out-of-order insertions fill gaps."
+  "description": "Insert values with ids that arrive out of order and release the consecutive run starting at the next expected id. The visual shows slots filling and a pointer advancing over the released block."
 };

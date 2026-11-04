@@ -7,5 +7,5 @@ export const meta = {
     "Array"
   ],
   "accent": "#0891b2",
-  "description": "Count students whose homework interval contains the query time."
+  "description": "Count how many students are doing homework at a given time, using each student's start and end times. The visual shows the intervals stacked on a timeline with the query marked."
 };

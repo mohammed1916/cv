@@ -7,5 +7,5 @@ export const meta = {
     "Sliding Window"
   ],
   "accent": "#0891b2",
-  "description": "Replace the fewest entries to obtain n distinct consecutive integers."
+  "description": "Change the fewest entries so the array becomes a run of consecutive distinct integers. The visual sorts and removes duplicates, then slides a window over the values."
 };

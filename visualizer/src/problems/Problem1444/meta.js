@@ -8,5 +8,5 @@ export const meta = {
     "Prefix Sum"
   ],
   "accent": "#0891b2",
-  "description": "Count ordered ways to cut a pizza into k pieces so every piece contains an apple."
+  "description": "Count the ways to make k cuts so that every resulting piece contains at least one apple. The visual overlays the cut lines on the grid and counts apples in each region."
 };

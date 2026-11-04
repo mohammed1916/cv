@@ -7,5 +7,5 @@ export const meta = {
     "Monotonic Queue"
   ],
   "accent": "#0891b2",
-  "description": "Find the largest sum of a nonempty subsequence whose consecutive selected indices differ by at most k."
+  "description": "Find the largest total of a subsequence in which consecutive chosen indices are at most k apart. The visual shows a sliding maximum window over a DP array."
 };

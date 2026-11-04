@@ -8,5 +8,5 @@ export const meta = {
     "Matrix"
   ],
   "accent": "#0891b2",
-  "description": "Find the length of the longest contiguous block shared by both arrays."
+  "description": "Find the longest contiguous block that appears in both arrays. The visual lays the arrays on a grid and grows diagonal runs of matches."
 };

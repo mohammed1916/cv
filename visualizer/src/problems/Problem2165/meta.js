@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Rearrange the digits into the smallest number with the original sign and no leading zero."
+  "description": "Rearrange the digits of a number into the smallest value without creating a leading zero, keeping the original sign. The visual sorts the digits and moves a non-zero digit to the front."
 };

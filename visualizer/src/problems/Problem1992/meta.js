@@ -7,5 +7,5 @@ export const meta = {
     "Matrix"
   ],
   "accent": "#0891b2",
-  "description": "Find the corners of each rectangular farmland group."
+  "description": "Find the rectangular groups of farmland in a binary grid and report each group's corners. The visual scans the grid and marks each group's top-left and bottom-right corners."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Delete characters from two strings at minimum ASCII cost until the strings are equal."
+  "description": "Delete characters from two strings at the lowest total character-code cost so they match. The visual fills a grid of costs and traces the cheapest route back."
 };

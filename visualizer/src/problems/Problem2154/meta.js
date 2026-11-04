@@ -7,5 +7,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Repeatedly double a value while it is present in the input."
+  "description": "Keep doubling a starting value while the doubled value is still present in the list, then report the final value. The visual lines up the numbers in a set and walks the chain of doublings."
 };

@@ -8,5 +8,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Recover an array whose values and doubles form the supplied multiset."
+  "description": "Recover the original array from a doubled array, or report that it is impossible. The visual sorts the values and pairs each smallest remaining value with its double."
 };

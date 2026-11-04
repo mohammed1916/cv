@@ -7,5 +7,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Select the k strongest values relative to the lower middle median."
+  "description": "Select the k values farthest from the median in value, with ties broken by size. The visual sorts the array and marks the strongest values from both ends."
 };

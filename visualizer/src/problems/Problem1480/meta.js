@@ -7,5 +7,5 @@ export const meta = {
     "Array"
   ],
   "accent": "#0d9488",
-  "description": "Maintain one accumulator. Each output position records the complete prefix ending there."
+  "description": "Compute the running prefix sum of an array. The visual shows the accumulator growing as each value is added."
 };

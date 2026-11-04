@@ -7,5 +7,5 @@ export const meta = {
     "Array"
   ],
   "accent": "#0891b2",
-  "description": "Compute the average after excluding the minimum and maximum salary entries."
+  "description": "Compute the average of salaries after removing the single lowest and highest entries. The visual marks the removed extremes and averages the remaining bars."
 };

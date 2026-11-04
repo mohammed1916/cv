@@ -7,5 +7,5 @@ export const meta = {
     "Sliding Window"
   ],
   "accent": "#0891b2",
-  "description": "Find the longest aligned substring whose character replacement cost fits the budget."
+  "description": "Find the longest substring of two equal-length strings whose total character change cost fits within a budget. The visual slides a window and shows the running cost against the budget."
 };

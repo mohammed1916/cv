@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Count ordered binary trees where every internal value equals the product of its children."
+  "description": "Count binary trees whose internal values equal the product of their two children, using values from a distinct list. The visual sorts the values and combines each pair whose product is in the set."
 };

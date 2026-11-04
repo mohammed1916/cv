@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Find the longest subsequence with the specified fixed adjacent difference."
+  "description": "Find the longest subsequence whose consecutive elements differ by a fixed given step. The visual extends chains while a lookup table keeps the best length ending at each value."
 };

@@ -8,5 +8,5 @@ export const meta = {
     "Two Pointers"
   ],
   "accent": "#0891b2",
-  "description": "Return the common values in three strictly increasing arrays."
+  "description": "Return the values that appear in all three strictly increasing arrays. The visual advances three pointers and moves whichever one points at the smallest value."
 };

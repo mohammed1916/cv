@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Construct a permutation matching every increase/decrease instruction."
+  "description": "Build a permutation of the numbers zero through n that agrees with a string of increase and decrease instructions. The visual uses a low and high marker that close in on the number line."
 };

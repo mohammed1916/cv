@@ -1,1 +1,1 @@
-export const meta = { number: '73', title: 'Set Matrix Zeroes', slug: 'set-matrix-zeroes', difficulty: 'Medium', tags: ['Array', 'Matrix'] }
+export const meta = { number: '73', title: 'Set Matrix Zeroes', slug: 'set-matrix-zeroes', difficulty: 'Medium', tags: ['Array', 'Matrix'] , description: "Clear every row and column that contains a zero in a grid, in place. The visual marks the rows and columns to clear before zeroing them."}

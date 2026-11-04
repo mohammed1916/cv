@@ -8,5 +8,5 @@ export const meta = {
     "Counting"
   ],
   "accent": "#0891b2",
-  "description": "Return characters shared by every word, retaining multiplicity."
+  "description": "Find every letter that appears in all the words, keeping each letter as many times as it occurs in every word. A per-letter tally shows the smallest count seen so far."
 };

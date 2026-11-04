@@ -8,5 +8,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0d9488",
-  "description": "Count each value first. Then check whether a frequency is claimed by more than one value."
+  "description": "Check whether every distinct value in an array appears a different number of times. The visual tallies the counts and then checks that no count repeats."
 };

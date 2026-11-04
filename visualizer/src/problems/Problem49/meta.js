@@ -1,1 +1,1 @@
-export const meta = { number: '49', title: 'Group Anagrams', slug: 'group-anagrams', difficulty: 'Medium', tags: ['String', 'Hash Map'] }
+export const meta = { number: '49', title: 'Group Anagrams', slug: 'group-anagrams', difficulty: 'Medium', tags: ['String', 'Hash Map'], description: "Group strings that are anagrams of one another. The visual gives each word a letter-count signature and collects words that share a signature into the same group." }

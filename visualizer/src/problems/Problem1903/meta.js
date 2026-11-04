@@ -8,5 +8,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Keep the largest odd-valued substring of a decimal number."
+  "description": "Return the largest odd-valued substring of a decimal string, which is the longest prefix ending at its last odd digit. The visual scans from the right to the first odd digit and highlights the prefix that ends there.",
 };

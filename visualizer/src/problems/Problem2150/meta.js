@@ -7,5 +7,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Find values appearing once with neither neighboring integer present."
+  "description": "Find the values that occur exactly once and have no neighbouring integer present in the array. The visual places each value on a number line and checks its left and right neighbours."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Binary Search"
   ],
   "accent": "#0891b2",
-  "description": "Find the longest nondecreasing obstacle course ending at every position."
+  "description": "For every index, find the longest non-decreasing obstacle course that ends there. The visual keeps the tails array and shows where each new value lands by binary search."
 };

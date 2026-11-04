@@ -7,5 +7,5 @@ export const meta = {
     "Prefix Sum"
   ],
   "accent": "#0891b2",
-  "description": "Find the leftmost index with equal sums strictly to its left and right."
+  "description": "Find the leftmost index where the sum to its left equals the sum to its right. The visual tracks running prefix sums and compares them as the index moves."
 };

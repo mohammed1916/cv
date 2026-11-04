@@ -8,5 +8,5 @@ export const meta = {
     "Matrix"
   ],
   "accent": "#0891b2",
-  "description": "Choose one value from each row with total closest to target."
+  "description": "Pick one value from each row so the total lands as close as possible to a target. The visual builds reachable sums row by row and marks the closest one."
 };

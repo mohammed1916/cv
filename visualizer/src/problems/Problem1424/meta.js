@@ -8,5 +8,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Traverse a ragged list of rows in diagonal order."
+  "description": "Read a ragged grid along its anti-diagonals, from top-right to bottom-left. The visual colours each diagonal and shows the output sequence building up."
 };

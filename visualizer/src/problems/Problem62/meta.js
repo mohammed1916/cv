@@ -1,1 +1,1 @@
-export const meta = { number: '62', title: 'Unique Paths', slug: 'unique-paths', difficulty: 'Medium', tags: ['DP', 'Array'] }
+export const meta = { number: '62', title: 'Unique Paths', slug: 'unique-paths', difficulty: 'Medium', tags: ['DP', 'Array'], description: "Count the routes from the top-left to the bottom-right of a grid when only right and down moves are allowed. The visual fills a grid where each cell sums the counts from above and from the left." }

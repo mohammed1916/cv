@@ -8,5 +8,5 @@ export const meta = {
     "Matrix"
   ],
   "accent": "#0d9488",
-  "description": "Move each source cell (r,c) to destination (c,r). A rectangular matrix changes shape as well as orientation."
+  "description": "Swap the rows and columns of a matrix so each cell moves to its mirrored position. The visual shows the grid changing shape from rows-by-columns to columns-by-rows."
 };

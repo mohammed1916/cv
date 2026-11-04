@@ -7,5 +7,5 @@ export const meta = {
     "Array"
   ],
   "accent": "#0d9488",
-  "description": "A sorted signed array can have its greatest magnitude at either end. Fill the squared output from right to left."
+  "description": "Square each value in a sorted array of signed numbers and return the squares in sorted order. The visual shows the largest square coming from either end of the array."
 };

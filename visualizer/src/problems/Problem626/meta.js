@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Exchange every neighboring pair of student seats while leaving an unpaired last seat unchanged."
+  "description": "Swap each adjacent pair of student seats, leaving the last seat alone when the count is odd. The visual shows arrows between neighbouring seats and their new occupants."
 };

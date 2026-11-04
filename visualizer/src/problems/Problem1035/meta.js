@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Build a prefix table of the best non-crossing matches."
+  "description": "Connect equal values across two sequences with lines that never cross, maximizing the number of lines. A table of prefix results shows the best count for each pair of prefixes."
 };

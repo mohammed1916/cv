@@ -7,5 +7,5 @@ export const meta = {
     "Breadth-First Search"
   ],
   "accent": "#0891b2",
-  "description": "Find the shortest path to an exit other than the entrance."
+  "description": "Find the fewest steps from the entrance to any exit in a maze of walls and open cells, excluding the entrance itself. The visual shows a breadth-first wavefront spreading from the entrance and highlights the first border cell it reaches.",
 };

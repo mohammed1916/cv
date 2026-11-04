@@ -7,5 +7,5 @@ export const meta = {
     "Simulation"
   ],
   "accent": "#0891b2",
-  "description": "Find the minimum simultaneous frogs explaining the sound sequence."
+  "description": "Find the fewest frogs needed to produce a croak sequence in which each frog calls its letters in order. The visual shows how many frogs are active at each character."
 };

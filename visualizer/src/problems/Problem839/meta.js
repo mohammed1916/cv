@@ -7,5 +7,5 @@ export const meta = {
     "Union Find"
   ],
   "accent": "#0891b2",
-  "description": "Count connected groups of anagram strings linked by one allowed character swap."
+  "description": "Group strings that can become equal after a single swap of two letters and count the connected groups. The visual draws strings as nodes and merges components with union-find."
 };

@@ -8,5 +8,5 @@ export const meta = {
     "Matrix"
   ],
   "accent": "#0d9488",
-  "description": "A cell belongs to the same diagonal as its northwest neighbor. Local equality therefore proves whole-diagonal equality."
+  "description": "Check that every diagonal running top-left to bottom-right has one value throughout. The visual compares each cell with its northwest neighbour."
 };

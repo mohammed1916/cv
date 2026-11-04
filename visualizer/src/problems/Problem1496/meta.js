@@ -7,5 +7,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether a grid walk revisits a previously occupied point."
+  "description": "Decide whether a walk on a grid returns to a point it has already visited. The visual traces the path and flags the first revisit."
 };

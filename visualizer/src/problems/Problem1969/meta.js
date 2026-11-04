@@ -7,5 +7,5 @@ export const meta = {
     "Math"
   ],
   "accent": "#0891b2",
-  "description": "Minimize the nonzero product of values from one through 2^p-1 after allowed bit swaps."
+  "description": "Maximize the product of the values after allowed bit swaps between paired numbers, then return it modulo a prime. The visual pairs the smallest and largest values and shows how each swap changes them."
 };

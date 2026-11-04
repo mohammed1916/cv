@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Find the greatest nonempty subarray sum on a circular array."
+  "description": "Find the greatest sum of a nonempty run of values on a circular array, where a run may wrap past the end. The visual draws a ring with a highlighted arc and compares it with the complement arc."
 };

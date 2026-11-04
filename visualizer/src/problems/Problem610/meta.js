@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Classify whether each triple of segment lengths can form a nondegenerate triangle."
+  "description": "Decide, for each triple of stick lengths, whether they form a non-flat triangle. The visual compares the sum of the two shorter sides against the longest side for each row."
 };

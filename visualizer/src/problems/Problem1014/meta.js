@@ -8,5 +8,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Maximize the values of two sightseeing spots minus their distance."
+  "description": "Pick two sightseeing spots to maximize the sum of their values minus the distance between them. A running best score updates as the scan passes each spot."
 };

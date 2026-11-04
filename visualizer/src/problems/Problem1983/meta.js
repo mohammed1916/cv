@@ -7,5 +7,5 @@ export const meta = {
     "Prefix Sum"
   ],
   "accent": "#0891b2",
-  "description": "Find the widest interval whose sums match in two binary arrays."
+  "description": "Find the widest index pair whose subarray sums match in two binary arrays. The visual tracks the running difference and records the first occurrence of each value."
 };

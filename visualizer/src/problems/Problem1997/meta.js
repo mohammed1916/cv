@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Find the first day every room has been visited."
+  "description": "Find the first day on which every room has been visited under a fixed visiting rule. The visual steps through the days and records arrival times for each room."
 };

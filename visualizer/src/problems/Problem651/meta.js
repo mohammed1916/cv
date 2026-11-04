@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Maximize the number of A characters produced by n presses on a four-key keyboard."
+  "description": "Find the largest number of A characters that can be produced in n presses of a four-key keyboard. The visual tracks the best screen and buffer states at each press."
 };

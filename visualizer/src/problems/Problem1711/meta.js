@@ -7,5 +7,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Count pairs of meals whose total deliciousness is a positive power of two."
+  "description": "Count pairs of meals whose total deliciousness is a power of two. The visual counts each value and checks every power of two for matching partners."
 };

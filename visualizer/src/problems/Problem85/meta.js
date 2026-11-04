@@ -1,1 +1,1 @@
-export const meta = { number: '85', title: 'Maximal Rectangle', slug: 'maximal-rectangle', difficulty: 'Hard', tags: ['Array', 'DP'] }
+export const meta = { number: '85', title: 'Maximal Rectangle', slug: 'maximal-rectangle', difficulty: 'Hard', tags: ['Array', 'DP'], description: "Find the largest rectangle made entirely of ones in a binary grid. The visual turns each row into a histogram of column heights and reuses the histogram method on each one." }

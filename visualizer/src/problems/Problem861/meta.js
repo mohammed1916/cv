@@ -9,5 +9,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Maximize the sum of binary row values after flips."
+  "description": "Flip rows and columns of a binary matrix to maximise the sum of its rows read as binary numbers. The visual fixes the leading column first, then flips columns that improve the score."
 };

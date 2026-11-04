@@ -7,5 +7,5 @@ export const meta = {
     "Backtracking"
   ],
   "accent": "#0891b2",
-  "description": "Return the kth lexicographic length-n string over a,b,c with no equal neighbors."
+  "description": "Return the k-th string, in alphabetical order, of a fixed length built from a, b and c with no equal neighbouring letters. The visual shows the tree of valid prefixes and the branch taken at each position."
 };

@@ -8,5 +8,5 @@ export const meta = {
     "Array"
   ],
   "accent": "#0891b2",
-  "description": "Count columns that must be deleted to make every column sorted."
+  "description": "Count the columns of a grid of strings that are not in alphabetical order from top to bottom. The visual highlights each column and marks the ones that break the order."
 };

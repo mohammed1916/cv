@@ -8,5 +8,5 @@ export const meta = {
     "Prime Factorization"
   ],
   "accent": "#0891b2",
-  "description": "Reach exactly n letters using the fewest Copy All and Paste operations."
+  "description": "Reach exactly n letters using the fewest copy and paste steps. The visual shows the on-screen count growing through copy and paste moves and the factor structure behind them."
 };

@@ -8,5 +8,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Find the longest interval of alternating strict comparisons."
+  "description": "Find the longest contiguous stretch in which neighbouring values keep alternating between rising and falling. The visual shows the direction of each step as a sign that flips with every comparison."
 };

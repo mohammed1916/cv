@@ -8,5 +8,5 @@ export const meta = {
     "Matrix"
   ],
   "accent": "#0891b2",
-  "description": "Find the largest island obtainable by changing at most one water cell into land."
+  "description": "Turn at most one water cell into land to make the largest possible island. The visual labels each existing island and shows the combined size when a water cell joins its neighbours."
 };

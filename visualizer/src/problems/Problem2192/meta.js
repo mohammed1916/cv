@@ -8,5 +8,5 @@ export const meta = {
     "Topological Sort"
   ],
   "accent": "#0891b2",
-  "description": "List every ancestor of each vertex in a directed acyclic graph."
+  "description": "List every vertex that can reach each node in a directed acyclic graph. The visual propagates the ancestor sets along the edges in topological order."
 };

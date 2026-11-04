@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Find low-paid employees whose manager record has left the company."
+  "description": "Find low-paid employees whose manager is no longer in the company records. The visual checks each employee's manager and highlights the matches."
 };

@@ -8,5 +8,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Find the smallest available chair assigned to the target arrival."
+  "description": "Find the smallest chair number used by a target friend when friends arrive and leave at given times. The visual shows chairs filling and freeing in time order, with the target's chair highlighted.",
 };

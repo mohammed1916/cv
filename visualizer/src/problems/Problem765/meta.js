@@ -7,5 +7,5 @@ export const meta = {
     "Union Find"
   ],
   "accent": "#0891b2",
-  "description": "Find the minimum swaps of seated people needed to place every couple together."
+  "description": "Find the fewest swaps of seated people so each couple ends up side by side. The visual links seats to partners and resolves each cycle of pairs."
 };

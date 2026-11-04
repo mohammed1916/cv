@@ -7,5 +7,5 @@ export const meta = {
     "Math"
   ],
   "accent": "#0891b2",
-  "description": "Represent a nonnegative integer using base negative two."
+  "description": "Convert a nonnegative integer into base negative two, where place values alternate in sign. Each step divides by negative two and shows the remainder digit."
 };

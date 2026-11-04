@@ -7,5 +7,5 @@ export const meta = {
     "Binary Search"
   ],
   "accent": "#0891b2",
-  "description": "Return the k closest values in sorted order, preferring smaller values on distance ties."
+  "description": "Pick a window of k numbers from a sorted list that sits nearest a target. The visual slides two pointers inward, dropping whichever end is farther away."
 };

@@ -8,5 +8,5 @@ export const meta = {
     "Backtracking"
   ],
   "accent": "#0891b2",
-  "description": "Collect the maximum gold along a path that never revisits a cell."
+  "description": "On a grid of gold amounts, find the most gold collectible on a walk that never revisits a cell. The visual traces a depth-first path and updates the running total as it backtracks."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Sliding Window"
   ],
   "accent": "#0891b2",
-  "description": "Count length-k substrings without repeated characters."
+  "description": "Count windows of exactly k consecutive characters that contain no repeated letter. A sliding window grows and shrinks across the string."
 };

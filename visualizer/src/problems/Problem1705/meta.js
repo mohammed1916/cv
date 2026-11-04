@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Eat the maximum number of apples when one can be eaten per day and batches expire."
+  "description": "Eat at most one apple per day from batches that expire, maximizing the apples eaten. The visual tracks a heap of batches by expiry date and marks each eaten apple."
 };

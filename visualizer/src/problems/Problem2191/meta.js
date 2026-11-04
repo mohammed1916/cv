@@ -7,5 +7,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Sort numbers by their digit-mapped values while preserving ties in original order."
+  "description": "Sort numbers by the value their digits map to, keeping equal mapped values in their original order. The visual shows each number's digit mapping and sorts by the mapped result."
 };

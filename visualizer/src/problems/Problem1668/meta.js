@@ -7,5 +7,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Find the largest consecutive repetition count of word present inside sequence."
+  "description": "Find how many times a word can repeat back to back inside a sequence. The visual slides the repeated word along the sequence and grows a run counter while it keeps matching."
 };

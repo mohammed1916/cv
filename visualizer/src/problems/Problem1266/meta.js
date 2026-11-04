@@ -7,5 +7,5 @@ export const meta = {
     "Geometry"
   ],
   "accent": "#0891b2",
-  "description": "Visit points in order using the least number of unit horizontal, vertical, or diagonal moves."
+  "description": "Visit a list of points in order, where each second you can move one step horizontally, vertically or diagonally, and find the minimum total time. The visual splits each leg into a diagonal run followed by a straight run."
 };

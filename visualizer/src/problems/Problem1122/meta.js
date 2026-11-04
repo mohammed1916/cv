@@ -8,5 +8,5 @@ export const meta = {
     "Counting"
   ],
   "accent": "#0891b2",
-  "description": "Sort values according to an explicit relative order, then sort the unlisted tail."
+  "description": "Sort an array so that values follow a given relative order, with unlisted values placed afterwards in ascending order. Counts for each value drive the construction of the result."
 };

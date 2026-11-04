@@ -8,5 +8,5 @@ export const meta = {
     "Stack"
   ],
   "accent": "#0891b2",
-  "description": "Visit every child subtree before its parent in left-to-right order."
+  "description": "Process a multi-way tree so every child branch finishes before its parent is recorded. The visual drags nodes down into a stack and releases each one only after its children have been placed."
 };

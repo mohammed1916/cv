@@ -7,5 +7,5 @@ export const meta = {
     "Union Find"
   ],
   "accent": "#0891b2",
-  "description": "Determine whether every array index can reach every other using pairs with gcd greater than one."
+  "description": "Decide whether all indices can be linked together when two indices connect if their values share a prime factor. The visual joins indices through shared prime hubs and shows the components merging."
 };

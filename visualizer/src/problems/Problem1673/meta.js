@@ -7,5 +7,5 @@ export const meta = {
     "Monotonic Stack"
   ],
   "accent": "#0891b2",
-  "description": "Choose the lexicographically smallest subsequence of exactly k values."
+  "description": "Choose a subsequence of a fixed length that is as small as possible in lexicographic order. The visual uses a stack, popping larger values while enough elements remain."
 };

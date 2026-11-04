@@ -7,5 +7,5 @@ export const meta = {
     "Matrix"
   ],
   "accent": "#0891b2",
-  "description": "Sum the primary and secondary matrix diagonals without counting the center twice."
+  "description": "Sum both diagonals of a square matrix and subtract the shared centre once. The visual outlines the two diagonals and the centre cell.",
 };

@@ -9,5 +9,5 @@ export const meta = {
     "Game Theory"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether the first player can force a win in the divisor subtraction game."
+  "description": "Decide whether the first player can force a win in a game where each move removes a proper divisor of the current number. Each number is labelled as winning or losing, built up from the smallest."
 };

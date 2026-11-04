@@ -7,5 +7,5 @@ export const meta = {
     "Union Find"
   ],
   "accent": "#0891b2",
-  "description": "Find the largest component when numbers are connected by a common factor greater than one."
+  "description": "Numbers are connected whenever they share a common factor greater than one, and the task is to find the largest connected group. The visual links numbers through shared factor hubs."
 };

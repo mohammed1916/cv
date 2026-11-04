@@ -7,5 +7,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Wrap matching substrings in the fewest bold-tag ranges, merging overlaps and adjacency."
+  "description": "Wrap every occurrence of the given words in bold tags, merging overlapping or touching ranges into one tag. The visual marks match intervals on the string and combines them into the fewest bold spans."
 };

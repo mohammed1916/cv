@@ -7,5 +7,5 @@ export const meta = {
     "Counting"
   ],
   "accent": "#0891b2",
-  "description": "Count students left waiting when the top sandwich can no longer be served."
+  "description": "Count the students who cannot eat because the sandwich at the top of the queue is never one they want. The visual shows a queue rotating until no student matches the top sandwich."
 };

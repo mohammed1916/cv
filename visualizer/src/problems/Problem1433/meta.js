@@ -7,5 +7,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether a permutation of one string can dominate the other character by character."
+  "description": "Decide whether the letters of one string can be rearranged so that every position is at least as large as the other string's letter there, in either direction. The visual sorts both strings and compares them column by column."
 };

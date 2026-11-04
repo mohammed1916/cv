@@ -1,1 +1,1 @@
-export const meta = { number: '10', title: 'Regular Expression Matching', slug: 'regular-expression-matching', difficulty: 'Hard', tags: ['DP', 'String'] }
+export const meta = { number: '10', title: 'Regular Expression Matching', slug: 'regular-expression-matching', difficulty: 'Hard', tags: ['DP', 'String'], description: "Decide whether a pattern using a dot and a starred token matches an entire string. The grid fills cell by cell as each prefix of the text meets each prefix of the pattern, with starred tokens either repeating or being skipped." }

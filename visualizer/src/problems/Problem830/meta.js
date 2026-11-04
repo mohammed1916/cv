@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Return inclusive start and end indices of character runs at least three long."
+  "description": "Report the start and end index of every run of identical characters that is at least three long. The visual scans the string and brackets each qualifying run."
 };

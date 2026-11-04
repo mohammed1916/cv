@@ -9,5 +9,5 @@ export const meta = {
     "Bit Manipulation"
   ],
   "accent": "#0891b2",
-  "description": "Maximize each query value XOR an ancestor label, including the queried node."
+  "description": "For each query, find the largest XOR between the query value and the labels on the path from a node up to the root, including the node itself. The visual highlights the root path in a tree and shows a bit-by-bit trie lookup for each query.",
 };

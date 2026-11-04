@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Return visits belonging to a run of at least three consecutive IDs with attendance of at least 100."
+  "description": "Keep the rows that belong to a run of at least three consecutive IDs, each with a high attendance count. The visual numbers the rows, marks the qualifying ones, and groups consecutive IDs together."
 };

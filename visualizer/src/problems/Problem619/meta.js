@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Return the largest number that appears exactly once, or null when none exists."
+  "description": "Return the largest value that occurs exactly once, or null if none does. The visual counts occurrences and highlights the largest singleton."
 };

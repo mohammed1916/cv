@@ -7,5 +7,5 @@ export const meta = {
     "Geometry"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether a circle and axis-aligned rectangle overlap or touch."
+  "description": "Decide whether a circle and an axis-aligned rectangle share any point. The visual places the circle over the rectangle and highlights the nearest point of the box to the centre."
 };

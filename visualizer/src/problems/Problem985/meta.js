@@ -8,5 +8,5 @@ export const meta = {
     "Simulation"
   ],
   "accent": "#0891b2",
-  "description": "Report the sum of even values after every point update."
+  "description": "After each update to an array, report the sum of its even values. The visual keeps a running even total that changes with each query."
 };

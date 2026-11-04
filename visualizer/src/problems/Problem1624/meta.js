@@ -7,5 +7,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Find the longest substring strictly between equal endpoint characters."
+  "description": "Find the longest gap between two matching letters, excluding the endpoints themselves. The visual brackets each repeated letter pair and shows the length between them."
 };

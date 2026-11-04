@@ -7,5 +7,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Interpret the command tokens G, (), and (al)."
+  "description": "Translate a command string made of G, () and (al) tokens into its output. The visual scans the tokens and appends the matching output piece for each."
 };

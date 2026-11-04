@@ -7,5 +7,5 @@ export const meta = {
     "Array"
   ],
   "accent": "#0891b2",
-  "description": "Find the shorter route between two stops on a circular bus line."
+  "description": "On a circular route, find the shorter way between two stops by comparing the clockwise and counter-clockwise distances. The visual draws the ring of stops and highlights both arcs."
 };

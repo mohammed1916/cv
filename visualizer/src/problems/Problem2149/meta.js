@@ -7,5 +7,5 @@ export const meta = {
     "Two Pointers"
   ],
   "accent": "#0891b2",
-  "description": "Alternate positive and negative values while preserving each sign order."
+  "description": "Interleave positive and negative numbers so the signs alternate while each sign keeps its original order. The visual shows two queues being drawn from in turn to fill the output positions."
 };

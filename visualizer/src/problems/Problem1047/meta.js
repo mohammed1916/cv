@@ -8,5 +8,5 @@ export const meta = {
     "Stack"
   ],
   "accent": "#0d9488",
-  "description": "The stack is the reduced prefix. A matching incoming character removes its top; otherwise it extends the reduced prefix."
+  "description": "Repeatedly remove adjacent equal letters until none remain. A stack shows each incoming letter either cancelling the top or being pushed onto the reduced prefix."
 };

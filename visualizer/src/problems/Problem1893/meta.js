@@ -7,5 +7,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Check that every integer in an inclusive target interval is covered by some input range."
+  "description": "Check whether every integer in an inclusive target range is covered by at least one of the given intervals. The visual draws the intervals as stacked bars on a number line and highlights any uncovered gap.",
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Two Pointers"
   ],
   "accent": "#0891b2",
-  "description": "Count nonempty subsequences whose minimum plus maximum does not exceed target."
+  "description": "Count subsequences whose smallest and largest picks stay under a limit by sorting and using powers of two for the free middle choices. The visual shows the two boundary pointers and the running count.",
 };

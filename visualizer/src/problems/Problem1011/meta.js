@@ -8,5 +8,5 @@ export const meta = {
     "Array"
   ],
   "accent": "#0891b2",
-  "description": "Find the least ship capacity that delivers ordered packages within the deadline."
+  "description": "Find the smallest daily shipping capacity that carries the ordered packages within the given number of days. A capacity test runs day by day to see whether the packages fit."
 };

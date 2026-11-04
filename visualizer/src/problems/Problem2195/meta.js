@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Append k distinct absent positive integers with minimum total sum."
+  "description": "Append k distinct positive integers that are not already present, keeping the total sum as small as possible. The visual skips present values on the number line and collects the smallest free ones."
 };

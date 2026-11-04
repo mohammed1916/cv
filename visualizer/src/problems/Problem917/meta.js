@@ -8,5 +8,5 @@ export const meta = {
     "Two Pointers"
   ],
   "accent": "#0891b2",
-  "description": "Reverse letters while keeping all nonletter positions fixed."
+  "description": "Reverse only the letters in a string while every other character stays in its original place. The visual swaps letter tiles from both ends inward and leaves symbols fixed."
 };

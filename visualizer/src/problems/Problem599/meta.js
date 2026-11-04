@@ -7,5 +7,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Return all common strings with the least combined index."
+  "description": "Among strings that appear in both lists, return those with the smallest sum of positions. The visual indexes the first list, then walks the second and keeps only the best combined score."
 };

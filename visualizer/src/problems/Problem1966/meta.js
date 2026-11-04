@@ -7,5 +7,5 @@ export const meta = {
     "Prefix Sum"
   ],
   "accent": "#0891b2",
-  "description": "Count values guaranteed to be found by binary search despite the array being unsorted."
+  "description": "Count elements that a binary search would find correctly wherever it lands in an unsorted array. The visual shows the search range for each candidate and which candidates survive."
 };

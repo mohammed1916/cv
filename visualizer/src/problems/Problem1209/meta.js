@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Repeatedly remove adjacent groups of k equal characters."
+  "description": "Repeatedly delete any run of k identical adjacent characters until no such run remains. The visual keeps a stack of character and count pairs that collapse once a run reaches k."
 };

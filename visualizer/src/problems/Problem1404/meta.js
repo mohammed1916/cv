@@ -7,5 +7,5 @@ export const meta = {
     "Bit Manipulation"
   ],
   "accent": "#0891b2",
-  "description": "Count add-one and halve steps needed to reduce a binary number to one."
+  "description": "Count the steps needed to reduce a binary string to 1, where even values are halved and odd values have one added. The visual walks the bits from the least significant end and tallies each operation."
 };

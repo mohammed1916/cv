@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Find the longest subsequence whose k repetitions occur in s, breaking ties lexicographically."
+  "description": "Find the longest subsequence that appears k times when a string is repeated. The visual builds candidate subsequences and checks each against the repeated string."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Stack"
   ],
   "accent": "#0891b2",
-  "description": "Repeatedly remove adjacent copies of the same letter in opposite cases."
+  "description": "Remove adjacent letter pairs that match in value but differ in case, using a stack as the string is processed. The visual shows the stack growing and shrinking as pairs cancel.",
 };

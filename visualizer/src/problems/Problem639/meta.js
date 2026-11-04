@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Count letter decodings when an asterisk can represent any digit from one to nine."
+  "description": "Count the ways to decode a digit string when an asterisk can stand for any digit from one to nine. The visual walks left to right and carries forward the counts of the two previous prefixes."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Graph"
   ],
   "accent": "#0891b2",
-  "description": "Determine whether an undirected path connects source and destination."
+  "description": "Decide whether a path exists between two vertices in an undirected graph. The visual expands a search outward from the source and marks each reached vertex."
 };

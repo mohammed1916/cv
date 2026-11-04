@@ -7,5 +7,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Average the array after removing its smallest and largest five percent."
+  "description": "Remove the smallest and largest slice of values, then average what remains. The visual highlights the trimmed ends of the sorted array and the middle that gets averaged."
 };

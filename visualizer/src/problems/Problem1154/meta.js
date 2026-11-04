@@ -7,5 +7,5 @@ export const meta = {
     "Math"
   ],
   "accent": "#0891b2",
-  "description": "Find the one-based day number within the given year."
+  "description": "Given a calendar date, return how many days into its year it falls, counting the first of January as day one. The visual adds up month lengths in order, with a leap-year check for February."
 };

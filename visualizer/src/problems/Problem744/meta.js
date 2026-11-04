@@ -7,5 +7,5 @@ export const meta = {
     "Binary Search"
   ],
   "accent": "#0891b2",
-  "description": "Find the smallest letter strictly greater than target, wrapping around if needed."
+  "description": "Find the first letter alphabetically after a target, wrapping to the start if none exists. The visual narrows a sorted list by halves toward the boundary."
 };

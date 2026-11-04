@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Find each position’s distance to its nearest occurrence of c."
+  "description": "For each position in a string, find the distance to the nearest occurrence of a given character. The visual sweeps left to right and right to left to carry the closest distance along."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Counting"
   ],
   "accent": "#0891b2",
-  "description": "Count splits whose nonempty halves contain the same number of distinct letters."
+  "description": "Count split points where each side has the same number of distinct letters by building prefix and suffix tallies. The visual shows the two halves and their letter counts.",
 };

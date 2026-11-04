@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Find users with two confirmation requests no more than twenty-four hours apart."
+  "description": "Find users who make two confirmation requests less than or equal to twenty-four hours apart. The visual plots each user's request times on a timeline and highlights the pairs that fall within a day.",
 };

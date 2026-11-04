@@ -7,5 +7,5 @@ export const meta = {
     "Math"
   ],
   "accent": "#0891b2",
-  "description": "Find the greatest common divisor of the smallest and largest array values."
+  "description": "Return the greatest common divisor of the smallest and largest values in an array. The visual scans for the minimum and maximum, then runs Euclid's steps."
 };

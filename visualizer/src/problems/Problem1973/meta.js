@@ -7,5 +7,5 @@ export const meta = {
     "Tree"
   ],
   "accent": "#0891b2",
-  "description": "Count tree nodes whose value equals the sum of all descendants."
+  "description": "Count tree nodes whose value equals the sum of all values in their subtree below them. The visual computes subtree sums bottom-up and marks the matching nodes."
 };

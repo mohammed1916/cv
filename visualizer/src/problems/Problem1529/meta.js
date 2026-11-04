@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Minimize suffix flips turning an all-zero binary string into target."
+  "description": "Count the flips needed to turn a binary string into the target by flipping whenever the required value changes from one position to the next. The visual shows the bit pattern and the flip points.",
 };

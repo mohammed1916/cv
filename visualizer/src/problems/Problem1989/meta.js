@@ -8,5 +8,5 @@ export const meta = {
     "Two Pointers"
   ],
   "accent": "#0891b2",
-  "description": "Match as many people as possible to distinct taggers within reach."
+  "description": "Match as many people as possible to distinct taggers within reach. The visual sorts both sides by position and pairs them greedily."
 };

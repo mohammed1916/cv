@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Find the largest integer no greater than n with nondecreasing decimal digits."
+  "description": "Find the largest number not above a given value whose digits never decrease from left to right. The visual finds the first drop and reduces the digit before it."
 };

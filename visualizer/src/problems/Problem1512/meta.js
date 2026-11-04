@@ -8,5 +8,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0d9488",
-  "description": "When a value arrives, pair it with every earlier equal occurrence. Counting before incrementing prevents pairing an index with itself."
+  "description": "Count equal pairs by recording how many times each value has already appeared as each new value arrives. The visual shows a counter rising as matching pairs form.",
 };

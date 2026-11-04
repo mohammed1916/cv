@@ -1,1 +1,1 @@
-export const meta = { number: '76', title: 'Minimum Window Substring', slug: 'minimum-window-substring', difficulty: 'Hard', tags: ['String', 'Sliding Window'] }
+export const meta = { number: '76', title: 'Minimum Window Substring', slug: 'minimum-window-substring', difficulty: 'Hard', tags: ['String', 'Sliding Window'] , description: "Find the shortest slice of a string that contains every character from a second string. The visual slides a window and shrinks it while it stays valid."}

@@ -7,5 +7,5 @@ export const meta = {
     "Matrix"
   ],
   "accent": "#0891b2",
-  "description": "Count every all-one rectangular submatrix."
+  "description": "Count all-one rectangles in a grid by building column heights row by row and counting runs in a histogram-style sweep. The visual shades each counted rectangle.",
 };

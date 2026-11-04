@@ -7,5 +7,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Maximize disjoint pairs whose values sum to k."
+  "description": "Pair up values whose sum equals k, using each value at most once, to maximize the number of pairs. The visual sorts the values and moves two pointers toward each other."
 };

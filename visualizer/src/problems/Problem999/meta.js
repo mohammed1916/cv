@@ -8,5 +8,5 @@ export const meta = {
     "Simulation"
   ],
   "accent": "#0891b2",
-  "description": "Count pawns the rook can capture in one move."
+  "description": "Count the enemy pawns that a rook can capture in one move from its position on a board. The visual sends four rays outward from the rook and highlights the first piece in each direction."
 };

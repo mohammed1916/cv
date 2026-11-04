@@ -7,5 +7,5 @@ export const meta = {
     "Array"
   ],
   "accent": "#0891b2",
-  "description": "Check whether consecutive ones have at least k zeros between them."
+  "description": "Check whether every pair of consecutive 1s in a binary array is separated by at least k zeros. The visual marks each gap between ones and its length."
 };

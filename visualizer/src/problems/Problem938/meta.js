@@ -8,5 +8,5 @@ export const meta = {
     "Binary Tree"
   ],
   "accent": "#0891b2",
-  "description": "Sum BST node values within an inclusive range."
+  "description": "Add up the values of nodes in a binary search tree that fall inside an inclusive range. The visual highlights the nodes in range and grays out the branches that are skipped."
 };

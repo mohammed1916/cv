@@ -8,5 +8,5 @@ export const meta = {
     "Binary Tree"
   ],
   "accent": "#0891b2",
-  "description": "Construct the tree whose root is the maximum and whose subtrees represent the original left and right ranges."
+  "description": "Build a tree in which each node is the maximum of its range and the left and right subtrees come from the ranges on either side. The visual splits the array around the largest value and recurses on each part."
 };

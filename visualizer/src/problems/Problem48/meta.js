@@ -1,1 +1,1 @@
-export const meta = { number: '48', title: 'Rotate Image', slug: 'rotate-image', difficulty: 'Medium', tags: ['Array', 'Matrix'] }
+export const meta = { number: '48', title: 'Rotate Image', slug: 'rotate-image', difficulty: 'Medium', tags: ['Array', 'Matrix'], description: "Rotate a square matrix ninety degrees clockwise without allocating a second matrix. The visual moves each value through its four-cell cycle, holding the displaced value until it has been placed." }

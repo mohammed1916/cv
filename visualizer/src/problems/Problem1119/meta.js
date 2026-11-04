@@ -7,5 +7,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Remove lowercase vowels while preserving the other characters."
+  "description": "Remove every lowercase vowel from a string while keeping the other characters in their original order. The output builds up as each character is kept."
 };

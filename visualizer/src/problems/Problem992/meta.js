@@ -7,5 +7,5 @@ export const meta = {
     "Sliding Window"
   ],
   "accent": "#0891b2",
-  "description": "Count subarrays containing exactly k distinct values."
+  "description": "Count contiguous subarrays that contain exactly a given number of distinct values. The visual shows a window with a count of each value inside it."
 };

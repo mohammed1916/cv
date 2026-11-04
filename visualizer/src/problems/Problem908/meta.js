@@ -7,5 +7,5 @@ export const meta = {
     "Math"
   ],
   "accent": "#0891b2",
-  "description": "Minimize the range after independently adjusting each value by at most k."
+  "description": "Each value may be shifted up or down by at most a fixed amount, and the aim is the smallest possible spread between the largest and smallest result. The visual shows each value with a shrinking allowance band."
 };

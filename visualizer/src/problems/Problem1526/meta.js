@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Count minimum interval increments needed to form the target from zeros."
+  "description": "Compute the fewest interval increments needed to reach a target array by tracking rises from the previous value. The visual draws the target as bars and stacks the increments.",
 };

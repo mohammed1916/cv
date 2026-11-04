@@ -8,5 +8,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Type a word on a circular alphabet with minimum movement and keypress time."
+  "description": "Compute the minimum time to type a word on a circular alphabet wheel, counting moves and key presses. The visual moves a pointer around the wheel between consecutive letters."
 };

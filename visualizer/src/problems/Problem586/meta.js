@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Find the customer who placed the most orders."
+  "description": "Find the customer who placed the most orders. The visual groups orders by customer and highlights the largest count."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Stack"
   ],
   "accent": "#0891b2",
-  "description": "Produce Push and Pop operations that build the target from stream values one through n."
+  "description": "Produce the push and pop operations that build a target sequence from the stream 1 through n. The visual steps through the stream and shows the stack contents after each operation."
 };

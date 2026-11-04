@@ -8,5 +8,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Count characters dominated in both attack and defense."
+  "description": "Count characters that are weaker than another character in both attack and defense. The visual sorts by attack and tracks the best defense seen so far."
 };

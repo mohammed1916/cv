@@ -8,5 +8,5 @@ export const meta = {
     "Enumeration"
   ],
   "accent": "#0891b2",
-  "description": "Count distinct substrings whose present digits all occur equally often."
+  "description": "Count the distinct substrings in which every digit that appears occurs the same number of times. The visual lists substrings by their start and extends each one while tracking digit counts."
 };

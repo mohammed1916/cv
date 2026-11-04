@@ -7,5 +7,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Count index pairs whose absolute difference is k."
+  "description": "Count index pairs whose values differ by exactly k. The visual groups values by frequency and checks each value against value plus k."
 };

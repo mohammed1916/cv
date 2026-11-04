@@ -1,1 +1,1 @@
-export const meta = { number: '91', title: 'Decode Ways', slug: 'decode-ways', difficulty: 'Medium', tags: ['DP', 'String'] }
+export const meta = { number: '91', title: 'Decode Ways', slug: 'decode-ways', difficulty: 'Medium', tags: ['DP', 'String'], description: "A digit string maps to letters through codes one to twenty-six, and the task is to count the ways it can be split into valid codes. The visual fills a row of cells, each built from one- and two-digit choices." }

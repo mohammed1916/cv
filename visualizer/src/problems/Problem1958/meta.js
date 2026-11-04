@@ -8,5 +8,5 @@ export const meta = {
     "Simulation"
   ],
   "accent": "#0891b2",
-  "description": "Determine whether placing a piece captures at least one straight line."
+  "description": "Decide whether placing a piece on an empty cell of an 8 by 8 board creates a line of at least three cells that ends at an opposing piece. The visual shows the eight directions from the chosen cell and highlights the cells checked along each one.",
 };

@@ -7,6 +7,6 @@ export const meta = {
     "Math",
     "Enumeration"
   ],
-  "description": "Check each number in the range: even digit count and equal half digit sums.",
+  "description": "Count the numbers in a range whose digits split into two halves with equal digit sums and an even digit count. The visual splits each number's digits into halves and compares their sums.",
   "accent": "#84cc16"
 }

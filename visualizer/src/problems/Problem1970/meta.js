@@ -8,5 +8,5 @@ export const meta = {
     "Matrix"
   ],
   "accent": "#0891b2",
-  "description": "Find the last day a land path connects the top row to the bottom row."
+  "description": "Find the last day on which a path of land still connects the top and bottom rows as cells flood. The visual adds cells in reverse with union-find to merge land components."
 };

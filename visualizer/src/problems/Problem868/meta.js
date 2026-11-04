@@ -7,5 +7,5 @@ export const meta = {
     "Bit Manipulation"
   ],
   "accent": "#0891b2",
-  "description": "Find the largest distance between adjacent set bits."
+  "description": "Find the largest distance between two consecutive set bits in the binary form of a number. The visual highlights each 1 bit and measures the gap to its neighbour."
 };

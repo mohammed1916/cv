@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Count tilings of a two-by-n board using dominoes and trominoes."
+  "description": "Count the ways to fill a two-row strip using straight dominoes and L-shaped trominoes. The visual extends the strip column by column and shows how each new column builds on earlier fillings."
 };

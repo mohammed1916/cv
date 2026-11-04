@@ -8,5 +8,5 @@ export const meta = {
     "Backtracking"
   ],
   "accent": "#0891b2",
-  "description": "Find the largest group that can consistently be considered good."
+  "description": "Decide the largest set of people who can all be treated as good when their statements about others are consistent. The visual tries candidate groups and highlights which statements break."
 };

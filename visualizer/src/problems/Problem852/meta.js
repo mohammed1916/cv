@@ -7,5 +7,5 @@ export const meta = {
     "Binary Search"
   ],
   "accent": "#0891b2",
-  "description": "Find the peak index of a strictly increasing then strictly decreasing mountain."
+  "description": "Locate the single peak in an array that rises and then falls. The visual narrows a binary search by comparing a middle value with its right neighbour."
 };

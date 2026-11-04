@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Partition positive values into at most k contiguous groups to maximize the sum of group averages."
+  "description": "Split a list into at most k contiguous groups to maximise the total of the group averages. The visual compares split points using cumulative sums and a table of best totals."
 };

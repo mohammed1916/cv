@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Count distinct good binary subsequences without leading zeroes except the single zero."
+  "description": "Count the distinct good binary subsequences of a string, with no leading zeros except a single zero. The visual tracks counts for each ending character as the string is scanned."
 };

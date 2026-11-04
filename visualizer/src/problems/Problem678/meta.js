@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether stars can represent empty strings or parentheses to balance the string."
+  "description": "Decide whether a string with brackets and wildcard stars can be read as a balanced bracket sequence. The visual tracks a range of possible open-bracket counts as each character is read."
 };

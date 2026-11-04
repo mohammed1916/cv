@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Maximize the dot product of two equally long nonempty subsequences."
+  "description": "Choose two equally long nonempty subsequences to maximise their dot product. The visual shows a DP grid aligning the two sequences."
 };

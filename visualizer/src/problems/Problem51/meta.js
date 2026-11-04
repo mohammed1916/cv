@@ -1,1 +1,1 @@
-export const meta = { number: '51', title: 'N-Queens', slug: 'n-queens', difficulty: 'Hard', tags: ['Backtracking'] }
+export const meta = { number: '51', title: 'N-Queens', slug: 'n-queens', difficulty: 'Hard', tags: ['Backtracking'], description: "Place n queens on an n by n board so that no two attack each other, and list every complete placement. The visual places one queen per row, blocks columns and diagonals, and backtracks when a row has no safe square." }

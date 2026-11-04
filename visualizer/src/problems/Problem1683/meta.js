@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Return IDs of tweets longer than fifteen characters."
+  "description": "Return the ids of tweets whose content is longer than fifteen characters. The visual scans each row and highlights those whose length crosses the threshold."
 };

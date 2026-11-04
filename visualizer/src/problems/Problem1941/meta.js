@@ -7,5 +7,5 @@ export const meta = {
     "Counting"
   ],
   "accent": "#0891b2",
-  "description": "Check whether every distinct character occurs equally often."
+  "description": "Check whether every character in a string occurs the same number of times. The visual shows a bar for each character's count and checks that all the bars are the same height.",
 };

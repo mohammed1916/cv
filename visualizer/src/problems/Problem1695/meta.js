@@ -7,5 +7,5 @@ export const meta = {
     "Sliding Window"
   ],
   "accent": "#0891b2",
-  "description": "Find the greatest sum of a contiguous subarray containing no repeated values."
+  "description": "Find the largest sum of a contiguous run with no repeated values. The visual slides a window that grows at the right and shrinks from the left when a duplicate appears."
 };

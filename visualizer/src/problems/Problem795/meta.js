@@ -7,5 +7,5 @@ export const meta = {
     "Sliding Window"
   ],
   "accent": "#0891b2",
-  "description": "Count contiguous subarrays whose maximum lies within the inclusive bounds."
+  "description": "Count the subarrays whose largest value lies between two thresholds. The visual slides endpoints across the array and marks which windows still qualify."
 };

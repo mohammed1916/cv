@@ -7,5 +7,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Count ordered index quadruplets with three earlier values summing to the fourth."
+  "description": "Count index quadruplets where three earlier values sum to the fourth. The visual fixes the last index and uses a counting map of pair sums for earlier positions."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Find the shortest substring of s1 containing s2 as a subsequence, preferring the leftmost tie."
+  "description": "Find the shortest slice of one string that contains the second string as a subsequence. The visual matches characters forward and then backtracks to tighten the span."
 };

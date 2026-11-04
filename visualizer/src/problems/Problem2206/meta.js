@@ -7,5 +7,5 @@ export const meta = {
     "Counting"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether all elements can be partitioned into equal-value pairs."
+  "description": "Decide whether a list can be split completely into pairs of equal values. The visual counts each value and checks that every count is even."
 };

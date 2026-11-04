@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Count followers of users who themselves follow at least one other user."
+  "description": "Count the followers of users who themselves follow someone else. The visual shows follow arrows and keeps only the followers whose target is also a follower of another user."
 };

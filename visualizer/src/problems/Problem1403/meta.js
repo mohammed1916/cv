@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Choose the shortest subsequence whose sum exceeds the remaining values, preferring the greatest sum."
+  "description": "Pick the smallest group of numbers whose total is larger than the rest, taking the largest values first. The visual stacks sorted bars and compares the running sum with the remaining sum."
 };

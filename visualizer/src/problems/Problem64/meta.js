@@ -1,1 +1,1 @@
-export const meta = { number: '64', title: 'Minimum Path Sum', slug: 'minimum-path-sum', difficulty: 'Medium', tags: ['DP', 'Array'] }
+export const meta = { number: '64', title: 'Minimum Path Sum', slug: 'minimum-path-sum', difficulty: 'Medium', tags: ['DP', 'Array'], description: "Find the cheapest right-or-down route across a grid of costs. The visual fills each cell with its own cost plus the cheaper of the cell above or to the left." }

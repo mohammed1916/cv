@@ -8,5 +8,5 @@ export const meta = {
     "Simulation"
   ],
   "accent": "#0891b2",
-  "description": "Produce the fixed-length array after duplicating each zero and discarding overflow."
+  "description": "Duplicate each zero in a fixed-length array and shift the rest to the right, discarding anything that overflows. The writes are shown from the end of the array backward."
 };

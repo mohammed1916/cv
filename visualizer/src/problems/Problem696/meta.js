@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Count substrings with equal-sized consecutive runs of zeros and ones."
+  "description": "Count substrings that contain equal numbers of zeros and ones, grouped in consecutive blocks. The visual shows runs of identical bits and how neighbouring runs pair up."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Array"
   ],
   "accent": "#0d9488",
-  "description": "The second largest is the strongest competitor. Retain its value and the original index of the largest."
+  "description": "Check whether the largest number is at least double every other number and return its position. The visual compares the top two values and their index."
 };

@@ -8,5 +8,5 @@ export const meta = {
     "Two Pointers"
   ],
   "accent": "#0891b2",
-  "description": "Remove the shortest contiguous segment so the remaining array is nondecreasing."
+  "description": "Find the shortest contiguous segment whose removal leaves the array sorted by matching a sorted prefix with a sorted suffix. The visual shows the prefix, the removed middle and the suffix.",
 };

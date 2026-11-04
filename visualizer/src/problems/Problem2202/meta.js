@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Maximize the stack top after exactly k remove-or-restore moves."
+  "description": "Maximise the value at the top of a stack after exactly k moves that either remove the top or restore a removed value. The visual tracks the stack as items are removed and restored."
 };

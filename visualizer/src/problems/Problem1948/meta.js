@@ -8,5 +8,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Delete all folders having duplicate nonempty subtree structures in one simultaneous pass."
+  "description": "Delete every folder whose subtree structure is identical to another folder's, then return the remaining paths. The visual shows a folder tree with matching subtrees marked and removed together.",
 };

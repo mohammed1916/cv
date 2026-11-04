@@ -7,5 +7,5 @@ export const meta = {
     "Backtracking"
   ],
   "accent": "#0891b2",
-  "description": "List all distinct nondecreasing subsequences of length at least two."
+  "description": "Find all distinct non-decreasing subsequences of length at least two from an array. The visual explores choices in index order and skips repeated values at the same depth so each sequence appears once."
 };

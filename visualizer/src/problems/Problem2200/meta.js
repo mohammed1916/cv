@@ -7,5 +7,5 @@ export const meta = {
     "Intervals"
   ],
   "accent": "#0891b2",
-  "description": "Return every index within distance k of some key occurrence."
+  "description": "Return every index within distance k of some occurrence of a key value. The visual marks each key and shades the indices in its window."
 };

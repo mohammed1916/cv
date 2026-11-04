@@ -8,5 +8,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Collect words occurring exactly once across both sentences."
+  "description": "Find the words that appear exactly once across two sentences combined. The visual tallies word counts from both sentences and keeps only the singletons."
 };

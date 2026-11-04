@@ -7,5 +7,5 @@ export const meta = {
     "Bit Manipulation"
   ],
   "accent": "#0891b2",
-  "description": "Concatenate binary representations from one through n and return the result modulo 1000000007."
+  "description": "Join the binary forms of the numbers one through n into one long binary number and return it modulo a large prime. The visual shows the running value shifting left as each new number is appended."
 };

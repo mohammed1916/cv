@@ -8,5 +8,5 @@ export const meta = {
     "Enumeration"
   ],
   "accent": "#0891b2",
-  "description": "Count ordered positive integer triples satisfying a squared plus b squared equals c squared."
+  "description": "Count ordered triples of positive integers up to n where a squared plus b squared equals c squared. The visual fills a grid of pairs a and b, computes c for each pair, and marks the pairs whose sum is a perfect square.",
 };

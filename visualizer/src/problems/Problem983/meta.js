@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Cover all travel days at minimum ticket cost."
+  "description": "Cover every travel day with one-day, seven-day or thirty-day passes at the lowest total price. The visual runs a timeline with a cost for each day and the best pass choice."
 };

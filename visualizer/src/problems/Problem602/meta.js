@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Find the person with the most friendships and report that count."
+  "description": "Find the person who appears in the most friendship links and return that count. The visual stacks link tallies per user and crowns the tallest column."
 };

@@ -8,5 +8,5 @@ export const meta = {
     "Simulation"
   ],
   "accent": "#0891b2",
-  "description": "Find the remaining weight after repeatedly smashing the two heaviest stones."
+  "description": "Repeatedly smash the two heaviest stones together, keeping the difference, and report the final remaining weight. A max-heap shows the two heaviest stones at each step."
 };

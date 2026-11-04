@@ -7,5 +7,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Find the longest subsequence whose maximum and minimum differ by exactly one."
+  "description": "Find the longest selection of values whose largest and smallest members differ by exactly one. The visual groups equal values by count and pairs each group with its neighbour one step higher."
 };

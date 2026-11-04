@@ -7,5 +7,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Count words beginning with the supplied prefix."
+  "description": "Count the words that begin with a given prefix. The visual compares each word's leading letters with the prefix one character at a time."
 };

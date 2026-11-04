@@ -7,5 +7,5 @@ export const meta = {
     "Enumeration"
   ],
   "accent": "#0891b2",
-  "description": "Enter a microwave time with minimum finger movement and button cost."
+  "description": "Choose which microwave button presses produce a target cooking time with the least cost and finger movement. The visual lays out candidate digit sequences and compares their costs."
 };

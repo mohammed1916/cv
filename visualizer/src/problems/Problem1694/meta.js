@@ -7,5 +7,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Remove separators and regroup phone digits into blocks of two or three."
+  "description": "Strip separators from a phone number and regroup the digits into blocks of two or three. The visual shows the digits as a row and splits them into grouped blocks."
 };

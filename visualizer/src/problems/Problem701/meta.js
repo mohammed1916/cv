@@ -8,5 +8,5 @@ export const meta = {
     "Binary Tree"
   ],
   "accent": "#0891b2",
-  "description": "Insert a new value as a leaf while preserving strict BST order."
+  "description": "Add a new value to a search tree as a leaf without breaking ordering. The visual descends from the root and attaches the value where an empty slot appears."
 };

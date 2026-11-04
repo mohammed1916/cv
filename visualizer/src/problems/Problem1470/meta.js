@@ -7,5 +7,5 @@ export const meta = {
     "Array"
   ],
   "accent": "#0891b2",
-  "description": "Interleave corresponding values from the two array halves."
+  "description": "Rebuild a shuffled array by interleaving values from its first and second halves. The visual pairs each value from the two halves and places it in the output."
 };

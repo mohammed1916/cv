@@ -9,6 +9,6 @@ export const meta = {
     "Binary Lifting",
     "Simulation"
   ],
-  "description": "Binary lifting precomputes 2^j-pass jumps and sums; each start then walks the bits of k.",
+  "description": "For every starting holder of a ball, find the largest total of ids collected over a fixed number of passes. The visual builds jump tables for powers of two and walks the bits of the pass count for each start.",
   "accent": "#ec4899"
 }

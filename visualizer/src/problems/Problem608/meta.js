@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Classify each tree record as Root Inner or Leaf."
+  "description": "Label each node of a tree as the root, an inner node, or a leaf. The visual colours each row by whether it has a parent and whether it has children."
 };

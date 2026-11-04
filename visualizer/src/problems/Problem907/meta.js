@@ -7,5 +7,5 @@ export const meta = {
     "Monotonic Stack"
   ],
   "accent": "#0891b2",
-  "description": "Sum the minimum value of every subarray modulo 1000000007."
+  "description": "Add up the smallest value of every contiguous piece of a list, reporting the total modulo a large prime. The visual draws each element's span of dominance using a monotonic stack."
 };

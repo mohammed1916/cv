@@ -7,5 +7,5 @@ export const meta = {
     "Array"
   ],
   "accent": "#0d9488",
-  "description": "Partition into even and odd groups, preserving every occurrence. The groups can then be concatenated."
+  "description": "Rearrange a list so every even value comes before every odd value. The visual sorts tiles into an even lane and an odd lane as two pointers move inward."
 };

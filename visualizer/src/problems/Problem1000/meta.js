@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Merge adjacent groups of exactly k piles at minimum total cost until one pile remains."
+  "description": "Repeatedly merge exactly k neighbouring piles into one pile, paying their combined size each time, and find the lowest total cost to reach a single pile. An interval table shows which contiguous ranges can be collapsed."
 };

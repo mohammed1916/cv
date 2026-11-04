@@ -8,5 +8,5 @@ export const meta = {
     "Geometry"
   ],
   "accent": "#0891b2",
-  "description": "Maintain points and count axis-aligned squares with a requested corner."
+  "description": "Store points and count the axis-aligned squares that can be formed with a query point as one corner. The visual draws the candidate squares around the query point."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Swap the stored m and f category values for every employee in one update."
+  "description": "Flip every employee gender code between the two values in one update. The visual shows each row's code swapping in a single pass."
 };

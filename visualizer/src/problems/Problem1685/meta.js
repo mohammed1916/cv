@@ -7,5 +7,5 @@ export const meta = {
     "Prefix Sum"
   ],
   "accent": "#0891b2",
-  "description": "Compute the sum of absolute differences from every value to all other sorted-array values."
+  "description": "For each index in a sorted array, compute the total of absolute differences to every other value. The visual splits the array into left and right parts and tracks the running prefix sums."
 };

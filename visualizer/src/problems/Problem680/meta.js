@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether deleting at most one character can produce a palindrome."
+  "description": "Decide whether a string becomes a palindrome after removing at most one character. The visual compares characters from both ends and branches once at the first mismatch."
 };

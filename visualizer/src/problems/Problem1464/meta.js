@@ -7,5 +7,5 @@ export const meta = {
     "Array"
   ],
   "accent": "#0891b2",
-  "description": "Maximize the product of two distinct-position values after subtracting one from each."
+  "description": "Maximise the product of two different array elements after each is reduced by one. The visual highlights the two largest reduced values."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Array"
   ],
   "accent": "#0d9488",
-  "description": "Greedily occupy the earliest safe empty slot; this leaves at least as much room for later flowers."
+  "description": "Plant flowers one at a time in the first empty slot that has no neighbour occupied, and stop once the requested number is reached. The visual highlights each placed flower and shows that the greedy choice leaves room for later ones."
 };

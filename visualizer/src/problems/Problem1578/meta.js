@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Remove minimum total cost so adjacent retained balloons have different colors."
+  "description": "Remove the cheapest balloons so no adjacent retained balloons share a colour by keeping the costlier one in each run. The visual highlights each colour run and its removals.",
 };

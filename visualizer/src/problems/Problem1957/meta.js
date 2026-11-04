@@ -8,5 +8,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Delete the fewest characters so no three adjacent characters are equal."
+  "description": "Delete the fewest characters so that no three adjacent characters are equal. The visual shortens each run longer than two and strikes through the characters removed.",
 };

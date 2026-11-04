@@ -8,5 +8,5 @@ export const meta = {
     "Breadth-First Search"
   ],
   "accent": "#0891b2",
-  "description": "Count zero-valued land components enclosed away from every grid boundary."
+  "description": "Count groups of zero cells that are fully enclosed by one cells and do not touch the grid border. The visual floods the border-connected zeros first, then counts the enclosed islands that remain."
 };

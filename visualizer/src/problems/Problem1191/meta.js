@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Find the maximum subarray sum in k concatenated copies, allowing an empty subarray."
+  "description": "Find the largest subarray sum in an array repeated k times, where the empty subarray counts as zero. The visual contrasts the single-copy result with the best sum that crosses copy boundaries."
 };

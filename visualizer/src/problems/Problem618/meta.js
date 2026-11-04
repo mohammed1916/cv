@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Pivot alphabetically ordered student names into America Asia and Europe columns."
+  "description": "Pivot student names into three columns by continent, with each column listing its names in alphabetical order. The visual sorts the rows and drops each name into its region column."
 };

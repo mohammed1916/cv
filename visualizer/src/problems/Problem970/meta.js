@@ -8,5 +8,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "List distinct sums of one power of x and one power of y within the bound."
+  "description": "Find every distinct sum of a power of x and a power of y that does not exceed a bound. The visual lays out the powers on a grid and marks the sums that fall within the limit."
 };

@@ -8,5 +8,5 @@ export const meta = {
     "Binary Tree"
   ],
   "accent": "#0891b2",
-  "description": "Remove out-of-range BST nodes while preserving the relative structure of retained nodes."
+  "description": "Cut away every node whose value falls outside a range while keeping the tree ordered. The visual prunes subtrees and reattaches surviving children to their parents."
 };

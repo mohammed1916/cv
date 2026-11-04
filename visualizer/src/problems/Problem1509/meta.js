@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Minimize the array range after changing at most three entries."
+  "description": "Reduce the range of an array by trimming three entries from its ends in the best combination. The visual sorts the values and shows which end trims are compared.",
 };

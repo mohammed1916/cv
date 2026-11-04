@@ -8,5 +8,5 @@ export const meta = {
     "Bit Manipulation"
   ],
   "accent": "#0891b2",
-  "description": "Count nonnegative integers at most n whose binary digits never contain adjacent ones."
+  "description": "Count the integers from zero up to n whose binary form never has two adjacent ones. The visual builds a bit-by-bit tree and prunes branches that would create a forbidden pair."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Minimize remaining stones after exactly k removals."
+  "description": "Repeatedly reduce the largest pile for a fixed number of operations to leave the smallest total. The visual shows each max-heap pop and the reduced pile going back in."
 };

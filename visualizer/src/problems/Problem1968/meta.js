@@ -8,5 +8,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Rearrange distinct values so no interior value equals the average of its neighbors."
+  "description": "Arrange distinct integers so that no interior element equals the average of its two neighbors. The visual places values in order and checks each neighbor triple."
 };

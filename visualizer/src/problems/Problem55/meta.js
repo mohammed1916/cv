@@ -1,1 +1,1 @@
-export const meta = { number: '55', title: 'Jump Game', slug: 'jump-game', difficulty: 'Medium', tags: ['Greedy', 'Array'] }
+export const meta = { number: '55', title: 'Jump Game', slug: 'jump-game', difficulty: 'Medium', tags: ['Greedy', 'Array'], description: "Decide whether the last index can be reached when each value is a maximum jump length. The visual sweeps left to right while tracking the farthest index reachable so far." }

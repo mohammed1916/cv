@@ -8,5 +8,5 @@ export const meta = {
     "Counting"
   ],
   "accent": "#0891b2",
-  "description": "Count complete copies of balloon obtainable from the available letters."
+  "description": "Count how many copies of a target word can be built from the available letters, where some letters are needed twice. The visual tallies each required letter and divides by how many the word needs."
 };

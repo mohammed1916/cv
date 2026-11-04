@@ -8,5 +8,5 @@ export const meta = {
     "Math"
   ],
   "accent": "#0891b2",
-  "description": "Count odd cells after repeatedly incrementing selected rows and columns."
+  "description": "Start with a grid of zeros, add one to every cell in each listed row and column, and count the cells holding odd values. The visual applies each increment as a highlighted row or column before counting parity."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Array"
   ],
   "accent": "#0d9488",
-  "description": "A contiguous increasing run ends at the first equality or drop. Remember both the current run and the greatest completed length."
+  "description": "Find the longest run of neighbouring values that keep rising. The visual extends a current run while it climbs and resets it at the first flat or falling step."
 };

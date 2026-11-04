@@ -8,5 +8,5 @@ export const meta = {
     "Simulation"
   ],
   "accent": "#0891b2",
-  "description": "Arrange the deck so alternating reveal and rotate yields increasing cards."
+  "description": "Order a deck so that repeatedly revealing the top card and moving the next card to the bottom reveals the cards in increasing order. The visual runs the queue of positions as a simulation."
 };

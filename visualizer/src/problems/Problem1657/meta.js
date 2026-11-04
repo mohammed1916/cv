@@ -7,5 +7,5 @@ export const meta = {
     "Counting"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether position swaps and existing-character identity swaps can transform one word into the other."
+  "description": "Decide whether two words can be made equal using swaps of positions and swaps of letter identities between existing letters. The visual compares letter sets and frequency profiles side by side."
 };

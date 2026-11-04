@@ -8,5 +8,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Count distinct bitwise OR values of contiguous subarrays."
+  "description": "Count how many different values come from OR-ing contiguous subarrays together. The visual keeps the set of OR results ending at each index, which changes only a few times."
 };

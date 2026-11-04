@@ -7,5 +7,5 @@ export const meta = {
     "Monotonic Stack"
   ],
   "accent": "#0891b2",
-  "description": "Maximize a capped mountain height sum without rebuilding every possible peak."
+  "description": "Maximise the same capped mountain-shaped total as a faster version, avoiding a rebuild for every peak. The visual sweeps left and right with monotonic stacks that record how far each height can extend."
 };

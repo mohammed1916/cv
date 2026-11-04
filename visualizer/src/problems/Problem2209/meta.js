@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Cover the most white tiles using a limited number of fixed-length carpets."
+  "description": "Cover as many white tiles as possible with a limited number of fixed-length carpets. The visual lays carpets over the tile row and compares coverage across choices."
 };

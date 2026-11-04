@@ -7,5 +7,5 @@ export const meta = {
     "Enumeration"
   ],
   "accent": "#0891b2",
-  "description": "Count pairs of equal-length substrings that differ at exactly one character."
+  "description": "Count pairs of same-length substrings from two strings that differ in exactly one position. The visual aligns the two strings and marks each position where a single mismatch is allowed."
 };

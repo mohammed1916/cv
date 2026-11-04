@@ -8,5 +8,5 @@ export const meta = {
     "Binary Tree"
   ],
   "accent": "#0891b2",
-  "description": "Compute the average node value separately at each depth."
+  "description": "Compute the average value on each level of a binary tree. The visual groups nodes by depth and shows each level's sum divided by its count."
 };

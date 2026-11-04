@@ -1,1 +1,1 @@
-export const meta = { number: '87', title: 'Scramble String', slug: 'scramble-string', difficulty: 'Hard', tags: ['String', 'DP'] }
+export const meta = { number: '87', title: 'Scramble String', slug: 'scramble-string', difficulty: 'Hard', tags: ['String', 'DP'], description: "Decide whether one string can be produced from another by recursively splitting it and swapping the two halves. The visual shows the split points and which parts match." }

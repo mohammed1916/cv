@@ -8,5 +8,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Count distinct palindromic subsequences of length three."
+  "description": "Count distinct palindromes of length three that appear as subsequences of a string. The visual checks each outer letter pair against the first and last occurrence windows and marks the middle letters found between them.",
 };

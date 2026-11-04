@@ -8,5 +8,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Maximize the sum of cooking completion time times satisfaction."
+  "description": "Choose which dishes to cook and in what order to maximise the sum of time-weighted satisfaction. The visual shows the running prefix total as dishes are added in sorted order and where adding stops paying off."
 };

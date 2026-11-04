@@ -7,5 +7,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Format a nonnegative integer with dot-separated groups of three digits."
+  "description": "Insert dot separators every three digits in a number by working from the right end. The visual shows the digits grouped into blocks from the right.",
 };

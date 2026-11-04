@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether two axis-aligned rectangles overlap with positive area."
+  "description": "Decide whether two axis-aligned rectangles overlap in a region with positive area. The visual compares their horizontal and vertical extents and highlights any shared region."
 };

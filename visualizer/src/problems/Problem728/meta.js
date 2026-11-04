@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "List numbers in the inclusive interval divisible by every one of their own digits."
+  "description": "List the numbers in a range that are divisible by each of their nonzero digits. The visual checks each number by splitting off its digits."
 };

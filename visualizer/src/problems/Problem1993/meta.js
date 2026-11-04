@@ -8,5 +8,5 @@ export const meta = {
     "Design"
   ],
   "accent": "#0891b2",
-  "description": "Apply lock, unlock, and upgrade operations on a rooted tree."
+  "description": "Support lock, unlock and upgrade operations on the nodes of a rooted tree, with ancestor and descendant checks. The visual highlights the ancestor path affected by each operation."
 };

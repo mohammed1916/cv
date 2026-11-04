@@ -8,5 +8,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Check whether every length-k binary code appears as a substring."
+  "description": "Check whether every binary string of length k appears as a substring. The visual slides a window over the string and marks each distinct code seen."
 };

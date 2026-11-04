@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "List free seats that belong to a consecutive available group of at least two."
+  "description": "List the free seats that sit in a consecutive block of at least two. The visual marks each seat as free or taken and highlights the runs that qualify."
 };

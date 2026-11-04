@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Finish all race laps in minimum time while choosing when to change tires."
+  "description": "Finish a set of race laps in the least total time, choosing when to change tires with a fixed change penalty. The visual builds the lap-by-lap time for each tire run and compares the options."
 };

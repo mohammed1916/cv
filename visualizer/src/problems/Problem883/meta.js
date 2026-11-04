@@ -8,5 +8,5 @@ export const meta = {
     "Geometry"
   ],
   "accent": "#0891b2",
-  "description": "Measure the total area of three projections."
+  "description": "Add up the shadows of a stack of unit cubes seen from the top, front and side. The visual highlights each projection's footprint on the grid."
 };

@@ -8,5 +8,5 @@ export const meta = {
     "Simulation"
   ],
   "accent": "#0891b2",
-  "description": "Find all queens that can attack the king on an eight-by-eight board."
+  "description": "On an eight-by-eight board, list every queen that has a clear line of attack to the king. The visual sends a ray from the king in each of eight directions and stops it at the first queen it meets."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Minimize the final stone weight after repeatedly smashing pairs."
+  "description": "Split the stones into two groups with the smallest possible difference, so the leftover weight is minimized. A subset-sum table shows which totals can be reached."
 };

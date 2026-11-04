@@ -7,5 +7,5 @@ export const meta = {
     "Sliding Window"
   ],
   "accent": "#0891b2",
-  "description": "Find the longest all-one subarray after deleting exactly one element."
+  "description": "Find the longest run of ones after removing exactly one element. The visual slides a window that allows one zero."
 };

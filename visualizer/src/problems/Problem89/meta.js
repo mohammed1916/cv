@@ -1,1 +1,1 @@
-export const meta = { number: '89', title: 'Gray Code', slug: 'gray-code', difficulty: 'Medium', tags: ['Bit Manipulation', 'Math'] }
+export const meta = { number: '89', title: 'Gray Code', slug: 'gray-code', difficulty: 'Medium', tags: ['Bit Manipulation', 'Math'], description: "Produce a sequence of all n-bit numbers in which neighbouring entries differ by one bit. The visual mirrors the previous sequence and sets a new leading bit for the reflected half." }

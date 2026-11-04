@@ -7,5 +7,5 @@ export const meta = {
     "Binary Search"
   ],
   "accent": "#0891b2",
-  "description": "Find the earliest time at which all buses together complete enough trips."
+  "description": "Find the earliest time at which the buses together have completed the required number of trips. The visual searches over candidate times and checks how many trips each bus finishes."
 };

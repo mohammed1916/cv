@@ -8,5 +8,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Find the least string reachable by allowed front-to-back moves."
+  "description": "Find the smallest string reachable by repeatedly moving one of the first k letters to the back. The visual compares rotations when k is at least two and sorts the letters when k is one."
 };

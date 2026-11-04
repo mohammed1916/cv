@@ -7,5 +7,5 @@ export const meta = {
     "Math"
   ],
   "accent": "#0891b2",
-  "description": "Find the kth positive factor of n in ascending order."
+  "description": "Find the k-th smallest divisor of n. The visual lists candidate divisors in order and marks the k-th one."
 };

@@ -8,5 +8,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Maximize the sum after exactly k sign flips."
+  "description": "Flip the sign of exactly k elements to maximize the array sum. The bars show the greedy choice of flipping the most negative values first and handling leftover flips by parity."
 };

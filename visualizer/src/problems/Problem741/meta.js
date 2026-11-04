@@ -8,5 +8,5 @@ export const meta = {
     "Matrix"
   ],
   "accent": "#0891b2",
-  "description": "Collect the most cherries on a round trip without counting a cell twice."
+  "description": "Collect as many cherries as possible on a round trip through a grid, collecting each cell once. The visual moves two walkers together and marks cells already taken."
 };

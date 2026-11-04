@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether coordinatewise maximum merges can produce the target triplet."
+  "description": "Decide whether merging triplets by taking coordinatewise maxima can produce the target triplet. The visual shows the usable triplets merging into a running maximum that is compared with the target.",
 };

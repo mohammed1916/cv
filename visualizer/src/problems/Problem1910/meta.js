@@ -8,5 +8,5 @@ export const meta = {
     "Stack"
   ],
   "accent": "#0891b2",
-  "description": "Repeatedly erase the leftmost occurrence of part."
+  "description": "Repeatedly erase the leftmost occurrence of a given substring until none is left, then return what remains. The visual shows the string with the matched block cut out and the pieces closing together.",
 };

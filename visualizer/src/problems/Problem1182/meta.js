@@ -7,5 +7,5 @@ export const meta = {
     "Binary Search"
   ],
   "accent": "#0891b2",
-  "description": "Find the nearest occurrence of the requested color for every index query."
+  "description": "Given colour labels on an array, answer queries that ask for the nearest index carrying a requested colour. The visual marks each colour's positions and the nearest hit from each query index."
 };

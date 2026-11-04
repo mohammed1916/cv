@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Maximize a number by mutating at most one contiguous substring."
+  "description": "Maximize a digit string by replacing at most one contiguous substring with mapped digits. The visual shows the digit strip with a mapping table and a window that begins at the first digit the mapping improves.",
 };

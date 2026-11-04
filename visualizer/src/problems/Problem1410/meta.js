@@ -7,5 +7,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Decode the six supported HTML entities once while preserving other text."
+  "description": "Replace the six supported HTML entities in a string in a single pass and leave all other text untouched. The visual scans the characters left to right and shows each replacement as it is emitted."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Simulation"
   ],
   "accent": "#0891b2",
-  "description": "Find how many parent-folder moves return to the main folder after navigation logs."
+  "description": "Track the folder depth through the log commands and count how many steps end at the main folder. The visual shows the folder stack moving up and down.",
 };

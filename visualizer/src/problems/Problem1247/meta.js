@@ -8,5 +8,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Find the fewest cross-string swaps needed to make two x/y strings equal."
+  "description": "Two strings made only of x and y must become identical, with each swap exchanging a pair of characters between them; find the fewest swaps. The visual pairs up mismatched positions and groups them by mismatch type."
 };

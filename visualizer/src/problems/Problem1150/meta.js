@@ -7,5 +7,5 @@ export const meta = {
     "Binary Search"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether a target occupies more than half of a sorted array."
+  "description": "Decide whether a target value occupies more than half of a sorted array. The visual probes the quarter points and locates the target run boundaries with binary search."
 };

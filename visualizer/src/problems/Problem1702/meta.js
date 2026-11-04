@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Find the greatest binary string reachable by the permitted 00-to-10 and 10-to-01 transformations."
+  "description": "Apply the allowed swaps that move zeros left to make the largest binary string possible. The visual shows the string transforming step by step with the single leftover one moving into place."
 };

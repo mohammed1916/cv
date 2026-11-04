@@ -7,5 +7,5 @@ export const meta = {
     "Enumeration"
   ],
   "accent": "#0891b2",
-  "description": "Count index triples satisfying all three absolute-difference limits."
+  "description": "Count index triples whose pairwise gaps satisfy three limits by checking each middle index against candidates on its left and right. The visual highlights a qualifying triple.",
 };

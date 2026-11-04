@@ -8,5 +8,5 @@ export const meta = {
     "Manacher"
   ],
   "accent": "#0891b2",
-  "description": "Maximize the product of lengths of two nonoverlapping odd-length palindromic substrings."
+  "description": "Pick two non-overlapping odd-length palindromic substrings to maximize the product of their lengths. The visual marks palindrome centers and sweeps best lengths from the left and right."
 };

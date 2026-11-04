@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Split four digits into two numbers with the smallest possible sum."
+  "description": "Split four digits into two numbers that use every digit once, minimising their sum. The visual shows the digits being sorted and dealt alternately into two numbers."
 };

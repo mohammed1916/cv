@@ -8,5 +8,5 @@ export const meta = {
     "Two Pointers"
   ],
   "accent": "#0891b2",
-  "description": "Rescue everyone with the fewest two-person boats."
+  "description": "Pair people by weight so each boat carries at most two people within the weight limit, using the fewest boats. The visual pairs the heaviest and lightest people at the two ends of a sorted line."
 };

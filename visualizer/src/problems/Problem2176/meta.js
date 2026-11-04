@@ -7,5 +7,5 @@ export const meta = {
     "Enumeration"
   ],
   "accent": "#0891b2",
-  "description": "Count equal-value index pairs whose index product is divisible by k."
+  "description": "Count pairs of equal values whose index product is divisible by k. The visual groups indices by value and tests each pair's product against k."
 };

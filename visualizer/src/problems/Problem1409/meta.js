@@ -7,5 +7,5 @@ export const meta = {
     "Simulation"
   ],
   "accent": "#0891b2",
-  "description": "Answer permutation positions while moving each requested value to the front."
+  "description": "Answer queries by finding each queried value's position in a list, then moving that value to the front. The visual shows the list reordering after each query."
 };

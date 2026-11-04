@@ -8,5 +8,5 @@ export const meta = {
     "Bit Manipulation"
   ],
   "accent": "#0891b2",
-  "description": "Count brick walls with no aligned internal seams in adjacent rows."
+  "description": "Count ways to build a brick wall of fixed height and width so that no seam lines up across two adjacent rows. The visual compares the seam positions of each pair of consecutive rows."
 };

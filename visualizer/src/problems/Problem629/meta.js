@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Count permutations of one through n with exactly k inverse pairs."
+  "description": "Count permutations of the numbers one through n that contain exactly k inversions. The visual builds up inversion counts one new element at a time and shows the running table."
 };

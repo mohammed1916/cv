@@ -7,5 +7,5 @@ export const meta = {
     "Array"
   ],
   "accent": "#0d9488",
-  "description": "Keep only the extremes that can participate in an optimal triple; a pair of negative values can turn positive."
+  "description": "Pick three numbers whose product is largest, noting that two large negatives can produce a positive product. The visual sorts the values and highlights the two smallest and three largest candidates."
 };

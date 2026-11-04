@@ -7,5 +7,5 @@ export const meta = {
     "Array"
   ],
   "accent": "#0d9488",
-  "description": "Sort side lengths. For a fixed largest side, one successful pair proves a whole interval of starts is valid."
+  "description": "Count the triples of stick lengths that form a triangle. The visual sorts the lengths and sweeps two pointers inward from the largest side, adding the whole run of valid starts at once."
 };

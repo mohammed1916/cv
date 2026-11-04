@@ -7,5 +7,5 @@ export const meta = {
     "Union Find"
   ],
   "accent": "#0891b2",
-  "description": "Choose one initial infection to clear so the final malware spread is smallest."
+  "description": "A network has some initially infected nodes, and removing one of those starting nodes changes how far the infection spreads. The visual shows connected groups with the chosen starting node highlighted and the spread compared."
 };

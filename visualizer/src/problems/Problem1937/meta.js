@@ -8,5 +8,5 @@ export const meta = {
     "Matrix"
   ],
   "accent": "#0891b2",
-  "description": "Choose one cell per row while paying for horizontal movement between rows."
+  "description": "Choose one cell per row to maximize the total value minus the horizontal distance paid between consecutive rows. The visual shows a row-by-row grid where each cell's best total is carried from the row above with left and right sweeps.",
 };

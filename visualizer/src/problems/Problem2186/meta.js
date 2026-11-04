@@ -7,5 +7,5 @@ export const meta = {
     "Counting"
   ],
   "accent": "#0891b2",
-  "description": "Append the fewest characters to make two strings anagrams."
+  "description": "Find the fewest characters to append to two strings so that their letter counts match. The visual compares the letter counts of both strings and marks the surplus letters."
 };

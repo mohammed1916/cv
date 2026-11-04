@@ -8,5 +8,5 @@ export const meta = {
     "Binary Tree"
   ],
   "accent": "#0891b2",
-  "description": "Merge trees by adding corresponding values and retaining unmatched branches."
+  "description": "Overlay two binary trees node by node, adding values where both trees have a node and keeping any branch that only one tree has. The visual stacks the trees and shows the sums landing on the shared positions."
 };

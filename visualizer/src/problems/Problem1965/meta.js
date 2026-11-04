@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Find employee IDs missing either their name record or salary record."
+  "description": "List the employee IDs that appear in only one of two tables. The visual compares the two ID sets side by side and highlights IDs present in just one."
 };

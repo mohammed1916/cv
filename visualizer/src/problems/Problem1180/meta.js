@@ -8,5 +8,5 @@ export const meta = {
     "Counting"
   ],
   "accent": "#0891b2",
-  "description": "Count substrings consisting of one repeated character."
+  "description": "Count every substring made of a single repeated letter. The visual splits the text into runs of equal letters and shows how a run of length L contributes its triangular count."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Compute the overall acceptance rate using distinct directed request and acceptance pairs."
+  "description": "Divide the number of unique accepted request pairs by the number of unique sent request pairs and report the ratio. The visual deduplicates the two tables side by side before the division is shown."
 };

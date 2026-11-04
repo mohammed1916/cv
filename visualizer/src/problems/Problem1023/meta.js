@@ -8,5 +8,5 @@ export const meta = {
     "Two Pointers"
   ],
   "accent": "#0891b2",
-  "description": "Decide which queries can be formed by inserting lowercase letters into a pattern."
+  "description": "For each query, decide whether it can be turned into the pattern by inserting lowercase letters only. A pointer walks the pattern and the query together, advancing on each match."
 };

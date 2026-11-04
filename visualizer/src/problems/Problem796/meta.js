@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether repeatedly moving the first character to the end can produce goal."
+  "description": "Check whether one string becomes another after repeatedly moving its first character to the end. The visual shows each shifted copy of the string being compared with the target."
 };

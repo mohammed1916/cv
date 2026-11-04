@@ -8,5 +8,5 @@ export const meta = {
     "Matrix"
   ],
   "accent": "#0891b2",
-  "description": "Count regions formed by slash boundaries inside a square grid."
+  "description": "Count the regions that a set of slashes divides a square grid into. The visual splits each cell into four triangles and merges neighbouring triangles into groups."
 };

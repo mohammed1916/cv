@@ -7,5 +7,5 @@ export const meta = {
     "Stack"
   ],
   "accent": "#0891b2",
-  "description": "Compute the total of valid baseball rounds after cancel, double, and sum operations."
+  "description": "Total the scores of a record after applying number, cancel, double and sum operations on a stack. The visual shows the score stack changing with each operation."
 };

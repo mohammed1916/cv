@@ -7,6 +7,6 @@ export const meta = {
     "Array",
     "String"
   ],
-  "description": "Check that s equals the first letters of the words, in order.",
+  "description": "Decide whether a string equals the initial letters of a list of words taken in order. The visual drops each word's first letter into a row and compares it with the target string.",
   "accent": "#10b981"
 }

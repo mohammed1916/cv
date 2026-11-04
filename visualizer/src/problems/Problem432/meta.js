@@ -8,5 +8,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Maintain string counts with constant-time updates and minimum/maximum-key queries."
+  "description": "Maintain counts of strings under increment and decrement, and report a key with the largest or smallest count in constant time. The visual groups keys into count buckets that rise and fall as keys change."
 };

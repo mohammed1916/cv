@@ -9,5 +9,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Maintain directories and file contents while answering sorted listings and reads."
+  "description": "Implement an in-memory file system that supports directory creation, file appends, and sorted listings. The visual shows a directory tree where listing a folder reveals sorted names and reading a file returns its contents."
 };

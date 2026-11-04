@@ -7,5 +7,5 @@ export const meta = {
     "Array"
   ],
   "accent": "#0d9488",
-  "description": "Compute the total once. Before consuming each value, compare the completed left sum with the remaining right sum."
+  "description": "Find the position where the sum to its left equals the sum to its right. The visual keeps a running left total while the right total shrinks."
 };

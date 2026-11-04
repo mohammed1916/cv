@@ -8,5 +8,5 @@ export const meta = {
     "Matrix"
   ],
   "accent": "#0891b2",
-  "description": "Count paths from the start to the end that visit every non-obstacle cell exactly once."
+  "description": "Count the walks from the start cell to the end cell that visit every empty cell of a grid exactly once. The visual traces a path through the grid and backtracks when it hits a dead end."
 };

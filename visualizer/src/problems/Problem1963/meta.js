@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Minimize arbitrary swaps needed to balance equal numbers of opening and closing brackets."
+  "description": "Find the fewest swaps needed to turn a bracket string into a balanced one. The visual tracks the running balance and marks where it dips below zero."
 };

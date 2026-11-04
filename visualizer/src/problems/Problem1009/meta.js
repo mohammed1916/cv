@@ -7,5 +7,5 @@ export const meta = {
     "Bit Manipulation"
   ],
   "accent": "#0891b2",
-  "description": "Complement every digit of the binary representation without introducing leading bits."
+  "description": "Flip every bit of a positive integer's binary form while ignoring leading zeros. The bit row shows which digits flip and which leading positions are left out."
 };

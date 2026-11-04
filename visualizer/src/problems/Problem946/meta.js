@@ -7,5 +7,5 @@ export const meta = {
     "Stack"
   ],
   "accent": "#0891b2",
-  "description": "Check whether the requested pop sequence is achievable."
+  "description": "Check whether a given pop order could arise from pushing the values in a given sequence onto a stack. The visual shows the stack with pushes and pops moving through the two sequences."
 };

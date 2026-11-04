@@ -8,5 +8,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Maximize the product of lengths of two disjoint palindromic subsequences."
+  "description": "Pick two disjoint palindromic subsequences to maximize the product of their lengths. The visual shows how each character is assigned to one of the two subsequences."
 };

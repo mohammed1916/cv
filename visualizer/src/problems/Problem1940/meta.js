@@ -8,5 +8,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Find the longest common subsequence of strictly increasing arrays."
+  "description": "Find the values that appear in every one of several strictly increasing arrays and return them in sorted order. The visual shows parallel sorted arrays with pointers advancing and a value highlighted once all pointers agree.",
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Binary Search"
   ],
   "accent": "#0891b2",
-  "description": "Find the kth positive integer missing from a strictly increasing array."
+  "description": "Find the kth positive integer missing from a sorted list by counting gaps and locating where the k-th gap lands. The visual lays the numbers on a line and marks the missing ones.",
 };

@@ -1,1 +1,1 @@
-export const meta = { number: '79', title: 'Word Search', slug: 'word-search', difficulty: 'Medium', tags: ['Backtracking', 'DFS'] }
+export const meta = { number: '79', title: 'Word Search', slug: 'word-search', difficulty: 'Medium', tags: ['Backtracking', 'DFS'], description: "Decide whether a word can be traced through neighbouring grid cells without reusing any cell. The visual highlights the current path and backtracks whenever a branch fails." }

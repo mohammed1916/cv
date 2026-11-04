@@ -7,5 +7,5 @@ export const meta = {
     "Math"
   ],
   "accent": "#0891b2",
-  "description": "Compute savings after n days of the increasing weekly deposit schedule."
+  "description": "Compute the total savings after n days, where each week deposits one more than the week before. The visual shows weekly rows of deposits building up."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Array"
   ],
   "accent": "#0891b2",
-  "description": "Compose a permutation with itself."
+  "description": "Build a new array where each position holds the original permutation value at the index given by that position. The visual draws arrows from each index to the value it points to, forming chains of lookups.",
 };

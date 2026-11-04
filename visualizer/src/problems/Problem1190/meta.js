@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Reverse the contents of every matched parenthesis pair, starting from nested effects."
+  "description": "Reverse the text inside every matched pair of parentheses, starting from the innermost pairs and working outward, then remove the brackets. The visual shows a stack of open positions and each reversed segment."
 };

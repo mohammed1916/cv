@@ -7,5 +7,5 @@ export const meta = {
     "Array"
   ],
   "accent": "#0891b2",
-  "description": "Find the largest positive difference with the smaller value at an earlier index."
+  "description": "Find the largest positive difference where the smaller value occurs at an earlier index. The visual tracks the running minimum and compares each later value against it."
 };

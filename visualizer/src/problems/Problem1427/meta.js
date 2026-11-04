@@ -7,5 +7,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Apply all left and right cyclic string shifts."
+  "description": "Apply a list of left and right cyclic shifts to a string and report the final string. The visual rotates the characters around a ring and shows the net offset."
 };

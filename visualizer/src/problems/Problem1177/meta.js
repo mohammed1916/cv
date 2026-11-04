@@ -8,5 +8,5 @@ export const meta = {
     "Bit Manipulation"
   ],
   "accent": "#0891b2",
-  "description": "For each substring, decide whether rearrangement and at most k replacements can form a palindrome."
+  "description": "For each query substring, decide whether it can be rearranged, after at most k replacements, into a palindrome. The visual compares letter parity counts against prefix tallies for each query."
 };

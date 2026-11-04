@@ -7,5 +7,5 @@ export const meta = {
     "Math"
   ],
   "accent": "#0891b2",
-  "description": "Find the number of days in a Gregorian calendar month."
+  "description": "Find how many days a given month has in a given year under Gregorian leap-year rules. A month strip shows the days being counted."
 };

@@ -8,5 +8,5 @@ export const meta = {
     "Math"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether cards divide into equal-size identical-value groups of size at least two."
+  "description": "Decide whether a deck can be split into equal groups of at least two cards where every card in a group has the same value. The visual stacks cards by value and checks whether their counts share a common divisor."
 };

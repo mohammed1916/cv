@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Find each user latest login within calendar year 2020."
+  "description": "Report each user's latest login within the calendar year 2020 from a login table. The visual shows per-user login events on a timeline with the 2020 window highlighted and the latest event marked.",
 };

@@ -8,5 +8,5 @@ export const meta = {
     "Dijkstra"
   ],
   "accent": "#0891b2",
-  "description": "Find the minimum-weight directed subgraph letting both sources reach the destination."
+  "description": "Find the minimum-weight set of directed edges that lets two sources both reach a shared destination. The visual overlays the shortest paths from each source and shows where they merge."
 };

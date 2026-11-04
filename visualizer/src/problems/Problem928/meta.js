@@ -7,5 +7,5 @@ export const meta = {
     "Union Find"
   ],
   "accent": "#0891b2",
-  "description": "Choose one infected node to remove with all its edges to minimize the final malware spread."
+  "description": "A network has initially infected nodes, and removing one node together with its links can reduce the final spread. The visual shows the network with the chosen node cut out and the infection reach recomputed."
 };

@@ -8,5 +8,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Remove the fewest beans so every nonempty bag has the same count."
+  "description": "Remove the fewest beans so that every remaining nonempty bag ends with the same count. The visual sorts the bags and shows the cost of trimming all bags down to each candidate level."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Select non-boring movies with odd IDs and rank them by descending rating."
+  "description": "Keep the movies whose IDs are odd and whose description is not boring, then order them by rating from high to low. The visual filters rows and sorts the survivors by score."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Enumeration"
   ],
   "accent": "#0891b2",
-  "description": "Choose tower heights under their individual caps to maximize a mountain-shaped total."
+  "description": "Pick a height for every tower within its cap so that the heights form a mountain shape with the largest total. The visual draws bars with their caps and sweeps outward from each possible peak."
 };

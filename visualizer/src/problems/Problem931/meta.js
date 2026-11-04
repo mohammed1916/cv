@@ -8,5 +8,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Find the cheapest falling path from top row to bottom row."
+  "description": "Find the cheapest path that starts in the top row and moves down one row at a time to a column next to or below the previous one. The visual fills a grid with each cell taking its cheapest neighbour above."
 };

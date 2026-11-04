@@ -7,5 +7,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Count how many supplied patterns occur as substrings of word."
+  "description": "Count how many of the given patterns occur as contiguous substrings of a word. The visual scans the word and highlights each match position."
 };

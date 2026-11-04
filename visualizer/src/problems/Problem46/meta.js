@@ -1,1 +1,1 @@
-export const meta = { number: '46', title: 'Permutations', slug: 'permutations', difficulty: 'Medium', tags: ['Backtracking'] }
+export const meta = { number: '46', title: 'Permutations', slug: 'permutations', difficulty: 'Medium', tags: ['Backtracking'], description: "Return every ordering of a list of distinct numbers. The visual builds orderings depth by depth, choosing an unused number, exploring beneath it, and then undoing that choice to try the next one." }

@@ -7,5 +7,5 @@ export const meta = {
     "Math"
   ],
   "accent": "#0891b2",
-  "description": "Maximize the sum of two absolute value differences and index distance."
+  "description": "Maximize an expression built from two absolute differences plus an index distance over all pairs of positions. Four sign patterns are each checked in a single pass."
 };

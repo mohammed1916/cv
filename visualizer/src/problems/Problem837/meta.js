@@ -8,5 +8,5 @@ export const meta = {
     "Probability"
   ],
   "accent": "#0891b2",
-  "description": "Find the probability a random drawing game stops with score at most n."
+  "description": "Find the chance that a random draw game ends with a score at most n when drawing stops at a threshold. The visual shows a sliding window of probabilities over recent scores."
 };

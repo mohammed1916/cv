@@ -7,5 +7,5 @@ export const meta = {
     "Prefix Sum"
   ],
   "accent": "#0891b2",
-  "description": "Count deletions that leave equal sums at even and odd indices."
+  "description": "Count indices whose removal leaves the even-position and odd-position sums equal. The visual keeps running sums for each parity and checks each removal point."
 };

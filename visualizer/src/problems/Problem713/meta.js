@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Count contiguous subarrays whose product is strictly smaller than k."
+  "description": "Count contiguous slices whose product stays below a limit. The visual grows a window and counts every slice ending at the right edge that fits."
 };

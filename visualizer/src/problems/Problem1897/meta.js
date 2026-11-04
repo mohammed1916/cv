@@ -7,5 +7,5 @@ export const meta = {
     "Counting"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether redistributing characters can make all words equal."
+  "description": "Decide whether character moves between words can make every word identical. The visual shows a tally of each letter across the words and checks that every count splits evenly by the number of words.",
 };

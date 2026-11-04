@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Buy exactly the needed quantities at minimum cost using unit prices and reusable bundle offers."
+  "description": "Buy exactly the required quantities at the lowest cost, using single-item prices and bundle offers. The visual explores the cost of each offer applied and keeps the cheapest total."
 };

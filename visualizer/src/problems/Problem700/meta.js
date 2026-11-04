@@ -8,5 +8,5 @@ export const meta = {
     "Binary Tree"
   ],
   "accent": "#0891b2",
-  "description": "Find a target in a BST and return the entire matching subtree."
+  "description": "Locate a target value in a search tree and return the subtree rooted at it. The visual walks left or right at each node until the value is found or the path ends."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Track the best run for each difference ending at every index."
+  "description": "Find the longest subsequence whose consecutive values differ by a fixed step. A table records the best chain length ending at each index for each difference."
 };

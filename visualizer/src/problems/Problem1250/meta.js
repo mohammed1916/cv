@@ -7,5 +7,5 @@ export const meta = {
     "Math"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether an integer linear combination of the array can equal one."
+  "description": "Decide whether some integer combination of the array elements can equal one. The visual folds the values into a running greatest common divisor and shows it converging."
 };

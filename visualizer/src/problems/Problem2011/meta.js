@@ -7,5 +7,5 @@ export const meta = {
     "Simulation"
   ],
   "accent": "#0891b2",
-  "description": "Compute the value after a sequence of increment and decrement operations."
+  "description": "Compute the final value of a variable after a sequence of increment and decrement operations. The visual steps through each operation and updates the running value."
 };

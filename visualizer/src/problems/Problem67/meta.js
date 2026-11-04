@@ -1,1 +1,1 @@
-export const meta = { number: '67', title: 'Add Binary', slug: 'add-binary', difficulty: 'Easy', tags: ['String', 'Math'] }
+export const meta = { number: '67', title: 'Add Binary', slug: 'add-binary', difficulty: 'Easy', tags: ['String', 'Math'] , description: "Add two binary numbers given as strings and return their sum as a binary string. The visual aligns the two strings from the right and shows the carry moving left."}

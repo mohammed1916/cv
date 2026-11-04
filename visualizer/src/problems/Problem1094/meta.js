@@ -8,5 +8,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether all passenger trips fit the vehicle capacity."
+  "description": "Decide whether every passenger trip fits within the vehicle capacity as riders board and leave. The running load is updated at each stop."
 };

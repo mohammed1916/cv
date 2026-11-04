@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Construct the lexicographically smallest length-n lowercase string whose character values sum to k."
+  "description": "Build the lexicographically smallest string of a fixed length whose letter values sum to a target. The visual fills positions from the end, placing the largest letter that still leaves room for the rest."
 };

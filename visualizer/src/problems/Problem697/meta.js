@@ -8,5 +8,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0d9488",
-  "description": "For every value retain count, first index, and last index. Among values with the greatest count choose the shortest enclosing span."
+  "description": "Find the shortest contiguous slice that contains all the most frequent values. The visual records first and last positions for each value and compares spans."
 };

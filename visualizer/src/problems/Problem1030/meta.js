@@ -8,5 +8,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Expand outward from the centre in waves of growing distance."
+  "description": "List every cell of a grid ordered by its distance from a chosen centre. The visual expands outward in rings of equal distance."
 };

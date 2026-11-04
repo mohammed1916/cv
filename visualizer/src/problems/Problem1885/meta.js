@@ -7,5 +7,5 @@ export const meta = {
     "Two Pointers"
   ],
   "accent": "#0891b2",
-  "description": "Count index pairs whose first-array sum exceeds their second-array sum."
+  "description": "Count index pairs where the sum of the first array at one index plus the second array at the other index beats the reverse sum. The visual shows the difference values sorted with two pointers sweeping to count matches.",
 };

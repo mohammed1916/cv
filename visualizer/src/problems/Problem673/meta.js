@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Count the longest strictly increasing subsequences by index choices."
+  "description": "Count how many strictly increasing subsequences reach the maximum length. The visual shows each position's length and count growing from earlier smaller values."
 };

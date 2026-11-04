@@ -8,5 +8,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Count subarrays whose sum is divisible by k."
+  "description": "Count contiguous subarrays whose sum is a multiple of k. The visual groups prefix sums by remainder and counts matching buckets."
 };

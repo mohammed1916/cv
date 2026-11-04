@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether the last zero is a one-bit character."
+  "description": "Decide whether the final bit in a binary sequence is a standalone one-bit character. The visual groups bits into characters from the left and marks where the last one lands."
 };

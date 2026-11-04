@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Find the maximum value in the specified recursively generated array through index n."
+  "description": "Generate an array by a fixed rule where each value comes from its half or quarter index, then report its largest entry. The visual builds the array step by step and marks the running maximum."
 };

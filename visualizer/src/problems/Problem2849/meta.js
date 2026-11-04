@@ -7,6 +7,6 @@ export const meta = {
     "Math",
     "Geometry"
   ],
-  "description": "The king-move distance is max(dx, dy); the start-equals-finish case needs t not equal to 1.",
+  "description": "Decide whether a given cell can be reached on an exact time step when a king moves one square per step in any direction. The visual shows the king-step distance as rings of equal distance and marks the special case where the start and target are the same cell.",
   "accent": "#f43f5e"
 }

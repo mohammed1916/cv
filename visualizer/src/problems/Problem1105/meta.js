@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Arrange ordered books on shelves to minimize total height."
+  "description": "Arrange books in order onto shelves of fixed width so that the total height of the shelves is as small as possible. A table records the best height for each prefix of books."
 };

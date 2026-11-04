@@ -7,5 +7,5 @@ export const meta = {
     "Union Find"
   ],
   "accent": "#0891b2",
-  "description": "Answer whether each pair of vertices is connected using only edges shorter than its limit."
+  "description": "For each query, decide whether two nodes are connected using only edges shorter than the query limit. The visual sorts edges and queries by limit and merges components as the limit grows."
 };

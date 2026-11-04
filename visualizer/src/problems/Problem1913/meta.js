@@ -7,5 +7,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Maximize the difference between two products using four distinct positions."
+  "description": "Maximize the difference between two products formed from four distinct positions in an array. The visual sorts the values, highlights the two largest and two smallest, and shows the two products side by side.",
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Delete the fewest characters so all remaining positive character frequencies differ."
+  "description": "Delete the fewest characters so that no two letters keep the same nonzero count. The visual shows frequency bars being lowered one at a time until every bar is distinct."
 };

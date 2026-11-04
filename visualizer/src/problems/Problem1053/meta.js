@@ -8,5 +8,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Find the greatest lexicographically smaller arrangement using at most one swap."
+  "description": "Find the largest arrangement that is lexicographically smaller than the given one using at most one swap. The scan finds the rightmost place where a smaller digit can be swapped in."
 };

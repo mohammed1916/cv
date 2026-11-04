@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Choose each school minimum feasible score threshold."
+  "description": "For each school, find the highest score threshold that still fills its required places. The visual shows one threshold per school row."
 };

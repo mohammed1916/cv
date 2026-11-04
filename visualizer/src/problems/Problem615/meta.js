@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Compare each department monthly average salary with the company average for that same month."
+  "description": "For each department and month, compare its average salary with the company-wide average for that same month. The visual places the department average beside the company average and marks which is higher."
 };

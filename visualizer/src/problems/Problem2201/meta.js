@@ -7,5 +7,5 @@ export const meta = {
     "Matrix"
   ],
   "accent": "#0891b2",
-  "description": "Count artifacts whose every covered cell has been excavated."
+  "description": "Count the rectangular artifacts whose covered cells are all uncovered by the digging. The visual fills the excavated cells and checks each artifact's cells."
 };

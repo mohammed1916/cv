@@ -7,5 +7,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Construct a binary string absent from the supplied equal-length strings."
+  "description": "Build a binary string of the same length that differs from every given string. The visual reads the diagonal bits of the list and flips each one into a new string."
 };

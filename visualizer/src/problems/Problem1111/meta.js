@@ -8,5 +8,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Split a balanced parentheses sequence into two groups with minimum maximum nesting depth."
+  "description": "Split a valid parentheses string into two valid groups so that the deeper of the two has the smallest possible nesting depth. Each character is assigned to a group by its depth parity."
 };

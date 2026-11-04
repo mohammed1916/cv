@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Reach the farthest building using limited bricks and ladders."
+  "description": "Climb as far as possible through buildings, spending bricks on small height rises and ladders on the largest. The visual tracks a heap of the biggest rises used so far."
 };

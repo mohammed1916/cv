@@ -8,5 +8,5 @@ export const meta = {
     "Counting"
   ],
   "accent": "#0891b2",
-  "description": "Count pairs of distinct songs whose total duration is divisible by sixty."
+  "description": "Count pairs of songs whose durations sum to a multiple of sixty. Songs are grouped by their remainder and each group is matched with its complement."
 };

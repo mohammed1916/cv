@@ -8,5 +8,5 @@ export const meta = {
     "Enumeration"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether rearranging digits can form a power of two."
+  "description": "Decide whether the digits of a number can be rearranged into a power of two. The visual compares digit-count signatures against each power of two."
 };

@@ -8,5 +8,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether deleting exactly one element can leave a strictly increasing array."
+  "description": "Decide whether removing exactly one element makes the array strictly increasing. The visual shows the array as tiles, highlights the first violating pair, and tests removal on each side of it.",
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Monotonic Stack"
   ],
   "accent": "#0891b2",
-  "description": "Count people visible to the right of every person."
+  "description": "Count how many people each person can see to their right, where a taller person blocks those behind them. The visual shows heights as bars with a stack of candidates and arrows to the people each one can see.",
 };

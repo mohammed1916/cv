@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Load a limited number of boxes to maximize total units."
+  "description": "Load boxes onto a truck with a limited box capacity to maximize total units. The visual sorts boxes by units per box and fills the truck from the top down."
 };

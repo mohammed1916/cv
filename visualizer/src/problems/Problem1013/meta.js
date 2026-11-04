@@ -8,5 +8,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether two cuts create three nonempty parts with equal sums."
+  "description": "Decide whether two cuts split the array into three nonempty pieces of equal sum. The visual marks the running total and the cut points as the scan moves forward."
 };

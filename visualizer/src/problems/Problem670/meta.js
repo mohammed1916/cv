@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Maximize a number using at most one swap of two digits."
+  "description": "Make a number as large as possible by swapping two of its digits once. The visual scans digits from the right to record the largest later digit and swaps the first smaller digit found."
 };

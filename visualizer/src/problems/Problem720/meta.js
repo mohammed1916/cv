@@ -7,5 +7,5 @@ export const meta = {
     "Trie"
   ],
   "accent": "#0891b2",
-  "description": "Find the longest dictionary word buildable one character at a time from other dictionary words."
+  "description": "Find the longest word that can be built one letter at a time from other words in the list. The visual adds words in order and extends only those whose prefixes exist."
 };

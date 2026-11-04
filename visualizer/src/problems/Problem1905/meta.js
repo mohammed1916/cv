@@ -8,5 +8,5 @@ export const meta = {
     "Matrix"
   ],
   "accent": "#0891b2",
-  "description": "Count grid-two islands entirely contained inside grid-one land."
+  "description": "Count islands in the second grid that are entirely made of land cells of the first grid. The visual places both grids side by side, flood-fills each island, and marks cells that fall outside the first grid.",
 };

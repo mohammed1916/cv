@@ -1,1 +1,1 @@
-export const meta = { number: '66', title: 'Plus One', slug: 'plus-one', difficulty: 'Easy', tags: ['Array', 'Math'] }
+export const meta = { number: '66', title: 'Plus One', slug: 'plus-one', difficulty: 'Easy', tags: ['Array', 'Math'] , description: "Treat a digit array as one big number and add one to it. The visual walks from the last digit, carrying the overflow leftward until a digit absorbs it."}

@@ -7,5 +7,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Find the key with the longest individual press, resolving ties toward the greatest character."
+  "description": "Find which key was held longest, using the release times to derive each press duration. The visual lays the presses on a timeline and highlights the longest bar."
 };

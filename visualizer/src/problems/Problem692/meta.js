@@ -7,5 +7,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Return the k most frequent words, resolving ties alphabetically."
+  "description": "Pick the k most common words, breaking ties alphabetically. The visual tallies counts, then orders words by frequency and then by spelling."
 };

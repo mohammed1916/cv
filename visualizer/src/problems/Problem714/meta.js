@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Maximize profit with any number of nonoverlapping stock trades and a fee per sale."
+  "description": "Maximize profit from unlimited trades where each completed sale pays a fee. The visual tracks two running states, holding a share or holding cash."
 };

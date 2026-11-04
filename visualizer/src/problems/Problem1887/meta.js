@@ -7,5 +7,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Count reductions needed to make every value equal by repeatedly lowering a maximum to the next distinct value."
+  "description": "Count the operations needed to make every value equal when the current largest value is lowered to the next smaller distinct value. The visual shows bars sorted by height with a step pointer lowering the tallest group and a running operation count.",
 };

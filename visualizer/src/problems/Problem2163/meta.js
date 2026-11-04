@@ -8,5 +8,5 @@ export const meta = {
     "Prefix Sum"
   ],
   "accent": "#0891b2",
-  "description": "Remove one third of the values to minimize the first retained half sum minus the second."
+  "description": "Remove one third of the values to make the sum of the lower retained half as small as possible relative to the upper half. The visual sorts the values and sweeps a split point."
 };

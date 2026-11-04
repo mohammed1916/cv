@@ -7,5 +7,5 @@ export const meta = {
     "Monotonic Stack"
   ],
   "accent": "#0891b2",
-  "description": "Count subarrays whose first value is no greater than every later value in that subarray."
+  "description": "Count subarrays whose first value is no larger than every later value in that subarray. A monotonic stack shows how far each value can extend to the right."
 };

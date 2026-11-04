@@ -7,5 +7,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Determine whether the two equal-length halves contain the same number of vowels."
+  "description": "Check whether the vowel count in the first half matches the vowel count in the second half. The visual splits the string in the middle and marks each vowel on both sides."
 };

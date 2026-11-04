@@ -7,5 +7,5 @@ export const meta = {
     "Math"
   ],
   "accent": "#0891b2",
-  "description": "Count odd integers in an inclusive interval."
+  "description": "Count odd integers in a range using arithmetic on the endpoints rather than scanning every number. The visual marks the odd values on a number line.",
 };

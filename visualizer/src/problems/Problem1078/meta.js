@@ -7,5 +7,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Collect each word immediately following the requested two-word phrase."
+  "description": "Collect every word that immediately follows a given two-word phrase in a sentence. The visual highlights each matching triple as the scan moves along the words."
 };

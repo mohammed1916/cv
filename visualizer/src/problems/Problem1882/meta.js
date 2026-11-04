@@ -7,5 +7,5 @@ export const meta = {
     "Simulation"
   ],
   "accent": "#0891b2",
-  "description": "Assign arriving tasks to servers using weight and index priority while preserving task order."
+  "description": "Assign each arriving task to a free server, preferring the lowest weight and then the lowest index, and queue tasks when all servers are busy. The visual shows idle and busy servers as two pools with tasks moving between them along a timeline.",
 };

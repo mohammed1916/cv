@@ -7,5 +7,5 @@ export const meta = {
     "Graph"
   ],
   "accent": "#0891b2",
-  "description": "Find the smallest starting-vertex set reaching every vertex of a directed acyclic graph."
+  "description": "Find the smallest set of starting nodes that can reach the whole graph by collecting nodes with no incoming edges. The visual highlights nodes that have an incoming arrow.",
 };

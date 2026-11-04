@@ -8,5 +8,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Choose k scores with the smallest difference between highest and lowest."
+  "description": "Choose k scores with the smallest possible spread between highest and lowest. The visual sorts the scores and slides a window of length k across them."
 };

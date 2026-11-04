@@ -8,5 +8,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Find the earliest timestamp when every person belongs to one friendship network."
+  "description": "Find the earliest timestamp when everyone is connected through friendships added in time order. Groups merge as each friendship arrives until one group remains."
 };

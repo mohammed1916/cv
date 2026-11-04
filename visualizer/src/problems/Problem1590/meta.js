@@ -7,5 +7,5 @@ export const meta = {
     "Prefix Sum"
   ],
   "accent": "#0891b2",
-  "description": "Remove the shortest proper subarray so the remaining sum is divisible by p."
+  "description": "Remove the shortest proper subarray so the remaining total divides by p by tracking prefix remainders. The visual marks the remainders and the best removal window.",
 };

@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Choose an empty seat maximizing its distance to the nearest occupied seat."
+  "description": "Choose an empty seat that is as far as possible from the nearest occupied seat. The visual measures the gaps between occupied seats and places the candidate in the widest gap."
 };

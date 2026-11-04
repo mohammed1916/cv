@@ -7,5 +7,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Sort even-index values ascending and odd-index values descending."
+  "description": "Sort the values at even indices in ascending order and the values at odd indices in descending order. The visual separates the two index classes and sorts each lane on its own."
 };

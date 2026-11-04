@@ -7,5 +7,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Enumerate spreadsheet cells in a rectangular range by column then row."
+  "description": "List the spreadsheet cells inside a rectangular range, ordered by column and then by row. The visual fills the range column by column and labels each cell."
 };

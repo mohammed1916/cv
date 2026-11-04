@@ -8,5 +8,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Order sentence words by length while preserving ties and sentence capitalization."
+  "description": "Reorder the words of a sentence by length, keeping original order for equal lengths, and restore the capital letter. The visual sorts word tiles by length."
 };

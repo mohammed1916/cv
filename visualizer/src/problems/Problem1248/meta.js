@@ -7,5 +7,5 @@ export const meta = {
     "Prefix Sum"
   ],
   "accent": "#0891b2",
-  "description": "Count contiguous subarrays containing exactly k odd numbers."
+  "description": "Count contiguous subarrays that contain exactly k odd numbers. The visual marks the odd positions and counts the runs of even numbers between them."
 };

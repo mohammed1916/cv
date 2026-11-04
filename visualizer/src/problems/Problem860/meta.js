@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Serve every customer with exact change."
+  "description": "Serve customers one at a time with $5 drinks, accepting $5, $10 or $20 bills and giving correct change. The visual tracks the count of each bill as change is given out."
 };

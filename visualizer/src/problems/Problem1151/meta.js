@@ -7,5 +7,5 @@ export const meta = {
     "Sliding Window"
   ],
   "accent": "#0891b2",
-  "description": "Minimize arbitrary swaps needed to group all ones together."
+  "description": "Find the fewest swaps needed to bring every one in a binary array next to each other. The visual slides a window as wide as the number of ones and tracks how many ones it already holds."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Stack rotatable cuboids for maximum total height while respecting all three dimension limits."
+  "description": "Stack cuboids so the height is maximized while every box in the stack fits under the one beneath it in all rotations. The visual sorts each box's dimensions and builds a chain of stacked boxes."
 };

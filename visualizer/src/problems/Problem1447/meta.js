@@ -7,5 +7,5 @@ export const meta = {
     "Math"
   ],
   "accent": "#0891b2",
-  "description": "List all reduced positive proper fractions with denominator at most n."
+  "description": "List all reduced fractions between zero and one whose denominator is at most n. The visual places the fractions on a number line."
 };

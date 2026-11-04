@@ -8,5 +8,5 @@ export const meta = {
     "Binary Tree"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether every node has the same value as the root."
+  "description": "Decide whether every node in a binary tree holds the same value as the root. The visual colours each node and flags any that differ."
 };

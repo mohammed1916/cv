@@ -7,5 +7,5 @@ export const meta = {
     "Graph"
   ],
   "accent": "#0891b2",
-  "description": "Find the greatest number of distinct roads incident to a pair of cities."
+  "description": "Find the largest number of roads touching any pair of cities by using degree counts and checking whether the pair is directly connected. The visual highlights the pair and its incident roads.",
 };

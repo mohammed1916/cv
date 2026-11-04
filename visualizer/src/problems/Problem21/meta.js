@@ -1,1 +1,1 @@
-export const meta = { number: '21', title: 'Merge Two Sorted Lists', slug: 'merge-two-sorted-lists', difficulty: 'Easy', tags: ['LinkedList'] }
+export const meta = { number: '21', title: 'Merge Two Sorted Lists', slug: 'merge-two-sorted-lists', difficulty: 'Easy', tags: ['LinkedList'], description: "Splice two already-ordered linked lists into one ordered chain by repeatedly attaching the smaller front node." }

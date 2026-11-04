@@ -8,5 +8,5 @@ export const meta = {
     "Coordinate Compression"
   ],
   "accent": "#0891b2",
-  "description": "Measure the newly painted length each day despite overlapping half-open intervals."
+  "description": "Track how much newly painted length is added on each day when painting intervals overlap. The visual shows each day's segment and which parts were already covered."
 };

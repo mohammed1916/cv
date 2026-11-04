@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Find the shortest suffix-based reference encoding length, including separators."
+  "description": "Find the shortest text made of words joined by a separator, where each word is stored as a suffix of that text. The visual inserts reversed words into a trie and counts the leaves that survive."
 };

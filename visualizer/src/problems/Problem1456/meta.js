@@ -7,5 +7,5 @@ export const meta = {
     "Sliding Window"
   ],
   "accent": "#0891b2",
-  "description": "Find the greatest vowel count among length-k substrings."
+  "description": "Find the largest number of vowels in any window of fixed length k within a string. The visual slides the window and tracks the vowel count."
 };

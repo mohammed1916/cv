@@ -8,5 +8,5 @@ export const meta = {
     "Stack"
   ],
   "accent": "#0891b2",
-  "description": "Remove the outermost pair from each primitive balanced-parentheses section."
+  "description": "Remove the outer pair from every primitive balanced block in a parentheses string. A depth counter shows when each outer layer opens and closes."
 };

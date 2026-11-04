@@ -8,5 +8,5 @@ export const meta = {
     "Matrix"
   ],
   "accent": "#0891b2",
-  "description": "Count axis-aligned rectangles whose four corners are ones."
+  "description": "Count rectangles whose four corners all sit on ones in a grid. The visual pairs rows and counts shared columns between them."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Partition the array into blocks of length at most k to maximize the sum after each block is replaced by its maximum."
+  "description": "Split an array into contiguous blocks of at most k elements, replace each block by its maximum, and maximize the total. A dynamic table records the best total for each prefix length."
 };

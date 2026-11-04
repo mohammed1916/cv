@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Find classes with at least five enrolled students."
+  "description": "Report every class that has at least five students enrolled. The visual tallies enrollment rows per class and highlights the classes whose count reaches the cutoff."
 };

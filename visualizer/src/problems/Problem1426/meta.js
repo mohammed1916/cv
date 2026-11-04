@@ -7,5 +7,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Count array occurrences whose value plus one also appears."
+  "description": "Count how many values in an array have their successor also present in the array. The visual marks each value and links it to value plus one when that value exists."
 };

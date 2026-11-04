@@ -1,1 +1,1 @@
-export const meta = { number: '78', title: 'Subsets', slug: 'subsets', difficulty: 'Medium', tags: ['Backtracking', 'Bit Manipulation'] }
+export const meta = { number: '78', title: 'Subsets', slug: 'subsets', difficulty: 'Medium', tags: ['Backtracking', 'Bit Manipulation'], description: "Generate every subset of a list of distinct numbers by deciding include or skip for each element. The visual draws a branching tree where each root-to-leaf path becomes one collected subset." }

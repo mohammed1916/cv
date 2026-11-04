@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Count permutations in which no position keeps its original item."
+  "description": "Count permutations in which no element stays in its original position. The visual shows the recurrence building up from small sizes and the chain of swapped positions."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Count experiments for every platform and experiment-name combination."
+  "description": "Count experiments for every platform and experiment-name combination. The visual groups rows into a grid of platforms and names and shows the count in each cell."
 };

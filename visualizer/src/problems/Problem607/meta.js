@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Find salespeople who have never handled an order for company RED."
+  "description": "Find the salespeople who never handled an order tied to the RED company. The visual marks salespeople who appear in red-linked orders and keeps the rest."
 };

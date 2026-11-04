@@ -7,5 +7,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Count words that use only allowed characters."
+  "description": "Count words where every letter appears in an allowed set. The visual marks each word's letters against the allowed characters."
 };

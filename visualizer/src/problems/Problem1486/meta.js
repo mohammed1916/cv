@@ -7,5 +7,5 @@ export const meta = {
     "Bit Manipulation"
   ],
   "accent": "#0891b2",
-  "description": "Compute the XOR of n values defined by start plus twice their index."
+  "description": "Compute the XOR of n values, where each value is start plus twice its index. The visual lists the values and folds them into a running XOR."
 };

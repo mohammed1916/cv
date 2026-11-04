@@ -7,5 +7,5 @@ export const meta = {
     "Counting"
   ],
   "accent": "#0891b2",
-  "description": "Find x such that exactly x array entries are at least x."
+  "description": "Find the value x where exactly x numbers are at least x by sorting and testing candidates. The visual places the sorted values against the candidate line.",
 };

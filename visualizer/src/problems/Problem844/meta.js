@@ -7,5 +7,5 @@ export const meta = {
     "Stack"
   ],
   "accent": "#0891b2",
-  "description": "Compare the final texts after treating # as backspace."
+  "description": "Compare two strings after applying their backspace markers and check whether the final texts match. The visual scans from the end and skips characters that a marker deletes."
 };

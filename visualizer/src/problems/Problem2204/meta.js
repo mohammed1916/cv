@@ -8,5 +8,5 @@ export const meta = {
     "Breadth-First Search"
   ],
   "accent": "#0891b2",
-  "description": "Find each vertex distance to the unique cycle of a connected undirected graph."
+  "description": "For each vertex, find its distance to the unique cycle in a connected undirected graph. The visual peels off the tree branches and marks the cycle vertices."
 };

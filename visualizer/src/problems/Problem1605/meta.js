@@ -8,5 +8,5 @@ export const meta = {
     "Matrix"
   ],
   "accent": "#0891b2",
-  "description": "Construct a nonnegative matrix matching all row and column totals."
+  "description": "Build a matrix whose rows and columns match given totals by greedily assigning the smaller of the remaining row and column sums. The visual fills cells and reduces the remaining totals.",
 };

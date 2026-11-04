@@ -7,5 +7,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Find the greatest rectangle area after full horizontal and vertical cake cuts."
+  "description": "Find the largest rectangular piece of cake left after horizontal and vertical cuts. The visual draws the grid lines and highlights the largest gap in each direction."
 };

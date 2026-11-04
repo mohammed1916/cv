@@ -1,1 +1,1 @@
-export const meta = { number: '52', title: 'N-Queens II', slug: 'n-queens-ii', difficulty: 'Hard', tags: ['Backtracking'] }
+export const meta = { number: '52', title: 'N-Queens II', slug: 'n-queens-ii', difficulty: 'Hard', tags: ['Backtracking'], description: "Count the valid n-queens placements on an n by n board. The visual builds placements row by row and counts each completed board without storing it." }

@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Normalize names to first-letter uppercase and remaining-letter lowercase, ordered by user ID."
+  "description": "Capitalize the first letter of each name and lowercase the rest, then sort by user id. The visual shows each name being transformed letter by letter and rows reordering by id."
 };

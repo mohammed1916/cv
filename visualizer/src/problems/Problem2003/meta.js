@@ -7,5 +7,5 @@ export const meta = {
     "Tree"
   ],
   "accent": "#0891b2",
-  "description": "Find the smallest missing positive genetic value in every subtree."
+  "description": "For each node of a tree, find the smallest positive genetic value missing from its subtree. The visual walks the path to the node holding value 1 and marks which values are present."
 };

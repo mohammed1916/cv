@@ -8,5 +8,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Minimize the total cost of joining all sticks into one."
+  "description": "Join all sticks into one by repeatedly combining two of them, where each join costs the sum of their lengths, and minimize the total cost. The visual shows a min-heap of stick lengths and each merge it performs."
 };

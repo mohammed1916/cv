@@ -1,1 +1,1 @@
-export const meta = { number: '81', title: 'Search Rotated Array II', slug: 'search-in-rotated-sorted-array-ii', difficulty: 'Medium', tags: ['Array', 'Binary Search'] }
+export const meta = { number: '81', title: 'Search Rotated Array II', slug: 'search-in-rotated-sorted-array-ii', difficulty: 'Medium', tags: ['Array', 'Binary Search'], description: "Search a rotated sorted array that may contain repeated values for a target. The visual marks the midpoint, shows which half is sorted, and narrows the range while handling duplicate edges." }

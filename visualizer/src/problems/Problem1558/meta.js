@@ -7,5 +7,5 @@ export const meta = {
     "Bit Manipulation"
   ],
   "accent": "#0891b2",
-  "description": "Minimize individual increments and global doublings needed to build the target array."
+  "description": "Count operations to build a target array from zeros using single increments and global doublings. The visual tracks the bits of each value and the doubling rounds.",
 };

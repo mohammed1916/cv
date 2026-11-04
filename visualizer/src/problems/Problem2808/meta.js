@@ -8,6 +8,6 @@ export const meta = {
     "Hash Table",
     "Enumeration"
   ],
-  "description": "Group equal values by position; each value needs half its largest cyclic gap in seconds.",
+  "description": "Find the fewest seconds needed to make every value in a circular array equal when each value can copy a neighbour each second. The visual groups equal values by position and shows colour spreading around the ring.",
   "accent": "#0ea5e9"
 }

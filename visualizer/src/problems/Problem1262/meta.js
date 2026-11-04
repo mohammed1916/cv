@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Find the greatest subset sum divisible by three."
+  "description": "Find the largest sum of a subset of the array whose total is divisible by three. The visual tracks the best sum for each remainder class as each value is considered."
 };

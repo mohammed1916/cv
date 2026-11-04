@@ -8,5 +8,5 @@ export const meta = {
     "Graph"
   ],
   "accent": "#0891b2",
-  "description": "Remove the latest eligible directed edge so the remaining graph becomes a rooted tree."
+  "description": "Remove one directed edge so the remaining graph forms a single rooted tree. The visual highlights parent conflicts and cycles, then shows which edge is dropped."
 };

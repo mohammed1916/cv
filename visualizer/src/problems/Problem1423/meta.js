@@ -7,5 +7,5 @@ export const meta = {
     "Sliding Window"
   ],
   "accent": "#0891b2",
-  "description": "Maximize points by taking exactly k cards from the two ends."
+  "description": "Take exactly k cards from either end of a row to maximise the total points. The visual shows the left and right windows of taken cards sliding across the row."
 };

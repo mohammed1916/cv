@@ -1,1 +1,1 @@
-export const meta = { number: '77', title: 'Combinations', slug: 'combinations', difficulty: 'Medium', tags: ['Backtracking'] }
+export const meta = { number: '77', title: 'Combinations', slug: 'combinations', difficulty: 'Medium', tags: ['Backtracking'] , description: "List every group of k numbers chosen from one to n. The visual builds each group by adding numbers and backtracking when a branch is finished."}

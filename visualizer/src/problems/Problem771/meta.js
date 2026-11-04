@@ -7,5 +7,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Count stones whose case-sensitive type occurs in the jewel set."
+  "description": "Given a set of jewel letters, tally how many letters in a second collection are jewels. Each stone is checked against a lookup set and the running count grows as matches are found."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Return the name of the candidate receiving the most votes."
+  "description": "Return the name of the candidate with the most votes. The visual tallies votes per candidate ID and joins the winning ID to its name."
 };

@@ -1,1 +1,1 @@
-export const meta = { number: '57', title: 'Insert Interval', slug: 'insert-interval', difficulty: 'Medium', tags: ['Array'] }
+export const meta = { number: '57', title: 'Insert Interval', slug: 'insert-interval', difficulty: 'Medium', tags: ['Array'], description: "Insert a new interval into a sorted list of non-overlapping intervals and merge any overlaps. The visual keeps the intervals before the insertion, merges those touching the new one, and appends the rest." }

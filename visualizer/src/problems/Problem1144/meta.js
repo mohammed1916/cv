@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Minimize decrements needed to make values alternate between peaks and valleys."
+  "description": "Decide which positions to lower by one so that the array alternates between smaller and larger neighbours, counting the fewest decrements for each pattern. The visual compares both alternating patterns side by side with the cost at each position."
 };

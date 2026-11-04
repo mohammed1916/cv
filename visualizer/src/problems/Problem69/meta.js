@@ -1,1 +1,1 @@
-export const meta = { number: '69', title: 'Sqrt(x)', slug: 'sqrtx', difficulty: 'Easy', tags: ['Math', 'Binary Search'] }
+export const meta = { number: '69', title: 'Sqrt(x)', slug: 'sqrtx', difficulty: 'Easy', tags: ['Math', 'Binary Search'] , description: "Find the largest whole number whose square does not exceed a given value. The visual narrows a range by halves and checks each midpoint's square."}

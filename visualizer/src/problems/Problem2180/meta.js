@@ -7,5 +7,5 @@ export const meta = {
     "Math"
   ],
   "accent": "#0891b2",
-  "description": "Count positive integers up to num with an even digit sum."
+  "description": "Count positive integers up to a limit whose digits add up to an even number. The visual walks through digit ranges and uses the parity of the digit sum to count them."
 };

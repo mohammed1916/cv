@@ -1,1 +1,1 @@
-export const meta = { number: '63', title: 'Unique Paths II', slug: 'unique-paths-ii', difficulty: 'Medium', tags: ['DP', 'Array'] }
+export const meta = { number: '63', title: 'Unique Paths II', slug: 'unique-paths-ii', difficulty: 'Medium', tags: ['DP', 'Array'], description: "Count the monotone routes across a grid where some cells are blocked. The visual fills the same grid as before but zeroes out any blocked cell and its contribution." }

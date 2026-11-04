@@ -7,5 +7,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Find words that occur as substrings of another input word."
+  "description": "Return every word that appears inside another word of the list. The visual compares each word against the others and highlights the matched substrings."
 };

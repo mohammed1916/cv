@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether the robot returns to its starting position."
+  "description": "Decide whether a sequence of moves brings the robot back to its starting cell. The visual tracks the position on a grid and checks whether it lands on the origin at the end."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Array"
   ],
   "accent": "#0d9488",
-  "description": "Use independent write pointers for even and odd output indices. Each pointer advances by two."
+  "description": "Rearrange a list so that even values sit at even indices and odd values sit at odd indices. The visual moves two markers along the index slots in steps of two."
 };

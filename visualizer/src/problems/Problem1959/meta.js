@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Minimize wasted capacity with at most k resizing operations."
+  "description": "Split the demand sequence into at most k+1 contiguous blocks, where each block's capacity is its largest value, and minimize the total unused capacity. The visual builds the block partition and tallies the wasted space for each choice."
 };

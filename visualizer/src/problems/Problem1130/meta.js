@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Build an ordered leaf tree with minimum total nonleaf cost."
+  "description": "Build a tree from an ordered list of leaf values so that the total cost of its nonleaf nodes is as small as possible. Adjacent pairs are merged with the smaller product first."
 };

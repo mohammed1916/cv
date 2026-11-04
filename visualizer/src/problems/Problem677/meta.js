@@ -8,5 +8,5 @@ export const meta = {
     "Design"
   ],
   "accent": "#0891b2",
-  "description": "Maintain key values and answer sums over every key sharing a prefix."
+  "description": "Store key-value pairs and answer the total of all values whose keys start with a prefix. The visual walks a prefix trie and highlights the nodes that contribute to each sum."
 };

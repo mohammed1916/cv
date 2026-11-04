@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Count length-n phone-number sequences made by knight moves on a keypad."
+  "description": "Count digit sequences of a given length that can be typed by moving a chess knight across a phone keypad. The visual shows the keypad with the number of sequences ending at each digit updated per step."
 };

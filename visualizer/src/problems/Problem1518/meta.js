@@ -7,5 +7,5 @@ export const meta = {
     "Simulation"
   ],
   "accent": "#0891b2",
-  "description": "Count bottles drinkable using repeated exchanges of empty bottles."
+  "description": "Count how many bottles can be drunk when empty bottles can be exchanged for new full ones. The visual shows drink and exchange steps reducing the empty count.",
 };

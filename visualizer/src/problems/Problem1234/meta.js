@@ -7,5 +7,5 @@ export const meta = {
     "Sliding Window"
   ],
   "accent": "#0891b2",
-  "description": "Find the shortest substring whose replacement makes Q W E and R equally frequent."
+  "description": "Find the shortest substring that, when replaced, leaves four letter types equally frequent in a string. The visual shows the excess count of each letter and a sliding window that shrinks while the balance holds."
 };

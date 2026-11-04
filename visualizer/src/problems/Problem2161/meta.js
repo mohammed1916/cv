@@ -7,5 +7,5 @@ export const meta = {
     "Array"
   ],
   "accent": "#0891b2",
-  "description": "Partition values around a pivot while preserving order within each group."
+  "description": "Reorder the values so those below a pivot come first, equal values follow, and those above come last, keeping each group in its original order. The visual splits the array into three lanes."
 };

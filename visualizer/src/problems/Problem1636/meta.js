@@ -8,5 +8,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Sort values by increasing frequency and by decreasing value when frequencies tie."
+  "description": "Reorder values so the rarest ones come first, breaking ties by larger value first. The visual counts each value and bins them into frequency groups before sorting."
 };

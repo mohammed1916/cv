@@ -7,5 +7,5 @@ export const meta = {
     "Monotonic Stack"
   ],
   "accent": "#0891b2",
-  "description": "Apply the first subsequent no-greater price as each item discount."
+  "description": "For each item, find the discount from the first later price that is no greater than it. The visual uses a stack to match each price with its discount."
 };

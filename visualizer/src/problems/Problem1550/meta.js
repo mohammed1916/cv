@@ -7,5 +7,5 @@ export const meta = {
     "Array"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether three consecutive values are all odd."
+  "description": "Decide whether three neighbouring values are all odd by scanning a sliding window of length three. The visual slides the window along the array.",
 };

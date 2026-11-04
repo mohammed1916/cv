@@ -7,5 +7,5 @@ export const meta = {
     "Math"
   ],
   "accent": "#0891b2",
-  "description": "Determine whether n has exactly three positive divisors."
+  "description": "Decide whether a number has exactly three positive divisors. The visual counts divisors up to the square root and shows that only squares of primes reach a count of three.",
 };

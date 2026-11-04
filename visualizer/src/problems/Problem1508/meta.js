@@ -7,5 +7,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Sum the requested rank range of sorted contiguous-subarray sums."
+  "description": "Sum the requested slice of all contiguous subarray sums after sorting them. The visual lists the subarray sums in order and highlights the chosen rank range.",
 };

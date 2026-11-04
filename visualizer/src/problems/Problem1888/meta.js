@@ -7,5 +7,5 @@ export const meta = {
     "Sliding Window"
   ],
   "accent": "#0891b2",
-  "description": "Minimize bit flips to make some cyclic rotation alternate."
+  "description": "Find the fewest flips that turn some cyclic rotation of a binary string into an alternating string. The visual slides a window across the doubled string and tracks the flip counts for both alternating patterns.",
 };

@@ -7,5 +7,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Replace question marks so no neighboring characters are equal."
+  "description": "Fill each question mark with a letter so no two neighbouring characters match by choosing a letter that differs from both neighbours. The visual shows each choice made from left to right.",
 };

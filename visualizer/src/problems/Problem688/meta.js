@@ -8,5 +8,5 @@ export const meta = {
     "Probability"
   ],
   "accent": "#0891b2",
-  "description": "Find the probability that a knight remains on the board after exactly k random moves."
+  "description": "Estimate the chance a knight still stands on the board after a fixed number of random moves. The visual spreads probability mass across the squares step by step."
 };

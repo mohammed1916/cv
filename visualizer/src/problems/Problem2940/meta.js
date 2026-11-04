@@ -8,5 +8,5 @@ export const meta = {
     "Binary Search"
   ],
   "accent": "#0891b2",
-  "description": "Find the leftmost building where each pair can meet by moving right to strictly taller buildings."
+  "description": "For each pair of query positions, find the leftmost building where both can meet by moving right to a taller building. The visual places query markers on the height bars and shows the candidate building for each pair."
 };

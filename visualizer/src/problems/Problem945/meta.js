@@ -8,5 +8,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Make every integer unique with the fewest increments."
+  "description": "Increase some numbers as little as possible so that every number in the list becomes different. The visual shows sorted values with bumps pushing duplicates forward."
 };

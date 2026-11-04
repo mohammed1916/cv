@@ -8,5 +8,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Find the greatest perimeter of a nondegenerate triangle."
+  "description": "Pick three sticks that form a nondegenerate triangle and maximise the perimeter. The visual sorts the lengths and tests the triangle inequality from the largest side down."
 };

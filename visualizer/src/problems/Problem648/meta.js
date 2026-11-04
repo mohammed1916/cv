@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Replace each sentence word by its shortest dictionary root."
+  "description": "Replace each word in a sentence with the shortest dictionary root that it starts with. The visual checks each prefix of a word against the root set and swaps in the first match."
 };

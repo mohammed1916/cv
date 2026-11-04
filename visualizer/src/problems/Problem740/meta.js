@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Maximize points when taking a value removes all occurrences of its neighboring values."
+  "description": "Choose values to earn points, where taking one value forbids its immediate neighbours. The visual groups equal values into buckets and runs a take-or-skip choice."
 };

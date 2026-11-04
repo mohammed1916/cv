@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Find the shortest Euclidean distance between distinct planar points, rounded to two decimals."
+  "description": "Find the shortest straight-line distance among a set of distinct points, rounded to two decimals. The visual draws candidate pairs and keeps the closest one found so far."
 };

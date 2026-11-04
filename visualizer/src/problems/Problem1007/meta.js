@@ -8,5 +8,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Find the fewest domino rotations that make either row uniform."
+  "description": "Find the fewest domino rotations that make one row show a single value. Two candidate values are tested and the rotations needed for each row are counted."
 };

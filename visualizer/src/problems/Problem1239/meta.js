@@ -7,5 +7,5 @@ export const meta = {
     "Backtracking"
   ],
   "accent": "#0891b2",
-  "description": "Find the longest concatenation of a subsequence whose characters are all distinct."
+  "description": "Choose a subset of the given strings whose concatenation uses no repeated letter, maximizing the total length. The visual branches on each string and prunes any choice that would repeat a character."
 };

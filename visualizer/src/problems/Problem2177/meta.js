@@ -7,5 +7,5 @@ export const meta = {
     "Math"
   ],
   "accent": "#0891b2",
-  "description": "Find three consecutive integers whose sum equals the requested number."
+  "description": "Find three consecutive integers whose sum equals the target, or report that none exist. The visual centres the sum on the middle value and checks it against the target."
 };

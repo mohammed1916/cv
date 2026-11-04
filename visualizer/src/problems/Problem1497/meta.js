@@ -7,5 +7,5 @@ export const meta = {
     "Counting"
   ],
   "accent": "#0891b2",
-  "description": "Pair all array positions so each pair sum is divisible by k."
+  "description": "Walk through each number's remainder modulo k and pair complementary remainders to see whether every position can be matched. The visual highlights each pairing as it forms.",
 };

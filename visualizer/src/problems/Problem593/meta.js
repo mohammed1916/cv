@@ -8,5 +8,5 @@ export const meta = {
     "Geometry"
   ],
   "accent": "#0891b2",
-  "description": "Determine whether four unordered points are the vertices of a nondegenerate square."
+  "description": "Decide whether four unlabeled points can be arranged as a square with no degenerate corners. The visual compares all six pairwise distances and checks that the shortest ones match and the diagonals are larger by the right ratio."
 };

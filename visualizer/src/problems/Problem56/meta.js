@@ -1,1 +1,1 @@
-export const meta = { number: '56', title: 'Merge Intervals', slug: 'merge-intervals', difficulty: 'Medium', tags: ['Array'] }
+export const meta = { number: '56', title: 'Merge Intervals', slug: 'merge-intervals', difficulty: 'Medium', tags: ['Array'], description: "Merge overlapping intervals and return the non-overlapping result. The visual sorts intervals by start and extends the current block while the next interval overlaps it." }

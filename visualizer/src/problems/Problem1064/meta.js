@@ -7,5 +7,5 @@ export const meta = {
     "Binary Search"
   ],
   "accent": "#0891b2",
-  "description": "Find the smallest index whose array value equals that index."
+  "description": "Find the smallest index whose array value equals that index, or report none. A binary search narrows the range using the comparison between value and index."
 };

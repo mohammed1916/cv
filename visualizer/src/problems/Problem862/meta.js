@@ -7,5 +7,5 @@ export const meta = {
     "Monotonic Queue"
   ],
   "accent": "#0891b2",
-  "description": "Find the shortest nonempty subarray with sum at least k even when values are negative."
+  "description": "Find the shortest contiguous block whose sum reaches a target, even when some values are negative. The visual maintains prefix sums and a monotonic queue of candidate start points."
 };

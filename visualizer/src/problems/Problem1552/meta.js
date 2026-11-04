@@ -7,5 +7,5 @@ export const meta = {
     "Binary Search"
   ],
   "accent": "#0891b2",
-  "description": "Place m balls to maximize the minimum distance between any pair."
+  "description": "Place balls to maximize the smallest gap between any two by binary searching on the distance. The visual shows the gap candidate and the placements it allows.",
 };

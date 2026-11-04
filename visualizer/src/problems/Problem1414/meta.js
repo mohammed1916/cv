@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Use the fewest Fibonacci numbers whose sum equals k."
+  "description": "Find the fewest Fibonacci numbers that add up to a target value. The visual lays out the Fibonacci sequence and greedily subtracts the largest term that still fits."
 };

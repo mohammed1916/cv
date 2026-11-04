@@ -7,5 +7,5 @@ export const meta = {
     "Binary Search"
   ],
   "accent": "#0891b2",
-  "description": "Find the earliest day that supplies m disjoint bouquets of k adjacent flowers."
+  "description": "Find the earliest day on which enough bouquets of adjacent blooming flowers can be made. The visual shows flowers blooming over days and counts runs of length k."
 };

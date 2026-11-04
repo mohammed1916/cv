@@ -7,5 +7,5 @@ export const meta = {
     "Union Find"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether swaps between values sharing a factor greater than one can sort the array."
+  "description": "Decide whether values can be sorted when swaps are allowed between values sharing a common factor above one. The visual links values to their prime factors with union-find."
 };

@@ -8,5 +8,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Check dictionary order in a supplied alphabet."
+  "description": "Check whether a list of words is in order under a custom alphabet. The visual compares adjacent words letter by letter against the alphabet's ranks."
 };

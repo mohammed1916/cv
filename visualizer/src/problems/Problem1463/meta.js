@@ -8,5 +8,5 @@ export const meta = {
     "Matrix"
   ],
   "accent": "#0891b2",
-  "description": "Maximize cherries collected by two robots descending from opposite top corners."
+  "description": "Maximise the cherries collected by two robots that start at opposite top corners and move down the grid. The visual shows both paths on the grid and the cells they collect."
 };

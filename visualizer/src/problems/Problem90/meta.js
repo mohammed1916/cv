@@ -4,6 +4,6 @@ export const meta = {
   slug: "subsets-ii",
   difficulty: "Medium",
   tags: [],
-  description: "Subsets II visualization",
+  description: "Generate every subset of a list that may contain repeated values, without producing duplicate subsets. The visual sorts the values and skips repeats at each branching level.",
   accent: "#f59e0b",
 }

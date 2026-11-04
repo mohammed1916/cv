@@ -8,5 +8,5 @@ export const meta = {
     "Two Pointers"
   ],
   "accent": "#0891b2",
-  "description": "Find the longest repeated-character substring obtainable with at most one swap."
+  "description": "Find the longest run of a repeated character that can be extended by at most one swap with another occurrence of that character elsewhere in the string. The visual highlights runs and the swap that bridges two of them."
 };

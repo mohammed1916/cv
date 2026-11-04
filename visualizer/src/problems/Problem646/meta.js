@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Find the maximum number of strictly nonoverlapping pairs in a chain."
+  "description": "Find the largest number of pairs that can be chained so each pair starts after the previous one ends. The visual sorts the pairs by end point and greedily picks the next compatible pair."
 };

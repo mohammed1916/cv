@@ -8,5 +8,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Halve the total array sum using the fewest individual halving operations."
+  "description": "Halve the total of an array with the fewest individual halvings, always halving the largest value first. The visual keeps a max-heap of values and shows the running total shrinking."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Prefix Sum"
   ],
   "accent": "#0891b2",
-  "description": "Find the longest interval with more tiring days than other days."
+  "description": "Find the longest interval whose tiring days outnumber the other days. A running score and the first position of each score show the best window."
 };

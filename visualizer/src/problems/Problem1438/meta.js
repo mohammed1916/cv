@@ -8,5 +8,5 @@ export const meta = {
     "Monotonic Queue"
   ],
   "accent": "#0891b2",
-  "description": "Find the longest contiguous interval whose greatest and least values differ by at most limit."
+  "description": "Find the longest contiguous slice whose largest and smallest values differ by at most a limit. The visual shows a sliding window with its minimum and maximum tracked."
 };

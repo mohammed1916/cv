@@ -7,5 +7,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether rearranging values can form an arithmetic progression."
+  "description": "Decide whether the values can be reordered into equal steps by sorting and checking neighbouring differences. The visual lines the sorted values up and marks each gap.",
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "List countries meeting either the area threshold or the population threshold."
+  "description": "Select the rows whose area or population passes a fixed threshold and show them in a fixed order. The visual sweeps the table, lighting up each qualifying row and dimming the rest."
 };

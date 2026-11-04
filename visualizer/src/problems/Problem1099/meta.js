@@ -8,5 +8,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Find the greatest sum of two different positions strictly below k."
+  "description": "Find the greatest sum of two different values that stays strictly below a threshold, or report that none exists. Sorted values are paired from both ends inward."
 };

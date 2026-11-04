@@ -8,5 +8,5 @@ export const meta = {
     "Binary Tree"
   ],
   "accent": "#0891b2",
-  "description": "Serialize the tree into preorder text while preserving its exact structure."
+  "description": "Turn a binary tree into a parenthesised preorder string that keeps every empty child explicit where needed. The visual walks the tree and writes each node and bracket in order."
 };

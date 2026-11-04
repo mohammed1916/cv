@@ -1,1 +1,1 @@
-export const meta = { number: '60', title: 'Permutation Sequence', slug: 'permutation-sequence', difficulty: 'Hard', tags: ['Math', 'Backtracking'] }
+export const meta = { number: '60', title: 'Permutation Sequence', slug: 'permutation-sequence', difficulty: 'Hard', tags: ['Math', 'Backtracking'], description: "Find the k-th arrangement of the digits one through n in lexicographic order. The visual uses factorial block sizes to choose each digit in turn and removes it from the pool." }

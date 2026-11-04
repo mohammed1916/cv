@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether swapping exactly two positions in s can produce goal."
+  "description": "Decide whether swapping exactly two letters in one string can produce the other. The visual lines up both strings and highlights the mismatched positions."
 };

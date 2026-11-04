@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Count valid three-column grid colorings with adjacent cells different."
+  "description": "Count the ways to colour a three-wide grid row by row so that neighbouring cells never share a colour. The visual shows the pattern types for each row and how they carry into the next row."
 };

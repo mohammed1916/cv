@@ -7,5 +7,5 @@ export const meta = {
     "Geometry"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether all points lie on one straight line."
+  "description": "Decide whether a set of coordinate points all lie on one straight line. The visual draws the direction from the first two points and checks every other point against it."
 };

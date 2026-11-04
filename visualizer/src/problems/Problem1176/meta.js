@@ -7,5 +7,5 @@ export const meta = {
     "Sliding Window"
   ],
   "accent": "#0891b2",
-  "description": "Score every consecutive k-day calorie interval against two thresholds."
+  "description": "Slide a window of k consecutive days across calorie totals and award points by comparing each window sum with a lower and an upper threshold. The visual moves the window along the bars with its running total."
 };

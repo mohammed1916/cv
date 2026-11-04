@@ -9,6 +9,6 @@ export const meta = {
     "Greedy",
     "Counting"
   ],
-  "description": "Fixed L and R moves cancel; every underscore adds one step away from the origin.",
+  "description": "Track a walk on a number line where fixed moves are known and wildcard moves can go either way, then find the farthest reachable position from the origin. The visual splits the fixed moves from the wildcards and shows how the wildcards add distance.",
   "accent": "#6366f1"
 }

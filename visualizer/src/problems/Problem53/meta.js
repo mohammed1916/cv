@@ -1,1 +1,1 @@
-export const meta = { number: '53', title: 'Maximum Subarray', slug: 'maximum-subarray', difficulty: 'Medium', tags: ['DP', 'Array'] }
+export const meta = { number: '53', title: 'Maximum Subarray', slug: 'maximum-subarray', difficulty: 'Medium', tags: ['DP', 'Array'], description: "Find the contiguous subarray with the largest sum. The visual tracks the best sum ending at each position as a running bar that either extends the previous segment or restarts." }

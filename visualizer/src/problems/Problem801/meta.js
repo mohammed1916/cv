@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Use the fewest same-index swaps so both sequences become strictly increasing."
+  "description": "Make two aligned arrays strictly increasing using the fewest swaps of equal-index pairs. The visual tracks two running costs, one for leaving each index unswapped and one for swapping it."
 };

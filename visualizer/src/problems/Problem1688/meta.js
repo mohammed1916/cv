@@ -7,5 +7,5 @@ export const meta = {
     "Simulation"
   ],
   "accent": "#0891b2",
-  "description": "Count the matches needed to reduce a tournament to one winner."
+  "description": "Count the matches needed to leave a single winner in a knockout tournament. The visual pairs teams round by round and eliminates one per match."
 };

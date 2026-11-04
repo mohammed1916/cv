@@ -8,5 +8,5 @@ export const meta = {
     "Monotonic Stack"
   ],
   "accent": "#0891b2",
-  "description": "Report the consecutive no-higher price span for every quote."
+  "description": "Prices arrive one at a time, and each new quote asks how many consecutive quotes ending today are no higher than it. The visual shows a stack of earlier quotes shrinking as the span boundary moves."
 };

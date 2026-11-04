@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Count accounts in all three income categories, including empty categories."
+  "description": "Count accounts in the low, average and high income categories, including any category with no accounts. The visual sorts each account into one of three buckets and shows empty buckets at zero.",
 };

@@ -1,1 +1,1 @@
-export const meta = { number: '59', title: 'Spiral Matrix II', slug: 'spiral-matrix-ii', difficulty: 'Medium', tags: ['Array', 'Matrix'] }
+export const meta = { number: '59', title: 'Spiral Matrix II', slug: 'spiral-matrix-ii', difficulty: 'Medium', tags: ['Array', 'Matrix'], description: "Fill an n by n matrix with consecutive numbers in clockwise spiral order. The visual writes values along the outer boundary and shrinks inward after each side." }

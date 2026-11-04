@@ -7,5 +7,5 @@ export const meta = {
     "Sliding Window"
   ],
   "accent": "#0891b2",
-  "description": "Maximize satisfied customers using one contiguous calm interval."
+  "description": "Use a fixed-length window to recover customers during the owner's grumpy minutes and maximize the number satisfied. The window slides across the day and tracks the gain it adds."
 };

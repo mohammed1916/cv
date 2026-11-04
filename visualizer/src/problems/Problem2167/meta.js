@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Remove every illegal car with minimum cost using end removals or individual removals."
+  "description": "Remove every car carrying illegal goods at the lowest total cost, using either the ends of the line or individual removals. The visual compares the cost of clearing from each side against removing cars in the middle."
 };

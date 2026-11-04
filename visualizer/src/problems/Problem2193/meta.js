@@ -8,5 +8,5 @@ export const meta = {
     "Two Pointers"
   ],
   "accent": "#0891b2",
-  "description": "Form a palindrome using the fewest adjacent swaps."
+  "description": "Rearrange the characters of a string into a palindrome using the fewest adjacent swaps. The visual pairs the outer characters and brings matching characters together one swap at a time."
 };

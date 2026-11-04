@@ -8,5 +8,5 @@ export const meta = {
     "Design"
   ],
   "accent": "#0891b2",
-  "description": "Match streamed letters against stored words by walking a reversed trie."
+  "description": "Accept letters one at a time and report whether any stored word ends at the newest letter. The matcher walks backward through the stream against reversed stored words."
 };

@@ -8,5 +8,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Maximize score from deleting ab and ba substrings worth different amounts."
+  "description": "Remove ab and ba substrings from a string, scoring each removal with the higher-value pattern first. The visual highlights removable pairs on a stack as the string is scanned."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Matrix"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether rotating a square matrix by quarter-turns can match the target."
+  "description": "Decide whether rotating a square grid in quarter turns can make it equal the target grid. The visual rotates the matrix one quarter turn at a time and checks it cell by cell against the target.",
 };

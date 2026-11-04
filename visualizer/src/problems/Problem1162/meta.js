@@ -8,5 +8,5 @@ export const meta = {
     "Breadth-First Search"
   ],
   "accent": "#0891b2",
-  "description": "Find the water cell farthest from its nearest land cell."
+  "description": "On a grid of land and water, find the water cell whose nearest land cell is as far away as possible. The visual grows a wave outward from all land cells at once, one ring per step."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Tree"
   ],
   "accent": "#0891b2",
-  "description": "Construct the binary tree described by parent child and side triples."
+  "description": "Build a binary tree from parent, child and side triples. The visual links each parent to its child on the indicated side and marks the root with no incoming link."
 };

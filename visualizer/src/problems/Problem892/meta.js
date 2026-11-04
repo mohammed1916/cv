@@ -8,5 +8,5 @@ export const meta = {
     "Geometry"
   ],
   "accent": "#0891b2",
-  "description": "Count exposed faces of the stacked cubes."
+  "description": "Count the exposed faces of a grid of stacked unit cubes. The visual adds the top and bottom faces of each column and subtracts faces hidden between neighbouring stacks."
 };

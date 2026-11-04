@@ -8,5 +8,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Count distinct nonempty substrings rather than their occurrences."
+  "description": "Count how many different nonempty substrings a string contains. The visual lists distinct substrings as they are first seen and marks repeats that add nothing."
 };

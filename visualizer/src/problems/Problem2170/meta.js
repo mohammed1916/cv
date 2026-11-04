@@ -7,5 +7,5 @@ export const meta = {
     "Counting"
   ],
   "accent": "#0891b2",
-  "description": "Change the fewest values so every even index shares one value and every odd index another."
+  "description": "Change the fewest values so that all even positions share one value and all odd positions share another. The visual tallies the most common values in each index class and pairs the best choices."
 };

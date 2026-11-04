@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Count distinct leads and partners for each date and make."
+  "description": "Count the distinct leads and partners for each date and make in a set of event rows. The visual groups rows by date and make and shows the distinct counts."
 };

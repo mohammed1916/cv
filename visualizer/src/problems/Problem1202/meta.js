@@ -8,5 +8,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Find the lexicographically smallest string reachable through allowed index swaps."
+  "description": "Given a string and pairs of indices whose characters may be swapped freely, return the smallest string that can be reached. The visual groups indices into connected components and sorts the letters within each group."
 };

@@ -8,5 +8,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Count the fewest parentheses to insert for balance."
+  "description": "Find how many brackets must be inserted to make a string of brackets balanced. The visual pushes open brackets onto a stack and counts the closing brackets that have nothing to match."
 };

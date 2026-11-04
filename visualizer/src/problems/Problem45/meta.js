@@ -1,1 +1,1 @@
-export const meta = { number: '45', title: 'Jump Game II', slug: 'jump-game-ii', difficulty: 'Medium', tags: ['Greedy', 'Array'] }
+export const meta = { number: '45', title: 'Jump Game II', slug: 'jump-game-ii', difficulty: 'Medium', tags: ['Greedy', 'Array'], description: "Find the fewest jumps needed to reach the last index, where each value gives the maximum forward jump from its position. The visual shows reachable ranges as layers, extending the farthest reach inside each jump before committing to the next one." }

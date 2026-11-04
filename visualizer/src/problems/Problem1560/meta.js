@@ -7,5 +7,5 @@ export const meta = {
     "Simulation"
   ],
   "accent": "#0891b2",
-  "description": "Find the most visited sectors during clockwise rounds on a circular track."
+  "description": "Find which sectors are visited most when rounds run around a circular track. The visual draws the circle and colours sectors by visit count.",
 };

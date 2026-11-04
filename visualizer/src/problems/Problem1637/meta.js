@@ -7,5 +7,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Find the widest empty vertical strip between points."
+  "description": "Find the widest vertical gap between points where no point lies strictly inside. The visual sorts the x-coordinates and measures each gap between neighbours."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Reorder characters into their specified destination indices."
+  "description": "Place each character at its destination index to rebuild the string. The visual draws arrows from each original slot to its new position.",
 };

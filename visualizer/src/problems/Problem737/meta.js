@@ -7,5 +7,5 @@ export const meta = {
     "Union Find"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether two sentences match position by position under transitive word similarity."
+  "description": "Check whether two sentences match word by word when similar-word pairs may chain together. The visual joins similar words into groups and compares each position."
 };

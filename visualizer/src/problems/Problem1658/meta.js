@@ -7,5 +7,5 @@ export const meta = {
     "Sliding Window"
   ],
   "accent": "#0891b2",
-  "description": "Remove the fewest values from the array ends whose sum is x."
+  "description": "Remove a set of values from the two ends of the array so that their total equals x, using as few removals as possible. The visual finds the longest middle block whose sum equals the total minus x."
 };

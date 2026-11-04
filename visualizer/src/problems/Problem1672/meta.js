@@ -8,5 +8,5 @@ export const meta = {
     "Matrix"
   ],
   "accent": "#0d9488",
-  "description": "Sum bank balances separately for each customer. Compare completed row totals rather than individual balances."
+  "description": "Find the customer whose total across all their accounts is largest. The visual sums each customer's row of balances and highlights the largest row total."
 };

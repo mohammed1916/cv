@@ -7,5 +7,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether whole pieces can be reordered to form the target array."
+  "description": "Decide whether the target array can be built by placing the given pieces in some order, with each piece kept whole. The visual matches each target start to the piece that begins with it."
 };

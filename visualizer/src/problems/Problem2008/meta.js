@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Maximize taxi earnings from nonoverlapping rides along increasing positions."
+  "description": "Pick non-overlapping taxi rides along a line to maximize total earnings. The visual sweeps the positions and chooses between taking a ride or skipping it."
 };

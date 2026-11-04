@@ -8,5 +8,5 @@ export const meta = {
     "Divide and Conquer"
   ],
   "accent": "#0891b2",
-  "description": "Compute logical OR of two compressed binary images and compress the result."
+  "description": "Combine two compressed binary images with logical OR and return the compressed result. The visual splits both quad-trees into quadrants, lets a true region dominate, and merges equal quadrants back together."
 };

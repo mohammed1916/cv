@@ -8,5 +8,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Select words having exactly the pattern repetition structure."
+  "description": "Select the words that match a pattern under a one-to-one letter mapping. The visual builds each word's letter mapping and checks it for conflicts."
 };

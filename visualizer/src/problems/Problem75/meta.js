@@ -1,1 +1,1 @@
-export const meta = { number: '75', title: 'Sort Colors', slug: 'sort-colors', difficulty: 'Medium', tags: ['Array', 'Two Pointers'] }
+export const meta = { number: '75', title: 'Sort Colors', slug: 'sort-colors', difficulty: 'Medium', tags: ['Array', 'Two Pointers'] , description: "Sort an array holding three values in place with a single pass. The visual keeps three regions moving boundaries as elements are swapped into place."}

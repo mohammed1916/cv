@@ -7,5 +7,5 @@ export const meta = {
     "Graph"
   ],
   "accent": "#0891b2",
-  "description": "Identify a person trusted by everyone else who trusts nobody."
+  "description": "Find the single person whom everyone else trusts while that person trusts nobody. The visual draws a directed graph and tracks in-degree and out-degree counts for each person."
 };

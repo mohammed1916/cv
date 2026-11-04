@@ -7,5 +7,5 @@ export const meta = {
     "Monotonic Stack"
   ],
   "accent": "#0891b2",
-  "description": "Count subarrays whose two boundary values equal the maximum value anywhere inside."
+  "description": "Count the subarrays whose first and last values both equal the largest value inside them. The visual highlights the maximum of each window and marks matching boundary values."
 };

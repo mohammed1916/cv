@@ -8,5 +8,5 @@ export const meta = {
     "Monotonic Queue"
   ],
   "accent": "#0891b2",
-  "description": "Maximize score while jumping forward at most k positions and ending at the last index."
+  "description": "Start at index zero, jump forward up to k positions each step, and maximize the total score including the last index. The visual shows a window of the best recent scores feeding each new position."
 };

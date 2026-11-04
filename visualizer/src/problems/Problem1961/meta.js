@@ -7,5 +7,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Determine whether s equals the concatenation of a nonempty prefix of words."
+  "description": "Check whether the target string can be formed by joining the first few words of a list in order. The visual appends one word at a time to a growing prefix and compares it with the target."
 };

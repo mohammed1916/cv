@@ -7,5 +7,5 @@ export const meta = {
     "Union Find"
   ],
   "accent": "#0891b2",
-  "description": "Produce the lexicographically smallest array using swaps of values differing by at most limit."
+  "description": "Rearrange an array into the smallest possible order using swaps allowed only between values within a given limit. The visual groups the values into connected blocks and sorts each block in place."
 };

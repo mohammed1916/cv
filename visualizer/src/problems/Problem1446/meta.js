@@ -7,5 +7,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Find the longest run of one repeated character."
+  "description": "Find the length of the longest run of one repeated character in a string. The visual highlights runs as they grow along the characters."
 };

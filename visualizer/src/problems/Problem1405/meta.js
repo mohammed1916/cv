@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Construct a longest a/b/c string without three identical adjacent characters."
+  "description": "Build the longest string from copies of a, b and c so that no three identical letters appear in a row. The visual fills the string one character at a time and shows the remaining letter counts."
 };

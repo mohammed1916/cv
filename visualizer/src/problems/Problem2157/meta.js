@@ -8,5 +8,5 @@ export const meta = {
     "Bit Manipulation"
   ],
   "accent": "#0891b2",
-  "description": "Group letter sets connected by adding deleting or replacing one letter."
+  "description": "Group strings whose letter sets are linked by adding, removing or replacing one letter. The visual merges connected sets into components and counts how many components remain."
 };

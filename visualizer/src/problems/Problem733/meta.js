@@ -8,5 +8,5 @@ export const meta = {
     "Matrix"
   ],
   "accent": "#0891b2",
-  "description": "Recolor the starting pixel’s orthogonally connected component of equal-colored pixels."
+  "description": "Recolor the connected region of matching pixels that touches a starting cell. The visual spreads outward from the start in four directions."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Find the value repeated in exactly half the array."
+  "description": "In an array of double length, one value appears exactly half the time, and the task is to find it. The visual shows a tally of counts as values are checked."
 };

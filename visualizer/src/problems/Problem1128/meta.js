@@ -7,5 +7,5 @@ export const meta = {
     "Counting"
   ],
   "accent": "#0891b2",
-  "description": "Count pairs of dominoes equivalent under rotation."
+  "description": "Count pairs of dominoes that match after rotation. Each domino is reduced to a canonical key and the pair count grows with every repeat."
 };

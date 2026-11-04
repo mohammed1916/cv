@@ -11,6 +11,6 @@ export const meta = {
     "Monotonic Stack",
     "Number Theory"
   ],
-  "description": "Count the subarrays where each element has the top prime score, then spend operations on the largest values first.",
+  "description": "Choose a limited number of operations to maximise a score built from prime-based element strengths in subarrays. The visual counts which subarrays each element dominates and spends the operations on the largest values first.",
   "accent": "#f59e0b"
 }

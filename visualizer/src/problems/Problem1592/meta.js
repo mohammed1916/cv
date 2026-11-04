@@ -7,5 +7,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Redistribute spaces evenly between words and put leftovers at the end."
+  "description": "Spread the spaces evenly between words and put any leftover spaces at the end. The visual shows the gaps between words being redistributed.",
 };

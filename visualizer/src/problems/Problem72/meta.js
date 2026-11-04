@@ -1,1 +1,1 @@
-export const meta = { number: '72', title: 'Edit Distance', slug: 'edit-distance', difficulty: 'Hard', tags: ['DP', 'String'] }
+export const meta = { number: '72', title: 'Edit Distance', slug: 'edit-distance', difficulty: 'Hard', tags: ['DP', 'String'] , description: "Find the fewest insert, delete and replace operations that turn one word into another. The visual fills a table cell by cell and traces the path back."}

@@ -7,5 +7,5 @@ export const meta = {
     "Union Find"
   ],
   "accent": "#0891b2",
-  "description": "Remove as many stones as possible while every removed stone shares a row or column with another remaining stone."
+  "description": "Remove as many stones as possible while every removed stone still shares a row or column with another remaining stone. The visual groups stones that connect through shared rows and columns."
 };

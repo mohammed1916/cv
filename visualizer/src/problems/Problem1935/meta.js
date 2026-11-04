@@ -8,5 +8,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Count words that can be typed without a broken key."
+  "description": "Count the words in a sentence that can be typed when some keys are broken. The visual checks each word letter by letter against the set of broken keys and marks each word as typeable or blocked.",
 };

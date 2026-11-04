@@ -1,1 +1,1 @@
-export const meta = { number: '58', title: 'Length of Last Word', slug: 'length-of-last-word', difficulty: 'Easy', tags: ['String'] }
+export const meta = { number: '58', title: 'Length of Last Word', slug: 'length-of-last-word', difficulty: 'Easy', tags: ['String'], description: "Return the length of the last word in a string. The visual skips trailing spaces from the right and counts the final run of letters." }

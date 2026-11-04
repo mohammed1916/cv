@@ -8,5 +8,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Count pairs of rectangles with the same width-to-height ratio."
+  "description": "Count pairs of rectangles whose width-to-height ratio is the same. The visual reduces each ratio to a simple fraction and groups equal ones."
 };

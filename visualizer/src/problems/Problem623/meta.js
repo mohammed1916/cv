@@ -8,5 +8,5 @@ export const meta = {
     "Binary Tree"
   ],
   "accent": "#0891b2",
-  "description": "Insert a new row while attaching original left and right subtrees to the correct sides."
+  "description": "Insert a new row of nodes at a given depth, attaching the original subtrees to the new nodes on the correct side. The visual shows the existing levels shifting down and the new row appearing between them."
 };

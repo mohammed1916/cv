@@ -7,5 +7,5 @@ export const meta = {
     "Prefix Sum"
   ],
   "accent": "#0891b2",
-  "description": "Count subarrays with odd sum modulo one billion and seven."
+  "description": "Count subarrays with an odd sum by tracking prefix parity counts as the array is scanned. The visual shows the parity prefixes and the running total.",
 };

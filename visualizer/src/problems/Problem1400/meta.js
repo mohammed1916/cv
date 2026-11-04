@@ -8,5 +8,5 @@ export const meta = {
     "Counting"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether all characters can form exactly k nonempty palindromes."
+  "description": "Decide whether the letters of a string can be split into exactly k palindromes. The visual counts each letter's parity and shows how odd-count letters are spread across palindrome centres."
 };

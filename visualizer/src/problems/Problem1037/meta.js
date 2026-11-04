@@ -8,5 +8,5 @@ export const meta = {
     "Geometry"
   ],
   "accent": "#0891b2",
-  "description": "Determine whether three points form a nondegenerate triangle."
+  "description": "Decide whether three points form a genuine triangle with nonzero area. The check compares the slopes between pairs of points."
 };

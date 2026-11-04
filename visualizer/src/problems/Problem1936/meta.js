@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Bridge every ladder gap using the fewest added rungs."
+  "description": "Add the fewest rungs to a ladder so that every gap between consecutive rungs is at most a given distance. The visual shows a vertical ladder with each too-large gap split by newly added rungs.",
 };

@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Find the fewest repeats of a that contain b as a contiguous substring."
+  "description": "Find how many copies of a string must be placed end to end before a second string appears inside them. The visual stacks copies and slides the target across the joined text."
 };

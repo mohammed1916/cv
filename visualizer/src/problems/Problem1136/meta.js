@@ -8,5 +8,5 @@ export const meta = {
     "Topological Sort"
   ],
   "accent": "#0891b2",
-  "description": "Find the fewest semesters needed when all available courses can run together."
+  "description": "Schedule prerequisite-linked courses so each semester takes every course that is ready at that point, and report how many semesters are needed. The visual lays courses out in layers, with each layer unlocking after its prerequisites finish."
 };

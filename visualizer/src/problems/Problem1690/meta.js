@@ -8,5 +8,5 @@ export const meta = {
     "Game Theory"
   ],
   "accent": "#0891b2",
-  "description": "Find the optimal score difference in a game where removing an endpoint scores the remaining interval sum."
+  "description": "Two players alternately remove an end stone and score the remaining sum, and the answer is the difference in scores under optimal play. The visual fills an interval table from short ranges to long ones."
 };

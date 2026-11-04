@@ -7,5 +7,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Display an IPv4 address with bracketed dots."
+  "description": "Rewrite an IPv4 address so that each dot is replaced by a bracketed dot. The output is built one character at a time."
 };

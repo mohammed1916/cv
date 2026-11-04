@@ -7,5 +7,5 @@ export const meta = {
     "Minimum Spanning Tree"
   ],
   "accent": "#0891b2",
-  "description": "Connect all points at minimum total Manhattan edge cost."
+  "description": "Connect points into a minimum-cost tree by adding the cheapest Manhattan-distance edges first. The visual grows the spanning tree one edge at a time.",
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Maximize your coins when Alice takes the largest and Bob the smallest of each chosen triple."
+  "description": "Maximize your coins in triples by sorting piles and repeatedly choosing the second-largest from the top three. The visual shows the sorted piles and the chosen triples.",
 };

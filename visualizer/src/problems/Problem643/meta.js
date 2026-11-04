@@ -7,5 +7,5 @@ export const meta = {
     "Array"
   ],
   "accent": "#0d9488",
-  "description": "Keep exactly k neighboring values. Subtract the outgoing value as each incoming value arrives."
+  "description": "Find the maximum average of any run of exactly k neighbouring values. The visual slides a window across the array, adding the new value and dropping the old one."
 };

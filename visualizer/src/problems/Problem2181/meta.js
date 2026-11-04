@@ -7,5 +7,5 @@ export const meta = {
     "Linked List"
   ],
   "accent": "#0891b2",
-  "description": "Merge each run between zero delimiters into one sum node."
+  "description": "Collapse each block of values between zero delimiters into one node holding the block's sum, and drop the delimiters. The visual walks the list and shows each block folding into a single sum."
 };

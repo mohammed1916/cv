@@ -7,5 +7,5 @@ export const meta = {
     "Prefix Sum"
   ],
   "accent": "#0891b2",
-  "description": "Sum each interior element beauty based on global or local ordering."
+  "description": "Sum the beauty of each interior element, where beauty depends on comparisons with everything to its left and right. The visual tracks prefix and suffix maxima and minima."
 };

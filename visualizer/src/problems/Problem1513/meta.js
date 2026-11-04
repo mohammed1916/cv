@@ -7,5 +7,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Count substrings consisting only of ones modulo one billion and seven."
+  "description": "Count substrings made only of ones by counting the run length of ones at each position. The visual highlights a run and its growing substring total.",
 };

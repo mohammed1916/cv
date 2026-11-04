@@ -8,5 +8,5 @@ export const meta = {
     "Binary Search Tree"
   ],
   "accent": "#0891b2",
-  "description": "Find the inorder successor of a BST node using its child and parent links."
+  "description": "Find the inorder successor of a node in a binary search tree when every node has a parent link. The visual highlights the leftmost node of the right subtree, or climbs upward to the first ancestor reached from its left side."
 };

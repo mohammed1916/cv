@@ -1,1 +1,1 @@
-export const meta = { number: '88', title: 'Merge Sorted Array', slug: 'merge-sorted-array', difficulty: 'Easy', tags: ['Array', 'Two Pointers'] }
+export const meta = { number: '88', title: 'Merge Sorted Array', slug: 'merge-sorted-array', difficulty: 'Easy', tags: ['Array', 'Two Pointers'], description: "Merge two sorted arrays into the first one in place, using the spare slots at its end. The visual fills from the back, comparing the largest remaining values." }

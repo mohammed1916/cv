@@ -1,1 +1,1 @@
-export const meta = { number: '84', title: 'Largest Rectangle in Histogram', slug: 'largest-rectangle-in-histogram', difficulty: 'Hard', tags: ['Array', 'Stack'] }
+export const meta = { number: '84', title: 'Largest Rectangle in Histogram', slug: 'largest-rectangle-in-histogram', difficulty: 'Hard', tags: ['Array', 'Stack'], description: "Find the largest rectangle that fits under a row of bars. The visual keeps a stack of increasing heights and pops bars to measure the width each one can extend." }

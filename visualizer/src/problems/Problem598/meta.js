@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Count cells that attain the maximum after origin-anchored rectangle increments."
+  "description": "After several top-left rectangle increments, count how many cells hold the largest value. The visual shades the overlapping corner region and shows that its area is the answer."
 };

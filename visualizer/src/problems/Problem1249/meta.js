@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Remove the fewest parentheses needed to make the string valid."
+  "description": "Delete the fewest parentheses from a string so that every opening bracket has a matching closing bracket. The visual scans left to right with a stack and marks unmatched brackets for removal."
 };

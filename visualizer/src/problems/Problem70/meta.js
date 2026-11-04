@@ -1,1 +1,1 @@
-export const meta = { number: '70', title: 'Climbing Stairs', slug: 'climbing-stairs', difficulty: 'Easy', tags: ['DP', 'Math'] }
+export const meta = { number: '70', title: 'Climbing Stairs', slug: 'climbing-stairs', difficulty: 'Easy', tags: ['DP', 'Math'] , description: "Count the distinct ways to climb a staircase taking one or two steps at a time. The visual builds the count from the two previous step counts."}

@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Find existing friendships with at least three mutual friends."
+  "description": "Find pairs of friends who share at least three mutual friends. The visual draws a friendship graph and highlights the shared neighbours of each edge, marking the edges with three or more.",
 };

@@ -8,5 +8,5 @@ export const meta = {
     "Matrix"
   ],
   "accent": "#0d9488",
-  "description": "For destination column c, read the mirrored source column and invert that bit exactly once."
+  "description": "Mirror each row of a binary matrix and invert every bit. The visual moves each source cell to its mirrored position and toggles it in place."
 };

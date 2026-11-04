@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Find the kth largest nonnegative integer represented as a decimal string."
+  "description": "Find the kth largest number among decimal strings without leading zeros. The visual orders strings by length and then lexicographically and highlights the kth one."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Bit Manipulation"
   ],
   "accent": "#0891b2",
-  "description": "Count triples splitting a contiguous interval into two equal-XOR parts."
+  "description": "Count index triples where a contiguous range splits into two parts with equal XOR. The visual shows prefix XOR values and the matching pairs."
 };

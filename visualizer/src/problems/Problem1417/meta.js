@@ -7,5 +7,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Rearrange digits and lowercase letters so their types alternate."
+  "description": "Rearrange a mixed string so that digits and letters alternate, if the counts allow it. The visual interleaves two colour-coded sequences into one output row."
 };

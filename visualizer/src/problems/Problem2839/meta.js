@@ -8,6 +8,6 @@ export const meta = {
     "String",
     "Sorting"
   ],
-  "description": "Index-2 swaps keep characters on the same parity, so compare the even and odd pairs.",
+  "description": "Decide whether two strings can be made equal by swapping characters that sit two positions apart. The visual separates the even and odd index lanes and compares the characters in each lane.",
   "accent": "#14b8a6"
 }

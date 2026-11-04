@@ -7,5 +7,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Determine which queried subarrays can be rearranged into arithmetic progressions."
+  "description": "For each query range, decide whether its values can be rearranged into an evenly spaced sequence. The visual sorts each subarray and checks that consecutive gaps match."
 };

@@ -7,5 +7,5 @@ export const meta = {
     "Simulation"
   ],
   "accent": "#0891b2",
-  "description": "Compute average waiting time for customers served by one cook in arrival order."
+  "description": "Compute the average time each customer waits when one cook serves orders in arrival order. The visual timelines each order's start and finish and the wait each customer experiences."
 };

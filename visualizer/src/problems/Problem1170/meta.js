@@ -8,5 +8,5 @@ export const meta = {
     "Counting"
   ],
   "accent": "#0891b2",
-  "description": "For each query, count words with a greater frequency of their smallest character."
+  "description": "For each query word, take the frequency of its smallest letter and count the words whose smallest-letter frequency is strictly higher. The visual shows a sorted list of frequencies with a binary-search boundary for each query."
 };

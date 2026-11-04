@@ -8,5 +8,5 @@ export const meta = {
     "Sorting"
   ],
   "accent": "#0891b2",
-  "description": "Select k points nearest the origin."
+  "description": "Select the k points that lie closest to the origin from a list of coordinates. The visual plots the points and a distance circle that shrinks around the chosen ones."
 };

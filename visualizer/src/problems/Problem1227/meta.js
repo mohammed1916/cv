@@ -8,5 +8,5 @@ export const meta = {
     "Probability and Statistics"
   ],
   "accent": "#0891b2",
-  "description": "Find the probability the last passenger occupies their own seat."
+  "description": "Passengers board a plane one by one, the first sits at random, and everyone else takes their own seat when possible; find the chance the last passenger ends up in their own seat. The visual shows the first passenger's random choice and the resulting cascade of displaced passengers."
 };

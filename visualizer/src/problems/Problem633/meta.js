@@ -8,5 +8,5 @@ export const meta = {
     "Two Pointers"
   ],
   "accent": "#0d9488",
-  "description": "Compare the smallest and largest remaining squares. Move the endpoint whose change brings their sum toward the target."
+  "description": "Decide whether a target can be written as the sum of two perfect squares. The visual places one pointer at the smallest square and one at the largest, moving whichever step keeps the sum on track."
 };

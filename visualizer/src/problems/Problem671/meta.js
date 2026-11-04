@@ -8,5 +8,5 @@ export const meta = {
     "Binary Tree"
   ],
   "accent": "#0891b2",
-  "description": "Find the second smallest distinct value in a tree whose parent equals the minimum of its children."
+  "description": "Find the second smallest distinct value in a tree where each parent holds the smaller of its children. The visual walks the tree and tracks the smallest value that differs from the root."
 };

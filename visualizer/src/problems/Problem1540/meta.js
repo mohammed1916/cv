@@ -7,5 +7,5 @@ export const meta = {
     "Counting"
   ],
   "accent": "#0891b2",
-  "description": "Decide whether at most k uniquely numbered shift moves can transform s into t."
+  "description": "Check whether each character shift can be made within the move budget by grouping the shift amounts each letter needs. The visual shows each required shift and the running move count.",
 };

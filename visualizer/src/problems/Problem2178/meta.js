@@ -7,5 +7,5 @@ export const meta = {
     "Greedy"
   ],
   "accent": "#0891b2",
-  "description": "Split an even total into as many distinct positive even values as possible."
+  "description": "Split an even total into as many distinct positive even numbers as possible. The visual builds the parts from the smallest even value upward and shows the remaining amount shrinking."
 };

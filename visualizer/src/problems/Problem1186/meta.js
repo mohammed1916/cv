@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Find the maximum nonempty subarray sum after at most one deletion."
+  "description": "Find the largest sum of a nonempty contiguous run after removing at most one element from it. The visual tracks two running sums across the array, one with the deletion used and one without."
 };

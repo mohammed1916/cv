@@ -7,5 +7,5 @@ export const meta = {
     "Math"
   ],
   "accent": "#0891b2",
-  "description": "Sum all odd-length contiguous subarrays."
+  "description": "Sum subarrays of odd length by counting how many such subarrays each element belongs to. The visual shows each element's contribution.",
 };

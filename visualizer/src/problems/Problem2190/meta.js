@@ -7,5 +7,5 @@ export const meta = {
     "Counting"
   ],
   "accent": "#0891b2",
-  "description": "Find the most frequent value immediately following the key."
+  "description": "Find the value that most often appears directly after a given key in the array. The visual marks each key occurrence and tallies the value that follows it."
 };

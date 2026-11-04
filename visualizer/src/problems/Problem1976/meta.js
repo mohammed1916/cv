@@ -8,5 +8,5 @@ export const meta = {
     "Shortest Path"
   ],
   "accent": "#0891b2",
-  "description": "Count shortest routes from vertex zero to vertex n-1."
+  "description": "Count the shortest routes from the first city to the last in a weighted road network. The visual runs a shortest-path search and tracks the number of ways to reach each node."
 };

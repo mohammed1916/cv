@@ -8,5 +8,5 @@ export const meta = {
     "String"
   ],
   "accent": "#0891b2",
-  "description": "Return the number of lines and final-line width when writing letters into 100-unit lines."
+  "description": "Write letters left to right onto lines of fixed width and report the line count and the width used on the last line. The visual shows each line filling as letter widths are added."
 };

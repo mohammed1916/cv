@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Minimize flips needed for zeros followed by ones."
+  "description": "Change the fewest characters in a binary string so that all zeros come before all ones. The visual sweeps a split line across the string while a cost counter updates."
 };

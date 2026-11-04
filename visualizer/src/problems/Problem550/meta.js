@@ -7,5 +7,5 @@ export const meta = {
     "Database"
   ],
   "accent": "#0891b2",
-  "description": "Measure the fraction of players who return exactly one day after their first login."
+  "description": "Compute the fraction of players who log in again exactly one day after their first login. The visual groups each player's login dates, checks the day after the first login, and reports the share of players who return."
 };

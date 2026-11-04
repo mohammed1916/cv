@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Print a string using the fewest turns when one turn paints one character over a contiguous interval."
+  "description": "Work out the fewest passes of a printer that lays one color across a span at a time, with later passes overwriting earlier ones. The visual shows interval splits and how overlapping spans merge."
 };

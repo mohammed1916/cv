@@ -7,5 +7,5 @@ export const meta = {
     "Dynamic Programming"
   ],
   "accent": "#0891b2",
-  "description": "Count playlists of length goal using every song while requiring k other songs before a repeat."
+  "description": "Count playlists of a fixed length that use every song at least once, with a required gap before any song repeats. The visual shows a grid of unique songs used against playlist length."
 };

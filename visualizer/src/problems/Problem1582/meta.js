@@ -7,5 +7,5 @@ export const meta = {
     "Matrix"
   ],
   "accent": "#0891b2",
-  "description": "Count one-valued cells that are the only one in both their row and column."
+  "description": "Count one-cells that are alone in both their row and column by tallying row and column sums. The visual marks the lone ones.",
 };

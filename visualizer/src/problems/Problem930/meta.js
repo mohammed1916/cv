@@ -8,5 +8,5 @@ export const meta = {
     "Hash Table"
   ],
   "accent": "#0891b2",
-  "description": "Count nonempty binary subarrays with the requested sum."
+  "description": "Count contiguous runs of a binary array whose total equals a given target. The visual tracks running sums as a window and a tally of matching earlier sums."
 };
