@@ -1,3 +1,11 @@
+# Latest user direction: finish functional coverage; paste inbox available
+
+Read [the paste inbox and completion handoff](docs/requirements/CLAUDE-PASTE-HANDOFF.md). The user accepts basic visual presentation and wants all problems finished. New statement copies go in `local-reference/leetcode/user-pastes-326/<ID>.txt`; its README links all 326 pages. Read nonempty files immediately and continue ready work without waiting for every paste. Earlier requirements-only instructions describe the previous task; visual polish is no longer a completion blocker. The current inbox-creation task itself does not change implementations.
+
+# Current priority: requirements only — 2026-11-03
+
+The user's latest instruction is to provide proper problem requirements and help Claude proceed, without unrelated tests, builds, browser checks, implementation changes or cleanup. Read [the answers and continuation](docs/requirements/CLAUDE-ANSWERS.md), then [the original questions](docs/requirements/CLAUDE-QUESTIONS.md). The 19 concrete questions have sourced clarifications; the 326 category-based rows still need individual draft review. Preserve source-confidence labels and user reference text. The implementation review below is deferred during this requirements task.
+
 # Latest manual-run review — 2026-11-03
 
 Read [the latest review and continuation](docs/reviews/2026-11-03-manual-run-review.md). The reviewed commit range contains 223 changed folders, 1,071 passing tests and 612 passing preset/line checks. Browser access works on port 3010; only targeted 3616 interactions were checked. Its selected-student identity bug is fixed. Duplicate catalogue React keys and full browser acceptance remain open. The five loose files were identical 3616 duplicates and are preserved outside src. SQL/API/Promise/concurrency/design work remains in scope.
