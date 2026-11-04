@@ -23,17 +23,28 @@ export default function ColoringBorder() {
     const inComp = new Set(step.members.map(([r, c]) => `${r},${c}`))
     const border = new Set(step.borders.map(([r, c]) => `${r},${c}`))
     const cur = step.cell ? `${step.cell[0]},${step.cell[1]}` : null
-    return <table aria-label="Grid state">
-      <tbody>
-        {run.input.grid.map((line, r) => <tr key={r}>
-          {line.map((value, c) => {
-            const key = `${r},${c}`
-            const role = key === cur ? 'current' : border.has(key) ? 'border' : inComp.has(key) ? 'member' : ''
-            return <td key={c} data-role={role || undefined} className={role ? `is-${role}` : ''}>{value}</td>
-          })}
-        </tr>)}
-      </tbody>
-    </table>
+    const roleStyle = {
+      current: { background: 'var(--primary)', color: 'var(--text)', fontWeight: 700 },
+      border: { background: 'var(--surface2)', color: 'var(--text)', borderStyle: 'double' },
+      member: { background: 'transparent', color: 'var(--text)', outline: '1px dashed var(--text)', outlineOffset: -4 },
+      none: { background: 'transparent', color: 'var(--text)' },
+    }
+    return <>
+      <table aria-label="Grid state" style={{ borderCollapse: 'collapse', fontFamily: 'monospace' }}>
+        <tbody>
+          {run.input.grid.map((line, r) => <tr key={r}>
+            {line.map((value, c) => {
+              const key = `${r},${c}`
+              const role = key === cur ? 'current' : border.has(key) ? 'border' : inComp.has(key) ? 'member' : 'none'
+              return <td key={c} data-role={role === 'none' ? undefined : role} style={{ width: 40, height: 40, textAlign: 'center', border: '2px solid var(--border)', ...roleStyle[role] }}>
+                {value}{role !== 'none' && <small style={{ display: 'block', fontSize: 10 }}>{role === 'current' ? 'current' : role === 'border' ? 'border' : 'member'}</small>}
+              </td>
+            })}
+          </tr>)}
+        </tbody>
+      </table>
+      <p style={{ color: 'var(--text)' }}>Member cells belong to the component of the start cell; border cells are recolored.</p>
+    </>
   }} renderReasoning={() => <>
     <p>The component is found by flood fill from the starting cell, following equal neighbours only.</p>
     <p>A cell is on the border when one of its four neighbours lies outside the grid or outside the component.</p>

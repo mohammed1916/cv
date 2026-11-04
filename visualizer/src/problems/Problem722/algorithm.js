@@ -19,7 +19,7 @@ export function buildTrace(source) {
         else i++
       } else if (line.startsWith('/*', i)) {
         inBlock = true; i += 2
-        frames.push({ phase: 'block', pythonLine: 14, line: lineNo, output: [...out], inBlock, activeLine: 6, message: `Line ${lineNo}: block comment opens.` })
+        frames.push({ phase: 'block', pythonLine: 14, line: lineNo, kept: current, output: [...out], inBlock, activeLine: 6, message: `Line ${lineNo}: block comment opens.` })
       } else if (line.startsWith('//', i)) {
         break
       } else {
@@ -31,8 +31,8 @@ export function buildTrace(source) {
     if (inBlock) return
     if (current.length) {
       out.push(current)
-      frames.push({ phase: 'emit', pythonLine: 24, line: lineNo, output: [...out], inBlock, activeLine: 10, message: `Line ${lineNo} keeps "${current}".` })
-    } else frames.push({ phase: 'drop', pythonLine: 23, line: lineNo, output: [...out], inBlock, activeLine: 11, message: `Line ${lineNo} is empty after removing comments: drop it.` })
+      frames.push({ phase: 'emit', pythonLine: 24, line: lineNo, kept: current, output: [...out], inBlock, activeLine: 10, message: `Line ${lineNo} keeps "${current}".` })
+    } else frames.push({ phase: 'drop', pythonLine: 23, line: lineNo, kept: '', output: [...out], inBlock, activeLine: 11, message: `Line ${lineNo} is empty after removing comments: drop it.` })
     current = ''
   })
   frames.push({ phase: 'done', pythonLine: 26, line: source.length - 1, output: [...out], inBlock, result: out, activeLine: 13, message: `${out.length} line${out.length === 1 ? '' : 's'} of code remain.` })

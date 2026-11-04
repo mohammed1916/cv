@@ -11,7 +11,8 @@ const tokenize = expr => expr.match(/\d+|[-+*/()]/g) ?? []
 export function buildTrace(expr) {
   const tokens = tokenize(expr)
   let pos = 0
-  const frames = [{ phase: 'start', activeLine: L('tokens = numbers'), pythonLine: 4, a: null, op: null, b: null, value: null, message: 'Read the expression left to right. * and / are applied before + and -.' }]
+  let depth = 0
+  const frames = [{ phase: 'start', activeLine: L('tokens = numbers'), pythonLine: 4, a: null, op: null, b: null, value: null, pos: 0, depth: 0, tokens, message: 'Read the expression left to right. * and / are applied before + and -.' }]
   const apply = (a, op, b) => {
     let value, activeLine, pythonLine
     if (op === '+') { value = a + b; activeLine = L('if op is + then'); pythonLine = 14 }
@@ -23,7 +24,7 @@ export function buildTrace(expr) {
       activeLine = L('otherwise value = value divided')
       pythonLine = 28
     }
-    frames.push({ phase: 'apply', activeLine, pythonLine, a, op, b, value, message: `${a} ${op} ${b} = ${value}.` })
+    frames.push({ phase: 'apply', activeLine, pythonLine, a, op, b, value, pos, depth, tokens, message: `${a} ${op} ${b} = ${value}.` })
     return value
   }
   const expression = () => {
@@ -45,9 +46,11 @@ export function buildTrace(expr) {
   const factor = () => {
     if (tokens[pos] === '(') {
       pos++
+      depth++
       const value = expression()
       if (tokens[pos] !== ')') throw new Error('Missing closing parenthesis.')
       pos++
+      depth--
       return value
     }
     const token = tokens[pos++]
@@ -56,7 +59,7 @@ export function buildTrace(expr) {
   }
   const result = expression()
   if (pos !== tokens.length) throw new Error('Unexpected token.')
-  frames.push({ phase: 'done', activeLine: L('return expression()'), pythonLine: 39, a: null, op: null, b: null, value: result, message: `The expression evaluates to ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return expression()'), pythonLine: 39, a: null, op: null, b: null, value: result, pos, depth: 0, tokens, message: `The expression evaluates to ${result}.` })
   return { input: expr, result, frames }
 }
 

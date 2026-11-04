@@ -19,19 +19,19 @@ export function buildTrace({ ops }) {
   const frames = []
   const state = () => logs.map(([id, ts]) => `log ${id} at ${ts}`)
   let matched = []
-  frames.push({ phase: 'start', pythonLine: PL('logs = []'), activeLine: L('start with no logs'), state: [], message: 'No logs are stored yet.' })
+  frames.push({ phase: 'start', pythonLine: PL('logs = []'), activeLine: L('start with no logs'), state: [], logs: [], window: null, matched: [], message: 'No logs are stored yet.' })
   for (const op of ops) {
     if (op[0] === 'put') {
       logs.push([op[1], op[2]])
-      frames.push({ phase: 'put', pythonLine: PL('logs.append'), activeLine: L('append its id'), state: state(), message: `Store log ${op[1]} at ${op[2]}.` })
+      frames.push({ phase: 'put', pythonLine: PL('logs.append'), activeLine: L('append its id'), state: state(), logs: logs.map(([id, ts]) => [id, ts]), window: null, matched: [], message: `Store log ${op[1]} at ${op[2]}.` })
       continue
     }
     const [, start, end, gran] = op
     const idx = UNITS.indexOf(gran)
     matched = logs.filter(([, ts]) => cut(ts, idx) >= cut(start, idx) && cut(ts, idx) <= cut(end, idx)).map(([id]) => id).sort((a, b) => a - b)
-    frames.push({ phase: 'retrieve', pythonLine: PL('result = sorted'), activeLine: L('keep the ids whose'), state: [...state(), `matched: ${matched.join(', ') || 'none'}`], message: `Compare every stamp down to ${gran}: ${matched.length} match${matched.length === 1 ? '' : 'es'}.` })
+    frames.push({ phase: 'retrieve', pythonLine: PL('result = sorted'), activeLine: L('keep the ids whose'), state: [...state(), `matched: ${matched.join(', ') || 'none'}`], logs: logs.map(([id, ts]) => [id, ts]), window: { start, end, gran }, matched: [...matched], message: `Compare every stamp down to ${gran}: ${matched.length} match${matched.length === 1 ? '' : 'es'}.` })
   }
-  frames.push({ phase: 'done', pythonLine: PL('return result'), activeLine: L('return the last matched'), state: [...state(), `last result: ${matched.join(', ') || 'none'}`], message: 'All operations are finished.' })
+  frames.push({ phase: 'done', pythonLine: PL('return result'), activeLine: L('return the last matched'), state: [...state(), `last result: ${matched.join(', ') || 'none'}`], logs: logs.map(([id, ts]) => [id, ts]), window: null, matched: [...matched], message: 'All operations are finished.' })
   return { input: { ops }, result: matched, frames }
 }
 

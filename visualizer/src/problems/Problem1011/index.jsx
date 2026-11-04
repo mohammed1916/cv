@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 import { buildTrace, parseInput, code, python } from './algorithm'
 import authoredExamples from '../../config/examples/collection--1011.js'
 
@@ -20,8 +21,11 @@ export default function ShipWithinDays() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const s = step.state
     const max = Math.max(1, ...s.loads, s.mid ?? 1)
+    const total = run.input.weights.reduce((a, b) => a + b, 0)
     return <>
-      <p aria-label="Capacity bounds" style={{ fontFamily: 'monospace' }}>{`lo ${s.lo} · hi ${s.hi}${s.mid !== null ? ` · mid ${s.mid}` : ''}`}</p>
+      <AnswerRangeBar title="Capacity search" min={Math.max(...run.input.weights)} max={Math.max(total, Math.max(...run.input.weights) + 1)}
+        low={s.lo} high={s.hi} probe={s.mid} verdict={s.needed !== null && s.needed <= run.input.days} />
+      <p aria-label="Capacity bounds" style={{ fontFamily: 'monospace', color: 'var(--text)' }}>{`lo ${s.lo} · hi ${s.hi}${s.mid !== null ? ` · mid ${s.mid}` : ''}`}</p>
       <div aria-label="Day loads" role="img" style={{ display: 'grid', gap: 6, maxWidth: 520 }}>
         {s.loads.map((load, day) => <div key={day} data-day={day} style={{ display: 'grid', gridTemplateColumns: '64px 1fr 48px', alignItems: 'center', gap: 8, fontFamily: 'monospace' }}>
           <span>{`Day ${day + 1}`}</span>

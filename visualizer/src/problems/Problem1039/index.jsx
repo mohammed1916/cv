@@ -27,7 +27,7 @@ export default function MinimumScoreTriangulation() {
         <thead><tr><th>i \ j</th>{Array.from({ length: n }, (_, j) => <th key={j}>{j}</th>)}</tr></thead>
         <tbody>{step.best.map((row, i) => <tr key={i}><th>{i}</th>{row.map((v, j) => {
           const current = step.cell && step.cell[0] === i && step.cell[1] === j
-          return <td key={j} data-role={current ? 'active' : undefined}>{j > i ? v : ''}</td>
+          return <td key={j} data-role={current ? 'active' : undefined} style={{ width: 44, textAlign: 'center', border: '1px solid var(--border)', color: 'var(--text)', background: current ? 'var(--primary)' : 'transparent', fontWeight: current ? 700 : 400 }}>{j > i ? v : ''}</td>
         })}</tr>)}</tbody>
       </table>
       <output aria-label="Current apex">{step.apex === -1 ? 'No apex in use' : `Apex ${step.apex} for base ${step.cell[0]}-${step.cell[1]}`}</output>

@@ -56,7 +56,7 @@ def to_fraction(s):
     repeat = repeat.rstrip(')')
     if not repeat:
         return Fraction(int(whole) * 10 ** len(non_repeat) + int(non_repeat or 0), 10 ** len(non_repeat))
-    return Fraction(int(whole + non_repeat + repeat) - int(whole + non_repeat), 10 ** len(non_repeat) * (10 ** len(repeat) - 1)) + int(whole)
+    return Fraction(int(non_repeat + repeat) - int(non_repeat or 0), 10 ** len(non_repeat) * (10 ** len(repeat) - 1)) + int(whole)
 
 def is_rational_equal(s, t):
     a = to_fraction(s)

@@ -20,7 +20,17 @@ const definition = {
 export default function BulbSwitcherII() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
     <output aria-label="Distinct states">{step.depth} press{step.depth === 1 ? '' : 'es'} · {step.states.length} distinct state{step.states.length === 1 ? '' : 's'}</output>
-    <ul aria-label="States" style={{ fontFamily: 'monospace', columns: 4 }}>{step.states.map(s => <li key={s}>{s}</li>)}</ul>
+    <div aria-label="States as bulbs" style={{ display: 'grid', gap: 6, gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))' }}>
+      {step.states.map(s => <div key={s} style={{ border: '1px solid var(--border)', padding: 6, color: 'var(--text)' }}>
+        <div style={{ display: 'flex', gap: 4 }} aria-label={`bulbs ${s}`}>
+          {[...s].map((b, i) => <span key={i} title={`bulb ${i + 1} ${b === '1' ? 'on' : 'off'}`} style={{
+            width: 18, height: 18, borderRadius: '50%', boxSizing: 'border-box', border: '1px solid var(--text)',
+            background: b === '1' ? 'var(--primary)' : 'transparent' }} />)}
+        </div>
+        <small style={{ fontFamily: 'monospace' }}>{s}</small>
+      </div>)}
+    </div>
+    <p style={{ color: 'var(--text)' }}>Filled bulbs are on. Each state is one distinct pattern reachable after exactly the given presses.</p>
   </>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>
     <p><strong>Buttons:</strong> flip all; flip odd-numbered bulbs; flip even-numbered bulbs; flip bulbs 1, 4, 7, …. Only the set of states matters, so duplicates are merged at each depth.</p>

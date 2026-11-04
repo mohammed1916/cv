@@ -14,21 +14,62 @@ const definition = {
   ],
 }
 
+const GAP_X = 52
+const GAP_Y = 64
+
+// Positions come from the original tree (in-order x, depth y), so nodes stay put while pointers turn.
+function layoutOf(links, rootVal) {
+  const byVal = new Map(links.map(l => [l.val, l]))
+  const pos = new Map()
+  let x = 0
+  const walk = (val, depth) => {
+    if (val === null || val === undefined) return
+    const node = byVal.get(val)
+    walk(node.left, depth + 1)
+    pos.set(val, { x: x * GAP_X + 30, y: depth * GAP_Y + 30 })
+    x++
+    walk(node.right, depth + 1)
+  }
+  walk(rootVal, 0)
+  return pos
+}
+
 export default function BinaryTreeUpsideDown() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { links, cur, prev, prevRight } = step.snapshot
-    const show = v => (v === null || v === undefined ? '-' : v)
+    const initial = run.frames[0].snapshot
+    const pos = layoutOf(initial.links, run.input.values[0])
+    const width = Math.max(...[...pos.values()].map(p => p.x)) + 40
+    const height = Math.max(...[...pos.values()].map(p => p.y)) + 40
+    const edges = []
+    links.forEach(l => {
+      if (l.left !== null && pos.has(l.left)) edges.push({ from: l.val, to: l.left, kind: 'left' })
+      if (l.right !== null && pos.has(l.right)) edges.push({ from: l.val, to: l.right, kind: 'right' })
+    })
+    const fill = val => (val === cur ? 'var(--primary)' : val === prev ? 'var(--surface2)' : 'transparent')
     return <>
-      <table aria-label="Child links for each node" style={{ fontFamily: 'monospace', borderCollapse: 'collapse' }}>
-        <thead><tr><th>node</th><th>left</th><th>right</th><th>role</th></tr></thead>
-        <tbody>{links.map(link => <tr key={link.val} data-node={link.val} style={{
-          background: link.val === cur ? 'var(--surface2)' : link.val === prev ? '#a5f3fc' : 'transparent',
-        }}>
-          <td>{link.val}</td><td>{show(link.left)}</td><td>{show(link.right)}</td>
-          <td>{link.val === cur ? 'current' : link.val === prev ? 'previous' : link.val === prevRight ? 'saved right child' : ''}</td>
+      <svg role="img" aria-label="Tree with current child links" viewBox={`0 0 ${width} ${height}`} width="100%" style={{ maxWidth: width, display: 'block' }}>
+        {edges.map(e => {
+          const a = pos.get(e.from), b = pos.get(e.to)
+          if (!a || !b) return null
+          return <line key={`${e.from}-${e.to}-${e.kind}`} x1={a.x} y1={a.y} x2={b.x} y2={b.y}
+            stroke={e.kind === 'left' ? 'var(--text)' : 'var(--primary)'} strokeWidth={2}
+            strokeDasharray={e.kind === 'right' ? '5 4' : undefined} />
+        })}
+        {[...pos].map(([val, p]) => <g key={val} data-node={val}>
+          <circle cx={p.x} cy={p.y} r={18} fill={fill(val)} stroke="var(--text)" strokeWidth={val === cur ? 3 : 1} />
+          <text x={p.x} y={p.y + 5} textAnchor="middle" fill="var(--text)" fontFamily="monospace" fontSize={14}>{val}</text>
+        </g>)}
+      </svg>
+      <p style={{ color: 'var(--text)' }}>
+        Solid line: left child. Dashed line: right child. Current node {cur ?? '-'}; previous node {prev ?? '-'}; saved right child {prevRight ?? '-'}.
+      </p>
+      <table aria-label="Child links for each node" style={{ fontFamily: 'monospace', borderCollapse: 'collapse', color: 'var(--text)' }}>
+        <thead><tr><th>node</th><th>left</th><th>right</th></tr></thead>
+        <tbody>{links.map(link => <tr key={link.val} data-node={link.val} style={{ background: link.val === cur ? 'var(--surface2)' : 'transparent' }}>
+          <td>{link.val}</td><td>{link.left ?? '-'}</td><td>{link.right ?? '-'}</td>
         </tr>)}</tbody>
       </table>
-      <p>Current: {show(cur)}. Previous: {show(prev)}. Saved right child: {show(prevRight)}.</p>
     </>
   }} renderReasoning={() => <>
     <p><strong>Key idea:</strong> the leftmost path becomes the new right-hand spine. Each node on it keeps its old left child as the next node to turn.</p>

@@ -14,22 +14,35 @@ const definition = {
   ],
 }
 
+const cell = { border: '1px solid var(--border)', padding: '3px 7px', textAlign: 'center', fontFamily: 'monospace', color: 'var(--text)' }
+
+// Letter-by-word matrix: one row per word processed so far, then the running minimum.
 export default function CommonCharacters() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
-    const { word, common, counts } = step.snapshot
-    const countMap = new Map(counts ?? [])
-    const commonMap = new Map(common ?? [])
-    const letters = [...new Set([...countMap.keys(), ...commonMap.keys()])].sort()
+    const words = run.input
+    const letters = [...new Set(words.join(''))].sort()
+    const processed = step.snapshot.index ?? (step.phase === 'done' ? words.length - 1 : -1)
+    const shownCount = processed + 1
+    const common = new Map(step.snapshot.common ?? [])
+    const countIn = (word, ch) => word.split(ch).length - 1
     return <>
-      <p>{word === null ? 'No word is being counted yet.' : `Counting "${word}"`}</p>
-      <table aria-label="Letter counts" style={{ fontFamily: 'monospace', borderCollapse: 'collapse' }}>
-        <thead><tr><th>letter</th><th>this word</th><th>shared so far</th></tr></thead>
-        <tbody>{letters.length === 0 ? <tr><td colSpan={3}>empty</td></tr> : letters.map(ch => <tr key={ch}>
-          <td>{ch}</td><td>{countMap.get(ch) ?? '-'}</td><td>{commonMap.get(ch) ?? '-'}</td>
-        </tr>)}</tbody>
-      </table>
+      <div style={{ overflowX: 'auto' }}>
+        <table aria-label="Letter counts per word and shared minimum" style={{ borderCollapse: 'collapse' }}>
+          <thead><tr><th style={cell}>word</th>{letters.map(ch => <th key={ch} style={cell}>{ch}</th>)}</tr></thead>
+          <tbody>
+            {words.slice(0, shownCount).map((w, i) => <tr key={i} style={{ background: i === processed ? 'var(--surface2)' : 'transparent' }}>
+              <td style={cell}>{w}</td>{letters.map(ch => <td key={ch} style={cell}>{countIn(w, ch) || ''}</td>)}
+            </tr>)}
+            <tr style={{ fontWeight: 700 }}>
+              <td style={cell}>shared</td>{letters.map(ch => <td key={ch} style={cell}>{common.get(ch) ?? ''}</td>)}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style={{ color: 'var(--text)' }}>{step.snapshot.word === null ? 'No word is being counted yet.' : `Counting "${step.snapshot.word}"`}</p>
     </>
   }} renderReasoning={({ step }) => <>
+    <p>{step.message}</p>
     <p><strong>Per letter:</strong> a letter can appear only as often as it appears in the word that contains it least. Taking the minimum across words captures this.</p>
     <p><strong>Repeats:</strong> the result repeats each surviving letter by its final minimum count.</p>
   </>} />

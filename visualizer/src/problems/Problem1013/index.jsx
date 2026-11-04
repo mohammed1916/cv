@@ -19,15 +19,26 @@ const definition = {
 export default function PartitionThreeEqualParts() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const s = step.state
+    const arr = run.input.arr
+    const current = run.frames.indexOf(step)
+    const cuts = run.frames.slice(0, current + 1).filter(f => f.phase === 'close').map(f => f.state.index)
+    // Segment index for each element: parts closed so far separate the array into segments.
+    const segmentOf = i => cuts.filter(c => c < i).length
+    const segmentColors = ['#bfdbfe', '#bbf7d0', '#fde68a']
     return <>
-      <div aria-label="Array elements" role="img" style={{ display: 'flex', flexWrap: 'wrap', gap: 4, fontFamily: 'monospace' }}>
-        {run.input.arr.map((v, i) => <div key={i} data-index={i} style={{
-          minWidth: 40, padding: '6px 4px', boxSizing: 'border-box', textAlign: 'center',
+      <div aria-label="Array elements split into parts" role="img" style={{ display: 'flex', flexWrap: 'wrap', gap: 4, fontFamily: 'monospace' }}>
+        {arr.map((v, i) => <div key={i} data-index={i} style={{
+          minWidth: 40, padding: '6px 4px', boxSizing: 'border-box', textAlign: 'center', color: '#1c1917',
           borderWidth: i === s.index ? 2 : 1, borderStyle: 'solid', borderColor: i === s.index ? 'var(--text)' : 'var(--border)',
-          background: i < s.index && s.index >= 0 && s.closed > 0 && i <= s.index ? 'var(--surface2)' : 'transparent', color: 'var(--text)',
-        }}><div>{v}</div><small style={{ color: 'var(--text-dim)' }}>{i}</small></div>)}
+          background: cuts.length && segmentOf(i) < 3 ? segmentColors[Math.min(segmentOf(i), 2)] : 'transparent',
+          borderRight: cuts.includes(i) ? '4px solid var(--text)' : undefined,
+        }}><div>{v}</div><small style={{ color: '#1c1917' }}>{i}</small></div>)}
       </div>
-      <output aria-label="Partition state">{`Target ${s.target ?? '-'} · running ${s.running} · parts closed ${s.closed}`}</output>
+      <p style={{ color: 'var(--text)' }}>
+        Cut positions: {cuts.length ? cuts.map((c, k) => `after ${c}${k === 0 ? ' (left part ends)' : ' (middle part ends)'}`).join(', ') : 'none yet'}.
+        {s.target !== null && s.target !== undefined ? ` Each part should sum to ${s.target}.` : ''}
+      </p>
+      <output aria-label="Partition state" style={{ display: 'block', color: 'var(--text)' }}>{`Target ${s.target ?? '-'} · running ${s.running} · parts closed ${s.closed}`}</output>
     </>
   }} renderReasoning={({ step }) => <>
     <p>{step.message}</p>

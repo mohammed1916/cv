@@ -24,6 +24,23 @@ const definition = {
 
 const names = ['0 (east, bottom)', '1 (east, top)', '2 (west, top)']
 
+// The unfolded room: m copies across and n copies up. The straight ray runs from the origin to the first corner (m, n).
+function Unfolded({ m, n }) {
+  const cell = 18
+  const W = m * cell + 20, H = n * cell + 20
+  const x = c => 10 + c * cell
+  const y = r => 10 + (n - r) * cell
+  const lines = []
+  for (let c = 0; c <= m; c++) lines.push(<line key={`v${c}`} x1={x(c)} x2={x(c)} y1={y(0)} y2={y(n)} stroke="var(--border)" />)
+  for (let r = 0; r <= n; r++) lines.push(<line key={`h${r}`} x1={x(0)} x2={x(m)} y1={y(r)} y2={y(r)} stroke="var(--border)" />)
+  return <svg role="img" aria-label="Unfolded room grid with the straight ray to the first corner" viewBox={`0 0 ${W} ${H}`} width="100%" style={{ maxWidth: W, display: 'block', marginTop: 8 }}>
+    {lines}
+    <line x1={x(0)} y1={y(0)} x2={x(m)} y2={y(n)} stroke="var(--primary)" strokeWidth={3} />
+    <circle cx={x(0)} cy={y(0)} r={4} fill="var(--text)" />
+    <circle cx={x(m)} cy={y(n)} r={6} fill="var(--primary)" stroke="var(--text)" />
+  </svg>
+}
+
 export default function MirrorReflection() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { p, q } = run.input
@@ -38,7 +55,8 @@ export default function MirrorReflection() {
           <tr><th>n = q / gcd (room heights)</th><td>{n ?? '—'}{n !== null && ` (${n % 2 ? 'odd: top edge' : 'even: bottom edge'})`}</td></tr>
         </tbody>
       </table>
-      <output aria-label="Receptor">{step.phase === 'done' ? `Receptor ${names[run.result]}` : 'Receptor not decided yet'}</output>
+      {m !== null && m !== undefined && m <= 16 && n <= 16 && <Unfolded m={m} n={n} />}
+      <output aria-label="Receptor" style={{ display: 'block', color: 'var(--text)', marginTop: 8 }}>{step.phase === 'done' ? `Receptor ${names[run.result]}` : 'Receptor not decided yet'}</output>
     </>
   }} renderReasoning={() => <>
     <p><strong>Unfolding:</strong> reflecting the square at every bounce turns the zigzag into a straight line with slope q/p. Receptors sit at corners of the unfolded grid, at positions (a*p, b*p).</p>
