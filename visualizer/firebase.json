@@ -13,7 +13,7 @@
     ],
     "rewrites": [
       {
-        "source": "**",
+        "source": "!/assets/**",
         "destination": "/index.html"
       }
     ],
@@ -37,7 +37,7 @@
         ]
       },
       {
-        "source": "**/*.html",
+        "source": "!/@(assets|data)/**",
         "headers": [
           {
             "key": "Cache-Control",
