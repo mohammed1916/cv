@@ -12,8 +12,8 @@ const definition = {
   url: 'https://leetcode.com/problems/smallest-number-with-all-set-bits/',
   complexity: 'O(log n) time and O(1) extra space.',
   examples: [
-    { label: 'Example 1', input: '{"n":5}' },
-    { label: 'Example 2', input: '{"n":10}' },
+    { label: 'Invented twenty', input: '{"n":20}' },
+    { label: 'Invented three', input: '{"n":3}' },
   ],
 }
 

@@ -15,38 +15,28 @@ export function parseInput(text) {
   return { eventTime, startTime, endTime, k }
 }
 
-export function buildTrace(input) {
-  const { eventTime, startTime, endTime, k } = input
-  const n = startTime.length
-  // gaps[i] is the free time before meeting i (gaps[n] is the time after the last meeting).
-  const gaps = []
-  let previous = 0
-  for (let i = 0; i < n; i++) {
-    gaps.push(startTime[i] - previous)
-    previous = endTime[i]
-  }
-  gaps.push(eventTime - previous)
-  let best = Math.max(...gaps)
-  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set gaps to'), gaps, from: null, to: null, total: null, best, message: `The largest single gap is ${best}.` }]
-  for (let l = 0; l < n; l++) {
-    for (let r = l; r < n && r - l + 1 <= k; r++) {
-      let total = 0
-      for (let g = l; g <= r + 1; g++) total += gaps[g]
-      frames.push({ pythonLine: 15, phase: 'window', activeLine: L('set total to'), gaps, from: l, to: r, total, best, message: `Moving meetings ${l} to ${r} merges gaps ${l} to ${r + 1} into ${total}.` })
-      best = Math.max(best, total)
-    }
-  }
-  frames.push({ pythonLine: 16, phase: 'done', activeLine: L('return best'), gaps, from: null, to: null, total: null, best, message: `Largest free time: ${best}.` })
-  return { input, result: best, frames }
-}
-
-export const code = `largest free time after moving at most k meetings, keeping their order
-  set gaps to the free times before, between, and after the meetings
-  set best to the largest single gap
-  for each run of consecutive meetings from l to r that has at most k meetings
-    set total to the sum of gaps from gap l through gap r + 1
-    set best to the larger of best and total
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+// Code panel: real JavaScript (above). Python below mirrors it line for line.
+export const code = [
+  "function maxFreeTime(eventTime, startTime, endTime, k) {",
+  "  const n = startTime.length;",
+  "  const gaps = [];",
+  "  let previous = 0;",
+  "  for (let i = 0; i < n; i++) {",
+  "    gaps.push(startTime[i] - previous);",
+  "    previous = endTime[i];",
+  "  }",
+  "  gaps.push(eventTime - previous);",
+  "  let best = Math.max(...gaps);",
+  "  for (let l = 0; l < n; l++) {",
+  "    for (let r = l; r < n && r - l + 1 <= k; r++) {",
+  "      let total = 0;",
+  "      for (let g = l; g <= r + 1; g++) total += gaps[g];",
+  "      best = Math.max(best, total);",
+  "    }",
+  "  }",
+  "  return best;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def max_free_time(eventTime, startTime, endTime, k):
@@ -63,6 +53,36 @@ export const python = `def max_free_time(eventTime, startTime, endTime, k):
         for r in range(l, n):
             if r - l + 1 > k:
                 break
-            best = max(best, sum(gaps[l:r + 2]))
+            total = sum(gaps[l:r + 2])
+            best = max(best, total)
     return best
 `
+const PY = s => python.split('\n').findIndex(line => line.includes(s)) + 1
+
+export function buildTrace(input) {
+  const { eventTime, startTime, endTime, k } = input
+  const n = startTime.length
+  // gaps[i] is the free time before meeting i (gaps[n] is the time after the last meeting).
+  const gaps = []
+  let previous = 0
+  for (let i = 0; i < n; i++) {
+    gaps.push(startTime[i] - previous)
+    previous = endTime[i]
+  }
+  gaps.push(eventTime - previous)
+  let best = Math.max(...gaps)
+  const frames = [{ pythonLine: PY('best = max(gaps)'), activeLine: L('let best = Math.max'), phase: 'start', gaps, from: null, to: null, total: null, best,
+    message: `The largest single gap is ${best}. Moving a run of meetings can join gaps into a larger block.` }]
+  for (let l = 0; l < n; l++) {
+    for (let r = l; r < n && r - l + 1 <= k; r++) {
+      let total = 0
+      for (let g = l; g <= r + 1; g++) total += gaps[g]
+      frames.push({ pythonLine: PY('total = sum'), activeLine: L('let total = 0'), phase: 'window', gaps, from: l, to: r, total, best,
+        message: `Moving meetings ${l} to ${r} merges gaps ${l} to ${r + 1} into ${total}.` })
+      best = Math.max(best, total)
+    }
+  }
+  frames.push({ pythonLine: PY('return best'), activeLine: L('return best;'), phase: 'done', gaps, from: null, to: null, total: null, best,
+    message: `Largest free time: ${best}.` })
+  return { input, result: best, frames }
+}

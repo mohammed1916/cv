@@ -34,8 +34,8 @@ export default function BoxSuffixView({ run, step }) {
         {word.split("").map((letter, index) => (
           <div className={`box-suffix__cell box-suffix__cell--${roleAt(index) || "idle"}`} role="listitem" key={`w-${index}`}>
             <span className="box-suffix__pointer">
-              {!isSingle && index === i ? "i" : ""}
-              {!isSingle && index === j ? "j" : ""}
+              {!isSingle && index === i ? "i (l)" : ""}
+              {!isSingle && index === j ? "j (r)" : ""}
             </span>
             <span className="box-suffix__letter">{letter}</span>
             <span className="box-suffix__index">{index}</span>

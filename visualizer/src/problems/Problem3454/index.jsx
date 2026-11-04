@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/separate-squares-ii/',
   complexity: 'O(n^2 log n) time for n squares with a strip per pair of edges. The visualization caps input at 6 squares.',
   examples: [
-    { label: 'Two squares', input: '{"squares":[[0,0,1],[2,2,1]]}' },
-    { label: 'Overlap', input: '{"squares":[[0,0,2],[1,1,1]]}' },
+    { label: 'Invented two squares', input: '{"squares":[[0,0,2],[3,1,1]]}' },
+    { label: 'Invented overlap', input: '{"squares":[[1,0,3],[2,2,2],[0,4,1]]}' },
   ],
 }
 

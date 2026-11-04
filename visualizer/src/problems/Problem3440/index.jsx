@@ -12,8 +12,8 @@ const definition = {
   url: 'https://leetcode.com/problems/reschedule-meetings-for-maximum-free-time-ii/',
   complexity: 'O(n^2) time for n meetings. The visualization caps input at 8 meetings.',
   examples: [
-    { label: 'Example 1', input: '{"eventTime":5,"startTime":[1,3],"endTime":[2,5]}' },
-    { label: 'Example 2', input: '{"eventTime":10,"startTime":[0,7,9],"endTime":[1,8,10]}' },
+    { label: 'Invented short day', input: '{"eventTime":6,"startTime":[0,2],"endTime":[1,4]}' },
+    { label: 'Invented three meetings', input: '{"eventTime":10,"startTime":[0,7,9],"endTime":[1,8,10]}' },
   ],
 }
 
@@ -30,6 +30,15 @@ export default function RescheduleMeetings() {
           ))}
         </tbody>
       </table>
+      {step.gaps && step.gaps.length > 0 && <ol aria-label="Free stretches without the lifted meeting" style={{ display: 'flex', gap: 6, listStyle: 'none', padding: 0, flexWrap: 'wrap' }}>
+        {step.gaps.map((g, j) => {
+          const fits = step.dur !== null && g >= step.dur
+          const chosen = step.chosen === j
+          return <li key={j} data-role={chosen ? 'chosen' : fits ? 'fits' : ''} style={{ minWidth: 64, padding: '0.4rem', textAlign: 'center', borderRadius: 6, border: `2px solid ${chosen ? 'var(--primary)' : fits ? 'var(--text)' : 'var(--surface2)'}`, background: chosen ? 'var(--surface2)' : 'transparent', color: 'var(--text)' }}>
+            <small>gap {j}</small><br /><strong>{g}</strong>{fits ? <small> fits</small> : null}
+          </li>
+        })}
+      </ol>}
       <output aria-label="Best">{`Longest free stretch so far: ${step.best}`}</output>
     </>
   )} renderReasoning={() => <>

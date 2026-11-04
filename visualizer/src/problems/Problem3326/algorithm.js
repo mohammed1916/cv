@@ -21,10 +21,10 @@ export function buildTrace({ nums }) {
   const frames = []
   let ops = 0
   let impossible = false
-  frames.push({ pythonLine: PL('for i in range'), phase: 'scan', activeLine: L('scan from the right'), index: null, value: null, next: null, chain: [], ops, message: `Start from the right with ${cur.join(', ')}.` })
+  frames.push({ pythonLine: PL('for i in range'), phase: 'scan', activeLine: L('for (let i = cur.length - 2'), index: null, value: null, next: null, chain: [], ops, message: `Start from the right with ${cur.join(', ')}.` })
   for (let i = cur.length - 2; i >= 0 && !impossible; i--) {
     if (cur[i] <= cur[i + 1]) {
-      frames.push({ pythonLine: PL('if nums[i] <= nums[i + 1]'), phase: 'keep', activeLine: L('already ordered'), index: i, value: cur[i], next: cur[i + 1], chain: [cur[i]], ops, message: `${cur[i]} is already at most ${cur[i + 1]}.` })
+      frames.push({ pythonLine: PL('if nums[i] <= nums[i + 1]'), phase: 'keep', activeLine: L('if (cur[i] <= cur[i + 1]) continue'), index: i, value: cur[i], next: cur[i + 1], chain: [cur[i]], ops, message: `${cur[i]} is already at most ${cur[i + 1]}.` })
       continue
     }
     const chain = [cur[i]]
@@ -39,28 +39,40 @@ export function buildTrace({ nums }) {
       value = p
       chain.push(value)
       ops += 1
-      frames.push({ pythonLine: PL('value = p'), phase: 'divide', activeLine: L('divide by the greatest proper divisor'), index: i, value, next: cur[i + 1], chain: [...chain], ops, message: `Divide to reach ${value}; ${ops} operation${ops === 1 ? '' : 's'} so far.` })
+      frames.push({ pythonLine: PL('value = p'), phase: 'divide', activeLine: L('value = p;'), index: i, value, next: cur[i + 1], chain: [...chain], ops, message: `Divide to reach ${value}; ${ops} operation${ops === 1 ? '' : 's'} so far.` })
     }
     if (!impossible) cur[i] = value
   }
   const result = impossible ? -1 : ops
-  frames.push({ pythonLine: PL('return ops'), phase: 'done', activeLine: L('return ops'), index: null, value: null, next: null, chain: [], ops: result, message: impossible ? 'No sequence of operations makes the array non-decreasing.' : `Minimum operations: ${result}. Final array: ${cur.join(', ')}.` })
+  frames.push({ pythonLine: PL('return ops;'), phase: 'done', activeLine: L('return ops;'), index: null, value: null, next: null, chain: [], ops: result, message: impossible ? 'No sequence of operations makes the array non-decreasing.' : `Minimum operations: ${result}. Final array: ${cur.join(', ')}.` })
   return { input: { nums }, result, final: cur, frames }
 }
 
-export const code = `minimum divisions to make nums non-decreasing
-  ops = 0
-  for i from the last but one index down to 0
-    if nums[i] <= nums[i + 1] then continue
-    value = nums[i]
-    while value > nums[i + 1]
-      p = smallest prime factor of value
-      if p == value then return -1
-      value = p
-      ops = ops + 1
-    nums[i] = value
-  return ops`.split('\n').map((text, index) => ({ line: index + 1, text }))
+// Code panel: real JavaScript. Python below mirrors it line for line.
+export const code = [
+  "function minDivisionOperations(nums) {",
+  "  const cur = [...nums];",
+  "  let ops = 0;",
+  "  for (let i = cur.length - 2; i >= 0; i--) {",
+  "    if (cur[i] <= cur[i + 1]) continue;",
+  "    let value = cur[i];",
+  "    while (value > cur[i + 1]) {",
+  "      const p = smallestPrimeFactor(value);",
+  "      if (p === value) return -1;",
+  "      value = p;",
+  "      ops += 1;",
+  "    }",
+  "    cur[i] = value;",
+  "  }",
+  "  return ops;",
+  "}",
+  "function smallestPrimeFactor(x) {",
+  "  for (let d = 2; d * d <= x; d++) if (x % d === 0) return d;",
+  "  return x;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const PY = s => python.split('\n').findIndex(line => line.includes(s)) + 1
 
 export const python = `def min_division_operations(nums):
     def spf(x):

@@ -28,36 +28,24 @@ function gapsOf(meetings, eventTime) {
   return gaps
 }
 
-export function buildTrace(input) {
-  const { eventTime, startTime, endTime } = input
-  const meetings = startTime.map((s, i) => [s, endTime[i]])
-  let best = Math.max(...gapsOf(meetings, eventTime))
-  const frames = [{ pythonLine: 12, phase: 'start', activeLine: L('best = largest gap with no move'), meeting: null, best, message: `Without moving anything the longest free stretch is ${best}.` }]
-  meetings.forEach(([s, e], i) => {
-    const dur = e - s
-    const rest = meetings.filter((_, k) => k !== i)
-    const gaps = gapsOf(rest, eventTime)
-    let found = best
-    gaps.forEach((g, j) => {
-      if (g < dur) return
-      const others = Math.max(...gaps.filter((_, k) => k !== j), 0)
-      found = Math.max(found, others, g - dur)
-    })
-    best = found
-    frames.push({ pythonLine: 13, phase: 'move', activeLine: L('for each meeting i'), meeting: i, best, message: `Move meeting ${i} (length ${dur}) into the best gap. Longest free stretch so far: ${best}.` })
-  })
-  frames.push({ pythonLine: 20, phase: 'done', activeLine: L('return best'), meeting: null, best, message: `Longest free stretch after the move: ${best}.` })
-  return { input, result: best, frames }
-}
-
-export const code = `longest free stretch after moving at most one meeting:
-  gaps = free stretches between the meetings, including both ends
-  best = largest gap with no move
-  for each meeting i:
-    remove meeting i and find the gaps of the rest
-    for each gap g that is at least as long as meeting i:
-      best = max(best, largest other gap, g - duration of i)
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+// Code panel: real JavaScript. Python below mirrors it line for line.
+export const code = [
+  "function maxFreeTime(eventTime, startTime, endTime) {",
+  "  const meetings = startTime.map((s, i) => [s, endTime[i]]);",
+  "  let best = Math.max(...gapsOf(meetings, eventTime));",
+  "  meetings.forEach(([s, e], i) => {",
+  "    const dur = e - s;",
+  "    const rest = meetings.filter((_, k) => k !== i);",
+  "    const gaps = gapsOf(rest, eventTime);",
+  "    gaps.forEach((g, j) => {",
+  "      if (g < dur) return;",
+  "      const others = Math.max(...gaps.filter((_, k) => k !== j), 0);",
+  "      best = Math.max(best, others, g - dur);",
+  "    });",
+  "  });",
+  "  return best;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def max_free_time(eventTime, startTime, endTime):
@@ -81,3 +69,31 @@ export const python = `def max_free_time(eventTime, startTime, endTime):
                 best = max(best, others, g - dur)
     return best
 `
+const PY = s => python.split('\n').findIndex(line => line.includes(s)) + 1
+
+export function buildTrace(input) {
+  const { eventTime, startTime, endTime } = input
+  const meetings = startTime.map((s, i) => [s, endTime[i]])
+  let best = Math.max(...gapsOf(meetings, eventTime))
+  const frames = [{ pythonLine: PY('best = max(gaps_of'), activeLine: L('let best = Math.max'), phase: 'start', meeting: null, dur: null, gaps: gapsOf(meetings, eventTime), chosen: null, best,
+    message: `Without moving anything the longest free stretch is ${best}.` }]
+  meetings.forEach(([s, e], i) => {
+    const dur = e - s
+    const rest = meetings.filter((_, k) => k !== i)
+    const gaps = gapsOf(rest, eventTime)
+    frames.push({ pythonLine: PY('gaps = gaps_of(meetings[:i]'), activeLine: L('const rest = meetings'), phase: 'lift', meeting: i, dur, gaps, chosen: null, best,
+      message: `Lift meeting ${i} (length ${dur}). The free stretches of the others are [${gaps.join(', ')}].` })
+    let found = best
+    gaps.forEach((g, j) => {
+      if (g < dur) return
+      const others = Math.max(...gaps.filter((_, k) => k !== j), 0)
+      found = Math.max(found, others, g - dur)
+      frames.push({ pythonLine: PY('best = max(best, others'), activeLine: L('best = Math.max(best, others'), phase: 'fit', meeting: i, dur, gaps, chosen: j, best: found,
+        message: `Gap ${j} (${g}) fits length ${dur}; placing meeting ${i} at its edge leaves ${g - dur} free there and ${others} elsewhere.` })
+    })
+    best = found
+  })
+  frames.push({ pythonLine: PY('return best'), activeLine: L('return best;'), phase: 'done', meeting: null, dur: null, gaps: [], chosen: null, best,
+    message: `Longest free stretch after the move: ${best}.` })
+  return { input, result: best, frames }
+}

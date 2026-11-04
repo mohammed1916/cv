@@ -17,12 +17,12 @@ export function buildTrace({ strength, x }) {
   const dp = Array(1 << n).fill(INF)
   const frames = []
   dp[0] = 0
-  frames.push({ pythonLine: PY('dp[0] = 0'), phase: 'start', activeLine: L('no locks broken'), mask: 0, lock: -1, dp: [...dp], message: 'Nothing is broken, so the time is 0.' })
+  frames.push({ pythonLine: PY('dp[0] = 0'), phase: 'start', activeLine: L('dp[0] = 0'), mask: 0, lock: -1, dp: [...dp], message: 'Nothing is broken, so the time is 0.' })
   for (let mask = 0; mask <= full; mask++) {
     if (dp[mask] === INF) continue
     const count = popcount(mask)
     const k = 1 + x * count
-    frames.push({ pythonLine: PY('k = 1 + x'), phase: 'state', activeLine: L('the factor for this state'), mask, lock: -1, k, dp: [...dp],
+    frames.push({ pythonLine: PY('k = 1 + x'), phase: 'state', activeLine: L('const k = 1 + x'), mask, lock: -1, k, dp: [...dp],
       message: `${count} lock(s) broken, factor ${k}, best time ${dp[mask]}.` })
     for (let i = 0; i < n; i++) {
       if (mask & (1 << i)) continue
@@ -30,12 +30,12 @@ export function buildTrace({ strength, x }) {
       const next = mask | (1 << i)
       const improves = dp[mask] + minutes < dp[next]
       if (improves) dp[next] = dp[mask] + minutes
-      frames.push({ pythonLine: PY('if dp[mask] + minutes'), phase: improves ? 'relax' : 'skip', activeLine: L('try breaking lock'), mask, lock: i, k, dp: [...dp],
+      frames.push({ pythonLine: PY('if dp[mask] + minutes'), phase: improves ? 'relax' : 'skip', activeLine: L('const minutes = Math.ceil'), mask, lock: i, k, dp: [...dp],
         message: `Break lock ${i} (strength ${strength[i]}) in ${minutes} minute(s) to reach time ${dp[mask] + minutes}${improves ? ' (improves)' : ''}.` })
     }
   }
   const result = dp[full]
-  frames.push({ pythonLine: PY('return dp['), phase: 'done', activeLine: L('return the time for all locks'), mask: full, lock: -1, dp: [...dp], result, message: `Minimum time to break all locks: ${result}.` })
+  frames.push({ pythonLine: PY('return dp['), phase: 'done', activeLine: L('return dp[full];'), mask: full, lock: -1, dp: [...dp], result, message: `Minimum time to break all locks: ${result}.` })
   return { input: { strength, x }, result, frames }
 }
 
@@ -45,17 +45,33 @@ function popcount(v) {
   return c
 }
 
-export const code = `minimum minutes to break all locks
-  dp[mask] is the minimum time to have broken exactly the locks in mask
-  dp[0] is 0 and all other states start at infinity
-  for each mask in increasing order with a finite dp value
-    k is 1 plus x times the number of broken locks
-    for each lock i not in mask
-      minutes is strength[i] divided by k, rounded up
-      if dp[mask] plus minutes improves dp[mask with i]
-        update it
-  return dp for the full mask`.split('\n').map((text, index) => ({ line: index + 1, text }))
+// Code panel: real JavaScript. Python below mirrors it line for line.
+export const code = [
+  "function popcount(m) {",
+  "  let count = 0;",
+  "  for (; m; m &= m - 1) count++;",
+  "  return count;",
+  "}",
+  "function minimumTimeToBreakLocks(strength, x) {",
+  "  const n = strength.length;",
+  "  const full = (1 << n) - 1;",
+  "  const dp = Array(1 << n).fill(Infinity);",
+  "  dp[0] = 0;",
+  "  for (let mask = 0; mask <= full; mask++) {",
+  "    if (dp[mask] === Infinity) continue;",
+  "    const k = 1 + x * popcount(mask);",
+  "    for (let i = 0; i < n; i++) {",
+  "      if (mask & (1 << i)) continue;",
+  "      const minutes = Math.ceil(strength[i] / k);",
+  "      const next = mask | (1 << i);",
+  "      if (dp[mask] + minutes < dp[next]) dp[next] = dp[mask] + minutes;",
+  "    }",
+  "  }",
+  "  return dp[full];",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const PY = s => python.split('\n').findIndex(line => line.includes(s)) + 1
 
 export const python = `def minimum_time_to_break_locks(strength, x):
     n = len(strength)
@@ -76,4 +92,3 @@ export const python = `def minimum_time_to_break_locks(strength, x):
                 dp[nxt] = dp[mask] + minutes
     return dp[full]
 `
-const PY = s => python.split('\n').findIndex(line => line.includes(s)) + 1

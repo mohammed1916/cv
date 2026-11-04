@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -13,9 +14,9 @@ const definition = {
   url: 'https://leetcode.com/problems/minimize-the-maximum-adjacent-element-difference/description/',
   complexity: 'Teaching model: every pair in the known range, each checked by a dynamic program over the positions. The visualization caps values at 20 and the length at 8.',
   examples: [
-    { label: 'Mixed', input: '{"nums":[2,-1,7,-1,13]}' },
+    { label: 'Invented mixed', input: '{"nums":[2,-1,7,-1,13]}' },
     { label: 'All missing', input: '{"nums":[-1,-1,-1,-1]}' },
-    { label: 'Gap in middle', input: '{"nums":[-1,6,-1,11]}' },
+    { label: 'Invented gap in middle', input: '{"nums":[-1,6,-1,11]}' },
   ],
 }
 
@@ -34,6 +35,7 @@ export default function MinimizeMaxAdjacentDifference() {
           </div>
         })}
       </div>
+      <AnswerRangeBar title="Pair search (x to y inside the known range)" min={step.lo} max={step.hi} low={step.x ?? step.lo} high={step.y ?? step.hi} />
       <p>{step.x !== null ? `Pair (${step.x}, ${step.y}) with largest gap ${step.cost}.` : 'Collecting the range of known values.'}</p>
       <output aria-label="Best so far">{step.best ? `Best so far: ${step.best.cost} using (${step.best.x}, ${step.best.y}).` : ''}</output>
     </>

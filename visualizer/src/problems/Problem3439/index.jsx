@@ -12,8 +12,8 @@ const definition = {
   url: 'https://leetcode.com/problems/reschedule-meetings-for-maximum-free-time-i/',
   complexity: 'O(n * k) windows, each summed in O(k) time. The visualization caps the schedule at 8 meetings.',
   examples: [
-    { label: 'Example 1', input: '{"eventTime":5,"startTime":[1,3],"endTime":[2,5],"k":1}' },
-    { label: 'Example 2', input: '{"eventTime":10,"startTime":[0,7,9],"endTime":[1,8,10],"k":1}' },
+    { label: 'Invented short day', input: '{"eventTime":6,"startTime":[0,2],"endTime":[1,4],"k":1}' },
+    { label: 'Invented three meetings', input: '{"eventTime":10,"startTime":[0,7,9],"endTime":[1,8,10],"k":1}' },
   ],
 }
 
@@ -23,8 +23,9 @@ export default function RescheduleMeetings() {
       <thead><tr><th>Gap</th><th>Free time</th><th>Role</th></tr></thead>
       <tbody>{step.gaps.map((g, i) => {
         const inWindow = step.from !== null && i >= step.from && i <= step.to + 1
+        const role = step.from === null ? '' : i === step.from ? 'l: first gap' : i === step.to + 1 ? 'r: last gap' : inWindow ? 'merged' : ''
         return <tr key={i} className={inWindow ? 'is-active' : ''}>
-          <td>{i}</td><td>{g}</td><td>{inWindow ? 'merged' : ''}</td>
+          <td>{i}</td><td>{g}</td><td>{role}</td>
         </tr>
       })}</tbody>
     </table>

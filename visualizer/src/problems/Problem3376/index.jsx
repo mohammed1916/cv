@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-time-to-break-locks-i/',
   complexity: 'O(2^n * n) time and O(2^n) space, with n at most 8 locks.',
   examples: [
-    { label: 'Example 1', input: '{"strength":[3,4,1],"x":1}' },
-    { label: 'Example 2', input: '{"strength":[1,1,1],"x":1}' },
+    { label: 'Invented spread', input: '{"strength":[2,6,5],"x":2}' },
+    { label: 'Invented equal locks', input: '{"strength":[1,1,1],"x":1}' },
   ],
 }
 

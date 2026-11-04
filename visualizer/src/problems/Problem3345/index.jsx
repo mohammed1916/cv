@@ -12,7 +12,7 @@ const definition = {
   url: 'https://leetcode.com/problems/smallest-divisible-digit-product-i/',
   complexity: 'O(answer * digits) time; the answer stays close to n because a zero digit makes the product 0.',
   examples: [
-    { label: 'Example', input: '{"n":15,"t":7}' },
+    { label: 'Invented n and t', input: '{"n":15,"t":7}' },
     { label: 'Zero digit', input: '{"n":99,"t":10}' },
   ],
 }

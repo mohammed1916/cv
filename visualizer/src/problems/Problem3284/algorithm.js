@@ -7,28 +7,36 @@ export function parseInput(text) {
   return nums
 }
 
-export const code = `FUNCTION sumConsecutiveSubarrays(nums)
-    MOD ← 1000000007
-    total ← sum of nums, since every single element counts once
-    upCount, upSum ← 0, 0 (length 2 or more, steps of +1, ending here)
-    downCount, downSum ← 0, 0 (length 2 or more, steps of -1, ending here)
-    FOR i from 1 to n − 1
-        IF nums[i] − nums[i−1] = 1 THEN
-            upSum ← upSum + upCount · nums[i] + nums[i−1] + nums[i]
-            upCount ← upCount + 1
-        ELSE upCount, upSum ← 0, 0
-        IF nums[i] − nums[i−1] = −1 THEN
-            downSum ← downSum + downCount · nums[i] + nums[i−1] + nums[i]
-            downCount ← downCount + 1
-        ELSE downCount, downSum ← 0, 0
-        total ← total + upSum + downSum
-    RETURN total mod MOD`.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-const L = s => {
-  const index = code.findIndex(c => c.text.includes(s))
-  if (index < 0) throw new Error(`Missing pseudocode line: ${s}`)
-  return index + 1
-}
+// Code panel: real JavaScript. Python below mirrors it line for line.
+export const code = [
+  "function sumConsecutiveSubarrays(nums) {",
+  "  const MOD = 1000000007;",
+  "  let total = nums.reduce((sum, x) => sum + x, 0);",
+  "  let upCount = 0, upSum = 0;",
+  "  let downCount = 0, downSum = 0;",
+  "  for (let i = 1; i < nums.length; i++) {",
+  "    const diff = nums[i] - nums[i - 1];",
+  "    if (diff === 1) {",
+  "      upSum = upSum + upCount * nums[i] + nums[i - 1] + nums[i];",
+  "      upCount += 1;",
+  "    } else {",
+  "      upCount = 0;",
+  "      upSum = 0;",
+  "    }",
+  "    if (diff === -1) {",
+  "      downSum = downSum + downCount * nums[i] + nums[i - 1] + nums[i];",
+  "      downCount += 1;",
+  "    } else {",
+  "      downCount = 0;",
+  "      downSum = 0;",
+  "    }",
+  "    total += upSum + downSum;",
+  "  }",
+  "  return ((total % MOD) + MOD) % MOD;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const PY = s => python.split('\n').findIndex(line => line.includes(s)) + 1
 
 export const python = `def sum_consecutive_subarrays(nums):
     MOD = 1000000007
@@ -57,11 +65,6 @@ if __name__ == "__main__":
     print(sum_consecutive_subarrays(json.loads(sys.stdin.read())))
 `
 
-const P = s => {
-  const index = python.split('\n').findIndex(line => line.includes(s))
-  if (index < 0) throw new Error(`Missing python line: ${s}`)
-  return index + 1
-}
 
 export function buildTrace(nums) {
   const frames = []
@@ -71,7 +74,7 @@ export function buildTrace(nums) {
   let downCount = 0
   let downSum = 0
   frames.push({
-    phase: 'start', activeLine: L('total ← sum of nums'), pythonLine: P('total = sum(nums)'),
+    phase: 'start', activeLine: L('let total = nums.reduce'), pythonLine: PY('total = sum(nums)'),
     i: -1, diff: null, upCount, upSum, downCount, downSum, total,
     message: `Every single element counts once: the running total starts at ${total}.`,
   })
@@ -92,7 +95,7 @@ export function buildTrace(nums) {
       downSum = 0
     }
     frames.push({
-      phase: 'diff', activeLine: L('= 1 THEN'), pythonLine: P('if diff == 1'),
+      phase: 'diff', activeLine: L('if (diff === 1)'), pythonLine: PY('if diff == 1'),
       i, diff, upCount, upSum, downCount, downSum, total,
       message: diff === 1
         ? `nums[${i}] − nums[${i - 1}] = +1, so the rising run extends.`
@@ -102,14 +105,14 @@ export function buildTrace(nums) {
     })
     total += upSum + downSum
     frames.push({
-      phase: 'add', activeLine: L('total ← total + upSum'), pythonLine: P('total += up_sum + down_sum'),
+      phase: 'add', activeLine: L('total += upSum + downSum'), pythonLine: PY('total += up_sum + down_sum'),
       i, diff, upCount, upSum, downCount, downSum, total,
       message: `Add the runs that end at ${i}: ${upSum + downSum} more, total ${total}.`,
     })
   }
   const result = ((total % MOD) + MOD) % MOD
   frames.push({
-    phase: 'done', activeLine: L('RETURN total mod MOD'), pythonLine: P('return total % MOD'),
+    phase: 'done', activeLine: L('return ((total'), pythonLine: PY('return total % MOD'),
     i: nums.length, diff: null, upCount, upSum, downCount, downSum, total,
     message: `The total is ${result} modulo ${MOD}.`,
   })

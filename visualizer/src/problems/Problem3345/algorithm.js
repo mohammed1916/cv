@@ -16,27 +16,32 @@ function digitProduct(x) {
 export function buildTrace({ n, t }) {
   const frames = []
   let x = n
-  frames.push({ pythonLine: PY('x = n'), phase: 'start', activeLine: L('start at n'), candidate: x, product: null, message: `Start at ${n} and look for a digit product divisible by ${t}.` })
+  frames.push({ pythonLine: PY('x = n'), phase: 'start', activeLine: L('let x = n'), candidate: x, product: null, message: `Start at ${n} and look for a digit product divisible by ${t}.` })
   for (;;) {
     const product = digitProduct(x)
     const ok = product % t === 0
-    frames.push({ pythonLine: PY('if product % t'), phase: 'check', activeLine: L('if the digit product'), candidate: x, product, ok,
+    frames.push({ pythonLine: PY('if product % t'), phase: 'check', activeLine: L('if (product % t === 0)'), candidate: x, product, ok,
       message: `${x} has digit product ${product}, ${ok ? 'divisible by' : 'not divisible by'} ${t}.` })
     if (ok) {
-      frames.push({ pythonLine: PY('return x'), phase: 'done', activeLine: L('return the candidate'), candidate: x, product, ok, result: x, message: `The answer is ${x}.` })
+      frames.push({ pythonLine: PY('return x'), phase: 'done', activeLine: L('return x;'), candidate: x, product, ok, result: x, message: `The answer is ${x}.` })
       return { input: { n, t }, result: x, frames }
     }
     x += 1
   }
 }
 
-export const code = `smallest number at least n with digit product divisible by t
-  set x to n
-  repeat
-    compute the product of the digits of x
-    if the product is divisible by t
-      return x
-    add 1 to x`.split('\n').map((text, index) => ({ line: index + 1, text }))
+// Code panel: real JavaScript. Python below mirrors it line for line.
+export const code = [
+  "function smallestDivisibleDigitProduct(n, t) {",
+  "  let x = n;",
+  "  for (;;) {",
+  "    let product = 1;",
+  "    for (const ch of String(x)) product *= Number(ch);",
+  "    if (product % t === 0) return x;",
+  "    x += 1;",
+  "  }",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def smallest_divisible_digit_product(n, t):

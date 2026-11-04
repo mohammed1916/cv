@@ -27,7 +27,7 @@ export default function MedianWindowView({ run, step }) {
           return (
             <div className={cls} role="listitem" key={`n-${i}`}>
               <span className="median-window__value">{value}</span>
-              <span className="median-window__index">{i}</span>
+              <span className="median-window__index">{i}{hasWindow && i === start ? " · l" : ""}{hasWindow && i === start + k - 1 ? " · r" : ""}</span>
             </div>
           );
         })}

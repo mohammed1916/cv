@@ -6,22 +6,29 @@ export function parseInput(text) {
   return { n }
 }
 
+const PY = s => python.split('\n').findIndex(line => line.includes(s)) + 1
+
 export function buildTrace({ n }) {
   let candidate = 1
-  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set candidate to 1'), candidate, message: `Find the smallest all-ones number that is at least ${n}.` }]
+  const frames = [{ pythonLine: PY('candidate = 1'), phase: 'start', activeLine: L('let candidate = 1'), candidate, message: `Find the smallest all-ones number that is at least ${n}.` }]
   while (candidate < n) {
     candidate = candidate * 2 + 1
-    frames.push({ pythonLine: 4, phase: 'grow', activeLine: L('set candidate to candidate times 2 plus 1'), candidate, message: `${candidate - 1 === 0 ? '' : ''}Candidate is now ${candidate} (binary ${candidate.toString(2)}).${candidate < n ? ' Still below n, so grow it again.' : ' It reaches n.'}` })
+    frames.push({ pythonLine: PY('candidate = candidate * 2'), phase: 'grow', activeLine: L('candidate = candidate * 2 + 1'), candidate, message: `${candidate - 1 === 0 ? '' : ''}Candidate is now ${candidate} (binary ${candidate.toString(2)}).${candidate < n ? ' Still below n, so grow it again.' : ' It reaches n.'}` })
   }
-  frames.push({ pythonLine: 5, phase: 'done', activeLine: L('return candidate'), candidate, message: `Smallest number with all set bits that is at least ${n}: ${candidate}.` })
+  frames.push({ pythonLine: PY('return candidate'), phase: 'done', activeLine: L('return candidate;'), candidate, message: `Smallest number with all set bits that is at least ${n}: ${candidate}.` })
   return { input: { n }, result: candidate, frames }
 }
 
-export const code = `smallest number with all set bits at least n:
-  set candidate to 1
-  while candidate is less than n do
-    set candidate to candidate times 2 plus 1
-  return candidate`.split('\n').map((text, index) => ({ line: index + 1, text }))
+// Code panel: real JavaScript. Python below mirrors it line for line.
+export const code = [
+  "function smallestAllOnes(n) {",
+  "  let candidate = 1;",
+  "  while (candidate < n) {",
+  "    candidate = candidate * 2 + 1;",
+  "  }",
+  "  return candidate;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def smallest_all_ones(n):

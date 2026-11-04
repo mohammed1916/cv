@@ -12,7 +12,7 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-frequency-of-an-element-after-performing-operations-i/',
   complexity: 'O(c * n) time for c candidate targets. The visualization caps input at 10 numbers.',
   examples: [
-    { label: 'Example', input: '{"nums":[1,4,5],"k":1,"numOperations":2}' },
+    { label: 'Invented spread', input: '{"nums":[2,6,7],"k":1,"numOperations":2}' },
     { label: 'Equal values', input: '{"nums":[2,2,9,9,9],"k":3,"numOperations":0}' },
   ],
 }

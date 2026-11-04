@@ -12,21 +12,21 @@ function buildNodes(values) {
   return values.map((val, i) => ({ val, prev: i > 0 ? i - 1 : -1, next: i + 1 < values.length ? i + 1 : -1 }))
 }
 
-export const code = `FUNCTION convertFromNode(node)
-    head ← node
-    WHILE head.prev is not null
-        head ← head.prev
-    result ← empty list
-    WHILE head is not null
-        append head.val to result
-        head ← head.next
-    RETURN result`.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-const L = s => {
-  const index = code.findIndex(c => c.text.includes(s))
-  if (index < 0) throw new Error(`Missing pseudocode line: ${s}`)
-  return index + 1
-}
+// Code panel: real JavaScript. Python below mirrors it line for line.
+export const code = [
+  "function convertFromNode(node) {",
+  "  let head = node;",
+  "  while (head.prev !== null) head = head.prev;",
+  "  const result = [];",
+  "  while (head !== null) {",
+  "    result.push(head.val);",
+  "    head = head.next;",
+  "  }",
+  "  return result;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const PY = s => python.split('\n').findIndex(line => line.includes(s)) + 1
 
 export const python = `class Node:
     def __init__(self, val, prev=None, next=None):
@@ -65,11 +65,6 @@ if __name__ == "__main__":
     print(convert_from_node(nodes[data["node"]]))
 `
 
-const P = s => {
-  const index = python.split('\n').findIndex(line => line.includes(s))
-  if (index < 0) throw new Error(`Missing python line: ${s}`)
-  return index + 1
-}
 
 export function buildTrace({ values, node }) {
   const nodes = buildNodes(values)
@@ -77,36 +72,36 @@ export function buildTrace({ values, node }) {
   const result = []
   let head = node
   frames.push({
-    phase: 'start', activeLine: L('head ← node'), pythonLine: P('head = node'),
+    phase: 'start', activeLine: L('let head = node'), pythonLine: PY('head = node'),
     current: node, head, result: [], nodes, message: `Start from the given node at position ${node}; its head is not known yet.`,
   })
   while (nodes[head].prev !== -1) {
     head = nodes[head].prev
     frames.push({
-      phase: 'climb', activeLine: L('head ← head.prev'), pythonLine: P('head = head.prev'),
+      phase: 'climb', activeLine: L('head = head.prev;'), pythonLine: PY('head = head.prev'),
       current: head, head, result: [], nodes, message: `Follow prev back to position ${head}.`,
     })
   }
   frames.push({
-    phase: 'head', activeLine: L('WHILE head.prev is not null'), pythonLine: P('while head.prev is not None'),
+    phase: 'head', activeLine: L('while (head.prev !== null)'), pythonLine: PY('while head.prev is not None'),
     current: head, head, result: [], nodes, message: `Position ${head} has no prev, so it is the head.`,
   })
   let current = head
   while (current !== -1) {
     result.push(nodes[current].val)
     frames.push({
-      phase: 'collect', activeLine: L('append head.val'), pythonLine: P('result.append(head.val)'),
+      phase: 'collect', activeLine: L('result.push(head.val)'), pythonLine: PY('result.append(head.val)'),
       current, head, result: result.slice(), nodes, message: `Append ${nodes[current].val} from position ${current}.`,
     })
     current = nodes[current].next
     frames.push({
-      phase: 'advance', activeLine: L('head ← head.next'), pythonLine: P('head = head.next'),
+      phase: 'advance', activeLine: L('head = head.next;'), pythonLine: PY('head = head.next'),
       current, head, result: result.slice(), nodes,
       message: current === -1 ? 'Next is null, so the forward walk ends.' : `Follow next to position ${current}.`,
     })
   }
   frames.push({
-    phase: 'done', activeLine: L('RETURN result'), pythonLine: P('return result'),
+    phase: 'done', activeLine: L('return result;'), pythonLine: PY('return result'),
     current: -1, head, result: result.slice(), nodes, message: `The full list is [${result.join(', ')}].`,
   })
   return { input: { values, node }, result: result.slice(), frames }

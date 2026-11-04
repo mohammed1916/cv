@@ -12,7 +12,7 @@ export function buildTrace(input) {
   const { n, k, stay_score, travel_score } = input
   let best = Array.from({ length: n }, () => 0)
   const history = [best.slice()]
-  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set best to 0'), day: -1, best: best.slice(), result: null, message: `Before day 0 the tourist can be in any of the ${n} cities with 0 points.` }]
+  const frames = [{ pythonLine: PY('best = [0] * n'), phase: 'start', activeLine: L('let best = Array'), day: -1, best: best.slice(), result: null, message: `Before day 0 the tourist can be in any of the ${n} cities with 0 points.` }]
   for (let d = 0; d < k; d++) {
     const next = Array.from({ length: n }, () => 0)
     for (let c = 0; c < n; c++) {
@@ -22,22 +22,31 @@ export function buildTrace(input) {
     }
     best = next
     history.push(best.slice())
-    frames.push({ pythonLine: 9, phase: 'day', activeLine: L('set next[c]'), day: d, best: best.slice(), history: history.map(r => r.slice()), result: null, message: `After day ${d}, the best total for each city is ${best.join(', ')}.` })
+    frames.push({ pythonLine: PY('nxt[c] = max(options)'), phase: 'day', activeLine: L('next[c] = Math.max'), day: d, best: best.slice(), history: history.map(r => r.slice()), result: null, message: `After day ${d}, the best total for each city is ${best.join(', ')}.` })
   }
   const result = Math.max(...best)
-  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return the largest'), day: k, best: best.slice(), history: history.map(r => r.slice()), result, message: `The most points the tourist can earn is ${result}.` })
+  frames.push({ pythonLine: PY('return max(best)'), phase: 'done', activeLine: L('return Math.max'), day: k, best: best.slice(), history: history.map(r => r.slice()), result, message: `The most points the tourist can earn is ${result}.` })
   return { input, result, frames }
 }
 
-export const code = `maximum points the tourist can earn (n, k, stay_score, travel_score)
-  set best to 0 for every city
-  for each day d from 0 to k minus 1
-    set next to zeros for every city
-    for each city c
-      set next[c] to the largest of: best[c] plus stay_score[d][c], and best[p] plus travel_score[p][c] for each other city p
-    set best to next
-  return the largest value in best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+// Code panel: real JavaScript. Python below mirrors it line for line.
+export const code = [
+  "function maxPoints(n, k, stayScore, travelScore) {",
+  "  let best = Array(n).fill(0);",
+  "  for (let d = 0; d < k; d++) {",
+  "    const next = Array(n).fill(0);",
+  "    for (let c = 0; c < n; c++) {",
+  "      const options = [best[c] + stayScore[d][c]];",
+  "      for (let p = 0; p < n; p++) if (p !== c) options.push(best[p] + travelScore[p][c]);",
+  "      next[c] = Math.max(...options);",
+  "    }",
+  "    best = next;",
+  "  }",
+  "  return Math.max(...best);",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const PY = s => python.split('\n').findIndex(line => line.includes(s)) + 1
 
 export const python = `def max_points(n, k, stay_score, travel_score):
     best = [0] * n

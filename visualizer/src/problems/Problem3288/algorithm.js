@@ -22,7 +22,7 @@ export function buildTrace(input) {
     }
     return rows
   }
-  const frames = [{ pythonLine: 18, phase: 'start', activeLine: L('set rising to rising'), index: k, direction: null, memo: [], message: `Find the longest strictly increasing path through point ${k}, ${coordinates[k]}.` }]
+  const frames = [{ pythonLine: PY('return chain(k, 1'), phase: 'start', activeLine: L('return chain(k, 1, upMemo)'), index: k, direction: null, memo: [], message: `Find the longest strictly increasing path through point ${k}, ${coordinates[k]}.` }]
 
   // sign +1 looks for points that are larger in both coordinates (rising); sign -1 for smaller ones (falling).
   const chain = (i, sign) => {
@@ -30,42 +30,47 @@ export function buildTrace(input) {
     const name = sign === 1 ? 'rising' : 'falling'
     if (memo.has(i)) {
       const value = memo.get(i)
-      frames.push({ pythonLine: 7, phase: 'reuse', activeLine: L('if memo already holds'), index: i, direction: name, memo: snapshot(), message: `${name} from point ${i} is already ${value}.` })
+      frames.push({ pythonLine: PY('if i in memo'), phase: 'reuse', activeLine: L('if (memo.has(i))'), index: i, direction: name, memo: snapshot(), message: `${name} from point ${i} is already ${value}.` })
       return value
     }
     let best = 1
-    frames.push({ pythonLine: 9, phase: 'visit', activeLine: L('set best to 1'), index: i, direction: name, memo: snapshot(), message: `Look for points that are ${sign === 1 ? 'larger' : 'smaller'} in both coordinates than point ${i}.` })
+    frames.push({ pythonLine: PY('best = 1'), phase: 'visit', activeLine: L('let best = 1'), index: i, direction: name, memo: snapshot(), message: `Look for points that are ${sign === 1 ? 'larger' : 'smaller'} in both coordinates than point ${i}.` })
     for (let j = 0; j < n; j++) {
       const dx = coordinates[j][0] - coordinates[i][0]
       const dy = coordinates[j][1] - coordinates[i][1]
       if (sign * dx > 0 && sign * dy > 0) best = Math.max(best, 1 + chain(j, sign))
     }
     memo.set(i, best)
-    frames.push({ pythonLine: 15, phase: 'store', activeLine: L('store best for i'), index: i, direction: name, memo: snapshot(), message: `${name} from point ${i} is ${best}.` })
+    frames.push({ pythonLine: PY('memo[i] = best'), phase: 'store', activeLine: L('memo.set(i, best)'), index: i, direction: name, memo: snapshot(), message: `${name} from point ${i} is ${best}.` })
     return best
   }
 
   const rising = chain(k, 1)
   const falling = chain(k, -1)
   const result = rising + falling - 1
-  frames.push({ pythonLine: 18, phase: 'done', activeLine: L('return rising plus falling'), index: k, direction: null, memo: snapshot(), message: `Longest path through point ${k}: ${rising} + ${falling} - 1 = ${result}.` })
+  frames.push({ pythonLine: PY('return chain(k, 1'), phase: 'done', activeLine: L('return chain(k, 1'), index: k, direction: null, memo: snapshot(), message: `Longest path through point ${k}: ${rising} + ${falling} - 1 = ${result}.` })
   return { input, result, frames }
 }
 
-export const code = `longest strictly increasing path that contains point k
-  set rising to rising(k), the longest path that starts at point k
-  set falling to falling(k), the longest path that ends at point k
-  return rising plus falling minus 1
-
-rising(i)
-  if memo already holds i then return it
-  set best to 1
-  for each point j with both coordinates larger than point i
-    set best to the larger of best and 1 plus rising(j)
-  store best for i and return it
-
-falling(i) is the same as rising(i), but with both coordinates smaller`.split('\n').map((text, index) => ({ line: index + 1, text }))
+// Code panel: real JavaScript. Python below mirrors it line for line.
+export const code = [
+  "function longestIncreasingPath(coordinates, k) {",
+  "  const upMemo = new Map(), downMemo = new Map();",
+  "  const chain = (i, sign, memo) => {",
+  "    if (memo.has(i)) return memo.get(i);",
+  "    let best = 1;",
+  "    coordinates.forEach(([x, y], j) => {",
+  "      const dx = x - coordinates[i][0], dy = y - coordinates[i][1];",
+  "      if (sign * dx > 0 && sign * dy > 0) best = Math.max(best, 1 + chain(j, sign, memo));",
+  "    });",
+  "    memo.set(i, best);",
+  "    return best;",
+  "  };",
+  "  return chain(k, 1, upMemo) + chain(k, -1, downMemo) - 1;",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const PY = s => python.split('\n').findIndex(line => line.includes(s)) + 1
 
 export const python = `def longest_increasing_path(coordinates, k):
     n = len(coordinates)
