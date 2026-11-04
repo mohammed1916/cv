@@ -441,8 +441,7 @@ function SettingsMenu({
           aria-labelledby="settings-about-title"
         >
           <h2 id="settings-about-title">About</h2>
-          <strong>CP Visualizer</strong>
-          <p>By Teem Treat</p>
+          <strong>Visualizer Pro</strong>
           <p>
             Explore algorithms step by step with interactive inputs, code
             traces, and a workspace you can arrange. Start with a free Easy
@@ -495,14 +494,14 @@ function ProblemPage({
   const Shell = enableTransitions ? motion.div : "div";
   const shellProps = enableTransitions
     ? {
-        initial: { opacity: 0, x: 14 },
-        animate: { opacity: 1, x: 0 },
-        exit: { opacity: 0, x: -14 },
-        // Stiffer spring and a shorter slide: AnimatePresence runs this on every
-        // problem navigation, where the old 50px/320-stiffness travel was slow
-        // enough to feel like the page was still loading.
-        transition: { type: "spring", stiffness: 520, damping: 38 },
-      }
+      initial: { opacity: 0, x: 14 },
+      animate: { opacity: 1, x: 0 },
+      exit: { opacity: 0, x: -14 },
+      // Stiffer spring and a shorter slide: AnimatePresence runs this on every
+      // problem navigation, where the old 50px/320-stiffness travel was slow
+      // enough to feel like the page was still loading.
+      transition: { type: "spring", stiffness: 520, damping: 38 },
+    }
     : {};
   return (
     <Shell className="problem-page" {...shellProps}>
@@ -720,13 +719,13 @@ function HomePage({
   const Shell = enableTransitions ? motion.div : "div";
   const shellProps = enableTransitions
     ? {
-        initial: { opacity: 0 },
-        animate: { opacity: 1 },
-        exit: { opacity: 0 },
-        // Explicit short fade — the default (~0.3s) stacked in front of the card
-        // stagger and made the list feel like it was loading slowly.
-        transition: { duration: 0.14 },
-      }
+      initial: { opacity: 0 },
+      animate: { opacity: 1 },
+      exit: { opacity: 0 },
+      // Explicit short fade — the default (~0.3s) stacked in front of the card
+      // stagger and made the list feel like it was loading slowly.
+      transition: { duration: 0.14 },
+    }
     : {};
   const Brand = enableTransitions ? motion.div : "div";
 
@@ -749,12 +748,12 @@ function HomePage({
             className="brand"
             {...(enableTransitions
               ? {
-                  initial: { y: -18, opacity: 0 },
-                  animate: { y: 0, opacity: 1 },
-                  // No delay: the brand is above the fold, so holding it back just
-                  // reads as lag.
-                  transition: { type: "spring", stiffness: 460, damping: 30 },
-                }
+                initial: { y: -18, opacity: 0 },
+                animate: { y: 0, opacity: 1 },
+                // No delay: the brand is above the fold, so holding it back just
+                // reads as lag.
+                transition: { type: "spring", stiffness: 460, damping: 30 },
+              }
               : {})}
           >
             <img className="brand-icon" src="/visualizer-icon.png" alt="" width="36" height="36" />
@@ -1012,7 +1011,7 @@ export default function App() {
         if (cancelled) return;
         setNavCatalog(Array.isArray(payload?.problems) ? payload.problems : []);
       })
-      .catch(() => {});
+      .catch(() => { });
     return () => {
       cancelled = true;
     };
@@ -1022,9 +1021,9 @@ export default function App() {
     () =>
       navCatalog.length
         ? mergeCatalog(
-            navCatalog,
-            ALL_PROBLEMS.filter((problem) => problem.implemented),
-          )
+          navCatalog,
+          ALL_PROBLEMS.filter((problem) => problem.implemented),
+        )
         : ALL_PROBLEMS,
     [navCatalog],
   );
@@ -1268,9 +1267,9 @@ export default function App() {
               <a
                 className="marketing-brand"
                 href="#"
-                aria-label="Teem Treat home"
+                aria-label="home"
               >
-                <span>⌘</span> TEEM TREAT <small>VISUALIZER</small>
+                <small>VISUALIZER Pro</small>
               </a>
               <div className="marketing-nav-actions">
                 <details className="marketing-view">
@@ -1309,8 +1308,8 @@ export default function App() {
             <AccessDialog
               title={
                 dialog === "account"
-                    ? "Your Teem Treat account"
-                    : "Unlock Teem Treat Pro"
+                  ? "Your Visualizer Pro account"
+                  : "Unlock Visualizer Pro"
               }
               onClose={() => setDialog(null)}
             >
@@ -1326,8 +1325,8 @@ export default function App() {
                           ? "Pro enabled locally for development"
                           : access.pro && access.account?.expiresAt
                             ? `${access.account.trialActive ? 'Free trial' : 'Pro'} active until ${new Date(
-                                access.account.expiresAt,
-                              ).toLocaleString()}`
+                              access.account.expiresAt,
+                            ).toLocaleString()}`
                             : access.pro
                               ? "Pro account"
                               : "Free account"}

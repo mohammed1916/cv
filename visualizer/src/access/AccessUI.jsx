@@ -49,7 +49,7 @@ export function Plans({ access, reason }) {
       const order = await accessCall('createProOrder', { plan });
       const checkout = new window.Razorpay({
         key: order.key, order_id: order.id, amount: order.amount, currency: 'INR',
-        name: 'Teem Treat · CP Visualizer', description: `Pro · ${PLANS[plan].label}`,
+        name: 'Visualizer Pro', description: `Pro · ${PLANS[plan].label}`,
         prefill: { email: access.user.email || '' },
         modal: { ondismiss: () => { setPending(false); restoreDialog(); } },
         handler: async (payment) => {
@@ -74,7 +74,7 @@ export function Plans({ access, reason }) {
         <ul><li>All Basics and Easy visualizers</li><li>{FREE_MEDIUM.size} selected Medium problems, including Problem 2333</li><li>Beginner tutorial</li><li>30 minutes of playground every day</li></ul>
         <small>Sign in for playground access. Resets at midnight India time.</small>
       </section>
-      <section className="plan-card plan-pro"><span className="access-eyebrow">TEEM TREAT PRO</span><h3>Every problem. More practice.</h3>
+      <section className="plan-card plan-pro"><span className="access-eyebrow">VISUALIZER PRO</span><h3>Every problem. More practice.</h3>
         <ul><li>All implemented problem visualizers unlocked</li><li>Unlimited code playground time</li><li>Future problem visualizers included during your plan</li></ul>
         <p>Try Pro free for 3 days. No card required and no automatic charge.</p>
         {access.account?.trialActive && access.pro && <p role="status">Free trial active until {new Date(access.account.trialEndsAt).toLocaleString()}.</p>}

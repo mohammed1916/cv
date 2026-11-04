@@ -67,10 +67,10 @@
   "auth": {
     "providers": {
       "googleSignIn": {
-        "oAuthBrandDisplayName": "CP Visualizer by Teem Treat",
+        "oAuthBrandDisplayName": "Visualizer Pro",
         "supportEmail": "greenelitesolutions@gmail.com",
         "authorizedRedirectUris": [
-          "https://visualizer.teemtreat.com/__/auth/handler"
+          "https://visualizer.pro/__/auth/handler"
         ]
       }
     }

@@ -20,7 +20,7 @@ export default function WelcomeHero({ onTutorial, onPlayground, onStart }) {
   function dismiss() { setDismissed(true); try { localStorage.setItem('cpviz.welcome.v1', 'dismissed'); } catch { /* Optional preference */ } }
   return <section className="welcome-hero" aria-labelledby="welcome-title">
     <div className="welcome-copy">
-      <span className="welcome-eyebrow">TEEM TREAT / LEARN BY SEEING</span>
+      <span className="welcome-eyebrow">Visualizer Pro / LEARN BY SEEING</span>
       <h1 id="welcome-title">Make algorithms<br /><em>click.</em></h1>
       <p>See the code. Follow the data. Build the intuition.<br />Explore problems step by step in a workspace that moves with you.</p>
       <div className="welcome-actions"><button className="welcome-primary" onClick={onStart}>Explore Two Sum <span>↗</span></button><button onClick={onTutorial}>▶ Take the guided tour</button></div>
