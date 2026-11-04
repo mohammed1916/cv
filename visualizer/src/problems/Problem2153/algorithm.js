@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample buses, passengers and capacities are invented for this visualization.
+// SQL walkthrough. The sample buses, passengers and capacities are invented for this visualization.
 export const sql = `WITH RECURSIVE OrderedBuses AS (
   SELECT bus_id, arrival_time, capacity,
          ROW_NUMBER() OVER (ORDER BY arrival_time, bus_id) AS seq

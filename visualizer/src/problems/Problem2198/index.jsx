@@ -17,7 +17,7 @@ const definition = {
   python,
   inputLabel: 'Object with nums (e.g. {"nums":[2,5,7,8]})',
   url: "https://leetcode.com/problems/number-of-single-divisor-triplets/",
-  complexity: "O(n^3) time and O(1) extra space for n values: every unordered index triple is checked once, and each qualifying one adds the six orderings. The visualization caps nums at 10 values from 1 to 30; the official bounds are not verified here.",
+  complexity: "O(n^3) time and O(1) extra space for n values: every unordered index triple is checked once, and each qualifying one adds the six orderings. The visualization caps nums at 10 values from 1 to 30 so each triple can be shown.",
   examples: [
     { label: "Four values", input: '{"nums":[2,5,7,8]}' },
     { label: "Five values", input: '{"nums":[3,4,6,9,10]}' },

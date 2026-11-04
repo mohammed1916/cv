@@ -1,4 +1,4 @@
-// Teaching rule (official signature not verified): count distinct users with a purchase
+// Rule: count distinct users with a purchase
 // whose time_stamp is inside the inclusive interval and whose amount is at least minAmount.
 const DATE = /^\d{4}-\d{2}-\d{2}$/
 
@@ -15,13 +15,17 @@ FROM Purchases
 WHERE time_stamp BETWEEN :start_date AND :end_date
   AND amount >= :min_amount;`
 
-export const code = `count distinct users with a qualifying purchase
-  start an empty set of user ids
-  for each purchase row
-    if time_stamp is inside the interval and amount is at least minAmount
-      add user_id to the set
-    otherwise skip the row
-  return the size of the set`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function countEligibleUsers(purchases, startDate, endDate, minAmount) {
+  const eligible = new Set()
+  for (const { user_id, time_stamp, amount } of purchases) {
+    if (time_stamp >= startDate && time_stamp <= endDate && amount >= minAmount) {
+      eligible.add(user_id)
+    } else {
+      continue
+    }
+  }
+  return eligible.size
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def count_eligible_users(purchases, start_date, end_date, min_amount):
     eligible = set()
@@ -33,7 +37,7 @@ export const python = `def count_eligible_users(purchases, start_date, end_date,
 
 const PY_LINES = python.split('\n')
 const L = text => {
-  const index = code.findIndex(line => line.text.trim().startsWith(text))
+  const index = code.findIndex(line => line.text.includes(text))
   if (index < 0) throw new Error(`Missing pseudocode line: ${text}`)
   return index + 1
 }
@@ -87,35 +91,35 @@ export function buildTrace(raw) {
     users: [...eligible].sort((a, b) => a - b),
   })
 
-  snap('start', 'start an empty set', 'eligible = set()', -1,
+  snap('start', 'const eligible = new Set()', 'eligible = set()', -1,
     `Start with no users. The interval ${startDate} to ${endDate} includes both ends, and amount must be at least ${minAmount}.`)
 
   purchases.forEach((row, index) => {
     status[index] = 'scanning'
-    snap('scan', 'for each purchase row', 'for user_id, time_stamp', index,
+    snap('scan', 'for (const { user_id', 'for user_id, time_stamp', index,
       `Row ${index + 1}: user ${row.user_id} on ${row.time_stamp} paid ${row.amount}.`)
     const inside = row.time_stamp >= startDate && row.time_stamp <= endDate
     const enough = row.amount >= minAmount
     if (inside && enough) {
-      snap('qualify', 'if time_stamp is inside', 'if start_date', index,
+      snap('qualify', 'if (time_stamp >= startDate', 'if start_date', index,
         `${row.time_stamp} is inside the interval and ${row.amount} meets ${minAmount}.`)
       if (eligible.has(row.user_id)) {
         status[index] = 'repeat'
-        snap('qualify', 'add user_id', 'eligible.add', index, `User ${row.user_id} is already counted, so the set does not grow.`)
+        snap('qualify', 'eligible.add(user_id)', 'eligible.add', index, `User ${row.user_id} is already counted, so the set does not grow.`)
       } else {
         eligible.add(row.user_id)
         status[index] = 'counted'
-        snap('qualify', 'add user_id', 'eligible.add', index, `User ${row.user_id} joins the set; its size is now ${eligible.size}.`)
+        snap('qualify', 'eligible.add(user_id)', 'eligible.add', index, `User ${row.user_id} joins the set; its size is now ${eligible.size}.`)
       }
     } else {
       status[index] = 'skipped'
       const reason = inside ? `Amount ${row.amount} is below ${minAmount}.` : `${row.time_stamp} is outside the interval.`
-      snap('skip', 'otherwise skip', 'if start_date', index, `Row ${index + 1} is skipped. ${reason}`)
+      snap('skip', '} else {', 'if start_date', index, `Row ${index + 1} is skipped. ${reason}`)
     }
   })
 
   const count = eligible.size
-  snap('done', 'return the size', 'return len', -1,
+  snap('done', 'return eligible.size', 'return len', -1,
     `Result: ${count} distinct user${count === 1 ? '' : 's'} with a qualifying purchase.`)
   return { input, result: count, frames }
 }

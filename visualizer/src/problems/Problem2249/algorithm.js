@@ -13,13 +13,19 @@ export function parseInput(text) {
   return { circles }
 }
 
-export const code = `count lattice points(circles)
-  set lo and hi to the square box that contains every circle
-  set count to 0
-  for each integer point (x, y) in the box
-    if some circle has (x - cx)^2 + (y - cy)^2 at most r^2 then
-      add 1 to count
-  return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function countLatticePoints(circles) {
+  const loX = Math.min(...circles.map(([x, , r]) => x - r))
+  const hiX = Math.max(...circles.map(([x, , r]) => x + r))
+  const loY = Math.min(...circles.map(([, y, r]) => y - r))
+  const hiY = Math.max(...circles.map(([, y, r]) => y + r))
+  let count = 0
+  for (let y = loY; y <= hiY; y++) {
+    for (let x = loX; x <= hiX; x++) {
+      if (circles.some(([cx, cy, r]) => (x - cx) ** 2 + (y - cy) ** 2 <= r * r)) count++
+    }
+  }
+  return count
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 // The points are scanned row by row inside the box around all circles, and each point is tested against every circle.
@@ -30,7 +36,7 @@ export function buildTrace({ circles }) {
   const hiX = Math.max(...xs)
   const loY = Math.min(...ys)
   const hiY = Math.max(...ys)
-  const frames = [{ phase: 'start', index: -1, x: null, y: null, inside: false, count: 0, flags: null, pythonLine: 5, activeLine: L('set lo and hi'), message: `Scan the box x from ${loX} to ${hiX}, y from ${loY} to ${hiY}.` }]
+  const frames = [{ phase: 'start', index: -1, x: null, y: null, inside: false, count: 0, flags: null, pythonLine: 5, activeLine: L('const loX'), message: `Scan the box x from ${loX} to ${hiX}, y from ${loY} to ${hiY}.` }]
   const flags = []
   let count = 0
   let index = 0
@@ -39,7 +45,7 @@ export function buildTrace({ circles }) {
       const inside = circles.some(([cx, cy, r]) => (x - cx) * (x - cx) + (y - cy) * (y - cy) <= r * r)
       if (inside) count++
       flags.push(inside)
-      frames.push({ phase: 'point', index, x, y, inside, count, flags: [...flags], pythonLine: inside ? 10 : 9, activeLine: L(inside ? 'add 1 to count' : 'if some circle'), message: inside ? `(${x}, ${y}) lies in a circle: count ${count}.` : `(${x}, ${y}) lies in no circle.` })
+      frames.push({ phase: 'point', index, x, y, inside, count, flags: [...flags], pythonLine: inside ? 10 : 9, activeLine: L(inside ? 'count++' : 'circles.some'), message: inside ? `(${x}, ${y}) lies in a circle: count ${count}.` : `(${x}, ${y}) lies in no circle.` })
       index++
     }
   }

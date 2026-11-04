@@ -31,7 +31,7 @@ export function buildTrace({ nums, queries }) {
   const n = nums.length
   const cycle = 2 * n
   const frames = []
-  frames.push({ pythonLine: 3, phase: 'start', activeLine: L('start from nums'), time: 0, cycle, present: snapshot(nums, 0), queryIndex: -1, queryTime: -1, answer: null, message: `Start with nums. One full cycle is ${cycle} seconds.` })
+  frames.push({ pythonLine: 3, phase: 'start', activeLine: L('const cycle'), time: 0, cycle, present: snapshot(nums, 0), queryIndex: -1, queryTime: -1, answer: null, message: `Start with nums. One full cycle is ${cycle} seconds.` })
   for (let p = 1; p < cycle; p++) {
     const removing = p < n
     const phase = p === n ? 'empty' : removing ? 'remove' : 'restore'
@@ -41,29 +41,32 @@ export function buildTrace({ nums, queries }) {
       : removing
         ? `Second ${p}: the leftmost ${p} element${p === 1 ? ' is' : 's are'} gone, ${left} remain.`
         : `Second ${p}: ${p - n} element${p - n === 1 ? ' is' : 's are'} restored, ${left} now in the array.`
-    frames.push({ pythonLine: removing ? 8 : 10, phase, activeLine: L(removing ? 'remove the leftmost' : 'restore the next'), time: p, cycle, present: snapshot(nums, p), queryIndex: -1, queryTime: -1, answer: null, message })
+    frames.push({ pythonLine: removing ? 8 : 10, phase, activeLine: L(removing ? 'p < n ?' : 'nums.slice(0, p - n)'), time: p, cycle, present: snapshot(nums, p), queryIndex: -1, queryTime: -1, answer: null, message })
   }
   const answers = []
   for (const [t, i] of queries) {
     const p = t % cycle
     const arr = snapshot(nums, p)
-    frames.push({ pythonLine: 6, phase: 'query', activeLine: L('set p to t mod'), time: p, cycle, present: arr, queryIndex: i, queryTime: t, answer: null, message: `Query [${t}, ${i}]: ${t} mod ${cycle} = ${p}, so read the array at second ${p}.` })
+    frames.push({ pythonLine: 6, phase: 'query', activeLine: L('const p = t % cycle'), time: p, cycle, present: arr, queryIndex: i, queryTime: t, answer: null, message: `Query [${t}, ${i}]: ${t} mod ${cycle} = ${p}, so read the array at second ${p}.` })
     const value = i < arr.length ? arr[i].v : -1
     answers.push(value)
-    frames.push({ pythonLine: 11, phase: 'query', activeLine: L(i < arr.length ? 'inside the array' : 'return -1'), time: p, cycle, present: arr, queryIndex: i, queryTime: t, answer: value, message: value === -1 ? `Index ${i} is past the end of a ${arr.length}-element array, so the answer is -1.` : `Index ${i} of that array holds ${value}.` })
+    frames.push({ pythonLine: 11, phase: 'query', activeLine: L(i < arr.length ? 'i < arr.length' : ': -1'), time: p, cycle, present: arr, queryIndex: i, queryTime: t, answer: value, message: value === -1 ? `Index ${i} is past the end of a ${arr.length}-element array, so the answer is -1.` : `Index ${i} of that array holds ${value}.` })
   }
-  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('for each query'), time: -1, cycle, present: [], queryIndex: -1, queryTime: -1, answer: answers, message: `All ${queries.length} queries are answered.` })
+  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return answers'), time: -1, cycle, present: [], queryIndex: -1, queryTime: -1, answer: answers, message: `All ${queries.length} queries are answered.` })
   return { input: { nums, queries }, result: answers, frames }
 }
 
-export const code = `start from nums and a cycle of 2n seconds
-for each second p in the cycle
-  if p is less than n then remove the leftmost element
-  else restore the next element in original order
-for each query [t, i]
-  set p to t mod cycle
-  if index i is inside the array at p then return that element
-  else return -1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function elementsAfterRemoval(nums, queries) {
+  const n = nums.length
+  const cycle = 2 * n
+  const answers = []
+  for (const [t, i] of queries) {
+    const p = t % cycle
+    const arr = p < n ? nums.slice(p) : nums.slice(0, p - n)
+    answers.push(i < arr.length ? arr[i] : -1)
+  }
+  return answers
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def element_at_times(nums, queries):
     n = len(nums)

@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The keyword and post rows are invented for this visualization.
+// SQL walkthrough. The keyword and post rows are invented for this visualization.
 export const sql = `WITH PostWords AS (
   SELECT post_id, word
   FROM WordTokens
@@ -53,6 +53,8 @@ function tableRows(input, name, columns) {
   if (!Array.isArray(rows) || rows.length < 1 || rows.length > 12) throw new Error(`${name} needs 1 to 12 rows.`)
   for (const row of rows) {
     if (!row || typeof row !== 'object' || columns.some(column => !(column in row))) throw new Error(`${name} rows need ${columns.join(', ')}.`)
+    if (name === 'Keywords' && (!Number.isInteger(row.topic_id) || typeof row.word !== 'string')) throw new Error('Keywords rows need an integer topic_id and a word.')
+    if (name === 'Posts' && (!Number.isInteger(row.post_id) || typeof row.content !== 'string')) throw new Error('Posts rows need an integer post_id and content.')
   }
   return rows.map(row => Object.fromEntries(columns.map(column => [column, row[column]])))
 }
@@ -77,14 +79,14 @@ export function buildTrace(input) {
     if (!topicsByWord.has(word)) topicsByWord.set(word, new Set())
     topicsByWord.get(word).add(row.topic_id)
   }
-  const index = [...topicsByWord].map(([word, topics]) => ({ word, topics: [...topics].sort().join(',') }))
+  const index = [...topicsByWord].map(([word, topics]) => ({ word, topics: [...topics].sort((x, y) => x - y).join(',') }))
   frames.push(frame('index', 'LEFT JOIN Keywords', 'topics_by_word =', `Index ${topicsByWord.size} distinct keyword words.`, ['word', 'topics'], index))
 
   const table = []
   const result = []
   for (const post of Posts) {
     const words = [...new Set(post.content.toLowerCase().match(/[a-z0-9]+/g) ?? [])]
-    const topics = [...new Set(words.flatMap(word => [...(topicsByWord.get(word) ?? [])]))].sort()
+    const topics = [...new Set(words.flatMap(word => [...(topicsByWord.get(word) ?? [])]))].sort((x, y) => x - y)
     const topicText = topics.length ? topics.join(',') : 'Ambiguous!'
     result.push({ post_id: post.post_id, topics: topicText })
     table.push({ post_id: post.post_id, words: words.join(' '), topics: topicText })

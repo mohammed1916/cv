@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample buses, passengers and boarding rule are invented for this visualization.
+// SQL walkthrough of the bus and passenger tables. The sample rows and boarding rule are invented for this visualization.
 export const sql = `WITH Boarding AS (
   SELECT p.passenger_id,
          (SELECT MIN(b.arrival_time) FROM Buses b WHERE b.arrival_time >= p.arrival_time) AS bus_time

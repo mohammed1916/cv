@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample values are invented for this visualization.
+// SQL walkthrough. The sample values are invented for this visualization.
 export const sql = `WITH FirstSorted AS (
   SELECT first_col, ROW_NUMBER() OVER (ORDER BY first_col ASC) AS pos
   FROM Data

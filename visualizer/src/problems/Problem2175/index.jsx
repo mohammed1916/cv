@@ -1,12 +1,13 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, sql, python, phases, sample } from './algorithm'
 import { meta } from './meta'
+import RankShiftView from './RankShiftView'
 
 const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python,
   inputLabel: 'Teams and point changes as JSON: {"team_points":[...],"points_change":[...]}',
   url: 'https://leetcode.com/problems/the-change-in-global-rankings/',
-  complexity: 'Knowledge-derived walkthrough: two rankings of at most 10 teams, joined by team.',
+  complexity: 'Two rankings of at most 10 teams, joined by team: O(t log t) for t teams.',
   examples: [{ label: 'Sample tables', input: JSON.stringify(sample) }],
 }
 
@@ -20,11 +21,12 @@ function RowTable({ rows, label }) {
 }
 
 export default function ChangeInGlobalRankings() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <RankShiftView run={run} step={step} phases={phases} />
     <h3>Working table</h3>
     <RowTable rows={step.rows} label={`${meta.title} working table`} />
   </>} renderReasoning={() => <>
-    <p>Knowledge-derived walkthrough written for this visualizer. The sample tables are invented.</p>
+    <p>This walkthrough uses invented sample tables.</p>
     <p>The ranking is done twice: once before the changes and once after. A tie in points is broken by name in both rankings.</p>
     <p>A positive rank difference means the team climbed, because its old rank number was larger than its new one.</p>
   </>} />

@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The purchase rows are invented for this visualization.
+// SQL walkthrough. The purchase rows are invented for this visualization.
 export const sql = `SELECT DISTINCT p1.user_id
 FROM Purchases AS p1
 JOIN Purchases AS p2

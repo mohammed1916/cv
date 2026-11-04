@@ -11,7 +11,7 @@ export default function DifferenceTableView({ run, step }) {
   return (
     <div className="dtv" aria-label="Difference table for the current index">
       <div className="dtv__pairs" style={{ gridTemplateColumns: `4.5rem repeat(${nums1.length}, minmax(2.5rem, 1fr))` }}>
-        <div className="dtv__label">index</div>
+        <div className="dtv__label">r (index)</div>
         {nums1.map((_, i) => (
           <div key={`i${i}`} className={`dtv__idx${i === r ? " is-current" : ""}`}>{i}</div>
         ))}
@@ -37,7 +37,7 @@ export default function DifferenceTableView({ run, step }) {
       </div>
 
       <p className="dtv__note">
-        {step.phase === "count" ? `Balanced ways ending here: ${step.added}.` : step.phase === "done" ? "Totals are summed over every range." : "The bold row is difference 0, where the two sums are equal."}
+        {step.phase === "count" ? `Balanced ways ending here: ${step.added}.` : step.phase === "done" ? "Totals are summed over every range." : "A range [l, r] that starts at l = r begins at the marked index. The bold row is difference 0, where the two sums are equal."}
       </p>
     </div>
   );

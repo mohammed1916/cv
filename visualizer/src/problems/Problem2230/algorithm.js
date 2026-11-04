@@ -1,101 +1,86 @@
-// Teaching rule: a user is eligible when, inside [start, end], they have at least minCount purchases and a total of at least minTotal.
+// Teaching rule: a user is eligible when some purchase has a time inside [start, end] (both ends included)
+// and an amount of at least minAmount. A user with several qualifying purchases is listed once.
 
 export const phases = [
-  { id: 'start', label: 'Totals', description: 'Begin with no user totals.' },
+  { id: 'start', label: 'Start', description: 'Begin with no eligible users.' },
   { id: 'scan', label: 'Read row', description: 'Read the next purchase.' },
-  { id: 'skip', label: 'Outside', description: 'The purchase time is outside the interval.' },
-  { id: 'include', label: 'Add', description: 'Add the purchase to its user total.' },
-  { id: 'tally', label: 'Check user', description: 'Compare a user total with both thresholds.' },
-  { id: 'reject', label: 'Too few', description: 'This user misses a threshold.' },
-  { id: 'qualify', label: 'Eligible', description: 'This user meets both thresholds.' },
+  { id: 'skip', label: 'Skip', description: 'The purchase is outside the interval, or its amount is too small.' },
+  { id: 'qualify', label: 'Eligible', description: 'This purchase qualifies, so its user is eligible.' },
+  { id: 'repeat', label: 'Already in', description: 'This user already qualified from an earlier purchase.' },
   { id: 'done', label: 'Result', description: 'Return the eligible users in ascending order.' },
 ]
 
-const INTEGER = /^-?\d+$/
-
 export function parseInput(text) {
   const input = JSON.parse(text)
-  if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Use an object with purchases, start, end, minCount and minTotal.')
-  const { purchases, start, end, minCount, minTotal } = input
+  if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Use an object with purchases, start, end and minAmount.')
+  const { purchases, start, end, minAmount } = input
   if (!Array.isArray(purchases) || purchases.length < 1 || purchases.length > 12) throw new Error('purchases is a list of 1 to 12 rows.')
   for (const row of purchases) {
     if (!Array.isArray(row) || row.length !== 3 || !row.every(Number.isInteger)) throw new Error('Each purchase is [user_id, time_stamp, amount] with whole numbers.')
     if (row[0] < 1 || row[2] < 0) throw new Error('user_id must be at least 1 and amount cannot be negative.')
   }
-  for (const [name, value] of [['start', start], ['end', end], ['minCount', minCount], ['minTotal', minTotal]]) {
+  for (const [name, value] of [['start', start], ['end', end], ['minAmount', minAmount]]) {
     if (!Number.isInteger(value)) throw new Error(`${name} must be a whole number.`)
   }
   if (start > end) throw new Error('start must not be after end.')
-  if (minCount < 1 || minTotal < 0) throw new Error('minCount is at least 1 and minTotal is not negative.')
-  return { purchases, start, end, minCount, minTotal }
+  if (minAmount < 0) throw new Error('minAmount is not negative.')
+  return { purchases, start, end, minAmount }
 }
 
-function snapshotOf(totals, row, result) {
-  return {
-    row,
-    totals: [...totals.entries()].map(([user, [count, total]]) => ({ user, count, total })),
-    result: [...result],
-  }
+function snapshotOf(eligible, row) {
+  return { row, result: [...eligible] }
 }
 
-export function buildTrace({ purchases, start, end, minCount, minTotal }) {
+export function buildTrace({ purchases, start, end, minAmount }) {
   const frames = []
-  const totals = new Map()
-  const result = []
-  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('build the totals'), snapshot: snapshotOf(totals, null, result), message: 'No user has a total yet.' })
+  const eligible = new Set()
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('const eligible = new Set()'), snapshot: snapshotOf(eligible, null), message: 'No user is eligible yet.' })
 
   for (const [user, time, amount] of purchases) {
     const row = { user, time, amount }
-    frames.push({ pythonLine: 3, phase: 'scan', activeLine: L('for each purchase'), snapshot: snapshotOf(totals, row, result), message: `Read user ${user} at time ${time} for ${amount}.` })
+    frames.push({ pythonLine: 3, phase: 'scan', activeLine: L('for (const [user_id'), snapshot: snapshotOf(eligible, row), message: `Read user ${user} at time ${time} for ${amount}.` })
     if (time < start || time > end) {
-      frames.push({ pythonLine: 4, phase: 'skip', activeLine: L('if the time is outside'), snapshot: snapshotOf(totals, row, result), message: `Time ${time} is outside ${start} to ${end}, so skip it.` })
+      frames.push({ pythonLine: 4, phase: 'skip', activeLine: L('if (time_stamp < startDate'), snapshot: snapshotOf(eligible, row), message: `Time ${time} is outside ${start} to ${end}, so skip it.` })
       continue
     }
-    const [count, total] = totals.get(user) || [0, 0]
-    totals.set(user, [count + 1, total + amount])
-    frames.push({ pythonLine: 7, phase: 'include', activeLine: L('add one purchase'), snapshot: snapshotOf(totals, row, result), message: `User ${user} now has ${count + 1} purchase${count + 1 === 1 ? '' : 's'} totalling ${total + amount}.` })
-  }
-
-  for (const [user, [count, total]] of totals) {
-    frames.push({ pythonLine: 9, phase: 'tally', activeLine: L('for each user'), snapshot: snapshotOf(totals, null, result), message: `Check user ${user}: ${count} purchases, total ${total}.` })
-    if (count >= minCount && total >= minTotal) {
-      result.push(user)
-      frames.push({ pythonLine: 11, phase: 'qualify', activeLine: L('if count is at least minCount'), snapshot: snapshotOf(totals, null, result), message: `User ${user} meets both thresholds.` })
-    } else {
-      frames.push({ pythonLine: 10, phase: 'reject', activeLine: L('if count is at least minCount'), snapshot: snapshotOf(totals, null, result), message: `User ${user} misses a threshold.` })
+    if (amount < minAmount) {
+      frames.push({ pythonLine: 6, phase: 'skip', activeLine: L('if (amount >= minAmount)'), snapshot: snapshotOf(eligible, row), message: `Amount ${amount} is below ${minAmount}, so this purchase does not count.` })
+      continue
     }
+    if (eligible.has(user)) {
+      frames.push({ pythonLine: 7, phase: 'repeat', activeLine: L('eligible.add(user_id)'), snapshot: snapshotOf(eligible, row), message: `User ${user} already qualified, so the set does not change.` })
+      continue
+    }
+    eligible.add(user)
+    frames.push({ pythonLine: 7, phase: 'qualify', activeLine: L('eligible.add(user_id)'), snapshot: snapshotOf(eligible, row), message: `User ${user} has a purchase of ${amount} inside the interval, so the user is eligible.` })
   }
 
-  result.sort((a, b) => a - b)
-  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return the result sorted'), snapshot: snapshotOf(totals, null, result), message: `Eligible users: ${result.length ? result.join(', ') : 'none'}.` })
-  return { input: { purchases, start, end, minCount, minTotal }, result, frames }
+  const result = [...eligible].sort((a, b) => a - b)
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return [...eligible]'), snapshot: snapshotOf(eligible, null), message: `Eligible users: ${result.length ? result.join(', ') : 'none'}.` })
+  return { input: { purchases, start, end, minAmount }, result, frames }
 }
 
-export const code = `eligible users for purchases inside an interval
-  build the totals of count and sum per user
-  for each purchase (user, time, amount)
-    if the time is outside start to end then skip it
-    add one purchase and the amount to that user total
-  result = empty list
-  for each user total
-    if count is at least minCount and total is at least minTotal then add the user
-  return the result sorted ascending`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function eligibleUsers(purchases, startDate, endDate, minAmount) {
+  const eligible = new Set()
+  for (const [user_id, time_stamp, amount] of purchases) {
+    if (time_stamp < startDate || time_stamp > endDate) continue
+    if (amount >= minAmount) eligible.add(user_id)
+  }
+  return [...eligible].sort((a, b) => a - b)
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
 const L = s => {
-  const line = code.findIndex(c => c.text.includes(s))
-  if (line < 0) throw new Error(`Missing code line: ${s}`)
-  return line + 1
+  const line = code.findIndex(c => c.text.includes(s)) + 1
+  if (line < 1) throw new Error(`Missing code line: ${s}`)
+  return line
 }
 
-export const python = `def eligible_users(purchases, start, end, min_count, min_total):
-    totals = {}
-    for user, time, amount in purchases:
-        if time < start or time > end:
+export const python = `def eligible_users(purchases, start, end, min_amount):
+    eligible = set()
+    for user_id, time_stamp, amount in purchases:
+        if time_stamp < start or time_stamp > end:
             continue
-        count, total = totals.get(user, (0, 0))
-        totals[user] = (count + 1, total + amount)
-    result = []
-    for user, (count, total) in totals.items():
-        if count >= min_count and total >= min_total:
-            result.append(user)
-    return sorted(result)
+        if amount >= min_amount:
+            eligible.add(user_id)
+    return sorted(eligible)
 `

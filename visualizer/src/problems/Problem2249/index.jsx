@@ -36,7 +36,7 @@ export default function LatticePoints() {
         <tbody>{rows.map(y => <tr key={y}>
           <th scope="row">{y}</th>
           {cols.map(x => <td key={x} className={cellClass(x, y)}
-            style={{ width: 22, height: 22, textAlign: 'center', border: '1px solid currentColor', opacity: cellClass(x, y) === '' ? 0.35 : 1, background: cellClass(x, y) === 'is-inside' ? '#86efac' : cellClass(x, y) === 'is-current' ? '#fde68a' : 'transparent' }}>
+            style={{ width: 22, height: 22, textAlign: 'center', border: '1px solid currentColor', opacity: cellClass(x, y) === '' ? 0.35 : 1, background: cellClass(x, y) === 'is-inside' ? 'var(--primary-glow)' : cellClass(x, y) === 'is-current' ? 'var(--surface3)' : 'transparent', color: 'var(--text)' }}>
             {cellClass(x, y) === 'is-inside' ? '•' : ''}
           </td>)}
         </tr>)}</tbody>

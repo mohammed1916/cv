@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The ride rows are invented for this visualization.
+// SQL walkthrough. The ride rows are invented for this visualization.
 export const sql = `SELECT d.driver_id, COUNT(r.ride_id) AS cnt
 FROM (SELECT DISTINCT driver_id FROM Rides) AS d
 LEFT JOIN Rides AS r ON r.passenger_id = d.driver_id

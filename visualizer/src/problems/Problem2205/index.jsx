@@ -1,9 +1,10 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { meta } from './meta'
+import StageStrip from './StageStrip'
 import { buildTrace, parseInput, code, python, sql, phases } from './algorithm'
 
 const inputLabel = 'Object with purchases (user_id, time_stamp, amount), startDate, endDate and minAmount'
-const complexity = 'O(n) time for n purchase rows, with O(d) space for the d distinct eligible users. The teaching sample caps the input at 10 rows.'
+const complexity = 'O(n) time for n purchase rows, with O(d) space for the d distinct eligible users. The sample caps the input at 10 rows.'
 const examples = [
   { label: 'Interval with a boundary day', input: '{"purchases":[{"user_id":7,"time_stamp":"2024-05-01","amount":25},{"user_id":8,"time_stamp":"2024-05-31","amount":40},{"user_id":9,"time_stamp":"2024-06-01","amount":90},{"user_id":7,"time_stamp":"2024-05-15","amount":30}],"startDate":"2024-05-01","endDate":"2024-05-31","minAmount":30}' },
   { label: 'Repeat purchases', input: '{"purchases":[{"user_id":3,"time_stamp":"2024-02-10","amount":60},{"user_id":3,"time_stamp":"2024-02-11","amount":70},{"user_id":4,"time_stamp":"2024-02-12","amount":5}],"startDate":"2024-02-01","endDate":"2024-02-28","minAmount":50}' },
@@ -11,7 +12,7 @@ const examples = [
 const reasoning = <>
   <p>A user counts once if at least one purchase satisfies both tests: the date lies inside the interval (both ends included) and the amount is at least minAmount.</p>
   <p>A set keeps each user id once, so repeated qualifying purchases by the same user do not change the answer.</p>
-  <p>The SQL form asks the same question directly: filter the rows, then count distinct user_id values. The teaching sample uses calendar dates only.</p>
+  <p>The SQL form asks the same question directly: filter the rows, then count distinct user_id values. The sample uses calendar dates, which read as midnight.</p>
 </>
 
 const definition = {
@@ -31,6 +32,7 @@ const definition = {
 
 export default function UsersEligibleForDiscount() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <StageStrip phases={phases} step={step} />
     <p>Interval {run.input.startDate} to {run.input.endDate}, minAmount {run.input.minAmount}.</p>
     <table aria-label="Purchase rows">
       <thead><tr><th>Row</th><th>user_id</th><th>time_stamp</th><th>amount</th><th>Status</th></tr></thead>

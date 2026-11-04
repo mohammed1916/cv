@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { meta } from './meta'
+import SqlStageView from './SqlStageView'
 import { buildTrace, parseInput, code, sql, python, phases } from './algorithm'
 
 const inputLabel = "Object with a Purchases table"
@@ -25,9 +26,9 @@ function Rows({ columns = [], rows = [] }) {
   </div>
 }
 
-export default function KnowledgeDerivedSqlVisual() {
+export default function SqlWalkthrough() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <Rows columns={step.columns} rows={step.rows} />
+    <SqlStageView phases={phases} step={step} columns={step.columns} rows={step.rows} />
     <output aria-label="Query output">{step.phase === 'done' ? `Output rows: ${run.result.length}` : step.message}</output>
   </>} renderReasoning={() => <p>Two purchases of one user count when their dates differ by at most seven days, and the same day counts as zero days apart. Each user is checked against the closest pair of dates.</p>} />
 }

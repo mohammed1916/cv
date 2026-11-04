@@ -16,7 +16,7 @@ const definition = {
   python,
   inputLabel: 'Object with a grid of 0 and 1 rows (e.g. {"grid":[[1,0],[0,1]]})',
   url: "https://leetcode.com/problems/remove-all-ones-with-row-and-column-flips-ii/",
-  complexity: "O(2^(R+C) * R * C) time and space for an R by C grid, because each state is a pair of cleared row and column sets. The visualization caps the grid at 4 by 4. The draft's rule is clearing (set to 0), not toggling; the official bounds are not verified here.",
+  complexity: "O(2^(R+C) * R * C) time and space for an R by C grid, because each state is a pair of cleared row and column sets. The visualization caps the grid at 4 by 4 so every state can be shown.",
   examples: [
     { label: "Three by three", input: '{"grid":[[1,0,1],[0,1,0],[1,1,1]]}' },
     { label: "Four by four", input: '{"grid":[[1,1,1,1],[1,0,0,1],[0,1,1,0],[1,0,1,1]]}' },

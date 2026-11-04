@@ -1,14 +1,9 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code, python } from './algorithm'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import StageStrip from './StageStrip'
 
 const definition = {
-  phases: [
-    { id: 'start', label: 'Empty tally', description: 'Start with no counts.' },
-    { id: 'tally', label: 'Tally arrays', description: 'Add one to each value an array contains.' },
-    { id: 'select', label: 'Keep all', description: 'Keep values whose count equals the number of arrays.' },
-    { id: 'done', label: 'Sort', description: 'Return the kept values in ascending order.' },
-  ],
-  parse: parseInput, build: buildTrace, code, python,
+  phases, parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Arrays (JSON array of arrays of distinct integers)',
   url: 'https://leetcode.com/problems/intersection-of-multiple-arrays/',
   complexity: 'O(total elements + V log V) time, where V is the number of distinct kept values. The visualization caps input at 6 arrays.',
@@ -18,13 +13,29 @@ const definition = {
   ],
 }
 
+const chip = (active, all) => ({
+  display: 'inline-block', minWidth: 30, textAlign: 'center', padding: '3px 7px', margin: 2, borderRadius: 6,
+  border: `1px solid ${active ? 'var(--primary)' : 'var(--border)'}`,
+  background: all ? 'var(--primary-glow)' : 'var(--surface2)', color: 'var(--text)',
+})
+
 export default function MultiIntersection() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const values = Object.keys(step.counts).map(Number).sort((x, y) => x - y)
+    const arrays = run.input
     return <>
-      <table aria-label="Tally of values"><thead><tr><th>Value</th><th>Arrays containing it</th><th>In all arrays</th></tr></thead><tbody>
+      <StageStrip phases={phases} step={step} />
+      <div aria-label="Input arrays" style={{ display: 'grid', gap: 6, color: 'var(--text)' }}>
+        {arrays.map((arr, a) => (
+          <div key={a} aria-current={step.array === a ? 'step' : undefined} style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 4 }}>
+            <strong style={{ minWidth: 72 }}>Array {a}</strong>
+            {arr.map(v => <span key={v} style={chip(step.array === a, step.counts[v] === arrays.length)}>{v}</span>)}
+          </div>
+        ))}
+      </div>
+      <table aria-label="Tally of values" style={{ borderCollapse: 'collapse', color: 'var(--text)' }}><thead><tr><th style={chip()}>Value</th><th style={chip()}>Arrays containing it</th><th style={chip()}>In all arrays</th></tr></thead><tbody>
         {values.map(v => <tr key={v} data-value={v}>
-          <th>{v}</th><td>{step.counts[v]}</td><td>{step.counts[v] === run.input.length ? 'yes' : 'no'}</td>
+          <th style={chip()}>{v}</th><td style={chip()}>{step.counts[v]}</td><td style={chip()}>{step.counts[v] === arrays.length ? 'yes' : 'no'}</td>
         </tr>)}
       </tbody></table>
       <output aria-label="Intersection state">{step.message}</output>

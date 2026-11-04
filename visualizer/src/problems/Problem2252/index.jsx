@@ -1,18 +1,19 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { meta } from './meta'
+import StageStrip from './StageStrip'
 import { phases, sql, code, python, parseInput, buildTrace } from './algorithm'
 
-const STORE_COLUMNS = ['north', 'south', 'west']
-
-const inputLabel = 'Object with rows: [product_id, store, price] triples'
-const complexity = 'O(n log n) time to sort the product ids, then three fixed column checks per product. The teaching version caps rows at 12.'
+const inputLabel = 'Object with rows: [product_id, store, price] triples; store names are lowercase letters'
+const complexity = 'O(n log n + p * s) time for n rows, p products and s store columns, after sorting the products and stores. The teaching version caps rows at 12.'
 const examples = [
   { label: 'Three products', input: '{"rows":[[101,"north",40],[101,"west",55],[102,"south",18],[103,"north",7],[103,"south",9]]}' },
   { label: 'One price', input: '{"rows":[[7,"west",3]]}' },
 ]
 
 function renderVisual({ run, step }) {
+  const STORE_COLUMNS = run.result.length ? Object.keys(run.result[0]).filter(key => key !== 'product_id') : []
   return <>
+    <StageStrip phases={phases} step={step} />
     <h3>{meta.title}</h3>
     <table aria-label="Products input">
       <thead><tr><th>product_id</th><th>store</th><th>price</th></tr></thead>
@@ -32,8 +33,8 @@ function renderVisual({ run, step }) {
 
 function renderReasoning() {
   return <>
-    <p>The store names are fixed in the query, so each output column is one MAX over a CASE expression. The CASE keeps the price only for its own store, and MAX returns that single price or NULL.</p>
-    <p>Grouping by product_id gives one output row per product. A dynamic pivot would build these columns at run time from the distinct stores; this teaching version keeps the columns fixed so it runs as plain SQL.</p>
+    <p>Each store in the table becomes a column, sorted by name. A product's price for a store is kept only in that store's column, and a missing price shows as NULL.</p>
+    <p>Grouping by product_id gives one output row per product. Plain SQL needs the store list written into the query, so the SQL shown uses the sample's three stores; a dynamic pivot builds the same list at run time.</p>
   </>
 }
 

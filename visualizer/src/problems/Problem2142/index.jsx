@@ -27,7 +27,7 @@ function Rows({ columns = [], rows = [] }) {
   </div>
 }
 
-export default function KnowledgeDerivedSqlVisual() {
+export default function SqlWalkthrough() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <BusStationView run={run} step={step} />
     <Rows columns={step.columns} rows={step.rows} />
