@@ -1,4 +1,4 @@
-.narrative { flex: none; padding: 16px; border: 1px solid var(--border, #475569); border-radius: 12px; background: var(--bg-secondary, #172033); color: var(--text, #e2e8f0); }
+.narrative { flex: none; padding: 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); color: var(--text); }
 .goal { margin: 0; line-height: 1.6; font-size: 14px; overflow-wrap: anywhere; }
 .goal strong { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--accent, #a5b4fc); }
 .chapters { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 14px 0; list-style: none; }
