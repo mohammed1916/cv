@@ -757,7 +757,7 @@ function HomePage({
                 }
               : {})}
           >
-            <div className="brand-icon">⟨/⟩</div>
+            <img className="brand-icon" src="/visualizer-icon.png" alt="" width="36" height="36" />
             <div>
               <h2>Explore the problem library</h2>
               <p>
