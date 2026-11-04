@@ -97,6 +97,7 @@
 }
 
 .problem-list-label {
+  color: var(--text);
   display: flex;
   align-items: baseline;
   flex: 1 1 auto;
