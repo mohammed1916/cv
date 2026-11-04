@@ -35,15 +35,18 @@ export function buildTrace({ foods, cuisines, ratings, operations, arguments: ar
     rating[f] = ratings[i]
     ;(entries[cuisines[i]] ??= []).push({ r: ratings[i], f })
   })
+  const snap = () => Object.fromEntries(Object.entries(entries).map(([c, list]) => [c, [...list]
+    .sort((a, b) => b.r - a.r || (a.f < b.f ? -1 : a.f > b.f ? 1 : 0))
+    .map(e => ({ f: e.f, r: e.r, stale: rating[e.f] !== e.r }))]))
   const result = []
-  const frames = [{ phase: 'start', pythonLine: 7, activeLine: L('store each food cuisine and rating'), rating: { ...rating }, answer: null, message: 'Each cuisine gets a heap of its foods, keyed by rating.' }]
+  const frames = [{ phase: 'start', pythonLine: 7, activeLine: L('const cuisineOf = {}'), rating: { ...rating }, heaps: snap(), answer: null, message: 'Each cuisine gets a heap of its foods, keyed by rating.' }]
   operations.forEach((op, i) => {
     if (op === 'changeRating') {
       const [food, r] = args[i]
       rating[food] = r
       entries[cuisineOf[food]].push({ r, f: food })
       result.push(null)
-      frames.push({ phase: 'change', pythonLine: 17, activeLine: L('set the rating of that food'), rating: { ...rating }, answer: null, message: `${food} changes to ${r}.` })
+      frames.push({ phase: 'change', pythonLine: 17, activeLine: L('rating[food] = r'), rating: { ...rating }, heaps: snap(), answer: null, message: `${food} changes to ${r}.` })
     } else {
       const c = args[i][0]
       const live = entries[c].filter(e => rating[e.f] === e.r)
@@ -51,22 +54,33 @@ export function buildTrace({ foods, cuisines, ratings, operations, arguments: ar
       let top = live[0]
       for (const e of live) if (e.r > top.r || (e.r === top.r && e.f < top.f)) top = e
       result.push(top.f)
-      frames.push({ phase: 'query', pythonLine: 24, activeLine: L('answer with the food at the top'), rating: { ...rating }, answer: top.f, message: `Best ${c} food is ${top.f} at ${top.r}.` })
+      frames.push({ phase: 'query', pythonLine: 24, activeLine: L('out.push(top.f)'), rating: { ...rating }, heaps: snap(), answer: top.f, top: top.f, cuisine: c, message: `Best ${c} food is ${top.f} at ${top.r}.` })
     }
   })
   return { input: { foods, cuisines, ratings, operations, arguments: args }, result, frames }
 }
 
-export const code = `highest rated food in each cuisine, with rating changes
-  store each food cuisine and rating
-  for each cuisine keep a heap of its foods, highest rating first and smaller name on ties
-  for each operation in order
-    if it is changeRating food r
-      set the rating of that food to r and push a new entry into its cuisine heap
-    if it is highestRated cuisine
-      discard entries whose rating is no longer current
-      answer with the food at the top of that cuisine heap
-  return the answers in order`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `const cuisineOf = {}, rating = {}, entries = {}
+for (let i = 0; i < foods.length; i++) {
+  cuisineOf[foods[i]] = cuisines[i]
+  rating[foods[i]] = ratings[i]
+  ;(entries[cuisines[i]] ??= []).push({ r: ratings[i], f: foods[i] })
+}
+const out = []
+for (let i = 0; i < operations.length; i++) {
+  if (operations[i] === 'changeRating') {
+    const [food, r] = args[i]
+    rating[food] = r
+    entries[cuisineOf[food]].push({ r, f: food })
+    out.push(null)
+  } else {
+    const c = args[i][0]
+    entries[c] = entries[c].filter(e => rating[e.f] === e.r)
+    const top = entries[c].reduce((a, b) => (b.r > a.r || (b.r === a.r && b.f < a.f) ? b : a))
+    out.push(top.f)
+  }
+}
+return out`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `import heapq

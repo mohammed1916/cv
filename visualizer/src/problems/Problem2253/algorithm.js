@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough. The sample tables are invented for this visualization.
 // The generated query repeats one SELECT per discovered store column.
 export const sql = `WITH unpivoted AS (
 SELECT product_id, 'store1' AS store, store1 AS price FROM Products

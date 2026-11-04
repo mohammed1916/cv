@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import PairGridView from './PairGridView'
 
 const definition = {
   phases: [
@@ -13,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-excellent-pairs/',
   complexity: 'O(d + 32 * 32) time for d distinct values. The visualization caps nums at 12 values.',
   examples: [
-    { label: 'Example 1', input: '{"nums": [1,2,3,1], "k": 3}' },
-    { label: 'Example 2', input: '{"nums": [5,1,1], "k": 10}' },
+    { label: 'Example 1', input: '{"nums": [6,3,12,3], "k": 3}' },
+    { label: 'Example 2', input: '{"nums": [7,8,1], "k": 4}' },
   ],
 }
 
@@ -30,6 +31,7 @@ export default function ExcellentPairs() {
           </tr>
         ))}</tbody>
       </table>
+      <PairGridView tally={step.tally} k={run.input.k} pair={step.pair} />
       <output aria-label="Pairs so far">{`Pairs counted: ${step.total} (k = ${run.input.k})`}</output>
     </>
   }} renderReasoning={() => (

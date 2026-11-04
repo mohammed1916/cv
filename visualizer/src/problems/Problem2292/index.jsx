@@ -25,8 +25,25 @@ function Rows({ columns = [], rows = [] }) {
   </div>
 }
 
-export default function KnowledgeDerivedSqlVisual() {
+function StageStrip({ phases = [], active }) {
+  const at = Math.max(0, phases.findIndex(phase => phase.id === active))
+  return <ol aria-label="SQL stages" style={{ display: 'flex', flexWrap: 'wrap', gap: 8, listStyle: 'none', padding: 0, margin: '0 0 12px' }}>
+    {phases.map((phase, index) => {
+      const state = index < at ? 'done' : index === at ? 'active' : 'pending'
+      return <li key={phase.id} data-stage={phase.id} data-state={state} title={phase.description} style={{
+        padding: '6px 10px', borderRadius: 8, fontSize: 13,
+        border: '1px solid var(--border, var(--surface2))',
+        background: state === 'active' ? 'var(--primary)' : state === 'done' ? 'var(--surface2)' : 'transparent',
+        color: state === 'active' ? 'var(--on-primary, var(--surface))' : 'var(--text)',
+        fontWeight: state === 'active' ? 700 : 400,
+      }}>{index + 1}. {phase.label}</li>
+    })}
+  </ol>
+}
+
+export default function SqlStageVisual() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <StageStrip phases={phases} active={step.phase} />
     <Rows columns={step.columns} rows={step.rows} />
     <output aria-label="Query output">{step.phase === 'done' ? `Output rows: ${run.result.length}` : step.message}</output>
   </>} renderReasoning={() => <p>Orders are counted per product and year, years with at least three orders are kept, and a product qualifies when one kept year is directly followed by another. Quantity is not used.</p>} />

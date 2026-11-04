@@ -11,10 +11,10 @@ const definition = {
   python,
   inputLabel: "Object with regular, express (equal-length cost lists) and expressCost",
   url: "https://leetcode.com/problems/minimum-costs-using-the-train-line/description/",
-  complexity: "O(n) time and O(n) output for n stops. The visualization caps n at 20 and each cost at 100; the official bounds are not verified in this draft.",
+  complexity: "O(n) time and O(n) output for n stops. The visualization caps n at 20 and each cost at 100.",
   examples: [
-    { label: "Example", input: '{"regular":[1,6,9,5],"express":[5,2,3,10],"expressCost":8}' },
-    { label: "Switch once", input: '{"regular":[9,9,1],"express":[1,1,9],"expressCost":2}' },
+    { label: "Example", input: '{"regular":[4,2,8,3],"express":[1,6,2,9],"expressCost":5}' },
+    { label: "Switch once", input: '{"regular":[3,9,2],"express":[8,1,4],"expressCost":2}' },
   ],
 };
 

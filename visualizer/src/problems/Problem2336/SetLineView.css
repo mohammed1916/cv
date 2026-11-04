@@ -1,0 +1,16 @@
+.set-line { display: grid; gap: 12px; }
+.set-line__cells { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 0; }
+.set-line__cell { min-width: 38px; padding: 6px 4px; text-align: center; border-radius: 8px; border: 1px solid var(--border, var(--surface2)); color: var(--text); background: var(--surface); font-variant-numeric: tabular-nums; }
+.set-line__cell small { display: block; font-size: 10px; color: var(--muted, var(--text)); }
+.set-line__cell--fresh { background: var(--surface); }
+.set-line__cell--taken { background: var(--surface2); color: var(--muted, var(--text)); text-decoration: line-through; }
+.set-line__cell--back { background: var(--primary); color: var(--on-primary, var(--surface)); font-weight: 700; }
+.set-line__cell--returned { outline: 3px solid var(--accent, var(--primary)); outline-offset: 2px; }
+.set-line__heap { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; color: var(--text); }
+.set-line__heap b { padding: 2px 8px; border-radius: 6px; background: var(--surface2); color: var(--text); }
+.set-line__heap b[data-min] { background: var(--primary); color: var(--on-primary, var(--surface)); }
+.set-line__legend { display: flex; flex-wrap: wrap; gap: 12px; list-style: none; padding: 0; margin: 0; font-size: 13px; color: var(--text); }
+.set-line__swatch { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 4px; vertical-align: middle; border: 1px solid var(--border, var(--surface2)); }
+.set-line__swatch--fresh { background: var(--surface); }
+.set-line__swatch--taken { background: var(--surface2); }
+.set-line__swatch--back { background: var(--primary); }

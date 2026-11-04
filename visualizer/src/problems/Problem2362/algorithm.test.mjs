@@ -16,12 +16,11 @@ function checkFrames(trace) {
   }
 }
 
-test('2362 sample picks invoice 2 over invoice 3 on the 500 tie', () => {
+test('2362 sample picks the invoice with the highest total', () => {
   const trace = run(examples[0].input)
   checkFrames(trace)
   assert.deepEqual(trace.result, [
-    { product_id: 3, quantity: 4, price: 200 },
-    { product_id: 1, quantity: 3, price: 300 },
+    { product_id: 1, quantity: 5, price: 600 },
   ])
 })
 

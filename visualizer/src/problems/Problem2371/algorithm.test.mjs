@@ -5,9 +5,9 @@ import { buildTrace, parseInput } from './algorithm.js'
 const solve = grid => buildTrace(grid).best
 
 test('2371 worked examples', () => {
-  assert.equal(solve([[3, 1], [2, 4]]), 2)
+  assert.equal(solve([[5, 2], [1, 6]]), 2)
   assert.equal(solve([[7, 3, 9]]), 3)
-  assert.equal(solve([[10]]), 1)
+  assert.equal(solve([[6]]), 1)
 })
 
 test('2371 each row and column keeps its strict order', () => {

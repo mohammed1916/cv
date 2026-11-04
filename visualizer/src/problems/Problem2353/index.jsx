@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import CuisineHeapsView from './CuisineHeapsView'
 
 const definition = {
   phases: [
@@ -13,12 +14,13 @@ const definition = {
   url: 'https://leetcode.com/problems/design-a-food-rating-system/',
   complexity: 'O(log n) per changeRating and amortised O(log n) per highestRated with lazy heaps. The visualization caps input at 8 foods and 12 operations.',
   examples: [
-    { label: 'Example', input: '{"foods":["kimchi","miso","sushi","moussaka","ramen","bulgogi"],"cuisines":["korean","japanese","japanese","greek","japanese","korean"],"ratings":[9,12,8,15,14,7],"operations":["highestRated","highestRated","changeRating","highestRated","changeRating","highestRated"],"arguments":[["korean"],["japanese"],["sushi",16],["japanese"],["ramen",16],["japanese"]]}' },
+    { label: 'Example', input: '{"foods":["pho","bun","taco","burrito"],"cuisines":["viet","viet","mex","mex"],"ratings":[7,9,4,4],"operations":["highestRated","changeRating","highestRated","highestRated","changeRating","highestRated"],"arguments":[["viet"],["bun",3],["viet"],["mex"],["taco",6],["mex"]]}' },
   ],
 }
 
 export default function FoodRatingSystem() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+    <CuisineHeapsView heaps={step.heaps} top={step.top} cuisine={step.cuisine} />
     <table aria-label="Current ratings">
       <thead><tr><th scope="col">Food</th><th scope="col">Rating</th></tr></thead>
       <tbody>{Object.entries(step.rating).map(([food, r]) => <tr key={food}><th scope="row">{food}</th><td>{r}</td></tr>)}</tbody>

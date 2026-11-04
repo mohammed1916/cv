@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough. The sample tables are invented for this visualization.
 export const sql = `SELECT pu.product_id, pu.quantity, pu.quantity * p.price AS price
 FROM Purchases pu
 JOIN Products p ON p.product_id = pu.product_id
@@ -48,7 +48,7 @@ export const inputLabel = 'Object with Products and Purchases tables'
 export const complexity = 'O(n + m) to join and total, plus O(k) to find the maximum over k invoices. The visualizer caps each table at 12 rows.'
 export const examples = [{
   label: 'Sample',
-  input: '{"Products":[{"product_id":1,"price":100},{"product_id":2,"price":200},{"product_id":3,"price":50}],"Purchases":[{"invoice_id":1,"product_id":1,"quantity":2},{"invoice_id":1,"product_id":2,"quantity":1},{"invoice_id":2,"product_id":3,"quantity":4},{"invoice_id":2,"product_id":1,"quantity":3},{"invoice_id":3,"product_id":1,"quantity":5}]}',
+  input: '{"Products":[{"product_id":1,"price":120},{"product_id":2,"price":75},{"product_id":3,"price":40}],"Purchases":[{"invoice_id":1,"product_id":1,"quantity":2},{"invoice_id":1,"product_id":2,"quantity":1},{"invoice_id":2,"product_id":3,"quantity":4},{"invoice_id":2,"product_id":1,"quantity":3},{"invoice_id":3,"product_id":1,"quantity":5}]}',
 }]
 
 function tableRows(input, name, columns) {

@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough. The sample tables are invented for this visualization.
 export const sql = `SELECT country, gold_medals, silver_medals, bronze_medals
 FROM Olympic
 ORDER BY gold_medals DESC, silver_medals DESC, bronze_medals DESC, country ASC`
@@ -37,7 +37,7 @@ export const inputLabel = 'Object with an Olympic table'
 export const complexity = 'O(n log n) to sort n countries. The visualizer caps the table at 12 rows.'
 export const examples = [{
   label: 'Sample',
-  input: '{"Olympic":[{"country":"Norway","gold_medals":2,"silver_medals":1,"bronze_medals":0},{"country":"Brazil","gold_medals":2,"silver_medals":1,"bronze_medals":0},{"country":"Chile","gold_medals":3,"silver_medals":0,"bronze_medals":0},{"country":"Peru","gold_medals":0,"silver_medals":5,"bronze_medals":1},{"country":"Oman","gold_medals":2,"silver_medals":2,"bronze_medals":0}]}',
+  input: '{"Olympic":[{"country":"Norway","gold_medals":2,"silver_medals":3,"bronze_medals":0},{"country":"Brazil","gold_medals":2,"silver_medals":1,"bronze_medals":0},{"country":"Chile","gold_medals":3,"silver_medals":0,"bronze_medals":0},{"country":"Peru","gold_medals":0,"silver_medals":5,"bronze_medals":1},{"country":"Oman","gold_medals":2,"silver_medals":2,"bronze_medals":0}]}',
 }]
 
 function tableRows(input, name, columns) {

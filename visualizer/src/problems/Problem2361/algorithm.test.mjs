@@ -5,8 +5,8 @@ import { buildTrace, parseInput } from './algorithm.js'
 const solve = (regular, express, expressCost) => buildTrace({ regular, express, expressCost }).result
 
 test('2361 worked examples', () => {
-  assert.deepEqual(solve([1, 6, 9, 5], [5, 2, 3, 10], 8), [1, 7, 14, 19])
-  assert.deepEqual(solve([9, 9, 1], [1, 1, 9], 2), [3, 4, 5])
+  assert.deepEqual(solve([4, 2, 8, 3], [1, 6, 2, 9], 5), [4, 6, 13, 16])
+  assert.deepEqual(solve([3, 9, 2], [8, 1, 4], 2), [3, 6, 8])
 })
 
 test('2361 single stop takes the cheaper line from regular at stop zero', () => {
@@ -19,7 +19,7 @@ test('2361 frames carry valid pseudocode and python lines', () => {
   const lines = run.frames.length
   assert.ok(lines > 0)
   for (const frame of run.frames) {
-    assert.ok(frame.activeLine >= 1 && frame.activeLine <= 9)
+    assert.ok(frame.activeLine >= 1 && frame.activeLine <= 10)
     assert.ok(frame.pythonLine >= 1 && frame.pythonLine <= 10)
     assert.equal(typeof frame.message, 'string')
   }

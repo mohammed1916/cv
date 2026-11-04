@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough. The sample tables are invented for this visualization.
 export const sql = `SELECT s.salesperson_id, s.name, COALESCE(SUM(sa.price), 0) AS total
 FROM Salesperson s
 LEFT JOIN Customer c ON c.salesperson_id = s.salesperson_id

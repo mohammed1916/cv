@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough. The sample tables are invented for this visualization.
 export const sql = `SELECT s.user_id, SUM(s.quantity * p.price) AS spending
 FROM Sales s
 JOIN Product p ON p.product_id = s.product_id

@@ -4,9 +4,9 @@ import { buildTrace, parseInput } from './algorithm.js'
 
 const solve = (nums, k) => buildTrace({ nums, k }).result
 
-test('2354 official examples', () => {
-  assert.equal(solve([1, 2, 3, 1], 3), 5)
-  assert.equal(solve([5, 1, 1], 10), 0)
+test('2354 invented examples', () => {
+  assert.equal(solve([6, 3, 12, 3], 3), 9)
+  assert.equal(solve([7, 8, 1], 4), 5)
 })
 
 test('2354 edge cases: a single value pairs with itself', () => {

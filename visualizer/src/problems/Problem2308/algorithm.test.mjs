@@ -16,16 +16,16 @@ function checkFrames(trace) {
   }
 }
 
-test('2308 interleaves female, male and other users round-robin', () => {
+test('2308 interleaves female, other and male users round-robin', () => {
   const trace = run('{"Genders":[{"user_id":6,"gender":"other"},{"user_id":5,"gender":"male"},{"user_id":4,"gender":"female"},{"user_id":3,"gender":"other"},{"user_id":2,"gender":"male"},{"user_id":1,"gender":"female"}]}')
   checkFrames(trace)
   assert.deepEqual(trace.result, [
     { user_id: 1, gender: 'female' },
-    { user_id: 2, gender: 'male' },
     { user_id: 3, gender: 'other' },
+    { user_id: 2, gender: 'male' },
     { user_id: 4, gender: 'female' },
-    { user_id: 5, gender: 'male' },
     { user_id: 6, gender: 'other' },
+    { user_id: 5, gender: 'male' },
   ])
 })
 

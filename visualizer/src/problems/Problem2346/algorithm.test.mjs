@@ -16,12 +16,12 @@ function checkFrames(trace) {
   }
 }
 
-test('2346 sample ranks ties together and gives a lone student 0', () => {
+test('2346 sample ranks ties together and gives the top mark 0', () => {
   const trace = run(examples[0].input)
   checkFrames(trace)
   assert.deepEqual(trace.result, [
-    { student_id: 1, department_id: 1, percentage: 0 },
-    { student_id: 2, department_id: 1, percentage: 33.33 },
+    { student_id: 1, department_id: 1, percentage: 33.33 },
+    { student_id: 2, department_id: 1, percentage: 0 },
     { student_id: 3, department_id: 1, percentage: 33.33 },
     { student_id: 4, department_id: 1, percentage: 100 },
     { student_id: 5, department_id: 2, percentage: 0 },

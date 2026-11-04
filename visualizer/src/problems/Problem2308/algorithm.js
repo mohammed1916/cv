@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample table is invented for this visualization.
+// SQL walkthrough. The sample table is invented for this visualization.
 export const sql = `WITH ranked AS (
 SELECT user_id, gender,
 ROW_NUMBER() OVER (PARTITION BY gender ORDER BY user_id) AS rn
@@ -6,7 +6,7 @@ FROM Genders
 )
 SELECT user_id, gender
 FROM ranked
-ORDER BY rn, CASE gender WHEN 'female' THEN 1 WHEN 'male' THEN 2 ELSE 3 END`
+ORDER BY rn, CASE gender WHEN 'female' THEN 1 WHEN 'other' THEN 2 ELSE 3 END`
 
 export const code = sql.split('\n').map((text, index) => ({ line: index + 1, text }))
 const SQL = key => {
@@ -18,7 +18,7 @@ const SQL = key => {
 export const python = `def arrange_by_gender(genders):
     genders = genders.sort_values("user_id")
     genders["rn"] = genders.groupby("gender").cumcount() + 1
-    order = {"female": 1, "male": 2, "other": 3}
+    order = {"female": 1, "other": 2, "male": 3}
     genders["g"] = genders["gender"].map(order).fillna(4)
     return genders.sort_values(["rn", "g"])[["user_id", "gender"]]`
 const PY_LINES = python.split('\n')
@@ -39,7 +39,7 @@ export const phases = [
   { id: 'done', label: 'Result', description: 'Return the arranged users.' },
 ]
 
-const GENDER_ORDER = ['female', 'male', 'other']
+const GENDER_ORDER = ['female', 'other', 'male']
 const COLUMNS = ['user_id', 'gender']
 const rankOf = gender => {
   const index = GENDER_ORDER.indexOf(gender)

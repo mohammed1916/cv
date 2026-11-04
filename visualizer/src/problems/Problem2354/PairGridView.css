@@ -1,0 +1,8 @@
+.pair-grid { display: grid; gap: 6px; color: var(--text); overflow-x: auto; }
+.pair-grid__rule { margin: 0; font-size: 13px; color: var(--muted, var(--text)); }
+.pair-grid table { border-collapse: collapse; }
+.pair-grid th, .pair-grid td { padding: 4px 10px; border: 1px solid var(--border, var(--surface2)); text-align: center; font-variant-numeric: tabular-nums; }
+.pair-grid th { background: var(--surface2); color: var(--text); }
+.pair-grid__ok { background: var(--surface); color: var(--text); font-weight: 600; }
+.pair-grid__no { background: transparent; color: var(--muted, var(--text)); }
+.pair-grid__current { outline: 3px solid var(--primary); outline-offset: -3px; }

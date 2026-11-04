@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough. The sample tables are invented for this visualization.
 export const sql = `SELECT student_id, department_id,
   CASE WHEN COUNT(*) OVER w = 1 THEN 0
        ELSE ROUND(100.0 * (RANK() OVER w - 1) / (COUNT(*) OVER w - 1), 2) END AS percentage
@@ -42,7 +42,7 @@ export const inputLabel = 'Object with a Students table'
 export const complexity = 'O(n²) for this visual rank count over n students. A window function gives O(n log n) per department in SQL. The visualizer caps the table at 12 rows.'
 export const examples = [{
   label: 'Sample',
-  input: '{"Students":[{"student_id":1,"department_id":1,"mark":90},{"student_id":2,"department_id":1,"mark":80},{"student_id":3,"department_id":1,"mark":80},{"student_id":4,"department_id":1,"mark":70},{"student_id":5,"department_id":2,"mark":50}]}',
+  input: '{"Students":[{"student_id":1,"department_id":1,"mark":88},{"student_id":2,"department_id":1,"mark":91},{"student_id":3,"department_id":1,"mark":88},{"student_id":4,"department_id":1,"mark":75},{"student_id":5,"department_id":2,"mark":60}]}',
 }]
 
 function tableRows(input, name, columns) {

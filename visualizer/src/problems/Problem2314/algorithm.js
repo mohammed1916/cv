@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample table is invented for this visualization.
+// SQL walkthrough. The sample table is invented for this visualization.
 export const sql = `WITH ranked AS (
 SELECT city_id, day, degree,
 ROW_NUMBER() OVER (PARTITION BY city_id ORDER BY degree DESC, day ASC) AS rn

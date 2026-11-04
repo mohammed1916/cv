@@ -19,7 +19,7 @@ function checkFrames(trace) {
 test('2377 sample orders by gold, silver, bronze, then country', () => {
   const trace = run(examples[0].input)
   checkFrames(trace)
-  assert.deepEqual(trace.result.map(row => row.country), ['Chile', 'Oman', 'Brazil', 'Norway', 'Peru'])
+  assert.deepEqual(trace.result.map(row => row.country), ['Chile', 'Norway', 'Oman', 'Brazil', 'Peru'])
 })
 
 test('2377 a full tie is broken by country name ascending', () => {

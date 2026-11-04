@@ -9,11 +9,11 @@ const definition = {
   build: buildTrace,
   code,
   python,
-  inputLabel: "Grid of distinct integers (e.g. [[3,1],[2,4]])",
+  inputLabel: "Grid of distinct integers (e.g. [[5,2],[1,6]])",
   url: "https://leetcode.com/problems/minimize-maximum-value-in-a-grid/description/",
-  complexity: "O(mn log(mn)) time for the sort and O(mn) space for an m x n grid. The visualization caps the grid at 6 x 6 with values 1 to 100; the official bounds are not verified in this draft.",
+  complexity: "O(mn log(mn)) time for the sort and O(mn) space for an m x n grid. The visualization caps the grid at 6 x 6 with values 1 to 100.",
   examples: [
-    { label: "Example", input: "[[3,1],[2,4]]" },
+    { label: "Example", input: "[[5,2],[1,6]]" },
     { label: "Single row", input: "[[7,3,9]]" },
   ],
 };

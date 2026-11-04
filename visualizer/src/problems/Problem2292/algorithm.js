@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough. The sample tables are invented for this visualization.
 export const sql = `WITH yearly AS (
 SELECT product_id, YEAR(purchase_date) AS yr, COUNT(*) AS orders
 FROM Orders

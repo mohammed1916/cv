@@ -5,7 +5,7 @@ import { buildTrace, parseInput } from './algorithm.js'
 const solve = (parents, weights) => buildTrace({ parents, weights }).result
 
 test('2378 worked examples', () => {
-  assert.equal(solve([-1, 0, 0, 1, 1], [0, 5, -2, 3, 4]), 5)
+  assert.equal(solve([-1, 0, 0, 1, 1, 2], [0, 4, -3, 6, 2, 5]), 11)
   assert.equal(solve([-1, 0, 0], [0, -4, -7]), 0)
   assert.equal(solve([-1], [0]), 0)
 })

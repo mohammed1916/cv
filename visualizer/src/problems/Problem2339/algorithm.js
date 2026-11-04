@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough. The sample tables are invented for this visualization.
 export const sql = `SELECT a.team_name AS home_team, b.team_name AS away_team
 FROM Teams a
 CROSS JOIN Teams b

@@ -1,14 +1,18 @@
 const CODE = [
-  'FUNCTION maxScore(parents, weights)',
-  '    children ← child lists built from parents',
-  '    order ← nodes listed so that every child comes before its parent',
-  '    free[v] ← best total in v subtree with v not matched to a child',
-  '    matched[v] ← best total in v subtree with v matched to one child',
-  '    FOR each node v in order',
-  '        total ← sum of max(free[c], matched[c]) over children c',
-  '        free[v] ← total',
-  '        matched[v] ← max over children c of total - max(free[c], matched[c]) + free[c] + weights[c]',
-  '    RETURN max(free[root], matched[root])',
+  'const children = Array.from({ length: n }, () => [])',
+  'for (let v = 1; v < n; v++) children[parents[v]].push(v)',
+  'const order = [0]',
+  'for (let i = 0; i < order.length; i++) order.push(...children[order[i]])',
+  'const free = Array(n).fill(0)',
+  'const matched = Array(n).fill(-Infinity)',
+  'for (const v of [...order].reverse()) {',
+  '  const total = children[v].reduce((sum, c) => sum + Math.max(free[c], matched[c]), 0)',
+  '  free[v] = total',
+  '  for (const c of children[v]) {',
+  '    matched[v] = Math.max(matched[v], total - Math.max(free[c], matched[c]) + free[c] + weights[c])',
+  '  }',
+  '}',
+  'return Math.max(free[0], matched[0])',
 ]
 
 const PY = [
@@ -79,22 +83,22 @@ export function buildTrace({ parents, weights }) {
   const frames = []
   const snapshot = (current, child, message, phase, activeLine, pythonLine) => frames.push({ pythonLine, phase, activeLine, node: current, child, order: [...order].reverse(), free: free.map((x, i) => (done.has(i) ? x : null)), matched: matched.map((x, i) => (done.has(i) ? shown(x) : null)), message })
   const done = new Set()
-  snapshot(null, null, 'Build the children lists. Process nodes so that every child is handled before its parent.', 'start', codeLine('children ← child lists built from parents'), pyLine('children[parents[v]].append(v)'))
+  snapshot(null, null, 'Build the children lists. Process nodes so that every child is handled before its parent.', 'start', codeLine('const children = Array.from({ length: n }, () => [])'), pyLine('children[parents[v]].append(v)'))
   for (const v of [...order].reverse()) {
     const total = children[v].reduce((sum, c) => sum + Math.max(free[c], matched[c]), 0)
-    snapshot(v, null, `Node ${v}: the children contribute their best totals, ${children[v].map(c => `child ${c} gives ${Math.max(free[c], matched[c])}`).join(', ') || 'none (leaf)'}. Sum ${total}.`, 'node', codeLine('total ← sum of max(free[c], matched[c]) over children c'), pyLine('total = sum(max(free[c], matched[c]) for c in children[v])'))
+    snapshot(v, null, `Node ${v}: the children contribute their best totals, ${children[v].map(c => `child ${c} gives ${Math.max(free[c], matched[c])}`).join(', ') || 'none (leaf)'}. Sum ${total}.`, 'node', codeLine('const total = children[v].reduce((sum, c) => sum + Math.max(free[c], matched[c]), 0)'), pyLine('total = sum(max(free[c], matched[c]) for c in children[v])'))
     free[v] = total
     done.add(v)
     let best = NEG
     for (const c of children[v]) {
       const candidate = total - Math.max(free[c], matched[c]) + free[c] + weights[c]
       best = Math.max(best, candidate)
-      snapshot(v, c, `Match ${v} with child ${c} using weight ${weights[c]}: the child must stay free for this edge, giving ${candidate}.`, 'candidate', codeLine('matched[v] ← max over children c of total - max(free[c], matched[c]) + free[c] + weights[c]'), pyLine('best = max(best, total - max(free[c], matched[c]) + free[c] + weights[c])'))
+      snapshot(v, c, `Match ${v} with child ${c} using weight ${weights[c]}: the child must stay free for this edge, giving ${candidate}.`, 'candidate', codeLine('matched[v] = Math.max(matched[v], total - Math.max(free[c], matched[c]) + free[c] + weights[c])'), pyLine('best = max(best, total - max(free[c], matched[c]) + free[c] + weights[c])'))
     }
     matched[v] = best
   }
   const answer = Math.max(free[0], matched[0])
-  frames.push({ pythonLine: pyLine('return max(free[0], matched[0])'), phase: 'done', activeLine: codeLine('RETURN max(free[root], matched[root])'), node: 0, child: null, order: [...order].reverse(), free: [...free], matched: matched.map(shown), message: `Root keeps the best total ${answer}. Selecting no edge is included as the free option.` })
+  frames.push({ pythonLine: pyLine('return max(free[0], matched[0])'), phase: 'done', activeLine: codeLine('return Math.max(free[0], matched[0])'), node: 0, child: null, order: [...order].reverse(), free: [...free], matched: matched.map(shown), message: `Root keeps the best total ${answer}. Selecting no edge is included as the free option.` })
   return { input: { parents, weights }, result: answer, free: [...free], matched: matched.map(shown), frames }
 }
 

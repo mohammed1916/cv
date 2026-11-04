@@ -22,18 +22,18 @@ export function buildTrace({ operations, arguments: args }) {
   let fresh = 1
   const back = []
   const result = []
-  const frames = [{ phase: 'start', activeLine: L('set fresh to 1'), pythonLine: 4, fresh, back: [], value: null, message: 'Every positive integer is in the set; the counter starts at 1.' }]
+  const frames = [{ phase: 'start', activeLine: L('let fresh = 1'), pythonLine: 4, fresh, back: [], value: null, message: 'Every positive integer is in the set; the counter starts at 1.' }]
   operations.forEach((op, i) => {
     if (op === 'popSmallest') {
       let value
       if (back.length) {
         back.sort((a, b) => a - b)
         value = back.shift()
-        frames.push({ phase: 'pop', activeLine: L('return and remove its smallest'), pythonLine: 10, fresh, back: [...back], value, message: `Return ${value} from the added-back heap.` })
+        frames.push({ phase: 'pop', activeLine: L('return heapPop(back)'), pythonLine: 10, fresh, back: [...back], value, message: `Return ${value} from the added-back heap.` })
       } else {
         value = fresh
         fresh++
-        frames.push({ phase: 'pop', activeLine: L('return fresh, then add 1'), pythonLine: 12, fresh, back: [...back], value, message: `Return ${value} from the counter.` })
+        frames.push({ phase: 'pop', activeLine: L('return fresh++'), pythonLine: 12, fresh, back: [...back], value, message: `Return ${value} from the counter.` })
       }
       result.push(value)
     } else {
@@ -41,23 +41,28 @@ export function buildTrace({ operations, arguments: args }) {
       const added = x < fresh && !back.includes(x)
       if (added) back.push(x)
       result.push(null)
-      frames.push({ phase: 'addBack', activeLine: L('push x into the heap'), pythonLine: added ? 17 : 16, fresh, back: [...back], value: null, message: added ? `Add ${x} back to the heap.` : `${x} is already in the set, so nothing changes.` })
+      frames.push({ phase: 'addBack', activeLine: L('heapPush(back, x)'), pythonLine: added ? 17 : 16, fresh, back: [...back], value: null, message: added ? `Add ${x} back to the heap.` : `${x} is already in the set, so nothing changes.` })
     }
   })
-  frames.push({ phase: 'done', activeLine: L('return the list of results'), pythonLine: 19, fresh, back: [...back], value: null, message: 'Every operation has been answered.' })
+  frames.push({ phase: 'done', activeLine: L('return out'), pythonLine: 19, fresh, back: [...back], value: null, message: 'Every operation has been answered.' })
   return { input: { operations, arguments: args }, result, frames }
 }
 
-export const code = `popSmallest and addBack on the infinite set of positive integers
-  set fresh to 1, the next number never taken
-  keep a min heap of numbers added back, all below fresh
-  for each operation in order
-    if the operation is popSmallest
-      if the heap is not empty then return and remove its smallest number
-      otherwise return fresh, then add 1 to fresh
-    if the operation is addBack x
-      if x is below fresh and not in the heap then push x into the heap
-  return the list of results`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `let fresh = 1
+const back = []
+function popSmallest() {
+  if (back.length) return heapPop(back)
+  return fresh++
+}
+function addBack(x) {
+  if (x < fresh && !back.includes(x)) heapPush(back, x)
+}
+const out = []
+for (let i = 0; i < operations.length; i++) {
+  if (operations[i] === 'popSmallest') out.push(popSmallest())
+  else { addBack(args[i][0]); out.push(null) }
+}
+return out`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `import heapq

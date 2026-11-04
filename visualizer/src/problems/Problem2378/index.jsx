@@ -11,9 +11,9 @@ const definition = {
   python,
   inputLabel: "Object with parents (parents[0] = -1) and weights (weights[v] is the edge from parents[v] to v)",
   url: "https://leetcode.com/problems/choose-edges-to-maximize-score-in-a-tree/description/",
-  complexity: "O(n) time and space for n nodes. The visualization caps the tree at 10 nodes and weights at -100 to 100; the official bounds are not verified in this draft.",
+  complexity: "O(n) time and space for n nodes. The visualization caps the tree at 10 nodes and weights at -100 to 100.",
   examples: [
-    { label: "Example", input: '{"parents":[-1,0,0,1,1],"weights":[0,5,-2,3,4]}' },
+    { label: "Example", input: '{"parents":[-1,0,0,1,1,2],"weights":[0,4,-3,6,2,5]}' },
     { label: "Skip negative", input: '{"parents":[-1,0,0],"weights":[0,-4,-7]}' },
   ],
 };

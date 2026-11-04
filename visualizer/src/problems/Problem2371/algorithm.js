@@ -1,14 +1,15 @@
 const CODE = [
-  'FUNCTION minimizeMax(grid)',
-  '    m, n ← dimensions of grid',
-  '    assigned ← m by n grid of zeros',
-  '    rowMax ← m zeros, colMax ← n zeros',
-  '    cells ← every (r, c), sorted by grid[r][c] ascending',
-  '    FOR each (r, c) in cells',
-  '        value ← max(rowMax[r], colMax[c]) + 1',
-  '        assigned[r][c] ← value',
-  '        rowMax[r] ← value, colMax[c] ← value',
-  '    RETURN assigned',
+  'const m = grid.length, n = grid[0].length',
+  'const assigned = Array.from({ length: m }, () => Array(n).fill(0))',
+  'const rowMax = Array(m).fill(0), colMax = Array(n).fill(0)',
+  'cells.sort((a, b) => grid[a[0]][a[1]] - grid[b[0]][b[1]])',
+  'for (const [r, c] of cells) {',
+  '  const value = Math.max(rowMax[r], colMax[c]) + 1',
+  '  assigned[r][c] = value',
+  '  rowMax[r] = value',
+  '  colMax[c] = value',
+  '}',
+  'return assigned',
 ]
 
 const PY = [
@@ -62,17 +63,17 @@ export function buildTrace(grid) {
   for (let r = 0; r < m; r++) for (let c = 0; c < n; c++) cells.push([r, c])
   cells.sort((a, b) => grid[a[0]][a[1]] - grid[b[0]][b[1]])
   const frames = []
-  frames.push({ pythonLine: pyLine('cells = sorted(((r, c) for r in range(m) for c in range(n)), key=lambda p: grid[p[0]][p[1]])'), phase: 'start', activeLine: codeLine('cells ← every (r, c), sorted by grid[r][c] ascending'), cell: null, value: null, order: cells.map(([r, c]) => [r, c]), assigned: assigned.map(row => [...row]), rowMax: [...rowMax], colMax: [...colMax], message: `Visit the ${m * n} cells from smallest original value to largest.` })
+  frames.push({ pythonLine: pyLine('cells = sorted(((r, c) for r in range(m) for c in range(n)), key=lambda p: grid[p[0]][p[1]])'), phase: 'start', activeLine: codeLine('cells.sort((a, b) => grid[a[0]][a[1]] - grid[b[0]][b[1]])'), cell: null, value: null, order: cells.map(([r, c]) => [r, c]), assigned: assigned.map(row => [...row]), rowMax: [...rowMax], colMax: [...colMax], message: `Visit the ${m * n} cells from smallest original value to largest.` })
   cells.forEach(([r, c], index) => {
     const value = Math.max(rowMax[r], colMax[c]) + 1
-    frames.push({ pythonLine: pyLine('value = max(row_max[r], col_max[c]) + 1'), phase: 'assign', activeLine: codeLine('value ← max(rowMax[r], colMax[c]) + 1'), cell: [r, c], value, index, order: cells.map(([a, b]) => [a, b]), assigned: assigned.map(row => [...row]), rowMax: [...rowMax], colMax: [...colMax], message: `Cell (${r}, ${c}) has original value ${grid[r][c]}. Its row's largest so far is ${rowMax[r]} and its column's is ${colMax[c]}, so it takes ${value}.` })
+    frames.push({ pythonLine: pyLine('value = max(row_max[r], col_max[c]) + 1'), phase: 'assign', activeLine: codeLine('const value = Math.max(rowMax[r], colMax[c]) + 1'), cell: [r, c], value, index, order: cells.map(([a, b]) => [a, b]), assigned: assigned.map(row => [...row]), rowMax: [...rowMax], colMax: [...colMax], message: `Cell (${r}, ${c}) has original value ${grid[r][c]}. Its row's largest so far is ${rowMax[r]} and its column's is ${colMax[c]}, so it takes ${value}.` })
     assigned[r][c] = value
     rowMax[r] = value
     colMax[c] = value
-    frames.push({ pythonLine: pyLine('col_max[c] = value'), phase: 'assign', activeLine: codeLine('rowMax[r] ← value, colMax[c] ← value'), cell: [r, c], value, index, order: cells.map(([a, b]) => [a, b]), assigned: assigned.map(row => [...row]), rowMax: [...rowMax], colMax: [...colMax], message: `Row ${r} and column ${c} now record ${value}.` })
+    frames.push({ pythonLine: pyLine('col_max[c] = value'), phase: 'assign', activeLine: codeLine('rowMax[r] = value'), cell: [r, c], value, index, order: cells.map(([a, b]) => [a, b]), assigned: assigned.map(row => [...row]), rowMax: [...rowMax], colMax: [...colMax], message: `Row ${r} and column ${c} now record ${value}.` })
   })
   const best = Math.max(...assigned.flat())
-  frames.push({ pythonLine: pyLine('return assigned'), phase: 'done', activeLine: codeLine('RETURN assigned'), cell: null, value: best, order: cells.map(([a, b]) => [a, b]), assigned: assigned.map(row => [...row]), rowMax: [...rowMax], colMax: [...colMax], message: `Every cell is placed. The largest assigned value is ${best}.` })
+  frames.push({ pythonLine: pyLine('return assigned'), phase: 'done', activeLine: codeLine('return assigned'), cell: null, value: best, order: cells.map(([a, b]) => [a, b]), assigned: assigned.map(row => [...row]), rowMax: [...rowMax], colMax: [...colMax], message: `Every cell is placed. The largest assigned value is ${best}.` })
   return { input: grid, result: assigned, best, frames }
 }
 

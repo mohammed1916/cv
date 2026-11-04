@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import SetLineView from './SetLineView'
 
 const definition = {
   phases: [
@@ -19,6 +20,7 @@ const definition = {
 
 export default function SmallestInfiniteSet() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+    <SetLineView step={step} />
     <table aria-label="Infinite set state">
       <tbody>
         <tr><th scope="row">Counter (next fresh number)</th><td>{step.fresh}</td></tr>

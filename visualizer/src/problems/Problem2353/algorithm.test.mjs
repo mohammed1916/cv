@@ -5,18 +5,20 @@ import { buildTrace, parseInput } from './algorithm.js'
 const solve = input => buildTrace(parseInput(JSON.stringify(input))).result
 
 const base = {
-  foods: ['kimchi', 'miso', 'sushi', 'moussaka', 'ramen', 'bulgogi'],
-  cuisines: ['korean', 'japanese', 'japanese', 'greek', 'japanese', 'korean'],
-  ratings: [9, 12, 8, 15, 14, 7],
+  foods: ['pho', 'bun', 'taco', 'burrito'],
+  cuisines: ['viet', 'viet', 'mex', 'mex'],
+  ratings: [7, 9, 4, 4],
 }
 
-test('2353 official example', () => {
+test('2353 invented mixed example', () => {
   const input = {
-    ...base,
-    operations: ['highestRated', 'highestRated', 'changeRating', 'highestRated', 'changeRating', 'highestRated'],
-    arguments: [['korean'], ['japanese'], ['sushi', 16], ['japanese'], ['ramen', 16], ['japanese']],
+    foods: ['pho', 'bun', 'taco', 'burrito'],
+    cuisines: ['viet', 'viet', 'mex', 'mex'],
+    ratings: [7, 9, 4, 4],
+    operations: ['highestRated', 'changeRating', 'highestRated', 'highestRated', 'changeRating', 'highestRated'],
+    arguments: [['viet'], ['bun', 3], ['viet'], ['mex'], ['taco', 6], ['mex']],
   }
-  assert.deepEqual(solve(input), ['kimchi', 'ramen', null, 'sushi', null, 'ramen'])
+  assert.deepEqual(solve(input), ['bun', null, 'pho', 'burrito', null, 'taco'])
 })
 
 test('2353 a tie on rating goes to the smaller name', () => {
