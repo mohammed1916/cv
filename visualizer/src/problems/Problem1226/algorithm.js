@@ -15,7 +15,7 @@ export function buildTrace({ n, events }) {
   const eating = new Set()
   const log = []
   const forksLabel = () => holder.map((h, f) => `fork ${f}: ${h === null ? 'free' : `held by ${h}`}`)
-  const frames = [{ phase: 'start', pythonLine: PL('holding = [None]'), activeLine: L('start with all forks free'), state: forksLabel(), message: 'All forks are on the table.' }]
+  const frames = [{ phase: 'start', pythonLine: PL('holding = [None]'), activeLine: L('const holding'), state: forksLabel(), message: 'All forks are on the table.' }]
   for (const [kind, p] of events) {
     const right = (p + 1) % n
     if (kind === 'hungry') {
@@ -25,10 +25,10 @@ export function buildTrace({ n, events }) {
         holder[second] = p
         eating.add(p)
         log.push(`${p} eats`)
-        frames.push({ phase: 'eat', pythonLine: PL('holding[first] = holding[second] = p'), activeLine: L('if both forks are free'), state: forksLabel(), message: `${p} takes forks ${first} and ${second} in order, then eats.` })
+        frames.push({ phase: 'eat', pythonLine: PL('holding[first] = holding[second] = p'), activeLine: L('if (holding[first]'), state: forksLabel(), message: `${p} takes forks ${first} and ${second} in order, then eats.` })
       } else {
         log.push(`${p} waits`)
-        frames.push({ phase: 'wait', pythonLine: PL('log.append(f"{p} waits")'), activeLine: L('otherwise wait'), state: forksLabel(), message: `${p} waits: a neighbouring fork is taken.` })
+        frames.push({ phase: 'wait', pythonLine: PL('log.append(f"{p} waits")'), activeLine: L('log.push(`${p} waits`)'), state: forksLabel(), message: `${p} waits: a neighbouring fork is taken.` })
       }
     } else {
       if (!eating.has(p)) throw new Error(`Philosopher ${p} is not eating, so there is nothing to finish.`)
@@ -36,23 +36,38 @@ export function buildTrace({ n, events }) {
       holder[right] = null
       eating.delete(p)
       log.push(`${p} thinks`)
-      frames.push({ phase: 'finish', pythonLine: PL('holding[p] = holding[right] = None'), activeLine: L('when finished put both forks down'), state: forksLabel(), message: `${p} puts both forks down.` })
+      frames.push({ phase: 'finish', pythonLine: PL('holding[p] = holding[right] = None'), activeLine: L('holding[p] = holding[right]'), state: forksLabel(), message: `${p} puts both forks down.` })
     }
   }
-  frames.push({ phase: 'done', pythonLine: PL('return log'), activeLine: L('return the log'), state: forksLabel(), message: 'The event list is finished.' })
+  frames.push({ phase: 'done', pythonLine: PL('return log'), activeLine: L('return log'), state: forksLabel(), message: 'The event list is finished.' })
   return { input: { n, events }, result: log, frames }
 }
 
-export const code = `dining philosophers with ordered fork pickup
-  start with all forks free
-  for each event in order
-    if a philosopher becomes hungry
-      pick up the lower numbered fork first, then the higher one
-      if both forks are free then eat
-      otherwise wait
-    if a philosopher finishes
-      when finished put both forks down
-  return the log`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  { line: 1, text: "function diningPhilosophers(n, events) {" },
+  { line: 2, text: "  const holding = Array(n).fill(null)" },
+  { line: 3, text: "  const eating = new Set()" },
+  { line: 4, text: "  const log = []" },
+  { line: 5, text: "  for (const [kind, p] of events) {" },
+  { line: 6, text: "    const right = (p + 1) % n" },
+  { line: 7, text: "    if (kind === 'hungry') {" },
+  { line: 8, text: "      const [first, second] = [p, right].sort((a, b) => a - b)" },
+  { line: 9, text: "      if (holding[first] === null && holding[second] === null) {" },
+  { line: 10, text: "        holding[first] = holding[second] = p" },
+  { line: 11, text: "        eating.add(p)" },
+  { line: 12, text: "        log.push(`${p} eats`)" },
+  { line: 13, text: "      } else {" },
+  { line: 14, text: "        log.push(`${p} waits`)" },
+  { line: 15, text: "      }" },
+  { line: 16, text: "    } else {" },
+  { line: 17, text: "      holding[p] = holding[right] = null" },
+  { line: 18, text: "      eating.delete(p)" },
+  { line: 19, text: "      log.push(`${p} thinks`)" },
+  { line: 20, text: "    }" },
+  { line: 21, text: "  }" },
+  { line: 22, text: "  return log" },
+  { line: 23, text: "}" },
+].map(c => c)
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def dine(n, events):

@@ -22,14 +22,19 @@ export function parseInput(text) {
   return { arr: data.arr, difference: data.difference }
 }
 
-const codeText = `longest(arr, difference):
-  best = empty map from value to chain length
-  answer = 0
-  for each x in arr:
-    length = 1 + best[x - difference], or 1 if that value is absent
-    best[x] = length
-    answer = max(answer, length)
-  return answer`
+const codeLines = [
+  "function longestSubsequence(arr, difference) {",
+  "  const best = new Map()",
+  "  let answer = 0",
+  "  for (const x of arr) {",
+  "    const length = (best.get(x - difference) ?? 0) + 1",
+  "    best.set(x, length)",
+  "    answer = Math.max(answer, length)",
+  "  }",
+  "  return answer",
+  "}",
+]
+const codeText = codeLines.join('\n')
 const pythonText = `def longest_subsequence(arr, difference):
     best = {}                                     # best[v]: longest chain ending at value v
     answer = 0
@@ -50,7 +55,7 @@ export function buildTrace({ arr, difference }) {
   let answer = 0
   const snap = (extra = {}) => ({ best: [...best.entries()].map(([value, length]) => ({ value, length })), answer, ...extra })
   frames.push({
-    phase: 'start', activeLine: L('best = empty map'), pythonLine: P('best = {}'),
+    phase: 'start', activeLine: L('const best = new Map()'), pythonLine: P('best = {}'),
     message: `The difference is ${difference}. The map starts empty, so no chain has been recorded.`,
     snapshot: snap({ x: null }),
   })
@@ -58,7 +63,7 @@ export function buildTrace({ arr, difference }) {
     const predecessor = x - difference
     const before = best.has(predecessor) ? best.get(predecessor) : 0
     frames.push({
-      phase: 'extend', activeLine: L('length = 1 + best'), pythonLine: P('length = best.get'),
+      phase: 'extend', activeLine: L('const length ='), pythonLine: P('length = best.get'),
       message: best.has(predecessor)
         ? `For x = ${x}, the predecessor ${predecessor} already ends a chain of length ${before}, so this chain is ${before + 1}.`
         : `For x = ${x}, the predecessor ${predecessor} has not appeared before, so the chain starts here with length 1.`,
@@ -68,7 +73,7 @@ export function buildTrace({ arr, difference }) {
     best.set(x, length)
     answer = Math.max(answer, length)
     frames.push({
-      phase: 'record', activeLine: L('best[x] = length'), pythonLine: P('best[x] = length'),
+      phase: 'record', activeLine: L('best.set(x, length)'), pythonLine: P('best[x] = length'),
       message: `Record ${length} for value ${x}. The best chain so far is ${answer}.`,
       snapshot: snap({ x, index, predecessor, recorded: length }),
     })

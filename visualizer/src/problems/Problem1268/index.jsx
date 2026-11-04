@@ -21,7 +21,7 @@ export default function SearchSuggestions() {
       <div role="img" aria-label="Sorted products" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {sorted.map((word, i) => <div key={i} style={{
           padding: '6px 8px', fontFamily: 'monospace', border: `${i === scan ? 2 : 1}px solid ${i === scan ? 'var(--text)' : 'var(--border)'}`,
-          background: matches.includes(word) ? '#bbf7d0' : 'transparent', color: '#1c1917',
+          background: matches.includes(word) ? 'color-mix(in srgb, var(--primary) 25%, transparent)' : 'transparent', color: 'var(--text)',
         }}>{word}</div>)}
       </div>
       <p>{prefix === null ? 'No prefix is active yet.' : `Active prefix: "${prefix}"`}</p>

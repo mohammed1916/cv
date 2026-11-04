@@ -19,7 +19,7 @@ export function buildTrace({ n }) {
   const frames = []
   if (n === 1) {
     frames.push({
-      phase: 'start', activeLine: L('if n == 1'), pythonLine: P('if n == 1'),
+      phase: 'start', activeLine: L('if (n === 1)'), pythonLine: P('if n == 1'),
       message: 'With one passenger there is no competing seat, so the probability is 1.',
       snapshot: { n, seat1: 1, middle: 0, seatN: 0, running: 1 },
     })
@@ -35,22 +35,22 @@ export function buildTrace({ n }) {
   const middle = middleCount / n * 0.5
   const seatN = 0
   frames.push({
-    phase: 'start', activeLine: L('seat1 = 1 / n'), pythonLine: P('seat1 = 1 / n'),
+    phase: 'start', activeLine: L('const seat1 = 1 / n'), pythonLine: P('seat1 = 1 / n'),
     message: `The first passenger picks one of ${n} seats, each with probability 1/${n}.`,
     snapshot: { n, seat1: null, middle: null, seatN: null, running: 0 },
   })
   frames.push({
-    phase: 'seat1', activeLine: L('seat1 = 1 / n'), pythonLine: P('seat1 = 1 / n'),
+    phase: 'seat1', activeLine: L('const seat1 = 1 / n'), pythonLine: P('seat1 = 1 / n'),
     message: `Seat 1 is chosen with probability 1/${n}. Then the last passenger finds seat ${n} free, so this case contributes ${seat1.toFixed(6)}.`,
     snapshot: { n, seat1, middle: null, seatN: null, running: seat1 },
   })
   frames.push({
-    phase: 'middle', activeLine: L('middle = (n - 2) / n'), pythonLine: P('middle ='),
+    phase: 'middle', activeLine: L('const middle = ((n - 2)'), pythonLine: P('middle ='),
     message: `${middleCount} middle seats each contribute half their probability, for a total of ${middle.toFixed(6)}.`,
     snapshot: { n, seat1, middle, seatN: null, running: seat1 + middle },
   })
   frames.push({
-    phase: 'seatN', activeLine: L('seatN = 0'), pythonLine: P('seatN ='),
+    phase: 'seatN', activeLine: L('const seatN = 0'), pythonLine: P('seatN ='),
     message: `Seat ${n} is chosen with probability 1/${n}, which takes the last passenger's seat. It contributes 0.`,
     snapshot: { n, seat1, middle, seatN, running: seat1 + middle },
   })
@@ -63,14 +63,15 @@ export function buildTrace({ n }) {
   return { input: { n }, result, frames }
 }
 
-const codeLines = `probability the last passenger sits in their own seat (n):
-  if n == 1:
-    return 1
-  seat1 = 1 / n
-  middle = (n - 2) / n * 1/2
-  seatN = 0
-  return seat1 + middle + seatN`.split('\n')
-
+const codeLines = [
+  "function nthPassengerSeatProbability(n) {",
+  "  if (n === 1) return 1",
+  "  const seat1 = 1 / n",
+  "  const middle = ((n - 2) / n) * 0.5",
+  "  const seatN = 0",
+  "  return seat1 + middle + seatN",
+  "}",
+]
 export const code = codeLines.map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def last_passenger_probability(n):

@@ -14,16 +14,20 @@ export const examples = [
   { label: 'Nested', input: '(a(b)c)' },
 ]
 
-export const code = `function minRemoveToValid(s):
-  openers = empty stack
-  remove = empty set
-  for i, ch in s:
-    if ch == '(': push i onto openers
-    else if ch == ')':
-      if openers is not empty: pop openers
-      else: add i to remove
-  add every index left in openers to remove
-  return s without the indices in remove`
+export const code = `function minRemoveToMakeValid(s) {
+  const openers = []
+  const remove = new Set()
+  for (let i = 0; i < s.length; i++) {
+    const ch = s[i]
+    if (ch === '(') openers.push(i)
+    else if (ch === ')') {
+      if (openers.length > 0) openers.pop()
+      else remove.add(i)
+    }
+  }
+  for (const i of openers) remove.add(i)
+  return [...s].filter((_, i) => !remove.has(i)).join('')
+}`
 
 export const python = `def min_remove_to_valid(s):
     openers = []
@@ -64,22 +68,22 @@ export function buildTrace(s) {
     text: s, position, openers: [...openers], remove: marks(), ...extra,
   })
 
-  push('start', 'openers = empty', 'openers = []', `Read ${s.length} characters. Letters are always kept; only parentheses can be marked.`, -1)
+  push('start', 'const openers = []', 'openers = []', `Read ${s.length} characters. Letters are always kept; only parentheses can be marked.`, -1)
   for (let i = 0; i < s.length; i++) {
     const ch = s[i]
     if (ch === '(') {
       openers.push(i)
-      push('inspect', 'push i onto openers', 'openers.append(i)', `Position ${i} is "(". It waits on the stack for a closer.`, i)
+      push('inspect', 'openers.push(i)', 'openers.append(i)', `Position ${i} is "(". It waits on the stack for a closer.`, i)
     } else if (ch === ')') {
       if (openers.length) {
         const partner = openers.pop()
-        push('inspect', 'pop openers', 'openers.pop()', `Position ${i} is ")" and pairs with the "(" at ${partner}. That pair stays.`, i)
+        push('inspect', 'openers.pop()', 'openers.pop()', `Position ${i} is ")" and pairs with the "(" at ${partner}. That pair stays.`, i)
       } else {
         remove.add(i)
-        push('update', 'add i to remove', 'remove.add(i)', `Position ${i} is ")" with no waiting "(", so it is marked for removal.`, i)
+        push('update', 'remove.add(i)', 'remove.add(i)', `Position ${i} is ")" with no waiting "(", so it is marked for removal.`, i)
       }
     } else {
-      push('inspect', 'for i, ch', 'for i, ch', `Position ${i} is the letter ${ch}. Letters are always kept.`, i)
+      push('inspect', 'for (let i = 0', 'for i, ch', `Position ${i} is the letter ${ch}. Letters are always kept.`, i)
     }
   }
 
@@ -87,10 +91,10 @@ export function buildTrace(s) {
     remove.add(leftover)
   }
   if (openers.length) {
-    push('update', 'add every index left', 'remove.update(openers)', `${openers.length} "(" remain on the stack without a partner, at position${openers.length > 1 ? 's' : ''} ${openers.join(', ')}. Mark ${openers.length > 1 ? 'them' : 'it'} for removal.`, -1)
+    push('update', 'for (const i of openers)', 'remove.update(openers)', `${openers.length} "(" remain on the stack without a partner, at position${openers.length > 1 ? 's' : ''} ${openers.join(', ')}. Mark ${openers.length > 1 ? 'them' : 'it'} for removal.`, -1)
   }
 
   const result = [...s].filter((_, i) => !remove.has(i)).join('')
-  push('done', 'return s without', 'return', `Removing ${remove.size} bracket${remove.size === 1 ? '' : 's'} gives "${result}".`, -1, { result })
+  push('done', 'return [...s].filter', 'return', `Removing ${remove.size} bracket${remove.size === 1 ? '' : 's'} gives "${result}".`, -1, { result })
   return { input: s, result, frames }
 }

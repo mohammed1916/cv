@@ -21,16 +21,19 @@ export function parseInput(text) {
   return { s: data.s, k: data.k }
 }
 
-const codeText = `remove_runs(s, k):
-  stack = empty list of runs, each run is (character, length)
-  for each character ch in s:
-    if the top run has character ch:
-      add 1 to the top run's length
-    else:
-      push a new run (ch, 1)
-    if the top run's length equals k:
-      pop the top run
-  return every run's character repeated by its length, in order`
+const codeLines = [
+  "function removeRuns(s, k) {",
+  "  const stack = []",
+  "  for (const ch of s) {",
+  "    const top = stack[stack.length - 1]",
+  "    if (top && top[0] === ch) top[1] += 1",
+  "    else stack.push([ch, 1])",
+  "    if (stack[stack.length - 1][1] === k) stack.pop()",
+  "  }",
+  "  return stack.map(([ch, n]) => ch.repeat(n)).join('')",
+  "}",
+]
+const codeText = codeLines.join('\n')
 const pythonText = `def remove_runs(s, k):
     stack = []                              # pairs [character, run length]
     for ch in s:
@@ -52,27 +55,27 @@ export function buildTrace({ s, k }) {
   const frames = []
   const snap = (extra = {}) => ({ stack: stack.map(([ch, n]) => ({ ch, n })), ...extra })
   frames.push({
-    phase: 'read', activeLine: L('stack = empty'), pythonLine: P('stack = []'),
+    phase: 'read', activeLine: L('const stack'), pythonLine: P('stack = []'),
     message: `Start with an empty stack. A run is removed as soon as it reaches ${k} equal characters.`,
     snapshot: snap({ index: -1 }),
   })
   for (let i = 0; i < s.length; i++) {
     const ch = s[i]
     frames.push({
-      phase: 'read', activeLine: L('for each character'), pythonLine: P('for ch in s'),
+      phase: 'read', activeLine: L('for (const ch'), pythonLine: P('for ch in s'),
       message: `Read "${ch}" at position ${i}.`, snapshot: snap({ index: i }),
     })
     const top = stack[stack.length - 1]
     if (top && top[0] === ch) {
       top[1] += 1
       frames.push({
-        phase: 'push', activeLine: L('add 1 to the top'), pythonLine: P('stack[-1][1] += 1'),
+        phase: 'push', activeLine: L('top[1] += 1'), pythonLine: P('stack[-1][1] += 1'),
         message: `The top run is also "${ch}", so it grows to ${top[1]}.`, snapshot: snap({ index: i }),
       })
     } else {
       stack.push([ch, 1])
       frames.push({
-        phase: 'push', activeLine: L('push a new run'), pythonLine: P('stack.append'),
+        phase: 'push', activeLine: L('stack.push([ch, 1])'), pythonLine: P('stack.append'),
         message: `"${ch}" does not match the top run, so it starts a new run of length 1.`, snapshot: snap({ index: i }),
       })
     }
@@ -80,7 +83,7 @@ export function buildTrace({ s, k }) {
     if (current[1] === k) {
       stack.pop()
       frames.push({
-        phase: 'remove', activeLine: L('pop the top run'), pythonLine: P('stack.pop()'),
+        phase: 'remove', activeLine: L('stack.pop()'), pythonLine: P('stack.pop()'),
         message: `The run of "${current[0]}" reached ${k}, so it is removed. The run beneath it now meets whatever comes next.`,
         snapshot: snap({ index: i, removed: current[0] }),
       })
@@ -88,7 +91,7 @@ export function buildTrace({ s, k }) {
   }
   const result = stack.map(([ch, n]) => ch.repeat(n)).join('')
   frames.push({
-    phase: 'done', activeLine: L('return every run'), pythonLine: P('return "".join'),
+    phase: 'done', activeLine: L('return stack.map'), pythonLine: P('return "".join'),
     message: result ? `The surviving runs, in order, give "${result}".` : 'Every character was removed, so the answer is the empty string.',
     snapshot: snap({ index: s.length }),
   })

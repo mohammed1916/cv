@@ -30,7 +30,7 @@ export function buildTrace({ m, n, indices }) {
   const cols = Array(n).fill(0)
   const snap = (extra = {}) => ({ rows: [...rows], cols: [...cols], m, n, ...extra })
   const frames = [{
-    phase: 'start', activeLine: L('rows = [0] * m'), pythonLine: P('rows = [0] * m'), snapshot: snap(),
+    phase: 'start', activeLine: L('const rows = Array(m)'), pythonLine: P('rows = [0] * m'), snapshot: snap(),
     message: `A ${m} by ${n} matrix starts at zero. We will apply ${indices.length} operations using one counter per row and per column.`,
   }]
 
@@ -50,7 +50,7 @@ export function buildTrace({ m, n, indices }) {
     for (let c = 0; c < n; c++) if ((rows[r] + cols[c]) % 2 === 1) inRow++
     count += inRow
     frames.push({
-      phase: 'scan', activeLine: L('if (rows[r] + cols[c])'), pythonLine: P('if (rows[r] + cols[c])'),
+      phase: 'scan', activeLine: L('if ((rows[r] + cols[c])'), pythonLine: P('if (rows[r] + cols[c])'),
       snapshot: snap({ scanRow: r, rowOdd: inRow, count }),
       message: `Row ${r} has counter ${rows[r]}. Its cells are odd where the column counter has the opposite parity, so this row contributes ${inRow}. Running total ${count}.`,
     })
@@ -64,16 +64,21 @@ export function buildTrace({ m, n, indices }) {
 }
 
 export const code = [
-  'odd_cells(m, n, indices):',
-  '  rows = [0] * m, cols = [0] * n',
-  '  for [r, c] in indices:',
-  '    rows[r] += 1',
-  '    cols[c] += 1',
-  '  count = 0',
-  '  for r in 0 .. m - 1:',
-  '    for c in 0 .. n - 1:',
-  '      if (rows[r] + cols[c]) is odd: count += 1',
-  '  return count',
+  "function oddCells(m, n, indices) {",
+  "  const rows = Array(m).fill(0)",
+  "  const cols = Array(n).fill(0)",
+  "  for (const [r, c] of indices) {",
+  "    rows[r] += 1",
+  "    cols[c] += 1",
+  "  }",
+  "  let count = 0",
+  "  for (let r = 0; r < m; r++) {",
+  "    for (let c = 0; c < n; c++) {",
+  "      if ((rows[r] + cols[c]) % 2 === 1) count += 1",
+  "    }",
+  "  }",
+  "  return count",
+  "}",
 ].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def odd_cells(m, n, indices):

@@ -26,20 +26,34 @@ export function parseInput(text) {
   return grid
 }
 
-const codeText = `max_gold(grid):
-  answer = 0
-  for each cell (r, c) with gold > 0:
-    answer = max(answer, explore(r, c))
-  return answer
-
-explore(r, c):
-  mark (r, c) as used on the current path
-  best = 0
-  for each orthogonal neighbour (nr, nc):
-    if it has gold and is not used:
-      best = max(best, explore(nr, nc))
-  unmark (r, c)
-  return gold at (r, c) + best`
+const codeLines = [
+  "function getMaximumGold(grid) {",
+  "  const rows = grid.length",
+  "  const cols = grid[0].length",
+  "  const used = new Set()",
+  "  const explore = (r, c) => {",
+  "    used.add(`${r},${c}`)",
+  "    let best = 0",
+  "    for (const [dr, dc] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {",
+  "      const nr = r + dr",
+  "      const nc = c + dc",
+  "      if (nr >= 0 && nr < rows && nc >= 0 && nc < cols && grid[nr][nc] > 0 && !used.has(`${nr},${nc}`)) {",
+  "        best = Math.max(best, explore(nr, nc))",
+  "      }",
+  "    }",
+  "    used.delete(`${r},${c}`)",
+  "    return grid[r][c] + best",
+  "  }",
+  "  let answer = 0",
+  "  for (let r = 0; r < rows; r++) {",
+  "    for (let c = 0; c < cols; c++) {",
+  "      if (grid[r][c] > 0) answer = Math.max(answer, explore(r, c))",
+  "    }",
+  "  }",
+  "  return answer",
+  "}",
+]
+const codeText = codeLines.join('\n')
 const pythonText = `def get_maximum_gold(grid):
     rows, cols = len(grid), len(grid[0])
     seen = set()
@@ -79,7 +93,7 @@ export function buildTrace(grid) {
     used.add(key(r, c))
     let pathTotal = 0
     frames.push({
-      phase: 'extend', activeLine: L('mark (r, c)'), pythonLine: P('seen.add'),
+      phase: 'extend', activeLine: L('used.add('), pythonLine: P('seen.add'),
       message: `Enter (${r},${c}) with ${grid[r][c]} gold and mark it as used on this path.`,
       snapshot: snap({ cell: [r, c] }),
     })
@@ -90,7 +104,7 @@ export function buildTrace(grid) {
       const inside = nr >= 0 && nr < rows && nc >= 0 && nc < cols
       if (inside && grid[nr][nc] > 0 && !used.has(key(nr, nc))) {
         frames.push({
-          phase: 'extend', activeLine: L('if it has gold'), pythonLine: P('if 0 <= nr'),
+          phase: 'extend', activeLine: L('best = Math.max(best, explore'), pythonLine: P('if 0 <= nr'),
           message: `Neighbour (${nr},${nc}) has gold and is unused, so the path may continue there.`,
           snapshot: snap({ cell: [r, c], next: [nr, nc] }),
         })
@@ -100,7 +114,7 @@ export function buildTrace(grid) {
     used.delete(key(r, c))
     pathTotal = grid[r][c] + best
     frames.push({
-      phase: 'backtrack', activeLine: L('unmark (r, c)'), pythonLine: P('seen.remove'),
+      phase: 'backtrack', activeLine: L('used.delete('), pythonLine: P('seen.remove'),
       message: `The best path from (${r},${c}) collects ${pathTotal}. Unmark it so other paths can pass through.`,
       snapshot: snap({ cell: [r, c], value: pathTotal }),
     })
@@ -111,7 +125,7 @@ export function buildTrace(grid) {
     for (let c = 0; c < cols; c++) {
       if (grid[r][c] <= 0) continue
       frames.push({
-        phase: 'start', activeLine: L('for each cell (r, c)'), pythonLine: P('for r in range(rows)'),
+        phase: 'start', activeLine: L('if (grid[r][c] > 0)'), pythonLine: P('for r in range(rows)'),
         message: `Start a path at (${r},${c}), which holds ${grid[r][c]} gold.`,
         snapshot: snap({ cell: [r, c] }),
       })

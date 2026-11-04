@@ -23,10 +23,10 @@ export default function ClosedIslands() {
           const isFocus = focus && focus[0] === r && focus[1] === c
           const water = cell === 1
           const edge = r === 0 || c === 0 || r === grid.length - 1 || c === row.length - 1
-          const background = water ? '#334155' : reach[r][c] ? (edge ? '#bbf7d0' : '#a7f3d0') : '#fef3c7'
+          const background = water ? 'var(--surface2)' : reach[r][c] ? (edge ? 'color-mix(in srgb, var(--primary) 25%, transparent)' : 'color-mix(in srgb, var(--primary) 35%, transparent)') : 'var(--surface2)'
           return <div key={`${r}-${c}`} data-cell={`${r},${c}`} style={{
             width: 34, height: 34, display: 'flex', alignItems: 'center', justifyContent: 'center',
-            background, color: water ? '#e2e8f0' : '#1c1917', border: isFocus ? '2px solid var(--text)' : '1px solid var(--border)',
+            background, color: water ? 'var(--text)' : 'var(--text)', border: isFocus ? '2px solid var(--text)' : '1px solid var(--border)',
           }}>{water ? '≈' : edge && !reach[r][c] ? 'E' : ''}</div>
         }))}
       </div>

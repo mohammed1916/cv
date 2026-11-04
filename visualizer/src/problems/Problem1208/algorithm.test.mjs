@@ -41,14 +41,14 @@ test('1208 random cases match the all-substrings oracle', () => {
 test('1208 trace extends, shrinks and records the window, ending with the answer', () => {
   const { frames, result } = buildTrace({ s: 'abcd', t: 'bcdf', maxCost: 3 })
   assert.equal(result, 3)
-  assert.ok(frames.some(f => f.activeLine === 5), 'a shrink step appears')
+  assert.ok(frames.some(f => f.activeLine === 9), 'a shrink step appears')
   assert.equal(frames.at(-1).phase, 'done')
   assert.ok(frames.every(f => f.snapshot && typeof f.message === 'string'))
 })
 
 test('1208 phases and code are exported for the shared shell', () => {
   assert.deepEqual(phases.map(p => p.id), ['start', 'inspect', 'update', 'done'])
-  assert.equal(code.length, 7)
+  assert.equal(code.length, 15)
   assert.ok(python.includes('equal_substring'))
 })
 

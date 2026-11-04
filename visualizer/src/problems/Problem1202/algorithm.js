@@ -2,12 +2,30 @@
 const MAX_LENGTH = 40
 
 export const code = [
-  { line: 1, text: 'parent[i] = i for every index i' },
-  { line: 2, text: 'for each allowed pair (i, j): union the components of i and j' },
-  { line: 3, text: 'for each component, in order of its first index:' },
-  { line: 4, text: '  sort the component letters and sort its indices' },
-  { line: 5, text: '  put the k-th smallest letter at the k-th smallest index' },
-  { line: 6, text: 'return the rebuilt string' },
+  { line: 1, text: "function smallestStringWithSwaps(s, pairs) {" },
+  { line: 2, text: "  const parent = Array.from({ length: s.length }, (_, i) => i)" },
+  { line: 3, text: "  const find = x => {" },
+  { line: 4, text: "    while (parent[x] !== x) { parent[x] = parent[parent[x]]; x = parent[x] }" },
+  { line: 5, text: "    return x" },
+  { line: 6, text: "  }" },
+  { line: 7, text: "  for (const [i, j] of pairs) {" },
+  { line: 8, text: "    const ri = find(i)" },
+  { line: 9, text: "    const rj = find(j)" },
+  { line: 10, text: "    if (ri !== rj) parent[Math.max(ri, rj)] = Math.min(ri, rj)" },
+  { line: 11, text: "  }" },
+  { line: 12, text: "  const groups = new Map()" },
+  { line: 13, text: "  for (let i = 0; i < s.length; i++) {" },
+  { line: 14, text: "    const root = find(i)" },
+  { line: 15, text: "    if (!groups.has(root)) groups.set(root, [])" },
+  { line: 16, text: "    groups.get(root).push(i)" },
+  { line: 17, text: "  }" },
+  { line: 18, text: "  const out = [...s]" },
+  { line: 19, text: "  for (const members of groups.values()) {" },
+  { line: 20, text: "    const letters = members.map(i => s[i]).sort()" },
+  { line: 21, text: "    members.forEach((position, k) => { out[position] = letters[k] })" },
+  { line: 22, text: "  }" },
+  { line: 23, text: "  return out.join('')" },
+  { line: 24, text: "}" },
 ]
 
 export const python = `def smallest_string_with_swaps(s, pairs):
@@ -31,7 +49,7 @@ export const python = `def smallest_string_with_swaps(s, pairs):
             out[i] = c
     return "".join(out)`
 
-export const pythonLineMap = { 1: 2, 2: 8, 3: 13, 4: 17, 5: 19, 6: 20 }
+export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 7, 6: 7, 7: 8, 8: 9, 9: 9, 10: 10, 11: 12, 12: 12, 13: 13, 14: 14, 15: 14, 16: 14, 17: 14, 18: 15, 19: 16, 20: 17, 21: 19, 22: 19, 23: 20, 24: 20 }
 
 export const phases = [
   { id: 'start', label: 'Separate', description: 'Every position begins as its own component.' },
@@ -75,14 +93,14 @@ export function buildTrace({ s, pairs }) {
   const out = [...s]
   const frames = []
   const snap = (extra = {}) => ({ letters: [...s], parent: [...parent], result: out.join(''), ...extra })
-  frames.push({ phase: 'start', activeLine: 1, message: `Each of the ${n} positions starts as its own component.`, snapshot: snap() })
+  frames.push({ phase: 'start', activeLine: 2, message: `Each of the ${n} positions starts as its own component.`, snapshot: snap() })
   pairs.forEach(([i, j], pair) => {
     const ri = find(i)
     const rj = find(j)
     const merged = ri !== rj
     if (merged) parent[Math.max(ri, rj)] = Math.min(ri, rj)
     frames.push({
-      phase: 'inspect', activeLine: 2,
+      phase: 'inspect', activeLine: 10,
       message: merged ? `Pair ${i} and ${j} joins components ${Math.min(ri, rj)} and ${Math.max(ri, rj)}.` : `Pair ${i} and ${j} is already connected, so nothing changes.`,
       snapshot: snap({ pair, merged }),
     })
@@ -97,12 +115,12 @@ export function buildTrace({ s, pairs }) {
     const letters = members.map(i => s[i]).sort()
     members.forEach((position, k) => { out[position] = letters[k] })
     frames.push({
-      phase: 'update', activeLine: 5,
+      phase: 'update', activeLine: 21,
       message: `Positions ${members.join(', ')} receive ${letters.join('')} in increasing order.`,
       snapshot: snap({ group: [...members] }),
     })
   }
   const result = out.join('')
-  frames.push({ phase: 'done', activeLine: 6, message: `Return ${result}.`, snapshot: snap() })
+  frames.push({ phase: 'done', activeLine: 23, message: `Return ${result}.`, snapshot: snap() })
   return { input: { s, pairs }, result, frames }
 }

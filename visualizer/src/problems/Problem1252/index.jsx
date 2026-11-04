@@ -24,7 +24,7 @@ export default function CellsWithOddValues() {
           const odd = (rv + cv) % 2 === 1
           return <td key={c} data-cell={`${r},${c}`} style={{
             width: 56, height: 36, textAlign: 'center', border: '1px solid var(--border)',
-            background: odd ? '#fde68a' : 'transparent', color: '#1c1917',
+            background: odd ? 'color-mix(in srgb, var(--primary) 30%, transparent)' : 'transparent', color: 'var(--text)',
             outline: scanRow === r ? '2px solid var(--text)' : 'none',
           }}>{rv + cv}</td>
         })}</tr>)}</tbody>

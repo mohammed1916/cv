@@ -15,14 +15,14 @@ export default function LongestArithmeticSubsequence() {
       <div aria-label="Input array" style={{ marginBottom: 12 }}>
         {run.input.arr.map((value, i) => <span key={i} style={{
           ...box,
-          background: i === index ? '#facc15' : i < (index ?? -1) ? 'var(--surface2)' : 'transparent',
-          color: i === index ? '#1c1917' : 'var(--text)',
+          background: i === index ? 'color-mix(in srgb, var(--primary) 35%, transparent)' : i < (index ?? -1) ? 'var(--surface2)' : 'transparent',
+          color: 'var(--text)',
         }}>{value}</span>)}
       </div>
       <p>Best chain ending at each value (a chain is a subsequence with a fixed difference of {run.input.difference}):</p>
       <div aria-label="Best chain lengths">
         {best.length === 0 ? <span style={{ color: 'var(--text-dim)' }}>none yet</span>
-          : best.map(entry => <span key={entry.value} style={{ ...box, borderColor: entry.value === x ? '#0891b2' : 'var(--border)' }}>
+          : best.map(entry => <span key={entry.value} style={{ ...box, borderColor: entry.value === x ? 'var(--text)' : 'var(--border)' }}>
             {entry.value}: {entry.length}{recorded !== undefined && entry.value === x ? ' (new)' : ''}
           </span>)}
       </div>

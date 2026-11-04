@@ -14,15 +14,18 @@ export const examples = [
   { label: 'Impossible', input: '["xxy","yyx"]' },
 ]
 
-export const code = `function minimumSwaps(a, b):
-  xy = 0, yx = 0
-  for i from 0 to n - 1:
-    if a[i] == 'x' and b[i] == 'y': xy += 1
-    else if a[i] == 'y' and b[i] == 'x': yx += 1
-  if (xy + yx) is odd: return -1
-  swaps = xy // 2 + yx // 2
-  if xy is odd: swaps += 2
-  return swaps`
+export const code = `function minimumSwaps(s1, s2) {
+  let xy = 0
+  let yx = 0
+  for (let i = 0; i < s1.length; i++) {
+    if (s1[i] === 'x' && s2[i] === 'y') xy += 1
+    else if (s1[i] === 'y' && s2[i] === 'x') yx += 1
+  }
+  if ((xy + yx) % 2 === 1) return -1
+  let swaps = Math.floor(xy / 2) + Math.floor(yx / 2)
+  if (xy % 2 === 1) swaps += 2
+  return swaps
+}`
 
 export const python = `def minimum_swaps(s1, s2):
     xy = yx = 0
@@ -68,7 +71,7 @@ export function buildTrace([a, b]) {
     s1: a, s2: b, position, xy, yx, swaps, verdict,
   })
 
-  push('start', 'xy = 0', 'xy = yx = 0', `Two strings of length ${a.length}. Compare them position by position.`)
+  push('start', 'let xy = 0', 'xy = yx = 0', `Two strings of length ${a.length}. Compare them position by position.`)
   for (let i = 0; i < a.length; i++) {
     if (a[i] === 'x' && b[i] === 'y') {
       xy += 1
@@ -77,7 +80,7 @@ export function buildTrace([a, b]) {
       yx += 1
       push('inspect', 'yx += 1', 'yx += 1', `Position ${i}: first string has y, second has x. This is a yx mismatch (${yx} so far).`, i, 'yx')
     } else {
-      push('inspect', 'for i from', 'for a, b in zip', `Position ${i} already matches (${a[i]}), so it needs no swap.`, i, 'match')
+      push('inspect', 'for (let i = 0', 'for a, b in zip', `Position ${i} already matches (${a[i]}), so it needs no swap.`, i, 'match')
     }
   }
 
@@ -88,15 +91,15 @@ export function buildTrace([a, b]) {
 
   for (let pair = 0; pair < Math.floor(xy / 2); pair++) {
     swaps += 1
-    push('update', 'swaps = xy // 2', 'swaps = xy // 2', `Pair two xy mismatches with one swap. Swaps so far: ${swaps}.`, null, 'pair')
+    push('update', 'let swaps = Math.floor(xy / 2)', 'swaps = xy // 2', `Pair two xy mismatches with one swap. Swaps so far: ${swaps}.`, null, 'pair')
   }
   for (let pair = 0; pair < Math.floor(yx / 2); pair++) {
     swaps += 1
-    push('update', 'swaps = xy // 2', 'swaps = xy // 2', `Pair two yx mismatches with one swap. Swaps so far: ${swaps}.`, null, 'pair')
+    push('update', 'let swaps = Math.floor(xy / 2)', 'swaps = xy // 2', `Pair two yx mismatches with one swap. Swaps so far: ${swaps}.`, null, 'pair')
   }
   if (xy % 2 === 1) {
     swaps += 2
-    push('update', 'swaps += 2', 'swaps += 2', `One xy and one yx mismatch are left over. Two swaps fix them. Swaps total: ${swaps}.`, null, 'leftover')
+    push('update', 'if (xy % 2 === 1) swaps += 2', 'swaps += 2', `One xy and one yx mismatch are left over. Two swaps fix them. Swaps total: ${swaps}.`, null, 'leftover')
   }
 
   push('done', 'return swaps', 'return swaps', `The fewest swaps is ${swaps}.`, null, 'result')

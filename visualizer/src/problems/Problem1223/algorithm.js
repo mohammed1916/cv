@@ -25,14 +25,14 @@ export function buildTrace({ n, rollMax }) {
   // runs[f][k] = number of sequences so far that end with face f (0-based) in a run of exactly k rolls.
   let runs = rollMax.map((limit, f) => Array.from({ length: limit + 1 }, (_, k) => (k === 1 ? 1 : 0)))
   frames.push({
-    phase: 'start', activeLine: L('runs[f][1] = 1'), pythonLine: P('runs = ['),
+    phase: 'start', activeLine: L('let runs = rollMax'), pythonLine: P('runs = ['),
     message: 'After one roll every face has one sequence, a run of length one.',
     snapshot: { length: 1, runs: copyRuns(runs), total: 6 },
   })
   for (let length = 2; length <= n; length++) {
     const total = runs.reduce((sum, row) => row.reduce((s, c) => (s + c) % MOD, sum), 0)
     frames.push({
-      phase: 'inspect', activeLine: L('total = sum'), pythonLine: P('total = sum'),
+      phase: 'inspect', activeLine: L('const total = runs.flat()'), pythonLine: P('total = sum'),
       message: `Read the ${length - 1}-roll sequences: ${total} in all, counting every face and run length.`,
       snapshot: { length: length - 1, runs: copyRuns(runs), total },
     })
@@ -44,30 +44,37 @@ export function buildTrace({ n, rollMax }) {
       return next
     })
     frames.push({
-      phase: 'update', activeLine: L('next[f][1] = total'), pythonLine: P('row[1] ='),
+      phase: 'update', activeLine: L('next[1] = '), pythonLine: P('row[1] ='),
       message: `Length ${length}: face runs of length one take every sequence that ends in another face. Longer runs shift up, up to each face's limit.`,
       snapshot: { length, runs: copyRuns(runs), total: runs.reduce((sum, row) => row.reduce((s, c) => (s + c) % MOD, sum), 0) },
     })
   }
   const result = runs.reduce((sum, row) => row.reduce((s, c) => (s + c) % MOD, sum), 0)
   frames.push({
-    phase: 'done', activeLine: L('return sum of every'), pythonLine: P('return sum(map'),
+    phase: 'done', activeLine: L('return runs.flat()'), pythonLine: P('return sum(map'),
     message: `Total sequences of length ${n}: ${result}.`,
     snapshot: { length: n, runs: copyRuns(runs), total: result },
   })
   return { input: { n, rollMax }, result, frames }
 }
 
-const codeLines = `count die sequences (n, rollMax):
-  runs[f][k] = 0 for all faces f and run lengths k
-  runs[f][1] = 1 for each face f
-  for length from 2 to n:
-    total = sum of every runs[f][k]
-    next[f][1] = total - sum of runs[f][k] over all k
-    next[f][k + 1] = runs[f][k] while k + 1 <= rollMax[f]
-    runs = next
-  return sum of every runs[f][k] modulo 1000000007`.split('\n')
-
+const codeLines = [
+  "function dieSimulation(n, rollMax) {",
+  "  const MOD = 1000000007",
+  "  let runs = rollMax.map(limit => Array.from({ length: limit + 1 }, (_, k) => (k === 1 ? 1 : 0)))",
+  "  for (let length = 2; length <= n; length++) {",
+  "    const total = runs.flat().reduce((sum, c) => (sum + c) % MOD, 0)",
+  "    runs = runs.map((row, f) => {",
+  "      const endingHere = row.reduce((sum, c) => (sum + c) % MOD, 0)",
+  "      const next = Array.from({ length: rollMax[f] + 1 }, () => 0)",
+  "      next[1] = ((total - endingHere) % MOD + MOD) % MOD",
+  "      for (let k = 1; k < rollMax[f]; k++) next[k + 1] = row[k]",
+  "      return next",
+  "    })",
+  "  }",
+  "  return runs.flat().reduce((sum, c) => (sum + c) % MOD, 0)",
+  "}",
+]
 export const code = codeLines.map((text, index) => ({ line: index + 1, text }))
 
 export const python = `MOD = 1_000_000_007

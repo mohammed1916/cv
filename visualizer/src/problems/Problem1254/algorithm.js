@@ -30,7 +30,7 @@ export function buildTrace(grid) {
   const onEdge = (r, c) => r === 0 || c === 0 || r === m - 1 || c === n - 1
   const snap = (extra = {}) => ({ grid, reach: reach.map(row => [...row]), m, n, ...extra })
   const frames = [{
-    phase: 'start', activeLine: L('reach = m x n'), pythonLine: P('reach = [[False]'), snapshot: snap(),
+    phase: 'start', activeLine: L('const reach = Array.from'), pythonLine: P('reach = [[False]'), snapshot: snap(),
     message: `A ${m} by ${n} grid. Land is 0 and water is 1. A closed island is land that never reaches the outer edge.`,
   }]
 
@@ -43,7 +43,7 @@ export function buildTrace(grid) {
       const [r, c] = queue[head]
       if (onEdge(r, c)) touches = true
       frames.push({
-        phase, activeLine: L('pop (r, c) from queue'), pythonLine: P('r, c = queue[head]'),
+        phase, activeLine: L('const [y, x] = queue[head]'), pythonLine: P('r, c = queue[head]'),
         snapshot: snap({ focus: [r, c], touches }),
         message: phase === 'border'
           ? `Land cell (${r}, ${c}) is reachable from the edge, so it cannot be enclosed.`
@@ -61,7 +61,7 @@ export function buildTrace(grid) {
   }
 
   frames.push({
-    phase: 'border', activeLine: L('for each edge cell'), pythonLine: P('if (r in (0, m - 1)'), snapshot: snap(),
+    phase: 'border', activeLine: L('if ((r === 0 || r === m - 1'), pythonLine: P('if (r in (0, m - 1)'), snapshot: snap(),
     message: 'Sweep the outer ring. Each land cell found there starts a flood that marks everything it can reach.',
   })
   for (let r = 0; r < m; r++) {
@@ -77,7 +77,7 @@ export function buildTrace(grid) {
       const touches = flood(r, c, 'interior')
       if (!touches) count++
       frames.push({
-        phase: 'interior', activeLine: L('if not touches: count += 1'), pythonLine: P('if not touches:'),
+        phase: 'interior', activeLine: L('!flood(r, c)'), pythonLine: P('if not touches:'),
         snapshot: snap({ island: [r, c], count }),
         message: touches
           ? `The island from (${r}, ${c}) reaches the edge, so it is not counted.`
@@ -94,24 +94,41 @@ export function buildTrace(grid) {
 }
 
 export const code = [
-  'closed_islands(grid):',
-  '  m, n = rows and columns of grid',
-  '  reach = m x n table of false',
-  '  for each edge cell (r, c) that is land and not reached:',
-  '    flood(r, c)',
-  '  count = 0',
-  '  for each cell (r, c) that is land and not reached:',
-  '    touches = flood(r, c)',
-  '    if not touches: count += 1',
-  '  return count',
-  '',
-  'flood(r, c):',
-  '  queue = [(r, c)] and mark (r, c) reached',
-  '  while queue is not empty:',
-  '    pop (r, c) from queue',
-  '    if (r, c) is on the edge: touches = true',
-  '    push each unreached land neighbour, marking it reached',
-  '  return touches',
+  "function closedIsland(grid) {",
+  "  const m = grid.length",
+  "  const n = grid[0].length",
+  "  const reach = Array.from({ length: m }, () => Array(n).fill(false))",
+  "  const flood = (r, c) => {",
+  "    const queue = [[r, c]]",
+  "    reach[r][c] = true",
+  "    let touches = false",
+  "    for (let head = 0; head < queue.length; head++) {",
+  "      const [y, x] = queue[head]",
+  "      if (y === 0 || y === m - 1 || x === 0 || x === n - 1) touches = true",
+  "      for (const [dr, dc] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {",
+  "        const nr = y + dr",
+  "        const nc = x + dc",
+  "        if (nr >= 0 && nr < m && nc >= 0 && nc < n && grid[nr][nc] === 0 && !reach[nr][nc]) {",
+  "          reach[nr][nc] = true",
+  "          queue.push([nr, nc])",
+  "        }",
+  "      }",
+  "    }",
+  "    return touches",
+  "  }",
+  "  for (let r = 0; r < m; r++) {",
+  "    for (let c = 0; c < n; c++) {",
+  "      if ((r === 0 || r === m - 1 || c === 0 || c === n - 1) && grid[r][c] === 0 && !reach[r][c]) flood(r, c)",
+  "    }",
+  "  }",
+  "  let count = 0",
+  "  for (let r = 0; r < m; r++) {",
+  "    for (let c = 0; c < n; c++) {",
+  "      if (grid[r][c] === 0 && !reach[r][c] && !flood(r, c)) count += 1",
+  "    }",
+  "  }",
+  "  return count",
+  "}",
 ].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def closed_islands(grid):

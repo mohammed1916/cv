@@ -16,18 +16,23 @@ export const examples = [
   { label: 'All Q', input: 'QQQQQQQQ' },
 ]
 
-export const code = `function balancedReplacement(s):
-  k = length(s) / 4
-  outside = count each letter in s
-  if every outside count <= k: return 0
-  best = length(s), left = 0
-  for right from 0 to length(s) - 1:
+export const code = `function balancedReplacement(s) {
+  const k = s.length / 4
+  const outside = { Q: 0, W: 0, E: 0, R: 0 }
+  for (const c of s) outside[c] += 1
+  if (Object.values(outside).every(c => c <= k)) return 0
+  let best = s.length
+  let left = 0
+  for (let right = 0; right < s.length; right++) {
     outside[s[right]] -= 1
-    while every outside count <= k:
-      best = min(best, right - left + 1)
+    while (Object.values(outside).every(c => c <= k)) {
+      best = Math.min(best, right - left + 1)
       outside[s[left]] += 1
       left += 1
-  return best`
+    }
+  }
+  return best
+}`
 
 export const python = `from collections import Counter
 
@@ -79,7 +84,7 @@ export function buildTrace(s) {
     text: s, k, window, outside: { ...outside }, best: extra.best ?? null, valid: fits(), result: extra.result ?? null,
   })
 
-  push('start', 'count each', 'Counter(s)', `Length ${n} gives a target of ${k} for each letter. Counts: ${LETTERS.map(c => `${c} ${outside[c]}`).join(', ')}.`)
+  push('start', 'const outside = {', 'Counter(s)', `Length ${n} gives a target of ${k} for each letter. Counts: ${LETTERS.map(c => `${c} ${outside[c]}`).join(', ')}.`)
   if (fits()) {
     frames.push({ phase: 'done', activeLine: CODE_LINE('return 0'), pythonLine: PY_LINE('return 0'), message: 'Every letter already has at most the target count, so no replacement is needed.', text: s, k, window: null, outside: { ...outside }, best: 0, valid: true, result: 0 })
     return { input: s, result: 0, frames }
@@ -93,7 +98,7 @@ export function buildTrace(s) {
     while (fits()) {
       const length = right - left + 1
       best = Math.min(best, length)
-      push('update', 'best = min', 'best = min', `Window ${left}–${right} (length ${length}) is valid: its replacement can supply every excess letter. Best so far is ${best}.`, [left, right], { best })
+      push('update', 'best = Math.min', 'best = min', `Window ${left}–${right} (length ${length}) is valid: its replacement can supply every excess letter. Best so far is ${best}.`, [left, right], { best })
       outside[s[left]] += 1
       left += 1
       push('inspect', 'left += 1', 'left += 1', `Position ${left - 1} (${s[left - 1]}) returns to the outside counts. ${fits() ? 'The window is still valid, so it can shrink further.' : 'The window is no longer valid, so the right edge moves next.'}`, left <= right ? [left, right] : null, { best })

@@ -14,33 +14,40 @@ export function buildTrace({ ops }) {
   const scores = new Map()
   const answers = []
   const state = () => [...scores].map(([id, s]) => `player ${id}: ${s}`)
-  const frames = [{ phase: 'start', pythonLine: PL('scores = {}'), activeLine: L('start with no players'), state: [], message: 'The board is empty.' }]
+  const frames = [{ phase: 'start', pythonLine: PL('scores = {}'), activeLine: L('const scores = new Map'), state: [], message: 'The board is empty.' }]
   for (const op of ops) {
     if (op[0] === 'add') {
       scores.set(op[1], (scores.get(op[1]) || 0) + op[2])
-      frames.push({ phase: 'add', pythonLine: PL('scores[op[1]] = scores.get'), activeLine: L('add the score'), state: state(), message: `Player ${op[1]} gains ${op[2]}.` })
+      frames.push({ phase: 'add', pythonLine: PL('scores[op[1]] = scores.get'), activeLine: L('scores.set('), state: state(), message: `Player ${op[1]} gains ${op[2]}.` })
     } else if (op[0] === 'top') {
       const best = [...scores.values()].sort((a, b) => b - a).slice(0, op[1])
       const total = best.reduce((a, b) => a + b, 0)
       answers.push(total)
-      frames.push({ phase: 'top', pythonLine: PL('answers.append(sum(best))'), activeLine: L('sort the scores'), state: [...state(), `top ${op[1]} sum: ${total}`], message: `The top ${op[1]} scores add to ${total}.` })
+      frames.push({ phase: 'top', pythonLine: PL('answers.append(sum(best))'), activeLine: L('.sort((a, b)'), state: [...state(), `top ${op[1]} sum: ${total}`], message: `The top ${op[1]} scores add to ${total}.` })
     } else {
       scores.delete(op[1])
-      frames.push({ phase: 'reset', pythonLine: PL('scores.pop(op[1], None)'), activeLine: L('remove the player'), state: state(), message: `Player ${op[1]} is removed.` })
+      frames.push({ phase: 'reset', pythonLine: PL('scores.pop(op[1], None)'), activeLine: L('scores.delete('), state: state(), message: `Player ${op[1]} is removed.` })
     }
   }
-  frames.push({ phase: 'done', pythonLine: PL('return answers'), activeLine: L('return the answers'), state: state(), message: 'All operations are finished.' })
+  frames.push({ phase: 'done', pythonLine: PL('return answers'), activeLine: L('return answers'), state: state(), message: 'All operations are finished.' })
   return { input: { ops }, result: answers, frames }
 }
 
-export const code = `leaderboard with running scores
-  start with no players
-  for each operation in order
-    if add then add the score to the player running total
-    if top then sort the scores and sum the largest k
-      record that sum
-    if reset then remove the player
-  return the answers`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function leaderboard(ops) {
+  const scores = new Map()
+  const answers = []
+  for (const op of ops) {
+    if (op[0] === 'add') {
+      scores.set(op[1], (scores.get(op[1]) ?? 0) + op[2])
+    } else if (op[0] === 'top') {
+      const best = [...scores.values()].sort((a, b) => b - a).slice(0, op[1])
+      answers.push(best.reduce((a, b) => a + b, 0))
+    } else {
+      scores.delete(op[1])
+    }
+  }
+  return answers
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def leaderboard(ops):

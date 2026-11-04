@@ -20,7 +20,7 @@ export function buildTrace(nums) {
   const show = values => values.map(v => (v === NONE ? null : v))
   const snap = (extra = {}) => ({ nums, best: show(best), ...extra })
   const frames = [{
-    phase: 'start', activeLine: L('best = [0, -inf, -inf]'), pythonLine: P('best = [0, NEG, NEG]'), snapshot: snap({ index: -1 }),
+    phase: 'start', activeLine: L('let best = [0, -Infinity'), pythonLine: P('best = [0, NEG, NEG]'), snapshot: snap({ index: -1 }),
     message: `Remainder 0 starts at sum 0. Remainders 1 and 2 are empty for now. We read ${nums.length} numbers.`,
   }]
 
@@ -47,15 +47,19 @@ export function buildTrace(nums) {
 }
 
 export const code = [
-  'max_div3(nums):',
-  '  best = [0, -inf, -inf]   # best sum for each remainder',
-  '  for x in nums:',
-  '    next = copy of best',
-  '    for r in 0..2 where best[r] is reachable:',
-  '      nr = (r + x) mod 3',
-  '      next[nr] = max(next[nr], best[r] + x)',
-  '    best = next',
-  '  return best[0]',
+  "function maxSumDivThree(nums) {",
+  "  let best = [0, -Infinity, -Infinity]",
+  "  for (const x of nums) {",
+  "    const next = [...best]",
+  "    for (let r = 0; r < 3; r++) {",
+  "      if (best[r] === -Infinity) continue",
+  "      const nr = (r + x) % 3",
+  "      next[nr] = Math.max(next[nr], best[r] + x)",
+  "    }",
+  "    best = next",
+  "  }",
+  "  return best[0]",
+  "}",
 ].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def max_div3(nums):

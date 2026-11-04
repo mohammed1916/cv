@@ -45,7 +45,7 @@ test('1207 trace stops at the first clash and records the clashing values', () =
 
 test('1207 phases and code are exported for the shared shell', () => {
   assert.deepEqual(phases.map(p => p.id), ['start', 'inspect', 'update', 'done'])
-  assert.equal(code.length, 6)
+  assert.equal(code.length, 10)
   assert.ok(python.includes('unique_occurrences'))
 })
 

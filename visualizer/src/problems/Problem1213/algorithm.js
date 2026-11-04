@@ -29,18 +29,28 @@ export function parseInput(text) {
   return { a: strictlyIncreasingArray(data.a, 'a'), b: strictlyIncreasingArray(data.b, 'b'), c: strictlyIncreasingArray(data.c, 'c') }
 }
 
-const codeText = `common_values(a, b, c):
-  set three pointers i, j, k to the first positions
-  output = empty list
-  while every pointer is still inside its array:
-    read heads x, y, z
-    if x, y and z are equal:
-      append x to output
-      move all three pointers forward
-    else:
-      m = the smallest of x, y, z
-      move each pointer whose head equals m forward
-  return output`
+const codeLines = [
+  "function commonValues(a, b, c) {",
+  "  let i = 0",
+  "  let j = 0",
+  "  let k = 0",
+  "  const out = []",
+  "  while (i < a.length && j < b.length && k < c.length) {",
+  "    const x = a[i], y = b[j], z = c[k]",
+  "    if (x === y && y === z) {",
+  "      out.push(x)",
+  "      i += 1; j += 1; k += 1",
+  "    } else {",
+  "      const m = Math.min(x, y, z)",
+  "      if (x === m) i += 1",
+  "      if (y === m) j += 1",
+  "      if (z === m) k += 1",
+  "    }",
+  "  }",
+  "  return out",
+  "}",
+]
+const codeText = codeLines.join('\n')
 const pythonText = `def common_values(a, b, c):
     i = j = k = 0                                   # one pointer per array
     out = []
@@ -69,20 +79,20 @@ export function buildTrace({ a, b, c }) {
   const heads = () => arrays.map(([, arr], i) => (pos[i] < arr.length ? arr[pos[i]] : null))
   const snap = (extra = {}) => ({ pos: [...pos], heads: heads(), common: [...out], ...extra })
   frames.push({
-    phase: 'start', activeLine: L('set three pointers'), pythonLine: P('i = j = k = 0'),
+    phase: 'start', activeLine: L('let i = 0'), pythonLine: P('i = j = k = 0'),
     message: 'Each pointer starts at the first value of its array. Nothing is common yet.', snapshot: snap(),
   })
   while (pos.every((p, i) => p < arrays[i][1].length)) {
     const current = heads()
     frames.push({
-      phase: 'compare', activeLine: L('read heads'), pythonLine: P('x, y, z = a[i]'),
+      phase: 'compare', activeLine: L('const x = a[i]'), pythonLine: P('x, y, z = a[i]'),
       message: `Heads are a=${current[0]}, b=${current[1]}, c=${current[2]}.`, snapshot: snap(),
     })
     if (current[0] === current[1] && current[1] === current[2]) {
       out.push(current[0])
       pos[0] += 1; pos[1] += 1; pos[2] += 1
       frames.push({
-        phase: 'match', activeLine: L('append x to output'), pythonLine: P('out.append(x)'),
+        phase: 'match', activeLine: L('out.push(x)'), pythonLine: P('out.append(x)'),
         message: `All three heads are ${current[0]}, so it is common. Record it and move all three pointers on.`, snapshot: snap({ found: current[0] }),
       })
     } else {
@@ -90,14 +100,14 @@ export function buildTrace({ a, b, c }) {
       const moved = []
       current.forEach((value, i) => { if (value === low) { pos[i] += 1; moved.push(arrays[i][0]) } })
       frames.push({
-        phase: 'advance', activeLine: L('move each pointer whose head'), pythonLine: P('m = min(x, y, z)'),
+        phase: 'advance', activeLine: L('const m = Math.min'), pythonLine: P('m = min(x, y, z)'),
         message: `The smallest head is ${low}. The other arrays are already past it, so it cannot appear later there. Advance ${moved.join(' and ')}.`,
         snapshot: snap({ low, moved }),
       })
     }
   }
   frames.push({
-    phase: 'done', activeLine: L('return output'), pythonLine: P('return out'),
+    phase: 'done', activeLine: L('return out'), pythonLine: P('return out'),
     message: out.length ? `Common values: [${out.join(', ')}].` : 'One array ran out before any value was shared, so the output is empty.',
     snapshot: snap({ end: true }),
   })

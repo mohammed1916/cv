@@ -14,13 +14,13 @@ export default function RemoveAdjacentDuplicatesII() {
     const at = step.snapshot.index
     return <>
       <div aria-label="String" role="img" style={{ marginBottom: 12 }}>
-        {[...s].map((ch, i) => <span key={i} style={{ ...chip, background: i === at ? '#facc15' : i < at ? 'var(--surface2)' : 'transparent', color: i === at ? '#1c1917' : 'var(--text)' }}>{ch}</span>)}
+        {[...s].map((ch, i) => <span key={i} style={{ ...chip, background: i === at ? 'color-mix(in srgb, var(--primary) 35%, transparent)' : i < at ? 'var(--surface2)' : 'transparent', color: 'var(--text)', fontWeight: i === at ? 700 : 400 }}>{ch}</span>)}
       </div>
       <p>Run stack, bottom to top (a run is removed at {k}):</p>
       <div aria-label="Run stack" style={{ minHeight: 40 }}>
         {step.snapshot.stack.length === 0
           ? <span style={{ color: 'var(--text-dim)' }}>empty</span>
-          : step.snapshot.stack.map((run, i) => <span key={i} style={{ ...chip, borderColor: run.n === k - 1 ? '#f59e0b' : 'var(--border)' }}>{run.ch} × {run.n}</span>)}
+          : step.snapshot.stack.map((run, i) => <span key={i} style={{ ...chip, borderColor: run.n === k - 1 ? 'var(--text)' : 'var(--border)' }}>{run.ch} × {run.n}</span>)}
       </div>
     </>
   }} renderReasoning={({ step }) => <>

@@ -34,7 +34,7 @@ export function buildTrace(points) {
     const moves = Math.max(dx, dy)
     total += moves
     frames.push({
-      phase: 'step', activeLine: L('total += max('), pythonLine: P('total += max('),
+      phase: 'step', activeLine: L('total += Math.max('), pythonLine: P('total += max('),
       snapshot: snap({ leg: i, from: points[i], to: points[i + 1], dx, dy, moves, total }),
       message: `Leg ${i + 1}: from [${x1}, ${y1}] to [${x2}, ${y2}]. dx = ${dx}, dy = ${dy}. Diagonal steps cover both gaps, so the leg costs ${moves}. Running total ${total}.`,
     })
@@ -48,12 +48,15 @@ export function buildTrace(points) {
 }
 
 export const code = [
-  'min_time(points):',
-  '  total = 0',
-  '  for each consecutive pair (a, b):',
-  '    dx = |b.x - a.x|, dy = |b.y - a.y|',
-  '    total += max(dx, dy)',
-  '  return total',
+  "function minTimeToVisitAllPoints(points) {",
+  "  let total = 0",
+  "  for (let i = 1; i < points.length; i++) {",
+  "    const dx = Math.abs(points[i][0] - points[i - 1][0])",
+  "    const dy = Math.abs(points[i][1] - points[i - 1][1])",
+  "    total += Math.max(dx, dy)",
+  "  }",
+  "  return total",
+  "}",
 ].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def min_time(points):

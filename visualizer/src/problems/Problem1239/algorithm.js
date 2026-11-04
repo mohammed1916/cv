@@ -14,18 +14,21 @@ export const examples = [
   { label: 'Repeats', input: '["aa","bb"]' },
 ]
 
-export const code = `function maxUniqueLength(words):
-  best = 0
-  function explore(i, used, length):
-    if i == count(words):
-      best = max(best, length)
+export const code = `function maxUniqueLength(words) {
+  let best = 0
+  const explore = (i, used, length) => {
+    if (i === words.length) {
+      best = Math.max(best, length)
       return
-    explore(i + 1, used, length)          # skip words[i]
-    letters = set of words[i]
-    if words[i] repeats or letters meets used: return
-    explore(i + 1, used union letters, length + len(words[i]))   # take words[i]
-  explore(0, empty, 0)
-  return best`
+    }
+    explore(i + 1, used, length)
+    const letters = new Set(words[i])
+    if (letters.size < words[i].length || [...letters].some(c => used.has(c))) return
+    explore(i + 1, new Set([...used, ...letters]), length + words[i].length)
+  }
+  explore(0, new Set(), 0)
+  return best
+}`
 
 export const python = `def max_unique_length(words):
     best = 0
@@ -75,20 +78,20 @@ export function buildTrace(words) {
       if (length > best) {
         best = length
         bestChoice = [...chosen]
-        push('update', 'best = max', 'best = max(best, length)', `Complete choice ${chosen.length ? chosen.map(j => words[j]).join(' + ') : '(nothing)'} has length ${length}. New best.`, { index: i, chosen: [...chosen], used: [...used].sort().join(''), length, verdict: 'leaf' })
+        push('update', 'best = Math.max', 'best = max(best, length)', `Complete choice ${chosen.length ? chosen.map(j => words[j]).join(' + ') : '(nothing)'} has length ${length}. New best.`, { index: i, chosen: [...chosen], used: [...used].sort().join(''), length, verdict: 'leaf' })
       } else {
-        push('inspect', 'if i == count', 'if i == len(words)', `Complete choice ${chosen.length ? chosen.map(j => words[j]).join(' + ') : '(nothing)'} has length ${length}, which does not beat ${best}.`, { index: i, chosen: [...chosen], used: [...used].sort().join(''), length, verdict: 'leaf' })
+        push('inspect', 'if (i === words.length)', 'if i == len(words)', `Complete choice ${chosen.length ? chosen.map(j => words[j]).join(' + ') : '(nothing)'} has length ${length}, which does not beat ${best}.`, { index: i, chosen: [...chosen], used: [...used].sort().join(''), length, verdict: 'leaf' })
       }
       return
     }
     explore(i + 1, used, chosen, length)
-    push('inspect', 'skip words[i]', 'skip this word', `Skip word ${i} (${words[i]}). The letters used stay as they are: ${[...used].sort().join('') || 'none'}.`, { index: i, chosen: [...chosen], used: [...used].sort().join(''), length, verdict: 'skip' })
+    push('inspect', 'explore(i + 1, used, length)', 'skip this word', `Skip word ${i} (${words[i]}). The letters used stay as they are: ${[...used].sort().join('') || 'none'}.`, { index: i, chosen: [...chosen], used: [...used].sort().join(''), length, verdict: 'skip' })
 
     const word = words[i]
     const letters = new Set(word)
     const repeats = letters.size < word.length
     const clashes = [...letters].some(c => used.has(c))
-    push('inspect', 'if words[i] repeats', 'if len(letters)', `Word ${word}: ${repeats ? 'it repeats a letter inside itself' : clashes ? 'it shares a letter with the chosen letters' : 'it is internally unique and disjoint from the chosen letters'}, so taking it is ${repeats || clashes ? 'illegal' : 'legal'}.`, { index: i, chosen: [...chosen], used: [...used].sort().join(''), length, verdict: repeats || clashes ? 'blocked' : 'free' })
+    push('inspect', 'if (letters.size < words[i].length', 'if len(letters)', `Word ${word}: ${repeats ? 'it repeats a letter inside itself' : clashes ? 'it shares a letter with the chosen letters' : 'it is internally unique and disjoint from the chosen letters'}, so taking it is ${repeats || clashes ? 'illegal' : 'legal'}.`, { index: i, chosen: [...chosen], used: [...used].sort().join(''), length, verdict: repeats || clashes ? 'blocked' : 'free' })
     if (repeats || clashes) return
     const nextUsed = new Set([...used, ...letters])
     explore(i + 1, nextUsed, [...chosen, i], length + word.length)

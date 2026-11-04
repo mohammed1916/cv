@@ -17,53 +17,71 @@ export function buildTrace({ capacity, ops }) {
   const parkedEnq = []
   const parkedDeq = []
   const results = ops.map(() => null)
-  const snap = () => ({ items: [...items], parkedEnq: parkedEnq.map(p => p.value), parkedDeq: [...parkedDeq] })
-  const frames = [{ phase: 'start', pythonLine: PL('items = deque()'), activeLine: L('start with an empty queue'), state: [], ...snap(), message: `Capacity is ${capacity}.` }]
+  let current = null
+  const snap = () => ({ items: [...items], parkedEnq: parkedEnq.map(p => p.value), parkedEnqCalls: parkedEnq.map(p => p.call), parkedDeq: [...parkedDeq], call: current })
+  const frames = [{ phase: 'start', pythonLine: PL('items = deque()'), activeLine: L('const items = []'), state: [], ...snap(), message: `Capacity is ${capacity}.` }]
   const push = (phase, key, pyKey, message) => frames.push({ phase, pythonLine: PL(pyKey), activeLine: L(key), state: [...items], ...snap(), message })
   ops.forEach((op, call) => {
+    current = call
     const label = `call ${call + 1}`
     if (op[0] === 'enqueue') {
       if (parkedDeq.length && items.length === 0) {
         const waiter = parkedDeq.shift()
         results[waiter] = op[1]
-        push('enqueue', 'hand the value', 'results[parked_deq.popleft()]', `${label}: enqueue ${op[1]} goes straight to the oldest waiting dequeue, which returns ${op[1]}.`)
+        push('enqueue', 'results[parkedDeq.shift()]', 'results[parked_deq.popleft()]', `${label}: enqueue ${op[1]} goes straight to the oldest waiting dequeue, which returns ${op[1]}.`)
       } else if (items.length < capacity) {
         items.push(op[1])
-        push('enqueue', 'add the value', 'items.append(op[1])', `${label}: add ${op[1]} to the back.`)
+        push('enqueue', 'items.push(op[1])', 'items.append(op[1])', `${label}: add ${op[1]} to the back.`)
       } else {
         parkedEnq.push({ call, value: op[1] })
-        push('blocked', 'park the enqueue', 'parked_enq.append', `${label}: enqueue ${op[1]} waits because the queue is full.`)
+        push('blocked', 'parkedEnq.push', 'parked_enq.append', `${label}: enqueue ${op[1]} waits because the queue is full.`)
       }
     } else if (items.length === 0) {
       parkedDeq.push(call)
-      push('blocked', 'park the dequeue', 'parked_deq.append', `${label}: dequeue waits because the queue is empty.`)
+      push('blocked', 'parkedDeq.push(call)', 'parked_deq.append', `${label}: dequeue waits because the queue is empty.`)
     } else {
       const front = items.shift()
       results[call] = front
-      push('dequeue', 'remove the front value', 'results[call] = items.popleft()', `${label}: remove ${front} from the front.`)
+      push('dequeue', 'results[call] = items.shift()', 'results[call] = items.popleft()', `${label}: remove ${front} from the front.`)
       if (parkedEnq.length) {
         const waiter = parkedEnq.shift()
         items.push(waiter.value)
-        push('enqueue', 'let the oldest parked enqueue add', 'items.append(parked_enq.popleft()', `The room frees the oldest waiting enqueue, which adds ${waiter.value} at the back.`)
+        push('enqueue', 'items.push(parkedEnq.shift().value)','items.append(parked_enq.popleft()[1])', `The room frees the oldest waiting enqueue, which adds ${waiter.value} at the back.`)
       }
     }
   })
   for (const call of parkedDeq) results[call] = 'waiting'
-  frames.push({ phase: 'done', pythonLine: PL('return results'), activeLine: L('return every result'), state: [...items], ...snap(), message: 'The schedule is finished. Calls still waiting at the end are marked waiting.' })
+  current = null
+  frames.push({ phase: 'done', pythonLine: PL('return results'), activeLine: L('return results'), state: [...items], ...snap(), message: 'The schedule is finished. Calls still waiting at the end are marked waiting.' })
   return { input: { capacity, ops }, result: results, frames }
 }
 
-export const code = `bounded queue replay where blocked calls wait
-  start with an empty queue and nothing parked
-  for each call in the schedule
-    if the call is enqueue
-      if a dequeue is parked and the queue is empty then hand the value over
-      otherwise if the queue has room then add the value at the back
-      otherwise park the enqueue until there is room
-    otherwise
-      if the queue is empty then park the dequeue until a value arrives
-      otherwise remove the front value, then let the oldest parked enqueue add
-  return every result`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  'function replay(capacity, ops) {',
+  '  const items = []',
+  '  const parkedEnq = []',
+  '  const parkedDeq = []',
+  '  const results = ops.map(() => null)',
+  '  ops.forEach((op, call) => {',
+  "    if (op[0] === 'enqueue') {",
+  '      if (parkedDeq.length && items.length === 0) {',
+  '        results[parkedDeq.shift()] = op[1]',
+  '      } else if (items.length < capacity) {',
+  '        items.push(op[1])',
+  '      } else {',
+  '        parkedEnq.push({ call, value: op[1] })',
+  '      }',
+  '    } else if (items.length === 0) {',
+  '      parkedDeq.push(call)',
+  '    } else {',
+  '      results[call] = items.shift()',
+  '      if (parkedEnq.length) items.push(parkedEnq.shift().value)',
+  '    }',
+  '  })',
+  "  parkedDeq.forEach(call => { results[call] = 'waiting' })",
+  '  return results',
+  '}',
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `from collections import deque

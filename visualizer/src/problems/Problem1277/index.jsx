@@ -23,7 +23,7 @@ export default function SquareSubmatrices() {
           const current = i === r && j === c
           return <td key={c} style={{
             width: 44, height: 40, textAlign: 'center', border: `${current ? 2 : 1}px solid ${current ? 'var(--text)' : 'var(--border)'}`,
-            background: current ? '#bbf7d0' : 'transparent', color: '#1c1917',
+            background: current ? 'color-mix(in srgb, var(--primary) 25%, transparent)' : 'transparent', color: 'var(--text)',
           }}>{run.input.matrix[r][c]}{cell ? ` → ${cell}` : ''}</td>
         })}</tr>)}</tbody>
       </table>

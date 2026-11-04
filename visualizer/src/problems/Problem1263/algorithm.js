@@ -20,14 +20,14 @@ export function buildTrace(grid) {
   const dist = new Map([[key(box0, player0), 0]])
   // 0-1 BFS: walking goes to the front of the deque, pushing goes to the back.
   const queue = [{ cost: 0, box: box0, player: player0 }]
-  const frames = [{ pythonLine: 19, phase: 'start', activeLine: L('set the start state'), box: box0, player: player0, cost: 0, message: 'The player starts beside the box. Walking costs 0 and each push costs 1.' }]
+  const frames = [{ pythonLine: 19, phase: 'start', activeLine: L('const dist = new Map'), box: box0, player: player0, cost: 0, message: 'The player starts beside the box. Walking costs 0 and each push costs 1.' }]
   let answer = -1
   let last = { box: box0, player: player0 }
   while (queue.length) {
     const { cost, box, player } = queue.shift()
     if (dist.get(key(box, player)) !== cost) continue
     if (same(box, target)) { answer = cost; last = { box, player }; break }
-    frames.push({ pythonLine: 27, phase: 'explore', activeLine: L('for each of the four directions'), box, player, cost, message: `Box at ${box}, player at ${player}, cost ${cost}.` })
+    frames.push({ pythonLine: 27, phase: 'explore', activeLine: L('for (const [dr, dc] of'), box, player, cost, message: `Box at ${box}, player at ${player}, cost ${cost}.` })
     for (const [dr, dc] of DIRS) {
       const step = [player[0] + dr, player[1] + dc]
       if (!open(step)) continue
@@ -46,16 +46,40 @@ export function buildTrace(grid) {
   return { input: grid, result: answer, frames }
 }
 
-export const code = `minimum pushes to move the box onto the target:
-  set the start state to the box and player positions at cost zero
-  set the queue to hold the start state
-  while the queue is not empty
-    take the cheapest state from the front of the queue
-    if the box is on the target then return its cost
-    for each of the four directions
-      if the player can step there then move the player at cost zero
-      if that step pushes the box and the box can move then push the box at cost one
-  return -1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minPushes(grid) {
+  const rows = grid.length
+  const cols = grid[0].length
+  const find = ch => grid.flatMap((row, r) => [...row].map((x, c) => (x === ch ? [r, c] : null))).find(Boolean)
+  const player = find('S')
+  const box = find('B')
+  const target = find('T')
+  const open = ([r, c]) => r >= 0 && r < rows && c >= 0 && c < cols && grid[r][c] !== '#'
+  const same = (a, b) => a[0] === b[0] && a[1] === b[1]
+  const key = (b, p) => b + "|" + p
+  const dist = new Map([[key(box, player), 0]])
+  const deque = [[0, box, player]]
+  while (deque.length > 0) {
+    const [cost, b, p] = deque.shift()
+    if (dist.get(key(b, p)) !== cost) continue
+    if (same(b, target)) return cost
+    for (const [dr, dc] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+      const step = [p[0] + dr, p[1] + dc]
+      if (!open(step)) continue
+      if (same(step, b)) {
+        const pushed = [b[0] + dr, b[1] + dc]
+        if (!open(pushed)) continue
+        if ((dist.get(key(pushed, b)) ?? Infinity) > cost + 1) {
+          dist.set(key(pushed, b), cost + 1)
+          deque.push([cost + 1, pushed, b])
+        }
+      } else if ((dist.get(key(b, step)) ?? Infinity) > cost) {
+        dist.set(key(b, step), cost)
+        deque.unshift([cost, b, step])
+      }
+    }
+  }
+  return -1
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `from collections import deque

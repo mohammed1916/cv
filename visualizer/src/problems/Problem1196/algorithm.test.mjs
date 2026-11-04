@@ -45,7 +45,7 @@ test('1196 trace is ordered, stops at the first misfit and ends with a snapshot'
 
 test('1196 phases and code lines are consistent', () => {
   assert.deepEqual(phases.map(p => p.id), ['start', 'inspect', 'update', 'done'])
-  assert.equal(code.length, 6)
+  assert.equal(code.length, 11)
   assert.ok(python.includes('def max_apples'))
 })
 

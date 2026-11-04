@@ -27,12 +27,12 @@ export function buildTrace({ coordinates }) {
   const dx = x1 - x0
   const dy = y1 - y0
   frames.push({
-    phase: 'start', activeLine: L('points = coordinates'), pythonLine: P('points'),
+    phase: 'start', activeLine: L('const [x0, y0]'), pythonLine: P('points'),
     message: `${coordinates.length} points. We will test each one against the line through the first two.`,
     snapshot: { points: coordinates, anchor: [x0, y0], direction: null, index: null, cross: null },
   })
   frames.push({
-    phase: 'anchor', activeLine: L('dx, dy'), pythonLine: P('dx, dy'),
+    phase: 'anchor', activeLine: L('const dx = x1'), pythonLine: P('dx, dy'),
     message: `Direction from (${x0},${y0}) to (${x1},${y1}) is (${dx},${dy}). Every point on the line must keep the same cross product with it.`,
     snapshot: { points: coordinates, anchor: [x0, y0], direction: [dx, dy], index: 1, cross: 0 },
   })
@@ -41,41 +41,43 @@ export function buildTrace({ coordinates }) {
     const cross = dx * (yk - y0) - dy * (xk - x0)
     if (cross !== 0) {
       frames.push({
-        phase: 'off', activeLine: L('return False'), pythonLine: P('return False'),
+        phase: 'off', activeLine: L('return false'), pythonLine: P('return False'),
         message: `Point ${k + 1} is (${xk},${yk}). Its cross product is ${cross}, which is not zero, so it lies off the line.`,
         snapshot: { points: coordinates, anchor: [x0, y0], direction: [dx, dy], index: k, cross },
       })
       frames.push({
-        phase: 'done', activeLine: L('return True'), pythonLine: P('return True'),
+        phase: 'done', activeLine: L('return true'), pythonLine: P('return True'),
         message: 'The points are not all on one line.',
         snapshot: { points: coordinates, anchor: [x0, y0], direction: [dx, dy], index: k, cross, verdict: false },
       })
       return { input: { coordinates }, result: false, frames }
     }
     frames.push({
-      phase: 'check', activeLine: L('if cross != 0'), pythonLine: P('if cross != 0'),
+      phase: 'check', activeLine: L('if (cross !== 0)'), pythonLine: P('if cross != 0'),
       message: `Point ${k + 1} is (${xk},${yk}). Its cross product is 0, so it stays on the line.`,
       snapshot: { points: coordinates, anchor: [x0, y0], direction: [dx, dy], index: k, cross: 0 },
     })
   }
   frames.push({
-    phase: 'done', activeLine: L('return True'), pythonLine: P('return True'),
+    phase: 'done', activeLine: L('return true'), pythonLine: P('return True'),
     message: 'Every point has zero cross product with the direction, so all points lie on one line.',
     snapshot: { points: coordinates, anchor: [x0, y0], direction: [dx, dy], index: coordinates.length - 1, cross: 0, verdict: true },
   })
   return { input: { coordinates }, result: true, frames }
 }
 
-const codeLines = `points on one straight line (coordinates):
-  points = coordinates
-  (x0, y0), (x1, y1) = points[0], points[1]
-  dx, dy = x1 - x0, y1 - y0
-  for each point (xk, yk) after the first two:
-    cross = dx * (yk - y0) - dy * (xk - x0)
-    if cross != 0:
-      return False
-  return True`.split('\n')
-
+const codeLines = [
+  "function checkStraightLine(coordinates) {",
+  "  const [x0, y0] = coordinates[0]",
+  "  const [x1, y1] = coordinates[1]",
+  "  const dx = x1 - x0, dy = y1 - y0",
+  "  for (const [xk, yk] of coordinates.slice(2)) {",
+  "    const cross = dx * (yk - y0) - dy * (xk - x0)",
+  "    if (cross !== 0) return false",
+  "  }",
+  "  return true",
+  "}",
+]
 export const code = codeLines.map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def check_straight_line(coordinates):

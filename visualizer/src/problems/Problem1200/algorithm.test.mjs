@@ -35,8 +35,8 @@ test('1200 random distinct arrays match the all-pairs oracle', () => {
 
 test('1200 trace records a reset and an append and ends with the answer', () => {
   const { frames } = buildTrace({ arr: [1, 2, 4, 5, 9] })
-  assert.ok(frames.some(f => f.activeLine === 5))
-  assert.ok(frames.some(f => f.activeLine === 6))
+  assert.ok(frames.some(f => f.activeLine === 11))
+  assert.ok(frames.some(f => f.activeLine === 13))
   assert.equal(frames.at(-1).phase, 'done')
   assert.ok(frames.every(f => f.snapshot && typeof f.message === 'string'))
   assert.deepEqual(frames.at(-1).snapshot.pairs, [[1, 2], [4, 5]])
@@ -44,7 +44,7 @@ test('1200 trace records a reset and an append and ends with the answer', () => 
 
 test('1200 phases and code are exported for the shared shell', () => {
   assert.deepEqual(phases.map(p => p.id), ['start', 'inspect', 'update', 'done'])
-  assert.equal(code.length, 7)
+  assert.equal(code.length, 17)
   assert.ok(python.includes('minimum_abs_difference'))
 })
 

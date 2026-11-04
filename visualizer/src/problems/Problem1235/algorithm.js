@@ -22,7 +22,7 @@ export function buildTrace(input) {
   const jobs = startTime.map((start, i) => ({ start, end: endTime[i], profit: profit[i] })).sort((a, b) => a.end - b.end)
   const n = jobs.length
   const best = [0]
-  const frames = [{ phase: 'start', activeLine: L('sort jobs by end'), pythonLine: PY('jobs = sorted'), k: 0, p: null, take: null, skip: null, best: [0], message: 'Sort the jobs by end time. best[k] is the most profit from the first k jobs.' }]
+  const frames = [{ phase: 'start', activeLine: L('jobs.sort('), pythonLine: PY('jobs = sorted'), k: 0, p: null, take: null, skip: null, best: [0], message: 'Sort the jobs by end time. best[k] is the most profit from the first k jobs.' }]
   for (let k = 1; k <= n; k++) {
     const job = jobs[k - 1]
     let p = 0
@@ -30,23 +30,25 @@ export function buildTrace(input) {
     const take = job.profit + best[p]
     const skip = best[k - 1]
     best[k] = Math.max(take, skip)
-    frames.push({ phase: 'job', activeLine: L('set best[k]'), pythonLine: PY('best[k] = max'), k, p, take, skip, best: best.slice(), jobs: jobs.slice(0, k), message: `Job ${k} (${job.start} to ${job.end}, profit ${job.profit}): ${p} earlier jobs end by its start. Take ${take}, skip ${skip}, keep ${best[k]}.` })
+    frames.push({ phase: 'job', activeLine: L('best[k] = Math.max'), pythonLine: PY('best[k] = max'), k, p, take, skip, best: best.slice(), jobs: jobs.slice(0, k), message: `Job ${k} (${job.start} to ${job.end}, profit ${job.profit}): ${p} earlier jobs end by its start. Take ${take}, skip ${skip}, keep ${best[k]}.` })
   }
   frames.push({ phase: 'done', activeLine: L('return best[n]'), pythonLine: PY('return best[n]'), k: n, p: null, take: null, skip: null, best: best.slice(), message: `Maximum profit: ${best[n]}.` })
   return { input, jobs, result: best[n], frames }
 }
 
-export const code = `maximum profit from non-overlapping jobs:
-  sort jobs by end time
-  set best[0] to 0
-  for k from 1 to the number of jobs:
-    let job be the k-th job in sorted order
-    count p, the earlier jobs that end by the start of job
-    take = profit of job + best[p]
-    skip = best[k - 1]
-    set best[k] to the larger of take and skip
-  return best[n]`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+export const code = `function jobScheduling(startTime, endTime, profit) {
+  const jobs = startTime.map((start, i) => ({ start, end: endTime[i], profit: profit[i] }))
+  jobs.sort((a, b) => a.end - b.end)
+  const n = jobs.length
+  const best = Array(n + 1).fill(0)
+  for (let k = 1; k <= n; k++) {
+    const job = jobs[k - 1]
+    let p = 0
+    while (p < k - 1 && jobs[p].end <= job.start) p++
+    best[k] = Math.max(best[k - 1], job.profit + best[p])
+  }
+  return best[n]
+}`
 
 export const python = `def job_scheduling(startTime, endTime, profit):
     jobs = sorted(zip(endTime, startTime, profit))
@@ -60,6 +62,12 @@ export const python = `def job_scheduling(startTime, endTime, profit):
         best[k] = max(best[k - 1], value + best[p])
     return best[n]
 `
+
+const L = s => {
+  const index = code.split('\n').findIndex(line => line.includes(s))
+  if (index < 0) throw new Error('Missing solution line: ' + s)
+  return index + 1
+}
 
 const PY = (s, nth = 0) => {
   let hits = -1

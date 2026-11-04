@@ -34,7 +34,7 @@ export function buildTrace({ grid, k }) {
     source: grid, result: result.map(row => [...row]), m, n, total, k, kEff, ...extra,
   })
   const frames = [{
-    phase: 'start', activeLine: L('k = k mod total'), pythonLine: P('k %= total'), snapshot: snap(),
+    phase: 'start', activeLine: L('k = k % total'), pythonLine: P('k %= total'), snapshot: snap(),
     message: `${total} cells, so shifting by ${k} is the same as shifting by ${kEff}. Each value moves forward ${kEff} flat positions, wrapping from the last cell to the first.`,
   }]
 
@@ -42,7 +42,7 @@ export function buildTrace({ grid, k }) {
     const target = (index + kEff) % total
     result[Math.floor(target / n)][target % n] = flat[index]
     frames.push({
-      phase: 'place', activeLine: L('target = (index + k) mod total'), pythonLine: P('target = (index + k) % total'),
+      phase: 'place', activeLine: L('const target = (index + k) % total'), pythonLine: P('target = (index + k) % total'),
       snapshot: snap({ index, target, value: flat[index], filled: index + 1 }),
       message: `Value ${flat[index]} at flat position ${index} (row ${Math.floor(index / n)}, column ${index % n}) moves to position ${target} (row ${Math.floor(target / n)}, column ${target % n}).`,
     })
@@ -56,14 +56,18 @@ export function buildTrace({ grid, k }) {
 }
 
 export const code = [
-  'shift_grid(grid, k):',
-  '  m, n = size of grid; total = m * n',
-  '  k = k mod total',
-  '  result = m x n table, empty',
-  '  for index from 0 to total - 1:',
-  '    target = (index + k) mod total',
-  '    result[target / n][target mod n] = grid[index / n][index mod n]',
-  '  return result',
+  "function shiftGrid(grid, k) {",
+  "  const m = grid.length",
+  "  const n = grid[0].length",
+  "  const total = m * n",
+  "  k = k % total",
+  "  const result = Array.from({ length: m }, () => Array(n).fill(0))",
+  "  for (let index = 0; index < total; index++) {",
+  "    const target = (index + k) % total",
+  "    result[Math.floor(target / n)][target % n] = grid[Math.floor(index / n)][index % n]",
+  "  }",
+  "  return result",
+  "}",
 ].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def shift_grid(grid, k):

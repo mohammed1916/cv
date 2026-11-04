@@ -51,7 +51,7 @@ test('1202 trace shows separation, unions, component sorts and the final string'
 
 test('1202 phases and code are exported for the shared shell', () => {
   assert.deepEqual(phases.map(p => p.id), ['start', 'inspect', 'update', 'done'])
-  assert.equal(code.length, 6)
+  assert.equal(code.length, 24)
   assert.ok(python.includes('smallest_string_with_swaps'))
 })
 

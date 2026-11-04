@@ -39,6 +39,17 @@ export default function DesignBoundedBlockingQueue() {
       <p style={{ marginTop: 24, color: waiting ? 'var(--text)' : 'var(--text-dim)' }}>
         {waiting ? 'This call is parked. It stays here until the queue changes.' : 'No call is parked on this step.'}
       </p>
+      <ol aria-label="Call timeline" style={{ display: 'flex', gap: 6, flexWrap: 'wrap', listStyle: 'none', padding: 0 }}>
+        {run.input.ops.map((op, call) => <li key={call} data-call={call} style={{
+          padding: '4px 8px', fontFamily: 'monospace', color: 'var(--text)',
+          border: call === step.call ? '2px solid var(--text)' : '1px solid var(--border)',
+          background: call === step.call ? 'color-mix(in srgb, var(--primary) 28%, transparent)' : 'var(--surface2)',
+          opacity: step.call !== null && call > step.call ? 0.5 : 1,
+        }}>
+          {call + 1}. {op[0] === 'enqueue' ? `enq ${op[1]}` : 'deq'}
+          {step.parkedDeq.includes(call) || step.parkedEnqCalls.includes(call) ? <small style={{ color: 'var(--text-dim)' }}> waiting</small> : null}
+        </li>)}
+      </ol>
       <p aria-label="Parked calls">Parked enqueues: {step.parkedEnq.length ? step.parkedEnq.join(', ') : 'none'} · parked dequeues: {step.parkedDeq.length}</p>
       <output aria-label="Current step">{step.message}</output>
     </>

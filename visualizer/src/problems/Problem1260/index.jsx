@@ -20,7 +20,7 @@ function Table({ rows, label, highlight }) {
       const active = highlight && highlight[0] === r && highlight[1] === c
       return <td key={c} data-cell={`${r},${c}`} style={{
         width: 46, height: 36, textAlign: 'center', border: `${active ? 2 : 1}px solid ${active ? 'var(--text)' : 'var(--border)'}`,
-        background: v === null ? 'transparent' : '#bae6fd', color: '#1c1917',
+        background: v === null ? 'transparent' : 'color-mix(in srgb, var(--primary) 25%, transparent)', color: 'var(--text)',
       }}>{v === null ? '' : v}</td>
     })}</tr>)}</tbody>
   </table>

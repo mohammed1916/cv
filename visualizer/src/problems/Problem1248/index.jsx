@@ -15,7 +15,7 @@ function ParityView({ step }) {
       {step.nums.map((v, i) => {
         const current = i === step.index
         const done = i < step.index
-        return <span key={i} style={{ padding: '6px 10px', border: `2px solid ${current ? '#0891b2' : 'currentColor'}`, borderRadius: 4, opacity: done || current ? 1 : 0.5, background: v % 2 ? 'rgba(37,99,235,0.2)' : 'transparent' }}>
+        return <span key={i} style={{ padding: '6px 10px', border: `2px solid ${current ? 'var(--primary)' : 'currentColor'}`, borderRadius: 4, opacity: done || current ? 1 : 0.5, background: v % 2 ? 'rgba(37,99,235,0.2)' : 'transparent' }}>
           {v}{v % 2 ? ' odd' : ' even'}
         </span>
       })}

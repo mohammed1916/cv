@@ -29,7 +29,7 @@ export default function QueensAttackKing() {
         return <div key={i} data-square={`${r},${c}`} style={{
           width: 32, height: 32, boxSizing: 'border-box', display: 'grid', placeItems: 'center',
           border: '1px solid var(--border)',
-          background: isFound(r, c) ? '#fca5a5' : isCell ? 'var(--surface2)' : 'transparent',
+          background: isFound(r, c) ? 'color-mix(in srgb, var(--primary) 40%, transparent)' : isCell ? 'var(--surface2)' : 'transparent',
         }}>{isKing ? 'K' : isQueen(r, c) ? 'Q' : ''}</div>
       })}
       <output aria-label="Current ray" style={{ gridColumn: '1 / -1', marginTop: 8 }}>{direction ? `Ray direction (${direction[0]},${direction[1]})` : 'Choose the next ray'}</output>

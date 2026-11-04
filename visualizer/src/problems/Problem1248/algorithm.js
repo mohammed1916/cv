@@ -14,14 +14,17 @@ export const examples = [
   { label: 'Alternating', input: '{"nums":[1,2,1,2,1],"k":2}' },
 ]
 
-export const code = `function countNiceSubarrays(nums, k):
-  seen[0] = 1
-  odd = 0, answer = 0
-  for x in nums:
-    odd += x mod 2
-    answer += seen[odd - k]
-    seen[odd] += 1
-  return answer`
+export const code = `function numberOfSubarrays(nums, k) {
+  const seen = new Map([[0, 1]])
+  let odd = 0
+  let answer = 0
+  for (const x of nums) {
+    odd += x % 2
+    answer += seen.get(odd - k) ?? 0
+    seen.set(odd, (seen.get(odd) ?? 0) + 1)
+  }
+  return answer
+}`
 
 export const python = `from collections import defaultdict
 
@@ -66,16 +69,16 @@ export function buildTrace({ nums, k }) {
     nums, k, index, odd, answer, seen: snapshot(), ...extra,
   })
 
-  push('start', 'seen[0] = 1', 'seen[0] = 1', `The empty prefix has 0 odd numbers, so seen counts it once. The target is ${k} odd numbers.`, -1)
+  push('start', 'new Map([[0, 1]])', 'seen[0] = 1', `The empty prefix has 0 odd numbers, so seen counts it once. The target is ${k} odd numbers.`, -1)
   for (let i = 0; i < nums.length; i++) {
     odd += nums[i] % 2
     const need = odd - k
     const found = seen.get(need) ?? 0
     answer += found
-    push('inspect', 'odd += x mod 2', 'odd += x % 2', `Value ${nums[i]} (${nums[i] % 2 ? 'odd' : 'even'}) brings the prefix to ${odd} odd numbers. Earlier prefixes with ${need} odd numbers give ${found} subarray${found === 1 ? '' : 's'} ending here.`, i, { need, found })
-    push('inspect', 'answer += seen', 'answer += seen[odd - k]', `Answer is now ${answer}.`, i, { need, found })
+    push('inspect', 'odd += x % 2', 'odd += x % 2', `Value ${nums[i]} (${nums[i] % 2 ? 'odd' : 'even'}) brings the prefix to ${odd} odd numbers. Earlier prefixes with ${need} odd numbers give ${found} subarray${found === 1 ? '' : 's'} ending here.`, i, { need, found })
+    push('inspect', 'answer += seen.get', 'answer += seen[odd - k]', `Answer is now ${answer}.`, i, { need, found })
     seen.set(odd, (seen.get(odd) ?? 0) + 1)
-    push('update', 'seen[odd] += 1', 'seen[odd] += 1', `The prefix with ${odd} odd numbers is recorded for later positions.`, i)
+    push('update', 'seen.set(odd', 'seen[odd] += 1', `The prefix with ${odd} odd numbers is recorded for later positions.`, i)
   }
 
   push('done', 'return answer', 'return answer', `There are ${answer} subarray${answer === 1 ? '' : 's'} with exactly ${k} odd numbers.`, nums.length)

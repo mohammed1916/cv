@@ -2,13 +2,23 @@
 const MAX_VALUES = 30
 
 export const code = [
-  { line: 1, text: 'sort arr so that the closest pair is adjacent' },
-  { line: 2, text: 'best = infinity; pairs = []' },
-  { line: 3, text: 'for each neighbouring pair (a, b) in sorted order:' },
-  { line: 4, text: '  gap = b - a' },
-  { line: 5, text: '  if gap < best: best = gap and pairs = [[a, b]]' },
-  { line: 6, text: '  else if gap == best: append [a, b] to pairs' },
-  { line: 7, text: 'return pairs' },
+  { line: 1, text: "function minimumAbsDifference(arr) {" },
+  { line: 2, text: "  const sorted = [...arr].sort((a, b) => a - b)" },
+  { line: 3, text: "  let best = Infinity" },
+  { line: 4, text: "  let pairs = []" },
+  { line: 5, text: "  for (let i = 0; i + 1 < sorted.length; i++) {" },
+  { line: 6, text: "    const a = sorted[i]" },
+  { line: 7, text: "    const b = sorted[i + 1]" },
+  { line: 8, text: "    const gap = b - a" },
+  { line: 9, text: "    if (gap < best) {" },
+  { line: 10, text: "      best = gap" },
+  { line: 11, text: "      pairs = [[a, b]]" },
+  { line: 12, text: "    } else if (gap === best) {" },
+  { line: 13, text: "      pairs.push([a, b])" },
+  { line: 14, text: "    }" },
+  { line: 15, text: "  }" },
+  { line: 16, text: "  return pairs" },
+  { line: 17, text: "}" },
 ]
 
 export const python = `def minimum_abs_difference(arr):
@@ -24,7 +34,7 @@ export const python = `def minimum_abs_difference(arr):
             pairs.append([a, b])
     return pairs`
 
-export const pythonLineMap = { 1: 2, 2: 3, 3: 5, 4: 6, 5: 7, 6: 11, 7: 12 }
+export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 6, 8: 6, 9: 7, 10: 8, 11: 9, 12: 10, 13: 11, 14: 11, 15: 11, 16: 12, 17: 12 }
 
 export const phases = [
   { id: 'start', label: 'Sort', description: 'Sort the values. The closest pair must sit next to each other.' },
@@ -65,16 +75,16 @@ export function buildTrace({ arr }) {
     const a = sorted[i]
     const b = sorted[i + 1]
     const gap = b - a
-    frames.push({ phase: 'inspect', activeLine: 4, message: `Neighbours ${a} and ${b} have gap ${gap}. The best so far is ${Number.isFinite(best) ? best : 'unset'}.`, snapshot: snap({ index: i, gap }) })
+    frames.push({ phase: 'inspect', activeLine: 8, message: `Neighbours ${a} and ${b} have gap ${gap}. The best so far is ${Number.isFinite(best) ? best : 'unset'}.`, snapshot: snap({ index: i, gap }) })
     if (gap < best) {
       best = gap
       pairs = [[a, b]]
-      frames.push({ phase: 'update', activeLine: 5, message: `Gap ${gap} is smaller, so the answer restarts with [${a}, ${b}].`, snapshot: snap({ index: i, gap }) })
+      frames.push({ phase: 'update', activeLine: 11, message: `Gap ${gap} is smaller, so the answer restarts with [${a}, ${b}].`, snapshot: snap({ index: i, gap }) })
     } else if (gap === best) {
       pairs.push([a, b])
-      frames.push({ phase: 'update', activeLine: 6, message: `Gap ${gap} ties the best, so [${a}, ${b}] is appended.`, snapshot: snap({ index: i, gap }) })
+      frames.push({ phase: 'update', activeLine: 13, message: `Gap ${gap} ties the best, so [${a}, ${b}] is appended.`, snapshot: snap({ index: i, gap }) })
     }
   }
-  frames.push({ phase: 'done', activeLine: 7, message: `Return ${pairs.length} pair(s) with gap ${best}.`, snapshot: snap() })
+  frames.push({ phase: 'done', activeLine: 16, message: `Return ${pairs.length} pair(s) with gap ${best}.`, snapshot: snap() })
   return { input: { arr }, result: pairs.map(p => [...p]), frames }
 }

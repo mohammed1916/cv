@@ -3,12 +3,17 @@ const CAPACITY = 5000
 const MAX_APPLES = 30
 
 export const code = [
-  { line: 1, text: 'sort the apple weights in ascending order' },
-  { line: 2, text: 'total = 0, count = 0 (capacity is 5000)' },
-  { line: 3, text: 'for each weight w in that order:' },
-  { line: 4, text: '  if total + w is more than the capacity: stop' },
-  { line: 5, text: '  total = total + w; count = count + 1' },
-  { line: 6, text: 'return count' },
+  { line: 1, text: 'function maxApples(weight) {' },
+  { line: 2, text: '  const sorted = [...weight].sort((a, b) => a - b)' },
+  { line: 3, text: '  let total = 0' },
+  { line: 4, text: '  let count = 0' },
+  { line: 5, text: '  for (const w of sorted) {' },
+  { line: 6, text: '    if (total + w > 5000) break' },
+  { line: 7, text: '    total += w' },
+  { line: 8, text: '    count += 1' },
+  { line: 9, text: '  }' },
+  { line: 10, text: '  return count' },
+  { line: 11, text: '}' },
 ]
 
 export const python = `def max_apples(weight):
@@ -21,7 +26,7 @@ export const python = `def max_apples(weight):
         count += 1
     return count`
 
-export const pythonLineMap = { 1: 4, 2: 2, 3: 4, 4: 5, 5: 7, 6: 9 }
+export const pythonLineMap = { 1: 1, 2: 4, 3: 2, 4: 3, 5: 4, 6: 5, 7: 7, 8: 8, 9: 8, 10: 9, 11: 9 }
 
 export const phases = [
   { id: 'start', label: 'Sort', description: 'Order the apples from lightest to heaviest. The total and count start at zero.' },
@@ -55,19 +60,19 @@ export function buildTrace({ weight }) {
   let total = 0
   let count = 0
   const snap = (extra = {}) => ({ sorted: [...sorted], taken: [...taken], total, count, ...extra })
-  frames.push({ phase: 'start', activeLine: 1, message: `Sort ${sorted.length} weights: ${sorted.join(', ')}. Start with total 0 and count 0.`, snapshot: snap() })
+  frames.push({ phase: 'start', activeLine: 2, message: `Sort ${sorted.length} weights: ${sorted.join(', ')}. Start with total 0 and count 0.`, snapshot: snap() })
   let stop = -1
   for (let index = 0; index < sorted.length; index++) {
     const w = sorted[index]
     const fits = total + w <= CAPACITY
-    frames.push({ phase: 'inspect', activeLine: 4, message: `Next weight ${w}: ${total} + ${w} = ${total + w}, which ${fits ? 'fits' : `is more than ${CAPACITY}`}.`, snapshot: snap({ index, w, fits }) })
+    frames.push({ phase: 'inspect', activeLine: 6, message: `Next weight ${w}: ${total} + ${w} = ${total + w}, which ${fits ? 'fits' : `is more than ${CAPACITY}`}.`, snapshot: snap({ index, w, fits }) })
     if (!fits) { stop = index; break }
     total += w
     count += 1
     taken.push(w)
-    frames.push({ phase: 'update', activeLine: 5, message: `Take ${w}. Total ${total}, count ${count}.`, snapshot: snap({ index, w, fits: true }) })
+    frames.push({ phase: 'update', activeLine: 7, message: `Take ${w}. Total ${total}, count ${count}.`, snapshot: snap({ index, w, fits: true }) })
   }
   const result = count
-  frames.push({ phase: 'done', activeLine: 6, message: `Return ${count}. The basket holds ${total} of ${CAPACITY} weight units${stop >= 0 ? '; every heavier apple is left out' : ''}.`, snapshot: snap({ index: stop }) })
+  frames.push({ phase: 'done', activeLine: 10, message: `Return ${count}. The basket holds ${total} of ${CAPACITY} weight units${stop >= 0 ? '; every heavier apple is left out' : ''}.`, snapshot: snap({ index: stop }) })
   return { input: { weight }, result, frames }
 }

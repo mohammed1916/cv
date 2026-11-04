@@ -24,7 +24,7 @@ export default function TicTacToeWinner() {
           const isMove = move && move[0] === r && move[1] === c
           return <td key={c} style={{
             width: 44, height: 44, textAlign: 'center', border: `${isMove ? 2 : 1}px solid ${isMove ? 'var(--text)' : 'var(--border)'}`,
-            background: isMove ? '#bbf7d0' : 'transparent', color: '#1c1917', fontSize: 20,
+            background: isMove ? 'color-mix(in srgb, var(--primary) 25%, transparent)' : 'transparent', color: 'var(--text)', fontSize: 20,
           }}>{cell || '·'}</td>
         })}</tr>)}</tbody>
       </table>

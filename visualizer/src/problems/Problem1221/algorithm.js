@@ -24,14 +24,14 @@ export function buildTrace({ s }) {
   let pieces = 0
   let start = 0
   frames.push({
-    phase: 'start', activeLine: L('balance = 0'), pythonLine: P('balance = 0'),
+    phase: 'start', activeLine: L('let balance = 0'), pythonLine: P('balance = 0'),
     message: 'Start with balance 0 and no pieces. Each L raises the balance and each R lowers it.',
     snapshot: { index: -1, balance, pieces, piece: '' },
   })
   for (let i = 0; i < s.length; i++) {
     balance += s[i] === 'L' ? 1 : -1
     frames.push({
-      phase: 'scan', activeLine: L('balance += 1'), pythonLine: P('balance +='),
+      phase: 'scan', activeLine: L('balance += ch'), pythonLine: P('balance +='),
       message: `Letter ${i + 1} is ${s[i]}, so the balance becomes ${balance}.`,
       snapshot: { index: i, balance, pieces, piece: s.slice(start, i + 1) },
     })
@@ -53,15 +53,17 @@ export function buildTrace({ s }) {
   return { input: { s }, result: pieces, frames }
 }
 
-const codeLines = `split a balanced string (s):
-  balance = 0
-  pieces = 0
-  for each letter in s:
-    if letter is L: balance += 1 else balance -= 1
-    if balance == 0:
-      pieces += 1
-  return pieces`.split('\n')
-
+const codeLines = [
+  "function balancedStringSplit(s) {",
+  "  let balance = 0",
+  "  let pieces = 0",
+  "  for (const ch of s) {",
+  "    balance += ch === 'L' ? 1 : -1",
+  "    if (balance === 0) pieces += 1",
+  "  }",
+  "  return pieces",
+  "}",
+]
 export const code = codeLines.map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def split_balanced(s):

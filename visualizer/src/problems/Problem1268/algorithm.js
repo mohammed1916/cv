@@ -18,35 +18,39 @@ export function buildTrace({ products, searchWord }) {
   const sorted = [...products].sort()
   const result = []
   const snap = (prefix, matches, scan) => ({ sorted, prefix, matches, scan, result: result.map(r => [...r]) })
-  const frames = [{ phase: 'start', activeLine: L('sort products'), pythonLine: P('products.sort()'), snapshot: snap(null, [], null), message: `Sorted products: ${sorted.join(', ')}. Matches for any prefix will appear in this order.` }]
+  const frames = [{ phase: 'start', activeLine: L('const sorted = [...products]'), pythonLine: P('products.sort()'), snapshot: snap(null, [], null), message: `Sorted products: ${sorted.join(', ')}. Matches for any prefix will appear in this order.` }]
   for (let k = 1; k <= searchWord.length; k++) {
     const prefix = searchWord.slice(0, k)
-    frames.push({ phase: 'prefix', activeLine: L('for each prefix'), pythonLine: P('for k in range'), snapshot: snap(prefix, [], null), message: `Prefix "${prefix}" is the next prefix of "${searchWord}".` })
+    frames.push({ phase: 'prefix', activeLine: L('for (let k = 1'), pythonLine: P('for k in range'), snapshot: snap(prefix, [], null), message: `Prefix "${prefix}" is the next prefix of "${searchWord}".` })
     const matches = []
     for (let i = 0; i < sorted.length && matches.length < 3; i++) {
       if (!sorted[i].startsWith(prefix)) continue
       matches.push(sorted[i])
-      frames.push({ phase: 'collect', activeLine: L('append word'), pythonLine: P('suggestions.append'), snapshot: snap(prefix, [...matches], i), message: `"${sorted[i]}" starts with "${prefix}" and is suggestion ${matches.length}${matches.length === 3 ? ', so the scan stops at three.' : '.'}` })
+      frames.push({ phase: 'collect', activeLine: L('suggestions.push(word)'), pythonLine: P('suggestions.append'), snapshot: snap(prefix, [...matches], i), message: `"${sorted[i]}" starts with "${prefix}" and is suggestion ${matches.length}${matches.length === 3 ? ', so the scan stops at three.' : '.'}` })
     }
-    if (matches.length === 0) frames.push({ phase: 'collect', activeLine: L('append suggestions'), pythonLine: P('result.append'), snapshot: snap(prefix, [], null), message: `No product starts with "${prefix}", so its list is empty.` })
+    if (matches.length === 0) frames.push({ phase: 'collect', activeLine: L('result.push(suggestions)'), pythonLine: P('result.append'), snapshot: snap(prefix, [], null), message: `No product starts with "${prefix}", so its list is empty.` })
     result.push(matches)
   }
   frames.push({ phase: 'done', activeLine: L('return result'), pythonLine: P('return result'), snapshot: snap(null, [], null), message: `Return ${result.length} suggestion lists, one for each prefix.` })
   return { input: { products, searchWord }, result, frames }
 }
 
-export const code = `search suggestions (products, searchWord):
-  sort products
-  set result to an empty list
-  for each prefix length k from 1 to len(searchWord):
-    set prefix to the first k letters
-    set suggestions to an empty list
-    for each word in sorted products:
-      if word starts with prefix:
-        append word to suggestions
-        if suggestions has 3 words: stop scanning
-    append suggestions to result
-  return result`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function suggestedProducts(products, searchWord) {
+  const sorted = [...products].sort()
+  const result = []
+  for (let k = 1; k <= searchWord.length; k++) {
+    const prefix = searchWord.slice(0, k)
+    const suggestions = []
+    for (const word of sorted) {
+      if (word.startsWith(prefix)) {
+        suggestions.push(word)
+        if (suggestions.length === 3) break
+      }
+    }
+    result.push(suggestions)
+  }
+  return result
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 

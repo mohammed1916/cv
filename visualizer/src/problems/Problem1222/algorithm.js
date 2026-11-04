@@ -28,13 +28,13 @@ export function buildTrace({ queens, king }) {
   const occupied = new Map(queens.map(([r, c]) => [`${r},${c}`, true]))
   const found = []
   frames.push({
-    phase: 'start', activeLine: L('for each direction'), pythonLine: P('for dr, dc'),
+    phase: 'start', activeLine: L('for (const [dr'), pythonLine: P('for dr, dc'),
     message: `The king sits at (${king[0]},${king[1]}). There are ${queens.length} queens; we walk eight rays outward from the king.`,
     snapshot: { king, direction: null, cell: null, found: [] },
   })
   for (const [dr, dc] of DIRECTIONS) {
     frames.push({
-      phase: 'ray', activeLine: L('r, c = king'), pythonLine: P('r, c = king'),
+      phase: 'ray', activeLine: L('let r = king[0]'), pythonLine: P('r, c = king'),
       message: `Ray (${dr},${dc}): start from the king and step outward.`,
       snapshot: { king, direction: [dr, dc], cell: null, found: [...found] },
     })
@@ -44,14 +44,14 @@ export function buildTrace({ queens, king }) {
       if (occupied.has(`${r},${c}`)) {
         found.push([r, c])
         frames.push({
-          phase: 'hit', activeLine: L('append'), pythonLine: P('append'),
+          phase: 'hit', activeLine: L('found.push'), pythonLine: P('append'),
           message: `The first queen on this ray is at (${r},${c}). It can attack the king, and queens beyond it are blocked.`,
           snapshot: { king, direction: [dr, dc], cell: [r, c], found: [...found] },
         })
         break
       }
       frames.push({
-        phase: 'step', activeLine: L('is on the board'), pythonLine: P('while 0 <= r'),
+        phase: 'step', activeLine: L('while (r >= 0'), pythonLine: P('while 0 <= r'),
         message: `Square (${r},${c}) is empty, so the ray continues.`,
         snapshot: { king, direction: [dr, dc], cell: [r, c], found: [...found] },
       })
@@ -67,18 +67,25 @@ export function buildTrace({ queens, king }) {
   return { input: { queens, king }, result: found, frames }
 }
 
-const codeLines = `attacking queens (queens, king):
-  occupied = set of queen squares
-  found = []
-  for each direction (dr, dc):
-    r, c = king
-    while (r, c) is on the board:
-      if (r, c) is occupied:
-        append (r, c) to found
-        stop this ray
-      step r, c by (dr, dc)
-  return found`.split('\n')
-
+const codeLines = [
+  "function queensAttackingKing(queens, king) {",
+  "  const occupied = new Set(queens.map(([r, c]) => `${r},${c}`))",
+  "  const found = []",
+  "  for (const [dr, dc] of [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]]) {",
+  "    let r = king[0] + dr",
+  "    let c = king[1] + dc",
+  "    while (r >= 0 && r < 8 && c >= 0 && c < 8) {",
+  "      if (occupied.has(`${r},${c}`)) {",
+  "        found.push([r, c])",
+  "        break",
+  "      }",
+  "      r += dr",
+  "      c += dc",
+  "    }",
+  "  }",
+  "  return found",
+  "}",
+]
 export const code = codeLines.map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def attacking_queens(queens, king):

@@ -38,34 +38,38 @@ function winnerAt(board, r, c) {
 export function buildTrace({ moves }) {
   const board = Array.from({ length: 3 }, () => Array(3).fill(''))
   const copy = () => board.map(row => [...row])
-  const frames = [{ phase: 'start', activeLine: L('set board'), pythonLine: P('board = '), snapshot: { board: copy(), move: null, lines: [], winner: null }, message: 'The board is empty. Player A makes the first move.' }]
+  const frames = [{ phase: 'start', activeLine: L('const board = [[null'), pythonLine: P('board = '), snapshot: { board: copy(), move: null, lines: [], winner: null }, message: 'The board is empty. Player A makes the first move.' }]
   let result = null
   for (let i = 0; i < moves.length; i++) {
     const [r, c] = moves[i]
     const player = i % 2 === 0 ? 'A' : 'B'
     board[r][c] = player
-    frames.push({ phase: 'place', activeLine: L('place'), pythonLine: P('board[row][col] ='), snapshot: { board: copy(), move: [r, c], lines: [], winner: null }, message: `Move ${i + 1}: ${player} takes row ${r}, column ${c}.` })
+    frames.push({ phase: 'place', activeLine: L('board[row][col] = player'), pythonLine: P('board[row][col] ='), snapshot: { board: copy(), move: [r, c], lines: [], winner: null }, message: `Move ${i + 1}: ${player} takes row ${r}, column ${c}.` })
     const lines = [`row ${r}`, `column ${c}`]
     if (r === c) lines.push('main diagonal')
     if (r + c === 2) lines.push('anti-diagonal')
     const winner = winnerAt(board, r, c)
-    frames.push({ phase: 'check', activeLine: L('if the player completes'), pythonLine: P('if wins('), snapshot: { board: copy(), move: [r, c], lines, winner }, message: winner ? `${lines.join(', ')} is complete for ${winner}.` : `${lines.join(', ')} is not complete, so play continues.` })
+    frames.push({ phase: 'check', activeLine: L('if (won) return player'), pythonLine: P('if wins('), snapshot: { board: copy(), move: [r, c], lines, winner }, message: winner ? `${lines.join(', ')} is complete for ${winner}.` : `${lines.join(', ')} is not complete, so play continues.` })
     if (winner) { result = winner; break }
   }
   if (!result) result = moves.length === 9 ? 'Draw' : 'Pending'
-  frames.push({ phase: 'done', activeLine: L('return'), pythonLine: P("return 'Draw'"), snapshot: { board: copy(), move: null, lines: [], winner: result }, message: result === 'Draw' ? 'All nine cells are filled and no line is complete, so the game is a draw.' : result === 'Pending' ? 'Cells remain and no line is complete, so the game is still pending.' : `${result} completed a line and wins.` })
+  frames.push({ phase: 'done', activeLine: L('return moves.length'), pythonLine: P("return 'Draw'"), snapshot: { board: copy(), move: null, lines: [], winner: result }, message: result === 'Draw' ? 'All nine cells are filled and no line is complete, so the game is a draw.' : result === 'Pending' ? 'Cells remain and no line is complete, so the game is still pending.' : `${result} completed a line and wins.` })
   return { input: { moves }, result, frames }
 }
 
-export const code = `find winner (moves):
-  set board to nine empty cells
-  for each move i with (row, col):
-    player is A on even moves and B on odd moves
-    place player at (row, col)
-    if the player completes its row, column or a diagonal through (row, col):
-      return player
-  if the board has nine marks: return Draw
-  return Pending`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function tictactoe(moves) {
+  const board = [[null, null, null], [null, null, null], [null, null, null]]
+  for (let i = 0; i < moves.length; i++) {
+    const [row, col] = moves[i]
+    const player = i % 2 === 0 ? 'A' : 'B'
+    board[row][col] = player
+    const won = board[row].every(v => v === player) || board.every(r => r[col] === player)
+      || (row === col && [0, 1, 2].every(k => board[k][k] === player))
+      || (row + col === 2 && [0, 1, 2].every(k => board[k][2 - k] === player))
+    if (won) return player
+  }
+  return moves.length === 9 ? 'Draw' : 'Pending'
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 

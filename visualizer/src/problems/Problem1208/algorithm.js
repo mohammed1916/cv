@@ -2,13 +2,21 @@
 const MAX_LENGTH = 40
 
 export const code = [
-  { line: 1, text: 'cost[i] = |s[i] - t[i]| for every position i' },
-  { line: 2, text: 'left = 0; spent = 0; best = 0' },
-  { line: 3, text: 'for right from 0 to the last position:' },
-  { line: 4, text: '  spent = spent + cost[right]' },
-  { line: 5, text: '  while spent > maxCost: spent = spent - cost[left]; left = left + 1' },
-  { line: 6, text: '  best = max(best, right - left + 1)' },
-  { line: 7, text: 'return best' },
+  { line: 1, text: "function equalSubstring(s, t, maxCost) {" },
+  { line: 2, text: "  const cost = [...s].map((ch, i) => Math.abs(ch.charCodeAt(0) - t.charCodeAt(i)))" },
+  { line: 3, text: "  let left = 0" },
+  { line: 4, text: "  let spent = 0" },
+  { line: 5, text: "  let best = 0" },
+  { line: 6, text: "  for (let right = 0; right < s.length; right++) {" },
+  { line: 7, text: "    spent += cost[right]" },
+  { line: 8, text: "    while (spent > maxCost) {" },
+  { line: 9, text: "      spent -= cost[left]" },
+  { line: 10, text: "      left += 1" },
+  { line: 11, text: "    }" },
+  { line: 12, text: "    best = Math.max(best, right - left + 1)" },
+  { line: 13, text: "  }" },
+  { line: 14, text: "  return best" },
+  { line: 15, text: "}" },
 ]
 
 export const python = `def equal_substring(s, t, maxCost):
@@ -24,7 +32,7 @@ export const python = `def equal_substring(s, t, maxCost):
         best = max(best, right - left + 1)
     return best`
 
-export const pythonLineMap = { 1: 2, 2: 4, 3: 6, 4: 7, 5: 8, 6: 11, 7: 12 }
+export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: 10, 11: 10, 12: 11, 13: 11, 14: 12, 15: 12 }
 
 export const phases = [
   { id: 'start', label: 'Costs', description: 'Price every position by its character distance. Nothing is spent yet.' },
@@ -64,18 +72,18 @@ export function buildTrace({ s, t, maxCost }) {
   const snap = (right, extra = {}) => ({
     cost: [...cost], left, right, spent, best, maxCost, window: right >= 0 ? [left, right] : [], ...extra,
   })
-  frames.push({ phase: 'start', activeLine: 1, message: `Each position costs its character distance. The budget is ${maxCost}.`, snapshot: snap(-1) })
+  frames.push({ phase: 'start', activeLine: 2, message: `Each position costs its character distance. The budget is ${maxCost}.`, snapshot: snap(-1) })
   for (let right = 0; right < n; right++) {
     spent += cost[right]
-    frames.push({ phase: 'inspect', activeLine: 4, message: `Include position ${right} (cost ${cost[right]}). Spent ${spent} of ${maxCost}.`, snapshot: snap(right) })
+    frames.push({ phase: 'inspect', activeLine: 7, message: `Include position ${right} (cost ${cost[right]}). Spent ${spent} of ${maxCost}.`, snapshot: snap(right) })
     while (spent > maxCost) {
       spent -= cost[left]
       left += 1
-      frames.push({ phase: 'update', activeLine: 5, message: `Over budget: drop position ${left - 1} (cost ${cost[left - 1]}). Spent ${spent}.`, snapshot: snap(right) })
+      frames.push({ phase: 'update', activeLine: 9, message: `Over budget: drop position ${left - 1} (cost ${cost[left - 1]}). Spent ${spent}.`, snapshot: snap(right) })
     }
     best = Math.max(best, right - left + 1)
-    frames.push({ phase: 'update', activeLine: 6, message: `Window ${left} to ${right} has length ${right - left + 1}. Best is ${best}.`, snapshot: snap(right) })
+    frames.push({ phase: 'update', activeLine: 12, message: `Window ${left} to ${right} has length ${right - left + 1}. Best is ${best}.`, snapshot: snap(right) })
   }
-  frames.push({ phase: 'done', activeLine: 7, message: `Return ${best}.`, snapshot: snap(n - 1) })
+  frames.push({ phase: 'done', activeLine: 14, message: `Return ${best}.`, snapshot: snap(n - 1) })
   return { input: { s, t, maxCost }, result: best, frames }
 }

@@ -36,7 +36,7 @@ test('every frame has a phase, a valid code line and narration', () => {
   const run = buildTrace({ n: 4 })
   for (const frame of run.frames) {
     assert.ok(frame.message.length > 10)
-    assert.ok(frame.activeLine >= 1 && frame.activeLine <= 7)
+    assert.ok(frame.activeLine >= 1 && frame.activeLine <= 13)
   }
   assert.equal(run.frames.at(-1).phase, 'done')
 })

@@ -14,19 +14,19 @@ export function buildTrace(input) {
   const frames = []
   let x = 1
   let y = z
-  frames.push({ phase: 'start', activeLine: L('set x to 1'), pythonLine: PY('x = 1'), x, y, value: null, pairs: [], message: `Start with x = 1 and y = ${z}.` })
+  frames.push({ phase: 'start', activeLine: L('let x = 1'), pythonLine: PY('x = 1'), x, y, value: null, pairs: [], message: `Start with x = 1 and y = ${z}.` })
   while (x <= z && y >= 1) {
     const value = apply(x, y)
     if (value === z) {
       pairs.push([x, y])
-      frames.push({ phase: 'found', activeLine: L('add the pair'), pythonLine: PY('pairs.append'), x, y, value, pairs: pairs.map(p => [...p]), message: `f(${x}, ${y}) = ${value} equals z, so (${x}, ${y}) is a solution.` })
+      frames.push({ phase: 'found', activeLine: L('pairs.push'), pythonLine: PY('pairs.append'), x, y, value, pairs: pairs.map(p => [...p]), message: `f(${x}, ${y}) = ${value} equals z, so (${x}, ${y}) is a solution.` })
       x++
       y--
     } else if (value < z) {
-      frames.push({ phase: 'low', activeLine: L('increase x'), pythonLine: PY('x += 1', 1), x, y, value, pairs: pairs.map(p => [...p]), message: `f(${x}, ${y}) = ${value} is below z, so x moves up.` })
+      frames.push({ phase: 'low', activeLine: L('} else if (value < z)'), pythonLine: PY('x += 1', 1), x, y, value, pairs: pairs.map(p => [...p]), message: `f(${x}, ${y}) = ${value} is below z, so x moves up.` })
       x++
     } else {
-      frames.push({ phase: 'high', activeLine: L('decrease y'), pythonLine: PY('y -= 1', 1), x, y, value, pairs: pairs.map(p => [...p]), message: `f(${x}, ${y}) = ${value} is above z, so y moves down.` })
+      frames.push({ phase: 'high', activeLine: L('} else {'), pythonLine: PY('y -= 1', 1), x, y, value, pairs: pairs.map(p => [...p]), message: `f(${x}, ${y}) = ${value} is above z, so y moves down.` })
       y--
     }
   }
@@ -34,17 +34,24 @@ export function buildTrace(input) {
   return { input, result: pairs, frames }
 }
 
-export const code = `find all positive pairs (x, y) with f(x, y) equal to z
-  set pairs to an empty list
-  set x to 1 and y to z
-  while x is at most z and y is at least 1 do
-    compute value as f(x, y)
-    if value equals z then
-      add the pair (x, y) to pairs and move x up and y down
-    else if value is less than z then
-      increase x by one
-    otherwise decrease y by one
-  return pairs`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function findSolutions(customfunction, z) {
+  const pairs = []
+  let x = 1
+  let y = z
+  while (x <= z && y >= 1) {
+    const value = customfunction(x, y)
+    if (value === z) {
+      pairs.push([x, y])
+      x += 1
+      y -= 1
+    } else if (value < z) {
+      x += 1
+    } else {
+      y -= 1
+    }
+  }
+  return pairs
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def find_solutions(z, operation):

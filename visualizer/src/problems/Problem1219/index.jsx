@@ -20,10 +20,10 @@ export default function PathWithMaximumGold() {
           const key = `${r},${c}`
           return <span key={key} data-cell={key} style={{
             ...cell,
-            background: isCurrent(r, c) ? '#facc15' : usedKeys.has(key) ? 'rgba(8,145,178,.25)' : gold > 0 ? 'var(--surface2)' : 'transparent',
-            color: isCurrent(r, c) ? '#1c1917' : 'var(--text)',
+            background: isCurrent(r, c) ? 'color-mix(in srgb, var(--primary) 45%, transparent)' : usedKeys.has(key) ? 'color-mix(in srgb, var(--primary) 22%, transparent)' : gold > 0 ? 'var(--surface2)' : 'transparent',
+            color: 'var(--text)',
             borderWidth: next && next[0] === r && next[1] === c ? 2 : 1,
-            borderColor: next && next[0] === r && next[1] === c ? '#0891b2' : 'var(--border)',
+            borderColor: next && next[0] === r && next[1] === c ? 'var(--text)' : 'var(--border)',
           }}>{gold}</span>
         }))}
       </div>

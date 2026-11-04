@@ -18,28 +18,38 @@ export function buildTrace({ n, a, b, c }) {
   // Counts the numbers from 1 to x divisible by a, b or c.
   const foundUpTo = x => Math.floor(x / a) + Math.floor(x / b) + Math.floor(x / c) - Math.floor(x / ab) - Math.floor(x / ac) - Math.floor(x / bc) + Math.floor(x / abc)
   let low = 1, high = n * Math.min(a, b, c)
-  const frames = [{ phase: 'start', activeLine: L('set low to one'), pythonLine: PY('low = 1'), low, high, mid: null, found: null, message: `The answer is at most ${n} times the smallest divisor, ${high}.` }]
+  const frames = [{ phase: 'start', activeLine: L('let low = 1'), pythonLine: PY('low = 1'), low, high, mid: null, found: null, message: `The answer is at most ${n} times the smallest divisor, ${high}.` }]
   while (low < high) {
     const mid = Math.floor((low + high) / 2)
     const found = foundUpTo(mid)
     if (found >= n) high = mid
     else low = mid + 1
-    frames.push({ phase: 'probe', activeLine: L('if found is at least'), pythonLine: PY('if found_up_to(mid) >= n'), low, high, mid, found, message: `${found} numbers up to ${mid} are divisible by a, b or c; need ${n}.` })
+    frames.push({ phase: 'probe', activeLine: L('if (found >= n)'), pythonLine: PY('if found_up_to(mid) >= n'), low, high, mid, found, message: `${found} numbers up to ${mid} are divisible by a, b or c; need ${n}.` })
   }
   frames.push({ phase: 'done', activeLine: L('return low'), pythonLine: PY('return low'), low, high, mid: null, found: null, message: `The ${n}th such number is ${low}.` })
   return { input: { n, a, b, c }, result: low, frames }
 }
 
-export const code = `nth divisible number (n, a, b, c)
-  set low to one and high to n times the smallest of a, b, c
-  while low is below high
-    set mid to the middle of low and high rounded down
-    set found to how many numbers up to mid are divisible by a, b or c
-    if found is at least n then
-      set high to mid
-    otherwise
-      set low to mid plus one
-  return low`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function nthDivisibleNumber(n, a, b, c) {",
+  "  const gcd = (x, y) => (y === 0 ? x : gcd(y, x % y))",
+  "  const lcm = (x, y) => (x / gcd(x, y)) * y",
+  "  const ab = lcm(a, b)",
+  "  const ac = lcm(a, c)",
+  "  const bc = lcm(b, c)",
+  "  const abc = lcm(ab, c)",
+  "  const foundUpTo = x => Math.floor(x / a) + Math.floor(x / b) + Math.floor(x / c) - Math.floor(x / ab) - Math.floor(x / ac) - Math.floor(x / bc) + Math.floor(x / abc)",
+  "  let low = 1",
+  "  let high = n * Math.min(a, b, c)",
+  "  while (low < high) {",
+  "    const mid = Math.floor((low + high) / 2)",
+  "    const found = foundUpTo(mid)",
+  "    if (found >= n) high = mid",
+  "    else low = mid + 1",
+  "  }",
+  "  return low",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `from math import gcd

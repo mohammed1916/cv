@@ -46,8 +46,8 @@ test('1206 frames carry snapshots and the bottom level stays sorted', () => {
 
 test('1206 phases and code are exported for the shared shell', () => {
   assert.deepEqual(phases.map(p => p.id), ['start', 'add', 'search', 'erase', 'done'])
-  assert.equal(code.length, 6)
-  assert.ok(python.includes('class Skiplist'))
+  assert.equal(code.length, 33)
+  assert.ok(python.includes('def skiplist_operations'))
 })
 
 test('1206 rejects bad calls', () => {

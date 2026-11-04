@@ -1,5 +1,6 @@
-const URL_RE = /^https?:\/\/[a-z]+\.[a-z]+(\/[a-z]*)*$/
+const URL_RE = /^https?:\/\/[a-z]+(\.[a-z]+)+(\/[a-z]*)*$/
 const host = url => url.split('/')[2]
+const hostname = host
 
 export function parseInput(text) {
   const input = JSON.parse(text)
@@ -16,33 +17,42 @@ export function buildTrace({ start, links }) {
   const seen = new Set([start])
   const queue = [start]
   const order = []
-  const frames = [{ phase: 'start', pythonLine: PL('visited = {start}'), activeLine: L('start with the start page'), state: [`host ${h}`], message: `Crawl only ${h}.` }]
+  const frames = [{ phase: 'start', pythonLine: PL('visited = {start}'), activeLine: L('const seen = new Set'), state: [`host ${h}`], message: `Crawl only ${h}.` }]
   while (queue.length) {
     const page = queue.shift()
     order.push(page)
-    frames.push({ phase: 'visit', pythonLine: PL('order.append(page)'), activeLine: L('take the next page'), state: [...order], message: `Visit ${page}.` })
+    frames.push({ phase: 'visit', pythonLine: PL('order.append(page)'), activeLine: L('const page = queue.shift()'), state: [...order], message: `Visit ${page}.` })
     for (const nxt of links[page] || []) {
       if (host(nxt) === h && !seen.has(nxt)) {
         seen.add(nxt)
         queue.push(nxt)
-        frames.push({ phase: 'queue', pythonLine: PL('queue.append(nxt)'), activeLine: L('same host and is new'), state: [...order, `queued ${nxt}`], message: `${nxt} is on this host and new, so queue it.` })
+        frames.push({ phase: 'queue', pythonLine: PL('queue.append(nxt)'), activeLine: L('if (hostname(nxt) === h'), state: [...order, `queued ${nxt}`], message: `${nxt} is on this host and new, so queue it.` })
       } else {
-        frames.push({ phase: 'skip', pythonLine: PL('if nxt.split'), activeLine: L('same host and is new'), state: [...order], message: `${nxt} is skipped: other host or already seen.` })
+        frames.push({ phase: 'skip', pythonLine: PL('if nxt.split'), activeLine: L('if (hostname(nxt) === h'), state: [...order], message: `${nxt} is skipped: other host or already seen.` })
       }
     }
   }
-  frames.push({ phase: 'done', pythonLine: PL('return order'), activeLine: L('return the visited pages'), state: [...order], message: `${order.length} pages were visited.` })
+  frames.push({ phase: 'done', pythonLine: PL('return order'), activeLine: L('return order'), state: [...order], message: `${order.length} pages were visited.` })
   return { input: { start, links }, result: order, frames }
 }
 
-export const code = `host restricted breadth first crawl
-  start with the start page
-  mark the start page as seen and queue it
-  while the queue is not empty
-    take the next page from the queue and record it
-    for each link on the page
-      if the link has the same host and is new then mark it and queue it
-  return the visited pages in order`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function crawl(startUrl, htmlParser) {
+  const h = hostname(startUrl)
+  const seen = new Set([startUrl])
+  const queue = [startUrl]
+  const order = []
+  while (queue.length > 0) {
+    const page = queue.shift()
+    order.push(page)
+    for (const nxt of htmlParser.getUrls(page)) {
+      if (hostname(nxt) === h && !seen.has(nxt)) {
+        seen.add(nxt)
+        queue.push(nxt)
+      }
+    }
+  }
+  return order
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `from collections import deque

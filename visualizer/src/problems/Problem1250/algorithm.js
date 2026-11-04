@@ -14,17 +14,19 @@ export const examples = [
   { label: 'Single', input: '[7]' },
 ]
 
-export const code = `function isGoodArray(nums):
-  g = 0
-  for x in nums:
+export const code = `function isGoodArray(nums) {
+  let g = 0
+  for (const x of nums) {
     g = gcd(g, x)
-    if g == 1: return true
+    if (g === 1) return true
+  }
   return false
+}
 
-function gcd(a, b):
-  while b != 0:
-    a, b = b, a mod b
-  return a`
+function gcd(a, b) {
+  while (b !== 0) [a, b] = [b, a % b]
+  return a
+}`
 
 export const python = `from math import gcd
 
@@ -59,7 +61,7 @@ export function buildTrace(nums) {
     phase, activeLine: CODE_LINE(key), pythonLine: PY_LINE(pyKey), message, nums, g, ...extra,
   })
 
-  push('start', 'g = 0', 'g = 0', `The running gcd starts at 0. A good array needs its gcd to be exactly 1.`)
+  push('start', 'let g = 0', 'g = 0', `The running gcd starts at 0. A good array needs its gcd to be exactly 1.`)
   for (let index = 0; index < nums.length; index++) {
     const x = nums[index]
     let a = g
@@ -69,11 +71,11 @@ export function buildTrace(nums) {
       const remainder = a % b
       a = b
       b = remainder
-      push('update', 'a, b = b', 'g = gcd(g, x)', `Euclid step: the pair becomes (${a}, ${b}). ${b === 0 ? 'The remainder is zero, so the last nonzero value is the gcd.' : `The remainder ${b} carries forward.`}`, { index, a, b })
+      push('update', '[a, b] = [b, a % b]', 'g = gcd(g, x)', `Euclid step: the pair becomes (${a}, ${b}). ${b === 0 ? 'The remainder is zero, so the last nonzero value is the gcd.' : `The remainder ${b} carries forward.`}`, { index, a, b })
     }
     g = a
     const reached = g === 1
-    push('inspect', 'if g == 1', 'if g == 1', `The running gcd is now ${g}. ${reached ? 'It reached 1, so a combination of the values can sum to 1.' : 'It is not 1 yet, so the next value is folded in.'}`, { index, a: g, b: null, reached })
+    push('inspect', 'if (g === 1)', 'if g == 1', `The running gcd is now ${g}. ${reached ? 'It reached 1, so a combination of the values can sum to 1.' : 'It is not 1 yet, so the next value is folded in.'}`, { index, a: g, b: null, reached })
     if (reached) {
       push('done', 'return true', 'return True', `The running gcd reached 1 after value ${index + 1}, so the array is good.`, { index, result: true })
       return { input: nums, result: true, frames }

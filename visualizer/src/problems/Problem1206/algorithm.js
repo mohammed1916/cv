@@ -1,4 +1,5 @@
 const OPERATIONS = ['add', 'search', 'erase']
+const MAX_LEVEL = 16
 
 export function parseInput(text) {
   let obj
@@ -16,104 +17,109 @@ export function parseInput(text) {
   return { operations: obj.operations, args: obj.args }
 }
 
+// The JavaScript and Python below run the same skiplist. A new node's height comes from a
+// deterministic counter (every second insert is one level taller, up to 16), so the trace is repeatable.
 export const code = [
-  { line: 1, text: 'start with an empty skiplist whose bottom level is a sorted list' },
-  { line: 2, text: 'for each operation and its argument num, in order:' },
-  { line: 3, text: '  if operation is add: insert num at its sorted position (duplicates kept)' },
-  { line: 4, text: '  if operation is search: result = whether num is present' },
-  { line: 5, text: '  if operation is erase: remove one copy of num if present; result = whether one was removed' },
-  { line: 6, text: 'return the list of results' },
-]
+  'function skiplistOperations(operations, args) {',
+  '  const head = { val: null, next: Array(16).fill(null) }',
+  '  let level = 1',
+  '  let inserted = 0',
+  '  const results = []',
+  '  operations.forEach((op, call) => {',
+  '    const num = args[call]',
+  '    const update = Array(16).fill(head)',
+  '    let node = head',
+  '    for (let i = level - 1; i >= 0; i--) {',
+  '      while (node.next[i] && node.next[i].val < num) node = node.next[i]',
+  '      update[i] = node',
+  '    }',
+  "    if (op === 'add') {",
+  '      inserted += 1',
+  '      let lvl = 1',
+  '      for (let k = inserted; k % 2 === 0 && lvl < 16; k /= 2) lvl += 1',
+  '      if (lvl > level) { for (let i = level; i < lvl; i++) update[i] = head; level = lvl }',
+  '      const created = { val: num, next: Array(lvl).fill(null) }',
+  '      for (let i = 0; i < lvl; i++) { created.next[i] = update[i].next[i]; update[i].next[i] = created }',
+  '      results.push(null)',
+  "    } else if (op === 'search') {",
+  '      results.push(update[0].next[0] !== null && update[0].next[0].val === num)',
+  '    } else {',
+  '      const target = update[0].next[0]',
+  '      if (target === null || target.val !== num) { results.push(false); return }',
+  '      for (let i = 0; i < target.next.length; i++) if (update[i].next[i] === target) update[i].next[i] = target.next[i]',
+  '      while (level > 1 && head.next[level - 1] === null) level--',
+  '      results.push(true)',
+  '    }',
+  '  })',
+  '  return results',
+  '}',
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `class Node:
     def __init__(self, val, level):
         self.val = val
         self.next = [None] * level
 
-class Skiplist:
-    MAX_LEVEL = 16
-
-    def __init__(self):
-        self.head = Node(None, self.MAX_LEVEL)
-        self.level = 1
-        self.inserted = 0
-
-    def _random_level(self):
-        self.inserted += 1
-        level = 1
-        k = self.inserted
-        while k % 2 == 0 and level < self.MAX_LEVEL:
-            level += 1
-            k //= 2
-        return level
-
-    def search(self, target):
-        node = self.head
-        for i in range(self.level - 1, -1, -1):
-            while node.next[i] and node.next[i].val < target:
-                node = node.next[i]
-        node = node.next[0]
-        return node is not None and node.val == target
-
-    def add(self, num):
-        update = [self.head] * self.MAX_LEVEL
-        node = self.head
-        for i in range(self.level - 1, -1, -1):
-            while node.next[i] and node.next[i].val < num:
-                node = node.next[i]
-            update[i] = node
-        lvl = self._random_level()
-        if lvl > self.level:
-            for i in range(self.level, lvl):
-                update[i] = self.head
-            self.level = lvl
-        new = Node(num, lvl)
-        for i in range(lvl):
-            new.next[i] = update[i].next[i]
-            update[i].next[i] = new
-
-    def erase(self, num):
-        update = [self.head] * self.MAX_LEVEL
-        node = self.head
-        for i in range(self.level - 1, -1, -1):
-            while node.next[i] and node.next[i].val < num:
-                node = node.next[i]
-            update[i] = node
-        target = node.next[0]
-        if target is None or target.val != num:
-            return False
-        for i in range(len(target.next)):
-            if update[i].next[i] is target:
-                update[i].next[i] = target.next[i]
-        while self.level > 1 and self.head.next[self.level - 1] is None:
-            self.level -= 1
-        return True
-
-def skiplistOperations(operations, args):
-    sl = Skiplist()
+def skiplist_operations(operations, args):
+    head = Node(None, 16)
+    level = 1
+    inserted = 0
     results = []
-    for op, num in zip(operations, args):
+    for call, op in enumerate(operations):
+        num = args[call]
+        update = [head] * 16
+        node = head
+        for i in range(level - 1, -1, -1):
+            while node.next[i] and node.next[i].val < num:
+                node = node.next[i]
+            update[i] = node
         if op == "add":
-            sl.add(num)
+            inserted += 1
+            lvl = 1
+            k = inserted
+            while k % 2 == 0 and lvl < 16:
+                lvl += 1
+                k //= 2
+            if lvl > level:
+                for i in range(level, lvl):
+                    update[i] = head
+                level = lvl
+            created = Node(num, lvl)
+            for i in range(lvl):
+                created.next[i] = update[i].next[i]
+                update[i].next[i] = created
             results.append(None)
         elif op == "search":
-            results.append(sl.search(num))
-        elif op == "erase":
-            results.append(sl.erase(num))
+            results.append(update[0].next[0] is not None and update[0].next[0].val == num)
+        else:
+            target = update[0].next[0]
+            if target is None or target.val != num:
+                results.append(False)
+                continue
+            for i in range(len(target.next)):
+                if update[i].next[i] is target:
+                    update[i].next[i] = target.next[i]
+            while level > 1 and head.next[level - 1] is None:
+                level -= 1
+            results.append(True)
     return results`
 
-export const pythonLineMap = { 1: 66, 2: 68, 3: 70, 4: 73, 5: 75, 6: 76 }
+export const pythonLineMap = {
+  1: 6, 2: 7, 3: 8, 4: 9, 5: 10, 6: 11, 7: 12, 8: 13, 9: 14, 10: 15, 11: 16, 12: 18, 13: 18,
+  14: 19, 15: 20, 16: 21, 17: 23, 18: 26, 19: 30, 20: 31, 21: 34, 22: 35, 23: 36, 24: 37,
+  25: 38, 26: 40, 27: 43, 28: 45, 29: 47, 30: 47, 31: 48, 32: 48, 33: 48,
+}
 
 export const phases = [
   { id: 'start', label: 'Start', description: 'Create an empty skiplist.' },
-  { id: 'add', label: 'Add', description: 'Insert a value at its sorted position.' },
-  { id: 'search', label: 'Search', description: 'Check whether a value is present.' },
-  { id: 'erase', label: 'Erase', description: 'Remove one copy of a value if present.' },
+  { id: 'add', label: 'Add', description: 'Insert a value. Its height decides how many lanes it joins.' },
+  { id: 'search', label: 'Search', description: 'Walk down from the top lane to find the value.' },
+  { id: 'erase', label: 'Erase', description: 'Unlink one copy of a value if present.' },
   { id: 'done', label: 'Result', description: 'Return the results of every call.' },
 ]
 
 export const inputLabel = 'Calls as JSON with operations and args (e.g. {"operations":["add","search"],"args":[1,1]})'
-export const complexity = 'The real skiplist runs in expected O(log n) per call. The visualization shows the sorted bottom level and accepts up to 40 calls.'
+export const complexity = 'The real skiplist runs in expected O(log n) per call. The visualization draws every lane and accepts up to 40 calls.'
 export const examples = [
   {
     label: 'Add, search, erase',
@@ -124,44 +130,80 @@ export const examples = [
   },
 ]
 
-function lowerBound(list, value) {
-  let lo = 0
-  let hi = list.length
-  while (lo < hi) {
-    const mid = (lo + hi) >> 1
-    if (list[mid] < value) lo = mid + 1
-    else hi = mid
+const LINE = { start: 2, add: 20, search: 23, erase: 27, done: 32 }
+
+function laneSnapshot(head, level, path, target, op) {
+  const levels = []
+  for (let i = 0; i < level; i++) {
+    const row = []
+    for (let node = head.next[i]; node !== null; node = node.next[i]) row.push(node.val)
+    levels.push(row)
   }
-  return lo
+  return { levels, values: levels[0] ?? [], path: path.map(p => ({ ...p })), target, op }
 }
 
 export function buildTrace(input) {
   const { operations, args } = parseInput(input)
-  const values = []
+  const head = { val: null, next: Array(MAX_LEVEL).fill(null) }
+  let level = 1
+  let inserted = 0
   const results = []
   const frames = []
-  const push = (phase, activeLine, message, extra = {}) =>
-    frames.push({ phase, activeLine, message, values: [...values], results: [...results], snapshot: { values: [...values], results: [...results] }, ...extra })
+  const push = (phase, activeLine, message, extra) => {
+    const snapshot = { ...laneSnapshot(head, level, extra.path ?? [], extra.target ?? null, extra.op ?? null), results: [...results] }
+    frames.push({ phase, activeLine, message, values: snapshot.levels[0] ?? [], results: [...results], snapshot, touched: extra.touched ?? -1, call: extra.call ?? null })
+  }
 
-  push('start', 1, 'Start with an empty skiplist. The bottom level is an empty sorted list.')
-  operations.forEach((op, index) => {
-    const num = args[index]
+  push('start', LINE.start, 'Start with an empty skiplist. The bottom lane is an empty sorted list.', { path: [] })
+  operations.forEach((op, call) => {
+    const num = args[call]
+    const update = Array(MAX_LEVEL).fill(head)
+    const path = []
+    let node = head
+    for (let i = level - 1; i >= 0; i--) {
+      while (node.next[i] && node.next[i].val < num) {
+        node = node.next[i]
+        path.push({ val: node.val, lane: i })
+      }
+      update[i] = node
+    }
     if (op === 'add') {
-      const at = lowerBound(values, num)
-      values.splice(at, 0, num)
+      inserted += 1
+      let lvl = 1
+      for (let k = inserted; k % 2 === 0 && lvl < MAX_LEVEL; k /= 2) lvl += 1
+      if (lvl > level) {
+        for (let i = level; i < lvl; i++) update[i] = head
+        level = lvl
+      }
+      const created = { val: num, next: Array(lvl).fill(null) }
+      for (let i = 0; i < lvl; i++) {
+        created.next[i] = update[i].next[i]
+        update[i].next[i] = created
+      }
       results.push(null)
-      push('add', 3, `add(${num}): insert at sorted position ${at}. Duplicates are kept.`, { touched: at, call: index })
+      push('add', LINE.add, `add(${num}): the new node has height ${lvl} and joins lanes 0 to ${lvl - 1}. Duplicates are kept.`, { path, target: num, op, touched: lvl, call })
     } else if (op === 'search') {
-      const at = values.indexOf(num)
-      results.push(at !== -1)
-      push('search', 4, `search(${num}): ${at !== -1 ? 'found' : 'not found'}.`, { touched: at, call: index })
+      const found = update[0].next[0] !== null && update[0].next[0].val === num
+      results.push(found)
+      push('search', LINE.search, `search(${num}): ${found ? 'found' : 'not found'} on the bottom lane.`, { path, target: num, op, call })
     } else {
-      const at = values.indexOf(num)
-      if (at !== -1) values.splice(at, 1)
-      results.push(at !== -1)
-      push('erase', 5, `erase(${num}): ${at !== -1 ? 'removed one copy' : 'not present, so return false'}.`, { touched: at, call: index })
+      const target = update[0].next[0]
+      if (target === null || target.val !== num) {
+        results.push(false)
+        push('erase', LINE.erase, `erase(${num}): not present, so return false.`, { path, target: num, op, call })
+        return
+      }
+      for (let i = 0; i < target.next.length; i++) {
+        if (update[i].next[i] === target) update[i].next[i] = target.next[i]
+      }
+      while (level > 1 && head.next[level - 1] === null) level--
+      results.push(true)
+      push('erase', LINE.erase, `erase(${num}): unlink it from every lane it joined, and return true.`, { path, target: num, op, call })
     }
   })
-  push('done', 6, `Return the ${results.length} results.`, { result: [...results] })
+  frames.push({
+    phase: 'done', activeLine: LINE.done, message: `Return the ${results.length} results.`,
+    values: laneSnapshot(head, level, [], null, null).values, results: [...results], snapshot: { ...laneSnapshot(head, level, [], null, null), results: [...results] }, touched: -1, call: null,
+  })
   return { input: { operations, args }, result: [...results], frames }
 }

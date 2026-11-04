@@ -22,13 +22,18 @@ export function parseInput(text) {
   return data
 }
 
-const codeText = `min_cost(positions):
-  even = 0, odd = 0
-  for each chip position p:
-    if p is even: add 1 to even
-    else: add 1 to odd
-  cost = the smaller of even and odd
-  return cost`
+const codeLines = [
+  "function minCostToMoveChips(position) {",
+  "  let even = 0",
+  "  let odd = 0",
+  "  for (const p of position) {",
+  "    if (p % 2 === 0) even += 1",
+  "    else odd += 1",
+  "  }",
+  "  return Math.min(even, odd)",
+  "}",
+]
+const codeText = codeLines.join('\n')
 const pythonText = `def min_cost(position):
     even = odd = 0
     for p in position:
@@ -48,7 +53,7 @@ export function buildTrace(positions) {
   let even = 0
   let odd = 0
   frames.push({
-    phase: 'count', activeLine: L('even = 0'), pythonLine: P('even = odd = 0'),
+    phase: 'count', activeLine: L('let even = 0'), pythonLine: P('even = odd = 0'),
     message: `There are ${positions.length} chips. Start both parity counts at zero.`,
     snapshot: { even, odd, index: -1 },
   })
@@ -56,7 +61,7 @@ export function buildTrace(positions) {
     if (p % 2 === 0) even += 1
     else odd += 1
     frames.push({
-      phase: 'count', activeLine: L('if p is even'), pythonLine: P('if p % 2 == 0'),
+      phase: 'count', activeLine: L('if (p % 2 === 0)'), pythonLine: P('if p % 2 == 0'),
       message: `Chip at ${p} is ${p % 2 === 0 ? 'even' : 'odd'}, so the ${p % 2 === 0 ? 'even' : 'odd'} count becomes ${p % 2 === 0 ? even : odd}.`,
       snapshot: { even, odd, index, position: p },
     })
@@ -64,12 +69,12 @@ export function buildTrace(positions) {
   const cost = Math.min(even, odd)
   const target = even >= odd ? 'even' : 'odd'
   frames.push({
-    phase: 'choose', activeLine: L('cost = the smaller'), pythonLine: P('return min(even, odd)'),
+    phase: 'choose', activeLine: L('return Math.min'), pythonLine: P('return min(even, odd)'),
     message: `${target === 'even' ? 'Even' : 'Odd'} positions hold the larger group, so gather there. The ${cost} chip${cost === 1 ? '' : 's'} on the other parity pay 1 each.`,
     snapshot: { even, odd, index: positions.length - 1, target, cost },
   })
   frames.push({
-    phase: 'done', activeLine: L('return cost'), pythonLine: P('return min'),
+    phase: 'done', activeLine: L('return Math.min'), pythonLine: P('return min'),
     message: `Minimum cost: ${cost}.`,
     snapshot: { even, odd, index: positions.length - 1, target, cost },
   })

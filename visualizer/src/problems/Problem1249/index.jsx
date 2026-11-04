@@ -15,7 +15,7 @@ function BracketView({ step }) {
       {[...step.text].map((ch, i) => {
         const marked = step.remove.includes(i)
         const current = i === step.position
-        return <span key={i} style={{ padding: '4px 8px', border: `2px solid ${current ? '#0891b2' : 'currentColor'}`, borderRadius: 4, textDecoration: marked ? 'line-through' : 'none', color: marked ? '#dc2626' : 'inherit', opacity: i > step.position && step.position >= 0 ? 0.6 : 1 }}>{ch}</span>
+        return <span key={i} style={{ padding: '4px 8px', border: `2px solid ${current ? 'var(--primary)' : 'currentColor'}`, borderRadius: 4, textDecoration: marked ? 'line-through' : 'none', color: marked ? 'var(--text)' : 'inherit', opacity: i > step.position && step.position >= 0 ? 0.6 : 1 }}>{ch}</span>
       })}
     </div>
     <p>Waiting "(" stack (positions): <code>{step.openers.length ? step.openers.join(', ') : 'empty'}</code></p>
