@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code, PREDICATES } from './algorithm'
+import { buildTrace, parseInput, code, python, PREDICATES } from './algorithm'
 
 const definition = {
   number: '2634',
@@ -11,7 +11,7 @@ const definition = {
     { id: 'skip', label: 'Skip', description: 'The test fails, so the element is dropped.' },
     { id: 'done', label: 'Result', description: 'The kept elements in order.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'JSON object with arr (up to 10 whole numbers) and fn ("aboveIndex", "positive" or "even")',
   url: 'https://leetcode.com/problems/filter-elements-from-array/',
   complexity: 'O(n) time and O(n) space for the kept list.',

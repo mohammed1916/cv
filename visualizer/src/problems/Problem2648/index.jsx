@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { parseInput, buildTrace, code } from './algorithm'
+import { parseInput, buildTrace, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'advance', label: 'Advance', description: 'Shift the pair forward.' },
     { id: 'done', label: 'Done', description: 'No more values are produced.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with count (0 to 15)',
   url: 'https://leetcode.com/problems/generate-fibonacci-sequence/',
   complexity: 'O(count) time and O(1) state. Only the last two values are kept.',

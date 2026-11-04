@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 import GroupView from './GroupView'
 
 const definition = {
@@ -11,7 +11,7 @@ const definition = {
     { id: 'append', label: 'Append', description: 'Add the id to its bucket.' },
     { id: 'done', label: 'Result', description: 'The grouped object.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'JSON object with items (objects with an integer id) and key (the property to group by)',
   url: 'https://leetcode.com/problems/group-by/',
   complexity: 'O(n) time for n items, O(n) extra space for the buckets.',

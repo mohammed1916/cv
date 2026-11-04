@@ -1,3 +1,36 @@
+const CODE = [
+  'function timeLimit(fn, t) {',
+  '  return async function (...args) {',
+  '    const work = fn(...args)',
+  '    const limit = new Promise((_, reject) => setTimeout(() => reject("Time Limit Exceeded"), t))',
+  '    return Promise.race([work, limit])',
+  '  }',
+  '}',
+]
+
+const PY = [
+  'def time_limit(fn, t):',
+  '    async def limited(*args):',
+  '        try:',
+  '            return await asyncio.wait_for(fn(*args), timeout=t / 1000)',
+  '        except asyncio.TimeoutError:',
+  '            raise Exception("Time Limit Exceeded")',
+  '    return limited',
+]
+
+const at = (lines, text) => {
+  const index = lines.findIndex(line => line.trim() === text.trim())
+  if (index < 0) throw new Error(`Missing trace line: ${text}`)
+  return index + 1
+}
+
+export const phases = [
+  { id: 'start', label: 'Start', description: 'Start the task and the limit timer together.' },
+  { id: 'wait', label: 'Wait', description: 'Neither has settled yet.' },
+  { id: 'resolve', label: 'Resolve', description: 'The task wins the race.' },
+  { id: 'reject', label: 'Reject', description: 'The limit wins the race.' },
+]
+
 export function parseInput(text) {
   const input = JSON.parse(text)
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Use an object with delay, limit and value.')
@@ -8,24 +41,22 @@ export function parseInput(text) {
   return { delay, limit, value }
 }
 
-export const code = `race a task against a timer for the limit
-start the task and the limit timer together
-wait while neither has settled
-if the task finishes first, resolve with its value
-otherwise reject with Time Limit Exceeded`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-
 export function buildTrace({ delay, limit, value }) {
   const frames = []
   const end = Math.min(delay, limit)
-  frames.push({ phase: 'start', activeLine: L('start the task'), t: 0, outcome: null, message: 'Start the task and the limit timer together.' })
-  for (let t = 10; t < end; t += 10) frames.push({ phase: 'wait', activeLine: L('wait while'), t, outcome: null, message: `At ${t} ms neither has settled.` })
+  frames.push({ pythonLine: at(PY, 'return await asyncio.wait_for(fn(*args), timeout=t / 1000)'), activeLine: at(CODE, 'const work = fn(...args)'), phase: 'start', t: 0, outcome: null, message: 'Start the task and the limit timer together.' })
+  for (let t = 10; t < end; t += 10) frames.push({ pythonLine: at(PY, 'return await asyncio.wait_for(fn(*args), timeout=t / 1000)'), activeLine: at(CODE, 'return Promise.race([work, limit])'), phase: 'wait', t, outcome: null, message: `At ${t} ms neither has settled.` })
   const ok = delay <= limit
   frames.push({
-    phase: ok ? 'resolve' : 'reject', activeLine: L(ok ? 'resolve with its value' : 'otherwise reject'), t: end,
+    pythonLine: at(PY, ok ? 'return await asyncio.wait_for(fn(*args), timeout=t / 1000)' : 'raise Exception("Time Limit Exceeded")'),
+    activeLine: at(CODE, ok ? 'return Promise.race([work, limit])' : 'const limit = new Promise((_, reject) => setTimeout(() => reject("Time Limit Exceeded"), t))'),
+    phase: ok ? 'resolve' : 'reject', t: end,
     outcome: ok ? 'resolved' : 'rejected',
     message: ok ? `The task finishes at ${delay} ms, before the limit, so it resolves with "${value}".` : `The limit fires at ${limit} ms first, so the promise rejects.`,
   })
   for (const frame of frames) { frame.delay = delay; frame.limit = limit }
   return { input: { delay, limit, value }, result: ok ? value : 'Time Limit Exceeded', frames }
 }
+
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+export const python = PY.join('\n') + '\n'

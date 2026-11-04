@@ -1,12 +1,43 @@
-export const code = [
-  'make a cache keyed by the argument list',
-  'build the key from the arguments',
-  'if the key is in the cache return the stored value',
-  'otherwise call fn and store its value',
-  'return the value',
-].map((text, index) => ({ line: index + 1, text }))
-const at = phrase => code.findIndex(c => c.text.includes(phrase)) + 1
-function step(frames, phase, line, message, view) { frames.push({ phase, activeLine: at(line), message, view }) }
+const CODE = [
+  'function memoize(fn) {',
+  '  const cache = new Map()',
+  '  return function (...args) {',
+  '    const key = JSON.stringify(args)',
+  '    if (cache.has(key)) return cache.get(key)',
+  '    const value = fn(...args)',
+  '    cache.set(key, value)',
+  '    return value',
+  '  }',
+  '}',
+]
+
+const PY = [
+  'def memoize(fn):',
+  '    cache = {}',
+  '    def wrapped(*args):',
+  '        key = tuple(args)',
+  '        if key in cache:',
+  '            return cache[key]',
+  '        value = fn(*args)',
+  '        cache[key] = value',
+  '        return value',
+  '    return wrapped',
+]
+
+const at = (lines, text) => {
+  const index = lines.findIndex(line => line.trim() === text.trim())
+  if (index < 0) throw new Error(`Missing trace line: ${text}`)
+  return index + 1
+}
+
+export const phases = [
+  { id: 'start', label: 'Start', description: 'Create an empty cache.' },
+  { id: 'key', label: 'Key', description: 'Turn the arguments into a key.' },
+  { id: 'hit', label: 'Hit', description: 'Reuse a stored answer.' },
+  { id: 'miss', label: 'Miss', description: 'Run the function and store it.' },
+  { id: 'return', label: 'Return', description: 'Answer this call.' },
+  { id: 'done', label: 'Result', description: 'Totals.' },
+]
 
 export function parseInput(text) {
   const input = JSON.parse(text)
@@ -25,25 +56,28 @@ export function buildTrace({ calls }) {
   const outcomes = []
   let underlying = 0
   const view = (focus) => ({ title: 'Calls', rows: calls.map((args, index) => `call ${index + 1}: fn(${args.join(', ')})`), calls: calls.map(args => args.slice()), outcomes: outcomes.slice(), focus, entries: [...cache.entries()].map(([key, value]) => ({ key, value })), underlying, summary: `underlying calls: ${underlying}` })
-  step(frames, 'start', 'make a cache', 'An empty cache is ready.', view(-1))
+  frames.push({ pythonLine: at(PY, 'cache = {}'), activeLine: at(CODE, 'const cache = new Map()'), phase: 'start', message: 'An empty cache is ready.', view: view(-1) })
   for (let i = 0; i < calls.length; i++) {
     const args = calls[i]
     const key = JSON.stringify(args)
-    step(frames, 'key', 'build the key', `Key for call ${i + 1} is ${key}.`, view(i))
+    frames.push({ pythonLine: at(PY, 'key = tuple(args)'), activeLine: at(CODE, 'const key = JSON.stringify(args)'), phase: 'key', message: `Key for call ${i + 1} is ${key}.`, view: view(i) })
     if (cache.has(key)) {
       values.push(cache.get(key))
       outcomes.push('hit')
-      step(frames, 'hit', 'if the key is in the cache', `Hit: reuse ${cache.get(key)} without calling fn.`, view(i))
+      frames.push({ pythonLine: at(PY, 'if key in cache:'), activeLine: at(CODE, 'if (cache.has(key)) return cache.get(key)'), phase: 'hit', message: `Hit: reuse ${cache.get(key)} without calling fn.`, view: view(i) })
     } else {
       const value = args.reduce((sum, n) => sum + n, 0)
       underlying += 1
       cache.set(key, value)
       values.push(value)
       outcomes.push('miss')
-      step(frames, 'miss', 'otherwise call fn', `Miss: fn runs and stores ${value}.`, view(i))
+      frames.push({ pythonLine: at(PY, 'value = fn(*args)'), activeLine: at(CODE, 'const value = fn(...args)'), phase: 'miss', message: `Miss: fn runs and stores ${value}.`, view: view(i) })
     }
-    step(frames, 'return', 'return the value', `Call ${i + 1} answers ${values[i]}.`, view(i))
+    frames.push({ pythonLine: at(PY, 'return value'), activeLine: at(CODE, 'return value'), phase: 'return', message: `Call ${i + 1} answers ${values[i]}.`, view: view(i) })
   }
-  step(frames, 'done', 'return the value', `Finished with ${underlying} underlying calls.`, view(-1))
+  frames.push({ pythonLine: at(PY, 'return wrapped'), activeLine: at(CODE, '}'), phase: 'done', message: `Finished with ${underlying} underlying calls.`, view: view(-1) })
   return { result: { values, underlyingCalls: underlying }, frames }
 }
+
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+export const python = PY.join('\n') + '\n'

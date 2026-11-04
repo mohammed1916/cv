@@ -1,12 +1,37 @@
-export const code = [
-  'given the starting number n',
-  'keep a variable current set to n',
-  'each call returns current',
-  'then add one to current',
-  'return the list of answers',
-].map((text, index) => ({ line: index + 1, text }))
-const at = phrase => code.findIndex(c => c.text.includes(phrase)) + 1
-function step(frames, phase, line, message, view) { frames.push({ phase, activeLine: at(line), message, view }) }
+const CODE = [
+  'function makeCounter(n) {',
+  '  let current = n',
+  '  return function () {',
+  '    const answer = current',
+  '    current += 1',
+  '    return answer',
+  '  }',
+  '}',
+]
+
+const PY = [
+  'def make_counter(n):',
+  '    current = n',
+  '    def call():',
+  '        nonlocal current',
+  '        answer = current',
+  '        current += 1',
+  '        return answer',
+  '    return call',
+]
+
+const at = (lines, text) => {
+  const index = lines.findIndex(line => line.trim() === text.trim())
+  if (index < 0) throw new Error(`Missing trace line: ${text}`)
+  return index + 1
+}
+
+export const phases = [
+  { id: 'start', label: 'Start', description: 'The closure stores the starting number.' },
+  { id: 'call', label: 'Call', description: 'Each call returns the stored value.' },
+  { id: 'advance', label: 'Advance', description: 'The stored value grows by one for the next call.' },
+  { id: 'done', label: 'Result', description: 'All answers recorded.' },
+]
 
 export function parseInput(text) {
   const input = JSON.parse(text)
@@ -19,14 +44,17 @@ export function buildTrace({ init, calls }) {
   const frames = []
   const answers = []
   let current = init
-  
-  step(frames, 'start', 'keep a variable current', `Counter starts at ${init}.`, { title: 'Counter', rows: [`current ${current}`], answers: [], current, focus: -1, summary: '' })
+  const view = (focus, summary) => ({ title: 'Counter', rows: answers.map((value, index) => `call ${index + 1} returned ${value}`), answers: answers.slice(), current, focus, summary })
+  frames.push({ pythonLine: at(PY, 'current = n'), activeLine: at(CODE, 'let current = n'), phase: 'start', message: `Counter starts at ${init}.`, view: view(-1, '') })
   for (let call = 1; call <= calls; call++) {
     answers.push(current)
-    step(frames, 'call', 'each call returns current', `Call ${call} returns ${current}.`, { title: 'Counter', rows: answers.map((value, index) => `call ${index + 1} returned ${value}`), answers: answers.slice(), current, focus: answers.length - 1, summary: '' })
+    frames.push({ pythonLine: at(PY, 'return answer'), activeLine: at(CODE, 'return answer'), phase: 'call', message: `Call ${call} returns ${current}.`, view: view(answers.length - 1, '') })
     current += 1
-    step(frames, 'advance', 'then add one', `Current moves to ${current}.`, { title: 'Counter', rows: answers.map((value, index) => `call ${index + 1} returned ${value}`), answers: answers.slice(), current, focus: answers.length - 1, summary: `current ${current}` })
+    frames.push({ pythonLine: at(PY, 'current += 1'), activeLine: at(CODE, 'current += 1'), phase: 'advance', message: `Current moves to ${current}.`, view: view(answers.length - 1, `current ${current}`) })
   }
-  step(frames, 'done', 'return the list', 'Answers recorded.', { title: 'Counter', rows: answers.map((value, index) => `call ${index + 1} returned ${value}`), answers: answers.slice(), current, focus: -1, summary: JSON.stringify(answers) })
+  frames.push({ pythonLine: at(PY, 'return call'), activeLine: at(CODE, '}'), phase: 'done', message: 'Answers recorded.', view: view(-1, JSON.stringify(answers)) })
   return { result: answers, frames }
 }
+
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+export const python = PY.join('\n') + '\n'

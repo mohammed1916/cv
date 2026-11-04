@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code, TRANSFORMS } from './algorithm'
+import { buildTrace, parseInput, code, python, TRANSFORMS } from './algorithm'
 
 const definition = {
   number: '2635',
@@ -10,7 +10,7 @@ const definition = {
     { id: 'push', label: 'Push', description: 'Append the mapped value.' },
     { id: 'done', label: 'Result', description: 'The mapped list.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'JSON object with arr (up to 8 whole numbers) and fn ("twicePlusIndex", "square" or "plusIndex")',
   url: 'https://leetcode.com/problems/apply-transform-over-each-element-in-array/',
   complexity: 'O(n) time and O(n) space for the output list.',

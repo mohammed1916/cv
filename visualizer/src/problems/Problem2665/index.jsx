@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { parseInput, buildTrace, code } from './algorithm'
+import { parseInput, buildTrace, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'reset', label: 'Reset', description: 'reset restores the initial value.' },
     { id: 'done', label: 'Done', description: 'All calls have returned.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with init and ops (increment, decrement, reset)',
   url: 'https://leetcode.com/problems/counter-ii/',
   complexity: 'O(1) per call. The closure holds one number.',

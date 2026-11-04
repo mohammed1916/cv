@@ -1,11 +1,38 @@
 export const code = [
-  'start up to limit tasks at time zero',
-  'wait for the earliest running task to finish',
-  'start the next waiting task at that moment',
-  'return the total time once nothing runs or waits',
+  'function poolTotalTime(limit, durations) {',
+  '  let now = 0',
+  '  let next = 0',
+  '  const running = []',
+  '  const start = () => { running.push(now + durations[next]); next++ }',
+  '  while (running.length < limit && next < durations.length) start()',
+  '  while (running.length) {',
+  '    running.sort((a, b) => a - b)',
+  '    now = running.shift()',
+  '    while (running.length < limit && next < durations.length) start()',
+  '  }',
+  '  return now',
+  '}',
 ].map((text, index) => ({ line: index + 1, text }))
+
+export const python = `def pool_total_time(limit, durations):
+    now = 0
+    nxt = 0
+    running = []
+    def start():
+        nonlocal nxt
+        running.append(now + durations[nxt])
+        nxt += 1
+    while len(running) < limit and nxt < len(durations):
+        start()
+    while running:
+        running.sort()
+        now = running.pop(0)
+        while len(running) < limit and nxt < len(durations):
+            start()
+    return now`
+
 const at = phrase => code.findIndex(c => c.text.includes(phrase)) + 1
-function step(frames, phase, line, message, view) { frames.push({ phase, activeLine: at(line), message, view }) }
+const pyAt = phrase => python.split('\n').findIndex(line => line.includes(phrase)) + 1
 
 export function parseInput(text) {
   const input = JSON.parse(text)
@@ -21,28 +48,29 @@ export function buildTrace({ limit, durations }) {
   const running = []
   const bars = [] // every task that has started: its slot in the pool, start and finish times
   const view = (focus) => ({ title: `Running (limit ${limit})`, rows: running.map(t => `task ${t.index} finishes at ${t.finish}`), running: running.map(t => ({ ...t })), bars: bars.map(b => ({ ...b })), limit, now, focus, summary: `time ${now}` })
-  const fill = phrase => {
+  const push = (phase, line, pyLine, message, focus) => frames.push({ phase, activeLine: at(line), pythonLine: pyAt(pyLine), message, view: view(focus) })
+  const fill = (line, pyLine) => {
     while (running.length < limit && next < durations.length) {
       const slot = Math.min(...Array.from({ length: limit }, (_, s) => s).filter(s => !running.some(t => t.slot === s)))
       const task = { index: next, slot, start: now, finish: now + durations[next] }
       running.push(task)
       bars.push({ ...task })
-      step(frames, 'start', phrase, `Task ${next} starts at ${now}, ends at ${now + durations[next]}.`, view(running.length - 1))
+      push('start', line, pyLine, `Task ${next} starts at ${now}, ends at ${now + durations[next]}.`, running.length - 1)
       next += 1
     }
   }
   if (durations.length === 0) {
-    step(frames, 'done', 'return the total time', 'No tasks, so the total time is 0.', view(-1))
+    push('done', 'return now', 'return now', 'No tasks, so the total time is 0.', -1)
     return { result: 0, frames, input: { limit, durations } }
   }
-  fill('start up to limit')
+  fill('while (running.length < limit && next < durations.length) start()', 'while len(running) < limit')
   while (running.length) {
     running.sort((a, b) => a.finish - b.finish || a.index - b.index)
     const done = running.shift()
     now = done.finish
-    step(frames, 'finish', 'wait for the earliest', `Task ${done.index} finishes at ${now}.`, view(-1))
-    fill('start the next waiting task')
+    push('finish', 'now = running.shift()', 'now = running.pop(0)', `Task ${done.index} finishes at ${now}.`, -1)
+    fill('now = running.shift()', 'running.pop(0)')
   }
-  step(frames, 'done', 'return the total time', `All tasks are done at ${now}.`, { ...view(-1), title: 'Result', rows: [String(now)], focus: 0, summary: `total ${now}` })
+  frames.push({ phase: 'done', activeLine: at('return now'), pythonLine: pyAt('return now'), message: `All tasks are done at ${now}.`, view: { ...view(-1), title: 'Result', rows: [String(now)], focus: 0, summary: `total ${now}` } })
   return { result: now, frames, input: { limit, durations } }
 }

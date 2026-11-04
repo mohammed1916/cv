@@ -1,12 +1,37 @@
-export const code = [
-  'given an object and a class C',
-  'if the value is a primitive otherwise answer false',
-  'walk up the prototype chain one class at a time',
-  'if a prototype is C.prototype then answer true',
-  'if the chain ends without a match otherwise answer false',
-].map((text, index) => ({ line: index + 1, text }))
-const at = phrase => code.findIndex(c => c.text.includes(phrase)) + 1
-function step(frames, phase, line, message, view) { frames.push({ phase, activeLine: at(line), message, view }) }
+const CODE = [
+  'function isInstanceOf(obj, classFunction) {',
+  '  if (obj === null || (typeof obj !== "object" && typeof obj !== "function")) return false',
+  '  let proto = Object.getPrototypeOf(obj)',
+  '  while (proto !== null) {',
+  '    if (proto === classFunction.prototype) return true',
+  '    proto = Object.getPrototypeOf(proto)',
+  '  }',
+  '  return false',
+  '}',
+]
+
+const PY = [
+  'def is_instance_of(obj, cls):',
+  '    if obj is None or isinstance(obj, (int, float, str, bool)):',
+  '        return False',
+  '    for klass in type(obj).__mro__:',
+  '        if klass is cls:',
+  '            return True',
+  '    return False',
+]
+
+const at = (lines, text) => {
+  const index = lines.findIndex(line => line.trim() === text.trim())
+  if (index < 0) throw new Error(`Missing trace line: ${text}`)
+  return index + 1
+}
+
+export const phases = [
+  { id: 'check', label: 'Primitive check', description: 'Primitives have no prototype chain, so they are rejected first.' },
+  { id: 'walk', label: 'Walk chain', description: 'Compare each prototype, nearest first, with the class prototype.' },
+  { id: 'found', label: 'Match', description: 'A prototype is the class prototype.' },
+  { id: 'done', label: 'Result', description: 'Report the answer.' },
+]
 
 export function parseInput(text) {
   const input = JSON.parse(text)
@@ -20,21 +45,26 @@ export function parseInput(text) {
 
 export function buildTrace({ chain, target, primitive }) {
   const frames = []
-  const view = (title, focus, summary) => ({ title, rows: primitive ? ['primitive value'] : chain.slice(), chain: chain.slice(), target, primitive, focus, summary })
+  const view = (focus, summary) => ({ title: 'Prototype chain', rows: primitive ? ['primitive value'] : chain.slice(), chain: chain.slice(), target, primitive, focus, summary })
   if (primitive) {
-    step(frames, 'check', 'if the value is a primitive', 'A primitive is never an instance.', view('Value', -1, 'false'))
-    step(frames, 'done', 'otherwise answer false', 'Result: false.', view('Result', -1, 'false'))
+    frames.push({ pythonLine: at(PY, 'return False'), activeLine: at(CODE, 'if (obj === null || (typeof obj !== "object" && typeof obj !== "function")) return false'), phase: 'check', message: 'A primitive is never an instance.', view: view(-1, 'false') })
+    frames.push({ pythonLine: at(PY, 'return False'), activeLine: at(CODE, 'return false'), phase: 'done', message: 'Result: false.', view: view(-1, 'false') })
     return { result: false, frames }
   }
   let result = false
+  frames.push({ pythonLine: at(PY, 'for klass in type(obj).__mro__:'), activeLine: at(CODE, 'let proto = Object.getPrototypeOf(obj)'), phase: 'walk', message: `Start at the nearest prototype, ${chain[0] ?? 'none'}.`, view: view(0, '') })
   for (let i = 0; i < chain.length && !result; i++) {
-    step(frames, 'walk', 'walk up the prototype', `Compare ${chain[i]} with ${target}.`, view('Prototype chain', i, ''))
+    if (i > 0) frames.push({ pythonLine: at(PY, 'for klass in type(obj).__mro__:'), activeLine: at(CODE, 'proto = Object.getPrototypeOf(proto)'), phase: 'walk', message: `Move up to ${chain[i]}.`, view: view(i, '') })
+    frames.push({ pythonLine: at(PY, 'if klass is cls:'), activeLine: at(CODE, 'if (proto === classFunction.prototype) return true'), phase: 'walk', message: `Compare ${chain[i]} with ${target}.`, view: view(i, '') })
     if (chain[i] === target) {
       result = true
-      step(frames, 'found', 'if a prototype is', `${chain[i]} matches ${target}.`, view('Prototype chain', i, 'true'))
+      frames.push({ pythonLine: at(PY, 'return True'), activeLine: at(CODE, 'if (proto === classFunction.prototype) return true'), phase: 'found', message: `${chain[i]} matches ${target}.`, view: view(i, 'true') })
     }
   }
-  if (!result) step(frames, 'done', 'if the chain ends', 'The chain ends without a match.', view('Prototype chain', -1, 'false'))
-  else step(frames, 'done', 'if a prototype is', 'Result: true.', view('Prototype chain', -1, 'true'))
+  if (!result) frames.push({ pythonLine: at(PY, 'return False'), activeLine: at(CODE, 'return false'), phase: 'done', message: 'The chain ends without a match.', view: view(-1, 'false') })
+  else frames.push({ pythonLine: at(PY, 'return True'), activeLine: at(CODE, 'if (proto === classFunction.prototype) return true'), phase: 'done', message: 'Result: true.', view: view(-1, 'true') })
   return { result, frames }
 }
+
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+export const python = PY.join('\n') + '\n'

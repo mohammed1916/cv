@@ -1,12 +1,32 @@
-export const code = [
-  'set the accumulator to init',
-  'for each number in nums in order',
-  'the reducer combines the accumulator with the number',
-  'the accumulator takes the reducer result',
-  'return the accumulator',
-].map((text, index) => ({ line: index + 1, text }))
-const at = phrase => code.findIndex(c => c.text.includes(phrase)) + 1
-function step(frames, phase, line, message, view) { frames.push({ phase, activeLine: at(line), message, view }) }
+const CODE = [
+  'function reduce(nums, fn, init) {',
+  '  let accum = init',
+  '  for (let i = 0; i < nums.length; i++) {',
+  '    accum = fn(accum, nums[i])',
+  '  }',
+  '  return accum',
+  '}',
+]
+
+const PY = [
+  'def reduce_nums(nums, fn, init):',
+  '    accum = init',
+  '    for curr in nums:',
+  '        accum = fn(accum, curr)',
+  '    return accum',
+]
+
+const at = (lines, text) => {
+  const index = lines.findIndex(line => line.trim() === text.trim())
+  if (index < 0) throw new Error(`Missing trace line: ${text}`)
+  return index + 1
+}
+
+export const phases = [
+  { id: 'start', label: 'Start', description: 'Set the accumulator to init.' },
+  { id: 'step', label: 'Combine', description: 'Combine the accumulator with one element.' },
+  { id: 'done', label: 'Result', description: 'The final accumulator.' },
+]
 
 // Reducers the visualization offers. Each takes (accumulator, element) and returns the next accumulator.
 export const REDUCERS = {
@@ -28,13 +48,16 @@ export function buildTrace({ nums, init, fn = 'sum' }) {
   const frames = []
   let acc = init
   const view = (focus, extra = {}) => ({ title: 'Accumulator', rows: nums.map(n => String(n)), nums: nums.slice(), focus, accum: acc, formula: reducer.label, done: [], ...extra })
-  step(frames, 'start', 'set the accumulator', `Accumulator starts at ${acc}.`, view(-1))
+  frames.push({ pythonLine: at(PY, 'accum = init'), activeLine: at(CODE, 'let accum = init'), phase: 'start', message: `Accumulator starts at ${acc}.`, view: view(-1) })
   for (let i = 0; i < nums.length; i++) {
     const before = acc
-    step(frames, 'step', 'for each number', `Element ${nums[i]} at index ${i}.`, view(i, { before }))
+    frames.push({ pythonLine: at(PY, 'for curr in nums:'), activeLine: at(CODE, 'for (let i = 0; i < nums.length; i++) {'), phase: 'step', message: `Element ${nums[i]} at index ${i}.`, view: view(i, { before }) })
     acc = reducer.apply(acc, nums[i])
-    step(frames, 'step', 'the accumulator takes', `${before} combined with ${nums[i]} gives ${acc}.`, view(i, { before, after: acc }))
+    frames.push({ pythonLine: at(PY, 'accum = fn(accum, curr)'), activeLine: at(CODE, 'accum = fn(accum, nums[i])'), phase: 'step', message: `${before} combined with ${nums[i]} gives ${acc}.`, view: view(i, { before, after: acc }) })
   }
-  step(frames, 'done', 'return the accumulator', `Result ${acc}.`, view(-1, { done: true }))
+  frames.push({ pythonLine: at(PY, 'return accum'), activeLine: at(CODE, 'return accum'), phase: 'done', message: `Result ${acc}.`, view: view(-1, { done: true }) })
   return { result: acc, frames, input: { nums, init, fn } }
 }
+
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+export const python = PY.join('\n') + '\n'

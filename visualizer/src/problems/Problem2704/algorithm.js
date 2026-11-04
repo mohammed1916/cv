@@ -1,3 +1,36 @@
+export const code = [
+  'function expect(value) {',
+  '  return {',
+  '    toBe(expected) {',
+  '      if (value !== expected) throw new Error("Not Equal")',
+  '      return true',
+  '    },',
+  '    notToBe(expected) {',
+  '      if (value === expected) throw new Error("Equal")',
+  '      return true',
+  '    },',
+  '  }',
+  '}',
+].map((text, index) => ({ line: index + 1, text }))
+
+export const python = `def same(a, b):
+    return type(a) is type(b) and a == b
+
+class Expect:
+    def __init__(self, value):
+        self.value = value
+    def to_be(self, expected):
+        if not same(self.value, expected):
+            raise AssertionError("Not Equal")
+        return True
+    def not_to_be(self, expected):
+        if same(self.value, expected):
+            raise AssertionError("Equal")
+        return True`
+
+const at = phrase => code.findIndex(c => c.text.includes(phrase)) + 1
+const pyAt = phrase => python.split('\n').findIndex(line => line.includes(phrase)) + 1
+
 export function parseInput(text) {
   const input = JSON.parse(text)
   if (!input || typeof input !== 'object' || !('value' in input) || !Array.isArray(input.checks) || input.checks.length > 8) {
@@ -12,26 +45,24 @@ export function parseInput(text) {
   return { value: input.value, checks: input.checks }
 }
 
-export const code = `expect(value) returns an object with toBe and notToBe
-toBe(expected) throws Not Equal when value is not strictly equal to expected
-notToBe(expected) throws Equal when value is strictly equal to expected
-otherwise the check returns true`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-
 export function buildTrace({ value, checks }) {
   const frames = []
   const results = []
-  frames.push({ phase: 'start', activeLine: L('expect(value)'), value, results: [], message: `expect(${JSON.stringify(value)}) returns the checker.` })
+  frames.push({ phase: 'start', activeLine: at('function expect(value)'), pythonLine: pyAt('class Expect:'), value, results: [], message: `expect(${JSON.stringify(value)}) returns the checker.` })
   for (const [method, expected] of checks) {
     const same = value === expected
     const pass = method === 'toBe' ? same : !same
     const label = `${method}(${JSON.stringify(expected)})`
     results.push({ label, pass: pass ? 'true' : 'throws' })
     frames.push({
-      phase: 'check', activeLine: L(method === 'toBe' ? 'toBe(expected)' : 'notToBe(expected)'), value, results: [...results],
+      phase: 'check',
+      activeLine: at(method === 'toBe' ? 'toBe(expected) {' : 'notToBe(expected) {'),
+      pythonLine: pyAt(method === 'toBe' ? 'def to_be' : 'def not_to_be'),
+      value,
+      results: [...results],
       message: pass ? `${label} passes and returns true.` : `${label} throws ${method === 'toBe' ? 'Not Equal' : 'Equal'}.`,
     })
   }
-  frames.push({ phase: 'done', activeLine: L('otherwise the check'), value, results: [...results], message: 'All checks were evaluated.' })
+  frames.push({ phase: 'done', activeLine: at('return true'), pythonLine: pyAt('return True'), value, results: [...results], message: 'All checks were evaluated.' })
   return { input: { value, checks }, result: results.map(r => r.pass), frames }
 }

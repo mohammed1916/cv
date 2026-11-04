@@ -1,12 +1,39 @@
-export const code = [
-  'create an empty result object',
-  'for each item compute its key from the key property',
-  'if the group is new create an empty list for it',
-  'append the whole item to its group list',
-  'return the result object',
-].map((text, index) => ({ line: index + 1, text }))
-const at = phrase => code.findIndex(c => c.text.includes(phrase)) + 1
-function step(frames, phase, line, message, view) { frames.push({ phase, activeLine: at(line), message, view }) }
+const CODE = [
+  'function groupBy(items, key) {',
+  '  const groups = {}',
+  '  for (const item of items) {',
+  '    const name = item[key]',
+  '    if (!(name in groups)) groups[name] = []',
+  '    groups[name].push(item)',
+  '  }',
+  '  return groups',
+  '}',
+]
+
+const PY = [
+  'def group_by(items, key):',
+  '    groups = {}',
+  '    for item in items:',
+  '        name = item[key]',
+  '        if name not in groups:',
+  '            groups[name] = []',
+  '        groups[name].append(item)',
+  '    return groups',
+]
+
+const at = (lines, text) => {
+  const index = lines.findIndex(line => line.trim() === text.trim())
+  if (index < 0) throw new Error(`Missing trace line: ${text}`)
+  return index + 1
+}
+
+export const phases = [
+  { id: 'start', label: 'Start', description: 'Empty result.' },
+  { id: 'read', label: 'Read key', description: 'Read one item key value.' },
+  { id: 'new', label: 'New group', description: 'Create a bucket when needed.' },
+  { id: 'append', label: 'Append', description: 'Add the id to its bucket.' },
+  { id: 'done', label: 'Result', description: 'The grouped object.' },
+]
 
 export function parseInput(text) {
   const input = JSON.parse(text)
@@ -24,17 +51,20 @@ export function buildTrace({ items, key }) {
   const groups = {}
   const snapshot = () => Object.keys(groups).map(name => ({ name, items: groups[name].map(item => item.id) }))
   const view = (focus, extra = {}) => ({ title: 'Groups', items: items.map(item => ({ id: item.id, key: item[key] })), focus, groups: snapshot(), ...extra })
-  step(frames, 'start', 'create an empty result', 'Result object is empty.', view(-1))
+  frames.push({ pythonLine: at(PY, 'groups = {}'), activeLine: at(CODE, 'const groups = {}'), phase: 'start', message: 'Result object is empty.', view: view(-1) })
   items.forEach((item, index) => {
     const name = item[key]
-    step(frames, 'read', 'for each item compute its key', `Item ${item.id} has ${key} ${name}.`, view(index, { keyName: name }))
+    frames.push({ pythonLine: at(PY, 'name = item[key]'), activeLine: at(CODE, 'const name = item[key]'), phase: 'read', message: `Item ${item.id} has ${key} ${name}.`, view: view(index, { keyName: name }) })
     if (!(name in groups)) {
       groups[name] = []
-      step(frames, 'new', 'if the group is new', `New group ${name}.`, view(index, { keyName: name }))
+      frames.push({ pythonLine: at(PY, 'groups[name] = []'), activeLine: at(CODE, 'if (!(name in groups)) groups[name] = []'), phase: 'new', message: `New group ${name}.`, view: view(index, { keyName: name }) })
     }
     groups[name].push(item)
-    step(frames, 'append', 'append the whole item', `Item ${item.id} joins ${name}.`, view(index, { keyName: name }))
+    frames.push({ pythonLine: at(PY, 'groups[name].append(item)'), activeLine: at(CODE, 'groups[name].push(item)'), phase: 'append', message: `Item ${item.id} joins ${name}.`, view: view(index, { keyName: name }) })
   })
-  step(frames, 'done', 'return the result object', 'Grouping complete.', view(-1))
+  frames.push({ pythonLine: at(PY, 'return groups'), activeLine: at(CODE, 'return groups'), phase: 'done', message: 'Grouping complete.', view: view(-1) })
   return { result: groups, frames }
 }
+
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+export const python = PY.join('\n') + '\n'

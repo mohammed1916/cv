@@ -1,11 +1,37 @@
-export const code = [
-  'keep a list of collected arguments',
-  'for each call add the arguments of this call',
-  'if fewer than arity collected return a function to keep waiting',
-  'otherwise call fn with all collected arguments and return its value',
-].map((text, index) => ({ line: index + 1, text }))
-const at = phrase => code.findIndex(c => c.text.includes(phrase)) + 1
-function step(frames, phase, line, message, view) { frames.push({ phase, activeLine: at(line), message, view }) }
+const CODE = [
+  'function curry(fn, arity) {',
+  '  const collected = []',
+  '  return function step(...args) {',
+  '    collected.push(...args)',
+  '    if (collected.length < arity) return step',
+  '    return fn(...collected)',
+  '  }',
+  '}',
+]
+
+const PY = [
+  'def curry(fn, arity):',
+  '    collected = []',
+  '    def step(*args):',
+  '        collected.extend(args)',
+  '        if len(collected) < arity:',
+  '            return step',
+  '        return fn(*collected)',
+  '    return step',
+]
+
+const at = (lines, text) => {
+  const index = lines.findIndex(line => line.trim() === text.trim())
+  if (index < 0) throw new Error(`Missing trace line: ${text}`)
+  return index + 1
+}
+
+export const phases = [
+  { id: 'collect', label: 'Collect', description: 'Add this call arguments to the list.' },
+  { id: 'wait', label: 'Wait', description: 'Not enough arguments yet.' },
+  { id: 'fire', label: 'Fire', description: 'Enough arguments, so fn runs.' },
+  { id: 'done', label: 'Result', description: 'Final outcome.' },
+]
 
 export function parseInput(text) {
   const input = JSON.parse(text)
@@ -25,15 +51,19 @@ export function buildTrace({ arity, calls }) {
   for (let i = 0; i < calls.length && result === null; i++) {
     collected.push(...calls[i])
     const view = (focus, summary) => ({ title: `Collected ${collected.length} of ${arity}`, rows: calls.map((args, index) => `call ${index + 1}: [${args.join(', ')}]`), calls: calls.map(args => args.slice()), collected: collected.slice(), arity, focus, summary })
-    step(frames, 'collect', 'for each call add', `Collected: [${collected.join(', ')}].`, view(i, ''))
+    frames.push({ pythonLine: at(PY, 'collected.extend(args)'), activeLine: at(CODE, 'collected.push(...args)'), phase: 'collect', message: `Collected: [${collected.join(', ')}].`, view: view(i, '') })
     if (collected.length < arity) {
-      step(frames, 'wait', 'if fewer than arity', `${collected.length} of ${arity} arguments, so a function is returned to keep waiting.`, view(i, ''))
+      frames.push({ pythonLine: at(PY, 'return step'), activeLine: at(CODE, 'if (collected.length < arity) return step'), phase: 'wait', message: `${collected.length} of ${arity} arguments, so a function is returned to keep waiting.`, view: view(i, '') })
     } else {
       result = collected.reduce((sum, n) => sum + n, 0)
-      step(frames, 'fire', 'otherwise call fn', `Enough arguments, so fn runs and returns ${result}.`, view(i, String(result)))
+      frames.push({ pythonLine: at(PY, 'return fn(*collected)'), activeLine: at(CODE, 'return fn(...collected)'), phase: 'fire', message: `Enough arguments, so fn runs and returns ${result}.`, view: view(i, String(result)) })
     }
   }
-  if (result === null) step(frames, 'done', 'if fewer than arity', 'Calls ran out before enough arguments arrived.', { title: `Collected ${collected.length} of ${arity}`, rows: calls.map((args, index) => `call ${index + 1}: [${args.join(', ')}]`), calls: calls.map(args => args.slice()), collected: collected.slice(), arity, focus: -1, summary: 'pending' })
-  else step(frames, 'done', 'otherwise call fn', `Final value ${result}.`, { title: 'Result', rows: [String(result)], calls: calls.map(args => args.slice()), collected: collected.slice(), arity, focus: 0, summary: String(result) })
+  const rows = calls.map((args, index) => `call ${index + 1}: [${args.join(', ')}]`)
+  if (result === null) frames.push({ pythonLine: at(PY, 'return step'), activeLine: at(CODE, 'if (collected.length < arity) return step'), phase: 'done', message: 'Calls ran out before enough arguments arrived.', view: { title: `Collected ${collected.length} of ${arity}`, rows, calls: calls.map(args => args.slice()), collected: collected.slice(), arity, focus: -1, summary: 'pending' } })
+  else frames.push({ pythonLine: at(PY, 'return fn(*collected)'), activeLine: at(CODE, 'return fn(...collected)'), phase: 'done', message: `Final value ${result}.`, view: { title: 'Result', rows: [String(result)], calls: calls.map(args => args.slice()), collected: collected.slice(), arity, focus: 0, summary: String(result) } })
   return { result, frames }
 }
+
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+export const python = PY.join('\n') + '\n'

@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 import DebounceView from './DebounceView'
 
 const definition = {
@@ -10,7 +10,7 @@ const definition = {
     { id: 'run', label: 'Schedule', description: 'This call is the last of its burst.' },
     { id: 'done', label: 'Result', description: 'Run times.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'JSON object with wait (milliseconds) and calls (sorted call times)',
   url: 'https://leetcode.com/problems/debounce/',
   complexity: 'O(k) time for k calls, O(k) space for the run list.',

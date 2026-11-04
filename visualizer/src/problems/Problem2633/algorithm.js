@@ -1,14 +1,42 @@
-export const code = [
-  'if value is an array write each item in brackets',
-  'if value is an object write each key and value in braces',
-  'if value is a string write it in quotes',
-  'otherwise write the number boolean or null',
-  'return the joined text',
-].map((text, index) => ({ line: index + 1, text }))
-const at = phrase => code.findIndex(c => c.text.includes(phrase)) + 1
-function step(frames, phase, line, message, view) { frames.push({ phase, activeLine: at(line), message, view }) }
+const CODE = [
+  'function jsonStringify(value) {',
+  '  if (Array.isArray(value)) return `[${value.map(jsonStringify).join(",")}]`',
+  '  if (value !== null && typeof value === "object") {',
+  '    return `{${Object.keys(value).map(key => `"${key}":${jsonStringify(value[key])}`).join(",")}}`',
+  '  }',
+  '  if (typeof value === "string") return `"${value}"`',
+  '  return String(value)',
+  '}',
+]
 
-function check(value, depth) {
+const PY = [
+  'def json_stringify(value):',
+  '    if isinstance(value, list):',
+  '        return "[" + ",".join(json_stringify(item) for item in value) + "]"',
+  '    if isinstance(value, dict):',
+  '        return "{" + ",".join(f\'"{key}":\' + json_stringify(item) for key, item in value.items()) + "}"',
+  '    if isinstance(value, str):',
+  '        return f\'"{value}"\'',
+  '    if value is None:',
+  '        return "null"',
+  '    return "true" if value is True else "false" if value is False else str(value)',
+]
+
+const at = (lines, text) => {
+  const index = lines.findIndex(line => line.trim() === text.trim())
+  if (index < 0) throw new Error(`Missing trace line: ${text}`)
+  return index + 1
+}
+
+export const phases = [
+  { id: 'array', label: 'Array', description: 'Write items inside brackets.' },
+  { id: 'object', label: 'Object', description: 'Write key and value pairs inside braces.' },
+  { id: 'string', label: 'String', description: 'Wrap the text in quotes.' },
+  { id: 'leaf', label: 'Leaf', description: 'Write a number, boolean or null.' },
+  { id: 'done', label: 'Result', description: 'The joined text.' },
+]
+
+const check = (value, depth) => {
   if (depth > 3) throw new Error('Nesting is at most 3 levels deep.')
   if (value === null || typeof value === 'boolean') return
   if (typeof value === 'number') { if (!Number.isInteger(value)) throw new Error('Numbers are whole numbers.'); return }
@@ -39,22 +67,25 @@ export function buildTrace({ value }) {
       out.push('[')
       node.forEach((item, i) => { if (i) out.push(','); write(item, depth + 1) })
       out.push(']')
-      step(frames, 'array', 'if value is an array', `Closed an array of ${node.length} items.`, view('array', depth))
+      frames.push({ pythonLine: at(PY, 'if isinstance(value, list):'), activeLine: at(CODE, 'if (Array.isArray(value)) return `[${value.map(jsonStringify).join(",")}]`'), phase: 'array', message: `Closed an array of ${node.length} items.`, view: view('array', depth) })
     } else if (node !== null && typeof node === 'object') {
       out.push('{')
       Object.keys(node).forEach((key, i) => { if (i) out.push(','); out.push(`"${key}":`); write(node[key], depth + 1) })
       out.push('}')
-      step(frames, 'object', 'if value is an object', `Closed an object with ${Object.keys(node).length} keys.`, view('object', depth))
+      frames.push({ pythonLine: at(PY, 'if isinstance(value, dict):'), activeLine: at(CODE, 'if (value !== null && typeof value === "object") {'), phase: 'object', message: `Closed an object with ${Object.keys(node).length} keys.`, view: view('object', depth) })
     } else if (typeof node === 'string') {
       out.push(`"${node}"`)
-      step(frames, 'string', 'if value is a string', `Wrote the string "${node}".`, view('string', depth))
+      frames.push({ pythonLine: at(PY, 'if isinstance(value, str):'), activeLine: at(CODE, 'if (typeof value === "string") return `"${value}"`'), phase: 'string', message: `Wrote the string "${node}".`, view: view('string', depth) })
     } else {
       out.push(String(node))
-      step(frames, 'leaf', 'otherwise write', `Wrote ${String(node)}.`, view('leaf', depth))
+      frames.push({ pythonLine: at(PY, 'return "true" if value is True else "false" if value is False else str(value)'), activeLine: at(CODE, 'return String(value)'), phase: 'leaf', message: `Wrote ${String(node)}.`, view: view('leaf', depth) })
     }
   }
   write(value)
   const result = out.join('')
-  step(frames, 'done', 'return the joined text', 'Finished.', { title: 'Output', text: result, kind: 'done', depth: 0, summary: result })
+  frames.push({ pythonLine: at(PY, 'return "true" if value is True else "false" if value is False else str(value)'), activeLine: at(CODE, '}'), phase: 'done', message: 'Finished.', view: { title: 'Output', text: result, kind: 'done', depth: 0, summary: result } })
   return { result, frames }
 }
+
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+export const python = PY.join('\n') + '\n'

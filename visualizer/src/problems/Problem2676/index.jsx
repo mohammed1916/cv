@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { parseInput, buildTrace, code } from './algorithm'
+import { parseInput, buildTrace, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'queue', label: 'Queue', description: 'The call waits for the window to end.' },
     { id: 'done', label: 'Done', description: 'Every queued call has run.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with wait (ms) and calls (sorted list of call times in ms)',
   url: 'https://leetcode.com/problems/throttle/',
   complexity: 'O(calls) time. The model stores one pending call, the latest one.',

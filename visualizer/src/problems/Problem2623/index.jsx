@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 import MemoView from './MemoView'
 
 const definition = {
@@ -12,7 +12,7 @@ const definition = {
     { id: 'return', label: 'Return', description: 'Answer this call.' },
     { id: 'done', label: 'Result', description: 'Totals.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'JSON object with calls: a list of argument lists (up to 3 whole numbers each)',
   url: 'https://leetcode.com/problems/memoize/',
   complexity: 'O(total argument size) per call to build keys; each distinct argument list runs fn once.',

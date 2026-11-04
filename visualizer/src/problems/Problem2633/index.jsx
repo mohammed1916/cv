@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 import JsonView from './JsonView'
 
 const definition = {
@@ -11,7 +11,7 @@ const definition = {
     { id: 'leaf', label: 'Leaf', description: 'Write a number, boolean or null.' },
     { id: 'done', label: 'Result', description: 'The joined text.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'JSON object with a value field (nested arrays and objects allowed, at most 3 levels)',
   url: 'https://leetcode.com/problems/convert-object-to-json-string/',
   complexity: 'O(size of the value) time and O(size) space for the output pieces.',

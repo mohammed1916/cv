@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import FoldView from './FoldView'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   number: '2626',
@@ -9,7 +9,7 @@ const definition = {
     { id: 'step', label: 'Combine', description: 'Combine the accumulator with one element.' },
     { id: 'done', label: 'Result', description: 'The final accumulator.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'JSON object with nums (up to 8 whole numbers), init, and fn ("sum" or "squareSum")',
   url: 'https://leetcode.com/problems/array-reduce-transformation/',
   complexity: 'O(n) time and O(1) extra space for n elements.',

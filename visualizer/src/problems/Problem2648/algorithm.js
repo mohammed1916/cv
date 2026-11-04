@@ -1,3 +1,35 @@
+const CODE = [
+  'function* fibonacci(count) {',
+  '  let a = 0',
+  '  let b = 1',
+  '  for (let i = 0; i < count; i++) {',
+  '    yield a',
+  '    ;[a, b] = [b, a + b]',
+  '  }',
+  '}',
+]
+
+const PY = [
+  'def fibonacci(count):',
+  '    a, b = 0, 1',
+  '    for _ in range(count):',
+  '        yield a',
+  '        a, b = b, a + b',
+]
+
+const at = (lines, text) => {
+  const index = lines.findIndex(line => line.trim() === text.trim())
+  if (index < 0) throw new Error(`Missing trace line: ${text}`)
+  return index + 1
+}
+
+export const phases = [
+  { id: 'init', label: 'Start', description: 'Set the first two state values.' },
+  { id: 'yield', label: 'Yield', description: 'Hand the current value to the caller.' },
+  { id: 'advance', label: 'Advance', description: 'Shift the pair forward.' },
+  { id: 'done', label: 'Done', description: 'No more values are produced.' },
+]
+
 export function parseInput(text) {
   const input = JSON.parse(text)
   if (!input || typeof input !== 'object' || !Number.isInteger(input.count) || input.count < 0 || input.count > 15) {
@@ -6,25 +38,21 @@ export function parseInput(text) {
   return { count: input.count }
 }
 
-export const code = `generate the first count Fibonacci numbers
-set a to 0 and b to 1
-repeat count times
-  yield a
-  move a and b forward so that b becomes a plus b`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-
 export function buildTrace({ count }) {
   const frames = []
   let a = 0
   let b = 1
   const yielded = []
-  frames.push({ phase: 'init', activeLine: L('set a to 0'), a, b, yielded: [], message: 'Start with a = 0 and b = 1.' })
+  frames.push({ pythonLine: at(PY, 'a, b = 0, 1'), activeLine: at(CODE, 'let a = 0'), phase: 'init', a, b, yielded: [], message: 'Start with a = 0 and b = 1.' })
   for (let i = 0; i < count; i++) {
     yielded.push(a)
-    frames.push({ phase: 'yield', activeLine: L('yield a'), a, b, yielded: [...yielded], message: `Yield ${a}.` })
+    frames.push({ pythonLine: at(PY, 'yield a'), activeLine: at(CODE, 'yield a'), phase: 'yield', a, b, yielded: [...yielded], message: `Yield ${a}.` })
     ;[a, b] = [b, a + b]
-    frames.push({ phase: 'advance', activeLine: L('move a and b'), a, b, yielded: [...yielded], message: `Now a = ${a} and b = ${b}.` })
+    frames.push({ pythonLine: at(PY, 'a, b = b, a + b'), activeLine: at(CODE, ';[a, b] = [b, a + b]'), phase: 'advance', a, b, yielded: [...yielded], message: `Now a = ${a} and b = ${b}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('repeat count times'), a, b, yielded: [...yielded], message: 'The generator is exhausted.' })
+  frames.push({ pythonLine: at(PY, 'for _ in range(count):'), activeLine: at(CODE, '}'), phase: 'done', a, b, yielded: [...yielded], message: 'The generator is exhausted.' })
   return { input: { count }, result: yielded, frames }
 }
+
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+export const python = PY.join('\n') + '\n'

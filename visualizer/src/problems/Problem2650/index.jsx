@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { parseInput, buildTrace, code } from './algorithm'
+import { parseInput, buildTrace, code, python } from './algorithm'
 import JobView from './JobView'
 
 const definition = {
@@ -9,7 +9,7 @@ const definition = {
     { id: 'cancel', label: 'Cancel', description: 'The next step would finish too late.' },
     { id: 'done', label: 'Result', description: 'Report the outcome.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with steps (durations in ms) and cancelAt',
   url: 'https://leetcode.com/problems/design-cancellable-function/',
   complexity: 'O(steps) time. The visualization models timing only, not the user callback.',

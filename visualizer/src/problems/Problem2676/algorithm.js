@@ -1,3 +1,44 @@
+export const code = [
+  'function throttleRuns(wait, calls) {',
+  '  const runs = []',
+  '  let lastRun = -Infinity',
+  '  let pendingAt = null',
+  '  const runAt = t => { runs.push(t); lastRun = t; pendingAt = null }',
+  '  for (const t of calls) {',
+  '    while (pendingAt !== null && pendingAt <= t) runAt(pendingAt)',
+  '    if (t - lastRun >= wait) runAt(t)',
+  '    else pendingAt = lastRun + wait',
+  '  }',
+  '  if (pendingAt !== null) runAt(pendingAt)',
+  '  return runs',
+  '}',
+].map((text, index) => ({ line: index + 1, text }))
+
+export const python = `def throttle_runs(wait, calls):
+    runs = []
+    last_run = float("-inf")
+    pending_at = None
+
+    def run_at(t):
+        nonlocal last_run, pending_at
+        runs.append(t)
+        last_run = t
+        pending_at = None
+
+    for t in calls:
+        while pending_at is not None and pending_at <= t:
+            run_at(pending_at)
+        if t - last_run >= wait:
+            run_at(t)
+        else:
+            pending_at = last_run + wait
+    if pending_at is not None:
+        run_at(pending_at)
+    return runs`
+
+const at = phrase => code.findIndex(c => c.text.includes(phrase)) + 1
+const pyAt = phrase => python.split('\n').findIndex(line => line.includes(phrase)) + 1
+
 export function parseInput(text) {
   const input = JSON.parse(text)
   if (!input || typeof input !== 'object' || !Number.isInteger(input.wait) || input.wait < 1 || input.wait > 500) {
@@ -11,37 +52,28 @@ export function parseInput(text) {
   return { wait: input.wait, calls }
 }
 
-export const code = `throttle a function so it runs at most once per wait
-keep the time of the last run and one pending call
-on each call at time t
-  first run any pending call whose window has ended
-  if t is at least wait after the last run, run now
-  otherwise keep this call as the pending one
-after the last call, run any remaining pending call`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-
 export function buildTrace({ wait, calls }) {
   const frames = []
   const runs = []
   let lastRun = -Infinity
   let pendingAt = null
-  const runAt = (t, why) => {
+  const runAt = (t, line, pyLine) => {
     runs.push(t)
     lastRun = t
     pendingAt = null
-    frames.push({ phase: 'run', activeLine: L(why), t, runs: [...runs], pendingAt, message: `Run the function at ${t} ms.` })
+    frames.push({ phase: 'run', activeLine: at(line), pythonLine: pyAt(pyLine), t, runs: [...runs], pendingAt, message: `Run the function at ${t} ms.` })
   }
-  frames.push({ phase: 'start', activeLine: L('throttle a function'), t: 0, runs: [], pendingAt: null, message: `The window is ${wait} ms.` })
+  frames.push({ phase: 'start', activeLine: at('function throttleRuns'), pythonLine: pyAt('def throttle_runs'), t: 0, runs: [], pendingAt: null, message: `The window is ${wait} ms.` })
   for (const t of calls) {
-    while (pendingAt !== null && pendingAt <= t) runAt(pendingAt, 'run any pending')
-    frames.push({ phase: 'call', activeLine: L('on each call'), t, runs: [...runs], pendingAt, message: `A call arrives at ${t} ms.` })
-    if (t - lastRun >= wait) runAt(t, 'if t is at least')
+    while (pendingAt !== null && pendingAt <= t) runAt(pendingAt, 'while (pendingAt !== null', 'while pending_at is not None')
+    frames.push({ phase: 'call', activeLine: at('for (const t of calls)'), pythonLine: pyAt('for t in calls:'), t, runs: [...runs], pendingAt, message: `A call arrives at ${t} ms.` })
+    if (t - lastRun >= wait) runAt(t, 'if (t - lastRun >= wait)', 'if t - last_run >= wait:')
     else {
       pendingAt = lastRun + wait
-      frames.push({ phase: 'queue', activeLine: L('otherwise keep'), t, runs: [...runs], pendingAt, message: `Inside the window; the latest call waits until ${pendingAt} ms.` })
+      frames.push({ phase: 'queue', activeLine: at('else pendingAt = lastRun'), pythonLine: pyAt('pending_at = last_run + wait'), t, runs: [...runs], pendingAt, message: `Inside the window; the latest call waits until ${pendingAt} ms.` })
     }
   }
-  if (pendingAt !== null) runAt(pendingAt, 'run any remaining')
-  frames.push({ phase: 'done', activeLine: L('after the last call'), t: lastRun, runs: [...runs], pendingAt: null, message: `The function ran ${runs.length} time${runs.length === 1 ? '' : 's'}.` })
+  if (pendingAt !== null) runAt(pendingAt, 'if (pendingAt !== null) runAt', 'if pending_at is not None:')
+  frames.push({ phase: 'done', activeLine: at('return runs'), pythonLine: pyAt('return runs'), t: lastRun, runs: [...runs], pendingAt: null, message: `The function ran ${runs.length} time${runs.length === 1 ? '' : 's'}.` })
   return { input: { wait, calls }, result: runs, frames }
 }

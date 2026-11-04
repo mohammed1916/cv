@@ -1,12 +1,35 @@
-export const code = [
-  'create an empty output list',
-  'for each element with its index',
-  'compute the mapped value from the element and its index',
-  'push the result onto the output list',
-  'return the output list',
-].map((text, index) => ({ line: index + 1, text }))
-const at = phrase => code.findIndex(c => c.text.includes(phrase)) + 1
-function step(frames, phase, line, message, view) { frames.push({ phase, activeLine: at(line), message, view }) }
+const CODE = [
+  'function map(arr, fn) {',
+  '  const out = []',
+  '  for (let index = 0; index < arr.length; index++) {',
+  '    const next = fn(arr[index], index)',
+  '    out.push(next)',
+  '  }',
+  '  return out',
+  '}',
+]
+
+const PY = [
+  'def map_items(arr, fn):',
+  '    out = []',
+  '    for index, value in enumerate(arr):',
+  '        next_value = fn(value, index)',
+  '        out.append(next_value)',
+  '    return out',
+]
+
+const at = (lines, text) => {
+  const index = lines.findIndex(line => line.trim() === text.trim())
+  if (index < 0) throw new Error(`Missing trace line: ${text}`)
+  return index + 1
+}
+
+export const phases = [
+  { id: 'start', label: 'Start', description: 'Create an empty output list.' },
+  { id: 'compute', label: 'Compute', description: 'Map the element with its index.' },
+  { id: 'push', label: 'Push', description: 'Append the mapped value.' },
+  { id: 'done', label: 'Result', description: 'The mapped list.' },
+]
 
 // Transforms the visualization offers in place of an arbitrary callback. The default matches the first version.
 export const TRANSFORMS = {
@@ -28,14 +51,17 @@ export function buildTrace({ arr, fn = 'twicePlusIndex' }) {
   const out = []
   const transform = TRANSFORMS[fn]
   const view = (focus, extra = {}) => ({ title: 'Elements', rows: arr.map((v, i) => `index ${i}: ${v}`), arr: arr.slice(), focus, out: out.slice(), label: transform.label, summary: `output [${out.join(', ')}]`, ...extra })
-  step(frames, 'start', 'create an empty output', 'Output list is empty.', view(-1))
+  frames.push({ pythonLine: at(PY, 'out = []'), activeLine: at(CODE, 'const out = []'), phase: 'start', message: 'Output list is empty.', view: view(-1) })
   arr.forEach((value, index) => {
     const next = transform.apply(value, index)
-    step(frames, 'compute', 'for each element with its index', `Element ${value} at index ${index}.`, view(index))
-    step(frames, 'compute', 'compute the mapped value', `${transform.label} gives ${next} for ${value} at index ${index}.`, view(index, { next }))
+    frames.push({ pythonLine: at(PY, 'for index, value in enumerate(arr):'), activeLine: at(CODE, 'for (let index = 0; index < arr.length; index++) {'), phase: 'compute', message: `Element ${value} at index ${index}.`, view: view(index) })
+    frames.push({ pythonLine: at(PY, 'next_value = fn(value, index)'), activeLine: at(CODE, 'const next = fn(arr[index], index)'), phase: 'compute', message: `${transform.label} gives ${next} for ${value} at index ${index}.`, view: view(index, { next }) })
     out.push(next)
-    step(frames, 'push', 'push the result', `Pushed ${next}.`, view(index, { next }))
+    frames.push({ pythonLine: at(PY, 'out.append(next_value)'), activeLine: at(CODE, 'out.push(next)'), phase: 'push', message: `Pushed ${next}.`, view: view(index, { next }) })
   })
-  step(frames, 'done', 'return the output list', `Output [${out.join(', ')}].`, view(-1))
+  frames.push({ pythonLine: at(PY, 'return out'), activeLine: at(CODE, 'return out'), phase: 'done', message: `Output [${out.join(', ')}].`, view: view(-1) })
   return { result: out, frames, input: { arr, fn } }
 }
+
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+export const python = PY.join('\n') + '\n'

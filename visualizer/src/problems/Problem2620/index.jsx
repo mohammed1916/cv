@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 import CounterView from './CounterView'
 
 const definition = {
@@ -10,7 +10,7 @@ const definition = {
     { id: 'advance', label: 'Advance', description: 'Add one for the next call.' },
     { id: 'done', label: 'Result', description: 'All answers recorded.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'JSON object with init (integer) and calls (how many calls to make)',
   url: 'https://leetcode.com/problems/counter/',
   complexity: 'O(k) time for k calls and O(k) space for the recorded answers.',

@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 import ComposeView from './ComposeView'
 
 const definition = {
@@ -9,7 +9,7 @@ const definition = {
     { id: 'apply', label: 'Apply', description: 'Apply one function, from the last to the first.' },
     { id: 'done', label: 'Result', description: 'The composed value.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'JSON object with fns (any of inc, dbl, sq; applied right to left) and x',
   url: 'https://leetcode.com/problems/function-composition/',
   complexity: 'O(k) time for k functions and O(1) extra space.',

@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 import CacheView from './CacheView'
 
 const definition = {
@@ -11,7 +11,7 @@ const definition = {
     { id: 'count', label: 'Count', description: 'Count live keys.' },
     { id: 'done', label: 'Result', description: 'All answers.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'JSON object with ops: [time, "set", key, value, duration], [time, "get", key] or [time, "count"]',
   url: 'https://leetcode.com/problems/cache-with-time-limit/',
   complexity: 'O(1) per get and set, O(n) for a count over n stored keys.',

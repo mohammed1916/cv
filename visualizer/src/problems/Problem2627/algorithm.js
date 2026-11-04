@@ -1,11 +1,28 @@
 export const code = [
-  'for each call at time t in order',
-  'if another call arrives before t plus wait skip this call',
-  'otherwise schedule the run at t plus wait',
-  'return the run times',
+  'function debounceRuns(wait, calls) {',
+  '  const runs = []',
+  '  for (let i = 0; i < calls.length; i++) {',
+  '    const t = calls[i]',
+  '    const next = calls[i + 1]',
+  '    if (next !== undefined && next < t + wait) continue',
+  '    runs.push(t + wait)',
+  '  }',
+  '  return runs',
+  '}',
 ].map((text, index) => ({ line: index + 1, text }))
+
+export const python = `def debounce_runs(wait, calls):
+    runs = []
+    for i, t in enumerate(calls):
+        nxt = calls[i + 1] if i + 1 < len(calls) else None
+        if nxt is not None and nxt < t + wait:
+            continue
+        runs.append(t + wait)
+    return runs`
+
 const at = phrase => code.findIndex(c => c.text.includes(phrase)) + 1
-function step(frames, phase, line, message, view) { frames.push({ phase, activeLine: at(line), message, view }) }
+const pyAt = phrase => python.split('\n').findIndex(line => line.includes(phrase)) + 1
+function step(frames, phase, line, pyLine, message, view) { frames.push({ phase, activeLine: at(line), pythonLine: pyAt(pyLine), message, view }) }
 
 export function parseInput(text) {
   const input = JSON.parse(text)
@@ -27,16 +44,16 @@ export function buildTrace({ wait, calls }) {
   for (let i = 0; i < calls.length; i++) {
     const t = calls[i]
     const next = calls[i + 1]
-    step(frames, 'call', 'for each call at time', `Call at ${t} ms.`, view(i))
+    step(frames, 'call', 'for (let i = 0', 'for i, t in enumerate', `Call at ${t} ms.`, view(i))
     if (next !== undefined && next < t + wait) {
       outcomes.push('skip')
-      step(frames, 'skip', 'if another call arrives', `Call at ${next} ms arrives within ${wait} ms, so this one is skipped.`, view(i))
+      step(frames, 'skip', 'if (next !== undefined', 'if nxt is not None', `Call at ${next} ms arrives within ${wait} ms, so this one is skipped.`, view(i))
     } else {
       runs.push(t + wait)
       outcomes.push('run')
-      step(frames, 'run', 'otherwise schedule the run', `Run scheduled at ${t + wait} ms.`, view(i))
+      step(frames, 'run', 'runs.push(t + wait)', 'runs.append(t + wait)', `Run scheduled at ${t + wait} ms.`, view(i))
     }
   }
-  step(frames, 'done', 'return the run times', `Runs at ${runs.join(', ') || 'none'}.`, view(-1))
+  step(frames, 'done', 'return runs', 'return runs', `Runs at ${runs.join(', ') || 'none'}.`, view(-1))
   return { result: runs, frames }
 }

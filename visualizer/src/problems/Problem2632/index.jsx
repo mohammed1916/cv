@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 import CurryView from './CurryView'
 
 const definition = {
@@ -10,7 +10,7 @@ const definition = {
     { id: 'fire', label: 'Fire', description: 'Enough arguments, so fn runs.' },
     { id: 'done', label: 'Result', description: 'Final outcome.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'JSON object with arity (1 to 4) and calls (argument lists)',
   url: 'https://leetcode.com/problems/curry/',
   complexity: 'O(total arguments) time and space for the collected list.',

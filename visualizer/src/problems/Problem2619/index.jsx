@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   number: '2619',
@@ -9,7 +9,7 @@ const definition = {
     { id: 'read', label: 'Read last', description: 'Read the element at length minus one.' },
     { id: 'done', label: 'Result', description: 'Report the answer.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'JSON object with items (at most 10 values)',
   url: 'https://leetcode.com/problems/array-prototype-last/',
   complexity: 'O(1) time and O(1) extra space.',

@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 import ChainView from './ChainView'
 
 const definition = {
@@ -10,7 +10,7 @@ const definition = {
     { id: 'found', label: 'Match', description: 'A prototype equals the target class.' },
     { id: 'done', label: 'Result', description: 'Report the answer.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'JSON object with chain (nearest class first), target and primitive',
   url: 'https://leetcode.com/problems/check-if-object-instance-of-class/',
   complexity: 'O(k) time for a chain of k classes, O(1) extra space.',

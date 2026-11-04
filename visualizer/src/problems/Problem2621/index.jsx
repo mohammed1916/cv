@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 import TimelineView from './TimelineView'
 
 const definition = {
@@ -10,7 +10,7 @@ const definition = {
     { id: 'fire', label: 'Fire', description: 'Record each timer as it fires.' },
     { id: 'done', label: 'Result', description: 'The completion order.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'JSON object with durations (whole milliseconds, 1 to 8 values)',
   url: 'https://leetcode.com/problems/sleep/',
   complexity: 'O(n log n) time to order n timers, O(n) extra space.',

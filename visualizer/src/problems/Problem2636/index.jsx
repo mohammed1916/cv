@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 import PoolView from './PoolView'
 
 const definition = {
@@ -9,7 +9,7 @@ const definition = {
     { id: 'finish', label: 'Finish', description: 'The earliest running task ends.' },
     { id: 'done', label: 'Result', description: 'Total time.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'JSON object with limit (1 to 4) and durations (whole milliseconds, up to 8 tasks)',
   url: 'https://leetcode.com/problems/promise-pool/',
   complexity: 'O(n^2) time with this simple list (a heap would give O(n log n)), O(n) space.',

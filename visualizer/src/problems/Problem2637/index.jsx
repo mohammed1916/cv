@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { parseInput, buildTrace, code } from './algorithm'
+import { parseInput, buildTrace, code, python } from './algorithm'
 import RaceView from './RaceView'
 
 const definition = {
@@ -9,7 +9,7 @@ const definition = {
     { id: 'resolve', label: 'Resolve', description: 'The task wins the race.' },
     { id: 'reject', label: 'Reject', description: 'The limit wins the race.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with delay, limit and value (milliseconds)',
   url: 'https://leetcode.com/problems/promise-time-limit/',
   complexity: 'O(1) bookkeeping. The visualization only models the timing race, not the user function.',
