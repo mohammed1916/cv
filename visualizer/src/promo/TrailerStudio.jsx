@@ -117,11 +117,11 @@ export default function TrailerStudio({ onNavigate, canRecord }) {
     } finally { delete document.body.dataset.trailerRecording; }
   }
   return <>
-    {scene && <div className="trailer-caption"><span>TEEM TREAT / VISUALIZER</span><strong>{scene.title}</strong></div>}
+    {scene && <div className="trailer-caption"><span> visualizer.pro</span><strong>{scene.title}</strong></div>}
     <aside className={`trailer-studio ${running ? 'is-recording' : ''}`}>
       {!running && <><h2>Record the feature trailer</h2><p>Use a clean desktop tab at 1920 × 1080. Choose this tab when asked. The recording stays on your device.</p><p>Draft narration uses Microsoft Zira. Replace the scene audio with professional narration for release. During the playground and selection scenes, demonstrate the real controls yourself.</p><p role="status">{status}</p>{!canRecord && <p>Sign in with Pro to record the requested advanced visualizers and playground.</p>}</>}
       {running ? <button onClick={() => session.current?.stop()}>Stop recording</button> : <button disabled={!canRecord || preparing} onClick={record}>{preparing ? 'Preparing…' : 'Record real UI + narration'}</button>}
-      {download && !running && <a href={download} download="teem-treat-feature-trailer.webm">Download recording</a>}
+      {download && !running && <a href={download} download="visualizer-pro-feature-trailer.webm">Download recording</a>}
     </aside>
   </>;
 }
