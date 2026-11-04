@@ -18,7 +18,13 @@ const definition = {
 }
 
 export default function DesignExamScoresTracker() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <ol aria-label="Call list" style={{ listStyle: 'none', padding: 0, display: 'grid', gap: 4 }}>
+      {run.input.operations.map((op, i) => <li key={i} data-current={i === step.call ? 'yes' : undefined}
+        style={{ border: '1px solid var(--surface2)', borderRadius: 6, padding: '4px 8px', background: i === step.call ? 'var(--primary)' : 'transparent', color: i === step.call ? 'var(--on-primary, #fff)' : 'var(--text)' }}>
+        <small>{i + 1}.</small> <strong>{op}</strong>({JSON.stringify(run.input.arguments[i])})
+      </li>)}
+    </ol>
     <output aria-label="Last call">{step.call < 0 ? 'Waiting for the first call' : `Call ${step.call + 1}: ${step.phase === 'query' ? `returns ${step.output}` : 'records an exam'}`}</output>
     <output aria-label="Answers so far">{`Answers so far: ${step.outputs.map(v => (v === null ? 'null' : v)).join(', ') || 'none'}`}</output>
   </>} renderReasoning={() => <>

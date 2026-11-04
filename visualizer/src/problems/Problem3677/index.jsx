@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -19,6 +20,8 @@ const definition = {
 
 export default function CountBinaryPalindromes() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    {(() => { const bits = run.input.toString(2); return <IndexedSequence label="Bits of n (most significant first)" length={bits.length}
+      valueAt={i => bits[i]} active={-1} roleAt={i => i < step.length ? 'processed' : 'pending'} /> })()}
     <output aria-label="Bit length">{`Bit length processed: ${step.length} of ${run.input.toString(2).length || 0}`}</output>
     <output aria-label="Count">{`Palindromes of this length: ${step.count}. Running total: ${step.total}`}</output>
   </>} renderReasoning={() => <>

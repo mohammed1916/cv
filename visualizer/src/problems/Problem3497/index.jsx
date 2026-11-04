@@ -20,6 +20,15 @@ function RowTable({ label, rows, columns }) {
   )
 }
 
+function StageRail({ phases, active }) {
+  return <ol aria-label="SQL stages" style={{ display: 'flex', gap: 8, flexWrap: 'wrap', listStyle: 'none', padding: 0 }}>
+    {phases.map(phase => <li key={phase.id} aria-current={phase.id === active ? 'step' : undefined}
+      style={{ border: '1px solid var(--surface2)', borderRadius: 6, padding: '4px 10px', background: phase.id === active ? 'var(--primary)' : 'var(--surface2)', color: phase.id === active ? 'var(--on-primary, #fff)' : 'var(--text)' }}>
+      <strong>{phase.label}</strong>
+    </li>)}
+  </ol>
+}
+
 const definition = {
   number: '3497',
   phases: [
@@ -47,6 +56,7 @@ const definition = {
 
 export default function AnalyzeSubscriptionConversion() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+    <StageRail phases={definition.phases} active={step.phase} />
     <RowTable label="Working rows" rows={step.rows} columns={WORK_COLUMNS} />
     <RowTable label="Result so far" rows={step.result} columns={RESULT_COLUMNS} />
   </>} renderReasoning={() => <>

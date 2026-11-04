@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -19,6 +20,8 @@ const definition = {
 
 export default function NonDecreasingDigits() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    {step.digits && <IndexedSequence label={`Base-${run.input.b} digits of the ${step.part === 'l-1' ? 'bound below l' : 'upper bound'}`} length={step.digits.length}
+      valueAt={index => step.digits[index]} active={step.position} roleAt={index => index < step.position ? 'matched' : index === step.position ? 'choosing' : 'open'} />}
     <output aria-label="Current bound">{`Counting ${step.part === 'l-1' ? 'below l' : 'up to r'}, digit ${step.digit ?? '-'} at position ${step.position}`}</output>
     <output aria-label="Running count">{`Count so far: ${step.total} (base ${run.input.b})`}</output>
   </>} renderReasoning={() => <>

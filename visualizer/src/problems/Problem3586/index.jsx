@@ -1,6 +1,15 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python, SAMPLE_TEXT } from './algorithm'
 
+function StageRail({ phases, active }) {
+  return <ol aria-label="SQL stages" style={{ display: 'flex', gap: 8, flexWrap: 'wrap', listStyle: 'none', padding: 0 }}>
+    {phases.map(phase => <li key={phase.id} aria-current={phase.id === active ? 'step' : undefined}
+      style={{ border: '1px solid var(--surface2)', borderRadius: 6, padding: '4px 10px', background: phase.id === active ? 'var(--primary)' : 'var(--surface2)', color: phase.id === active ? 'var(--on-primary, #fff)' : 'var(--text)' }}>
+      <strong>{phase.label}</strong>
+    </li>)}
+  </ol>
+}
+
 const definition = {
   phases: [
     { id: 'load', label: 'Load', description: 'Read the dated test results.' },
@@ -11,8 +20,8 @@ const definition = {
     { id: 'done', label: 'Result', description: 'Report the recovered patients.' },
   ],
   parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'Object with patients and covid_tests lists (knowledge-derived sample)',
-  complexity: 'O(T log T) for T tests: sort by date, then one pass per patient. Knowledge-derived draft; the rule is not yet verified against the official statement.',
+  inputLabel: 'Object with patients and covid_tests lists',
+  complexity: 'O(T log T) for T tests: sort by date, then one pass per patient.',
   examples: [{ label: 'Sample', input: SAMPLE_TEXT }],
 }
 
@@ -28,6 +37,7 @@ function Rows({ columns = [], rows = [] }) {
 
 export default function FindCovidRecoveryPatients() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+    <StageRail phases={definition.phases} active={step.phase} />
     <Rows columns={step.columns} rows={step.rows} />
     <output aria-label="Step">{step.message}</output>
   </>} renderReasoning={() => <>

@@ -30,6 +30,20 @@ export default function PartitionKDistinct() {
         </li>
       })}
     </ul>
+    <section aria-label="Count against the group limit">
+      <h4>Each value must fit at most once per group ({run.input.nums.length / run.input.k} groups)</h4>
+      <ul style={{ listStyle: 'none', padding: 0, display: 'grid', gap: 4 }}>
+        {[...new Set(run.input.nums)].map(v => {
+          const count = run.input.nums.filter(x => x === v).length
+          const limit = run.input.nums.length / run.input.k
+          return <li key={v} style={{ display: 'flex', gap: 8, alignItems: 'center', color: 'var(--text)' }}>
+            <span style={{ minWidth: 60 }}>value {v}</span>
+            <span style={{ height: 12, width: count * 28, background: count > limit ? 'var(--accent, #b45309)' : 'var(--primary)', borderRadius: 3 }} />
+            <small>{count} of at most {limit}</small>
+          </li>
+        })}
+      </ul>
+    </section>
     <output aria-label="Group size check">{`groups of ${run.input.k}: ${step.count || 'not computed'}`}</output>
   </>} renderReasoning={() => <>
     <p>Every group must hold k different values, so a value can appear at most once per group.</p>

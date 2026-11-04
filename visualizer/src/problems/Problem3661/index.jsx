@@ -1,6 +1,20 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
+function WallLine({ run, step }) {
+  const pts = [...run.positions.map(p => p.x ?? p), ...run.input.walls.map(w => w.x ?? w)]
+  const lo = Math.min(0, ...pts), hi = Math.max(1, ...pts)
+  const W = 560, scale = v => 30 + ((v - lo) / Math.max(1, hi - lo)) * (W - 60)
+  return <svg viewBox={`0 0 ${W} 90`} role="img" aria-label="Robots and walls on one line" style={{ width: '100%', maxWidth: W }}>
+    <line x1={30} y1={50} x2={W - 30} y2={50} stroke="var(--text)" strokeOpacity="0.4" />
+    {run.input.walls.map((w, i) => { const x = w.x ?? w; return <rect key={`w${i}`} x={scale(x) - 3} y={36} width={6} height={28} fill="var(--text)" /> })}
+    {run.positions.map((p, i) => { const x = p.x ?? p; return <g key={`r${i}`}>
+      <circle cx={scale(x)} cy={50} r={9} fill={step.robot === i ? 'var(--primary)' : 'var(--surface2)'} stroke="var(--text)" />
+      <text x={scale(x)} y={80} textAnchor="middle" fontSize="11" fill="var(--text)">R{i + 1}</text>
+    </g> })}
+  </svg>
+}
+
 const definition = {
   number: '3661',
   phases: [
@@ -21,6 +35,7 @@ const definition = {
 
 export default function MaximumWallsDestroyedByRobots() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <WallLine run={run} step={step} />
     <section className="algorithm-sequence" aria-label="Robot ranges">
       <h3>Robots from left to right</h3>
       <table>

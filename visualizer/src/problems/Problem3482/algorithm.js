@@ -100,23 +100,23 @@ export function buildTrace(input) {
   }
   const ids = people.map(row => row.employee_id).sort((a, b) => a - b)
   const frames = []
-  frames.push({ phase: 'load', activeLine: L('FROM employees e'), pythonLine: P('def analyze_hierarchy'), message: `Loaded ${people.length} employees.`, rows: copy(people) })
+  frames.push({ phase: 'load', focus: null, activeLine: L('FROM employees e'), pythonLine: P('def analyze_hierarchy'), message: `Loaded ${people.length} employees.`, rows: copy(people) })
   const levels = new Map()
   const climbed = []
   for (const id of ids) {
     const level = ancestors(id).length + 1
     levels.set(id, level)
     climbed.push({ employee_id: id, level })
-    frames.push({ phase: 'climb', activeLine: L('WITH RECURSIVE above'), pythonLine: P('def ancestors'), message: `Employee ${id} has ${level - 1} manager${level === 2 ? '' : 's'} above, so level ${level}.`, rows: copy(climbed) })
+    frames.push({ phase: 'climb', activeLine: L('WITH RECURSIVE above'), pythonLine: P('def ancestors'), focus: id, message: `Employee ${id} has ${level - 1} manager${level === 2 ? '' : 's'} above, so level ${level}.`, rows: copy(climbed) })
   }
   const computed = []
   for (const id of ids) {
     const under = ids.filter(other => ancestors(other).includes(id))
     const budget = byId.get(id).salary + under.reduce((sum, other) => sum + byId.get(other).salary, 0)
     computed.push({ employee_id: id, level: levels.get(id), team_size: under.length, budget })
-    frames.push({ phase: 'team', activeLine: L('SELECT e.employee_id'), pythonLine: P('rows.append'), message: `Employee ${id}: ${under.length} below, budget ${budget}.`, rows: copy(computed) })
+    frames.push({ phase: 'team', activeLine: L('SELECT e.employee_id'), pythonLine: P('rows.append'), focus: id, message: `Employee ${id}: ${under.length} below, budget ${budget}.`, rows: copy(computed) })
   }
   const result = copy(computed)
-  frames.push({ phase: 'output', activeLine: L('ORDER BY e.employee_id'), pythonLine: P('return pd.DataFrame'), message: `Returned ${result.length} rows.`, rows: copy(result) })
+  frames.push({ phase: 'output', focus: null, activeLine: L('ORDER BY e.employee_id'), pythonLine: P('return pd.DataFrame'), message: `Returned ${result.length} rows.`, rows: copy(result) })
   return { input, result, frames }
 }

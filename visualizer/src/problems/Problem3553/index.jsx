@@ -1,5 +1,16 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import RootedTreeDiagram from '../../components/shared/RootedTreeDiagram'
 import { buildTrace, parseInput, code, python } from './algorithm'
+
+function TreeView({ run, step }) {
+  const { n, edges } = run.input
+  const adj = Array.from({ length: n }, () => [])
+  for (const [u, v] of edges) { adj[u].push(v); adj[v].push(u) }
+  const build = (id, parent) => ({ id, children: adj[id].filter(next => next !== parent).map(next => build(next, id)) })
+  const queried = step.query >= 0 ? run.input.queries[step.query] : []
+  const roles = Object.fromEntries(queried.map(id => [id, 'target']))
+  return <RootedTreeDiagram root={build(0, -1)} title="Tree with the current query nodes" roles={roles} />
+}
 
 const definition = {
   phases: [
@@ -21,6 +32,7 @@ const definition = {
 
 export default function MinimumWeightedSubgraph() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <TreeView run={run} step={step} />
     <table aria-label="Query distances">
       <tbody>
         <tr><th scope="row">Current query</th><td>{step.query >= 0 ? run.input.queries[step.query].join(', ') : 'none yet'}</td></tr>

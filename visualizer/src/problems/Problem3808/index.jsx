@@ -27,8 +27,20 @@ function CurrentTable({ table }) {
   </div>
 }
 
+function StageRail({ phases, active }) {
+  return <ol aria-label="SQL stages" style={{ display: 'flex', gap: 8, flexWrap: 'wrap', listStyle: 'none', padding: 0 }}>
+    {phases.map(phase => <li key={phase.id} aria-current={phase.id === active ? 'step' : undefined}
+      style={{ border: '1px solid var(--surface2)', borderRadius: 6, padding: '4px 10px', background: phase.id === active ? 'var(--primary)' : 'var(--surface2)', color: phase.id === active ? 'var(--on-primary, #fff)' : 'var(--text)' }}>
+      <strong>{phase.label}</strong>
+    </li>)}
+  </ol>
+}
+
 export default function FindEmotionallyConsistentUsers() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <CurrentTable table={step.table} />} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+    <StageRail phases={definition.phases} active={step.phase} />
+    <CurrentTable table={step.table} />
+  </>} renderReasoning={() => <>
     <p>Count how many times each user used each reaction, then the total and the largest count.</p>
     <p>A user stays only when the total is at least five and the largest count is at least three fifths of the total, which also rules out a tie for the dominant reaction.</p>
   </>} />

@@ -1,6 +1,16 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
+function PathGraph({ run, step }) {
+  const n = run.input.n
+  const W = 260, cx = W / 2, r = 100
+  const pos = Array.from({ length: n }, (_, i) => ({ x: cx + r * Math.cos((2 * Math.PI * i) / n - Math.PI / 2), y: cx + r * Math.sin((2 * Math.PI * i) / n - Math.PI / 2) }))
+  return <svg viewBox={`0 0 ${W} ${W}`} role="img" aria-label="Graph with the node letters" style={{ width: 260, maxWidth: '100%' }}>
+    {run.input.edges.map(([u, v], i) => <line key={i} x1={pos[u].x} y1={pos[u].y} x2={pos[v].x} y2={pos[v].y} stroke="var(--text)" strokeOpacity="0.5" strokeWidth="2" />)}
+    {pos.map((p, i) => <g key={i}><circle cx={p.x} cy={p.y} r={13} fill="var(--surface2)" stroke="var(--text)" /><text x={p.x} y={p.y + 4} textAnchor="middle" fontSize="12" fill="var(--text)">{run.input.label[i]}</text></g>)}
+  </svg>
+}
+
 const definition = {
   phases: [
     { id: 'start', label: 'Centers', description: 'Start from single nodes and from edges whose ends share a letter.' },
@@ -19,6 +29,7 @@ const definition = {
 
 export default function LongestPalindromicPath() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <PathGraph run={run} step={step} />
     <output aria-label="Label">{`Labels: ${run.input.label}`}</output>
     <output aria-label="Search">{`States: ${step.states}. Best so far: ${step.best}`}</output>
   </>} renderReasoning={() => <>

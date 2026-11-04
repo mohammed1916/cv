@@ -1,6 +1,26 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
+function PrerequisiteMap({ run, mask, node }) {
+  const n = run.input.n
+  const prereqs = Array.from({ length: n }, () => [])
+  for (const [u, v] of run.input.edges) prereqs[v].push(u)
+  return <section aria-label="Prerequisite map">
+    <h4>Prerequisite map: node to the nodes that must be placed first</h4>
+    <ul style={{ listStyle: 'none', padding: 0, display: 'grid', gap: 6 }}>
+      {Array.from({ length: n }, (_, v) => {
+        const placed = Boolean(mask & (1 << v))
+        const ready = prereqs[v].every(u => mask & (1 << u))
+        const state = placed ? 'placed' : ready ? 'ready' : 'waiting'
+        return <li key={v} data-state={state} aria-current={node === v ? 'step' : undefined}
+          style={{ border: '1px solid var(--surface2)', borderRadius: 6, padding: '4px 8px', background: node === v ? 'var(--primary)' : placed ? 'var(--surface2)' : 'transparent', color: node === v ? 'var(--on-primary, #fff)' : 'var(--text)' }}>
+          <strong>{v}</strong> (score {run.input.score[v]}) {'<- '}{prereqs[v].length ? prereqs[v].join(', ') : 'none'} : {state}
+        </li>
+      })}
+    </ul>
+  </section>
+}
+
 const definition = {
   phases: [
     { id: 'start', label: 'Empty set', description: 'No node is placed; the profit is 0.' },
@@ -19,6 +39,7 @@ const definition = {
 
 export default function TopologicalProfit() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <PrerequisiteMap run={run} mask={step.mask} node={step.node} />
     <output aria-label="Placed set">{`Placed set (bitmask ${step.mask.toString(2).padStart(run.input.n, '0')}): ${[...Array(run.input.n).keys()].filter(v => step.mask & (1 << v)).join(', ') || 'none'}`}</output>
     <output aria-label="Profit">{`Best profit for this set: ${step.value}${step.node >= 0 ? `, last placed node ${step.node}` : ''}`}</output>
   </>} renderReasoning={() => <>

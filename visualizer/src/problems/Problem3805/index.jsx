@@ -13,13 +13,14 @@ const definition = {
   url: 'https://leetcode.com/problems/count-caesar-cipher-pairs/',
   complexity: 'O(n * m) time to build the signatures and a hash map of counts.',
   examples: [
-    { label: 'Shifted pairs', input: '{"words":["abc","bcd","xyz","ab"]}' },
+    { label: 'Shifted pairs', input: '{"words":["abc","bcd","xyz","xab"]}' },
     { label: 'Same letters', input: '{"words":["aa","bb","cd"]}' },
   ],
 }
 
 export default function CountCaesarCipherPairs() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <output aria-label="Current signature">{step.key !== undefined ? `Signature ${step.key}: ${step.matches} earlier word${step.matches === 1 ? '' : 's'} share it` : 'Waiting for the first word'}</output>
     <table aria-label="Signatures">
       <thead><tr><th>index</th><th>word</th><th>gap signature</th></tr></thead>
       <tbody>{run.input.words.map((word, i) => <tr key={i} data-current={step.at === i ? 'yes' : undefined}>

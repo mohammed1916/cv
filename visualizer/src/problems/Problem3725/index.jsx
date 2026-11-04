@@ -20,7 +20,10 @@ const definition = {
 
 export default function CoprimeRowChoices() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <output aria-label="Matrix">{run.input.mat.map(row => `[${row.join(', ')}]`).join(' ')}</output>
+    <table aria-label="Matrix with entries divisible by d" style={{ borderCollapse: 'collapse' }}>
+      <tbody>{run.input.mat.map((row, r) => <tr key={r}>{row.map((v, c) => <td key={c} data-divisible={step.d && v % step.d === 0 ? 'yes' : undefined}
+        style={{ border: '1px solid var(--surface2)', padding: '4px 8px', textAlign: 'center', color: 'var(--text)', background: step.d && v % step.d === 0 ? 'var(--primary)' : 'transparent' }}>{v}</td>)}</tr>)}</tbody>
+    </table>
     <output aria-label="Divisor">{`d = ${step.d || '-'}, mu = ${step.mu}, picks divisible by d (product): ${step.ways}, running answer: ${step.answer}`}</output>
   </>} renderReasoning={() => <>
     <p>Counting the picks with gcd exactly 1 directly is hard. Counting the picks where every chosen entry is divisible by d is easy: multiply the per-row counts.</p>

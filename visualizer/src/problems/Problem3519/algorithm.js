@@ -42,7 +42,7 @@ function uptoCount(x, b, part, frames) {
     if (digits[i] < lo) break
     lo = digits[i]
     if (i === len - 1) total = (total + 1) % MOD
-    frames.push({ phase: 'digit', pythonLine: 29, part, position: i, digit: digits[i], total, activeLine: L('for each smaller digit'), message: `${part} in base ${b}: digit ${digits[i]} at position ${i}. Running count ${total}.` })
+    frames.push({ phase: 'digit', pythonLine: 29, part, position: i, digit: digits[i], digits, total, activeLine: L('for each smaller digit'), message: `${part} in base ${b}: digit ${digits[i]} at position ${i}. Running count ${total}.` })
   }
   return total
 }

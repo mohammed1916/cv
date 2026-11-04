@@ -15,8 +15,18 @@ const reasoning = [
 
 const definition = { number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, sql, inputLabel, complexity, examples }
 
+function StageRail({ phases, active }) {
+  return <ol aria-label="SQL stages" style={{ display: 'flex', gap: 8, flexWrap: 'wrap', listStyle: 'none', padding: 0 }}>
+    {phases.map(phase => <li key={phase.id} aria-current={phase.id === active ? 'step' : undefined}
+      style={{ border: '1px solid var(--surface2)', borderRadius: 6, padding: '4px 10px', background: phase.id === active ? 'var(--primary)' : 'var(--surface2)', color: phase.id === active ? 'var(--on-primary, #fff)' : 'var(--text)' }}>
+      <strong>{phase.label}</strong>
+    </li>)}
+  </ol>
+}
+
 export default function FindZombieSessions() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <StageRail phases={phases} active={step.phase} />
     <table aria-label="Sessions">
       <thead><tr><th>session_id</th><th>last_active</th><th>is_open</th><th>idle</th><th>zombie</th></tr></thead>
       <tbody>{run.input.sessions.map(row => {

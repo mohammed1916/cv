@@ -35,8 +35,20 @@ function CurrentTable({ table }) {
   </div>
 }
 
+function StageRail({ phases, active }) {
+  return <ol aria-label="SQL stages" style={{ display: 'flex', gap: 8, flexWrap: 'wrap', listStyle: 'none', padding: 0 }}>
+    {phases.map(phase => <li key={phase.id} aria-current={phase.id === active ? 'step' : undefined}
+      style={{ border: '1px solid var(--surface2)', borderRadius: 6, padding: '4px 10px', background: phase.id === active ? 'var(--primary)' : 'var(--surface2)', color: phase.id === active ? 'var(--on-primary, #fff)' : 'var(--text)' }}>
+      <strong>{phase.label}</strong>
+    </li>)}
+  </ol>
+}
+
 export default function FindChurnRiskCustomers() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <CurrentTable table={step.table} />} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+    <StageRail phases={phases} active={step.phase} />
+    <CurrentTable table={step.table} />
+  </>} renderReasoning={() => <>
     <p>Each customer last login is the largest login date. Subtracting it from the as-of date gives the idle days.</p>
     <p>A customer is kept when the idle days are at least 30. Grouping first means each customer is judged once, however many logins it has.</p>
   </>} />

@@ -1,5 +1,13 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
+
+function DigitStrip({ candidate }) {
+  const digits = String(candidate)
+  return <div aria-label="Candidate digits">
+    <IndexedSequence label="Digits of the candidate" length={digits.length} valueAt={i => digits[i]} roleAt={() => ''} />
+  </div>
+}
 
 const definition = {
   phases: [
@@ -19,6 +27,7 @@ const definition = {
 
 export default function NextSpecialPalindrome() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+    <DigitStrip candidate={step.candidate} />
     <output aria-label="Candidate">{`Candidate ${step.candidate}`}</output>
     <output aria-label="Palindromes checked">{`Palindromes checked: ${step.checked.join(', ') || 'none yet'}`}</output>
   </>} renderReasoning={({ step }) => <>

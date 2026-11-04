@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -20,6 +21,8 @@ const definition = {
 
 export default function TotalWavinessLarge() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    {(() => { const ds = String(step.bound); return <IndexedSequence label="Digits of the current bound" length={ds.length}
+      valueAt={i => ds[i]} active={-1} roleAt={() => 'bound digit'} /> })()}
     <output aria-label="Bound">{`Current bound: ${step.bound}. Range [${run.input.num1}, ${run.input.num2}]`}</output>
     <output aria-label="Value">{`Prefix waviness for this bound: ${step.value}`}</output>
   </>} renderReasoning={() => <>

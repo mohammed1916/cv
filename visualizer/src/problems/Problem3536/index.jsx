@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -22,9 +23,8 @@ const definition = {
 
 export default function MaximumProductOfTwoDigits() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <ol aria-label="Digits of n">
-      {String(run.input).split('').map((digit, index) => <li key={index} data-role={step.index === index ? 'current' : ''}>{digit}</li>)}
-    </ol>
+    <IndexedSequence label="Digits of n" length={String(run.input).length} valueAt={index => String(run.input)[index]}
+      active={step.index} roleAt={index => { const d = Number(String(run.input)[index]); return d === step.first ? 'largest so far' : d === step.second ? 'second so far' : '' }} />
     <output aria-label="Tracked digits">{`largest ${step.first}, second ${step.second}`}</output>
   </>} renderReasoning={() => <>
     <p>The best product uses the two largest digits in different positions. Tracking those two values while reading the digits once gives the answer without sorting.</p>

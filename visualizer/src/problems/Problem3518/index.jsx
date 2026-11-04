@@ -21,7 +21,14 @@ const definition = {
 }
 
 export default function SmallestPalindromicRearrangementTwo() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <section aria-label="Letters available">
+      <h4>Letters available for the left half</h4>
+      <ol style={{ display: 'flex', gap: 6, flexWrap: 'wrap', listStyle: 'none', padding: 0 }}>
+        {Object.entries(run.input.s.split('').reduce((acc, ch) => ({ ...acc, [ch]: (acc[ch] || 0) + 1 }), {})).sort(([a], [b]) => a.localeCompare(b)).map(([ch, n]) => <li key={ch}
+          style={{ border: '1px solid var(--surface2)', borderRadius: 6, padding: '4px 8px', background: 'var(--surface2)', color: 'var(--text)' }}><strong>{ch}</strong> x{Math.floor(n / 2)} in left half</li>)}
+      </ol>
+    </section>
     <output aria-label="Left half so far">{`Left half so far: ${step.left || '(empty)'}`}</output>
     <output aria-label="Remaining rank">{`Remaining rank k: ${step.rank}`}</output>
   </>} renderReasoning={() => <>

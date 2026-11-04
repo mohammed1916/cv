@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -18,10 +19,14 @@ const definition = {
 }
 
 export default function GcdOfOddAndEvenSums() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <table aria-label="Running sums">
-    <thead><tr><th>i</th><th>Odd sum</th><th>Even sum</th></tr></thead>
-    <tbody><tr><td>{step.i}</td><td>{step.oddSum}</td><td>{step.evenSum}</td></tr></tbody>
-  </table>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="Numbers 1 to 2n: odd and even" length={2 * run.input.n} indexOffset={1}
+      valueAt={i => i + 1} active={step.i >= 1 ? 2 * step.i - 2 : -1} roleAt={i => (i + 1) % 2 ? 'odd' : 'even'} />
+    <table aria-label="Running sums">
+      <thead><tr><th>i</th><th>Odd sum</th><th>Even sum</th></tr></thead>
+      <tbody><tr><td>{step.i}</td><td>{step.oddSum}</td><td>{step.evenSum}</td></tr></tbody>
+    </table>
+  </>} renderReasoning={() => <>
     <p>The first n odd numbers add up to n squared, and the first n even numbers add up to n times n plus one.</p>
     <p>Both sums share the factor n, and the remaining factors n and n plus one are coprime, so the gcd is exactly n.</p>
   </>} />

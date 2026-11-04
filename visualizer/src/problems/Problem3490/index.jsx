@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -20,6 +21,8 @@ const definition = {
 export default function CountBeautifulNumbers() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <output aria-label="Range">{`Range: ${run.input.l} to ${run.input.r}`}</output>
+    {step.bound !== '' && <IndexedSequence label={`Digits of ${step.bound} (most significant first)`} length={String(step.bound).length}
+      valueAt={index => String(step.bound)[index]} roleAt={index => index === 0 ? 'leading digit' : 'digit'} />}
     <output aria-label="Running count">{`Count so far: ${step.total}${step.bound !== '' ? ` (up to ${step.bound})` : ''}`}</output>
   </>} renderReasoning={() => <>
     <p>A number is beautiful when its digit product is divisible by its digit sum. Both values are built up digit by digit, so the DP carries them as state.</p>

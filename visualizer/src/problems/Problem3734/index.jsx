@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -20,6 +21,8 @@ const definition = {
 
 export default function SmallestPalindromeAboveTarget() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="Target letters" length={run.input.target.length} valueAt={i => run.input.target[i]}
+      active={(step.half || '').length} roleAt={i => i < (step.half || '').length ? 'chosen half' : ''} />
     <output aria-label="Half">{`Half letters: ${step.half || '(none)'}`}</output>
     <output aria-label="Candidate">{`Candidate palindrome: ${step.candidate || '(none)'}. Target: ${run.input.target}`}</output>
   </>} renderReasoning={() => <>

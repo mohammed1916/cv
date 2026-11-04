@@ -1,6 +1,20 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
+function HeightBars({ points, level }) {
+  const heights = [...new Set(points.map(([, y]) => y))].sort((a, b) => a - b)
+  return <ol aria-label="Heights with point counts" style={{ listStyle: 'none', padding: 0, display: 'grid', gap: 4 }}>
+    {heights.map(y => {
+      const count = points.filter(([, py]) => py === y).length
+      return <li key={y} data-current={y === level ? 'yes' : undefined} style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+        <span style={{ minWidth: 70, color: 'var(--text)' }}>y = {y}</span>
+        <span style={{ height: 12, width: count * 26, background: y === level ? 'var(--primary)' : 'var(--surface2)', border: '1px solid var(--text)', borderRadius: 3 }} />
+        <small style={{ color: 'var(--text)' }}>{count} point{count === 1 ? '' : 's'}, {count * (count - 1) / 2} pair{count * (count - 1) / 2 === 1 ? '' : 's'}</small>
+      </li>
+    })}
+  </ol>
+}
+
 const definition = {
   phases: [
     { id: 'start', label: 'Start', description: 'No height has been counted yet.' },
@@ -21,7 +35,8 @@ const definition = {
 }
 
 export default function CountTrapezoidsI() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <HeightBars points={run.input} level={step.level} />
     <output aria-label="Height being counted">{`height = ${step.level ?? 'none'}`}</output>
     <output aria-label="Segments">{`segments on this height = ${step.pairs}, seen before = ${step.seen}, total = ${step.total}`}</output>
   </>} renderReasoning={() => <>

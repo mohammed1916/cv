@@ -1,6 +1,19 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
+function ComponentGraph({ run, step }) {
+  const { n, edges } = run.input
+  const W = 260, cx = W / 2, r = 100
+  const pos = Array.from({ length: n }, (_, i) => ({ x: cx + r * Math.cos((2 * Math.PI * i) / n - Math.PI / 2), y: cx + r * Math.sin((2 * Math.PI * i) / n - Math.PI / 2) }))
+  return <svg viewBox={`0 0 ${W} ${W}`} role="img" aria-label="Graph with edges kept at the current time" style={{ width: 260, maxWidth: '100%' }}>
+    {edges.map(([u, v, t], i) => {
+      const kept = step.time === undefined || t > step.time
+      return <line key={i} x1={pos[u].x} y1={pos[u].y} x2={pos[v].x} y2={pos[v].y} stroke={kept ? 'var(--primary)' : 'var(--text)'} strokeOpacity={kept ? 1 : 0.35} strokeDasharray={kept ? undefined : '4 4'} strokeWidth="2" />
+    })}
+    {pos.map((p, i) => <g key={i}><circle cx={p.x} cy={p.y} r={12} fill="var(--surface2)" stroke="var(--text)" /><text x={p.x} y={p.y + 4} textAnchor="middle" fontSize="11" fill="var(--text)">{i}</text></g>)}
+  </svg>
+}
+
 const definition = {
   phases: [
     { id: 'start', label: 'Start', description: 'Every node begins as its own component.' },
@@ -20,6 +33,7 @@ const definition = {
 
 export default function MinimumTimeKComponents() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <ComponentGraph run={run} step={step} />
     <output aria-label="Component count">{`Time ${step.time ?? '-'}: ${step.comps} components, need ${run.input.k}`}</output>
     <output aria-label="Edges">{`Edges: ${run.input.edges.map(([u, v, t]) => `${u}-${v}@${t}`).join(', ') || 'none'}`}</output>
   </>} renderReasoning={() => <>

@@ -1,6 +1,15 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
+function Chips({ label, values, tone }) {
+  return <section aria-label={label}>
+    <h4>{label}</h4>
+    <ol style={{ display: 'flex', gap: 6, flexWrap: 'wrap', listStyle: 'none', padding: 0 }}>
+      {values.length ? values.map((v, i) => <li key={i} style={{ border: '1px solid var(--surface2)', borderRadius: 6, padding: '4px 8px', background: tone === 'best' ? 'var(--primary)' : 'var(--surface2)', color: tone === 'best' ? 'var(--on-primary, #fff)' : 'var(--text)' }}>{v}</li>) : <li>none yet</li>}
+    </ol>
+  </section>
+}
+
 const definition = {
   phases: [
     { id: 'start', label: 'Divisors', description: 'List the divisors of n; each factor comes from this list.' },
@@ -19,6 +28,8 @@ const definition = {
 
 export default function BalancedKFactorDecomposition() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <Chips label="Candidate factors" values={step.parts ?? []} />
+    <Chips label="Best factors so far" values={step.best ?? []} tone="best" />
     <output aria-label="Factor split">{`n = ${run.input.n}, k = ${run.input.k}; candidate [${(step.parts ?? []).join(', ')}], best [${(step.best ?? []).join(', ')}]`}</output>
   </>} renderReasoning={() => <>
     <p>Every factor divides n, so the search only tries divisors. Keeping factors in non-decreasing order avoids testing the same multiset twice.</p>

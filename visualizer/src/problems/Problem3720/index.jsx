@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -20,6 +21,9 @@ const definition = {
 
 export default function NextPermutationAboveTarget() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="Target letters" length={run.input.target.length} valueAt={i => run.input.target[i]}
+      active={step.prefix ? step.prefix.length : -1}
+      roleAt={i => i < (step.prefix || '').length ? 'kept prefix' : (step.pick && i === (step.prefix || '').length) ? 'position to raise' : ''} />
     <output aria-label="Letters">{`s = ${run.input.s}, target = ${run.input.target}`}</output>
     <output aria-label="Prefix">{`Kept prefix: ${step.prefix || '(none)'}${step.pick ? `, raised letter: ${step.pick}` : ''}`}</output>
   </>} renderReasoning={() => <>

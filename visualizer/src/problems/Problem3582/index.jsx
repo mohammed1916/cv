@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -20,11 +21,8 @@ const definition = {
 
 export default function GenerateTagForVideoCaption() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <section aria-label="Words">
-      <ol>{run.input.caption.trim().split(/\s+/).filter(Boolean).map((word, i) => (
-        <li key={i} data-role={i < step.index ? 'read' : i === step.index ? 'active' : ''}>{word}</li>
-      ))}</ol>
-    </section>
+    {(() => { const words = run.input.caption.trim().split(/\s+/).filter(Boolean); return <IndexedSequence label="Words of the caption" length={words.length}
+      valueAt={index => words[index]} active={step.index} roleAt={index => index < step.index ? 'read' : ''} /> })()}
     <output aria-label="Tag so far">{`Tag so far: #${step.tag || ''}`}</output>
   </>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>

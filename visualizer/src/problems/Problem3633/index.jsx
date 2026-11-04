@@ -1,6 +1,22 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
+function RideTimeline({ run, step }) {
+  const { landStartTime: ls, landDuration: ld, waterStartTime: ws, waterDuration: wd } = run.input
+  const ends = [...ls.map((s, i) => s + ld[i]), ...ws.map((s, i) => s + wd[i])]
+  const max = Math.max(1, ...ends)
+  const W = 520, scale = v => (v / max) * (W - 40) + 20
+  const bar = (y, start, dur, label, on) => <g>
+    <rect x={scale(start)} y={y} width={Math.max(2, scale(start + dur) - scale(start))} height={18} rx={3}
+      fill={on ? 'var(--primary)' : 'var(--surface2)'} stroke="var(--text)" />
+    <text x={scale(start) + 4} y={y + 13} fontSize="11" fill="var(--text)">{label}</text>
+  </g>
+  return <svg viewBox={`0 0 ${W} 80`} role="img" aria-label="Timeline of the chosen land and water rides" style={{ width: '100%', maxWidth: W }}>
+    {ls.map((s, i) => bar(8, s, ld[i], `L${i}`, step.land === i))}
+    {ws.map((s, i) => bar(44, s, wd[i], `W${i}`, step.water === i))}
+  </svg>
+}
+
 const definition = {
   phases: [
     { id: 'start', label: 'Start', description: 'No finish time has been found yet.' },
@@ -22,6 +38,7 @@ const definition = {
 
 export default function EarliestFinishTimeRidesI() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <RideTimeline run={run} step={step} />
     <output aria-label="Ride pair">{`land ${step.land >= 0 ? step.land : 'none'}, water ${step.water >= 0 ? step.water : 'none'}`}</output>
     <output aria-label="Best finish">{`best = ${Number.isFinite(step.best) ? step.best : 'infinity'}`}</output>
   </>} renderReasoning={() => <>

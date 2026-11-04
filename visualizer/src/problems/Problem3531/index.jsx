@@ -1,6 +1,24 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
+function Plot({ run, step }) {
+  const { n, buildings } = run.input
+  const W = 300, pad = 20
+  const at = v => pad + (v / Math.max(1, n - 1)) * (W - pad * 2)
+  return <svg viewBox={`0 0 ${W} ${W}`} role="img" aria-label="Building positions on the grid" style={{ width: 260, maxWidth: '100%' }}>
+    <rect x={pad} y={pad} width={W - pad * 2} height={W - pad * 2} fill="none" stroke="var(--surface2)" />
+    {buildings.map(([x, y], index) => {
+      const covered = step.covered.includes(index)
+      const current = step.at === index
+      return <g key={index}>
+        <circle cx={at(x - 1)} cy={W - at(y - 1)} r={current ? 9 : 6}
+          fill={current ? 'var(--primary)' : covered ? 'var(--text)' : 'transparent'} stroke="var(--text)" strokeWidth="1.5" />
+        <text x={at(x - 1) + 9} y={W - at(y - 1) - 8} fontSize="11" fill="var(--text)">{index}</text>
+      </g>
+    })}
+  </svg>
+}
+
 const definition = {
   phases: [
     { id: 'start', label: 'Start', description: 'No row or column has been measured.' },
@@ -22,6 +40,7 @@ const definition = {
 
 export default function CountCoveredBuildings() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <Plot run={run} step={step} />
     <ol aria-label="Buildings">
       {run.input.buildings.map(([x, y], index) => <li key={index} data-role={step.at === index ? 'current' : step.covered.includes(index) ? 'covered' : ''}>
         {`(${x}, ${y})`}{step.at === index ? ' checked' : ''}{step.covered.includes(index) ? ' covered' : ''}</li>)}

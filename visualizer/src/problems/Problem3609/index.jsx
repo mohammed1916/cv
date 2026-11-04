@@ -1,6 +1,23 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
+function StatePlane({ run, step }) {
+  const [sx, sy, tx, ty] = run.input
+  const size = Math.max(sx, sy, tx, ty, 1)
+  const W = 260, pad = 24
+  const at = v => pad + (v / size) * (W - pad * 2)
+  const pt = (x, y) => ({ cx: at(x), cy: W - at(y) })
+  return <svg viewBox={`0 0 ${W} ${W}`} role="img" aria-label="Coordinate plane with start, target and current state" style={{ width: 240, maxWidth: '100%' }}>
+    <line x1={pad} y1={W - pad} x2={W - pad} y2={W - pad} stroke="var(--text)" strokeOpacity="0.4" />
+    <line x1={pad} y1={pad} x2={pad} y2={W - pad} stroke="var(--text)" strokeOpacity="0.4" />
+    <circle {...pt(sx, sy)} r={7} fill="var(--accent, var(--primary))" />
+    <text {...pt(sx, sy)} dx={10} dy={-8} fontSize="11" fill="var(--text)">start</text>
+    <rect x={pt(tx, ty).cx - 6} y={pt(tx, ty).cy - 6} width={12} height={12} fill="var(--primary)" />
+    <text {...pt(tx, ty)} dx={10} dy={-8} fontSize="11" fill="var(--text)">target</text>
+    {step.state && <circle {...pt(step.state[0], step.state[1])} r={11} fill="none" stroke="var(--primary)" strokeWidth="2" />}
+  </svg>
+}
+
 const definition = {
   phases: [
     { id: 'start', label: 'Target', description: 'Start from the target and undo moves backward.' },
@@ -20,6 +37,7 @@ const definition = {
 
 export default function MinimumMovesTarget() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <StatePlane run={run} step={step} />
     <output aria-label="Current state">{step.state ? `State: (${step.state[0]}, ${step.state[1]}), distance ${step.distance}` : `No path, answer ${step.distance}`}</output>
     <output aria-label="Start">{`Start: (${run.input[0]}, ${run.input[1]}), target: (${run.input[2]}, ${run.input[3]})`}</output>
   </>} renderReasoning={() => <>

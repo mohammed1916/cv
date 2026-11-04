@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -19,6 +20,8 @@ const definition = {
 
 export default function TotalWavinessRange() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    {(() => { const ds = String(step.number); return <IndexedSequence label="Digits of the current number" length={ds.length}
+      valueAt={i => ds[i]} active={-1} roleAt={i => { if (i === 0 || i === ds.length - 1) return 'end, never counted'; const d = +ds[i]; if (d > +ds[i - 1] && d > +ds[i + 1]) return 'peak'; if (d < +ds[i - 1] && d < +ds[i + 1]) return 'valley'; return 'plain' }} /> })()}
     <output aria-label="Number">{`Range ${run.input.num1} to ${run.input.num2}. Current number: ${step.number}`}</output>
     <output aria-label="Total">{`Total waviness so far: ${step.total}`}</output>
   </>} renderReasoning={() => <>

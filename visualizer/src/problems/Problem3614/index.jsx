@@ -1,6 +1,15 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
+function OperationChips({ s, active }) {
+  return <ol aria-label="Operations, read from the last to the first" style={{ display: 'flex', gap: 6, flexWrap: 'wrap', listStyle: 'none', padding: 0 }}>
+    {[...String(s)].map((op, i) => <li key={i} data-current={i === active ? 'yes' : undefined}
+      style={{ border: '1px solid var(--surface2)', borderRadius: 6, padding: '4px 8px', background: i === active ? 'var(--primary)' : 'var(--surface2)', color: i === active ? 'var(--on-primary, #fff)' : 'var(--text)' }}>
+      <small>{i + 1}</small> <strong>{op}</strong>
+    </li>)}
+  </ol>
+}
+
 const definition = {
   phases: [
     { id: 'lengths', label: 'Lengths', description: 'Track only the length after each operation.' },
@@ -20,6 +29,7 @@ const definition = {
 
 export default function SpecialOperationsII() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <OperationChips s={run.input.s} active={step.index} />
     <output aria-label="Position">{`Operations: ${run.input.s}. Position ${step.pos} of ${step.total} (operation ${step.index >= 0 ? step.index + 1 : '-'})`}</output>
   </>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>

@@ -20,6 +20,15 @@ function RowTable({ label, rows, columns }) {
   )
 }
 
+function StageRail({ phases, active }) {
+  return <ol aria-label="SQL stages" style={{ display: 'flex', gap: 8, flexWrap: 'wrap', listStyle: 'none', padding: 0 }}>
+    {phases.map(phase => <li key={phase.id} aria-current={phase.id === active ? 'step' : undefined}
+      style={{ border: '1px solid var(--surface2)', borderRadius: 6, padding: '4px 10px', background: phase.id === active ? 'var(--primary)' : 'var(--surface2)', color: phase.id === active ? 'var(--on-primary, #fff)' : 'var(--text)' }}>
+      <strong>{phase.label}</strong>
+    </li>)}
+  </ol>
+}
+
 const definition = {
   number: '3570',
   phases: [
@@ -36,7 +45,7 @@ const definition = {
   examples: [
     {
       label: 'Sample',
-      input: '{"library_books":[{"book_id":1,"title":"Atlas","author":"Ruiz","genre":"fiction","publication_year":2001,"total_copies":2},{"book_id":2,"title":"Brook","author":"Chen","genre":"science","publication_year":2010,"total_copies":1},{"book_id":3,"title":"Cedar","author":"Okafor","genre":"history","publication_year":1999,"total_copies":3},{"book_id":4,"title":"Delta","author":"Park","genre":"fiction","publication_year":2018,"total_copies":1}],"borrowing_records":[{"record_id":1,"book_id":1,"borrower_name":"ann","borrow_date":"2024-01-01","return_date":"2024-01-10"},{"record_id":2,"book_id":1,"borrower_name":"bo","borrow_date":"2024-02-01","return_date":null},{"record_id":3,"book_id":1,"borrower_name":"cy","borrow_date":"2024-02-05","return_date":null},{"record_id":4,"book_id":2,"borrower_name":"dee","borrow_date":"2024-03-01","return_date":null},{"record_id":5,"book_id":3,"borrower_name":"eve","borrow_date":"2024-03-02","return_date":null},{"record_id":6,"book_id":3,"borrower_name":"fay","borrow_date":"2024-03-03","return_date":"2024-03-20"},{"record_id":7,"book_id":4,"borrower_name":"gus","borrow_date":"2024-01-05","return_date":"2024-01-06"},{"record_id":8,"book_id":2,"borrower_name":"hal","borrow_date":"2023-12-01","return_date":"2023-12-20"}]}',
+      input: '{"library_books":[{"book_id":1,"title":"Atlas","author":"Ruiz","genre":"fiction","publication_year":2001,"total_copies":2},{"book_id":2,"title":"Brook","author":"Chen","genre":"science","publication_year":2010,"total_copies":1},{"book_id":3,"title":"Cedar","author":"Okafor","genre":"history","publication_year":1999,"total_copies":3},{"book_id":4,"title":"Delta","author":"Park","genre":"fiction","publication_year":2018,"total_copies":1}],"borrowing_records":[{"record_id":1,"book_id":1,"borrower_name":"ann","borrow_date":"2024-01-01","return_date":"2024-01-10"},{"record_id":2,"book_id":1,"borrower_name":"bo","borrow_date":"2024-02-01","return_date":null},{"record_id":3,"book_id":1,"borrower_name":"cy","borrow_date":"2024-02-05","return_date":null},{"record_id":4,"book_id":2,"borrower_name":"dee","borrow_date":"2024-03-01","return_date":null},{"record_id":5,"book_id":3,"borrower_name":"eve","borrow_date":"2024-03-02","return_date":null},{"record_id":6,"book_id":3,"borrower_name":"fay","borrow_date":"2024-03-03","return_date":"2024-03-20"},{"record_id":7,"book_id":4,"borrower_name":"gus","borrow_date":"2024-01-05","return_date":"2024-01-06"},{"record_id":8,"book_id":2,"borrower_name":"hal","borrow_date":"2023-10-15","return_date":null}]}',
     },
     {
       label: 'Fully on loan',
@@ -47,6 +56,7 @@ const definition = {
 
 export default function FindBooksWithNoAvailableCopies() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+    <StageRail phases={definition.phases} active={step.phase} />
     <RowTable label="Working rows" rows={step.rows} columns={WORK_COLUMNS} />
     <RowTable label="Result so far" rows={step.result} columns={RESULT_COLUMNS} />
   </>} renderReasoning={() => <>

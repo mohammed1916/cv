@@ -1,6 +1,16 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
+function PopcountChips({ n, c }) {
+  const bits = n.toString(2).length
+  return <ol aria-label="Popcount classes" style={{ display: 'flex', gap: 6, flexWrap: 'wrap', listStyle: 'none', padding: 0 }}>
+    {Array.from({ length: bits }, (_, i) => i + 1).map(value => <li key={value} data-current={value === c ? 'yes' : undefined}
+      style={{ border: '1px solid var(--surface2)', borderRadius: 6, padding: '4px 8px', background: value === c ? 'var(--primary)' : 'var(--surface2)', color: value === c ? 'var(--on-primary, #fff)' : 'var(--text)' }}>
+      popcount {value}
+    </li>)}
+  </ol>
+}
+
 const definition = {
   phases: [
     { id: 'zero', label: 'k = 0', description: 'Only the number 1 has depth 0.' },
@@ -20,6 +30,7 @@ const definition = {
 
 export default function PopcountDepthCount() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <PopcountChips n={run.input.n} c={step.c} />
     <output aria-label="Class">{step.c === null ? `n = ${run.input.n}, k = ${run.input.k}` : `Popcount ${step.c}: ${step.count} numbers, depth of this class ${step.depth + 1}`}</output>
     <output aria-label="Total">{`Running total: ${step.total}`}</output>
   </>} renderReasoning={() => <>

@@ -25,7 +25,8 @@ export default function EqualSumGridPartitionOne() {
       <table aria-label="Grid">
         <tbody>{run.input.grid.map((row, r) => <tr key={r}>{row.map((value, c) => {
           const side = !cut ? '' : cut.kind === 'row' ? (r <= cut.index ? 'top' : 'bottom') : (c <= cut.index ? 'left' : 'right')
-          return <td key={c} data-side={side}>{value}</td>
+          const tint = side === 'top' || side === 'left' ? 'var(--primary)' : side === 'bottom' || side === 'right' ? 'var(--accent, var(--surface2))' : 'transparent'
+          return <td key={c} data-side={side} style={{ border: '1px solid var(--surface2)', padding: '4px 8px', textAlign: 'center', background: tint, opacity: side ? 0.85 : 1 }}>{value}</td>
         })}</tr>)}</tbody>
       </table>
       <output aria-label="Cut sums">{step.acc === null || step.acc === undefined ? `Total ${step.total}` : `First part ${step.acc}, total ${step.total}`}</output>
