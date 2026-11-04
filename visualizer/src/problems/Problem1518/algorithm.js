@@ -15,14 +15,16 @@ export function parseInput(text) {
   return { numBottles, numExchange }
 }
 
-export const code = `water bottles (numBottles, numExchange):
-  drunk = numBottles
-  empty = numBottles
-  while empty >= numExchange:
-    fresh = empty // numExchange
-    drunk += fresh
-    empty = empty % numExchange + fresh
-  return drunk`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function waterBottles(numBottles, numExchange) {",
+  "  let drunk = numBottles",
+  "  let empty = numBottles",
+  "  while (empty >= numExchange) {",
+  "    const fresh = Math.floor(empty / numExchange)",
+  "    drunk += fresh",
+  "    empty = (empty % numExchange) + fresh }",
+  "  return drunk }",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def num_water_bottles(num_bottles, num_exchange):
     drunk = num_bottles

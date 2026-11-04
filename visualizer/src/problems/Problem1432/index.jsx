@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -22,6 +23,11 @@ const definition = {
 export default function MaxDifferenceChangingInteger() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Digits of num" length={run.text.length} valueAt={index => run.text[index]} active={-1} roleAt={index => (step.changed && run.text[index] === step.changed ? 'changed' : '')} />
+    <RecordStateTable label="The two single substitutions" columns={['goal', 'digit replaced', 'result']}
+      rows={[
+        { goal: 'largest', 'digit replaced': step.phase === 'start' ? '—' : step.big === run.text ? 'none (all 9s)' : `${step.changed || '—'} → 9`, result: step.big ?? 'pending' },
+        { goal: 'smallest', 'digit replaced': step.phase === 'done' || step.phase === 'min' ? (step.small === run.text ? 'none' : `${step.phase === 'min' ? (run.text[0] !== '1' ? run.text[0] + ' → 1' : step.changed + ' → 0') : ''}`) : '—', result: step.small ?? 'pending' },
+      ]} />
     <output aria-label="Candidates">{`Largest: ${step.big ?? '(pending)'}, smallest: ${step.small ?? '(pending)'}`}</output>
   </>} renderReasoning={() => <>
     <p>One substitution is applied to get the largest value and another to get the smallest; the two are independent.</p>

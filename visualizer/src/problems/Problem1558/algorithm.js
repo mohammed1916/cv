@@ -28,7 +28,7 @@ export function buildTrace({ nums }) {
   nums.forEach((value, i) => {
     total += ones[i]
     frames.push({
-      phase: 'bits', activeLine: L('increments += number'), pythonLine: P('increments += bin(value)'),
+      phase: 'bits', activeLine: L('increments += value.toString(2)'), pythonLine: P('increments += bin(value)'),
       snapshot: snap(i, total, null),
       message: `${value} is ${bits[i]} in binary with ${ones[i]} set bit${ones[i] === 1 ? '' : 's'}. The running increment total is ${total}.`,
     })
@@ -36,7 +36,7 @@ export function buildTrace({ nums }) {
   const max = Math.max(...nums)
   const doublings = Math.max(0, max.toString(2).length - 1)
   frames.push({
-    phase: 'doublings', activeLine: L('doublings = max'), pythonLine: P('doublings = max'),
+    phase: 'doublings', activeLine: L('doublings = Math.max'), pythonLine: P('doublings = max'),
     snapshot: snap(nums.length, total, doublings),
     message: max === 0
       ? 'Every value is zero, so no doublings are needed.'
@@ -50,12 +50,14 @@ export function buildTrace({ nums }) {
   return { input: { nums }, result, frames }
 }
 
-export const code = `minimum operations (nums):
-  increments = 0
-  for each value in nums:
-    increments += number of 1 bits in value
-  doublings = max(0, bit length of largest value - 1)
-  return increments + doublings`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function minOperations(nums) {",
+  "  let increments = 0",
+  "  for (const value of nums) {",
+  "    increments += value.toString(2).split('').filter(bit => bit === '1').length }",
+  "  const doublings = Math.max(0, Math.floor(Math.log2(Math.max(...nums))))",
+  "  return increments + doublings }",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 

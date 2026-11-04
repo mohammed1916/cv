@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -25,6 +26,9 @@ const definition = {
 export default function AvoidFlood() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Plan (-1 rain, 1 default dry, lake number when used)" length={run.input.rains.length} valueAt={i => step.ans[i]} active={step.day ?? -1} />
+    <RecordStateTable label="Lakes and dry days" columns={['lake', 'last rain day', 'dry days still free']}
+      rows={[...(step.lastRain || []).map(([lake, day]) => ({ lake, 'last rain day': day, 'dry days still free': '' })),
+        ...(step.dryLeft || []).map(d => ({ lake: '—', 'last rain day': '', 'dry days still free': d }))]} />
     <output aria-label="Full lakes">{`Full lakes: ${step.full.length ? step.full.join(', ') : 'none'}`}</output>
   </>} renderReasoning={() => <>
     <p>A dry day can only help a lake that rained before it, so each flood needs a dry day after that lake's last rain.</p>

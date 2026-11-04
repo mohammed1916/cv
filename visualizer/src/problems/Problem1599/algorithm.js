@@ -18,7 +18,7 @@ export function buildTrace(input) {
   let bestRotation = -1
   let rotation = 0
   const profits = []
-  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set waiting to 0'), rotation: 0, waiting, profit, best, bestRotation, profits: [], message: 'No rotations yet. Profit must beat 0 to count.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('let waiting = 0'), rotation: 0, waiting, profit, best, bestRotation, profits: [], message: 'No rotations yet. Profit must beat 0 to count.' }]
   while (next < customers.length || waiting > 0) {
     rotation += 1
     if (next < customers.length) waiting += customers[next++]
@@ -31,25 +31,35 @@ export function buildTrace(input) {
       best = profit
       bestRotation = rotation
     }
-    frames.push({ phase: improved ? 'record' : 'rotate', pythonLine: improved ? 18 : 16, activeLine: L(improved ? 'if profit is greater than best' : 'board the smaller'), rotation, waiting, profit, best, bestRotation, profits: [...profits],
+    frames.push({ phase: improved ? 'record' : 'rotate', pythonLine: improved ? 18 : 16, activeLine: L(improved ? 'if (profit > best)' : 'const board = Math.min(4'), rotation, waiting, profit, best, bestRotation, profits: [...profits],
       message: `Rotation ${rotation}: ${board} board, profit ${profit}. ${improved ? `New best at rotation ${rotation}.` : `Best stays at ${best} (rotation ${bestRotation}).`}` })
   }
   const result = bestRotation
-  frames.push({ phase: 'done', pythonLine: 19, activeLine: L('return the best rotation'), rotation, waiting, profit, best, bestRotation, profits: [...profits], message: result === -1 ? 'No rotation makes a profit, so the answer is -1.' : `Best rotation count: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 19, activeLine: L('return bestRotation'), rotation, waiting, profit, best, bestRotation, profits: [...profits], message: result === -1 ? 'No rotation makes a profit, so the answer is -1.' : `Best rotation count: ${result}.` })
   return { input, result, frames }
 }
 
-export const code = `find the rotation with the most profit
-  set waiting to 0, the next group to 0, profit to 0, best to 0, and best rotation to -1
-  set rotation to 0
-  while customers remain or people are waiting
-    add 1 to rotation
-    add the next group of customers to the queue, if any
-    board the smaller of 4 and the queue, and remove them from the queue
-    add boarding income minus running cost to profit
-    if profit is greater than best then record profit and rotation as best
-  return the best rotation`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function minOperationsMaxProfit(customers, boardingCost, runningCost) {',
+  '  let waiting = 0',
+  '  let next = 0',
+  '  let profit = 0',
+  '  let best = 0',
+  '  let bestRotation = -1',
+  '  let rotation = 0',
+  '  while (next < customers.length || waiting > 0) {',
+  '    rotation++',
+  '    if (next < customers.length) waiting += customers[next++]',
+  '    const board = Math.min(4, waiting)',
+  '    waiting -= board',
+  '    profit += board * boardingCost - runningCost',
+  '    if (profit > best) { best = profit; bestRotation = rotation }',
+  '  }',
+  '  return bestRotation',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(c => c.includes(s)) + 1
 
 export const python = `def max_profit_rotations(customers, boardingCost, runningCost):
     waiting = 0

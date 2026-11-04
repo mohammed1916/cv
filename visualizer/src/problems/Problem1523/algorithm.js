@@ -15,10 +15,12 @@ export function parseInput(text) {
   return { low, high }
 }
 
-export const code = `count odd integers in [low, high]:
-  upto_high = (high + 1) // 2
-  below_low = low // 2
-  return upto_high - below_low`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function countOdds(low, high) {",
+  "  const upToHigh = Math.floor((high + 1) / 2)",
+  "  const belowLow = Math.floor(low / 2)",
+  "  return upToHigh - belowLow }",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def count_odds(low, high):
     upto_high = (high + 1) // 2

@@ -1,21 +1,27 @@
-// LeetCode 1682 (draft): Longest Palindromic Subsequence II.
+// LeetCode 1682: Longest Palindromic Subsequence II.
 // Input: a lowercase string s (visualization cap: 8 characters). Find the longest subsequence that is a palindrome of
 // even length where no two adjacent characters are equal except the central pair. Return 0 when none exists.
 // Each layer of the palindrome is a matching pair (s[i], s[j]); the pairs' letters must differ from the layer outside them.
 
-const CODE_TEXT = `FUNCTION longestPalindromicII(s)
-    memo ← empty map
-    FUNCTION best(l, r, prev)
-        IF l is at least r, RETURN 0
-        IF (l, r, prev) is already in memo, RETURN the stored value
-        result ← 0
-        FOR each pair i < j inside l..r
-            IF s[i] equals s[j] and s[i] is not prev
-                value ← 1 plus best(i + 1, j - 1, s[i])
-                result ← the larger of result and value
-        store result in memo for (l, r, prev)
-        RETURN result
-    RETURN 2 times best(0, length of s minus 1, none)`
+const CODE_TEXT = `export function longestPalindromicII(s) {
+  const memo = new Map()
+  function best(l, r, prev) {
+    if (l >= r) return 0
+    const key = l + ',' + r + ',' + prev
+    if (memo.has(key)) return memo.get(key)
+    let result = 0
+    for (let i = l; i < r; i++) {
+      for (let j = i + 1; j <= r; j++) {
+        if (s[i] === s[j] && s[i] !== prev) {
+          result = Math.max(result, 1 + best(i + 1, j - 1, s[i]))
+        }
+      }
+    }
+    memo.set(key, result)
+    return result
+  }
+  return 2 * best(0, s.length - 1, '')
+}`
 
 export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
 
@@ -81,10 +87,10 @@ export function buildTrace(s) {
   let calls = 0
   const best = (l, r, prev, depth) => {
     if (l >= r) return 0
-    const key = `${l},${r},${prev}`
+    const key = l + ',' + r + ',' + prev
     if (memo.has(key)) return memo.get(key)
     calls += 1
-    frames.push({ pythonLine: P('if l >= r:'), phase: 'enter', activeLine: L('IF l is at least r'), l, r, prev, pair: null, best: 0, memoSize: memo.size, memo: snapshotMemo(memo), message: `Window ${l}..${r} with outer letter ${prev === '' ? 'none' : prev} forbidden.` })
+    frames.push({ pythonLine: P('if l >= r:'), phase: 'enter', activeLine: L('if (l >= r)'), l, r, prev, pair: null, best: 0, memoSize: memo.size, memo: snapshotMemo(memo), message: `Window ${l}..${r} with outer letter ${prev === '' ? 'none' : prev} forbidden.` })
     let result = 0
     for (let i = l; i < r; i++) {
       for (let j = i + 1; j <= r; j++) {
@@ -92,16 +98,16 @@ export function buildTrace(s) {
           const inner = best(i + 1, j - 1, s[i], depth + 1)
           const value = 1 + inner
           if (value > result) result = value
-          frames.push({ pythonLine: P('result = max(result, 1 +'), phase: 'pair', activeLine: L('IF s[i] equals s[j] and s[i] is not prev'), l, r, prev, pair: [i, j], value, best: result, memoSize: memo.size, memo: snapshotMemo(memo), message: `Pair ${s[i]} at ${i} and ${j} gives 1 + ${inner} = ${value}; best is ${result}.` })
+          frames.push({ pythonLine: P('result = max(result, 1 +'), phase: 'pair', activeLine: L('if (s[i] === s[j]'), l, r, prev, pair: [i, j], value, best: result, memoSize: memo.size, memo: snapshotMemo(memo), message: `Pair ${s[i]} at ${i} and ${j} gives 1 + ${inner} = ${value}; best is ${result}.` })
         }
       }
     }
     memo.set(key, result)
-    frames.push({ pythonLine: P('memo[key] = result'), phase: 'store', activeLine: L('store result in memo'), l, r, prev, pair: null, best: result, memoSize: memo.size, memo: snapshotMemo(memo), message: `Window ${l}..${r} with ${prev === '' ? 'no' : prev} forbidden: ${result} layer${result === 1 ? '' : 's'}.` })
+    frames.push({ pythonLine: P('memo[key] = result'), phase: 'store', activeLine: L('memo.set(key, result)'), l, r, prev, pair: null, best: result, memoSize: memo.size, memo: snapshotMemo(memo), message: `Window ${l}..${r} with ${prev === '' ? 'no' : prev} forbidden: ${result} layer${result === 1 ? '' : 's'}.` })
     return result
   }
   const layers = best(0, n - 1, '', 0)
   const answer = 2 * layers
-  frames.push({ pythonLine: P('return 2 * best'), phase: 'answer', activeLine: L('RETURN 2 times best'), l: 0, r: n - 1, prev: '', pair: null, best: layers, memoSize: memo.size, memo: snapshotMemo(memo), message: answer === 0 ? 'No valid palindrome subsequence: answer 0.' : `${layers} layer${layers === 1 ? '' : 's'}: longest length ${answer}.` })
+  frames.push({ pythonLine: P('return 2 * best'), phase: 'answer', activeLine: L('return 2 * best'), l: 0, r: n - 1, prev: '', pair: null, best: layers, memoSize: memo.size, memo: snapshotMemo(memo), message: answer === 0 ? 'No valid palindrome subsequence: answer 0.' : `${layers} layer${layers === 1 ? '' : 's'}: longest length ${answer}.` })
   return { input: s, result: answer, calls, frames }
 }

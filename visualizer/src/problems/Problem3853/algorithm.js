@@ -1,11 +1,23 @@
-export const code = [
-  'current starts as s',
-  'repeat while a merge is possible',
-  'find the close equal pair with the smallest left index, then the smallest right index',
-  'if there is no such pair then stop',
-  'remove the right character of that pair',
-  'return the current string',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function mergeCloseCharacters(s, k) {
+  // current starts as s, as an array of characters
+  const cur = [...s]
+  // repeat while a merge is possible
+  for (;;) {
+    let pair = null
+    // find the close equal pair with the smallest left index, then the smallest right index
+    outer: for (let i = 0; i < cur.length; i++) {
+      for (let j = i + 1; j < cur.length; j++) {
+        if (cur[i] === cur[j] && j - i <= k) { pair = [i, j]; break outer }
+      }
+    }
+    // if there is no such pair then stop
+    if (!pair) break
+    // remove the right character of that pair
+    cur.splice(pair[1], 1)
+  }
+  // return the current string
+  return cur.join('')
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = key => code.findIndex(c => c.text.includes(key)) + 1
 const PY = key => python.split('\n').findIndex(line => line.includes(key)) + 1
 

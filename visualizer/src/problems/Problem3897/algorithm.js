@@ -1,12 +1,28 @@
 const MOD = 1000000007n
-const codeLines = `for each index i build the segment: nums1[i] ones then nums0[i] zeros
-  val = (2^ones minus 1) times 2^zeros, len = ones + zeros
-sort segments so that a comes first when
-  val_a times (2^len_b minus 1) is larger than val_b times (2^len_a minus 1)
-total = 0
-for each segment in sorted order
-  total = total times 2^len + val
-return total modulo 1000000007`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
+const codeLines = `function maxValue(nums1, nums0) {
+  const MOD = 1000000007n
+  // for each index i build the segment: nums1[i] ones then nums0[i] zeros
+  // val = (2^ones minus 1) times 2^zeros, len = ones + zeros
+  const segs = nums1.map((ones, i) => {
+    const zeros = nums0[i]
+    return { len: ones + zeros, val: ((1n << BigInt(ones)) - 1n) << BigInt(zeros) }
+  })
+  // sort segments so that a comes first when
+  // val_a times (2^len_b minus 1) is larger than val_b times (2^len_a minus 1)
+  segs.sort((a, b) => {
+    const left = a.val * ((1n << BigInt(b.len)) - 1n)
+    const right = b.val * ((1n << BigInt(a.len)) - 1n)
+    return left > right ? -1 : left < right ? 1 : 0
+  })
+  let total = 0n
+  // for each segment in sorted order
+  for (const seg of segs) {
+    // total = total times 2^len + val
+    total = (total << BigInt(seg.len)) + seg.val
+  }
+  // return total modulo 1000000007
+  return total % MOD
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => codeLines.findIndex(c => c.text.includes(s)) + 1
 const pythonLines = `from functools import cmp_to_key
 def max_value(nums1, nums0):

@@ -26,7 +26,7 @@ export default function SumOfSortableIntegers() {
       <IndexedSequence label={step.k ? `nums, split into blocks of length ${step.k}` : 'nums (no block length chosen yet)'} length={n}
         active={step.start !== null && step.start !== undefined ? step.start : -1}
         valueAt={index => run.input.nums[index]}
-        roleAt={index => !step.k ? '' : inBlock(index) ? (index === step.start ? 'l' : 'in block') : ''} />
+        roleAt={index => !step.k ? '' : inBlock(index) ? (index === step.start ? 'l' : index === step.start + step.k - 1 ? 'r' : 'in block') : ''} />
       {step.want && <IndexedSequence label={`Sorted target for this block (positions ${step.start}–${step.start + step.k - 1})`} length={step.want.length}
         valueAt={offset => step.want[offset]} roleAt={offset => step.rotation >= 0 ? `rotate ${step.rotation}` : 'no match'} />}
       <output aria-label="Sum so far">{`Total ${step.total}. ${step.message}`}</output>

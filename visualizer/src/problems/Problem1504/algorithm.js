@@ -14,18 +14,22 @@ export function parseInput(text) {
   return mat
 }
 
-export const code = `count all-one submatrices (mat):
-  heights = zero for every column
-  total = 0
-  for each row in mat:
-    for each column c: heights[c] = heights[c] + 1 if cell is 1, else 0
-    for right in columns:
-      low = heights[right]
-      for left from right down to 0:
-        low = min(low, heights[left])
-        if low == 0: stop widening this right edge
-        total += low
-  return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function countSubmatrices(mat) {",
+  "  const heights = Array(mat[0].length).fill(0)",
+  "  let total = 0",
+  "  for (const row of mat) {",
+  "    for (let c = 0; c < row.length; c++) heights[c] = row[c] === 1 ? heights[c] + 1 : 0",
+  "    for (let right = 0; right < row.length; right++) {",
+  "      let low = heights[right]",
+  "      for (let left = right; left >= 0; left--) {",
+  "        low = Math.min(low, heights[left])",
+  "        if (low === 0) break",
+  "        total += low }",
+  "    }",
+  "  }",
+  "  return total }",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def count_submatrices(mat):
     cols = len(mat[0])
@@ -46,13 +50,13 @@ export const python = `def count_submatrices(mat):
 
 // Each key names the pseudocode line and the Python line it corresponds to.
 const SPOT = {
-  start: ['heights = zero', 'heights = [0]'],
-  grow: ['heights[c] = heights[c] + 1', 'heights[c] = heights[c] + 1'],
-  right: ['low = heights[right]', 'low = heights[right]'],
-  min: ['low = min(', 'low = min('],
-  stop: ['if low == 0', 'if low == 0'],
-  add: ['total += low', 'total += low'],
-  done: ['return total', 'return total'],
+  start: ["const heights = Array(mat[0].length)", "heights = [0]"],
+  grow: ["heights[c] = row[c] === 1", "heights[c] = heights[c] + 1"],
+  right: ["let low = heights[right]", "low = heights[right]"],
+  min: ["low = Math.min(", "low = min("],
+  stop: ["if (low === 0)", "if low == 0"],
+  add: ["total += low", "total += low"],
+  done: ["return total", "return total"],
 }
 function where(key) {
   const [pseudo, py] = SPOT[key]

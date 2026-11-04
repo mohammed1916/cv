@@ -21,16 +21,29 @@ export function buildTrace(input) {
   return { input, result: score, frames }
 }
 
-export const code = `digit frequency score of n
-  let score be 0
-  let counts be an empty table of digit counts
-  while n is greater than 0
-    let d be n mod 10
-    add 1 to counts for d
-    remove the last digit of n
-  for each digit d in counts
-    add d times counts of d to score
-  return score`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function digitFrequencyScore(n) {
+  // let score be 0
+  let score = 0
+  // let counts be an empty table of digit counts
+  const counts = new Map()
+  let m = n
+  // while n is greater than 0
+  while (m > 0) {
+    // let d be n mod 10
+    const d = m % 10
+    // add 1 to counts for d
+    counts.set(d, (counts.get(d) || 0) + 1)
+    // remove the last digit of n
+    m = Math.floor(m / 10)
+  }
+  // for each digit d in counts
+  for (const [d, f] of counts) {
+    // add d times counts of d to score
+    score += d * f
+  }
+  // return score
+  return score
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def digit_frequency_score(n):

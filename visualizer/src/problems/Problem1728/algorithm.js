@@ -111,15 +111,43 @@ export function buildTrace({ grid, catJump, mouseJump }) {
   return { input, result, frames }
 }
 
-export const code = `can the mouse force food first when both play best
-  mark finished states: mouse on food, or cat on food or on the mouse
-  repeat until no state changes
-    a state where the mouse moves is a mouse win if some move reaches a mouse win
-    a state where the mouse moves is a cat win if every move reaches a cat win
-    a state where the cat moves is a mouse win if every move reaches a mouse win
-    a state where the cat moves is a cat win if some move reaches a cat win
-  a draw within 1000 turns counts as a cat win
-  return whether the start state is a mouse win`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `export function canMouseWin(grid, catJump, mouseJump) {
+  const cells = grid.join('')
+  const n = cells.length
+  const food = cells.indexOf('F')
+  const mouseStart = cells.indexOf('M')
+  const catStart = cells.indexOf('C')
+  const moveM = cells.split('').map((_, cell) => reachable(grid, cell, mouseJump))
+  const moveC = cells.split('').map((_, cell) => reachable(grid, cell, catJump))
+  const id = (m, c, t) => (m * n + c) * 2 + t // t = 0: mouse to move, t = 1: cat to move
+  const result = new Int8Array(2 * n * n) // 0 unknown, 1 mouse wins, 2 cat wins
+  const remaining = new Int32Array(2 * n * n) // moves not yet known to lose
+  const queue = []
+  // mark finished states: mouse on food, or cat on food or on the mouse
+  for (let m = 0; m < n; m++) for (let c = 0; c < n; c++) for (let t = 0; t < 2; t++) {
+    const s = id(m, c, t)
+    remaining[s] = t === 0 ? moveM[m].length : moveC[c].length
+    if (m === food) { result[s] = 1; queue.push(s) }
+    else if (c === food || c === m) { result[s] = 2; queue.push(s) }
+  }
+  for (let head = 0; head < queue.length; head++) {
+    const s = queue[head]
+    const t = s % 2, c = Math.floor(s / 2) % n, m = Math.floor(s / 2 / n)
+    const outcome = result[s]
+    const preds = t === 0 ? moveC[c].map(y => id(m, y, 1)) : moveM[m].map(x => id(x, c, 0))
+    for (const p of preds) {
+      if (result[p] !== 0) continue
+      const mouseMoves = p % 2 === 0
+      // a state where the mouse moves is a mouse win if some move reaches a mouse win
+      // a state where the mouse moves is a cat win if every move reaches a cat win
+      // a state where the cat moves is a mouse win if every move reaches a mouse win
+      // a state where the cat moves is a cat win if some move reaches a cat win
+      if (outcome === (mouseMoves ? 1 : 2)) { result[p] = outcome; queue.push(p) }
+      else if (--remaining[p] === 0) { result[p] = mouseMoves ? 2 : 1; queue.push(p) }
+    }
+  }
+  // a draw within 1000 turns counts as a cat win
+  return result[id(mouseStart, catStart, 0)] === 1 // return whether the start state is a mouse win`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `from collections import deque

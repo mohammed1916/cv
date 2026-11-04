@@ -18,18 +18,21 @@ export function parseInput(text) {
   return { nums, left, right }
 }
 
-export const code = `range sum of sorted subarray sums (nums, left, right):
-  sums = empty list
-  for each start index s in nums:
-    running = 0
-    for each end index e from s to the last index:
-      running = running + nums[e]
-      append running to sums
-  sort sums ascending
-  total = 0
-  for each position from left to right (1-based):
-    total = total + sums[position - 1]
-  return total modulo 1000000007`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function rangeSumSortedSubarraySums(nums, left, right) {",
+  "  const sums = []",
+  "  for (let s = 0; s < nums.length; s++) {",
+  "    let running = 0",
+  "    for (let e = s; e < nums.length; e++) {",
+  "      running += nums[e]",
+  "      sums.push(running) }",
+  "  }",
+  "  sums.sort((a, b) => a - b)",
+  "  let total = 0",
+  "  for (let position = left; position <= right; position++) {",
+  "    total = (total + sums[position - 1]) % 1000000007 }",
+  "  return total }",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def range_sum_of_sorted_subarray_sums(nums, left, right):
     MOD = 1_000_000_007
@@ -47,11 +50,11 @@ export const python = `def range_sum_of_sorted_subarray_sums(nums, left, right):
 `
 
 const SPOT = {
-  setup: ['sums = empty', 'sums = []'],
-  gen: ['running = running + nums[e]', 'running += nums[end]'],
-  sort: ['sort sums ascending', 'sums.sort()'],
-  pick: ['total = total + sums[position - 1]', 'total += sums[rank]'],
-  done: ['return total modulo', 'return total % MOD'],
+  setup: ['const sums = []', 'sums = []'],
+  gen: ['running += nums[e]', 'running += nums[end]'],
+  sort: ['sums.sort((a, b) => a - b)', 'sums.sort()'],
+  pick: ['total = (total + sums[position - 1])', 'total += sums[rank]'],
+  done: ['return total }', 'return total % MOD'],
 }
 function where(key) {
   const [pseudo, py] = SPOT[key]

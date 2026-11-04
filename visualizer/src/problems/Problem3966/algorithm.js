@@ -41,20 +41,40 @@ export function buildTrace(input) {
   return { input, result, frames }
 }
 
-export const code = `count good integers in the range [l, r]
-  return good up to r minus good up to l minus 1
-define good up to x
-  let digits be the digits of x
-  define go(pos, prev, tight, started)
-    if pos is past the last digit then return 1 if started else 0
-    let limit be digits[pos] if tight else 9
-    let total be 0
-    for each digit d from 0 to limit
-      let nowTight be tight and d equals limit
-      if not started and d is 0 then add go(pos + 1, none, nowTight, false) to total
-      else if not started or the gap from prev is at most k then add go(pos + 1, d, nowTight, true) to total
-    return total
-  return go(0, none, true, false)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function countGoodIntegersInRange(l, r, k) {
+  // define good up to x: count the good integers from 1 to x with a memoized digit walk
+  const goodUpTo = x => {
+    if (x <= 0) return 0
+    // let digits be the digits of x
+    const digits = String(x).split('').map(Number)
+    const memo = new Map()
+    // define go(pos, prev, tight, started), where prev is -1 before the first real digit
+    const go = (pos, prev, tight, started) => {
+      // if pos is past the last digit then return 1 if started else 0
+      if (pos === digits.length) return started ? 1 : 0
+      const key = [pos, prev, tight, started].join(',')
+      if (memo.has(key)) return memo.get(key)
+      // let limit be digits[pos] if tight else 9
+      const limit = tight ? digits[pos] : 9
+      // let total be 0
+      let total = 0
+      // for each digit d from 0 to limit
+      for (let d = 0; d <= limit; d++) {
+        // let nowTight be tight and d equals limit
+        const nowTight = tight && d === limit
+        // leading zeros do not start the number
+        if (!started && d === 0) total += go(pos + 1, -1, nowTight, false)
+        // a new digit must differ from the previous one by at most k
+        else if (!started || Math.abs(d - prev) <= k) total += go(pos + 1, d, nowTight, true)
+      }
+      memo.set(key, total)
+      return total
+    }
+    return go(0, -1, true, false)
+  }
+  // return good up to r minus good up to l minus 1
+  return goodUpTo(r) - goodUpTo(l - 1)
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def count_good_integers_in_range(l, r, k):

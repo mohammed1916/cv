@@ -15,11 +15,13 @@ export function parseInput(text) {
   return { s, indices }
 }
 
-export const code = `shuffle string (s, indices):
-  out = blank list with one slot per letter
-  for i from 0 to length of s minus 1:
-    out[indices[i]] = s[i]
-  return the letters of out joined in order`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function restoreString(s, indices) {",
+  "  const out = new Array(s.length)",
+  "  for (let i = 0; i < s.length; i++) {",
+  "    out[indices[i]] = s[i] }",
+  "  return out.join('') }",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def restore_string(s, indices):
     out = [""] * len(s)
@@ -36,12 +38,12 @@ export function buildTrace({ s, indices }) {
   const out = Array(s.length).fill(null)
   const frames = []
   const snap = (i, slots) => ({ s, indices, i, slots: [...slots] })
-  frames.push({ phase: 'start', ...at('out = blank', 'out = ['), message: `Make ${s.length} empty slots. Each letter will be dropped into the slot named by its index.`, snapshot: snap(null, out) })
+  frames.push({ phase: 'start', ...at('out = new Array', 'out = ['), message: `Make ${s.length} empty slots. Each letter will be dropped into the slot named by its index.`, snapshot: snap(null, out) })
   for (let i = 0; i < s.length; i++) {
     out[indices[i]] = s[i]
     frames.push({ phase: 'place', ...at('out[indices[i]] = s[i]', 'out[indices[i]] = s[i]'), message: `Letter ${s[i]} (position ${i}) goes to slot ${indices[i]}.`, snapshot: snap(i, out) })
   }
   const result = out.join('')
-  frames.push({ phase: 'done', ...at('return the letters', 'return "".join'), message: `Reading the slots left to right gives "${result}".`, snapshot: snap(null, out) })
+  frames.push({ phase: 'done', ...at('return out.join', 'return "".join'), message: `Reading the slots left to right gives "${result}".`, snapshot: snap(null, out) })
   return { input: { s, indices }, result, frames }
 }

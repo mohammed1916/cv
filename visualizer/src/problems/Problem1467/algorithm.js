@@ -21,7 +21,7 @@ export function buildTrace(balls) {
   const total = balls.reduce((a, b) => a + b, 0)
   const half = total / 2
   let ways = new Map([[key(0, 0, 0), 1]])
-  const frames = [{ phase: 'start', activeLine: L('let T be'), pythonLine: 4, color: -1, states: ways.size, favorable: 0, message: `There are ${total} balls. Each box must receive ${half}.` }]
+  const frames = [{ phase: 'start', activeLine: L('const total'), pythonLine: 4, color: -1, states: ways.size, favorable: 0, message: `There are ${total} balls. Each box must receive ${half}.` }]
   balls.forEach((count, color) => {
     const next = new Map()
     for (const [state, w] of ways) {
@@ -33,7 +33,7 @@ export function buildTrace(balls) {
       }
     }
     ways = next
-    frames.push({ phase: 'color', activeLine: L('for each color'), pythonLine: 15, color, states: ways.size, favorable: 0, message: `Colour ${color + 1} has ${count} balls. Split them into the two boxes in every way.` })
+    frames.push({ phase: 'color', activeLine: L('for (const c of balls)'), pythonLine: 15, color, states: ways.size, favorable: 0, rows: [...ways].map(([state, w]) => ({ state, w })), message: `Colour ${color + 1} has ${count} balls. Split them into the two boxes in every way.` })
   })
   let favorable = 0
   for (const [state, w] of ways) {
@@ -41,18 +41,38 @@ export function buildTrace(balls) {
     if (size === half && d1 === d2) favorable += w
   }
   const result = favorable / choose(total, half)
-  frames.push({ phase: 'done', activeLine: L('return favorable'), pythonLine: 17, color: balls.length, states: ways.size, favorable, message: `${favorable} favourable splits out of ${choose(total, half)}, so the probability is ${result.toFixed(5)}.` })
+  frames.push({ phase: 'done', activeLine: L('return favorable / choose'), pythonLine: 17, color: balls.length, states: ways.size, favorable, message: `${favorable} favourable splits out of ${choose(total, half)}, so the probability is ${result.toFixed(5)}.` })
   return { input: balls, result, frames }
 }
 
-export const code = `probability that two boxes get the same number of distinct colours
-let T be the number of balls and half be T / 2
-set ways to a table over (balls in box 1, colours in box 1, colours in box 2) with 1 at (0, 0, 0)
-for each color with count c do
-  for each state and each k from 0 to c do
-    add ways times C(c, k) to the state with k more balls in box 1
-return favorable states with half balls and equal colour counts, divided by C(T, half)`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function choose(n, k) {',
+  '  let v = 1; for (let i = 1; i <= k; i++) v = (v * (n - k + i)) / i',
+  '  return Math.round(v)',
+  '}',
+  'function probabilitySameDistinct(balls) {',
+  '  const total = balls.reduce((a, b) => a + b, 0)',
+  '  const half = total / 2',
+  "  let ways = new Map([['0,0,0', 1]])",
+  '  for (const c of balls) {',
+  '    const next = new Map()',
+  '    for (const [state, w] of ways) {',
+  "      const [size, d1, d2] = state.split(',').map(Number)",
+  '      for (let k = 0; k <= c; k++) {',
+  '        if (size + k > half) continue',
+  "        const key = `${size + k},${d1 + (k > 0 ? 1 : 0)},${d2 + (c - k > 0 ? 1 : 0)}`",
+  '        next.set(key, (next.get(key) || 0) + w * choose(c, k))',
+  '      }',
+  '    }',
+  '    ways = next',
+  '  }',
+  '  let favorable = 0',
+  "  for (const [state, w] of ways) { const [size, d1, d2] = state.split(',').map(Number); if (size === half && d1 === d2) favorable += w }",
+  '  return favorable / choose(total, half)',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(text => text.includes(s)) + 1
 
 export const python = `from math import comb
 

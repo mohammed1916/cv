@@ -1,3 +1,4 @@
+// Teaching model written for this visualizer. The sample roads and wording are original.
 export function parseInput(text) {
   const input = JSON.parse(text)
   const n = input?.n
@@ -22,50 +23,31 @@ export function parseInput(text) {
   return { n, connections }
 }
 
-export function buildTrace({ n, connections }) {
-  const adj = Array.from({ length: n }, () => [])
-  const visited = Array(n).fill(false)
-  const seen = () => visited.map((on, city) => (on ? city : -1)).filter(city => city >= 0)
-  const frames = [{ phase: 'start', activeLine: L('count reversals so all cities reach city zero'), pythonLine: 2, city: null, visited: [], count: 0, message: 'Roads that point away from city zero must be reversed. Roads that point toward it are fine.' }]
-
-  for (const [a, b] of connections) {
-    adj[a].push([b, 1])
-    adj[b].push([a, 0])
-  }
-  frames.push({ phase: 'build', activeLine: L('for each road a to b'), pythonLine: 5, city: null, visited: [], count: 0, message: 'Each road is recorded both ways. Walking it in its drawn direction costs 1; walking against it costs 0.' })
-
-  visited[0] = true
-  const stack = [0]
-  let count = 0
-  frames.push({ phase: 'push', activeLine: L('push city zero onto a stack'), pythonLine: 8, city: 0, visited: seen(), count, message: 'Start the search at city zero.' })
-  while (stack.length) {
-    const city = stack.pop()
-    frames.push({ phase: 'pop', activeLine: L('pop a city'), pythonLine: 11, city, visited: seen(), count, message: `Look at the roads leaving city ${city}.` })
-    for (const [next, cost] of adj[city]) {
-      if (visited[next]) continue
-      visited[next] = true
-      count += cost
-      stack.push(next)
-      frames.push({
-        phase: 'road', activeLine: L('add the neighbour cost'), pythonLine: 15, city: next, visited: seen(), count,
-        message: cost === 1 ? `Road from ${city} to ${next} points away from city zero, so it is reversed (count ${count}).` : `Road between ${city} and ${next} already points toward city zero.`,
-      })
-    }
-  }
-  frames.push({ phase: 'done', activeLine: L('return the count'), pythonLine: 17, city: null, visited: seen(), count, message: `Reversals needed: ${count}.` })
-  return { input: { n, connections }, result: count, frames }
-}
-
-export const code = `count reversals so all cities reach city zero
-  for each road a to b, record b as a neighbour of a with cost 1, and a as a neighbour of b with cost 0
-  push city zero onto a stack and mark it visited
-  while the stack is not empty
-    pop a city
-    for each neighbour that is not visited
-      add the neighbour cost to the count
-      mark the neighbour visited and push it onto the stack
-  return the count`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function minReorder(n, connections) {',
+  '  const adj = Array.from({ length: n }, () => [])',
+  '  for (const [a, b] of connections) {',
+  '    adj[a].push([b, 1])',
+  '    adj[b].push([a, 0])',
+  '  }',
+  '  const visited = Array(n).fill(false)',
+  '  visited[0] = true',
+  '  const stack = [0]',
+  '  let count = 0',
+  '  while (stack.length > 0) {',
+  '    const city = stack.pop()',
+  '    for (const [next, cost] of adj[city]) {',
+  '      if (visited[next]) continue',
+  '      visited[next] = true',
+  '      count += cost',
+  '      stack.push(next)',
+  '    }',
+  '  }',
+  '  return count',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(text => text.includes(s)) + 1
 
 export const python = `def min_reorders(n, connections):
     adj = [[] for _ in range(n)]
@@ -85,3 +67,37 @@ export const python = `def min_reorders(n, connections):
                 stack.append(nxt)
     return count
 `
+
+export function buildTrace({ n, connections }) {
+  const adj = Array.from({ length: n }, () => [])
+  const visited = Array(n).fill(false)
+  const seen = () => visited.map((on, city) => (on ? city : -1)).filter(city => city >= 0)
+  const frames = [{ phase: 'start', activeLine: L('let count = 0'), pythonLine: 9, city: null, from: null, visited: [], stack: [], count: 0, message: 'Roads that point away from city zero must be reversed. Count them while searching outward from city zero.' }]
+
+  for (const [a, b] of connections) {
+    adj[a].push([b, 1])
+    adj[b].push([a, 0])
+  }
+  frames.push({ phase: 'build', activeLine: L('for (const [a, b]'), pythonLine: 3, city: null, from: null, visited: [], stack: [], count: 0, message: 'Each road is recorded both ways. Walking it in its drawn direction costs 1; walking against it costs 0.' })
+
+  visited[0] = true
+  const stack = [0]
+  let count = 0
+  frames.push({ phase: 'push', activeLine: L('visited[0] = true'), pythonLine: 7, city: 0, from: null, visited: seen(), stack: [...stack], count, message: 'Start the search at city zero.' })
+  while (stack.length) {
+    const city = stack.pop()
+    frames.push({ phase: 'pop', activeLine: L('const city = stack.pop()'), pythonLine: 11, city, from: null, visited: seen(), stack: [...stack], count, message: `Take city ${city} from the stack and look at its roads.` })
+    for (const [next, cost] of adj[city]) {
+      if (visited[next]) continue
+      visited[next] = true
+      count += cost
+      stack.push(next)
+      frames.push({
+        phase: 'road', activeLine: L('count += cost'), pythonLine: 15, city: next, from: city, visited: seen(), stack: [...stack], count,
+        message: cost === 1 ? `Road from ${city} to ${next} points away from city zero, so it is reversed (count ${count}).` : `Road between ${city} and ${next} already points toward city zero.`,
+      })
+    }
+  }
+  frames.push({ phase: 'done', activeLine: L('return count'), pythonLine: 17, city: null, from: null, visited: seen(), stack: [], count, message: `Reversals needed: ${count}.` })
+  return { input: { n, connections }, result: count, frames }
+}

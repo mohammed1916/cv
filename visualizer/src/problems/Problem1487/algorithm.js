@@ -47,23 +47,6 @@ export function buildTrace({ names }) {
   return { input: { names }, result, frames }
 }
 
-const pseudo = [
-  'make unique(names):',
-  '  set used to an empty set',
-  '  set next_suffix to an empty map',
-  '  set result to an empty list',
-  '  for each name in names:',
-  '    if name is not in used:',
-  '      add name to used and result',
-  '      continue',
-  '    k = next_suffix[name], or 1 if there is none',
-  '    while name(k) is in used:',
-  '      k = k + 1',
-  '    candidate = name(k)',
-  '    add candidate to used and result',
-  '    next_suffix[name] = k + 1',
-  '  return result',
-]
 
 const pythonLines = [
   'def make_unique(names):',
@@ -83,5 +66,21 @@ const pythonLines = [
   '    return result',
 ]
 
-export const code = pseudo.map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function makeUnique(names) {",
+  "  const used = new Set()",
+  "  const nextSuffix = new Map()",
+  "  const result = []",
+  "  for (const name of names) {",
+  "    if (!used.has(name)) {",
+  "      used.add(name); result.push(name); continue }",
+  "    // the name is taken: resume its suffix search",
+  "    let k = nextSuffix.get(name) ?? 1",
+  "    while (used.has(`${name}(${k})`)) {",
+  "      k += 1",
+  "    }",
+  "    const candidate = `${name}(${k})`; used.add(candidate); result.push(candidate)",
+  "    nextSuffix.set(name, k + 1) }",
+  "  return result }",
+].map((text, index) => ({ line: index + 1, text }))
 export const python = pythonLines.join('\n')

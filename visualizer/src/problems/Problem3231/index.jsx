@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
 import PileDealView from "./PileDealView";
+import AnswerRangeBar from "../../components/shared/AnswerRangeBar";
 import { code, python, parseInput, buildTrace, phases } from "./algorithm.js";
 
 const definition = {
@@ -23,7 +24,10 @@ export default function MinimumIncreasingSubsequenceRemoval() {
   return (
     <AlgorithmWorkspace
       definition={definition}
-      renderVisual={({ run, step }) => <PileDealView run={run} step={step} />}
+      renderVisual={({ run, step }) => <>
+        <PileDealView run={run} step={step} />
+        {typeof step.lo === "number" && step.hi >= step.lo && <AnswerRangeBar title="Pile search range (tops below x)" min={0} max={Math.max(1, step.piles.length)} low={step.lo} high={step.hi} />}
+      </>}
       renderReasoning={({ run, step }) => (
         <p>
           {step.message} {run ? `Final answer: ${run.result}.` : ""}

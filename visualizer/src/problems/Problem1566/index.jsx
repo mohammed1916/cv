@@ -25,11 +25,14 @@ export default function RepeatedPattern() {
           return <div key={i} data-position={i} style={{
             minWidth: 44, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
             border: `${compared ? 2 : 1}px solid ${compared ? '#0891b2' : 'var(--border)'}`,
-            background: found && inMatch ? '#bbf7d0' : compared ? 'var(--surface2)' : 'transparent', color: '#1c1917',
-          }}><div>{value}</div><small>{i}</small></div>
+            background: found && inMatch ? '#bbf7d0' : compared ? 'var(--surface2)' : 'transparent', color: 'var(--text)',
+          }}><div>{value}</div><small>{i}</small>
+            <small style={{ display: 'block', height: 14, fontWeight: 700, color: 'var(--text-muted)' }}>
+              {index >= 0 && matches > 0 && i === index - matches + 1 ? 'l' : ''}{index >= 0 && i === index + m ? 'r' : ''}
+            </small></div>
         })}
       </div>
-      <p>Matches in a row: <strong>{matches}</strong> of {need} needed (gap m = {m}).</p>
+      <p>Matches in a row: <strong>{matches}</strong> of {need} needed (gap m = {m}). The run of matches runs from l to r (positions shifted by m).</p>
       <p>{found ? 'The repeated block has been found.' : 'The block has not been found yet.'}</p>
       <p>Pattern length {run.input.m}, repeated {run.input.k} times or more.</p>
     </>

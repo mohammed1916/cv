@@ -25,7 +25,7 @@ export default function ShuffleString() {
       </div>
       <p>Slots by destination:</p>
       <div role="img" aria-label="Destination slots" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        {slots.map((ch, k) => <div key={k} style={{ width: 40, textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', padding: 4, boxSizing: 'border-box', background: ch ? '#a5f3fc' : 'transparent', color: '#1c1917' }}>
+        {slots.map((ch, k) => <div key={k} style={{ width: 40, textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', padding: 4, boxSizing: 'border-box', background: ch ? '#a5f3fc' : 'transparent', color: 'var(--text)' }}>
           <div>{ch ?? '·'}</div><small>{k}</small>
         </div>)}
       </div>

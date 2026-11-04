@@ -24,7 +24,14 @@ const definition = {
 export default function FindLatestGroupOfSizeM() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Binary string" length={run.input.arr.length} valueAt={i => step.bits[i]} active={step.active}
-      roleAt={i => (step.bits[i] === 1 ? 'on' : '')} />
+      roleAt={i => {
+        if (step.left === undefined || step.pos === undefined) return step.bits[i] === 1 ? 'on' : ''
+        const runStart = step.pos - step.left - 1, runEnd = step.pos + step.right - 1
+        if (i === runStart) return 'l'
+        if (i === runEnd) return 'r'
+        if (i > runStart && i < runEnd) return 'window'
+        return step.bits[i] === 1 ? 'on' : ''
+      }} />
     <p>Step {step.step ?? 0} · groups of length m: {step.groupsOfM} · last: {step.last}</p>
   </>} renderReasoning={({ step }) => <p>{step.message}</p>} />
 }

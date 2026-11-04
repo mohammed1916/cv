@@ -19,7 +19,7 @@ const definition = {
   python,
   inputLabel: 'Object with s and t (e.g. {"s":"abc","t":"def"})',
   url: "https://leetcode.com/problems/equalize-strings-by-adding-or-removing-characters-at-ends/",
-  complexity: "O(|s| × |t|) time and space for the run table. The visualization accepts strings of 1 to 12 lowercase letters; the official bounds are not verified here. The answer assumes a shared piece must be contiguous in both strings.",
+  complexity: "O(|s| × |t|) time and space for the run table. The visualization accepts strings of 1 to 12 lowercase letters; the bounds shown are this visualization's own limits. The answer assumes a shared piece must be contiguous in both strings.",
   examples: [
     { label: "Shared core", input: '{"s":"xxhelloyy","t":"hello"}' },
     { label: "Nothing shared", input: '{"s":"abc","t":"xyz"}' },

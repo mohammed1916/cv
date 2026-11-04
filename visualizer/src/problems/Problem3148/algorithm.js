@@ -10,32 +10,39 @@ export function buildTrace(grid) {
   const m = grid.length, n = grid[0].length
   const mn = Array.from({ length: m }, () => Array(n).fill(Infinity))
   let best = -Infinity
-  frames.push({ mn: mn.map(row => row.slice()), pythonLine: 4, phase: 'start', activeLine: L('best = negative infinity'), cell: null, prev: null, best, message: 'Scan the grid; each cell can end a path that started above or to the left.' })
+  frames.push({ mn: mn.map(row => row.slice()), pythonLine: 4, phase: 'start', activeLine: L('let best = -Infinity'), cell: null, prev: null, best, message: 'Scan the grid; each cell can end a path that started above or to the left.' })
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
       const above = i > 0 ? mn[i - 1][j] : Infinity
       const left = j > 0 ? mn[i][j - 1] : Infinity
       const prev = Math.min(above, left)
-      frames.push({ mn: mn.map(row => row.slice()), pythonLine: 8, phase: 'cell', activeLine: L('prev = smaller of mn above'), cell: [i, j], prev, best, message: `Cell (${i}, ${j}) = ${grid[i][j]}; smallest earlier value reachable is ${prev === Infinity ? 'none' : prev}.` })
+      frames.push({ mn: mn.map(row => row.slice()), pythonLine: 8, phase: 'cell', activeLine: L('const prev = Math.min'), cell: [i, j], prev, best, message: `Cell (${i}, ${j}) = ${grid[i][j]}; smallest earlier value reachable is ${prev === Infinity ? 'none' : prev}.` })
       if (prev < Infinity) {
         best = Math.max(best, grid[i][j] - prev)
-        frames.push({ mn: mn.map(row => row.slice()), pythonLine: 10, phase: 'score', activeLine: L('if prev is finite, best = max'), cell: [i, j], prev, best, message: `Score ${grid[i][j] - prev} ending here; best is ${best}.` })
+        frames.push({ mn: mn.map(row => row.slice()), pythonLine: 10, phase: 'score', activeLine: L('if (prev !== Infinity)'), cell: [i, j], prev, best, message: `Score ${grid[i][j] - prev} ending here; best is ${best}.` })
       }
       mn[i][j] = Math.min(grid[i][j], prev)
-      frames.push({ mn: mn.map(row => row.slice()), pythonLine: 11, phase: 'store', activeLine: L('mn[i][j] = smaller of the cell value'), cell: [i, j], prev, best, message: `Smallest value covering (${i}, ${j}) is ${mn[i][j]}.` })
+      frames.push({ mn: mn.map(row => row.slice()), pythonLine: 11, phase: 'store', activeLine: L('mn[i][j] = Math.min'), cell: [i, j], prev, best, message: `Smallest value covering (${i}, ${j}) is ${mn[i][j]}.` })
     }
   }
   frames.push({ mn: mn.map(row => row.slice()), pythonLine: 12, phase: 'done', activeLine: L('return best'), cell: null, prev: null, best, message: `Maximum score: ${best}.` })
   return { input: grid, result: best, frames }
 }
 
-export const code = `maximum difference score of a path moving right or down
-  best = negative infinity; mn = grid of infinities
-  for each cell (i, j) in row-major order
-    prev = smaller of mn above and mn to the left
-    if prev is finite, best = max of best and value minus prev
-    mn[i][j] = smaller of the cell value and prev
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function maxDifferenceScore(grid) {
+  const m = grid.length
+  const n = grid[0].length
+  let best = -Infinity
+  const mn = grid.map(row => row.map(() => Infinity))
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      const prev = Math.min(i > 0 ? mn[i - 1][j] : Infinity, j > 0 ? mn[i][j - 1] : Infinity)
+      if (prev !== Infinity) best = Math.max(best, grid[i][j] - prev)
+      mn[i][j] = Math.min(grid[i][j], prev)
+    }
+  }
+  return best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def max_score(grid):

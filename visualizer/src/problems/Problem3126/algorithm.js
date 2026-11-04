@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample events and the unclosed-session rule are invented for this visualization.
+// SQL walkthrough. The sample events and the unclosed-session rule are invented for this visualization.
 export const sql = `WITH Paired AS (
   SELECT s1.server_id, s1.status_time AS start_time,
     MIN(s2.status_time) AS stop_time

@@ -20,7 +20,7 @@ const definition = {
   python,
   inputLabel: 'Object with nums and m (e.g. {"nums":[1,2,3],"m":2})',
   url: "https://leetcode.com/problems/maximum-hamming-distances/",
-  complexity: "O(n² × m) time with the pair scan, O(n) extra space for the answers. The visualization accepts up to 10 numbers and m up to 10; the official bounds are not verified here, and a faster solution is not traced.",
+  complexity: "O(n² × m) time with the pair scan, O(n) extra space for the answers. The visualization accepts up to 10 numbers and m up to 10; the bounds shown are this visualization's own limits, and a faster solution is not traced.",
   examples: [
     { label: "Three numbers", input: '{"nums":[2,5,9,12],"m":4}' },
     { label: "Repeated values", input: '{"nums":[7,0,7],"m":3}' },

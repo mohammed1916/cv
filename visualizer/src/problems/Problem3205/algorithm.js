@@ -2,18 +2,18 @@
 // Let best[j] be the largest score of any hop sequence from index 0 that ends at j.
 // The last hop into j comes from some earlier i and scores (j - i) * nums[j], so best[j] = max over i < j of best[i] + (j - i) * nums[j].
 
-const CODE_TEXT = [
-  'FUNCTION maxHopScore(nums)',
-  '    n ← length of nums',
-  '    best[0] ← 0',
-  '    FOR j from 1 to n minus 1',
-  '        best[j] ← negative infinity',
-  '        FOR i from 0 to j minus 1',
-  '            candidate ← best[i] + (j minus i) * nums[j]',
-  '            IF candidate is greater than best[j] THEN best[j] ← candidate',
-  '    RETURN best[n minus 1]',
-]
-
+const CODE_TEXT = `function maxHopScore(nums) {
+  const n = nums.length
+  const best = [0]
+  for (let j = 1; j < n; j++) {
+    best[j] = -Infinity
+    for (let i = 0; i < j; i++) {
+      const candidate = best[i] + (j - i) * nums[j]
+      if (candidate > best[j]) best[j] = candidate
+    }
+  }
+  return best[n - 1]
+}`.split('\n')
 export const code = CODE_TEXT.map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def max_hop_score(nums):
@@ -58,20 +58,20 @@ export function buildTrace(nums) {
   const from = Array(n).fill(-1)
   const frames = []
   const snap = (extra) => ({ nums, n, best: best.slice(), from: from.slice(), ...extra })
-  frames.push(snap({ phase: 'start', activeLine: L('FUNCTION'), pythonLine: P('def max_hop'), j: -1, i: -1, candidate: null, message: n === 1 ? 'One index: no hop is needed, the score is 0.' : `Start at index 0 with score 0; ${n} indices in total.` }))
+  frames.push(snap({ phase: 'start', activeLine: L('function maxHopScore'), pythonLine: P('def max_hop'), j: -1, i: -1, candidate: null, message: n === 1 ? 'One index: no hop is needed, the score is 0.' : `Start at index 0 with score 0; ${n} indices in total.` }))
   best[0] = 0
-  frames.push(snap({ phase: 'start', activeLine: L('best[0] ← 0'), pythonLine: P('best = [0] * n'), j: 0, i: -1, candidate: null, message: 'best[0] is 0 because no hop has been made.' }))
+  frames.push(snap({ phase: 'start', activeLine: L('const best = [0]'), pythonLine: P('best = [0] * n'), j: 0, i: -1, candidate: null, message: 'best[0] is 0 because no hop has been made.' }))
   for (let j = 1; j < n; j++) {
     best[j] = -Infinity
-    frames.push(snap({ phase: 'target', activeLine: L('FOR j from 1'), pythonLine: P('for j in range(1, n)'), j, i: -1, candidate: null, message: `Find the best way to land on index ${j}.` }))
+    frames.push(snap({ phase: 'target', activeLine: L('for (let j = 1'), pythonLine: P('for j in range(1, n)'), j, i: -1, candidate: null, message: `Find the best way to land on index ${j}.` }))
     for (let i = 0; i < j; i++) {
       const candidate = best[i] + (j - i) * nums[j]
       const improves = candidate > best[j]
       if (improves) { best[j] = candidate; from[j] = i }
-      frames.push(snap({ phase: improves ? 'keep' : 'hop', activeLine: improves ? L('IF candidate is greater') : L('candidate ← best[i]'), pythonLine: improves ? P('best[j] = candidate') : P('candidate = best[i]'), j, i, candidate, improves, message: `Hop ${i} to ${j}: ${best[i]} + ${j - i} * ${nums[j]} = ${candidate}. ${improves ? 'New best for ' + j + '.' : 'Not better than ' + best[j] + '.'}` }))
+      frames.push(snap({ phase: improves ? 'keep' : 'hop', activeLine: improves ? L('if (candidate > best[j])') : L('const candidate ='), pythonLine: improves ? P('best[j] = candidate') : P('candidate = best[i]'), j, i, candidate, improves, message: `Hop ${i} to ${j}: ${best[i]} + ${j - i} * ${nums[j]} = ${candidate}. ${improves ? 'New best for ' + j + '.' : 'Not better than ' + best[j] + '.'}` }))
     }
   }
   const answer = best[n - 1] === null ? 0 : best[n - 1]
-  frames.push(snap({ phase: 'done', activeLine: L('RETURN best'), pythonLine: P('return best[n - 1]'), j: n - 1, i: -1, candidate: null, message: `Best score reaching index ${n - 1}: ${answer}.` }))
+  frames.push(snap({ phase: 'done', activeLine: L('return best[n - 1]'), pythonLine: P('return best[n - 1]'), j: n - 1, i: -1, candidate: null, message: `Best score reaching index ${n - 1}: ${answer}.` }))
   return { input: nums, result: answer, frames }
 }

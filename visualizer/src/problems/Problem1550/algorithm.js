@@ -13,15 +13,15 @@ export function parseInput(text) {
   return values
 }
 
-export const code = `run = 0
-for value in arr:
-    if value is odd:
-        run = run + 1
-    else:
-        run = 0
-    if run == 3:
-        return true
-return false`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function threeConsecutiveOdds(arr) {",
+  "  let run = 0",
+  "  for (const value of arr) {",
+  "    if (Math.abs(value) % 2 === 1) run += 1",
+  "    else run = 0",
+  "    if (run === 3) return true }",
+  "  return false }",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def three_consecutive_odds(arr):
     run = 0
@@ -47,15 +47,15 @@ export function buildTrace(arr) {
   for (let i = 0; i < arr.length; i++) {
     const v = arr[i]
     const odd = isOdd(v)
-    frames.push({ phase: 'check', activeLine: L('if value is odd'), pythonLine: P('if value % 2'), snapshot: snap({ index: i, value: v, odd }),
+    frames.push({ phase: 'check', activeLine: L('if (Math.abs(value) % 2 === 1)'), pythonLine: P('if value % 2'), snapshot: snap({ index: i, value: v, odd }),
       message: `Value ${v} at index ${i} is ${odd ? 'odd' : 'even'}.` })
     if (odd) {
       run += 1
-      frames.push({ phase: 'extend', activeLine: L('run = run + 1'), pythonLine: P('run = run + 1'), snapshot: snap({ index: i, value: v, odd }),
+      frames.push({ phase: 'extend', activeLine: L('run += 1'), pythonLine: P('run = run + 1'), snapshot: snap({ index: i, value: v, odd }),
         message: `The run of odd values is now ${run}.` })
     } else {
       run = 0
-      frames.push({ phase: 'reset', activeLine: L('run = 0'), pythonLine: P('run = 0'), snapshot: snap({ index: i, value: v, odd }),
+      frames.push({ phase: 'reset', activeLine: L('else run = 0'), pythonLine: P('run = 0'), snapshot: snap({ index: i, value: v, odd }),
         message: `An even value breaks any run, so the run resets to 0.` })
     }
     if (run === 3) {

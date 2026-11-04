@@ -10,15 +10,21 @@ export function parseInput(text) {
   return stones
 }
 
-export const code = `stone game vii (stones):
-  prefix[k] = sum of the first k stones
-  best[i][i] = 0 for every single stone
-  for length from 2 to n:
-    for each start i, with end j = i + length - 1:
-      take left: prefix sum of i+1..j - best[i+1][j]
-      take right: prefix sum of i..j-1 - best[i][j-1]
-      best[i][j] = max of the two
-  return best[0][n-1]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `export function stoneGameVII(stones) {
+  const n = stones.length
+  const prefix = [0]
+  for (const s of stones) prefix.push(prefix[prefix.length - 1] + s)
+  const best = Array.from({ length: n }, () => Array(n).fill(0))
+  for (let length = 2; length <= n; length++) {
+    for (let i = 0; i + length <= n; i++) {
+      const j = i + length - 1
+      const takeLeft = prefix[j + 1] - prefix[i + 1] - best[i + 1][j]
+      const takeRight = prefix[j] - prefix[i] - best[i][j - 1]
+      best[i][j] = Math.max(takeLeft, takeRight)
+    }
+  }
+  return best[0][n - 1]
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def stone_game_vii(stones):
     n = len(stones)
@@ -45,14 +51,14 @@ export function buildTrace(stones) {
   stones.forEach(s => prefix.push(prefix[prefix.length - 1] + s))
   const best = Array.from({ length: n }, () => Array(n).fill(0))
   const table = () => best.map(row => [...row])
-  const frames = [{ phase: 'base', ...at('best[i][i] = 0', 'best = [[0] * n'), snapshot: { stones, prefix, table: table(), interval: null, takeLeft: null, takeRight: null }, message: `Every single stone is worth 0 for the player who must take it, so the diagonal starts at 0.` }]
+  const frames = [{ phase: 'base', ...at('const best', 'best = [[0] * n'), snapshot: { stones, prefix, table: table(), interval: null, takeLeft: null, takeRight: null }, message: `Every single stone is worth 0 for the player who must take it, so the diagonal starts at 0.` }]
   for (let length = 2; length <= n; length++) {
     for (let i = 0; i + length - 1 < n; i++) {
       const j = i + length - 1
       const takeLeft = prefix[j + 1] - prefix[i + 1] - best[i + 1][j]
       const takeRight = prefix[j] - prefix[i] - best[i][j - 1]
       best[i][j] = Math.max(takeLeft, takeRight)
-      frames.push({ phase: 'choose', ...at('best[i][j] = max', 'best[i][j] = max(take_left'), snapshot: { stones, prefix, table: table(), interval: [i, j], takeLeft, takeRight }, message: `Interval ${i}..${j}: removing the left stone scores ${takeLeft}, removing the right stone scores ${takeRight}. Keep the larger, which is ${best[i][j]}.` })
+      frames.push({ phase: 'choose', ...at('best[i][j] = Math.max', 'best[i][j] = max(take_left'), snapshot: { stones, prefix, table: table(), interval: [i, j], takeLeft, takeRight }, message: `Interval ${i}..${j}: removing the left stone scores ${takeLeft}, removing the right stone scores ${takeRight}. Keep the larger, which is ${best[i][j]}.` })
     }
   }
   const result = n === 1 ? 0 : best[0][n - 1]

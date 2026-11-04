@@ -1,4 +1,4 @@
-// Knowledge-derived teaching model. The sample tables are invented for this visualization.
+// Teaching model. The sample tables are invented for this visualization.
 export function snap(rows) {
   return rows.map(row => ({ ...row }))
 }

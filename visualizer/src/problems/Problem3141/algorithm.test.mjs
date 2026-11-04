@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { buildTrace, parseInput } from './algorithm.js'
+import { buildTrace, parseInput, code } from './algorithm.js'
 
 const solve = (nums, m) => buildTrace({ nums, m }).result
 
@@ -42,7 +42,7 @@ test('3141 each answer is between 0 and m', () => {
 test('3141 frames carry real pseudocode and python lines and the answer so far', () => {
   const run = buildTrace({ nums: [2, 5, 9, 12], m: 4 })
   for (const frame of run.frames) {
-    assert.ok(frame.activeLine >= 1 && frame.activeLine <= 10, `activeLine ${frame.activeLine}`)
+    assert.ok(frame.activeLine >= 1 && frame.activeLine <= code.length, `activeLine ${frame.activeLine}`)
     assert.ok(frame.pythonLine >= 1 && frame.pythonLine <= 13, `pythonLine ${frame.pythonLine}`)
     assert.equal(frame.answer.length, 4)
   }

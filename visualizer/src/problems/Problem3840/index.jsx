@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/house-robber-v/',
   complexity: 'O(n) time and O(n) space for the two-state table.',
   examples: [
-    { label: 'Colour break', input: '{"nums":[2,6,4,1],"colors":[1,1,2,2]}' },
+    { label: 'Colour break', input: '{"nums":[3,7,5,2],"colors":[1,1,3,3]}' },
     { label: 'Run of one colour', input: '{"nums":[5,8,2,7],"colors":[3,3,3,4]}' },
   ],
 }

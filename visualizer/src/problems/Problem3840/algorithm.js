@@ -36,13 +36,26 @@ export function solve(input) {
   return buildTrace(input).result
 }
 
-export const code = `maximum amount robbed when same-coloured neighbours cannot both be robbed
-  skip[i] is the best total up to house i without robbing house i
-  take[i] is the best total up to house i with house i robbed
-  for each house i
-    take[i] = nums[i] plus the best earlier total that allows house i
-    skip[i] = the best total up to house i - 1
-  return the larger of skip and take at the last house`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
+export const code = `function houseRobberV(nums, colors) {
+  const n = nums.length
+  // skip[i] is the best total up to house i without robbing house i
+  // take[i] is the best total up to house i with house i robbed
+  const skip = Array(n).fill(0)
+  const take = Array(n).fill(-Infinity)
+  for (let i = 0; i < n; i++) {
+    const prevSkip = i > 0 ? skip[i - 1] : 0
+    const prevTake = i > 0 ? take[i - 1] : -Infinity
+    // a neighbour of the same colour blocks taking, so only skipping it is allowed
+    let bestBefore = prevSkip
+    if (i > 0 && colors[i] !== colors[i - 1]) bestBefore = Math.max(bestBefore, prevTake)
+    // take[i] = nums[i] plus the best earlier total that allows house i
+    take[i] = nums[i] + bestBefore
+    // skip[i] = the best total up to house i - 1
+    skip[i] = Math.max(prevSkip, prevTake)
+  }
+  // return the larger of skip and take at the last house
+  return n ? Math.max(skip[n - 1], take[n - 1]) : 0
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def house_robber_v(nums, colors):
     n = len(nums)

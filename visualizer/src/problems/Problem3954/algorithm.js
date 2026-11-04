@@ -21,13 +21,21 @@ export function buildTrace(input) {
   return { input, result: total, frames }
 }
 
-export const code = `sum of compatible numbers in range
-  let total be 0
-  let low be the larger of 1 and n minus k
-  let high be n plus k
-  for each x from low to high
-    if n and x have no common set bit then add x to total
-  return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function sumOfCompatibleNumbers(n, k) {
+  // let total be 0
+  let total = 0
+  // let low be the larger of 1 and n minus k
+  const low = Math.max(1, n - k)
+  // let high be n plus k
+  const high = n + k
+  // for each x from low to high
+  for (let x = low; x <= high; x++) {
+    // if n and x have no common set bit then add x to total
+    if ((n & x) === 0) total += x
+  }
+  // return total
+  return total
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def sum_of_compatible_numbers_in_range(n, k):
@@ -35,7 +43,7 @@ export const python = `def sum_of_compatible_numbers_in_range(n, k):
     low = max(1, n - k)
     high = n + k
     for x in range(low, high + 1):
-        if n & x == 0:
+        if (n & x) == 0:
             total += x
     return total
 `

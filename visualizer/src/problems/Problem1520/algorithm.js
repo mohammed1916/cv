@@ -16,7 +16,7 @@ export function buildTrace(input) {
   }
   const letters = Object.keys(first).sort((a, b) => first[a] - first[b])
   const cands = []
-  const frames = [{ phase: 'start', activeLine: L('for each letter'), pythonLine: 9, s, picked: [], current: null, message: 'Each letter that must stay together gives one candidate span, grown until it closes.' }]
+  const frames = [{ phase: 'start', activeLine: L('const first = {}'), pythonLine: 9, s, picked: [], current: null, message: 'Each letter that must stay together gives one candidate span, grown until it closes.' }]
   for (const c of letters) {
     let l = first[c]
     let r = last[c]
@@ -28,7 +28,7 @@ export function buildTrace(input) {
     }
     if (ok) {
       cands.push({ l, r })
-      frames.push({ phase: 'candidate', activeLine: L('keep the span'), pythonLine: 22, s, picked: [], current: [l, r], message: `Letter ${c}: the closed span ${s.slice(l, r + 1)} is a candidate.` })
+      frames.push({ phase: 'candidate', activeLine: L('if (ok) cands.push'), pythonLine: 22, s, picked: [], current: [l, r], message: `Letter ${c}: the closed span ${s.slice(l, r + 1)} is a candidate.` })
     }
   }
   cands.sort((a, b) => a.r - b.r || b.l - a.l)
@@ -38,29 +38,43 @@ export function buildTrace(input) {
     if (cand.l > lastEnd) {
       picked.push([cand.l, cand.r])
       lastEnd = cand.r
-      frames.push({ phase: 'take', activeLine: L('take it'), pythonLine: 28, s, picked: picked.map(p => [...p]), current: [cand.l, cand.r], message: `Take ${s.slice(cand.l, cand.r + 1)}; it starts after the last taken span.` })
+      frames.push({ phase: 'take', activeLine: L('if (l > lastEnd)'), pythonLine: 28, s, picked: picked.map(p => [...p]), current: [cand.l, cand.r], message: `Take ${s.slice(cand.l, cand.r + 1)}; it starts after the last taken span.` })
     } else {
-      frames.push({ phase: 'skip', activeLine: L('skip it'), pythonLine: 27, s, picked: picked.map(p => [...p]), current: [cand.l, cand.r], message: `Skip ${s.slice(cand.l, cand.r + 1)}; it overlaps a taken span.` })
+      frames.push({ phase: 'skip', activeLine: L('if (l > lastEnd)'), pythonLine: 27, s, picked: picked.map(p => [...p]), current: [cand.l, cand.r], message: `Skip ${s.slice(cand.l, cand.r + 1)}; it overlaps a taken span.` })
     }
   }
   const result = picked.map(([l, r]) => s.slice(l, r + 1))
-  frames.push({ phase: 'done', activeLine: L('return the taken substrings'), pythonLine: 30, s, picked: picked.map(p => [...p]), current: null, message: `Maximum count: ${result.length}.` })
+  frames.push({ phase: 'done', activeLine: L('return picked'), pythonLine: 30, s, picked: picked.map(p => [...p]), current: null, message: `Maximum count: ${result.length}.` })
   return { input, result, frames }
 }
 
-export const code = `maximum number of non-overlapping valid substrings:
-  set first and last to the first and last index of each letter
-  for each letter in order of first appearance
-    start a span from its first index to its last index
-    grow the span while a letter inside also appears outside it
-    if the span is still closed then keep the span as a candidate
-  sort the candidates by right end, then by shorter span first
-  set last end to minus one
-  for each candidate in that order
-    if its left end is after last end then take it and set last end to its right end
-    otherwise skip it
-  return the taken substrings`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function maxNonOverlapping(s) {',
+  '  const first = {}, last = {}',
+  '  for (let i = 0; i < s.length; i++) {',
+  '    if (!(s[i] in first)) first[s[i]] = i',
+  '    last[s[i]] = i',
+  '  }',
+  '  const cands = []',
+  '  for (const c of Object.keys(first)) {',
+  '    let l = first[c], r = last[c], ok = true',
+  '    for (let k = l; k <= r; k++) {',
+  '      if (first[s[k]] < l) { ok = false; break }',
+  '      r = Math.max(r, last[s[k]])',
+  '    }',
+  '    if (ok) cands.push([l, r])',
+  '  }',
+  '  cands.sort((a, b) => a[1] - b[1] || b[0] - a[0])',
+  '  const picked = []',
+  '  let lastEnd = -1',
+  '  for (const [l, r] of cands) {',
+  '    if (l > lastEnd) { picked.push(s.slice(l, r + 1)); lastEnd = r }',
+  '  }',
+  '  return picked',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(c => c.includes(s)) + 1
 
 export const python = `def max_non_overlapping(s):
     first = {}

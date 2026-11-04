@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, phases, code, python } from './algorithm'
 
 const definition = {
@@ -17,10 +18,17 @@ export default function SubstringsWithAllThreeLetters() {
   return <AlgorithmWorkspace definition={definition}
     renderVisual={({ step }) => {
       const { s, index, last, total, added } = step.snapshot
+      const earliest = Math.min(last.a, last.b, last.c)
       return <>
         <IndexedSequence label="String" length={s.length} valueAt={i => s[i]} active={index}
-          roleAt={i => (i <= index ? 'read' : '')} />
-        <p>Latest positions: a = {last.a}, b = {last.b}, c = {last.c}</p>
+          roleAt={i => {
+            if (i === index) return 'r'
+            if (earliest >= 0 && i <= earliest) return 'window'
+            return ''
+          }} />
+        <RecordStateTable label="Latest position of each letter" columns={['letter', 'latest index']}
+          rows={['a', 'b', 'c'].map(ch => ({ letter: ch, 'latest index': last[ch] < 0 ? 'not seen' : last[ch] }))} />
+        <p>Earliest latest position: {earliest < 0 ? 'not every letter seen yet' : earliest}. Starts 0 to {earliest} are valid for end {index}.</p>
         <p>Running total: <strong>{total}</strong>{added ? ` (+${added} for this end position)` : ''}</p>
       </>
     }}

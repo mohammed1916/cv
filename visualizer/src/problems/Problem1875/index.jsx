@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import SqlStages from './SqlStages'
 import { meta } from './meta'
 import { buildTrace, parseInput, code, sql, python, phases } from './algorithm'
 
@@ -26,6 +27,7 @@ function Rows({ columns = [], rows = [] }) {
 
 export default function SharedSalaryTeamsVisual() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <SqlStages code={code} activeLine={step.activeLine} />
     <Rows columns={step.columns} rows={step.rows} />
     <output aria-label="Query output">{step.phase === 'done' ? `Output rows: ${run.result.length}` : step.message}</output>
   </>} renderReasoning={() => <p>First keep only salaries that occur at least twice. Each remaining salary gets the next team number in ascending order, and every employee on that salary inherits it.</p>} />

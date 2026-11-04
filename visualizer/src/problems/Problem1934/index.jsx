@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import SqlStages from './SqlStages'
 import { buildTrace, parseInput, code, python, sampleText } from './algorithm'
 
 const definition = {
@@ -27,7 +28,10 @@ function CurrentTable({ table }) {
 }
 
 export default function ConfirmationRate() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <CurrentTable table={step.table} />} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+    <SqlStages code={code} activeLine={step.activeLine} />
+    <CurrentTable table={step.table} />
+  </>} renderReasoning={() => <>
     <p>Count every confirmation event for each user, and count the ones marked confirmed.</p>
     <p>Start from the signups, not from the events, so a user with no events still appears, with a rate of zero. Events from users who never signed up are ignored.</p>
   </>} />

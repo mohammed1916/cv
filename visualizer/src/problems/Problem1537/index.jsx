@@ -23,8 +23,10 @@ const definition = {
 export default function MaximumScore() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => (
     <>
-      <IndexedSequence label="nums1" length={run.input.nums1.length} valueAt={i => run.input.nums1[i]} active={step.i < run.input.nums1.length ? step.i : -1} />
-      <IndexedSequence label="nums2" length={run.input.nums2.length} valueAt={i => run.input.nums2[i]} active={step.j < run.input.nums2.length ? step.j : -1} />
+      <IndexedSequence label="nums1" length={run.input.nums1.length} valueAt={i => run.input.nums1[i]} active={step.i < run.input.nums1.length ? step.i : -1}
+        roleAt={i => (i === step.i ? 'l' : i < step.i ? 'taken' : '')} />
+      <IndexedSequence label="nums2" length={run.input.nums2.length} valueAt={i => run.input.nums2[i]} active={step.j < run.input.nums2.length ? step.j : -1}
+        roleAt={i => (i === step.j ? 'r' : i < step.j ? 'taken' : '')} />
       <output aria-label="Running sums">{`First sum ${step.first}, second sum ${step.second}, total ${step.total}`}</output>
     </>
   )} renderReasoning={() => (

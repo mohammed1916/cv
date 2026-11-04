@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough. The sample tables are invented for this visualization.
 export const sql = `WITH medals AS (
   SELECT gold_medal AS user_id, contest_id, 'gold' AS medal FROM Contests
   UNION ALL

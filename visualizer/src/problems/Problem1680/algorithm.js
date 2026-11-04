@@ -15,7 +15,7 @@ export function parseInput(text) {
 
 // Each phase points at one line of the code and one line of the Python.
 const LINE = {
-  start: [2, 3], grow: [4, 7], append: [5, 8], done: [6, 9],
+  start: [3, 3], grow: [6, 7], append: [7, 8], done: [9, 9],
 }
 const at = phase => ({ activeLine: LINE[phase][0], pythonLine: LINE[phase][1] })
 
@@ -37,12 +37,16 @@ export function buildTrace(n) {
   return { input: n, result, frames }
 }
 
-const codeText = `concatenated binary (n):
-  result = 0, width = 0
-  for i from 1 to n:
-    if i is a power of two: width += 1
-    result = (result shifted left by width + i) mod M
-  return result`
+const codeText = `function concatenatedBinary(n) {
+  const MOD = 1000000007
+  let result = 0
+  let width = 0
+  for (let i = 1; i <= n; i++) {
+    if ((i & (i - 1)) === 0) width += 1
+    result = (result * 2 ** width + i) % MOD
+  }
+  return result
+}`
 export const code = codeText.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def concatenated_binary(n):

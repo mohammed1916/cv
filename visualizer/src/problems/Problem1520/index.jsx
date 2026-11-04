@@ -25,7 +25,13 @@ export default function MaximumNonOverlappingSubstrings() {
     const inPicked = i => step.picked.some(([l, r]) => i >= l && i <= r)
     const inCurrent = i => step.current !== null && i >= step.current[0] && i <= step.current[1]
     return <>
-      <IndexedSequence label="Letters of s" length={step.s.length} valueAt={i => step.s[i]} active={step.current ? step.current[0] : -1} roleAt={i => (inPicked(i) ? 'taken' : inCurrent(i) ? 'checking' : '')} />
+      <IndexedSequence label="Letters of s" length={step.s.length} valueAt={i => step.s[i]} active={step.current ? step.current[0] : -1}
+        roleAt={i => {
+          if (step.current && i === step.current[0]) return 'l'
+          if (step.current && i === step.current[1]) return 'r'
+          if (inCurrent(i)) return 'window'
+          return inPicked(i) ? 'taken' : ''
+        }} />
       <output aria-label="Taken substrings">{`Taken: ${step.picked.map(([l, r]) => step.s.slice(l, r + 1)).join(', ') || 'none'}`}</output>
     </>
   }} renderReasoning={() => <>

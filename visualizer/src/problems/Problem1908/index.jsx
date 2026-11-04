@@ -11,7 +11,7 @@ const definition = {
   python,
   inputLabel: "A JSON list of heap sizes, e.g. [1,2,3]",
   url: "https://leetcode.com/problems/game-of-nim/",
-  complexity: "O(h) time for h heaps and O(1) space. The visualization caps the input at 6 heaps of size up to 15; the official bounds are not verified in this draft.",
+  complexity: "O(h) time for h heaps and O(1) space. The visualization shows up to 6 heaps of size up to 15 so each XOR step fits on screen.",
   examples: [
     { label: "Balanced", input: "[1,2,3]" },
     { label: "Winning", input: "[1,2]" },

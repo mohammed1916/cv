@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import SqlStages from './SqlStages'
 import { buildTrace, parseInput, code, python, sampleText } from './algorithm'
 
 const definition = {
@@ -28,7 +29,10 @@ function CurrentTable({ table }) {
 }
 
 export default function LeetcodifySimilarFriends() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <CurrentTable table={step.table} />} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+    <SqlStages code={code} activeLine={step.activeLine} />
+    <CurrentTable table={step.table} />
+  </>} renderReasoning={() => <>
     <p>Count the distinct songs each pair of users shares on each day. A pair qualifies with three or more shared songs on at least one day.</p>
     <p>The output keeps only qualifying pairs that are already friends. Friendships are stored in either order, so each one is first written with the smaller id, which keeps the output free of duplicates.</p>
   </>} />

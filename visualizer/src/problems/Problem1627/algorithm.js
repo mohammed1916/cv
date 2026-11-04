@@ -16,16 +16,20 @@ export function parseInput(text) {
   return { n: data.n, threshold: data.threshold, queries: data.queries.map(q => [...q]) }
 }
 
-const CODE = `connected pairs (n, threshold, queries):
-  parent[c] = c for every city c
-  for d from threshold + 1 to n:
-    for each multiple m of d with m <= n:
-      join the groups of d and m
-  for each query (a, b):
-    answer whether find(a) equals find(b)`.split('\n')
+const CODE = [
+  'function areConnected(n, threshold, queries) {',
+  '  const parent = Array.from({ length: n + 1 }, (_, c) => c)',
+  '  const find = x => { while (parent[x] !== x) x = parent[x]; return x }',
+  '  for (let d = threshold + 1; d <= n; d++) {',
+  '    for (let m = 2 * d; m <= n; m += d) {',
+  '      parent[find(m)] = find(d)',
+  '    }',
+  '  }',
+  '  return queries.map(([a, b]) => find(a) === find(b))',
+  '}',
+]
 export const code = CODE.map((text, index) => ({ line: index + 1, text }))
-const L = { setup: 2, outer: 3, inner: 4, join: 5, query: 6, answer: 7 }
-
+const L = { setup: 2, outer: 4, inner: 5, join: 6, query: 9, answer: 9 }
 export const python = `def are_connected(n, threshold, queries):
     parent = list(range(n + 1))
     def find(x):

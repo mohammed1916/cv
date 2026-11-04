@@ -40,7 +40,7 @@ export default function MaximumCapacityWithinBudget() {
     <CostBars budget={run.input.budget} sorted={step.sorted} costs={run.input.costs} r={step.r} k={step.k} />
     <IndexedSequence label="Machines by sorted position" length={step.sorted.length} active={step.r}
       valueAt={pos => run.input.capacity[step.sorted[pos]]}
-      roleAt={pos => pos === step.k ? 'partner limit k' : pos < step.k ? 'prefix' : ''} />
+      roleAt={pos => pos === step.k ? 'l (partner limit)' : pos === step.r ? 'r (current)' : pos < step.k ? 'prefix' : ''} />
     <table aria-label="Machines sorted by cost">
       <thead><tr><th>position</th><th>machine</th><th>cost</th><th>capacity</th><th>prefix max</th></tr></thead>
       <tbody>{step.sorted.map((m, pos) => <tr key={pos} data-current={step.r === pos ? 'yes' : undefined} data-partner={step.k === pos ? 'yes' : undefined}>

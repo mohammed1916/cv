@@ -15,17 +15,17 @@ export function buildTrace(input) {
   const { s, k } = input
   const n = s.length
   const memo = new Map()
-  const frames = [{ phase: 'start', activeLine: L('return best(0'), pythonLine: 25, i: 0, letter: '', run: 0, left: k, value: null, states: 0, message: `Compress ${s}, deleting at most ${k} characters.` }]
+  const frames = [{ phase: 'start', activeLine: L("return best(0, '', 0, k)"), pythonLine: 25, i: 0, letter: '', run: 0, left: k, value: null, states: 0, message: `Compress ${s}, deleting at most ${k} characters.` }]
 
   const best = (i, letter, run, left) => {
     if (i >= n) return 0
     const key = `${i}|${letter}|${run}|${left}`
     if (memo.has(key)) {
       const value = memo.get(key)
-      frames.push({ phase: 'reuse', activeLine: L('if memo already holds'), pythonLine: 17, i, letter, run, left, value, states: memo.size, message: `Character ${i} with run ${letter || 'none'} x${run} and ${left} deletions left is known.` })
+      frames.push({ phase: 'reuse', activeLine: L('if (memo.has(key))'), pythonLine: 17, i, letter, run, left, value, states: memo.size, message: `Character ${i} with run ${letter || 'none'} x${run} and ${left} deletions left is known.` })
       return value
     }
-    frames.push({ phase: 'visit', activeLine: L('set delete to infinity'), pythonLine: 18, i, letter, run, left, value: null, states: memo.size, message: `Character ${i} is ${s[i]}. The current run is ${letter || 'empty'} x${run}, with ${left} deletions left.` })
+    frames.push({ phase: 'visit', activeLine: L('let del = Infinity'), pythonLine: 18, i, letter, run, left, value: null, states: memo.size, message: `Character ${i} is ${s[i]}. The current run is ${letter || 'empty'} x${run}, with ${left} deletions left.` })
     let del = Infinity
     if (left > 0) del = best(i + 1, letter, run, left - 1)
     const same = s[i] === letter
@@ -33,27 +33,37 @@ export function buildTrace(input) {
     const keep = extra + best(i + 1, s[i], same ? run + 1 : 1, left)
     const value = Math.min(del, keep)
     memo.set(key, value)
-    frames.push({ phase: 'store', activeLine: L('store the smaller'), pythonLine: 22, i, letter, run, left, value, states: memo.size, message: `Best length from character ${i} is ${value}.` })
+    frames.push({ phase: 'store', activeLine: L('memo.set(key'), pythonLine: 22, i, letter, run, left, value, states: memo.size, message: `Best length from character ${i} is ${value}.` })
     return value
   }
 
   const result = best(0, '', 0, k)
-  frames.push({ phase: 'done', activeLine: L('return best(0'), pythonLine: 25, i: n, letter: '', run: 0, left: null, value: result, states: memo.size, message: `Shortest compressed length: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L("return best(0, '', 0, k)"), pythonLine: 25, i: n, letter: '', run: 0, left: null, value: result, states: memo.size, message: `Shortest compressed length: ${result}.` })
   return { input, result, frames }
 }
 
-export const code = `shortest compressed length after deleting at most k characters
-  return best(0, no letter, run of 0, k)
-
-best(i, letter, run, left)
-  if i is past the end of the string then return 0
-  if memo already holds this state then return it
-  set delete to infinity
-  if left is above 0 then set delete to best(i + 1, letter, run, left - 1)
-  set extra to the growth in the encoded run if character i joins the run, or 1 for a new run
-  set keep to extra plus best(i + 1, character i, the new run length, left)
-  store the smaller of delete and keep, then return it`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function getLengthOfOptimalCompression(s, k) {',
+  '  const encoded = x => (x === 0 ? 0 : x === 1 ? 1 : 1 + String(x).length)',
+  '  const n = s.length',
+  '  const memo = new Map()',
+  '  const best = (i, letter, run, left) => {',
+  '    if (i >= n) return 0',
+  '    const key = `${i}|${letter}|${run}|${left}`',
+  '    if (memo.has(key)) return memo.get(key)',
+  '    let del = Infinity',
+  '    if (left > 0) del = best(i + 1, letter, run, left - 1)',
+  '    const same = s[i] === letter',
+  '    const extra = same ? encoded(run + 1) - encoded(run) : 1',
+  '    const keep = extra + best(i + 1, s[i], same ? run + 1 : 1, left)',
+  '    memo.set(key, Math.min(del, keep))',
+  '    return memo.get(key)',
+  '  }',
+  "  return best(0, '', 0, k)",
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(c => c.includes(s)) + 1
 
 export const python = `def min_length(s, k):
     def encoded(x):

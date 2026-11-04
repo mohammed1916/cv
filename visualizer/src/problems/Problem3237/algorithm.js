@@ -2,16 +2,15 @@
 // Windows are kept from most to least recent. Activating a window moves it to the front and keeps the
 // order of all other windows. The draft gives no starting list, so this visualization starts with windows 1 to n in order.
 
-const CODE_TEXT = [
-  'FUNCTION altTab(windows, activations)',
-  '    order ← windows 1 to windows, most recent first',
-  '    FOR each window in activations',
-  '        position ← index of window in order',
-  '        remove the entry at position from order',
-  '        insert window at the front of order',
-  '    RETURN order',
-]
-
+const CODE_TEXT = `function altTab(windows, activations) {
+  const order = Array.from({ length: windows }, (_, i) => i + 1)
+  for (const window of activations) {
+    const position = order.indexOf(window)
+    order.splice(position, 1)
+    order.unshift(window)
+  }
+  return order
+}`.split('\n')
 export const code = CODE_TEXT.map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def alt_tab_order(windows, activations):
@@ -54,14 +53,14 @@ export function buildTrace({ windows, activations }) {
   const order = Array.from({ length: windows }, (_, k) => k + 1)
   const frames = []
   const snap = extra => ({ windows, activations, order: order.slice(), ...extra })
-  frames.push(snap({ phase: 'start', activeLine: L('order ← windows'), pythonLine: P('order = list(range'), window: null, from: -1, time: -1, message: `Windows 1 to ${windows} start in order, most recent first.` }))
+  frames.push(snap({ phase: 'start', activeLine: L('const order = Array.from'), pythonLine: P('order = list(range'), window: null, from: -1, time: -1, message: `Windows 1 to ${windows} start in order, most recent first.` }))
   activations.forEach((window, time) => {
     const from = order.indexOf(window)
-    frames.push(snap({ phase: 'find', activeLine: L('position ← index of window'), pythonLine: P('position = order.index'), window, from, time, message: `Activate window ${window}; it sits at position ${from}.` }))
+    frames.push(snap({ phase: 'find', activeLine: L('const position = order.indexOf'), pythonLine: P('position = order.index'), window, from, time, message: `Activate window ${window}; it sits at position ${from}.` }))
     order.splice(from, 1)
     order.unshift(window)
-    frames.push(snap({ phase: 'move', activeLine: L('insert window at the front'), pythonLine: P('order.insert(0, window)'), window, from, time, message: `Window ${window} moves to the front; the other windows keep their order.` }))
+    frames.push(snap({ phase: 'move', activeLine: L('order.unshift(window)'), pythonLine: P('order.insert(0, window)'), window, from, time, message: `Window ${window} moves to the front; the other windows keep their order.` }))
   })
-  frames.push(snap({ phase: 'done', activeLine: L('RETURN order'), pythonLine: P('return order'), window: null, from: -1, time: activations.length - 1, message: `Final order: ${order.join(', ')}.` }))
+  frames.push(snap({ phase: 'done', activeLine: L('return order'), pythonLine: P('return order'), window: null, from: -1, time: activations.length - 1, message: `Final order: ${order.join(', ')}.` }))
   return { input: { windows, activations }, result: order.slice(), frames }
 }

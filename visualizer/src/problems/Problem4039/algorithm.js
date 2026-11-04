@@ -36,19 +36,36 @@ if __name__ == "__main__":
     print(sum_of_decoded(json.loads(sys.stdin.read())))
 `
 
-export const code = `sum of decoded numbers modulo 1000000007
-  total ← 0
-  FOR each encoded value e in nums
-    width ← last decimal digit of e; body ← e without its last digit
-    x ← first width digits of body; y ← remaining digits of body
-    total ← (total + powMod(x, y)) mod 1000000007
-  RETURN total
-FUNCTION powMod(base, exp)
-  result ← 1; base ← base mod 1000000007
-  WHILE exp > 0
-    IF exp is odd THEN result ← result × base mod 1000000007
-    base ← base × base mod 1000000007; exp ← exp ÷ 2
-  RETURN result`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `const MOD = 1000000007n
+function powMod(base, exp) {
+  // result starts at 1
+  let result = 1n
+  base %= MOD
+  while (exp > 0n) {
+    // if exp is odd then multiply the result by base
+    if (exp & 1n) result = (result * base) % MOD
+    // base times itself, modulo MOD
+    base = (base * base) % MOD
+    exp >>= 1n
+  }
+  return result
+}
+function sumOfDecoded(nums) {
+  // total starts at 0
+  let total = 0n
+  for (const e of nums) {
+    const text = String(e)
+    // width is the last digit, and body is e without that digit
+    const width = Number(text.slice(-1))
+    const body = text.slice(0, -1)
+    const x = BigInt(body.slice(0, width))
+    const y = BigInt(body.slice(width))
+    // add powMod(x, y) to total, modulo MOD
+    total = (total + powMod(x, y)) % MOD
+  }
+  // return total
+  return total
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const L = s => {
   const index = code.findIndex(c => c.text.includes(s))
@@ -88,39 +105,39 @@ export function buildTrace({ nums }) {
   if (nums.length > MAX_VISUAL_VALUES) throw new Error(`The visualization caps the array at ${MAX_VISUAL_VALUES} values.`)
   const frames = []
   let total = 0n
-  frames.push({ phase: 'setup', pythonLine: P('total = 0'), activeLine: L('total ← 0'), index: -1, e: null, width: null, x: null, y: null,
+  frames.push({ phase: 'setup', pythonLine: P('total = 0'), activeLine: L('total starts at 0'), index: -1, e: null, width: null, x: null, y: null,
     power: null, total: 0, message: `Decode ${nums.length} encoded value${nums.length === 1 ? '' : 's'}; the running sum starts at 0.` })
 
   nums.forEach((e, index) => {
     const { width, x, y } = decode(e)
-    frames.push({ phase: 'split', pythonLine: P('width = int(text[-1])'), activeLine: L('width ← last decimal digit'), index, e, width, x, y,
+    frames.push({ phase: 'split', pythonLine: P('width = int(text[-1])'), activeLine: L('width is the last digit'), index, e, width, x, y,
       power: null, total: Number(total), message: `${e}: last digit ${width} is the width. Parts x = ${x} and y = ${y}.` })
 
     // powMod(x, y) with the bits of y walked from the least significant end.
     let base = BigInt(x) % MOD
     let exp = BigInt(y)
     let result = 1n
-    frames.push({ phase: 'power', pythonLine: P('result = 1'), activeLine: L('result ← 1'), index, e, width, x, y,
+    frames.push({ phase: 'power', pythonLine: P('result = 1'), activeLine: L('result starts at 1'), index, e, width, x, y,
       power: { bit: null, exp: exp.toString(), base: base.toString(), result: result.toString() }, total: Number(total),
       message: `Compute ${x}^${y} mod 1000000007 by squaring.` })
     while (exp > 0n) {
       const odd = (exp & 1n) === 1n
       if (odd) result = (result * base) % MOD
-      frames.push({ phase: 'power', pythonLine: P(odd ? 'result = result * base' : 'if exp & 1'), activeLine: L('IF exp is odd'), index, e, width, x, y,
+      frames.push({ phase: 'power', pythonLine: P(odd ? 'result = result * base' : 'if exp & 1'), activeLine: L('exp is odd'), index, e, width, x, y,
         power: { bit: odd ? 1 : 0, exp: exp.toString(), base: base.toString(), result: result.toString() }, total: Number(total),
         message: odd ? `Exponent bit is 1, so multiply result by base: result is ${result}.` : 'Exponent bit is 0, so the result is unchanged.' })
       base = (base * base) % MOD
       exp >>= 1n
-      frames.push({ phase: 'power', pythonLine: P('base = base * base'), activeLine: L('base ← base × base'), index, e, width, x, y,
+      frames.push({ phase: 'power', pythonLine: P('base = base * base'), activeLine: L('base times itself'), index, e, width, x, y,
         power: { bit: null, exp: exp.toString(), base: base.toString(), result: result.toString() }, total: Number(total),
         message: `Square the base to ${base}; the exponent halves to ${exp}.` })
     }
     total = (total + result) % MOD
-    frames.push({ phase: 'add', pythonLine: P('total = (total + pow_mod'), activeLine: L('total ← (total + powMod'), index, e, width, x, y,
+    frames.push({ phase: 'add', pythonLine: P('total = (total + pow_mod'), activeLine: L('add powMod(x, y)'), index, e, width, x, y,
       power: { bit: null, exp: '0', base: null, result: result.toString() }, total: Number(total),
       message: `${x}^${y} mod 1000000007 = ${result}. Running total ${total}.` })
   })
-  frames.push({ phase: 'done', pythonLine: P('return total'), activeLine: L('RETURN total'), index: -1, e: null, width: null, x: null, y: null,
+  frames.push({ phase: 'done', pythonLine: P('return total'), activeLine: L('return total'), index: -1, e: null, width: null, x: null, y: null,
     power: null, total: Number(total), message: `Sum of decoded powers modulo 1000000007 is ${total}.` })
   return { input: { nums }, nums, answer: Number(total), frames }
 }

@@ -21,7 +21,13 @@ const definition = {
 export default function TwoNonOverlappingTargetWindows() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="arr" length={run.input.arr.length} valueAt={index => run.input.arr[index]} active={step.index}
-      roleAt={index => step.window && index >= step.window[0] && index <= step.window[1] ? 'window' : ''} />
+      roleAt={index => {
+        if (!step.window) return ''
+        if (index === step.window[0]) return 'l'
+        if (index === step.window[1]) return 'r'
+        return index > step.window[0] && index < step.window[1] ? 'window' : ''
+      }} />
+    <p>{step.window ? `Window found: arr[${step.window[0]}..${step.window[1]}] with length ${step.length}. The left pointer is l and the right pointer is r.` : 'No target window ends at this position.'}</p>
     <output aria-label="Best total">{`Best total so far: ${step.best ?? '(none)'}`}</output>
   </>} renderReasoning={() => <>
     <p>A window sums to the target exactly when two prefix sums differ by the target, so a map of prefix sums finds each window ending at a position.</p>

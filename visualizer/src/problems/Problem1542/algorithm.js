@@ -19,7 +19,7 @@ export function buildTrace(s) {
   let best = 0
   let span = [0, 0]
   const snap = (r, extra = {}) => ({ r, mask, best, span, ...extra })
-  frames.push({ phase: 'start', activeLine: L('first = {0: 0}'), pythonLine: P('first = {0: 0}'), snapshot: snap(0, { hits: [] }), message: 'The empty prefix has mask 0 at index 0. Record each new mask at its first appearance.' })
+  frames.push({ phase: 'start', activeLine: L('const first = new Map([[0, 0]])'), pythonLine: P('first = {0: 0}'), snapshot: snap(0, { hits: [] }), message: 'The empty prefix has mask 0 at index 0. Record each new mask at its first appearance.' })
   for (let r = 1; r <= s.length; r++) {
     const digit = Number(s[r - 1])
     mask ^= 1 << digit
@@ -29,12 +29,12 @@ export function buildTrace(s) {
     for (const target of targets) {
       if (first.has(target)) hits.push({ target, start: first.get(target), length: r - first.get(target) })
     }
-    frames.push({ phase: 'check', activeLine: L('for target in'), pythonLine: P('for target in'), snapshot: snap(r, { hits }), message: hits.length ? `${hits.length} earlier prefix(es) pair with this end; the longest gives length ${Math.max(...hits.map(h => h.length))}.` : 'No earlier prefix pairs with this end.' })
+    frames.push({ phase: 'check', activeLine: L('for (const target of'), pythonLine: P('for target in'), snapshot: snap(r, { hits }), message: hits.length ? `${hits.length} earlier prefix(es) pair with this end; the longest gives length ${Math.max(...hits.map(h => h.length))}.` : 'No earlier prefix pairs with this end.' })
     for (const hit of hits) {
       if (hit.length > best) {
         best = hit.length
         span = [hit.start, r]
-        frames.push({ phase: 'record', activeLine: L('best = max'), pythonLine: P('best = max'), snapshot: snap(r, { hits }), message: `Substring from ${hit.start} to ${r} has length ${best} and can be rearranged into a palindrome.` })
+        frames.push({ phase: 'record', activeLine: L('best = Math.max'), pythonLine: P('best = max'), snapshot: snap(r, { hits }), message: `Substring from ${hit.start} to ${r} has length ${best} and can be rearranged into a palindrome.` })
       }
     }
     if (!first.has(mask)) first.set(mask, r)
@@ -43,16 +43,18 @@ export function buildTrace(s) {
   return { input: s, result: best, frames }
 }
 
-export const code = `longest palindromable (s):
-  first = {0: 0}           // parity mask -> earliest prefix index
-  mask, best = 0, 0
-  for r in 1..len(s):
-    mask ^= 1 << digit(s[r-1])
-    for target in [mask] + [mask ^ (1 << d) for d in 0..9]:
-      if target in first:
-        best = max(best, r - first[target])
-    if mask not in first: first[mask] = r
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function longestPalindromable(s) {",
+  "  const first = new Map([[0, 0]])",
+  "  let mask = 0, best = 0",
+  "  for (let r = 1; r <= s.length; r++) {",
+  "    mask ^= 1 << Number(s[r - 1])",
+  "    const targets = [mask, ...Array.from({ length: 10 }, (_, d) => mask ^ (1 << d))]",
+  "    for (const target of targets) {",
+  "      if (first.has(target)) best = Math.max(best, r - first.get(target)) }",
+  "    if (!first.has(mask)) first.set(mask, r) }",
+  "  return best }",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def longest_awesome(s):

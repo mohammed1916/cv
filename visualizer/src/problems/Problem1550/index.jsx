@@ -1,7 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
-
-const cell = { minWidth: 36, textAlign: 'center', border: '1px solid var(--border)', padding: 4, fontFamily: 'monospace' }
 
 const definition = {
   number: '1550',
@@ -20,11 +19,16 @@ export default function ThreeConsecutiveOdds() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const arr = run.input
     const { index, odd, run: length } = step.snapshot
+    const l = length > 0 ? index - length + 1 : -1
+    const r = index
+    const roleAt = i => {
+      if (length <= 0 || i < l || i > r) return ''
+      if (i === l && i === r) return 'l and r'
+      return i === l ? 'l' : i === r ? 'r' : 'in run'
+    }
     return <>
-      <div aria-label="Values" style={{ display: 'flex', gap: 6 }}>
-        {arr.map((v, i) => <div key={i} style={{ ...cell, background: i === index ? 'var(--surface2)' : 'transparent', borderWidth: i === index ? 2 : 1, color: odd === true ? 'var(--text)' : undefined }}>{v}</div>)}
-      </div>
-      <p>Current run of odd values: <strong>{length}</strong> of 3 needed</p>
+      <IndexedSequence label="Values, left to right" length={arr.length} valueAt={i => arr[i]} active={index} roleAt={roleAt} />
+      <p>{index < 0 ? 'The window is empty before the first value.' : `The current run is the window from l = ${Math.max(l, 0)} to r = ${r}; its length is ${length} of the 3 needed. ${odd === true ? 'The value is odd.' : 'The value is even, so the run resets.'}`}</p>
     </>
   }} renderReasoning={() => <>
     <p><strong>Key idea:</strong> a single pass tracks how many odd values end at the current position. Any even value resets that count.</p>

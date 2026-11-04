@@ -49,14 +49,14 @@ export function buildTrace({ n, rounds }) {
     ? range(start, end)
     : [...range(1, end), ...range(start, n)]
   frames.push({
-    phase: 'range', activeLine: L('if start <= end'), pythonLine: P('if start <= end'),
+    phase: 'range', activeLine: L('if (start <= end)'), pythonLine: P('if start <= end'),
     snapshot: snap(null, result),
     message: start <= end
       ? `The run does not wrap, so the busiest sectors are ${start} through ${end}.`
       : `The run wraps past sector ${n} back to 1, so the busiest sectors are 1 through ${end} and ${start} through ${n}.`,
   })
   frames.push({
-    phase: 'done', activeLine: L('return 1 through'), pythonLine: P('return list(range(1'),
+    phase: 'done', activeLine: L('return [...Array.from({ length: end }'), pythonLine: P('return list(range(1'),
     snapshot: snap(null, result), message: `Return [${result.join(', ')}].`,
   })
   return { input: { n, rounds }, result, frames }
@@ -66,12 +66,13 @@ function range(a, b) {
   return Array.from({ length: b - a + 1 }, (_, i) => a + i)
 }
 
-export const code = `most visited sectors (n, rounds):
-  start = rounds[0], end = rounds[last]
-  the laps cover only the clockwise run from start to end
-  if start <= end:
-    return start through end
-  return 1 through end, then start through n`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function mostVisitedSectors(n, rounds) {",
+  "  const start = rounds[0], end = rounds[rounds.length - 1]",
+  "  // the laps cover only the clockwise run from start to end",
+  "  if (start <= end) return Array.from({ length: end - start + 1 }, (_, i) => start + i)",
+  "  return [...Array.from({ length: end }, (_, i) => i + 1), ...Array.from({ length: n - start + 1 }, (_, i) => start + i)] }",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 

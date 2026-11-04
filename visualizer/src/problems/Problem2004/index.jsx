@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import SqlStages from './SqlStages'
 import { meta } from './meta'
 import { buildTrace, parseInput, code, sql, python, phases } from './algorithm'
 
@@ -27,6 +28,7 @@ function Rows({ columns = [], rows = [] }) {
 
 export default function SeniorsAndJuniorsJoin() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <SqlStages code={code} activeLine={step.activeLine} />
     <Rows columns={step.columns} rows={step.rows} />
     <output aria-label="Query output">{step.phase === 'done' ? run.result.map(row => `${row.experience}: ${row.accepted_candidates}`).join(', ') : step.message}</output>
   </>} renderReasoning={() => <>

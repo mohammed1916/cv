@@ -30,42 +30,50 @@ export function buildTrace(input) {
     at = i
     if (i === m) {
       const balanced = balance.every(b => b === 0)
-      snap('check', L('if every balance is zero'), balanced ? `All balances are zero with ${taken} granted. Best is ${Math.max(best, taken)}.` : `Some building is unbalanced with ${taken} granted.`)
+      snap('check', L('balance.every(b => b === 0)'), balanced ? `All balances are zero with ${taken} granted. Best is ${Math.max(best, taken)}.` : `Some building is unbalanced with ${taken} granted.`)
       if (balanced && taken > best) best = taken
       return
     }
     const [from, to] = requests[i]
     balance[from]--
     balance[to]++
-    snap('take', L('take the request'), `Grant request ${i} (${from} to ${to}).`)
+    snap('take', L('const [from, to]'), `Grant request ${i} (${from} to ${to}).`)
     search(i + 1, taken + 1)
     balance[from]++
     balance[to]--
-    snap('undo', L('undo the take'), `Undo request ${i}.`)
-    snap('skip', L('skip the request'), `Refuse request ${i} and continue.`)
+    snap('undo', L('balance[from]++; balance[to]--'), `Undo request ${i}.`)
+    snap('skip', L('search(i + 1, taken)'), `Refuse request ${i} and continue.`)
     search(i + 1, taken)
   }
 
-  snap('start', L('set best to zero'), 'Start with best at zero and every balance at zero.')
+  snap('start', L('let best = 0'), 'Start with best at zero and every balance at zero.')
   search(0, 0)
   at = -1
   snap('done', L('return best'), `Maximum achievable requests: ${best}.`)
   return { input, result: best, frames }
 }
 
-export const code = `set best to zero and the balance of every building to zero
-define a search that takes the request number i and a count of granted requests
-  if i is past the last request
-    if every balance is zero, update best with the count
-    return
-  take the request: its source building loses one and its target gains one
-  search with i plus one and the count plus one
-  undo the take
-  skip the request
-  search with i plus one and the same count
-start the search at request 0 with a count of zero
-return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function maximumRequests(n, requests) {',
+  '  const balance = Array(n).fill(0)',
+  '  let best = 0',
+  '  const search = (i, taken) => {',
+  '    if (i === requests.length) {',
+  '      if (balance.every(b => b === 0) && taken > best) best = taken',
+  '      return',
+  '    }',
+  '    const [from, to] = requests[i]',
+  '    balance[from]--; balance[to]++',
+  '    search(i + 1, taken + 1)',
+  '    balance[from]++; balance[to]--',
+  '    search(i + 1, taken)',
+  '  }',
+  '  search(0, 0)',
+  '  return best',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(c => c.includes(s)) + 1
 
 export const python = `def max_achievable(n, requests):
     m = len(requests)

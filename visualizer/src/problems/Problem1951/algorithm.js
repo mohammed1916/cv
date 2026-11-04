@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough. The sample tables are invented for this visualization.
 export const sql = `WITH pair_counts AS (
   SELECT a.user_id AS user1_id, b.user_id AS user2_id, COUNT(*) AS common
   FROM Relations a

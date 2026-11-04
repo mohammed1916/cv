@@ -41,13 +41,29 @@ export function solve(input) {
   return buildTrace(input).result
 }
 
-export const code = `maximum score from exactly k pairs with increasing indices in both lists
-  dp[t][i][j] is the best score with exactly t pairs among the first i and first j numbers
-  dp[0][i][j] is zero for every i and j
-  for t from 1 to k, i from 1 to n, j from 1 to m
-    dp[t][i][j] = max of dp[t][i-1][j] and dp[t][i][j-1]
-    and dp[t-1][i-1][j-1] plus nums1[i-1] times nums2[j-1] when that is possible
-  return dp[k][n][m]`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
+export const code = `function maxScore(nums1, nums2, k) {
+  const n = nums1.length
+  const m = nums2.length
+  const NEG = -Infinity
+  // dp[t][i][j] is the best score with exactly t pairs among the first i and first j numbers
+  // dp[0][i][j] is zero for every i and j, so the previous layer starts as all zeros
+  let prev = Array.from({ length: n + 1 }, () => Array(m + 1).fill(0))
+  for (let t = 1; t <= k; t++) {
+    const cur = Array.from({ length: n + 1 }, () => Array(m + 1).fill(NEG))
+    for (let i = 1; i <= n; i++) {
+      for (let j = 1; j <= m; j++) {
+        // dp[t][i][j] = max of dp[t][i-1][j] and dp[t][i][j-1]
+        let value = Math.max(cur[i - 1][j], cur[i][j - 1])
+        // and dp[t-1][i-1][j-1] plus nums1[i-1] times nums2[j-1] when that is possible
+        if (prev[i - 1][j - 1] > NEG) value = Math.max(value, prev[i - 1][j - 1] + nums1[i - 1] * nums2[j - 1])
+        cur[i][j] = value
+      }
+    }
+    prev = cur
+  }
+  // return dp[k][n][m]
+  return prev[n][m]
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def max_score(nums1, nums2, k):
     n, m = len(nums1), len(nums2)

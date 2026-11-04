@@ -1,8 +1,21 @@
-const codeLines = `candidates are the interior indices 1 to n minus 2
-cost[i] = max(0, max(nums[i-1], nums[i+1]) + 1 - nums[i])
-best[k] = better of best[k-1] and best[k-2] plus candidate k
-  better means more special indices, then lower total cost
-return the cost part of best for the last candidate`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
+const codeLines = `function minIncrease(nums) {
+  const n = nums.length
+  // candidates are the interior indices 1 to n minus 2
+  // cost[i] = max(0, max(nums[i-1], nums[i+1]) + 1 - nums[i]) is the raise that makes i a peak
+  const cost = Array(n).fill(0)
+  for (let i = 1; i < n - 1; i++) cost[i] = Math.max(0, Math.max(nums[i - 1], nums[i + 1]) + 1 - nums[i])
+  // best[k] = better of best[k-1] and best[k-2] plus candidate k
+  // better means more special indices, then lower total cost
+  const best = [{ count: 0, cost: 0 }]
+  const at = k => (k < 0 ? { count: 0, cost: 0 } : best[k])
+  for (let k = 1; k <= n - 2; k++) {
+    const take = { count: at(k - 2).count + 1, cost: at(k - 2).cost + cost[k] }
+    const keep = at(k - 1)
+    best[k] = take.count > keep.count || (take.count === keep.count && take.cost < keep.cost) ? take : keep
+  }
+  // return the cost part of best for the last candidate
+  return n >= 3 ? best[n - 2].cost : 0
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => codeLines.findIndex(c => c.text.includes(s)) + 1
 const pythonLines = `def min_increase(nums):
     n = len(nums)

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
+import AnswerRangeBar from "../../components/shared/AnswerRangeBar";
 import HullLinesView from "./HullLinesView";
 import { code, python, parseInput, buildTrace, phases } from "./algorithm.js";
 
@@ -23,7 +24,10 @@ export default function MaximumArrayHoppingScoreII() {
   return (
     <AlgorithmWorkspace
       definition={definition}
-      renderVisual={({ run, step }) => <HullLinesView run={run} step={step} />}
+      renderVisual={({ run, step }) => <>
+        <HullLinesView run={run} step={step} />
+        {step.lo >= 0 && step.hi >= step.lo && <AnswerRangeBar title="Hull search range (positions on the hull)" min={0} max={Math.max(1, step.hull.length - 1)} low={step.lo} high={step.hi} />}
+      </>}
       renderReasoning={({ run, step }) => (
         <p>
           {step.message} {run ? `Final answer: ${run.result}.` : ""}

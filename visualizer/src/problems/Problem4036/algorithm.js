@@ -6,17 +6,30 @@ const PHASES = [
 
 export const phases = PHASES
 
-const CODE_LINES = [
-  'lexicographically largest string for each count x',
-  'for each x in nums',
-  '  s is empty and rem is x',
-  '  while rem is above zero',
-  '    k is the largest exponent with 2 to the k at most rem, capped at 25',
-  '    append the letter a plus k to s',
-  '    subtract 2 to the k from rem',
-  '  add s to the answers',
-  'return the answers',
-]
+const CODE_LINES = `function largestStrings(nums) {
+  // lexicographically largest string for each count x
+  const answers = []
+  // for each x in nums
+  for (const x of nums) {
+    // s is empty and rem is x
+    const s = []
+    let rem = x
+    while (rem > 0) {
+      // k is the largest exponent with 2 to the k at most rem, capped at 25
+      let k = 0
+      while (2 ** (k + 1) <= rem) k++
+      k = Math.min(25, k)
+      // append the letter a plus k to s
+      s.push(String.fromCharCode(97 + k))
+      // subtract 2 to the k from rem
+      rem -= 2 ** k
+    }
+    // add s to the answers
+    answers.push(s.join(''))
+  }
+  // return the answers
+  return answers
+}`.split('\n')
 
 export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }))
 

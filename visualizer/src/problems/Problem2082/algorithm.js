@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough. The sample tables are invented for this visualization.
 export const sql = `SELECT COUNT(DISTINCT customer_id) AS rich_count
 FROM Store
 WHERE amount > 500`

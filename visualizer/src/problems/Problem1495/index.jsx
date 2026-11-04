@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import SqlStageStrip from './SqlStageStrip'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -55,6 +56,7 @@ export default function FriendlyMovies() {
       done: 'SELECT DISTINCT title, sorted: one row per movie.',
     }[step.phase]
     return <>
+      <SqlStageStrip phases={definition.phases} current={step.phase} />
       <RowTable caption={step.phase === 'load' || step.phase === 'window' ? 'Airings (date order)' : 'Working rows'}
         stage={stage} rows={step.rows} isCurrent={sameAiring} rowTone={row => (sameAiring(row) ? (airing.kept ? KEPT : SKIPPED) : null)} />
       {airing && <p>Testing airing on {airing.program_date} for content {airing.content_id}: {airing.kept ? 'kept' : 'skipped'}.</p>}

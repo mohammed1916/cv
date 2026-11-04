@@ -1,26 +1,28 @@
-// LeetCode 1918 (draft): Kth Smallest Subarray Sum.
+// LeetCode 1918: Kth Smallest Subarray Sum.
 // Input: { nums, k }: nums are positive integers (visualization cap: 10 entries, each 1 to 9). Sums of all nonempty
 // contiguous subarrays are taken with duplicates; return the kth smallest. 1 <= k <= n(n+1)/2.
 // Binary search on the answer value; counting subarrays with sum at most a limit uses a sliding window (values are positive).
 
-const CODE_TEXT = `FUNCTION kthSmallestSubarraySum(nums, k)
-    lo ← smallest element, hi ← sum of all elements
-    WHILE lo is less than hi
-        mid ← floor of (lo + hi) / 2
-        IF countAtMost(nums, mid) is at least k
-            hi ← mid
-        ELSE
-            lo ← mid + 1
-    RETURN lo
+const CODE_TEXT = `function countAtMost(nums, limit) {
+  let total = 0, sum = 0, left = 0
+  for (let right = 0; right < nums.length; right++) {
+    sum += nums[right]
+    while (sum > limit) { sum -= nums[left]; left++ }
+    total += right - left + 1 // total ← total + (right - left + 1)
+  }
+  return total
+}
 
-FUNCTION countAtMost(nums, limit)
-    total ← 0, left ← 0, window ← 0
-    FOR right from 0 to the last index
-        window ← window + nums[right]
-        WHILE window is greater than limit
-            window ← window - nums[left], then left ← left + 1
-        total ← total + (right - left + 1)
-    RETURN total`
+export function kthSmallestSubarraySum(nums, k) {
+  let lo = Math.min(...nums) // lo ← smallest element
+  let hi = nums.reduce((a, b) => a + b, 0)
+  while (lo < hi) {
+    const mid = Math.floor((lo + hi) / 2) // mid ← floor of (lo + hi) / 2
+    if (countAtMost(nums, mid) >= k) hi = mid // IF countAtMost(nums, mid) is at least k
+    else lo = mid + 1 // lo ← mid + 1
+  }
+  return lo // RETURN lo
+}`
 
 export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
 

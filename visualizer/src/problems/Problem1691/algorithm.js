@@ -13,15 +13,23 @@ export function parseInput(text) {
   return boxes
 }
 
-export const code = `max stack height (boxes):
-  for each box: sort its three sides, smallest first
-  sort the boxes by their sorted sides
-  for i from 0 to n - 1:
-    best[i] = height of box i (its largest side)
-    for each earlier box j:
-      if every side of j fits under box i:
-        best[i] = max(best[i], best[j] + height of box i)
-  return max of best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `export function maxHeight(cuboids) {
+  const boxes = cuboids.map(box => [...box].sort((a, b) => a - b)) // sort its three sides
+  boxes.sort((a, b) => a[0] - b[0] || a[1] - b[1] || a[2] - b[2]) // sort the boxes by their sorted sides
+  const n = boxes.length
+  const best = new Array(n).fill(0)
+  for (let i = 0; i < n; i++) {
+    const box = boxes[i]
+    best[i] = box[2] // best[i] = height of box i
+    for (let j = 0; j < i; j++) {
+      const low = boxes[j]
+      if (low[0] <= box[0] && low[1] <= box[1] && low[2] <= box[2]) {
+        best[i] = Math.max(best[i], best[j] + box[2])
+      }
+    }
+  }
+  return Math.max(...best) // return max of best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def max_stack_height(boxes):
     boxes = sorted(sorted(box) for box in boxes)

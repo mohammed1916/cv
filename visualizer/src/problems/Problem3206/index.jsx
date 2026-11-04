@@ -31,7 +31,7 @@ export default function AlternatingGroupsVisualizer() {
         <>
           <IndexedSequence label="Tiles on the circle" length={run.input.colors.length}
             valueAt={i => (run.input.colors[i] === 1 ? "B" : "R")}
-            active={step.index} roleAt={i => (i === step.index ? "active" : step.window.includes(i) ? "window" : "")} />
+            active={step.index} roleAt={i => (i === step.index ? "active" : i === step.window[0] ? "l" : i === step.window[2] ? "r" : step.window.includes(i) ? "window" : "")} />
           <p>Alternating groups so far: {step.count}</p>
         </>
       )}

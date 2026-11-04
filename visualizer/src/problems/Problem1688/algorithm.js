@@ -11,14 +11,16 @@ export function parseInput(text) {
   return value
 }
 
-export const code = `count matches (n):
-  teams = n
-  matches = 0
-  while teams > 1:
-    pairs = floor(teams / 2)
+export const code = `export function numberOfMatches(n) {
+  let teams = n
+  let matches = 0
+  while (teams > 1) {
+    const pairs = Math.floor(teams / 2)
     matches += pairs
-    teams = pairs + (teams mod 2)
-  return matches`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    teams = pairs + (teams % 2)
+  }
+  return matches
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def count_matches(n):
     teams = n

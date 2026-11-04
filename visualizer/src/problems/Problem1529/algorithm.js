@@ -11,14 +11,16 @@ export function parseInput(text) {
   return target
 }
 
-export const code = `minimum suffix flips (target):
-  state = '0'
-  flips = 0
-  for each bit in target:
-    if bit != state:
-      flips = flips + 1
-      state = bit
-  return flips`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function minSuffixFlips(target) {",
+  "  let state = '0'",
+  "  let flips = 0",
+  "  for (const bit of target) {",
+  "    if (bit !== state) {",
+  "      flips += 1",
+  "      state = bit }",
+  "  } return flips }",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def min_suffix_flips(target):
     state = '0'
@@ -45,9 +47,9 @@ export function buildTrace(target) {
     if (bit !== state) {
       flips += 1
       state = bit
-      frames.push({ phase: 'flip', ...at('flips = flips + 1', 'flips += 1'), message: `Position ${i} needs ${bit} but holds ${bit === '1' ? '0' : '1'}. Flip the suffix starting here; flips so far: ${flips}.`, snapshot: snap(i, true) })
+      frames.push({ phase: 'flip', ...at('flips += 1', 'flips += 1'), message: `Position ${i} needs ${bit} but holds ${bit === '1' ? '0' : '1'}. Flip the suffix starting here; flips so far: ${flips}.`, snapshot: snap(i, true) })
     } else {
-      frames.push({ phase: 'match', ...at('if bit != state', 'if bit != state'), message: `Position ${i} already holds ${bit} after the earlier flips, so no flip is needed.`, snapshot: snap(i, false) })
+      frames.push({ phase: 'match', ...at('if (bit !== state)', 'if bit != state'), message: `Position ${i} already holds ${bit} after the earlier flips, so no flip is needed.`, snapshot: snap(i, false) })
     }
   }
   frames.push({ phase: 'done', ...at('return flips', 'return flips'), message: `Return ${flips}, the number of suffix flips.`, snapshot: snap(null, false) })

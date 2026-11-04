@@ -13,18 +13,20 @@ export function parseInput(text) {
   return { s }
 }
 
-export const code = `count good splits (s):
-  n = length of s
-  seen = empty set
-  for i from 0 to n-1:
-    add s[i] to seen; left[i] = size of seen
-  seen = empty set
-  for i from n-1 down to 0:
-    add s[i] to seen; right[i] = size of seen
-  good = 0
-  for i from 0 to n-2:
-    if left[i] == right[i+1]: good += 1
-  return good`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function countGoodSplits(s) {",
+  "  const n = s.length",
+  "  const seen = new Set(); const left = []",
+  "  for (let i = 0; i < n; i++) {",
+  "    seen.add(s[i]); left[i] = seen.size }",
+  "  seen.clear(); const right = []",
+  "  for (let i = n - 1; i >= 0; i--) {",
+  "    seen.add(s[i]); right[i] = seen.size }",
+  "  let good = 0",
+  "  for (let i = 0; i < n - 1; i++) {",
+  "    if (left[i] === right[i + 1]) good += 1 }",
+  "  return good }",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def num_splits(s):
     n = len(s)

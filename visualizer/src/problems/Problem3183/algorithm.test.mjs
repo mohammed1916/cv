@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { buildTrace, parseInput } from './algorithm.js'
+import { buildTrace, parseInput, code } from './algorithm.js'
 
 const solve = n => buildTrace(n).result
 
@@ -37,7 +37,7 @@ test('3183 the modulus is applied to large amounts', () => {
 test('3183 frames carry real pseudocode and python lines and the strip', () => {
   const run = buildTrace(10)
   for (const frame of run.frames) {
-    assert.ok(frame.activeLine >= 1 && frame.activeLine <= 10, `activeLine ${frame.activeLine}`)
+    assert.ok(frame.activeLine >= 1 && frame.activeLine <= code.length, `activeLine ${frame.activeLine}`)
     assert.ok(frame.pythonLine >= 1 && frame.pythonLine <= 12, `pythonLine ${frame.pythonLine}`)
     assert.equal(frame.ways.length, 11)
   }

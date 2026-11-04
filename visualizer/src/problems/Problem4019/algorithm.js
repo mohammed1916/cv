@@ -7,16 +7,22 @@ const PHASES = [
 
 export const phases = PHASES
 
-const CODE_LINES = [
-  'merge close characters within distance k',
-  'repeat until no pair is found',
-  '  for i from 0 to the last index',
-  '    for j from i plus 1 up to i plus k',
-  '      if s at i equals s at j then record the pair (i, j) and stop',
-  '    if a pair was recorded then stop scanning i',
-  '  if no pair was recorded then return s',
-  '  delete the character at index j from s',
-]
+const CODE_LINES = `function mergeClose(s, k) {
+  // merge close characters within distance k
+  for (;;) { // repeat until no pair is found
+    let pair = null
+    for (let i = 0; i < s.length && !pair; i++) {
+      for (let j = i + 1; j < Math.min(s.length, i + k + 1); j++) {
+        if (s[i] === s[j]) { pair = [i, j]; break } // if s at i equals s at j then record the pair (i, j) and stop
+      }
+    }
+    // if no pair was recorded then return s
+    if (!pair) return s
+    // delete the character at index j from s, keeping the left one
+    const j = pair[1]
+    s = s.slice(0, j) + s.slice(j + 1)
+  }
+}`.split('\n')
 
 export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }))
 

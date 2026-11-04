@@ -1,11 +1,13 @@
 export const CODE = [
-  "FUNCTION swapNodes(head, k)",
-  "    first ← head, moved forward k − 1 steps",
-  "    tail ← first; second ← head",
-  "    WHILE tail.next is not null",
-  "        tail ← tail.next; second ← second.next",
-  "    swap the values of first and second",
-  "    RETURN head",
+  "function swapNodes(head, k) {",
+  "  let first = k - 1 // move first k - 1 steps from the head",
+  "  let tail = first, second = 0 // tail starts at first; second starts at head",
+  "  while (tail < n - 1) { // while tail.next exists",
+  "    tail++; second++ // advance tail and second together",
+  "  }",
+  "  ;[values[first], values[second]] = [values[second], values[first]] // swap the values",
+  "  return values",
+  "}",
 ];
 export const code = CODE.map((text, index) => ({ line: index + 1, text }));
 
@@ -42,7 +44,7 @@ def to_list(node):
     return out`;
 
 // Pseudocode activeLine -> Python line doing the same action.
-export const pythonLineMap = { 1: 1, 2: 4, 3: 6, 4: 7, 5: 8, 6: 10, 7: 11 };
+export const pythonLineMap = { 1: 1, 2: 4, 3: 6, 4: 7, 5: 8, 6: 9, 7: 10, 8: 11, 9: 11 };
 
 const MAX_LENGTH = 30;
 
@@ -76,9 +78,9 @@ export function buildTrace({ head, k }) {
     frames.push({ phase: "scan", activeLine: 5, message: `Advance tail to index ${tail} and second to index ${second}.`, ...base({ tail, second }) });
   }
   frames.push({ phase: "scan", activeLine: 4, message: `tail is the last node; second is the ${k}-th node from the end (index ${second}).`, ...base({ tail, second }) });
-  frames.push({ phase: "swap", activeLine: 6, message: `Swap values ${values[first]} and ${values[second]}.`, ...base({ tail, second }) });
+  frames.push({ phase: "swap", activeLine: 7, message: `Swap values ${values[first]} and ${values[second]}.`, ...base({ tail, second }) });
   const result = values.slice();
   [result[first], result[second]] = [result[second], result[first]];
-  frames.push({ phase: "done", activeLine: 7, message: "Return the list with the two values swapped.", values: result, first, tail, second, swapped: true });
+  frames.push({ phase: "done", activeLine: 8, message: "Return the list with the two values swapped.", values: result, first, tail, second, swapped: true });
   return { input: { head, k }, result, frames };
 }

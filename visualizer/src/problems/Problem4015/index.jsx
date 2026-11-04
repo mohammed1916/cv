@@ -12,8 +12,8 @@ const definition = {
   url: 'https://leetcode.doocs.org/en/lc/4015/',
   complexity: 'O(n) time and O(n) space. The visualization caps the tree at 12 nodes.',
   examples: [
-    { label: 'Example 1', input: '{"parent":[-1,0,0,0,2,2],"nums":[5,2,3,1,4,6]}' },
-    { label: 'Example 2', input: '{"parent":[-1,0,1,2],"nums":[1,2,3,4]}' },
+    { label: 'Example 1', input: '{"parent":[-1,0,0,1,1,3],"nums":[2,4,1,3,5,6]}' },
+    { label: 'Example 2', input: '{"parent":[-1,0,0],"nums":[7,1,2]}' },
   ],
 }
 

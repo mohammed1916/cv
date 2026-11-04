@@ -14,14 +14,14 @@ export function buildTrace(input) {
   const n = s.length
   const ways = Array(n + 1).fill(0)
   ways[0] = 1
-  const frames = [{ phase: 'start', activeLine: L('set ways[0] to 1'), pythonLine: 5, end: 0, start: -1, ways: [...ways], total: null, message: 'The empty prefix can be split in one way.' }]
+  const frames = [{ phase: 'start', activeLine: L('ways[0] = 1'), pythonLine: 5, end: 0, start: -1, ways: [...ways], total: null, message: 'The empty prefix can be split in one way.' }]
   for (let i = 1; i <= n; i++) {
     for (let j = 0; j < i; j++) {
       if (s[j] === '0') continue
       const value = Number(s.slice(j, i))
       if (value <= k) {
         ways[i] = (ways[i] + ways[j]) % MOD
-        frames.push({ phase: 'piece', activeLine: L('if the number from j to i'), pythonLine: 11, end: i, start: j, ways: [...ways], total: null, message: `Piece ${s.slice(j, i)} is at most ${k}, so ways up to ${j} add to ways up to ${i}.` })
+        frames.push({ phase: 'piece', activeLine: L('ways[i] = (ways[i]'), pythonLine: 11, end: i, start: j, ways: [...ways], total: null, message: `Piece ${s.slice(j, i)} is at most ${k}, so ways up to ${j} add to ways up to ${i}.` })
       }
     }
   }
@@ -30,16 +30,25 @@ export function buildTrace(input) {
   return { input, result, frames }
 }
 
-export const code = `count ways to restore the array (s, k):
-  set ways[0] to 1
-  for each end position i from 1 to n:
-    set ways[i] to 0
-    for each start j from 0 to i - 1:
-      if s[j] is 0 then skip this start, since numbers cannot have leading zeros
-      if the number from j to i is at most k then add ways[j] to ways[i]
-    take ways[i] modulo 1000000007
-  return ways[n]`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function numberOfArrays(s, k) {',
+  '  const MOD = 1000000007',
+  '  const n = s.length',
+  '  const ways = Array(n + 1).fill(0)',
+  '  ways[0] = 1',
+  '  for (let i = 1; i <= n; i++) {',
+  '    for (let j = 0; j < i; j++) {',
+  "      if (s[j] === '0') continue",
+  '      if (Number(s.slice(j, i)) <= k) {',
+  '        ways[i] = (ways[i] + ways[j]) % MOD',
+  '      }',
+  '    }',
+  '  }',
+  '  return ways[n]',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(text => text.includes(s)) + 1
 
 export const python = `def number_of_arrays(s, k):
     MOD = 1000000007

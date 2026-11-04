@@ -1,12 +1,30 @@
-const codeLines = `set total to 0
-sorted = a sorted copy of nums
-for each k that divides n
-  sortable = true
-  for each block of length k starting at b
-    target = sorted slice of the same positions
-    if no rotation of the block equals target then sortable = false
-  if sortable then total += k
-return total`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
+const codeLines = `function sumSortable(nums) {
+  const n = nums.length
+  // sorted = a sorted copy of nums
+  const target = [...nums].sort((a, b) => a - b)
+  let total = 0
+  // for each k that divides n
+  for (let k = 1; k <= n; k++) {
+    if (n % k !== 0) continue
+    let sortable = true
+    // for each block of length k starting at b
+    for (let b = 0; b < n && sortable; b += k) {
+      const block = nums.slice(b, b + k)
+      // target is the sorted slice of the same positions
+      const want = target.slice(b, b + k)
+      // if no rotation of the block equals target then sortable = false
+      let matched = false
+      for (let r = 0; r < k && !matched; r++) {
+        matched = [...block.slice(r), ...block.slice(0, r)].every((v, i) => v === want[i])
+      }
+      if (!matched) sortable = false
+    }
+    // if sortable then total += k
+    if (sortable) total += k
+  }
+  // return total
+  return total
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => codeLines.findIndex(c => c.text.includes(s)) + 1
 const pythonLines = `def sum_sortable(nums):
     n = len(nums)

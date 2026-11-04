@@ -23,9 +23,9 @@ export function buildTrace(input) {
     phase, activeLine, pythonLine: PY_LINE[phase], cell, apex, pts: [...pts], best: best.map(row => [...row]), message,
   })
 
-  snap('start', L('sort the cuts'), `Points on the stick: [${pts.join(', ')}]. Pieces between neighbors cost nothing yet.`)
+  snap('start', L('const pts = [...cuts'), `Points on the stick: [${pts.join(', ')}]. Pieces between neighbors cost nothing yet.`)
   for (let len = 2; len < m; len++) {
-    snap('length', L('for each gap length'), `Solve every stretch spanning ${len} steps.`)
+    snap('length', L('for (let len = 2'), `Solve every stretch spanning ${len} steps.`)
     for (let i = 0; i + len < m; i++) {
       const j = i + len
       cell = [i, j]
@@ -34,26 +34,31 @@ export function buildTrace(input) {
         apex = k
         const total = best[i][k] + best[k][j] + pts[j] - pts[i]
         bestHere = Math.min(bestHere, total)
-        snap('try', L('try every cut k'), `Cut at ${pts[k]} inside ${pts[i]} to ${pts[j]} costs ${total} in total.`)
+        snap('try', L('for (let k = i + 1'), `Cut at ${pts[k]} inside ${pts[i]} to ${pts[j]} costs ${total} in total.`)
       }
       best[i][j] = bestHere
       apex = -1
-      snap('keep', L('keep the smallest total'), `Best for ${pts[i]} to ${pts[j]} is ${bestHere}.`)
+      snap('keep', L('best[i][j] = bestHere'), `Best for ${pts[i]} to ${pts[j]} is ${bestHere}.`)
     }
   }
   cell = null
-  snap('done', L('return best'), `Minimum total cost: ${best[0][m - 1]}.`)
+  snap('done', L('return best[0][m - 1]'), `Minimum total cost: ${best[0][m - 1]}.`)
   return { input, result: best[0][m - 1], frames }
 }
 
-export const code = `sort the cuts and add the two ends 0 and n to them
-let m be the number of points, and set best to zero for each neighboring pair
-for each gap length from 2 up to m - 1
-  for each left point i, let j be i plus the gap
-    try every cut k strictly between i and j
-    the total is best[i][k] + best[k][j] + the length from point i to point j
-    keep the smallest total in best[i][j]
-return best[0][m - 1]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function minCost(n, cuts) {",
+  "  const pts = [...cuts, 0, n].sort((a, b) => a - b)",
+  "  const m = pts.length, best = Array.from({ length: m }, () => Array(m).fill(0))",
+  "  for (let len = 2; len < m; len++) {",
+  "    for (let i = 0; i + len < m; i++) {",
+  "      const j = i + len; let bestHere = Infinity",
+  "      for (let k = i + 1; k < j; k++) {",
+  "        bestHere = Math.min(bestHere, best[i][k] + best[k][j] + pts[j] - pts[i]) }",
+  "      best[i][j] = bestHere }",
+  "  }",
+  "  return best[0][m - 1] }",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def min_cost(n, cuts):

@@ -22,42 +22,49 @@ export function parseInput(text) {
   return { parent, queries }
 }
 
-export const code = `kth ancestor for each query using binary lifting
-  let n be the number of nodes and LOG be four
-  let up[0] be the parent array
-  for each level j from 1 to LOG minus 1
-  up[j][v] is up[j-1] applied twice, or minus one if missing
-  for each query [node, k]
-  let v be node
-  for each bit j set in k
-  move v to up[j][v], or keep minus one if v is already minus one
-  record v as the answer
-  return the recorded answers`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function kthAncestors(parent, queries) {',
+  '  const LOG = 4',
+  '  const up = [parent.slice()]',
+  '  for (let j = 1; j < LOG; j++) {',
+  '    const prev = up[j - 1]',
+  '    up.push(prev.map(p => (p === -1 ? -1 : prev[p])))',
+  '  }',
+  '  return queries.map(([node, k]) => {',
+  '    let v = node',
+  '    for (let j = 0; j < LOG; j++) {',
+  '      if ((k >> j) & 1) v = v === -1 ? -1 : up[j][v]',
+  '    }',
+  '    return v',
+  '  })',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(text => text.includes(s)) + 1
 
 export function buildTrace({ parent, queries }) {
   const LOG = 4
   const up = [parent.slice()]
-  const frames = [{ phase: 'start', activeLine: L('let n be the number'), pythonLine: 3, node: -1, jump: 0, up: up[0], message: 'Build jump tables: 1 step, 2 steps, 4 steps and so on.' }]
+  const frames = [{ phase: 'start', activeLine: L('const LOG'), pythonLine: 3, node: -1, jump: 0, up: up[0], message: 'Build jump tables: 1 step, 2 steps, 4 steps and so on.' }]
   for (let j = 1; j < LOG; j++) {
     up[j] = up[j - 1].map(p => (p === -1 ? -1 : up[j - 1][p]))
-    frames.push({ phase: 'lift', activeLine: L('up[j][v] is'), pythonLine: 6, node: -1, jump: j, up: up[j], message: `Jump table ${1 << j} steps up.` })
+    frames.push({ phase: 'lift', activeLine: L('up.push('), pythonLine: 6, node: -1, jump: j, up: up[j], message: `Jump table ${1 << j} steps up.` })
   }
   const answers = []
   for (const [node, k] of queries) {
     let v = node
-    frames.push({ phase: 'query', activeLine: L('for each query'), pythonLine: 9, node, jump: -1, up: null, message: `Find the ${k}th ancestor of ${node}.` })
+    frames.push({ phase: 'query', activeLine: L('queries.map'), pythonLine: 9, node, jump: -1, up: null, message: `Find the ${k}th ancestor of ${node}.` })
     for (let j = 0; j < LOG; j++) {
       if (((k >> j) & 1) === 1) {
         v = v === -1 ? -1 : up[j][v]
-        frames.push({ phase: 'jump', activeLine: L('move v to up'), pythonLine: 12, node, jump: j, up: null, message: `Jump ${1 << j} step(s) to reach ${v === -1 ? 'nothing' : v}.` })
+        frames.push({ phase: 'jump', activeLine: L('if ((k >> j) & 1)'), pythonLine: 12, node, jump: j, up: null, message: `Jump ${1 << j} step(s) to reach ${v === -1 ? 'nothing' : v}.` })
       }
     }
     answers.push(v)
-    frames.push({ phase: 'answer', activeLine: L('record v as the answer'), pythonLine: 13, node, jump: -1, up: null, message: `Answer: ${v}.` })
+    frames.push({ phase: 'answer', activeLine: L('return v'), pythonLine: 13, node, jump: -1, up: null, message: `Answer: ${v}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the recorded answers'), pythonLine: 14, node: -1, jump: -1, up: null, message: `Answers: [${answers.join(', ')}].` })
-  return { input: { parent, queries }, result: answers, frames }
+  frames.push({ phase: 'done', activeLine: L('return v'), pythonLine: 14, node: -1, jump: -1, up: null, message: `Answers: [${answers.join(', ')}].` })
+  return { input: { parent, queries }, result: answers, frames, tables: up }
 }
 
 export const python = `def kth_ancestors(parent, queries):

@@ -31,15 +31,33 @@ const PY = [
 export const python = PY.join("\n")
 const at = text => PY.findIndex(line => line.includes(text)) + 1
 
-export const code = [
-  { line: 1, text: "compute the remainder weight of each mirrored pair of positions" },
-  { line: 2, text: "build reach sets from the right end back to the left" },
-  { line: 3, text: "for each position from the outside in" },
-  { line: 4, text: "try digits from 9 down to 0, or down to 1 at the first position" },
-  { line: 5, text: "keep the digit when some completion reaches remainder 0" },
-  { line: 6, text: "mirror the chosen half into a palindrome" },
-  { line: 7, text: "return the palindrome, or an empty string when none exists" },
-]
+export const code = `function largestPalindrome(n, k) {
+  const half = Math.floor((n + 1) / 2)
+  const pow10 = e => { let r = 1 % k; for (let t = 0; t < e; t++) r = (r * 10) % k; return r }
+  const weight = []
+  for (let i = 0; i < half; i++) {
+    const j = n - 1 - i
+    weight[i] = i === j ? pow10(i) : (pow10(i) + pow10(j)) % k
+  }
+  const reach = Array.from({ length: half + 1 }, () => new Set())
+  reach[half].add(0)
+  for (let i = half - 1; i >= 0; i--) {
+    for (const r of reach[i + 1]) for (let d = 0; d <= 9; d++) reach[i].add((r + d * weight[i]) % k)
+  }
+  const digits = []
+  let cur = 0
+  for (let i = 0; i < half; i++) {
+    const low = i === 0 ? 1 : 0
+    let placed = false
+    for (let d = 9; d >= low && !placed; d--) {
+      const total = (cur + d * weight[i]) % k
+      if (reach[i + 1].has((k - total) % k)) { digits.push(d); cur = total; placed = true }
+    }
+    if (!placed) return ''
+  }
+  const left = digits.map(String)
+  return left.concat(left.slice().reverse().slice(n % 2)).join('')
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const MAX_N = 40
 
@@ -83,8 +101,8 @@ export function buildTrace(input) {
     phase, activeLine, pythonLine: at(pythonText), message, n, k, half, weight: [...weight],
     reachRows, digits: [...digits], cur, pos: -1, tried: null, need: null, ...extra,
   })
-  add("weights", 1, "weight = [0] * half", `Each mirrored pair contributes a weight modulo ${k}.`)
-  add("reach", 2, "reach = [set()", "Reach sets record which remainders the positions from i onward can produce.")
+  add("weights", 7, "weight = [0] * half", `Each mirrored pair contributes a weight modulo ${k}.`)
+  add("reach", 12, "reach = [set()", "Reach sets record which remainders the positions from i onward can produce.")
   let result = ""
   let failed = false
   for (let i = 0; i < half && !failed; i += 1) {
@@ -94,17 +112,17 @@ export function buildTrace(input) {
       const total = (cur + d * weight[i]) % k
       const need = (k - total) % k
       const ok = reach[i + 1].has(need)
-      add("try", 4, "for d in range(9", `Position ${i}: try digit ${d}; it needs a completion with remainder ${need}.`, { pos: i, tried: d, need, ok })
+      add("try", 19, "for d in range(9", `Position ${i}: try digit ${d}; it needs a completion with remainder ${need}.`, { pos: i, tried: d, need, ok })
       if (ok) {
         digits.push(d)
         cur = total
-        add("keep", 5, "digits.append(d)", `Keep digit ${d} at position ${i}.`, { pos: i, tried: d, need, ok })
+        add("keep", 21, "digits.append(d)", `Keep digit ${d} at position ${i}.`, { pos: i, tried: d, need, ok })
         placed = true
         break
       }
     }
     if (!placed) {
-      add("none", 7, 'return ""', `No digit fits position ${i}, so no palindrome exists.`, { pos: i })
+      add("none", 23, 'return ""', `No digit fits position ${i}, so no palindrome exists.`, { pos: i })
       failed = true
     }
   }
@@ -112,8 +130,8 @@ export function buildTrace(input) {
     const left = digits.map(String)
     const mirror = left.slice().reverse().slice(n % 2)
     result = left.concat(mirror).join("")
-    add("mirror", 6, "left = [str(d)", `Mirror the half to form ${result}.`, { pos: -1 })
+    add("mirror", 25, "left = [str(d)", `Mirror the half to form ${result}.`, { pos: -1 })
   }
-  add("done", 7, '"".join(left', `Return "${result}".`, { pos: -1 })
+  add("done", 26, '"".join(left', `Return "${result}".`, { pos: -1 })
   return { input: { n, k }, result, frames }
 }

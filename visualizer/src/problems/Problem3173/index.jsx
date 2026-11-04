@@ -18,7 +18,7 @@ const definition = {
   python,
   inputLabel: "List of integers (e.g. [1,2,3,4])",
   url: "https://leetcode.com/problems/bitwise-or-of-adjacent-elements/",
-  complexity: "O(n) time and O(n) output space for n values, since each neighbour pair is OR-ed once. The visualization accepts up to 12 values from 0 to 1023; the official bounds are not verified here.",
+  complexity: "O(n) time and O(n) output space for n values, since each neighbour pair is OR-ed once. The visualization accepts up to 12 values from 0 to 1023; the bounds shown are this visualization's own limits.",
   examples: [
     { label: "Four values", input: "[1,2,3,4]" },
     { label: "Zero in the middle", input: "[8,0,5]" },

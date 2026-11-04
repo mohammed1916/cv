@@ -6,14 +6,16 @@ export const phases = [
 ]
 
 const CODE = [
-  'count substrings(s):',
-  '  last = {a: -1, b: -1, c: -1}',
-  '  total = 0',
-  '  for i from 0 to length - 1:',
+  'function countABC(s) {',
+  '  const last = { a: -1, b: -1, c: -1 }',
+  '  let total = 0',
+  '  for (let i = 0; i < s.length; i++) {',
   '    last[s[i]] = i',
-  '    if every letter has been seen:',
-  '      total += 1 + min(last)',
+  '    const earliest = Math.min(last.a, last.b, last.c)',
+  '    if (earliest >= 0) total += 1 + earliest',
+  '  }',
   '  return total',
+  '}',
 ]
 const PYTHON = `def count_abc_substrings(s):
     last = {'a': -1, 'b': -1, 'c': -1}
@@ -60,7 +62,7 @@ export function buildTrace({ s }) {
     if (earliest >= 0) {
       total += 1 + earliest
       frames.push({
-        phase: 'count', activeLine: L('total += 1 + min'), pythonLine: P('total += 1 + min'),
+        phase: 'count', activeLine: L('total += 1 + earliest'), pythonLine: P('total += 1 + min'),
         message: `All three letters are present. Starts 0 through ${earliest} each give a valid substring ending at ${i}, which is ${earliest + 1} new substrings.`,
         snapshot: snap(i, { added: earliest + 1 }),
       })

@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { buildTrace, parseInput } from './algorithm.js'
+import { buildTrace, parseInput, code } from './algorithm.js'
 
 const solve = centers => buildTrace(centers).result
 
@@ -35,7 +35,7 @@ test('3155 random centers match an enumerate-every-split oracle', () => {
 test('3155 frames carry real pseudocode and python lines and the ledger numbers', () => {
   const run = buildTrace([[5, 10, 0, 5], [2, 1, 5, 100]])
   for (const frame of run.frames) {
-    assert.ok(frame.activeLine >= 1 && frame.activeLine <= 9, `activeLine ${frame.activeLine}`)
+    assert.ok(frame.activeLine >= 1 && frame.activeLine <= code.length, `activeLine ${frame.activeLine}`)
     assert.ok(frame.pythonLine >= 1 && frame.pythonLine <= 12, `pythonLine ${frame.pythonLine}`)
   }
   assert.equal(run.frames.at(-1).phase, 'done')

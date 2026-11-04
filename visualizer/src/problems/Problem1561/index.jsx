@@ -25,7 +25,7 @@ export default function MaximumCoins() {
           minWidth: 52, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
           border: `${active.has(i) ? 2 : 1}px solid ${i === triple?.[1] ? '#0891b2' : 'var(--border)'}`,
           background: i === triple?.[1] ? '#a5f3fc' : active.has(i) ? 'var(--surface2)' : 'transparent',
-          opacity: taken.has(i) ? 1 : 0.5, color: '#1c1917',
+          opacity: taken.has(i) ? 1 : 0.5, color: 'var(--text)',
         }}><div>{value}</div><small>{i === triple?.[0] ? 'Alice' : i === triple?.[1] ? 'you' : i === triple?.[2] ? 'Bob' : ''}</small></div>)}
       </div>
       <p>Your coins so far: <strong>{coins}</strong></p>

@@ -12,8 +12,8 @@ const definition = {
   url: 'https://www.talentd.in/fleetcode/problems/minimum-total-price-after-applying-discounts',
   complexity: 'O(n log n + m log m) time for the sorts and O(1) extra space. The visualization caps each list at 8 entries.',
   examples: [
-    { label: 'Example 1', input: '{"prices":[10,30,21],"discounts":[50,60]}' },
-    { label: 'Example 2', input: '{"prices":[100,70],"discounts":[10,40,50]}' },
+    { label: 'Example 1', input: '{"prices":[8,25,40],"discounts":[20,35]}' },
+    { label: 'Example 2', input: '{"prices":[12,7,9,30],"discounts":[15,5,25]}' },
   ],
 }
 

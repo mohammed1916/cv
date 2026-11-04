@@ -28,7 +28,7 @@ export default function MostVisitedSector() {
           return <div key={sector} data-sector={sector} style={{
             minWidth: 56, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
             border: `${chosen.has(sector) ? 2 : 1}px solid ${chosen.has(sector) ? '#0891b2' : 'var(--border)'}`,
-            background: entered ? '#a5f3fc' : 'transparent', color: '#1c1917',
+            background: entered ? '#a5f3fc' : 'transparent', color: 'var(--text)',
           }}><div>sector {sector}</div><small>visits: {visits[i]}{visits[i] === top && top > 0 ? ' (max)' : ''}</small></div>
         })}
       </div>

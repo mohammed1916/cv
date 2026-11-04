@@ -21,18 +21,19 @@ export function buildTrace({ ops }) {
     owners: [...owners].sort((a, b) => a[0] - b[0]).map(([id, chunks]) => [id, [...chunks].sort((a, b) => a - b)]),
     ...extra,
   })
-  const frames = [{ phase: 'start', pythonLine: PL('owners = {}'), activeLine: L('start with no users'), state: [], message: 'No users have joined.', snapshot: snapshot() }]
-  for (const op of ops) {
+  const frames = [{ phase: 'start', pythonLine: PL('owners = {}'), activeLine: L('const owners = new Map()'), state: [], message: 'No users have joined.', snapshot: snapshot() }]
+  for (const [opIndex, op] of ops.entries()) {
+    const firstFrame = frames.length
     if (op[0] === 'join') {
       let uid = 1
       while (owners.has(uid)) uid++
       owners.set(uid, new Set(op[1]))
       answers.push(uid)
-      frames.push({ phase: 'join', pythonLine: PL('owners[uid] = set(op[1])'), activeLine: L('take the smallest free id'), state: state(), message: `Join: the smallest free id is ${uid}.`, snapshot: snapshot({ uid, chunks: op[1] }) })
+      frames.push({ phase: 'join', pythonLine: PL('owners[uid] = set(op[1])'), activeLine: L('let uid = 1; while'), state: state(), message: `Join: the smallest free id is ${uid}.`, snapshot: snapshot({ uid, chunks: op[1] }) })
     } else if (op[0] === 'leave') {
       owners.delete(op[1])
       answers.push(null)
-      frames.push({ phase: 'leave', pythonLine: PL('owners.pop(op[1], None)'), activeLine: L('remove that user'), state: state(), message: `User ${op[1]} leaves and frees its id.`, snapshot: snapshot({ uid: op[1], freed: op[1] }) })
+      frames.push({ phase: 'leave', pythonLine: PL('owners.pop(op[1], None)'), activeLine: L('owners.delete(op[1])'), state: state(), message: `User ${op[1]} leaves and frees its id.`, snapshot: snapshot({ uid: op[1], freed: op[1] }) })
     } else {
       const [, uid, chunk] = op
       if (!owners.has(uid)) throw new Error(`User ${uid} has not joined.`)
@@ -41,24 +42,35 @@ export function buildTrace({ ops }) {
       if (gives) owners.get(uid).add(chunk)
       answers.push(holders)
       frames.push({
-        phase: 'request', pythonLine: PL('holders = sorted'), activeLine: L('list the owners'), state: state(),
+        phase: 'request', pythonLine: PL('holders = sorted'), activeLine: L('const holders = [...owners]'), state: state(),
         message: `Chunk ${chunk} is held by ${holders.join(', ') || 'nobody'}. ${gives ? `User ${uid} receives it.` : `User ${uid} receives nothing.`}`,
         snapshot: snapshot({ uid, chunk, holders, gives }),
       })
     }
+    for (let f = firstFrame; f < frames.length; f++) frames[f].op = opIndex
   }
-  frames.push({ phase: 'done', pythonLine: PL('return answers'), activeLine: L('return the answers'), state: state(), message: 'All operations are finished.', snapshot: snapshot() })
+  frames.push({ phase: 'done', pythonLine: PL('return answers'), activeLine: L('return answers'), state: state(), message: 'All operations are finished.', snapshot: snapshot() })
   return { input: { ops }, result: answers, frames }
 }
 
-export const code = `file sharing with the smallest free user id
-  start with no users
-  for each operation in order
-    if the operation is join then take the smallest free id and store its chunks
-    if the operation is leave then remove that user
-    if the operation is request then list the owners of the chunk, the requester included
-      and give the chunk to the requester only when another user has it
-  return the answers`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function fileSharing(ops) {",
+  "  const owners = new Map()",
+  "  const answers = []",
+  "  for (const op of ops) {",
+  "    if (op[0] === 'join') {",
+  "      let uid = 1; while (owners.has(uid)) uid++",
+  "      owners.set(uid, new Set(op[1])); answers.push(uid) }",
+  "    else if (op[0] === 'leave') {",
+  "      owners.delete(op[1]); answers.push(null) }",
+  "    else {",
+  "      const [, uid, chunk] = op",
+  "      const holders = [...owners].filter(([, c]) => c.has(chunk)).map(([id]) => id).sort((a, b) => a - b)",
+  "      if (holders.some(id => id !== uid)) owners.get(uid).add(chunk)",
+  "      answers.push(holders) }",
+  "  }",
+  "  return answers }",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def share(ops):

@@ -1,4 +1,4 @@
-// Knowledge-derived teaching model written for this visualizer. Not the official statement text.
+// Teaching model written for this visualizer, with invented sample rows.
 export const phases = [
   { id: 'load', label: 'Load', description: 'Read the shift table.' },
   { id: 'pair', label: 'Pair', description: 'Pair a shift with a later shift of the same employee.' },

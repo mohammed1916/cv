@@ -18,37 +18,64 @@ export function buildTrace(input) {
   for (const x of nums) prefix.push(prefix[prefix.length - 1] + x)
   const best = Array.from({ length: n + 1 }, () => Array(top + 1).fill(-Infinity))
   for (let i = 0; i <= n; i++) best[i][0] = 0
-  const frames = [{ pythonLine: 10, phase: 'start', activeLine: L('let prefix be'), i: 0, row: [...best[0]], message: `Build the table best[i][j]: the most total using j subarrays in the first i values.` }]
+  // pick[i][j] is the start of the subarray that ends a cell's best option, or -1 when skipping is best
+  const pick = Array.from({ length: n + 1 }, () => Array(top + 1).fill(-1))
+  const frames = [{ pythonLine: 10, phase: 'start', activeLine: L('let prefix be'), i: 0, row: [...best[0]], table: best.map(row => [...row]), picks: [], message: 'The empty prefix has total 0 and uses no subarrays.' }]
   for (let i = 1; i <= n; i++) {
     for (let j = 1; j <= top; j++) {
       let option = best[i - 1][j]
+      let chosen = -1
       for (let length = l; length <= Math.min(r, i); length++) {
         const start = i - length
         const candidate = best[start][j - 1] + (prefix[i] - prefix[start])
-        if (candidate > option) option = candidate
+        if (candidate > option) { option = candidate; chosen = start }
       }
       best[i][j] = option
+      pick[i][j] = chosen
     }
-    frames.push({ pythonLine: 19, phase: 'row', activeLine: L('for each end position i'), i, row: [...best[i]], message: `After ${i} value(s): ${best[i].slice(1).map((v, idx) => `${idx + 1} subarray(s) give ${v}`).join(', ')}.` })
+    frames.push({ pythonLine: 19, phase: 'row', activeLine: L('for each end position i'), i, row: [...best[i]], table: best.map(row => [...row]), picks: [...pick[i]],
+      message: `After ${i} value(s): ${best[i].slice(1).map((v, idx) => `${idx + 1} subarray(s) give ${v}`).join(', ')}.` })
   }
   let result = -Infinity
   for (let j = 1; j <= top; j++) if (best[n][j] > result) result = best[n][j]
-  frames.push({ pythonLine: 20, phase: 'done', activeLine: L('return the largest'), i: n, row: [...best[n]], message: `Best total with 1 to ${top} subarrays: ${result}.` })
+  frames.push({ pythonLine: 20, phase: 'done', activeLine: L('return the largest'), i: n, row: [...best[n]], table: best.map(row => [...row]), picks: [...pick[n]],
+    message: `Best total with 1 to ${top} subarrays: ${result}.` })
   return { input, result, frames }
 }
 
-export const code = `maximum total of 1 to m non-overlapping subarrays with lengths in [l, r]
-  let prefix be the running sums of nums
-  let best be a table with best[i][j] for the first i values and j subarrays, best[i][0] is 0
-  for each end position i from 1 to n
-    for each count j from 1 to m
-      let option be best[i-1][j], which skips value i
-      for each length from l to r that fits ending at i
-        let start be i minus length
-        let candidate be best[start][j-1] plus the sum from start to i
-        if candidate is larger than option then set option to candidate
-      set best[i][j] to option
-  return the largest best[n][j] for j from 1 to m`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function maxSumMNonOverlappingSubarrays(nums, m, l, r) {
+  const n = nums.length
+  const top = Math.min(m, n)
+  // let prefix be the running sums of nums
+  const prefix = [0]
+  for (const x of nums) prefix.push(prefix[prefix.length - 1] + x)
+  // let best be a table with best[i][j] for the first i values and j subarrays, best[i][0] is 0
+  const best = Array.from({ length: n + 1 }, () => Array(top + 1).fill(-Infinity))
+  for (let i = 0; i <= n; i++) best[i][0] = 0
+  // for each end position i from 1 to n
+  for (let i = 1; i <= n; i++) {
+    // for each count j from 1 to m
+    for (let j = 1; j <= top; j++) {
+      // let option be best[i-1][j], which skips value i
+      let option = best[i - 1][j]
+      // for each length from l to r that fits ending at i
+      for (let length = l; length <= Math.min(r, i); length++) {
+        // let start be i minus length
+        const start = i - length
+        // let candidate be best[start][j-1] plus the sum from start to i
+        const candidate = best[start][j - 1] + (prefix[i] - prefix[start])
+        // if candidate is larger than option then set option to candidate
+        if (candidate > option) option = candidate
+      }
+      // set best[i][j] to option
+      best[i][j] = option
+    }
+  }
+  // return the largest best[n][j] for j from 1 to m
+  let result = -Infinity
+  for (let j = 1; j <= top; j++) result = Math.max(result, best[n][j])
+  return result
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def max_sum_m_non_overlapping_subarrays(nums, m, l, r):

@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python, pythonLineMap, examples } from './algorithm'
 
 const definition = {
@@ -18,9 +18,13 @@ const definition = {
 
 export default function LargestMultipleOfThree() {
   return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ run, step }) => <>
-      <IndexedSequence label="digit counts" length={10} active={step.focus ?? -1}
-        valueAt={i => `${i} x ${step.cnt[i]}`} roleAt={i => (step.cnt[i] === 0 ? 'empty' : '')} />
+    renderVisual={({ step }) => <>
+      <RecordStateTable label="Digit counts by remainder class" columns={['digit', 'mod 3', 'count left', 'status']}
+        activeRow={step.focus ?? -1}
+        rows={step.cnt.map((count, d) => ({
+          digit: d, 'mod 3': d % 3, 'count left': count,
+          status: step.removed.includes(d) ? 'dropped' : count === 0 ? 'none' : 'kept',
+        }))} />
       <p>Remainder mod 3: {step.rem ?? '-'}. Dropped: {step.removed.length ? step.removed.join(', ') : 'none'}.</p>
       {step.result !== null && <p>Result: {step.result === '' ? '(empty)' : step.result}</p>}
     </>}

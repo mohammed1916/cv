@@ -8,6 +8,8 @@ export default function RotationCostView({ run, step }) {
   const t = step.t;
   const maxCost = Math.max(1, ...step.table.map(row => row.cost), step.cost || 0);
   const activePairs = new Set(step.pairs.map(p => `${p.i}-${p.j}`));
+  // l and r mark the mirror pair priced most recently in this rotation.
+  const lastPair = step.pairs.length ? step.pairs[step.pairs.length - 1] : null;
   return (
     <section className="rc-view" aria-label="Rotated palindrome costs">
       <p className="rc-caption">Rotated string {t || "-"} {step.r >= 0 ? `(left by ${step.r})` : ""}</p>
@@ -18,7 +20,7 @@ export default function RotationCostView({ run, step }) {
           return (
             <li key={index} className={pairOn ? "rc-letter rc-letter--paired" : "rc-letter"}>
               <span>{ch}</span>
-              <small>{mirror !== index ? `mirror ${mirror}` : "middle"}</small>
+              <small>{index === lastPair?.i ? "l" : index === lastPair?.j ? "r" : mirror !== index ? `mirror ${mirror}` : "middle"}</small>
             </li>
           );
         })}

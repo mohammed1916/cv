@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import SqlStages from './SqlStages'
 import { buildTrace, parseInput, code, python, sampleText } from './algorithm'
 
 const definition = {
@@ -28,7 +29,10 @@ function CurrentTable({ table }) {
 }
 
 export default function LeetcodifyFriendsRecommendations() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <CurrentTable table={step.table} />} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+    <SqlStages code={code} activeLine={step.activeLine} />
+    <CurrentTable table={step.table} />
+  </>} renderReasoning={() => <>
     <p>Only songs heard on the same day count. Two users share a day when they both listened to a song on that day.</p>
     <p>For each pair, count the distinct songs they share on each day. A pair qualifies with three or more on at least one day. Friends are removed, and each remaining pair is written in both directions.</p>
   </>} />

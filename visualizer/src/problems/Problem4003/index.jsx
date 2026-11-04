@@ -13,7 +13,7 @@ const definition = {
   complexity: 'O(mn log(mn)) time with a heap. The visualization caps the grid at 16 cells.',
   examples: [
     { label: 'Example 1', input: '{"m":2,"n":2,"penalty":[[5,3],[1,4]]}' },
-    { label: 'Example 3', input: '{"m":2,"n":3,"penalty":[[8,0,9],[7,4,1]]}' },
+    { label: 'Example 3', input: '{"m":2,"n":3,"penalty":[[2,6,1],[3,0,5]]}' },
   ],
 }
 

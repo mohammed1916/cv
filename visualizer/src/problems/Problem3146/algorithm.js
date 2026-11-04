@@ -9,16 +9,17 @@ const PYTHON_LINES = [
   "    return total",
 ];
 
-const CODE = [
-  "FUNCTION findPermutationDifference(s, t)",
-  "    pos ← empty map",
-  "    FOR i, ch IN s",
-  "        pos[ch] ← i",
-  "    total ← 0",
-  "    FOR j, ch IN t",
-  "        total ← total + |pos[ch] − j|",
-  "    RETURN total",
-];
+const CODE = `function findPermutationDifference(s, t) {
+  const pos = new Map()
+  for (let i = 0; i < s.length; i++) {
+    pos.set(s[i], i)
+  }
+  let total = 0
+  for (let j = 0; j < t.length; j++) {
+    total += Math.abs(pos.get(t[j]) - j)
+  }
+  return total
+}`.split('\n');
 
 export const code = CODE.map((text, index) => ({ line: index + 1, text }));
 export const python = PYTHON_LINES.join("\n");
@@ -67,14 +68,14 @@ export function buildTrace(input) {
     pos[s[i]] = i;
     push({ phase: "index", activeLine: 4, pythonLine: 4, index: i, message: `Record pos["${s[i]}"] = ${i}.` });
   }
-  push({ phase: "sum", activeLine: 5, pythonLine: 5, message: "Start the running total at 0." });
+  push({ phase: "sum", activeLine: 6, pythonLine: 5, message: "Start the running total at 0." });
   for (let j = 0; j < t.length; j += 1) {
-    push({ phase: "sum", activeLine: 6, pythonLine: 6, index: j, message: `Visit t[${j}] = "${t[j]}".` });
+    push({ phase: "sum", activeLine: 7, pythonLine: 6, index: j, message: `Visit t[${j}] = "${t[j]}".` });
     const diff = Math.abs(pos[t[j]] - j);
     total += diff;
-    push({ phase: "sum", activeLine: 7, pythonLine: 7, index: j, diff, message: `Add |${pos[t[j]]} − ${j}| = ${diff}; total is now ${total}.` });
+    push({ phase: "sum", activeLine: 8, pythonLine: 7, index: j, diff, message: `Add |${pos[t[j]]} − ${j}| = ${diff}; total is now ${total}.` });
   }
-  push({ phase: "done", activeLine: 8, pythonLine: 8, message: `Return ${total}.`, result: total });
+  push({ phase: "done", activeLine: 10, pythonLine: 8, message: `Return ${total}.`, result: total });
 
   return { input: { s, t }, result: total, frames };
 }

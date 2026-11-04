@@ -56,13 +56,30 @@ export function solve(input) {
   return buildTrace(input).result
 }
 
-export const code = `count nodes whose three distances form a Pythagorean triple
-  compute the distance from every node to x, y and z by breadth-first search
-  set count to 0
-  for each node u
-    sort the three distances
-    if the two smaller squares add up to the largest square then add one to count
-  return the count`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
+export const code = `function pythagoreanNodes(n, edges, x, y, z) {
+  const adj = Array.from({ length: n }, () => [])
+  for (const [a, b] of edges) { adj[a].push(b); adj[b].push(a) }
+  // compute the distance from every node to a source by breadth-first search
+  const distances = source => {
+    const dist = Array(n).fill(-1)
+    dist[source] = 0
+    const queue = [source]
+    for (let k = 0; k < queue.length; k++) {
+      const v = queue[k]
+      for (const w of adj[v]) if (dist[w] < 0) { dist[w] = dist[v] + 1; queue.push(w) }
+    }
+    return dist
+  }
+  const dx = distances(x), dy = distances(y), dz = distances(z)
+  let count = 0
+  for (let u = 0; u < n; u++) {
+    // sort the three distances, then test the two smaller squares against the largest
+    const [a, b, c] = [dx[u], dy[u], dz[u]].sort((p, q) => p - q)
+    if (a * a + b * b === c * c) count++
+  }
+  // return the count
+  return count
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `from collections import deque
 

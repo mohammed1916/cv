@@ -7,18 +7,29 @@ const PHASES = [
 
 export const phases = PHASES
 
-const CODE_LINES = [
-  'minimum operations to make a rotated palindrome',
-  'let n be the length of s',
-  'for each left rotation r from 0 to n minus 1',
-  '  t is s rotated left by r',
-  '  cost starts at r',
-  '  for each mirror pair i and n minus 1 minus i with i below the middle',
-  '    d is the forward distance from t[i] to t[n minus 1 minus i] mod 26',
-  '    add min(d, 26 minus d) to cost',
-  '  keep the smallest cost',
-  'return the smallest cost',
-]
+const CODE_LINES = `function minOps(s) {
+  // minimum operations to make a rotated palindrome; let n be the length of s
+  const n = s.length
+  let best = null
+  // for each left rotation r from 0 to n minus 1
+  for (let r = 0; r < n; r++) {
+    // t is s rotated left by r
+    const t = s.slice(r) + s.slice(0, r)
+    // cost starts at r
+    let cost = r
+    // for each mirror pair i and n minus 1 minus i with i below the middle
+    for (let i = 0; i < Math.floor(n / 2); i++) {
+      // d is the forward distance from t[i] to t[n minus 1 minus i] mod 26
+      const d = (t.charCodeAt(n - 1 - i) - t.charCodeAt(i) + 26) % 26
+      // add min(d, 26 minus d) to cost
+      cost += Math.min(d, 26 - d)
+    }
+    // keep the smallest cost
+    if (best === null || cost < best) best = cost
+  }
+  // return the smallest cost
+  return best
+}`.split('\n')
 
 export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }))
 

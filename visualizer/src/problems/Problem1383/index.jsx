@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -22,6 +23,11 @@ export default function MaximumPerformance() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Speeds (team members marked)" length={run.input.speed.length} valueAt={i => run.input.speed[i]}
       active={step.current} roleAt={i => (step.team.includes(i) ? 'in team' : i === step.removed ? 'removed' : '')} />
+    <RecordStateTable label="Engineers visited from highest efficiency" columns={['engineer', 'speed', 'efficiency', 'in team']}
+      activeRow={run.order.indexOf(step.current)}
+      rows={run.order.map(i => ({
+        engineer: i, speed: run.input.speed[i], efficiency: run.input.efficiency[i], 'in team': step.team.includes(i) ? 'yes' : 'no',
+      }))} />
     <output aria-label="Best performance">{`Best so far: ${step.best}`}</output>
     <p>{step.message}</p>
   </>} renderReasoning={() => <>

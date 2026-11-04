@@ -12,20 +12,22 @@ export function parseInput(text) {
   return { arr }
 }
 
-export const code = `count odd-sum subarrays (arr):
-  even_prefixes = 1
-  odd_prefixes = 0
-  parity = 0
-  total = 0
-  for each value v in arr:
-    parity = (parity + v) mod 2
-    if parity == 1:
-      total = (total + even_prefixes) mod 1000000007
-      odd_prefixes += 1
-    else:
-      total = (total + odd_prefixes) mod 1000000007
-      even_prefixes += 1
-  return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function countOddSumSubarrays(arr) {",
+  "  let evenPrefixes = 1",
+  "  let oddPrefixes = 0",
+  "  let parity = 0",
+  "  let total = 0",
+  "  for (const v of arr) {",
+  "    parity = Math.abs(parity + v) % 2",
+  "    if (parity === 1) {",
+  "      total = (total + evenPrefixes) % 1000000007",
+  "      oddPrefixes += 1",
+  "    } else {",
+  "      total = (total + oddPrefixes) % 1000000007",
+  "      evenPrefixes += 1 }",
+  "  } return total }",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def num_of_subarrays(arr):
     MOD = 10**9 + 7

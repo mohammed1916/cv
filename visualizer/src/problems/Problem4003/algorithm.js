@@ -55,16 +55,46 @@ export function buildTrace(input) {
   return { input, result: answer, frames }
 }
 
-export const code = `minimum cost path with alternating directions(m, n, penalty)
-  set the cost of the start state at (0, 0) with an odd next action to its entry cost
-  repeat until no unsettled state remains
-    take the unsettled state with the least cost
-    if it is the bottom right cell then return its cost
-    settle it
-    relax the wait, which costs the penalty here and flips the parity
-    for each adjacent cell do
-      relax the move, paying its entry cost plus the penalty here unless the move is compliant
-  return no answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minCostPath(m, n, penalty) {
+  // entry cost of cell (i, j) is (i + 1) times (j + 1)
+  const entry = (i, j) => (i + 1) * (j + 1)
+  // a state is a cell plus the parity of the next action: 0 is odd, 1 is even
+  const key = (i, j, p) => (i * n + j) * 2 + p
+  const dist = new Map()
+  const settled = new Set()
+  const relax = (ni, nj, np, value) => {
+    const k = key(ni, nj, np)
+    if (!dist.has(k) || value < dist.get(k)) dist.set(k, value)
+  }
+  // set the cost of the start state at (0, 0) with an odd next action to its entry cost
+  dist.set(key(0, 0, 0), entry(0, 0))
+  for (;;) {
+    // take the unsettled state with the least cost
+    let current = null
+    for (const [k, c] of dist) {
+      if (!settled.has(k) && (current === null || c < dist.get(current))) current = k
+    }
+    if (current === null) return null
+    const cost = dist.get(current)
+    settled.add(current)
+    const p = current % 2
+    const cell = (current - p) / 2
+    const i = Math.floor(cell / n)
+    const j = cell % n
+    // if it is the bottom right cell then return its cost
+    if (i === m - 1 && j === n - 1) return cost
+    // relax the wait, which costs the penalty here and flips the parity
+    relax(i, j, 1 - p, cost + penalty[i][j])
+    // for each adjacent cell, relax the move, paying its entry cost plus the penalty here unless the move is compliant
+    for (const [di, dj] of [[0, 1], [1, 0], [0, -1], [-1, 0]]) {
+      const ni = i + di
+      const nj = j + dj
+      if (ni < 0 || nj < 0 || ni >= m || nj >= n) continue
+      const compliant = p === 0 ? di === 1 || dj === 1 : di === -1 || dj === -1
+      relax(ni, nj, 1 - p, cost + entry(ni, nj) + (compliant ? 0 : penalty[i][j]))
+    }
+  }
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `import heapq

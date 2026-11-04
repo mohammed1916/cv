@@ -15,8 +15,18 @@ export const python = `def max_score(cards, k):
     return best`
 
 const pythonLines = python.split('\n')
-export const code = pythonLines.map((text, index) => ({ line: index + 1, text }))
-export const pythonLineMap = Object.fromEntries(pythonLines.map((_, index) => [index + 1, index + 1]))
+const CODE = [
+  'function maxScore(cards, k) {',
+  '  let total = cards.slice(0, k).reduce((a, b) => a + b, 0)',
+  '  let best = total',
+  '  for (let i = 0; i < k; i++) {',
+  '    total += cards[cards.length - 1 - i] - cards[k - 1 - i]; best = Math.max(best, total)',
+  '  }',
+  '  return best',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+export const pythonLineMap = { 1: 1, 2: 3, 3: 4, 4: 5, 5: 6, 6: 6, 7: 7, 8: 8 }
 
 export function parseInput(text) {
   let value
@@ -41,17 +51,17 @@ export function buildTrace({ cards, k }) {
     snapshot: { leftCount: k, rightCount: 0, total, best, added: -1, removed: -1, ...extra },
   })
 
-  push('take', 3, `Take the first ${k} cards from the left. Their total is ${total}.`)
+  push('take', 2, `Take the first ${k} cards from the left. Their total is ${total}.`)
   for (let i = 0; i < k; i++) {
     const removed = k - 1 - i
     const added = n - 1 - i
     total += cards[added] - cards[removed]
-    push('swap', 6, `Give back card ${removed} (value ${cards[removed]}) from the left and take card ${added} (value ${cards[added]}) from the right. Total: ${total}.`,
+    push('swap', 5, `Give back card ${removed} (value ${cards[removed]}) from the left and take card ${added} (value ${cards[added]}) from the right. Total: ${total}.`,
       { leftCount: k - i - 1, rightCount: i + 1, total, added, removed })
     best = Math.max(best, total)
-    push('record', 7, `Best so far: ${best}.`, { leftCount: k - i - 1, rightCount: i + 1, total, added, removed })
+    push('record', 5, `Best so far: ${best}.`, { leftCount: k - i - 1, rightCount: i + 1, total, added, removed })
   }
 
-  push('result', 8, `Done: the best total is ${best}.`, { leftCount: 0, rightCount: 0, total: best, best })
+  push('result', 7, `Done: the best total is ${best}.`, { leftCount: 0, rightCount: 0, total: best, best })
   return { input: { cards, k }, result: best, frames }
 }

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import SqlStageStrip from './SqlStageStrip'
 import { buildTrace, parseInput, code, sql, python } from './algorithm'
 
 const phases = [
@@ -61,6 +62,7 @@ export default function CustomerOrderFrequency() {
     const focusIndex = (step.phase === 'total' || step.phase === 'decide') ? rows.length - 1 : -1
     const current = focusIndex >= 0 ? rows[focusIndex] : null
     return <>
+      <SqlStageStrip phases={definition.phases} current={step.phase} />
       <section aria-label="SQL stage">
         <h3>Stage: {phases.find(p => p.id === step.phase)?.label}</h3>
         <p>{STAGE[step.phase]}</p>

@@ -19,14 +19,14 @@ export function buildTrace({ arr, k }) {
   const mod = v => ((v % k) + k) % k
   const snap = (index, remainder, partner, ok) => ({ counts: [...count], index, remainder, partner, ok })
   const frames = [{
-    phase: 'start', activeLine: L('count = [0]'), pythonLine: P('count = [0]'), snapshot: snap(null, null, null, null),
+    phase: 'start', activeLine: L('const count = Array(k).fill(0)'), pythonLine: P('count = [0]'), snapshot: snap(null, null, null, null),
     message: `Make ${k} remainder classes, all empty. Each value joins the class of its remainder modulo ${k}.`,
   }]
   arr.forEach((value, i) => {
     const r = mod(value)
     count[r] += 1
     frames.push({
-      phase: 'count', activeLine: L('count[v mod k]'), pythonLine: P('count[value % k]'), snapshot: snap(i, r, null, null),
+      phase: 'count', activeLine: L('count[((v % k) + k) % k] += 1'), pythonLine: P('count[value % k]'), snapshot: snap(i, r, null, null),
       message: `Value ${value} has remainder ${r}, so class ${r} now holds ${count[r]}.`,
     })
   })
@@ -37,13 +37,13 @@ export function buildTrace({ arr, k }) {
     if (r === s) {
       matched = count[r] % 2 === 0
       frames.push({
-        phase: 'check', activeLine: L('if r == s'), pythonLine: P('if r == s'), snapshot: snap(null, r, s, matched),
+        phase: 'check', activeLine: L('if (r === s) {'), pythonLine: P('if r == s'), snapshot: snap(null, r, s, matched),
         message: `Class ${r} partners with itself, since ${r} + ${r} is 0 mod ${k}. It holds ${count[r]} value${count[r] === 1 ? '' : 's'}, which ${matched ? 'splits into pairs' : 'leaves one value without a partner'}.`,
       })
     } else {
       matched = count[r] === count[s]
       frames.push({
-        phase: 'check', activeLine: L('else if count[r] != count[s]'), pythonLine: P('elif count[r] != count[s]'), snapshot: snap(null, r, s, matched),
+        phase: 'check', activeLine: L('} else if (count[r] !== count[s])'), pythonLine: P('elif count[r] != count[s]'), snapshot: snap(null, r, s, matched),
         message: `Class ${r} (${count[r]} values) must match class ${s} (${count[s]} values). ${matched ? 'The counts agree.' : 'The counts differ, so some value has no partner.'}`,
       })
     }
@@ -56,16 +56,18 @@ export function buildTrace({ arr, k }) {
   return { input: { arr, k }, result, frames }
 }
 
-export const code = `can pair up (arr, k):
-  count = [0] * k
-  for each value v in arr:
-    count[v mod k] += 1
-  for r from 0 to k - 1:
-    s = (k - r) mod k
-    if r == s:
-      if count[r] is odd: return false
-    else if count[r] != count[s]: return false
-  return true`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function canPairUp(arr, k) {",
+  "  const count = Array(k).fill(0)",
+  "  for (const v of arr) {",
+  "    count[((v % k) + k) % k] += 1 }",
+  "  for (let r = 0; r < k; r++) {",
+  "    const s = (k - r) % k",
+  "    if (r === s) {",
+  "      if (count[r] % 2 === 1) return false",
+  "    } else if (count[r] !== count[s]) return false",
+  "  } return true }",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def can_pair_up(arr, k):

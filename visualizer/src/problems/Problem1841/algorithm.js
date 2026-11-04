@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough. The sample tables are invented for this visualization.
 export const sql = `WITH sides AS (
   SELECT home_team_id AS team_id, home_team_goals AS scored, away_team_goals AS conceded,
          CASE WHEN home_team_goals > away_team_goals THEN 3

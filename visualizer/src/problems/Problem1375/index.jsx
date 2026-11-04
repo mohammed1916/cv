@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python, pythonLineMap, examples } from './algorithm'
 
 const definition = {
@@ -21,6 +22,8 @@ export default function NumberOfTimesBinaryStringIsPrefixAligned() {
         roleAt={i => (i < step.i ? 'flipped' : '')} />
       <IndexedSequence label="bits" length={run.input.flips.length} valueAt={i => step.bits[i]} active={-1}
         roleAt={i => (step.bits[i] === 1 ? 'one' : '')} />
+      <RecordStateTable label="Prefix check" columns={['step', 'flipped', 'highest', 'aligned']}
+        rows={Array.from({ length: step.i }, (_, k) => ({ step: k + 1, flipped: run.input.flips[k], highest: Math.max(...run.input.flips.slice(0, k + 1)), aligned: Math.max(...run.input.flips.slice(0, k + 1)) === k + 1 ? 'yes' : 'no' }))} />
       <p>Highest: {step.highest} · Aligned steps: {step.count}</p>
     </>}
     renderReasoning={({ step }) => <p>{step.message}</p>} />

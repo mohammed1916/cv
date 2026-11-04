@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough. The sample tables are invented for this visualization.
 export const sql = `WITH monthly AS (
   SELECT t.account_id,
          DATE_FORMAT(t.day, '%Y-%m') AS month,

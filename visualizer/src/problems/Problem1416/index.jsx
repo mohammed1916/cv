@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -21,7 +22,10 @@ const definition = {
 export default function RestoreTheArray() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Ways to split each prefix" length={step.ways.length} valueAt={i => step.ways[i]} active={step.end}
-      roleAt={i => (step.start >= 0 && i === step.start ? 'start' : '')} />
+      roleAt={i => (step.start >= 0 && i >= step.start && i < step.end ? 'window' : '')} />
+    <RecordStateTable label="Prefixes and ways to split them" columns={['prefix end', 'prefix', 'ways']}
+      activeRow={step.end}
+      rows={step.ways.map((w, i) => ({ 'prefix end': i, prefix: run.input.s.slice(0, i) || '(empty)', ways: w }))} />
     <output aria-label="Piece">{step.start >= 0 ? `Piece ${run.input.s.slice(step.start, step.end)}` : `Digits ${run.input.s}`}</output>
   </>} renderReasoning={() => <>
     <p>Every number in the split must be between 1 and k and cannot start with a zero, so each cut is checked against the piece before it.</p>

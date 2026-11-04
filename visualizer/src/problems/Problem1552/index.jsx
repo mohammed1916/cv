@@ -1,7 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
-
-const cell = { minWidth: 36, textAlign: 'center', border: '1px solid var(--border)', padding: 4, fontFamily: 'monospace' }
 
 const definition = {
   number: '1552',
@@ -24,7 +23,9 @@ export default function MagneticBalls() {
       <div aria-label="Positions" style={{ position: 'relative', height: 40, border: '1px solid var(--border)', margin: '8px 0' }}>
         {positions.map(p => <div key={p} title={`Position ${p}`} style={{ position: 'absolute', left: `${((p - positions[0]) / span) * 96}%`, top: 6, width: 12, height: 22, borderRadius: 6, background: placed?.includes(p) ? '#bbf7d0' : 'var(--surface2)' }} />)}
       </div>
-      <p>Search range for the gap: <strong>{lo}</strong> to <strong>{hi}</strong>{mid !== null && mid !== undefined && <> · trying <strong>{mid}</strong></>}</p>
+      <AnswerRangeBar title="Gap search range" min={1} max={Math.max(1, span)} low={lo} high={hi}
+        probe={ok !== undefined && mid !== null ? mid : null} verdict={ok === true} />
+      <p>{mid !== null && mid !== undefined ? `Middle tested: ${mid}. ${ok === undefined ? 'Checking whether all balls fit at this gap.' : ok ? 'It fits, so the lower bound moves up to it.' : 'It does not fit, so the upper bound moves down below it.'}` : `The answer lies between ${lo} and ${hi}.`}</p>
       {placed?.length > 0 && <p aria-label="Greedy placements">Greedy balls at: {placed.join(', ')}{ok !== undefined && (ok ? ' (enough)' : ' (too few)')}</p>}
     </>
   }} renderReasoning={() => <>

@@ -54,6 +54,24 @@ function exponentBefore(n) {
   return total
 }
 
+// The binary search that exponentBefore runs for n: the range [lo, hi] and the block tested each step.
+function searchSteps(n) {
+  let lo = 0
+  let hi = 1
+  while (blocks(hi)[0] <= n) hi *= 2
+  const top = hi
+  const steps = []
+  while (hi - lo > 1) {
+    const mid = Math.floor((lo + hi) / 2)
+    const ok = blocks(mid)[0] <= n
+    steps.push({ lo, hi, mid, ok, entries: blocks(mid)[0] })
+    if (ok) lo = mid
+    else hi = mid
+  }
+  steps.top = top
+  return steps
+}
+
 function powMod(exp, mod) {
   const m = BigInt(mod)
   let result = BigInt(1) % m
@@ -70,29 +88,64 @@ function powMod(exp, mod) {
 export function buildTrace({ queries }) {
   const frames = []
   const results = []
-  frames.push({ pythonLine: 39, phase: 'start', activeLine: L('set results to an empty list'), query: -1, total: null, value: null, message: 'Answer each query from exponent sums.' })
+  frames.push({ pythonLine: 39, phase: 'start', activeLine: L('const results = []'), query: -1, total: null, value: null, message: 'Answer each query from exponent sums.' })
+  const pyLine = text => python.split('\n').findIndex(line => line.includes(text)) + 1
   queries.forEach(([from, to, mod], index) => {
+    const steps = searchSteps(to + 1)
+    steps.forEach(step => frames.push({ pythonLine: pyLine('mid = (lo + hi)'), phase: 'search', activeLine: L('const mid = Math.floor'), query: index, total: null, value: null, lo: step.lo, hi: step.hi, mid: step.mid, ok: step.ok, top: steps.top, message: `Block search for n = ${to + 1}: test block ${step.mid}; it holds ${step.entries} entries, ${step.ok ? 'at most' : 'more than'} ${to + 1}, so the range becomes ${step.ok ? `${step.mid} to ${step.hi}` : `${step.lo} to ${step.mid}`}.` }))
     const total = exponentBefore(to + 1) - exponentBefore(from)
-    frames.push({ pythonLine: 41, phase: 'exponent', activeLine: L('set total to exponent before'), query: index, total, value: null, message: `Query ${index}: the range has exponent sum ${total}.` })
+    frames.push({ pythonLine: 41, phase: 'exponent', activeLine: L('const total = exponentBefore'), query: index, total, value: null, message: `Query ${index}: the range has exponent sum ${total}.` })
     const value = powMod(total, mod)
     results.push(value)
-    frames.push({ pythonLine: 42, phase: 'power', activeLine: L('add 2 raised to total'), query: index, total, value, message: `2 raised to ${total}, modulo ${mod}, is ${value}.` })
+    frames.push({ pythonLine: 42, phase: 'power', activeLine: L('results.push(powMod(2, total, mod))'), query: index, total, value, message: `2 raised to ${total}, modulo ${mod}, is ${value}.` })
   })
   frames.push({ pythonLine: 43, phase: 'done', activeLine: L('return results'), query: -1, total: null, value: null, message: `Answers: ${results.join(', ')}.` })
   return { input: { queries }, result: results, frames }
 }
 
-export const code = `product of big_nums from index from to index to, modulo mod
-  set results to an empty list
-  for each query [from, to, mod] do
-    set total to exponent before (to + 1) minus exponent before from
-    add 2 raised to total, taken modulo mod, to results
+export const code = `function productOfBigNums(queries) {
+  const countBit = (m, b) => {
+    const period = 2 ** (b + 1)
+    const half = 2 ** b
+    return Math.floor((m + 1) / period) * half + Math.max(0, (m + 1) % period - half)
+  }
+  const blocks = m => {
+    let entries = 0
+    let exps = 0
+    for (let b = 0; 2 ** b <= m; b++) {
+      const c = countBit(m, b)
+      entries += c
+      exps += c * b
+    }
+    return [entries, exps]
+  }
+  const exponentBefore = n => {
+    let lo = 0
+    let hi = 1
+    while (blocks(hi)[0] <= n) hi *= 2
+    while (hi - lo > 1) {
+      const mid = Math.floor((lo + hi) / 2)
+      if (blocks(mid)[0] <= n) lo = mid
+      else hi = mid
+    }
+    let [entries, total] = blocks(lo)
+    let rest = n - entries
+    const x = lo + 1
+    for (let b = 0; rest > 0; b++) {
+      if ((x >> b) & 1) {
+        total += b
+        rest -= 1
+      }
+    }
+    return total
+  }
+  const results = []
+  for (const [from, to, mod] of queries) {
+    const total = exponentBefore(to + 1) - exponentBefore(from)
+    results.push(powMod(2, total, mod))
+  }
   return results
-exponent before n, the sum of exponents of the first n entries
-  find the largest m whose blocks 1 to m hold at most n entries
-  set total to the exponent sum of blocks 1 to m
-  add the bit positions of the first (n minus entries of blocks 1 to m) set bits of block m + 1
-  return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => { const i = code.findIndex(c => c.text.includes(s)); if (i < 0) throw new Error('missing code line: ' + s); return i + 1 }
 
 export const python = `def product_of_big_nums(queries):

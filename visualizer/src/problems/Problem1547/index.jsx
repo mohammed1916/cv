@@ -22,7 +22,27 @@ const definition = {
 export default function MinimumCostToCutStick() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
     const m = step.pts.length
+    const [li, rj] = step.cell ?? [-1, -1]
     return <>
+      <section aria-label="Stick points with the stretch l to r">
+        <h3>The stick: points in order, with the stretch l to r being solved</h3>
+        <div role="img" aria-label="Stick points" style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+          {step.pts.map((p, idx) => {
+            const inside = li >= 0 && idx >= li && idx <= rj
+            const cutHere = step.apex === idx
+            return <div key={idx} data-point={idx} style={{
+              minWidth: 46, padding: '4px 6px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace', color: 'var(--text)',
+              border: `${idx === li || idx === rj || cutHere ? 2 : 1}px solid ${cutHere ? 'var(--primary, var(--text))' : idx === li || idx === rj ? 'var(--text)' : 'var(--border)'}`,
+              background: inside ? 'var(--surface2)' : 'transparent', opacity: li >= 0 && !inside ? 0.5 : 1,
+            }}>
+              <div>{p}</div>
+              <small style={{ display: 'block', height: 14, fontWeight: 700, color: 'var(--text-muted)' }}>
+                {idx === li ? 'l' : ''}{idx === rj ? 'r' : ''}{cutHere ? ' k' : ''}
+              </small>
+            </div>
+          })}
+        </div>
+      </section>
       <table aria-label="Best cost for each stretch">
         <thead><tr><th>from \ to</th>{step.pts.map((p, j) => <th key={j}>{p}</th>)}</tr></thead>
         <tbody>{step.best.map((row, i) => <tr key={i}><th>{step.pts[i]}</th>{row.map((v, j) => {

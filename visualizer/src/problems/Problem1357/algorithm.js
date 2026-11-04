@@ -19,17 +19,21 @@ const PYTHON_LINES = [
 
 export const python = PYTHON_LINES.join("\n");
 
-export const code = [
-  { line: 1, text: "price[product] = prices for every product" },
-  { line: 2, text: "count = 0" },
-  { line: 3, text: "for each customer order (product, amount):" },
-  { line: 4, text: "count = count + 1" },
-  { line: 5, text: "subtotal = sum of price[p] * amount" },
-  { line: 6, text: "if count is a multiple of n: subtotal = subtotal * (100 - discount) / 100" },
-  { line: 7, text: "record subtotal as the bill" },
+const CODE_LINES = [
+  "const price = new Map(products.map((p, i) => [p, prices[i]]))",
+  "let count = 0",
+  "for (const { product, amount } of orders) {",
+  "  count += 1",
+  "  let subtotal = product.reduce((sum, p, j) => sum + price.get(p) * amount[j], 0)",
+  "  if (count % n === 0) subtotal = subtotal * (100 - discount) / 100",
+  "  bills.push(subtotal)",
+  "}",
+  "return bills",
 ];
 
-export const pythonLineMap = { 1: 6, 2: 5, 3: 16, 4: 8, 5: 9, 6: 10, 7: 12 };
+export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }));
+
+export const pythonLineMap = { 1: 6, 2: 5, 3: 16, 4: 8, 5: 9, 6: 10, 7: 12, 8: 16, 9: 16 };
 
 export const examples = [
   {
@@ -97,6 +101,6 @@ export function buildTrace(input) {
     bills.push(subtotal);
     frames.push({ phase: "bill", activeLine: 7, message: `Bill for customer ${k + 1} is ${subtotal}.`, k, count, subtotal, bills: [...bills] });
   });
-  frames.push({ phase: "done", activeLine: 7, message: "All bills are computed.", k: -1, count, subtotal: null, bills: [...bills] });
+  frames.push({ phase: "done", activeLine: 9, message: "All bills are computed.", k: -1, count, subtotal: null, bills: [...bills] });
   return { input, result: bills, frames };
 }

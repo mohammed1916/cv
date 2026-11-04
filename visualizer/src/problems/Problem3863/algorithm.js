@@ -1,12 +1,35 @@
-export const code = [
-  'target is the letters of s in sorted order',
-  'if s equals target then return 0',
-  'level holds the strings reachable with ops moves',
-  'for each string in level and each proper substring sort the substring',
-  'add new strings to the next level',
-  'add one to ops until the target appears in a level',
-  'return ops',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function minOperationsToSort(s) {
+  // target is the letters of s in sorted order
+  const target = [...s].sort().join('')
+  // if s equals target then return 0
+  if (s === target) return 0
+  const n = s.length
+  // level holds the strings reachable with ops moves
+  let level = [s]
+  const seen = new Set([s])
+  let ops = 0
+  // add one to ops until the target appears in a level
+  while (!level.includes(target)) {
+    const next = []
+    for (const cur of level) {
+      // for each string in level and each proper substring, sort the substring
+      for (let l = 0; l < n; l++) {
+        for (let r = l + 1; r < n; r++) {
+          if (l === 0 && r === n - 1) continue
+          const sorted = [...cur.slice(l, r + 1)].sort().join('')
+          const candidate = cur.slice(0, l) + sorted + cur.slice(r + 1)
+          // add new strings to the next level
+          if (!seen.has(candidate)) { seen.add(candidate); next.push(candidate) }
+        }
+      }
+    }
+    if (next.length === 0) return -1
+    level = next
+    ops++
+  }
+  // return ops
+  return ops
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = key => code.findIndex(c => c.text.includes(key)) + 1
 const PY = key => python.split('\n').findIndex(line => line.includes(key)) + 1
 

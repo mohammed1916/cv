@@ -12,8 +12,8 @@ const definition = {
   url: 'https://leetcode.com/problems/aggregate-two-time-series/',
   complexity: 'O(n + m) after sorting the timestamps. The visualization caps each series at 8 entries.',
   examples: [
-    { label: 'Example 1', input: '{"series1":[[1,3],[4,1]],"series2":[[2,2],[5,2]]}' },
-    { label: 'Example 3', input: '{"series1":[[1,5]],"series2":[[1000000000,2]]}' },
+    { label: 'Example 1', input: '{"series1":[[3,2],[6,4]],"series2":[[1,1],[6,3]]}' },
+    { label: 'Example 3', input: '{"series1":[[2,5],[7,1]],"series2":[[7,4]]}' },
   ],
 }
 
@@ -23,17 +23,17 @@ function pointerFor(series, t) {
   return series.findIndex(([stamp]) => stamp >= t)
 }
 
-function SeriesRow({ label, series, t }) {
+function SeriesRow({ label, series, t, pointerRole }) {
   const pointer = pointerFor(series, t)
   return <IndexedSequence label={label} length={series.length} active={pointer}
     valueAt={index => `${series[index][0]}: ${series[index][1]}`}
-    roleAt={index => index === pointer ? (series[index][0] === t ? 'exact match' : 'next later entry') : index < pointer || (pointer < 0 && t !== null && series[index][0] < t) ? 'passed' : ''} />
+    roleAt={index => index === pointer ? `${pointerRole} · ${series[index][0] === t ? 'exact match' : 'next later entry'}` : index < pointer || (pointer < 0 && t !== null && series[index][0] < t) ? 'passed' : ''} />
 }
 
 export default function AggregateTwoTimeSeries() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <SeriesRow label="series1 (timestamp: value)" series={run.input.series1} t={step.t} />
-    <SeriesRow label="series2 (timestamp: value)" series={run.input.series2} t={step.t} />
+    <SeriesRow label="series1 (timestamp: value); l is its pointer" series={run.input.series1} t={step.t} pointerRole="l" />
+    <SeriesRow label="series2 (timestamp: value); r is its pointer" series={run.input.series2} t={step.t} pointerRole="r" />
     <table aria-label="Aggregated series">
       <thead><tr><th>Timestamp</th><th>Sum</th></tr></thead>
       <tbody>{step.result.map(([t, sum]) => <tr key={t}><td>{t}</td><td>{sum}</td></tr>)}</tbody>

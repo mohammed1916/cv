@@ -1,21 +1,26 @@
-// LeetCode 3167 (draft reading): a compressed string is a series of groups, each one lowercase
+// LeetCode 3167: a compressed string is a series of groups, each one lowercase
 // letter followed by a positive decimal frequency. A letter may appear in several groups.
 // Add the frequencies per letter, then emit one group per present letter in alphabetical order.
 
 const MAX_GROUPS = 16
 const MAX_DIGITS = 6
 
-const CODE_TEXT = `FUNCTION compress(s)
-    totals ← 26 zeros, one per letter
-    i ← 0
-    WHILE i < length of s
-        letter ← s[i]; i ← i + 1
-        read the digits starting at i into number; advance i past them
-        totals[letter] ← totals[letter] + number
-    result ← empty text
-    FOR letter from a to z
-        IF totals[letter] > 0 THEN append letter and totals[letter] to result
-    RETURN result`
+const CODE_TEXT = `function betterCompression(s) {
+  const totals = Array(26).fill(0)
+  let i = 0
+  while (i < s.length) {
+    const letter = s[i]
+    i += 1
+    const start = i
+    while (i < s.length && /[0-9]/.test(s[i])) i += 1
+    totals[letter.charCodeAt(0) - 97] += Number(s.slice(start, i))
+  }
+  const parts = []
+  for (let k = 0; k < 26; k++) {
+    if (totals[k] > 0) parts.push(String.fromCharCode(97 + k) + totals[k])
+  }
+  return parts.join('')
+}`
 
 export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => {
@@ -60,13 +65,13 @@ export function buildTrace(s) {
   const totals = Array(26).fill(0)
   const frames = []
   const snapshot = () => totals.slice()
-  frames.push({ phase: 'start', pythonLine: PY('totals = [0] * 26'), activeLine: L('totals ← 26 zeros'), s, groups, group: -1, letter: '', number: 0, totals: snapshot(), output: '', message: `Read ${groups.length} group${groups.length === 1 ? '' : 's'} from ${s}.` })
+  frames.push({ phase: 'start', pythonLine: PY('totals = [0] * 26'), activeLine: L('const totals = Array(26)'), s, groups, group: -1, letter: '', number: 0, totals: snapshot(), output: '', message: `Read ${groups.length} group${groups.length === 1 ? '' : 's'} from ${s}.` })
   let i = 0
   groups.forEach((group, index) => {
     const letter = group[0]
     const number = Number(group.slice(1))
     totals[letter.charCodeAt(0) - 97] += number
-    frames.push({ phase: 'group', pythonLine: PY('totals[ord(letter) - ord("a")] +='), activeLine: L('totals[letter] ← totals[letter] + number'), s, groups, group: index, letter, number, totals: snapshot(), output: '', message: `Add ${number} to ${letter}: ${letter} is now ${totals[letter.charCodeAt(0) - 97]}.` })
+    frames.push({ phase: 'group', pythonLine: PY('totals[ord(letter) - ord("a")] +='), activeLine: L('+= Number('), s, groups, group: index, letter, number, totals: snapshot(), output: '', message: `Add ${number} to ${letter}: ${letter} is now ${totals[letter.charCodeAt(0) - 97]}.` })
     i += group.length
   })
   const parts = []
@@ -74,10 +79,10 @@ export function buildTrace(s) {
     const letter = String.fromCharCode(97 + k)
     if (totals[k] > 0) {
       parts.push(`${letter}${totals[k]}`)
-      frames.push({ phase: 'emit', pythonLine: PY('parts.append(chr'), activeLine: L('append letter and totals[letter]'), s, groups, group: -1, letter, number: totals[k], totals: snapshot(), output: parts.join(''), message: `${letter} appears with total ${totals[k]}; emit ${letter}${totals[k]}.` })
+      frames.push({ phase: 'emit', pythonLine: PY('parts.append(chr'), activeLine: L('parts.push(String.fromCharCode'), s, groups, group: -1, letter, number: totals[k], totals: snapshot(), output: parts.join(''), message: `${letter} appears with total ${totals[k]}; emit ${letter}${totals[k]}.` })
     }
   }
   const output = parts.join('')
-  frames.push({ phase: 'done', pythonLine: PY('return "".join(parts)'), activeLine: L('RETURN result'), s, groups, group: -1, letter: '', number: 0, totals: snapshot(), output, message: `Compressed result: ${output}.` })
+  frames.push({ phase: 'done', pythonLine: PY('return "".join(parts)'), activeLine: L('return parts.join'), s, groups, group: -1, letter: '', number: 0, totals: snapshot(), output, message: `Compressed result: ${output}.` })
   return { input: s, result: output, frames }
 }

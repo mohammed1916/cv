@@ -19,7 +19,7 @@ export function parseInput(text) {
 
 // Each phase points at one line of the code and one line of the Python.
 const LINE = {
-  start: [2, 2], letter: [7, 7], reject: [8, 8], accept: [9, 11], done: [10, 12],
+  start: [2, 2], letter: [7, 7], reject: [7, 8], accept: [9, 11], done: [11, 12],
 }
 const at = phase => ({ activeLine: LINE[phase][0], pythonLine: LINE[phase][1] })
 
@@ -68,16 +68,18 @@ export function buildTrace({ allowed, words }) {
   return { input: { allowed, words }, result: count, frames }
 }
 
-const codeText = `count consistent (allowed, words):
-  allowedSet = the letters of allowed
-  count = 0
-  for each word in words:
-    consistent = true
-    for each letter c in word:
-      if c not in allowedSet:
-        consistent = false, stop this word
-    if consistent: count += 1
-  return count`
+const codeText = `export function countConsistentStrings(allowed, words) {
+  const allowedSet = new Set(allowed)
+  let count = 0
+  for (const word of words) {
+    let consistent = true
+    for (const ch of word) {
+      if (!allowedSet.has(ch)) { consistent = false; break }
+    }
+    if (consistent) count += 1
+  }
+  return count
+}`
 export const code = codeText.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def count_consistent_strings(allowed, words):

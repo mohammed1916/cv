@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { buildTrace, parseInput } from './algorithm.js'
+import { buildTrace, parseInput, code } from './algorithm.js'
 
 const solve = (s, t) => buildTrace({ s, t }).result
 
@@ -37,7 +37,7 @@ test('3135 random strings match a substring oracle', () => {
 test('3135 frames carry real pseudocode and python lines and the table', () => {
   const run = buildTrace({ s: 'stone', t: 'tones' })
   for (const frame of run.frames) {
-    assert.ok(frame.activeLine >= 1 && frame.activeLine <= 9, `activeLine ${frame.activeLine}`)
+    assert.ok(frame.activeLine >= 1 && frame.activeLine <= code.length, `activeLine ${frame.activeLine}`)
     assert.ok(frame.pythonLine >= 1 && frame.pythonLine <= 13, `pythonLine ${frame.pythonLine}`)
     assert.equal(frame.table.length, 6)
     assert.equal(frame.table[0].length, 6)

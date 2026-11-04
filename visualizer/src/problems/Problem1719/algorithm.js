@@ -76,17 +76,39 @@ export function buildTrace({ pairs }) {
   return { input: { pairs }, result, frames }
 }
 
-export const code = `count the ways to reconstruct a rooted tree from the pairs
-  build a related-pairs graph from the pairs
-  solve for all nodes, with no parent above them
-  for a group of nodes, find the nodes related to every other node in the group
-  if there are none then the answer is zero
-  if there are two or more then they can be stacked in any order, so there is more than one tree
-  stack these nodes as a chain below the parent above them
-  split the rest of the group into parts that are not related to each other
-  solve each part below the bottom of the chain
-  verify that the tree relates exactly the given pairs, otherwise the answer is zero
-  return the answer, capped at two`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `export function countWays(pairs) {
+  const adj = new Map() // build a related-pairs graph
+  for (const [x, y] of pairs) {
+    if (!adj.has(x)) adj.set(x, new Set())
+    if (!adj.has(y)) adj.set(y, new Set())
+    adj.get(x).add(y)
+    adj.get(y).add(x)
+  }
+  const parent = new Map()
+  let ways = 1
+  const solve = (group, above) => {
+    // find the nodes related to every other node in the group
+    const universal = group.filter(v => group.every(w => w === v || adj.get(v).has(w)))
+    if (universal.length === 0) return false // if there are none, this group has no tree
+    if (universal.length >= 2) ways = 2 // if there are two or more, they can be stacked in either order
+    let bottom = above
+    for (const u of universal) { parent.set(u, bottom); bottom = u } // stack these nodes as a chain
+    const rest = group.filter(v => !universal.includes(v))
+    const seen = new Set()
+    for (const v of rest) { // split the rest of the group into parts that are not related to each other
+      if (seen.has(v)) continue
+      const part = [v]
+      seen.add(v)
+      for (let k = 0; k < part.length; k++) {
+        for (const w of adj.get(part[k])) if (rest.includes(w) && !seen.has(w)) { seen.add(w); part.push(w) }
+      }
+      if (!solve(part, bottom)) return false // solve each part below the bottom of the chain
+    }
+    return true
+  }
+  if (!solve([...adj.keys()], null)) return 0
+  return Math.min(ways, 2) // capped at two
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def count_tree_reconstructions(pairs):

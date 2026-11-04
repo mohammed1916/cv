@@ -20,7 +20,7 @@ export function buildTrace({ piles }) {
   const rounds = ordered.length / 3
   const snap = (round, triple, coins) => ({ ordered, round, triple, coins })
   const frames = [{
-    phase: 'start', activeLine: L('ordered = sorted'), pythonLine: P('ordered = sorted'),
+    phase: 'start', activeLine: L('ordered = [...piles]'), pythonLine: P('ordered = sorted'),
     snapshot: snap(-1, [], 0),
     message: `Sort the ${piles.length} piles from largest to smallest. Each round takes the next three from the top.`,
   }]
@@ -40,12 +40,14 @@ export function buildTrace({ piles }) {
   return { input: { piles }, result: coins, frames }
 }
 
-export const code = `maximum coins (piles):
-  ordered = sorted piles, largest first
-  coins = 0
-  for each round r in 0 .. len(piles)/3 - 1:
-    coins += ordered[2r + 1]
-  return coins`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function maxCoins(piles) {",
+  "  const ordered = [...piles].sort((a, b) => b - a)",
+  "  let coins = 0",
+  "  for (let r = 0; r < piles.length / 3; r++) {",
+  "    coins += ordered[2 * r + 1] }",
+  "  return coins }",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 

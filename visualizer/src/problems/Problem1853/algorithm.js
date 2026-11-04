@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough. The sample tables are invented for this visualization.
 export const sql = `SELECT DATE_FORMAT(d.day, '%W, %M %e, %Y') AS formatted_day
 FROM Days d
 ORDER BY d.day`

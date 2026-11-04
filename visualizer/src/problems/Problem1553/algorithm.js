@@ -11,42 +11,44 @@ export function buildTrace(input) {
   const memo = new Map()
   const entries = []
   const snapshot = () => entries.map(e => ({ ...e }))
-  const frames = [{ phase: 'start', activeLine: L('fewest days to eat'), pythonLine: 2, remaining: n, memo: [], message: `Find the fewest days to finish ${n} oranges.` }]
+  const frames = [{ phase: 'start', activeLine: L('function minDays(n)'), pythonLine: 2, remaining: n, memo: [], message: `Find the fewest days to finish ${n} oranges.` }]
 
   const days = remaining => {
     if (remaining <= 1) {
-      frames.push({ phase: 'base', activeLine: L('if remaining is at most 1'), pythonLine: 6, remaining, memo: snapshot(), message: `${remaining} orange${remaining === 1 ? '' : 's'} left takes ${remaining} day${remaining === 1 ? '' : 's'}.` })
+      frames.push({ phase: 'base', activeLine: L('if (remaining <= 1)'), pythonLine: 6, remaining, memo: snapshot(), message: `${remaining} orange${remaining === 1 ? '' : 's'} left takes ${remaining} day${remaining === 1 ? '' : 's'}.` })
       return remaining
     }
     if (memo.has(remaining)) {
       const value = memo.get(remaining)
-      frames.push({ phase: 'reuse', activeLine: L('if memo already holds'), pythonLine: 8, remaining, memo: snapshot(), message: `${remaining} oranges already need ${value} days.` })
+      frames.push({ phase: 'reuse', activeLine: L('if (memo.has(remaining))'), pythonLine: 8, remaining, memo: snapshot(), message: `${remaining} oranges already need ${value} days.` })
       return value
     }
-    frames.push({ phase: 'visit', activeLine: L('set half option'), pythonLine: 9, remaining, memo: snapshot(), message: `Compare eating half or two thirds of ${remaining}. An odd count first loses one orange to a day of eating one.` })
+    frames.push({ phase: 'visit', activeLine: L('const half = '), pythonLine: 9, remaining, memo: snapshot(), message: `Compare eating half or two thirds of ${remaining}. An odd count first loses one orange to a day of eating one.` })
     const half = remaining % 2 + days(Math.floor(remaining / 2))
     const third = remaining % 3 + days(Math.floor(remaining / 3))
     const best = 1 + Math.min(half, third)
     memo.set(remaining, best)
     entries.push({ remaining, days: best })
-    frames.push({ phase: 'store', activeLine: L('store one plus'), pythonLine: 11, remaining, memo: snapshot(), message: `${remaining} oranges need ${best} days.` })
+    frames.push({ phase: 'store', activeLine: L('memo.set(remaining, 1 + Math.min'), pythonLine: 11, remaining, memo: snapshot(), message: `${remaining} oranges need ${best} days.` })
     return best
   }
 
   const result = days(n)
-  frames.push({ phase: 'done', activeLine: L('return days for n'), pythonLine: 14, remaining: 0, memo: snapshot(), message: `Fewest days for ${n} oranges: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return days(n)'), pythonLine: 14, remaining: 0, memo: snapshot(), message: `Fewest days for ${n} oranges: ${result}.` })
   return { input, result, frames }
 }
 
-export const code = `fewest days to eat n oranges
-  return days for n
-
-days(remaining)
-  if remaining is at most 1 then return remaining
-  if memo already holds remaining then return it
-  set half option to remaining mod 2 plus days for remaining divided by 2, rounded down
-  set third option to remaining mod 3 plus days for remaining divided by 3, rounded down
-  store one plus the smaller of half option and third option, then return it`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function minDays(n) {",
+  "  const memo = new Map()",
+  "  const days = remaining => {",
+  "    if (remaining <= 1) return remaining",
+  "    if (memo.has(remaining)) return memo.get(remaining)",
+  "    const half = (remaining % 2) + days(Math.floor(remaining / 2))",
+  "    const third = (remaining % 3) + days(Math.floor(remaining / 3))",
+  "    memo.set(remaining, 1 + Math.min(half, third)); return memo.get(remaining) }",
+  "  return days(n) }",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def min_days(n):

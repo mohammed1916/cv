@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import IndexedSequence from '../../components/shared/IndexedSequence'
+import GraphTraversalView from '../../components/shared/GraphTraversalView'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -24,8 +24,11 @@ const definition = {
 export default function ReorderRoutes() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => (
     <>
-      <IndexedSequence label="Cities reached from city zero" length={run.input.n}
-        valueAt={i => (step.visited.includes(i) ? 'seen' : '-')} active={step.city ?? -1} />
+      <GraphTraversalView title="Roads drawn as arrows; search from city zero" n={run.input.n}
+        edges={run.input.connections} directed
+        current={step.from ?? step.city} neighbour={step.from !== null ? step.city : null}
+        visited={step.visited} frontier={step.stack} frontierKind="stack"
+        legend={{ neighbour: 'road being walked' }} />
       <output aria-label="Reversals so far">{`Reversals counted: ${step.count}`}</output>
     </>
   )} renderReasoning={() => (

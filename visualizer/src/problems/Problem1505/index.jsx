@@ -20,7 +20,15 @@ const definition = {
 
 export default function MinimumIntegerAfterSwaps() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <IndexedSequence label="Digits" length={step.digits.length} valueAt={i => step.digits[i]} active={step.index} roleAt={i => (i < step.index ? 'fixed' : '')} />
+    <IndexedSequence label="Digits" length={step.digits.length} valueAt={i => step.digits[i]} active={step.index}
+      roleAt={i => {
+        if (step.reach === undefined) return i < step.index ? 'fixed' : ''
+        if (i === step.index) return 'l'
+        if (i === step.reach) return 'r'
+        if (i > step.index && i < step.reach) return 'window'
+        return i < step.index ? 'fixed' : ''
+      }} />
+    {step.reach !== undefined && <p>Window of digits within reach: positions {step.index} to {step.reach}. Smallest digit found: {step.digits[step.index]} from position {step.best}.</p>}
     <output aria-label="Swaps left">{`Swaps left: ${step.left}`}</output>
   </>} renderReasoning={() => <>
     <p>The smallest digit reachable within the remaining budget is brought to the front, then the same idea applies to the next position.</p>

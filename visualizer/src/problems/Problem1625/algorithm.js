@@ -16,11 +16,11 @@ export function buildTrace({ s, a, b }) {
   let best = s
   const seen = new Set([s])
   const queue = [s]
-  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('set best to s'), current: s, best, queued: 1, message: 'Start with s as the best string so far.' }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('let best = s'), current: s, best, queued: 1, message: 'Start with s as the best string so far.' }]
   for (let head = 0; head < queue.length; head++) {
     const cur = queue[head]
     if (cur < best) best = cur
-    frames.push({ phase: 'visit', pythonLine: 8, activeLine: L('take the first string'), current: cur, best, queued: queue.length, message: `Visit ${cur}. Best so far: ${best}.` })
+    frames.push({ phase: 'visit', pythonLine: 8, activeLine: L('const cur = queue[head]'), current: cur, best, queued: queue.length, message: `Visit ${cur}. Best so far: ${best}.` })
     const added = addToOdd(cur, a)
     const rotated = rotateRight(cur, b)
     for (const next of [added, rotated]) {
@@ -34,19 +34,28 @@ export function buildTrace({ s, a, b }) {
   return { input: { s, a, b }, result: best, frames }
 }
 
-export const code = `smallest reachable string:
-  set best to s
-  put s in a queue and mark s as seen
-  while the queue is not empty
-    take the first string cur from the queue
-    if cur is smaller than best then set best to cur
-    make add-string by adding a to every digit at an odd position, wrapping past 9
-    make rotate-string by moving the last b digits to the front
-    for each new string among add-string and rotate-string
-      if it has not been seen then
-        mark it as seen and put it in the queue
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function findLexSmallestString(s, a, b) {',
+  '  const n = s.length',
+  '  let best = s',
+  '  const seen = new Set([s])',
+  '  const queue = [s]',
+  '  for (let head = 0; head < queue.length; head++) {',
+  '    const cur = queue[head]',
+  '    if (cur < best) best = cur',
+  '    const digits = [...cur]',
+  '    for (let i = 1; i < n; i += 2) digits[i] = String((Number(digits[i]) + a) % 10)',
+  "    const added = digits.join('')",
+  '    const rotated = cur.slice(n - b) + cur.slice(0, n - b)',
+  '    for (const next of [added, rotated]) {',
+  '      if (!seen.has(next)) { seen.add(next); queue.push(next) }',
+  '    }',
+  '  }',
+  '  return best',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(c => c.includes(s)) + 1
 
 export const python = `def find_lex_smallest_string(s, a, b):
     n = len(s)

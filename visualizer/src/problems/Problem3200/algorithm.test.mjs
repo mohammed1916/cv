@@ -19,7 +19,8 @@ test('3200 edge cases', () => {
   assert.throws(() => parseInput('{"red":-1,"blue":1}'))
 })
 
-// Independent oracle: lay out each candidate triangle ball by ball with explicit colors.
+// Independent oracle: lay out each candidate triangle row by row, every row in one colour,
+// adjacent rows in different colours, and check the ball totals.
 function oracle(red, blue) {
   let best = 0
   for (let h = 1; h <= 30; h++) {
@@ -27,12 +28,8 @@ function oracle(red, blue) {
     for (const startColor of ['red', 'blue']) {
       let r = 0, b = 0
       for (let row = 1; row <= h; row++) {
-        const rowStart = row % 2 === 1 ? startColor : (startColor === 'red' ? 'blue' : 'red')
-        let color = rowStart
-        for (let k = 0; k < row; k++) {
-          if (color === 'red') r++; else b++
-          color = color === 'red' ? 'blue' : 'red'
-        }
+        const color = row % 2 === 1 ? startColor : (startColor === 'red' ? 'blue' : 'red')
+        if (color === 'red') r += row; else b += row
       }
       if (r <= red && b <= blue) fits = true
     }

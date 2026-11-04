@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python, pythonLineMap } from './algorithm'
 
 const definition = {
@@ -25,6 +26,14 @@ export default function CountNumberOfTeams() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Ratings" length={run.input.rating.length} valueAt={i => run.input.rating[i]}
       active={step.j ?? -1} roleAt={i => (step.j === null || step.j === undefined ? '' : i < step.j ? 'left' : i > step.j ? 'right' : 'middle')} />
+    <RecordStateTable label="Counts around each middle soldier" columns={['middle j', 'rating', 'left smaller', 'left larger', 'right smaller', 'right larger', 'teams']}
+      activeRow={step.j ?? -1}
+      rows={run.input.rating.slice(0, (step.j ?? -1) + 1).map((r, j) => {
+        const left = run.input.rating.slice(0, j), right = run.input.rating.slice(j + 1)
+        const ls = left.filter(x => x < r).length, lg = left.filter(x => x > r).length
+        const rs = right.filter(x => x < r).length, rg = right.filter(x => x > r).length
+        return { 'middle j': j, rating: r, 'left smaller': ls, 'left larger': lg, 'right smaller': rs, 'right larger': rg, teams: ls * rg + lg * rs }
+      })} />
     <p>Total teams so far: {step.total}{step.counts ? ` · left <${step.counts.leftLess} >${step.counts.leftGreater} · right <${step.counts.rightLess} >${step.counts.rightGreater}` : ''}</p>
   </>} renderReasoning={({ step }) => <p>{step.message}</p>} />
 }

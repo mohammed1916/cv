@@ -10,12 +10,13 @@ const PYTHON_LINES = [
 ];
 
 const CODE = [
-  "FUNCTION reformatDate(date)",
-  "    months ← [Jan, Feb, …, Dec]",
-  "    split date into day, month, year",
-  "    day ← day without its suffix, padded to two digits",
-  "    monthNumber ← position of month in months, plus 1",
-  "    RETURN year, monthNumber padded to two digits, day",
+  "function reformatDate(date) {",
+  `  const months = ${JSON.stringify(MONTHS)}`,
+  "  const [rawDay, month, year] = date.split(' ')",
+  "  const day = rawDay.slice(0, -2).padStart(2, '0')",
+  "  const monthNumber = String(months.indexOf(month) + 1).padStart(2, '0')",
+  "  return `${year}-${monthNumber}-${day}`",
+  "}",
 ];
 
 function parseJson(text) {
@@ -65,4 +66,4 @@ export function buildTrace(input) {
 
 export const python = PYTHON_LINES.join("\n");
 export const code = CODE.map((text, index) => ({ line: index + 1, text }));
-export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6 };
+export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 6 };

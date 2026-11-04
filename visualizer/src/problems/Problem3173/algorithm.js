@@ -5,11 +5,13 @@
 const MAX_LENGTH = 12
 const MAX_VALUE = 1023
 
-const CODE_TEXT = `FUNCTION adjacentOr(nums)
-    answer ← empty list
-    FOR i from 0 to length of nums minus 2
-        answer[i] ← nums[i] OR nums[i + 1]
-    RETURN answer`
+const CODE_TEXT = `function adjacentOr(nums) {
+  const answer = []
+  for (let i = 0; i <= nums.length - 2; i++) {
+    answer[i] = nums[i] | nums[i + 1]
+  }
+  return answer
+}`
 
 export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => {
@@ -42,12 +44,12 @@ export function parseInput(text) {
 export function buildTrace(nums) {
   const answer = []
   const frames = []
-  frames.push({ phase: 'start', pythonLine: PY('answer = []'), activeLine: L('answer ← empty list'), nums, i: -1, answer: [], message: `Read ${nums.length} value${nums.length === 1 ? '' : 's'}; the answer will have ${Math.max(0, nums.length - 1)} entries.` })
+  frames.push({ phase: 'start', pythonLine: PY('answer = []'), activeLine: L('const answer = []'), nums, i: -1, answer: [], message: `Read ${nums.length} value${nums.length === 1 ? '' : 's'}; the answer will have ${Math.max(0, nums.length - 1)} entries.` })
   for (let i = 0; i < nums.length - 1; i++) {
-    frames.push({ phase: 'pair', pythonLine: PY('for i in range'), activeLine: L('FOR i from 0'), nums, i, answer: answer.slice(), message: `Pair ${nums[i]} with ${nums[i + 1]}.` })
+    frames.push({ phase: 'pair', pythonLine: PY('for i in range'), activeLine: L('for (let i = 0'), nums, i, answer: answer.slice(), message: `Pair ${nums[i]} with ${nums[i + 1]}.` })
     answer.push(nums[i] | nums[i + 1])
-    frames.push({ phase: 'or', pythonLine: PY('answer.append(nums[i] | nums[i + 1])'), activeLine: L('answer[i] ← nums[i] OR nums[i + 1]'), nums, i, answer: answer.slice(), message: `${nums[i]} OR ${nums[i + 1]} = ${answer[i]}.` })
+    frames.push({ phase: 'or', pythonLine: PY('answer.append(nums[i] | nums[i + 1])'), activeLine: L('answer[i] = nums[i] | nums[i + 1]'), nums, i, answer: answer.slice(), message: `${nums[i]} OR ${nums[i + 1]} = ${answer[i]}.` })
   }
-  frames.push({ phase: 'done', pythonLine: PY('return answer'), activeLine: L('RETURN answer'), nums, i: -1, answer: answer.slice(), message: `Answer: [${answer.join(', ')}].` })
+  frames.push({ phase: 'done', pythonLine: PY('return answer'), activeLine: L('return answer'), nums, i: -1, answer: answer.slice(), message: `Answer: [${answer.join(', ')}].` })
   return { input: nums, result: answer, frames }
 }

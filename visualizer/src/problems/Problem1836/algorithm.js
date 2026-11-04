@@ -1,22 +1,18 @@
-// LeetCode 1836 (draft): Remove Duplicates From an Unsorted Linked List.
+// LeetCode 1836: Remove Duplicates From an Unsorted Linked List.
 // Input: a JSON array of integers (the linked list in order; visualization cap: 12 nodes).
 // Remove every node whose value occurs more than once anywhere in the list. Keep globally unique values in order.
 // Pass 1 counts every value; pass 2 copies only the nodes whose count is exactly 1.
 
-const CODE_TEXT = `FUNCTION deleteDuplicates(head)
-    counts ← empty map
-    node ← head
-    WHILE node is present
-        counts[node.value] ← counts[node.value] plus 1
-        node ← node.next
-    dummy ← new empty node, tail ← dummy
-    node ← head
-    WHILE node is present
-        IF counts[node.value] equals 1
-            link a copy of node after tail, move tail forward
-        node ← node.next
-    tail.next ← empty
-    RETURN dummy.next`
+const CODE_TEXT = `export function deleteDuplicates(head) {
+  const counts = new Map()
+  for (let node = head; node; node = node.next) counts.set(node.val, (counts.get(node.val) ?? 0) + 1)
+  const dummy = { val: 0, next: null }
+  let tail = dummy
+  for (let node = head; node; node = node.next) {
+    if (counts.get(node.val) === 1) { tail.next = { val: node.val, next: null }; tail = tail.next }
+  }
+  return dummy.next
+}`
 
 export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
 
@@ -74,18 +70,18 @@ export function buildTrace(values) {
   const counts = new Map()
   values.forEach((v, index) => {
     counts.set(v, (counts.get(v) || 0) + 1)
-    frames.push({ pythonLine: P('counts[node.val] = counts.get'), phase: 'count', activeLine: L('counts[node.value] ← counts[node.value] plus 1'), index, value: v, count: counts.get(v), counts: Object.fromEntries(counts), kept: [], message: `Value ${v} seen ${counts.get(v)} time${counts.get(v) === 1 ? '' : 's'} so far.` })
+    frames.push({ pythonLine: P('counts[node.val] = counts.get'), phase: 'count', activeLine: L('counts.set(node.val'), index, value: v, count: counts.get(v), counts: Object.fromEntries(counts), kept: [], message: `Value ${v} seen ${counts.get(v)} time${counts.get(v) === 1 ? '' : 's'} so far.` })
   })
   const result = []
   values.forEach((v, index) => {
     const total = counts.get(v)
     if (total === 1) {
       result.push(v)
-      frames.push({ pythonLine: P('tail.next = ListNode(node.val)'), phase: 'keep', activeLine: L('IF counts[node.value] equals 1'), index, value: v, count: total, counts: Object.fromEntries(counts), kept: [...result], message: `${v} is unique: keep it.` })
+      frames.push({ pythonLine: P('tail.next = ListNode(node.val)'), phase: 'keep', activeLine: L('if (counts.get(node.val) === 1)'), index, value: v, count: total, counts: Object.fromEntries(counts), kept: [...result], message: `${v} is unique: keep it.` })
     } else {
-      frames.push({ pythonLine: P('if counts[node.val] == 1:'), phase: 'drop', activeLine: L('IF counts[node.value] equals 1'), index, value: v, count: total, counts: Object.fromEntries(counts), kept: [...result], message: `${v} occurs ${total} times: drop every copy.` })
+      frames.push({ pythonLine: P('if counts[node.val] == 1:'), phase: 'drop', activeLine: L('if (counts.get(node.val) === 1)'), index, value: v, count: total, counts: Object.fromEntries(counts), kept: [...result], message: `${v} occurs ${total} times: drop every copy.` })
     }
   })
-  frames.push({ pythonLine: P('return dummy.next'), phase: 'done', activeLine: L('RETURN dummy.next'), index: values.length, value: null, count: null, counts: Object.fromEntries(counts), kept: [...result], message: result.length ? `Remaining list: ${result.join(' -> ')}.` : 'Every value was duplicated: the list is empty.' })
+  frames.push({ pythonLine: P('return dummy.next'), phase: 'done', activeLine: L('return dummy.next'), index: values.length, value: null, count: null, counts: Object.fromEntries(counts), kept: [...result], message: result.length ? `Remaining list: ${result.join(' -> ')}.` : 'Every value was duplicated: the list is empty.' })
   return { input: values, result, frames }
 }

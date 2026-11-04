@@ -36,16 +36,29 @@ export function buildTrace(input) {
   return { input, result, frames }
 }
 
-export const code = `aggregate two time series(series1, series2)
-  set stamps to the sorted distinct timestamps from both series
-  set i and j to 0 and set result to an empty list
-  for each timestamp t in stamps do
-    move i forward while series1 at i has a timestamp before t
-    move j forward while series2 at j has a timestamp before t
-    set v1 to the value at i, or 0 if i is past the end
-    set v2 to the value at j, or 0 if j is past the end
-    add the values v1 and v2 and append [t, sum] to result
-  return result`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function aggregateTwoTimeSeries(series1, series2) {
+  // set stamps to the sorted distinct timestamps from both series
+  const stamps = [...new Set([...series1, ...series2].map(p => p[0]))].sort((a, b) => a - b)
+  // set i and j to 0 and set result to an empty list
+  let i = 0
+  let j = 0
+  const result = []
+  // for each timestamp t in stamps do
+  for (const t of stamps) {
+    // move i forward while series1 at i has a timestamp before t
+    while (i < series1.length && series1[i][0] < t) i++
+    // move j forward while series2 at j has a timestamp before t
+    while (j < series2.length && series2[j][0] < t) j++
+    // set v1 to the value at i, or 0 if i is past the end
+    const v1 = i < series1.length ? series1[i][1] : 0
+    // set v2 to the value at j, or 0 if j is past the end
+    const v2 = j < series2.length ? series2[j][1] : 0
+    // add the values v1 and v2 and append [t, sum] to result
+    result.push([t, v1 + v2])
+  }
+  // return result
+  return result
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def aggregate_two_time_series(series1, series2):

@@ -14,7 +14,23 @@ export function parseInput(text) {
 }
 
 const VOWELS = 'aeiou'
-const LINE = { start: 2, scan: 4, toggle: 5, match: 6, store: 7, done: 8 }
+const CODE = [
+  'function longestEvenVowels(s) {',
+  '  const first = new Map([[0, 0]])',
+  '  let mask = 0',
+  '  let best = 0',
+  '  for (let i = 1; i <= s.length; i++) {',
+  '    const bit = "aeiou".indexOf(s[i - 1])',
+  '    if (bit >= 0) mask ^= 1 << bit',
+  '    if (first.has(mask)) best = Math.max(best, i - first.get(mask))',
+  '    else first.set(mask, i)',
+  '  }',
+  '  return best',
+  '}',
+]
+const PY_LINES = ['def longest_even_vowels(s):', '    first = {0: 0}', '    mask = 0', '    best = 0', '    for i, ch in enumerate(s, start=1):', "        if ch in 'aeiou':", "            mask ^= 1 << 'aeiou'.index(ch)", '        if mask in first:', '            best = max(best, i - first[mask])', '        else:', '            first[mask] = i', '    return best']
+const LINE = { start: 2, toggle: 7, match: 8, store: 9, done: 11 }
+const PY = { start: 2, toggle: 7, match: 9, store: 11, done: 12 }
 
 export function buildTrace(input) {
   const { s } = input
@@ -26,7 +42,7 @@ export function buildTrace(input) {
   const maskText = m => [...VOWELS].map((v, bit) => `${v}:${(m >> bit) & 1}`).join(' ')
 
   frames.push({
-    phase: 'start', activeLine: LINE.start,
+    phase: 'start', activeLine: LINE.start, pythonLine: PY.start,
     message: 'The empty prefix has parity mask 00000 and is recorded at length 0.',
     snapshot: { mask, maskText: maskText(mask), prefix: 0, best, bestRange: null, seen: 1 },
   })
@@ -36,7 +52,7 @@ export function buildTrace(input) {
     const bit = VOWELS.indexOf(ch)
     if (bit >= 0) mask ^= 1 << bit
     frames.push({
-      phase: 'inspect', activeLine: LINE.toggle,
+      phase: 'inspect', activeLine: LINE.toggle, pythonLine: PY.toggle,
       message: bit >= 0
         ? `Prefix ${i} adds vowel ${ch}, flipping its parity bit. Mask is now ${maskText(mask)}.`
         : `Prefix ${i} adds consonant ${ch}. The parity mask stays ${maskText(mask)}.`,
@@ -47,14 +63,14 @@ export function buildTrace(input) {
       const length = i - start
       if (length > best) { best = length; bestRange = [start, i] }
       frames.push({
-        phase: 'update', activeLine: LINE.match,
+        phase: 'update', activeLine: LINE.match, pythonLine: PY.match,
         message: `This mask was seen at prefix ${start}, so the substring s[${start}..${i - 1}] (length ${length}) has every vowel an even number of times.${length === best ? ' It is the longest so far.' : ''}`,
-        snapshot: { mask, maskText: maskText(mask), prefix: i, best, bestRange, seen: first.size, match: start },
+        snapshot: { mask, maskText: maskText(mask), prefix: i, best, bestRange, seen: first.size, match: start, window: [start, i] },
       })
     } else {
       first.set(mask, i)
       frames.push({
-        phase: 'update', activeLine: LINE.store,
+        phase: 'update', activeLine: LINE.store, pythonLine: PY.store,
         message: `Mask ${maskText(mask)} is new. Remember prefix ${i} for it, because a later match gives the longest gap.`,
         snapshot: { mask, maskText: maskText(mask), prefix: i, best, bestRange, seen: first.size, match: null },
       })
@@ -62,31 +78,13 @@ export function buildTrace(input) {
   }
 
   frames.push({
-    phase: 'done', activeLine: LINE.done,
+    phase: 'done', activeLine: LINE.done, pythonLine: PY.done,
     message: best === 0 ? 'No substring has every vowel an even number of times, so the answer is 0.' : `The longest substring with all vowel counts even has length ${best}.`,
     snapshot: { mask, maskText: maskText(mask), prefix: s.length, best, bestRange, seen: first.size },
   })
   return { input, result: best, frames }
 }
 
-export const code = `longest_even_vowels(s):
-  first = {mask 0: prefix length 0}   # earliest prefix for each parity mask
-  mask = 0; best = 0
-  for i from 1 to len(s):
-    if s[i-1] is a vowel: mask = mask XOR bit(s[i-1])
-    if mask is in first: best = max(best, i - first[mask])
-    else: first[mask] = i
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
 
-export const python = `def longest_even_vowels(s):
-    first = {0: 0}
-    mask = 0
-    best = 0
-    for i, ch in enumerate(s, start=1):
-        if ch in 'aeiou':
-            mask ^= 1 << 'aeiou'.index(ch)
-        if mask in first:
-            best = max(best, i - first[mask])
-        else:
-            first[mask] = i
-    return best`
+export const python = PY_LINES.join('\n')

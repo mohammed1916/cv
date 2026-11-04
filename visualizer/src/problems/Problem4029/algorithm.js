@@ -7,17 +7,34 @@ const PHASES = [
 
 export const phases = PHASES
 
-const CODE_LINES = [
-  'earliest time at which every request is completed',
-  'let m be the number of requests',
-  'best[mask][last] is the earliest time with exactly mask done, ending at last',
-  'for each request i, best[1 shifted by i][i] = max(distance from start, arrival of i)',
-  'for each mask in increasing order and each last in mask',
-  '  for each request nxt not in mask',
-  '    arrive = max(best[mask][last] plus distance from last to nxt, arrival of nxt)',
-  '    best[mask plus nxt][nxt] = the smaller of its value and arrive',
-  'return the smallest best over the full mask',
-]
+const CODE_LINES = `function earliestFinish(start, requests) {
+  // earliest time at which every request is completed
+  // let m be the number of requests
+  const m = requests.length
+  // best[mask][last] is the earliest time with exactly mask done, ending at last
+  const best = Array.from({ length: 1 << m }, () => Array(m).fill(Infinity))
+  // for each request i, best[1 shifted by i][i] = max(distance from start, arrival of i)
+  requests.forEach(([a, f], i) => { best[1 << i][i] = Math.max(Math.abs(f - start), a) })
+  // for each mask in increasing order and each last in mask
+  for (let mask = 1; mask < 1 << m; mask++) {
+    for (let last = 0; last < m; last++) {
+      const t = best[mask][last]
+      if (t === Infinity) continue
+      // for each request nxt not in mask
+      for (let nxt = 0; nxt < m; nxt++) {
+        if (mask & (1 << nxt)) continue
+        const [a, f] = requests[nxt]
+        // arrive = max(best[mask][last] plus distance from last to nxt, arrival of nxt)
+        const arrive = Math.max(t + Math.abs(f - requests[last][1]), a)
+        // best[mask plus nxt][nxt] = the smaller of its value and arrive
+        const next = mask | (1 << nxt)
+        best[next][nxt] = Math.min(best[next][nxt], arrive)
+      }
+    }
+  }
+  // return the smallest best over the full mask
+  return Math.min(...best[(1 << m) - 1])
+}`.split('\n')
 
 export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }))
 

@@ -10,17 +10,18 @@ export function parseInput(text) {
   return { target, words, costs }
 }
 
-export const code = `FUNCTION minimumCost(target, words, costs)
-    m ← length of target
-    best ← array of m + 1 entries, all infinity
-    best[0] ← 0
-    FOR i from 0 to m − 1
-        IF best[i] is infinity THEN skip to the next i
-        FOR each word k
-            IF words[k] matches target starting at i THEN
-                best[i + length of words[k]] ← smaller of its current value and best[i] + costs[k]
-    IF best[m] is infinity THEN RETURN -1
-    RETURN best[m]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minimumCost(target, words, costs) {
+  const m = target.length
+  const best = Array(m + 1).fill(Infinity)
+  best[0] = 0
+  for (let i = 0; i < m; i++) {
+    if (best[i] === Infinity) continue
+    words.forEach((word, k) => {
+      if (target.startsWith(word, i)) best[i + word.length] = Math.min(best[i + word.length], best[i] + costs[k])
+    })
+  }
+  return best[m] === Infinity ? -1 : best[m]
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const L = s => {
   const index = code.findIndex(c => c.text.includes(s))
@@ -63,28 +64,28 @@ export function buildTrace({ target, words, costs }) {
   const frames = []
   const snap = () => best.slice()
   frames.push({
-    phase: 'start', activeLine: L('best[0] ← 0'), pythonLine: P('best[0] = 0'),
+    phase: 'start', activeLine: L('best[0] = 0'), pythonLine: P('best[0] = 0'),
     i: -1, k: -1, matched: null, candidate: null, updated: null, best: snap(),
     message: 'best[0] = 0: building the empty prefix costs nothing. Every other prefix starts unreachable.',
   })
   for (let i = 0; i < m; i++) {
     if (best[i] === Infinity) {
       frames.push({
-        phase: 'skip', activeLine: L('IF best[i] is infinity'), pythonLine: P('if best[i] == INF'),
+        phase: 'skip', activeLine: L('if (best[i] === Infinity)'), pythonLine: P('if best[i] == INF'),
         i, k: -1, matched: null, candidate: null, updated: null, best: snap(),
         message: `Prefix length ${i} is unreachable, so no word can start here.`,
       })
       continue
     }
     frames.push({
-      phase: 'position', activeLine: L('FOR i from 0'), pythonLine: P('for i in range(m)'),
+      phase: 'position', activeLine: L('for (let i = 0'), pythonLine: P('for i in range(m)'),
       i, k: -1, matched: null, candidate: null, updated: null, best: snap(),
       message: `Extend the cheapest way to build the first ${i} letters (cost ${best[i]}) with a word that starts at position ${i}.`,
     })
     words.forEach((word, k) => {
       const matched = target.startsWith(word, i)
       frames.push({
-        phase: 'check', activeLine: L('IF words[k] matches'), pythonLine: P('if target.startswith(word, i)'),
+        phase: 'check', activeLine: L('if (target.startsWith(word, i))'), pythonLine: P('if target.startswith(word, i)'),
         i, k, matched, candidate: matched ? best[i] + costs[k] : null, updated: null, best: snap(),
         message: matched
           ? `"${word}" matches at ${i}; the candidate cost is ${best[i]} + ${costs[k]}.`
@@ -96,7 +97,7 @@ export function buildTrace({ target, words, costs }) {
       if (candidate < best[j]) {
         best[j] = candidate
         frames.push({
-          phase: 'update', activeLine: L('best[i + length of words[k]]'), pythonLine: P('best[j] = min(best[j], best[i] + cost)'),
+          phase: 'update', activeLine: L('best[i + word.length] = Math.min'), pythonLine: P('best[j] = min(best[j], best[i] + cost)'),
           i, k, matched, candidate, updated: j, best: snap(),
           message: `best[${j}] becomes ${candidate}.`,
         })
@@ -105,7 +106,7 @@ export function buildTrace({ target, words, costs }) {
   }
   const result = best[m] === Infinity ? -1 : best[m]
   frames.push({
-    phase: 'done', activeLine: L(result === -1 ? 'RETURN -1' : 'RETURN best[m]'),
+    phase: 'done', activeLine: L('return best[m]'),
     pythonLine: P('return -1 if best[m] == INF'),
     i: m, k: -1, matched: null, candidate: null, updated: null, best: snap(),
     message: result === -1 ? 'The full target cannot be built from these words.' : `The minimum cost for the whole target is ${result}.`,

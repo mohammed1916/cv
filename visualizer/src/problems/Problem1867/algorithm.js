@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough. The sample tables are invented for this visualization.
 export const sql = `WITH per_order AS (
   SELECT order_id, AVG(quantity) AS avg_qty, MAX(quantity) AS max_qty
   FROM OrdersDetails

@@ -42,17 +42,36 @@ export function buildTrace(input) {
   return { input, result, frames }
 }
 
-export const code = `count distinct ways to build target from word1 and word2
-  let states be a table from (next free index in word1, next free index in word2) to ways, starting at (0, 0) with 1
-  for each character ch of target in order
-    let next be an empty table
-    for each state (i, j) with ways c
-      for each index x from i to the end of word1
-        if word1[x] equals ch then add c to next at (x + 1, j)
-      for each index y from j to the end of word2
-        if word2[y] equals ch then add c to next at (i, y + 1)
-    set states to next
-  return the total of ways in states where both words were used`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function countDistinctWays(word1, word2, target) {
+  const MOD = 1000000007
+  const n1 = word1.length
+  const n2 = word2.length
+  // let states be a table from (next free index in word1, next free index in word2) to ways, starting at (0, 0) with 1
+  let states = new Map([['0,0', 1]])
+  const add = (next, key, c) => next.set(key, ((next.get(key) ?? 0) + c) % MOD)
+  // for each character ch of target in order
+  for (const ch of target) {
+    // let next be an empty table
+    const next = new Map()
+    // for each state (i, j) with ways c
+    for (const [key, c] of states) {
+      const [i, j] = key.split(',').map(Number)
+      // for each index x from i to the end of word1, if word1[x] equals ch then add c to next at (x + 1, j)
+      for (let x = i; x < n1; x++) if (word1[x] === ch) add(next, (x + 1) + ',' + j, c)
+      // for each index y from j to the end of word2, if word2[y] equals ch then add c to next at (i, y + 1)
+      for (let y = j; y < n2; y++) if (word2[y] === ch) add(next, i + ',' + (y + 1), c)
+    }
+    // set states to next
+    states = next
+  }
+  // return the total of ways in states where both words were used
+  let result = 0
+  for (const [key, c] of states) {
+    const [i, j] = key.split(',').map(Number)
+    if (i > 0 && j > 0) result = (result + c) % MOD
+  }
+  return result
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def count_distinct_ways(word1, word2, target):

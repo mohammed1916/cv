@@ -20,7 +20,7 @@ const definition = {
   python,
   inputLabel: "List of [servers, money, sell, cost] per center",
   url: "https://leetcode.com/problems/maximum-number-of-upgradable-servers/",
-  complexity: "O(n) checks per center with n servers, so O(total servers) time and O(1) extra space per center. The visualization accepts up to 6 centers, 20 servers and values up to 200; the official bounds are not verified here. A closed-form formula exists but is not traced.",
+  complexity: "O(n) checks per center with n servers, so O(total servers) time and O(1) extra space per center. The visualization accepts up to 6 centers, 20 servers and values up to 200; the bounds shown are this visualization's own limits. A closed-form formula exists but is not traced.",
   examples: [
     { label: "Sell to fund", input: "[[6,4,3,4]]" },
     { label: "Empty purse", input: "[[4,0,2,3]]" },

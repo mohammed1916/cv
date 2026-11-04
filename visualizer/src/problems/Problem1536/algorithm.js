@@ -18,13 +18,13 @@ export function buildTrace(input) {
   })
   let ids = grid.map((_, i) => i)
   let swaps = 0
-  const frames = [{ phase: 'start', activeLine: L('count the trailing zeros'), pythonLine: 12, row: -1, need: 0, order: ids.slice(), swaps, message: `Row i needs at least ${n - 1} - i trailing zeros; count what each row has.` }]
+  const frames = [{ phase: 'start', activeLine: L('const zeros'), pythonLine: 12, row: -1, need: 0, order: ids.slice(), swaps, message: `Row i needs at least ${n - 1} - i trailing zeros; count what each row has.` }]
   for (let i = 0; i < n; i++) {
     const need = n - 1 - i
     let k = i
     while (k < n && zeros[ids[k]] < need) k++
     if (k === n) {
-      frames.push({ phase: 'stuck', activeLine: L('if no row at or below'), pythonLine: 19, row: i, need, order: ids.slice(), swaps, message: `Position ${i} needs ${need} trailing zeros and no row below has enough, so it is impossible.` })
+      frames.push({ phase: 'stuck', activeLine: L('if (k === n)'), pythonLine: 19, row: i, need, order: ids.slice(), swaps, message: `Position ${i} needs ${need} trailing zeros and no row below has enough, so it is impossible.` })
       return { input, result: -1, frames }
     }
     while (k > i) {
@@ -32,24 +32,31 @@ export function buildTrace(input) {
       k--
       swaps++
     }
-    frames.push({ phase: 'place', activeLine: L('bubble that row up'), pythonLine: 23, row: i, need, order: ids.slice(), swaps, message: `Position ${i} takes row ${ids[i]} with ${zeros[ids[i]]} trailing zeros; ${swaps} swaps so far.` })
+    frames.push({ phase: 'place', activeLine: L('for (; k > i; k--)'), pythonLine: 23, row: i, need, order: ids.slice(), swaps, message: `Position ${i} takes row ${ids[i]} with ${zeros[ids[i]]} trailing zeros; ${swaps} swaps so far.` })
   }
   ids = ids.slice()
   frames.push({ phase: 'done', activeLine: L('return swaps'), pythonLine: 24, row: -1, need: 0, order: ids, swaps, message: `Minimum adjacent swaps: ${swaps}.` })
   return { input, result: swaps, frames }
 }
 
-export const code = `minimum adjacent row swaps to arrange a binary grid:
-  count the trailing zeros of each row
-  set swaps to 0
-  for each row position i from top to bottom
-    set need to the number of zeros that position i requires
-    find the first row at or below position i with enough trailing zeros
-    if no row at or below i has enough then return -1
-    bubble that row up to position i, one adjacent swap at a time
-    add each swap to swaps
-  return swaps`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function minSwaps(grid) {',
+  '  const n = grid.length',
+  '  const zeros = grid.map(row => { let c = 0; for (let j = n - 1; j >= 0 && row[j] === 0; j--) c++; return c })',
+  '  const ids = zeros.map((_, i) => i)',
+  '  let swaps = 0',
+  '  for (let i = 0; i < n; i++) {',
+  '    const need = n - 1 - i',
+  '    let k = i',
+  '    while (k < n && zeros[ids[k]] < need) k++',
+  '    if (k === n) return -1',
+  '    for (; k > i; k--) { [ids[k - 1], ids[k]] = [ids[k], ids[k - 1]]; swaps++ }',
+  '  }',
+  '  return swaps',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(c => c.includes(s)) + 1
 
 export const python = `def minimum_swaps(grid):
     n = len(grid)

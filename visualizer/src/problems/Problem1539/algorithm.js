@@ -21,7 +21,7 @@ export function buildTrace({ arr, k }) {
   let lo = 0
   let hi = arr.length
   const snap = (mid, missing, extra = {}) => ({ lo, hi, mid, missing, k, ...extra })
-  frames.push({ phase: 'start', activeLine: L('lo, hi = 0'), pythonLine: P('lo, hi = 0'), snapshot: snap(null, null), message: `Search the whole array for the first index whose missing count reaches ${k}.` })
+  frames.push({ phase: 'start', activeLine: L('lo = 0, hi = arr.length'), pythonLine: P('lo, hi = 0'), snapshot: snap(null, null), message: `Search the whole array for the first index whose missing count reaches ${k}.` })
   while (lo < hi) {
     const mid = (lo + hi) >> 1
     const missing = arr[mid] - (mid + 1)
@@ -39,16 +39,17 @@ export function buildTrace({ arr, k }) {
   return { input: { arr, k }, result, frames }
 }
 
-export const code = `kth missing (arr, k):
-  lo, hi = 0, len(arr)
-  while lo < hi:
-    mid = (lo + hi) // 2
-    missing = arr[mid] - (mid + 1)
-    if missing < k:
-      lo = mid + 1
-    else:
-      hi = mid
-  return lo + k`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function findKthPositive(arr, k) {",
+  "  let lo = 0, hi = arr.length",
+  "  while (lo < hi) {",
+  "    const mid = (lo + hi) >> 1",
+  "    const missing = arr[mid] - (mid + 1)",
+  "    if (missing < k) lo = mid + 1",
+  "    else hi = mid",
+  "  }",
+  "  return lo + k }",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def find_kth_positive(arr, k):

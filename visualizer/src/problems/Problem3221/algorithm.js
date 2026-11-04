@@ -3,21 +3,30 @@
 // Each earlier index i is a line y = -i * x + best[i]. Lines arrive with decreasing slopes, so the useful
 // lines form an upper hull; a landing value nums[j] is a query x on that hull, answered by binary search.
 
-const CODE_TEXT = [
-  'FUNCTION maxHopScore(nums)',
-  '    n ← length of nums',
-  '    best[0] ← 0',
-  '    hull ← [line for index 0]',
-  '    FOR j from 1 to n minus 1',
-  '        x ← nums[j]',
-  '        line ← binary search hull for the largest value at x',
-  '        best[j] ← value of line at x, plus j * x',
-  '        WHILE the last two hull lines are made useless by the new line',
-  '            remove the last hull line',
-  '        append line for index j to hull',
-  '    RETURN best[n minus 1]',
-]
-
+const CODE_TEXT = `function maxHopScore(nums) {
+  const n = nums.length
+  const best = [0]
+  const hull = [{ m: 0, b: 0 }]
+  const value = (line, x) => line.m * x + line.b
+  const useless = (l1, l2, l3) => (l3.b - l2.b) * (l1.m - l2.m) >= (l2.b - l1.b) * (l2.m - l3.m)
+  for (let j = 1; j < n; j++) {
+    const x = nums[j]
+    let lo = 0
+    let hi = hull.length - 1
+    while (lo < hi) {
+      const mid = (lo + hi) >> 1
+      if (value(hull[mid], x) < value(hull[mid + 1], x)) lo = mid + 1
+      else hi = mid
+    }
+    best[j] = value(hull[lo], x) + j * x
+    const line = { m: -j, b: best[j] }
+    while (hull.length >= 2 && useless(hull[hull.length - 2], hull[hull.length - 1], line)) {
+      hull.pop()
+    }
+    hull.push(line)
+  }
+  return best[n - 1]
+}`.split('\n')
 export const code = CODE_TEXT.map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def max_hop_score(nums):
@@ -89,11 +98,11 @@ export function buildTrace(nums) {
   const first = { i: 0, m: 0, b: 0 }
   all.push(first)
   hull.push(first)
-  frames.push(snap({ phase: 'start', activeLine: L('best[0] ← 0'), pythonLine: P('best = [0] * n'), j: 0, x: null, lo: -1, hi: -1, mid: -1, chosen: -1, popped: -1, message: 'Index 0 becomes the first line: slope 0, intercept 0.' }))
+  frames.push(snap({ phase: 'start', activeLine: L('const best = [0]'), pythonLine: P('best = [0] * n'), j: 0, x: null, lo: -1, hi: -1, mid: -1, chosen: -1, popped: -1, message: 'Index 0 becomes the first line: slope 0, intercept 0.' }))
 
   for (let j = 1; j < n; j++) {
     const x = nums[j]
-    frames.push(snap({ phase: 'query', activeLine: L('x ← nums[j]'), pythonLine: P('x = nums[j]'), j, x, lo: 0, hi: hull.length - 1, mid: -1, chosen: -1, popped: -1, message: `Landing on ${j} queries the hull at x = ${x}.` }))
+    frames.push(snap({ phase: 'query', activeLine: L('const x = nums[j]'), pythonLine: P('x = nums[j]'), j, x, lo: 0, hi: hull.length - 1, mid: -1, chosen: -1, popped: -1, message: `Landing on ${j} queries the hull at x = ${x}.` }))
     let lo = 0
     let hi = hull.length - 1
     while (lo < hi) {
@@ -102,21 +111,21 @@ export function buildTrace(nums) {
       const right = value(hull[mid + 1], x)
       if (left < right) lo = mid + 1
       else hi = mid
-      frames.push(snap({ phase: 'query', activeLine: L('binary search hull'), pythonLine: P('mid = (lo + hi)'), j, x, lo, hi, mid, chosen: -1, popped: -1, message: `Compare hull lines ${hull[mid].i} (${left}) and ${hull[mid + 1].i} (${right}) at x = ${x}; ${left < right ? 'move right' : 'keep the left side'}.` }))
+      frames.push(snap({ phase: 'query', activeLine: L('while (lo < hi)'), pythonLine: P('mid = (lo + hi)'), j, x, lo, hi, mid, chosen: -1, popped: -1, message: `Compare hull lines ${hull[mid].i} (${left}) and ${hull[mid + 1].i} (${right}) at x = ${x}; ${left < right ? 'move right' : 'keep the left side'}.` }))
     }
     const top = hull[lo]
     best[j] = value(top, x) + j * x
-    frames.push(snap({ phase: 'extend', activeLine: L('best[j] ← value of line'), pythonLine: P('best[j] = value(hull[lo], x)'), j, x, lo, hi: lo, mid: -1, chosen: top.i, popped: -1, message: `Line ${top.i} gives ${value(top, x)} at x = ${x}; add ${j} * ${x} to get best[${j}] = ${best[j]}.` }))
+    frames.push(snap({ phase: 'extend', activeLine: L('best[j] = value(hull[lo], x)'), pythonLine: P('best[j] = value(hull[lo], x)'), j, x, lo, hi: lo, mid: -1, chosen: top.i, popped: -1, message: `Line ${top.i} gives ${value(top, x)} at x = ${x}; add ${j} * ${x} to get best[${j}] = ${best[j]}.` }))
     const line = { i: j, m: -j, b: best[j] }
     all.push(line)
     while (hull.length >= 2 && useless(hull[hull.length - 2], hull[hull.length - 1], line)) {
       const gone = hull.pop()
-      frames.push(snap({ phase: 'pop', activeLine: L('remove the last hull line'), pythonLine: P('hull.pop()'), j, x, lo: -1, hi: -1, mid: -1, chosen: -1, popped: gone.i, message: `Line ${gone.i} can never be the maximum once line ${j} is added; remove it.` }))
+      frames.push(snap({ phase: 'pop', activeLine: L('hull.pop()'), pythonLine: P('hull.pop()'), j, x, lo: -1, hi: -1, mid: -1, chosen: -1, popped: gone.i, message: `Line ${gone.i} can never be the maximum once line ${j} is added; remove it.` }))
     }
     hull.push(line)
-    frames.push(snap({ phase: 'add', activeLine: L('append line for index j'), pythonLine: P('hull.append(line)'), j, x, lo: -1, hi: -1, mid: -1, chosen: -1, popped: -1, message: `Line ${j} has slope ${-j} and intercept ${best[j]}; the hull now holds ${hull.length} line${hull.length === 1 ? '' : 's'}.` }))
+    frames.push(snap({ phase: 'add', activeLine: L('hull.push(line)'), pythonLine: P('hull.append(line)'), j, x, lo: -1, hi: -1, mid: -1, chosen: -1, popped: -1, message: `Line ${j} has slope ${-j} and intercept ${best[j]}; the hull now holds ${hull.length} line${hull.length === 1 ? '' : 's'}.` }))
   }
   const answer = best[n - 1]
-  frames.push(snap({ phase: 'done', activeLine: L('RETURN best[n minus 1]'), pythonLine: P('return best[n - 1]'), j: n - 1, x: null, lo: -1, hi: -1, mid: -1, chosen: -1, popped: -1, message: `Best score reaching index ${n - 1}: ${answer}.` }))
+  frames.push(snap({ phase: 'done', activeLine: L('return best[n - 1]'), pythonLine: P('return best[n - 1]'), j: n - 1, x: null, lo: -1, hi: -1, mid: -1, chosen: -1, popped: -1, message: `Best score reaching index ${n - 1}: ${answer}.` }))
   return { input: nums, result: answer, frames }
 }

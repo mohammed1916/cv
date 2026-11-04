@@ -6,14 +6,16 @@ export const phases = [
 ]
 
 const CODE = [
-  'smaller counts(nums):',
-  '  ordered = sorted copy of nums',
-  '  answer = empty list',
-  '  for each value in nums:',
-  '    j = 0',
-  '    while ordered[j] < value: j += 1',
+  'function smallerThanCurrent(nums) {',
+  '  const ordered = [...nums].sort((a, b) => a - b)',
+  '  const answer = []',
+  '  for (const value of nums) {',
+  '    let j = 0',
+  '    while (ordered[j] < value) j += 1',
   '    answer.push(j)',
+  '  }',
   '  return answer',
+  '}',
 ]
 const PYTHON = `def smaller_than_current(nums):
     ordered = sorted(nums)
@@ -44,7 +46,7 @@ export function buildTrace(nums) {
   const snap = (extra = {}) => ({ nums, ordered, answer: [...answer], ...extra })
 
   frames.push({
-    phase: 'sort', activeLine: L('ordered = sorted copy'), pythonLine: P('ordered = sorted'),
+    phase: 'sort', activeLine: L('const ordered'), pythonLine: P('ordered = sorted'),
     message: `Sorted copy: ${ordered.join(', ')}. In this order, the first place a value appears is the number of smaller values before it.`,
     snapshot: snap(),
   })
@@ -53,7 +55,7 @@ export function buildTrace(nums) {
     while (ordered[j] < value) j += 1
     answer.push(j)
     frames.push({
-      phase: 'scan', activeLine: L('while ordered[j] < value'), pythonLine: P('for v in nums'),
+      phase: 'scan', activeLine: L('while (ordered[j] < value)'), pythonLine: P('for v in nums'),
       message: `Position ${index} holds ${value}. Walking the sorted copy stops at position ${j}, where the value is no longer smaller, so ${j} value${j === 1 ? '' : 's'} are smaller.`,
       snapshot: snap({ index, value, pointer: j }),
     })

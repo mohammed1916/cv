@@ -48,6 +48,6 @@ export default function YearOnYearGrowth() {
     </section>}
     renderReasoning={() => <>
       <p>{meta.description}</p>
-      <p>This is a knowledge-derived teaching model. The sample tables were invented for this visualization.</p>
+      <p>This is an independently written teaching model. The sample tables were invented for this visualization.</p>
     </>} />
 }

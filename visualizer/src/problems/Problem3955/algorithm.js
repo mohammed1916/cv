@@ -25,17 +25,27 @@ export function buildTrace(input) {
   return { input, result: answers, frames }
 }
 
-export const code = `valid binary strings of length n with cost at most k
-  let answers be an empty list
-  define extend(pos, previousOne, cost, text)
-    if pos equals n then
-      if cost is at most k then append text to answers
+export const code = `function validBinaryStringsWithCostLimit(n, k) {
+  // let answers be an empty list
+  const answers = []
+  // define extend(pos, previousOne, cost, text)
+  const extend = (pos, previousOne, cost, text) => {
+    // if pos equals n then the string is complete
+    if (pos === n) {
+      // if cost is at most k then append text to answers
+      if (cost <= k) answers.push(text)
       return
-    extend with a 0 at pos
-    if previousOne is false and cost plus pos is at most k then
-      extend with a 1 at pos
-  call extend(0, false, 0, empty text)
-  return answers`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    }
+    // extend with a 0 at pos
+    extend(pos + 1, false, cost, text + '0')
+    // if previousOne is false and cost plus pos is at most k then extend with a 1 at pos
+    if (!previousOne && cost + pos <= k) extend(pos + 1, true, cost + pos, text + '1')
+  }
+  // call extend(0, false, 0, empty text)
+  extend(0, false, 0, '')
+  // return answers
+  return answers
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def valid_binary_strings_with_cost_limit(n, k):

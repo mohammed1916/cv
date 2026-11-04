@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented; times are minutes from midnight.
+// SQL walkthrough. The sample tables are invented; times are minutes from midnight.
 // The average hourly rate and the tie-break (smallest lot_id) follow the walkthrough's own stated rule.
 export const sql = `WITH stays AS (
   SELECT car_id, lot_id, fee_paid,

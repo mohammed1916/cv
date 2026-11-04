@@ -22,9 +22,9 @@ export function buildTrace({ n, requirements }) {
     need.set(end, cnt)
   }
   let ways = [1]
-  const frames = [{ pythonLine: 8, phase: 'start', index: null, row: ways.slice(), need: null, activeLine: L('set ways to [1]'), message: 'An empty prefix has one arrangement with zero inversions.' }]
+  const frames = [{ pythonLine: 8, phase: 'start', index: null, row: ways.slice(), need: null, activeLine: L('let ways = [1]'), message: 'An empty prefix has one arrangement with zero inversions.' }]
   if (conflict) {
-    frames.push({ pythonLine: 6, phase: 'done', index: null, row: [], need: null, activeLine: L('return the sum'), message: 'Two requirements for the same prefix disagree, so no permutation qualifies.' })
+    frames.push({ pythonLine: 6, phase: 'done', index: null, row: [], need: null, activeLine: L('return ways.reduce'), message: 'Two requirements for the same prefix disagree, so no permutation qualifies.' })
     return { input: { n, requirements }, result: 0, frames }
   }
   for (let i = 0; i < n; i++) {
@@ -35,23 +35,29 @@ export function buildTrace({ n, requirements }) {
     const req = need.has(i) ? need.get(i) : null
     if (req !== null) for (let j = 0; j < size; j++) if (j !== req) next[j] = 0
     ways = next
-    frames.push({ pythonLine: req === null ? 17 : 16, phase: 'position', index: i, row: ways.slice(), need: req, activeLine: L('zero every entry'), message: req === null ? `Position ${i} adds 0 to ${i} inversions.` : `Prefix ${i} must have exactly ${req} inversions: every other count is zeroed.` })
+    frames.push({ pythonLine: req === null ? 17 : 16, phase: 'position', index: i, row: ways.slice(), need: req, activeLine: L('next[j] = 0'), message: req === null ? `Position ${i} adds 0 to ${i} inversions.` : `Prefix ${i} must have exactly ${req} inversions: every other count is zeroed.` })
   }
   const result = ways.reduce((s, w) => (s + w) % MOD, 0)
-  frames.push({ pythonLine: 18, phase: 'done', index: null, row: ways.slice(), need: null, activeLine: L('return the sum'), message: `Total arrangements: ${result}.` })
+  frames.push({ pythonLine: 18, phase: 'done', index: null, row: ways.slice(), need: null, activeLine: L('return ways.reduce'), message: `Total arrangements: ${result}.` })
   return { input: { n, requirements }, result, frames }
 }
 
-export const code = `count permutations of 0 to n-1 that meet every inversion requirement
-  set ways to [1], the single arrangement of an empty prefix
-  for each position i from 0 to n-1
-    set next to zeros for the largest possible inversion count so far
-    for each inversion count j with a nonzero entry in ways
-      add ways[j] to next[j] through next[j + i]
-    if position i has a required count then
-      zero every entry of next except the required count
-    set ways to next
-  return the sum of ways`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function countPermutations(n, requirements) {
+  const MOD = 1000000007
+  const need = new Map(requirements)
+  let ways = [1]
+  for (let i = 0; i < n; i++) {
+    const next = Array(i * (i + 1) / 2 + 1).fill(0)
+    ways.forEach((w, j) => {
+      for (let k = 0; k <= i; k++) next[j + k] = (next[j + k] + w) % MOD
+    })
+    if (need.has(i)) {
+      for (let j = 0; j < next.length; j++) if (j !== need.get(i)) next[j] = 0
+    }
+    ways = next
+  }
+  return ways.reduce((sum, w) => (sum + w) % MOD, 0)
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def count_permutations(n, requirements):

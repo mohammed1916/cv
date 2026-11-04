@@ -10,49 +10,60 @@ export function buildTrace({ rains }) {
   const full = new Map()
   const dry = []
   let failed = false
-  const frames = [{ phase: 'start', activeLine: L('set every dry day to 1'), pythonLine: 3, day: null, ans: [...ans], full: [], message: 'Dry days default to 1 until a lake needs one.' }]
-  const PY = { 'remember this dry day': 8, 'stop and return': 13, 'use the earliest dry day': 14, 'mark the lake as full': 16 }
-  const snap = (phase, line, day, message) => frames.push({ phase, activeLine: L(line), pythonLine: PY[line], day, ans: [...ans], full: [...full.keys()], message })
+  const frames = [{ phase: 'start', activeLine: L('const ans'), pythonLine: 3, day: null, ans: [...ans], full: [], message: 'Dry days default to 1 until a lake needs one.' }]
+  const PY = { 'dry.push(day)': 8, 'return []': 13, 'ans[dry[i]] = lake': 14, 'full.set(lake, day)': 16 }
+  const snap = (phase, line, day, message) => frames.push({ phase, activeLine: L(line), pythonLine: PY[line], day, ans: [...ans], full: [...full.keys()], dryLeft: [...dry], lastRain: [...full.entries()], message })
   for (let day = 0; day < rains.length && !failed; day++) {
     const lake = rains[day]
     if (lake === 0) {
       dry.push(day)
-      snap('dry', 'remember this dry day', day, `Day ${day} is dry; keep it for a later flood.`)
+      snap('dry', 'dry.push(day)', day, `Day ${day} is dry; keep it for a later flood.`)
       continue
     }
     if (full.has(lake)) {
       const i = dry.findIndex(d => d > full.get(lake))
       if (i === -1) {
         failed = true
-        snap('fail', 'stop and return', day, `Lake ${lake} would flood on day ${day}.`)
+        snap('fail', 'return []', day, `Lake ${lake} would flood on day ${day}.`)
         continue
       }
       const used = dry[i]
       ans[used] = lake
       dry.splice(i, 1)
-      snap('use', 'use the earliest dry day', day, `Dry day ${used} empties lake ${lake} before it rains again.`)
+      snap('use', 'ans[dry[i]] = lake', day, `Dry day ${used} empties lake ${lake} before it rains again.`)
     }
     full.set(lake, day)
-    snap('rain', 'mark the lake as full', day, `Rain on lake ${lake} on day ${day}.`)
+    snap('rain', 'full.set(lake, day)', day, `Rain on lake ${lake} on day ${day}.`)
   }
   const result = failed ? [] : ans
-  frames.push({ phase: 'done', activeLine: L('return the answer'), pythonLine: failed ? 13 : 17, day: null, ans: [...ans], full: [...full.keys()], message: failed ? 'No valid plan: a flood cannot be avoided.' : 'Every flood is avoided.' })
+  frames.push({ phase: 'done', activeLine: L('return ans'), pythonLine: failed ? 13 : 17, day: null, ans: [...ans], full: [...full.keys()], message: failed ? 'No valid plan: a flood cannot be avoided.' : 'Every flood is avoided.' })
   return { input: { rains }, result, frames }
 }
 
-export const code = `avoid flooding the city
-  set every dry day to 1 as a default
-  for each day in order
-    if the day is dry then
-      remember this dry day for a later flood
-    otherwise
-      if the lake is already full then
-        if no dry day is left after the lake last rained then
-          stop and return an empty answer
-        use the earliest dry day after that rain to dry the lake
-      mark the lake as full
-  return the answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function avoidFlood(rains) {',
+  '  const ans = rains.map(r => (r === 0 ? 1 : -1))',
+  '  const full = new Map()',
+  '  const dry = []',
+  '  for (let day = 0; day < rains.length; day++) {',
+  '    const lake = rains[day]',
+  '    if (lake === 0) {',
+  '      dry.push(day)',
+  '      continue',
+  '    }',
+  '    if (full.has(lake)) {',
+  '      const i = dry.findIndex(d => d > full.get(lake))',
+  '      if (i === -1) return []',
+  '      ans[dry[i]] = lake',
+  '      dry.splice(i, 1)',
+  '    }',
+  '    full.set(lake, day)',
+  '  }',
+  '  return ans',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(text => text.includes(s)) + 1
 
 export const python = `def avoid_flood(rains):
     import bisect

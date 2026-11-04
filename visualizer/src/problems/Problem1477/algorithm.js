@@ -16,7 +16,7 @@ export function buildTrace(input) {
   // bestEnd[b] is the shortest target-sum window that ends at or before prefix index b.
   const bestEnd = new Array(n + 1).fill(Infinity)
   let ans = Infinity
-  const frames = [{ phase: 'start', activeLine: L('set bestEnd[0]'), pythonLine: 8, index: -1, window: null, best: null, message: 'No window has been found yet.' }]
+  const frames = [{ phase: 'start', activeLine: L('const bestEnd'), pythonLine: 8, index: -1, window: null, best: null, message: 'No window has been found yet.' }]
   for (let b = 1; b <= n; b++) {
     bestEnd[b] = bestEnd[b - 1]
     const need = prefix[b] - target
@@ -29,27 +29,37 @@ export function buildTrace(input) {
       if (bestEnd[a] !== Infinity) ans = Math.min(ans, length + bestEnd[a])
     }
     last.set(prefix[b], b)
-    frames.push({ phase: 'scan', activeLine: L('if need is in last'), pythonLine: window ? 15 : 18, index: b - 1, window, best: ans === Infinity ? null : ans, bestEnd: bestEnd[b], message: window ? `Window ${window[0]} to ${window[1]} sums to ${target}. Best total so far ${ans === Infinity ? 'none' : ans}.` : `No window ends at ${b - 1} with sum ${target}.` })
+    frames.push({ phase: 'scan', activeLine: window ? L('const length = b - a') : L('last.set(prefix[b], b)'), pythonLine: window ? 15 : 18, length: window ? b - window[0] : null, index: b - 1, window, best: ans === Infinity ? null : ans, bestEnd: bestEnd[b], message: window ? `Window ${window[0]} to ${window[1]} sums to ${target}. Best total so far ${ans === Infinity ? 'none' : ans}.` : `No window ends at ${b - 1} with sum ${target}.` })
   }
   const result = ans === Infinity ? -1 : ans
-  frames.push({ phase: 'done', activeLine: L('return -1 if'), pythonLine: 19, index: n, window: null, best: result, message: `Smallest total length: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return ans === Infinity'), pythonLine: 19, index: n, window: null, best: result, message: `Smallest total length: ${result}.` })
   return { input, result, frames }
 }
 
-export const code = `minimum total length of two non-overlapping subarrays each summing to target
-  set prefix[0] to 0 and prefix[i] to the sum of the first i values
-  set last to a map holding 0 at prefix index 0
-  set bestEnd[0] to infinity and ans to infinity
-  for each end b from 1 to n do
-    set bestEnd[b] to bestEnd[b - 1]
-    set need to prefix[b] minus target
-    if need is in last then
-      set a to last[need] and length to b minus a
-      set bestEnd[b] to the smaller of bestEnd[b] and length
-      if bestEnd[a] is finite then update ans with length plus bestEnd[a]
-    set last[prefix[b]] to b
-  return -1 if ans is infinite, otherwise ans`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function minSumOfTwoLengths(arr, target) {',
+  '  const n = arr.length',
+  '  const prefix = [0]',
+  '  for (const v of arr) prefix.push(prefix[prefix.length - 1] + v)',
+  '  const last = new Map([[0, 0]])',
+  '  const bestEnd = Array(n + 1).fill(Infinity)',
+  '  let ans = Infinity',
+  '  for (let b = 1; b <= n; b++) {',
+  '    bestEnd[b] = bestEnd[b - 1]',
+  '    const need = prefix[b] - target',
+  '    if (last.has(need)) {',
+  '      const a = last.get(need)',
+  '      const length = b - a',
+  '      bestEnd[b] = Math.min(bestEnd[b], length)',
+  '      ans = Math.min(ans, length + bestEnd[a])',
+  '    }',
+  '    last.set(prefix[b], b)',
+  '  }',
+  '  return ans === Infinity ? -1 : ans',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(text => text.includes(s)) + 1
 
 export const python = `def min_sum_of_two_lengths(arr, target):
     n = len(arr)

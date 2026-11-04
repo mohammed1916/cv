@@ -1,10 +1,43 @@
-const codeLines = `the route visits 7 cells: start at index 0, D adds 4, R adds 1
-chain = the 7 route indices in order
-count(X) = how many 16-digit strings up to X keep chain digits non-decreasing
-  states: tight flag and last chain digit
-  for each digit position, try each allowed digit
-    skip a chain digit that is smaller than the last chain digit
-return count(r) minus count(l - 1)`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
+const codeLines = `function countGood(l, r, directions) {
+  // the route visits 7 cells: start at index 0, D adds 4, R adds 1
+  const chain = [0]
+  let pos = 0
+  for (const d of directions) {
+    pos += d === 'D' ? 4 : 1
+    chain.push(pos)
+  }
+  // chain is the 7 route indices in order; isChain marks them among the 16 digit positions
+  const isChain = Array.from({ length: 16 }, (_, i) => chain.includes(i))
+  // count(X) is how many 16-digit strings up to X keep chain digits non-decreasing
+  const count = X => {
+    if (X < 0n) return 0n
+    const digits = X.toString().padStart(16, '0')
+    // states: a tight flag and the last chain digit
+    let dp = new Map([['1:0', 1n]])
+    for (let p = 0; p < 16; p++) {
+      const nxt = new Map()
+      for (const [key, c] of dp) {
+        const [t, lastText] = key.split(':')
+        const tight = t === '1'
+        const last = Number(lastText)
+        const top = tight ? Number(digits[p]) : 9
+        // for each digit position, try each allowed digit
+        for (let d = 0; d <= top; d++) {
+          // skip a chain digit that is smaller than the last chain digit
+          if (isChain[p] && d < last) continue
+          const nk = (tight && d === top ? '1' : '0') + ':' + String(isChain[p] ? d : last)
+          nxt.set(nk, (nxt.get(nk) || 0n) + c)
+        }
+      }
+      dp = nxt
+    }
+    let total = 0n
+    for (const v of dp.values()) total += v
+    return total
+  }
+  // return count(r) minus count(l - 1)
+  return count(BigInt(r)) - count(BigInt(l) - 1n)
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => codeLines.findIndex(c => c.text.includes(s)) + 1
 const pythonLines = `def count_good(l, r, directions):
     chain = [0]

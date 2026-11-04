@@ -16,7 +16,7 @@ export function parseInput(text) {
 
 // Each phase points at one line of the code and one line of the Python.
 const LINE = {
-  start: [2, 3], scan: [5, 7], add: [6, 8], move: [7, 9], done: [8, 10],
+  start: [2, 3], scan: [6, 7], add: [9, 8], move: [10, 9], done: [12, 10],
 }
 const at = phase => ({ activeLine: LINE[phase][0], pythonLine: LINE[phase][1] })
 
@@ -62,14 +62,19 @@ export function buildTrace(nums) {
   return { input: nums, result, frames }
 }
 
-const codeText = `sum of absolute differences (nums):
-  n = length of nums, total = sum of nums
-  before = 0
-  for each index i with value v:
-    after = total - before - v
-    answer[i] = v*i - before + after - v*(n-1-i)
+const codeText = `export function getSumAbsoluteDifferences(nums) {
+  const n = nums.length
+  const total = nums.reduce((a, b) => a + b, 0)
+  let before = 0
+  const answer = []
+  for (let i = 0; i < n; i++) {
+    const v = nums[i]
+    const after = total - before - v
+    answer[i] = v * i - before + after - v * (n - 1 - i)
     before += v
-  return answer`
+  }
+  return answer
+}`
 export const code = codeText.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def get_sum_absolute_differences(nums):

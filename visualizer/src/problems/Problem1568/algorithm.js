@@ -81,14 +81,29 @@ export function buildTrace(grid) {
   return { input: grid, result, frames }
 }
 
-export const code = `minimum days to disconnect the land of a grid
-count the islands with a flood fill
-if there is not exactly one island then return 0
-run a DFS from one land cell that records discovery times and low values
-for each cell u and child v of u, mark u when low v is at least disc u (the root needs two children)
-if some cell is a cut point then return 1
-if the island has one cell then return 1
-return 2`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function minDaysToDisconnect(grid) {",
+  "  const land = landCells(grid)   // count the islands with a flood fill",
+  "  if (countIslands(grid) !== 1) return 0   // if there is not exactly one island",
+  "  const disc = new Map(), low = new Map(), cuts = new Set()",
+  "  let timer = 0",
+  "  const dfs = (r, c, parent) => {   // run a DFS that records discovery times and low values",
+  "    disc.set(key(r, c), ++timer); low.set(key(r, c), disc.get(key(r, c)))",
+  "    let children = 0",
+  "    for (const [nr, nc] of neighbours(r, c)) {",
+  "      if (!disc.has(key(nr, nc))) {",
+  "        children++; dfs(nr, nc, [r, c])",
+  "        low.set(key(r, c), Math.min(low.get(key(r, c)), low.get(key(nr, nc))))",
+  "        if (parent && low.get(key(nr, nc)) >= disc.get(key(r, c))) cuts.add(key(r, c)) }",
+  "      else if (!parent || nr !== parent[0] || nc !== parent[1]) low.set(key(r, c), Math.min(low.get(key(r, c)), disc.get(key(nr, nc))))",
+  "    }",
+  "    if (!parent && children > 1) cuts.add(key(r, c))   // the root needs two children",
+  "  }",
+  "  dfs(...land[0], null)",
+  "  if (cuts.size > 0) return 1   // if some cell is a cut point",
+  "  if (land.length === 1) return 1   // if the island has one cell",
+  "  return 2 }   // return 2 when neither",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def min_days(grid):

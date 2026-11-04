@@ -60,13 +60,36 @@ export function solve(input) {
   return buildTrace(input).result
 }
 
-export const code = `list the edge indices that turn start into target, or [-1]
-  root the tree at node 0 with a breadth-first order
-  mark each node whose start and target colors differ
-  for each node except the root, deepest first
-    if the node still differs then toggle its parent edge and flip the parent mark
-  if the root still differs then return [-1]
-  return the chosen edge indices in increasing order`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
+export const code = `function minEdgeToggles(n, edges, start, target) {
+  const adj = Array.from({ length: n }, () => [])
+  edges.forEach(([a, b], idx) => { adj[a].push([b, idx]); adj[b].push([a, idx]) })
+  // root the tree at node 0 and record each parent and parent edge
+  const parent = Array(n).fill(-1)
+  const parentEdge = Array(n).fill(-1)
+  const order = [0]
+  const seen = Array(n).fill(false)
+  seen[0] = true
+  for (let k = 0; k < order.length; k++) {
+    const v = order[k]
+    for (const [w, idx] of adj[v]) if (!seen[w]) { seen[w] = true; parent[w] = v; parentEdge[w] = idx; order.push(w) }
+  }
+  // a node is marked when its start and target differ
+  const need = Array.from({ length: n }, (_, i) => (start[i] !== target[i] ? 1 : 0))
+  const chosen = []
+  for (let k = n - 1; k >= 1; k--) {
+    const v = order[k]
+    // if the node still differs, toggle its parent edge
+    if (need[v]) {
+      chosen.push(parentEdge[v])
+      need[v] ^= 1
+      need[parent[v]] ^= 1
+    }
+  }
+  // if the root still differs, no sequence of toggles works
+  if (need[0]) return [-1]
+  // return the chosen edge indices in increasing order
+  return chosen.sort((a, b) => a - b)
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def min_edge_toggles(n, edges, start, target):
     adj = [[] for _ in range(n)]

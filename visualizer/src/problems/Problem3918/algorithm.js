@@ -32,15 +32,31 @@ export function buildTrace(input) {
   return { input, result: total, frames }
 }
 
-export const code = `sum of primes between a number and its reverse
-  let r be n with its digits reversed
-  let low be the smaller of n and r
-  let high be the larger of n and r
-  let total be 0
-  for each number x from low to high
-    if x is prime then
-      add x to total
-  return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function sumPrimesBetweenNumberAndItsReverse(n) {
+  const isPrime = x => {
+    if (x < 2) return false
+    for (let d = 2; d * d <= x; d++) if (x % d === 0) return false
+    return true
+  }
+  // let r be n with its digits reversed
+  const r = Number(String(n).split('').reverse().join(''))
+  // let low be the smaller of n and r
+  const low = Math.min(n, r)
+  // let high be the larger of n and r
+  const high = Math.max(n, r)
+  // let total be 0
+  let total = 0
+  // for each number x from low to high
+  for (let x = low; x <= high; x++) {
+    // if x is prime then
+    if (isPrime(x)) {
+      // add x to total
+      total += x
+    }
+  }
+  // return total
+  return total
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def sum_primes_between_number_and_its_reverse(n):

@@ -13,7 +13,7 @@ export function parseInput(text) {
 }
 
 // Pseudocode line numbers used by activeLine, and Python line numbers used by pythonLine.
-const C = { start: 2, index: 3, loop: 4, isG: 5, isParen: 6, isAl: 7, done: 8 }
+const C = { start: 2, index: 3, loop: 4, isG: 5, isParen: 6, isAl: 7, done: 9 }
 const PY = { start: 2, index: 3, loop: 4, isG: 5, isParen: 8, isAl: 11, done: 14 }
 
 export function buildTrace(command) {
@@ -39,14 +39,16 @@ export function buildTrace(command) {
   return { input: command, result, frames }
 }
 
-export const code = `interpret (command):
-  out = empty text
-  i = 0
-  while i < length of command:
-    if command[i] is G: append "G", move 1
-    else if next two characters are (): append "o", move 2
-    else: append "al", move 4
-  return out`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function interpret(command) {
+  const out = []
+  let i = 0
+  while (i < command.length) {
+    if (command[i] === 'G') { out.push('G'); i += 1 }
+    else if (command.startsWith('()', i)) { out.push('o'); i += 2 }
+    else { out.push('al'); i += 4 }
+  }
+  return out.join('')
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def interpret(command):
     out = []

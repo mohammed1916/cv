@@ -1,10 +1,22 @@
-export const code = [
-  'count each value in nums1 and in nums2',
-  'if a value has an odd total count then return -1',
-  'the surplus of a value is half of its nums1 count minus nums2 count, when positive',
-  'each paid cross swap moves one surplus value across',
-  'return the sum of the surpluses',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function minCostToEqualize(nums1, nums2) {
+  // count each value in nums1 and in nums2
+  const c1 = new Map()
+  const c2 = new Map()
+  for (const v of nums1) c1.set(v, (c1.get(v) || 0) + 1)
+  for (const v of nums2) c2.set(v, (c2.get(v) || 0) + 1)
+  let total = 0
+  for (const v of new Set([...nums1, ...nums2])) {
+    const a = c1.get(v) || 0
+    const b = c2.get(v) || 0
+    // if a value has an odd total count then return -1
+    if ((a + b) % 2 === 1) return -1
+    // the surplus of a value is half of its nums1 count minus nums2 count, when positive
+    // each paid cross swap moves one surplus value across
+    total += Math.max(0, (a - b) / 2)
+  }
+  // return the sum of the surpluses
+  return total
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = key => code.findIndex(c => c.text.includes(key)) + 1
 const PY = key => python.split('\n').findIndex(line => line.includes(key)) + 1
 

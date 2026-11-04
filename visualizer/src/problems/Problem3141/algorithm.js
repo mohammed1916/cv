@@ -6,16 +6,21 @@
 const MAX_M = 10
 const MAX_COUNT = 10
 
-const CODE_TEXT = `FUNCTION maxHammingDistances(nums, m)
-    answer ← list of zeros with one entry per number
-    FOR each index i in nums
-        best ← 0
-        FOR each index j in nums
-            diff ← nums[i] XOR nums[j], keeping only the lowest m bits
-            count ← number of 1 bits in diff
-            IF count > best THEN best ← count
-        answer[i] ← best
-    RETURN answer`
+const CODE_TEXT = `function maxHammingDistances(nums, m) {
+  const mask = (1 << m) - 1
+  const answer = nums.map(() => 0)
+  for (let i = 0; i < nums.length; i++) {
+    let best = 0
+    for (let j = 0; j < nums.length; j++) {
+      const diff = (nums[i] ^ nums[j]) & mask
+      let count = 0
+      for (let v = diff; v > 0; v &= v - 1) count++
+      if (count > best) best = count
+    }
+    answer[i] = best
+  }
+  return answer
+}`
 
 export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => {
@@ -59,21 +64,21 @@ export function buildTrace({ nums, m }) {
   const mask = (1 << m) - 1
   const answer = Array(nums.length).fill(0)
   const frames = []
-  frames.push({ phase: 'start', pythonLine: PY('answer = [0]'), activeLine: L('list of zeros'), nums, m, i: -1, j: -1, diff: 0, count: 0, best: 0, answer: answer.slice(), message: `Read ${nums.length} numbers as ${m}-bit strings.` })
+  frames.push({ phase: 'start', pythonLine: PY('answer = [0]'), activeLine: L('const answer = nums.map'), nums, m, i: -1, j: -1, diff: 0, count: 0, best: 0, answer: answer.slice(), message: `Read ${nums.length} numbers as ${m}-bit strings.` })
   for (let i = 0; i < nums.length; i++) {
     let best = 0
-    frames.push({ phase: 'row', pythonLine: PY('for i, a in enumerate'), activeLine: L('FOR each index i'), nums, m, i, j: -1, diff: 0, count: 0, best, answer: answer.slice(), message: `Find the farthest partner for ${nums[i]}.` })
+    frames.push({ phase: 'row', pythonLine: PY('for i, a in enumerate'), activeLine: L('for (let i = 0'), nums, m, i, j: -1, diff: 0, count: 0, best, answer: answer.slice(), message: `Find the farthest partner for ${nums[i]}.` })
     for (let j = 0; j < nums.length; j++) {
       const diff = (nums[i] ^ nums[j]) & mask
       const count = countBits(diff)
       const improved = count > best
       if (improved) best = count
-      frames.push({ phase: improved ? 'improve' : 'pair', pythonLine: PY('diff = (a ^ b) & mask'), activeLine: L('diff ← nums[i] XOR'), nums, m, i, j, diff, count, best, answer: answer.slice(), message: `${nums[i]} vs ${nums[j]} differ in ${count} bit${count === 1 ? '' : 's'}${improved ? ': new best' : ''}.` })
+      frames.push({ phase: improved ? 'improve' : 'pair', pythonLine: PY('diff = (a ^ b) & mask'), activeLine: L('const diff ='), nums, m, i, j, diff, count, best, answer: answer.slice(), message: `${nums[i]} vs ${nums[j]} differ in ${count} bit${count === 1 ? '' : 's'}${improved ? ': new best' : ''}.` })
     }
     answer[i] = best
-    frames.push({ phase: 'store', pythonLine: PY('answer[i] = best'), activeLine: L('answer[i] ← best'), nums, m, i, j: -1, diff: 0, count: 0, best, answer: answer.slice(), message: `Record ${best} for ${nums[i]}.` })
+    frames.push({ phase: 'store', pythonLine: PY('answer[i] = best'), activeLine: L('answer[i] = best'), nums, m, i, j: -1, diff: 0, count: 0, best, answer: answer.slice(), message: `Record ${best} for ${nums[i]}.` })
   }
-  frames.push({ phase: 'done', pythonLine: PY('return answer'), activeLine: L('RETURN answer'), nums, m, i: -1, j: -1, diff: 0, count: 0, best: 0, answer: answer.slice(), message: `Every number has its answer: [${answer.join(', ')}].` })
+  frames.push({ phase: 'done', pythonLine: PY('return answer'), activeLine: L('return answer'), nums, m, i: -1, j: -1, diff: 0, count: 0, best: 0, answer: answer.slice(), message: `Every number has its answer: [${answer.join(', ')}].` })
   return { input: { nums, m }, result: answer, frames }
 }
 

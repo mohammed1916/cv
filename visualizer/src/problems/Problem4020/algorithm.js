@@ -24,12 +24,20 @@ export function buildTrace(input) {
   return { input, result: time, frames }
 }
 
-export const code = `elevator requests I(n, requests)
-  set floor to 0 and set time to 0
-  for each requested floor r in order do
-    add the distance between floor and r to time
-    set floor to r
-  return time`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function elevatorRequestsI(n, requests) {
+  // set floor to 0 and set time to 0
+  let floor = 0
+  let time = 0
+  // for each requested floor r in order do
+  for (const r of requests) {
+    // add the distance between floor and r to time
+    time += Math.abs(floor - r)
+    // set floor to r
+    floor = r
+  }
+  // return time
+  return time
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def elevator_requests_time(n, requests):

@@ -11,7 +11,7 @@ const definition = {
   python,
   inputLabel: 'Object with nums and k, e.g. {"nums":[3,1,2],"k":3}',
   url: "https://leetcode.com/problems/kth-smallest-subarray-sum/",
-  complexity: "O(n log S) time and O(1) space for n values with total sum S. The visualization caps nums at 10 entries of 1 to 9; the official bounds are not verified in this draft.",
+  complexity: "O(n log S) time and O(1) space for n values with total sum S. The visualization shows up to 10 entries of 1 to 9 so the window and search bounds fit on screen.",
   examples: [
     { label: "Third smallest", input: '{"nums":[3,1,2],"k":3}' },
     { label: "First smallest", input: '{"nums":[3,1,2],"k":1}' },

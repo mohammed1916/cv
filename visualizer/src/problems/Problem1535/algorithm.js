@@ -15,21 +15,23 @@ export function parseInput(text) {
   return { arr, k }
 }
 
-export const code = `find the winner (arr, k):
-  champion = arr[0]
-  wins = 0
-  queue = the rest of arr, in order
-  repeat:
-    challenger = front of queue, removed
-    if champion > challenger:
-      wins = wins + 1
-      add challenger to the back of queue
-    else:
-      add champion to the back of queue
-      champion = challenger
-      wins = 1
-    if wins == k:
-      return champion`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function findWinner(arr, k) {",
+  "  let champion = arr[0]",
+  "  let wins = 0",
+  "  const queue = arr.slice(1)",
+  "  while (true) {",
+  "    const challenger = queue.shift()",
+  "    if (champion > challenger) {",
+  "      wins += 1",
+  "      queue.push(challenger)",
+  "    } else {",
+  "      queue.push(champion)",
+  "      champion = challenger",
+  "      wins = 1 }",
+  "    if (wins === k) return champion }",
+  "}",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `from collections import deque
 
@@ -66,7 +68,7 @@ export function buildTrace({ arr, k }) {
     if (champion > challenger) {
       wins += 1
       queue.push(challenger)
-      frames.push({ phase: 'stay', ...at('if champion > challenger', 'if champion > challenger'), message: `${champion} beats ${challenger}. Wins in a row: ${wins} of ${k}. ${challenger} goes to the back.`, snapshot: snap(challenger, 'stay') })
+      frames.push({ phase: 'stay', ...at('if (champion > challenger)', 'if champion > challenger'), message: `${champion} beats ${challenger}. Wins in a row: ${wins} of ${k}. ${challenger} goes to the back.`, snapshot: snap(challenger, 'stay') })
     } else {
       const old = champion
       queue.push(champion)

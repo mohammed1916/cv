@@ -15,7 +15,7 @@ export function parseInput(text) {
 }
 
 const NEG = -Infinity
-const LINE = { start: 2, cut: 3, pick: 7, done: 3 }
+const LINE = { start: 2, cut: 3, pick: 11, done: 3 }
 
 // Shared line-DP. `frames` receives one update per value; `pass` labels which cut is being solved.
 function pickTrace(values, k, pass, frames) {
@@ -30,7 +30,7 @@ function pickTrace(values, k, pass, frames) {
     frames.push({
       phase: 'update', activeLine: LINE.pick,
       message: `${pass}: value ${values[i]} at position ${i}. Best totals for 0..${k} chosen: ${row.map(v => (v === NEG ? '—' : v)).join(', ')}.`,
-      snapshot: { pass, index: i, value: values[i], row: row.slice(), taken: k, linePos: i },
+      snapshot: { pass, index: i, value: values[i], row: row.slice(), taken: k, linePos: i, table: dp.map(r => r.slice()) },
     })
   }
   return dp[values.length][k]
@@ -61,14 +61,26 @@ export function buildTrace(input) {
   return { input, result, frames }
 }
 
-export const code = `max_pizza(slices):
-  n = len(slices) / 3
-  return max(pick(slices[1:], n), pick(slices[:-1], n))   # drop first or last
-pick(values, k):          # k values, no two adjacent, maximum total
-  dp[i][j] = best total of j picks among first i values
-  for i, v in values:
-    dp[i+1][j] = max(dp[i][j], dp[i-1][j-1] + v)  # skip or take v
-  return dp[len][k]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const CODE = [
+  'function maxSizeSlices(slices) {',
+  '  const n = slices.length / 3',
+  '  return Math.max(pick(slices.slice(1), n), pick(slices.slice(0, -1), n))',
+  '}',
+  'function pick(values, k) {',
+  '  const dp = [[0, ...Array(k).fill(-Infinity)]]',
+  '  for (let i = 0; i < values.length; i++) {',
+  '    const before = dp[Math.max(i - 1, 0)]',
+  '    const row = [...dp[i]]',
+  '    for (let j = 1; j <= k; j++) {',
+  '      if (before[j - 1] > -Infinity) row[j] = Math.max(row[j], before[j - 1] + values[i])',
+  '    }',
+  '    dp.push(row)',
+  '  }',
+  '  return dp[values.length][k]',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 3, 5: 5, 6: 7, 7: 8, 8: 9, 9: 10, 10: 11, 11: 13, 12: 13, 13: 14, 14: 14, 15: 15, 16: 15 }
 
 export const python = `def max_pizza(slices):
     n = len(slices) // 3

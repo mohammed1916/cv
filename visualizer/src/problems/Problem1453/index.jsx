@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import IndexedSequence from '../../components/shared/IndexedSequence'
+import CoordinatePlane from '../../components/shared/CoordinatePlane'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -21,9 +21,11 @@ const definition = {
 
 export default function Dartboard() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="Darts covered by the current circle" length={run.points.length}
-      valueAt={i => `(${run.points[i][0]}, ${run.points[i][1]})`}
-      roleAt={i => (step.covered[i] ? 'covered' : 'outside')} />
+    <CoordinatePlane title={`Darts and the candidate centre (radius ${run.input.r})`}
+      points={[
+        ...run.input.points.map(([x, y], i) => ({ x, y, label: `${i + 1}`, role: step.covered[i] ? 'kept' : 'excluded' })),
+        ...(step.center ? [{ x: step.center[0], y: step.center[1], label: 'centre', role: 'active' }] : []),
+      ]} />
     <output aria-label="Status">{step.message}</output>
   </>} renderReasoning={() => <>
     <p>Any circle of radius r that covers some darts can be slid until one dart sits on its edge, and then turned until a second one does.</p>

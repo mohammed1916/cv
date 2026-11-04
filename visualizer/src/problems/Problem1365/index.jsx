@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, phases, code, python } from './algorithm'
 
 const definition = {
@@ -22,6 +23,9 @@ export default function SmallerThanCurrent() {
           roleAt={i => (i < answer.length ? 'counted' : '')} />
         <IndexedSequence label="Sorted copy" length={ordered.length} valueAt={i => ordered[i]} active={pointer ?? -1}
           roleAt={i => (value !== undefined && ordered[i] < value ? 'smaller' : '')} />
+        <RecordStateTable label="Count of smaller values per position" columns={['position', 'value', 'smaller']}
+          activeRow={index ?? -1}
+          rows={nums.map((v, i) => ({ position: i, value: v, smaller: i < answer.length ? answer[i] : '—' }))} />
         <p>Answer so far: {answer.join(', ') || 'none yet'}</p>
       </>
     }}

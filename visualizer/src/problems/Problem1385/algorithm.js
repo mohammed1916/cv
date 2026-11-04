@@ -14,7 +14,7 @@ export function parseInput(text) {
   return { arr1: value.arr1, arr2: value.arr2, d: value.d }
 }
 
-const LINE = { start: 1, outer: 3, inner: 5, close: 6, count: 7, done: 8 }
+const LINE = { start: 2, outer: 3, inner: 5, close: 6, count: 8, done: 10 }
 
 export function buildTrace(input) {
   const { arr1, arr2, d } = input
@@ -70,14 +70,21 @@ export function buildTrace(input) {
   return { input, result: count, frames }
 }
 
-export const code = `distance_value(arr1, arr2, d):
-  count = 0
-  for a in arr1:
-    close = false
-    for b in arr2:
-      if |a - b| <= d: close = true; break
-    if not close: count += 1
-  return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const CODE = [
+  'function findTheDistanceValue(arr1, arr2, d) {',
+  '  let count = 0',
+  '  for (const a of arr1) {',
+  '    let close = false',
+  '    for (const b of arr2) {',
+  '      if (Math.abs(a - b) <= d) { close = true; break }',
+  '    }',
+  '    if (!close) count += 1',
+  '  }',
+  '  return count',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 9, 9: 9, 10: 11, 11: 11 }
 
 export const python = `def distance_value(arr1, arr2, d):
     count = 0

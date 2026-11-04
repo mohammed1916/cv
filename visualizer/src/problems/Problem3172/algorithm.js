@@ -1,5 +1,5 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
-// The rule (a Verified text dated the calendar day after signup) is as remembered and is labelled for verification.
+// SQL walkthrough. The sample tables are invented for this visualization.
+// The rule: a Verified text dated the calendar day after signup.
 export const sql = `SELECT DISTINCT e.user_id
 FROM Emails e
 JOIN Texts t ON t.email_id = e.email_id

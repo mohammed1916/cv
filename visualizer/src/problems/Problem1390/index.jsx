@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -21,6 +22,12 @@ const definition = {
 export default function FourDivisors() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Numbers" length={run.input.nums.length} valueAt={index => run.input.nums[index]} roleAt={index => (step.qualifies.includes(index) ? 'four divisors' : '')} active={step.index ?? -1} />
+    <RecordStateTable label="Divisors of the current number" columns={['number', 'divisors', 'count', 'added']}
+      activeRow={step.index ?? -1}
+      rows={run.input.nums.slice(0, step.index >= 0 ? step.index + 1 : 0).map((v, i) => {
+        const divs = i === step.index && step.divisors ? step.divisors : []
+        return { number: v, divisors: divs.join(', ') || '—', count: divs.length, added: divs.length === 4 ? 'yes' : 'no' }
+      })} />
     <output aria-label="Running total">{`Running total: ${step.total}`}</output>
   </>} renderReasoning={() => <>
     <p>A number with exactly four divisors is either a product of two distinct primes or a cube of a prime. Counting divisors directly is enough for these small inputs.</p>

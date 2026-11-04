@@ -19,7 +19,16 @@ export default function LongestEvenVowelSubstring() {
     const [from, to] = step.snapshot.bestRange || [0, 0]
     return <>
       <IndexedSequence label="Text" length={run.input.s.length} valueAt={i => run.input.s[i]}
-        active={step.snapshot.prefix - 1} roleAt={i => (step.snapshot.bestRange && i >= from && i < to ? 'best' : '')} />
+        active={step.snapshot.prefix - 1}
+        roleAt={i => {
+          const [matchFrom, matchTo] = step.snapshot.window || []
+          if (matchFrom !== undefined) {
+            if (i === matchFrom) return 'l'
+            if (i === matchTo - 1) return 'r'
+            if (i > matchFrom && i < matchTo - 1) return 'window'
+          }
+          return step.snapshot.bestRange && i >= from && i < to ? 'window' : ''
+        }} />
       <section aria-label="Parity mask">
         <h3>Parity mask</h3>
         <p><strong>{step.snapshot.maskText}</strong></p>

@@ -26,15 +26,26 @@ export function buildTrace(input) {
   return { input, result, frames }
 }
 
-export const code = `exactly one consecutive set bits pair in n
-  let pairs be 0
-  let previous be 0
-  while n is greater than 0
-    let bit be n mod 2
-    if bit and previous are both 1 then add 1 to pairs
-    let previous be bit
-    n becomes n divided by 2 rounded down
-  return pairs equals 1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function exactlyOneConsecutiveSetBitsPair(n) {
+  // let pairs be 0
+  let pairs = 0
+  // let previous be 0
+  let previous = 0
+  let m = n
+  // while n is greater than 0
+  while (m > 0) {
+    // let bit be n mod 2
+    const bit = m % 2
+    // if bit and previous are both 1 then add 1 to pairs
+    if (bit === 1 && previous === 1) pairs += 1
+    // let previous be bit
+    previous = bit
+    // n becomes n divided by 2 rounded down
+    m = Math.floor(m / 2)
+  }
+  // return pairs equals 1
+  return pairs === 1
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def exactly_one_consecutive_set_bits_pair(n):

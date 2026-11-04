@@ -25,7 +25,7 @@ export default function MaximumHeightTriangle() {
     <output aria-label="Current start">{step.first ? `starting with ${step.first}` : 'choosing a start'}</output>
     <output aria-label="Height">{`height ${step.height}, used red ${step.usedA ?? '-'} and blue ${step.usedB ?? '-'}, best ${step.best}`}</output>
   </>} renderReasoning={() => <>
-    <p>Row r has r balls, and its colors alternate. Odd rows start with the chosen color, so that color covers one more ball than the other in those rows.</p>
+    <p>Row r has r balls, all of one colour, and adjacent rows differ. Odd rows take the chosen starting colour and even rows take the other, so each row is paid from that colour's remaining balls.</p>
     <p>Trying both starting colors and growing the triangle while the totals fit gives the answer.</p>
   </>} />
 }

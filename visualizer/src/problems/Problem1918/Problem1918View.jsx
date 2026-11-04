@@ -26,7 +26,7 @@ export default function Problem1918View({ run, step }) {
         <div className="sw-range-fill" style={{ left: 0, width: pct(step.hi ?? 0) }} />
         {step.lo !== null && <div className="sw-range-mark" style={{ left: pct(step.lo) }} />}
         {step.hi !== null && <div className="sw-range-mark" style={{ left: pct(step.hi) }} />}
-        {step.mid !== null && step.mid !== undefined && <div className="sw-range-mark" style={{ left: pct(step.mid), background: "#dc2626" }} />}
+        {step.mid !== null && step.mid !== undefined && <div className="sw-range-mark" style={{ left: pct(step.mid), background: "var(--text)" }} />}
       </div>
       <div className="sw-facts">
         <span>lo <strong>{step.lo}</strong></span>

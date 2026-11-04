@@ -11,15 +11,17 @@ const PYTHON_LINES = [
 ];
 
 const CODE = [
-  "FUNCTION numTeams(rating)",
-  "    total ← 0",
-  "    FOR j FROM 0 THROUGH n − 1",
-  "        leftLess ← count of i < j with rating[i] < rating[j]",
-  "        leftGreater ← count of i < j with rating[i] > rating[j]",
-  "        rightLess ← count of k > j with rating[k] < rating[j]",
-  "        rightGreater ← count of k > j with rating[k] > rating[j]",
-  "        total ← total + leftLess × rightGreater + leftGreater × rightLess",
-  "    RETURN total",
+  "function numTeams(rating) {",
+  "  let total = 0;",
+  "  for (let j = 0; j < rating.length; j++) {",
+  "    const leftLess = rating.slice(0, j).filter(r => r < rating[j]).length;",
+  "    const leftGreater = rating.slice(0, j).filter(r => r > rating[j]).length;",
+  "    const rightLess = rating.slice(j + 1).filter(r => r < rating[j]).length;",
+  "    const rightGreater = rating.slice(j + 1).filter(r => r > rating[j]).length;",
+  "    total += leftLess * rightGreater + leftGreater * rightLess;",
+  "  }",
+  "  return total;",
+  "}",
 ];
 
 function parseJson(text) {
@@ -54,8 +56,9 @@ export function buildTrace(input) {
   const n = rating.length;
   const frames = [];
   let total = 0;
+  const PY_OF = { 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 10: 9 };
   const frame = (activeLine, phase, message, extra = {}) => frames.push({
-    activeLine, pythonLine: activeLine, phase, message, rating: [...rating], total, j: null, counts: null, contribution: 0, ...extra,
+    activeLine, pythonLine: PY_OF[activeLine], phase, message, rating: [...rating], total, j: null, counts: null, contribution: 0, ...extra,
   });
 
   frame(2, "init", "Start with zero teams.");
@@ -74,11 +77,11 @@ export function buildTrace(input) {
     total += contribution;
     frame(8, "add", `Teams centred on ${j}: ${counts.leftLess}×${counts.rightGreater} increasing + ${counts.leftGreater}×${counts.rightLess} decreasing = ${contribution}.`, { j, counts: { ...counts }, contribution });
   }
-  frame(9, "done", `Return ${total} teams.`, { result: total });
+  frame(10, "done", `Return ${total} teams.`, { result: total });
 
   return { input: { rating }, result: total, frames };
 }
 
 export const python = PYTHON_LINES.join("\n");
 export const code = CODE.map((text, index) => ({ line: index + 1, text }));
-export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9 };
+export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 8, 10: 9, 11: 9 };

@@ -28,11 +28,11 @@ export function buildTrace({ grid, calls }) {
   const n = grid.length
   const where = new Map()
   grid.forEach((row, r) => row.forEach((v, c) => where.set(v, [r, c])))
-  const frames = [{ pythonLine: PL('self.where = '), phase: 'build', activeLine: L('record where each value sits'), cell: null, neighbours: [], sum: null, answers: [null], message: `Stored the positions of ${n * n} values.` }]
+  const frames = [{ pythonLine: PL('self.where = '), phase: 'build', activeLine: L('where.set(v, [r, c])'), cell: null, neighbours: [], sum: null, answers: [null], message: `Stored the positions of ${n * n} values.` }]
   const answers = [null]
   for (const [method, value] of calls) {
     const [r, c] = where.get(value)
-    frames.push({ pythonLine: PL('r, c = '), phase: 'locate', activeLine: L('find the cell of value'), cell: [r, c], neighbours: [], sum: null, method, answers: [...answers], message: `${value} sits at row ${r}, column ${c}.` })
+    frames.push({ pythonLine: PL('r, c = '), phase: 'locate', activeLine: L('const [r, c] = where.get(value)'), cell: [r, c], neighbours: [], sum: null, method, answers: [...answers], message: `${value} sits at row ${r}, column ${c}.` })
     const offsets = method === 'adjacentSum' ? ADJACENT : DIAGONAL
     const neighbours = offsets
       .map(([dr, dc]) => [r + dr, c + dc])
@@ -40,22 +40,28 @@ export function buildTrace({ grid, calls }) {
       .map(([nr, nc]) => ({ at: [nr, nc], value: grid[nr][nc] }))
     const sum = neighbours.reduce((total, x) => total + x.value, 0)
     answers.push(sum)
-    frames.push({ pythonLine: PL('return total'), phase: 'sum', activeLine: L('add up the values'), cell: [r, c], neighbours, sum, method, answers: [...answers], message: `${method === 'adjacentSum' ? 'Top, bottom, left and right' : 'The four diagonal'} neighbours of ${value} add to ${sum}.` })
+    frames.push({ pythonLine: PL('return total'), phase: 'sum', activeLine: L('const sum = neighbours.reduce'), cell: [r, c], neighbours, sum, method, answers: [...answers], message: `${method === 'adjacentSum' ? 'Top, bottom, left and right' : 'The four diagonal'} neighbours of ${value} add to ${sum}.` })
   }
   frames.push({ pythonLine: PL('def diagonalSum'), phase: 'done', activeLine: L('return answers'), cell: null, neighbours: [], sum: null, answers: [...answers], message: 'All queries answered.' })
   return { input: { grid, calls }, result: answers, frames }
 }
 
-export const code = `neighbour sums on a grid of distinct values
-  build: remember the row and column of every value
-  for each query (method, value)
-    r, c = where[value]
-    offsets = the four side offsets, or the four diagonal offsets
-    total = 0
-    for each offset that stays inside the grid
-      total = total + grid at that offset
-    record total as the answer
-  return answers`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function neighbourSums(grid, calls) {
+  const n = grid.length
+  const where = new Map()
+  grid.forEach((row, r) => row.forEach((v, c) => where.set(v, [r, c])))
+  const answers = [null]
+  for (const [method, value] of calls) {
+    const [r, c] = where.get(value)
+    const offsets = method === 'adjacentSum' ? [[-1, 0], [1, 0], [0, -1], [0, 1]] : [[-1, -1], [-1, 1], [1, -1], [1, 1]]
+    const neighbours = offsets
+      .map(([dr, dc]) => [r + dr, c + dc])
+      .filter(([nr, nc]) => nr >= 0 && nc >= 0 && nr < n && nc < n)
+    const sum = neighbours.reduce((total, [nr, nc]) => total + grid[nr][nc], 0)
+    answers.push(sum)
+  }
+  return answers
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `class NeighborSum:

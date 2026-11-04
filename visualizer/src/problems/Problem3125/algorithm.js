@@ -5,12 +5,14 @@
 
 const MAX_N = 1000000000
 
-const CODE_TEXT = `FUNCTION largestZeroAndStart(n)
-    width ← number of binary digits of n
-    x ← 0
-    FOR bit from width - 2 DOWN to 0
-        set that bit of x to 1
-    RETURN x`
+const CODE_TEXT = `function largestZeroAndStart(n) {
+  const width = n.toString(2).length
+  let x = 0
+  for (let bit = width - 2; bit >= 0; bit--) {
+    x |= 1 << bit
+  }
+  return x
+}`
 
 export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => {
@@ -42,14 +44,14 @@ export function buildTrace({ n }) {
   const width = n.toString(2).length
   const frames = []
   let x = 0
-  frames.push({ phase: 'start', pythonLine: PY('width = n.bit_length()'), activeLine: L('number of binary digits'), width, n, x, bit: -1, nBit: null, action: 'start', message: `n = ${n} uses ${width} binary digit${width === 1 ? '' : 's'}. Its top bit (${width - 1}) must be cleared in x.` })
+  frames.push({ phase: 'start', pythonLine: PY('width = n.bit_length()'), activeLine: L('const width'), width, n, x, bit: -1, nBit: null, action: 'start', message: `n = ${n} uses ${width} binary digit${width === 1 ? '' : 's'}. Its top bit (${width - 1}) must be cleared in x.` })
   for (let bit = width - 2; bit >= 0; bit--) {
     const nBit = (n >> bit) & 1
-    frames.push({ phase: 'scan', pythonLine: PY('for i in range'), activeLine: L('FOR bit from'), width, n, x, bit, nBit, action: 'check', message: `Bit ${bit} of n is ${nBit}. Lower bits of x are free to be 1.` })
+    frames.push({ phase: 'scan', pythonLine: PY('for i in range'), activeLine: L('for (let bit'), width, n, x, bit, nBit, action: 'check', message: `Bit ${bit} of n is ${nBit}. Lower bits of x are free to be 1.` })
     x |= 1 << bit
-    frames.push({ phase: 'set', pythonLine: PY('x |= 1 << i'), activeLine: L('set that bit of x'), width, n, x, bit, nBit, action: 'set', message: `Set bit ${bit} of x: x = ${x}.` })
+    frames.push({ phase: 'set', pythonLine: PY('x |= 1 << i'), activeLine: L('x |= 1 << bit'), width, n, x, bit, nBit, action: 'set', message: `Set bit ${bit} of x: x = ${x}.` })
   }
-  if (width === 1) frames.push({ phase: 'scan', pythonLine: PY('x = 0'), activeLine: L('x ← 0'), width, n, x, bit: -1, nBit: null, action: 'check', message: `n = 1 has no lower bits, so x stays 0.` })
-  frames.push({ phase: 'done', pythonLine: PY('return x'), activeLine: L('RETURN x'), width, n, x, bit: -1, nBit: null, action: 'done', message: `Return ${x}: the AND of [${x}, ${n}] is 0.` })
+  if (width === 1) frames.push({ phase: 'scan', pythonLine: PY('x = 0'), activeLine: L('let x = 0'), width, n, x, bit: -1, nBit: null, action: 'check', message: `n = 1 has no lower bits, so x stays 0.` })
+  frames.push({ phase: 'done', pythonLine: PY('return x'), activeLine: L('return x'), width, n, x, bit: -1, nBit: null, action: 'done', message: `Return ${x}: the AND of [${x}, ${n}] is 0.` })
   return { input: { n }, result: x, frames }
 }

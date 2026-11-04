@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import RecordStateTable from '../../components/shared/RecordStateTable'
+import { buildTrace, parseInput, code, python, pythonLineMap, phases } from './algorithm'
 
 const definition = {
   phases, parse: parseInput, build: buildTrace, code, python,
@@ -22,6 +23,13 @@ export default function DistanceValueBetweenArrays() {
         active={step.snapshot.index ?? -1} roleAt={i => (verdict[i] === true ? 'counted' : verdict[i] === false ? 'rejected' : '')} />
       <IndexedSequence label="arr2 (blockers)" length={run.input.arr2.length} valueAt={i => run.input.arr2[i]}
         active={step.snapshot.other ?? -1} roleAt={() => ''} />
+      <RecordStateTable label="Nearest arr2 value to each arr1 value" columns={['arr1 value', 'nearest gap', 'counted?']}
+        activeRow={step.snapshot.index ?? -1}
+        rows={run.input.arr1.map((a, i) => {
+          const gap = Math.min(...run.input.arr2.map(b => Math.abs(a - b)))
+          const verdict = step.snapshot.verdict[i]
+          return { 'arr1 value': a, 'nearest gap': gap, 'counted?': verdict === null ? '—' : verdict ? 'yes' : 'no' }
+        })} />
       <p>Distance limit d = {run.input.d}. Count so far: {step.snapshot.count}.</p>
     </>
   }} renderReasoning={({ step }) => <>

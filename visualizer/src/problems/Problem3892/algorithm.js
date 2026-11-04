@@ -1,9 +1,23 @@
-const codeLines = `if k is larger than n divided by 2 then return -1
-best = infinity
-for each set S of k positions with no two circularly adjacent
-  cost = sum over i in S of max(0, max(prev, next) + 1 - nums[i])
-  best = min(best, cost)
-return best`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
+const codeLines = `function minOps(nums, k) {
+  const n = nums.length
+  // if k is larger than n divided by 2 then return -1
+  if (k > Math.floor(n / 2)) return -1
+  // best = infinity
+  let best = Infinity
+  // for each set S of k positions with no two circularly adjacent
+  for (let mask = 0; mask < 1 << n; mask++) {
+    const chosen = []
+    for (let i = 0; i < n; i++) if ((mask >> i) & 1) chosen.push(i)
+    if (chosen.length !== k) continue
+    // skip a set when a chosen index is followed circularly by another chosen index
+    if (chosen.some(i => (mask >> ((i + 1) % n)) & 1)) continue
+    // cost = sum over i in S of max(0, max(prev, next) + 1 - nums[i])
+    const cost = chosen.reduce((sum, i) => sum + Math.max(0, Math.max(nums[(i - 1 + n) % n], nums[(i + 1) % n]) + 1 - nums[i]), 0)
+    best = Math.min(best, cost)
+  }
+  // return best
+  return best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => codeLines.findIndex(c => c.text.includes(s)) + 1
 const pythonLines = `def min_ops(nums, k):
     n = len(nums)

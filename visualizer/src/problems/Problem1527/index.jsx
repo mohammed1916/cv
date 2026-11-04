@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import SqlStageStrip from './SqlStageStrip'
 import { buildTrace, parseInput, code, sql, python } from './algorithm'
 
 const phases = [
@@ -31,10 +32,11 @@ const definition = {
 
 export default function PatientsWithCondition() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+      <SqlStageStrip phases={definition.phases} current={step.phase} />
     <p>{step.message}</p>
     <TableView caption="Current rows" columns={step.columns} rows={step.rows} />
   </>} renderReasoning={() => <>
-    <p>Knowledge-derived teaching version with invented sample tables.</p>
+    <p>A teaching version with invented sample tables.</p>
     <p>Each condition text is split into codes. A patient matches when some code begins with DIAB1, so a code such as XDIAB1 does not count.</p>
   </>} />
 }

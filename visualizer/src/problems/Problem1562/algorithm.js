@@ -23,22 +23,24 @@ const PYTHON_LINES = [
 ];
 
 const CODE = [
-  "FUNCTION findLatestStep(arr, m)",
-  "    n ← length of arr",
-  "    runEnd ← zeros of length n + 2 (run length stored at run endpoints)",
-  "    groupsOfM ← 0",
-  "    last ← −1",
-  "    FOR step FROM 1 THROUGH n",
-  "        pos ← arr[step]; that bit becomes 1",
-  "        left ← runEnd[pos − 1]; right ← runEnd[pos + 1]",
-  "        IF left = m, groupsOfM ← groupsOfM − 1",
-  "        IF right = m, groupsOfM ← groupsOfM − 1",
-  "        total ← left + right + 1",
-  "        runEnd[pos − left] ← total",
-  "        runEnd[pos + right] ← total",
-  "        IF total = m, groupsOfM ← groupsOfM + 1",
-  "        IF groupsOfM > 0, last ← step",
-  "    RETURN last",
+  "function findLatestStep(arr, m) {",
+  "  const n = arr.length;",
+  "  const runEnd = Array(n + 2).fill(0);",
+  "  let groupsOfM = 0;",
+  "  let last = -1;",
+  "  for (let step = 1; step <= n; step++) {",
+  "    const pos = arr[step - 1];",
+  "    const left = runEnd[pos - 1], right = runEnd[pos + 1];",
+  "    if (left === m) groupsOfM--;",
+  "    if (right === m) groupsOfM--;",
+  "    const total = left + right + 1;",
+  "    runEnd[pos - left] = total;",
+  "    runEnd[pos + right] = total;",
+  "    if (total === m) groupsOfM++;",
+  "    if (groupsOfM > 0) last = step;",
+  "  }",
+  "  return last;",
+  "}",
 ];
 
 function parseJson(text) {
@@ -108,11 +110,11 @@ export function buildTrace(input) {
     frame(15, "check", groupsOfM > 0 ? `A run of length m exists, so last = ${step}.` : `No run of length m exists yet; last stays ${last}.`, { pythonLine: groupsOfM > 0 ? 20 : 19 });
   }
   state = {};
-  frame(16, "done", `Return ${last}.`, { pythonLine: 21, result: last });
+  frame(17, "done", `Return ${last}.`, { pythonLine: 21, result: last });
 
   return { input: { arr, m }, result: last, frames };
 }
 
 export const python = PYTHON_LINES.join("\n");
 export const code = CODE.map((text, index) => ({ line: index + 1, text }));
-export const pythonLineMap = { 5: 5, 7: 7, 8: 8, 9: 10, 10: 12, 11: 14, 12: 15, 13: 16, 14: 17, 15: 19, 16: 21 };
+export const pythonLineMap = { 5: 5, 6: 6, 7: 7, 8: 8, 9: 10, 10: 12, 11: 14, 12: 15, 13: 16, 14: 17, 15: 19, 16: 20, 17: 21 };

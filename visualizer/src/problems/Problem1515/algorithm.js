@@ -53,16 +53,26 @@ export function buildTrace({ positions }) {
   return { input: { positions }, result, frames }
 }
 
-export const code = `minimum total distance from one point to every service point
-  start at the average of the points
-  repeat a fixed number of times
-    set the weight, the weighted sums, the pull vector and the coincident count to zero
-    for each point p
-      let d be the distance from the current point to p
-      if d is about zero then count p as coincident and skip it
-      otherwise add p divided by d to the weighted sums, add one divided by d to the weight, and add the unit vector toward p to the pull
-    move the current point toward the weighted average, keeping part of it in place when points coincide
-  return the sum of distances from the current point to every point`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function minTotalDistance(positions) {",
+  "  const n = positions.length",
+  "  let x = positions.reduce((s, p) => s + p[0], 0) / n   // start at the average",
+  "  let y = positions.reduce((s, p) => s + p[1], 0) / n",
+  "  for (let it = 1; it <= ITER; it++) {",
+  "    let wx = 0, wy = 0, w = 0, rx = 0, ry = 0, eta = 0",
+  "    for (const [px, py] of positions) {",
+  "      const d = Math.hypot(px - x, py - y)",
+  "      if (d < EPS) { eta++; continue }",
+  "      wx += px / d; wy += py / d; w += 1 / d",
+  "      rx += (px - x) / d; ry += (py - y) / d }",
+  "    if (w > 0) {",
+  "      const tx = wx / w, ty = wy / w, rn = Math.hypot(rx, ry)",
+  "      const pull = eta > 0 ? (rn > 0 ? Math.min(1, eta / rn) : 1) : 0",
+  "      x = (1 - pull) * tx + pull * x   // move the current point toward the weighted average",
+  "      y = (1 - pull) * ty + pull * y }",
+  "  }",
+  "  return total(positions, x, y) }   // return the sum of distances",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `import math

@@ -42,15 +42,27 @@ export function solve(input) {
   return buildTrace(input).result
 }
 
-export const code = `maximum capacity from at most two machines with total cost below budget
-  sort the machines by cost
-  build prefix maxima of capacity over the sorted order
-  best = 0
-  for each machine r in sorted order
-    if its cost is below budget then best = max(best, its capacity)
-    move k down from r minus 1 while cost k plus cost r is not below budget
-    if k >= 0 then best = max(best, capacity r plus prefix maximum at k)
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
+export const code = `function maxCapacity(costs, capacity, budget) {
+  // sort the machines by cost, keeping each original index
+  const order = costs.map((_, i) => i).sort((a, b) => costs[a] - costs[b] || a - b)
+  // prefix[pos] is the best capacity among sorted positions 0..pos
+  const prefix = []
+  order.forEach((machine, pos) => {
+    prefix.push(pos === 0 ? capacity[machine] : Math.max(prefix[pos - 1], capacity[machine]))
+  })
+  let best = 0
+  for (let r = 0; r < order.length; r++) {
+    const machine = order[r]
+    // if its cost is below budget, the machine can be selected alone
+    if (costs[machine] < budget) best = Math.max(best, capacity[machine])
+    // move k down while the pair with r is not strictly below budget
+    let k = r - 1
+    while (k >= 0 && costs[order[k]] + costs[machine] >= budget) k--
+    // if k >= 0, every position up to k is a valid partner
+    if (k >= 0) best = Math.max(best, capacity[machine] + prefix[k])
+  }
+  return best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def max_capacity(costs, capacity, budget):
     order = sorted(range(len(costs)), key=lambda i: costs[i])

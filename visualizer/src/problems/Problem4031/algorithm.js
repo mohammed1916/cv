@@ -34,17 +34,32 @@ export function buildTrace(input) {
   return { input, result: ranges, frames }
 }
 
-export const code = `missing ranges(nums, lower, upper)
-  set present to the set of values in nums
-  set ranges to an empty list and set start to nothing
-  for each value v from lower to upper do
-    if v is missing from present then
-      if start is nothing then set start to v
-      set last to v
-    otherwise if start is not nothing then
-      append [start, last] to ranges and set start to nothing
-  if start is not nothing then append [start, last] to ranges
-  return ranges`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function missingRanges(nums, lower, upper) {
+  // set present to the set of values in nums
+  const present = new Set(nums)
+  // set ranges to an empty list and set start to nothing
+  const ranges = []
+  let start = null
+  let last = null
+  // for each value v from lower to upper do
+  for (let v = lower; v <= upper; v++) {
+    // if v is missing from present then extend the current missing run
+    if (!present.has(v)) {
+      // if start is nothing then set start to v
+      if (start === null) start = v
+      // set last to v
+      last = v
+    } else if (start !== null) {
+      // otherwise, if start is not nothing then append [start, last] to ranges and set start to nothing
+      ranges.push([start, last])
+      start = null
+    }
+  }
+  // if start is not nothing then append the final run
+  if (start !== null) ranges.push([start, last])
+  // return ranges
+  return ranges
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def missing_ranges(nums, lower, upper):

@@ -11,11 +11,13 @@ export function parseInput(text) {
   return digits
 }
 
-export const code = `min deci-binary count (n):
-  best = 0
-  for each digit d of n from left to right:
-    if d > best: best = d
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `export function minPartitions(n) {
+  let best = 0
+  for (const ch of n) {
+    if (Number(ch) > best) best = Number(ch)
+  }
+  return best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def min_deci_binary(n):
     best = 0
@@ -42,9 +44,9 @@ export function buildTrace(digits) {
     const d = Number(digits[i])
     if (d > best) {
       best = d
-      frames.push({ phase: 'raise', ...at('if d > best', 'best = max(best, int(ch))'), snapshot: { digits, index: i, best, layers: null }, message: `Digit ${d} at position ${i + 1} is larger than the best so far, so best becomes ${best}.` })
+      frames.push({ phase: 'raise', ...at('Number(ch) > best', 'best = max(best, int(ch))'), snapshot: { digits, index: i, best, layers: null }, message: `Digit ${d} at position ${i + 1} is larger than the best so far, so best becomes ${best}.` })
     } else {
-      frames.push({ phase: 'scan', ...at('for each digit', 'for ch in n'), snapshot: { digits, index: i, best, layers: null }, message: `Digit ${d} at position ${i + 1} does not beat best = ${best}.` })
+      frames.push({ phase: 'scan', ...at('for (const ch of n)', 'for ch in n'), snapshot: { digits, index: i, best, layers: null }, message: `Digit ${d} at position ${i + 1} does not beat best = ${best}.` })
     }
   }
   const layers = layersFor(digits, best)

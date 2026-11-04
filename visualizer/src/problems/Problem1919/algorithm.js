@@ -1,4 +1,4 @@
-// Knowledge-derived teaching model. The SQL, pandas code, sample rows and wording were written for this visualizer.
+// Teaching model. The SQL, pandas code, sample rows and wording were written for this visualizer.
 const SQL = `WITH daily AS (
   SELECT DISTINCT user_id, day, song_id
   FROM Listens

@@ -7,15 +7,16 @@ export function parseInput(text) {
   return nums
 }
 
-export const code = `FUNCTION countOddSum(nums)
-    MOD ← 1000000007
-    odd ← 0, even ← 1 (the empty subsequence has sum 0)
-    FOR each value x in nums
-        IF x is odd THEN
-            odd, even ← odd + even, even + odd, both mod MOD
-        ELSE
-            odd, even ← 2 · odd, 2 · even, both mod MOD
-    RETURN odd`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function countOddSum(nums) {
+  const MOD = 1000000007
+  let odd = 0
+  let even = 1
+  for (const x of nums) {
+    if (x % 2 === 1) [odd, even] = [(odd + even) % MOD, (even + odd) % MOD]
+    else [odd, even] = [(2 * odd) % MOD, (2 * even) % MOD]
+  }
+  return odd
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const L = s => {
   const index = code.findIndex(c => c.text.includes(s))
@@ -51,7 +52,7 @@ export function buildTrace(nums) {
   let odd = 0
   let even = 1
   frames.push({
-    phase: 'start', activeLine: L('odd ← 0'), pythonLine: P('odd, even = 0, 1'),
+    phase: 'start', activeLine: L('let odd = 0'), pythonLine: P('odd, even = 0, 1'),
     index: -1, x: null, odd, even, prevOdd: odd, prevEven: even,
     message: 'Start with the empty subsequence. Its sum 0 is even, so even = 1 and odd = 0.',
   })
@@ -60,7 +61,7 @@ export function buildTrace(nums) {
     const prevEven = even
     const isOdd = x % 2 === 1
     frames.push({
-      phase: 'decide', activeLine: L('IF x is odd'), pythonLine: P('if x % 2 == 1'),
+      phase: 'decide', activeLine: L('if (x % 2 === 1)'), pythonLine: P('if x % 2 == 1'),
       index, x, odd: prevOdd, even: prevEven, prevOdd, prevEven, isOdd,
       message: `${x} is ${isOdd ? 'odd' : 'even'}, so ${isOdd ? 'subsets that were even swap to odd and odd swap to even' : 'every subset keeps its parity and is doubled by including x'}.`,
     })
@@ -72,7 +73,7 @@ export function buildTrace(nums) {
       even = (2 * prevEven) % MOD
     }
     frames.push({
-      phase: 'update', activeLine: isOdd ? L('odd, even ← odd + even') : L('2 · odd'),
+      phase: 'update', activeLine: isOdd ? L('[odd, even] = [(odd + even)') : L('[odd, even] = [(2 * odd)'),
       pythonLine: isOdd ? P('odd, even = (odd + even)') : P('odd, even = (2 * odd)'),
       index, x, odd, even, prevOdd, prevEven, isOdd,
       message: isOdd
@@ -81,7 +82,7 @@ export function buildTrace(nums) {
     })
   })
   frames.push({
-    phase: 'done', activeLine: L('RETURN odd'), pythonLine: P('return odd'),
+    phase: 'done', activeLine: L('return odd'), pythonLine: P('return odd'),
     index: nums.length, x: null, odd, even, prevOdd: odd, prevEven: even,
     message: `${odd} nonempty subsequences have an odd sum (mod ${MOD}).`,
   })

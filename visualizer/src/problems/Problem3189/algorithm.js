@@ -2,18 +2,18 @@
 // Rows and columns can be fixed independently: the rook with the i-th smallest row
 // moves to row i, and the rook with the j-th smallest column moves to column j.
 
-const CODE_TEXT = [
-  'FUNCTION minMoves(n, rooks)',
-  '    rows ← sorted row of each rook',
-  '    cols ← sorted column of each rook',
-  '    total ← 0',
-  '    FOR i from 0 to n minus 1',
-  '        total ← total + |rows[i] minus i|',
-  '    FOR j from 0 to n minus 1',
-  '        total ← total + |cols[j] minus j|',
-  '    RETURN total',
-]
-
+const CODE_TEXT = `function minMovesToPeacefulBoard(n, rooks) {
+  const rows = rooks.map(([r]) => r).sort((a, b) => a - b)
+  const cols = rooks.map(([, c]) => c).sort((a, b) => a - b)
+  let total = 0
+  for (let i = 0; i < n; i++) {
+    total += Math.abs(rows[i] - i)
+  }
+  for (let j = 0; j < n; j++) {
+    total += Math.abs(cols[j] - j)
+  }
+  return total
+}`.split('\n')
 export const code = CODE_TEXT.map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def min_moves_to_peaceful_board(n, rooks):
@@ -62,21 +62,21 @@ export function parseInput(text) {
 export function buildTrace({ n, rooks }) {
   const frames = []
   const base = { n, rooks }
-  frames.push({ ...base, phase: 'read', activeLine: L('FUNCTION'), pythonLine: P('def min_moves'), axis: null, rank: -1, rows: null, cols: null, total: 0, message: `${n} by ${n} board with ${n} rooks.` })
+  frames.push({ ...base, phase: 'read', activeLine: L('function minMoves'), pythonLine: P('def min_moves'), axis: null, rank: -1, rows: null, cols: null, total: 0, message: `${n} by ${n} board with ${n} rooks.` })
   const rows = rooks.map(([r]) => r).sort((a, b) => a - b)
   const cols = rooks.map(([, c]) => c).sort((a, b) => a - b)
-  frames.push({ ...base, phase: 'sort', activeLine: L('rows ← sorted'), pythonLine: P('rows = sorted'), axis: null, rank: -1, rows, cols, total: 0, message: `Sorted rook rows: ${rows.join(', ')}. Sorted columns: ${cols.join(', ')}.` })
+  frames.push({ ...base, phase: 'sort', activeLine: L('const rows = rooks'), pythonLine: P('rows = sorted'), axis: null, rank: -1, rows, cols, total: 0, message: `Sorted rook rows: ${rows.join(', ')}. Sorted columns: ${cols.join(', ')}.` })
   let total = 0
   for (let i = 0; i < n; i++) {
     const d = Math.abs(rows[i] - i)
     total += d
-    frames.push({ ...base, phase: 'row', activeLine: L('total ← total + |rows'), pythonLine: P('total += abs(rows'), axis: 'row', rank: i, rows, cols, distance: d, total, message: `Row rank ${i} is row ${rows[i]}; it needs ${d} move${d === 1 ? '' : 's'} to reach row ${i}.` })
+    frames.push({ ...base, phase: 'row', activeLine: L('total += Math.abs(rows'), pythonLine: P('total += abs(rows'), axis: 'row', rank: i, rows, cols, distance: d, total, message: `Row rank ${i} is row ${rows[i]}; it needs ${d} move${d === 1 ? '' : 's'} to reach row ${i}.` })
   }
   for (let j = 0; j < n; j++) {
     const d = Math.abs(cols[j] - j)
     total += d
-    frames.push({ ...base, phase: 'col', activeLine: L('total ← total + |cols'), pythonLine: P('total += abs(cols'), axis: 'col', rank: j, rows, cols, distance: d, total, message: `Column rank ${j} is column ${cols[j]}; it needs ${d} move${d === 1 ? '' : 's'} to reach column ${j}.` })
+    frames.push({ ...base, phase: 'col', activeLine: L('total += Math.abs(cols'), pythonLine: P('total += abs(cols'), axis: 'col', rank: j, rows, cols, distance: d, total, message: `Column rank ${j} is column ${cols[j]}; it needs ${d} move${d === 1 ? '' : 's'} to reach column ${j}.` })
   }
-  frames.push({ ...base, phase: 'done', activeLine: L('RETURN total'), pythonLine: P('return total'), axis: null, rank: -1, rows, cols, distance: 0, total, message: `Minimum total moves: ${total}.` })
+  frames.push({ ...base, phase: 'done', activeLine: L('return total'), pythonLine: P('return total'), axis: null, rank: -1, rows, cols, distance: 0, total, message: `Minimum total moves: ${total}.` })
   return { input: { n, rooks }, result: total, frames }
 }

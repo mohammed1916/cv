@@ -1,12 +1,17 @@
 const MOD = 1000000007n
-const codeLines = `count the people on each side of pos
-  left = pos and right = n minus 1 minus pos
-  set total to 0
-  for a from 0 to min(left, k)
-    b = k minus a
-    if b is between 0 and right
-      total += C(left, a) times C(right, b)
-  return 2 times total modulo 1000000007`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
+const codeLines = `function countAssignments(n, pos, k) {
+  // count the people on each side of pos
+  const left = pos
+  const right = n - 1 - pos
+  let total = 0n
+  // for a from 0 to min(left, k), pick a visible people on the left and b on the right
+  for (let a = 0; a <= Math.min(left, k); a++) {
+    const b = k - a
+    if (b >= 0 && b <= right) total += binomial(left, a) * binomial(right, b)
+  }
+  // return 2 times total modulo 1000000007, since person pos may pick either direction
+  return (2n * total) % MOD
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => codeLines.findIndex(c => c.text.includes(s)) + 1
 const pythonLines = `def count_assignments(n, pos, k):
     left, right = pos, n - 1 - pos

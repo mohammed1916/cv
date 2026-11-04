@@ -13,15 +13,17 @@ export function parseInput(text) {
   return heights
 }
 
-export const code = `minimum increments (target):
-  total = 0
-  previous = 0
-  for each height in target:
-    rise = height - previous
-    if rise > 0:
-      total = total + rise
-    previous = height
-  return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function minIncrements(target) {",
+  "  let total = 0",
+  "  let previous = 0",
+  "  for (const height of target) {",
+  "    const rise = height - previous",
+  "    if (rise > 0) {",
+  "      total += rise }",
+  "    previous = height }",
+  "  return total }",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def min_increments(target):
     total = 0
@@ -48,9 +50,9 @@ export function buildTrace(heights) {
     const rise = height - previous
     if (rise > 0) {
       total += rise
-      frames.push({ phase: 'raise', ...at('total = total + rise', 'total += rise'), message: `Height ${height} is ${rise} above ${previous}, so ${rise} new increment${rise === 1 ? '' : 's'} begin at index ${index}. Total is ${total}.`, snapshot: snap(index, rise) })
+      frames.push({ phase: 'raise', ...at('total += rise', 'total += rise'), message: `Height ${height} is ${rise} above ${previous}, so ${rise} new increment${rise === 1 ? '' : 's'} begin at index ${index}. Total is ${total}.`, snapshot: snap(index, rise) })
     } else {
-      frames.push({ phase: 'level', ...at('if rise > 0', 'if rise > 0'), message: `Height ${height} is not above ${previous}. Increments already placed can cover it, so nothing new is added.`, snapshot: snap(index, rise) })
+      frames.push({ phase: 'level', ...at('if (rise > 0)', 'if rise > 0'), message: `Height ${height} is not above ${previous}. Increments already placed can cover it, so nothing new is added.`, snapshot: snap(index, rise) })
     }
     previous = height
   })

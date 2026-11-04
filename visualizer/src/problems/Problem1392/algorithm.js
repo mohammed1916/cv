@@ -10,7 +10,7 @@ export function buildTrace(s) {
   const pi = Array(n).fill(0)
   const frames = []
   const PY_LINE = { 'make an array pi': 3, 'set k to 0': 4, 'for i from 1': 5, 'while k is above 0': 6, 'set k to pi[k - 1]': 7, 'if s[i] equals s[k]': 8, 'add 1 to k': 9, 'set pi[i] to k': 10, 'return the first': 11 }
-  const snap = (phase, line, i, k, message) => frames.push({ phase, pythonLine: PY_LINE[line], activeLine: L(line), i, k, pi: [...pi], message })
+  const snap = (phase, line, i, k, message) => frames.push({ phase, pythonLine: PY_LINE[line], activeLine: L(LINE_TEXT[line]), i, k, pi: [...pi], message })
   snap('start', 'make an array pi', -1, 0, `The prefix function pi[i] is the length of the longest proper prefix of s[0..i] that is also a suffix.`)
   let k = 0
   snap('start', 'set k to 0', -1, k, 'No border has been found yet, so the matched length k starts at 0.')
@@ -31,22 +31,26 @@ export function buildTrace(s) {
     snap('record', 'set pi[i] to k', i, k, `pi[${i}] = ${k}.`)
   }
   const result = s.slice(0, pi[n - 1])
-  frames.push({ phase: 'done', pythonLine: 11, activeLine: L('return the first'), i: n, k: pi[n - 1], pi: [...pi], message: result ? `The longest happy prefix is "${result}".` : 'No proper prefix is also a suffix, so the answer is the empty string.' })
+  frames.push({ phase: 'done', pythonLine: 11, activeLine: L('return s.slice'), i: n, k: pi[n - 1], pi: [...pi], message: result ? `The longest happy prefix is "${result}".` : 'No proper prefix is also a suffix, so the answer is the empty string.' })
   return { input: s, result, frames }
 }
 
-export const code = `longest happy prefix of s:
-  set n to the length of s
-  make an array pi of n zeros
-  set k to 0
-  for i from 1 to n - 1:
-    while k is above 0 and s[i] differs from s[k]:
-      set k to pi[k - 1]
-    if s[i] equals s[k] then
-      add 1 to k
-    set pi[i] to k
-  return the first pi[n - 1] characters of s`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function longestHappyPrefix(s) {',
+  '  const n = s.length',
+  '  const pi = Array(n).fill(0)',
+  '  let k = 0',
+  '  for (let i = 1; i < n; i++) {',
+  '    while (k > 0 && s[i] !== s[k]) k = pi[k - 1]',
+  '    if (s[i] === s[k]) k++',
+  '    pi[i] = k',
+  '  }',
+  '  return s.slice(0, pi[n - 1])',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(text => text.includes(s)) + 1
+const LINE_TEXT = { 'make an array pi': 'const pi', 'set k to 0': 'let k = 0', 'for i from 1': 'for (let i', 'while k is above 0': 'while (k > 0', 'set k to pi[k - 1]': 'k = pi[k - 1]', 'if s[i] equals s[k]': 'if (s[i] === s[k])', 'add 1 to k': 'if (s[i] === s[k])', 'set pi[i] to k': 'pi[i] = k', 'return the first': 'return s.slice' }
 
 export const python = `def longest_happy_prefix(s):
     n = len(s)

@@ -19,7 +19,22 @@ export default function MinimumStartingVertices() {
     const { n, edges } = run.input
     const { indegree, edge, sources } = step.snapshot
     const sourceSet = new Set(sources)
+    const counted = step.phase === 'start' ? [] : edge
+      ? edges.slice(0, edges.findIndex(([a, b]) => a === edge[0] && b === edge[1]) + 1)
+      : edges
+    const prerequisites = Array.from({ length: n }, (_, v) => counted.filter(([, to]) => to === v).map(([from]) => from))
     return <>
+      <section aria-label="Prerequisite map">
+        <h3>Each vertex's incoming arrows (its prerequisites, the vertices that point to it)</h3>
+        <table>
+          <thead><tr><th scope="col">vertex</th><th scope="col">prerequisites so far</th><th scope="col">status</th></tr></thead>
+          <tbody>{prerequisites.map((list, v) => <tr key={v} data-vertex={v} style={edge && edge[1] === v ? { background: 'var(--surface2)', fontWeight: 600 } : undefined}>
+            <td>{v}</td>
+            <td>{list.length ? list.join(', ') : 'none'}</td>
+            <td>{step.phase === 'collect' || step.phase === 'done' ? (sourceSet.has(v) ? 'start here' : 'reached from a prerequisite') : 'still being counted'}</td>
+          </tr>)}</tbody>
+        </table>
+      </section>
       <div role="img" aria-label="Vertices with incoming arrow counts" style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
         {Array.from({ length: n }, (_, v) => {
           const isSource = sourceSet.has(v)
@@ -27,7 +42,7 @@ export default function MinimumStartingVertices() {
           return <div key={v} data-vertex={v} style={{
             minWidth: 64, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
             border: `${isSource || isTarget ? 2 : 1}px solid ${isSource ? '#0891b2' : 'var(--border)'}`,
-            background: isSource ? '#a5f3fc' : isTarget ? 'var(--surface2)' : 'transparent', color: '#1c1917',
+            background: isSource ? '#a5f3fc' : isTarget ? 'var(--surface2)' : 'transparent', color: 'var(--text)',
           }}><div>vertex {v}</div><small>arrows in: {indegree[v]}</small></div>
         })}
       </div>

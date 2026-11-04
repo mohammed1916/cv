@@ -15,17 +15,15 @@ export function parseInput(text) {
 }
 
 export const code = [
-  'function longest_positive(nums):',
-  '  best = 0, pos = 0, neg = 0',
-  '  for each index i with value x in nums:',
-  '    if x == 0:',
-  '      pos = 0, neg = 0',
-  '    else if x > 0:',
-  '      pos = pos + 1, neg = neg > 0 ? neg + 1 : 0',
-  '    else:',
-  '      pos, neg = (neg > 0 ? neg + 1 : 0), pos + 1',
-  '    best = max(best, pos)',
-  '  return best',
+  "function longestPositive(nums) {",
+  "  let best = 0, pos = 0, neg = 0",
+  "  for (let i = 0; i < nums.length; i++) {",
+  "    const x = nums[i]",
+  "    if (x === 0) { pos = 0; neg = 0 }",
+  "    else if (x > 0) { pos = pos + 1; neg = neg > 0 ? neg + 1 : 0 }",
+  "    else { [pos, neg] = [neg > 0 ? neg + 1 : 0, pos + 1] }",
+  "    best = Math.max(best, pos) }",
+  "  return best }",
 ].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def longest_positive(nums):
@@ -52,13 +50,13 @@ export function buildTrace(nums) {
   const snap = (index, x) => ({ index, x, pos, neg, best })
   const frames = [{ phase: 'start', activeLine: L('best = 0'), pythonLine: P('best = 0'), snapshot: snap(null, null), message: 'Nothing is read yet. pos is the longest subarray ending here with a positive product, and neg the longest with a negative product. Both start at 0.' }]
   nums.forEach((x, index) => {
-    frames.push({ phase: 'element', activeLine: L('for each index'), pythonLine: P('for index, x'), snapshot: snap(index, x), message: `Read ${x} at index ${index}.` })
+    frames.push({ phase: 'element', activeLine: L('for (let i = 0'), pythonLine: P('for index, x'), snapshot: snap(index, x), message: `Read ${x} at index ${index}.` })
     const prevPos = pos
     const prevNeg = neg
     if (x === 0) {
       pos = 0
       neg = 0
-      frames.push({ phase: 'zero', activeLine: L('if x == 0'), pythonLine: P('if x == 0'), snapshot: snap(index, x), message: `${x} is zero, so every subarray through it has product 0. Both lengths reset.` })
+      frames.push({ phase: 'zero', activeLine: L('if (x === 0)'), pythonLine: P('if x == 0'), snapshot: snap(index, x), message: `${x} is zero, so every subarray through it has product 0. Both lengths reset.` })
     } else if (x > 0) {
       pos = prevPos + 1
       neg = prevNeg > 0 ? prevNeg + 1 : 0
@@ -66,11 +64,11 @@ export function buildTrace(nums) {
     } else {
       pos = prevNeg > 0 ? prevNeg + 1 : 0
       neg = prevPos + 1
-      frames.push({ phase: 'extend', activeLine: L('else:'), pythonLine: P('else:'), snapshot: snap(index, x), message: `${x} is negative, so the signs flip. The old negative run (${prevNeg}) becomes positive: pos = ${pos}. neg = ${neg}, starting from the old positive run.` })
+      frames.push({ phase: 'extend', activeLine: L('else {'), pythonLine: P('else:'), snapshot: snap(index, x), message: `${x} is negative, so the signs flip. The old negative run (${prevNeg}) becomes positive: pos = ${pos}. neg = ${neg}, starting from the old positive run.` })
     }
     const before = best
     best = Math.max(best, pos)
-    frames.push({ phase: 'extend', activeLine: L('best = max'), pythonLine: P('best = max'), snapshot: snap(index, x), message: `Keep the larger of ${before} and pos = ${pos}: best is ${best}.` })
+    frames.push({ phase: 'extend', activeLine: L('best = Math.max'), pythonLine: P('best = max'), snapshot: snap(index, x), message: `Keep the larger of ${before} and pos = ${pos}: best is ${best}.` })
   })
   frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: P('return best'), snapshot: snap(null, null), message: `Return ${best}, the longest subarray with a positive product.` })
   return { input: nums, result: best, frames }

@@ -16,17 +16,18 @@ export function parseInput(text) {
   return { nums, target }
 }
 
-export const code = `count = 0
-prefix = 0
-seen = {0}
-for value in nums:
-    prefix += value
-    if prefix - target is in seen:
-        count += 1
-        seen = {prefix}
-    else:
-        seen.add(prefix)
-return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function maxNonOverlapping(nums, target) {",
+  "  let count = 0, prefix = 0",
+  "  let seen = new Set([0])",
+  "  for (const value of nums) {",
+  "    prefix += value",
+  "    if (seen.has(prefix - target)) {",
+  "      count += 1",
+  "      seen = new Set([prefix])",
+  "    } else seen.add(prefix) }",
+  "  return count }",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def max_non_overlapping(nums, target):
     count = 0
@@ -49,7 +50,7 @@ export function buildTrace({ nums, target }) {
   let count = 0, prefix = 0
   let seen = new Set([0])
   const snap = extra => ({ prefix, count, seen: [...seen].sort((a, b) => a - b), ...extra })
-  frames.push({ phase: 'start', activeLine: L('seen = {0}'), pythonLine: P('seen = {0}'), snapshot: snap({ index: -1 }),
+  frames.push({ phase: 'start', activeLine: L('seen = new Set([0])'), pythonLine: P('seen = {0}'), snapshot: snap({ index: -1 }),
     message: `Target ${target}. Before any number, the prefix sum is 0 and 0 is the only remembered prefix.` })
   nums.forEach((value, i) => {
     prefix += value
@@ -57,14 +58,14 @@ export function buildTrace({ nums, target }) {
       message: `Number ${value} at index ${i} makes the prefix sum ${prefix}.` })
     const need = prefix - target
     if (seen.has(need)) {
-      frames.push({ phase: 'match', activeLine: L('if prefix - target'), pythonLine: P('if prefix - target'), snapshot: snap({ index: i, need, matched: true }),
+      frames.push({ phase: 'match', activeLine: L('seen.has(prefix - target)'), pythonLine: P('if prefix - target'), snapshot: snap({ index: i, need, matched: true }),
         message: `Prefix ${prefix} minus target ${target} is ${need}, and ${need} is remembered. The values after that prefix up to index ${i} sum to ${target}.` })
       count += 1
       seen = new Set([prefix])
       frames.push({ phase: 'cut', activeLine: L('count += 1'), pythonLine: P('count += 1'), snapshot: snap({ index: i, need, matched: true }),
         message: `Take this subarray: count ${count}. Only prefix ${prefix} is remembered, so the next subarray starts after index ${i} and cannot overlap.` })
     } else {
-      frames.push({ phase: 'match', activeLine: L('if prefix - target'), pythonLine: P('if prefix - target'), snapshot: snap({ index: i, need, matched: false }),
+      frames.push({ phase: 'match', activeLine: L('seen.has(prefix - target)'), pythonLine: P('if prefix - target'), snapshot: snap({ index: i, need, matched: false }),
         message: `Prefix ${prefix} minus target is ${need}, which is not remembered. No subarray ends at index ${i}.` })
       seen.add(prefix)
       frames.push({ phase: 'remember', activeLine: L('seen.add(prefix)'), pythonLine: P('seen.add(prefix)'), snapshot: snap({ index: i, need, matched: false }),

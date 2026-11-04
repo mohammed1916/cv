@@ -1,11 +1,35 @@
-const codeLines = `set count to 0
-for each node v: parent[v] = v and parity[v] = 0
-for each edge (u, v, w) in order
-  find the root and parity of u and of v
-  if the roots differ then join them with parity so that u xor v = w, count += 1
-  else if parity[u] xor parity[v] equals w then count += 1
-  otherwise skip the edge
-return count`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
+const codeLines = `function countAdded(n, edges) {
+  // set count to 0
+  let count = 0
+  // for each node v: parent[v] = v and parity[v] = 0
+  const parent = Array.from({ length: n }, (_, v) => v)
+  const parity = Array(n).fill(0)
+  const find = x => {
+    if (parent[x] === x) return [x, 0]
+    const [root, p] = find(parent[x])
+    parity[x] ^= p
+    parent[x] = root
+    return [root, parity[x]]
+  }
+  // for each edge (u, v, w) in order
+  for (const [u, v, w] of edges) {
+    // find the root and parity of u and of v
+    const [ru, pu] = find(u)
+    const [rv, pv] = find(v)
+    if (ru !== rv) {
+      // if the roots differ, join them with parity so that u xor v = w
+      parent[ru] = rv
+      parity[ru] = pu ^ pv ^ w
+      count += 1
+    } else if ((pu ^ pv) === w) {
+      // if the roots match, the cycle is even exactly when the parities agree
+      count += 1
+    }
+    // otherwise skip the edge
+  }
+  // return count
+  return count
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => codeLines.findIndex(c => c.text.includes(s)) + 1
 const pythonLines = `def count_added(n, edges):
     parent = list(range(n))

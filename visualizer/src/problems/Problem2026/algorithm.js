@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough. The sample tables are invented for this visualization.
 export const sql = `WITH rated AS (
   SELECT problem_id, likes * 100.0 / (likes + dislikes) AS like_pct
   FROM Problems

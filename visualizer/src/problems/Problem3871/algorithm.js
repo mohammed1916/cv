@@ -1,11 +1,20 @@
-export const code = [
-  'commas starts at zero',
-  'group starts at 1000',
-  'while group is at most n',
-  'add n minus group plus one commas',
-  'group grows by a factor of 1000',
-  'return commas',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function countCommasII(n) {
+  // BigInt keeps the counts exact for n up to 10^15 and beyond
+  const big = BigInt(n)
+  // commas starts at zero
+  let commas = 0n
+  // group starts at 1000, the first size that gets a comma
+  let group = 1000n
+  // while group is at most n
+  while (group <= big) {
+    // add n minus group plus one commas, one for each number from group to n
+    commas += big - group + 1n
+    // group grows by a factor of 1000
+    group *= 1000n
+  }
+  // return commas
+  return commas
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = key => code.findIndex(c => c.text.includes(key)) + 1
 const PY = key => python.split('\n').findIndex(line => line.includes(key)) + 1
 

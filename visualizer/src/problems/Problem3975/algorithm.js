@@ -37,19 +37,31 @@ export function buildTrace(input) {
   return { input, result: answer, frames }
 }
 
-export const code = `remove the free window from the merged occupied intervals
-  let sorted be the occupied intervals sorted by start
-  let merged be an empty list
-  for each interval [s, e] in sorted
-    if merged is not empty and s is at most the last end plus 1 then
-      extend the last merged end to the larger end
-    else
-      append [s, e] to merged
-  let answer be an empty list
-  for each merged interval [s, e]
-    if s is before freeStart then append [s, min of e and freeStart minus 1]
-    if e is after freeEnd then append [max of s and freeEnd plus 1, e]
-  return answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function filterOccupiedIntervals(occupiedIntervals, freeStart, freeEnd) {
+  // let sorted be the occupied intervals sorted by start
+  const sorted = occupiedIntervals.map(iv => [...iv]).sort((a, b) => a[0] - b[0] || a[1] - b[1])
+  // let merged be an empty list
+  const merged = []
+  for (const [s, e] of sorted) {
+    // if merged is not empty and s is at most the last end plus 1 then they touch or overlap
+    if (merged.length && s <= merged[merged.length - 1][1] + 1) {
+      // extend the last merged end to the larger end
+      merged[merged.length - 1][1] = Math.max(merged[merged.length - 1][1], e)
+    } else {
+      merged.push([s, e])
+    }
+  }
+  // let answer be an empty list
+  const answer = []
+  for (const [s, e] of merged) {
+    // if s is before freeStart then keep the part up to freeStart minus 1
+    if (s < freeStart) answer.push([s, Math.min(e, freeStart - 1)])
+    // if e is after freeEnd then keep the part from freeEnd plus 1 onward
+    if (e > freeEnd) answer.push([Math.max(s, freeEnd + 1), e])
+  }
+  // return answer
+  return answer
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def filter_occupied_intervals(occupiedIntervals, freeStart, freeEnd):

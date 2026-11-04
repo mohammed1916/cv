@@ -7,18 +7,27 @@ const PHASES = [
 
 export const phases = PHASES
 
-const CODE_LINES = [
-  'total sum of interaction cost over the groups',
-  'root the tree at node 0 and count each group in the whole tree',
-  'order the nodes so every child comes before its parent',
-  'for each node v in that order',
-  '  add the node own group to its subtree counts',
-  '  if v has a parent',
-  '    for each group g with a = count of g in subtree of v',
-  '      add a times (total of g minus a) to the answer',
-  '    add the subtree counts of v into the parent',
-  'return the answer',
-]
+const CODE_LINES = `function interactionCost(groups, edges) {
+  const n = groups.length, adj = Array.from({ length: n }, () => [])
+  for (const [u, v] of edges) { adj[u].push(v); adj[v].push(u) } // root the tree at node 0 and count each group in the whole tree
+  const total = new Map()
+  for (const g of groups) total.set(g, (total.get(g) || 0) + 1)
+  const parent = Array(n).fill(-1), seen = Array(n).fill(false), order = [], stack = [0]
+  seen[0] = true
+  while (stack.length) { // order the nodes so every child comes before its parent
+    const v = stack.pop(); order.push(v)
+    for (const w of adj[v]) if (!seen[w]) { seen[w] = true; parent[w] = v; stack.push(w) }
+  }
+  const sub = Array.from({ length: n }, () => new Map())
+  let answer = 0
+  for (const v of order.reverse()) { // for each node v in that order
+    sub[v].set(groups[v], (sub[v].get(groups[v]) || 0) + 1) // add the node own group to its subtree counts
+    if (parent[v] < 0) continue
+    for (const [g, a] of sub[v]) answer += a * (total.get(g) - a) // for each group g with a = count of g in subtree of v, add a times (total of g minus a) to the answer
+    for (const [g, a] of sub[v]) sub[parent[v]].set(g, (sub[parent[v]].get(g) || 0) + a)
+  }
+  return answer // return the answer
+}`.split('\n')
 
 export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }))
 

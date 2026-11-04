@@ -19,7 +19,7 @@ const definition = {
   python,
   inputLabel: "Target amount n (e.g. 10)",
   url: "https://leetcode.com/problems/the-number-of-ways-to-make-the-sum/",
-  complexity: "O(n) time and O(n) space for amount n: one pass per unlimited coin type, then three lookups for the 4-coins. The visualization accepts amounts from 0 to 200; the official bounds are not verified here.",
+  complexity: "O(n) time and O(n) space for amount n: one pass per unlimited coin type, then three lookups for the 4-coins. The visualization accepts amounts from 0 to 200; the bounds shown are this visualization's own limits.",
   examples: [
     { label: "Mixed sum", input: "10" },
     { label: "Single big coin", input: "6" },

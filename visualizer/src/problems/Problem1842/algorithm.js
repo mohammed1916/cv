@@ -1,22 +1,24 @@
-// LeetCode 1842 (draft): Next Palindrome Using Same Digits.
+// LeetCode 1842: Next Palindrome Using Same Digits.
 // Input: a palindromic digit string s (visualization cap: 10 digits). Return the smallest larger palindrome made by
 // rearranging exactly the digits of s, or "" when none exists. Length and digit multiplicities are kept.
 // A palindrome is fixed by its first half (plus the middle digit when the length is odd), so the next palindrome comes
 // from the next permutation of the first half.
 
-const CODE_TEXT = `FUNCTION nextPalindrome(s)
-    n ← length of s, half ← first floor(n / 2) digits of s
-    middle ← the middle digit when n is odd, otherwise empty
-    i ← last index of half minus 1
-    WHILE i is at least 0 AND half[i] is at least half[i + 1]
-        i ← i minus 1
-    IF i is less than 0, RETURN empty string
-    j ← last index of half
-    WHILE half[j] is at most half[i]
-        j ← j minus 1
-    swap half[i] and half[j]
-    reverse the part of half after index i
-    RETURN half + middle + reverse of half`
+const CODE_TEXT = `export function nextPalindrome(s) {
+  const n = s.length
+  const half = s.slice(0, Math.floor(n / 2)).split('')
+  const middle = n % 2 ? s[Math.floor(n / 2)] : ''
+  let i = half.length - 2
+  while (i >= 0 && half[i] >= half[i + 1]) i--
+  if (i < 0) return ''
+  let j = half.length - 1
+  while (half[j] <= half[i]) j--
+  ;[half[i], half[j]] = [half[j], half[i]] // swap half[i] and half[j]
+  // reverse the part of half after index i
+  half.splice(i + 1, half.length, ...half.slice(i + 1).reverse())
+  const first = half.join('')
+  return first + middle + first.split('').reverse().join('') // RETURN half + middle + reverse of half
+}`
 
 export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
 
@@ -71,14 +73,14 @@ export function buildTrace(s) {
   const middle = n % 2 ? s[Math.floor(n / 2)] : ''
   const frames = []
   const snap = () => half.slice()
-  frames.push({ pythonLine: P('half = list(s'), phase: 'half', activeLine: L('n ← length of s'), half: snap(), middle, i: null, j: null, message: `First half ${half.join('') || '(empty)'}${middle ? `, middle ${middle}` : ''}.` })
+  frames.push({ pythonLine: P('half = list(s'), phase: 'half', activeLine: L('const n = s.length'), half: snap(), middle, i: null, j: null, message: `First half ${half.join('') || '(empty)'}${middle ? `, middle ${middle}` : ''}.` })
   let i = half.length - 2
   while (i >= 0 && half[i] >= half[i + 1]) i -= 1
   if (i < 0) {
-    frames.push({ pythonLine: P('return ""'), phase: 'done', activeLine: L('RETURN empty string'), half: snap(), middle, i: null, j: null, message: 'The half is in its largest order: no larger palindrome exists.' })
+    frames.push({ pythonLine: P('return ""'), phase: 'done', activeLine: L('if (i < 0)'), half: snap(), middle, i: null, j: null, message: 'The half is in its largest order: no larger palindrome exists.' })
     return { input: s, result: '', frames }
   }
-  frames.push({ pythonLine: P('while i >= 0 and half[i]'), phase: 'pivot', activeLine: L('i ← i minus 1'), half: snap(), middle, i, j: null, message: `Digit ${half[i]} at ${i} is smaller than the digit after it: pivot found.` })
+  frames.push({ pythonLine: P('while i >= 0 and half[i]'), phase: 'pivot', activeLine: L('i--'), half: snap(), middle, i, j: null, message: `Digit ${half[i]} at ${i} is smaller than the digit after it: pivot found.` })
   let j = half.length - 1
   while (half[j] <= half[i]) j -= 1
   ;[half[i], half[j]] = [half[j], half[i]]

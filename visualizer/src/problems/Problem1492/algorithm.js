@@ -39,16 +39,6 @@ export function buildTrace({ n, k }) {
   return { input: { n, k }, result, frames }
 }
 
-const pseudo = [
-  'kth factor(n, k):',
-  '  count = 0',
-  '  for d from 1 to n:',
-  '    if n is divisible by d:',
-  '      count += 1',
-  '      if count == k:',
-  '        return d',
-  '  return -1',
-]
 
 const pythonLines = [
   'def kth_factor(n, k):',
@@ -61,5 +51,14 @@ const pythonLines = [
   '    return -1',
 ]
 
-export const code = pseudo.map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function kthFactor(n, k) {",
+  "  let count = 0",
+  "  for (let d = 1; d <= n; d++) {",
+  "    if (n % d !== 0) continue",
+  "    count += 1",
+  "    if (count === k) {",
+  "      return d }",
+  "  } return -1 }",
+].map((text, index) => ({ line: index + 1, text }))
 export const python = pythonLines.join('\n')

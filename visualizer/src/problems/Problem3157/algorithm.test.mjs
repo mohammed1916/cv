@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { buildTrace, parseInput } from './algorithm.js'
+import { buildTrace, parseInput, code } from './algorithm.js'
 
 const solve = values => buildTrace(values).result
 
@@ -59,7 +59,7 @@ test('3157 random trees match a recursive level-sum oracle', () => {
 test('3157 frames carry real pseudocode and python lines', () => {
   const run = buildTrace([4, 1, 9, -6, 2, null, 3])
   for (const frame of run.frames) {
-    assert.ok(frame.activeLine >= 1 && frame.activeLine <= 12, `activeLine ${frame.activeLine}`)
+    assert.ok(frame.activeLine >= 1 && frame.activeLine <= code.length, `activeLine ${frame.activeLine}`)
     assert.ok(frame.pythonLine >= 1 && frame.pythonLine <= 28, `pythonLine ${frame.pythonLine}`)
   }
   assert.equal(run.frames.at(-1).phase, 'done')

@@ -1,4 +1,4 @@
-// Knowledge-derived teaching model. The SQL, pandas code, sample rows and wording were written for this visualizer.
+// Teaching model. The SQL, pandas code, sample rows and wording were written for this visualizer.
 const SQL = `WITH totals AS (
   SELECT user_id,
     COUNT(*) AS total_events,

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import SqlStageStrip from './SqlStageStrip'
 import { buildTrace, parseInput, code, python, sql, phases } from './algorithm'
 
 const INPUT_LABEL = "Object with users and transactions lists"
@@ -31,6 +32,7 @@ function RowTable({ label, rows }) {
 export default function Problem1555() {
   return <AlgorithmWorkspace definition={definition}
     renderVisual={({ step }) => <>
+      <SqlStageStrip phases={definition.phases} current={step.phase} />
       <RowTable label="Working rows" rows={step.rows} />
       <RowTable label="Output" rows={step.output} />
     </>}

@@ -8,15 +8,17 @@ const PYTHON_LINES = [
   "    return count",
 ];
 
-const CODE = [
-  "FUNCTION countGoodPairs(nums1, nums2, k)",
-  "    count ← 0",
-  "    FOR each x IN nums1",
-  "        FOR each y IN nums2",
-  "            IF x is divisible by y × k",
-  "                count ← count + 1",
-  "    RETURN count",
-];
+const CODE = `function countGoodPairs(nums1, nums2, k) {
+  let count = 0
+  for (const x of nums1) {
+    for (const y of nums2) {
+      if (x % (y * k) === 0) {
+        count++
+      }
+    }
+  }
+  return count
+}`.split('\n');
 
 export const code = CODE.map((text, index) => ({ line: index + 1, text }));
 export const python = PYTHON_LINES.join("\n");
@@ -71,7 +73,7 @@ export function buildTrace(input) {
       }
     }
   }
-  push({ phase: "done", activeLine: 7, pythonLine: 7, message: `Return ${count}.`, result: count });
+  push({ phase: "done", activeLine: 10, pythonLine: 7, message: `Return ${count}.`, result: count });
 
   return { input: { nums1, nums2, k }, result: count, frames };
 }

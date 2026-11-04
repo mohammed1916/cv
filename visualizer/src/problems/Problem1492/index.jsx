@@ -22,7 +22,7 @@ export default function KthFactor() {
     return <>
       <div role="img" aria-label="Candidates from 1 to n" style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
         {cells.map(d => <div key={d} data-candidate={d} style={{
-          width: 30, textAlign: 'center', fontFamily: 'monospace', boxSizing: 'border-box', color: '#1c1917',
+          width: 30, textAlign: 'center', fontFamily: 'monospace', boxSizing: 'border-box', color: 'var(--text)',
           border: `${d === candidate ? 2 : 1}px solid ${d === candidate ? 'var(--text)' : 'var(--border)'}`,
           background: factors.includes(d) ? '#bbf7d0' : 'transparent',
         }}>{d}</div>)}

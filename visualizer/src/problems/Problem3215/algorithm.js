@@ -2,16 +2,28 @@
 // The parity of a XOR b XOR c is the XOR of their parities, because popcount(x XOR y) has the parity of popcount(x) + popcount(y).
 // So each array only needs a count of even-parity and odd-parity values, and the triplets combine in O(1) per array.
 
-const CODE_TEXT = [
-  'FUNCTION countEvenTriples(a, b, c)',
-  '    (evenA, oddA) ← count values of a by set-bit parity',
-  '    (evenB, oddB) ← count values of b by set-bit parity',
-  '    (evenC, oddC) ← count values of c by set-bit parity',
-  '    evenPairs ← evenA * evenB + oddA * oddB',
-  '    oddPairs ← evenA * oddB + oddA * evenB',
-  '    RETURN evenPairs * evenC + oddPairs * oddC',
-]
-
+const CODE_TEXT = `function countEvenTriples(a, b, c) {
+  const parity = value => {
+    let ones = 0
+    for (let v = value; v > 0; v &= v - 1) ones++
+    return ones % 2
+  }
+  const counts = values => {
+    let even = 0
+    let odd = 0
+    for (const v of values) {
+      if (parity(v)) odd++
+      else even++
+    }
+    return [even, odd]
+  }
+  const [evenA, oddA] = counts(a)
+  const [evenB, oddB] = counts(b)
+  const [evenC, oddC] = counts(c)
+  const evenPairs = evenA * evenB + oddA * oddB
+  const oddPairs = evenA * oddB + oddA * evenB
+  return evenPairs * evenC + oddPairs * oddC
+}`.split('\n')
 export const code = CODE_TEXT.map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def count_even_triples(a, b, c):
@@ -69,16 +81,16 @@ export function buildTrace({ a, b, c }) {
     tallies[name] = { even, odd: arr.length - even }
     frames.push({ ...base, tallies: { ...tallies }, pairs: null, result: null, phase, activeLine: L(lineText), pythonLine: P(pyText), done: name, message: `${name}: ${even} even-parity and ${arr.length - even} odd-parity value${arr.length - even === 1 ? '' : 's'}.` })
   }
-  frames.push({ ...base, tallies: {}, pairs: null, result: null, phase: 'read', activeLine: L('FUNCTION'), pythonLine: P('def count_even'), done: null, message: `Arrays of ${a.length}, ${b.length} and ${c.length} values.` })
-  tally('a', a, 'tally', '(evenA, oddA)', 'even_a, odd_a = parity')
-  tally('b', b, 'tally', '(evenB, oddB)', 'even_b, odd_b = parity')
-  tally('c', c, 'tally', '(evenC, oddC)', 'even_c, odd_c = parity')
+  frames.push({ ...base, tallies: {}, pairs: null, result: null, phase: 'read', activeLine: L('function countEvenTriples'), pythonLine: P('def count_even'), done: null, message: `Arrays of ${a.length}, ${b.length} and ${c.length} values.` })
+  tally('a', a, 'tally', 'const [evenA, oddA]', 'even_a, odd_a = parity')
+  tally('b', b, 'tally', 'const [evenB, oddB]', 'even_b, odd_b = parity')
+  tally('c', c, 'tally', 'const [evenC, oddC]', 'even_c, odd_c = parity')
   const ea = tallies.a.even, oa = tallies.a.odd, eb = tallies.b.even, ob = tallies.b.odd, ec = tallies.c.even, oc = tallies.c.odd
   const evenPairs = ea * eb + oa * ob
   const oddPairs = ea * ob + oa * eb
-  frames.push({ ...base, tallies: { ...tallies }, pairs: { even: evenPairs, odd: oddPairs }, result: null, phase: 'pairs', activeLine: L('evenPairs ← evenA'), pythonLine: P('even_pairs = even_a'), done: 'pairs', message: `Pairs from a and b: ${evenPairs} with even parity sum, ${oddPairs} with odd.` })
+  frames.push({ ...base, tallies: { ...tallies }, pairs: { even: evenPairs, odd: oddPairs }, result: null, phase: 'pairs', activeLine: L('const evenPairs = evenA'), pythonLine: P('even_pairs = even_a'), done: 'pairs', message: `Pairs from a and b: ${evenPairs} with even parity sum, ${oddPairs} with odd.` })
   const total = evenPairs * ec + oddPairs * oc
-  frames.push({ ...base, tallies: { ...tallies }, pairs: { even: evenPairs, odd: oddPairs }, result: total, phase: 'combine', activeLine: L('RETURN evenPairs'), pythonLine: P('return even_pairs'), done: 'c', message: `Add c: ${evenPairs} * ${ec} + ${oddPairs} * ${oc} = ${total} triplets.` })
-  frames.push({ ...base, tallies: { ...tallies }, pairs: { even: evenPairs, odd: oddPairs }, result: total, phase: 'done', activeLine: L('RETURN evenPairs'), pythonLine: P('return even_pairs'), done: 'done', message: `${total} triplet${total === 1 ? '' : 's'} have an even XOR set-bit count.` })
+  frames.push({ ...base, tallies: { ...tallies }, pairs: { even: evenPairs, odd: oddPairs }, result: total, phase: 'combine', activeLine: L('return evenPairs * evenC'), pythonLine: P('return even_pairs'), done: 'c', message: `Add c: ${evenPairs} * ${ec} + ${oddPairs} * ${oc} = ${total} triplets.` })
+  frames.push({ ...base, tallies: { ...tallies }, pairs: { even: evenPairs, odd: oddPairs }, result: total, phase: 'done', activeLine: L('return evenPairs * evenC'), pythonLine: P('return even_pairs'), done: 'done', message: `${total} triplet${total === 1 ? '' : 's'} have an even XOR set-bit count.` })
   return { input: { a, b, c }, result: total, frames }
 }

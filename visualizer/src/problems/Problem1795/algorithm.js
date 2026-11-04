@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample rows are invented for this visualization.
+// SQL walkthrough. The sample rows are invented for this visualization.
 export const phases = [
   { id: 'load', label: 'Load', description: 'Read the wide product rows.' },
   { id: 'store', label: 'Unpivot', description: 'Take one store column at a time and keep its non-NULL prices.' },

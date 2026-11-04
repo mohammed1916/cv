@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { phases, parseInput, buildTrace, code, python, pythonLineMap } from './algorithm'
 
 const definition = {
@@ -25,6 +26,13 @@ function SplitScene({ run, step }) {
   return <>
     <IndexedSequence label="Binary string" length={input.length} valueAt={i => input[i]} active={snap.current}
       roleAt={i => (snap.current < 0 ? '' : i <= snap.current ? 'left' : 'right')} />
+    <RecordStateTable label="Scores for each split" columns={['split after', 'zeros left', 'ones right', 'score']}
+      activeRow={snap.current}
+      rows={input.slice(0, -1).map((_, i) => {
+        const zl = input.slice(0, i + 1).split('').filter(c => c === '0').length
+        const or = input.slice(i + 1).split('').filter(c => c === '1').length
+        return { 'split after': `position ${i}`, 'zeros left': zl, 'ones right': or, score: zl + or }
+      }).slice(0, Math.max(0, snap.current + 1))} />
     <p>Left zeros: {snap.zerosLeft} · right ones: {snap.onesRight} · best: {snap.best}{snap.score !== null ? ` · this split: ${snap.score}` : ''}</p>
   </>
 }

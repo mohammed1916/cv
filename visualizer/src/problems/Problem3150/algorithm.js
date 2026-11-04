@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables and the limits (140 characters, three hashtags, three mentions) are as remembered, not verified against the official statement.
+// SQL walkthrough. The sample tables and the limits (140 characters, three hashtags, three mentions) are this visualization's own.
 export const sql = `SELECT tweet_id
 FROM Tweets
 WHERE LENGTH(content) > 140

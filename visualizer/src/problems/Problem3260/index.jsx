@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
 import RecurrenceGrid from "../../components/shared/RecurrenceGrid";
+import IndexedSequence from "../../components/shared/IndexedSequence";
 import { code, python, parseInput, buildTrace } from "./algorithm";
 
 const definition = {
@@ -36,6 +37,10 @@ export default function LargestPalindromeVisualizer() {
         const columnLabels = Array.from({ length: step.k }, (_, c) => `rem ${c}`)
         return (
           <div>
+            <IndexedSequence label="Digit positions, outside in (each pair is filled together)" length={step.n}
+              valueAt={i => { const p = Math.min(i, step.n - 1 - i); return p < step.digits.length ? step.digits[p] : "?" }}
+              active={step.pos >= 0 ? step.pos : -1}
+              roleAt={i => (i === step.pos ? "l" : i === step.n - 1 - step.pos ? "r" : "")} />
             <RecurrenceGrid label={`Reachable remainders for positions ${step.pos >= 0 ? `from ${step.pos}` : ""}`}
               rowLabels={rowLabels} columnLabels={columnLabels}
               row={Math.max(0, step.pos)} column={step.need ?? 0}

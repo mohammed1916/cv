@@ -19,7 +19,7 @@ const definition = {
   python,
   inputLabel: 'Cities n and queries (JSON, e.g. {"n": 4, "queries": [[0,3],[0,2]]})',
   url: "https://leetcode.com/problems/shortest-distance-after-road-addition-queries-ii/",
-  complexity: "This reference recomputes distances from v onward for each query: O(n * q) time and O(n + q) space. The official limits are larger, so this is not the optimized solution. The visualization accepts n up to 12 and 12 queries.",
+  complexity: "This reference recomputes distances from v onward for each query: O(n * q) time and O(n + q) space. The limits are larger, so this is not the optimized solution. The visualization accepts n up to 12 and 12 queries.",
   examples: [
     { label: "Four cities (from search summary)", input: '{"n": 4, "queries": [[0,3],[0,2]]}' },
     { label: "Five cities (illustrative)", input: '{"n": 5, "queries": [[0,2],[1,4],[2,4]]}' },

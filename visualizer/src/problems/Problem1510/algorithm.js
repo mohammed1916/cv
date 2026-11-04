@@ -15,15 +15,17 @@ export function parseInput(text) {
   return n
 }
 
-export const code = `first player wins with n stones (n):
-  win[0] = false
-  for stones from 1 to n:
-    win[stones] = false
-    for each k with k * k <= stones:
-      if win[stones - k * k] is false:
-        win[stones] = true
-        stop checking squares
-  return win[n]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function firstPlayerWins(n) {",
+  "  const win = [false]",
+  "  for (let stones = 1; stones <= n; stones++) {",
+  "    win[stones] = false",
+  "    for (let k = 1; k * k <= stones; k++) {",
+  "      if (!win[stones - k * k]) {",
+  "        win[stones] = true; break }",
+  "    }",
+  "  } return win[n] }",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def winner_square_game(n):
     win = [False] * (n + 1)
@@ -38,9 +40,9 @@ export const python = `def winner_square_game(n):
 `
 
 const SPOT = {
-  setup: ['win[0] = false', 'win = [False]'],
-  pos: ['for stones from 1 to n', 'for stones in range(1, n + 1)'],
-  move: ['if win[stones - k * k] is false', 'if not win[stones - k * k]'],
+  setup: ['const win = [false]', 'win = [False]'],
+  pos: ['for (let stones = 1', 'for stones in range(1, n + 1)'],
+  move: ['if (!win[stones - k * k])', 'if not win[stones - k * k]'],
   win: ['win[stones] = true', 'win[stones] = True'],
   lose: ['win[stones] = false', 'while k * k <= stones'],
   done: ['return win[n]', 'return win[n]'],

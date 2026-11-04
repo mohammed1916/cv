@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough. The sample tables are invented for this visualization.
 export const sql = `WITH directed AS (
   SELECT user1_id AS user_id, user2_id AS friend_id FROM Friendship
   UNION

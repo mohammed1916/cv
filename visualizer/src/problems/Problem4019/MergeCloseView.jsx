@@ -18,7 +18,7 @@ export default function MergeCloseView({ run, step }) {
           return (
             <li key={`${index}-${ch}`} className={cls} aria-label={`${ch} at index ${index}`}>
               <span className="mc-char">{ch}</span>
-              <span className="mc-index">{index}</span>
+              <span className="mc-index">{index}{index === i ? ' · l' : index === j ? ' · r' : ''}</span>
             </li>
           );
         })}

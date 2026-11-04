@@ -30,14 +30,6 @@ export function buildTrace({ salary }) {
   return { input: { salary }, result, frames }
 }
 
-const pseudo = [
-  'average excluding extremes(salary):',
-  '  lowest = highest = salary[0]',
-  '  total = 0',
-  '  for each amount s in salary:',
-  '    total += s; lowest = min(lowest, s); highest = max(highest, s)',
-  '  return (total - lowest - highest) / (count - 2)',
-]
 
 const pythonLines = [
   'def average(salary):',
@@ -48,5 +40,12 @@ const pythonLines = [
   '    return (total - lowest - highest) / (len(salary) - 2)',
 ]
 
-export const code = pseudo.map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function averageExcludingExtremes(salary) {",
+  "  let lowest = salary[0], highest = salary[0]",
+  "  let total = 0",
+  "  for (const s of salary) {",
+  "    total += s; lowest = Math.min(lowest, s); highest = Math.max(highest, s) }",
+  "  return (total - lowest - highest) / (salary.length - 2) }",
+].map((text, index) => ({ line: index + 1, text }))
 export const python = pythonLines.join('\n')

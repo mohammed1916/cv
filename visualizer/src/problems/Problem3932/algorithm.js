@@ -31,16 +31,29 @@ export function buildTrace(input) {
   return { input, result: count, frames }
 }
 
-export const code = `count perfect k-th powers in the range
-  if k is 1 then
-    return r minus l plus 1
-  let count be 0
-  let x be 0
-  while x to the power k is at most r
-    if x to the power k is at least l then
-      add 1 to count
-    add 1 to x
-  return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function countKthRoots(l, r, k) {
+  // if k is 1 then every integer in range is a power
+  if (k === 1) {
+    // return r minus l plus 1
+    return r - l + 1
+  }
+  // let count be 0
+  let count = 0
+  // let x be 0
+  let x = 0
+  // while x to the power k is at most r
+  while (x ** k <= r) {
+    // if x to the power k is at least l then count it
+    if (x ** k >= l) {
+      // add 1 to count
+      count += 1
+    }
+    // add 1 to x
+    x += 1
+  }
+  // return count
+  return count
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def count_k_th_roots_in_range(l, r, k):

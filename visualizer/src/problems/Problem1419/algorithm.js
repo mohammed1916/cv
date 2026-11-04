@@ -29,8 +29,29 @@ export const python = `def min_number_of_frogs(sound):
     return best if sum(waiting) == 0 else -1`
 
 const pythonLines = python.split('\n')
-export const code = pythonLines.map((text, index) => ({ line: index + 1, text }))
-export const pythonLineMap = Object.fromEntries(pythonLines.map((_, index) => [index + 1, index + 1]))
+const CODE = [
+  'function minNumberOfFrogs(sound) {',
+  '  const stage = { c: 0, r: 1, o: 2, a: 3, k: 4 }; const waiting = [0, 0, 0, 0]',
+  '  let best = 0',
+  '  for (const ch of sound) {',
+  '    const i = stage[ch]',
+  '    if (i === 0) {',
+  '      waiting[0] += 1',
+  '    } else if (i === 4) {',
+  '      if (waiting[3] === 0) return -1',
+  '      waiting[3] -= 1',
+  '    } else {',
+  '      if (waiting[i - 1] === 0) return -1',
+  '      waiting[i - 1] -= 1',
+  '      waiting[i] += 1',
+  '    }',
+  '    best = Math.max(best, waiting.reduce((a, b) => a + b, 0))',
+  '  }',
+  '  return waiting.every(v => v === 0) ? best : -1',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+export const pythonLineMap = { 1: 1, 2: 2, 3: 4, 4: 5, 5: 6, 6: 7, 7: 8, 8: 9, 9: 11, 10: 12, 11: 13, 12: 15, 13: 16, 14: 17, 15: 17, 16: 18, 17: 18, 18: 19, 19: 19 }
 
 const LETTERS = 'croak'
 
@@ -51,39 +72,39 @@ export function buildTrace(sound) {
     snapshot: { current, waiting: [...waiting], frogs: waiting.reduce((a, b) => a + b, 0), best },
   })
 
-  push('scan', 6, `${sound.length} letters to read. Every frog must say c, r, o, a and k in that order.`)
+  push('scan', 5, `${sound.length} letters to read. Every frog must say c, r, o, a and k in that order.`)
   for (let idx = 0; idx < sound.length; idx++) {
     const ch = sound[idx]
     const i = LETTERS.indexOf(ch)
-    push('scan', 6, `Read "${ch}" at position ${idx + 1}.`, idx)
+    push('scan', 5, `Read "${ch}" at position ${idx + 1}.`, idx)
     if (i === 0) {
       waiting[0] += 1
-      push('start', 8, `"c" starts a croak. Frogs waiting after c: ${waiting[0]}.`, idx)
+      push('start', 7, `"c" starts a croak. Frogs waiting after c: ${waiting[0]}.`, idx)
     } else if (i === 4) {
       if (waiting[3] === 0) {
-        push('check', 10, `"k" needs a frog that has said a. None is waiting, so the stream is invalid.`, idx)
-        push('result', 11, 'Return -1.', idx)
+        push('check', 9, `"k" needs a frog that has said a. None is waiting, so the stream is invalid.`, idx)
+        push('result', 9, 'Return -1.', idx)
         return { input: sound, result: -1, frames }
       }
       waiting[3] -= 1
-      push('finish', 12, `"k" finishes one croak. A frog that said a is now free.`, idx)
+      push('finish', 10, `"k" finishes one croak. A frog that said a is now free.`, idx)
     } else {
       if (waiting[i - 1] === 0) {
-        push('check', 14, `"${ch}" needs a frog that has said ${LETTERS[i - 1]}. None is waiting, so the stream is invalid.`, idx)
-        push('result', 15, 'Return -1.', idx)
+        push('check', 12, `"${ch}" needs a frog that has said ${LETTERS[i - 1]}. None is waiting, so the stream is invalid.`, idx)
+        push('result', 12, 'Return -1.', idx)
         return { input: sound, result: -1, frames }
       }
       waiting[i - 1] -= 1
       waiting[i] += 1
-      push('advance', 16, `"${ch}" moves one frog from waiting for ${LETTERS[i]} to waiting for ${LETTERS[i + 1]}.`, idx)
+      push('advance', 13, `"${ch}" moves one frog from waiting for ${LETTERS[i]} to waiting for ${LETTERS[i + 1]}.`, idx)
     }
     best = Math.max(best, waiting.reduce((a, b) => a + b, 0))
-    push('count', 18, `Frogs in the middle of a croak: ${waiting.reduce((a, b) => a + b, 0)}. The largest so far is ${best}.`, idx)
+    push('count', 16, `Frogs in the middle of a croak: ${waiting.reduce((a, b) => a + b, 0)}. The largest so far is ${best}.`, idx)
   }
 
   const complete = waiting.every(v => v === 0)
   const result = complete ? best : -1
-  push('result', 19, complete
+  push('result', 18, complete
     ? `Every croak finished. The minimum number of frogs is ${best}.`
     : 'Some croak never finished, so the stream is invalid. Return -1.')
   return { input: sound, result, frames }

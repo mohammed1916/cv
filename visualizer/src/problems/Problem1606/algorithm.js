@@ -13,14 +13,14 @@ export function buildTrace({ k, arrival, load }) {
   const handled = Array(k).fill(0)
   const free = Array.from({ length: k }, (_, i) => i)
   const busy = []
-  const frames = [{ phase: 'start', pythonLine: 6, activeLine: L('set every server'), request: -1, server: -1, handled: [...handled], message: `${k} servers, all free.` }]
+  const frames = [{ phase: 'start', pythonLine: 6, activeLine: L('const handled'), request: -1, server: -1, handled: [...handled], message: `${k} servers, all free.` }]
   arrival.forEach((t, i) => {
     for (let j = busy.length - 1; j >= 0; j--) {
       if (busy[j].end <= t) { free.push(busy[j].server); busy.splice(j, 1) }
     }
     free.sort((a, b) => a - b)
     if (free.length === 0) {
-      frames.push({ phase: 'drop', pythonLine: 13, activeLine: L('drop the request'), request: i, server: -1, handled: [...handled], message: `Request ${i} at time ${t} finds every server busy and is dropped.` })
+      frames.push({ phase: 'drop', pythonLine: 13, activeLine: L('if (free.length === 0)'), request: i, server: -1, handled: [...handled], message: `Request ${i} at time ${t} finds every server busy and is dropped.` })
       return
     }
     let pos = free.findIndex(s => s >= i % k)
@@ -28,24 +28,37 @@ export function buildTrace({ k, arrival, load }) {
     const server = free.splice(pos, 1)[0]
     handled[server]++
     busy.push({ end: t + load[i], server })
-    frames.push({ phase: 'assign', pythonLine: 19, activeLine: L('take the free server'), request: i, server, handled: [...handled], message: `Request ${i} goes to server ${server}, busy until ${t + load[i]}.` })
+    frames.push({ phase: 'assign', pythonLine: 19, activeLine: L('const server = free.splice'), request: i, server, handled: [...handled], message: `Request ${i} goes to server ${server}, busy until ${t + load[i]}.` })
   })
   const best = Math.max(...handled)
   const result = handled.map((_, s) => s).filter(s => handled[s] === best)
-  frames.push({ phase: 'done', pythonLine: 21, activeLine: L('return every server with the highest'), request: -1, server: -1, handled: [...handled], message: `Busiest servers: [${result.join(', ')}].` })
+  frames.push({ phase: 'done', pythonLine: 21, activeLine: L('return handled.map'), request: -1, server: -1, handled: [...handled], message: `Busiest servers: [${result.join(', ')}].` })
   return { input: { k, arrival, load }, result, frames }
 }
 
-export const code = `servers that handled the most requests, given k servers, arrival times, and loads
-  set every server handled count to 0
-  keep a free list of all servers and a busy list that starts empty
-  for each request i with arrival time t
-    move every server whose request ended by t back into the free list
-    if no server is free then drop the request and continue
-    take the free server with the lowest id at least i mod k, or the lowest free id if none
-    add 1 to that server handled count and mark it busy until t plus load i
-  return every server with the highest handled count`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function busiestServers(k, arrival, load) {',
+  '  const handled = Array(k).fill(0)',
+  '  const free = Array.from({ length: k }, (_, i) => i)',
+  '  const busy = []',
+  '  arrival.forEach((t, i) => {',
+  '    for (let j = busy.length - 1; j >= 0; j--) {',
+  '      if (busy[j].end <= t) { free.push(busy[j].server); busy.splice(j, 1) }',
+  '    }',
+  '    free.sort((a, b) => a - b)',
+  '    if (free.length === 0) return',
+  '    let pos = free.findIndex(s => s >= i % k)',
+  '    if (pos === -1) pos = 0',
+  '    const server = free.splice(pos, 1)[0]',
+  '    handled[server]++',
+  '    busy.push({ end: t + load[i], server })',
+  '  })',
+  '  const best = Math.max(...handled)',
+  '  return handled.map((_, s) => s).filter(s => handled[s] === best)',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(c => c.includes(s)) + 1
 
 export const python = `import bisect
 import heapq

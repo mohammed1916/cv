@@ -1,11 +1,29 @@
-export const code = [
-  'states starts with value 1 counted once',
-  'for each number x in order',
-  'every state keeps its value when x is skipped',
-  'every state also multiplies and divides by x',
-  'reduce each fraction and add counts of equal values',
-  'return the count stored at k',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function countSequencesToK(nums, k) {
+  // states starts with value 1 counted once, stored as reduced fractions
+  let states = new Map([['1/1', { p: 1, q: 1, count: 1 }]])
+  const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b))
+  const add = (next, p, q, count) => {
+    const g = gcd(p, q)
+    const key = String(p / g) + '/' + String(q / g)
+    const current = next.get(key)
+    next.set(key, { p: p / g, q: q / g, count: (current ? current.count : 0) + count })
+  }
+  for (const x of nums) {
+    // for each number x in order, every state moves to three possible values
+    const next = new Map()
+    for (const { p, q, count } of states.values()) {
+      // every state keeps its value when x is skipped
+      add(next, p, q, count)
+      // every state also multiplies and divides by x
+      add(next, p * x, q, count)
+      add(next, p, q * x, count)
+    }
+    states = next
+  }
+  // return the count stored at k
+  const answer = states.get(String(k) + '/1')
+  return answer ? answer.count : 0
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = key => code.findIndex(c => c.text.includes(key)) + 1
 const PY = key => python.split('\n').findIndex(line => line.includes(key)) + 1
 

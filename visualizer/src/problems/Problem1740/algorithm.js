@@ -2,17 +2,22 @@
 // Input: { root: level-order list (null = missing child), p, q }. Values are unique and both are in the tree.
 // Distance (in edges) = depth(p) + depth(q) - 2 * depth(lowest common ancestor).
 
-const CODE_TEXT = `FUNCTION findDistance(root, p, q)
-    depth ← empty map, parent ← empty map
-    stack ← [root with depth 0]
-    WHILE stack is not empty
-        pop (node, d) and record depth d for node
-        FOR each present child of node
-            record parent of the child as node, push child with depth d plus 1
-    ancestors ← every node on the path from p up to the root
-    x ← q
-    WHILE x is not in ancestors, move x up to its parent
-    RETURN depth of p plus depth of q minus 2 times depth of x`
+const CODE_TEXT = `export function findDistance(root, p, q) {
+  const depth = new Map(), parent = new Map()
+  const stack = [[root, 0]]
+  while (stack.length) {
+    const [node, d] = stack.pop() // pop (node, d) and record depth d for node
+    depth.set(node, d)
+    for (const child of [node.left, node.right]) {
+      if (child) { parent.set(child, node); stack.push([child, d + 1]) }
+    }
+  }
+  const ancestors = new Set() // ancestors = every node on the path from p up to the root
+  for (let x = p; x; x = parent.get(x)) ancestors.add(x)
+  let x = q
+  while (!ancestors.has(x)) x = parent.get(x) // WHILE x is not in ancestors, move x up to its parent
+  return depth.get(p) + depth.get(q) - 2 * depth.get(x) // RETURN depth of p plus depth of q minus 2 times depth of x
+}`
 
 export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
 
@@ -107,7 +112,7 @@ export function buildTrace({ root, p, q }) {
   let x = p
   while (x !== null) {
     ancestors.push(x)
-    frames.push({ pythonLine: P('ancestors.add(x)'), phase: 'mark', activeLine: L('ancestors ← every node on the path from p'), current: x, marked: [...ancestors], climbing: null, depths: { ...depthOf }, message: `Mark ${x} as an ancestor of p.` })
+    frames.push({ pythonLine: P('ancestors.add(x)'), phase: 'mark', activeLine: L('ancestors = every node on the path from p'), current: x, marked: [...ancestors], climbing: null, depths: { ...depthOf }, message: `Mark ${x} as an ancestor of p.` })
     x = parentOf[x]
   }
   let y = q

@@ -8,18 +8,37 @@ const PHASES = [
 
 export const phases = PHASES
 
-const CODE_LINES = [
-  'maximum number of valid split positions after removing at most one element',
-  'best is the score of nums with nothing removed',
-  'for each index r',
-  '  b is nums with index r removed',
-  '  score b and keep the larger value in best',
-  'return best',
-  'score(b): if b has fewer than 2 elements return 0',
-  '  pre[i] is the gcd of b[0..i) and suf[i] is the gcd of b[i..m)',
-  '  for each split i from 1 to m minus 1',
-  '    count the split when pre[i] equals suf[i]',
-]
+const CODE_LINES = `function maxValidSplit(nums) {
+  const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b))
+  // score(b): if b has fewer than 2 elements return 0, otherwise count the valid splits
+  const score = b => {
+    const m = b.length
+    if (m < 2) return 0
+    // pre[i] is the gcd of b[0..i) and suf[i] is the gcd of b[i..m)
+    const pre = [0]
+    for (let i = 0; i < m; i++) pre.push(gcd(pre[i], b[i]))
+    const suf = Array(m + 1).fill(0)
+    for (let i = m - 1; i >= 0; i--) suf[i] = gcd(suf[i + 1], b[i])
+    let count = 0
+    // for each split i from 1 to m minus 1
+    for (let i = 1; i < m; i++) {
+      // count the split when pre[i] equals suf[i]
+      if (pre[i] === suf[i]) count++
+    }
+    return count
+  }
+  // best is the score of nums with nothing removed
+  let best = score(nums)
+  // for each index r
+  for (let r = 0; r < nums.length; r++) {
+    // b is nums with index r removed
+    const b = nums.filter((_, index) => index !== r)
+    // score b and keep the larger value in best
+    best = Math.max(best, score(b))
+  }
+  // return best
+  return best
+}`.split('\n')
 
 export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }))
 

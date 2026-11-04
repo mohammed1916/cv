@@ -1,10 +1,21 @@
-export const code = [
-  'best[1] is zero because one is already a single unit',
-  'for x from 2 to n',
-  'try every split x = a + b with a and b positive',
-  'best[x] is the smallest best[a] + best[b] + a times b',
-  'return best[n]',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function minCostToSplitIntoOnes(n) {
+  // best holds the least cost to split each size into ones
+  const best = [0, 0]
+  // best[1] is zero because one is already a single unit
+  for (let x = 2; x <= n; x++) {
+    // for x from 2 to n
+    let cost = Infinity
+    // try every split x = a + b with a and b positive
+    for (let a = 1; a < x; a++) {
+      const b = x - a
+      // best[x] is the smallest best[a] + best[b] + a times b
+      cost = Math.min(cost, best[a] + best[b] + a * b)
+    }
+    best[x] = cost
+  }
+  // return best[n]
+  return best[n]
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = key => code.findIndex(c => c.text.includes(key)) + 1
 const PY = key => python.split('\n').findIndex(line => line.includes(key)) + 1
 

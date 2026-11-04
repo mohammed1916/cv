@@ -11,7 +11,7 @@ export function buildTrace({ arr, target }) {
   const n = arr.length
   const table = [arr.slice()]
   const frames = []
-  const snap = (phase, line, extra, message) => frames.push({ phase, activeLine: L(line), table: table.map(row => row.slice()), best, message, ...extra })
+  const snap = (phase, line, extra, message) => frames.push({ phase, activeLine: L(LINE_TEXT[line] ?? line), table: table.map(row => row.slice()), best, message, ...extra })
   let best = Infinity
   snap('build', 'set n to the length', { pythonLine: 3 }, `Level 0 is the array itself. Each higher level stores the AND of two overlapping blocks of twice the length.`)
   for (let j = 1; (1 << j) <= n; j++) {
@@ -60,26 +60,42 @@ export function buildTrace({ arr, target }) {
   return { input: { arr, target }, result: best, frames }
 }
 
-export const code = `closest AND of a subarray to target:
-  set n to the length of arr
-  table level 0 is arr
-  for level j from 1 while 2^j is at most n:
-    for each start i where i + 2^j - 1 is at most n - 1:
-      set table[j][i] to table[j-1][i] AND table[j-1][i + 2^(j-1)]
-  set best to infinity
-  for each left index l from 0 to n - 1:
-    binary search for the smallest r from l to n - 1 where range(l, r) is at most target
-    if there is no such r then
-      update best with |range(l, n - 1) - target|
-    otherwise
-      update best with |range(l, r) - target|
-      if r is above l then update best with |range(l, r - 1) - target|
-  return best
-
-range(l, r):
-  k is the largest power with 2^k at most r - l + 1
-  return table[k][l] AND table[k][r - 2^k + 1]`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function closestSubarrayAnd(arr, target) {',
+  '  const n = arr.length',
+  '  const table = [arr.slice()]',
+  '  for (let j = 1; (1 << j) <= n; j++) {',
+  '    const half = 1 << (j - 1), prev = table[j - 1]',
+  '    table.push(Array.from({ length: n - (1 << j) + 1 }, (_, i) => prev[i] & prev[i + half]))',
+  '  }',
+  '  const query = (l, r) => {',
+  '    const k = Math.floor(Math.log2(r - l + 1))',
+  '    return table[k][l] & table[k][r - (1 << k) + 1]',
+  '  }',
+  '  let best = Infinity',
+  '  for (let l = 0; l < n; l++) {',
+  '    let lo = l, hi = n - 1, first = -1',
+  '    while (lo <= hi) {',
+  '      const mid = (lo + hi) >> 1',
+  '      if (query(l, mid) <= target) { first = mid; hi = mid - 1 } else lo = mid + 1',
+  '    }',
+  '    if (first === -1) best = Math.min(best, Math.abs(query(l, n - 1) - target))',
+  '    else {',
+  '      best = Math.min(best, Math.abs(query(l, first) - target))',
+  '      if (first > l) best = Math.min(best, Math.abs(query(l, first - 1) - target))',
+  '    }',
+  '  }',
+  '  return best',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(c => c.includes(s)) + 1
+const LINE_TEXT = {
+  'set n to the length': 'const n', 'for level j from 1': 'for (let j = 1', 'set best to infinity': 'let best',
+  'for each left index l': 'for (let l = 0', 'binary search for the smallest r': 'while (lo <= hi)',
+  'if there is no such r': 'if (first === -1)', 'update best with |range(l, r) - target|': 'best = Math.min(best, Math.abs(query(l, first) - target))',
+  'if r is above l': 'if (first > l)', 'return best': 'return best',
+}
 
 export const python = `def closest_to_target(arr, target):
     n = len(arr)

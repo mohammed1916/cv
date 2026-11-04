@@ -6,12 +6,13 @@ export const phases = [
 ]
 
 const CODE = [
-  'sort by one bits(values):',
-  '  ones = empty map',
-  '  for each v in values:',
-  '    ones[v] = count the 1 bits in v',
-  '  sort values by (ones[v], v)',
-  '  return values',
+  'function sortByOneBits(values) {',
+  '  const ones = new Map()',
+  '  for (const v of values) {',
+  '    ones.set(v, countOneBits(v))',
+  '  }',
+  '  return [...values].sort((a, b) => ones.get(a) - ones.get(b) || a - b)',
+  '}',
 ]
 const PYTHON = `def sort_by_one_bits(values):
     ones = {v: bin(v).count('1') for v in values}
@@ -43,7 +44,7 @@ export function buildTrace(values) {
   const snap = (extra = {}) => ({ values, counted: [...ones.entries()], ordered: null, ...extra })
 
   frames.push({
-    phase: 'count', activeLine: L('ones = empty map'), pythonLine: P('ones = {v'),
+    phase: 'count', activeLine: L('const ones = new Map'), pythonLine: P('ones = {v'),
     message: `Start with ${values.length} values. The bit count decides the first sort key, so count the one bits of each value.`,
     snapshot: snap(),
   })
@@ -51,19 +52,19 @@ export function buildTrace(values) {
     const k = oneBits(v)
     ones.set(v, k)
     frames.push({
-      phase: 'count', activeLine: L('ones[v] = count'), pythonLine: P('bin(v).count'),
+      phase: 'count', activeLine: L('ones.set(v'), pythonLine: P('bin(v).count'),
       message: `${v} is ${v.toString(2)} in binary, with ${k} one bit${k === 1 ? '' : 's'}.`,
       snapshot: snap({ focus: v }),
     })
   }
   const ordered = [...values].sort((a, b) => (ones.get(a) - ones.get(b)) || (a - b))
   frames.push({
-    phase: 'sort', activeLine: L('sort values by'), pythonLine: P('return sorted'),
+    phase: 'sort', activeLine: L('return [...values].sort'), pythonLine: P('return sorted'),
     message: `Sort by bit count, then by value. Values with equal bit counts appear in increasing order.`,
     snapshot: snap({ ordered }),
   })
   frames.push({
-    phase: 'done', activeLine: L('return values'), pythonLine: P('return sorted'),
+    phase: 'done', activeLine: L('return [...values].sort'), pythonLine: P('return sorted'),
     message: `Return ${ordered.join(', ')}.`,
     snapshot: snap({ ordered }),
   })

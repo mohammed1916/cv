@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { buildTrace, parseInput } from './algorithm.js'
+import { buildTrace, parseInput, code } from './algorithm.js'
 
 const solve = nums => buildTrace(nums).result
 
@@ -38,7 +38,7 @@ test('1685 every frame has a message and lines inside the solver', () => {
   const run = buildTrace([1, 4, 6, 9])
   for (const frame of run.frames) {
     assert.ok(frame.message.length > 10)
-    assert.ok(frame.activeLine >= 1 && frame.activeLine <= 8)
+    assert.ok(frame.activeLine >= 1 && frame.activeLine <= code.length)
     assert.ok(frame.pythonLine >= 1 && frame.pythonLine <= 10)
   }
   assert.equal(run.frames.at(-1).phase, 'done')

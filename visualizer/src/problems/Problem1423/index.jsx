@@ -23,10 +23,18 @@ function CardsScene({ run, step }) {
   const { cards } = run.input
   const snap = step.snapshot
   const n = cards.length
-  const role = i => (i < snap.leftCount ? 'left' : i >= n - snap.rightCount ? 'right' : 'unused')
+  const k = run.input.k
+  // The left pointer marks the rightmost card currently taken from the left; the right pointer marks the newest card taken from the right.
+  const role = i => {
+    if (i === snap.added) return 'r'
+    if (i === snap.removed) return 'l'
+    if (i < snap.leftCount || i >= n - snap.rightCount) return 'window'
+    return ''
+  }
   return <>
     <IndexedSequence label="Cards in a row" length={n} valueAt={i => cards[i]} active={snap.added >= 0 ? snap.added : -1}
       roleAt={role} />
+    <p>Cards taken: {k}. The left pointer is on card {snap.removed >= 0 ? snap.removed : k - 1} and the right pointer is on card {snap.added >= 0 ? snap.added : n - 1}.</p>
     <p>Taken from left: {snap.leftCount} · from right: {snap.rightCount} · total: {snap.total} · best: {snap.best}</p>
   </>
 }

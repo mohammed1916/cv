@@ -46,29 +46,29 @@ export function buildTrace({ ops }) {
   const real = () => raw.map(r => Number((r * mul + add) % MOD))
   const snap = (op, arg, message) => ({ op, arg, mul: Number(mul), add: Number(add), stored: raw.map(Number), values: real(), results: [...answers], done: false, message })
 
-  frames.push({ phase: 'start', ...at('seq = empty list', 'MOD = 10**9 + 7'),
+  frames.push({ phase: 'start', ...at('const raw = []', 'MOD = 10**9 + 7'),
     message: 'The sequence is empty, the multiplier is 1 and the offset is 0.', snapshot: snap('start', null, 'Start') })
 
   ops.forEach(([name, value], index) => {
     if (name === 'append') {
       const stored = ((BigInt(value) - add) % MOD + MOD) % MOD * powMod(mul, MOD - 2n) % MOD
       raw.push(stored)
-      frames.push({ phase: 'append', ...at('if name is append', "if name == 'append'"),
+      frames.push({ phase: 'append', ...at("if (name === 'append')", "if name == 'append'"),
         message: `Append ${value}. Stored as ${Number(stored)} so that ${Number(stored)} * ${Number(mul)} + ${Number(add)} gives ${value} modulo the prime.`,
         snapshot: snap(name, value, `Append ${value}`) })
     } else if (name === 'addAll') {
       add = (add + BigInt(value)) % MOD
-      frames.push({ phase: 'addAll', ...at('if name is addAll', "elif name == 'addAll'"),
+      frames.push({ phase: 'addAll', ...at("name === 'addAll')", "elif name == 'addAll'"),
         message: `addAll ${value}: the offset becomes ${Number(add)}. No stored value is touched.`, snapshot: snap(name, value, 'addAll') })
     } else if (name === 'multAll') {
       mul = mul * BigInt(value) % MOD
       add = add * BigInt(value) % MOD
-      frames.push({ phase: 'multAll', ...at('if name is multAll', "elif name == 'multAll'"),
+      frames.push({ phase: 'multAll', ...at("name === 'multAll')", "elif name == 'multAll'"),
         message: `multAll ${value}: the multiplier becomes ${Number(mul)} and the offset ${Number(add)}. Still no stored value is touched.`, snapshot: snap(name, value, 'multAll') })
     } else {
       const answer = value >= raw.length ? -1 : Number((raw[value] * mul + add) % MOD)
       answers.push(answer)
-      frames.push({ phase: 'getIndex', ...at('if name is getIndex', 'answers.append(-1'),
+      frames.push({ phase: 'getIndex', ...at('else answers.push', 'answers.append(-1'),
         message: answer === -1 ? `getIndex ${value}: there is no element at that index, so the answer is -1.` : `getIndex ${value}: stored ${Number(raw[value])} times ${Number(mul)}, plus ${Number(add)}, gives ${answer}.`,
         snapshot: snap(name, value, 'getIndex') })
     }
@@ -79,15 +79,23 @@ export function buildTrace({ ops }) {
   return { input: { ops }, result: answers, frames }
 }
 
-export const code = `fancy sequence (ops):
-  seq = empty list of raw values
-  mul, add = 1, 0
-  for name, x in ops:
-    if name is append: push (x - add) / mul
-    if name is addAll: add = add + x
-    if name is multAll: mul, add = mul * x, add * x
-    if name is getIndex: answer -1 if x >= len(seq), else seq[x] * mul + add
-  return answers`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const CODE = [
+  'function fancySequence(ops) {',
+  '  const MOD = 1000000007n',
+  '  const raw = []',
+  '  let mul = 1n, add = 0n',
+  '  const answers = []',
+  '  const powMod = (base, exp) => { let r = 1n, b = base % MOD, e = exp; while (e > 0n) { if (e & 1n) r = r * b % MOD; b = b * b % MOD; e >>= 1n } return r }',
+  '  for (const [name, value] of ops) {',
+  "    if (name === 'append') raw.push((BigInt(value) - add + MOD) % MOD * powMod(mul, MOD - 2n) % MOD)",
+  "    else if (name === 'addAll') add = (add + BigInt(value)) % MOD",
+  "    else if (name === 'multAll') { mul = mul * BigInt(value) % MOD; add = add * BigInt(value) % MOD }",
+  '    else answers.push(value >= raw.length ? -1 : Number((raw[value] * mul + add) % MOD))',
+  '  }',
+  '  return answers',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def fancy_ops(ops):
     MOD = 10**9 + 7

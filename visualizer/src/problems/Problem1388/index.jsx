@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import RecurrenceGrid from '../../components/shared/RecurrenceGrid'
+import { buildTrace, parseInput, code, python, pythonLineMap, phases } from './algorithm'
 
 const definition = {
   phases, parse: parseInput, build: buildTrace, code, python,
@@ -22,6 +23,12 @@ export default function PizzaWith3nSlices() {
       <IndexedSequence label={`Slices (choose ${run.input.slices.length / 3})`} length={run.input.slices.length}
         valueAt={i => run.input.slices[i]} active={step.snapshot.index === null ? -1 : step.snapshot.index + (pass === 'Without the first slice' ? 1 : 0)}
         roleAt={i => (i === dropped ? 'left out' : '')} />
+      {step.snapshot.table && <RecurrenceGrid label={`${pass} line DP: best total for j slices chosen`}
+        rowLabels={['start', ...(pass === 'Without the last slice' ? run.input.slices.slice(0, -1) : run.input.slices.slice(1)).map((v, i) => `value ${v}`)]}
+        columnLabels={Array.from({ length: run.input.slices.length / 3 + 1 }, (_, j) => `j=${j}`)}
+        row={step.snapshot.index + 1} column={0}
+        valueAt={(r, c) => (step.snapshot.table[r] && step.snapshot.table[r][c] !== undefined && step.snapshot.table[r][c] !== -Infinity ? step.snapshot.table[r][c] : '—')}
+        roleAt={(r, c) => (r === step.snapshot.index + 1 ? 'current' : r === step.snapshot.index && c > 0 ? 'source' : '')} />}
       {step.snapshot.row && <p>{pass}: best totals by number chosen: {step.snapshot.row.map(v => (v === -Infinity ? '—' : v)).join(', ')}</p>}
       {step.snapshot.best !== null && <p>Answer: {step.snapshot.best}</p>}
     </>

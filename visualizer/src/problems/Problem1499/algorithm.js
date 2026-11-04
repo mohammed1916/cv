@@ -13,7 +13,7 @@ export function parseInput(text) {
 export function buildTrace({ points, k }) {
   let best = -Infinity
   const queue = []
-  const frames = [{ phase: 'start', j: null, queue: [], best: null, activeLine: L('set best to negative infinity'), pythonLine: 5, message: 'Keep indices i whose value y minus x is larger than every later candidate.' }]
+  const frames = [{ phase: 'start', j: null, queue: [], best: null, activeLine: L('let best = -Infinity'), pythonLine: 5, message: 'Keep indices i whose value y minus x is larger than every later candidate.' }]
   points.forEach(([xj, yj], j) => {
     while (queue.length && xj - points[queue[0]][0] > k) queue.shift()
     if (queue.length) {
@@ -22,22 +22,27 @@ export function buildTrace({ points, k }) {
     }
     while (queue.length && points[queue[queue.length - 1]][1] - points[queue[queue.length - 1]][0] <= yj - xj) queue.pop()
     queue.push(j)
-    frames.push({ phase: 'point', j, queue: queue.slice(), best, activeLine: L('add j to the back'), pythonLine: 14, message: queue.length > 1 || best > -Infinity ? `Point ${j} pairs with the front of the queue; best so far ${best}.` : `Point ${j} has no partner within ${k} yet.` })
+    frames.push({ phase: 'point', j, queue: queue.slice(), best, activeLine: L('queue.push(j)'), pythonLine: 14, message: queue.length > 1 || best > -Infinity ? `Point ${j} pairs with the front of the queue; best so far ${best}.` : `Point ${j} has no partner within ${k} yet.` })
   })
   frames.push({ phase: 'done', j: null, queue: queue.slice(), best, activeLine: L('return best'), pythonLine: 15, message: `Maximum value: ${best}.` })
   return { input: { points, k }, result: best, frames }
 }
 
-export const code = `maximum of y_i + y_j + |x_i - x_j| over pairs i before j with x_j - x_i at most k
-  set best to negative infinity and queue to an empty deque
-  for each point j from left to right
-    remove from the front of queue every index i with x_j minus x_i more than k
-    if queue is not empty then
-      set best to the larger of best and (y_i - x_i) at the front, plus y_j plus x_j
-    remove from the back of queue every index whose y minus x is at most y_j minus x_j
-    add j to the back of queue
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function findMaxValueOfEquation(points, k) {',
+  '  let best = -Infinity',
+  '  const queue = []',
+  '  points.forEach(([xj, yj], j) => {',
+  '    while (queue.length && xj - points[queue[0]][0] > k) queue.shift()',
+  '    if (queue.length) best = Math.max(best, points[queue[0]][1] - points[queue[0]][0] + yj + xj)',
+  '    while (queue.length && points[queue.at(-1)][1] - points[queue.at(-1)][0] <= yj - xj) queue.pop()',
+  '    queue.push(j)',
+  '  })',
+  '  return best',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(text => text.includes(s)) + 1
 
 export const python = `from collections import deque
 

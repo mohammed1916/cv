@@ -49,24 +49,26 @@ function diameterWithTrace(edges, label, frames, phase, activeLine) {
 
 export function buildTrace({ edges1, edges2 }) {
   const frames = []
-  frames.push({ pythonLine: 28, phase: 'start', activeLine: L('find the diameter d1'), label: 'Start', value: null, message: 'Find each tree’s diameter with two searches for the farthest node.' })
-  const d1 = diameterWithTrace(edges1, 'Tree 1', frames, 'first', L('find the diameter d1'))
-  const d2 = diameterWithTrace(edges2, 'Tree 2', frames, 'second', L('find the diameter d2'))
+  frames.push({ pythonLine: 28, phase: 'start', activeLine: L('const d1 ='), label: 'Start', value: null, message: 'Find each tree’s diameter with two searches for the farthest node.' })
+  const d1 = diameterWithTrace(edges1, 'Tree 1', frames, 'first', L('const d1 ='))
+  const d2 = diameterWithTrace(edges2, 'Tree 2', frames, 'second', L('const d2 ='))
   const radius1 = Math.ceil(d1 / 2), radius2 = Math.ceil(d2 / 2)
-  frames.push({ pythonLine: 30, phase: 'radius', activeLine: L('set radius'), label: `Radii ${radius1} and ${radius2}`, value: null, message: `Radii are ${radius1} and ${radius2}.` })
+  frames.push({ pythonLine: 30, phase: 'radius', activeLine: L('const radius1'), label: `Radii ${radius1} and ${radius2}`, value: null, message: `Radii are ${radius1} and ${radius2}.` })
   const joined = radius1 + radius2 + 1
-  frames.push({ pythonLine: 30, phase: 'join', activeLine: L('set joined'), label: `Joined path ${joined}`, value: joined, message: `Joining centres with one edge gives a path of ${joined}.` })
+  frames.push({ pythonLine: 30, phase: 'join', activeLine: L('const joined'), label: `Joined path ${joined}`, value: joined, message: `Joining centres with one edge gives a path of ${joined}.` })
   const result = Math.max(d1, d2, joined)
-  frames.push({ pythonLine: 31, phase: 'done', activeLine: L('return the largest'), label: `Minimum diameter ${result}`, value: result, message: `Minimum diameter: ${result}.` })
+  frames.push({ pythonLine: 31, phase: 'done', activeLine: L('return Math.max'), label: `Minimum diameter ${result}`, value: result, message: `Minimum diameter: ${result}.` })
   return { input: { edges1, edges2 }, result, frames }
 }
 
-export const code = `minimum diameter after joining one node of each tree with an edge
-  find the diameter d1 of the first tree by two searches for farthest nodes
-  find the diameter d2 of the second tree the same way
-  set radius1 to d1 rounded up over 2, and radius2 to d2 rounded up over 2
-  set joined to radius1 plus radius2 plus 1
-  return the largest of d1, d2 and joined`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minimumDiameterAfterMerge(edges1, edges2) {
+  const d1 = treeDiameter(edges1)
+  const d2 = treeDiameter(edges2)
+  const radius1 = Math.ceil(d1 / 2)
+  const radius2 = Math.ceil(d2 / 2)
+  const joined = radius1 + radius2 + 1
+  return Math.max(d1, d2, joined)
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def min_merged_diameter(edges1, edges2):

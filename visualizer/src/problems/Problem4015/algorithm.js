@@ -54,15 +54,38 @@ export function buildTrace(input) {
   return { input, result: total, frames }
 }
 
-export const code = `weighted sum of a tree(parent, nums)
-  set the depth of the root to 1
-  for each node i do
-    find the depth of node i by walking up to a node with a known depth
-  set height to the largest depth
-  set total to 0
-  for each node i do
-    add nums[i] times (height minus depth[i] plus 1) to total
-  return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function weightedTreeSum(parent, nums) {
+  const n = parent.length
+  // set the depth of the root to 1
+  const depth = Array(n).fill(0)
+  depth[0] = 1
+  // for each node i do
+  for (let i = 0; i < n; i++) {
+    // find the depth of node i by walking up to a node with a known depth
+    const chain = []
+    let v = i
+    while (depth[v] === 0) {
+      chain.push(v)
+      v = parent[v]
+    }
+    let d = depth[v]
+    for (const node of chain.reverse()) {
+      d += 1
+      depth[node] = d
+    }
+  }
+  // set height to the largest depth
+  const height = Math.max(...depth)
+  // set total to 0
+  let total = 0
+  // for each node i do
+  for (let i = 0; i < n; i++) {
+    // add nums[i] times (height minus depth[i] plus 1) to total
+    total += nums[i] * (height - depth[i] + 1)
+  }
+  // return total
+  return total
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def weighted_tree_sum(parent, nums):

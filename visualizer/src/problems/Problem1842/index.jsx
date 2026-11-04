@@ -11,7 +11,7 @@ const definition = {
   python,
   inputLabel: "A palindromic digit string, e.g. 1221",
   url: "https://leetcode.com/problems/next-palindrome-using-same-digits/",
-  complexity: "O(n) time and O(n) space for a digit string of length n. The visualization caps n at 10 digits; the official bounds are not verified in this draft.",
+  complexity: "O(n) time and O(n) space for a digit string of length n. The visualization shows at most 10 digits so each swap and reversal stays visible.",
   examples: [
     { label: "Even length", input: "1221" },
     { label: "Odd length", input: "12321" },

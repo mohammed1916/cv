@@ -13,7 +13,15 @@ export function parseInput(text) {
   return { n: value.n }
 }
 
-const LINE = { start: 1, parity: 2, odd: 3, even: 4, done: 4 }
+const CODE = [
+  'function generateTheString(n) {',
+  '  if (n % 2 === 1) {',
+  "    return 'a'.repeat(n)",
+  '  }',
+  "  return 'a'.repeat(n - 1) + 'b'",
+  '}',
+]
+const LINE = { start: 1, parity: 2, odd: 3, even: 5, done: 5 }
 
 export function buildTrace(input) {
   const { n } = input
@@ -25,7 +33,7 @@ export function buildTrace(input) {
     snapshot: { out, n, rule: null },
   })
   frames.push({
-    phase: 'inspect', activeLine: n % 2 === 1 ? LINE.parity : LINE.even,
+    phase: 'inspect', activeLine: n % 2 === 1 ? LINE.parity : 5,
     message: n % 2 === 1
       ? `${n} is odd, so a single letter repeated ${n} times has an odd count.`
       : `${n} is even, so one letter cannot have an odd count alone. Use ${n - 1} copies of a (odd) and one b (odd).`,
@@ -64,10 +72,9 @@ export function buildTrace(input) {
   return { input, result: out, frames }
 }
 
-export const code = `odd_count_string(n):
-  if n is odd:
-    return 'a' repeated n times           # one letter, odd count
-  return 'a' repeated (n - 1) times + 'b'  # a has n-1 (odd), b has 1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+
+export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 4, 6: 5 }
 
 export const python = `def odd_count_string(n):
     if n % 2 == 1:

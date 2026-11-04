@@ -15,7 +15,7 @@ export function buildTrace({ n, speed, efficiency, k }) {
   const team = []
   let total = 0
   let best = 0
-  const frames = [{ phase: 'start', pythonLine: 8, activeLine: L('set best to 0'), current: -1, team: [], removed: -1, total, best, message: 'Engineers are visited from the highest efficiency down.' }]
+  const frames = [{ phase: 'start', pythonLine: 8, activeLine: L('let best = 0'), current: -1, team: [], removed: -1, total, best, message: 'Engineers are visited from the highest efficiency down.' }]
   for (const i of order) {
     team.push(i)
     total += speed[i]
@@ -28,23 +28,35 @@ export function buildTrace({ n, speed, efficiency, k }) {
       team.splice(at, 1)
     }
     best = Math.max(best, total * efficiency[i])
-    frames.push({ phase: 'consider', pythonLine: removed !== -1 ? 13 : 10, activeLine: L('add the engineer'), current: i, team: [...team], removed, total, best, message: `Engineer ${i} (efficiency ${efficiency[i]}) joins. Team speed sum ${total}, best ${best}.` })
+    frames.push({ phase: 'consider', pythonLine: removed !== -1 ? 13 : 10, activeLine: L('team.push'), current: i, team: [...team], removed, total, best, message: `Engineer ${i} (efficiency ${efficiency[i]}) joins. Team speed sum ${total}, best ${best}.` })
   }
   const result = best % MOD
-  frames.push({ phase: 'done', pythonLine: 15, activeLine: L('return best modulo'), current: -1, team: [...team], removed: -1, total, best, message: `Maximum performance: ${result}.` })
-  return { input: { n, speed, efficiency, k }, result, frames }
+  frames.push({ phase: 'done', pythonLine: 15, activeLine: L('return best % MOD'), current: -1, team: [...team], removed: -1, total, best, message: `Maximum performance: ${result}.` })
+  return { input: { n, speed, efficiency, k }, order, result, frames }
 }
 
-export const code = `maximum performance of a team of at most k engineers, given speed and efficiency
-  sort engineers by efficiency, highest first
-  set best to 0, and set the team total to 0
-  keep a min heap of the speeds of the team
-  for each engineer in that order
-    add the engineer speed to the heap and to the total
-    if the heap holds more than k speeds then remove the smallest speed from the total
-    set best to the larger of best and total times this engineer efficiency
-  return best modulo 1000000007`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function maxPerformance(n, speed, efficiency, k) {',
+  '  const MOD = 1000000007',
+  '  const order = speed.map((_, i) => i).sort((a, b) => efficiency[b] - efficiency[a] || speed[b] - speed[a] || a - b)',
+  '  const team = []',
+  '  let total = 0',
+  '  let best = 0',
+  '  for (const i of order) {',
+  '    team.push(i)',
+  '    total += speed[i]',
+  '    if (team.length > k) {',
+  '      const slowest = team.reduce((lo, j) => (speed[j] < speed[lo] ? j : lo))',
+  '      total -= speed[slowest]',
+  '      team.splice(team.indexOf(slowest), 1)',
+  '    }',
+  '    best = Math.max(best, total * efficiency[i])',
+  '  }',
+  '  return best % MOD',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(text => text.includes(s)) + 1
 
 export const python = `import heapq
 

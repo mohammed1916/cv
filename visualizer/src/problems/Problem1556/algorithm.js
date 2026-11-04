@@ -11,15 +11,16 @@ export function parseInput(text) {
   return Number(t)
 }
 
-export const code = `digits = text of n
-out = ""
-count = 0
-for d in digits, from right to left:
-    out = d + out
-    count += 1
-    if count % 3 == 0 and more digits remain:
-        out = "." + out
-return out`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function thousandSeparator(n) {",
+  "  const digits = String(n)",
+  "  let out = '', count = 0",
+  "  for (let i = digits.length - 1; i >= 0; i--) {",
+  "    out = digits[i] + out",
+  "    count += 1",
+  "    if (count % 3 === 0 && i > 0) out = '.' + out }",
+  "  return out }",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def thousand_separator(n):
     digits = str(n)
@@ -46,11 +47,11 @@ export function buildTrace(n) {
   for (let i = digits.length - 1; i >= 0; i--) {
     out = digits[i] + out
     count += 1
-    frames.push({ phase: 'read', activeLine: L('out = d + out'), pythonLine: P('out = d + out'), snapshot: snap({ index: i }),
+    frames.push({ phase: 'read', activeLine: L('out = digits[i] + out'), pythonLine: P('out = d + out'), snapshot: snap({ index: i }),
       message: `Digit ${digits[i]} goes to the front, giving "${out}".` })
     if (count % 3 === 0 && i > 0) {
       out = '.' + out
-      frames.push({ phase: 'group', activeLine: L('if count % 3'), pythonLine: P('if count % 3'), snapshot: snap({ index: i }),
+      frames.push({ phase: 'group', activeLine: L('if (count % 3 === 0'), pythonLine: P('if count % 3'), snapshot: snap({ index: i }),
         message: `Three digits are complete and more digits remain to the left, so insert a dot: "${out}".` })
     }
   }

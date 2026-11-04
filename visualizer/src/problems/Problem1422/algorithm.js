@@ -18,8 +18,21 @@ export const python = `def max_score(s):
     return best`
 
 const pythonLines = python.split('\n')
-export const code = pythonLines.map((text, index) => ({ line: index + 1, text }))
-export const pythonLineMap = Object.fromEntries(pythonLines.map((_, index) => [index + 1, index + 1]))
+const CODE = [
+  'function maxScore(s) {',
+  "  let zerosLeft = 0",
+  "  let onesRight = [...s].filter(c => c === '1').length",
+  '  let best = 0',
+  '  for (let i = 0; i < s.length - 1; i++) {',
+  "    if (s[i] === '0') zerosLeft++",
+  '    else onesRight--',
+  '    best = Math.max(best, zerosLeft + onesRight)',
+  '  }',
+  '  return best',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+export const pythonLineMap = { 1: 1, 2: 3, 3: 2, 4: 4, 5: 5, 6: 6, 7: 9, 8: 10, 9: 10, 10: 11, 11: 11 }
 
 export function parseInput(text) {
   let value
@@ -40,18 +53,18 @@ export function buildTrace(s) {
     snapshot: { current, zerosLeft, onesRight, best, score, total: onesTotal },
   })
 
-  push('setup', 2, `The string has ${onesTotal} ones. Before any move, the left part is empty and all ones are on the right.`)
+  push('setup', 3, `The string has ${onesTotal} ones. Before any move, the left part is empty and all ones are on the right.`)
   for (let i = 0; i < s.length - 1; i++) {
     if (s[i] === '0') {
       zerosLeft += 1
-      push('move', 7, `Position ${i + 1} is 0. The left part gains a zero: ${zerosLeft} zeros on the left.`, i)
+      push('move', 6, `Position ${i + 1} is 0. The left part gains a zero: ${zerosLeft} zeros on the left.`, i)
     } else {
       onesRight -= 1
-      push('move', 8, `Position ${i + 1} is 1. It leaves the right part, which now has ${onesRight} ones.`, i)
+      push('move', 7, `Position ${i + 1} is 1. It leaves the right part, which now has ${onesRight} ones.`, i)
     }
     const score = zerosLeft + onesRight
     best = Math.max(best, score)
-    push('score', 9, `Split after position ${i + 1}: ${zerosLeft} + ${onesRight} = ${score}. Best so far: ${best}.`, i, score)
+    push('score', 8, `Split after position ${i + 1}: ${zerosLeft} + ${onesRight} = ${score}. Best so far: ${best}.`, i, score)
   }
 
   push('result', 10, `Done: the best split scores ${best}.`, -1, best)

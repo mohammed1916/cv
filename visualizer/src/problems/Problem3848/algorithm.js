@@ -1,10 +1,19 @@
-export const code = [
-  'total starts at zero',
-  'for each digit d of n add the factorial of d',
-  'sort the digits of total and the digits of n',
-  'true when the two sorted digit strings match',
-  'return the answer',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function checkDigitorialPermutation(n) {
+  // total starts at zero
+  let total = 0
+  const digits = String(n)
+  // factorials of the digits 0 to 9
+  const FACT = [1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880]
+  // for each digit d of n add the factorial of d
+  for (const ch of digits) total += FACT[Number(ch)]
+  // sort the digits of total and the digits of n
+  const a = [...String(total)].sort().join('')
+  const b = [...digits].sort().join('')
+  // true when the two sorted digit strings match
+  const same = a === b
+  // return the answer
+  return same
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = key => code.findIndex(c => c.text.includes(key)) + 1
 const PY = key => python.split('\n').findIndex(line => line.includes(key)) + 1
 
@@ -39,10 +48,10 @@ export function buildTrace({ n }) {
 }
 
 export const python = `from math import factorial
-
 def check_digitorial_permutation(n):
     digits = str(n)
     total = 0
     for d in digits:
         total += factorial(int(d))
-    return sorted(str(total)) == sorted(digits)`
+    return sorted(str(total)) == sorted(digits)
+`

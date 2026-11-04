@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, phases, code, python } from './algorithm'
 
 const definition = {
@@ -16,13 +17,15 @@ const definition = {
 export default function SortByOneBits() {
   return <AlgorithmWorkspace definition={definition}
     renderVisual={({ step }) => {
-      const { values, counted, ordered } = step.snapshot
-      const focusIndex = values.indexOf(step.snapshot.focus)
+      const { values, counted, ordered, focus } = step.snapshot
+      const countOf = v => counted.find(([x]) => x === v)?.[1]
       return <>
-        <IndexedSequence label="Input values" length={values.length} valueAt={i => values[i]} active={focusIndex}
-          roleAt={i => (counted.some(([v]) => v === values[i]) ? 'counted' : '')} />
-        <p><strong>Bit counts:</strong> {counted.map(([v, k]) => `${v}→${k}`).join(', ') || 'not counted yet'}</p>
-        {ordered && <p><strong>Sorted:</strong> {ordered.join(', ')}</p>}
+        <IndexedSequence label="Input values" length={values.length} valueAt={i => values[i]} active={values.indexOf(focus)}
+          roleAt={i => (countOf(values[i]) !== undefined ? 'counted' : '')} />
+        <RecordStateTable label="Bit counts" columns={['value', 'binary', 'ones']} activeRow={values.indexOf(focus)}
+          rows={values.map(v => ({ value: v, binary: v.toString(2), ones: countOf(v) ?? '—' }))} />
+        {ordered && <RecordStateTable label="Sorted by ones, then value" columns={['position', 'value', 'ones']}
+          rows={ordered.map((v, i) => ({ position: i, value: v, ones: countOf(v) }))} />}
       </>
     }}
     renderReasoning={({ step }) => <p>{step.message}</p>} />

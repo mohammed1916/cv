@@ -18,7 +18,7 @@ export function buildTrace({ arr }) {
   const step = sorted[1] - sorted[0]
   const snap = (pos, gap, ok) => ({ sorted, pos, step, gap, ok })
   const frames = [{
-    phase: 'start', activeLine: L('sort arr'), pythonLine: P('arr = sorted(arr)'), snapshot: snap(null, null, null),
+    phase: 'start', activeLine: L('arr.sort((a, b) => a - b)'), pythonLine: P('arr = sorted(arr)'), snapshot: snap(null, null, null),
     message: `Values as given: ${arr.join(', ')}. Only their sorted order matters for the gaps.`,
   }, {
     phase: 'sort', activeLine: L('step = arr[1] - arr[0]'), pythonLine: P('step = arr[1] - arr[0]'), snapshot: snap(1, null, null),
@@ -29,7 +29,7 @@ export function buildTrace({ arr }) {
     const gap = sorted[i] - sorted[i - 1]
     const ok = gap === step
     frames.push({
-      phase: 'compare', activeLine: L('if arr[i] - arr[i - 1] != step'), pythonLine: P('if arr[i] - arr[i - 1] != step'), snapshot: snap(i, gap, ok),
+      phase: 'compare', activeLine: L('if (arr[i] - arr[i - 1] !== step)'), pythonLine: P('if arr[i] - arr[i - 1] != step'), snapshot: snap(i, gap, ok),
       message: `Gap between ${sorted[i - 1]} and ${sorted[i]} is ${gap}. ${ok ? `That matches ${step}.` : `That is not ${step}, so the values cannot form a progression.`}`,
     })
     if (!ok) { result = false; break }
@@ -41,12 +41,14 @@ export function buildTrace({ arr }) {
   return { input: { arr }, result, frames }
 }
 
-export const code = `can make progression (arr):
-  sort arr ascending
-  step = arr[1] - arr[0]
-  for i from 2 to length - 1:
-    if arr[i] - arr[i - 1] != step: return false
-  return true`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function canMakeProgression(arr) {",
+  "  arr.sort((a, b) => a - b)",
+  "  const step = arr[1] - arr[0]",
+  "  for (let i = 2; i < arr.length; i++) {",
+  "    if (arr[i] - arr[i - 1] !== step) return false }",
+  "  return true }",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def can_make_progression(arr):

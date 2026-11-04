@@ -16,14 +16,16 @@ export function parseInput(text) {
   return { arr, a, b, c }
 }
 
-export const code = `count good triplets (arr, a, b, c):
-  count = 0
-  for i from 0 to n - 1:
-    for j from i + 1 to n - 1:
-      for k from j + 1 to n - 1:
-        if |arr[i] - arr[j]| <= a and |arr[j] - arr[k]| <= b and |arr[i] - arr[k]| <= c:
-          count = count + 1
-  return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function countGoodTriplets(arr, a, b, c) {",
+  "  let count = 0",
+  "  for (let i = 0; i < arr.length; i++) {",
+  "  for (let j = i + 1; j < arr.length; j++) {",
+  "    for (let k = j + 1; k < arr.length; k++) {",
+  "      if (Math.abs(arr[i] - arr[j]) <= a && Math.abs(arr[j] - arr[k]) <= b && Math.abs(arr[i] - arr[k]) <= c) {",
+  "        count += 1 } } } }",
+  "  return count }",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def count_good_triplets(arr, a, b, c):
     count = 0
@@ -54,10 +56,10 @@ export function buildTrace({ arr, a, b, c }) {
         const ijk = `(${i}, ${j}, ${k}) with values ${arr[i]}, ${arr[j]}, ${arr[k]}`
         if (checks.every(Boolean)) {
           count += 1
-          frames.push({ phase: 'count', ...at('count = count + 1', 'count += 1'), message: `Triple ${ijk}: |${arr[i]} - ${arr[j]}| = ${d1} <= ${a}, |${arr[j]} - ${arr[k]}| = ${d2} <= ${b}, |${arr[i]} - ${arr[k]}| = ${d3} <= ${c}. Good triple; count is ${count}.`, snapshot: snap(i, j, k, checks) })
+          frames.push({ phase: 'count', ...at('count += 1', 'count += 1'), message: `Triple ${ijk}: |${arr[i]} - ${arr[j]}| = ${d1} <= ${a}, |${arr[j]} - ${arr[k]}| = ${d2} <= ${b}, |${arr[i]} - ${arr[k]}| = ${d3} <= ${c}. Good triple; count is ${count}.`, snapshot: snap(i, j, k, checks) })
         } else {
           const failed = [`|${arr[i]} - ${arr[j]}| = ${d1} is over ${a}`, `|${arr[j]} - ${arr[k]}| = ${d2} is over ${b}`, `|${arr[i]} - ${arr[k]}| = ${d3} is over ${c}`].filter((_, idx) => !checks[idx])
-          frames.push({ phase: 'test', ...at('if |arr[i]', 'if abs(arr[i]'), message: `Triple ${ijk}: ${failed.join('; ')}, so it is not good.`, snapshot: snap(i, j, k, checks) })
+          frames.push({ phase: 'test', ...at('if (Math.abs(arr[i]', 'if abs(arr[i]'), message: `Triple ${ijk}: ${failed.join('; ')}, so it is not good.`, snapshot: snap(i, j, k, checks) })
         }
       }
     }

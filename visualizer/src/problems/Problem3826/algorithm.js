@@ -47,14 +47,27 @@ export function solve(input) {
   return buildTrace(input).result
 }
 
-export const code = `minimum score when splitting nums into exactly k contiguous blocks
-  prefix sums give the sum of any block in constant time
-  dp[j][i] is the best score for the first i numbers in j blocks
-  set up the table with dp[0][0] equal to 0
-  for each block count j and each end i
-    try every last block that starts after some position p
-    dp[j][i] = min of dp[j - 1][p] plus the block cost
-  return dp[k][n]`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
+export const code = `function minimumPartitionScore(nums, k) {
+  const n = nums.length
+  // prefix sums give the sum of any block in constant time
+  const prefix = [0]
+  for (const v of nums) prefix.push(prefix[prefix.length - 1] + v)
+  const cost = s => (s * (s + 1)) / 2
+  // dp[j][i] is the best score for the first i numbers in j blocks
+  const dp = Array.from({ length: k + 1 }, () => Array(n + 1).fill(Infinity))
+  // set up the table with dp[0][0] equal to 0
+  dp[0][0] = 0
+  for (let j = 1; j <= k; j++) {
+    for (let i = j; i <= n; i++) {
+      // try every last block that starts after some position p
+      for (let p = j - 1; p < i; p++) {
+        dp[j][i] = Math.min(dp[j][i], dp[j - 1][p] + cost(prefix[i] - prefix[p]))
+      }
+    }
+  }
+  // return dp[k][n]
+  return dp[k][n]
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def minimum_partition_score(nums, k):
     n = len(nums)

@@ -73,13 +73,32 @@ function codeMarker(name) {
   return { addOrder: 'records the order', modifyOrder: 'changes the price', cancelOrder: 'marks the order inactive', getOrdersAtPrice: 'collects the active' }[name]
 }
 
-export const code = `run the order operations in order
-  keep every order by id with its side, price and whether it is active
-  addOrder records the order as active
-  modifyOrder changes the price of an active order
-  cancelOrder marks the order inactive
-  getOrdersAtPrice collects the active orders with that side and price
-  return the list of answers`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
+export const code = `function orderManagementSystem(ops) {
+  // run the order operations in order, keeping every order by id
+  const orders = new Map()
+  const results = []
+  for (const [name, ...args] of ops) {
+    if (name === 'addOrder') {
+      const [id, side, price] = args
+      // records the order as active
+      orders.set(id, { side, price, active: true })
+    } else if (name === 'modifyOrder') {
+      const [id, newPrice] = args
+      // changes the price of an active order
+      orders.get(id).price = newPrice
+    } else if (name === 'cancelOrder') {
+      const [id] = args
+      // marks the order inactive instead of deleting it
+      orders.get(id).active = false
+    } else {
+      const [side, price] = args
+      // collects the active orders with that side and price
+      results.push([...orders].filter(([, o]) => o.active && o.side === side && o.price === price).map(([id]) => id))
+    }
+  }
+  // return the list of answers
+  return results
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `class OrderManagementSystem:
     def __init__(self):

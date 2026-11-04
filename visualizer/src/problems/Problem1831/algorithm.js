@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough. The sample tables are invented for this visualization.
 export const sql = `WITH daily_max AS (
   SELECT DATE(day) AS calendar_day, MAX(amount) AS top_amount
   FROM Transactions

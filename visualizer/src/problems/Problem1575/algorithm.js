@@ -19,17 +19,17 @@ export function buildTrace(input) {
   const memo = new Map()
   const entries = []
   const snapshot = () => entries.map(e => ({ ...e }))
-  const frames = [{ phase: 'start', pythonLine: 19, activeLine: L('call routes on start'), city: start, fuel, memo: [], message: `Start at city ${start} with ${fuel} fuel.` }]
+  const frames = [{ phase: 'start', pythonLine: 19, activeLine: L('return routes(start'), city: start, fuel, memo: [], message: `Start at city ${start} with ${fuel} fuel.` }]
 
   const routes = (city, left) => {
     const key = `${city}:${left}`
     if (memo.has(key)) {
       const value = memo.get(key)
-      frames.push({ phase: 'reuse', pythonLine: 8, activeLine: L('if the memo already holds'), city, fuel: left, memo: snapshot(), message: `(${city}, ${left}) is already known to be ${value}.` })
+      frames.push({ phase: 'reuse', pythonLine: 8, activeLine: L('if (memo.has(key))'), city, fuel: left, memo: snapshot(), message: `(${city}, ${left}) is already known to be ${value}.` })
       return value
     }
     let total = city === finish ? 1 : 0
-    frames.push({ phase: 'visit', pythonLine: 9, activeLine: L('set total to 1'), city, fuel: left, memo: snapshot(), message: `Count routes from city ${city} with ${left} fuel. The route stopping here counts ${total ? 'once' : 'zero times'}.` })
+    frames.push({ phase: 'visit', pythonLine: 9, activeLine: L('let total = city'), city, fuel: left, memo: snapshot(), message: `Count routes from city ${city} with ${left} fuel. The route stopping here counts ${total ? 'once' : 'zero times'}.` })
     for (let next = 0; next < n; next++) {
       if (next === city) continue
       const cost = Math.abs(locations[city] - locations[next])
@@ -38,28 +38,36 @@ export function buildTrace(input) {
     }
     memo.set(key, total)
     entries.push({ city, fuel: left, value: total })
-    frames.push({ phase: 'store', pythonLine: 16, activeLine: L('store total'), city, fuel: left, memo: snapshot(), message: `Store ${total} for (${city}, ${left}).` })
+    frames.push({ phase: 'store', pythonLine: 16, activeLine: L('memo.set(key, total)'), city, fuel: left, memo: snapshot(), message: `Store ${total} for (${city}, ${left}).` })
     return total
   }
 
   const result = routes(start, fuel)
-  frames.push({ phase: 'done', pythonLine: 19, activeLine: L('return the result'), city: null, fuel: null, memo: snapshot(), message: `Routes from ${start} to ${finish}: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 19, activeLine: L('return routes(start'), city: null, fuel: null, memo: snapshot(), message: `Routes from ${start} to ${finish}: ${result}.` })
   return { input, result, frames }
 }
 
-export const code = `count the routes from start to finish with the fuel
-  call routes on start with all of the fuel
-  return the result
-
-routes for a city and the fuel left
-  if the memo already holds (city, left) then return that value
-  set total to 1 if city is finish, otherwise 0
-  for each other city next
-    set cost to the distance between the two locations
-    if cost is at most left then
-      add routes for next with left minus cost to total, modulo 1000000007
-  store total for (city, left) and return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function countRoutes(locations, start, finish, fuel) {',
+  '  const MOD = 1000000007',
+  '  const memo = new Map()',
+  '  const routes = (city, left) => {',
+  '    const key = `${city}:${left}`',
+  '    if (memo.has(key)) return memo.get(key)',
+  '    let total = city === finish ? 1 : 0',
+  '    for (let next = 0; next < locations.length; next++) {',
+  '      if (next === city) continue',
+  '      const cost = Math.abs(locations[city] - locations[next])',
+  '      if (cost <= left) total = (total + routes(next, left - cost)) % MOD',
+  '    }',
+  '    memo.set(key, total)',
+  '    return total',
+  '  }',
+  '  return routes(start, fuel)',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(c => c.includes(s)) + 1
 
 export const python = `def count_routes(locations, start, finish, fuel):
     MOD = 1000000007

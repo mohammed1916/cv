@@ -36,12 +36,19 @@ export function solve(input) {
   return buildTrace(input).result
 }
 
-export const code = `count groups of words that share their first k letters and have at least two words
-  set up an empty map from prefix to word count
-  for each word
-    if the word is shorter than k then skip it
-    count the word under its prefix of length k
-  return the number of prefixes whose count is at least two`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
+export const code = `function prefixGroups(words, k) {
+  // set up an empty map from prefix to word count
+  const buckets = new Map()
+  for (const word of words) {
+    // if the word is shorter than k then skip it
+    if (word.length < k) continue
+    // count the word under its prefix of length k
+    const key = word.slice(0, k)
+    buckets.set(key, (buckets.get(key) || 0) + 1)
+  }
+  // return the number of prefixes whose count is at least two
+  return [...buckets.values()].filter(count => count >= 2).length
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def prefix_groups(words, k):
     buckets = {}

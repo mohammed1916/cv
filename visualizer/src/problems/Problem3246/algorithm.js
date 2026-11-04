@@ -1,4 +1,4 @@
-// Knowledge-derived teaching model written for this visualizer. Not the official statement text. Exact official requirements are unverified.
+// Teaching model written for this visualizer, with invented sample rows.
 export const phases = [
   { id: 'load', label: 'Load', description: 'Read the team statistics table.' },
   { id: 'points', label: 'Points', description: 'Score each team: 3 per win plus 1 per draw.' },

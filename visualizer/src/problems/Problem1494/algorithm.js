@@ -28,19 +28,33 @@ export function parseInput(text) {
   return { n, relations, k }
 }
 
-export const code = `minimum semesters(n, relations, k)
-  set need[i] to the courses that must be taken before course i
-  set frontier to {nothing taken}, and semester to 0
-  while the frontier does not contain every course
-    add 1 to semester
-    set next to nothing
-    for each taken set in frontier
-      find the courses whose prerequisites are all taken and that are not taken yet
-      for each way to take the smaller of k and that many of them
-        add the new taken set to next if it was not seen before
-    replace frontier with next
-  return semester`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function minNumberOfSemesters(n, relations, k) {',
+  '  const need = Array(n).fill(0)',
+  '  for (const [a, b] of relations) need[b - 1] |= 1 << (a - 1)',
+  '  const full = (1 << n) - 1',
+  '  const combinations = (xs, r) => (r === 0 ? [[]] : xs.flatMap((x, i) => combinations(xs.slice(i + 1), r - 1).map(c => [x, ...c])))',
+  '  let frontier = [0]',
+  '  const seen = new Set([0])',
+  '  let semester = 0',
+  '  while (!frontier.includes(full)) {',
+  '    semester++',
+  '    const next = []',
+  '    for (const taken of frontier) {',
+  '      const ready = Array.from({ length: n }, (_, i) => i).filter(i => !(taken & (1 << i)) && (need[i] & taken) === need[i])',
+  '      const take = Math.min(k, ready.length)',
+  '      for (const picks of combinations(ready, take)) {',
+  '        const fresh = picks.reduce((mask, i) => mask | (1 << i), taken)',
+  '        if (!seen.has(fresh)) { seen.add(fresh); next.push(fresh) }',
+  '      }',
+  '    }',
+  '    frontier = next',
+  '  }',
+  '  return semester',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(text => text.includes(s)) + 1
 
 // A taken set is a bitmask. Taking more courses never hurts, so each semester takes as many courses as allowed.
 export function buildTrace({ n, relations, k }) {
@@ -60,10 +74,10 @@ export function buildTrace({ n, relations, k }) {
   let frontier = [0]
   const seen = new Set([0])
   let semester = 0
-  const frames = [{ phase: 'start', mask: 0, roles: rolesFor(0), semester: 0, activeLine: L('set need[i]'), pythonLine: 8, message: 'No course is taken yet. Each semester takes up to k courses whose prerequisites are done.' }]
+  const frames = [{ phase: 'start', mask: 0, roles: rolesFor(0), semester: 0, activeLine: L('const need'), pythonLine: 8, message: 'No course is taken yet. Each semester takes up to k courses whose prerequisites are done.' }]
   while (!frontier.includes(full)) {
     semester++
-    frames.push({ phase: 'semester', mask: null, roles: null, semester, activeLine: L('add 1 to semester'), pythonLine: 12, message: `Semester ${semester}: ${frontier.length} distinct set(s) of finished courses to extend.` })
+    frames.push({ phase: 'semester', mask: null, roles: null, semester, activeLine: L('semester++'), pythonLine: 12, message: `Semester ${semester}: ${frontier.length} distinct set(s) of finished courses to extend.` })
     const next = []
     for (const taken of frontier) {
       const ready = Array.from({ length: n }, (_, i) => i).filter(i => !(taken & (1 << i)) && (need[i] & taken) === need[i])
@@ -72,7 +86,7 @@ export function buildTrace({ n, relations, k }) {
         const fresh = picks.reduce((mask, i) => mask | (1 << i), taken)
         if (!seen.has(fresh)) { seen.add(fresh); next.push(fresh) }
       }
-      frames.push({ phase: 'expand', mask: taken, roles: rolesFor(taken), semester, activeLine: L('find the courses whose'), pythonLine: 17, message: `Finished set ${taken.toString(2).padStart(n, '0')}: ${ready.length} course(s) are ready, so ${take} are taken this semester.` })
+      frames.push({ phase: 'expand', mask: taken, roles: rolesFor(taken), semester, activeLine: L('const ready'), pythonLine: 17, message: `Finished set ${taken.toString(2).padStart(n, '0')}: ${ready.length} course(s) are ready, so ${take} are taken this semester.` })
     }
     frontier = next
   }

@@ -1,3 +1,15 @@
+const CODE = [
+  "function numTimesAligned(flips) {",
+  "  let count = 0",
+  "  let highest = 0",
+  "  for (let i = 1; i <= flips.length; i++) {",
+  "    highest = Math.max(highest, flips[i - 1])",
+  "    if (highest === i) count += 1",
+  "  }",
+  "  return count",
+  "}",
+];
+
 const PYTHON_LINES = [
   "def numTimesAligned(flips):",
   "    count = 0",
@@ -11,15 +23,9 @@ const PYTHON_LINES = [
 
 export const python = PYTHON_LINES.join("\n");
 
-export const code = [
-  { line: 1, text: "count = 0; highest = 0" },
-  { line: 2, text: "for step i from 1 to n:" },
-  { line: 3, text: "highest = max(highest, flips[i])" },
-  { line: 4, text: "if highest == i: count += 1 (the first i bits are exactly ones)" },
-  { line: 5, text: "return count" },
-];
+export const code = CODE.map((text, index) => ({ line: index + 1, text }));
 
-export const pythonLineMap = { 1: 2, 2: 4, 3: 5, 4: 6, 5: 8 };
+export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 8 };
 
 export const examples = [
   { label: "[2,1,3,5,4]", input: '{"flips":[2,1,3,5,4]}' },
@@ -55,16 +61,16 @@ export function buildTrace(input) {
   const bits = Array(n).fill(0);
   let count = 0;
   let highest = 0;
-  frames.push({ phase: "scan", activeLine: 1, message: "Start with count 0 and highest 0.", i: 0, highest, count, bits: [...bits], aligned: false });
+  frames.push({ phase: "scan", activeLine: 2, pythonLine: 2, message: "Start with count 0 and highest 0.", i: 0, highest, count, bits: [...bits], aligned: false });
   for (let i = 1; i <= n; i++) {
     bits[flips[i - 1] - 1] = 1;
-    frames.push({ phase: "scan", activeLine: 2, message: `Step ${i}: flip position ${flips[i - 1]}.`, i, highest, count, bits: [...bits], aligned: false });
+    frames.push({ phase: "scan", activeLine: 4, pythonLine: 4, message: `Step ${i}: flip position ${flips[i - 1]}.`, i, highest, count, bits: [...bits], aligned: false });
     highest = Math.max(highest, flips[i - 1]);
-    frames.push({ phase: "scan", activeLine: 3, message: `Highest flipped position is ${highest}.`, i, highest, count, bits: [...bits], aligned: false });
+    frames.push({ phase: "scan", activeLine: 5, pythonLine: 5, message: `Highest flipped position is ${highest}.`, i, highest, count, bits: [...bits], aligned: false });
     const aligned = highest === i;
     if (aligned) count += 1;
-    frames.push({ phase: "scan", activeLine: 4, message: aligned ? `Highest ${highest} equals step ${i}, so the string is prefix-aligned; count is ${count}.` : `Highest ${highest} is not ${i}; not aligned.`, i, highest, count, bits: [...bits], aligned });
+    frames.push({ phase: "scan", activeLine: 6, pythonLine: 6, message: aligned ? `Highest ${highest} equals step ${i}, so the string is prefix-aligned; count is ${count}.` : `Highest ${highest} is not ${i}; not aligned.`, i, highest, count, bits: [...bits], aligned });
   }
-  frames.push({ phase: "done", activeLine: 5, message: `Prefix-aligned after ${count} steps.`, i: n, highest, count, bits: [...bits], aligned: false });
+  frames.push({ phase: "done", activeLine: 8, pythonLine: 8, message: `Prefix-aligned after ${count} steps.`, i: n, highest, count, bits: [...bits], aligned: false });
   return { input, result: count, frames };
 }

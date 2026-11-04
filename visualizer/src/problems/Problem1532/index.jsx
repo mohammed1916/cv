@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import SqlStageStrip from './SqlStageStrip'
 import { buildTrace, parseInput, code, sql, python } from './algorithm'
 
 const phases = [
@@ -32,10 +33,11 @@ const definition = {
 
 export default function MostRecentThreeOrders() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+      <SqlStageStrip phases={definition.phases} current={step.phase} />
     <p>{step.message}</p>
     <TableView caption="Current rows" columns={step.columns} rows={step.rows} />
   </>} renderReasoning={() => <>
-    <p>Knowledge-derived teaching version with invented sample tables.</p>
+    <p>A teaching version with invented sample tables.</p>
     <p>Each customer is ranked on its own, newest first, and only the top three rows stay. The final list is ordered by customer name, customer id, then date with the newest first.</p>
   </>} />
 }

@@ -23,7 +23,7 @@ export default function MaxValueOfEquation() {
     const pts = run.input.points
     return <>
       <IndexedSequence label="Points (x, y) with deque marked" length={pts.length} active={step.j ?? -1}
-        valueAt={i => `(${pts[i][0]}, ${pts[i][1]})`} roleAt={i => (step.queue.includes(i) ? 'candidate' : '')} />
+        valueAt={i => `(${pts[i][0]}, ${pts[i][1]})`} roleAt={i => (i === step.j ? 'r' : step.queue[0] === i ? 'l' : step.queue.includes(i) ? 'window' : '')} />
       <output aria-label="Deque">{`Candidates (front first): [${step.queue.join(', ')}]`}</output>
       <p>{step.message}</p>
     </>

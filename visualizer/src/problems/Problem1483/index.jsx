@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecurrenceGrid from '../../components/shared/RecurrenceGrid'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -22,7 +22,10 @@ const definition = {
 
 export default function KthAncestor() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="Parent table (up[0])" length={run.input.parent.length} valueAt={i => (step.up ?? run.input.parent)[i]} active={step.node} />
+    <RecurrenceGrid label="Jump tables: up[j][node] is the node 2^j steps above" rowLabels={run.tables.map((_, j) => `2^${j}`)}
+      columnLabels={run.input.parent.map((_, v) => `node ${v}`)} row={Math.max(0, step.jump)} column={Math.max(0, step.node)}
+      valueAt={(r, c) => (run.tables[r][c] === -1 ? '—' : run.tables[r][c])}
+      roleAt={(r, c) => (r === step.jump && c === step.node ? 'current' : r === step.jump ? 'window' : '')} />
     <output aria-label="Jump">{step.jump >= 0 ? `Jump table ${1 << step.jump} step(s)` : 'Parents only'}</output>
   </>} renderReasoning={() => <>
     <p>A jump of 2^j steps composed from two jumps of 2^(j-1) steps, so every table is cheap to build from the one before.</p>

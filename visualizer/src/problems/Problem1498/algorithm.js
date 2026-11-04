@@ -24,14 +24,14 @@ export function buildTrace({ nums, target }) {
   let left = 0, right = n - 1, total = 0
   const snap = (add, sum) => ({ sorted, left, right, sum, add, total })
   const frames = [{
-    phase: 'start', activeLine: L('sort nums ascending'), pythonLine: P('nums.sort()'), snapshot: snap(null, null),
+    phase: 'start', activeLine: L('nums.sort((a, b) => a - b)'), pythonLine: P('nums.sort()'), snapshot: snap(null, null),
     message: `Sorted values: ${sorted.join(', ')}. Target ${target}. Pointers start at the two ends.`,
   }]
   while (left <= right) {
     const sum = sorted[left] + sorted[right]
     if (sum > target) {
       frames.push({
-        phase: 'shrink', activeLine: L('right = right - 1'), pythonLine: P('right -= 1'), snapshot: snap(null, sum),
+        phase: 'shrink', activeLine: L('right -= 1'), pythonLine: P('right -= 1'), snapshot: snap(null, sum),
         message: `${sorted[left]} + ${sorted[right]} = ${sum} is above ${target}. Even the smallest value with the largest one is too much, so ${sorted[right]} is not a maximum. Move the right pointer left.`,
       })
       right -= 1
@@ -39,7 +39,7 @@ export function buildTrace({ nums, target }) {
       const add = power[right - left]
       total = (total + add) % MOD
       frames.push({
-        phase: 'count', activeLine: L('total = total + power'), pythonLine: P('total = (total + power'), snapshot: snap(add, sum),
+        phase: 'count', activeLine: L('total = (total + power'), pythonLine: P('total = (total + power'), snapshot: snap(add, sum),
         message: `${sorted[left]} + ${sorted[right]} = ${sum} fits. Fix ${sorted[left]} as the minimum and ${sorted[right]} as the maximum: the ${right - left - 1 < 0 ? 0 : right - left - 1} values between them can be in or out, which adds 2^${right - left} = ${add}. Total ${total}.`,
       })
       left += 1
@@ -52,17 +52,19 @@ export function buildTrace({ nums, target }) {
   return { input: { nums, target }, result: total, frames }
 }
 
-export const code = `count subsequences (nums, target):
-  sort nums ascending
-  power[i] = 2 to the i, mod M, for each i below n
-  left = 0, right = n - 1, total = 0
-  while left <= right:
-    if nums[left] + nums[right] > target:
-      right = right - 1
-    else:
-      total = total + power[right - left], mod M
-      left = left + 1
-  return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function countSubsequences(nums, target) {",
+  "  nums.sort((a, b) => a - b)",
+  "  const power = [1]; for (let i = 1; i < nums.length; i++) power.push((power[i - 1] * 2) % MOD)",
+  "  let left = 0, right = nums.length - 1, total = 0",
+  "  while (left <= right) {",
+  "    if (nums[left] + nums[right] > target) {",
+  "      right -= 1 } else {",
+  "      total = (total + power[right - left]) % MOD",
+  "      left += 1 }",
+  "  }",
+  "  return total }",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def num_subseq(nums, target):

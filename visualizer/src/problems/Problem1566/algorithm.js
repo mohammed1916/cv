@@ -29,14 +29,14 @@ export function buildTrace({ arr, m, k }) {
   let result = false
   if (!fits) {
     frames.push({
-      phase: 'done', activeLine: L('if m * k > len(arr)'), pythonLine: P('if m * k > len(arr)'),
+      phase: 'done', activeLine: L('if (m * k > arr.length)'), pythonLine: P('if m * k > len(arr)'),
       snapshot: snap(-1, 0, false),
       message: `${m} times ${k} is ${m * k}, which is longer than the array of ${arr.length}, so no block can fit.`,
     })
   } else if (need === 0) {
     result = true
     frames.push({
-      phase: 'found', activeLine: L('if need == 0'), pythonLine: P('if need == 0'),
+      phase: 'found', activeLine: L('if (need === 0)'), pythonLine: P('if need == 0'),
       snapshot: snap(-1, 0, true),
       message: 'k is 1, so any single block of length m already counts.',
     })
@@ -47,35 +47,37 @@ export function buildTrace({ arr, m, k }) {
       if (run >= need) {
         result = true
         frames.push({
-          phase: 'found', activeLine: L('if run >= need'), pythonLine: P('if run >= need'),
+          phase: 'found', activeLine: L('if (run >= need)'), pythonLine: P('if run >= need'),
           snapshot: snap(i, run, true),
           message: `${run} matches in a row reach ${need}, so the block starting at position ${i + 1 - run} repeats ${k} times.`,
         })
         break
       }
       frames.push({
-        phase: 'compare', activeLine: L('run = run + 1'), pythonLine: P('run = run + 1'),
+        phase: 'compare', activeLine: L('run = arr[i] === arr[i + m] ? run + 1'), pythonLine: P('run = run + 1'),
         snapshot: snap(i, run, false),
         message: `arr[${i}] = ${arr[i]} and arr[${i + m}] = ${arr[i + m]} ${run ? 'match' : 'differ'}; the run is ${run} of ${need} needed.`,
       })
     }
   }
   frames.push({
-    phase: 'done', activeLine: L('return false'), pythonLine: python.trimEnd().split('\n').length - 1,
+    phase: 'done', activeLine: L('return false }'), pythonLine: python.trimEnd().split('\n').length - 1,
     snapshot: snap(-1, 0, result), message: `Return ${result ? 'true' : 'false'}.`,
   })
   return { input: { arr, m, k }, result, frames }
 }
 
-export const code = `contains repeated pattern (arr, m, k):
-  if m * k > len(arr): return false
-  need = (k - 1) * m
-  if need == 0: return true
-  run = 0
-  for i from 0 while i + m < len(arr):
-    run = run + 1 if arr[i] == arr[i + m] else 0
-    if run >= need: return true
-  return false`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function containsPattern(arr, m, k) {",
+  "  if (m * k > arr.length) return false",
+  "  const need = (k - 1) * m",
+  "  if (need === 0) return true",
+  "  let run = 0",
+  "  for (let i = 0; i + m < arr.length; i++) {",
+  "    run = arr[i] === arr[i + m] ? run + 1 : 0",
+  "    if (run >= need) return true }",
+  "  return false }",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 

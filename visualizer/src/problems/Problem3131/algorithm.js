@@ -11,17 +11,21 @@ export function buildTrace({ nums1, nums2 }) {
   const frames = []
   const min1 = Math.min(...nums1)
   const min2 = Math.min(...nums2)
-  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('find the smallest value in nums1'), min1, min2, x: null, message: `Smallest value of nums1 is ${min1}; of nums2 is ${min2}.` })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('const min1'), min1, min2, x: null, message: `Smallest value of nums1 is ${min1}; of nums2 is ${min2}.` })
   const x = min2 - min1
-  frames.push({ pythonLine: 2, phase: 'done', activeLine: L('return the second minimum minus the first minimum'), min1, min2, x, message: `Adding ${x} to every value of nums1 gives nums2 as a multiset.` })
+  frames.push({ pythonLine: 4, phase: 'done', activeLine: L('return min2 - min1'), min1, min2, x, message: `Adding ${x} to every value of nums1 gives nums2 as a multiset.` })
   return { input: { nums1, nums2 }, result: x, frames }
 }
 
-export const code = `the integer added to every value of nums1 to make nums2
-  find the smallest value in nums1 and the smallest value in nums2
-  return the second minimum minus the first minimum`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function addedInteger(nums1, nums2) {
+  const min1 = Math.min(...nums1)
+  const min2 = Math.min(...nums2)
+  return min2 - min1
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def added_integer(nums1, nums2):
-    return min(nums2) - min(nums1)
+    min1 = min(nums1)
+    min2 = min(nums2)
+    return min2 - min1
 `

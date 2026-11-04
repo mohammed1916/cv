@@ -13,16 +13,18 @@ export function parseInput(text) {
   return { s }
 }
 
-export const code = `count all-ones substrings (s):
-  total = 0
-  run = 0
-  for each character c in s:
-    if c == '1':
-      run = run + 1
-      total = (total + run) mod 1000000007
-    else:
-      run = 0
-  return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function countOnesSubstrings(s) {",
+  "  let total = 0",
+  "  let run = 0",
+  "  for (const c of s) {",
+  "    if (c === '1') {",
+  "      run += 1",
+  "      total = (total + run) % 1000000007",
+  "    } else {",
+  "      run = 0 }",
+  "  } return total }",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def num_sub(s):
     MOD = 10**9 + 7

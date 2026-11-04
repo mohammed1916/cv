@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables and the score cutoff are invented for this visualization.
+// SQL walkthrough. The sample tables and the score cutoff are invented for this visualization.
 export const sql = `WITH ny AS (
   SELECT COUNT(*) AS strong FROM NewYork WHERE score >= 90
 ),

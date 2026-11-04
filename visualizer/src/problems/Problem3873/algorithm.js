@@ -1,11 +1,30 @@
-export const code = [
-  'parent starts with every x value and y value alone',
-  'for each point join its x value and its y value',
-  'count the points in each group',
-  'if two groups exist then best is the two largest counts plus one',
-  'otherwise best is the largest count plus one',
-  'return best',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function maxActivated(points) {
+  // parent starts with every x value and y value alone, each keyed by its label
+  const parent = new Map()
+  const find = a => {
+    if (!parent.has(a)) parent.set(a, a)
+    while (parent.get(a) !== a) a = parent.get(a)
+    return a
+  }
+  // for each point join its x value and its y value
+  for (const [x, y] of points) {
+    const ra = find('x' + x)
+    const rb = find('y' + y)
+    if (ra !== rb) parent.set(ra, rb)
+  }
+  // count the points in each group, by the root of their x value
+  const counts = new Map()
+  for (const [x] of points) {
+    const root = find('x' + x)
+    counts.set(root, (counts.get(root) || 0) + 1)
+  }
+  const sizes = [...counts.values()].sort((a, b) => b - a)
+  // if two groups exist then best is the two largest counts plus one
+  // otherwise best is the largest count plus one
+  const best = sizes.length >= 2 ? sizes[0] + sizes[1] + 1 : sizes[0] + 1
+  // return best
+  return best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = key => code.findIndex(c => c.text.includes(key)) + 1
 const PY = key => python.split('\n').findIndex(line => line.includes(key)) + 1
 

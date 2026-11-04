@@ -28,16 +28,31 @@ const PY = [
 export const python = PY.join("\n")
 const at = text => PY.findIndex(line => line.includes(text)) + 1
 
-export const code = [
-  { line: 1, text: "start with dp[0] = 0 and every other remainder at infinity" },
-  { line: 2, text: "for each cell not already in an orbit" },
-  { line: 3, text: "collect the mirror orbit of the cell" },
-  { line: 4, text: "count the ones in the orbit" },
-  { line: 5, text: "for each remainder and each choice of value 0 or 1" },
-  { line: 6, text: "record the cost and the new remainder, keeping the minimum" },
-  { line: 7, text: "replace dp with the new table" },
-  { line: 8, text: "return dp[0]" },
-]
+export const code = `function minFlips(grid) {
+  const m = grid.length
+  const n = grid[0].length
+  let dp = [0, Infinity, Infinity, Infinity]
+  const seen = new Set()
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      if (seen.has(i * n + j)) continue
+      const orbit = new Set([[i, j], [i, n - 1 - j], [m - 1 - i, j], [m - 1 - i, n - 1 - j]].map(([r, c]) => r * n + c))
+      orbit.forEach(cell => seen.add(cell))
+      const size = orbit.size
+      const ones = [...orbit].filter(cell => grid[Math.floor(cell / n)][cell % n] === 1).length
+      const next = [Infinity, Infinity, Infinity, Infinity]
+      for (let mod = 0; mod < 4; mod++) {
+        for (let v = 0; v < 2; v++) {
+          const cost = v === 0 ? ones : size - ones
+          const nm = (mod + v * size) % 4
+          next[nm] = Math.min(next[nm], dp[mod] + cost)
+        }
+      }
+      dp = next
+    }
+  }
+  return dp[0]
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const MAX_SIDE = 6
 const INF = Infinity
@@ -76,7 +91,7 @@ export function buildTrace(input) {
   const add = (phase, activeLine, pythonText, message, extra) => frames.push({
     phase, activeLine, pythonLine: at(pythonText), message, grid, m, n, dp: [...dp], ...extra,
   })
-  add("setup", 1, "dp = [0, INF", "Start with remainder 0 at cost 0. Every other remainder is unreachable.", { cells: [], orbitIndex: -1 })
+  add("setup", 4, "dp = [0, INF", "Start with remainder 0 at cost 0. Every other remainder is unreachable.", { cells: [], orbitIndex: -1 })
   for (let i = 0; i < m; i += 1) {
     for (let j = 0; j < n; j += 1) {
       if (seen.has(i * n + j)) continue
@@ -86,8 +101,8 @@ export function buildTrace(input) {
       const cells = unique.map(key => [Math.floor(key / n), key % n])
       const size = cells.length
       const ones = cells.reduce((sum, [r, c]) => sum + grid[r][c], 0)
-      add("orbit", 3, "orbit = {", `Cells (${i},${j}) mirror into ${size} cell(s) that must share one value.`, { cells, orbitIndex: unique[0] })
-      add("count", 4, "ones = sum(", `The orbit holds ${ones} one(s).`, { cells, orbitIndex: unique[0], ones, size })
+      add("orbit", 9, "orbit = {", `Cells (${i},${j}) mirror into ${size} cell(s) that must share one value.`, { cells, orbitIndex: unique[0] })
+      add("count", 12, "ones = sum(", `The orbit holds ${ones} one(s).`, { cells, orbitIndex: unique[0], ones, size })
       const next = [INF, INF, INF, INF]
       for (let mod = 0; mod < 4; mod += 1) {
         if (dp[mod] === INF) continue
@@ -97,11 +112,11 @@ export function buildTrace(input) {
           next[nm] = Math.min(next[nm], dp[mod] + cost)
         }
       }
-      add("combine", 6, "new[nm] = min(", `Combine the orbit choices into the remainder table.`, { cells, orbitIndex: unique[0], ones, size })
+      add("combine", 18, "new[nm] = min(", `Combine the orbit choices into the remainder table.`, { cells, orbitIndex: unique[0], ones, size })
       dp = next
-      add("replace", 7, "dp = new", `dp is now [${dp.map(value => (value === INF ? "inf" : value)).join(", ")}].`, { cells: [], orbitIndex: -1 })
+      add("replace", 21, "dp = new", `dp is now [${dp.map(value => (value === INF ? "inf" : value)).join(", ")}].`, { cells: [], orbitIndex: -1 })
     }
   }
-  add("done", 8, "return dp[0]", `Return dp[0] = ${dp[0]}, the minimum flips.`, { cells: [], orbitIndex: -1 })
+  add("done", 24, "return dp[0]", `Return dp[0] = ${dp[0]}, the minimum flips.`, { cells: [], orbitIndex: -1 })
   return { input: { grid }, result: dp[0], frames }
 }

@@ -8,15 +8,16 @@ const PYTHON_LINES = [
   "    return False",
 ];
 
-const CODE = [
-  "FUNCTION canMakeSquare(grid)",
-  "    FOR each top row r FROM 0 TO 1",
-  "        FOR each left column c FROM 0 TO 1",
-  "            cells ← the four cells of the 2 by 2 square at (r, c)",
-  '            IF count of "B" in cells is not 2',
-  "                RETURN true",
-  "    RETURN false",
-];
+const CODE = `function canMakeSquare(grid) {
+  for (let r = 0; r < 2; r++) {
+    for (let c = 0; c < 2; c++) {
+      const cells = [grid[r][c], grid[r][c + 1], grid[r + 1][c], grid[r + 1][c + 1]]
+      const blues = cells.filter(cell => cell === 'B').length
+      if (blues !== 2) return true
+    }
+  }
+  return false
+}`.split('\n');
 
 export const code = CODE.map((text, index) => ({ line: index + 1, text }));
 export const python = PYTHON_LINES.join("\n");
@@ -67,16 +68,16 @@ export function buildTrace(input) {
       const values = cells.map(i => grid[Math.floor(i / 3)][i % 3]);
       const blackCount = values.filter(v => v === "B").length;
       push({ phase: "scan", activeLine: 3, pythonLine: 3, square: [r, c], cells, message: `Left column c = ${c}; square at (${r}, ${c}).` });
-      push({ phase: "check", activeLine: 4, pythonLine: 4, square: [r, c], cells, message: `Cells ${values.join(", ")} hold ${blackCount} "B".` });
+      push({ phase: "check", activeLine: 5, pythonLine: 4, square: [r, c], cells, message: `Cells ${values.join(", ")} hold ${blackCount} "B".` });
       if (blackCount !== 2) {
         result = true;
-        push({ phase: "done", activeLine: 5, pythonLine: 5, square: [r, c], cells, message: "Changing at most one cell makes this square one color. Return true.", result });
+        push({ phase: "done", activeLine: 6, pythonLine: 5, square: [r, c], cells, message: "Changing at most one cell makes this square one color. Return true.", result });
         break outer;
       }
     }
   }
   if (!result) {
-    push({ phase: "done", activeLine: 6, pythonLine: 6, message: "No square has 1 or 3 blue cells. Return false.", result });
+    push({ phase: "done", activeLine: 9, pythonLine: 6, message: "No square has 1 or 3 blue cells. Return false.", result });
   }
   return { input: { grid }, result, frames };
 }

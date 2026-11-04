@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample transactions are invented for this visualization.
+// SQL walkthrough. The sample transactions are invented for this visualization.
 export const sql = `SELECT account_id, day,
        SUM(CASE WHEN type = 'Deposit' THEN amount ELSE -amount END)
          OVER (PARTITION BY account_id ORDER BY day

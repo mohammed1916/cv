@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough. The sample tables are invented for this visualization.
 export const sql = `WITH visit_stats AS (
   SELECT v.member_id, COUNT(*) AS visits, COUNT(p.visit_id) AS purchases
   FROM Visits v

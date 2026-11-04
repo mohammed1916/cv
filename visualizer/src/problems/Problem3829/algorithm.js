@@ -70,12 +70,29 @@ function codeMarker(name) {
   return { addRider: 'addRider and addDriver', addDriver: 'addRider and addDriver', matchDriverWithRider: 'pairs the front', cancelRider: 'cancelRider removes' }[name]
 }
 
-export const code = `run the ride operations in arrival order
-  keep two queues, one for riders and one for drivers
-  addRider and addDriver join the back of their queue
-  matchDriverWithRider pairs the front of each queue, or answers [-1, -1]
-  cancelRider removes that rider only if the rider is still waiting
-  return the answers`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
+export const code = `function rideSharingSystem(ops) {
+  // run the ride operations in arrival order, with two queues
+  const riders = []
+  const drivers = []
+  const results = []
+  for (const [name, id] of ops) {
+    if (name === 'addRider') {
+      // addRider and addDriver join the back of their queue
+      riders.push(id)
+    } else if (name === 'addDriver') {
+      drivers.push(id)
+    } else if (name === 'matchDriverWithRider') {
+      // pairs the front of each queue, or answers [-1, -1]
+      results.push(drivers.length && riders.length ? [drivers.shift(), riders.shift()] : [-1, -1])
+    } else {
+      // cancelRider removes that rider only if the rider is still waiting
+      const index = riders.indexOf(id)
+      if (index >= 0) riders.splice(index, 1)
+    }
+  }
+  // return the answers
+  return results
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `from collections import deque
 

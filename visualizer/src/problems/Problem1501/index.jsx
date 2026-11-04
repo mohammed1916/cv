@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import SqlStageStrip from './SqlStageStrip'
 import { buildTrace, parseInput, code, sql, python } from './algorithm'
 
 const phases = [
@@ -51,6 +52,7 @@ export default function CountriesToInvest() {
       return false
     }
     return <>
+      <SqlStageStrip phases={definition.phases} current={step.phase} />
       <section aria-label="SQL stage">
         <h3>Stage: {phases.find(p => p.id === step.phase)?.label}</h3>
         <p>{STAGE[step.phase]}</p>

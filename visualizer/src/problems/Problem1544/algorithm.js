@@ -22,13 +22,13 @@ export function buildTrace(s) {
   for (let i = 0; i < s.length; i++) {
     const ch = s[i]
     const top = stack.length ? stack[stack.length - 1] : null
-    frames.push({ phase: 'inspect', activeLine: L('if stack and'), pythonLine: P('if stack and'), snapshot: snap(i, ch), message: top === null ? `Letter ${ch} has an empty stack beneath it.` : `Compare ${ch} with the top ${top}.` })
+    frames.push({ phase: 'inspect', activeLine: L('if (stack.length &&'), pythonLine: P('if stack and'), snapshot: snap(i, ch), message: top === null ? `Letter ${ch} has an empty stack beneath it.` : `Compare ${ch} with the top ${top}.` })
     if (top !== null && opposite(top, ch)) {
       stack.pop()
       frames.push({ phase: 'cancel', activeLine: L('stack.pop()'), pythonLine: P('stack.pop()'), snapshot: snap(i, ch), message: `${top} and ${ch} are the same letter in opposite cases, so both disappear.` })
     } else {
       stack.push(ch)
-      frames.push({ phase: 'push', activeLine: L('stack.append(ch)'), pythonLine: P('stack.append(ch)'), snapshot: snap(i, ch), message: `${ch} cannot cancel, so it stays on the stack.` })
+      frames.push({ phase: 'push', activeLine: L('stack.push(ch)'), pythonLine: P('stack.append(ch)'), snapshot: snap(i, ch), message: `${ch} cannot cancel, so it stays on the stack.` })
     }
   }
   const result = stack.join('')
@@ -36,14 +36,14 @@ export function buildTrace(s) {
   return { input: s, result, frames }
 }
 
-export const code = `make good (s):
-  stack = []
-  for ch in s:
-    if stack and ch is the opposite case of stack top:
-      stack.pop()
-    else:
-      stack.append(ch)
-  return join(stack)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function makeGood(s) {",
+  "  const stack = []",
+  "  for (const ch of s) {",
+  "    if (stack.length && stack[stack.length - 1] === (ch === ch.toUpperCase() ? ch.toLowerCase() : ch.toUpperCase())) stack.pop()",
+  "    else stack.push(ch) }",
+  "  return stack.join('') }",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def make_good(s):

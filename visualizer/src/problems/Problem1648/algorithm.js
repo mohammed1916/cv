@@ -14,28 +14,35 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const counts = [...input.inventory]
   let total = 0
-  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('set total to zero'), counts: [...counts], index: -1, total, message: 'Each sale takes the colour with the most balls left and earns that count.' }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('let total = 0'), counts: [...counts], index: -1, total, message: 'Each sale takes the colour with the most balls left and earns that count.' }]
   for (let sale = 0; sale < input.orders; sale++) {
     let best = 0
     for (let c = 1; c < counts.length; c++) if (counts[c] > counts[best]) best = c
     const value = counts[best]
     total = (total + value) % MOD
     counts[best] -= 1
-    frames.push({ phase: 'sell', pythonLine: 8, activeLine: L('sell one ball'), counts: [...counts], index: best, total, message: `Sale ${sale + 1}: sell a colour ${best} ball for ${value}. Total ${total}.` })
+    frames.push({ phase: 'sell', pythonLine: 8, activeLine: L('counts[best] -= 1'), counts: [...counts], index: best, total, message: `Sale ${sale + 1}: sell a colour ${best} ball for ${value}. Total ${total}.` })
   }
   frames.push({ phase: 'done', pythonLine: 9, activeLine: L('return total'), counts: [...counts], index: -1, total, message: `Maximum value modulo 1e9+7: ${total}.` })
   return { input, result: total, frames }
 }
 
-export const code = `maximum total value of the orders, modulo 1000000007:
-  set total to zero
-  set counts to the number of balls of each colour
-  repeat once for each order
-    find the colour with the most balls left
-    add its count to total, modulo 1000000007
-    sell one ball of that colour by reducing its count by one
-  return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function maxSellValue(inventory, orders) {',
+  '  const MOD = 1000000007',
+  '  const counts = [...inventory]',
+  '  let total = 0',
+  '  for (let sale = 0; sale < orders; sale++) {',
+  '    let best = 0',
+  '    for (let c = 1; c < counts.length; c++) if (counts[c] > counts[best]) best = c',
+  '    total = (total + counts[best]) % MOD',
+  '    counts[best] -= 1',
+  '  }',
+  '  return total',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(c => c.includes(s)) + 1
 
 export const python = `def max_sell_value(inventory, orders):
     MOD = 10 ** 9 + 7

@@ -1,11 +1,18 @@
-export const code = [
-  'commas starts at zero',
-  'group starts at 1000',
-  'while group is at most n',
-  'add n minus group plus one commas',
-  'group grows by a factor of 1000',
-  'return commas',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function countCommas(n) {
+  // commas starts at zero
+  let commas = 0
+  // group starts at 1000, the first size that gets a comma
+  let group = 1000
+  // while group is at most n
+  while (group <= n) {
+    // add n minus group plus one commas, one for each number from group to n
+    commas += n - group + 1
+    // group grows by a factor of 1000
+    group *= 1000
+  }
+  // return commas
+  return commas
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = key => code.findIndex(c => c.text.includes(key)) + 1
 const PY = key => python.split('\n').findIndex(line => line.includes(key)) + 1
 

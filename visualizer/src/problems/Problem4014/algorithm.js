@@ -25,13 +25,21 @@ export function buildTrace(input) {
   return { input, result, frames }
 }
 
-export const code = `minimum total price after applying discounts(prices, discounts)
-  sort prices from largest to smallest
-  sort discounts from largest to smallest
-  set total to 100 times the sum of prices
-  for each position i that both lists have do
-    subtract prices[i] times discounts[i] from total
-  return total divided by 100`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minTotalPrice(prices, discounts) {
+  // sort prices from largest to smallest
+  const p = [...prices].sort((x, y) => y - x)
+  // sort discounts from largest to smallest
+  const d = [...discounts].sort((x, y) => y - x)
+  // set total to 100 times the sum of prices, kept in hundredths so it stays an integer
+  let total = 100 * p.reduce((sum, v) => sum + v, 0)
+  // for each position i that both lists have do
+  for (let i = 0; i < Math.min(p.length, d.length); i++) {
+    // subtract prices[i] times discounts[i] from total
+    total -= p[i] * d[i]
+  }
+  // return total divided by 100
+  return total / 100
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def min_total_price(prices, discounts):

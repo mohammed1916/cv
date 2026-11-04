@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -23,8 +24,14 @@ const ROLE_TEXT = { taken: 'finished', ready: 'ready', waiting: 'waiting' }
 
 export default function ParallelCourses() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="Courses" length={run.n} valueAt={i => `Course ${i + 1}`}
+    <IndexedSequence label="Courses" length={run.input.n} valueAt={i => `Course ${i + 1}`}
       roleAt={i => (step.roles ? ROLE_TEXT[step.roles[i]] : '')} />
+    <RecordStateTable label="Prerequisite map: course -> must finish first" columns={['course', 'prerequisites', 'state']}
+      rows={Array.from({ length: run.input.n }, (_, i) => ({
+        course: i + 1,
+        prerequisites: run.input.relations.filter(([, b]) => b === i + 1).map(([a]) => a).join(', ') || 'none',
+        state: step.roles ? ROLE_TEXT[step.roles[i]] : '—',
+      }))} />
     <output aria-label="Status">{step.message}</output>
   </>} renderReasoning={() => <>
     <p>A set of finished courses is a bitmask. A course is ready when all its prerequisites are inside the mask.</p>

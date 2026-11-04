@@ -1,13 +1,18 @@
-// LeetCode 1692 (draft): Count Ways to Distribute Candies.
+// LeetCode 1692: Count Ways to Distribute Candies.
 // Input: { n, k }: n distinct candies go into k nonempty, unlabeled bags. Count the partitions, modulo 1000000007.
 // Visualization cap: 1 <= k <= n <= 12. The count is the Stirling number of the second kind S(n, k).
 
-const CODE_TEXT = `FUNCTION countWays(n, k)
-    table ← (n + 1) by (k + 1) grid of zeros, table[0][0] ← 1
-    FOR i from 1 to n
-        FOR j from 1 to k
-            table[i][j] ← (j times table[i-1][j] plus table[i-1][j-1]) modulo 1000000007
-    RETURN table[n][k]`
+const CODE_TEXT = `export function countWays(n, k) {
+  const MOD = 1000000007
+  const table = Array.from({ length: n + 1 }, () => Array(k + 1).fill(0))
+  table[0][0] = 1
+  for (let i = 1; i <= n; i++) {
+    for (let j = 1; j <= k; j++) {
+      table[i][j] = (j * table[i - 1][j] + table[i - 1][j - 1]) % MOD
+    }
+  }
+  return table[n][k]
+}`
 
 export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
 
@@ -53,16 +58,16 @@ export function buildTrace({ n, k }) {
   const table = Array.from({ length: n + 1 }, () => Array(k + 1).fill(0))
   table[0][0] = 1
   const frames = []
-  frames.push({ pythonLine: P('table[0][0] = 1'), phase: 'start', activeLine: L('table[0][0] ← 1'), i: 0, j: 0, table: table.map(r => [...r]), message: 'Zero candies and zero bags: one way.' })
+  frames.push({ pythonLine: P('table[0][0] = 1'), phase: 'start', activeLine: L('table[0][0] = 1'), i: 0, j: 0, table: table.map(r => [...r]), message: 'Zero candies and zero bags: one way.' })
   for (let i = 1; i <= n; i++) {
     for (let j = 1; j <= k; j++) {
       const joinExisting = (j * table[i - 1][j]) % MOD
       const openNew = table[i - 1][j - 1] % MOD
       table[i][j] = (joinExisting + openNew) % MOD
-      frames.push({ pythonLine: P('table[i][j] = (j * table[i - 1][j]'), phase: 'cell', activeLine: L('table[i][j] ← (j times table[i-1][j]'), i, j, joinExisting, openNew, table: table.map(r => [...r]), message: `Candy ${i}, ${j} bags: ${j} x ${table[i - 1][j]} (join a bag) + ${table[i - 1][j - 1]} (open bag ${j}) = ${table[i][j]}.` })
+      frames.push({ pythonLine: P('table[i][j] = (j * table[i - 1][j]'), phase: 'cell', activeLine: L('table[i][j] = (j * table[i - 1][j]'), i, j, joinExisting, openNew, table: table.map(r => [...r]), message: `Candy ${i}, ${j} bags: ${j} x ${table[i - 1][j]} (join a bag) + ${table[i - 1][j - 1]} (open bag ${j}) = ${table[i][j]}.` })
     }
   }
   const result = table[n][k]
-  frames.push({ pythonLine: P('return table[n][k]'), phase: 'answer', activeLine: L('RETURN table[n][k]'), i: n, j: k, table: table.map(r => [...r]), message: `${n} candies in ${k} nonempty bags: ${result} ways.` })
+  frames.push({ pythonLine: P('return table[n][k]'), phase: 'answer', activeLine: L('return table[n][k]'), i: n, j: k, table: table.map(r => [...r]), message: `${n} candies in ${k} nonempty bags: ${result} ways.` })
   return { input: { n, k }, result, frames }
 }

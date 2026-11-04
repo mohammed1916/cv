@@ -11,8 +11,8 @@ const definition = {
   url: 'https://leetcode.com/problems/incremental-even-weighted-cycle-queries/',
   complexity: 'Near-linear union-find work per edge with parity labels. The visual caps n at 10 and edges at 14.',
   examples: [
-    { label: 'Example', input: '{"n":3,"edges":[[0,1,0],[1,2,1],[0,2,1]]}' },
-    { label: 'Even triangle', input: '{"n":3,"edges":[[0,1,1],[1,2,0],[0,2,1]]}' },
+    { label: 'Example', input: '{"n":4,"edges":[[0,1,0],[2,1,1],[3,1,0],[0,3,1]]}' },
+    { label: 'Even triangle', input: '{"n":4,"edges":[[1,0,1],[2,1,1],[3,2,0]]}' },
   ],
 }
 

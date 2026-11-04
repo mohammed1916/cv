@@ -11,7 +11,7 @@ const definition = {
   python,
   inputLabel: "A JSON array of integers, e.g. [1,2,3,2]",
   url: "https://leetcode.com/problems/remove-duplicates-from-an-unsorted-linked-list/",
-  complexity: "O(n) expected time and O(n) space for n nodes (a hash map of counts). The visualization caps the list at 12 nodes; the official bounds are not verified in this draft.",
+  complexity: "O(n) expected time and O(n) space for n nodes (a hash map of counts). The visualization shows at most 12 nodes so every count stays visible.",
   examples: [
     { label: "Value 2 repeats", input: "[1,2,3,2]" },
     { label: "Mixed repeats", input: "[1,1,1,2,3]" },

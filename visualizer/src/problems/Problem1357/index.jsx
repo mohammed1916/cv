@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python, pythonLineMap, examples } from './algorithm'
 
 const definition = {
@@ -18,9 +19,17 @@ const definition = {
 export default function ApplyDiscountEveryNOrders() {
   return <AlgorithmWorkspace definition={definition}
     renderVisual={({ run, step }) => <>
-      <IndexedSequence label="bills" length={run.input.orders.length} active={step.k}
+      <IndexedSequence label="Customers in order" length={run.input.orders.length} active={step.k}
         valueAt={i => (step.bills[i] !== undefined ? step.bills[i] : '...')}
         roleAt={i => (i < step.bills.length ? 'billed' : '')} />
+      <RecordStateTable label="Discount schedule" columns={['customer', 'items', 'every nth?', 'bill']}
+        activeRow={step.k}
+        rows={run.input.orders.map((order, i) => ({
+          customer: i + 1,
+          items: order.product.map((p, j) => `${p}×${order.amount[j]}`).join(', '),
+          'every nth?': (i + 1) % run.input.n === 0 ? `yes, ${run.input.discount}% off` : 'no',
+          bill: i < step.bills.length ? step.bills[i] : '—',
+        }))} />
       <dl>
         <dt>Customer count</dt><dd>{step.count}</dd>
         <dt>Subtotal</dt><dd>{step.subtotal ?? '-'}</dd>

@@ -78,12 +78,33 @@ function codeMarker(name) {
   return { addBid: 'store the amount', updateBid: 'store the amount', removeBid: 'deletes the user', getHighestBidder: 'scans the item' }[name]
 }
 
-export const code = `run the auction operations in order
-  keep for each item a map from user to bid amount
-  addBid and updateBid store the amount for that user and item
-  removeBid deletes the user's bid on that item
-  getHighestBidder scans the item's bids for the largest amount, then the largest user id
-  return -1 when the item has no bids`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
+export const code = `function auctionSystem(ops) {
+  // run the auction operations in order, keeping one bids map per item
+  const bids = new Map()
+  const results = []
+  for (const [name, ...args] of ops) {
+    if (name === 'addBid' || name === 'updateBid') {
+      const [user, item, amount] = args
+      if (!bids.has(item)) bids.set(item, new Map())
+      // store the amount for that user and item
+      bids.get(item).set(user, amount)
+    } else if (name === 'removeBid') {
+      const [user, item] = args
+      // deletes the user's bid on that item
+      bids.get(item).delete(user)
+    } else {
+      const [item] = args
+      // scans the item's bids for the largest amount, then the largest user id
+      let best = null
+      for (const [user, amount] of bids.get(item) ?? []) {
+        if (best === null || amount > best[1] || (amount === best[1] && user > best[0])) best = [user, amount]
+      }
+      // return -1 when the item has no bids
+      results.push(best ? best[0] : -1)
+    }
+  }
+  return results
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `class AuctionSystem:
     def __init__(self):

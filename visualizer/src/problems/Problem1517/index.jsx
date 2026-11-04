@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import SqlStageStrip from './SqlStageStrip'
 import { buildTrace, parseInput, code, sql, python } from './algorithm'
 
 const phases = [
@@ -63,6 +64,7 @@ export default function ValidMails() {
     const currentIndex = step.phase === 'check' ? step.rows.length - 1 : -1
     const current = currentIndex >= 0 ? step.rows[currentIndex] : null
     return <>
+      <SqlStageStrip phases={definition.phases} current={step.phase} />
       <section aria-label="SQL stage">
         <h3>Stage: {phases.find(p => p.id === step.phase)?.label}</h3>
         <p>{step.phase === 'check' ? 'WHERE mail REGEXP: the highlighted row is the mail being tested.' : step.phase === 'done' ? 'ORDER BY user_id: the valid rows in id order.' : 'FROM Users: every row before the filter.'}</p>

@@ -28,15 +28,18 @@ export function buildTrace({ n }) {
   return { input: { n }, result, frames }
 }
 
-export const code = `minimum floor boxes for n boxes in a corner
-  find the largest m with a full pyramid of m layers holding at most n boxes
-  remaining = n minus that pyramid size
-  floor = m times (m plus 1) divided by 2
-  extra = 0
-  while remaining is positive
-    extra = extra plus 1
-    remaining = remaining minus extra
-  return floor plus extra`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `export function minimumFloorBoxes(n) {
+  let m = 0 // find the largest m with a full pyramid of m layers holding at most n boxes
+  while ((m + 1) * (m + 2) * (m + 3) / 6 <= n) m++
+  let remaining = n - m * (m + 1) * (m + 2) / 6 // remaining = n minus that pyramid size
+  const floor = m * (m + 1) / 2
+  let extra = 0
+  while (remaining > 0) {
+    extra += 1 // extra = extra plus 1
+    remaining -= extra
+  }
+  return floor + extra // return floor plus extra
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def minimum_floor_boxes(n):

@@ -38,7 +38,7 @@ export function buildTrace({ n, edges }) {
   const indegree = Array(n).fill(0)
   const snap = (edge, sources) => ({ indegree: [...indegree], edge, sources })
   const frames = [{
-    phase: 'start', activeLine: L('indegree = [0] * n'), pythonLine: P('indegree = [0] * n'),
+    phase: 'start', activeLine: L('indegree = Array(n)'), pythonLine: P('indegree = [0] * n'),
     snapshot: snap(null, []), message: `Start with ${n} vertices. Every vertex begins with no incoming arrows.`,
   }]
   for (const [from, to] of edges) {
@@ -51,22 +51,23 @@ export function buildTrace({ n, edges }) {
   }
   const result = indegree.flatMap((d, v) => (d === 0 ? [v] : []))
   frames.push({
-    phase: 'collect', activeLine: L('return every'), pythonLine: P('return [v for v'),
+    phase: 'collect', activeLine: L('return [...Array(n)'), pythonLine: P('return [v for v'),
     snapshot: snap(null, result),
     message: `Vertices with no incoming arrows are ${result.join(', ')}. Each must be started from, and together they reach everything.`,
   })
   frames.push({
-    phase: 'done', activeLine: L('return every'), pythonLine: P('return [v for v'),
+    phase: 'done', activeLine: L('return [...Array(n)'), pythonLine: P('return [v for v'),
     snapshot: snap(null, result), message: `Return [${result.join(', ')}].`,
   })
   return { input: { n, edges }, result, frames }
 }
 
-export const code = `minimum starting vertices (n, edges):
-  indegree = [0] * n
-  for each edge from -> to:
-    indegree[to] += 1
-  return every vertex whose indegree is 0`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function minVerticesToReachAll(n, edges) {",
+  "  const indegree = Array(n).fill(0)",
+  "  for (const [from, to] of edges) indegree[to] += 1",
+  "  return [...Array(n).keys()].filter(v => indegree[v] === 0) }",
+].map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 

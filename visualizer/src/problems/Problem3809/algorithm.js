@@ -16,18 +16,18 @@ export function buildTrace({ towers, center, radius }) {
   towers.forEach(([x, y, q], i) => {
     const distance = Math.abs(x - cx) + Math.abs(y - cy)
     const reachable = distance <= radius
-    frames.push({ pythonLine: P('if distance <= radius'), phase: 'check', activeLine: C('if the tower is reachable'), at: i, distance, reachable, best: best ? [...best.at] : null,
+    frames.push({ pythonLine: P('if distance <= radius'), phase: 'check', activeLine: C('if (distance <= radius)'), at: i, distance, reachable, best: best ? [...best.at] : null,
       message: `Tower ${i} at (${x}, ${y}) is ${distance} away; ${reachable ? 'reachable' : 'out of range'}.` })
     if (!reachable) return
     const better = !best || q > best.q || (q === best.q && (x < best.at[0] || (x === best.at[0] && y < best.at[1])))
     if (better) {
       best = { q, at: [x, y] }
-      frames.push({ pythonLine: P('best = '), phase: 'best', activeLine: C('if best is nothing'), at: i, distance, reachable, best: [...best.at],
+      frames.push({ pythonLine: P('best = '), phase: 'best', activeLine: C('best = { q'), at: i, distance, reachable, best: [...best.at],
         message: `Quality ${q} becomes the best so far.` })
     }
   })
   const result = best ? best.at : [-1, -1]
-  frames.push({ pythonLine: P('return'), phase: 'done', activeLine: C('return best coordinate'), at: -1, distance: null, reachable: null, best: result,
+  frames.push({ pythonLine: P('return'), phase: 'done', activeLine: C('return best ?'), at: -1, distance: null, reachable: null, best: result,
     message: best ? `Answer (${result[0]}, ${result[1]}).` : 'No tower is reachable, so the answer is [-1, -1].' })
   return { input: { towers, center, radius }, result, frames }
 }
@@ -36,13 +36,19 @@ export function solve(input) {
   return buildTrace(input).result
 }
 
-export const code = `choose the reachable tower with the highest quality, ties to the smallest coordinate
-  set best to nothing
-  for each tower in order
-    compute the Manhattan distance to the center
-    if the tower is reachable
-      if best is nothing or the tower beats best then best = this tower
-  return best coordinate, or [-1, -1] when nothing was reachable`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
+export const code = `function bestReachableTower(towers, center, radius) {
+  const [cx, cy] = center
+  let best = null
+  for (const [x, y, q] of towers) {
+    const distance = Math.abs(x - cx) + Math.abs(y - cy)
+    if (distance <= radius) {
+      if (best === null || q > best.q || (q === best.q && (x < best.at[0] || (x === best.at[0] && y < best.at[1])))) {
+        best = { q, at: [x, y] }
+      }
+    }
+  }
+  return best ? best.at : [-1, -1]
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def best_reachable_tower(towers, center, radius):
     cx, cy = center

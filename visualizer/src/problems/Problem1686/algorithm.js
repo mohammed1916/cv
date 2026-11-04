@@ -15,21 +15,19 @@ export function parseInput(text) {
   return { alice, bob }
 }
 
-export const code = `stone game vi (alice, bob):
-  total[i] = alice[i] + bob[i] for each stone i
-  order the stones by total, largest first
-  alice_sum = 0, bob_sum = 0
-  for turn k from 0 to n - 1:
-    stone = order[k]
-    if k is even:
-      alice takes stone
-      alice_sum += alice[stone]
-    else:
-      bob takes stone
-      bob_sum += bob[stone]
-  if alice_sum > bob_sum: return 1
-  if alice_sum < bob_sum: return -1
-  return 0`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `export function stoneGameVI(aliceValues, bobValues) {
+  const total = aliceValues.map((a, i) => a + bobValues[i])
+  const order = total.map((_, i) => i).sort((x, y) => total[y] - total[x])
+  let aliceSum = 0, bobSum = 0
+  for (let k = 0; k < order.length; k++) {
+    const stone = order[k]
+    if (k % 2 === 0) aliceSum += aliceValues[stone]
+    else bobSum += bobValues[stone]
+  }
+  if (aliceSum > bobSum) return 1
+  if (aliceSum < bobSum) return -1
+  return 0
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def stone_game_vi(alice, bob):
     total = [a + b for a, b in zip(alice, bob)]
@@ -59,22 +57,22 @@ export function buildTrace({ alice, bob }) {
   let aliceSum = 0
   let bobSum = 0
   const snap = (extra = {}) => ({ total, order: null, taken: [...taken], aliceSum, bobSum, current: null, ...extra })
-  const frames = [{ phase: 'total', ...at('total[i] =', 'total = ['), snapshot: snap(), message: `Combined values are ${total.join(', ')}. Each is Alice's value plus Bob's value for that stone.` }]
-  frames.push({ phase: 'sort', ...at('order the stones', 'order = sorted'), snapshot: snap({ order }), message: `Ranking from highest combined value: stones ${order.join(', ')}. Ties keep the lower index first.` })
+  const frames = [{ phase: 'total', ...at('const total', 'total = ['), snapshot: snap(), message: `Combined values are ${total.join(', ')}. Each is Alice's value plus Bob's value for that stone.` }]
+  frames.push({ phase: 'sort', ...at('const order', 'order = sorted'), snapshot: snap({ order }), message: `Ranking from highest combined value: stones ${order.join(', ')}. Ties keep the lower index first.` })
   for (let k = 0; k < n; k++) {
     const stone = order[k]
     if (k % 2 === 0) {
       aliceSum += alice[stone]
       taken.push({ stone, player: 'Alice' })
-      frames.push({ phase: 'take', ...at('alice takes stone', 'alice_sum += alice[stone]'), snapshot: snap({ order, current: stone }), message: `Turn ${k + 1}: Alice takes stone ${stone} worth ${alice[stone]} to her. Her total is ${aliceSum}.` })
+      frames.push({ phase: 'take', ...at('aliceSum += aliceValues', 'alice_sum += alice[stone]'), snapshot: snap({ order, current: stone }), message: `Turn ${k + 1}: Alice takes stone ${stone} worth ${alice[stone]} to her. Her total is ${aliceSum}.` })
     } else {
       bobSum += bob[stone]
       taken.push({ stone, player: 'Bob' })
-      frames.push({ phase: 'take', ...at('bob takes stone', 'bob_sum += bob[stone]'), snapshot: snap({ order, current: stone }), message: `Turn ${k + 1}: Bob takes stone ${stone} worth ${bob[stone]} to him. His total is ${bobSum}.` })
+      frames.push({ phase: 'take', ...at('bobSum += bobValues', 'bob_sum += bob[stone]'), snapshot: snap({ order, current: stone }), message: `Turn ${k + 1}: Bob takes stone ${stone} worth ${bob[stone]} to him. His total is ${bobSum}.` })
     }
   }
   const result = aliceSum > bobSum ? 1 : aliceSum < bobSum ? -1 : 0
-  frames.push({ phase: 'score', ...at('if alice_sum > bob_sum', 'if alice_sum > bob_sum'), snapshot: snap({ order }), message: `Alice collected ${aliceSum} and Bob collected ${bobSum}.` })
+  frames.push({ phase: 'score', ...at('if (aliceSum > bobSum)', 'if alice_sum > bob_sum'), snapshot: snap({ order }), message: `Alice collected ${aliceSum} and Bob collected ${bobSum}.` })
   frames.push({ phase: 'done', ...at(`return ${result}`, `return ${result}`), snapshot: snap({ order }), message: `The result is ${result}.` })
   return { input: { alice, bob }, result, frames }
 }

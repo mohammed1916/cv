@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -22,6 +23,12 @@ export default function TwoBoxesSameDistinct() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Balls per colour" length={run.input.length} valueAt={index => run.input[index]}
       active={step.color} roleAt={index => (index < step.color ? 'done' : '')} />
+    {step.rows && <RecordStateTable label="Split states after this colour (box 1 balls, colours in box 1, colours in box 2)"
+      columns={['box 1 balls', 'colours in box 1', 'colours in box 2', 'ways']}
+      rows={step.rows.map(({ state, w }) => {
+        const [size, d1, d2] = state.split(',').map(Number)
+        return { 'box 1 balls': size, 'colours in box 1': d1, 'colours in box 2': d2, ways: w }
+      })} />}
     <output aria-label="Split states">{`Split states tracked: ${step.states}`}</output>
   </>} renderReasoning={() => <>
     <p>Balls of one colour are distinct objects, so a colour with c balls can send k of them to box one in C(c, k) ways.</p>

@@ -16,20 +16,18 @@ export function parseInput(text) {
   return { positions, m }
 }
 
-export const code = `sort positions
-lo = 1
-hi = positions[last] - positions[0]
-while lo < hi:
-    mid = (lo + hi + 1) // 2
-    if can_place(mid): lo = mid
-    else: hi = mid - 1
-return lo
-
-def can_place(gap):
-    count = 1, last = positions[0]
-    for p in positions[1:]:
-        if p - last >= gap: count += 1, last = p
-    return count >= m`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function maxMinDistance(positions, m) {",
+  "  positions.sort((a, b) => a - b)",
+  "  let lo = 1, hi = positions[positions.length - 1] - positions[0]",
+  "  while (lo < hi) {",
+  "    const mid = Math.floor((lo + hi + 1) / 2)",
+  "    const placed = [positions[0]]; let last = positions[0]",
+  "    for (let i = 1; i < positions.length; i++) {",
+  "      if (positions[i] - last >= mid) { placed.push(positions[i]); last = positions[i] } }",
+  "    if (placed.length >= m) lo = mid; else hi = mid - 1 }",
+  "  return lo }",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def max_min_distance(positions, m):
     positions.sort()
@@ -58,7 +56,7 @@ export function buildTrace({ positions: given, m }) {
   const frames = []
   let lo = 1, hi = positions[positions.length - 1] - positions[0]
   const snap = extra => ({ positions, m, lo, hi, ...extra })
-  frames.push({ phase: 'start', activeLine: L('sort positions'), pythonLine: P('positions.sort()'), snapshot: snap({ mid: null, placed: [] }),
+  frames.push({ phase: 'start', activeLine: L('positions.sort((a, b) => a - b)'), pythonLine: P('positions.sort()'), snapshot: snap({ mid: null, placed: [] }),
     message: `Sorted positions: ${positions.join(', ')}. Place ${m} balls. The gap answer lies from ${lo} to ${hi}.` })
   while (lo < hi) {
     const mid = Math.floor((lo + hi + 1) / 2)
@@ -70,11 +68,11 @@ export function buildTrace({ positions: given, m }) {
       if (positions[i] - last >= mid) { placed.push(positions[i]); last = positions[i] }
     }
     const ok = placed.length >= m
-    frames.push({ phase: 'place', activeLine: L('for p in positions'), pythonLine: P('for p in positions'), snapshot: snap({ mid, placed: [...placed], ok }),
+    frames.push({ phase: 'place', activeLine: L('for (let i = 1; i < positions.length'), pythonLine: P('for p in positions'), snapshot: snap({ mid, placed: [...placed], ok }),
       message: `Greedy placement with gap ${mid} fits ${placed.length} ball${placed.length === 1 ? '' : 's'} at ${placed.join(', ')}. ${ok ? `That reaches ${m}, so ${mid} is achievable.` : `That is fewer than ${m}, so ${mid} is too large.`}` })
     if (ok) lo = mid
     else hi = mid - 1
-    frames.push({ phase: 'record', activeLine: L('if can_place'), pythonLine: P('if can_place'), snapshot: snap({ mid, placed: [], ok }),
+    frames.push({ phase: 'record', activeLine: L('if (placed.length >= m)'), pythonLine: P('if can_place'), snapshot: snap({ mid, placed: [], ok }),
       message: `${ok ? `Raise the lower bound to ${lo}.` : `Lower the upper bound to ${hi}.`} The range is now ${lo} to ${hi}.` })
   }
   frames.push({ phase: 'done', activeLine: L('return lo'), pythonLine: P('return lo'), snapshot: snap({ mid: null, placed: [] }),

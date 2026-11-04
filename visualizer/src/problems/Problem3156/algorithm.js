@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough. The sample tables are invented for this visualization.
 // Intervals are treated as half-open: a task ending at t and another starting at t do not overlap.
 export const sql = `WITH ordered AS (
   SELECT task_id, employee_id, start_time, end_time,

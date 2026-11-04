@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -26,9 +27,10 @@ export default function ClosestToTarget() {
     const l = step.l ?? -1
     const inRange = index => l >= 0 && step.lo !== undefined && index >= l && index <= (step.mid ?? step.first ?? l)
     const roleAt = index => {
-      if (index === step.mid) return 'probe'
-      if (step.first !== undefined && step.first !== -1 && index === step.first) return 'first r'
-      if (inRange(index)) return 'range'
+      if (index === l) return 'l'
+      if (step.mid !== undefined && index === step.mid) return 'r'
+      if (step.first !== undefined && step.first !== -1 && index === step.first) return 'r'
+      if (inRange(index)) return 'window'
       return ''
     }
     return <>
@@ -42,6 +44,8 @@ export default function ClosestToTarget() {
           </tr>)}</tbody>
         </table>
       </section>
+      {step.lo !== undefined && step.l >= 0 && <AnswerRangeBar title={`Search for the smallest r with AND at most ${run.input.target} (left end ${l})`}
+        min={l} max={arr.length - 1} low={step.lo} high={step.hi} probe={step.mid ?? null} verdict={step.value !== undefined ? step.value <= run.input.target : null} />}
       <output aria-label="Best distance">{`Best distance so far: ${Number.isFinite(step.best) ? step.best : '∞'}`}</output>
     </>
   }} renderReasoning={() => <>

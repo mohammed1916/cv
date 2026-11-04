@@ -43,19 +43,6 @@ export function buildTrace({ nums }) {
   return { input: { nums }, result: best, frames }
 }
 
-const pseudo = [
-  'longest after deleting one(nums):',
-  '  left = 0, zeros = 0, best = 0',
-  '  for each right index r:',
-  '    if nums[r] is 0:',
-  '      zeros += 1',
-  '    while zeros > 1:',
-  '      if nums[left] is 0:',
-  '        zeros -= 1',
-  '      left += 1',
-  '    best = max(best, r - left)',
-  '  return best',
-]
 
 const pythonLines = [
   'def longest_after_delete(nums):',
@@ -71,5 +58,17 @@ const pythonLines = [
   '    return best',
 ]
 
-export const code = pseudo.map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function longestAfterDelete(nums) {",
+  "  let left = 0, zeros = 0, best = 0",
+  "  for (let right = 0; right < nums.length; right++) {",
+  "    const value = nums[right]",
+  "    if (value === 0) zeros += 1",
+  "    while (zeros > 1) {",
+  "      const dropped = nums[left]",
+  "      if (dropped === 0) zeros -= 1",
+  "      left += 1 }",
+  "    best = Math.max(best, right - left) }",
+  "  return best }",
+].map((text, index) => ({ line: index + 1, text }))
 export const python = pythonLines.join('\n')

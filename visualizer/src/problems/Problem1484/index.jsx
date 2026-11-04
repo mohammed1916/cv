@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import SqlStageStrip from './SqlStageStrip'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -51,6 +52,7 @@ export default function GroupSoldProducts() {
       done: 'The result has one row per date.',
     }[step.phase]
     return <>
+      <SqlStageStrip phases={definition.phases} current={step.phase} />
       <RowTable caption="Working rows" rows={step.rows} current={current} stage={stage} />
       <RowTable caption="Result" rows={run.result} current={current} stage="Each date's row appears once its group is counted." />
     </>

@@ -17,15 +17,15 @@ export function parseInput(text) {
 }
 
 export const code = [
-  'function sparse_dot(a, b):',
-  '  store = empty map',
-  '  for each index i with value v in a:',
-  '    if v != 0: store[i] = v',
-  '  total = 0',
-  '  for each index i with value w in b:',
-  '    if w != 0 and i in store:',
-  '      total = total + store[i] * w',
-  '  return total',
+  "function sparseDot(a, b) {",
+  "  const store = new Map()",
+  "  for (let i = 0; i < a.length; i++) {",
+  "    const v = a[i]",
+  "    if (v !== 0) store.set(i, v) }",
+  "  let total = 0",
+  "  for (let i = 0; i < b.length; i++) {",
+  "    const w = b[i]; if (w !== 0 && store.has(i)) total += store.get(i) * w }",
+  "  return total }",
 ].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def sparse_dot(a, b):
@@ -46,20 +46,20 @@ export function buildTrace({ a, b }) {
   const store = new Map()
   let total = 0
   const snap = (extra = {}) => ({ store: [...store].map(([index, value]) => ({ index, value })), total, ...extra })
-  const frames = [{ phase: 'start', activeLine: L('store = empty'), pythonLine: P('store = {}'), snapshot: snap(), message: `Both vectors have length ${a.length}. Only indices where both entries are nonzero can add to the total.` }]
+  const frames = [{ phase: 'start', activeLine: L('const store = new Map()'), pythonLine: P('store = {}'), snapshot: snap(), message: `Both vectors have length ${a.length}. Only indices where both entries are nonzero can add to the total.` }]
   a.forEach((v, i) => {
-    frames.push({ phase: 'store', activeLine: L('for each index i with value v'), pythonLine: P('for i, v'), snapshot: snap({ index: i }), message: `Look at a[${i}] = ${v}.` })
+    frames.push({ phase: 'store', activeLine: L('for (let i = 0; i < a.length; i++)'), pythonLine: P('for i, v'), snapshot: snap({ index: i }), message: `Look at a[${i}] = ${v}.` })
     if (v !== 0) store.set(i, v)
-    frames.push({ phase: 'store', activeLine: L('if v != 0'), pythonLine: P('if v != 0'), snapshot: snap({ index: i }), message: v !== 0 ? `a[${i}] = ${v} is nonzero, so it is stored under index ${i}.` : `a[${i}] = 0, so nothing is stored.` })
+    frames.push({ phase: 'store', activeLine: L('if (v !== 0)'), pythonLine: P('if v != 0'), snapshot: snap({ index: i }), message: v !== 0 ? `a[${i}] = ${v} is nonzero, so it is stored under index ${i}.` : `a[${i}] = 0, so nothing is stored.` })
   })
   b.forEach((w, i) => {
-    frames.push({ phase: 'scan', activeLine: L('for each index i with value w'), pythonLine: P('for i, w'), snapshot: snap({ index: i, bValue: w }), message: `Look at b[${i}] = ${w}.` })
+    frames.push({ phase: 'scan', activeLine: L('for (let i = 0; i < b.length; i++)'), pythonLine: P('for i, w'), snapshot: snap({ index: i, bValue: w }), message: `Look at b[${i}] = ${w}.` })
     if (w !== 0 && store.has(i)) {
       const term = store.get(i) * w
       total += term
-      frames.push({ phase: 'match', activeLine: L('total = total + store'), pythonLine: P('total += store'), snapshot: snap({ index: i, bValue: w }), message: `Both are nonzero at index ${i}: ${store.get(i)} times ${w} adds ${term}. Total is ${total}.` })
+      frames.push({ phase: 'match', activeLine: L('total += store.get(i)'), pythonLine: P('total += store'), snapshot: snap({ index: i, bValue: w }), message: `Both are nonzero at index ${i}: ${store.get(i)} times ${w} adds ${term}. Total is ${total}.` })
     } else {
-      frames.push({ phase: 'scan', activeLine: L('if w != 0'), pythonLine: P('if w != 0'), snapshot: snap({ index: i, bValue: w }), message: w === 0 ? `b[${i}] is zero, so this index adds nothing.` : `a[${i}] is zero, so there is nothing to multiply.` })
+      frames.push({ phase: 'scan', activeLine: L('if (w !== 0'), pythonLine: P('if w != 0'), snapshot: snap({ index: i, bValue: w }), message: w === 0 ? `b[${i}] is zero, so this index adds nothing.` : `a[${i}] is zero, so there is nothing to multiply.` })
     }
   })
   frames.push({ phase: 'done', activeLine: L('return total'), pythonLine: P('return total'), snapshot: snap(), message: `The dot product is ${total}.` })

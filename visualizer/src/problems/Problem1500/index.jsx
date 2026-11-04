@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import OperationLog from '../../components/shared/OperationLog'
 import { parseInput, buildTrace, code, python } from './algorithm'
 
 const definition = {
@@ -29,7 +30,7 @@ const chip = (text, background) => <span key={text} style={{
 }}>{text}</span>
 
 export default function DesignAFileSharingSystem() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { owners, uid, chunks, freed, chunk, holders, gives } = step.snapshot
     const phase = step.phase
     const ids = owners.map(([id]) => id)
@@ -40,7 +41,13 @@ export default function DesignAFileSharingSystem() {
       if (phase === 'request' && holders?.includes(id)) return HOLDER
       return undefined
     }
+    const opList = run.input.ops.map((op, i) => ({
+      name: op[0],
+      args: op[0] === 'join' ? [op[1]] : op.slice(1),
+      returned: run.result[i],
+    }))
     return <>
+      <OperationLog title="Operation timeline" ops={opList} current={step.op ?? -1} through={step.op ?? -1} />
       <section aria-label="Users and chunks">
         <h3>Users in the system, by id (smallest free id is reused first)</h3>
         {owners.length === 0 ? <p>No users are in the system.</p> : (

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -16,7 +17,7 @@ const definition = {
 export default function KthMissingPositive() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { arr } = run.input
-    const { lo, hi, mid } = step.snapshot
+    const { lo, hi, mid, missing, k } = step.snapshot
     return <>
       <div role="img" aria-label="Array values with missing counts" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {arr.map((value, i) => {
@@ -28,6 +29,8 @@ export default function KthMissingPositive() {
           }}><div>{value}</div><small>missing {value - (i + 1)}</small><small>index {i}</small></div>
         })}
       </div>
+      <AnswerRangeBar title="Index search range (first index whose missing count reaches k)" min={0} max={arr.length} low={lo} high={hi}
+        probe={mid !== null && mid !== undefined ? mid : null} verdict={missing !== null && missing !== undefined && missing >= k} />
       <p>{`Candidate window: indices ${lo} to ${Math.max(lo, hi - 1)}.`}</p>
     </>
   }} renderReasoning={() => <>

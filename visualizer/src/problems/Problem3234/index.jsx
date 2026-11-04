@@ -32,7 +32,7 @@ export default function CountDominantOnesVisualizer() {
         <div>
           <IndexedSequence label="Binary string s" length={run.input.s.length} active={Math.max(0, step.right)}
             valueAt={index => run.input.s[index]}
-            roleAt={index => (step.left <= index && index <= step.right ? "window" : "")} />
+            roleAt={index => (index === step.left ? "l" : index === step.right ? "r" : step.left <= index && index <= step.right ? "window" : "")} />
           <p>Zeros {step.zeros} · Ones {step.ones} · Dominant substrings {step.count}</p>
         </div>
       )}

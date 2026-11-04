@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough. The sample tables are invented for this visualization.
 export const sql = `WITH legs AS (
   SELECT caller_id AS user_id, recipient_id AS other_id, call_time FROM Calls
   UNION ALL

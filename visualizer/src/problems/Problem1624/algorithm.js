@@ -27,18 +27,18 @@ export function buildTrace({ s }) {
     i, ch, gap, best, first: [...first].map(([letter, index]) => ({ letter, index })),
   })
 
-  frames.push({ phase: 'start', ...at('first = empty map', 'first = {}'), message: `Scan ${s.length} letters from left to right, keeping the first position of each letter seen so far.`, snapshot: snap(null, null) })
+  frames.push({ phase: 'start', ...at('const first = new Map()', 'first = {}'), message: `Scan ${s.length} letters from left to right, keeping the first position of each letter seen so far.`, snapshot: snap(null, null) })
   for (let i = 0; i < s.length; i++) {
     const ch = s[i]
     if (first.has(ch)) {
       const gap = i - first.get(ch) - 1
       best = Math.max(best, gap)
-      frames.push({ phase: 'gap', ...at('best = max(best, i - first[ch] - 1)', 'best = max(best, i - first[ch] - 1)'),
+      frames.push({ phase: 'gap', ...at('best = Math.max(best, i - first.get(ch) - 1)', 'best = max(best, i - first[ch] - 1)'),
         message: `'${ch}' at ${i} repeats the copy at ${first.get(ch)}. The letters between them number ${gap}, so the best is now ${best}.`,
         snapshot: snap(i, ch, { from: first.get(ch), to: i }) })
     } else {
       first.set(ch, i)
-      frames.push({ phase: 'first', ...at('first[ch] = i', 'first[ch] = i'),
+      frames.push({ phase: 'first', ...at('first.set(ch, i)', 'first[ch] = i'),
         message: `First sighting of '${ch}' at ${i}. Store that position.`, snapshot: snap(i, ch) })
     }
   }
@@ -48,15 +48,19 @@ export function buildTrace({ s }) {
   return { input: { s }, result: best, frames }
 }
 
-export const code = `longest gap (s):
-  first = empty map
-  best = -1
-  for i, ch in s:
-    if ch in first:
-      best = max(best, i - first[ch] - 1)
-    else:
-      first[ch] = i
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const CODE = [
+  'function maxLengthBetweenEqualCharacters(s) {',
+  '  const first = new Map()',
+  '  let best = -1',
+  '  for (let i = 0; i < s.length; i++) {',
+  '    const ch = s[i]',
+  '    if (first.has(ch)) best = Math.max(best, i - first.get(ch) - 1)',
+  '    else first.set(ch, i)',
+  '  }',
+  '  return best',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def max_gap_between_equal(s):
     first = {}

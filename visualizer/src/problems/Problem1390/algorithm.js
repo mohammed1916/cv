@@ -10,7 +10,7 @@ export function parseInput(text) {
 export function buildTrace({ nums }) {
   let total = 0
   const qualifies = []
-  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set total to 0'), index: -1, total, qualifies: [], message: 'Check each number for exactly four divisors.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('let total = 0'), index: -1, total, qualifies: [], message: 'Check each number for exactly four divisors.' }]
   nums.forEach((value, index) => {
     const divisors = []
     for (let d = 1; d * d <= value; d++) {
@@ -24,20 +24,30 @@ export function buildTrace({ nums }) {
       total += divisors.reduce((acc, d) => acc + d, 0)
       qualifies.push(index)
     }
-    frames.push({ phase: 'number', pythonLine: ok ? 13 : 12, activeLine: L('if exactly four'), index, total, qualifies: qualifies.slice(), message: `${value} has ${divisors.length} divisors${ok ? ', so its divisor sum is added.' : ', so it is skipped.'}` })
+    frames.push({ phase: 'number', divisors: [...divisors].sort((a, b) => a - b), pythonLine: ok ? 13 : 12, activeLine: L('if (divisors.length === 4)'), index, total, qualifies: qualifies.slice(), message: `${value} has ${divisors.length} divisors${ok ? ', so its divisor sum is added.' : ', so it is skipped.'}` })
   })
   frames.push({ phase: 'done', pythonLine: 14, activeLine: L('return total'), index: -1, total, qualifies: qualifies.slice(), message: `The total is ${total}.` })
   return { input: { nums }, result: total, qualifies, frames }
 }
 
-export const code = `sum the divisor sums of the numbers that have exactly four divisors
-read the list of numbers from the input
-set total to 0
-for each number in the list do
-  find every divisor by testing candidates up to the square root
-  if exactly four divisors were found then add their sum to total
-return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function sumFourDivisors(nums) {',
+  '  let total = 0',
+  '  for (const value of nums) {',
+  '    const divisors = []',
+  '    for (let d = 1; d * d <= value; d++) {',
+  '      if (value % d === 0) {',
+  '        divisors.push(d)',
+  '        if (d * d !== value) divisors.push(value / d)',
+  '      }',
+  '    }',
+  '    if (divisors.length === 4) total += divisors.reduce((a, b) => a + b, 0)',
+  '  }',
+  '  return total',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(text => text.includes(s)) + 1
 
 export const python = `def sum_four_divisors(nums):
     total = 0

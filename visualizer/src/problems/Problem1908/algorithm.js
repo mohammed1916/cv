@@ -1,13 +1,15 @@
-// LeetCode 1908 (draft): Game of Nim.
+// LeetCode 1908: Game of Nim.
 // Input: a JSON array of heap sizes (0 to 15 each, 1 to 6 heaps). Players alternate removing any positive number of
 // stones from one heap; a player with no move loses. Return true when the first player wins under optimal play.
 // The rule: the first player wins exactly when the XOR of all heap sizes is nonzero.
 
-const CODE_TEXT = `FUNCTION firstPlayerWins(heaps)
-    total ← 0
-    FOR each heap in heaps
-        total ← total XOR heap
-    RETURN total is not zero`
+const CODE_TEXT = `export function firstPlayerWins(heaps) {
+  let total = 0 // total ← 0
+  for (const heap of heaps) {
+    total ^= heap // total ← total XOR heap
+  }
+  return total !== 0 // RETURN total is not zero
+}`
 
 export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
 

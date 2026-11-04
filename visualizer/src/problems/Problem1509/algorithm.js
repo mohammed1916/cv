@@ -12,14 +12,17 @@ export function parseInput(text) {
   return nums
 }
 
-export const code = `min difference after three moves (nums):
-  if length of nums <= 4: return 0
-  sort nums ascending
-  best = infinity
-  for left from 0 to 3:
-    right = length - 4 + left
-    best = min(best, nums[right] - nums[left])
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function minDifferenceAfterThreeMoves(nums) {",
+  "  if (nums.length <= 4) return 0",
+  "  const sorted = [...nums].sort((a, b) => a - b)",
+  "  let best = Infinity",
+  "  for (let left = 0; left <= 3; left++) {",
+  "    const right = sorted.length - 4 + left",
+  "    best = Math.min(best, sorted[right] - sorted[left])",
+  "  }",
+  "  return best }",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def min_difference(nums):
     if len(nums) <= 4:
@@ -34,12 +37,12 @@ export const python = `def min_difference(nums):
 `
 
 const SPOT = {
-  setup: ['if length of nums', 'if len(nums) <= 4'],
-  short: ['return 0', 'return 0'],
-  sort: ['sort nums ascending', 'nums.sort()'],
-  window: ['right = length - 4 + left', 'right = n - 4 + left'],
-  best: ['best = min(', 'best = min('],
-  done: ['return best', 'return best'],
+  setup: ["if (nums.length <= 4)", "if len(nums) <= 4"],
+  short: ["return 0", "return 0"],
+  sort: [".sort((a, b) => a - b)", "nums.sort()"],
+  window: ["const right = sorted.length - 4 + left", "right = n - 4 + left"],
+  best: ["best = Math.min(", "best = min("],
+  done: ["return best", "return best"],
 }
 function where(key) {
   const [pseudo, py] = SPOT[key]

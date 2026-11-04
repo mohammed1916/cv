@@ -12,13 +12,15 @@ export function parseInput(text) {
   return nums
 }
 
-export const code = `count good pairs (nums):
-  seen = empty counts
-  good = 0
-  for each index i with value v in nums:
-    good = good + seen[v]
-    seen[v] = seen[v] + 1
-  return good`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "function countGoodPairs(nums) {",
+  "  const seen = new Map()",
+  "  let good = 0",
+  "  for (const v of nums) {",
+  "    good += seen.get(v) ?? 0",
+  "    seen.set(v, (seen.get(v) ?? 0) + 1) }",
+  "  return good }",
+].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def num_identical_pairs(nums):
     seen = {}
@@ -30,10 +32,10 @@ export const python = `def num_identical_pairs(nums):
 `
 
 const SPOT = {
-  setup: ['seen = empty counts', 'seen = {}'],
-  read: ['for each index i', 'for value in nums'],
-  pair: ['good = good + seen[v]', 'good += seen.get'],
-  store: ['seen[v] = seen[v] + 1', 'seen[value] = seen.get'],
+  setup: ['const seen = new Map()', 'seen = {}'],
+  read: ['for (const v of nums)', 'for value in nums'],
+  pair: ['good += seen.get(v)', 'good += seen.get'],
+  store: ['seen.set(v', 'seen[value] = seen.get'],
   done: ['return good', 'return good'],
 }
 function where(key) {

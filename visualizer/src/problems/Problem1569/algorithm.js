@@ -10,15 +10,26 @@ export function parseInput(text) {
   return { nums }
 }
 
-export const code = `ways to reorder(nums)
-  set pascal[i][j] to the binomial coefficients C(i, j), modulo the prime
-  define count(arr)
-    if arr is empty then return 1
-    let root be the first value of arr
-    split the rest of arr into left, the smaller values, and right, the larger, keeping order
-    return C(len(arr)-1, len(left)) * count(left) * count(right), modulo the prime
-  return count(nums) - 1, modulo the prime`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function numOfWays(nums) {',
+  '  const n = nums.length',
+  '  const pascal = Array.from({ length: n + 1 }, () => Array(n + 1).fill(0))',
+  '  for (let i = 0; i <= n; i++) {',
+  '    pascal[i][0] = 1',
+  '    for (let j = 1; j <= i; j++) pascal[i][j] = (pascal[i - 1][j - 1] + pascal[i - 1][j]) % MOD',
+  '  }',
+  '  const count = arr => {',
+  '    if (arr.length === 0) return 1',
+  '    const root = arr[0]',
+  '    const left = arr.slice(1).filter(v => v < root)',
+  '    const right = arr.slice(1).filter(v => v > root)',
+  '    return pascal[arr.length - 1][left.length] * count(left) % MOD * count(right) % MOD',
+  '  }',
+  '  return (count(nums) - 1 + MOD) % MOD',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(c => c.includes(s)) + 1
 
 // A reordering keeps the same tree when its root is the first value and the left and right parts keep their own order.
 // The interleaving of the two parts is free, which gives the binomial coefficient.
@@ -29,7 +40,7 @@ export function buildTrace({ nums }) {
     pascal[i][0] = 1
     for (let j = 1; j <= i; j++) pascal[i][j] = (pascal[i - 1][j - 1] + pascal[i - 1][j]) % MOD
   }
-  const frames = [{ phase: 'start', pythonLine: 8, segment: [...nums], root: null, value: null, activeLine: L('set pascal'), message: `Split ${nums.join(', ')} around its first value ${nums[0]}.` }]
+  const frames = [{ phase: 'start', pythonLine: 8, segment: [...nums], root: null, value: null, activeLine: L('const pascal'), message: `Split ${nums.join(', ')} around its first value ${nums[0]}.` }]
   const count = arr => {
     if (arr.length === 0) return 1
     const root = arr[0]
@@ -38,13 +49,13 @@ export function buildTrace({ nums }) {
     const choose = pascal[arr.length - 1][left.length]
     const value = (((choose * count(left)) % MOD) * count(right)) % MOD
     if (arr.length >= 2) {
-      frames.push({ phase: 'combine', pythonLine: 16, segment: [...arr], root, value, activeLine: L('return C(len(arr)-1'), message: `${arr.join(', ')} with root ${root}: C(${arr.length - 1}, ${left.length}) interleavings times the two sides gives ${value}.` })
+      frames.push({ phase: 'combine', pythonLine: 16, segment: [...arr], root, value, activeLine: L('return pascal[arr.length - 1]'), message: `${arr.join(', ')} with root ${root}: C(${arr.length - 1}, ${left.length}) interleavings times the two sides gives ${value}.` })
     }
     return value
   }
   const total = count(nums)
   const result = (total - 1 + MOD) % MOD
-  frames.push({ phase: 'done', pythonLine: 18, segment: [...nums], root: null, value: result, activeLine: L('return count(nums)'), result, message: `Orderings with the same tree, excluding the original: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 18, segment: [...nums], root: null, value: result, activeLine: L('return (count(nums)'), result, message: `Orderings with the same tree, excluding the original: ${result}.` })
   return { input: { nums }, result, frames }
 }
 

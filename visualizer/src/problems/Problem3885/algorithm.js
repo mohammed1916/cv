@@ -1,11 +1,31 @@
-const codeLines = `set up the active map from eventId to priority
-for each operation in order
-  if it is an update then change the priority of that active event
-  if it is a poll then
-    choose the active event with the highest priority
-    break ties by the smaller eventId
-    remove it and record its id, or -1 when none is active
-return the recorded answers`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
+const codeLines = `function eventManager(events, ops) {
+  // set up the active map from eventId to priority
+  const active = new Map(events.map(([id, p]) => [id, p]))
+  const answers = []
+  // for each operation in order
+  for (const op of ops) {
+    if (op[0] === 'update') {
+      // if it is an update then change the priority of that active event
+      active.set(op[1], op[2])
+    } else {
+      // if it is a poll then choose the active event with the highest priority
+      let best = null
+      for (const [id, p] of active) {
+        // break ties by the smaller eventId
+        if (best === null || p > active.get(best) || (p === active.get(best) && id < best)) best = id
+      }
+      // remove it and record its id, or -1 when none is active
+      if (best === null) {
+        answers.push(-1)
+      } else {
+        active.delete(best)
+        answers.push(best)
+      }
+    }
+  }
+  // return the recorded answers
+  return answers
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => codeLines.findIndex(c => c.text.includes(s)) + 1
 const pythonLines = `class EventManager:
     def __init__(self, events):

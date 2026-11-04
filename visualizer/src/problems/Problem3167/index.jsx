@@ -18,7 +18,7 @@ const definition = {
   python,
   inputLabel: 'Compressed string of letter-and-number groups (e.g. "b12a3b4")',
   url: "https://leetcode.com/problems/better-compression-of-string/",
-  complexity: "O(n + 26) time and O(1) extra space for n characters of input. The visualization accepts up to 16 groups with frequencies of up to six digits; the official limits are not verified here.",
+  complexity: "O(n + 26) time and O(1) extra space for n characters of input. The visualization accepts up to 16 groups with frequencies of up to six digits; the limits shown are this visualization's own.",
   examples: [
     { label: "Split letters", input: '"b12a3b4"' },
     { label: "One group", input: '"z1"' },

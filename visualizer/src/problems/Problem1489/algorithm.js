@@ -46,31 +46,51 @@ export function buildTrace({ n, edges }) {
   }
   const base = mst(null, null)
   const status = edges.map(() => '')
-  const frames = [{ phase: 'start', activeLine: L('build the minimum'), pythonLine: 31, index: -1, status: [...status], base, message: `The minimum spanning tree weighs ${base}.` }]
+  const frames = [{ phase: 'start', activeLine: L('const base'), pythonLine: 31, index: -1, status: [...status], base, message: `The minimum spanning tree weighs ${base}.` }]
   edges.forEach((_, i) => {
     let activeLine
     if (mst(null, i) > base) {
       status[i] = 'critical'
-      activeLine = L('remove edge i')
+      activeLine = L('critical.push(i)')
     } else {
-      activeLine = L('otherwise force')
+      activeLine = L('else if (mst(i, null)')
       if (mst(i, null) === base) status[i] = 'pseudo'
     }
     frames.push({ phase: 'test', activeLine, pythonLine: status[i] === 'critical' ? 35 : status[i] === 'pseudo' ? 37 : 36, index: i, status: [...status], base, message: status[i] === 'critical' ? `Edge ${i} is critical: without it the weight rises.` : status[i] === 'pseudo' ? `Edge ${i} is pseudo-critical: it can always be in a minimum tree.` : `Edge ${i} is in no minimum tree.` })
   })
   const critical = edges.map((_, i) => i).filter(i => status[i] === 'critical')
   const pseudo = edges.map((_, i) => i).filter(i => status[i] === 'pseudo')
-  frames.push({ phase: 'done', activeLine: L('return the critical'), pythonLine: 38, index: edges.length, status: [...status], base, message: `Critical: [${critical.join(', ')}]. Pseudo-critical: [${pseudo.join(', ')}].` })
+  frames.push({ phase: 'done', activeLine: L('return [critical, pseudo]'), pythonLine: 38, index: edges.length, status: [...status], base, message: `Critical: [${critical.join(', ')}]. Pseudo-critical: [${pseudo.join(', ')}].` })
   return { input: { n, edges }, result: [critical, pseudo], frames }
 }
 
-export const code = `find the edges every minimum spanning tree needs, and the edges that some but not all need
-build the minimum spanning tree weight base with Kruskal over the edges sorted by weight
-for each edge i do
-  remove edge i and rebuild: if the weight rises above base, edge i is critical
-  otherwise force edge i into the tree first: if the weight is still base, edge i is pseudo-critical
-return the critical and pseudo-critical edge indices`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function findCriticalAndPseudoEdges(n, edges) {',
+  '  const order = edges.map((_, i) => i).sort((x, y) => edges[x][2] - edges[y][2])',
+  '  const mst = (forced, skip) => {',
+  '    const parent = Array.from({ length: n }, (_, i) => i)',
+  '    const find = x => { while (parent[x] !== x) x = parent[x]; return x }',
+  '    let total = 0, used = 0',
+  '    if (forced !== null) { const [a, b, w] = edges[forced]; parent[find(a)] = find(b); total += w; used++ }',
+  '    for (const i of order) {',
+  '      if (i === skip || i === forced) continue',
+  '      const [a, b, w] = edges[i]',
+  '      const ra = find(a), rb = find(b)',
+  '      if (ra !== rb) { parent[ra] = rb; total += w; used++ }',
+  '    }',
+  '    return used === n - 1 ? total : Infinity',
+  '  }',
+  '  const base = mst(null, null)',
+  '  const critical = [], pseudo = []',
+  '  edges.forEach((_, i) => {',
+  '    if (mst(null, i) > base) critical.push(i)',
+  '    else if (mst(i, null) === base) pseudo.push(i)',
+  '  })',
+  '  return [critical, pseudo]',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(text => text.includes(s)) + 1
 
 export const python = `def find_critical_and_pseudo(n, edges):
     order = sorted(range(len(edges)), key=lambda i: edges[i][2])

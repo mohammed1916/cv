@@ -10,13 +10,15 @@ function buildNodes(values) {
   return values.map((val, i) => ({ val, prev: i > 0 ? i - 1 : -1, next: i + 1 < values.length ? i + 1 : -1 }))
 }
 
-export const code = `FUNCTION convertToArray(head)
-    result ← empty list
-    node ← head
-    WHILE node is not null
-        append node.val to result
-        node ← node.next
-    RETURN result`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function convertToArray(head) {
+  const result = []
+  let node = head
+  while (node !== null) {
+    result.push(node.val)
+    node = node.next
+  }
+  return result
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const L = s => {
   const index = code.findIndex(c => c.text.includes(s))
@@ -71,28 +73,28 @@ export function buildTrace(values) {
   const result = []
   let current = values.length ? 0 : -1
   frames.push({
-    phase: 'start', activeLine: L('node ← head'), pythonLine: P('node = head'),
+    phase: 'start', activeLine: L('let node = head'), pythonLine: P('node = head'),
     current, result: [], nodes, message: values.length ? 'Start at the head, the first node in the list.' : 'The list is empty, so the head is null.',
   })
   while (current !== -1) {
     frames.push({
-      phase: 'check', activeLine: L('WHILE node is not null'), pythonLine: P('while node is not None'),
+      phase: 'check', activeLine: L('while (node !== null)'), pythonLine: P('while node is not None'),
       current, result: result.slice(), nodes, message: `The node at position ${current} exists, so keep going.`,
     })
     result.push(nodes[current].val)
     frames.push({
-      phase: 'append', activeLine: L('append node.val'), pythonLine: P('result.append(node.val)'),
+      phase: 'append', activeLine: L('result.push(node.val)'), pythonLine: P('result.append(node.val)'),
       current, result: result.slice(), nodes, message: `Append ${nodes[current].val} to the result.`,
     })
     current = nodes[current].next
     frames.push({
-      phase: 'advance', activeLine: L('node ← node.next'), pythonLine: P('node = node.next'),
+      phase: 'advance', activeLine: L('node = node.next'), pythonLine: P('node = node.next'),
       current, result: result.slice(), nodes,
       message: current === -1 ? 'The next pointer is null, so the walk ends.' : `Follow next to position ${current}.`,
     })
   }
   frames.push({
-    phase: 'done', activeLine: L('RETURN result'), pythonLine: P('return result'),
+    phase: 'done', activeLine: L('return result'), pythonLine: P('return result'),
     current: -1, result: result.slice(), nodes, message: `The array is [${result.join(', ')}].`,
   })
   return { input: values, result: result.slice(), frames }

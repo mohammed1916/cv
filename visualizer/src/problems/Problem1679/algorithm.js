@@ -17,7 +17,7 @@ export function parseInput(text) {
 
 // Each phase points at one line of the code and one line of the Python.
 const LINE = {
-  start: [2, 3], check: [5, 6], pair: [7, 8], store: [9, 10], done: [10, 11],
+  start: [2, 3], check: [5, 6], pair: [7, 8], store: [10, 10], done: [13, 11],
 }
 const at = phase => ({ activeLine: LINE[phase][0], pythonLine: LINE[phase][1] })
 
@@ -62,16 +62,20 @@ export function buildTrace({ nums, k }) {
   return { input: { nums, k }, result: pairs, frames }
 }
 
-const codeText = `max k-sum pairs (nums, k):
-  counts = empty map, pairs = 0
-  for each value v in nums:
-    need = k - v
-    if counts[need] > 0:
-      counts[need] -= 1
+const codeText = `function maxOperations(nums, k) {
+  const counts = new Map()
+  let pairs = 0
+  for (const value of nums) {
+    const need = k - value
+    if ((counts.get(need) ?? 0) > 0) {
+      counts.set(need, counts.get(need) - 1)
       pairs += 1
-    else:
-      counts[v] += 1
-  return pairs`
+    } else {
+      counts.set(value, (counts.get(value) ?? 0) + 1)
+    }
+  }
+  return pairs
+}`
 export const code = codeText.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def max_operations(nums, k):

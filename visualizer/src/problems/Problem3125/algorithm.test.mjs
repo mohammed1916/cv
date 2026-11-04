@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { buildTrace, parseInput } from './algorithm.js'
+import { buildTrace, parseInput, code } from './algorithm.js'
 
 const solve = n => buildTrace({ n }).result
 
@@ -29,7 +29,7 @@ test('3125 matches a brute-force search over every x from n down', () => {
 test('3125 frames carry real pseudocode and python lines and the running x', () => {
   const run = buildTrace({ n: 22 })
   for (const frame of run.frames) {
-    assert.ok(frame.activeLine >= 1 && frame.activeLine <= 6, `activeLine ${frame.activeLine}`)
+    assert.ok(frame.activeLine >= 1 && frame.activeLine <= code.length, `activeLine ${frame.activeLine}`)
     assert.ok(frame.pythonLine >= 1 && frame.pythonLine <= 7, `pythonLine ${frame.pythonLine}`)
     assert.ok(frame.x >= 0 && frame.x < 22)
     assert.equal(typeof frame.message, 'string')
