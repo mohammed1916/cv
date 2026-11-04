@@ -197,3 +197,20 @@ input {
 
 /* Selection */
 ::selection { background: var(--primary-glow); color: var(--text); }
+
+/* Converted visualizer tables and outputs: explicit theme text and surface so
+   cells never inherit a light colour over a light background in dark mode. */
+.algorithm-workspace table,
+.algorithm-workspace th,
+.algorithm-workspace td,
+.algorithm-workspace output {
+  color: var(--text);
+}
+.algorithm-workspace th,
+.algorithm-workspace td,
+.algorithm-workspace output {
+  background: var(--surface2);
+}
+.algorithm-workspace th {
+  background: var(--surface3);
+}
