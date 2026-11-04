@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import DistanceLayers from './DistanceLayers'
 
 const definition = {
   phases: [
@@ -26,6 +27,7 @@ export default function EqualWithOperations() {
       <dt>Operations so far</dt><dd>{step.distance ?? '-'}</dd>
       <dt>Waiting in queue</dt><dd>{step.queued}</dd>
     </dl>
+    {step.seen && <DistanceLayers seen={step.seen} current={step.value} target={run.input.y} />}
     {step.moves && <output aria-label="Moves">{`Moves from here: ${step.moves.join(', ')}`}</output>}
     <output aria-label="Current step">{step.message}</output>
   </>} renderReasoning={() => <>

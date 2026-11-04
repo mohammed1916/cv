@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import CoordinatePlane from '../../components/shared/CoordinatePlane'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -21,6 +22,12 @@ const definition = {
 
 export default function PlacePeopleI() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <CoordinatePlane title="Points and the fence" points={run.input.map(([x, y], i) => {
+      const isA = step.a && step.a[0] === x && step.a[1] === y
+      const isB = step.b && step.b[0] === x && step.b[1] === y
+      const isBlocker = step.blocker && step.blocker[0] === x && step.blocker[1] === y
+      return { x, y, label: `${x},${y}`, role: isA || isB ? 'active' : isBlocker ? 'excluded' : 'kept' }
+    })} rects={step.a && step.b ? [{ x1: step.a[0], y1: step.b[1], x2: step.b[0], y2: step.a[1], label: 'fence', role: step.blocker ? 'excluded' : 'active' }] : []} />
     <output aria-label="Pair being checked">{step.a ? `a = (${step.a[0]}, ${step.a[1]}), b = (${step.b[0]}, ${step.b[1]})${step.blocker ? `, blocked by (${step.blocker[0]}, ${step.blocker[1]})` : ''}` : 'no pair yet'}</output>
     <output aria-label="Valid pairs">{`valid pairs: ${step.count} of ${run.input.length} points`}</output>
   </>} renderReasoning={() => <>

@@ -1,17 +1,12 @@
-.lps2-view { display: grid; gap: 12px; font: 500 14px system-ui, sans-serif; color: #0f172a; }
-.lps2-tiles { display: flex; gap: 6px; flex-wrap: wrap; }
-.lps2-tile { width: 44px; height: 44px; display: grid; place-items: center; border: 2px solid #94a3b8; border-radius: 8px; background: #f8fafc; font: 700 18px ui-monospace, monospace; position: relative; }
-.lps2-tile small { position: absolute; bottom: -16px; font-size: 10px; color: #475569; }
-.lps2-tile--window { border-color: #2563eb; background: #dbeafe; }
-.lps2-tile--pair { border-color: #7c3aed; background: #ede9fe; box-shadow: 0 0 0 3px #c4b5fd; }
-.lps2-facts { display: flex; gap: 14px; flex-wrap: wrap; color: #334155; }
-.lps2-facts strong { color: #0f172a; }
-.lps2-message { color: #334155; }
-@media (prefers-color-scheme: dark) {
-  .lps2-view { color: #e2e8f0; }
-  .lps2-tile { background: #1e293b; border-color: #64748b; color: #e2e8f0; }
-  .lps2-tile--window { background: #1e3a8a; border-color: #60a5fa; }
-  .lps2-tile--pair { background: #4c1d95; border-color: #a78bfa; }
-  .lps2-facts, .lps2-message, .lps2-tile small { color: #cbd5e1; }
-  .lps2-facts strong { color: #f8fafc; }
-}
+.lps2-view { display: grid; gap: 14px; font: 500 14px system-ui, sans-serif; color: var(--text); }
+.lps2-tiles { display: flex; gap: 6px; flex-wrap: wrap; padding-bottom: 18px; }
+.lps2-tile { width: 44px; height: 44px; display: grid; place-items: center; border: 2px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); font: 700 18px ui-monospace, monospace; position: relative; }
+.lps2-tile small { position: absolute; bottom: -18px; font-size: 10px; color: var(--text-muted, var(--text)); }
+.lps2-tile--window { border-color: var(--primary); background: var(--surface2); }
+.lps2-tile--pair { border-color: var(--primary); background: var(--primary); color: var(--on-primary, #fff); }
+.lps2-tag { position: absolute; top: -18px; font-size: 11px; font-weight: 700; color: var(--primary); }
+.lps2-facts { display: flex; gap: 12px; flex-wrap: wrap; }
+.lps2-table { border-collapse: collapse; font-family: ui-monospace, monospace; font-size: 13px; }
+.lps2-table th, .lps2-table td { border: 1px solid var(--border); padding: 3px 8px; text-align: left; }
+.lps2-table tr.is-current td { background: var(--surface2); font-weight: 700; }
+.lps2-message { margin: 0; }

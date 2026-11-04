@@ -1,19 +1,9 @@
-.stir-view { display: grid; gap: 10px; font: 500 14px system-ui, sans-serif; color: #0f172a; }
+.stir-view { display: grid; gap: 10px; font: 500 14px system-ui, sans-serif; color: var(--text); }
 .stir-grid { display: grid; gap: 4px; justify-content: start; }
-.stir-cell { width: 54px; height: 40px; display: grid; place-items: center; border: 2px solid #cbd5e1; border-radius: 6px; background: #f8fafc; font: 600 13px ui-monospace, monospace; position: relative; }
-.stir-cell--head { background: transparent; border-color: transparent; font-weight: 700; color: #334155; font-family: system-ui, sans-serif; }
-.stir-cell--source { border-color: #0ea5e9; background: #e0f2fe; }
-.stir-cell--current { border-color: #7c3aed; background: #ede9fe; box-shadow: 0 0 0 3px #c4b5fd; }
-.stir-cell--target { border-color: #15803d; background: #dcfce7; }
-.stir-legend, .stir-message { color: #334155; }
-.stir-formula { font: 600 14px ui-monospace, monospace; color: #0f172a; }
-@media (prefers-color-scheme: dark) {
-  .stir-view { color: #e2e8f0; }
-  .stir-cell { background: #1e293b; border-color: #475569; color: #e2e8f0; }
-  .stir-cell--head { color: #cbd5e1; }
-  .stir-cell--source { background: #0c4a6e; border-color: #38bdf8; }
-  .stir-cell--current { background: #4c1d95; border-color: #a78bfa; }
-  .stir-cell--target { background: #14532d; border-color: #4ade80; }
-  .stir-legend, .stir-message { color: #cbd5e1; }
-  .stir-formula { color: #f8fafc; }
-}
+.stir-cell { width: 54px; height: 40px; display: grid; place-items: center; border: 2px solid var(--border); border-radius: 6px; background: var(--surface); color: var(--text); font: 600 13px ui-monospace, monospace; position: relative; }
+.stir-cell--head { background: transparent; border-color: transparent; font-weight: 700; color: var(--text-muted, var(--text)); font-family: system-ui, sans-serif; }
+.stir-cell--source { border-color: var(--primary); background: var(--surface2); }
+.stir-cell--current { border-color: var(--primary); background: var(--surface2); box-shadow: 0 0 0 3px var(--primary); }
+.stir-cell--target { border-color: var(--primary); background: var(--primary); color: var(--on-primary, #fff); }
+.stir-legend, .stir-message { color: var(--text-muted, var(--text)); margin: 0; }
+.stir-formula { font: 600 14px ui-monospace, monospace; color: var(--text); margin: 0; }

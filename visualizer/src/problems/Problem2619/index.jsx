@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code } from './algorithm'
 
 const definition = {
@@ -20,11 +21,19 @@ const definition = {
 
 export default function ArrayPrototypeLast() {
   return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ step }) => <section aria-label="Visual state">
-      <h3>{step.view.title}</h3>
-      <ol>{step.view.rows.map((row, index) => <li key={index} aria-current={index === step.view.focus ? 'step' : undefined}>{row}</li>)}</ol>
-      {step.view.summary && <output>{`Answer: ${step.view.summary}`}</output>}
-    </section>}
+    renderVisual={({ run, step }) => {
+      const items = run.input.items
+      const last = items.length - 1
+      const answered = step.phase === 'done'
+      return <section aria-label="Visual state">
+        {items.length === 0
+          ? <p className="algorithm-sequence__empty">The array is empty, so there is no index length minus one. The answer is -1.</p>
+          : <IndexedSequence label="Array" length={items.length} active={last}
+              valueAt={index => JSON.stringify(items[index])}
+              roleAt={index => (index === last ? (answered ? 'answer' : 'last index') : '')} />}
+        {answered && <output>{`Answer: ${JSON.stringify(run.result)}`}</output>}
+      </section>
+    }}
     renderReasoning={() => <>
       <p>The last position is always length minus one, so one read answers the question.</p>
       <p>An empty array has no such position, so the answer is the sentinel -1.</p>

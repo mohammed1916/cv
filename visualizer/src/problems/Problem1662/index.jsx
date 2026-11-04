@@ -27,14 +27,14 @@ export default function ArrayStrings() {
           {[...chunk].map((ch, pos) => <span key={pos} style={{
             padding: '0 2px',
             background: active && active.chunk === ci && active.pos === pos ? 'var(--primary)' : 'transparent',
-            color: active && active.chunk === ci && active.pos === pos ? '#fff' : 'var(--text)',
+            color: active && active.chunk === ci && active.pos === pos ? 'var(--text-inverse)' : 'var(--text)',
           }}>{ch}</span>)}
         </span>)}
       </div>
     </div>
     return <>
-      {chunkView(word1, left, 'word1')}
-      {chunkView(word2, right, 'word2')}
+      {chunkView(word1, left, 'word1 (pointer l)')}
+      {chunkView(word2, right, 'word2 (pointer r)')}
       <p>Matched characters: {matched}{mismatch ? ' · mismatch' : ''}</p>
     </>
   }} renderReasoning={() => <>

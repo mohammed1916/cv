@@ -8,6 +8,7 @@ export const code = [
   'return ops',
 ].map((text, index) => ({ line: index + 1, text }))
 const L = key => code.findIndex(c => c.text.includes(key)) + 1
+const PY = key => python.split('\n').findIndex(line => line.includes(key)) + 1
 
 export function parseInput(text) {
   const input = JSON.parse(text)
@@ -20,9 +21,9 @@ export function parseInput(text) {
 export function buildTrace({ s }) {
   const n = s.length
   const target = [...s].sort().join('')
-  const frames = [{ level: [s], ops: 0, count: 1, phase: 'setup', activeLine: L('target is the letters'), message: `Target is ${target}.` }]
+  const frames = [{ level: [s], ops: 0, count: 1, phase: 'setup', pythonLine: PY('target = '), activeLine: L('target is the letters'), message: `Target is ${target}.` }]
   if (s === target) {
-    frames.push({ level: [s], ops: 0, count: 1, phase: 'done', activeLine: L('return 0'), message: 'Already sorted: 0 operations.' })
+    frames.push({ level: [s], ops: 0, count: 1, phase: 'done', pythonLine: PY('return 0'), activeLine: L('return 0'), message: 'Already sorted: 0 operations.' })
     return { input: { s }, result: 0, frames }
   }
   let level = [s]
@@ -42,11 +43,14 @@ export function buildTrace({ s }) {
     }
     ops++
     level = next
-    frames.push({ level: level.slice(0, 8), count: level.length, ops, phase: 'level', activeLine: L('add one to ops'),
+    frames.push({ level: level.slice(0, 8), count: level.length, ops, phase: 'level', pythonLine: PY('ops += 1'), activeLine: L('add one to ops'),
       message: `${level.length} new string${level.length === 1 ? '' : 's'} after ${ops} operation${ops === 1 ? '' : 's'}.` })
-    if (level.length === 0) throw new Error('The target is not reachable.')
+    if (level.length === 0) {
+      frames.push({ level: [], count: 0, ops, pythonLine: PY('return -1'), phase: 'done', activeLine: L('return ops'), message: 'No substring sort can reach the sorted string, so the answer is -1.' })
+      return { input: { s }, result: -1, frames }
+    }
   }
-  frames.push({ level: [target], count: 1, ops, phase: 'done', activeLine: L('return ops'), message: `Sorted after ${ops} operation${ops === 1 ? '' : 's'}.` })
+  frames.push({ level: [target], count: 1, ops, phase: 'done', pythonLine: PY('return ops'), activeLine: L('return ops'), message: `Sorted after ${ops} operation${ops === 1 ? '' : 's'}.` })
   return { input: { s }, result: ops, frames }
 }
 
@@ -69,6 +73,8 @@ export const python = `def min_operations_to_sort(s):
                     if cand not in seen:
                         seen.add(cand)
                         nxt.add(cand)
+        if not nxt:
+            return -1
         level = nxt
         ops += 1
     return ops`

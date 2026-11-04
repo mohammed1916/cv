@@ -19,10 +19,10 @@ export function buildTrace({ items }) {
   if (items.length === 0) {
     step(frames, 'check', 'if arr has no elements', 'The array is empty.', view(-1, ''))
     step(frames, 'done', 'if arr has no elements', 'Result: -1.', view(-1, '-1'))
-    return { result: -1, frames }
+    return { result: -1, frames, input: { items } }
   }
   step(frames, 'check', 'if arr has no elements', `Length is ${items.length}, so an element exists.`, view(last, ''))
   step(frames, 'read', 'otherwise answer', `Index ${last} holds ${JSON.stringify(items[last])}.`, view(last, ''))
   step(frames, 'done', 'otherwise answer', 'Result: the last element.', view(last, JSON.stringify(items[last])))
-  return { result: items[last], frames }
+  return { result: items[last], frames, input: { items } }
 }

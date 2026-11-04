@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import BitColumns from './BitColumns'
 
 const definition = {
   phases: [
@@ -21,14 +22,17 @@ const definition = {
 
 export default function XorToK() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => (
-    <table aria-label="XOR state">
-      <tbody>
-        <tr><th scope="row">Values</th><td>{run.nums.join(', ')}</td></tr>
-        <tr><th scope="row">Total XOR</th><td>{step.total}</td></tr>
-        <tr><th scope="row">Differing bits</th><td>{step.diff ?? 'not yet computed'}</td></tr>
-        <tr><th scope="row">Flips</th><td>{step.flips}</td></tr>
-      </tbody>
-    </table>
+    <>
+      <table aria-label="XOR state">
+        <tbody>
+          <tr><th scope="row">Values</th><td>{run.nums.join(', ')}</td></tr>
+          <tr><th scope="row">Total XOR</th><td>{step.total}</td></tr>
+          <tr><th scope="row">Differing bits</th><td>{step.diff ?? 'not yet computed'}</td></tr>
+          <tr><th scope="row">Flips</th><td>{step.flips}</td></tr>
+        </tbody>
+      </table>
+      {step.phase !== 'start' && step.phase !== 'fold' && <BitColumns total={step.total} k={run.k} diff={step.diff} />}
+    </>
   )} renderReasoning={() => <>
     <p>Flipping one bit of one element changes the XOR of the whole array in exactly that bit.</p>
     <p>So the fewest flips equal the number of bits where the array XOR differs from k.</p>

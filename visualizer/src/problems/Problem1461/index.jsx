@@ -14,34 +14,41 @@ const definition = {
   ],
 }
 
-const bar = { height: 12, background: 'var(--border)', borderRadius: 6, overflow: 'hidden' }
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
-export default function BinaryCodes() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
-    const { s, k, needed, windows, start, seen, window } = step.snapshot
-    const shown = seen.slice(0, 64)
+const chip = { minWidth: 30, padding: '3px 5px', textAlign: 'center', fontFamily: 'monospace', fontSize: 12, border: '1px solid var(--border)', borderRadius: 5, color: 'var(--text)' }
+
+// Every code of length k as a cell; a cell fills in once that code has been seen in a window.
+function CodeGrid({ k, seen, current }) {
+  const total = 2 ** k
+  if (total > 64) return <p style={{ color: 'var(--text)' }}>{seen.length} of {total} codes seen.</p>
+  const codes = Array.from({ length: total }, (_, n) => n.toString(2).padStart(k, '0'))
+  return <div role="img" aria-label={`Codes seen: ${seen.length} of ${total}`} style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginBottom: 8 }}>
+    {codes.map(code => <span key={code} style={{
+      ...chip, borderWidth: code === current ? 2 : 1, borderColor: code === current ? 'var(--primary)' : 'var(--border)',
+      background: seen.includes(code) ? 'var(--primary)' : 'transparent', color: seen.includes(code) ? '#fff' : 'var(--text)',
+    }}>{code}</span>)}
+  </div>
+}
+
+export default function BinaryCodesAllPresent() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const { s, k, needed, windows, start, seen, window: code } = step.snapshot
+    const hasWindow = start !== null && start !== undefined
+    const roleAt = i => {
+      const parts = []
+      if (hasWindow && i === start) parts.push('l')
+      if (hasWindow && i === start + k - 1) parts.push('r')
+      return parts.join(' ')
+    }
     return <>
-      <div role="img" aria-label="Binary string with the current window" style={{ display: 'flex', gap: 3, flexWrap: 'wrap', fontFamily: 'monospace' }}>
-        {[...s].map((ch, i) => {
-          const inWindow = start !== null && i >= start && i < start + k
-          return <span key={i} style={{
-            padding: '2px 4px', border: `1px solid ${inWindow ? 'var(--text)' : 'transparent'}`,
-            background: inWindow ? 'var(--surface2)' : 'transparent', color: 'inherit', opacity: inWindow ? 1 : 0.6,
-          }}>{ch}</span>
-        })}
-      </div>
-      <p>{window ? `Current window: "${window}".` : 'No window is being read.'} Windows available: {windows}. Codes needed: {needed}.</p>
-      <div aria-label="Distinct codes seen" style={bar}>
-        <div style={{ width: `${Math.min(100, (seen.length / needed) * 100)}%`, height: '100%', background: '#0891b2' }} />
-      </div>
-      <p>{seen.length} of {needed} distinct codes seen.</p>
-      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', fontFamily: 'monospace' }}>
-        {shown.map(code => <span key={code} style={{ padding: '2px 6px', border: '1px solid var(--border)', color: 'inherit' }}>{code}</span>)}
-        {seen.length > shown.length && <span>and {seen.length - shown.length} more</span>}
-      </div>
+      <IndexedSequence label={`String s, with the length-${k} window from l to r`} length={s.length} active={hasWindow ? start + k - 1 : -1}
+        valueAt={i => s[i]} roleAt={roleAt} />
+      <CodeGrid k={k} seen={seen} current={code ?? null} />
+      <p style={{ color: 'var(--text)' }}>{hasWindow ? `Window at ${start}: "${code}". ` : ''}Codes needed: {needed}. Windows in the string: {windows}.</p>
     </>
-  }} renderReasoning={() => <>
-    <p><strong>Counting first:</strong> there are exactly 2^k codes, so a string with fewer than 2^k windows cannot contain them all.</p>
-    <p><strong>Distinct windows:</strong> a set keeps one copy of each code; the answer is true exactly when the set reaches 2^k members.</p>
+  }} renderReasoning={({ step }) => <>
+    <p><strong>Every window is a candidate:</strong> the string has one window per start position, and a code is present when some window equals it.</p>
+    <p>{step.message}</p>
   </>} />
 }

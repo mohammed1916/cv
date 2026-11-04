@@ -12,7 +12,7 @@ const definition = {
   pythonLineMap,
   inputLabel: "Array JSON, e.g. [2,4,1,3]",
   url: "https://leetcode.com/problems/maximum-length-of-semi-decreasing-subarrays/",
-  complexity: "O(n^2) time and O(1) extra space in the trace, which scans each left end's right ends until the first smaller value. The draft's bound on n is unverified, so the visualization caps the array at 20 values.",
+  complexity: "O(n^2) time and O(1) extra space in the trace, which scans each left end's right ends until the first smaller value. The visualization caps the array at 20 values.",
   examples: [
     { label: "[2,4,1,3] gives 3", input: "[2,4,1,3]" },
     { label: "[7,6,1,5] gives 4", input: "[7,6,1,5]" },

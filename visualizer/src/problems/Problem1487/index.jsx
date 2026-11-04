@@ -14,24 +14,52 @@ const definition = {
   ],
 }
 
+const KEPT = 'color-mix(in srgb, var(--success) 35%, var(--surface2))'
+const SUFFIXED = 'color-mix(in srgb, var(--primary) 35%, var(--surface2))'
+const WAITING = 'var(--surface2)'
+
+function Chip({ children, background, outline, title }) {
+  return <span title={title} style={{
+    display: 'inline-block', padding: '4px 8px', margin: 2, fontFamily: 'monospace', color: 'var(--text)',
+    background, border: `${outline ? 2 : 1}px solid ${outline ? 'var(--text)' : 'var(--border)'}`,
+  }}>{children}</span>
+}
+
 export default function UniqueFileNames() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { names } = run.input
-    const { index, candidate, used, result } = step.snapshot
+    const { index, current: requestedName, candidate, used, result, nextSuffix } = step.snapshot
     const current = index ?? -1
+    const taken = new Set(used)
     return <>
-      <div role="img" aria-label="Requested names" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        {names.map((name, i) => <div key={i} data-index={i} style={{
-          padding: '6px 8px', fontFamily: 'monospace', color: '#1c1917', background: i < result.length ? '#bbf7d0' : '#e7e5e4',
-          border: `${i === current ? 2 : 1}px solid ${i === current ? 'var(--text)' : 'var(--border)'}`, opacity: i > current ? 0.55 : 1,
-        }}>{name}</div>)}
-      </div>
-      <p>{candidate ? `Candidate name: ${candidate}` : 'No candidate chosen yet.'}</p>
-      <table aria-label="Assigned names" style={{ fontFamily: 'monospace', borderCollapse: 'collapse' }}>
-        <thead><tr><th>request</th><th>assigned</th></tr></thead>
-        <tbody>{result.length === 0 ? <tr><td colSpan={2}>none yet</td></tr> : result.map((assigned, i) => <tr key={i}><td>{names[i]}</td><td>{assigned}</td></tr>)}</tbody>
-      </table>
-      <p>Reserved names: {used.length ? used.join(', ') : 'none'}</p>
+      <section aria-label="Requests in order">
+        <h3>Requests, in order</h3>
+        <p>Each request is compared with every name reserved so far. A reused name gets the smallest free suffix.</p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+          {names.map((requested, i) => {
+            const assigned = i < result.length ? result[i] : null
+            const background = assigned === null ? WAITING : assigned === requested ? KEPT : SUFFIXED
+            return <Chip key={i} background={background} outline={i === current} title={assigned ? `request ${i}: ${requested} becomes ${assigned}` : `request ${i}`}>
+              {requested}{assigned && assigned !== requested ? ` → ${assigned}` : ''}
+            </Chip>
+          })}
+        </div>
+      </section>
+      <section aria-label="Reserved names">
+        <h3>Reserved names (a hash set: each name is checked in one lookup)</h3>
+        <div>{used.length ? used.map(value => <Chip key={value} background={value === candidate ? SUFFIXED : KEPT}>{value}</Chip>) : <em>none yet</em>}</div>
+      </section>
+      <section aria-label="Next suffix to try">
+        <h3>Next suffix per base name (a hash map)</h3>
+        {nextSuffix.length === 0 ? <p>No base name has needed a suffix yet.</p> : (
+          <table>
+            <thead><tr><th scope="col">base name</th><th scope="col">resume at</th></tr></thead>
+            <tbody>{nextSuffix.map(([base, k]) => <tr key={base} data-base={base} style={base === requestedName ?{ background: 'var(--surface2)', fontWeight: 600 } : undefined}>
+              <td>{base}</td><td>{k}</td></tr>)}</tbody>
+          </table>
+        )}
+      </section>
+      <p>{candidate ? `Candidate: ${candidate}${taken.has(candidate) ? ' (reserved)' : ''}` : 'No candidate chosen for this step.'}</p>
     </>
   }} renderReasoning={() => <>
     <p><strong>Reserve as you go:</strong> a name is kept only if it is still free when its request arrives, so the answer is built in request order.</p>

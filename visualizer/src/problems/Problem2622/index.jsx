@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code } from './algorithm'
+import CacheView from './CacheView'
 
 const definition = {
   number: '2622',
@@ -22,11 +23,7 @@ const definition = {
 
 export default function CacheWithTimeLimit() {
   return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ step }) => <section aria-label="Visual state">
-      <h3>{step.view.title}</h3>
-      <ol>{step.view.rows.map((row, index) => <li key={index} aria-current={index === step.view.focus ? 'step' : undefined}>{row}</li>)}</ol>
-      {step.view.summary && <output>{step.view.summary}</output>}
-    </section>}
+    renderVisual={({ step }) => <CacheView view={step.view} />}
     renderReasoning={() => <>
       <p>Each key stores its value with an expiry time. A key is alive while the current time is before that expiry.</p>
       <p>Get and count both check liveness first, so expired entries never leak into an answer.</p>

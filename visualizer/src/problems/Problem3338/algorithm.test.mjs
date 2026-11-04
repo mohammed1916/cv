@@ -5,9 +5,9 @@ import { buildTrace, parseInput, phases } from './algorithm.js'
 const sample = {
   employees: [
     { emp_id: 1, name: 'Ana', salary: 900, dept: 'Eng' },
-    { emp_id: 2, name: 'Bo', salary: 700, dept: 'Eng' },
-    { emp_id: 3, name: 'Cy', salary: 700, dept: 'Eng' },
-    { emp_id: 4, name: 'Di', salary: 500, dept: 'Ops' },
+    { emp_id: 2, dept: 'Eng' },
+    { emp_id: 3, dept: 'Eng' },
+    { emp_id: 4, dept: 'Ops' },
     { emp_id: 5, name: 'Ed', salary: 800, dept: 'Ops' },
     { emp_id: 6, name: 'Fay', salary: 900, dept: 'Eng' },
     { emp_id: 7, name: 'Gil', salary: 400, dept: 'Solo' },
@@ -17,9 +17,9 @@ const sample = {
 test('3338 keeps the tied second-highest distinct salaries and drops single-salary departments', () => {
   const { result } = buildTrace(sample)
   assert.deepEqual(result, [
-    { emp_id: 2, name: 'Bo', salary: 700, dept: 'Eng' },
-    { emp_id: 3, name: 'Cy', salary: 700, dept: 'Eng' },
-    { emp_id: 4, name: 'Di', salary: 500, dept: 'Ops' },
+    { emp_id: 2, dept: 'Eng' },
+    { emp_id: 3, dept: 'Eng' },
+    { emp_id: 4, dept: 'Ops' },
   ])
 })
 

@@ -14,24 +14,45 @@ const definition = {
   ],
 }
 
-const chip = (text, on) => ({
-  minWidth: 36, padding: '4px 8px', fontFamily: 'monospace', textAlign: 'center', boxSizing: 'border-box',
+const chip = (on, kept) => ({
+  minWidth: 36, padding: '4px 8px', fontFamily: 'monospace', textAlign: 'center', boxSizing: 'border-box', color: 'var(--text)',
   border: `${on ? 2 : 1}px solid ${on ? 'var(--text)' : 'var(--border)'}`,
-  background: on ? '#bbf7d0' : 'transparent', color: '#1c1917',
+  background: on ? 'color-mix(in srgb, var(--success) 35%, var(--surface2))' : kept ? 'color-mix(in srgb, var(--primary) 22%, var(--surface2))' : 'transparent',
 })
 
 export default function RangeSumSortedSubarraySums() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { sums, start, end, rank, total, result } = step.snapshot
-    const inRange = i => start !== undefined && start !== null && i >= start && i <= end
+    const { left, right } = run.input
+    const hasWindow = start !== undefined && start !== null
+    const inWindow = i => hasWindow && i >= start && i <= end
+    const sorted = step.phase === 'sort' || step.phase === 'pick' || step.phase === 'done'
     return <>
-      <div role="img" aria-label="Input values" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        {run.input.nums.map((v, i) => <div key={i} style={chip(v, inRange(i))}>{v}</div>)}
-      </div>
-      <p>{sums.length} sum{sums.length === 1 ? '' : 's'} listed{rank ? `, ranks ${run.input.left} to ${run.input.right} being added` : ''}.</p>
-      <div role="img" aria-label="Sums" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        {sums.map((v, i) => <div key={i} style={chip(v, i + 1 === rank)}>{v}</div>)}
-      </div>
+      <section aria-label="Input values">
+        <h3>Input: l and r mark the current start and end of the subarray</h3>
+        <div role="img" aria-label="Input values" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+          {run.input.nums.map((v, i) => <div key={i} style={{ ...chip(false, inWindow(i)), position: 'relative' }}>
+            {v}
+            <small style={{ display: 'block', height: 14, color: 'var(--text-muted)', fontWeight: 700 }}>
+              {hasWindow && i === start ? 'l' : ''}{hasWindow && i === end ? 'r' : ''}
+            </small>
+          </div>)}
+        </div>
+      </section>
+      <section aria-label="Sums">
+        <h3>{sorted ? 'Sums in ascending order, with ranks' : `Sums so far (${sums.length})`}</h3>
+        <div role="img" aria-label="Sums" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+          {sums.map((v, i) => {
+            const r = i + 1
+            const kept = sorted && r >= left && r <= right
+            return <div key={i} style={chip(r === rank, kept)}>
+              {v}
+              {sorted && <small style={{ display: 'block', color: 'var(--text-muted)' }}>rank {r}</small>}
+            </div>
+          })}
+        </div>
+      </section>
+      <p>{sorted ? `Ranks ${left} to ${right} are kept.` : `Every contiguous subarray is listed once; ${sums.length} sums so far.`}</p>
       <p>Running total: <strong>{total ?? 0}</strong>{result !== undefined && <> → answer <strong>{result}</strong></>}</p>
     </>
   }} renderReasoning={() => <>

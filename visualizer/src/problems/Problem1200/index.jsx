@@ -10,20 +10,26 @@ const definition = {
 export default function MinimumAbsoluteDifferenceVisual() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
     const { sorted, index, pairs, best } = step.snapshot
-    const current = index ?? -1
+    const left = index ?? -1
+    const right = left + 1
+    const isPair = i => i === left || i === right
     return <>
-      <div role="list" aria-label="Sorted values" style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+      <div role="list" aria-label="Sorted values" style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'flex-end' }}>
         {sorted.map((value, position) => {
-          const inGap = current >= 0 && (position === current || position === current + 1)
+          const role = position === left && left >= 0 ? 'l' : position === right && left >= 0 ? 'r' : ''
           return <span key={position} role="listitem" data-index={position} style={{
-            padding: '6px 8px', borderRadius: 6, fontFamily: 'monospace',
-            border: inGap ? '2px solid var(--text)' : '1px solid var(--border)',
-            background: inGap ? '#0891b2' : 'transparent', color: inGap ? '#fff' : 'var(--text)',
-          }}>{value}</span>
+            display: 'grid', justifyItems: 'center', padding: '6px 8px', borderRadius: 6, fontFamily: 'monospace',
+            border: isPair(position) ? '2px solid var(--text)' : '1px solid var(--border)',
+            background: isPair(position) ? 'color-mix(in srgb, var(--primary) 30%, transparent)' : 'var(--surface2)',
+            color: 'var(--text)',
+          }}>
+            <strong>{value}</strong>
+            <small style={{ color: 'var(--text-dim)', minHeight: '1em' }}>{role}</small>
+          </span>
         })}
       </div>
-      <p>Smallest gap so far: {best ?? 'not set'}</p>
+      <p>Smallest gap so far: {best ?? 'not set'}. The pair being compared is l and r.</p>
       <output aria-label="Pairs so far">{`Pairs: ${pairs.map(([a, b]) => `[${a}, ${b}]`).join(', ') || 'none yet'}`}</output>
     </>
-  }} renderReasoning={() => <p><strong>Sorting first:</strong> after sorting, the closest two values are always neighbours, so only adjacent gaps need checking.</p>} />
+  }} renderReasoning={() => <p><strong>Sorting first:</strong> after sorting, the closest two values are always neighbours, so only adjacent gaps need checking. Each step compares the pair at l and r.</p>} />
 }

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import OperationLog from '../../components/shared/OperationLog'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -17,18 +18,29 @@ const definition = {
   ],
 }
 
+// Active events ranked the way a poll ranks them: highest priority first, then the smaller id.
+function Ranking({ snapshot, removed }) {
+  const ranked = [...snapshot].sort((a, b) => b[1] - a[1] || a[0] - b[0])
+  if (ranked.length === 0) return <p>None active.</p>
+  return <ol aria-label="Active events in poll order">{ranked.map(([id, p], rank) => (
+    <li key={id} data-role={id === removed ? 'removed' : rank === 0 ? 'next' : ''} data-current={rank === 0 ? 'yes' : undefined}>
+      event {id}: priority {p}{rank === 0 ? ' (the next poll takes this one)' : ''}{id === removed ? ' (just removed)' : ''}
+    </li>))}</ol>
+}
+
 export default function DesignEventManager() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <section className="algorithm-sequence" aria-label="Active events">
-      <h3>Active events</h3>
-      <div className="algorithm-sequence__cells">{step.snapshot.length === 0 ? <p>None active.</p> : step.snapshot.map(([id, p]) => (
-        <div key={id} className={`algorithm-sequence__cell ${id === step.removed ? 'is-active' : ''}`} data-role={id === step.removed ? 'removed' : ''}>
-          <small>event</small><strong>{id}</strong><span>priority {p}</span>
-        </div>))}</div>
-    </section>
-    <output aria-label="Answers so far">{step.answer !== null ? `Returned ${step.answer}` : step.message}</output>
-  </>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const ops = run.input.ops.map((op, i) => ({ name: op[0], args: op.slice(1), returned: step.phase === 'done' || i <= step.op ? run.result[i] : undefined }))
+    return <>
+      <section aria-label="Active events">
+        <h3>Active events, poll order</h3>
+        <Ranking snapshot={step.snapshot} removed={step.removed} />
+      </section>
+      <OperationLog title="Operations" ops={ops} current={step.op} through={step.op >= 0 ? step.op : ops.length - 1} />
+      <output aria-label="Answers so far">{step.answer !== null ? `Returned ${step.answer}` : step.message}</output>
+    </>
+  }} renderReasoning={() => <>
     <p>An event is active until a poll removes it. Updates change only active events, so the map of current priorities is the whole state.</p>
-    <p>A poll picks the largest priority and breaks ties with the smallest id.</p>
+    <p>A poll picks the largest priority and breaks ties with the smallest id, which is the first row of the ranking shown.</p>
   </>} />
 }

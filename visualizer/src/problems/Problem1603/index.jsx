@@ -24,12 +24,13 @@ export default function ParkingSystem() {
         {left.map((count, index) => <div key={index} data-type={index + 1} style={{
           minWidth: 90, padding: 8, textAlign: 'center', fontFamily: 'monospace', boxSizing: 'border-box',
           border: `${type === index + 1 ? 2 : 1}px solid ${type === index + 1 ? 'var(--text)' : 'var(--border)'}`,
-          background: type === index + 1 && verdict === false ? '#fecaca' : type === index + 1 && verdict ? '#bbf7d0' : 'transparent',
-          color: '#1c1917',
+          background: type === index + 1 && verdict === false ? 'color-mix(in srgb, var(--error) 25%, transparent)' : type === index + 1 && verdict ? 'color-mix(in srgb, var(--success) 25%, transparent)' : 'transparent',
+          color: 'var(--text)',
         }}><div>{NAMES[index + 1]}</div><strong>{count}</strong><small> free</small></div>)}
       </div>
       <p>{type ? `Request type: ${NAMES[type]}` : 'No request is being checked.'}</p>
       <p>Answers so far: {answers.length ? answers.map(a => a ? 'true' : 'false').join(', ') : 'none'}</p>
+      <p style={{ color: 'var(--text-muted)' }}>Each request only reads and changes the counter for its own type.</p>
     </>
   }} renderReasoning={({ step }) => <>
     <p><strong>Exact type only:</strong> a request is compared with the counter for its own type and no other.</p>

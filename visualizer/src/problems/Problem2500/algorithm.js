@@ -96,8 +96,9 @@ export function buildTrace(input) {
   const heaps = [];
   const frames = [];
   let total = 0;
+  const removed = []; // removed[round][row] = the value taken from that row in that round
   const snap = (phase, activeLine, pyKey, message, extra = {}) => frames.push({
-    phase, activeLine, pythonLine: py(pyKey), message, row: -1, heap0: heaps[0] ? [...heaps[0]] : [], total, best: null, ...extra,
+    phase, activeLine, pythonLine: py(pyKey), message, row: -1, heap0: heaps[0] ? [...heaps[0]] : [], heaps: heaps.map(h => [...h]), removed: removed.map(r => [...r]), total, best: null, ...extra,
   });
 
   snap("setup", 2, "heaps = []", "Start with no row heaps.");
@@ -118,6 +119,7 @@ export function buildTrace(input) {
       snap("pick", 6, "for h in heaps", `Take the greatest value left in row ${r}.`, { round: c + 1, row: r, best });
       const popped = heapPop(heaps[r]);
       best = Math.max(best, popped);
+      (removed[c] ??= [])[r] = popped;
       snap("pop", 6, "best = max(best", `Row ${r} gives up ${popped}; the largest so far is ${best}.`, { round: c + 1, row: r, best, heap0: [...heaps[0]] });
     }
     total += best;

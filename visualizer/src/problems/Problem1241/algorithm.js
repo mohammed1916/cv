@@ -1,4 +1,4 @@
-// Knowledge-derived walkthrough: posts are the rows without a parent; each distinct reply is counted once against its post, and posts with no replies keep zero.
+// Walkthrough: posts are the rows without a parent; each distinct reply is counted once against its post, and posts with no replies keep zero.
 export const phases = [
   { id: 'load', label: 'Rows', description: 'Drop exact duplicate rows first.' },
   { id: 'posts', label: 'Posts', description: 'Rows with no parent are the posts.' },

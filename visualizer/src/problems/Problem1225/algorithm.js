@@ -1,4 +1,4 @@
-// Knowledge-derived walkthrough: number the rows inside each state, subtract that number from the date, and rows that share the result form one run.
+// Teaching walkthrough: number the rows inside each state, subtract that number from the date, and rows that share the result form one run.
 export const phases = [
   { id: 'load', label: 'Filter', description: 'Keep only the 2019 outcomes, in date order.' },
   { id: 'extend', label: 'Extend', description: 'A consecutive day with the same state continues the run.' },

@@ -3,12 +3,25 @@ import assert from 'node:assert/strict'
 import { buildTrace, parseInput, code, python, phases } from './algorithm.js'
 
 const sample = {
-  Drivers: [{ driver_id: 1, name: 'Ana' }, { driver_id: 2, name: 'Ben' }, { driver_id: 3, name: 'Cy' }],
+  Drivers: [
+    { driver_id: 11, name: 'Dana', accidents: 2 },
+    { driver_id: 12, name: 'Eli', accidents: 0 },
+    { driver_id: 13, name: 'Fay', accidents: 1 },
+  ],
+  Vehicles: [
+    { vehicle_id: 300, driver_id: 11, fuel_type: 'Hybrid' },
+    { vehicle_id: 301, driver_id: 12, fuel_type: 'Hybrid' },
+    { vehicle_id: 302, driver_id: 13, fuel_type: 'Diesel' },
+    { vehicle_id: 303, driver_id: 11, fuel_type: 'Diesel' },
+  ],
   Trips: [
-    { trip_id: 1, driver_id: 1, distance: 10, rating: 5 },
-    { trip_id: 2, driver_id: 1, distance: 5, rating: 4 },
-    { trip_id: 3, driver_id: 2, distance: 15, rating: 3 },
-    { trip_id: 4, driver_id: 2, distance: 15, rating: 4 },
+    { trip_id: 1, vehicle_id: 300, distance: 10, rating: 4 },
+    { trip_id: 2, vehicle_id: 300, distance: 20, rating: 5 },
+    { trip_id: 3, vehicle_id: 301, distance: 15, rating: 4 },
+    { trip_id: 4, vehicle_id: 301, distance: 5, rating: 5 },
+    { trip_id: 5, vehicle_id: 302, distance: 40, rating: 3 },
+    { trip_id: 6, vehicle_id: 303, distance: 40, rating: 3 },
+    { trip_id: 7, vehicle_id: 999, distance: 80, rating: 5 },
   ],
 }
 
@@ -25,30 +38,22 @@ function checkFrames(trace) {
   assert.deepEqual(trace.frames.at(-1).rows, trace.result)
 }
 
-test('3308 ranks drivers by total distance with averages', () => {
+test('3308 top driver per fuel type: rating, then distance, then fewest accidents', () => {
   const trace = buildTrace(sample)
+  // Hybrid: Dana 4.50 over 30 km and Eli 4.50 over 20 km tie on rating, so the longer distance (Dana) wins.
+  // Diesel: Dana and Fay both 3.00 over 40 km; Fay has fewer accidents, so Fay wins.
   assert.deepEqual(trace.result, [
-    { rank: 1, driver_id: 2, name: 'Ben', total_distance: 30, avg_rating: 3.5 },
-    { rank: 2, driver_id: 1, name: 'Ana', total_distance: 15, avg_rating: 4.5 },
+    { fuel_type: 'Diesel', driver_id: 13, rating: 3, distance: 40 },
+    { fuel_type: 'Hybrid', driver_id: 11, rating: 4.5, distance: 30 },
   ])
   checkFrames(trace)
 })
 
-test('3308 equal distances are broken by the lower driver id', () => {
-  const trace = buildTrace({
-    Drivers: [{ driver_id: 5, name: 'Dee' }, { driver_id: 6, name: 'Eli' }],
-    Trips: [{ trip_id: 1, driver_id: 6, distance: 8, rating: 2 }, { trip_id: 2, driver_id: 5, distance: 8, rating: 5 }],
-  })
-  assert.deepEqual(trace.result.map(r => [r.rank, r.driver_id]), [[1, 5], [2, 6]])
-  checkFrames(trace)
+test('3308 rejects a trip without a vehicle only by dropping it', () => {
+  const trace = buildTrace(sample)
+  assert.ok(trace.frames.some(f => f.phase === 'join' && f.message.includes('not listed')))
 })
 
-test('3308 drivers without trips are not listed', () => {
-  const trace = buildTrace({ Drivers: [{ driver_id: 9, name: 'Fay' }], Trips: [] })
-  assert.deepEqual(trace.result, [])
-  checkFrames(trace)
-})
-
-test('3308 rejects a rating outside 1 to 5', () => {
-  assert.throws(() => parseInput('{"Drivers":[],"Trips":[{"trip_id":1,"driver_id":1,"distance":1,"rating":0}]}'))
+test('3308 rejects an invalid rating', () => {
+  assert.throws(() => parseInput('{"Drivers":[],"Vehicles":[],"Trips":[{"trip_id":1,"vehicle_id":1,"distance":1,"rating":9}]}'))
 })

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -19,6 +20,9 @@ const definition = {
 
 export default function HouseRobberV() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="Houses (amount, with colour in the role line)" length={run.input.nums.length} active={step.at}
+      valueAt={index => run.input.nums[index]}
+      roleAt={index => `colour ${run.input.colors[index]}${index > 0 && run.input.colors[index] === run.input.colors[index - 1] ? ' (same as left)' : ''}`} />
     <table aria-label="Houses">
       <thead><tr><th>house</th><th>amount</th><th>colour</th><th>skip total</th><th>take total</th></tr></thead>
       <tbody>{run.input.nums.map((v, i) => <tr key={i} data-current={step.at === i ? 'yes' : undefined}>

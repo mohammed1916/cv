@@ -26,8 +26,43 @@ const definition = {
   ],
 }
 
+function StageStrip({ phases, current }) {
+  return <ol aria-label="SQL stages" style={{ display: 'flex', flexWrap: 'wrap', gap: 6, listStyle: 'none', padding: 0, margin: '0 0 12px' }}>
+    {phases.map(stage => <li key={stage.id} data-stage={stage.id} aria-current={stage.id === current ? 'step' : undefined} style={{
+      padding: '4px 10px', border: stage.id === current ? '2px solid var(--text)' : '1px solid var(--border)',
+      background: stage.id === current ? 'color-mix(in srgb, var(--primary) 25%, transparent)' : 'var(--surface2)', color: 'var(--text)',
+    }}>{stage.label}</li>)}
+  </ol>
+}
+
+// The reporting tree under employee 1: each person sits under their manager; reached people are shaded.
+function ReportTree({ employees, reached }) {
+  const children = new Map()
+  for (const e of employees) {
+    if (e.manager_id === null) continue
+    if (!children.has(e.manager_id)) children.set(e.manager_id, [])
+    children.get(e.manager_id).push(e.employee_id)
+  }
+  const draw = (id, depth) => (children.get(id) ?? []).map(child => <li key={child}>
+    <span data-employee={child} style={{
+      display: 'inline-block', padding: '2px 8px', fontFamily: 'monospace', color: 'var(--text)',
+      border: '1px solid var(--border)',
+      background: reached.includes(child) ? 'color-mix(in srgb, var(--primary) 25%, transparent)' : 'var(--surface2)',
+    }}>{child}</span>
+    {depth < 12 && <ul style={{ margin: '4px 0 4px 18px', padding: 0, listStyle: 'none' }}>{draw(child, depth + 1)}</ul>}
+  </li>)
+  return <div aria-label="Reporting tree" style={{ overflowX: 'auto' }}>
+    <span data-employee={BOSS_ID} style={{ display: 'inline-block', padding: '2px 8px', fontFamily: 'monospace', color: 'var(--text)', border: '2px solid var(--text)' }}>{BOSS_ID} (boss)</span>
+    <ul style={{ margin: '4px 0 4px 18px', padding: 0, listStyle: 'none' }}>{draw(BOSS_ID, 0)}</ul>
+  </div>
+}
+
+const BOSS_ID = 1
+
 export default function AllPeopleReportToTheGivenManager() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <StageStrip phases={phases} current={step.phase} />
+    <ReportTree employees={run.input.employees} reached={step.rows.map(r => r.employee_id)} />
     <RowTable label={`Working rows (${step.phase})`} columns={step.columns} rows={step.rows} />
     {step.phase === 'done' && <RowTable label="Result" columns={run.columns} rows={run.result} />}
   </>} renderReasoning={() => <>

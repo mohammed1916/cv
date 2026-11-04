@@ -17,12 +17,26 @@ const definition = {
   ],
 }
 
+// Each reachable string as letter cells; a cell is green when its letter already sits where the sorted target has it.
+function LevelStrings({ target, level, count }) {
+  return <div aria-label="Reachable strings">
+    <p>Target: {[...target].map((ch, i) => <span key={i} style={{ display: 'inline-block', minWidth: 20, textAlign: 'center', margin: 1, padding: '1px 3px', border: '1px solid var(--text-muted)', background: 'var(--surface2)', color: 'var(--text)' }}>{ch}</span>)}</p>
+    {level.map((text, row) => <div key={row} style={{ marginBottom: 4 }}>
+      {[...text].map((ch, i) => <span key={i} data-role={ch === target[i] ? 'target' : ''} style={{ display: 'inline-block', minWidth: 20, textAlign: 'center', margin: 1, padding: '1px 3px', border: '1px solid var(--text-muted)', background: ch === target[i] ? 'var(--primary)' : 'var(--surface2)', color: ch === target[i] ? 'var(--surface)' : 'var(--text)' }}>{ch}</span>)}
+    </div>)}
+    {count > level.length && <p>{count - level.length} more strings not shown</p>}
+  </div>
+}
+
 export default function MinimumOperationsToSortAString() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <ul aria-label="Reachable strings">{step.level.map((text, index) => <li key={index}><code>{text}</code></li>)}</ul>
-    <output aria-label="Operation count">{`Operations so far: ${step.ops} · strings in this level: ${step.count}`}</output>
-  </>} renderReasoning={() => <>
-    <p>A move re-sorts a stretch of letters, as long as that stretch is shorter than the whole word. The search keeps every string reachable after the same number of operations and stops at the first level that contains the sorted string.</p>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const target = [...run.input.s].sort().join('')
+    return <>
+      <LevelStrings target={target} level={step.level} count={step.count} />
+      <output aria-label="Operation count">{`Operations so far: ${step.ops} · strings in this level: ${step.count}`}</output>
+    </>
+  }} renderReasoning={() => <>
+    <p>A move re-sorts a stretch of letters, as long as that stretch is not the whole word. The search keeps every string reachable after the same number of operations and stops at the first level that contains the sorted string.</p>
     <p>Strings already seen are skipped, so each string is expanded once.</p>
   </>} />
 }

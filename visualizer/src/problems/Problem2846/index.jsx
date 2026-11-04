@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import GraphTraversalView from '../../components/shared/GraphTraversalView'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -16,11 +17,21 @@ const definition = {
   ],
 }
 
+const cell = { padding: '4px 8px', borderBottom: '1px solid var(--surface2)', color: 'var(--text)', textAlign: 'left' }
+
 export default function EquilibriumQueries() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+    <GraphTraversalView title="Tree (each node shows its edge weight to the parent)" n={step.tags ? Object.keys(step.tags).length : 0}
+      edges={step.edges} directed={false} labels={null} tags={step.tags} visited={step.pathNodes} done={[]} showFrontier={false} />
     <ol aria-label="Path weights" className="algorithm-chain">
       {step.weights.map((w, i) => <li key={i}>{w}</li>)}
     </ol>
+    {step.counts.length > 0 && <table aria-label="Weight counts on the path" style={{ borderCollapse: 'collapse' }}>
+      <thead><tr>{['weight', 'edges on path', 'kept'].map(h => <th key={h} scope="col" style={{ ...cell, borderBottom: '2px solid var(--border, currentColor)' }}>{h}</th>)}</tr></thead>
+      <tbody>{step.counts.map(([w, c], i) => <tr key={w}>
+        <td style={cell}>{w}</td><td style={cell}>{c}</td><td style={cell}>{i === 0 ? 'most common: kept' : 'changed'}</td>
+      </tr>)}</tbody>
+    </table>}
     <output aria-label="Cost">{step.cost === null ? 'Waiting for a query' : `Cost for this query: ${step.cost}`}</output>
   </>} renderReasoning={() => <>
     <p>Each operation changes one edge to any weight, so the cheapest target is the most common weight on the path.</p>

@@ -23,12 +23,14 @@ export default function MinimumOperations() {
     const inBlock = i => left !== null && right !== null && i >= left && i <= right && left <= right
     return <>
       <div role="img" aria-label="Array with the middle block highlighted" style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-        {nums.map((value, i) => <div key={i} data-index={i} style={{
-          ...cell, background: inBlock(i) ? '#bbf7d0' : 'transparent', color: inBlock(i) ? '#1c1917' : 'var(--text)',
-          outline: left === i || right === i ? '2px solid var(--primary)' : 'none',
-        }}><div>{value}</div><small>{i}</small></div>)}
+        {nums.map((value, i) => <div key={i} data-index={i} style={{ display: 'grid', justifyItems: 'center', gap: 2 }}>
+          <small style={{ minHeight: 16, color: 'var(--text)', fontWeight: 700 }}>{left === i && right === i ? 'l r' : left === i ? 'l' : right === i ? 'r' : ''}</small>
+          <div style={{ ...cell, padding: '4px 6px', color: 'var(--text)',
+            background: inBlock(i) ? 'color-mix(in srgb, var(--success) 30%, transparent)' : 'transparent',
+            outline: left === i || right === i ? '2px solid var(--primary)' : 'none' }}><div>{value}</div><small>{i}</small></div>
+        </div>)}
       </div>
-      <p>Target block sum: {target} · current block sum: {window} · longest matching block: {best}</p>
+      <p style={{ color: 'var(--text)' }}>Green is the block between l and r. Target block sum: {target} · current block sum: {window} · longest matching block: {best}</p>
       <p>{run.result === -1 ? 'No block matches, so the answer is -1.' : `Answer: ${run.result}`}</p>
     </>
   }} renderReasoning={() => <>

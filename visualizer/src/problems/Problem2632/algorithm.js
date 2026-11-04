@@ -24,7 +24,7 @@ export function buildTrace({ arity, calls }) {
   let result = null
   for (let i = 0; i < calls.length && result === null; i++) {
     collected.push(...calls[i])
-    const view = (focus, summary) => ({ title: `Collected ${collected.length} of ${arity}`, rows: calls.map((args, index) => `call ${index + 1}: [${args.join(', ')}]`), focus, summary })
+    const view = (focus, summary) => ({ title: `Collected ${collected.length} of ${arity}`, rows: calls.map((args, index) => `call ${index + 1}: [${args.join(', ')}]`), calls: calls.map(args => args.slice()), collected: collected.slice(), arity, focus, summary })
     step(frames, 'collect', 'for each call add', `Collected: [${collected.join(', ')}].`, view(i, ''))
     if (collected.length < arity) {
       step(frames, 'wait', 'if fewer than arity', `${collected.length} of ${arity} arguments, so a function is returned to keep waiting.`, view(i, ''))
@@ -33,7 +33,7 @@ export function buildTrace({ arity, calls }) {
       step(frames, 'fire', 'otherwise call fn', `Enough arguments, so fn runs and returns ${result}.`, view(i, String(result)))
     }
   }
-  if (result === null) step(frames, 'done', 'if fewer than arity', 'Calls ran out before enough arguments arrived.', { title: `Collected ${collected.length} of ${arity}`, rows: calls.map((args, index) => `call ${index + 1}: [${args.join(', ')}]`), focus: -1, summary: 'pending' })
-  else step(frames, 'done', 'otherwise call fn', `Final value ${result}.`, { title: 'Result', rows: [String(result)], focus: 0, summary: String(result) })
+  if (result === null) step(frames, 'done', 'if fewer than arity', 'Calls ran out before enough arguments arrived.', { title: `Collected ${collected.length} of ${arity}`, rows: calls.map((args, index) => `call ${index + 1}: [${args.join(', ')}]`), calls: calls.map(args => args.slice()), collected: collected.slice(), arity, focus: -1, summary: 'pending' })
+  else step(frames, 'done', 'otherwise call fn', `Final value ${result}.`, { title: 'Result', rows: [String(result)], calls: calls.map(args => args.slice()), collected: collected.slice(), arity, focus: 0, summary: String(result) })
   return { result, frames }
 }

@@ -19,14 +19,14 @@ export function buildTrace({ init, calls }) {
   const frames = []
   const answers = []
   let current = init
-  const view = (focus, summary) => ({ title: 'Counter', rows: answers.map((value, index) => `call ${index + 1} returned ${value}`), focus, summary })
-  step(frames, 'start', 'keep a variable current', `Counter starts at ${init}.`, { title: 'Counter', rows: [`current ${current}`], focus: 0, summary: '' })
+  
+  step(frames, 'start', 'keep a variable current', `Counter starts at ${init}.`, { title: 'Counter', rows: [`current ${current}`], answers: [], current, focus: -1, summary: '' })
   for (let call = 1; call <= calls; call++) {
     answers.push(current)
-    step(frames, 'call', 'each call returns current', `Call ${call} returns ${current}.`, view(answers.length - 1, ''))
+    step(frames, 'call', 'each call returns current', `Call ${call} returns ${current}.`, { title: 'Counter', rows: answers.map((value, index) => `call ${index + 1} returned ${value}`), answers: answers.slice(), current, focus: answers.length - 1, summary: '' })
     current += 1
-    step(frames, 'advance', 'then add one', `Current moves to ${current}.`, view(answers.length - 1, `current ${current}`))
+    step(frames, 'advance', 'then add one', `Current moves to ${current}.`, { title: 'Counter', rows: answers.map((value, index) => `call ${index + 1} returned ${value}`), answers: answers.slice(), current, focus: answers.length - 1, summary: `current ${current}` })
   }
-  step(frames, 'done', 'return the list', 'Answers recorded.', view(-1, JSON.stringify(answers)))
+  step(frames, 'done', 'return the list', 'Answers recorded.', { title: 'Counter', rows: answers.map((value, index) => `call ${index + 1} returned ${value}`), answers: answers.slice(), current, focus: -1, summary: JSON.stringify(answers) })
   return { result: answers, frames }
 }

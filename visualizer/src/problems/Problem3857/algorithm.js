@@ -6,6 +6,7 @@ export const code = [
   'return best[n]',
 ].map((text, index) => ({ line: index + 1, text }))
 const L = key => code.findIndex(c => c.text.includes(key)) + 1
+const PY = key => python.split('\n').findIndex(line => line.includes(key)) + 1
 
 export function parseInput(text) {
   const input = JSON.parse(text)
@@ -17,7 +18,7 @@ export function parseInput(text) {
 
 export function buildTrace({ n }) {
   const best = [0, 0]
-  const frames = [{ best: best.slice(), x: 1, a: null, phase: 'setup', activeLine: L('best[1] is zero'), message: 'A single one costs nothing.' }]
+  const frames = [{ best: best.slice(), x: 1, a: null, phase: 'setup', pythonLine: PY('best = [0] * (n + 1)'), activeLine: L('best[1] is zero'), message: 'A single one costs nothing.' }]
   for (let x = 2; x <= n; x++) {
     let cost = Infinity
     let arg = 1
@@ -27,9 +28,9 @@ export function buildTrace({ n }) {
       if (candidate < cost) { cost = candidate; arg = a }
     }
     best[x] = cost
-    frames.push({ best: best.slice(), x, a: arg, phase: 'split', activeLine: L('best[x] is'), message: `Splitting ${x} as ${arg} + ${x - arg} costs ${cost} in total.` })
+    frames.push({ best: best.slice(), x, a: arg, phase: 'split', pythonLine: PY('best[x] = min'), activeLine: L('best[x] is'), message: `Splitting ${x} as ${arg} + ${x - arg} costs ${cost} in total.` })
   }
-  frames.push({ best: best.slice(), x: n, a: null, phase: 'done', activeLine: L('return best[n]'), message: `Minimum cost for ${n} is ${best[n]}.` })
+  frames.push({ best: best.slice(), x: n, a: null, phase: 'done', pythonLine: PY('return best[n]'), activeLine: L('return best[n]'), message: `Minimum cost for ${n} is ${best[n]}.` })
   return { input: { n }, result: best[n], frames }
 }
 

@@ -19,26 +19,31 @@ const definition = {
   url: 'https://leetcode.com/problems/check-if-all-1s-are-at-least-length-k-places-away/',
 }
 
-const cell = (active, one) => ({
-  display: 'inline-flex', flexDirection: 'column', alignItems: 'center', minWidth: 34, margin: 2, padding: '4px 6px',
-  borderRadius: 6, border: active ? '2px solid #0891b2' : '1px solid currentColor',
-  background: one ? 'rgba(8,145,178,0.2)' : 'transparent',
-})
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
-function GapVisual({ step }) {
-  const { nums, k, index, last, gap, verdict } = step.snapshot
-  return <div style={{ padding: 8 }}>
-    <h4>Positions</h4>
-    <div>{nums.map((x, i) => <span key={i} style={cell(i === index, x === 1)}>
-      <strong>{x}</strong><small>{i}</small>
-    </span>)}</div>
-    <p>Required distance k = {k}. Latest 1 at: {last ?? 'none'}{gap !== null ? ` · zeros in between: ${gap}` : ''}</p>
-    {verdict !== null && <p><strong>Answer: {String(verdict)}</strong></p>}
+// The array with the previous 1 (last) and the current position (i) marked. The zeros between them are counted.
+function GapVisual({ run, step }) {
+  const { nums, k } = run.input
+  const { index, last, gap, verdict } = step.snapshot
+  const roleAt = i => {
+    const parts = []
+    if (last !== null && i === last) parts.push('last 1')
+    return parts.join(' ')
+  }
+  return <div>
+    <IndexedSequence label={`Positions (k = ${k}); the marked 1 is the previous one`} length={nums.length} active={index ?? -1}
+      valueAt={i => nums[i]} roleAt={roleAt} />
+    <p style={{ color: 'var(--text)' }}>
+      {gap !== null && gap !== undefined
+        ? `Zeros between the previous 1 and this 1: ${gap}. They must be at least ${k}.`
+        : (last !== null ? `Latest 1 so far is at ${last}.` : 'No 1 seen yet.')}
+    </p>
+    {verdict !== null && verdict !== undefined && <p style={{ color: 'var(--text)' }}>Verdict: <strong>{verdict ? 'true' : 'false'}</strong></p>}
   </div>
 }
 
 export default function AllOnesAwayByK() {
   return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ step }) => <GapVisual step={step} />}
+    renderVisual={({ run, step }) => <GapVisual run={run} step={step} />}
     renderReasoning={() => <p>Only neighbouring 1s matter: if each consecutive pair has at least k zeros between them, every pair is fine.</p>} />
 }

@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
 import GraphTraversalView from "../../components/shared/GraphTraversalView";
 import { code, python, parseInput, buildTrace } from "./algorithm";
@@ -23,23 +24,45 @@ const definition = {
   ],
 };
 
+const cell = { padding: "4px 8px", borderBottom: "1px solid var(--surface2)", color: "var(--text)", textAlign: "left" };
+
+// The jump table: row = player, one column per level j holding the holder after 2^j passes and the sum of receivers met.
+function JumpTable({ levels }) {
+  const n = levels.nxt[0].length;
+  const headers = levels.nxt.map((_, j) => `2^${j} passes`);
+  return <table aria-label="Jump table by level" style={{ borderCollapse: "collapse", width: "100%" }}>
+    <thead><tr>
+      <th scope="col" style={{ ...cell, borderBottom: "2px solid var(--border, currentColor)" }}>player</th>
+      {headers.map(h => <th key={h} scope="col" colSpan={2} style={{ ...cell, borderBottom: "2px solid var(--border, currentColor)" }}>{h}</th>)}
+    </tr>
+    <tr><th scope="col" style={cell}>x</th>{headers.map(h => <Fragment key={h}><th scope="col" style={cell}>holder</th><th scope="col" style={cell}>sum</th></Fragment>)}</tr></thead>
+    <tbody>{Array.from({ length: n }, (_, x) => <tr key={x}>
+      <td style={cell}>{x}</td>
+      {levels.nxt.map((_, j) => <Fragment key={j}><td style={cell}>{levels.nxt[j][x]}</td><td style={cell}>{levels.sums[j][x]}</td></Fragment>)}
+    </tr>)}</tbody>
+  </table>
+}
+
 export default function Problem2836Visualizer() {
   return (
     <AlgorithmWorkspace
       definition={definition}
       renderVisual={({ step }) => (
-        <GraphTraversalView
-          title="Ball passing graph"
-          n={step.n}
-          edges={step.edges}
-          directed={step.directed}
-          current={step.current}
-          visited={step.visited}
-          done={step.done}
-          tags={step.tags}
-          notes={step.notes}
-          showFrontier={false}
-        />
+        <>
+          <GraphTraversalView
+            title="Ball passing graph"
+            n={step.n}
+            edges={step.edges}
+            directed={step.directed}
+            current={step.current}
+            visited={step.visited}
+            done={step.done}
+            tags={step.tags}
+            notes={step.notes}
+            showFrontier={false}
+          />
+          {step.levels.nxt.length > 0 && <JumpTable levels={step.levels} />}
+        </>
       )}
       renderReasoning={({ step }) => <p>{step.detail}</p>}
     />

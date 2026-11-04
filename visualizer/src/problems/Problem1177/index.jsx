@@ -1,37 +1,44 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import { meta } from './meta'
+import { buildTrace, parseInput, code, python, phases, examples, complexity, inputLabel } from './algorithm'
+import { Sequence, Vars } from './SeqKit'
 
 const definition = {
-  phases,
-  parse: parseInput,
-  build: buildTrace,
-  code,
-  python,
-  inputLabel: 'Object with text and queries (JSON)',
-  url: 'https://leetcode.com/problems/can-make-palindrome-from-substring/',
-  complexity: 'O(n + q) time after the prefix masks are built: each query is one XOR and one popcount. O(n) space for the masks.',
-  examples: [
-    { label: 'First', input: '{"text":"abcda","queries":[[0,4,0],[0,4,1],[1,3,0],[1,3,1],[2,2,0]]}' },
-    { label: 'Second', input: '{"text":"xyzzyq","queries":[[0,5,0],[0,5,2],[1,4,0]]}' },
-  ],
+  number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
+  url: `https://leetcode.com/problems/${meta.slug}/`, complexity, examples,
+}
+
+const ALPHABET = [...'abcdefghijklmnopqrstuvwxyz']
+
+// One cell per letter: lit when that letter has an odd count inside the query substring.
+function ParityRow({ letters }) {
+  return <ol aria-label="Letters with an odd count" style={{ display: 'flex', flexWrap: 'wrap', gap: 3, listStyle: 'none', padding: 0, margin: '8px 0' }}>
+    {ALPHABET.map(letter => {
+      const odd = letters.includes(letter)
+      return <li key={letter} style={{
+        width: 26, textAlign: 'center', padding: '3px 0', borderRadius: 4, fontFamily: 'var(--mono, monospace)',
+        border: '1px solid var(--border)', background: odd ? 'var(--primary-glow)' : 'var(--surface2)',
+        color: odd ? 'var(--text)' : 'var(--text-muted)', fontWeight: odd ? 700 : 400,
+      }}>{letter}</li>
+    })}
+  </ol>
 }
 
 export default function CanMakePalindromeFromSubstring() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
-    const { query, letters, need, k, answer, answers, index } = step.snapshot
+    const { text, query, letters, need, k, answer, answers, index } = step.snapshot
     const [l, r] = query ?? [-1, -2]
+    const chars = [...text]
+    const marks = {}
+    if (query) for (let i = l; i <= r; i++) marks[i] = 'window'
+    const pointers = query ? { l, r } : {}
+    if (index !== null && index !== undefined) pointers.index = index
     return <>
-      <div role="img" aria-label="Text" style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-        {[...run.input.text].map((ch, i) => <div key={i} data-index={i} style={{
-          width: 36, height: 36, boxSizing: 'border-box', display: 'grid', placeItems: 'center', fontFamily: 'monospace',
-          border: index === i ? '2px solid var(--text)' : '1px solid var(--border)',
-          background: i >= l && i <= r ? '#a5f3fc' : 'transparent',
-        }}>{ch}</div>)}
-      </div>
-      <output aria-label="Query state">{query
-        ? `Query [${query.join(', ')}] · odd letters: ${letters.length ? letters.join(' ') : 'none'} · replacements needed: ${need ?? '-'} · k: ${k}${answer === null ? '' : ` · ${answer ? 'true' : 'false'}`}`
-        : 'Prefix masks are being built.'}</output>
+      <Sequence label={query ? `Substring ${l}..${r} (k = ${k})` : 'Input string (prefix masks being built)'} values={chars} pointers={pointers} marks={marks} />
+      <ParityRow letters={query ? letters : []} />
+      <Vars vars={{ 'odd letters': query ? letters.length : null, 'replacements needed': need, k, 'palindrome possible': answer === null ? null : answer ? 'true' : 'false' }} />
       <output aria-label="Answers">{`Answers: [${answers.map(a => (a ? 'true' : 'false')).join(', ')}]`}</output>
+      <p>{step.message}</p>
     </>
   }} renderReasoning={() => <>
     <p><strong>Parity mask:</strong> XOR of two prefix masks leaves a bit for each letter with an odd count in the substring.</p>

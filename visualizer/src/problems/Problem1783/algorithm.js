@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample rows are invented for this visualization.
+// Teaching version of the query. The sample rows are invented for this visualization.
 export const phases = [
   { id: 'load', label: 'Load', description: 'Read the players and the yearly championship results.' },
   { id: 'tally', label: 'Tally', description: 'Stack the four tournament columns and count wins per player.' },

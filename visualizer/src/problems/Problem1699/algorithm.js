@@ -1,4 +1,4 @@
-// Knowledge-derived teaching version. The sample tables are invented for this visualization.
+// Teaching version of the query. The sample tables are invented for this visualization.
 const SQL = `SELECT person1, person2, COUNT(*) AS call_count, SUM(duration) AS total_duration
 FROM (
   SELECT CASE WHEN from_id < to_id THEN from_id ELSE to_id END AS person1,

@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import { Sequence, Vars } from './SeqKit'
 
 const definition = {
   phases, parse: parseInput, build: buildTrace, code, python,
@@ -16,19 +17,11 @@ const definition = {
 export default function ArmstrongNumber() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
     const { digits, k, total, n, current } = step.snapshot
+    const pointers = current === null || current === undefined ? {} : { digit: current }
     return <>
-      <div role="img" aria-label="Digits of n" style={{ display: 'flex', gap: 8, fontFamily: 'monospace' }}>
-        {digits.map((d, i) => <div key={i} data-digit={i} style={{
-          width: 48, height: 48, display: 'grid', placeItems: 'center', fontSize: '1.2rem',
-          border: `${current === i ? 2 : 1}px solid ${current === i ? 'var(--text)' : 'var(--border)'}`,
-          background: current !== null && i < current ? 'var(--surface2)' : 'transparent',
-        }}>{d}</div>)}
-      </div>
-      <p>{k ? `Each digit is raised to the power ${k}.` : 'Digits will appear here.'}</p>
-      <output aria-label="Running total">{`Total ${total} of target ${n}`}</output>
+      <Sequence label={`Digits of ${n}, each raised to the power ${k}`} values={digits} pointers={pointers} />
+      <Vars vars={{ 'digit count k': k, 'running total': total, n }} />
+      <output aria-label="Result">{step.message}</output>
     </>
-  }} renderReasoning={({ step }) => <>
-    <p><strong>Digit count sets the power:</strong> a number with k digits uses exponent k for every digit.</p>
-    <p><strong>Compare at the end:</strong> the total of those powers is checked against n once every digit has been used.</p>
-  </>} />
+  }} renderReasoning={() => <p>An Armstrong number equals the sum of its digits, each raised to the number of digits. The running total is compared with n once every digit has been added.</p>} />
 }

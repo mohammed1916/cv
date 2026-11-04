@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import BinaryTreeLane from '../../components/shared/BinaryTreeLane'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -15,15 +16,10 @@ const definition = {
   ],
 }
 
-// Nested node view: shows the subtrees placed so far, so each attachment is visible.
-function TreeView({ node, label = 'root' }) {
+// BinaryTreeLane needs stable ids; here each value is unique, so the value is the id.
+function withIds(node) {
   if (!node) return null
-  return <li><span>{label}: <strong>{node.value}</strong></span>
-    {(node.left || node.right) && <ul>
-      {node.left && <TreeView node={node.left} label="left" />}
-      {node.right && <TreeView node={node.right} label="right" />}
-    </ul>}
-  </li>
+  return { id: node.value, value: node.value, left: withIds(node.left), right: withIds(node.right) }
 }
 
 export default function ConstructBinaryTreeFromPreorderAndInorder() {
@@ -38,10 +34,9 @@ export default function ConstructBinaryTreeFromPreorderAndInorder() {
       <IndexedSequence label="Inorder" length={snap.inorder.length} valueAt={i => snap.inorder[i]}
         active={snap.mid ?? -1}
         roleAt={i => (i === snap.mid ? 'root' : i >= is && i < ie ? 'range' : '')} />
-      <section aria-label="Tree built so far">
-        <h3>Tree built so far</h3>
-        {snap.tree ? <ul><TreeView node={snap.tree} /></ul> : <p>No node yet.</p>}
-      </section>
+      <BinaryTreeLane title="Tree built so far" root={withIds(snap.tree)}
+        roles={snap.root === null || snap.root === undefined ? {} : { [snap.root]: 'active' }}
+        tags={Object.fromEntries((snap.placed ?? []).map(p => [p.value, p.side]))} />
     </>
   }} renderReasoning={({ step }) => <>
     <p>{step.snapshot.root !== null && step.snapshot.root !== undefined

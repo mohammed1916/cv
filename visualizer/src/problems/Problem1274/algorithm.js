@@ -19,19 +19,19 @@ export function buildTrace({ size, ships }) {
   const box = (a, b, c, d) => `[${a},${b}] to [${c},${d}]`
   const visit = (a, b, c, d) => {
     if (a > c || b > d) {
-      frames.push({ phase: 'empty', pythonLine: PL('if a > c'), activeLine: L('if it is empty'), state: [...lines], message: `${box(a, b, c, d)} is empty, so return 0.` })
+      frames.push({ phase: 'empty', pythonLine: PL('if a > c'), activeLine: L('if it is empty'), state: [...lines], rect: [a, b, c, d], message: `${box(a, b, c, d)} is empty, so return 0.` })
       return 0
     }
     if (!has(a, b, c, d)) {
-      frames.push({ phase: 'oracle', pythonLine: PL('if a > c'), activeLine: L('ask the oracle'), state: [...lines], message: `Oracle: no ships in ${box(a, b, c, d)}.` })
+      frames.push({ phase: 'oracle', pythonLine: PL('if a > c'), activeLine: L('ask the oracle'), state: [...lines], rect: [a, b, c, d], message: `Oracle: no ships in ${box(a, b, c, d)}.` })
       return 0
     }
     if (a === c && b === d) {
       lines.push(`ship at [${a},${b}]`)
-      frames.push({ phase: 'cell', pythonLine: PL('return 1'), activeLine: L('if it is a single cell'), state: [...lines], message: `Single cell [${a},${b}] holds a ship.` })
+      frames.push({ phase: 'cell', pythonLine: PL('return 1'), activeLine: L('if it is a single cell'), state: [...lines], rect: [a, b, c, d], message: `Single cell [${a},${b}] holds a ship.` })
       return 1
     }
-    frames.push({ phase: 'split', pythonLine: PL('if c - a >= d - b'), activeLine: L('split it in half'), state: [...lines], message: `${box(a, b, c, d)} has ships: split it.` })
+    frames.push({ phase: 'split', pythonLine: PL('if c - a >= d - b'), activeLine: L('split it in half'), state: [...lines], rect: [a, b, c, d], message: `${box(a, b, c, d)} has ships: split it.` })
     if (c - a >= d - b) {
       const mid = Math.floor((a + c) / 2)
       return visit(a, b, mid, d) + visit(mid + 1, b, c, d)

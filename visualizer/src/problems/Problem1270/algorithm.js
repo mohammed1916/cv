@@ -1,4 +1,4 @@
-// Knowledge-derived walkthrough: a recursive query starts at the direct reports of employee 1 and keeps following manager links until no new employees appear.
+// Walkthrough: a recursive query starts at the direct reports of employee 1 and keeps following manager links until no new employees appear.
 export const phases = [
   { id: 'start', label: 'Direct', description: 'Begin with the people whose manager is employee 1.' },
   { id: 'visit', label: 'Follow', description: 'Each reached employee brings in their own reports.' },

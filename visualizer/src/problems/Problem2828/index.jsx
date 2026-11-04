@@ -24,18 +24,35 @@ const definition = {
   ],
 };
 
+const cell = { padding: "4px 8px", borderBottom: "1px solid var(--surface2)", color: "var(--text)" };
+
+// Each word's first letter lined up against the matching letter of s.
+function PairTable({ words, s, step }) {
+  const rows = words.map((word, i) => ({ word, first: word[0], target: s[i] ?? "-", state: step.roles?.[i] ?? "" }));
+  return <table aria-label="Word first letters against s" style={{ borderCollapse: "collapse", width: "100%" }}>
+    <thead><tr>{["index", "word", "first letter", "s letter", "match"].map(h => <th key={h} scope="col" style={{ ...cell, textAlign: "left", borderBottom: "2px solid var(--border, currentColor)" }}>{h}</th>)}</tr></thead>
+    <tbody>{rows.map((r, i) => <tr key={i} data-current={step.active === i} style={{ background: step.active === i ? "var(--surface2)" : "transparent" }}>
+      <td style={cell}>{i}</td><td style={cell}>{r.word}</td><td style={cell}><strong>{r.first}</strong></td><td style={cell}><strong>{r.target}</strong></td>
+      <td style={cell}>{r.state === "mismatch" ? "no" : r.state === "match" ? "yes" : step.active === i ? "checking" : "-"}</td>
+    </tr>)}</tbody>
+  </table>
+}
+
 export default function Problem2828Visualizer() {
   return (
     <AlgorithmWorkspace
       definition={definition}
-      renderVisual={({ step }) => (
-        <IndexedSequence
-          label="words"
-          length={step.values.length}
-          valueAt={i => String(step.values[i])}
-          active={step.active ?? -1}
-          roleAt={i => step.roles?.[i] ?? ""}
-        />
+      renderVisual={({ run, step }) => (
+        <>
+          <IndexedSequence
+            label="words"
+            length={step.values.length}
+            valueAt={i => String(step.values[i])}
+            active={step.active ?? -1}
+            roleAt={i => step.roles?.[i] ?? ""}
+          />
+          <PairTable words={step.values} s={run.input.s} step={step} />
+        </>
       )}
       renderReasoning={({ step }) => <p>{step.detail}</p>}
     />

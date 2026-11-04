@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import IntervalView from '../../components/shared/IntervalView'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -16,15 +17,26 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"clips":[[0,2],[4,6],[8,10],[1,9],[1,5],[5,9]],"time":10}' },
     { label: 'Gap', input: '{"clips":[[0,1],[1,2]],"time":5}' },
+    { label: 'Short but enough', input: '{"clips":[[0,4],[2,8]],"time":6}' },
   ],
 }
 
 export default function VideoStitching() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="Clips" length={run.input.clips.length} valueAt={index => `[${run.input.clips[index].join(', ')}]`} active={step.viaIndex} />
-    <output aria-label="Coverage">{`Covered up to ${step.covered} of ${run.input.time}; clips used: ${step.used}`}</output>
-  </>} renderReasoning={() => <>
-    <p>Each step extends the covered prefix with the usable clip that reaches furthest.</p>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const { clips, time } = run.input
+    const intervals = clips.map(([start, end], index) => ({
+      start, end, label: `clip ${index}`,
+      role: step.picked.includes(index) ? 'kept' : index === step.viaIndex ? 'current' : clips[index][0] <= step.covered && end > step.covered ? 'active' : 'pending',
+    }))
+    return <>
+      <IntervalView title={`Number line from 0 to ${time}`} intervals={intervals} marker={step.covered} markerLabel="covered up to" closed={false}
+        note="Each bar is a clip. The marker is the covered prefix; a clip helps only if it starts at or before the marker." />
+      <IndexedSequence label="Clips picked" length={step.picked.length || 1} valueAt={i => (step.picked[i] !== undefined ? `[${clips[step.picked[i]].join(', ')}]` : '-')} active={step.picked.length - 1} />
+      <output aria-label="Coverage">{`Covered up to ${step.covered} of ${time}; clips used: ${step.used}`}</output>
+    </>
+  }} renderReasoning={({ step }) => <>
+    <p>{step.message}</p>
+    <p>Each step extends the covered prefix with the usable clip that reaches furthest. A clip starting after the marker cannot help yet.</p>
     <p>A clip that reaches further never does worse than one that reaches less from the same prefix, so the count is minimal.</p>
   </>} />
 }

@@ -1,5 +1,4 @@
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
-import IndexedSequence from "../../components/shared/IndexedSequence";
 import { code, python, parseInput, buildTrace } from "./algorithm";
 
 const definition = {
@@ -30,13 +29,25 @@ export default function MinimumMovesSpreadStones() {
     <AlgorithmWorkspace
       definition={definition}
       renderVisual={({ run, step }) => (
-        <IndexedSequence
-          label="Grid cells (row-major, stones per cell)"
-          length={9}
-          valueAt={(i) => step.cells[i]}
-          active={step.path.length ? step.path[step.path.length - 1].to : -1}
-          roleAt={(i) => (step.path.some((m) => m.to === i) ? "target" : step.path.some((m) => m.from === i) ? "source" : "")}
-        />
+        <>
+          <div role="img" aria-label="3 by 3 grid of stones" style={{ display: "grid", gridTemplateColumns: "repeat(3, 64px)", gap: 6, width: "max-content" }}>
+            {Array.from({ length: 9 }, (_, i) => {
+              const isTo = step.path.some(m => m.to === i);
+              const isFrom = step.path.some(m => m.from === i);
+              const isCurrent = step.path.length && step.path[step.path.length - 1].to === i;
+              return <div key={i} data-cell={i} data-role={isCurrent ? "current" : isTo ? "target" : isFrom ? "source" : ""} style={{
+                height: 56, display: "grid", placeItems: "center", borderRadius: 8, border: "2px solid var(--border, currentColor)",
+                background: isCurrent ? "var(--primary)" : isTo ? "var(--surface2)" : "transparent", color: isCurrent ? "#fff" : "var(--text)",
+              }}>
+                <div style={{ textAlign: "center" }}><small>cell {i}</small><div style={{ fontSize: 20, fontWeight: 700 }}>{step.cells[i]}</div></div>
+              </div>;
+            })}
+          </div>
+          <ol aria-label="Moves so far" style={{ color: "var(--text)" }}>
+            {step.path.map((m, i) => <li key={i}>{`stone from cell ${m.from} to cell ${m.to}`}</li>)}
+          </ol>
+          <output aria-label="Cell colours" style={{ color: "var(--text)" }}>{`Stones per cell after moves so far, read row by row: ${step.cells.join(" ")}`}</output>
+        </>
       )}
       renderReasoning={({ step }) => (
         <>

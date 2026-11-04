@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code, python } from './algorithm'
+import { buildTrace, parseInput, code, python, mirror } from './algorithm'
 
 const definition = {
   phases: [
@@ -18,20 +18,36 @@ const definition = {
   ],
 }
 
+// Mirror pairs as rows: each pair shows its two frequencies and the gap; the pair being visited is highlighted.
+function PairRows({ freq, pairs, current }) {
+  return <table aria-label="Mirror pairs">
+    <thead><tr><th scope="col">pair</th><th scope="col">freq c</th><th scope="col">freq m</th><th scope="col">gap</th></tr></thead>
+    <tbody>{pairs.map(([c, m]) => {
+      const fc = freq[c] || 0, fm = freq[m] || 0
+      const isCurrent = current && current[0] === c && current[1] === m
+      return <tr key={`${c}${m}`} data-current={isCurrent ? 'yes' : undefined} data-role={fc + fm === 0 ? 'muted' : ''}>
+        <th scope="row">{c} – {m}</th><td>{fc}</td><td>{fm}</td><td>{Math.abs(fc - fm)}</td></tr>
+    })}</tbody>
+  </table>
+}
+
 export default function MirrorFrequencyDistance() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <section className="algorithm-sequence" aria-label="Pair counts">
-      <h3>Pair counts</h3>
-      <div className="algorithm-sequence__cells">{step.pair ? step.pair.map(ch => (
-        <div key={ch} className="algorithm-sequence__cell is-active" data-role="window">
-          <small>char</small><strong>{ch}</strong><span>freq {step.freq[ch] || 0}</span>
-        </div>)) : Object.entries(step.freq).map(([ch, n]) => (
-        <div key={ch} className="algorithm-sequence__cell" data-role="">
-          <small>char</small><strong>{ch}</strong><span>freq {n}</span>
-        </div>))}</div>
-    </section>
-    <output aria-label="Running total">{`Total ${step.total}. ${step.message}`}</output>
-  </>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const chars = [...new Set([...run.input.s, ...[...run.input.s].map(mirror)])]
+    const seen = new Set()
+    const pairs = []
+    for (const c of chars.sort()) {
+      const m = mirror(c)
+      const key = [c, m].sort().join('')
+      if (seen.has(key)) continue
+      seen.add(key)
+      pairs.push([c, m])
+    }
+    return <>
+      <PairRows freq={step.freq} pairs={pairs} current={step.pair} />
+      <output aria-label="Running total">{`Total ${step.total}. ${step.message}`}</output>
+    </>
+  }} renderReasoning={() => <>
     <p>Every letter has a mirror in the alphabet and every digit has a mirror in 0 to 9. Each pair is counted once even though both members point at each other.</p>
     <p>The contribution of a pair is the gap between how often its two members appear.</p>
   </>} />

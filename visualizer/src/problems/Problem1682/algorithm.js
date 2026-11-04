@@ -66,6 +66,14 @@ export function parseInput(text) {
   return s
 }
 
+// Copy of the memo table for the visual: each solved window with its forbidden letter and best layer count.
+function snapshotMemo(memo) {
+  return [...memo].map(([key, value]) => {
+    const [l, r, prev] = key.split(',')
+    return { l: Number(l), r: Number(r), prev, value }
+  })
+}
+
 export function buildTrace(s) {
   const n = s.length
   const memo = new Map()
@@ -76,7 +84,7 @@ export function buildTrace(s) {
     const key = `${l},${r},${prev}`
     if (memo.has(key)) return memo.get(key)
     calls += 1
-    frames.push({ pythonLine: P('if l >= r:'), phase: 'enter', activeLine: L('IF l is at least r'), l, r, prev, pair: null, best: 0, memoSize: memo.size, message: `Window ${l}..${r} with outer letter ${prev === '' ? 'none' : prev} forbidden.` })
+    frames.push({ pythonLine: P('if l >= r:'), phase: 'enter', activeLine: L('IF l is at least r'), l, r, prev, pair: null, best: 0, memoSize: memo.size, memo: snapshotMemo(memo), message: `Window ${l}..${r} with outer letter ${prev === '' ? 'none' : prev} forbidden.` })
     let result = 0
     for (let i = l; i < r; i++) {
       for (let j = i + 1; j <= r; j++) {
@@ -84,16 +92,16 @@ export function buildTrace(s) {
           const inner = best(i + 1, j - 1, s[i], depth + 1)
           const value = 1 + inner
           if (value > result) result = value
-          frames.push({ pythonLine: P('result = max(result, 1 +'), phase: 'pair', activeLine: L('IF s[i] equals s[j] and s[i] is not prev'), l, r, prev, pair: [i, j], value, best: result, memoSize: memo.size, message: `Pair ${s[i]} at ${i} and ${j} gives 1 + ${inner} = ${value}; best is ${result}.` })
+          frames.push({ pythonLine: P('result = max(result, 1 +'), phase: 'pair', activeLine: L('IF s[i] equals s[j] and s[i] is not prev'), l, r, prev, pair: [i, j], value, best: result, memoSize: memo.size, memo: snapshotMemo(memo), message: `Pair ${s[i]} at ${i} and ${j} gives 1 + ${inner} = ${value}; best is ${result}.` })
         }
       }
     }
     memo.set(key, result)
-    frames.push({ pythonLine: P('memo[key] = result'), phase: 'store', activeLine: L('store result in memo'), l, r, prev, pair: null, best: result, memoSize: memo.size, message: `Window ${l}..${r} with ${prev === '' ? 'no' : prev} forbidden: ${result} layer${result === 1 ? '' : 's'}.` })
+    frames.push({ pythonLine: P('memo[key] = result'), phase: 'store', activeLine: L('store result in memo'), l, r, prev, pair: null, best: result, memoSize: memo.size, memo: snapshotMemo(memo), message: `Window ${l}..${r} with ${prev === '' ? 'no' : prev} forbidden: ${result} layer${result === 1 ? '' : 's'}.` })
     return result
   }
   const layers = best(0, n - 1, '', 0)
   const answer = 2 * layers
-  frames.push({ pythonLine: P('return 2 * best'), phase: 'answer', activeLine: L('RETURN 2 times best'), l: 0, r: n - 1, prev: '', pair: null, best: layers, memoSize: memo.size, message: answer === 0 ? 'No valid palindrome subsequence: answer 0.' : `${layers} layer${layers === 1 ? '' : 's'}: longest length ${answer}.` })
+  frames.push({ pythonLine: P('return 2 * best'), phase: 'answer', activeLine: L('RETURN 2 times best'), l: 0, r: n - 1, prev: '', pair: null, best: layers, memoSize: memo.size, memo: snapshotMemo(memo), message: answer === 0 ? 'No valid palindrome subsequence: answer 0.' : `${layers} layer${layers === 1 ? '' : 's'}: longest length ${answer}.` })
   return { input: s, result: answer, calls, frames }
 }

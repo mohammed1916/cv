@@ -11,7 +11,7 @@ const definition = {
   python,
   inputLabel: 'Object with root (level-order list) and nodes, e.g. {"root":[3,5,1,6,2,0,8,null,null,7,4],"nodes":[4,7]}',
   url: "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree-iv/",
-  complexity: "O(n) time and O(h) recursion space for n nodes. The visualization caps the tree at 15 nodes and the target list at 6; the official limits are not verified in this draft.",
+  complexity: "O(n) time and O(h) recursion space for n nodes. The visualization caps the tree at 15 nodes and the target list at 6.",
   examples: [
     { label: "Two targets", input: '{"root":[3,5,1,6,2,0,8,null,null,7,4],"nodes":[4,7]}' },
     { label: "Three targets", input: '{"root":[3,5,1,6,2,0,8,null,null,7,4],"nodes":[6,0,8]}' },

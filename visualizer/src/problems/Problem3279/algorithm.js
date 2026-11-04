@@ -67,17 +67,19 @@ export function buildTrace({ height, positions, directions }) {
   const frames = []
   let best = 0
   let bestTime = 0
+  const history = []
   frames.push({
     phase: 'start', activeLine: L('period ← 2'), pythonLine: P('period = 2 * height'),
-    t: -1, positions: positions.slice(), total: 0, best, bestTime, period,
+    t: -1, positions: positions.slice(), total: 0, best, bestTime, period, history: [],
     message: `Every piston repeats after ${period} time units (up and down a height of ${height}).`,
   })
   for (let t = 0; t < period; t++) {
     const at = directions.map((d, i) => positionAt(positions[i], d, t, height))
     const total = at.reduce((sum, p) => sum + p, 0)
+    history.push(total)
     frames.push({
       phase: 'sweep', activeLine: L('total ← 0'), pythonLine: P('total = 0'),
-      t, positions: at, total, best, bestTime, period,
+      t, positions: at, total, best, bestTime, period, history: history.slice(),
       message: `At time ${t} the pistons sit at [${at.join(', ')}], a total area of ${total}.`,
     })
     if (total > best) {
@@ -85,14 +87,14 @@ export function buildTrace({ height, positions, directions }) {
       bestTime = t
       frames.push({
         phase: 'best', activeLine: L('best ← larger'), pythonLine: P('best = max(best, total)'),
-        t, positions: at, total, best, bestTime, period,
+        t, positions: at, total, best, bestTime, period, history: history.slice(),
         message: `${total} beats the previous best, so the best time is now ${t}.`,
       })
     }
   }
   frames.push({
     phase: 'done', activeLine: L('RETURN best'), pythonLine: P('return best'),
-    t: period, positions: positions.slice(), total: best, best, bestTime, period,
+    t: period, positions: positions.slice(), total: best, best, bestTime, period, history: history.slice(),
     message: `The largest total area is ${best}, first reached at time ${bestTime}.`,
   })
   return { input: { height, positions, directions }, result: best, frames }

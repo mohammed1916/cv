@@ -14,30 +14,31 @@ const definition = {
   ],
 }
 
-export default function StringCanBreak() {
+const cell = { minWidth: 28, padding: '4px 6px', textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', borderRadius: 6, color: 'var(--text)', background: 'var(--surface2)' }
+
+// Both words sorted, one row each. The comparison walks down the columns; a failing column is marked.
+function Row({ label, letters, index, failedAt }) {
+  return <div style={{ display: 'flex', gap: 4, alignItems: 'center', color: 'var(--text)' }}>
+    <small style={{ width: 60 }}>{label}</small>
+    {letters.map((ch, i) => <span key={i} style={{ ...cell, borderWidth: i === index ? 2 : 1, borderColor: i === failedAt ? '#b91c1c' : i === index ? 'var(--primary)' : 'var(--border)', opacity: index !== null && i > index ? 0.5 : 1 }}>{ch}</span>)}
+  </div>
+}
+
+export default function CanBreak() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
-    const { first, second } = run.input
-    const { a, b, direction, index, left, right, pass, failed, result } = step.snapshot
-    const sortedA = a ?? [...first]
-    const sortedB = b ?? [...second]
-    const cell = (ch, i, side) => <div key={`${side}${i}`} style={{
-      minWidth: 36, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
-      border: `${index === i ? 2 : 1}px solid ${index === i ? 'var(--text)' : 'var(--border)'}`,
-      background: index === i ? (pass ? '#bbf7d0' : '#fecaca') : 'transparent', color: '#1c1917',
-    }}>{ch}</div>
+    const { a, b, direction, index, left, right, failed, result } = step.snapshot
     return <>
-      <p>Sorted first: <code>{sortedA.join('')}</code> &nbsp; Sorted second: <code>{sortedB.join('')}</code></p>
-      <div role="img" aria-label="Sorted letters side by side" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        {sortedA.map((ch, i) => cell(ch, i, 'a'))}
+      <div role="img" aria-label="Sorted letters of both words" style={{ display: 'grid', gap: 6, marginBottom: 10 }}>
+        <Row label="first" letters={a} index={direction ? index ?? null : null} failedAt={failed ? index : null} />
+        <Row label="second" letters={b} index={direction ? index ?? null : null} failedAt={failed ? index : null} />
       </div>
-      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 6 }}>
-        {sortedB.map((ch, i) => cell(ch, i, 'b'))}
-      </div>
-      <p>{direction ? `${direction}${index !== undefined ? `, position ${index}: ${left} vs ${right}` : ''}` : 'No direction tested yet.'}{failed ? ' - fails' : ''}</p>
-      {result !== undefined && <p><strong>Result: {String(result)}</strong></p>}
+      {direction && <p style={{ color: 'var(--text)' }}>Checking <strong>{direction}</strong>{index !== undefined && index !== null ? `: position ${index}, ${left} against ${right}` : ''}.</p>}
+      {failed && <p style={{ color: 'var(--text)' }}>{left} is smaller than {right} here, so this direction fails.</p>}
+      {result !== undefined && <p style={{ color: 'var(--text)' }}>Result: <strong>{result ? 'true' : 'false'}</strong></p>}
+      <p style={{ color: 'var(--text)' }}>{step.message}</p>
     </>
-  }} renderReasoning={({ step }) => <>
-    <p><strong>Sorting first:</strong> sorted letters are the most favourable order for dominance, so a single position-by-position check decides each direction.</p>
-    <p><strong>Two directions:</strong> one string may break the other, or the other may break it.</p>
+  }} renderReasoning={() => <>
+    <p><strong>Sort, then compare position by position:</strong> the sorted order pairs the smallest letter of one word with the smallest of the other.</p>
+    <p><strong>Either direction:</strong> one word breaks the other when every sorted letter of it is at least the matching letter of the other word.</p>
   </>} />
 }

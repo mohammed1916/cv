@@ -14,17 +14,33 @@ const definition = {
   ],
 }
 
+const MATCH = 'color-mix(in srgb, var(--success) 35%, var(--surface2))'
+const MISMATCH = 'color-mix(in srgb, var(--warning) 45%, var(--surface2))'
+
 export default function ArithmeticFromSequence() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
-    const { sorted, pos, step: gap, ok } = step.snapshot
+    const { sorted, pos, step: requiredGap, gap, ok } = step.snapshot
     return <>
-      <div role="img" aria-label="Sorted values and gaps" style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'flex-end' }}>
-        {sorted.map((value, i) => <div key={i} style={{ textAlign: 'center', fontFamily: 'monospace' }}>
-          {i > 0 && <small style={{ display: 'block', color: pos === i && ok === false ? '#b91c1c' : 'var(--muted, #78716c)' }}>gap {value - sorted[i - 1]}</small>}
-          <div style={{ minWidth: 52, padding: '6px 8px', boxSizing: 'border-box', border: `${pos === i ? 2 : 1}px solid ${pos === i ? 'var(--text)' : 'var(--border)'}`, background: pos !== null && i <= pos && i > 0 ? 'var(--surface2)' : 'transparent' }}>{value}</div>
-        </div>)}
-      </div>
-      <p>{gap === null ? `Required gap: ${gap ?? 'not yet known'}` : `Required gap: ${gap}`}</p>
+      <section aria-label="Sorted values and gaps">
+        <h3>Sorted values and the gap between neighbours</h3>
+        <div role="img" aria-label="Sorted values and gaps" style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'flex-end' }}>
+          {sorted.map((value, i) => {
+            const isCompared = pos !== null && i === pos
+            const gapHere = i > 0 ? value - sorted[i - 1] : null
+            const gapTone = !isCompared || gapHere === null ? 'transparent' : ok ? MATCH : MISMATCH
+            return <div key={i} style={{ textAlign: 'center', fontFamily: 'monospace', color: 'var(--text)' }}>
+              <small style={{ display: 'block', height: 16, color: 'var(--text-muted)' }}>{gapHere === null ? '' : `gap ${gapHere}`}</small>
+              <div style={{
+                minWidth: 52, padding: '6px 8px', boxSizing: 'border-box',
+                border: `${isCompared ? 2 : 1}px solid ${isCompared ? 'var(--text)' : 'var(--border)'}`,
+                background: gapTone,
+              }}>{value}</div>
+            </div>
+          })}
+        </div>
+      </section>
+      <p>{requiredGap === null || requiredGap === undefined ? 'The required gap is not known yet.' : `Required gap, from the first two sorted values: ${requiredGap}.`}</p>
+      <p>{gap === null || gap === undefined ? 'No neighbouring pair is compared yet.' : `Comparing a gap of ${gap} with the required gap of ${requiredGap}: ${ok ? 'they match.' : 'they differ.'}`}</p>
     </>
   }} renderReasoning={() => <>
     <p><strong>Sort first:</strong> in a progression the sorted order is the only order where neighbours differ by the same step, so sorting loses nothing.</p>

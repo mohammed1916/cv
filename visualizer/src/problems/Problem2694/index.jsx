@@ -1,36 +1,31 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { parseInput, buildTrace, code } from './algorithm'
 
 const definition = {
   phases: [
-    { id: 'start', label: 'Start', description: 'The emitter starts empty.' },
-    { id: 'subscribe', label: 'Subscribe', description: 'Append a listener to its event.' },
-    { id: 'unsubscribe', label: 'Unsubscribe', description: 'Remove one listener.' },
-    { id: 'emit', label: 'Emit', description: 'Call the listeners in order.' },
-    { id: 'done', label: 'Done', description: 'The script has run.' },
+    { id: 'start', label: 'Start', description: 'No listeners are registered.' },
+    { id: 'subscribe', label: 'Subscribe', description: 'Add a listener to the event list.' },
+    { id: 'unsubscribe', label: 'Unsubscribe', description: 'Remove one listener from its event list.' },
+    { id: 'emit', label: 'Emit', description: 'Call the listeners of the event in the order they were added.' },
+    { id: 'done', label: 'Done', description: 'The script has finished.' },
   ],
   parse: parseInput, build: buildTrace, code,
-  inputLabel: 'Object with script: a list of [kind, event] or [kind, event, listener]',
+  inputLabel: 'Object with script: a list of ["subscribe" | "unsubscribe" | "emit", event, listener]',
   url: 'https://leetcode.com/problems/event-emitter/',
-  complexity: 'O(listeners of the event) per emit. Subscribe is O(1) and unsubscribe is linear in one list.',
+  complexity: 'Subscribe is O(1). Emit calls each listener of one event once, in order.',
   examples: [
-    { label: 'Subscribe, emit, unsubscribe', input: '{"script":[["subscribe","a","L1"],["subscribe","a","L2"],["emit","a"],["unsubscribe","a","L1"],["emit","a"]]}' },
-    { label: 'Two events', input: '{"script":[["subscribe","x","A"],["subscribe","y","B"],["emit","y"],["emit","x"]]}' },
+    { label: 'Two listeners, one removed', input: '{"script":[["subscribe","save","a"],["subscribe","save","b"],["emit","save"],["unsubscribe","save","a"],["emit","save"]]}' },
+    { label: 'Other event', input: '{"script":[["subscribe","open","x"],["emit","close"],["emit","open"]]}' },
   ],
 }
 
 export default function EventEmitter() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <dl aria-label="Registered listeners">
-      {Object.entries(step.events).length === 0 && <dd>No events registered.</dd>}
-      {Object.entries(step.events).map(([name, list]) => <div key={name}>
-        <dt><strong>{name}</strong></dt>
-        <dd>{list.length ? list.join(' → ') : 'no listeners'}</dd>
-      </div>)}
-    </dl>
-    <ol aria-label="Emit results">{step.calls.map((c, i) => <li key={i}>{`${c.event}: ${c.listeners.join(', ') || 'none'}`}</li>)}</ol>
-  </>} renderReasoning={() => <>
-    <p>A map of arrays holds the state. Order matters: listeners run in the order they were subscribed.</p>
-    <p>Unsubscribing removes only the first matching entry, so a listener subscribed twice is still called once in each emit that remains.</p>
-  </>} />
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
+    const rows = Object.entries(step.events).map(([event, listeners]) => ({ event, listeners: listeners.join(', ') || '(none)' }))
+    return <section style={{ display: 'grid', gap: 10 }}>
+      <RecordStateTable label="Listeners by event" columns={['event', 'listeners']} rows={rows} />
+      <p style={{ margin: 0, color: 'var(--text)' }}>Calls so far: <code>{JSON.stringify(step.calls)}</code></p>
+    </section>
+  }} renderReasoning={({ step }) => <p>{step.message}</p>} />
 }

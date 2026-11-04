@@ -20,14 +20,14 @@ export default function NestingDepth() {
     return <>
       <div role="img" aria-label="Expression characters" style={{ display: 'flex', gap: 3, flexWrap: 'wrap', fontFamily: 'monospace' }}>
         {[...expr].map((ch, i) => <span key={i} style={{
-          padding: '4px 6px', border: `${i === index ? 2 : 1}px solid ${i === index ? 'var(--text)' : 'var(--border)'}`,
+          padding: '4px 6px', color: 'var(--text)', border: `${i === index ? 2 : 1}px solid ${i === index ? 'var(--text)' : 'var(--border)'}`,
           background: i === index ? 'var(--surface2)' : 'transparent',
         }}>{ch}</span>)}
       </div>
-      <p>Current depth: <strong>{depth}</strong> · Best depth so far: <strong>{best}</strong></p>
+      <p style={{ color: 'var(--text)' }}>Current depth: <strong>{depth}</strong> · Best depth so far: <strong>{best}</strong></p>
       <div aria-label="Depth bar" style={{ display: 'flex', gap: 4, alignItems: 'flex-end', height: 90 }}>
         {Array.from({ length: best }, (_, k) => <div key={k} style={{
-          width: 28, height: (k + 1) * 24, background: k < depth ? '#bbf7d0' : 'var(--surface2)', border: '1px solid var(--border)',
+          width: 28, height: (k + 1) * 24, background: k < depth ? 'color-mix(in srgb, var(--success) 35%, transparent)' : 'var(--surface2)', border: '1px solid var(--border)',
         }} />)}
       </div>
     </>

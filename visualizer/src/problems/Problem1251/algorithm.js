@@ -1,4 +1,4 @@
-// Knowledge-derived walkthrough: every sale is priced by the one range that contains its date, then revenue and units are summed per product.
+// Walkthrough: every sale is priced by the one range that contains its date, then revenue and units are summed per product.
 export const phases = [
   { id: 'load', label: 'Products', description: 'List each product once.' },
   { id: 'match', label: 'Match', description: 'Each sale takes the price of the range containing its date.' },

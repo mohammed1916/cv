@@ -22,7 +22,7 @@ export default function NumberOfGoodPairs() {
         {run.input.map((v, i) => <div key={i} style={{
           minWidth: 44, padding: '4px 8px', fontFamily: 'monospace', textAlign: 'center', boxSizing: 'border-box',
           border: `${i === index ? 2 : 1}px solid ${i === index ? 'var(--text)' : 'var(--border)'}`,
-          background: i === index ? 'var(--surface2)' : 'transparent', color: '#1c1917',
+          background: i === index ? 'var(--surface2)' : 'transparent', color: 'var(--text)',
         }}><div>{v}</div><small>{i}</small></div>)}
       </div>
       <table aria-label="Counts seen" style={{ fontFamily: 'monospace', borderCollapse: 'collapse', marginTop: 8 }}>

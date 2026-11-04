@@ -25,6 +25,18 @@ export default function MinimumDeletionsUniqueFrequencies() {
           background: i === index ? 'var(--surface2)' : 'transparent', color: 'var(--text)',
         }}><div>{f}</div><small>letter {i + 1}</small></div>)}
       </div>
+      <section aria-label="Frequency values in use">
+        <h4>Frequency values 1 to {freqs.length ? freqs[0] : 0}: filled means already kept</h4>
+        <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+          {Array.from({ length: freqs.length ? freqs[0] : 0 }, (_, k) => k + 1).map(value => {
+            const isKept = kept.includes(value)
+            const isTarget = target === value && count !== null
+            return <span key={value} style={{ minWidth: 30, textAlign: 'center', padding: '4px 6px', borderRadius: 4, fontFamily: 'monospace', color: 'var(--text)',
+              border: `${isTarget ? 2 : 1}px solid ${isTarget ? 'var(--primary)' : 'var(--border)'}`,
+              background: isKept ? 'color-mix(in srgb, var(--success) 30%, transparent)' : 'transparent' }}>{value}</span>
+          })}
+        </div>
+      </section>
       <p>{count === null ? 'Frequencies are sorted, largest first.' : `Current frequency ${count}, target ${target}.`}</p>
       <p>Kept values: {kept.length ? kept.join(', ') : 'none yet'}</p>
       <p>Deletions so far: <strong>{deletions}</strong></p>

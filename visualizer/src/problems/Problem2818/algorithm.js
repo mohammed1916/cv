@@ -111,12 +111,14 @@ export function buildTrace(input) {
   const n = nums.length;
   const frames = [];
   const roles = () => Array(n).fill("");
+  const table = { score: null, left: Array(n).fill(null), right: Array(n).fill(null), count: Array(n).fill(null) };
   const push = (phase, activeLine, pythonLine, message, extra = {}) => frames.push({
-    phase, activeLine, pythonLine, message, values: nums, active: -1, roles: roles(), detail: "", ...extra,
+    phase, activeLine, pythonLine, message, values: nums, active: -1, roles: roles(), detail: "", table: { ...table, score: table.score && [...table.score], left: [...table.left], right: [...table.right], count: [...table.count] }, ...extra,
   });
 
   push("setup", 2, py("n = len(nums)"), `n = ${n}. Prime score = number of distinct prime factors.`);
   const scores = nums.map(primeScore);
+  table.score = [...scores];
   push("score", 3, py("scores = [prime_score(v) for v in nums]"), "Prime score of every element.", { detail: `scores = [${scores.join(", ")}]` });
 
   const left = Array(n).fill(0);
@@ -125,6 +127,7 @@ export function buildTrace(input) {
   for (let i = 0; i < n; i += 1) {
     while (stack.length && scores[stack[stack.length - 1]] < scores[i]) stack.pop();
     left[i] = stack.length ? stack[stack.length - 1] : -1;
+    table.left[i] = left[i];
     const r = roles(); r[i] = "current"; if (left[i] >= 0) r[left[i]] = "bound";
     push("left", 4, py("left[i] = stack[-1] if stack else -1"),
       `Nearest index to the left with score >= ${scores[i]} is ${left[i]}.`, { active: i, roles: r, detail: `left[${i}] = ${left[i]}` });
@@ -134,6 +137,7 @@ export function buildTrace(input) {
   for (let i = n - 1; i >= 0; i -= 1) {
     while (stack.length && scores[stack[stack.length - 1]] <= scores[i]) stack.pop();
     right[i] = stack.length ? stack[stack.length - 1] : n;
+    table.right[i] = right[i];
     const r = roles(); r[i] = "current"; if (right[i] < n) r[right[i]] = "bound";
     push("right", 5, py("right[i] = stack[-1] if stack else n"),
       `Nearest index to the right with score > ${scores[i]} is ${right[i] < n ? right[i] : "none (n)"}.`, { active: i, roles: r, detail: `right[${i}] = ${right[i]}` });
@@ -141,6 +145,7 @@ export function buildTrace(input) {
   }
 
   const count = nums.map((_, i) => (i - left[i]) * (right[i] - i));
+  table.count = [...count];
   const order = nums.map((_, i) => i).sort((a, b) => nums[b] - nums[a] || a - b);
   let k = startK;
   let score = 1n;

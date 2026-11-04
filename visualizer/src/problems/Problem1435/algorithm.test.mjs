@@ -16,10 +16,10 @@ function checkFrames(run) {
 }
 
 const bins = (a, b, c, d) => [
-  { bin: '[0-5)', total: a },
-  { bin: '[5-10)', total: b },
-  { bin: '[10-15)', total: c },
-  { bin: '15+', total: d },
+  { bin: '[0-5>', total: a },
+  { bin: '[5-10>', total: b },
+  { bin: '[10-15>', total: c },
+  { bin: '15 or more', total: d },
 ]
 
 test('1435 counts sessions into minute bins and keeps empty bins', () => {

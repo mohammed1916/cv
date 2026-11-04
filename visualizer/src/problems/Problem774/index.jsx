@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -21,6 +22,7 @@ const definition = {
 export default function MinimizeMaxDistance() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Gaps between stations" length={run.gaps.length} valueAt={i => run.gaps[i]} />
+    <AnswerRangeBar title="Largest allowed gap" min={0} max={Math.max(...run.gaps)} low={step.lo} high={step.hi} probe={step.mid} verdict={step.feasible} />
     <output aria-label="Limit">
       {`Limit range [${step.lo.toFixed(4)}, ${step.hi.toFixed(4)}]`}
       {step.mid !== null && `, testing ${step.mid.toFixed(4)}: ${step.feasible ? 'feasible' : 'not feasible'}`}

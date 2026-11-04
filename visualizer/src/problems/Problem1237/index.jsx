@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -20,17 +21,28 @@ const definition = {
 }
 
 export default function PositiveSolutions() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <table aria-label="Pointer state">
-      <tbody>
-        <tr><th scope="row">x</th><td>{step.x}</td></tr>
-        <tr><th scope="row">y</th><td>{step.y}</td></tr>
-        <tr><th scope="row">f(x, y)</th><td>{step.value === null ? '-' : step.value}</td></tr>
-        <tr><th scope="row">z</th><td>{run.input.z}</td></tr>
-      </tbody>
-    </table>
-    <output aria-label="Pairs found">{`Pairs found: ${step.pairs.map(p => `(${p[0]}, ${p[1]})`).join(' ') || 'none yet'}`}</output>
-  </>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const z = run.input.z
+    const roleAt = i => {
+      const value = i + 1
+      if (value === step.x && value === step.y) return 'x, y'
+      if (value === step.x) return 'x (l)'
+      if (value === step.y) return 'y (r)'
+      return ''
+    }
+    return <>
+      <IndexedSequence label={`Candidate values 1 to ${z}`} length={z} valueAt={i => i + 1} active={step.x - 1} roleAt={roleAt} indexOffset={1} />
+      <table aria-label="Pointer state">
+        <tbody>
+          <tr><th scope="row">x (moves up)</th><td>{step.x}</td></tr>
+          <tr><th scope="row">y (moves down)</th><td>{step.y}</td></tr>
+          <tr><th scope="row">f(x, y)</th><td>{step.value === null ? '-' : step.value}</td></tr>
+          <tr><th scope="row">z</th><td>{z}</td></tr>
+        </tbody>
+      </table>
+      <output aria-label="Pairs found">{`Pairs found: ${step.pairs.map(p => `(${p[0]}, ${p[1]})`).join(' ') || 'none yet'}`}</output>
+    </>
+  }} renderReasoning={() => <>
     <p>The function grows when either argument grows, so each comparison rules out a whole row or column of candidates.</p>
     <p>Starting at x = 1 and y = z, every step either records a pair or discards one candidate.</p>
   </>} />

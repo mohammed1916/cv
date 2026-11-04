@@ -1,4 +1,4 @@
-// Knowledge-derived teaching version. The sample tables are invented for this visualization.
+// Teaching version of the query. The sample tables are invented for this visualization.
 const SQL = `WITH ordered AS (
   SELECT user_id, visit_date,
          LEAD(visit_date) OVER (PARTITION BY user_id ORDER BY visit_date) AS next_visit

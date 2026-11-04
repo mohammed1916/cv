@@ -29,12 +29,13 @@ export default function MatrixDiagonalSum() {
               const diag = r === c || r + c === n - 1
               return <td key={c} style={{
                 width: 44, height: 40, textAlign: 'center', border: `${active ? 2 : 1}px solid ${active ? 'var(--text)' : 'var(--border)'}`,
-                background: isCounted(r, c) ? '#bbf7d0' : diag ? 'var(--surface2)' : 'transparent', color: '#1c1917',
+                background: isCounted(r, c) ? 'color-mix(in srgb, var(--primary) 35%, transparent)' : diag ? 'var(--surface2)' : 'transparent', color: 'var(--text)',
               }}>{v}</td>
             })}
           </tr>)}
         </tbody>
       </table>
+      <p>Highlighted cells are already in the total. Shaded cells lie on a diagonal.</p>
       <p>Diagonal total so far: <strong>{total}</strong></p>
     </>
   }} renderReasoning={() => <>

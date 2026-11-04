@@ -17,17 +17,40 @@ const definition = {
   ],
 }
 
+// The DP as a table: one row per interior index, the raise cost of making it special,
+// and the best (special count, total cost) over the candidates so far.
+function ChooseTable({ nums, frames, current }) {
+  const rows = frames.filter(f => f.phase === 'dp' && (current === null || f.k <= current))
+  return <table aria-label="Choices by index">
+    <thead><tr><th scope="col">index</th><th scope="col">raise cost</th><th scope="col">best special count</th><th scope="col">best cost</th><th scope="col">choice</th></tr></thead>
+    <tbody>{nums.map((_, i) => {
+      if (i === 0 || i === nums.length - 1) return null
+      const row = rows.find(f => f.k === i)
+      return <tr key={i} data-current={current === i ? 'yes' : undefined}>
+        <th scope="row">{i}</th><td>{costOf(nums, i)}</td>
+        <td>{row ? row.best.count : ''}</td><td>{row ? row.best.cost : ''}</td>
+        <td>{row ? (row.pickedTake ? 'make special' : 'skip') : ''}</td>
+      </tr>
+    })}</tbody>
+  </table>
+}
+
 export default function MinimumIncreaseToMaximizeSpecialIndices() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <section className="algorithm-sequence" aria-label="Values and raise costs">
-      <h3>Values and raise cost</h3>
-      <div className="algorithm-sequence__cells">{run.input.nums.map((v, i) => (
-        <div key={i} className={`algorithm-sequence__cell ${i === step.k ? 'is-active' : ''}`} data-role={step.best && step.best.chosen.includes(i) ? 'window' : ''}>
-          <small>[{i}]</small><strong>{v}</strong><span>{i > 0 && i < run.input.nums.length - 1 ? `cost ${costOf(run.input.nums, i)}` : 'edge'}</span>
-        </div>))}</div>
-    </section>
-    <output aria-label="Best choice so far">{step.best ? `Special ${step.best.count}, cost ${step.best.cost}. ${step.message}` : step.message}</output>
-  </>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const { frames } = buildTrace(run.input)
+    const nums = run.input.nums
+    return <>
+      <section className="algorithm-sequence" aria-label="Values and raise costs">
+        <h3>Values and raise cost</h3>
+        <div className="algorithm-sequence__cells">{nums.map((v, i) => (
+          <div key={i} className={`algorithm-sequence__cell ${i === step.k ? 'is-active' : ''}`} data-role={step.best && step.best.chosen.includes(i) ? 'window' : ''}>
+            <small>[{i}]</small><strong>{v}</strong><span>{i > 0 && i < nums.length - 1 ? `cost ${costOf(nums, i)}` : 'edge'}</span>
+          </div>))}</div>
+      </section>
+      <ChooseTable nums={nums} frames={frames} current={step.k >= 0 ? step.k : null} />
+      <output aria-label="Best choice so far">{step.best ? `Special ${step.best.count}, cost ${step.best.cost}. ${step.message}` : step.message}</output>
+    </>
+  }} renderReasoning={() => <>
     <p>Two special indices cannot be neighbours, because each would have to be larger than the other. So the choice is a set of interior positions with gaps between them.</p>
     <p>Raising a value only ever helps that position itself, so each chosen index is priced as the raise needed to beat its larger neighbour.</p>
   </>} />

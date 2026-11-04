@@ -1,20 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { phases, parseInput, buildTrace, code, python, pythonLineMap } from './algorithm'
-
-function SumRows({ snapshot }) {
-  const cells = (values, highlight) => <div style={{ display: 'grid', gridTemplateColumns: `repeat(${values.length}, minmax(28px, 1fr))`, gap: 4 }}>
-    {values.map((value, sum) => <div key={sum} style={{
-      border: '1px solid currentColor', borderRadius: 4, padding: 4, textAlign: 'center',
-      fontWeight: highlight?.includes(sum) ? 700 : 400, opacity: highlight && !highlight.includes(sum) ? 0.55 : 1,
-    }}><small>{sum}</small><br />{value}</div>)}
-  </div>
-  return <div>
-    <p>Previous row (dice − 1), reads shown in bold</p>
-    {cells(snapshot.prev, snapshot.reads)}
-    <p>New row (dice {snapshot.row}){snapshot.sum !== null ? `, writing sum ${snapshot.sum}` : ''}</p>
-    {snapshot.cur ? cells(snapshot.cur, snapshot.sum !== null ? [snapshot.sum] : null) : <p>Answer read from the final row.</p>}
-  </div>
-}
+import DPDependencyView from '../../components/shared/DPDependencyView'
+import { Vars } from './SeqKit'
 
 const definition = {
   phases,
@@ -32,10 +19,20 @@ const definition = {
   ],
 }
 
-export default function DiceRollWorkspace() {
-  return <AlgorithmWorkspace
-    definition={definition}
-    renderVisual={({ step }) => <SumRows snapshot={step.snapshot} />}
-    renderReasoning={({ step }) => <p>{step.message}</p>}
-  />
+export default function DiceRollsVisual() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
+    const s = step.snapshot
+    const done = step.phase === 'done'
+    const values = done ? [s.prev] : [s.prev, s.cur ?? s.prev.map(() => null)]
+    const target = done ? [0, s.target] : [s.cur ? 1 : 0, s.sum ?? 0]
+    const sources = s.reads && s.sum !== null && !done ? s.reads.map(r => ({ cell: [0, r], note: `face ${s.sum - r}`, chosen: false })) : []
+    return <>
+      <DPDependencyView title={`Ways to reach each sum with ${s.row} dice`} shape="grid" values={values} target={target} sources={sources}
+        labels={{ rows: done ? [`${s.row} dice`] : [`${Math.max(0, s.row - 1)} dice`, `${s.row} dice`] }}
+        recurrence="ways[d][s] = sum over faces f of ways[d-1][s-f]"
+        why="The last die shows one face, so every way to reach s - f with one fewer die extends to s." />
+      <Vars vars={{ dice: s.dice, faces: s.faces, target: s.target, 'sum being filled': s.sum ?? null }} />
+      <output aria-label="Result">{step.message}</output>
+    </>
+  }} renderReasoning={() => <p>Each row is built from the row before it: the last die adds one face to every way of reaching the earlier sums.</p>} />
 }

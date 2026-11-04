@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
 import IndexedSequence from "../../components/shared/IndexedSequence";
+import PatternStrip from "./PatternStrip";
 import { code, python, pythonLineMap, parseInput, buildTrace, sampleInputs } from "./algorithm";
 
 const definition = {
@@ -18,7 +19,7 @@ const definition = {
   pythonLineMap,
   inputLabel: 'JSON {"nums": [...], "pattern": [...]}',
   url: "https://leetcode.com/problems/number-of-subarrays-that-match-a-pattern-i/",
-  complexity: "O(n * m) time and O(1) extra space. The visualization caps n at 100 as stated in the requirements record.",
+  complexity: "O(n * m) time and O(1) extra space. The visualization caps n at 100.",
   examples: sampleInputs.map(({ label, input }) => ({ label, input: JSON.stringify(input) })),
 };
 
@@ -33,8 +34,14 @@ export default function NumberOfSubarraysPatternVisualizer() {
             length={run.input.nums.length}
             active={step.start >= 0 ? step.start + (step.k >= 0 ? step.k : 0) : -1}
             valueAt={(i) => run.input.nums[i]}
-            roleAt={(i) => (step.start >= 0 && i >= step.start && i <= step.start + run.input.pattern.length ? "window" : "")}
+            roleAt={(i) => {
+              if (step.start < 0) return ""
+              if (i === step.start) return "l"
+              if (i === step.start + run.input.pattern.length) return "r"
+              return i > step.start && i < step.start + run.input.pattern.length ? "window" : ""
+            }}
           />
+          <PatternStrip nums={run.input.nums} pattern={run.input.pattern} start={step.start} k={step.k} />
           <p>pattern: [{run.input.pattern.join(", ")}] &nbsp; count: {step.count}</p>
         </div>
       )}

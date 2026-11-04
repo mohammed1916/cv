@@ -14,24 +14,36 @@ const definition = {
   ],
 }
 
-const cell = { minWidth: 52, padding: '6px 8px', textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', borderRadius: 8, color: 'var(--text)' }
+import { DPTable } from '../../components/shared/AlgorithmStatePrimitives'
+
+const tile = { minWidth: 52, padding: '6px 8px', textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', borderRadius: 8, color: 'var(--text)', background: 'var(--surface2)' }
+
+// The stones in a row. The current start and the stones it may take are outlined; the sum of the taken stones is shown.
+function StoneRow({ values, start, take }) {
+  const taken = new Set(start !== null && start !== undefined ? Array.from({ length: take ?? 1 }, (_, k) => start + k) : [])
+  return <div role="img" aria-label="Stones in a row" style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 10 }}>
+    {values.map((value, i) => <div key={i} style={{ ...tile, borderWidth: taken.has(i) ? 2 : 1, borderColor: taken.has(i) ? 'var(--primary)' : 'var(--border)', opacity: start !== null && start !== undefined && !taken.has(i) && i < start ? 0.5 : 1 }}>
+      <div>{value}</div><small>{i}</small>
+    </div>)}
+  </div>
+}
 
 export default function StoneGameIII() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { values, start, take, best, option, winner } = step.snapshot
-    const active = new Set(start !== null && start !== undefined ? Array.from({ length: take ?? 1 }, (_, k) => start + k) : [])
+    const n = values.length
+    // Each start depends on the next one to three cells of the table (the table has one extra cell for the empty suffix).
+    const related = start !== null && start !== undefined ? Array.from({ length: 3 }, (_, k) => ({ row: 0, column: start + 1 + k })).filter(c => c.column <= n) : []
     return <>
-      <div role="img" aria-label="Stones in a row" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        {values.map((value, i) => <div key={i} style={{ ...cell, borderWidth: active.has(i) ? 2 : 1, background: active.has(i) ? 'var(--surface2)' : 'transparent' }}>
-          <div>{value}</div><small>{i}</small>
-        </div>)}
-      </div>
-      <p>Best advantage from each start (index {values.length} is 0 with no stones):</p>
-      <div role="table" aria-label="Best advantage by start index" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        {best.map((value, i) => <div key={i} style={cell}><div>{value === null ? '·' : value}</div><small>{i}</small></div>)}
-      </div>
-      {option !== undefined && <p>Latest option is worth <strong>{option}</strong>.</p>}
-      {winner && <p>Winner: <strong>{winner}</strong></p>}
+      <StoneRow values={values} start={start} take={take} />
+      <DPTable title="best advantage from each start" values={[best]} activeCell={start !== null && start !== undefined ? { row: 0, column: start } : null}
+        relatedCells={related} rowLabels={['best']} columnLabels={Array.from({ length: n + 1 }, (_, i) => i)} />
+      <p style={{ color: 'var(--text)' }}>
+        {start !== null && start !== undefined
+          ? `From start ${start}, taking ${take} stone${take === 1 ? '' : 's'} is worth ${option}. The highlighted cells after start are the choices the opponent can make next.`
+          : 'Fill the table from the right end. Each cell only looks at the three cells to its right.'}
+      </p>
+      {winner && <p style={{ color: 'var(--text)' }}>Result: <strong>{winner}</strong> (best[0] = {best[0]})</p>}
     </>
   }} renderReasoning={() => <>
     <p><strong>Suffix table:</strong> the best advantage from a start depends only on the suffix after it, so each suffix is solved once, from the right.</p>

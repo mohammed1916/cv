@@ -15,18 +15,32 @@ const definition = {
   ],
 }
 
+const tile = (state) => ({
+  minWidth: 52, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace', borderRadius: 8,
+  border: `2px solid ${state === 'current' ? 'var(--primary)' : 'var(--border)'}`,
+  background: state === 'below' ? 'var(--surface2)' : state === 'current' ? 'var(--primary)' : 'var(--surface)',
+  color: state === 'current' ? 'var(--on-primary, #fff)' : 'var(--text)',
+})
+
 export default function SumAbsoluteDifferences() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
-    const { index, value, before, after, below, above, result } = step.snapshot
+    const { index, value, before, after, below, above, answer, leftGap, rightGap, result } = step.snapshot
     return <>
-      <div role="img" aria-label="Sorted values" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        {run.input.map((v, i) => <div key={i} data-index={i} style={{
-          minWidth: 48, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
-          border: `${i === index ? 2 : 1}px solid ${i === index ? 'var(--text)' : 'var(--border)'}`,
-          background: index !== null && i < index ? 'var(--surface2)' : 'transparent',
-        }}><div>{v}</div><small>{i}</small></div>)}
+      <p style={{ margin: '0 0 6px' }}>The array is sorted, so every value before the current index is no larger than it and every value after it is no smaller.</p>
+      <div role="img" aria-label="Sorted values split at the current index" style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 12 }}>
+        {run.input.map((v, i) => <div key={i} data-index={i} style={tile(i === index ? 'current' : index !== null && i < index ? 'below' : 'above')}>
+          <div>{v}</div><small>{i}</small>
+        </div>)}
       </div>
-      {index !== null && <p>Value {value} at index {index}: {below} before it (sum {before}), {above} after it (sum {after}).</p>}
+      {index !== null && <table aria-label="Split sums at this index" style={{ borderCollapse: 'collapse', fontFamily: 'monospace', marginBottom: 10 }}>
+        <tbody>
+          <tr><th scope="row">current value</th><td>{value}</td></tr>
+          <tr><th scope="row">left side</th><td>{below} value{below === 1 ? '' : 's'}, sum {before}</td></tr>
+          <tr><th scope="row">right side</th><td>{above} value{above === 1 ? '' : 's'}, sum {after}</td></tr>
+          {answer !== undefined && <tr><th scope="row">left gap</th><td>{value} × {below} − {before} = {leftGap}</td></tr>}
+          {answer !== undefined && <tr><th scope="row">right gap</th><td>{after} − {value} × {above} = {rightGap}</td></tr>}
+        </tbody>
+      </table>}
       <p style={{ fontFamily: 'monospace' }}>Answers so far: [{result.join(', ')}]</p>
     </>
   }} renderReasoning={() => <>

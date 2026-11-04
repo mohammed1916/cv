@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import RunGrid from './RunGrid'
 
 const definition = {
   phases: [
@@ -19,7 +20,8 @@ const definition = {
 }
 
 export default function MostFrequentPrime() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <RunGrid matrix={run.input} step={step} />
     <output aria-label="Current run">{step.cell ? `from (${step.cell[0]}, ${step.cell[1]}) going (${step.dir[0]}, ${step.dir[1]}): ${step.num}` : 'no run yet'}</output>
     <output aria-label="Best prime">{`best so far: ${step.best ?? '-'}, count ${step.bestCount}`}</output>
   </>} renderReasoning={() => <>

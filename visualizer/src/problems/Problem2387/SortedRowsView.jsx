@@ -1,14 +1,22 @@
 import "./SortedRowsView.css";
+import AnswerRangeBar from "../../components/shared/AnswerRangeBar";
+import IndexedSequence from "../../components/shared/IndexedSequence";
 
-// The matrix with the current probe. Cells at most mid are shaded; per-row counts appear at the row ends.
+// The matrix with the current probe, the answer range, and the flattened sorted order with the median marked.
 export default function SortedRowsView({ run, step }) {
   if (!run || !step) {
     return <section className="median-view" aria-label="Sorted rows median"><p className="median-empty">Press Play to narrow the value range.</p></section>;
   }
   const rows = run.input;
   const n = rows[0].length;
+  const sorted = rows.flat().sort((a, b) => a - b);
+  const medianAt = step.need - 1;
+  const min = sorted[0];
+  const max = sorted[sorted.length - 1];
+  const hasCount = step.count !== null && step.count !== undefined;
   return (
     <section className="median-view" aria-label="Sorted rows median">
+      <AnswerRangeBar title="Value range for the median" min={min} max={max} low={step.lo} high={step.hi} probe={step.mid ?? null} verdict={hasCount ? step.count >= step.need : null} />
       <dl className="median-range" aria-label="Search range">
         <div><dt>Low</dt><dd>{step.lo}</dd></div>
         <div><dt>High</dt><dd>{step.hi}</dd></div>
@@ -28,7 +36,8 @@ export default function SortedRowsView({ run, step }) {
           ))}
         </tbody>
       </table>
-      <p className="median-total">{step.count !== null ? `Total at most ${step.mid}: ${step.count} of ${rows.length * n} (need ${step.need}).` : step.mid !== null ? "Shaded cells are at most the probe." : ""}</p>
+      <p className="median-total">{hasCount ? `Total at most ${step.mid}: ${step.count} of ${rows.length * n} (need ${step.need}).` : step.mid !== null ? "Shaded cells are at most the probe." : ""}</p>
+      <IndexedSequence label={`Sorted order (median is the ${step.need}th value)`} length={sorted.length} valueAt={i => sorted[i]} roleAt={i => (i === medianAt ? "median" : "")} />
     </section>
   );
 }

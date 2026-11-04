@@ -16,6 +16,18 @@ const definition = {
   complexity, examples,
 }
 
+const CLAUSES = [['FROM', 'FROM and LEFT JOIN'], ['GROUP', 'GROUP BY sums'], ['WHERE', 'WHERE filter'], ['ORDER', 'ORDER BY']]
+const CLAUSE_OF_PHASE = { load: 'FROM', session: 'GROUP', total: 'GROUP', filter: 'WHERE', done: 'ORDER' }
+
+// Stage strip: the SQL clause that the current step corresponds to.
+function StageStrip({ phase }) {
+  const active = CLAUSE_OF_PHASE[phase]
+  return <ol aria-label="SQL stages" style={{ display: 'flex', gap: 6, listStyle: 'none', padding: 0, margin: '8px 0', flexWrap: 'wrap' }}>
+    {CLAUSES.map(([key, label]) => <li key={key} aria-current={active === key ? 'step' : undefined}
+      style={{ padding: '4px 10px', borderRadius: 6, border: '1px solid var(--border)', background: active === key ? 'var(--primary-glow)' : 'var(--surface2)', color: 'var(--text)', fontWeight: active === key ? 700 : 400 }}>{label}</li>)}
+  </ol>
+}
+
 function Rows({ columns = [], rows = [] }) {
   return <div style={{ overflowX: 'auto' }}>
     <table>
@@ -27,6 +39,7 @@ function Rows({ columns = [], rows = [] }) {
 
 export default function EmployeesWithDeductions() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <StageStrip phase={step.phase} />
     <Rows columns={step.columns} rows={step.rows} />
     <output aria-label="Query output">{step.phase === 'done' ? `Output rows: ${run.result.length}` : step.message}</output>
   </>} renderReasoning={() => <>

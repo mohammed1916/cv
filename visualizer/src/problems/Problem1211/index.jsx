@@ -27,8 +27,20 @@ function CurrentTable({ table }) {
   </div>
 }
 
+function StageStrip({ phases, current }) {
+  return <ol aria-label="SQL stages" style={{ display: 'flex', flexWrap: 'wrap', gap: 6, listStyle: 'none', padding: 0, margin: '0 0 12px' }}>
+    {phases.map(stage => <li key={stage.id} data-stage={stage.id} aria-current={stage.id === current ? 'step' : undefined} style={{
+      padding: '4px 10px', border: stage.id === current ? '2px solid var(--text)' : '1px solid var(--border)',
+      background: stage.id === current ? 'color-mix(in srgb, var(--primary) 25%, transparent)' : 'var(--surface2)', color: 'var(--text)',
+    }}>{stage.label}</li>)}
+  </ol>
+}
+
 export default function QueriesQualityAndPercentage() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <CurrentTable table={step.table} />} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+    <StageStrip phases={definition.phases} current={step.phase} />
+    <CurrentTable table={step.table} />
+  </>} renderReasoning={() => <>
     <p>Each observation contributes its rating divided by its position to the quality of its query name.</p>
     <p>The poor share counts the observations whose rating is below 3, then expresses that count as a percentage of all observations for the name.</p>
   </>} />

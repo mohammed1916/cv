@@ -1,12 +1,9 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
-  phases,
-  parse: parseInput,
-  build: buildTrace,
-  code,
-  python,
+  phases, parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with colors and queries (JSON)',
   url: 'https://leetcode.com/problems/shortest-distance-to-target-color/',
   complexity: 'O(n + q log n) time: grouping the positions is one pass, and each query is a binary search over one color list.',
@@ -18,29 +15,38 @@ const definition = {
 }
 
 export default function ShortestDistanceToTargetColor() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
     const { colors, arr, lo, hi, mid, index, color, best, answers } = step.snapshot
-    const midPosition = arr && mid !== null ? arr[mid] : null
+    const list = arr ?? []
+    const roleAt = i => {
+      if (lo === null) return ''
+      const parts = []
+      if (i === lo) parts.push('lo')
+      if (i === hi) parts.push('hi')
+      if (mid !== null && i === mid) parts.push('mid')
+      return parts.join(', ')
+    }
     return <>
       <div role="img" aria-label="Colors" style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
         {colors.map((c, i) => {
-          const isCandidate = arr?.includes(i)
-          const inRange = arr && lo !== null && hi !== null && arr.indexOf(i) >= lo && arr.indexOf(i) < hi
+          const isCandidate = list.includes(i)
           return <div key={i} data-index={i} style={{
             width: 40, height: 40, boxSizing: 'border-box', display: 'grid', placeItems: 'center', fontFamily: 'monospace',
-            border: index === i ? '2px solid var(--text)' : midPosition === i ? '2px dashed var(--text)' : '1px solid var(--border)',
-            background: isCandidate ? (inRange ? '#a5f3fc' : 'var(--surface2)') : 'transparent',
+            border: index === i ? '2px solid var(--text)' : '1px solid var(--border)',
+            background: isCandidate && color === c ? 'color-mix(in srgb, var(--primary) 28%, transparent)' : 'var(--surface2)',
             color: color === c ? 'var(--text)' : 'var(--text-dim)',
           }}>{c}</div>
         })}
       </div>
+      {arr && <IndexedSequence label={`Positions of color ${color} (sorted)`} length={list.length} valueAt={i => list[i]} active={mid ?? -1} roleAt={roleAt} />}
+      {arr && hi === list.length && lo !== null && <p>hi sits just past the last position, so every position is before it.</p>}
       <output aria-label="Query state">{index === null
         ? 'Positions are being grouped.'
-        : `Query index ${index}, color ${color} · search range [${lo}, ${hi}) · middle ${midPosition ?? '-'} · best ${best ?? '-'}`}</output>
+        : `Query index ${index}, color ${color} · best so far ${best ?? '-'}`}</output>
       <output aria-label="Answers">{`Answers: [${answers.join(', ')}]`}</output>
     </>
   }} renderReasoning={() => <>
-    <p><strong>Sorted positions:</strong> each color's indices are already in increasing order, so one binary search finds the first one at or after the query index.</p>
+    <p><strong>Sorted positions:</strong> each color's indices are already in increasing order, so one binary search finds the first one at or after the query index. lo and hi narrow to that boundary.</p>
     <p><strong>Two neighbors:</strong> the nearest match is either that entry or the one just before it. Compare both distances.</p>
   </>} />
 }

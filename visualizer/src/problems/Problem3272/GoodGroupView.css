@@ -1,0 +1,9 @@
+.gg-view { display: grid; gap: 10px; color: var(--text); }
+.gg-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.gg-chip { font-family: monospace; padding: 4px 8px; border-radius: 6px; border: 1px solid var(--surface2, #d1d5db); background: var(--surface2, transparent); color: var(--text); }
+.gg-chip.is-divisible { background: var(--primary, #2563eb); color: #fff; border-color: transparent; }
+.gg-chip.is-current { outline: 2px solid var(--text); outline-offset: 1px; }
+.gg-group { display: grid; gap: 4px; padding: 8px; border: 1px solid var(--surface2, #d1d5db); border-radius: 8px; }
+.gg-group.is-active { border-color: var(--primary, #2563eb); }
+.gg-formula { font-family: monospace; margin: 0; color: var(--text); }
+.gg-muted { color: var(--muted, var(--text)); font-size: 0.9rem; margin: 0; }

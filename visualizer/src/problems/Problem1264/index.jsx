@@ -26,8 +26,18 @@ const definition = {
   ],
 }
 
+function StageStrip({ phases, current }) {
+  return <ol aria-label="SQL stages" style={{ display: 'flex', flexWrap: 'wrap', gap: 6, listStyle: 'none', padding: 0, margin: '0 0 12px' }}>
+    {phases.map(stage => <li key={stage.id} data-stage={stage.id} aria-current={stage.id === current ? 'step' : undefined} style={{
+      padding: '4px 10px', border: stage.id === current ? '2px solid var(--text)' : '1px solid var(--border)',
+      background: stage.id === current ? 'color-mix(in srgb, var(--primary) 25%, transparent)' : 'var(--surface2)', color: 'var(--text)',
+    }}>{stage.label}</li>)}
+  </ol>
+}
+
 export default function PageRecommendations() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <StageStrip phases={phases} current={step.phase} />
     <RowTable label={`Working rows (${step.phase})`} columns={step.columns} rows={step.rows} />
     {step.phase === 'done' && <RowTable label="Result" columns={run.columns} rows={run.result} />}
   </>} renderReasoning={() => <>

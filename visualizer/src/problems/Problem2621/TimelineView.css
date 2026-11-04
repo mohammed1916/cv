@@ -1,0 +1,11 @@
+.timeline-view { display: grid; gap: 8px; }
+.timeline-view__axis { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); padding-left: 90px; }
+.timeline-view__rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.timeline-view__row { display: grid; grid-template-columns: 80px 1fr 70px 36px; align-items: center; gap: 8px; color: var(--text); }
+.timeline-view__row--current { font-weight: 700; }
+.timeline-view__track { height: 14px; border-radius: 7px; background: var(--surface2); overflow: hidden; display: block; }
+.timeline-view__bar { display: block; height: 100%; background: var(--border); border-radius: 7px; }
+.timeline-view__bar--fired { background: var(--primary); }
+.timeline-view__row--current .timeline-view__bar--fired { background: var(--success); }
+.timeline-view__time, .timeline-view__place { font-size: 12px; color: var(--text-muted); }
+.timeline-view__note { margin: 0; font-size: 13px; color: var(--text-muted); }

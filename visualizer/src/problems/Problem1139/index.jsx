@@ -1,6 +1,8 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { meta } from './meta'
 import { buildTrace, parseInput, code, python, phases, examples, complexity, inputLabel } from './algorithm'
+import MatrixGrid from '../../components/shared/MatrixGrid'
+import { Vars } from './SeqKit'
 
 const definition = {
   number: meta.number,
@@ -8,25 +10,28 @@ const definition = {
   url: `https://leetcode.com/problems/${meta.slug}/`,
 }
 
-function GridView({ snapshot }) {
-  const { grid, corner, size } = snapshot
-  return <table aria-label="Grid of zeros and ones" style={{ borderCollapse: 'collapse' }}><tbody>
-    {grid.map((row, i) => <tr key={i}>{row.map((cell, j) => {
-      const inside = corner && size && i >= corner[0] && i < corner[0] + size && j >= corner[1] && j < corner[1] + size
-      const border = inside && (i === corner[0] || i === corner[0] + size - 1 || j === corner[1] || j === corner[1] + size - 1)
-      return <td key={j} style={{
-        width: 28, height: 28, textAlign: 'center', border: '1px solid #94a3b8',
-        background: border ? '#0891b2' : inside ? '#a5f3fc' : cell ? '#e2e8f0' : 'transparent',
-      }}>{cell}</td>
-    })}</tr>)}
-  </tbody></table>
-}
-
-export default function LargestBorderedSquareVisual() {
-  return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ step }) => <>
-      <GridView snapshot={step.snapshot} />
-      <output aria-label="Best side">Best side so far: {step.snapshot.best ?? 0}</output>
-    </>}
-    renderReasoning={() => <p>Run lengths let each candidate square be checked in constant time: its top and left edges come from the corner's runs, and only its bottom and right edges need confirming.</p>} />
+export default function LargestBorderedSquare() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const s = step.snapshot
+    const highlighted = []
+    if (s.corner && s.size) {
+      const [i, j] = s.corner
+      for (let k = 0; k < s.size; k++) {
+        highlighted.push({ row: i, col: j + k }, { row: i + s.size - 1, col: j + k }, { row: i + k, col: j }, { row: i + k, col: j + s.size - 1 })
+      }
+    }
+    const active = s.corner ? { row: s.corner[0], col: s.corner[1] } : null
+    return <>
+      <MatrixGrid matrix={s.grid} label="Grid: the candidate square's border is highlighted" activeCell={active} highlightedCells={highlighted} cellWidth={40} cellHeight={40} />
+      <div style={{ display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))' }}>
+        <MatrixGrid matrix={s.right} label="Run of ones to the right" activeCell={active} cellWidth={40} cellHeight={40} />
+        <MatrixGrid matrix={s.down} label="Run of ones downward" activeCell={active} cellWidth={40} cellHeight={40} />
+      </div>
+      <Vars vars={{ corner: s.corner ? `row ${s.corner[0]}, col ${s.corner[1]}` : null, 'side tested': s.size, 'best side so far': s.best }} />
+      <output aria-label="Result">{step.message}</output>
+    </>
+  }} renderReasoning={() => <>
+    <p><strong>Runs first:</strong> each cell stores how many ones continue to its right and downward. Those two runs are all a corner needs.</p>
+    <p><strong>Corner test:</strong> a square with a top-left corner at a one has a border of ones when its bottom run and right run both reach its side length.</p>
+  </>} />
 }

@@ -26,5 +26,6 @@ export function buildTrace({ delay, limit, value }) {
     outcome: ok ? 'resolved' : 'rejected',
     message: ok ? `The task finishes at ${delay} ms, before the limit, so it resolves with "${value}".` : `The limit fires at ${limit} ms first, so the promise rejects.`,
   })
+  for (const frame of frames) { frame.delay = delay; frame.limit = limit }
   return { input: { delay, limit, value }, result: ok ? value : 'Time Limit Exceeded', frames }
 }

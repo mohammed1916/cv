@@ -28,9 +28,29 @@ function RowTable({ label, rows }) {
   </section>
 }
 
+function NumberStrip({ rows }) {
+  if (rows.length === 0 || !('id' in rows[0])) return null
+  return <section aria-label="Generated numbers">
+    <h4>Numbers from 1 upward</h4>
+    <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+      {rows.map(row => {
+        const missing = row.has_customer === false
+        const known = row.has_customer === true
+        return <span key={row.id} style={{ minWidth: 34, padding: '4px 6px', textAlign: 'center', borderRadius: 6, fontFamily: 'monospace', color: 'var(--text)',
+          border: '1px solid var(--border)',
+          background: missing ? 'color-mix(in srgb, var(--primary) 28%, transparent)' : known ? 'var(--surface2)' : 'transparent' }}>
+          {row.id}
+        </span>
+      })}
+    </div>
+    {rows.some(row => 'has_customer' in row) && <p style={{ color: 'var(--text-muted)' }}>Shaded purple: no customer has this id, so it is missing.</p>}
+  </section>
+}
+
 export default function Problem1613() {
   return <AlgorithmWorkspace definition={definition}
     renderVisual={({ step }) => <>
+      <NumberStrip rows={step.rows} />
       <RowTable label="Working rows" rows={step.rows} />
       <RowTable label="Output" rows={step.output} />
     </>}

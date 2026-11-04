@@ -10,7 +10,7 @@ const PANDAS = `import pandas as pd
 
 def session_bars(sessions):
     edges = [0, 300, 600, 900, float("inf")]
-    labels = ["[0-5)", "[5-10)", "[10-15)", "15+"]
+    labels = ["[0-5>", "[5-10>", "[10-15>", "15 or more"]
     bins = pd.cut(sessions["duration"], bins=edges, labels=labels, right=False)
     counts = bins.value_counts().reindex(labels, fill_value=0)
     return counts.rename_axis("bin").reset_index(name="total")`
@@ -39,10 +39,10 @@ const frame = (phase, sqlText, pyText, message, columns, rows) => ({
 
 // Half-open bins in seconds: [0, 300), [300, 600), [600, 900), [900, infinity).
 const BINS = [
-  { label: '[0-5)', low: 0, high: 300 },
-  { label: '[5-10)', low: 300, high: 600 },
-  { label: '[10-15)', low: 600, high: 900 },
-  { label: '15+', low: 900, high: Infinity },
+  { label: '[0-5>', low: 0, high: 300 },
+  { label: '[5-10>', low: 300, high: 600 },
+  { label: '[10-15>', low: 600, high: 900 },
+  { label: '15 or more', low: 900, high: Infinity },
 ]
 
 export function parseInput(text) {

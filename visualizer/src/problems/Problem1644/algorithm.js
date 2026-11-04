@@ -1,4 +1,4 @@
-// LeetCode 1644 (draft): Lowest Common Ancestor of a Binary Tree II.
+// LeetCode 1644: Lowest Common Ancestor of a Binary Tree II.
 // Input: { root: level-order list (null = missing child), p, q }. Values are unique, so a node is identified by its value.
 // A value that is not in the tree means that node does not belong, and the answer is null.
 

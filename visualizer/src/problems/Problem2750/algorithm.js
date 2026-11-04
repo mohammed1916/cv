@@ -23,7 +23,7 @@ export const pythonLineMap = { 1: 1, 2: 3, 3: 5, 4: 6, 5: 7, 6: 8, 7: 9 };
 const snapshot = table => table.map(row => row.map(cell => (Array.isArray(cell) ? [...cell] : cell)));
 function emit(frames, table, info, write = false) {
   if (write) table[info.row][info.column] = info.value;
-  frames.push({ phase: info.phase, activeLine: info.line, pythonLine: info.pythonLine, message: info.message, row: info.row, column: info.column, value: info.value, table: snapshot(table) });
+  frames.push({ phase: info.phase, activeLine: info.line, pythonLine: info.pythonLine, message: info.message, row: info.row, column: info.column, value: info.value, table: snapshot(table), l: info.l ?? null, r: info.r ?? null });
 }
 
 export function parseInput(text) {
@@ -54,9 +54,9 @@ export function buildTrace(input) {
       const ones = nums.slice(j, i).reduce((a, b) => a + b, 0);
       if (ones === 1) {
         ways[i] += ways[j];
-        emit(frames, table, { phase: "check", line: 5, pythonLine: 8,row: 0, column: i, value: ways[i], message: `nums[${j}..${i - 1}] has exactly one 1, so add ways[${j}] = ${ways[j]}.` }, true);
+        emit(frames, table, { l: j, r: i - 1, phase: "check", line: 5, pythonLine: 8,row: 0, column: i, value: ways[i], message: `nums[${j}..${i - 1}] has exactly one 1, so add ways[${j}] = ${ways[j]}.` }, true);
       } else {
-        emit(frames, table, { phase: "check", line: 4, pythonLine: 7,row: 0, column: i, value: ways[i], message: `nums[${j}..${i - 1}] has ${ones} ones, so skip j = ${j}.` });
+        emit(frames, table, { l: j, r: i - 1, phase: "check", line: 4, pythonLine: 7,row: 0, column: i, value: ways[i], message: `nums[${j}..${i - 1}] has ${ones} ones, so skip j = ${j}.` });
       }
     }
   }

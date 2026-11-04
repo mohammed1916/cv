@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { parseInput, buildTrace, code } from './algorithm'
+import JobView from './JobView'
 
 const definition = {
   phases: [
@@ -19,18 +20,8 @@ const definition = {
 }
 
 export default function DesignCancellableFunction() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
-    const total = run.input.steps.reduce((a, b) => a + b, 0)
-    const scale = Math.max(total, run.input.cancelAt, 1)
-    const pct = v => `${(v / scale) * 100}%`
-    return <div>
-      <div style={{ position: 'relative', height: 60, borderBottom: '1px solid currentColor' }}>
-        {step.done.map((t, i) => <div key={i} title={`step ends ${t}`} style={{ position: 'absolute', left: 0, top: 10, width: pct(t), height: 20, background: '#9333ea', opacity: 0.25 + 0.15 * i }} />)}
-        <div title="cancel" style={{ position: 'absolute', left: pct(run.input.cancelAt), top: 0, bottom: 0, width: 3, background: '#dc2626' }} />
-      </div>
-      <output aria-label="Job state">{`t = ${step.t} ms · ${step.status} · finished steps: ${step.done.length}`}</output>
-    </div>
-  }} renderReasoning={() => <>
-    <p>The cancel check happens before each step starts. Work already finished stays finished, and nothing after the cancel time is reported.</p>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <JobView run={run} step={step} />} renderReasoning={() => <>
+    <p>Cancel is checked before each step is allowed to complete. Steps already finished stay finished; the one that would end after the cancel point gets the Cancelled error instead.</p>
+    <p>If the job finishes first, its return value is the promise's result.</p>
   </>} />
 }

@@ -21,7 +21,9 @@ export default function GrumpyBookstoreOwner() {
     return <>
       <IndexedSequence label="Customers per minute" length={customers.length} valueAt={i => customers[i]}
         active={windowStart}
-        roleAt={i => (i >= windowStart && i < windowEnd ? 'window' : grumpy[i] === 1 ? 'grumpy' : 'calm')} />
+        roleAt={i => (i === windowStart ? 'l' : i === windowEnd - 1 ? 'r' : i > windowStart && i < windowEnd - 1 ? 'window' : grumpy[i] === 1 ? 'grumpy' : 'calm')} />
+      <IndexedSequence label="Grumpy minutes (1 means the owner is grumpy)" length={grumpy.length} valueAt={i => grumpy[i]} active={windowStart}
+        roleAt={i => (i >= windowStart && i < windowEnd ? 'window' : '')} />
       <p>Calm baseline: {calm}. Window [{windowStart}, {windowEnd - 1}] recovers {window}. Best so far: {best}, starting at minute {bestStart}.</p>
     </>
   }} renderReasoning={({ step }) => <>

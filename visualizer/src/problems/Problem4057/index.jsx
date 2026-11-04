@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -17,15 +18,23 @@ const definition = {
   ],
 }
 
-export default function IntersectingIntervalPairsII() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <table aria-label="Intervals">
-      <tbody>{run.input.intervals.map(([s, e], i) => <tr key={i} data-active={i === step.index ? 'true' : undefined}>
-        <td>{i}</td><td>{`[${s}, ${e}]`}</td>
-      </tr>)}</tbody>
-    </table>
-    <output aria-label="Disjoint">{`Disjoint pairs so far: ${step.disjoint}`}</output>
-  </>} renderReasoning={() => <>
+export default function DisjointIntervalPairs() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const starts = run.input.intervals.map(([s]) => s).sort((a, b) => a - b)
+    const boundary = step.k === null || step.k === undefined ? -1 : starts.length - step.k
+    const endNow = step.index >= 0 ? run.input.intervals[step.index][1] : null
+    return <>
+      <table aria-label="Intervals">
+        <tbody>{run.input.intervals.map(([s, e], i) => <tr key={i} data-active={i === step.index ? 'true' : undefined}>
+          <td>{i}</td><td>{`[${s}, ${e}]`}</td>
+        </tr>)}</tbody>
+      </table>
+      <IndexedSequence label={`Sorted starts${endNow === null ? '' : ` — interval ${step.index} ends at ${endNow}`}`} length={starts.length}
+        valueAt={i => starts[i]} active={boundary >= 0 && boundary < starts.length ? boundary : -1}
+        roleAt={i => (boundary >= 0 && i >= boundary ? 'after end' : boundary >= 0 ? 'not after' : '')} />
+      <output aria-label="Disjoint">{`Disjoint pairs so far: ${step.disjoint}`}</output>
+    </>
+  }} renderReasoning={() => <>
     <p>Two intervals are disjoint when one ends before the other starts. Each disjoint pair has exactly one such order.</p>
     <p>Counting starts above each end and subtracting from n(n − 1) / 2 gives the intersecting pairs.</p>
   </>} />

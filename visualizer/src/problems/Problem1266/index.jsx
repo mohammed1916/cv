@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import CoordinatePlane from '../../components/shared/CoordinatePlane'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -17,26 +18,28 @@ const definition = {
 export default function MinimumTimeVisitingAllPoints() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
     const { points, leg, from, to, dx, dy, moves, total } = step.snapshot
+    const planePoints = points.map(([x, y], i) => ({
+      x, y, label: String(i + 1),
+      role: i === leg || i === leg + 1 ? 'active' : leg >= 0 && i < leg + 1 ? 'kept' : '',
+    }))
     return <>
+      <CoordinatePlane title="Points in visiting order" points={planePoints} />
       <ol aria-label="Points in visiting order" style={{ display: 'flex', gap: 8, listStyle: 'none', padding: 0, flexWrap: 'wrap', fontFamily: 'monospace' }}>
         {points.map((p, i) => {
           const active = i === leg || i === leg + 1
-          return <li key={i} style={{ border: `${active ? 2 : 1}px solid ${active ? 'var(--text)' : 'var(--border)'}`, padding: '4px 8px' }}>
+          return <li key={i} style={{ border: `${active ? 2 : 1}px solid ${active ? 'var(--text)' : 'var(--border)'}`, padding: '4px 8px', color: 'var(--text)' }}>
             [{p[0]}, {p[1]}]
           </li>
         })}
       </ol>
       {from && to && <table aria-label="Current leg" style={{ marginTop: 12, fontFamily: 'monospace', borderCollapse: 'collapse' }}>
         <tbody>
-          <tr><th>from → to</th><td>[{from[0]}, {from[1]}] → [{to[0]}, {to[1]}]</td></tr>
-          <tr><th>dx, dy</th><td>{dx}, {dy}</td></tr>
-          <tr><th>cost max(dx, dy)</th><td>{moves}</td></tr>
-          <tr><th>running total</th><td>{total}</td></tr>
+          <tr><th scope="row">From to</th><td>[{from[0]}, {from[1]}] to [{to[0]}, {to[1]}]</td></tr>
+          <tr><th scope="row">dx, dy</th><td>{dx}, {dy}</td></tr>
+          <tr><th scope="row">max(dx, dy)</th><td>{moves}</td></tr>
         </tbody>
       </table>}
+      <output aria-label="Total time" style={{ display: 'block', marginTop: 8 }}>{`Total time so far: ${total}`}</output>
     </>
-  }} renderReasoning={() => <>
-    <p><strong>Diagonal first:</strong> one move can change x and y together. Between two points, the cost is the larger of the two gaps: the diagonal covers the smaller gap for free.</p>
-    <p><strong>Legs add up:</strong> the points must be visited in order, so the total is the sum of the leg costs.</p>
-  </>} />
+  }} renderReasoning={({ step }) => <p>{step.message}</p>} />
 }

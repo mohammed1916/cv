@@ -28,9 +28,25 @@ function RowTable({ label, rows }) {
   </section>
 }
 
+function CandidateList({ rows }) {
+  if (rows.length === 0 || !('valid' in rows[0])) return null
+  return <section aria-label="Candidate triplets">
+    <h4>Candidates, one student from each school</h4>
+    <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+      {rows.map((row, index) => <span key={index} style={{ padding: '6px 10px', borderRadius: 6, fontFamily: 'monospace', color: 'var(--text)',
+        border: '1px solid var(--border)',
+        background: row.valid ? 'color-mix(in srgb, var(--success) 25%, transparent)' : 'color-mix(in srgb, var(--error) 18%, transparent)',
+        textDecoration: row.valid ? 'none' : 'line-through' }}>
+        ({row.member_A}, {row.member_B}, {row.member_C}) {row.valid ? 'kept' : 'rejected'}
+      </span>)}
+    </div>
+  </section>
+}
+
 export default function Problem1623() {
   return <AlgorithmWorkspace definition={definition}
     renderVisual={({ step }) => <>
+      <CandidateList rows={step.rows} />
       <RowTable label="Working rows" rows={step.rows} />
       <RowTable label="Output" rows={step.output} />
     </>}

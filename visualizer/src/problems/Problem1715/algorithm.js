@@ -1,4 +1,4 @@
-// Knowledge-derived teaching version. The sample tables are invented for this visualization.
+// Teaching version of the query. The sample tables are invented for this visualization.
 const SQL = `SELECT SUM(b.apple_count + COALESCE(c.apple_count, 0)) AS apple_count,
        SUM(b.orange_count + COALESCE(c.orange_count, 0)) AS orange_count
 FROM Boxes AS b

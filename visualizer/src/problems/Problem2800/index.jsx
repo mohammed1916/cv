@@ -18,14 +18,34 @@ const definition = {
   ],
 }
 
+function OrderTable({ frames, current }) {
+  const orders = frames.filter(f => f.order)
+  return <table aria-label="Merge orders" style={{ borderCollapse: 'collapse', width: '100%', color: 'var(--text)' }}>
+    <thead><tr>
+      {['Order (p, q, r)', 'Candidate', 'Length', 'Status'].map(h => <th key={h} scope="col" style={{ textAlign: 'left', padding: '4px 8px', borderBottom: '2px solid var(--border, currentColor)' }}>{h}</th>)}
+    </tr></thead>
+    <tbody>{orders.map((f, i) => {
+      const isCurrent = frames.indexOf(f) === current
+      const isBest = f.candidate === f.best && f.phase === 'better'
+      return <tr key={i} data-current={isCurrent} style={{ background: isCurrent ? 'var(--primary)' : 'transparent', color: isCurrent ? '#fff' : 'var(--text)' }}>
+        <td style={{ padding: '4px 8px' }}>{f.order}</td>
+        <td style={{ padding: '4px 8px', fontFamily: 'monospace' }}>{f.candidate}</td>
+        <td style={{ padding: '4px 8px' }}>{f.candidate.length}</td>
+        <td style={{ padding: '4px 8px' }}>{isBest ? 'new best' : 'not better'}</td>
+      </tr>
+    })}</tbody>
+  </table>
+}
+
 export default function ShortestStringThatContainsThree() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <section aria-label="Input strings">
-      <ol>
+      <ol style={{ color: 'var(--text)' }}>
         {['a', 'b', 'c'].map(k => <li key={k}>{`${k} = ${run.input[k]}`}</li>)}
       </ol>
     </section>
-    <output aria-label="Candidate">{`Order: ${step.order || '(none)'}, candidate: ${step.candidate || '(none)'}, best: ${step.best || '(none)'}`}</output>
+    <OrderTable frames={run.frames} current={run.frames.indexOf(step)} />
+    <output aria-label="Candidate" style={{ color: 'var(--text)' }}>{`Order: ${step.order || '(none)'}, candidate: ${step.candidate || '(none)'}, best: ${step.best || '(none)'}`}</output>
   </>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>
     <p>Some pair of strings is always merged first. Overlapping the ends of two strings saves the most letters, and trying every order covers every merge.</p>

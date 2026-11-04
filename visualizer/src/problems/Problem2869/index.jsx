@@ -36,7 +36,15 @@ export default function MinimumOperationsCollectElements() {
             active={step.cursor}
             roleAt={(i) => (step.cursor >= 0 && i >= step.cursor ? "removed" : "")}
           />
-          <p>Still needed: {step.need.length === 0 ? "none" : step.need.join(", ")}</p>
+          <div aria-label="Values still needed" style={{ display: "flex", flexWrap: "wrap", gap: 6, color: "var(--text)" }}>
+            <span>Still needed:</span>
+            {step.need.length === 0 && <span>none</span>}
+            {step.need.map((v) => <span key={v} style={{ padding: "2px 8px", borderRadius: 999, border: "1px solid var(--border, currentColor)", background: "var(--primary)", color: "#fff" }}>{v}</span>)}
+          </div>
+          <div aria-label="Values collected" style={{ display: "flex", flexWrap: "wrap", gap: 6, color: "var(--text)" }}>
+            <span>Collected:</span>
+            {Array.from({ length: run.input.k }, (_, i) => i + 1).filter((v) => !step.need.includes(v)).map((v) => <span key={v} style={{ padding: "2px 8px", borderRadius: 999, border: "1px solid var(--border, currentColor)", background: "var(--surface2)" }}>{v}</span>)}
+          </div>
         </>
       )}
       renderReasoning={({ step }) => <p>{step.message}</p>}

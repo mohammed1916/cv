@@ -11,29 +11,33 @@ export function parseInput(text) {
 export const code = `run the job one timed step at a time
 keep the clock t and the list of finished steps
 for each step with duration d
-  if t plus d is later than the cancel time, stop now
+  if t plus d is later than the cancel time, throw Cancelled into the job and stop
   otherwise advance t by d and record the step
-report whether the job finished or was cancelled`.split('\n').map((text, index) => ({ line: index + 1, text }))
+report the job's return value, or the Cancelled error`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
+// The job yields one promise per step. Cancel throws the string "Cancelled" into the job at its pending
+// yield; with no catch, the returned promise rejects with that string. Otherwise it resolves with the
+// value the job returns, which here is the time the last step finished.
 export function buildTrace({ steps, cancelAt }) {
   const frames = []
   const done = []
   let t = 0
   let status = 'running'
-  frames.push({ phase: 'start', activeLine: L('run the job'), t, done: [], status, message: `Cancel requested at ${cancelAt} ms.` })
+  frames.push({ phase: 'start', activeLine: L('run the job'), t, done: [], status, cancelAt, message: `Cancel requested at ${cancelAt} ms.` })
   for (let i = 0; i < steps.length; i++) {
     const d = steps[i]
     if (t + d > cancelAt) {
       status = 'cancelled'
-      frames.push({ phase: 'cancel', activeLine: L('if t plus d'), t: cancelAt, done: [...done], status, message: `Step ${i + 1} would end at ${t + d} ms, after the cancel, so it never starts its result.` })
+      frames.push({ phase: 'cancel', activeLine: L('if t plus d'), t: cancelAt, done: [...done], status, cancelAt, pending: { index: i, from: t, to: t + d }, message: `Step ${i + 1} would end at ${t + d} ms, after the cancel, so "Cancelled" is thrown into the job instead.` })
       break
     }
     t += d
     done.push(t)
-    frames.push({ phase: 'step', activeLine: L('otherwise advance'), t, done: [...done], status, message: `Step ${i + 1} finishes at ${t} ms.` })
+    frames.push({ phase: 'step', activeLine: L('otherwise advance'), t, done: [...done], status, cancelAt, message: `Step ${i + 1} finishes at ${t} ms.` })
   }
   if (status === 'running') status = 'finished'
-  frames.push({ phase: 'done', activeLine: L('report whether'), t, done: [...done], status, message: `The job ${status}.` })
-  return { input: { steps, cancelAt }, result: status, frames }
+  const result = status === 'cancelled' ? 'Cancelled' : t
+  frames.push({ phase: 'done', activeLine: L('report the job'), t, done: [...done], status, cancelAt, result, message: status === 'cancelled' ? 'The promise rejects with "Cancelled".' : `The job returns ${t}, so the promise resolves with ${t}.` })
+  return { input: { steps, cancelAt }, result, frames }
 }

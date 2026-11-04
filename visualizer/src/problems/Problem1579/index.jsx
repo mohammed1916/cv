@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import EdgeTypesView from './EdgeTypesView'
 
 const definition = {
   phases: [
@@ -19,6 +20,8 @@ const definition = {
 
 export default function RemoveMaxEdges() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <EdgeTypesView n={run.input.n} edges={run.input.edges} decisions={step.decisions} activeEdge={step.edge} />
+    <p>Alice's groups: {step.groups[0]} · Bob's groups: {step.groups[1]} · each must reach 1 group at the end.</p>
     <table aria-label="Edges and decisions">
       <thead><tr><th scope="col">Edge</th><th scope="col">Type</th><th scope="col">Nodes</th><th scope="col">Decision</th></tr></thead>
       <tbody>{run.input.edges.map(([t, u, v], i) => (

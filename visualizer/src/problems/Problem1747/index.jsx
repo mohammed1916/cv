@@ -16,18 +16,48 @@ const definition = {
   complexity, examples,
 }
 
+const CELL = { border: '1px solid var(--border)', padding: '3px 8px', color: 'var(--text)', fontFamily: 'monospace' }
+
 function Rows({ columns = [], rows = [] }) {
   return <div style={{ overflowX: 'auto' }}>
-    <table>
-      <thead><tr>{columns.map(column => <th key={column} scope="col">{column}</th>)}</tr></thead>
-      <tbody>{rows.map((row, index) => <tr key={index}>{columns.map(column => <td key={column}>{String(row[column] ?? '')}</td>)}</tr>)}</tbody>
+    <table style={{ borderCollapse: 'collapse' }}>
+      <thead><tr>{columns.map(column => <th key={column} scope="col" style={CELL}>{column}</th>)}</tr></thead>
+      <tbody>{rows.map((row, index) => <tr key={index}>{columns.map(column => <td key={column} style={CELL}>{String(row[column] ?? '')}</td>)}</tr>)}</tbody>
     </table>
   </div>
 }
 
-export default function KnowledgeDerivedSqlVisual() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <Rows columns={step.columns} rows={step.rows} />
-    <output aria-label="Query output">{step.phase === 'done' ? `Output rows: ${run.result.length}` : step.message}</output>
-  </>} renderReasoning={() => <p>Each pair of sessions on different IP addresses is checked with the two overlap comparisons. Touching endpoints count, so a logout at minute 5 and a login at minute 5 flag the account.</p>} />
+// Sessions of each account on one minute axis. The two sessions being compared are highlighted.
+function Timeline({ input, pair }) {
+  const max = Math.max(...input.map(r => r.logout), 1)
+  const pct = t => `${(t / max) * 100}%`
+  const accounts = [...new Set(input.map(r => r.account_id))].sort((a, b) => a - b)
+  const isPair = row => pair.some(p => p.account_id === row.account_id && p.ip_address === row.ip_address && p.login === row.login && p.logout === row.logout)
+  return <div role="img" aria-label="Login sessions on a time axis" style={{ display: 'grid', gap: 6 }}>
+    {accounts.map(account => <div key={account} style={{ display: 'grid', gridTemplateColumns: '70px 1fr', gap: 8, alignItems: 'center' }}>
+      <span style={{ fontFamily: 'monospace', color: 'var(--text)' }}>account {account}</span>
+      <div style={{ position: 'relative', height: 30, borderBottom: '1px solid var(--border)' }}>
+        {input.filter(r => r.account_id === account).map((r, k) => {
+          const hot = isPair(r)
+          return <span key={k} title={`IP ${r.ip_address}: ${r.login} to ${r.logout}`} style={{
+            position: 'absolute', top: 4 + (k % 2) * 12, height: 10, left: pct(r.login), width: `${((r.logout - r.login) / max) * 100}%`,
+            minWidth: 4, boxSizing: 'border-box', borderRadius: 3,
+            background: hot ? 'var(--primary)' : 'var(--surface2)', border: `1px solid ${hot ? 'var(--primary)' : 'var(--border)'}`,
+          }} />
+        })}
+      </div>
+    </div>)}
+    <span style={{ justifySelf: 'end', fontFamily: 'monospace', fontSize: 12, color: 'var(--text-muted, var(--text))' }}>minute 0 to {max}</span>
+  </div>
+}
+
+export default function BannedAccountsVisual() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const pair = step.phase === 'pair' ? step.rows : []
+    return <>
+      <Timeline input={run.input} pair={pair} />
+      <output aria-label="Query output" style={{ display: 'block', margin: '10px 0' }}>{step.phase === 'done' ? `Output rows: ${run.result.length}` : step.message}</output>
+      <Rows columns={step.columns} rows={step.rows} />
+    </>
+  }} renderReasoning={() => <p>Each pair of sessions on different IP addresses is checked with the two overlap comparisons. Touching endpoints count, so a logout at minute 5 and a login at minute 5 flag the account.</p>} />
 }

@@ -1,0 +1,12 @@
+.ac-view { display: grid; gap: 10px; color: var(--text); }
+.ac-note { margin: 0; color: var(--muted, var(--text)); font-size: 0.9rem; }
+.ac-grid { display: grid; gap: 4px; overflow-x: auto; }
+.ac-head { font-family: monospace; font-size: 0.8rem; text-align: center; color: var(--text); }
+.ac-cell { display: grid; place-items: center; min-height: 30px; border: 1px solid var(--surface2, #d1d5db); border-radius: 6px; background: var(--surface2, transparent); color: var(--text); }
+.ac-blank { border-style: dashed; opacity: 0.35; }
+.ac-idle { opacity: 0.6; }
+.ac-candidate { border-color: var(--primary, #2563eb); box-shadow: 0 0 0 2px var(--primary, #2563eb) inset; }
+.ac-paired { background: var(--primary, #2563eb); color: #fff; font-weight: 700; }
+.ac-reach { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; color: var(--text); }
+.ac-reach span { font-family: monospace; }
+.ac-count { margin: 0; font-weight: 600; color: var(--text); }

@@ -3,37 +3,38 @@ import { parseInput, buildTrace, code } from './algorithm'
 
 const definition = {
   phases: [
-    { id: 'start', label: 'Start', description: 'Set the window length.' },
-    { id: 'call', label: 'Call', description: 'A caller invokes the throttled function.' },
-    { id: 'queue', label: 'Queue', description: 'Inside the window, keep only the latest call.' },
-    { id: 'run', label: 'Run', description: 'The function actually executes.' },
-    { id: 'done', label: 'Done', description: 'Pending work is flushed.' },
+    { id: 'start', label: 'Start', description: 'The window length is set.' },
+    { id: 'call', label: 'Call', description: 'A call arrives.' },
+    { id: 'run', label: 'Run', description: 'The function runs now.' },
+    { id: 'queue', label: 'Queue', description: 'The call waits for the window to end.' },
+    { id: 'done', label: 'Done', description: 'Every queued call has run.' },
   ],
   parse: parseInput, build: buildTrace, code,
-  inputLabel: 'Object with wait (ms) and calls (ascending times, at most 8)',
+  inputLabel: 'Object with wait (ms) and calls (sorted list of call times in ms)',
   url: 'https://leetcode.com/problems/throttle/',
-  complexity: 'O(calls) time and O(1) extra state: one last-run time and one pending slot.',
+  complexity: 'O(calls) time. The model stores one pending call, the latest one.',
   examples: [
-    { label: 'Burst then pause', input: '{"wait":100,"calls":[0,40,90,150,260]}' },
-    { label: 'Two calls', input: '{"wait":50,"calls":[10,70]}' },
+    { label: 'Burst then a late call', input: '{"wait":100,"calls":[0,40,90,260]}' },
+    { label: 'Spaced calls', input: '{"wait":50,"calls":[0,60,130]}' },
   ],
 }
 
 export default function Throttle() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
-    const end = Math.max(...run.input.calls, ...step.runs, step.pendingAt ?? 0, 1)
-    const pct = v => `${(v / end) * 100}%`
-    return <div>
-      <div style={{ position: 'relative', height: 90, borderBottom: '1px solid currentColor' }}>
-        {run.input.calls.map((t, i) => <div key={`c${i}`} title={`call at ${t}`} style={{ position: 'absolute', left: pct(t), top: 8, width: 2, height: 30, background: '#64748b' }} />)}
-        {step.runs.map((t, i) => <div key={`r${i}`} title={`run at ${t}`} style={{ position: 'absolute', left: pct(t), top: 50, width: 10, height: 30, marginLeft: -4, background: '#0f766e', borderRadius: 3 }} />)}
-        {step.pendingAt !== null && <div title="pending run" style={{ position: 'absolute', left: pct(step.pendingAt), top: 50, width: 10, height: 30, marginLeft: -4, border: '2px dashed #0f766e', borderRadius: 3 }} />}
+    // A time axis: runs are solid markers, the current call is a ring, and the pending run is a dashed marker.
+    const end = Math.max(...run.input.calls, step.pendingAt ?? 0, ...run.result, 1)
+    const pct = t => `${(t / end) * 100}%`
+    const mark = (t, style) => <div key={`${style.key}-${t}`} title={`${t} ms`} style={{ position: 'absolute', left: pct(t), top: style.top, width: 10, height: 10, marginLeft: -5, borderRadius: '50%', ...style.css }} />
+    return <section aria-label="Throttle timeline" style={{ display: 'grid', gap: 8 }}>
+      <div style={{ position: 'relative', height: 84, background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: 6 }}>
+        {run.input.calls.map(t => mark(t, { key: 'call', top: 14, css: { border: '2px solid var(--primary)', background: 'transparent' } }))}
+        {step.runs.map(t => mark(t, { key: 'run', top: 40, css: { background: 'var(--success)' } }))}
+        {step.pendingAt !== null && step.pendingAt !== undefined && mark(step.pendingAt, { key: 'pending', top: 62, css: { border: '2px dashed var(--warning)', background: 'transparent' } })}
       </div>
-      <p>Grey ticks are calls. Teal blocks are runs. A dashed block is the pending run.</p>
-      <output aria-label="Throttle state">{`runs so far: ${step.runs.join(', ') || 'none'}${step.pendingAt !== null ? ` · pending at ${step.pendingAt} ms` : ''}`}</output>
-    </div>
-  }} renderReasoning={() => <>
-    <p>Only two numbers are needed: when the function last ran and which call is waiting. Each new call either runs or replaces the waiting one.</p>
-    <p>Keeping the latest arguments means the final state is never lost, even when the burst is long.</p>
-  </>} />
+      <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', color: 'var(--text-muted)', fontSize: 13 }}>
+        <span>Rings: calls</span><span>Filled: runs</span><span>Dashed: queued run</span><span>Window {run.input.wait} ms</span>
+      </div>
+      <p style={{ margin: 0, color: 'var(--text)' }}>{step.message} Runs so far: <code>{JSON.stringify(step.runs)}</code></p>
+    </section>
+  }} renderReasoning={({ step }) => <p>{step.message}</p>} />
 }

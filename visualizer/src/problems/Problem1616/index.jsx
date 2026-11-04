@@ -16,15 +16,15 @@ const definition = {
 
 function Row({ name, text, i, j, segment }) {
   return <div role="img" aria-label={`String ${name}`} style={{ display: 'flex', gap: 4, alignItems: 'center', marginBottom: 6 }}>
-    <strong style={{ width: 18, fontFamily: 'monospace' }}>{name}</strong>
+    <strong style={{ width: 18, fontFamily: 'monospace', color: 'var(--text)' }}>{name}</strong>
     {[...text].map((letter, index) => {
       const inSegment = segment && segment.owner === name && index >= segment.from && index <= segment.to
       const pointer = index === i || index === j
       return <div key={index} data-index={index} style={{
         minWidth: 30, textAlign: 'center', fontFamily: 'monospace', padding: '4px 6px', boxSizing: 'border-box',
         border: `${pointer ? 2 : 1}px solid ${pointer ? 'var(--text)' : 'var(--border)'}`,
-        background: inSegment ? (segment.isPalindrome ? '#bbf7d0' : '#fecaca') : 'transparent', color: '#1c1917',
-      }}>{letter}<small style={{ display: 'block' }}>{index}</small></div>
+        background: inSegment ? (segment.isPalindrome ? 'color-mix(in srgb, var(--success) 30%, transparent)' : 'color-mix(in srgb, var(--error) 25%, transparent)') : 'transparent', color: 'var(--text)',
+      }}>{letter}<small style={{ display: 'block', color: 'var(--text-muted)' }}>{index === i ? 'i' : index === j ? 'j' : index}</small></div>
     })}
   </div>
 }
@@ -38,7 +38,7 @@ export default function SplitPalindromeVisualizer() {
     return <>
       <Row name={xName} text={x ?? a} i={i} j={j} segment={segment} />
       <Row name={yName} text={y ?? b} i={i} j={j} segment={segment} />
-      <p>{pass ? `${pass}: pointers at ${i} and ${j}.` : 'Both strings are shown in full before any split is tried.'}</p>
+      <p style={{ color: 'var(--text)' }}>{pass ? `${pass}: pointers i and j at ${i} and ${j}.` : 'Both strings are shown in full before any split is tried.'}</p>
     </>
   }} renderReasoning={({ step }) => <>
     <p><strong>Two pointers from the outside:</strong> a palindrome built from a prefix of one string and a suffix of the other has matching characters at mirrored positions, so matching from both ends first is forced.</p>

@@ -1,4 +1,4 @@
-// Knowledge-derived walkthrough: collect user 1's friends from both directions of the friendship pairs, then recommend pages those friends like that user 1 has not liked.
+// Walkthrough: collect user 1's friends from both directions of the friendship pairs, then recommend pages those friends like that user 1 has not liked.
 export const phases = [
   { id: 'load', label: 'Friendships', description: 'Read each friendship from both directions.' },
   { id: 'friends', label: 'Friends', description: 'Collect the friends of user 1.' },

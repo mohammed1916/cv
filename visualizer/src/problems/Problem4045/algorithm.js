@@ -66,12 +66,12 @@ export function parseInput(text) {
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Use an object with positions, speeds and distance.')
   const { positions, speeds, distance } = input
   if (!Array.isArray(positions) || !Array.isArray(speeds) || positions.length !== speeds.length) throw new Error('positions and speeds have equal lengths.')
-  if (positions.length < 1 || positions.length > 8) throw new Error('Use 1 to 8 robots.')
-  if (!positions.every((p, i) => Number.isInteger(p) && p >= 1 && p <= 10 && (i === 0 || p > positions[i - 1]))) {
-    throw new Error('positions are integers from 1 to 10, strictly increasing.')
+  if (positions.length < 1 || positions.length > 8) throw new Error('The visualization takes 1 to 8 robots.')
+  if (!positions.every((p, i) => Number.isInteger(p) && p >= 1 && p <= 1e9 && (i === 0 || p > positions[i - 1]))) {
+    throw new Error('positions are integers from 1 to 10^9, strictly increasing.')
   }
-  if (!speeds.every(s => Number.isInteger(s) && s >= 1 && s <= 4)) throw new Error('speeds are integers from 1 to 4.')
-  if (!Number.isInteger(distance) || distance < 1 || distance > 9) throw new Error('distance is an integer from 1 to 9.')
+  if (!speeds.every(s => Number.isInteger(s) && s >= 1 && s <= 1e9)) throw new Error('speeds are integers from 1 to 10^9.')
+  if (!Number.isInteger(distance) || distance < 1 || distance > 1e9) throw new Error('distance is an integer from 1 to 10^9.')
   return { positions, speeds, distance }
 }
 

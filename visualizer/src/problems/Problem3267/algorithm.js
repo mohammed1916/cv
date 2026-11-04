@@ -79,8 +79,9 @@ export function buildTrace(input) {
   const frames = []
   let count = 0
   const pairs = []
+  let reachWords = []
   const add = (phase, activeLine, pythonText, message, extra = {}) => frames.push({
-    phase, activeLine, pythonLine: at(pythonText), message, nums, texts, width, count, pairs: [...pairs], j: -1, i: -1, ...extra,
+    phase, activeLine, pythonLine: at(pythonText), message, nums, texts, width, count, pairs: [...pairs], j: -1, i: -1, reach: reachWords, ...extra,
   })
   add("setup", 1, "width = len(", `Pad every number to ${width} digits.`)
   add("setup", 2, "texts = [str(x)", `Padded values: ${texts.join(", ")}.`)
@@ -88,13 +89,15 @@ export function buildTrace(input) {
   for (let j = 0; j < texts.length; j += 1) {
     const reach = new Set([texts[j]])
     let frontier = new Set([texts[j]])
+    reachWords = [...reach]
     add("reach", 5, "reach = {texts[j]}", `Start the reach of ${texts[j]}.`, { j })
     for (let round = 0; round < 2; round += 1) {
       const nextLevel = new Set()
       frontier.forEach(word => swapsOf(word, width).forEach(next => nextLevel.add(next)))
       frontier = nextLevel
       nextLevel.forEach(word => reach.add(word))
-      add("swap", 6, "for swap_round in range(2)", `Round ${round + 1}: reach of ${texts[j]} now has ${reach.size} word(s).`, { j, reach: [...reach] })
+      reachWords = [...reach]
+      add("swap", 6, "for swap_round in range(2)", `Round ${round + 1}: reach of ${texts[j]} now has ${reach.size} word(s).`, { j })
     }
     for (let i = 0; i < j; i += 1) {
       if (reach.has(texts[i])) {

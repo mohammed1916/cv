@@ -25,13 +25,13 @@ export default function DesignOrderedStream() {
           return <div key={id} data-slot={id} style={{
             minWidth: 52, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
             border: `${id === pointer ? 2 : 1}px solid ${id === key ? 'var(--text)' : 'var(--border)'}`,
-            background: chunk?.includes(slots[i]) && filled ? '#bbf7d0' : filled ? 'var(--surface2)' : 'transparent',
+            background: chunk?.includes(slots[i]) && filled ? 'color-mix(in srgb, var(--success) 30%, transparent)' : filled ? 'var(--surface2)' : 'transparent',
             color: 'var(--text)',
-          }}><div>{filled ? slots[i] : '·'}</div><small>id {id}</small></div>
+          }}><div style={{ minHeight: 16, fontSize: 11, fontWeight: 700 }}>{id === pointer ? 'ptr' : ''}</div><div>{filled ? slots[i] : '·'}</div><small>id {id}</small></div>
         })}
       </div>
       <p>{key === null ? 'Waiting for the first insertion.' : `Inserted ${value} at id ${key}. Pointer waits at id ${pointer}.`}</p>
-      <p>Released chunks: {output.length ? output.map(c => `[${c.join(', ')}]`).join(' ') : 'none yet'}</p>
+      <p style={{ color: 'var(--text)' }}>Released chunks: {output.length ? output.map(c => `[${c.join(', ')}]`).join(' ') : 'none yet'}</p>
     </>
   }} renderReasoning={() => <>
     <p><strong>Store by id:</strong> a value waits in its own slot until every earlier id has been released.</p>

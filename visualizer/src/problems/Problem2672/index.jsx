@@ -37,7 +37,9 @@ export default function AdjacentSameColorVisualizer() {
             length={run.input.n}
             valueAt={(i) => step.colors[i]}
             active={step.index ?? -1}
+            roleAt={(i) => (i === step.index ? 'changed' : i === step.neighbor ? 'neighbour checked' : step.colors[i] !== 0 && step.colors[i] === step.colors[i + 1] ? 'pair' : '')}
           />
+          <p>Equal neighbours shown as pairs: {Array.from({ length: Math.max(0, run.input.n - 1) }, (_, i) => i).filter((i) => step.colors[i] !== 0 && step.colors[i] === step.colors[i + 1]).map((i) => `${i}-${i + 1}`).join(', ') || 'none'}</p>
           <output aria-label="Adjacent equal pairs">count = {step.count}</output>
           <p>Answer so far: [{step.answer.join(", ")}]</p>
         </>

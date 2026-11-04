@@ -33,24 +33,24 @@ export function buildTrace({ ops }) {
   const store = new Map()
   const results = []
   const alive = (key, time) => store.has(key) && store.get(key).expires > time
-  const view = (focus) => ({ title: 'Operations', rows: ops.map(op => op.join(' ')), focus, summary: `results so far: ${JSON.stringify(results)}` })
+  const view = (focus, time = -1) => ({ title: 'Operations', rows: ops.map(op => op.join(' ')), focus, time, store: [...store.entries()].map(([key, entry]) => ({ key, value: entry.value, expires: entry.expires })), results: results.slice(), summary: `results so far: ${JSON.stringify(results)}` })
   for (let i = 0; i < ops.length; i++) {
     const [time, op, key, value, duration] = ops[i]
-    step(frames, 'op', 'for each operation', `At time ${time}: ${op}.`, view(i))
+    step(frames, 'op', 'for each operation', `At time ${time}: ${op}.`, view(i, time))
     if (op === 'set') {
       const existed = alive(key, time)
-      step(frames, 'set', 'if set:', existed ? `${key} is still alive, so it is overwritten and the answer is true.` : `${key} is new or expired, so the answer is false.`, view(i))
+      step(frames, 'set', 'if set:', existed ? `${key} is still alive, so it is overwritten and the answer is true.` : `${key} is new or expired, so the answer is false.`, view(i, time))
       store.set(key, { value, expires: time + duration })
       results.push(existed)
-      step(frames, 'set', 'store the value', `${key} now expires at ${time + duration}.`, view(i))
+      step(frames, 'set', 'store the value', `${key} now expires at ${time + duration}.`, view(i, time))
     } else if (op === 'get') {
       const found = alive(key, time) ? store.get(key).value : -1
       results.push(found)
-      step(frames, 'get', 'if get:', `get ${key} gives ${found}.`, view(i))
+      step(frames, 'get', 'if get:', `get ${key} gives ${found}.`, view(i, time))
     } else {
       const count = [...store.keys()].filter(k => alive(k, time)).length
       results.push(count)
-      step(frames, 'count', 'if count:', `${count} keys are alive at time ${time}.`, view(i))
+      step(frames, 'count', 'if count:', `${count} keys are alive at time ${time}.`, view(i, time))
     }
   }
   step(frames, 'done', 'return the results', 'All operations answered.', view(-1))

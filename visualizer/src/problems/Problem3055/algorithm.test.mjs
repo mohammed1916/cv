@@ -26,19 +26,19 @@ function assertFrames(trace) {
   assert.deepEqual(trace.frames.at(-1).rows, trace.result)
 }
 
-test('3055 keeps the top quarter of each state, ties by policy_id', () => {
+test('3055 keeps the top 5 percent of each state, rounded up, ties by policy_id', () => {
   const trace = buildTrace(parseInput(SAMPLE))
   assert.deepEqual(trace.result, [
     { policy_id: 5, state: 'CA', fraud_score: 88 },
     { policy_id: 1, state: 'NY', fraud_score: 90 },
-    { policy_id: 3, state: 'NY', fraud_score: 75 },
+    { policy_id: 9, state: 'TX', fraud_score: 50 },
   ])
   assertFrames(trace)
 })
 
-test('3055 a state with fewer than four policies keeps nothing', () => {
+test('3055 a state with one policy keeps that policy', () => {
   const trace = buildTrace(parseInput('{"Fraud":[{"policy_id":9,"state":"TX","fraud_score":50}]}'))
-  assert.deepEqual(trace.result, [])
+  assert.deepEqual(trace.result, [{ policy_id: 9, state: 'TX', fraud_score: 50 }])
   assertFrames(trace)
 })
 

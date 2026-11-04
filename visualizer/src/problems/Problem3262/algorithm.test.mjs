@@ -29,8 +29,8 @@ function checkFrames(trace) {
 test('3262 mixed sample counts each overlapping pair once', () => {
   const trace = buildTrace(sample)
   assert.deepEqual(trace.result, [
-    { employee_id: 7, overlap_count: 1 },
-    { employee_id: 9, overlap_count: 2 },
+    { employee_id: 7, overlapping_shifts: 1 },
+    { employee_id: 9, overlapping_shifts: 2 },
   ])
   checkFrames(trace)
 })

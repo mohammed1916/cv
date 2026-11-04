@@ -11,9 +11,9 @@ const definition = {
   python,
   inputLabel: "Array of positive integers (e.g. [9,6,7,13])",
   url: "https://leetcode.com/problems/number-of-subarrays-having-even-product/description/",
-  complexity: "O(n) time and O(1) extra space for n values. The visualization caps the array at 12 values of 1 to 20; the official bounds are not verified in this draft.",
+  complexity: "O(n) time and O(1) extra space. The visualization caps the array at 12 values from 1 to 20 to keep the trace short.",
   examples: [
-    { label: "Example", input: "[9,6,7,13]" },
+    { label: "Mixed", input: "[5,8,3,4]" },
     { label: "All odd", input: "[1,3,5]" },
     { label: "Even first", input: "[2,1,1]" },
   ],

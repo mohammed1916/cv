@@ -9,13 +9,13 @@ const definition = {
   build: buildTrace,
   code,
   python,
-  inputLabel: "A lowercase string of 1 to 8 letters, e.g. abba",
+  inputLabel: "A lowercase string of 1 to 8 letters, e.g. rsttsr",
   url: "https://leetcode.com/problems/longest-palindromic-subsequence-ii/",
-  complexity: "O(n^4) time with memoised windows and a letter state (about O(n^2 * 27) states, each scanning O(n^2) pairs) for a string of length n. The visualization caps s at 8 letters; the official bounds are not verified in this draft.",
+  complexity: "Memoised windows keyed by (l, r, forbidden letter): each state scans its pairs once, so the cost grows with the number of states times the pairs inside each window.",
   examples: [
-    { label: "Nested pairs", input: "abba" },
-    { label: "Centre only", input: "aa" },
-    { label: "No valid pair", input: "ab" },
+    { label: "Nested pairs", input: "rsttsr" },
+    { label: "Centre only", input: "xx" },
+    { label: "No valid pair", input: "uvw" },
   ],
 };
 

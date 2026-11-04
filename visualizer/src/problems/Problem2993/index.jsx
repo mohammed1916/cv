@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { meta } from './meta'
 import { buildTrace, parseInput, code, sql, python, phases } from './algorithm'
+import NovemberCalendar from './NovemberCalendar'
 
 const inputLabel = 'Object with a Purchases table (user_id, purchase_date as YYYY-MM-DD, amount_spend)'
 const complexity = 'One filter pass plus one grouping pass: O(n) time with one entry per Friday. The visualizer caps the table at 20 rows.'
@@ -27,6 +28,7 @@ function Rows({ columns = [], rows = [] }) {
 
 export default function FridayPurchasesVisual() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <NovemberCalendar rows={step.rows} stage={step.phase} />
     <Rows columns={step.columns} rows={step.rows} />
     <output aria-label="Query output">{step.phase === 'done' ? `Output rows: ${run.result.length}` : step.message}</output>
   </>} renderReasoning={() => <>

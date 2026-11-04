@@ -16,18 +16,33 @@ const definition = {
   complexity, examples,
 }
 
-function Rows({ columns = [], rows = [] }) {
-  return <div style={{ overflowX: 'auto' }}>
-    <table>
-      <thead><tr>{columns.map(column => <th key={column} scope="col">{column}</th>)}</tr></thead>
-      <tbody>{rows.map((row, index) => <tr key={index}>{columns.map(column => <td key={column}>{String(row[column] ?? '')}</td>)}</tr>)}</tbody>
-    </table>
-  </div>
-}
+const CELL = { border: '1px solid var(--border)', padding: '3px 8px', color: 'var(--text)', fontFamily: 'monospace' }
 
-export default function KnowledgeDerivedSqlVisual() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <Rows columns={step.columns} rows={step.rows} />
-    <output aria-label="Query output">{step.phase === 'done' ? `Output rows: ${run.result.length}` : step.message}</output>
-  </>} renderReasoning={() => <p>An employee with one association keeps it whatever its flag. An employee with several keeps the row flagged Y, so the output has exactly one department per employee.</p>} />
+// Each association row with the test it goes through: Y flag, or the only department of its employee.
+export default function PrimaryDepartmentVisual() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const checkedId = step.phase === 'check' ? step.rows[step.rows.length - 1]?.employee_id : null
+    const decided = step.phase === 'check' ? new Map(step.rows.map(r => [`${r.employee_id}:${r.department_id}`, r.kept])) : null
+    const single = new Set(run.input.map(r => r.employee_id).filter((id, i, all) => all.filter(x => x === id).length === 1))
+    return <>
+      <p style={{ margin: '0 0 8px' }}>{step.message}</p>
+      <table aria-label="Employee departments" style={{ borderCollapse: 'collapse' }}>
+        <thead><tr>{['employee_id', 'department_id', 'primary_flag', 'test', 'kept'].map(c => <th key={c} scope="col" style={CELL}>{c}</th>)}</tr></thead>
+        <tbody>{run.input.map((row, i) => {
+          const key = `${row.employee_id}:${row.department_id}`
+          const kept = decided && decided.has(key) ? decided.get(key) : null
+          const test = row.primary_flag === 'Y' ? 'flag Y' : single.has(row.employee_id) ? 'only department' : 'not primary'
+          return <tr key={i} style={{ background: row.employee_id === checkedId ? 'var(--surface2)' : undefined, opacity: kept === 'no' ? 0.55 : 1 }}>
+            <td style={CELL}>{row.employee_id}</td><td style={CELL}>{row.department_id}</td><td style={CELL}>{row.primary_flag}</td>
+            <td style={CELL}>{test}</td>
+            <td style={{ ...CELL, fontWeight: kept === 'yes' ? 700 : 400 }}>{kept ?? '-'}</td>
+          </tr>
+        })}</tbody>
+      </table>
+      {step.phase === 'done' && <table aria-label="Result" style={{ borderCollapse: 'collapse', marginTop: 10 }}>
+        <thead><tr><th style={CELL}>employee_id</th><th style={CELL}>department_id</th></tr></thead>
+        <tbody>{step.rows.map((r, i) => <tr key={i}><td style={CELL}>{r.employee_id}</td><td style={CELL}>{r.department_id}</td></tr>)}</tbody>
+      </table>}
+    </>
+  }} renderReasoning={() => <p>An employee with one association keeps it whatever its flag. An employee with several keeps the row flagged Y, so the output has exactly one department per employee.</p>} />
 }

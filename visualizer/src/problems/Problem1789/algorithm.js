@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample rows are invented for this visualization.
+// Teaching version of the query. The sample rows are invented for this visualization.
 export const phases = [
   { id: 'load', label: 'Load', description: 'Read each employee-department association.' },
   { id: 'check', label: 'Check', description: 'Decide whether each employee keeps a department.' },

@@ -14,22 +14,42 @@ const definition = {
   ],
 }
 
-const chip = { padding: '4px 8px', border: '1px solid var(--border)', borderRadius: 6, fontFamily: 'monospace', color: 'var(--text)' }
+const chip = { minWidth: 34, padding: '4px 8px', textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', borderRadius: 6, color: 'var(--text)', background: 'var(--surface2)' }
 
-export default function StringMatchingInArray() {
+// Result of every pair checked so far: rows are the word being tested, columns the word it may sit inside.
+function PairGrid({ run, step }) {
+  const words = run.input
+  const upto = run.frames.indexOf(step)
+  const checked = {}
+  for (let k = 0; k <= upto; k++) {
+    const f = run.frames[k]
+    const s = f.snapshot
+    if ((f.phase === 'compare' || f.phase === 'found') && s.i !== null && s.j !== null) checked[`${s.i},${s.j}`] = s.inside ? 'in' : 'no'
+  }
+  const { i, j } = step.snapshot
+  return <table aria-label="Pairs checked" style={{ borderCollapse: 'collapse', marginBottom: 10, color: 'var(--text)' }}>
+    <thead><tr><th style={chip}>word \ inside</th>{words.map((w, c) => <th key={c} style={chip}>{w}</th>)}</tr></thead>
+    <tbody>{words.map((w, r) => <tr key={r}>
+      <th style={chip}>{w}</th>
+      {words.map((_, c) => {
+        const current = i === r && j === c
+        const value = r === c ? '-' : (checked[`${r},${c}`] ?? '')
+        return <td key={c} style={{ ...chip, borderWidth: current ? 2 : 1, borderColor: current ? 'var(--primary)' : 'var(--border)', background: value === 'in' ? 'var(--surface2)' : 'transparent' }}>{value}</td>
+      })}
+    </tr>)}</tbody>
+  </table>
+}
+
+export default function AlgorithmPage() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
-    const { i, j, answer, inside } = step.snapshot
+    const { answer, i, j, inside } = step.snapshot
     return <>
-      <div role="img" aria-label="Words in the input" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        {run.input.map((word, k) => <div key={k} style={{
-          ...chip, borderWidth: k === i ? 2 : 1,
-          background: k === j ? 'var(--surface2)' : 'transparent',
-        }}>{word}{k === i ? ' (checking)' : ''}{k === j ? ' (inside?)' : ''}</div>)}
-      </div>
+      <PairGrid run={run} step={step} />
       {i !== null && i !== undefined && j !== null && j !== undefined && (
-        <p>Is <strong>{run.input[i]}</strong> inside <strong>{run.input[j]}</strong>? {inside === undefined ? '…' : inside ? 'Yes' : 'No'}</p>
+        <p style={{ color: 'var(--text)' }}>Is <strong>{run.input[i]}</strong> inside <strong>{run.input[j]}</strong>? {inside === undefined ? '...' : inside ? 'Yes' : 'No'}</p>
       )}
-      <p>Answer so far: {answer.length ? answer.map(w => `"${w}"`).join(', ') : 'empty'}</p>
+      <p style={{ color: 'var(--text)' }}>Answer so far: {answer.length ? answer.map(w => `"${w}"`).join(', ') : 'empty'}</p>
+      <p style={{ color: 'var(--text)' }}>A word that is found inside another word stops its row early, so the blank cells after it are never checked.</p>
     </>
   }} renderReasoning={() => <>
     <p><strong>Pairs, not self:</strong> a word always contains itself, so the comparison must skip the same entry and use a different word.</p>

@@ -1,6 +1,8 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { meta } from './meta'
 import { buildTrace, parseInput, code, python, phases, examples, complexity, inputLabel } from './algorithm'
+import DPDependencyView from '../../components/shared/DPDependencyView'
+import { Sequence, Vars } from './SeqKit'
 
 const definition = {
   number: meta.number,
@@ -8,32 +10,26 @@ const definition = {
   url: `https://leetcode.com/problems/${meta.slug}/`,
 }
 
-function TableView({ snapshot }) {
-  const { piles, suffix, table, cell } = snapshot
-  const n = piles.length
-  const limits = Array.from({ length: n }, (_, k) => k + 1)
-  return <div style={{ overflowX: 'auto' }}>
-    <p>Piles: {piles.join(', ')} · Remaining stones from each pile: {suffix.slice(0, n).join(', ')}</p>
-    <table aria-label="Stone game table">
-      <thead><tr><th scope="col">pile \ limit M</th>{limits.map(M => <th key={M} scope="col">{M}</th>)}</tr></thead>
-      <tbody>{piles.map((_, i) => <tr key={i}>
-        <th scope="row">{i}</th>
-        {limits.map(M => {
-          const current = cell && cell[0] === i && cell[1] === M
-          return <td key={M} style={{ padding: '4px 8px', border: '1px solid #94a3b8', background: current ? '#0891b2' : 'transparent' }}>
-            {table[i][M] ?? '·'}
-          </td>
-        })}
-      </tr>)}</tbody>
-    </table>
-  </div>
-}
-
 export default function StoneGameIIVisual() {
-  return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ step }) => <>
-      <TableView snapshot={step.snapshot} />
-      {step.snapshot.choice ? <output aria-label="Chosen take">Take {step.snapshot.choice} pile(s)</output> : null}
-    </>}
-    renderReasoning={() => <p>Each cell depends only on cells to its right, so the table fills from the last pile backward. The opponent's best result from the remaining piles is subtracted from what is left.</p>} />
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
+    const s = step.snapshot
+    const n = s.piles.length
+    const cell = s.cell
+    const sources = []
+    if (cell) {
+      const [i, M] = cell
+      const maxX = Math.min(2 * M, n - i)
+      for (let X = 1; X <= maxX; X++) sources.push({ cell: [i + X, Math.max(M, X)], note: `take ${X} pile${X === 1 ? '' : 's'}`, chosen: X === s.choice })
+    }
+    return <>
+      <Sequence label="Piles (shaded: still on the table from the current pile)" values={s.piles} marks={cell ? Object.fromEntries(s.piles.map((_, k) => [k, k >= cell[0] ? 'window' : ''])) : {}} pointers={cell ? { pile: cell[0] } : {}} />
+      <DPDependencyView title="Best total the player to move can collect"
+        shape="grid" values={s.table} target={cell ?? [0, 1]} sources={sources}
+        labels={{ rows: Array.from({ length: n + 1 }, (_, i) => (i === n ? 'end' : `pile ${i}`)), columns: Array.from({ length: n + 1 }, (_, M) => (M === 0 ? '-' : `M=${M}`)) }}
+        recurrence="best[i][M] = max over X of suffix[i] - best[i+X][max(M, X)]"
+        why="After taking X piles the opponent moves next on what is left, so their best total is subtracted from everything still on the table." />
+      <Vars vars={{ 'current pile i': cell ? cell[0] : null, 'limit M': cell ? cell[1] : null, 'piles taken (choice)': s.choice ?? null, 'stones from i on': cell ? s.suffix[cell[0]] : null }} />
+      <output aria-label="Result">{step.message}</output>
+    </>
+  }} renderReasoning={() => <p>Each pile choice leaves the opponent a smaller game with a larger limit. The table stores the best total for every pile and limit, so the first player's answer is read from the top cell.</p>} />
 }

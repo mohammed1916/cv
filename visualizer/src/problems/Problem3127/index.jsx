@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
-import IndexedSequence from "../../components/shared/IndexedSequence";
+import MatrixGrid from "../../components/shared/MatrixGrid";
 import { code, python, parseInput, buildTrace } from "./algorithm";
 
 const definition = {
@@ -24,13 +24,34 @@ export default function SquareSameColorVisualizer() {
   return (
     <AlgorithmWorkspace
       definition={definition}
-      renderVisual={({ run, step }) => (
-        <IndexedSequence label="Grid cells, row by row" length={9}
-          valueAt={i => run.input.grid[Math.floor(i / 3)][i % 3]}
-          active={step.square ? step.square[0] * 3 + step.square[1] : -1}
-          roleAt={i => (step.cells?.includes(i) ? "active" : "")} />
+      renderVisual={({ run, step }) => {
+        const [r, c] = step.square ?? [-1, -1];
+        const windowCells = [];
+        if (step.square) {
+          for (let dr = 0; dr < 2; dr += 1) for (let dc = 0; dc < 2; dc += 1) windowCells.push({ row: r + dr, col: c + dc });
+        }
+        const blue = windowCells.filter(({ row, col }) => run.input.grid[row][col] === "B").length;
+        return (
+          <>
+            <MatrixGrid
+              matrix={run.input.grid}
+              label="3 by 3 grid; the highlighted cells are the current 2 by 2 square"
+              highlightedCells={windowCells}
+              activeCell={step.square && step.phase === "done" ? { row: r, col: c } : null}
+              cellWidth={56}
+              cellHeight={52}
+            />
+            <p className="algorithm-workspace__event" role="status">{step.message}</p>
+            {step.square && <output aria-label="Blue cells in square">{`Blue cells in this square: ${blue}`}</output>}
+          </>
+        );
+      }}
+      renderReasoning={({ step }) => (
+        <>
+          <p>{step.message}</p>
+          <p>A square can become one color with one change only when it holds one or three blue cells. Zero or four is already solid, and two cannot be fixed by one change.</p>
+        </>
       )}
-      renderReasoning={({ step }) => <p>{step.message}</p>}
     />
   );
 }

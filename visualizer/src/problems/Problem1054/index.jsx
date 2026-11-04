@@ -20,10 +20,17 @@ const definition = {
 }
 
 export default function DistantBarcodes() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <IndexedSequence label="Arrangement so far" length={step.result.length} valueAt={i => step.result[i]} active={step.result.length - 1} />
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
+    const queue = [...step.heap].sort((a, b) => b.c - a.c || a.v - b.v)
+    return <>
+      <IndexedSequence label="Arrangement so far" length={step.result.length} valueAt={i => step.result[i]} active={step.result.length - 1}
+        roleAt={i => (i === step.result.length - 1 ? 'l' : '')} />
+      <IndexedSequence label="Heap of remaining counts, top first (value x count)" length={queue.length || 1}
+        valueAt={i => (queue[i] ? `${queue[i].v} x${queue[i].c}` : 'empty')} active={0} roleAt={i => (i === 0 && queue.length ? 'current' : '')} />
+      <p>{step.message}</p>
+    </>
+  }} renderReasoning={({ step }) => <>
     <p>{step.message}</p>
-  </>} renderReasoning={() => <>
     <p>The most frequent barcode must be spread out first, so the heap always offers the largest remaining count.</p>
     <p>If the barcode on top equals the last one placed, the next most frequent barcode goes in its place and the top is put back.</p>
   </>} />

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import MatrixGrid from '../../components/shared/MatrixGrid'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -21,7 +22,12 @@ const definition = {
 
 export default function MaximumDifferenceScore() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <output aria-label="Current cell">{step.cell ? `cell (${step.cell[0]}, ${step.cell[1]}) = ${run.input[step.cell[0]][step.cell[1]]}, smallest earlier ${step.prev === Infinity ? 'none' : step.prev}` : 'scanning'}</output>
+    <div className="algorithm-workspace__matrices">
+      <MatrixGrid matrix={run.input} label="Grid values" activeCell={step.cell ? { row: step.cell[0], col: step.cell[1] } : null} cellWidth={48} cellHeight={44} />
+      <MatrixGrid matrix={(step.mn ?? run.input).map(row => row.map(v => (v === Infinity ? '∞' : v)))} label="Smallest value that reaches each cell" tone="muted"
+        activeCell={step.cell ? { row: step.cell[0], col: step.cell[1] } : null} cellWidth={48} cellHeight={44} />
+    </div>
+    <output aria-label="Current cell">{step.cell ? `cell (${step.cell[0]}, ${step.cell[1]}) = ${run.input[step.cell[0]][step.cell[1]]}, smallest earlier ${step.prev === Infinity ? 'none' : step.prev}` : 'Scan starts at the top-left cell.'}</output>
     <output aria-label="Best score">{`best score: ${step.best === -Infinity ? 'none' : step.best}`}</output>
   </>} renderReasoning={() => <>
     <p>A path's score is its last value minus its first value, because each step adds the difference of neighboring cells. For each cell, the best path ending there starts at the smallest value that can reach it.</p>

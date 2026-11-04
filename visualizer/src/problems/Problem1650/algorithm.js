@@ -1,4 +1,4 @@
-// LeetCode 1650 (draft): Lowest Common Ancestor of a Binary Tree III, using parent pointers only.
+// LeetCode 1650: Lowest Common Ancestor of a Binary Tree III, using parent pointers only.
 // Input: { root: level-order list (null = missing child), p, q }. Both values are in the tree and unique.
 // The root is not supplied to the algorithm: it only walks parent pointers, and the tree is built from the list for display.
 

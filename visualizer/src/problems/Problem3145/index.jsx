@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -18,8 +19,21 @@ const definition = {
   ],
 }
 
+// The first 302 entries of big_nums as exponents of two: block x lists the set bits of x, lowest first.
+const EXPONENTS = (() => {
+  const out = []
+  for (let x = 1; out.length < 302; x++) {
+    for (let b = 0; (1 << b) <= x && out.length < 302; b++) if ((x >> b) & 1) out.push(b)
+  }
+  return out
+})()
+
 export default function ProductsOfBigArray() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <table aria-label="Queries">
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="big_nums exponents (entry i is 2 to the power shown)" length={EXPONENTS.length}
+      valueAt={i => EXPONENTS[i]} active={step.query >= 0 ? run.input.queries[step.query][0] : -1}
+      roleAt={i => (step.query >= 0 && i >= run.input.queries[step.query][0] && i <= run.input.queries[step.query][1] ? 'in range' : '')} />
+    <table aria-label="Queries">
     <thead><tr><th>Query</th><th>[from, to, mod]</th><th>Exponent sum</th><th>Answer</th></tr></thead>
     <tbody>{run.input.queries.map((q, i) => (
       <tr key={i} data-current={step.query === i ? 'yes' : undefined}>
@@ -28,7 +42,8 @@ export default function ProductsOfBigArray() {
         <td>{step.query === i && step.total !== null ? step.total : '-'}</td>
         <td>{step.query === i && step.value !== null ? step.value : '-'}</td>
       </tr>))}</tbody>
-  </table>} renderReasoning={() => <>
+  </table>
+  </>} renderReasoning={() => <>
     <p>Each element of the big array is a power of two, so a range product is 2 raised to the sum of the exponents in that range.</p>
     <p>Consecutive powerful arrays appear in blocks of known size, so the exponent sum up to any index comes from a closed formula plus one partial block.</p>
   </>} />

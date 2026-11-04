@@ -17,20 +17,20 @@ const definition = {
 export default function FillMatrix() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { rowLeft, colLeft, grid, i, j, placed } = step.snapshot
+    const cell = { width: 56, height: 40, textAlign: 'center', border: '1px solid var(--border)', color: 'var(--text)' }
     return <>
-      <table aria-label="Grid being filled" style={{ borderCollapse: 'collapse', fontFamily: 'monospace' }}>
-        <thead><tr><th />{colLeft.map((_, k) => <th key={k}>col {k + 1}</th>)}<th>row left</th></tr></thead>
+      <table aria-label="Grid being filled" style={{ borderCollapse: 'collapse', fontFamily: 'monospace', color: 'var(--text)' }}>
+        <thead><tr><th />{colLeft.map((_, k) => <th key={k} style={{ color: k === j ? 'var(--primary)' : 'var(--text)' }}>col {k + 1}{k === j ? ' (j)' : ''}</th>)}<th>row left</th></tr></thead>
         <tbody>{grid.map((row, r) => <tr key={r}>
-          <th>row {r + 1}</th>
-          {row.map((value, k) => <td key={k} style={{
-            width: 56, height: 40, textAlign: 'center', border: '1px solid var(--border)',
-            background: placed && placed.i === r && placed.j === k ? '#bbf7d0' : 'transparent', color: '#1c1917',
-          }}>{value}</td>)}
+          <th style={{ color: r === i ? 'var(--primary)' : 'var(--text)' }}>row {r + 1}{r === i ? ' (i)' : ''}</th>
+          {row.map((value, k) => <td key={k} style={{ ...cell,
+            background: placed && placed.i === r && placed.j === k ? 'color-mix(in srgb, var(--success) 30%, transparent)' : r === i && k === j ? 'var(--surface2)' : 'transparent' }}>{value}</td>)}
           <td>{rowLeft[r]}</td>
         </tr>)}</tbody>
         <tfoot><tr><th>col left</th>{colLeft.map((v, k) => <td key={k} style={{ textAlign: 'center' }}>{v}</td>)}</tr></tfoot>
       </table>
       <p>{placed ? `Last placed value: ${placed.v} at (${placed.i + 1}, ${placed.j + 1}).` : 'No value placed in this step.'}</p>
+      <p style={{ color: 'var(--text-muted)' }}>i marks the current row and j the current column. Whichever one is satisfied moves on; the other keeps its remainder.</p>
     </>
   }} renderReasoning={() => <>
     <p><strong>Smaller demand first:</strong> placing the smaller of the two remaining demands satisfies at least one row or column exactly.</p>

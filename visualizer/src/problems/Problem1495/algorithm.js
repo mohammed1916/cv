@@ -71,6 +71,7 @@ export function buildTrace(input) {
     if (inJune && title !== undefined) accepted.push({ content_id: airing.content_id, title, program_date: airing.program_date })
     add('window', 'program_date >= ', "program_date'] >= ",
       `${airing.program_date} content ${airing.content_id}: ${inJune && title !== undefined ? 'kept' : 'skipped'}.`, accepted)
+    frames[frames.length - 1].airing = { ...airing, kept: inJune && title !== undefined }
   }
 
   const titles = [...new Set(accepted.map(row => row.title))].sort(compare).map(title => ({ title }))

@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code } from './algorithm'
+import ChainView from './ChainView'
 
 const definition = {
   number: '2618',
@@ -21,11 +22,7 @@ const definition = {
 
 export default function CheckIfObjectInstanceOfClass() {
   return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ step }) => <section aria-label="Visual state">
-      <h3>{step.view.title}</h3>
-      <ol>{step.view.rows.map((row, index) => <li key={index} aria-current={index === step.view.focus ? 'step' : undefined}>{row}</li>)}</ol>
-      {step.view.summary && <output>{`Answer: ${step.view.summary}`}</output>}
-    </section>}
+    renderVisual={({ step }) => <ChainView view={step.view} />}
     renderReasoning={() => <>
       <p>A value is an instance of a class when the class prototype appears somewhere on its prototype chain.</p>
       <p>Primitives have no prototype chain to walk, so they are answered before the loop starts.</p>

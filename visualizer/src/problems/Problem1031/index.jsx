@@ -16,19 +16,32 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[0,6,5,2,2,5,1,9,4],"first_len":1,"second_len":2}' },
     { label: 'Example 2', input: '{"nums":[3,8,1,3,2,1,8,9,0],"first_len":3,"second_len":2}' },
+    { label: 'Example 3', input: '{"nums":[5,1,9,2,7,3],"first_len":2,"second_len":2}' },
   ],
 }
+
+const sums = (nums, length) => Array.from({ length: nums.length - length + 1 }, (_, s) => nums.slice(s, s + length).reduce((a, b) => a + b, 0))
 
 export default function MaxTwoSubarrays() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { nums, first_len: firstLen, second_len: secondLen } = run.input
-    const inSpan = i => step.span !== null && i >= step.span[0] && i <= step.span[1]
+    const len = step.phase === 'second' ? secondLen : firstLen
+    const span = step.span
+    const roleAt = i => {
+      if (!span) return ''
+      if (i === span[0]) return 'l'
+      if (i === span[1]) return 'r'
+      return i > span[0] && i < span[1] ? 'window' : ''
+    }
+    const windowSum = sums(nums, len)
+    const roleSum = s => (step.index === s ? 'current' : '')
     return <>
-      <IndexedSequence label="nums" length={nums.length} valueAt={i => nums[i]} active={step.span ? step.span[0] : -1}
-        roleAt={i => (inSpan(i) ? (step.phase === 'second' ? 'second window' : 'first window') : '')} />
-      <output aria-label="Window status">{`Window lengths ${firstLen} and ${secondLen}. ${step.message}`}</output>
+      <IndexedSequence label="nums with the window being tested" length={nums.length} valueAt={i => nums[i]} active={span ? span[0] : -1} roleAt={roleAt} />
+      <IndexedSequence label={`Sums of windows of length ${len}`} length={windowSum.length} valueAt={i => windowSum[i]} active={step.index} roleAt={roleSum} />
+      <output aria-label="Window status">{`Window lengths ${firstLen} and ${secondLen}. Best total so far: ${step.best ?? 'none'}. ${step.message}`}</output>
     </>
-  }} renderReasoning={() => <>
+  }} renderReasoning={({ step }) => <>
+    <p>{step.message}</p>
     <p>Either window can come first. Sweeping the second window while remembering the best first window that ends before it covers every pair where the first window is earlier.</p>
     <p>A mirrored sweep covers the case where the second window is earlier, so every non-overlapping pair is checked.</p>
   </>} />

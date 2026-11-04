@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -21,6 +22,8 @@ const definition = {
 export default function MaximumAverageSubarray() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Values" length={run.nums.length} valueAt={i => run.nums[i]} />
+    <AnswerRangeBar title="Average search" min={Math.min(...run.nums)} max={Math.max(...run.nums)}
+      low={step.lo} high={step.hi} probe={step.mid} verdict={step.feasible} />
     <output aria-label="Search range">
       {`Answer range [${step.lo.toFixed(4)}, ${step.hi.toFixed(4)}]`}
       {step.mid !== null && `, testing average ${step.mid.toFixed(4)}: ${step.feasible ? 'reachable' : 'not reachable'}`}

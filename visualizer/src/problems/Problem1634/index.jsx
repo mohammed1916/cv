@@ -11,7 +11,7 @@ const definition = {
   python,
   inputLabel: 'Object with poly1 and poly2, each a list of [coefficient, power] in descending power order',
   url: "https://leetcode.com/problems/add-two-polynomials-represented-as-linked-lists/",
-  complexity: "O(m + n) time and O(m + n) output space for lists of length m and n. The visualization caps each polynomial at 8 terms; the official bounds are not verified in this draft.",
+  complexity: "O(m + n) time and O(m + n) output space for lists of length m and n. The visualization caps each polynomial at 8 terms.",
   examples: [
     { label: "Merge and cancel", input: '{"poly1":[[2,2],[4,1],[3,0]],"poly2":[[3,2],[-4,1],[-1,0]]}' },
     { label: "One side longer", input: '{"poly1":[[5,3],[1,0]],"poly2":[[2,2]]}' },

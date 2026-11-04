@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { meta } from './meta'
 import { buildTrace, parseInput, code, sql, python, phases } from './algorithm'
 
@@ -26,11 +27,18 @@ function Rows({ columns = [], rows = [] }) {
 }
 
 export default function ConsecutiveAvailableSeats() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const freeBy = new Map(run.input.Cinema.map(row => [row.seat_id, row.free]))
+    const seats = Math.max(...run.input.Cinema.map(row => row.seat_id))
+    const keptSeats = new Set(step.phase === 'done' || step.phase === 'pick' ? step.rows.filter(row => row.kept === 'yes').map(row => row.seat_id) : [])
+    return <>
+    <IndexedSequence label="Seat row (seat ids from 1)" length={seats} indexOffset={1}
+      valueAt={i => (freeBy.get(i + 1) === 1 ? 'free' : 'taken')} active={-1}
+      roleAt={i => (keptSeats.has(i + 1) ? 'kept' : '')} />
     <Rows columns={step.columns} rows={step.rows} />
     <output aria-label="Query output">{step.phase === 'done' ? `Output rows: ${run.result.length}` : step.message}</output>
-  </>} renderReasoning={() => <>
+  </>}} renderReasoning={() => <>
     <p>Free seats that touch each other share one block. Subtracting the row number from the seat id gives the same value for every seat in a block.</p>
-    <p>Grouping by that value gives each block's length, and the query keeps only the seats in the longest block or blocks.</p>
+    <p>Grouping by that value gives each block's length. The query keeps the longest block or blocks and reports the first seat, last seat and length of each one.</p>
   </>} />
 }

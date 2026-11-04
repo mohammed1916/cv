@@ -21,7 +21,10 @@ const definition = {
 
 export default function BeautifulArrangement() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <IndexedSequence label="Permutation" length={step.perm.length || 1} active={step.perm.length - 1} valueAt={i => (step.perm[i] ?? '…')} />
+    <IndexedSequence label="Permutation (zig-zag from both ends, then the rest in order)" length={step.perm.length || 1} active={step.perm.length - 1}
+      valueAt={i => (step.perm[i] ?? '…')}
+      roleAt={i => (step.k === undefined ? '' : i > step.k ? 'tail' : i % 2 === 0 ? 'from lo' : 'from hi')} />
+    {step.lo !== undefined && <p style={{ color: 'var(--text)' }}>Pointers: lo = {step.lo} (next low value), hi = {step.hi} (next high value). Each zig-zag step moves one pointer inward.</p>}
     <output aria-label="Distinct differences">Distinct differences: {step.diffs.length ? step.diffs.join(', ') : '—'}</output>
   </>} renderReasoning={({ run, step }) => <>
     <p>{step.message}</p>

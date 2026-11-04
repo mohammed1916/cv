@@ -31,7 +31,16 @@ export default function MinimumDivisionOperationsToMakeArrayNonDecreasing() {
         </div>
       })}
     </div>
-    <output aria-label="Division chain">{step.chain && step.chain.length > 1 ? `chain ${step.chain.join(' -> ')}, needs to be at most ${step.next}` : step.message}</output>
+    <div aria-label="Division chain" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 6, margin: '8px 0', color: 'var(--text)' }}>
+      {step.chain && step.chain.length > 1 ? <>
+        {step.chain.map((v, i) => <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+          {i > 0 && <span aria-hidden="true" style={{ color: 'var(--muted, var(--text))' }}>→</span>}
+          <span style={{ padding: '4px 10px', borderRadius: 6, fontFamily: 'monospace', border: '1px solid var(--surface2, #d1d5db)', background: i === step.chain.length - 1 ? 'var(--primary, #2563eb)' : 'var(--surface2, transparent)', color: i === step.chain.length - 1 ? '#fff' : 'var(--text)' }}>{v}</span>
+        </span>)}
+        <span style={{ marginLeft: 8, color: 'var(--muted, var(--text))' }}>must be at most {step.next} (the right neighbour)</span>
+      </> : <span>{step.message}</span>}
+    </div>
+    <output aria-label="Step message" style={{ color: 'var(--text)' }}>{step.message}</output>
   </>} renderReasoning={() => <>
     <p>Dividing by the greatest proper divisor always lands on the smallest prime factor, so a value can only walk down a fixed chain of smaller values.</p>
     <p>Scanning from the right and lowering each value just enough to fit its right neighbour keeps the most room for the values on its left.</p>

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -19,15 +20,14 @@ const definition = {
 }
 
 export default function MergeCloseCharacters() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <div className="algorithm-sequence" aria-label="Current string">
-      <h3>Current string</h3>
-      <div className="algorithm-sequence__cells">{[...step.cur].map((ch, index) =>
-        <div key={index} className="algorithm-sequence__cell" data-role={step.pair && step.pair.includes(index) ? 'window' : ''}>
-          <small>[{index}]</small><strong>{ch}</strong><span>{step.pair && step.pair.includes(index) ? (index === step.pair[0] ? 'left' : 'merges left') : ' '}</span></div>)}</div>
-    </div>
-    <output aria-label="Merge status">{step.pair ? `Pair ${step.pair[0]} and ${step.pair[1]} is close` : step.cur}</output>
-  </>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const [l, r] = step.pair ?? [-1, -1]
+    return <>
+      <IndexedSequence label={`Current string (k = ${run.input.k}; l is the left letter, r the right one that merges)`} length={[...step.cur].length}
+        active={r} valueAt={index => step.cur[index]} roleAt={index => index === l ? 'l' : index === r ? `r, ${r - l} apart` : ''} />
+      <output aria-label="Merge status">{step.pair ? `Pair ${l} and ${r} is close: distance ${r - l} is at most ${run.input.k}` : step.cur}</output>
+    </>
+  }} renderReasoning={() => <>
     <p>Two equal letters merge when their indices are at most k apart. The right one is removed, and the indices after it shift left.</p>
     <p>Each search takes the smallest left index first, then the smallest right index, so the order of merges is fixed.</p>
   </>} />

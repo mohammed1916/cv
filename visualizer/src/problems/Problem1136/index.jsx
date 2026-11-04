@@ -1,5 +1,8 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import GraphTraversalView from '../../components/shared/GraphTraversalView'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import { Vars } from './SeqKit'
 
 const definition = {
   phases, parse: parseInput, build: buildTrace, code, python,
@@ -14,22 +17,30 @@ const definition = {
 }
 
 export default function ParallelCourses() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { unmet, available, semester, finished, current } = step.snapshot
+    const { courses, relations } = run.input
+    // The dependency map: each course with the prerequisites it waits for.
+    const needs = Array.from({ length: courses + 1 }, () => [])
+    for (const [before, after] of relations) needs[after].push(before)
+    const rows = Array.from({ length: courses }, (_, i) => {
+      const course = i + 1
+      const status = finished.includes(course) ? 'finished' : current?.includes(course) ? 'running' : available.includes(course) ? 'ready' : 'waiting'
+      return { course, needs: needs[course].length ? needs[course].join(', ') : 'none', unmet: unmet[course] ?? 0, status }
+    })
+    const activeRow = rows.findIndex(row => row.status === 'running' || row.status === 'ready')
+    const edges = relations.map(([before, after]) => [before - 1, after - 1])
     return <>
-      <table aria-label="Unmet prerequisites" style={{ borderCollapse: 'collapse', fontFamily: 'monospace' }}>
-        <tbody>{Object.entries(unmet).map(([course, count]) => {
-          const now = current?.includes(Number(course))
-          return <tr key={course} data-course={course} style={{ background: now ? 'var(--surface2)' : 'transparent' }}>
-            <td style={{ padding: '4px 10px' }}>Course {course}</td>
-            <td style={{ padding: '4px 10px' }}>{finished.includes(Number(course)) ? 'done' : `${count} unmet`}</td>
-          </tr>
-        })}</tbody>
-      </table>
-      <p>{semester ? `Semester ${semester}` : 'No semester yet'} · unlocked next: {available.length ? available.join(', ') : 'none'}</p>
+      <GraphTraversalView title="Prerequisite graph" n={courses} edges={edges} directed
+        labels={Array.from({ length: courses }, (_, i) => `C${i + 1}`)}
+        frontier={available.map(c => c - 1)} done={finished.map(c => c - 1)} />
+      <RecordStateTable label="Dependency map: course, prerequisites, unmet count, status" columns={['course', 'needs', 'unmet', 'status']} rows={rows} activeRow={activeRow} />
+      <Vars vars={{ semester: semester || null, 'ready now': available.length ? available.join(', ') : 'none', finished: `${finished.length} of ${courses}` }} />
+      <output aria-label="Result">{step.message}</output>
     </>
   }} renderReasoning={({ step }) => <>
-    <p><strong>Semesters are layers:</strong> every course whose prerequisites are all finished joins the current semester.</p>
-    <p><strong>Release dependants:</strong> finishing a course lowers the unmet count of each course that needs it. Counts that reach zero form the next layer.</p>
+    <p><strong>Dependency map:</strong> each course lists the prerequisites it waits for. A course is ready when none of them are still unfinished.</p>
+    <p><strong>Semesters are layers:</strong> finishing a course lowers the unmet count of each course that needs it, and counts that reach zero form the next layer.</p>
+    <p>{step.message}</p>
   </>} />
 }

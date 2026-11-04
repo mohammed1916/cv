@@ -7,6 +7,7 @@ export const code = [
   'return best',
 ].map((text, index) => ({ line: index + 1, text }))
 const L = key => code.findIndex(c => c.text.includes(key)) + 1
+const PY = key => python.split('\n').findIndex(line => line.includes(key)) + 1
 
 export function parseInput(text) {
   const input = JSON.parse(text)
@@ -45,10 +46,10 @@ export function buildTrace({ points }) {
     }
     return [...groups.values()]
   }
-  const frames = [{ groups: [], best: null, phase: 'setup', activeLine: L('parent starts'), message: 'Each coordinate starts alone.' }]
+  const frames = [{ groups: [], best: null, phase: 'setup', pythonLine: PY('parent = {}'), activeLine: L('parent starts'), message: 'Each coordinate starts alone.' }]
   points.forEach(([x, y], i) => {
     join(`x${x}`, `y${y}`)
-    frames.push({ groups: groupsSoFar(i), best: null, phase: 'join', activeLine: L('for each point join'), message: `Point (${x}, ${y}) joins x ${x} with y ${y}.` })
+    frames.push({ groups: groupsSoFar(i), best: null, phase: 'join', pythonLine: PY('ra, rb = find'), activeLine: L('for each point join'), message: `Point (${x}, ${y}) joins x ${x} with y ${y}.` })
   })
   const counts = new Map()
   for (const [x] of points) {
@@ -57,9 +58,9 @@ export function buildTrace({ points }) {
   }
   const sizes = [...counts.values()].sort((a, b) => b - a)
   const best = sizes.length >= 2 ? sizes[0] + sizes[1] + 1 : sizes[0] + 1
-  frames.push({ groups: groupsSoFar(points.length - 1), best, phase: 'count', activeLine: L('if two groups exist'),
+  frames.push({ groups: groupsSoFar(points.length - 1), best, phase: 'count', pythonLine: PY('if len(sizes) >= 2'), activeLine: L('if two groups exist'),
     message: sizes.length >= 2 ? `Largest groups have ${sizes[0]} and ${sizes[1]} points; the new point links them.` : `One group with ${sizes[0]} points; the new point joins it.` })
-  frames.push({ groups: groupsSoFar(points.length - 1), best, phase: 'done', activeLine: L('return best'), message: `Maximum activated: ${best}.` })
+  frames.push({ groups: groupsSoFar(points.length - 1), best, phase: 'done', pythonLine: PY('return sizes[0] + 1'), activeLine: L('return best'), message: `Maximum activated: ${best}.` })
   return { input: { points }, result: best, frames }
 }
 

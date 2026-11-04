@@ -19,14 +19,30 @@ export default function SplitBalancedStrings() {
     const { s } = run.input
     const { index, balance, pieces, piece } = step.snapshot
     const start = index - piece.length + 1
-    return <div aria-label="Letters" style={{ display: 'grid', gap: 8, justifyItems: 'start' }}>
-      <div style={{ display: 'flex', gap: 3, fontFamily: 'monospace' }}>
-        {[...s].map((ch, i) => <span key={i} data-index={i} style={{
-          width: 26, textAlign: 'center', border: '1px solid var(--border)',
-          background: i === index ? 'var(--surface2)' : 'transparent', fontWeight: i === index ? 700 : 400,
-        }}>{ch}</span>)}
+    // Running balance after each letter, shown under the letter so the zero points are visible.
+    const balances = []
+    let running = 0
+    for (const ch of s) { running += ch === 'L' ? 1 : -1; balances.push(running) }
+    const cell = { width: 30, textAlign: 'center', fontFamily: 'monospace', padding: '2px 0' }
+    return <div aria-label="Letters" style={{ display: 'grid', gap: 6, justifyItems: 'start', overflowX: 'auto', maxWidth: '100%' }}>
+      <div style={{ display: 'flex', gap: 3 }}>
+        {[...s].map((ch, i) => {
+          const role = i === index && piece ? (i === start ? 'l, r' : 'r') : i === start && index >= 0 ? 'l' : ''
+          const inPiece = index >= 0 && i >= start && i <= index
+          return <div key={i} data-index={i} style={{ ...cell, display: 'grid', gap: 2, border: 'none' }}>
+            <span style={{
+              border: i === index ? '2px solid var(--text)' : '1px solid var(--border)',
+              background: inPiece ? 'color-mix(in srgb, var(--primary) 22%, transparent)' : 'transparent',
+              color: 'var(--text)', padding: '2px 0',
+            }}>{ch}</span>
+            <small style={{ color: 'var(--text-dim)', minHeight: '1em' }}>{role}</small>
+            <small style={{ color: i <= index && balances[i] === 0 ? 'var(--text)' : 'var(--text-dim)', fontWeight: i <= index && balances[i] === 0 ? 700 : 400 }}>
+              {i <= index ? balances[i] : ''}
+            </small>
+          </div>
+        })}
       </div>
-      <output aria-label="Balance and pieces">{`Balance ${balance} · pieces ${pieces}${piece && index >= 0 ? ` · current piece starts at ${start}` : ''}`}</output>
+      <output aria-label="Balance and pieces">{`Balance ${balance} · pieces ${pieces}${piece && index >= 0 ? ` · current piece from l = ${start} to r = ${index}` : ''}`}</output>
     </div>
   }} renderReasoning={({ step }) => <p>{step.message}</p>} />
 }

@@ -28,9 +28,26 @@ function RowTable({ label, rows }) {
   </section>
 }
 
+function VisitMatch({ rows }) {
+  if (rows.length === 0 || !('transactions' in rows[0])) return null
+  return <section aria-label="Visits matched to transactions">
+    <h4>Each visit against the Transactions table</h4>
+    <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+      {rows.map(row => {
+        const silent = row.transactions === 0
+        return <span key={row.visit_id} style={{ padding: '6px 10px', borderRadius: 6, border: '1px solid var(--border)', color: 'var(--text)',
+          fontFamily: 'monospace', background: silent ? 'color-mix(in srgb, var(--success) 25%, transparent)' : 'var(--surface2)' }}>
+          visit {row.visit_id} · customer {row.customer_id} · {silent ? 'no transaction (kept)' : `${row.transactions} transaction${row.transactions === 1 ? '' : 's'} (dropped)`}
+        </span>
+      })}
+    </div>
+  </section>
+}
+
 export default function Problem1581() {
   return <AlgorithmWorkspace definition={definition}
     renderVisual={({ step }) => <>
+      <VisitMatch rows={step.rows} />
       <RowTable label="Working rows" rows={step.rows} />
       <RowTable label="Output" rows={step.output} />
     </>}

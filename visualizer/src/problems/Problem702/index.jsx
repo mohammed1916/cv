@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -26,6 +27,7 @@ export default function SearchUnknownSize() {
       <IndexedSequence label="Reader (indices probed so far)" length={shown} active={step.probe ?? -1}
         valueAt={i => (i < run.arr.length ? run.arr[i] : '∞')}
         roleAt={i => (step.reads.includes(i) ? 'read' : '')} />
+      <AnswerRangeBar title="Index search range" min={0} max={Math.max(shown - 1, step.right)} low={step.left} high={step.right} />
       <output aria-label="Bounds">{`Search range [${step.left}, ${step.right}]`}{step.result !== null && step.result !== -1 ? `, found at ${step.result}` : ''}</output>
     </>
   }} renderReasoning={() => <>

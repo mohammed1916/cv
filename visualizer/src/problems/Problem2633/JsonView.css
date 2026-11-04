@@ -1,0 +1,7 @@
+.json-view { display: grid; gap: 10px; color: var(--text); }
+.json-view__text { margin: 0; padding: 12px; border-radius: 10px; background: var(--surface2); border: 1px solid var(--border); font-family: monospace; font-size: 14px; white-space: pre-wrap; word-break: break-all; min-height: 48px; }
+.json-view__caret { color: var(--primary); }
+.json-view__state { display: flex; flex-wrap: wrap; gap: 14px; margin: 0; }
+.json-view__state div { min-width: 120px; }
+.json-view__state dt { font-size: 12px; color: var(--text-muted); }
+.json-view__state dd { margin: 0; font-weight: 700; }

@@ -51,6 +51,6 @@ export default function EmployeesProjectAllocation() {
     renderVisual={({ step }) => <RowTable step={step} />}
     renderReasoning={() => <>
       <p>{meta.description}</p>
-      <p>This is a knowledge-derived teaching model. The sample tables were invented for this visualization and are not the official statement.</p>
+      <p>The sample tables are invented for this visualization.</p>
     </>} />
 }

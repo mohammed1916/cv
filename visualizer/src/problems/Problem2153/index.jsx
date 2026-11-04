@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { meta } from './meta'
+import CapacityLineView from './CapacityLineView'
 import { buildTrace, parseInput, code, sql, python, phases } from './algorithm'
 
 const inputLabel = 'Object with Buses and Passengers tables'
@@ -28,6 +29,7 @@ function Rows({ columns = [], rows = [] }) {
 
 export default function KnowledgeDerivedSqlVisual() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <CapacityLineView run={run} step={step} />
     <Rows columns={step.columns} rows={step.rows} />
     <output aria-label="Query output">{step.phase === 'done' ? `Output rows: ${run.result.length}` : step.message}</output>
   </>} renderReasoning={() => <p>{reasoning}</p>} />

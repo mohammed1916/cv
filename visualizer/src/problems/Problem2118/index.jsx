@@ -26,8 +26,19 @@ function Rows({ columns = [], rows = [] }) {
   </div>
 }
 
+function StageStrip({ current }) {
+  return <ol style={{ display: 'flex', flexWrap: 'wrap', gap: 6, listStyle: 'none', padding: 0, margin: '8px 0' }}>
+    {phases.map(stage => <li key={stage.id} aria-current={stage.id === current ? 'step' : undefined} style={{
+      padding: '3px 10px', borderRadius: 999, border: '1px solid var(--surface2)',
+      background: stage.id === current ? 'var(--primary)' : 'var(--surface2)',
+      color: stage.id === current ? 'var(--surface)' : 'var(--text)',
+    }}>{stage.label}</li>)}
+  </ol>
+}
+
 export default function KnowledgeDerivedSqlVisual() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <StageStrip current={step.phase} />
     <Rows columns={step.columns} rows={step.rows} />
     <output aria-label="Query output">{step.phase === 'done' ? `Output rows: ${run.result.length}` : step.message}</output>
   </>} renderReasoning={() => <p>{reasoning}</p>} />

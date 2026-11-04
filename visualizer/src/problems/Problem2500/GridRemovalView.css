@@ -1,0 +1,11 @@
+.grid-removal { display: grid; gap: 12px; color: var(--text); }
+.grid-removal__table { border-collapse: collapse; font-size: 14px; }
+.grid-removal__table caption { text-align: left; font-size: 12px; color: var(--text-muted); padding-bottom: 4px; }
+.grid-removal__table th { text-align: left; padding: 4px 8px 4px 0; font-weight: 600; color: var(--text-muted); }
+.grid-removal__cell { border: 1px solid var(--border); padding: 6px 10px; text-align: center; min-width: 48px; background: var(--surface2); }
+.grid-removal__cell--removed { background: var(--surface); color: var(--text-muted); text-decoration: line-through; }
+.grid-removal__cell small { display: block; text-decoration: none; font-size: 11px; color: var(--primary); }
+.grid-removal__row--current th { color: var(--primary); }
+.grid-removal__heaps { display: flex; flex-wrap: wrap; gap: 10px; }
+.grid-removal__heap { min-width: 180px; }
+.grid-removal__total { margin: 0; font-size: 13px; color: var(--text-muted); }

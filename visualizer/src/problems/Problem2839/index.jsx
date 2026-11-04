@@ -22,18 +22,41 @@ const definition = {
   ],
 };
 
+const cell = { padding: "4px 8px", borderBottom: "1px solid var(--surface2)", color: "var(--text)", textAlign: "left" };
+
+// A swap moves letters two apart, so each parity class stays inside its own group: compare the sorted groups.
+function GroupTable({ s1, s2 }) {
+  const rows = [
+    { name: "even positions (0, 2)", a: [s1[0], s1[2]], b: [s2[0], s2[2]] },
+    { name: "odd positions (1, 3)", a: [s1[1], s1[3]], b: [s2[1], s2[3]] },
+  ];
+  return <table aria-label="Letters grouped by parity" style={{ borderCollapse: "collapse", width: "100%" }}>
+    <thead><tr>{["group", "s1 letters", "s2 letters", "sorted match"].map(h => <th key={h} scope="col" style={{ ...cell, borderBottom: "2px solid var(--border, currentColor)" }}>{h}</th>)}</tr></thead>
+    <tbody>{rows.map(r => {
+      const ok = [...r.a].sort().join() === [...r.b].sort().join();
+      return <tr key={r.name}>
+        <td style={cell}>{r.name}</td><td style={cell}>{r.a.join(", ")}</td><td style={cell}>{r.b.join(", ")}</td>
+        <td style={cell}>{ok ? "yes" : "no"}</td>
+      </tr>;
+    })}</tbody>
+  </table>
+}
+
 export default function Problem2839Visualizer() {
   return (
     <AlgorithmWorkspace
       definition={definition}
-      renderVisual={({ step }) => (
-        <IndexedSequence
-          label="s1 then s2 (indices 0-3 are s1, 4-7 are s2)"
-          length={step.values.length}
-          valueAt={i => String(step.values[i])}
-          active={step.active ?? -1}
-          roleAt={i => step.roles?.[i] ?? ""}
-        />
+      renderVisual={({ run, step }) => (
+        <>
+          <IndexedSequence
+            label="s1 then s2 (indices 0-3 are s1, 4-7 are s2)"
+            length={step.values.length}
+            valueAt={i => String(step.values[i])}
+            active={step.active ?? -1}
+            roleAt={i => step.roles?.[i] ?? ""}
+          />
+          <GroupTable s1={run.input.s1} s2={run.input.s2} />
+        </>
       )}
       renderReasoning={({ step }) => <p>{step.detail}</p>}
     />

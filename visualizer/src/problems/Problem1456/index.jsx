@@ -14,36 +14,34 @@ const definition = {
   ],
 }
 
-const cell = {
-  minWidth: 34, padding: '6px 4px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
-}
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
-export default function MaxVowels() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
-    const { text, k, start, count, best, bestStart, entering, leaving } = step.snapshot
-    const inWindow = i => start !== null && i >= start && i < start + k
+export default function MaxVowelsWindow() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const { text, k } = run.input
+    const { start, count, best, bestStart, entering, leaving } = step.snapshot
+    const hasWindow = start !== null && start !== undefined
+    const left = hasWindow ? start : -1
+    const right = hasWindow ? start + k - 1 : -1
+    const bestEnd = bestStart + k - 1
+    const roleAt = i => {
+      const parts = []
+      if (hasWindow && i === left) parts.push('l')
+      if (hasWindow && i === right) parts.push('r')
+      if (i >= bestStart && i <= bestEnd && best > 0) parts.push('best')
+      return parts.join(' ')
+    }
     return <>
-      <div role="img" aria-label="Text with the current window" style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-        {[...text].map((ch, i) => {
-          const vowel = 'aeiou'.includes(ch)
-          return <div key={i} data-index={i} style={{
-            ...cell,
-            border: `${i === entering ? 2 : 1}px solid ${i === leaving ? '#dc2626' : i === entering ? '#16a34a' : 'var(--border)'}`,
-            background: inWindow(i) ? 'var(--surface2)' : 'transparent',
-            opacity: inWindow(i) ? 1 : 0.55, color: 'inherit', fontWeight: vowel ? 700 : 400,
-          }}>
-            <div>{ch}</div><small>{i}</small>
-          </div>
-        })}
-      </div>
-      <p>
-        {start === null ? 'The answer is final.' : `Window: positions ${start} to ${start + k - 1}, vowels now ${count}.`}
-        {' '}Best so far: {best} (window starting at {bestStart}).
+      <IndexedSequence label={`Text, with the window of length ${k} from l to r`} length={text.length} active={hasWindow ? right : -1}
+        valueAt={i => text[i]} roleAt={roleAt} />
+      <p style={{ color: 'var(--text)' }}>
+        {hasWindow ? `Window [${left}, ${right}] has ${count} vowels.` : 'No window yet.'}
+        {entering !== null && entering !== undefined ? ` Entering ${text[entering]} at ${entering}, leaving ${text[leaving]} at ${leaving}.` : ''}
       </p>
-      {entering !== null && <p>Entering at {entering} (green border), leaving at {leaving} (red border).</p>}
+      <p style={{ color: 'var(--text)' }}>Best so far: {best} vowels, in the window starting at {bestStart}.</p>
     </>
-  }} renderReasoning={() => <>
-    <p><strong>Fixed width:</strong> every window has exactly k characters, so moving the window changes the count by at most one entering and one leaving character.</p>
-    <p><strong>Reuse the count:</strong> recounting each window would repeat work; subtracting the leaving letter and adding the entering letter keeps each step constant-time.</p>
+  }} renderReasoning={({ step }) => <>
+    <p><strong>Slide, do not rescan:</strong> moving the window one step adds the character entering on the right and removes the one leaving on the left.</p>
+    <p>{step.message}</p>
   </>} />
 }

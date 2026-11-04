@@ -1,33 +1,26 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import { meta } from './meta'
+import { buildTrace, parseInput, code, python, phases, examples, complexity, inputLabel } from './algorithm'
+import { Sequence, Vars } from './SeqKit'
 
 const definition = {
-  number: '1071',
-  phases,
-  parse: parseInput,
-  build: buildTrace,
-  code,
-  python,
-  inputLabel: 'JSON object with first and second uppercase strings',
-  url: 'https://leetcode.com/problems/greatest-common-divisor-of-strings/',
-  complexity: 'O(n + m) for the concatenation check and O(log(min(n, m))) Euclid steps on the lengths, where n and m are the string lengths.',
-  examples: [
-    { label: 'Triple base', input: '{"first":"ABCABC","second":"ABC"}' },
-    { label: 'Two-letter base', input: '{"first":"ABABAB","second":"ABAB"}' },
-    { label: 'No shared base', input: '{"first":"LEET","second":"CODE"}' },
-  ],
+  number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
+  url: `https://leetcode.com/problems/${meta.slug}/`, complexity, examples,
 }
 
-export default function RepeatedBase() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
+export default function RepeatedBaseVisual() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { first, second, a, b, joinedFirst, joinedSecond } = step.state
     const matches = joinedFirst === joinedSecond
-    return <div style={{ fontFamily: 'monospace' }}>
-      <p><strong>first + second</strong> = {joinedFirst}</p>
-      <p><strong>second + first</strong> = {joinedSecond}</p>
-      <p aria-label="Order check">{matches ? 'The two orders match.' : 'The two orders differ.'}</p>
-      {matches && <p aria-label="Current lengths">Lengths: a = {a}, b = {b}</p>}
-    </div>
+    const marks = {}
+    if (matches && a) for (let i = 0; i < a; i++) marks[i] = 'window'
+    return <>
+      <Sequence label="first (block shaded when a shared base exists)" values={[...first]} marks={marks} />
+      <Sequence label="second" values={[...second]} marks={marks} />
+      <Vars vars={{ 'first + second': joinedFirst, 'second + first': joinedSecond, 'a (length)': matches ? a : null, 'b (length)': matches ? b : null }} />
+      <p aria-label="Order check">{matches ? 'The two orders match, so both strings are built from one block.' : 'The two orders differ, so no shared block exists.'}</p>
+      <output aria-label="Result">{step.phase === 'done' ? `Result: "${run.result}"` : step.message}</output>
+    </>
   }} renderReasoning={() => <>
     <p><strong>Commuting test:</strong> if the two joined orders are equal, both strings are built from one common block.</p>
     <p><strong>Largest block:</strong> the block length must divide both lengths, so the largest one is their greatest common divisor, found with Euclid.</p>

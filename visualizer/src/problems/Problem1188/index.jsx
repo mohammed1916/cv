@@ -20,11 +20,30 @@ const definition = {
 }
 
 export default function DesignBoundedBlockingQueue() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <ol aria-label="Queue contents" className="algorithm-workspace__queue">{step.state.map((value, index) => <li key={index}>{value}</li>)}</ol>
-    <output aria-label="Current step">{step.message}</output>
-  </>} renderReasoning={() => <>
-    <p>A real blocking queue parks the calling thread until there is room or an item. This replay keeps one schedule and marks each call that would wait.</p>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const capacity = run.input.capacity
+    const slots = Array.from({ length: capacity }, (_, i) => step.state[i])
+    const waiting = step.phase === 'blocked'
+    return <>
+      <p aria-label="Capacity">Capacity {capacity}: {step.state.length} of {capacity} slots used</p>
+      <ol aria-label="Queue slots" style={{ display: 'flex', gap: 6, listStyle: 'none', padding: 0, margin: 0 }}>
+        {slots.map((value, i) => <li key={i} data-role={value === undefined ? 'free' : i === 0 ? 'front' : ''} style={{
+          minWidth: 52, minHeight: 52, boxSizing: 'border-box', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', fontFamily: 'monospace',
+          border: i === 0 && value !== undefined ? '2px solid var(--text)' : '1px dashed var(--border)',
+          background: value === undefined ? 'transparent' : 'var(--surface2)', color: 'var(--text)',
+        }}>
+          <span>{value === undefined ? '' : value}</span>
+          <small style={{ color: 'var(--text-dim)' }}>{i === 0 && value !== undefined ? 'front' : i === step.state.length - 1 ? 'back' : ''}</small>
+        </li>)}
+      </ol>
+      <p style={{ marginTop: 24, color: waiting ? 'var(--text)' : 'var(--text-dim)' }}>
+        {waiting ? 'This call is parked. It stays here until the queue changes.' : 'No call is parked on this step.'}
+      </p>
+      <p aria-label="Parked calls">Parked enqueues: {step.parkedEnq.length ? step.parkedEnq.join(', ') : 'none'} · parked dequeues: {step.parkedDeq.length}</p>
+      <output aria-label="Current step">{step.message}</output>
+    </>
+  }} renderReasoning={() => <>
+    <p>A real blocking queue parks the calling thread until there is room or an item. This replay runs one fixed schedule: a call that would wait is parked, and it resumes in arrival order as soon as the queue can serve it.</p>
     <p>Both limits are checked against the same count, so a full queue never accepts another item and an empty queue never returns one.</p>
   </>} />
 }

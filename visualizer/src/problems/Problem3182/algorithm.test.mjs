@@ -17,19 +17,19 @@ function checkFrames(trace) {
 }
 
 test('3182 sample keeps Ann and Cy, drops Ben, Dee and the no-requirement student', () => {
-  const trace = run('{"Students":[{"student_id":1,"name":"Ann","major":"CS"},{"student_id":2,"name":"Ben","major":"CS"},{"student_id":3,"name":"Cy","major":"Math"},{"student_id":4,"name":"Dee","major":"Bio"}],"Courses":[{"course_id":1,"name":"Algorithms","credits":4,"major":"CS"},{"course_id":2,"name":"Databases","credits":3,"major":"CS"},{"course_id":3,"name":"Calculus","credits":4,"major":"Math"}],"Enrollments":[{"student_id":1,"course_id":1,"semester":"2024S","grade":90},{"student_id":1,"course_id":2,"semester":"2024S","grade":95},{"student_id":2,"course_id":1,"semester":"2024S","grade":92},{"student_id":2,"course_id":2,"semester":"2024S","grade":85},{"student_id":3,"course_id":3,"semester":"2024S","grade":91},{"student_id":3,"course_id":1,"semester":"2024S","grade":60}]}')
+  const trace = run('{"Students":[{"student_id":1,"name":"Ann","major":"CS"},{"student_id":2,"name":"Ben","major":"CS"},{"student_id":3,"name":"Cy","major":"Math"},{"student_id":4,"name":"Dee","major":"Bio"}],"Courses":[{"course_id":1,"name":"Algorithms","credits":4,"major":"CS"},{"course_id":2,"name":"Databases","credits":3,"major":"CS"},{"course_id":3,"name":"Calculus","credits":4,"major":"Math"}],"Enrollments":[{"student_id":1,"course_id":1,"semester":"2024S","grade":"A"},{"student_id":1,"course_id":2,"semester":"2024S","grade":"A"},{"student_id":2,"course_id":1,"semester":"2024S","grade":"A"},{"student_id":2,"course_id":2,"semester":"2024S","grade":"B"},{"student_id":3,"course_id":3,"semester":"2024S","grade":"A"},{"student_id":3,"course_id":1,"semester":"2024S","grade":"B"}]}')
   checkFrames(trace)
-  assert.deepEqual(trace.result, [{ student_id: 1, name: 'Ann' }, { student_id: 3, name: 'Cy' }])
+  assert.deepEqual(trace.result, [{ student_id: 1 }, { student_id: 3 }])
 })
 
 test('3182 a missing required course disqualifies even with high grades', () => {
-  const trace = run('{"Students":[{"student_id":5,"name":"Eve","major":"CS"}],"Courses":[{"course_id":1,"name":"Algorithms","credits":4,"major":"CS"},{"course_id":2,"name":"Databases","credits":3,"major":"CS"}],"Enrollments":[{"student_id":5,"course_id":1,"semester":"2024S","grade":99}]}')
+  const trace = run('{"Students":[{"student_id":5,"name":"Eve","major":"CS"}],"Courses":[{"course_id":1,"name":"Algorithms","credits":4,"major":"CS"},{"course_id":2,"name":"Databases","credits":3,"major":"CS"}],"Enrollments":[{"student_id":5,"course_id":1,"semester":"2024S","grade":"A"}]}')
   checkFrames(trace)
   assert.deepEqual(trace.result, [])
 })
 
-test('3182 a grade of exactly 90 qualifies and 89 does not', () => {
-  const trace = run('{"Students":[{"student_id":6,"name":"Fay","major":"CS"},{"student_id":7,"name":"Gus","major":"CS"}],"Courses":[{"course_id":1,"name":"Algorithms","credits":4,"major":"CS"}],"Enrollments":[{"student_id":6,"course_id":1,"semester":"2024S","grade":90},{"student_id":7,"course_id":1,"semester":"2024S","grade":89}]}')
+test('3182 an A qualifies and a B does not', () => {
+  const trace = run('{"Students":[{"student_id":6,"name":"Fay","major":"CS"},{"student_id":7,"name":"Gus","major":"CS"}],"Courses":[{"course_id":1,"name":"Algorithms","credits":4,"major":"CS"}],"Enrollments":[{"student_id":6,"course_id":1,"semester":"2024S","grade":"A"},{"student_id":7,"course_id":1,"semester":"2024S","grade":"B"}]}')
   checkFrames(trace)
-  assert.deepEqual(trace.result, [{ student_id: 6, name: 'Fay' }])
+  assert.deepEqual(trace.result, [{ student_id: 6 }])
 })

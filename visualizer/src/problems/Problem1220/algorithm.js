@@ -22,30 +22,32 @@ export function parseInput(text) {
 export function buildTrace({ n }) {
   const frames = []
   let counts = [1, 1, 1, 1, 1]
+  const history = [[...counts]]
   frames.push({
     phase: 'start', activeLine: L('counts = [1, 1, 1, 1, 1]'), pythonLine: P('counts = {v: 1'),
     message: 'Length 1: each vowel alone is one string, so every ending count is 1.',
-    snapshot: { length: 1, counts: [...counts] },
+    snapshot: { length: 1, counts: [...counts], history: history.map(r => [...r]) },
   })
   for (let length = 2; length <= n; length++) {
     frames.push({
       phase: 'inspect', activeLine: L('for step from 2 to n'), pythonLine: P('for _ in range'),
       message: `Read the row for length ${length - 1}: a=${counts[0]}, e=${counts[1]}, i=${counts[2]}, o=${counts[3]}, u=${counts[4]}.`,
-      snapshot: { length: length - 1, counts: [...counts] },
+      snapshot: { length: length - 1, counts: [...counts], history: history.map(r => [...r]) },
     })
     const next = VOWELS.split('').map(v => [...PREDECESSORS[v]].reduce((sum, p) => sum + counts[VOWELS.indexOf(p)], 0) % MOD)
     counts = next
+    history.push([...counts])
     frames.push({
       phase: 'update', activeLine: L('next[v] = sum'), pythonLine: P('counts = {v: sum'),
       message: `Length ${length}: each ending vowel sums only the allowed predecessors from the previous row. New row: [${counts.join(', ')}].`,
-      snapshot: { length, counts: [...counts] },
+      snapshot: { length, counts: [...counts], history: history.map(r => [...r]) },
     })
   }
   const result = counts.reduce((sum, c) => (sum + c) % MOD, 0)
   frames.push({
     phase: 'done', activeLine: L('return sum'), pythonLine: P('return sum'),
     message: `Add the five counts for length ${n}: ${result}.`,
-    snapshot: { length: n, counts: [...counts], total: result },
+    snapshot: { length: n, counts: [...counts], total: result, history: history.map(r => [...r]) },
   })
   return { input: { n }, result, frames }
 }
@@ -55,6 +57,7 @@ const codeLines = `count vowel strings (n):
   for step from 2 to n:
     next[v] = sum of counts[p] for each allowed predecessor p of v
     counts = next
+    history.push([...counts])
   return sum of counts modulo 1000000007`.split('\n')
 
 export const code = codeLines.map((text, index) => ({ line: index + 1, text }))

@@ -25,12 +25,22 @@ export default function KeyCardAlerts() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
     <section aria-label="Swipe times">
       <h3>{step.name ? `Worker: ${step.name}` : 'All workers'}</h3>
-      <ol className="algorithm-sequence__cells">
-        {step.times.map((minute, i) => <li key={i} className="algorithm-sequence__cell" data-role={step.flagged >= 0 && i >= step.flagged && i <= step.flagged + 2 ? 'window' : ''}>
-          <small>swipe {i + 1}</small><strong>{`${String(Math.floor(minute / 60)).padStart(2, '0')}:${String(minute % 60).padStart(2, '0')}`}</strong>
-        </li>)}
-      </ol>
-      {step.span !== undefined && <p>{`Span of this window: ${step.span} minutes`}</p>}
+      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+        {step.times.map((minute, i) => {
+          const inWindow = step.flagged >= 0 && i >= step.flagged && i <= step.flagged + 2
+          const pointer = i === step.flagged ? 'l' : i === step.flagged + 2 ? 'r' : ''
+          return <div key={i} data-index={i} style={{ display: 'grid', justifyItems: 'center', gap: 2 }}>
+            <small style={{ minHeight: 16, color: 'var(--text)', fontWeight: 700 }}>{pointer}</small>
+            <div style={{ minWidth: 72, padding: '6px 8px', textAlign: 'center', boxSizing: 'border-box', borderRadius: 6, fontFamily: 'monospace', color: 'var(--text)',
+              border: `${pointer ? 2 : 1}px solid ${pointer ? 'var(--primary)' : 'var(--border)'}`,
+              background: inWindow ? 'color-mix(in srgb, var(--primary) 20%, transparent)' : 'var(--surface2)' }}>
+              <div>{`${String(Math.floor(minute / 60)).padStart(2, '0')}:${String(minute % 60).padStart(2, '0')}`}</div>
+              <small>swipe {i + 1}</small>
+            </div>
+          </div>
+        })}
+      </div>
+      {step.span !== undefined && <p>{`Window from l to r spans ${step.span} minutes. Alert when it is at most 60.`}</p>}
     </section>
     <output aria-label="Alerted workers">{`Alerts so far: ${step.alerts.length ? step.alerts.join(', ') : 'none'}`}</output>
   </>} renderReasoning={() => <>

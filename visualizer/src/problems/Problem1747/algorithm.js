@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample rows are invented for this visualization.
+// Teaching version of the query. The sample rows are invented for this visualization.
 export const phases = [
   { id: 'load', label: 'Load', description: 'Read the login sessions.' },
   { id: 'pair', label: 'Pair', description: 'Compare two sessions of one account that used different IP addresses.' },

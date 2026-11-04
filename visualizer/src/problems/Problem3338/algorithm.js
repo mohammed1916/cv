@@ -7,7 +7,7 @@ const SQL_LINES = [
   '         DENSE_RANK() OVER (PARTITION BY dept ORDER BY salary DESC) AS rnk',
   '  FROM Employees',
   ')',
-  'SELECT emp_id, name, salary, dept',
+  'SELECT emp_id, dept',
   'FROM ranked',
   'WHERE rnk = 2',
   'ORDER BY emp_id;',
@@ -19,7 +19,7 @@ const PY_LINES = [
   "    df['rnk'] = df.groupby('dept')['salary'].rank(method='dense', ascending=False)",
   "    picked = df[df['rnk'] == 2]",
   "    picked = picked.sort_values('emp_id')",
-  "    return picked[['emp_id', 'name', 'salary', 'dept']].to_dict('records')",
+  "    return picked[['emp_id', 'dept']].to_dict('records')",
 ]
 
 export const sql = SQL_LINES.join('\n')
@@ -77,7 +77,7 @@ export function buildTrace({ employees }) {
   const sorted = [...kept].sort((a, b) => a.emp_id - b.emp_id)
   frames.push({ phase: 'order', activeLine: sqlAt('ORDER BY'), pythonLine: pyAt('sort_values'), message: 'Sort by emp_id.', rows: snap(sorted) })
 
-  const result = sorted.map(({ emp_id, name, salary, dept }) => ({ emp_id, name, salary, dept }))
+  const result = sorted.map(({ emp_id, dept }) => ({ emp_id, dept }))
   frames.push({ phase: 'output', activeLine: sqlAt('ORDER BY emp_id;'), pythonLine: pyAt('return picked'), message: `Result has ${result.length} row${result.length === 1 ? '' : 's'}.`, rows: snap(result), result: true })
   return { input: { employees }, result, frames }
 }

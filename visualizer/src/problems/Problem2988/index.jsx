@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import SqlStageBoard from './SqlStageBoard'
 import { meta } from './meta'
 import { buildTrace, parseInput, code, sql, python, phases } from './algorithm'
 
@@ -8,6 +9,11 @@ const examples = [{
   label: 'Sample',
   input: '{"Employees":[{"emp_id":1,"emp_name":"Ana","dep_id":10,"position":"Manager"},{"emp_id":2,"emp_name":"Ben","dep_id":10,"position":"Engineer"},{"emp_id":3,"emp_name":"Cy","dep_id":10,"position":"Analyst"},{"emp_id":4,"emp_name":"Dee","dep_id":20,"position":"Manager"},{"emp_id":5,"emp_name":"Eli","dep_id":20,"position":"Engineer"},{"emp_id":6,"emp_name":"Fay","dep_id":30,"position":"Manager"},{"emp_id":7,"emp_name":"Gus","dep_id":30,"position":"Analyst"},{"emp_id":8,"emp_name":"Hal","dep_id":30,"position":"Engineer"}]}',
 }]
+
+const stagesOf = run => run.frames.map(f => ({
+  id: f.phase, clause: code[f.activeLine - 1]?.text.trim() ?? '', label: phases.find(p => p.id === f.phase)?.label ?? f.phase,
+  columns: f.columns, rows: f.rows,
+}))
 
 const definition = {
   number: meta.number,
@@ -27,7 +33,7 @@ function Rows({ columns = [], rows = [] }) {
 
 export default function LargestDepartmentManagerVisual() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <Rows columns={step.columns} rows={step.rows} />
+    <SqlStageBoard title="Query stages" stages={stagesOf(run)} active={run.frames.indexOf(step)} />
     <output aria-label="Query output">{step.phase === 'done' ? `Output rows: ${run.result.length}` : step.message}</output>
   </>} renderReasoning={() => <>
     <p>First count staff per department, then keep every department that ties for the highest count. Ties are kept.</p>

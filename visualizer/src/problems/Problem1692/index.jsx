@@ -11,7 +11,7 @@ const definition = {
   python,
   inputLabel: 'Object with n (candies) and k (bags), e.g. {"n":4,"k":2}',
   url: "https://leetcode.com/problems/count-ways-to-distribute-candies/",
-  complexity: "O(n * k) time and O(n * k) space with modulo 1000000007. The visualization caps n at 12; the official bounds are not verified in this draft.",
+  complexity: "O(n * k) time and O(n * k) space with modulo 1000000007. The visualization caps n at 12.",
   examples: [
     { label: "Four candies, two bags", input: '{"n":4,"k":2}' },
     { label: "Three candies, two bags", input: '{"n":3,"k":2}' },

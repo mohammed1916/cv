@@ -28,9 +28,29 @@ function RowTable({ label, rows }) {
   </section>
 }
 
+function BalanceBars({ rows, threshold = 10000 }) {
+  if (rows.length === 0 || !('balance' in rows[0])) return null
+  const max = Math.max(threshold, ...rows.map(row => Number(row.balance) || 0))
+  const pct = value => `${Math.max(0, Math.min(100, (value / max) * 100))}%`
+  return <section aria-label="Balance against threshold">
+    <h4>Balance against the {threshold} threshold</h4>
+    {rows.map(row => <div key={row.account ?? row.name} style={{ display: 'grid', gridTemplateColumns: '6rem 1fr 5rem', gap: 8, alignItems: 'center', marginBottom: 4 }}>
+      <span style={{ color: 'var(--text)' }}>{row.name}</span>
+      <div style={{ position: 'relative', background: 'var(--surface2)', borderRadius: 4, height: 14 }}>
+        <div style={{ width: pct(row.balance), height: '100%', borderRadius: 4,
+          background: row.passes === false ? 'var(--text-muted)' : 'var(--primary)' }} />
+        <div style={{ position: 'absolute', left: pct(threshold), top: -3, bottom: -3, width: 2, background: 'var(--text)' }} />
+      </div>
+      <strong style={{ color: 'var(--text)' }}>{row.balance}</strong>
+    </div>)}
+    <p style={{ color: 'var(--text-muted)' }}>The vertical line is the threshold. Bars past it are kept; grey bars are dropped.</p>
+  </section>
+}
+
 export default function Problem1587() {
   return <AlgorithmWorkspace definition={definition}
     renderVisual={({ step }) => <>
+      <BalanceBars rows={step.rows} />
       <RowTable label="Working rows" rows={step.rows} />
       <RowTable label="Output" rows={step.output} />
     </>}

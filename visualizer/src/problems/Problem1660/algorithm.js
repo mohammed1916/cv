@@ -1,4 +1,4 @@
-// LeetCode 1660 (draft): Correct a Binary Tree.
+// LeetCode 1660: Correct a Binary Tree.
 // Input: { root: level-order list (null = missing child), bad: [from, to] }.
 // The node with value `from` has its right pointer wrongly set to the node with value `to`, which sits at the same depth
 // and further right. Real children are one level deeper, so a right pointer that lands on a node already seen at the

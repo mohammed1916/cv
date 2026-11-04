@@ -20,7 +20,7 @@ export function parseInput(text) {
 
 export function buildTrace({ chain, target, primitive }) {
   const frames = []
-  const view = (title, focus, summary) => ({ title, rows: primitive ? ['primitive value'] : chain.slice(), focus, summary })
+  const view = (title, focus, summary) => ({ title, rows: primitive ? ['primitive value'] : chain.slice(), chain: chain.slice(), target, primitive, focus, summary })
   if (primitive) {
     step(frames, 'check', 'if the value is a primitive', 'A primitive is never an instance.', view('Value', -1, 'false'))
     step(frames, 'done', 'otherwise answer false', 'Result: false.', view('Result', -1, 'false'))

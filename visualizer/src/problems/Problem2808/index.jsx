@@ -25,11 +25,28 @@ const definition = {
   ],
 };
 
+// Each distinct value with the indices holding it, in the order the algorithm visits them.
+function PositionsTable({ values, focus }) {
+  const groups = new Map()
+  values.forEach((v, i) => { if (!groups.has(v)) groups.set(v, []); groups.get(v).push(i) })
+  const cell = { padding: "4px 8px", borderBottom: "1px solid var(--surface2)", color: "var(--text)" }
+  return <table aria-label="Positions of each value" style={{ borderCollapse: "collapse", width: "100%" }}>
+    <thead><tr>{["value", "indices (circular)", "gaps between copies"].map(h => <th key={h} scope="col" style={{ ...cell, textAlign: "left", borderBottom: "2px solid var(--border, currentColor)" }}>{h}</th>)}</tr></thead>
+    <tbody>{[...groups].map(([v, idx]) => {
+      const n = values.length
+      const gaps = idx.map((start, k) => (idx[(k + 1) % idx.length] - start + n) % n || n)
+      return <tr key={v} data-focus={v === focus} style={{ background: v === focus ? "var(--primary)" : "transparent", color: v === focus ? "#fff" : "var(--text)" }}>
+        <td style={cell}>{v}</td><td style={cell}>{idx.join(", ")}</td><td style={cell}>{gaps.join(", ")}</td>
+      </tr>
+    })}</tbody>
+  </table>
+}
+
 export default function Problem2808Visualizer() {
   return (
     <AlgorithmWorkspace
       definition={definition}
-      renderVisual={({ step }) => (
+      renderVisual={({ step }) => <>
         <IndexedSequence
           label="nums"
           length={step.values.length}
@@ -37,7 +54,8 @@ export default function Problem2808Visualizer() {
           active={step.active ?? -1}
           roleAt={i => step.roles?.[i] ?? ""}
         />
-      )}
+        <PositionsTable values={step.values} focus={step.focus} />
+      </>}
       renderReasoning={({ step }) => <p>{step.detail}</p>}
     />
   );

@@ -1,0 +1,11 @@
+.sv-view { display: grid; gap: 10px; color: var(--text); }
+.sv-svg { width: 100%; max-width: 320px; height: auto; background: var(--surface2, transparent); border-radius: 8px; }
+.sv-axis { stroke: var(--muted, #94a3b8); stroke-width: 1; }
+.sv-point { fill: var(--surface, #fff); stroke: var(--text); stroke-width: 1.5; }
+.sv-point.is-required { fill: var(--primary, #2563eb); stroke: var(--primary, #2563eb); }
+.sv-point.is-active { stroke: var(--text); stroke-width: 3; }
+.sv-label { font-size: 10px; fill: var(--text); }
+.sv-region { fill: var(--primary, #2563eb); opacity: 0.12; }
+.sv-list { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; font-family: monospace; }
+.sv-list li { padding: 3px 6px; border: 1px solid var(--surface2, #d1d5db); border-radius: 5px; color: var(--text); }
+.sv-note { margin: 0; font-size: 0.9rem; color: var(--muted, var(--text)); }

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import SqlStageBoard from './SqlStageBoard'
 import { meta } from './meta'
 import { buildTrace, parseInput, code, sql, python, phases } from './algorithm'
 
@@ -8,6 +9,11 @@ const examples = [{
   label: 'Sample',
   input: '{"Scores":[{"student_id":1,"student_name":"Ivy","assignment1":10,"assignment2":20,"assignment3":30},{"student_id":2,"student_name":"Jo","assignment1":5,"assignment2":5,"assignment3":5},{"student_id":3,"student_name":"Kai","assignment1":40,"assignment2":10,"assignment3":0},{"student_id":4,"student_name":"Lu","assignment1":25,"assignment2":25,"assignment3":25}]}',
 }]
+
+const stagesOf = run => run.frames.map(f => ({
+  id: f.phase, clause: code[f.activeLine - 1]?.text.trim() ?? '', label: phases.find(p => p.id === f.phase)?.label ?? f.phase,
+  columns: f.columns, rows: f.rows,
+}))
 
 const definition = {
   number: meta.number,
@@ -27,7 +33,7 @@ function Rows({ columns = [], rows = [] }) {
 
 export default function ClassPerformanceVisual() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <Rows columns={step.columns} rows={step.rows} />
+    <SqlStageBoard title="Query stages" stages={stagesOf(run)} active={run.frames.indexOf(step)} />
     <output aria-label="Query output">{step.phase === 'done' ? `Difference: ${run.result[0].difference_in_score}` : step.message}</output>
   </>} renderReasoning={() => <>
     <p>Each student’s total is the sum of the three assignment columns in that row.</p>

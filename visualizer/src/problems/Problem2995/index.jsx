@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { meta } from './meta'
 import { buildTrace, parseInput, code, sql, python, phases } from './algorithm'
+import SessionLanes from './SessionLanes'
 
 const inputLabel = 'Object with a Sessions table'
 const complexity = 'O(s * u) for s sessions and u users in the teaching loop. The visualizer caps Sessions at 12 rows.'
@@ -27,7 +28,8 @@ function Rows({ columns = [], rows = [] }) {
 
 export default function KnowledgeDerivedSqlVisual() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <SessionLanes sessions={run.input.Sessions} firsts={step.phase === 'load' ? [] : (step.columns.includes('first_type') ? step.rows : [])} counted={step.columns.includes('sessions_count') ? step.rows : []} />
     <Rows columns={step.columns} rows={step.rows} />
     <output aria-label="Query output">{step.phase === 'done' ? `Output rows: ${run.result.length}` : step.message}</output>
-  </>} renderReasoning={() => <p>The query first finds each user's earliest session, keeps the users who began as viewers, and counts streamer sessions that start after that first session. Users with no later streaming are dropped.</p>} />
+  </>} renderReasoning={() => <p>The query first finds each user's earliest session, keeps the users who began as viewers, and counts streamer sessions that start after that first session. Users with no later streaming are dropped. The final rows are sorted by count, then user id, both descending.</p>} />
 }

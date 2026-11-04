@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import SqlStageBoard from './SqlStageBoard'
 import { meta } from './meta'
 import { buildTrace, parseInput, code, sql, python, phases } from './algorithm'
 
@@ -8,6 +9,11 @@ const examples = [{
   label: 'Sample',
   input: '{"Loans":[{"loan_id":1,"user_id":10,"loan_type":"Mortgage"},{"loan_id":2,"user_id":10,"loan_type":"Refinance"},{"loan_id":3,"user_id":10,"loan_type":"Personal"},{"loan_id":4,"user_id":11,"loan_type":"Mortgage"},{"loan_id":5,"user_id":11,"loan_type":"Mortgage"},{"loan_id":6,"user_id":12,"loan_type":"Refinance"},{"loan_id":7,"user_id":13,"loan_type":"Mortgage"},{"loan_id":8,"user_id":13,"loan_type":"Refinance"},{"loan_id":9,"user_id":13,"loan_type":"Mortgage"}]}',
 }]
+
+const stagesOf = run => run.frames.map(f => ({
+  id: f.phase, clause: code[f.activeLine - 1]?.text.trim() ?? '', label: phases.find(p => p.id === f.phase)?.label ?? f.phase,
+  columns: f.columns, rows: f.rows,
+}))
 
 const definition = {
   number: meta.number,
@@ -27,7 +33,7 @@ function Rows({ columns = [], rows = [] }) {
 
 export default function LoanTypesVisual() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <Rows columns={step.columns} rows={step.rows} />
+    <SqlStageBoard title="Query stages" stages={stagesOf(run)} active={run.frames.indexOf(step)} />
     <output aria-label="Query output">{step.phase === 'done' ? `Output rows: ${run.result.length}` : step.message}</output>
   </>} renderReasoning={() => <>
     <p>Other loan types are filtered out first, so they cannot disqualify a user.</p>

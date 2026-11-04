@@ -39,9 +39,9 @@ export function buildTrace(s) {
     const mid = (lo + hi) >> 1
     const candidate = check(mid)
     if (candidate) { best = candidate; lo = mid + 1 } else hi = mid - 1
-    frames.push({ phase: 'search', pythonLine: 29, activeLine: L('check length mid'), lo, hi, mid, best, message: candidate ? `Length ${mid} has a repeat (${candidate}). Look longer.` : `Length ${mid} has no repeat. Look shorter.` })
+    frames.push({ phase: 'search', pythonLine: 29, activeLine: L('check length mid'), lo, hi, mid, found: Boolean(candidate), best, message: candidate ? `Length ${mid} has a repeat (${candidate}). Look longer.` : `Length ${mid} has no repeat. Look shorter.` })
   }
-  frames.push({ phase: 'done', pythonLine: 35, activeLine: L('return best'), lo, hi, mid: null, best, message: best ? `Longest duplicate: ${best}.` : 'No substring repeats.' })
+  frames.push({ phase: 'done', pythonLine: 35, activeLine: L('return best'), lo, hi, mid: null, found: false, best, message: best ? `Longest duplicate: ${best}.` : 'No substring repeats.' })
   return { input: s, result: best, frames }
 }
 

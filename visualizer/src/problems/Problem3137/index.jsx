@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
 import IndexedSequence from "../../components/shared/IndexedSequence";
+import FrequencyCountTable from "../../components/shared/FrequencyCountTable";
 import { code, python, parseInput, buildTrace } from "./algorithm";
 
 const definition = {
@@ -24,14 +25,22 @@ export default function KPeriodicWordVisualizer() {
   return (
     <AlgorithmWorkspace
       definition={definition}
-      renderVisual={({ run, step }) => (
-        <>
-          <IndexedSequence label="Blocks of length k" length={run.input.word.length / run.input.k}
-            valueAt={i => run.input.word.slice(i * run.input.k, (i + 1) * run.input.k)}
-            active={step.index ?? -1} roleAt={i => (i === step.index ? "active" : "")} />
-          <p>Counts: {Object.entries(step.counts).map(([b, c]) => `${b}×${c}`).join(", ") || "none yet"}</p>
-        </>
-      )}
+      renderVisual={({ run, step }) => {
+        const total = run.input.word.length / run.input.k;
+        const counts = Object.entries(step.counts);
+        const top = counts.length ? counts.reduce((a, b) => (b[1] > a[1] ? b : a))[0] : null;
+        const finished = step.phase === "count" || step.phase === "done";
+        return (
+          <>
+            <IndexedSequence label="Blocks of length k" length={total}
+              valueAt={i => run.input.word.slice(i * run.input.k, (i + 1) * run.input.k)}
+              active={step.index ?? -1}
+              roleAt={i => (finished && step.blocks[i] === top ? "kept" : finished ? "changed" : "")} />
+            <FrequencyCountTable title="Count of each block" entries={counts} active={step.block} emptyText="No blocks counted yet." />
+            <p>Blocks that match the most common block stay as they are. Every other block costs one operation.</p>
+          </>
+        );
+      }}
       renderReasoning={({ step }) => <p>{step.message}</p>}
     />
   );

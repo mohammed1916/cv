@@ -33,28 +33,28 @@ export function parseInput(text) {
 export function buildTrace({ value }) {
   const frames = []
   const out = []
-  const view = (focus) => ({ title: 'Output so far', rows: [out.join('')], focus: 0, summary: '' })
-  const write = (node) => {
+  const view = (kind, depth) => ({ title: 'Output so far', text: out.join(''), kind, depth, summary: '' })
+  const write = (node, depth = 0) => {
     if (Array.isArray(node)) {
       out.push('[')
-      node.forEach((item, i) => { if (i) out.push(','); write(item) })
+      node.forEach((item, i) => { if (i) out.push(','); write(item, depth + 1) })
       out.push(']')
-      step(frames, 'array', 'if value is an array', `Closed an array of ${node.length} items.`, view(0))
+      step(frames, 'array', 'if value is an array', `Closed an array of ${node.length} items.`, view('array', depth))
     } else if (node !== null && typeof node === 'object') {
       out.push('{')
-      Object.keys(node).forEach((key, i) => { if (i) out.push(','); out.push(`"${key}":`); write(node[key]) })
+      Object.keys(node).forEach((key, i) => { if (i) out.push(','); out.push(`"${key}":`); write(node[key], depth + 1) })
       out.push('}')
-      step(frames, 'object', 'if value is an object', `Closed an object with ${Object.keys(node).length} keys.`, view(0))
+      step(frames, 'object', 'if value is an object', `Closed an object with ${Object.keys(node).length} keys.`, view('object', depth))
     } else if (typeof node === 'string') {
       out.push(`"${node}"`)
-      step(frames, 'string', 'if value is a string', `Wrote the string "${node}".`, view(0))
+      step(frames, 'string', 'if value is a string', `Wrote the string "${node}".`, view('string', depth))
     } else {
       out.push(String(node))
-      step(frames, 'leaf', 'otherwise write', `Wrote ${String(node)}.`, view(0))
+      step(frames, 'leaf', 'otherwise write', `Wrote ${String(node)}.`, view('leaf', depth))
     }
   }
   write(value)
   const result = out.join('')
-  step(frames, 'done', 'return the joined text', 'Finished.', { title: 'Output', rows: [result], focus: 0, summary: result })
+  step(frames, 'done', 'return the joined text', 'Finished.', { title: 'Output', text: result, kind: 'done', depth: 0, summary: result })
   return { result, frames }
 }

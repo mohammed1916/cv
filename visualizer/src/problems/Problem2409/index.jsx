@@ -1,4 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IntervalView from '../../components/shared/IntervalView'
+import { intervalView } from '../../components/shared/intervalModel.js'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -29,6 +31,10 @@ export default function CountDaysTogether() {
           <tr><td>Bob</td><td>{ab}</td><td>{lb}</td></tr>
         </tbody>
       </table>
+      {(() => { const { interval } = intervalView({ title: 'Stays as day numbers (inclusive)', intervals: [
+        { start: aa, end: la, label: 'Alice', group: 'Alice', role: 'pending' },
+        { start: ab, end: lb, label: 'Bob', group: 'Bob', role: 'pending' },
+      ], marker: step.latest, markerLabel: 'latest arrival', closed: true }); return interval ? <IntervalView {...interval} /> : null })()}
       <output aria-label="Current step">{step.message}</output>
       {step.phase === 'done' && <output aria-label="Result">{`Shared days: ${run.result}`}</output>}
     </>

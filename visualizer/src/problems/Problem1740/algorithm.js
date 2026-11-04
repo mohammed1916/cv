@@ -1,4 +1,4 @@
-// LeetCode 1740 (draft): Find Distance in a Binary Tree.
+// LeetCode 1740: Find Distance in a Binary Tree.
 // Input: { root: level-order list (null = missing child), p, q }. Values are unique and both are in the tree.
 // Distance (in edges) = depth(p) + depth(q) - 2 * depth(lowest common ancestor).
 

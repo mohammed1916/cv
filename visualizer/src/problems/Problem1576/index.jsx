@@ -14,21 +14,41 @@ const definition = {
   ],
 }
 
-const tile = (active, replaced) => ({
-  minWidth: 40, boxSizing: 'border-box', padding: '6px 8px', textAlign: 'center', fontFamily: 'monospace',
-  background: replaced ? '#bbf7d0' : 'transparent', color: replaced ? '#1c1917' : 'inherit',
+const cell = (tone, active) => ({
+  minWidth: 40, boxSizing: 'border-box', padding: '6px 8px', textAlign: 'center', fontFamily: 'monospace', color: 'var(--text)',
+  background: tone ?? 'transparent',
   border: `${active ? 2 : 1}px solid ${active ? 'var(--text)' : 'var(--border)'}`,
 })
+const REPLACED = 'color-mix(in srgb, var(--success) 28%, transparent)'
 
 export default function AvoidConsecutiveRepeats() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { index, chars } = step.snapshot
     const original = run.input
+    const left = index !== null && index > 0 ? chars[index - 1] : null
+    const right = index !== null && index + 1 < chars.length ? chars[index + 1] : null
+    const current = index !== null && original[index] === '?'
     return <>
       <div role="img" aria-label="String positions" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        {chars.map((ch, k) => <div key={k} style={tile(k === index, original[k] === '?' && ch !== '?')}>{ch}<small> {k}</small></div>)}
+        {chars.map((ch, k) => <div key={k} style={{ display: 'grid', justifyItems: 'center', gap: 2 }}>
+          <small style={{ minHeight: 16, color: 'var(--text-muted)' }}>{k === index ? 'i' : ''}</small>
+          <div style={cell(original[k] === '?' && ch !== '?' ? REPLACED : undefined, k === index)}>{ch}<small> {k}</small></div>
+        </div>)}
       </div>
-      <p>Green cells were ? marks that are now filled. The outlined cell is the position being handled.</p>
+      {current && <div aria-label="Letter choices" style={{ marginTop: 10 }}>
+        <p>Choices for position {index}:</p>
+        <div style={{ display: 'flex', gap: 8 }}>
+          {['a', 'b', 'c'].map(letter => {
+            const blocked = letter === left || letter === right
+            return <span key={letter} style={{ padding: '4px 10px', borderRadius: 6, fontFamily: 'monospace', border: '1px solid var(--border)',
+              color: blocked ? 'var(--text-muted)' : 'var(--text)', textDecoration: blocked ? 'line-through' : 'none',
+              background: !blocked && letter === chars[index] ? REPLACED : 'var(--surface2)' }}>
+              {letter}{blocked ? ` (matches ${letter === left ? 'left' : 'right'})` : ''}
+            </span>
+          })}
+        </div>
+      </div>}
+      <p>Green cells are former ? marks that are now filled. The outlined cell is the position being handled; i is its index.</p>
     </>
   }} renderReasoning={() => <>
     <p><strong>Greedy from the left:</strong> the left neighbour is already final, so each ? only has to differ from it and from its right neighbour as it stands.</p>

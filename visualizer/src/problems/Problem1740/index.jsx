@@ -11,7 +11,7 @@ const definition = {
   python,
   inputLabel: 'Object with root (level-order list), p and q, e.g. {"root":[3,5,1,6,2,0,8,null,null,7,4],"p":7,"q":1}',
   url: "https://leetcode.com/problems/find-distance-in-a-binary-tree/",
-  complexity: "O(n) time and O(n) space for n nodes. The visualization caps the tree at 15 nodes; the official limits are not verified in this draft.",
+  complexity: "O(n) time and O(n) space for n nodes. The visualization caps the tree at 15 nodes.",
   examples: [
     { label: "Siblings", input: '{"root":[3,5,1,6,2,0,8,null,null,7,4],"p":7,"q":4}' },
     { label: "Across the root", input: '{"root":[3,5,1,6,2,0,8,null,null,7,4],"p":7,"q":1}' },

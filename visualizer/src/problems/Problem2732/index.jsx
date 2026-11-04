@@ -3,35 +3,42 @@ import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
-    { id: 'start', label: 'Start', description: 'Look for a good subset of the rows.' },
-    { id: 'zero', label: 'Zero row', description: 'A row of zeros is a good subset by itself.' },
-    { id: 'pair', label: 'Row pair', description: 'Two rows with no shared column form a good subset.' },
+    { id: 'start', label: 'Start', description: 'Look for a good subset of the rows, smallest subsets first.' },
+    { id: 'check', label: 'Check subset', description: 'Add up each column for this subset and compare with floor(k / 2).' },
+    { id: 'good', label: 'Good', description: 'Every column sum is within the limit.' },
     { id: 'done', label: 'Complete', description: 'Report the rows found, or an empty list.' },
   ],
   parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'JSON object with grid (up to 6 rows of 0 and 1, up to 5 columns)',
-  url: 'https://leetcode.doocs.org/en/lc/2732/',
-  complexity: 'O(m^2 * n) time for the zero-row and pair checks.',
+  url: 'https://leetcode.com/problems/find-a-good-subset-of-the-matrix/',
+  complexity: 'Exhaustive over subsets of rows: at most 2^6 subsets of up to 6 rows and 5 columns for the visualization cap.',
   examples: [
-    { label: 'Example 1', input: '{"grid": [[0,1,1,0],[0,0,0,1],[1,1,1,1]]}' },
-    { label: 'Example 3', input: '{"grid": [[1,1,1],[1,1,1]]}' },
+    { label: 'Pair of rows', input: '{"grid": [[1,0,1],[0,1,0],[1,1,0]]}' },
+    { label: 'No good subset', input: '{"grid": [[1,1,1],[1,1,1],[1,1,0]]}' },
   ],
 }
 
+const cell = (on, chosen) => ({
+  width: 34, height: 34, display: 'grid', placeItems: 'center', borderRadius: 4,
+  border: '1px solid var(--border)', color: 'var(--text)',
+  background: chosen && on ? 'var(--primary)' : on ? 'var(--primary-glow)' : 'var(--surface)',
+})
+
 export default function GoodSubset() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => (
-    <table aria-label="Matrix rows">
-      <tbody>
-        {run.grid.map((row, i) => (
-          <tr key={i} data-chosen={step.rows.includes(i) ? 'yes' : 'no'}>
-            <th scope="row">{`Row ${i}`}</th>
-            <td>{row.join(' ')}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  )} renderReasoning={() => <>
-    <p>With at most five columns, a good subset is either one all-zero row, or two rows whose ones never land in the same column.</p>
-    <p>The check on pairs is exact for this statement, and the exhaustive test confirms it on random grids.</p>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const chosen = new Set(step.rows)
+    return <section aria-label="Matrix rows" style={{ display: 'grid', gap: 10 }}>
+      <div style={{ display: 'grid', gap: 4 }}>
+        {run.grid.map((row, i) => <div key={i} data-chosen={chosen.has(i) ? 'yes' : 'no'} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+          <span style={{ width: 56, color: chosen.has(i) ? 'var(--primary)' : 'var(--text-muted)' }}>{`Row ${i}`}</span>
+          {row.map((v, c) => <div key={c} style={cell(v === 1, chosen.has(i))}>{v}</div>)}
+        </div>)}
+      </div>
+      {step.sums && <p style={{ margin: 0, color: 'var(--text)' }}>Column sums: <code>[{step.sums.join(', ')}]</code>, limit <code>{step.limit}</code> for {step.rows.length} rows.</p>}
+      <p style={{ margin: 0, color: 'var(--text)' }}>{step.message}</p>
+    </section>
+  }} renderReasoning={() => <>
+    <p>A subset of k rows is good when no column has more than floor(k / 2) ones among those rows.</p>
+    <p>Subsets are tried smallest first, so the first good subset found is the one returned.</p>
   </>} />
 }

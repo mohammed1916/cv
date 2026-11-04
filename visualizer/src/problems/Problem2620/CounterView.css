@@ -1,0 +1,9 @@
+.counter-view { display: grid; gap: 12px; }
+.counter-view__box { display: inline-flex; flex-direction: column; align-items: center; justify-self: start; padding: 12px 20px; border: 2px solid var(--primary); border-radius: 12px; background: var(--surface2); color: var(--text); }
+.counter-view__label { font-size: 12px; color: var(--text-muted); }
+.counter-view__value { font-size: 32px; font-variant-numeric: tabular-nums; }
+.counter-view__calls { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.counter-view__call { display: flex; flex-direction: column; min-width: 110px; padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); }
+.counter-view__call--current { outline: 3px solid var(--primary); outline-offset: 1px; }
+.counter-view__call span { font-size: 12px; color: var(--text-muted); }
+.counter-view__empty, .counter-view__note { margin: 0; font-size: 13px; color: var(--text-muted); }

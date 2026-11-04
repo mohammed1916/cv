@@ -9,17 +9,18 @@ export function parseInput(text) {
 }
 
 export function buildTrace({ s, n }) {
-  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('for each number x'), x: 0, b: '', message: `Check every number from 1 to ${n}.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('for each number x'), x: 0, b: '', match: null, message: `Check every number from 1 to ${n}.` }]
   for (let x = 1; x <= n; x++) {
     const b = x.toString(2)
-    if (!s.includes(b)) {
-      frames.push({ phase: 'missing', pythonLine: 3, activeLine: L('if b is not a substring'), x, b, message: `${x} is ${b} in binary, which is not a substring of s. The answer is false.` })
-      frames.push({ phase: 'done', pythonLine: 4, activeLine: L('return false'), x, b, message: `Answer: false.` })
+    const at = s.indexOf(b)
+    if (at < 0) {
+      frames.push({ phase: 'missing', pythonLine: 3, activeLine: L('if b is not a substring'), x, b, match: null, message: `${x} is ${b} in binary, which is not a substring of s. The answer is false.` })
+      frames.push({ phase: 'done', pythonLine: 4, activeLine: L('return false'), x, b, match: null, message: `Answer: false.` })
       return { input: { s, n }, result: false, frames }
     }
-    frames.push({ phase: 'check', pythonLine: 3, activeLine: L('if b is not a substring'), x, b, message: `${x} is ${b} in binary, and it appears in s.` })
+    frames.push({ phase: 'check', pythonLine: 3, activeLine: L('if b is not a substring'), x, b, match: [at, at + b.length - 1], message: `${x} is ${b} in binary, and it appears in s at positions ${at} to ${at + b.length - 1}.` })
   }
-  frames.push({ phase: 'done', pythonLine: 5, activeLine: L('return true'), x: n, b: '', message: `Every number from 1 to ${n} appears in s. Answer: true.` })
+  frames.push({ phase: 'done', pythonLine: 5, activeLine: L('return true'), x: n, b: '', match: null, message: `Every number from 1 to ${n} appears in s. Answer: true.` })
   return { input: { s, n }, result: true, frames }
 }
 

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import DigitPlaces from './DigitPlaces'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -19,8 +20,9 @@ const definition = {
 }
 
 export default function PowerfulIntegers() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <output aria-label="Bound">{step.bound === null ? 'Checking digits' : `Bound ${step.bound}: ${step.count} valid numbers`}</output>
+    {step.bound !== null && <DigitPlaces bound={step.bound} limit={run.input.limit} s={run.input.s} />}
   </>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>
     <p>A powerful integer is some prefix followed by s, so each bound reduces to counting prefixes with digits at most the limit.</p>

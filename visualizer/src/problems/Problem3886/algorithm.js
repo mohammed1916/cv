@@ -51,12 +51,12 @@ export function buildTrace({ nums }) {
       for (let r = 0; r < k; r++) {
         if ([...block.slice(r), ...block.slice(0, r)].every((v, i) => v === want[i])) { rotation = r; break }
       }
-      frames.push({ phase: 'block', activeLine: L('no rotation of the block'), pythonLine: P('if not any'), k, block, want, rotation, sortable: rotation >= 0, total,
+      frames.push({ phase: 'block', activeLine: L('no rotation of the block'), pythonLine: P('if not any'), k, start: b, block, want, rotation, sortable: rotation >= 0, total,
         message: rotation >= 0 ? `Block at ${b} rotates by ${rotation} to match.` : `Block at ${b} cannot match its sorted slice.` })
       if (rotation < 0) ok = false
     }
     if (ok) total += k
-    frames.push({ phase: 'divisor', activeLine: L('if sortable then'), pythonLine: P('if ok:'), k, block: null, want: null, rotation: null, sortable: ok, total,
+    frames.push({ phase: 'divisor', activeLine: L('if sortable then'), pythonLine: P('if ok:'), k, start: null, block: null, want: null, rotation: null, sortable: ok, total,
       message: ok ? `k = ${k} is sortable; total is now ${total}.` : `k = ${k} is not sortable.` })
   }
   frames.push({ phase: 'done', activeLine: L('return total'), pythonLine: P('return total'), k: null, block: null, want: null, rotation: null, sortable: null, total,

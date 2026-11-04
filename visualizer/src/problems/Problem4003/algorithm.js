@@ -16,6 +16,7 @@ export function buildTrace(input) {
   const key = (i, j, p) => (i * n + j) * 2 + p
   const dist = new Map([[key(0, 0, 0), entry(0, 0)]])
   const settled = new Set()
+  const order = []
   const frames = [{ pythonLine: 9, phase: 'start', activeLine: L('set the cost of the start state'), i: 0, j: 0, parity: 'odd', cost: entry(0, 0), message: 'Start at (0, 0) and pay its entry cost. The first action is odd.' }]
   let answer = null
   for (;;) {
@@ -26,6 +27,7 @@ export function buildTrace(input) {
     if (current === null) break
     const cost = dist.get(current)
     settled.add(current)
+    order.push({ i: Math.floor(((current - (current % 2)) / 2) / n), j: ((current - (current % 2)) / 2) % n, parity: current % 2 === 0 ? 'odd' : 'even', cost: dist.get(current) })
     const p = current % 2
     const cell = (current - p) / 2
     const i = Math.floor(cell / n)
@@ -36,7 +38,7 @@ export function buildTrace(input) {
       frames.push({ pythonLine: 15, phase: 'done', activeLine: L('if it is the bottom right cell'), i, j, parity, cost, message: `Reached the bottom right cell with cost ${cost}.` })
       break
     }
-    frames.push({ pythonLine: 11, phase: 'settle', activeLine: L('take the unsettled state'), i, j, parity, cost, message: `Settle (${i}, ${j}) with an ${parity} next action at cost ${cost}.` })
+    frames.push({ pythonLine: 11, phase: 'settle', activeLine: L('take the unsettled state'), i, j, parity, cost, settledList: order.slice(), message: `Settle (${i}, ${j}) with an ${parity} next action at cost ${cost}.` })
     const relax = (ni, nj, extra) => {
       const k = key(ni, nj, 1 - p)
       if (!dist.has(k) || cost + extra < dist.get(k)) dist.set(k, cost + extra)

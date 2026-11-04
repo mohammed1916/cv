@@ -14,12 +14,37 @@ const definition = {
   ],
 }
 
+// Cities sit on a circle. Roads drawn solid; the pair being ranked is highlighted.
+function CityMap({ n, roads, pair }) {
+  const size = 260, radius = 100
+  const point = city => {
+    const angle = (2 * Math.PI * city) / n - Math.PI / 2
+    return { x: size / 2 + radius * Math.cos(angle), y: size / 2 + radius * Math.sin(angle) }
+  }
+  const isPairRoad = ([a, b]) => pair && ((a === pair[0] && b === pair[1]) || (a === pair[1] && b === pair[0]))
+  return <svg viewBox={`0 0 ${size} ${size}`} width="100%" style={{ maxWidth: 300 }} role="img" aria-label="Cities and roads">
+    {roads.map(([a, b], k) => {
+      const p = point(a), q = point(b)
+      return <line key={k} x1={p.x} y1={p.y} x2={q.x} y2={q.y} stroke={isPairRoad([a, b]) ? 'var(--primary)' : 'var(--text-muted)'} strokeWidth={isPairRoad([a, b]) ? 4 : 2} />
+    })}
+    {Array.from({ length: n }, (_, city) => {
+      const p = point(city)
+      const inPair = pair && pair.includes(city)
+      return <g key={city}>
+        <circle cx={p.x} cy={p.y} r={16} fill={inPair ? 'var(--primary)' : 'var(--surface)'} stroke="var(--text)" strokeWidth={1.5} />
+        <text x={p.x} y={p.y + 4} textAnchor="middle" fill={inPair ? 'var(--surface)' : 'var(--text)'} fontSize="13" fontFamily="monospace">{city}</text>
+      </g>
+    })}
+  </svg>
+}
+
 export default function NetworkRank() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { n, degree, pair, rank, shared } = step.snapshot
     const inPair = city => pair && pair.includes(city)
     return <>
-      <div role="img" aria-label="City degrees" style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+      <CityMap n={run.input.n} roads={run.input.roads} pair={pair} />
+      <div role="img" aria-label="City degrees" style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 8 }}>
         {Array.from({ length: n }, (_, city) => <div key={city} style={{
           minWidth: 72, padding: 8, textAlign: 'center', fontFamily: 'monospace', boxSizing: 'border-box',
           border: `${inPair(city) ? 2 : 1}px solid ${inPair(city) ? 'var(--text)' : 'var(--border)'}`,
@@ -28,7 +53,7 @@ export default function NetworkRank() {
       </div>
       <p>{pair ? `Pair ${pair[0]} and ${pair[1]}: rank ${rank}${shared ? ' (shared road subtracted)' : ''}.` : 'Degrees are counted from the roads.'}</p>
     </>
-  }} renderReasoning={({ step }) => <>
+  }} renderReasoning={() => <>
     <p><strong>Degrees first:</strong> a city's degree is the number of roads attached to it.</p>
     <p><strong>Shared road once:</strong> a direct road between two cities is in both degrees, so it is subtracted exactly once.</p>
   </>} />

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import FoldView from './FoldView'
 import { buildTrace, parseInput, code } from './algorithm'
 
 const definition = {
@@ -9,24 +10,21 @@ const definition = {
     { id: 'done', label: 'Result', description: 'The final accumulator.' },
   ],
   parse: parseInput, build: buildTrace, code,
-  inputLabel: 'JSON object with nums (up to 8 whole numbers) and init',
+  inputLabel: 'JSON object with nums (up to 8 whole numbers), init, and fn ("sum" or "squareSum")',
   url: 'https://leetcode.com/problems/array-reduce-transformation/',
   complexity: 'O(n) time and O(1) extra space for n elements.',
   examples: [
-    { label: 'Fold', input: '{"nums":[1,2,3],"init":4}' },
+    { label: 'Sum', input: '{"nums":[2,5,1],"init":3}' },
+    { label: 'Squares', input: '{"nums":[2,-3],"init":10,"fn":"squareSum"}' },
     { label: 'Empty', input: '{"nums":[],"init":7}' },
   ],
 }
 
 export default function ArrayReduceTransformation() {
   return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ step }) => <section aria-label="Visual state">
-      <h3>{step.view.title}</h3>
-      <ol>{step.view.rows.map((row, index) => <li key={index} aria-current={index === step.view.focus ? 'step' : undefined}>{row}</li>)}</ol>
-      {step.view.summary && <output>{step.view.summary}</output>}
-    </section>}
+    renderVisual={({ step }) => <FoldView view={step.view} />}
     renderReasoning={() => <>
       <p>A reduce keeps one running value. Each element is combined with that value, and the result becomes the next running value.</p>
-      <p>The sample rule here doubles the accumulator and adds the element, which makes each step visible.</p>
+      <p>The reducer is chosen by name in this visualization. With no elements, the initial value is returned unchanged.</p>
     </>} />
 }

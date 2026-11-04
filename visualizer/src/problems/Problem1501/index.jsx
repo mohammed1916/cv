@@ -8,15 +8,26 @@ const phases = [
   { id: 'done', label: 'Result', description: 'Return the countries above the overall average.' },
 ]
 
-const CELL = { border: '1px solid currentColor', padding: '2px 8px' }
+const STAGE = {
+  resident: 'WITH resident AS (...): JOIN Person to Country on the first three digits of phone_number.',
+  participate: 'UNION ALL: each call appears once for its caller side and once for its callee side.',
+  average: 'GROUP BY country: the average of each country is compared with AVG(duration) over Calls.',
+  done: 'ORDER BY country: the countries above the overall average, alphabetically.',
+}
 
-function TableView({ caption, columns, rows }) {
+const CELL = { border: '1px solid currentColor', padding: '2px 8px' }
+const HIGHLIGHT = 'color-mix(in srgb, var(--primary) 28%, var(--surface2))'
+
+function TableView({ caption, columns, rows, isCurrent = () => false }) {
   return <table aria-label={caption} style={{ borderCollapse: 'collapse' }}>
     <caption>{caption}</caption>
     <thead><tr>{columns.map(column => <th key={column} scope="col" style={CELL}>{column}</th>)}</tr></thead>
     <tbody>{rows.length === 0
       ? <tr><td style={CELL} colSpan={Math.max(1, columns.length)}>No rows yet</td></tr>
-      : rows.map((row, index) => <tr key={index}>{columns.map(column => <td key={column} style={CELL}>{String(row[column])}</td>)}</tr>)}</tbody>
+      : rows.map((row, index) => <tr key={index} data-current={isCurrent(row, index) ? 'yes' : undefined}
+        style={{ background: isCurrent(row, index) ? HIGHLIGHT : undefined, fontWeight: isCurrent(row, index) ? 600 : undefined }}>
+        {columns.map(column => <td key={column} style={CELL}>{String(row[column])}</td>)}
+      </tr>)}</tbody>
   </table>
 }
 
@@ -31,11 +42,24 @@ const definition = {
 }
 
 export default function CountriesToInvest() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <p>{step.message}</p>
-    <TableView caption="Current rows" columns={step.columns} rows={step.rows} />
-  </>} renderReasoning={() => <>
-    <p>Knowledge-derived teaching version with invented sample tables.</p>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
+    const focus = step.focus
+    const isCurrent = (row, index) => {
+      if (step.phase === 'resident') return row.id === focus
+      if (step.phase === 'participate') return focus > 0 && index >= step.rows.length - focus
+      if (step.phase === 'average') return row.country === focus
+      return false
+    }
+    return <>
+      <section aria-label="SQL stage">
+        <h3>Stage: {phases.find(p => p.id === step.phase)?.label}</h3>
+        <p>{STAGE[step.phase]}</p>
+      </section>
+      <p>{step.message}</p>
+      <TableView caption="Current rows" columns={step.columns} rows={step.rows} isCurrent={isCurrent} />
+    </>
+  }} renderReasoning={() => <>
     <p>A call adds its duration once for each resident on it, so a call between two residents of one country counts twice for that country. The overall average is taken over all calls, and the comparison is made without rounding.</p>
+    <p>Each stage is a table: residents, then the call sides, then one average per country, then the filtered and sorted list.</p>
   </>} />
 }

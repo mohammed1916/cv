@@ -22,6 +22,12 @@ export default function MaxSumThreeSubarrays() {
     const windows = step.starts ?? step.best ?? []
     const role = i => {
       const inWindow = windows.some(s => i >= s && i < s + run.input.k)
+      if (step.phase === 'middle' && step.starts) {
+        const [a, j, c] = step.starts
+        if (i >= a && i < a + run.input.k && i === a) return 'left window'
+        if (i >= j && i < j + run.input.k && i === j) return 'middle window'
+        if (i >= c && i < c + run.input.k && i === c) return 'right window'
+      }
       return inWindow ? 'in-window' : ''
     }
     return <>

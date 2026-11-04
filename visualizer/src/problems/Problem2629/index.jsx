@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code } from './algorithm'
+import ComposeView from './ComposeView'
 
 const definition = {
   number: '2629',
@@ -20,11 +21,7 @@ const definition = {
 
 export default function FunctionComposition() {
   return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ step }) => <section aria-label="Visual state">
-      <h3>{step.view.title}</h3>
-      <ol>{step.view.rows.map((row, index) => <li key={index} aria-current={index === step.view.focus ? 'step' : undefined}>{row}</li>)}</ol>
-      {step.view.summary && <output>{step.view.summary}</output>}
-    </section>}
+    renderVisual={({ step }) => <ComposeView view={step.view} />}
     renderReasoning={() => <>
       <p>The composed function is f(g(h(x))): the rightmost function sees the input first and each function feeds its result to the one on its left.</p>
       <p>With no functions the composition is the identity, so the input comes straight back.</p>

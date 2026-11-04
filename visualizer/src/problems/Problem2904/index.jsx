@@ -36,8 +36,8 @@ export default function Problem2904Visualizer() {
             label="s"
             length={run.input.s.length}
             valueAt={(index) => run.input.s[index]}
-            active={step.right ?? -1}
-            roleAt={(index) => (step.right !== null && step.left !== null && index >= step.left && index <= step.right ? "window" : "")}
+            active={-1}
+            roleAt={(index) => (index === step.left && index === step.right ? "l and r" : index === step.left ? "l" : index === step.right ? "r" : step.right !== null && step.left !== null && index > step.left && index < step.right ? "window" : "")}
           />
           <output aria-label="Window state">
             {`window ${step.left ?? "-"}..${step.right ?? "-"}, ones ${step.ones}, best "${step.best}"`}

@@ -67,6 +67,7 @@ export function buildTrace(input) {
     const products = distinct.filter(row => row.sell_date === date).map(row => row.product).sort(compare)
     grouped.push({ sell_date: date, num_sold: products.length, products: products.join(',') })
     add('group', 'COUNT(*)', "agg(num_sold='count'", `${date}: ${products.length} distinct product${products.length === 1 ? '' : 's'}.`, grouped)
+    frames[frames.length - 1].date = date
   }
 
   add('output', 'GROUP BY sell_date', 'reset_index', 'Dates are already in ascending order.', grouped)

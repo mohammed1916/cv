@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -18,14 +19,21 @@ const definition = {
 }
 
 export default function MinimumCostToEqualizeArraysUsingSwaps() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <table aria-label="Value counts">
-      <thead><tr><th scope="col">Value</th><th scope="col">nums1</th><th scope="col">nums2</th><th scope="col">Surplus</th></tr></thead>
-      <tbody>{step.rows.map(row => <tr key={row.value} data-role={row.odd ? 'odd' : ''}>
-        <th scope="row">{row.value}</th><td>{row.a}</td><td>{row.b}</td><td>{row.odd ? 'odd total' : row.surplus}</td></tr>)}</tbody>
-    </table>
-    <output aria-label="Running cost">{`Running cost: ${step.cost}`}</output>
-  </>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const current = step.rows.length ? step.rows[step.rows.length - 1].value : null
+    return <>
+      <IndexedSequence label="nums1 (cells of the value being counted are marked)" length={run.input.nums1.length} active={-1}
+        valueAt={index => run.input.nums1[index]} roleAt={index => run.input.nums1[index] === current ? 'counted' : ''} />
+      <IndexedSequence label="nums2 (cells of the value being counted are marked)" length={run.input.nums2.length} active={-1}
+        valueAt={index => run.input.nums2[index]} roleAt={index => run.input.nums2[index] === current ? 'counted' : ''} />
+      <table aria-label="Value counts">
+        <thead><tr><th scope="col">Value</th><th scope="col">nums1</th><th scope="col">nums2</th><th scope="col">Surplus</th></tr></thead>
+        <tbody>{step.rows.map(row => <tr key={row.value} data-role={row.odd ? 'odd' : ''}>
+          <th scope="row">{row.value}</th><td>{row.a}</td><td>{row.b}</td><td>{row.odd ? 'odd total' : row.surplus}</td></tr>)}</tbody>
+      </table>
+      <output aria-label="Running cost">{`Running cost: ${step.cost}`}</output>
+    </>
+  }} renderReasoning={() => <>
     <p>Swaps inside one array are free, so positions do not matter. Only how many copies of each value sit in each array matters.</p>
     <p>A paid swap moves one copy across, so the answer is the total of the surpluses that must cross, provided every value has an even total.</p>
   </>} />

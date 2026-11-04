@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
 import PistonTrackView from "./PistonTrackView";
+import TotalsStripView from "./TotalsStripView";
 import { code, python, parseInput, buildTrace } from "./algorithm.js";
 
 const definition = {
@@ -28,7 +29,10 @@ export default function MaximumTotalAreaOccupiedByPistons() {
   return (
     <AlgorithmWorkspace
       definition={definition}
-      renderVisual={({ run, step }) => <PistonTrackView run={run} step={step} />}
+      renderVisual={({ run, step }) => <>
+        <PistonTrackView run={run} step={step} />
+        <TotalsStripView step={step} />
+      </>}
       renderReasoning={({ run, step }) => (
         <p>
           {step.message} {run ? `Largest total: ${run.result}.` : ""}

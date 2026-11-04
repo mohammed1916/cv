@@ -17,12 +17,28 @@ const definition = {
   ],
 }
 
+// The penalty grid with the cell being expanded marked; each cell shows its entry cost.
+function PenaltyGrid({ run, current }) {
+  return <table aria-label="Penalty grid">
+    <tbody>{run.input.penalty.map((row, i) => <tr key={i}>{row.map((v, j) => {
+      const isCurrent = current && current.i === i && current.j === j
+      return <td key={j} data-active={isCurrent ? 'true' : undefined} style={{ textAlign: 'center', padding: 8, minWidth: 90, border: '1px solid var(--text-muted)', background: isCurrent ? 'var(--primary)' : 'var(--surface2)', color: isCurrent ? 'var(--surface)' : 'var(--text)' }}>
+        <strong>{v}</strong><small> · entry {(i + 1) * (j + 1)}</small>
+      </td>
+    })}</tr>)}</tbody>
+  </table>
+}
+
 export default function MinimumCostAlternatingPath() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <table aria-label="Penalty grid">
-    <tbody>{run.input.penalty.map((row, i) => <tr key={i}>{row.map((v, j) => <td key={j}
-      data-active={i === step.i && j === step.j ? 'true' : undefined}>{`${v} (entry ${(i + 1) * (j + 1)})`}</td>)}</tr>)}</tbody>
-  </table>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <PenaltyGrid run={run} current={step.phase === 'done' || step.phase === 'settle' || step.phase === 'start' ? step : null} />
+    {step.settledList && <section aria-label="Settled states">
+      <h3>Settled states, cheapest first</h3>
+      <ol>{step.settledList.map((s, k) => <li key={k}>cell ({s.i}, {s.j}), next action {s.parity}: cost {s.cost}</li>)}</ol>
+    </section>}
+    <output aria-label="Current state">{step.message}</output>
+  </>} renderReasoning={() => <>
     <p>Each move alternates between the right and down directions on odd actions and the left and up directions on even ones.</p>
-    <p>Dijkstra runs over the pair of cell and next-action parity, so a wrong-way move or a wait is just another edge with a cost.</p>
+    <p>Dijkstra runs over the pair of cell and next-action parity, so a wrong-way move or a wait is just another edge with a cost. The settled list shows states in the order they become final.</p>
   </>} />
 }

@@ -22,8 +22,9 @@ export function buildTrace({ calls }) {
   const frames = []
   const cache = new Map()
   const values = []
+  const outcomes = []
   let underlying = 0
-  const view = (focus) => ({ title: 'Calls', rows: calls.map((args, index) => `call ${index + 1}: fn(${args.join(', ')})`), focus, summary: `underlying calls: ${underlying}` })
+  const view = (focus) => ({ title: 'Calls', rows: calls.map((args, index) => `call ${index + 1}: fn(${args.join(', ')})`), calls: calls.map(args => args.slice()), outcomes: outcomes.slice(), focus, entries: [...cache.entries()].map(([key, value]) => ({ key, value })), underlying, summary: `underlying calls: ${underlying}` })
   step(frames, 'start', 'make a cache', 'An empty cache is ready.', view(-1))
   for (let i = 0; i < calls.length; i++) {
     const args = calls[i]
@@ -31,12 +32,14 @@ export function buildTrace({ calls }) {
     step(frames, 'key', 'build the key', `Key for call ${i + 1} is ${key}.`, view(i))
     if (cache.has(key)) {
       values.push(cache.get(key))
+      outcomes.push('hit')
       step(frames, 'hit', 'if the key is in the cache', `Hit: reuse ${cache.get(key)} without calling fn.`, view(i))
     } else {
       const value = args.reduce((sum, n) => sum + n, 0)
       underlying += 1
       cache.set(key, value)
       values.push(value)
+      outcomes.push('miss')
       step(frames, 'miss', 'otherwise call fn', `Miss: fn runs and stores ${value}.`, view(i))
     }
     step(frames, 'return', 'return the value', `Call ${i + 1} answers ${values[i]}.`, view(i))

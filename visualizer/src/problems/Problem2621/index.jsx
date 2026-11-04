@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code } from './algorithm'
+import TimelineView from './TimelineView'
 
 const definition = {
   number: '2621',
@@ -21,11 +22,7 @@ const definition = {
 
 export default function Sleep() {
   return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ step }) => <section aria-label="Visual state">
-      <h3>{step.view.title}</h3>
-      <ol>{step.view.rows.map((row, index) => <li key={index} aria-current={index === step.view.focus ? 'step' : undefined}>{row}</li>)}</ol>
-      {step.view.summary && <output>{step.view.summary}</output>}
-    </section>}
+    renderVisual={({ step }) => <TimelineView view={step.view} />}
     renderReasoning={() => <>
       <p>A sleep is a timer that resolves its promise when its delay has passed. Several timers started together finish in delay order.</p>
       <p>Equal delays resolve in the order they were started, which is what the tie rule records.</p>

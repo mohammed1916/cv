@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import { Sequence, Vars } from './SeqKit'
 
 const definition = {
   phases, parse: parseInput, build: buildTrace, code, python,
@@ -13,24 +14,24 @@ const definition = {
   ],
 }
 
+// Terms T0..T(last) so the row shows every term the window has passed.
+function termsUpTo(last) {
+  const terms = [0, 1, 1]
+  for (let i = 3; i <= last; i++) terms.push(terms[i - 1] + terms[i - 2] + terms[i - 3])
+  return terms.slice(0, Math.max(last + 1, 1))
+}
+
 export default function NthTribonacci() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
-    const { window, index } = step.snapshot
-    const labels = ['T(i-3)', 'T(i-2)', 'T(i-1)']
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const { window, index, n } = step.snapshot
+    const last = Math.max(index, 0)
+    const terms = termsUpTo(Math.max(last, n))
+    const marks = {}
+    for (let i = Math.max(0, last - 2); i <= last && i < terms.length; i++) marks[i] = 'window'
     return <>
-      <div role="img" aria-label="Sliding window of three terms" style={{ display: 'flex', gap: 10 }}>
-        {window.map((value, i) => <div key={i} data-term={i} style={{
-          width: 90, padding: 8, textAlign: 'center', fontFamily: 'monospace',
-          border: `${i === 2 ? 2 : 1}px solid ${i === 2 ? 'var(--text)' : 'var(--border)'}`,
-        }}>
-          <div style={{ fontSize: '.75rem', color: 'var(--text-dim)' }}>{labels[i]}</div>
-          <div style={{ fontSize: '1.2rem' }}>{value}</div>
-        </div>)}
-      </div>
-      <output aria-label="Current index">{`Index ${index} of ${step.snapshot.n}`}</output>
+      <Sequence label={`Terms T0 to T${Math.min(n, last)} (window = last three)`} values={terms.slice(0, last + 1)} pointers={{ 'T(i)': last }} marks={marks} />
+      <Vars vars={{ 'window': window.join(', '), 'i (current term)': index, 'target n': n }} />
+      <output aria-label="Result">{step.phase === 'done' ? `Result: ${run.result}` : step.message}</output>
     </>
-  }} renderReasoning={({ step }) => <>
-    <p><strong>Three terms are enough:</strong> each new term depends only on the previous three, so a window of three is all the state needed.</p>
-    <p><strong>Slide, do not store:</strong> each step drops the oldest term and appends the new sum.</p>
-  </>} />
+  }} renderReasoning={() => <p>Each term is the sum of the previous three, so a window of three terms slides forward and never needs the whole history.</p>} />
 }

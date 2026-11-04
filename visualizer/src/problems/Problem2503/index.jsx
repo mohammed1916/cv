@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import RegionView from './RegionView'
 
 const definition = {
   phases: [
@@ -14,26 +15,13 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-number-of-points-from-grid-queries/',
   complexity: 'O(mn log(mn) + q log q) time, since each cell enters the heap once and queries are sorted. The visualization caps the grid at 4 by 4.',
   examples: [
-    { label: 'Example 1', input: '{"grid":[[1,2,3],[2,5,7],[3,5,1]],"queries":[5,6,2]}' },
-    { label: 'Example 2', input: '{"grid":[[5,2,1],[1,1,2]],"queries":[3]}' },
+    { label: 'Three queries', input: '{"grid":[[2,4,6],[3,8,1],[5,2,9]],"queries":[4,7,3]}' },
+    { label: 'Blocked start', input: '{"grid":[[5,2,1],[1,1,2]],"queries":[3]}' },
   ],
 }
 
 export default function GridQueries() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
-    const grid = run.input.grid
-    return <>
-      <table aria-label="Grid of values">
-        <tbody>{grid.map((row, r) => <tr key={r}>{row.map((v, c) => {
-          const key = `${r},${c}`
-          const done = step.visited.includes(key)
-          return <td key={c} data-visited={done ? 'yes' : undefined} aria-label={`cell ${r},${c} value ${v}${done ? ', collected' : ''}`}>{v}</td>
-        })}</tr>)}</tbody>
-      </table>
-      <output aria-label="Points">{`Points so far: ${step.points}${step.query === null ? '' : `, query ${step.query}`}`}</output>
-      <p>{step.message}</p>
-    </>
-  }} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <RegionView grid={run.input.grid} step={step} />} renderReasoning={() => <>
     <p>For a query q, the cells that can be collected form the region reachable from the top-left cell through cells below q.</p>
     <p>Queries are processed in increasing order, so the region only grows, and a min heap of frontier cells yields each cell as soon as its value is below the current query.</p>
   </>} />

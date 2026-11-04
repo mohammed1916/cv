@@ -29,12 +29,12 @@ export default function TrimmedMeanVisualizer() {
           const kept = snap.kept && snap.sorted && index >= snap.k && index < n - snap.k
           return <div key={index} data-index={index} style={{
             minWidth: 36, padding: '4px 6px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
-            border: '1px solid var(--border)', color: '#1c1917',
-            background: dropped ? '#fecaca' : kept ? '#bbf7d0' : 'transparent', opacity: dropped ? 0.6 : 1,
+            border: '1px solid var(--border)', color: 'var(--text)',
+            background: dropped ? 'color-mix(in srgb, var(--error) 25%, transparent)' : kept ? 'color-mix(in srgb, var(--success) 28%, transparent)' : 'transparent', opacity: dropped ? 0.6 : 1,
           }}>{value}</div>
         })}
       </div>
-      <p>{`Removed ${lowCount} from the bottom and ${highCount} from the top (${removed.size} values total). Five percent of ${n} is ${snap.k}.`}</p>
+      <p style={{ color: 'var(--text)' }}>{`Red values are dropped (${lowCount} from the bottom, ${highCount} from the top). Green values are kept. Removed ${lowCount} from the bottom and ${highCount} from the top (${removed.size} values total). Five percent of ${n} is ${snap.k}.`}</p>
       {snap.kept && <output aria-label="Running total">{`Running total ${snap.total} over ${snap.kept.length} kept values`}</output>}
     </>
   }} renderReasoning={({ step }) => <>

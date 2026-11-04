@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code } from './algorithm'
+import DebounceView from './DebounceView'
 
 const definition = {
   number: '2627',
@@ -21,11 +22,7 @@ const definition = {
 
 export default function Debounce() {
   return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ step }) => <section aria-label="Visual state">
-      <h3>{step.view.title}</h3>
-      <ol>{step.view.rows.map((row, index) => <li key={index} aria-current={index === step.view.focus ? 'step' : undefined}>{row}</li>)}</ol>
-      {step.view.summary && <output>{step.view.summary}</output>}
-    </section>}
+    renderVisual={({ step }) => <DebounceView view={step.view} />}
     renderReasoning={() => <>
       <p>Each call cancels the pending run and starts a new wait. Only a call followed by a quiet gap of at least the wait time actually runs.</p>
     </>} />

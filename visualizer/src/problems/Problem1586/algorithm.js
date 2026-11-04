@@ -13,27 +13,27 @@ export function buildTrace({ values, ops }) {
   let cursor = -1
   const answers = []
   const state = () => [`cursor ${cursor < 0 ? 'before the first value' : `on ${values[cursor]}`}`, `in-order: ${values.join(', ')}`]
-  const frames = [{ phase: 'start', pythonLine: PL('cursor = -1'), activeLine: L('start with the cursor before'), state: state(), message: 'The cursor starts before the first value.' }]
+  const frames = [{ phase: 'start', pythonLine: PL('cursor = -1'), activeLine: L('start with the cursor before'), state: state(), cursor, message: 'The cursor starts before the first value.' }]
   for (const op of ops) {
     if (op === 'next') {
       const moved = cursor + 1 < values.length
       if (moved) cursor++
       answers.push(moved ? values[cursor] : null)
-      frames.push({ phase: 'next', pythonLine: moved ? PL('cursor += 1') : PL('answers.append(None)'), activeLine: L('if next then'), state: state(), message: moved ? `next moves forward to ${values[cursor]}.` : 'next has nothing ahead, so it returns null.' })
+      frames.push({ phase: 'next', pythonLine: moved ? PL('cursor += 1') : PL('answers.append(None)'), activeLine: L('if next then'), state: state(), cursor, message: moved ? `next moves forward to ${values[cursor]}.` : 'next has nothing ahead, so it returns null.' })
     } else if (op === 'prev') {
       const moved = cursor - 1 >= 0
       if (moved) cursor--
       answers.push(moved ? values[cursor] : null)
-      frames.push({ phase: 'prev', pythonLine: moved ? PL('cursor -= 1') : PL('answers.append(None)'), activeLine: L('if prev then'), state: state(), message: moved ? `prev moves back to ${values[cursor]}.` : 'prev has nothing behind, so it returns null.' })
+      frames.push({ phase: 'prev', pythonLine: moved ? PL('cursor -= 1') : PL('answers.append(None)'), activeLine: L('if prev then'), state: state(), cursor, message: moved ? `prev moves back to ${values[cursor]}.` : 'prev has nothing behind, so it returns null.' })
     } else if (op === 'hasNext') {
       answers.push(cursor + 1 < values.length)
-      frames.push({ phase: 'query', pythonLine: PL('answers.append(cursor + 1 < len'), activeLine: L('if hasNext or hasPrevious'), state: state(), message: `hasNext is ${cursor + 1 < values.length}.` })
+      frames.push({ phase: 'query', pythonLine: PL('answers.append(cursor + 1 < len'), activeLine: L('if hasNext or hasPrevious'), state: state(), cursor, message: `hasNext is ${cursor + 1 < values.length}.` })
     } else {
       answers.push(cursor - 1 >= 0)
-      frames.push({ phase: 'query', pythonLine: PL('answers.append(cursor - 1 >= 0)'), activeLine: L('if hasNext or hasPrevious'), state: state(), message: `hasPrevious is ${cursor - 1 >= 0}.` })
+      frames.push({ phase: 'query', pythonLine: PL('answers.append(cursor - 1 >= 0)'), activeLine: L('if hasNext or hasPrevious'), state: state(), cursor, message: `hasPrevious is ${cursor - 1 >= 0}.` })
     }
   }
-  frames.push({ phase: 'done', pythonLine: PL('return answers'), activeLine: L('return the answers'), state: state(), message: 'All calls are finished.' })
+  frames.push({ phase: 'done', pythonLine: PL('return answers'), activeLine: L('return the answers'), state: state(), cursor, message: 'All calls are finished.' })
   return { input: { values, ops }, result: answers, frames }
 }
 

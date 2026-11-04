@@ -9,7 +9,7 @@ export const phases = [
 export const inputLabel = 'Object with arr (integers) and difference (JSON)'
 export const complexity = 'O(n) expected time with a hash map, where n is the array length. The visualizer caps arr at 12 values from -10 to 10.'
 export const examples = [
-  { label: 'Step of two', input: '{"arr":[7,1,5,3,9,11,13,4],"difference":2}' },
+  { label: 'Step of two', input: '{"arr":[7,1,5,3,9,-1,4,-2],"difference":2}' },
   { label: 'Repeated values', input: '{"arr":[2,2,2,5],"difference":0}' },
   { label: 'No predecessor', input: '{"arr":[1,4,9],"difference":2}' },
 ]

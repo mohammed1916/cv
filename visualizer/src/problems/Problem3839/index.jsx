@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -19,6 +20,9 @@ const definition = {
 
 export default function NumberOfPrefixConnectedGroups() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="Words in input order" length={run.input.words.length} active={step.at}
+      valueAt={index => run.input.words[index]}
+      roleAt={index => run.input.words[index].length < run.input.k ? 'too short' : run.input.words[index].slice(0, run.input.k) === step.key ? `prefix ${step.key}` : ''} />
     <table aria-label="Prefix buckets">
       <thead><tr><th>prefix of length {run.input.k}</th><th>words</th></tr></thead>
       <tbody>{step.buckets.map(([key, count]) => <tr key={key} data-current={step.key === key ? 'yes' : undefined}>

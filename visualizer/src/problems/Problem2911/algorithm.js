@@ -82,17 +82,17 @@ export function buildTrace({ s, k }) {
   emit('setup', 3, 20, 'dp[0][0] = 0; every other entry is infinity', 0, 0)
   for (let p = 1; p <= k; p++) {
     for (let end = p; end <= n; end++) {
-      emit('row', 5, 22, `parts ${p}, end ${end}`, p, end)
+      emit('row', 5, 22, `parts ${p}, end ${end}`, p, end, { start: null, bestD: 0 })
       for (let start = p - 1; start < end; start++) {
         if (dp[p - 1][start] === INF) {
           emit('skip', 7, 24, `dp[${p - 1}][${start}] is infinity, skip`, p, end)
           continue
         }
         const { best, bestD } = semiCost(s.slice(start, end))
-        emit('cost', 10, 18, `cost("${s.slice(start, end)}") = ${best === INF ? 'infinity' : best}${bestD ? ` with d = ${bestD}` : ''}`, p, end)
+        emit('cost', 10, 18, `cost("${s.slice(start, end)}") = ${best === INF ? 'infinity' : best}${bestD ? ` with d = ${bestD}` : ''}`, p, end, { start, bestD })
         const cand = dp[p - 1][start] + best
         if (cand < dp[p][end]) dp[p][end] = cand
-        emit('update', 8, 26, `candidate from start ${start} is ${cand === INF ? 'infinity' : cand}`, p, end)
+        emit('update', 8, 26, `candidate from start ${start} is ${cand === INF ? 'infinity' : cand}`, p, end, { start, bestD })
       }
     }
   }

@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import DPDependencyView from '../../components/shared/DPDependencyView'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -20,12 +21,30 @@ const definition = {
 }
 
 export default function CoinPath() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="Cheapest total from each index" length={run.coins.length} active={step.index ?? -1}
-      valueAt={i => (step.cost[i] === Infinity ? '∞' : step.cost[i])}
-      roleAt={i => (step.path.includes(i) ? 'read' : '')} />
-    <output aria-label="Path">{step.path.length ? `Path so far: ${step.path.map(i => i + 1).join(' → ')}` : 'No path yet'}</output>
-  </>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const n = run.coins.length
+    const maxJump = run.input.maxJump
+    const filling = step.index !== null && step.index >= 0 && run.coins[step.index] !== -1 && step.phase === 'fill'
+    // While filling index i, the candidates are the next maxJump indices; the cheapest one is marked chosen.
+    let sources = []
+    if (filling) {
+      const i = step.index
+      const options = []
+      for (let j = i + 1; j < Math.min(n, i + maxJump + 1); j++) if (step.cost[j] !== Infinity) options.push(j)
+      const best = options.length ? Math.min(...options.map(j => step.cost[j])) : null
+      const chosen = options.find(j => step.cost[j] === best)
+      sources = options.map(j => ({ cell: [0, j], chosen: j === chosen }))
+    }
+    return <>
+      <DPDependencyView title="Cheapest cost from each index" shape="linear" values={step.cost}
+        target={filling ? step.index : 0} sources={sources}
+        recurrence="cost[i] = coins[i] + min(cost[i+1 .. i+maxJump])" />
+      <IndexedSequence label="Path cells" length={n} active={step.index ?? -1}
+        valueAt={i => (step.cost[i] === Infinity ? '∞' : step.cost[i])}
+        roleAt={i => (step.path.includes(i) ? 'on path' : '')} />
+      <output aria-label="Path">{step.path.length ? `Path so far: ${step.path.map(i => i + 1).join(' → ')}` : 'No path yet'}</output>
+    </>
+  }} renderReasoning={() => <>
     <p>The cheapest cost from an index depends only on later indices, so one backwards pass computes it for every index in turn.</p>
     <p>Walking forward, several next steps can share the best cost. Taking the earliest one gives the lexicographically smallest path among the cheapest ones.</p>
   </>} />

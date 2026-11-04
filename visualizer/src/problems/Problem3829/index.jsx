@@ -1,4 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import OperationLog from '../../components/shared/OperationLog'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -21,15 +23,19 @@ const definition = {
 }
 
 export default function DesignRideSharingSystem() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <ol aria-label="Operations">{run.input.ops.map((op, i) => <li key={i} data-current={step.at === i ? 'yes' : undefined}>
-      {op.join(', ')}{step.results[i] !== null && step.results[i] !== undefined ? ` → [${step.results[i].join(', ')}]` : ''}</li>)}</ol>
-    <div aria-label="Waiting queues">
-      <p><strong>Riders (front first):</strong> {step.riders.join(', ') || 'none'}</p>
-      <p><strong>Drivers (front first):</strong> {step.drivers.join(', ') || 'none'}</p>
-    </div>
-    <output aria-label="Current operation">{step.message}</output>
-  </>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const ops = run.input.ops.map((op, i) => ({ name: op[0], args: op.slice(1), returned: step.results[i] ?? undefined }))
+    return <>
+      <div className="ride-queues" aria-label="Waiting queues">
+        <IndexedSequence label="Riders waiting (index 0 is the front)" length={step.riders.length} active={-1}
+          valueAt={i => step.riders[i]} roleAt={i => i === 0 ? 'front' : ''} />
+        <IndexedSequence label="Drivers available (index 0 is the front)" length={step.drivers.length} active={-1}
+          valueAt={i => step.drivers[i]} roleAt={i => i === 0 ? 'front' : ''} />
+      </div>
+      <OperationLog title="Operations" ops={ops} current={step.at} through={step.at >= 0 ? step.at : ops.length - 1} />
+      <output aria-label="Current operation">{step.message}</output>
+    </>
+  }} renderReasoning={() => <>
     <p>Both waiting groups are first-in first-out queues, so the earliest driver and earliest rider are always at the front.</p>
     <p>A cancellation only touches the rider queue, and it has no effect once that rider has been matched.</p>
   </>} />

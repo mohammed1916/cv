@@ -12,9 +12,9 @@ const definition = {
   pythonLineMap,
   inputLabel: 'Snail input (e.g. {"arr":[1,2,3,4,5,6],"rowsCount":2,"colsCount":3})',
   url: "https://leetcode.com/problems/snail-traversal/description/",
-  complexity: "O(rowsCount × colsCount) time and output space, one write per array value. The visualization caps the grid at 8 × 8 and the array at 64 values. The draft gives no official bound.",
+  complexity: "O(rowsCount × colsCount) time and output space, one write per array value. The visualization caps the grid at 8 × 8 and the array at 64 values.",
   examples: [
-    { label: "2 by 3 snail fill", input: '{"arr":[1,2,3,4,5,6],"rowsCount":2,"colsCount":3}' },
+    { label: "3 by 2 snail fill", input: '{"arr":[4,5,6,7,8,9],"rowsCount":3,"colsCount":2}' },
     { label: "One row", input: '{"arr":[1,2,3,4],"rowsCount":1,"colsCount":4}' },
     { label: "One column", input: '{"arr":[1,2,3,4],"rowsCount":4,"colsCount":1}' },
     { label: "Size mismatch", input: '{"arr":[1,2,3],"rowsCount":2,"colsCount":2}' },

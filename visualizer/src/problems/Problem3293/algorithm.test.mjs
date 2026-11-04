@@ -9,7 +9,7 @@ const sample = {
     { product_id: 3, category: 'food', price: 333 },
     { product_id: 4, category: 'books', price: 999 },
   ],
-  Discounts: [{ category: 'food', percent: 10 }, { category: 'toys', percent: 15 }],
+  Discounts: [{ category: 'food', discount: 10 }, { category: 'toys', discount: 15 }],
 }
 
 function checkFrames(trace) {
@@ -25,24 +25,24 @@ function checkFrames(trace) {
   assert.deepEqual(trace.frames.at(-1).rows, trace.result)
 }
 
-test('3293 discounted prices in cents with half-up rounding', () => {
+test('3293 discounted prices keep their exact value', () => {
   const trace = buildTrace(sample)
-  // 1000 at 10% off = 900; 250 at 15% off = 212.5 rounds to 213; 333 at 10% off = 299.7 rounds to 300; 999 with no discount = 999.
+  // 1000 at 10% off = 900; 250 at 15% off = 212.5; 333 at 10% off = 299.7; 999 with no discount = 999.
   assert.deepEqual(trace.result, [
     { product_id: 1, final_price: 900 },
-    { product_id: 2, final_price: 213 },
-    { product_id: 3, final_price: 300 },
+    { product_id: 2, final_price: 212.5 },
+    { product_id: 3, final_price: 299.7 },
     { product_id: 4, final_price: 999 },
   ])
   checkFrames(trace)
 })
 
-test('3293 a half cent rounds up', () => {
-  const trace = buildTrace({ Products: [{ product_id: 8, category: 'toys', price: 10 }], Discounts: [{ category: 'toys', percent: 25 }] })
-  assert.deepEqual(trace.result, [{ product_id: 8, final_price: 8 }])
+test('3293 a half unit stays exact', () => {
+  const trace = buildTrace({ Products: [{ product_id: 8, category: 'toys', price: 10 }], Discounts: [{ category: 'toys', discount: 25 }] })
+  assert.deepEqual(trace.result, [{ product_id: 8, final_price: 7.5 }])
   checkFrames(trace)
 })
 
-test('3293 rejects a percent above 100', () => {
-  assert.throws(() => parseInput('{"Products":[],"Discounts":[{"category":"x","percent":101}]}'))
+test('3293 rejects a discount above 100', () => {
+  assert.throws(() => parseInput('{"Products":[],"Discounts":[{"category":"x","discount":101}]}'))
 })

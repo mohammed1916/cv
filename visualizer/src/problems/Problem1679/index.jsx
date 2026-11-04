@@ -15,24 +15,38 @@ const definition = {
   ],
 }
 
+const cell = (state) => ({
+  minWidth: 52, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
+  borderRadius: 8, border: `2px solid ${state === 'current' ? 'var(--primary)' : state === 'used' ? 'var(--border)' : 'transparent'}`,
+  background: state === 'current' ? 'var(--primary)' : state === 'used' ? 'var(--surface2)' : 'var(--surface)',
+  color: state === 'current' ? 'var(--on-primary, #fff)' : 'var(--text)',
+})
+
 export default function MaxKSumPairs() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
-    const { index, value, need, pairs, counts } = step.snapshot
+    const { index, value, need, pairs, counts, outcome } = step.snapshot
+    const k = run.input.k
     return <>
-      <div role="img" aria-label="Numbers in order" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        {run.input.nums.map((v, i) => <div key={i} data-index={i} style={{
-          minWidth: 48, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
-          border: `${i === index ? 2 : 1}px solid ${i === index ? 'var(--text)' : 'var(--border)'}`,
-          background: i < (index ?? -1) || (index === null && step.phase === 'done') ? 'var(--surface2)' : 'transparent',
-        }}><div>{v}</div><small>{i}</small></div>)}
+      <p style={{ margin: '0 0 6px' }}>Target sum <strong>{k}</strong>. Each value needs a partner equal to {k} minus itself.</p>
+      <div role="img" aria-label="Numbers in order" style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 12 }}>
+        {run.input.nums.map((v, i) => {
+          const state = i === index ? 'current' : (index !== null && i < index) || (index === null && step.phase === 'done') ? 'used' : 'ahead'
+          return <div key={i} data-index={i} style={cell(state)}>
+            <div>{v}</div><small>{i}</small>
+            {i === index && <div style={{ fontSize: 11 }}>{outcome === 'paired' ? 'paired' : outcome === 'waiting' ? 'waits' : 'now'}</div>}
+          </div>
+        })}
       </div>
-      <p>{need === null ? `Target sum is ${run.input.k}.` : `Current value ${value} needs a partner of ${need}.`}</p>
-      <table aria-label="Waiting numbers" style={{ fontFamily: 'monospace', borderCollapse: 'collapse' }}>
-        <thead><tr><th>waiting value</th><th>count</th></tr></thead>
-        <tbody>{counts.length === 0 ? <tr><td colSpan={2}>nothing waiting</td></tr>
-          : counts.map(entry => <tr key={entry.value}><td>{entry.value}</td><td>{entry.count}</td></tr>)}</tbody>
-      </table>
-      <output aria-label="Operations so far">Operations: {pairs}</output>
+      <p>{need === null ? 'Scan the numbers from left to right.' : `Current value ${value} looks for a waiting ${need}.`}</p>
+      <div aria-label="Waiting pool" style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
+        <span>Waiting:</span>
+        {counts.length === 0 && <span style={{ color: 'var(--text-muted, var(--text))' }}>nothing waiting</span>}
+        {counts.map(entry => <span key={entry.value} style={{
+          padding: '4px 10px', borderRadius: 999, border: '1px solid var(--border)', background: entry.value === need ? 'var(--primary)' : 'var(--surface2)',
+          color: entry.value === need ? 'var(--on-primary, #fff)' : 'var(--text)', fontFamily: 'monospace',
+        }}>{entry.value} × {entry.count}</span>)}
+      </div>
+      <output aria-label="Operations so far" style={{ display: 'block', marginTop: 12 }}>Operations: <strong>{pairs}</strong></output>
     </>
   }} renderReasoning={() => <>
     <p><strong>Pair on arrival:</strong> a value can only pair with a partner that is already waiting, so the scan decides each number once.</p>

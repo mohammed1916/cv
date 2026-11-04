@@ -66,7 +66,7 @@ export function buildTrace(input) {
     const message = row.drink !== null
       ? `Row ${row.id} has ${row.drink}; it keeps its own drink.`
       : `Row ${row.id} is NULL; it takes ${carry} from the nearest earlier row.`
-    frames.push({ phase: 'carry', activeLine: SQL(row.drink !== null ? 'COALESCE' : 'WHERE p.id'), pythonLine: PY('ffill'), message, columns, rows: snapshot(filled) })
+    frames.push({ phase: 'carry', activeLine: SQL(row.drink !== null ? 'COALESCE' : 'WHERE p.id'), pythonLine: PY('ffill'), message, columns, rows: snapshot(filled), activeId: row.id, carry })
   })
 
   const result = rows.map((row, i) => ({ id: row.id, drink: filled[i] }))

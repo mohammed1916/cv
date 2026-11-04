@@ -1,0 +1,4 @@
+.seq-vars { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; }
+.seq-vars div { min-width: 96px; padding: 6px 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface2); }
+.seq-vars dt { color: var(--text-muted); font-size: 12px; }
+.seq-vars dd { margin: 0; color: var(--text); font-family: var(--mono, monospace); font-weight: 600; }

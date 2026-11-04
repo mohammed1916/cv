@@ -26,11 +26,26 @@ const definition = {
   ],
 };
 
+// Per-index working columns; a dash marks a value the algorithm has not computed yet.
+function BoundsTable({ values, table }) {
+  const cell = { padding: "4px 8px", borderBottom: "1px solid var(--surface2)", color: "var(--text)" }
+  const show = v => (v === null || v === undefined ? "-" : String(v))
+  const headers = ["index", "value", "prime score", "left bound", "right bound", "subarrays won"]
+  return <table aria-label="Bounds for each index" style={{ borderCollapse: "collapse", width: "100%" }}>
+    <thead><tr>{headers.map(h => <th key={h} scope="col" style={{ ...cell, textAlign: "left", borderBottom: "2px solid var(--border, currentColor)" }}>{h}</th>)}</tr></thead>
+    <tbody>{values.map((v, i) => <tr key={i}>
+      <td style={cell}>{i}</td><td style={cell}>{v}</td>
+      <td style={cell}>{show(table.score?.[i])}</td><td style={cell}>{show(table.left[i])}</td>
+      <td style={cell}>{show(table.right[i] === values.length ? "n" : table.right[i])}</td><td style={cell}>{show(table.count[i])}</td>
+    </tr>)}</tbody>
+  </table>
+}
+
 export default function Problem2818Visualizer() {
   return (
     <AlgorithmWorkspace
       definition={definition}
-      renderVisual={({ step }) => (
+      renderVisual={({ step }) => <>
         <IndexedSequence
           label="nums"
           length={step.values.length}
@@ -38,7 +53,8 @@ export default function Problem2818Visualizer() {
           active={step.active ?? -1}
           roleAt={i => step.roles?.[i] ?? ""}
         />
-      )}
+        <BoundsTable values={step.values} table={step.table} />
+      </>}
       renderReasoning={({ step }) => <p>{step.detail}</p>}
     />
   );

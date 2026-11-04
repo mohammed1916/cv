@@ -14,18 +14,22 @@ const definition = {
   ],
 }
 
-export default function HtmlEntityParser() {
+const cell = { minWidth: 22, padding: '2px 4px', textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', borderRadius: 4, color: 'var(--text)' }
+
+// The original text, with the characters the current step reads outlined; the output is built beside it.
+export default function AlgorithmPage() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
     const { text, span, emitted } = step.snapshot
+    const [from, to] = span || [-1, -1]
     return <>
-      <p aria-label="Original text">
-        {[...text].map((ch, i) => <span key={i} style={{
-          fontFamily: 'monospace', padding: '2px 1px',
-          background: span && i >= span[0] && i < span[1] ? '#cffafe' : undefined,
-          fontWeight: span && i >= span[0] && i < span[1] ? 700 : 400,
-        }}>{ch === ' ' ? ' ' : ch}</span>)}
-      </p>
-      <p><strong>Output so far:</strong> <code>{emitted || '(empty)'}</code></p>
+      <div aria-label="Original text" style={{ display: 'flex', gap: 2, flexWrap: 'wrap', marginBottom: 10 }}>
+        {[...text].map((ch, i) => {
+          const inSpan = span && i >= from && i < to
+          return <span key={i} style={{ ...cell, borderWidth: inSpan ? 2 : 1, borderColor: inSpan ? 'var(--primary)' : 'var(--border)', background: inSpan ? 'var(--surface2)' : 'transparent', fontWeight: inSpan ? 700 : 400 }}>{ch === ' ' ? ' ' : ch}</span>
+        })}
+      </div>
+      <p style={{ color: 'var(--text)' }}>{span ? `Reading positions ${from} to ${to - 1}.` : 'Nothing read yet.'}</p>
+      <p style={{ color: 'var(--text)' }}><strong>Output so far:</strong> <code>{emitted || '(empty)'}</code></p>
     </>
   }} renderReasoning={() => <>
     <p><strong>One pass over the original text.</strong> Supported entities are recognised only where they appear in the input.</p>

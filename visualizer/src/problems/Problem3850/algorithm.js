@@ -7,6 +7,7 @@ export const code = [
   'return the count stored at k',
 ].map((text, index) => ({ line: index + 1, text }))
 const L = key => code.findIndex(c => c.text.includes(key)) + 1
+const PY = key => python.split('\n').findIndex(line => line.includes(key)) + 1
 
 const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b))
 
@@ -23,7 +24,7 @@ export function buildTrace({ nums, k }) {
   let states = new Map([['1/1', { p: 1, q: 1, count: 1 }]])
   const frames = []
   const table = () => [...states.values()].map(({ p, q, count }) => ({ value: q === 1 ? `${p}` : `${p}/${q}`, count }))
-  frames.push({ table: table(), x: null, phase: 'setup', activeLine: L('states starts'), message: 'Only the value 1 is reachable, in one way.' })
+  frames.push({ table: table(), x: null, phase: 'setup', pythonLine: PY('states = {'), activeLine: L('states starts'), message: 'Only the value 1 is reachable, in one way.' })
   nums.forEach((x, index) => {
     const next = new Map()
     const add = (p, q, count) => {
@@ -40,10 +41,10 @@ export function buildTrace({ nums, k }) {
       add(p, q * x, count)
     }
     states = next
-    frames.push({ table: table(), x, index, phase: 'element', activeLine: L('every state also'), message: `After element ${index} (${x}) there are ${states.size} distinct values.` })
+    frames.push({ table: table(), x, index, phase: 'element', pythonLine: PY('for np, nq'), activeLine: L('every state also'), message: `After element ${index} (${x}) there are ${states.size} distinct values.` })
   })
   const answer = states.get(`${k}/1`)?.count ?? 0
-  frames.push({ table: table(), x: null, phase: 'done', activeLine: L('return the count'), message: `Ways to reach ${k}: ${answer}.` })
+  frames.push({ table: table(), x: null, phase: 'done', pythonLine: PY('return states.get'), activeLine: L('return the count'), message: `Ways to reach ${k}: ${answer}.` })
   return { input: { nums, k }, result: answer, frames }
 }
 

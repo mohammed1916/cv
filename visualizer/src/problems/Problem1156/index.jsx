@@ -1,20 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { phases, parseInput, buildTrace, code, python, pythonLineMap } from './algorithm'
-
-function Window({ snapshot }) {
-  const { s, letter, l, r, bad, tot, best } = snapshot
-  return <div>
-    <p>Target letter: <strong>{letter ?? '—'}</strong>{letter ? ` (${tot[letter]} copies in the whole string)` : ''} · differing letters in window: {bad} · best: {best}</p>
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-      {[...s].map((ch, i) => <span key={i} style={{
-        width: 28, textAlign: 'center', border: '1px solid currentColor', borderRadius: 4, padding: '4px 0',
-        background: r >= 0 && i >= l && i <= r ? 'rgba(8,145,178,0.25)' : 'transparent',
-        fontWeight: letter && ch === letter ? 700 : 400,
-      }}>{ch}</span>)}
-    </div>
-    <p>{r >= 0 ? `Window [${l}..${r}] shaded` : 'No window yet'}</p>
-  </div>
-}
+import { Sequence, Vars } from './SeqKit'
 
 const definition = {
   phases,
@@ -33,9 +19,16 @@ const definition = {
 }
 
 export default function RepeatedRunWorkspace() {
-  return <AlgorithmWorkspace
-    definition={definition}
-    renderVisual={({ step }) => <Window snapshot={step.snapshot} />}
-    renderReasoning={({ step }) => <p>{step.message}</p>}
-  />
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const s = step.snapshot
+    const chars = [...s.s]
+    const marks = {}
+    if (s.r >= 0) for (let i = s.l; i <= s.r; i++) marks[i] = 'window'
+    const pointers = s.r >= 0 ? { l: s.l, r: s.r } : {}
+    return <>
+      <Sequence label={`Target letter ${s.letter ?? '-'}; window shows at most one other letter`} values={chars} pointers={pointers} marks={marks} />
+      <Vars vars={{ letter: s.letter, 'l': s.r >= 0 ? s.l : null, 'r': s.r >= 0 ? s.r : null, 'differing letters': s.bad, 'best so far': s.best, copies: s.letter ? s.tot[s.letter] : null }} />
+      <output aria-label="Result">{step.phase === 'done' ? `Result: ${run.result}` : step.message}</output>
+    </>
+  }} renderReasoning={({ step }) => <p>{step.message}</p>} />
 }

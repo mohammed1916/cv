@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
 import RecurrenceGrid from "../../components/shared/RecurrenceGrid";
+import IndexedSequence from "../../components/shared/IndexedSequence";
 import { code, python, pythonLineMap, parseInput, buildTrace } from "./algorithm";
 
 const definition = {
@@ -20,8 +21,8 @@ const definition = {
   url: "https://leetcode.com/problems/find-the-maximum-sequence-value-of-array/",
   complexity: "O(n * k * 32) set work with 5-bit OR values here, for n up to 20 in the visualization (LeetCode allows n up to 400).",
   examples: [
-    { label: "Example 1", input: "{\"nums\": [4, 2, 5, 6, 7], \"k\": 2}" },
-    { label: "Check case", input: "{\"nums\": [2, 6, 7], \"k\": 1}" },
+    { label: "Invented four values", input: "{\"nums\": [3, 9, 12, 5], \"k\": 1}" },
+    { label: "Invented six values", input: "{\"nums\": [1, 8, 2, 4, 16, 3], \"k\": 2}" },
   ],
 };
 
@@ -30,10 +31,16 @@ const cellText = value => Array.isArray(value) ? `{${value.join(", ")}}` : value
 export default function Problem3287() {
   return <AlgorithmWorkspace
     definition={definition}
-    renderVisual={({ run, step }) => <RecurrenceGrid
+    renderVisual={({ run, step }) => <>
+      <IndexedSequence label="nums: first half and second half" length={run.input.nums.length}
+        active={step.phase === "combine" ? step.column : -1}
+        valueAt={index => run.input.nums[index]}
+        roleAt={index => step.phase === "combine" || step.phase === "result" ? (index < step.column ? "first half" : "second half") : step.phase === "prefix" ? (index < step.column ? "prefix" : "") : ""} />
+      <RecurrenceGrid
       rowLabels={run.rowLabels} columnLabels={run.columnLabels}
       row={step.row} column={step.column} label="DP table"
       valueAt={(r, c) => cellText(step.table[r][c])}
-      roleAt={(r, c) => r === step.row && c === step.column ? "current" : step.table[r][c] !== null ? "filled" : ""} />}
+      roleAt={(r, c) => r === step.row && c === step.column ? "current" : step.table[r][c] !== null ? "filled" : ""} />
+    </>}
     renderReasoning={({ step }) => <p>{step.message}</p>} />;
 }

@@ -14,25 +14,36 @@ const definition = {
   ],
 }
 
+const bar = { display: 'grid', gridTemplateColumns: '44px 1fr 56px', gap: 8, alignItems: 'center', color: 'var(--text)', fontFamily: 'monospace', fontSize: 13 }
+
 export default function KidsWithGreatestCandies() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { candies, extraCandies } = run.input
-    const { current, best, flags } = step.snapshot
+    const { current, best, flags = [] } = step.snapshot
+    const max = Math.max(1, ...candies.map(c => c + extraCandies))
+    const pct = v => `${(v / max) * 100}%`
     return <>
-      <div role="img" aria-label="Children with candy counts and flags" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+      <p style={{ color: 'var(--text)' }}>Extra candies: {extraCandies}. Greatest original count: <strong>{best}</strong>. A child is flagged when their count plus extra reaches {best}.</p>
+      <div role="img" aria-label="Candies per child with the extra added" style={{ display: 'grid', gap: 6, marginBottom: 10 }}>
         {candies.map((count, i) => {
-          const flag = flags[i]
-          return <div key={i} data-index={i} style={{
-            minWidth: 72, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
-            border: `${i === current ? 2 : 1}px solid ${i === current ? 'var(--text)' : 'var(--border)'}`,
-            background: flag === undefined ? 'transparent' : flag ? '#bbf7d0' : '#fecaca', color: '#1c1917',
-          }}><div>{count}{current === i && step.snapshot.total !== undefined ? ` + ${extraCandies} = ${step.snapshot.total}` : ''}</div><small>child {i}</small></div>
+          const isCurrent = i === current
+          const flagged = i < flags.length ? flags[i] : null
+          return <div key={i} style={{ ...bar, opacity: current !== null && i > current ? 0.5 : 1 }}>
+            <span>child {i}</span>
+            <div style={{ position: 'relative', height: 16, borderRadius: 4, background: 'var(--surface2)', border: '1px solid var(--border)' }}>
+              <div style={{ width: pct(count), height: '100%', background: 'var(--text)', opacity: 0.35, borderRadius: 4 }} />
+              <div style={{ position: 'absolute', top: -3, bottom: -3, left: pct(count + extraCandies), width: 3, background: isCurrent ? 'var(--primary)' : 'var(--text)' }} />
+              <div style={{ position: 'absolute', top: -6, bottom: -6, left: pct(best), width: 2, background: 'var(--primary)', opacity: 0.6 }} />
+            </div>
+            <span>{count}{flagged === null ? '' : flagged ? ' yes' : ' no'}</span>
+          </div>
         })}
       </div>
-      <p>Greatest original count: <strong>{best}</strong>. Flags so far: {flags.length ? flags.map(f => (f ? 'true' : 'false')).join(', ') : 'none'}</p>
+      <p style={{ color: 'var(--text)' }}>Bars show the original count; the tick is the count after the extra candies. The dashed-style line marks the greatest count {best}.</p>
+      <p style={{ color: 'var(--text)' }}>{step.message}</p>
     </>
-  }} renderReasoning={({ step }) => <>
-    <p><strong>Hypothetical bonus:</strong> only one child receives the extra candies at a time, so every test is independent.</p>
-    <p><strong>Ties count:</strong> reaching the maximum is enough, which is why the comparison is greater than or equal to.</p>
+  }} renderReasoning={() => <>
+    <p><strong>One target:</strong> every child is compared against the same number, the greatest count, so the largest value is found once.</p>
+    <p><strong>Extra is added first:</strong> the test is count plus extra compared with the largest count, not the largest count plus extra.</p>
   </>} />
 }

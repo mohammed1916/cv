@@ -20,7 +20,7 @@ export function parseInput(text) {
 export function buildTrace({ fns, x }) {
   const frames = []
   let value = x
-  const view = (focus) => ({ title: 'Chain (applied right to left)', rows: fns.map(name => name), focus, summary: `value ${value}` })
+  const view = (focus) => ({ title: 'Chain (applied right to left)', rows: fns.map(name => name), fns: fns.slice(), focus, value, summary: `value ${value}` })
   if (fns.length === 0) {
     step(frames, 'start', 'if there are no functions', 'No functions, so x passes through.', view(-1))
     step(frames, 'done', 'return the value', `Result ${x}.`, view(-1))

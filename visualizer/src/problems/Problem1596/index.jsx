@@ -28,9 +28,29 @@ function RowTable({ label, rows }) {
   </section>
 }
 
+function CountBars({ rows }) {
+  if (rows.length === 0 || !('best_count' in rows[0])) return null
+  const max = Math.max(1, ...rows.map(row => row.order_count))
+  return <section aria-label="Orders per customer and product">
+    <h4>Orders per product, against each customer's best</h4>
+    {rows.map(row => {
+      const tied = row.order_count === row.best_count
+      return <div key={`${row.customer_id}-${row.product_id}`} style={{ display: 'grid', gridTemplateColumns: '9rem 1fr 4rem', gap: 8, alignItems: 'center', marginBottom: 4, color: 'var(--text)' }}>
+        <span style={{ fontFamily: 'monospace' }}>customer {row.customer_id} · product {row.product_id}</span>
+        <div style={{ position: 'relative', background: 'var(--surface2)', borderRadius: 4, height: 14 }}>
+          <div style={{ width: `${(row.order_count / max) * 100}%`, height: '100%', borderRadius: 4, background: tied ? 'var(--primary)' : 'var(--text-muted)' }} />
+        </div>
+        <strong>{row.order_count}{tied ? ' (best)' : ''}</strong>
+      </div>
+    })}
+    <p style={{ color: 'var(--text-muted)' }}>Purple bars reach their customer's largest count, so every tie is kept.</p>
+  </section>
+}
+
 export default function Problem1596() {
   return <AlgorithmWorkspace definition={definition}
     renderVisual={({ step }) => <>
+      <CountBars rows={step.rows} />
       <RowTable label="Working rows" rows={step.rows} />
       <RowTable label="Output" rows={step.output} />
     </>}

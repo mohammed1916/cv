@@ -1,41 +1,24 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import { meta } from './meta'
+import { buildTrace, parseInput, code, python, phases, examples, complexity, inputLabel } from './algorithm'
+import { Sequence, Vars } from './SeqKit'
 
 const definition = {
-  number: '1078',
-  phases,
-  parse: parseInput,
-  build: buildTrace,
-  code,
-  python,
-  inputLabel: 'JSON object with text, first and second',
-  url: 'https://leetcode.com/problems/occurrences-after-a-bigram/',
-  complexity: 'O(w) time and O(k) output space for w words and k matches. Every consecutive triple is checked once.',
-  examples: [
-    { label: 'Repeated follower', input: '{"text":"red blue red green red blue red","first":"red","second":"blue"}' },
-    { label: 'Overlapping phrase', input: '{"text":"go go go stop","first":"go","second":"go"}' },
-    { label: 'No match', input: '{"text":"one two three","first":"three","second":"one"}' },
-  ],
+  number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
+  url: `https://leetcode.com/problems/${meta.slug}/`, complexity, examples,
 }
 
 export default function FollowingWords() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
-    const { words, index, window: current, collected } = step.state
-    return <div>
-      <div role="img" aria-label="Words in the text" style={{ display: 'flex', gap: 6, flexWrap: 'wrap', fontFamily: 'monospace' }}>
-        {words.map((word, position) => {
-          const inWindow = index !== null && position >= index && position < index + 3
-          const isFollower = index !== null && position === index + 2 && current.length === 3
-          return <span key={position} data-word={position} style={{
-            padding: '4px 8px', border: `2px solid ${inWindow ? 'var(--accent, #0891b2)' : 'var(--border)'}`,
-            background: isFollower && step.phase === 'collect' ? 'rgba(34,197,94,.2)' : 'transparent',
-          }}>{word}</span>
-        })}
-      </div>
-      <output aria-label="Collected words">{`Collected: [${collected.join(', ')}]`}</output>
-    </div>
-  }} renderReasoning={() => <>
-    <p><strong>Consecutive triples:</strong> each window of three words is checked, so overlapping phrases such as "go go go" are both found.</p>
-    <p><strong>Order:</strong> collected words are appended in text order, keeping repeats.</p>
-  </>} />
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const { words, index, window: current, collected, first, second } = step.state
+    const pointers = index === null ? {} : { i: index, follower: index + 2 }
+    const marks = {}
+    if (index !== null) for (let k = index; k < index + 3 && k < words.length; k++) marks[k] = 'window'
+    if (step.phase === 'collect' && index !== null) marks[index + 2] = 'written'
+    return <>
+      <Sequence label={`Words; looking for "${first} ${second}" followed by a word`} values={words} pointers={pointers} marks={marks} />
+      <Vars vars={{ 'i (window start)': index, 'window': current.length ? current.join(' ') : null, 'collected': collected.length ? collected.join(', ') : '-' }} />
+      <output aria-label="Result">{step.phase === 'done' ? `Result: ${run.result.length ? run.result.join(', ') : 'empty'}` : step.message}</output>
+    </>
+  }} renderReasoning={() => <p>A window of three consecutive words slides through the text. When its first two words are the phrase, the third word is recorded in text order.</p>} />
 }

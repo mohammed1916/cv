@@ -12,7 +12,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-moves-to-move-a-box-to-their-target-location/',
   complexity: 'O(R * C * R * C) states with O(1) work each. The visualization caps the board at 6 by 6.',
   examples: [
-    { label: 'Example 1', input: '["#######","#T....#","#.B...#","#...S.#","#######"]' },
+    { label: 'Example 1', input: '["######","#T...#","#.B..#","#..S.#","######"]' },
     { label: 'One push', input: '["#####","#TB.#","#S..#","#####"]' },
     { label: 'Boxed in', input: '["#####","#T#B#","#S###","#####"]' },
   ],

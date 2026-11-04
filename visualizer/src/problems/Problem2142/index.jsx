@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { meta } from './meta'
 import { buildTrace, parseInput, code, sql, python, phases } from './algorithm'
+import BusStationView from './BusStationView'
 
 const inputLabel = 'Object with Buses and Passengers tables'
 const complexity = 'O(b * p) with the simple join used here; the visualizer caps each table at 12 rows.'
@@ -28,6 +29,7 @@ function Rows({ columns = [], rows = [] }) {
 
 export default function KnowledgeDerivedSqlVisual() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <BusStationView run={run} step={step} />
     <Rows columns={step.columns} rows={step.rows} />
     <output aria-label="Query output">{step.phase === 'done' ? `Output rows: ${run.result.length}` : step.message}</output>
   </>} renderReasoning={() => <p>{reasoning}</p>} />

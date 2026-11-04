@@ -29,8 +29,8 @@ const PY = key => {
   return index + 1
 }
 
-const frame = (phase, sqlKey, pyKey, message, columns, rows) => ({
-  phase, activeLine: SQL(sqlKey), pythonLine: PY(pyKey), message, columns, rows: rows.map(row => ({ ...row })),
+const frame = (phase, sqlKey, pyKey, message, columns, rows, type0 = []) => ({
+  phase, activeLine: SQL(sqlKey), pythonLine: PY(pyKey), message, columns, rows: rows.map(row => ({ ...row })), type0: [...type0],
 })
 
 export const phases = [
@@ -65,7 +65,7 @@ export function buildTrace(input) {
   frames.push(frame('load', 'FROM Orders o', 'def ', 'Read the orders as stored.', ['order_id', 'customer_id', 'order_type'], Orders))
 
   const type0 = [...new Set(Orders.filter(row => row.order_type === 0).map(row => row.customer_id))]
-  frames.push(frame('customers', 'SELECT DISTINCT', 'type0 = ', 'These customers have at least one type-0 order.', ['customer_id'], type0.map(customer_id => ({ customer_id }))))
+  frames.push(frame('customers', 'SELECT DISTINCT', 'type0 = ', 'These customers have at least one type-0 order.', ['customer_id'], type0.map(customer_id => ({ customer_id })), type0))
 
   const sorted = [...Orders].sort((a, b) => a.order_id - b.order_id)
   const checked = []
@@ -74,8 +74,8 @@ export function buildTrace(input) {
     const kept = row.order_type === 0 || (row.order_type === 1 && !type0.includes(row.customer_id))
     checked.push({ order_id: row.order_id, customer_id: row.customer_id, order_type: row.order_type, kept: kept ? 'yes' : 'no' })
     if (kept) result.push({ order_id: row.order_id, customer_id: row.customer_id, order_type: row.order_type })
-    frames.push(frame('check', 'OR (', 'keep =', `Order ${row.order_id} (customer ${row.customer_id}, type ${row.order_type}) is ${kept ? 'kept' : 'dropped'}.`, ['order_id', 'customer_id', 'order_type', 'kept'], checked))
+    frames.push(frame('check', 'OR (', 'keep =', `Order ${row.order_id} (customer ${row.customer_id}, type ${row.order_type}) is ${kept ? 'kept' : 'dropped'}.`, ['order_id', 'customer_id', 'order_type', 'kept'], checked, type0))
   }
-  frames.push(frame('done', 'ORDER BY o.order_id', 'return', `Return ${result.length} kept orders.`, ['order_id', 'customer_id', 'order_type'], result))
+  frames.push(frame('done', 'ORDER BY o.order_id', 'return', `Return ${result.length} kept orders.`, ['order_id', 'customer_id', 'order_type'], result, type0))
   return { input, result, frames }
 }

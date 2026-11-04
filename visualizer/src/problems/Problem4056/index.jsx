@@ -1,4 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IntervalView from '../../components/shared/IntervalView'
+import { intervalView } from '../../components/shared/intervalModel.js'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -17,14 +19,25 @@ const definition = {
 }
 
 export default function IntersectingIntervalPairsI() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <table aria-label="Intervals">
-      <tbody>{run.input.intervals.map(([s, e], i) => <tr key={i} data-active={i === step.i || i === step.j ? 'true' : undefined}>
-        <td>{i}</td><td>{`[${s}, ${e}]`}</td>
-      </tr>)}</tbody>
-    </table>
-    <output aria-label="Count">{`Intersecting pairs so far: ${step.count}`}</output>
-  </>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const { interval } = intervalView({
+      title: 'Intervals on a number line',
+      intervals: run.input.intervals.map(([start, end], k) => ({
+        start, end, label: `#${k}`,
+        role: step.i < 0 ? 'pending' : k === step.i || k === step.j ? (step.hit ? 'kept' : 'rejected') : 'pending',
+      })),
+      note: step.i < 0 ? 'Every pair is checked once.' : `Comparing #${step.i} and #${step.j}: ${step.hit ? 'they share a point.' : 'they do not meet.'}`,
+    })
+    return <>
+      {interval && <IntervalView {...interval} />}
+      <table aria-label="Intervals">
+        <tbody>{run.input.intervals.map(([s, e], i) => <tr key={i} data-active={i === step.i || i === step.j ? 'true' : undefined}>
+          <td>{i}</td><td>{`[${s}, ${e}]`}</td>
+        </tr>)}</tbody>
+      </table>
+      <output aria-label="Count">{`Intersecting pairs so far: ${step.count}`}</output>
+    </>
+  }} renderReasoning={() => <>
     <p>Two closed intervals intersect exactly when the larger start is at most the smaller end.</p>
     <p>Touching at one endpoint counts, so the comparison uses at most.</p>
   </>} />

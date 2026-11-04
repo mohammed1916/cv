@@ -18,12 +18,12 @@ export function parseInput(text) {
 export function buildTrace({ durations }) {
   const frames = []
   const timers = durations.map((ms, index) => ({ index, ms }))
-  step(frames, 'start', 'start one timer', 'Every sleep starts at time 0.', { title: 'Timers', rows: timers.map(t => `timer ${t.index}: ${t.ms} ms`), focus: -1, summary: '' })
+  step(frames, 'start', 'start one timer', 'Every sleep starts at time 0.', { title: 'Timers', rows: timers.map(t => `timer ${t.index}: ${t.ms} ms`), timers, fired: [], focus: -1, summary: '' })
   const order = timers.slice().sort((a, b) => a.ms - b.ms || a.index - b.index)
-  step(frames, 'sort', 'sort the timers', 'Sorted by fire time, ties by start order.', { title: 'Timeline', rows: order.map(t => `${t.ms} ms: timer ${t.index}`), focus: -1, summary: '' })
+  step(frames, 'sort', 'sort the timers', 'Sorted by fire time, ties by start order.', { title: 'Timeline', rows: order.map(t => `${t.ms} ms: timer ${t.index}`), timers, fired: [], focus: -1, summary: '' })
   order.forEach((timer, k) => step(frames, 'fire', 'record the index', `Timer ${timer.index} fires at ${timer.ms} ms.`,
-    { title: 'Timeline', rows: order.map(t => `${t.ms} ms: timer ${t.index}`), focus: k, summary: JSON.stringify(order.slice(0, k + 1).map(t => t.index)) }))
+    { title: 'Timeline', rows: order.map(t => `${t.ms} ms: timer ${t.index}`), timers, fired: order.slice(0, k + 1).map(t => t.index), focus: k, summary: JSON.stringify(order.slice(0, k + 1).map(t => t.index)) }))
   const result = order.map(t => t.index)
-  step(frames, 'done', 'return the recorded order', 'Completion order recorded.', { title: 'Timeline', rows: order.map(t => `${t.ms} ms: timer ${t.index}`), focus: -1, summary: JSON.stringify(result) })
+  step(frames, 'done', 'return the recorded order', 'Completion order recorded.', { title: 'Timeline', rows: order.map(t => `${t.ms} ms: timer ${t.index}`), timers, fired: result.slice(), focus: -1, summary: JSON.stringify(result) })
   return { result, frames }
 }

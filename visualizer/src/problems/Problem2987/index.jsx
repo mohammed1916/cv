@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import SqlStageBoard from './SqlStageBoard'
 import { meta } from './meta'
 import { buildTrace, parseInput, code, sql, python, phases } from './algorithm'
 
@@ -8,6 +9,11 @@ const examples = [{
   label: 'Sample',
   input: '{"Listings":[{"listing_id":1,"city":"Ashford","price":100},{"listing_id":2,"city":"Ashford","price":300},{"listing_id":3,"city":"Brookvale","price":150},{"listing_id":4,"city":"Brookvale","price":160},{"listing_id":5,"city":"Cedar","price":500},{"listing_id":6,"city":"Cedar","price":100},{"listing_id":7,"city":"Cedar","price":600},{"listing_id":8,"city":"Dunmore","price":260}]}',
 }]
+
+const stagesOf = run => run.frames.map(f => ({
+  id: f.phase, clause: code[f.activeLine - 1]?.text.trim() ?? '', label: phases.find(p => p.id === f.phase)?.label ?? f.phase,
+  columns: f.columns, rows: f.rows,
+}))
 
 const definition = {
   number: meta.number,
@@ -27,7 +33,7 @@ function Rows({ columns = [], rows = [] }) {
 
 export default function ExpensiveCitiesVisual() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <Rows columns={step.columns} rows={step.rows} />
+    <SqlStageBoard title="Query stages" stages={stagesOf(run)} active={run.frames.indexOf(step)} />
     <output aria-label="Query output">{step.phase === 'done' ? `Output rows: ${run.result.length}` : step.message}</output>
   </>} renderReasoning={() => <>
     <p>The overall figure is a row-weighted average: every listing counts once, so a city with many listings pulls it harder.</p>

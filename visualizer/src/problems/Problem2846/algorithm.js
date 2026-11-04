@@ -50,23 +50,26 @@ export function buildTrace({ n, edges, queries }) {
       if (depth[w] < 0) { depth[w] = depth[u] + 1; parent[w] = u; parentWeight[w] = weight; order.push(w) }
     }
   }
-  const frames = [{ phase: 'start', activeLine: L('build the tree'), pythonLine: P('depth[0] = 0'), weights: [], cost: null, message: 'Root the tree at node 0 so each query path can be climbed.' }]
+  const tags = Object.fromEntries(Array.from({ length: n }, (_, i) => [i, i === 0 ? 'root' : `w${parentWeight[i]}`]))
+  const graphEdges = edges.map(([u, v]) => [u, v])
+  const frames = [{ phase: 'start', activeLine: L('build the tree'), pythonLine: P('depth[0] = 0'), weights: [], cost: null, tags, edges: graphEdges, pathNodes: [], counts: [], message: 'Root the tree at node 0 so each query path can be climbed.' }]
   const answers = []
   for (const [a0, b0] of queries) {
     let x = a0
     let y = b0
     const weights = []
+    const pathNodes = [a0, b0]
     while (x !== y) {
-      if (depth[x] >= depth[y]) { weights.push(parentWeight[x]); x = parent[x] } else { weights.push(parentWeight[y]); y = parent[y] }
+      if (depth[x] >= depth[y]) { weights.push(parentWeight[x]); x = parent[x]; pathNodes.push(x) } else { weights.push(parentWeight[y]); y = parent[y]; pathNodes.push(y) }
     }
     const counts = new Map()
     for (const w of weights) counts.set(w, (counts.get(w) || 0) + 1)
     const top = Math.max(0, ...counts.values())
     const cost = weights.length - top
     answers.push(cost)
-    frames.push({ phase: 'query', activeLine: L('the path length minus'), pythonLine: P('answers.append(len(weights) - top)'), weights: [...weights], cost, message: `Path ${a0} to ${b0} has ${weights.length} edge(s); keeping the most common weight leaves ${cost} change(s).` })
+    frames.push({ phase: 'query', activeLine: L('the path length minus'), pythonLine: P('answers.append(len(weights) - top)'), weights: [...weights], cost, tags, edges: graphEdges, pathNodes: [...new Set(pathNodes)], counts: [...counts].sort((p, q) => q[1] - p[1] || p[0] - q[0]), query: [a0, b0], message: `Path ${a0} to ${b0} has ${weights.length} edge(s); keeping the most common weight leaves ${cost} change(s).` })
   }
-  frames.push({ phase: 'done', activeLine: L('return answers'), pythonLine: P('return answers'), weights: [], cost: null, message: `Answers: [${answers.join(', ')}].` })
+  frames.push({ phase: 'done', activeLine: L('return answers'), pythonLine: P('return answers'), weights: [], cost: null, tags, edges: graphEdges, pathNodes: [], counts: [], message: `Answers: [${answers.join(', ')}].` })
   return { input: { n, edges, queries }, result: answers, frames }
 }
 

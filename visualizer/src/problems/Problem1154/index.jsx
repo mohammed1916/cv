@@ -1,23 +1,8 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { phases, parseInput, buildTrace, code, python, pythonLineMap } from './algorithm'
+import { Sequence, Vars } from './SeqKit'
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-
-function YearStrip({ snapshot }) {
-  return <div>
-    <p>{snapshot.leap ? 'Leap year' : 'Common year'} · running total <strong>{snapshot.total}</strong> of day {snapshot.day} in month {snapshot.month}</p>
-    <ol style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 6, padding: 0, listStyle: 'none' }}>
-      {snapshot.lengths.map((length, index) => {
-        const month = index + 1
-        const counted = snapshot.counted.includes(month)
-        const focused = snapshot.focus === month
-        return <li key={month} style={{ border: '1px solid currentColor', borderRadius: 6, padding: 6, opacity: counted || focused || month === snapshot.month ? 1 : 0.45, fontWeight: focused ? 700 : 400 }}>
-          {MONTHS[index]} · {length}{counted ? ' ✓' : ''}{month === snapshot.month ? ' (target)' : ''}
-        </li>
-      })}
-    </ol>
-  </div>
-}
 
 const definition = {
   phases,
@@ -38,7 +23,17 @@ const definition = {
 export default function DayOfYearWorkspace() {
   return <AlgorithmWorkspace
     definition={definition}
-    renderVisual={({ step }) => <YearStrip snapshot={step.snapshot} />}
+    renderVisual={({ step }) => {
+      const s = step.snapshot
+      const pointers = { target: s.month - 1 }
+      if (s.focus) pointers.month = s.focus - 1
+      const marks = Object.fromEntries(s.counted.map(m => [m - 1, 'written']))
+      return <div>
+        <Sequence label={`Month lengths in a ${s.leap ? 'leap' : 'common'} year (${MONTHS.join(' ')})`} values={s.lengths} pointers={pointers} marks={marks} />
+        <Vars vars={{ 'target month': MONTHS[s.month - 1], 'target day': s.day, 'running total': s.total, leap: s.leap ? 'yes' : 'no' }} />
+        <output aria-label="Result">{step.message}</output>
+      </div>
+    }}
     renderReasoning={({ step }) => <p>{step.message}</p>}
   />
 }

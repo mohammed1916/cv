@@ -11,7 +11,7 @@ function place(i) {
   return { x: ((k + 0.5) / 2 ** d) * W, y: TOP + d * GAP };
 }
 
-// Marked ancestors of p are green outlines; the climb from q is yellow; depth is printed under each node.
+// Marked ancestors of p are filled; the node being checked has a dashed ring; depth is printed under each node.
 export default function Problem1740View({ run, step }) {
   const values = run.input.root;
   const { p, q } = run.input;
@@ -50,9 +50,9 @@ export default function Problem1740View({ run, step }) {
         })}
       </svg>
       <div className="lca2-legend">
-        <span>Blue ring: p or q</span>
-        <span>Green: ancestor of p (marked)</span>
-        <span>Yellow: node being checked</span>
+        <span>Outlined in blue: p or q</span>
+        <span>Filled: ancestor of p (marked)</span>
+        <span>Dashed ring: node being checked</span>
       </div>
       <p className="lca2-result">{step.phase === "answer" ? `Distance = ${run.result} edges (LCA ${run.lca})` : step.message}</p>
     </section>

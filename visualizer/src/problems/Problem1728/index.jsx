@@ -18,11 +18,36 @@ const definition = {
   ],
 }
 
+// Board cells: walls, floor, food, and the two pieces. Each piece has a letter and its own colour role.
+function cellStyle(ch) {
+  const base = { width: 40, height: 40, boxSizing: 'border-box', display: 'grid', placeItems: 'center', fontFamily: 'monospace', fontWeight: 700, borderRadius: 6, border: '1px solid var(--border)' }
+  if (ch === '#') return { ...base, background: 'var(--text)', color: 'var(--surface)' }
+  if (ch === 'F') return { ...base, background: 'var(--primary)', color: 'var(--on-primary, #fff)' }
+  if (ch === 'M' || ch === 'C') return { ...base, background: 'var(--surface2)', color: 'var(--text)', borderWidth: 2, borderColor: 'var(--primary)' }
+  return { ...base, background: 'var(--surface)', color: 'var(--text-muted, var(--text))' }
+}
+
 export default function CatAndMouse() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <pre aria-label="Board">{run.input.grid.join('\n')}</pre>
-    <output aria-label="Decided states">{`Decided states: ${step.decided}, after ${step.depth} moves`}</output>
-  </>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const rows = run.input.grid
+    const layers = run.frames.filter(frame => frame.phase === 'layer')
+    return <>
+      <div role="img" aria-label="Board" style={{ display: 'inline-grid', gridTemplateColumns: `repeat(${rows[0].length}, 40px)`, gap: 4, marginBottom: 10 }}>
+        {rows.join('').split('').map((ch, i) => <span key={i} style={cellStyle(ch)}>{ch === '.' ? '' : ch}</span>)}
+      </div>
+      <output aria-label="Decided states" style={{ display: 'block' }}>{`Decided states: ${step.decided}, after ${step.depth} moves`}</output>
+      {layers.length > 0 && <table aria-label="Decisions by depth" style={{ borderCollapse: 'collapse', marginTop: 10, fontFamily: 'monospace' }}>
+        <thead><tr><th style={{ padding: '2px 8px', border: '1px solid var(--border)', color: 'var(--text)' }}>after moves</th><th style={{ padding: '2px 8px', border: '1px solid var(--border)', color: 'var(--text)' }}>total decided</th></tr></thead>
+        <tbody>{layers.map((layer, i) => {
+          const current = layer === step
+          return <tr key={i} style={{ background: current ? 'var(--surface2)' : undefined, fontWeight: current ? 700 : 400 }}>
+            <td style={{ padding: '2px 8px', border: '1px solid var(--border)', color: 'var(--text)' }}>{layer.depth}</td>
+            <td style={{ padding: '2px 8px', border: '1px solid var(--border)', color: 'var(--text)' }}>{layer.decided}</td>
+          </tr>
+        })}</tbody>
+      </table>}
+    </>
+  }} renderReasoning={() => <>
     <p>A state is a mouse cell, a cat cell and whose turn it is. Work backwards from finished states: a mouse-turn state is won by the mouse if some move reaches a mouse win, and a cat-turn state is won by the mouse only if every cat move does.</p>
     <p>Any state still undecided at the end is a draw, which counts as a cat win.</p>
   </>} />

@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample rows are invented for this visualization.
+// Teaching version of the query. The sample rows are invented for this visualization.
 export const phases = [
   { id: 'load', label: 'Load', description: 'Read the task counts and the execution log.' },
   { id: 'slots', label: 'Expand', description: 'Number each task from 1 up to its subtask count.' },

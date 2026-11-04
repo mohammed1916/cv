@@ -30,7 +30,17 @@ export default function Problem2910() {
     renderVisual={({ step }) => <>
       <IndexedSequence label="count per value" length={step.values.length} valueAt={i => String(step.values[i])}
         active={step.active} roleAt={i => step.marks[i] || ""} />
-      <p>{step.summary}</p>
+      {step.s !== undefined && <table aria-label="Split of each count for the current size" style={{ borderCollapse: 'collapse', color: 'var(--text)' }}>
+        <thead><tr>{['count c', 'groups t = ceil(c / (s + 1))', 'valid for size s?'].map(h => <th key={h} scope="col" style={{ padding: '4px 8px', textAlign: 'left', borderBottom: '2px solid var(--border, currentColor)' }}>{h}</th>)}</tr></thead>
+        <tbody>{step.values.map((c, i) => {
+          const t = Math.ceil(c / (step.s + 1))
+          return <tr key={i} data-current={i === step.active} style={{ background: i === step.active ? 'var(--surface2)' : 'transparent' }}>
+            <td style={{ padding: '4px 8px' }}>{c}</td><td style={{ padding: '4px 8px' }}>{t}</td>
+            <td style={{ padding: '4px 8px' }}>{t * step.s > c ? 'no' : 'yes'}</td>
+          </tr>
+        })}</tbody>
+      </table>}
+      <p style={{ color: 'var(--text)' }}>{step.summary}</p>
     </>}
     renderReasoning={({ step }) => <p>{step.message}</p>} />;
 }

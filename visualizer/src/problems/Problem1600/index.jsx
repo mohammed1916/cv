@@ -3,9 +3,16 @@ import { buildTrace, parseInput, code, python } from './algorithm'
 
 function FamilyNode({ member, visit }) {
   const role = member.name === visit ? 'active' : member.alive ? '' : 'dead'
-  return <li data-role={role}>
-    <span>{member.name}{member.alive ? '' : ' (dead)'}</span>
-    {member.children.length > 0 && <ul>{member.children.map(child => <FamilyNode key={child.name} member={child} visit={visit} />)}</ul>}
+  return <li data-role={role} style={{ listStyle: 'none' }}>
+    <span style={{
+      display: 'inline-block', margin: '3px 0', padding: '4px 10px', borderRadius: 6, fontFamily: 'monospace', color: 'var(--text)',
+      border: `${role === 'active' ? 2 : 1}px solid ${role === 'active' ? 'var(--primary)' : 'var(--border)'}`,
+      background: role === 'active' ? 'color-mix(in srgb, var(--primary) 22%, transparent)' : 'var(--surface2)',
+      textDecoration: member.alive ? 'none' : 'line-through', opacity: member.alive ? 1 : 0.6,
+    }}>{member.name}{member.alive ? '' : ' (dead)'}</span>
+    {member.children.length > 0 && <ul style={{ borderLeft: '1px solid var(--border)', margin: '0 0 0 14px', paddingLeft: 14 }}>
+      {member.children.map(child => <FamilyNode key={child.name} member={child} visit={visit} />)}
+    </ul>}
   </li>
 }
 
@@ -29,9 +36,10 @@ const definition = {
 
 export default function ThroneInheritance() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <ul className="throne-family" aria-label="Family tree">
+    <ul aria-label="Family tree" style={{ paddingLeft: 0 }}>
       <FamilyNode member={step.family} visit={step.visit} />
     </ul>
+    <p style={{ color: 'var(--text-muted)' }}>Children are listed in birth order, oldest first. Struck-through names are dead and are skipped in an order walk, but they keep their place in the tree.</p>
     <output aria-label="Latest order">{step.answer ? `Order: ${step.answer.join(', ')}` : `Last operation: ${step.op ? step.op.join(' ') : 'none'}`}</output>
   </>} renderReasoning={() => <>
     <p>Children are stored in birth order, so a walk from the king that visits children in that order is the inheritance order.</p>

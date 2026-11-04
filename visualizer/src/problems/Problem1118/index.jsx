@@ -1,8 +1,9 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { phases, parseInput, buildTrace, code, python } from './algorithm'
+import { Sequence, Vars } from './SeqKit'
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-const yesNo = value => (value ? 'yes' : 'no')
+const yesNo = value => (value === undefined || value === null ? '-' : value ? 'yes' : 'no')
 
 const definition = {
   phases, parse: parseInput, build: buildTrace, code, python,
@@ -22,20 +23,18 @@ export default function DaysInMonth() {
   return <AlgorithmWorkspace definition={definition}
     renderVisual={({ step }) => {
       const s = step.snapshot
+      const checks = s.leapChecks
       return <div style={{ display: 'grid', gap: 12 }}>
-        <div aria-label="Months" style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-          {MONTHS.map((name, i) => <span key={name} style={{ padding: '4px 8px', borderRadius: 6, border: '1px solid currentColor', opacity: i + 1 === s.month ? 1 : 0.45, fontWeight: i + 1 === s.month ? 700 : 400 }}>{name}</span>)}
-        </div>
-        <p><strong style={{ fontSize: 28 }}>{s.days ?? '?'}</strong> days in {MONTHS[s.month - 1]} {s.year}</p>
-        {s.leapChecks && <ul>
-          <li>Divisible by 4: {yesNo(s.leapChecks.div4)}</li>
-          <li>Century year: {yesNo(s.leapChecks.div100)}</li>
-          <li>Divisible by 400: {yesNo(s.leapChecks.div400)}</li>
-          <li>Leap year: {yesNo(s.leapChecks.leap)}</li>
-        </ul>}
+        <Sequence label="Month names (pointer on the chosen month)" values={MONTHS} pointers={{ month: s.month - 1 }} />
+        <Vars vars={{ year: s.year, month: s.month, 'days in month': s.days }} />
+        {checks && <dl className="seq-vars">
+          <div><dt>divisible by 4</dt><dd>{yesNo(checks.div4)}</dd></div>
+          <div><dt>divisible by 100</dt><dd>{yesNo(checks.div100)}</dd></div>
+          <div><dt>divisible by 400</dt><dd>{yesNo(checks.div400)}</dd></div>
+          <div><dt>leap year</dt><dd>{yesNo(checks.leap)}</dd></div>
+        </dl>}
+        <output aria-label="Result">{step.message}</output>
       </div>
     }}
-    renderReasoning={({ step }) => <p>{step.snapshot.leapChecks
-      ? 'February is the only month whose length depends on the year. A century year counts as a leap year only when it is divisible by 400.'
-      : 'Months other than February have fixed lengths, so only the month number is needed.'}</p>} />
+    renderReasoning={() => <p>Most months have a fixed length. Only February changes, and the leap rule decides between 28 and 29 days.</p>} />
 }

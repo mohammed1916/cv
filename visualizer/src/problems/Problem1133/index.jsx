@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -15,21 +16,13 @@ const definition = {
 
 export default function LargestUniqueNumber() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
-    const entries = Object.entries(step.snapshot.counts).sort((a, b) => Number(b[0]) - Number(a[0]))
+    const s = step.snapshot
+    const rows = Object.entries(s.counts).map(([value, count]) => ({ value: Number(value), count })).sort((a, b) => b.value - a.value)
+    const activeRow = rows.findIndex(row => row.value === s.current)
     return <>
-      <table aria-label="Counts by value" style={{ borderCollapse: 'collapse', fontFamily: 'monospace' }}>
-        <thead><tr><th style={{ padding: '4px 10px' }}>Value</th><th style={{ padding: '4px 10px' }}>Count</th></tr></thead>
-        <tbody>{entries.map(([value, count]) => {
-          const current = String(step.snapshot.current) === value
-          return <tr key={value} data-value={value} style={{ background: current ? 'var(--surface2)' : 'transparent', fontWeight: count === 1 ? 700 : 400 }}>
-            <td style={{ padding: '4px 10px' }}>{value}</td><td style={{ padding: '4px 10px' }}>{count}</td>
-          </tr>
-        })}</tbody>
-      </table>
-      <output aria-label="Answer so far">{`Answer: ${step.snapshot.answer ?? '–'}`}</output>
+      <RecordStateTable label="Count of each value (largest value first)" columns={['value', 'count']} rows={rows} activeRow={activeRow} />
+      <output aria-label="Answer">{s.answer !== null && s.answer !== undefined ? `Largest unique so far: ${s.answer}` : step.message}</output>
+      <p>{step.message}</p>
     </>
-  }} renderReasoning={({ step }) => <>
-    <p><strong>Count first:</strong> every appearance adds one to its value's count.</p>
-    <p><strong>Search from the top:</strong> the first value, scanning downward from the largest, whose count is exactly one is the answer.</p>
-  </>} />
+  }} renderReasoning={() => <p>Count each value, then scan from the largest value down. The first value whose count is exactly one is the answer; if none exists the answer is -1.</p>} />
 }

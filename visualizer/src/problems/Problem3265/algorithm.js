@@ -79,15 +79,17 @@ export function buildTrace(input) {
   const frames = []
   let count = 0
   const pairs = []
+  let reachWords = []
   const add = (phase, activeLine, pythonText, message, extra = {}) => frames.push({
-    phase, activeLine, pythonLine: at(pythonText), message, nums, texts, width, count, pairs: [...pairs], j: -1, i: -1, ...extra,
+    phase, activeLine, pythonLine: at(pythonText), message, nums, texts, width, count, pairs: [...pairs], j: -1, i: -1, reach: reachWords, ...extra,
   })
   add("setup", 1, "width = len(", `Pad every number to ${width} digits.`)
   add("setup", 2, "texts = [str(x)", `Padded values: ${texts.join(", ")}.`)
   add("setup", 3, "count = 0", "Start with no almost equal pairs.")
   for (let j = 0; j < texts.length; j += 1) {
     const reach = reachOneSwap(texts[j], width)
-    add("reach", 5, "reach = {texts[j]}", `Reach of ${texts[j]} has ${reach.size} word(s) after at most one swap.`, { j, reach: [...reach] })
+    reachWords = [...reach]
+    add("reach", 5, "reach = {texts[j]}", `Reach of ${texts[j]} has ${reach.size} word(s) after at most one swap.`, { j })
     for (let i = 0; i < j; i += 1) {
       if (reach.has(texts[i])) {
         count += 1

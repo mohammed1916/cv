@@ -1,10 +1,11 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import MatrixGrid from '../../components/shared/MatrixGrid'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
-    { id: 'start', label: 'Start', description: 'Count the 1s in each row and column.' },
-    { id: 'corner', label: 'Corner', description: 'Add the triangles with this corner.' },
+    { id: 'start', label: 'Count', description: 'Count the 1s in every row and column.' },
+    { id: 'corner', label: 'Corner', description: 'Pair a corner 1 with a 1 in its row and a 1 in its column.' },
     { id: 'done', label: 'Complete', description: 'Return the total.' },
   ],
   parse: parseInput, build: buildTrace, code, python,
@@ -18,13 +19,22 @@ const definition = {
 }
 
 export default function RightTriangles() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <table aria-label="Grid">
-      <tbody>{run.matrix.map((row, r) => <tr key={r}>{row.map((v, col) => <td key={col} className={step.cell && step.cell[0] === r && step.cell[1] === col ? 'is-active' : undefined}>{v}</td>)}</tr>)}</tbody>
-    </table>
-    <output aria-label="State">{Object.entries(step.state ?? {}).map(([key, value]) => `${key}: ${Array.isArray(value) ? value.join(', ') : String(value)}`).join(' · ')}</output>
-  </>} renderReasoning={() => <>
-    <p>In a right triangle with axis-aligned legs, the corner is the vertex shared by a row partner and a column partner.</p>
-    <p>Each 1 is a corner for every pair formed by another 1 in its row and another 1 in its column.</p>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const [cr, cc] = step.cell ?? [-1, -1]
+    const partners = []
+    if (step.cell) {
+      run.matrix.forEach((row, r) => row.forEach((v, c) => {
+        if (v === 1 && (r === cr) !== (c === cc) && (r === cr || c === cc)) partners.push({ row: r, col: c })
+      }))
+    }
+    return <>
+      <MatrixGrid matrix={run.matrix} label="Grid of 1s" tone="main"
+        activeCell={step.cell ? { row: cr, col: cc } : null} highlightedCells={partners} cellWidth={48} cellHeight={44} />
+      <p className="algorithm-workspace__event" role="status">{step.message}</p>
+      <output aria-label="State">{Object.entries(step.state ?? {}).map(([key, value]) => `${key}: ${Array.isArray(value) ? value.join(', ') : String(value)}`).join(' · ')}</output>
+    </>
+  }} renderReasoning={() => <>
+    <p>Pick a 1 as the right-angle corner. Any other 1 in its row and any other 1 in its column completes a triangle, so the corner contributes (row count minus 1) times (column count minus 1).</p>
+    <p>Highlighted cells are the partners that pair with the active corner.</p>
   </>} />
 }

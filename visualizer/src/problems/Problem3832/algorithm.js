@@ -122,6 +122,7 @@ export function buildTrace(input) {
     const ok = run.streak_length >= 5
     if (ok) kept.push(publish(run))
     push('run', 'HAVING COUNT(*) >= 5', 'runs = runs[', `User ${run.user_id}, ${run.action} from ${run.start_date}: ${run.streak_length} days, ${ok ? 'kept' : 'too short'}.`, COLUMNS_RUNS, [...kept])
+    frames[frames.length - 1].focus = { user_id: run.user_id, start: run.start_date, end: run.end_date }
   }
 
   const ordered = [...kept].sort((a, b) => a.user_id - b.user_id
@@ -133,6 +134,7 @@ export function buildTrace(input) {
     if (chosen.some(entry => entry.user_id === run.user_id)) continue
     chosen.push(run)
     push('choose', 'ROW_NUMBER() OVER (PARTITION BY user_id', 'best = runs.drop_duplicates', `User ${run.user_id}: keep ${run.action} for ${run.streak_length} days from ${run.start_date}.`, COLUMNS_RUNS, [...chosen])
+    frames[frames.length - 1].focus = { user_id: run.user_id, start: run.start_date, end: run.end_date }
   }
 
   const result = [...chosen].sort((a, b) => b.streak_length - a.streak_length || a.user_id - b.user_id)

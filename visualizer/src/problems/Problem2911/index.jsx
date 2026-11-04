@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
 import RecurrenceGrid from "../../components/shared/RecurrenceGrid";
+import IndexedSequence from "../../components/shared/IndexedSequence";
 import { code, python, parseInput, buildTrace } from "./algorithm";
 
 const definition = {
@@ -17,7 +18,7 @@ const definition = {
   python,
   inputLabel: 'JSON object with keys s and k (e.g. {"s": "abcac", "k": 2})',
   url: "https://leetcode.com/problems/minimum-changes-to-make-k-semi-palindromes/",
-  complexity: "O(n^3) time and O(n*k) space for string length n, with the semi-palindrome cost computed per substring. Visualization caps s at 12 characters. Constraints are paraphrased from a mirror, so the statement is not verified.",
+  complexity: "O(n^3) time and O(n*k) space for string length n, with the semi-palindrome cost computed per substring. The visualization caps s at 12 characters.",
   examples: [
     { label: "Example 1", input: '{"s": "abcac", "k": 2}' },
     { label: "Example 2", input: '{"s": "abcdef", "k": 2}' },
@@ -31,6 +32,8 @@ export default function Problem2911() {
   return <AlgorithmWorkspace
     definition={definition}
     renderVisual={({ run, step }) => <>
+      <IndexedSequence label="s (the piece being priced runs from l to r)" length={run.input.s.length} valueAt={i => run.input.s[i]}
+        active={-1} roleAt={i => (step.start !== null && step.start !== undefined && i === step.start ? "l" : step.column > 0 && i === step.column - 1 ? "r" : step.start !== null && step.start !== undefined && i > step.start && i < step.column - 1 ? "inside" : "")} />
       <RecurrenceGrid rowLabels={run.rowLabels} columnLabels={run.columnLabels}
         row={step.row} column={step.column} label="DP table: parts (rows) by end index (columns)"
         valueAt={(r, c) => cellText(step.table[r][c])}

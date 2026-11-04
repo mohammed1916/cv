@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import * as model from './algorithm'
 
 const definition = {
@@ -8,10 +9,21 @@ const definition = {
 
 export default function ProblemVisual() {
   return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ run, step }) => <section aria-label="Current state">
-      <output>{step.message}</output>
-      <dl>{Object.entries(step.state || {}).map(([key, value]) => <div key={key}><dt>{key}</dt><dd><code>{JSON.stringify(value)}</code></dd></div>)}</dl>
-      <p>Result: <code>{step.phase === 'done' ? JSON.stringify(run.result) : 'not yet'}</code></p>
-    </section>}
+    renderVisual={({ run, step }) => {
+      const { lo = 0, hi = run.input.arr.length, mid = -1 } = step.state || {}
+      // Highlight the live window [lo, hi) and mark its ends so the narrowing is visible.
+      const roleAt = index => {
+        if (index === mid) return 'mid'
+        if (index === lo && index === hi - 1) return 'lo and hi-1'
+        if (index === lo) return 'lo'
+        if (index === hi - 1) return 'hi-1'
+        if (index >= lo && index < hi) return 'in range'
+        return 'outside'
+      }
+      return <>
+        <IndexedSequence label="Sorted array" length={run.input.arr.length} valueAt={index => run.input.arr[index]} active={mid} roleAt={roleAt} />
+        <p style={{ color: 'var(--text)' }}>Search range is [{lo}, {hi}). Target {run.input.target}. Result: <code>{step.phase === 'done' ? run.result : 'not yet'}</code></p>
+      </>
+    }}
     renderReasoning={() => <>{model.WHY.map((text, index) => <p key={index}>{text}</p>)}</>} />
 }

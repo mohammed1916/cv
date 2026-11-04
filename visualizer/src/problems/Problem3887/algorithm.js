@@ -54,6 +54,7 @@ export function buildTrace({ n, edges }) {
     return [root, par[x]]
   }
   const frames = []
+  const kept = []
   let count = 0
   edges.forEach(([u, v, w], index) => {
     const [ru, pu] = find(u)
@@ -70,10 +71,11 @@ export function buildTrace({ n, edges }) {
       message = added ? `Edge ${u}-${v} closes a cycle with even total weight.` : `Edge ${u}-${v} would close an odd cycle; skipped.`
     }
     if (added) count++
-    frames.push({ phase: 'edge', activeLine: L(ru !== rv ? 'join them' : 'if the roots'), pythonLine: P(ru !== rv ? 'parent[ru] = rv' : 'elif pu ^ pv'), index, edge: [u, v, w], added, count,
+    kept.push(added)
+    frames.push({ phase: 'edge', activeLine: L(ru !== rv ? 'join them' : 'if the roots'), pythonLine: P(ru !== rv ? 'parent[ru] = rv' : 'elif pu ^ pv'), index, edge: [u, v, w], added, count, kept: kept.slice(),
       parent: parent.slice(), par: par.slice(), message })
   })
-  frames.push({ phase: 'done', activeLine: L('return count'), pythonLine: P('return count'), index: -1, edge: null, added: null, count, parent: parent.slice(), par: par.slice(),
+  frames.push({ phase: 'done', activeLine: L('return count'), pythonLine: P('return count'), index: -1, edge: null, added: null, count, kept: kept.slice(), parent: parent.slice(), par: par.slice(),
     message: `${count} edge${count === 1 ? '' : 's'} added.` })
   return { input: { n, edges }, result: count, frames }
 }

@@ -1,0 +1,8 @@
+.bp-view { display: grid; gap: 10px; color: var(--text); }
+.bp-row { display: grid; gap: 4px; }
+.bp-label { font-weight: 600; color: var(--text); }
+.bp-bits { display: flex; flex-wrap: wrap; gap: 4px; }
+.bp-bit { min-width: 26px; text-align: center; font-family: monospace; padding: 3px 4px; border-radius: 5px; border: 1px solid var(--surface2, #d1d5db); background: var(--surface2, transparent); color: var(--text); }
+.bp-bit.is-one { background: var(--primary, #2563eb); color: #fff; border-color: transparent; }
+.bp-place { display: block; font-size: 0.65rem; color: var(--muted, var(--text)); }
+.bp-muted { margin: 0; font-size: 0.9rem; color: var(--muted, var(--text)); }

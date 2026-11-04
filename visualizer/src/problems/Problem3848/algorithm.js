@@ -6,6 +6,7 @@ export const code = [
   'return the answer',
 ].map((text, index) => ({ line: index + 1, text }))
 const L = key => code.findIndex(c => c.text.includes(key)) + 1
+const PY = key => python.split('\n').findIndex(line => line.includes(key)) + 1
 
 const FACT = [1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880]
 
@@ -22,18 +23,18 @@ export function buildTrace({ n }) {
   const frames = []
   let total = 0
   const terms = []
-  frames.push({ digits, terms: [], total, phase: 'setup', activeLine: L('total starts'), message: `Digits of ${n} are ${digits}.` })
+  frames.push({ digits, terms: [], total, phase: 'setup', pythonLine: PY('total = 0'), activeLine: L('total starts'), message: `Digits of ${n} are ${digits}.` })
   for (const ch of digits) {
     const d = Number(ch)
     total += FACT[d]
     terms.push([d, FACT[d]])
-    frames.push({ digits, terms: [...terms], total, phase: 'digit', activeLine: L('for each digit'), message: `${d}! = ${FACT[d]}; running total ${total}.` })
+    frames.push({ digits, terms: [...terms], total, phase: 'digit', pythonLine: PY('total += factorial'), activeLine: L('for each digit'), message: `${d}! = ${FACT[d]}; running total ${total}.` })
   }
   const a = [...String(total)].sort().join('')
   const b = [...digits].sort().join('')
   const result = a === b
-  frames.push({ digits, terms: [...terms], total, sortedTotal: a, sortedN: b, result, phase: 'compare', activeLine: L('true when'), message: `Sorted digits ${a} and ${b} ${result ? 'match' : 'differ'}.` })
-  frames.push({ digits, terms: [...terms], total, sortedTotal: a, sortedN: b, result, phase: 'done', activeLine: L('return the answer'), message: result ? `${total} is a permutation of n, so the answer is true.` : 'No permutation of n can be digitorial.' })
+  frames.push({ digits, terms: [...terms], total, sortedTotal: a, sortedN: b, result, phase: 'compare', pythonLine: PY('return sorted'), activeLine: L('true when'), message: `Sorted digits ${a} and ${b} ${result ? 'match' : 'differ'}.` })
+  frames.push({ digits, terms: [...terms], total, sortedTotal: a, sortedN: b, result, phase: 'done', pythonLine: PY('return sorted'), activeLine: L('return the answer'), message: result ? `${total} is a permutation of n, so the answer is true.` : 'No permutation of n can be digitorial.' })
   return { input: { n }, result, frames }
 }
 

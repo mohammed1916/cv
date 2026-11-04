@@ -67,19 +67,27 @@ export function buildTrace(input) {
   const frames = []
   frames.push(frame('load', 'FROM Servers', 'def ', `Read ${Servers.length} status events.`, COLUMNS, Servers))
 
+  // Sessions on one server nest: the latest open start closes at the next stop (last in, first out).
   const events = [...Servers].sort((a, b) => a.server_id - b.server_id || a.status_time - b.status_time)
-  const starts = events.filter(row => row.session_status === 'start')
-  const stops = events.filter(row => row.session_status === 'stop')
+  const open = new Map()
   const pairs = []
-  const shown = []
-  for (const start of starts) {
-    const next = stops.filter(row => row.server_id === start.server_id && row.status_time > start.status_time)
-      .reduce((best, row) => (best === null || row.status_time < best ? row.status_time : best), null)
-    const seconds = next === null ? 0 : next - start.status_time
-    if (next !== null) pairs.push({ server_id: start.server_id, start_time: start.status_time, stop_time: next, seconds })
-    shown.push({ server_id: start.server_id, start_time: start.status_time, stop_time: next === null ? 'open' : next, seconds: next === null ? '' : seconds })
-    frames.push(frame('pair', 'JOIN Servers', 'closed =', next === null ? `Server ${start.server_id} starts at ${start.status_time} and never stops, so it adds nothing.` : `Server ${start.server_id} runs from ${start.status_time} to ${next}.`, ['server_id', 'start_time', 'stop_time', 'seconds'], shown))
+  const sessions = []
+  for (const row of events) {
+    if (row.session_status === 'start') {
+      if (!open.has(row.server_id)) open.set(row.server_id, [])
+      open.get(row.server_id).push(row)
+      continue
+    }
+    const stack = open.get(row.server_id) || []
+    const start = stack.pop()
+    if (!start) continue
+    const seconds = row.status_time - start.status_time
+    pairs.push({ server_id: start.server_id, start_time: start.status_time, stop_time: row.status_time, seconds })
+    sessions.push({ server_id: start.server_id, start: start.status_time, end: row.status_time, role: 'kept', group: `Server ${start.server_id}` })
+    frames.push(frame('pair', 'JOIN Servers', 'closed =', `Server ${start.server_id}: the stop at ${row.status_time} closes the latest open start at ${start.status_time}.`, ['server_id', 'start_time', 'stop_time', 'seconds'], pairs))
   }
+  const unclosed = [...open.values()].flat()
+  if (unclosed.length) frames.push(frame('pair', 'JOIN Servers', 'closed =', `${unclosed.length} start${unclosed.length === 1 ? '' : 's'} never closed and add nothing.`, ['server_id', 'start_time', 'stop_time', 'seconds'], pairs))
 
   const total = pairs.reduce((sum, row) => sum + row.seconds, 0)
   frames.push(frame('sum', 'SELECT FLOOR', 'total =', `Closed sessions add up to ${total} seconds.`, ['server_id', 'start_time', 'stop_time', 'seconds'], pairs))
@@ -87,5 +95,5 @@ export function buildTrace(input) {
   const days = Math.floor(total / 86400)
   const result = [{ total_uptime_days: days }]
   frames.push(frame('done', 'FROM Paired', 'return', `Return ${days} whole day${days === 1 ? '' : 's'} of uptime.`, ['total_uptime_days'], result))
-  return { input, result, frames }
+  return { input, result, frames, sessions }
 }

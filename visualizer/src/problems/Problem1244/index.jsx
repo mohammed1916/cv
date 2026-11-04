@@ -19,12 +19,43 @@ const definition = {
   ],
 }
 
+// The trace stores each player as "player id: score" and each top query as "top k sum: total".
+function readBoard(state) {
+  const players = []
+  let top = null
+  for (const line of state) {
+    const player = /^player (\d+): (\d+)$/.exec(line)
+    if (player) players.push({ id: Number(player[1]), score: Number(player[2]) })
+    const sum = /^top (\d+) sum: (\d+)$/.exec(line)
+    if (sum) top = { k: Number(sum[1]), total: Number(sum[2]) }
+  }
+  players.sort((a, b) => b.score - a.score || a.id - b.id)
+  return { players, top }
+}
+
 export default function DesignALeaderboard() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <ul aria-label="Board">{step.state.map((line, index) => <li key={index}>{line}</li>)}</ul>
-    <output aria-label="Current step">{step.message}</output>
-  </>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
+    const { players, top } = readBoard(step.state)
+    const k = top ? top.k : 0
+    return <>
+      <table aria-label="Leaderboard, highest first" style={{ borderCollapse: 'collapse', minWidth: 260 }}>
+        <thead><tr><th scope="col" style={{ textAlign: 'left', padding: '4px 10px' }}>Rank</th><th scope="col" style={{ textAlign: 'left', padding: '4px 10px' }}>Player</th><th scope="col" style={{ textAlign: 'right', padding: '4px 10px' }}>Score</th></tr></thead>
+        <tbody>{players.length
+          ? players.map((p, i) => <tr key={p.id} data-rank={i + 1} data-counted={i < k ? 'yes' : 'no'} style={{
+            background: i < k ? 'color-mix(in srgb, var(--primary) 22%, transparent)' : 'transparent',
+            color: 'var(--text)',
+          }}>
+            <td style={{ padding: '4px 10px' }}>{i + 1}</td>
+            <td style={{ padding: '4px 10px' }}>{p.id}</td>
+            <td style={{ padding: '4px 10px', textAlign: 'right', fontFamily: 'monospace' }}>{p.score}</td>
+          </tr>)
+          : <tr><td colSpan={3} style={{ padding: '4px 10px', color: 'var(--text-dim)' }}>No players yet</td></tr>}</tbody>
+      </table>
+      {top && <p>The top {top.k} scores add up to <strong>{top.total}</strong>. Shaded rows are the ones counted.</p>}
+      <output aria-label="Current step">{step.message}</output>
+    </>
+  }} renderReasoning={() => <>
     <p>Each player keeps one running total, so an add never has to scan the board.</p>
-    <p>Sorting is deferred until a top query asks for it, which keeps the cost of adds low.</p>
+    <p>Sorting is deferred until a top query asks for it, which keeps the cost of adds low. The shaded rows are the k largest totals.</p>
   </>} />
 }

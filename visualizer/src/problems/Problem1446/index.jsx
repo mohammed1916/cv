@@ -14,22 +14,27 @@ const definition = {
   ],
 }
 
+import IndexedSequence from '../../components/shared/IndexedSequence'
+
 export default function ConsecutiveCharacters() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
-    const { s, index, run, best } = step.snapshot
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const { s, index, run: runLength, best, runStart, bestStart, bestEnd } = step.snapshot
+    const current = index ?? -1
+    const roleAt = i => {
+      const parts = []
+      if (current >= 0 && i === runStart) parts.push('l')
+      if (current >= 0 && i === current) parts.push('r')
+      if (i >= bestStart && i <= bestEnd && best > 0) parts.push('best')
+      return parts.join(' ')
+    }
     return <>
-      <div role="list" aria-label="Characters" style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-        {[...s].map((ch, i) => <span key={i} role="listitem" data-index={i} style={{
-          width: 34, height: 34, display: 'grid', placeItems: 'center', fontFamily: 'monospace', boxSizing: 'border-box',
-          border: `${i === index ? 2 : 1}px solid ${i === index ? 'var(--text)' : 'var(--border)'}`,
-          background: i <= index && i > index - run ? '#bae6fd' : 'transparent',
-        }}>{ch}</span>)}
-      </div>
-      <p>Current run: {run} · Best run: {best}</p>
-      <p>{step.message}</p>
+      <IndexedSequence label="Characters, with the current run from l to r" length={s.length} active={current}
+        valueAt={i => s[i]} roleAt={roleAt} />
+      <p style={{ color: 'var(--text)' }}>Current run: {runLength} (from {runStart} to {current}) · Best run: {best} (from {bestStart} to {bestEnd})</p>
+      <p style={{ color: 'var(--text)' }}>{step.message}</p>
     </>
   }} renderReasoning={({ step }) => <>
-    <p><strong>Run:</strong> a block of the same character. The highlighted cells are the current run.</p>
-    <p>{step.snapshot.same === null ? 'The first character starts a run.' : step.snapshot.same ? 'This character matches its neighbour, so the run grows.' : 'This character differs, so a new run starts.'}</p>
+    <p><strong>Run:</strong> a block of the same character. The l and r markers bound the current run, and the best marker shows the longest one found so far.</p>
+    <p>{step.snapshot.same === null ? 'The first character starts a run.' : step.snapshot.same ? 'This character matches its neighbour, so the run grows.' : 'This character differs, so a new run starts and l moves to it.'}</p>
   </>} />
 }

@@ -24,14 +24,22 @@ export default function PermutationDifferenceVisualizer() {
   return (
     <AlgorithmWorkspace
       definition={definition}
-      renderVisual={({ run, step }) => (
-        <>
-          <IndexedSequence label="String t" length={run.input.t.length} valueAt={i => run.input.t[i]}
-            active={step.index ?? -1} roleAt={i => (i === step.index ? "active" : "")} />
-          <p>Index map: {Object.entries(step.pos).map(([ch, i]) => `${ch}→${i}`).join(", ") || "empty"}</p>
-          <p>Running total: {step.total}</p>
-        </>
-      )}
+      renderVisual={({ run, step }) => {
+        const { s: word, t: other } = run.input;
+        const j = step.phase === "sum" ? step.index ?? -1 : -1;
+        const sIndexOf = ch => word.indexOf(ch);
+        return (
+          <>
+            <IndexedSequence label="String s (position of each letter)" length={word.length}
+              valueAt={i => word[i]} active={j >= 0 ? sIndexOf(other[j]) : step.phase === "index" ? step.index ?? -1 : -1}
+              roleAt={i => (j >= 0 && i === sIndexOf(other[j]) ? "matched" : "")} />
+            <IndexedSequence label="String t (current letter in the sum)" length={other.length}
+              valueAt={i => other[i]} active={j} roleAt={i => (i === j ? "active" : "")} />
+            <p>Index map: {Object.entries(step.pos).map(([ch, i]) => `${ch}→${i}`).join(", ") || "empty"}</p>
+            <p>Running total: {step.total}</p>
+          </>
+        );
+      }}
       renderReasoning={({ step }) => <p>{step.message}</p>}
     />
   );

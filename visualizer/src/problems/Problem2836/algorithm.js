@@ -64,16 +64,19 @@ export function buildTrace(input) {
   const n = receiver.length;
   const edges = receiver.map((to, from) => [from, to]);
   const frames = [];
+  const nxt = [];
+  const sums = [];
+  const levels = () => ({ nxt: nxt.map(row => row.slice()), sums: sums.map(row => row.slice()) });
   const push = (phase, activeLine, pythonLine, message, extra = {}) => frames.push({
-    phase, activeLine, pythonLine, message, n, edges, directed: true, current: null, visited: [], done: [], tags: {}, notes: [], detail: "", ...extra,
+    phase, activeLine, pythonLine, message, n, edges, directed: true, current: null, visited: [], done: [], tags: {}, notes: [], detail: "", levels: levels(), ...extra,
   });
 
   push("setup", 1, py("n = len(receiver)"), `${n} players; each passes to receiver[i].`, { detail: `n = ${n}` });
   const LOG = k.toString(2).length;
   push("setup", 2, py("LOG = k.bit_length()"), `k = ${k} has ${LOG} binary digits, so LOG = ${LOG}.`, { detail: `LOG = ${LOG}` });
 
-  const nxt = [receiver.slice()];
-  const sums = [receiver.slice()];
+  nxt.push(receiver.slice());
+  sums.push(receiver.slice());
   push("table", 3, py("nxt = [receiver[:]]"), "Level 0: one pass goes to receiver[i]; the sum is the receiver index.", { tags: Object.fromEntries(receiver.map((r, i) => [i, `→${r}`])), detail: "nxt[0] = receiver" });
   for (let j = 1; j < LOG; j += 1) {
     push("table", 4, py("for j in range(1, LOG):"), `Build level ${j}: 2^${j} passes per entry.`, { detail: `level ${j}` });

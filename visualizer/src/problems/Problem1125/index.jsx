@@ -1,5 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import RecordStateTable from '../../components/shared/RecordStateTable'
+import { Sequence } from './SeqKit'
 
 const definition = {
   phases: [
@@ -19,17 +21,20 @@ const definition = {
   ],
 }
 
-export default function SmallestSufficientTeam() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <table aria-label="Covered skill sets">
-      <thead><tr><th>Covered set (bits)</th><th>Team size</th></tr></thead>
-      <tbody>{step.teams.map(([mask, size]) => <tr key={mask} data-role={step.changed.includes(mask) ? 'active' : undefined}>
-        <td>{mask.toString(2).padStart(run.input.req_skills.length, '0')}</td><td>{size}</td>
-      </tr>)}</tbody>
-    </table>
-    <output aria-label="Current person">{step.person === -1 ? 'No person in use' : `Person ${step.person}: ${run.input.people[step.person].join(', ') || 'no skills'}`}</output>
-  </>} renderReasoning={() => <>
-    <p>Each required skill is one bit, so any set of skills is one number. For each set reached so far, the team is stored with the fewest people.</p>
-    <p>Adding a person either reaches a new set or improves the team for an existing one. The answer is the stored team for the set that holds every skill.</p>
+export default function SmallestTeamVisual() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const skills = run.input.req_skills
+    const people = run.input.people
+    const names = mask => skills.filter((_, i) => mask & (1 << i)).join(', ') || '(none)'
+    const rows = step.teams.map(([mask, size]) => ({ covered: names(mask), 'team size': size, 'new this person': step.changed.includes(mask) ? 'yes' : 'no' }))
+    return <>
+      <Sequence label="Skills (bit order)" values={skills} />
+      <Sequence label="People (current person marked)" values={people.map(p => p.join(' + ') || '(none)')} pointers={step.person >= 0 ? { person: step.person } : {}} />
+      <RecordStateTable label="Smallest team found for each covered set" columns={['covered', 'team size', 'new this person']} rows={rows} />
+      <output aria-label="Result">{step.message}</output>
+    </>
+  }} renderReasoning={() => <>
+    <p><strong>Bitmask of skills:</strong> each covered set is a number whose bits are the skills it contains.</p>
+    <p><strong>Keep the smallest team per set:</strong> adding a person to every known set produces new sets; the smallest team for each set is kept.</p>
   </>} />
 }

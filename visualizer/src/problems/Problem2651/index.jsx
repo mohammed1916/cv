@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -13,15 +14,25 @@ const definition = {
   url: 'https://leetcode.com/problems/calculate-delayed-arrival-time/',
   complexity: 'O(1) time and O(1) space.',
   examples: [
-    { label: 'Example 1', input: '{"arrivalTime":15,"delayedTime":5}' },
-    { label: 'Example 2', input: '{"arrivalTime":13,"delayedTime":11}' },
+    { label: 'Before midnight', input: '{"arrivalTime":9,"delayedTime":4}' },
+    { label: 'Wraps', input: '{"arrivalTime":21,"delayedTime":6}' },
   ],
 }
 
 export default function CalculateDelayedArrivalTime() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <output aria-label="Clock reading">{`arrival ${run.input.arrivalTime} + delay ${run.input.delayedTime} = ${step.total ?? 'pending'} on the clock`}</output>
-  </>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const { arrivalTime, delayedTime } = run.input
+    const reached = step.total
+    const roleAt = hour => {
+      if (hour === arrivalTime) return 'arrival'
+      if (step.phase === 'wrap' || step.phase === 'done') return hour === reached && reached !== arrivalTime ? 'arrives' : ''
+      return ''
+    }
+    return <section aria-label="24-hour clock">
+      <IndexedSequence label="24-hour clock" length={24} active={reached ?? arrivalTime} valueAt={hour => `${hour}:00`} roleAt={roleAt} />
+      <output aria-label="Clock reading">{`arrival ${arrivalTime} + delay ${delayedTime} = ${arrivalTime + delayedTime}${arrivalTime + delayedTime >= 24 ? `, wrapped to ${reached}` : ''}`}</output>
+    </section>
+  }} renderReasoning={() => <>
     <p>The train arrives at the station after adding the delay to the arrival hour.</p>
     <p>A time past 23 wraps around midnight, so the answer is the sum taken modulo 24.</p>
   </>} />

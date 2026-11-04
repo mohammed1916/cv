@@ -1,52 +1,42 @@
-import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
-import IndexedSequence from "../../components/shared/IndexedSequence";
-import { code, python, parseInput, buildTrace } from "./algorithm";
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import { parseInput, buildTrace, code, python } from './algorithm'
 
 const definition = {
-  number: "2729",
   phases: [
-    { id: "build", label: "Write", description: "Write n, 2n and 3n as text, one after another." },
-    { id: "join", label: "Join", description: "Join the three texts into one string." },
-    { id: "sort", label: "Sort", description: "Sort the characters of the joined string." },
-    { id: "done", label: "Result", description: "Compare the sorted characters with 123456789." },
+    { id: 'build', label: 'Write', description: 'Write n, then 2n, then 3n one after another.' },
+    { id: 'sort', label: 'Sort', description: 'Sort the digits of the joined text.' },
+    { id: 'join', label: 'Compare', description: 'Compare the sorted digits with 1 to 9.' },
+    { id: 'done', label: 'Result', description: 'Fascinating when the digits are exactly 1 to 9, each once.' },
   ],
-  parse: parseInput,
-  build: buildTrace,
-  code,
-  python,
-  inputLabel: 'n JSON object (e.g. {"n": 192})',
-  url: "https://leetcode.com/problems/check-if-the-number-is-fascinating/",
-  complexity: "O(1) time and space: the joined string has at most 11 characters for 100 <= n <= 999.",
+  parse: parseInput, build: buildTrace, code, python,
+  inputLabel: 'Object with n (an integer from 100 to 999)',
+  url: 'https://leetcode.com/problems/check-if-the-number-is-fascinating/',
+  complexity: 'O(1) for three-digit numbers. The check touches nine digit slots at most.',
   examples: [
-    { label: "Example 1", input: '{"n": 192}' },
-    { label: "Example 2", input: '{"n": 100}' },
+    { label: 'Three-digit check', input: '{"n":192}' },
+    { label: 'Not fascinating', input: '{"n":100}' },
   ],
-};
+}
 
-export default function FascinatingNumberVisualizer() {
-  return (
-    <AlgorithmWorkspace
-      definition={definition}
-      renderVisual={({ run, step }) => (
-        <>
-          <IndexedSequence
-            label="Joined digits s"
-            length={step.text.length}
-            valueAt={(index) => step.text[index]}
-            active={-1}
-            roleAt={(index) => (step.digits ? step.digits[index] : "")}
-          />
-          {step.digits && <p aria-label="Sorted digits">Sorted: {step.digits}</p>}
-          {step.phase === "done" && <output aria-label="Fascinating check result">Fascinating: {String(run.result)}</output>}
-        </>
-      )}
-      renderReasoning={({ step }) => (
-        <>
-          <p>A fascinating number joins n, 2n and 3n into a string that contains each digit 1 through 9 exactly once and no zeros.</p>
-          <p>Sorting the joined characters gives a single canonical order, so the check is an exact comparison with "123456789".</p>
-          <p>{step.message}</p>
-        </>
-      )}
-    />
-  );
+const DIGITS = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+export default function FascinatingNumber() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    // The joined text is shown in three blocks: n, then 2n, then 3n. Below it, each digit 1 to 9 is ticked when present once.
+    const n = run.input.n
+    const parts = [String(n), String(2 * n), String(3 * n)]
+    const text = step.text ?? ''
+    const counts = Object.fromEntries(DIGITS.map(d => [d, [...text].filter(ch => ch === String(d)).length]))
+    return <section aria-label="Joined digits" style={{ display: 'grid', gap: 10 }}>
+      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+        {parts.map((p, i) => <div key={i} style={{ padding: '6px 10px', borderRadius: 6, border: '1px solid var(--border)', background: 'var(--surface)', color: 'var(--text)' }}>
+          <small style={{ color: 'var(--text-muted)' }}>{['n', '2n', '3n'][i]}</small><div><code>{p}</code></div></div>)}
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(9, 1fr)', gap: 4 }}>
+        {DIGITS.map(d => <div key={d} style={{ textAlign: 'center', padding: 6, borderRadius: 6, border: '1px solid var(--border)', color: 'var(--text)', background: counts[d] === 1 ? 'var(--primary-glow)' : 'var(--surface)' }}>
+          <div>{d}</div><small>{counts[d]}×</small></div>)}
+      </div>
+      <p style={{ margin: 0, color: 'var(--text)' }}>{step.message}</p>
+    </section>
+  }} renderReasoning={({ step }) => <p>{step.message}</p>} />
 }

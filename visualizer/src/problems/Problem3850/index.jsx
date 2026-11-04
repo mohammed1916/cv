@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -19,6 +20,9 @@ const definition = {
 
 export default function CountSequencesToK() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="nums in order (the element being applied is marked)" length={run.input.nums.length}
+      active={step.index ?? -1} valueAt={index => run.input.nums[index]}
+      roleAt={index => step.index !== undefined && index < step.index ? 'applied' : ''} />
     <table aria-label="Reachable values">
       <thead><tr><th scope="col">Value</th><th scope="col">Ways</th></tr></thead>
       <tbody>{step.table.map(row => <tr key={row.value} data-role={row.value === String(run.input.k) ? 'target' : ''}>

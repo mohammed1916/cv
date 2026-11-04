@@ -31,11 +31,11 @@ export function buildTrace({ init, ops }) {
   const frames = [frame('setup', 1, `Start with ${value}.`, { value })]
   for (const [name, arg] of ops) {
     if (name === 'divide' && arg === 0) {
-      frames.push(frame('step', 4, 'Division by zero: the chain stops.', { value, error: 'Division by zero' }))
+      frames.push(frame('step', 4, 'Division by zero: the chain stops.', { value, error: 'Division by zero is not allowed' }))
       frames.push(frame('done', 5, 'Error result.', { value }))
-      return { input: { init, ops }, result: { error: 'Division by zero' }, frames }
+      return { input: { init, ops }, result: { error: 'Division by zero is not allowed' }, frames }
     }
-    const next = { add: value + arg, subtract: value - arg, multiply: value * arg, divide: Math.trunc(value / arg), power: value ** arg }[name]
+    const next = { add: value + arg, subtract: value - arg, multiply: value * arg, divide: value / arg, power: value ** arg }[name]
     value = next
     frames.push(frame('step', 3, `${name} ${arg} gives ${value}.`, { op: name, arg, value }))
   }
@@ -51,6 +51,6 @@ export const python = `def chain(init, ops):
     value = init
     for name, arg in ops:
         if name == "divide" and arg == 0:
-            return "Division by zero"
+            return "Division by zero is not allowed"
         value = apply(name, value, arg)
     return value`

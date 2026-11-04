@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import PrefixSuffixChain from './PrefixSuffixChain'
 
 const definition = {
   phases: [
@@ -19,7 +20,8 @@ const definition = {
 }
 
 export default function CountPrefixSuffixPairsII() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <PrefixSuffixChain run={run} step={step} />
     <p><strong>Current word:</strong> {step.word ?? 'none'}</p>
     <output aria-label="Trie count">{`${step.message} Total ${step.total}.`}</output>
   </>} renderReasoning={() => <>

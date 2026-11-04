@@ -14,20 +14,33 @@ const definition = {
   ],
 }
 
-const chip = (text, on, dim) => ({
-  minWidth: 40, padding: '4px 8px', fontFamily: 'monospace', textAlign: 'center', boxSizing: 'border-box',
-  border: `${on ? 2 : 1}px solid ${on ? 'var(--text)' : 'var(--border)'}`,
-  background: on ? '#bbf7d0' : 'transparent', color: dim ? 'var(--muted, #78716c)' : '#1c1917',
-})
+const KEPT = 'color-mix(in srgb, var(--success) 35%, var(--surface2))'
+const REMOVED = 'var(--surface)'
 
 export default function MinDifferenceThreeMoves() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
     const { sorted, left, right, best } = step.snapshot
+    const hasWindow = left !== null && left !== undefined
     return <>
-      {sorted ? <div role="img" aria-label="Sorted values" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        {sorted.map((v, i) => <div key={i} style={chip(v, left !== null && i >= left && i <= right, left !== null && (i < left || i > right))}>{v}</div>)}
-      </div> : <p>Values are read but not sorted yet.</p>}
-      {left !== null && left !== undefined && <p>Kept window: indices {left} to {right}. Removed: {left} smallest and {3 - left} largest.</p>}
+      <section aria-label="Sorted values">
+        <h3>Sorted values: the kept window runs from l to r</h3>
+        {sorted ? <div role="img" aria-label="Sorted values" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+          {sorted.map((v, i) => {
+            const kept = hasWindow && i >= left && i <= right
+            return <div key={i} style={{
+              minWidth: 44, padding: '4px 8px', fontFamily: 'monospace', textAlign: 'center', boxSizing: 'border-box', color: 'var(--text)',
+              border: `${hasWindow && (i === left || i === right) ? 2 : 1}px solid ${hasWindow && (i === left || i === right) ? 'var(--text)' : 'var(--border)'}`,
+              background: kept ? KEPT : REMOVED, opacity: hasWindow && !kept ? 0.5 : 1,
+            }}>
+              <div>{v}</div>
+              <small style={{ display: 'block', height: 14, fontWeight: 700, color: 'var(--text-muted)' }}>
+                {hasWindow && i === left ? 'l' : ''}{hasWindow && i === right ? 'r' : ''}
+              </small>
+            </div>
+          })}
+        </div> : <p>Values are read but not sorted yet.</p>}
+      </section>
+      {hasWindow && <p>Changes: {left} smallest and {3 - left} largest values are moved into the window. Kept window: l = {left} to r = {right}; width {sorted[right] - sorted[left]}.</p>}
       <p>Narrowest width so far: <strong>{best === Infinity || best === null || best === undefined ? 'none yet' : best}</strong></p>
     </>
   }} renderReasoning={() => <>

@@ -14,11 +14,28 @@ const definition = {
   ],
 }
 
+function PointPlot({ points, edges, u, inTree }) {
+  const xs = points.map(p => p[0]); const ys = points.map(p => p[1])
+  const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys)
+  const pad = 24, size = 260
+  const span = Math.max(1, maxX - minX, maxY - minY)
+  const sx = p => pad + ((p[0] - minX) / span) * (size - 2 * pad)
+  const sy = p => size - pad - ((p[1] - minY) / span) * (size - 2 * pad)
+  return <svg viewBox={`0 0 ${size} ${size}`} width="100%" style={{ maxWidth: 300 }} role="img" aria-label="Points and tree edges">
+    {edges.map(([a, b], k) => <line key={k} x1={sx(points[a])} y1={sy(points[a])} x2={sx(points[b])} y2={sy(points[b])} stroke="var(--success)" strokeWidth={3} />)}
+    {points.map((p, k) => <g key={k}>
+      <circle cx={sx(p)} cy={sy(p)} r={k === u ? 9 : 6} fill={inTree[k] ? 'var(--success)' : 'var(--surface2)'} stroke="var(--text)" strokeWidth={k === u ? 2.5 : 1} />
+      <text x={sx(p) + 10} y={sy(p) - 8} fill="var(--text)" fontSize="12" fontFamily="monospace">{k}</text>
+    </g>)}
+  </svg>
+}
+
 export default function ConnectPoints() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { points } = run.input
     const { dist, inTree, edges, u, total } = step.snapshot
     return <>
+      <PointPlot points={points} edges={edges} u={u} inTree={inTree} />
       <table aria-label="Points and distances to the tree" style={{ borderCollapse: 'collapse', fontFamily: 'monospace' }}>
         <thead><tr><th>point</th><th>x, y</th><th>distance</th><th>in tree</th></tr></thead>
         <tbody>{points.map((p, k) => <tr key={k} data-index={k} style={{ background: k === u ? 'var(--surface2)' : 'transparent' }}>

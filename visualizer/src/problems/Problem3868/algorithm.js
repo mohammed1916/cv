@@ -6,6 +6,7 @@ export const code = [
   'return the sum of the surpluses',
 ].map((text, index) => ({ line: index + 1, text }))
 const L = key => code.findIndex(c => c.text.includes(key)) + 1
+const PY = key => python.split('\n').findIndex(line => line.includes(key)) + 1
 
 export function parseInput(text) {
   const input = JSON.parse(text)
@@ -21,7 +22,7 @@ export function buildTrace({ nums1, nums2 }) {
   const frames = []
   let cost = 0
   let possible = true
-  frames.push({ rows: [], cost, phase: 'setup', activeLine: L('count each value'), message: 'Count how often each value appears in each array.' })
+  frames.push({ rows: [], cost, phase: 'setup', pythonLine: PY('c1, c2 = Counter'), activeLine: L('count each value'), message: 'Count how often each value appears in each array.' })
   const rows = []
   for (const v of values) {
     const a = nums1.filter(x => x === v).length
@@ -31,12 +32,12 @@ export function buildTrace({ nums1, nums2 }) {
     if (odd) possible = false
     cost += surplus
     rows.push({ value: v, a, b, odd, surplus })
-    frames.push({ rows: [...rows], cost, phase: 'value', activeLine: odd ? L('odd total') : L('the surplus of a value'),
+    frames.push({ rows: [...rows], cost, phase: 'value', pythonLine: PY(odd ? 'if (a + b) % 2' : 'total += max'), activeLine: odd ? L('odd total') : L('the surplus of a value'),
       message: odd ? `Value ${v} has an odd total: equalizing is impossible.` : `Value ${v}: nums1 has ${a}, nums2 has ${b}, surplus ${surplus}.` })
     if (odd) break
   }
   const result = possible ? cost : -1
-  frames.push({ rows: [...rows], cost: result, phase: 'done', activeLine: L('return the sum'), message: result === -1 ? 'Return -1.' : `Minimum cost is ${result}.` })
+  frames.push({ rows: [...rows], cost: result, phase: 'done', pythonLine: PY('return total'), activeLine: L('return the sum'), message: result === -1 ? 'Return -1.' : `Minimum cost is ${result}.` })
   return { input: { nums1, nums2 }, result, frames }
 }
 

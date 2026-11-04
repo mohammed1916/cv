@@ -133,7 +133,7 @@ export function buildTrace(input) {
     const dist = window.reduce((sum, row) => sum + row.ride_distance, 0)
     const dur = window.reduce((sum, row) => sum + row.ride_duration, 0)
     summary.push({ month: start, average_ride_distance: avg(dist), average_ride_duration: avg(dur) })
-    frames.push(frame('window', 'BETWEEN', 'dist =', `Window ${MONTHS[start - 1]} to ${MONTHS[start + 1]}: distance ${dist} and duration ${dur}, divided by 3.`, ['month', 'average_ride_distance', 'average_ride_duration'], summary))
+    frames.push(frame('window', 'BETWEEN', 'dist =', `Window ${MONTHS[start - 1]} to ${MONTHS[start + 1]}: distance ${dist} and duration ${dur}, divided by 3.`, ['month', 'average_ride_distance', 'average_ride_duration'], summary, { windowStart: start }))
   }
   const result = summary.map(row => ({ ...row }))
   frames.push(frame('done', 'ORDER BY', 'return', 'Return one row for each of the ten windows.', ['month', 'average_ride_distance', 'average_ride_duration'], result))

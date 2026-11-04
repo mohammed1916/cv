@@ -1,9 +1,9 @@
 // Knowledge-derived SQL walkthrough. The sample tweets, date range and tie rule are invented for this visualization.
 export const sql = `SELECT hashtag, COUNT(*) AS hashtag_count
 FROM TweetTags
-WHERE tweet_date BETWEEN '2024-02-10' AND '2024-03-02'
+WHERE tweet_date >= '2024-02-01' AND tweet_date < '2024-03-01'
 GROUP BY hashtag
-ORDER BY hashtag_count DESC, hashtag
+ORDER BY hashtag_count DESC, hashtag DESC
 LIMIT 3`
 
 export const code = sql.split('\n').map((text, index) => ({ line: index + 1, text }))
@@ -14,11 +14,12 @@ const SQL = key => {
 }
 
 export const python = `def trending(tweets):
-    tags = tweets["tweet"].apply(lambda t: sorted({h.lower() for h in re.findall(r"#(\\w+)", t)}))
+    tags = tweets["tweet"].apply(lambda t: sorted(set(re.findall(r"#\\w+", t))))
     tagged = tweets.assign(tags=tags).explode("tags").dropna(subset=["tags"])
-    window = tagged[tagged["tweet_date"].between("2024-02-10", "2024-03-02")]
+    window = tagged[(tagged["tweet_date"] >= "2024-02-01") & (tagged["tweet_date"] < "2024-03-01")]
     counts = window.groupby("tags").size()
-    ranked = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))
+    by_name = sorted(counts.items(), key=lambda kv: kv[0], reverse=True)
+    ranked = sorted(by_name, key=lambda kv: -kv[1])
     return ranked[:3]`
 const PY_LINES = python.split('\n')
 const PY = key => {
@@ -63,14 +64,14 @@ export function buildTrace(input) {
   const tagRows = []
   const listed = []
   for (const row of Tweets) {
-    const tags = [...new Set((row.tweet.match(/#\w+/g) ?? []).map(tag => tag.slice(1).toLowerCase()))]
+    const tags = [...new Set(row.tweet.match(/#\w+/g) ?? [])]
     listed.push({ tweet_id: row.tweet_id, tweet_date: row.tweet_date, hashtags: tags.join(', ') })
     for (const hashtag of tags) tagRows.push({ tweet_id: row.tweet_id, tweet_date: row.tweet_date, hashtag })
     frames.push(frame('extract', 'FROM TweetTags', 'tags =', `Tweet ${row.tweet_id} has ${tags.length} distinct hashtag${tags.length === 1 ? '' : 's'}.`, ['tweet_id', 'tweet_date', 'hashtags'], listed))
   }
 
-  const kept = tagRows.filter(row => row.tweet_date >= '2024-02-10' && row.tweet_date <= '2024-03-02')
-  frames.push(frame('filter', 'WHERE', 'window =', `Keep ${kept.length} tag row${kept.length === 1 ? '' : 's'} dated 2024-02-10 to 2024-03-02.`, ['tweet_id', 'tweet_date', 'hashtag'], kept))
+  const kept = tagRows.filter(row => row.tweet_date >= '2024-02-01' && row.tweet_date < '2024-03-01')
+  frames.push(frame('filter', 'WHERE', 'window =', `Keep ${kept.length} tag row${kept.length === 1 ? '' : 's'} dated in February 2024.`, ['tweet_id', 'tweet_date', 'hashtag'], kept))
 
   const counts = new Map()
   const summary = []
@@ -78,10 +79,10 @@ export function buildTrace(input) {
     counts.set(row.hashtag, (counts.get(row.hashtag) ?? 0) + 1)
     summary.length = 0
     for (const [hashtag, count] of counts) summary.push({ hashtag, hashtag_count: count })
-    frames.push(frame('count', 'GROUP BY', 'counts =', `Count tweet ${row.tweet_id} for #${row.hashtag}; it now has ${counts.get(row.hashtag)}.`, ['hashtag', 'hashtag_count'], summary))
+    frames.push(frame('count', 'GROUP BY', 'counts =', `Count tweet ${row.tweet_id} for ${row.hashtag}; it now has ${counts.get(row.hashtag)}.`, ['hashtag', 'hashtag_count'], summary))
   }
 
-  const ranked = [...counts.entries()].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0))
+  const ranked = [...counts.entries()].sort((a, b) => b[1] - a[1] || (a[0] > b[0] ? -1 : a[0] < b[0] ? 1 : 0))
   const result = ranked.slice(0, 3).map(([hashtag, count]) => ({ hashtag, hashtag_count: count }))
   frames.push(frame('done', 'LIMIT', 'return', `Return the top ${result.length} hashtag${result.length === 1 ? '' : 's'}.`, ['hashtag', 'hashtag_count'], result))
   return { input, result, frames }

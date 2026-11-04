@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import PairGrid from './PairGrid'
 
 const definition = {
   phases: [
@@ -23,6 +24,7 @@ export default function CountPrefixSuffixPairsI() {
       <thead><tr><th>Index</th><th>Word</th></tr></thead>
       <tbody>{run.input.words.map((w, i) => <tr key={i} className={i === step.i || i === step.j ? 'is-active' : ''}><td>{i}</td><td>{w}</td></tr>)}</tbody>
     </table>
+    <PairGrid words={run.input.words} run={run} step={step} />
     <output aria-label="Pair check">{`${step.message} Count ${step.count}.`}</output>
   </>} renderReasoning={() => <>
     <p>A word is a prefix and suffix of another word exactly when both startsWith and endsWith hold for the pair.</p>

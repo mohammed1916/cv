@@ -7,6 +7,7 @@ export const code = [
   'return commas',
 ].map((text, index) => ({ line: index + 1, text }))
 const L = key => code.findIndex(c => c.text.includes(key)) + 1
+const PY = key => python.split('\n').findIndex(line => line.includes(key)) + 1
 
 export function parseInput(text) {
   const input = JSON.parse(text)
@@ -19,16 +20,16 @@ export function parseInput(text) {
 export function buildTrace({ n }) {
   const big = BigInt(n)
   let commas = 0n
-  const frames = [{ group: null, added: 0, commas: 0, phase: 'setup', activeLine: L('commas starts'), message: 'No commas yet.' }]
+  const frames = [{ group: null, added: 0, commas: 0, phase: 'setup', pythonLine: PY('commas = 0'), activeLine: L('commas starts'), message: 'No commas yet.' }]
   let group = 1000n
   while (group <= big) {
     const added = big - group + 1n
     commas += added
-    frames.push({ group: String(group), added: String(added), commas: String(commas), phase: 'group', activeLine: L('add n minus group'),
+    frames.push({ group: String(group), added: String(added), commas: String(commas), phase: 'group', pythonLine: PY('commas += n'), activeLine: L('add n minus group'),
       message: `Numbers ${group} to ${n} each gain one comma: ${added} commas.` })
     group *= 1000n
   }
-  frames.push({ group: null, added: 0, commas: String(commas), phase: 'done', activeLine: L('return commas'), message: `Total commas: ${commas}.` })
+  frames.push({ group: null, added: 0, commas: String(commas), phase: 'done', pythonLine: PY('return commas'), activeLine: L('return commas'), message: `Total commas: ${commas}.` })
   return { input: { n }, result: Number(commas), frames }
 }
 

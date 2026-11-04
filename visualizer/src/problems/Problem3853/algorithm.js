@@ -7,6 +7,7 @@ export const code = [
   'return the current string',
 ].map((text, index) => ({ line: index + 1, text }))
 const L = key => code.findIndex(c => c.text.includes(key)) + 1
+const PY = key => python.split('\n').findIndex(line => line.includes(key)) + 1
 
 export function parseInput(text) {
   const input = JSON.parse(text)
@@ -19,7 +20,7 @@ export function parseInput(text) {
 
 export function buildTrace({ s, k }) {
   const cur = [...s]
-  const frames = [{ cur: cur.join(''), pair: null, phase: 'setup', activeLine: L('current starts'), message: `Start with ${cur.join('')}.` }]
+  const frames = [{ cur: cur.join(''), pair: null, phase: 'setup', pythonLine: PY('cur = list(s)'), activeLine: L('current starts'), message: `Start with ${cur.join('')}.` }]
   for (;;) {
     let pair = null
     outer: for (let i = 0; i < cur.length; i++) {
@@ -28,15 +29,15 @@ export function buildTrace({ s, k }) {
       }
     }
     if (!pair) {
-      frames.push({ cur: cur.join(''), pair: null, phase: 'done', activeLine: L('if there is no such pair'), message: 'No close equal pair is left.' })
+      frames.push({ cur: cur.join(''), pair: null, phase: 'done', pythonLine: PY('if pair is None'), activeLine: L('if there is no such pair'), message: 'No close equal pair is left.' })
       break
     }
-    frames.push({ cur: cur.join(''), pair, phase: 'pair', activeLine: L('find the close equal pair'), message: `Characters ${cur[pair[0]]} at ${pair[0]} and ${cur[pair[1]]} at ${pair[1]} are close.` })
+    frames.push({ cur: cur.join(''), pair, phase: 'pair', pythonLine: PY('pair = (i, j)'), activeLine: L('find the close equal pair'), message: `Characters ${cur[pair[0]]} at ${pair[0]} and ${cur[pair[1]]} at ${pair[1]} are close.` })
     cur.splice(pair[1], 1)
-    frames.push({ cur: cur.join(''), pair: null, phase: 'merge', activeLine: L('remove the right character'), message: `Right one merged into the left; now ${cur.join('')}.` })
+    frames.push({ cur: cur.join(''), pair: null, phase: 'merge', pythonLine: PY('del cur[pair[1]]'), activeLine: L('remove the right character'), message: `Right one merged into the left; now ${cur.join('')}.` })
   }
   const result = cur.join('')
-  frames.push({ cur: result, pair: null, phase: 'done', activeLine: L('return the current string'), message: `Result ${result}.` })
+  frames.push({ cur: result, pair: null, phase: 'done', pythonLine: PY("return ''.join"), activeLine: L('return the current string'), message: `Result ${result}.` })
   return { input: { s, k }, result, frames }
 }
 

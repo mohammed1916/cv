@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import TrieStateDiagram from '../../components/shared/TrieStateDiagram'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -19,11 +20,37 @@ const definition = {
   ],
 }
 
+// Prefix tree of the stored sentences. Each node id is its prefix; terminal nodes show the stored count.
+function buildPrefixTree(sentences, times) {
+  const nodes = [{ id: '', parent: null, char: '', prefix: '', terminal: null }]
+  const byId = new Map([['', nodes[0]]])
+  sentences.forEach((sentence, k) => {
+    let id = ''
+    for (const ch of sentence) {
+      const next = id + ch
+      if (!byId.has(next)) {
+        const node = { id: next, parent: id, char: ch === ' ' ? '␣' : ch, prefix: next, terminal: null }
+        byId.set(next, node)
+        nodes.push(node)
+      }
+      id = next
+    }
+    byId.get(id).terminal = String(times[k])
+  })
+  return { nodes, byId }
+}
+
 export default function DesignAutocomplete() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <p aria-label="Typed so far">Prefix: <code>{step.typed || '(empty)'}</code></p>
-    <IndexedSequence label="Suggestions (hottest first)" length={step.top.length} valueAt={i => `${step.top[i][0]} (${step.top[i][1]})`} />
-  </>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const { nodes, byId } = buildPrefixTree(run.input.sentences, run.input.times)
+    let active = step.phase === 'save' ? '' : step.typed
+    while (active && !byId.has(active)) active = active.slice(0, -1)
+    return <>
+      <p aria-label="Typed so far">Prefix: <code>{step.typed || '(empty)'}</code></p>
+      <TrieStateDiagram nodes={nodes} activeNode={active} />
+      <IndexedSequence label="Suggestions (hottest first)" length={step.top.length} valueAt={i => `${step.top[i][0]} (${step.top[i][1]})`} />
+    </>
+  }} renderReasoning={() => <>
     <p>A trie or a scan can both find the sentences that start with the typed prefix. The ranking is by hotness, then by ASCII order, and only the top three are shown.</p>
     <p>A # records the typed sentence. It is the only operation that changes the counts, so later prefixes see the new hotness.</p>
   </>} />

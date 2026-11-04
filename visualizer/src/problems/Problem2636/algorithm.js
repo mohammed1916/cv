@@ -19,17 +19,21 @@ export function buildTrace({ limit, durations }) {
   let now = 0
   let next = 0
   const running = []
-  const view = (focus) => ({ title: `Running (limit ${limit})`, rows: running.map(t => `task ${t.index} finishes at ${t.finish}`), focus, summary: `time ${now}` })
+  const bars = [] // every task that has started: its slot in the pool, start and finish times
+  const view = (focus) => ({ title: `Running (limit ${limit})`, rows: running.map(t => `task ${t.index} finishes at ${t.finish}`), running: running.map(t => ({ ...t })), bars: bars.map(b => ({ ...b })), limit, now, focus, summary: `time ${now}` })
   const fill = phrase => {
     while (running.length < limit && next < durations.length) {
-      running.push({ index: next, finish: now + durations[next] })
+      const slot = Math.min(...Array.from({ length: limit }, (_, s) => s).filter(s => !running.some(t => t.slot === s)))
+      const task = { index: next, slot, start: now, finish: now + durations[next] }
+      running.push(task)
+      bars.push({ ...task })
       step(frames, 'start', phrase, `Task ${next} starts at ${now}, ends at ${now + durations[next]}.`, view(running.length - 1))
       next += 1
     }
   }
   if (durations.length === 0) {
     step(frames, 'done', 'return the total time', 'No tasks, so the total time is 0.', view(-1))
-    return { result: 0, frames }
+    return { result: 0, frames, input: { limit, durations } }
   }
   fill('start up to limit')
   while (running.length) {
@@ -39,6 +43,6 @@ export function buildTrace({ limit, durations }) {
     step(frames, 'finish', 'wait for the earliest', `Task ${done.index} finishes at ${now}.`, view(-1))
     fill('start the next waiting task')
   }
-  step(frames, 'done', 'return the total time', `All tasks are done at ${now}.`, { title: 'Result', rows: [String(now)], focus: 0, summary: `total ${now}` })
-  return { result: now, frames }
+  step(frames, 'done', 'return the total time', `All tasks are done at ${now}.`, { ...view(-1), title: 'Result', rows: [String(now)], focus: 0, summary: `total ${now}` })
+  return { result: now, frames, input: { limit, durations } }
 }

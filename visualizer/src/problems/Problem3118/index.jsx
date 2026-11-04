@@ -3,11 +3,11 @@ import { meta } from './meta'
 import { buildTrace, parseInput, code, sql, python, phases } from './algorithm'
 
 const inputLabel = 'Object with Users (user_id, membership) and Purchases (user_id, purchase_date as YYYY-MM-DD, amount_spend)'
-const complexity = 'O(u + p) over the users and purchases, plus one pass per membership group. The visualization caps each table at 12 rows.'
+const complexity = 'O(u + p) over the users and purchases, plus a fixed grid of 4 weeks by 2 memberships. The visualization caps each table at 12 rows.'
 const examples = [
   {
     label: 'Sample',
-    input: '{"Users":[{"user_id":1,"membership":"basic"},{"user_id":2,"membership":"plus"},{"user_id":3,"membership":"pro"},{"user_id":4,"membership":"basic"}],"Purchases":[{"user_id":1,"purchase_date":"2023-11-03","amount_spend":20},{"user_id":1,"purchase_date":"2023-11-04","amount_spend":50},{"user_id":2,"purchase_date":"2023-11-10","amount_spend":15},{"user_id":2,"purchase_date":"2023-11-17","amount_spend":35},{"user_id":4,"purchase_date":"2023-11-24","amount_spend":5},{"user_id":3,"purchase_date":"2023-10-27","amount_spend":99},{"user_id":3,"purchase_date":"2023-12-01","amount_spend":99},{"user_id":2,"purchase_date":"2023-11-12","amount_spend":40}]}',
+    input: '{"Users":[{"user_id":1,"membership":"Premium"},{"user_id":2,"membership":"VIP"},{"user_id":3,"membership":"Standard"}],"Purchases":[{"user_id":1,"purchase_date":"2023-11-03","amount_spend":1126},{"user_id":2,"purchase_date":"2023-11-10","amount_spend":7473},{"user_id":3,"purchase_date":"2023-11-03","amount_spend":999},{"user_id":2,"purchase_date":"2023-11-24","amount_spend":14933},{"user_id":1,"purchase_date":"2023-11-24","amount_spend":5117}]}',
   },
 ]
 
@@ -32,7 +32,7 @@ export default function FridayPurchaseSqlVisual() {
     <Rows columns={step.columns} rows={step.rows} />
     <output aria-label="Query output">{step.phase === 'done' ? `Output rows: ${run.result.length}` : step.message}</output>
   </>} renderReasoning={() => <>
-    <p>Every membership group must appear in the output, so the query starts from the users and attaches only the purchases that pass the Friday and November checks.</p>
-    <p>A group with no surviving purchase still gets a row, and COALESCE turns its empty sum into zero.</p>
+    <p>Every week and membership pair must appear in the output, so the query builds the full grid of weeks and memberships first and then attaches only the Premium and VIP Friday purchases from November.</p>
+    <p>A pair with no surviving purchase still gets a row, and COALESCE turns its empty sum into zero.</p>
   </>} />
 }

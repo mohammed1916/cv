@@ -12,7 +12,7 @@ const definition = {
   pythonLineMap,
   inputLabel: "k, a positive integer (e.g. 5)",
   url: "https://leetcode.com/problems/find-the-k-th-lucky-number/",
-  complexity: "O(log k) time and O(log k) space: the answer has about log2(k) digits. The answer is returned as a digit string, exact at any length. The draft gives no verified bound on k, so the visualization caps k at 126 (lucky numbers up to six digits).",
+  complexity: "O(log k) time and O(log k) space: the answer has about log2(k) digits, returned as a digit string so it stays exact. The visualization caps k at 126 so every lucky number it shows fits on the page.",
   examples: [
     { label: "k = 5 gives 74", input: "5" },
     { label: "k = 4 gives 47", input: "4" },

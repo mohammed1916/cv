@@ -1,0 +1,14 @@
+.sql-stages { display: grid; gap: 12px; color: var(--text); }
+.sql-stages__pipeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 6px; list-style: none; margin: 0; padding: 0; }
+.sql-stages__pipeline li { display: grid; gap: 2px; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface2); color: var(--text-muted); }
+.sql-stages__pipeline li.is-done { color: var(--text); }
+.sql-stages__pipeline li.is-current { border-color: var(--primary); color: var(--text); box-shadow: 0 0 0 2px var(--primary-glow); }
+.sql-stages__pipeline span { font-size: 12px; }
+.sql-stages__table { overflow-x: auto; }
+.sql-stages table { width: 100%; border-collapse: collapse; }
+.sql-stages caption { text-align: left; color: var(--text-muted); padding-bottom: 6px; }
+.sql-stages th, .sql-stages td { border: 1px solid var(--border); padding: 6px 8px; text-align: left; color: var(--text); }
+.sql-stages th { background: var(--surface2); }
+.sql-stages tr.is-kept td { background: var(--primary-glow); }
+.sql-stages tr.is-dropped td { color: var(--text-muted); opacity: 0.6; text-decoration: line-through; }
+.sql-stages output { color: var(--text-muted); }

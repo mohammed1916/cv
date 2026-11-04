@@ -43,8 +43,11 @@ export function buildTrace(s) {
   const frames = []
   let run = 1
   let best = 1
+  let start = 0
+  let bestStart = 0
+  let bestEnd = 0
   const add = (phase, c, p, message, snapshot) => frames.push({ phase, activeLine: C(c), pythonLine: P(p), message, snapshot })
-  const snap = (index, same = null) => ({ s, index, run, best, same })
+  const snap = (index, same = null) => ({ s, index, run, best, same, runStart: start, bestStart, bestEnd })
   add('start', 'best = 1', 'best = 1', `Start with s[0] = '${s[0]}'. Its run has length 1, and so does the best run.`, snap(0))
   for (let i = 1; i < s.length; i++) {
     const same = s[i] === s[i - 1]
@@ -54,8 +57,10 @@ export function buildTrace(s) {
       add('extend', 'run = run + 1', 'run += 1', `The run continues, so its length becomes ${run}.`, snap(i, same))
     } else {
       run = 1
+      start = i
       add('restart', 'else:', 'else:', `A new run starts at s[${i}], so its length resets to 1.`, snap(i, same))
     }
+    if (run > best) { best = run; bestStart = start; bestEnd = i }
     best = Math.max(best, run)
     add('record', 'best = max', 'best = max', `The best run is now ${best}.`, snap(i, same))
   }

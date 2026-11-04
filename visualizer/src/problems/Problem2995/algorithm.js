@@ -104,7 +104,9 @@ export function buildTrace(input) {
     const verdict = count > 0 ? 'stays' : 'is dropped'
     frames.push(frame('count', 'JOIN Sessions s ON', 'counts[user]', `User ${viewer.user_id} has ${count} later streamer session${count === 1 ? '' : 's'}, so it ${verdict}.`, ['user_id', 'sessions_count'], summary))
   }
-  const result = summary.filter(row => row.sessions_count > 0)
+  const result = summary
+    .filter(row => row.sessions_count > 0)
+    .sort((a, b) => b.sessions_count - a.sessions_count || b.user_id - a.user_id)
   frames.push(frame('done', 'ORDER BY', 'return [', `Return ${result.length} users.`, ['user_id', 'sessions_count'], result))
   return { input, result, frames }
 }

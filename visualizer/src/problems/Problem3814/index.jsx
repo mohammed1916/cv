@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -19,8 +20,27 @@ const definition = {
   ],
 }
 
+// Cost bars in sorted order with the budget line; the current machine r and its partner limit k are marked.
+function CostBars({ budget, sorted, costs, r, k }) {
+  const max = Math.max(budget, ...sorted.map(m => costs[m]), 1)
+  return <div className="cost-bars" role="img" aria-label={`Costs in sorted order; budget ${budget}`}>
+    {sorted.map((m, pos) => {
+      const h = (costs[m] / max) * 120
+      const cls = pos === r ? 'is-current' : pos === k ? 'is-partner' : pos < k ? 'is-prefix' : ''
+      return <div key={pos} className={`cost-bars__bar ${cls}`} style={{ height: h, background: pos === r ? 'var(--primary)' : pos === k ? 'var(--accent, var(--primary))' : 'var(--surface2)', border: '1px solid var(--text-muted)', width: 28, display: 'inline-block', margin: '0 3px', verticalAlign: 'bottom' }} title={`position ${pos}, machine ${m}, cost ${costs[m]}`}>
+        <small style={{ display: 'block', textAlign: 'center', color: 'var(--text)' }}>{costs[m]}</small>
+      </div>
+    })}
+    <div style={{ borderTop: '2px dashed var(--text)', marginTop: 4, fontSize: 12, color: 'var(--text)' }}>budget {budget}: a pair must total less than this</div>
+  </div>
+}
+
 export default function MaximumCapacityWithinBudget() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <CostBars budget={run.input.budget} sorted={step.sorted} costs={run.input.costs} r={step.r} k={step.k} />
+    <IndexedSequence label="Machines by sorted position" length={step.sorted.length} active={step.r}
+      valueAt={pos => run.input.capacity[step.sorted[pos]]}
+      roleAt={pos => pos === step.k ? 'partner limit k' : pos < step.k ? 'prefix' : ''} />
     <table aria-label="Machines sorted by cost">
       <thead><tr><th>position</th><th>machine</th><th>cost</th><th>capacity</th><th>prefix max</th></tr></thead>
       <tbody>{step.sorted.map((m, pos) => <tr key={pos} data-current={step.r === pos ? 'yes' : undefined} data-partner={step.k === pos ? 'yes' : undefined}>

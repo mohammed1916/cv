@@ -14,25 +14,35 @@ const definition = {
   ],
 }
 
-const tile = (value, tone, active) => ({
-  minWidth: 44, boxSizing: 'border-box', padding: '6px 8px', textAlign: 'center', fontFamily: 'monospace',
-  background: tone ?? 'transparent', color: tone ? '#1c1917' : 'inherit',
+const tile = (tone, active) => ({
+  minWidth: 44, boxSizing: 'border-box', padding: '6px 8px', textAlign: 'center', fontFamily: 'monospace', color: 'var(--text)',
+  background: tone ?? 'transparent',
   border: `${active ? 2 : 1}px solid ${active ? 'var(--text)' : 'var(--border)'}`,
 })
+const PREFIX = 'color-mix(in srgb, var(--primary) 30%, transparent)'
+const SUFFIX = 'color-mix(in srgb, var(--accent, var(--primary)) 25%, transparent)'
+const REMOVED = 'var(--surface2)'
 
 export default function ShortestRemovalToSort() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { l, r, i, j, ans } = step.snapshot
     const arr = run.input
+    const n = arr.length
+    const pointerAt = k => [k === l && 'l', k === r && 'r', k === i && 'i', k === j && 'j'].filter(Boolean).join(' ')
+    const removing = i !== undefined && j !== undefined && i < j - 1 && step.phase === 'pair'
     return <>
-      <div role="img" aria-label="Array values" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+      <div role="img" aria-label="Array values with pointers" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {arr.map((v, k) => {
-          const tone = l !== undefined && k <= l ? '#bbf7d0' : r !== undefined && k >= r ? '#bfdbfe' : undefined
-          const mark = k === i ? ' i' : k === j ? ' j' : ''
-          return <div key={k} style={tile(v, tone, k === i || k === j)}>{v}<small> {k}{mark}</small></div>
+          const tone = removing && k > i && k < j ? REMOVED : (l !== undefined && k <= l) ? PREFIX : (r !== undefined && k >= r) ? SUFFIX : undefined
+          return <div key={k} style={{ display: 'grid', justifyItems: 'center', gap: 2 }}>
+            <small style={{ minHeight: 16, color: 'var(--text)' }}>{pointerAt(k)}</small>
+            <div style={tile(tone, pointerAt(k) !== '')}>{v}<small> {k}</small></div>
+          </div>
         })}
       </div>
-      <p>Green: sorted prefix (up to index {l ?? '-'}). Blue: sorted suffix (from index {r ?? '-'}).</p>
+      <p>Left shaded: sorted prefix, up to index {l ?? '-'} (pointer l). Right shaded: sorted suffix, from index {r ?? '-'} (pointer r).</p>
+      {removing && <p>The grey cells between i and j are the block that would be removed for this join, length {j - i - 1}.</p>}
+      <p>Pointer i (prefix end) is {i ?? '-'}; pointer j (suffix start) is {j ?? '-'}; of {n} values.</p>
       <p>Best removal so far: <strong>{ans}</strong></p>
     </>
   }} renderReasoning={() => <>

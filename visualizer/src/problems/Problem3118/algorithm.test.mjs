@@ -16,24 +16,29 @@ function checkFrames(trace) {
   }
 }
 
-const SAMPLE = '{"Users":[{"user_id":1,"membership":"basic"},{"user_id":2,"membership":"plus"},{"user_id":3,"membership":"pro"},{"user_id":4,"membership":"basic"}],"Purchases":[{"user_id":1,"purchase_date":"2023-11-03","amount_spend":20},{"user_id":1,"purchase_date":"2023-11-04","amount_spend":50},{"user_id":2,"purchase_date":"2023-11-10","amount_spend":15},{"user_id":2,"purchase_date":"2023-11-17","amount_spend":35},{"user_id":4,"purchase_date":"2023-11-24","amount_spend":5},{"user_id":3,"purchase_date":"2023-10-27","amount_spend":99},{"user_id":3,"purchase_date":"2023-12-01","amount_spend":99},{"user_id":2,"purchase_date":"2023-11-12","amount_spend":40}]}'
+const SAMPLE = '{"Users":[{"user_id":1,"membership":"Premium"},{"user_id":2,"membership":"VIP"},{"user_id":3,"membership":"Standard"}],"Purchases":[{"user_id":1,"purchase_date":"2023-11-03","amount_spend":1126},{"user_id":2,"purchase_date":"2023-11-10","amount_spend":7473},{"user_id":3,"purchase_date":"2023-11-03","amount_spend":999},{"user_id":2,"purchase_date":"2023-11-24","amount_spend":14933},{"user_id":1,"purchase_date":"2023-11-24","amount_spend":5117}]}'
 
-test('3118 sample totals only November Friday purchases per membership', () => {
+test('3118 sample: Premium and VIP only, every week and membership listed', () => {
   const trace = run(SAMPLE)
   checkFrames(trace)
   assert.deepEqual(trace.result, [
-    { membership: 'basic', total_spend: 25 },
-    { membership: 'plus', total_spend: 50 },
-    { membership: 'pro', total_spend: 0 },
+    { week_of_month: 1, membership: 'Premium', total_amount: 1126 },
+    { week_of_month: 1, membership: 'VIP', total_amount: 0 },
+    { week_of_month: 2, membership: 'Premium', total_amount: 0 },
+    { week_of_month: 2, membership: 'VIP', total_amount: 7473 },
+    { week_of_month: 3, membership: 'Premium', total_amount: 0 },
+    { week_of_month: 3, membership: 'VIP', total_amount: 0 },
+    { week_of_month: 4, membership: 'Premium', total_amount: 5117 },
+    { week_of_month: 4, membership: 'VIP', total_amount: 14933 },
   ])
 })
 
-test('3118 a membership with only non-Friday purchases still appears as zero', () => {
-  const trace = run('{"Users":[{"user_id":7,"membership":"gold"}],"Purchases":[{"user_id":7,"purchase_date":"2023-11-04","amount_spend":12}]}')
+test('3118 a Standard member and a non-Friday purchase are ignored', () => {
+  const trace = run('{"Users":[{"user_id":1,"membership":"Standard"},{"user_id":2,"membership":"Premium"}],"Purchases":[{"user_id":1,"purchase_date":"2023-11-03","amount_spend":50},{"user_id":2,"purchase_date":"2023-11-04","amount_spend":70}]}')
   checkFrames(trace)
-  assert.deepEqual(trace.result, [{ membership: 'gold', total_spend: 0 }])
+  assert.ok(trace.result.every(row => row.total_amount === 0))
 })
 
-test('3118 rejects a purchase from a user missing in Users', () => {
-  assert.throws(() => parseInput('{"Users":[{"user_id":1,"membership":"basic"}],"Purchases":[{"user_id":2,"purchase_date":"2023-11-03","amount_spend":5}]}'))
+test('3118 rejects an unknown membership', () => {
+  assert.throws(() => parseInput('{"Users":[{"user_id":1,"membership":"Gold"}],"Purchases":[{"user_id":1,"purchase_date":"2023-11-03","amount_spend":5}]}'))
 })

@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -15,16 +16,24 @@ const definition = {
   examples: [
     { label: 'Banana', input: '"banana"' },
     { label: 'Repeats', input: '"abab"' },
+    { label: 'No repeat', input: '"abcd"' },
   ],
 }
 
 export default function LongestDuplicateSubstring() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="Text" length={run.input.length} valueAt={index => run.input[index]} />
-    <output aria-label="Search range">{`Lengths ${step.lo} to ${step.hi}${step.mid ? `, trying ${step.mid}` : ''}`}</output>
-    <output aria-label="Best so far">{`Best so far: ${step.best || '(none)'}`}</output>
-  </>} renderReasoning={() => <>
-    <p>If a repeat exists at some length, one exists at every shorter length, so the length can be found by binary search.</p>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const n = run.input.length
+    const max = Math.max(1, n - 1)
+    return <>
+      <IndexedSequence label="Text" length={n} valueAt={index => run.input[index]} />
+      <AnswerRangeBar title="Length search" min={1} max={max} low={Math.max(1, step.lo)} high={Math.max(1, step.hi)}
+        probe={step.mid} verdict={step.mid === null ? null : step.found} />
+      <output aria-label="Search range">{`Lengths ${step.lo} to ${step.hi}${step.mid ? `, trying ${step.mid}` : ''}`}</output>
+      <output aria-label="Best so far">{`Best so far: ${step.best || '(none)'}`}</output>
+    </>
+  }} renderReasoning={({ step }) => <>
+    <p>{step.message}</p>
+    <p>If a repeat exists at some length, one exists at every shorter length, so the length can be found by binary search. The bar shows the range still possible; the marker is the length being tried.</p>
     <p>A rolling hash gives each window a number in constant time. Equal numbers are only candidates, so the letters are compared before a repeat is accepted.</p>
   </>} />
 }

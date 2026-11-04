@@ -13,11 +13,14 @@ runs AS (
   FROM numbered
   GROUP BY run_key
 )
-SELECT n.seat_id
+SELECT MIN(n.seat_id) AS first_seat_id,
+  MAX(n.seat_id) AS last_seat_id,
+  COUNT(*) AS consecutive_seats_len
 FROM numbered n
 JOIN runs r ON r.run_key = n.run_key
 WHERE r.run_length = (SELECT MAX(run_length) FROM runs)
-ORDER BY n.seat_id`
+GROUP BY n.run_key
+ORDER BY first_seat_id`
 
 export const code = sql.split('\n').map((text, index) => ({ line: index + 1, text }))
 const SQL = key => {
@@ -31,7 +34,9 @@ export const python = `def consecutive_longest(cinema):
     run_key = free["seat_id"].diff().ne(1).cumsum()
     run_length = free.groupby(run_key)["seat_id"].transform("size")
     keep = run_length == run_length.max()
-    return free.loc[keep].to_dict("records")`
+    kept = free.loc[keep].assign(run_key=run_key[keep])
+    blocks = kept.groupby("run_key")["seat_id"].agg(first_seat_id="min", last_seat_id="max", consecutive_seats_len="size")
+    return blocks.reset_index(drop=True).to_dict("records")`
 const PY_LINES = python.split('\n')
 const PY = key => {
   const index = PY_LINES.findIndex(line => line.includes(key))
@@ -100,7 +105,17 @@ export function buildTrace(input) {
   })
   frames.push(frame('pick', 'WHERE r.run_length', 'keep =', `The longest block has ${best} seat${best === 1 ? '' : 's'}; seats in other blocks are dropped.`, ['seat_id', 'run_key', 'run_length', 'kept'], picked))
 
-  const result = picked.filter(row => row.kept === 'yes').map(row => ({ seat_id: row.seat_id }))
-  frames.push(frame('done', 'ORDER BY n.seat_id', 'return', `Return ${result.length} seat${result.length === 1 ? '' : 's'}.`, ['seat_id'], result))
-  return { input, result, frames }
+  const kept = picked.filter(row => row.kept === 'yes')
+  const result = []
+  for (const row of kept) {
+    const last = result.at(-1)
+    if (last && last.run_key === row.run_key) {
+      last.last_seat_id = row.seat_id
+      last.consecutive_seats_len += 1
+    }
+    else result.push({ first_seat_id: row.seat_id, last_seat_id: row.seat_id, consecutive_seats_len: 1, run_key: row.run_key })
+  }
+  const output = result.map(({ run_key, ...rest }) => rest)
+  frames.push(frame('done', 'ORDER BY first_seat_id', 'return', `Return ${output.length} block${output.length === 1 ? '' : 's'} with the longest run.`, ['first_seat_id', 'last_seat_id', 'consecutive_seats_len'], output))
+  return { input, result: output, frames }
 }

@@ -37,6 +37,6 @@ export default function FindAllUniqueEmailDomains() {
     renderVisual={({ step }) => <RowTable step={step} />}
     renderReasoning={() => <>
       <p>{meta.description}</p>
-      <p>This is a knowledge-derived teaching model. The sample table was invented for this visualization and is not the official statement.</p>
+      <p>The sample tables are invented for this visualization.</p>
     </>} />
 }

@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { meta } from './meta'
 import { buildTrace, parseInput, code, python, phases, examples, complexity, inputLabel } from './algorithm'
+import { Sequence, Vars } from './SeqKit'
 
 const definition = {
   number: meta.number,
@@ -8,26 +9,19 @@ const definition = {
   url: `https://leetcode.com/problems/${meta.slug}/`,
 }
 
-function SearchView({ snapshot }) {
-  const { nums, target, lo, hi, mid } = snapshot
-  return <div style={{ overflowX: 'auto' }}>
-    <p>Target: {target} · Search window: [{lo}, {hi})</p>
-    <table aria-label="Sorted array search">
-      <thead><tr>{nums.map((_, i) => <th key={i} scope="col">{i}</th>)}</tr></thead>
-      <tbody><tr>{nums.map((value, i) => {
-        const inWindow = i >= lo && i < hi
-        return <td key={i} style={{
-          padding: '6px 10px', textAlign: 'center', border: '1px solid #94a3b8',
-          background: i === mid ? '#0891b2' : inWindow ? '#a5f3fc' : 'transparent',
-          opacity: inWindow ? 1 : 0.45,
-        }}>{value}</td>
-      })}</tr></tbody>
-    </table>
-  </div>
-}
-
 export default function MajorityElementVisual() {
-  return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ step }) => <SearchView snapshot={step.snapshot} />}
-    renderReasoning={() => <p>Copies of the target form one block in a sorted array. Two binary searches find the block's edges, and the block's width decides whether it is more than half.</p>} />
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const s = step.snapshot
+    const pointers = {}
+    if (s.lo < s.nums.length) pointers.lo = s.lo
+    if (s.mid !== null) pointers.mid = s.mid
+    const marks = {}
+    for (let i = s.lo; i < s.hi; i++) marks[i] = 'window'
+    if (s.boundary === 'count') for (let i = s.lo; i < s.hi; i++) marks[i] = 'written'
+    return <>
+      <Sequence label={`Sorted array, search range [${s.lo}, ${s.hi})`} values={s.nums} pointers={pointers} marks={marks} />
+      <Vars vars={{ target: s.target, lo: s.lo, hi: s.hi, mid: s.mid, 'boundary': s.boundary ?? '-', 'copies': s.boundary === 'count' ? s.hi - s.lo : '-' }} />
+      <output aria-label="Result">{step.phase === 'done' ? `Result: ${run.result}` : step.message}</output>
+    </>
+  }} renderReasoning={() => <p>Copies of the target form one block in a sorted array. Two binary searches find the block's edges, and the block's width decides whether it is more than half.</p>} />
 }

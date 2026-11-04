@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
 import IndexedSequence from "../../components/shared/IndexedSequence";
+import MatrixGrid from "../../components/shared/MatrixGrid";
 import { code, python, parseInput, buildTrace } from "./algorithm";
 
 const definition = {
@@ -25,15 +26,30 @@ export default function GoodPairsVisualizer() {
   return (
     <AlgorithmWorkspace
       definition={definition}
-      renderVisual={({ run, step }) => (
-        <>
-          <IndexedSequence label="nums1" length={run.input.nums1.length} valueAt={i => run.input.nums1[i]}
-            active={step.i} roleAt={i => (i === step.i ? "active" : "")} />
-          <IndexedSequence label="nums2" length={run.input.nums2.length} valueAt={i => run.input.nums2[i]}
-            active={step.j} roleAt={i => (i === step.j ? "active" : "")} />
-          <p>Good pairs so far: {step.count}</p>
-        </>
-      )}
+      renderVisual={({ run, step }) => {
+        const { nums1, nums2, k } = run.input;
+        const good = (a, b) => nums1[a] % (nums2[b] * k) === 0;
+        const matrix = nums1.map((_, a) => nums2.map((_, b) => (good(a, b) ? 1 : 0)));
+        const checked = [];
+        for (let a = 0; a < nums1.length; a += 1) {
+          for (let b = 0; b < nums2.length; b += 1) {
+            if (step.i >= 0 && (a < step.i || (a === step.i && b <= Math.max(step.j, 0)))) checked.push({ row: a, col: b });
+          }
+        }
+        const goodSoFar = checked.filter(({ row, col }) => good(row, col));
+        return (
+          <>
+            <MatrixGrid matrix={matrix} label="Pairs (nums1 rows, nums2 columns); 1 marks a good pair"
+              activeCell={step.i >= 0 && step.j >= 0 ? { row: step.i, col: step.j } : null}
+              highlightedCells={goodSoFar} dimmedCells={checked.filter(({ row, col }) => !good(row, col))} cellWidth={44} cellHeight={40} />
+            <IndexedSequence label="nums1" length={nums1.length} valueAt={i => nums1[i]}
+              active={step.i} roleAt={i => (i === step.i ? "active" : "")} />
+            <IndexedSequence label="nums2" length={nums2.length} valueAt={i => nums2[i]}
+              active={step.j} roleAt={i => (i === step.j ? "active" : "")} />
+            <p>{`Count so far: ${step.count}`}</p>
+          </>
+        );
+      }}
       renderReasoning={({ step }) => <p>{step.message}</p>}
     />
   );

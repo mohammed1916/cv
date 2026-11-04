@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -19,10 +20,18 @@ const definition = {
 }
 
 export default function AddedIntegerII() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <output aria-label="Removed pair">{step.i === null ? 'no pair yet' : `removed indices ${step.i} and ${step.j}, shift ${step.x}`}</output>
-    <output aria-label="Best shift">{`best shift so far: ${step.best ?? 'none'}`}</output>
-  </>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const removed = step.i === null ? [] : [step.i, step.j]
+    const roleOf = i => (removed.includes(i) ? 'removed' : '')
+    const target = [...run.input.nums2].sort((a, b) => a - b)
+    return <>
+      <IndexedSequence label="nums1 (red cells are removed)" length={run.input.nums1.length}
+        valueAt={i => run.input.nums1[i]} active={step.i ?? -1} roleAt={roleOf} />
+      <IndexedSequence label="Target: nums2 sorted" length={target.length} valueAt={i => target[i]} active={-1} roleAt={() => ''} />
+      <output aria-label="Removed pair">{step.i === null ? 'no pair yet' : `removed indices ${step.i} and ${step.j}, shift ${step.x}`}</output>
+      <output aria-label="Best shift">{`best shift so far: ${step.best ?? 'none'}`}</output>
+    </>
+  }} renderReasoning={() => <>
     <p>Exactly two values are removed from nums1. For each choice, the smallest remaining value must map to the smallest value of nums2, and the sorted rest must line up with the sorted target after that shift.</p>
   </>} />
 }

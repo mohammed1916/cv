@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -18,11 +19,16 @@ const definition = {
 }
 
 export default function UglyNumberThree() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <output aria-label="Search">{step.mid === null
-      ? `Answer range ${step.low} to ${step.high} for n = ${run.input.n}, divisors ${run.input.a}, ${run.input.b}, ${run.input.c}`
-      : `Range ${step.low} to ${step.high}, testing ${step.mid}: ${step.found} divisible numbers up to it, need ${run.input.n}`}</output>
-  </>} renderReasoning={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const { n, a, b, c } = run.input
+    const max = n * Math.min(a, b, c)
+    return <>
+      <AnswerRangeBar title="Answer search" min={1} max={max} low={step.low} high={step.high} probe={step.mid} verdict={step.found !== null && step.found >= n} />
+      <output aria-label="Search">{step.mid === null
+        ? `lo = ${step.low}, hi = ${step.high}. The answer is the ${n}th number divisible by ${a}, ${b} or ${c}.`
+        : `lo = ${step.low}, hi = ${step.high}, mid = ${step.mid}: ${step.found} numbers up to mid, need ${n}.`}</output>
+    </>
+  }} renderReasoning={({ step }) => <>
     <p>{step.message}</p>
     <p>Inclusion-exclusion counts numbers divisible by at least one divisor, subtracting the overlaps of each pair and adding back the triple overlap.</p>
   </>} />

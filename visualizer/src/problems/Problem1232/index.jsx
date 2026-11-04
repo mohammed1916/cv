@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import CoordinatePlane from '../../components/shared/CoordinatePlane'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -16,15 +17,19 @@ const definition = {
 
 export default function StraightLineCheck() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
-    const { points, index, cross } = step.snapshot
-    return <div aria-label="Points" style={{ display: 'grid', gap: 6, fontFamily: 'monospace' }}>
-      <ol style={{ margin: 0, paddingLeft: 20 }}>
-        {points.map(([x, y], i) => <li key={`${i}-${x}-${y}`} data-point={i} style={{
-          fontWeight: i === index ? 700 : 400,
-          color: i === index && cross !== null && cross !== 0 ? '#dc2626' : 'inherit',
-        }}>({x}, {y}){i < 2 ? ' · sets direction' : ''}</li>)}
-      </ol>
-      <output aria-label="Cross product">{cross === null ? '' : `Cross product for the current point: ${cross}`}</output>
+    const { points, index, cross, anchor, direction } = step.snapshot
+    const planePoints = points.map(([x, y], i) => {
+      let role = ''
+      if (i < 2) role = 'kept'
+      if (index !== null && i === index) role = cross !== null && cross !== 0 ? 'excluded' : 'active'
+      return { x, y, label: i < 2 ? `p${i + 1}` : String(i + 1), role }
+    })
+    return <div style={{ display: 'grid', gap: 8 }}>
+      <CoordinatePlane title="Points and the line through the first two" points={planePoints} />
+      <p style={{ margin: 0, color: 'var(--text-dim)' }}>
+        {direction ? `Direction (${direction[0]}, ${direction[1]}) from p1. Cross product for the current point: ${cross ?? '-'}.` : 'The first two points fix the direction.'}
+      </p>
+      <output aria-label="Cross product">{cross === null ? '' : `Anchor (${anchor[0]}, ${anchor[1]}) · cross ${cross}`}</output>
     </div>
   }} renderReasoning={({ step }) => <p>{step.message}</p>} />
 }

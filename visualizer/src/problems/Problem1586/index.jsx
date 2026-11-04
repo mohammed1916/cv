@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { parseInput, buildTrace, code, python } from './algorithm'
 
 const definition = {
@@ -20,7 +21,11 @@ const definition = {
 }
 
 export default function BinarySearchTreeIteratorII() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="Values in order (the tree read left to right)" length={run.input.values.length}
+      active={step.cursor} valueAt={index => run.input.values[index]}
+      roleAt={index => (index === step.cursor ? 'cursor' : '')} />
+    <p>{step.cursor < 0 ? 'The cursor is before the first value; prev and hasPrevious are false.' : `The cursor is on index ${step.cursor}. next moves right, prev moves left.`}</p>
     <ul aria-label="Iterator state">{step.state.map((line, index) => <li key={index}>{line}</li>)}</ul>
     <output aria-label="Current step">{step.message}</output>
   </>} renderReasoning={() => <>

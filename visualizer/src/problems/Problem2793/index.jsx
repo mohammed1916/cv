@@ -1,6 +1,12 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import SqlStageBoard from './SqlStageBoard'
 import { buildTrace, parseInput, code, sql, python, phases, sample } from './algorithm'
 import { meta } from './meta'
+
+const stagesOf = run => run.frames.map(f => ({
+  id: f.phase, clause: code[f.activeLine - 1]?.text.trim() ?? '', label: phases.find(p => p.id === f.phase)?.label ?? f.phase,
+  columns: f.columns, rows: f.rows,
+}))
 
 const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python,
@@ -20,10 +26,7 @@ function RowTable({ rows }) {
 }
 
 export default function TicketStatus() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <h3>{meta.title}: working table</h3>
-    <RowTable rows={step.rows} />
-  </>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <SqlStageBoard title={`${meta.title}: query stages`} stages={stagesOf(run)} active={run.frames.indexOf(step)} />} renderReasoning={() => <>
     <p>Knowledge-derived walkthrough written for this visualizer. The sample tables are invented.</p>
     <p>Bookings are numbered in time order within each flight.</p>
     <p>A booking is confirmed when its arrival number is no more than the flight capacity.</p>

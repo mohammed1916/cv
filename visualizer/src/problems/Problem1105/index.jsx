@@ -1,32 +1,27 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { meta } from './meta'
 import { buildTrace, parseInput, code, python, phases, examples, complexity, inputLabel } from './algorithm'
+import DPDependencyView from '../../components/shared/DPDependencyView'
+import { Sequence, Vars } from './SeqKit'
 
 const definition = {
   number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`, complexity, examples,
 }
 
-function PrefixTable({ snapshot }) {
-  return <table aria-label="Prefix costs">
-    <thead><tr><th scope="col">Books</th><th scope="col">Best height</th></tr></thead>
-    <tbody>{snapshot.dp.map((value, index) => <tr key={index} style={index === snapshot.end ? { fontWeight: 700 } : undefined}>
-      <td>{index}</td><td>{value ?? 'unsolved'}</td>
-    </tr>)}</tbody>
-  </table>
-}
-
-function ShelfStrip({ snapshot }) {
-  if (snapshot.start === undefined) return null
-  return <p aria-label="Last shelf">Last shelf: books {snapshot.start}–{snapshot.end} · width {snapshot.width} of {snapshot.shelfWidth} · tallest {snapshot.tallest}</p>
-}
-
-export default function ShelfPartitionVisual() {
-  return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ run, step }) => <>
-      <PrefixTable snapshot={step.snapshot} />
-      <ShelfStrip snapshot={step.snapshot} />
-      <output aria-label="Result">{step.phase === 'done' ? `Result: ${run.result}` : step.message}</output>
-    </>}
-    renderReasoning={() => <p>Each prefix ends with one final shelf. Growing that shelf backward from the end gives every fitting choice; the cheapest is the best earlier prefix plus this shelf's tallest book.</p>} />
+export default function BookshelfVisual() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
+    const s = step.snapshot
+    const end = s.end ?? 0
+    const sources = s.start ? [{ cell: [0, s.start - 1], note: `last shelf holds books ${s.start}..${end}`, chosen: step.phase === 'improve' }] : []
+    return <>
+      <DPDependencyView title="Cheapest total height for the first books" shape="linear" values={s.dp} target={[0, end]} sources={sources}
+        recurrence="dp[end] = min over start of dp[start-1] + tallest(start..end)"
+        why="The last shelf takes books start..end. Each start is tried while the shelf width still fits, and the cheapest total wins." />
+      <Sequence label="Books as thickness/height" values={s.books.map(([thickness, height]) => `${thickness}/${height}`)}
+        pointers={s.start ? { start: s.start - 1, end: end - 1 } : {}} />
+      <Vars vars={{ 'books placed': end, 'last shelf width': s.width ?? null, 'tallest on last shelf': s.tallest ?? null, 'shelf width limit': s.shelfWidth }} />
+      <output aria-label="Result">{step.message}</output>
+    </>
+  }} renderReasoning={() => <p>Books keep their order, so the last shelf is always a run of consecutive books. Each prefix is priced from the cheaper prefixes before it.</p>} />
 }

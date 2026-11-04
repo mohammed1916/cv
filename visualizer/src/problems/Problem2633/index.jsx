@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code } from './algorithm'
+import JsonView from './JsonView'
 
 const definition = {
   number: '2633',
@@ -22,11 +23,7 @@ const definition = {
 
 export default function ConvertObjectToJsonString() {
   return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ step }) => <section aria-label="Visual state">
-      <h3>{step.view.title}</h3>
-      <ol>{step.view.rows.map((row, index) => <li key={index} aria-current={index === step.view.focus ? 'step' : undefined}>{row}</li>)}</ol>
-      {step.view.summary && <output>{step.view.summary}</output>}
-    </section>}
+    renderVisual={({ step }) => <JsonView view={step.view} />}
     renderReasoning={() => <>
       <p>Serialising is a recursion: arrays and objects are opened, their children are written in order, and then they are closed.</p>
       <p>Leaves (numbers, booleans, null and strings) are written directly. Commas go between siblings only.</p>

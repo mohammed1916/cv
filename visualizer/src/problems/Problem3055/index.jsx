@@ -41,6 +41,6 @@ export default function TopPercentileFraud() {
     renderVisual={({ step }) => <RowTable step={step} />}
     renderReasoning={() => <>
       <p>{meta.description}</p>
-      <p>Ties are broken by policy_id so the rank is deterministic. This is a knowledge-derived teaching model; the sample table was invented for this visualization.</p>
+      <p>Ties are broken by policy_id so the rank is deterministic. The sample table was invented for this visualization.</p>
     </>} />
 }

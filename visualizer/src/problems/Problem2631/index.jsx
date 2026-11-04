@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code } from './algorithm'
+import GroupView from './GroupView'
 
 const definition = {
   number: '2631',
@@ -21,11 +22,7 @@ const definition = {
 
 export default function GroupBy() {
   return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ step }) => <section aria-label="Visual state">
-      <h3>{step.view.title}</h3>
-      <ol>{step.view.rows.map((row, index) => <li key={index} aria-current={index === step.view.focus ? 'step' : undefined}>{row}</li>)}</ol>
-      {step.view.summary && <output>{step.view.summary}</output>}
-    </section>}
+    renderVisual={({ step }) => <GroupView view={step.view} />}
     renderReasoning={() => <>
       <p>One pass over the items: the key value of each item picks its bucket, and the bucket is created the first time its name appears.</p>
     </>} />

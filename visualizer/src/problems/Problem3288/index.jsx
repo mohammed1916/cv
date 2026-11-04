@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import ScatterView from './ScatterView'
 
 const definition = {
   phases: [
@@ -14,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/length-of-the-longest-increasing-path/',
   complexity: 'O(n^2) time for the two memoized searches over n points. The visualization caps input at 10 points.',
   examples: [
-    { label: 'Example 1', input: '{"coordinates":[[3,1],[2,2],[4,1],[0,0],[5,3]],"k":1}' },
-    { label: 'Example 2', input: '{"coordinates":[[2,1],[7,0],[5,6]],"k":2}' },
+    { label: 'Invented staircase', input: '{"coordinates":[[1,4],[3,1],[6,2],[2,6],[8,8],[5,5]],"k":5}' },
+    { label: 'Invented pair', input: '{"coordinates":[[2,1],[7,0],[5,6]],"k":1}' },
   ],
 }
 
@@ -24,6 +25,7 @@ export default function LongestIncreasingPath() {
     const { coordinates, k } = run.input
     const values = new Map(step.memo.map(e => [e.index, e]))
     return <>
+      <ScatterView run={run} step={step} />
       <table aria-label="Points">
         <thead><tr><th>Index</th><th>Point</th><th>Rising</th><th>Falling</th></tr></thead>
         <tbody>{coordinates.map((p, i) => {

@@ -1,5 +1,5 @@
 // Knowledge-derived teaching model. The sample table is invented for this visualization.
-// Teaching rule: within each state, keep the policies whose rank times 4 is at most the state's size (the top quarter).
+// Rule: within each state, keep the policies whose rank is at most 5 percent of the state's size, rounded up.
 export const sql = `SELECT policy_id, state, fraud_score
 FROM (
   SELECT policy_id, state, fraud_score,
@@ -7,17 +7,17 @@ FROM (
          COUNT(*) OVER (PARTITION BY state) AS group_size
   FROM Fraud
 ) ranked
-WHERE rnk * 4 <= group_size
+WHERE rnk <= CEIL(group_size / 20)
 ORDER BY state, fraud_score DESC, policy_id`
 
 export const python = `import pandas as pd
 
-def top_quarter_by_state(fraud):
+def top_five_percent_by_state(fraud):
     ranked = fraud.copy()
     ranked["group_size"] = ranked.groupby("state")["policy_id"].transform("count")
     ranked = ranked.sort_values(["state", "fraud_score", "policy_id"], ascending=[True, False, True])
     ranked["rnk"] = ranked.groupby("state").cumcount() + 1
-    kept = ranked[ranked["rnk"] * 4 <= ranked["group_size"]]
+    kept = ranked[ranked["rnk"] <= -(-ranked["group_size"] // 20)]
     return kept[["policy_id", "state", "fraud_score"]].sort_values(["state", "fraud_score", "policy_id"], ascending=[True, False, True])`
 
 const sqlLines = sql.split('\n')
@@ -38,7 +38,7 @@ const frame = (phase, sqlText, pyText, message, columns, rows) => ({
 export const phases = [
   { id: 'load', label: 'Load', description: 'Read each policy and its state.' },
   { id: 'rank', label: 'Rank', description: 'Rank the policies inside one state.' },
-  { id: 'cut', label: 'Cut', description: 'Keep the top quarter of that state.' },
+  { id: 'cut', label: 'Cut', description: 'Keep the top 5 percent of that state, rounded up.' },
   { id: 'order', label: 'Order', description: 'Sort the kept policies.' },
   { id: 'done', label: 'Result', description: 'Output the kept policies.' },
 ]
@@ -63,7 +63,7 @@ export function parseInput(text) {
 
 export function buildTrace(input) {
   const fraud = input.Fraud
-  const frames = [frame('load', 'SELECT policy_id, state, fraud_score', 'def top_quarter_by_state', `Load ${fraud.length} policies.`, COLS, fraud)]
+  const frames = [frame('load', 'SELECT policy_id, state, fraud_score', 'def top_five_percent_by_state', `Load ${fraud.length} policies.`, COLS, fraud)]
   const groups = new Map()
   for (const row of fraud) groups.set(row.state, [...(groups.get(row.state) || []), row])
   const states = [...groups.entries()].sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
@@ -71,9 +71,9 @@ export function buildTrace(input) {
   for (const [state, rows] of states) {
     const sorted = [...rows].sort((x, y) => y.fraud_score - x.fraud_score || x.policy_id - y.policy_id)
     frames.push(frame('rank', 'ROW_NUMBER() OVER', 'ranked = ranked.sort_values', `${state} has ${sorted.length} policies. Rank by score, then policy_id.`, COLS, sorted))
-    const top = sorted.filter((row, index) => (index + 1) * 4 <= sorted.length)
+    const top = sorted.filter((row, index) => (index + 1) * 20 <= sorted.length + 19)
     kept.push(...top)
-    frames.push(frame('cut', 'WHERE rnk * 4 <= group_size', 'kept = ranked[', `Keep ${top.length} from ${state}: rank times 4 must not exceed ${sorted.length}.`, COLS, top))
+    frames.push(frame('cut', 'WHERE rnk <= CEIL(group_size / 20)', 'kept = ranked[', `Keep ${top.length} from ${state}: 5 percent of ${sorted.length} rounded up is ${Math.ceil(sorted.length / 20)}.`, COLS, top))
   }
   const result = [...kept].sort(byOutput)
   frames.push(frame('order', 'ORDER BY state', 'return kept[', 'Sort by state, then score descending, then policy_id.', COLS, result))

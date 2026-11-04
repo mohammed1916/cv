@@ -22,10 +22,11 @@ const definition = {
 export default function MovingStones() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
     <IndexedSequence label="Sorted stones" length={step.sorted.length} valueAt={i => step.sorted[i]} active={step.i}
-      roleAt={i => (i >= step.i && i <= step.j ? 'window' : '')} />
-    <output aria-label="Result">{`Fewest so far: ${step.least ?? '-'}. Most: ${step.most ?? '-'}.`}</output>
-  </>} renderReasoning={() => <>
+      roleAt={i => (step.i < 0 ? '' : i === step.i ? 'l' : i === step.j ? 'r' : i > step.i && i < step.j ? 'window' : '')} />
+    <output aria-label="Result">{`Window from l to r holds ${step.j >= 0 && step.i >= 0 ? step.j - step.i + 1 : 0} stones. Fewest so far: ${step.least ?? '-'}. Most: ${step.most ?? '-'}.`}</output>
+  </>} renderReasoning={({ step }) => <>
+    <p>{step.message}</p>
     <p>An endpoint stone may only move to an empty cell that is strictly inside the span, so the outer gaps decide the most moves.</p>
-    <p>For the fewest moves, the best plan keeps as many stones as possible inside one window of span n.</p>
+    <p>For the fewest moves, the best plan keeps as many stones as possible inside one window of span n. The pointers l and r mark that window as it slides right.</p>
   </>} />
 }

@@ -56,8 +56,9 @@ export function buildTrace(input) {
   const frames = [];
   const positions = new Map();
   const roles = () => Array(n).fill("");
+  let focus = null;
   const push = (phase, activeLine, pythonLine, message, extra = {}) => frames.push({
-    phase, activeLine, pythonLine, message, values: nums, active: -1, roles: roles(), detail: "", ...extra,
+    phase, activeLine, pythonLine, message, values: nums, active: -1, roles: roles(), detail: "", focus, ...extra,
   });
 
   push("setup", 1, py("n = len(nums)"), `n = ${n}; the array is circular, so index n-1 neighbours index 0.`);
@@ -76,6 +77,7 @@ export function buildTrace(input) {
   push("answer", 4, py("answer = n"), `Start with answer = ${n}, an upper bound.`, { detail: `answer = ${answer}` });
 
   for (const [value, idx] of positions) {
+    focus = value;
     const groupRoles = roles();
     idx.forEach(i => { groupRoles[i] = "group"; });
     push("group", 5, py("for value, idx in positions.items():"),

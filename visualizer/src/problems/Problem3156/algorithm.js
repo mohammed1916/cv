@@ -40,7 +40,7 @@ peak AS (
   FROM depth
   GROUP BY employee_id
 )
-SELECT c.employee_id, c.total_task_duration, p.max_concurrent_tasks
+SELECT c.employee_id, FLOOR(c.total_task_duration / 3600) AS total_task_hours, p.max_concurrent_tasks
 FROM covered c
 JOIN peak p ON p.employee_id = c.employee_id
 ORDER BY c.employee_id`
@@ -69,7 +69,7 @@ export const python = `def task_duration_and_peak(tasks):
         for _, delta in sorted(events):
             running += delta
             peak = max(peak, running)
-        result.append({"employee_id": emp, "total_task_duration": covered, "max_concurrent_tasks": peak})
+        result.append({"employee_id": emp, "total_task_hours": covered // 3600, "max_concurrent_tasks": peak})
     return result`
 const PY_LINES = python.split('\n')
 const PY = key => {
@@ -108,7 +108,7 @@ export function parseInput(text) {
   const Tasks = tableRows(input, 'Tasks', TASK_COLUMNS)
   for (const row of Tasks) {
     if (![row.task_id, row.employee_id, row.start_time, row.end_time].every(Number.isInteger)) throw new Error('Every column is an integer.')
-    if (row.start_time < 0 || row.end_time > 1000) throw new Error('Times are between 0 and 1000.')
+    if (row.start_time < 0 || row.end_time > 3600000) throw new Error('Times are whole seconds between 0 and 3600000.')
     if (row.end_time <= row.start_time) throw new Error('Each task ends after it starts.')
   }
   return { Tasks }
@@ -174,7 +174,7 @@ export function buildTrace(input) {
       `Employee ${employee_id} never has more than ${peak} task${peak === 1 ? '' : 's'} running at once.`, ['employee_id', 'total_task_duration', 'max_concurrent_tasks'], peaks))
   }
 
-  const result = peaks.map(row => ({ ...row })).sort((a, b) => a.employee_id - b.employee_id)
-  frames.push(frame('done', 'ORDER BY c.employee_id', 'return result', `Return ${result.length} employee row${result.length === 1 ? '' : 's'}.`, ['employee_id', 'total_task_duration', 'max_concurrent_tasks'], result))
+  const result = peaks.map(row => ({ employee_id: row.employee_id, total_task_hours: Math.floor(row.total_task_duration / 3600), max_concurrent_tasks: row.max_concurrent_tasks })).sort((a, b) => a.employee_id - b.employee_id)
+  frames.push(frame('done', 'ORDER BY c.employee_id', 'return result', `Return ${result.length} employee row${result.length === 1 ? '' : 's'}.`, ['employee_id', 'total_task_hours', 'max_concurrent_tasks'], result))
   return { input, result, frames }
 }

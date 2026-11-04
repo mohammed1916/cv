@@ -18,13 +18,40 @@ const definition = {
 }
 
 export default function NumberOfBlackBlocks() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <table aria-label="Grid">
-      <tbody>{run.matrix.map((row, r) => <tr key={r}>{row.map((v, col) => <td key={col} className={step.cell && step.cell[0] === r && step.cell[1] === col ? 'is-active' : undefined}>{v}</td>)}</tr>)}</tbody>
-    </table>
-    <output aria-label="State">{Object.entries(step.state ?? {}).map(([key, value]) => `${key}: ${Array.isArray(value) ? value.join(', ') : String(value)}`).join(' · ')}</output>
-  </>} renderReasoning={() => <>
-    <p>Only blocks that contain a black cell need updating, so the work follows the black cells rather than the whole grid.</p>
-    <p>Blocks with no black cell are found by subtracting the touched blocks from the total number of blocks.</p>
-  </>} />
+  return (
+    <AlgorithmWorkspace
+      definition={definition}
+      renderVisual={({ run, step }) => {
+        // The grid of cells, with the current black cell ringed; below it, each 2 by 2 block shows its black count.
+        const { m, n, coordinates } = run.input
+        const black = new Set(coordinates.map(([r, c]) => `${r},${c}`))
+        const [cr, cc] = step.cell ?? [-1, -1]
+        const blockCount = (top, left) => [[0, 0], [0, 1], [1, 0], [1, 1]].filter(([dr, dc]) => black.has(`${top + dr},${left + dc}`)).length
+        const touching = (top, left) => cr >= top && cr <= top + 1 && cc >= left && cc <= left + 1
+        return (
+          <section aria-label="Grid and 2 by 2 blocks" style={{ display: 'grid', gap: 14 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: `repeat(${n}, 26px)`, gap: 3 }}>
+              {Array.from({ length: m * n }, (_, k) => {
+                const r = Math.floor(k / n), c = k % n
+                const on = black.has(`${r},${c}`)
+                return <div key={k} style={{ width: 26, height: 26, borderRadius: 4, background: on ? 'var(--primary)' : 'var(--surface2)', border: r === cr && c === cc ? '3px solid var(--warning)' : '1px solid var(--border)' }} />
+              })}
+            </div>
+            <div>
+              <h3 style={{ margin: '0 0 6px', color: 'var(--text)', fontSize: 15 }}>Blocks and their black counts</h3>
+              <div style={{ display: 'grid', gridTemplateColumns: `repeat(${Math.max(1, n - 1)}, 34px)`, gap: 3 }}>
+                {Array.from({ length: Math.max(0, (m - 1) * (n - 1)) }, (_, k) => {
+                  const top = Math.floor(k / (n - 1)), left = k % (n - 1)
+                  const count = blockCount(top, left)
+                  return <div key={k} title={`block at (${top}, ${left})`} style={{ height: 34, display: 'grid', placeItems: 'center', borderRadius: 4, color: 'var(--text)', border: touching(top, left) ? '2px solid var(--warning)' : '1px solid var(--border)', background: count ? 'var(--primary-glow)' : 'var(--surface)' }}>{count}</div>
+                })}
+              </div>
+            </div>
+            <p style={{ margin: 0, color: 'var(--text)' }}>{step.message}</p>
+          </section>
+        )
+      }}
+      renderReasoning={({ step }) => <p>{step.message}</p>}
+    />
+  )
 }

@@ -72,7 +72,7 @@ export function buildTrace(input) {
   const good = new Map()
   let total = 0
   const add = (phase, activeLine, pythonText, message, extra = {}) => frames.push({
-    phase, activeLine, pythonLine: at(pythonText), message, n, k, candidates, total, index: -1, ...extra,
+    phase, activeLine, pythonLine: at(pythonText), message, n, k, candidates: [...candidates], total, index: -1, ...extra,
   })
   add("setup", 1, "good = set()", "Start with no good digit multisets and a total of 0.")
   const low = 10 ** (half - 1)

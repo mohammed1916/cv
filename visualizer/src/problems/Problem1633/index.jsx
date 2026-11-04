@@ -28,9 +28,25 @@ function RowTable({ label, rows }) {
   </section>
 }
 
+function PercentBars({ rows }) {
+  if (rows.length === 0 || !('percentage' in rows[0])) return null
+  const max = 100
+  return <section aria-label="Attendance percentages">
+    <h4>Attendance per contest, out of all users</h4>
+    {rows.map(row => <div key={row.contest_id} style={{ display: 'grid', gridTemplateColumns: '5rem 1fr 4.5rem', gap: 8, alignItems: 'center', marginBottom: 4, color: 'var(--text)' }}>
+      <span style={{ fontFamily: 'monospace' }}>contest {row.contest_id}</span>
+      <div style={{ background: 'var(--surface2)', borderRadius: 4, height: 14 }}>
+        <div style={{ width: `${Math.min(100, (row.percentage / max) * 100)}%`, height: '100%', borderRadius: 4, background: 'var(--primary)' }} />
+      </div>
+      <strong>{row.percentage}%</strong>
+    </div>)}
+  </section>
+}
+
 export default function Problem1633() {
   return <AlgorithmWorkspace definition={definition}
     renderVisual={({ step }) => <>
+      <PercentBars rows={step.rows} />
       <RowTable label="Working rows" rows={step.rows} />
       <RowTable label="Output" rows={step.output} />
     </>}

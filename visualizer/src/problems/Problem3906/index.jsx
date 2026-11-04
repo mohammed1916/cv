@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code, python } from './algorithm'
+import { buildTrace, parseInput, code, python, routeIndices } from './algorithm'
 
 const definition = {
   phases: [
@@ -17,15 +17,24 @@ const definition = {
   ],
 }
 
+// The 4 by 4 grid of the sample r. Route cells carry their order (1 to 7) and are shaded.
+function Grid({ digits, chain }) {
+  const order = new Map(chain.map((cell, step) => [cell, step + 1]))
+  return <table aria-label="Sample r in the 4 by 4 grid" className="route-grid">
+    <tbody>{[0, 1, 2, 3].map(row => <tr key={row}>{[0, 1, 2, 3].map(col => {
+      const cell = row * 4 + col
+      const on = order.has(cell)
+      return <td key={col} data-role={on ? 'window' : ''} style={{ textAlign: 'center', minWidth: 56, padding: 8, border: '1px solid var(--text-muted)', background: on ? 'var(--primary)' : 'var(--surface2)', color: on ? 'var(--surface)' : 'var(--text)' }}>
+        <strong>{digits[cell] ?? '0'}</strong>{on && <small> · {order.get(cell)}</small>}
+      </td>
+    })}</tr>)}</tbody>
+  </table>
+}
+
 export default function CountGoodIntegersOnAGridPath() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <section className="algorithm-sequence" aria-label="Sample grid">
-      <h3>Sample r in the 4 by 4 grid</h3>
-      <div className="algorithm-sequence__cells">{(step.sampleDigits || '0000000000000000').split('').map((d, i) => (
-        <div key={i} className="algorithm-sequence__cell" data-role={step.chain && step.chain.includes(i) ? 'window' : ''}>
-          <small>cell {i}</small><strong>{d}</strong><span>{step.chain && step.chain.includes(i) ? 'on route' : ''}</span>
-        </div>))}</div>
-    </section>
+    <Grid digits={run.input.r.padStart(16, '0').split('')} chain={routeIndices(run.input.directions)} />
+    <p>Route: start at cell 0, then apply {run.input.directions.split('').join(' ')}. Digits on the route must not decrease.</p>
     <output aria-label="Count status">{step.count !== null && step.count !== undefined ? `Good integers: ${step.count}` : step.message}</output>
   </>} renderReasoning={() => <>
     <p>The seven route cells are visited in increasing index order, so the rule is that their digits never decrease along the route.</p>

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import DPDependencyView from '../../components/shared/DPDependencyView'
 import { meta } from './meta'
 import { buildTrace, parseInput, code, python, phases, examples, complexity, inputLabel } from './algorithm'
 
@@ -8,26 +9,30 @@ const definition = {
   url: `https://leetcode.com/problems/${meta.slug}/`,
 }
 
-function DpTable({ snapshot }) {
-  const { first, second, table, cell } = snapshot
-  return <div style={{ overflowX: 'auto' }}>
-    <table aria-label="Common subsequence table">
-      <thead><tr><th scope="col" /><th scope="col">·</th>{[...second].map((letter, j) => <th key={j} scope="col">{letter}</th>)}</tr></thead>
-      <tbody>{table.map((row, i) => <tr key={i}>
-        <th scope="row">{i === 0 ? '·' : first[i - 1]}</th>
-        {row.map((value, j) => {
-          const current = cell && cell[0] === i && cell[1] === j
-          return <td key={j} style={{ padding: '4px 8px', textAlign: 'center', border: '1px solid #94a3b8', background: current ? '#a855f7' : 'transparent' }}>
-            {value ?? ''}
-          </td>
-        })}
-      </tr>)}</tbody>
-    </table>
-  </div>
+// Cells read by the cell being filled: the diagonal on a match, otherwise the two neighbours (larger one chosen).
+function sourcesFor(s) {
+  if (!s.cell) return []
+  const [i, j] = s.cell
+  if (s.same) return [{ cell: [i - 1, j - 1], note: 'diagonal, plus one matched letter', chosen: true }]
+  const up = s.table[i - 1][j], left = s.table[i][j - 1]
+  return [
+    { cell: [i - 1, j], note: 'drop the last letter of first', chosen: up >= left },
+    { cell: [i, j - 1], note: 'drop the last letter of second', chosen: left > up },
+  ]
 }
 
 export default function LongestCommonSubsequenceVisual() {
   return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ step }) => <DpTable snapshot={step.snapshot} />}
-    renderReasoning={() => <p>A matching letter can only extend the diagonal from the cell before both letters. A mismatch means one of the two letters cannot both be used, so the cell takes the better neighbour.</p>} />
+    renderVisual={({ step }) => {
+      const s = step.snapshot
+      return <DPDependencyView title="LCS table"
+        shape="grid" values={s.table} target={s.cell ?? [0, 0]} sources={sourcesFor(s)}
+        labels={{ rows: ['·', ...[...s.first]], columns: ['·', ...[...s.second]] }}
+        recurrence={s.cell && s.same ? 'dp[i][j] = dp[i-1][j-1] + 1 when the letters match' : 'dp[i][j] = max(dp[i-1][j], dp[i][j-1]) when they differ'}
+        why="Each cell is the best common length for one prefix of each string, so the bottom-right cell covers both whole strings." />
+    }}
+    renderReasoning={({ step }) => <>
+      <p>A matching letter can only extend the diagonal from the cell before both letters. A mismatch means one of the two letters cannot both be used, so the cell keeps the better neighbour.</p>
+      <p>{step.message}</p>
+    </>} />
 }

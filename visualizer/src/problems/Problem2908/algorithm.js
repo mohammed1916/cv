@@ -55,7 +55,7 @@ export function parseInput(text) {
 }
 
 function frame(fields) {
-  return { result: null, j: null, leftMin: null, rightMin: null, best: -1, explanation: "", ...fields };
+  return { result: null, j: null, leftMin: null, rightMin: null, leftAt: null, rightAt: null, best: -1, explanation: "", ...fields };
 }
 
 export function buildTrace(input) {
@@ -75,20 +75,22 @@ export function buildTrace(input) {
       explanation: `Look for the cheapest valid left and right partners around index ${j}.`,
     }));
     let leftMin = null;
+    let leftAt = null;
     for (let i = 0; i < j; i += 1) {
-      if (nums[i] < nums[j] && (leftMin === null || nums[i] < leftMin)) leftMin = nums[i];
+      if (nums[i] < nums[j] && (leftMin === null || nums[i] < leftMin)) { leftMin = nums[i]; leftAt = i; }
     }
     frames.push(frame({
-      phase: "left", activeLine: 3, pythonLine: 8, j, leftMin, best,
+      phase: "left", activeLine: 3, pythonLine: 8, j, leftMin, leftAt, best,
       message: leftMin === null ? `No value left of ${j} is below ${nums[j]}.` : `Smallest left partner below ${nums[j]} is ${leftMin}.`,
       explanation: "Only values strictly smaller than the peak can form the left side.",
     }));
     let rightMin = null;
+    let rightAt = null;
     for (let k = j + 1; k < n; k += 1) {
-      if (nums[k] < nums[j] && (rightMin === null || nums[k] < rightMin)) rightMin = nums[k];
+      if (nums[k] < nums[j] && (rightMin === null || nums[k] < rightMin)) { rightMin = nums[k]; rightAt = k; }
     }
     frames.push(frame({
-      phase: "right", activeLine: 4, pythonLine: 12, j, leftMin, rightMin, best,
+      phase: "right", activeLine: 4, pythonLine: 12, j, leftMin, rightMin, leftAt, rightAt, best,
       message: rightMin === null ? `No value right of ${j} is below ${nums[j]}.` : `Smallest right partner below ${nums[j]} is ${rightMin}.`,
       explanation: "The same test on the right side gives the cheapest right partner.",
     }));
@@ -96,7 +98,7 @@ export function buildTrace(input) {
       const total = leftMin + nums[j] + rightMin;
       if (best === -1 || total < best) best = total;
       frames.push(frame({
-        phase: "record", activeLine: 5, pythonLine: 16, j, leftMin, rightMin, best,
+        phase: "record", activeLine: 5, pythonLine: 16, j, leftMin, rightMin, leftAt, rightAt, best,
         message: `Total ${leftMin} + ${nums[j]} + ${rightMin} = ${total}; best is now ${best}.`,
         explanation: "The smaller of the old best and this total is kept.",
       }));

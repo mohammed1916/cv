@@ -1,5 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { phases, parseInput, buildTrace, code, python } from './algorithm'
+import RecordStateTable from '../../components/shared/RecordStateTable'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import { Sequence, Vars } from './SeqKit'
 
 const definition = {
   phases, parse: parseInput, build: buildTrace, code, python,
@@ -14,15 +16,17 @@ const definition = {
 }
 
 export default function EquivalentDominoPairs() {
-  return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ run, step }) => {
-      const s = step.snapshot
-      return <div style={{ display: 'grid', gap: 12 }}>
-        <div aria-label="Dominoes"><strong>Dominoes:</strong> {run.input.map((d, i) => <span key={i} style={{ marginRight: 8, fontWeight: i === s.index ? 700 : 400 }}>[{d[0]}, {d[1]}]</span>)}</div>
-        {s.key && <p>Current key: <strong>{s.key}</strong>{s.matches !== null && ` · earlier matches: ${s.matches}`}</p>}
-        <div aria-label="Counts"><strong>Seen keys:</strong> {s.counts.map(c => `${c.key}×${c.n}`).join('  ') || 'none'}</div>
-        <p>Total pairs: <strong>{s.pairs}</strong></p>
-      </div>
-    }}
-    renderReasoning={() => <p>Keys are stored as (smaller end, larger end), so a domino and its turned copy count as the same key.</p>} />
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const s = step.snapshot
+    const dominoes = run.input.map(([a, b]) => `${a}-${b}`)
+    const pointers = s.index >= 0 && s.index < dominoes.length ? { domino: s.index } : {}
+    const rows = s.counts.map(c => ({ key: c.key, seen: c.n }))
+    const activeRow = rows.findIndex(row => row.key === s.key)
+    return <>
+      <Sequence label="Dominoes, each shown as its sorted key" values={dominoes} pointers={pointers} />
+      <RecordStateTable label="Keys seen so far" columns={['key', 'seen']} rows={rows} activeRow={activeRow} />
+      <Vars vars={{ 'current key': s.key, 'earlier matches': s.matches, 'pairs so far': s.pairs }} />
+      <output aria-label="Result">{step.message}</output>
+    </>
+  }} renderReasoning={() => <p>Each domino is written with its smaller end first, so a turned copy gets the same key. Every earlier domino with the same key forms one new pair.</p>} />
 }

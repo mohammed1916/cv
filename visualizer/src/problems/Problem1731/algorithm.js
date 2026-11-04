@@ -1,4 +1,4 @@
-// Knowledge-derived teaching version. The sample tables are invented for this visualization.
+// Teaching version of the query. The sample tables are invented for this visualization.
 const SQL = `SELECT m.employee_id, m.name,
        COUNT(*) AS reports_count,
        ROUND(AVG(e.age)) AS average_age

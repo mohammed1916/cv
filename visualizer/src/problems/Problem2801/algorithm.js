@@ -18,6 +18,7 @@ export function buildTrace({ low, high }) {
     const digits = [...x].map(Number)
     const n = digits.length
     const memo = new Map()
+    const states = []
     const go = (pos, prev, tight, started) => {
       if (pos === n) return started ? 1 : 0
       const key = `${pos},${prev},${tight},${started}`
@@ -30,10 +31,12 @@ export function buildTrace({ low, high }) {
         else if (Math.abs(d - prev) === 1) total += go(pos + 1, d, nextTight, true)
       }
       memo.set(key, total)
+      states.push({ pos, prev: prev < 0 ? '-' : String(prev), tight, started, ways: total })
       return total
     }
     const total = go(0, -1, true, false)
-    frames.push({ phase: 'count', activeLine: L('for each digit d'), pythonLine: 26, bound: label, total, message: `Stepping numbers from 1 to ${x}: ${total}.` })
+    states.sort((a, b) => a.pos - b.pos)
+    frames.push({ phase: 'count', activeLine: L('for each digit d'), pythonLine: 26, bound: label, total, digits: x, states, message: `Stepping numbers from 1 to ${x}: ${total}.` })
     return total
   }
   const upper = upTo(high, high)

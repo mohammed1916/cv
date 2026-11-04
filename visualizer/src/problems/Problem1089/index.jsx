@@ -1,5 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import { Sequence, Vars } from './SeqKit'
+import './SeqKit.css'
 
 const definition = {
   number: '1089',
@@ -21,23 +23,18 @@ const definition = {
 export default function DuplicateZeros() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
     const { arr, n, src, last, value } = step.state
-    const overflow = Math.max(0, (last ?? n - 1) - (n - 1))
+    const pointers = {}
+    if (src !== null) pointers.read = src
+    if (last !== null && last < n) pointers.write = last
     return <div>
-      <div role="img" aria-label="Working array" style={{ display: 'flex', gap: 6, flexWrap: 'wrap', fontFamily: 'monospace' }}>
-        {arr.map((cell, index) => <div key={index} data-index={index} style={{
-          minWidth: 44, padding: '6px 8px', textAlign: 'center',
-          border: `2px solid ${index === src ? '#f59e0b' : index === last ? 'var(--accent, #0891b2)' : 'var(--border)'}`,
-        }}>
-          <div>{cell}</div>
-          <small>{index}</small>
-        </div>)}
-      </div>
-      <p aria-label="Write pointer">{last === null || last === undefined ? 'Write pointer not set' : `Write pointer at virtual index ${last}${last >= n ? ' (past the end)' : ''}`}</p>
-      {src !== null && <p>{`Reading original index ${src}, value ${value}.`}</p>}
-      {overflow > 0 && <p>{`${overflow} virtual slot(s) lie past the array end and are discarded.`}</p>}
+      <Sequence label={`Array of length ${n}`} values={arr} pointers={pointers} />
+      <p role="status">{last >= n
+        ? `The write pointer is at virtual slot ${last}, past the end, so that write is discarded.`
+        : src !== null ? `Read pointer at original index ${src} (value ${value}); write pointer at ${last}.` : 'Count the zeros before any write.'}</p>
+      <Vars vars={{ 'read (src)': src, 'write (last)': last, value, 'extra slots past end': Math.max(0, (last ?? n - 1) - (n - 1)) }} />
     </div>
   }} renderReasoning={() => <>
     <p><strong>Count first:</strong> each zero needs one extra slot, so the expanded length is the original length plus the zero count.</p>
-    <p><strong>Backward writes:</strong> reading from the right means every write lands at or after the next unread original value, so nothing is lost.</p>
+    <p><strong>Backward writes:</strong> the read pointer moves left while the write pointer starts at the expanded end, so no unread value is overwritten.</p>
   </>} />
 }

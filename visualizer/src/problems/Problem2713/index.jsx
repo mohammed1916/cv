@@ -1,32 +1,56 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code, python } from './algorithm'
+import * as model from './algorithm'
 
 const definition = {
   phases: [
-    { id: 'start', label: 'Start', description: 'Every cell is a path of one cell.' },
-    { id: 'cell', label: 'Set dp', description: 'Extend the best smaller path in the same row or column.' },
-    { id: 'group', label: 'Update bests', description: 'Record finished values for later, larger cells.' },
-    { id: 'done', label: 'Complete', description: 'Report the longest path.' },
+    { id: 'start', label: 'Start', description: 'Every cell begins a path of length 1.' },
+    { id: 'cell', label: 'Cell', description: 'Set one cell from the best smaller value in its row or column.' },
+    { id: 'group', label: 'Group', description: 'Equal values are finished, then their row and column bests are updated.' },
+    { id: 'done', label: 'Result', description: 'The longest strictly increasing path.' },
   ],
-  parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'Matrix of integers from -20 to 20 (JSON array of rows)',
+  parse: model.parseInput, build: model.buildTrace, code: model.code, python: model.python,
+  inputLabel: 'JSON matrix of integers (rectangular, at most 6 by 6)',
   url: 'https://leetcode.com/problems/maximum-strictly-increasing-cells-in-a-matrix/',
-  complexity: 'O(mn log(mn)) time for the sort and O(mn) space. The visualization caps the matrix at 5 by 5.',
+  complexity: 'O(mn log(mn)) to sort the cells. The visualization caps the matrix at 6 by 6.',
   examples: [
-    { label: 'Example 1', input: '[[3,1],[3,4]]' },
-    { label: 'Example 3', input: '[[3,1,6],[-9,5,7]]' },
+    { label: 'Mixed', input: '[[3,1,6],[-9,5,7]]' },
+    { label: 'Equal neighbours', input: '[[1,1],[1,2]]' },
   ],
 }
 
-export default function IncreasingCells() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <table aria-label="dp values of the matrix">
-      <caption>Longest strictly increasing path ending at each cell</caption>
-      <tbody>{step.table.map((row, r) => <tr key={r}>{row.map((value, c) => <td key={c} data-role={r === step.r && c === step.c ? 'current' : undefined}>{value}</td>)}</tr>)}</tbody>
-    </table>
-    <output aria-label="Step">{step.message}</output>
-  </>} renderReasoning={() => <>
-    <p>From a cell you may move to any cell in the same row or column with a strictly larger value.</p>
-    <p>Handling values in increasing order means every smaller neighbour is already final, and equal values must not feed each other.</p>
+const cellStyle = (active, filled) => ({
+  minWidth: 52, padding: '6px 4px', textAlign: 'center', borderRadius: 4,
+  border: active ? '2px solid var(--primary)' : '1px solid var(--border)',
+  background: filled ? 'var(--primary-glow)' : 'var(--surface)', color: 'var(--text)',
+})
+
+export default function MaxIncreasingCells() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const mat = run.input
+    const m = mat.length, n = mat[0].length
+    const table = step.table ?? []
+    return <section aria-label="Matrix and path lengths" style={{ display: 'grid', gap: 12 }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24 }}>
+        <div>
+          <h3 style={{ margin: '0 0 6px', color: 'var(--text)' }}>Values</h3>
+          <div style={{ display: 'grid', gridTemplateColumns: `repeat(${n}, auto)`, gap: 4 }}>
+            {mat.flatMap((row, r) => row.map((v, c) => <div key={`${r}-${c}`} style={cellStyle(step.r === r && step.c === c, false)}>{v}</div>))}
+          </div>
+        </div>
+        <div>
+          <h3 style={{ margin: '0 0 6px', color: 'var(--text)' }}>Longest path ending here</h3>
+          <div style={{ display: 'grid', gridTemplateColumns: `repeat(${n}, auto)`, gap: 4 }}>
+            {Array.from({ length: m }, (_, r) => Array.from({ length: n }, (_, c) => {
+              const value = table[r]?.[c] ?? 0
+              return <div key={`${r}-${c}`} data-role={value ? 'set' : 'unset'} style={cellStyle(step.r === r && step.c === c, value > 0)}>{value || '·'}</div>
+            }))}
+          </div>
+        </div>
+      </div>
+      <p style={{ margin: 0, color: 'var(--text)' }}>{step.message}</p>
+    </section>
+  }} renderReasoning={() => <>
+    <p>A path may jump to any cell in the same row or column, so the best smaller value in each row and each column is all a cell needs.</p>
+    <p>Cells with the same value cannot follow each other, so a whole group of equal values is finished before the row and column bests are raised.</p>
   </>} />
 }

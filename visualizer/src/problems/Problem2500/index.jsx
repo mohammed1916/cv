@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
-import HeapView from "../../components/shared/HeapView";
+import GridRemovalView from "./GridRemovalView";
 import { code, python, parseInput, buildTrace } from "./algorithm";
 
 const definition = {
@@ -23,19 +23,17 @@ const definition = {
   inputLabel: 'JSON {"grid": [[1,2,4],[3,3,1]]}',
   url: "https://leetcode.com/problems/delete-greatest-value-in-each-row/",
   complexity: "O(m * n * log n) time and O(m * n) space for m rows and n columns. The visualization caps the grid at 10 by 10 with values up to 100.",
-  examples: [{ label: "Example 1", input: '{"grid":[[1,2,4],[3,3,1]]}' }],
+  examples: [
+    { label: "Two rows", input: '{"grid":[[5,1,4],[2,6,3]]}' },
+    { label: "One row", input: '{"grid":[[7,2,9]]}' },
+  ],
 };
 
 export default function DeleteGreatestValueVisualizer() {
   return (
     <AlgorithmWorkspace
       definition={definition}
-      renderVisual={({ step }) => (
-        <>
-          <HeapView items={step.heap0} order="max" title="Row 1 max-heap" />
-          <p>Running total: {step.total}</p>
-        </>
-      )}
+      renderVisual={({ run, step }) => <GridRemovalView grid={run.input.grid} step={step} />}
       renderReasoning={({ step }) => <p>{step.message}</p>}
     />
   );

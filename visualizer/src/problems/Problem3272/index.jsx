@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
 import IndexedSequence from "../../components/shared/IndexedSequence";
+import GoodGroupView from "./GoodGroupView";
 import { code, python, parseInput, buildTrace } from "./algorithm";
 
 const definition = {
@@ -36,7 +37,8 @@ export default function GoodIntegersVisualizer() {
           <IndexedSequence label="Palindromes with n digits" length={step.candidates.length}
             active={Math.max(0, step.index)} valueAt={index => step.candidates[index].text}
             roleAt={index => (step.candidates[index].divisible ? "divisible" : "")} />
-          <p>Good digit multisets: distinct sorted keys of divisible palindromes. Total so far {step.total}. k = {run.input.k}.</p>
+          <GoodGroupView run={run} step={step} />
+          <p>k = {run.input.k}.</p>
         </div>
       )}
       renderReasoning={({ step }) => <p>{step.message}</p>}

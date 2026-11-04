@@ -28,9 +28,23 @@ function RowTable({ label, rows }) {
   </section>
 }
 
+function SellerChips({ rows }) {
+  if (rows.length === 0 || !('orders_2020' in rows[0])) return null
+  return <section aria-label="2020 sales per seller">
+    <h4>2020 orders per seller</h4>
+    <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+      {rows.map(row => <span key={row.seller_id} style={{ padding: '6px 10px', borderRadius: 6, border: '1px solid var(--border)', color: 'var(--text)', fontFamily: 'monospace',
+        background: row.orders_2020 === 0 ? 'color-mix(in srgb, var(--primary) 22%, transparent)' : 'var(--surface2)' }}>
+        {row.seller_name}: {row.orders_2020} {row.orders_2020 === 0 ? '(idle, kept)' : '(sold in 2020)'}
+      </span>)}
+    </div>
+  </section>
+}
+
 export default function Problem1607() {
   return <AlgorithmWorkspace definition={definition}
     renderVisual={({ step }) => <>
+      <SellerChips rows={step.rows} />
       <RowTable label="Working rows" rows={step.rows} />
       <RowTable label="Output" rows={step.output} />
     </>}

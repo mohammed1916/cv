@@ -24,12 +24,12 @@ export default function DefuseTheBomb() {
           return <div key={i} data-index={i} style={{
             minWidth: 52, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
             border: `${i === index ? 2 : 1}px solid ${i === index ? 'var(--text)' : 'var(--border)'}`,
-            background: chosen ? '#bfdbfe' : 'transparent', color: 'var(--text)',
+            background: chosen ? 'color-mix(in srgb, var(--info) 30%, transparent)' : 'transparent', color: 'var(--text)',
           }}><div>{v}</div><small>{i}</small></div>
         })}
       </div>
       <p>{index === null ? 'Each position reads the unchanged input.' : `Position ${index} reads ${window.length ? `indices ${window.join(', ')}` : 'nothing'}${sum !== null ? `, sum ${sum}` : ''}.`}</p>
-      <p>Output so far: [{output.map(o => (o === null ? '_' : o)).join(', ')}]</p>
+      <p style={{ color: 'var(--text)' }}>Output so far: [{output.map(o => (o === null ? '_' : o)).join(', ')}]</p>
     </>
   }} renderReasoning={() => <>
     <p><strong>Read the original:</strong> every position reads only from the input values, never from already written output.</p>

@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -24,6 +25,7 @@ export default function PreimageSizeFactorialZeroes() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Search state" length={4} valueAt={i => [`lo ${step.lo}`, step.mid < 0 ? 'mid -' : `mid ${step.mid}`, `hi ${step.hi}`, `target k ${run.input}`][i]} active={step.mid < 0 ? -1 : 1} roleAt={i => i === 0 ? 'low' : i === 2 ? 'high' : ''} />
     <IndexedSequence label="floor(mid / 5^i) terms (sum = zeros)" length={Math.max(step.terms.length, 1)} valueAt={i => step.terms[i] ?? ' '} indexOffset={1} />
+    <AnswerRangeBar title="Candidate search for mid" min={0} max={5 * (run.input + 1)} low={step.lo} high={step.hi} probe={step.mid >= 0 ? step.mid : null} verdict={step.z >= run.input} />
     <output aria-label="Zeros">Trailing zeros of mid!: {step.z < 0 ? '-' : step.z}{step.phase === 'done' ? `. Answer: ${run.result}` : ''}</output>
   </>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>

@@ -1,0 +1,11 @@
+.pool-view { display: grid; gap: 8px; color: var(--text); }
+.pool-view__axis { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); padding-left: 64px; }
+.pool-view__lanes { display: grid; gap: 6px; }
+.pool-view__lane { display: grid; grid-template-columns: 64px 1fr; align-items: center; gap: 8px; }
+.pool-view__slot { font-size: 12px; color: var(--text-muted); }
+.pool-view__track { position: relative; height: 26px; background: var(--surface2); border-radius: 6px; }
+.pool-view__bar { position: absolute; top: 3px; height: 20px; border-radius: 5px; font-size: 11px; line-height: 20px; padding: 0 4px; overflow: hidden; white-space: nowrap; color: var(--text); background: var(--surface); border: 1px solid var(--border); }
+.pool-view__bar--running { background: var(--primary); border-color: var(--primary); color: var(--surface); }
+.pool-view__bar--done { opacity: 0.85; }
+.pool-view__now { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--warning); }
+.pool-view__note { margin: 0; font-size: 13px; color: var(--text-muted); }

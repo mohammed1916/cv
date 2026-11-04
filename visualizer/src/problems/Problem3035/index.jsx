@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import LetterBudget from './LetterBudget'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -20,7 +21,8 @@ const definition = {
 }
 
 export default function MaximumPalindromes() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <LetterBudget words={run.input} step={step} />
     <output aria-label="Letter budget">{`letters used ${step.usedLen} of ${step.total}, pairs used ${step.usedPairs} of ${step.pairs ?? '?'}`}</output>
     <output aria-label="Palindromes counted">{`palindromes counted: ${step.best}`}</output>
   </>} renderReasoning={() => <>

@@ -18,18 +18,30 @@ export default function LongestAfterDelete() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { nums } = run.input
     const { left, right, zeros, best } = step.snapshot
+    const hasWindow = right >= 0
     return <>
       <div role="img" aria-label="Binary values with the window" style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
         {nums.map((value, i) => {
-          const inside = right >= 0 && i >= left && i <= right
+          const inside = hasWindow && i >= left && i <= right
+          const isZero = value === 0
           return <div key={i} data-index={i} style={{
-            width: 36, textAlign: 'center', fontFamily: 'monospace', padding: '6px 0', boxSizing: 'border-box', color: '#1c1917',
-            background: inside ? (value === 0 ? '#fecaca' : '#bbf7d0') : '#e7e5e4',
+            width: 40, textAlign: 'center', fontFamily: 'monospace', padding: '6px 0 2px', boxSizing: 'border-box', color: 'var(--text)',
+            background: inside
+              ? (isZero ? 'color-mix(in srgb, var(--warning) 40%, var(--surface2))' : 'color-mix(in srgb, var(--success) 35%, var(--surface2))')
+              : 'var(--surface)',
             border: `${i === right ? 2 : 1}px solid ${i === right ? 'var(--text)' : 'var(--border)'}`,
-          }}><div>{value}</div><small>{i}</small></div>
+            opacity: inside || !hasWindow ? 1 : 0.5,
+          }}>
+            <div>{value}</div>
+            <small>{i}</small>
+            <div style={{ height: 14, fontWeight: 700, color: 'var(--text-muted)' }}>
+              {i === left && hasWindow ? 'l' : ''}{i === right ? 'r' : ''}
+            </div>
+          </div>
         })}
       </div>
-      <p>Window [{Math.max(left, 0)}, {right}] holds {zeros} zero(s). Best deletion result so far: {best}.</p>
+      <p>Window [l = {Math.max(left, 0)}, r = {Math.max(right, 0)}] holds {zeros} zero{zeros === 1 ? '' : 's'}. The one allowed deletion can remove a zero from the window.</p>
+      <p>Best length after deleting one element so far: {best}. A window of length L gives L minus 1.</p>
     </>
   }} renderReasoning={() => <>
     <p><strong>Window with one allowed zero:</strong> the deleted element can be that zero, so the best window with at most one zero is the answer's source.</p>

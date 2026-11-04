@@ -14,16 +14,40 @@ const definition = {
   ],
 }
 
+const row = (current, chain) => ({
+  display: 'grid', gridTemplateColumns: '120px 1fr 110px 110px', gap: 8, alignItems: 'center', padding: '4px 8px', fontFamily: 'monospace',
+  borderRadius: 6, border: `1px solid ${current ? 'var(--primary)' : 'var(--border)'}`,
+  background: chain ? 'var(--surface2)' : 'transparent', color: 'var(--text)',
+})
+
 export default function StackingCuboids() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
-    const { ordered, best, current, from } = step.snapshot
-    if (!ordered) return <p>Sorting the sides of each box.</p>
-    return <table aria-label="Box stacks" style={{ borderCollapse: 'collapse', fontFamily: 'monospace' }}>
-      <thead><tr><th>box</th><th>best stack</th><th>below</th></tr></thead>
-      <tbody>{ordered.map((box, i) => <tr key={i} style={{ background: i === current ? 'var(--surface2)' : undefined }}>
-        <td>{box.join(' x ')}</td><td>{best && best[i] !== undefined ? best[i] : '-'}</td><td>{from && from[i] >= 0 ? ordered[from[i]].join(' x ') : (best && best[i] !== undefined ? 'none' : '-')}</td>
-      </tr>)}</tbody>
-    </table>
+    const { ordered, best, current, from, chain, boxes } = step.snapshot
+    if (!ordered) return <>
+      <p>Sorting the sides of each box. The largest side will be the height.</p>
+      <ul style={{ fontFamily: 'monospace' }}>{(boxes ?? []).map((b, i) => <li key={i}>{b.join(' x ')}</li>)}</ul>
+    </>
+    const chainSet = new Set((chain ?? []).map(b => b.join('x')))
+    const maxHeight = best ? Math.max(1, ...best) : 1
+    return <>
+      <div role="img" aria-label="Boxes in order" style={{ display: 'grid', gap: 4 }}>
+        <div style={{ ...row(false, false), fontWeight: 700 }}><span>box</span><span>stack height</span><span>below</span><span>tallest</span></div>
+        {ordered.map((box, i) => {
+          const done = best && best[i] !== undefined
+          const onChain = chainSet.has(box.join('x'))
+          return <div key={i} style={row(i === current, onChain)}>
+            <span>{box.join(' x ')}</span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <span aria-hidden style={{ display: 'inline-block', height: 10, width: done ? `${(best[i] / maxHeight) * 100}%` : 0, background: 'var(--primary)' }} />
+              {done ? best[i] : '-'}
+            </span>
+            <span>{from && from[i] >= 0 ? ordered[from[i]].join(' x ') : (done ? 'base' : '-')}</span>
+            <span>{onChain ? 'in stack' : ''}</span>
+          </div>
+        })}
+      </div>
+      {chain && chain.length > 0 && <p style={{ marginTop: 10 }}>Tallest stack, bottom to top: {chain.map(b => b.join(' x ')).join(' → ')}</p>}
+    </>
   }} renderReasoning={({ step }) => <>
     <p><strong>Key idea:</strong> a box can sit on another only if, once both are sorted, every side fits. Boxes can be turned, so sorting each box removes the choice of orientation for that test.</p>
     <p><strong>Chain:</strong> {step.snapshot.chain ? step.snapshot.chain.map(b => b.join(' x ')).join(' then ') : 'the chain is built as the boxes are processed'}.</p>

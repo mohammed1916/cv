@@ -90,6 +90,7 @@ export function buildTrace({ Person, Country, Calls }) {
     frames.push(frame('resident', 'FROM Person AS p', 'person = person.assign',
       `${person.name} has prefix ${prefix}, so ${country ? `lives in ${country}` : 'is not counted'}.`,
       ['id', 'name', 'country'], residentRows))
+    frames[frames.length - 1].focus = person.id
   }
   // Each call adds its duration once per resident participant, so a same-country call counts twice.
   const sides = []
@@ -104,6 +105,7 @@ export function buildTrace({ Person, Country, Calls }) {
     frames.push(frame('participate', 'UNION ALL', 'sides = pd.concat',
       `Call ${call.caller_id} to ${call.callee_id} (${call.duration}s) counts for ${parts.length ? parts.join(' and ') : 'no country'}.`,
       ['country', 'duration'], sides))
+    frames[frames.length - 1].focus = parts.length
   }
   const total = Calls.reduce((sum, call) => sum + call.duration, 0)
   const callCount = Calls.length
@@ -121,6 +123,7 @@ export function buildTrace({ Person, Country, Calls }) {
     frames.push(frame('average', 'GROUP BY country', 'by_country = ',
       `${name} averages ${(sum / count).toFixed(2)} against an overall ${(total / callCount).toFixed(2)}.`,
       ['country', 'average', 'beats_overall'], averages))
+    frames[frames.length - 1].focus = name
   }
   frames.push(frame('done', 'ORDER BY pc.country', 'return by_country', `Returned ${result.length} countries above the overall average.`, ['country'], result))
   return { input: { Person, Country, Calls }, result, frames }

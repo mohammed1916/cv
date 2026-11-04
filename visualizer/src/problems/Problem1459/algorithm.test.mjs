@@ -15,7 +15,7 @@ function checkFrames(run) {
   assert.deepEqual(run.frames.at(-1).rows, run.result)
 }
 
-test('1459 lists positive-area rectangles, largest first, then by corners', () => {
+test('1459 pairs of ids give positive-area rectangles, largest first, then by ids', () => {
   const run = buildTrace(parseInput(JSON.stringify({ Points: [
     { id: 1, x_value: 1, y_value: 1 },
     { id: 2, x_value: 3, y_value: 4 },
@@ -24,12 +24,12 @@ test('1459 lists positive-area rectangles, largest first, then by corners', () =
     { id: 5, x_value: 2, y_value: 2 },
   ] })))
   assert.deepEqual(run.result, [
-    { p1: '1,1', p2: '3,4', area: 6 },
-    { p1: '1,4', p2: '3,1', area: 6 },
-    { p1: '1,4', p2: '2,2', area: 2 },
-    { p1: '2,2', p2: '3,4', area: 2 },
-    { p1: '1,1', p2: '2,2', area: 1 },
-    { p1: '2,2', p2: '3,1', area: 1 },
+    { p1: 1, p2: 2, area: 6 },
+    { p1: 3, p2: 4, area: 6 },
+    { p1: 2, p2: 5, area: 2 },
+    { p1: 3, p2: 5, area: 2 },
+    { p1: 1, p2: 5, area: 1 },
+    { p1: 4, p2: 5, area: 1 },
   ])
   checkFrames(run)
 })

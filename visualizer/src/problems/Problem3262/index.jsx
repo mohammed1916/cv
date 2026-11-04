@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IntervalView from '../../components/shared/IntervalView'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const mixed = '{"EmployeeShifts":[{"shift_id":1,"employee_id":7,"start_time":0,"end_time":60},{"shift_id":2,"employee_id":7,"start_time":30,"end_time":90},{"shift_id":3,"employee_id":7,"start_time":90,"end_time":120},{"shift_id":4,"employee_id":9,"start_time":0,"end_time":10},{"shift_id":5,"employee_id":9,"start_time":5,"end_time":15},{"shift_id":6,"employee_id":9,"start_time":10,"end_time":20}]}'
@@ -26,7 +27,13 @@ function RowsTable({ columns, rows, caption }) {
 
 export default function FindOverlappingShifts() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <RowsTable caption="Overlap counts so far" columns={['employee_id', 'overlap_count']} rows={step.rows} />
+    <IntervalView title="Shifts per employee (the pair being compared is highlighted)"
+      intervals={run.input.EmployeeShifts.map(shift => ({
+        start: shift.start_time, end: shift.end_time, group: `Employee ${shift.employee_id}`,
+        label: `#${shift.shift_id}`, role: step.pair && step.pair.includes(shift.shift_id) ? 'current' : 'pending',
+      }))}
+      note="Each bar is one shift in minutes. Half-open ranges: a shift that ends exactly when another starts does not overlap it." />
+    <RowsTable caption="Overlap counts so far" columns={['employee_id', 'overlapping_shifts']} rows={step.rows} />
     <output aria-label="Result">{`${run.result.length} employee row${run.result.length === 1 ? '' : 's'} in the final result`}</output>
   </>} renderReasoning={() => <>
     <p>Each pair of shifts is checked once, using the shift_id order so a pair is never counted twice.</p>

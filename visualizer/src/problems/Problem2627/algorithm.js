@@ -22,15 +22,18 @@ export function parseInput(text) {
 export function buildTrace({ wait, calls }) {
   const frames = []
   const runs = []
-  const view = (focus) => ({ title: 'Call times (ms)', rows: calls.map(t => `call at ${t}`), focus, summary: `runs: ${JSON.stringify(runs)}` })
+  const outcomes = []
+  const view = (focus) => ({ title: 'Call times (ms)', rows: calls.map(t => `call at ${t}`), calls: calls.slice(), wait, focus, outcomes: outcomes.slice(), runs: runs.slice(), summary: `runs: ${JSON.stringify(runs)}` })
   for (let i = 0; i < calls.length; i++) {
     const t = calls[i]
     const next = calls[i + 1]
     step(frames, 'call', 'for each call at time', `Call at ${t} ms.`, view(i))
     if (next !== undefined && next < t + wait) {
+      outcomes.push('skip')
       step(frames, 'skip', 'if another call arrives', `Call at ${next} ms arrives within ${wait} ms, so this one is skipped.`, view(i))
     } else {
       runs.push(t + wait)
+      outcomes.push('run')
       step(frames, 'run', 'otherwise schedule the run', `Run scheduled at ${t + wait} ms.`, view(i))
     }
   }

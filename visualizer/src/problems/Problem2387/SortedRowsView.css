@@ -1,10 +1,10 @@
-.median-view { display: grid; gap: 10px; }
+.median-view { display: grid; gap: 10px; color: var(--text); }
 .median-range { display: flex; flex-wrap: wrap; gap: 12px; margin: 0; }
 .median-range div { min-width: 96px; }
 .median-range dt { font-size: 12px; opacity: 0.75; }
 .median-range dd { margin: 0; font-weight: 700; font-size: 18px; }
 .median-table { border-collapse: separate; border-spacing: 6px; }
-.median-cell { width: 48px; height: 44px; text-align: center; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 600; background: #f8fafc; color: #0f172a; }
-.median-cell--le { background: #fee2e2; border-color: #dc2626; }
-.median-count { font-size: 12px; padding-left: 8px; white-space: nowrap; color: #334155; }
-.median-total, .median-empty { margin: 0; font-size: 13px; opacity: 0.85; }
+.median-cell { width: 48px; height: 44px; text-align: center; border: 1px solid var(--border); border-radius: 6px; font-weight: 600; background: var(--surface2); color: var(--text); }
+.median-cell--le { background: var(--primary-glow); border-color: var(--primary); }
+.median-count { font-size: 12px; padding-left: 8px; white-space: nowrap; color: var(--text); opacity: 0.85; }
+.median-total, .median-empty { margin: 0; font-size: 13px; color: var(--text); opacity: 0.85; }

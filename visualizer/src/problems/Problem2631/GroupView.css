@@ -1,0 +1,11 @@
+.group-view { display: grid; gap: 12px; color: var(--text); }
+.group-view__items { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.group-view__item { display: flex; flex-direction: column; min-width: 80px; padding: 6px 8px; border: 2px solid var(--border); border-radius: 8px; background: var(--surface2); font-size: 13px; }
+.group-view__item span { color: var(--text-muted); font-size: 12px; }
+.group-view__item--done { border-color: var(--primary); }
+.group-view__item--current { outline: 3px solid var(--primary); outline-offset: 1px; }
+.group-view__groups { display: flex; flex-wrap: wrap; gap: 8px; }
+.group-view__group { display: flex; flex-direction: column; min-width: 120px; padding: 8px 10px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+.group-view__group--target { border-color: var(--success); border-width: 2px; }
+.group-view__group span { font-family: monospace; font-size: 13px; }
+.group-view__empty, .group-view__note { margin: 0; font-size: 13px; color: var(--text-muted); }

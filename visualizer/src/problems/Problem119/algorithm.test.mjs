@@ -22,8 +22,8 @@ test('row 3 and row 4 match the binomial rule', () => {
   assert.deepEqual(buildTrace(4).result, [1, 4, 6, 4, 1])
 })
 
-test('every row from 0 to 30 agrees with the table oracle', () => {
-  for (let k = 0; k <= 30; k++) assert.deepEqual(buildTrace(k).result, oracle(k), `row ${k}`)
+test('every row from 0 to 33 agrees with the table oracle', () => {
+  for (let k = 0; k <= 33; k++) assert.deepEqual(buildTrace(k).result, oracle(k), `row ${k}`)
 })
 
 test('every frame has a valid phase, code line, message and snapshot', () => {
@@ -40,7 +40,7 @@ test('every frame has a valid phase, code line, message and snapshot', () => {
 })
 
 test('input validation rejects out-of-range and non-integer indices', () => {
-  assert.throws(() => parseInput('31'))
+  assert.throws(() => parseInput('34'))
   assert.throws(() => parseInput('-1'))
   assert.throws(() => parseInput('2.5'))
   assert.throws(() => parseInput(''))

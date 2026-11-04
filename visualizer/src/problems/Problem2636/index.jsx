@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code } from './algorithm'
+import PoolView from './PoolView'
 
 const definition = {
   number: '2636',
@@ -20,11 +21,7 @@ const definition = {
 
 export default function PromisePool() {
   return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ step }) => <section aria-label="Visual state">
-      <h3>{step.view.title}</h3>
-      <ol>{step.view.rows.map((row, index) => <li key={index} aria-current={index === step.view.focus ? 'step' : undefined}>{row}</li>)}</ol>
-      {step.view.summary && <output>{step.view.summary}</output>}
-    </section>}
+    renderVisual={({ step }) => <PoolView view={step.view} />}
     renderReasoning={() => <>
       <p>The pool keeps at most limit tasks in flight. Finishing one frees a slot, and the next waiting task takes it straight away.</p>
       <p>The total time is when the last task ends.</p>

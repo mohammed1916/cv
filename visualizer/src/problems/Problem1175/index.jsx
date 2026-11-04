@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import { phases, parseInput, buildTrace, code, python } from './algorithm'
+import { Sequence, Vars } from './SeqKit'
 
 const definition = {
   phases,
@@ -21,21 +22,14 @@ export default function PrimeArrangements() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { n, x, primeCount, primeSlots, otherSlots, answer, marks } = step.snapshot
     const known = new Map(marks.map(mark => [mark.x, mark.prime]))
+    const values = Array.from({ length: n }, (_, i) => i + 1)
+    const pointers = x === null || x === undefined ? {} : { x: x - 1 }
+    const cellMarks = Object.fromEntries(values.map(value => [value - 1, known.get(value) === true ? 'written' : '']))
     return <>
-      <div aria-label="Numbers from 1 to n" role="img" style={{ display: 'flex', flexWrap: 'wrap', gap: 6, maxWidth: 560 }}>
-        {Array.from({ length: n }, (_, i) => i + 1).map(value => {
-          const prime = known.get(value)
-          return <div key={value} data-value={value} style={{
-            width: 40, height: 40, boxSizing: 'border-box', display: 'grid', placeItems: 'center', fontFamily: 'monospace',
-            border: x === value ? '2px solid var(--text)' : '1px solid var(--border)',
-            background: prime === true ? '#67e8f9' : 'transparent',
-            color: prime === false ? 'var(--text-dim)' : 'var(--text)',
-          }}>{value}</div>
-        })}
-      </div>
-      <output aria-label="Group counts">
-        {`Primes: ${primeCount} · prime slots: ${primeSlots ?? '-'} · other slots: ${otherSlots ?? '-'}${answer !== null ? ` · answer: ${answer}` : ''}`}
-      </output>
+      <Sequence label="Numbers 1 to n (green = prime)" values={values} pointers={pointers} marks={cellMarks} />
+      <Vars vars={{ 'primes p': primeCount, 'other numbers n - p': n - primeCount, 'prime slots p!': primeSlots, 'other slots (n-p)!': otherSlots, answer }} />
+      <output aria-label="Group counts">{step.message}</output>
+      {run.result !== undefined && step.phase === 'done' && <p>Result: {run.result}</p>}
     </>
   }} renderReasoning={() => <>
     <p><strong>Split the positions:</strong> of the positions 1 to n, p are prime-numbered and n − p are not.</p>

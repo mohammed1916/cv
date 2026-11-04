@@ -7,7 +7,7 @@ export const phases = [
 
 export function parseInput(text) {
   const value = Number(String(text).trim())
-  if (!Number.isInteger(value) || value < 0 || value > 30 || String(text).trim() === '') throw new Error('Enter an integer row index from 0 to 30.')
+  if (!Number.isInteger(value) || value < 0 || value > 33 || String(text).trim() === '') throw new Error('Enter an integer row index from 0 to 33.')
   return value
 }
 

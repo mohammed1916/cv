@@ -1,0 +1,6 @@
+.ts-view { display: grid; gap: 6px; color: var(--text); }
+.ts-strip { display: flex; align-items: flex-end; gap: 3px; height: 120px; border-bottom: 1px solid var(--surface2, #d1d5db); }
+.ts-bar { flex: 1; min-width: 4px; background: var(--surface2, #cbd5e1); border-radius: 3px 3px 0 0; }
+.ts-bar.is-now { background: var(--primary, #2563eb); }
+.ts-bar.is-best { outline: 2px solid var(--text); outline-offset: 1px; }
+.ts-note { margin: 0; font-size: 0.9rem; color: var(--muted, var(--text)); }

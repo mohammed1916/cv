@@ -20,11 +20,16 @@ const definition = {
 export default function JobScheduling() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <table aria-label="Jobs sorted by end time">
-      <thead><tr><th>Job</th><th>Start</th><th>End</th><th>Profit</th><th>best[k]</th></tr></thead>
-      <tbody>{run.jobs.map((job, i) => <tr key={i} data-role={step.k === i + 1 ? 'active' : undefined}>
-        <td>{i + 1}</td><td>{job.start}</td><td>{job.end}</td><td>{job.profit}</td><td>{step.best[i + 1] ?? '-'}</td>
-      </tr>)}</tbody>
+      <thead><tr><th>Job</th><th>Start</th><th>End</th><th>Profit</th><th>best[k]</th><th>role</th></tr></thead>
+      <tbody>{run.jobs.map((job, i) => {
+        const k = i + 1
+        const role = step.k === k ? 'current job k' : step.p !== null && step.p === k ? 'p' : ''
+        return <tr key={i} data-role={step.k === k ? 'active' : undefined} style={{ background: step.k === k ? 'color-mix(in srgb, var(--primary) 22%, transparent)' : 'transparent' }}>
+          <td>{k}</td><td>{job.start}</td><td>{job.end}</td><td>{job.profit}</td><td>{step.best[k] ?? '-'}</td><td>{role}</td>
+        </tr>
+      })}</tbody>
     </table>
+    {step.k > 0 && step.p !== null && <p>p = {step.p}: jobs 1 to {step.p} end by the start of job {step.k}, so they can come before it.</p>}
     <output aria-label="Best profit">{`best so far: ${step.best[step.best.length - 1]}`}</output>
   </>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>

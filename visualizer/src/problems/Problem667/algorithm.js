@@ -15,11 +15,11 @@ export function buildTrace({ n, k }) {
   while (out.length < k + 1) {
     out.push(turnLow ? lo++ : hi--)
     turnLow = !turnLow
-    frames.push({ phase: 'place', pythonLine: 5, perm: [...out], diffs: distinctDiffs(out), activeLine: L('append lo if turn'), message: `Place ${out.at(-1)}.` })
+    frames.push({ phase: 'place', pythonLine: 5, perm: [...out], lo, hi, k, diffs: distinctDiffs(out), activeLine: L('append lo if turn'), message: `Place ${out.at(-1)}.` })
   }
   for (let v = k + 2; v <= n; v++) {
     out.push(v)
-    frames.push({ phase: 'tail', pythonLine: 11, perm: [...out], diffs: distinctDiffs(out), activeLine: L('append k+2 through n'), message: `Append ${v}: consecutive values give difference 1, already counted.` })
+    frames.push({ phase: 'tail', pythonLine: 11, perm: [...out], lo, hi, k, diffs: distinctDiffs(out), activeLine: L('append k+2 through n'), message: `Append ${v}: consecutive values give difference 1, already counted.` })
   }
   const result = out
   frames.push({ phase: 'done', pythonLine: 12, perm: [...result], diffs: distinctDiffs(result), result, activeLine: L('return out'), message: `A permutation with ${distinctDiffs(result).length} distinct differences.` })

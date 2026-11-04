@@ -3,11 +3,10 @@ import LargestPartnerView from "./LargestPartnerView";
 import { code, python, parseInput, buildTrace } from "./algorithm.js";
 
 const phases = [
-  { id: "start", label: "Width", description: "Count the binary digits of n." },
-  { id: "scan", label: "Scan", description: "Look at one bit of n." },
-  { id: "set", label: "Set", description: "An open bit of n can carry a 1 in x." },
-  { id: "skip", label: "Skip", description: "A set bit of n must stay 0 in x." },
-  { id: "done", label: "Result", description: "Report the largest partner." },
+  { id: "start", label: "Top bit", description: "Clear the top bit of n in x." },
+  { id: "scan", label: "Scan", description: "Read the next lower bit of n." },
+  { id: "set", label: "Set", description: "Set that bit of x to 1." },
+  { id: "done", label: "Result", description: "Report the largest x whose range AND is 0." },
 ];
 
 const definition = {
@@ -19,7 +18,7 @@ const definition = {
   python,
   inputLabel: "Positive integer n (e.g. 22)",
   url: "https://leetcode.com/problems/maximum-number-that-makes-result-of-bitwise-and-zero/",
-  complexity: "O(log n) time and O(1) extra space: one pass over the binary digits of n. The visualization accepts n up to 10^9; the official bound is not verified here.",
+  complexity: "O(log n) time and O(1) extra space: one pass over the binary digits of n. The visualization accepts n up to 10^9.",
   examples: [
     { label: "Mixed bits", input: "22" },
     { label: "Power of two", input: "8" },
@@ -34,7 +33,7 @@ export default function MaximumNumberZeroAndPartner() {
       renderVisual={({ run, step }) => <LargestPartnerView run={run} step={step} />}
       renderReasoning={({ run }) => (
         <p>
-          Every bit of n that is 0 (below its top bit) can be 1 in x without sharing a set bit with n. Setting all of them gives x = {run.result}, the largest such value below n.
+          Any x that keeps n's top bit shares that bit with n, so the range AND keeps it. Clearing the top bit and setting every lower bit gives x = {run.result}, and the range from x to n then has an AND of 0.
         </p>
       )}
     />

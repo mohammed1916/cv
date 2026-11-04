@@ -37,7 +37,17 @@ export default function MaximumValueOrderedTripletI() {
             active={step.cursor}
             roleAt={(i) => (step.cursor >= 0 && i < step.cursor ? "seen" : "")}
           />
-          <p>Answer {step.answer}. Best difference {step.bestDiff}. Best prefix {step.bestPrefix}.</p>
+          <table aria-label="Largest value before each index" style={{ borderCollapse: "collapse", width: "100%", color: "var(--text)" }}>
+            <thead><tr>{["index j", "value", "largest before j", "best difference so far"].map((h) => <th key={h} scope="col" style={{ textAlign: "left", padding: "4px 8px", borderBottom: "2px solid var(--border, currentColor)" }}>{h}</th>)}</tr></thead>
+            <tbody>{run.input.nums.slice(0, step.cursor >= 0 ? step.cursor + 1 : 0).map((v, j) => {
+              const before = j === 0 ? "-" : Math.max(...run.input.nums.slice(0, j));
+              return <tr key={j} data-current={j === step.cursor} style={{ background: j === step.cursor ? "var(--surface2)" : "transparent" }}>
+                <td style={{ padding: "4px 8px" }}>{j}</td><td style={{ padding: "4px 8px" }}>{v}</td><td style={{ padding: "4px 8px" }}>{before}</td>
+                <td style={{ padding: "4px 8px" }}>{j === step.cursor ? step.bestDiff : ""}</td>
+              </tr>;
+            })}</tbody>
+          </table>
+          <p style={{ color: "var(--text)" }}>Answer {step.answer}. Best difference {step.bestDiff}. Best prefix {step.bestPrefix}.</p>
         </>
       )}
       renderReasoning={({ step }) => <p>{step.message}</p>}

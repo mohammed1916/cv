@@ -1,0 +1,12 @@
+.debounce-view { display: grid; gap: 8px; color: var(--text); }
+.debounce-view__axis { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); padding-left: 90px; }
+.debounce-view__rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.debounce-view__row { display: grid; grid-template-columns: 90px 1fr 110px; gap: 8px; align-items: center; }
+.debounce-view__row--current .debounce-view__label { font-weight: 700; }
+.debounce-view__track { position: relative; height: 18px; background: var(--surface2); border-radius: 6px; }
+.debounce-view__window { position: absolute; top: 4px; height: 10px; background: var(--border); border-radius: 5px; opacity: 0.7; }
+.debounce-view__tick { position: absolute; top: 0; width: 3px; height: 18px; background: var(--primary); transform: translateX(-1px); }
+.debounce-view__tick--skip { background: var(--error); }
+.debounce-view__run { position: absolute; top: 2px; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; background: var(--success); }
+.debounce-view__label, .debounce-view__verdict { font-size: 12px; color: var(--text-muted); }
+.debounce-view__note { margin: 0; font-size: 13px; color: var(--text-muted); }

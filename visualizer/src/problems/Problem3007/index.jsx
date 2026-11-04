@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -21,6 +22,7 @@ const definition = {
 
 export default function MaximumNumberPrice() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <AnswerRangeBar title="Answers searched" min={0} max={Math.max(step.high, 2 * run.result + 2)} low={step.low} high={step.high} probe={step.mid} verdict={step.price !== null && step.mid !== null ? step.price <= run.input.k : null} />
     <table aria-label="Binary search bounds">
       <tbody>
         <tr><th scope="row">low</th><td>{step.low}</td></tr>

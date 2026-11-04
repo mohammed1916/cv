@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IntervalView from '../../components/shared/IntervalView'
 import { meta } from './meta'
 import { buildTrace, parseInput, code, sql, python, phases } from './algorithm'
 
@@ -29,10 +30,14 @@ function Rows({ columns = [], rows = [] }) {
 
 export default function ServerUptimeSqlVisual() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    {step.rows.length > 0 && <IntervalView title="Closed sessions on each server" intervals={step.rows.map((row, index) => ({
+      start: row.start_time, end: row.stop_time, group: `Server ${row.server_id}`,
+      role: index === step.rows.length - 1 && step.phase === 'pair' ? 'current' : 'kept', label: `${row.stop_time - row.start_time}s`,
+    }))} note="Each bar is one session from its start to the stop that closes it. Nested starts close last in, first out." />}
     <Rows columns={step.columns} rows={step.rows} />
     <output aria-label="Query output">{step.phase === 'done' ? `Output: ${run.result[0].total_uptime_days} whole days` : step.message}</output>
   </>} renderReasoning={() => <>
-    <p>Each start event is matched with the earliest stop on the same server that comes after it. A start with no later stop is left out of the total.</p>
+    <p>Walk each server's events in time order. A stop closes the most recent open start on that server, so nested sessions close inside out. A start with no later stop is left out of the total.</p>
     <p>The seconds of the matched sessions are added together across all servers, then integer division by 86400 gives whole days.</p>
   </>} />
 }

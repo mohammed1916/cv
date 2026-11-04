@@ -4,9 +4,9 @@ import { buildTrace, parseInput } from './algorithm.js'
 
 const solve = (arrivalTime, delayedTime) => buildTrace({ arrivalTime, delayedTime }).result
 
-test('2651 official examples', () => {
-  assert.equal(solve(15, 5), 20)
-  assert.equal(solve(13, 11), 0)
+test('2651 worked examples', () => {
+  assert.equal(solve(9, 4), 13)
+  assert.equal(solve(21, 6), 3)
 })
 
 test('2651 edge cases around midnight', () => {
@@ -23,7 +23,7 @@ test('2651 rejects out-of-range input', () => {
 })
 
 test('2651 frames end at the result with executable Python lines', () => {
-  const trace = buildTrace({ arrivalTime: 13, delayedTime: 11 })
+  const trace = buildTrace({ arrivalTime: 21, delayedTime: 6 })
   assert.equal(trace.frames.at(-1).phase, 'done')
   for (const frame of trace.frames) assert.ok(frame.pythonLine >= 1 && frame.pythonLine <= 3)
 })

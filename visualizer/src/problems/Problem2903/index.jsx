@@ -24,6 +24,27 @@ const definition = {
   ],
 };
 
+// Rows are i, columns are j. A cell shows whether the pair passes both gaps; cells after the current pair are not yet checked.
+function PairGrid({ run, step }) {
+  const { nums, indexDifference, valueDifference } = run.input;
+  const n = nums.length;
+  const cell = { width: 40, height: 36, textAlign: "center", border: "1px solid var(--surface2)", color: "var(--text)" };
+  return <table aria-label="Pairs checked, rows are i and columns are j" style={{ borderCollapse: "collapse" }}>
+    <thead><tr><th scope="col" style={cell}>i / j</th>{nums.map((_, j) => <th key={j} scope="col" style={cell}>{j}</th>)}</tr></thead>
+    <tbody>{nums.map((_, i) => <tr key={i}>
+      <th scope="row" style={cell}>{i}</th>
+      {nums.map((__, j) => {
+        const checked = step.i !== null && step.i !== undefined && (i < step.i || (i === step.i && j <= step.j));
+        const pass = Math.abs(i - j) >= indexDifference && Math.abs(nums[i] - nums[j]) >= valueDifference;
+        const isCurrent = i === step.i && j === step.j;
+        return <td key={j} data-pass={checked ? String(pass) : ""} style={{ ...cell, background: isCurrent ? "var(--primary)" : pass && checked ? "var(--surface2)" : "transparent", color: isCurrent ? "#fff" : "var(--text)" }}>
+          {checked ? (pass ? "yes" : "no") : ""}
+        </td>;
+      })}
+    </tr>)}</tbody>
+  </table>;
+}
+
 export default function Problem2903Visualizer() {
   return (
     <AlgorithmWorkspace
@@ -37,6 +58,7 @@ export default function Problem2903Visualizer() {
             active={step.j ?? -1}
             roleAt={(index) => (index === step.i ? "i" : "")}
           />
+          {run.input.nums.length <= 12 && <PairGrid run={run} step={step} />}
           <output aria-label="Pair state">
             {`i = ${step.i ?? "-"}, j = ${step.j ?? "-"}, result = ${JSON.stringify(step.result ?? run.result)}`}
           </output>

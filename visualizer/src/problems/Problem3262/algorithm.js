@@ -7,7 +7,7 @@ export const phases = [
   { id: 'output', label: 'Result', description: 'Return one row per employee with overlaps.' },
 ]
 
-export const code = `SELECT a.employee_id, COUNT(*) AS overlap_count
+export const code = `SELECT a.employee_id, COUNT(*) AS overlapping_shifts
 FROM EmployeeShifts a
 JOIN EmployeeShifts b
   ON a.employee_id = b.employee_id AND a.shift_id < b.shift_id
@@ -19,7 +19,7 @@ export const python = `def overlapping_shifts(df):
     pairs = df.merge(df, on='employee_id', suffixes=('_a', '_b'))
     pairs = pairs[pairs.shift_id_a < pairs.shift_id_b]
     hit = pairs[(pairs.start_time_a < pairs.end_time_b) & (pairs.start_time_b < pairs.end_time_a)]
-    out = hit.groupby('employee_id').size().reset_index(name='overlap_count')
+    out = hit.groupby('employee_id').size().reset_index(name='overlapping_shifts')
     return out.sort_values('employee_id')
 `
 
@@ -54,10 +54,11 @@ export function buildTrace(input) {
   const shifts = [...input.EmployeeShifts].sort((a, b) => a.shift_id - b.shift_id)
   const counts = new Map()
   const rows = () => [...counts].filter(([, n]) => n > 0).sort(([a], [b]) => a - b)
-    .map(([employee_id, overlap_count]) => ({ employee_id, overlap_count }))
+    .map(([employee_id, overlapping_shifts]) => ({ employee_id, overlapping_shifts }))
   const frames = []
+  let pair = null
   const push = (phase, sqlText, pyText, message) => frames.push({
-    phase, activeLine: lookupCode(sqlText), pythonLine: lookupPython(pyText), message, rows: rows(),
+    phase, activeLine: lookupCode(sqlText), pythonLine: lookupPython(pyText), message, rows: rows(), pair,
   })
   push('load', 'FROM EmployeeShifts a', 'df.merge', `Load ${shifts.length} shifts and pair each shift with every later shift.`)
   for (let i = 0; i < shifts.length; i++) {
@@ -65,6 +66,7 @@ export function buildTrace(input) {
       const a = shifts[i]
       const b = shifts[j]
       if (a.employee_id !== b.employee_id) continue
+      pair = [a.shift_id, b.shift_id]
       push('pair', 'ON a.employee_id', 'shift_id_a < ', `Compare shift ${a.shift_id} with later shift ${b.shift_id} for employee ${a.employee_id}.`)
       if (a.start_time < b.end_time && b.start_time < a.end_time) {
         counts.set(a.employee_id, (counts.get(a.employee_id) || 0) + 1)

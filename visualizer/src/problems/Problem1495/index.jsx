@@ -18,17 +18,25 @@ const definition = {
   ],
 }
 
-function RowTable({ caption, rows }) {
+const KEPT = 'color-mix(in srgb, var(--success) 30%, var(--surface2))'
+const SKIPPED = 'color-mix(in srgb, var(--warning) 30%, var(--surface2))'
+
+function RowTable({ caption, stage, rows, isCurrent = () => false, rowTone = () => null }) {
   const columns = rows.length ? Object.keys(rows[0]) : []
   return (
     <section aria-label={caption}>
       <h3>{caption}</h3>
-      {columns.length === 0 ? <p>No rows yet.</p> : (
+      {stage && <p>{stage}</p>}
+      {columns.length === 0 ? <p>No rows at this stage.</p> : (
         <table>
           <thead><tr>{columns.map(column => <th key={column} scope="col">{column}</th>)}</tr></thead>
-          <tbody>{rows.map((row, index) => (
-            <tr key={index}>{columns.map(column => <td key={column}>{String(row[column])}</td>)}</tr>
-          ))}</tbody>
+          <tbody>{rows.map((row, index) => {
+            const current = isCurrent(row)
+            return <tr key={index} data-current={current ? 'yes' : undefined}
+              style={{ background: rowTone(row) ?? (current ? 'var(--surface2)' : undefined), fontWeight: current ? 600 : undefined }}>
+              {columns.map(column => <td key={column}>{String(row[column])}</td>)}
+            </tr>
+          })}</tbody>
         </table>
       )}
     </section>
@@ -36,10 +44,23 @@ function RowTable({ caption, rows }) {
 }
 
 export default function FriendlyMovies() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <RowTable caption="Working rows" rows={step.rows} />
-    <RowTable caption="Result" rows={run.result} />
-  </>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const airing = step.airing
+    const sameAiring = row => airing && row.content_id === airing.content_id && row.program_date === airing.program_date
+    const stage = {
+      load: 'FROM TVProgram: every airing row, in the order given.',
+      content: "WHERE Kids_content = 'Y' AND content_type = 'Movies': the content rows that qualify.",
+      window: 'WHERE program_date is in June 2020: the highlighted airing is tested now; green rows are kept.',
+      output: 'JOIN on content_id: each kept airing already carries its title.',
+      done: 'SELECT DISTINCT title, sorted: one row per movie.',
+    }[step.phase]
+    return <>
+      <RowTable caption={step.phase === 'load' || step.phase === 'window' ? 'Airings (date order)' : 'Working rows'}
+        stage={stage} rows={step.rows} isCurrent={sameAiring} rowTone={row => (sameAiring(row) ? (airing.kept ? KEPT : SKIPPED) : null)} />
+      {airing && <p>Testing airing on {airing.program_date} for content {airing.content_id}: {airing.kept ? 'kept' : 'skipped'}.</p>}
+      <RowTable caption="Result" stage="The distinct titles appear once each." rows={run.result} />
+    </>
+  }} renderReasoning={() => <>
     <p>A movie qualifies only when both its content flags match and at least one airing falls between June 1 and June 30, 2020.</p>
     <p>Each kept airing is joined to its title, and repeated titles collapse to one row in the final list.</p>
   </>} />

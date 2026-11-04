@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code } from './algorithm'
+import MemoView from './MemoView'
 
 const definition = {
   number: '2623',
@@ -23,11 +24,7 @@ const definition = {
 
 export default function Memoize() {
   return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ step }) => <section aria-label="Visual state">
-      <h3>{step.view.title}</h3>
-      <ol>{step.view.rows.map((row, index) => <li key={index} aria-current={index === step.view.focus ? 'step' : undefined}>{row}</li>)}</ol>
-      {step.view.summary && <output>{step.view.summary}</output>}
-    </section>}
+    renderVisual={({ step }) => <MemoView view={step.view} />}
     renderReasoning={() => <>
       <p>The cache maps an argument list to its answer. A repeated list is a hit and skips the real function.</p>
       <p>Serialising the arguments into a key lets equal lists match even though each call creates a new array.</p>

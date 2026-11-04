@@ -1,33 +1,31 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { parseInput, buildTrace, code } from './algorithm'
 
 const definition = {
   phases: [
-    { id: 'start', label: 'Start', description: 'Begin at the top level.' },
-    { id: 'differ', label: 'Differ', description: 'A leaf value changed.' },
-    { id: 'done', label: 'Result', description: 'Report every changed key.' },
+    { id: 'start', label: 'Start', description: 'Compare the two objects key by key.' },
+    { id: 'differ', label: 'Differ', description: 'A key whose values differ is recorded with both values.' },
+    { id: 'done', label: 'Result', description: 'The collected differences.' },
   ],
   parse: parseInput, build: buildTrace, code,
-  inputLabel: 'Object with obj1 and obj2 (nested plain objects)',
+  inputLabel: 'Object with obj1 and obj2 (JSON objects, nesting allowed)',
   url: 'https://leetcode.com/problems/differences-between-two-objects/',
-  complexity: 'O(total keys) comparisons when values are small. Nested objects are visited once each.',
+  complexity: 'O(total keys) time. Each key of both objects is compared once.',
   examples: [
-    { label: 'Nested change', input: '{"obj1":{"a":1,"n":{"x":2,"y":[1]}},"obj2":{"a":1,"n":{"x":5,"y":[1]}}}' },
-    { label: 'Added key', input: '{"obj1":{},"obj2":{"k":null}}' },
+    { label: 'Nested change', input: '{"obj1":{"a":1,"nest":{"x":true,"y":[1,2]}},"obj2":{"a":1,"nest":{"x":false,"y":[1,2]},"extra":"new"}}' },
+    { label: 'Same objects', input: '{"obj1":{"k":"v"},"obj2":{"k":"v"}}' },
   ],
 }
 
 export default function DifferencesBetweenTwoObjects() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <table aria-label="Changed keys">
-      <thead><tr><th>Key</th><th>Old</th><th>New</th></tr></thead>
-      <tbody>{Object.entries(step.diff).map(([key, [oldValue, newValue]]) => <tr key={key}>
-        <td>{key}</td><td>{JSON.stringify(oldValue) ?? 'missing'}</td><td>{JSON.stringify(newValue) ?? 'missing'}</td>
-      </tr>)}</tbody>
-    </table>
-    {Object.keys(step.diff).length === 0 && <p>No differences yet.</p>}
-  </>} renderReasoning={() => <>
-    <p>Recursion only continues when both sides are objects. Anywhere else the two values are compared as a whole.</p>
-    <p>Each changed key is reported with its old and new value, which is why the result is a map from key path to a pair.</p>
-  </>} />
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    // Each differing key is one row: its path, the value in obj1, and the value in obj2.
+    const rows = Object.entries(step.diff ?? {}).map(([path, [x, y]]) => ({ path, obj1: JSON.stringify(x ?? null), obj2: JSON.stringify(y ?? null) }))
+    const current = rows.length - 1
+    return <section aria-label="Differences" style={{ display: 'grid', gap: 10 }}>
+      <RecordStateTable label="Keys that differ" columns={['path', 'obj1', 'obj2']} rows={rows} activeRow={step.phase === 'differ' ? current : -1} />
+      {step.phase === 'done' && <pre style={{ color: 'var(--text)', whiteSpace: 'pre-wrap' }}>{JSON.stringify(run.result)}</pre>}
+    </section>
+  }} renderReasoning={({ step }) => <p>{step.message ?? 'Keys present on only one side are compared against undefined.'}</p>} />
 }

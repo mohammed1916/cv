@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import RevertStrips from './RevertStrips'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -21,6 +22,7 @@ const definition = {
 
 export default function RevertWordI() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <RevertStrips word={run.input.word} t={step.t} k={run.input.k} rest={step.rest} prefix={step.prefix} />
     <output aria-label="Second being tested">{`t = ${step.t}, removed ${step.cut ?? 0} letters of ${run.input.word.length}`}</output>
     <output aria-label="Remaining letters and start">{step.rest !== undefined ? `remaining "${step.rest}" against start "${step.prefix}"` : 'no comparison yet'}</output>
   </>} renderReasoning={() => <>

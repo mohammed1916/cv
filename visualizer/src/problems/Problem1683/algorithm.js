@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample table is invented for this visualization.
+// Teaching version of the query. The sample table is invented for this visualization.
 export const sql = `SELECT tweet_id
 FROM Tweets
 WHERE CHAR_LENGTH(content) > 15

@@ -19,12 +19,12 @@ export function buildTrace({ grid, queries }) {
   const seen = new Set(['0,0'])
   const frontier = [{ v: grid[0][0], r: 0, c: 0 }]
   const visited = []
-  const frames = [{ phase: 'start', activeLine: L('mark the top-left cell as seen'), pythonLine: P('seen = {(0, 0)}'), visited: [], query: null, points: 0, message: 'Start the region at the top-left cell.' }]
+  const frames = [{ phase: 'start', activeLine: L('mark the top-left cell as seen'), pythonLine: P('seen = {(0, 0)}'), visited: [], frontier: frontier.map(f => ({ r: f.r, c: f.c, v: f.v })), query: null, points: 0, message: 'Start the region at the top-left cell.' }]
   let points = 0
   const less = (a, b) => a.v < b.v || (a.v === b.v && (a.r < b.r || (a.r === b.r && a.c < b.c)))
   for (const qi of order) {
     const q = queries[qi]
-    frames.push({ phase: 'query', activeLine: L('take the next query'), pythonLine: P('q = queries[qi]'), visited: [...visited], query: q, points, message: `Query ${q}: cells below ${q} can be collected.` })
+    frames.push({ phase: 'query', activeLine: L('take the next query'), pythonLine: P('q = queries[qi]'), visited: [...visited], frontier: frontier.map(f => ({ r: f.r, c: f.c, v: f.v })), query: q, points, message: `Query ${q}: cells below ${q} can be collected.` })
     while (frontier.length) {
       let at = 0
       for (let j = 1; j < frontier.length; j++) if (less(frontier[j], frontier[at])) at = j
@@ -39,12 +39,12 @@ export function buildTrace({ grid, queries }) {
         seen.add(`${nr},${nc}`)
         frontier.push({ v: grid[nr][nc], r: nr, c: nc })
       }
-      frames.push({ phase: 'expand', activeLine: L('take the smallest frontier cell'), pythonLine: P('points += 1'), visited: [...visited], query: q, points, message: `Collect cell (${cell.r}, ${cell.c}) with value ${cell.v}. Points: ${points}.` })
+      frames.push({ phase: 'expand', activeLine: L('take the smallest frontier cell'), pythonLine: P('points += 1'), visited: [...visited], frontier: frontier.map(f => ({ r: f.r, c: f.c, v: f.v })), query: q, points, message: `Collect cell (${cell.r}, ${cell.c}) with value ${cell.v}. Points: ${points}.` })
     }
     answer[qi] = points
-    frames.push({ phase: 'answer', activeLine: L('record the points for this query'), pythonLine: P('answer[qi] = points'), visited: [...visited], query: q, points, message: `Answer for query ${q}: ${points}.` })
+    frames.push({ phase: 'answer', activeLine: L('record the points for this query'), pythonLine: P('answer[qi] = points'), visited: [...visited], frontier: frontier.map(f => ({ r: f.r, c: f.c, v: f.v })), query: q, points, message: `Answer for query ${q}: ${points}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the answers'), pythonLine: P('return answer'), visited: [...visited], query: null, points, message: 'Answers are in the original query order.' })
+  frames.push({ phase: 'done', activeLine: L('return the answers'), pythonLine: P('return answer'), visited: [...visited], frontier: frontier.map(f => ({ r: f.r, c: f.c, v: f.v })), query: null, points, message: 'Answers are in the original query order.' })
   return { input: { grid, queries }, result: answer, frames }
 }
 

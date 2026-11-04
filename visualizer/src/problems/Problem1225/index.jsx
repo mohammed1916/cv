@@ -26,11 +26,22 @@ const definition = {
   ],
 }
 
+function StageStrip({ phases, current }) {
+  return <ol aria-label="SQL stages" style={{ display: 'flex', flexWrap: 'wrap', gap: 6, listStyle: 'none', padding: 0, margin: '0 0 12px' }}>
+    {phases.map(stage => <li key={stage.id} data-stage={stage.id} aria-current={stage.id === current ? 'step' : undefined} style={{
+      padding: '4px 10px', border: stage.id === current ? '2px solid var(--text)' : '1px solid var(--border)',
+      background: stage.id === current ? 'color-mix(in srgb, var(--primary) 25%, transparent)' : 'var(--surface2)', color: 'var(--text)',
+    }}>{stage.label}</li>)}
+  </ol>
+}
+
 export default function ReportContiguousDates() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <StageStrip phases={phases} current={step.phase} />
     <RowTable label={`Working rows (${step.phase})`} columns={step.columns} rows={step.rows} />
     {step.phase === 'done' && <RowTable label="Result" columns={run.columns} rows={run.result} />}
   </>} renderReasoning={() => <>
+    <p>Each run is an interval: l is its first day and r its last day.</p>
     <p>Only dates in 2019 count. Adjacent days in the same state form one period, so a run keeps extending while the next day is the day after the current end and has the same state.</p>
     <p>A day with the other outcome, or a missing day, closes the current period and opens a new one.</p>
   </>} />

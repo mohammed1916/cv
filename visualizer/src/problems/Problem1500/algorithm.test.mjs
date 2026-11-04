@@ -4,7 +4,12 @@ import { parseInput, buildTrace } from './algorithm.js'
 
 test('example run gives the expected result and every frame maps to code', () => {
   const run = buildTrace(parseInput(`{"ops":[["join",[5,6]],["join",[6]],["request",2,5],["leave",1],["join",[8]],["request",2,6]]}`))
-  assert.deepEqual(run.result, [1, 2, [1], null, 1, []])
+  assert.deepEqual(run.result, [1, 2, [1], null, 1, [2]])
   assert.ok(run.frames.length > 1)
   assert.ok(run.frames.every(f => f.pythonLine > 0 && f.activeLine > 0 && typeof f.message === 'string'))
+})
+
+test('official-style run: requester is listed and gets the chunk only when another owner exists', () => {
+  const run = buildTrace(parseInput(`{"ops":[["join",[1,2]],["join",[2,3]],["join",[4]],["request",1,3],["request",2,2],["leave",1],["request",2,1],["leave",2],["join",[]]]}`))
+  assert.deepEqual(run.result, [1, 2, 3, [2], [1, 2], null, [], null, 1])
 })

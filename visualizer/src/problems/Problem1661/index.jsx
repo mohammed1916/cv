@@ -28,9 +28,31 @@ function RowTable({ label, rows }) {
   </section>
 }
 
+// Each machine is a lane; each matched process is a bar from its start time to its end time.
+function ProcessTimeline({ rows }) {
+  const spans = rows.filter(row => 'start_at' in row && 'end_at' in row)
+  if (spans.length === 0) return null
+  const maxT = Math.max(...spans.map(row => row.end_at), 1)
+  const machines = [...new Set(spans.map(row => row.machine_id))].sort((a, b) => a - b)
+  return <section aria-label="Processes on a time line">
+    <h4>Each process as a bar on its machine's lane</h4>
+    {machines.map(machine => <div key={machine} style={{ display: 'grid', gridTemplateColumns: '5rem 1fr', gap: 8, alignItems: 'center', marginBottom: 6 }}>
+      <span style={{ fontFamily: 'monospace', color: 'var(--text)' }}>machine {machine}</span>
+      <div style={{ position: 'relative', height: 22, background: 'var(--surface2)', borderRadius: 4 }}>
+        {spans.filter(row => row.machine_id === machine).map(row => <div key={row.process_id} title={`process ${row.process_id}: ${row.end_at - row.start_at}`} style={{
+          position: 'absolute', top: 3, bottom: 3, borderRadius: 3, background: 'var(--primary)', opacity: 0.85,
+          left: `${(row.start_at / maxT) * 100}%`, width: `${((row.end_at - row.start_at) / maxT) * 100}%`,
+        }} />)}
+      </div>
+    </div>)}
+    <p style={{ color: 'var(--text-muted)' }}>Bar length is end minus start. The time axis runs from 0 to {maxT}.</p>
+  </section>
+}
+
 export default function Problem1661() {
   return <AlgorithmWorkspace definition={definition}
     renderVisual={({ step }) => <>
+      <ProcessTimeline rows={step.rows} />
       <RowTable label="Working rows" rows={step.rows} />
       <RowTable label="Output" rows={step.output} />
     </>}

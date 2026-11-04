@@ -1,4 +1,4 @@
-// LeetCode 1634 (draft): Add Two Polynomials Represented as Linked Lists.
+// LeetCode 1634: Add Two Polynomials Represented as Linked Lists.
 // Input: { poly1, poly2 } where each polynomial is a list of [coefficient, power] terms in descending power order.
 // Terms with a zero coefficient are not stored, and equal powers are merged. The result is a list in the same format.
 

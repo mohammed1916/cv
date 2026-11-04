@@ -1,5 +1,40 @@
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
 import GraphTraversalView from "../../components/shared/GraphTraversalView";
+
+const cellStyle = { width: 30, height: 30, textAlign: "center", fontFamily: "monospace", color: "var(--text)", border: "1px solid var(--border)" };
+
+// Each colour's bounding box is outlined; the box being scanned is outlined thick.
+function BoxGrid({ grid, colors, current }) {
+  const colour = current >= 0 ? colors[current] : null;
+  let box = null;
+  if (colour !== null) {
+    grid.forEach((row, r) => row.forEach((value, c) => {
+      if (value !== colour) return;
+      box = box ? [Math.min(box[0], r), Math.max(box[1], r), Math.min(box[2], c), Math.max(box[3], c)] : [r, r, c, c];
+    }));
+  }
+  return <table aria-label="Target grid" style={{ borderCollapse: "collapse", marginBottom: 8 }}><tbody>
+    {grid.map((row, r) => <tr key={r}>{row.map((value, c) => {
+      const inBox = box && r >= box[0] && r <= box[1] && c >= box[2] && c <= box[3];
+      return <td key={c} style={{ ...cellStyle, fontWeight: value === colour ? 700 : 400,
+        background: inBox ? "color-mix(in srgb, var(--primary) 18%, transparent)" : "transparent",
+        outline: inBox ? "1px dashed var(--primary)" : "none" }}>{value}</td>;
+    })}</tr>)}
+  </tbody></table>
+}
+
+// A list of node -> prerequisites: a colour can be printed once every colour listed before it is printed.
+function PrereqList({ colors, edges, done, current }) {
+  return <ul aria-label="Colour prerequisites" style={{ color: "var(--text)" }}>
+    {colors.map((colour, i) => {
+      const prereq = edges.filter(([, b]) => b === i).map(([a]) => colors[a])
+      const finished = done.includes(i);
+      return <li key={colour} style={{ fontWeight: i === current ? 700 : 400 }}>
+        {colour} needs {prereq.length ? prereq.join(", ") : "nothing"} first{finished ? " (printed)" : ""}
+      </li>;
+    })}
+  </ul>
+}
 import { code, python, pythonLineMap, parseInput, buildTrace } from "./algorithm";
 
 const definition = {
@@ -31,6 +66,9 @@ export default function StrangePrinterIIVisualizer() {
     <AlgorithmWorkspace
       definition={definition}
       renderVisual={({ run, step }) => (
+        <>
+        <BoxGrid grid={run.input.targetGrid} colors={run.colors} current={step.current} />
+        <PrereqList colors={run.colors} edges={step.edges} done={step.done} current={step.current} />
         <GraphTraversalView
           title="Must-be-painted-before graph (colors)"
           n={run.colors.length}
@@ -44,6 +82,7 @@ export default function StrangePrinterIIVisualizer() {
           done={step.done}
           tags={step.tags}
         />
+        </>
       )}
       renderReasoning={({ run }) => <p>{`Colors: ${run.colors.join(", ")}. The grid is printable exactly when this graph has no cycle.`}</p>}
     />

@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import BitPlaceView from './BitPlaceView'
 
 const definition = {
   phases: [
@@ -14,13 +15,14 @@ const definition = {
   url: 'https://leetcode.com/problems/convert-date-to-binary/',
   complexity: 'O(1) time, since each field has at most 12 binary digits.',
   examples: [
-    { label: 'Example 1', input: '{"date":"2080-02-29"}' },
-    { label: 'New year', input: '{"date":"1900-01-01"}' },
+    { label: 'Leap day (illustrative)', input: '{"date":"2024-02-29"}' },
+    { label: 'Single-digit month and day (illustrative)', input: '{"date":"1999-07-04"}' },
   ],
 }
 
 export default function ConvertDateToBinary() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+    <BitPlaceView parts={step.parts} />
     <table aria-label="Date parts">
       <thead><tr><th>Part</th><th>Decimal</th><th>Binary</th></tr></thead>
       <tbody>{step.parts.map(part => (

@@ -19,13 +19,13 @@ function checkFrames(trace) {
 test('3140 longest block of three seats is returned', () => {
   const trace = run('{"Cinema":[{"seat_id":1,"free":1},{"seat_id":2,"free":1},{"seat_id":3,"free":0},{"seat_id":4,"free":1},{"seat_id":5,"free":1},{"seat_id":6,"free":1},{"seat_id":7,"free":0},{"seat_id":8,"free":1}]}')
   checkFrames(trace)
-  assert.deepEqual(trace.result, [{ seat_id: 4 }, { seat_id: 5 }, { seat_id: 6 }])
+  assert.deepEqual(trace.result, [{ first_seat_id: 4, last_seat_id: 6, consecutive_seats_len: 3 }])
 })
 
 test('3140 tied longest blocks are all returned', () => {
   const trace = run('{"Cinema":[{"seat_id":1,"free":1},{"seat_id":2,"free":1},{"seat_id":3,"free":0},{"seat_id":4,"free":1},{"seat_id":5,"free":1}]}')
   checkFrames(trace)
-  assert.deepEqual(trace.result, [{ seat_id: 1 }, { seat_id: 2 }, { seat_id: 4 }, { seat_id: 5 }])
+  assert.deepEqual(trace.result, [{ first_seat_id: 1, last_seat_id: 2, consecutive_seats_len: 2 }, { first_seat_id: 4, last_seat_id: 5, consecutive_seats_len: 2 }])
 })
 
 test('3140 no free seats gives an empty result; bad rows are rejected', () => {

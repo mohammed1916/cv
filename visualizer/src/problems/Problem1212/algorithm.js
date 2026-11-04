@@ -1,4 +1,4 @@
-// Knowledge-derived walkthrough: each match yields a points table for both sides, then the totals are joined onto every team so teams without matches keep zero.
+// Walkthrough: each match yields a points table for both sides, then the totals are joined onto every team so teams without matches keep zero.
 export const phases = [
   { id: 'load', label: 'Teams', description: 'Start every team at zero points.' },
   { id: 'award', label: 'Matches', description: 'Each match gives points to both sides.' },
