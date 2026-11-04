@@ -15,7 +15,7 @@ const definition = {
   complexity: 'O(n + p) time for n words and p pairs. The visualization caps input at 20 words and 20 pairs.',
   examples: [
     { label: 'Similar', input: '{"s1":["great","acting","skills"],"s2":["fine","drama","talent"],"pairs":[["great","fine"],["acting","drama"],["skills","talent"]]}' },
-    { label: 'Not similar', input: '{"s1":["an","extraordinary","meal"],"s2":["one","good","dinner"],"pairs":[["great","good"],["any","one"],["some","one"]]}' },
+    { label: 'Not similar', input: '{"s1":["an","unusual","meal"],"s2":["one","good","dinner"],"pairs":[["great","good"],["any","one"],["some","one"]]}' },
   ],
 }
 

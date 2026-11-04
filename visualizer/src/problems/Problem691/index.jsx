@@ -13,7 +13,7 @@ const definition = {
   complexity: 'O(S · ∏(cᵢ + 1)) time for S stickers and letter counts cᵢ of the target, since each state is a vector of remaining counts.',
   examples: [
     { label: 'Two stickers', input: '{"stickers":["with","example","science"],"target":"thehat"}' },
-    { label: 'Impossible', input: '{"stickers":["notice","possible"],"target":"basicbasic"}' },
+    { label: 'Impossible', input: '{"stickers":["notice","possible"],"target":"basic"}' },
   ],
 }
 
