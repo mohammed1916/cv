@@ -1,5 +1,6 @@
 const lines = text => text.split('\n').map((t, i) => ({ line: i + 1, text: t }))
-const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: line, activeLine: line, message, state })
+const PY_OF = {1: 44, 2: 50, 3: 47, 4: 49, 5: 51}
+const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: PY_OF[line] ?? line, activeLine: line, message, state })
 export const PHASES = [
   { id: 'setup', label: 'Setup', description: 'Read the input and prepare the model.' },
   { id: 'step', label: 'Step', description: 'Process one event or item.' },
@@ -31,14 +32,14 @@ export function buildTrace(input) {
     ? { status: 'resolved', value: input.value }
     : { status: 'rejected', reason: input.error }
   frames.push(frame('step', 4, input.ok ? 'The callback got no error, so resolve with the value.' : 'The callback got an error, so reject with it.', { callback: input.ok ? [null, input.value] : [input.error] }))
-  frames.push(frame('done', 6, `Promise ${result.status}.`, { result }))
+  frames.push(frame('done', 5, `Promise ${result.status}.`, { result }))
   return { input, result, frames }
 }
-export const code = lines(`create a new promise
-call the callback-style function with a handler
-  if the handler gets an error then reject with it
-  otherwise resolve with the value
-return the promise`)
+export const code = lines(`const promise = new Promise((resolve, reject) => { // create a new promise
+  fn(...args, (err, value) => { // call the callback-style function with a handler
+    if (err) reject(err); // if the handler gets an error then reject with it
+    else resolve(value); }); // otherwise resolve with the value
+}); return promise; // return the promise`)
 export const python = `def promisify(fn):
     def wrapped(*args):
         future = Future()

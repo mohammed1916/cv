@@ -44,16 +44,23 @@ export function buildTrace(input) {
   return { input, s, k, result: '', frames }
 }
 
-export const code = `smallest beautiful string of length n that is larger than s
-  let a be the letters of s as numbers
-  for i from n - 1 down to 0 do
-    for each letter c above a[i] and below k, in order, do
-      if c is not a[i-1] and c is not a[i-2] then
-        set a[i] to c
-        fill each later position with the smallest letter that avoids the two letters before it
-        return the result
-  return the empty string`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function smallestBeautiful(s, k) {',
+  '  const a = [...s].map(ch => ch.charCodeAt(0) - 97) // let a be the letters of s as numbers',
+  '  for (let i = a.length - 1; i >= 0; i--) { // for i from n - 1 down to 0',
+  '    for (let c = a[i] + 1; c < k; c++) { // for each letter c above a[i] and below k',
+  '      if (c !== a[i - 1] && c !== a[i - 2]) {',
+  '        a[i] = c // set a[i] to c',
+  '        for (let j = i + 1; j < a.length; j++) a[j] = smallestAvoiding(a, j) // fill each later position with the smallest letter that avoids the two letters before it',
+  '        return a.map(x => String.fromCharCode(97 + x)).join("") // return the result',
+  '      }',
+  '    }',
+  '  }',
+  '  return "" // return the empty string',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(c => c.includes(s)) + 1
 
 export const python = `def smallest_beautiful(s, k):
     a = [ord(ch) - 97 for ch in s]

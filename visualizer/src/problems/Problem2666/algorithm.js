@@ -1,11 +1,10 @@
 // Teaching stand-in for fn: the visualization uses fn(...args) = the sum of its arguments (an empty call sums to 0).
 // JSON cannot express undefined, so a later call's result is reported as null.
-export const code = `function once(fn)
-  set called to false
-  return a wrapper that takes the call arguments
-    if called is true then return undefined
-    set called to true
-    return fn applied to the arguments`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function once(fn) { let called = false; // set called to false
+  return (...args) => { // return a wrapper that takes the call arguments
+    if (called) return undefined; // if called is true then return undefined
+    called = true; // set called to true
+    return fn(...args); }; } // return fn applied to the arguments`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def once(fn):
     called = False

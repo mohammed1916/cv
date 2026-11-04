@@ -1,9 +1,9 @@
 // Visualization cap: at most 12 keys or elements at the top level. A key whose value is null still counts as a key.
-export const code = `function isEmpty(value)
-  if value is a list then
-    return whether its length is zero
-  count the own keys of the object
-  return whether the count is zero`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function isEmpty(value) {
+  if (Array.isArray(value)) return value.length === 0; // if value is a list then return whether its length is zero
+  const keys = Object.keys(value); // count the own keys of the object
+  return keys.length === 0; // return whether the count is zero
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def is_empty(value):
     if isinstance(value, list):

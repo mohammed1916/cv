@@ -1,11 +1,11 @@
 const CODE = [
-  "FUNCTION findChampion(n, edges)",
-  "    indegree ← zero for every team",
-  "    FOR each edge [a, b]",
-  "        indegree[b] ← indegree[b] + 1",
-  "    candidates ← teams with indegree 0",
-  "    IF exactly one candidate, RETURN it",
-  "    RETURN -1",
+  "function findChampion(n, edges) {",
+  "const indegree = Array(n).fill(0)",
+  "for (const [a, b] of edges)",
+  "  indegree[b]++",
+  "const candidates = [...indegree.keys()].filter(t => indegree[t] === 0)",
+  "if (candidates.length === 1) return candidates[0]",
+  "return -1 }",
 ]
 export const code = CODE.map((text, index) => ({ line: index + 1, text }))
 export const python = `def findChampion(n, edges):

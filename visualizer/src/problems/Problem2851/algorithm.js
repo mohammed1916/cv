@@ -34,16 +34,16 @@ export function buildTrace({ s, t, k }) {
   return { input: { s, t, k }, result: ways, frames }
 }
 
-export const code = `ways to turn s into t in exactly k operations
-  let n be the length of s
-  count how many rotations l from 0 to n minus 1 turn s into t, and call the count p
-  if p is 0 then return 0
-  set ways to 1 if s equals t, otherwise 0
-  set total to 1
-  repeat k times
-    set ways to (p minus 1) times ways plus p times (total minus ways), modulo 1000000007
-    set total to (n minus 1) times total, modulo 1000000007
-  return ways`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `// ways to turn s into t in exactly k operations
+const n = s.length // let n be the length of s
+let p = 0; for (let l = 0; l < n; l++) if (s.slice(l) + s.slice(0, l) === t) p++ // count how many rotations l from 0 to n minus 1 turn s into t, and call the count p
+if (p === 0) return 0 // if p is 0 then return 0
+let ways = s === t ? 1 : 0 // set ways to 1 if s equals t, otherwise 0
+let total = 1 // set total to 1
+for (let step = 0; step < k; step++) { // repeat k times
+  ways = ((p - 1) * ways + p * (total - ways)) % MOD // set ways to (p minus 1) times ways plus p times (total minus ways)
+  total = ((n - 1) * total) % MOD } // set total to (n minus 1) times total, modulo MOD
+return ways // return ways`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 

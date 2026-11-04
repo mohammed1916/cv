@@ -28,12 +28,13 @@ export function buildTrace({ num1, num2 }) {
   return { input: { num1, num2 }, result: -1, frames }
 }
 
-export const code = `minimum operations to make num1 zero
-  for each operation count k from 0 to 64
-    set x to num1 minus k times num2
-    if x is at least k and the number of set bits in x is at most k then
-      return k
-  return -1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minOperationsToZero(num1, num2) { // minimum operations to make num1 zero
+  for (let k = 0; k <= 64; k++) { // for each operation count k from 0 to 64
+    const x = num1 - k * num2; // set x to num1 minus k times num2
+    if (x >= k && popcount(x) <= k) return k; // if x is at least k and the number of set bits in x is at most k then return k
+  }
+  return -1; // return -1
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def min_operations_to_zero(num1, num2):

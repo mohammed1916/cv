@@ -8,15 +8,19 @@ const MAX_SIDE = 8
 const MAX_LENGTH = 64
 
 const CODE_LINES = [
-  'FUNCTION snail(arr, rowsCount, colsCount)',
-  '    IF rowsCount × colsCount is not the length of arr THEN RETURN []',
-  '    matrix ← rowsCount by colsCount grid, all empty',
-  '    k ← 0, the next array index to place',
-  '    FOR col from 0 to colsCount − 1',
-  '        IF col is even THEN rows run top to bottom ELSE bottom to top',
-  '        FOR each row in that order',
-  '            matrix[row][col] ← arr[k]; k ← k + 1',
-  '    RETURN matrix',
+  'function snail(arr, rowsCount, colsCount) {',
+  '  if (rowsCount * colsCount !== arr.length) return []',
+  '  const matrix = Array.from({ length: rowsCount }, () => Array(colsCount))',
+  '  let k = 0',
+  '  for (let col = 0; col < colsCount; col++) {',
+  '    const down = col % 2 === 0',
+  '    const rows = down ? [...Array(rowsCount).keys()] : [...Array(rowsCount).keys()].reverse()',
+  '    for (const row of rows) {',
+  '      matrix[row][col] = arr[k]; k++',
+  '    }',
+  '  }',
+  '  return matrix',
+  '}',
 ]
 
 const PYTHON_LINES = [
@@ -84,25 +88,25 @@ export function buildTrace({ arr, rowsCount, colsCount }) {
 
   const fits = rowsCount * colsCount === arr.length
   frames.push({
-    phase: 'check', activeLine: L('IF rowsCount × colsCount'), pythonLine: P('if rowsCount * colsCount'),
+    phase: 'check', activeLine: L('if (rowsCount * colsCount !== arr.length)'), pythonLine: P('if rowsCount * colsCount'),
     message: `${rowsCount} × ${colsCount} = ${rowsCount * colsCount} cells for ${arr.length} value${arr.length === 1 ? '' : 's'}.`,
     view: snapshot({ mismatch: !fits }),
   })
   if (!fits) {
-    frames.push({ phase: 'done', activeLine: L('RETURN []'), pythonLine: P('return []'), message: 'The sizes differ, so the answer is an empty list.', view: snapshot({ mismatch: true, answer: [] }) })
+    frames.push({ phase: 'done', activeLine: L('return []'), pythonLine: P('return []'), message: 'The sizes differ, so the answer is an empty list.', view: snapshot({ mismatch: true, answer: [] }) })
     return { input: { arr, rowsCount, colsCount }, result: [], frames }
   }
 
   const matrix = emptyGrid()
   const order = emptyGrid()
   let k = 0
-  frames.push({ phase: 'check', activeLine: L('matrix ← rowsCount'), pythonLine: P('matrix = [[None]'), message: `An empty ${rowsCount} by ${colsCount} grid.`, view: snapshot({ matrix: copy(matrix), order: copy(order), k }) })
-  frames.push({ phase: 'check', activeLine: L('k ← 0'), pythonLine: P('k = 0'), message: 'Next array index to place is 0.', view: snapshot({ matrix: copy(matrix), order: copy(order), k }) })
+  frames.push({ phase: 'check', activeLine: L('const matrix = Array.from'), pythonLine: P('matrix = [[None]'), message: `An empty ${rowsCount} by ${colsCount} grid.`, view: snapshot({ matrix: copy(matrix), order: copy(order), k }) })
+  frames.push({ phase: 'check', activeLine: L('let k = 0'), pythonLine: P('k = 0'), message: 'Next array index to place is 0.', view: snapshot({ matrix: copy(matrix), order: copy(order), k }) })
 
   for (let col = 0; col < colsCount; col++) {
     const down = col % 2 === 0
     frames.push({
-      phase: 'column', activeLine: L('IF col is even'), pythonLine: P('rows = range(rowsCount) if'),
+      phase: 'column', activeLine: L('const down = col % 2 === 0'), pythonLine: P('rows = range(rowsCount) if'),
       message: `Column ${col}: ${down ? 'top to bottom' : 'bottom to top'}.`,
       view: snapshot({ matrix: copy(matrix), order: copy(order), k, direction: down ? 'down' : 'up', column: col }),
     })
@@ -111,16 +115,16 @@ export function buildTrace({ arr, rowsCount, colsCount }) {
       matrix[row][col] = arr[k]
       order[row][col] = k
       frames.push({
-        phase: 'place', activeLine: L('matrix[row][col] ← arr[k]'), pythonLine: P('matrix[row][col] = arr[k]'),
+        phase: 'place', activeLine: L('matrix[row][col] = arr[k]'), pythonLine: P('matrix[row][col] = arr[k]'),
         message: `arr[${k}] = ${arr[k]} goes to row ${row}, column ${col}.`,
         view: snapshot({ matrix: copy(matrix), order: copy(order), k, cursor: { row, col }, direction: down ? 'down' : 'up', column: col }),
       })
       k++
-      frames.push({ phase: 'place', activeLine: L('k ← k + 1'), pythonLine: P('k += 1'), message: `Next index is ${k}.`, view: snapshot({ matrix: copy(matrix), order: copy(order), k, direction: down ? 'down' : 'up', column: col }) })
+      frames.push({ phase: 'place', activeLine: L('matrix[row][col] = arr[k]'), pythonLine: P('k += 1'), message: `Next index is ${k}.`, view: snapshot({ matrix: copy(matrix), order: copy(order), k, direction: down ? 'down' : 'up', column: col }) })
     }
   }
 
-  frames.push({ phase: 'done', activeLine: L('RETURN matrix'), pythonLine: P('return matrix'), message: 'Every value is placed exactly once.', view: snapshot({ matrix: copy(matrix), order: copy(order), k, answer: copy(matrix) }) })
+  frames.push({ phase: 'done', activeLine: L('return matrix'), pythonLine: P('return matrix'), message: 'Every value is placed exactly once.', view: snapshot({ matrix: copy(matrix), order: copy(order), k, answer: copy(matrix) }) })
   return { input: { arr, rowsCount, colsCount }, result: matrix, frames }
 }
 

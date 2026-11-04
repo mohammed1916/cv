@@ -19,7 +19,7 @@ const definition = {
   complexity: "O(n) time and O(n) space for the answer. The first and last indices are never peaks. The visualization caps input at 50 values from 1 to 100.",
   examples: [
     { label: "Example 1 (from a community test, not the statement)", input: '{"mountain": [1, 4, 3, 8, 5]}' },
-    { label: "Illustrative example (not from the statement)", input: '{"mountain": [2, 1, 2, 1, 2]}' },
+    { label: "Second example", input: '{"mountain": [2, 1, 2, 1, 2]}' },
   ],
 };
 

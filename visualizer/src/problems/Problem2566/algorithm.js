@@ -1,12 +1,15 @@
-export const code = [
-  { line: 1, text: "text = the digits of num" },
-  { line: 2, text: "high = text" },
-  { line: 3, text: "for each digit from left to right" },
-  { line: 4, text: "if digit is not 9" },
-  { line: 5, text: "high = text with every occurrence of that digit replaced by 9, then stop" },
-  { line: 6, text: "low = text with every occurrence of the first digit replaced by 0" },
-  { line: 7, text: "return integer value of high minus integer value of low" },
+const CODE = [
+  'function maxDiff(num) {',
+  '  const text = String(num)',
+  '  let high = text',
+  '  for (const digit of text) {',
+  '    if (digit !== \'9\') { high = text.split(digit).join(\'9\'); break }',
+  '  }',
+  '  const low = text.split(text[0]).join("0")',
+  '  return Number(high) - Number(low)',
+  '}',
 ];
+export const code = CODE.map((text, index) => ({ line: index + 1, text }));
 
 export const python = `def maxDiff(num):
     text = str(num)
@@ -45,25 +48,25 @@ export function buildTrace(input) {
   const frame = (phase, activeLine, pythonLine, message) =>
     frames.push({ phase, activeLine, pythonLine, message, num, text, high, low, scanIndex, foundIndex });
 
-  frame("setup", 1, 2, `The digits of ${num} are ${text}.`);
-  frame("setup", 2, 3, "Start with high equal to the original digits.");
+  frame("setup", 2, 2, `The digits of ${num} are ${text}.`);
+  frame("setup", 3, 3, "Start with high equal to the original digits.");
   for (let i = 0; i < text.length; i++) {
     scanIndex = i;
-    frame("scan", 3, 4, `Look at digit ${text[i]} at position ${i}.`);
+    frame("scan", 4, 4, `Look at digit ${text[i]} at position ${i}.`);
     if (text[i] !== "9") {
       foundIndex = i;
-      frame("scan", 4, 5, `Digit ${text[i]} is not 9, so it is the one to remap upward.`);
+      frame("scan", 5, 5, `Digit ${text[i]} is not 9, so it is the one to remap upward.`);
       high = text.split(text[i]).join("9");
       frame("raise", 5, 6, `Replacing every ${text[i]} with 9 gives high = ${high}.`);
       frame("raise", 5, 7, "Stop scanning after the first remap.");
       break;
     }
-    frame("scan", 4, 5, "Digit is 9, so keep scanning.");
+    frame("scan", 5, 5, "Digit is 9, so keep scanning.");
   }
   scanIndex = -1;
   low = text.split(text[0]).join("0");
-  frame("lower", 6, 8, `Replacing every ${text[0]} with 0 gives low = ${low}.`);
+  frame("lower", 7, 8, `Replacing every ${text[0]} with 0 gives low = ${low}.`);
   const result = Number(high) - Number(low);
-  frame("done", 7, 9, `${high} minus ${low} gives ${result}.`);
+  frame("done", 8, 9, `${high} minus ${low} gives ${result}.`);
   return { input, result, frames };
 }

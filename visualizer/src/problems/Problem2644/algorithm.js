@@ -9,13 +9,16 @@ const PYTHON_LINES = [
 ];
 
 const CODE = [
-  "FUNCTION maximumDivisibilityScore(nums, divisors)",
-  "  best_div = none, best_score = -1",
-  "  FOR each divisor d in divisors",
-  "    score = number of values x in nums with x mod d = 0",
-  "    IF score > best_score OR (score = best_score AND d < best_div)",
-  "      best_div = d, best_score = score",
-  "  RETURN best_div",
+  'function maximumDivisibilityScore(nums, divisors) {',
+  '  let bestDiv = null, bestScore = -1',
+  '  for (const d of divisors) {',
+  '    const score = nums.filter(x => x % d === 0).length',
+  '    if (score > bestScore || (score === bestScore && d < bestDiv)) {',
+  '      [bestDiv, bestScore] = [d, score]',
+  '    }',
+  '  }',
+  '  return bestDiv',
+  '}',
 ];
 
 const MAX_LENGTH = 1000;
@@ -102,7 +105,7 @@ export function buildTrace(input) {
     }
   }
 
-  frames.push(makeFrame({ phase: "done", activeLine: 7, pythonLine: 7, nums, divisors, scores, bestDiv, bestScore,
+  frames.push(makeFrame({ phase: "done", activeLine: 9, pythonLine: 7, nums, divisors, scores, bestDiv, bestScore,
     result: bestDiv,
     message: `Return ${bestDiv}.` }));
 

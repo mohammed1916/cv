@@ -9,13 +9,13 @@ export const PYTHON_LINES = [
 ];
 export const python = PYTHON_LINES.join("\n");
 export const CODE = [
-  "MAXIMIZE-SUM(nums, k)",
-  "best <- largest value in nums",
-  "score <- 0",
-  "repeat k times",
-  "score <- score + best",
-  "best <- best + 1",
-  "return score",
+  'function maximizeSum(nums, k) {',
+  '  let best = Math.max(...nums), score = 0',
+  '  for (let step = 0; step < k; step++) {',
+  '    score += best',
+  '    best += 1',
+  '  }',
+  '  return score }',
 ];
 export const code = CODE.map((text, index) => ({ line: index + 1, text }));
 

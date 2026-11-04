@@ -1,8 +1,8 @@
 export const code = [
-  { line: 1, text: "Sort nums and take its middle value, or both middle values" },
-  { line: 2, text: "For each middle value m, find the nearest palindrome at or below m and the nearest at or above m" },
-  { line: 3, text: "Collect the distinct candidate palindromes" },
-  { line: 4, text: "Return the smallest total cost of moving every value to one candidate" },
+  { line: 1, text: "const sorted = [...nums].sort((a, b) => a - b), n = sorted.length // sort nums and take its middle value, or both middle values" },
+  { line: 2, text: "const middles = n % 2 ? [sorted[(n - 1) / 2]] : [sorted[n / 2 - 1], sorted[n / 2]] // for each middle value m, find the nearest palindrome at or below m and the nearest at or above m" },
+  { line: 3, text: "const candidates = new Set(middles.flatMap(m => [nearestPalindromeBelow(m), nearestPalindromeAbove(m)])) // collect the distinct candidate palindromes" },
+  { line: 4, text: "return Math.min(...[...candidates].map(p => nums.reduce((t, v) => t + Math.abs(v - p), 0))) // return the smallest total cost of moving every value to one candidate" },
 ]
 
 export const python = `def minimumCost(nums):

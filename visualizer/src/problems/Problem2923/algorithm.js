@@ -1,12 +1,12 @@
 const CODE = [
-  "FUNCTION findChampion(grid)",
-  "    n ← number of teams",
-  "    FOR each team i",
-  "        wins ← 0",
-  "        FOR each team j different from i",
-  "            IF grid[i][j] = 1, wins ← wins + 1",
-  "        IF wins = n - 1, RETURN i",
-  "    RETURN -1",
+  "function findChampion(grid) {",
+  "const n = grid.length",
+  "for (let i = 0; i < n; i++) {",
+  "  let wins = 0",
+  "  for (let j = 0; j < n; j++) if (j !== i) {",
+  "    if (grid[i][j] === 1) wins++ }",
+  "  if (wins === n - 1) return i }",
+  "return -1",
 ]
 export const code = CODE.map((text, index) => ({ line: index + 1, text }))
 export const python = `def findChampion(grid):

@@ -1,9 +1,9 @@
 export const code = [
-  { line: 1, text: "Start with an empty list of peaks" },
-  { line: 2, text: "For each interior index i from 1 to n - 2" },
-  { line: 3, text: "If mountain[i] is greater than both neighbours" },
-  { line: 4, text: "Append i to the peaks" },
-  { line: 5, text: "Return the peaks" },
+  { line: 1, text: "const peaks = [] // start with an empty list of peaks" },
+  { line: 2, text: "for (let i = 1; i < n - 1; i++) { // for each interior index i from 1 to n - 2" },
+  { line: 3, text: "  if (mountain[i] > mountain[i - 1] && mountain[i] > mountain[i + 1]) // if mountain[i] is greater than both neighbours" },
+  { line: 4, text: "    peaks.push(i) }" },
+  { line: 5, text: "return peaks" },
 ]
 
 export const python = `def findPeaks(mountain):

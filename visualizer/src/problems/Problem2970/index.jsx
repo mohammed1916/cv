@@ -36,7 +36,7 @@ export default function IncremovableSubarraysVisualizer() {
             valueAt={(i) => run.input.nums[i]}
             active={step.b ?? -1}
             roleAt={(i) =>
-              step.a !== null && i < step.a ? "kept prefix" : step.q !== null && i >= step.q ? "kept suffix" : ""
+              step.a !== null && i === step.a ? "l" : step.b !== null && i === step.b ? "r" : step.a !== null && i < step.a ? "kept prefix" : step.q !== null && i >= step.q ? "kept suffix" : step.a !== null && step.b !== null && i > step.a && i < step.b ? "removed" : ""
             }
           />
           <p>

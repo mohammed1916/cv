@@ -12,7 +12,7 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python,
   inputLabel: 'Votes as JSON',
   url: 'https://leetcode.com/problems/election-results/',
-  complexity: 'Knowledge-derived walkthrough: distinct picks, equal shares, then tie-aware maximum.',
+  complexity: 'Walkthrough: distinct picks, equal shares, then tie-aware maximum.',
   examples: [{ label: 'Sample tables', input: JSON.stringify(sample) }],
 }
 
@@ -27,7 +27,7 @@ function RowTable({ rows }) {
 
 export default function ElectionResults() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <SqlStageBoard title={`${meta.title}: query stages`} stages={stagesOf(run)} active={run.frames.indexOf(step)} />} renderReasoning={() => <>
-    <p>Knowledge-derived walkthrough written for this visualizer. The sample tables are invented.</p>
+    <p>Walkthrough of the query with invented sample tables.</p>
     <p>Each voter spends one vote, split across their distinct candidates.</p>
     <p>Empty choices are dropped before counting, so they never take a share.</p>
   </>} />

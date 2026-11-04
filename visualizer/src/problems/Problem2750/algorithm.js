@@ -1,12 +1,10 @@
-const CODE = [
-  "FUNCTION countGoodSplits(nums)",
-  "    ways[0] ← 1, and ways[i] ← 0 for every other prefix length i",
-  "    FOR i FROM 1 TO length(nums)",
-  "        FOR j FROM 0 TO i − 1",
-  "            IF nums[j..i−1] contains exactly one 1 THEN",
-  "                ways[i] ← ways[i] + ways[j]",
-  "    RETURN ways[length(nums)] mod 1000000007",
-];
+const CODE = `function goodSplits(nums) {
+  const MOD = 1000000007; const ways = Array(nums.length + 1).fill(0); ways[0] = 1; // ways[0] ← 1, and ways[i] ← 0 for every other prefix length i
+  for (let i = 1; i <= nums.length; i++) { // FOR i FROM 1 TO length(nums)
+    for (let j = 0; j < i; j++) { // FOR j FROM 0 TO i − 1
+      if (countOnes(nums, j, i) === 1) ways[i] = (ways[i] + ways[j]) % MOD; // IF nums[j..i−1] contains exactly one 1 THEN ways[i] ← ways[i] + ways[j]
+    } }
+  return ways[nums.length]; } // RETURN ways[length(nums)] mod 1000000007`.split('\n');
 export const code = CODE.map((text, index) => ({ line: index + 1, text }));
 export const python = `def goodSplits(nums):
     MOD = 10**9 + 7

@@ -9,16 +9,18 @@ const MAX_NODES = 20
 const MAX_DEPTH = 4
 
 const CODE_LINES = [
-  'FUNCTION deepEqual(a, b)',
-  '    IF a or b is a primitive or null THEN RETURN a === b',
-  '    IF exactly one of a and b is an array THEN RETURN false',
-  '    IF both are arrays THEN',
-  '        IF lengths differ THEN RETURN false',
-  '        FOR each index i, IF NOT deepEqual(a[i], b[i]) THEN RETURN false',
-  '        RETURN true',
-  '    IF key counts differ THEN RETURN false',
-  '    FOR each key of a, IF key is missing in b OR NOT deepEqual(a[key], b[key]) THEN RETURN false',
-  '    RETURN true',
+  'function deepEqual(a, b) {',
+  '  if (!isContainer(a) || !isContainer(b)) return a === b // IF a or b is a primitive',
+  '  if (Array.isArray(a) !== Array.isArray(b)) return false // IF exactly one of a and b is an array',
+  '  if (Array.isArray(a)) {',
+  '    if (a.length !== b.length) return false // IF lengths differ THEN RETURN false',
+  '    for (let i = 0; i < a.length; i++) if (!deepEqual(a[i], b[i])) return false // FOR each index i',
+  '    return true // RETURN true',
+  '  }',
+  '  if (Object.keys(a).length !== Object.keys(b).length) return false // IF key counts differ',
+  '  for (const key of Object.keys(a)) if (!(key in b) || !deepEqual(a[key], b[key])) return false // FOR each key of a',
+  '  return true // RETURN true',
+  '}',
 ]
 
 const PYTHON_LINES = [
@@ -66,7 +68,7 @@ const phases = [
   { id: 'done', label: 'Answer', description: 'Whether the two JSON values are deeply equal.' },
 ]
 
-const pythonLineMap = { 1: 5, 2: 5, 3: 7, 4: 9, 5: 10, 6: 12, 7: 12, 8: 13, 9: 15, 10: 15 }
+const pythonLineMap = { 1: 5, 2: 5, 3: 7, 4: 9, 5: 10, 6: 12, 7: 12, 8: 13, 9: 15, 10: 15, 11: 15, 12: 15 }
 
 export { code, python, phases, pythonLineMap }
 

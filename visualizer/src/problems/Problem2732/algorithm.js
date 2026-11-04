@@ -48,13 +48,17 @@ export function buildTrace(input) {
   return { input, grid, result: [], frames }
 }
 
-export const code = `good subset of rows for the matrix grid
-  for each size k from 1 to the number of rows do
-    for each set of k rows in row order do
-      find the column sums of the set
-      if every column sum is at most floor(k / 2) then
-        return the rows
-  return []`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function goodSubset(grid) {
+  const m = grid.length, n = grid[0].length;
+  for (let size = 1; size <= m; size++) { // try subsets of rows by size
+    for (const rows of combinations(m, size)) { // for each set of k rows in row order
+      const limit = Math.floor(size / 2);
+      const sums = Array.from({ length: n }, (_, c) => rows.reduce((total, r) => total + grid[r][c], 0));
+      if (sums.every(s => s <= limit)) return rows; // if every column sum is at most floor(k / 2), return the rows
+    }
+  }
+  return []; // return []
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def good_subset(grid):

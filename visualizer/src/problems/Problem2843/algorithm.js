@@ -14,16 +14,16 @@ const PYTHON_LINES = [
 ];
 
 const CODE_LINES = [
-  "count <- 0",
-  "for x from low to high",
-  "  digits <- decimal digits of x",
-  "  if the number of digits is odd",
-  "    skip x",
-  "  half <- number of digits divided by 2",
-  "  left sum <- sum of the first half digits",
-  "  right sum <- sum of the second half digits",
-  "  if left sum equals right sum",
-  "    count <- count + 1",
+  "let count = 0",
+  "for (let x = low; x <= high; x++) {",
+  "  const digits = String(x).split('').map(Number)",
+  "  const odd = digits.length % 2 === 1",
+  "  if (odd) continue // skip x",
+  "  const half = digits.length / 2",
+  "  const left = digits.slice(0, half).reduce((a, b) => a + b, 0) // left sum",
+  "  const right = digits.slice(half).reduce((a, b) => a + b, 0) // right sum",
+  "  if (left === right)",
+  "    count++ }",
   "return count",
 ];
 

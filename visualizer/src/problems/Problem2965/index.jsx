@@ -19,8 +19,8 @@ const definition = {
   url: "https://leetcode.com/problems/find-missing-and-repeated-values/",
   complexity: "O(n^2) time and O(n^2) space for an n x n grid. The visualization caps n at 9.",
   examples: [
-    { label: "Illustrative example (not from the statement)", input: '{"grid": [[1, 3], [2, 2]]}' },
-    { label: "Illustrative example (not from the statement)", input: '{"grid": [[9, 1, 7], [8, 9, 2], [3, 4, 6]]}' },
+    { label: "Second example", input: '{"grid": [[1, 3], [2, 2]]}' },
+    { label: "Second example", input: '{"grid": [[9, 1, 7], [8, 9, 2], [3, 4, 6]]}' },
   ],
 };
 

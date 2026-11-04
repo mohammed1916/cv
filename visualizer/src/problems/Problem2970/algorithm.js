@@ -1,9 +1,9 @@
 export const code = [
-  { line: 1, text: "Find p, the last index of the longest strictly increasing prefix" },
-  { line: 2, text: "Find q, the first index of the longest strictly increasing suffix" },
-  { line: 3, text: "For each prefix length a from 0 up to p plus one, move b to the smallest valid end, never below a or q minus one" },
-  { line: 4, text: "Add n minus b to the count" },
-  { line: 5, text: "Return the count" },
+  { line: 1, text: "let p = 0; while (p + 1 < n && nums[p] < nums[p + 1]) p++ // find p, the last index of the longest strictly increasing prefix" },
+  { line: 2, text: "let q = n - 1; while (q > 0 && nums[q - 1] < nums[q]) q-- // find q, the first index of the longest strictly increasing suffix" },
+  { line: 3, text: "let b = Math.max(q - 1, 0), count = 0; for (let a = 0; a <= Math.min(p + 1, n - 1); a++) { b = Math.max(b, a) // for each prefix length a from 0 up to p plus one, move b to the smallest valid end, never below a or q minus one" },
+  { line: 4, text: "  while (b < n - 1 && a > 0 && nums[a - 1] >= nums[b + 1]) b++; count += n - b } // add n minus b to the count" },
+  { line: 5, text: "return count" },
 ]
 
 export const python = `def incremovableSubarrayCount(nums):

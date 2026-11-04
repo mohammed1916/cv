@@ -1,11 +1,11 @@
 export const code = [
-  { line: 1, text: "Start with count = 0 and the vowel set a, e, i, o, u" },
-  { line: 2, text: "For each start index i" },
-  { line: 3, text: "For each end index j from i to the last index" },
-  { line: 4, text: "If s[j] is a vowel, add one to the vowel count" },
-  { line: 5, text: "Consonants = length of s[i..j] minus vowels" },
-  { line: 6, text: "If vowels equal consonants and vowels times consonants is divisible by k, add one to count" },
-  { line: 7, text: "Return count" },
+  { line: 1, text: "let count = 0; const vowels = new Set('aeiou') // start with count = 0 and the vowel set a, e, i, o, u" },
+  { line: 2, text: "for (let i = 0; i < s.length; i++) { let v = 0 // for each start index i" },
+  { line: 3, text: "  for (let j = i; j < s.length; j++) { // for each end index j from i to the last index" },
+  { line: 4, text: "    if (vowels.has(s[j])) v++ // if s[j] is a vowel, add one to the vowel count" },
+  { line: 5, text: "    const c = (j - i + 1) - v // consonants = length of s[i..j] minus vowels" },
+  { line: 6, text: "    if (v === c && (v * c) % k === 0) count++ } } // if vowels equal consonants and vowels times consonants is divisible by k, add one to count" },
+  { line: 7, text: "return count" },
 ]
 
 export const python = `def countBeautifulSubstrings(s, k):

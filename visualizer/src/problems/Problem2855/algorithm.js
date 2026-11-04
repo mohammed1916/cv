@@ -44,12 +44,12 @@ export function buildTrace(input) {
   return { input, result, frames }
 }
 
-export const code = `minimum right shifts to sort nums
-  set n to the length of nums
-  find every index i where nums[i] is greater than nums[i + 1]
-  if there are no such indexes then return 0
-  if there are two or more, or the last value is greater than the first, return -1
-  return n - 1 - the index of the single descent`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `// minimum right shifts to sort nums
+const n = nums.length
+const breaks = []; for (let i = 0; i < n - 1; i++) if (nums[i] > nums[i + 1]) breaks.push(i) // find every index i where nums[i] is greater than nums[i + 1]
+if (breaks.length === 0) return 0
+if (breaks.length > 1 || nums[n - 1] > nums[0]) return -1 // if there are two or more, or the last value is greater than the first, return -1
+return n - 1 - breaks[0]`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def minimumRightShifts(nums):
     n = len(nums)

@@ -10,10 +10,10 @@ export function parseInput(text) {
   return { init: input.init, ops }
 }
 
-export const code = `create a counter that remembers init
-define increment, decrement and reset over one shared value
-for each call, update the value and return it
-reset puts the value back to init`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function makeCounter(init) { let value = init; // create a counter that remembers init
+  const increment = () => ++value; const decrement = () => --value; // define increment, decrement and reset over one shared value
+  const reset = () => (value = init); // reset puts the value back to init
+  return { increment, decrement, reset }; } // for each call, update the value and return it`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def make_counter(init):

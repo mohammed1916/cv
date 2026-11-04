@@ -8,11 +8,11 @@ const PYTHON_LINES = [
 ];
 
 const CODE_LINES = [
-  "even1 <- sorted letters of s1 at indices 0 and 2",
-  "even2 <- sorted letters of s2 at indices 0 and 2",
-  "odd1 <- sorted letters of s1 at indices 1 and 3",
-  "odd2 <- sorted letters of s2 at indices 1 and 3",
-  "return even1 == even2 and odd1 == odd2",
+  "const even1 = [s1[0], s1[2]].sort()",
+  "const even2 = [s2[0], s2[2]].sort()",
+  "const odd1 = [s1[1], s1[3]].sort()",
+  "const odd2 = [s2[1], s2[3]].sort()",
+  "return even1.join() === even2.join() && odd1.join() === odd2.join()",
 ];
 
 export const python = PYTHON_LINES.join("\n");

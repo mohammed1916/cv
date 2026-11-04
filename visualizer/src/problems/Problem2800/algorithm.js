@@ -23,37 +23,40 @@ export function buildTrace({ a, b, c }) {
   const strings = [a, b, c]
   const orders = [[0, 1, 2], [0, 2, 1], [1, 0, 2], [1, 2, 0], [2, 0, 1], [2, 1, 0]]
   let best = null
-  const frames = [{ phase: 'start', activeLine: L('set best to nothing'), pythonLine: 13, order: '', candidate: '', best: '', message: 'Try each order of the three strings.' }]
+  const frames = [{ phase: 'start', activeLine: L('let best = null'), pythonLine: 13, order: '', candidate: '', best: '', message: 'Try each order of the three strings.' }]
   for (const [p, q, r] of orders) {
     const first = merge(strings[p], strings[q])
     const candidate = merge(first, strings[r])
     const label = `${strings[p]}, ${strings[q]}, ${strings[r]}`
     if (best === null || candidate.length < best.length || (candidate.length === best.length && candidate < best)) {
       best = candidate
-      frames.push({ phase: 'better', activeLine: L('set best to candidate'), pythonLine: 17, order: label, candidate, best, message: `Order ${label} gives ${candidate}, which is the best so far.` })
+      frames.push({ phase: 'better', activeLine: L('best = candidate'), pythonLine: 17, order: label, candidate, best, message: `Order ${label} gives ${candidate}, which is the best so far.` })
     } else {
-      frames.push({ phase: 'try', activeLine: L('let candidate be'), pythonLine: 16, order: label, candidate, best, message: `Order ${label} gives ${candidate}, which is not better than ${best}.` })
+      frames.push({ phase: 'try', activeLine: L('const candidate'), pythonLine: 16, order: label, candidate, best, message: `Order ${label} gives ${candidate}, which is not better than ${best}.` })
     }
   }
   frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: 18, order: '', candidate: '', best, message: `Shortest string: ${best}.` })
   return { input: { a, b, c }, result: best, frames }
 }
 
-export const code = `shortest string containing a, b and c:
-  set best to nothing
-  for each order p, q, r of the three strings
-    let first be the merge of p and q
-    let candidate be the merge of first and r
-    if best is nothing or candidate is shorter than best then
-      set best to candidate
-    otherwise if candidate has the same length as best and is smaller then
-      set best to candidate
+export const code = `function shortestStringWithThree(a, b, c) {
+  const merge = (x, y) => {
+    if (x.includes(y)) return x
+    if (y.includes(x)) return y
+    for (let k = Math.min(x.length, y.length); k >= 0; k--) {
+      if (x.endsWith(y.slice(0, k))) return x + y.slice(k)
+    }
+    return x + y
+  }
+  let best = null
+  for (const [p, q, r] of permutations([a, b, c])) {
+    const candidate = merge(merge(p, q), r)
+    if (best === null || candidate.length < best.length || (candidate.length === best.length && candidate < best)) {
+      best = candidate
+    }
+  }
   return best
-merge of x and y
-  if x contains y then return x
-  if y contains x then return y
-  find the longest suffix of x that is also a prefix of y
-  return x followed by the rest of y`.split('\n').map((text, index) => ({ line: index + 1, text }))
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def shortest_string_with_three(a, b, c):

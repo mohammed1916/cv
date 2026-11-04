@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import ChainFactorView from './ChainFactorView'
 
 const definition = {
   phases: [
@@ -19,11 +20,7 @@ const definition = {
 }
 
 export default function SmallestAfterReplacing() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <ol aria-label="Values" className="algorithm-chain">
-      {step.chain.map((value, i) => <li key={i} data-role={i === step.index ? 'active' : undefined} className={i === step.index ? 'is-active' : ''}>{value}</li>)}
-    </ol>
-  </>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <ChainFactorView step={step} />} renderReasoning={() => <>
     <p>Replacing a number with the sum of its prime factors never increases it, and a fixed point is reached quickly.</p>
     <p>Each step is a trial-division factorization, so the loop only needs to track the current value and stop when it stops changing.</p>
   </>} />

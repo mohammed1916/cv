@@ -1,9 +1,9 @@
 export const code = [
-  { line: 1, text: "Start with an empty answer list." },
-  { line: 2, text: "For each index i and word in words" },
-  { line: 3, text: "If x is a character of word" },
-  { line: 4, text: "Append i to the answer" },
-  { line: 5, text: "Return the answer" },
+  { line: 1, text: "const answer = []" },
+  { line: 2, text: "for (let i = 0; i < words.length; i++) { // for each index i and word in words" },
+  { line: 3, text: "  if (words[i].includes(x)) // if x is a character of word" },
+  { line: 4, text: "    answer.push(i) }" },
+  { line: 5, text: "return answer" },
 ]
 
 export const python = `def findWordsContaining(words, x):

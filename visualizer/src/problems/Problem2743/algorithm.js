@@ -22,14 +22,16 @@ if __name__ == "__main__":
     print(count_substrings(json.loads(sys.stdin.read())))
 `
 
-export const code = `count substrings with no repeated character in s
-  left ← 0; lastSeen ← empty map; total ← 0
-  FOR each right end r from 0 to length(s) - 1
-    c ← s[r]
-    IF c was last seen at index ≥ left THEN left ← lastSeen[c] + 1
-    lastSeen[c] ← r
-    total ← total + (r - left + 1)
-  RETURN total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function countSubstrings(s) {
+  let left = 0; const lastSeen = new Map(); let total = 0; // left ← 0; lastSeen ← empty map; total ← 0
+  for (let r = 0; r < s.length; r++) { // FOR each right end r from 0 to length(s) - 1
+    const c = s[r];
+    if (lastSeen.has(c) && lastSeen.get(c) >= left) left = lastSeen.get(c) + 1; // IF c was last seen at index ≥ left THEN left ← lastSeen[c] + 1
+    lastSeen.set(c, r);
+    total += r - left + 1; // total ← total + (r - left + 1)
+  }
+  return total; // RETURN total
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const L = s => {
   const index = code.findIndex(c => c.text.includes(s))

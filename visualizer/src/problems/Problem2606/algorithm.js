@@ -1,13 +1,14 @@
 const CODE = [
-  "FUNCTION maximumCostSubstring(s, chars, vals)",
-  "    custom ← cost of each character listed in chars",
-  "    bestEnding ← 0",
-  "    best ← 0",
-  "    FOR each character ch in s",
-  "        value ← custom cost of ch, or its alphabet position if not listed",
-  "        bestEnding ← max(0, bestEnding + value)",
-  "        best ← max(best, bestEnding)",
-  "    RETURN best",
+  'function maximumCostSubstring(s, chars, vals) {',
+  '  const custom = new Map(chars.split("").map((ch, i) => [ch, vals[i]]))',
+  '  let bestEnding = 0, best = 0',
+  '  for (const ch of s) {',
+  '    const value = custom.has(ch) ? custom.get(ch) : ch.charCodeAt(0) - 96',
+  '    bestEnding = Math.max(0, bestEnding + value)',
+  '    best = Math.max(best, bestEnding)',
+  '  }',
+  '  return best',
+  '}',
 ];
 export const code = CODE.map((text, index) => ({ line: index + 1, text }));
 export const python = `def maximumCostSubstring(s, chars, vals):
@@ -20,7 +21,7 @@ export const python = `def maximumCostSubstring(s, chars, vals):
         best = max(best, best_ending)
     return best
 `;
-export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9 };
+export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 5, 5: 6, 6: 7, 7: 8, 8: 5, 9: 9, 10: 9 };
 
 const snapshot = table => table.map(row => row.map(cell => (Array.isArray(cell) ? [...cell] : cell)));
 function emit(frames, table, info, write = false) {
@@ -53,12 +54,12 @@ export function buildTrace(input) {
   for (let i = 0; i < s.length; i++) {
     const ch = s[i];
     const value = custom.has(ch) ? custom.get(ch) : ch.charCodeAt(0) - 96;
-    emit(frames, table, { phase: "scan", line: 5, row: 0, column: i, value: null, message: `Read "${ch}" at index ${i}.` });
-    emit(frames, table, { phase: "scan", line: 6, row: 0, column: i, value, message: `Cost of "${ch}" is ${value}.` });
+    emit(frames, table, { phase: "scan", line: 4, row: 0, column: i, value: null, message: `Read "${ch}" at index ${i}.` });
+    emit(frames, table, { phase: "scan", line: 5, row: 0, column: i, value, message: `Cost of "${ch}" is ${value}.` });
     bestEnding = Math.max(0, bestEnding + value);
-    emit(frames, table, { phase: "compute", line: 7, row: 0, column: i, value: bestEnding, message: `bestEnding = max(0, previous + ${value}) = ${bestEnding}.` }, true);
+    emit(frames, table, { phase: "compute", line: 6, row: 0, column: i, value: bestEnding, message: `bestEnding = max(0, previous + ${value}) = ${bestEnding}.` }, true);
     best = Math.max(best, bestEnding);
-    emit(frames, table, { phase: "compute", line: 8, row: 1, column: i, value: best, message: `best = max(best, bestEnding) = ${best}.` }, true);
+    emit(frames, table, { phase: "compute", line: 7, row: 1, column: i, value: best, message: `best = max(best, bestEnding) = ${best}.` }, true);
   }
   emit(frames, table, { phase: "result", line: 9, row: 1, column: s.length - 1, value: best, message: `Return best = ${best}.` });
   return { input, result: best, frames, rowLabels, columnLabels };

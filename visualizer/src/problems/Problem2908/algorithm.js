@@ -21,12 +21,12 @@ const PYTHON_LINES = [
 export const python = PYTHON_LINES.join("\n");
 
 export const code = [
-  { line: 1, text: "Read n as the length of nums; set best = -1" },
-  { line: 2, text: "For each peak index j from 1 to n - 2" },
-  { line: 3, text: "Find the smallest value left of j that is below nums[j]" },
-  { line: 4, text: "Find the smallest value right of j that is below nums[j]" },
-  { line: 5, text: "If both exist, total = left + nums[j] + right; keep the smaller total in best" },
-  { line: 6, text: "Return best" },
+  { line: 1, text: "const n = nums.length; let best = -1" },
+  { line: 2, text: "for (let j = 1; j < n - 1; j++) {" },
+  { line: 3, text: "  const L = Math.min(...nums.slice(0, j).filter(v => v < nums[j]))" },
+  { line: 4, text: "  const R = Math.min(...nums.slice(j + 1).filter(v => v < nums[j]))" },
+  { line: 5, text: "  if (L !== Infinity && R !== Infinity) best = best === -1 ? L + nums[j] + R : Math.min(best, L + nums[j] + R) }" },
+  { line: 6, text: "return best" },
 ];
 
 const LIMITS = { minLength: 3, maxLength: 50, minValue: 1, maxValue: 50 };

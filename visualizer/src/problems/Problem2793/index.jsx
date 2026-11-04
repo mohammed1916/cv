@@ -12,7 +12,7 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python,
   inputLabel: 'Flights and bookings as JSON',
   url: 'https://leetcode.com/problems/status-of-flight-tickets/',
-  complexity: 'Knowledge-derived walkthrough: one ordering by flight and time, then a row-number check.',
+  complexity: 'Walkthrough: one ordering by flight and time, then a row-number check.',
   examples: [{ label: 'Sample tables', input: JSON.stringify(sample) }],
 }
 
@@ -27,7 +27,7 @@ function RowTable({ rows }) {
 
 export default function TicketStatus() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <SqlStageBoard title={`${meta.title}: query stages`} stages={stagesOf(run)} active={run.frames.indexOf(step)} />} renderReasoning={() => <>
-    <p>Knowledge-derived walkthrough written for this visualizer. The sample tables are invented.</p>
+    <p>Walkthrough of the query with invented sample tables.</p>
     <p>Bookings are numbered in time order within each flight.</p>
     <p>A booking is confirmed when its arrival number is no more than the flight capacity.</p>
   </>} />

@@ -1,9 +1,9 @@
 const CODE = [
-  "FUNCTION minChanges(s)",
-  "    changes ← 0",
-  "    FOR each pair start i = 0, 2, 4, ... up to length - 1",
-  "        IF s[i] differs from s[i + 1], changes ← changes + 1",
-  "    RETURN changes",
+  "function minChanges(s) {",
+  "let changes = 0",
+  "for (let i = 0; i < s.length; i += 2) {",
+  "  if (s[i] !== s[i + 1]) changes++ }",
+  "return changes",
 ]
 export const code = CODE.map((text, index) => ({ line: index + 1, text }))
 export const python = `def minChanges(s):

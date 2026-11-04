@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough with invented sample tables.
 export const sql = `SELECT user_id
 FROM Loans
 WHERE loan_type IN ('Mortgage', 'Refinance')

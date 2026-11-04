@@ -12,26 +12,37 @@ export function parseInput(text) {
   return { n, queries }
 }
 
-export const code = `add one to every cell inside each query rectangle
-  let n be the size of the grid
-  make an (n+1) by (n+1) difference grid of zeros
-  for each query with top-left and bottom-right corners
-  add one at the top-left corner and subtract one at the two edges
-  add one back at the cell diagonally past the bottom-right corner
-  for each cell in row order
-  add the upper and left totals and subtract the upper-left total
-  return the n by n grid`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function incrementSubmatrices(n, queries) {',
+  '  const diff = Array.from({ length: n + 1 }, () => Array(n + 1).fill(0))',
+  '  for (const [r1, c1, r2, c2] of queries) {',
+  '    diff[r1][c1]++; diff[r1][c2 + 1]--; diff[r2 + 1][c1]--; diff[r2 + 1][c2 + 1]++',
+  '  }',
+  '  const grid = Array.from({ length: n }, () => Array(n).fill(0))',
+  '  for (let i = 0; i < n; i++) {',
+  '    for (let j = 0; j < n; j++) {',
+  '      let value = diff[i][j]',
+  '      if (i > 0) value += grid[i - 1][j]',
+  '      if (j > 0) value += grid[i][j - 1]',
+  '      if (i > 0 && j > 0) value -= grid[i - 1][j - 1]',
+  '      grid[i][j] = value',
+  '    }',
+  '  }',
+  '  return grid',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(c => c.includes(s)) + 1
 
 export function buildTrace({ n, queries }) {
   const diff = Array.from({ length: n + 1 }, () => Array(n + 1).fill(0))
-  const frames = [{ phase: 'start', activeLine: L('make an (n+1)'), pythonLine: 2, cell: null, grid: null, message: 'Mark each rectangle at its corners in a difference grid.' }]
+  const frames = [{ phase: 'start', activeLine: L('const diff = Array.from'), pythonLine: 2, cell: null, grid: null, message: 'Mark each rectangle at its corners in a difference grid.' }]
   for (const [r1, c1, r2, c2] of queries) {
     diff[r1][c1] += 1
     diff[r1][c2 + 1] -= 1
     diff[r2 + 1][c1] -= 1
     diff[r2 + 1][c2 + 1] += 1
-    frames.push({ phase: 'mark', activeLine: L('for each query'), pythonLine: 7, cell: [r1, c1], grid: null, message: `Query [${r1}, ${c1}, ${r2}, ${c2}] marks four corners of the difference grid.` })
+    frames.push({ phase: 'mark', activeLine: L('for (const [r1, c1, r2, c2] of queries) {'), pythonLine: 3, cell: [r1, c1], grid: null, message: `Query [${r1}, ${c1}, ${r2}, ${c2}] marks four corners of the difference grid.` })
   }
   const grid = Array.from({ length: n }, () => Array(n).fill(0))
   for (let i = 0; i < n; i++) {
@@ -42,9 +53,9 @@ export function buildTrace({ n, queries }) {
       if (i > 0 && j > 0) value -= grid[i - 1][j - 1]
       grid[i][j] = value
     }
-    frames.push({ phase: 'sum', activeLine: L('for each cell'), pythonLine: 18, cell: [i, n - 1], grid: grid.map(row => [...row]), message: `Row ${i} is finished with prefix sums.` })
+    frames.push({ phase: 'sum', activeLine: L('for (let i = 0; i < n; i++) {'), pythonLine: 18, cell: [i, n - 1], grid: grid.map(row => [...row]), message: `Row ${i} is finished with prefix sums.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the n by n grid'), pythonLine: 19, cell: null, grid: grid.map(row => [...row]), message: 'Every cell now holds how many queries cover it.' })
+  frames.push({ phase: 'done', activeLine: L('return grid'), pythonLine: 19, cell: null, grid: grid.map(row => [...row]), message: 'Every cell now holds how many queries cover it.' })
   return { input: { n, queries }, result: grid, frames }
 }
 

@@ -44,18 +44,19 @@ const PYTHON_LINES = [
 ];
 
 const CODE_LINES = [
-  "MOD <- 1000000007",
-  "n <- length of nums",
-  "scores[i] <- number of distinct prime factors of nums[i]",
-  "left[i] <- nearest index to the left with score >= scores[i], or -1",
-  "right[i] <- nearest index to the right with score > scores[i], or n",
-  "count[i] <- (i - left[i]) * (right[i] - i) subarrays where i wins",
-  "order <- indices sorted by nums value, largest first",
-  "score <- 1",
-  "for i in order while k > 0",
-  "  use <- min(count[i], k)",
-  "  score <- score * nums[i]^use mod MOD",
-  "  k <- k - use",
+  "const MOD = 1000000007n",
+  "const n = nums.length",
+  "const scores = nums.map(distinctPrimeFactors)",
+  "const left = nearestLeftWithAtLeast(scores)",
+  "const right = nearestRightWithGreater(scores)",
+  "const count = nums.map((_, i) => (i - left[i]) * (right[i] - i))",
+  "const order = nums.map((_, i) => i).sort((a, b) => nums[b] - nums[a])",
+  "let score = 1n",
+  "for (const i of order) {",
+  "  const use = Math.min(count[i], k)",
+  "  score = score * modPow(nums[i], use) % MOD",
+  "  k -= use",
+  "}",
   "return score",
 ];
 
@@ -168,6 +169,6 @@ export function buildTrace(input) {
     k -= use;
     push("pick", 12, py("k -= use"), `${k} operation(s) left.`, { active: i, roles: useRoles, detail: `k = ${k}` });
   }
-  push("result", 13, py("return score"), `Maximum score ${score} mod 1000000007.`, { detail: `return ${score}` });
+  push("result", 14, py("return score"), `Maximum score ${score} mod 1000000007.`, { detail: `return ${score}` });
   return { input: { nums, k: startK }, result: Number(score), frames };
 }

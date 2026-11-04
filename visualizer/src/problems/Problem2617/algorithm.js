@@ -1,15 +1,20 @@
 const CODE = [
-  "FUNCTION minVisitedCells(grid)",
-  "    m, n ← dimensions of grid; dist[r][c] ← infinity for every cell",
-  "    dist[0][0] ← 1",
-  "    FOR r FROM 0 TO m − 1",
-  "        FOR c FROM 0 TO n − 1",
-  "            IF (r, c) is not the start THEN",
-  "                FOR each p < c in row r with p + grid[r][p] ≥ c: dist[r][c] ← min(dist[r][c], dist[r][p] + 1)",
-  "                FOR each q < r in column c with q + grid[q][c] ≥ r: dist[r][c] ← min(dist[r][c], dist[q][c] + 1)",
-  "    RETURN dist[m − 1][n − 1] if finite, else −1",
+  'function minVisitedCells(grid) {',
+  '  const m = grid.length, n = grid[0].length',
+  '  const dist = Array.from({ length: m }, () => Array(n).fill(Infinity))',
+  '  dist[0][0] = 1',
+  '  for (let r = 0; r < m; r++) {',
+  '    for (let c = 0; c < n; c++) {',
+  '      if (r === 0 && c === 0) continue',
+  '      for (let p = 0; p < c; p++) if (p + grid[r][p] >= c) dist[r][c] = Math.min(dist[r][c], dist[r][p] + 1)',
+  '      for (let q = 0; q < r; q++) if (q + grid[q][c] >= r) dist[r][c] = Math.min(dist[r][c], dist[q][c] + 1)',
+  '    }',
+  '  }',
+  '  return dist[m - 1][n - 1] === Infinity ? -1 : dist[m - 1][n - 1]',
+  '}',
 ];
 export const code = CODE.map((text, index) => ({ line: index + 1, text }));
+const L = s => { const i = CODE.findIndex(c => c.includes(s)); if (i < 0) throw new Error('missing code line: ' + s); return i + 1 };
 export const python = `def minVisitedCells(grid):
     m, n = len(grid), len(grid[0])
     INF = float("inf")
@@ -61,24 +66,24 @@ export function buildTrace(input) {
   const shown = v => (v === Infinity ? null : v);
   dist[0][0] = 1;
   table[0][0] = 1;
-  emit(frames, table, { phase: "setup", pythonLine: 5, line: 3, row: 0, column: 0, value: 1, message: "The start cell is visited once, so dist = 1." });
+  emit(frames, table, { phase: "setup", pythonLine: 5, line: L('dist[0][0] = 1'), row: 0, column: 0, value: 1, message: "The start cell is visited once, so dist = 1." });
   for (let r = 0; r < m; r++) {
     for (let c = 0; c < n; c++) {
       if (r === 0 && c === 0) continue;
-      emit(frames, table, { phase: "scan", pythonLine: 10, line: 6, row: r, column: c, value: null, message: `Cell (${r}, ${c}): look at cells that can jump here.` });
+      emit(frames, table, { phase: "scan", pythonLine: 10, line: L('if (r === 0 && c === 0) continue'), row: r, column: c, value: null, message: `Cell (${r}, ${c}): look at cells that can jump here.` });
       for (let p = 0; p < c; p++) {
         if (p + grid[r][p] >= c) dist[r][c] = Math.min(dist[r][c], dist[r][p] + 1);
       }
       table[r][c] = shown(dist[r][c]);
-      emit(frames, table, { phase: "compute", pythonLine: 12, line: 7, row: r, column: c, value: shown(dist[r][c]), message: `After the row jumps, dist = ${shown(dist[r][c]) ?? "infinity"}.` });
+      emit(frames, table, { phase: "compute", pythonLine: 12, line: L('for (let p = 0; p < c; p++)'), row: r, column: c, value: shown(dist[r][c]), message: `After the row jumps, dist = ${shown(dist[r][c]) ?? "infinity"}.` });
       for (let q = 0; q < r; q++) {
         if (q + grid[q][c] >= r) dist[r][c] = Math.min(dist[r][c], dist[q][c] + 1);
       }
       table[r][c] = shown(dist[r][c]);
-      emit(frames, table, { phase: "compute", pythonLine: 15, line: 8, row: r, column: c, value: shown(dist[r][c]), message: `After the column jumps, dist = ${shown(dist[r][c]) ?? "infinity"}.` });
+      emit(frames, table, { phase: "compute", pythonLine: 15, line: L('for (let q = 0; q < r; q++)'), row: r, column: c, value: shown(dist[r][c]), message: `After the column jumps, dist = ${shown(dist[r][c]) ?? "infinity"}.` });
     }
   }
   const answer = dist[m - 1][n - 1] === Infinity ? -1 : dist[m - 1][n - 1];
-  emit(frames, table, { phase: "result", pythonLine: 16, line: 9, row: m - 1, column: n - 1, value: answer, message: `Return ${answer}.` });
+  emit(frames, table, { phase: "result", pythonLine: 16, line: L('return dist[m - 1]'), row: m - 1, column: n - 1, value: answer, message: `Return ${answer}.` });
   return { input, result: answer, frames, rowLabels, columnLabels };
 }

@@ -1,16 +1,20 @@
 // Pseudocode lines are looked up by a phrase, so a renamed line fails loudly instead of pointing at the wrong text.
-export const code = `list the uncovered ranges inside [0, n - 1] given inclusive covered ranges
-sort the covered ranges by their left end
-set cursor to 0 and gaps to an empty list
-for each covered range [l, r] in sorted order
-  if l is greater than cursor then add the gap [cursor, l - 1]
-  set cursor to the larger of cursor and r plus 1
-if cursor is at most n - 1 then add the gap [cursor, n - 1]
-return gaps`.split('\n').map((text, index) => ({ line: index + 1, text }))
-
+const CODE = [
+  'function uncoveredRanges(n, ranges) {',
+  '  const sorted = [...ranges].sort((a, b) => a[0] - b[0] || a[1] - b[1]) // sort the covered ranges by their left end',
+  '  const gaps = []; let cursor = 0 // set cursor to 0 and gaps to an empty list',
+  '  for (const [l, r] of sorted) { // for each covered range [l, r] in sorted order',
+  '    if (l > cursor) gaps.push([cursor, l - 1]) // if l is greater than cursor then add the gap',
+  '    cursor = Math.max(cursor, r + 1) // set cursor to the larger of cursor and r plus 1',
+  '  }',
+  '  if (cursor <= n - 1) gaps.push([cursor, n - 1]) // if cursor is at most n - 1 then add the gap',
+  '  return gaps // return gaps',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
 const L = phrase => {
-  const found = code.findIndex(c => c.text.includes(phrase))
-  if (found < 0) throw new Error(`Missing pseudocode line for "${phrase}"`)
+  const found = CODE.findIndex(c => c.includes(phrase))
+  if (found < 0) throw new Error(`Missing code line for "${phrase}"`)
   return found + 1
 }
 

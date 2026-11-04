@@ -19,12 +19,12 @@ export function buildTrace({ grid, queries }) {
   const seen = new Set(['0,0'])
   const frontier = [{ v: grid[0][0], r: 0, c: 0 }]
   const visited = []
-  const frames = [{ phase: 'start', activeLine: L('mark the top-left cell as seen'), pythonLine: P('seen = {(0, 0)}'), visited: [], frontier: frontier.map(f => ({ r: f.r, c: f.c, v: f.v })), query: null, points: 0, message: 'Start the region at the top-left cell.' }]
+  const frames = [{ phase: 'start', activeLine: L('const seen = new Set'), pythonLine: P('seen = {(0, 0)}'), visited: [], frontier: frontier.map(f => ({ r: f.r, c: f.c, v: f.v })), query: null, points: 0, message: 'Start the region at the top-left cell.' }]
   let points = 0
   const less = (a, b) => a.v < b.v || (a.v === b.v && (a.r < b.r || (a.r === b.r && a.c < b.c)))
   for (const qi of order) {
     const q = queries[qi]
-    frames.push({ phase: 'query', activeLine: L('take the next query'), pythonLine: P('q = queries[qi]'), visited: [...visited], frontier: frontier.map(f => ({ r: f.r, c: f.c, v: f.v })), query: q, points, message: `Query ${q}: cells below ${q} can be collected.` })
+    frames.push({ phase: 'query', activeLine: L('const q = queries[qi]'), pythonLine: P('q = queries[qi]'), visited: [...visited], frontier: frontier.map(f => ({ r: f.r, c: f.c, v: f.v })), query: q, points, message: `Query ${q}: cells below ${q} can be collected.` })
     while (frontier.length) {
       let at = 0
       for (let j = 1; j < frontier.length; j++) if (less(frontier[j], frontier[at])) at = j
@@ -39,27 +39,43 @@ export function buildTrace({ grid, queries }) {
         seen.add(`${nr},${nc}`)
         frontier.push({ v: grid[nr][nc], r: nr, c: nc })
       }
-      frames.push({ phase: 'expand', activeLine: L('take the smallest frontier cell'), pythonLine: P('points += 1'), visited: [...visited], frontier: frontier.map(f => ({ r: f.r, c: f.c, v: f.v })), query: q, points, message: `Collect cell (${cell.r}, ${cell.c}) with value ${cell.v}. Points: ${points}.` })
+      frames.push({ phase: 'expand', activeLine: L('const [, r, c] = heap.pop()'), pythonLine: P('points += 1'), visited: [...visited], frontier: frontier.map(f => ({ r: f.r, c: f.c, v: f.v })), query: q, points, message: `Collect cell (${cell.r}, ${cell.c}) with value ${cell.v}. Points: ${points}.` })
     }
     answer[qi] = points
-    frames.push({ phase: 'answer', activeLine: L('record the points for this query'), pythonLine: P('answer[qi] = points'), visited: [...visited], frontier: frontier.map(f => ({ r: f.r, c: f.c, v: f.v })), query: q, points, message: `Answer for query ${q}: ${points}.` })
+    frames.push({ phase: 'answer', activeLine: L('answer[qi] = points'), pythonLine: P('answer[qi] = points'), visited: [...visited], frontier: frontier.map(f => ({ r: f.r, c: f.c, v: f.v })), query: q, points, message: `Answer for query ${q}: ${points}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the answers'), pythonLine: P('return answer'), visited: [...visited], frontier: frontier.map(f => ({ r: f.r, c: f.c, v: f.v })), query: null, points, message: 'Answers are in the original query order.' })
+  frames.push({ phase: 'done', activeLine: L('return answer'), pythonLine: P('return answer'), visited: [...visited], frontier: frontier.map(f => ({ r: f.r, c: f.c, v: f.v })), query: null, points, message: 'Answers are in the original query order.' })
   return { input: { grid, queries }, result: answer, frames }
 }
 
-export const code = `maximum points collected for each query value, starting at the top-left cell
-  sort the query indices by query value, smallest first
-  mark the top-left cell as seen and put it in a min heap of frontier cells
-  set points to 0
-  for each query q in that order
-    take the next query q and grow the region while the heap top is below q
-    take the smallest frontier cell out of the heap, and add 1 to points
-    push its unseen neighbours into the heap and mark them as seen
-    record the points for this query
-  return the answers in the original query order`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-
+const CODE = [
+  'function maxPoints(grid, queries) {',
+  '  const m = grid.length, n = grid[0].length',
+  '  const order = queries.map((_, i) => i).sort((a, b) => queries[a] - queries[b])',
+  '  const answer = Array(queries.length).fill(0)',
+  '  const heap = new MinHeap([[grid[0][0], 0, 0]])',
+  '  const seen = new Set(["0,0"])',
+  '  let points = 0',
+  '  for (const qi of order) {',
+  '    const q = queries[qi]',
+  '    while (heap.size && heap.peek()[0] < q) {',
+  '      const [, r, c] = heap.pop()',
+  '      points++',
+  '      for (const [dr, dc] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {',
+  '        const nr = r + dr, nc = c + dc',
+  '        if (inBounds(nr, nc) && !seen.has(`${nr},${nc}`)) {',
+  '          seen.add(`${nr},${nc}`)',
+  '          heap.push([grid[nr][nc], nr, nc])',
+  '        }',
+  '      }',
+  '    }',
+  '    answer[qi] = points',
+  '  }',
+  '  return answer',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(c => c.includes(s)) + 1
 export const python = `import heapq
 
 def max_points(grid, queries):

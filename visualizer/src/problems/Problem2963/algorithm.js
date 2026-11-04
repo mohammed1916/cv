@@ -1,11 +1,12 @@
 const CODE = [
-  "FUNCTION countGoodPartitions(nums)",
-  "    first[v], last[v] ← first and last index of every value v; ways[0] ← 1",
-  "    FOR i FROM 1 TO length(nums)",
-  "        FOR j FROM 0 TO i − 1",
-  "            IF every value in nums[j..i−1] has all its occurrences inside nums[j..i−1] THEN",
-  "                ways[i] ← ways[i] + ways[j]",
-  "    RETURN ways[length(nums)] mod 1000000007",
+  "function countGoodPartitions(nums) {",
+  "const first = new Map(), last = new Map(); nums.forEach((v, i) => { if (!first.has(v)) first.set(v, i); last.set(v, i) })",
+  "const ways = [1]; for (let i = 1; i <= nums.length; i++) {",
+  "  for (let j = 0; j < i; j++) {",
+  "    if (nums.slice(j, i).every(v => first.get(v) >= j && last.get(v) < i))",
+  "      ways[i] = ((ways[i] ?? 0) + ways[j]) % MOD",
+  "  }}",
+  "return ways[nums.length] }",
 ];
 export const code = CODE.map((text, index) => ({ line: index + 1, text }));
 export const python = `def countGoodPartitions(nums):
@@ -54,15 +55,15 @@ export function buildTrace(input) {
   ways[0] = 1;
   emit(frames, table, { phase: "setup", line: 2, row: 0, column: 0, value: 1, message: "Record first and last positions of each value. One way to split the empty prefix." }, true);
   for (let i = 1; i <= n; i++) {
-    emit(frames, table, { phase: "loop", line: 3, row: 0, column: i, value: 0, message: `Count good partitions of the prefix of length ${i}.` }, true);
+    emit(frames, table, { phase: "loop", line: 3, row: 0, column: i, l: null, r: i - 1, value: 0, message: `Count good partitions of the prefix of length ${i}.` }, true);
     for (let j = 0; j < i; j++) {
       const closed = nums.slice(j, i).every(v => first.get(v) >= j && last.get(v) < i);
       if (closed) {
         ways[i] += ways[j];
         table[0][i] = ways[i];
-        emit(frames, table, { phase: "check", line: 5, row: 0, column: i, value: ways[i], message: `Segment nums[${j}..${i - 1}] is closed, so add ways[${j}] = ${ways[j]}.` });
+        emit(frames, table, { phase: "check", line: 5, row: 0, column: i, l: j, r: i - 1, value: ways[i], message: `Segment nums[${j}..${i - 1}] is closed, so add ways[${j}] = ${ways[j]}.` });
       } else {
-        emit(frames, table, { phase: "check", line: 4, row: 0, column: i, value: ways[i], message: `Segment nums[${j}..${i - 1}] shares a value with another part, so skip j = ${j}.` });
+        emit(frames, table, { phase: "check", line: 4, row: 0, column: i, l: j, r: i - 1, value: ways[i], message: `Segment nums[${j}..${i - 1}] shares a value with another part, so skip j = ${j}.` });
       }
     }
   }

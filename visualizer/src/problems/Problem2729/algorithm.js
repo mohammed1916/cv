@@ -8,14 +8,12 @@ export const PYTHON_LINES = [
   "    return \"\".join(digits) == \"123456789\"",
 ];
 
-export const CODE = [
-  "Write n as text",
-  "Write 2 * n as text",
-  "Write 3 * n as text",
-  "Join the three texts into s",
-  "Sort the characters of s",
-  "Return whether the sorted characters are 1 through 9",
-];
+export const CODE = `const first = String(n); // write n as text
+const second = String(2 * n); // write 2 * n as text
+const third = String(3 * n); // write 3 * n as text
+const s = first + second + third; // join the three texts into s
+const digits = [...s].sort(); // sort the characters of s
+return digits.join('') === '123456789'; // return whether the sorted characters are 1 through 9`.split('\n');
 
 export const python = PYTHON_LINES.join("\n");
 export const code = CODE.map((text, index) => ({ line: index + 1, text }));

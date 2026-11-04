@@ -1,5 +1,6 @@
 const lines = text => text.split('\n').map((t, i) => ({ line: i + 1, text: t }))
-const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: line, activeLine: line, message, state })
+const PY_OF = {1: 2, 2: 2, 3: 2, 4: 3}
+const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: PY_OF[line] ?? line, activeLine: line, message, state })
 export const PHASES = [
   { id: 'setup', label: 'Setup', description: 'Read the input and prepare the model.' },
   { id: 'step', label: 'Step', description: 'Process one event or item.' },
@@ -34,10 +35,10 @@ export function buildTrace(input) {
   frames.push(frame('done', 4, `Return ${a} + ${b} = ${a + b}.`, { a, b, sum: a + b }))
   return { input, result: a + b, frames }
 }
-export const code = lines(`wait for promise a and promise b to both resolve
-read the resolved value of a
-read the resolved value of b
-return a plus b`)
+export const code = lines(`const [x, y] = await Promise.all([a, b]); // wait for promise a and promise b to both resolve
+const valueA = x; // read the resolved value of a
+const valueB = y; // read the resolved value of b
+return valueA + valueB; // return a plus b`)
 export const python = `def add_two(a, b):
     total = a.value + b.value
     return total`

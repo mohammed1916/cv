@@ -1,14 +1,20 @@
 const CODE = [
-  'FUNCTION maxNumbers(banned, n, maxSum)',
-  '    forbidden ← sorted distinct banned values that lie in 1..n',
-  '    total ← 0 ; count ← 0 ; lo ← 1',
-  '    FOR each gap [lo, hi] of allowed numbers between forbidden values (sentinel n + 1 at the end)',
-  '        len ← hi − lo + 1',
-  '        k ← the most numbers from this gap, starting at lo, whose sum keeps total ≤ maxSum (at most len)',
-  '        total ← total + k × lo + k(k − 1)/2 ; count ← count + k',
-  '        IF k < len THEN RETURN count   (the budget is spent)',
-  '        lo ← forbidden value + 1',
-  '    RETURN count',
+  'function maxNumbers(banned, n, maxSum) {',
+  '  const forbidden = [...new Set(banned.filter(x => x >= 1 && x <= n))].sort((a, b) => a - b)',
+  '  let total = 0, count = 0, lo = 1',
+  '  for (const f of [...forbidden, n + 1]) {',
+  '    const hi = f - 1',
+  '    if (hi < lo) { lo = f + 1; continue }',
+  '    const length = hi - lo + 1',
+  '    const budget = maxSum - total',
+  '    const k = largestCount(lo, length, budget)',
+  '    total += k * lo + (k * (k - 1)) / 2',
+  '    count += k',
+  '    if (k < length) return count',
+  '    lo = f + 1',
+  '  }',
+  '  return count',
+  '}',
 ]
 
 const PY = [
@@ -69,7 +75,7 @@ export function buildTrace({ banned, n, maxSum }) {
   let total = 0
   let count = 0
   let lo = 1
-  frames.push({ pythonLine: pyLine('forbidden = sorted(set(x for x in banned if 1 <= x <= n))'), phase: 'start', activeLine: codeLine('forbidden ← sorted distinct banned values that lie in 1..n'), gap: null, forbidden, total, count, message: `Forbidden values inside 1..${n}: ${forbidden.join(', ') || 'none'}. Budget ${maxSum}.` })
+  frames.push({ pythonLine: pyLine('forbidden = sorted(set(x for x in banned if 1 <= x <= n))'), phase: 'start', activeLine: codeLine('const forbidden = [...new Set(banned.filter(x => x >= 1 && x <= n))].sort((a, b) => a - b)'), gap: null, forbidden, total, count, message: `Forbidden values inside 1..${n}: ${forbidden.join(', ') || 'none'}. Budget ${maxSum}.` })
   const ends = [...forbidden, n + 1]
   for (const f of ends) {
     const hi = f - 1
@@ -85,14 +91,14 @@ export function buildTrace({ banned, n, maxSum }) {
     const k = a
     total += k * lo + (k * (k - 1)) / 2
     count += k
-    frames.push({ pythonLine: pyLine('k = a'), phase: 'gap', activeLine: codeLine('k ← the most numbers from this gap, starting at lo, whose sum keeps total ≤ maxSum (at most len)'), gap: [lo, hi], k, len: length, forbidden, total, count, message: `Gap ${lo}..${hi} (${length} number${length === 1 ? '' : 's'}): take ${k}. Sum ${total}, count ${count}.` })
+    frames.push({ pythonLine: pyLine('k = a'), phase: 'gap', activeLine: codeLine('const k = largestCount(lo, length, budget)'), gap: [lo, hi], k, len: length, forbidden, total, count, message: `Gap ${lo}..${hi} (${length} number${length === 1 ? '' : 's'}): take ${k}. Sum ${total}, count ${count}.` })
     if (k < length) {
-      frames.push({ pythonLine: pyLine('return count'), phase: 'stop', activeLine: codeLine('IF k < len THEN RETURN count   (the budget is spent)'), gap: [lo, hi], k, len: length, forbidden, total, count, message: `The next number ${lo + k} would exceed the budget. Stop with ${count}.` })
+      frames.push({ pythonLine: pyLine('return count'), phase: 'stop', activeLine: codeLine('if (k < length) return count'), gap: [lo, hi], k, len: length, forbidden, total, count, message: `The next number ${lo + k} would exceed the budget. Stop with ${count}.` })
       return { input: { banned, n, maxSum }, result: count, frames }
     }
     lo = f + 1
   }
-  frames.push({ pythonLine: pyLine('return count'), phase: 'done', activeLine: codeLine('RETURN count'), gap: null, forbidden, total, count, message: `All allowed numbers fit. Maximum count ${count}.` })
+  frames.push({ pythonLine: pyLine('return count'), phase: 'done', activeLine: codeLine('return count'), gap: null, forbidden, total, count, message: `All allowed numbers fit. Maximum count ${count}.` })
   return { input: { banned, n, maxSum }, result: count, frames }
 }
 

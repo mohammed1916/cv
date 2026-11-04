@@ -1,14 +1,14 @@
 const CODE = [
-  "FUNCTION minimumChanges(s, k)",
-  "    n ← length of s",
-  "    dp[p][end] ← infinity for all, dp[0][0] ← 0",
-  "    FOR each number of parts p from 1 to k",
-  "        FOR each end position from p to n",
-  "            FOR each start from p - 1 to end - 1",
-  "                IF dp[p - 1][start] is finite",
-  "                    dp[p][end] ← min(dp[p][end], dp[p - 1][start] + cost(start, end))",
-  "    RETURN dp[k][n]",
-  "FUNCTION cost(i, j): fewest changes over divisors d < length of s[i..j) (length 1 is never a semi-palindrome)",
+  "function minimumChanges(s, k) {",
+  "const n = s.length",
+  "const dp = Array.from({ length: k + 1 }, () => Array(n + 1).fill(Infinity)); dp[0][0] = 0",
+  "for (let p = 1; p <= k; p++) {",
+  "  for (let end = p; end <= n; end++) {",
+  "    for (let start = p - 1; start < end; start++) {",
+  "      if (dp[p - 1][start] < Infinity)",
+  "        dp[p][end] = Math.min(dp[p][end], dp[p - 1][start] + cost(start, end))",
+  "return dp[k][n] }",
+  "function cost(i, j) { // fewest changes over divisors d < length of s[i..j) (length 1 is never a semi-palindrome)",
 ]
 export const code = CODE.map((text, index) => ({ line: index + 1, text }))
 export const python = `def minimumChanges(s, k):

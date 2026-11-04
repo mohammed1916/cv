@@ -57,12 +57,14 @@ export function buildTrace(input) {
   return { input, result, frames }
 }
 
-export const code = `set the result list to empty
-for each index i with variables [a, b, c, m]
-  compute x as a to the power b, modulo 10
-  compute y as x to the power c, modulo m
-  if y equals target, add i to the result
-return the result`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `const result = [] // set the result list to empty
+for (let i = 0; i < variables.length; i++) { // for each index i with variables [a, b, c, m]
+  const [a, b, c, m] = variables[i]
+  const x = modPow(a, b, 10) // compute x as a to the power b, modulo 10
+  const y = modPow(x, c, m) // compute y as x to the power c, modulo m
+  if (y === target) result.push(i) // if y equals target, add i to the result
+}
+return result // return the result`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def good_indices(variables, target):

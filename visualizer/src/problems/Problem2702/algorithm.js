@@ -1,19 +1,22 @@
-// Visualization caps (the draft gives no verified bounds): up to 8 values, each 1 to 50, with 1 <= y < x <= 10.
+// Visualization caps: up to 8 values, each 1 to 50, with 1 <= y < x <= 10.
 const MAX_LEN = 8
 const MAX_VALUE = 50
 const MAX_X = 10
 
-export const code = `minimum operations to make all values nonpositive
-  set lo to 0 and hi to the largest value
-  while lo is less than hi
-    set mid to the middle of lo and hi
-    set picks to 0
-    for each value v
-      set left to v minus mid times y
-      if left is positive then add ceil(left over x minus y) to picks
-    if picks is at most mid then set hi to mid
-    otherwise set lo to mid plus 1
-  return lo`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minOperations(nums, x, y) {
+  let lo = 0, hi = Math.max(...nums); // set lo to 0 and hi to the largest value
+  while (lo < hi) {
+    const mid = Math.floor((lo + hi) / 2); // set mid to the middle of lo and hi
+    let picks = 0;
+    for (const v of nums) {
+      const left = v - mid * y;
+      if (left > 0) picks += Math.ceil(left / (x - y)); // if left is positive, add the picks it needs
+    }
+    if (picks <= mid) hi = mid; // if picks is at most mid, mid works
+    else lo = mid + 1; // otherwise set lo to mid plus 1
+  }
+  return lo; // return lo
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def min_operations(nums, x, y):
     lo, hi = 0, max(nums)

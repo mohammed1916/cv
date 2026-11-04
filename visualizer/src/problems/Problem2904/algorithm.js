@@ -22,13 +22,13 @@ const PYTHON_LINES = [
 export const python = PYTHON_LINES.join("\n");
 
 export const code = [
-  { line: 1, text: "Set best to empty, left to 0, and ones to 0" },
-  { line: 2, text: "For each right index from 0 to n - 1" },
-  { line: 3, text: "If s[right] is 1, add one to ones" },
-  { line: 4, text: "While ones is greater than k, drop s[left] and move left forward" },
-  { line: 5, text: "If ones equals k, move left past leading zeros" },
-  { line: 6, text: "Let cand = s[left..right]; keep it if shorter, or equal length and smaller" },
-  { line: 7, text: "Return best" },
+  { line: 1, text: "let best = '', left = 0, ones = 0" },
+  { line: 2, text: "for (let right = 0; right < s.length; right++) {" },
+  { line: 3, text: "  if (s[right] === '1') ones++" },
+  { line: 4, text: "  while (ones > k) { if (s[left++] === '1') ones-- }" },
+  { line: 5, text: "  if (ones === k) { while (s[left] === '0') left++" },
+  { line: 6, text: "    const cand = s.slice(left, right + 1); if (best === '' || cand.length < best.length || (cand.length === best.length && cand < best)) best = cand } }" },
+  { line: 7, text: "return best" },
 ];
 
 const LIMITS = { maxLength: 100, maxK: 100 };

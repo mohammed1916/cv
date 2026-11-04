@@ -44,14 +44,14 @@ export function buildTrace(input) {
   return { input, result: ops, frames }
 }
 
-export const code = `minimum operations to collect elements 1 to k
-  set need to the values 1 through k
-  set ops to 0
-  for each element x from the end of nums
-    add one to ops
-    remove x from need
-    if need is empty then return ops
-  return ops`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `// minimum operations to collect elements 1 to k
+const need = new Set(Array.from({ length: k }, (_, i) => i + 1))
+let ops = 0
+for (let p = nums.length - 1; p >= 0; p--) { const x = nums[p] // for each element x from the end of nums
+  ops++ // add one to ops
+  need.delete(x) // remove x from need
+  if (need.size === 0) return ops } // if need is empty then return ops
+return ops`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def minOperations(nums, k):
     need = set(range(1, k + 1))

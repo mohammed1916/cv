@@ -42,12 +42,12 @@ export function buildTrace(input) {
   return { input, result: best, frames }
 }
 
-export const code = `maximum element sum of a complete subset
-  set sums to an empty table
-  for each index i from 1 to n with value v
-    reduce i by removing every square factor, giving key
-    add v to sums[key]
-  return the largest value in sums`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `// maximum element sum of a complete subset
+const sums = new Map()
+for (let i = 1; i <= n; i++) { const v = nums[i - 1]
+  let key = i; for (let p = 2; p * p <= key; p++) while (key % (p * p) === 0) key /= p * p // reduce i by removing every square factor
+  sums.set(key, (sums.get(key) ?? 0) + v) } // add v to sums[key]
+return Math.max(...sums.values())`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def maximumSum(nums):
     sums = {}

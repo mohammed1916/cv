@@ -17,28 +17,34 @@ export function buildTrace(input) {
   const working = input.score.map((row, index) => ({ row, index }))
   const result = []
   const taken = []
-  const frames = [{ phase: 'start', activeLine: L('set result to an empty list'), pythonLine: 3, picked: null, taken: [], result: [], message: `Sort students by exam ${input.k} score, highest first.` }]
+  const frames = [{ phase: 'start', activeLine: L('const result = []'), pythonLine: 3, picked: null, taken: [], result: [], message: `Sort students by exam ${input.k} score, highest first.` }]
   while (working.length > 0) {
     let best = 0
     for (let i = 1; i < working.length; i++) if (working[i].row[input.k] > working[best].row[input.k]) best = i
-    frames.push({ phase: 'find', activeLine: L('find the row with the largest'), pythonLine: 7, picked: working[best].index, taken: [...taken], result: [...result], message: `Student ${working[best].index} has the best remaining score in exam ${input.k}: ${working[best].row[input.k]}.` })
+    frames.push({ phase: 'find', activeLine: L('for (let i = 1; i < working.length; i++)'), pythonLine: 7, picked: working[best].index, taken: [...taken], result: [...result], message: `Student ${working[best].index} has the best remaining score in exam ${input.k}: ${working[best].row[input.k]}.` })
     const [student] = working.splice(best, 1)
     result.push(student.row)
     taken.push(student.index)
-    frames.push({ phase: 'take', activeLine: L('move that row'), pythonLine: 9, picked: student.index, taken: [...taken], result: result.map(r => [...r]), message: `Student ${student.index} moves to the next position in the result.` })
+    frames.push({ phase: 'take', activeLine: L('result.push('), pythonLine: 9, picked: student.index, taken: [...taken], result: result.map(r => [...r]), message: `Student ${student.index} moves to the next position in the result.` })
   }
   frames.push({ phase: 'done', activeLine: L('return result'), pythonLine: 10, picked: null, taken: [...taken], result: result.map(r => [...r]), message: 'Every student is placed from highest to lowest kth score.' })
   return { input, result, frames }
 }
 
-export const code = `sort the students by their kth score, highest first
-  set result to an empty list
-  pair each student row with its index in a working list
-  repeat while the working list is not empty
-    find the row with the largest score in column k
-    move that row from the working list to the end of result
-  return result`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function sortStudents(score, k) {',
+  '  const working = score.map((row, index) => ({ row, index }))',
+  '  const result = []',
+  '  while (working.length > 0) {',
+  '    let best = 0',
+  '    for (let i = 1; i < working.length; i++) if (working[i].row[k] > working[best].row[k]) best = i',
+  '    result.push(...working.splice(best, 1).map(s => s.row))',
+  '  }',
+  '  return result',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(c => c.includes(s)) + 1
 
 export const python = `def sort_students(score, k):
     working = [list(row) for row in score]

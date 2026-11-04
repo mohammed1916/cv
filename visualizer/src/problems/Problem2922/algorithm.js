@@ -75,12 +75,12 @@ export function buildTrace({ items, orders }) {
   return { input: { items, orders }, result, frames }
 }
 
-export const code = `seller brand diversity
-  index each item to its brand
-  for each order, add the item's brand to its seller's set of brands
-  for each seller in ascending seller_id order
-    keep the seller when its set has at least two brands
-  return the kept seller ids`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `const brandOf = new Map(items.map(r => [r.item_id, r.item_brand])) // index each item to its brand
+const brandsBySeller = new Map(), kept = []
+for (const o of orders) (brandsBySeller.get(o.seller_id) ?? brandsBySeller.set(o.seller_id, new Set()).get(o.seller_id)).add(brandOf.get(o.item_id)) // for each order, add the item's brand to its seller's set of brands
+for (const seller of [...brandsBySeller.keys()].sort((a, b) => a - b)) { // for each seller in ascending seller_id order
+  if (brandsBySeller.get(seller).size >= 2) kept.push(seller) } // keep the seller when its set has at least two brands
+return kept // return the kept seller ids`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const sql = `SELECT o.seller_id
 FROM Orders o

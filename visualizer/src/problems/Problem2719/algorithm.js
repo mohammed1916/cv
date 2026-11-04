@@ -50,12 +50,33 @@ export function buildTrace({ num1, num2, min_sum, max_sum }) {
   return { input: { num1, num2, min_sum, max_sum }, result, frames }
 }
 
-export const code = `count integers in [num1, num2] whose digit sum is between min_sum and max_sum
-ways[k][s] is the number of k-digit strings whose digits sum to s
-define count(X) as the number of integers from 0 to X with a digit sum in range
-for each position i of X, with a smaller digit e at i, add the strings that fit after it
-include X itself when its digit sum is in range
-return count(num2) minus count(num1) plus 1 when num1 is in range`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function countIntegers(num1, num2, minSum, maxSum) {
+  const width = num2.length;
+  // ways[k][s] is the number of k-digit strings whose digits sum to s
+  const ways = [Array.from({ length: 9 * width + 1 }, (_, s) => (s === 0 ? 1 : 0))];
+  for (let k = 1; k <= width; k++) {
+    const row = new Array(9 * width + 1).fill(0);
+    for (let s = 0; s <= 9 * k; s++) for (let d = 0; d <= 9 && s - d >= 0; d++) row[s] += ways[k - 1][s - d];
+    ways.push(row);
+  }
+  // define count(X) as the number of integers from 0 to X with a digit sum in range
+  const count = x => {
+    const digits = x.padStart(width, '0').split('').map(Number);
+    let total = 0, prefix = 0;
+    digits.forEach((d, i) => {
+      const rest = width - i - 1;
+      for (let e = 0; e < d; e++) { // for each position i of X, with a smaller digit e at i, add the strings that fit after it
+        for (let t = Math.max(0, minSum - prefix - e); t <= maxSum - prefix - e && t <= 9 * rest; t++) total += ways[rest][t];
+      }
+      prefix += d;
+    });
+    if (prefix >= minSum && prefix <= maxSum) total += 1; // include X itself when its digit sum is in range
+    return total;
+  };
+  const numSum = [...num1].reduce((a, c) => a + Number(c), 0);
+  const lowerIn = numSum >= minSum && numSum <= maxSum ? 1 : 0;
+  return count(num2) - count(num1) + lowerIn; // return count(num2) minus count(num1) plus 1 when num1 is in range
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def count_integers(num1, num2, min_sum, max_sum):

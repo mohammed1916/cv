@@ -9,23 +9,28 @@ const MAX_GRAINS = 8
 const MAX_POSITION = 30
 
 const CODE_LINES = [
-  'FUNCTION minTimeToEatAll(hens, grains)',
-  '    sort hens and sort grains ascending',
-  '    IF grains is empty THEN RETURN 0',
-  '    low ← 0, high ← 2 × largest position',
-  '    WHILE low < high',
-  '        mid ← floor((low + high) / 2)',
-  '        IF canFinish(mid) THEN high ← mid ELSE low ← mid + 1',
-  '    RETURN low',
-  'FUNCTION canFinish(t)',
-  '    next ← 0, the first grain not yet eaten',
-  '    FOR each hen in sorted order',
-  '        end ← next; extend end while cost(hen, grains[next], grains[end]) ≤ t; next ← end',
-  '    RETURN next equals the number of grains',
-  'FUNCTION cost(hen, a, b), time for one hen to eat every grain from a to b',
-  '    IF hen ≤ a THEN RETURN b − hen',
-  '    IF hen ≥ b THEN RETURN hen − a',
-  '    RETURN min(2 × (hen − a) + (b − hen), 2 × (b − hen) + (hen − a))',
+  'function minTimeToEatAll(hens, grains) {',
+  '  const H = [...hens].sort((x, y) => x - y), G = [...grains].sort((x, y) => x - y)',
+  '  if (G.length === 0) return 0',
+  '  let low = 0, high = 2 * Math.max(...H, ...G)',
+  '  while (low < high) {',
+  '    const mid = Math.floor((low + high) / 2)',
+  '    if (canFinish(mid)) high = mid; else low = mid + 1',
+  '  }',
+  '  return low',
+  '}',
+  'function canFinish(t) {',
+  '  let next = 0',
+  '  for (const hen of H) {',
+  '    let end = next; while (end < G.length && cost(hen, G[next], G[end]) <= t) end++; next = end',
+  '  }',
+  '  return next === G.length',
+  '}',
+  'function cost(hen, a, b) {',
+  '  if (hen <= a) return b - hen',
+  '  if (hen >= b) return hen - a',
+  '  return Math.min(2 * (hen - a) + (b - hen), 2 * (b - hen) + (hen - a))',
+  '}',
 ]
 
 const PYTHON_LINES = [
@@ -118,20 +123,20 @@ export function buildTrace({ hens, grains }) {
   const frames = []
   const snapshot = (extra) => ({ hens: H, grains: G, lo: null, hi: null, mid: null, segments: [], feasible: null, current: null, ...extra })
 
-  frames.push({ phase: 'setup', activeLine: L('sort hens and sort grains'), pythonLine: P('hens = sorted(hens)'), message: `Sorted ${H.length} hen${H.length === 1 ? '' : 's'} and ${G.length} grain${G.length === 1 ? '' : 's'}.`, view: snapshot({}) })
+  frames.push({ phase: 'setup', activeLine: L('const H = [...hens]'), pythonLine: P('hens = sorted(hens)'), message: `Sorted ${H.length} hen${H.length === 1 ? '' : 's'} and ${G.length} grain${G.length === 1 ? '' : 's'}.`, view: snapshot({}) })
   if (G.length === 0) {
-    frames.push({ phase: 'done', activeLine: L('IF grains is empty'), pythonLine: P('return 0'), message: 'No grains, so the answer is 0.', view: snapshot({ answer: 0 }) })
+    frames.push({ phase: 'done', activeLine: L('if (G.length === 0) return 0'), pythonLine: P('return 0'), message: 'No grains, so the answer is 0.', view: snapshot({ answer: 0 }) })
     return { input: { hens, grains }, result: 0, frames }
   }
 
   let lo = 0
   let hi = 2 * Math.max(...H, ...G)
-  frames.push({ phase: 'setup', activeLine: L('low ← 0, high ← 2 × largest'), pythonLine: P('low, high = 0, 2 * max'), message: `Any answer lies between 0 and ${hi}: one hen can walk to one end and then the other.`, view: snapshot({ lo, hi }) })
+  frames.push({ phase: 'setup', activeLine: L('let low = 0, high'), pythonLine: P('low, high = 0, 2 * max'), message: `Any answer lies between 0 and ${hi}: one hen can walk to one end and then the other.`, view: snapshot({ lo, hi }) })
 
   while (lo < hi) {
     const mid = Math.floor((lo + hi) / 2)
-    frames.push({ phase: 'search', activeLine: L('WHILE low < high'), pythonLine: P('while low < high'), message: `Range ${lo} to ${hi}. Try time ${mid}.`, view: snapshot({ lo, hi, mid }) })
-    frames.push({ phase: 'search', activeLine: L('mid ← floor'), pythonLine: P('mid = (low + high)'), message: `Test whether every grain can be eaten by time ${mid}.`, view: snapshot({ lo, hi, mid }) })
+    frames.push({ phase: 'search', activeLine: L('while (low < high)'), pythonLine: P('while low < high'), message: `Range ${lo} to ${hi}. Try time ${mid}.`, view: snapshot({ lo, hi, mid }) })
+    frames.push({ phase: 'search', activeLine: L('const mid = Math.floor'), pythonLine: P('mid = (low + high)'), message: `Test whether every grain can be eaten by time ${mid}.`, view: snapshot({ lo, hi, mid }) })
 
     const segments = []
     let next = 0
@@ -146,17 +151,17 @@ export function buildTrace({ hens, grains }) {
       const why = took === 0
         ? `Hen ${k + 1} at ${hen} cannot reach grain ${G[next] ?? '-'} within ${mid}.`
         : `Hen ${k + 1} at ${hen} takes grains ${G.slice(next, end).join(', ')} in ${cost} unit${cost === 1 ? '' : 's'}.`
-      frames.push({ phase: 'assign', activeLine: L('end ← next; extend'), pythonLine: P('while end < len(grains)'), message: why + (blocker !== null ? ` Grain ${blocker} is too far.` : ''), view: snapshot({ lo, hi, mid, segments: segments.slice(), current: k, feasible: null }) })
+      frames.push({ phase: 'assign', activeLine: L('let end = next'), pythonLine: P('while end < len(grains)'), message: why + (blocker !== null ? ` Grain ${blocker} is too far.` : ''), view: snapshot({ lo, hi, mid, segments: segments.slice(), current: k, feasible: null }) })
       next = end
     }
     const feasible = next === G.length
-    frames.push({ phase: 'assign', activeLine: L('RETURN next equals'), pythonLine: P('return nxt == len(grains)'), message: feasible ? `All ${G.length} grains are taken: time ${mid} works.` : `${G.length - next} grain${G.length - next === 1 ? '' : 's'} left uneaten: time ${mid} fails.`, view: snapshot({ lo, hi, mid, segments: segments.slice(), current: null, feasible }) })
+    frames.push({ phase: 'assign', activeLine: L('return next === G.length'), pythonLine: P('return nxt == len(grains)'), message: feasible ? `All ${G.length} grains are taken: time ${mid} works.` : `${G.length - next} grain${G.length - next === 1 ? '' : 's'} left uneaten: time ${mid} fails.`, view: snapshot({ lo, hi, mid, segments: segments.slice(), current: null, feasible }) })
 
     if (feasible) hi = mid
     else lo = mid + 1
-    frames.push({ phase: 'decide', activeLine: L('IF canFinish(mid) THEN'), pythonLine: P(feasible ? 'high = mid' : 'low = mid + 1'), message: feasible ? `Time ${mid} works, so the answer is at most ${mid}.` : `Time ${mid} fails, so the answer is above ${mid}.`, view: snapshot({ lo, hi, mid: null, segments: segments.slice(), feasible }) })
+    frames.push({ phase: 'decide', activeLine: L('if (canFinish(mid))'), pythonLine: P(feasible ? 'high = mid' : 'low = mid + 1'), message: feasible ? `Time ${mid} works, so the answer is at most ${mid}.` : `Time ${mid} fails, so the answer is above ${mid}.`, view: snapshot({ lo, hi, mid: null, segments: segments.slice(), feasible }) })
   }
 
-  frames.push({ phase: 'done', activeLine: L('RETURN low'), pythonLine: P('return low'), message: `The smallest working time is ${lo}.`, view: snapshot({ lo, hi, answer: lo }) })
+  frames.push({ phase: 'done', activeLine: L('return low'), pythonLine: P('return low'), message: `The smallest working time is ${lo}.`, view: snapshot({ lo, hi, answer: lo }) })
   return { input: { hens, grains }, result: lo, frames }
 }

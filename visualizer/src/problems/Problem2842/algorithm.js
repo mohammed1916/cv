@@ -49,16 +49,19 @@ export function buildTrace({ s, k }) {
   const tiedAll = letters.filter(([, f]) => f === v)
   frames.push({ pythonLine: 8, phase: 'tie', activeLine: L('letters tied with the k-th'), chosen: chosen.map(([c]) => c), message: `${tiedAll.length} letter${tiedAll.length === 1 ? '' : 's'} share frequency ${v}; any of them can fill the last slots.` })
   const result = countMaxBeauty(s, k).toString()
-  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return the product'), chosen: chosen.map(([c]) => c), message: `Choose which tied letters to use, then one index for each: ${result} ways.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return combinations'), chosen: chosen.map(([c]) => c), message: `Choose which tied letters to use, then one index for each: ${result} ways.` })
   return { input: { s, k }, result, frames }
 }
 
-export const code = `count the maximum beauty subsequences of s with k distinct letters
-  count how often each letter appears
-  sort the letters by frequency from high to low
-  take the k largest; the k-th frequency is v
-  count the tied letters with frequency v and how many slots they fill
-  return the number of ways to pick those letters and one index each, modulo 1e9+7`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `const freq = new Map() // count how often each letter appears
+for (const c of s) freq.set(c, (freq.get(c) ?? 0) + 1)
+const sorted = [...freq.values()].sort((a, b) => b - a) // sort the letters by frequency from high to low
+const v = sorted[k - 1] // take the k largest; the k-th frequency is v
+const tied = sorted.filter(f => f === v).length // letters tied with the k-th frequency
+if (sorted.length < k) return 0
+const greater = sorted.slice(0, k).filter(f => f > v)
+const slots = k - greater.length
+return combinations(tied, slots) * v ** slots * greater.reduce((p, f) => p * f, 1) % MOD`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `from math import comb

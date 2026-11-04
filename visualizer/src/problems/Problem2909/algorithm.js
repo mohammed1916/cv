@@ -1,14 +1,14 @@
 const CODE = [
-  "FUNCTION minimumSum(nums)",
-  "    n ← length of nums",
-  "    suffixMin ← smallest value at or after each index",
-  "    leftMin ← infinity",
-  "    best ← infinity",
-  "    FOR each index j from 0 to n - 1",
-  "        IF leftMin < nums[j] AND suffixMin[j + 1] < nums[j]",
-  "            best ← min(best, leftMin + nums[j] + suffixMin[j + 1])",
-  "        leftMin ← min(leftMin, nums[j])",
-  "    RETURN best, or -1 if no triplet exists",
+  "function minimumSum(nums) {",
+  "const n = nums.length",
+  "const suffixMin = nums.map((_, i) => Math.min(...nums.slice(i))).concat(Infinity)",
+  "let leftMin = Infinity",
+  "let best = Infinity",
+  "for (let j = 0; j < n; j++) {",
+  "  if (leftMin < nums[j] && suffixMin[j + 1] < nums[j])",
+  "    best = Math.min(best, leftMin + nums[j] + suffixMin[j + 1])",
+  "  leftMin = Math.min(leftMin, nums[j]) }",
+  "return best === Infinity ? -1 : best }",
 ]
 export const code = CODE.map((text, index) => ({ line: index + 1, text }))
 export const python = `def minimumSum(nums):

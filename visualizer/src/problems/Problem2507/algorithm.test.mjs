@@ -5,8 +5,8 @@ import { buildTrace, parseInput } from './algorithm.js'
 const solve = n => buildTrace(parseInput(JSON.stringify({ n }))).result
 
 test('2507 statement examples', () => {
-  assert.equal(solve(15), 5)
-  assert.equal(solve(3), 3)
+  assert.equal(solve(20), 5)
+  assert.equal(solve(12), 7)
 })
 
 test('2507 rejects n below two', () => {

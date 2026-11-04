@@ -17,23 +17,25 @@ export const PYTHON_LINES = [
   "    return answer",
 ];
 export const python = PYTHON_LINES.join("\n");
-export const CODE = [
-  "COLOR-THE-ARRAY(n, queries)",
-  "colors <- n zeros; count <- 0; answer <- empty",
-  "for each [index, color] in queries",
-  "old <- colors[index]",
-  "if old is not uncolored",
-  "for each neighbor of index",
-  "if neighbor exists and has color old",
-  "count <- count - 1",
-  "colors[index] <- color",
-  "for each neighbor of index",
-  "if neighbor exists and has color color",
-  "count <- count + 1",
-  "append count to answer",
-  "return answer",
-];
-export const code = CODE.map((text, index) => ({ line: index + 1, text }));
+export const code = `function colorTheArray(n, queries) {
+  const colors = Array(n).fill(0);
+  let count = 0;
+  const answer = [];
+  for (const [index, color] of queries) { // query: read the next [index, color]
+    const old = colors[index]; // old color at index
+    if (old !== 0) { // remove the pairs the old color made
+      for (const nb of [index - 1, index + 1]) {
+        if (nb >= 0 && nb < n && colors[nb] === old) count--;
+      }
+    }
+    colors[index] = color; // set the new color
+    for (const nb of [index - 1, index + 1]) { // add the pairs the new color makes
+      if (nb >= 0 && nb < n && colors[nb] === color) count++;
+    }
+    answer.push(count); // record count
+  }
+  return answer; // return answer
+}`.split('\n').map((text, index) => ({ line: index + 1, text }));
 
 export function parseInput(text) {
   const obj = typeof text === "string" ? JSON.parse(text) : text;
@@ -72,33 +74,33 @@ export function buildTrace(input) {
   frames.push(snap({ phase: "init", activeLine: 2, pythonLine: 4, index: null, color: null, message: "answer starts empty." }));
 
   for (const [index, color] of queries) {
-    frames.push(snap({ phase: "query", activeLine: 3, pythonLine: 5, index, color, message: `Query: color ${index} with ${color}.` }));
+    frames.push(snap({ phase: "query", activeLine: 5, pythonLine: 5, index, color, message: `Query: color ${index} with ${color}.` }));
     const old = colors[index];
-    frames.push(snap({ phase: "old", activeLine: 4, pythonLine: 6, index, color, old, message: `Old color at ${index} is ${old}.` }));
-    frames.push(snap({ phase: "remove", activeLine: 5, pythonLine: 7, index, color, old, message: old !== 0 ? "The old color is nonzero, so its pairs are removed first." : "Position was uncolored, so nothing is removed." }));
+    frames.push(snap({ phase: "old", activeLine: 6, pythonLine: 6, index, color, old, message: `Old color at ${index} is ${old}.` }));
+    frames.push(snap({ phase: "remove", activeLine: 7, pythonLine: 7, index, color, old, message: old !== 0 ? "The old color is nonzero, so its pairs are removed first." : "Position was uncolored, so nothing is removed." }));
     if (old !== 0) {
       for (const nb of [index - 1, index + 1]) {
         const match = nb >= 0 && nb < n && colors[nb] === old;
-        frames.push(snap({ phase: "remove-check", activeLine: 7, pythonLine: 9, index, color, old, neighbor: nb, message: `Neighbor ${nb} ${match ? "had the old color" : "does not match"}.` }));
+        frames.push(snap({ phase: "remove-check", activeLine: 9, pythonLine: 9, index, color, old, neighbor: nb, message: `Neighbor ${nb} ${match ? "had the old color" : "does not match"}.` }));
         if (match) {
           count -= 1;
-          frames.push(snap({ phase: "remove-dec", activeLine: 8, pythonLine: 10, index, color, old, neighbor: nb, message: `Remove one equal pair; count is ${count}.` }));
+          frames.push(snap({ phase: "remove-dec", activeLine: 9, pythonLine: 10, index, color, old, neighbor: nb, message: `Remove one equal pair; count is ${count}.` }));
         }
       }
     }
     colors[index] = color;
-    frames.push(snap({ phase: "set", activeLine: 9, pythonLine: 11, index, color, old, message: `Set position ${index} to ${color}.` }));
+    frames.push(snap({ phase: "set", activeLine: 12, pythonLine: 11, index, color, old, message: `Set position ${index} to ${color}.` }));
     for (const nb of [index - 1, index + 1]) {
       const match = nb >= 0 && nb < n && colors[nb] === color;
-      frames.push(snap({ phase: "add-check", activeLine: 11, pythonLine: 13, index, color, old, neighbor: nb, message: `Neighbor ${nb} ${match ? "has the new color" : "does not match"}.` }));
+      frames.push(snap({ phase: "add-check", activeLine: 14, pythonLine: 13, index, color, old, neighbor: nb, message: `Neighbor ${nb} ${match ? "has the new color" : "does not match"}.` }));
       if (match) {
         count += 1;
-        frames.push(snap({ phase: "add-inc", activeLine: 12, pythonLine: 14, index, color, old, neighbor: nb, message: `Add one equal pair; count is ${count}.` }));
+        frames.push(snap({ phase: "add-inc", activeLine: 14, pythonLine: 14, index, color, old, neighbor: nb, message: `Add one equal pair; count is ${count}.` }));
       }
     }
     answer.push(count);
-    frames.push(snap({ phase: "record", activeLine: 13, pythonLine: 15, index, color, old, message: `Record count ${count}.` }));
+    frames.push(snap({ phase: "record", activeLine: 16, pythonLine: 15, index, color, old, message: `Record count ${count}.` }));
   }
-  frames.push(snap({ phase: "done", activeLine: 14, pythonLine: 16, index: null, color: null, message: `Return ${JSON.stringify(answer)}.` , result: [...answer]}));
+  frames.push(snap({ phase: "done", activeLine: 18, pythonLine: 16, index: null, color: null, message: `Return ${JSON.stringify(answer)}.` , result: [...answer]}));
   return { input, result: answer, frames };
 }

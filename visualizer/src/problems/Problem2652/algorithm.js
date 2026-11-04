@@ -8,12 +8,12 @@ export const PYTHON_LINES = [
 ];
 export const python = PYTHON_LINES.join("\n");
 export const CODE = [
-  "SUM-MULTIPLES(n)",
-  "total <- 0",
-  "for x from 1 to n",
-  "if x is divisible by 3, 5, or 7",
-  "total <- total + x",
-  "return total",
+  'function sumOfMultiples(n) {',
+  '  let total = 0',
+  '  for (let x = 1; x <= n; x++)',
+  '    if (x % 3 === 0 || x % 5 === 0 || x % 7 === 0)',
+  '      total += x',
+  '  return total }',
 ];
 export const code = CODE.map((text, index) => ({ line: index + 1, text }));
 

@@ -12,7 +12,7 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python,
   inputLabel: 'Flights and passengers as JSON',
   url: 'https://leetcode.com/problems/flight-occupancy-and-waitlist-analysis/',
-  complexity: 'Knowledge-derived walkthrough: one count per flight, then a clamp against capacity.',
+  complexity: 'Walkthrough: one count per flight, then a clamp against capacity.',
   examples: [{ label: 'Sample tables', input: JSON.stringify(sample) }],
 }
 
@@ -27,7 +27,7 @@ function RowTable({ rows }) {
 
 export default function FlightOccupancy() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <SqlStageBoard title={`${meta.title}: query stages`} stages={stagesOf(run)} active={run.frames.indexOf(step)} />} renderReasoning={() => <>
-    <p>Knowledge-derived walkthrough written for this visualizer. The sample tables are invented.</p>
+    <p>Walkthrough of the query with invented sample tables.</p>
     <p>A flight with no passengers still appears, because the join starts from the flights table.</p>
     <p>Booked seats are the smaller of the count and the capacity; the rest are waitlisted.</p>
   </>} />

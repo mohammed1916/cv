@@ -1,5 +1,6 @@
 const lines = text => text.split('\n').map((t, i) => ({ line: i + 1, text: t }))
-const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: line, activeLine: line, message, state })
+const PY_OF = {1: 5, 2: 4, 3: 5, 4: 4, 5: 7}
+const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: PY_OF[line] ?? line, activeLine: line, message, state })
 export const PHASES = [
   { id: 'setup', label: 'Setup', description: 'Read the input and prepare the model.' },
   { id: 'step', label: 'Step', description: 'Process one event or item.' },
@@ -29,15 +30,15 @@ export function buildTrace({ periodMs, cancelMs }) {
     calls.push(t)
     frames.push(frame('step', 2, `Call at ${t}ms.`, { time: t, calls: [...calls] }))
   }
-  frames.push(frame('step', 3, `Cancelled at ${cancelMs}ms; later calls are dropped.`, { time: cancelMs, calls: [...calls] }))
-  frames.push(frame('done', 4, `${calls.length} calls happened.`, { calls }))
+  frames.push(frame('step', 4, `Cancelled at ${cancelMs}ms; later calls are dropped.`, { time: cancelMs, calls: [...calls] }))
+  frames.push(frame('done', 5, `${calls.length} calls happened.`, { calls }))
   return { input: { periodMs, cancelMs }, result: calls, frames }
 }
-export const code = lines(`call the function now at time 0
-while the next scheduled time is before the cancel time
-  wait one period and call the function
-stop when the cancel function runs
-return the number of calls`)
+export const code = lines(`const calls = [0]; // call the function now at time 0
+for (let t = period; t < cancelAt; t += period) { // while the next scheduled time is before the cancel time
+  calls.push(t); // wait one period and call the function
+  // stop when the cancel function runs: the loop ends once t reaches cancelAt
+} return calls.length; // return the number of calls`)
 export const python = `def interval_calls(period, cancel_at):
     calls = []
     t = 0

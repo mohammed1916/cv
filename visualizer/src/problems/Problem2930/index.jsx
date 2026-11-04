@@ -21,6 +21,15 @@ export default function LeetRearrange() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
     <output aria-label="Step">{step.message}</output>
     <p aria-label="Current count">Strings that contain l, e, e, t so far: {step.ways}</p>
+    {step.dp && <table aria-label="Capped count states" style={{ borderCollapse: "collapse", color: "var(--text)" }}>
+      <thead><tr><th scope="col">l used (max 1)</th><th scope="col">e used (max 2)</th><th scope="col">t used (max 1)</th><th scope="col">strings in this state</th></tr></thead>
+      <tbody>{[0, 1].flatMap(l => [0, 1, 2].flatMap(e => [0, 1].map(t => {
+        const value = step.dp[(l * 3 + e) * 2 + t]
+        return <tr key={`${l}${e}${t}`} data-active={value > 0} style={{ opacity: value > 0 ? 1 : 0.5 }}>
+          <td style={{ padding: "2px 8px" }}>{l}</td><td style={{ padding: "2px 8px" }}>{e}</td><td style={{ padding: "2px 8px" }}>{t}</td><td style={{ padding: "2px 8px" }}>{value}</td>
+        </tr>
+      })))}</tbody>
+    </table>}
   </>} renderReasoning={() => <>
     <p>A string can be rearranged to contain leet exactly when it has at least one l, two e, and one t.</p>
     <p>The counts above the requirement do not matter, so each count is capped, which keeps the state space at 12.</p>

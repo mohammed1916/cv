@@ -39,16 +39,16 @@ export function buildTrace({ m, n, coordinates }) {
   return { input: { m, n, coordinates }, result: answer, matrix, frames }
 }
 
-export const code = `count blocks by number of black cells
-  set block counts to an empty map
-  for each black cell at (row, col)
-    for each 2 by 2 block that contains the cell
-      if the block lies inside the grid then add 1 to its count
-  set answer to five zeros
-  for each count in block counts
-    add 1 to answer at that count
-  set answer[0] to the total blocks minus the number of blocks in block counts
-  return answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `const counts = new Map(); // set block counts to an empty map
+for (const [row, col] of blacks) { // for each black cell at (row, col)
+  for (const [top, left] of blocksWith(row, col)) { // for each 2 by 2 block that contains the cell
+    if (top >= 0 && top <= m - 2 && left >= 0 && left <= n - 2) counts.set(\`\${top},\${left}\`, (counts.get(\`\${top},\${left}\`) ?? 0) + 1); // if the block lies inside the grid then add 1 to its count
+  }
+}
+const answer = [0, 0, 0, 0, 0]; // set answer to five zeros
+for (const c of counts.values()) answer[c] += 1; // for each count in block counts, add 1 to answer at that count
+answer[0] = (m - 1) * (n - 1) - counts.size; // set answer[0] to the total blocks minus the number of blocks in block counts
+return answer; // return answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def count_black_blocks(m, n, coordinates):

@@ -34,16 +34,21 @@ if __name__ == "__main__":
     print(closest_marked(data["n"], data["edges"], data["s"], data["marked"]))
 `
 
-export const code = `closest marked node by Dijkstra from s
-  graph ← adjacency list built from edges
-  dist[s] ← 0 and every other dist ← infinity
-  WHILE some unsettled vertex has a finite distance
-    u ← unsettled vertex with the smallest distance
-    mark u as settled
-    IF u is in marked THEN RETURN dist[u]
-    FOR each edge (u, v, w) out of u
-      IF dist[u] + w < dist[v] THEN dist[v] ← dist[u] + w
-  RETURN -1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function closestMarked(n, edges, s, marked) {
+  const graph = adjacency(n, edges); // graph ← adjacency list built from edges
+  const dist = Array(n).fill(Infinity); dist[s] = 0; // dist[s] ← 0 and every other dist ← infinity
+  const settled = new Set();
+  while (settled.size < n) { // WHILE some unsettled vertex has a finite distance
+    const u = nearestUnsettled(dist, settled); // u ← unsettled vertex with the smallest distance
+    if (u === -1) break;
+    settled.add(u); // mark u as settled
+    if (marked.includes(u)) return dist[u]; // IF u is in marked THEN RETURN dist[u]
+    for (const [v, w] of graph[u]) { // FOR each edge (u, v, w) out of u
+      if (dist[u] + w < dist[v]) dist[v] = dist[u] + w; // IF dist[u] + w < dist[v] THEN dist[v] ← dist[u] + w
+    }
+  }
+  return -1; // RETURN -1
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const L = s => {
   const index = code.findIndex(c => c.text.includes(s))

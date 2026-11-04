@@ -17,16 +17,16 @@ const PYTHON_LINES = [
 ];
 
 const CODE_LINES = [
-  "n <- length of nums",
-  "positions <- empty map from value to index list",
-  "for each index i, append i to positions[nums[i]]",
-  "answer <- n",
-  "for each value with index list idx",
-  "  worst <- 0",
-  "  for k from 0 to len(idx) - 1",
-  "    steps <- cyclic distance from idx[k] to the next index",
-  "    worst <- max(worst, steps // 2)",
-  "  answer <- min(answer, worst)",
+  "const n = nums.length",
+  "const positions = new Map()",
+  "for (let i = 0; i < n; i++) (positions.get(nums[i]) ?? positions.set(nums[i], []).get(nums[i])).push(i)",
+  "let answer = n",
+  "for (const idx of positions.values())",
+  "  let worst = 0",
+  "  for (let k = 0; k < idx.length; k++)",
+  "    const steps = (idx[(k + 1) % idx.length] - idx[k] + n) % n || n",
+  "    worst = Math.max(worst, Math.floor(steps / 2))",
+  "  answer = Math.min(answer, worst)",
   "return answer",
 ];
 

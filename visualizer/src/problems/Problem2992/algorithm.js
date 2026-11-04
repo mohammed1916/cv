@@ -1,15 +1,15 @@
 export const code = [
-  'count permutations p of 1 to n where gcd(position, p[position]) is 1',
-  '  set count to 0',
-  '  call place(1)',
-  '  return count',
-  'define place(pos)',
-  '  if pos is past n then add one to count and return',
-  '  for each value v from 1 to n that is not used',
-  '    if gcd(pos, v) is not 1 then skip v',
-  '    set p[pos] to v and mark v as used',
-  '    call place(pos + 1)',
-  '    unmark v and clear p[pos]',
+  "const used = Array(n + 1).fill(false), p = Array(n + 1) // count permutations p of 1 to n where gcd(position, p[position]) is 1",
+  "let count = 0 // set count to 0",
+  "const place = pos => { // define place(pos)",
+  "  if (pos > n) { count++; return } // if pos is past n then add one to count and return",
+  "  for (let v = 1; v <= n; v++) { // for each value v from 1 to n that is not used",
+  "    if (used[v]) continue",
+  "    if (gcd(pos, v) !== 1) continue // if gcd(pos, v) is not 1 then skip v",
+  "    p[pos] = v; used[v] = true // set p[pos] to v and mark v as used",
+  "    place(pos + 1) // call place(pos + 1)",
+  "    used[v] = false; p[pos] = undefined } } // unmark v and clear p[pos]",
+  "place(1); return count // call place(1), then return count",
 ].map((text, index) => ({ line: index + 1, text }))
 
 const L = s => {

@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough with invented sample tables.
 export const sql = `SELECT city
 FROM Listings
 GROUP BY city

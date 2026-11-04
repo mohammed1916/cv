@@ -36,7 +36,7 @@ export default function Problem2905Visualizer() {
             length={run.input.nums.length}
             valueAt={(index) => run.input.nums[index]}
             active={step.j ?? -1}
-            roleAt={(index) => (index === step.mn ? "min" : index === step.mx ? "max" : index === step.i ? "i" : "")}
+            roleAt={(index) => (index === step.j ? "j" : index === step.i ? "i" : index === step.mn ? "min" : index === step.mx ? "max" : "")}
           />
           <output aria-label="Tracked extremes">
             {`j = ${step.j ?? "-"}, min index ${step.mn}, max index ${step.mx}, result = ${JSON.stringify(step.result ?? run.result)}`}

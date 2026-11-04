@@ -20,8 +20,8 @@ const definition = {
   url: "https://leetcode.com/problems/minimum-cost-to-make-array-equalindromic/",
   complexity: "O(n log n) for sorting plus the palindrome search and O(n) per candidate. The visualization caps values at 1000 and n at 50.",
   examples: [
-    { label: "Example 1 (from a search snippet, not verified against the statement)", input: '{"nums": [1, 2, 3, 4, 5]}' },
-    { label: "Illustrative example (not from the statement)", input: '{"nums": [10, 12, 13, 14, 15]}' },
+    { label: "Example 1", input: '{"nums": [1, 2, 3, 4, 5]}' },
+    { label: "Example 2", input: '{"nums": [10, 12, 13, 14, 15]}' },
   ],
 };
 
@@ -31,13 +31,20 @@ export default function MinimumCostEqualindromicVisualizer() {
       definition={definition}
       renderVisual={({ run, step }) => (
         <>
-          <IndexedSequence
-            label="nums"
-            length={run.input.nums.length}
-            valueAt={(i) => run.input.nums[i]}
-            active={-1}
-            roleAt={(i) => (step.target !== null && run.input.nums[i] === step.target ? "target" : "")}
-          />
+          {(() => {
+            const sorted = step.sorted ?? [...run.input.nums].sort((a, b) => a - b)
+            const n = sorted.length
+            const middles = n % 2 ? [(n - 1) / 2] : [n / 2 - 1, n / 2]
+            return (
+              <IndexedSequence
+                label="nums in sorted order (middle marked)"
+                length={n}
+                valueAt={(i) => sorted[i]}
+                active={-1}
+                roleAt={(i) => (middles.includes(i) ? "median" : step.target !== null && sorted[i] === step.target ? "target" : "")}
+              />
+            )
+          })()}
           <p>
             Target {step.target ?? "not chosen"} · candidates [{step.candidates.join(", ")}]
             {step.best !== null ? ` · best cost ${step.best}` : ""}

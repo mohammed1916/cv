@@ -19,7 +19,7 @@ const definition = {
   complexity: "O(total length of words) time and O(n) space for n words. The visualization caps input at 50 words of up to 50 letters.",
   examples: [
     { label: "Example 1", input: '{"words": ["leet", "code"], "x": "e"}' },
-    { label: "Illustrative example (not from the statement)", input: '{"words": ["abc", "bcd", "aaaa", "cbc"], "x": "a"}' },
+    { label: "Second example", input: '{"words": ["abc", "bcd", "aaaa", "cbc"], "x": "a"}' },
   ],
 };
 

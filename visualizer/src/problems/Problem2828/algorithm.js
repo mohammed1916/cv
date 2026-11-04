@@ -9,10 +9,10 @@ const PYTHON_LINES = [
 ];
 
 const CODE_LINES = [
-  "if the number of words differs from length of s",
+  "if (words.length !== s.length)",
   "  return false",
-  "for i from 0 to number of words - 1",
-  "  if first letter of words[i] differs from s[i]",
+  "for (let i = 0; i < words.length; i++)",
+  "  if (words[i][0] !== s[i])",
   "    return false",
   "return true",
 ];

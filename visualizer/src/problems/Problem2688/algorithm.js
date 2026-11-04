@@ -1,10 +1,10 @@
-// Knowledge-derived SQL walkthrough. The sample table and the seven-day rule are our own teaching version.
+// SQL walkthrough. The position column is the row order in the input, which tells two identical purchases apart.
 export const sql = `SELECT DISTINCT a.user_id
 FROM Users a
 JOIN Users b
   ON a.user_id = b.user_id
- AND b.created_at > a.created_at
- AND DATEDIFF(b.created_at, a.created_at) <= 7
+ AND a.position < b.position
+ AND DATEDIFF(b.created_at, a.created_at) BETWEEN 0 AND 7
 ORDER BY a.user_id`
 
 export const code = sql.split('\n').map((text, index) => ({ line: index + 1, text }))
@@ -21,7 +21,7 @@ export const python = `def find_active_users(users):
         for i, earlier in enumerate(dates):
             for later in dates[i + 1:]:
                 gap = days_between(earlier, later)
-                if 0 < gap <= 7:
+                if 0 <= gap <= 7:
                     active.add(user)
     return [{"user_id": u} for u in sorted(active)]`
 const PY_LINES = python.split('\n')
@@ -78,10 +78,10 @@ export function buildTrace(input) {
     for (let i = 0; i < own.length; i++) {
       for (let j = i + 1; j < own.length; j++) {
         const gap = dayNumber(own[j].created_at) - dayNumber(own[i].created_at)
-        const hit = gap > 0 && gap <= 7
+        const hit = gap >= 0 && gap <= 7
         if (hit) pairs.push({ user_id: user, earlier: own[i].created_at, later: own[j].created_at, gap_days: gap })
         if (hit && !result.some(r => r.user_id === user)) result.push({ user_id: user })
-        frames.push(frame('pair', 'b.created_at >', 'for later in', hit
+        frames.push(frame('pair', 'DATEDIFF(', 'for later in', hit
           ? `User ${user}: ${own[j].created_at} is ${gap} days after ${own[i].created_at}, so the user is active.`
           : `User ${user}: a gap of ${gap} days is outside the window, so this pair does not count.`, PAIR_COLS, pairs))
       }

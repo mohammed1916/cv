@@ -1,5 +1,6 @@
 const lines = text => text.split('\n').map((t, i) => ({ line: i + 1, text: t }))
-const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: line, activeLine: line, message, state })
+const PY_OF = {1: 2, 2: 2, 3: 4, 4: 5, 5: 7}
+const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: PY_OF[line] ?? line, activeLine: line, message, state })
 export const PHASES = [
   { id: 'setup', label: 'Setup', description: 'Read the input and prepare the model.' },
   { id: 'step', label: 'Step', description: 'Process one event or item.' },
@@ -30,16 +31,16 @@ export function buildTrace({ street, start }) {
   for (let step = 0; step < street.length; step++) {
     const position = (start + step) % street.length
     if (street[position] === 1) count++
-    frames.push(frame('step', 3, `Index ${position} ${street[position] ? 'has a house' : 'is empty'}.`, { position, count }))
+    frames.push(frame('step', 4, `Index ${position} ${street[position] ? 'has a house' : 'is empty'}.`, { position, count }))
   }
   frames.push(frame('done', 5, `${count} houses on the street.`, { count }))
   return { input: { street, start }, result: count, frames }
 }
-export const code = lines(`set count to 0
-for each step around the circle from start
-  position is (start plus step) modulo the length
-  if there is a house at position then add one to count
-return count`)
+export const code = lines(`let count = 0; // set count to 0
+for (let step = 0; step < street.length; step++) { // for each step around the circle from start
+  const position = (start + step) % street.length; // position is (start plus step) modulo the length
+  if (street[position] === 1) count++; // if there is a house at position then add one to count
+} return count; // return count`)
 export const python = `def count_houses(street, start):
     count = 0
     n = len(street)

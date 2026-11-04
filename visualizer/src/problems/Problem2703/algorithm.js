@@ -1,9 +1,9 @@
 // JSON cannot express undefined, so a null in the args list stands for an explicitly passed undefined argument.
-export const code = `function argumentsLength(...args)
-  set count to 0
-  for each argument
-    add one to count
-  return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function argumentsLength(...args) {
+  let count = 0; // set count to 0
+  for (const _ of args) count += 1; // for each argument, add one to count
+  return count; // return count
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def arguments_length(*args):
     count = 0

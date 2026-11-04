@@ -1,5 +1,6 @@
 const lines = text => text.split('\n').map((t, i) => ({ line: i + 1, text: t }))
-const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: line, activeLine: line, message, state })
+const PY_OF = {1: 2, 2: 3, 3: 4, 4: 6, 5: 7}
+const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: PY_OF[line] ?? line, activeLine: line, message, state })
 export const PHASES = [
   { id: 'setup', label: 'Setup', description: 'Read the input and prepare the model.' },
   { id: 'step', label: 'Step', description: 'Process one event or item.' },
@@ -31,22 +32,22 @@ export function buildTrace({ init, ops }) {
   const frames = [frame('setup', 1, `Start with ${value}.`, { value })]
   for (const [name, arg] of ops) {
     if (name === 'divide' && arg === 0) {
-      frames.push(frame('step', 4, 'Division by zero: the chain stops.', { value, error: 'Division by zero is not allowed' }))
+      frames.push(frame('step', 3, 'Division by zero: the chain stops.', { value, error: 'Division by zero is not allowed' }))
       frames.push(frame('done', 5, 'Error result.', { value }))
       return { input: { init, ops }, result: { error: 'Division by zero is not allowed' }, frames }
     }
     const next = { add: value + arg, subtract: value - arg, multiply: value * arg, divide: value / arg, power: value ** arg }[name]
     value = next
-    frames.push(frame('step', 3, `${name} ${arg} gives ${value}.`, { op: name, arg, value }))
+    frames.push(frame('step', 4, `${name} ${arg} gives ${value}.`, { op: name, arg, value }))
   }
   frames.push(frame('done', 5, `Final value ${value}.`, { value }))
   return { input: { init, ops }, result: { value }, frames }
 }
-export const code = lines(`set value to init
-for each [name, arg] in the chain
-  if the name is divide and arg is zero then return an error
-  value becomes value combined with arg
-return value`)
+export const code = lines(`let value = init; // set value to init
+for (const [name, arg] of ops) { // for each [name, arg] in the chain
+  if (name === 'divide' && arg === 0) return 'Division by zero is not allowed'; // if the name is divide and arg is zero then return an error
+  value = apply(name, value, arg); // value becomes value combined with arg
+} return value; // return value`)
 export const python = `def chain(init, ops):
     value = init
     for name, arg in ops:

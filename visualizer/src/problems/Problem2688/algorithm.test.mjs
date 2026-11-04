@@ -18,10 +18,10 @@ function checkFrames(trace) {
 
 const SAMPLE = '{"Users":[{"user_id":1,"item":"pen","created_at":"2025-04-01","amount":10},{"user_id":1,"item":"ink","created_at":"2025-04-06","amount":4},{"user_id":2,"item":"pad","created_at":"2025-04-01","amount":7},{"user_id":2,"item":"pad","created_at":"2025-04-09","amount":3},{"user_id":3,"item":"cap","created_at":"2025-04-02","amount":9},{"user_id":3,"item":"cap","created_at":"2025-04-02","amount":2},{"user_id":4,"item":"box","created_at":"2025-04-03","amount":5},{"user_id":4,"item":"box","created_at":"2025-04-10","amount":5}]}'
 
-test('2688 sample keeps users 1 and 4 only', () => {
+test('2688 sample keeps users 1, 3 and 4 (a same-day repeat counts)', () => {
   const trace = run(SAMPLE)
   checkFrames(trace)
-  assert.deepEqual(trace.result, [{ user_id: 1 }, { user_id: 4 }])
+  assert.deepEqual(trace.result, [{ user_id: 1 }, { user_id: 3 }, { user_id: 4 }])
 })
 
 test('2688 a repeat found through a third purchase still counts', () => {
@@ -32,4 +32,10 @@ test('2688 a repeat found through a third purchase still counts', () => {
 
 test('2688 rejects a purchase without a created_at date', () => {
   assert.throws(() => parseInput('{"Users":[{"user_id":1,"item":"pen","amount":10}]}'))
+})
+
+test('2688 same-day repeat is within seven days', () => {
+  const trace = run('{"Users":[{"user_id":6,"item":"x","created_at":"2025-05-01","amount":1},{"user_id":6,"item":"x","created_at":"2025-05-01","amount":1}]}')
+  checkFrames(trace)
+  assert.deepEqual(trace.result, [{ user_id: 6 }])
 })

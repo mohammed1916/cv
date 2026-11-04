@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough with invented sample tables.
 export const sql = `WITH ranked AS (
   SELECT user_id, spend, transaction_date,
          ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY transaction_date) AS nth

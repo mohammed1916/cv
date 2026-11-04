@@ -11,24 +11,25 @@ export function buildTrace(input) {
   const chars = [...input.s]
   const positions = []
   chars.forEach((ch, i) => { if (VOWELS.includes(ch)) positions.push(i) })
-  const frames = [{ phase: 'collect', pythonLine: 3, activeLine: L('set vowel positions'), at: null, text: chars.join(''), message: `Vowel positions: ${positions.join(', ') || 'none'}.` }]
+  const frames = [{ phase: 'collect', pythonLine: 3, activeLine: L('positions.push(i)'), at: null, text: chars.join(''), message: `Vowel positions: ${positions.join(', ') || 'none'}.` }]
   const letters = positions.map(i => chars[i]).sort()
-  frames.push({ phase: 'sort', pythonLine: 4, activeLine: L('sort vowels by character code'), at: null, text: chars.join(''), sorted: letters.join(''), message: `Sorted vowels by character code: ${letters.join('') || 'none'}.` })
+  frames.push({ phase: 'sort', pythonLine: 4, activeLine: L('.sort()'), at: null, text: chars.join(''), sorted: letters.join(''), message: `Sorted vowels by character code: ${letters.join('') || 'none'}.` })
   positions.forEach((pos, k) => {
     chars[pos] = letters[k]
-    frames.push({ phase: 'write', pythonLine: 7, activeLine: L('write the sorted vowels back'), at: pos, k, text: chars.join(''), sorted: letters.join(''), message: `Position ${pos} receives ${letters[k]}.` })
+    frames.push({ phase: 'write', pythonLine: 7, activeLine: L('chars[pos] = letters[k]'), at: pos, k, text: chars.join(''), sorted: letters.join(''), message: `Position ${pos} receives ${letters[k]}.` })
   })
   const result = chars.join('')
-  frames.push({ phase: 'done', pythonLine: 8, activeLine: L('return the string'), at: null, text: result, sorted: letters.join(''), message: `Result: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 8, activeLine: L("return chars.join('')"), at: null, text: result, sorted: letters.join(''), message: `Result: ${result}.` })
   return { input, result, frames }
 }
 
-export const code = `sort the vowels in a string while keeping consonants in place
-  set vowel positions to the indexes holding vowels
-  set vowels to the vowel letters at those positions
-  sort vowels by character code
-  write the sorted vowels back into the vowel positions in order
-  return the string`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `const VOWELS = 'aeiouAEIOU'
+const positions = []
+for (let i = 0; i < s.length; i++) if (VOWELS.includes(s[i])) positions.push(i)
+const letters = positions.map(i => s[i]).sort()
+const chars = [...s]
+positions.forEach((pos, k) => { chars[pos] = letters[k] })
+return chars.join('')`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def sort_vowels(s):

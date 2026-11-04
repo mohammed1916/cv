@@ -1,5 +1,6 @@
 const lines = text => text.split('\n').map((t, i) => ({ line: i + 1, text: t }))
-const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: line, activeLine: line, message, state })
+const PY_OF = {1: 47, 2: 49, 3: 51, 4: 53}
+const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: PY_OF[line] ?? line, activeLine: line, message, state })
 export const PHASES = [
   { id: 'setup', label: 'Setup', description: 'Read the input and prepare the model.' },
   { id: 'step', label: 'Step', description: 'Process one event or item.' },
@@ -36,13 +37,13 @@ export function buildTrace(input) {
     return value
   }
   const result = walk(input, '')
-  frames.push(frame('done', 5, 'Every undefined is now null.', { result }))
+  frames.push(frame('done', 4, 'Every undefined is now null.', { result }))
   return { input, result, frames }
 }
-export const code = lines(`if the value is an undefined marker then return null
-if the value is an array then map each item through this rule
-if the value is an object then rebuild it with each field through this rule
-otherwise return the value unchanged`)
+export const code = lines(`if (value === UNDEFINED_MARKER) return null; // if the value is an undefined marker then return null
+if (Array.isArray(value)) return value.map(undefinedToNull); // if the value is an array then map each item through this rule
+if (isObject(value)) return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, undefinedToNull(v)])); // if the value is an object then rebuild it with each field through this rule
+return value; // otherwise return the value unchanged`)
 export const python = `def undefined_to_null(value):
     if is_marker(value):
         return None

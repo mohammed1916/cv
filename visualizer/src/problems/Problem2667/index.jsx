@@ -11,7 +11,7 @@ const definition = {
   python,
   inputLabel: 'Object with calls, a list of argument lists (e.g. {"calls":[[1,2],[],["x"]]})',
   url: "https://leetcode.com/problems/create-hello-world-function/",
-  complexity: "O(1) work for each call, so O(c) for c calls. The visualization caps calls at 6 with up to 4 arguments each; the draft does not verify official limits.",
+  complexity: "O(1) work for each call, so O(c) for c calls. The visualization caps calls at 6 with up to 4 arguments each; the page caps calls at 6 for teaching.",
   examples: [
     { label: "Example", input: '{"calls":[[1,2],[],["x"]]}' },
     { label: "No arguments", input: '{"calls":[[]]}' },

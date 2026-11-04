@@ -100,17 +100,17 @@ export function buildTrace(input) {
   return { input, result, frames }
 }
 
-export const code = `minimum moves to spread stones over grid
-  collect surplus stones and empty cells
-  set best to infinity and mark no cell used
-  place the next surplus stone starting from cost
-  if cost is not below best then stop this branch
-  if every surplus stone is placed then record cost as best and stop
-  for each empty cell that is still free
-  mark the cell used and add its distance to cost
-  unmark the cell after the branch is explored
-  start placing from stone 0 with cost 0
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `// minimum moves to spread stones over grid
+const surplus = grid.flat().flatMap((v, c) => Array(Math.max(0, v - 1)).fill(c)), empty = grid.flat().flatMap((v, c) => v === 0 ? [c] : [])
+let best = Infinity, used = Array(9).fill(false)
+const place = (k, cost) => { // place the next surplus stone starting from cost
+  if (cost >= best) return // if cost is not below best then stop this branch
+  if (k === surplus.length) { best = cost; return } // if every surplus stone is placed then record cost as best and stop
+  for (const e of empty) if (!used[e]) { // for each empty cell that is still free
+    used[e] = true; place(k + 1, cost + dist(surplus[k], e)) // mark the cell used and add its distance to cost
+    used[e] = false } } // unmark the cell after the branch is explored
+place(0, 0) // start placing from stone 0 with cost 0
+return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def minimumMoves(grid):
     surplus = []

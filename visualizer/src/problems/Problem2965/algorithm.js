@@ -1,10 +1,10 @@
 export const code = [
-  { line: 1, text: "Let n be the grid side and make a count for each value from 1 to n squared" },
-  { line: 2, text: "For each value in the grid, add one to its count" },
-  { line: 3, text: "For each value v from 1 to n squared" },
-  { line: 4, text: "If count of v is 2, remember v as repeated" },
-  { line: 5, text: "If count of v is 0, remember v as missing" },
-  { line: 6, text: "Return repeated and missing" },
+  { line: 1, text: "const n = grid.length, count = new Array(n * n + 1).fill(0); let repeated, missing // let n be the grid side and make a count for each value from 1 to n squared" },
+  { line: 2, text: "for (const v of grid.flat()) count[v]++ // for each value in the grid, add one to its count" },
+  { line: 3, text: "for (let v = 1; v <= n * n; v++) { // for each value v from 1 to n squared" },
+  { line: 4, text: "  if (count[v] === 2) repeated = v // if count of v is 2, remember v as repeated" },
+  { line: 5, text: "  if (count[v] === 0) missing = v } // if count of v is 0, remember v as missing" },
+  { line: 6, text: "return [repeated, missing]" },
 ]
 
 export const python = `def findMissingAndRepeatedValues(grid):

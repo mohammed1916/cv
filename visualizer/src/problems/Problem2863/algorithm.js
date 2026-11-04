@@ -2,7 +2,7 @@
 // A subarray counts when it has length at least 2 and its first value is strictly greater than its last.
 // For each left index l, scan right ends from the far end inward; the first r with nums[l] > nums[r]
 // is the longest valid subarray starting at l, so the inner scan stops there.
-// The draft gives no verified bound on the array length, so the visualization caps it at 20 values.
+// The visualization caps the array at 20 values.
 
 const MAX_VISUAL_LENGTH = 20
 
@@ -21,14 +21,14 @@ if __name__ == "__main__":
     print(max_semi_decreasing(json.loads(sys.stdin.read())))
 `
 
-export const code = `maximum length of a semi-decreasing subarray
-  n ← length of nums; best ← 0
-  FOR each left index l from 0 to n - 2
-    FOR each right index r from n - 1 down to l + 1
-      IF nums[l] > nums[r] THEN
-        best ← max(best, r - l + 1)
-        BREAK out of the r loop
-  RETURN best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `// maximum length of a semi-decreasing subarray (first value greater than last value)
+const n = nums.length, best = 0 // n ← length of nums; best ← 0
+for (let l = 0; l <= n - 2; l++) { // FOR each left index l from 0 to n - 2
+  for (let r = n - 1; r > l; r--) { // FOR each right index r from n - 1 down to l + 1
+    if (nums[l] > nums[r]) { // IF nums[l] > nums[r] THEN
+      best = Math.max(best, r - l + 1) // best ← max(best, r - l + 1)
+      break } } } // BREAK out of the r loop
+return best // RETURN best`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const L = s => {
   const index = code.findIndex(c => c.text.includes(s))

@@ -11,7 +11,7 @@ export function buildTrace(n) {
   const idx = (l, e, t) => (l * 3 + e) * 2 + t
   let dp = Array(12).fill(0)
   dp[idx(0, 0, 0)] = 1
-  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('set ways'), step: 0, ways: dp[idx(1, 2, 1)], message: 'Nothing placed yet. Track how many of l, e, and t are used, each capped at what leet needs.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('set ways'), step: 0, dp: dp.slice(), ways: dp[idx(1, 2, 1)], message: 'Nothing placed yet. Track how many of l, e, and t are used, each capped at what leet needs.' }]
   for (let step = 1; step <= n; step++) {
     const next = Array(12).fill(0)
     for (let l = 0; l < 2; l++) for (let e = 0; e < 3; e++) for (let t = 0; t < 2; t++) {
@@ -23,20 +23,31 @@ export function buildTrace(n) {
       next[idx(l, e, t)] += ways * 23
     }
     dp = next.map(v => v % MOD)
-    frames.push({ pythonLine: 17, phase: 'position', activeLine: L('for each position'), step, ways: dp[idx(1, 2, 1)], message: `After ${step} letter${step === 1 ? '' : 's'}, ${dp[idx(1, 2, 1)]} strings already contain l, e, e, and t.` })
+    frames.push({ pythonLine: 17, phase: 'position', activeLine: L('for each position'), step, dp: dp.slice(), ways: dp[idx(1, 2, 1)], message: `After ${step} letter${step === 1 ? '' : 's'}, ${dp[idx(1, 2, 1)]} strings already contain l, e, e, and t.` })
   }
   const result = dp[idx(1, 2, 1)]
   frames.push({ pythonLine: 18, phase: 'done', activeLine: L('return the ways'), step: n, ways: result, message: `Strings of length ${n} that can be rearranged to contain leet: ${result}.` })
   return { input: n, result, frames, dp }
 }
 
-export const code = `count strings of length n that can be rearranged to contain leet:
-  track how many l, e, and t letters are used, each capped at what leet needs
-  set ways for the empty state to 1
-  for each position in the string:
-    a letter l, e, or t moves its count one step toward the requirement
-    each of the other 23 letters keeps the counts unchanged
-  return the ways that reach one l, two e, and one t, modulo 1000000007`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `const idx = (l, e, t) => (l * 3 + e) * 2 + t
+let dp = Array(12).fill(0) // set ways for the empty state to 1
+dp[idx(0, 0, 0)] = 1
+for (let step = 1; step <= n; step++) { // for each position in the string
+  const next = Array(12).fill(0)
+  for (let l = 0; l < 2; l++) for (let e = 0; e < 3; e++) for (let t = 0; t < 2; t++) {
+    const w = dp[idx(l, e, t)]
+    if (w === 0) continue
+    // a letter l, e, or t moves its count one step toward the requirement
+    next[idx(Math.min(1, l + 1), e, t)] += w
+    next[idx(l, Math.min(2, e + 1), t)] += w
+    next[idx(l, e, Math.min(1, t + 1))] += w
+    // each of the other 23 letters keeps the counts unchanged
+    next[idx(l, e, t)] += w * 23
+  }
+  dp = next.map(v => v % MOD)
+}
+return dp[idx(1, 2, 1)] // return the ways that reach one l, two e, and one t, modulo 1000000007`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def count_rearrangeable(n):

@@ -28,15 +28,18 @@ export function buildTrace({ nums }) {
   return { input: { nums }, result: total, frames }
 }
 
-export const code = `count beautiful pairs
-  set seen to ten zeros, one per first digit
-  set total to 0
-  for each number x in nums in order
-    set last to the last digit of x
-    for each first digit d from 1 to 9
-      if d and last are coprime then add seen[d] to total
-    count the first digit of x in seen
-  return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function countBeautifulPairs(nums) { // count beautiful pairs
+  const seen = Array(10).fill(0); // set seen to ten zeros, one per first digit
+  let total = 0; // set total to 0
+  for (const x of nums) { // for each number x in nums in order
+    const last = x % 10; // set last to the last digit of x
+    for (let d = 1; d <= 9; d++) { // for each first digit d from 1 to 9
+      if (gcd(d, last) === 1) total += seen[d]; // if d and last are coprime then add seen[d] to total
+    }
+    seen[Number(String(x)[0])] += 1; // count the first digit of x in seen
+  }
+  return total; // return total
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def count_beautiful_pairs(nums):

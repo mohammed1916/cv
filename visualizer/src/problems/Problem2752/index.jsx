@@ -6,7 +6,7 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python,
   inputLabel: 'Transactions as JSON',
   url: 'https://leetcode.com/problems/customers-with-maximum-number-of-transactions-on-consecutive-days/',
-  complexity: 'Knowledge-derived walkthrough: one sort per customer plus streak grouping.',
+  complexity: 'One pass to find the distinct days per customer, then streak grouping.',
   examples: [{ label: 'Sample tables', input: JSON.stringify(sample) }],
 }
 
@@ -37,7 +37,7 @@ export default function ConsecutiveDays() {
     <h3>{meta.title}: working table</h3>
     <RowTable rows={step.rows} />
   </>} renderReasoning={() => <>
-    <p>Knowledge-derived walkthrough written for this visualizer. The sample tables are invented.</p>
+    <p>Each customer's distinct transaction days are grouped into runs of consecutive dates. The sample table is invented.</p>
     <p>Duplicate transactions on one day are collapsed first, so a day counts once.</p>
     <p>Subtracting the row number from the date keeps consecutive days on one shared key.</p>
   </>} />

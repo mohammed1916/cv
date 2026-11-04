@@ -11,7 +11,7 @@ const definition = {
   python,
   inputLabel: 'Object with rows, cols and start (e.g. {"rows":5,"cols":5,"start":[0,0]})',
   url: "https://leetcode.com/problems/the-knights-tour/",
-  complexity: "Backtracking with the fewest-onward-moves ordering (Warnsdorff). Worst case is exponential in the number of squares, so this visualization caps the board at 5 by 5 and stops a search that exceeds 20000 frames. Each placement checks eight moves, so one branch costs O(rows * cols). The draft does not fix the output for a board with no tour, so this version returns an empty grid in that case.",
+  complexity: "Backtracking with the fewest-onward-moves ordering (Warnsdorff). Worst case is exponential in the number of squares, so this visualization caps the board at 5 by 5 and stops a search that exceeds 20000 frames. Each placement checks eight moves, so one branch costs O(rows * cols). The statement guarantees a tour, so the empty grid shown for a board with no tour is a teaching case only.",
   examples: [
     { label: "Open tour from a corner", input: '{"rows":5,"cols":5,"start":[0,0]}' },
     { label: "Open tour from the centre", input: '{"rows":5,"cols":5,"start":[2,2]}' },

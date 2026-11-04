@@ -25,15 +25,15 @@ export function parseInput(text) {
   return { n, edges, queries }
 }
 
-export const code = `minimum changes so every edge on each query path has the same weight
-  build the tree and root it at node zero, recording each parent, depth and parent edge weight
-  let answers be an empty list
-  for each query [a, b]
-  collect the weights along the path from a up to the meeting point and from b up to it
-  count how many times each weight appears on the path
-  the path length minus the highest count is the cost
-  append the cost to answers
-  return answers`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `// minimum changes so every edge on each query path has the same weight
+const parent = [], depth = [], parentW = [] // build the tree and root it at node zero, recording each parent, depth and parent edge weight
+const answers = [] // let answers be an empty list
+for (const [a, b] of queries) { // for each query [a, b]
+  const weights = pathWeights(a, b) // collect the weights along the path from a up to the meeting point and from b up to it
+  const freq = new Map(); for (const w of weights) freq.set(w, (freq.get(w) ?? 0) + 1) // count how many times each weight appears on the path
+  answers.push(weights.length - Math.max(...freq.values())) // the path length minus the highest count is the cost
+} // append the cost to answers
+return answers // return answers`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export function buildTrace({ n, edges, queries }) {

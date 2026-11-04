@@ -22,19 +22,19 @@ const PYTHON_LINES = [
 ];
 
 const CODE_LINES = [
-  "n <- length of receiver",
-  "LOG <- bit length of k",
-  "nxt[0] <- receiver, sums[0] <- receiver",
-  "for each level j from 1 to LOG - 1",
-  "  nxt[j][i] <- nxt[j-1][ nxt[j-1][i] ] for every i",
-  "  sums[j][i] <- sums[j-1][i] + sums[j-1][ nxt[j-1][i] ] for every i",
-  "best <- 0",
-  "for each start x",
-  "  cur <- x, total <- x",
-  "  for each bit j of k, lowest first",
-  "    if bit j of k is set: total <- total + sums[j][cur]",
-  "      cur <- nxt[j][cur]",
-  "  best <- max(best, total)",
+  "const n = receiver.length",
+  "const LOG = k.toString(2).length",
+  "const nxt = [receiver.slice()], sums = [receiver.slice()]",
+  "for (let j = 1; j < LOG; j++) {",
+  "  nxt.push(nxt[j - 1].map(v => nxt[j - 1][v]))",
+  "  sums.push(sums[j - 1].map((s, i) => s + sums[j - 1][nxt[j - 1][i]])) }",
+  "let best = 0",
+  "for (let x = 0; x < n; x++) {",
+  "  let cur = x, total = x",
+  "  for (let j = 0; j < LOG; j++) {",
+  "    if (Math.floor(k / 2 ** j) % 2 === 1) { total += sums[j][cur]",
+  "      cur = nxt[j][cur] } }",
+  "  best = Math.max(best, total) }",
   "return best",
 ];
 

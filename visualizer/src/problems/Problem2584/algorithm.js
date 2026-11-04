@@ -26,31 +26,37 @@ export function buildTrace({ nums }) {
   const factors = nums.map(primesOf)
   const last = new Map()
   factors.forEach((fs, i) => fs.forEach(p => last.set(p, i)))
-  const frames = [{ phase: 'factor', pythonLine: 17, activeLine: L('for each index i, record'), index: -1, reach: -1, message: 'Recorded the last index at which each prime appears.' }]
+  const frames = [{ phase: 'factor', pythonLine: 17, activeLine: L('factors.forEach('), index: -1, reach: -1, message: 'Recorded the last index at which each prime appears.' }]
   let reach = -1
   let answer = -1
   for (let i = 0; i < nums.length - 1; i++) {
     for (const p of factors[i]) reach = Math.max(reach, last.get(p))
     if (reach <= i) {
       answer = i
-      frames.push({ phase: 'scan', pythonLine: 23, activeLine: L('if reach is at most i'), index: i, reach, message: `Primes of the prefix all end by index ${i}, so the split after ${i} works.` })
+      frames.push({ phase: 'scan', pythonLine: 23, activeLine: L('if (reach <= i) return i'), index: i, reach, message: `Primes of the prefix all end by index ${i}, so the split after ${i} works.` })
       break
     }
-    frames.push({ phase: 'scan', pythonLine: 22, activeLine: L('set reach to the larger'), index: i, reach, message: `Prefix primes last appear at index ${reach}, so split ${i} fails.` })
+    frames.push({ phase: 'scan', pythonLine: 22, activeLine: L('reach = Math.max'), index: i, reach, message: `Prefix primes last appear at index ${reach}, so split ${i} fails.` })
   }
   frames.push({ phase: 'done', pythonLine: answer === -1 ? 24 : 23, activeLine: L('return -1'), index: answer, reach, message: answer === -1 ? 'No split gives coprime products.' : `First valid split index: ${answer}.` })
   return { input: { nums }, result: answer, factors, frames }
 }
 
-export const code = `index where prefix and suffix products become coprime
-  for each index i, record i as the last index of each prime factor of nums[i]
-  set reach to -1
-  for each index i from 0 to n - 2
-    for each prime p in the prime factors of nums[i]
-      set reach to the larger of reach and last[p]
-    if reach is at most i then return i
-  return -1`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function coprimeSplitIndex(nums) {',
+  '  const factors = nums.map(primesOf)',
+  '  const last = new Map()',
+  '  factors.forEach((fs, i) => fs.forEach(p => last.set(p, i)))',
+  '  let reach = -1',
+  '  for (let i = 0; i < nums.length - 1; i++) {',
+  '    for (const p of factors[i]) reach = Math.max(reach, last.get(p))',
+  '    if (reach <= i) return i',
+  '  }',
+  '  return -1',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => { const i = CODE.findIndex(c => c.includes(s)); if (i < 0) throw new Error('missing code line: ' + s); return i + 1 }
 
 export const python = `def coprime_split_index(nums):
     def prime_factors(x):

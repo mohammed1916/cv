@@ -1,16 +1,14 @@
-const CODE = [
-  "FUNCTION longestNewString(x, y, z)",
-  "    best[i][j][state] ← most AB blocks possible, using i AA and j BB blocks",
-  "    best[0][0][empty] ← 0",
-  "    answer ← 0",
-  "    FOR i FROM 0 TO x",
-  "        FOR j FROM 0 TO y",
-  "            IF i > 0 THEN append AA from (i − 1, j) when that string does not end in AA",
-  "            IF j > 0 THEN append BB from (i, j − 1) when that string is empty or ends in AA",
-  "            IF the string here is empty or ends in BB THEN append AB blocks up to z",
-  "            answer ← max(answer, 2 × (i + j + most AB blocks))",
-  "    RETURN answer",
-];
+const CODE = `function longestNewString(x, y, z) { const START = 0, AB = 1, BB = 2, AA = 3;
+  const best = Array.from({ length: x + 1 }, () => Array.from({ length: y + 1 }, () => [-1, -1, -1, -1])); // best[i][j][state] ← most AB blocks possible, using i AA and j BB blocks
+  best[0][0][START] = 0; // best[0][0][empty] ← 0
+  let answer = 0; // answer ← 0
+  for (let i = 0; i <= x; i++) { // FOR i FROM 0 TO x
+    for (let j = 0; j <= y; j++) { // FOR j FROM 0 TO y
+      if (i > 0) for (const st of [START, AB, BB]) if (best[i - 1][j][st] >= 0) best[i][j][AA] = Math.max(best[i][j][AA], best[i - 1][j][st]); // IF i > 0 THEN append AA from (i − 1, j) when that string does not end in AA
+      if (j > 0) for (const st of [START, AA]) if (best[i][j - 1][st] >= 0) best[i][j][BB] = Math.max(best[i][j][BB], best[i][j - 1][st]); // IF j > 0 THEN append BB from (i, j − 1) when that string is empty or ends in AA
+      if (best[i][j][START] >= 0 || best[i][j][BB] >= 0) best[i][j][AB] = z; // IF the string here is empty or ends in BB THEN append AB blocks up to z
+      answer = Math.max(answer, ...best[i][j].filter(k => k >= 0).map(k => 2 * (i + j + k))); // answer ← max(answer, 2 × (i + j + most AB blocks))
+    } } return answer; } // RETURN answer`.split('\n');
 export const code = CODE.map((text, index) => ({ line: index + 1, text }));
 export const python = `def longestNewString(x, y, z):
     START, AB, BB, AA = 0, 1, 2, 3

@@ -1,12 +1,12 @@
 const CODE = [
-  "FUNCTION sumCounts(nums)",
-  "    n ← length of nums, total ← 0",
-  "    FOR each start index i from 0 to n - 1",
-  "        seen ← empty set",
-  "        FOR each end index j from i to n - 1",
-  "            add nums[j] to seen",
-  "            total ← total + (size of seen)²",
-  "    RETURN total",
+  "function sumCounts(nums) {",
+  "const n = nums.length; let total = 0",
+  "for (let i = 0; i < n; i++) {",
+  "  const seen = new Set()",
+  "  for (let j = i; j < n; j++) {",
+  "    seen.add(nums[j])",
+  "    total += seen.size ** 2 } }",
+  "return total",
 ]
 export const code = CODE.map((text, index) => ({ line: index + 1, text }))
 export const python = `def sumCounts(nums):
@@ -39,15 +39,15 @@ export function buildTrace({ nums }) {
   })
   emit('setup', 2, 2, `n = ${n}, total = 0`)
   for (let i = 0; i < n; i++) {
-    emit('start', 3, 4, `start index ${i}`, i, { [i]: 'start' })
+    emit('start', 3, 4, `start index ${i}`, i, { [i]: 'l' })
     const seen = new Set()
     emit('start', 4, 5, 'seen is empty')
     for (let j = i; j < n; j++) {
       seen.add(nums[j])
       const marks = {}
-      for (let k = i; k <= j; k++) marks[k] = 'window'
-      marks[i] = 'start'
-      marks[j] = 'end'
+      for (let k = i + 1; k < j; k++) marks[k] = 'window'
+      marks[i] = 'l'
+      marks[j] = i === j ? 'l and r' : 'r'
       emit('extend', 6, 7, `add nums[${j}] = ${nums[j]}; distinct = ${seen.size}`, j, marks)
       total += seen.size ** 2
       emit('extend', 7, 8, `add ${seen.size}² to total, now ${total}`, j, marks)

@@ -1,14 +1,18 @@
 const CODE = [
-  "FUNCTION countIncreasingQuadruplets(nums)",
-  "    n ← length(nums); total ← 0",
-  "    FOR j FROM 1 TO n − 3",
-  "        FOR k FROM j + 1 TO n − 2",
-  "            IF nums[j] > nums[k] THEN",
-  "                left ← count of i < j with nums[i] < nums[k]",
-  "                right ← count of l > k with nums[l] > nums[j]",
-  "                total ← total + left × right",
-  "    RETURN total",
-];
+  'function countIncreasingQuadruplets(nums) {',
+  '  const n = nums.length; let total = 0',
+  '  for (let j = 1; j <= n - 3; j++) {',
+  '    for (let k = j + 1; k <= n - 2; k++) {',
+  '      if (nums[j] > nums[k]) {',
+  '        const left = nums.slice(0, j).filter(v => v < nums[k]).length',
+  '        const right = nums.slice(k + 1).filter(v => v > nums[j]).length',
+  '        total += left * right',
+  '      }',
+  '    }',
+  '  }',
+  '  return total',
+  '}',
+]
 export const code = CODE.map((text, index) => ({ line: index + 1, text }));
 export const python = `def countIncreasingQuadruplets(nums):
     n = len(nums)
@@ -21,7 +25,7 @@ export const python = `def countIncreasingQuadruplets(nums):
                 total += left * right
     return total
 `;
-export const pythonLineMap = { 1: 1, 2: 2, 3: 4, 4: 5, 5: 6, 6: 7, 7: 8, 8: 9, 9: 10 };
+export const pythonLineMap = { 1: 1, 2: 2, 3: 4, 4: 5, 5: 6, 6: 7, 7: 8, 8: 9, 9: 9, 10: 9, 11: 9, 12: 10, 13: 10 };
 
 const snapshot = table => table.map(row => row.map(cell => (Array.isArray(cell) ? [...cell] : cell)));
 function emit(frames, table, info, write = false) {
@@ -64,6 +68,6 @@ export function buildTrace(input) {
       }
     }
   }
-  emit(frames, table, { phase: "result", line: 9, pythonLine: 10, row: n - 1, column: n - 1, value: total, message: `Return ${total}.` });
+  emit(frames, table, { phase: "result", line: 12, pythonLine: 10, row: n - 1, column: n - 1, value: total, message: `Return ${total}.` });
   return { input, result: total, frames, rowLabels, columnLabels };
 }

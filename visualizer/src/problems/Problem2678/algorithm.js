@@ -1,10 +1,11 @@
-export const code = [
-  { line: 1, text: "Set count to 0" },
-  { line: 2, text: "For each detail in details" },
-  { line: 3, text: "Read the age from positions 11 and 12 of the detail" },
-  { line: 4, text: "If age is greater than 60, add one to count" },
-  { line: 5, text: "Return count" },
-];
+export const code = `function countSeniors(details) {
+  let count = 0;
+  for (const detail of details) {
+    const age = Number(detail.slice(11, 13));
+    if (age > 60) count++;
+  }
+  return count;
+}`.split('\n').map((text, index) => ({ line: index + 1, text }));
 
 export const python = `def countSeniors(details):
     count = 0
@@ -55,21 +56,21 @@ export function buildTrace(input) {
   let count = 0;
   const push = (frame) => frames.push({ count, seniors: [...seniors], index: -1, age: null, checked: 0, ...frame });
 
-  push({ phase: "start", activeLine: 1, pythonLine: 2, message: "Set count to 0." });
+  push({ phase: "start", activeLine: 2, pythonLine: 2, message: "Set count to 0." });
   details.forEach((detail, index) => {
-    push({ phase: "scan", activeLine: 2, pythonLine: 3, index, checked: index, message: `Take detail ${index}: ${detail}.` });
+    push({ phase: "scan", activeLine: 3, pythonLine: 3, index, checked: index, message: `Take detail ${index}: ${detail}.` });
     const age = Number(detail.slice(11, 13));
-    push({ phase: "age", activeLine: 3, pythonLine: 4, index, age, checked: index, message: `Its age is ${age}.` });
+    push({ phase: "age", activeLine: 4, pythonLine: 4, index, age, checked: index, message: `Its age is ${age}.` });
     const senior = age > 60;
-    push({ phase: "check", activeLine: 4, pythonLine: 5, index, age, checked: index,
+    push({ phase: "check", activeLine: 5, pythonLine: 5, index, age, checked: index,
       message: senior ? `${age} is greater than 60.` : `${age} is not greater than 60.` });
     if (senior) {
       count += 1;
       seniors.push(index);
-      push({ phase: "add", activeLine: 4, pythonLine: 6, index, age, checked: index + 1, message: `Add one. Count is now ${count}.` });
+      push({ phase: "add", activeLine: 5, pythonLine: 6, index, age, checked: index + 1, message: `Add one. Count is now ${count}.` });
     }
   });
-  push({ phase: "done", activeLine: 5, pythonLine: 7, index: -1, checked: details.length, message: `Return ${count}.` });
+  push({ phase: "done", activeLine: 7, pythonLine: 7, index: -1, checked: details.length, message: `Return ${count}.` });
 
   return { input, result: count, frames };
 }

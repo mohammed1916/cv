@@ -1,10 +1,12 @@
 // Visualization caps: up to 12 integers from -99 to 99 and a chunk size from 1 to 12. The draft gives no verified bounds.
-export const code = `function chunk(arr, size)
-  set chunks to an empty list
-  for start from 0 up to the length of arr, stepping by size
-    take arr from start up to start plus size
-    append that piece to chunks
-  return chunks`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function chunk(arr, size) {
+  const chunks = []; // set chunks to an empty list
+  for (let start = 0; start < arr.length; start += size) { // for start from 0 up to the length of arr
+    const piece = arr.slice(start, start + size); // take arr from start up to start plus size
+    chunks.push(piece); // append that piece to chunks
+  }
+  return chunks; // return chunks
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def chunk(arr, size):
     chunks = []

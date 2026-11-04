@@ -38,7 +38,12 @@ export default function MakeKSubarraySumsEqualVisualizer() {
           roleAt={(index) => (step.cycleIndices.includes(index) ? `cycle ${step.start}` : "")}
         />
       )}
-      renderReasoning={({ step }) => <p>{step.message}</p>}
+      renderReasoning={({ step }) => <>
+        <p>{step.message}</p>
+        {step.cycleValues && step.cycleValues.length > 0 && <p aria-label="Sorted cycle with median">
+          Sorted cycle: [{[...step.cycleValues].sort((a, b) => a - b).map((v, i, all) => i === Math.floor(all.length / 2) ? `(${v})` : String(v)).join(', ')}]. The median, in brackets, is the target.
+        </p>}
+      </>}
     />
   );
 }

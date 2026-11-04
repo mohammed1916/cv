@@ -28,13 +28,16 @@ export function buildTrace(input) {
   return { input, result: distance, frames }
 }
 
-export const code = `total distance traveled
-  set distance to 0
-  while the main tank holds at least 5 liters
-    use 5 liters from the main tank and add 50 to distance
-    if the auxiliary tank is not empty then move 1 liter into the main tank
-  add 10 times the remaining liters in the main tank to distance
-  return distance`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function totalDistance(mainTank, additionalTank) {
+  let main = mainTank, extra = additionalTank;
+  let distance = 0; // set distance to 0
+  while (main >= 5) { // while the main tank holds at least 5 liters
+    main -= 5; distance += 50; // use 5 liters from the main tank and add 50 to distance
+    if (extra > 0) { extra--; main++; } // if the auxiliary tank is not empty then move 1 liter into the main tank
+  }
+  distance += 10 * main; // add 10 times the remaining liters in the main tank to distance
+  return distance; // return distance
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def total_distance(mainTank, additionalTank):

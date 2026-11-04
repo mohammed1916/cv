@@ -1,11 +1,14 @@
-export const code = [
-  { line: 1, text: "values = sorted copy of nums" },
-  { line: 2, text: "best = smallest of the three candidates below" },
-  { line: 3, text: "candidate one: last value minus value at index 2" },
-  { line: 4, text: "candidate two: second last value minus value at index 1" },
-  { line: 5, text: "candidate three: third last value minus value at index 0" },
-  { line: 6, text: "return best" },
+const CODE = [
+  'function minimumScore(nums) {',
+  '  const values = [...nums].sort((a, b) => a - b)',
+  '  const n = values.length',
+  '  const one = values[n - 1] - values[2]',
+  '  const two = values[n - 2] - values[1]',
+  '  const three = values[n - 3] - values[0]',
+  '  return Math.min(one, two, three)',
+  '}',
 ];
+export const code = CODE.map((text, index) => ({ line: index + 1, text }));
 
 export const python = `def minimumScore(nums):
     values = sorted(nums)
@@ -40,13 +43,13 @@ export function buildTrace(input) {
     frames.push({ phase, activeLine, pythonLine, message, values: [...values], candidate, best, pair });
   const n = nums.length;
 
-  frame("setup", 1, 2, "Original values are read, not yet sorted.");
+  frame("setup", 2, 2, "Original values are read, not yet sorted.");
   values = [...nums].sort((a, b) => a - b);
-  frame("sort", 1, 2, `Sorted values: [${values.join(", ")}].`);
+  frame("sort", 2, 2, `Sorted values: [${values.join(", ")}].`);
   const options = [
-    { name: "one", activeLine: 3, value: values[n - 1] - values[2], pair: [2, n - 1], text: `candidate one: ${values[n - 1]} minus ${values[2]}` },
-    { name: "two", activeLine: 4, value: values[n - 2] - values[1], pair: [1, n - 2], text: `candidate two: ${values[n - 2]} minus ${values[1]}` },
-    { name: "three", activeLine: 5, value: values[n - 3] - values[0], pair: [0, n - 3], text: `candidate three: ${values[n - 3]} minus ${values[0]}` },
+    { name: "one", activeLine: 4, value: values[n - 1] - values[2], pair: [2, n - 1], text: `candidate one: ${values[n - 1]} minus ${values[2]}` },
+    { name: "two", activeLine: 5, value: values[n - 2] - values[1], pair: [1, n - 2], text: `candidate two: ${values[n - 2]} minus ${values[1]}` },
+    { name: "three", activeLine: 6, value: values[n - 3] - values[0], pair: [0, n - 3], text: `candidate three: ${values[n - 3]} minus ${values[0]}` },
   ];
   best = Infinity;
   for (const option of options) {
@@ -54,8 +57,8 @@ export function buildTrace(input) {
     best = Math.min(best, option.value);
     frame("candidate", option.activeLine, 3, `${option.text} = ${option.value}.`, option.pair);
   }
-  frame("pick", 2, 3, `The smallest candidate is ${best}.`);
+  frame("pick", 7, 3, `The smallest candidate is ${best}.`);
   candidate = null;
-  frame("done", 6, 4, `Minimum score: ${best}.`);
+  frame("done", 7, 4, `Minimum score: ${best}.`);
   return { input, result: best, frames };
 }

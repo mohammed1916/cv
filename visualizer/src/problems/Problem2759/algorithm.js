@@ -1,5 +1,6 @@
 const lines = text => text.split('\n').map((t, i) => ({ line: i + 1, text: t }))
-const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: line, activeLine: line, message, state })
+const PY_OF = {1: 49, 2: 50, 3: 52, 4: 54, 5: 55}
+const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: PY_OF[line] ?? line, activeLine: line, message, state })
 export const PHASES = [
   { id: 'setup', label: 'Setup', description: 'Read the input and prepare the model.' },
   { id: 'step', label: 'Step', description: 'Process one event or item.' },
@@ -40,11 +41,11 @@ export function buildTrace(text) {
   frames.push(frame('done', 5, `Built the value; deepest nesting was ${maxDepth}.`, { maxDepth }))
   return { input: text, result, frames }
 }
-export const code = lines(`set depth to 0
-for each character
-  if it opens a bracket then increase depth
-  if it closes a bracket then decrease depth
-return the value parsed from the text`)
+export const code = lines(`let depth = 0; // set depth to 0
+for (const ch of text) { // for each character
+  if ('{['.includes(ch)) depth++; // if it opens a bracket then increase depth
+  if ('}]'.includes(ch)) depth--; } // if it closes a bracket then decrease depth
+return JSON.parse(text); // return the value parsed from the text`)
 export const python = `def parse_json(text):
     depth = 0
     for ch in text:

@@ -10,14 +10,14 @@ const PYTHON_LINES = [
 ];
 
 const CODE = [
-  "FUNCTION columnWidths(grid)",
-  "  rows = number of rows in grid",
-  "  cols = number of columns in grid",
-  "  widths = array of cols zeros",
-  "  FOR each row r from 0 to rows - 1",
-  "    FOR each column c from 0 to cols - 1",
-  "      widths[c] = MAX(widths[c], length of grid[r][c] as text)",
-  "  RETURN widths",
+  'function columnWidths(grid) {',
+  '  const rows = grid.length',
+  '  const cols = grid[0].length',
+  '  const widths = Array(cols).fill(0)',
+  '  for (let r = 0; r < rows; r++)',
+  '    for (let c = 0; c < cols; c++)',
+  '      widths[c] = Math.max(widths[c], String(grid[r][c]).length)',
+  '  return widths }',
 ];
 
 const MIN_VALUE = -1000000000;

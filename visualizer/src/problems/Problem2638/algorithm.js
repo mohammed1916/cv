@@ -1,20 +1,26 @@
 // Pseudocode lines are looked up by a phrase, so a renamed line fails loudly instead of pointing at the wrong text.
-export const code = `count subsets with no two values exactly k apart, including the empty subset
-put every value into a set called present
-set total to 1
-for each value v in increasing order
-  if v minus k is in present then skip v, since its chain starts earlier
-  set skip to 1 and take to 0 for the empty chain before v
-  set x to v
-  while x is in present
-    set skip and take to skip plus take, and skip
-    set x to x plus k
-  multiply total by skip plus take
-return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const CODE = [
+  'function countKFree(nums, k) {',
+  '  const present = new Set(nums) // put every value into a set',
+  '  let total = 1',
+  '  for (const v of [...nums].sort((a, b) => a - b)) {',
+  '    if (present.has(v - k)) continue // if v minus k is in present, skip v',
+  '    let skip = 1, take = 0 // set skip to 1 and take to 0 before v',
+  '    let x = v',
+  '    while (present.has(x)) {',
+  '      [skip, take] = [skip + take, skip] // set skip and take to skip plus take',
+  '      x += k',
+  '    }',
+  '    total *= skip + take // multiply total by skip plus take',
+  '  }',
+  '  return total // return total',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
 
 const L = phrase => {
-  const found = code.findIndex(c => c.text.includes(phrase))
-  if (found < 0) throw new Error(`Missing pseudocode line for "${phrase}"`)
+  const found = CODE.findIndex(c => c.includes(phrase))
+  if (found < 0) throw new Error(`Missing code line for "${phrase}"`)
   return found + 1
 }
 

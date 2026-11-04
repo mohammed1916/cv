@@ -50,12 +50,12 @@ export function buildTrace(rows) {
   return { input: rows, result, frames }
 }
 
-export const code = `total the orders in each six-minute interval
-  start an empty total for each interval number
-  for each row with minute m and order count c
-    interval number <- (m + 5) div 6
-    add c to the total for that interval number
-  return the totals ordered by interval number`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
+export const code = `const totals = new Map() // start an empty total for each interval number
+for (const { minute: m, order_count: c } of rows) { // for each row with minute m and order count c
+  const k = Math.floor((m + 5) / 6) // interval number <- (m + 5) div 6
+  totals.set(k, (totals.get(k) ?? 0) + c) // add c to the total for that interval number
+}
+return [...totals].sort((a, b) => a[0] - b[0]) // return the totals ordered by interval number`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
 const L = s => {
   const index = code.findIndex(c => c.text.includes(s))
   if (index < 0) throw new Error(`Missing pseudocode text: ${s}`)

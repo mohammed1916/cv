@@ -12,7 +12,7 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python,
   inputLabel: 'Users and rides as JSON',
   url: 'https://leetcode.com/problems/total-traveled-distance/',
-  complexity: 'Knowledge-derived walkthrough: one left join and one sum per user.',
+  complexity: 'Walkthrough: one left join and one sum per user.',
   examples: [{ label: 'Sample tables', input: JSON.stringify(sample) }],
 }
 
@@ -27,7 +27,7 @@ function RowTable({ rows }) {
 
 export default function TraveledDistance() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <SqlStageBoard title={`${meta.title}: query stages`} stages={stagesOf(run)} active={run.frames.indexOf(step)} />} renderReasoning={() => <>
-    <p>Knowledge-derived walkthrough written for this visualizer. The sample tables are invented.</p>
+    <p>Walkthrough of the query with invented sample tables.</p>
     <p>A left join keeps users with no rides, and their empty sum becomes zero.</p>
     <p>Sorting by user id gives a stable output order.</p>
   </>} />

@@ -12,7 +12,7 @@ const definition = {
   pythonLineMap,
   inputLabel: 'String, e.g. "abcab" (JSON string or raw text)',
   url: "https://leetcode.com/problems/count-substrings-without-repeating-character/",
-  complexity: "O(n) time with a last-seen map, O(alphabet) extra space for the window. The draft's bounds are unverified, so the visualization caps the string at 16 characters.",
+  complexity: "O(n) time with a last-seen map, O(alphabet) extra space for the window. The visualization caps the string at 16 characters.",
   examples: [
     { label: "abcab", input: JSON.stringify("abcab") },
     { label: "aaaa", input: JSON.stringify("aaaa") },

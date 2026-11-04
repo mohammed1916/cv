@@ -1,90 +1,84 @@
-const SQL = `WITH targets AS (
+// SQL walkthrough. The sample table is invented. A word counts only when it has a space on both sides.
+export const SQL = `WITH targets AS (
   SELECT 'bull' AS word
   UNION ALL SELECT 'bear'
-),
-padded AS (
-  SELECT CONCAT(' ', REPLACE(REPLACE(LOWER(content), '.', ' '), ',', ' '), ' ') AS text
-  FROM Files
 )
-SELECT t.word,
-  COALESCE(SUM((LENGTH(p.text) - LENGTH(REPLACE(p.text, CONCAT(' ', t.word, ' '), ''))) / (LENGTH(t.word) + 2)), 0) AS occurrences
+SELECT t.word, COUNT(f.file_name) AS occurrences
 FROM targets t
-LEFT JOIN padded p ON 1 = 1
+LEFT JOIN Files f
+  ON INSTR(f.content, CONCAT(' ', t.word, ' ')) > 0
 GROUP BY t.word
 ORDER BY t.word;`
 
-const PY = `import pandas as pd
+export const sql = SQL
+export const code = SQL.split('\n').map((text, index) => ({ line: index + 1, text }))
+const sqlLine = fragment => {
+  const index = code.findIndex(line => line.text.includes(fragment))
+  if (index < 0) throw new Error(`SQL has no line containing "${fragment}"`)
+  return index + 1
+}
+
+export const python = `import pandas as pd
 
 def count_occurrences(files):
     rows = []
     for word in ["bear", "bull"]:
-        total = 0
-        for content in files["content"]:
-            text = str(content).lower().replace(".", " ").replace(",", " ")
-            total += text.split().count(word)
-        rows.append({"word": word, "occurrences": total})
-    return pd.DataFrame(rows)
-`
-
-const TARGETS = ['bear', 'bull']
-const snap = rows => JSON.parse(JSON.stringify(rows))
-const SQL_LINES = SQL.split('\n')
-const PY_LINES = PY.split('\n')
-function lookup(lines, fragment, label) {
-  const index = lines.findIndex(text => text.includes(fragment))
-  if (index < 0) throw new Error(`${label} has no line containing "${fragment}"`)
+        pattern = " " + word + " "
+        matches = sum(1 for content in files["content"] if pattern in content)
+        rows.append({"word": word, "occurrences": matches})
+    return pd.DataFrame(rows)`
+const PY_LINES = python.split('\n')
+const pyLine = fragment => {
+  const index = PY_LINES.findIndex(line => line.includes(fragment))
+  if (index < 0) throw new Error(`Python has no line containing "${fragment}"`)
   return index + 1
 }
-const sqlLine = fragment => lookup(SQL_LINES, fragment, 'SQL')
-const pyLine = fragment => lookup(PY_LINES, fragment, 'Python')
-const frame = (phase, sqlFragment, pyFragment, message, rows) => ({
-  phase, activeLine: sqlLine(sqlFragment), pythonLine: pyLine(pyFragment), message, rows: snap(rows),
-})
 
-export const sql = SQL
-export const python = PY
-export const code = SQL_LINES.map((text, index) => ({ line: index + 1, text }))
 export const phases = [
   { id: 'load', label: 'Files', description: 'Each file body is the text to scan.' },
-  { id: 'normalise', label: 'Normalise', description: 'Lowercase, and turn commas and periods into spaces so words stand alone.' },
-  { id: 'count', label: 'Count', description: 'Count each target as a whole token.' },
-  { id: 'done', label: 'Result', description: 'One row per word, zero when it never appears.' },
+  { id: 'match', label: 'Match', description: 'Look for the word with a space on each side.' },
+  { id: 'count', label: 'Count', description: 'Count the files that contain the word at least once.' },
+  { id: 'done', label: 'Result', description: 'One row per word, zero when no file contains it.' },
 ]
+
+export const TARGETS = ['bull', 'bear']
 export const sample = {
   files: [
     { file_name: 'a.txt', content: 'The bull ran past the bear.' },
-    { file_name: 'b.txt', content: 'Bears and bulls, a bull market.' },
+    { file_name: 'b.txt', content: 'Bulls and bears, a bull market.' },
     { file_name: 'c.txt', content: 'Bullish outlook.' },
     { file_name: 'd.txt', content: 'Nothing here.' },
   ],
 }
 
-// Teaching rule: a word is a run of letters separated by spaces, commas or periods.
-const tokens = text => text.toLowerCase().replace(/[.,]/g, ' ').split(/\s+/).filter(Boolean)
-
 export function parseInput(text) {
   const input = JSON.parse(text)
-  if (!Array.isArray(input.files)) throw new Error('Provide a files array.')
+  if (!input || !Array.isArray(input.files) || input.files.length > 12) throw new Error('Provide a files array of at most 12 rows.')
   const names = new Set(input.files.map(f => f.file_name))
   if (names.size !== input.files.length) throw new Error('file_name must be unique.')
   for (const f of input.files) {
-    if (typeof f.content !== 'string') throw new Error(`File ${f.file_name} needs text content.`)
+    if (typeof f.file_name !== 'string' || typeof f.content !== 'string') throw new Error('Each file needs a file_name and text content.')
   }
   return input
 }
 
+const hasWord = (content, word) => content.includes(` ${word} `)
+
 export function buildTrace(input) {
   const { files } = input
   const frames = []
-  frames.push(frame('load', 'FROM Files', 'for content in files', 'Start with every file body.', files.map(f => ({ file_name: f.file_name, content: f.content }))))
-  const normalised = files.map(f => ({ file_name: f.file_name, words: tokens(f.content).join(' ') }))
-  frames.push(frame('normalise', 'REPLACE(REPLACE(LOWER', 'text = str(content)', 'Lowercase and split each file into words.', normalised))
+  const frame = (phase, sqlFragment, pyFragment, message, rows) => frames.push({
+    phase, activeLine: sqlLine(sqlFragment), pythonLine: pyLine(pyFragment), message, rows: rows.map(row => ({ ...row })),
+  })
+  frame('load', 'LEFT JOIN Files', 'for content in files', 'Start with every file body.', files.map(f => ({ file_name: f.file_name, content: f.content })))
   const result = []
   for (const word of TARGETS) {
-    const occurrences = files.reduce((sum, f) => sum + tokens(f.content).filter(t => t === word).length, 0)
+    const rows = files.map(f => ({ file_name: f.file_name, word, has: hasWord(f.content, word) ? 'yes' : 'no' }))
+    frame('match', 'INSTR(f.content', 'pattern = " "', `Look for " ${word} " (a space on each side) in each file.`, rows)
+    const occurrences = rows.filter(r => r.has === 'yes').length
     result.push({ word, occurrences })
-    frames.push(frame('count', 'SUM((LENGTH', 'rows.append', `${word} appears ${occurrences} time(s) as a whole word.`, result))
+    frame('count', 'COUNT(f.file_name)', 'matches = sum', `${word} is in ${occurrences} file${occurrences === 1 ? '' : 's'}.`, result)
   }
-  frames.push(frame('done', 'ORDER BY t.word', 'return pd.DataFrame', 'Both words listed, including any zero.', result))
+  frame('done', 'ORDER BY t.word', 'return pd.DataFrame', 'Both words are listed, including any zero.', result)
   return { input, result, frames }
 }

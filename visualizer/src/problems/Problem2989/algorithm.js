@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough with invented sample tables.
 export const sql = `WITH totals AS (
   SELECT student_id,
          assignment1 + assignment2 + assignment3 AS total_score

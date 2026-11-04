@@ -1,18 +1,17 @@
 // Pseudocode lines are looked up by a phrase, so a renamed line fails loudly instead of pointing at the wrong text.
-export const code = `find a knight's tour on a rows by cols board that starts at start
-make a board with every cell unlabelled, marked -1
-walk(start, 0)
-return the labelled board if the walk succeeds, otherwise an empty grid
-
-walk(cell, step):
-  label the cell with the step
-  if step is the last index then return true
-  list the unvisited knight moves from cell with their onward counts
-  sort the moves by fewest onward moves first
-  for each move in that order
-    if walk(move, step plus 1) then return true
-  clear the label of cell
-  return false`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function knightTour(rows, cols, start) { // find a knight's tour on a rows by cols board that starts at start
+  const board = Array.from({ length: rows }, () => Array(cols).fill(-1)); // make a board with every cell unlabelled, marked -1
+  const walk = (r, c, step) => { // walk(cell, step)
+    board[r][c] = step; // label the cell with the step
+    if (step === rows * cols - 1) return true; // if step is the last index then return true
+    const options = knightMoves(r, c, board).sort((a, b) => a.onward - b.onward); // list the unvisited knight moves from cell with their onward counts, fewest onward moves first
+    for (const move of options) { // for each move in that order
+      if (walk(move.r, move.c, step + 1)) return true; // walk(move, step plus 1)
+    }
+    board[r][c] = -1; // clear the label of cell
+    return false; };
+  return walk(start[0], start[1], 0) ? board : []; // walk(start, 0); return the labelled board if the walk succeeds, otherwise an empty grid
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const L = phrase => {
   const found = code.findIndex(c => c.text.includes(phrase))

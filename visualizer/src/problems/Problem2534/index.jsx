@@ -11,7 +11,7 @@ const definition = {
   python,
   inputLabel: 'Object with arrival (arrival times) and state (0 enter, 1 exit) per person',
   url: "https://leetcode.com/problems/time-taken-to-cross-the-door/description/",
-  complexity: "O(T * n) time for T simulated seconds and n people, O(n) space. The visualization caps people at 10 and arrival times at 0 to 20; the official bounds are not verified in this draft.",
+  complexity: "O(T * n) time for T simulated seconds and n people, O(n) space. The visualization caps people at 10 and arrival times at 0 to 20;",
   examples: [
     { label: "Example", input: '{"arrival":[0,1,1],"state":[0,1,0]}' },
     { label: "Idle gap", input: '{"arrival":[0,3,3],"state":[1,0,1]}' },

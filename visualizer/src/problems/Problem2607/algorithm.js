@@ -1,12 +1,16 @@
-export const code = [
-  { line: 1, text: "n = length of arr, g = gcd of n and k" },
-  { line: 2, text: "ops = 0" },
-  { line: 3, text: "for start from 0 to g minus 1" },
-  { line: 4, text: "cycle = values at start, start + g, start + 2g, ..." },
-  { line: 5, text: "sort cycle and set target to its median" },
-  { line: 6, text: "ops = ops + sum of absolute differences from target" },
-  { line: 7, text: "return ops" },
+const CODE = [
+  'function makeSubKSumsEqual(arr, k) {',
+  '  const n = arr.length, g = gcd(n, k)',
+  '  let ops = 0',
+  '  for (let start = 0; start < g; start++) {',
+  '    const cycle = arr.filter((_, i) => i % g === start).sort((a, b) => a - b)',
+  '    const target = cycle[Math.floor(cycle.length / 2)]',
+  '    ops += cycle.reduce((sum, x) => sum + Math.abs(x - target), 0)',
+  '  }',
+  '  return ops',
+  '}',
 ];
+export const code = CODE.map((text, index) => ({ line: index + 1, text }));
 
 export const python = `from math import gcd
 
@@ -63,23 +67,23 @@ export function buildTrace(input) {
       cycleIndices: [...cycleIndices], cycleValues: [...cycleValues], target, cost,
     });
 
-  frame("setup", 1, 4, `Array length n = ${n}.`);
+  frame("setup", 2, 4, `Array length n = ${n}.`);
   g = gcd(n, k);
-  frame("setup", 1, 5, `g = gcd(${n}, ${k}) = ${g}, so there are ${g} cycles of indices.`);
-  frame("setup", 2, 6, "No operations have been counted yet.");
+  frame("setup", 2, 5, `g = gcd(${n}, ${k}) = ${g}, so there are ${g} cycles of indices.`);
+  frame("setup", 3, 6, "No operations have been counted yet.");
   for (let s = 0; s < g; s++) {
     start = s;
-    frame("loop", 3, 7, `Cycle start ${s}.`);
+    frame("loop", 4, 7, `Cycle start ${s}.`);
     cycleIndices = [];
     for (let i = s; i < n; i += g) cycleIndices.push(i);
     cycleValues = cycleIndices.map((i) => arr[i]).sort((a, b) => a - b);
-    frame("gather", 4, 8, `Cycle ${s} holds indices [${cycleIndices.join(", ")}]; sorted values [${cycleValues.join(", ")}].`);
+    frame("gather", 5, 8, `Cycle ${s} holds indices [${cycleIndices.join(", ")}]; sorted values [${cycleValues.join(", ")}].`);
     target = cycleValues[Math.floor(cycleValues.length / 2)];
-    frame("median", 5, 9, `The median target for this cycle is ${target}.`);
+    frame("median", 6, 9, `The median target for this cycle is ${target}.`);
     cost = cycleValues.reduce((sum, value) => sum + Math.abs(value - target), 0);
     ops += cost;
-    frame("add", 6, 10, `This cycle costs ${cost}; running total is ${ops}.`);
+    frame("add", 7, 10, `This cycle costs ${cost}; running total is ${ops}.`);
   }
-  frame("done", 7, 11, `Minimum operations: ${ops}.`);
+  frame("done", 9, 11, `Minimum operations: ${ops}.`);
   return { input, result: ops, frames };
 }

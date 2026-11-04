@@ -1,5 +1,6 @@
 const lines = text => text.split('\n').map((t, i) => ({ line: i + 1, text: t }))
-const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: line, activeLine: line, message, state })
+const PY_OF = {1: 68, 2: 70, 3: 78, 4: 80, 5: 81, 6: 83, 7: 83}
+const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: PY_OF[line] ?? line, activeLine: line, message, state })
 export const PHASES = [
   { id: 'setup', label: 'Setup', description: 'Read the two values and prepare the merge.' },
   { id: 'step', label: 'Step', description: 'Decide, for one position, which value wins or whether to recurse.' },
@@ -54,16 +55,16 @@ export function buildTrace({ a, b }) {
     return y
   }
   const result = merge(a, b, '')
-  frames.push(frame('done', 8, 'Merged value ready.', { path: '(top)', origin: 'done', result }))
+  frames.push(frame('done', 7, 'Merged value ready.', { path: '(top)', origin: 'done', result }))
   return { input: { a, b }, result, frames }
 }
-export const code = lines(`if both values are arrays then merge them index by index
-  the result is as long as the longer array
-if both values are objects then merge them key by key
-  keys from either object are kept
-  a key on both sides is merged again
-otherwise the result is the value from b
-return the merged value`)
+export const code = lines(`if (Array.isArray(a) && Array.isArray(b)) { // if both values are arrays then merge them index by index
+  return Array.from({ length: Math.max(a.length, b.length) }, (_, i) => merge(a[i], b[i])); } // the result is as long as the longer array
+if (isObject(a) && isObject(b)) { // if both values are objects then merge them key by key
+  const keys = new Set([...Object.keys(a), ...Object.keys(b)]); // keys from either object are kept
+  return Object.fromEntries([...keys].map(k => [k, k in a && k in b ? merge(a[k], b[k]) : (k in a ? a[k] : b[k])])); } // a key on both sides is merged again
+return b; // otherwise the result is the value from b
+// return the merged value`)
 export const python = `def deep_merge(a, b):
     if isinstance(a, list) and isinstance(b, list):
         out = []

@@ -1,16 +1,16 @@
 const CODE = [
-  "FUNCTION minGroups(nums)",
-  "    counts ← occurrence count of each distinct value",
-  "    m ← smallest count",
-  "    best ← infinity",
-  "    FOR each group size s from m down to 1",
-  "        groups ← 0, possible ← true",
-  "        FOR each count c",
-  "            t ← ceil(c / (s + 1))",
-  "            IF t * s > c, possible ← false",
-  "            groups ← groups + t",
-  "        IF possible, best ← min(best, groups)",
-  "    RETURN best",
+  "function minGroups(nums) {",
+  "const counts = [...nums.reduce((m, v) => m.set(v, (m.get(v) ?? 0) + 1), new Map()).values()]",
+  "const m = Math.min(...counts)",
+  "let best = Infinity",
+  "for (let s = m; s >= 1; s--) {",
+  "  let groups = 0, possible = true",
+  "  for (const c of counts) {",
+  "    const t = Math.ceil(c / (s + 1))",
+  "    if (t * s > c) possible = false",
+  "    groups += t }",
+  "  if (possible) best = Math.min(best, groups) }",
+  "return best",
 ]
 export const code = CODE.map((text, index) => ({ line: index + 1, text }))
 export const python = `from collections import Counter

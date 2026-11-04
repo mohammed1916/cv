@@ -1,9 +1,8 @@
-export const code = [
-  { line: 1, text: "Set end to the length of num" },
-  { line: 2, text: "While end is above 0 and the character before end is zero" },
-  { line: 3, text: "Move end one step left" },
-  { line: 4, text: "Return num from the start up to end" },
-];
+export const code = `function removeTrailingZeros(num) {
+  let end = num.length; // set end to the length of num
+  while (end > 0 && num[end - 1] === '0') end--; // while end is above 0 and the character before end is zero, move end one step left
+  return num.slice(0, end); // return num from the start up to end
+}`.split('\n').map((text, index) => ({ line: index + 1, text }));
 
 export const python = `def removeTrailingZeros(num):
     end = len(num)
@@ -43,11 +42,11 @@ export function buildTrace(input) {
   let end = num.length;
   const push = (frame) => frames.push({ end, index: -1, ...frame });
 
-  push({ phase: "start", activeLine: 1, pythonLine: 2, message: `Set end to ${end}, the length of num.` });
+  push({ phase: "start", activeLine: 2, pythonLine: 2, message: `Set end to ${end}, the length of num.` });
   while (true) {
     const isZero = end > 0 && num[end - 1] === "0";
     if (end > 0) {
-      push({ phase: "scan", activeLine: 2, pythonLine: 3, index: end - 1,
+      push({ phase: "scan", activeLine: 3, pythonLine: 3, index: end - 1,
         message: isZero ? `Character ${end - 1} is 0, so keep scanning.` : `Character ${end - 1} is ${num[end - 1]}, so stop.` });
     }
     if (!isZero) break;

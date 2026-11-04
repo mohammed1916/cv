@@ -1,5 +1,6 @@
 const lines = text => text.split('\n').map((t, i) => ({ line: i + 1, text: t }))
-const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: line, activeLine: line, message, state })
+const PY_OF = {1: 2, 2: 3, 3: 6, 4: 8, 5: 9}
+const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: PY_OF[line] ?? line, activeLine: line, message, state })
 export const PHASES = [
   { id: 'setup', label: 'Setup', description: 'Read the input and prepare the model.' },
   { id: 'step', label: 'Step', description: 'Process one event or item.' },
@@ -33,7 +34,7 @@ export function buildTrace({ key, items }) {
     while (j > 0 && list[j - 1][key] > current[key]) {
       list[j] = list[j - 1]
       j--
-      frames.push(frame('step', 4, `${list[j].id} is larger, so it moves right.`, { list: list.map(x => x.id) }))
+      frames.push(frame('step', 3, `${list[j].id} is larger, so it moves right.`, { list: list.map(x => x.id) }))
     }
     list[j] = current
   }
@@ -41,11 +42,11 @@ export function buildTrace({ key, items }) {
   frames.push(frame('done', 5, 'Sorted by the key.', { order: ids }))
   return { input: { key, items }, result: list, frames }
 }
-export const code = lines(`start with the first item as the sorted part
-for each later item called current
-  move left while the item before has a larger key
-  place current in the gap
-return the items in sorted order`)
+export const code = lines(`const list = [items[0]]; // start with the first item as the sorted part
+for (const current of items.slice(1)) { // for each later item called current
+  let j = list.length; while (j > 0 && list[j - 1][key] > current[key]) j--; // move left while the item before has a larger key
+  list.splice(j, 0, current); // place current in the gap
+} return list; // return the items in sorted order`)
 export const python = `def sort_by(items, key):
     for i in range(1, len(items)):
         current = items[i]

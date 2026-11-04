@@ -7,10 +7,10 @@ const PYTHON_LINES = [
 ];
 
 const CODE_LINES = [
-  "left <- number of 'L' in moves",
-  "right <- number of 'R' in moves",
-  "free <- number of '_' in moves",
-  "return |left - right| + free",
+  "const left = [...moves].filter(c => c === 'L').length",
+  "const right = [...moves].filter(c => c === 'R').length",
+  "const free = [...moves].filter(c => c === '_').length",
+  "return Math.abs(left - right) + free",
 ];
 
 export const python = PYTHON_LINES.join("\n");

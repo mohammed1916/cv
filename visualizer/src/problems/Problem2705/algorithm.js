@@ -1,17 +1,16 @@
 // Visualization caps: the JSON value has at most 4 levels of nesting and 30 entries in total.
 // Falsy means null, false, 0 or "". Empty objects and arrays are truthy and are kept.
-export const code = `function compact(value)
-  if value is a list then
-    set out to an empty list
-    for each element
-      if element is truthy then append compact(element) to out
-    return out
-  if value is an object then
-    set out to an empty object
-    for each key and item
-      if item is truthy then set out[key] to compact(item)
-    return out
-  return value`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function compact(value) {
+  if (Array.isArray(value)) { // if value is a list then
+    const out = []; // set out to an empty list
+    for (const element of value) if (truthy(element)) out.push(compact(element)); // if element is truthy then append compact(element) to out
+    return out; }
+  if (value !== null && typeof value === 'object') { // if value is an object then
+    const out = {}; // set out to an empty object
+    for (const [key, item] of Object.entries(value)) if (truthy(item)) out[key] = compact(item); // if item is truthy then set out[key] to compact(item)
+    return out; }
+  return value; // return value
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def truthy(v):
     return not (v is None or v is False or v == 0 or v == "")

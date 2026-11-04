@@ -39,19 +39,30 @@ export function buildTrace({ low, high, k }) {
   const upper = upTo(high, high)
   const lower = upTo(low - 1, low - 1)
   const result = upper - lower
-  frames.push({ phase: 'done', pythonLine: 29, activeLine: L('return count(high)'), bound: '', total: result, message: `${upper} minus ${lower} gives ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 29, activeLine: L('return countBeautiful(high)'), bound: '', total: result, message: `${upper} minus ${lower} gives ${result}.` })
   return { input: { low, high, k }, result, frames }
 }
 
-export const code = `count beautiful integers in [low, high]: equal even and odd digit counts, and divisible by k
-define count(X) as the number of beautiful integers from 1 to X
-walk the digits of X with state (position, even minus odd, remainder mod k, tight, started)
-for each digit d up to the current limit do
-  if the number has not started and d is 0 then keep it unstarted
-  otherwise add d: an even digit adds 1 to the difference, an odd digit subtracts 1, and the remainder becomes (10 * rem + d) mod k
-memoize each state so repeated states are counted once
-at the end count the state when started, the difference is 0 and the remainder is 0
-return count(high) minus count(low - 1)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `// count beautiful integers in [low, high]: equal even and odd digit counts, divisible by k
+const countBeautiful = x => {
+  const digits = [...String(x)].map(Number), memo = new Map()
+  const go = (pos, diff, rem, tight, started) => {
+    if (pos === digits.length) return started && diff === 0 && rem === 0 ? 1 : 0
+    const key = [pos, diff, rem, tight, started].join(',')
+    if (memo.has(key)) return memo.get(key)
+    let total = 0
+    const limit = tight ? digits[pos] : 9
+    for (let d = 0; d <= limit; d++) { // for each digit d
+      const nextTight = tight && d === limit
+      if (!started && d === 0) total += go(pos + 1, 0, 0, nextTight, false)
+      else total += go(pos + 1, diff + (d % 2 === 0 ? 1 : -1), (rem * 10 + d) % k, nextTight, true)
+    }
+    memo.set(key, total)
+    return total
+  }
+  return go(0, 0, 0, true, false)
+}
+return countBeautiful(high) - countBeautiful(low - 1)`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def count_beautiful(low, high, k):

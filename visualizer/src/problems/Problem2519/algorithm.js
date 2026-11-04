@@ -1,11 +1,13 @@
 const CODE = [
-  'FUNCTION countKBig(nums, k)',
-  '    n ← length of nums ; count ← 0',
-  '    FOR each index i from 0 to n - 1',
-  '        before ← number of j < i with nums[j] < nums[i]',
-  '        after ← number of j > i with nums[j] < nums[i]',
-  '        IF before ≥ k AND after ≥ k THEN count ← count + 1',
-  '    RETURN count',
+  'function countKBig(nums, k) {',
+  '  const n = nums.length; let count = 0',
+  '  for (let i = 0; i < n; i++) {',
+  '    const before = nums.slice(0, i).filter(v => v < nums[i]).length',
+  '    const after = nums.slice(i + 1).filter(v => v < nums[i]).length',
+  '    if (before >= k && after >= k) count++',
+  '  }',
+  '  return count',
+  '}',
 ]
 
 const PY = [
@@ -49,7 +51,7 @@ export function buildTrace({ nums, k }) {
   const n = nums.length
   let count = 0
   const frames = []
-  frames.push({ pythonLine: pyLine('count = 0'), phase: 'start', activeLine: codeLine('n ← length of nums ; count ← 0'), i: null, before: [], after: [], count, k, message: `Look for indices with at least ${k} strictly smaller values on each side.` })
+  frames.push({ pythonLine: pyLine('count = 0'), phase: 'start', activeLine: codeLine('const n = nums.length; let count = 0'), i: null, before: [], after: [], count, k, message: `Look for indices with at least ${k} strictly smaller values on each side.` })
   const befores = [], afters = []
   for (let i = 0; i < n; i++) {
     let before = 0, after = 0
@@ -57,12 +59,12 @@ export function buildTrace({ nums, k }) {
     for (let j = i + 1; j < n; j++) if (nums[j] < nums[i]) after++
     befores.push(before)
     afters.push(after)
-    frames.push({ pythonLine: pyLine('after = sum(1 for j in range(i + 1, n) if nums[j] < nums[i])'), phase: 'count', activeLine: codeLine('after ← number of j > i with nums[j] < nums[i]'), i, before: [...befores], after: [...afters], count, k, message: `Index ${i} (value ${nums[i]}): ${before} smaller before, ${after} smaller after.` })
+    frames.push({ pythonLine: pyLine('after = sum(1 for j in range(i + 1, n) if nums[j] < nums[i])'), phase: 'count', activeLine: codeLine('const after = nums.slice(i + 1).filter(v => v < nums[i]).length'), i, before: [...befores], after: [...afters], count, k, message: `Index ${i} (value ${nums[i]}): ${before} smaller before, ${after} smaller after.` })
     const big = before >= k && after >= k
     if (big) count += 1
-    frames.push({ pythonLine: pyLine('if before >= k and after >= k:'), phase: 'decide', activeLine: codeLine('IF before ≥ k AND after ≥ k THEN count ← count + 1'), i, before: [...befores], after: [...afters], count, k, big, message: big ? `Index ${i} is ${k}-big. Count ${count}.` : `Index ${i} is not ${k}-big.` })
+    frames.push({ pythonLine: pyLine('if before >= k and after >= k:'), phase: 'decide', activeLine: codeLine('if (before >= k && after >= k) count++'), i, before: [...befores], after: [...afters], count, k, big, message: big ? `Index ${i} is ${k}-big. Count ${count}.` : `Index ${i} is not ${k}-big.` })
   }
-  frames.push({ pythonLine: pyLine('return count'), phase: 'done', activeLine: codeLine('RETURN count'), i: null, before: [...befores], after: [...afters], count, k, message: `${count} k-big ind${count === 1 ? 'ex' : 'ices'}.` })
+  frames.push({ pythonLine: pyLine('return count'), phase: 'done', activeLine: codeLine('return count'), i: null, before: [...befores], after: [...afters], count, k, message: `${count} k-big ind${count === 1 ? 'ex' : 'ices'}.` })
   return { input: { nums, k }, result: count, frames }
 }
 

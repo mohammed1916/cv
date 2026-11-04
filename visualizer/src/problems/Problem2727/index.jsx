@@ -11,7 +11,7 @@ const definition = {
   python,
   inputLabel: "JSON object or array (e.g. {\"a\":null})",
   url: "https://leetcode.com/problems/is-object-empty/",
-  complexity: "O(1) time for the count of a list and O(k) time to count k keys of an object. The visualization caps the top level at 12 keys or elements; the draft does not verify official limits.",
+  complexity: "O(1) time for the count of a list and O(k) time to count k keys of an object. The visualization caps the top level at 12 keys or elements; the page keeps the input small for teaching.",
   examples: [
     { label: "Empty object", input: "{}" },
     { label: "Null value is a key", input: '{"a":null}' },

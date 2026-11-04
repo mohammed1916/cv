@@ -1,10 +1,12 @@
 const CODE = [
-  'FUNCTION evenProductSubarrays(nums)',
-  '    count ← 0 ; lastEven ← -1',
-  '    FOR i from 0 to n - 1',
-  '        IF nums[i] is even THEN lastEven ← i',
-  '        count ← count + lastEven + 1   (subarrays ending at i that contain an even value)',
-  '    RETURN count',
+  'function evenProductSubarrays(nums) {',
+  '  let count = 0, lastEven = -1',
+  '  for (let i = 0; i < nums.length; i++) {',
+  '    if (nums[i] % 2 === 0) lastEven = i',
+  '    count += lastEven + 1',
+  '  }',
+  '  return count',
+  '}',
 ]
 
 const PY = [
@@ -44,17 +46,17 @@ export function buildTrace(nums) {
   let count = 0
   let lastEven = -1
   const frames = []
-  frames.push({ pythonLine: pyLine('last_even = -1'), phase: 'start', activeLine: codeLine('count ← 0 ; lastEven ← -1'), i: null, lastEven, added: 0, count, message: 'No subarray is counted yet. No even value has been seen.' })
+  frames.push({ pythonLine: pyLine('last_even = -1'), phase: 'start', activeLine: codeLine('let count = 0, lastEven = -1'), i: null, lastEven, added: 0, count, message: 'No subarray is counted yet. No even value has been seen.' })
   nums.forEach((v, i) => {
     const even = v % 2 === 0
     if (even) lastEven = i
     const added = lastEven + 1
     count += added
-    frames.push({ pythonLine: pyLine(even ? 'last_even = i' : 'count += last_even + 1'), phase: even ? 'even' : 'odd', activeLine: codeLine(even ? 'IF nums[i] is even THEN lastEven ← i' : 'count ← count + lastEven + 1   (subarrays ending at i that contain an even value)'), i, lastEven, added, count, message: even
+    frames.push({ pythonLine: pyLine(even ? 'last_even = i' : 'count += last_even + 1'), phase: even ? 'even' : 'odd', activeLine: codeLine(even ? 'if (nums[i] % 2 === 0) lastEven = i' : 'count += lastEven + 1'), i, lastEven, added, count, message: even
       ? `${v} is even, so all ${added} subarrays ending at index ${i} have an even product. Total ${count}.`
       : `${v} is odd. Subarrays ending at ${i} start at 0 to ${lastEven} to contain an even value: ${added} of them. Total ${count}.` })
   })
-  frames.push({ pythonLine: pyLine('return count'), phase: 'done', activeLine: codeLine('RETURN count'), i: null, lastEven, added: 0, count, message: `${count} subarray${count === 1 ? '' : 's'} have an even product.` })
+  frames.push({ pythonLine: pyLine('return count'), phase: 'done', activeLine: codeLine('return count'), i: null, lastEven, added: 0, count, message: `${count} subarray${count === 1 ? '' : 's'} have an even product.` })
   return { input: nums, result: count, frames }
 }
 

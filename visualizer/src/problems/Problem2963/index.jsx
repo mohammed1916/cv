@@ -1,3 +1,4 @@
+import IndexedSequence from "../../components/shared/IndexedSequence";
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
 import RecurrenceGrid from "../../components/shared/RecurrenceGrid";
 import { code, python, pythonLineMap, parseInput, buildTrace } from "./algorithm";
@@ -30,10 +31,15 @@ const cellText = value => Array.isArray(value) ? `{${value.join(", ")}}` : value
 export default function Problem2963() {
   return <AlgorithmWorkspace
     definition={definition}
-    renderVisual={({ run, step }) => <RecurrenceGrid
+    renderVisual={({ run, step }) => <>
+      <IndexedSequence label="nums (segment l..r is the piece being tested)" length={run.input.nums.length}
+        valueAt={i => String(run.input.nums[i])} active={step.r ?? -1}
+        roleAt={i => step.l !== null && step.l !== undefined && i === step.l ? "l" : i === step.r ? "r" : step.l !== null && step.l !== undefined && i > step.l && i < step.r ? "window" : ""} />
+      <RecurrenceGrid
       rowLabels={run.rowLabels} columnLabels={run.columnLabels}
       row={step.row} column={step.column} label="DP table"
       valueAt={(r, c) => cellText(step.table[r][c])}
-      roleAt={(r, c) => r === step.row && c === step.column ? "current" : step.table[r][c] !== null ? "filled" : ""} />}
+      roleAt={(r, c) => r === step.row && c === step.column ? "current" : step.table[r][c] !== null ? "filled" : ""} />
+    </>}
     renderReasoning={({ step }) => <p>{step.message}</p>} />;
 }

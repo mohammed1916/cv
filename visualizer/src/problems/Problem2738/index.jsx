@@ -6,7 +6,7 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, sql, python,
   inputLabel: 'Files as JSON',
   url: 'https://leetcode.com/problems/count-occurrences-in-text/',
-  complexity: 'Knowledge-derived walkthrough: one pass over each file’s words per target.',
+  complexity: 'One substring check per file and per target word, so O(files × targets) checks on the file text.',
   examples: [{ label: 'Sample tables', input: JSON.stringify(sample) }],
 }
 
@@ -37,8 +37,8 @@ export default function CountOccurrences() {
     <h3>{meta.title}: working table</h3>
     <RowTable rows={step.rows} />
   </>} renderReasoning={() => <>
-    <p>Knowledge-derived walkthrough written for this visualizer. The sample tables are invented.</p>
-    <p>Words are compared as whole tokens, so “bulls” and “bullish” do not count as “bull”.</p>
-    <p>Both target words are returned, so a word that never appears still gets a zero row.</p>
+    <p>A file counts for a word only when the word has a space on both sides, so “bulls”, “bullish” and a word followed by a period do not match.</p>
+    <p>Each word is counted once per file that contains it, so the result is the number of files, not the number of matches inside a file.</p>
+    <p>Both target words are returned, so a word that never appears still gets a zero row. The sample table is invented.</p>
   </>} />
 }

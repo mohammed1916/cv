@@ -1,5 +1,6 @@
 const lines = text => text.split('\n').map((t, i) => ({ line: i + 1, text: t }))
-const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: line, activeLine: line, message, state })
+const PY_OF = {1: 54, 2: 55, 3: 56, 4: 57, 5: 60, 6: 61, 7: 62}
+const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: PY_OF[line] ?? line, activeLine: line, message, state })
 export const PHASES = [
   { id: 'setup', label: 'Setup', description: 'Read the input and prepare the model.' },
   { id: 'step', label: 'Step', description: 'Process one event or item.' },
@@ -43,13 +44,13 @@ export function buildTrace({ arr, target }) {
   frames.push(frame('done', 7, result === -1 ? 'No copy of the target.' : `Last copy is at index ${result}.`, { boundary: lo, result }))
   return { input: { arr, target }, result, frames }
 }
-export const code = lines(`set lo to 0 and hi to the length
-while lo is less than hi
-  mid is the middle of lo and hi
-  if arr[mid] is at most target then lo = mid plus one
-  otherwise hi = mid
-if the item before lo equals target return its index
-return -1`)
+export const code = lines(`let lo = 0, hi = arr.length; // set lo to 0 and hi to the length
+while (lo < hi) { // while lo is less than hi
+  const mid = (lo + hi) >> 1; // mid is the middle of lo and hi
+  if (arr[mid] <= target) lo = mid + 1; // if arr[mid] is at most target then lo = mid plus one
+  else hi = mid; } // otherwise hi = mid
+if (lo > 0 && arr[lo - 1] === target) return lo - 1; // if the item before lo equals target return its index
+return -1; // return -1`)
 export const python = `def last_index(arr, target):
     lo, hi = 0, len(arr)
     while lo < hi:

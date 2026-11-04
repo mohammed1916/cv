@@ -8,11 +8,11 @@ const PYTHON_LINES = [
 ];
 
 const CODE_LINES = [
-  "dx <- |fx - sx|",
-  "dy <- |fy - sy|",
-  "if the start equals the finish",
-  "  return t is not 1",
-  "return max(dx, dy) is at most t",
+  "const dx = Math.abs(fx - sx)",
+  "const dy = Math.abs(fy - sy)",
+  "if (dx === 0 && dy === 0)",
+  "  return t !== 1",
+  "return Math.max(dx, dy) <= t",
 ];
 
 export const python = PYTHON_LINES.join("\n");

@@ -1,10 +1,13 @@
-export const code = [
-  { line: 1, text: "answer = empty list" },
-  { line: 2, text: "for each value in nums in order" },
-  { line: 3, text: "for each digit of value from left to right" },
-  { line: 4, text: "append digit to answer" },
-  { line: 5, text: "return answer" },
+const CODE = [
+  'function separateDigits(nums) {',
+  '  const answer = []',
+  '  for (const value of nums) {',
+  '    for (const digit of String(value)) answer.push(Number(digit))',
+  '  }',
+  '  return answer',
+  '}',
 ];
+export const code = CODE.map((text, index) => ({ line: index + 1, text }));
 
 export const python = `def separateDigits(nums):
     answer = []
@@ -46,20 +49,20 @@ export function buildTrace(input) {
       current, answer: [...answer],
     });
 
-  frame("setup", 1, 2, "The answer starts as an empty list.");
+  frame("setup", 2, 2, "The answer starts as an empty list.");
   for (let i = 0; i < nums.length; i++) {
     valueIndex = i;
     current = nums[i];
-    frame("scan", 2, 3, `Take the value ${current} from nums.`);
+    frame("scan", 3, 3, `Take the value ${current} from nums.`);
     const digits = String(current);
     for (let d = 0; d < digits.length; d++) {
       digitIndex = d;
-      frame("digit", 3, 4, `Next digit of ${current} is ${digits[d]}.`);
+      frame("digit", 4, 4, `Next digit of ${current} is ${digits[d]}.`);
       answer.push(Number(digits[d]));
       frame("append", 4, 5, `Append ${digits[d]}; answer now has ${answer.length} digits.`);
     }
     digitIndex = -1;
   }
-  frame("done", 5, 6, `Separated ${answer.length} digits in total.`);
+  frame("done", 6, 6, `Separated ${answer.length} digits in total.`);
   return { input, result: answer, frames };
 }

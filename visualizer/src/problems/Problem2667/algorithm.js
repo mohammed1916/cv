@@ -1,6 +1,6 @@
-export const code = `function createHelloWorld()
-  return a new function that takes any arguments
-    return the string Hello World`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function createHelloWorld() {
+  return (...args) => 'Hello World'; // return a new function that takes any arguments and, when called, will return the string Hello World
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def create_hello_world():
     def hello(*args):

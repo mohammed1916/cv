@@ -9,13 +9,14 @@ const PYTHON_LINES = [
 ];
 
 const CODE = [
-  "FUNCTION rowAndMaximumOnes(mat)",
-  "  best_row = 0, best_count = -1",
-  "  FOR each row index i from 0 to number of rows - 1",
-  "    count = number of ones in mat[i]",
-  "    IF count > best_count",
-  "      best_row = i, best_count = count",
-  "  RETURN [best_row, best_count]",
+  'function rowAndMaximumOnes(mat) {',
+  '  let bestRow = 0, bestCount = -1',
+  '  for (let i = 0; i < mat.length; i++) {',
+  '    const count = mat[i].reduce((sum, x) => sum + x, 0)',
+  '    if (count > bestCount) [bestRow, bestCount] = [i, count]',
+  '  }',
+  '  return [bestRow, bestCount]',
+  '}',
 ];
 
 const MAX_DIMENSION = 100;
@@ -98,7 +99,7 @@ export function buildTrace(input) {
     if (better) {
       bestRow = i;
       bestCount = count;
-      frames.push(makeFrame({ phase: "update", activeLine: 6, pythonLine: 6, mat, counts, i, count, bestRow, bestCount,
+      frames.push(makeFrame({ phase: "update", activeLine: 5, pythonLine: 6, mat, counts, i, count, bestRow, bestCount,
         updated: true,
         message: `Best is now row ${bestRow} with ${bestCount} ones.` }));
     }

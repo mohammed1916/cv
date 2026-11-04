@@ -1,11 +1,11 @@
 const CODE = [
-  "FUNCTION minimumSteps(s)",
-  "    ones ← 0",
-  "    steps ← 0",
-  "    FOR each character ch in s",
-  "        IF ch is '1', ones ← ones + 1",
-  "        ELSE steps ← steps + ones",
-  "    RETURN steps",
+  "function minimumSteps(s) {",
+  "let ones = 0",
+  "let steps = 0",
+  "for (const ch of s) {",
+  "  if (ch === '1') ones++",
+  "  else steps += ones",
+  "return steps }",
 ]
 export const code = CODE.map((text, index) => ({ line: index + 1, text }))
 export const python = `def minimumSteps(s):

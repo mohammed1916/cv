@@ -1,0 +1,6 @@
+.chain-factor { display: grid; gap: 10px; color: var(--text); }
+.chain-factor__chain { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.chain-factor__value { min-width: 44px; padding: 8px 10px; text-align: center; border: 2px solid var(--border); border-radius: 10px; background: var(--surface2); font-variant-numeric: tabular-nums; font-weight: 700; }
+.chain-factor__value--current { border-color: var(--primary); outline: 3px solid var(--primary); outline-offset: 1px; }
+.chain-factor__factors { margin: 0; font-family: monospace; font-size: 14px; }
+.chain-factor__note { margin: 0; font-size: 13px; color: var(--text-muted); }

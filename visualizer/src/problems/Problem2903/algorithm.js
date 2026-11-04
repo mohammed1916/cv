@@ -11,12 +11,12 @@ const PYTHON_LINES = [
 export const python = PYTHON_LINES.join("\n");
 
 export const code = [
-  { line: 1, text: "Read n as the length of nums" },
-  { line: 2, text: "For each index i from 0 to n - 1" },
-  { line: 3, text: "For each index j from 0 to n - 1" },
-  { line: 4, text: "If |i - j| >= indexDifference and |nums[i] - nums[j]| >= valueDifference" },
-  { line: 5, text: "Return [i, j]" },
-  { line: 6, text: "Return [-1, -1]" },
+  { line: 1, text: "const n = nums.length" },
+  { line: 2, text: "for (let i = 0; i < n; i++)" },
+  { line: 3, text: "  for (let j = 0; j < n; j++)" },
+  { line: 4, text: "    if (Math.abs(i - j) >= indexDifference && Math.abs(nums[i] - nums[j]) >= valueDifference)" },
+  { line: 5, text: "      return [i, j]" },
+  { line: 6, text: "return [-1, -1]" },
 ];
 
 const LIMITS = { maxLength: 100, maxValue: 50, maxIndexDifference: 100, maxValueDifference: 50 };

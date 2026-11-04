@@ -1,14 +1,21 @@
 const CODE = [
-  'FUNCTION crossingTimes(arrival, state)',
-  '    answer ← zeros ; crossed ← nobody ; t ← 0 ; lastDir ← none ; lastTime ← -2',
-  '    WHILE someone has not crossed',
-  '        waiting[d] ← people who have not crossed, arrived by t, and want direction d',
-  '        IF no one is waiting THEN t ← t + 1 and continue (the door is idle)',
-  '        IF both directions wait THEN d ← lastDir if lastTime = t - 1, otherwise exit (1)',
-  '        ELSE d ← the only direction that waits',
-  '        person ← the earliest input index in waiting[d]',
-  '        answer[person] ← t ; lastDir ← d ; lastTime ← t ; t ← t + 1',
-  '    RETURN answer',
+  'function crossingTimes(arrival, state) {',
+  '  const n = arrival.length',
+  '  const answer = Array(n).fill(0)',
+  '  const crossed = Array(n).fill(false)',
+  '  let t = 0, lastDir = null, lastTime = -2',
+  '  let remaining = n',
+  '  while (remaining > 0) {',
+  '    const waiting = [[], []]',
+  '    for (let i = 0; i < n; i++) if (!crossed[i] && arrival[i] <= t) waiting[state[i]].push(i)',
+  '    if (!waiting[0].length && !waiting[1].length) { t++; continue }',
+  '    const d = waiting[0].length && waiting[1].length ? (lastTime === t - 1 ? lastDir : 1) : (waiting[0].length ? 0 : 1)',
+  '    const person = waiting[d][0]',
+  '    crossed[person] = true; answer[person] = t; remaining--',
+  '    lastDir = d; lastTime = t; t++',
+  '  }',
+  '  return answer',
+  '}',
 ]
 
 const PY = [
@@ -78,14 +85,14 @@ export function buildTrace({ arrival, state }) {
   let lastTime = -2
   let remaining = n
   const frames = []
-  frames.push({ pythonLine: pyLine('answer = [0] * n'), phase: 'start', activeLine: codeLine('answer ← zeros ; crossed ← nobody ; t ← 0 ; lastDir ← none ; lastTime ← -2'), t: 0, waiting: [[], []], dir: null, person: null, timeline: [], answer: [...answer], message: 'The door starts idle. Each crossing takes one second.' })
+  frames.push({ pythonLine: pyLine('answer = [0] * n'), phase: 'start', activeLine: codeLine('const answer = Array(n).fill(0)'), t: 0, waiting: [[], []], dir: null, person: null, timeline: [], answer: [...answer], message: 'The door starts idle. Each crossing takes one second.' })
   const timeline = []
   while (remaining) {
     const waiting = [[], []]
     for (let i = 0; i < n; i++) if (!crossed[i] && arrival[i] <= t) waiting[state[i]].push(i)
     if (!waiting[0].length && !waiting[1].length) {
       timeline.push({ t, idle: true })
-      frames.push({ pythonLine: pyLine('t += 1'), phase: 'idle', activeLine: codeLine('IF no one is waiting THEN t ← t + 1 and continue (the door is idle)'), t, waiting, dir: null, person: null, timeline: [...timeline], answer: [...answer], message: `Second ${t}: nobody is waiting, so the door is idle.` })
+      frames.push({ pythonLine: pyLine('t += 1'), phase: 'idle', activeLine: codeLine('if (!waiting[0].length && !waiting[1].length) { t++; continue }'), t, waiting, dir: null, person: null, timeline: [...timeline], answer: [...answer], message: `Second ${t}: nobody is waiting, so the door is idle.` })
       t += 1
       continue
     }
@@ -98,7 +105,7 @@ export function buildTrace({ arrival, state }) {
       d = waiting[0].length ? 0 : 1
       why = `only ${d === 0 ? 'entering' : 'exiting'} people wait`
     }
-    frames.push({ pythonLine: pyLine('d = last_dir if last_time == t - 1 else 1'), phase: 'choose', activeLine: codeLine('IF both directions wait THEN d ← lastDir if lastTime = t - 1, otherwise exit (1)'), t, waiting: waiting.map(w => [...w]), dir: d, person: null, timeline: [...timeline], answer: [...answer], message: `Second ${t}: ${why}.` })
+    frames.push({ pythonLine: pyLine('d = last_dir if last_time == t - 1 else 1'), phase: 'choose', activeLine: codeLine('const d = waiting[0].length && waiting[1].length ? (lastTime === t - 1 ? lastDir : 1) : (waiting[0].length ? 0 : 1)'), t, waiting: waiting.map(w => [...w]), dir: d, person: null, timeline: [...timeline], answer: [...answer], message: `Second ${t}: ${why}.` })
     const person = waiting[d][0]
     crossed[person] = true
     answer[person] = t
@@ -106,10 +113,10 @@ export function buildTrace({ arrival, state }) {
     lastDir = d
     lastTime = t
     timeline.push({ t, dir: d, person })
-    frames.push({ pythonLine: pyLine('answer[i] = t'), phase: 'cross', activeLine: codeLine('person ← the earliest input index in waiting[d]'), t, waiting: waiting.map(w => [...w]), dir: d, person, timeline: [...timeline], answer: [...answer], message: `Person ${person} ${d === 0 ? 'enters' : 'exits'} at second ${t}.` })
+    frames.push({ pythonLine: pyLine('answer[i] = t'), phase: 'cross', activeLine: codeLine('const person = waiting[d][0]'), t, waiting: waiting.map(w => [...w]), dir: d, person, timeline: [...timeline], answer: [...answer], message: `Person ${person} ${d === 0 ? 'enters' : 'exits'} at second ${t}.` })
     t += 1
   }
-  frames.push({ pythonLine: pyLine('return answer'), phase: 'done', activeLine: codeLine('RETURN answer'), t: t - 1, waiting: [[], []], dir: null, person: null, timeline: [...timeline], answer: [...answer], message: `Crossing times: ${answer.join(', ')}.` })
+  frames.push({ pythonLine: pyLine('return answer'), phase: 'done', activeLine: codeLine('return answer'), t: t - 1, waiting: [[], []], dir: null, person: null, timeline: [...timeline], answer: [...answer], message: `Crossing times: ${answer.join(', ')}.` })
   return { input: { arrival, state }, result: answer, frames }
 }
 

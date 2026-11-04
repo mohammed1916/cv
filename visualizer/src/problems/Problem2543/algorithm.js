@@ -15,22 +15,23 @@ export function buildTrace(input) {
   const g = gcd(targetX, targetY)
   const result = (g & (g - 1)) === 0
   const frames = [
-    { phase: 'start', activeLine: L('start the walk'), pythonLine: 3, g: null, message: `Start at (1, 1). The target is (${targetX}, ${targetY}).` },
-    { phase: 'gcd', activeLine: L('g = gcd'), pythonLine: 4, g, message: `The gcd of ${targetX} and ${targetY} is ${g}.` },
-    { phase: 'check', activeLine: L('if g is a power of two'), pythonLine: 5, g, message: `${g} is ${result ? '' : 'not '}a power of two.` },
-    { phase: 'done', activeLine: L(result ? 'return true' : 'return false'), pythonLine: 5, g, message: `(${targetX}, ${targetY}) is ${result ? 'reachable' : 'not reachable'}.` },
+    { phase: 'start', activeLine: L('let g = gcd'), pythonLine: 3, g: null, message: `Start at (1, 1). The target is (${targetX}, ${targetY}).` },
+    { phase: 'gcd', activeLine: L('let g = gcd'), pythonLine: 4, g, message: `The gcd of ${targetX} and ${targetY} is ${g}.` },
+    { phase: 'check', activeLine: L('if ((g & (g - 1)) === 0) return true'), pythonLine: 5, g, message: `${g} is ${result ? '' : 'not '}a power of two.` },
+    { phase: 'done', activeLine: L(result ? 'if ((g & (g - 1)) === 0) return true' : 'return false'), pythonLine: 5, g, message: `(${targetX}, ${targetY}) is ${result ? 'reachable' : 'not reachable'}.` },
   ]
   return { input, targetX, targetY, g, result, frames }
 }
 
-export const code = `reachable from (1, 1) to (targetX, targetY)
-  start the walk at (1, 1)
-  g = gcd of targetX and targetY
-  the subtraction moves keep g, and a doubling move can at most double it
-  if g is a power of two then
-    return true
-  return false`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function isReachable(targetX, targetY) {',
+  '  let g = gcd(targetX, targetY)',
+  '  if ((g & (g - 1)) === 0) return true',
+  '  return false',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => CODE.findIndex(c => c.includes(s)) + 1
 
 export const python = `from math import gcd
 

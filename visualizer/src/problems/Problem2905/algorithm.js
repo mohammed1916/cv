@@ -18,13 +18,13 @@ const PYTHON_LINES = [
 export const python = PYTHON_LINES.join("\n");
 
 export const code = [
-  { line: 1, text: "Read n as the length of nums; set mn = mx = 0" },
-  { line: 2, text: "For each index j from indexDifference to n - 1" },
-  { line: 3, text: "Let i = j - indexDifference, the newest index that is far enough back" },
-  { line: 4, text: "If nums[i] is smaller than nums[mn], set mn = i; if larger than nums[mx], set mx = i" },
-  { line: 5, text: "If |nums[j] - nums[mn]| >= valueDifference, return [mn, j]" },
-  { line: 6, text: "If |nums[mx] - nums[j]| >= valueDifference, return [mx, j]" },
-  { line: 7, text: "Return [-1, -1]" },
+  { line: 1, text: "const n = nums.length; let mn = 0, mx = 0" },
+  { line: 2, text: "for (let j = indexDifference; j < n; j++) {" },
+  { line: 3, text: "  const i = j - indexDifference // the newest index that is far enough back" },
+  { line: 4, text: "  if (nums[i] < nums[mn]) mn = i; if (nums[i] > nums[mx]) mx = i" },
+  { line: 5, text: "  if (Math.abs(nums[j] - nums[mn]) >= valueDifference) return [mn, j]" },
+  { line: 6, text: "  if (Math.abs(nums[mx] - nums[j]) >= valueDifference) return [mx, j] }" },
+  { line: 7, text: "return [-1, -1]" },
 ];
 
 const LIMITS = { maxLength: 100, maxValue: 1000, maxIndexDifference: 100, maxValueDifference: 1000 };

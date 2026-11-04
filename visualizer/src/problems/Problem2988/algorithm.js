@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// SQL walkthrough with invented sample tables.
 export const sql = `WITH headcount AS (
   SELECT dep_id, COUNT(*) AS staff
   FROM Employees

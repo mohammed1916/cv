@@ -41,13 +41,13 @@ export function buildTrace(input) {
   return { input, result: answer, frames }
 }
 
-export const code = `maximum value of an ordered triplet
-  set answer to 0, best difference to 0, best prefix to 0
-  for each value x in nums
-    update answer with best difference times x
-    update best difference with best prefix minus x
-    update best prefix with x
-  return answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `// maximum value of an ordered triplet (i < j < k)
+let answer = 0, bestDiff = 0, bestPrefix = 0
+for (const x of nums) {
+  answer = Math.max(answer, bestDiff * x)
+  bestDiff = Math.max(bestDiff, bestPrefix - x)
+  bestPrefix = Math.max(bestPrefix, x) }
+return answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def maximumTripletValue(nums):
     answer = 0

@@ -1,6 +1,21 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python, sql } from './algorithm'
 import { meta } from './meta'
+import SqlStageBoard from './SqlStageBoard'
+
+const stagesFor = run => {
+  const brandOf = new Map(run.input.items.map(r => [r.item_id, r.item_brand]))
+  const joined = run.input.orders.map(o => ({ order_id: o.order_id, seller_id: o.seller_id, item_brand: brandOf.get(o.item_id) }))
+  const bySeller = new Map()
+  for (const row of joined) (bySeller.get(row.seller_id) ?? bySeller.set(row.seller_id, new Set()).get(row.seller_id)).add(row.item_brand)
+  const grouped = [...bySeller].sort((a, b) => a[0] - b[0]).map(([seller_id, brands]) => ({ seller_id, distinct_brands: brands.size }))
+  const kept = grouped.filter(r => r.distinct_brands >= 2)
+  return [
+    { id: 'join', clause: 'FROM Orders o JOIN Items i ON i.item_id = o.item_id', label: 'Join', columns: ['order_id', 'seller_id', 'item_brand'], rows: joined },
+    { id: 'group', clause: 'GROUP BY o.seller_id', label: 'Group', columns: ['seller_id', 'distinct_brands'], rows: grouped },
+    { id: 'having', clause: 'HAVING COUNT(DISTINCT i.item_brand) >= 2', label: 'Keep', columns: ['seller_id', 'distinct_brands'], rows: kept },
+  ]
+}
 
 const definition = {
   number: meta.number,
@@ -21,6 +36,7 @@ const definition = {
 
 export default function Problem2922() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <SqlStageBoard title="Query stages" stages={stagesFor(run)} active={run.frames.indexOf(step) === run.frames.length - 1 ? 2 : step.order === null ? 0 : 1} />
     <table aria-label="Seller brand table">
       <thead><tr><th>seller_id</th><th>brands seen</th><th>verdict</th></tr></thead>
       <tbody>

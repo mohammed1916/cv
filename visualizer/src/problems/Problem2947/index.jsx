@@ -36,7 +36,7 @@ export default function CountBeautifulSubstringsVisualizer() {
             length={run.input.s.length}
             valueAt={(index) => run.input.s[index]}
             active={step.j}
-            roleAt={(index) => (step.i >= 0 && index >= step.i && index <= step.j ? "window" : "")}
+            roleAt={(index) => (step.i >= 0 && index === step.i ? "l" : step.i >= 0 && index === step.j ? "r" : step.i >= 0 && index > step.i && index < step.j ? "window" : "")}
           />
           <p>
             k = {run.input.k} · window s[{step.i}..{step.j}] · count so far: {step.count}

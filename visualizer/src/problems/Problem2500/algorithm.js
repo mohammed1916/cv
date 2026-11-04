@@ -17,14 +17,16 @@ const PYTHON_LINES = [
 ];
 
 const CODE_LINES = [
-  "FUNCTION deleteGreatestValue(grid)",
-  "  FOR each row, build a max-heap of its values",
-  "  total <- 0",
-  "  REPEAT once for each column",
-  "    best <- 0",
-  "    FOR each row, remove its greatest value and keep the largest removed",
-  "    add best to total",
-  "  RETURN total",
+  "function deleteGreatestValue(grid) {",
+  "  const heaps = grid.map(row => buildMaxHeap(row))",
+  "  let total = 0",
+  "  for (let round = 0; round < grid[0].length; round++) {",
+  "    let best = 0",
+  "    for (const heap of heaps) best = Math.max(best, heap.pop())",
+  "    total += best",
+  "  }",
+  "  return total",
+  "}",
 ];
 
 const MAX_SIZE = 10;
@@ -101,29 +103,29 @@ export function buildTrace(input) {
     phase, activeLine, pythonLine: py(pyKey), message, row: -1, heap0: heaps[0] ? [...heaps[0]] : [], heaps: heaps.map(h => [...h]), removed: removed.map(r => [...r]), total, best: null, ...extra,
   });
 
-  snap("setup", 2, "heaps = []", "Start with no row heaps.");
+  snap("setup", 1, "heaps = []", "Start with no row heaps.");
   for (let r = 0; r < grid.length; r++) {
-    snap("build", 2, "for row in grid", `Build the max-heap for row ${r}.`, { row: r });
+    snap("build", 1, "for row in grid", `Build the max-heap for row ${r}.`, { row: r });
     const h = [];
     for (const x of grid[r]) heapPush(h, x);
     heaps.push(h);
-    snap("heapify", 2, "heapq.heapify", `Row ${r} is now a max-heap.`, { row: r, heap0: [...heaps[0]] });
+    snap("heapify", 1, "heapq.heapify", `Row ${r} is now a max-heap.`, { row: r, heap0: [...heaps[0]] });
   }
 
-  snap("total", 3, "total = 0", "The running total starts at 0.", { heap0: [...heaps[0]] });
+  snap("total", 2, "total = 0", "The running total starts at 0.", { heap0: [...heaps[0]] });
   for (let c = 0; c < grid[0].length; c++) {
-    snap("round", 4, "for _ in range", `Round ${c + 1}: remove one greatest value from each row.`, { round: c + 1 });
+    snap("round", 3, "for _ in range", `Round ${c + 1}: remove one greatest value from each row.`, { round: c + 1 });
     let best = 0;
-    snap("reset", 5, "best = 0", "Start the best removed value for this round at 0.", { round: c + 1, best });
+    snap("reset", 4, "best = 0", "Start the best removed value for this round at 0.", { round: c + 1, best });
     for (let r = 0; r < heaps.length; r++) {
-      snap("pick", 6, "for h in heaps", `Take the greatest value left in row ${r}.`, { round: c + 1, row: r, best });
+      snap("pick", 5, "for h in heaps", `Take the greatest value left in row ${r}.`, { round: c + 1, row: r, best });
       const popped = heapPop(heaps[r]);
       best = Math.max(best, popped);
       (removed[c] ??= [])[r] = popped;
-      snap("pop", 6, "best = max(best", `Row ${r} gives up ${popped}; the largest so far is ${best}.`, { round: c + 1, row: r, best, heap0: [...heaps[0]] });
+      snap("pop", 5, "best = max(best", `Row ${r} gives up ${popped}; the largest so far is ${best}.`, { round: c + 1, row: r, best, heap0: [...heaps[0]] });
     }
     total += best;
-    snap("add", 7, "total += best", `Add ${best} to the total, now ${total}.`, { round: c + 1, best, total });
+    snap("add", 6, "total += best", `Add ${best} to the total, now ${total}.`, { round: c + 1, best, total });
   }
   snap("done", 8, "return total", `Return ${total}.`, { result: total, total });
   return { input: { grid }, result: total, frames };

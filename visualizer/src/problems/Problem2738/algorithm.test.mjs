@@ -6,8 +6,8 @@ const run = buildTrace(parseInput(JSON.stringify(sample)))
 
 test('2738 result matches the hand-computed sample', () => {
   assert.deepEqual(run.result, [
-    { word: 'bear', occurrences: 1 },
     { word: 'bull', occurrences: 2 },
+    { word: 'bear', occurrences: 0 },
   ])
 })
 

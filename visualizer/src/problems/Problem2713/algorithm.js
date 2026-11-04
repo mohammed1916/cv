@@ -44,13 +44,29 @@ export function buildTrace(mat) {
   return { input: mat, result, frames }
 }
 
-export const code = `longest strictly increasing path in a matrix:
-  list every cell with its value
-  sort the cells from smallest value to largest
-  for each group of cells with the same value:
-    set dp of each cell to 1 plus the best dp in its row or column so far
-    after the group, record each cell's dp as its row and column best
-  return the largest dp`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function maxIncreasingCells(mat) {
+  const m = mat.length, n = mat[0].length;
+  const cells = []; // list every cell with its value
+  for (let r = 0; r < m; r++) for (let c = 0; c < n; c++) cells.push([mat[r][c], r, c]);
+  cells.sort((a, b) => a[0] - b[0]); // sort the cells from smallest value to largest
+  const rowBest = Array(m).fill(0), colBest = Array(n).fill(0);
+  const dp = Array.from({ length: m }, () => Array(n).fill(0));
+  for (let i = 0; i < cells.length;) {
+    let j = i;
+    while (j < cells.length && cells[j][0] === cells[i][0]) j++; // for each group of cells with the same value
+    for (let k = i; k < j; k++) {
+      const [, r, c] = cells[k];
+      dp[r][c] = 1 + Math.max(rowBest[r], colBest[c]); // set dp of each cell to 1 plus the best so far
+    }
+    for (let k = i; k < j; k++) {
+      const [, r, c] = cells[k];
+      rowBest[r] = Math.max(rowBest[r], dp[r][c]); // after the group, record each cell's dp as its row and column best
+      colBest[c] = Math.max(colBest[c], dp[r][c]);
+    }
+    i = j;
+  }
+  return Math.max(...dp.flat()); // return the largest dp
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def max_increasing_cells(mat):

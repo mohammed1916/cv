@@ -1,15 +1,17 @@
 const MOD = 1000000007
 
 const CODE = [
-  'FUNCTION countGood(s)',
-  '    count[c] ← occurrences of each letter c in s',
-  '    total ← 0',
-  '    FOR k from 1 to the largest count',
-  '        ways ← 1',
-  '        FOR each letter c',
-  '            ways ← ways × (1 + C(count[c], k))   (choose none of c, or exactly k of its positions)',
-  '        total ← total + (ways − 1)   (remove the empty choice)',
-  '    RETURN total modulo 1000000007',
+  'function countGood(s) {',
+  '  const count = {}',
+  '  for (const ch of s) count[ch] = (count[ch] || 0) + 1',
+  '  let total = 0',
+  '  for (let k = 1; k <= Math.max(...Object.values(count)); k++) {',
+  '    let ways = 1',
+  '    for (const c in count) ways = ways * (1 + binomial(count[c], k)) % MOD',
+  '    total = (total + ways - 1) % MOD',
+  '  }',
+  '  return total',
+  '}',
 ]
 
 const PY = [
@@ -64,16 +66,16 @@ export function buildTrace(s) {
   const letters = Object.keys(counts).sort()
   const maxCount = Math.max(...Object.values(counts))
   const frames = []
-  frames.push({ pythonLine: pyLine('count[ch] = count.get(ch, 0) + 1'), phase: 'start', activeLine: codeLine('count[c] ← occurrences of each letter c in s'), k: null, letters, counts: letters.map(c => counts[c]), terms: [], ways: null, total: 0, message: `Letters present: ${letters.map(c => `${c}×${counts[c]}`).join(', ')}.` })
+  frames.push({ pythonLine: pyLine('count[ch] = count.get(ch, 0) + 1'), phase: 'start', activeLine: codeLine('for (const ch of s) count[ch] = (count[ch] || 0) + 1'), k: null, letters, counts: letters.map(c => counts[c]), terms: [], ways: null, total: 0, message: `Letters present: ${letters.map(c => `${c}×${counts[c]}`).join(', ')}.` })
   let total = 0
   for (let k = 1; k <= maxCount; k++) {
     let ways = 1
     const terms = letters.map(c => binomial(counts[c], k))
     for (const t of terms) ways = (ways * (1 + t)) % MOD
     total = (total + ways - 1 + MOD) % MOD
-    frames.push({ pythonLine: pyLine('ways = ways * (1 + comb(count[c], k))'), phase: 'level', activeLine: codeLine('ways ← ways × (1 + C(count[c], k))   (choose none of c, or exactly k of its positions)'), k, letters, counts: letters.map(c => counts[c]), terms, ways, total, message: `k = ${k}: each letter contributes 1 + C(count, ${k}). Product ${ways}, minus the empty choice gives ${ways - 1}. Running total ${total}.` })
+    frames.push({ pythonLine: pyLine('ways = ways * (1 + comb(count[c], k))'), phase: 'level', activeLine: codeLine('for (const c in count) ways = ways * (1 + binomial(count[c], k)) % MOD'), k, letters, counts: letters.map(c => counts[c]), terms, ways, total, message: `k = ${k}: each letter contributes 1 + C(count, ${k}). Product ${ways}, minus the empty choice gives ${ways - 1}. Running total ${total}.` })
   }
-  frames.push({ pythonLine: pyLine('return total % MOD'), phase: 'done', activeLine: codeLine('RETURN total modulo 1000000007'), k: null, letters, counts: letters.map(c => counts[c]), terms: [], ways: null, total, message: `${total} good subsequence${total === 1 ? '' : 's'} modulo 1000000007.` })
+  frames.push({ pythonLine: pyLine('return total % MOD'), phase: 'done', activeLine: codeLine('return total'), k: null, letters, counts: letters.map(c => counts[c]), terms: [], ways: null, total, message: `${total} good subsequence${total === 1 ? '' : 's'} modulo 1000000007.` })
   return { input: s, result: total, letters, counts: letters.map(c => counts[c]), frames }
 }
 

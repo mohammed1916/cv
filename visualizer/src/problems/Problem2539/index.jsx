@@ -11,7 +11,7 @@ const definition = {
   python,
   inputLabel: "Lowercase string (e.g. aabb)",
   url: "https://leetcode.com/problems/count-the-number-of-good-subsequences/description/",
-  complexity: "O(26 * L) time for L letters after counting, O(1) extra space with a small binomial table. The visualization caps the string at 20 lowercase letters; the official bounds are not verified in this draft.",
+  complexity: "O(26 * L) time for L letters after counting, O(1) extra space with a small binomial table. The visualization caps the string at 20 lowercase letters;",
   examples: [
     { label: "Example", input: '"aabb"' },
     { label: "Single letter", input: '"aaa"' },

@@ -1,11 +1,14 @@
 const CODE = [
-  'FUNCTION equalPath(grid)',
-  '    reach[r][c] ← empty set of balances (zeros minus ones on a path into the cell)',
-  '    FOR each cell (r, c) in row-major order',
-  '        delta ← +1 if grid[r][c] is 0, otherwise -1',
-  '        IF r = 0 and c = 0 THEN reach[0][0] ← {delta}',
-  '        ELSE reach[r][c] ← {b + delta for b in reach[r-1][c] ∪ reach[r][c-1]}',
-  '    RETURN whether balance 0 is in reach[last row][last column]',
+  'function equalPath(grid) {',
+  '  const m = grid.length, n = grid[0].length',
+  '  const reach = grid.map(row => row.map(() => new Set()))',
+  '  for (let r = 0; r < m; r++) for (let c = 0; c < n; c++) {',
+  '    const delta = grid[r][c] === 0 ? 1 : -1',
+  '    if (r === 0 && c === 0) reach[0][0].add(delta)',
+  '    else for (const b of [...(reach[r - 1]?.[c] ?? []), ...(reach[r][c - 1] ?? [])]) reach[r][c].add(b + delta)',
+  '  }',
+  '  return reach[m - 1][n - 1].has(0)',
+  '}',
 ]
 
 const PY = [
@@ -56,22 +59,22 @@ export function buildTrace(grid) {
   const reach = Array.from({ length: m }, () => Array.from({ length: n }, () => new Set()))
   const frames = []
   const snapshot = () => reach.map(row => row.map(s => [...s].sort((a, b) => a - b)))
-  frames.push({ pythonLine: pyLine('reach = [[set() for _ in range(n)] for _ in range(m)]'), phase: 'start', activeLine: codeLine('reach[r][c] ← empty set of balances (zeros minus ones on a path into the cell)'), cell: null, delta: null, reach: snapshot(), message: `A ${m} by ${n} grid. Balance counts zeros minus ones on a path, both endpoints included.` })
+  frames.push({ pythonLine: pyLine('reach = [[set() for _ in range(n)] for _ in range(m)]'), phase: 'start', activeLine: codeLine('const reach = grid.map(row => row.map(() => new Set()))'), cell: null, delta: null, reach: snapshot(), message: `A ${m} by ${n} grid. Balance counts zeros minus ones on a path, both endpoints included.` })
   for (let r = 0; r < m; r++) for (let c = 0; c < n; c++) {
     const delta = grid[r][c] === 0 ? 1 : -1
     if (r === 0 && c === 0) {
       reach[r][c].add(delta)
-      frames.push({ pythonLine: pyLine('reach[r][c] = {delta}'), phase: 'cell', activeLine: codeLine('IF r = 0 and c = 0 THEN reach[0][0] ← {delta}'), cell: [r, c], delta, reach: snapshot(), message: `The start cell holds ${grid[r][c]}, so the balance is ${delta}.` })
+      frames.push({ pythonLine: pyLine('reach[r][c] = {delta}'), phase: 'cell', activeLine: codeLine('if (r === 0 && c === 0) reach[0][0].add(delta)'), cell: [r, c], delta, reach: snapshot(), message: `The start cell holds ${grid[r][c]}, so the balance is ${delta}.` })
       continue
     }
     const prev = new Set()
     if (r > 0) for (const b of reach[r - 1][c]) prev.add(b)
     if (c > 0) for (const b of reach[r][c - 1]) prev.add(b)
     for (const b of prev) reach[r][c].add(b + delta)
-    frames.push({ pythonLine: pyLine('reach[r][c] = {b + delta for b in prev}'), phase: 'cell', activeLine: codeLine('ELSE reach[r][c] ← {b + delta for b in reach[r-1][c] ∪ reach[r][c-1]}'), cell: [r, c], delta, reach: snapshot(), message: `Cell (${r}, ${c}) holds ${grid[r][c]} (delta ${delta}). Balances reaching it: ${[...reach[r][c]].sort((a, b) => a - b).join(', ') || 'none'}.` })
+    frames.push({ pythonLine: pyLine('reach[r][c] = {b + delta for b in prev}'), phase: 'cell', activeLine: codeLine('else for (const b of [...(reach[r - 1]?.[c] ?? []), ...(reach[r][c - 1] ?? [])]) reach[r][c].add(b + delta)'), cell: [r, c], delta, reach: snapshot(), message: `Cell (${r}, ${c}) holds ${grid[r][c]} (delta ${delta}). Balances reaching it: ${[...reach[r][c]].sort((a, b) => a - b).join(', ') || 'none'}.` })
   }
   const ok = reach[m - 1][n - 1].has(0)
-  frames.push({ pythonLine: pyLine('return 0 in reach[m - 1][n - 1]'), phase: 'done', activeLine: codeLine('RETURN whether balance 0 is in reach[last row][last column]'), cell: [m - 1, n - 1], delta: null, reach: snapshot(), message: ok ? 'Balance 0 reaches the bottom-right corner: a balanced path exists.' : 'Balance 0 does not reach the bottom-right corner: no balanced path.' })
+  frames.push({ pythonLine: pyLine('return 0 in reach[m - 1][n - 1]'), phase: 'done', activeLine: codeLine('return reach[m - 1][n - 1].has(0)'), cell: [m - 1, n - 1], delta: null, reach: snapshot(), message: ok ? 'Balance 0 reaches the bottom-right corner: a balanced path exists.' : 'Balance 0 does not reach the bottom-right corner: no balanced path.' })
   return { input: grid, result: ok, reach: snapshot(), frames }
 }
 

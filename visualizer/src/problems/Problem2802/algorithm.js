@@ -2,7 +2,7 @@
 // Lucky numbers use only digits 4 and 7. Listed in numeric order they are a binary counter in disguise:
 // write k + 1 in binary, drop the leading 1, and read each remaining bit as a digit (0 means 4, 1 means 7).
 // The answer is returned as its decimal digit string, which stays exact at any length.
-// The draft gives no verified bound on k, so the visualization caps k at 126 (numbers up to six digits).
+// The visualization caps k at 126 (numbers up to six digits).
 
 const MAX_VISUAL_K = 126
 
@@ -19,13 +19,13 @@ if __name__ == "__main__":
     print(kth_lucky(json.loads(sys.stdin.read())))
 `
 
-export const code = `kth lucky number for positive k
-  m ← k + 1
-  bits ← binary digits of m
-  result ← empty digit string
-  FOR each bit after the leading 1 in bits
-    IF bit is 0 THEN append 4 ELSE append 7
-  RETURN result`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `const m = k + 1 // m ← k + 1
+const bits = m.toString(2).slice(1) // bits ← binary digits after the leading one
+let result = ''
+for (const bit of bits) { // for each bit after the leading one
+  result += bit === '0' ? '4' : '7' // IF bit is 0 append 4, otherwise append 7
+}
+return result // RETURN result`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const L = s => {
   const index = code.findIndex(c => c.text.includes(s))

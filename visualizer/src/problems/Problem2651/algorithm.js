@@ -18,11 +18,14 @@ export function buildTrace({ arrivalTime, delayedTime }) {
   return { input: { arrivalTime, delayedTime }, result, frames }
 }
 
-export const code = `delayed arrival time for a train
-  add the delay to the arrival hour
-  wrap past midnight back into the 24-hour clock
-  return the wrapped hour`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const CODE = [
+  'function findDelayedArrivalTime(arrivalTime, delayedTime) {',
+  '  const total = arrivalTime + delayedTime // add the delay to the arrival hour',
+  '  return total % 24 // wrap past midnight back into the 24-hour clock',
+  '}',
+];
+export const code = CODE.map((text, index) => ({ line: index + 1, text }));
+const L = s => CODE.findIndex(c => c.includes(s)) + 1
 
 export const python = `def calculate_delayed_arrival_time(arrival_time, delayed_time):
     total = arrival_time + delayed_time

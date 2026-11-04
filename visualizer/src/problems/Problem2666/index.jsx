@@ -11,7 +11,7 @@ const definition = {
   python,
   inputLabel: 'Object with calls, a list of argument lists (e.g. {"calls":[[1,2],[3],[]]})',
   url: "https://leetcode.com/problems/allow-one-function-call/",
-  complexity: "O(c) time for c calls, with O(1) extra state beyond the recorded results. The visualization caps calls at 6 with up to 4 integer arguments each; the draft does not verify official limits. fn is a teaching stand-in that sums its arguments.",
+  complexity: "O(c) time for c calls, with O(1) extra state beyond the recorded results. The visualization caps calls at 6 with up to 4 integer arguments each; the page caps calls at 6 for teaching. fn is a stand-in that sums its arguments.",
   examples: [
     { label: "Example", input: '{"calls":[[1,2],[3],[]]}' },
     { label: "Single call", input: '{"calls":[[4]]}' },

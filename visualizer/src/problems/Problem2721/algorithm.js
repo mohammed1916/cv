@@ -1,5 +1,7 @@
 const lines = text => text.split('\n').map((t, i) => ({ line: i + 1, text: t }))
-const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: line, activeLine: line, message, state })
+// JavaScript line numbers in code; pythonLine maps each to the matching Python line.
+const PY_OF = { 1: 2, 2: 2, 3: 3, 4: 4, 5: 6, 6: 7 }
+const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: PY_OF[line] ?? line, activeLine: line, message, state })
 export const PHASES = [
   { id: 'setup', label: 'Setup', description: 'Read the input and prepare the model.' },
   { id: 'step', label: 'Step', description: 'Process one event or item.' },
@@ -32,7 +34,7 @@ export function buildTrace(tasks) {
   let remaining = tasks.length
   for (const { task, index } of order) {
     if (task.fail) {
-      frames.push(frame('step', 5, `Task ${task.id} rejects at ${task.ms}ms, so the whole call rejects.`, { time: task.ms, rejected: task.id }))
+      frames.push(frame('step', 4, `Task ${task.id} rejects at ${task.ms}ms, so the whole call rejects.`, { time: task.ms, rejected: task.id }))
       frames.push(frame('done', 6, 'Rejected. Later finishes are ignored.', { values }))
       return { input: tasks, result: { ok: false, error: task.id }, frames }
     }
@@ -43,12 +45,12 @@ export function buildTrace(tasks) {
   frames.push(frame('done', 6, 'All tasks finished. Values keep input order.', { values }))
   return { input: tasks, result: { ok: true, values }, frames }
 }
-export const code = lines(`start every task now
-create a results list with one empty slot per task
-for each task in the order they finish
-  if the task rejects then reject the whole call
-  store its value in its own slot
-when all slots are filled resolve with the list`)
+export const code = lines(`const promises = tasks.map(task => task.run()); // start every task now
+const results = new Array(tasks.length); // create a results list with one empty slot per task
+for (const { index, task } of byFinish(tasks)) { // for each task in the order they finish
+  if (task.fail) throw task.id; // if the task rejects then reject the whole call
+  results[index] = task.value; // store its value in its own slot
+} return results; // when all slots are filled resolve with the list`)
 export const python = `def run_all(tasks):
     results = [None] * len(tasks)
     for index, task in sorted(enumerate(tasks), key=lambda p: p[1].ms):

@@ -1,11 +1,15 @@
-export const code = [
-  { line: 1, text: "pos = 1 and direction = 1" },
-  { line: 2, text: "for each second from 1 to time" },
-  { line: 3, text: "pos = pos + direction" },
-  { line: 4, text: "if pos is 1 or pos is n" },
-  { line: 5, text: "direction = minus direction" },
-  { line: 6, text: "return pos" },
-];
+const CODE = [
+  'function passThePillow(n, time) {',
+  '  let pos = 1, direction = 1',
+  '  for (let second = 1; second <= time; second++) {',
+  '    pos += direction',
+  '    if (pos === 1 || pos === n) direction = -direction',
+  '  }',
+  '  return pos',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => { const i = CODE.findIndex(c => c.includes(s)); if (i < 0) throw new Error('missing code line: ' + s); return i + 1 }
 
 export const python = `def passThePillow(n, time):
     pos = 1
@@ -40,19 +44,19 @@ export function buildTrace(input) {
   const frame = (phase, activeLine, pythonLine, second, message) =>
     frames.push({ phase, activeLine, pythonLine, second, message, n, time, pos, direction });
 
-  frame("setup", 1, 2, 0, "Person 1 starts with the pillow.");
-  frame("setup", 1, 3, 0, "The pillow moves toward larger person numbers first.");
+  frame("setup", 2, 2, 0, "Person 1 starts with the pillow.");
+  frame("setup", 2, 3, 0, "The pillow moves toward larger person numbers first.");
   for (let second = 1; second <= time; second++) {
-    frame("loop", 2, 4, second, `Second ${second}: the pillow is passed once more.`);
+    frame("loop", 3, 4, second, `Second ${second}: the pillow is passed once more.`);
     pos += direction;
-    frame("move", 3, 5, second, `The pillow moves to person ${pos}.`);
+    frame("move", 4, 5, second, `The pillow moves to person ${pos}.`);
     const atEnd = pos === 1 || pos === n;
-    frame("check", 4, 6, second, atEnd ? `Person ${pos} is at an end of the line.` : "The pillow is not at an end, so the direction stays.");
+    frame("check", 5, 6, second, atEnd ? `Person ${pos} is at an end of the line.` : "The pillow is not at an end, so the direction stays.");
     if (atEnd) {
       direction = -direction;
       frame("turn", 5, 7, second, `Direction reverses to ${direction}.`);
     }
   }
-  frame("done", 6, 8, time, `After ${time} seconds, person ${pos} holds the pillow.`);
+  frame("done", 7, 8, time, `After ${time} seconds, person ${pos} holds the pillow.`);
   return { input, result: pos, frames };
 }

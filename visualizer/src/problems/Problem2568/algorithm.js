@@ -10,24 +10,27 @@ export function parseInput(text) {
 export function buildTrace({ nums }) {
   const present = new Set(nums)
   const frames = []
-  frames.push({ phase: 'start', pythonLine: 2, activeLine: L('put every number'), candidate: 1, present: [...present], message: 'Store the numbers in a set for quick lookup.' })
+  frames.push({ phase: 'start', pythonLine: 2, activeLine: L('const present = new Set(nums)'), candidate: 1, present: [...present], message: 'Store the numbers in a set for quick lookup.' })
   let candidate = 1
   while (present.has(candidate)) {
-    frames.push({ phase: 'check', pythonLine: 4, activeLine: L('while candidate is in the set'), candidate, present: [...present], message: `${candidate} is in nums, so try the next power of two.` })
+    frames.push({ phase: 'check', pythonLine: 4, activeLine: L('while (present.has(candidate))'), candidate, present: [...present], message: `${candidate} is in nums, so try the next power of two.` })
     candidate *= 2
   }
-  frames.push({ phase: 'found', pythonLine: 4, activeLine: L('while candidate is in the set'), candidate, present: [...present], message: `${candidate} is not in nums, so no subsequence can produce it.` })
+  frames.push({ phase: 'found', pythonLine: 4, activeLine: L('while (present.has(candidate))'), candidate, present: [...present], message: `${candidate} is not in nums, so no subsequence can produce it.` })
   frames.push({ phase: 'done', pythonLine: 6, activeLine: L('return candidate'), candidate, present: [...present], message: `Minimum impossible OR: ${candidate}.` })
   return { input: { nums }, result: candidate, frames }
 }
 
-export const code = `minimum impossible OR
-  put every number of nums into a set
-  set candidate to 1
-  while candidate is in the set do
-    double candidate
-  return candidate`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => { const i = code.findIndex(c => c.text.includes(s)); if (i < 0) throw new Error('missing code line: ' + s); return i + 1 }
+const CODE = [
+  'function minimumImpossibleOR(nums) {',
+  '  const present = new Set(nums)',
+  '  let candidate = 1',
+  '  while (present.has(candidate)) candidate *= 2',
+  '  return candidate',
+  '}',
+]
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
+const L = s => { const i = CODE.findIndex(c => c.includes(s)); if (i < 0) throw new Error('missing code line: ' + s); return i + 1 }
 
 export const python = `def minimum_impossible_or(nums):
     present = set(nums)

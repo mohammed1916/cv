@@ -1,15 +1,18 @@
 // Pseudocode lines are looked up by a phrase, so a renamed line fails loudly instead of pointing at the wrong text.
-export const code = `split a circular list whose head is the first value into two circular lists
-count the nodes n by walking from head until returning to head
-set half to ceil(n / 2)
-set last to head
-walk last forward half minus 1 times
-set second to the node after last
-point last back to head to close the first list
-if second is head then the second list is empty
-walk from second to the tail, the node whose next is head
-point the tail to second to close the second list
-return both lists`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function splitCircularList(head) {
+  let n = 1; // count the nodes n by walking from head
+  for (let node = head.next; node !== head; node = node.next) n++;
+  const half = Math.ceil(n / 2); // set half to ceil(n / 2)
+  let last = head; // set last to head
+  for (let i = 0; i < half - 1; i++) last = last.next; // walk last forward half minus 1 times
+  const second = last.next; // set second to the node after last
+  last.next = head; // point last back to head to close the first list
+  if (second === head) return [head, null]; // if second is head then the second list is empty
+  let tail = second; // walk from second to the tail
+  while (tail.next !== head) tail = tail.next;
+  tail.next = second; // point the tail to second to close the second list
+  return [head, second]; // return both lists
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const L = phrase => {
   const found = code.findIndex(c => c.text.includes(phrase))

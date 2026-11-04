@@ -1,5 +1,6 @@
 const lines = text => text.split('\n').map((t, i) => ({ line: i + 1, text: t }))
-const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: line, activeLine: line, message, state })
+const PY_OF = {1: 1, 2: 1, 3: 2, 4: 3}
+const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: PY_OF[line] ?? line, activeLine: line, message, state })
 export const PHASES = [
   { id: 'setup', label: 'Setup', description: 'Read the input and prepare the model.' },
   { id: 'step', label: 'Step', description: 'Process one event or item.' },
@@ -35,10 +36,10 @@ export function buildTrace({ name, args, call }) {
   frames.push(frame('done', 4, 'Return the joined sentence.', { result }))
   return { input: { name, args, call }, result, frames }
 }
-export const code = lines(`store the context as this
-store the leading arguments
-when called, append the call arguments after the stored ones
-return the function result with this set to the context`)
+export const code = lines(`const self = context; // store the context as this
+const leading = bound; // store the leading arguments
+const call = (...args) => fn.apply(self, [...leading, ...args]); // when called, append the call arguments after the stored ones
+return call; // return the function result with this set to the context`)
 export const python = `def bind(func, context, *bound):
     def bound_call(*args):
         return func(context, [*bound, *args])
