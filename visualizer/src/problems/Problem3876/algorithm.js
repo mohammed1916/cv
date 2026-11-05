@@ -1,10 +1,16 @@
-const codeLines = `split the values into odd and even
-  if one of the groups is empty then that parity works directly
-  let lo be the smallest odd value and ev the smallest even value
-  if lo is smaller than ev then make every even value subtract lo
-  keep every odd value as it is
-  return true when the odd target works
-  otherwise return false`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
+const codeLines = `function constructUniform(nums1) {
+  const odds = nums1.filter(v => v % 2 === 1)
+  const evens = nums1.filter(v => v % 2 === 0)
+  if (odds.length === 0 || evens.length === 0) return true
+  const lo = Math.min(...odds)
+  const ev = Math.min(...evens)
+  if (lo < ev) {
+    const out = []
+    for (const v of nums1) out.push(v % 2 === 0 ? v - lo : v)
+    return true
+  }
+  return false
+}`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
 const L = s => codeLines.findIndex(c => c.text.includes(s)) + 1
 const pythonLines = `def construct_uniform(nums1):
     odds = [v for v in nums1 if v % 2 == 1]
@@ -30,16 +36,16 @@ export function parseInput(text) {
 export function buildTrace({ nums1 }) {
   const odds = nums1.filter(v => v % 2 === 1)
   const evens = nums1.filter(v => v % 2 === 0)
-  const frames = [{ phase: 'split', activeLine: L('split the values'), pythonLine: P('odds = '), index: -1, out: [],
+  const frames = [{ phase: 'split', activeLine: L('const odds'), pythonLine: P('odds = '), index: -1, out: [],
     message: `${odds.length} odd and ${evens.length} even value${evens.length === 1 ? '' : 's'}.` }]
   if (!odds.length || !evens.length) {
-    frames.push({ phase: 'done', activeLine: L('return true when'), pythonLine: P('return True'), index: -1, out: nums1, result: true,
+    frames.push({ phase: 'done', activeLine: L('if (odds.length === 0'), pythonLine: P('return True'), index: -1, out: nums1, result: true,
       message: 'One parity group is empty, so every value keeps its parity.' })
     return { input: { nums1 }, result: true, frames }
   }
   const lo = Math.min(...odds)
   const ev = Math.min(...evens)
-  frames.push({ phase: 'compare', activeLine: L('let lo be'), pythonLine: P('lo, ev ='), index: nums1.indexOf(lo), out: [],
+  frames.push({ phase: 'compare', activeLine: L('const lo ='), pythonLine: P('lo, ev ='), index: nums1.indexOf(lo), out: [],
     message: `Smallest odd is ${lo}; smallest even is ${ev}.` })
   const result = lo < ev
   const out = []
@@ -47,11 +53,11 @@ export function buildTrace({ nums1 }) {
     nums1.forEach((v, i) => {
       const value = v % 2 === 0 ? v - lo : v
       out.push(value)
-      frames.push({ phase: 'assign', activeLine: L('make every even value subtract'), pythonLine: P('return True'), index: i, out: [...out],
+      frames.push({ phase: 'assign', activeLine: L('out.push(v % 2'), pythonLine: P('return True'), index: i, out: [...out],
         message: v % 2 === 0 ? `${v} - ${lo} = ${value}, which is odd.` : `${v} stays odd.` })
     })
   }
-  frames.push({ phase: 'done', activeLine: L(result ? 'return true when' : 'otherwise return false'), pythonLine: P(result ? 'return True' : 'return False'),
+  frames.push({ phase: 'done', activeLine: L(result ? 'return true' : 'return false'), pythonLine: P(result ? 'return True' : 'return False'),
     index: -1, out, result,
     message: result ? `Every even value is larger than ${lo}, so the odd target works.` : `Some even value ${ev} is not above the smallest odd ${lo}.` })
   return { input: { nums1 }, result, frames }

@@ -35,15 +35,16 @@ export function buildTrace({ a, b }) {
   return { input: { a, b }, root, result: serial, frames }
 }
 
-export const code = `align the two roots at the top
-define merge for two positions: if both positions are empty, return empty
-otherwise sum the two values, treating a missing node as zero
-merge the left children and merge the right children at the same positions
-return a new node holding the sum and the merged children
-return the level-order serialization of the merged tree`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `if (!x) return y
+if (!y) return x
+const node = { val: x.val + y.val, left: null, right: null }
+node.left = merge(x.left, y.left)
+node.right = merge(x.right, y.right)
+return node
+return levelOrder(merge(root1, root2))`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 // The tree-family visualizer reports its own step numbers (1 setup, 3 sum, 4 combine, 5 return).
-export const LINE_MAP = { 1: 1, 3: 3, 4: 5, 5: 6 }
+export const LINE_MAP = { 1: 1, 3: 3, 4: 5, 5: 7 }
 
 export const python = `def merge_trees(root1, root2):
     def build(values):

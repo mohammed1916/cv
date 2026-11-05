@@ -36,15 +36,17 @@ export function buildTrace({ root, v, d }) {
   return { input: { root, v, d }, root: top, result, frames }
 }
 
-export const code = `if the depth is one, make a new root whose left child is the old tree
-otherwise start the frontier at the root
-advance the frontier down until it holds the nodes just above the insertion depth
-under each frontier node, insert a new value node on the left that keeps the old left subtree
-and a new value node on the right that keeps the old right subtree
-return the tree serialized in level order`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `if (depth === 1) return { val, left: root, right: null }
+let frontier = [root]
+for (let level = 2; level < depth; level++) frontier = frontier.flatMap(node => [node.left, node.right].filter(Boolean))
+for (const node of frontier) {
+  node.left = { val, left: node.left, right: null }
+  node.right = { val, left: null, right: node.right }
+}
+return root`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 // The tree-family visualizer reports its own step numbers (1 setup, 3 advance, 4 insert, 5 return).
-export const LINE_MAP = { 1: 1, 3: 3, 4: 4, 5: 6 }
+export const LINE_MAP = { 1: 1, 3: 3, 4: 5, 5: 8 }
 
 export const python = `def add_one_row(root, val, depth):
     def build(values):

@@ -1,11 +1,13 @@
-const codeLines = `choose the target parity for the new array
-  if no odd value exists then every value keeps its own even parity
-  otherwise take one odd value as the helper
-  for each value in nums1
-    if the target is even then keep the value
-    else if the value is odd then keep the value
-    else subtract the helper from the value
-  return true`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
+const codeLines = `function constructUniform(nums1) {
+  const odd = nums1.find(v => v % 2 === 1)
+  const targetEven = odd === undefined
+  const out = []
+  for (const v of nums1) {
+    if (targetEven || v % 2 === 1) out.push(v)
+    else out.push(v - odd)
+  }
+  return true
+}`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
 const L = s => codeLines.findIndex(c => c.text.includes(s)) + 1
 const pythonLines = `def construct_uniform(nums1):
     odd = next((v for v in nums1 if v % 2 == 1), None)
@@ -33,13 +35,13 @@ export function buildTrace({ nums1 }) {
   const odd = nums1.find(v => v % 2 === 1)
   const targetEven = odd === undefined
   const out = []
-  const frames = [{ phase: 'plan', activeLine: L('choose the target'), pythonLine: P('odd = next'), index: -1, out: [],
+  const frames = [{ phase: 'plan', activeLine: L('const odd'), pythonLine: P('odd = next'), index: -1, out: [],
     message: targetEven ? 'No odd value exists, so every value stays even.' : `Use ${odd} as the odd helper.` }]
   nums1.forEach((v, i) => {
     let value = v
     if (!targetEven && v % 2 === 0) value = v - odd
     out.push(value)
-    frames.push({ phase: 'assign', activeLine: L(targetEven ? 'keep the value' : 'subtract the helper'), pythonLine: P('out.append(v - odd)'),
+    frames.push({ phase: 'assign', activeLine: L(targetEven ? 'out.push(v)' : 'out.push(v - odd)'), pythonLine: P('out.append(v - odd)'),
       index: i, out: [...out], message: `${v} becomes ${value}, which is ${value % 2 === 0 ? 'even' : 'odd'}.` })
   })
   frames.push({ phase: 'done', activeLine: L('return true'), pythonLine: P('return True'), index: -1, out: [...out], result: true,

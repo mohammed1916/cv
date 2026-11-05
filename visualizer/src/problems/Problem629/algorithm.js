@@ -31,20 +31,27 @@ export function buildTrace({ n, k }) {
   return { input: { n, k }, result, table: dp, frames }
 }
 
-export const code = `if k is more than n times (n minus one) divided by two, return zero
-start with one empty permutation, so the row holds one at zero inversions and zero elsewhere
-for each size from one to n
-  build a new row using a sliding window sum over the previous row
-  add the entering count to the window for each inversion count from zero to k
-  subtract the count that falls outside the insertion range
-  store the window sum as the new row entry
-return the entry for k inversions, modulo 1000000007`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `const MOD = 1000000007
+if (k > (n * (n - 1)) / 2) return 0
+let row = Array(k + 1).fill(0)
+row[0] = 1
+for (let size = 1; size <= n; size++) {
+  const next = Array(k + 1).fill(0)
+  let window = 0
+  for (let inv = 0; inv <= k; inv++) {
+    window = (window + row[inv]) % MOD
+    if (inv >= size) window = (window - row[inv - size] + MOD) % MOD
+    next[inv] = window
+  }
+  row = next
+}
+return row[k]`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 // The family visualizer reports code stages rather than line numbers. This maps each frame onto the lines above.
 export function familyLine(frame) {
   if (frame.phase === 'start') return 1
-  if (frame.phase === 'done') return frame.codeStage === 'impossible' ? 1 : 8
-  return 4
+  if (frame.phase === 'done') return frame.codeStage === 'impossible' ? 2 : 15
+  return 9
 }
 
 export const python = `def k_inverse_pairs(n, k):

@@ -21,15 +21,16 @@ export function buildTrace({ m, n, ops }) {
   return { input: { m, n, ops }, result, frames }
 }
 
-export const code = `start the common rectangle at m rows and n columns
-for each operation [a, b] in order
-  shrink the rows to the smaller of the rows and a
-  shrink the columns to the smaller of the columns and b
-  the rectangle now covers exactly the cells that received every increment so far
-return the rows times the columns`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `let rows = m
+let cols = n
+for (const [a, b] of ops) {
+  rows = Math.min(rows, a)
+  cols = Math.min(cols, b)
+}
+return rows * cols`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 // The scan-family visualizer reports its own step numbers (1 setup, 4 update, 5 return).
-export const LINE_MAP = { 1: 1, 4: 4, 5: 6 }
+export const LINE_MAP = { 1: 1, 4: 4, 5: 7 }
 
 export const python = `def max_count(m, n, ops):
     rows, cols = m, n

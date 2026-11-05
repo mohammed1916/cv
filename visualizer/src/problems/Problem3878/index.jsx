@@ -19,8 +19,8 @@ const definition = {
 
 export default function CountGoodSubarrays() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} active={step.right}
-      roleAt={i => (step.left >= 0 && i >= step.left && i <= step.right ? 'window' : '')} />
+    <IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} active={-1}
+      roleAt={i => (step.left < 0 ? '' : i === step.left && i === step.right ? 'l = r' : i === step.left ? 'l' : i === step.right ? 'r' : i > step.left && i < step.right ? 'window' : '')} />
     <output aria-label="Window status">{step.running === null ? `Count ${step.count}` : `Window [${step.left}..${step.right}] OR ${step.running}, count ${step.count}, ${step.good ? 'good' : 'not good'}`}</output>
   </>} renderReasoning={() => <>
     <p>A subarray is good when its OR is one of its own elements. The OR only gains bits as the window grows, so every window is checked against its current OR.</p>

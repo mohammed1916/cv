@@ -20,17 +20,16 @@ export function buildTrace(points) {
   return { input: points, result, frames }
 }
 
-export const code = `calculate the six squared distances between the four points
-sort the six distances from smallest to largest
-let the side be the smallest distance
-require the four smallest distances to equal the side, and the side to be positive
-require the two largest distances to be equal and twice the side
-return whether all square conditions hold`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `const d = squaredDistances(p1, p2, p3, p4)
+d.sort((a, b) => a - b)
+const side = d[0]
+const ok = side > 0 && d[0] === d[3] && d[4] === d[5] && d[4] === 2 * side
+return ok`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 // The family visualizer reports code stages rather than line numbers. This maps each frame onto the lines above.
 export function familyLine(frame) {
   if (frame.phase === 'start') return 1
-  if (frame.phase === 'done') return 6
+  if (frame.phase === 'done') return 5
   return frame.codeStage === 'classify' ? 4 : 1
 }
 

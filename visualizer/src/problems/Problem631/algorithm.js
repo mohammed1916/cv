@@ -74,27 +74,27 @@ export function buildTrace(spec) {
   return { input: spec, rows, cols, result, frames, rowLabels, columnLabels }
 }
 
-export const code = `set cols to the number of columns from A to width
-create a grid of height rows and cols columns, every cell 0
-clear the formula table
-results = empty list
-for each operation (kind, row, column, arg) in ops:
-  if kind is "set":
-    remove any formula stored at (row, column)
-    store arg as the raw value at (row, column)
-    append nothing to results
-  else if kind is "sum":
-    store the cells named by arg as the formula at (row, column)
-    total = value of (row, column)
-    append total to results
-  else:
-    append value of (row, column) to results
-return results
+export const code = `const cols = width // set cols to the number of columns from A to width
+const grid = Array.from({ length: height }, () => Array(cols).fill(0)) // create a grid of height rows and cols columns, every cell 0
+const formulas = new Map() // clear the formula table
+const results = []
+for (const [kind, row, column, arg] of ops) {
+  if (kind === 'set') {
+    formulas.delete(key(row, column)) // remove any formula stored at (row, column)
+    grid[row][column] = arg // store arg as the raw value at (row, column)
+  } else if (kind === 'sum') {
+    formulas.set(key(row, column), arg) // store the cells named by arg as the formula
+    results.push(value(row, column)) // total = value of (row, column)
+  } else {
+    results.push(value(row, column)) // append value of (row, column)
+  }
+}
+return results // return results
 
-value of (r, c):
-  if (r, c) has a formula:
-    return the sum of value of each cell in that formula
-  return the raw value at (r, c)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+function value(r, c) {
+  if (formulas.has(key(r, c))) return formulas.get(key(r, c)).reduce((total, [rr, cc]) => total + value(rr, cc), 0)
+  return grid[r][c] // the raw value at (r, c)
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def design_excel_sum(h, w, ops):

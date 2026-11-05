@@ -34,13 +34,15 @@ export function buildTrace(courses) {
   return { input: courses, result, frames }
 }
 
-export const code = `sort the courses by last day, earliest first
-set time to 0 and keep a max-heap of the durations taken
-for each course with a duration and a last day:
-  add duration to time and push duration onto the heap
-  if time is greater than last day:
-    pop the longest duration from the heap and subtract it from time
-return the number of durations left in the heap`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `courses.sort((a, b) => a.last - b.last) // sort the courses by last day
+let time = 0
+const taken = new MaxHeap() // max-heap of the durations taken
+for (const [duration, lastDay] of courses) {
+  time += duration // add duration to time
+  taken.push(duration)
+  if (time > lastDay) time -= taken.pop() // pop the longest duration and drop it
+}
+return taken.size // return the number of durations left`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `import heapq

@@ -26,17 +26,24 @@ export function buildTrace(nums) {
   return { input: nums, result: count, frames }
 }
 
-export const code = `sort the side lengths and start the count at zero
-for each largest side k from the last index down to two
-  start left at zero and right just below k
-  while left is less than right
-    if the sides at left and right sum to more than the side at k
-      add right minus left to the count, then move right down
-    otherwise move left up
-return the count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `const a = [...nums].sort((x, y) => x - y)
+let count = 0
+for (let k = a.length - 1; k >= 2; k--) {
+  let i = 0
+  let j = k - 1
+  while (i < j) {
+    if (a[i] + a[j] > a[k]) {
+      count += j - i
+      j--
+    } else {
+      i++
+    }
+  }
+}
+return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 // The family visualizer reports its own step numbers (1 setup, 4 update, 5 return).
-export const LINE_MAP = { 1: 1, 4: 5, 5: 8 }
+export const LINE_MAP = { 1: 1, 4: 8, 5: 15 }
 
 export const python = `def triangle_number(nums):
     a = sorted(nums)

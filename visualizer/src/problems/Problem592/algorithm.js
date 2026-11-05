@@ -24,15 +24,18 @@ export function buildTrace(fractions) {
   return { input: fractions, result, frames }
 }
 
-export const code = `start the fraction accumulator at zero over one
-for each signed term in the expression, from left to right
-  read its signed numerator and its positive denominator
-  cross multiply to combine the term with the accumulator
-  divide the numerator and the denominator by their greatest common divisor
-return the accumulator as a numerator, a slash, and a denominator`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `let num = 0, den = 1
+for (const [sign, n, d] of terms) {
+  num = num * d + sign * n * den
+  den = den * d
+  const g = gcd(Math.abs(num), den)
+  num /= g
+  den /= g
+}
+return \`\${num}/\${den}\``.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 // The family visualizer reports stage numbers: 1 setup, 4 reduce, 5 return.
-export const LINE_MAP = { 1: 1, 4: 5, 5: 6 }
+export const LINE_MAP = { 1: 1, 4: 5, 5: 9 }
 
 export const python = `def fraction_addition(expression):
     import re

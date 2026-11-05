@@ -27,16 +27,19 @@ export function buildTrace({ list1, list2 }) {
   return { input: { list1, list2 }, result: answer, frames }
 }
 
-export const code = `index each string of the first list by its position
-start the best combined index at infinity and the winners as an empty list
-for each string in the second list, with its position j
-  if the string is not in the index, skip it
-  otherwise if its index plus j is below the best, replace the winners
-  if its index plus j equals the best, add the string to the winners
-return the winners`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `const indices = new Map(list1.map((name, i) => [name, i]))
+let best = Infinity
+let output = []
+for (let j = 0; j < list2.length; j++) {
+  const i = indices.get(list2[j])
+  if (i === undefined) continue
+  if (i + j < best) { best = i + j; output = [] }
+  if (i + j === best) output.push(list2[j])
+}
+return output`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 // The scan-family visualizer reports its own step numbers (1 setup, 4 scan, 5 return).
-export const LINE_MAP = { 1: 1, 4: 5, 5: 7 }
+export const LINE_MAP = { 1: 1, 4: 5, 5: 10 }
 
 export const python = `def min_index_sum_common(list1, list2):
     indices = {name: i for i, name in enumerate(list1)}

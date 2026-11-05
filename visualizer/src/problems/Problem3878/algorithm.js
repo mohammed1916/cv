@@ -1,11 +1,14 @@
-const codeLines = `count the good subarrays
-  set count to 0
-  for each left end l
-    set running to 0
-    for each right end r from l onward
-      running becomes running OR nums[r]
-      if nums[l..r] contains running then add one to count
-  return count`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
+const codeLines = `function countGood(nums) {
+  let count = 0
+  for (let l = 0; l < nums.length; l++) {
+    let running = 0
+    for (let r = l; r < nums.length; r++) {
+      running |= nums[r]
+      if (nums.slice(l, r + 1).includes(running)) count++
+    }
+  }
+  return count
+}`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
 const L = s => codeLines.findIndex(c => c.text.includes(s)) + 1
 const pythonLines = `def count_good(nums):
     count = 0
@@ -36,7 +39,7 @@ export function buildTrace({ nums }) {
       running |= nums[r]
       const good = nums.slice(l, r + 1).includes(running)
       if (good) count++
-      frames.push({ phase: 'window', activeLine: L('running becomes'), pythonLine: P('running |= '), left: l, right: r, running, good, count,
+      frames.push({ phase: 'window', activeLine: L('running |= nums[r]'), pythonLine: P('running |= '), left: l, right: r, running, good, count,
         message: `[${l}..${r}] OR is ${running}: ${good ? 'present, so it is good' : 'absent, so it is not good'}.` })
     }
   }

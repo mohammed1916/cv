@@ -20,8 +20,8 @@ const definition = {
 
 export default function LongestBalancedSubstringAfterOneSwap() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="s" length={run.input.s.length} valueAt={i => run.input.s[i]} active={step.r}
-      roleAt={i => (step.l >= 0 && i >= step.l && i <= step.r ? (step.fixable ? 'window' : 'excluded') : '')} />
+    <IndexedSequence label="s" length={run.input.s.length} valueAt={i => run.input.s[i]} active={-1}
+      roleAt={i => (step.l < 0 ? '' : i === step.l && i === step.r ? 'l = r' : i === step.l ? 'l' : i === step.r ? 'r' : i > step.l && i < step.r ? (step.fixable ? 'window' : 'excluded') : '')} />
     <output aria-label="Window status">{`Best ${step.best}. ${step.message}`}</output>
   </>} renderReasoning={() => <>
     <p>A single swap changes the balance by at most two, so a window is fixable when it is already balanced, or it is two characters off and the matching character sits outside the window.</p>

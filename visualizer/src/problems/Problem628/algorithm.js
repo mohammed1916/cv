@@ -21,15 +21,22 @@ export function buildTrace(nums) {
   return { input: nums, result, frames }
 }
 
-export const code = `start the two smallest values and the three largest values as empty lists
-for each value in the list
-  keep only the two smallest values seen so far, in sorted order
-  keep only the three largest values seen so far, in sorted order
-compare the product of the three largest with the product of the two smallest and the largest
-return the larger of those two products`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `const smallest = []
+const largest = []
+for (const v of nums) {
+  smallest.push(v)
+  smallest.sort((a, b) => a - b)
+  smallest.length = Math.min(smallest.length, 2)
+  largest.push(v)
+  largest.sort((a, b) => b - a)
+  largest.length = Math.min(largest.length, 3)
+}
+const [s1, s2] = smallest
+const [l1, l2, l3] = largest
+return Math.max(l1 * l2 * l3, s1 * s2 * l1)`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 // The family visualizer reports its own step numbers (1 setup, 3 compare, 4 update, 5 return).
-export const LINE_MAP = { 1: 1, 3: 5, 4: 4, 5: 6 }
+export const LINE_MAP = { 1: 1, 3: 11, 4: 4, 5: 13 }
 
 export const python = `def maximum_product(nums):
     smallest, largest = [], []

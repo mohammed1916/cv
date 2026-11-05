@@ -26,15 +26,16 @@ export function buildTrace({ flowerbed, n }) {
   return { input: { flowerbed, n }, result, frames }
 }
 
-export const code = `copy the bed and start planted at zero
-for each slot i from left to right
-  check whether slot i is empty and both of its neighbors are empty
-  if so, occupy slot i and add one to planted
-  otherwise leave slot i empty
-return whether planted is at least n`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `const bed = [...flowerbed]
+let planted = 0
+for (let i = 0; i < bed.length && planted < n; i++) {
+  const free = bed[i] === 0 && bed[i - 1] !== 1 && bed[i + 1] !== 1
+  if (free) { bed[i] = 1; planted++ }
+}
+return planted >= n`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 // The family visualizer reports its own step numbers (1 setup, 4 update, 5 return).
-export const LINE_MAP = { 1: 1, 4: 4, 5: 6 }
+export const LINE_MAP = { 1: 1, 4: 5, 5: 7 }
 
 export const python = `def can_place_flowers(flowerbed, n):
     bed = list(flowerbed)

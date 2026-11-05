@@ -28,16 +28,16 @@ export function buildTrace(values) {
   return { input: values, root, result, frames }
 }
 
-export const code = `define serialize for one subtree, which returns the text of that subtree
-if the subtree is empty, return the empty string
-serialize the left subtree and the right subtree first
-write the node value
-if the node has a left or right child, append the left text in parentheses, and append the right text in parentheses when a right child exists
-return the text for this subtree
-return serialize applied to the root`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `if (!root) return ''
+let text = String(root.val)
+if (root.left || root.right) {
+  text += '(' + tree2str(root.left) + ')'
+  if (root.right) text += '(' + tree2str(root.right) + ')'
+}
+return text`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 // The tree-family visualizer reports its own step numbers (1 setup, 3 recurse, 4 combine, 5 return).
-export const LINE_MAP = { 1: 1, 3: 3, 4: 5, 5: 7 }
+export const LINE_MAP = { 1: 1, 3: 4, 4: 2, 5: 7 }
 
 export const python = `def tree2str(root):
     def build(values):

@@ -32,18 +32,21 @@ export function buildTrace(items) {
   return { input: items, root, result: order, frames }
 }
 
-export const code = `put the root on a stack marked not expanded
-start the output as an empty list
-while the stack is not empty
-  pop the next entry from the stack
-  if the entry is not expanded
-    push it back marked expanded
-    push its children onto the stack from right to left, not expanded
-  otherwise append its value to the output
-return the output`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `const stack = root ? [{ node: root, expanded: false }] : []
+const output = []
+while (stack.length > 0) {
+  const { node, expanded } = stack.pop()
+  if (expanded) {
+    output.push(node.val)
+  } else {
+    stack.push({ node, expanded: true })
+    for (let i = node.children.length - 1; i >= 0; i--) stack.push({ node: node.children[i], expanded: false })
+  }
+}
+return output`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 // The family visualizer reports its own step numbers (1 setup, 3 defer, 4 visit, 5 return).
-export const LINE_MAP = { 1: 1, 3: 6, 4: 8, 5: 9 }
+export const LINE_MAP = { 1: 1, 3: 8, 4: 6, 5: 12 }
 
 export const python = `def postorder(root):
     stack = [(root, False)] if root is not None else []

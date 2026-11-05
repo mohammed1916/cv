@@ -1,11 +1,23 @@
-const codeLines = `set best to 0
-for each window [l, r] of s
-  ones = number of 1s in the window, zeros = length minus ones
-  outside ones and zeros are the counts outside the window
-  if ones equals zeros then the window is balanced without a swap
-  else if the gap is 2 and a matching character lies outside, one swap fixes it
-  if the window is fixable then best = max(best, length)
-return best`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
+const codeLines = `function longestBalanced(s) {
+  const n = s.length
+  const total1 = [...s].filter(c => c === '1').length
+  const total0 = n - total1
+  let best = 0
+  for (let l = 0; l < n; l++) {
+    for (let r = l; r < n; r++) {
+      const window = s.slice(l, r + 1)
+      const ones = [...window].filter(c => c === '1').length
+      const zeros = window.length - ones
+      const out1 = total1 - ones
+      const out0 = total0 - zeros
+      const gap = ones - zeros
+      if (gap === 0 || (gap === 2 && out0 >= 1) || (gap === -2 && out1 >= 1)) {
+        best = Math.max(best, window.length)
+      }
+    }
+  }
+  return best
+}`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
 const L = s => codeLines.findIndex(c => c.text.includes(s)) + 1
 const pythonLines = `def longest_balanced(s):
     n = len(s)
@@ -37,7 +49,7 @@ export function buildTrace({ s }) {
   const n = s.length
   const total1 = [...s].filter(c => c === '1').length
   const total0 = n - total1
-  const frames = [{ phase: 'totals', activeLine: L('set best to 0'), pythonLine: P('total1 = '), l: -1, r: -1, fixable: null, best: 0,
+  const frames = [{ phase: 'totals', activeLine: L('let best = 0'), pythonLine: P('total1 = '), l: -1, r: -1, fixable: null, best: 0,
     message: `${total1} ones and ${total0} zeros in the whole string.` }]
   let best = 0
   let bestWindow = null
@@ -51,7 +63,7 @@ export function buildTrace({ s }) {
       const gap = ones - zeros
       const fixable = gap === 0 || (gap === 2 && out0 >= 1) || (gap === -2 && out1 >= 1)
       if (fixable && window.length > best) { best = window.length; bestWindow = [l, r] }
-      frames.push({ phase: 'window', activeLine: L('ones = number'), pythonLine: P('ones = s[l'), l, r, fixable, best,
+      frames.push({ phase: 'window', activeLine: L('const ones'), pythonLine: P('ones = s[l'), l, r, fixable, best,
         message: `[${l}..${r}]: ${ones} ones, ${zeros} zeros, ${fixable ? 'fixable' : 'not fixable'}.` })
     }
   }

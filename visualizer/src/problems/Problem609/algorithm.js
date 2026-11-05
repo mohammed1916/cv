@@ -25,17 +25,21 @@ export function buildTrace(paths) {
   return { input: paths, result, frames }
 }
 
-export const code = `start a map from each file content to the list of full paths with that content
-for each directory record in the list
-  split the record into its directory and its file tokens
-  for each file token, take the name before the opening parenthesis
-  take the content between the parentheses
-  append the directory, a slash, and the name to that content's group
-keep only the groups that contain at least two paths
-return those duplicate groups`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `const byContent = new Map()
+for (const record of paths) {
+  const [dir, ...files] = record.split(' ')
+  for (const file of files) {
+    const open = file.indexOf('(')
+    const name = file.slice(0, open)
+    const content = file.slice(open + 1, -1)
+    if (!byContent.has(content)) byContent.set(content, [])
+    byContent.get(content).push(\`\${dir}/\${name}\`)
+  }
+}
+return [...byContent.values()].filter(group => group.length > 1)`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 // The family visualizer reports its own step numbers (1 setup, 3 group, 5 return).
-export const LINE_MAP = { 1: 1, 3: 6, 5: 8 }
+export const LINE_MAP = { 1: 1, 3: 9, 5: 12 }
 
 export const python = `def find_duplicate(paths):
     groups = {}
