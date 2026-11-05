@@ -598,7 +598,7 @@ body.panel-resizing * {
 }
 
 .variable-card {
-  background: linear-gradient(180deg, rgba(23, 23, 46, 0.9), rgba(15, 15, 36, 0.95));
+  background: var(--surface2);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 1rem;
