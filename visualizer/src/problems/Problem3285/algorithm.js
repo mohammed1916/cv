@@ -11,27 +11,28 @@ export function parseInput(text) {
 export function buildTrace({ height, threshold }) {
   const frames = []
   const stable = []
-  frames.push({ pythonLine: PY('result = []'), phase: 'start', activeLine: L('start an empty list'), index: -1, stable: [], message: `Check mountains 1 to ${height.length - 1} against threshold ${threshold}.` })
+  frames.push({ pythonLine: PY('result = []'), phase: 'start', activeLine: L('const result = []'), index: -1, stable: [], message: `Check mountains 1 to ${height.length - 1} against threshold ${threshold}.` })
   for (let i = 1; i < height.length; i++) {
     const ok = height[i - 1] > threshold
-    frames.push({ pythonLine: PY('if height[i - 1]'), phase: 'check', activeLine: L('if the mountain before'), index: i, stable: [...stable], ok,
+    frames.push({ pythonLine: PY('if height[i - 1]'), phase: 'check', activeLine: L('if (height[i - 1] > threshold)'), index: i, stable: [...stable], ok,
       message: `Index ${i}: height[${i - 1}] = ${height[i - 1]} ${ok ? 'is above' : 'is not above'} ${threshold}.` })
     if (ok) {
       stable.push(i)
-      frames.push({ pythonLine: PY('result.append'), phase: 'stable', activeLine: L('add i to the result'), index: i, stable: [...stable], ok,
+      frames.push({ pythonLine: PY('result.append'), phase: 'stable', activeLine: L('result.push(i)'), index: i, stable: [...stable], ok,
         message: `Index ${i} is stable.` })
     }
   }
-  frames.push({ pythonLine: PY('return result'), phase: 'done', activeLine: L('return the result'), index: -1, stable: [...stable], message: `Stable indices: ${stable.join(', ') || 'none'}.` })
+  frames.push({ pythonLine: PY('return result'), phase: 'done', activeLine: L('return result'), index: -1, stable: [...stable], message: `Stable indices: ${stable.join(', ') || 'none'}.` })
   return { input: { height, threshold }, result: stable, frames }
 }
 
-export const code = `find the stable mountains
-  result is an empty list
-  for each index i from 1 to the last index
-    if the mountain before i is higher than threshold
-      add i to the result
-  return the result`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function findIndicesOfStableMountains(height, threshold) {
+  const result = []
+  for (let i = 1; i < height.length; i++) {
+    if (height[i - 1] > threshold) result.push(i)
+  }
+  return result
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def find_indices_of_stable_mountains(height, threshold):

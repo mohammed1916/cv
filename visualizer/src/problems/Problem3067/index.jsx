@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import GraphTraversalView from '../../components/shared/GraphTraversalView'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -15,13 +16,18 @@ const definition = {
   url: 'https://leetcode.com/problems/count-pairs-of-connectable-servers-in-a-weighted-tree-network/',
   complexity: 'O(n^2) time in this trace: each server runs a search over its tree. A rerooting pass gives O(n) overall.',
   examples: [
-    { label: 'Example 1', input: '{"edges":[[0,1,1],[1,2,5],[2,3,13],[3,4,9],[4,5,2]],"signalSpeed":1}' },
-    { label: 'Example 2', input: '{"edges":[[0,6,3],[6,5,3],[0,3,1],[3,2,7],[3,1,6],[3,4,2]],"signalSpeed":3}' },
+    { label: 'Example 1', input: '{"edges":[[0,1,2],[0,2,3],[2,3,4]],"signalSpeed":2}' },
+    { label: 'Example 2', input: '{"edges":[[0,1,4],[1,2,6],[1,3,5],[3,4,3]],"signalSpeed":2}' },
   ],
 }
 
 export default function ConnectableServers() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <GraphTraversalView title="Weighted tree of servers" n={run.input.edges.length + 1}
+      edges={run.input.edges.map(([a, b]) => [a, b])} current={step.server ?? null}
+      visited={(step.reached ?? []).map(([node]) => node)}
+      tags={Object.fromEntries((step.reached ?? []).map(([node, dist]) => [node, `${dist} ${dist % run.input.signalSpeed === 0 ? 'counts' : 'no'}`]))}
+      legend={{ current: 'chosen server c', visited: 'in this branch (distance, counts?)' }} />
     <IndexedSequence label="answer" length={run.input.edges.length + 1} valueAt={i => step.answer[i]} active={step.server ?? -1}
       roleAt={i => (i === step.server ? 'server' : '')} />
     <output aria-label="Branch state">{step.server === null || step.server === undefined ? 'waiting' : `server ${step.server}: ${step.seen ?? 0} servers in earlier branches${step.branch !== null ? `, this branch ${step.branch}` : ''}`}</output>

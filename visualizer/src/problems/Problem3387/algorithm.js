@@ -55,23 +55,53 @@ export function buildTrace(input) {
   const day1 = relaxForward(initialCurrency, list1, names)
   const day2 = relaxBackward(initialCurrency, list2, names)
   const frames = []
-  frames.push({ pythonLine: P('day1 ='), phase: 'day1', activeLine: L('best amount on day 1'), at: -1, rows: [], message: `Starting with 1 ${initialCurrency}; find the best day 1 amount of each currency.` })
+  frames.push({ pythonLine: P('day1 ='), phase: 'day1', activeLine: L('const day1 = relaxForward'), at: -1, rows: [], message: `Starting with 1 ${initialCurrency}; find the best day 1 amount of each currency.` })
   const rows = names.map(name => ({ name, day1: day1.get(name), day2: day2.get(name), product: day1.get(name) * day2.get(name) }))
-  frames.push({ pythonLine: P('day2 ='), phase: 'day2', activeLine: L('best return on day 2'), at: -1, rows, message: 'For each currency, the best day 2 route back to the initial currency.' })
+  frames.push({ pythonLine: P('day2 ='), phase: 'day2', activeLine: L('const day2 = relaxBackward'), at: -1, rows, message: 'For each currency, the best day 2 route back to the initial currency.' })
   const result = Math.max(...rows.map(r => r.product))
   const winner = rows.find(r => r.product === result)
-  frames.push({ pythonLine: P('return best'), phase: 'done', activeLine: L('return the largest'), at: -1, rows, result, message: `Best: go through ${winner.name}, ending with ${result.toFixed(4)} ${initialCurrency}.` })
+  frames.push({ pythonLine: P('return best'), phase: 'done', activeLine: L('return Math.max'), at: -1, rows, result, message: `Best: go through ${winner.name}, ending with ${result.toFixed(4)} ${initialCurrency}.` })
   return { input, result, frames }
 }
 
-export const code = `maximum amount of the initial currency after two days
-  day1 = best amount of each currency reached from the initial one on day 1
-  day2 = best amount of the initial currency reached from each currency on day 2
-  return the largest day1[c] times day2[c]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function maxAmount(initialCurrency, pairs1, rates1, pairs2, rates2) {
+  const names = [...new Set([initialCurrency, ...pairs1.flat(), ...pairs2.flat()])]
+  const day1 = relaxForward(initialCurrency, edges(pairs1, rates1), names)
+  const day2 = relaxBackward(initialCurrency, edges(pairs2, rates2), names)
+  return Math.max(...names.map(c => day1.get(c) * day2.get(c)))
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
-export const python = `def max_amount(initial, pairs1, rates1, pairs2, rates2):
-    day1 = relax_forward(initial, edges(pairs1, rates1))
-    day2 = relax_backward(initial, edges(pairs2, rates2))
-    return max(day1[c] * day2[c] for c in day1)`
+export const python = `def edges(pairs, rates):
+    out = []
+    for (a, b), r in zip(pairs, rates):
+        out.append((a, b, r))
+        out.append((b, a, 1 / r))
+    return out
+
+def relax_forward(start, lst, names):
+    best = {name: 0 for name in names}
+    best[start] = 1
+    for _ in range(len(names)):
+        for frm, to, rate in lst:
+            cand = best[frm] * rate
+            if cand > best[to]:
+                best[to] = cand
+    return best
+
+def relax_backward(target, lst, names):
+    best = {name: 0 for name in names}
+    best[target] = 1
+    for _ in range(len(names)):
+        for frm, to, rate in lst:
+            cand = rate * best[to]
+            if cand > best[frm]:
+                best[frm] = cand
+    return best
+
+def max_amount(initial, pairs1, rates1, pairs2, rates2):
+    names = list(dict.fromkeys([initial] + [c for p in pairs1 for c in p] + [c for p in pairs2 for c in p]))
+    day1 = relax_forward(initial, edges(pairs1, rates1), names)
+    day2 = relax_backward(initial, edges(pairs2, rates2), names)
+    return max(day1[c] * day2[c] for c in names)`
 const P = s => python.split('\n').findIndex(line => line.includes(s)) + 1

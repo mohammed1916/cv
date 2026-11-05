@@ -1,4 +1,4 @@
-// Knowledge-derived model: keep the largest subset whose max and min satisfy max - min <= k * min.
+// Keep the largest subset whose maximum and minimum satisfy max - min <= k * min.
 export function parseInput(text) {
   const input = JSON.parse(text)
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Use an object with nums and k.')
@@ -17,35 +17,38 @@ export function buildTrace({ nums, k }) {
   let bestStart = 0
   let bestEnd = 0
   let j = 0
-  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('sort the values'), i: -1, j: -1, best, message: `Sort ${n} values so every kept set is a contiguous run.` })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('const sorted = [...nums]'), i: -1, j: -1, best, message: `Sort ${n} values so every kept set is a contiguous run.` })
   for (let i = 0; i < n; i++) {
-    frames.push({ pythonLine: 6, phase: 'window', activeLine: L('for each smallest kept value'), i, j, best, message: `Treat sorted[${i}] = ${sorted[i]} as the minimum.` })
+    frames.push({ pythonLine: 6, phase: 'window', activeLine: L('for (let i = 0; i < n; i++)'), i, j, best, message: `Treat sorted[${i}] = ${sorted[i]} as the minimum.` })
     while (j < n && sorted[j] - sorted[i] <= k * sorted[i]) {
       j++
-      frames.push({ pythonLine: 7, phase: 'grow', activeLine: L('while the next value fits'), i, j, best, message: `${sorted[j - 1]} fits: ${sorted[j - 1]} - ${sorted[i]} <= ${k} * ${sorted[i]}.` })
+      frames.push({ pythonLine: 7, phase: 'grow', activeLine: L('while (j < n'), i, j, best, message: `${sorted[j - 1]} fits: ${sorted[j - 1]} - ${sorted[i]} <= ${k} * ${sorted[i]}.` })
     }
     if (j - i > best) {
       best = j - i
       bestStart = i
       bestEnd = j
-      frames.push({ pythonLine: 9, phase: 'record', activeLine: L('keep the longest run'), i, j, best, message: `A run of ${best} values can stay; the best so far.` })
+      frames.push({ pythonLine: 9, phase: 'record', activeLine: L('best = Math.max'), i, j, best, message: `A run of ${best} values can stay; the best so far.` })
     } else {
-      frames.push({ pythonLine: 9, phase: 'record', activeLine: L('keep the longest run'), i, j, best, message: `This run of ${j - i} does not beat ${best}.` })
+      frames.push({ pythonLine: 9, phase: 'record', activeLine: L('best = Math.max'), i, j, best, message: `This run of ${j - i} does not beat ${best}.` })
     }
   }
   const result = n - best
-  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return the removals'), i: bestStart, j: bestEnd, best, result, message: `Remove ${result} value${result === 1 ? '' : 's'}; keep ${best}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return n - best'), i: bestStart, j: bestEnd, best, result, message: `Remove ${result} value${result === 1 ? '' : 's'}; keep ${best}.` })
   return { input: { nums, k }, sorted, result, keep: [bestStart, bestEnd], frames }
 }
 
-export const code = `minimum removals to balance the array
-  sort the values
-  set j to 0 and best to 0
-  for each smallest kept value i
-    while j is inside the array and sorted at j minus sorted at i is no more than k times sorted at i
-      move j forward
-    if j minus i is larger than best then record it
-  return the length minus best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minRemovals(nums, k) {
+  const sorted = [...nums].sort((a, b) => a - b)
+  const n = sorted.length
+  let best = 0
+  let j = 0
+  for (let i = 0; i < n; i++) {
+    while (j < n && sorted[j] - sorted[i] <= k * sorted[i]) j++
+    best = Math.max(best, j - i)
+  }
+  return n - best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def min_removals(nums, k):

@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-occurrences-of-an-element-in-an-array/',
   complexity: 'O(n + q) time: one scan of nums, then one lookup per query.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,3,1,7],"queries":[1,3,2,4],"x":1}' },
-    { label: 'Example 2', input: '{"nums":[1,2,3],"queries":[10],"x":5}' },
+    { label: 'Example 1', input: '{"nums":[4,2,4,9,4],"queries":[2,1,5],"x":4}' },
+    { label: 'Example 2', input: '{"nums":[5,6,7],"queries":[1,4],"x":6}' },
   ],
 }
 

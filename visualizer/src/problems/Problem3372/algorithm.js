@@ -1,9 +1,13 @@
-export const code = [
-  { line: 1, text: "build adjacency lists for both trees" },
-  { line: 2, text: "for each node v of tree 2, count nodes within k - 1 steps and keep the largest count as the bridge" },
-  { line: 3, text: "for each node u of tree 1, count nodes within k steps and add the bridge count" },
-  { line: 4, text: "return all totals" },
-];
+export const code = `function maxTargetNodes(edges1, edges2, k) {
+  const g1 = adjacency(edges1)
+  const g2 = adjacency(edges2)
+  let bridge = 0
+  for (let v = 0; v < g2.length; v++) bridge = Math.max(bridge, withinSteps(g2, v, k - 1))
+  const answer = []
+  for (let u = 0; u < g1.length; u++) answer.push(withinSteps(g1, u, k) + bridge)
+  return answer
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `from collections import deque
 
@@ -100,13 +104,17 @@ function reachIds(graph, source, limit) {
   return order;
 }
 
+function withinSteps(graph, source, limit) {
+  return reachIds(graph, source, limit).length;
+}
+
 export function buildTrace(input) {
   const { edges1, edges2, k } = input;
   const g1 = adjacency(edges1);
   const g2 = adjacency(edges2);
   const frames = [];
   frames.push({
-    phase: "setup", activeLine: 1, pythonLine: pyLine("g1 = adjacency"),
+    phase: "setup", activeLine: L("const g1 = adjacency(edges1)"), pythonLine: pyLine("g1 = adjacency"),
     message: "Build adjacency lists for both trees.", current: null, reach: [], bridge: null, counts: [], tree: null,
   });
   let bridge = 0;
@@ -114,7 +122,7 @@ export function buildTrace(input) {
     const reach = reachIds(g2, v, k - 1);
     bridge = Math.max(bridge, reach.length);
     frames.push({
-      phase: "bridge", activeLine: 2, pythonLine: pyLine("bridge = max"),
+      phase: "bridge", activeLine: L("bridge = Math.max"), pythonLine: pyLine("bridge = max"),
       message: `Tree 2 node ${v} reaches ${reach.length} node(s) within ${k - 1} step(s). Best bridge so far: ${bridge}.`,
       current: v, reach, bridge, counts: [], tree: "second",
     });
@@ -124,13 +132,13 @@ export function buildTrace(input) {
     const reach = reachIds(g1, u, k);
     counts.push(reach.length + bridge);
     frames.push({
-      phase: "count", activeLine: 3, pythonLine: pyLine("return [within"),
+      phase: "count", activeLine: L("answer.push"), pythonLine: pyLine("return [within"),
       message: `Node ${u} of tree 1 reaches ${reach.length} node(s) within ${k} step(s); adding bridge ${bridge} gives ${counts[u]}.`,
       current: u, reach, bridge, counts: [...counts], tree: "first",
     });
   }
   frames.push({
-    phase: "done", activeLine: 4, pythonLine: pyLine("return [within"),
+    phase: "done", activeLine: L("return answer"), pythonLine: pyLine("return [within"),
     message: `Return the totals ${JSON.stringify(counts)}.`, current: null, reach: [], bridge, counts, tree: null,
   });
   return { input, result: counts, frames };

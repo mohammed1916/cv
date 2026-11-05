@@ -19,8 +19,8 @@ const definition = {
   url: 'https://leetcode.com/problems/manhattan-distances-of-all-arrangements-of-pieces/',
   complexity: 'O(m + n + log) time with modular arithmetic for the real limits. The visualization caps m * n at 36 cells.',
   examples: [
-    { label: 'Example 1', input: '{"m":2,"n":2,"k":2}' },
-    { label: 'Example 2', input: '{"m":1,"n":4,"k":3}' },
+    { label: 'Example 1', input: '{"m":2,"n":3,"k":2}' },
+    { label: 'Example 2', input: '{"m":1,"n":3,"k":3}' },
   ],
 }
 

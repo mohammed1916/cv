@@ -20,7 +20,7 @@ export function parseInput(text) {
 export function buildTrace({ nums, queries }) {
   const values = nums.map(BigInt)
   const snapshot = () => values.map(String)
-  const frames = [{ phase: 'start', query: null, at: -1, values: snapshot(), pythonLine: P('for l, r, k, v'), activeLine: L('for each query'), message: 'Start with the array as given.' }]
+  const frames = [{ phase: 'start', query: null, at: -1, values: snapshot(), pythonLine: P('for l, r, k, v'), activeLine: L('for each query [l, r, k, v]'), message: 'Start with the array as given.' }]
   queries.forEach((q, qi) => {
     const [l, r, k, v] = q
     const query = { index: qi, l, r, k, v }
@@ -35,14 +35,16 @@ export function buildTrace({ nums, queries }) {
   return { input: { nums, queries }, result: Number(result), frames }
 }
 
-export const code = [
-  'for each query [l, r, k, v]',
-  'set idx to l',
-  'while idx is at most r',
-  'multiply nums at idx by v modulo 1000000007',
-  'add k to idx',
-  'return the XOR over all nums',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function xorAfterRangeMultiplication(nums, queries) {
+  const MOD = 1000000007n
+  const values = nums.map(BigInt)
+  for (const [l, r, k, v] of queries) { // for each query [l, r, k, v]
+    for (let idx = l; idx <= r; idx += k) { // set idx to l, then step by k while idx is at most r
+      values[idx] = (values[idx] * BigInt(v)) % MOD // multiply nums at idx by v modulo 1000000007
+    }
+  }
+  return values.reduce((acc, x) => acc ^ x, 0n) // return the XOR over all nums
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def xor_after_range_multiplication(nums, queries):

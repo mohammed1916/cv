@@ -19,15 +19,18 @@ const P = text => {
   return index + 1
 }
 
-export const code = [
-  'FUNCTION manhattanDistances(m, n, k)',
-  'cells ← m × n',
-  'rowSum ← sum over row gaps d of 2 × d × (m − d), times n²',
-  'colSum ← sum over column gaps d of 2 × d × (n − d), times m²',
-  'pairTotal ← (rowSum + colSum) / 2',
-  'ways ← C(cells − 2, k − 2)',
-  'RETURN pairTotal × ways mod 1000000007',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function manhattanDistances(m, n, k) {
+  const MOD = 1000000007n
+  const cells = m * n
+  let rowGap = 0n
+  for (let d = 1; d < m; d++) rowGap += 2n * BigInt(d) * BigInt(m - d)
+  let colGap = 0n
+  for (let d = 1; d < n; d++) colGap += 2n * BigInt(d) * BigInt(n - d)
+  const pairTotal = (rowGap * BigInt(n * n) + colGap * BigInt(m * m)) / 2n
+  const ways = combBig(cells - 2, k - 2)
+  return Number((pairTotal * ways) % MOD)
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export function parseInput(text) {
   const data = typeof text === 'string' ? JSON.parse(text) : text
@@ -55,30 +58,30 @@ export function buildTrace(input) {
   const cells = m * n
   const base = { axis: null, length: 0, d: -1, rowGap: 0n, colGap: 0n, pairTotal: null, ways: null, result: null }
   const frames = []
-  frames.push({ ...base, phase: 'setup', activeLine: 2, pythonLine: P('cells = m * n'),
+  frames.push({ ...base, phase: 'setup', activeLine: L('const cells = m * n'), pythonLine: P('cells = m * n'),
     message: `The grid has ${cells} cells and ${k} pieces. Every pair of cells appears together in C(${cells - 2}, ${k - 2}) arrangements.` })
   let rowGap = 0n
   for (let d = 1; d < m; d++) {
     rowGap += gapTerm(m, d)
-    frames.push({ ...base, phase: 'rows', activeLine: 3, pythonLine: P('return sum(2'), axis: 'rows', length: m, d, rowGap,
+    frames.push({ ...base, phase: 'rows', activeLine: L('rowGap += '), pythonLine: P('return sum(2'), axis: 'rows', length: m, d, rowGap,
       message: `Row gap ${d} contributes ${gapTerm(m, d)} to the ordered row-gap sum, now ${rowGap}.` })
   }
   let colGap = 0n
   for (let d = 1; d < n; d++) {
     colGap += gapTerm(n, d)
-    frames.push({ ...base, phase: 'columns', activeLine: 4, pythonLine: P('return sum(2'), axis: 'columns', length: n, d, rowGap, colGap,
+    frames.push({ ...base, phase: 'columns', activeLine: L('colGap += '), pythonLine: P('return sum(2'), axis: 'columns', length: n, d, rowGap, colGap,
       message: `Column gap ${d} contributes ${gapTerm(n, d)} to the ordered column-gap sum, now ${colGap}.` })
   }
   const rowPart = rowGap * BigInt(n * n)
   const colPart = colGap * BigInt(m * m)
   const pairTotal = (rowPart + colPart) / 2n
-  frames.push({ ...base, phase: 'pairs', activeLine: 5, pythonLine: P('pair_distance_total ='), rowGap, colGap, pairTotal,
+  frames.push({ ...base, phase: 'pairs', activeLine: L('const pairTotal'), pythonLine: P('pair_distance_total ='), rowGap, colGap, pairTotal,
     message: `Sum over unordered cell pairs of their distances: ${pairTotal}.` })
   const ways = combBig(cells - 2, k - 2)
-  frames.push({ ...base, phase: 'ways', activeLine: 6, pythonLine: P('ways = comb'), pairTotal, ways,
+  frames.push({ ...base, phase: 'ways', activeLine: L('const ways = combBig'), pythonLine: P('ways = comb'), pairTotal, ways,
     message: `Each pair appears in C(${cells - 2}, ${k - 2}) = ${ways} arrangements.` })
   const result = Number((pairTotal * ways) % 1000000007n)
-  frames.push({ ...base, phase: 'done', activeLine: 7, pythonLine: P('return pair_distance'), pairTotal, ways, result,
+  frames.push({ ...base, phase: 'done', activeLine: L('return Number'), pythonLine: P('return pair_distance'), pairTotal, ways, result,
     message: `Return ${pairTotal} × ${ways} mod 1000000007 = ${result}.` })
   return { input, result, frames }
 }

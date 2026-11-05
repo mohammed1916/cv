@@ -14,25 +14,27 @@ export function buildTrace({ order, friends }) {
   const mine = new Set(friends)
   const answer = []
   const frames = []
-  frames.push({ pythonLine: P('mine = set'), phase: 'start', activeLine: L('mark each friend'), index: -1, id: null, kept: [], message: `Mark ${friends.length} friend IDs.` })
+  frames.push({ pythonLine: P('mine = set'), phase: 'start', activeLine: L('const mine = new Set'), index: -1, id: null, kept: [], message: `Mark ${friends.length} friend IDs.` })
   order.forEach((id, i) => {
     const hit = mine.has(id)
     if (hit) answer.push(id)
     frames.push({
-      pythonLine: P(hit ? 'answer.append' : 'if participant in mine'), phase: hit ? 'keep' : 'skip', activeLine: L(hit ? 'append it' : 'if the participant'),
+      pythonLine: P(hit ? 'answer.append' : 'if participant in mine'), phase: hit ? 'keep' : 'skip', activeLine: L(hit ? 'answer.push(participant)' : 'if (mine.has(participant))'),
       index: i, id, kept: [...answer], message: hit ? `Participant ${id} is a friend, so it is kept.` : `Participant ${id} is not a friend.`,
     })
   })
-  frames.push({ pythonLine: P('return answer'), phase: 'done', activeLine: L('return the answer'), index: -1, id: null, kept: [...answer], message: `Friends in finishing order: ${answer.join(', ')}.` })
+  frames.push({ pythonLine: P('return answer'), phase: 'done', activeLine: L('return answer'), index: -1, id: null, kept: [...answer], message: `Friends in finishing order: ${answer.join(', ')}.` })
   return { input: { order, friends }, result: answer, frames }
 }
 
-export const code = `return the friends' IDs in finishing order
-mark each friend ID in a set
-set an empty answer list
-for each participant in finishing order
-  if the participant is a friend, append it to the answer
-return the answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function restoreFinishingOrder(order, friends) {
+  const mine = new Set(friends)
+  const answer = []
+  for (const participant of order) {
+    if (mine.has(participant)) answer.push(participant)
+  }
+  return answer
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def restore_finishing_order(order, friends):

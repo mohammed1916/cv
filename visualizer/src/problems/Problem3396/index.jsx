@@ -14,15 +14,15 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-number-of-operations-to-make-elements-in-array-distinct/',
   complexity: 'O(n) time and O(n) space for the set of seen values.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,3,4,2,3,3,5,7]}' },
-    { label: 'Example 2', input: '{"nums":[4,5,6,4,4]}' },
+    { label: 'Example 1', input: '{"nums":[4,2,5,4,1,3]}' },
+    { label: 'Example 2', input: '{"nums":[3,3,3,3,1,2,4,5]}' },
   ],
 }
 
 export default function MinimumNumberOfOperationsToMakeElementsDistinct() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} active={step.index}
-      roleAt={i => (i >= step.start ? 'suffix' : '')} />
+      roleAt={i => (i === step.start && step.start < run.input.nums.length ? 'l' : i === run.input.nums.length - 1 && step.start < run.input.nums.length ? 'r' : i > step.start ? 'suffix' : '')} />
     <output aria-label="Distinct suffix">{`suffix starts at ${step.start}. ${step.message}`}</output>
   </>} renderReasoning={() => <>
     <p>Each operation removes three elements from the front, so only the suffix that remains matters.</p>

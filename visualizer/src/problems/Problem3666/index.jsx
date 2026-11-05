@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-operations-to-equalize-binary-string/',
   complexity: 'O(n * k) time and O(n) space with breadth-first search over zero counts. The visualization caps s at 30 characters.',
   examples: [
-    { label: 'Three flips', input: '{"s":"0010","k":3}' },
-    { label: 'Unreachable', input: '{"s":"00101","k":5}' },
+    { label: 'Three flips', input: '{"s":"0110","k":2}' },
+    { label: 'Unreachable', input: '{"s":"01011","k":3}' },
   ],
 }
 

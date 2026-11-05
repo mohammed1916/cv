@@ -31,21 +31,42 @@ export function parseInput(text) {
   return { classroom, energy }
 }
 
-export const code = `fewest moves to collect all litter
-  number each litter cell and find the start
-  if there is no litter the answer is 0
-  queue the start with full energy and all litter left
-  while the queue has states
-    take the oldest state
-    if it has 0 energy it cannot move, drop it
-    for each of the four neighbours
-      skip walls and cells off the grid
-      new energy is full on a reset cell, else one less
-      collect the litter if the neighbour holds some
-      if no litter is left the answer is moves + 1
-      skip if this cell and litter set was reached with as much energy
-      record the energy and queue the new state
-  if the queue empties the answer is -1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minMoves(classroom, energy) {
+  const m = classroom.length
+  const n = classroom[0].length
+  const bit = new Map()
+  let start = null
+  // number each litter cell and find the start
+  classroom.forEach((row, r) => [...row].forEach((ch, c) => {
+    if (ch === 'S') start = [r, c]
+    if (ch === 'L') bit.set(\`\${r},\${c}\`, bit.size)
+  }))
+  const full = (1 << bit.size) - 1
+  // if there is no litter the answer is 0
+  if (full === 0) return 0
+  const best = new Map([[\`\${start[0]},\${start[1]},\${full}\`, energy]])
+  // queue the start with full energy and all litter left
+  const queue = [{ r: start[0], c: start[1], left: energy, mask: full, moves: 0 }]
+  let head = 0
+  while (head < queue.length) {
+    const node = queue[head++] // take the oldest state
+    if (node.left === 0) continue // if it has 0 energy it cannot move, drop it
+    for (const [dr, dc] of [[-1, 0], [0, 1], [1, 0], [0, -1]]) {
+      const nr = node.r + dr
+      const nc = node.c + dc
+      // skip walls and cells off the grid
+      if (nr < 0 || nc < 0 || nr >= m || nc >= n || classroom[nr][nc] === 'X') continue
+      const left = classroom[nr][nc] === 'R' ? energy : node.left - 1
+      const k = bit.has(\`\${nr},\${nc}\`) ? node.mask & ~(1 << bit.get(\`\${nr},\${nc}\`)) : node.mask
+      if (k === 0) return node.moves + 1 // if no litter is left the answer is moves + 1
+      const key = \`\${nr},\${nc},\${k}\`
+      if ((best.get(key) ?? -1) >= left) continue // skip if this cell and litter set was reached with as much energy
+      best.set(key, left) // record the energy and queue the new state
+      queue.push({ r: nr, c: nc, left, mask: k, moves: node.moves + 1 })
+    }
+  }
+  return -1 // if the queue empties the answer is -1
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => {
   const index = code.findIndex(c => c.text.includes(s))
   if (index < 0) throw new Error(`Pseudocode line missing: ${s}`)

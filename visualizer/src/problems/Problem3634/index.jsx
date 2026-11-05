@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-removals-to-balance-array/',
   complexity: 'O(n log n) time for the sort, then O(n) for the two pointers. The visualization caps nums at 20 values.',
   examples: [
-    { label: 'Example', input: '{"nums":[1,3,6,9],"k":2}' },
+    { label: 'Spread out', input: '{"nums":[1,3,6,9],"k":2}' },
     { label: 'Tight limit', input: '{"nums":[4,4,9,10,30],"k":1}' },
   ],
 }
@@ -25,7 +25,7 @@ export default function MinimumRemovalsToBalanceArray() {
     const [from, to] = step.phase === 'done' ? run.keep : [step.i, step.j]
     return <>
       <IndexedSequence label="sorted nums" length={run.sorted.length} valueAt={i => run.sorted[i]} active={step.i >= 0 ? step.i : 0}
-        roleAt={i => (step.i >= 0 && i >= from && i < to ? (step.phase === 'done' ? 'keep' : 'window') : '')} />
+        roleAt={i => (step.i >= 0 && i === from ? 'l' : step.i >= 0 && i === to - 1 ? 'r' : step.i >= 0 && i > from && i < to - 1 ? (step.phase === 'done' ? 'keep' : 'window') : '')} />
       <output aria-label="Balance check">{`minimum ${step.i >= 0 ? run.sorted[step.i] : 'none'}, top of run ${step.i >= 0 ? run.input.k * run.sorted[step.i] + run.sorted[step.i] : 'none'}, best run ${step.best ?? 0}`}</output>
     </>
   }} renderReasoning={() => <>

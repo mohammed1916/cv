@@ -18,9 +18,9 @@ const definition = {
   url: 'https://leetcode.com/problems/assign-elements-to-groups-with-constraints/',
   complexity: 'O(n + m + M log M) time for n groups, m elements and largest group size M. The visualization caps lists at 8 values and values at 50.',
   examples: [
-    { label: 'Example 1', input: '{"groups":[8,4,3,2,4],"elements":[4,2]}' },
-    { label: 'Example 2', input: '{"groups":[2,3,5,7],"elements":[5,3,3]}' },
-    { label: 'Example 3', input: '{"groups":[10,21,30,41],"elements":[2,1]}' },
+    { label: 'Example 1', input: '{"groups":[6,9,4],"elements":[3,2,7]}' },
+    { label: 'Example 2', input: '{"groups":[12,5,8,1],"elements":[5,4,2,4]}' },
+    { label: 'Example 3', input: '{"groups":[9,15],"elements":[7,3,6]}' },
   ],
 }
 

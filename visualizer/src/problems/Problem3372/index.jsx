@@ -18,8 +18,9 @@ const definition = {
   url: "https://leetcode.com/problems/maximize-the-number-of-target-nodes-after-connecting-trees-i/",
   complexity: "O(n * (n + m) + m * (n + m)) time for tree sizes n and m. The visualization accepts at most 40 nodes per tree.",
   examples: [
-    { label: "Sourced example (k = 1)", input: '{"edges1": [[0,1],[0,2],[0,3],[0,4]], "edges2": [[0,1],[1,2],[2,3]], "k": 1}' },
-    { label: "Illustrative: k = 0", input: '{"edges1": [[0,1],[1,2]], "edges2": [[0,1]], "k": 0}' },
+    { label: "Star and path, k = 1", input: '{"edges1": [[0,1],[0,2],[0,3],[0,4]], "edges2": [[0,1],[1,2],[2,3]], "k": 1}' },
+    { label: "Small pair, k = 0", input: '{"edges1": [[0,1],[1,2]], "edges2": [[0,1]], "k": 0}' },
+    { label: "Path and fork, k = 2", input: '{"edges1": [[0,1],[1,2],[2,3]], "edges2": [[0,1],[0,2],[2,3]], "k": 2}' },
   ],
 };
 
@@ -64,7 +65,12 @@ export default function Problem3372Visualizer() {
               activeIds={new Set(step.current !== null && step.tree === "first" ? [step.current] : [])}
               visitedIds={reachSet}
               labelForNode={node => (step.counts[node.id] !== undefined ? `total ${step.counts[node.id]}` : "")} />
-            {step.tree === "second" && <p>Working on tree 2: node {step.current} gives reach {step.reach.length}.</p>}
+            <p>Tree 2 supplies the bridge: the best start node reaches the most nodes within k - 1 steps.</p>
+            <TreeDiagram positions={layout(run.input.edges2)} edges={run.input.edges2.map(([a, b]) => ({ fromId: a, toId: b }))}
+              nodes={[...layout(run.input.edges2).keys()].map(id => ({ id, val: id }))}
+              activeIds={new Set(step.current !== null && step.tree === "second" ? [step.current] : [])}
+              visitedIds={new Set(step.tree === "second" ? step.reach : [])}
+              labelForNode={node => (step.tree === "second" && node.id === step.current ? `bridge ${step.bridge}` : "")} />
           </>
         );
       }}

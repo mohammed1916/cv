@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-indices-of-stable-mountains/',
   complexity: 'O(n) time and O(n) space for the result.',
   examples: [
-    { label: 'Example', input: '{"height":[1,2,3,4,5],"threshold":2}' },
-    { label: 'None stable', input: '{"height":[10,1,1],"threshold":10}' },
+    { label: 'Example', input: '{"height":[5,9,2,8,7,1],"threshold":6}' },
+    { label: 'None stable', input: '{"height":[3,1,4],"threshold":9}' },
   ],
 }
 

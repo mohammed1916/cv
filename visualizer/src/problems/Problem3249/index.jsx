@@ -20,8 +20,8 @@ const definition = {
   url: "https://leetcode.com/problems/count-the-number-of-good-nodes/",
   complexity: "O(n) time and O(n) space with one traversal order. The visualization accepts at most 12 nodes.",
   examples: [
-    { label: "Small tree (illustrative)", input: '{"edges": [[0,1],[0,2],[1,3],[1,4]]}' },
-    { label: "Path (illustrative)", input: '{"edges": [[0,1],[1,2],[2,3]]}' },
+    { label: "Small tree", input: '{"edges": [[0,1],[0,2],[1,3],[1,4]]}' },
+    { label: "Path", input: '{"edges": [[0,1],[1,2],[2,3]]}' },
   ],
 };
 

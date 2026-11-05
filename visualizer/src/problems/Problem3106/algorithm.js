@@ -17,31 +17,39 @@ export function buildTrace({ s, k }) {
   const frames = []
   const out = []
   let budget = k
-  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('out = empty list; budget = k'), at: -1, letter: null, cost: null, budget, out: '', message: `Budget is ${k}.` })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('const out = []'), at: -1, letter: null, cost: null, budget, out: '', message: `Budget is ${k}.` })
   for (let i = 0; i < s.length; i++) {
     for (const c of ALPHA) {
       const cost = cyclicCost(s[i], c)
       if (cost <= budget) {
         out.push(c)
         budget -= cost
-        frames.push({ pythonLine: 8, phase: 'pick', activeLine: L('append c, subtract cost from budget'), at: i, letter: c, cost, budget, out: out.join(''), message: `Position ${i}: ${s[i]} becomes ${c} for cost ${cost}; ${budget} left.` })
+        frames.push({ pythonLine: 8, phase: 'pick', activeLine: L('budget -= cost'), at: i, letter: c, cost, budget, out: out.join(''), message: `Position ${i}: ${s[i]} becomes ${c} for cost ${cost}; ${budget} left.` })
         break
       }
     }
   }
   const result = out.join('')
-  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return out as a string'), at: -1, letter: null, cost: null, budget, out: result, message: `Smallest string: ${result}.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return out.join'), at: -1, letter: null, cost: null, budget, out: result, message: `Smallest string: ${result}.` })
   return { input: { s, k }, result, frames }
 }
 
-export const code = `lexicographically smallest string within a total cost budget
-  out = empty list; budget = k
-  for each position with letter ch in s
-    for each letter c from a to z
-      cost = the shorter way around the alphabet from ch to c
-      if cost is at most budget
-        append c, subtract cost from budget, and stop searching
-  return out as a string`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function smallestString(s, k) {
+  const out = []
+  let budget = k
+  for (const ch of s) {
+    for (const c of 'abcdefghijklmnopqrstuvwxyz') {
+      const d = Math.abs(ch.charCodeAt(0) - c.charCodeAt(0))
+      const cost = Math.min(d, 26 - d)
+      if (cost <= budget) {
+        out.push(c)
+        budget -= cost
+        break
+      }
+    }
+  }
+  return out.join('')
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def smallest_string(s, k):

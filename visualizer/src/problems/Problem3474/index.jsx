@@ -16,16 +16,16 @@ const definition = {
   url: 'https://leetcode.com/problems/lexicographically-smallest-generated-string/',
   complexity: 'Roughly O(n * m) time for the constraint sweeps. The visualization caps str1 at 8 letters and str2 at 4.',
   examples: [
-    { label: 'Example', input: '{"str1":"TFT","str2":"ab"}' },
-    { label: 'Impossible', input: '{"str1":"TT","str2":"ab"}' },
+    { label: 'Mixed', input: '{"str1":"TFTF","str2":"ab"}' },
+    { label: 'Impossible', input: '{"str1":"TTF","str2":"ab"}' },
   ],
 }
 
 export default function LexicographicallySmallestGeneratedString() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Word" length={step.word.length} valueAt={i => step.word[i]}
       active={step.at !== undefined && step.at >= 0 ? step.at : -1}
-      roleAt={i => (step.fixed[i] ? 'fixed' : '')} />
+      roleAt={i => (step.window >= 0 && i === step.window ? 'l' : step.window >= 0 && i === step.window + run.input.str2.length - 1 ? 'r' : step.window >= 0 && i > step.window && i < step.window + run.input.str2.length - 1 ? 'window' : step.fixed[i] ? 'fixed' : '')} />
     <output aria-label="Window status">{`window ${step.window >= 0 ? step.window : 'none'} ${step.kind || ''}, ${step.ok === false ? 'impossible' : step.ok ? 'done' : 'working'}`}</output>
   </>} renderReasoning={() => <>
     <p>Positions forced by a T must hold str2 exactly, so they are written first and marked as fixed.</p>

@@ -15,14 +15,15 @@ const at = text => {
 
 export const python = PY.join('\n');
 
-export const code = [
-  { line: 1, text: 'function kthCharacter(k)' },
-  { line: 2, text: 'word = "a"' },
-  { line: 3, text: 'while the length of word is less than k' },
-  { line: 4, text: 'shifted = every character of word moved to the next letter, with z wrapping to a' },
-  { line: 5, text: 'word = word followed by shifted' },
-  { line: 6, text: 'return the character at position k' },
-];
+export const code = `function kthCharacter(k) {
+  let word = 'a'
+  while (word.length < k) {
+    const shifted = [...word].map(c => String.fromCharCode((c.charCodeAt(0) - 97 + 1) % 26 + 97)).join('')
+    word = word + shifted
+  }
+  return word[k - 1]
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = text => code.findIndex(c => c.text.includes(text)) + 1
 
 export function parseInput(text) {
   let data;
@@ -47,15 +48,15 @@ export function buildTrace(input) {
     phase, activeLine, pythonLine, message, explanation, k, word, active, length: word.length, relatedLines: [activeLine], ...extra,
   });
 
-  snap('start', 2, at('word = "a"'), 'Start with word = "a".', 'Each round appends a shifted copy of the whole word.');
+  snap('start', L("let word = 'a'"), at('word = "a"'), 'Start with word = "a".', 'Each round appends a shifted copy of the whole word.');
   while (word.length < k) {
-    snap('check', 3, at('while len(word)'), `Length ${word.length} is below k = ${k}.`, 'Keep extending while the word is too short.', k - 1);
+    snap('check', L('while (word.length < k)'), at('while len(word)'), `Length ${word.length} is below k = ${k}.`, 'Keep extending while the word is too short.', k - 1);
     const shifted = shiftWord(word);
-    snap('shift', 4, at('shifted = '), `Shifted copy has ${shifted.length} characters.`, `Every character moves to the next letter; "z" wraps to "a".`, -1, { shifted });
+    snap('shift', L('const shifted'), at('shifted = '), `Shifted copy has ${shifted.length} characters.`, `Every character moves to the next letter; "z" wraps to "a".`, -1, { shifted });
     word = word + shifted;
-    snap('append', 5, at('word = word + shifted'), `Word now has length ${word.length}.`, 'The appended copy doubles the length.', k - 1 < word.length ? k - 1 : -1);
+    snap('append', L('word = word + shifted'), at('word = word + shifted'), `Word now has length ${word.length}.`, 'The appended copy doubles the length.', k - 1 < word.length ? k - 1 : -1);
   }
   const result = word[k - 1];
-  snap('done', 6, at('return word[k - 1]'), `Character at position ${k} is "${result}".`, `The word has length ${word.length}, so position ${k} exists.`, k - 1, { result });
+  snap('done', L('return word[k - 1]'), at('return word[k - 1]'), `Character at position ${k} is "${result}".`, `The word has length ${word.length}, so position ${k} exists.`, k - 1, { result });
   return { input, result, frames };
 }

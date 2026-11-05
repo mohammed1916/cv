@@ -21,7 +21,7 @@ const definition = {
 export default function MaximumFrequencyAfterSubarrayOperation() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]}
-      roleAt={i => (step.at >= 0 && i >= step.at && i <= step.end ? 'window' : '')} />
+      roleAt={i => (step.at < 0 ? '' : i === step.at ? 'l' : i === step.end ? 'r' : i > step.at && i < step.end ? 'window' : '')} />
     <output aria-label="Frequency check">{`value ${step.value ?? '-'} lands on ${run.input.k}; block ${step.at >= 0 ? `${step.at}..${step.end}` : 'none'}; frequency ${step.count}`}</output>
   </>} renderReasoning={() => <>
     <p>Only one shift is allowed, so every element in the chosen block moves by the same amount. A value v in the block lands on k exactly when the shift is k minus v.</p>

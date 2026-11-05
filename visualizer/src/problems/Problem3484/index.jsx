@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import OperationLog from '../../components/shared/OperationLog'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const COLUMNS = ['A', 'B', 'C', 'D', 'E']
@@ -16,7 +17,7 @@ const definition = {
   url: 'https://leetcode.com/problems/design-spreadsheet/',
   complexity: 'Each operation is O(1) with a map of stored cells. The visualization shows columns A to E only.',
   examples: [
-    { label: 'Example', input: '{"rows":2,"ops":[["set","A1",5],["set","B2",7],["get","=A1+B2"],["get","=A1+3"],["reset","A1"],["get","=A1+B2"]]}' },
+    { label: 'Three rows', input: '{"rows":3,"ops":[["set","C3",4],["set","A1",2],["get","=A1+C3"],["reset","C3"],["get","=A1+C3"]]}' },
   ],
 }
 
@@ -36,6 +37,7 @@ export default function DesignSpreadsheet() {
         })}
       </tr>)}</tbody>
     </table>
+    <OperationLog title="Operation timeline" ops={run.input.ops.reduce((acc, op, i) => { acc.push({ name: op[0], args: op.slice(1).join(' '), returned: op[0] === 'get' ? run.result[acc.filter(o => o.name === 'get').length] : undefined }); return acc }, [])} current={step.op} through={step.op} />
     <output aria-label="Formula results">{step.results.length ? `results: ${step.results.join(', ')}` : 'no formula results yet'}</output>
   </>} renderReasoning={() => <>
     <p>The sheet keeps only the cells that were set. Reading a cell that is not stored gives zero, so a reset simply removes the entry.</p>

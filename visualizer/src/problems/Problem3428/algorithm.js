@@ -32,16 +32,28 @@ const P = text => {
   return index + 1
 }
 
-export const code = [
-  'FUNCTION maxMinSubsequenceSum(nums, k)',
-  'sort nums ascending into a',
-  'FOR d FROM 0 TO n − 1, g[d] ← number of subsets of size at most k − 2 from d items',
-  'H[d] ← H[d − 1] + g[d], the running prefix sum',
-  'total ← 2 × sum of a (single-element subsequences)',
-  'FOR x FROM 0 TO n − 1',
-  'total ← total + a[x] × (H[n − 2 − x] + H[x − 1])',
-  'RETURN total mod 1000000007',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function maxMinSubsequenceSum(nums, k) {
+  const MOD = 1000000007
+  const a = [...nums].sort((x, y) => x - y)
+  const n = a.length
+  const g = []
+  for (let d = 0; d < n; d++) {
+    let count = 0
+    for (let t = 0; t <= Math.min(k - 2, d); t++) count += choose(d, t)
+    g.push(count)
+  }
+  const H = []
+  let running = 0
+  for (let d = 0; d < n; d++) {
+    running += g[d]
+    H.push(running)
+  }
+  const prefix = m => (m >= 0 ? H[m] : 0)
+  let total = 2 * a.reduce((sum, value) => sum + value, 0)
+  for (let x = 0; x < n; x++) total += a[x] * (prefix(n - 2 - x) + prefix(x - 1))
+  return total % MOD
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export function parseInput(text) {
   const data = typeof text === 'string' ? JSON.parse(text) : text
@@ -71,33 +83,33 @@ export function buildTrace(input) {
   const frames = []
   let total = null
   const snap = extra => ({ a, g: [...g], H: [...H], x: -1, total, result: null, ...extra })
-  frames.push(snap({ phase: 'setup', activeLine: 2, pythonLine: P('a = sorted(nums)'),
+  frames.push(snap({ phase: 'setup', activeLine: L('const a = [...nums]'), pythonLine: P('a = sorted(nums)'),
     message: `Sorted values: ${a.join(', ')}. Each subsequence's minimum and maximum come from two sorted positions.` }))
   for (let d = 0; d < n; d++) {
     let count = 0n
     for (let t = 0; t <= Math.min(k - 2, d); t++) count += combBig(d, t)
     g[d] = count
-    frames.push(snap({ phase: 'gaps', activeLine: 3, pythonLine: P('g = [sum('), d,
+    frames.push(snap({ phase: 'gaps', activeLine: L('for (let t = 0'), pythonLine: P('g = [sum('), d,
       message: `Items strictly between two chosen ends: d = ${d} gives ${count} ways to add at most ${k - 2} middle elements.` }))
   }
   let running = 0n
   for (let d = 0; d < n; d++) {
     running += g[d]
     H[d] = running
-    frames.push(snap({ phase: 'prefix', activeLine: 4, pythonLine: P('H.append(running)'), d,
+    frames.push(snap({ phase: 'prefix', activeLine: L('running += g[d]'), pythonLine: P('H.append(running)'), d,
       message: `H[${d}] = ${running}, the running sum of the gap counts.` }))
   }
   total = (2n * a.reduce((sum, value) => sum + BigInt(value), 0n))
-  frames.push(snap({ phase: 'singles', activeLine: 5, pythonLine: P('total = 2 * sum'),
+  frames.push(snap({ phase: 'singles', activeLine: L('let total = 2'), pythonLine: P('total = 2 * sum'),
     message: `Single-element subsequences contribute 2 × their value, giving ${total}.` }))
   for (let x = 0; x < n; x++) {
     const weight = hAt(n - 2 - x) + hAt(x - 1)
     total += BigInt(a[x]) * weight
-    frames.push(snap({ phase: 'pairs', activeLine: 7, pythonLine: P('total = (total + a[x]'), x, total,
+    frames.push(snap({ phase: 'pairs', activeLine: L('total += a[x]'), pythonLine: P('total = (total + a[x]'), x, total,
       message: `a[${x}] = ${a[x]} is a minimum or maximum of ${weight} pairs, so the total is now ${total}.` }))
   }
   const result = Number(total % MOD)
-  frames.push(snap({ phase: 'done', activeLine: 8, pythonLine: P('return total'), x: -1, total, result,
+  frames.push(snap({ phase: 'done', activeLine: L('return total % MOD'), pythonLine: P('return total'), x: -1, total, result,
     message: `Return ${total} mod 1000000007 = ${result}.` }))
   return { input, result, frames }
 }

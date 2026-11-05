@@ -19,8 +19,9 @@ const definition = {
   url: "https://leetcode.com/problems/button-with-longest-push-time/",
   complexity: "O(n) time and O(1) extra space for n events. The visualization accepts at most 40 events.",
   examples: [
-    { label: "Sourced example 1", input: '{"events": [[1,2],[2,5],[3,9],[1,15]]}' },
-    { label: "Sourced example 2", input: '{"events": [[10,5],[1,7]]}' },
+    { label: "Four presses", input: '{"events": [[4,3],[2,8],[4,12],[1,14]]}' },
+    { label: "Tie on time", input: '{"events": [[5,4],[2,6],[3,8]]}' },
+    { label: "Single press", input: '{"events": [[0,1]]}' },
   ],
 };
 

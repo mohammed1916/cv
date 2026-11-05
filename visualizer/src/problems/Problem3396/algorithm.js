@@ -14,31 +14,32 @@ export function buildTrace({ nums }) {
   const frames = []
   const seen = new Set()
   let start = nums.length
-  frames.push({ pythonLine: PY('seen = set()'), phase: 'start', activeLine: L('scan from the right'), index: -1, start, message: 'Scan from the right, growing a set of distinct values.' })
+  frames.push({ pythonLine: PY('seen = set()'), phase: 'start', activeLine: L('const seen = new Set'), index: -1, start, message: 'Scan from the right, growing a set of distinct values.' })
   for (let i = nums.length - 1; i >= 0; i--) {
     if (seen.has(nums[i])) {
-      frames.push({ pythonLine: PY('if nums[i] in seen'), phase: 'repeat', activeLine: L('a repeat appears'), index: i, start, message: `${nums[i]} at index ${i} already appears later; stop.` })
+      frames.push({ pythonLine: PY('if nums[i] in seen'), phase: 'repeat', activeLine: L('if (seen.has(nums[i]))'), index: i, start, message: `${nums[i]} at index ${i} already appears later; stop.` })
       break
     }
     seen.add(nums[i])
     start = i
-    frames.push({ pythonLine: PY('start = i'), phase: 'extend', activeLine: L('extend the distinct suffix'), index: i, start, message: `${nums[i]} at index ${i} is new; the distinct suffix starts at ${i}.` })
+    frames.push({ pythonLine: PY('start = i'), phase: 'extend', activeLine: L('start = i'), index: i, start, message: `${nums[i]} at index ${i} is new; the distinct suffix starts at ${i}.` })
   }
   const result = Math.floor((start + 2) / 3)
-  frames.push({ pythonLine: PY('return (start'), phase: 'done', activeLine: L('return the number of operations'), index: -1, start, result,
+  frames.push({ pythonLine: PY('return (start'), phase: 'done', activeLine: L('return Math.floor'), index: -1, start, result,
     message: `Each operation removes three elements: ${result} operation(s).` })
   return { input: { nums }, result, frames }
 }
 
-export const code = `minimum operations so the remaining array has distinct values
-  seen is an empty set
-  start is the length of nums
-  for i from the last index down to 0
-    if nums[i] is already in seen
-      stop
-    add nums[i] to seen
-    start is i
-  return the number of groups of three needed to reach start`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minOperations(nums) {
+  const seen = new Set()
+  let start = nums.length
+  for (let i = nums.length - 1; i >= 0; i--) {
+    if (seen.has(nums[i])) break
+    seen.add(nums[i])
+    start = i
+  }
+  return Math.floor((start + 2) / 3)
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def min_operations(nums):

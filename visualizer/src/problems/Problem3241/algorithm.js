@@ -53,14 +53,45 @@ const PY = [
 export const python = PY.join("\n")
 const at = text => PY.findIndex(line => line.includes(text)) + 1
 
-export const code = [
-  { line: 1, text: "build the adjacency list from edges" },
-  { line: 2, text: "root the tree at node 0 and record each parent" },
-  { line: 3, text: "for each node from the bottom up, take the best time reached through its children" },
-  { line: 4, text: "for each node from the top down, take the best time reached through its parent" },
-  { line: 5, text: "answer for a node is the larger of its downward and upward times" },
-  { line: 6, text: "return the answers" },
-]
+export const code = `function timeTaken(edges) {
+  const n = edges.length + 1
+  const adj = Array.from({ length: n }, () => [])
+  for (const [u, v] of edges) { adj[u].push(v); adj[v].push(u) }
+  const weight = node => (node % 2 === 1 ? 1 : 2)
+  const parent = Array(n).fill(-1)
+  const visited = Array(n).fill(false)
+  const order = []
+  const stack = [0]
+  visited[0] = true
+  while (stack.length) {
+    const node = stack.pop()
+    order.push(node)
+    for (const next of adj[node]) if (!visited[next]) { visited[next] = true; parent[next] = node; stack.push(next) }
+  }
+  const down = Array(n).fill(0)
+  for (const node of [...order].reverse()) {
+    for (const child of adj[node]) if (child !== parent[node]) down[node] = Math.max(down[node], weight(child) + down[child])
+  }
+  const up = Array(n).fill(-Infinity)
+  for (const node of order) {
+    let best = -Infinity
+    let second = -Infinity
+    let bestChild = -1
+    for (const child of adj[node]) {
+      if (child === parent[node]) continue
+      const value = weight(child) + down[child]
+      if (value > best) { second = best; best = value; bestChild = child } else if (value > second) second = value
+    }
+    for (const child of adj[node]) {
+      if (child === parent[node]) continue
+      const sibling = child === bestChild ? second : best
+      up[child] = weight(node) + Math.max(0, up[node], sibling)
+    }
+  }
+  const answer = Array.from({ length: n }, (_, i) => Math.max(down[i], up[i]))
+  return answer
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 const MAX_NODES = 12
 const NEG = -Infinity
@@ -117,7 +148,7 @@ export function buildTrace(input) {
     phase, activeLine, pythonLine: at(pythonText), message, n, edges, parent: [...parent], down: [...down],
     up: up.map(value => (value === NEG ? null : value)), answer: [...answer], ...extra,
   })
-  add("build", 1, "adj = [[]", "Build the adjacency list from the edges.", { node: -1 })
+  add("build", L("const adj = Array"), "adj = [[]", "Build the adjacency list from the edges.", { node: -1 })
   visited[0] = true
   const stack = [0]
   while (stack.length) {
@@ -127,12 +158,12 @@ export function buildTrace(input) {
       if (!visited[next]) { visited[next] = true; parent[next] = node; stack.push(next) }
     })
   }
-  add("root", 2, "visited[0] = True", `Root the tree at node 0. Visit order: ${order.join(", ")}.`, { node: 0, order: [...order] })
+  add("root", L("const parent = Array"), "visited[0] = True", `Root the tree at node 0. Visit order: ${order.join(", ")}.`, { node: 0, order: [...order] })
   for (const node of [...order].reverse()) {
     adj[node].forEach(child => {
       if (child !== parent[node]) down[node] = Math.max(down[node], weightOf(child) + down[child])
     })
-    add("down", 3, "down[node] = max(", `Node ${node}: downward time ${down[node]} through its children.`, { node, order: [...order] })
+    add("down", L("for (const node of [...order].reverse())"), "down[node] = max(", `Node ${node}: downward time ${down[node]} through its children.`, { node, order: [...order] })
   }
   for (const node of order) {
     let best = NEG
@@ -148,13 +179,13 @@ export function buildTrace(input) {
       const sibling = child === bestChild ? second : best
       const outside = Math.max(0, up[node], sibling)
       up[child] = weightOf(node) + outside
-      add("up", 4, "up[child] = weight(node)", `Node ${child}: time through parent ${node} is ${up[child]}.`, { node: child, order: [...order] })
+      add("up", L("for (const node of order)"), "up[child] = weight(node)", `Node ${child}: time through parent ${node} is ${up[child]}.`, { node: child, order: [...order] })
     })
   }
   for (let node = 0; node < n; node += 1) {
     answer[node] = Math.max(down[node], up[node])
-    add("answer", 5, "return [max(", `Start at ${node}: the last node is marked at time ${answer[node]}.`, { node, order: [...order] })
+    add("answer", L("const answer = Array"), "return [max(", `Start at ${node}: the last node is marked at time ${answer[node]}.`, { node, order: [...order] })
   }
-  add("done", 6, "return [max(", `Return [${answer.join(", ")}].`, { node: -1, order: [...order] })
+  add("done", L("return answer"), "return [max(", `Return [${answer.join(", ")}].`, { node: -1, order: [...order] })
   return { input: { edges }, result: answer, frames }
 }

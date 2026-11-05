@@ -20,7 +20,7 @@ export function buildTrace({ nums }) {
     const seen = new Set([start])
     const queue = [start]
     let best = nums[start]
-    frames.push({ phase: 'start', start, at: start, seen: [...seen], best, message: `Explore jumps from index ${start}.` })
+    frames.push({ phase: 'start', pythonLine: 4, activeLine: L('for (let i = 0'), start, at: start, seen: [...seen], best, message: `Explore jumps from index ${start}.` })
     while (queue.length) {
       const cur = queue.shift()
       for (const j of neighbours(nums, cur)) {
@@ -28,25 +28,38 @@ export function buildTrace({ nums }) {
         seen.add(j)
         queue.push(j)
         best = Math.max(best, nums[j])
-        frames.push({ phase: 'visit', start, at: j, seen: [...seen], best, message: `Reach index ${j} with value ${nums[j]}.` })
+        frames.push({ phase: 'visit', pythonLine: 12, activeLine: L('if (allowed'), start, at: j, seen: [...seen], best, message: `Reach index ${j} with value ${nums[j]}.` })
       }
     }
     ans.push(best)
-    frames.push({ phase: 'record', start, at: start, seen: [...seen], best, message: `The largest value reachable from ${start} is ${best}.` })
+    frames.push({ phase: 'record', pythonLine: 16, activeLine: L('ans.push(best)'), start, at: start, seen: [...seen], best, message: `The largest value reachable from ${start} is ${best}.` })
   }
-  frames.push({ phase: 'done', start: -1, at: -1, seen: [], best: null, message: `Answer: [${ans.join(', ')}].` })
+  frames.push({ phase: 'done', pythonLine: 17, activeLine: L('return ans'), start: -1, at: -1, seen: [], best: null, message: `Answer: [${ans.join(', ')}].` })
   return { input: { nums }, result: ans, frames }
 }
 
-export const code = `for each index i
-  reachable = {i} and queue = [i]
-  best = nums[i]
-  while queue is not empty
-    take cur from the queue
-    for each j that a jump from cur allows
-      if j is new then add it and update best with nums[j]
-  record best as ans[i]
-return ans`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function maxReachable(nums) {
+  const ans = []
+  for (let i = 0; i < nums.length; i++) {
+    const seen = new Set([i])
+    const queue = [i]
+    let best = nums[i]
+    while (queue.length) {
+      const cur = queue.shift()
+      for (let j = 0; j < nums.length; j++) {
+        const allowed = (j > cur && nums[j] < nums[cur]) || (j < cur && nums[j] > nums[cur])
+        if (allowed && !seen.has(j)) {
+          seen.add(j)
+          queue.push(j)
+          best = Math.max(best, nums[j])
+        }
+      }
+    }
+    ans.push(best)
+  }
+  return ans
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def max_reachable(nums):
     n = len(nums)

@@ -9,44 +9,54 @@ export function buildTrace(nums) {
   const cnt = new Map()
   for (const v of nums) cnt.set(v, (cnt.get(v) ?? 0) + 1)
   let best = 0
-  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('count each value'), base: null, cur: null, length: null, best, message: `Counts are ready for ${cnt.size} distinct values.` })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('const count = new Map'), base: null, cur: null, length: null, best, climb: [], message: `Counts are ready for ${cnt.size} distinct values.` })
   if (cnt.has(1)) {
     best = cnt.get(1) % 2 === 1 ? cnt.get(1) : cnt.get(1) - 1
-    frames.push({ pythonLine: 7, phase: 'ones', activeLine: L('if 1 is present'), base: 1, cur: 1, length: best, best, message: `Ones can fill any odd count: ${best}.` })
+    frames.push({ pythonLine: 7, phase: 'ones', activeLine: L('if (count.has(1))'), base: 1, cur: 1, length: best, best, climb: [], message: `Ones can fill any odd count: ${best}.` })
   }
   for (const x of cnt.keys()) {
     if (x === 1) continue
     let cur = x
     let m = 0
     let length = 1
-    frames.push({ pythonLine: 13, phase: 'base', activeLine: L('cur = x and length = 1'), base: x, cur, length, best, message: `Base ${x} alone gives length 1.` })
+    const climb = [x]
+    frames.push({ pythonLine: 13, phase: 'base', activeLine: L('let cur = x'), base: x, cur, length, best, climb: [...climb], message: `Base ${x} alone gives length 1.` })
     while ((cnt.get(cur) ?? 0) >= 2) {
       cur = cur * cur
       m += 1
-      frames.push({ pythonLine: 15, phase: 'climb', activeLine: L('cur = cur squared'), base: x, cur, length, best, message: `Need two copies below; move up to ${cur}.` })
+      climb.push(cur)
+      frames.push({ pythonLine: 15, phase: 'climb', activeLine: L('cur = cur * cur'), base: x, cur, length, best, climb: [...climb], message: `Need two copies below; move up to ${cur}.` })
       if ((cnt.get(cur) ?? 0) >= 1) {
         length = 2 * m + 1
-        frames.push({ pythonLine: 18, phase: 'top', activeLine: L('if cur appears, length'), base: x, cur, length, best, message: `${cur} is present, so length ${length} works.` })
+        frames.push({ pythonLine: 18, phase: 'top', activeLine: L('length = 2 * m + 1'), base: x, cur, length, best, climb: [...climb], message: `${cur} is present, so length ${length} works.` })
       }
     }
     best = Math.max(best, length)
-    frames.push({ pythonLine: 19, phase: 'best', activeLine: L('best = maximum of best and length'), base: x, cur, length, best, message: `Best so far is ${best}.` })
+    frames.push({ pythonLine: 19, phase: 'best', activeLine: L('best = Math.max'), base: x, cur, length, best, climb: [...climb], message: `Best so far is ${best}.` })
   }
-  frames.push({ pythonLine: 20, phase: 'done', activeLine: L('return best'), base: null, cur: null, length: null, best, message: `The largest valid subset has ${best} elements.` })
+  frames.push({ pythonLine: 20, phase: 'done', activeLine: L('return best'), base: null, cur: null, length: null, best, climb: [], message: `The largest valid subset has ${best} elements.` })
   return { input: nums, result: best, frames }
 }
 
-export const code = `largest subset that forms x, x squared, ... , x squared, x
-  count each value
-  best = 0
-  if 1 is present, odd count of ones (or count minus one) is the candidate
-  for each value x other than 1
-    cur = x and length = 1
-    while cur appears at least twice
-      cur = cur squared; the value below is used twice
-      if cur appears, length = 2 times the climb count plus 1
-    best = maximum of best and length
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function maxSubset(nums) {
+  const count = new Map()
+  for (const v of nums) count.set(v, (count.get(v) ?? 0) + 1)
+  let best = 0
+  if (count.has(1)) best = count.get(1) % 2 === 1 ? count.get(1) : count.get(1) - 1
+  for (const x of count.keys()) {
+    if (x === 1) continue
+    let cur = x
+    let m = 0
+    let length = 1
+    while ((count.get(cur) ?? 0) >= 2) {
+      cur = cur * cur
+      m += 1
+      if ((count.get(cur) ?? 0) >= 1) length = 2 * m + 1
+    }
+    best = Math.max(best, length)
+  }
+  return best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def max_subset(nums):

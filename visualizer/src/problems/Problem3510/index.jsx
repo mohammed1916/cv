@@ -16,16 +16,16 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-pair-removal-to-sort-array-ii/',
   complexity: 'O(n^2) time with this direct simulation and O(n) extra space. The official limit is larger, so the visualization caps the input at 12 values.',
   examples: [
-    { label: 'Example 1', input: '[5,2,3,1]' },
-    { label: 'Example 2', input: '[1,2,2]' },
-    { label: 'Example 3', input: '[2,1,2,0]' },
+    { label: 'Descending start', input: '[6,1,4,2]' },
+    { label: 'Already sorted', input: '[1,2,2]' },
+    { label: 'Zero at the end', input: '[8,2,7,0]' },
   ],
 }
 
 export default function MinimumPairRemovalToSortArrayII() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="array" length={step.arr.length} valueAt={i => step.arr[i]} active={step.at >= 0 ? step.at : -1}
-      roleAt={i => (step.pair && step.pair.includes(i) ? 'pair' : '')} />
+      roleAt={i => (step.pair && step.pair[0] === i ? 'l' : step.pair && step.pair[1] === i ? 'r' : '')} />
     <output aria-label="Operations">{`operations = ${step.operations}${step.phase === 'done' ? ', sorted' : ''}`}</output>
   </>} renderReasoning={() => <>
     <p>Each merge replaces an adjacent pair with its sum. Choosing the smallest sum, leftmost on ties, is the rule the problem asks for, so the simulation follows it exactly.</p>

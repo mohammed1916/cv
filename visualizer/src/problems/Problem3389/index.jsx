@@ -20,9 +20,9 @@ const definition = {
   url: "https://leetcode.com/problems/minimum-operations-to-make-character-frequencies-equal/",
   complexity: "O(n^3 * 26) time in this DP for word length n, and O(n^2) space per letter. The visualization accepts words up to 24 characters.",
   examples: [
-    { label: "Sourced example: acab", input: '{"word": "acab"}' },
-    { label: "Sourced example: wddw", input: '{"word": "wddw"}' },
-    { label: "Sourced example: aaabc", input: '{"word": "aaabc"}' },
+    { label: "Short mix", input: '{"word": "abbcc"}' },
+    { label: "Repeated pair", input: '{"word": "xxyy"}' },
+    { label: "Skewed counts", input: '{"word": "aaaxyz"}' },
   ],
 };
 

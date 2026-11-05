@@ -14,9 +14,9 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-unique-subarray-sum-after-deletion/',
   complexity: 'O(n) time and O(n) space. The visualization caps the input at 12 values.',
   examples: [
-    { label: 'Example 1', input: '[1,2,3,4,5]' },
-    { label: 'Example 2', input: '[1,1,0,1,1]' },
-    { label: 'Example 3', input: '[1,2,-1,-2,1,0,-5]' },
+    { label: 'Example 1', input: '[3,-2,3,5]' },
+    { label: 'Example 2', input: '[-4,-1,-7]' },
+    { label: 'Example 3', input: '[2,2,6,-1]' },
   ],
 }
 

@@ -24,30 +24,48 @@ export function buildTrace({ nums }) {
   const candidates = [...new Set(nums)].sort((a, b) => a - b)
   let best = bestSubarray(nums, null)
   let bestRemoved = null
-  frames.push({ pythonLine: P('best = kadane'), phase: 'keep', activeLine: L('keep everything'), at: -1, removed: null, window: best, best, message: `Without removing anything, the best subarray sum is ${best.sum}.` })
+  frames.push({ pythonLine: P('best = kadane'), phase: 'keep', activeLine: L('let best = kadane'), at: -1, removed: null, window: best, best, message: `Without removing anything, the best subarray sum is ${best.sum}.` })
   for (const x of candidates) {
     if (nums.every(v => v === x)) continue
     const candidate = bestSubarray(nums, x)
-    frames.push({ pythonLine: P('for x in'), phase: 'try', activeLine: L('for each value x'), at: -1, removed: x, window: candidate, best, message: `Remove every ${x}: best subarray sum ${candidate.sum}.` })
+    frames.push({ pythonLine: P('for x in'), phase: 'try', activeLine: L('for (const x of values)'), at: -1, removed: x, window: candidate, best, message: `Remove every ${x}: best subarray sum ${candidate.sum}.` })
     if (candidate.sum > best.sum) {
       best = candidate
       bestRemoved = x
     }
   }
-  frames.push({ pythonLine: P('return best'), phase: 'done', activeLine: L('return the largest'), at: -1, removed: bestRemoved, window: best, best, result: best.sum, message: `Maximum subarray sum is ${best.sum}.` })
+  frames.push({ pythonLine: python.split('\n').length - 1, phase: 'done', activeLine: L('return best'), at: -1, removed: bestRemoved, window: best, best, result: best.sum, message: `Maximum subarray sum is ${best.sum}.` })
   return { input: { nums }, result: best.sum, frames }
 }
 
-export const code = `maximum subarray sum after removing all occurrences of at most one value
-  best = largest subarray sum of nums
-  for each distinct value x that is not the whole array
-    best = max(best, largest subarray sum with every x skipped)
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function maxAfterRemoval(nums) {
+  let best = bestSubarray(nums, null).sum
+  const values = [...new Set(nums)].sort((a, b) => a - b)
+  for (const x of values) {
+    if (nums.every(v => v === x)) continue
+    best = Math.max(best, bestSubarray(nums, x).sum)
+  }
+  return best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
-export const python = `def max_after_removal(nums):
+export const python = `def kadane(nums, removed):
+    best = None
+    current = None
+    for v in nums:
+        if v == removed:
+            continue
+        if current is None or current < 0:
+            current = v
+        else:
+            current += v
+        if best is None or current > best:
+            best = current
+    return best
+
+def max_after_removal(nums):
     best = kadane(nums, None)
-    for x in set(nums):
+    for x in sorted(set(nums)):
         if all(v == x for v in nums):
             continue
         best = max(best, kadane(nums, x))

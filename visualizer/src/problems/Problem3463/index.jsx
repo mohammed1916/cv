@@ -19,11 +19,29 @@ const definition = {
   ],
 }
 
+function rowsOf(s) {
+  const rows = [[...s].map(Number)]
+  while (rows[rows.length - 1].length > 2) {
+    const last = rows[rows.length - 1]
+    rows.push(last.slice(1).map((v, i) => (last[i] + v) % 10))
+  }
+  return rows
+}
+
 export default function CheckIfDigitsAreEqual() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <div aria-label="Every round of the reduction" style={{ display: 'grid', gap: 4, marginBottom: 8 }}>
+      {rowsOf(run.input.s).map((row, round) => {
+        const current = run.input.s.length - step.row.length
+        return <div key={round} style={{ display: 'flex', gap: 6, color: 'var(--text)', fontWeight: round === current ? 700 : 400, opacity: round > current ? 0.45 : 1 }}>
+          <span style={{ minWidth: 72 }}>{round === 0 ? 'digits' : `round ${round}`}</span>
+          {row.map((v, i) => <span key={i} style={{ padding: '0 4px', background: round === current && step.at >= 0 && (i === step.at || i === step.at + 1) ? 'var(--primary)' : 'transparent' }}>{v}</span>)}
+        </div>
+      })}
+    </div>
     <IndexedSequence label="Current row" length={step.row.length} valueAt={i => step.row[i]}
       active={step.at >= 0 ? step.at : -1}
-      roleAt={i => (step.at >= 0 && (i === step.at || i === step.at + 1) ? 'pair' : '')} />
+      roleAt={i => (step.at >= 0 && i === step.at ? 'l' : step.at >= 0 && i === step.at + 1 ? 'r' : '')} />
     <output aria-label="Next row so far">{step.next.length ? step.next.join(' ') : 'not built yet'}</output>
   </>} renderReasoning={() => <>
     <p>Each round replaces every neighbouring pair with the sum of its digits modulo 10, so the row loses one digit per round.</p>

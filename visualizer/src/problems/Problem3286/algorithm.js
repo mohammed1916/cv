@@ -19,13 +19,13 @@ export function buildTrace({ grid, health }) {
   const frames = []
   const cell = (r, c) => `(${r}, ${c})`
   cost[0][0] = grid[0][0]
-  frames.push({ pythonLine: PY('cost[0][0] ='), phase: 'start', activeLine: L('start at the top left'), at: [0, 0], cost: copy(cost), queue: [[0, 0]], message: `Start at ${cell(0, 0)} with ${grid[0][0]} unsafe cell(s) counted.` })
+  frames.push({ pythonLine: PY('cost[0][0] ='), phase: 'start', activeLine: L('cost[0][0] = grid[0][0]'), at: [0, 0], cost: copy(cost), queue: [[0, 0]], message: `Start at ${cell(0, 0)} with ${grid[0][0]} unsafe cell(s) counted.` })
   // 0-1 BFS: stepping onto a 0 cell adds nothing and goes to the front; stepping onto a 1 cell adds one and goes to the back.
   const deque = [[0, 0]]
   const dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]]
   while (deque.length) {
     const [r, c] = deque.shift()
-    frames.push({ pythonLine: PY('r, c = dq.popleft()'), phase: 'pop', activeLine: L('take the next cell'), at: [r, c], cost: copy(cost), queue: deque.map(p => [...p]), message: `Visit ${cell(r, c)} with cost ${cost[r][c]}.` })
+    frames.push({ pythonLine: PY('r, c = dq.popleft()'), phase: 'pop', activeLine: L('const [r, c] = dq.shift()'), at: [r, c], cost: copy(cost), queue: deque.map(p => [...p]), message: `Visit ${cell(r, c)} with cost ${cost[r][c]}.` })
     for (const [dr, dc] of dirs) {
       const nr = r + dr, nc = c + dc
       if (nr < 0 || nc < 0 || nr >= m || nc >= n) continue
@@ -34,33 +34,43 @@ export function buildTrace({ grid, health }) {
       cost[nr][nc] = next
       if (grid[nr][nc] === 0) {
         deque.unshift([nr, nc])
-        frames.push({ pythonLine: PY('dq.appendleft'), phase: 'relax', activeLine: L('a safe step'), at: [nr, nc], cost: copy(cost), queue: deque.map(p => [...p]), message: `Safe step to ${cell(nr, nc)}, cost stays ${next}.` })
+        frames.push({ pythonLine: PY('dq.appendleft'), phase: 'relax', activeLine: L('dq.unshift([nr, nc])'), at: [nr, nc], cost: copy(cost), queue: deque.map(p => [...p]), message: `Safe step to ${cell(nr, nc)}, cost stays ${next}.` })
       } else {
         deque.push([nr, nc])
-        frames.push({ pythonLine: PY('dq.append((nr'), phase: 'relax', activeLine: L('an unsafe step'), at: [nr, nc], cost: copy(cost), queue: deque.map(p => [...p]), message: `Unsafe step to ${cell(nr, nc)}, cost becomes ${next}.` })
+        frames.push({ pythonLine: PY('dq.append((nr'), phase: 'relax', activeLine: L('dq.push([nr, nc])'), at: [nr, nc], cost: copy(cost), queue: deque.map(p => [...p]), message: `Unsafe step to ${cell(nr, nc)}, cost becomes ${next}.` })
       }
     }
   }
   const best = cost[m - 1][n - 1]
   const result = best < health
-  frames.push({ pythonLine: PY('return'), phase: 'done', activeLine: L('return whether'), at: [m - 1, n - 1], cost: copy(cost), queue: [], result, message: `Fewest unsafe cells to the target is ${best}; health ${health} ${result ? 'leaves at least 1' : 'is not enough'}.` })
+  frames.push({ pythonLine: PY('return'), phase: 'done', activeLine: L('return cost[m - 1][n - 1] < health'), at: [m - 1, n - 1], cost: copy(cost), queue: [], result, message: `Fewest unsafe cells to the target is ${best}; health ${health} ${result ? 'leaves at least 1' : 'is not enough'}.` })
   return { input: { grid, health }, result, frames }
 }
 
 function copy(table) { return table.map(row => [...row]) }
 
-export const code = `can the walk reach the target with health to spare
-  cost of a cell is the number of unsafe cells on the best path to it
-  set the cost of the start cell to its value
-  deque holds the start cell
-  while the deque is not empty
-    take the front cell (r, c)
-    for each neighbor inside the grid
-      new cost is cost of (r, c) plus the neighbor value
-      if new cost improves the neighbor
-        if the neighbor is safe, push it to the front
-        otherwise push it to the back
-  return cost of the target is less than health`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function findSafeWalk(grid, health) {
+  const m = grid.length
+  const n = grid[0].length
+  const cost = Array.from({ length: m }, () => Array(n).fill(Infinity))
+  cost[0][0] = grid[0][0]
+  const dq = [[0, 0]]
+  const dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]]
+  while (dq.length) {
+    const [r, c] = dq.shift()
+    for (const [dr, dc] of dirs) {
+      const nr = r + dr
+      const nc = c + dc
+      if (nr < 0 || nc < 0 || nr >= m || nc >= n) continue
+      const nxt = cost[r][c] + grid[nr][nc]
+      if (nxt >= cost[nr][nc]) continue
+      cost[nr][nc] = nxt
+      if (grid[nr][nc] === 0) dq.unshift([nr, nc])
+      else dq.push([nr, nc])
+    }
+  }
+  return cost[m - 1][n - 1] < health
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `from collections import deque

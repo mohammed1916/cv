@@ -21,7 +21,7 @@ const definition = {
 export default function MaximizeSubarraySumAfterRemoval() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]}
-      roleAt={i => (step.removed !== null && run.input.nums[i] === step.removed ? 'removed' : step.window && i >= step.window.start && i <= step.window.end ? 'window' : '')} />
+      roleAt={i => (step.removed !== null && run.input.nums[i] === step.removed ? 'removed' : step.window && i === step.window.start ? 'l' : step.window && i === step.window.end ? 'r' : step.window && i > step.window.start && i < step.window.end ? 'window' : '')} />
     <output aria-label="Removal try">{`removed ${step.removed ?? 'nothing'}, window sum ${step.window ? step.window.sum : '-'}, best so far ${step.best.sum}`}</output>
   </>} renderReasoning={() => <>
     <p>Removing a value joins the pieces on either side of it, so a subarray can span the gap. Skipping that value during the scan models exactly this.</p>

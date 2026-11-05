@@ -21,25 +21,34 @@ export function raiseCost(values) {
 export function buildTrace({ nums, k }) {
   const frames = []
   let count = 0
-  frames.push({ pythonLine: P('count = 0'), phase: 'start', activeLine: L('count = 0'), at: -1, count, cost: null, message: `Budget k = ${k}. Check every subarray.` })
+  frames.push({ pythonLine: P('count = 0'), phase: 'start', activeLine: L('let count = 0'), at: -1, count, cost: null, message: `Budget k = ${k}. Check every subarray.` })
   for (let l = 0; l < nums.length; l++) {
     for (let r = l; r < nums.length; r++) {
       const cost = raiseCost(nums.slice(l, r + 1))
       const ok = cost <= k
       if (ok) count++
-      frames.push({ pythonLine: P('if cost <= k'), phase: ok ? 'fits' : 'too-costly', activeLine: L('if the cost'), at: l, end: r, cost, count, message: `nums[${l}..${r}] needs ${cost} increment(s): ${ok ? 'counts' : 'too many'}.` })
+      frames.push({ pythonLine: P('if cost <= k'), phase: ok ? 'fits' : 'too-costly', activeLine: L('if (cost <= k)'), at: l, end: r, cost, count, message: `nums[${l}..${r}] needs ${cost} increment(s): ${ok ? 'counts' : 'too many'}.` })
     }
   }
-  frames.push({ pythonLine: P('return count'), phase: 'done', activeLine: L('return the count'), at: -1, end: -1, cost: null, count, result: count, message: `${count} subarray(s) reach a sorted run within k increments.` })
+  frames.push({ pythonLine: P('return count'), phase: 'done', activeLine: L('return count'), at: -1, end: -1, cost: null, count, result: count, message: `${count} subarray(s) reach a sorted run within k increments.` })
   return { input: { nums, k }, result: count, frames }
 }
 
-export const code = `count subarrays that can become non-decreasing within k increments
-  count = 0
-  for each subarray nums[l..r]
-    cost = total raise needed, using the running maximum
-    if cost <= k then count += 1
-  return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function countNonDecreasing(nums, k) {
+  let count = 0
+  for (let l = 0; l < nums.length; l++) {
+    for (let r = l; r < nums.length; r++) {
+      let high = -Infinity
+      let cost = 0
+      for (let i = l; i <= r; i++) {
+        if (nums[i] < high) cost += high - nums[i]
+        else high = nums[i]
+      }
+      if (cost <= k) count += 1
+    }
+  }
+  return count
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def count_subarrays(nums, k):

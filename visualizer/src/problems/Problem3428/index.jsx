@@ -19,9 +19,9 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-and-minimum-sums-of-at-most-size-k-subsequences/',
   complexity: 'O(n log n + n k) time and O(n + k) extra space for the sort and the binomial prefix sums. The visualization caps nums at 8 values.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,3],"k":2}' },
-    { label: 'Example 2', input: '{"nums":[5,0,6],"k":1}' },
-    { label: 'Example 3', input: '{"nums":[1,1,1],"k":2}' },
+    { label: 'Example 1', input: '{"nums":[4,1,7,2],"k":2}' },
+    { label: 'Example 2', input: '{"nums":[0,9,3],"k":1}' },
+    { label: 'Example 3', input: '{"nums":[2,2,5],"k":3}' },
   ],
 }
 

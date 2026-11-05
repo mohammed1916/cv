@@ -14,15 +14,18 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-number-of-chairs-in-a-waiting-room/',
   complexity: 'O(n) time and O(1) extra space.',
   examples: [
-    { label: 'Example 1', input: '"EEEEEEE"' },
-    { label: 'Example 2', input: '"ELELEEL"' },
-    { label: 'Example 3', input: '"ELEELEELLL"' },
+    { label: 'Example 1', input: '"EEELLE"' },
+    { label: 'Example 2', input: '"EELLEE"' },
+    { label: 'Example 3', input: '"EELELL"' },
   ],
 }
 
 export default function WaitingRoomChairs() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="events" length={run.input.length} valueAt={i => run.input[i]} active={step.at} roleAt={i => (i === step.at ? 'event' : '')} />
+    <div aria-label="Waiting count over time" style={{ display: 'flex', alignItems: 'flex-end', gap: 3, height: 90 }}>
+      {(step.history ?? []).map((value, i) => <div key={i} title={`after event ${i}: ${value}`} style={{ width: 14, height: `${(value / Math.max(1, step.best)) * 100}%`, background: 'var(--primary)' }} />)}
+    </div>
     <output aria-label="Waiting count">{`waiting now ${step.current}, peak ${step.best}`}</output>
   </>} renderReasoning={() => <>
     <p>Chairs must cover the largest number of people waiting at the same moment. Each E raises the count, each L lowers it, and the running peak is the answer.</p>

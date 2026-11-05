@@ -19,8 +19,8 @@ const definition = {
   url: "https://leetcode.com/problems/maximize-the-number-of-target-nodes-after-connecting-trees-ii/",
   complexity: "O(n + m) time and O(n + m) space for tree sizes n and m. The visualization accepts at most 40 nodes per tree.",
   examples: [
-    { label: "Illustrative: two small trees", input: '{"edges1": [[0,1],[0,2],[2,3]], "edges2": [[0,1],[0,2]]}' },
-    { label: "Illustrative: single node in tree 2", input: '{"edges1": [[0,1]], "edges2": []}' },
+    { label: "Two small trees", input: '{"edges1": [[0,1],[0,2],[2,3]], "edges2": [[0,1],[0,2]]}' },
+    { label: "Single node in tree 2", input: '{"edges1": [[0,1]], "edges2": []}' },
   ],
 };
 

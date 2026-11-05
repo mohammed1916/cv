@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/restore-finishing-order/',
   complexity: 'O(n) time and O(n) space for one pass over the finishing order. The visualization caps order at 12 participants.',
   examples: [
-    { label: 'Example', input: '{"order":[4,2,6,1,5],"friends":[1,2,6]}' },
+    { label: 'Example', input: '{"order":[5,3,1,4,2],"friends":[2,4]}' },
     { label: 'Single friend', input: '{"order":[3,1,2],"friends":[2]}' },
   ],
 }

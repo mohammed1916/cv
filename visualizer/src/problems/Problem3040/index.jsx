@@ -18,15 +18,15 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-number-of-operations-with-the-same-score-ii/',
   complexity: 'O(n^2) states for each of three target scores, each with three moves. The trace caps n at 10.',
   examples: [
-    { label: 'Example 1', input: '[3,2,1,2,3,4]' },
-    { label: 'Example 2', input: '[3,2,6,1,4]' },
+    { label: 'Example 1', input: '[5,1,4,2,5,3]' },
+    { label: 'Example 2', input: '[2,2,2,2]' },
   ],
 }
 
 export default function SameScoreII() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="nums" length={run.input.length} valueAt={i => run.input[i]} active={step.l ?? -1}
-      roleAt={i => (step.l !== null && step.r !== null && i >= step.l && i <= step.r ? 'window' : '')} />
+      roleAt={i => (step.l === null || step.r === null ? '' : i === step.l ? 'l' : i === step.r ? 'r' : i > step.l && i < step.r ? 'window' : '')} />
     <output aria-label="Interval and target">{`interval ${step.l ?? '-'} to ${step.r ?? '-'}, target ${step.target ?? '-'}, best ${step.best}`}</output>
   </>} renderReasoning={() => <>
     <p>The first removal fixes the score for every later removal. Each remaining part is a contiguous interval, so storing the answer for each interval avoids repeated work.</p>

@@ -19,16 +19,21 @@ const P = text => {
   return index + 1
 }
 
-export const code = [
-  'FUNCTION minCost(n, cost)',
-  'states ← ordered color pairs (a, b) with a ≠ b',
-  'pair 0 ← cost[0][a] + cost[n − 1][b] for each state',
-  'FOR p FROM 1 TO n / 2 − 1',
-  'FOR EACH state (a, b)',
-  'prev ← min over states (pa, pb) with pa ≠ a and pb ≠ b',
-  'best[a][b] ← prev + cost[p][a] + cost[n − 1 − p][b]',
-  'RETURN the minimum over all states of the last pair',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function minCost(n, cost) {
+  const states = []
+  for (const a of [0, 1, 2]) for (const b of [0, 1, 2]) if (a !== b) states.push([a, b])
+  let best = new Map(states.map(([a, b]) => [\`\${a},\${b}\`, cost[0][a] + cost[n - 1][b]]))
+  for (let p = 1; p < n / 2; p++) {
+    const next = new Map()
+    for (const [a, b] of states) {
+      const prev = Math.min(...states.filter(([pa, pb]) => pa !== a && pb !== b).map(([pa, pb]) => best.get(\`\${pa},\${pb}\`)))
+      next.set(\`\${a},\${b}\`, prev + cost[p][a] + cost[n - 1 - p][b])
+    }
+    best = next
+  }
+  return Math.min(...best.values())
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export function parseInput(text) {
   const data = typeof text === 'string' ? JSON.parse(text) : text
@@ -56,20 +61,20 @@ export function buildTrace(input) {
   const snap = extra => ({ table: table.map(row => [...row]), row: -1, column: -1, rowLabels, columnLabels, result: null, ...extra })
   states.forEach(([a, b], c) => {
     table[0][c] = cost[0][a] + cost[n - 1][b]
-    frames.push(snap({ phase: 'start', activeLine: 3, pythonLine: P('best = {(a, b)'), row: 0, column: c,
+    frames.push(snap({ phase: 'start', activeLine: L('let best = new Map'), pythonLine: P('best = {(a, b)'), row: 0, column: c,
       message: `Outer pair: house 0 gets color ${a + 1} and house ${n - 1} gets color ${b + 1}, cost ${table[0][c]}.` }))
   })
   for (let p = 1; p < half; p++) {
     states.forEach(([a, b], c) => {
       const prev = Math.min(...states.map(([pa, pb], i) => (pa !== a && pb !== b ? table[p - 1][i] : Infinity)))
       table[p][c] = prev + cost[p][a] + cost[n - 1 - p][b]
-      frames.push(snap({ phase: 'pairs', activeLine: 7, pythonLine: P('nxt[(a, b)] = prev'), row: p, column: c,
+      frames.push(snap({ phase: 'pairs', activeLine: L('const prev = Math.min'), pythonLine: P('nxt[(a, b)] = prev'), row: p, column: c,
         message: `Pair ${p} colors ${a + 1},${b + 1}: best previous pair ${prev}, plus this pair's costs, gives ${table[p][c]}.` }))
     })
   }
   const last = table[half - 1]
   const result = Math.min(...last)
-  frames.push(snap({ phase: 'done', activeLine: 8, pythonLine: P('return min(best.values())'), row: half - 1, column: -1, result,
+  frames.push(snap({ phase: 'done', activeLine: L('return Math.min'), pythonLine: P('return min(best.values())'), row: half - 1, column: -1, result,
     message: `Return ${result}, the cheapest finish over the last mirror pair.` }))
   return { input, result, frames }
 }

@@ -27,9 +27,9 @@ export function buildTrace({ nums, k, op1, op2 }) {
   const frames = []
   // table maps "used1,used2" to the smallest sum reachable with exactly that usage so far
   let table = new Map([['0,0', 0]])
-  frames.push({ pythonLine: P('table = {'), phase: 'start', activeLine: L('start with no operations'), at: -1, table: snapshot(table), message: 'No operations used and sum 0 so far.' })
+  frames.push({ pythonLine: P('table = {'), phase: 'start', activeLine: L('let table = new Map'), at: -1, table: snapshot(table), message: 'No operations used and sum 0 so far.' })
   for (let i = 0; i < nums.length; i++) {
-    frames.push({ pythonLine: P('for x in nums'), phase: 'element', activeLine: L('for each element'), at: i, table: snapshot(table), message: `Element ${nums[i]}: list its fates.` })
+    frames.push({ pythonLine: P('for x in nums'), phase: 'element', activeLine: L('for (const x of nums)'), at: i, table: snapshot(table), message: `Element ${nums[i]}: list its fates.` })
     const next = new Map()
     for (const [key, sum] of table) {
       const [u1, u2] = key.split(',').map(Number)
@@ -43,10 +43,10 @@ export function buildTrace({ nums, k, op1, op2 }) {
       }
     }
     table = next
-    frames.push({ pythonLine: P('table = next'), phase: 'update', activeLine: L('keep the smallest sum'), at: i, table: snapshot(table), message: `Kept ${table.size} usage pattern(s) after element ${nums[i]}.` })
+    frames.push({ pythonLine: P('table = next'), phase: 'update', activeLine: L('table = next'), at: i, table: snapshot(table), message: `Kept ${table.size} usage pattern(s) after element ${nums[i]}.` })
   }
   const result = Math.min(...table.values())
-  frames.push({ pythonLine: P('return min'), phase: 'done', activeLine: L('return the smallest'), at: -1, table: snapshot(table), result, message: `Minimum possible sum is ${result}.` })
+  frames.push({ pythonLine: P('return min'), phase: 'done', activeLine: L('return Math.min'), at: -1, table: snapshot(table), result, message: `Minimum possible sum is ${result}.` })
   return { input: { nums, k, op1, op2 }, result, frames }
 }
 
@@ -54,15 +54,25 @@ function snapshot(table) {
   return [...table].map(([key, sum]) => ({ key, sum })).sort((a, b) => a.key.localeCompare(b.key))
 }
 
-export const code = `minimum sum after at most op1 halvings and op2 subtractions
-  table = { (0, 0): 0 }
-  for x in nums
-    next = {}
-    for each (used1, used2) with sum s in table
-      for each fate of x that fits the remaining operations
-        keep the smallest sum for the new usage
+export const code = `function minArraySum(nums, k, op1, op2) {
+  let table = new Map([['0,0', 0]])
+  for (const x of nums) {
+    const next = new Map()
+    for (const [key, total] of table) {
+      const [u1, u2] = key.split(',').map(Number)
+      for (const option of bestOptions(x, k)) {
+        const n1 = u1 + option.use1
+        const n2 = u2 + option.use2
+        if (n1 > op1 || n2 > op2) continue
+        const nkey = \`\${n1},\${n2}\`
+        const value = total + option.value
+        if (!next.has(nkey) || value < next.get(nkey)) next.set(nkey, value)
+      }
+    }
     table = next
-  return the smallest sum in table`.split('\n').map((text, index) => ({ line: index + 1, text }))
+  }
+  return Math.min(...table.values())
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def min_array_sum(nums, k, op1, op2):

@@ -34,14 +34,32 @@ const PY = [
 export const python = PY.join("\n")
 const at = text => PY.findIndex(line => line.includes(text)) + 1
 
-export const code = [
-  { line: 1, text: "build the adjacency list from edges" },
-  { line: 2, text: "root the tree at node 0 and record each parent" },
-  { line: 3, text: "for each node from the bottom up" },
-  { line: 4, text: "size of the node is 1 plus the sizes of its children" },
-  { line: 5, text: "the node is good when all child sizes are equal" },
-  { line: 6, text: "return the number of good nodes" },
-]
+export const code = `function countGoodNodes(edges) {
+  const n = edges.length + 1
+  const adj = Array.from({ length: n }, () => [])
+  for (const [u, v] of edges) { adj[u].push(v); adj[v].push(u) }
+  const parent = Array(n).fill(-1)
+  const visited = Array(n).fill(false)
+  const order = []
+  const stack = [0]
+  visited[0] = true
+  while (stack.length) {
+    const node = stack.pop()
+    order.push(node)
+    for (const next of adj[node]) if (!visited[next]) { visited[next] = true; parent[next] = node; stack.push(next) }
+  }
+  const size = Array(n).fill(1)
+  let count = 0
+  for (const node of [...order].reverse()) {
+    const childSizes = new Set()
+    for (const child of adj[node]) {
+      if (child !== parent[node]) { size[node] += size[child]; childSizes.add(size[child]) }
+    }
+    if (childSizes.size <= 1) count += 1
+  }
+  return count
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 const MAX_NODES = 12
 const readJson = text => {
@@ -93,7 +111,7 @@ export function buildTrace(input) {
     phase, activeLine, pythonLine: at(pythonText), message, n, edges, parent: [...parent],
     size: [...size], good: [...good], count, ...extra,
   })
-  add("build", 1, "adj = [[]", "Build the adjacency list from the edges.", { node: -1 })
+  add("build", L("const adj = Array"), "adj = [[]", "Build the adjacency list from the edges.", { node: -1 })
   visited[0] = true
   const stack = [0]
   while (stack.length) {
@@ -101,7 +119,7 @@ export function buildTrace(input) {
     order.push(node)
     adj[node].forEach(next => { if (!visited[next]) { visited[next] = true; parent[next] = node; stack.push(next) } })
   }
-  add("root", 2, "stack = [0]", `Root the tree at 0. Visit order: ${order.join(", ")}.`, { node: 0 })
+  add("root", L("const size = Array"), "stack = [0]", `Root the tree at 0. Visit order: ${order.join(", ")}.`, { node: 0 })
   for (const node of [...order].reverse()) {
     const childSizes = new Set()
     adj[node].forEach(child => {
@@ -110,15 +128,15 @@ export function buildTrace(input) {
         childSizes.add(size[child])
       }
     })
-    add("size", 4, "size[node] += size[child]", `Node ${node} has subtree size ${size[node]}.`, { node, childSizes: [...childSizes] })
+    add("size", L("size[node] += size[child]"), "size[node] += size[child]", `Node ${node} has subtree size ${size[node]}.`, { node, childSizes: [...childSizes] })
     if (childSizes.size <= 1) {
       count += 1
       good[node] = true
-      add("good", 5, "good += 1", `Node ${node} is good: its child subtree sizes are ${childSizes.size ? [...childSizes].join(", ") : "none"}.`, { node, childSizes: [...childSizes] })
+      add("good", L("if (childSizes.size <= 1)"), "good += 1", `Node ${node} is good: its child subtree sizes are ${childSizes.size ? [...childSizes].join(", ") : "none"}.`, { node, childSizes: [...childSizes] })
     } else {
-      add("check", 5, "if len(child_sizes) <= 1", `Node ${node} is not good: its child subtree sizes differ.`, { node, childSizes: [...childSizes] })
+      add("check", L("if (childSizes.size <= 1)"), "if len(child_sizes) <= 1", `Node ${node} is not good: its child subtree sizes differ.`, { node, childSizes: [...childSizes] })
     }
   }
-  add("done", 6, "return good", `Return ${count} good nodes.`, { node: -1 })
+  add("done", L("return count"), "return good", `Return ${count} good nodes.`, { node: -1 })
   return { input: { edges }, result: count, frames }
 }

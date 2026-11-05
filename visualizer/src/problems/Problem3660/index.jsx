@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/jump-game-ix/',
   complexity: 'O(n^2) time for this breadth-first search per start; the visualization caps n at 10.',
   examples: [
-    { label: 'Example', input: '{"nums":[4,1,3,2]}' },
-    { label: 'Peak', input: '{"nums":[1,5,2]}' },
+    { label: 'Example', input: '{"nums":[2,7,3,5]}' },
+    { label: 'Peak', input: '{"nums":[6,1,4]}' },
   ],
 }
 

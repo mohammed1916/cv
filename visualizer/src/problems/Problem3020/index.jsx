@@ -17,8 +17,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-maximum-number-of-elements-in-subset/',
   complexity: 'O(n) expected time with a hash map. Each chain climbs only while values keep appearing twice.',
   examples: [
-    { label: 'Example 1', input: '[5,4,1,2,2]' },
-    { label: 'Example 2', input: '[1,3,2,4]' },
+    { label: 'Example 1', input: '[4,4,16,2]' },
+    { label: 'Example 2', input: '[6,1,1,1,2]' },
   ],
 }
 
@@ -26,6 +26,9 @@ export default function MaximumElementsInSubset() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="nums" length={run.input.length} valueAt={i => run.input[i]} active={-1}
       roleAt={i => (step.cur !== null && run.input[i] === step.base ? 'base' : step.cur !== null && run.input[i] === step.cur ? 'top' : '')} />
+    <ol className="algorithm-chain" aria-label="Chain climbing from the base">
+      {step.climb.length === 0 ? <li>No chain yet</li> : step.climb.map((value, i) => <li key={i} data-role={i === step.climb.length - 1 ? 'top' : 'below'}>{value}</li>)}
+    </ol>
     <output aria-label="Chain state">{`base = ${step.base ?? 'none'}, current = ${step.cur ?? 'none'}, length = ${step.length ?? 'none'}, best = ${step.best}`}</output>
   </>} renderReasoning={() => <>
     <p>A valid subset arranges as x, x squared, x to the fourth, up to a top value, then back down. Every value below the top must appear at least twice.</p>

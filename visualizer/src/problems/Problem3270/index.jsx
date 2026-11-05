@@ -13,13 +13,16 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-key-of-the-numbers/',
   complexity: 'O(1) time and space, since every number has at most four digits.',
   examples: [
-    { label: 'Example', input: '{"num1":987,"num2":879,"num3":798}' },
-    { label: 'Leading zeros', input: '{"num1":1,"num2":10,"num3":1000}' },
+    { label: 'Example', input: '{"num1":452,"num2":61,"num3":7}' },
+    { label: 'Leading zeros', input: '{"num1":9,"num2":999,"num3":42}' },
   ],
 }
 
 export default function FindTheKeyOfTheNumbers() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <table aria-label="Padded digits by position" className="algorithm-digit-table">
+      <tbody>{step.digits.map((row, r) => <tr key={r}>{[...row].map((ch, c) => <td key={c} style={{ padding: '2px 8px', color: 'var(--text)', background: c === step.position ? 'var(--primary)' : 'transparent', border: '1px solid var(--text-muted)' }}>{ch}</td>)}</tr>)}</tbody>
+    </table>
     <IndexedSequence label="key digits" length={4} valueAt={i => (i < step.key.length ? step.key[i] : '·')} active={step.position} />
     <output aria-label="Key so far">{`padded: ${step.digits.join(' | ')}, key: ${step.key || 'empty'}`}</output>
   </>} renderReasoning={() => <>

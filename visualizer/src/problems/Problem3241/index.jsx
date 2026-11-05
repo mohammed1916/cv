@@ -20,9 +20,9 @@ const definition = {
   url: "https://leetcode.com/problems/time-taken-to-mark-all-nodes/",
   complexity: "O(n) time and O(n) space with two passes over a rooted tree. The visualization accepts at most 12 nodes.",
   examples: [
-    { label: "Star (from search summary)", input: '{"edges": [[0,1],[0,2]]}' },
-    { label: "Two nodes (from search summary)", input: '{"edges": [[0,1]]}' },
-    { label: "Five nodes (from search summary)", input: '{"edges": [[2,4],[0,1],[2,3],[0,2]]}' },
+    { label: "Three nodes", input: '{"edges": [[0,1],[1,2]]}' },
+    { label: "Two nodes", input: '{"edges": [[0,1]]}' },
+    { label: "Five nodes", input: '{"edges": [[0,1],[1,2],[1,3],[3,4]]}' },
   ],
 };
 

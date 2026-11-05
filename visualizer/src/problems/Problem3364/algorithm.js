@@ -11,34 +11,37 @@ export function parseInput(text) {
 export function buildTrace({ nums, l, r }) {
   const frames = []
   let best = -1
-  frames.push({ pythonLine: PY('best = -1'), phase: 'start', activeLine: L('no positive sum yet'), window: null, total: null, best, message: `Look at subarrays with length from ${l} to ${r}.` })
+  frames.push({ pythonLine: PY('best = -1'), phase: 'start', activeLine: L('let best = -1'), window: null, total: null, best, message: `Look at subarrays with length from ${l} to ${r}.` })
   for (let length = l; length <= r; length++) {
     for (let start = 0; start + length <= nums.length; start++) {
       let total = 0
       for (let i = start; i < start + length; i++) total += nums[i]
       const positive = total > 0
       const improves = positive && (best === -1 || total < best)
-      frames.push({ pythonLine: PY('total = sum'), phase: 'window', activeLine: L('sum the window'), window: [start, start + length], total, best, positive,
+      frames.push({ pythonLine: PY('total = sum'), phase: 'window', activeLine: L('let total = 0'), window: [start, start + length], total, best, positive,
         message: `Window [${start}, ${start + length - 1}] has sum ${total}${positive ? ', positive' : ''}.` })
       if (improves) {
         best = total
-        frames.push({ pythonLine: PY('best = total'), phase: 'better', activeLine: L('keep the smallest positive'), window: [start, start + length], total, best, positive,
+        frames.push({ pythonLine: PY('best = total'), phase: 'better', activeLine: L('best = total'), window: [start, start + length], total, best, positive,
           message: `New smallest positive sum ${best}.` })
       }
     }
   }
-  frames.push({ pythonLine: PY('return best'), phase: 'done', activeLine: L('return the smallest'), window: null, total: null, best, result: best, message: `Answer: ${best}.` })
+  frames.push({ pythonLine: PY('return best'), phase: 'done', activeLine: L('return best'), window: null, total: null, best, result: best, message: `Answer: ${best}.` })
   return { input: { nums, l, r }, result: best, frames }
 }
 
-export const code = `smallest positive sum of a subarray with length between l and r
-  best is -1
-  for each length from l to r
-    for each start index
-      total is the sum of the window
-      if total is positive and (best is -1 or total is smaller than best)
-        best is total
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minimumPositiveSum(nums, l, r) {
+  let best = -1
+  for (let length = l; length <= r; length++) {
+    for (let start = 0; start + length <= nums.length; start++) {
+      let total = 0
+      for (let i = start; i < start + length; i++) total += nums[i]
+      if (total > 0 && (best === -1 || total < best)) best = total
+    }
+  }
+  return best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def minimum_positive_sum_subarray(nums, l, r):

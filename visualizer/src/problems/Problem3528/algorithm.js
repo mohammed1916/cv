@@ -35,31 +35,38 @@ export function buildTrace(conversions) {
   for (const [source, target, factor] of conversions) adjacent[source].push([target, factor])
   const result = Array(n).fill(0)
   result[0] = 1
-  frames.push({ pythonLine: 9, phase: 'start', activeLine: L('start the answer'), unit: 0, edge: null, queue: [0], result: [...result], message: 'Unit 0 is worth 1 of itself.' })
+  frames.push({ pythonLine: 9, phase: 'start', activeLine: L('const result = Array'), unit: 0, edge: null, queue: [0], result: [...result], message: 'Unit 0 is worth 1 of itself.' })
   const queue = [0]
   for (let head = 0; head < queue.length; head++) {
     const node = queue[head]
-    frames.push({ pythonLine: 12, phase: 'visit', activeLine: L('for each unit in the queue'), unit: node, edge: null, queue: queue.slice(head), result: [...result], message: `Visit unit ${node}, worth ${result[node]} base units per unit.` })
+    frames.push({ pythonLine: 12, phase: 'visit', activeLine: L('const node = queue[head]'), unit: node, edge: null, queue: queue.slice(head), result: [...result], message: `Visit unit ${node}, worth ${result[node]} base units per unit.` })
     for (const [target, factor] of adjacent[node]) {
       result[target] = (result[node] * factor) % MOD
       queue.push(target)
-      frames.push({ pythonLine: 14, phase: 'relax', activeLine: L('times the factor'), unit: node, edge: [node, target, factor], queue: queue.slice(head + 1), result: [...result],
+      frames.push({ pythonLine: 14, phase: 'relax', activeLine: L('result[target] = '), unit: node, edge: [node, target, factor], queue: queue.slice(head + 1), result: [...result],
         message: `1 unit of ${node} is ${factor} of ${target}, so ${target} gets ${result[target]}.` })
     }
   }
-  frames.push({ pythonLine: 16, phase: 'done', activeLine: L('return the answer'), unit: null, edge: null, queue: [], result: [...result], message: 'Every unit has its base-unit count.' })
+  frames.push({ pythonLine: 16, phase: 'done', activeLine: L('return result'), unit: null, edge: null, queue: [], result: [...result], message: 'Every unit has its base-unit count.' })
   return { input: conversions, result, frames }
 }
 
-export const code = `find how many of each unit equal one unit of unit 0, modulo 1000000007
-  build the list of arrows out of each unit
-  start the answer with 1 for unit 0 and 0 elsewhere
-  put unit 0 in a queue
-  for each unit in the queue
-    for each arrow from that unit to a target with a factor
-      set the target answer to the unit answer times the factor, modulo 1000000007
-      add the target to the queue
-  return the answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function unitConversions(n, conversions) {
+  const MOD = 1000000007
+  const adjacent = Array.from({ length: n }, () => [])
+  for (const [source, target, factor] of conversions) adjacent[source].push([target, factor])
+  const result = Array(n).fill(0)
+  result[0] = 1
+  const queue = [0]
+  for (let head = 0; head < queue.length; head++) {
+    const node = queue[head]
+    for (const [target, factor] of adjacent[node]) {
+      result[target] = (result[node] * factor) % MOD
+      queue.push(target)
+    }
+  }
+  return result
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `from collections import deque

@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/adjacent-increasing-subarrays-detection-ii/',
   complexity: 'O(n) time and O(n) space for the run lengths.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[2,5,7,8,9,2,3,4,3,1]}' },
-    { label: 'Example 2', input: '{"nums":[1,2,3,4,4,4,4,5,6,7]}' },
+    { label: 'Example 1', input: '{"nums":[4,6,1,2,5,9,3]}' },
+    { label: 'Example 2', input: '{"nums":[3,3,1,2,4,2,5,6]}' },
   ],
 }
 
@@ -24,7 +24,11 @@ export default function AdjacentIncreasingSubarraysDetectionII() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]}
       active={step.focus.length ? step.focus[0][0] : -1}
-      roleAt={i => (step.focus.some(([a, b]) => i >= a && i < b) ? 'run' : '')} />
+      roleAt={i => {
+        const block = step.focus.find(([a, b]) => i >= a && i < b)
+        if (!block) return ''
+        return i === block[0] ? 'l' : i === block[1] - 1 ? 'r' : 'run'
+      }} />
     <output aria-label="Best k">{`best k so far: ${step.best}. ${step.message}`}</output>
   </>} renderReasoning={() => <>
     <p>A pair of adjacent subarrays of length k is two increasing blocks of length k placed side by side.</p>

@@ -16,8 +16,8 @@ const definition = {
   url: 'https://leetcode.com/problems/paint-house-iv/',
   complexity: 'O(n) time and O(1) extra space for n houses, since each mirror pair has six color states. The visualization caps n at 12.',
   examples: [
-    { label: 'Example 1', input: '{"n":4,"cost":[[3,5,7],[6,2,9],[4,8,1],[7,3,5]]}' },
-    { label: 'Example 2', input: '{"n":6,"cost":[[2,4,6],[5,3,8],[7,1,9],[4,6,2],[3,5,7],[8,2,4]]}' },
+    { label: 'Four houses', input: '{"n":4,"cost":[[1,4,2],[3,1,5],[2,6,1],[4,2,3]]}' },
+    { label: 'Six houses', input: '{"n":6,"cost":[[5,1,3],[2,6,4],[1,2,7],[3,3,1],[6,2,2],[4,1,5]]}' },
   ],
 }
 

@@ -18,8 +18,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-k-th-character-in-string-game-i/',
   complexity: 'O(k) time and O(k) space for the built prefix. The visualization caps k at 500.',
   examples: [
-    { label: 'Example 1', input: '{"k": 5}' },
-    { label: 'Example 2', input: '{"k": 10}' },
+    { label: 'Example 1', input: '{"k": 7}' },
+    { label: 'Example 2', input: '{"k": 12}' },
   ],
 }
 

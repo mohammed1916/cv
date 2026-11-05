@@ -15,16 +15,17 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-time-to-revert-word-to-initial-state-ii/',
   complexity: 'O(n) time for the Z-array and O(n / k) checks, each a constant-time lookup. The trace caps the word at 40 letters.',
   examples: [
-    { label: 'Example 1', input: '{"word":"abacaba","k":3}' },
-    { label: 'Example 2', input: '{"word":"abacaba","k":4}' },
-    { label: 'Example 3', input: '{"word":"abcbabcd","k":2}' },
+    { label: 'Example 1', input: '{"word":"abcab","k":2}' },
+    { label: 'Example 2', input: '{"word":"aabaa","k":4}' },
+    { label: 'Example 3', input: '{"word":"abcabc","k":3}' },
   ],
 }
 
 export default function RevertWordII() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="z (match length from each index)" length={run.input.word.length} valueAt={i => step.z[i]} active={step.i ?? (step.t ? step.t * run.input.k : -1)}
-      roleAt={i => (step.i !== null && step.i !== undefined && i === step.i ? 'window' : '')} />
+      roleAt={i => (i === step.l && step.r > step.l ? 'l' : i === step.r - 1 && step.r > step.l ? 'r' : i > step.l && i < step.r - 1 ? 'window' : i === step.i ? 'current' : '')} />
+    <p>{`Z-window: l = ${step.l}, r = ${step.r} (the match covers [l, r))`}</p>
     <output aria-label="Second being tested">{step.t ? `t = ${step.t}, looking at z[${step.t * run.input.k}]` : `building z up to index ${step.i ?? 0}`}</output>
   </>} renderReasoning={() => <>
     <p>The Z-array records, for each position, how far the word matches its own beginning. After t seconds, the rest of the word equals the start exactly when the Z value at position t times k covers the rest.</p>

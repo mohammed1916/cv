@@ -17,8 +17,8 @@ const definition = {
   url: 'https://leetcode.com/problems/shift-distance-between-two-strings/description/',
   complexity: 'O(n * 26) time and O(1) extra space. The visualization caps the strings at 6 letters.',
   examples: [
-    { label: 'Invented pair', input: JSON.stringify({ s: 'abab', t: 'baba', nextCost: [100, ...Array(25).fill(0)], previousCost: Array(26).fill(1) }) },
-    { label: 'Short mix', input: JSON.stringify({ s: 'zc', t: 'ab', nextCost: Array(26).fill(2), previousCost: Array(26).fill(3) }) },
+    { label: 'Invented pair', input: JSON.stringify({ s: 'ccd', t: 'bba', nextCost: Array(26).fill(3), previousCost: Array(26).fill(2) }) },
+    { label: 'Short mix', input: JSON.stringify({ s: 'ab', t: 'ca', nextCost: Array.from({ length: 26 }, (_, i) => i % 4), previousCost: Array(26).fill(1) }) },
   ],
 }
 

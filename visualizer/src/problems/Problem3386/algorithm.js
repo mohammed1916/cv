@@ -1,11 +1,18 @@
-export const code = [
-  { line: 1, text: "set the best index and best time to none, and the previous press time to 0" },
-  { line: 2, text: "for each event with its button index and press time" },
-  { line: 3, text: "the push time is this press minus the previous press" },
-  { line: 4, text: "remember this press as the previous press" },
-  { line: 5, text: "if the push time is longer, or ties with a smaller index, keep this button" },
-  { line: 6, text: "return the best button index" },
-];
+export const code = `function buttonWithLongestTime(events) {
+  let bestIndex = -1
+  let bestTime = -1
+  let previous = 0
+  for (const [index, press] of events) {
+    const duration = press - previous
+    previous = press
+    if (duration > bestTime || (duration === bestTime && index < bestIndex)) {
+      bestIndex = index
+      bestTime = duration
+    }
+  }
+  return bestIndex
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def buttonWithLongestTime(events):
     best_index = -1
@@ -54,27 +61,27 @@ export function buildTrace(input) {
   let previous = 0;
   const durations = [];
   frames.push({
-    phase: "setup", activeLine: 1, pythonLine: pyLine("best_index = -1"),
+    phase: "setup", activeLine: L("let bestIndex = -1"), pythonLine: pyLine("best_index = -1"),
     message: "No button has been judged yet; the previous press time is 0.",
     position: -1, index: null, duration: null, best: null, durations: [],
   });
   events.forEach(([index, press], position) => {
     const duration = press - previous;
     frames.push({
-      phase: "scan", activeLine: 2, pythonLine: pyLine("for index, press"),
+      phase: "scan", activeLine: L("for (const [index, press] of events)"), pythonLine: pyLine("for index, press"),
       message: `Event ${position + 1}: button ${index} pressed at ${press}.`,
       position, index, duration: null, best: bestIndex, durations: [...durations],
     });
     durations.push(duration);
     frames.push({
-      phase: "measure", activeLine: 3, pythonLine: pyLine("duration = press - previous"),
+      phase: "measure", activeLine: L("const duration = press - previous"), pythonLine: pyLine("duration = press - previous"),
       message: `Push time is ${press} - ${previous} = ${duration}.`,
       position, index, duration, best: bestIndex, durations: [...durations],
     });
     previous = press;
     const better = duration > bestTime || (duration === bestTime && index < bestIndex);
     frames.push({
-      phase: "compare", activeLine: 5, pythonLine: pyLine("if duration > best_time"),
+      phase: "compare", activeLine: L("if (duration > bestTime"), pythonLine: pyLine("if duration > best_time"),
       message: better
         ? `${duration} beats the best push time ${bestTime}, so button ${index} becomes the best.`
         : `${duration} does not beat the best push time ${bestTime}; button ${bestIndex} stays.`,
@@ -86,7 +93,7 @@ export function buildTrace(input) {
     }
   });
   frames.push({
-    phase: "done", activeLine: 6, pythonLine: pyLine("return best_index"),
+    phase: "done", activeLine: L("return bestIndex"), pythonLine: pyLine("return best_index"),
     message: `Button ${bestIndex} had the longest push time, ${bestTime}.`,
     position: -1, index: null, duration: null, best: bestIndex, durations: [...durations], result: bestIndex,
   });

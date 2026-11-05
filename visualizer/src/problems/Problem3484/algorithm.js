@@ -32,35 +32,47 @@ export function buildTrace({ rows, ops }) {
   const cells = new Map()
   const results = []
   const frames = []
-  const snap = (extra = {}) => ({ cells: Object.fromEntries(cells), results: [...results], ...extra })
+  const snap = (extra = {}) => ({ cells: Object.fromEntries(cells), results: [...results], op: -1, ...extra })
   const term = operand => (CELL.test(operand) ? cells.get(operand) ?? 0 : Number(operand))
-  frames.push({ ...snap(), pythonLine: P('cells = {}'), phase: 'start', activeLine: L('start with no cells set'), at: '', ok: null, message: `A ${rows}-row sheet with columns A to E. Unset cells read as 0.` })
+  frames.push({ ...snap(), pythonLine: P('cells = {}'), phase: 'start', activeLine: L('this.cells = new Map()'), at: '', ok: null, message: `A ${rows}-row sheet with columns A to E. Unset cells read as 0.` })
   for (const [index, op] of ops.entries()) {
     const [kind, target, value] = op
     if (kind === 'set') {
       cells.set(target, value)
-      frames.push({ ...snap({ at: target }), pythonLine: P('def set'), phase: 'set', activeLine: L('store the value'), ok: null, message: `Operation ${index + 1}: ${target} is now ${value}.` })
+      frames.push({ ...snap({ at: target, op: index }), pythonLine: P('def set'), phase: 'set', activeLine: L('this.cells.set(cell, value)'), ok: null, message: `Operation ${index + 1}: ${target} is now ${value}.` })
     } else if (kind === 'reset') {
       cells.delete(target)
-      frames.push({ ...snap({ at: target }), pythonLine: P('def reset'), phase: 'reset', activeLine: L('remove the cell'), ok: null, message: `Operation ${index + 1}: ${target} is reset to 0.` })
+      frames.push({ ...snap({ at: target, op: index }), pythonLine: P('def reset'), phase: 'reset', activeLine: L('this.cells.delete(cell)'), ok: null, message: `Operation ${index + 1}: ${target} is reset to 0.` })
     } else {
       const [, left, right] = target.match(FORMULA)
       const sum = term(left) + term(right)
       results.push(sum)
-      frames.push({ ...snap({ at: left, right }), pythonLine: P('def get'), phase: 'get', activeLine: L('add the two operands'), ok: null, message: `Operation ${index + 1}: ${left} + ${right} = ${sum}.` })
+      frames.push({ ...snap({ at: left, right, op: index }), pythonLine: P('def get'), phase: 'get', activeLine: L('return this.term(left) + this.term(right)'), ok: null, message: `Operation ${index + 1}: ${left} + ${right} = ${sum}.` })
     }
   }
-  frames.push({ ...snap({ at: '' }), pythonLine: P('return results'), phase: 'done', activeLine: L('return the results'), ok: true, message: `Recorded ${results.length} formula results.` })
+  frames.push({ ...snap({ at: '' }), pythonLine: P('return results'), phase: 'done', activeLine: L('getValue(formula)'), ok: true, message: `Recorded ${results.length} formula results.` })
   return { input: { rows, ops }, result: results, frames }
 }
 
-export const code = `answer a sequence of spreadsheet operations
-  start with an empty map of cells, where unset cells read as zero
-  for each operation in order
-    set: store the integer at the cell
-    reset: remove the cell so it reads as zero
-    get: read each operand, using the cell value or the integer, and add them
-  return the formula results in order`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `class Spreadsheet {
+  constructor(rows) {
+    this.rows = rows
+    this.cells = new Map()
+  }
+  setCell(cell, value) {
+    this.cells.set(cell, value)
+  }
+  resetCell(cell) {
+    this.cells.delete(cell)
+  }
+  term(operand) {
+    return /^[A-E]/.test(operand) ? this.cells.get(operand) ?? 0 : Number(operand)
+  }
+  getValue(formula) {
+    const [left, right] = formula.slice(1).split('+')
+    return this.term(left) + this.term(right)
+  }
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `class Spreadsheet:

@@ -36,15 +36,26 @@ export function buildTrace({ s, k }) {
   return { input: { s, k }, result, frames }
 }
 
-export const code = `count the minimum flips that make every character 1
-count the zeros z, and if z is 0 return 0
-queue the zero count z with distance 0
-while the queue is not empty
-  take the next zero count c from the queue
-  for each x zeros flipped among the k chosen, within limits
-    the new zero count is c plus k minus 2 times x
-    if this count is new, record its distance and check for zero
-  return -1 if the queue runs out`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minOperations(s, k) {
+  const n = s.length
+  const z = [...s].filter(ch => ch === '0').length // count the zeros
+  if (z === 0) return 0
+  const dist = new Map([[z, 0]])
+  const queue = [z]
+  for (let head = 0; head < queue.length; head++) {
+    const c = queue[head] // take the next zero count c from the queue
+    const lo = Math.max(0, k - (n - c))
+    const hi = Math.min(c, k)
+    for (let x = lo; x <= hi; x++) {
+      const next = c + k - 2 * x // the new zero count
+      if (dist.has(next)) continue
+      dist.set(next, dist.get(c) + 1)
+      if (next === 0) return dist.get(next)
+      queue.push(next)
+    }
+  }
+  return -1 // return -1 if the queue runs out
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `from collections import deque

@@ -15,7 +15,7 @@ export function buildTrace({ nums, k }) {
   let best = 0
   let bestValue = null
   let bestWindow = null
-  frames.push({ pythonLine: P('count_k ='), phase: 'start', activeLine: L('count the copies of k'), at: -1, end: -1, gain: 0, value: null, count: cntK, message: `${cntK} copies of k already exist; the best gain starts at 0.` })
+  frames.push({ pythonLine: P('count_k ='), phase: 'start', activeLine: L('const countK'), at: -1, end: -1, gain: 0, value: null, count: cntK, message: `${cntK} copies of k already exist; the best gain starts at 0.` })
   const values = [...new Set(nums)].filter(v => v !== k).sort((a, b) => a - b)
   for (const v of values) {
     let current = 0
@@ -27,19 +27,28 @@ export function buildTrace({ nums, k }) {
       if (current <= 0) { current = delta; start = i } else current += delta
       if (current > localBest) { localBest = current; window = [start, i] }
     }
-    frames.push({ pythonLine: P('for v in'), phase: 'try', activeLine: L('for each other value'), at: window ? window[0] : -1, end: window ? window[1] : -1, gain: localBest, value: v, count: cntK + Math.max(0, localBest), message: `Shift the value ${v} to ${k}: best gain ${localBest}.` })
+    frames.push({ pythonLine: P('for v in'), phase: 'try', activeLine: L('for (const v of new Set'), at: window ? window[0] : -1, end: window ? window[1] : -1, gain: localBest, value: v, count: cntK + Math.max(0, localBest), message: `Shift the value ${v} to ${k}: best gain ${localBest}.` })
     if (localBest > best) { best = localBest; bestValue = v; bestWindow = window }
   }
   const result = cntK + Math.max(0, best)
-  frames.push({ pythonLine: P('return count_k'), phase: 'done', activeLine: L('return the best frequency'), at: bestWindow ? bestWindow[0] : -1, end: bestWindow ? bestWindow[1] : -1, gain: Math.max(0, best), value: bestValue, count: result, result, message: `Maximum frequency of ${k} is ${result}.` })
+  frames.push({ pythonLine: P('return count_k'), phase: 'done', activeLine: L('return countK + best'), at: bestWindow ? bestWindow[0] : -1, end: bestWindow ? bestWindow[1] : -1, gain: Math.max(0, best), value: bestValue, count: result, result, message: `Maximum frequency of ${k} is ${result}.` })
   return { input: { nums, k }, result, frames }
 }
 
-export const code = `maximum frequency of k after adding x to one subarray
-  count the copies of k
-  for each value v different from k
-    find the subarray with the largest (copies of v) minus (copies of k)
-  return copies of k plus the best gain (at least 0)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function maxFrequency(nums, k) {
+  const countK = nums.filter(v => v === k).length
+  let best = 0
+  for (const v of new Set(nums)) {
+    if (v === k) continue
+    let current = 0
+    for (const x of nums) {
+      const delta = x === v ? 1 : x === k ? -1 : 0
+      current = Math.max(delta, current + delta)
+      best = Math.max(best, current)
+    }
+  }
+  return countK + best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def max_frequency(nums, k):

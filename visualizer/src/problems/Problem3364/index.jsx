@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-positive-sum-subarray/',
   complexity: 'O(n * r) time for the sums of every allowed window, with O(1) extra space.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[3,-2,1,4],"l":2,"r":3}' },
+    { label: 'Example 1', input: '{"nums":[5,-3,2,-1,4],"l":2,"r":3}' },
     { label: 'No positive sum', input: '{"nums":[-2,2,-3,1],"l":2,"r":3}' },
   ],
 }
@@ -23,7 +23,7 @@ export default function MinimumPositiveSumSubarray() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]}
       active={step.window ? step.window[0] : -1}
-      roleAt={i => (step.window && i >= step.window[0] && i < step.window[1] ? 'window' : '')} />
+      roleAt={i => (step.window && i === step.window[0] ? 'l' : step.window && i === step.window[1] - 1 ? 'r' : step.window && i > step.window[0] && i < step.window[1] - 1 ? 'window' : '')} />
     <output aria-label="Best positive sum">{`best: ${step.best === -1 ? 'none yet' : step.best}. ${step.message}`}</output>
   </>} renderReasoning={() => <>
     <p>Every window whose length is allowed is summed once.</p>

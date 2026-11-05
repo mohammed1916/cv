@@ -14,14 +14,16 @@ const definition = {
   url: 'https://leetcode.com/problems/find-a-safe-walk-through-a-grid/',
   complexity: 'O(m * n) time and space, since every edge costs 0 or 1 and a deque handles both.',
   examples: [
-    { label: 'Example', input: '{"grid":[[0,1,0,0,0],[0,1,0,1,0],[0,0,0,1,0]],"health":1}' },
-    { label: 'Too costly', input: '{"grid":[[1,1,1],[1,0,1],[1,1,1]],"health":3}' },
+    { label: 'Example', input: '{"grid":[[0,0,1],[1,0,0],[1,1,0]],"health":2}' },
+    { label: 'Too costly', input: '{"grid":[[0,1,0],[0,1,0],[0,0,0]],"health":2}' },
   ],
 }
 
 export default function FindASafeWalkThroughAGrid() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <MatrixGrid label="Grid" matrix={run.input.grid} activeCell={step.at ? { row: step.at[0], col: step.at[1] } : null} />
+    <MatrixGrid label="Grid (1 = unsafe)" matrix={run.input.grid} activeCell={step.at ? { row: step.at[0], col: step.at[1] } : null} />
+    <MatrixGrid label="Cheapest unsafe count reaching each cell" matrix={step.cost.map(row => row.map(v => (v === Infinity ? '∞' : v)))} activeCell={step.at ? { row: step.at[0], col: step.at[1] } : null} />
+    <p>{`Deque (front first): ${step.queue ? step.queue.map(([r, c]) => `(${r}, ${c})`).join(' ') || 'empty' : ''}`}</p>
     <output aria-label="Walk cost">{`${step.message}`}</output>
   </>} renderReasoning={() => <>
     <p>Each unsafe cell costs one health, so the cost of a route is the number of 1 cells on it.</p>
