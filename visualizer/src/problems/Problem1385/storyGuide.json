@@ -2,7 +2,7 @@
   "number": "1385",
   "title": "Find the Distance Value Between Two Arrays",
   "goal": "Count first-array values farther than d from every second-array value.",
-  "strategy": "One close second-array value disqualifies a candidate. Distance equal to d is still too close because the requirement is strictly greater.",
+  "strategy": "Select each arr1 candidate, compare it with arr2 values, and reject it immediately when a blocker is within distance d. Otherwise, count it.",
   "phases": [
     "start",
     "inspect",
@@ -10,22 +10,35 @@
     "done"
   ],
   "phasePurposes": {
-    "start": "Count first-array values farther than d from every second-array value.",
-    "inspect": "One close second-array value disqualifies a candidate. Distance equal to d is still too close because the requirement is strictly greater.",
-    "update": "One close second-array value disqualifies a candidate. Distance equal to d is still too close because the requirement is strictly greater.",
-    "done": "Count first-array values farther than d from every second-array value."
+    "start": "Initialize the arrays, distance limit, and running count.",
+    "inspect": "Highlight the exact source cells, connect them to the comparison cards, and calculate their absolute distance.",
+    "update": "Accept or reject the candidate, update the observed nearest gap, and update the count.",
+    "done": "Display the final distance value and completed candidate decisions."
   },
   "edgeCases": [
-    "Equality at the boundary disqualifies",
-    "Zero distance only rejects exact matches",
-    "Every candidate is too close"
+    "Equality at the distance boundary rejects the candidate.",
+    "Zero distance rejects only exact matches.",
+    "Every candidate may be rejected.",
+    "Every candidate may qualify.",
+    "Negative numbers use absolute distance.",
+    "Duplicate values are separate array elements.",
+    "Early rejection skips remaining blockers."
   ],
-  "checks": [],
+  "checks": [
+    "SVG connections originate from the active source cells.",
+    "The candidate connection remains while blockers change.",
+    "Connections update when indices or layout dimensions change.",
+    "Nearest gaps never reveal future comparisons.",
+    "The running count matches accepted verdicts.",
+    "Both light and dark themes remain readable."
+  ],
   "inputRules": [
-    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+    "Arrays contain between 1 and 50 integers.",
+    "Array values are between -100 and 100.",
+    "Distance d is an integer between 0 and 100."
   ],
   "verification": {
     "status": "not-run",
-    "reason": "User requested implementation without tests or builds."
+    "reason": "Tests and builds have not been executed in the user's project."
   }
 }
