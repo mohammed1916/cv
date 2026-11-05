@@ -1,50 +1,87 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 
 const code = [
-  'explore(r, c) with depth-first search',
-  '  record the cell as reached, and check for the target',
-  '  for each direction not yet seen',
-  '    if the master says the cell is open, step in and read its cost',
-  '    explore it, then step back',
-  'run Dijkstra from (0, 0) using the recorded costs',
-  '  entering a cell adds that cell cost',
-  'return the cost to the target, or -1',
+  'const cost = new Map([[key(0, 0), 0]])',
+  'let target = master.isTarget() ? [0, 0] : null',
+  'const dfs = (i, j) => {',
+  '  for (const [d, di, dj, back] of MOVES) {',
+  '    const ni = i + di, nj = j + dj',
+  '    if (master.canMove(d) && !cost.has(key(ni, nj))) {',
+  '      cost.set(key(ni, nj), master.move(d))',
+  '      if (target === null && master.isTarget()) target = [ni, nj]',
+  '      dfs(ni, nj)',
+  '      master.move(back)',
+  '    }',
+  '  }',
+  '}',
+  'dfs(0, 0)',
+  'if (target === null) return -1',
+  'const dist = new Map([[key(0, 0), 0]]), done = new Set()',
+  'while (true) {',
+  '  let best = null',
+  '  for (const [k, d] of dist) if (!done.has(k) && (best === null || d < dist.get(best))) best = k',
+  '  if (best === null) return -1',
+  '  if (best === key(...target)) return dist.get(best)',
+  '  done.add(best)',
+  '  const [i, j] = best.split(\',\').map(Number)',
+  '  for (const [, di, dj] of MOVES) {',
+  '    const k = key(i + di, j + dj)',
+  '    if (cost.has(k) && !done.has(k)) {',
+  '      const candidate = dist.get(best) + cost.get(k)',
+  '      if (!dist.has(k) || candidate < dist.get(k)) dist.set(k, candidate)',
+  '    }',
+  '  }',
+  '}',
 ].map((text, index) => ({ line: index + 1, text }))
 
 const python = `def minimum_cost(master):
-    import heapq
-    DIRS = [(-1, 0, 'U', 'D'), (1, 0, 'D', 'U'), (0, -1, 'L', 'R'), (0, 1, 'R', 'L')]
-    cost, seen, target = {(0, 0): 0}, {(0, 0)}, None
-    def explore(r, c):
+    MOVES = [('U', -1, 0, 'D'), ('D', 1, 0, 'U'), ('L', 0, -1, 'R'), ('R', 0, 1, 'L')]
+    cost = {(0, 0): 0}
+    target = (0, 0) if master.is_target() else None
+    def dfs(i, j):
         nonlocal target
-        if master.is_target():
-            target = (r, c)
-        for dr, dc, move, back in DIRS:
-            nr, nc = r + dr, c + dc
-            if (nr, nc) in seen:
-                continue
-            seen.add((nr, nc))
-            if master.can_move(move):
-                cost[(nr, nc)] = master.move(move)
-                explore(nr, nc)
+        for d, di, dj, back in MOVES:
+            ni, nj = i + di, j + dj
+            if master.can_move(d) and (ni, nj) not in cost:
+                cost[(ni, nj)] = master.move(d)
+                if target is None and master.is_target():
+                    target = (ni, nj)
+                dfs(ni, nj)
                 master.move(back)
-    explore(0, 0)
+    dfs(0, 0)
     if target is None:
         return -1
-    best, heap = {(0, 0): 0}, [(0, 0, 0)]
-    while heap:
-        d, r, c = heapq.heappop(heap)
-        if d > best.get((r, c), float('inf')):
-            continue
-        for dr, dc, _, _ in DIRS:
-            nxt = (r + dr, c + dc)
-            if nxt in cost and d + cost[nxt] < best.get(nxt, float('inf')):
-                best[nxt] = d + cost[nxt]
-                heapq.heappush(heap, (best[nxt], nxt[0], nxt[1]))
-    return best.get(target, -1)
+    dist, done = {(0, 0): 0}, set()
+    while True:
+        best = None
+        for k, d in dist.items():
+            if k not in done and (best is None or d < dist[best]):
+                best = k
+        if best is None:
+            return -1
+        if best == target:
+            return dist[best]
+        done.add(best)
+        i, j = best
+        for _, di, dj, _ in MOVES:
+            k = (i + di, j + dj)
+            if k in cost and k not in done:
+                candidate = dist[best] + cost[k]
+                if k not in dist or candidate < dist[k]:
+                    dist[k] = candidate
 `
 
-const PY = { explore: 5, reach: 7, probeOpen: 15, back: 17, dijkstra: 22, relax: 29, done: 31 }
+const pyLine = text => python.split('\n').findIndex(line => line.includes(text)) + 1
+const PY = {
+  start: pyLine('cost = {(0, 0): 0}'),
+  reach: pyLine('if target is None and master.is_target():'),
+  check: pyLine('if master.can_move(d)'),
+  probe: pyLine('cost[(ni, nj)] = master.move(d)'),
+  back: pyLine('master.move(back)'),
+  noTarget: pyLine('if target is None:'),
+  found: pyLine('return dist[best]'),
+  relax: pyLine('dist[k] = candidate'),
+}
 const DIRS = [[-1, 0, 'U', 'D'], [1, 0, 'D', 'U'], [0, -1, 'L', 'R'], [0, 1, 'R', 'L']]
 
 export function parse(text) {
@@ -69,28 +106,29 @@ export function build({ grid, target }) {
   const push = (phase, line, pythonLine, message, best = {}) => frames.push({
     phase, activeLine: line, pythonLine, message, pos: [...pos], cost: { ...cost }, best: { ...best },
   })
-  push('start', 1, PY.explore, 'Start at (0, 0). Its cost is not counted.')
+  push('start', 1, PY.start, 'Start at (0, 0). Its cost is not counted.')
   const explore = (r, c) => {
-    if (r === target[0] && c === target[1]) { found = true; push('reach', 2, PY.reach, `Target reached at (${r}, ${c}).`) }
+    if (r === target[0] && c === target[1]) { found = true; push('reach', 8, PY.reach, `Target reached at (${r}, ${c}).`) }
     for (const [dr, dc, move, back] of DIRS) {
       const nr = r + dr, nc = c + dc
       if (seen.has(key(nr, nc))) continue
-      seen.add(key(nr, nc))
       if (inside(nr, nc) && grid[nr][nc] > 0) {
+        seen.add(key(nr, nc))
         pos = [nr, nc]
         cost[key(nr, nc)] = grid[nr][nc]
-        push('probe', 6, PY.probeOpen, `Step ${move} into (${nr}, ${nc}); its cost is ${grid[nr][nc]}.`)
+        push('probe', 7, PY.probe, `Step ${move} into (${nr}, ${nc}); its cost is ${grid[nr][nc]}.`)
         explore(nr, nc)
         pos = [r, c]
-        push('back', 7, PY.back, `Step ${back} back to (${r}, ${c}).`)
+        push('back', 10, PY.back, `Step ${back} back to (${r}, ${c}).`)
       } else {
-        push('blocked', 6, PY.probeOpen, `Neighbour ${move} of (${r}, ${c}) is blocked.`)
+        blocked(r, c, move)
       }
     }
   }
+  const blocked = (r, c, move) => push('blocked', 6, PY.check, `Neighbour ${move} of (${r}, ${c}) is blocked.`)
   explore(0, 0)
   if (!found) {
-    push('done', 10, PY.done, 'The target was not reached by exploration.')
+    push('done', 15, PY.noTarget, 'The target was not reached by exploration.')
     return { input: { grid, target }, result: -1, frames }
   }
   const best = { '0,0': 0 }
@@ -106,12 +144,12 @@ export function build({ grid, target }) {
       const nk = key(r + dr, c + dc)
       if (open.has(nk) && (best[nk] === undefined || best[current] + cost[nk] < best[nk])) {
         best[nk] = best[current] + cost[nk]
-        push('relax', 15, PY.relax, `Cost to (${r + dr}, ${c + dc}) is now ${best[nk]}.`, best)
+        push('relax', 28, PY.relax, `Cost to (${r + dr}, ${c + dc}) is now ${best[nk]}.`, best)
       }
     }
   }
   const answer = best[key(target[0], target[1])] ?? -1
-  push('done', 10, PY.done, answer === -1 ? 'The target is unreachable.' : `Minimum path cost is ${answer}.`, best)
+  push('done', 21, PY.found, answer === -1 ? 'The target is unreachable.' : `Minimum path cost is ${answer}.`, best)
   return { input: { grid, target }, result: answer, frames }
 }
 
@@ -120,6 +158,7 @@ const definition = {
     { id: 'start', label: 'Start', description: 'Begin at (0, 0).' },
     { id: 'reach', label: 'Target', description: 'Exploration reaches the target.' },
     { id: 'probe', label: 'Explore', description: 'Step into an open neighbour and read its cost.' },
+    { id: 'blocked', label: 'Blocked', description: 'A neighbour is closed to the robot.' },
     { id: 'back', label: 'Backtrack', description: 'Return along the explored path.' },
     { id: 'relax', label: 'Relax', description: 'Update the cheapest known cost.' },
     { id: 'done', label: 'Result', description: 'Report the cheapest cost.' },

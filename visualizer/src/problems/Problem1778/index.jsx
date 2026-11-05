@@ -1,50 +1,77 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 
 const code = [
-  'explore(r, c) with depth-first search',
-  '  mark (r, c) as known open',
-  '  if (r, c) is the target, remember it',
-  '  for each direction',
-  '    skip cells already probed',
-  '    if the master says open, move in, explore, move back',
-  '    otherwise mark the neighbour blocked',
-  'breadth-first search over known open cells from (0, 0)',
-  'return the distance to the target, or -1',
+  'const seen = new Set([key(0, 0)])',
+  'let target = master.isTarget() ? [0, 0] : null',
+  'const dfs = (i, j) => {',
+  '  for (const [d, di, dj, back] of MOVES) {',
+  '    const ni = i + di, nj = j + dj',
+  '    if (master.canMove(d) && !seen.has(key(ni, nj))) {',
+  '      seen.add(key(ni, nj))',
+  '      master.move(d)',
+  '      if (target === null && master.isTarget()) target = [ni, nj]',
+  '      dfs(ni, nj)',
+  '      master.move(back)',
+  '    }',
+  '  }',
+  '}',
+  'dfs(0, 0)',
+  'if (target === null) return -1',
+  'const dist = new Map([[key(0, 0), 0]]), queue = [[0, 0]]',
+  'for (let head = 0; head < queue.length; head++) {',
+  '  const [i, j] = queue[head]',
+  '  if (i === target[0] && j === target[1]) return dist.get(key(i, j))',
+  '  for (const [, di, dj] of MOVES) {',
+  '    const k = key(i + di, j + dj)',
+  '    if (seen.has(k) && !dist.has(k)) { dist.set(k, dist.get(key(i, j)) + 1); queue.push([i + di, j + dj]) }',
+  '  }',
+  '}',
+  'return -1',
 ].map((text, index) => ({ line: index + 1, text }))
 
 const python = `def shortest_path(master):
-    DIRS = [(-1, 0, 'U', 'D'), (1, 0, 'D', 'U'), (0, -1, 'L', 'R'), (0, 1, 'R', 'L')]
-    open_cells, seen, target = {(0, 0)}, {(0, 0)}, None
-    def explore(r, c):
+    MOVES = [('U', -1, 0, 'D'), ('D', 1, 0, 'U'), ('L', 0, -1, 'R'), ('R', 0, 1, 'L')]
+    seen = {(0, 0)}
+    target = (0, 0) if master.is_target() else None
+    def dfs(i, j):
         nonlocal target
-        if master.is_target():
-            target = (r, c)
-        for dr, dc, move, back in DIRS:
-            nr, nc = r + dr, c + dc
-            if (nr, nc) in seen:
-                continue
-            seen.add((nr, nc))
-            if master.can_move(move):
-                master.move(move)
-                open_cells.add((nr, nc))
-                explore(nr, nc)
+        for d, di, dj, back in MOVES:
+            ni, nj = i + di, j + dj
+            if master.can_move(d) and (ni, nj) not in seen:
+                seen.add((ni, nj))
+                master.move(d)
+                if target is None and master.is_target():
+                    target = (ni, nj)
+                dfs(ni, nj)
                 master.move(back)
-    explore(0, 0)
+    dfs(0, 0)
     if target is None:
         return -1
     from collections import deque
     dist, queue = {(0, 0): 0}, deque([(0, 0)])
     while queue:
-        r, c = queue.popleft()
-        for dr, dc, _, _ in DIRS:
-            nxt = (r + dr, c + dc)
-            if nxt in open_cells and nxt not in dist:
-                dist[nxt] = dist[(r, c)] + 1
-                queue.append(nxt)
-    return dist.get(target, -1)
+        i, j = queue.popleft()
+        if (i, j) == target:
+            return dist[(i, j)]
+        for _, di, dj, _ in MOVES:
+            k = (i + di, j + dj)
+            if k in seen and k not in dist:
+                dist[k] = dist[(i, j)] + 1
+                queue.append(k)
+    return -1
 `
 
-const PY = { explore: 4, target: 6, probeOpen: 13, back: 17, probeBlocked: 13, bfs: 27, done: 30 }
+const pyLine = text => python.split('\n').findIndex(line => line.includes(text)) + 1
+const PY = {
+  seen: pyLine('seen = {(0, 0)}'),
+  check: pyLine('if master.can_move(d)'),
+  probe: pyLine('master.move(d)'),
+  target: pyLine('target = (ni, nj)'),
+  back: pyLine('master.move(back)'),
+  noTarget: pyLine('if target is None:'),
+  bfs: pyLine('i, j = queue.popleft()'),
+  done: pyLine('return dist[(i, j)]'),
+}
 const DIRS = [[-1, 0, 'U', 'D'], [1, 0, 'D', 'U'], [0, -1, 'L', 'R'], [0, 1, 'R', 'L']]
 
 export function parse(text) {
@@ -68,28 +95,31 @@ export function build({ grid, target }) {
   const push = (phase, line, pythonLine, message, dist = {}) => frames.push({
     phase, activeLine: line, pythonLine, message, pos: [...pos], open: [...open], blocked: [...blocked], dist,
   })
-  push('start', 1, PY.explore, 'The robot wakes up at (0, 0) and can only ask about neighbours.')
+  push('start', 1, PY.seen, 'The robot wakes up at (0, 0) and can only ask about neighbours.')
   const explore = (r, c) => {
-    open.add(key(r, c))
-    if (r === target[0] && c === target[1]) { found = true; push('target', 3, PY.target, `Target found at (${r}, ${c}).`) }
+    if (r === target[0] && c === target[1]) { found = true; push('target', 9, PY.target, `Target found at (${r}, ${c}).`) }
     for (const [dr, dc, move, back] of DIRS) {
       const nr = r + dr, nc = c + dc
       if (seen.has(key(nr, nc))) continue
-      seen.add(key(nr, nc))
       if (inside(nr, nc) && grid[nr][nc] === 1) {
+        seen.add(key(nr, nc))
         pos = [nr, nc]
         open.add(key(nr, nc))
-        push('probe', 6, PY.probeOpen, `Neighbour ${move} of (${r}, ${c}) is open; move in.`)
+        push('probe', 8, PY.probe, `Neighbour ${move} of (${r}, ${c}) is open; move in.`)
         explore(nr, nc)
         pos = [r, c]
-        push('back', 6, PY.back, `Step ${back} back to (${r}, ${c}).`)
+        push('back', 11, PY.back, `Step ${back} back to (${r}, ${c}).`)
       } else {
         blocked.add(key(nr, nc))
-        push('blocked', 7, PY.probeBlocked, `Neighbour ${move} of (${r}, ${c}) is blocked.`)
+        push('blocked', 6, PY.check, `Neighbour ${move} of (${r}, ${c}) is blocked.`)
       }
     }
   }
   explore(0, 0)
+  if (!found) {
+    push('done', 16, PY.noTarget, 'The target was not reached by exploration.')
+    return { input: { grid, target }, result: -1, frames }
+  }
   const dist = { '0,0': 0 }
   const queue = [[0, 0]]
   for (let head = 0; head < queue.length; head++) {
@@ -101,10 +131,10 @@ export function build({ grid, target }) {
         queue.push([r + dr, c + dc])
       }
     }
-    push('bfs', 8, PY.bfs, `Breadth-first search expands (${r}, ${c}) at distance ${dist[key(r, c)]}.`, { ...dist })
+    push('bfs', 19, PY.bfs, `Breadth-first search expands (${r}, ${c}) at distance ${dist[key(r, c)]}.`, { ...dist })
   }
-  const answer = found ? dist[key(target[0], target[1])] : -1
-  push('done', 9, PY.done, answer === -1 ? 'The target cannot be reached.' : `Shortest distance is ${answer}.`, { ...dist })
+  const answer = dist[key(target[0], target[1])] ?? -1
+  push('done', 20, PY.done, answer === -1 ? 'The target cannot be reached.' : `Shortest distance is ${answer}.`, { ...dist })
   return { input: { grid, target }, result: answer, frames }
 }
 
