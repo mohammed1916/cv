@@ -1,13 +1,13 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 
 const code = [
-  'play(row, round) where row lists the alive players in order',
-  '  pair the outermost players: row[i] with row[m - 1 - i]',
-  '  if the two chosen players share a pair, record this round',
-  '  for each choice of winner in every pair',
-  '    keep the winners and the middle player in row order',
-  '    play(next row, round + 1)',
-  'return the earliest and latest recorded rounds',
+  'function play(row, round) {',
+  '  const pairs = range(Math.floor(row.length / 2)).map(i => [row[i], row[row.length - 1 - i]])',
+  '  if (pairs.some(([a, b]) => tracked(a, b))) { found.push(round); return }',
+  '  for (const kept of winnerSets(row, pairs)) play(kept, round + 1)',
+  '}',
+  'play(Array.from({ length: n }, (_, i) => i + 1), 1)',
+  'return [Math.min(...found), Math.max(...found)]',
 ].map((text, index) => ({ line: index + 1, text }))
 
 const python = `from itertools import product
@@ -21,7 +21,19 @@ def earliest_and_latest(n, first, second):
             if {players[i], players[m - 1 - i]} == {first, second}:
                 found.append(round_no)
                 return
-        for picks in product(*[(i, m - 1 - i) for i in range(k)]):
+        if m < 2:
+            return
+        # A tracked player always wins; every other pair may go either way.
+        options = []
+        for i in range(k):
+            a, b = players[i], players[m - 1 - i]
+            if a in (first, second):
+                options.append((i,))
+            elif b in (first, second):
+                options.append((m - 1 - i,))
+            else:
+                options.append((i, m - 1 - i))
+        for picks in product(*options):
             kept = sorted(list(picks) + ([k] if m % 2 else []))
             play([players[i] for i in kept], round_no + 1)
     play(list(range(1, n + 1)), 1)
@@ -52,10 +64,18 @@ export function build({ n, first, second }) {
       push('meet', 3, PY.meet, `Players ${first} and ${second} meet in round ${round}.`, row, pairs, round)
       return
     }
-    const choices = Array.from({ length: k }, (_, i) => [i, m - 1 - i])
-    const total = 2 ** k
-    for (let mask = 0; mask < total; mask++) {
-      const kept = choices.map((pair, bit) => pair[(mask >> bit) & 1])
+    if (m < 2) return
+    // A tracked player always wins; every other pair may go either way.
+    const options = Array.from({ length: k }, (_, i) => {
+      const a = row[i], b = row[m - 1 - i]
+      if (a === first || a === second) return [i]
+      if (b === first || b === second) return [m - 1 - i]
+      return [i, m - 1 - i]
+    })
+    const free = options.filter(o => o.length === 2).length
+    for (let mask = 0; mask < 2 ** free; mask++) {
+      let bit = 0
+      const kept = options.map(o => (o.length === 1 ? o[0] : o[(mask >> bit++) & 1]))
       if (m % 2) kept.push(k)
       kept.sort((a, b) => a - b)
       const next = kept.map(i => row[i])
@@ -88,10 +108,25 @@ const definition = {
 export default function EarliestAndLatestRounds() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <ol aria-label="Alive players in this round" className="algorithm-workspace__players">
-      {step.row.map((player, i) => <li key={i} data-role={player === step.first || player === step.second ? 'focus' : ''}
-        aria-label={`position ${i + 1}, player ${player}`}>{player}</li>)}
+      {step.row.map((player, i) => {
+        const m = step.row.length, k = Math.floor(m / 2)
+        const pointer = i < k ? 'l' : i >= m - k ? 'r' : 'mid'
+        return <li key={i} data-role={player === step.first || player === step.second ? 'focus' : ''} data-pointer={pointer}
+          style={{ outline: pointer === 'mid' ? 'none' : '2px solid var(--primary)', outlineOffset: 2 }}
+          aria-label={`position ${i + 1}, player ${player}${pointer === 'mid' ? ', waits this round' : pointer === 'l' ? ', left pointer l' : ', right pointer r'}`}>
+          {player}{pointer === 'l' ? ' (l)' : pointer === 'r' ? ' (r)' : ''}
+        </li>
+      })}
     </ol>
-    <p aria-label="Pairs this round">{step.pairs.length ? step.pairs.map(([a, b]) => `${a} vs ${b}`).join(' · ') : 'No pairs'}</p>
+    <div aria-label="Pairs this round" style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 8 }}>
+      {step.pairs.length ? step.pairs.map(([a, b], i) => {
+        const tracked = [a, b].some(p => p === step.first || p === step.second)
+        return <span key={i} data-role={tracked ? 'focus' : undefined} style={{ border: '1px solid var(--border)', borderRadius: 6, padding: '2px 8px', background: tracked ? 'var(--surface2)' : 'transparent', color: 'var(--text)' }}>
+          {`${a} vs ${b}`}
+        </span>
+      }) : <span>No pairs: the row has one player left.</span>}
+    </div>
+    <p>{step.pairs.length ? 'Each pair plays, and one player from each pair advances. The middle player, if any, advances without a match.' : null}</p>
     <output aria-label="Players tracked">{`Tracking ${run.input.first} and ${run.input.second}; round ${step.round || 'done'}`}</output>
   </>} renderReasoning={() => <>
     <p>Each round pairs the outermost remaining players. Which winner advances is free, so the search tries each choice.</p>

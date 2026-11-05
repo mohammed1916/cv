@@ -1,13 +1,13 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 
 const code = [
-  'parse the expression into a tree of groups',
-  'for each leaf digit d: cost to make it d is 0, the other digit costs 1',
-  'for each operator node with children A and B',
-  '  for each target value t in 0 and 1',
-  '    keep the operator, or flip it at cost 1',
-  '    take the cheapest child pair that gives t',
-  'the answer flips the root to the opposite of its value',
+  'function costOf(node) {',
+  '  if (node.leaf !== undefined) return node.leaf === 0 ? [0, 1] : [1, 0]',
+  '  return combine(node.op, costOf(node.left), costOf(node.right))',
+  '}',
+  'function combine(op, a, b) {',
+  '  return [0, 1].map(t => cheapest(op, a, b, t))  // keep op, or flip it at cost 1',
+  'return costOf(root)[1 - root.value]',
 ].map((text, index) => ({ line: index + 1, text }))
 
 const python = `def min_cost_to_flip(expression):
@@ -64,11 +64,11 @@ export function build({ expression }) {
   const frames = []
   const nodes = []
   const apply = (op, x, y) => (op === '&' ? x & y : x | y)
-  const record = (phase, label, value, cost, line, pythonLine, message) => {
+  const record = (phase, label, value, cost, line, pythonLine, message, span) => {
     nodes.push({ label, value, cost })
-    frames.push({ phase, activeLine: line, pythonLine, message, nodes: nodes.map(n => ({ ...n, cost: [...n.cost] })) })
+    frames.push({ phase, activeLine: line, pythonLine, message, span, nodes: nodes.map(n => ({ ...n, cost: [...n.cost] })) })
   }
-  const combine = (op, a, b, label) => {
+  const combine = (op, a, b, label, span) => {
     const value = apply(op, a.value, b.value)
     const cost = [0, 1].map(target => {
       let best = Infinity
@@ -79,10 +79,11 @@ export function build({ expression }) {
       }
       return best
     })
-    record('combine', 'combine', value, cost, 3, PY.combine, `${label}: value ${value}, cost to make 0 is ${cost[0]}, to make 1 is ${cost[1]}.`)
+    record('combine', 'combine', value, cost, 3, PY.combine, `${label}: value ${value}, cost to make 0 is ${cost[0]}, to make 1 is ${cost[1]}.`, span)
     return { value, cost, label }
   }
   const term = () => {
+    const begin = pos
     if (expression[pos] === '(') {
       pos += 1
       const node = expr()
@@ -92,23 +93,24 @@ export function build({ expression }) {
     const value = Number(expression[pos])
     pos += 1
     const cost = value === 0 ? [0, 1] : [1, 0]
-    record('leaf', String(value), value, cost, 2, PY.leaf, `Leaf ${value}: cost ${cost[0]} to make 0, ${cost[1]} to make 1.`)
+    record('leaf', String(value), value, cost, 2, PY.leaf, `Leaf ${value}: cost ${cost[0]} to make 0, ${cost[1]} to make 1.`, [begin, pos])
     return { value, cost, label: String(value) }
   }
   const expr = () => {
+    const start = pos
     let node = term()
     while (pos < expression.length && (expression[pos] === '&' || expression[pos] === '|')) {
       const op = expression[pos]
       pos += 1
       const right = term()
-      node = combine(op, node, right, `${node.label} ${op} ${right.label}`)
+      node = combine(op, node, right, `${node.label} ${op} ${right.label}`, [start, pos])
     }
     return node
   }
   const root = expr()
   if (pos !== expression.length) throw new Error('Unexpected text after the expression. Check parentheses.')
   const answer = root.cost[1 - root.value]
-  frames.push({ phase: 'answer', activeLine: 7, pythonLine: PY.answer, message: `Final value is ${root.value}; flipping it costs ${answer}.`, nodes: nodes.map(n => ({ ...n, cost: [...n.cost] })) })
+  frames.push({ phase: 'answer', activeLine: 7, pythonLine: PY.answer, message: `Final value is ${root.value}; flipping it costs ${answer}.`, span: [0, expression.length], nodes: nodes.map(n => ({ ...n, cost: [...n.cost] })) })
   return { input: { expression }, result: answer, frames }
 }
 
@@ -129,7 +131,10 @@ const definition = {
 }
 
 export default function MinimumCostToChangeFinalValue() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <p aria-label="Expression with the group being priced highlighted" className="algorithm-sequence">
+      {[...run.input.expression].map((ch, i) => <span key={i} className="algorithm-sequence__cell" data-role={step.span && i >= step.span[0] && i < step.span[1] ? 'window' : undefined}>{ch}</span>)}
+    </p>
     <table aria-label="Subexpression costs">
       <thead><tr><th>Node</th><th>Value</th><th>Cost to 0</th><th>Cost to 1</th></tr></thead>
       <tbody>{step.nodes.map((node, i) => <tr key={i} data-current={i === step.nodes.length - 1 ? 'yes' : undefined}>
