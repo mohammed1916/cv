@@ -1,10 +1,35 @@
-import authoredExamples0 from '../../config/examples/collection--2139.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import RecordStateTable from '../../components/shared/RecordStateTable'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/stampAndScheduleBatch.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '2139',
+  phases,
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  inputLabel: 'JSON object with target and maxDoubles',
+  url: 'https://leetcode.com/problems/minimum-moves-to-reach-target-score/',
+  complexity: 'O(log target) time: each halving removes a doubling, and odd values cost one increment each.',
+  examples: [
+    { label: 'Mixed moves', input: '{"target":26,"maxDoubles":3}' },
+    { label: 'No doublings', input: '{"target":7,"maxDoubles":0}' },
+    { label: 'Plenty of doublings', input: '{"target":40,"maxDoubles":10}' },
+  ],
+}
 
-const definition = { ...definitions[2139], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem2139Visualizer() {
+  return (
+    <AlgorithmWorkspace
+      definition={definition}
+      renderVisual={({ step }) => (
+        <>
+          <RecordStateTable label="Working backwards from the target" columns={['move', 'from', 'to', 'action', 'doublesLeft']} rows={step.rows} activeRow={step.rows.length - 1} />
+          <p>Current value: {step.t} · doublings left: {step.doubles} · moves so far: {step.moves}</p>
+        </>
+      )}
+      renderReasoning={({ step }) => <p>{step.message}</p>}
+    />
+  )
+}

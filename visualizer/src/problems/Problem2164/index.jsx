@@ -1,10 +1,35 @@
-import authoredExamples0 from '../../config/examples/collection--2164.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/selectionAndBitsetBatch.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '2164',
+  phases,
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  inputLabel: 'Integer array as JSON',
+  url: 'https://leetcode.com/problems/sort-even-and-odd-indices-independently/',
+  complexity: 'O(n log n) time for the two sorts; O(n) space.',
+  examples: [
+    { label: 'Four values', input: '[9,4,2,7]' },
+    { label: 'Five values', input: '[5,30,1,2,8]' },
+  ],
+}
 
-const definition = { ...definitions[2164], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem2164Visualizer() {
+  return (
+    <AlgorithmWorkspace
+      definition={definition}
+      renderVisual={({ run, step }) => (
+        <>
+          <IndexedSequence label="Original array" length={run.input.nums.length} valueAt={i => run.input.nums[i]} active={step.i} roleAt={i => (i % 2 === 0 ? 'even index' : 'odd index')} />
+          <IndexedSequence label="Result so far" length={step.placed.length || 1} valueAt={i => (step.placed[i] ?? '·')} active={step.placed.length - 1} roleAt={i => (i % 2 === 0 ? 'even' : 'odd')} />
+          <p>Even indices (ascending): {step.evens.join(', ')} · odd indices (descending): {step.odds.join(', ') || 'none'}</p>
+        </>
+      )}
+      renderReasoning={({ step }) => <p>{step.message}</p>}
+    />
+  )
+}

@@ -1,10 +1,36 @@
-import authoredExamples0 from '../../config/examples/collection--2110.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/windowAndOrderBatch.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '2110',
+  phases,
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  inputLabel: 'Prices as a JSON array (e.g. [3,2,1,4])',
+  url: 'https://leetcode.com/problems/number-of-smooth-descent-periods-of-a-stock/',
+  complexity: 'O(n) time and O(1) extra space; the visualization keeps the run length of every day.',
+  examples: [
+    { label: 'One long run', input: '[9,8,7,4,3]' },
+    { label: 'Two runs', input: '[5,4,4,3,2]' },
+    { label: 'Rise breaks it', input: '[6,5,7,6]' },
+  ],
+}
 
-const definition = { ...definitions[2110], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem2110Visualizer() {
+  return (
+    <AlgorithmWorkspace
+      definition={definition}
+      renderVisual={({ run, step }) => (
+        <>
+          <IndexedSequence label="Prices" length={run.input.prices.length} valueAt={i => run.input.prices[i]} active={step.i} roleAt={i => (step.marks[i] ? 'today' : '')} />
+          <IndexedSequence label="Run length ending on each day" length={step.runs.length} valueAt={i => step.runs[i]} active={step.runs.length - 1} roleAt={() => ''} />
+          <p>Periods so far: {step.total}</p>
+        </>
+      )}
+      renderReasoning={({ step }) => <p>{step.message}</p>}
+    />
+  )
+}

@@ -1,10 +1,34 @@
-import authoredExamples0 from '../../config/examples/collection--2114.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/dependencyAndRecoveryBatch.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '2114',
+  phases,
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  inputLabel: 'Sentences as a JSON array of lowercase strings',
+  url: 'https://leetcode.com/problems/maximum-number-of-words-found-in-sentences/',
+  complexity: 'O(total length) time and O(1) extra space beyond the split.',
+  examples: [
+    { label: 'Middle sentence wins', input: '["one two","red blue green","solo"]' },
+    { label: 'Single words', input: '["a","b"]' },
+  ],
+}
 
-const definition = { ...definitions[2114], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem2114Visualizer() {
+  return (
+    <AlgorithmWorkspace
+      definition={definition}
+      renderVisual={({ run, step }) => (
+        <>
+          <IndexedSequence label="Word count of each sentence" length={run.input.sentences.length} valueAt={i => step.counts[i] ?? '–'} active={step.i} roleAt={i => (i === step.bestAt ? 'largest' : '')} />
+          <p>Largest so far: {step.best}</p>
+        </>
+      )}
+      renderReasoning={({ step }) => <p>{step.message}</p>}
+    />
+  )
+}

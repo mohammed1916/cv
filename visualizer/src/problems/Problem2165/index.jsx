@@ -1,10 +1,31 @@
-import authoredExamples0 from '../../config/examples/collection--2165.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/selectionAndBitsetBatch.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '2165',
+  phases,
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  inputLabel: 'Integer (may be negative, up to 12 digits)',
+  url: 'https://leetcode.com/problems/smallest-value-of-the-rearranged-number/',
+  complexity: 'O(d log d) time for d digits (a sort of the digits); O(d) space.',
+  examples: [
+    { label: 'Positive with zeros', input: '3091' },
+    { label: 'Negative', input: '-4520' },
+  ],
+}
 
-const definition = { ...definitions[2165], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem2165Visualizer() {
+  return (
+    <AlgorithmWorkspace
+      definition={definition}
+      renderVisual={({ step }) => (
+        <IndexedSequence label="Digits of the rearranged number" length={step.digits.length} valueAt={i => step.digits[i]} active={step.lead ?? -1} roleAt={i => (i === step.lead ? 'lead' : '')} />
+      )}
+      renderReasoning={({ step }) => <p>{step.message}</p>}
+    />
+  )
+}

@@ -16,22 +16,35 @@ export function parseInput(text) {
   return { grid }
 }
 
-export const code = `FUNCTION minRemovals(grid)
-    black ← the 1 cells with (row + col) even; white ← the other 1 cells
-    matchOfWhite ← empty map
-    matched ← 0
-    FOR each black cell b
-        visited ← empty set
-        IF augment(b, visited) THEN matched ← matched + 1
-    RETURN matched
-FUNCTION augment(b, visited)
-    FOR each adjacent 1 cell w of b
-        IF w is not in visited
-            add w to visited
-            IF w has no match OR augment(matchOfWhite[w], visited)
-                matchOfWhite[w] ← b
-                RETURN true
-    RETURN false`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minRemovals(grid) {
+  const rows = grid.length
+  const cols = grid[0].length
+  const matchOfWhite = new Map()
+  const isOne = (r, c) => r >= 0 && c >= 0 && r < rows && c < cols && grid[r][c] === 1
+  const augment = (r, c, visited) => {
+    for (const [dr, dc] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+      const nr = r + dr
+      const nc = c + dc
+      if (!isOne(nr, nc)) continue
+      const key = nr + ',' + nc
+      if (visited.has(key)) continue
+      visited.add(key)
+      const holder = matchOfWhite.get(key)
+      if (!holder || augment(holder[0], holder[1], visited)) {
+        matchOfWhite.set(key, [r, c])
+        return true
+      }
+    }
+    return false
+  }
+  let matched = 0
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      if (grid[r][c] === 1 && (r + c) % 2 === 0 && augment(r, c, new Set())) matched++
+    }
+  }
+  return matched
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def min_removals(grid):
     rows, cols = len(grid), len(grid[0])
@@ -84,7 +97,7 @@ export function buildTrace({ grid }) {
   let whiteCount = 0
   for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) if (grid[r][c] === 1) ((r + c) % 2 === 0 ? blackCount++ : whiteCount++)
   const pairs = () => [...matchOfWhite].map(([key, b]) => ({ white: key.split(',').map(Number), black: b }))
-  frames.push({ phase: 'start', activeLine: L('black ← the 1 cells'), pythonLine: P('match = {}'), message: `${blackCount} black and ${whiteCount} white ones; only black-white neighbours conflict.`, black: null, white: null, visited: [], pairs: [], matched: 0 })
+  frames.push({ phase: 'start', activeLine: L('const matchOfWhite'), pythonLine: P('match = {}'), message: `${blackCount} black and ${whiteCount} white ones; only black-white neighbours conflict.`, black: null, white: null, visited: [], pairs: [], matched: 0 })
   let matched = 0
   function augment(b, visited, depth) {
     const [r, c] = b
@@ -94,15 +107,15 @@ export function buildTrace({ grid }) {
       if (!isOne(grid, nr, nc)) continue
       const key = `${nr},${nc}`
       if (visited.has(key)) {
-        frames.push({ phase: 'edge', activeLine: L('IF w is not in visited'), pythonLine: P('not in visited'), message: `(${nr},${nc}) was already tried in this search.`, black: b, white: [nr, nc], visited: [...visited], pairs: pairs(), matched, depth })
+        frames.push({ phase: 'edge', activeLine: L('if (visited.has(key))'), pythonLine: P('not in visited'), message: `(${nr},${nc}) was already tried in this search.`, black: b, white: [nr, nc], visited: [...visited], pairs: pairs(), matched, depth })
         continue
       }
       visited.add(key)
-      frames.push({ phase: 'edge', activeLine: L('add w to visited'), pythonLine: P('visited.add'), message: `Try white (${nr},${nc}) next to black (${r},${c}).`, black: b, white: [nr, nc], visited: [...visited], pairs: pairs(), matched, depth })
+      frames.push({ phase: 'edge', activeLine: L('visited.add(key)'), pythonLine: P('visited.add'), message: `Try white (${nr},${nc}) next to black (${r},${c}).`, black: b, white: [nr, nc], visited: [...visited], pairs: pairs(), matched, depth })
       const holder = matchOfWhite.get(key)
       if (!holder || augment(holder, visited, depth + 1)) {
         matchOfWhite.set(key, b)
-        frames.push({ phase: 'match', activeLine: L('matchOfWhite[w] ← b'), pythonLine: P('match[(nr, nc)] = (r, c)'), message: `Match white (${nr},${nc}) with black (${r},${c}).`, black: b, white: [nr, nc], visited: [...visited], pairs: pairs(), matched, depth })
+        frames.push({ phase: 'match', activeLine: L('matchOfWhite.set(key'), pythonLine: P('match[(nr, nc)] = (r, c)'), message: `Match white (${nr},${nc}) with black (${r},${c}).`, black: b, white: [nr, nc], visited: [...visited], pairs: pairs(), matched, depth })
         return true
       }
     }
@@ -112,10 +125,10 @@ export function buildTrace({ grid }) {
     for (let c = 0; c < cols; c++) {
       if (grid[r][c] !== 1 || (r + c) % 2 !== 0) continue
       const visited = new Set()
-      frames.push({ phase: 'pick', activeLine: L('FOR each black cell b'), pythonLine: P('if grid[r][c] == 1'), message: `Search augmenting paths from black (${r},${c}).`, black: [r, c], white: null, visited: [], pairs: pairs(), matched, depth: 0 })
+      frames.push({ phase: 'pick', activeLine: L('if (grid[r][c] === 1'), pythonLine: P('if grid[r][c] == 1'), message: `Search augmenting paths from black (${r},${c}).`, black: [r, c], white: null, visited: [], pairs: pairs(), matched, depth: 0 })
       if (augment([r, c], visited, 0)) matched++
     }
   }
-  frames.push({ phase: 'done', activeLine: L('RETURN matched'), pythonLine: P('return matched'), message: `Maximum matching is ${matched}, so ${matched} ones must be removed.`, black: null, white: null, visited: [], pairs: pairs(), matched, depth: 0 })
+  frames.push({ phase: 'done', activeLine: L('return matched'), pythonLine: P('return matched'), message: `Maximum matching is ${matched}, so ${matched} ones must be removed.`, black: null, white: null, visited: [], pairs: pairs(), matched, depth: 0 })
   return { input: { grid }, result: matched, frames }
 }

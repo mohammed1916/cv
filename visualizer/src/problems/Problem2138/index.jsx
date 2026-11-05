@@ -1,10 +1,35 @@
-import authoredExamples0 from '../../config/examples/collection--2138.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecordStateTable from '../../components/shared/RecordStateTable'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/stampAndScheduleBatch.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '2138',
+  phases,
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  inputLabel: 'JSON object with s, k and fill',
+  url: 'https://leetcode.com/problems/divide-a-string-into-groups-of-size-k/',
+  complexity: 'O(n) time and O(n) space for the output groups.',
+  examples: [
+    { label: 'Padded last group', input: '{"s":"abcdefghij","k":3,"fill":"x"}' },
+    { label: 'Exact fit', input: '{"s":"nolog","k":5,"fill":"q"}' },
+  ],
+}
 
-const definition = { ...definitions[2138], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem2138Visualizer() {
+  return (
+    <AlgorithmWorkspace
+      definition={definition}
+      renderVisual={({ run, step }) => (
+        <>
+          <IndexedSequence label="String (l to r is the group being cut)" length={run.input.s.length} valueAt={i => run.input.s[i]} active={step.l >= 0 ? step.l : -1} roleAt={i => (step.l >= 0 && i >= step.l && i <= step.r ? 'group' : '')} />
+          <RecordStateTable label="Groups so far" columns={['group', 'text']} rows={step.groups.map((text, group) => ({ group, text }))} />
+        </>
+      )}
+      renderReasoning={({ step }) => <p>{step.message}</p>}
+    />
+  )
+}

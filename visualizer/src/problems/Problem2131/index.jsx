@@ -1,10 +1,35 @@
-import authoredExamples0 from '../../config/examples/collection--2131.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import RecordStateTable from '../../components/shared/RecordStateTable'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/stampAndScheduleBatch.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '2131',
+  phases,
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  inputLabel: 'Two-letter words as a JSON array',
+  url: 'https://leetcode.com/problems/longest-palindrome-by-concatenating-two-letter-words/',
+  complexity: 'O(n) time with a count per word; O(n) space.',
+  examples: [
+    { label: 'Mirror pairs', input: '["ab","ba","ca","ac","zz"]' },
+    { label: 'Doubled letters', input: '["qq","qq","qq","rs"]' },
+    { label: 'Only middle', input: '["aa"]' },
+  ],
+}
 
-const definition = { ...definitions[2131], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem2131Visualizer() {
+  return (
+    <AlgorithmWorkspace
+      definition={definition}
+      renderVisual={({ step }) => (
+        <>
+          <RecordStateTable label="Word counts and pairing" columns={['word', 'count', 'used']} rows={step.rows} activeRow={step.rows.findIndex(r => r.word === step.current)} />
+          <p>Length so far: {step.length}{step.middle ? ' · a middle word is available' : ''}</p>
+        </>
+      )}
+      renderReasoning={({ step }) => <p>{step.message}</p>}
+    />
+  )
+}

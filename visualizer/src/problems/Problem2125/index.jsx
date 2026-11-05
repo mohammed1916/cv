@@ -1,10 +1,34 @@
-import authoredExamples0 from '../../config/examples/collection--2125.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import RecordStateTable from '../../components/shared/RecordStateTable'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/dependencyAndRecoveryBatch.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '2125',
+  phases,
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  inputLabel: 'Bank rows as a JSON array of binary strings',
+  url: 'https://leetcode.com/problems/number-of-laser-beams-in-a-bank/',
+  complexity: 'O(m n) time to count the devices in an m x n bank; O(1) extra space.',
+  examples: [
+    { label: 'Empty row between', input: '["0110","0000","1001","1110"]' },
+    { label: 'Adjacent rows', input: '["10","10"]' },
+  ],
+}
 
-const definition = { ...definitions[2125], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem2125Visualizer() {
+  return (
+    <AlgorithmWorkspace
+      definition={definition}
+      renderVisual={({ step }) => (
+        <>
+          <RecordStateTable label="Rows: devices and beams added" columns={['row', 'devices', 'beams', 'note']} rows={step.rows} activeRow={step.i} />
+          <p>Total beams so far: {step.total}</p>
+        </>
+      )}
+      renderReasoning={({ step }) => <p>{step.message}</p>}
+    />
+  )
+}

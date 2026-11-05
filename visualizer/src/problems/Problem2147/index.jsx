@@ -1,10 +1,35 @@
-import authoredExamples0 from '../../config/examples/collection--2147.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/corridorAndEvidenceBatch.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '2147',
+  phases,
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  inputLabel: 'Corridor string of S (seat) and P (plant)',
+  url: 'https://leetcode.com/problems/number-of-ways-to-divide-a-long-corridor/',
+  complexity: 'O(n) time for the scan and the gap product; O(number of seats) space for the seat positions.',
+  examples: [
+    { label: 'Two gaps', input: 'SSPPSPSPSS' },
+    { label: 'Odd seats', input: 'SSPPS' },
+    { label: 'Adjacent pairs', input: 'SSSS' },
+  ],
+}
 
-const definition = { ...definitions[2147], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem2147Visualizer() {
+  return (
+    <AlgorithmWorkspace
+      definition={definition}
+      renderVisual={({ run, step }) => (
+        <>
+          <IndexedSequence label={`Corridor ${run.input.corridor}`} length={run.input.corridor.length} valueAt={i => run.input.corridor[i]} active={-1} roleAt={i => step.marks[i] ?? ''} />
+          <p>Ways so far: {step.ways ?? '–'}</p>
+        </>
+      )}
+      renderReasoning={({ step }) => <p>{step.message}</p>}
+    />
+  )
+}

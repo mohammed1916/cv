@@ -16,12 +16,14 @@ export function parseInput(text) {
   return { grid }
 }
 
-export const code = `FUNCTION canRemoveAll(grid)
-    pattern ← row 0 with every bit XOR-ed with its first bit
-    FOR each row r of grid
-        shape ← row r with every bit XOR-ed with its first bit
-        IF shape differs from pattern THEN RETURN false
-    RETURN true`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function canRemoveAll(grid) {
+  const normalize = row => row.map(bit => bit ^ row[0])
+  const pattern = normalize(grid[0])
+  for (const row of grid) {
+    if (normalize(row).join('') !== pattern.join('')) return false
+  }
+  return true
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def can_remove_all(grid):
     def normalize(row):
@@ -56,14 +58,14 @@ const normalize = row => row.map(bit => bit ^ row[0])
 export function buildTrace({ grid }) {
   const frames = []
   const pattern = normalize(grid[0])
-  frames.push({ phase: 'start', activeLine: L('pattern ← row 0'), pythonLine: P('pattern = normalize(grid[0])'), message: `Row 0 normalised is ${pattern.join('')}.`, row: -1, shape: pattern, pattern, ok: null })
+  frames.push({ phase: 'start', activeLine: L('const pattern = normalize'), pythonLine: P('pattern = normalize(grid[0])'), message: `Row 0 normalised is ${pattern.join('')}.`, row: -1, shape: pattern, pattern, ok: null })
   let result = true
   for (let r = 0; r < grid.length; r++) {
     const shape = normalize(grid[r])
     const same = shape.join('') === pattern.join('')
-    frames.push({ phase: same ? 'row' : 'mismatch', activeLine: L(same ? 'FOR each row r' : 'IF shape differs'), pythonLine: P(same ? 'for row in grid' : 'return False'), message: same ? `Row ${r} has the same shape (it equals row 0 or its complement).` : `Row ${r} normalises to ${shape.join('')}, not ${pattern.join('')}.`, row: r, shape, pattern, ok: same })
+    frames.push({ phase: same ? 'row' : 'mismatch', activeLine: L(same ? 'for (const row of grid)' : 'return false'), pythonLine: P(same ? 'for row in grid' : 'return False'), message: same ? `Row ${r} has the same shape (it equals row 0 or its complement).` : `Row ${r} normalises to ${shape.join('')}, not ${pattern.join('')}.`, row: r, shape, pattern, ok: same })
     if (!same) { result = false; break }
   }
-  frames.push({ phase: 'done', activeLine: L('RETURN true'), pythonLine: P('return True'), message: result ? 'Every row is equal or complementary to row 0: the grid can be cleared.' : 'Some row cannot be matched by flips: the grid cannot be cleared.', row: -1, shape: pattern, pattern, ok: result })
+  frames.push({ phase: 'done', activeLine: L('return true'), pythonLine: P('return True'), message: result ? 'Every row is equal or complementary to row 0: the grid can be cleared.' : 'Some row cannot be matched by flips: the grid cannot be cleared.', row: -1, shape: pattern, pattern, ok: result })
   return { input: { grid }, result, frames }
 }
