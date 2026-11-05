@@ -145,7 +145,7 @@ function VisualizationPanel({ step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ padding: 12, backgroundColor: '#fee2e2', borderRadius: 6, borderLeft: '4px solid #991b1b' }}>
+      <div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fee2e2, #fee2e2)", borderRadius: 6, borderLeft: '4px solid #991b1b' }}>
         <div style={{ fontSize: 12, color: '#7f1d1d', fontStyle: 'italic' }}>
           Backtracking: assign digits to letters respecting constraints (first letters ≠ 0, all different), verify equation, backtrack on failure.
         </div>
@@ -156,7 +156,7 @@ function VisualizationPanel({ step }) {
           <motion.div key={letter}
             style={{
               padding: '12px 8px', borderRadius: 6, textAlign: 'center',
-              backgroundColor: digit != null ? '#fecaca' : '#fef2f2',
+              backgroundColor: digit != null ? "var(--recovered-surface-fecaca, #fecaca)" : "var(--recovered-surface-fef2f2, #fef2f2)",
               border: letter === trying ? '3px solid #991b1b' : letter === solved ? '3px solid #059669' : '1px solid #fca5a5',
               fontSize: 13, fontWeight: 700, color: '#7f1d1d',
             }}
@@ -170,7 +170,7 @@ function VisualizationPanel({ step }) {
       </div>
 
       <motion.div
-        style={{ padding: 12, backgroundColor: '#fee2e2', borderRadius: 6, border: '2px solid #991b1b', textAlign: 'center' }}
+        style={{ padding: 12, backgroundColor: "var(--recovered-surface-fee2e2, #fee2e2)", borderRadius: 6, border: '2px solid #991b1b', textAlign: 'center' }}
         initial={{ opacity: 0 }} animate={{ opacity: 1 }}
       >
         <div style={{ fontSize: 12, color: '#991b1b' }}>{step.message}</div>

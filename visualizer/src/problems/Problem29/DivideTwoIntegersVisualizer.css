@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+  background: linear-gradient(135deg, var(--recovered-surface-fce7f3, #fce7f3) 0%, var(--recovered-surface-fbcfe8, #fbcfe8) 100%);
 }
 .divideint-top-split {
   flex: 1;
@@ -14,14 +14,14 @@
 .divideint-panel {
   display: flex;
   flex-direction: column;
-  background: white;
+  background: var(--recovered-surface-white, white);
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(236, 72, 153, 0.1);
 }
 .divideint-panel-head {
   padding: 12px 16px;
-  background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
-  color: white;
+  background: linear-gradient(135deg, var(--recovered-surface-ec4899, #ec4899) 0%, var(--recovered-surface-db2777, #db2777) 100%);
+  color: var(--recovered-ink-white, white);
   font-weight: 600;
   font-size: 14px;
   border-bottom: 2px solid #be185d;
@@ -60,7 +60,7 @@
   flex-direction: column;
   gap: 12px;
   padding: 12px;
-  background: #faf5ff;
+  background: var(--recovered-surface-faf5ff, #faf5ff);
   border-radius: 8px;
   border-left: 4px solid #ec4899;
 }
@@ -69,13 +69,13 @@
   justify-content: space-between;
   align-items: center;
   padding: 8px 12px;
-  background: white;
+  background: var(--recovered-surface-white, white);
   border-radius: 6px;
   border-left: 4px solid #ec4899;
 }
 .divideint-narrative {
   padding: 12px;
-  background: #fce7f3;
+  background: var(--recovered-surface-fce7f3, #fce7f3);
   border-left: 4px solid #ec4899;
   border-radius: 6px;
   font-size: 14px;
@@ -91,7 +91,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 12px;
-  background: #f9fafb;
+  background: var(--recovered-surface-f9fafb, #f9fafb);
   border-left: 4px solid #ec4899;
   border-radius: 6px;
 }
@@ -104,7 +104,7 @@
   font-family: monospace;
   font-size: 14px;
   font-weight: 700;
-  color: #e0177a;
+  color: var(--recovered-ink-e0177a, #e0177a);
 }
 .divideint-status {
   padding: 12px 16px;
@@ -115,7 +115,7 @@
 }
 .divideint-dock {
   padding: 12px 16px;
-  background: white;
+  background: var(--recovered-surface-white, white);
   border-top: 2px solid #fbcfe8;
   display: flex;
   justify-content: center;

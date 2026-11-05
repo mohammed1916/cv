@@ -33,7 +33,7 @@
 }
 
 .ts2-error {
-    color: #ea0c0c;
+    color: var(--recovered-ink-ea0c0c, #ea0c0c);
     font-size: 12px;
     font-weight: 400;
 }
@@ -62,7 +62,7 @@
 .ts2-chip {
     border: 1px solid var(--border);
     color: var(--text-muted);
-    background: rgba(30, 41, 59, 0.8);
+    background: var(--recovered-surface-rgba30415908, rgba(30, 41, 59, 0.8));
     border-radius: 999px;
     padding: 4px 12px;
     font-size: 12px;
@@ -154,7 +154,7 @@
 .ts2-cell.hi {
     border-color: #a855f7;
     background: rgba(168, 85, 247, 0.12);
-    color: #c084fc;
+    color: var(--recovered-ink-c084fc, #c084fc);
 }
 
 .ts2-cell.both {
@@ -200,7 +200,7 @@
 
 .hi-ptr {
     background: rgba(168, 85, 247, 0.2);
-    color: #c084fc;
+    color: var(--recovered-ink-c084fc, #c084fc);
 }
 
 /* ── Verdict ── */
@@ -227,7 +227,7 @@
 .ts2-verdict.high {
     background: rgba(168, 85, 247, 0.08);
     border: 1px solid rgba(168, 85, 247, 0.2);
-    color: #c084fc;
+    color: var(--recovered-ink-c084fc, #c084fc);
 }
 
 /* ── Result ── */

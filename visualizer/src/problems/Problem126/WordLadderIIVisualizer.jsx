@@ -167,18 +167,18 @@ function generateSteps(beginWord, endWord, wordList) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: '#627794' }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: "var(--recovered-ink-627794, #627794)" }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ padding: 12, backgroundColor: '#fed7aa', borderRadius: 6, borderLeft: '4px solid #f59e0b' }}>
+      <div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fed7aa, #fed7aa)", borderRadius: 6, borderLeft: '4px solid #f59e0b' }}>
         <div style={{ fontSize: 12, color: '#92400e', fontStyle: 'italic' }}>
           Two-phase approach: BFS to build neighbor graph, then DFS to find all shortest paths.
         </div>
       </div>
 
       {step.beginWord && (
-        <motion.div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dbeafe, #dbeafe)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>
             Task
           </div>
@@ -189,7 +189,7 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.distance && (
-        <motion.div style={{ padding: 12, backgroundColor: '#f3e8ff', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-f3e8ff, #f3e8ff)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#5b21b6', marginBottom: 8 }}>
             Distances
           </div>
@@ -199,7 +199,7 @@ function VisualizationPanel({ step }) {
                 key={word}
                 style={{
                   padding: '4px 8px',
-                  backgroundColor: dist === Infinity ? '#e9d5ff' : '#c7d2fe',
+                  backgroundColor: dist === Infinity ? "var(--recovered-surface-e9d5ff, #e9d5ff)" : "var(--recovered-surface-c7d2fe, #c7d2fe)",
                   borderRadius: 3,
                   fontSize: 10,
                   fontWeight: 600,
@@ -214,7 +214,7 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.neighbor && (
-        <motion.div style={{ padding: 12, backgroundColor: '#d1fae5', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-d1fae5, #d1fae5)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 8 }}>
             Edge Found
           </div>
@@ -225,7 +225,7 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.message && (
-        <motion.div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, fontSize: 12, color: '#92400e' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fef3c7, #fef3c7)", borderRadius: 6, fontSize: 12, color: '#92400e' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           {step.message}
         </motion.div>
       )}

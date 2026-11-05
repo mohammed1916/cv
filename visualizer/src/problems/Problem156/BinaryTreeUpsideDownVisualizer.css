@@ -18,13 +18,13 @@
 .binary_tree_upside_down-status.success {
   background: rgba(34, 197, 94, 0.1);
   border-color: rgba(34, 197, 94, 0.3);
-  color: #22c55e;
+  color: var(--recovered-ink-22c55e, #22c55e);
 }
 
 .binary_tree_upside_down-status.fail {
   background: rgba(239, 68, 68, 0.1);
   border-color: rgba(239, 68, 68, 0.3);
-  color: #ef4444;
+  color: var(--recovered-ink-ef4444, #ef4444);
 }
 
 .binary_tree_upside_down-dock {

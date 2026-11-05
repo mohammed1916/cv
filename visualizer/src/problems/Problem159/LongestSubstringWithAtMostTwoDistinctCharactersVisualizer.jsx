@@ -212,7 +212,7 @@ function StringVisualization({ s, left, right }) {
               alignItems: 'center',
               justifyContent: 'center',
               borderRadius: 4,
-              backgroundColor: inWindow ? '#a5b4fc' : 'var(--text)',
+              backgroundColor: inWindow ? "var(--recovered-surface-a5b4fc, #a5b4fc)" : 'var(--text)',
               border: idx === left || idx === right ? '3px solid #4f46e5' : '1px solid var(--border)',
               fontSize: 13,
               fontWeight: 600,
@@ -230,18 +230,18 @@ function StringVisualization({ s, left, right }) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: '#627794' }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: "var(--recovered-ink-627794, #627794)" }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ padding: 12, backgroundColor: '#f3e8ff', borderRadius: 6, borderLeft: '4px solid #8b5cf6' }}>
+      <div style={{ padding: 12, backgroundColor: "var(--recovered-surface-f3e8ff, #f3e8ff)", borderRadius: 6, borderLeft: '4px solid #8b5cf6' }}>
         <div style={{ fontSize: 12, color: '#5b21b6', fontStyle: 'italic' }}>
           Sliding window: expand right, shrink left to maintain ≤2 distinct chars.
         </div>
       </div>
 
       {step.s && (
-        <motion.div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dbeafe, #dbeafe)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>
             String
           </div>
@@ -250,7 +250,7 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.left !== undefined && step.right !== undefined && (
-        <motion.div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-f0fdf4, #f0fdf4)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 8 }}>
             Window Info
           </div>
@@ -262,7 +262,7 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.charCount && Object.keys(step.charCount).length > 0 && (
-        <motion.div style={{ padding: 12, backgroundColor: '#f3e8ff', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-f3e8ff, #f3e8ff)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#5b21b6', marginBottom: 8 }}>
             Character Count ({Object.keys(step.charCount).length} distinct)
           </div>
@@ -277,19 +277,19 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.maxLen !== undefined && (
-        <motion.div style={{ padding: 12, backgroundColor: '#dcfce7', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dcfce7, #dcfce7)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 8 }}>
             Maximum Length
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4, fontSize: 12, color: '#065f46' }}>
-            <div style={{ fontSize: 16, fontWeight: 700, color: '#0c865d' }}>{step.maxLen}</div>
+            <div style={{ fontSize: 16, fontWeight: 700, color: "var(--recovered-ink-0c865d, #0c865d)" }}>{step.maxLen}</div>
             {step.maxSubstring && <div>"{step.maxSubstring}"</div>}
           </div>
         </motion.div>
       )}
 
       {step.message && (
-        <motion.div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, fontSize: 12, color: '#92400e' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fef3c7, #fef3c7)", borderRadius: 6, fontSize: 12, color: '#92400e' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           {step.message}
         </motion.div>
       )}
@@ -355,7 +355,7 @@ export default function LongestSubstringWithAtMostTwoDistinctCharactersVisualize
 
   const statusPanel = (
     <div className="lsatdc-status">
-      <div style={{ fontSize: 12, color: '#627794' }}>
+      <div style={{ fontSize: 12, color: "var(--recovered-ink-627794, #627794)" }}>
         {step && step.message ? step.message : 'Press play to begin'}
       </div>
     </div>

@@ -59,7 +59,7 @@
 .ms-chip {
     border: 1px solid var(--border);
     color: var(--text-muted);
-    background: rgba(30, 41, 59, 0.8);
+    background: var(--recovered-surface-rgba30415908, rgba(30, 41, 59, 0.8));
     border-radius: 999px;
     padding: 4px 12px;
     font-size: 12px;
@@ -134,12 +134,12 @@
 
 .ms-op-btn.min {
     background: rgba(168, 85, 247, 0.1);
-    color: #c084fc;
+    color: var(--recovered-ink-c084fc, #c084fc);
     border-color: rgba(168, 85, 247, 0.3);
 }
 
 .ms-op-btn.reset {
-    background: rgba(30, 41, 59, 0.8);
+    background: var(--recovered-surface-rgba30415908, rgba(30, 41, 59, 0.8));
     color: var(--text-dim);
 }
 
@@ -162,7 +162,7 @@
     font-weight: 600;
     font-family: monospace;
     border: 1px solid var(--border);
-    background: rgba(30, 41, 59, 0.6);
+    background: var(--recovered-surface-rgba30415906, rgba(30, 41, 59, 0.6));
     color: var(--text-muted);
 }
 
@@ -182,7 +182,7 @@
 }
 
 .ms-op-tag.getMin {
-    color: #9d40fa;
+    color: var(--recovered-ink-9d40fa, #9d40fa);
     border-color: rgba(168, 85, 247, 0.2);
 }
 
@@ -214,7 +214,7 @@
     gap: 4px;
     min-height: 80px;
     min-width: 100px;
-    background: rgba(15, 23, 42, 0.5);
+    background: var(--recovered-surface-rgba15234205, rgba(15, 23, 42, 0.5));
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 8px;
@@ -279,7 +279,7 @@
     padding: 1px 5px;
     border-radius: 4px;
     background: rgba(168, 85, 247, 0.2);
-    color: #c084fc;
+    color: var(--recovered-ink-c084fc, #c084fc);
     text-transform: uppercase;
 }
 
@@ -320,7 +320,7 @@
 .ms-result-box.min-result {
     border-color: #a855f7;
     background: rgba(168, 85, 247, 0.12);
-    color: #c084fc;
+    color: var(--recovered-ink-c084fc, #c084fc);
     box-shadow: 0 0 14px rgba(168, 85, 247, 0.3);
 }
 

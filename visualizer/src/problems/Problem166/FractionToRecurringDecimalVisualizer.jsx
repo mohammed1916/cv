@@ -197,18 +197,18 @@ function generateSteps(numerator, denominator) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: '#627794' }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: "var(--recovered-ink-627794, #627794)" }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ padding: 12, backgroundColor: '#fed7aa', borderRadius: 6, borderLeft: '4px solid #f59e0b' }}>
+      <div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fed7aa, #fed7aa)", borderRadius: 6, borderLeft: '4px solid #f59e0b' }}>
         <div style={{ fontSize: 12, color: '#92400e', fontStyle: 'italic' }}>
           Long division: track remainders, detect cycle with hash map.
         </div>
       </div>
 
       {step.numerator !== undefined && step.denominator !== undefined && (
-        <motion.div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dbeafe, #dbeafe)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>
             Fraction
           </div>
@@ -219,7 +219,7 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.result !== undefined && (
-        <motion.div style={{ padding: 12, backgroundColor: '#f3e8ff', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-f3e8ff, #f3e8ff)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#5b21b6', marginBottom: 8 }}>
             Result
           </div>
@@ -230,7 +230,7 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.remainder !== undefined && (
-        <motion.div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-f0fdf4, #f0fdf4)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 4 }}>
             Current Remainder
           </div>
@@ -241,7 +241,7 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.seen && Object.keys(step.seen).length > 0 && (
-        <motion.div style={{ padding: 12, backgroundColor: '#d1fae5', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-d1fae5, #d1fae5)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 8 }}>
             Seen Remainders
           </div>
@@ -256,7 +256,7 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.foundAt !== undefined && (
-        <motion.div style={{ padding: 12, backgroundColor: '#fee2e2', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fee2e2, #fee2e2)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#7f1d1d', marginBottom: 4 }}>
             Cycle Detected!
           </div>
@@ -267,7 +267,7 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.message && (
-        <motion.div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, fontSize: 12, color: '#92400e' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fef3c7, #fef3c7)", borderRadius: 6, fontSize: 12, color: '#92400e' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           {step.message}
         </motion.div>
       )}
@@ -329,7 +329,7 @@ export default function FractionToRecurringDecimalVisualizer() {
     <VisualizationPanel step={step} />
   </>
   const statusPanel = (
-    <div className="ftrd-status" style={{ padding: 8, fontSize: 12, color: '#627794', display: 'flex', alignItems: 'center', gap: 8 }}>
+    <div className="ftrd-status" style={{ padding: 8, fontSize: 12, color: "var(--recovered-ink-627794, #627794)", display: 'flex', alignItems: 'center', gap: 8 }}>
       {step ? `Step ${stepIndex + 1} of ${steps.length}` : 'Ready'}
     </div>
   )

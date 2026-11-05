@@ -26,6 +26,7 @@
   --border:      rgba(15, 23, 42, 0.16);
 
   --primary:      #6d28d9;
+  --primary-contrast: #ffffff;
   --primary-l:    #7c3aed;
   --primary-d:    #5b21b6;
   --primary-glow: rgba(109, 40, 217, 0.28);
@@ -68,6 +69,7 @@
   --text-secondary: var(--text-muted);
   --text-primary: var(--text);
   --text-main:    var(--text);
+  --surface1:     var(--surface);
   --surface-1:    var(--surface);
   --surface-2:    var(--surface2);
   --surface-3:    var(--surface3);
@@ -80,12 +82,12 @@
   --code-surface: #e6e9ef;
   --code-line:    #dce0e8;
   --code-text:    #4c4f69;
-  --code-dim:     #6c6f85;
+  --code-dim:     #676a80;
   --code-keyword: #8839ef;
-  --code-string:  #40a02b;
-  --code-number:  #fe640b;
-  --code-func:    #1e66f5;
-  --code-comment: #7c7f93;
+  --code-string:  #28751c;
+  --code-number:  #ae4200;
+  --code-func:    #195bdd;
+  --code-comment: #64677c;
 
   /* Neutral wash layers. Panels used rgba(255,255,255,0.06) for these, which
      is invisible on a light ground. */
@@ -109,6 +111,7 @@
   --border:      rgba(255, 255, 255, 0.09);
 
   --primary:      #a78bfa;
+  --primary-contrast: #0b1020;
   --primary-l:    #c4b5fd;
   --primary-d:    #8b5cf6;
   --primary-glow: rgba(139, 92, 246, 0.38);

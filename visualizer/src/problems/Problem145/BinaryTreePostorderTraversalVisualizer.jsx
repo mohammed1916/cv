@@ -304,14 +304,14 @@ function TreeVisualization({ root, currentNode, processedIds }) {
                 r={22}
                 fill={
                   isCurrent
-                    ? "#fbbf24"
+                    ? "var(--recovered-ink-fbbf24, #fbbf24)"
                     : isProcessed
-                      ? "#ec4899"
+                      ? "var(--recovered-ink-ec4899, #ec4899)"
                       : "var(--surface-raised, #64748b)"
                 }
                 stroke={
                   isCurrent
-                    ? "#d97706"
+                    ? "var(--recovered-ink-d97706, #d97706)"
                     : isProcessed
                       ? "#be185d"
                       : "var(--border, #cbd5e1)"
@@ -329,7 +329,7 @@ function TreeVisualization({ root, currentNode, processedIds }) {
                 fontWeight={700}
                 fill={
                   isCurrent || isProcessed
-                    ? "#ffffff"
+                    ? "var(--text-on-dark)"
                     : "var(--text-inverse, #ffffff)"
                 }
                 style={{ pointerEvents: "none", userSelect: "none" }}
@@ -346,7 +346,7 @@ function TreeVisualization({ root, currentNode, processedIds }) {
 
 function VisualizationPanel({ step, root }) {
   if (!step)
-    return <div style={{ padding: 16, color: "#627794" }}>Press play</div>;
+    return <div style={{ padding: 16, color: "var(--recovered-ink-627794, #627794)" }}>Press play</div>;
 
   return (
     <div
@@ -355,7 +355,7 @@ function VisualizationPanel({ step, root }) {
       <div
         style={{
           padding: 12,
-          backgroundColor: "#fbcfe8",
+          backgroundColor: "var(--recovered-surface-fbcfe8, #fbcfe8)",
           borderRadius: 6,
           borderLeft: "4px solid #ec4899",
         }}
@@ -373,7 +373,7 @@ function VisualizationPanel({ step, root }) {
 
       {step.stack1 && step.stack1.length > 0 && (
         <motion.div
-          style={{ padding: 12, backgroundColor: "#dbeafe", borderRadius: 6 }}
+          style={{ padding: 12, backgroundColor: "var(--recovered-surface-dbeafe, #dbeafe)", borderRadius: 6 }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
@@ -393,7 +393,7 @@ function VisualizationPanel({ step, root }) {
                 key={idx}
                 style={{
                   padding: "4px 8px",
-                  backgroundColor: "#a5b4fc",
+                  backgroundColor: "var(--recovered-surface-a5b4fc, #a5b4fc)",
                   borderRadius: 3,
                   fontSize: 11,
                   fontWeight: 600,
@@ -409,7 +409,7 @@ function VisualizationPanel({ step, root }) {
 
       {step.stack2 && step.stack2.length > 0 && (
         <motion.div
-          style={{ padding: 12, backgroundColor: "#fbcfe8", borderRadius: 6 }}
+          style={{ padding: 12, backgroundColor: "var(--recovered-surface-fbcfe8, #fbcfe8)", borderRadius: 6 }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
@@ -447,7 +447,7 @@ function VisualizationPanel({ step, root }) {
 
       {step.result && step.result.length > 0 && (
         <motion.div
-          style={{ padding: 12, backgroundColor: "#dcfce7", borderRadius: 6 }}
+          style={{ padding: 12, backgroundColor: "var(--recovered-surface-dcfce7, #dcfce7)", borderRadius: 6 }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
@@ -473,7 +473,7 @@ function VisualizationPanel({ step, root }) {
         <motion.div
           style={{
             padding: 12,
-            backgroundColor: "#fef3c7",
+            backgroundColor: "var(--recovered-surface-fef3c7, #fef3c7)",
             borderRadius: 6,
             fontSize: 12,
             color: "#92400e",
@@ -610,7 +610,7 @@ export default function BinaryTreePostorderTraversalVisualizer() {
   const statusPanel = (
     <div className="btp-status">
       {step?.message && (
-        <div style={{ fontSize: 13, color: "#627794", padding: "8px 12px" }}>
+        <div style={{ fontSize: 13, color: "var(--recovered-ink-627794, #627794)", padding: "8px 12px" }}>
           {step.message}
         </div>
       )}

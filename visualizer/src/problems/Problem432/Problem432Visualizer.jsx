@@ -34,7 +34,7 @@ function VisualizationPanel({ step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, overflow: 'auto' }}>
       {step && (
-        <div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6, border: '2px solid #0284c7', fontSize: 12, color: '#0c4a6e' }}>
+        <div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dbeafe, #dbeafe)", borderRadius: 6, border: '2px solid #0284c7', fontSize: 12, color: '#0c4a6e' }}>
           {step.message}
         </div>
       )}
@@ -61,7 +61,7 @@ function VisualizationPanel({ step, applyEx }) {
         </div>
       </div>
 
-      <div style={{ padding: 12, backgroundColor: '#f0f9ff', borderRadius: 6, border: '1px solid #bfdbfe' }}>
+      <div style={{ padding: 12, backgroundColor: "var(--recovered-surface-f0f9ff, #f0f9ff)", borderRadius: 6, border: '1px solid #bfdbfe' }}>
         <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 6 }}>Key Insight</div>
         <div style={{ fontSize: 11, color: '#075985', lineHeight: 1.5 }}>
           Keep keys in linked count buckets. Move a key to its neighboring bucket on each update; read the first or last bucket for an extreme count.
@@ -79,7 +79,7 @@ function VisualizationPanel({ step, applyEx }) {
                   width: 45,
                   height: 45,
                   borderRadius: 6,
-                  backgroundColor: step.val === val ? '#dbeafe' : step.randomVal === val ? '#fef08a' : 'var(--surface2)',
+                  backgroundColor: step.val === val ? "var(--recovered-surface-dbeafe, #dbeafe)" : step.randomVal === val ? "var(--recovered-surface-fef08a, #fef08a)" : 'var(--surface2)',
                   border: step.val === val ? '3px solid #0284c7' : step.randomVal === val ? '3px solid #eab308' : '1px solid var(--border)',
                   display: 'flex',
                   alignItems: 'center',
@@ -109,7 +109,7 @@ function VisualizationPanel({ step, applyEx }) {
                 key={i}
                 style={{
                   padding: '8px 12px',
-                  backgroundColor: step.val === val ? '#fef3c7' : '#f3e8ff',
+                  backgroundColor: step.val === val ? "var(--recovered-surface-fef3c7, #fef3c7)" : "var(--recovered-surface-f3e8ff, #f3e8ff)",
                   borderRadius: 4,
                   border: step.val === val ? '2px solid #f59e0b' : '1px solid #d8b4fe',
                   fontFamily: 'monospace',
@@ -121,23 +121,23 @@ function VisualizationPanel({ step, applyEx }) {
               </div>
             ))}
             {step.map.size > 5 && (
-              <div style={{ fontSize: 11, color: '#627794' }}>... and {step.map.size - 5} more</div>
+              <div style={{ fontSize: 11, color: "var(--recovered-ink-627794, #627794)" }}>... and {step.map.size - 5} more</div>
             )}
           </div>
         </div>
       )}
 
       {step?.currentOp && (
-        <div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, border: '2px solid #f59e0b' }}>
+        <div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fef3c7, #fef3c7)", borderRadius: 6, border: '2px solid #f59e0b' }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#92400e' }}>Current Operation</div>
-          <div style={{ fontSize: 13, fontFamily: 'monospace', fontWeight: 700, color: '#a36907', marginTop: 4 }}>
+          <div style={{ fontSize: 13, fontFamily: 'monospace', fontWeight: 700, color: "var(--recovered-ink-a36907, #a36907)", marginTop: 4 }}>
             {step.currentOp}
           </div>
         </div>
       )}
 
       {step?.inMap !== undefined && (
-        <div style={{ padding: 12, backgroundColor: step.inMap ? '#dcfce7' : '#fee2e2', borderRadius: 6, border: `2px solid ${step.inMap ? '#22c55e' : '#ef4444'}` }}>
+        <div style={{ padding: 12, backgroundColor: step.inMap ? "var(--recovered-surface-dcfce7, #dcfce7)" : "var(--recovered-surface-fee2e2, #fee2e2)", borderRadius: 6, border: `2px solid ${step.inMap ? '#22c55e' : '#ef4444'}` }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: step.inMap ? '#166534' : '#991b1b' }}>
             In Map: {step.inMap ? '✓ Yes' : '✗ No'}
           </div>

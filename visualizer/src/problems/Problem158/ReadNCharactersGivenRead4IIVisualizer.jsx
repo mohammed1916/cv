@@ -175,7 +175,7 @@ function CharacterBox({ char, style = {} }) {
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 4,
-        backgroundColor: '#a5b4fc',
+        backgroundColor: "var(--recovered-surface-a5b4fc, #a5b4fc)",
         border: '2px solid #4f46e5',
         fontSize: 12,
         fontWeight: 600,
@@ -192,18 +192,18 @@ function CharacterBox({ char, style = {} }) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: '#627794' }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: "var(--recovered-ink-627794, #627794)" }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ padding: 12, backgroundColor: '#fed7aa', borderRadius: 6, borderLeft: '4px solid #f97316' }}>
+      <div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fed7aa, #fed7aa)", borderRadius: 6, borderLeft: '4px solid #f97316' }}>
         <div style={{ fontSize: 12, color: '#92400e', fontStyle: 'italic' }}>
           Multiple calls with cache: queue holds between calls, fill on demand.
         </div>
       </div>
 
       {step.callNum !== undefined && (
-        <motion.div style={{ padding: 12, backgroundColor: '#fecaca', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fecaca, #fecaca)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#7f1d1d', marginBottom: 4 }}>
             Call #{step.callNum}
           </div>
@@ -214,7 +214,7 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.chunk && (
-        <motion.div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fef3c7, #fef3c7)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#92400e', marginBottom: 8 }}>
             Read4 Chunk
           </div>
@@ -227,7 +227,7 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.globalQueue && (
-        <motion.div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dbeafe, #dbeafe)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>
             Queue (cache)
           </div>
@@ -238,7 +238,7 @@ function VisualizationPanel({ step }) {
                   key={idx}
                   char={char}
                   style={{
-                    backgroundColor: '#d1fae5',
+                    backgroundColor: "var(--recovered-surface-d1fae5, #d1fae5)",
                     border: '2px solid #10b981',
                     color: '#065f46',
                   }}
@@ -252,7 +252,7 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.result && step.result.length > 0 && (
-        <motion.div style={{ padding: 12, backgroundColor: '#dcfce7', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dcfce7, #dcfce7)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 8 }}>
             Return Value
           </div>
@@ -262,7 +262,7 @@ function VisualizationPanel({ step }) {
                 key={idx}
                 char={char}
                 style={{
-                  backgroundColor: '#86efac',
+                  backgroundColor: "var(--recovered-surface-86efac, #86efac)",
                   border: '2px solid #22c55e',
                   color: '#065f46',
                 }}
@@ -273,7 +273,7 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.message && (
-        <motion.div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, fontSize: 12, color: '#92400e' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fef3c7, #fef3c7)", borderRadius: 6, fontSize: 12, color: '#92400e' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           {step.message}
         </motion.div>
       )}

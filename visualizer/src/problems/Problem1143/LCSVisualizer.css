@@ -78,19 +78,19 @@
 }
 
 .lcs-th-label {
-    color: #7e8297;
+    color: var(--recovered-ink-7e8297, #7e8297);
     font-size: 13px;
-    background: #181825;
+    background: var(--recovered-surface-181825, #181825);
 }
 
 .lcs-th-label.active-col {
-    color: #a6e3a1;
-    background: #1d3a2a;
+    color: var(--recovered-ink-a6e3a1, #a6e3a1);
+    background: var(--recovered-surface-1d3a2a, #1d3a2a);
 }
 
 .lcs-th-label.active-row {
-    color: #89b4fa;
-    background: #1e2a3a;
+    color: var(--recovered-ink-89b4fa, #89b4fa);
+    background: var(--recovered-surface-1e2a3a, #1e2a3a);
 }
 
 .lcs-cell {
@@ -101,21 +101,21 @@
 }
 
 .lcs-cell.active {
-    background: #2a2a3e;
+    background: var(--recovered-surface-2a2a3e, #2a2a3e);
     border-color: #f9e2af;
-    color: #f9e2af;
+    color: var(--recovered-ink-f9e2af, #f9e2af);
 }
 
 .lcs-cell.match {
-    background: #1d3a2a;
+    background: var(--recovered-surface-1d3a2a, #1d3a2a);
     border-color: #a6e3a1;
-    color: #a6e3a1;
+    color: var(--recovered-ink-a6e3a1, #a6e3a1);
 }
 
 .lcs-cell.no-match {
-    background: #2a1d1d;
+    background: var(--recovered-surface-2a1d1d, #2a1d1d);
     border-color: #f38ba8;
-    color: #f38ba8;
+    color: var(--recovered-ink-f38ba8, #f38ba8);
 }
 
 .lcs-info-row {
@@ -136,19 +136,19 @@
 
 .lcs-val {
     font-size: 18px;
-    color: #4f6ed8;
+    color: var(--recovered-ink-4f6ed8, #4f6ed8);
 }
 
 .lcs-val.match-ok {
-    color: #2f8628;
+    color: var(--recovered-ink-2f8628, #2f8628);
 }
 
 .lcs-val.match-fail {
-    color: #e51851;
+    color: var(--recovered-ink-e51851, #e51851);
 }
 
 .lcs-val.accent {
-    color: #964cef;
+    color: var(--recovered-ink-964cef, #964cef);
 }
 
 .lcs-result {
@@ -157,12 +157,12 @@
     background: var(--code-line);
     border-radius: 8px;
     font-size: 14px;
-    color: #999cad;
+    color: var(--recovered-ink-999cad, #999cad);
 }
 
 .lcs-result.done {
-    background: #2a1e3a;
-    color: #cba6f7;
+    background: var(--recovered-surface-2a1e3a, #2a1e3a);
+    color: var(--recovered-ink-cba6f7, #cba6f7);
     font-weight: 700;
     font-size: 18px;
 }

@@ -25,6 +25,7 @@ export default function PrerequisiteDrawer({ open, onOpen, onClose, onSelect, pr
     if (!cancelled && distance > 65) onOpen();
   }
   return <>
+    <div className="prerequisite-edge-track" aria-hidden="true"><i className="prerequisite-edge-band prerequisite-edge-band-outer" /><i className="prerequisite-edge-band prerequisite-edge-band-inner" /></div>
     <motion.button ref={handle} className="prerequisite-edge" style={{ width }}
       aria-label="Open prerequisite map. Drag right or press Enter." aria-haspopup="dialog" aria-expanded={open}
       onPointerDown={event => {

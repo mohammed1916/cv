@@ -29,7 +29,7 @@
   flex: 1;
   overflow: auto;
   padding: 16px;
-  color: #5577a4;
+  color: var(--recovered-ink-5577a4, #5577a4);
 }
 
 .cvn-status {

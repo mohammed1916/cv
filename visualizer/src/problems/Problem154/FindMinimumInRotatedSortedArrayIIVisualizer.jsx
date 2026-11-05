@@ -190,7 +190,7 @@ function ArrayVisualization({ nums, left, right, mid }) {
               alignItems: 'center',
               justifyContent: 'center',
               borderRadius: 4,
-              backgroundColor: isMid ? '#fbbf24' : isInRange ? '#dbeafe' : 'var(--text)',
+              backgroundColor: isMid ? "var(--recovered-surface-fbbf24, #fbbf24)" : isInRange ? "var(--recovered-surface-dbeafe, #dbeafe)" : 'var(--text)',
               border: isLeft || isRight ? '3px solid #ef4444' : isMid ? '2px solid #f59e0b' : '1px solid var(--border)',
               fontSize: 12,
               fontWeight: 600,
@@ -207,18 +207,18 @@ function ArrayVisualization({ nums, left, right, mid }) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: '#627794' }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: "var(--recovered-ink-627794, #627794)" }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ padding: 12, backgroundColor: '#fee2e2', borderRadius: 6, borderLeft: '4px solid #ef4444' }}>
+      <div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fee2e2, #fee2e2)", borderRadius: 6, borderLeft: '4px solid #ef4444' }}>
         <div style={{ fontSize: 12, color: '#7f1d1d', fontStyle: 'italic' }}>
           Binary search: handle mid vs right, shrink on duplicates.
         </div>
       </div>
 
       {step.nums && (
-        <motion.div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dbeafe, #dbeafe)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>
             Array
           </div>
@@ -232,7 +232,7 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.left !== undefined && step.right !== undefined && (
-        <motion.div style={{ padding: 12, backgroundColor: '#f3e8ff', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-f3e8ff, #f3e8ff)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#5b21b6', marginBottom: 8 }}>
             Search Range
           </div>
@@ -245,18 +245,18 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.result !== undefined && (
-        <motion.div style={{ padding: 12, backgroundColor: '#dcfce7', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dcfce7, #dcfce7)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 4 }}>
             Minimum
           </div>
-          <div style={{ fontSize: 16, fontWeight: 700, color: '#0c865d' }}>
+          <div style={{ fontSize: 16, fontWeight: 700, color: "var(--recovered-ink-0c865d, #0c865d)" }}>
             {step.result}
           </div>
         </motion.div>
       )}
 
       {step.message && (
-        <motion.div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, fontSize: 12, color: '#92400e' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fef3c7, #fef3c7)", borderRadius: 6, fontSize: 12, color: '#92400e' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           {step.message}
         </motion.div>
       )}
@@ -322,7 +322,7 @@ export default function FindMinimumInRotatedSortedArrayIIVisualizer() {
 
   const statusPanel = (
     <div className="fmirsa2-status">
-      {step?.message && <div style={{ padding: '8px 12px', fontSize: '12px', color: '#5a779b' }}>{step.message}</div>}
+      {step?.message && <div style={{ padding: '8px 12px', fontSize: '12px', color: "var(--recovered-ink-5a779b, #5a779b)" }}>{step.message}</div>}
     </div>
   )
 

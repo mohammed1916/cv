@@ -139,7 +139,7 @@ export default function MaxProductSubarrayVisualizer() {
                         return (
                             <motion.div key={i} animate={isActive ? { y: -8, scale: 1.2 } : { y: 0, scale: 1 }} style={{
                                 width: 50, height: 50, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                                backgroundColor: isActive ? '#fbbf24' : val < 0 ? '#fee2e2' : val === 0 ? '#f3f4f6' : '#dbeafe',
+                                backgroundColor: isActive ? "var(--recovered-surface-fbbf24, #fbbf24)" : val < 0 ? "var(--recovered-surface-fee2e2, #fee2e2)" : val === 0 ? "var(--recovered-surface-f3f4f6, #f3f4f6)" : "var(--recovered-surface-dbeafe, #dbeafe)",
                                 border: isActive ? '2px solid #f59e0b' : '1px solid var(--border)', borderRadius: 4
                             }}>
                                 <span style={{ fontSize: 10, color: 'var(--text-muted)' }}>{i}</span>
@@ -150,14 +150,14 @@ export default function MaxProductSubarrayVisualizer() {
                 </div>
 
                 {step?.candidates?.length > 0 && (
-                    <div style={{ padding: 8, backgroundColor: '#fef3c7', borderRadius: 6, border: '1px solid #fcd34d' }}>
+                    <div style={{ padding: 8, backgroundColor: "var(--recovered-surface-fef3c7, #fef3c7)", borderRadius: 6, border: '1px solid #fcd34d' }}>
                         <div style={{ fontSize: 11, color: '#92400e', marginBottom: 4 }}>Candidates: [num, curMax×num, curMin×num]</div>
                         <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
                             {step.candidates.map((c, i) => (
                                 <span key={i} style={{
                                     padding: '4px 8px', borderRadius: 3, fontSize: 12, fontWeight: 'bold',
-                                    backgroundColor: c === step.curMax ? '#dcfce7' : c === step.curMin ? '#fee2e2' : '#fef3c7',
-                                    color: c === step.curMax ? '#15803d' : c === step.curMin ? '#991b1b' : '#92400e'
+                                    backgroundColor: c === step.curMax ? "var(--recovered-surface-dcfce7, #dcfce7)" : c === step.curMin ? "var(--recovered-surface-fee2e2, #fee2e2)" : "var(--recovered-surface-fef3c7, #fef3c7)",
+                                    color: c === step.curMax ? "var(--recovered-ink-15803d, #15803d)" : c === step.curMin ? '#991b1b' : '#92400e'
                                 }}>
                                     {c}
                                 </span>
@@ -167,19 +167,19 @@ export default function MaxProductSubarrayVisualizer() {
                 )}
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
-                    <div style={{ padding: 8, backgroundColor: '#dcfce7', borderRadius: 6, border: '1px solid #86efac' }}>
-                        <div style={{ fontSize: 11, color: '#15803d', marginBottom: 4 }}>curMax</div>
-                        <motion.div key={step?.curMax} initial={{ scale: 0.8 }} animate={{ scale: 1 }} style={{ fontSize: 16, fontWeight: 'bold', color: '#15803d' }}>
+                    <div style={{ padding: 8, backgroundColor: "var(--recovered-surface-dcfce7, #dcfce7)", borderRadius: 6, border: '1px solid #86efac' }}>
+                        <div style={{ fontSize: 11, color: "var(--recovered-ink-15803d, #15803d)", marginBottom: 4 }}>curMax</div>
+                        <motion.div key={step?.curMax} initial={{ scale: 0.8 }} animate={{ scale: 1 }} style={{ fontSize: 16, fontWeight: 'bold', color: "var(--recovered-ink-15803d, #15803d)" }}>
                             {step?.curMax ?? '—'}
                         </motion.div>
                     </div>
-                    <div style={{ padding: 8, backgroundColor: '#fee2e2', borderRadius: 6, border: '1px solid #fecaca' }}>
+                    <div style={{ padding: 8, backgroundColor: "var(--recovered-surface-fee2e2, #fee2e2)", borderRadius: 6, border: '1px solid #fecaca' }}>
                         <div style={{ fontSize: 11, color: '#991b1b', marginBottom: 4 }}>curMin</div>
                         <motion.div key={step?.curMin} initial={{ scale: 0.8 }} animate={{ scale: 1 }} style={{ fontSize: 16, fontWeight: 'bold', color: '#991b1b' }}>
                             {step?.curMin ?? '—'}
                         </motion.div>
                     </div>
-                    <div style={{ padding: 8, backgroundColor: '#dbeafe', borderRadius: 6, border: '1px solid #0ea5e9' }}>
+                    <div style={{ padding: 8, backgroundColor: "var(--recovered-surface-dbeafe, #dbeafe)", borderRadius: 6, border: '1px solid #0ea5e9' }}>
                         <div style={{ fontSize: 11, color: '#1e40af', marginBottom: 4 }}>result</div>
                         <motion.div key={step?.res} initial={{ scale: 0.8 }} animate={{ scale: 1 }} style={{ fontSize: 16, fontWeight: 'bold', color: '#1e40af' }}>
                             {step?.res ?? '—'}
@@ -188,7 +188,7 @@ export default function MaxProductSubarrayVisualizer() {
                 </div>
 
                 {step?.phase === 'done' && (
-                    <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #86efac', textAlign: 'center', fontWeight: 600, color: '#15803d' }}>
+                    <div style={{ padding: 12, backgroundColor: "var(--recovered-surface-f0fdf4, #f0fdf4)", borderRadius: 6, border: '2px solid #86efac', textAlign: 'center', fontWeight: 600, color: "var(--recovered-ink-15803d, #15803d)" }}>
                         ✓ Max product = {step.res}
                     </div>
                 )}

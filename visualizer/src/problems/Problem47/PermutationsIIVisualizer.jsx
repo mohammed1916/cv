@@ -225,7 +225,7 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
         <div
           style={{
             fontSize: 13,
-            color: "#5577a4",
+            color: "var(--recovered-ink-5577a4, #5577a4)",
             fontFamily: "monospace",
             fontWeight: 600,
           }}
@@ -247,7 +247,7 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
             style={{
               fontSize: 11,
               fontWeight: 600,
-              color: "#7e56f8",
+              color: "var(--recovered-ink-7e56f8, #7e56f8)",
               marginBottom: 6,
             }}
           >
@@ -256,7 +256,7 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
           <div
             style={{
               fontSize: 13,
-              color: "#5577a4",
+              color: "var(--recovered-ink-5577a4, #5577a4)",
               fontFamily: "monospace",
               fontWeight: 600,
             }}
@@ -273,7 +273,7 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
             style={{
               fontSize: 12,
               fontWeight: 600,
-              color: "#5577a4",
+              color: "var(--recovered-ink-5577a4, #5577a4)",
               marginBottom: 8,
             }}
           >
@@ -299,7 +299,7 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
                     backgroundColor: "var(--border)",
                     fontFamily: "monospace",
                     fontSize: 12,
-                    color: "#22c55e",
+                    color: "var(--recovered-ink-22c55e, #22c55e)",
                   }}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -336,7 +336,7 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
           >
             Total Permutations
           </div>
-          <div style={{ fontSize: 24, fontWeight: "bold", color: "#178740" }}>
+          <div style={{ fontSize: 24, fontWeight: "bold", color: "var(--recovered-ink-178740, #178740)" }}>
             {step.result.length}
           </div>
         </motion.div>

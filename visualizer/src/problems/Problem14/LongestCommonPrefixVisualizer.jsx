@@ -201,7 +201,7 @@ function InputPanel({
 
       <div className="lcp-input-section">
         {inputError && (
-          <div style={{ color: "#ea0c0c", fontSize: 12, marginTop: 8 }}>
+          <div style={{ color: "var(--recovered-ink-ea0c0c, #ea0c0c)", fontSize: 12, marginTop: 8 }}>
             {inputError}
           </div>
         )}

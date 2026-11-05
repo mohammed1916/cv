@@ -78,8 +78,8 @@
 
 .np-cell.pivot {
   border-color: #fab387;
-  background: #2a1200;
-  color: #fab387;
+  background: var(--recovered-surface-2a1200, #2a1200);
+  color: var(--recovered-ink-fab387, #fab387);
 }
 
 
@@ -87,8 +87,8 @@
 
 .np-cell.swap {
   border-color: #89b4fa;
-  background: #0d1424;
-  color: #89b4fa;
+  background: var(--recovered-surface-0d1424, #0d1424);
+  color: var(--recovered-ink-89b4fa, #89b4fa);
 }
 
 
@@ -96,8 +96,8 @@
 
 .np-cell.reversed {
   border-color: #a6e3a1;
-  background: #002010;
-  color: #a6e3a1;
+  background: var(--recovered-surface-002010, #002010);
+  color: var(--recovered-ink-a6e3a1, #a6e3a1);
 }
 
 
@@ -128,15 +128,15 @@
 }
 
 .np-leg.pivot {
-  color: #c65108;
+  color: var(--recovered-ink-c65108, #c65108);
 }
 
 .np-leg.swap {
-  color: #1a6df5;
+  color: var(--recovered-ink-1a6df5, #1a6df5);
 }
 
 .np-leg.reversed {
-  color: #2f8628;
+  color: var(--recovered-ink-2f8628, #2f8628);
 }
 
 

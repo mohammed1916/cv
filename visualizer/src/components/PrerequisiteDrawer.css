@@ -1,15 +1,22 @@
+/* An opaque rail fills the space reserved beside the app, including the
+   curved handle's corners. Nothing from the page bleeds through the handle. */
+.prerequisite-edge-track {
+  position: fixed; inset: 0 auto 0 0; width: 52px; height: 100dvh;
+  background: var(--surface); border-right: 1px solid var(--border);
+  pointer-events: none; z-index: 99;
+}
 .prerequisite-edge {
   position: fixed; inset: 0 auto 0 0; z-index: 100; height: 100dvh;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px;
   padding: 0; color: var(--text); border: 0; border-right: 1px solid color-mix(in srgb, var(--primary) 40%, transparent);
   border-radius: 0 45% 45% 0 / 0 9% 9% 0;
-  background: linear-gradient(100deg, color-mix(in srgb, var(--surface) 92%, transparent), color-mix(in srgb, var(--primary) 22%, transparent));
-  backdrop-filter: blur(18px); box-shadow: 5px 0 28px var(--primary-glow), inset -2px 0 3px #ffffff35;
+  background: linear-gradient(100deg, var(--surface), color-mix(in srgb, var(--primary) 16%, var(--surface)));
+  box-shadow: inset -2px 0 3px #ffffff35;
   cursor: ew-resize; touch-action: none; user-select: none;
 }
 .prerequisite-edge-label { writing-mode: vertical-rl; transform: rotate(180deg); letter-spacing: .13em; font-size: 11px; font-weight: 700; white-space: nowrap; }
 .prerequisite-edge:focus-visible { outline: 3px solid var(--primary); outline-offset: -3px; }
-.app { margin-left: 36px; }
+.app { margin-left: 52px; }
 .prerequisite-drawer { position: fixed; inset: 0; width: 100vw; max-width: none; height: 100dvh; max-height: none; margin: 0; padding: 0; border: 0; background: transparent; color: var(--text); overflow: hidden; }
 .prerequisite-drawer::backdrop { background: #060b1866; backdrop-filter: blur(6px); }
 .prerequisite-drawer-surface { width: min(1180px, 94vw); height: 100%; display: flex; flex-direction: column; background: color-mix(in srgb, var(--surface) 96%, transparent); border-right: 1px solid var(--primary); border-radius: 0 28px 28px 0; box-shadow: 20px 0 90px #0005; overflow: hidden; }
@@ -19,3 +26,17 @@
 .prerequisite-drawer .learning-page { overflow: auto; min-height: 0; width: 100%; box-sizing: border-box; }
 .prerequisite-loading { padding: 32px; }
 @media (max-width: 640px) { .prerequisite-drawer-surface { width: 100%; border-radius: 0; } .prerequisite-drawer .learning-intro { flex-direction: column; align-items: stretch; } }
+
+/* Decorative nested curves sit behind the interactive handle, never over its label. */
+.prerequisite-edge-track { overflow: hidden; }
+.prerequisite-edge-band {
+  position: absolute; inset: 0 auto 0 0;
+  height: 100%; border-right: 1px solid color-mix(in srgb, var(--primary) 30%, var(--border));
+  background: color-mix(in srgb, var(--primary) 5%, var(--surface));
+  border-radius: 0 100% 100% 0 / 0 45% 45% 0;
+}
+.prerequisite-edge-band-outer { width: 51px; }
+.prerequisite-edge-band-inner {
+  width: 43px; border-radius: 0 100% 100% 0 / 0 20% 20% 0;
+  background: color-mix(in srgb, var(--primary) 9%, var(--surface));
+}

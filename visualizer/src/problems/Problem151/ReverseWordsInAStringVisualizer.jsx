@@ -123,7 +123,7 @@ function WordBox({ word, isReversed }) {
     <motion.div
       style={{
         padding: '8px 12px',
-        backgroundColor: isReversed ? '#86efac' : '#dbeafe',
+        backgroundColor: isReversed ? "var(--recovered-surface-86efac, #86efac)" : "var(--recovered-surface-dbeafe, #dbeafe)",
         borderRadius: 4,
         border: `2px solid ${isReversed ? '#22c55e' : '#0c4a6e'}`,
         fontSize: 13,
@@ -141,18 +141,18 @@ function WordBox({ word, isReversed }) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: '#627794' }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: "var(--recovered-ink-627794, #627794)" }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ padding: 12, backgroundColor: '#fed7aa', borderRadius: 6, borderLeft: '4px solid #f59e0b' }}>
+      <div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fed7aa, #fed7aa)", borderRadius: 6, borderLeft: '4px solid #f59e0b' }}>
         <div style={{ fontSize: 12, color: '#92400e', fontStyle: 'italic' }}>
           Split → Reverse → Join: three-step word reversal.
         </div>
       </div>
 
       {step.input && (
-        <motion.div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dbeafe, #dbeafe)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>
             Input String
           </div>
@@ -163,7 +163,7 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.words && step.words.length > 0 && (
-        <motion.div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dbeafe, #dbeafe)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>
             Words (Original Order)
           </div>
@@ -176,7 +176,7 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.reversed && step.reversed.length > 0 && (
-        <motion.div style={{ padding: 12, backgroundColor: '#d1fae5', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-d1fae5, #d1fae5)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 8 }}>
             Words (Reversed Order)
           </div>
@@ -189,7 +189,7 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.result && (
-        <motion.div style={{ padding: 12, backgroundColor: '#dcfce7', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dcfce7, #dcfce7)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 8 }}>
             Result String
           </div>
@@ -200,7 +200,7 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.message && (
-        <motion.div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, fontSize: 12, color: '#92400e' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fef3c7, #fef3c7)", borderRadius: 6, fontSize: 12, color: '#92400e' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           {step.message}
         </motion.div>
       )}
@@ -266,7 +266,7 @@ export default function ReverseWordsInAStringVisualizer() {
 
   const statusPanel = (
     <div className="rwias-status">
-      {step?.message && <div style={{ fontSize: 12, color: '#627794' }}>{step.message}</div>}
+      {step?.message && <div style={{ fontSize: 12, color: "var(--recovered-ink-627794, #627794)" }}>{step.message}</div>}
     </div>
   )
 

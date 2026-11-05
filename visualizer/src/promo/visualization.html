@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Visualizer Pro — Animated Intro</title>
+    <style>
+        :root {
+            --bg: #030307;
+            --violet: #9474ff;
+            --pink: #e0a7ff;
+            --white: #f9f7ff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            min-height: 100%;
+            background: var(--bg);
+            color: white;
+            font-family: Inter, Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+        }
+
+        .canvas {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background:
+                radial-gradient(ellipse 45% 35% at 50% 54%,
+                    rgba(85, 49, 156, .14), transparent 75%),
+                #030307;
+            isolation: isolate;
+        }
+
+        .canvas::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(ellipse at center,
+                    transparent 25%,
+                    rgba(0, 0, 0, .55) 100%);
+        }
+
+        .brand-area {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 42%;
+            transform: translateY(-50%);
+            text-align: center;
+        }
+
+        .logo {
+            display: inline-block;
+            position: relative;
+            font-size: clamp(40px, 8.3vw, 155px);
+            font-weight: 850;
+            letter-spacing: -.075em;
+            line-height: 1.15;
+            white-space: nowrap;
+            padding-right: .09em;
+            background: linear-gradient(110deg,
+                    #f9f7ff 0%,
+                    #d9c6ff 16%,
+                    #a18aff 31%,
+                    #f6efff 47%,
+                    #b29aff 63%,
+                    #ead7ff 81%,
+                    #f9f7ff 100%);
+            background-size: 220% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-flow 2s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 16px rgba(146, 99, 255, .16));
+        }
+
+        .logo .dot {
+            -webkit-text-fill-color: #d4b0ff;
+        }
+
+        .reflection {
+            height: clamp(35px, 7vw, 100px);
+            overflow: hidden;
+            opacity: .23;
+            transform: scaleY(-.65) translateY(5px);
+            filter: blur(3px);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, .65), transparent 85%);
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, .65), transparent 85%);
+        }
+
+        .reflection .logo {
+            animation-name: gradient-flow;
+        }
+
+        .floor-glow {
+            position: absolute;
+            top: 50%;
+            left: 20%;
+            width: 60%;
+            height: 15%;
+            background: radial-gradient(ellipse,
+                    rgba(126, 79, 245, .15),
+                    transparent 72%);
+            filter: blur(30px);
+            pointer-events: none;
+        }
+
+        .tagline {
+            position: absolute;
+            top: 65%;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: clamp(11px, 1.3vw, 18px);
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            color: #9a90b1;
+            opacity: 0;
+            transform: translateY(12px);
+        }
+
+        /* Final message, positioned at the bottom */
+        .beta {
+            position: absolute;
+            left: 5%;
+            right: 5%;
+            bottom: 5%;
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: clamp(7px, 1vw, 18px);
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateY(24px);
+            z-index: 2;
+        }
+
+        .beta .free {
+            font-size: clamp(46px, 9vw, 150px);
+            font-weight: 900;
+            letter-spacing: -.085em;
+            line-height: .95;
+            color: #fff;
+        }
+
+        .beta .rest {
+            font-size: clamp(15px, 3vw, 50px);
+            font-weight: 750;
+            letter-spacing: -.055em;
+            color: #fff;
+        }
+
+        .beta-underline {
+            position: absolute;
+            left: 32%;
+            bottom: 0;
+            width: 36%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #8e5cff, #db9aff, transparent);
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        /* Hidden editing controls */
+        .controls {
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            width: min(320px, calc(100vw - 36px));
+            padding: 18px;
+            border: 1px solid rgba(190, 165, 255, .2);
+            border-radius: 14px;
+            background: rgba(15, 12, 27, .94);
+            backdrop-filter: blur(16px);
+            z-index: 100;
+            display: none;
+            box-shadow: 0 12px 45px rgba(0, 0, 0, .4);
+        }
+
+        .controls.visible {
+            display: block;
+        }
+
+        .controls h3 {
+            margin: 0 0 15px;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .control-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin: 12px 0;
+            font-size: 12px;
+            color: #c7bfd8;
+        }
+
+        .control-row input[type="range"] {
+            width: 155px;
+            accent-color: #a78bfa;
+        }
+
+        .control-row output {
+            min-width: 38px;
+            text-align: right;
+            color: white;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        button {
+            flex: 1;
+            background: #34264f;
+            border: 1px solid #67518d;
+            border-radius: 8px;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #503a75;
+        }
+
+        .hint {
+            margin-top: 13px;
+            font-size: 11px;
+            color: #9387a9;
+        }
+
+        @keyframes gradient-flow {
+            from {
+                background-position: 0% 50%;
+            }
+
+            to {
+                background-position: 100% 50%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .brand-area {
+                top: 43%;
+            }
+
+            .logo {
+                font-size: 9vw;
+            }
+
+            .tagline {
+                top: 60%;
+                letter-spacing: .12em;
+            }
+
+            .beta {
+                bottom: 8%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="canvas" id="canvas">
+        <div class="floor-glow"></div>
+
+        <section class="brand-area">
+            <div class="logo animated-gradient">
+                visualizer<span class="dot">.</span>pro
+            </div>
+            <div class="reflection" aria-hidden="true">
+                <div class="logo animated-gradient">
+                    visualizer<span class="dot">.</span>pro
+                </div>
+            </div>
+        </section>
+
+        <div class="tagline" id="tagline">
+            See the algorithm. Understand the logic.
+        </div>
+
+        <div class="beta" id="beta">
+            <span class="free">Free</span>
+            <span class="rest">now in beta stage</span>
+        </div>
+
+        <div class="beta-underline" id="underline"></div>
+    </main>
+
+    <aside class="controls" id="controls">
+        <h3>Animation controls</h3>
+
+        <div class="control-row">
+            <label for="speed">Speed</label>
+            <input id="speed" type="range" min=".25" max="3" step=".05" value="1">
+            <output id="speedValue">1.00×</output>
+        </div>
+
+        <div class="control-row">
+            <label for="glow">Glow intensity</label>
+            <input id="glow" type="range" min="0" max="40" step="1" value="16">
+            <output id="glowValue">16</output>
+        </div>
+
+        <div class="control-row">
+            <label for="reflection">Reflection</label>
+            <input id="reflection" type="range" min="0" max=".6" step=".01" value=".23">
+            <output id="reflectionValue">0.23</output>
+        </div>
+
+        <div class="buttons">
+            <button id="play">Pause</button>
+            <button id="restart">Restart</button>
+        </div>
+
+        <div class="hint">
+            H — show/hide controls<br>
+            Space — play/pause<br>
+            R — restart
+        </div>
+    </aside>
+
+    <script>
+        "use strict";
+
+        /*
+          EDIT THESE VALUES IN VS CODE.
+        
+          duration: full intro duration in milliseconds.
+          speed: 1 = normal, 1.5 = 50% faster.
+          loop: true repeats the complete intro.
+          gradientDuration: background color movement duration.
+        */
+        const CONFIG = {
+            duration: 3500,
+            speed: 1,
+            loop: true,
+            gradientDuration: 2000,
+            glow: 16,
+            reflection: 0.23
+        };
+
+        const canvas = document.getElementById("canvas");
+        const controls = document.getElementById("controls");
+        const tagline = document.getElementById("tagline");
+        const beta = document.getElementById("beta");
+        const underline = document.getElementById("underline");
+        const logos = [...document.querySelectorAll(".logo")];
+        const reflection = document.querySelector(".reflection");
+
+        const speedInput = document.getElementById("speed");
+        const speedValue = document.getElementById("speedValue");
+        const glowInput = document.getElementById("glow");
+        const glowValue = document.getElementById("glowValue");
+        const reflectionInput = document.getElementById("reflection");
+        const reflectionValue = document.getElementById("reflectionValue");
+        const playButton = document.getElementById("play");
+
+        let playing = true;
+        let elapsed = 0;
+        let lastFrame = null;
+        let frameId = null;
+
+        function clamp(value, min, max) {
+            return Math.max(min, Math.min(max, value));
+        }
+
+        function smoothstep(a, b, x) {
+            const t = clamp((x - a) / (b - a), 0, 1);
+            return t * t * (3 - 2 * t);
+        }
+
+        function applySettings() {
+            const duration = CONFIG.gradientDuration / CONFIG.speed;
+
+            logos.forEach(logo => {
+                logo.style.animationDuration = duration + "ms";
+                logo.style.animationPlayState =
+                    playing ? "running" : "paused";
+                logo.style.filter =
+                    `drop-shadow(0 0 ${CONFIG.glow}px rgba(146,99,255,.18))`;
+            });
+
+            reflection.style.opacity = CONFIG.reflection;
+            speedInput.value = CONFIG.speed;
+            speedValue.textContent = CONFIG.speed.toFixed(2) + "×";
+            glowInput.value = CONFIG.glow;
+            glowValue.textContent = CONFIG.glow;
+            reflectionInput.value = CONFIG.reflection;
+            reflectionValue.textContent = CONFIG.reflection.toFixed(2);
+            playButton.textContent = playing ? "Pause" : "Play";
+        }
+
+        function render(time) {
+            // All phases are normalized to a 0–1 timeline.
+            const p = clamp(time / CONFIG.duration, 0, 1);
+
+            // Logo: reveal, settle, then remain visible.
+            const reveal = smoothstep(0.00, 0.30, p);
+            const settle = smoothstep(0.25, 0.58, p);
+
+            const scale = 0.93 + reveal * 0.09 - settle * 0.02;
+            const opacity = reveal;
+
+            document.querySelector(".brand-area").style.opacity = opacity;
+            document.querySelector(".brand-area").style.transform =
+                `translateY(-50%) scale(${scale})`;
+
+            // Tagline appears after logo settles.
+            const tagIn = smoothstep(0.32, 0.62, p);
+            tagline.style.opacity = tagIn * 0.9;
+            tagline.style.transform =
+                `translateY(${(1 - tagIn) * 12}px)`;
+
+            // Bottom text is the final reveal.
+            const betaIn = smoothstep(0.63, 0.94, p);
+            beta.style.opacity = betaIn;
+            beta.style.transform =
+                `translateY(${(1 - betaIn) * 24}px)`;
+
+            const lineIn = smoothstep(0.76, 1, p);
+            underline.style.opacity = lineIn * .9;
+            underline.style.transform = `scaleX(${lineIn})`;
+        }
+
+        function tick(timestamp) {
+            if (lastFrame === null) lastFrame = timestamp;
+
+            const delta = Math.min(timestamp - lastFrame, 100);
+            lastFrame = timestamp;
+
+            if (playing) {
+                elapsed += delta * CONFIG.speed;
+
+                if (elapsed >= CONFIG.duration) {
+                    if (CONFIG.loop) {
+                        elapsed %= CONFIG.duration;
+                    } else {
+                        elapsed = CONFIG.duration;
+                        playing = false;
+                        applySettings();
+                    }
+                }
+
+                render(elapsed);
+            }
+
+            frameId = requestAnimationFrame(tick);
+        }
+
+        function togglePlay() {
+            playing = !playing;
+            lastFrame = null;
+            applySettings();
+        }
+
+        function restart() {
+            elapsed = 0;
+            lastFrame = null;
+            playing = true;
+            render(0);
+            applySettings();
+        }
+
+        speedInput.addEventListener("input", event => {
+            CONFIG.speed = Number(event.target.value);
+            applySettings();
+        });
+
+        glowInput.addEventListener("input", event => {
+            CONFIG.glow = Number(event.target.value);
+            applySettings();
+        });
+
+        reflectionInput.addEventListener("input", event => {
+            CONFIG.reflection = Number(event.target.value);
+            applySettings();
+        });
+
+        document.getElementById("play")
+            .addEventListener("click", togglePlay);
+
+        document.getElementById("restart")
+            .addEventListener("click", restart);
+
+        document.addEventListener("keydown", event => {
+            if (event.target instanceof HTMLInputElement) return;
+
+            const key = event.key.toLowerCase();
+
+            if (key === "h") {
+                controls.classList.toggle("visible");
+            }
+
+            if (event.code === "Space") {
+                event.preventDefault();
+                togglePlay();
+            }
+
+            if (key === "r") {
+                restart();
+            }
+        });
+
+        render(0);
+        applySettings();
+        frameId = requestAnimationFrame(tick);
+    </script>
+
+</body>
+
+</html>

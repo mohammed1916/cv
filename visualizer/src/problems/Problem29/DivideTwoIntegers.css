@@ -1,4 +1,4 @@
-﻿.division-story { display: grid; gap: 12px; padding: 12px; min-width: 0; color: var(--text); }
+.division-story { display: grid; gap: 12px; padding: 12px; min-width: 0; color: var(--text); }
 .division-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px; min-width: 0; }
 .division-card h3 { font-size: 14px; margin: 0 0 12px; }
 .division-card p { font-size: 13px; line-height: 1.5; color: var(--text-muted); overflow-wrap: anywhere; }

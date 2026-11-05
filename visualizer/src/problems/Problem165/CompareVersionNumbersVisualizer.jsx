@@ -187,7 +187,7 @@ function VersionParts({ parts, label }) {
             style={{
               padding: '6px 8px',
               borderRadius: 3,
-              backgroundColor: '#a5b4fc',
+              backgroundColor: "var(--recovered-surface-a5b4fc, #a5b4fc)",
               border: '2px solid #4f46e5',
               fontSize: 12,
               fontWeight: 600,
@@ -206,18 +206,18 @@ function VersionParts({ parts, label }) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: '#627794' }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: "var(--recovered-ink-627794, #627794)" }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6, borderLeft: '4px solid #3b82f6' }}>
+      <div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dbeafe, #dbeafe)", borderRadius: 6, borderLeft: '4px solid #3b82f6' }}>
         <div style={{ fontSize: 12, color: '#0c4a6e', fontStyle: 'italic' }}>
           Parse versions: split by dots, pad shorter with zeros, compare element-wise.
         </div>
       </div>
 
       {step.version1 && step.version2 && (
-        <motion.div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-f0fdf4, #f0fdf4)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 8 }}>
             Input Versions
           </div>
@@ -229,7 +229,7 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.parts1 && step.parts2 && (
-        <motion.div style={{ padding: 12, backgroundColor: '#f3e8ff', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-f3e8ff, #f3e8ff)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ display: 'flex', gap: 16 }}>
             <VersionParts parts={step.parts1} label="Version 1 Parts" />
             <VersionParts parts={step.parts2} label="Version 2 Parts" />
@@ -238,7 +238,7 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.i !== undefined && step.p1 !== undefined && step.p2 !== undefined && (
-        <motion.div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dbeafe, #dbeafe)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>
             Current Comparison (Index {step.i})
           </div>
@@ -261,7 +261,7 @@ function VisualizationPanel({ step }) {
           style={{
             padding: 12,
             backgroundColor:
-              step.result === 0 ? '#f3e8ff' : step.result < 0 ? '#fecaca' : '#dcfce7',
+              step.result === 0 ? "var(--recovered-surface-f3e8ff, #f3e8ff)" : step.result < 0 ? "var(--recovered-surface-fecaca, #fecaca)" : "var(--recovered-surface-dcfce7, #dcfce7)",
             borderRadius: 6,
           }}
           initial={{ opacity: 0 }}
@@ -281,7 +281,7 @@ function VisualizationPanel({ step }) {
             style={{
               fontSize: 16,
               fontWeight: 700,
-              color: step.result === 0 ? '#8b5cf6' : step.result < 0 ? '#ef4444' : '#10b981',
+              color: step.result === 0 ? "var(--recovered-ink-8b5cf6, #8b5cf6)" : step.result < 0 ? "var(--recovered-ink-ef4444, #ef4444)" : "var(--recovered-ink-10b981, #10b981)",
               fontFamily: 'monospace',
             }}
           >
@@ -291,7 +291,7 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.message && (
-        <motion.div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, fontSize: 12, color: '#92400e' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fef3c7, #fef3c7)", borderRadius: 6, fontSize: 12, color: '#92400e' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           {step.message}
         </motion.div>
       )}

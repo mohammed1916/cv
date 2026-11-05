@@ -24,7 +24,7 @@
 
 .mps-head {
     padding: 10px 14px;
-    background: #181825;
+    background: var(--recovered-surface-181825, #181825);
     font-size: 13px;
     font-weight: 600;
     color: var(--code-text);
@@ -34,7 +34,7 @@
 }
 
 .mps-error {
-    color: #e51851;
+    color: var(--recovered-ink-e51851, #e51851);
     font-size: 11px;
 }
 
@@ -97,26 +97,26 @@
 }
 
 .mps-cell.pos {
-    background: #1d3a2a;
+    background: var(--recovered-surface-1d3a2a, #1d3a2a);
     border-color: #a6e3a1;
 }
 
 .mps-cell.neg {
-    background: #3a1d1d;
+    background: var(--recovered-surface-3a1d1d, #3a1d1d);
     border-color: #f38ba8;
 }
 
 .mps-cell.zero {
-    background: #2a2a3e;
+    background: var(--recovered-surface-2a2a3e, #2a2a3e);
     border-color: var(--code-dim);
 }
 
 .mps-cell.active.pos {
-    background: #2a5a3a;
+    background: var(--recovered-surface-2a5a3a, #2a5a3a);
 }
 
 .mps-cell.active.neg {
-    background: #5a2a2a;
+    background: var(--recovered-surface-5a2a2a, #5a2a2a);
 }
 
 .mps-idx {
@@ -127,7 +127,7 @@
 .mps-val {
     font-size: 18px;
     font-weight: 700;
-    color: #4f6ed8;
+    color: var(--recovered-ink-4f6ed8, #4f6ed8);
 }
 
 .mps-candidates {
@@ -152,12 +152,12 @@
 
 .mps-cand.hi {
     border-color: #a6e3a1;
-    color: #2f8628;
+    color: var(--recovered-ink-2f8628, #2f8628);
 }
 
 .mps-cand.lo {
     border-color: #f38ba8;
-    color: #e51851;
+    color: var(--recovered-ink-e51851, #e51851);
 }
 
 .mps-label {
@@ -187,15 +187,15 @@
 }
 
 .mps-hi {
-    color: #2f8628;
+    color: var(--recovered-ink-2f8628, #2f8628);
 }
 
 .mps-lo {
-    color: #e51851;
+    color: var(--recovered-ink-e51851, #e51851);
 }
 
 .mps-res {
-    color: #964cef;
+    color: var(--recovered-ink-964cef, #964cef);
 }
 
 .mps-result {
@@ -204,12 +204,12 @@
     background: var(--code-line);
     border-radius: 8px;
     font-size: 14px;
-    color: #999cad;
+    color: var(--recovered-ink-999cad, #999cad);
 }
 
 .mps-result.ok {
-    background: #1e3a2e;
-    color: #a6e3a1;
+    background: var(--recovered-surface-1e3a2e, #1e3a2e);
+    color: var(--recovered-ink-a6e3a1, #a6e3a1);
     font-weight: 700;
 }
 
@@ -224,6 +224,6 @@
 }
 
 .mps-status.ok {
-    color: #2f8628;
+    color: var(--recovered-ink-2f8628, #2f8628);
     border-color: #a6e3a1;
 }

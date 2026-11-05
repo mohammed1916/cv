@@ -262,7 +262,7 @@ export default function ReorderListVisualizer() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  backgroundColor: "#dbeafe",
+                  backgroundColor: "var(--recovered-surface-dbeafe, #dbeafe)",
                   border: "1px solid #0ea5e9",
                   borderRadius: 4,
                   fontSize: 12,
@@ -274,7 +274,7 @@ export default function ReorderListVisualizer() {
               </motion.div>
 
               {i < displayList.length - 1 && (
-                <span style={{ color: "#5a779b" }}>→</span>
+                <span style={{ color: "var(--recovered-ink-5a779b, #5a779b)" }}>→</span>
               )}
             </div>
           ))}
@@ -291,7 +291,7 @@ export default function ReorderListVisualizer() {
             <div
               style={{
                 padding: 8,
-                backgroundColor: "#dbeafe",
+                backgroundColor: "var(--recovered-surface-dbeafe, #dbeafe)",
                 borderRadius: 6,
               }}
             >
@@ -322,7 +322,7 @@ export default function ReorderListVisualizer() {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      backgroundColor: "#f0f9ff",
+                      backgroundColor: "var(--recovered-surface-f0f9ff, #f0f9ff)",
                       border: "1px solid #0ea5e9",
                       borderRadius: 3,
                       fontSize: 11,
@@ -339,7 +339,7 @@ export default function ReorderListVisualizer() {
             <div
               style={{
                 padding: 8,
-                backgroundColor: "#fee2e2",
+                backgroundColor: "var(--recovered-surface-fee2e2, #fee2e2)",
                 borderRadius: 6,
               }}
             >
@@ -370,7 +370,7 @@ export default function ReorderListVisualizer() {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      backgroundColor: "#fecaca",
+                      backgroundColor: "var(--recovered-surface-fecaca, #fecaca)",
                       border: "1px solid #fca5a5",
                       borderRadius: 3,
                       fontSize: 11,

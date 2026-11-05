@@ -276,16 +276,16 @@ function TreeVisualization({ root, currentNode, processedIds }) {
                 r={22}
                 fill={
                   isCurrent
-                    ? "#fbbf24"
+                    ? "var(--recovered-ink-fbbf24, #fbbf24)"
                     : isProcessed
-                      ? "#22c55e"
+                      ? "var(--recovered-ink-22c55e, #22c55e)"
                       : "var(--surface2, #334155)"
                 }
                 stroke={
                   isCurrent
-                    ? "#f59e0b"
+                    ? "var(--recovered-ink-f59e0b, #f59e0b)"
                     : isProcessed
-                      ? "#16a34a"
+                      ? "var(--recovered-ink-16a34a, #16a34a)"
                       : "var(--border, #64748b)"
                 }
                 strokeWidth={isCurrent ? 3 : 2}
@@ -314,7 +314,7 @@ function TreeVisualization({ root, currentNode, processedIds }) {
 
 function VisualizationPanel({ step, root }) {
   if (!step)
-    return <div style={{ padding: 16, color: "#627794" }}>Press play</div>;
+    return <div style={{ padding: 16, color: "var(--recovered-ink-627794, #627794)" }}>Press play</div>;
 
   return (
     <div
@@ -323,7 +323,7 @@ function VisualizationPanel({ step, root }) {
       <div
         style={{
           padding: 12,
-          backgroundColor: "#d1fae5",
+          backgroundColor: "var(--recovered-surface-d1fae5, #d1fae5)",
           borderRadius: 6,
           borderLeft: "4px solid #10b981",
         }}
@@ -342,7 +342,7 @@ function VisualizationPanel({ step, root }) {
 
       {step.stack && step.stack.length > 0 && (
         <motion.div
-          style={{ padding: 12, backgroundColor: "#dbeafe", borderRadius: 6 }}
+          style={{ padding: 12, backgroundColor: "var(--recovered-surface-dbeafe, #dbeafe)", borderRadius: 6 }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
@@ -362,7 +362,7 @@ function VisualizationPanel({ step, root }) {
                 key={idx}
                 style={{
                   padding: "4px 8px",
-                  backgroundColor: "#a5b4fc",
+                  backgroundColor: "var(--recovered-surface-a5b4fc, #a5b4fc)",
                   borderRadius: 3,
                   fontSize: 11,
                   fontWeight: 600,
@@ -378,7 +378,7 @@ function VisualizationPanel({ step, root }) {
 
       {step.result && step.result.length > 0 && (
         <motion.div
-          style={{ padding: 12, backgroundColor: "#dcfce7", borderRadius: 6 }}
+          style={{ padding: 12, backgroundColor: "var(--recovered-surface-dcfce7, #dcfce7)", borderRadius: 6 }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
@@ -404,7 +404,7 @@ function VisualizationPanel({ step, root }) {
         <motion.div
           style={{
             padding: 12,
-            backgroundColor: "#fef3c7",
+            backgroundColor: "var(--recovered-surface-fef3c7, #fef3c7)",
             borderRadius: 6,
             fontSize: 12,
             color: "#92400e",
@@ -542,7 +542,7 @@ export default function BinaryTreePreorderTraversalVisualizer() {
   const statusPanel = (
     <div className="btpt-status">
       {step?.message && (
-        <div style={{ padding: 8, fontSize: 12, color: "#627794" }}>
+        <div style={{ padding: 8, fontSize: 12, color: "var(--recovered-ink-627794, #627794)" }}>
           {step.message}
         </div>
       )}

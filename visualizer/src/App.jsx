@@ -5,6 +5,7 @@ import WelcomeHero from "./components/marketing/WelcomeHero";
 import PrerequisiteDrawer from './components/PrerequisiteDrawer';
 import CreateVisualizerButton from './components/CreateVisualizerButton';
 import './components/shared/FluidMotion.css';
+import './components/shared/RecoveredVisualizerTheme.css';
 import LiveTutorial from './access/LiveTutorial';
 import { TUTORIAL_STEPS } from './access/tutorialSteps';
 import React, {
