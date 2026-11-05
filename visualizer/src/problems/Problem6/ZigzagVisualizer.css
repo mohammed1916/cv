@@ -163,8 +163,8 @@
 
 .zv-example-card {
   text-align: left;
-  border: 1px solid rgba(255,255,255,0.07);
-  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  border: 1px solid var(--border);
+  background: var(--surface2);
   border-radius: 16px;
   padding: 0.85rem 0.95rem;
   transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
@@ -299,9 +299,9 @@
   align-items: center;
   justify-content: center;
   border-radius: 12px;
-  background: rgba(255,255,255,0.03);
-  border: 1px dashed rgba(255,255,255,0.08);
-  color: rgba(255,255,255,0.18);
+  background: var(--surface2);
+  border: 1px dashed var(--text-dim);
+  color: var(--text-muted);
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-weight: 700;
 }
@@ -309,7 +309,7 @@
 .zv-cell.filled {
   color: var(--text);
   border-style: solid;
-  background: linear-gradient(180deg, rgba(34,197,94,0.08), rgba(255,255,255,0.03));
+  background: linear-gradient(180deg, rgba(34,197,94,0.14), var(--surface2));
 }
 
 .zv-cell.active {
@@ -360,8 +360,8 @@
   gap: 0.35rem;
   padding: 0.8rem 0.9rem;
   border-radius: 14px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.05);
+  background: var(--surface2);
+  border: 1px solid var(--border);
 }
 
 .zv-state-item.wide {
@@ -397,8 +397,8 @@
   gap: 0.42rem;
   padding: 0.55rem 0.82rem;
   border-radius: 12px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: var(--surface2);
+  border: 1px solid var(--border);
   color: var(--text-muted);
   font-size: 0.76rem;
   font-weight: 700;
