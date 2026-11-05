@@ -1,19 +1,21 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { parseInput, buildTrace, code } from './algorithm'
+import { parseInput, buildTrace, code, python } from './algorithm'
 
 const definition = {
   phases: [
     { id: 'collect', label: 'Keys', description: 'Collect each key the first time it appears.' },
+    { id: 'sort', label: 'Sort', description: 'Sort the column names lexicographically.' },
     { id: 'fill', label: 'Fill rows', description: 'Put each object into one row, leaving empty cells for missing keys.' },
     { id: 'done', label: 'Matrix', description: 'The header row plus one row per object.' },
   ],
-  parse: parseInput, build: buildTrace, code,
-  inputLabel: 'Object with rows: a list of at most 6 flat objects',
+  parse: parseInput, build: buildTrace, code, python,
+  inputLabel: 'Object with rows: a list of at most 6 objects or arrays, possibly nested',
   url: 'https://leetcode.com/problems/array-of-objects-to-matrix/',
-  complexity: 'O(rows * keys) to build the matrix. Each key is looked up once per row.',
+  complexity: 'O(total leaves) to flatten the items, then O(rows * columns) to fill the matrix, plus a sort of the column names.',
   examples: [
     { label: 'Two shared keys', input: '{"rows":[{"color":"red","size":2},{"size":5,"shape":"round"}]}' },
     { label: 'Only one object', input: '{"rows":[{"id":7,"ok":true}]}' },
+    { label: 'Nested paths', input: '{"rows":[{"name":"Ada","address":{"city":"Oslo"}},[9,{"ok":false}]]}' },
   ],
 }
 
@@ -30,7 +32,7 @@ export default function ArrayOfObjectsToMatrix() {
           </tr>)}
         </tbody>
       </table>
-      <p style={{ margin: 0, color: 'var(--text-muted)' }}>A dash marks a key the object does not have.</p>
+      <p style={{ margin: 0, color: 'var(--text-muted)' }}>A dash marks a path the item does not have. Columns are sorted; nested paths are joined with dots.</p>
     </section>
   }} renderReasoning={({ step }) => <p>{step.message}</p>} />
 }
