@@ -17,9 +17,13 @@ function uid(request) {
   return request.auth.uid;
 }
 const COMPLIMENTARY_EMAILS = new Set(['greenelitesolutions@gmail.com']);
+// While the site is in beta, every verified Google sign-in gets Pro for free.
+// Set to false to return to the allowlist above.
+const BETA_FREE_PRO = true;
 function complimentary(request) {
   const token = request.auth?.token;
-  return token?.email_verified === true && COMPLIMENTARY_EMAILS.has(String(token.email || '').toLowerCase());
+  if (token?.email_verified !== true) return false;
+  return BETA_FREE_PRO || COMPLIMENTARY_EMAILS.has(String(token.email || '').toLowerCase());
 }
 function accountPro(request, data, now) {
   const pro = status(data, now);
