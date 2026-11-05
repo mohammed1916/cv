@@ -16,38 +16,50 @@ export function buildTrace({ nums, queries }) {
   const marked = Array(n).fill(false)
   let total = nums.reduce((a, b) => a + b, 0)
   const answer = []
-  frames.push({ pythonLine: 4, phase: 'start', activeLine: L('total = sum of nums'), query: null, marked: [...marked], total, answer: [...answer], message: `Unmarked sum starts at ${total}.` })
+  frames.push({ pythonLine: 4, phase: 'start', activeLine: L('let total ='), query: null, marked: [...marked], total, answer: [...answer], message: `Unmarked sum starts at ${total}.` })
   for (const [index, k] of queries) {
     if (!marked[index]) {
       marked[index] = true
       total -= nums[index]
-      frames.push({ pythonLine: 9, phase: 'mark', activeLine: L('if index is unmarked, mark it'), query: [index, k], marked: [...marked], total, answer: [...answer], message: `Mark index ${index} (value ${nums[index]}).` })
+      frames.push({ pythonLine: 8, phase: 'mark', activeLine: L('marked[index] = true'), query: [index, k], marked: [...marked], total, answer: [...answer], message: `Mark index ${index} (value ${nums[index]}).` })
     }
     const order = []
     for (let i = 0; i < n; i++) if (!marked[i]) order.push(i)
     order.sort((a, b) => nums[a] - nums[b] || a - b)
-    frames.push({ pythonLine: 10, phase: 'order', activeLine: L('order = unmarked indices sorted'), query: [index, k], marked: [...marked], total, answer: [...answer], message: `Unmarked indices in order: ${order.join(', ') || 'none'}.` })
+    frames.push({ pythonLine: 10, phase: 'order', activeLine: L('order.sort'), query: [index, k], marked: [...marked], total, answer: [...answer], message: `Unmarked indices in order: ${order.join(', ') || 'none'}.` })
     for (const i of order.slice(0, k)) {
       marked[i] = true
       total -= nums[i]
-      frames.push({ pythonLine: 13, phase: 'smallest', activeLine: L('mark it and subtract its value from total'), query: [index, k], marked: [...marked], total, answer: [...answer], message: `Mark index ${i} (value ${nums[i]}).` })
+      frames.push({ pythonLine: 12, phase: 'smallest', activeLine: L('for (const i of order.slice'), query: [index, k], marked: [...marked], total, answer: [...answer], message: `Mark index ${i} (value ${nums[i]}).` })
     }
     answer.push(total)
-    frames.push({ pythonLine: 14, phase: 'record', activeLine: L('append total to answer'), query: [index, k], marked: [...marked], total, answer: [...answer], message: `Unmarked sum after this query is ${total}.` })
+    frames.push({ pythonLine: 14, phase: 'record', activeLine: L('answer.push(total)'), query: [index, k], marked: [...marked], total, answer: [...answer], message: `Unmarked sum after this query is ${total}.` })
   }
   frames.push({ pythonLine: 15, phase: 'done', activeLine: L('return answer'), query: null, marked: [...marked], total, answer: [...answer], message: `Answers: [${answer.join(', ')}].` })
   return { input: { nums, queries }, result: answer, frames }
 }
 
-export const code = `unmarked sums after each query
-  marked = all false; total = sum of nums; answer = empty
-  for each query [index, k]
-    if index is unmarked, mark it and subtract its value from total
-    order = unmarked indices sorted by value, then by index
-    for the first k indices in order
-      mark it and subtract its value from total
-    append total to answer
-  return answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function unmarkedSums(nums, queries) {
+  const n = nums.length
+  const marked = Array(n).fill(false)
+  let total = nums.reduce((a, b) => a + b, 0)
+  const answer = []
+  for (const [index, k] of queries) {
+    if (!marked[index]) {
+      marked[index] = true
+      total -= nums[index]
+    }
+    const order = []
+    for (let i = 0; i < n; i++) if (!marked[i]) order.push(i)
+    order.sort((a, b) => nums[a] - nums[b] || a - b)
+    for (const i of order.slice(0, k)) {
+      marked[i] = true
+      total -= nums[i]
+    }
+    answer.push(total)
+  }
+  return answer
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def unmarked_sums(nums, queries):

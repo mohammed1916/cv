@@ -1,21 +1,35 @@
-// Own recursive-descent walkthrough. The sample expression is invented for this visualization.
-const PSEUDO = [
-  'expand(expression):',
-  '    pos = 0',
-  '    words = parse_expr()',
-  '    return sorted(words)',
-  'parse_expr():',
-  '    union = empty set; product = {""}',
-  '    while pos < len and expression[pos] != "}":',
-  '        if expression[pos] == ",":',
-  '            union = union or product; product = {""}',
-  '        elif expression[pos] == "{":',
-  '            pos += 1; inner = parse_expr(); pos += 1',
-  '            product = concat(product, inner)',
-  '        else:',
-  '            read letters; product = concat(product, {word})',
-  '    return union or product',
-]
+// Recursive-descent walkthrough. The sample expression is invented for this visualization.
+export const code = `function braceExpansionII(expression) {
+  let pos = 0
+  const concat = (left, right) => {
+    const out = new Set()
+    for (const a of left) for (const b of right) out.add(a + b)
+    return out
+  }
+  const parseExpr = () => {
+    let union = new Set()
+    let product = new Set([''])
+    while (pos < expression.length && expression[pos] !== '}') {
+      if (expression[pos] === ',') {
+        union = new Set([...union, ...product])
+        product = new Set([''])
+        pos++
+      } else if (expression[pos] === '{') {
+        pos++
+        const inner = parseExpr()
+        pos++
+        product = concat(product, inner)
+      } else {
+        const begin = pos
+        while (pos < expression.length && /[a-z]/.test(expression[pos])) pos++
+        product = concat(product, new Set([expression.slice(begin, pos)]))
+      }
+    }
+    return new Set([...union, ...product])
+  }
+  return [...parseExpr()].sort()
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const CODE_LINES = code.map(line => line.text)
 
 export const python = `def brace_expansion_ii(expression):
     pos = 0
@@ -42,14 +56,13 @@ export const python = `def brace_expansion_ii(expression):
     return sorted(parse_expr())`
 
 const PY = python.split('\n')
-export const code = PSEUDO.map((text, index) => ({ line: index + 1, text }))
 
 const STEP = {
-  start: ['union = empty set', 'union, product = set()'],
-  letters: ['read letters', 'word = expression'],
+  start: ['let union = new Set()', 'union, product = set()'],
+  letters: ['const begin = pos', 'start = pos'],
   group: ['product = concat(product, inner)', 'product = {a + b'],
-  comma: ['union = union or product', 'union |= product'],
-  done: ['return sorted(words)', 'return sorted(parse_expr())'],
+  comma: ['union = new Set([...union, ...product])', 'union |= product'],
+  done: ['return [...parseExpr()].sort()', 'return sorted(parse_expr())'],
 }
 function lineOf(lines, key) {
   const index = lines.findIndex(line => line.includes(key))
@@ -58,7 +71,7 @@ function lineOf(lines, key) {
 }
 const frame = (phase, step, message, snapshot) => ({
   phase,
-  activeLine: lineOf(PSEUDO, STEP[step][0]),
+  activeLine: lineOf(CODE_LINES, STEP[step][0]),
   pythonLine: lineOf(PY, STEP[step][1]),
   message,
   snapshot,

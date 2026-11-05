@@ -23,7 +23,7 @@ const definition = {
 export default function ShortestSubarrayOrI() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { nums } = run.input
-    const roleOf = i => (step.start <= i && i <= step.end ? 'subarray' : '')
+    const roleOf = i => (i === step.start ? 'l' : i === step.end ? 'r' : step.start < i && i < step.end ? 'subarray' : '')
     return <>
       <IndexedSequence label="Values" length={nums.length} valueAt={i => nums[i]} active={Math.max(step.end, step.start, 0)} roleAt={roleOf} />
       <output aria-label="Subarray OR">{`Subarray ${step.start}-${step.end}, OR ${step.or}, target k ${run.input.k}, best ${step.best ?? 'none'}`}</output>

@@ -23,13 +23,13 @@ const definition = {
 export default function LastSubstringInLexicographicalOrder() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const roles = i => {
-      if (i === step.i) return 'candidate'
-      if (i === step.j) return 'challenger'
+      if (i === step.i) return 'l'
+      if (i === step.j) return 'r'
       if (step.k > 0 && (i >= step.i && i < step.i + step.k || i >= step.j && i < step.j + step.k)) return 'matched'
       return ''
     }
     return <>
-      <IndexedSequence label="String" length={run.input.s.length} valueAt={i => run.input.s[i]} active={step.i} roleAt={roles} />
+      <IndexedSequence label="String (l = candidate start i, r = challenger start j)" length={run.input.s.length} valueAt={i => run.input.s[i]} active={step.i} roleAt={roles} />
       <output aria-label="Comparison">{`Candidate ${step.i}, challenger ${step.j}, matched ${step.k}`}</output>
     </>
   }} renderReasoning={({ step }) => <>

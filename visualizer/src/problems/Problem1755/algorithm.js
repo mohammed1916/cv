@@ -13,17 +13,6 @@ const subsetSums = part => {
   for (const x of part) out = out.concat(out.map(s => s + x))
   return out.sort((a, b) => a - b)
 }
-const lowerBound = (arr, target) => {
-  let lo = 0
-  let hi = arr.length
-  while (lo < hi) {
-    const mid = (lo + hi) >> 1
-    if (arr[mid] < target) lo = mid + 1
-    else hi = mid
-  }
-  return lo
-}
-
 export function buildTrace(input) {
   const { nums, goal } = input
   const half = Math.floor(nums.length / 2)
@@ -33,26 +22,39 @@ export function buildTrace(input) {
   let candidate = -1
   let lsums = []
   let rsums = []
-  const PY_LINE = { split: 6, left: 14, right: 15, start: 16, search: 18, update: 21, done: 22 }
+  let range = null
+  const PY_LINE = { split: 2, left: 8, right: 9, start: 10, probe: 14, search: 12, update: 22, done: 23 }
   const snap = (phase, activeLine, message) => frames.push({
-    phase, pythonLine: PY_LINE[phase], activeLine, a, candidate, lsums: [...lsums], rsums: [...rsums], best: best === Infinity ? null : best, message,
+    phase, pythonLine: PY_LINE[phase], activeLine, a, candidate, lo: range ? range.lo : null, hi: range ? range.hi : null, lsums: [...lsums], rsums: [...rsums], best: best === Infinity ? null : best, message,
   })
 
-  snap('split', L('split the numbers'), `Left half: [${nums.slice(0, half).join(', ')}]. Right half: [${nums.slice(half).join(', ')}].`)
+  snap('split', L('const half = Math'), `Left half: [${nums.slice(0, half).join(', ')}]. Right half: [${nums.slice(half).join(', ')}].`)
   lsums = subsetSums(nums.slice(0, half))
-  snap('left', L('list every subset sum of the left half'), `${lsums.length} left sums, sorted.`)
+  snap('left', L('const left = subsetSums'), `${lsums.length} left sums, sorted.`)
   rsums = subsetSums(nums.slice(half))
-  snap('right', L('list every subset sum of the right half'), `${rsums.length} right sums, sorted.`)
-  snap('start', L('set best to a very large number'), 'Start with best at a very large number.')
+  snap('right', L('const right = subsetSums'), `${rsums.length} right sums, sorted.`)
+  snap('start', L('let best = Infinity'), 'Start with best at a very large number.')
   for (let i = 0; i < lsums.length; i++) {
     a = i
-    candidate = lowerBound(rsums, goal - lsums[i])
-    snap('search', L('find the right sum closest to goal minus a'), `For left sum ${lsums[i]}, look for right sums near ${goal - lsums[i]}.`)
+    const target = goal - lsums[i]
+    let lo = 0
+    let hi = rsums.length
+    while (lo < hi) {
+      const mid = (lo + hi) >> 1
+      candidate = mid
+      range = { lo, hi }
+      snap('probe', L('while (lo < hi)'), `Search right sums for ${target}: testing index ${mid}, value ${rsums[mid]}.`)
+      if (rsums[mid] < target) lo = mid + 1
+      else hi = mid
+    }
+    candidate = lo
+    range = { lo, hi }
+    snap('search', L('const target = goal - a'), `For left sum ${lsums[i]}, the first right sum at least ${target} is at index ${lo}.`)
     for (const idx of [candidate - 1, candidate]) {
       if (idx < 0 || idx >= rsums.length) continue
       best = Math.min(best, Math.abs(goal - (lsums[i] + rsums[idx])))
     }
-    snap('update', L('update best with'), `Best difference so far: ${best}.`)
+    snap('update', L('best = Math.min(best'), `Best difference so far: ${best}.`)
   }
   a = -1
   candidate = -1
@@ -60,36 +62,54 @@ export function buildTrace(input) {
   return { input, result: best, frames }
 }
 
-export const code = `split the numbers into a left half and a right half
-list every subset sum of the left half, and sort them
-list every subset sum of the right half, and sort them
-set best to a very large number
-for each left sum a
-  find the right sum closest to goal minus a, using binary search
-  update best with the distance from goal of a plus that right sum
-return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function closestSubsequenceSum(nums, goal) {
+  const half = Math.floor(nums.length / 2)
+  const subsetSums = part => {
+    let out = [0]
+    for (const x of part) out = out.concat(out.map(s => s + x))
+    return out.sort((a, b) => a - b)
+  }
+  const left = subsetSums(nums.slice(0, half))
+  const right = subsetSums(nums.slice(half))
+  let best = Infinity
+  for (const a of left) {
+    const target = goal - a
+    let lo = 0
+    let hi = right.length
+    while (lo < hi) {
+      const mid = (lo + hi) >> 1
+      if (right[mid] < target) lo = mid + 1
+      else hi = mid
+    }
+    for (const idx of [lo - 1, lo]) {
+      if (idx >= 0 && idx < right.length) best = Math.min(best, Math.abs(goal - (a + right[idx])))
+    }
+  }
+  return best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
-export const python = `from bisect import bisect_left
-
-def min_difference(nums, goal):
+export const python = `def closest_subsequence_sum(nums, goal):
     half = len(nums) // 2
-    left = nums[:half]
-    right = nums[half:]
-
     def subset_sums(part):
         out = [0]
         for x in part:
-            out += [s + x for s in out]
+            out = out + [s + x for s in out]
         return sorted(out)
-
-    lsums = subset_sums(left)
-    rsums = subset_sums(right)
+    left = subset_sums(nums[:half])
+    right = subset_sums(nums[half:])
     best = float('inf')
-    for a in lsums:
-        k = bisect_left(rsums, goal - a)
-        for idx in (k - 1, k):
-            if 0 <= idx < len(rsums):
-                best = min(best, abs(goal - (a + rsums[idx])))
+    for a in left:
+        target = goal - a
+        lo, hi = 0, len(right)
+        while lo < hi:
+            mid = (lo + hi) // 2
+            if right[mid] < target:
+                lo = mid + 1
+            else:
+                hi = mid
+        for idx in (lo - 1, lo):
+            if 0 <= idx < len(right):
+                best = min(best, abs(goal - (a + right[idx])))
     return best
 `

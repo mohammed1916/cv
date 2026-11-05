@@ -28,6 +28,17 @@ export default function SortItemsByGroups() {
     <IndexedSequence label="Item groups" length={run.input.n} valueAt={i => run.groups[i]}
       active={step.item ?? -1} roleAt={i => (run.input.group[i] === -1 ? 'no group' : '')} />
     <IndexedSequence label="Answer so far" length={step.list.length} valueAt={i => step.list[i]} />
+    <section aria-label="Prerequisite map" className="algorithm-sequence">
+      <h3>Each item and the items it needs first (its prerequisites)</h3>
+      <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 4 }}>
+        {run.input.before_items.map((list, item) => {
+          const placed = step.list.includes(item)
+          return <li key={item} data-state={placed ? 'processed' : 'pending'} style={{ padding: '4px 8px', border: '1px solid var(--border)', borderRadius: 6, background: placed ? 'var(--surface2)' : 'transparent', color: placed ? 'var(--text)' : 'var(--text-muted)' }}>
+            <strong>{item}</strong> {'->'} {list.length ? list.join(', ') : 'no prerequisite'} <em>{placed ? 'placed' : 'waiting'}</em>
+          </li>
+        })}
+      </ul>
+    </section>
   </>} renderReasoning={() => <>
     <p>Items in one group must stay together, and every dependency must come before the item that needs it.</p>
     <p>Ordering the groups and then the items inside each group satisfies both rules. A cycle at either level means no valid order exists.</p>

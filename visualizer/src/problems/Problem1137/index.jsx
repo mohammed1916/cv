@@ -8,7 +8,7 @@ const definition = {
   url: 'https://leetcode.com/problems/n-th-tribonacci-number/',
   complexity: 'O(n) time and O(1) extra space with a three-term window. The visualization caps n at 37.',
   examples: [
-    { label: 'Term 4', input: '{"n":4}' },
+    { label: 'Term 6', input: '{"n":6}' },
     { label: 'Term 10', input: '{"n":10}' },
     { label: 'Start', input: '{"n":0}' },
   ],
@@ -29,7 +29,7 @@ export default function NthTribonacci() {
     const marks = {}
     for (let i = Math.max(0, last - 2); i <= last && i < terms.length; i++) marks[i] = 'window'
     return <>
-      <Sequence label={`Terms T0 to T${Math.min(n, last)} (window = last three)`} values={terms.slice(0, last + 1)} pointers={{ 'T(i)': last }} marks={marks} />
+      <Sequence label={`Terms T0 to T${Math.min(n, last)} (window = last three)`} values={terms.slice(0, last + 1)} pointers={last >= 2 ? { l: last - 2, r: last } : { r: last }} marks={marks} />
       <Vars vars={{ 'window': window.join(', '), 'i (current term)': index, 'target n': n }} />
       <output aria-label="Result">{step.phase === 'done' ? `Result: ${run.result}` : step.message}</output>
     </>

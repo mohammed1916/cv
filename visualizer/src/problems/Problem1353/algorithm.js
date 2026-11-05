@@ -10,6 +10,30 @@ export function parseInput(text) {
   return { events }
 }
 
+// Each line of JavaScript is paired with the Python line on the same row.
+const LINES = [
+  ['function maxEvents(events) {', 'import heapq'],
+  ['  const evs = [...events].sort((a, b) => a[0] - b[0] || a[1] - b[1])', 'def max_events(events):'],
+  ['  const heap = []', '    evs = sorted(events)'],
+  ['  let day = 0, i = 0, count = 0', '    heap = []'],
+  ['  while (i < evs.length || heap.length > 0) {', '    day = i = count = 0'],
+  ['    if (heap.length === 0) day = Math.max(day, evs[i][0])', '    while i < len(evs) or heap:'],
+  ['    while (i < evs.length && evs[i][0] <= day) {', '        if not heap: day = max(day, evs[i][0])'],
+  ['      heap.push(evs[i][1]); heap.sort((a, b) => a - b); i++', '        while i < len(evs) and evs[i][0] <= day:'],
+  ['    }', '            heapq.heappush(heap, evs[i][1]); i += 1'],
+  ['    while (heap.length > 0 && heap[0] < day) heap.shift()', ''],
+  ['    if (heap.length > 0) { heap.shift(); count++ }', '        while heap and heap[0] < day: heapq.heappop(heap)'],
+  ['    day++', '        if heap: heapq.heappop(heap); count += 1'],
+  ['  }', '        day += 1'],
+  ['  return count', ''],
+  ['}', '    return count'],
+]
+const codeLines = LINES.map(([js]) => js)
+export const code = codeLines.map((text, index) => ({ line: index + 1, text }))
+const L = s => codeLines.findIndex(c => c.includes(s)) + 1
+export const python = LINES.map(([, py]) => py).join('\n')
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 export function buildTrace(input) {
   const ev = input.events
   const order = ev.map((e, i) => i).sort((a, b) => ev[a][0] - ev[b][0] || ev[a][1] - ev[b][1])
@@ -18,7 +42,7 @@ export function buildTrace(input) {
   let next = 0
   let attended = 0
   const attendedIdx = []
-  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('sort the events by start day'), day, index: -1, attended, attendedIdx: [], message: 'Sort the events by start day. Walk through the days in order.' }]
+  const frames = [{ phase: 'start', pythonLine: P('evs = sorted'), activeLine: L('const evs'), day, index: -1, attended, attendedIdx: [], message: 'Sort the events by start day. Walk through the days in order.' }]
   while (next < order.length || waiting.length > 0) {
     if (waiting.length === 0) day = Math.max(day, ev[order[next]][0])
     while (next < order.length && ev[order[next]][0] <= day) {
@@ -31,45 +55,10 @@ export function buildTrace(input) {
       const pick = waiting.shift()
       attended += 1
       attendedIdx.push(pick)
-      frames.push({ phase: 'attend', pythonLine: 18, activeLine: L('attend the one ending soonest'), day, index: pick, attended, attendedIdx: [...attendedIdx], message: `Day ${day}: attend event ${pick} ${JSON.stringify(ev[pick])}, which ends soonest.` })
+      frames.push({ phase: 'attend', pythonLine: P('if heap:'), activeLine: L('if (heap.length > 0)'), day, index: pick, attended, attendedIdx: [...attendedIdx], message: `Day ${day}: attend event ${pick} ${JSON.stringify(ev[pick])}, which ends soonest.` })
     }
     day += 1
   }
-  frames.push({ phase: 'done', pythonLine: 21, activeLine: L('return attended'), day, index: -1, attended, attendedIdx: [...attendedIdx], message: `Maximum events attended: ${attended}.` })
+  frames.push({ phase: 'done', pythonLine: P('return count'), activeLine: L('return count'), day, index: -1, attended, attendedIdx: [...attendedIdx], message: `Maximum events attended: ${attended}.` })
   return { input, result: attended, frames }
 }
-
-export const code = `maximum number of events attended, at most one per day:
-  sort the events by start day
-  set day to zero, attended to zero, and waiting to an empty list
-  while events remain or the waiting list is not empty
-    if the waiting list is empty then jump day forward to the next start day
-    add every event that has started by this day to the waiting list
-    drop waiting events that ended before this day
-    if the waiting list is not empty then attend the one ending soonest and add one to attended
-    move to the next day
-  return attended`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-
-export const python = `import heapq
-
-def max_events(events):
-    evs = sorted(events)
-    heap = []
-    day = 0
-    i = 0
-    count = 0
-    while i < len(evs) or heap:
-        if not heap:
-            day = max(day, evs[i][0])
-        while i < len(evs) and evs[i][0] <= day:
-            heapq.heappush(heap, evs[i][1])
-            i += 1
-        while heap and heap[0] < day:
-            heapq.heappop(heap)
-        if heap:
-            heapq.heappop(heap)
-            count += 1
-        day += 1
-    return count
-`

@@ -11,7 +11,7 @@ const definition = {
   python,
   inputLabel: 'Object with nums, k, start [l, r], and q (number of queries)',
   url: "https://leetcode.com/problems/valid-k-unique-subarrays-ii/",
-  complexity: "O(q * n) time for q queries over an array of n values, by recounting each range. The visualization caps n at 14 and q at 12; the official bounds and the exact query interface are not verified in this draft.",
+  complexity: "O(q * n) time for q queries over an array of n values, by recounting each range. The visualization caps n at 14 and q at 12; The query interface takes the first range l0, r0 and q queries, as in the statement.",
   examples: [
     { label: "Two pairs", input: '{"nums":[1,1,2,2],"k":2,"start":[0,3],"q":2}' },
     { label: "Odd counts", input: '{"nums":[1,2,2,3],"k":1,"start":[0,3],"q":2}' },

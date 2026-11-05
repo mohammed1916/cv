@@ -16,12 +16,12 @@ export function buildTrace({ s }) {
     }
   }
   const frames = []
-  frames.push({ phase: 'table', pythonLine: 7, activeLine: L('mark each substring'), a: null, b: null, found: false, message: 'The palindrome table is filled for every substring.' })
+  frames.push({ phase: 'table', pythonLine: 7, activeLine: L('const pal = Array'), a: null, b: null, found: false, message: 'The palindrome table is filled for every substring.' })
   let result = false
   search: for (let a = 1; a <= n - 2; a++) {
     for (let b = a + 1; b <= n - 1; b++) {
       const ok = pal[0][a - 1] && pal[a][b - 1] && pal[b][n - 1]
-      frames.push({ phase: 'cut', pythonLine: 10, activeLine: L('for each second cut'), a, b, found: ok, message: ok ? `Cuts at ${a} and ${b} give three palindromes.` : `Cuts at ${a} and ${b}: at least one piece is not a palindrome.` })
+      frames.push({ phase: 'cut', pythonLine: 10, activeLine: L('for (let b = a + 1'), a, b, found: ok, message: ok ? `Cuts at ${a} and ${b} give three palindromes.` : `Cuts at ${a} and ${b}: at least one piece is not a palindrome.` })
       if (ok) {
         result = true
         frames.push({ phase: 'done', pythonLine: 11, activeLine: L('return true'), a, b, found: true, message: `Partition found: ${s.slice(0, a)} | ${s.slice(a, b)} | ${s.slice(b)}.` })
@@ -33,13 +33,22 @@ export function buildTrace({ s }) {
   return { input: { s }, result, frames }
 }
 
-export const code = `check partitioning (s):
-  set n to the length of s
-  mark each substring s[i..j] as a palindrome when its ends match and the inside is one
-  for each first cut a from 1 to n minus 2
-    for each second cut b from a plus 1 to n minus 1
-      if the three pieces are all palindromes then return true
-  return false`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function checkPartitioning(s) {
+  const n = s.length
+  const pal = Array.from({ length: n }, () => new Array(n).fill(false))
+  for (let length = 1; length <= n; length++) {
+    for (let i = 0; i + length - 1 < n; i++) {
+      const j = i + length - 1
+      pal[i][j] = s[i] === s[j] && (length <= 2 || pal[i + 1][j - 1])
+    }
+  }
+  for (let a = 1; a <= n - 2; a++) {
+    for (let b = a + 1; b <= n - 1; b++) {
+      if (pal[0][a - 1] && pal[a][b - 1] && pal[b][n - 1]) return true
+    }
+  }
+  return false
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def check_partitioning(s):

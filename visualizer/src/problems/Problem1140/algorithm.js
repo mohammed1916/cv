@@ -7,24 +7,29 @@ export const phases = [
   { id: 'done', label: 'Result', description: 'Read the first player total from the first pile with limit one.' },
 ]
 
-export const code = [
-  'n = number of piles; suffix[i] = stones from pile i to the end',
-  'best[n][M] = 0 for every limit M',
-  'for i from n - 1 down to 0:',
-  '  for M from 1 to n:',
-  '    choice = 0',
-  '    for X from 1 to min(2M, n - i):',
-  '      opponent = best[i + X][max(M, X)]',
-  '      choice = max(choice, suffix[i] - opponent)',
-  '    best[i][M] = choice',
-  'return best[0][1]',
-].map((text, index) => ({ line: index + 1, text }))
-
+export const code = `function stoneSplit(piles) {
+  const n = piles.length
+  const suffix = Array(n + 1).fill(0)
+  for (let i = n - 1; i >= 0; i--) suffix[i] = suffix[i + 1] + piles[i]
+  const best = Array.from({ length: n + 1 }, () => Array(n + 1).fill(0))
+  for (let i = n - 1; i >= 0; i--) {
+    for (let m = 1; m <= n; m++) {
+      let choice = 0
+      for (let x = 1; x <= Math.min(2 * m, n - i); x++) {
+        choice = Math.max(choice, suffix[i] - best[i + x][Math.max(m, x)])
+      }
+      best[i][m] = choice
+    }
+  }
+  return best[0][1]
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const at = key => {
   const index = code.findIndex(line => line.text.includes(key))
   if (index < 0) throw new Error(`Missing code line: ${key}`)
   return index + 1
 }
+const pyAt = key => python.split('\n').findIndex(l => l.includes(key)) + 1
+
 
 export const python = `def stone_split(piles):
     n = len(piles)
@@ -67,7 +72,7 @@ export function buildTrace(piles) {
   const snap = extra => ({ piles, suffix: [...suffix], table: best.map(row => [...row]), cell: null, choice: null, ...extra })
 
   frames.push({
-    phase: 'setup', activeLine: at('n = number'),
+    phase: 'setup', activeLine: at('const n = piles.length'), pythonLine: pyAt('suffix[i] = suffix[i + 1]'),
     message: `${n} piles. The suffix totals show how many stones remain from each pile to the end. Past the last pile nothing is left, so those cells are zero.`,
     snapshot: snap(),
   })
@@ -84,7 +89,7 @@ export function buildTrace(piles) {
       best[i][M] = choice
       const opponentLeft = best[i + chosenX][Math.max(M, chosenX)]
       frames.push({
-        phase: 'fill', activeLine: at('best[i][M] = choice'),
+        phase: 'fill', activeLine: at('best[i][m] = choice'), pythonLine: pyAt('best[i][m] = choice'),
         message: `Pile ${i}, limit ${M}: taking ${chosenX} pile(s) is best. The opponent then collects ${opponentLeft} from the rest, so this player keeps ${choice}.`,
         snapshot: snap({ cell: [i, M], choice: chosenX }),
       })
@@ -93,7 +98,7 @@ export function buildTrace(piles) {
 
   const result = best[0][1]
   frames.push({
-    phase: 'done', activeLine: at('return best[0][1]'),
+    phase: 'done', activeLine: at('return best[0][1]'), pythonLine: pyAt('return best[0][1]'),
     message: `Starting at pile 0 with limit 1, the first player can guarantee ${result} stones.`,
     snapshot: snap({ cell: [0, 1], choice: null }),
   })

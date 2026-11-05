@@ -49,7 +49,7 @@ test('frames map to real code and Python lines and end with the result', () => {
   const ids = new Set(phases.map(p => p.id))
   for (const frame of run.frames) {
     assert.ok(ids.has(frame.phase))
-    assert.ok(frame.activeLine >= 1 && frame.activeLine <= code.split('\n').length, frame.message)
+    assert.ok(frame.activeLine >= 1 && frame.activeLine <= code.length, frame.message)
     assert.ok(frame.pythonLine >= 1 && frame.pythonLine <= python.split('\n').length, frame.message)
   }
   assert.equal(run.frames.at(-1).phase, 'done')

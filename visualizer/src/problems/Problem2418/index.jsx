@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/sort-the-people/',
   complexity: 'O(n^2) time for this selection walk, O(n) space. The visualization caps input at 12 people.',
   examples: [
-    { label: 'Example 1', input: '{"names":["Mary","John","Emma"],"heights":[180,165,170]}' },
-    { label: 'Example 2', input: '{"names":["Alice","Bob"],"heights":[155,185]}' },
+    { label: 'Three people', input: '{"names":["Ana","Ben","Cleo"],"heights":[150,190,170]}' },
+    { label: 'Two people', input: '{"names":["Dev","Eli"],"heights":[160,175]}' },
   ],
 }
 

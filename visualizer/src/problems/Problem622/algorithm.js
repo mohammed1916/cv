@@ -17,7 +17,7 @@ export function buildTrace({ k, ops }) {
   const slots = Array(k).fill(null)
   let head = 0, size = 0
   const results = []
-  const frames = [{ phase: 'start', op: -1, slots: [...slots], head, size, k, returned: undefined, activeLine: L('create a ring'), pythonLine: 2, message: `Create a ring buffer with ${k} slots.` }]
+  const frames = [{ phase: 'start', op: -1, slots: [...slots], head, size, k, returned: undefined, activeLine: L('const slots = Array(k)'), pythonLine: 2, message: `Create a ring buffer with ${k} slots.` }]
   ops.forEach(([name, value], op) => {
     let returned
     let phase = 'query'
@@ -34,25 +34,43 @@ export function buildTrace({ k, ops }) {
     else if (name === 'isEmpty') returned = size === 0
     else returned = size === k
     results.push(returned === undefined ? null : returned)
-    frames.push({ phase, op, name, value, slots: [...slots], head, size, k, returned, activeLine: phase === 'write' ? L('write value into slot') : phase === 'read' ? L('move head forward') : L('answer Front'),
+    frames.push({ phase, op, name, value, slots: [...slots], head, size, k, returned, activeLine: phase === 'write' ? L('slots[(head + size) % k] = value') : phase === 'read' ? L('head = (head + 1) % k') : L('answer Front'),
       pythonLine: pythonLineFor(name, returned),
       message: `${name}${name === 'enQueue' ? `(${value})` : '()'} → ${String(returned)}.` })
   })
-  frames.push({ phase: 'done', op: ops.length - 1, slots: [...slots], head, size, k, returned: undefined, activeLine: L('return the recorded answers'), pythonLine: 31, message: `${ops.length} operations complete.` })
+  frames.push({ phase: 'done', op: ops.length - 1, slots: [...slots], head, size, k, returned: undefined, activeLine: L('return results'), pythonLine: 31, message: `${ops.length} operations complete.` })
   return { input: { k, ops }, result: results, frames }
 }
 
-export const code = `create a ring of k empty slots, with head at slot 0 and size 0
-for each operation in ops:
-  if the operation is enQueue(value):
-    if size equals k, record false and skip the write
-    write value into slot (head + size) mod k
-    increase size by 1 and record true
-  else if the operation is deQueue:
-    if size is 0, record false and skip the move
-    clear slot head, move head forward by 1 modulo k, decrease size by 1, record true
-  else answer Front, Rear, isEmpty, or isFull from head and size, then record the answer
-return the recorded answers`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function circularQueue(k, ops) {
+  const slots = Array(k).fill(null)
+  let head = 0
+  let size = 0
+  const results = []
+  for (const [name, value] of ops) {
+    if (name === 'enQueue') {
+      if (size === k) results.push(false)
+      else {
+        slots[(head + size) % k] = value // write value into slot (head + size) mod k
+        size++
+        results.push(true)
+      }
+    } else if (name === 'deQueue') {
+      if (size === 0) results.push(false)
+      else {
+        slots[head] = null
+        head = (head + 1) % k // move head forward
+        size--
+        results.push(true)
+      }
+    } else if (name === 'Front') results.push(size ? slots[head] : -1) // answer Front
+    else if (name === 'Rear') results.push(size ? slots[(head + size - 1) % k] : -1) // answer Rear
+    else if (name === 'isEmpty') results.push(size === 0) // answer isEmpty
+    else results.push(size === k) // answer isFull
+  }
+  return results
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 // Python line (1-based index into `python` below) executed by an operation frame.

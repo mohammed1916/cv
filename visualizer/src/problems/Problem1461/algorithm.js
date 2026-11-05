@@ -21,12 +21,12 @@ export function buildTrace({ s, k }) {
   const snap = (start, extra = {}) => ({ s, k, needed, windows, start, seen: [...seen], ...extra })
   const frames = [{ phase: 'start', activeLine: L('needed = 2 ** k'), pythonLine: P('needed = 1 << k'), snapshot: snap(null), message: `Length ${k} has ${needed} codes. The string has ${windows} windows of that length.` }]
   if (windows < needed) {
-    frames.push({ phase: 'done', activeLine: L('if len(s) - k + 1 < needed'), pythonLine: P('if len(s) - k + 1 < needed'), snapshot: snap(null, { reason: 'short' }), message: `${windows} windows cannot cover ${needed} distinct codes, so the answer is false without scanning.` })
+    frames.push({ phase: 'done', activeLine: L('if (s.length - k + 1 < needed)'), pythonLine: P('if len(s) - k + 1 < needed'), snapshot: snap(null, { reason: 'short' }), message: `${windows} windows cannot cover ${needed} distinct codes, so the answer is false without scanning.` })
     return { input: { s, k }, result: false, frames }
   }
   for (let start = 0; start <= s.length - k; start++) {
     const code = s.slice(start, start + k)
-    frames.push({ phase: 'inspect', activeLine: L('for start from 0'), pythonLine: P('for start in range'), snapshot: snap(start, { window: code }), message: `Window at ${start} is "${code}".` })
+    frames.push({ phase: 'inspect', activeLine: L('for (let start = 0'), pythonLine: P('for start in range'), snapshot: snap(start, { window: code }), message: `Window at ${start} is "${code}".` })
     seen.add(code)
     if (seen.size === needed) {
       frames.push({ phase: 'done', activeLine: L('return true'), pythonLine: P('return True'), snapshot: snap(start, { window: code }), message: `All ${needed} codes have appeared by position ${start}, so return true.` })
@@ -34,18 +34,20 @@ export function buildTrace({ s, k }) {
     }
     frames.push({ phase: 'update', activeLine: L('seen.add'), pythonLine: P('seen.add'), snapshot: snap(start, { window: code }), message: `Recorded "${code}". ${seen.size} of ${needed} codes seen so far.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return len(seen)'), pythonLine: P('return len(seen)'), snapshot: snap(null, { window: null }), message: `Only ${seen.size} of ${needed} codes appeared, so return false.` })
+  frames.push({ phase: 'done', activeLine: L('return seen.size'), pythonLine: P('return len(seen)'), snapshot: snap(null, { window: null }), message: `Only ${seen.size} of ${needed} codes appeared, so return false.` })
   return { input: { s, k }, result: false, frames }
 }
 
-export const code = `contains all binary codes (s, k):
-  needed = 2 ** k
-  if len(s) - k + 1 < needed: return false
-  seen = empty set
-  for start from 0 to len(s) - k:
-    seen.add(s[start:start + k])
-    if len(seen) == needed: return true
-  return len(seen) == needed`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function hasAllCodes(s, k) {
+  const needed = 2 ** k
+  if (s.length - k + 1 < needed) return false
+  const seen = new Set()
+  for (let start = 0; start <= s.length - k; start++) {
+    seen.add(s.slice(start, start + k))
+    if (seen.size === needed) return true
+  }
+  return seen.size === needed
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
@@ -58,5 +60,4 @@ export const python = `def has_all_codes(s, k):
         seen.add(s[start:start + k])
         if len(seen) == needed:
             return True
-    return len(seen) == needed
-`
+    return len(seen) == needed`

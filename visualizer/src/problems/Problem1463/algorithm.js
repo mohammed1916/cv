@@ -45,43 +45,47 @@ export function buildTrace({ grid }) {
     }
     dp = next
     frames.push({
-      phase: 'transition', ...at(8, 13),
+      phase: 'transition', ...at(11, 13),
       snapshot: { row: r, table: table(dp), best: best(dp) },
       message: `Row ${r}: each column pair takes its best reachable predecessor. Best total so far: ${best(dp)}.`,
     })
   }
   const result = best(dp)
-  frames.push({ phase: 'answer', ...at(9, 15), snapshot: { row: rows - 1, table: table(dp), best: result }, message: `Largest total on the last row: ${result}.` })
-  frames.push({ phase: 'done', ...at(9, 15), snapshot: { row: rows - 1, table: table(dp), best: result }, message: `Return ${result}.` })
+  frames.push({ phase: 'answer', ...at(15, 16), snapshot: { row: rows - 1, table: table(dp), best: result }, message: `Largest total on the last row: ${result}.` })
+  frames.push({ phase: 'done', ...at(15, 16), snapshot: { row: rows - 1, table: table(dp), best: result }, message: `Return ${result}.` })
   return { input: { grid }, result, frames }
 }
 
-export const code = [
-  'max cherries (grid):',
-  '  cols = number of columns',
-  '  best[a][b] = negative infinity for every column pair',
-  '  best[0][cols - 1] = cherries in row 0 at both corners',
-  '  for each next row r:',
-  '    for every column pair (a, b):',
-  '      prev = best previous pair reachable by one step each',
-  '      best[a][b] = prev + cherries at (r, a) and (r, b), once if a == b',
-  '  return the largest value in best',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function cherryPickup(grid) {
+  const rows = grid.length, cols = grid[0].length
+  let dp = Array.from({ length: cols }, () => Array(cols).fill(-Infinity))
+  dp[0][cols - 1] = grid[0][0] + grid[0][cols - 1]
+  for (let r = 1; r < rows; r++) {
+    const next = Array.from({ length: cols }, () => Array(cols).fill(-Infinity))
+    for (let a = 0; a < cols; a++) for (let b = 0; b < cols; b++) {
+      const gain = grid[r][a] + (a !== b ? grid[r][b] : 0)
+      let prev = -Infinity
+      for (let pa = a - 1; pa <= a + 1; pa++) for (let pb = b - 1; pb <= b + 1; pb++) if (pa >= 0 && pa < cols && pb >= 0 && pb < cols) prev = Math.max(prev, dp[pa][pb])
+      next[a][b] = prev + gain
+    }
+    dp = next
+  }
+  return Math.max(...dp.flat())
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
-export const python = [
-  'def cherry_pickup(grid):',
-  '    cols = len(grid[0])',
-  "    NEG = float('-inf')",
-  '    dp = [[NEG] * cols for _ in range(cols)]',
-  '    dp[0][cols - 1] = grid[0][0] + grid[0][cols - 1]',
-  '    for r in range(1, len(grid)):',
-  '        nxt = [[NEG] * cols for _ in range(cols)]',
-  '        for a in range(cols):',
-  '            for b in range(cols):',
-  '                gain = grid[r][a] + (grid[r][b] if a != b else 0)',
-  '                prev = max(dp[pa][pb] for pa in (a - 1, a, a + 1) for pb in (b - 1, b, b + 1)',
-  '                           if 0 <= pa < cols and 0 <= pb < cols)',
-  '                nxt[a][b] = prev + gain',
-  '        dp = nxt',
-  '    return max(max(row) for row in dp)',
-].join('\n')
+export const python = `def cherry_pickup(grid):
+    rows, cols = len(grid), len(grid[0])
+    NEG = float('-inf')
+    dp = [[NEG] * cols for _ in range(cols)]
+    dp[0][cols - 1] = grid[0][0] + grid[0][cols - 1]
+    for r in range(1, rows):
+        nxt = [[NEG] * cols for _ in range(cols)]
+        for a in range(cols):
+            for b in range(cols):
+                gain = grid[r][a] + (grid[r][b] if a != b else 0)
+                prev = max(dp[pa][pb] for pa in (a - 1, a, a + 1) for pb in (b - 1, b, b + 1)
+                           if 0 <= pa < cols and 0 <= pb < cols)
+                nxt[a][b] = prev + gain
+        dp = nxt
+
+    return max(max(row) for row in dp)`

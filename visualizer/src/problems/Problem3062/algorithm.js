@@ -1,13 +1,17 @@
-const CODE_TEXT = `set even and odd scores to zero
-for each pair index p from 0 to n / 2 minus 1
-  let a be the node at index 2p (even team) and b the node at 2p + 1 (odd team)
-  if a > b then the even team gains one point
-  else if b > a then the odd team gains one point
-  otherwise the pair scores nothing
-if even > odd then return "Even"
-if odd > even then return "Odd"
-return "Tie"`
-
+const CODE_TEXT = `function winnerOfLinkedListGame(values) {
+  let even = 0
+  let odd = 0
+  for (let p = 0; p < values.length / 2; p++) {
+    const a = values[2 * p]
+    const b = values[2 * p + 1]
+    if (a > b) even++
+    else if (b > a) odd++
+    // equal values score nothing
+  }
+  if (even > odd) return "Even"
+  if (odd > even) return "Odd"
+  return "Tie"
+}`
 const PYTHON_TEXT = `def winner_of_linked_list_game(values):
     even = 0
     odd = 0
@@ -40,7 +44,7 @@ export function buildTrace(values) {
   const frames = []
   let even = 0
   let odd = 0
-  frames.push({ phase: 'start', activeLine: L('set even and odd scores'), pythonLine: PY('even = 0'), pair: -1, even, odd, outcome: null, message: 'Both teams start with no points.' })
+  frames.push({ phase: 'start', activeLine: L('let even = 0'), pythonLine: PY('even = 0'), pair: -1, even, odd, outcome: null, message: 'Both teams start with no points.' })
   for (let p = 0; p < values.length / 2; p++) {
     const a = values[2 * p]
     const b = values[2 * p + 1]
@@ -48,13 +52,13 @@ export function buildTrace(values) {
     if (a > b) {
       even++
       outcome = 'even'
-      frames.push({ phase: 'pair', activeLine: L('if a > b'), pythonLine: PY('if a > b'), pair: p, even, odd, outcome, message: `Pair ${p}: ${a} beats ${b}, so the even team scores.` })
+      frames.push({ phase: 'pair', activeLine: L('if (a > b)'), pythonLine: PY('if a > b'), pair: p, even, odd, outcome, message: `Pair ${p}: ${a} beats ${b}, so the even team scores.` })
     } else if (b > a) {
       odd++
       outcome = 'odd'
-      frames.push({ phase: 'pair', activeLine: L('else if b > a'), pythonLine: PY('elif b > a'), pair: p, even, odd, outcome, message: `Pair ${p}: ${b} beats ${a}, so the odd team scores.` })
+      frames.push({ phase: 'pair', activeLine: L('else if (b > a)'), pythonLine: PY('elif b > a'), pair: p, even, odd, outcome, message: `Pair ${p}: ${b} beats ${a}, so the odd team scores.` })
     } else {
-      frames.push({ phase: 'pair', activeLine: L('otherwise the pair scores nothing'), pythonLine: PY('elif b > a'), pair: p, even, odd, outcome, message: `Pair ${p}: both values are ${a}, so nobody scores.` })
+      frames.push({ phase: 'pair', activeLine: L('equal values score nothing'), pythonLine: PY('elif b > a'), pair: p, even, odd, outcome, message: `Pair ${p}: both values are ${a}, so nobody scores.` })
     }
   }
   const result = even > odd ? 'Even' : odd > even ? 'Odd' : 'Tie'

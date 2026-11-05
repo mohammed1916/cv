@@ -1,17 +1,20 @@
 // Own two-pointer walkthrough. The sample values are invented for this visualization.
-const PSEUDO = [
-  'sort the values',
-  'left = 0; right = last index',
-  'best = -1',
-  'while left < right:',
-  '    total = values[left] + values[right]',
-  '    if total < limit:',
-  '        best = max(best, total)',
-  '        left += 1',
-  '    else:',
-  '        right -= 1',
-  'return best',
-]
+const CODE_TEXT = `function bestPairBelow(values, limit) {
+  const sorted = [...values].sort((a, b) => a - b)
+  let left = 0
+  let right = sorted.length - 1
+  let best = -1
+  while (left < right) {
+    const total = sorted[left] + sorted[right]
+    if (total < limit) {
+      best = Math.max(best, total)
+      left++
+    } else {
+      right--
+    }
+  }
+  return best
+}`
 
 export const python = `def best_pair_below(values, limit):
     values = sorted(values)
@@ -27,13 +30,13 @@ export const python = `def best_pair_below(values, limit):
     return best`
 
 const PY = python.split('\n')
-export const code = PSEUDO.map((text, index) => ({ line: index + 1, text }))
+export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const STEP = {
-  start: ['left = 0', 'left, right ='],
-  total: ['total = values', 'total = values'],
-  best: ['best = max', 'best = max'],
-  shrink: ['right -= 1', 'right -= 1'],
+  start: ['let left = 0', 'left, right ='],
+  total: ['const total = sorted', 'total = values'],
+  best: ['best = Math.max', 'best = max'],
+  shrink: ['right--', 'right -= 1'],
   done: ['return best', 'return best'],
 }
 function lineOf(lines, key) {
@@ -43,7 +46,7 @@ function lineOf(lines, key) {
 }
 const frame = (phase, step, message, snapshot) => ({
   phase,
-  activeLine: lineOf(PSEUDO, STEP[step][0]),
+  activeLine: lineOf(CODE_TEXT.split('\n'), STEP[step][0]),
   pythonLine: lineOf(PY, STEP[step][1]),
   message,
   snapshot,

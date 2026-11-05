@@ -22,21 +22,21 @@ export const PYTHON_LINES = [
   "    return ans",
 ];
 
-export const CODE = [
-  "FUNCTION maxSelectedElements(nums)",
-  "    best ← empty map from value to run length",
-  "    ans ← 0",
-  "    FOR each x IN sorted(nums)",
-  "        cand ← empty map",
-  "        FOR v IN {x, x + 1}",
-  "            cand[v] ← best[v − 1] + 1",
-  "        FOR each (v, length) IN cand",
-  "            best[v] ← max(best[v], length)",
-  "            ans ← max(ans, best[v])",
-  "    RETURN ans",
-];
-
+export const CODE = `function maxSelectedElements(nums) {
+  const best = new Map()
+  let ans = 0
+  for (const x of [...nums].sort((a, b) => a - b)) {
+    const cand = new Map()
+    for (const v of [x, x + 1]) cand.set(v, (best.get(v - 1) ?? 0) + 1)
+    for (const [v, length] of cand) {
+      best.set(v, Math.max(best.get(v) ?? 0, length))
+      ans = Math.max(ans, best.get(v))
+    }
+  }
+  return ans
+}`.split('\n');
 export const code = CODE.map((text, index) => ({ line: index + 1, text }));
+const L = k => { const i = code.findIndex(c => c.text.includes(k)); if (i < 0) throw new Error('No code line: ' + k); return i + 1 };
 export const python = PYTHON_LINES.join("\n");
 
 export const pythonLineMap = {
@@ -90,19 +90,19 @@ export function buildTrace(input) {
       result: f.result ?? null,
     });
 
-  push({ phase: "init", activeLine: 2, pythonLine: 2, message: "best is empty: no runs yet." });
-  push({ phase: "init", activeLine: 3, pythonLine: 3, message: "ans = 0." });
+  push({ phase: "init", activeLine: L('const best = new Map()'), pythonLine: 2, message: "best is empty: no runs yet." });
+  push({ phase: "init", activeLine: L('let ans = 0'), pythonLine: 3, message: "ans = 0." });
 
   for (let index = 0; index < sorted.length; index++) {
     const x = sorted[index];
-    push({ phase: "loop", activeLine: 4, pythonLine: 4, index, x, message: `Take x = ${x} from the sorted array (position ${index}).` });
+    push({ phase: "loop", activeLine: L('for (const x of'), pythonLine: 4, index, x, message: `Take x = ${x} from the sorted array (position ${index}).` });
     const cand = {};
-    push({ phase: "loop", activeLine: 5, pythonLine: 5, index, x, message: "cand = {}." });
+    push({ phase: "loop", activeLine: L('const cand = new Map()'), pythonLine: 5, index, x, message: "cand = {}." });
     for (const v of [x, x + 1]) {
       cand[v] = (best.get(v - 1) ?? 0) + 1;
       push({
         phase: "candidate",
-        activeLine: 7,
+        activeLine: L('cand.set(v, '),
         pythonLine: 7,
         index,
         x,
@@ -115,7 +115,7 @@ export function buildTrace(input) {
       best.set(v, Math.max(prev, length));
       push({
         phase: "update",
-        activeLine: 9,
+        activeLine: L('for (const [v, length] of cand)'),
         pythonLine: 9,
         index,
         x,
@@ -125,7 +125,7 @@ export function buildTrace(input) {
       ans = Math.max(ans, best.get(v));
       push({
         phase: "update",
-        activeLine: 10,
+        activeLine: L('best.set(v,'),
         pythonLine: 10,
         index,
         x,
@@ -135,7 +135,7 @@ export function buildTrace(input) {
     }
   }
 
-  push({ phase: "done", activeLine: 11, pythonLine: 11, result: ans, message: `Return ans = ${ans}.` });
+  push({ phase: "done", activeLine: L('ans = Math.max(ans, best.get(v))'), pythonLine: 11, result: ans, message: `Return ans = ${ans}.` });
   return { input: { nums }, result: ans, frames };
 }
 

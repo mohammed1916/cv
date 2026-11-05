@@ -6,20 +6,26 @@ const PHASES = [
 
 export const phases = PHASES
 
-const CODE_LINES = [
-  'count the groups left after every possible merge',
-  'groups is the list of robot indices, each its own group',
-  'cur is time zero',
-  'repeat',
-  '  for each adjacent pair (left, right) of groups',
-  '    t is the earliest time at or after cur when the gap is at most d',
-  '    if no such time exists skip the pair',
-  '  if no pair has a time then stop',
-  '  cur is the earliest time; remove the left group from groups',
-  'return the number of groups',
-]
-
-export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }))
+export const code = `function countRobotGroups(position, speed, distance) {
+  const groups = position.map((_, i) => i)
+  let now = 0
+  for (;;) {
+    let best = null
+    for (let k = 0; k + 1 < groups.length; k++) {
+      const left = groups[k]
+      const right = groups[k + 1]
+      const gap = position[right] - position[left]
+      let t = null
+      if (gap + (speed[right] - speed[left]) * now <= distance) t = now
+      else if (speed[left] > speed[right]) t = (gap - distance) / (speed[left] - speed[right])
+      if (t !== null && (best === null || t < best.time)) best = { time: t, k }
+    }
+    if (best === null) break
+    now = best.time
+    groups.splice(best.k, 1)
+  }
+  return groups.length
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 function L(fragment) {
   const index = code.findIndex(c => c.text.includes(fragment))
@@ -92,7 +98,7 @@ export function buildTrace({ positions, speeds, distance }) {
   const frames = []
   let cur = { n: 0n, d: 1n }
   const timeText = t => (Number(t.n) / Number(t.d)).toFixed(3).replace(/\.?0+$/, '') || '0'
-  frames.push({ pythonLine: P('def count_robot_groups'), phase: 'start', activeLine: L('count the groups'), groups: [...groups], time: 0, left: null, right: null, message: `${groups.length} robots, each its own group; merge distance ${distance}.` })
+  frames.push({ pythonLine: P('def count_robot_groups'), phase: 'start', activeLine: L('const groups = position.map'), groups: [...groups], time: 0, left: null, right: null, message: `${groups.length} robots, each its own group; merge distance ${distance}.` })
   for (;;) {
     let best = null
     for (let k = 0; k < groups.length - 1; k++) {
@@ -112,8 +118,8 @@ export function buildTrace({ positions, speeds, distance }) {
     if (best === null) break
     cur = best.t
     groups.splice(best.k, 1)
-    frames.push({ pythonLine: P('groups.pop(k)'), phase: 'merge', activeLine: L('remove the left group'), groups: [...groups], time: timeText(cur), left: best.left, right: best.right, message: `At time ${timeText(cur)} robot ${best.left} reaches robot ${best.right}'s group and joins it; ${groups.length} group${groups.length === 1 ? '' : 's'} remain.` })
+    frames.push({ pythonLine: P('groups.pop(k)'), phase: 'merge', activeLine: L('groups.splice(best.k, 1)'), groups: [...groups], time: timeText(cur), left: best.left, right: best.right, message: `At time ${timeText(cur)} robot ${best.left} reaches robot ${best.right}'s group and joins it; ${groups.length} group${groups.length === 1 ? '' : 's'} remain.` })
   }
-  frames.push({ pythonLine: P('return len(groups)'), phase: 'done', activeLine: L('return the number of groups'), groups: [...groups], time: null, left: null, right: null, message: `${groups.length} group${groups.length === 1 ? '' : 's'} at the end.` })
+  frames.push({ pythonLine: P('return len(groups)'), phase: 'done', activeLine: L('return groups.length'), groups: [...groups], time: null, left: null, right: null, message: `${groups.length} group${groups.length === 1 ? '' : 's'} at the end.` })
   return { input: { positions, speeds, distance }, result: groups.length, frames }
 }

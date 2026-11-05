@@ -4,10 +4,11 @@ import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
-    { id: 'start', label: 'Empty prefix', description: 'The empty prefix needs zero substrings.' },
-    { id: 'skip', label: 'Leading zero', description: 'A substring cannot start with 0.' },
+    { id: 'start', label: 'Empty prefix', description: 'The empty prefix needs zero pieces.' },
+    { id: 'skip', label: 'Leading zero', description: 'A piece cannot start with 0.' },
+    { id: 'big', label: 'Too large', description: 'A piece whose value exceeds k is not allowed.' },
     { id: 'piece', label: 'Valid piece', description: 'A piece at most k extends the best count from its start.' },
-    { id: 'done', label: 'Complete', description: 'Report the fewest substrings, or -1.' },
+    { id: 'done', label: 'Complete', description: 'Report the fewest pieces, or -1.' },
   ],
   parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with s (digits) and k (JSON)',
@@ -21,11 +22,18 @@ const definition = {
 
 export default function PartitionIntoValuesAtMostK() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="Fewest substrings for each prefix (- = unset)" length={step.dp.length} valueAt={i => (step.dp[i] === null ? '-' : step.dp[i])}
-      active={step.end} roleAt={i => (step.start >= 0 && i === step.start ? 'start' : '')} />
-    <output aria-label="Piece">{step.start >= 0 ? `Piece ${run.input.s.slice(step.start, step.end)} from ${step.start} to ${step.end}` : `String ${run.input.s}, k = ${run.input.k}`}</output>
+    <IndexedSequence label="Digits of s (the current piece is marked)" length={run.input.s.length} valueAt={i => run.input.s[i]} active={step.end - 1}
+      roleAt={i => {
+        if (step.start < 0) return ''
+        if (i === step.start) return 'l'
+        if (i === step.end - 1) return 'r'
+        return i > step.start && i < step.end - 1 ? 'inside piece' : ''
+      }} />
+    <IndexedSequence label="Fewest pieces for each prefix (- = unset)" length={step.dp.length} valueAt={i => (step.dp[i] === null || step.dp[i] === Infinity ? '-' : step.dp[i])} active={step.end}
+      roleAt={i => (step.start >= 0 && i === step.start ? 'from' : '')} />
+    <output aria-label="Piece">{step.start >= 0 ? `Piece ${run.input.s.slice(step.start, step.end)} covers digits ${step.start} to ${step.end - 1}` : `String ${run.input.s}, k = ${run.input.k}`}</output>
   </>} renderReasoning={() => <>
-    <p>A substring is valid when it does not start with 0 and its value is at most k. Each prefix is split by choosing its last valid substring.</p>
-    <p>The fewest substrings for a prefix is one more than the fewest for the prefix before that last substring.</p>
+    <p>A piece is valid when its first digit is not 0 and its value is at most k. Each prefix is split by choosing its last piece.</p>
+    <p>The fewest pieces for a prefix is one more than the fewest for the prefix before that last piece. The l and r markers bound the piece being tested.</p>
   </>} />
 }

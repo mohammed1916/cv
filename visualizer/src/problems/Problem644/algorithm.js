@@ -24,14 +24,14 @@ function feasible(nums, k, average) {
 export function buildTrace(spec) {
   const { nums, k } = spec
   let lo = Math.min(...nums), hi = Math.max(...nums)
-  const frames = [{ phase: 'start', pythonLine: P('lo, hi = min'), activeLine: L('lo = smallest value'), lo, hi, mid: null, feasible: null, iteration: 0, message: `The answer lies between the smallest value ${lo} and the largest ${hi}. Binary search on the average.` }]
+  const frames = [{ phase: 'start', pythonLine: P('lo, hi = min'), activeLine: L('let lo = Math.min'), lo, hi, mid: null, feasible: null, iteration: 0, message: `The answer lies between the smallest value ${lo} and the largest ${hi}. Binary search on the average.` }]
   for (let iteration = 1; iteration <= ITERATIONS; iteration++) {
     const mid = (lo + hi) / 2
     const ok = feasible(nums, k, mid)
     if (ok) lo = mid
     else hi = mid
     frames.push({
-      phase: 'check', pythonLine: P(ok ? 'lo = mid' : 'hi = mid'), activeLine: L(ok ? 'lo = mid' : 'hi = mid'), lo, hi, mid, feasible: ok, iteration,
+      phase: 'check', pythonLine: P(ok ? 'lo = mid' : 'hi = mid'), activeLine: L(ok ? 'if (feasible(nums, k, mid)) lo = mid' : 'else hi = mid'), lo, hi, mid, feasible: ok, iteration,
       message: ok
         ? `An average of at least ${mid.toFixed(4)} is reachable with length ≥ ${k}, so the answer is at least that.`
         : `No subarray of length ≥ ${k} averages ${mid.toFixed(4)} or more, so the answer is lower.`,
@@ -40,21 +40,27 @@ export function buildTrace(spec) {
   return { input: spec, nums, result: lo, frames }
 }
 
-export const code = `lo = smallest value, hi = largest value
-repeat 40 times:
-  mid = (lo + hi) / 2
-  if feasible(mid) is true: lo = mid
-  else: hi = mid
-return lo
+export const code = `function findMaxAverage(nums, k) {
+  let lo = Math.min(...nums)
+  let hi = Math.max(...nums)
+  for (let iteration = 0; iteration < 40; iteration++) {
+    const mid = (lo + hi) / 2
+    if (feasible(nums, k, mid)) lo = mid
+    else hi = mid
+  }
+  return lo
+}
 
-feasible(average):
-  prefix = [0]
-  for each value v in nums: append the last prefix sum + v - average
-  lowest = infinity
-  for j from k to the end of prefix:
-    lowest = smaller of lowest and prefix[j - k]
-    if prefix[j] - lowest is at least 0: return true
-  return false`.split('\n').map((text, index) => ({ line: index + 1, text }))
+function feasible(nums, k, average) {
+  const prefix = [0]
+  for (const v of nums) prefix.push(prefix[prefix.length - 1] + v - average)
+  let lowest = Infinity
+  for (let j = k; j < prefix.length; j++) {
+    lowest = Math.min(lowest, prefix[j - k])
+    if (prefix[j] - lowest >= 0) return true
+  }
+  return false
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def find_max_average(nums, k):
     def feasible(average):

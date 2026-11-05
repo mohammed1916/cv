@@ -22,8 +22,41 @@ export function buildTrace(input) {
     shared.set(key, (shared.get(key) || 0) + 1)
   }
   const ordered = deg.slice(1).sort((a, b) => a - b)
-  const frames = [{ phase: 'degree', pythonLine: 6, activeLine: L('count the degree'), query: null, sorted: ordered, total: null, message: `Degrees: ${deg.slice(1).join(', ')}.` }]
-  frames.push({ phase: 'sort', pythonLine: 9, activeLine: L('sort the degrees'), query: null, sorted: ordered, total: null, message: `Sorted degrees: ${ordered.join(', ')}.` })
+  const frames = [{ phase: 'degree', pythonLine: 8, activeLine: L('const deg = new Array'), query: null, sorted: ordered, total: null, message: `Degrees: ${deg.slice(1).join(', ')}.` }]
+  frames.push({ phase: 'sort', pythonLine: 9, activeLine: L('const ordered = deg'), query: null, sorted: ordered, total: null, message: `Sorted degrees: ${ordered.join(', ')}.` })
+  const answers = []
+  for (const q of queries) {
+    let total = 0
+    let i = 0
+    let j = n - 1
+    while (i < j) {
+      const sum = ordered[i] + ordered[j]
+      frames.push({ phase: 'scan', pythonLine: 16, activeLine: L('while (i < j)'), query: q, sorted: ordered, total, i, j, message: `Pointers at ${i} and ${j}: degree sum ${sum} ${sum > q ? `is above ${q}, so all ${j - i} pairs ending at ${j} count` : `is at most ${q}, so move i up`}.` })
+      if (sum > q) { total += j - i; j-- } else i++
+    }
+    frames.push({ phase: 'query', pythonLine: 15, activeLine: L('while (i < j)'), query: q, sorted: ordered, total, message: `Query ${q}: ${total} pairs have a degree sum above ${q} before correcting shared edges.` })
+    for (const [key, c] of shared) {
+      const [a, b] = key.split(',').map(Number)
+      const s = deg[a] + deg[b]
+      if (s > q && s - c <= q) total--
+    }
+    frames.push({ phase: 'correct', pythonLine: 24, activeLine: L('total--'), query: q, sorted: ordered, total, message: `Shared edges removed from the count: ${total} pairs for query ${q}.` })
+    answers.push(total)
+  }
+  frames.push({ phase: 'done', pythonLine: 26, activeLine: L('return answers'), query: null, sorted: ordered, total: null, message: `Answers: ${answers.join(', ')}.` })
+  return { input, result: answers, frames }
+}
+
+export const code = `function countPairsOfNodes(n, edges, queries) {
+  const deg = new Array(n + 1).fill(0)
+  const shared = new Map()
+  for (const [u, v] of edges) {
+    deg[u]++
+    deg[v]++
+    const key = Math.min(u, v) + ',' + Math.max(u, v)
+    shared.set(key, (shared.get(key) || 0) + 1)
+  }
+  const ordered = deg.slice(1).sort((a, b) => a - b)
   const answers = []
   for (const q of queries) {
     let total = 0
@@ -32,33 +65,18 @@ export function buildTrace(input) {
     while (i < j) {
       if (ordered[i] + ordered[j] > q) { total += j - i; j-- } else i++
     }
-    frames.push({ phase: 'query', pythonLine: 17, activeLine: L('set total to the number of pairs'), query: q, sorted: ordered, total, message: `Query ${q}: ${total} pairs have a degree sum above ${q} before correcting shared edges.` })
     for (const [key, c] of shared) {
       const [a, b] = key.split(',').map(Number)
       const s = deg[a] + deg[b]
       if (s > q && s - c <= q) total--
     }
-    frames.push({ phase: 'correct', pythonLine: 24, activeLine: L('decrease total'), query: q, sorted: ordered, total, message: `Shared edges removed from the count: ${total} pairs for query ${q}.` })
     answers.push(total)
   }
-  frames.push({ phase: 'done', pythonLine: 26, activeLine: L('return the answers'), query: null, sorted: ordered, total: null, message: `Answers: ${answers.join(', ')}.` })
-  return { input, result: answers, frames }
-}
-
-export const code = `count pairs of nodes for each query
-  count the degree of every node
-  sort the degrees
-  set answers to an empty list
-  for each query q do
-    set total to the number of pairs with a degree sum above q, using two pointers
-    for each pair of nodes a and b that share c edges do
-      if the degree sum is above q but minus c it is at most q then
-        decrease total by one
-    add total to answers
-  return the answers`.split('\n').map((text, index) => ({ line: index + 1, text }))
+  return answers
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
-export const python = `def count_pairs(n, edges, queries):
+export const python = `def count_pairs_of_nodes(n, edges, queries):
     deg = [0] * (n + 1)
     shared = {}
     for u, v in edges:

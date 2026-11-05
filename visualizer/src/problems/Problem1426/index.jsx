@@ -24,7 +24,7 @@ export default function CountingElements() {
         {values.map((v, i) => <div key={i} data-index={i} style={{
           minWidth: 48, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
           border: `${i === current ? 2 : 1}px solid ${i === current ? 'var(--text)' : 'var(--border)'}`,
-          background: i === current && counted ? '#bbf7d0' : i === current ? 'var(--surface2)' : 'transparent', color: '#1c1917',
+          background: i === current && counted ? 'var(--primary)' : i === current ? 'var(--surface2)' : 'transparent', color: i === current && counted ? '#fff' : 'var(--text)',
         }}>{v}<div><small>{i}</small></div></div>)}
       </div>
       <p>{value === undefined ? 'Set of values built from the array.' : `Checking ${value}: successor ${successor} ${hit ? 'is present' : 'is absent'}.`}</p>

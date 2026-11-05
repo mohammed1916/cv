@@ -19,24 +19,26 @@ export function buildTrace(spec) {
     positions.get(v).push(i)
   })
   const mapping = []
-  const frames = [{ phase: 'index', activeLine: L('positions = empty map'), pythonLine: 2, i: null, value: null, index: null, mapping: [], message: 'Record where each value sits in nums2. A repeated value takes its positions in order.' }]
+  const frames = [{ phase: 'index', activeLine: L('const positions = new Map()'), pythonLine: 2, i: null, value: null, index: null, mapping: [], message: 'Record where each value sits in nums2. A repeated value takes its positions in order.' }]
   nums1.forEach((v, i) => {
     const index = positions.get(v).shift()
     mapping.push(index)
-    frames.push({ phase: 'map', activeLine: L('append it to mapping'), pythonLine: 7, i, value: v, index, mapping: [...mapping], message: `${v} at position ${i} of nums1 maps to index ${index} of nums2.` })
+    frames.push({ phase: 'map', activeLine: L('mapping.push(positions'), pythonLine: 7, i, value: v, index, mapping: [...mapping], message: `${v} at position ${i} of nums1 maps to index ${index} of nums2.` })
   })
   frames.push({ phase: 'done', activeLine: L('return mapping'), pythonLine: 8, i: null, value: null, index: null, mapping: [...mapping], message: `The mapping is ${mapping.join(', ')}.` })
   return { input: spec, nums1, nums2, result: mapping, frames }
 }
 
-export const code = `function anagramMappings(nums1, nums2):
-  positions = empty map from value to a list of indices
-  for each index i and value v in nums2:
-    add i to the list of positions for v
-  mapping = empty list
-  for each value v in nums1:
-    remove the first position in positions[v] and append it to mapping
-  return mapping`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function anagramMappings(nums1, nums2) {
+  const positions = new Map()
+  nums2.forEach((v, i) => {
+    if (!positions.has(v)) positions.set(v, [])
+    positions.get(v).push(i)
+  })
+  const mapping = []
+  for (const v of nums1) mapping.push(positions.get(v).shift())
+  return mapping
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def anagram_mappings(nums1, nums2):

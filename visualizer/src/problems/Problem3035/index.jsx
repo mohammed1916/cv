@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-palindromes-after-operations/',
   complexity: 'O(N + k log k) time, where N is the total number of letters and k is the number of words.',
   examples: [
-    { label: 'Example 1', input: '["abbb","ba","aa"]' },
-    { label: 'Example 2', input: '["abc","ab"]' },
+    { label: 'Example 1', input: '["xxyz","xx","yyy"]' },
+    { label: 'Example 2', input: '["pq","rrs","tt"]' },
   ],
 }
 

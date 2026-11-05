@@ -15,29 +15,33 @@ export function buildTrace({ nums1, nums2 }) {
   if (nums2.length % 2 === 1) {
     const part = nums1.reduce((a, b) => a ^ b, 0)
     result ^= part
-    frames.push({ phase: 'nums1', pythonLine: 5, activeLine: L('if the length of nums2 is odd'), result, message: `nums2 has odd length, so each nums1 value is paired an odd number of times. Its xor ${part} is included.` })
+    frames.push({ phase: 'nums1', pythonLine: 5, activeLine: L('if (nums2.length % 2'), result, message: `nums2 has odd length, so each nums1 value is paired an odd number of times. Its xor ${part} is included.` })
   } else {
-    frames.push({ phase: 'nums1', pythonLine: 3, activeLine: L('if the length of nums2 is odd'), result, message: 'nums2 has even length, so each nums1 value is paired an even number of times and cancels out.' })
+    frames.push({ phase: 'nums1', pythonLine: 3, activeLine: L('if (nums2.length % 2'), result, message: 'nums2 has even length, so each nums1 value is paired an even number of times and cancels out.' })
   }
   if (nums1.length % 2 === 1) {
     const part = nums2.reduce((a, b) => a ^ b, 0)
     result ^= part
-    frames.push({ phase: 'nums2', pythonLine: 8, activeLine: L('if the length of nums1 is odd'), result, message: `nums1 has odd length, so each nums2 value is paired an odd number of times. Its xor ${part} is included.` })
+    frames.push({ phase: 'nums2', pythonLine: 8, activeLine: L('if (nums1.length % 2'), result, message: `nums1 has odd length, so each nums2 value is paired an odd number of times. Its xor ${part} is included.` })
   } else {
-    frames.push({ phase: 'nums2', pythonLine: 6, activeLine: L('if the length of nums1 is odd'), result, message: 'nums1 has even length, so each nums2 value cancels out.' })
+    frames.push({ phase: 'nums2', pythonLine: 6, activeLine: L('if (nums1.length % 2'), result, message: 'nums1 has even length, so each nums2 value cancels out.' })
   }
   frames.push({ phase: 'done', pythonLine: 9, activeLine: L('return result'), result, message: `Bitwise XOR of all pairings: ${result}.` })
   return { input: { nums1, nums2 }, result, frames }
 }
 
-export const code = `xor of all pairings:
-  set result to 0
-  if the length of nums2 is odd then
-    xor every value of nums1 into result
-  if the length of nums1 is odd then
-    xor every value of nums2 into result
-  return result`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function pairingXor(nums1, nums2) {
+  let result = 0 // set result to 0
+  if (nums2.length % 2 === 1) {
+    for (const a of nums1) result ^= a
+  }
+  if (nums1.length % 2 === 1) {
+    for (const b of nums2) result ^= b
+  }
+  return result // return result
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def pairing_xor(nums1, nums2):
     result = 0

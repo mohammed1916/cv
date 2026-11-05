@@ -14,7 +14,7 @@ export function buildTrace({ words }) {
   // the first len(s) pairs of w. So each word is stored as a path of letter pairs.
   const root = { next: new Map(), end: 0 }
   let total = 0
-  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set trie to an empty trie'), word: null, gained: 0, total, message: 'Start with an empty trie.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('const root = { next'), word: null, gained: 0, total, message: 'Start with an empty trie.' }]
   for (const w of words) {
     const m = w.length
     let node = root
@@ -26,7 +26,7 @@ export function buildTrace({ words }) {
       gained += node.end
     }
     total += gained
-    frames.push({ pythonLine: gained ? 12 : 10, phase: 'check', activeLine: L('add the count at every node'), word: w, gained, total, message: `${w} pairs with ${gained} earlier word(s).` })
+    frames.push({ pythonLine: gained ? 12 : 10, phase: 'check', activeLine: L('total += node.end'), word: w, gained, total, message: `${w} pairs with ${gained} earlier word(s).` })
     node = root
     for (let k = 0; k < m; k++) {
       const key = w[k] + w[m - 1 - k]
@@ -34,21 +34,34 @@ export function buildTrace({ words }) {
       node = node.next.get(key)
     }
     node.end += 1
-    frames.push({ pythonLine: 17, phase: 'insert', activeLine: L('increase the count'), word: w, gained, total, message: `Stored ${w} as a path of letter pairs.` })
+    frames.push({ pythonLine: 17, phase: 'insert', activeLine: L('node.end += 1'), word: w, gained, total, message: `Stored ${w} as a path of letter pairs.` })
   }
   frames.push({ pythonLine: 18, phase: 'done', activeLine: L('return total'), word: null, gained: 0, total, message: `Pairs: ${total}.` })
   return { input: { words }, result: total, frames }
 }
 
-export const code = `count pairs where an earlier word is both a prefix and a suffix of a later word
-  set trie to an empty trie with a count at each node
-  set total to 0
-  for each word w in order
-    walk the letter pairs (w[k], w[last - k]) down the trie
-    add the count at every node reached to total
-    insert the letter pairs of w into the trie
-    increase the count at the final node by one
-  return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function countPrefixSuffixPairs(words) {
+  const root = { next: new Map(), end: 0 }
+  let total = 0
+  for (const w of words) {
+    const m = w.length
+    let node = root
+    for (let k = 0; k < m; k++) {
+      const key = w[k] + w[m - 1 - k]
+      if (!node.next.has(key)) break
+      node = node.next.get(key)
+      total += node.end
+    }
+    node = root
+    for (let k = 0; k < m; k++) {
+      const key = w[k] + w[m - 1 - k]
+      if (!node.next.has(key)) node.next.set(key, { next: new Map(), end: 0 })
+      node = node.next.get(key)
+    }
+    node.end += 1
+  }
+  return total
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def count_prefix_suffix_pairs(words):

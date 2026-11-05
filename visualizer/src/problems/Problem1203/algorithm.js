@@ -12,6 +12,55 @@ export function parseInput(text) {
   return { n, m, group, before_items: before }
 }
 
+// Each line of JavaScript is paired with the Python line on the same row.
+const LINES = [
+  ['function sortItems(n, m, group, beforeItems) {', 'def sort_items(n, m, group, before_items):'],
+  ['  const groups = group.map((g, i) => (g === -1 ? m + i : g))', '    groups = [g if g != -1 else m + i for i, g in enumerate(group)]'],
+  ['  const itemEdges = [], groupEdges = []', '    item_edges, group_edges = [], []'],
+  ['  for (let i = 0; i < n; i++) {', '    for i in range(n):'],
+  ['    for (const j of beforeItems[i]) {', '        for j in before_items[i]:'],
+  ['      itemEdges.push([j, i])', '            item_edges.append((j, i))'],
+  ['      if (groups[j] !== groups[i]) groupEdges.push([groups[j], groups[i]])', '            if groups[j] != groups[i]: group_edges.append((groups[j], groups[i]))'],
+  ['    }', ''],
+  ['  }', ''],
+  ['  const topo = (count, edges) => {', '    def topo(count, edges):'],
+  ['    const adj = Array.from({ length: count }, () => [])', '        adj = [[] for _ in range(count)]'],
+  ['    const indeg = Array(count).fill(0)', '        indeg = [0] * count'],
+  ['    for (const [a, b] of edges) {', '        for a, b in edges:'],
+  ['      adj[a].push(b); indeg[b]++', '            adj[a].append(b); indeg[b] += 1'],
+  ['    }', ''],
+  ['    const ready = []; for (let v = 0; v < count; v++) if (indeg[v] === 0) ready.push(v)', '        ready = [v for v in range(count) if indeg[v] == 0]'],
+  ['    const order = []', '        order = []'],
+  ['    while (ready.length) {', '        while ready:'],
+  ['      ready.sort((x, y) => x - y)', '            ready.sort()'],
+  ['      const v = ready.shift()', '            v = ready.pop(0)'],
+  ['      order.push(v)', '            order.append(v)'],
+  ['      for (const w of adj[v]) {', '            for w in adj[v]:'],
+  ['        indeg[w]--', '                indeg[w] -= 1'],
+  ['        if (indeg[w] === 0) ready.push(w)', '                if indeg[w] == 0: ready.append(w)'],
+  ['      }', ''],
+  ['    }', ''],
+  ['    return order.length === count ? order : null', '        return order if len(order) == count else None'],
+  ['  }', ''],
+  ['  const groupOrder = topo(m + n, groupEdges)', '    group_order = topo(m + n, group_edges)'],
+  ['  if (!groupOrder) return []', '    if group_order is None: return []'],
+  ['  const itemOrder = topo(n, itemEdges)', '    item_order = topo(n, item_edges)'],
+  ['  if (!itemOrder) return []', '    if item_order is None: return []'],
+  ['  const result = []', '    result = []'],
+  ['  for (const g of groupOrder) {', '    for g in group_order:'],
+  ['    for (const item of itemOrder) {', '        for item in item_order:'],
+  ['      if (groups[item] === g) result.push(item)', '            if groups[item] == g: result.append(item)'],
+  ['    }', ''],
+  ['  }', ''],
+  ['  return result', '    return result'],
+  ['}', ''],
+]
+const codeLines = LINES.map(([js]) => js)
+export const code = codeLines.map((text, index) => ({ line: index + 1, text }))
+const L = s => codeLines.findIndex(c => c.includes(s)) + 1
+export const python = LINES.map(([, py]) => py).join('\n')
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 export function buildTrace(input) {
   const { n, m, group, before_items: before } = input
   const groups = group.map((g, i) => (g === -1 ? m + i : g))
@@ -36,8 +85,8 @@ export function buildTrace(input) {
   }
   const fail = (activeLine, pythonLine, message) => { snap('fail', activeLine, pythonLine, message); return { input, groups, result: [], frames } }
 
-  snap('start', L('result is an empty list'), PY('def sort_items'), 'Start with an empty answer.')
-  snap('assign', L('give each item without a group'), PY('groups = ['), `Items with no group get private group ids ${m} to ${m + n - 1}, after the real groups.`)
+  snap('start', L('function sortItems'), P('def sort_items'), 'Start with an empty answer.')
+  snap('assign', L('const groups = group.map'), P('groups = [g if'), `Items with no group get private group ids ${m} to ${m + n - 1}, after the real groups.`)
   const itemEdges = []
   const groupEdges = []
   for (let i = 0; i < n; i++) {
@@ -46,78 +95,18 @@ export function buildTrace(input) {
       if (groups[j] !== groups[i]) groupEdges.push([groups[j], groups[i]])
     }
   }
-  snap('graph', L('build a graph of item dependencies'), PY('group_edges.append'), `${itemEdges.length} item dependencies and ${groupEdges.length} cross-group dependencies found.`)
-  const groupOrder = topo('groups', m + n, groupEdges, L('topologically sort the groups'), PY('order.append(v)'), 'Group')
-  if (!groupOrder) return fail(L('topologically sort the groups'), PY('return []', 0), 'The groups depend on each other in a cycle, so no order exists. Return empty.')
-  const itemOrder = topo('items', n, itemEdges, L('topologically sort the items'), PY('order.append(v)'), 'Item')
-  if (!itemOrder) return fail(L('topologically sort the items'), PY('return []', 1), 'The items depend on each other in a cycle, so no order exists. Return empty.')
+  snap('graph', L('itemEdges.push'), P('item_edges.append'), `${itemEdges.length} item dependencies and ${groupEdges.length} cross-group dependencies found.`)
+  const groupOrder = topo('groups', m + n, groupEdges, L('const v = ready.shift()'), P('v = ready.pop(0)'), 'Group')
+  if (!groupOrder) return fail(L('if (!groupOrder)'), P('if group_order is None'), 'The groups depend on each other in a cycle, so no order exists. Return empty.')
+  const itemOrder = topo('items', n, itemEdges, L('const v = ready.shift()'), P('v = ready.pop(0)'), 'Item')
+  if (!itemOrder) return fail(L('if (!itemOrder)'), P('if item_order is None'), 'The items depend on each other in a cycle, so no order exists. Return empty.')
   for (const g of groupOrder) {
     for (const item of itemOrder) {
       if (groups[item] !== g) continue
       list.push(item)
-      snap('emit', L('add its items'), PY('result.append(item)'), `Group ${g} contributes item ${item}.`, item)
+      snap('emit', L('if (groups[item] === g)'), P('if groups[item] == g'), `Group ${g} contributes item ${item}.`, item)
     }
   }
-  snap('done', L('return the result'), PY('return result'), list.length ? `Answer: [${list.join(', ')}].` : 'Answer: empty.')
+  snap('done', L('return result'), P('return result'), list.length ? `Answer: [${list.join(', ')}].` : 'Answer: empty.')
   return { input, groups, result: list, frames }
-}
-
-export const code = `result is an empty list
-give each item without a group its own private group id
-build a graph of item dependencies from each before list
-build a graph of group dependencies for pairs in different groups
-topologically sort the groups; if a cycle exists, return empty
-topologically sort the items; if a cycle exists, return empty
-for each group in topological group order
-  add its items in topological item order to the result
-return the result`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-
-export const python = `def sort_items(n, m, group, before_items):
-    groups = [g if g != -1 else m + i for i, g in enumerate(group)]
-    item_edges = []
-    group_edges = []
-    for i in range(n):
-        for j in before_items[i]:
-            item_edges.append((j, i))
-            if groups[j] != groups[i]:
-                group_edges.append((groups[j], groups[i]))
-
-    def topo(count, edges):
-        adj = [[] for _ in range(count)]
-        indeg = [0] * count
-        for a, b in edges:
-            adj[a].append(b)
-            indeg[b] += 1
-        ready = [v for v in range(count) if indeg[v] == 0]
-        order = []
-        while ready:
-            ready.sort()
-            v = ready.pop(0)
-            order.append(v)
-            for w in adj[v]:
-                indeg[w] -= 1
-                if indeg[w] == 0:
-                    ready.append(w)
-        return order if len(order) == count else None
-
-    group_order = topo(m + n, group_edges)
-    if group_order is None:
-        return []
-    item_order = topo(n, item_edges)
-    if item_order is None:
-        return []
-    result = []
-    for g in group_order:
-        for item in item_order:
-            if groups[item] == g:
-                result.append(item)
-    return result
-`
-
-const PY = (s, nth = 0) => {
-  let hits = -1
-  const i = python.split('\n').findIndex(line => line.includes(s) && ++hits === nth)
-  if (i < 0) throw new Error(`no Python line: ${s}`)
-  return i + 1
 }

@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-number-that-sum-of-the-prices-is-less-than-or-equal-to-k/',
   complexity: 'O(x log^2 N) time for the binary search with a per-bit closed formula. The visualization caps k at 200.',
   examples: [
-    { label: 'Example 1', input: '{"k":9,"x":1}' },
-    { label: 'Example 2', input: '{"k":7,"x":2}' },
+    { label: 'Example 1', input: '{"k":12,"x":2}' },
+    { label: 'Example 2', input: '{"k":20,"x":3}' },
   ],
 }
 

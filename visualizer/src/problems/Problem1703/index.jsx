@@ -19,10 +19,24 @@ const definition = {
 }
 
 export default function MinimumAdjacentSwaps() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="Input" length={run.input.nums.length} valueAt={index => run.input.nums[index]} active={step.index} roleAt={index => (step.marked.includes(index) ? 'window' : '')} />
-    <output aria-label="Best cost">{`Best cost so far: ${step.best ?? '(none)'}`}</output>
-  </>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const { marked } = step
+    const l = marked.length ? marked[0] : -1
+    const r = marked.length ? marked[marked.length - 1] : -1
+    // The median one of the window is the element every other one is gathered toward.
+    const median = marked.length ? marked[run.input.k >> 1] : -1
+    const roleAt = index => {
+      if (index === l) return 'l'
+      if (index === r) return 'r'
+      if (index === median) return 'median'
+      return marked.includes(index) ? 'window' : ''
+    }
+    return <>
+      <IndexedSequence label="Input" length={run.input.nums.length} valueAt={index => run.input.nums[index]} active={step.index} roleAt={roleAt} />
+      <output aria-label="Window">{marked.length ? `Window of ${run.input.k} ones at positions ${marked.join(', ')}; median one at ${median}.` : 'No window yet.'}</output>
+      <output aria-label="Best cost">{`Best cost so far: ${step.best ?? '(none)'}`}</output>
+    </>
+  }} renderReasoning={() => <>
     <p>Only the relative order of the ones matters, so compare windows of k consecutive ones.</p>
     <p>Gathering k ones costs the sum of distances to a common block, and moving them to the median one is cheapest.</p>
   </>} />

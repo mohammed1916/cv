@@ -10,54 +10,59 @@ export function parseInput(text) {
     for (const item of items) {
       if (Array.isArray(item)) check(item, depth + 1)
       else if (Number.isInteger(item)) leaves++
-      else throw new Error('Leaves are integers.')
+      else throw new Error('Leaves must be integers.')
     }
   }
-  check(arr, 1)
-  if (leaves > 30) throw new Error('arr may hold at most 30 integers.')
+  check(arr, 0)
+  if (leaves > 24) throw new Error('Use at most 24 integers so every step stays visible.')
   return { arr, n }
 }
 
-export const code = `flatten an array to a given depth
-  set output to an empty list
-  define walk(items, depth) that goes through the items in order
-    for each item in items
-      if item is a list and depth is above zero then
-        walk the item with depth minus one
-      otherwise append item to output
-  call walk on arr with depth n
-  return output`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-
-export function buildTrace({ arr, n }) {
-  const output = []
-  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set output to an empty list'), output: [], depth: n, message: `Flatten to depth ${n}.` }]
-  const walk = (items, depth) => {
+export const code = `function flatten(arr, n) {
+  const result = []
+  function walk(items, depth) {
     for (const item of items) {
-      if (Array.isArray(item) && depth > 0) {
-        frames.push({ pythonLine: 7, phase: 'enter', activeLine: L('walk the item with depth'), output: [...output], depth, message: `Open a nested list; ${depth} level(s) of flattening remain.` })
-        walk(item, depth - 1)
-      } else {
-        output.push(item)
-        frames.push({ pythonLine: 9, phase: 'emit', activeLine: L('otherwise append item'), output: [...output], depth, message: `Append ${item} to the output.` })
-      }
+      if (Array.isArray(item) && depth < n) walk(item, depth + 1)
+      else result.push(item)
     }
   }
-  walk(arr, n)
-  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return output'), output: [...output], depth: n, message: `Flattened: [${output.join(', ')}].` })
-  return { input: { arr, n }, result: output, frames }
-}
+  walk(arr, 0)
+  return result
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
-export const python = `def flatten_deep(arr, n):
-    output = []
-
+export const python = `def flatten(arr, n):
+    result = []
     def walk(items, depth):
         for item in items:
-            if isinstance(item, list) and depth > 0:
-                walk(item, depth - 1)
+            if isinstance(item, list) and depth < n:
+                walk(item, depth + 1)
             else:
-                output.append(item)
-
-    walk(arr, n)
-    return output
+                result.append(item)
+    walk(arr, 0)
+    return result
 `
+
+const at = text => code.findIndex(line => line.text.includes(text)) + 1
+const pyAt = text => python.split('\n').findIndex(line => line.includes(text)) + 1
+
+export function buildTrace(input) {
+  const { arr, n } = input
+  const result = []
+  const frames = [{ phase: 'start', activeLine: at('const result'), pythonLine: pyAt('result = []'), depth: null, item: null, result: [], message: `Start with an empty output and a depth limit of ${n}.` }]
+  const walk = (items, depth, path) => {
+    items.forEach((item, index) => {
+      const where = [...path, index].join('.')
+      if (Array.isArray(item) && depth < n) {
+        frames.push({ phase: 'enter', activeLine: at('walk(item'), pythonLine: pyAt('walk(item'), depth, item, result: [...result], path: where, message: `Item ${where} is a list at depth ${depth}, and ${depth} < ${n}, so descend into it.` })
+        walk(item, depth + 1, [...path, index])
+      } else {
+        result.push(item)
+        const reason = Array.isArray(item) ? `it is a list at depth ${depth}, and ${depth} is not less than ${n}, so keep it nested` : `it is the integer ${item}`
+        frames.push({ phase: 'emit', activeLine: at('result.push'), pythonLine: pyAt('result.append'), depth, item, result: [...result], path: where, message: `Item ${where}: ${reason}. Append it.` })
+      }
+    })
+  }
+  walk(arr, 0, [])
+  frames.push({ phase: 'done', activeLine: at('return result'), pythonLine: pyAt('return result'), depth: null, item: null, result: [...result], path: null, message: `Flattened to ${result.length} entries.` })
+  return { input, result, frames }
+}

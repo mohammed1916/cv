@@ -5,35 +5,6 @@ export const phases = [
   { id: 'done', label: 'Result', description: 'Report the total finger travel.' },
 ]
 
-const CODE_LINES = [
-  'FUNCTION travelTime(keyboard, word)',
-  '  pos <- position of each key in keyboard',
-  '  current <- 0; total <- 0',
-  '  FOR each letter c in word',
-  '    total <- total + |pos[c] - current|',
-  '    current <- pos[c]',
-  '  RETURN total',
-]
-
-const PYTHON_LINES = [
-  'def travelTime(keyboard, word):',
-  '    pos = {ch: i for i, ch in enumerate(keyboard)}',
-  '    current = 0',
-  '    total = 0',
-  '    for ch in word:',
-  '        total += abs(pos[ch] - current)',
-  '        current = pos[ch]',
-  '    return total',
-]
-
-const py = text => PYTHON_LINES.findIndex(line => line.includes(text)) + 1
-
-export const python = PYTHON_LINES.join('\n')
-export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }))
-export const pythonLineMap = {
-  1: py('def '), 2: py('pos = '), 3: py('current = 0'), 4: py('for ch'), 5: py('total +='), 6: py('current = pos'), 7: py('return total'),
-}
-
 const WORD_LIMIT = 200
 
 export function parseInput(text) {
@@ -54,37 +25,54 @@ export function parseInput(text) {
   return { keyboard, word }
 }
 
+// Each line of JavaScript is paired with the Python line on the same row.
+const LINES = [
+  ['function travelTime(keyboard, word) {', 'def travel_time(keyboard, word):'],
+  ['  const pos = {}', '    pos = {}'],
+  ['  for (let i = 0; i < keyboard.length; i++) pos[keyboard[i]] = i', '    for i, ch in enumerate(keyboard): pos[ch] = i'],
+  ['  let current = 0, total = 0', '    current = total = 0'],
+  ['  for (const c of word) { total += Math.abs(pos[c] - current); current = pos[c] }', '    for ch in word: total += abs(pos[ch] - current); current = pos[ch]'],
+  ['  return total', '    return total'],
+  ['}', ''],
+]
+const codeLines = LINES.map(([js]) => js)
+export const code = codeLines.map((text, index) => ({ line: index + 1, text }))
+const L = s => codeLines.findIndex(c => c.includes(s)) + 1
+export const python = LINES.map(([, py]) => py).join('\n')
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+export const pythonLineMap = Object.fromEntries(code.map(({ line }) => [line, line]))
+
 export function buildTrace(text) {
   const { keyboard, word } = parseInput(text)
   const frames = []
   const pos = {}
   const base = { letter: '', position: -1, from: -1, letterIndex: -1, cost: 0, total: 0, positions: pos }
-  const snap = (phase, activeLine, message, extra = {}) => frames.push({
-    phase, activeLine, message, snapshot: { ...base, positions: { ...pos }, ...extra },
+  const snap = (phase, activeLine, pythonLine, message, extra = {}) => frames.push({
+    phase, activeLine, pythonLine, message, snapshot: { ...base, positions: { ...pos }, ...extra },
   })
 
-  snap('setup', 1, `The keyboard is ${keyboard}. The finger starts at position 0, the first key.`)
+  snap('setup', L('const pos = {}'), P('pos = {}'), `The keyboard is ${keyboard}. The finger starts at position 0, the first key.`)
   for (let i = 0; i < keyboard.length; i++) {
     pos[keyboard[i]] = i
-    snap('map', 2, `${keyboard[i]} is at position ${i}.`, { letter: keyboard[i], position: i })
+    snap('map', L('pos[keyboard[i]] = i'), P('for i, ch in enumerate'), `${keyboard[i]} is at position ${i}.`, { letter: keyboard[i], position: i })
   }
 
   let current = 0
   let total = 0
-  snap('walk', 3, 'The finger is at position 0 and the total travel is 0.', { from: 0, position: 0 })
+  snap('walk', L('let current = 0'), P('current = total'), 'The finger is at position 0 and the total travel is 0.', { from: 0, position: 0 })
   for (let k = 0; k < word.length; k++) {
     const letter = word[k]
     const p = pos[letter]
     const cost = Math.abs(p - current)
     const from = current
     total += cost
-    snap('walk', 5, `Move from position ${from} to ${letter} at ${p}: ${cost} steps, total ${total}.`, {
+    snap('walk', L('total += Math.abs'), P('total += abs'), `Move from position ${from} to ${letter} at ${p}: ${cost} steps, total ${total}.`, {
       letter, position: p, from, letterIndex: k, cost, total,
     })
     current = p
-    snap('walk', 6, `The finger now rests on ${letter}.`, { letter, position: p, from, letterIndex: k, cost, total })
+    snap('walk', L('current = pos[c]'), P('current = pos[ch]'), `The finger now rests on ${letter}.`, { letter, position: p, from, letterIndex: k, cost, total })
   }
 
-  snap('done', 7, `Report the total travel: ${total}.`, { total, position: current, letterIndex: word.length - 1, cost: 0 })
+  snap('done', L('return total'), P('return total'), `Report the total travel: ${total}.`, { total, position: current, letterIndex: word.length - 1, cost: 0 })
   return { input: { keyboard, word }, result: total, frames }
 }

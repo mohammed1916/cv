@@ -25,17 +25,23 @@ const PY = [
 export const python = PY.join("\n")
 const at = text => PY.findIndex(line => line.includes(text)) + 1
 
-export const code = [
-  { line: 1, text: "width is the number of digits in the largest value" },
-  { line: 2, text: "pad each value to width digits with leading zeros" },
-  { line: 3, text: "count is 0" },
-  { line: 4, text: "for each index j" },
-  { line: 5, text: "reach starts as the padded value at j" },
-  { line: 6, text: "apply every digit swap once to the reach set" },
-  { line: 7, text: "add the swapped words to reach" },
-  { line: 8, text: "for each earlier index i, if its padded value is in reach, add 1 to count" },
-  { line: 9, text: "return count" },
+const JS = [
+  "function countAlmostEqualPairs(nums) {",
+  "  const width = String(Math.max(...nums)).length",
+  "  const texts = nums.map(v => String(v).padStart(width, '0'))",
+  "  let count = 0",
+  "  for (let j = 0; j < texts.length; j++) {",
+  "    const reach = reachOneSwap(texts[j], width)",
+  "    for (let i = 0; i < j; i++) {",
+  "      if (reach.has(texts[i])) count++",
+  "    }",
+  "  }",
+  "  return count",
+  "}",
 ]
+
+export const code = JS.map((text, index) => ({ line: index + 1, text }))
+const js = text => JS.findIndex(line => line.includes(text)) + 1
 
 const MAX_VALUES = 12
 const MAX_VALUE = 999999
@@ -83,23 +89,23 @@ export function buildTrace(input) {
   const add = (phase, activeLine, pythonText, message, extra = {}) => frames.push({
     phase, activeLine, pythonLine: at(pythonText), message, nums, texts, width, count, pairs: [...pairs], j: -1, i: -1, reach: reachWords, ...extra,
   })
-  add("setup", 1, "width = len(", `Pad every number to ${width} digits.`)
-  add("setup", 2, "texts = [str(x)", `Padded values: ${texts.join(", ")}.`)
-  add("setup", 3, "count = 0", "Start with no almost equal pairs.")
+  add("setup", js("const width"), "width = len(", `Pad every number to ${width} digits.`)
+  add("setup", js("const texts"), "texts = [str(x)", `Padded values: ${texts.join(", ")}.`)
+  add("setup", js("let count"), "count = 0", "Start with no almost equal pairs.")
   for (let j = 0; j < texts.length; j += 1) {
     const reach = reachOneSwap(texts[j], width)
     reachWords = [...reach]
-    add("reach", 5, "reach = {texts[j]}", `Reach of ${texts[j]} has ${reach.size} word(s) after at most one swap.`, { j })
+    add("reach", js("const reach"), "reach = {texts[j]}", `Reach of ${texts[j]} has ${reach.size} word(s) after at most one swap.`, { j })
     for (let i = 0; i < j; i += 1) {
       if (reach.has(texts[i])) {
         count += 1
         pairs.push([i, j])
-        add("count", 8, "count += 1", `${texts[i]} and ${texts[j]} are almost equal, so pair (${i}, ${j}) counts.`, { j, i })
+        add("count", js("count++"), "count += 1", `${texts[i]} and ${texts[j]} are almost equal, so pair (${i}, ${j}) counts.`, { j, i })
       } else {
-        add("check", 8, "if texts[i] in reach", `${texts[i]} is not in the reach of ${texts[j]}.`, { j, i })
+        add("check", js("reach.has"), "if texts[i] in reach", `${texts[i]} is not in the reach of ${texts[j]}.`, { j, i })
       }
     }
   }
-  add("done", 9, "return count", `Return ${count}.`)
+  add("done", js("return count"), "return count", `Return ${count}.`)
   return { input: { nums }, result: count, frames }
 }

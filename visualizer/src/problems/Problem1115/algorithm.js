@@ -89,19 +89,17 @@ export const phases = [
   { id: 'done', label: 'Return', description: 'Return the printed text.' },
 ]
 
-export const code = [
-  "SHARED fooPermit = 1, barPermit = 0",
-  "FOR EACH round in the foo thread",
-  "    WAIT UNTIL fooPermit is available",
-  '    PRINT "foo"',
-  "    RELEASE barPermit",
-  "FOR EACH round in the bar thread",
-  "    WAIT UNTIL barPermit is available",
-  '    PRINT "bar"',
-  "    RELEASE fooPermit",
-  "START the foo thread and the bar thread, then join both",
-  "RETURN the printed text",
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `const fooPermit = new Semaphore(1)
+const barPermit = new Semaphore(0)
+  await fooPermit.acquire()
+  print("foo")
+  barPermit.release()
+  // bar thread
+  await barPermit.acquire()
+  print("bar")
+  fooPermit.release()
+  // start both threads, then join them
+  // return the printed text`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 // Maps each pseudocode activeLine used by the frames to its Python line.
 export const pythonLineMap = {

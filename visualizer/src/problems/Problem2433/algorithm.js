@@ -13,20 +13,23 @@ export function buildTrace({ pref }) {
   for (let i = 0; i < pref.length; i++) {
     const value = i === 0 ? pref[0] : pref[i] ^ pref[i - 1]
     answer.push(value)
-    frames.push({ phase: 'restore', pythonLine: (i === 0 ? P('answer.append(pref[0])') : P('answer.append(pref[i] ^ pref[i - 1])')), activeLine: i === 0 ? L('if i is 0') : L('otherwise the value is'), index: i, answer: [...answer], message: i === 0 ? `The first value equals the first prefix: ${value}.` : `pref[${i}] xor pref[${i - 1}] = ${pref[i]} xor ${pref[i - 1]} = ${value}.` })
+    frames.push({ phase: 'restore', pythonLine: (i === 0 ? P('answer.append(pref[0])') : P('answer.append(pref[i] ^ pref[i - 1])')), activeLine: i === 0 ? L('if i is 0') : L('otherwise pref[i] xor'), index: i, answer: [...answer], message: i === 0 ? `The first value equals the first prefix: ${value}.` : `pref[${i}] xor pref[${i - 1}] = ${pref[i]} xor ${pref[i - 1]} = ${value}.` })
   }
   frames.push({ phase: 'done', pythonLine: P('return answer'), activeLine: L('return answer'), index: -1, answer: [...answer], message: `Original array: [${answer.join(', ')}].` })
   return { input: { pref }, result: answer, frames }
 }
 
-export const code = `restore the original array:
-  set answer to an empty list
-  for each index i of pref do
-    if i is 0 then the value is pref[0]
-    otherwise the value is pref[i] xor pref[i - 1]
-    append the value to answer
-  return answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function restoreArray(pref) {
+  const answer = [] // set answer to an empty list
+  for (let i = 0; i < pref.length; i++) {
+    // if i is 0 the value is pref[0]; otherwise pref[i] xor pref[i - 1]
+    const value = i === 0 ? pref[0] : pref[i] ^ pref[i - 1]
+    answer.push(value)
+  }
+  return answer // return answer
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def restore_array(pref):
     answer = []
@@ -36,6 +39,7 @@ export const python = `def restore_array(pref):
         else:
             answer.append(pref[i] ^ pref[i - 1])
     return answer
-`
+
 
 const P = (s, n = 1) => { let c = 0; return python.split('\n').findIndex(l => l.includes(s) && ++c === n) + 1 }
+`

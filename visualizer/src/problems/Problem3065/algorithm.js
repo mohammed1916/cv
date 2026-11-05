@@ -1,12 +1,11 @@
-export const code = [
-  { line: 1, text: "minimum operations (nums, k):" },
-  { line: 2, text: "  set operations to 0" },
-  { line: 3, text: "  for each value x in nums" },
-  { line: 4, text: "    if x is less than k" },
-  { line: 5, text: "      add 1 to operations" },
-  { line: 6, text: "  return operations" },
-];
-
+export const code = `function minOperations(nums, k) {
+  let operations = 0
+  for (const x of nums) {
+    if (x < k) operations += 1
+  }
+  return operations
+}`.split('\n').map((text, index) => ({ line: index + 1, text }));
+const L = s => { const i = code.findIndex(c => c.text.includes(s)); if (i < 0) throw new Error('No code line: ' + s); return i + 1 };
 export const python = `def minOperations(nums, k):
     operations = 0
     for x in nums:
@@ -41,17 +40,17 @@ export function buildTrace(input) {
   const frames = [];
   const counted = [];
   let operations = 0;
-  frames.push({ phase: "start", activeLine: 2, pythonLine: 2, message: "Start with zero operations.", index: -1, counted: [], operations });
+  frames.push({ phase: "start", activeLine: L('let operations = 0'), pythonLine: 2, message: "Start with zero operations.", index: -1, counted: [], operations });
   for (let i = 0; i < nums.length; i++) {
-    frames.push({ phase: "scan", activeLine: 3, pythonLine: 3, message: `Look at nums[${i}] = ${nums[i]}.`, index: i, counted: [...counted], operations });
+    frames.push({ phase: "scan", activeLine: L('for (const x of nums)'), pythonLine: 3, message: `Look at nums[${i}] = ${nums[i]}.`, index: i, counted: [...counted], operations });
     const below = nums[i] < k;
-    frames.push({ phase: "check", activeLine: 4, pythonLine: 4, message: `${nums[i]} < ${k}? ${below ? "yes" : "no"}.`, index: i, counted: [...counted], operations });
+    frames.push({ phase: "check", activeLine: L('if (x < k)'), pythonLine: 4, message: `${nums[i]} < ${k}? ${below ? "yes" : "no"}.`, index: i, counted: [...counted], operations });
     if (below) {
       operations += 1;
       counted.push(i);
-      frames.push({ phase: "count", activeLine: 5, pythonLine: 5, message: `One more operation is needed. operations = ${operations}.`, index: i, counted: [...counted], operations });
+      frames.push({ phase: "count", activeLine: L('operations += 1'), pythonLine: 5, message: `One more operation is needed. operations = ${operations}.`, index: i, counted: [...counted], operations });
     }
   }
-  frames.push({ phase: "done", activeLine: 6, pythonLine: 6, message: `Return ${operations}.`, index: -1, counted: [...counted], operations });
+  frames.push({ phase: "done", activeLine: L('return operations'), pythonLine: 6, message: `Return ${operations}.`, index: -1, counted: [...counted], operations });
   return { input, result: operations, frames };
 }

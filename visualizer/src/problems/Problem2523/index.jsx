@@ -4,7 +4,8 @@ import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
-    { id: 'start', label: 'Start', description: 'No pair is known yet.' },
+    { id: 'start', label: 'Start', description: 'No prime has been seen yet.' },
+    { id: 'composite', label: 'Composite', description: 'A number with a divisor is skipped.' },
     { id: 'prime', label: 'Prime', description: 'A prime that does not improve the gap.' },
     { id: 'record', label: 'Record', description: 'A new closest pair of adjacent primes.' },
     { id: 'done', label: 'Complete', description: 'Report the closest pair.' },
@@ -21,10 +22,16 @@ const definition = {
 
 export default function ClosestPrimes() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="Numbers in range" length={run.input.right - run.input.left + 1} valueAt={i => run.input.left + i} active={step.index} roleAt={i => (step.answer.includes(run.input.left + i) ? 'in answer' : '')} />
-    <output aria-label="Answer">{`Answer so far: [${step.answer.join(', ')}]`}</output>
+    <IndexedSequence label="Numbers in the range (prime cells are marked)" length={run.input.right - run.input.left + 1} valueAt={i => run.input.left + i} active={step.index}
+      roleAt={i => {
+        const x = run.input.left + i
+        if (step.answer.includes(x) && step.answer[0] !== -1) return 'pair'
+        if (step.previous === x) return 'previous'
+        return step.primes.includes(x) ? 'prime' : ''
+      }} />
+    <output aria-label="Answer">{`Primes so far: ${step.primes.join(', ') || 'none'}. Best gap: ${step.best ?? 'unset'}. Answer: [${step.answer.join(', ')}]`}</output>
   </>} renderReasoning={() => <>
-    <p>The closest pair of primes is always two neighbours in the sorted list of primes in the range.</p>
-    <p>Walking the range once and comparing each prime with the previous one finds that pair.</p>
+    <p>Only primes matter. Once the primes are listed in order, the closest pair is two neighbours in that list.</p>
+    <p>Walking the range once and comparing each prime with the one before it finds that pair. A tie keeps the earlier pair because the comparison is strict.</p>
   </>} />
 }

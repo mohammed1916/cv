@@ -1,19 +1,25 @@
-export const code = [
-  'find the largest subtree whose nodes all share one colour, rooted at node 0',
-  '  build an adjacency list from the edges',
-  '  set best to 0',
-  '  call visit(0, none)',
-  '  return best',
-  'define visit(v, parent)',
-  '  set size to 1 and same to true',
-  '  for each child c of v other than parent',
-  '    call visit(c, v) to get childSize and childSame',
-  '    add childSize to size',
-  '    if not childSame or colour of c differs from colour of v then set same to false',
-  '  if same and size is greater than best then set best to size',
-  '  return size and same',
-].map((text, index) => ({ line: index + 1, text }))
-
+export const code = `function maxSameColorSubtree(colors, edges) {
+  const adj = Array.from({ length: colors.length }, () => [])
+  for (const [a, b] of edges) {
+    adj[a].push(b)
+    adj[b].push(a)
+  }
+  let best = 0
+  function visit(v, parent) {
+    let size = 1
+    let same = true
+    for (const c of adj[v]) {
+      if (c === parent) continue
+      const [childSize, childSame] = visit(c, v)
+      size += childSize
+      if (!childSame || colors[c] !== colors[v]) same = false
+    }
+    if (same && size > best) best = size
+    return [size, same]
+  }
+  visit(0, -1)
+  return best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => {
   const index = code.findIndex(c => c.text.includes(s))
   if (index < 0) throw new Error(`Missing pseudocode line: ${s}`)
@@ -96,26 +102,26 @@ export function buildTrace({ colors, edges }) {
     })
   }
 
-  push('start', -1, -1, { size: 0, same: null, changed: false }, 'build an adjacency list', 'adj = [[]', 'Build the adjacency list. Node 0 is the root.')
+  push('start', -1, -1, { size: 0, same: null, changed: false }, 'const adj = Array.from', 'adj = [[]', 'Build the adjacency list. Node 0 is the root.')
 
   function visit(v, parent) {
     let size = 1
     let same = true
-    push('enter', v, -1, { size, same, changed: false }, 'set size to 1', 'size = 1', `Enter node ${v}, colour ${colors[v]}. Start its subtree with size 1.`)
+    push('enter', v, -1, { size, same, changed: false }, 'let size = 1', 'size = 1', `Enter node ${v}, colour ${colors[v]}. Start its subtree with size 1.`)
     for (const c of adj[v]) {
       if (c === parent) continue
-      push('descend', v, c, { size, same, changed: false }, 'call visit(c, v)', 'child_size, child_same = visit', `Descend from ${v} into child ${c}.`)
+      push('descend', v, c, { size, same, changed: false }, 'const [childSize, childSame]', 'child_size, child_same = visit', `Descend from ${v} into child ${c}.`)
       const [childSize, childSame] = visit(c, v)
       size += childSize
       const mismatch = !childSame || colors[c] !== colors[v]
       if (mismatch) same = false
-      push('merge', v, c, { size, same, changed: mismatch }, 'if not childSame or colour', 'if not child_same or colors[c] != colors[v]',
+      push('merge', v, c, { size, same, changed: mismatch }, 'if (!childSame || colors[c]', 'if not child_same or colors[c] != colors[v]',
         mismatch ? `Child ${c} breaks the single colour of node ${v}'s subtree.` : `Child ${c} keeps the colour ${colors[v]} everywhere below it.`)
     }
     results[v] = { size, same }
     const improved = same && size > best
     if (improved) best = size
-    push('leave', v, -1, { size, same, changed: improved }, 'if same and size is greater than best', 'if same and size > best',
+    push('leave', v, -1, { size, same, changed: improved }, 'if (same && size > best)', 'if same and size > best',
       improved ? `Subtree of ${v} is one colour with ${size} nodes. Best is now ${best}.` : same ? `Subtree of ${v} is one colour, but ${size} does not beat ${best}.` : `Subtree of ${v} mixes colours.`)
     return [size, same]
   }

@@ -20,11 +20,21 @@ const definition = {
 }
 
 export default function MinimumOperationsSubsequence() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="arr" length={run.input.arr.length} valueAt={i => run.input.arr[i]} active={step.item} />
-    <IndexedSequence label="Run ends (target positions)" length={step.tails.length} valueAt={i => step.tails[i]} />
-    <output aria-label="Runs">{`Longest run so far: ${step.tails.length} of ${run.input.target.length}`}</output>
-  </>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const searching = step.lo !== null && step.lo !== undefined
+    // The search for the first run whose end is at least this position: l and r bound it, mid is tested.
+    const roleAt = index => {
+      if (index === step.lo) return 'l'
+      if (index === step.hi) return 'r'
+      return index === step.mid ? 'mid' : ''
+    }
+    return <>
+      <IndexedSequence label="arr" length={run.input.arr.length} valueAt={i => run.input.arr[i]} active={step.item} />
+      <IndexedSequence label="Run ends (target positions)" length={step.tails.length + (searching ? 1 : 0)}
+        valueAt={i => (i < step.tails.length ? step.tails[i] : 'new')} roleAt={roleAt} />
+      <output aria-label="Runs">{`Longest run so far: ${step.tails.length} of ${run.input.target.length}`}</output>
+    </>
+  }} renderReasoning={() => <>
     <p>Only values that appear in target matter, and they must keep their target order to form a subsequence.</p>
     <p>The longest strictly increasing run of target positions is the most of target that can already be kept, so the rest must be inserted.</p>
   </>} />

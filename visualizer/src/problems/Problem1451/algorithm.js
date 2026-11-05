@@ -8,20 +8,23 @@ export const phases = [
   { id: 'done', label: 'Result', description: 'Return the rearranged sentence.' },
 ]
 
-export const code = `function arrangeWords(text):
-    words = lowercase each word of split(text)
-    for i from 1 to length(words) - 1:
-        current = words[i]
-        j = i - 1
-        while j >= 0 and length(words[j]) > length(current):
-            words[j + 1] = words[j]
-            j = j - 1
-        words[j + 1] = current
-    words[0] = capitalize(words[0])
-    return join(words, " ")`
+export const code = `function arrangeWords(text) {
+  const words = text.split(' ').map(w => w.toLowerCase())
+  for (let i = 1; i < words.length; i++) {
+    const current = words[i]
+    let j = i - 1
+    while (j >= 0 && words[j].length > current.length) {
+      words[j + 1] = words[j]
+      j -= 1
+    }
+    words[j + 1] = current
+  }
+  words[0] = words[0][0].toUpperCase() + words[0].slice(1)
+  return words.join(' ')
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def arrange_words(text):
-    words = [w.lower() for w in text.split()]
+    words = [w.lower() for w in text.split(" ")]
     for i in range(1, len(words)):
         current = words[i]
         j = i - 1
@@ -29,11 +32,14 @@ export const python = `def arrange_words(text):
             words[j + 1] = words[j]
             j -= 1
         words[j + 1] = current
+
     words[0] = words[0].capitalize()
-    return " ".join(words)`
+
+    return " ".join(words)
+`
 
 const lineOf = (source, fragment) => source.split('\n').findIndex(line => line.includes(fragment)) + 1
-const C = fragment => lineOf(code, fragment)
+const C = fragment => code.findIndex(c => c.text.includes(fragment)) + 1
 const P = fragment => lineOf(python, fragment)
 
 export function parseInput(text) {
@@ -53,7 +59,7 @@ export function buildTrace(sentence) {
   })
   const add = (phase, c, p, message, compare) => frames.push({ phase, activeLine: C(c), pythonLine: P(p), message, snapshot: snap(compare) })
 
-  add('split', 'words = lowercase', 'words = [w.lower', `Split ${arr.length} word${arr.length === 1 ? '' : 's'} and lowercase them. Length alone decides the order.`)
+  add('split', 'const words = text', 'words = [w.lower', `Split ${arr.length} word${arr.length === 1 ? '' : 's'} and lowercase them. Length alone decides the order.`)
   for (let i = 1; i < arr.length; i++) {
     picked = arr[i]
     hole = i
@@ -61,7 +67,7 @@ export function buildTrace(sentence) {
     while (true) {
       const j = hole - 1
       const longer = j >= 0 && arr[j].length > picked.length
-      add('compare', 'while j', 'while j',
+      add('compare', 'while (j >= 0', 'while j >= 0',
         j < 0 ? 'The front of the list is reached, so the picked word goes first.'
           : `Compare "${arr[j]}" (length ${arr[j].length}) with "${picked}" (length ${picked.length}).`, j)
       if (!longer) break
@@ -75,8 +81,8 @@ export function buildTrace(sentence) {
     picked = null
   }
   arr[0] = arr[0][0].toUpperCase() + arr[0].slice(1)
-  add('capitalize', 'capitalize(words[0])', 'words[0].capitalize()', `The first word is capitalized: "${arr[0]}".`)
+  add('capitalize', 'words[0] = words[0][0]', 'words[0].capitalize()', `The first word is capitalized: "${arr[0]}".`)
   const result = arr.join(' ')
-  frames.push({ phase: 'done', activeLine: C('return join'), pythonLine: P('return " ".join'), message: `Rearranged sentence: ${result}`, snapshot: snap() })
+  frames.push({ phase: 'done', activeLine: C('return words.join'), pythonLine: P('return " ".join'), message: `Rearranged sentence: ${result}`, snapshot: snap() })
   return { input: sentence, result, frames }
 }

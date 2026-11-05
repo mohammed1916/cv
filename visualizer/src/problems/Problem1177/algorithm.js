@@ -5,15 +5,15 @@ export const phases = [
 ]
 
 const CODE = [
-  'function answerQueries(text, queries):',
-  '  mask[0] = 0',
-  '  for i from 0 to n - 1:',
-  '    mask[i+1] = mask[i] XOR bit(text[i])',
-  '  for [l, r, k] in queries:',
-  '    odd = popcount(mask[r+1] XOR mask[l])',
-  '    need = floor(odd / 2)',
-  '    answers.append(need <= k)',
-  '  return answers',
+  'function answerQueries(text, queries) {',
+  '  const mask = [0]',
+  '  for (let i = 0; i < text.length; i++) mask.push(mask[i] ^ (1 << (text.charCodeAt(i) - 97)))',
+  '  return queries.map(([l, r, k]) => {',
+  "    const odd = (mask[r + 1] ^ mask[l]).toString(2).replace(/0/g, '').length",
+  '    const need = Math.floor(odd / 2)',
+  '    return need <= k',
+  '  })',
+  '}',
 ]
 const PY = [
   'def answer_queries(text, queries):',
@@ -31,7 +31,7 @@ const PY = [
 export const code = CODE.map((text, index) => ({ line: index + 1, text }))
 export const python = PY.join('\n')
 
-const L = { prefix: 2, step: 4, query: 5, odd: 6, need: 7, answer: 8, ret: 9 }
+const L = { prefix: 2, step: 3, query: 4, odd: 5, need: 6, answer: 7, ret: 4 }
 const P = { prefix: 2, step: 4, query: 6, odd: 7, need: 8, answer: 9, ret: 10 }
 
 const ALPHABET = 'abcdefghijklmnopqrstuvwxyz'
@@ -88,3 +88,11 @@ export function buildTrace({ text, queries }) {
   push('done', 'ret', `Answers in query order: ${answers.map(a => (a ? 'true' : 'false')).join(', ')}.`)
   return { input: { text, queries }, result: answers, frames }
 }
+
+export const inputLabel = 'JSON with text and queries, e.g. {"text":"abcdab","queries":[[0,3,0],[1,5,1]]}'
+export const complexity = 'O(n + q) time after building the prefix masks: each query is one XOR and one bit count. The visualization caps the text at 30 letters and 10 queries.'
+export const examples = [
+  { label: 'Two queries', input: '{"text":"abcdab","queries":[[0,3,0],[1,5,1]]}' },
+  { label: 'Single odd letter', input: '{"text":"aabbc","queries":[[0,4,0]]}' },
+  { label: 'Repeated letters', input: '{"text":"zzzz","queries":[[0,3,0],[1,2,0]]}' },
+]

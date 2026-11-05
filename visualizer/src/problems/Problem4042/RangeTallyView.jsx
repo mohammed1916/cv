@@ -12,8 +12,10 @@ export default function RangeTallyView({ run, step }) {
         {nums.map((v, i) => {
           const inside = step.l !== undefined && i >= step.l && i <= step.r;
           const cls = ["rt-tile", inside ? "rt-tile--inside" : "", i === step.at ? "rt-tile--now" : ""].join(" ").trim();
+          const pointer = [i === step.l ? "l" : "", i === step.r ? "r" : ""].filter(Boolean).join("/");
           return (
             <li key={i} className={cls}>
+              <em className="rt-pointer" aria-hidden="true">{pointer}</em>
               <span>{v}</span>
               <small>{i}</small>
             </li>

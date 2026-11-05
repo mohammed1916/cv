@@ -32,16 +32,21 @@ export function buildTrace({ order, s }) {
   frames.push({ phase: 'done', activeLine: 10, pythonLine: 11, counts: [], out, current: '', message: `Result: "${out}".` })
   return { input: { order, s }, result: out, frames }
 }
-export const code = `set count to an empty table
-for each ch in s: add 1 to count[ch]
-set out to the empty string
-for each ch in order
-  if ch is in count then
-    append ch repeated count[ch] times to out, and remove ch from count
-  otherwise nothing to append
-for each remaining ch in count, with count c
-  append ch repeated c times to out
-return out`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function customSortString(order, s) {
+  const count = new Map()
+  for (const ch of s) count.set(ch, (count.get(ch) || 0) + 1)
+  let out = ''
+  for (const ch of order) {
+    if (count.has(ch)) {
+      const c = count.get(ch)
+      count.delete(ch)
+      out += ch.repeat(c)
+    }
+  }
+  for (const [ch, c] of count) out += ch.repeat(c)
+  return out
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
 export const python = `def custom_sort_string(order, s):
     count = {}
     for ch in s:

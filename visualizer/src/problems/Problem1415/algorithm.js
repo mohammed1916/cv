@@ -21,13 +21,13 @@ export function buildTrace({ n, k }) {
   const total = 3 * 2 ** (n - 1)
   const base = { n, k, total, chars: [], options: null, block: null, offset: null, chosen: null }
   const frames = [{
-    phase: 'start', activeLine: L('total = 3'), pythonLine: P('if k > 3'),
+    phase: 'start', activeLine: L('const total = 3'), pythonLine: P('if k > 3'),
     snapshot: base,
     message: `There are ${total} happy strings of length ${n}. Rank ${k} ${k <= total ? 'exists' : 'is beyond the last one'}.`,
   }]
   if (k > total) {
     frames.push({
-      phase: 'done', activeLine: L('if k > total'), pythonLine: P('if k > 3'),
+      phase: 'done', activeLine: L('k > total'), pythonLine: P('if k > 3'),
       snapshot: base,
       message: 'The rank is larger than the number of happy strings, so the answer is an empty string.',
     })
@@ -39,7 +39,7 @@ export function buildTrace({ n, k }) {
     const options = ['a', 'b', 'c'].filter(c => chars.length === 0 || c !== chars.at(-1))
     const block = 2 ** (n - 1 - i)
     frames.push({
-      phase: 'inspect', activeLine: L('options = letters'), pythonLine: P('options = [c'),
+      phase: 'inspect', activeLine: L('const options ='), pythonLine: P('options = [c'),
       snapshot: { n, k, total, chars: [...chars], options, block, offset, chosen: null },
       message: `Position ${i + 1}: allowed letters ${options.join(', ')}. Each one starts a block of ${block} strings.`,
     })
@@ -47,7 +47,7 @@ export function buildTrace({ n, k }) {
     const choice = options[index]
     chars.push(choice)
     frames.push({
-      phase: 'update', activeLine: L('chars.append'), pythonLine: P('chars.append'),
+      phase: 'update', activeLine: L('chars.push'), pythonLine: P('chars.append'),
       snapshot: { n, k, total, chars: [...chars], options, block, offset, chosen: choice },
       message: `Offset ${offset} falls in block ${index + 1}, so take ${choice}.`,
     })
@@ -55,24 +55,26 @@ export function buildTrace({ n, k }) {
   }
   const result = chars.join('')
   frames.push({
-    phase: 'done', activeLine: L('return join'), pythonLine: P('return "".join'),
+    phase: 'done', activeLine: L('return chars.join'), pythonLine: P('return "".join'),
     snapshot: { n, k, total, chars: [...chars], options: null, block: null, offset, chosen: null },
     message: `Rank ${k} is "${result}".`,
   })
   return { input: { n, k }, result, frames }
 }
 
-export const code = `k-th happy string of length n (k is 1-based):
-  total = 3 * 2^(n-1)
-  if k > total: return ""
-  offset = k - 1
-  chars = []
-  for position i from 0 to n-1:
-    options = letters a, b, c except the previous letter
-    block = 2^(n-1-i)
-    chars.append(options[offset // block])
-    offset = offset % block
-  return join(chars)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function getHappyString(n, k) {
+  const total = 3 * 2 ** (n - 1)
+  if (k > total) return ''
+  let offset = k - 1
+  const chars = []
+  for (let i = 0; i < n; i++) {
+    const options = ['a', 'b', 'c'].filter(c => chars.length === 0 || c !== chars.at(-1))
+    const block = 2 ** (n - 1 - i)
+    chars.push(options[Math.floor(offset / block)])
+    offset %= block
+  }
+  return chars.join('')
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def get_happy_string(n, k):
     if k > 3 * 2 ** (n - 1):

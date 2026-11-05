@@ -15,14 +15,16 @@ export function parseInput(text) {
 }
 
 export const code = [
-  'equivalent pairs(dominoes):',
-  '  count = empty map from normalized domino to frequency',
-  '  pairs = 0',
-  '  for [a, b] in dominoes:',
-  '    key = (min(a, b), max(a, b))',
-  '    pairs += count[key]',
-  '    count[key] += 1',
+  'function numEquivDominoPairs(dominoes) {',
+  '  const count = new Map()',
+  '  let pairs = 0',
+  '  for (const [a, b] of dominoes) {',
+  "    const key = Math.min(a, b) + '-' + Math.max(a, b)",
+  '    pairs += count.get(key) ?? 0',
+  '    count.set(key, (count.get(key) ?? 0) + 1)',
+  '  }',
   '  return pairs',
+  '}',
 ].map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def num_equiv_domino_pairs(dominoes):
@@ -36,23 +38,23 @@ export const python = `def num_equiv_domino_pairs(dominoes):
 
 export function buildTrace(input) {
   const frames = []
-  const frame = (phase, line, message, snapshot) => frames.push({ phase, activeLine: line, pythonLine: line, message, snapshot })
+  const frame = (phase, line, pyLine, message, snapshot) => frames.push({ phase, activeLine: line, pythonLine: pyLine, message, snapshot })
   const count = new Map()
   const countList = () => [...count.entries()].map(([key, n]) => ({ key, n }))
   let pairs = 0
 
-  frame('start', 3, 'No dominoes have been read yet. The pair total starts at 0.', { index: -1, domino: null, key: null, matches: 0, pairs, counts: countList() })
+  frame('start', 3, 3, 'No dominoes have been read yet. The pair total starts at 0.', { index: -1, domino: null, key: null, matches: 0, pairs, counts: countList() })
   input.forEach(([a, b], index) => {
     const key = `${Math.min(a, b)}-${Math.max(a, b)}`
-    frame('inspect', 5, `Domino ${index + 1} is [${a}, ${b}]. Its key is ${key}, so turning it over gives the same key.`, { index, domino: [a, b], key, matches: null, pairs, counts: countList() })
+    frame('inspect', 5, 5, `Domino ${index + 1} is [${a}, ${b}]. Its key is ${key}, so turning it over gives the same key.`, { index, domino: [a, b], key, matches: null, pairs, counts: countList() })
     const matches = count.get(key) || 0
     pairs += matches
     count.set(key, matches + 1)
-    frame('update', 6, matches
+    frame('update', 6, 6, matches
       ? `${matches} earlier domino${matches === 1 ? '' : 's'} share key ${key}, so ${matches} new pair${matches === 1 ? '' : 's'} form. The total is ${pairs}.`
       : `No earlier domino has key ${key}, so no pair forms here. The total stays ${pairs}.`,
     { index, domino: [a, b], key, matches, pairs, counts: countList() })
   })
-  frame('done', 8, `There are ${pairs} equivalent pairs.`, { index: input.length, domino: null, key: null, matches: null, pairs, counts: countList() })
+  frame('done', 9, 8, `There are ${pairs} equivalent pairs.`, { index: input.length, domino: null, key: null, matches: null, pairs, counts: countList() })
   return { input, result: pairs, frames }
 }

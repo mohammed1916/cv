@@ -1,6 +1,6 @@
 export function parseInput(text) {
   const data = JSON.parse(text)
-  if (!data || typeof data !== 'object' || !Array.isArray(data.nums) || !Array.isArray(data.and_values)) throw new Error('Use an object with arrays nums and and_values, for example {"nums":[1,4,3,3,2],"and_values":[0,3,3,2]}.')
+  if (!data || typeof data !== 'object' || !Array.isArray(data.nums) || !Array.isArray(data.and_values)) throw new Error('Use an object with arrays nums and and_values.')
   const n = data.nums.length
   const m = data.and_values.length
   if (n < 1 || n > 10) throw new Error('nums must have 1 to 10 entries.')
@@ -16,51 +16,64 @@ export function buildTrace(input) {
   const m = and_values.length
   const INF = Infinity
   let previous = Array.from({ length: n + 1 }, (_, i) => (i === 0 ? 0 : INF))
-  const frames = [{ pythonLine: 6, phase: 'start', activeLine: L('let m be the length'), piece: 0, costs: previous.slice(), result: null, message: 'Nothing is split yet. Cost 0 covers an empty prefix.' }]
+  const frames = [{ pythonLine: PL("cost = [0]"), phase: 'start', activeLine: L('const m = andValues.length'), piece: 0, left: -1, right: -1, value: null, costs: previous.slice(), result: null, message: 'Nothing is split yet: the cost of an empty prefix is 0.' }]
   for (let j = 1; j <= m; j++) {
     const next = Array.from({ length: n + 1 }, () => INF)
     for (let i = 1; i <= n; i++) {
       let running = -1
       for (let l = i - 1; l >= 0; l--) {
         running &= nums[l]
-        if (running === and_values[j - 1] && previous[l] < INF) next[i] = Math.min(next[i], previous[l] + nums[i - 1])
+        if (running === and_values[j - 1] && previous[l] < INF) {
+          const candidate = previous[l] + nums[i - 1]
+          frames.push({ pythonLine: PL('if running == and_values'), phase: 'candidate', activeLine: L('if (running === andValues[j - 1]'), piece: j, left: l, right: i - 1, value: running, costs: previous.slice(), result: null, message: `nums[${l}..${i - 1}] ANDs to ${running}, which is piece ${j}'s target, so it can end a piece with cost ${candidate}.` })
+          next[i] = Math.min(next[i], candidate)
+        }
       }
     }
     previous = next
-    frames.push({ pythonLine: 13, phase: 'piece', activeLine: L('set cost[j][i] to'), piece: j, costs: previous.slice(), result: null, message: `Piece ${j} must have AND ${and_values[j - 1]}. Cheapest costs for each prefix ending: ${previous.map(v => (v === INF ? '-' : v)).join(', ')}.` })
+    frames.push({ pythonLine: PL('cost = nxt'), phase: 'piece', activeLine: L('next[i] = Math.min'), piece: j, left: -1, right: -1, value: null, costs: previous.slice(), result: null, message: `Piece ${j} must end at a position with a matching AND. Cheapest costs so far: ${previous.map(v => (v === INF ? '-' : v)).join(', ')}.` })
   }
   const result = previous[n] === INF ? -1 : previous[n]
-  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return cost[m][n]'), piece: m, costs: previous.slice(), result, message: `Cheapest split: ${result}.` })
+  frames.push({ pythonLine: PL('return -1 if'), phase: 'done', activeLine: L('return previous[n] === Infinity'), piece: m, left: -1, right: -1, value: null, costs: previous.slice(), result, message: `Cheapest split: ${result}.` })
   return { input, result, frames }
 }
 
-export const code = `minimum sum of values (nums, and_values)
-  let m be the length of and_values
-  set cost[0][0] to 0 and every other cost to infinity
-  for each piece j from 1 to m
-    for each end position i from 1 to n
-      set running to all ones (-1)
-      for each start position l from i minus 1 down to 0
-        set running to running AND nums[l]
-        if running equals and_values[j minus 1] and cost[j minus 1][l] is finite then
-          set cost[j][i] to the smaller of cost[j][i] and cost[j minus 1][l] plus nums[i minus 1]
-  if cost[m][n] is infinite then
-    return -1
-  return cost[m][n]`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+export const code = `function minSumOfValues(nums, andValues) {
+  const n = nums.length
+  const m = andValues.length
+  let previous = Array(n + 1).fill(Infinity)
+  previous[0] = 0
+  for (let j = 1; j <= m; j++) {
+    const next = Array(n + 1).fill(Infinity)
+    for (let i = 1; i <= n; i++) {
+      let running = -1
+      for (let l = i - 1; l >= 0; l--) {
+        running &= nums[l]
+        if (running === andValues[j - 1] && previous[l] < Infinity) {
+          next[i] = Math.min(next[i], previous[l] + nums[i - 1])
+        }
+      }
+    }
+    previous = next
+  }
+  return previous[n] === Infinity ? -1 : previous[n]
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => { const i = code.findIndex(c => c.text.includes(s)); if (i < 0) throw new Error('No code line: ' + s); return i + 1 }
 
 export const python = `def min_sum_of_values(nums, and_values):
     n = len(nums)
     m = len(and_values)
     INF = float('inf')
-    cost = [[INF] * (n + 1) for _ in range(m + 1)]
-    cost[0][0] = 0
+    cost = [0] + [INF] * n
     for j in range(1, m + 1):
+        nxt = [INF] * (n + 1)
         for i in range(1, n + 1):
             running = -1
             for l in range(i - 1, -1, -1):
                 running &= nums[l]
-                if running == and_values[j - 1] and cost[j - 1][l] < INF:
-                    cost[j][i] = min(cost[j][i], cost[j - 1][l] + nums[i - 1])
-    return -1 if cost[m][n] == INF else cost[m][n]
-`
+                if running == and_values[j - 1] and cost[l] < INF:
+                    nxt[i] = min(nxt[i], cost[l] + nums[i - 1])
+        cost = nxt
+    return -1 if cost[n] == INF else cost[n]`
+const PY_LINES = python.split('\n')
+const PL = s => { const i = PY_LINES.findIndex(line => line.includes(s)); if (i < 0) throw new Error('No python line: ' + s); return i + 1 }

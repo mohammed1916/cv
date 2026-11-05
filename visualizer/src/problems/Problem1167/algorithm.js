@@ -5,41 +5,6 @@ export const phases = [
   { id: 'done', label: 'Result', description: 'Report the total cost once one stick remains.' },
 ]
 
-const CODE_LINES = [
-  'FUNCTION minimumCost(sticks)',
-  '  heap <- sticks arranged as a min-heap',
-  '  total <- 0',
-  '  WHILE the heap holds more than one stick',
-  '    a <- remove the smallest stick',
-  '    b <- remove the smallest stick',
-  '    joined <- a + b; total <- total + joined',
-  '    push joined back onto the heap',
-  '  RETURN total',
-]
-
-const PYTHON_LINES = [
-  'import heapq',
-  'def minimumCost(sticks):',
-  '    heap = list(sticks)',
-  '    heapq.heapify(heap)',
-  '    total = 0',
-  '    while len(heap) > 1:',
-  '        a = heapq.heappop(heap)',
-  '        b = heapq.heappop(heap)',
-  '        joined = a + b',
-  '        total += joined',
-  '        heapq.heappush(heap, joined)',
-  '    return total',
-]
-
-const py = text => PYTHON_LINES.findIndex(line => line.includes(text)) + 1
-
-export const python = PYTHON_LINES.join('\n')
-export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }))
-export const pythonLineMap = {
-  1: py('def '), 2: py('heapify'), 3: py('total = 0'), 4: py('while'), 5: py('a = heapq'), 6: py('joined = '), 7: py('heappush'), 8: py('return total'),
-}
-
 const STICK_LIMIT = 24
 const LENGTH_LIMIT = 1000
 
@@ -60,32 +25,51 @@ export function parseInput(text) {
   return { sticks: [...sticks] }
 }
 
+// Each line of JavaScript is paired with the Python line on the same row.
+const LINES = [
+  ['function minimumCost(sticks) {', 'import heapq'],
+  ['  const heap = [...sticks]; heap.sort((a, b) => a - b)', 'def minimum_cost(sticks):'],
+  ['  let total = 0', '    heap = list(sticks); heapq.heapify(heap); total = 0'],
+  ['  while (heap.length > 1) {', '    while len(heap) > 1:'],
+  ['    const a = heap.shift(), b = heap.shift()', '        a, b = heapq.heappop(heap), heapq.heappop(heap)'],
+  ['    total += a + b; heap.push(a + b); heap.sort((x, y) => x - y)', '        total += a + b; heapq.heappush(heap, a + b)'],
+  ['  }', ''],
+  ['  return total', '    return total'],
+  ['}', ''],
+]
+const codeLines = LINES.map(([js]) => js)
+export const code = codeLines.map((text, index) => ({ line: index + 1, text }))
+const L = s => codeLines.findIndex(c => c.includes(s)) + 1
+export const python = LINES.map(([, py]) => py).join('\n')
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+export const pythonLineMap = Object.fromEntries(code.map(({ line }) => [line, line]))
+
 export function buildTrace(text) {
   const { sticks } = parseInput(text)
   const frames = []
   let heap = [...sticks].sort((a, b) => a - b)
   let total = 0
   let joins = 0
-  const snap = (phase, activeLine, message, extra = {}) => frames.push({
-    phase, activeLine, message, snapshot: { heap: [...heap], pair: [], joined: null, total, joins, ...extra },
+  const snap = (phase, activeLine, pythonLine, message, extra = {}) => frames.push({
+    phase, activeLine, pythonLine, message, snapshot: { heap: [...heap], pair: [], joined: null, total, joins, ...extra },
   })
 
-  snap('setup', 1, `There are ${sticks.length} sticks. Each join costs the sum of the two lengths joined.`)
-  snap('heapify', 2, `The smallest stick is ${heap[0]}, so it will be joined first.`)
-  snap('heapify', 3, 'The total cost starts at 0.')
+  snap('setup', L('const heap'), P('heap = list'), `There are ${sticks.length} sticks. Each join costs the sum of the two lengths joined.`)
+  snap('heapify', L('const heap'), P('heap = list'), `The smallest stick is ${heap[0]}, so it will be joined first.`)
+  snap('heapify', L('let total = 0'), P('total = 0'), 'The total cost starts at 0.')
 
   while (heap.length > 1) {
     heap.sort((a, b) => a - b)
     const [a, b] = heap.splice(0, 2)
-    snap('join', 5, `Remove the smallest stick ${a}.`, { pair: [a] })
+    snap('join', L('const a = heap.shift()'), P('a, b = heapq'), `Remove the smallest stick ${a}.`, { pair: [a] })
     const joined = a + b
     total += joined
     joins += 1
-    snap('join', 6, `Join ${a} and ${b} for cost ${joined}. The running total is ${total}.`, { pair: [a, b], joined, total, joins })
+    snap('join', L('total += a + b'), P('total += a + b'), `Join ${a} and ${b} for cost ${joined}. The running total is ${total}.`, { pair: [a, b], joined, total, joins })
     heap.push(joined)
-    snap('join', 7, `Put the new stick ${joined} back into the heap. ${heap.length} stick(s) remain.`, { pair: [], joined, total, joins })
+    snap('join', L('heap.push(a + b)'), P('heapq.heappush'), `Put the new stick ${joined} back into the heap. ${heap.length} stick(s) remain.`, { pair: [], joined, total, joins })
   }
 
-  snap('done', 8, `One stick remains. The total cost is ${total}.`, { total, joins })
+  snap('done', L('return total'), P('return total'), `One stick remains. The total cost is ${total}.`, { total, joins })
   return { input: { sticks }, result: total, frames }
 }

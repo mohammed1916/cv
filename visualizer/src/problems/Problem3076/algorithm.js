@@ -9,17 +9,16 @@ export function parseInput(text) {
 
 export function buildTrace({ arr }) {
   const answers = []
-  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set answers to an empty list'), index: -1, sub: '', answers: [], message: 'Look at each string in turn.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('const answers = []'), index: -1, sub: '', answers: [], message: 'Look at each string in turn.' }]
   arr.forEach((s, i) => {
     const others = arr.filter((_, j) => j !== i)
     let found = ''
     for (let len = 1; len <= s.length && found === ''; len++) {
       const subs = [...new Set(Array.from({ length: s.length - len + 1 }, (_, j) => s.slice(j, j + len)))].sort()
       for (const sub of subs) {
-        if (found !== '') break
         const shared = others.some(o => o.includes(sub))
-        frames.push({ pythonLine: shared ? 11 : 12, phase: shared ? 'shared' : 'uncommon', activeLine: L('if sub appears in no other string'), index: i, sub, answers: [...answers], message: shared ? `${sub} appears in another string, so it does not count.` : `${sub} appears in no other string. It is the answer for ${s}.` })
-        if (!shared) found = sub
+        frames.push({ pythonLine: shared ? 9 : 10, phase: shared ? 'shared' : 'uncommon', activeLine: L('if (!others.some'), index: i, sub, answers: [...answers], message: shared ? `${sub} appears in another string, so it does not count.` : `${sub} appears in no other string. It is the answer for ${s}.` })
+        if (!shared) { found = sub; break }
       }
     }
     answers.push(found)
@@ -28,16 +27,22 @@ export function buildTrace({ arr }) {
   return { input: { arr }, result: answers, frames }
 }
 
-export const code = `shortest uncommon substring for each string:
-  set answers to an empty list
-  for each string s at index i
-    set found to empty text
-    for each length L from 1 to the length of s, while found is still empty
-      for each substring sub of s with length L, in sorted order, while found is still empty
-        if sub appears in no other string then
-          set found to sub
-    add found to answers
-  return answers`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function shortestUncommon(arr) {
+  const answers = []
+  for (let i = 0; i < arr.length; i++) {
+    const s = arr[i]
+    const others = arr.filter((_, j) => j !== i)
+    let found = ''
+    for (let len = 1; len <= s.length && found === ''; len++) {
+      const subs = [...new Set(Array.from({ length: s.length - len + 1 }, (_, j) => s.slice(j, j + len)))].sort()
+      for (const sub of subs) {
+        if (!others.some(o => o.includes(sub))) { found = sub; break }
+      }
+    }
+    answers.push(found)
+  }
+  return answers
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def shortest_uncommon(arr):
@@ -45,14 +50,14 @@ export const python = `def shortest_uncommon(arr):
     for i, s in enumerate(arr):
         others = arr[:i] + arr[i + 1:]
         found = ''
-        for L in range(1, len(s) + 1):
-            if found:
-                break
-            subs = sorted({s[j:j + L] for j in range(len(s) - L + 1)})
+        for length in range(1, len(s) + 1):
+            subs = sorted({s[j:j + length] for j in range(len(s) - length + 1)})
             for sub in subs:
                 if not any(sub in o for o in others):
                     found = sub
                     break
+            if found:
+                break
         answers.append(found)
     return answers
 `

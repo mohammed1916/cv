@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/count-prefix-and-suffix-pairs-i/',
   complexity: 'O(n^2 * L) time for n words of length up to L. The visualization caps input at 6 words.',
   examples: [
-    { label: 'Example 1', input: '{"words":["a","aba","ababa","aa"]}' },
-    { label: 'Example 2', input: '{"words":["pa","papa","ma","mama"]}' },
+    { label: 'Example 1', input: '{"words":["c","cc","cbc","ccc"]}' },
+    { label: 'Example 2', input: '{"words":["ab","abab","ab","b"]}' },
   ],
 }
 

@@ -11,30 +11,32 @@ export function buildTrace({ word, k }) {
   const frames = []
   const n = word.length
   let t = 1
-  frames.push({ pythonLine: 3, phase: 'start', activeLine: L('t = 1'), t, cut: null, message: `Try ${n} letters, removing ${k} each second.` })
+  frames.push({ pythonLine: 3, phase: 'start', activeLine: L('let t = 1'), t, cut: null, message: `Try ${n} letters, removing ${k} each second.` })
   for (;;) {
     if (t * k >= n) {
-      frames.push({ pythonLine: 6, phase: 'free', activeLine: L('if t times k is at least n, return t'), t, cut: t * k, message: `After ${t} seconds every letter was removed; the appended letters can rebuild the word.` })
+      frames.push({ pythonLine: 6, phase: 'free', activeLine: L('if (t * k >= n) return t'), t, cut: t * k, message: `After ${t} seconds every letter was removed; the appended letters can rebuild the word.` })
       return { input: { word, k }, result: t, frames }
     }
     const rest = word.slice(t * k)
     const prefix = word.slice(0, n - t * k)
     if (rest === prefix) {
-      frames.push({ pythonLine: 8, phase: 'match', activeLine: L('if the word after t times k letters equals'), t, cut: t * k, rest, prefix, message: `"${rest}" matches the start of the word, so ${t} seconds work.` })
+      frames.push({ pythonLine: 8, phase: 'match', activeLine: L('if (word.slice(t * k) ==='), t, cut: t * k, rest, prefix, message: `"${rest}" matches the start of the word, so ${t} seconds work.` })
       return { input: { word, k }, result: t, frames }
     }
-    frames.push({ pythonLine: 9, phase: 'miss', activeLine: L('t = t plus 1'), t, cut: t * k, rest, prefix, message: `"${rest}" does not match "${prefix}"; try ${t + 1}.` })
+    frames.push({ pythonLine: 9, phase: 'miss', activeLine: L('t += 1'), t, cut: t * k, rest, prefix, message: `"${rest}" does not match "${prefix}"; try ${t + 1}.` })
     t += 1
   }
 }
 
-export const code = `minimum seconds to revert the word
-  n = length of word
-  t = 1
-  repeat
-    if t times k is at least n, return t
-    if the word after t times k letters equals the start of the word, return t
-    t = t plus 1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minTime(word, k) {
+  const n = word.length
+  let t = 1
+  while (true) {
+    if (t * k >= n) return t
+    if (word.slice(t * k) === word.slice(0, n - t * k)) return t
+    t += 1
+  }
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def min_time(word, k):

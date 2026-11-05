@@ -6,39 +6,39 @@ export function parseInput(text) {
   return { values }
 }
 
+// Each line of JavaScript is paired with the Python line on the same row.
+const LINES = [
+  ['function nextGreaterValues(values) {', 'def next_greater_values(values):'],
+  ['  const answer = Array(values.length).fill(0)', '    answer = [0] * len(values)'],
+  ['  const stack = []', '    stack = []'],
+  ['  for (let i = 0; i < values.length; i++) { const v = values[i]', '    for i, v in enumerate(values):'],
+  ['    while (stack.length > 0 && values[stack[stack.length - 1]] < v) {', '        while stack and values[stack[-1]] < v:'],
+  ['      answer[stack.pop()] = v', '            answer[stack.pop()] = v'],
+  ['    }', ''],
+  ['    stack.push(i)', '        stack.append(i)'],
+  ['  }', ''],
+  ['  return answer', '    return answer'],
+  ['}', ''],
+]
+const codeLines = LINES.map(([js]) => js)
+export const code = codeLines.map((text, index) => ({ line: index + 1, text }))
+const L = s => codeLines.findIndex(c => c.includes(s)) + 1
+export const python = LINES.map(([, py]) => py).join('\n')
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 export function buildTrace({ values }) {
   const answer = Array(values.length).fill(0)
   const stack = []
-  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set answer to zeros'), index: -1, stack: [], answer: [...answer], message: 'Every answer starts at 0 until a larger value is found.' }]
+  const frames = [{ phase: 'start', pythonLine: P('answer = [0]'), activeLine: L('const answer = Array'), index: -1, stack: [], answer: [...answer], message: 'Every answer starts at 0 until a larger value is found.' }]
   values.forEach((v, i) => {
     while (stack.length && values[stack[stack.length - 1]] < v) {
       const p = stack.pop()
       answer[p] = v
-      frames.push({ phase: 'resolve', pythonLine: 6, activeLine: L('answer at that position with the value'), index: i, stack: [...stack], answer: [...answer], message: `Value ${v} is the next greater value for position ${p}.` })
+      frames.push({ phase: 'resolve', pythonLine: P('answer[stack.pop()]'), activeLine: L('answer[stack.pop()]'), index: i, stack: [...stack], answer: [...answer], message: `Value ${v} is the next greater value for position ${p}.` })
     }
     stack.push(i)
-    frames.push({ phase: 'push', pythonLine: 7, activeLine: L('push i onto the stack'), index: i, stack: [...stack], answer: [...answer], message: `Position ${i} (value ${v}) waits for a larger value.` })
+    frames.push({ phase: 'push', pythonLine: P('stack.append(i)'), activeLine: L('stack.push(i)'), index: i, stack: [...stack], answer: [...answer], message: `Position ${i} (value ${v}) waits for a larger value.` })
   })
-  frames.push({ phase: 'done', pythonLine: 8, activeLine: L('return answer'), index: -1, stack: [...stack], answer: [...answer], message: 'Positions left on the stack have no larger value, so they stay 0.' })
+  frames.push({ phase: 'done', pythonLine: P('return answer'), activeLine: L('return answer'), index: -1, stack: [...stack], answer: [...answer], message: 'Positions left on the stack have no larger value, so they stay 0.' })
   return { input: { values }, result: answer, frames }
 }
-
-export const code = `next greater value for each position in the list
-  set answer to zeros, one for each position
-  set stack to an empty list of positions
-  for each position i in order with value v
-    while the stack is not empty and the value at its top is less than v
-      pop the top position p and answer at that position with the value v
-    push i onto the stack
-  return answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-
-export const python = `def next_greater_values(values):
-    answer = [0] * len(values)
-    stack = []
-    for i, v in enumerate(values):
-        while stack and values[stack[-1]] < v:
-            answer[stack.pop()] = v
-        stack.append(i)
-    return answer
-`

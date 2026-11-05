@@ -8,21 +8,34 @@ const PHASES = [
 
 export const phases = PHASES
 
-const CODE_LINES = [
-  'count integers in [l, r] with an even number of even digits',
-  'ways[len][p] is the number of digit strings of length len whose even-digit count has parity p',
-  'define count(N) as the number of integers from 1 to N that qualify',
-  '  total is zero',
-  '  for each shorter length, add the numbers with a first digit 1 to 9 whose rest has the matching parity',
-  '  p is the parity of the even digits seen so far',
-  '  for each position i of N, for each smaller digit c that may appear there',
-  '    add ways[rest][p xor (c is even)]',
-  '  p = p xor (digit i is even)',
-  '  if p is zero, add N itself',
-  'return count(r) minus count(l minus 1)',
-]
-
-export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }))
+export const code = `function countEvenlyGood(l, r) {
+  // ways[len][p] is the number of digit strings of length len whose even-digit count has parity p
+  const ways = Array.from({ length: 20 }, () => [0, 0])
+  ways[0][0] = 1
+  for (let n = 1; n < 20; n++) {
+    for (let p = 0; p < 2; p++) ways[n][p] = 5 * ways[n - 1][p] + 5 * ways[n - 1][p ^ 1]
+  }
+  function count(N) {
+    if (N <= 0) return 0
+    const digits = String(N).split('').map(Number)
+    const m = digits.length
+    let total = 0
+    // for each shorter length, a first digit 1 to 9 with the matching parity for the rest
+    for (let len = 1; len < m; len++) {
+      for (let f = 1; f <= 9; f++) total += ways[len - 1][f % 2 === 0 ? 1 : 0]
+    }
+    let p = 0
+    for (let i = 0; i < m; i++) {
+      // for each position i of N, add the smaller digits c that may appear there
+      const rest = m - 1 - i
+      for (let c = i === 0 ? 1 : 0; c < digits[i]; c++) total += ways[rest][p ^ (c % 2 === 0 ? 1 : 0)]
+      p ^= digits[i] % 2 === 0 ? 1 : 0
+    }
+    if (p === 0) total += 1 // if p is zero, add N itself
+    return total
+  }
+  return count(r) - count(l - 1)
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 function L(fragment) {
   const index = code.findIndex(c => c.text.includes(fragment))
@@ -73,7 +86,7 @@ export function parseInput(text) {
   const input = JSON.parse(text)
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Use an object with l and r.')
   const { l, r } = input
-  if (!Number.isInteger(l) || !Number.isInteger(r) || l < 1 || r < l || r > 1000000000000) {
+  if (!Number.isInteger(l) || !Number.isInteger(r) || l < 1 || r < l || r > 1000000000000000) {
     throw new Error('Use integers with 1 <= l <= r <= 10^12.')
   }
   return { l, r }
@@ -98,7 +111,7 @@ export function buildTrace({ l, r }) {
       let added = 0
       for (let f = 1; f <= 9; f++) added += ways[L2 - 1][isEven(f) ? 1 : 0]
       total += added
-      frames.push({ ...base, pythonLine: P('for L in range(1, m)'), phase: 'shorter', activeLine: L('for each shorter length'), bound: N, digits, pos: -1, p: 0, added, total, message: `${label}: every ${L2 + 1}-digit number qualifies in ${added} way${added === 1 ? '' : 's'}.` })
+      frames.push({ ...base, pythonLine: P('for L in range(1, m)'), phase: 'shorter', activeLine: L('for each shorter length, a first digit'), bound: N, digits, pos: -1, p: 0, added, total, message: `${label}: every ${L2 + 1}-digit number qualifies in ${added} way${added === 1 ? '' : 's'}.` })
     }
     let p = 0
     for (let i = 0; i < m; i++) {
@@ -121,6 +134,6 @@ export function buildTrace({ l, r }) {
   const upper = countWithFrames(r, `count(${r})`)
   const lower = countWithFrames(l - 1, `count(${l - 1})`)
   grand = upper - lower
-  frames.push({ ...base, pythonLine: P('return count(r) - count(l - 1)'), phase: 'done', activeLine: L('return count(r) minus'), bound: null, digits: [], pos: -1, p: 0, added: 0, total: grand, message: `${upper} minus ${lower} gives ${grand} qualifying integers in [${l}, ${r}].` })
+  frames.push({ ...base, pythonLine: P('return count(r) - count(l - 1)'), phase: 'done', activeLine: L('return count(r) - count(l - 1)'), bound: null, digits: [], pos: -1, p: 0, added: 0, total: grand, message: `${upper} minus ${lower} gives ${grand} qualifying integers in [${l}, ${r}].` })
   return { input: { l, r }, result: grand, frames }
 }

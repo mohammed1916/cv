@@ -5,7 +5,6 @@ export const phases = [
 ]
 
 const PYTHON = `from collections import deque
-
 def longest_within_limit(nums, limit):
     max_q, min_q = deque(), deque()
     left = 0
@@ -27,7 +26,26 @@ def longest_within_limit(nums, limit):
     return best`
 
 export const python = PYTHON
-export const code = PYTHON.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function longestSubarray(nums, limit) {
+  const maxQ = []
+  const minQ = []
+  let left = 0
+  let best = 0
+  for (let right = 0; right < nums.length; right++) {
+    const x = nums[right]
+    while (maxQ.length && nums[maxQ.at(-1)] <= x) maxQ.pop()
+    maxQ.push(right)
+    while (minQ.length && nums[minQ.at(-1)] >= x) minQ.pop()
+    minQ.push(right)
+    while (nums[maxQ[0]] - nums[minQ[0]] > limit) {
+      if (maxQ[0] === left) maxQ.shift()
+      if (minQ[0] === left) minQ.shift()
+      left += 1
+    }
+    best = Math.max(best, right - left + 1)
+  }
+  return best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 export const pythonLineMap = Object.fromEntries(code.map(({ line }) => [line, line]))
 const lineAt = marker => code.find(({ text }) => text.includes(marker)).line
 
@@ -57,7 +75,7 @@ export function buildTrace({ nums, limit }) {
     best, ...extra,
   })
 
-  frames.push({ phase: 'extend', activeLine: lineAt('max_q, min_q = deque()'), message: `Start with an empty window and an ordered limit of ${limit}.`, snapshot: snap(null) })
+  frames.push({ phase: 'extend', activeLine: lineAt('const maxQ = []'), message: `Start with an empty window and an ordered limit of ${limit}.`, snapshot: snap(null) })
   for (let right = 0; right < nums.length; right++) {
     const x = nums[right]
     while (maxQ.length && nums[maxQ.at(-1)] <= x) maxQ.pop()
@@ -65,7 +83,7 @@ export function buildTrace({ nums, limit }) {
     while (minQ.length && nums[minQ.at(-1)] >= x) minQ.pop()
     minQ.push(right)
     frames.push({
-      phase: 'extend', activeLine: lineAt('min_q.append(right)'),
+      phase: 'extend', activeLine: lineAt('minQ.push(right)'),
       message: `Add ${x} at index ${right}. Both queues now keep only the candidates that could still be the window's max or min.`,
       snapshot: snap(right),
     })
@@ -81,7 +99,7 @@ export function buildTrace({ nums, limit }) {
     }
     best = Math.max(best, right - left + 1)
     frames.push({
-      phase: 'record', activeLine: lineAt('best = max(best'),
+      phase: 'record', activeLine: lineAt('best = Math.max(best'),
       message: `The valid window [${left}, ${right}] has length ${right - left + 1}. The best so far is ${best}.`,
       snapshot: snap(right),
     })

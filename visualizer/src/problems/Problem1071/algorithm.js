@@ -5,13 +5,15 @@ export const phases = [
   { id: 'done', label: 'Complete', description: 'Return the block prefix, or the empty string when no base exists.' },
 ]
 
-export const code = `repeated base (first, second):
-  if first + second != second + first:
-    return ""
-  a, b = len(first), len(second)
-  while b != 0:
-    a, b = b, a % b
-  return first[0:a]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function repeatedBase(first, second) {
+  if (first + second !== second + first) return ""
+  let a = first.length
+  let b = second.length
+  while (b !== 0) {
+    [a, b] = [b, a % b]
+  }
+  return first.slice(0, a)
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def repeated_base(first, second):
     if first + second != second + first:
@@ -46,25 +48,32 @@ export function buildTrace({ first, second }) {
     state: { first, second, a, b, joinedFirst: first + second, joinedSecond: second + first },
   })
 
-  push('start', 'repeated base', `Compare "${first}" and "${second}" by building both joined orders.`, 'def repeated_base')
+  push('start', 'function repeatedBase', `Compare "${first}" and "${second}" by building both joined orders.`, 'def repeated_base')
   const joinedFirst = first + second
   const joinedSecond = second + first
   if (joinedFirst !== joinedSecond) {
-    push('check', 'first + second != second + first', `"${joinedFirst}" differs from "${joinedSecond}", so no shared repeating base exists.`)
-    push('done', 'return ""', 'Return the empty string.')
+    push('check', 'first + second !== second + first', `"${joinedFirst}" differs from "${joinedSecond}", so no shared repeating base exists.`, 'if first + second')
+    push('done', 'return ""', 'Return the empty string.', 'return ""')
     return { input: { first, second }, result: '', frames }
   }
-  push('check', 'first + second != second + first', `Both orders give "${joinedFirst}", so a shared base exists.`)
+  push('check', 'first + second !== second + first', `Both orders give "${joinedFirst}", so a shared base exists.`, 'if first + second')
 
-  push('euclid', 'a, b = len(first)', `Start with lengths ${a} and ${b}.`)
+  push('euclid', 'let a = first.length', `Start with lengths ${a} and ${b}.`, 'a, b = len(first)')
   while (b !== 0) {
     const remainder = a % b
     const nextA = b
     a = nextA
     b = remainder
-    push('euclid', 'a, b = b, a % b', `Remainder step leaves lengths ${a} and ${b}.`)
+    push('euclid', '[a, b] = [b, a % b]', `Remainder step leaves lengths ${a} and ${b}.`, 'a, b = b, a % b')
   }
   const block = first.slice(0, a)
-  push('done', 'return first[0:a]', `The longest block has length ${a}: "${block}".`)
+  push('done', 'return first.slice(0, a)', `The longest block has length ${a}: "${block}".`, 'return first[0:a]')
   return { input: { first, second }, result: block, frames }
 }
+
+export const inputLabel = 'Object with first and second strings'
+export const complexity = 'O(n + m) to build and compare the joined strings, plus O(log) Euclid steps on the lengths.'
+export const examples = [
+  { label: 'Shared base', input: '{"first": "XYXYXY", "second": "XY"}' },
+  { label: 'No base', input: '{"first": "PQR", "second": "PQ"}' },
+]

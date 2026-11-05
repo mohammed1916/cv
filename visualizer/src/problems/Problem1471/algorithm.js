@@ -42,18 +42,16 @@ export function buildTrace({ arr, k }) {
   return { input: { arr, k }, result, frames }
 }
 
-export const code = [
-  'strongest values (arr, k):',
-  '  ordered = sort(arr)',
-  '  median = ordered[(n - 1) // 2]',
-  '  ranked = arr sorted by (|value - median|, value), largest first',
-  '  return the first k of ranked',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function getStrongest(arr, k) {
+  const sorted = [...arr].sort((a, b) => a - b)
+  const median = sorted[Math.floor((sorted.length - 1) / 2)]
+  const ranked = [...arr].sort((a, b) => (Math.abs(b - median) - Math.abs(a - median)) || (b - a))
+  return ranked.slice(0, k)
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
-export const python = [
-  'def get_strongest(arr, k):',
-  '    ordered = sorted(arr)',
-  '    median = ordered[(len(ordered) - 1) // 2]',
-  '    ranked = sorted(arr, key=lambda x: (abs(x - median), x), reverse=True)',
-  '    return ranked[:k]',
-].join('\n')
+export const python = `def get_strongest(arr, k):
+    ordered = sorted(arr)
+    median = ordered[(len(ordered) - 1) // 2]
+    ranked = sorted(arr, key=lambda x: (abs(x - median), x), reverse=True)
+    return ranked[:k]
+`

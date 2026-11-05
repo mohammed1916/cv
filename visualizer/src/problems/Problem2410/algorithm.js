@@ -14,29 +14,37 @@ export function buildTrace(input) {
   const ts = [...trainers].sort((a, b) => a - b)
   let next = 0
   let matches = 0
-  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('sort the players'), trainer: -1, next, matches, message: `Players ${ps.join(', ')}; trainers ${ts.join(', ')}.` }]
+  const frames = [{ phase: 'start', pythonLine: P('players = sorted'), activeLine: L('const ps = '), trainer: -1, next, matches, ps, ts, message: `Players ${ps.join(', ')}; trainers ${ts.join(', ')}.` }]
   for (const trainer of ts) {
     if (next < ps.length && ps[next] <= trainer) {
-      frames.push({ phase: 'match', pythonLine: 8, activeLine: L('match them'), trainer, next, matches: matches + 1, message: `Trainer ${trainer} takes player ${ps[next]}.` })
+      frames.push({ phase: 'match', pythonLine: P('nxt += 1'), activeLine: L('next++'), trainer, next, matches: matches + 1, ps, ts, message: `Trainer ${trainer} takes player ${ps[next]}.` })
       next += 1
       matches += 1
     } else {
-      frames.push({ phase: 'skip', pythonLine: 7, activeLine: L('otherwise skip this trainer'), trainer, next, matches, message: `Trainer ${trainer} cannot train the next player; skip.` })
+      frames.push({ phase: 'skip', pythonLine: P('if nxt < len'), activeLine: L('otherwise skip this trainer'), trainer, next, matches, ps, ts, message: next < ps.length ? `Trainer ${trainer} is weaker than the next player ${ps[next]}; skip.` : `No players remain, so trainer ${trainer} is skipped.` })
     }
   }
-  frames.push({ phase: 'done', pythonLine: 10, activeLine: L('return matches'), trainer: -1, next, matches, message: `${matches} players are matched.` })
+  frames.push({ phase: 'done', pythonLine: P('return matches'), activeLine: L('return matches'), trainer: -1, next, matches, ps, ts, message: `${matches} players are matched.` })
   return { input, result: matches, frames }
 }
 
-export const code = `maximum number of players matched to trainers:
-  sort the players from weakest to strongest
-  sort the trainers from weakest to strongest
-  set next to 0 and matches to 0
-  for each trainer in order
-    if a player remains and the next player is at most the trainer then match them, add one to next and add one to matches
-    otherwise skip this trainer
-  return matches`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function maxMatchedPlayers(players, trainers) {
+  const ps = [...players].sort((a, b) => a - b)
+  const ts = [...trainers].sort((a, b) => a - b)
+  let next = 0
+  let matches = 0
+  for (const trainer of ts) {
+    if (next < ps.length && ps[next] <= trainer) {
+      next++
+      matches++
+    } else {
+      // otherwise skip this trainer
+    }
+  }
+  return matches
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def max_matched_players(players, trainers):
     players = sorted(players)

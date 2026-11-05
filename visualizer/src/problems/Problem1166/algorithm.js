@@ -16,7 +16,7 @@ export function buildTrace({ ops }) {
   const frames = []
   const state = () => [...paths].map(([p, v]) => `${p} = ${v}`)
   const results = []
-  frames.push({ phase: 'start', pythonLine: PL('paths = {}'), activeLine: L('start with an empty map'), state: [], message: 'No paths exist yet.' })
+  frames.push({ phase: 'start', pythonLine: PL('paths = {}'), activeLine: L.start, state: [], entries: [], message: 'No paths exist yet.' })
   for (const op of ops) {
     if (op[0] === 'create') {
       const [, path, value] = op
@@ -25,31 +25,42 @@ export function buildTrace({ ops }) {
       const exists = paths.has(path)
       if (!parentOk || exists) {
         results.push(false)
-        frames.push({ phase: 'reject', pythonLine: PL('results.append(False)'), activeLine: L('record false'), state: state(), message: exists ? `${path} already exists.` : `Parent ${parent} is missing.` })
+        frames.push({ phase: 'reject', pythonLine: PL('results.append(False)'), activeLine: L.reject, state: state(), entries: [...paths], message: exists ? `${path} already exists.` : `Parent ${parent} is missing.` })
       } else {
         paths.set(path, value)
         results.push(true)
-        frames.push({ phase: 'create', pythonLine: PL('paths[path] = value'), activeLine: L('store the value and record true'), state: state(), message: `Create ${path} with ${value}.` })
+        frames.push({ phase: 'create', pythonLine: PL('paths[path] = value'), activeLine: L.create, state: state(), entries: [...paths], message: `Create ${path} with ${value}.` })
       }
     } else {
       const v = paths.has(op[1]) ? paths.get(op[1]) : -1
       results.push(v)
-      frames.push({ phase: 'get', pythonLine: PL('results.append(paths.get'), activeLine: L('record the stored value or -1'), state: state(), message: `get ${op[1]} returns ${v}.` })
+      frames.push({ phase: 'get', pythonLine: PL('results.append(paths.get'), activeLine: L.get, state: state(), entries: [...paths], message: `get ${op[1]} returns ${v}.` })
     }
   }
-  frames.push({ phase: 'done', pythonLine: PL('return results'), activeLine: L('return the recorded results'), state: state(), message: 'All operations are finished.' })
+  frames.push({ phase: 'done', pythonLine: PL('return results'), activeLine: L.done, state: state(), entries: [...paths], message: 'All operations are finished.' })
   return { input: { ops }, result: results, frames }
 }
 
-export const code = `file system with create and get
-  start with an empty map of paths
-  for each operation in order
-    if the operation is create then find the parent path
-      if the parent is missing or the path exists then record false
-      otherwise store the value and record true
-    otherwise record the stored value or -1
-  return the recorded results`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+export const code = `function fileSystem(ops) {
+  const paths = new Map()
+  const results = []
+  for (const op of ops) {
+    if (op[0] === 'create') {
+      const [, path, value] = op
+      const parent = path.slice(0, path.lastIndexOf('/'))
+      if ((parent !== '' && !paths.has(parent)) || paths.has(path)) {
+        results.push(false)
+      } else {
+        paths.set(path, value)
+        results.push(true)
+      }
+    } else {
+      results.push(paths.has(op[1]) ? paths.get(op[1]) : -1)
+    }
+  }
+  return results
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = { start: 2, reject: 9, create: 11, get: 15, done: 18 }
 
 export const python = `def file_system(ops):
     paths = {}

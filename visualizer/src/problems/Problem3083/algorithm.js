@@ -9,29 +9,32 @@ export function parseInput(text) {
 export function buildTrace({ s }) {
   const chars = [...s]
   const pairs = new Set()
-  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set pairs to an empty set'), active: -1, roles: {}, state: {}, message: 'List every adjacent pair of letters in s. Then look for a pair whose reverse is also in the list.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('const pairs = new Set()'), active: -1, roles: {}, state: {}, message: 'List every adjacent pair of letters in s. Then look for a pair whose reverse is also in the list.' }]
   for (let i = 0; i + 1 < chars.length; i++) {
     pairs.add(chars[i] + chars[i + 1])
-    frames.push({ pythonLine: 4, phase: 'collect', activeLine: L('add the pair to pairs'), active: i, roles: { [i]: 'pair', [i + 1]: 'pair' }, state: { pair: chars[i] + chars[i + 1] }, message: `Record "${chars[i]}${chars[i + 1]}".` })
+    frames.push({ pythonLine: 4, phase: 'collect', activeLine: L('pairs.add('), active: i, roles: { [i]: 'pair', [i + 1]: 'pair' }, state: { pair: chars[i] + chars[i + 1] }, message: `Record "${chars[i]}${chars[i + 1]}".` })
   }
   let found = false
   for (let i = 0; i + 1 < chars.length && !found; i++) {
     const reversed = chars[i + 1] + chars[i]
     const hit = pairs.has(reversed)
-    frames.push({ pythonLine: hit ? 7 : 6, phase: 'check', activeLine: L('if the reverse of the pair is in pairs'), active: i, roles: { [i]: hit ? 'match' : 'checked', [i + 1]: hit ? 'match' : 'checked' }, state: { pair: chars[i] + chars[i + 1], reversed, hit }, message: hit ? `Reverse "${reversed}" also appears, so the answer is true.` : `Reverse "${reversed}" does not appear.` })
+    frames.push({ pythonLine: hit ? 7 : 6, phase: 'check', activeLine: L('if (pairs.has('), active: i, roles: { [i]: hit ? 'match' : 'checked', [i + 1]: hit ? 'match' : 'checked' }, state: { pair: chars[i] + chars[i + 1], reversed, hit }, message: hit ? `Reverse "${reversed}" also appears, so the answer is true.` : `Reverse "${reversed}" does not appear.` })
     if (hit) found = true
   }
   frames.push({ pythonLine: found ? 7 : 8, phase: 'done', activeLine: L(found ? 'return true' : 'return false'), active: -1, roles: {}, state: { result: found }, message: found ? 'Return true.' : 'No pair has its reverse present. Return false.' })
   return { input: { s }, result: found, items: chars, frames }
 }
 
-export const code = `does s contain a pair whose reverse also appears
-  set pairs to an empty set
-  for each adjacent pair of letters in s
-    add the pair to pairs
-  for each adjacent pair of letters in s
-    if the reverse of the pair is in pairs then return true
-  return false`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function isSubstringPresent(s) {
+  const pairs = new Set()
+  for (let i = 0; i + 1 < s.length; i++) {
+    pairs.add(s[i] + s[i + 1])
+  }
+  for (let i = 0; i + 1 < s.length; i++) {
+    if (pairs.has(s[i + 1] + s[i])) return true
+  }
+  return false
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def is_substring_present(s):

@@ -16,7 +16,7 @@ export function buildTrace({ stickers, target }) {
   const start = need
   const dist = new Map([[key(start), { count: 0, used: [] }]])
   const queue = [start]
-  const frames = [{ phase: 'start', letters, remaining: [...need], used: [], result: null, activeLine: L('start the queue with the full need'), pythonLine: 9, message: `Need ${letters.map((ch, i) => `${ch}×${need[i]}`).join(', ')}.` }]
+  const frames = [{ phase: 'start', letters, remaining: [...need], used: [], result: null, activeLine: L('const queue = [need]'), pythonLine: 9, message: `Need ${letters.map((ch, i) => `${ch}×${need[i]}`).join(', ')}.` }]
   let answer = null
   for (let q = 0; q < queue.length && answer === null; q++) {
     const state = queue[q]
@@ -26,30 +26,38 @@ export function buildTrace({ stickers, target }) {
       if (next.every((n, j) => n === state[j]) || dist.has(key(next))) continue
       const nextUsed = [...used, stickers[i]]
       dist.set(key(next), { count: count + 1, used: nextUsed })
-      frames.push({ phase: 'apply', letters, remaining: [...next], used: nextUsed, sticker: stickers[i], result: null, activeLine: L('record next with one more sticker'), pythonLine: 16, message: `Apply "${stickers[i]}": remaining ${letters.map((ch, j) => `${ch}×${next[j]}`).join(', ')}.` })
+      frames.push({ phase: 'apply', letters, remaining: [...next], used: nextUsed, sticker: stickers[i], result: null, activeLine: L('dist.set(key(next)'), pythonLine: 15, message: `Apply "${stickers[i]}": remaining ${letters.map((ch, j) => `${ch}×${next[j]}`).join(', ')}.` })
       if (next.every(n => n === 0)) {
         answer = count + 1
-        frames.push({ phase: 'done', letters, remaining: [...next], used: nextUsed, result: answer, activeLine: L('if every remaining count is zero'), pythonLine: 18, message: `Spelled with ${answer} stickers: ${nextUsed.join(', ')}.` })
+        frames.push({ phase: 'done', letters, remaining: [...next], used: nextUsed, result: answer, activeLine: L('if (next.every(n => n === 0))'), pythonLine: 17, message: `Spelled with ${answer} stickers: ${nextUsed.join(', ')}.` })
         break
       }
       queue.push(next)
     }
   }
-  if (answer === null) frames.push({ phase: 'done', letters, remaining: [...need], used: [], result: -1, activeLine: L('return -1'), pythonLine: 20, message: 'The stickers cannot spell the target.' })
+  if (answer === null) frames.push({ phase: 'done', letters, remaining: [...need], used: [], result: -1, activeLine: L('return -1'), pythonLine: 19, message: 'The stickers cannot spell the target.' })
   return { input: { stickers, target }, result: answer ?? -1, letters, frames }
 }
 
-export const code = `letters = the distinct letters of target, and need = how many of each letter target requires
-start the queue with the full need, at distance 0
-while the queue is not empty
-  take the next state of remaining counts from the front of the queue
-  for each sticker
-    next = remaining counts after the sticker covers as many needed letters as it has
-    if next was already seen or did not change, skip it
-    record next with one more sticker
-    if every remaining count is zero, return that sticker count
-    add next to the queue
-return -1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minStickers(stickers, target) {
+  const letters = [...new Set(target)]
+  const need = letters.map(ch => [...target].filter(c => c === ch).length)
+  const counts = stickers.map(s => letters.map(ch => [...s].filter(c => c === ch).length))
+  const key = s => s.join(',')
+  const dist = new Map([[key(need), 0]])
+  const queue = [need]
+  for (let q = 0; q < queue.length; q++) {
+    const state = queue[q]
+    for (const sticker of counts) {
+      const next = state.map((n, j) => Math.max(0, n - sticker[j]))
+      if (next.every((n, j) => n === state[j]) || dist.has(key(next))) continue
+      dist.set(key(next), dist.get(key(state)) + 1)
+      if (next.every(n => n === 0)) return dist.get(key(next))
+      queue.push(next)
+    }
+  }
+  return -1
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
@@ -57,7 +65,7 @@ export const python = `from collections import deque
 
 
 def min_stickers(stickers, target):
-    letters = sorted(set(target))
+    letters = list(dict.fromkeys(target))
     need = tuple(target.count(ch) for ch in letters)
     counts = [tuple(sticker.count(ch) for ch in letters) for sticker in stickers]
     dist = {need: 0}

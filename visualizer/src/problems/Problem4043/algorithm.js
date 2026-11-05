@@ -26,15 +26,19 @@ if __name__ == "__main__":
     print(count_rotations(data["s"], data["k"]))
 `
 
-export const code = `count rotations with exactly k equal adjacent pairs
-  n ← length of s; answer ← 0
-  FOR each prefix length p from 0 to n - 1
-    t ← s from index p to the end, then s from index 0 to p - 1
-    pairs ← 0
-    FOR each i from 0 to n - 2
-      IF t[i] = t[i + 1] THEN pairs ← pairs + 1
-    IF pairs = k THEN answer ← answer + 1
-  RETURN answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function countRotations(s, k) {
+  const n = s.length
+  let answer = 0
+  for (let p = 0; p < n; p++) {
+    const t = s.slice(p) + s.slice(0, p)
+    let pairs = 0
+    for (let i = 0; i < n - 1; i++) {
+      if (t[i] === t[i + 1]) pairs++
+    }
+    if (pairs === k) answer++
+  }
+  return answer
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const L = s => {
   const index = code.findIndex(c => c.text.includes(s))
@@ -65,26 +69,26 @@ export function buildTrace({ s, k }) {
   const frames = []
   const rows = []
   let answer = 0
-  frames.push({ phase: 'setup', pythonLine: P('n = len(s)'), activeLine: L('n ← length of s'), p: -1, t: null, pairs: null, i: null, rows: [], answer, k,
+  frames.push({ phase: 'setup', pythonLine: P('n = len(s)'), activeLine: L('const n = s.length'), p: -1, t: null, pairs: null, i: null, rows: [], answer, k,
     message: `Rotate a ${n}-character string by each prefix length 0 to ${n - 1}; keep rotations with exactly ${k} equal neighbours.` })
   for (let p = 0; p < n; p += 1) {
     const t = s.slice(p) + s.slice(0, p)
-    frames.push({ phase: 'rotate', pythonLine: P('t = s[p:] + s[:p]'), activeLine: L('t ← s from index p'), p, t, pairs: 0, i: null, rows: [...rows], answer, k,
+    frames.push({ phase: 'rotate', pythonLine: P('t = s[p:] + s[:p]'), activeLine: L('const t = s.slice(p)'), p, t, pairs: 0, i: null, rows: [...rows], answer, k,
       message: `Prefix length ${p} moves to the end: "${t}".` })
     let pairs = 0
     for (let i = 0; i < n - 1; i += 1) {
       const equal = t[i] === t[i + 1]
       if (equal) pairs += 1
-      frames.push({ phase: 'pair', pythonLine: P('if t[i] == t[i + 1]'), activeLine: L('IF t[i] = t[i + 1]'), p, t, pairs, i, equal, rows: [...rows], answer, k,
+      frames.push({ phase: 'pair', pythonLine: P('if t[i] == t[i + 1]'), activeLine: L('if (t[i] === t[i + 1])'), p, t, pairs, i, equal, rows: [...rows], answer, k,
         message: `Positions ${i} and ${i + 1} hold ${t[i]} and ${t[i + 1]}: ${equal ? 'equal pair' : 'no pair'}. Pairs so far ${pairs}.` })
     }
     rows.push({ p, t, pairs })
     const matches = pairs === k
     if (matches) answer += 1
-    frames.push({ phase: 'tally', pythonLine: P('if pairs == k'), activeLine: L('IF pairs = k'), p, t, pairs, i: null, rows: [...rows], answer, k, matches,
+    frames.push({ phase: 'tally', pythonLine: P('if pairs == k'), activeLine: L('if (pairs === k)'), p, t, pairs, i: null, rows: [...rows], answer, k, matches,
       message: matches ? `"${t}" has exactly ${k} equal pair${k === 1 ? '' : 's'}; count it. Answer ${answer}.` : `"${t}" has ${pairs} equal pair${pairs === 1 ? '' : 's'}, not ${k}.` })
   }
-  frames.push({ phase: 'done', pythonLine: P('return answer'), activeLine: L('RETURN answer'), p: null, t: null, pairs: null, i: null, rows: [...rows], answer, k,
+  frames.push({ phase: 'done', pythonLine: P('return answer'), activeLine: L('return answer'), p: null, t: null, pairs: null, i: null, rows: [...rows], answer, k,
     message: `${answer} rotation position${answer === 1 ? '' : 's'} have exactly ${k} equal adjacent pairs.` })
   return { input: { s, k }, s, k, answer, frames }
 }

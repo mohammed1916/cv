@@ -19,7 +19,7 @@ export function buildTrace(nums) {
   let total = 0
   let lowest = 0
   const frames = [{
-    phase: 'start', activeLine: L('total = 0'), pythonLine: P('total = 0'),
+    phase: 'start', activeLine: L('let total = 0'), pythonLine: P('total = 0'),
     snapshot: { values: nums, index: null, total, lowest },
     message: `${nums.length} steps. The running total starts at 0, and 0 itself counts as the lowest point so far.`,
   }]
@@ -32,7 +32,7 @@ export function buildTrace(nums) {
     })
     lowest = Math.min(lowest, total)
     frames.push({
-      phase: 'update', activeLine: L('lowest = min'), pythonLine: P('lowest = min'),
+      phase: 'update', activeLine: L('lowest = Math.min'), pythonLine: P('lowest = min'),
       snapshot: { values: nums, index, total, lowest },
       message: `The lowest running total so far is ${lowest}.`,
     })
@@ -46,13 +46,15 @@ export function buildTrace(nums) {
   return { input: nums, result, frames }
 }
 
-export const code = `smallest start value (nums):
-  total = 0                  # running sum of the steps so far
-  lowest = 0                 # the empty prefix counts as 0
-  for x in nums:
+export const code = `function minStartValue(nums) {
+  let total = 0
+  let lowest = 0
+  for (const x of nums) {
     total += x
-    lowest = min(lowest, total)
-  return 1 - lowest          # lifts the lowest point to exactly 1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    lowest = Math.min(lowest, total)
+  }
+  return 1 - lowest
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def min_start(nums):
     total = 0

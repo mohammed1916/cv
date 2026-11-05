@@ -17,11 +17,13 @@ export default function SpanScanView({ run, step }) {
           const inside = lo >= 0 && i >= lo && i <= hi
           const isStart = i === step.l
           const isEnd = i === step.k
+          const isReach = step.r >= 0 && i === step.r
+          const marks = [isStart ? 'l' : '', isReach ? 'r' : '', isEnd ? 'k' : ''].filter(Boolean).join(' ')
           return (
             <li key={i} className={`ssv__cell${inside ? ' is-inside' : ''}${isEnd ? ' is-end' : ''}${isStart ? ' is-start' : ''}`}>
               <span className="ssv__pos">{i}</span>
               <span className="ssv__ch">{ch}</span>
-              <span className="ssv__mark">{isStart ? 'l' : ''}{isEnd && !isStart ? 'k' : ''}{isEnd && isStart ? ' l,k' : ''}</span>
+              <span className="ssv__mark">{marks}</span>
             </li>
           )
         })}

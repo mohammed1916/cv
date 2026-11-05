@@ -8,6 +8,27 @@ export function parseInput(text) {
   return { n, ranges }
 }
 
+// Each line of JavaScript is paired with the Python line on the same row.
+const LINES = [
+  ['function minTaps(n, ranges) {', 'def min_taps(n, ranges):'],
+  ['  const spans = ranges.map((r, i) => ({ left: Math.max(0, i - r), right: Math.min(n, i + r) })).sort((p, q) => p.left - q.left || q.right - p.right)', '    spans = sorted((max(0, i - r), min(n, i + r)) for i, r in enumerate(ranges))'],
+  ['  let covered = 0, farthest = 0, taps = 0, k = 0', '    covered = farthest = taps = k = 0'],
+  ['  while (covered < n) {', '    while covered < n:'],
+  ['    while (k < spans.length && spans[k].left <= covered) {', '        while k < len(spans) and spans[k][0] <= covered:'],
+  ['      farthest = Math.max(farthest, spans[k].right); k++', '            farthest = max(farthest, spans[k][1]); k += 1'],
+  ['    }', ''],
+  ['    if (farthest <= covered) return -1', '        if farthest <= covered: return -1'],
+  ['    taps++; covered = farthest', '        taps += 1; covered = farthest'],
+  ['  }', ''],
+  ['  return taps', '    return taps'],
+  ['}', ''],
+]
+const codeLines = LINES.map(([js]) => js)
+export const code = codeLines.map((text, index) => ({ line: index + 1, text }))
+const L = s => codeLines.findIndex(c => c.includes(s)) + 1
+export const python = LINES.map(([, py]) => py).join('\n')
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 export function buildTrace(input) {
   const { n, ranges } = input
   const spans = ranges
@@ -17,48 +38,20 @@ export function buildTrace(input) {
   let farthest = 0
   let taps = 0
   let k = 0
-  const frames = [{ phase: 'start', activeLine: L('set covered to zero'), pythonLine: 3, covered, taps, farthest, message: 'Nothing is watered yet. The garden runs from 0 to n.' }]
+  const frames = [{ phase: 'start', activeLine: L('let covered = 0'), pythonLine: P('covered = farthest'), covered, taps, farthest, message: 'Nothing is watered yet. The garden runs from 0 to n.' }]
   while (covered < n) {
     while (k < spans.length && spans[k].left <= covered) {
       farthest = Math.max(farthest, spans[k].right)
       k += 1
     }
     if (farthest <= covered) {
-      frames.push({ phase: 'stuck', activeLine: L('return minus one'), pythonLine: 12, covered, taps, farthest, message: `No tap reaches past ${covered}, so the garden cannot be watered.` })
+      frames.push({ phase: 'stuck', activeLine: L('if (farthest <= covered)'), pythonLine: P('return -1'), covered, taps, farthest, message: `No tap reaches past ${covered}, so the garden cannot be watered.` })
       return { input, result: -1, frames }
     }
     taps += 1
     covered = farthest
-    frames.push({ phase: 'open', activeLine: L('open one more tap'), pythonLine: 14, covered, taps, farthest, message: `Open another tap; the watered range now reaches ${covered}.` })
+    frames.push({ phase: 'open', activeLine: L('taps++'), pythonLine: P('taps += 1'), covered, taps, farthest, message: `Open another tap; the watered range now reaches ${covered}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return taps'), pythonLine: 15, covered, taps, farthest, message: `Fewest taps: ${taps}.` })
+  frames.push({ phase: 'done', activeLine: L('return taps'), pythonLine: P('return taps'), covered, taps, farthest, message: `Fewest taps: ${taps}.` })
   return { input, result: taps, frames }
 }
-
-export const code = `fewest taps that water the garden from zero to n:
-  for each tap make its watered span, clipped to the garden
-  sort the spans by where they start
-  set covered to zero, farthest to zero and taps to zero
-  while covered is less than n
-    among spans starting at or before covered, keep the farthest right end
-    if farthest is not beyond covered then return minus one
-    open one more tap by adding one to taps and setting covered to farthest
-  return taps`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-
-export const python = `def min_taps(n, ranges):
-    spans = sorted((max(0, i - r), min(n, i + r)) for i, r in enumerate(ranges))
-    covered = 0
-    farthest = 0
-    taps = 0
-    k = 0
-    while covered < n:
-        while k < len(spans) and spans[k][0] <= covered:
-            farthest = max(farthest, spans[k][1])
-            k += 1
-        if farthest <= covered:
-            return -1
-        taps += 1
-        covered = farthest
-    return taps
-`

@@ -20,21 +20,21 @@ export function buildTrace({ m, queries }) {
   let perm = Array.from({ length: m }, (_, i) => i + 1)
   const result = []
   const frames = [{
-    phase: 'start', activeLine: L('perm = [1'), pythonLine: P('perm = list'),
+    phase: 'start', activeLine: L('let perm = Array'), pythonLine: P('perm = list'),
     snapshot: { perm: [...perm], query: null, position: null },
     message: `Start with 1 to ${m} in order. There are ${queries.length} queries to answer in turn.`,
   }]
   queries.forEach((q, qi) => {
     const position = perm.indexOf(q)
     frames.push({
-      phase: 'inspect', activeLine: L('p = index of q'), pythonLine: P('p = perm.index'),
+      phase: 'inspect', activeLine: L('const p = perm.indexOf'), pythonLine: P('p = perm.index'),
       snapshot: { perm: [...perm], query: q, position },
       message: `Query ${qi + 1} asks for ${q}. It sits at zero-based position ${position}, so record ${position}.`,
     })
     result.push(position)
     perm = [q, ...perm.filter(v => v !== q)]
     frames.push({
-      phase: 'update', activeLine: L('perm.insert(0, q)'), pythonLine: P('perm.insert(0, q)'),
+      phase: 'update', activeLine: L('perm.unshift(q)'), pythonLine: P('perm.insert(0, q)'),
       snapshot: { perm: [...perm], query: q, position },
       message: `Move ${q} to the front: [${perm.join(', ')}]. Entries before its old place each moved one slot right.`,
     })
@@ -47,15 +47,17 @@ export function buildTrace({ m, queries }) {
   return { input: { m, queries }, result, frames }
 }
 
-export const code = `answer each query by moving it to the front:
-  perm = [1, 2, ..., m]
-  result = []
-  for each query q:
-    p = index of q in perm
-    result.append(p)
-    remove q from perm
-    perm.insert(0, q)
-  return result`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function processQueries(queries, m) {
+  let perm = Array.from({ length: m }, (_, i) => i + 1)
+  const result = []
+  for (const q of queries) {
+    const p = perm.indexOf(q)
+    result.push(p)
+    perm.splice(p, 1)
+    perm.unshift(q)
+  }
+  return result
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def process_queries(queries, m):
     perm = list(range(1, m + 1))

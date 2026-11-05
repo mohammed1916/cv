@@ -26,7 +26,7 @@ export default function SearchUnknownSize() {
     return <>
       <IndexedSequence label="Reader (indices probed so far)" length={shown} active={step.probe ?? -1}
         valueAt={i => (i < run.arr.length ? run.arr[i] : '∞')}
-        roleAt={i => (step.reads.includes(i) ? 'read' : '')} />
+        roleAt={i => (i === step.left ? 'lo' : i === step.right ? 'hi' : step.reads.includes(i) ? 'read' : '')} />
       <AnswerRangeBar title="Index search range" min={0} max={Math.max(shown - 1, step.right)} low={step.left} high={step.right} />
       <output aria-label="Bounds">{`Search range [${step.left}, ${step.right}]`}{step.result !== null && step.result !== -1 ? `, found at ${step.result}` : ''}</output>
     </>

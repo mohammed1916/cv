@@ -1,13 +1,13 @@
-export const code = [
-  { line: 1, text: "sum of encrypted integers (nums):" },
-  { line: 2, text: "  set total to 0" },
-  { line: 3, text: "  for each number x in nums" },
-  { line: 4, text: "    write x as its digits" },
-  { line: 5, text: "    find the largest digit" },
-  { line: 6, text: "    add the largest digit repeated once per digit to total" },
-  { line: 7, text: "  return total" },
-];
-
+export const code = `function sumOfEncryptedInt(nums) {
+  let total = 0
+  for (const x of nums) {
+    const digits = String(x)
+    const largest = digits.split('').reduce((a, b) => (b > a ? b : a))
+    total += Number(largest.repeat(digits.length))
+  }
+  return total
+}`.split('\n').map((text, index) => ({ line: index + 1, text }));
+const L = s => { const i = code.findIndex(c => c.text.includes(s)); if (i < 0) throw new Error('No code line: ' + s); return i + 1 };
 export const python = `def sumOfEncryptedInt(nums):
     total = 0
     for x in nums:
@@ -46,15 +46,15 @@ export function buildTrace(input) {
   const frames = [];
   const encrypted = [];
   let total = 0;
-  frames.push({ phase: "start", activeLine: 2, pythonLine: 2, message: "Start with total = 0.", index: -1, encrypted: [], total });
+  frames.push({ phase: "start", activeLine: L('let total = 0'), pythonLine: 2, message: "Start with total = 0.", index: -1, encrypted: [], total });
   for (let i = 0; i < nums.length; i++) {
-    frames.push({ phase: "scan", activeLine: 3, pythonLine: 3, message: `Take nums[${i}] = ${nums[i]}.`, index: i, encrypted: [...encrypted], total });
+    frames.push({ phase: "scan", activeLine: L('for (const x of nums)'), pythonLine: 3, message: `Take nums[${i}] = ${nums[i]}.`, index: i, encrypted: [...encrypted], total });
     const value = encrypt(nums[i]);
-    frames.push({ phase: "encrypt", activeLine: 5, pythonLine: 5, message: `Every digit of ${nums[i]} becomes its largest digit, giving ${value}.`, index: i, encrypted: [...encrypted], total });
+    frames.push({ phase: "encrypt", activeLine: L('const largest'), pythonLine: 5, message: `Every digit of ${nums[i]} becomes its largest digit, giving ${value}.`, index: i, encrypted: [...encrypted], total });
     total += value;
     encrypted.push(value);
-    frames.push({ phase: "add", activeLine: 6, pythonLine: 6, message: `Add ${value} to the total, now ${total}.`, index: i, encrypted: [...encrypted], total });
+    frames.push({ phase: "add", activeLine: L('total +='), pythonLine: 6, message: `Add ${value} to the total, now ${total}.`, index: i, encrypted: [...encrypted], total });
   }
-  frames.push({ phase: "done", activeLine: 7, pythonLine: 7, message: `Return ${total}.`, index: -1, encrypted: [...encrypted], total });
+  frames.push({ phase: "done", activeLine: L('return total'), pythonLine: 7, message: `Return ${total}.`, index: -1, encrypted: [...encrypted], total });
   return { input, result: total, frames };
 }

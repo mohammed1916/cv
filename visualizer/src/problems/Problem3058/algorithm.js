@@ -1,4 +1,4 @@
-// Knowledge-derived teaching model. The sample table is invented for this visualization.
+// Teaching teaching model. The sample table is invented for this visualization.
 // Friendships are undirected: each pair is normalized to (smaller id, larger id) and duplicates are removed.
 export const sql = `WITH pairs AS (
   SELECT DISTINCT

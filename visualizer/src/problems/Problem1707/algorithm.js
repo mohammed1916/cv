@@ -27,21 +27,24 @@ export function buildTrace({ nums, queries }) {
     }
   }
   const answers = []
-  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('build a binary trie'), q: -1, x: null, m: null, answer: null, chosen: null, answers: [], message: `Insert ${nums.length} numbers into the trie.` }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('const BITS = 5'), q: -1, x: null, m: null, answer: null, chosen: null, answers: [], walk: [], message: `Insert ${nums.length} numbers into the trie.` }]
   queries.forEach(([x, m], q) => {
     let answer
     let chosen = null
     let activeLine
+    const walk = []
     if (root.min > m) {
       answer = -1
-      activeLine = L('if the root')
+      activeLine = L('if (root.min > m)')
     } else {
       let node = root
       let best = 0
       for (let b = BITS - 1; b >= 0; b--) {
         const want = 1 - ((x >> b) & 1)
         const child = node.child[want]
-        if (child && child.min <= m) {
+        const took = child && child.min <= m ? want : 1 - want
+        walk.push({ bit: b, xBit: (x >> b) & 1, want, took, ok: took === want })
+        if (took === want) {
           best |= 1 << b
           node = child
         } else {
@@ -50,54 +53,74 @@ export function buildTrace({ nums, queries }) {
       }
       answer = best
       chosen = x ^ best
-      activeLine = L('walk the trie')
+      activeLine = L('let best = 0')
     }
     answers.push(answer)
-    frames.push({ phase: 'query', pythonLine: answer === -1 ? 16 : 28, activeLine, q, x, m, answer, chosen, answers: [...answers], message: answer === -1 ? `No number is at most ${m}, so the answer is -1.` : `Best partner for ${x} under ${m} is ${chosen}, giving ${answer}.` })
+    frames.push({ phase: 'query', pythonLine: answer === -1 ? 16 : 28, activeLine, q, x, m, answer, chosen, answers: [...answers], walk, message: answer === -1 ? `No number is at most ${m}, so the answer is -1.` : `Best partner for ${x} under ${m} is ${chosen}, giving ${answer}.` })
   })
-  frames.push({ phase: 'done', pythonLine: 29, activeLine: L('return answers'), q: queries.length, x: null, m: null, answer: null, chosen: null, answers: [...answers], message: `Answers: [${answers.join(', ')}].` })
+  frames.push({ phase: 'done', pythonLine: 29, activeLine: L('return queries.map'), q: queries.length, x: null, m: null, answer: null, chosen: null, answers: [...answers], walk: [], message: `Answers: [${answers.join(', ')}].` })
   return { input: { nums, queries }, result: answers, frames }
 }
 
-export const code = `maximum xor of x with an element of nums that is at most m, for each query
-build a binary trie of nums where each node stores the smallest value below it
-set answers to an empty list
-for each query (x, m) in order do
-  if the root's smallest value is above m then answer -1
-  otherwise walk the trie from the top bit down
-    prefer the child whose bit is opposite to x's bit when its smallest value is at most m
-    otherwise take the other child
-  append the answer to answers
-return answers`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function maximizeXorWithElement(nums, queries) {
+  const BITS = 5
+  const root = { child: [null, null], min: Infinity }
+  for (const v of nums) {
+    let node = root
+    node.min = Math.min(node.min, v)
+    for (let b = BITS - 1; b >= 0; b--) {
+      const bit = (v >> b) & 1
+      if (!node.child[bit]) node.child[bit] = { child: [null, null], min: Infinity }
+      node = node.child[bit]
+      node.min = Math.min(node.min, v)
+    }
+  }
+  return queries.map(([x, m]) => {
+    if (root.min > m) return -1
+    let node = root
+    let best = 0
+    for (let b = BITS - 1; b >= 0; b--) {
+      const want = 1 - ((x >> b) & 1)
+      const child = node.child[want]
+      if (child && child.min <= m) {
+        best |= 1 << b
+        node = child
+      } else {
+        node = node.child[1 - want]
+      }
+    }
+    return best
+  })
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def max_xor_with_element(nums, queries):
     BITS = 5
-    root = [None, None, 10 ** 9]
+    root = {'child': [None, None], 'min': float('inf')}
     for v in nums:
         node = root
-        node[2] = min(node[2], v)
+        node['min'] = min(node['min'], v)
         for b in range(BITS - 1, -1, -1):
             bit = (v >> b) & 1
-            if node[bit] is None:
-                node[bit] = [None, None, 10 ** 9]
-            node = node[bit]
-            node[2] = min(node[2], v)
+            if node['child'][bit] is None:
+                node['child'][bit] = {'child': [None, None], 'min': float('inf')}
+            node = node['child'][bit]
+            node['min'] = min(node['min'], v)
     answers = []
     for x, m in queries:
-        if root[2] > m:
+        if root['min'] > m:
             answers.append(-1)
             continue
         node = root
         best = 0
         for b in range(BITS - 1, -1, -1):
             want = 1 - ((x >> b) & 1)
-            child = node[want]
-            if child is not None and child[2] <= m:
+            child = node['child'][want]
+            if child is not None and child['min'] <= m:
                 best |= 1 << b
                 node = child
             else:
-                node = node[1 - want]
+                node = node['child'][1 - want]
         answers.append(best)
     return answers
 `

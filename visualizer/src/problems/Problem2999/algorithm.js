@@ -28,30 +28,41 @@ export function buildTrace(input) {
     return total + 1
   }
   const countUpTo = x => (x < sValue ? 0 : countPrefixes(Math.floor((x - sValue) / base)))
-  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('if some digit of s'), bound: null, count: null, message: `Every digit of s must be at most ${limit}, and then each valid number is a prefix followed by s.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('if ([...s].some'), bound: null, count: null, message: `Every digit of s must be at most ${limit}, and then each valid number is a prefix followed by s.` }]
   if ([...s].some(ch => Number(ch) > limit)) {
     frames.push({ pythonLine: 3, phase: 'done', activeLine: L('return 0'), bound: null, count: null, message: 's uses a digit above the limit, so no number can end with it.' })
     return { input, result: 0, frames }
   }
   const high = countUpTo(Number(finish))
-  frames.push({ pythonLine: 25, phase: 'upper', activeLine: L('set high to'), bound: Number(finish), count: high, message: `Valid numbers up to ${finish}: ${high}.` })
+  frames.push({ pythonLine: 25, phase: 'upper', activeLine: L('const high = countUpTo'), bound: Number(finish), count: high, message: `Valid numbers up to ${finish}: ${high}.` })
   const low = countUpTo(Number(start) - 1)
-  frames.push({ pythonLine: 25, phase: 'lower', activeLine: L('set low to'), bound: Number(start) - 1, count: low, message: `Valid numbers up to ${Number(start) - 1}: ${low}.` })
+  frames.push({ pythonLine: 25, phase: 'lower', activeLine: L('const low = countUpTo'), bound: Number(start) - 1, count: low, message: `Valid numbers up to ${Number(start) - 1}: ${low}.` })
   const result = high - low
   frames.push({ pythonLine: 25, phase: 'done', activeLine: L('return high - low'), bound: null, count: result, message: `Powerful integers in [${start}, ${finish}]: ${result}.` })
   return { input, result, frames }
 }
 
-export const code = `count powerful integers from start to finish:
-  if some digit of s is above limit then
-    return 0
-  set high to the count of valid numbers up to finish
-  set low to the count of valid numbers up to start - 1
+export const code = `function countPowerfulIntegers(start, finish, limit, s) {
+  if ([...s].some(ch => Number(ch) > limit)) return 0
+  const sValue = Number(s)
+  const base = 10 ** s.length
+  const countPrefixes = bound => {
+    if (bound < 0) return 0
+    const digits = String(bound)
+    let total = 0
+    for (let i = 0; i < digits.length; i++) {
+      const d = Number(digits[i])
+      const rest = digits.length - i - 1
+      total += Math.min(d, limit + 1) * (limit + 1) ** rest
+      if (d > limit) return total
+    }
+    return total + 1
+  }
+  const countUpTo = x => (x < sValue ? 0 : countPrefixes(Math.floor((x - sValue) / base)))
+  const high = countUpTo(Number(finish))
+  const low = countUpTo(Number(start) - 1)
   return high - low
-where a valid number up to x is counted as:
-  if x is below the value of s then count 0
-  set p to (x - value of s) divided by 10 to the power of len(s), rounded down
-  count the p from 0 to p whose digits are all at most limit`.split('\n').map((text, index) => ({ line: index + 1, text }))
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def count_powerful_integers(start, finish, limit, s):

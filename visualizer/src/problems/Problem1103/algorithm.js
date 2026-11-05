@@ -7,43 +7,44 @@ export function parseInput(text) {
   return { candies, numPeople }
 }
 
+// Each line of JavaScript is paired with the Python line on the same row.
+const LINES = [
+  ['function distributeCandies(candies, numPeople) {', 'def distribute_candies(candies, numPeople):'],
+  ['  const totals = Array(numPeople).fill(0)', '    result = [0] * numPeople'],
+  ['  let left = candies', '    left = candies'],
+  ['  let give = 1', '    give = 1'],
+  ['  let person = 0', '    person = 0'],
+  ['  while (left > 0) {', '    while left > 0:'],
+  ['    const amount = Math.min(give, left)', '        amount = min(give, left)'],
+  ['    totals[person] += amount', '        result[person] += amount'],
+  ['    left -= amount', '        left -= amount'],
+  ['    give += 1', '        give += 1'],
+  ['    person = (person + 1) % numPeople', '        person = (person + 1) % numPeople'],
+  ['  }', ''],
+  ['  return totals', '    return result'],
+  ['}', ''],
+]
+const codeLines = LINES.map(([js]) => js)
+export const code = codeLines.map((text, index) => ({ line: index + 1, text }))
+const L = s => codeLines.findIndex(c => c.includes(s)) + 1
+export const python = LINES.map(([, py]) => py).join('\n')
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 export function buildTrace(input) {
   const { candies, numPeople } = input
   const totals = Array(numPeople).fill(0)
   let left = candies
   let give = 1
   let person = 0
-  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set every person'), person: -1, totals: [...totals], left, message: `${candies} candies and ${numPeople} people. The first gift is 1.` }]
+  const frames = [{ phase: 'start', pythonLine: P('result = [0]'), activeLine: L('const totals'), person: -1, totals: [...totals], left, message: `${candies} candies and ${numPeople} people. The first gift is 1.` }]
   while (left > 0) {
     const amount = Math.min(give, left)
     totals[person] += amount
     left -= amount
-    frames.push({ phase: 'give', pythonLine: 7, activeLine: L('give the smaller'), person, totals: [...totals], left, message: `Give ${amount} to person ${person}. ${left} candies remain.` })
+    frames.push({ phase: 'give', pythonLine: P('amount = min'), activeLine: L('const amount'), person, totals: [...totals], left, message: `Give ${amount} to person ${person}. ${left} candies remain.` })
     give += 1
     person = (person + 1) % numPeople
   }
-  frames.push({ phase: 'done', pythonLine: 11, activeLine: L('return the totals'), person: -1, totals: [...totals], left, message: `Final totals: ${totals.join(', ')}.` })
+  frames.push({ phase: 'done', pythonLine: P('return result'), activeLine: L('return totals'), person: -1, totals: [...totals], left, message: `Final totals: ${totals.join(', ')}.` })
   return { input, result: totals, frames }
 }
-
-export const code = `distribute the candies
-  set every person's total to 0, the next gift to 1, and the person to 0
-  while candies remain
-    give the smaller of the next gift and the candies left to the current person
-    subtract that from the candies left, and add 1 to the next gift
-    move to the next person in the circle
-  return the totals`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-
-export const python = `def distribute_candies(candies, numPeople):
-    result = [0] * numPeople
-    give = 1
-    person = 0
-    while candies > 0:
-        amount = min(give, candies)
-        result[person] += amount
-        candies -= amount
-        give += 1
-        person = (person + 1) % numPeople
-    return result
-`

@@ -24,13 +24,16 @@ const PYTHON_LINES = [
 ];
 
 const CODE_LINES = [
-  "FUNCTION invalidTransactions(transactions)",
-  "  invalid <- empty set of indices",
-  "  FOR each index i",
-  "    IF amount(i) > 1000 THEN flag i",
-  "    FOR each other index j",
-  "      IF same name AND different city AND |time(i) - time(j)| <= 60 THEN flag i and stop j-loop",
-  "  RETURN transactions whose index is flagged, in order",
+  "function invalidTransactions(transactions) {",
+  "  const invalid = new Set(), parsed = transactions.map(t => t.split(','))",
+  "  for (let i = 0; i < parsed.length; i++) {",
+  "    if (Number(parsed[i][2]) > 1000) { invalid.add(i); continue }",
+  "    for (let j = 0; j < parsed.length; j++) {",
+  "      if (j !== i && sameName && otherCity && within60) { invalid.add(i); break }",
+  "    }",
+  "  }",
+  "  return transactions.filter((_, i) => invalid.has(i))",
+  "}",
 ];
 
 const MAX_TRANSACTIONS = 50;
@@ -39,8 +42,6 @@ const NAME_PATTERN = /^[a-z]{1,10}$/;
 export const python = PYTHON_LINES.join("\n");
 export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }));
 
-// Pseudocode line -> Python line, used for Python playback highlighting.
-export const pythonLineMap = { 1: 1, 2: 6, 3: 7, 4: 8, 5: 10, 6: 11, 7: 14 };
 
 export function parseInput(text) {
   let obj;

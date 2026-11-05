@@ -13,7 +13,7 @@ export function buildTrace(spec) {
   // on[p] for positions 1..n; the padding at 0 and n + 1 is always dark.
   const on = Array(n + 2).fill(false)
   const lit = () => on.slice(1, n + 1)
-  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('start with every bulb off'), day: 0, position: null, lit: lit(), hit: null, result: null, message: `Bulbs come on one per day. Look for two lit bulbs with exactly ${k} dark bulbs between them.` }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('const on = Array(n + 2)'), day: 0, position: null, left: null, right: null, lit: lit(), hit: null, result: null, message: `Bulbs come on one per day. Look for two lit bulbs with exactly ${k} dark bulbs between them.` }]
   let answer = -1
   for (let day = 1; day <= n; day++) {
     const position = bulbs[day - 1]
@@ -24,23 +24,34 @@ export function buildTrace(spec) {
     const leftHit = left >= 1 && on[left] && between(left, position)
     const rightHit = right <= n && on[right] && between(position, right)
     const hit = leftHit || rightHit
-    frames.push({ phase: 'light', pythonLine: 5, activeLine: L('light the bulb'), day, position, lit: lit(), hit: hit ? (leftHit ? left : right) : null, result: null, message: hit ? `Day ${day}: bulb ${position} lights, and bulb ${leftHit ? left : right} has exactly ${k} dark bulbs between them.` : `Day ${day}: bulb ${position} lights. No lit pair fits the gap yet.` })
+    frames.push({ phase: 'light', pythonLine: 5, activeLine: L('on[pos] = true'), day, position, left, right, lit: lit(), hit: hit ? (leftHit ? left : right) : null, result: null, message: hit ? `Day ${day}: bulb ${position} lights, and bulb ${leftHit ? left : right} has exactly ${k} dark bulbs between them.` : `Day ${day}: bulb ${position} lights. No lit pair fits the gap yet.` })
     if (hit) {
       answer = day
-      frames.push({ phase: 'match', pythonLine: leftHit ? 8 : 10, activeLine: leftHit ? L('the left bulb is lit') : L('the right bulb is lit'), day, position, lit: lit(), hit: leftHit ? left : right, result: day, message: `The first day with the pattern is day ${day}.` })
+      frames.push({ phase: 'match', pythonLine: leftHit ? 8 : 10, activeLine: leftHit ? L('if (left >= 1') : L('if (right <= n'), day, position, left, right, lit: lit(), hit: leftHit ? left : right, result: day, message: `The first day with the pattern is day ${day}.` })
       break
     }
   }
-  if (answer === -1) frames.push({ phase: 'done', pythonLine: 11, activeLine: L('return -1'), day: n, position: null, lit: lit(), hit: null, result: -1, message: 'No day produces the pattern.' })
+  if (answer === -1) frames.push({ phase: 'done', pythonLine: 11, activeLine: L('return -1'), day: n, position: null, left: null, right: null, lit: lit(), hit: null, result: -1, message: 'No day produces the pattern.' })
   return { input: spec, result: answer, frames }
 }
 
-export const code = `start with every bulb off, and let on mark the lit positions
-for each day, light the bulb at the given position
-  compute left and right, the positions k + 1 steps away on each side
-  if the left bulb is lit with only dark bulbs between it and this one, then return day
-  if the right bulb is lit with only dark bulbs between this one and it, then return day
-return -1 (no day produces the pattern)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function kEmptySlots(bulbs, k) {
+  const n = bulbs.length
+  const on = Array(n + 2).fill(false)
+  const onlyDarkBetween = (a, b) => {
+    for (let p = a + 1; p < b; p++) if (on[p]) return false
+    return true
+  }
+  for (let day = 1; day <= n; day++) {
+    const pos = bulbs[day - 1]
+    on[pos] = true
+    const left = pos - k - 1
+    const right = pos + k + 1
+    if (left >= 1 && on[left] && onlyDarkBetween(left, pos)) return day
+    if (right <= n && on[right] && onlyDarkBetween(pos, right)) return day
+  }
+  return -1
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 

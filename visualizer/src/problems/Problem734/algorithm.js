@@ -29,12 +29,17 @@ export function buildTrace(spec) {
   return { input: spec, s1, s2, result: true, frames }
 }
 
-export const code = `set similar to every listed pair, in both orders
-if the lengths differ, return false
-for each position i, let a be s1[i] and b be s2[i]
-  if a and b are equal, or (a, b) is in similar, keep going
-  otherwise return false, because a and b are neither equal nor a listed pair
-return true`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function areSentencesSimilar(s1, s2, pairs) {
+  const similar = new Set(pairs.flatMap(([a, b]) => [\`\${a} \${b}\`, \`\${b} \${a}\`])) // set similar to every listed pair, in both orders
+  if (s1.length !== s2.length) return false // if the lengths differ, return false
+  for (let i = 0; i < s1.length; i++) {
+    const a = s1[i]
+    const b = s2[i]
+    if (a === b || similar.has(\`\${a} \${b}\`)) continue // if a and b are equal, or (a, b) is in similar, keep going
+    return false // otherwise return false, because a and b are neither equal nor a listed pair
+  }
+  return true
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def are_sentences_similar(s1, s2, pairs):
     if len(s1) != len(s2):

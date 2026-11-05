@@ -23,7 +23,7 @@ export default function XorBeauty() {
     <IndexedSequence label="Numbers" length={run.input.nums.length} valueAt={i => run.input.nums[i]} active={step.index} roleAt={i => (i < step.index ? 'folded' : '')} />
     <output aria-label="Beauty">{`Running xor-beauty: ${step.beauty}`}</output>
   </>} renderReasoning={() => <>
-    <p>Fix two indices i and j. Over all k, the value (nums[i] AND nums[j]) OR nums[k] is an xor of terms that pair up and cancel, leaving the single values that the same argument reduces to.</p>
-    <p>The end result is the xor of every element, computed in one pass.</p>
+    <p>Fix the first two indices. For each bit, the pairs (i, j) whose OR has that bit set are counted by parity, and that parity matches the bit in the xor of every element.</p>
+    <p>So the answer is the xor of every element, computed in one pass. The folded cells show what has already been xored in.</p>
   </>} />
 }

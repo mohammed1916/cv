@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import { buildTrace, parseInput, code, python, phases, inputLabel, complexity, examples } from './algorithm'
 
 const definition = {
   number: '1094',
@@ -8,14 +8,10 @@ const definition = {
   build: buildTrace,
   code,
   python,
-  inputLabel: 'JSON object with capacity and trips, each trip [passengers, start, end]',
+  inputLabel,
   url: 'https://leetcode.com/problems/car-pooling/',
-  complexity: 'O(t + S) time for t trips and S stops, here at most 21 stops. Extra space is O(S).',
-  examples: [
-    { label: 'Fits with room', input: '{"capacity":4,"trips":[[2,0,3],[2,3,6],[1,1,5]]}' },
-    { label: 'Over capacity', input: '{"capacity":2,"trips":[[2,0,3],[2,3,6],[1,1,5]]}' },
-    { label: 'Exact fill', input: '{"capacity":2,"trips":[[2,0,4]]}' },
-  ],
+  complexity,
+  examples,
 }
 
 export default function CarPooling() {

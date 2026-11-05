@@ -18,7 +18,7 @@ export function buildTrace(k) {
       frames.push({ phase: 'shrink', activeLine: 6, pythonLine: 12, lo, hi, mid, z, terms, message: `${z} >= ${k}: ${mid} is a candidate, so keep it and search lower (hi = ${mid}).` })
     } else {
       lo = mid + 1
-      frames.push({ phase: 'raise', activeLine: 8, pythonLine: 14, lo, hi, mid, z, terms, message: `${z} < ${k}: too few zeros, so the answer is above ${mid} (lo = ${lo}).` })
+      frames.push({ phase: 'raise', activeLine: 7, pythonLine: 14, lo, hi, mid, z, terms, message: `${z} < ${k}: too few zeros, so the answer is above ${mid} (lo = ${lo}).` })
     }
   }
   const zl = zeros(lo)
@@ -26,15 +26,25 @@ export function buildTrace(k) {
   frames.push({ phase: 'done', activeLine: 9, pythonLine: 15, lo, hi, mid: lo, z: zl, terms: [], message: zl === k ? `zeros(${lo}) = ${k} exactly. zeros jumps only at multiples of 5, so x = ${lo}..${lo + 4} all give k zeros: answer 5.` : `zeros(${lo}) = ${zl}, which skips over ${k}: no x gives exactly ${k} zeros, answer 0.` })
   return { input: k, result, frames }
 }
-export const code = `define zeros(x) as the trailing zeros of x!, which is floor(x/5) + floor(x/25) + ...
-set lo = 0 and hi = 5 * (k + 1)
-while lo < hi
-  set mid = (lo + hi) / 2, using integer division
-  if zeros(mid) is at least k then
-    set hi = mid
-  otherwise
-    set lo = mid + 1
-if zeros(lo) equals k then return 5, otherwise return 0`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function preimageSizeFZF(k) {
+  const zeros = x => {
+    let z = 0
+    while (x) {
+      x = Math.floor(x / 5)
+      z += x
+    }
+    return z
+  }
+  let lo = 0
+  let hi = 5 * (k + 1)
+  while (lo < hi) {
+    const mid = Math.floor((lo + hi) / 2)
+    if (zeros(mid) >= k) hi = mid
+    else lo = mid + 1
+  }
+  return zeros(lo) === k ? 5 : 0
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
 export const python = `def preimage_size_fzf(k):
     def zeros(x):
         z = 0

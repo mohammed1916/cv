@@ -13,9 +13,9 @@ const definition = {
   url: 'https://leetcode.com/problems/apply-operations-to-make-sum-of-array-greater-than-or-equal-to-k/',
   complexity: 'O(k) time in this trace, trying every value x for the single repeated element.',
   examples: [
-    { label: 'Example 1', input: '1' },
+    { label: 'Example 1', input: '7' },
     { label: 'Example 2', input: '2' },
-    { label: 'Example 3', input: '11' },
+    { label: 'Example 3', input: '20' },
   ],
 }
 

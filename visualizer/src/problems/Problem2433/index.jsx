@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-original-array-of-prefix-xor/',
   complexity: 'O(n) time and O(n) space for the answer.',
   examples: [
-    { label: 'Example 1', input: '{"pref":[5,2,0,3,1]}' },
+    { label: 'Four values', input: '{"pref":[6,3,5,4]}' },
     { label: 'Single value', input: '{"pref":[13]}' },
   ],
 }

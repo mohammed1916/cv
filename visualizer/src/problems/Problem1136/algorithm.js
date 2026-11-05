@@ -30,21 +30,31 @@ export function parseInput(text) {
   return { courses, relations }
 }
 
-export const code = `parallel courses (courses, relations):
-  count the unmet prerequisites of each course
-  available = courses with no unmet prerequisites
-  semesters = 0; finished = 0
-  while available is not empty:
-    semesters = semesters + 1
-    upcoming = empty
-    for each course c in available:
-      finished = finished + 1
-      for each course d that needs c:
-        reduce the unmet count of d by 1
-        if the count of d is 0 then add d to upcoming
+export const code = `function minimumSemesters(courses, relations) {
+  const indegree = Array(courses + 1).fill(0)
+  const neededBy = Array.from({ length: courses + 1 }, () => [])
+  for (const [before, after] of relations) {
+    neededBy[before].push(after)
+    indegree[after]++
+  }
+  let available = []
+  for (let c = 1; c <= courses; c++) if (indegree[c] === 0) available.push(c)
+  let semesters = 0
+  let finished = 0
+  while (available.length) {
+    semesters++
+    const upcoming = []
+    for (const c of available) {
+      finished++
+      for (const d of neededBy[c]) {
+        indegree[d]--
+        if (indegree[d] === 0) upcoming.push(d)
+      }
+    }
     available = upcoming
-  if finished equals courses then return semesters
-  otherwise return -1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+  }
+  return finished === courses ? semesters : -1
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def minimum_semesters(courses, relations):
     indegree = [0] * (courses + 1)
@@ -90,7 +100,7 @@ export function buildTrace(input) {
   while (available.length) {
     semesters++
     frames.push({
-      phase: 'unlock', activeLine: 3, pythonLine: P('available = [c for'),
+      phase: 'unlock', activeLine: 12, pythonLine: P('available = [c for'),
       message: `Semester ${semesters}: courses ${available.join(', ')} have no unmet prerequisites.`,
       snapshot: { unmet: counts(), available: [...available], semester: semesters, finished: [...finished], current: [...available] },
     })
@@ -103,7 +113,7 @@ export function buildTrace(input) {
       }
     }
     frames.push({
-      phase: 'semester', activeLine: 6, pythonLine: P('for d in needed_by'),
+      phase: 'semester', activeLine: 19, pythonLine: P('for d in needed_by'),
       message: upcoming.length ? `Finishing semester ${semesters} unlocks ${upcoming.join(', ')} for the next semester.` : `Finishing semester ${semesters} unlocks nothing new.`,
       snapshot: { unmet: counts(), available: [...upcoming], semester: semesters, finished: [...finished], current: [...available] },
     })
@@ -111,7 +121,7 @@ export function buildTrace(input) {
   }
   const result = finished.length === courses ? semesters : -1
   frames.push({
-    phase: 'done', activeLine: 9, pythonLine: P('return semesters if'),
+    phase: 'done', activeLine: 24, pythonLine: P('return semesters if'),
     message: result === -1 ? `Only ${finished.length} of ${courses} courses could be finished, so the prerequisites form a cycle.` : `All ${courses} courses are finished in ${result} semester${result === 1 ? '' : 's'}.`,
     snapshot: { unmet: counts(), available: [], semester: semesters, finished: [...finished], current: [] },
   })

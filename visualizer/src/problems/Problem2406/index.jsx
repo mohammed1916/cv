@@ -13,15 +13,33 @@ const definition = {
   url: 'https://leetcode.com/problems/divide-intervals-into-minimum-number-of-groups/',
   complexity: 'O(n log n) time. The visualization caps input at 10 intervals with endpoints up to 30.',
   examples: [
-    { label: 'Example 1', input: '{"intervals":[[5,10],[6,8],[1,5],[2,3],[1,10]]}' },
-    { label: 'Example 2', input: '{"intervals":[[1,3],[5,6],[8,10],[11,13]]}' },
+    { label: 'Overlapping', input: '{"intervals":[[4,9],[7,12],[2,5],[10,11],[1,3]]}' },
+    { label: 'Chain', input: '{"intervals":[[1,3],[5,6],[8,10],[11,13]]}' },
   ],
+}
+
+// Interval timeline: one row per group, each interval drawn at its own span.
+function GroupTimeline({ groups, sorted, placed, horizon }) {
+  const span = Math.max(1, horizon)
+  return <section className="algorithm-sequence" aria-label="Group timeline">
+    <h3>Group timeline</h3>
+    {Array.from({ length: groups }, (_, g) => <div key={g} className="algorithm-sequence__cells" style={{ position: 'relative', height: 26, marginBottom: 4 }}>
+      <span style={{ position: 'absolute', left: 0, top: 4 }}>Group {g + 1}</span>
+      <div style={{ position: 'absolute', left: 80, right: 0, top: 0, bottom: 0 }}>
+        {placed.map((group, i) => group === g ? <div key={i} title={`[${sorted[i][0]}, ${sorted[i][1]}]`}
+          style={{ position: 'absolute', top: 2, bottom: 2, left: `${(sorted[i][0] / span) * 100}%`, width: `${((sorted[i][1] - sorted[i][0]) / span) * 100}%`, background: 'var(--primary)', color: 'var(--surface2)', borderRadius: 4, fontSize: 12, overflow: 'hidden', whiteSpace: 'nowrap' }}>
+          {sorted[i][0]}-{sorted[i][1]}
+        </div> : null)}
+      </div>
+    </div>)}
+  </section>
 }
 
 export default function IntervalGroups() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="Intervals in sorted order" length={run.sorted.length} active={step.index}
-      valueAt={i => `[${run.sorted[i][0]}, ${run.sorted[i][1]}]`} />
+    <GroupTimeline groups={step.ends.length} sorted={step.sorted} placed={step.placed} horizon={Math.max(...step.sorted.map(([, r]) => r), 1)} />
+    <IndexedSequence label="Intervals in sorted order" length={step.sorted.length} active={step.index}
+      valueAt={i => `[${step.sorted[i][0]}, ${step.sorted[i][1]}]`} roleAt={i => (step.placed[i] !== undefined ? `group ${step.placed[i] + 1}` : '')} />
     <IndexedSequence label="Groups (last end time)" length={step.ends.length} active={step.group}
       valueAt={i => step.ends[i]} roleAt={i => `group ${i + 1}`} />
     <output aria-label="Groups">{`Groups open: ${step.ends.length}`}</output>

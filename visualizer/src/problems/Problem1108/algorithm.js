@@ -1,13 +1,15 @@
 // Own character-by-character rewrite. The sample address is invented for this visualization.
-const PSEUDO = [
-  'out = empty text',
-  'for ch in address:',
-  '    if ch is ".":',
-  '        append "[.]" to out',
-  '    else:',
-  '        append ch to out',
-  'return out',
-]
+const CODE_TEXT = `function defang(address) {
+  const out = []
+  for (const ch of address) {
+    if (ch === '.') {
+      out.push('[.]')
+    } else {
+      out.push(ch)
+    }
+  }
+  return out.join('')
+}`
 
 export const python = `def defang(address):
     out = []
@@ -19,14 +21,14 @@ export const python = `def defang(address):
     return "".join(out)`
 
 const PY = python.split('\n')
-export const code = PSEUDO.map((text, index) => ({ line: index + 1, text }))
+export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const STEP = {
-  start: ['out = empty', 'out = []'],
-  read: ['for ch in address', 'for ch in address'],
-  dot: ['append "[.]"', 'out.append("[.]")'],
-  keep: ['append ch', 'out.append(ch)'],
-  done: ['return out', 'return "".join(out)'],
+  start: ['const out = []', 'out = []'],
+  read: ['for (const ch of address)', 'for ch in address'],
+  dot: ["out.push('[.]')", 'out.append("[.]")'],
+  keep: ['out.push(ch)', 'out.append(ch)'],
+  done: ['return out.join', 'return "".join(out)'],
 }
 function lineOf(lines, key) {
   const index = lines.findIndex(line => line.includes(key))
@@ -35,7 +37,7 @@ function lineOf(lines, key) {
 }
 const frame = (phase, step, message, snapshot) => ({
   phase,
-  activeLine: lineOf(PSEUDO, STEP[step][0]),
+  activeLine: lineOf(CODE_TEXT.split('\n'), STEP[step][0]),
   pythonLine: lineOf(PY, STEP[step][1]),
   message,
   snapshot,

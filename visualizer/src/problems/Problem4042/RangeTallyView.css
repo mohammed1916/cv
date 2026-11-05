@@ -78,3 +78,10 @@
 .rt-muted {
   opacity: 0.7;
 }
+
+.rt-pointer {
+  font-style: normal;
+  font-size: 0.7rem;
+  color: var(--primary);
+  min-height: 1rem;
+}

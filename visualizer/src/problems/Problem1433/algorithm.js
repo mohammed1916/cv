@@ -18,35 +18,48 @@ export function parseInput(text) {
 export function buildTrace({ first, second }) {
   const a = [...first].sort()
   const b = [...second].sort()
-  const frames = [{ phase: 'start', activeLine: L('sort both'), pythonLine: P('a, b = sorted'), snapshot: { a: [...first], b: [...second] }, message: `Compare "${first}" and "${second}" after sorting each one.` }]
-  frames.push({ phase: 'sort', activeLine: L('sort both'), pythonLine: P('a, b = sorted'), snapshot: { a, b }, message: `Sorted: ${a.join('')} and ${b.join('')}.` })
+  const frames = [{ phase: 'start', activeLine: L('const a ='), pythonLine: P('a, b = sorted'), snapshot: { a: [...first], b: [...second] }, message: `Compare "${first}" and "${second}" after sorting each one.` }]
+  frames.push({ phase: 'sort', activeLine: L('const a ='), pythonLine: P('a, b = sorted'), snapshot: { a, b }, message: `Sorted: ${a.join('')} and ${b.join('')}.` })
   const directions = [{ name: 'first over second', x: a, y: b }, { name: 'second over first', x: b, y: a }]
   let result = false
   for (const dir of directions) {
     let ok = true
     for (let i = 0; i < a.length; i++) {
       const pass = dir.x[i] >= dir.y[i]
-      frames.push({ phase: 'compare', activeLine: L('for each position'), pythonLine: P('all(x >= y'), snapshot: { a, b, direction: dir.name, index: i, left: dir.x[i], right: dir.y[i], pass }, message: `${dir.name}: position ${i} compares ${dir.x[i]} with ${dir.y[i]}, so ${pass ? 'it holds' : 'it fails'}.` })
+      frames.push({ phase: 'compare', activeLine: L('for (let i'), pythonLine: P('if x[i] < y[i]'), snapshot: { a, b, direction: dir.name, index: i, left: dir.x[i], right: dir.y[i], pass }, message: `${dir.name}: position ${i} compares ${dir.x[i]} with ${dir.y[i]}, so ${pass ? 'it holds' : 'it fails'}.` })
       if (!pass) { ok = false; break }
     }
     if (ok) { result = true; break }
-    frames.push({ phase: 'fail', activeLine: L('return false'), pythonLine: P('all(x >= y'), snapshot: { a, b, direction: dir.name, failed: true }, message: `${dir.name} is not a valid break.` })
+    frames.push({ phase: 'fail', activeLine: L('ok = false'), pythonLine: P('if x[i] < y[i]'), snapshot: { a, b, direction: dir.name, failed: true }, message: `${dir.name} is not a valid break.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return'), pythonLine: P('return all'), snapshot: { a, b, result }, message: result ? 'One arrangement dominates the other, so a break exists.' : 'Neither direction dominates, so no break exists.' })
+  frames.push({ phase: 'done', activeLine: L('return false'), pythonLine: P('return False'), snapshot: { a, b, result }, message: result ? 'One arrangement dominates the other, so a break exists.' : 'Neither direction dominates, so no break exists.' })
   return { input: { first, second }, result, frames }
 }
 
-export const code = `can break (first, second):
-  sort both
-  for each direction (first over second, then second over first):
-    for each position i:
-      if the letter from the dominating string is below the other, stop this direction
-    if every position holds: return true
-  return false`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function checkIfCanBreak(first, second) {
+  const a = [...first].sort()
+  const b = [...second].sort()
+  for (const [x, y] of [[a, b], [b, a]]) {
+    let ok = true
+    for (let i = 0; i < a.length; i++) {
+      if (x[i] < y[i]) ok = false
+    }
+    if (ok) return true
+  }
+  return false
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def check_if_can_break(s1, s2):
     a, b = sorted(s1), sorted(s2)
-    return all(x >= y for x, y in zip(a, b)) or all(y >= x for x, y in zip(a, b))
+    for x, y in [(a, b), (b, a)]:
+        ok = True
+        for i in range(len(a)):
+            if x[i] < y[i]: ok = False
+
+
+        if ok: return True
+
+    return False
 `
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

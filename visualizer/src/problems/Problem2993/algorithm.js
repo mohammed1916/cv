@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tables are invented for this visualization.
+// Teaching SQL walkthrough. The sample tables are invented for this visualization.
 // The day-of-week call uses MySQL numbering, where 6 is Friday.
 export const sql = `SELECT CEIL(DAY(purchase_date) / 7) AS week_of_month,
        purchase_date,

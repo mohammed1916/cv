@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The purchase rows and the calendar are invented for this visualization.
+// Teaching SQL walkthrough. The purchase rows and the calendar are invented for this visualization.
 export const sql = `WITH Fridays AS (
   SELECT DATE '2023-11-03' AS purchase_date
   UNION ALL SELECT DATE '2023-11-10'

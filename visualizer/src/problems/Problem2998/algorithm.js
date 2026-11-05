@@ -13,42 +13,48 @@ export function buildTrace(input) {
   const dist = new Map([[x, 0]])
   const queue = [x]
   const seenSnapshot = () => [...dist.entries()].map(([value, distance]) => ({ value, distance }))
-  const frames = [{ pythonLine: 6, phase: 'start', activeLine: L('set dist of x to 0'), value: x, distance: 0, queued: 1, seen: seenSnapshot(), message: `Search outward from ${x} until ${y} is reached.` }]
+  const frames = [{ pythonLine: 6, phase: 'start', activeLine: L('const dist = new Map'), value: x, distance: 0, queued: 1, seen: seenSnapshot(), message: `Search outward from ${x} until ${y} is reached.` }]
   let result = null
   for (let head = 0; head < queue.length; head++) {
     const v = queue[head]
     const d = dist.get(v)
     if (v === y) {
-      frames.push({ pythonLine: 11, phase: 'found', activeLine: L('if v equals y'), value: v, distance: d, queued: queue.length - head - 1, seen: seenSnapshot(), message: `Reached ${y} after ${d} operations.` })
+      frames.push({ pythonLine: 11, phase: 'found', activeLine: L('if (v === y)'), value: v, distance: d, queued: queue.length - head - 1, seen: seenSnapshot(), message: `Reached ${y} after ${d} operations.` })
       result = d
       break
     }
     const moves = [v - 1, v + 1]
     if (v % 11 === 0) moves.push(v / 11)
     if (v % 5 === 0) moves.push(v / 5)
-    frames.push({ pythonLine: 17, phase: 'visit', activeLine: L('for each value w'), value: v, distance: d, queued: queue.length - head - 1, moves, seen: seenSnapshot(), message: `From ${v} (after ${d} operations), the moves reach ${moves.join(', ')}.` })
+    frames.push({ pythonLine: 17, phase: 'visit', activeLine: L('for (const w of moves)'), value: v, distance: d, queued: queue.length - head - 1, moves, seen: seenSnapshot(), message: `From ${v} (after ${d} operations), the moves reach ${moves.join(', ')}.` })
     for (const w of moves) {
       if (w < 1 || w > limit || dist.has(w)) continue
       dist.set(w, d + 1)
       queue.push(w)
     }
   }
-  frames.push({ pythonLine: 21, phase: 'done', activeLine: L('return the distance'), value: null, distance: result, queued: 0, seen: seenSnapshot(), message: `Fewest operations: ${result}.` })
+  frames.push({ pythonLine: 21, phase: 'done', activeLine: L('return dist.get(y)'), value: null, distance: result, queued: 0, seen: seenSnapshot(), message: `Fewest operations: ${result}.` })
   return { input, result, frames }
 }
 
-export const code = `fewest operations to turn x into y
-  set limit to 10 times the larger of x and y, plus 100
-  set dist of x to 0 and put x in a queue
-  while the queue is not empty
-    take the next value v from the front of the queue
-    if v equals y then return the distance of v
-    for each value w reachable from v in one operation
-      if w is between 1 and limit and w is not yet seen then
-        set dist of w to dist of v plus 1 and add w to the queue
-  return the distance of y
-
-one operation from v: subtract 1, add 1, divide by 11 when v is a multiple of 11, divide by 5 when v is a multiple of 5`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minOperations(x, y) {
+  const limit = 10 * Math.max(x, y) + 100
+  const dist = new Map([[x, 0]])
+  const queue = [x]
+  for (let head = 0; head < queue.length; head++) {
+    const v = queue[head]
+    if (v === y) return dist.get(v)
+    const moves = [v - 1, v + 1]
+    if (v % 11 === 0) moves.push(v / 11)
+    if (v % 5 === 0) moves.push(v / 5)
+    for (const w of moves) {
+      if (w < 1 || w > limit || dist.has(w)) continue
+      dist.set(w, dist.get(v) + 1)
+      queue.push(w)
+    }
+  }
+  return dist.get(y)
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `from collections import deque

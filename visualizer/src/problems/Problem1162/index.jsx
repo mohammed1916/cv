@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { phases, parseInput, buildTrace, code, python, pythonLineMap } from './algorithm'
+import { phases, parseInput, buildTrace, code, python } from './algorithm'
 
 function DistanceGrid({ snapshot }) {
   const { grid, dist, current, reached, best } = snapshot
@@ -32,11 +32,10 @@ const definition = {
   build: buildTrace,
   code,
   python,
-  pythonLineMap,
   inputLabel: 'Grid as JSON rows, e.g. [[1,0],[0,0]] (1 = land, 0 = water)',
   complexity: 'O(n²) time and space for an n by n grid. The trace accepts grids up to 6 by 6.',
   examples: [
-    { label: 'Three land cells', input: '[[1,0,1],[0,0,0],[1,0,0]]' },
+    { label: 'Three land cells', input: '[[1,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,1]]' },
     { label: 'Corner land', input: '[[1,0],[0,0]]' },
     { label: 'All water', input: '[[0,0],[0,0]]' },
   ],

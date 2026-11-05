@@ -19,15 +19,18 @@ const py = (text) => {
 export const python = PYTHON_SOURCE
 
 export const code = [
-  { line: 1, text: 'function differenceOfSum(nums)' },
-  { line: 2, text: 'elementSum = 0 and digitSum = 0' },
-  { line: 3, text: 'for each num in nums' },
-  { line: 4, text: 'elementSum = elementSum + num' },
-  { line: 5, text: 'rest = num' },
-  { line: 6, text: 'while rest is greater than 0' },
-  { line: 7, text: 'digitSum = digitSum + (rest mod 10)' },
-  { line: 8, text: 'rest = rest integer-divided by 10' },
-  { line: 9, text: 'return absolute value of (elementSum minus digitSum)' },
+  { line: 1, text: "function differenceOfSum(nums) {" },
+  { line: 2, text: "  let elementSum = 0; let digitSum = 0" },
+  { line: 3, text: "  for (const num of nums) {" },
+  { line: 4, text: "    elementSum += num" },
+  { line: 5, text: "    let rest = num" },
+  { line: 6, text: "    while (rest > 0) {" },
+  { line: 7, text: "      digitSum += rest % 10" },
+  { line: 8, text: "      rest = Math.floor(rest / 10)" },
+  { line: 9, text: "    }" },
+  { line: 10, text: "  }" },
+  { line: 11, text: "  return Math.abs(elementSum - digitSum)" },
+  { line: 12, text: "}" },
 ]
 
 export function parseInput(text) {
@@ -80,6 +83,6 @@ export function buildTrace(input) {
 
   index = -1
   const answer = Math.abs(elementSum - digitSum)
-  add({ phase: 'done', activeLine: 9, pythonLine: py('return abs(element_sum - digit_sum)'), message: `|${elementSum} - ${digitSum}| = ${answer}.`, result: answer })
+  add({ phase: 'done', activeLine: 11, pythonLine: py('return abs(element_sum - digit_sum)'), message: `|${elementSum} - ${digitSum}| = ${answer}.`, result: answer })
   return { input, result: answer, frames }
 }

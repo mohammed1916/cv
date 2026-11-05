@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-common-factors/',
   complexity: 'O(min(a, b)) time and O(1) space. The visualization caps a and b at 60.',
   examples: [
-    { label: 'Example 1', input: '{"a":12,"b":6}' },
-    { label: 'Example 2', input: '{"a":25,"b":30}' },
+    { label: 'Shared factors', input: '{"a":18,"b":24}' },
+    { label: 'Sevens', input: '{"a":35,"b":14}' },
   ],
 }
 

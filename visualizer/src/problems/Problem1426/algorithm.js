@@ -16,15 +16,15 @@ export function buildTrace(values) {
   const present = new Set(values)
   let count = 0
   const snap = (current, extra = {}) => ({ current, present: [...present], count, ...extra })
-  const frames = [{ phase: 'start', activeLine: L('present = set'), pythonLine: P('present = set'), snapshot: snap(null), message: `Collect the ${present.size} distinct values. A successor check is then a constant-time lookup.` }]
+  const frames = [{ phase: 'start', activeLine: L('const present = new Set'), pythonLine: P('present = set'), snapshot: snap(null), message: `Collect the ${present.size} distinct values. A successor check is then a constant-time lookup.` }]
   values.forEach((x, i) => {
     const hit = present.has(x + 1)
-    frames.push({ phase: 'check', activeLine: L('if x + 1 in present'), pythonLine: P('if x + 1 in present'), snapshot: snap(i, { value: x, successor: x + 1, hit }), message: `Occurrence ${i} holds ${x}; is ${x + 1} in the array? ${hit ? 'Yes.' : 'No.'}` })
+    frames.push({ phase: 'check', activeLine: L('if (present.has(x + 1))'), pythonLine: P('if x + 1 in present'), snapshot: snap(i, { value: x, successor: x + 1, hit }), message: `Occurrence ${i} holds ${x}; is ${x + 1} in the array? ${hit ? 'Yes.' : 'No.'}` })
     if (hit) {
       count += 1
-      frames.push({ phase: 'count', activeLine: L('count = count + 1'), pythonLine: P('count += 1'), snapshot: snap(i, { value: x, successor: x + 1, hit, counted: true }), message: `Count occurrence ${i}. The running count is ${count}.` })
+      frames.push({ phase: 'count', activeLine: L('count += 1'), pythonLine: P('count += 1'), snapshot: snap(i, { value: x, successor: x + 1, hit, counted: true }), message: `Count occurrence ${i}. The running count is ${count}.` })
     } else {
-      frames.push({ phase: 'skip', activeLine: L('if x + 1 in present'), pythonLine: P('if x + 1 in present'), snapshot: snap(i, { value: x, successor: x + 1, hit }), message: `Occurrence ${i} is skipped; the count stays ${count}.` })
+      frames.push({ phase: 'skip', activeLine: L('if (present.has(x + 1))'), pythonLine: P('if x + 1 in present'), snapshot: snap(i, { value: x, successor: x + 1, hit }), message: `Occurrence ${i} is skipped; the count stays ${count}.` })
     }
   })
   const result = count
@@ -32,13 +32,14 @@ export function buildTrace(values) {
   return { input: values, result, frames }
 }
 
-export const code = `count elements (values):
-  present = set of all values
-  count = 0
-  for each x in values:
-    if x + 1 in present:
-      count = count + 1
-  return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function countElements(arr) {
+  const present = new Set(arr)
+  let count = 0
+  for (const x of arr) {
+    if (present.has(x + 1)) count += 1
+  }
+  return count
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def count_elements(arr):
@@ -47,6 +48,6 @@ export const python = `def count_elements(arr):
     for x in arr:
         if x + 1 in present:
             count += 1
-    return count
-`
+
+    return count`
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

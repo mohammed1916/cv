@@ -1,4 +1,4 @@
-// Knowledge-derived teaching model. The sample tables are invented for this visualization.
+// Teaching teaching model. The sample tables are invented for this visualization.
 // Teaching rule: an assignment is shown when its workload is above the average workload of all assignments by its team.
 export const sql = `WITH team_avg AS (
   SELECT e.team, AVG(p.workload) AS avg_workload

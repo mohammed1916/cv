@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import GraphTraversalView from '../../components/shared/GraphTraversalView'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -7,7 +8,7 @@ const definition = {
   url: 'https://leetcode.com/problems/connecting-cities-with-minimum-cost/',
   complexity: 'O(m log m) time to sort m roads, plus near-constant union-find work per road. The visualization caps the input at 8 cities and 20 roads.',
   examples: [
-    { label: 'Triangle', input: '{"cities":3,"roads":[[1,2,5],[1,3,6],[2,3,1]]}' },
+    { label: 'Triangle', input: '{"cities":3,"roads":[[1,2,4],[2,3,2],[1,3,9]]}' },
     { label: 'Unreachable city', input: '{"cities":4,"roads":[[1,2,3],[3,4,4]]}' },
     { label: 'Single city', input: '{"cities":1,"roads":[]}' },
   ],
@@ -15,22 +16,17 @@ const definition = {
 
 export default function ConnectingCities() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
-    const { cities } = run.input
+    const { cities, roads } = run.input
     const { parent, joined, total, current } = step.snapshot
     const rootOf = c => { let x = c; while (parent[x - 1] !== x) x = parent[x - 1]; return x }
+    const tags = Object.fromEntries(Array.from({ length: cities }, (_, i) => [i, `group ${rootOf(i + 1)}`]))
+    const built = new Set(joined.flat())
     return <>
-      <div role="img" aria-label="Groups of cities" style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-        {Array.from({ length: cities }, (_, i) => {
-          const city = i + 1
-          const isCurrent = current && current.includes(city)
-          return <div key={city} data-city={city} style={{
-            width: 64, padding: 6, textAlign: 'center', fontFamily: 'monospace',
-            border: `${isCurrent ? 2 : 1}px solid ${isCurrent ? 'var(--text)' : 'var(--border)'}`,
-          }}>
-            <div>City {city}</div><div style={{ color: 'var(--text-dim)' }}>group {rootOf(city)}</div>
-          </div>
-        })}
-      </div>
+      <GraphTraversalView title="Road network (Kruskal)" n={cities}
+        edges={roads.map(([a, b]) => [a - 1, b - 1])}
+        labels={Array.from({ length: cities }, (_, i) => `City ${i + 1}`)}
+        current={current ? current[0] - 1 : null} neighbour={current ? current[1] - 1 : null}
+        done={[...built].map(c => c - 1)} tags={tags} showFrontier={false} />
       <p>{joined.length ? `Built roads: ${joined.map(([a, b]) => `${a}-${b}`).join(', ')}` : 'No roads built yet.'}</p>
       <output aria-label="Total cost">{`Total cost ${total}`}</output>
     </>

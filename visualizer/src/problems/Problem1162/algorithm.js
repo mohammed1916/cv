@@ -5,20 +5,50 @@ export const phases = [
   { id: 'done', label: 'Result', description: 'The largest distance reached by a water cell is the answer.' },
 ]
 
-const SOURCE = [
-  ['head', 'function farthest_water(grid):', 'def farthest_water(grid):'],
-  ['check', '  if the grid has no land or no water: return -1', '    if no land or no water: return -1'],
-  ['init', '  queue = all land cells; dist = 0 there, -1 elsewhere', '    queue = deque(land); dist = [[-1] * n for _ in range(n)]'],
-  ['loop', '  while queue is not empty:', '    while queue:'],
-  ['pop', '    (r, c) = queue.pop_front()', '        r, c = queue.popleft()'],
-  ['nb', '    for each neighbour (nr, nc) inside the grid:', '        for nr, nc in neighbours(r, c):'],
-  ['set', '      if dist[nr][nc] == -1: dist[nr][nc] = dist[r][c] + 1; queue.push(nr, nc)', '            if dist[nr][nc] == -1: dist[nr][nc] = dist[r][c] + 1; queue.append((nr, nc))'],
-  ['ret', '  return max of dist over water cells', '    return max(dist[r][c] for water cells)'],
-]
-export const code = SOURCE.map(row => row[1]).join('\n')
-export const python = SOURCE.map(row => row[2]).join('\n')
-export const pythonLineMap = Object.fromEntries(SOURCE.map((_, index) => [index + 1, index + 1]))
-const L = Object.fromEntries(SOURCE.map((row, index) => [row[0], index + 1]))
+export const code = `function farthestWater(grid) {
+  const n = grid.length
+  const dist = Array.from({ length: n }, () => Array(n).fill(-1))
+  const queue = []
+  for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (grid[r][c] === 1) { dist[r][c] = 0; queue.push([r, c]) }
+  if (queue.length === 0 || queue.length === n * n) return -1
+  for (let head = 0; head < queue.length; head++) {
+    const [r, c] = queue[head]
+    for (const [dr, dc] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+      const nr = r + dr, nc = c + dc
+      if (nr >= 0 && nc >= 0 && nr < n && nc < n && dist[nr][nc] === -1) {
+        dist[nr][nc] = dist[r][c] + 1
+        queue.push([nr, nc])
+      }
+    }
+  }
+  return Math.max(...dist.flat())
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+export const python = `from collections import deque
+
+def farthest_water(grid):
+    n = len(grid)
+    dist = [[-1] * n for _ in range(n)]
+    queue = deque()
+    for r in range(n):
+        for c in range(n):
+            if grid[r][c] == 1:
+                dist[r][c] = 0
+                queue.append((r, c))
+    if not queue or len(queue) == n * n:
+        return -1
+    while queue:
+        r, c = queue.popleft()
+        for dr, dc in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            nr, nc = r + dr, c + dc
+            if 0 <= nr < n and 0 <= nc < n and dist[nr][nc] == -1:
+                dist[nr][nc] = dist[r][c] + 1
+                queue.append((nr, nc))
+    return max(max(row) for row in dist)`
+
+// Line numbers in the JavaScript code and in the Python version of each step.
+const L = { init: 1, check: 3, pop: 4, set: 6, ret: 8 }
+const PL = { init: 5, check: 12, pop: 15, set: 19, ret: 21 }
 
 export function parseInput(text) {
   let grid
@@ -40,11 +70,11 @@ export function buildTrace(grid) {
   }
   const snap = (extra = {}) => ({ grid, dist: dist.map(row => [...row]), current: null, queue: queue.map(q => [...q]), reached: [], best: null, ...extra })
   if (landCount === 0 || waterCount === 0) {
-    frames.push({ phase: 'start', activeLine: L.check, message: landCount === 0 ? 'There is no land, so no water cell has a distance. The answer is -1.' : 'There is no water, so the answer is -1.', snapshot: snap() })
-    frames.push({ phase: 'done', activeLine: L.ret, message: 'Answer: -1.', snapshot: snap() })
+    frames.push({ phase: 'start', activeLine: L.check, pythonLine: PL.check, message: landCount === 0 ? 'There is no land, so no water cell has a distance. The answer is -1.' : 'There is no water, so the answer is -1.', snapshot: snap() })
+    frames.push({ phase: 'done', activeLine: L.ret, pythonLine: PL.ret, message: 'Answer: -1.', snapshot: snap() })
     return { input: grid, result: -1, frames }
   }
-  frames.push({ phase: 'start', activeLine: L.init, message: `All ${landCount} land cells start the queue together at distance 0.`, snapshot: snap() })
+  frames.push({ phase: 'start', activeLine: L.init, pythonLine: PL.init, message: `All ${landCount} land cells start the queue together at distance 0.`, snapshot: snap() })
 
   let head = 0
   let best = 0
@@ -52,7 +82,7 @@ export function buildTrace(grid) {
   const dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]]
   while (head < queue.length) {
     const [r, c] = queue[head++]
-    frames.push({ phase: 'inspect', activeLine: L.pop, message: `Pop (${r},${c}) at distance ${dist[r][c]}. Look at its neighbours.`, snapshot: snap({ current: [r, c], queue: queue.slice(head).map(q => [...q]) }) })
+    frames.push({ phase: 'inspect', activeLine: L.pop, pythonLine: PL.pop, message: `Pop (${r},${c}) at distance ${dist[r][c]}. Look at its neighbours.`, snapshot: snap({ current: [r, c], queue: queue.slice(head).map(q => [...q]) }) })
     const reached = []
     for (const [dr, dc] of dirs) {
       const nr = r + dr, nc = c + dc
@@ -63,12 +93,12 @@ export function buildTrace(grid) {
       reached.push([nr, nc])
       if (dist[nr][nc] > best) { best = dist[nr][nc]; bestCell = [nr, nc] }
       frames.push({
-        phase: 'update', activeLine: L.set,
+        phase: 'update', activeLine: L.set, pythonLine: PL.set,
         message: `Water cell (${nr},${nc}) is reached first from (${r},${c}), so its distance is ${dist[nr][nc]}.`,
         snapshot: snap({ current: [r, c], queue: queue.slice(head).map(q => [...q]), reached: [...reached], best: bestCell }),
       })
     }
   }
-  frames.push({ phase: 'done', activeLine: L.ret, message: `The farthest water cell is at distance ${best}.`, snapshot: snap({ best: bestCell }) })
+  frames.push({ phase: 'done', activeLine: L.ret, pythonLine: PL.ret, message: `The farthest water cell is at distance ${best}.`, snapshot: snap({ best: bestCell }) })
   return { input: grid, result: best, frames }
 }

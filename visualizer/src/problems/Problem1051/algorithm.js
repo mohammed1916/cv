@@ -17,23 +17,22 @@ export function parseInput(text) {
   return { heights }
 }
 
-export const code = `height_checker(heights):
-  expected = sorted copy of heights
-  count = 0
-  for each position i:
-    if heights[i] differs from expected[i]:
-      count = count + 1
-  return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-export const python = `def height_checker(heights):
-    expected = sorted(heights)
-    count = 0
-    for i in range(len(heights)):
-        if heights[i] != expected[i]:
-            count += 1
-    return count`
-
-const LINE = { start: 1, sort: 2, compare: 5, count: 6, done: 7 }
+// Each line of JavaScript is paired with the Python line on the same row.
+const LINES = [
+  ['function heightChecker(heights) {', 'def height_checker(heights):'],
+  ['  const expected = [...heights].sort((a, b) => a - b)', '    expected = sorted(heights)'],
+  ['  let count = 0', '    count = 0'],
+  ['  for (let i = 0; i < heights.length; i++) {', '    for i in range(len(heights)):'],
+  ['    if (heights[i] !== expected[i]) count += 1', '        if heights[i] != expected[i]: count += 1'],
+  ['  }', ''],
+  ['  return count', '    return count'],
+  ['}', ''],
+]
+const codeLines = LINES.map(([js]) => js)
+export const code = codeLines.map((text, index) => ({ line: index + 1, text }))
+const L = s => codeLines.findIndex(c => c.includes(s)) + 1
+export const python = LINES.map(([, py]) => py).join('\n')
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export function buildTrace(input) {
   const { heights } = input
@@ -42,22 +41,22 @@ export function buildTrace(input) {
   const mismatches = []
   let count = 0
 
-  const frame = (phase, activeLine, message, current, expectedShown) => frames.push({
-    phase, activeLine, message,
+  const frame = (phase, pythonLine, activeLine, message, current, expectedShown) => frames.push({
+    phase, pythonLine, activeLine, message,
     snapshot: { heights, expected: expectedShown, current, mismatches: [...mismatches], count },
   })
 
-  frame('start', LINE.start, `Start with ${heights.length} positions. Heights are compared in their original order.`, -1, null)
-  frame('sort', LINE.sort, `The target lineup is ${expected.join(', ')}. Sorting a copy keeps the original visible.`, -1, expected)
+  frame('start', P('def height_checker'), L('function heightChecker'), `Start with ${heights.length} positions. Heights are compared in their original order.`, -1, null)
+  frame('sort', P('expected = sorted'), L('const expected'), `The target lineup is ${expected.join(', ')}. Sorting a copy keeps the original visible.`, -1, expected)
   for (let i = 0; i < heights.length; i++) {
     const differs = heights[i] !== expected[i]
-    frame('compare', LINE.compare, `Position ${i}: ${heights[i]} against target ${expected[i]}. ${differs ? 'They differ.' : 'They match.'}`, i, expected)
+    frame('compare', P('if heights[i] != expected[i]'), L('if (heights[i] !== expected[i])'), `Position ${i}: ${heights[i]} against target ${expected[i]}. ${differs ? 'They differ.' : 'They match.'}`, i, expected)
     if (differs) {
       mismatches.push(i)
       count += 1
-      frame('count', LINE.count, `Position ${i} is a mismatch, so the count becomes ${count}.`, i, expected)
+      frame('count', P('count += 1'), L('count += 1'), `Position ${i} is a mismatch, so the count becomes ${count}.`, i, expected)
     }
   }
-  frame('done', LINE.done, `${count} positions differ from the target lineup, so that is the answer.`, -1, expected)
+  frame('done', P('return count'), L('return count'), `${count} positions differ from the target lineup, so that is the answer.`, -1, expected)
   return { input, result: count, frames }
 }

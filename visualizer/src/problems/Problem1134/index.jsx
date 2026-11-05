@@ -8,7 +8,7 @@ const definition = {
   url: 'https://leetcode.com/problems/armstrong-number/',
   complexity: 'O(d) time for d digits and O(d) extra space for the digits. The visualization accepts n up to 100000000.',
   examples: [
-    { label: 'Three digits', input: '{"n":153}' },
+    { label: 'Three digits', input: '{"n":370}' },
     { label: 'Not Armstrong', input: '{"n":10}' },
     { label: 'Four digits', input: '{"n":9474}' },
   ],

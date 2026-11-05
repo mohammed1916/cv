@@ -8,24 +8,38 @@ export const phases = [
   { id: 'done', label: 'Result', description: 'Report the area of the largest square whose border is all ones.' },
 ]
 
-export const code = [
-  'right[i][j] = ones in a row run starting at (i, j) going right',
-  'down[i][j] = ones in a column run starting at (i, j) going down',
-  'best = 0',
-  'for each top-left cell (i, j) that holds a one:',
-  '  for size from min(right, down) down to best + 1:',
-  '    the bottom edge starts at (i + size - 1, j) and the right edge at (i, j + size - 1)',
-  '    if right[i + size - 1][j] >= size and down[i][j + size - 1] >= size:',
-  '      best = size, so smaller sides need no checks here',
-  'return best * best',
-].map((text, index) => ({ line: index + 1, text }))
-
+export const code = `function largestBorderedSquare(grid) {
+  const n = grid.length
+  const m = grid[0].length
+  const right = Array.from({ length: n }, () => Array(m).fill(0))
+  const down = Array.from({ length: n }, () => Array(m).fill(0))
+  for (let i = 0; i < n; i++) {
+    for (let j = m - 1; j >= 0; j--) right[i][j] = grid[i][j] ? (j + 1 < m ? right[i][j + 1] : 0) + 1 : 0
+  }
+  for (let i = n - 1; i >= 0; i--) {
+    for (let j = 0; j < m; j++) down[i][j] = grid[i][j] ? (i + 1 < n ? down[i + 1][j] : 0) + 1 : 0
+  }
+  let best = 0
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < m; j++) {
+      if (!grid[i][j]) continue
+      const limit = Math.min(right[i][j], down[i][j])
+      for (let size = limit; size > best; size--) {
+        if (right[i + size - 1][j] >= size && down[i][j + size - 1] >= size) {
+          best = size
+          break
+        }
+      }
+    }
+  }
+  return best * best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const pyAt = key => python.split('\n').findIndex(l => l.includes(key)) + 1
 const at = key => {
   const index = code.findIndex(line => line.text.includes(key))
   if (index < 0) throw new Error(`Missing code line: ${key}`)
   return index + 1
 }
-
 export const python = `def largest_bordered_square(grid):
     n, m = len(grid), len(grid[0])
     right = [[0] * (m + 1) for _ in range(n + 1)]
@@ -72,16 +86,16 @@ export function buildTrace(grid) {
   const down = grid.map(row => row.map(() => 0))
   const frames = []
   const snap = extra => ({ grid, right: right.map(row => [...row]), down: down.map(row => [...row]), corner: null, size: null, best: 0, ...extra })
-  const push = (phase, key, message, extra = {}) => frames.push({ phase, activeLine: at(key), message, snapshot: snap(extra) })
+  const push = (phase, key, pyKey, message, extra = {}) => frames.push({ phase, activeLine: at(key), pythonLine: pyAt(pyKey), message, snapshot: snap(extra) })
 
-  push('runs', 'right[i][j] =', `The grid has ${n} rows and ${m} columns. Start with the run of ones going right, scanning each row from its last cell.`)
+  push('runs', 'right[i][j] = grid[i][j]', 'right[i][j] = right[i][j + 1] + 1', `The grid has ${n} rows and ${m} columns. Start with the run of ones going right, scanning each row from its last cell.`)
   for (let i = 0; i < n; i++) {
     for (let j = m - 1; j >= 0; j--) right[i][j] = grid[i][j] ? (j + 1 < m ? right[i][j + 1] : 0) + 1 : 0
-    push('runs', 'right[i][j] =', `Row ${i} is finished. Each one adds one to the run that starts in the next cell.`)
+    push('runs', 'right[i][j] = grid[i][j]', 'right[i][j] = right[i][j + 1] + 1', `Row ${i} is finished. Each one adds one to the run that starts in the next cell.`)
   }
   for (let i = n - 1; i >= 0; i--) {
     for (let j = 0; j < m; j++) down[i][j] = grid[i][j] ? (i + 1 < n ? down[i + 1][j] : 0) + 1 : 0
-    push('runs', 'down[i][j] =', `Row ${i}, scanned from the bottom: each one extends the column run that starts in the row below.`)
+    push('runs', 'down[i][j] = grid[i][j]', 'down[i][j] = down[i + 1][j] + 1', `Row ${i}, scanned from the bottom: each one extends the column run that starts in the row below.`)
   }
 
   let best = 0
@@ -89,14 +103,14 @@ export function buildTrace(grid) {
     for (let j = 0; j < m; j++) {
       if (!grid[i][j]) continue
       const limit = Math.min(right[i][j], down[i][j])
-      push('corners', 'for each top-left cell', `Top-left corner (row ${i}, column ${j}) holds a one. Its top and left edges allow a side up to ${limit}.`, { corner: [i, j] })
+      push('corners', 'const limit = Math.min', 'for j in range(m)', `Top-left corner (row ${i}, column ${j}) holds a one. Its top and left edges allow a side up to ${limit}.`, { corner: [i, j] })
       for (let size = limit; size > best; size--) {
         const bottomOk = right[i + size - 1][j] >= size
         const rightOk = down[i][j + size - 1] >= size
-        push('check', 'for size from', `Test side ${size}. The bottom edge run is ${right[i + size - 1][j]} and the right edge run is ${down[i][j + size - 1]}; each must reach ${size}.`, { corner: [i, j], size })
+        push('check', 'if (right[i + size - 1][j]', 'for size in range', `Test side ${size}. The bottom edge run is ${right[i + size - 1][j]} and the right edge run is ${down[i][j + size - 1]}; each must reach ${size}.`, { corner: [i, j], size })
         if (bottomOk && rightOk) {
           best = size
-          push('corners', 'best = size', `Side ${size} works, so the best square now has area ${best * best}.`, { corner: [i, j], size, best })
+          push('corners', 'best = size', 'best = size', `Side ${size} works, so the best square now has area ${best * best}.`, { corner: [i, j], size, best })
           break
         }
       }
@@ -104,6 +118,6 @@ export function buildTrace(grid) {
   }
 
   const result = best * best
-  push('done', 'return best * best', `The largest square with an all-ones border has side ${best}, so its area is ${result}.`, { best })
+  push('done', 'return best * best', 'return best * best', `The largest square with an all-ones border has side ${best}, so its area is ${result}.`, { best })
   return { input: grid, result, frames }
 }

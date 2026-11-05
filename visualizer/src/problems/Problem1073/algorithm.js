@@ -13,8 +13,35 @@ export function parseInput(text) {
   return { arr1: checkDigits(input.arr1, 'arr1'), arr2: checkDigits(input.arr2, 'arr2') }
 }
 
+// Each line of JavaScript is paired with the Python line on the same row.
+const LINES = [
+  ['function addNegabinary(arr1, arr2) {', 'def add_negabinary(arr1, arr2):'],
+  ['  let carry = 0', '    carry = 0'],
+  ['  let i = arr1.length - 1', '    i = len(arr1) - 1'],
+  ['  let j = arr2.length - 1', '    j = len(arr2) - 1'],
+  ['  const written = []', '    answer = []'],
+  ['  while (i >= 0 || j >= 0 || carry !== 0) {', '    while i >= 0 or j >= 0 or carry != 0:'],
+  ['    const a = i >= 0 ? arr1[i] : 0', '        a = arr1[i] if i >= 0 else 0'],
+  ['    const b = j >= 0 ? arr2[j] : 0', '        b = arr2[j] if j >= 0 else 0'],
+  ['    const total = a + b + carry', '        total = a + b + carry'],
+  ['    const digit = ((total % 2) + 2) % 2', '        digit = total % 2'],
+  ['    carry = -((total - digit) / 2)', '        carry = -((total - digit) // 2)'],
+  ['    written.push(digit)', '        answer.append(digit)'],
+  ['    i -= 1', '        i -= 1'],
+  ['    j -= 1', '        j -= 1'],
+  ['  }', ''],
+  ['  while (written.length > 1 && written[written.length - 1] === 0) written.pop()', '    while len(answer) > 1 and answer[-1] == 0: answer.pop()'],
+  ['  return written.reverse()', '    return answer[::-1]'],
+  ['}', ''],
+]
+const codeLines = LINES.map(([js]) => js)
+export const code = codeLines.map((text, index) => ({ line: index + 1, text }))
+const L = s => codeLines.findIndex(c => c.includes(s)) + 1
+export const python = LINES.map(([, py]) => py).join('\n')
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 export function buildTrace({ arr1, arr2 }) {
-  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set carry to 0'), written: [], carry: 0, cols: { i: arr1.length - 1, j: arr2.length - 1 }, message: 'Add from the least significant digit. Carries are base -2, so they can be negative.' }]
+  const frames = [{ phase: 'start', pythonLine: P('carry = 0'), activeLine: L('let carry = 0'), written: [], carry: 0, cols: { i: arr1.length - 1, j: arr2.length - 1 }, message: 'Add from the least significant digit. Carries are base -2, so they can be negative.' }]
   let carry = 0
   let i = arr1.length - 1
   let j = arr2.length - 1
@@ -26,42 +53,12 @@ export function buildTrace({ arr1, arr2 }) {
     const digit = ((total % 2) + 2) % 2
     carry = -((total - digit) / 2)
     written.push(digit)
-    frames.push({ phase: 'digit', pythonLine: 10, activeLine: L('set digit to total'), written: written.slice().reverse(), carry, cols: { i: i >= 0 ? i : -1, j: j >= 0 ? j : -1 }, message: `${a} + ${b} + carry gives ${total}. Write ${digit} and carry ${carry}.` })
+    frames.push({ phase: 'digit', pythonLine: P('answer.append(digit)'), activeLine: L('const digit ='), written: written.slice().reverse(), carry, cols: { i: i >= 0 ? i : -1, j: j >= 0 ? j : -1 }, message: `${a} + ${b} + carry gives ${total}. Write ${digit} and carry ${carry}.` })
     i -= 1
     j -= 1
   }
   while (written.length > 1 && written[written.length - 1] === 0) written.pop()
   const result = written.reverse()
-  frames.push({ phase: 'done', pythonLine: 17, activeLine: L('return the answer'), written: result, carry: 0, message: `The sum in base -2 is ${result.join('')}.` })
+  frames.push({ phase: 'done', pythonLine: P('answer[::-1]'), activeLine: L('return written.reverse()'), written: result, carry: 0, message: `The sum in base -2 is ${result.join('')}.` })
   return { input: { arr1, arr2 }, result, frames }
 }
-
-export const code = `add two negabinary numbers stored most significant digit first
-set carry to 0 and walk both arrays from their last digits
-while a digit remains in either array or the carry is not 0 do
-  set total to the two digits plus carry
-  set digit to total modulo 2, which is 0 or 1
-  set carry to minus half of total minus digit
-  add digit to the front of the answer
-remove leading zeros from the answer, keeping one digit
-return the answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-
-export const python = `def add_negabinary(arr1, arr2):
-    carry = 0
-    i = len(arr1) - 1
-    j = len(arr2) - 1
-    answer = []
-    while i >= 0 or j >= 0 or carry != 0:
-        a = arr1[i] if i >= 0 else 0
-        b = arr2[j] if j >= 0 else 0
-        total = a + b + carry
-        digit = total % 2
-        carry = -((total - digit) // 2)
-        answer.append(digit)
-        i -= 1
-        j -= 1
-    while len(answer) > 1 and answer[-1] == 0:
-        answer.pop()
-    return answer[::-1]
-`

@@ -7,20 +7,32 @@ const PHASES = [
 
 export const phases = PHASES
 
-const CODE_LINES = [
-  'minimum operations to make the XOR of all elements zero, or -1',
-  'start is the sorted array; dist records the depth of each array seen',
-  'queue holds start',
-  'while the queue is not empty',
-  '  take the next array state and its depth',
-  '  if its XOR is zero return the depth',
-  '  for each ordered pair i, j with unequal values',
-  '    replace the value at i by its XOR with the value at j',
-  '    if the sorted result is new, record it at depth plus one and queue it',
-  'return -1',
-]
-
-export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }))
+export const code = `function minOpsXorZero(nums) {
+  const start = [...nums].sort((a, b) => a - b)
+  const dist = new Map([[start.join(','), 0]])
+  const queue = [start]
+  for (let head = 0; head < queue.length; head++) {
+    const state = queue[head]
+    const depth = dist.get(state.join(','))
+    let total = 0
+    for (const v of state) total ^= v
+    if (total === 0) return depth
+    for (let i = 0; i < state.length; i++) {
+      for (let j = 0; j < state.length; j++) {
+        if (i === j || state[i] === state[j]) continue
+        const next = [...state]
+        next[i] = state[i] ^ state[j]
+        next.sort((a, b) => a - b)
+        const key = next.join(',')
+        if (!dist.has(key)) {
+          dist.set(key, depth + 1)
+          queue.push(next)
+        }
+      }
+    }
+  }
+  return -1
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 function L(fragment) {
   const index = code.findIndex(c => c.text.includes(fragment))
@@ -79,15 +91,15 @@ export function buildTrace({ nums }) {
   const dist = new Map([[key(start), 0]])
   const queue = [start]
   const frames = []
-  frames.push({ pythonLine: P('start = tuple'), phase: 'start', activeLine: L('start is the sorted array'), state: start, depth: 0, total: xorAll(start), message: `Start from [${start.join(', ')}], XOR ${xorAll(start)}.` })
+  frames.push({ pythonLine: P('start = tuple'), phase: 'start', activeLine: L('const start = [...nums]'), state: start, depth: 0, total: xorAll(start), message: `Start from [${start.join(', ')}], XOR ${xorAll(start)}.` })
   for (let head = 0; head < queue.length; head++) {
     const state = queue[head]
     const depth = dist.get(key(state))
     const total = xorAll(state)
-    frames.push({ pythonLine: P('state = queue.popleft'), phase: 'expand', activeLine: L('take the next array'), state, depth, total, message: `Depth ${depth}: [${state.join(', ')}] has XOR ${total}.` })
+    frames.push({ pythonLine: P('state = queue.popleft'), phase: 'expand', activeLine: L('const state = queue[head]'), state, depth, total, message: `Depth ${depth}: [${state.join(', ')}] has XOR ${total}.` })
     if (total === 0) {
-      frames.push({ pythonLine: P('return dist[state]'), phase: 'found', activeLine: L('if its XOR is zero'), state, depth, total, message: `XOR is zero at depth ${depth}.` })
-      frames.push({ pythonLine: P('return dist[state]'), phase: 'done', activeLine: L('return the depth'), state, depth, total, message: `Minimum operations: ${depth}.` })
+      frames.push({ pythonLine: P('return dist[state]'), phase: 'found', activeLine: L('if (total === 0) return depth'), state, depth, total, message: `XOR is zero at depth ${depth}.` })
+      frames.push({ pythonLine: P('return dist[state]'), phase: 'done', activeLine: L('if (total === 0) return depth'), state, depth, total, message: `Minimum operations: ${depth}.` })
       return { input: { nums }, result: depth, frames }
     }
     for (let i = 0; i < state.length; i++) {
@@ -100,7 +112,7 @@ export function buildTrace({ nums }) {
         if (!dist.has(k)) {
           dist.set(k, depth + 1)
           queue.push(next)
-          frames.push({ pythonLine: P('dist[key] = dist[state] + 1'), phase: 'expand', activeLine: L('if the sorted result is new'), state, depth, total, from: { i, j }, next, message: `Replace ${state[i]} at ${i} with ${state[i]} xor ${state[j]} = ${next.join(', ')} at depth ${depth + 1}.` })
+          frames.push({ pythonLine: P('dist[key] = dist[state] + 1'), phase: 'expand', activeLine: L('if (!dist.has(key))'), state, depth, total, from: { i, j }, next, message: `Replace ${state[i]} at ${i} with ${state[i]} xor ${state[j]} = ${next.join(', ')} at depth ${depth + 1}.` })
         }
       }
     }

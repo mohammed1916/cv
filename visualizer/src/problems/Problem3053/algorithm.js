@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The side lengths are invented for this visualization.
+// Teaching SQL walkthrough. The side lengths are invented for this visualization.
 export const sql = `SELECT CASE
          WHEN A + B <= C OR A + C <= B OR B + C <= A THEN 'Not A Triangle'
          WHEN A = B AND B = C THEN 'Equilateral'

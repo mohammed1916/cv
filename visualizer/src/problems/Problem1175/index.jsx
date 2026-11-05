@@ -12,7 +12,7 @@ const definition = {
   url: 'https://leetcode.com/problems/prime-arrangements/',
   complexity: 'Trial division tests each number up to its square root, about O(n√n) in total. The two factorials take O(n) multiplications.',
   examples: [
-    { label: 'Five', input: '5' },
+    { label: 'Seven', input: '7' },
     { label: 'Ten', input: '10' },
     { label: 'One', input: '1' },
   ],

@@ -1,4 +1,4 @@
-// Knowledge-derived teaching model. The sample table is invented for this visualization.
+// Teaching teaching model. The sample table is invented for this visualization.
 export const sql = `SELECT N,
   CASE
     WHEN P IS NULL THEN 'Root'

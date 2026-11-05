@@ -9,29 +9,47 @@ export const phases = [
   { id: 'done', label: 'Result', description: 'Compare twice the count with the array length.' },
 ]
 
-export const code = [
-  'def first_index(nums, target, after_equal):',
-  '    lo, hi = 0, len(nums)',
-  '    while lo < hi:',
-  '        mid = (lo + hi) // 2',
-  '        if nums[mid] < target or (after_equal and nums[mid] == target):',
-  '            lo = mid + 1',
-  '        else:',
-  '            hi = mid',
-  '    return lo',
-  'lower = first_index(nums, target, False)',
-  'upper = first_index(nums, target, True)',
-  'count = upper - lower',
-  'return 2 * count > len(nums)',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function isMajority(nums, target) {
+  const firstIndex = afterEqual => {
+    let lo = 0
+    let hi = nums.length
+    while (lo < hi) {
+      const mid = Math.floor((lo + hi) / 2)
+      if (nums[mid] < target || (afterEqual && nums[mid] === target)) {
+        lo = mid + 1
+      } else {
+        hi = mid
+      }
+    }
+    return lo
+  }
+  const lower = firstIndex(false)
+  const upper = firstIndex(true)
+  const count = upper - lower
+  return 2 * count > nums.length
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+export const python = `def is_majority(nums, target):
+    def first_index(after_equal):
+        lo, hi = 0, len(nums)
+        while lo < hi:
+            mid = (lo + hi) // 2
+            if nums[mid] < target or (after_equal and nums[mid] == target):
+                lo = mid + 1
+            else:
+                hi = mid
+        return lo
+    lower = first_index(False)
+    upper = first_index(True)
+    count = upper - lower
+    return 2 * count > len(nums)`
 
 const at = key => {
   const index = code.findIndex(line => line.text.includes(key))
   if (index < 0) throw new Error(`Missing code line: ${key}`)
   return index + 1
 }
-
-export const python = code.map(line => line.text).join('\n')
+const pyAt = key => python.split('\n').findIndex(l => l.includes(key)) + 1
 
 export const inputLabel = 'Object with a sorted nums array and a target (JSON)'
 export const complexity = 'O(log n) time for the two binary searches. The space is O(1).'
@@ -61,7 +79,7 @@ export function buildTrace({ nums, target }) {
   const snap = extra => ({ nums, target, lo: 0, hi: n, mid: null, boundary: null, ...extra })
 
   frames.push({
-    phase: 'lower', activeLine: at('lo, hi = 0'),
+    phase: 'lower', activeLine: at('let lo = 0'), pythonLine: pyAt('lo, hi = 0'),
     message: `Length ${n}, target ${target}. A majority needs more than ${n / 2} copies, so first find where the copies start, then where they end.`,
     snapshot: snap(),
   })
@@ -73,7 +91,7 @@ export function buildTrace({ nums, target }) {
       const mid = Math.floor((lo + hi) / 2)
       const goRight = nums[mid] < target || (afterEqual && nums[mid] === target)
       frames.push({
-        phase, activeLine: at(goRight ? 'lo = mid + 1' : 'hi = mid'),
+        phase, activeLine: at(goRight ? 'lo = mid + 1' : 'hi = mid'), pythonLine: pyAt(goRight ? 'lo = mid + 1' : 'hi = mid'),
         message: goRight
           ? `Position ${mid} holds ${nums[mid]}, which is not past the ${boundary} boundary yet. Search the right half.`
           : `Position ${mid} holds ${nums[mid]}, so the ${boundary} boundary is at ${mid} or earlier. Search the left half.`,
@@ -83,7 +101,7 @@ export function buildTrace({ nums, target }) {
       else hi = mid
     }
     frames.push({
-      phase, activeLine: at('return lo'),
+      phase, activeLine: at('return lo'), pythonLine: pyAt('return lo'),
       message: `The ${boundary} boundary is at index ${lo}.`,
       snapshot: snap({ lo, hi: lo, mid: null, boundary }),
     })
@@ -94,14 +112,14 @@ export function buildTrace({ nums, target }) {
   const upper = search(true, 'upper')
   const count = upper - lower
   frames.push({
-    phase: 'count', activeLine: at('count = upper'),
+    phase: 'count', activeLine: at('const count = upper'), pythonLine: pyAt('count = upper - lower'),
     message: `${upper} - ${lower} = ${count} copies of ${target}.`,
     snapshot: snap({ lo: lower, hi: upper, mid: null, boundary: 'count' }),
   })
 
   const result = 2 * count > n
   frames.push({
-    phase: 'done', activeLine: at('return 2 * count'),
+    phase: 'done', activeLine: at('return 2 * count'), pythonLine: pyAt('return 2 * count'),
     message: `Twice ${count} is ${2 * count}, which ${result ? 'is more than' : 'is not more than'} ${n}. So ${target} ${result ? 'is' : 'is not'} a majority element.`,
     snapshot: snap({ lo: lower, hi: upper, mid: null, boundary: 'count', result }),
   })

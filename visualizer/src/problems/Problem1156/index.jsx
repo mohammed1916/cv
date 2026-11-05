@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { phases, parseInput, buildTrace, code, python, pythonLineMap } from './algorithm'
+import { phases, parseInput, buildTrace, code, python } from './algorithm'
 import { Sequence, Vars } from './SeqKit'
 
 const definition = {
@@ -8,11 +8,10 @@ const definition = {
   build: buildTrace,
   code,
   python,
-  pythonLineMap,
   inputLabel: 'Lowercase letters',
   complexity: 'O(26 × n) time with O(26) counts. The trace accepts up to 40 letters.',
   examples: [
-    { label: 'One misplaced letter', input: 'aaabaaa' },
+    { label: 'One misplaced letter', input: 'aabaa' },
     { label: 'All distinct', input: 'abcdef' },
     { label: 'Two runs', input: 'aaabbb' },
   ],

@@ -11,7 +11,7 @@ const definition = {
 export default function FollowingWords() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { words, index, window: current, collected, first, second } = step.state
-    const pointers = index === null ? {} : { i: index, follower: index + 2 }
+    const pointers = index === null ? {} : { l: index, r: index + 2 }
     const marks = {}
     if (index !== null) for (let k = index; k < index + 3 && k < words.length; k++) marks[k] = 'window'
     if (step.phase === 'collect' && index !== null) marks[index + 2] = 'written'

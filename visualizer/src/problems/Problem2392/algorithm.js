@@ -41,31 +41,55 @@ export function buildTrace(input) {
   }
   const fail = (activeLine, message, pythonLine) => { snap('fail', activeLine, message, null, pythonLine); return { input, result: [], frames } }
 
-  snap('start', L('create a k by k grid'), 'Start with a k by k grid of zeros.')
-  snap('graph', L('build a graph of row conditions'), `${rowEdges.length} row conditions and ${colEdges.length} column conditions.`)
-  if (!topo('rows', rowEdges, rows, L('topologically sort the rows'), 'Row value')) {
-    return fail(L('topologically sort the rows'), 'The row conditions form a cycle, so no matrix exists. Return empty.', P(`return []`))
+  snap('start', L('const grid = Array.from'), 'Start with a k by k grid of zeros.')
+  snap('graph', L('const adj = Array.from'), `${rowEdges.length} row conditions and ${colEdges.length} column conditions.`)
+  if (!topo('rows', rowEdges, rows, L('const rows = topologicalOrder'), 'Row value')) {
+    return fail(L('const rows = topologicalOrder'), 'The row conditions form a cycle, so no matrix exists. Return empty.', P(`return []`))
   }
-  if (!topo('cols', colEdges, cols, L('topologically sort the columns'), 'Column value')) {
-    return fail(L('topologically sort the columns'), 'The column conditions form a cycle, so no matrix exists. Return empty.', P(`if cols is None:`) + 1)
+  if (!topo('cols', colEdges, cols, L('const cols = topologicalOrder'), 'Column value')) {
+    return fail(L('const cols = topologicalOrder'), 'The column conditions form a cycle, so no matrix exists. Return empty.', P(`if cols is None:`) + 1)
   }
   for (let v = 1; v <= k; v++) {
     grid[rows.indexOf(v)][cols.indexOf(v)] = v
-    snap('place', L('put v in the row'), `Value ${v} goes to row ${rows.indexOf(v)} and column ${cols.indexOf(v)}.`, v)
+    snap('place', L('grid[rows.indexOf(v)]'), `Value ${v} goes to row ${rows.indexOf(v)} and column ${cols.indexOf(v)}.`, v)
   }
-  snap('done', L('return the grid'), 'The grid satisfies every row and column condition.')
+  snap('done', L('return grid'), 'The grid satisfies every row and column condition.')
   return { input, result: grid, frames }
 }
 
-export const code = `create a k by k grid of zeros
-build a graph of row conditions from each row pair
-build a graph of column conditions from each column pair
-topologically sort the rows; if a cycle exists, return empty
-topologically sort the columns; if a cycle exists, return empty
-for each value v from 1 to k
-  put v in the row at its place in the row order
-  and in the column at its place in the column order
-return the grid`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function buildMatrix(k, rowConditions, colConditions) {
+  const grid = Array.from({ length: k }, () => Array(k).fill(0)) // create a k by k grid of zeros
+  const rows = topologicalOrder(k, rowConditions) // topologically sort the rows
+  if (rows === null) return []
+  const cols = topologicalOrder(k, colConditions) // topologically sort the columns
+  if (cols === null) return []
+  for (let v = 1; v <= k; v++) {
+    grid[rows.indexOf(v)][cols.indexOf(v)] = v // put v in the row and column of its place
+  }
+  return grid // return the grid
+}
+
+function topologicalOrder(k, edges) {
+  const adj = Array.from({ length: k + 1 }, () => []) // build a graph: above -> below
+  const indegree = Array(k + 1).fill(0)
+  for (const [above, below] of edges) {
+    adj[above].push(below)
+    indegree[below]++
+  }
+  const ready = []
+  for (let v = 1; v <= k; v++) if (indegree[v] === 0) ready.push(v)
+  const order = []
+  while (ready.length) {
+    ready.sort((x, y) => x - y)
+    const v = ready.shift()
+    order.push(v)
+    for (const w of adj[v]) {
+      indegree[w]--
+      if (indegree[w] === 0) ready.push(w)
+    }
+  }
+  return order.length === k ? order : null
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 

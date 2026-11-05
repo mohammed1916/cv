@@ -23,7 +23,7 @@ export function buildTrace(ops) {
     while (front.length < target) front.push(back.shift())
   }
   const results = []
-  const frames = [{ phase: 'start', pythonLine: 6, activeLine: L('design a queue'), front: [], back: [], results: [], message: 'Start with an empty queue. The front half holds floor(n / 2) items.' }]
+  const frames = [{ phase: 'start', pythonLine: 6, activeLine: L('const results = []'), front: [], back: [], results: [], message: 'Start with an empty queue. The front half holds floor(n / 2) items.' }]
   for (const [name, value] of ops) {
     let out = null
     let message
@@ -43,24 +43,33 @@ export function buildTrace(ops) {
     }
     if (out !== null && name.startsWith('pop')) results.push(out)
     rebalance()
-    frames.push({ phase: name.startsWith('push') ? 'push' : 'pop', pythonLine: out === -1 ? 23 : ({ pushFront: 17, pushMiddle: 19, pushBack: 21, popFront: 26, popBack: 28, popMiddle: 30 })[name], activeLine: L(`${name}:`), front: [...front], back: [...back], results: [...results], message: `${message} Rebalance so the front half holds ${Math.floor(size() / 2)}.` })
+    frames.push({ phase: name.startsWith('push') ? 'push' : 'pop', pythonLine: out === -1 ? 23 : ({ pushFront: 17, pushMiddle: 19, pushBack: 21, popFront: 26, popBack: 28, popMiddle: 30 })[name], activeLine: L(out === -1 ? 'front.length + back.length === 0' : name === 'popMiddle' ? 'else results.push' : `'${name}'`), front: [...front], back: [...back], results: [...results], message: `${message} Rebalance so the front half holds ${Math.floor(size() / 2)}.` })
   }
   frames.push({ phase: 'done', pythonLine: 32, activeLine: L('return results'), front: [...front], back: [...back], results: [...results], message: `Popped values: [${results.join(', ')}].` })
   return { input: ops, result: results, frames }
 }
 
-export const code = `design a queue that supports front, middle and back operations
-keep the front half and the back half as two deques
-keep the front half at floor(n / 2) items
-pushFront: place the value at the front of the front half
-pushMiddle: append the value to the end of the front half
-pushBack: append the value to the end of the back half
-popFront: remove from the front half, or from the back half if the front half is empty
-popMiddle: remove the last front item when n is even, else the first back item
-popBack: remove the last item of the back half
-rebalance halves so the front half holds floor(n / 2) items
-pop operations return -1 when the queue is empty
-return results`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function frontMiddleBack(operations) {
+  const front = []
+  const back = []
+  const results = []
+  const rebalance = () => {
+    const target = Math.floor((front.length + back.length) / 2)
+    while (front.length > target) back.unshift(front.pop())
+    while (front.length < target) front.push(back.shift())
+  }
+  for (const [name, value] of operations) {
+    if (name === 'pushFront') front.unshift(value)
+    else if (name === 'pushMiddle') front.push(value)
+    else if (name === 'pushBack') back.push(value)
+    else if (front.length + back.length === 0) results.push(-1)
+    else if (name === 'popFront') results.push(front.length ? front.shift() : back.shift())
+    else if (name === 'popBack') results.push(back.length ? back.pop() : front.pop())
+    else results.push((front.length + back.length) % 2 === 0 ? front.pop() : back.shift())
+    rebalance()
+  }
+  return results
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `from collections import deque

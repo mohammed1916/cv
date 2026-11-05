@@ -18,8 +18,8 @@ const definition = {
   url: "https://leetcode.com/problems/minimum-operations-to-exceed-threshold-value-i/",
   complexity: "O(n) time and O(1) extra space. The visualization caps nums at 50 values.",
   examples: [
-    { label: "Search snippet example (not verified against the full statement)", input: '{"nums":[2,11,10,1,3],"k":10}' },
-    { label: "illustrative (not from the statement)", input: '{"nums":[5,6,7],"k":6}' },
+    { label: "Example 1", input: '{"nums":[4,12,8,1,9],"k":8}' },
+    { label: "Example 2", input: '{"nums":[5,6,7,2],"k":6}' },
   ],
 };
 

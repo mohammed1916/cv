@@ -16,22 +16,22 @@ export function buildTrace(points) {
   const pts = [...points].sort((p, q) => p[0] - q[0] || q[1] - p[1])
   const n = pts.length
   let count = 0
-  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('sort the points by x ascending'), a: null, b: null, topBlock: null, count, message: `Sorted by x ascending, then y descending.` })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('const pts = [...points].sort'), a: null, b: null, topBlock: null, count, message: `Sorted by x ascending, then y descending.` })
   for (let i = 0; i < n; i++) {
     const ay = pts[i][1]
     let topBlock = -Infinity
-    frames.push({ pythonLine: 7, phase: 'row', activeLine: L('for each later point b'), a: pts[i], b: null, topBlock, count, message: `Alice at (${pts[i][0]},${ay}); sweep the points after it.` })
+    frames.push({ pythonLine: 7, phase: 'row', activeLine: L('for (let j = i + 1'), a: pts[i], b: null, topBlock, count, message: `Alice at (${pts[i][0]},${ay}); sweep the points after it.` })
     for (let j = i + 1; j < n; j++) {
       const by = pts[j][1]
       if (by > ay) {
-        frames.push({ pythonLine: 11, phase: 'above', activeLine: L('if b is above a, skip it'), a: pts[i], b: pts[j], topBlock, count, message: `(${pts[j][0]},${by}) is above Alice, so it is skipped.` })
+        frames.push({ pythonLine: 11, phase: 'above', activeLine: L('if (by > ay) continue'), a: pts[i], b: pts[j], topBlock, count, message: `(${pts[j][0]},${by}) is above Alice, so it is skipped.` })
         continue
       }
       if (by > topBlock) {
         count += 1
-        frames.push({ pythonLine: 13, phase: 'count', activeLine: L('if b is higher than top_block, count it'), a: pts[i], b: pts[j], topBlock, count, message: `Nothing earlier sits between heights ${by} and ${ay}; count it.` })
+        frames.push({ pythonLine: 13, phase: 'count', activeLine: L('if (by > topBlock) count += 1'), a: pts[i], b: pts[j], topBlock, count, message: `Nothing earlier sits between heights ${by} and ${ay}; count it.` })
       } else {
-        frames.push({ pythonLine: 14, phase: 'block', activeLine: L('top_block = the larger'), a: pts[i], b: pts[j], topBlock, count, message: `An earlier point at height ${topBlock} blocks this fence.` })
+        frames.push({ pythonLine: 14, phase: 'block', activeLine: L('topBlock = Math.max'), a: pts[i], b: pts[j], topBlock, count, message: `An earlier point at height ${topBlock} blocks this fence.` })
       }
       topBlock = Math.max(topBlock, by)
     }
@@ -40,16 +40,22 @@ export function buildTrace(points) {
   return { input: points, result: count, frames }
 }
 
-export const code = `count pairs where Alice is upper-left of Bob with an empty fence
-  sort the points by x ascending, then y descending
-  count = 0
-  for each point a in sorted order
-    top_block = negative infinity
-    for each later point b
-      if b is above a, skip it
-      if b is higher than top_block, count it
-      top_block = the larger of top_block and b's height
-  return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function countPairs(points) {
+  const pts = [...points].sort((p, q) => p[0] - q[0] || q[1] - p[1])
+  const n = pts.length
+  let count = 0
+  for (let i = 0; i < n; i++) {
+    const ay = pts[i][1]
+    let topBlock = -Infinity
+    for (let j = i + 1; j < n; j++) {
+      const by = pts[j][1]
+      if (by > ay) continue
+      if (by > topBlock) count += 1
+      topBlock = Math.max(topBlock, by)
+    }
+  }
+  return count
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def count_pairs(points):

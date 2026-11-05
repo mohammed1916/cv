@@ -14,19 +14,20 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-matching-of-players-with-trainers/',
   complexity: 'O(n log n + m log m) time for n players and m trainers. The visualization caps each list at 8.',
   examples: [
-    { label: 'Example 1', input: '{"players":[4,7,9],"trainers":[8,2,3,1]}' },
-    { label: 'Example 2', input: '{"players":[1,1,1],"trainers":[10]}' },
+    { label: 'Mixed', input: '{"players":[5,2,9,3],"trainers":[4,10,1,6]}' },
+    { label: 'Weak trainers', input: '{"players":[6,6],"trainers":[2,3]}' },
   ],
 }
 
 export default function PlayersAndTrainers() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
-    const sortedPlayers = [...run.input.players].sort((a, b) => a - b)
-    return <>
-      <IndexedSequence label="Sorted players" length={sortedPlayers.length} valueAt={index => sortedPlayers[index]} active={step.next < sortedPlayers.length ? step.next : -1} />
-      <output aria-label="Trainer">{`Current trainer: ${step.trainer === -1 ? 'none' : step.trainer}; matches: ${step.matches}`}</output>
-    </>
-  }} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+    <IndexedSequence label="Sorted players (next = weakest unmatched)" length={step.ps.length} valueAt={index => step.ps[index]}
+      active={step.next < step.ps.length ? step.next : -1} roleAt={index => (index < step.next ? 'matched' : '')} />
+    <IndexedSequence label="Sorted trainers (current trainer marked)" length={step.ts.length} valueAt={index => step.ts[index]}
+      active={step.ts.indexOf(step.trainer)} roleAt={index => (index < step.ts.indexOf(step.trainer) ? 'passed' : '')} />
+    <output aria-label="Trainer">{`Current trainer: ${step.trainer === -1 ? 'none' : step.trainer}; matches: ${step.matches}`}</output>
+    <p>{step.message}</p>
+  </>} renderReasoning={() => <>
     <p>Matching the weakest player each trainer can handle keeps the strongest players available for the strongest trainers.</p>
     <p>A trainer who cannot train the weakest remaining player cannot train anyone else left, so skipping that trainer loses nothing.</p>
   </>} />

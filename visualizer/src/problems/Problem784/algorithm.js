@@ -6,38 +6,45 @@ export function parseInput(text) {
 }
 export function buildTrace(s) {
   const result = []
-  const frames = [{ phase: 'start', pythonLine: 12, activeLine: 1, index: 0, path: '', count: 0, message: 'Start a depth-first search with an empty prefix. Each letter doubles the number of outputs; digits do not.' }]
+  const frames = [{ phase: 'start', pythonLine: 12, activeLine: 3, index: 0, path: '', count: 0, message: 'Start a depth-first search with an empty prefix. Each letter doubles the number of outputs; digits do not.' }]
   const dfs = (i, path) => {
     if (i === s.length) {
       result.push(path)
-      frames.push({ phase: 'emit', pythonLine: 5, activeLine: 4, index: i, path, count: result.length, message: `All ${s.length} characters are fixed, so "${path}" is a complete permutation.` })
+      frames.push({ phase: 'emit', pythonLine: 5, activeLine: 5, index: i, path, count: result.length, message: `All ${s.length} characters are fixed, so "${path}" is a complete permutation.` })
       return
     }
     const ch = s[i]
     if (/[a-zA-Z]/.test(ch)) {
-      frames.push({ phase: 'branch', pythonLine: 8, activeLine: 6, index: i, path, count: result.length, message: `"${ch}" is a letter: try lowercase first, then uppercase.` })
+      frames.push({ phase: 'branch', pythonLine: 8, activeLine: 9, index: i, path, count: result.length, message: `"${ch}" is a letter: try lowercase first, then uppercase.` })
       dfs(i + 1, path + ch.toLowerCase())
-      frames.push({ phase: 'branch', pythonLine: 9, activeLine: 7, index: i, path, count: result.length, message: `Back at index ${i}: now try the uppercase "${ch.toUpperCase()}".` })
+      frames.push({ phase: 'branch', pythonLine: 9, activeLine: 10, index: i, path, count: result.length, message: `Back at index ${i}: now try the uppercase "${ch.toUpperCase()}".` })
       dfs(i + 1, path + ch.toUpperCase())
     } else {
-      frames.push({ phase: 'digit', pythonLine: 11, activeLine: 9, index: i, path, count: result.length, message: `"${ch}" is a digit and has only one form; append it unchanged.` })
+      frames.push({ phase: 'digit', pythonLine: 11, activeLine: 12, index: i, path, count: result.length, message: `"${ch}" is a digit and has only one form; append it unchanged.` })
       dfs(i + 1, path + ch)
     }
   }
   dfs(0, '')
-  frames.push({ phase: 'done', pythonLine: 13, activeLine: 10, index: s.length, path: '', count: result.length, message: `Done: ${result.length} permutations.` })
+  frames.push({ phase: 'done', pythonLine: 13, activeLine: 16, index: s.length, path: '', count: result.length, message: `Done: ${result.length} permutations.` })
   return { input: s, result, frames }
 }
-export const code = `call dfs(0, "") with an empty prefix
-define dfs(i, path)
-  if i equals the length of s then
-    add path to the results and return
-  if s[i] is a letter then
-    call dfs(i + 1, path + lowercase s[i])
-    call dfs(i + 1, path + uppercase s[i])
-  else
-    call dfs(i + 1, path + s[i])
-return the results`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function letterCasePermutation(s) {
+  const result = []
+  function dfs(i, path) {
+    if (i === s.length) {
+      result.push(path)
+      return
+    }
+    if (/[a-zA-Z]/.test(s[i])) {
+      dfs(i + 1, path + s[i].toLowerCase())
+      dfs(i + 1, path + s[i].toUpperCase())
+    } else {
+      dfs(i + 1, path + s[i])
+    }
+  }
+  dfs(0, '')
+  return result
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 export const python = `def letter_case_permutation(s):
     res = []
     def dfs(i, path):

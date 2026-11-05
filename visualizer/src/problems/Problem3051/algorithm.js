@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The candidate rows are invented for this visualization.
+// Teaching SQL walkthrough. The candidate rows are invented for this visualization.
 export const sql = `SELECT candidate_id
 FROM Candidates
 WHERE skill IN ('Python', 'Tableau', 'PostgreSQL')

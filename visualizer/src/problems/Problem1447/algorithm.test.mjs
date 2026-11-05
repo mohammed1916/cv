@@ -33,7 +33,7 @@ test('every n from 1 to 40 matches the oracle', () => {
 test('frames map to real code and Python lines and end with the result', () => {
   const run = buildTrace(7)
   const ids = new Set(phases.map(p => p.id))
-  const codeLines = code.split('\n').length
+  const codeLines = code.length
   const pyLines = python.split('\n').length
   for (const frame of run.frames) {
     assert.ok(ids.has(frame.phase))

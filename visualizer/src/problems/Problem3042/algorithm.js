@@ -11,24 +11,27 @@ export function parseInput(text) {
 
 export function buildTrace({ words }) {
   let count = 0
-  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set count to 0'), i: -1, j: -1, match: false, count, message: 'Start with no pairs counted.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('let count = 0'), i: -1, j: -1, match: false, count, message: 'Start with no pairs counted.' }]
   for (let i = 0; i < words.length; i++) {
     for (let j = i + 1; j < words.length; j++) {
       const match = words[j].startsWith(words[i]) && words[j].endsWith(words[i])
       if (match) count++
-      frames.push({ pythonLine: match ? 6 : 5, phase: 'pair', activeLine: L('if words[i] is a prefix'), i, j, match, count, message: `${words[i]} ${match ? 'is' : 'is not'} both a prefix and a suffix of ${words[j]}.` })
+      frames.push({ pythonLine: match ? 6 : 5, phase: 'pair', activeLine: L('if (words[j].startsWith'), i, j, match, count, message: `${words[i]} ${match ? 'is' : 'is not'} both a prefix and a suffix of ${words[j]}.` })
     }
   }
   frames.push({ pythonLine: 7, phase: 'done', activeLine: L('return count'), i: -1, j: -1, match: false, count, message: `Pairs: ${count}.` })
   return { input: { words }, result: count, frames }
 }
 
-export const code = `count pairs where an earlier word is both a prefix and a suffix of a later word
-  set count to 0
-  for each index i from 0 to n - 1
-    for each index j from i + 1 to n - 1
-      if words[i] is a prefix and a suffix of words[j] then add one to count
-  return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function countPrefixSuffixPairs(words) {
+  let count = 0
+  for (let i = 0; i < words.length; i++) {
+    for (let j = i + 1; j < words.length; j++) {
+      if (words[j].startsWith(words[i]) && words[j].endsWith(words[i])) count++
+    }
+  }
+  return count
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def count_prefix_suffix_pairs(words):

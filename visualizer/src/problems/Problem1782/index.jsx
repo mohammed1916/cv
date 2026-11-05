@@ -22,7 +22,8 @@ const definition = {
 
 export default function CountPairsOfNodes() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <IndexedSequence label="Sorted degrees" length={step.sorted.length} valueAt={i => step.sorted[i]} />
+    <IndexedSequence label="Sorted degrees" length={step.sorted.length} valueAt={i => step.sorted[i]}
+      active={step.i ?? -1} roleAt={i => (i === step.i ? 'l' : i === step.j ? 'r' : '')} />
     <output aria-label="Query state">{step.query === null ? 'Preparing degrees.' : `Query ${step.query}: ${step.total} pairs so far.`}</output>
   </>} renderReasoning={() => <>
     <p>The number of edges touching both nodes of a pair is counted twice when adding degrees, so shared edges are subtracted.</p>

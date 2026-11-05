@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-number-of-operations-to-make-x-and-y-equal/',
   complexity: 'O(L) time for a search over L bounded values, where L is about 10 times the larger input. The visualization caps x and y at 200.',
   examples: [
-    { label: 'Example 1', input: '{"x":26,"y":1}' },
-    { label: 'Example 2', input: '{"x":54,"y":2}' },
+    { label: 'Example 1', input: '{"x":18,"y":7}' },
+    { label: 'Example 2', input: '{"x":9,"y":20}' },
   ],
 }
 

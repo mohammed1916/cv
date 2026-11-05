@@ -26,7 +26,7 @@ export function buildTrace({ a, b, c }) {
   for (;;) {
     const order = ['a', 'b', 'c'].sort((x, y) => remaining[y] - remaining[x])
     frames.push({
-      phase: 'choose', activeLine: L('order letters'), pythonLine: PY('sorted('), snapshot: snap({ order }),
+      phase: 'choose', activeLine: L('const order'), pythonLine: PY('sorted('), snapshot: snap({ order }),
       message: `Try letters in order of remaining copies: ${order.map(l => `${l}×${remaining[l]}`).join(', ')}.`,
     })
     let added = false
@@ -35,7 +35,7 @@ export function buildTrace({ a, b, c }) {
       const blocked = result.length >= 2 && result.endsWith(letter + letter)
       if (blocked) {
         frames.push({
-          phase: 'skip', activeLine: L('two copies'), pythonLine: PY('result[-2:]'), snapshot: snap({ order, candidate: letter }),
+          phase: 'skip', activeLine: L('endsWith(letter'), pythonLine: PY('result[-2:]'), snapshot: snap({ order, candidate: letter }),
           message: `${letter} would make three in a row after "${result.slice(-2)}", so it is skipped.`,
         })
         continue
@@ -44,7 +44,7 @@ export function buildTrace({ a, b, c }) {
       remaining[letter] -= 1
       added = true
       frames.push({
-        phase: 'add', activeLine: L('append letter'), pythonLine: PY('result += letter'), snapshot: snap({ order, candidate: letter }),
+        phase: 'add', activeLine: L('result += letter'), pythonLine: PY('result += letter'), snapshot: snap({ order, candidate: letter }),
         message: `Append ${letter}. The string is now "${result}" with ${remaining[letter]} ${letter} left.`,
       })
       break
@@ -52,21 +52,29 @@ export function buildTrace({ a, b, c }) {
     if (!added) break
   }
   frames.push({
-    phase: 'done', activeLine: L('no letter'), pythonLine: PY('return result'), snapshot: snap(),
+    phase: 'done', activeLine: L('return result'), pythonLine: PY('return result'), snapshot: snap(),
     message: `No letter can be added. The longest string has length ${result.length}: "${result}".`,
   })
   return { input: { a, b, c }, result, frames }
 }
 
-export const code = `longest happy string (a, b, c):
-  remaining = {a: a, b: b, c: c}, result = ""
-  repeat:
-    order letters by remaining count, largest first
-    for each letter in that order:
-      if remaining[letter] is 0: continue
-      if result ends with two copies of letter: skip it
-      append letter to result, remaining[letter] -= 1, go to repeat
-    no letter can be added: return result`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function longestDiverseString(a, b, c) {
+  const remaining = { a, b, c }
+  let result = ''
+  while (true) {
+    const order = ['a', 'b', 'c'].sort((x, y) => remaining[y] - remaining[x])
+    let added = false
+    for (const letter of order) {
+      if (remaining[letter] === 0) continue
+      if (result.endsWith(letter + letter)) continue
+      result += letter
+      remaining[letter] -= 1
+      added = true
+      break
+    }
+    if (!added) return result
+  }
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 

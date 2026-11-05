@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-number-of-ways-to-place-people-i/',
   complexity: 'O(n^3) time in this trace: every ordered pair is checked against every other point.',
   examples: [
-    { label: 'Example 1', input: '[[1,1],[2,2],[3,3]]' },
-    { label: 'Example 2', input: '[[6,2],[4,4],[2,6]]' },
+    { label: 'Example 1', input: '[[2,5],[4,3],[6,1]]' },
+    { label: 'Example 2', input: '[[0,4],[3,3],[1,0],[5,6]]' },
   ],
 }
 

@@ -19,7 +19,7 @@ export function buildTrace(words) {
   const answer = []
   const snap = (i, j, extra = {}) => ({ words, i, j, answer: [...answer], ...extra })
   const frames = [{
-    phase: 'start', activeLine: L('answer = empty'), pythonLine: PY('answer = []'), snapshot: snap(null, null),
+    phase: 'start', activeLine: L('const answer = []'), pythonLine: PY('answer = []'), snapshot: snap(null, null),
     message: `${words.length} distinct words. A word qualifies when it sits inside a different word, so each word is compared only with the others.`,
   }]
   for (let i = 0; i < words.length; i++) {
@@ -27,13 +27,13 @@ export function buildTrace(words) {
       if (i === j) continue
       const inside = words[j].includes(words[i])
       frames.push({
-        phase: 'compare', activeLine: L('not the same entry'), pythonLine: PY('if i != j'), snapshot: snap(i, j, { inside }),
+        phase: 'compare', activeLine: L('i !== j'), pythonLine: PY('if i != j'), snapshot: snap(i, j, { inside }),
         message: `Is "${words[i]}" inside "${words[j]}"? ${inside ? 'Yes.' : 'No.'}`,
       })
       if (inside) {
         answer.push(words[i])
         frames.push({
-          phase: 'found', activeLine: L('append word'), pythonLine: PY('answer.append'), snapshot: snap(i, j, { inside }),
+          phase: 'found', activeLine: L('answer.push'), pythonLine: PY('answer.append'), snapshot: snap(i, j, { inside }),
           message: `"${words[i]}" is a substring of "${words[j]}", so it is recorded. Later words for "${words[i]}" are not needed.`,
         })
         break
@@ -47,13 +47,18 @@ export function buildTrace(words) {
   return { input: words, result: answer, frames }
 }
 
-export const code = `string matching (words):
-  answer = empty list
-  for each word in words:
-    for each other word in words, not the same entry:
-      if word is a substring of other:
-        append word to answer, then move to the next word
-  return answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function stringMatching(words) {
+  const answer = []
+  for (let i = 0; i < words.length; i++) {
+    for (let j = 0; j < words.length; j++) {
+      if (i !== j && words[j].includes(words[i])) {
+        answer.push(words[i])
+        break
+      }
+    }
+  }
+  return answer
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 

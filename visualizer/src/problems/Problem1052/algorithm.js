@@ -21,27 +21,26 @@ export function parseInput(text) {
   return { customers, grumpy, minutes }
 }
 
-const pseudo = `max_satisfied(customers, grumpy, minutes):
-  base = total of customers where grumpy is 0
-  window = recoverable customers in the first window
-  best = window
-  for each later window end:
-    window = window + entering minute - leaving minute
-    best = maximum of best and window
-  return base + best`
-const py = `def max_satisfied(customers, grumpy, minutes):
-    base = sum(c for c, g in zip(customers, grumpy) if g == 0)
-    window = sum(c for c, g in zip(customers[:minutes], grumpy[:minutes]) if g == 1)
-    best = window
-    for end in range(minutes, len(customers)):
-        window += customers[end] * grumpy[end] - customers[end - minutes] * grumpy[end - minutes]
-        best = max(best, window)
-    return base + best`
-
-export const code = pseudo.split('\n').map((text, index) => ({ line: index + 1, text }))
-export const python = py
-
-const LINE = { start: 1, baseline: 2, window: 3, slide: 6, best: 7, done: 8 }
+// Each line of JavaScript is paired with the Python line on the same row.
+const LINES = [
+  ['function maxSatisfied(customers, grumpy, minutes) {', 'def max_satisfied(customers, grumpy, minutes):'],
+  ['  let base = 0', '    base = 0'],
+  ['  for (let i = 0; i < customers.length; i++) if (grumpy[i] === 0) base += customers[i]', '    for i in range(len(customers)): base += customers[i] * (1 - grumpy[i])'],
+  ['  let window = 0', '    window = 0'],
+  ['  for (let i = 0; i < minutes; i++) window += customers[i] * grumpy[i]', '    for i in range(minutes): window += customers[i] * grumpy[i]'],
+  ['  let best = window', '    best = window'],
+  ['  for (let end = minutes; end < customers.length; end++) {', '    for end in range(minutes, len(customers)):'],
+  ['    window += customers[end] * grumpy[end] - customers[end - minutes] * grumpy[end - minutes]', '        window += customers[end] * grumpy[end] - customers[end - minutes] * grumpy[end - minutes]'],
+  ['    best = Math.max(best, window)', '        best = max(best, window)'],
+  ['  }', ''],
+  ['  return base + best', '    return base + best'],
+  ['}', ''],
+]
+const codeLines = LINES.map(([js]) => js)
+export const code = codeLines.map((text, index) => ({ line: index + 1, text }))
+const L = s => codeLines.findIndex(c => c.includes(s)) + 1
+export const python = LINES.map(([, py]) => py).join('\n')
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export function buildTrace(input) {
   const { customers, grumpy, minutes } = input
@@ -54,28 +53,28 @@ export function buildTrace(input) {
   let bestStart = 0
   let start = 0
 
-  const frame = (phase, activeLine, message) => frames.push({
-    phase, activeLine, message,
+  const frame = (phase, pythonKey, activeKey, message) => frames.push({
+    phase, pythonLine: P(pythonKey), activeLine: L(activeKey), message,
     snapshot: {
       customers, grumpy, minutes, calm,
       windowStart: start, windowEnd: start + minutes, window, best, bestStart,
     },
   })
 
-  frame('start', LINE.start, `Window length ${minutes} over ${customers.length} minutes. A window can recover grumpy minutes only.`)
-  frame('baseline', LINE.baseline, `Calm minutes already satisfy ${calm} customers, so they count once and never change.`)
-  frame('window', LINE.window, `The first window covers minutes 0 to ${minutes - 1}. It recovers ${window} customers.`)
-  frame('best', LINE.best, `Best so far is ${best}, from the window starting at minute 0.`)
+  frame('start', 'base = 0', 'let base = 0', `Window length ${minutes} over ${customers.length} minutes. A window can recover grumpy minutes only.`)
+  frame('baseline', 'for i in range(len(customers))', 'base += customers[i]', `Calm minutes already satisfy ${calm} customers, so they count once and never change.`)
+  frame('window', 'for i in range(minutes)', 'window += customers[i] * grumpy[i]', `The first window covers minutes 0 to ${minutes - 1}. It recovers ${window} customers.`)
+  frame('best', 'best = window', 'let best = window', `Best so far is ${best}, from the window starting at minute 0.`)
   for (let end = minutes; end < customers.length; end++) {
     start = end - minutes + 1
     window += recoverable(end) - recoverable(end - minutes)
-    frame('slide', LINE.slide, `Shift the window to minutes ${start} to ${end}: add minute ${end}, drop minute ${end - minutes}. It recovers ${window}.`)
+    frame('slide', 'window += customers[end]', 'window += customers[end] * grumpy[end]', `Shift the window to minutes ${start} to ${end}: add minute ${end}, drop minute ${end - minutes}. It recovers ${window}.`)
     if (window > best) { best = window; bestStart = start }
-    frame('best', LINE.best, `${window} against best ${best}${window === best && bestStart === start ? ' (new best)' : ''}.`)
+    frame('best', 'best = max', 'best = Math.max', `${window} against best ${best}${window === best && bestStart === start ? ' (new best)' : ''}.`)
   }
   const result = calm + best
   frames.push({
-    phase: 'done', activeLine: LINE.done,
+    phase: 'done', pythonLine: P('return base + best'), activeLine: L('return base + best'),
     message: `Answer: ${calm} calm plus ${best} recovered gives ${result}.`,
     snapshot: { customers, grumpy, minutes, calm, windowStart: bestStart, windowEnd: bestStart + minutes, window: best, best, bestStart },
   })

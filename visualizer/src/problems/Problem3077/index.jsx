@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-strength-of-k-disjoint-subarrays/',
   complexity: 'O(n * k) time and O(k) space. The visualization caps input at 8 numbers.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,3,-1,2],"k":3}' },
-    { label: 'Example 2', input: '{"nums":[12,-2,-2,-2,-2],"k":5}' },
+    { label: 'Example 1', input: '{"nums":[4,-1,3,2],"k":2}' },
+    { label: 'Example 2', input: '{"nums":[-3,5,-2,6],"k":3}' },
   ],
 }
 

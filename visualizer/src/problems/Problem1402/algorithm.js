@@ -40,7 +40,7 @@ export function buildTrace(satisfaction) {
     kept.push(sorted[i])
     total += running
     frames.push({
-      phase: 'add', activeLine: L('total = total + running'), pythonLine: PY('total += running'), snapshot: snap(i),
+      phase: 'add', activeLine: L('total += running'), pythonLine: PY('total += running'), snapshot: snap(i),
       message: `Keep ${sorted[i]}. The running sum is ${running}, so the total grows by ${running} to ${total}.`,
     })
   }
@@ -51,14 +51,17 @@ export function buildTrace(satisfaction) {
   return { input: satisfaction, result: total, frames }
 }
 
-export const code = `reducing dishes (satisfaction):
-  sort satisfaction from highest to lowest
-  total = 0, running = 0
-  for each value in sorted order:
-    running = running + value
-    if running < 0: stop
-    total = total + running
-  return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function maxSatisfaction(satisfaction) {
+  const sorted = [...satisfaction].sort((a, b) => b - a)
+  let total = 0
+  let running = 0
+  for (const value of sorted) {
+    running += value
+    if (running < 0) break
+    total += running
+  }
+  return total
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 

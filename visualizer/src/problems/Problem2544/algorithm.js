@@ -16,12 +16,14 @@ const py = (text) => {
 export const python = PYTHON_SOURCE
 
 export const code = [
-  { line: 1, text: 'function alternatingDigitSum(n)' },
-  { line: 2, text: 'total = 0 and sign = 1' },
-  { line: 3, text: 'for each digit of n from the most significant digit' },
-  { line: 4, text: 'total = total + sign times digit' },
-  { line: 5, text: 'sign = negative of sign' },
-  { line: 6, text: 'return total' },
+  { line: 1, text: "function alternatingDigitSum(n) {" },
+  { line: 2, text: "  let total = 0; let sign = 1" },
+  { line: 3, text: "  for (const digit of String(n)) {" },
+  { line: 4, text: "    total += sign * Number(digit)" },
+  { line: 5, text: "    sign = -sign" },
+  { line: 6, text: "  }" },
+  { line: 7, text: "  return total" },
+  { line: 8, text: "}" },
 ]
 
 export function parseInput(text) {
@@ -58,6 +60,6 @@ export function buildTrace(input) {
   }
 
   index = -1
-  add({ phase: 'done', activeLine: 6, pythonLine: py('return total'), message: `Return ${total}.`, result: total })
+  add({ phase: 'done', activeLine: 7, pythonLine: py('return total'), message: `Return ${total}.`, result: total })
   return { input, result: total, frames }
 }

@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-operations-to-write-the-letter-y-on-a-grid/',
   complexity: 'O(n^2) time to count the cells and O(1) to try the six value pairs.',
   examples: [
-    { label: 'Example 1', input: '[[1,2,2],[1,1,0],[0,1,2]]' },
-    { label: 'Example 2', input: '[[1,1,1],[1,1,1],[1,1,1]]' },
+    { label: 'Example 1', input: '[[2,2,0],[2,1,0],[1,0,1]]' },
+    { label: 'Example 2', input: '[[0,1,0],[1,0,1],[2,2,2]]' },
   ],
 }
 

@@ -14,7 +14,7 @@ export default function WindowVisual() {
     const chars = [...s.text]
     const marks = {}
     if (s.right >= 0) for (let i = s.left; i <= s.right; i++) marks[i] = 'window'
-    const pointers = s.right >= 0 ? { left: s.left, right: s.right } : { left: 0 }
+    const pointers = s.right >= 0 ? { l: s.left, r: s.right } : { l: 0 }
     const size = s.right >= 0 ? s.right - s.left + 1 : 0
     return <>
       <Sequence label={`Window of size ${size} (k = ${s.k})`} values={chars} pointers={pointers} marks={marks} />

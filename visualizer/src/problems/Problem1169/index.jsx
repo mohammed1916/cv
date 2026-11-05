@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
 import RecordStateTable from "../../components/shared/RecordStateTable";
 import { Sequence, Vars } from "./SeqKit";
-import { code, python, pythonLineMap, phases, parseInput, buildTrace } from "./algorithm";
+import { code, python, phases, parseInput, buildTrace } from "./algorithm";
 
 const definition = {
   number: "1169",
@@ -10,7 +10,6 @@ const definition = {
   build: buildTrace,
   code,
   python,
-  pythonLineMap,
   inputLabel: 'JSON {"transactions": ["name,time,amount,city", ...]}',
   url: "https://leetcode.com/problems/invalid-transactions/description/",
   complexity: "O(n^2) time and O(n) space for n transactions. The visualization caps n at 50.",

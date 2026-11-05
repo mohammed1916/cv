@@ -1,15 +1,20 @@
 // Own union-find walkthrough. The sample logs are invented for this visualization.
-const PSEUDO = [
-  'sort the logs by time',
-  'parent[i] = i for every person; groups = n',
-  'for time, a, b in logs:',
-  '    ra = find(a); rb = find(b)',
-  '    if ra != rb:',
-  '        union(ra, rb); groups -= 1',
-  '    if groups == 1:',
-  '        return time',
-  'return -1',
-]
+const CODE_TEXT = `function earliestFullLink(n, logs) {
+  const sorted = [...logs].sort((x, y) => x[0] - y[0])
+  const parent = Array.from({ length: n }, (_, i) => i)
+  const find = x => { while (parent[x] !== x) x = parent[x]; return x }
+  let groups = n
+  for (const [time, a, b] of sorted) {
+    const ra = find(a)
+    const rb = find(b)
+    if (ra !== rb) {
+      parent[ra] = rb
+      groups--
+    }
+    if (groups === 1) return time
+  }
+  return -1
+}`
 
 export const python = `def earliest_full_link(n, logs):
     logs = sorted(logs)
@@ -30,14 +35,14 @@ export const python = `def earliest_full_link(n, logs):
     return -1`
 
 const PY = python.split('\n')
-export const code = PSEUDO.map((text, index) => ({ line: index + 1, text }))
+export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const STEP = {
-  start: ['parent[i] = i', 'parent = list('],
-  pick: ['for time, a, b', 'for time, a, b'],
-  find: ['ra = find', 'ra, rb = find'],
-  merge: ['union(ra, rb)', 'parent[ra] = rb'],
-  skip: ['if ra != rb', 'if ra != rb'],
+  start: ['const parent = Array.from', 'parent = list('],
+  pick: ['for (const [time, a, b]', 'for time, a, b'],
+  find: ['const ra = find(a)', 'ra, rb = find'],
+  merge: ['parent[ra] = rb', 'parent[ra] = rb'],
+  skip: ['if (ra !== rb)', 'if ra != rb'],
   done: ['return time', 'return time'],
   none: ['return -1', 'return -1'],
 }
@@ -48,7 +53,7 @@ function lineOf(lines, key) {
 }
 const frame = (phase, step, message, snapshot) => ({
   phase,
-  activeLine: lineOf(PSEUDO, STEP[step][0]),
+  activeLine: lineOf(CODE_TEXT.split('\n'), STEP[step][0]),
   pythonLine: lineOf(PY, STEP[step][1]),
   message,
   snapshot,

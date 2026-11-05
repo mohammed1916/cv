@@ -16,39 +16,43 @@ const hotter = ([a, countA], [b, countB]) => countB - countA || (a < b ? -1 : a 
 export function buildTrace(spec) {
   const counts = new Map(spec.sentences.map((s, i) => [s, spec.times[i]]))
   const suggest = prefix => [...counts].filter(([s]) => s.startsWith(prefix)).sort(hotter).slice(0, LIMIT)
-  const frames = [{ phase: 'start', pythonLine: P('counts = dict(zip'), activeLine: L('counts = map each sentence'), typed: '', char: null, top: [], message: `Store ${counts.size} sentences with their hotness. Nothing is typed yet.` }]
+  const frames = [{ phase: 'start', pythonLine: P('counts = dict(zip'), activeLine: L('const counts = new Map'), typed: '', char: null, top: [], message: `Store ${counts.size} sentences with their hotness. Nothing is typed yet.` }]
   const result = []
   let typed = ''
   for (const char of spec.typed) {
     if (char === '#') {
       counts.set(typed, (counts.get(typed) ?? 0) + 1)
       result.push([])
-      frames.push({ phase: 'save', pythonLine: P('counts[prefix] = counts.get'), activeLine: L('counts[prefix] += 1'), typed, char, top: [], message: `"${typed}" is saved and its hotness rises by one. The next sentence starts empty.` })
+      frames.push({ phase: 'save', pythonLine: P('counts[prefix] = counts.get'), activeLine: L('counts.set(prefix'), typed, char, top: [], message: `"${typed}" is saved and its hotness rises by one. The next sentence starts empty.` })
       typed = ''
       continue
     }
     typed += char
     const top = suggest(typed)
     result.push(top.map(([s]) => s))
-    frames.push({ phase: 'input', pythonLine: P('matches.sort('), activeLine: L('sort matches by hotness'), typed, char, top, message: top.length ? `Prefix "${typed}": showing ${top.length} suggestion(s), hottest first.` : `No sentence starts with "${typed}".` })
+    frames.push({ phase: 'input', pythonLine: P('matches.sort('), activeLine: L('matches.sort('), typed, char, top, message: top.length ? `Prefix "${typed}": showing ${top.length} suggestion(s), hottest first.` : `No sentence starts with "${typed}".` })
   }
   return { input: spec, result, frames }
 }
 
-export const code = `counts = map each sentence to its times
-prefix = empty text
-result = empty list
-for each character ch in typed:
-  if ch is "#":
-    counts[prefix] += 1 (save the sentence; its hotness rises by one)
-    result append an empty list
-    prefix = empty text
-  else:
-    prefix = prefix + ch
-    matches = stored sentences that start with prefix
-    sort matches by hotness (high first), then alphabetically
-    result append the first 3 matches
-return result`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function autocompleteSystem(sentences, times, typed) {
+  const counts = new Map(sentences.map((s, i) => [s, times[i]]))
+  let prefix = ''
+  const result = []
+  for (const ch of typed) {
+    if (ch === '#') {
+      counts.set(prefix, (counts.get(prefix) ?? 0) + 1)
+      result.push([])
+      prefix = ''
+    } else {
+      prefix += ch
+      const matches = [...counts.keys()].filter(s => s.startsWith(prefix))
+      matches.sort((a, b) => counts.get(b) - counts.get(a) || (a < b ? -1 : a > b ? 1 : 0))
+      result.push(matches.slice(0, 3))
+    }
+  }
+  return result
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def autocomplete_system(sentences, times, typed):
     counts = dict(zip(sentences, times))

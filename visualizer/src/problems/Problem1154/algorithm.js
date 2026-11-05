@@ -5,18 +5,30 @@ export const phases = [
   { id: 'done', label: 'Result', description: 'The running total is the one-based day number.' },
 ]
 
-const SOURCE = [
-  ['head', 'function day_of_year(year, month, day):', 'def day_of_year(year, month, day):'],
-  ['leap', '  leap = (year % 4 == 0 and year % 100 != 0) or year % 400 == 0', '    leap = (year % 4 == 0 and year % 100 != 0) or year % 400 == 0'],
-  ['total', '  total = day', '    total = day'],
-  ['loop', '  for m from 1 to month - 1:', '    for m in range(1, month):'],
-  ['add', '    total = total + days_in(m, leap)', '        total += days_in(m, leap)'],
-  ['ret', '  return total', '    return total'],
-]
-export const code = SOURCE.map(row => row[1]).join('\n')
-export const python = SOURCE.map(row => row[2]).join('\n')
-export const pythonLineMap = Object.fromEntries(SOURCE.map((_, index) => [index + 1, index + 1]))
-const L = Object.fromEntries(SOURCE.map((row, index) => [row[0], index + 1]))
+export const code = `function dayOfYear(year, month, day) {
+  const leap = (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
+  let total = day
+  for (let m = 1; m < month; m++) total += monthLength(m, year)
+  return total
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+export const python = `def days_in(m, year):
+    if m == 2:
+        leap = year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
+        return 29 if leap else 28
+    return 30 if m in (4, 6, 9, 11) else 31
+
+
+def day_of_year(year, month, day):
+    leap = (year % 4 == 0 and year % 100 != 0) or year % 400 == 0
+    total = day
+    for m in range(1, month):
+        total += days_in(m, year)
+    return total`
+
+// Line numbers in the JavaScript code and in the Python version of each step.
+const L = { leap: 2, total: 3, loop: 4, add: 4, ret: 5 }
+const PL = { leap: 9, total: 10, loop: 11, add: 12, ret: 13 }
 
 const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 function isLeap(year) { return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0 }
@@ -43,32 +55,32 @@ export function buildTrace({ year, month, day }) {
     counted: [...counted], total, ...extra,
   })
   frames.push({
-    phase: 'start', activeLine: L.leap,
+    phase: 'start', activeLine: L.leap, pythonLine: PL.leap,
     message: `${year} is ${leap ? 'a leap' : 'not a leap'} year, so February has ${leap ? 29 : 28} days.`,
     snapshot: snapshot(),
   })
   frames.push({
-    phase: 'start', activeLine: L.total,
+    phase: 'start', activeLine: L.total, pythonLine: PL.total,
     message: `Start the total at day ${day} of month ${month}.`,
     snapshot: snapshot(),
   })
   for (let m = 1; m < month; m++) {
     const length = monthLength(m, year)
     frames.push({
-      phase: 'inspect', activeLine: L.loop,
+      phase: 'inspect', activeLine: L.loop, pythonLine: PL.loop,
       message: `Month ${m} is complete and has ${length} days.`,
       snapshot: snapshot({ focus: m }),
     })
     total += length
     counted.push(m)
     frames.push({
-      phase: 'update', activeLine: L.add,
+      phase: 'update', activeLine: L.add, pythonLine: PL.add,
       message: `Add ${length}. The total is now ${total}.`,
       snapshot: snapshot({ focus: m }),
     })
   }
   frames.push({
-    phase: 'done', activeLine: L.ret,
+    phase: 'done', activeLine: L.ret, pythonLine: PL.ret,
     message: `Day ${day} of month ${month} is day ${total} of the year.`,
     snapshot: snapshot(),
   })

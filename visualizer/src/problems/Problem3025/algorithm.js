@@ -14,12 +14,12 @@ export function parseInput(text) {
 export function buildTrace(points) {
   const frames = []
   let count = 0
-  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('count = 0'), a: null, b: null, count, message: `Check every ordered pair of ${points.length} points.` })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('let count = 0'), a: null, b: null, count, message: `Check every ordered pair of ${points.length} points.` })
   for (const [ax, ay] of points) {
     for (const [bx, by] of points) {
       if (ax === bx && ay === by) continue
       if (!(ax <= bx && ay >= by)) {
-        frames.push({ pythonLine: 7, phase: 'skip', activeLine: L('if a is left of or equal to b'), a: [ax, ay], b: [bx, by], count, message: `(${ax},${ay}) is not upper-left of (${bx},${by}).` })
+        frames.push({ pythonLine: 7, phase: 'skip', activeLine: L('if (ax <= bx && ay >= by)'), a: [ax, ay], b: [bx, by], count, message: `(${ax},${ay}) is not upper-left of (${bx},${by}).` })
         continue
       }
       let blocker = null
@@ -28,10 +28,10 @@ export function buildTrace(points) {
         if (ax <= px && px <= bx && by <= py && py <= ay) { blocker = [px, py]; break }
       }
       if (blocker) {
-        frames.push({ pythonLine: 13, phase: 'blocked', activeLine: L('if p lies inside'), a: [ax, ay], b: [bx, by], blocker, count, message: `(${blocker[0]},${blocker[1]}) lies in the fence, so this pair fails.` })
+        frames.push({ pythonLine: 13, phase: 'blocked', activeLine: L('if (ax <= px && px <= bx'), a: [ax, ay], b: [bx, by], blocker, count, message: `(${blocker[0]},${blocker[1]}) lies in the fence, so this pair fails.` })
       } else {
         count += 1
-        frames.push({ pythonLine: 16, phase: 'count', activeLine: L('if not blocked, add one to count'), a: [ax, ay], b: [bx, by], count, message: `The fence from (${ax},${ay}) to (${bx},${by}) is empty; count it.` })
+        frames.push({ pythonLine: 16, phase: 'count', activeLine: L('if (!blocked) count += 1'), a: [ax, ay], b: [bx, by], count, message: `The fence from (${ax},${ay}) to (${bx},${by}) is empty; count it.` })
       }
     }
   }
@@ -39,15 +39,23 @@ export function buildTrace(points) {
   return { input: points, result: count, frames }
 }
 
-export const code = `count pairs where Alice is upper-left of Bob with an empty fence
-  count = 0
-  for each ordered pair a, b of different points
-    if a is left of or equal to b and above or equal to b
-      blocked = false
-      for each other point p
-        if p lies inside or on the fence of a and b, blocked = true and stop
-      if not blocked, add one to count
-  return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function countPairs(points) {
+  let count = 0
+  for (const [ax, ay] of points) {
+    for (const [bx, by] of points) {
+      if (ax === bx && ay === by) continue
+      if (ax <= bx && ay >= by) {
+        let blocked = false
+        for (const [px, py] of points) {
+          if ((px === ax && py === ay) || (px === bx && py === by)) continue
+          if (ax <= px && px <= bx && by <= py && py <= ay) { blocked = true; break }
+        }
+        if (!blocked) count += 1
+      }
+    }
+  }
+  return count
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def count_pairs(points):

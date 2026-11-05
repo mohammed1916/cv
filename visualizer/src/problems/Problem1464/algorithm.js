@@ -22,49 +22,55 @@ export function buildTrace({ nums }) {
   let largestAt = null
   let runnerAt = null
   const snap = (index, action) => ({ index, value: index === null ? null : nums[index], largest, runner, largestAt, runnerAt, action })
-  const frames = [{ phase: 'start', ...at(2), snapshot: snap(null, 'start'), message: 'Start with no two largest values. Every value is at least 1, so 0 is a safe placeholder.' }]
+  const frames = [{ phase: 'start', ...at(2, 2), snapshot: snap(null, 'start'), message: 'Start with no two largest values. Every value is at least 1, so 0 is a safe placeholder.' }]
   nums.forEach((value, index) => {
-    frames.push({ phase: 'scan', ...at(3), snapshot: snap(index, 'read'), message: `Read ${value} at position ${index}. Largest is ${largest}, runner-up is ${runner}.` })
+    frames.push({ phase: 'scan', ...at(4, 4), snapshot: snap(index, 'read'), message: `Read ${value} at position ${index}. Largest is ${largest}, runner-up is ${runner}.` })
     if (value > largest) {
       runner = largest
       runnerAt = largestAt
       largest = value
       largestAt = index
-      frames.push({ phase: 'update', ...at(6), snapshot: snap(index, 'new largest'), message: `${value} is the new largest, and the old largest drops to runner-up.` })
+      frames.push({ phase: 'update', ...at(6, 7), snapshot: snap(index, 'new largest'), message: `${value} is the new largest, and the old largest drops to runner-up.` })
     } else if (value > runner) {
       runner = value
       runnerAt = index
-      frames.push({ phase: 'update', ...at(8), snapshot: snap(index, 'new runner-up'), message: `${value} beats the runner-up, so it replaces that value.` })
+      frames.push({ phase: 'update', ...at(10, 9), snapshot: snap(index, 'new runner-up'), message: `${value} beats the runner-up, so it replaces that value.` })
     } else {
-      frames.push({ phase: 'update', ...at(7), snapshot: snap(index, 'skip'), message: `${value} does not beat either stored value, so nothing changes.` })
+      frames.push({ phase: 'update', ...at(9, 8), snapshot: snap(index, 'skip'), message: `${value} does not beat either stored value, so nothing changes.` })
     }
   })
   const result = (largest - 1) * (runner - 1)
-  frames.push({ phase: 'answer', ...at(9), snapshot: snap(null, 'multiply'), message: `(${largest} - 1) * (${runner} - 1) = ${result}.` })
-  frames.push({ phase: 'done', ...at(9), snapshot: snap(null, 'done'), message: `Return ${result}.` })
+  frames.push({ phase: 'answer', ...at(13, 13), snapshot: snap(null, 'multiply'), message: `(${largest} - 1) * (${runner} - 1) = ${result}.` })
+  frames.push({ phase: 'done', ...at(13, 13), snapshot: snap(null, 'done'), message: `Return ${result}.` })
   return { input: { nums }, result, frames }
 }
 
-export const code = [
-  'max product of two elements (nums):',
-  '  largest = 0; runner = 0',
-  '  for value in nums:',
-  '    if value > largest:',
-  '      runner = largest',
-  '      largest = value',
-  '    else if value > runner:',
-  '      runner = value',
-  '  return (largest - 1) * (runner - 1)',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function maxProduct(nums) {
+  let largest = 0
+  let runner = 0
+  for (let index = 0; index < nums.length; index++) {
+    const value = nums[index]
+    if (value > largest) {
+      runner = largest
+      largest = value
+    } else if (value > runner) {
+      runner = value
+    }
+  }
+  return (largest - 1) * (runner - 1)
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
-export const python = [
-  'def max_product(nums):',
-  '    largest = runner = 0',
-  '    for value in nums:',
-  '        if value > largest:',
-  '            runner = largest',
-  '            largest = value',
-  '        elif value > runner:',
-  '            runner = value',
-  '    return (largest - 1) * (runner - 1)',
-].join('\n')
+export const python = `def max_product(nums):
+    largest = 0
+    runner = 0
+    for index, value in enumerate(nums):
+        if value > largest:
+            runner = largest
+            largest = value
+        elif value > runner:
+            runner = value
+
+
+
+    return (largest - 1) * (runner - 1)
+`

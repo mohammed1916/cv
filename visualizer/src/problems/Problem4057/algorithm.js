@@ -28,25 +28,35 @@ export function buildTrace(input) {
   const n = intervals.length
   // Two intervals are disjoint exactly when one ends before the other starts, and each disjoint pair is counted once.
   const starts = intervals.map(([s]) => s).sort((a, b) => a - b)
-  const frames = [{ pythonLine: 6, phase: 'sort', activeLine: L('sort all start values'), index: -1, disjoint: 0, message: 'Sort the start values so each end can be compared quickly.' }]
+  const frames = [{ pythonLine: 6, phase: 'sort', activeLine: L('const starts = intervals.map'), index: -1, disjoint: 0, message: 'Sort the start values so each end can be compared quickly.' }]
   let disjoint = 0
   intervals.forEach(([, e], index) => {
     const k = countGreater(starts, e)
     disjoint += k
-    frames.push({ pythonLine: 9, phase: 'count', activeLine: L('count the starts that are greater'), index, disjoint, k, message: `${k} interval${k === 1 ? '' : 's'} start after interval ${index} ends.` })
+    frames.push({ pythonLine: 9, phase: 'count', activeLine: L('disjoint += n - lo'), index, disjoint, k, message: `${k} interval${k === 1 ? '' : 's'} start after interval ${index} ends.` })
   })
   const result = (n * (n - 1)) / 2 - disjoint
-  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return n times'), index: -1, disjoint, k: null, message: `Intersecting pairs: ${result}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return (n * (n - 1))'), index: -1, disjoint, k: null, message: `Intersecting pairs: ${result}.` })
   return { input, result, frames }
 }
 
-export const code = `count intersecting interval pairs II(intervals)
-  set n to the number of intervals
-  sort all start values into starts
-  set disjoint to 0
-  for each interval i do
-    count the starts that are greater than the end of interval i and add that to disjoint
-  return n times (n minus 1) divided by 2 minus disjoint`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function countIntersectingPairsSorted(intervals) {
+  const n = intervals.length
+  const starts = intervals.map(([s]) => s).sort((a, b) => a - b)
+  let disjoint = 0
+  for (const [, end] of intervals) {
+    let lo = 0
+    let hi = n
+    while (lo < hi) {
+      const mid = (lo + hi) >> 1
+      if (starts[mid] <= end) lo = mid + 1
+      else hi = mid
+    }
+    disjoint += n - lo
+  }
+  return (n * (n - 1)) / 2 - disjoint
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `import bisect

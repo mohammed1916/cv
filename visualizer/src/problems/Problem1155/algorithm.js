@@ -6,19 +6,27 @@ export const phases = [
 ]
 
 const MOD = 1000000007
-const SOURCE = [
-  ['head', 'function count_ways(n, faces, target):', 'def count_ways(n, faces, target):'],
-  ['base', '  prev = [1, 0, 0, ..., 0]  (length target + 1)', '    prev = [1] + [0] * target'],
-  ['die', '  for die from 1 to n:', '    for die in range(n):'],
-  ['cell', '    for s from 0 to target:', '        for s in range(target + 1):'],
-  ['read', '      cur[s] = sum of prev[s - f] for face f = 1..faces, when s - f >= 0', '            cur[s] = sum(prev[s - f] for f in range(1, faces + 1) if s - f >= 0) % MOD'],
-  ['swap', '    prev = cur', '        prev = cur'],
-  ['ret', '  return prev[target]', '    return prev[target]'],
-]
-export const code = SOURCE.map(row => row[1]).join('\n')
-export const python = SOURCE.map(row => row[2]).join('\n')
-export const pythonLineMap = Object.fromEntries(SOURCE.map((_, index) => [index + 1, index + 1]))
-const L = Object.fromEntries(SOURCE.map((row, index) => [row[0], index + 1]))
+export const code = `function countWays(n, faces, target) {
+  let prev = [1, ...Array(target).fill(0)]
+  for (let die = 1; die <= n; die++) {
+    prev = prev.map((_, s) => { let t = 0; for (let f = 1; f <= faces; f++) if (s - f >= 0) t += prev[s - f]; return t % 1000000007 })
+  }
+  return prev[target]
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+export const python = `def count_ways(n, faces, target):
+    MOD = 1000000007
+    prev = [1] + [0] * target
+    for die in range(n):
+        cur = [0] * (target + 1)
+        for s in range(target + 1):
+            cur[s] = sum(prev[s - f] for f in range(1, faces + 1) if s - f >= 0) % MOD
+        prev = cur
+    return prev[target]`
+
+// Line numbers in the JavaScript code and in the Python version of each step.
+const L = { base: 2, die: 3, cell: 4, read: 4, swap: 4, ret: 6 }
+const PL = { base: 3, die: 4, cell: 6, read: 7, swap: 8, ret: 9 }
 
 export function parseInput(text) {
   let values
@@ -36,7 +44,7 @@ export function buildTrace({ dice, faces, target }) {
   let prev = Array(target + 1).fill(0)
   prev[0] = 1
   const snapshot = (extra = {}) => ({ dice, faces, target, row: 0, prev: [...prev], cur: null, reads: [], sum: null, ...extra })
-  frames.push({ phase: 'start', activeLine: L.base, message: `With zero dice, only sum 0 is possible. That is the starting row.`, snapshot: snapshot() })
+  frames.push({ phase: 'start', activeLine: L.base, pythonLine: PL.base, message: `With zero dice, only sum 0 is possible. That is the starting row.`, snapshot: snapshot() })
 
   for (let die = 1; die <= dice; die++) {
     const cur = Array(target + 1).fill(0)
@@ -45,7 +53,7 @@ export function buildTrace({ dice, faces, target }) {
       let total = 0
       for (let f = 1; f <= faces; f++) if (s - f >= 0) { reads.push(s - f); total += prev[s - f] }
       frames.push({
-        phase: 'inspect', activeLine: L.read,
+        phase: 'inspect', activeLine: L.read, pythonLine: PL.read,
         message: reads.length
           ? `Sum ${s} with ${die} dice: the last die shows one of its faces, so read previous sums ${reads.join(', ')}.`
           : `Sum ${s} with ${die} dice: no face can be the last one, so the count is 0.`,
@@ -53,13 +61,13 @@ export function buildTrace({ dice, faces, target }) {
       })
       cur[s] = total % MOD
       frames.push({
-        phase: 'update', activeLine: s === target ? L.swap : L.read,
+        phase: 'update', activeLine: s === target ? L.swap : L.read, pythonLine: s === target ? PL.swap : PL.read,
         message: `Store ${cur[s]} for sum ${s} in row ${die}.`,
         snapshot: snapshot({ row: die, cur: [...cur], reads, sum: s }),
       })
     }
     prev = cur
   }
-  frames.push({ phase: 'done', activeLine: L.ret, message: `After ${dice} dice, ${prev[target]} ways reach sum ${target}.`, snapshot: snapshot({ row: dice, cur: null }) })
+  frames.push({ phase: 'done', activeLine: L.ret, pythonLine: PL.ret, message: `After ${dice} dice, ${prev[target]} ways reach sum ${target}.`, snapshot: snapshot({ row: dice, cur: null }) })
   return { input: { dice, faces, target }, result: prev[target], frames }
 }

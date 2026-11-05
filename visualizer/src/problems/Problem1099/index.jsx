@@ -11,9 +11,9 @@ const definition = {
 export default function ValuePairVisual() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const s = step.snapshot
-    const pointers = s.left < s.right ? { left: s.left, right: s.right } : {}
+    const pointers = s.left < s.right ? { l: s.left, r: s.right } : {}
     return <>
-      <Sequence label="Sorted values (two pointers)" values={s.sorted} pointers={pointers} />
+      <Sequence label="Sorted values (l and r move inward)" values={s.sorted} pointers={pointers} />
       <p role="status">{step.phase === 'inspect' || step.phase === 'update'
         ? `Pair ${s.sorted[s.left]} + ${s.sorted[s.right]} = ${s.total}; ${s.total < s.limit ? 'below' : 'not below'} the limit ${s.limit}.`
         : step.message}</p>

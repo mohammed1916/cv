@@ -26,7 +26,7 @@ export default function MaximizePalindromeLength() {
     const [i, j] = step.cell ?? [-1, -1]
     return <>
       <IndexedSequence label="word1 followed by word2" length={s.length} valueAt={k => s[k]} active={i}
-        roleAt={k => (k === i || k === j ? 'pair' : k < run.input.word1.length ? 'word1' : 'word2')} />
+        roleAt={k => (k === i ? 'l' : k === j ? 'r' : k < run.input.word1.length ? 'word1' : 'word2')} />
       <output aria-label="Best so far">{`Best so far: ${step.best}`}</output>
     </>
   }} renderReasoning={() => <>

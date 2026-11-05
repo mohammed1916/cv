@@ -23,6 +23,9 @@ export default function PalindromePartitioningIV() {
     <IndexedSequence label="Characters" length={run.input.s.length} valueAt={index => run.input.s[index]} active={step.b ?? -1}
       roleAt={index => {
         if (step.a === null) return ''
+        // l and r bound the middle piece, the one whose palindrome check changes as the second cut moves.
+        if (index === step.a) return 'l'
+        if (index === step.b - 1) return 'r'
         if (index < step.a) return 'first'
         if (index < step.b) return 'second'
         return 'third'

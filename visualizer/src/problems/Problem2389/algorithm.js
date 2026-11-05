@@ -8,42 +8,61 @@ export function parseInput(text) {
 }
 
 export function buildTrace({ nums, queries }) {
-  const ordered = [...nums].sort((a, b) => a - b)
+  const sorted = [...nums].sort((a, b) => a - b)
   const prefix = [0]
-  for (const value of ordered) prefix.push(prefix[prefix.length - 1] + value)
+  for (const value of sorted) prefix.push(prefix[prefix.length - 1] + value)
   const answers = []
-  const frames = [{ phase: 'start', activeLine: L('sort nums from smallest'), pythonLine: P(`ordered = sorted(nums)`), query: null, count: null, message: `Sorted numbers ${ordered.join(', ')}; prefix sums ${prefix.join(', ')}.` }]
+  const frames = [{ phase: 'start', activeLine: L('const sorted = [...nums]'), pythonLine: P('ordered = sorted(nums)'), query: null, lo: null, hi: null, mid: null, count: null, sorted, prefix, message: `Sorted numbers ${sorted.join(', ')}; prefix sums ${prefix.join(', ')}.` }]
   queries.forEach((limit, index) => {
-    // Largest count k with prefix[k] <= limit; prefix sums only grow.
     let lo = 0
-    let hi = ordered.length
+    let hi = sorted.length
+    frames.push({ phase: 'query', activeLine: L('let lo = 0'), pythonLine: P('lo, hi = 0, len(ordered)'), query: index, limit, lo, hi, mid: null, count: null, sorted, prefix, message: `Query ${index}, limit ${limit}: search counts from ${lo} to ${hi}.` })
+    while (lo < hi) {
+      const mid = (lo + hi + 1) >> 1
+      const fits = prefix[mid] <= limit
+      if (fits) lo = mid
+      else hi = mid - 1
+      frames.push({ phase: 'query', activeLine: L('const mid ='), pythonLine: P('mid = (lo + hi + 1)'), query: index, limit, lo, hi, mid, fits, count: null, sorted, prefix, message: `Test ${mid} smallest numbers: sum ${prefix[mid]} ${fits ? 'fits' : 'is too large'}, so the range becomes ${lo} to ${hi}.` })
+    }
+    answers.push(lo)
+    frames.push({ phase: 'query', activeLine: L('return lo'), pythonLine: P('answers.append(lo)'), query: index, limit, lo, hi, mid: null, count: lo, sorted, prefix, message: `Limit ${limit}: the largest count is ${lo}, with sum ${prefix[lo]}.` })
+  })
+  frames.push({ phase: 'done', activeLine: L('return answers'), pythonLine: P('return answers'), query: null, lo: null, hi: null, mid: null, count: null, sorted, prefix, message: `Answers: ${answers.join(', ')}.` })
+  return { input: { nums, queries }, prefix, result: answers, frames }
+}
+
+export const code = `function answerQueries(nums, queries) {
+  const sorted = [...nums].sort((a, b) => a - b)
+  const prefix = [0]
+  for (const value of sorted) prefix.push(prefix[prefix.length - 1] + value)
+  return queries.map(limit => {
+    let lo = 0
+    let hi = sorted.length
     while (lo < hi) {
       const mid = (lo + hi + 1) >> 1
       if (prefix[mid] <= limit) lo = mid
       else hi = mid - 1
     }
-    answers.push(lo)
-    frames.push({ phase: 'query', activeLine: L('find the largest count'), pythonLine: P(`return [bisect.bisect_right`), query: index, count: lo, message: `Limit ${limit}: the smallest ${lo} numbers sum to ${prefix[lo]}, within the limit.` })
+    return lo
   })
-  frames.push({ phase: 'done', activeLine: L('return the stored counts'), pythonLine: P(`return [bisect.bisect_right`), query: null, count: null, message: `Answers: ${answers.join(', ')}.` })
-  return { input: { nums, queries }, prefix, result: answers, frames }
-}
-
-export const code = `longest subsequence size under each limit
-  sort nums from smallest to largest
-  build prefix sums, starting from zero
-  for each query limit
-    find the largest count whose prefix sum is at most the limit
-    store that count
-  return the stored counts`.split('\n').map((text, index) => ({ line: index + 1, text }))
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
-export const python = `def longest_subsequence_sizes(nums, queries):
-    import bisect
+export const python = `def answer_queries(nums, queries):
     ordered = sorted(nums)
     prefix = [0]
     for value in ordered:
         prefix.append(prefix[-1] + value)
-    return [bisect.bisect_right(prefix, limit) - 1 for limit in queries]
+    answers = []
+    for limit in queries:
+        lo, hi = 0, len(ordered)
+        while lo < hi:
+            mid = (lo + hi + 1) // 2
+            if prefix[mid] <= limit:
+                lo = mid
+            else:
+                hi = mid - 1
+        answers.append(lo)
+    return answers
 `

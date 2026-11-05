@@ -8,24 +8,25 @@ export const phases = [
   { id: 'done', label: 'Result', description: 'The bottom-right cell is the common subsequence length.' },
 ]
 
-export const code = [
-  'a = length of the first string, b = length of the second',
-  'dp[i][j] = LCS length of the first i letters and the first j letters',
-  'dp row 0 and dp column 0 start at zero',
-  'for i from 1 to a:',
-  '  for j from 1 to b:',
-  '    if first[i - 1] == second[j - 1]:',
-  '      dp[i][j] = dp[i - 1][j - 1] + 1',
-  '    else:',
-  '      dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])',
-  'return dp[a][b]',
-].map((text, index) => ({ line: index + 1, text }))
-
+export const code = `function longestCommonSubsequence(first, second) {
+  const a = first.length
+  const b = second.length
+  const dp = Array.from({ length: a + 1 }, () => Array(b + 1).fill(0))
+  for (let i = 1; i <= a; i++) {
+    for (let j = 1; j <= b; j++) {
+      if (first[i - 1] === second[j - 1]) dp[i][j] = dp[i - 1][j - 1] + 1
+      else dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1])
+    }
+  }
+  return dp[a][b]
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const at = key => {
   const index = code.findIndex(line => line.text.includes(key))
   if (index < 0) throw new Error(`Missing code line: ${key}`)
   return index + 1
 }
+const pyAt = key => python.split('\n').findIndex(l => l.includes(key)) + 1
+
 
 export const python = `def common_length(first, second):
     a, b = len(first), len(second)
@@ -60,7 +61,7 @@ export function buildTrace([first, second]) {
   for (let j = 0; j <= b; j++) dp[0][j] = 0
   const snap = extra => ({ first, second, table: dp.map(row => [...row]), cell: null, same: null, ...extra })
   const frames = [{
-    phase: 'init', activeLine: at('a = length'),
+    phase: 'init', activeLine: at('const a = first.length'), pythonLine: pyAt('a, b = len'),
     message: `Start with the empty prefixes. Each cell will hold the best common length for one prefix of ${first} against one prefix of ${second}.`,
     snapshot: snap(),
   }]
@@ -72,7 +73,8 @@ export function buildTrace([first, second]) {
       else dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1])
       frames.push({
         phase: same ? 'match' : 'no-match',
-        activeLine: at(same ? 'dp[i][j] = dp[i - 1][j - 1] + 1' : 'dp[i][j] = max('),
+        activeLine: at(same ? 'dp[i][j] = dp[i - 1][j - 1] + 1' : 'dp[i][j] = Math.max('),
+        pythonLine: pyAt(same ? 'dp[i][j] = dp[i - 1][j - 1] + 1' : 'dp[i][j] = max('),
         message: same
           ? `${first[i - 1]} matches ${second[j - 1]}, so the diagonal cell extends to ${dp[i][j]}.`
           : `${first[i - 1]} and ${second[j - 1]} differ, so keep the longer neighbour: ${dp[i][j]}.`,
@@ -83,7 +85,7 @@ export function buildTrace([first, second]) {
 
   const result = dp[a][b]
   frames.push({
-    phase: 'done', activeLine: at('return dp[a][b]'),
+    phase: 'done', activeLine: at('return dp[a][b]'), pythonLine: pyAt('return dp[a][b]'),
     message: `The bottom-right cell holds ${result}, the length of the longest common subsequence.`,
     snapshot: snap({ cell: [a, b] }),
   })

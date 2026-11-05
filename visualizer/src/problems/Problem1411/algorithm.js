@@ -20,7 +20,7 @@ export function buildTrace(n) {
   let aba = 6
   let abc = 6
   const frames = [{
-    phase: 'start', activeLine: L('aba = 6'), pythonLine: P('aba = 6'),
+    phase: 'start', activeLine: L('let aba = 6'), pythonLine: P('aba = 6'),
     snapshot: { row: 1, aba, abc },
     message: 'Row 1 can be ABA in 6 ways (3 choices for the first color, 2 for the second) or ABC in 6 ways (every order of three colors).',
   }]
@@ -30,14 +30,14 @@ export function buildTrace(n) {
     const nextAba = rawAba % MOD
     const nextAbc = rawAbc % MOD
     frames.push({
-      phase: 'inspect', activeLine: L('next_aba ='), pythonLine: P('next_aba ='),
+      phase: 'inspect', activeLine: L('const nextAba ='), pythonLine: P('next_aba ='),
       snapshot: { row, aba, abc, nextAba, nextAbc },
       message: `Row ${row}: new ABA rows = 3×${aba} + 2×${abc} = ${rawAba}; new ABC rows = 2×${aba} + 2×${abc} = ${rawAbc}.`,
     })
     aba = nextAba
     abc = nextAbc
     frames.push({
-      phase: 'update', activeLine: L('aba, abc ='), pythonLine: P('aba, abc ='),
+      phase: 'update', activeLine: L('aba = nextAba'), pythonLine: P('aba, abc ='),
       snapshot: { row, aba, abc },
       message: `Row ${row} totals: ${aba} ABA-type and ${abc} ABC-type colorings ending in this row.`,
     })
@@ -51,14 +51,19 @@ export function buildTrace(n) {
   return { input: n, result, frames }
 }
 
-export const code = `count colorings of n rows by row type:
-  aba = 6                       # two-color rows A B A
-  abc = 6                       # three-color rows A B C
-  for each next row from 2 to n:
-    next_aba = (3 * aba + 2 * abc) mod M
-    next_abc = (2 * aba + 2 * abc) mod M
-    aba, abc = next_aba, next_abc
-  return (aba + abc) mod M`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `const MOD = 1000000007
+
+function numOfWays(n) {
+  let aba = 6
+  let abc = 6
+  for (let row = 2; row <= n; row++) {
+    const nextAba = (3 * aba + 2 * abc) % MOD
+    const nextAbc = (2 * aba + 2 * abc) % MOD
+    aba = nextAba
+    abc = nextAbc
+  }
+  return (aba + abc) % MOD
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `MOD = 1000000007
 

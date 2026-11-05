@@ -25,17 +25,30 @@ const PY = [
 export const python = PY.join("\n")
 const at = text => PY.findIndex(line => line.includes(text)) + 1
 
-export const code = [
-  { line: 1, text: "width is the number of digits in the largest value" },
-  { line: 2, text: "pad each value to width digits with leading zeros" },
-  { line: 3, text: "count is 0" },
-  { line: 4, text: "for each index j" },
-  { line: 5, text: "reach starts as the padded value at j" },
-  { line: 6, text: "repeat two times: apply every digit swap to the frontier" },
-  { line: 7, text: "add the swapped words to reach" },
-  { line: 8, text: "for each earlier index i, if its padded value is in reach, add 1 to count" },
-  { line: 9, text: "return count" },
+const JS = [
+  "function countAlmostEqualPairs(nums) {",
+  "  const width = String(Math.max(...nums)).length",
+  "  const texts = nums.map(v => String(v).padStart(width, '0'))",
+  "  let count = 0",
+  "  for (let j = 0; j < texts.length; j++) {",
+  "    let reach = new Set([texts[j]])",
+  "    let frontier = new Set([texts[j]])",
+  "    for (let round = 0; round < 2; round++) {",
+  "      const nextLevel = new Set()",
+  "      frontier.forEach(word => swapsOf(word, width).forEach(w => nextLevel.add(w)))",
+  "      frontier = nextLevel",
+  "      nextLevel.forEach(word => reach.add(word))",
+  "    }",
+  "    for (let i = 0; i < j; i++) {",
+  "      if (reach.has(texts[i])) count++",
+  "    }",
+  "  }",
+  "  return count",
+  "}",
 ]
+
+export const code = JS.map((text, index) => ({ line: index + 1, text }))
+const js = text => JS.findIndex(line => line.includes(text)) + 1
 
 const MAX_VALUES = 12
 const MAX_VALUE = 999999
@@ -83,32 +96,32 @@ export function buildTrace(input) {
   const add = (phase, activeLine, pythonText, message, extra = {}) => frames.push({
     phase, activeLine, pythonLine: at(pythonText), message, nums, texts, width, count, pairs: [...pairs], j: -1, i: -1, reach: reachWords, ...extra,
   })
-  add("setup", 1, "width = len(", `Pad every number to ${width} digits.`)
-  add("setup", 2, "texts = [str(x)", `Padded values: ${texts.join(", ")}.`)
-  add("setup", 3, "count = 0", "Start with no almost equal pairs.")
+  add("setup", js("const width"), "width = len(", `Pad every number to ${width} digits.`)
+  add("setup", js("const texts"), "texts = [str(x)", `Padded values: ${texts.join(", ")}.`)
+  add("setup", js("let count"), "count = 0", "Start with no almost equal pairs.")
   for (let j = 0; j < texts.length; j += 1) {
     const reach = new Set([texts[j]])
     let frontier = new Set([texts[j]])
     reachWords = [...reach]
-    add("reach", 5, "reach = {texts[j]}", `Start the reach of ${texts[j]}.`, { j })
+    add("reach", js("let reach"), "reach = {texts[j]}", `Start the reach of ${texts[j]}.`, { j })
     for (let round = 0; round < 2; round += 1) {
       const nextLevel = new Set()
       frontier.forEach(word => swapsOf(word, width).forEach(next => nextLevel.add(next)))
       frontier = nextLevel
       nextLevel.forEach(word => reach.add(word))
       reachWords = [...reach]
-      add("swap", 6, "for swap_round in range(2)", `Round ${round + 1}: reach of ${texts[j]} now has ${reach.size} word(s).`, { j })
+      add("swap", js("nextLevel.forEach"), "for swap_round in range(2)", `Round ${round + 1}: reach of ${texts[j]} now has ${reach.size} word(s).`, { j })
     }
     for (let i = 0; i < j; i += 1) {
       if (reach.has(texts[i])) {
         count += 1
         pairs.push([i, j])
-        add("count", 8, "count += 1", `${texts[i]} and ${texts[j]} are almost equal within two swaps, so pair (${i}, ${j}) counts.`, { j, i })
+        add("count", js("count++"), "count += 1", `${texts[i]} and ${texts[j]} are almost equal within two swaps, so pair (${i}, ${j}) counts.`, { j, i })
       } else {
-        add("check", 8, "if texts[i] in reach", `${texts[i]} is not within two swaps of ${texts[j]}.`, { j, i })
+        add("check", js("reach.has"), "if texts[i] in reach", `${texts[i]} is not within two swaps of ${texts[j]}.`, { j, i })
       }
     }
   }
-  add("done", 9, "return count", `Return ${count}.`)
+  add("done", js("return count"), "return count", `Return ${count}.`)
   return { input: { nums }, result: count, frames }
 }

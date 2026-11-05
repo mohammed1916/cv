@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { parseInput, buildTrace, code, python } from './algorithm'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 
 const definition = {
   number: '1152',
@@ -20,7 +21,15 @@ const definition = {
 
 export default function AnalyzeUserWebsiteVisitPattern() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <ul aria-label="Pattern counts">{step.state.map((line, index) => <li key={index}>{line}</li>)}</ul>
+    <section aria-label="Visit timelines">
+      <p><strong>Each user's sites in time order</strong> (the user being counted is bold)</p>
+      <ul style={{ listStyle: 'none', padding: 0, display: 'grid', gap: 6 }}>
+        {step.timelines.map(({ user, sites }) => <li key={user} style={{ fontWeight: step.user === user ? 700 : 400, color: 'var(--text)' }}>
+          <span>{user}: </span>{sites.map((site, index) => <span key={index}>{index > 0 ? ' → ' : ''}{site}</span>)}
+        </li>)}
+      </ul>
+    </section>
+    <RecordStateTable label="Users sharing each three-site pattern" columns={['pattern', 'users']} rows={step.rows} />
     <output aria-label="Current step">{step.message}</output>
   </>} renderReasoning={() => <>
     <p>A user is counted once per pattern even when the same three sites appear more than once in that user's history.</p>

@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-all-good-indices/',
   complexity: 'O(n) time and O(n) space. The visualization caps nums at 12 entries.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[2,1,1,1,3,4,1],"k":2}' },
-    { label: 'Example 2', input: '{"nums":[2,1,1,2],"k":2}' },
+    { label: 'Two valleys', input: '{"nums":[9,7,4,4,6,8,8,3,5],"k":2}' },
+    { label: 'Short', input: '{"nums":[3,3,1,5],"k":1}' },
   ],
 }
 

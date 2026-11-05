@@ -27,10 +27,20 @@ const definition = {
   ],
 }
 
+// The sorted sample, written out from the counts so the middle sample(s) can be shown directly.
+function expandCounts(counts) {
+  const sorted = []
+  counts.forEach((c, v) => { for (let k = 0; k < c; k++) sorted.push(v) })
+  return sorted
+}
+
 export default function LargeSample() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Sample counts by value" length={256} valueAt={i => run.input[i]}
       active={step.value ?? -1} roleAt={i => (run.input[i] > 0 ? 'has samples' : '')} />
+    <IndexedSequence label="Sorted sample, written out from the counts" length={expandCounts(run.input).length} valueAt={i => expandCounts(run.input)[i]}
+      active={-1} roleAt={i => { const sorted = expandCounts(run.input); const total = sorted.length; const mid = total % 2 ? [(total - 1) / 2] : [total / 2 - 1, total / 2]; return mid.includes(i) ? 'median' : '' }} />
+    <output aria-label="Median samples">{(() => { const sorted = expandCounts(run.input); const total = sorted.length; const mid = total % 2 ? [(total - 1) / 2] : [total / 2 - 1, total / 2]; return `Median from sorted positions ${mid.map(k => k + 1).join(" and ")} of ${total}: values ${mid.map(k => sorted[k]).join(" and ")}`; })()}</output>
     <output aria-label="Statistics state">{step.message}</output>
     {step.phase === 'done' && <output aria-label="Statistics result">Result: [{run.result.join(', ')}]</output>}
   </>} renderReasoning={() => <>

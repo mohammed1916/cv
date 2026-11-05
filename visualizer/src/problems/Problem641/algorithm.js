@@ -16,7 +16,7 @@ export function buildTrace({ k, ops }) {
   const slots = Array(k).fill(null)
   let head = 0, size = 0
   const results = []
-  const frames = [{ phase: 'start', op: -1, slots: [...slots], head, size, k, activeLine: L('slots = k empty'), pythonLine: 2, message: `Create a ring of ${k} slots.` }]
+  const frames = [{ phase: 'start', op: -1, slots: [...slots], head, size, k, activeLine: L('const slots = Array(k)'), pythonLine: 2, message: `Create a ring of ${k} slots.` }]
   ops.forEach(([name, value], op) => {
     let returned
     let phase = 'query'
@@ -49,31 +49,50 @@ export function buildTrace({ k, ops }) {
   return { input: { k, ops }, result: results, frames }
 }
 
-export const code = `slots = k empty slots, head = 0, size = 0
-results = empty list
-for each operation (name, value) in ops:
-  if name is insertFront:
-    if size equals k: result = false
-    else: move head back one (wrap around), write value there, size += 1, result = true
-  else if name is insertLast:
-    if size equals k: result = false
-    else: write value after the last element, size += 1, result = true
-  else if name is deleteFront:
-    if size is 0: result = false
-    else: clear slot at head, move head forward one (wrap around), size -= 1, result = true
-  else if name is deleteLast:
-    if size is 0: result = false
-    else: clear the last element's slot, size -= 1, result = true
-  else if name is getFront:
-    result = front value, or -1 if empty
-  else if name is getRear:
-    result = rear value, or -1 if empty
-  else if name is isEmpty:
-    result = size is 0
-  else:
-    result = size equals k
-  append result to results
-return results`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function designCircularDeque(k, ops) {
+  const slots = Array(k).fill(null)
+  let head = 0
+  let size = 0
+  const results = []
+  for (const [name, value] of ops) {
+    if (name === 'insertFront') {
+      if (size === k) results.push(false)
+      else {
+        head = (head - 1 + k) % k // move head back one
+        slots[head] = value
+        size++
+        results.push(true)
+      }
+    } else if (name === 'insertLast') {
+      if (size === k) results.push(false)
+      else {
+        slots[(head + size) % k] = value // write value after the last element
+        size++
+        results.push(true)
+      }
+    } else if (name === 'deleteFront') {
+      if (size === 0) results.push(false)
+      else {
+        slots[head] = null // clear slot at head
+        head = (head + 1) % k
+        size--
+        results.push(true)
+      }
+    } else if (name === 'deleteLast') {
+      if (size === 0) results.push(false)
+      else {
+        slots[(head + size - 1) % k] = null // clear the last element's slot
+        size--
+        results.push(true)
+      }
+    } else if (name === 'getFront') results.push(size ? slots[head] : -1) // result = front value
+    else if (name === 'getRear') results.push(size ? slots[(head + size - 1) % k] : -1) // result = rear value
+    else if (name === 'isEmpty') results.push(size === 0) // result = size is 0
+    else results.push(size === k) // result = size equals k
+  }
+  return results
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 // Python line (1-based index into `python` below) executed by an operation frame.
 function pythonLineFor(name, returned) {

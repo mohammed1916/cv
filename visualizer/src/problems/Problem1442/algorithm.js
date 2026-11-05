@@ -11,15 +11,31 @@ const PYTHON = `def count_triplets(arr):
     pre = [0] * (n + 1)
     for idx, x in enumerate(arr):
         pre[idx + 1] = pre[idx] ^ x
+
     total = 0
     for a in range(n):
         for c in range(a + 1, n):
             if pre[a] == pre[c + 1]:
                 total += c - a
-    return total`
+
+    return total
+`
 
 export const python = PYTHON
-export const code = PYTHON.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function countTriplets(arr) {
+  const n = arr.length
+  const pre = Array(n + 1).fill(0)
+  for (let idx = 0; idx < n; idx++) {
+    pre[idx + 1] = pre[idx] ^ arr[idx]
+  }
+  let total = 0
+  for (let a = 0; a < n; a++) {
+    for (let c = a + 1; c < n; c++) {
+      if (pre[a] === pre[c + 1]) total += c - a
+    }
+  }
+  return total
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 export const pythonLineMap = Object.fromEntries(code.map(({ line }) => [line, line]))
 const lineAt = marker => code.find(({ text }) => text.includes(marker)).line
 
@@ -38,7 +54,7 @@ export function buildTrace(arr) {
   let total = 0
   const snap = (a = null, c = null, match = null) => ({ arr, pre: [...pre], a, c, match, total })
 
-  frames.push({ phase: 'prefix', activeLine: lineAt('pre = [0]'), message: 'pre[0] = 0: the XOR of an empty prefix.', snapshot: snap() })
+  frames.push({ phase: 'prefix', activeLine: lineAt('const pre = Array'), message: 'pre[0] = 0: the XOR of an empty prefix.', snapshot: snap() })
   arr.forEach((x, idx) => {
     pre.push(pre[idx] ^ x)
     frames.push({
@@ -48,11 +64,11 @@ export function buildTrace(arr) {
     })
   })
   for (let a = 0; a < n; a++) {
-    frames.push({ phase: 'scan', activeLine: lineAt('for a in range'), message: `Start the first array at index ${a}.`, snapshot: snap(a) })
+    frames.push({ phase: 'scan', activeLine: lineAt('for (let a = 0'), message: `Start the first array at index ${a}.`, snapshot: snap(a) })
     for (let c = a + 1; c < n; c++) {
       const match = pre[a] === pre[c + 1]
       frames.push({
-        phase: 'pair', activeLine: lineAt('if pre[a] == pre[c + 1]'), 
+        phase: 'pair', activeLine: lineAt('if (pre[a] === pre[c + 1])'), 
         message: `Segment ${a}..${c} XORs to ${match ? '0' : 'a non-zero value'}: pre[${a}] = ${pre[a]} and pre[${c + 1}] = ${pre[c + 1]} ${match ? 'match' : 'differ'}.`,
         snapshot: snap(a, c, match),
       })

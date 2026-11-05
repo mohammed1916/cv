@@ -24,7 +24,13 @@ export default function KEmptySlots() {
     <IndexedSequence label="Bulbs (position order)" length={run.input.bulbs.length}
       active={step.position === null ? -1 : step.position - 1}
       valueAt={i => (step.lit[i] ? 'on' : 'off')}
-      roleAt={i => (step.hit === i + 1 ? 'match' : step.lit[i] ? 'read' : '')} />
+      roleAt={i => {
+        const p = i + 1
+        if (step.left !== null && step.left !== undefined && p === step.left) return 'l'
+        if (step.right !== null && step.right !== undefined && p === step.right) return 'r'
+        if (step.left !== null && step.left !== undefined && p > step.left && p < step.right) return 'gap'
+        return step.hit === p ? 'match' : step.lit[i] ? 'read' : ''
+      }} />
     <output aria-label="Day">{step.day ? `Day ${step.day}` : 'Before day 1'}{step.result !== null && step.result !== -1 ? `: answer ${step.result}` : ''}</output>
   </>} renderReasoning={() => <>
     <p>A new bulb can only create the pattern with its nearest neighbours at distance k + 1. So each day only two candidates need checking, not every pair.</p>

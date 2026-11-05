@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/optimal-partition-of-string/',
   complexity: 'O(n) time with a set of at most 26 letters. The visualization caps input at 16 letters.',
   examples: [
-    { label: 'Example 1', input: '{"s":"abacaba"}' },
-    { label: 'Example 2', input: '{"s":"ssssss"}' },
+    { label: 'Mixed', input: '{"s":"kqmkwq"}' },
+    { label: 'Repeats', input: '{"s":"ttttt"}' },
   ],
 }
 

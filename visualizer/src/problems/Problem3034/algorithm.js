@@ -26,25 +26,26 @@ export const PYTHON_LINES = [
   "    return count",
 ];
 
-export const CODE = [
-  "FUNCTION countMatchingSubarrays(nums, pattern)",
-  "    m ← length(pattern)",
-  "    count ← 0",
-  "    FOR start FROM 0 THROUGH length(nums) − m − 1",
-  "        ok ← true",
-  "        FOR k FROM 0 THROUGH m − 1",
-  "            a ← nums[start + k]",
-  "            b ← nums[start + k + 1]",
-  "            sign ← compare(b, a)",
-  "            IF sign ≠ pattern[k]",
-  "                ok ← false",
-  "                BREAK",
-  "        IF ok",
-  "            count ← count + 1",
-  "    RETURN count",
-];
-
+export const CODE = `function countMatchingSubarrays(nums, pattern) {
+  const m = pattern.length
+  let count = 0
+  for (let start = 0; start < nums.length - m; start++) {
+    let ok = true
+    for (let k = 0; k < m; k++) {
+      const a = nums[start + k]
+      const b = nums[start + k + 1]
+      const sign = Math.sign(b - a)
+      if (sign !== pattern[k]) {
+        ok = false
+        break
+      }
+    }
+    if (ok) count += 1
+  }
+  return count
+}`.split('\n');
 export const code = CODE.map((text, index) => ({ line: index + 1, text }));
+const L = k => { const i = code.findIndex(c => c.text.includes(k)); if (i < 0) throw new Error('No code line: ' + k); return i + 1 };
 export const python = PYTHON_LINES.join("\n");
 
 // Pseudocode line -> Python line (identity mapping by design; both are 15 steps long).
@@ -107,43 +108,43 @@ export function buildTrace(input) {
       windows: [...windows],
     });
 
-  push({ phase: "init", activeLine: 2, pythonLine: 2, message: `m = ${m}, so each candidate window has ${m + 1} elements.` });
-  push({ phase: "init", activeLine: 3, pythonLine: 3, message: "count = 0." });
+  push({ phase: "init", activeLine: L('const m = pattern.length'), pythonLine: 2, message: `m = ${m}, so each candidate window has ${m + 1} elements.` });
+  push({ phase: "init", activeLine: L('let count = 0'), pythonLine: 3, message: "count = 0." });
 
   for (let start = 0; start < n - m; start++) {
-    push({ phase: "loop", activeLine: 4, pythonLine: 4, start, message: `Window starts at index ${start}: nums[${start}..${start + m}].` });
+    push({ phase: "loop", activeLine: L('for (let start'), pythonLine: 4, start, message: `Window starts at index ${start}: nums[${start}..${start + m}].` });
     let ok = true;
-    push({ phase: "loop", activeLine: 5, pythonLine: 5, start, message: "ok = true." });
+    push({ phase: "loop", activeLine: L('let ok = true'), pythonLine: 5, start, message: "ok = true." });
     for (let k = 0; k < m; k++) {
       const a = nums[start + k];
       const b = nums[start + k + 1];
       const s = sign(a, b);
-      push({ phase: "compare", activeLine: 6, pythonLine: 6, start, k, message: `Check pair (${a}, ${b}) against pattern[${k}] = ${pattern[k]}.` });
-      push({ phase: "compare", activeLine: 7, pythonLine: 7, start, k, comparison: s, message: `a = ${a}.` });
-      push({ phase: "compare", activeLine: 8, pythonLine: 8, start, k, comparison: s, message: `b = ${b}.` });
-      push({ phase: "compare", activeLine: 9, pythonLine: 9, start, k, comparison: s, message: `Comparison result: ${s} (${s > 0 ? "up" : s < 0 ? "down" : "equal"}).` });
+      push({ phase: "compare", activeLine: L('for (let k = 0'), pythonLine: 6, start, k, message: `Check pair (${a}, ${b}) against pattern[${k}] = ${pattern[k]}.` });
+      push({ phase: "compare", activeLine: L('const a = nums'), pythonLine: 7, start, k, comparison: s, message: `a = ${a}.` });
+      push({ phase: "compare", activeLine: L('const b = nums'), pythonLine: 8, start, k, comparison: s, message: `b = ${b}.` });
+      push({ phase: "compare", activeLine: L('const sign = Math.sign'), pythonLine: 9, start, k, comparison: s, message: `Comparison result: ${s} (${s > 0 ? "up" : s < 0 ? "down" : "equal"}).` });
       if (s !== pattern[k]) {
         ok = false;
-        push({ phase: "check", activeLine: 10, pythonLine: 10, start, k, comparison: s, windowOk: false, message: `${s} != pattern[${k}] = ${pattern[k]}, mismatch.` });
-        push({ phase: "check", activeLine: 11, pythonLine: 11, start, k, windowOk: false, message: "ok = false." });
-        push({ phase: "check", activeLine: 12, pythonLine: 12, start, k, windowOk: false, message: "Stop checking this window." });
+        push({ phase: "check", activeLine: L('if (sign !== pattern[k])'), pythonLine: 10, start, k, comparison: s, windowOk: false, message: `${s} != pattern[${k}] = ${pattern[k]}, mismatch.` });
+        push({ phase: "check", activeLine: L('ok = false'), pythonLine: 11, start, k, windowOk: false, message: "ok = false." });
+        push({ phase: "check", activeLine: L('break'), pythonLine: 12, start, k, windowOk: false, message: "Stop checking this window." });
         break;
       }
-      push({ phase: "check", activeLine: 10, pythonLine: 10, start, k, comparison: s, windowOk: true, message: `${s} matches pattern[${k}] = ${pattern[k]}.` });
+      push({ phase: "check", activeLine: L('if (sign !== pattern[k])'), pythonLine: 10, start, k, comparison: s, windowOk: true, message: `${s} matches pattern[${k}] = ${pattern[k]}.` });
     }
-    push({ phase: "check", activeLine: 13, pythonLine: 13, start, windowOk: ok, message: ok ? "Every pair matched; the window is valid." : "Window rejected." });
+    push({ phase: "check", activeLine: L('if (ok) count += 1'), pythonLine: 13, start, windowOk: ok, message: ok ? "Every pair matched; the window is valid." : "Window rejected." });
     if (ok) {
       count += 1;
       windows.push(start);
-      push({ phase: "count", activeLine: 14, pythonLine: 14, start, windowOk: true, message: `count = ${count}.` });
+      push({ phase: "count", activeLine: L('if (ok) count += 1'), pythonLine: 14, start, windowOk: true, message: `count = ${count}.` });
     }
   }
 
-  push({ phase: "done", activeLine: 15, pythonLine: 15, message: `Return count = ${count}.` });
+  push({ phase: "done", activeLine: L('return count'), pythonLine: 15, message: `Return count = ${count}.` });
   return { input: { nums, pattern }, result: count, frames };
 }
 
 export const sampleInputs = [
-  { label: "Example 1", input: { nums: [1, 2, 3, 4, 5, 6], pattern: [1, 1] } },
-  { label: "Example 2", input: { nums: [1, 4, 4, 1, 3, 5, 5, 3], pattern: [1, 0, -1] } },
+  { label: "Example 1", input: { nums: [6, 2, 2, 5, 9, 9], pattern: [-1, 0] } },
+  { label: "Example 2", input: { nums: [1, 2, 1, 5, 5, 4, 8, 3], pattern: [1, -1] } },
 ];

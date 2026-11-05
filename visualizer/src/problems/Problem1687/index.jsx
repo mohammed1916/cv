@@ -23,10 +23,23 @@ const definition = {
 }
 
 export default function DeliveringBoxes() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <IndexedSequence label="Fewest trips for each prefix" length={step.trips.length} valueAt={index => show(step.trips[index])} active={step.i} />
-    <output aria-label="Step">{step.message}</output>
-  </>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const last = step.i ? step.i - 1 : -1
+    const hasStart = step.j !== null && step.j !== undefined
+    // l and r are the trip's first and last box; the boxes between them are the window being priced.
+    const roleAt = index => {
+      if (last < 0 || index > last) return ''
+      if (hasStart && index === step.j) return 'l'
+      if (index === last) return 'r'
+      return hasStart && index > step.j ? 'window' : ''
+    }
+    return <>
+      <IndexedSequence label="Boxes in delivery order" length={run.input.boxes.length}
+        valueAt={index => `port ${run.input.boxes[index][0]}, w${run.input.boxes[index][1]}`} active={hasStart ? step.j : last} roleAt={roleAt} />
+      <IndexedSequence label="Fewest trips for each prefix" length={step.trips.length} valueAt={index => show(step.trips[index])} active={step.i} />
+      <output aria-label="Step">{step.message}</output>
+    </>
+  }} renderReasoning={() => <>
     <p>Boxes must be delivered in order, so every trip carries a consecutive block of boxes.</p>
     <p>A trip costs 2 for the trip from and back to storage, plus one for each change of port between neighbouring boxes in the block.</p>
     <p>The table value for prefix i is the cheapest of these costs over every legal starting box.</p>

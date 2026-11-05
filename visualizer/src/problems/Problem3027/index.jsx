@@ -16,8 +16,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-number-of-ways-to-place-people-ii/',
   complexity: 'O(n^2) after sorting: each Alice point sweeps the points after it once, keeping the highest blocker seen so far.',
   examples: [
-    { label: 'Example 1', input: '[[1,1],[2,2],[3,3]]' },
-    { label: 'Example 2', input: '[[6,2],[4,4],[2,6]]' },
+    { label: 'Example 1', input: '[[3,1],[1,4],[5,2],[2,2]]' },
+    { label: 'Example 2', input: '[[0,5],[4,4],[2,0]]' },
   ],
 }
 

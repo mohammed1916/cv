@@ -8,22 +8,26 @@ export const phases = [
   { id: 'done', label: 'Result', description: 'Keep the cheaper of the two patterns.' },
 ]
 
-export const code = [
-  'function cost(start): the valleys sit at positions start, start + 2, ...',
-  '  total = 0',
-  '  for i = start; i < n; i += 2:',
-  '    lower = min of the neighbours of i that exist',
-  '    if nums[i] >= lower:',
-  '      total += nums[i] - (lower - 1)',
-  '  return total',
-  'return min(cost(0), cost(1))',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function minDecrements(nums) {
+  const n = nums.length
+  const cost = start => {
+    let total = 0
+    for (let i = start; i < n; i += 2) {
+      const neighbours = [nums[i - 1], nums[i + 1]].filter((_, k) => (k === 0 ? i - 1 >= 0 : i + 1 < n))
+      const lower = neighbours.length ? Math.min(...neighbours) : Infinity
+      if (nums[i] >= lower) total += nums[i] - (lower - 1)
+    }
+    return total
+  }
+  return Math.min(cost(0), cost(1))
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const at = key => {
   const index = code.findIndex(line => line.text.includes(key))
   if (index < 0) throw new Error(`Missing code line: ${key}`)
   return index + 1
 }
+const pyAt = key => python.split('\n').findIndex(l => l.includes(key)) + 1
 
 export const python = `def min_decrements(nums):
     n = len(nums)
@@ -59,7 +63,7 @@ export function buildTrace(nums) {
   const snap = extra => ({ nums, start: null, index: null, lower: null, cut: 0, total: null, roles: null, ...extra })
   const roleFor = start => nums.map((_, i) => (i % 2 === start ? 'valley' : 'peak'))
   frames.push({
-    phase: 'setup', activeLine: at('function cost'),
+    phase: 'setup', activeLine: at('const cost = start'), pythonLine: pyAt('def min_decrements'),
     message: `${n} values. A valley must sit below both of its neighbours. Lowering a valley never affects another valley, because valleys are never next to each other.`,
     snapshot: snap(),
   })
@@ -79,7 +83,7 @@ export function buildTrace(nums) {
         ? `Valley at position ${i} (value ${nums[i]}): ${neighbourText}, so lower it by ${cut} to ${lower - 1}.`
         : `Valley at position ${i} (value ${nums[i]}): ${neighbourText}, so it is already below and costs nothing.`
       frames.push({
-        phase, activeLine: at(cut > 0 ? 'total += ' : 'if nums[i] >= lower'),
+        phase, activeLine: at(cut > 0 ? 'total += ' : 'if (nums[i] >= lower)'), pythonLine: pyAt(cut > 0 ? 'total += nums[i]' : 'if nums[i] >= lower'),
         message,
         snapshot: snap({ start, index: i, lower: Number.isFinite(lower) ? lower : null, cut, total, roles }),
       })
@@ -89,7 +93,7 @@ export function buildTrace(nums) {
 
   const result = Math.min(...totals)
   frames.push({
-    phase: 'done', activeLine: at('return min(cost(0)'),
+    phase: 'done', activeLine: at('return Math.min(cost(0)'), pythonLine: pyAt('return min(cost(0), cost(1))'),
     message: `Even-valley pattern costs ${totals[0]}, odd-valley pattern costs ${totals[1]}. The answer is ${result}.`,
     snapshot: snap({ total: result, roles: roleFor(totals[0] <= totals[1] ? 0 : 1) }),
   })

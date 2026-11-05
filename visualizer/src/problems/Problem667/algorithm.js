@@ -10,16 +10,16 @@ export function parseInput(text) {
 export function buildTrace({ n, k }) {
   const out = []
   let lo = 1, hi = k + 1
-  const frames = [{ phase: 'start', pythonLine: 2, perm: [], diffs: [], activeLine: L('set out to an empty list'), message: `Alternate between the low end and the high end of 1…${k + 1}.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, perm: [], diffs: [], activeLine: L('const out = []'), message: `Alternate between the low end and the high end of 1…${k + 1}.` }]
   let turnLow = true
   while (out.length < k + 1) {
     out.push(turnLow ? lo++ : hi--)
     turnLow = !turnLow
-    frames.push({ phase: 'place', pythonLine: 5, perm: [...out], lo, hi, k, diffs: distinctDiffs(out), activeLine: L('append lo if turn'), message: `Place ${out.at(-1)}.` })
+    frames.push({ phase: 'place', pythonLine: 5, perm: [...out], lo, hi, k, diffs: distinctDiffs(out), activeLine: L('out.push(turnLow ? lo++ : hi--)'), message: `Place ${out.at(-1)}.` })
   }
   for (let v = k + 2; v <= n; v++) {
     out.push(v)
-    frames.push({ phase: 'tail', pythonLine: 11, perm: [...out], lo, hi, k, diffs: distinctDiffs(out), activeLine: L('append k+2 through n'), message: `Append ${v}: consecutive values give difference 1, already counted.` })
+    frames.push({ phase: 'tail', pythonLine: 11, perm: [...out], lo, hi, k, diffs: distinctDiffs(out), activeLine: L('for (let v = k + 2'), message: `Append ${v}: consecutive values give difference 1, already counted.` })
   }
   const result = out
   frames.push({ phase: 'done', pythonLine: 12, perm: [...result], diffs: distinctDiffs(result), result, activeLine: L('return out'), message: `A permutation with ${distinctDiffs(result).length} distinct differences.` })
@@ -30,15 +30,19 @@ function distinctDiffs(list) {
   return [...new Set(list.slice(1).map((v, i) => Math.abs(v - list[i])))].sort((a, b) => a - b)
 }
 
-export const code = `function constructArray(n, k):
-  set out to an empty list, lo to 1, and hi to k + 1
-  set turn to low
-  while lo is at most hi:
-    append lo if turn is low, otherwise append hi
-    if turn is low, increase lo by 1; otherwise decrease hi by 1
-    flip turn
-  append k+2 through n to out, in order
-  return out`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function constructArray(n, k) {
+  const out = []
+  let lo = 1
+  let hi = k + 1
+  let turnLow = true
+  while (lo <= hi) {
+    out.push(turnLow ? lo++ : hi--) // append lo if turn is low, otherwise append hi
+    turnLow = !turnLow
+  }
+  for (let v = k + 2; v <= n; v++) out.push(v) // append k+2 through n in order
+  return out
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def construct_array(n, k):

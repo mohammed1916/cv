@@ -23,7 +23,7 @@ export function landing(heights, k) {
 
 export function buildTrace(spec) {
   const heights = [...spec.heights]
-  const frames = [{ phase: 'start', activeLine: L('heights = a copy'), pythonLine: 2, heights: [...heights], index: null, side: null, drop: 0, message: `Drop ${spec.volume} unit(s) of water at index ${spec.k}.` }]
+  const frames = [{ phase: 'start', activeLine: L('heights = [...heights]'), pythonLine: 2, heights: [...heights], index: null, side: null, drop: 0, message: `Drop ${spec.volume} unit(s) of water at index ${spec.k}.` }]
   for (let drop = 1; drop <= spec.volume; drop++) {
     const { index, side } = landing(heights, spec.k)
     heights[index] += 1
@@ -33,17 +33,23 @@ export function buildTrace(spec) {
   return { input: spec, result: heights, frames }
 }
 
-export const code = `function pourWater(heights, volume, k):
-  heights = a copy of the heights
-  repeat volume times:
-    index = k
-    look left from k-1 down to 0 while the ground does not rise:
-      if heights[i] is lower than heights[index] then index = i
-    if index is still k then:
-      look right from k+1 while the ground does not rise:
-        if heights[i] is lower than heights[index] then index = i
-    add one unit of water at index
-  return heights`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function pourWater(heights, volume, k) {
+  heights = [...heights] // heights = a copy of the heights
+  for (let unit = 0; unit < volume; unit++) {
+    let index = k
+    for (let i = k - 1; i >= 0 && heights[i] <= heights[i + 1]; i--) {
+      if (heights[i] < heights[index]) index = i
+    }
+    if (index === k) {
+      for (let i = k + 1; i < heights.length && heights[i] <= heights[i - 1]; i++) {
+        if (heights[i] < heights[index]) index = i
+      }
+    }
+    heights[index] += 1 // add one unit of water at index
+  }
+  return heights
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def pour_water(heights, volume, k):

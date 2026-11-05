@@ -11,10 +11,21 @@ const PYTHON = `def k_length_apart(nums, k):
             if last is not None and i - last - 1 < k:
                 return False
             last = i
-    return True`
+
+    return True
+`
 
 export const python = PYTHON
-export const code = PYTHON.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function kLengthApart(nums, k) {
+  let last = null
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] === 1) {
+      if (last !== null && i - last - 1 < k) return false
+      last = i
+    }
+  }
+  return true
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 export const pythonLineMap = Object.fromEntries(code.map(({ line }) => [line, line]))
 const lineAt = marker => code.find(({ text }) => text.includes(marker)).line
 
@@ -36,10 +47,10 @@ export function buildTrace({ nums, k }) {
   let verdict = null
   const snap = (index, gap) => ({ nums, k, index, last, gap, verdict })
 
-  frames.push({ phase: 'scan', activeLine: lineAt('last = None'), message: `Nothing seen yet. The required distance is k = ${k}.`, snapshot: snap(null, null) })
+  frames.push({ phase: 'scan', activeLine: lineAt('let last = null'), message: `Nothing seen yet. The required distance is k = ${k}.`, snapshot: snap(null, null) })
   for (let i = 0; i < nums.length && verdict === null; i++) {
     const x = nums[i]
-    frames.push({ phase: 'scan', activeLine: lineAt('for i, x'), message: `Position ${i} holds ${x}.`, snapshot: snap(i, null) })
+    frames.push({ phase: 'scan', activeLine: lineAt('for (let i = 0'), message: `Position ${i} holds ${x}.`, snapshot: snap(i, null) })
     if (x !== 1) continue
     if (last !== null) {
       const gap = i - last - 1
@@ -50,7 +61,7 @@ export function buildTrace({ nums, k }) {
       })
       if (gap < k) {
         verdict = false
-        frames.push({ phase: 'answer', activeLine: lineAt('return False'), message: 'Two 1s are too close, so the answer is false.', snapshot: snap(i, gap) })
+        frames.push({ phase: 'answer', activeLine: lineAt('return false'), message: 'Two 1s are too close, so the answer is false.', snapshot: snap(i, gap) })
         break
       }
     }
@@ -59,7 +70,7 @@ export function buildTrace({ nums, k }) {
   }
   if (verdict === null) {
     verdict = true
-    frames.push({ phase: 'answer', activeLine: lineAt('return True'), message: 'Every pair of 1s is far enough apart, so the answer is true.', snapshot: snap(null, null) })
+    frames.push({ phase: 'answer', activeLine: lineAt('return true'), message: 'Every pair of 1s is far enough apart, so the answer is true.', snapshot: snap(null, null) })
   }
   return { input: { nums, k }, result: verdict, frames }
 }

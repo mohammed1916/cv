@@ -1,17 +1,15 @@
-export const code = [
-  { line: 1, text: "latest time (s):" },
-  { line: 2, text: "  set chars to the characters of s" },
-  { line: 3, text: "  if the first hour digit is ?" },
-  { line: 4, text: "    use 1 if the second hour digit is ? or at most 1, else use 0" },
-  { line: 5, text: "  if the second hour digit is ?" },
-  { line: 6, text: "    use 1 if the first hour digit is 1, else use 9" },
-  { line: 7, text: "  if the first minute digit is ?" },
-  { line: 8, text: "    use 5" },
-  { line: 9, text: "  if the last minute digit is ?" },
-  { line: 10, text: "    use 9" },
-  { line: 11, text: "  return the joined characters" },
-];
-
+export const code = `function findLatestTime(s) {
+  const chars = [...s]
+  if (chars[0] === '?')
+    chars[0] = chars[1] === '?' || chars[1] <= '1' ? '1' : '0'
+  if (chars[1] === '?')
+    chars[1] = chars[0] === '1' ? '1' : '9'
+  if (chars[3] === '?')
+    chars[3] = '5'
+  if (chars[4] === '?')
+    chars[4] = '9'
+  return chars.join('')
+}`.split('\n').map((text, index) => ({ line: index + 1, text }));
 export const python = `def findLatestTime(s):
     chars = list(s)
     if chars[0] == "?":

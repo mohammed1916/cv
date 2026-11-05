@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-money-required-before-transactions/',
   complexity: 'O(n) time for n transactions. The visualization caps transactions at 8.',
   examples: [
-    { label: 'Example 1', input: '{"transactions":[[2,1],[5,0],[4,2]]}' },
-    { label: 'Example 2', input: '{"transactions":[[3,0],[0,3]]}' },
+    { label: 'Mixed', input: '{"transactions":[[4,2],[1,3],[6,6]]}' },
+    { label: 'Pure loss', input: '{"transactions":[[7,1],[3,0]]}' },
   ],
 }
 

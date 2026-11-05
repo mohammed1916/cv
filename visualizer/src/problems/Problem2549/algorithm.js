@@ -20,16 +20,21 @@ const py = (text) => {
 export const python = PYTHON_SOURCE
 
 export const code = [
-  { line: 1, text: 'function distinctNumbersOnBoard(n)' },
-  { line: 2, text: 'board ← {n}' },
-  { line: 3, text: 'changed ← true' },
-  { line: 4, text: 'while changed' },
-  { line: 5, text: 'changed ← false' },
-  { line: 6, text: 'for each x currently on the board' },
-  { line: 7, text: 'for each i from 1 to n' },
-  { line: 8, text: 'if x mod i equals 1 and i is not on the board' },
-  { line: 9, text: 'add i to the board and set changed ← true' },
-  { line: 10, text: 'return the number of values on the board' },
+  { line: 1, text: "function distinctNumbersOnBoard(n) {" },
+  { line: 2, text: "  const board = new Set([n])" },
+  { line: 3, text: "  let changed = true" },
+  { line: 4, text: "  while (changed) {" },
+  { line: 5, text: "    changed = false" },
+  { line: 6, text: "    for (const x of [...board].sort((a, b) => a - b)) {" },
+  { line: 7, text: "      for (let i = 1; i <= n; i++) {" },
+  { line: 8, text: "        if (x % i === 1 && !board.has(i)) {" },
+  { line: 9, text: "          board.add(i); changed = true" },
+  { line: 10, text: "        }" },
+  { line: 11, text: "      }" },
+  { line: 12, text: "    }" },
+  { line: 13, text: "  }" },
+  { line: 14, text: "  return board.size" },
+  { line: 15, text: "}" },
 ]
 
 export function parseInput(text) {
@@ -81,6 +86,6 @@ export function buildTrace(input) {
     current = null
     added = null
   }
-  frame('done', 10, py('return len(board)'), `${board.size} distinct numbers are on the board.`)
+  frame('done', 14, py('return len(board)'), `${board.size} distinct numbers are on the board.`)
   return { input, result: board.size, frames }
 }

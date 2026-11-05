@@ -22,7 +22,7 @@ export function buildTrace({ sentence, searchWord }) {
   let answer = null
   for (let i = 0; i < words.length; i++) {
     const hit = words[i].startsWith(searchWord)
-    frames.push({ phase: 'inspect', activeLine: L('if words[index]'), pythonLine: P('if word.startswith'), snapshot: snap(i, null), message: `Word ${i + 1} is "${words[i]}". ${hit ? `Its first ${searchWord.length} letters match.` : `Its first ${searchWord.length} letters differ, so keep scanning.`}` })
+    frames.push({ phase: 'inspect', activeLine: L('words[index].startsWith'), pythonLine: P('if word.startswith'), snapshot: snap(i, null), message: `Word ${i + 1} is "${words[i]}". ${hit ? `Its first ${searchWord.length} letters match.` : `Its first ${searchWord.length} letters differ, so keep scanning.`}` })
     if (hit) {
       answer = i + 1
       matches.push(i)
@@ -34,12 +34,13 @@ export function buildTrace({ sentence, searchWord }) {
   return { input: { sentence, searchWord }, result: answer ?? -1, frames }
 }
 
-export const code = `first prefix word (sentence, searchWord):
-  words = sentence.split(' ')
-  for index from 0 to len(words) - 1:
-    if words[index] starts with searchWord:
-      return index + 1
-  return -1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function isPrefixOfWord(sentence, searchWord) {
+  const words = sentence.split(' ')
+  for (let index = 0; index < words.length; index++) {
+    if (words[index].startsWith(searchWord)) return index + 1
+  }
+  return -1
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 

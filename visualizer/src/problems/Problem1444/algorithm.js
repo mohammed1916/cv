@@ -6,29 +6,36 @@ export const phases = [
   { id: 'done', label: 'Result', description: 'Return the ways for the whole pizza, taken modulo 1000000007.' },
 ]
 
-export const code = `function countWays(pizza, k):
-    rows, cols = size(pizza)
-    prefix = apple prefix sums of pizza
-    ways = one-piece table: 1 where the region from (r, c) has an apple
-    for pieces from 2 to k:
-        next = new table
-        for r from 0 to rows - 1:
-            for c from 0 to cols - 1:
-                total = 0
-                for r2 from r + 1 to rows - 1:
-                    if apples(r, c, r2, cols) > 0: total += ways[r2][c]
-                for c2 from c + 1 to cols - 1:
-                    if apples(r, c, rows, c2) > 0: total += ways[r][c2]
-                next[r][c] = total mod 1000000007
-        ways = next
-    return ways[0][0]`
+export const code = `const MOD = 1000000007
+function countWays(pizza, k) {
+  const rows = pizza.length
+  const cols = pizza[0].length
+  const prefix = Array.from({ length: rows + 1 }, () => Array(cols + 1).fill(0))
+  for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) prefix[r + 1][c + 1] = prefix[r][c + 1] + prefix[r + 1][c] - prefix[r][c] + (pizza[r][c] === 'A' ? 1 : 0)
+  const apples = (r1, c1, r2, c2) => prefix[r2][c2] - prefix[r1][c2] - prefix[r2][c1] + prefix[r1][c1]
+  let ways = Array.from({ length: rows }, (_, r) => Array.from({ length: cols }, (_, c) => (apples(r, c, rows, cols) > 0 ? 1 : 0)))
+  for (let pieces = 2; pieces <= k; pieces++) {
+    const nxt = Array.from({ length: rows }, () => Array(cols).fill(0))
+    for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+      let total = 0
+      for (let r2 = r + 1; r2 < rows; r2++) if (apples(r, c, r2, cols) > 0) total += ways[r2][c]
+      for (let c2 = c + 1; c2 < cols; c2++) if (apples(r, c, rows, c2) > 0) total += ways[r][c2]
+      nxt[r][c] = total % MOD
+    }
+    ways = nxt
+  }
+  return ways[0][0]
+
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `MOD = 1_000_000_007
-
 def count_ways(pizza, k):
     rows, cols = len(pizza), len(pizza[0])
-    prefix = apple_prefix_sums(pizza)
-    def apples(r1, c1, r2, c2): return prefix[r2][c2] - prefix[r1][c2] - prefix[r2][c1] + prefix[r1][c1]
+    prefix = [[0] * (cols + 1) for _ in range(rows + 1)]
+    for r in range(rows):
+        for c in range(cols):
+            prefix[r + 1][c + 1] = prefix[r][c + 1] + prefix[r + 1][c] - prefix[r][c] + (pizza[r][c] == 'A')
+    apples = lambda r1, c1, r2, c2: prefix[r2][c2] - prefix[r1][c2] - prefix[r2][c1] + prefix[r1][c1]
     ways = [[1 if apples(r, c, rows, cols) > 0 else 0 for c in range(cols)] for r in range(rows)]
     for pieces in range(2, k + 1):
         nxt = [[0] * cols for _ in range(rows)]
@@ -44,7 +51,7 @@ def count_ways(pizza, k):
     return ways[0][0]`
 
 const lineOf = (source, fragment) => source.split('\n').findIndex(line => line.includes(fragment)) + 1
-const C = fragment => lineOf(code, fragment)
+const C = fragment => code.findIndex(c => c.text.includes(fragment)) + 1
 const P = fragment => lineOf(python, fragment)
 const MOD = 1000000007
 
@@ -79,7 +86,7 @@ export function buildTrace({ pizza, k }) {
 
   add('setup', 'prefix = ', 'prefix = ', `Count apples in every top-left rectangle. The pizza has ${R} rows and ${Cc} columns.`, {})
   let ways = Array.from({ length: R }, (_, r) => Array.from({ length: Cc }, (_, c) => (apples(r, c, R, Cc) > 0 ? 1 : 0)))
-  add('base', 'ways = one-piece', 'ways = [[1', 'With one piece, a region from each cell is valid only if it still holds an apple.', { table: ways })
+  add('base', 'let ways = Array', 'ways = [[1', 'With one piece, a region from each cell is valid only if it still holds an apple.', { table: ways })
 
   for (let p = 2; p <= k; p++) {
     const next = Array.from({ length: R }, () => Array(Cc).fill(0))
@@ -94,7 +101,7 @@ export function buildTrace({ pizza, k }) {
         for (let c2 = c + 1; c2 < Cc; c2++) if (apples(r, c, R, c2) > 0) left += prev[r][c2]
         const total = (top + left) % MOD
         next[r][c] = total
-        add('cut', 'next[r][c] = ', 'nxt[r][c] = ', `Cell (${r}, ${c}): horizontal cuts add ${top}, vertical cuts add ${left}, so ${total} ways.`,
+        add('cut', 'nxt[r][c] = ', 'nxt[r][c] = ', `Cell (${r}, ${c}): horizontal cuts add ${top}, vertical cuts add ${left}, so ${total} ways.`,
           { pieces: p, r, c, value: total, table: prev })
       }
     }

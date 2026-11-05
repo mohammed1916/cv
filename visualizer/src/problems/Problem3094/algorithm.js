@@ -1,11 +1,15 @@
-const CODE_TEXT = `ask commonBits with num = 0 to learn how many one bits n has
-set answer to zero
-for each bit position i from 0 to 29
-  ask commonBits with num = 1 shifted left by i, which flips bit i of n
-  if the count of one bits dropped then bit i of the original n was one, so set it in answer
-  record the new count of one bits
-return answer`
-
+const CODE_TEXT = `function recoverNumber(commonBits) {
+  let ones = 30 - commonBits(0)
+  let answer = 0
+  for (let i = 0; i < 30; i++) {
+    const equal = commonBits(1 << i)
+    const newOnes = 30 - equal
+    if (newOnes < ones) answer |= 1 << i
+    ones = newOnes
+  }
+  return answer
+}`
+export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
 const PYTHON_TEXT = `def recover_number(common_bits):
     ones = 30 - common_bits(0)
     answer = 0
@@ -16,8 +20,6 @@ const PYTHON_TEXT = `def recover_number(common_bits):
             answer |= 1 << i
         ones = new_ones
     return answer`
-
-export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
 export const python = PYTHON_TEXT
 const L = s => { const i = code.findIndex(c => c.text.includes(s)); if (i < 0) throw new Error(`No pseudocode line: ${s}`); return i + 1 }
 const PY = s => { const i = python.split('\n').findIndex(t => t.includes(s)); if (i < 0) throw new Error(`No python line: ${s}`); return i + 1 }
@@ -48,7 +50,7 @@ export function buildTrace(hidden) {
   }
   let known = WIDTH - commonBits(0)
   let answer = 0
-  frames.push({ phase: 'start', activeLine: L('ask commonBits with num = 0'), pythonLine: PY('ones = 30 - common_bits(0)'), bit: -1, num: 0, reply: null, ones: known, answer, message: `The first reply shows ${known} one bits in the hidden number.` })
+  frames.push({ phase: 'start', activeLine: L('let ones = 30 - commonBits(0)'), pythonLine: PY('ones = 30 - common_bits(0)'), bit: -1, num: 0, reply: null, ones: known, answer, message: `The first reply shows ${known} one bits in the hidden number.` })
   for (let i = 0; i < WIDTH; i++) {
     const num = 1 << i
     const before = known
@@ -56,7 +58,7 @@ export function buildTrace(hidden) {
     const after = WIDTH - equal
     const dropped = after < known
     if (dropped) answer |= num
-    frames.push({ phase: dropped ? 'set' : 'probe', activeLine: L('if the count of one bits dropped'), pythonLine: PY('if new_ones < ones'), bit: i, num, reply: equal, ones: after, answer, message: dropped ? `The count fell from ${before} to ${after}, so bit ${i} of the original number is one.` : `The count rose from ${before} to ${after}, so bit ${i} of the original number is zero.` })
+    frames.push({ phase: dropped ? 'set' : 'probe', activeLine: L('if (newOnes < ones)'), pythonLine: PY('if new_ones < ones'), bit: i, num, reply: equal, ones: after, answer, message: dropped ? `The count fell from ${before} to ${after}, so bit ${i} of the original number is one.` : `The count rose from ${before} to ${after}, so bit ${i} of the original number is zero.` })
     known = after
   }
   frames.push({ phase: 'done', activeLine: L('return answer'), pythonLine: PY('return answer'), bit: -1, num: 0, reply: null, ones: known, answer, message: `The original number is ${answer}.` })

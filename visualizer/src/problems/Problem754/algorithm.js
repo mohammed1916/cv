@@ -1,11 +1,14 @@
-export const code = `function reachNumber(target):
-  goal = absolute value of target
-  k = 0
-  total = 0
-  while total is below goal or total minus goal is odd:
+export const code = `function reachNumber(target) {
+  const goal = Math.abs(target)
+  let k = 0
+  let total = 0
+  while (total < goal || (total - goal) % 2 !== 0) {
     k = k + 1
     total = total + k
-  return k`.split('\n').map((text, index) => ({ line: index + 1, text }))
+  }
+  return k
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def reach_number(target):
@@ -27,13 +30,13 @@ export function parseInput(text) {
 export function buildTrace(target) {
   const goal = Math.abs(target)
   const sums = [0]
-  const frames = [{ phase: 'start', activeLine: L('goal = absolute'), pythonLine: 2, k: 0, total: 0, goal, message: `Moving left or right is symmetric, so aim for |target| = ${goal}. Step i moves exactly i units.` }]
+  const frames = [{ phase: 'start', activeLine: L('const goal = Math.abs'), pythonLine: 2, k: 0, total: 0, goal, message: `Moving left or right is symmetric, so aim for |target| = ${goal}. Step i moves exactly i units.` }]
   let k = 0, total = 0
   while (true) {
     const diff = total - goal
     const reached = total >= goal
     const parityOk = diff % 2 === 0
-    frames.push({ phase: 'check', activeLine: L('while total'), pythonLine: 5, k, total, goal, reached, parityOk, sums: [...sums],
+    frames.push({ phase: 'check', activeLine: L('while (total < goal'), pythonLine: 5, k, total, goal, reached, parityOk, sums: [...sums],
       message: !reached ? `Sum ${total} is still below ${goal}; take another step.` : parityOk ? `Sum ${total} reaches ${goal} and the overshoot ${diff} is even, so some step of size ${diff / 2} can be flipped to go backwards.` : `Sum ${total} overshoots by ${diff}, which is odd: flipping a step changes the sum by an even amount, so it cannot be fixed. Keep going.` })
     if (reached && parityOk) break
     k++; total += k; sums.push(total)

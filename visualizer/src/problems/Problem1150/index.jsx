@@ -13,7 +13,8 @@ export default function MajorityElementVisual() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const s = step.snapshot
     const pointers = {}
-    if (s.lo < s.nums.length) pointers.lo = s.lo
+    if (s.lo < s.nums.length) pointers.l = s.lo
+    if (s.hi > s.lo && s.hi - 1 < s.nums.length) pointers.r = s.hi - 1
     if (s.mid !== null) pointers.mid = s.mid
     const marks = {}
     for (let i = s.lo; i < s.hi; i++) marks[i] = 'window'

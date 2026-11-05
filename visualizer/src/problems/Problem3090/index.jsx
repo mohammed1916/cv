@@ -23,7 +23,7 @@ const definition = {
 export default function TwoOccurrences() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Letters" length={run.input.s.length} valueAt={i => run.input.s[i]} active={step.right}
-      roleAt={i => (step.right >= 0 && i >= step.left && i <= step.right ? 'window' : '')} />
+      roleAt={i => (step.right < 0 ? '' : i === step.left ? 'l' : i === step.right ? 'r' : i > step.left && i < step.right ? 'window' : '')} />
     <output aria-label="Tally">{`Tally: ${Object.entries(step.counts).map(([v, c]) => `${v}×${c}`).join(', ') || 'empty'}; best ${step.best}`}</output>
   </>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>

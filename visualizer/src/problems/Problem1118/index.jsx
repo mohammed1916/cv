@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { phases, parseInput, buildTrace, code, python } from './algorithm'
+import { phases, parseInput, buildTrace, code, python, inputLabel, complexity, examples } from './algorithm'
 import { Sequence, Vars } from './SeqKit'
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -7,16 +7,10 @@ const yesNo = value => (value === undefined || value === null ? '-' : value ? 'y
 
 const definition = {
   phases, parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'Year and month (JSON object)',
+  inputLabel,
   url: 'https://leetcode.com/problems/number-of-days-in-a-month/',
-  complexity: 'O(1) time and O(1) space.',
-  examples: [
-    { label: 'Ordinary February', input: '{"year":2023,"month":2}' },
-    { label: 'Leap year', input: '{"year":2024,"month":2}' },
-    { label: 'Century exception', input: '{"year":1900,"month":2}' },
-    { label: 'Divisible by 400', input: '{"year":2000,"month":2}' },
-    { label: 'Thirty days', input: '{"year":2026,"month":4}' },
-  ],
+  complexity,
+  examples,
 }
 
 export default function DaysInMonth() {

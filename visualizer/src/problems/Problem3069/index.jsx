@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import DistributeLanesView from './DistributeLanesView'
 
 const definition = {
   phases: [
@@ -13,17 +14,13 @@ const definition = {
   url: 'https://leetcode.com/problems/distribute-elements-into-two-arrays-i/',
   complexity: 'O(n) time and O(n) space for the two arrays.',
   examples: [
-    { label: 'Example 1', input: '[2,1,3]' },
-    { label: 'Example 2', input: '[5,4,3,8]' },
+    { label: 'Example 1', input: '[4,9,2,7]' },
+    { label: 'Example 2', input: '[10,3,8,6,1]' },
   ],
 }
 
 export default function DistributeTwoArrays() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <output aria-label="First array">{`arr1 = [${step.arr1.join(', ')}]`}</output>
-    <output aria-label="Second array">{`arr2 = [${step.arr2.join(', ')}]`}</output>
-    <output aria-label="Current value">{step.value === null ? 'no value placed' : `value ${step.value} placed`}</output>
-  </>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <DistributeLanesView nums={run.input} step={step} />} renderReasoning={() => <>
     <p>The first two values start the arrays. Each later value is compared with the last elements of the two arrays, and it joins the first array only when that last element is larger.</p>
     <p>Joining the arrays at the end keeps every value in the order it was placed.</p>
   </>} />

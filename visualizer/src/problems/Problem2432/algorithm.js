@@ -34,15 +34,22 @@ export function buildTrace(input) {
   return { input, durations, result: bestId, frames }
 }
 
-export const code = `employee with the longest task
-  set the longest duration to minus one and the answer id to minus one
-  set the previous leave time to zero
-  for each log [id, leave time] in order
-    the task duration is leave time minus the previous leave time
-    if the duration is longer, or equal with a smaller id, keep this employee
-    set the previous leave time to leave time
-  return the answer id`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function hardestWorker(n, logs) {
+  let bestId = -1
+  let bestDuration = -1 // set the longest duration to minus one
+  let previous = 0
+  for (const [id, leave] of logs) {
+    const duration = leave - previous // the task duration is leave minus previous
+    if (duration > bestDuration || (duration === bestDuration && id < bestId)) {
+      bestId = id
+      bestDuration = duration
+    }
+    previous = leave
+  }
+  return bestId // return the answer id
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def hardest_worker(n, logs):
     best_id = -1
@@ -55,6 +62,7 @@ export const python = `def hardest_worker(n, logs):
             best_duration = duration
         previous = leave_time
     return best_id
-`
+
 
 const P = (s, n = 1) => { let c = 0; return python.split('\n').findIndex(l => l.includes(s) && ++c === n) + 1 }
+`

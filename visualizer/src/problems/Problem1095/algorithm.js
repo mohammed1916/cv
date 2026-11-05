@@ -14,26 +14,60 @@ export function parseInput(text) {
   return { mountain, target }
 }
 
+// Each line of JavaScript is paired with the Python line on the same row.
+const LINES = [
+  ['function findInMountain(mountain, target) {', 'def find_in_mountain(mountain, target):'],
+  ['  const n = mountain.length', '    n = len(mountain)'],
+  ['  let lo = 0, hi = n - 1', '    lo, hi = 0, n - 1'],
+  ['  while (lo < hi) {', '    while lo < hi:'],
+  ['    const mid = (lo + hi) >> 1', '        mid = (lo + hi) // 2'],
+  ['    if (mountain[mid] < mountain[mid + 1]) lo = mid + 1', '        if mountain[mid] < mountain[mid + 1]: lo = mid + 1'],
+  ['    else hi = mid', '        else: hi = mid'],
+  ['  }', ''],
+  ['  const peak = lo', '    peak = lo'],
+  ['  lo = 0; hi = peak', '    lo, hi = 0, peak'],
+  ['  while (lo <= hi) {', '    while lo <= hi:'],
+  ['    const mid = (lo + hi) >> 1', '        mid = (lo + hi) // 2'],
+  ['    if (mountain[mid] === target) return mid', '        if mountain[mid] == target: return mid'],
+  ['    if (mountain[mid] < target) lo = mid + 1', '        if mountain[mid] < target: lo = mid + 1'],
+  ['    else hi = mid - 1', '        else: hi = mid - 1'],
+  ['  }', ''],
+  ['  lo = peak + 1; hi = n - 1', '    lo, hi = peak + 1, n - 1'],
+  ['  while (lo <= hi) {', '    while lo <= hi:'],
+  ['    const mid = (lo + hi) >> 1', '        mid = (lo + hi) // 2'],
+  ['    if (mountain[mid] === target) return mid', '        if mountain[mid] == target: return mid'],
+  ['    if (mountain[mid] > target) lo = mid + 1', '        if mountain[mid] > target: lo = mid + 1'],
+  ['    else hi = mid - 1', '        else: hi = mid - 1'],
+  ['  }', ''],
+  ['  return -1', '    return -1'],
+  ['}', ''],
+]
+const codeLines = LINES.map(([js]) => js)
+export const code = codeLines.map((text, index) => ({ line: index + 1, text }))
+const L = s => codeLines.findIndex(c => c.includes(s)) + 1
+export const python = LINES.map(([, py]) => py).join('\n')
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 export function buildTrace(input) {
   const { mountain: arr, target } = input
   const frames = []
   let lo = 0
   let hi = arr.length - 1
-  frames.push({ phase: 'start', pythonLine: 3, activeLine: L('binary search for the peak index'), lo, hi, mid: -1, peak: -1, found: -1, message: `Search the whole array of length ${arr.length} for the peak.` })
+  frames.push({ phase: 'start', pythonLine: P('n = len'), activeLine: L('const n = mountain.length'), lo, hi, mid: -1, peak: -1, found: -1, message: `Search the whole array of length ${arr.length} for the peak.` })
   while (lo < hi) {
     const mid = (lo + hi) >> 1
-    frames.push({ phase: 'peak', pythonLine: 6, activeLine: L('if the middle value is less'), lo, hi, mid, peak: -1, found: -1, message: `Middle ${mid} has value ${arr[mid]} and its right neighbor ${arr[mid + 1]}.` })
+    frames.push({ phase: 'peak', pythonLine: P('if mountain[mid] < mountain[mid + 1]'), activeLine: L('if (mountain[mid] < mountain[mid + 1])'), lo, hi, mid, peak: -1, found: -1, message: `Middle ${mid} has value ${arr[mid]} and its right neighbor ${arr[mid + 1]}.` })
     if (arr[mid] < arr[mid + 1]) lo = mid + 1
     else hi = mid
   }
   const peak = lo
-  frames.push({ phase: 'peak', pythonLine: 10, activeLine: L('if the middle value is less'), lo, hi, mid: -1, peak, found: -1, message: `The peak is at index ${peak}.` })
+  frames.push({ phase: 'peak', pythonLine: P('peak = lo'), activeLine: L('const peak = lo'), lo, hi, mid: -1, peak, found: -1, message: `The peak is at index ${peak}.` })
   let found = -1
   lo = 0
   hi = peak
   while (lo <= hi && found === -1) {
     const mid = (lo + hi) >> 1
-    frames.push({ phase: 'ascending', pythonLine: 14, activeLine: L('binary search the ascending part'), lo, hi, mid, peak, found: -1, message: `Ascending part: compare index ${mid} (value ${arr[mid]}) with ${target}.` })
+    frames.push({ phase: 'ascending', pythonLine: P('while lo <= hi'), activeLine: L('while (lo <= hi)'), lo, hi, mid, peak, found: -1, message: `Ascending part: compare index ${mid} (value ${arr[mid]}) with ${target}.` })
     if (arr[mid] === target) found = mid
     else if (arr[mid] < target) lo = mid + 1
     else hi = mid - 1
@@ -43,52 +77,12 @@ export function buildTrace(input) {
     hi = arr.length - 1
     while (lo <= hi && found === -1) {
       const mid = (lo + hi) >> 1
-      frames.push({ phase: 'descending', pythonLine: 23, activeLine: L('binary search the descending part'), lo, hi, mid, peak, found: -1, message: `Descending part: compare index ${mid} (value ${arr[mid]}) with ${target}.` })
+      frames.push({ phase: 'descending', pythonLine: P('lo, hi = peak + 1'), activeLine: L('lo = peak + 1'), lo, hi, mid, peak, found: -1, message: `Descending part: compare index ${mid} (value ${arr[mid]}) with ${target}.` })
       if (arr[mid] === target) found = mid
       else if (arr[mid] > target) lo = mid + 1
       else hi = mid - 1
     }
   }
-  frames.push({ phase: 'done', pythonLine: found === -1 ? 29 : found <= peak ? 15 : 24, activeLine: L('return the index'), lo: -1, hi: -1, mid: -1, peak, found, message: found === -1 ? `${target} is not in the mountain.` : `${target} first appears at index ${found}.` })
+  frames.push({ phase: 'done', pythonLine: found === -1 ? P('return -1') : P('if mountain[mid] == target: return mid'), activeLine: found === -1 ? L('return -1') : L('if (mountain[mid] === target) return mid'), lo: -1, hi: -1, mid: -1, peak, found, message: found === -1 ? `${target} is not in the mountain.` : `${target} first appears at index ${found}.` })
   return { input, result: found, frames }
 }
-
-export const code = `find the smallest index of the target in a mountain array
-  binary search for the peak index
-    if the middle value is less than the value after it then move the low end past the middle
-    otherwise move the high end down to the middle
-  binary search the ascending part for the target
-  if the target was not found then binary search the descending part for it
-  return the index or minus one`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-
-export const python = `def find_in_mountain(mountain, target):
-    n = len(mountain)
-    lo, hi = 0, n - 1
-    while lo < hi:
-        mid = (lo + hi) // 2
-        if mountain[mid] < mountain[mid + 1]:
-            lo = mid + 1
-        else:
-            hi = mid
-    peak = lo
-    lo, hi = 0, peak
-    while lo <= hi:
-        mid = (lo + hi) // 2
-        if mountain[mid] == target:
-            return mid
-        if mountain[mid] < target:
-            lo = mid + 1
-        else:
-            hi = mid - 1
-    lo, hi = peak + 1, n - 1
-    while lo <= hi:
-        mid = (lo + hi) // 2
-        if mountain[mid] == target:
-            return mid
-        if mountain[mid] > target:
-            lo = mid + 1
-        else:
-            hi = mid - 1
-    return -1
-`

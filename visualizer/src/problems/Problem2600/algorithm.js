@@ -17,12 +17,13 @@ const py = (text) => {
 export const python = PYTHON_SOURCE
 
 export const code = [
-  { line: 1, text: 'function kItemsWithMaximumSum(numOnes, numZeros, numNegOnes, k)' },
-  { line: 2, text: 'total = 0' },
-  { line: 3, text: 'take up to k of the +1 items and add their values' },
-  { line: 4, text: 'take the 0 items with whatever budget remains' },
-  { line: 5, text: 'take the -1 items with whatever budget remains and subtract them' },
-  { line: 6, text: 'return total' },
+  { line: 1, text: "function kItemsWithMaximumSum(numOnes, numZeros, numNegOnes, k) {" },
+  { line: 2, text: "  let total = 0" },
+  { line: 3, text: "  const picked = Math.min(k, numOnes); total += picked" },
+  { line: 4, text: "  const zeros = Math.min(k - picked, numZeros)" },
+  { line: 5, text: "  const negatives = Math.min(k - picked - zeros, numNegOnes); total -= negatives" },
+  { line: 6, text: "  return total" },
+  { line: 7, text: "}" },
 ]
 
 export function parseInput(text) {

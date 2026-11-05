@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/count-prefix-and-suffix-pairs-ii/',
   complexity: 'O(total length) time and space, because each word is walked once for matching and once for storing. The visualization caps input at 8 words.',
   examples: [
-    { label: 'Example 1', input: '{"words":["a","aba","ababa","aa"]}' },
-    { label: 'Example 2', input: '{"words":["pa","papa","ma","mama"]}' },
+    { label: 'Example 1', input: '{"words":["x","xy","xyx","xyxy"]}' },
+    { label: 'Example 2', input: '{"words":["bo","bobo","ob","bob"]}' },
   ],
 }
 

@@ -1,12 +1,18 @@
-const CODE_TEXT = `set the modulus to 1000000007
-precompute factorials up to n modulo the modulus
-unused = the values 1 to n in increasing order
-rank = 0
-for each position i from 0 to n - 1 with value v = p[i]
-  smaller = number of unused values below v
-  rank = rank + smaller times (n - 1 - i)! modulo the modulus
-  remove v from unused
-return the rank`
+const CODE_TEXT = `function indexOfPermutation(perm) {
+  const MOD = 1000000007
+  const n = perm.length
+  const fact = [1]
+  for (let i = 1; i <= n; i++) fact[i] = (fact[i - 1] * i) % MOD
+  let unused = Array.from({ length: n }, (_, i) => i + 1)
+  let rank = 0
+  for (let i = 0; i < n; i++) {
+    const v = perm[i]
+    const smaller = unused.filter(u => u < v).length
+    rank = (rank + smaller * fact[n - 1 - i]) % MOD
+    unused = unused.filter(u => u !== v)
+  }
+  return rank
+}`
 
 const PYTHON_TEXT = `MOD = 1000000007
 
@@ -45,17 +51,17 @@ export function buildTrace(perm) {
   for (let i = 1; i <= n; i++) fact[i] = (fact[i - 1] * i) % MOD
   let unused = Array.from({ length: n }, (_, i) => i + 1)
   let rank = 0
-  frames.push({ phase: 'start', activeLine: L('set the modulus'), pythonLine: PY('MOD = 1000000007'), i: -1, value: null, smaller: null, weight: null, unused: [...unused], rank, message: `Start with rank 0 and ${n} unused values.` })
+  frames.push({ phase: 'start', activeLine: L('const MOD = 1000000007'), pythonLine: PY('MOD = 1000000007'), i: -1, value: null, smaller: null, weight: null, unused: [...unused], rank, message: `Start with rank 0 and ${n} unused values.` })
   for (let i = 0; i < n; i++) {
     const v = perm[i]
     const smaller = unused.filter(u => u < v).length
     const weight = fact[n - 1 - i]
     const before = rank
     rank = (rank + smaller * weight) % MOD
-    frames.push({ phase: 'count', activeLine: L('smaller = number of unused'), pythonLine: PY('smaller = sum'), i, value: v, smaller, weight, unused: [...unused], rank: before, message: `Position ${i} holds ${v}; ${smaller} unused value${smaller === 1 ? ' is' : 's are'} smaller, worth ${smaller} times ${n - 1 - i}!.` })
+    frames.push({ phase: 'count', activeLine: L('const smaller = unused.filter'), pythonLine: PY('smaller = sum'), i, value: v, smaller, weight, unused: [...unused], rank: before, message: `Position ${i} holds ${v}; ${smaller} unused value${smaller === 1 ? ' is' : 's are'} smaller, worth ${smaller} times ${n - 1 - i}!.` })
     unused = unused.filter(u => u !== v)
-    frames.push({ phase: 'add', activeLine: L('rank = rank + smaller'), pythonLine: PY('rank = (rank'), i, value: v, smaller, weight, unused: [...unused], rank, message: `Rank is now ${rank}; ${v} is used up.` })
+    frames.push({ phase: 'add', activeLine: L('rank = (rank + smaller'), pythonLine: PY('rank = (rank'), i, value: v, smaller, weight, unused: [...unused], rank, message: `Rank is now ${rank}; ${v} is used up.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the rank'), pythonLine: PY('return rank'), i: -1, value: null, smaller: null, weight: null, unused: [], rank, message: `The zero-based rank is ${rank}.` })
+  frames.push({ phase: 'done', activeLine: L('return rank'), pythonLine: PY('return rank'), i: -1, value: null, smaller: null, weight: null, unused: [], rank, message: `The zero-based rank is ${rank}.` })
   return { input: perm, result: rank, frames }
 }

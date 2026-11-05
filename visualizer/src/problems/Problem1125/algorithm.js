@@ -27,27 +27,27 @@ export function buildTrace(input) {
     phase, activeLine, person, changed: [...changed], teams: [...dp.entries()].map(([m, t]) => [m, t.length]), message, pythonLine,
   })
 
-  snap('start', L('start with the empty skill set'), 'The empty set of skills is covered by an empty team.', P('dp = {0: []}'))
-  snap('map', L('map each required skill'), `Skills get bits: ${skills.map((s, i) => `${s}=${i}`).join(', ')}.`, P('bit = {skill'))
+  snap('start', L('const dp = new Map'), 'The empty set of skills is covered by an empty team.', P('dp = {0: []}'))
+  snap('map', L('const bit = new Map'), `Skills get bits: ${skills.map((s, i) => `${s}=${i}`).join(', ')}.`, P('bit = {skill'))
   for (let p = 0; p < people.length; p++) {
     person = p
     changed = []
     let pm = 0
     for (const s of people[p]) pm |= 1 << bit.get(s)
-    snap('person', L('for each person p'), `Person ${p} holds mask ${pm.toString(2).padStart(skills.length, '0')}.`, P('pm |= 1 << bit[s]'))
+    snap('person', L('people.forEach'), `Person ${p} holds mask ${pm.toString(2).padStart(skills.length, '0')}.`, P('pm |= 1 << bit[s]'))
     for (const [mask, team] of [...dp.entries()]) {
       const t = mask | pm
       if (!dp.has(t) || dp.get(t).length > team.length + 1) {
         dp.set(t, [...team, p])
         changed.push(t)
-        snap('update', L('if t is new'), `Covered set ${t.toString(2).padStart(skills.length, '0')} is now reached with ${team.length + 1} people.`, P('dp[t] = team + [p]'))
+        snap('update', L('if (!dp.has(t))'), `Covered set ${t.toString(2).padStart(skills.length, '0')} is now reached with ${team.length + 1} people.`, P('dp[t] = team + [p]'))
       }
     }
   }
   person = -1
   changed = []
   const team = [...dp.get(full)].sort((a, b) => a - b)
-  snap('done', L('return the team'), `Smallest team of ${team.length}: [${team.join(', ')}].`, P('return sorted(dp[full])'))
+  snap('done', L('return [...dp.get(full)]'), `Smallest team of ${team.length}: [${team.join(', ')}].`, P('return sorted(dp[full])'))
   return { input, result: team, frames }
 }
 

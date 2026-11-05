@@ -9,22 +9,26 @@ export const phases = [
   { id: 'done', label: 'Result', description: 'Ones outside the best window must cross in.' },
 ]
 
-export const code = [
-  'ones = count of ones in bits',
-  'if ones == 0: return 0',
-  'inside = ones in bits[0 .. ones - 1]',
-  'best = inside',
-  'for start from 1 to n - ones:',
-  '  inside += bits[start + ones - 1] - bits[start - 1]',
-  '  best = max(best, inside)',
-  'return ones - best',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function minSwaps(bits) {
+  const n = bits.length
+  const ones = bits.reduce((sum, v) => sum + v, 0)
+  if (ones === 0) return 0
+  let inside = 0
+  for (let k = 0; k < ones; k++) inside += bits[k]
+  let best = inside
+  for (let start = 1; start <= n - ones; start++) {
+    inside += bits[start + ones - 1] - bits[start - 1]
+    best = Math.max(best, inside)
+  }
+  return ones - best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const at = key => {
   const index = code.findIndex(line => line.text.includes(key))
   if (index < 0) throw new Error(`Missing code line: ${key}`)
   return index + 1
 }
+const pyAt = key => python.split('\n').findIndex(l => l.includes(key)) + 1
 
 export const python = `def min_swaps(bits):
     n = len(bits)
@@ -59,13 +63,13 @@ export function buildTrace(bits) {
   const snap = extra => ({ bits, ones, start: null, inside: null, best: null, ...extra })
 
   frames.push({
-    phase: 'count', activeLine: at('ones = count'),
+    phase: 'count', activeLine: at('const ones = bits'), pythonLine: pyAt('ones = sum(bits)'),
     message: `There are ${ones} ones. The grouped block will be ${ones} cells wide.`,
     snapshot: snap(),
   })
   if (ones === 0) {
     frames.push({
-      phase: 'done', activeLine: at('if ones == 0'),
+      phase: 'done', activeLine: at('if (ones === 0)'), pythonLine: pyAt('if ones == 0'),
       message: 'There are no ones, so nothing needs grouping and no swaps are needed.',
       snapshot: snap({ inside: 0, best: 0 }),
     })
@@ -76,12 +80,12 @@ export function buildTrace(bits) {
   for (let k = 0; k < ones; k++) inside += bits[k]
   let best = inside
   frames.push({
-    phase: 'window', activeLine: at('inside = ones in'),
+    phase: 'window', activeLine: at('for (let k = 0; k < ones'), pythonLine: pyAt('inside = sum(bits[:ones])'),
     message: `The first window covers positions 0 to ${ones - 1} and already holds ${inside} ones.`,
     snapshot: snap({ start: 0, inside, best }),
   })
   frames.push({
-    phase: 'window', activeLine: at('best = inside'),
+    phase: 'window', activeLine: at('let best = inside'), pythonLine: pyAt('best = inside'),
     message: `Record ${inside} as the best count so far.`,
     snapshot: snap({ start: 0, inside, best }),
   })
@@ -90,7 +94,7 @@ export function buildTrace(bits) {
     inside += bits[start + ones - 1] - bits[start - 1]
     best = Math.max(best, inside)
     frames.push({
-      phase: 'slide', activeLine: at('inside += bits'),
+      phase: 'slide', activeLine: at('inside += bits'), pythonLine: pyAt('inside += bits'),
       message: `Slide to start ${start}: position ${start + ones - 1} enters (${bits[start + ones - 1]}) and position ${start - 1} leaves (${bits[start - 1]}). The window holds ${inside} ones.`,
       snapshot: snap({ start, inside, best }),
     })
@@ -98,7 +102,7 @@ export function buildTrace(bits) {
 
   const result = ones - best
   frames.push({
-    phase: 'done', activeLine: at('return ones - best'),
+    phase: 'done', activeLine: at('return ones - best'), pythonLine: pyAt('return ones - best'),
     message: `The best window keeps ${best} ones, so ${ones} - ${best} = ${result} swaps are needed.`,
     snapshot: snap({ inside, best }),
   })

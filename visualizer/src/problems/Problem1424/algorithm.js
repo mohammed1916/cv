@@ -6,17 +6,39 @@ export const phases = [
 ]
 
 export const python = `def find_diagonal_order(nums):
-    buckets = defaultdict(list)
-    for i, row in enumerate(nums):
-        for j, value in enumerate(row):
-            buckets[i + j].append(value)
+    buckets = {}
+    for i in range(len(nums)):
+        for j in range(len(nums[i])):
+            d = i + j
+            if d not in buckets: buckets[d] = []
+            buckets[d].append(nums[i][j])
+
+
     result = []
     for d in sorted(buckets):
-        result.extend(reversed(buckets[d]))
-    return result`
+        row = buckets[d]
+        for k in range(len(row) - 1, -1, -1): result.append(row[k])
+
+    return result
+`
 
 const pythonLines = python.split('\n')
-export const code = pythonLines.map((text, index) => ({ line: index + 1, text }))
+export const code = `function findDiagonalOrder(nums) {
+  const buckets = new Map()
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = 0; j < nums[i].length; j++) {
+      const d = i + j
+      if (!buckets.has(d)) buckets.set(d, [])
+      buckets.get(d).push(nums[i][j])
+    }
+  }
+  const result = []
+  for (const d of [...buckets.keys()].sort((a, b) => a - b)) {
+    const list = buckets.get(d)
+    for (let k = list.length - 1; k >= 0; k--) result.push(list[k])
+  }
+  return result
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 export const pythonLineMap = Object.fromEntries(pythonLines.map((_, index) => [index + 1, index + 1]))
 
 export function parseInput(text) {
@@ -45,19 +67,19 @@ export function buildTrace(nums) {
       const d = i + j
       if (!buckets.has(d)) buckets.set(d, [])
       buckets.get(d).push(value)
-      push('bucket', 5, `Cell (${i}, ${j}) holds ${value}. It goes to diagonal ${d}.`, [i, j], d)
+      push('bucket', 7, `Cell (${i}, ${j}) holds ${value}. It goes to diagonal ${d}.`, [i, j], d)
     })
   })
 
   for (const d of [...buckets.keys()].sort((a, b) => a - b)) {
-    push('order', 7, `Next diagonal: sum ${d}.`, null, d)
+    push('order', 11, `Next diagonal: sum ${d}.`, null, d)
     const list = buckets.get(d)
     for (let k = list.length - 1; k >= 0; k--) {
       output.push(list[k])
-      push('emit', 8, `Diagonal ${d}: read ${list[k]} and move up and to the right.`, null, d)
+      push('emit', 13, `Diagonal ${d}: read ${list[k]} and move up and to the right.`, null, d)
     }
   }
 
-  push('result', 9, `Done: ${output.length} values in diagonal order.`)
+  push('result', 15, `Done: ${output.length} values in diagonal order.`)
   return { input: nums, result: output, frames }
 }

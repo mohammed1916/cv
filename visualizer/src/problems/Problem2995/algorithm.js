@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The session rows are invented for this visualization.
+// Teaching SQL walkthrough. The session rows are invented for this visualization.
 export const sql = `WITH FirstSession AS (
   SELECT user_id, MIN(session_start) AS first_start
   FROM Sessions
@@ -20,7 +20,7 @@ JOIN Sessions s ON s.user_id = v.user_id
   AND s.session_type = 'Streamer'
   AND s.session_start > v.first_start
 GROUP BY v.user_id
-ORDER BY v.user_id`
+ORDER BY sessions_count DESC, v.user_id DESC`
 
 export const code = sql.split('\n').map((text, index) => ({ line: index + 1, text }))
 const SQL = key => {
@@ -37,7 +37,8 @@ export const python = `def turned_streamers(sessions):
     for user, row in viewers.iterrows():
         later = streams[(streams["user_id"] == user) & (streams["session_start"] > row["session_start"])]
         counts[user] = len(later)
-    return [{"user_id": u, "sessions_count": n} for u, n in sorted(counts.items()) if n > 0]`
+    rows = [{"user_id": u, "sessions_count": n} for u, n in counts.items() if n > 0]
+    return sorted(rows, key=lambda r: (-r["sessions_count"], -r["user_id"]))`
 const PY_LINES = python.split('\n')
 const PY = key => {
   const index = PY_LINES.findIndex(line => line.includes(key))
@@ -107,6 +108,6 @@ export function buildTrace(input) {
   const result = summary
     .filter(row => row.sessions_count > 0)
     .sort((a, b) => b.sessions_count - a.sessions_count || b.user_id - a.user_id)
-  frames.push(frame('done', 'ORDER BY', 'return [', `Return ${result.length} users.`, ['user_id', 'sessions_count'], result))
+  frames.push(frame('done', 'ORDER BY', 'return sorted(', `Return ${result.length} users.`, ['user_id', 'sessions_count'], result))
   return { input, result, frames }
 }

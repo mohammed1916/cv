@@ -19,16 +19,20 @@ export function buildTrace(answers) {
     groups.push({ answer: a, count: c, size, need, added })
     frames.push({ phase: 'group', pythonLine: 9, activeLine: 6, groups: groups.map(g => ({ ...g })), total, message: `${c} rabbit${c > 1 ? 's' : ''} answered ${a}. A colour group holds ${size}, so ${c} rabbits need ceil(${c}/${size}) = ${need} group${need > 1 ? 's' : ''}, i.e. ${added} rabbits (counting silent ones). Total: ${total}.` })
   }
-  frames.push({ phase: 'done', pythonLine: 10, activeLine: 7, groups: groups.map(g => ({ ...g })), total, message: `Minimum rabbits in the forest: ${total}.` })
+  frames.push({ phase: 'done', pythonLine: 10, activeLine: 9, groups: groups.map(g => ({ ...g })), total, message: `Minimum rabbits in the forest: ${total}.` })
   return { input: [...answers], result: total, entries, frames }
 }
-export const code = `set total to 0
-tally how many rabbits gave each answer a (count c)
-for each distinct answer a with count c
-  set group to a + 1 (the size of one colour group)
-  set groups to ceil(c / group)
-  add groups * group to total
-return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function numRabbits(answers) {
+  const counts = new Map()
+  for (const a of answers) counts.set(a, (counts.get(a) || 0) + 1)
+  let total = 0
+  for (const [a, c] of counts) {
+    const size = a + 1
+    total += Math.ceil(c / size) * size
+  }
+  return total
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
 export const python = `from collections import Counter
 
 def num_rabbits(answers):

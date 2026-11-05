@@ -7,19 +7,20 @@ const PHASES = [
 
 export const phases = PHASES
 
-const CODE_LINES = [
-  'maximum total profit with one share at a time and a cooldown after each sale',
-  'f[j] is the best profit whose last sale is on day j; G[j] is the best profit free to buy on day j',
-  'best_sell is zero',
-  'for each day j from 0 to n minus 1',
-  '  if day j minus cooldown minus 1 is at least 0, let best_sell be the larger of best_sell and f of that day',
-  '  G[j] = best_sell',
-  '  for each buy day i below j',
-  '    f[j] = the larger of f[j] and G[i] plus prices[j] minus prices[i] minus costs[j minus i]',
-  'return the larger of 0 and the largest f',
-]
-
-export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }))
+export const code = `function maxProfit(prices, costs, cooldown) {
+  const n = prices.length
+  const G = Array(n).fill(0)
+  const f = Array(n).fill(-Infinity)
+  let bestSell = 0
+  for (let j = 0; j < n; j++) {
+    if (j - cooldown - 1 >= 0) bestSell = Math.max(bestSell, f[j - cooldown - 1])
+    G[j] = bestSell
+    for (let i = 0; i < j; i++) {
+      f[j] = Math.max(f[j], G[i] + prices[j] - prices[i] - costs[j - i])
+    }
+  }
+  return Math.max(0, ...f)
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 function L(fragment) {
   const index = code.findIndex(c => c.text.includes(fragment))
@@ -70,18 +71,18 @@ export function buildTrace({ prices, costs, cooldown }) {
   let bestSell = 0
   const frames = []
   const snap = () => ({ G: [...G], f: f.map(v => (v === NEG ? null : v)) })
-  frames.push({ pythonLine: P('best_sell = 0'), phase: 'open', activeLine: L('best_sell is zero'), j: -1, i: -1, bestSell, ...snap(), message: `${n} day${n === 1 ? '' : 's'}; cooldown ${cooldown}. Nothing is sold yet.` })
+  frames.push({ pythonLine: P('best_sell = 0'), phase: 'open', activeLine: L('let bestSell = 0'), j: -1, i: -1, bestSell, ...snap(), message: `${n} day${n === 1 ? '' : 's'}; cooldown ${cooldown}. Nothing is sold yet.` })
   for (let j = 0; j < n; j++) {
     if (j - cooldown - 1 >= 0) bestSell = Math.max(bestSell, f[j - cooldown - 1])
     G[j] = bestSell
-    frames.push({ pythonLine: P('G[j] = best_sell'), phase: 'ready', activeLine: L('G[j] = best_sell'), j, i: -1, bestSell, ...snap(), message: `Day ${j}: a purchase here can start from profit ${G[j]}.` })
+    frames.push({ pythonLine: P('G[j] = best_sell'), phase: 'ready', activeLine: L('G[j] = bestSell'), j, i: -1, bestSell, ...snap(), message: `Day ${j}: a purchase here can start from profit ${G[j]}.` })
     for (let i = 0; i < j; i++) {
       const candidate = G[i] + prices[j] - prices[i] - costs[j - i]
       if (candidate > f[j]) f[j] = candidate
-      frames.push({ pythonLine: P('f[j] = max(f[j], G[i]'), phase: 'sell', activeLine: L('the larger of f[j] and G[i]'), j, i, bestSell, candidate, ...snap(), message: `Buy on day ${i}, sell on day ${j}: ${G[i]} + ${prices[j]} - ${prices[i]} - ${costs[j - i]} = ${candidate}.` })
+      frames.push({ pythonLine: P('f[j] = max(f[j], G[i]'), phase: 'sell', activeLine: L('f[j] = Math.max(f[j], G[i]'), j, i, bestSell, candidate, ...snap(), message: `Buy on day ${i}, sell on day ${j}: ${G[i]} + ${prices[j]} - ${prices[i]} - ${costs[j - i]} = ${candidate}.` })
     }
   }
   const answer = Math.max(0, ...f.filter(v => v !== NEG))
-  frames.push({ pythonLine: P('return max(0, max(f))'), phase: 'done', activeLine: L('return the larger of 0'), j: -1, i: -1, bestSell, ...snap(), answer, message: `Best total profit is ${answer}.` })
+  frames.push({ pythonLine: P('return max(0, max(f))'), phase: 'done', activeLine: L('return Math.max(0, ...f)'), j: -1, i: -1, bestSell, ...snap(), answer, message: `Best total profit is ${answer}.` })
   return { input: { prices, costs, cooldown }, result: answer, frames }
 }

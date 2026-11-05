@@ -57,22 +57,22 @@ export function buildTrace({ s }) {
 
   groups.forEach((group, k) => {
     const braced = group.display.length > 1
-    emit('parse', braced ? 'keep each group' : 'split s into groups', braced ? 'options = sorted' : 'groups.append([s[i]])',
+    emit('parse', braced ? 'const options' : 'groups.push([s[i]])', braced ? 'options = sorted' : 'groups.append([s[i]])',
       `Read ${group.display}: ${group.options.join(', ')}.`, { groups: groups.slice(0, k + 1) })
   })
 
-  emit('start', 'walk(0, "")', 'walk(0, ', `Begin at group 1 with an empty prefix; ${groups.length} group(s) to set.`)
+  emit('start', 'walk(0, \'\')', 'walk(0, ', `Begin at group 1 with an empty prefix; ${groups.length} group(s) to set.`)
 
   function walk(index, prefix) {
     if (index === groups.length) {
       results.push(prefix)
-      emit('emit', 'walk(index, prefix)', 'if index ==', `Every group is set, so ${prefix} joins the results.`,
+      emit('emit', 'if (index === groups.length)', 'if index ==', `Every group is set, so ${prefix} joins the results.`,
         { depth: index, prefix, emitted: results.length - 1 })
       return
     }
-    emit('enter', 'walk(index, prefix)', 'def walk', `Choose from ${groups[index].display} after prefix "${prefix}".`, { depth: index, prefix })
+    emit('enter', 'walk = (index, prefix)', 'def walk', `Choose from ${groups[index].display} after prefix "${prefix}".`, { depth: index, prefix })
     for (const option of groups[index].options) {
-      emit('try', 'for each letter c', 'walk(index + 1', `Take ${option} from ${groups[index].display}.`, { depth: index, prefix, option })
+      emit('try', 'for (const c of groups[index])', 'walk(index + 1', `Take ${option} from ${groups[index].display}.`, { depth: index, prefix, option })
       walk(index + 1, prefix + option)
     }
   }
@@ -80,22 +80,37 @@ export function buildTrace({ s }) {
   walk(0, '')
 
   const sorted = [...results].sort()
-  emit('done', 'return results sorted', 'return sorted(results)', `${sorted.length} expansion(s) in lexicographic order.`, { results: sorted })
+  emit('done', 'return results.sort()', 'return sorted(results)', `${sorted.length} expansion(s) in lexicographic order.`, { results: sorted })
   return { input: { s }, result: sorted, answer: sorted, frames }
 }
 
-export const code = `expand the brace string s
-split s into groups, one per letter or brace pair
-keep each group's distinct letters in sorted order
-results = []
-walk(0, "")
-walk(index, prefix)
-  if index equals the group count then add prefix to results and return
-  for each letter c in group index, in order
-    walk(index plus 1, prefix plus c)
-return results sorted`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function braceExpansion(s) {
+  const groups = []
+  let i = 0
+  while (i < s.length) {
+    if (s[i] === '{') {
+      const j = s.indexOf('}', i)
+      const options = [...new Set(s.slice(i + 1, j).split(','))].sort()
+      groups.push(options)
+      i = j + 1
+    } else {
+      groups.push([s[i]])
+      i++
+    }
+  }
+  const results = []
+  const walk = (index, prefix) => {
+    if (index === groups.length) {
+      results.push(prefix)
+      return
+    }
+    for (const c of groups[index]) walk(index + 1, prefix + c)
+  }
+  walk(0, '')
+  return results.sort()
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
-if (L('keep each group') < 1 || L('walk(0, "")') < 1) throw new Error('Pseudocode lookup is missing text.')
+if (L('const options') < 1 || L('walk(0, \'\')') < 1) throw new Error('Code lookup is missing text.')
 
 export const python = `def brace_expansion(s):
     groups = []
@@ -125,3 +140,20 @@ const P = s => {
   if (line < 1) throw new Error(`Python line missing: ${s}`)
   return line
 }
+
+export const inputLabel = 'Brace string (e.g. p{q,r}{s,t}z)'
+export const complexity = 'O(k * n) time for k expansions of length n, plus sorting the k results. The visualization caps the input at 30 characters and 64 expansions; these are visualization limits, not official bounds.'
+export const examples = [
+  { label: 'Two groups', input: 'p{q,r}{s,t}z' },
+  { label: 'Sorted groups', input: '{x,w}yz{b,a}' },
+  { label: 'No braces', input: 'kite' },
+]
+
+export const phases = [
+  { id: "start", label: "Start", description: "Begin the walk from the first group." },
+  { id: "parse", label: "Groups", description: "Read each group and sort its letters." },
+  { id: "enter", label: "Choose", description: "Pick the letters for the next group." },
+  { id: "try", label: "Try", description: "Extend the prefix with one letter." },
+  { id: "emit", label: "Emit", description: "A full prefix is one expansion." },
+  { id: "done", label: "Result", description: "Return the sorted results." },
+]

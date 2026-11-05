@@ -1,35 +1,11 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import IndexedSequence from '../../components/shared/IndexedSequence'
-
-const code = `delay a promise resolution
-  create a timer for ms milliseconds
-  when the timer fires
-    resolve with the same value
-  return the promise`
-const python = `def delay_resolution(value, ms):
-    # simulated clock: the result is available at time ms
-    return {"value": value, "resolves_at": ms}`
-
-function parseInput(text) {
-  const input = JSON.parse(text)
-  if (!input || !Number.isInteger(input.ms) || input.ms < 0 || !('value' in input)) {
-    throw new Error('Use { "value": any JSON value, "ms": non-negative integer }.')
-  }
-  return input
-}
-
-function buildTrace({ value, ms }) {
-  const frames = [{ phase: 'start', activeLine: 2, message: `Start a ${ms} ms timer; the promise is pending.`, at: -1, out: ['pending'] }]
-  frames.push({ phase: 'step', activeLine: 4, message: `At ${ms} ms the timer fires and resolves with ${JSON.stringify(value)}.`, at: 0, out: [JSON.stringify(value)] })
-  frames.push({ phase: 'done', activeLine: 5, message: 'The promise is returned with the same value, only later.', at: -1, out: [JSON.stringify(value)] })
-  return { frames }
-}
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
     { id: 'start', label: 'Pending', description: 'The timer is running.' },
-    { id: 'step', label: 'Resolve', description: 'The timer resolves the promise.' },
-    { id: 'done', label: 'Result', description: 'The value is delivered.' },
+    { id: 'wait', label: 'Waiting', description: 'Nothing can read the value yet.' },
+    { id: 'resolve', label: 'Resolve', description: 'The timer resolves the promise.' },
   ],
   parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with value and ms',
@@ -43,9 +19,17 @@ const definition = {
 
 export default function DelayPromiseResolution() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <IndexedSequence label="Promise state" length={step.out.length} valueAt={i => step.out[i]} active={step.at} />
-  </>} renderReasoning={() => <>
+    <section aria-label="Clock timeline">
+      <h3>Clock</h3>
+      <div style={{ position: 'relative', height: 28, borderRadius: 6, background: 'var(--surface2)', border: '1px solid var(--border, var(--surface2))' }}>
+        <div style={{ position: 'absolute', inset: 0, width: `${step.ms ? (step.clock / step.ms) * 100 : 100}%`, background: 'var(--primary)', opacity: 0.35, borderRadius: 6 }} />
+        <span style={{ position: 'absolute', left: 8, top: 4, color: 'var(--text)' }}>{`${step.clock} ms of ${step.ms} ms`}</span>
+      </div>
+      <p style={{ color: 'var(--text)' }}>{`Promise: ${step.state}`}</p>
+    </section>
+    <output aria-label="Delivered value">{step.state === 'resolved' ? `Delivered ${JSON.stringify(step.out[0])}` : 'Not delivered yet'}</output>
+  </>} renderReasoning={({ step }) => <>
+    <p>{step.message}</p>
     <p>The wrapper does not change the value. It only moves the moment the value is delivered.</p>
-    <p>Until the timer fires, the promise stays pending and anything waiting on it waits too.</p>
   </>} />
 }

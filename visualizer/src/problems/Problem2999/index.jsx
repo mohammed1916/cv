@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/count-the-number-of-powerful-integers/',
   complexity: 'O(d) time per bound, where d is the number of digits. The visualization caps finish at 100000.',
   examples: [
-    { label: 'Example 1', input: '{"start":"1","finish":"6000","limit":4,"s":"124"}' },
-    { label: 'No match', input: '{"start":"1000","finish":"2000","limit":4,"s":"3000"}' },
+    { label: 'Example 1', input: '{"start":"1","finish":"5000","limit":5,"s":"12"}' },
+    { label: 'No match', input: '{"start":"100","finish":"900","limit":2,"s":"10"}' },
   ],
 }
 

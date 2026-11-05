@@ -7,43 +7,40 @@ export function parseInput(text) {
   return { nums, threshold: input.threshold }
 }
 
+// Each line of JavaScript is paired with the Python line on the same row.
+const LINES = [
+  ['function smallestDivisor(nums, threshold) {', 'def smallest_divisor(nums, threshold):'],
+  ['  let low = 1', '    low = 1'],
+  ['  let high = Math.max(...nums)', '    high = max(nums)'],
+  ['  while (low < high) {', '    while low < high:'],
+  ['    const mid = Math.floor((low + high) / 2)', '        mid = (low + high) // 2'],
+  ['    const sum = nums.reduce((acc, v) => acc + Math.floor((v + mid - 1) / mid), 0)', '        total = sum(-(-value // mid) for value in nums)'],
+  ['    if (sum <= threshold) {', '        if total <= threshold:'],
+  ['      high = mid', '            high = mid'],
+  ['    } else {', '        else:'],
+  ['      low = mid + 1', '            low = mid + 1'],
+  ['    }', ''],
+  ['  }', ''],
+  ['  return low', '    return low'],
+  ['}', ''],
+]
+const codeLines = LINES.map(([js]) => js)
+export const code = codeLines.map((text, index) => ({ line: index + 1, text }))
+const L = s => codeLines.findIndex(c => c.includes(s)) + 1
+export const python = LINES.map(([, py]) => py).join('\n')
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 export function buildTrace({ nums, threshold }) {
   const frames = []
   let low = 1, high = Math.max(...nums)
-  frames.push({ phase: 'start', activeLine: L('set low to one'), pythonLine: P('low = 1'), low, high, mid: null, sum: null, message: `Try divisors from ${low} to ${high}. A larger divisor never raises the sum.` })
+  frames.push({ phase: 'start', activeLine: L('let low = 1'), pythonLine: P('low = 1'), low, high, mid: null, sum: null, message: `Try divisors from ${low} to ${high}. A larger divisor never raises the sum.` })
   while (low < high) {
     const mid = Math.floor((low + high) / 2)
     const sum = nums.reduce((acc, v) => acc + Math.floor((v + mid - 1) / mid), 0)
     if (sum <= threshold) high = mid
     else low = mid + 1
-    frames.push({ phase: 'probe', activeLine: L('if the rounded up'), pythonLine: P('if total <= threshold'), low, high, mid, sum, message: `Divisor ${mid} gives sum ${sum} ${sum <= threshold ? 'within' : 'above'} ${threshold}.` })
+    frames.push({ phase: 'probe', activeLine: L('if (sum <= threshold)'), pythonLine: P('if total <= threshold'), low, high, mid, sum, message: `Divisor ${mid} gives sum ${sum} ${sum <= threshold ? 'within' : 'above'} ${threshold}.` })
   }
   frames.push({ phase: 'done', activeLine: L('return low'), pythonLine: P('return low'), low, high, mid: null, sum: null, message: `The smallest divisor is ${low}.` })
   return { input: { nums, threshold }, result: low, frames }
 }
-
-export const code = `smallest divisor (nums, threshold)
-  set low to one and high to the largest value in nums
-  while low is less than high
-    set mid to the middle of low and high
-    if the rounded up quotient sum at mid is at most threshold then
-      set high to mid
-    otherwise
-      set low to mid plus one
-  return low`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-
-export const python = `def smallest_divisor(nums, threshold):
-    low = 1
-    high = max(nums)
-    while low < high:
-        mid = (low + high) // 2
-        total = sum(-(-value // mid) for value in nums)
-        if total <= threshold:
-            high = mid
-        else:
-            low = mid + 1
-    return low
-`
-
-const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

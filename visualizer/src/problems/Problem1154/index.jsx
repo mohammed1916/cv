@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { phases, parseInput, buildTrace, code, python, pythonLineMap } from './algorithm'
+import { phases, parseInput, buildTrace, code, python } from './algorithm'
 import { Sequence, Vars } from './SeqKit'
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -10,7 +10,6 @@ const definition = {
   build: buildTrace,
   code,
   python,
-  pythonLineMap,
   inputLabel: 'Date as YYYY-MM-DD',
   complexity: 'O(1) time and space: at most eleven month lengths are added.',
   examples: [

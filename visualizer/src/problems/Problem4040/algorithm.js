@@ -38,18 +38,33 @@ if __name__ == "__main__":
     print(min_operations_subset_sum(data["nums"], data["sum"]))
 `
 
-export const code = `minimum operations so a subset of final values sums to target
-  best[s] ← infinity for every sum s from 0 to target; best[0] ← 0
-  FOR each value v in nums
-    options ← for a doublings then b halvings, value floor(v × 2^a ÷ 2^b) costs a + b; keep cheapest per value in 1..target
-    nextBest ← copy of best (v stays out of the subset)
-    FOR each sum s with best[s] finite
-      FOR each (w, cost) in options
-        IF s + w ≤ target AND best[s] + cost < nextBest[s + w] THEN nextBest[s + w] ← best[s] + cost
-    best ← nextBest
-  IF best[target] is infinite THEN RETURN -1
-  RETURN best[target]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minOperations(nums, sum) {
+  let best = Array(sum + 1).fill(Infinity)
+  best[0] = 0
+  for (const v of nums) {
+    const options = reachableOptions(v, sum)
+    const next = best.slice()
+    for (let s = 0; s <= sum; s++) {
+      if (best[s] === Infinity) continue
+      for (const [w, cost] of options) {
+        if (s + w <= sum && best[s] + cost < next[s + w]) next[s + w] = best[s] + cost
+      }
+    }
+    best = next
+  }
+  return best[sum] === Infinity ? -1 : best[sum]
+}
 
+function reachableOptions(v, sum) {
+  const options = new Map()
+  for (let a = 0; a <= 13; a++) {
+    for (let b = 0; b <= 13; b++) {
+      const w = Math.floor((v * 2 ** a) / 2 ** b)
+      if (w >= 1 && w <= sum && (!options.has(w) || a + b < options.get(w))) options.set(w, a + b)
+    }
+  }
+  return options
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => {
   const index = code.findIndex(c => c.text.includes(s))
   if (index < 0) throw new Error(`Missing pseudocode line: ${s}`)
@@ -95,13 +110,13 @@ export function buildTrace({ nums, sum }) {
   let best = Array(sum + 1).fill(INF)
   best[0] = 0
   const frames = []
-  frames.push({ phase: 'setup', pythonLine: P('best = [INF]'), activeLine: L('best[s] ← infinity'), index: -1, v: null, options: [], best: toView(best), changed: [],
+  frames.push({ phase: 'setup', pythonLine: P('best = [INF]'), activeLine: L('let best = Array(sum + 1)'), index: -1, v: null, options: [], best: toView(best), changed: [],
     message: `Target ${sum}. Sum 0 costs nothing; every other sum is unreachable so far.` })
 
   nums.forEach((v, index) => {
     const options = reachableOptions(v, sum)
     const optionList = [...options.entries()].map(([w, cost]) => ({ w, cost })).sort((p, q) => p.w - q.w)
-    frames.push({ phase: 'options', pythonLine: P('options = {}'), activeLine: L('options ← for a doublings'), index, v, options: optionList, best: toView(best), changed: [],
+    frames.push({ phase: 'options', pythonLine: P('options = {}'), activeLine: L('const options = reachableOptions'), index, v, options: optionList, best: toView(best), changed: [],
       message: `Value ${v} can become ${optionList.map(o => `${o.w} (cost ${o.cost})`).join(', ')} within the target.` })
     const next = best.slice()
     const changed = []
@@ -115,12 +130,12 @@ export function buildTrace({ nums, sum }) {
       }
     }
     best = next
-    frames.push({ phase: 'combine', pythonLine: P('next_best = best[:]'), activeLine: L('FOR each sum s with best[s] finite'), index, v, options: optionList,
+    frames.push({ phase: 'combine', pythonLine: P('next_best = best[:]'), activeLine: L('for (let s = 0; s <= sum'), index, v, options: optionList,
       best: toView(best), changed: [...new Set(changed)].sort((p, q) => p - q),
       message: changed.length ? `Using ${v} raises ${new Set(changed).size} sum${new Set(changed).size === 1 ? '' : 's'}; the cheapest costs are updated.` : `${v} cannot improve any sum; it stays out.` })
   })
   const answer = best[sum] === INF ? -1 : best[sum]
-  frames.push({ phase: 'done', pythonLine: P('return best[target]'), activeLine: L(answer < 0 ? 'RETURN -1' : 'RETURN best[target]'), index: -1, v: null, options: [], best: toView(best), changed: [],
+  frames.push({ phase: 'done', pythonLine: P('return best[target]'), activeLine: L('return best[sum] === Infinity'), index: -1, v: null, options: [], best: toView(best), changed: [],
     message: answer < 0 ? `Sum ${sum} cannot be formed, so the answer is -1.` : `The minimum number of operations for sum ${sum} is ${answer}.` })
   return { input: { nums, sum }, nums, sum, answer, frames }
 }

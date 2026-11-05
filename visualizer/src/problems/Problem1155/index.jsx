@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { phases, parseInput, buildTrace, code, python, pythonLineMap } from './algorithm'
+import { phases, parseInput, buildTrace, code, python } from './algorithm'
 import DPDependencyView from '../../components/shared/DPDependencyView'
 import { Vars } from './SeqKit'
 
@@ -9,12 +9,11 @@ const definition = {
   build: buildTrace,
   code,
   python,
-  pythonLineMap,
   inputLabel: 'Dice, faces and target as JSON: [dice, faces, target]',
   complexity: 'O(dice × target × faces) time with O(target) memory. The trace accepts dice up to 8, faces up to 8, and target up to 40.',
   examples: [
     { label: 'Three two-faced dice', input: '[3,2,4]' },
-    { label: 'Single die', input: '[1,6,3]' },
+    { label: 'Single die', input: '[1,6,4]' },
     { label: 'Two three-faced dice', input: '[2,3,6]' },
   ],
 }

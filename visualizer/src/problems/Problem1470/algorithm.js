@@ -20,31 +20,31 @@ const at = (activeLine, pythonLine = activeLine) => ({ activeLine, pythonLine })
 
 export function buildTrace({ nums, n }) {
   const result = []
-  const frames = [{ phase: 'start', ...at(2), snapshot: { i: null, xIndex: null, yIndex: null, result: [] }, message: `First half: positions 0 to ${n - 1}. Second half: positions ${n} to ${2 * n - 1}.` }]
+  const frames = [{ phase: 'start', ...at(2, 2), snapshot: { i: null, xIndex: null, yIndex: null, result: [] }, message: `First half: positions 0 to ${n - 1}. Second half: positions ${n} to ${2 * n - 1}.` }]
   for (let i = 0; i < n; i++) {
     result.push(nums[i])
-    frames.push({ phase: 'take-x', ...at(4), snapshot: { i, xIndex: i, yIndex: null, result: [...result] }, message: `Round ${i + 1}: append x = ${nums[i]} from position ${i}.` })
+    frames.push({ phase: 'take-x', ...at(4, 4), snapshot: { i, xIndex: i, yIndex: null, result: [...result] }, message: `Round ${i + 1}: append x = ${nums[i]} from position ${i}.` })
     result.push(nums[n + i])
-    frames.push({ phase: 'take-y', ...at(5), snapshot: { i, xIndex: i, yIndex: n + i, result: [...result] }, message: `Append y = ${nums[n + i]} from position ${n + i}.` })
+    frames.push({ phase: 'take-y', ...at(5, 5), snapshot: { i, xIndex: i, yIndex: n + i, result: [...result] }, message: `Append y = ${nums[n + i]} from position ${n + i}.` })
   }
-  frames.push({ phase: 'done', ...at(6), snapshot: { i: null, xIndex: null, yIndex: null, result: [...result] }, message: `Return [${result.join(', ')}].` })
+  frames.push({ phase: 'done', ...at(7, 7), snapshot: { i: null, xIndex: null, yIndex: null, result: [...result] }, message: `Return [${result.join(', ')}].` })
   return { input: { nums, n }, result, frames }
 }
 
-export const code = [
-  'shuffle (nums, n):',
-  '  result = []',
-  '  for i from 0 to n - 1:',
-  '    append nums[i]',
-  '    append nums[n + i]',
-  '  return result',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function shuffle(nums, n) {
+  const result = []
+  for (let i = 0; i < n; i++) {
+    result.push(nums[i])
+    result.push(nums[n + i])
+  }
+  return result
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
-export const python = [
-  'def shuffle(nums, n):',
-  '    result = []',
-  '    for i in range(n):',
-  '        result.append(nums[i])',
-  '        result.append(nums[n + i])',
-  '    return result',
-].join('\n')
+export const python = `def shuffle(nums, n):
+    result = []
+    for i in range(n):
+        result.append(nums[i])
+        result.append(nums[n + i])
+
+    return result
+`

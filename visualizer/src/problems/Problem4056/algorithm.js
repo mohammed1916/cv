@@ -22,20 +22,26 @@ export function buildTrace(input) {
       const [s2, e2] = intervals[j]
       const hit = Math.max(s1, s2) <= Math.min(e1, e2)
       if (hit) count++
-      frames.push({ pythonLine: hit ? 9 : 8, phase: 'pair', activeLine: L('for each interval j after i'), i, j, hit, count, message: `[${s1}, ${e1}] and [${s2}, ${e2}] ${hit ? 'share a point' : 'do not meet'}.` })
+      frames.push({ pythonLine: hit ? 9 : 8, phase: 'pair', activeLine: L('for (let j = i + 1; j < n; j++)'), i, j, hit, count, message: `[${s1}, ${e1}] and [${s2}, ${e2}] ${hit ? 'share a point' : 'do not meet'}.` })
     }
   }
   frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return count'), i: -1, j: -1, hit: null, count, message: `Intersecting pairs: ${count}.` })
   return { input, result: count, frames }
 }
 
-export const code = `count intersecting interval pairs(intervals)
-  set count to 0
-  for each interval i from the first to the second to last do
-    for each interval j after i do
-      if the larger start is at most the smaller end then
-        add 1 to count
-  return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function countIntersectingPairs(intervals) {
+  const n = intervals.length
+  let count = 0
+  for (let i = 0; i < n; i++) {
+    for (let j = i + 1; j < n; j++) {
+      const [aStart, aEnd] = intervals[i]
+      const [bStart, bEnd] = intervals[j]
+      if (Math.max(aStart, bStart) <= Math.min(aEnd, bEnd)) count++
+    }
+  }
+  return count
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def count_intersecting_pairs(intervals):

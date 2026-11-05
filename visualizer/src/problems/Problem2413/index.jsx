@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/smallest-even-multiple/',
   complexity: 'O(1) time. At most one addition is needed.',
   examples: [
-    { label: 'Odd n', input: '{"n":5}' },
-    { label: 'Even n', input: '{"n":6}' },
+    { label: 'Odd n', input: '{"n":7}' },
+    { label: 'Even n', input: '{"n":12}' },
   ],
 }
 

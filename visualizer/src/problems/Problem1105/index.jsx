@@ -19,7 +19,7 @@ export default function BookshelfVisual() {
         recurrence="dp[end] = min over start of dp[start-1] + tallest(start..end)"
         why="The last shelf takes books start..end. Each start is tried while the shelf width still fits, and the cheapest total wins." />
       <Sequence label="Books as thickness/height" values={s.books.map(([thickness, height]) => `${thickness}/${height}`)}
-        pointers={s.start ? { start: s.start - 1, end: end - 1 } : {}} />
+        pointers={s.start ? { l: s.start - 1, r: end - 1 } : {}} />
       <Vars vars={{ 'books placed': end, 'last shelf width': s.width ?? null, 'tallest on last shelf': s.tallest ?? null, 'shelf width limit': s.shelfWidth }} />
       <output aria-label="Result">{step.message}</output>
     </>

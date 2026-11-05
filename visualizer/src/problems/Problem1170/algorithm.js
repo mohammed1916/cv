@@ -5,37 +5,6 @@ export const phases = [
   { id: 'done', label: 'Result', description: 'Return one count per query, in order.' },
 ]
 
-const CODE_LINES = [
-  'FUNCTION countGreater(queries, words)',
-  '  score(s) <- how many times the smallest letter of s appears',
-  '  wordScores <- score of each word',
-  '  FOR each query q',
-  '    target <- score(q)',
-  '    answer <- number of wordScores strictly greater than target',
-  '  RETURN answers',
-]
-
-const PYTHON_LINES = [
-  'def score(s):',
-  '    smallest = min(s)',
-  '    return s.count(smallest)',
-  'def countGreater(queries, words):',
-  '    word_scores = [score(w) for w in words]',
-  '    answers = []',
-  '    for q in queries:',
-  '        target = score(q)',
-  '        answers.append(sum(1 for s in word_scores if s > target))',
-  '    return answers',
-]
-
-const py = text => PYTHON_LINES.findIndex(line => line.includes(text)) + 1
-
-export const python = PYTHON_LINES.join('\n')
-export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }))
-export const pythonLineMap = {
-  1: py('def countGreater'), 2: py('smallest = min'), 3: py('word_scores = '), 4: py('for q in'), 5: py('target = '), 6: py('answers.append'), 7: py('return answers'),
-}
-
 const LIST_LIMIT = 20
 const STRING_LIMIT = 10
 
@@ -60,6 +29,23 @@ export function parseInput(text) {
   return { queries: check(queries, 'queries'), words: check(words, 'words') }
 }
 
+// Each line of JavaScript is paired with the Python line on the same row.
+const LINES = [
+  ['function countGreater(queries, words) {', 'def count_greater(queries, words):'],
+  ['  const score = s => s.split([...s].sort()[0]).length - 1', '    score = lambda s: s.count(min(s))'],
+  ['  const wordScores = words.map(score), answers = []', '    word_scores, answers = [score(w) for w in words], []'],
+  ['  for (const q of queries) {', '    for q in queries:'],
+  ['    const target = score(q)', '        target = score(q)'],
+  ['    answers.push(wordScores.filter(s => s > target).length)', '        answers.append(sum(1 for s in word_scores if s > target))'],
+  ['  } return answers }', '    return answers'],
+]
+const codeLines = LINES.map(([js]) => js)
+export const code = codeLines.map((text, index) => ({ line: index + 1, text }))
+const L = s => codeLines.findIndex(c => c.includes(s)) + 1
+export const python = LINES.map(([, py]) => py).join('\n')
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+export const pythonLineMap = Object.fromEntries(code.map(({ line }) => [line, line]))
+
 // The score of a string is how many times its smallest letter occurs in it.
 export function letterScore(s) {
   const smallest = [...s].sort()[0]
@@ -70,30 +56,30 @@ export function buildTrace(text) {
   const { queries, words } = parseInput(text)
   const frames = []
   const wordScores = []
-  const snap = (phase, activeLine, message, extra = {}) => frames.push({
-    phase, activeLine, message,
+  const snap = (phase, activeLine, pythonLine, message, extra = {}) => frames.push({
+    phase, activeLine, pythonLine, message,
     snapshot: { wordIndex: -1, queryIndex: -1, wordScores: [...wordScores], target: null, counted: [], answers: [], ...extra },
   })
 
-  snap('setup', 1, `There are ${words.length} words and ${queries.length} queries. Each score counts the smallest letter.`)
-  snap('measure', 2, 'Measure every word before answering any query.')
+  snap('setup', L('function countGreater'), P('def count_greater'), `There are ${words.length} words and ${queries.length} queries. Each score counts the smallest letter.`)
+  snap('measure', L('const wordScores'), P('word_scores, answers'), 'Measure every word before answering any query.')
   for (let i = 0; i < words.length; i++) {
     wordScores.push(letterScore(words[i]))
-    snap('measure', 3, `${words[i]}: the smallest letter appears ${wordScores[i]} time(s), so its score is ${wordScores[i]}.`, { wordIndex: i })
+    snap('measure', L('const wordScores'), P('word_scores, answers'), `${words[i]}: the smallest letter appears ${wordScores[i]} time(s), so its score is ${wordScores[i]}.`, { wordIndex: i })
   }
 
   const answers = []
   for (let q = 0; q < queries.length; q++) {
     const target = letterScore(queries[q])
-    snap('query', 5, `${queries[q]} has score ${target}. Words must score strictly higher to count.`, { queryIndex: q, target })
+    snap('query', L('const target'), P('target = score(q)'), `${queries[q]} has score ${target}. Words must score strictly higher to count.`, { queryIndex: q, target })
     const counted = []
     wordScores.forEach((score, i) => { if (score > target) counted.push(i) })
     answers.push(counted.length)
-    snap('query', 6, `${counted.length} word(s) score higher than ${target} for ${queries[q]}.`, {
+    snap('query', L('answers.push'), P('answers.append'), `${counted.length} word(s) score higher than ${target} for ${queries[q]}.`, {
       queryIndex: q, target, counted: [...counted], answers: [...answers],
     })
   }
 
-  snap('done', 7, `The answers are ${answers.join(', ')}.`, { answers: [...answers] })
+  snap('done', L('return answers'), P('return answers'), `The answers are ${answers.join(', ')}.`, { answers: [...answers] })
   return { input: { queries, words }, result: answers, frames }
 }

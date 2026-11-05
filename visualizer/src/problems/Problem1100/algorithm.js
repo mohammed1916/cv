@@ -1,15 +1,21 @@
 // Own sliding-window walkthrough. The sample text is invented for this visualization.
-const PSEUDO = [
-  'count_distinct_windows(text, k):',
-  '    counts = empty map; good = 0; left = 0',
-  '    for right, ch in text:',
-  '        counts[ch] += 1',
-  '        if window is wider than k:',
-  '            remove text[left] from counts; left += 1',
-  '        if window has size k and k distinct keys:',
-  '            good += 1',
-  '    return good',
-]
+const CODE_TEXT = `function countDistinctWindows(text, k) {
+  const counts = new Map()
+  let good = 0
+  let left = 0
+  for (let right = 0; right < text.length; right++) {
+    const ch = text[right]
+    counts.set(ch, (counts.get(ch) ?? 0) + 1)
+    if (right - left + 1 > k) {
+      const out = text[left]
+      counts.set(out, counts.get(out) - 1)
+      if (counts.get(out) === 0) counts.delete(out)
+      left++
+    }
+    if (right - left + 1 === k && counts.size === k) good++
+  }
+  return good
+}`
 
 export const python = `def count_distinct_windows(text, k):
     counts = {}
@@ -28,14 +34,14 @@ export const python = `def count_distinct_windows(text, k):
     return good`
 
 const PY = python.split('\n')
-export const code = PSEUDO.map((text, index) => ({ line: index + 1, text }))
+export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const STEP = {
-  start: ['counts = empty', 'counts = {}'],
-  grow: ['counts[ch] += 1', 'counts[ch] = counts.get'],
-  shrink: ['remove text[left]', 'counts[out] -= 1'],
-  check: ['if window has size k', 'if right - left + 1 == k'],
-  record: ['good += 1', 'good += 1'],
+  start: ['const counts = new Map()', 'counts = {}'],
+  grow: ['counts.set(ch', 'counts[ch] = counts.get'],
+  shrink: ['counts.set(out', 'counts[out] -= 1'],
+  check: ['if (right - left + 1 === k', 'if right - left + 1 == k'],
+  record: ['good++', 'good += 1'],
   done: ['return good', 'return good'],
 }
 function lineOf(lines, key) {
@@ -45,7 +51,7 @@ function lineOf(lines, key) {
 }
 const frame = (phase, step, message, snapshot) => ({
   phase,
-  activeLine: lineOf(PSEUDO, STEP[step][0]),
+  activeLine: lineOf(CODE_TEXT.split('\n'), STEP[step][0]),
   pythonLine: lineOf(PY, STEP[step][1]),
   message,
   snapshot,

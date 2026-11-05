@@ -19,27 +19,28 @@ export function buildTrace({ sx, sy, tx: tx0, ty: ty0 }) {
     }
   }
   let result, message, line
-  if (tx === sx && ty === sy) { result = true; message = `Reached the start (${sx}, ${sy}).`; line = 8 }
+  if (tx === sx && ty === sy) { result = true; message = `Reached the start (${sx}, ${sy}).`; line = 9 }
   else if (tx === sx) { result = ty > sy && (ty - sy) % tx === 0; message = `x matches at ${tx}. Only y can still change, by multiples of x: need ty = ${ty} greater than sy = ${sy} and (${ty} - ${sy}) divisible by ${tx}: ${result}.`; line = 10 }
-  else if (ty === sy) { result = tx > sx && (tx - sx) % ty === 0; message = `y matches at ${ty}. Only x can still change, by multiples of y: need tx = ${tx} greater than sx = ${sx} and (${tx} - ${sx}) divisible by ${ty}: ${result}.`; line = 12 }
-  else { result = false; message = `Stopped at (${tx}, ${ty}) without matching either start coordinate (or tx = ty, which has no parent): unreachable.`; line = 13 }
+  else if (ty === sy) { result = tx > sx && (tx - sx) % ty === 0; message = `y matches at ${ty}. Only x can still change, by multiples of y: need tx = ${tx} greater than sx = ${sx} and (${tx} - ${sx}) divisible by ${ty}: ${result}.`; line = 11 }
+  else { result = false; message = `Stopped at (${tx}, ${ty}) without matching either start coordinate (or tx = ty, which has no parent): unreachable.`; line = 12 }
   frames.push({ phase: 'finish', pythonLine: line, activeLine: line, tx, ty, message })
   frames.push({ phase: 'done', pythonLine: line, activeLine: line, tx, ty, message: `Answer: ${result}.` })
   return { input: { sx, sy, tx: tx0, ty: ty0 }, result, frames }
 }
-export const code = `start with (tx, ty) equal to the target (tx0, ty0)
-while tx > sx and ty > sy and tx is not ty
-  if tx > ty then
-    set tx to tx mod ty
-  else
-    set ty to ty mod tx
-if (tx, ty) equals (sx, sy) then
-  return True
-if tx equals sx then
-  return ty > sy and (ty - sy) is divisible by tx
-if ty equals sy then
-  return tx > sx and (tx - sx) is divisible by ty
-return False`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function reachingPoints(sx, sy, tx, ty) {
+  while (tx > sx && ty > sy && tx !== ty) {
+    if (tx > ty) {
+      tx %= ty
+    } else {
+      ty %= tx
+    }
+  }
+  if (tx === sx && ty === sy) return true
+  if (tx === sx) return ty > sy && (ty - sy) % tx === 0
+  if (ty === sy) return tx > sx && (tx - sx) % ty === 0
+  return false
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
 export const python = `def reaching_points(sx, sy, tx, ty):
     while tx > sx and ty > sy and tx != ty:
         if tx > ty:

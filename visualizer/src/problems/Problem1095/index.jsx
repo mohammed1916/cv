@@ -24,9 +24,9 @@ export default function MountainSearch() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const inRange = index => step.lo >= 0 && index >= step.lo && index <= step.hi
     return <>
-      <IndexedSequence label="Mountain" length={run.input.mountain.length} active={step.mid}
+      <IndexedSequence label="Mountain (l and r bound the current binary search)" length={run.input.mountain.length} active={step.mid}
         valueAt={index => run.input.mountain[index]}
-        roleAt={index => (index === step.peak ? 'peak' : inRange(index) ? 'range' : '')} />
+        roleAt={index => (index === step.lo ? 'l' : index === step.hi ? 'r' : index === step.peak ? 'peak' : inRange(index) ? 'range' : '')} />
       <output aria-label="Search state">{step.found >= 0 ? `Found at index ${step.found}` : `Range ${step.lo}..${step.hi}${step.peak >= 0 ? `, peak ${step.peak}` : ''}`}</output>
     </>
   }} renderReasoning={() => <>

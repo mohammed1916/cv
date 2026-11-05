@@ -1,14 +1,22 @@
 const CODE = [
-  "FUNCTION maxMultiplicationScore(a, b)",
-  "    m ← length(a); n ← length(b)",
-  "    dp[0][j] ← 0 for every j; dp[t][j] ← unreachable for t ≥ 1",
-  "    FOR t FROM 1 TO m",
-  "        FOR j FROM 1 TO n",
-  "            dp[t][j] ← dp[t][j − 1]",
-  "            IF dp[t − 1][j − 1] is reachable THEN dp[t][j] ← max(dp[t][j], dp[t − 1][j − 1] + a[t − 1] × b[j − 1])",
-  "    RETURN dp[m][n]",
+  "function maxMultiplicationScore(a, b) {",
+  "  const m = a.length, n = b.length",
+  "  const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(null))",
+  "  for (let j = 0; j <= n; j++) dp[0][j] = 0",
+  "  for (let t = 1; t <= m; t++) {",
+  "    for (let j = 1; j <= n; j++) {",
+  "      dp[t][j] = dp[t][j - 1]",
+  "      if (dp[t - 1][j - 1] !== null) {",
+  "        const candidate = dp[t - 1][j - 1] + a[t - 1] * b[j - 1]",
+  "        dp[t][j] = dp[t][j] === null ? candidate : Math.max(dp[t][j], candidate)",
+  "      }",
+  "    }",
+  "  }",
+  "  return dp[m][n]",
+  "}",
 ];
 export const code = CODE.map((text, index) => ({ line: index + 1, text }));
+const js = text => CODE.findIndex(line => line.includes(text)) + 1;
 export const python = `def maxMultiplicationScore(a, b):
     m, n = len(a), len(b)
     NEG = float("-inf")
@@ -22,7 +30,7 @@ export const python = `def maxMultiplicationScore(a, b):
                 dp[t][j] = max(dp[t][j], dp[t - 1][j - 1] + a[t - 1] * b[j - 1])
     return dp[m][n]
 `;
-export const pythonLineMap = { 1: 1, 2: 2, 3: 6, 4: 7, 5: 8, 6: 9, 7: 11, 8: 12 };
+export const pythonLineMap = { 1: 1, 2: 2, 3: 4, 4: 6, 5: 7, 6: 8, 7: 9, 8: 10, 9: 11, 10: 11, 11: 11, 12: 11, 13: 11, 14: 12, 15: 12 };
 
 const snapshot = table => table.map(row => row.map(cell => (Array.isArray(cell) ? [...cell] : cell)));
 function emit(frames, table, info, write = false) {
@@ -49,21 +57,21 @@ export function buildTrace(input) {
   const columnLabels = Array.from({ length: n + 1 }, (_, j) => `b[0..${j - 1}]`);
   const frames = [];
   for (let j = 0; j <= n; j++) dp[0][j] = 0;
-  emit(frames, dp, { phase: "setup", line: 3, row: 0, column: 0, value: 0, message: "With zero picks the score is 0 for every prefix of b." });
+  emit(frames, dp, { phase: "setup", line: js("dp[0][j] = 0"), row: 0, column: 0, value: 0, message: "With zero picks the score is 0 for every prefix of b." });
   for (let t = 1; t <= m; t++) {
     for (let j = 1; j <= n; j++) {
       dp[t][j] = dp[t][j - 1];
-      emit(frames, dp, { phase: "skip", line: 6, row: t, column: j, value: dp[t][j], message: `Skip b[${j - 1}] = ${b[j - 1]}: best of ${t} picks within b[0..${j - 2}].` });
+      emit(frames, dp, { phase: "skip", line: js("dp[t][j] = dp[t][j - 1]"), row: t, column: j, value: dp[t][j], message: `Skip b[${j - 1}] = ${b[j - 1]}: best of ${t} picks within b[0..${j - 2}].` });
       if (dp[t - 1][j - 1] !== null) {
         const candidate = dp[t - 1][j - 1] + a[t - 1] * b[j - 1];
         dp[t][j] = dp[t][j] === null ? candidate : Math.max(dp[t][j], candidate);
-        emit(frames, dp, { phase: "take", line: 7, row: t, column: j, value: dp[t][j], message: `Take b[${j - 1}] as pick ${t}: ${dp[t - 1][j - 1]} + ${a[t - 1]} × ${b[j - 1]} = ${candidate}; keep the best.` }, true);
+        emit(frames, dp, { phase: "take", line: js("if (dp[t - 1][j - 1]"), row: t, column: j, value: dp[t][j], message: `Take b[${j - 1}] as pick ${t}: ${dp[t - 1][j - 1]} + ${a[t - 1]} × ${b[j - 1]} = ${candidate}; keep the best.` }, true);
       } else {
-        emit(frames, dp, { phase: "take", line: 7, row: t, column: j, value: dp[t][j], message: `Taking b[${j - 1}] as pick ${t} is impossible (not enough earlier picks).` });
+        emit(frames, dp, { phase: "take", line: js("if (dp[t - 1][j - 1]"), row: t, column: j, value: dp[t][j], message: `Taking b[${j - 1}] as pick ${t} is impossible (not enough earlier picks).` });
       }
     }
   }
   const result = dp[m][n];
-  emit(frames, dp, { phase: "result", line: 8, row: m, column: n, value: result, message: `Return ${result}.` });
+  emit(frames, dp, { phase: "result", line: js("return dp[m][n]"), row: m, column: n, value: result, message: `Return ${result}.` });
   return { input, result, frames, rowLabels, columnLabels };
 }

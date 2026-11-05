@@ -6,14 +6,15 @@ export const phases = [
 ]
 
 const CODE = [
-  'function windowScore(values, window, low, high):',
-  '  total = sum of the first window values',
-  '  score = 0',
-  '  for start from 0 to n - window:',
-  '    if start > 0: total += values[start+window-1] - values[start-1]',
-  '    if total > high: score += 1',
-  '    else if total < low: score -= 1',
+  'function windowScore(values, window, low, high) {',
+  '  let total = values.slice(0, window).reduce((a, b) => a + b, 0), score = 0',
+  '  for (let start = 0; start <= values.length - window; start++) {',
+  '    if (start > 0) total += values[start + window - 1] - values[start - 1]',
+  '    if (total > high) score += 1',
+  '    else if (total < low) score -= 1',
+  '  }',
   '  return score',
+  '}',
 ]
 const PY = [
   'def window_score(values, window, low, high):',
@@ -32,7 +33,7 @@ const PY = [
 export const code = CODE.map((text, index) => ({ line: index + 1, text }))
 export const python = PY.join('\n')
 
-const L = { init: 2, loop: 4, slide: 5, high: 6, low: 7, ret: 8 }
+const L = { init: 2, loop: 3, slide: 4, high: 5, low: 6, ret: 8 }
 const P = { init: 2, loop: 4, slide: 6, high: 7, low: 9, ret: 11 }
 
 export function parseInput(text) {
@@ -88,3 +89,11 @@ export function buildTrace({ values, window, low, high }) {
   push('done', 'ret', `Final score: ${state.score}.`)
   return { input: { values, window, low, high }, result: state.score, frames }
 }
+
+export const inputLabel = 'JSON with values, window, low and high, e.g. {"values":[1,2,3],"window":2,"low":3,"high":5}'
+export const complexity = 'O(n) time: each window total is updated from the previous one with one addition and one subtraction. The visualization caps the input at 50 values.'
+export const examples = [
+  { label: 'Mixed days', input: '{"values":[6,1,4,4,2,7,1],"window":3,"low":10,"high":12}' },
+  { label: 'Always inside', input: '{"values":[3,3,3],"window":2,"low":5,"high":9}' },
+  { label: 'Single day', input: '{"values":[9,2],"window":1,"low":3,"high":8}' },
+]

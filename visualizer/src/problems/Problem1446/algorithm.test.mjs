@@ -23,7 +23,7 @@ test('every string over a and b up to length 10 matches the oracle', () => {
 })
 
 test('frames point at real code and Python lines and end with the result', () => {
-  const codeLines = code.split('\n').length
+  const codeLines = code.length
   const pyLines = python.split('\n').length
   const run = buildTrace(parseInput('aaabbc'))
   const ids = new Set(phases.map(p => p.id))

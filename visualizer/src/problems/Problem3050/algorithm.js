@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The topping rows are invented for this visualization.
+// Teaching SQL walkthrough. The topping rows are invented for this visualization.
 export const sql = `SELECT CONCAT(a.topping_name, ',', b.topping_name, ',', c.topping_name) AS pizza,
        a.cost + b.cost + c.cost AS total_cost
 FROM Toppings a

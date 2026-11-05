@@ -11,19 +11,51 @@ export function parseInput(text) {
 
 const codeOf = ch => ch.charCodeAt(0) - 97
 
+// Each line of JavaScript is paired with the Python line on the same row.
+const LINES = [
+  ['function maxScoreWords(words, letters, score) {', 'def max_score_words(words, letters, score):'],
+  ['  const available = new Array(26).fill(0)', '    available = [0] * 26'],
+  ['  for (const letter of letters) available[letter.charCodeAt(0) - 97]++', '    for letter in letters: available[ord(letter) - 97] += 1'],
+  ['  let best = 0', '    best = 0'],
+  ['  const choose = (index, total) => {', '    def choose(index, total):'],
+  ['    // best is shared with the caller', '        nonlocal best'],
+  ['    if (index === words.length) { best = Math.max(best, total); return }', '        if index == len(words):'],
+  ['      best = Math.max(best, total)', '            best = max(best, total)'],
+  ['      return', '            return'],
+  ['    }', ''],
+  ['    const needed = new Array(26).fill(0)', '        needed = [0] * 26'],
+  ['    for (const ch of words[index]) needed[ch.charCodeAt(0) - 97]++', '        for ch in words[index]: needed[ord(ch) - 97] += 1'],
+  ['    if (needed.every((n, c) => n <= available[c])) {', '        if all(needed[c] <= available[c] for c in range(26)):'],
+  ['      needed.forEach((n, c) => { available[c] -= n })', '            for c in range(26): available[c] -= needed[c]'],
+  ['      const gain = needed.reduce((sum, n, c) => sum + n * score[c], 0)', '            gain = sum(needed[c] * score[c] for c in range(26))'],
+  ['      choose(index + 1, total + gain)', '            choose(index + 1, total + gain)'],
+  ['      needed.forEach((n, c) => { available[c] += n })', '            for c in range(26): available[c] += needed[c]'],
+  ['    }', ''],
+  ['    choose(index + 1, total)', '        choose(index + 1, total)'],
+  ['  }', ''],
+  ['  choose(0, 0)', '    choose(0, 0)'],
+  ['  return best', '    return best'],
+  ['}', ''],
+]
+const codeLines = LINES.map(([js]) => js)
+export const code = codeLines.map((text, index) => ({ line: index + 1, text }))
+const L = s => codeLines.findIndex(c => c.includes(s)) + 1
+export const python = LINES.map(([, py]) => py).join('\n')
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 export function buildTrace(input) {
   const { words, letters, score } = input
   const available = new Array(26).fill(0)
   for (const letter of letters) available[codeOf(letter)]++
   const remaining = () => available.map((c, i) => String.fromCharCode(97 + i).repeat(c)).join('')
-  const frames = [{ pythonLine: 5, phase: 'start', activeLine: L('set best to zero'), index: -1, chosen: [], total: 0, best: 0, left: remaining(), message: 'Decide for each word in turn whether to use it.' }]
+  const frames = [{ pythonLine: P('best = 0'), phase: 'start', activeLine: L('let best = 0'), index: -1, chosen: [], total: 0, best: 0, left: remaining(), message: 'Decide for each word in turn whether to use it.' }]
   let best = 0
   let bestChosen = []
   const chosen = []
   const choose = (index, total) => {
     if (index === words.length) {
       if (total > best) { best = total; bestChosen = [...chosen] }
-      frames.push({ pythonLine: 10, phase: 'record', activeLine: L('keep the score if it beats best'), index, chosen: [...chosen], total, best, left: remaining(), message: `Every word is decided. The score is ${total}.` })
+      frames.push({ pythonLine: P('best = max(best, total)'), phase: 'record', activeLine: L('if (index === words.length)'), index, chosen: [...chosen], total, best, left: remaining(), message: `Every word is decided. The score is ${total}.` })
       return
     }
     const word = words[index]
@@ -33,54 +65,15 @@ export function buildTrace(input) {
     if (needed.every((n, c) => n <= available[c])) {
       needed.forEach((n, c) => { available[c] -= n })
       chosen.push(index)
-      frames.push({ pythonLine: 18, phase: 'take', activeLine: L('use those letters'), index, chosen: [...chosen], total: total + gain, best, left: remaining(), message: `Use "${word}" for ${gain} points.` })
+      frames.push({ pythonLine: P('choose(index + 1, total + gain)'), phase: 'take', activeLine: L('choose(index + 1, total + gain)'), index, chosen: [...chosen], total: total + gain, best, left: remaining(), message: `Use "${word}" for ${gain} points.` })
       choose(index + 1, total + gain)
       chosen.pop()
       needed.forEach((n, c) => { available[c] += n })
     }
-    frames.push({ pythonLine: 22, phase: 'skip', activeLine: L('leave this word out'), index, chosen: [...chosen], total, best, left: remaining(), message: `Leave "${word}" out.` })
+    frames.push({ pythonLine: P('choose(index + 1, total)'), phase: 'skip', activeLine: L('choose(index + 1, total)'), index, chosen: [...chosen], total, best, left: remaining(), message: `Leave "${word}" out.` })
     choose(index + 1, total)
   }
   choose(0, 0)
-  frames.push({ pythonLine: 25, phase: 'done', activeLine: L('return best'), index: words.length, chosen: bestChosen, total: best, best, left: '', message: `The maximum score is ${best}.` })
+  frames.push({ pythonLine: P('return best'), phase: 'done', activeLine: L('return best'), index: words.length, chosen: bestChosen, total: best, best, left: '', message: `The maximum score is ${best}.` })
   return { input, result: best, frames }
 }
-
-export const code = `largest score from a set of words the letters can form
-  set best to zero
-  call choose with word zero and score zero
-  return best
-choose(index, total)
-  if every word has been decided then
-    keep the score if it beats best and stop
-  if the letters are enough for this word then
-    use those letters, add the word score, choose the next word, then give the letters back
-  leave this word out and choose the next word`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-
-export const python = `def max_score_words(words, letters, score):
-    available = [0] * 26
-    for letter in letters:
-        available[ord(letter) - 97] += 1
-    best = 0
-
-    def choose(index, total):
-        nonlocal best
-        if index == len(words):
-            best = max(best, total)
-            return
-        needed = [0] * 26
-        for ch in words[index]:
-            needed[ord(ch) - 97] += 1
-        if all(needed[c] <= available[c] for c in range(26)):
-            for c in range(26):
-                available[c] -= needed[c]
-            gain = sum(needed[c] * score[c] for c in range(26))
-            choose(index + 1, total + gain)
-            for c in range(26):
-                available[c] += needed[c]
-        choose(index + 1, total)
-
-    choose(0, 0)
-    return best
-`

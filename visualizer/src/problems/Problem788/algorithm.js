@@ -22,18 +22,21 @@ export function buildTrace(n) {
       : `every digit is 0, 1, or 8, so it rotates to itself`
     frames.push({ phase: kind, activeLine: kind === 'good' ? 8 : kind === 'invalid' ? 5 : 7, pythonLine: kind === 'good' ? 13 : kind === 'invalid' ? 8 : 12, x, count, digits, message: `${x}: ${why}${kind === 'good' ? ' (counted).' : ' (not counted).'}` })
   }
-  frames.push({ phase: 'done', activeLine: 9, pythonLine: 14, x: n, count, digits: '', message: `${count} good numbers in 1..${n}.` })
+  frames.push({ phase: 'done', activeLine: 10, pythonLine: 14, x: n, count, digits: '', message: `${count} good numbers in 1..${n}.` })
   return { input: n, result: count, status, frames }
 }
-export const code = `set count to 0
-for each x from 1 to n
-  set valid to true and changed to false
-  for each digit d of x
-    if d is 3, 4 or 7 then set valid to false and stop reading digits
-    if d is 2, 5, 6 or 9 then set changed to true
-  if valid and changed is false then continue to the next x
-  add 1 to count
-return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function rotatedDigits(n) {
+  let count = 0
+  for (let x = 1; x <= n; x++) {
+    const digits = String(x)
+    if (/[347]/.test(digits)) continue
+    const changed = /[2569]/.test(digits)
+    if (!changed) continue
+    count++
+  }
+  return count
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
 export const python = `def rotated_digits(n):
     count = 0
     for x in range(1, n + 1):

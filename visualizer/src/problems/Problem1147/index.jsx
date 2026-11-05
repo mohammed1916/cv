@@ -22,7 +22,7 @@ const definition = {
 export default function ChunkedPalindrome() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Text" length={run.input.text.length} valueAt={i => run.input.text[i]} active={step.left}
-      roleAt={i => (i < step.left || i >= step.right ? 'chunked' : 'open')} />
+      roleAt={i => (i === step.left ? 'l' : i === step.right - 1 ? 'r' : i < step.left || i >= step.right ? 'chunked' : 'open')} />
     <output aria-label="Chunk count">{`Chunks so far: ${step.count}`}</output>
   </>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>

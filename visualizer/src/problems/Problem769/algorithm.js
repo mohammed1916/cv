@@ -10,7 +10,7 @@ export function buildTrace(arr) {
   const cuts = []
   arr.forEach((x, i) => {
     mx = Math.max(mx, x)
-    frames.push({ phase: 'scan', activeLine: L('mx = the larger'), pythonLine: 4, index: i, prefixMax: mx, cuts: [...cuts], count, message: `Prefix max after index ${i} is ${mx}; compare with index ${i}.` })
+    frames.push({ phase: 'scan', activeLine: L('mx = Math.max'), pythonLine: 4, index: i, prefixMax: mx, cuts: [...cuts], count, message: `Prefix max after index ${i} is ${mx}; compare with index ${i}.` })
     if (mx === i) {
       count++
       cuts.push(i)
@@ -20,13 +20,16 @@ export function buildTrace(arr) {
   frames.push({ phase: 'done', activeLine: L('return ans'), pythonLine: 7, index: arr.length - 1, prefixMax: mx, cuts: [...cuts], count, message: `Maximum number of chunks: ${count}.` })
   return { input: [...arr], result: count, frames }
 }
-export const code = `function maxChunksToSorted(arr):
-  mx = 0, ans = 0
-  for each index i and value x in arr:
-    mx = the larger of mx and x
-    if mx equals i then
-      ans = ans + 1
-  return ans`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function maxChunksToSorted(arr) {
+  let mx = 0
+  let ans = 0
+  for (let i = 0; i < arr.length; i++) {
+    mx = Math.max(mx, arr[i])
+    if (mx === i) ans = ans + 1
+  }
+  return ans
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def max_chunks_to_sorted(arr):

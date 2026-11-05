@@ -20,7 +20,7 @@ const definition = {
   complexity: "O(r log r) time for r runs, dominated by sorting the runs by length, and O(r) extra space. The visualization caps the road at 24 characters and the budget at 60.",
   examples: [
     { label: "Two runs fixed", input: "{\"road\":\"xx.xxxx.x\",\"budget\":5}" },
-    { label: "Partial last run", input: "{\"road\":\"xxxxx.xxx\",\"budget\":7}" },
+    { label: "Partial last run", input: "{\"road\":\"xxxxx.xxxx\",\"budget\":8}" },
     { label: "Nothing affordable", input: "{\"road\":\"xxx\",\"budget\":3}" },
   ],
 };

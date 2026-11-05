@@ -5,44 +5,40 @@ export function parseInput(text) {
   return arr
 }
 
+// Each line of JavaScript is paired with the Python line on the same row.
+const LINES = [
+  ['function minSetSize(arr) {', 'from collections import Counter'],
+  ['', ''],
+  ['  const counts = new Map()', 'def min_set_size(arr):'],
+  ['  for (const v of arr) counts.set(v, (counts.get(v) ?? 0) + 1)', '    counts = Counter(arr)'],
+  ['  const order = [...counts].sort((a, b) => b[1] - a[1])', '    order = counts.most_common()'],
+  ['  let removed = 0, chosen = 0', '    removed = chosen = 0'],
+  ['  for (const [value, count] of order) {', '    for value, count in order:'],
+  ['    if (removed * 2 >= arr.length) break', '        if removed * 2 >= len(arr): break'],
+  ['    removed += count; chosen++', '        removed += count; chosen += 1'],
+  ['  }', ''],
+  ['  return chosen', '    return chosen'],
+  ['}', ''],
+]
+const codeLines = LINES.map(([js]) => js)
+export const code = codeLines.map((text, index) => ({ line: index + 1, text }))
+const L = s => codeLines.findIndex(c => c.includes(s)) + 1
+export const python = LINES.map(([, py]) => py).join('\n')
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 export function buildTrace(arr) {
   const counts = new Map()
   for (const v of arr) counts.set(v, (counts.get(v) ?? 0) + 1)
   const order = [...counts].sort((a, b) => b[1] - a[1])
-  const frames = [{ phase: 'count', activeLine: L('count how often'), pythonLine: 6, value: null, chosen: [], removed: 0, message: `Count the values. The most frequent value appears ${order[0][1]} times.` }]
+  const frames = [{ phase: 'count', activeLine: L('const counts'), pythonLine: P('counts = Counter'), value: null, chosen: [], removed: 0, message: `Count the values. The most frequent value appears ${order[0][1]} times.` }]
   let removed = 0
   const chosen = []
   for (const [value, count] of order) {
     if (removed * 2 >= arr.length) break
     removed += count
     chosen.push(value)
-    frames.push({ phase: 'pick', activeLine: L('removed = removed + count'), pythonLine: 10, value, chosen: [...chosen], removed, message: `Remove every ${value} (${count} copies): ${removed} of ${arr.length} entries are gone.` })
+    frames.push({ phase: 'pick', activeLine: L('removed += count'), pythonLine: P('removed += count'), value, chosen: [...chosen], removed, message: `Remove every ${value} (${count} copies): ${removed} of ${arr.length} entries are gone.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return chosen'), pythonLine: 11, value: null, chosen: [...chosen], removed, message: `Smallest set size: ${chosen.length}.` })
+  frames.push({ phase: 'done', activeLine: L('return chosen'), pythonLine: P('return chosen'), value: null, chosen: [...chosen], removed, message: `Smallest set size: ${chosen.length}.` })
   return { input: arr, result: chosen.length, frames }
 }
-
-export const code = `smallest number of distinct values to remove
-  count how often each value appears
-  order the values by count, most frequent first
-  removed = 0
-  chosen = 0
-  for each value v in that order
-    if removed is at least half the length then stop
-    removed = removed + count of v
-    chosen = chosen + 1
-  return chosen`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-
-export const python = `from collections import Counter
-
-def min_set_size(arr):
-    removed = 0
-    chosen = 0
-    for _, count in Counter(arr).most_common():
-        if removed * 2 >= len(arr):
-            break
-        removed += count
-        chosen += 1
-    return chosen
-`

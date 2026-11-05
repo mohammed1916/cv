@@ -16,29 +16,40 @@ export function buildTrace({ s, words }) {
     const ch = s[p]
     const bucket = waiting.get(ch) || []
     waiting.delete(ch)
-    frames.push({ phase: 'scan', activeLine: 4, pythonLine: 7, pos: p, count, buckets: [`took ${ch}: ${bucket.map(([w, i]) => `${w}@${i}`).join(' ') || '(none waiting)'}`, ...show()], message: bucket.length ? `Read "${ch}" at index ${p}: ${bucket.length} word(s) were waiting for it.` : `Read "${ch}" at index ${p}: no word is waiting for it, nothing moves.` })
+    frames.push({ phase: 'scan', activeLine: 9, pythonLine: 7, pos: p, count, buckets: [`took ${ch}: ${bucket.map(([w, i]) => `${w}@${i}`).join(' ') || '(none waiting)'}`, ...show()], message: bucket.length ? `Read "${ch}" at index ${p}: ${bucket.length} word(s) were waiting for it.` : `Read "${ch}" at index ${p}: no word is waiting for it, nothing moves.` })
     for (const [w, i] of bucket) {
       if (i + 1 === w.length) {
         count++
-        frames.push({ phase: 'complete', activeLine: 7, pythonLine: 10, pos: p, count, buckets: show(), message: `"${w}" matched its last letter: it is a subsequence. Count = ${count}.` })
+        frames.push({ phase: 'complete', activeLine: 13, pythonLine: 10, pos: p, count, buckets: show(), message: `"${w}" matched its last letter: it is a subsequence. Count = ${count}.` })
       } else {
         add(w[i + 1], w, i + 1)
-        frames.push({ phase: 'advance', activeLine: 8, pythonLine: 12, pos: p, count, buckets: show(), message: `"${w}" matched letter ${i + 1} of ${w.length}; it now waits for "${w[i + 1]}".` })
+        frames.push({ phase: 'advance', activeLine: 14, pythonLine: 12, pos: p, count, buckets: show(), message: `"${w}" matched letter ${i + 1} of ${w.length}; it now waits for "${w[i + 1]}".` })
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: 9, pythonLine: 13, pos: s.length, count, buckets: show(), message: `${count} word(s) are subsequences of s.` })
+  frames.push({ phase: 'done', activeLine: 21, pythonLine: 13, pos: s.length, count, buckets: show(), message: `${count} word(s) are subsequences of s.` })
   return { input: { s, words }, result: count, frames }
 }
-export const code = `set count to 0
-for each word w: put (w, 0) in the bucket for letter w[0]
-for each character ch in s
-  take the bucket for ch and empty it
-  for each (w, i) taken from that bucket
-    if i + 1 equals the length of w then
-      add 1 to count
-    otherwise put (w, i + 1) in the bucket for letter w[i + 1]
-return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function numMatchingSubseq(s, words) {
+  const waiting = new Map()
+  for (const w of words) {
+    if (!waiting.has(w[0])) waiting.set(w[0], [])
+    waiting.get(w[0]).push([w, 0])
+  }
+  let count = 0
+  for (const ch of s) {
+    const bucket = waiting.get(ch) ?? []
+    waiting.delete(ch)
+    for (const [w, i] of bucket) {
+      if (i + 1 === w.length) count++
+      else {
+        if (!waiting.has(w[i + 1])) waiting.set(w[i + 1], [])
+        waiting.get(w[i + 1]).push([w, i + 1])
+      }
+    }
+  }
+  return count
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 export const python = `def num_matching_subseq(s, words):
     waiting = {}
     for w in words:

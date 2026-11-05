@@ -8,16 +8,16 @@ export function buildTrace(s) {
   const counts = new Map()
   for (const c of s) counts.set(c, (counts.get(c) || 0) + 1)
   const order = [...counts.entries()].sort((a, b) => b[1] - a[1])
-  const frames = [{ phase: 'start', activeLine: L('n = length'), pythonLine: 4, res: new Array(n).fill(''), i: -1, letter: '', counts: order, message: `Reorganize "${s}" (length ${n}) so that no two adjacent characters are equal.` }]
-  frames.push({ phase: 'count', activeLine: L('count how often'), pythonLine: 5, res: new Array(n).fill(''), i: -1, letter: '', counts: order, message: `Count letters: ${order.map(([c, k]) => `${c}x${k}`).join(', ')}.` })
+  const frames = [{ phase: 'start', activeLine: L('const n = s.length'), pythonLine: 4, res: new Array(n).fill(''), i: -1, letter: '', counts: order, message: `Reorganize "${s}" (length ${n}) so that no two adjacent characters are equal.` }]
+  frames.push({ phase: 'count', activeLine: L('for (const c of s) count.set'), pythonLine: 5, res: new Array(n).fill(''), i: -1, letter: '', counts: order, message: `Count letters: ${order.map(([c, k]) => `${c}x${k}`).join(', ')}.` })
   const limit = Math.floor((n + 1) / 2)
   const mx = order[0][1]
   if (mx > limit) {
-    frames.push({ phase: 'check', activeLine: L('exceeds'), pythonLine: 7, res: new Array(n).fill(''), i: -1, letter: order[0][0], counts: order, message: `'${order[0][0]}' appears ${mx} times but at most ${limit} slots can be pairwise non-adjacent in length ${n}. Impossible.` })
-    frames.push({ phase: 'done', activeLine: L('return the empty string'), pythonLine: 8, res: new Array(n).fill(''), i: -1, letter: '', counts: order, message: 'Return the empty string.' })
+    frames.push({ phase: 'check', activeLine: L('if (order[0][1] >'), pythonLine: 7, res: new Array(n).fill(''), i: -1, letter: order[0][0], counts: order, message: `'${order[0][0]}' appears ${mx} times but at most ${limit} slots can be pairwise non-adjacent in length ${n}. Impossible.` })
+    frames.push({ phase: 'done', activeLine: L("return ''"), pythonLine: 8, res: new Array(n).fill(''), i: -1, letter: '', counts: order, message: 'Return the empty string.' })
     return { input: s, result: '', frames }
   }
-  frames.push({ phase: 'check', activeLine: L('exceeds'), pythonLine: 7, res: new Array(n).fill(''), i: -1, letter: order[0][0], counts: order, message: `Most frequent '${order[0][0]}' x${mx} fits within ${limit} non-adjacent slots, so a solution exists.` })
+  frames.push({ phase: 'check', activeLine: L('if (order[0][1] >'), pythonLine: 7, res: new Array(n).fill(''), i: -1, letter: order[0][0], counts: order, message: `Most frequent '${order[0][0]}' x${mx} fits within ${limit} non-adjacent slots, so a solution exists.` })
   const res = new Array(n).fill('')
   let i = 0
   for (const [c, k] of order) {
@@ -28,28 +28,31 @@ export function buildTrace(s) {
       if (i >= n) {
         const wrapped = i
         i = 1
-        frames.push({ phase: 'wrap', activeLine: L('then i = 1'), pythonLine: 16, res: [...res], i: -1, letter: c, counts: order, message: `Index ${wrapped} is past the end, so wrap to the odd slots starting at 1.` })
+        frames.push({ phase: 'wrap', activeLine: L('if (i >= n) i = 1'), pythonLine: 16, res: [...res], i: -1, letter: c, counts: order, message: `Index ${wrapped} is past the end, so wrap to the odd slots starting at 1.` })
       }
     }
   }
   const result = res.join('')
-  frames.push({ phase: 'done', activeLine: L('res joined'), pythonLine: 17, res: [...res], i: -1, letter: '', counts: order, message: `Return "${result}".` })
+  frames.push({ phase: 'done', activeLine: L('return res.join'), pythonLine: 17, res: [...res], i: -1, letter: '', counts: order, message: `Return "${result}".` })
   return { input: s, result, frames }
 }
-export const code = `function reorganizeString(s):
-  n = length of s
-  count how often each letter appears
-  order = letters sorted by count, most frequent first
-  if the top count exceeds (n + 1) / 2 (integer division) then
-    return the empty string
-  res = n empty slots
-  i = 0
-  for each letter c with count k in order:
-    repeat k times:
+export const code = `function reorganizeString(s) {
+  const n = s.length
+  const count = new Map()
+  for (const c of s) count.set(c, (count.get(c) ?? 0) + 1)
+  const order = [...count.entries()].sort((a, b) => b[1] - a[1])
+  if (order[0][1] > Math.floor((n + 1) / 2)) return ''
+  const res = Array(n).fill('')
+  let i = 0
+  for (const [c, k] of order) {
+    for (let t = 0; t < k; t++) {
       res[i] = c
-      i = i + 2
-      if i is at least n then i = 1
-  return res joined as a string`.split('\n').map((text, index) => ({ line: index + 1, text }))
+      i += 2
+      if (i >= n) i = 1
+    }
+  }
+  return res.join('')
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `from collections import Counter

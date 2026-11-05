@@ -13,9 +13,9 @@ const definition = {
   url: 'https://leetcode.com/problems/most-frequent-prime/',
   complexity: 'O(m * n * (m + n) * sqrt(V)) time, where V is the largest number formed. The grid is at most 4 by 4 here.',
   examples: [
-    { label: 'Example 1', input: '[[1,1],[9,9],[1,1]]' },
-    { label: 'Example 2', input: '[[7]]' },
-    { label: 'Example 3', input: '[[9,7,8],[4,6,5],[2,8,6]]' },
+    { label: 'Example 1', input: '[[2,3],[5,1]]' },
+    { label: 'Example 2', input: '[[1,1,3],[7,9,2]]' },
+    { label: 'Example 3', input: '[[7,3,9],[1,4,5]]' },
   ],
 }
 

@@ -8,27 +8,34 @@ export function parseInput(text) {
   return { happiness, k }
 }
 
+// values[i] is the happiness shown for ranked child i: picked children keep the value they were picked at,
+// unpicked children have lost one point for each turn taken so far (never below zero).
+function valuesAfter(ranked, turn) {
+  return ranked.map((v, i) => (i < turn ? Math.max(v - i, 0) : Math.max(v - turn, 0)))
+}
+
 export function buildTrace(input) {
   const ranked = [...input.happiness].sort((a, b) => b - a)
   const { k } = input
   let total = 0
-  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('sort the children'), index: -1, turn: 0, total, message: 'Sort happiness from highest to lowest. Each earlier turn lowers the remaining children by one.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('ranked = [...happiness]'), index: -1, turn: 0, total, values: valuesAfter(ranked, 0), message: 'Sort happiness from highest to lowest. Each earlier turn lowers the children not yet picked by one.' }]
   for (let turn = 0; turn < k; turn++) {
     const gain = Math.max(ranked[turn] - turn, 0)
     total += gain
-    frames.push({ pythonLine: 5, phase: 'pick', activeLine: L('add the happiness'), index: turn, turn: turn + 1, total, message: `Turn ${turn + 1}: pick ${ranked[turn]} minus ${turn} earlier turns, gain ${gain}. Total ${total}.` })
+    frames.push({ pythonLine: 5, phase: 'pick', activeLine: L('total += Math.max'), index: turn, turn: turn + 1, total, values: valuesAfter(ranked, turn + 1), message: `Turn ${turn + 1}: pick ${ranked[turn]} minus ${turn} earlier turns, gain ${gain}. Total ${total}.` })
   }
-  frames.push({ pythonLine: 6, phase: 'done', activeLine: L('return total'), index: -1, turn: k, total, message: `Maximum happiness: ${total}.` })
+  frames.push({ pythonLine: 6, phase: 'done', activeLine: L('return total'), index: -1, turn: k, total, values: valuesAfter(ranked, k), message: `Maximum happiness: ${total}.` })
   return { input, result: total, frames }
 }
 
-export const code = `maximum total happiness from k picks:
-  sort the children by happiness, highest first
-  set total to zero
-  for each turn from zero to k minus one
-    the child picked this turn loses one point for each earlier turn
-    add the happiness of the pick minus the turn index, never below zero, to total
-  return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function maximizeHappiness(happiness, k) {
+  const ranked = [...happiness].sort((a, b) => b - a)
+  let total = 0
+  for (let turn = 0; turn < k; turn++) {
+    total += Math.max(ranked[turn] - turn, 0)
+  }
+  return total
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def maximize_happiness(happiness, k):

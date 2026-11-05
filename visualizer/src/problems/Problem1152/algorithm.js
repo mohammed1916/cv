@@ -20,32 +20,43 @@ export function buildTrace({ visits }) {
   }
   const counts = new Map()
   const state = () => [...counts].map(([key, c]) => `${key.split(',').join(' then ')}: ${c} user${c === 1 ? '' : 's'}`)
-  const frames = [{ phase: 'sort', pythonLine: PL('visits.sort'), activeLine: L('sort the visits by time'), state: [], message: 'Order every visit by time.' }]
+  const rows = () => [...counts].map(([key, c]) => ({ pattern: key.split(',').join(' -> '), users: c }))
+  const timelines = [...byUser].map(([user, sites]) => ({ user, sites }))
+  const frames = [{ phase: 'sort', pythonLine: PL('visits.sort'), activeLine: L('const sorted'), state: [], rows: [], timelines, user: null, message: 'Order every visit by time.' }]
   for (const [user, sites] of byUser) {
     const seen = new Set()
     for (let i = 0; i < sites.length; i++) for (let j = i + 1; j < sites.length; j++) for (let k = j + 1; k < sites.length; k++) {
       seen.add([sites[i], sites[j], sites[k]].join(','))
     }
     for (const key of seen) counts.set(key, (counts.get(key) || 0) + 1)
-    frames.push({ phase: 'user', pythonLine: PL('for user, sites'), activeLine: L('count it for the pattern'), state: state(), message: `${user} has ${seen.size} distinct pattern${seen.size === 1 ? '' : 's'}.` })
+    frames.push({ phase: 'user', pythonLine: PL('for user, sites'), activeLine: L('counts.set(pattern'), state: state(), rows: rows(), timelines, user, message: `${user} has ${seen.size} distinct pattern${seen.size === 1 ? '' : 's'}.` })
   }
   let best = null
   for (const [key, c] of counts) if (!best || c > best.c || (c === best.c && key < best.key)) best = { key, c }
   if (!best) throw new Error('No user visited three sites, so there is no pattern.')
-  frames.push({ phase: 'done', pythonLine: PL('return list(best)'), activeLine: L('return that pattern'), state: [...state(), `best: ${best.key}`], message: `${best.key.split(',').join(' then ')} is shared by the most users.` })
+  frames.push({ phase: 'done', pythonLine: PL('return list(best)'), activeLine: L('return best.pattern'), state: [...state(), `best: ${best.key}`], rows: rows(), timelines, user: null, message: `${best.key.split(',').join(' then ')} is shared by the most users.` })
   return { input: { visits }, result: best.key.split(','), frames }
 }
 
-export const code = `most shared three site pattern
-  sort the visits by time
-  group the sites of each user in time order
-  for each user
-    collect every distinct three site subsequence once
-    count it for the pattern
-  pick the highest count, breaking ties by the smaller pattern
-  return that pattern`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-
+export const code = `function mostVisitedPattern(visits) {
+  const sorted = [...visits].sort((a, b) => a[1] - b[1])
+  const sitesByUser = new Map()
+  for (const [user, , site] of sorted) {
+    if (!sitesByUser.has(user)) sitesByUser.set(user, [])
+    sitesByUser.get(user).push(site)
+  }
+  const counts = new Map()
+  for (const sites of sitesByUser.values()) {
+    const seen = new Set()
+    for (let i = 0; i < sites.length; i++)
+      for (let j = i + 1; j < sites.length; j++)
+        for (let k = j + 1; k < sites.length; k++) seen.add([sites[i], sites[j], sites[k]].join(','))
+    for (const pattern of seen) counts.set(pattern, (counts.get(pattern) ?? 0) + 1)
+  }
+  let best = null
+  for (const [pattern, c] of counts) if (!best || c > best.c || (c === best.c && pattern < best.pattern)) best = { pattern, c }
+  return best.pattern.split(',')
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 export const python = `def most_visited_pattern(visits):
     visits.sort(key=lambda v: v[1])
     sites_by_user = {}
@@ -64,3 +75,4 @@ export const python = `def most_visited_pattern(visits):
     return list(best)
 `
 const PL = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+const L = s => code.findIndex(c => c.text.includes(s)) + 1

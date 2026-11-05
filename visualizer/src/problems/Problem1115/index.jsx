@@ -20,8 +20,8 @@ const definition = {
   url: "https://leetcode.com/problems/print-foobar-alternately/",
   complexity: "O(n) time and O(1) extra space beyond the printed output: each thread prints n times.",
   examples: [
-    { label: "n = 1", input: '{"n":1}' },
-    { label: "n = 2", input: '{"n":2}' },
+    { label: "n = 3", input: '{"n":3}' },
+    { label: "n = 4", input: '{"n":4}' },
   ],
 };
 

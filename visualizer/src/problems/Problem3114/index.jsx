@@ -19,9 +19,9 @@ const definition = {
   url: "https://leetcode.com/problems/latest-time-you-can-obtain-after-replacing-characters/",
   complexity: "O(1) time and O(1) space because the time has a fixed five characters.",
   examples: [
-    { label: "Search snippet example (not verified against the full statement)", input: '{"s":"1?:?4"}' },
-    { label: "Search snippet example (not verified against the full statement)", input: '{"s":"0?:5?"}' },
-    { label: "illustrative (not from the statement)", input: '{"s":"?2:??"}' },
+    { label: "Example 1", input: '{"s":"1?:3?"}' },
+    { label: "Example 2", input: '{"s":"?0:5?"}' },
+    { label: "Example 3", input: '{"s":"?2:??"}' },
   ],
 };
 

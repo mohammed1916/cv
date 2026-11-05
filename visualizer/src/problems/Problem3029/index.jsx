@@ -14,9 +14,9 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-time-to-revert-word-to-initial-state-i/',
   complexity: 'O(n^2) time in the worst case with direct string comparison, where n is the word length.',
   examples: [
-    { label: 'Example 1', input: '{"word":"abacaba","k":3}' },
-    { label: 'Example 2', input: '{"word":"abacaba","k":4}' },
-    { label: 'Example 3', input: '{"word":"abcbabcd","k":2}' },
+    { label: 'Example 1', input: '{"word":"xyxzxy","k":2}' },
+    { label: 'Example 2', input: '{"word":"mnmnm","k":1}' },
+    { label: 'Example 3', input: '{"word":"aabbaab","k":3}' },
   ],
 }
 

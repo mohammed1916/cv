@@ -8,7 +8,7 @@ export function parseInput(text) {
 export function buildTrace(nums) {
   const count = new Map(), tails = new Map()
   for (const v of nums) count.set(v, (count.get(v) ?? 0) + 1)
-  const frames = [{ phase: 'start', value: null, tails: {}, pythonLine: P('count, tails = Counter(nums)'), activeLine: L('count the occurrences'), message: 'Count each value; try to extend a subsequence before starting one.' }]
+  const frames = [{ phase: 'start', value: null, tails: {}, pythonLine: P('count, tails = Counter(nums)'), activeLine: L('for (const v of nums) count.set('), message: 'Count each value; try to extend a subsequence before starting one.' }]
   let ok = true
   for (const v of nums) {
     if (!ok) break
@@ -17,30 +17,42 @@ export function buildTrace(nums) {
     if ((tails.get(v - 1) ?? 0) > 0) {
       tails.set(v - 1, tails.get(v - 1) - 1)
       tails.set(v, (tails.get(v) ?? 0) + 1)
-      frames.push({ phase: 'extend', value: v, tails: Object.fromEntries(tails), pythonLine: P('tails[x] += 1'), activeLine: L('extend it so'), message: `${v} extends a subsequence ending at ${v - 1}.` })
+      frames.push({ phase: 'extend', value: v, tails: Object.fromEntries(tails), pythonLine: P('tails[x] += 1'), activeLine: L('tails.set(v, (tails.get(v) ?? 0) + 1)'), message: `${v} extends a subsequence ending at ${v - 1}.` })
     } else if ((count.get(v + 1) ?? 0) > 0 && (count.get(v + 2) ?? 0) > 0) {
       count.set(v + 1, count.get(v + 1) - 1)
       count.set(v + 2, count.get(v + 2) - 1)
       tails.set(v + 2, (tails.get(v + 2) ?? 0) + 1)
-      frames.push({ phase: 'start-new', value: v, tails: Object.fromEntries(tails), pythonLine: P('tails[x + 2] += 1'), activeLine: L('start a new run'), message: `${v} starts a new run of length 3: ${v}, ${v + 1}, ${v + 2}.` })
+      frames.push({ phase: 'start-new', value: v, tails: Object.fromEntries(tails), pythonLine: P('tails[x + 2] += 1'), activeLine: L('tails.set(v + 2'), message: `${v} starts a new run of length 3: ${v}, ${v + 1}, ${v + 2}.` })
     } else {
       ok = false
-      frames.push({ phase: 'reject', value: v, tails: Object.fromEntries(tails), pythonLine: P('return False'), activeLine: L('otherwise return false'), message: `${v} can neither extend a run nor start one of length 3.` })
+      frames.push({ phase: 'reject', value: v, tails: Object.fromEntries(tails), pythonLine: P('return False'), activeLine: L('return false'), message: `${v} can neither extend a run nor start one of length 3.` })
     }
   }
   frames.push({ phase: 'done', value: null, tails: Object.fromEntries(tails), result: ok, pythonLine: P('return True'), activeLine: L('return true'), message: ok ? 'Every value joined a run of length at least 3.' : 'Some value could not be placed.' })
   return { input: nums, result: ok, frames }
 }
 
-export const code = `function isPossible(nums):
-  count the occurrences of each value in nums; set tails to an empty table
-  for each value x in nums, in order:
-    if no copies of x remain unused, continue to the next x
-    use one copy of x
-    if a run ends at x - 1, extend it so that it ends at x
-    otherwise, if x + 1 and x + 2 both have unused copies, start a new run x, x+1, x+2 that ends at x + 2
-    otherwise return false
-  return true`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function isPossible(nums) {
+  const count = new Map()
+  const tails = new Map()
+  for (const v of nums) count.set(v, (count.get(v) ?? 0) + 1)
+  for (const v of nums) {
+    if (count.get(v) === 0) continue
+    count.set(v, count.get(v) - 1)
+    if ((tails.get(v - 1) ?? 0) > 0) {
+      tails.set(v - 1, tails.get(v - 1) - 1)
+      tails.set(v, (tails.get(v) ?? 0) + 1)
+    } else if ((count.get(v + 1) ?? 0) > 0 && (count.get(v + 2) ?? 0) > 0) {
+      count.set(v + 1, count.get(v + 1) - 1)
+      count.set(v + 2, count.get(v + 2) - 1)
+      tails.set(v + 2, (tails.get(v + 2) ?? 0) + 1)
+    } else {
+      return false
+    }
+  }
+  return true
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 

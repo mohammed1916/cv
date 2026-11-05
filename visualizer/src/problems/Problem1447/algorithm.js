@@ -8,34 +8,36 @@ export const phases = [
   { id: 'done', label: 'Result', description: 'Return every reduced fraction in denominator order.' },
 ]
 
-export const code = `function simplifiedFractions(n):
-    result = []
-    for den from 2 to n:
-        for num from 1 to den - 1:
-            if gcd(num, den) equals 1:
-                result.append(num + "/" + den)
-    return result
-
-function gcd(a, b):
-    while b is not 0:
-        a, b = b, a mod b
-    return a`
+export const code = `function simplifiedFractions(n) {
+  const result = []
+  for (let den = 2; den <= n; den++) {
+    for (let num = 1; num < den; num++) {
+      if (gcd(num, den) === 1) result.push(num + '/' + den)
+    }
+  }
+  return result
+}
+function gcd(a, b) {
+  while (b) [a, b] = [b, a % b]
+  return a
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def simplified_fractions(n):
     result = []
     for den in range(2, n + 1):
         for num in range(1, den):
-            if gcd(num, den) == 1:
-                result.append(f"{num}/{den}")
+            if gcd(num, den) == 1: result.append(f"{num}/{den}")
+
     return result
 
 def gcd(a, b):
     while b:
         a, b = b, a % b
-    return a`
+    return a
+`
 
 const lineOf = (source, fragment) => source.split('\n').findIndex(line => line.includes(fragment)) + 1
-const C = fragment => lineOf(code, fragment)
+const C = fragment => code.findIndex(c => c.text.includes(fragment)) + 1
 const P = fragment => lineOf(python, fragment)
 
 function gcd(a, b) {
@@ -60,16 +62,16 @@ export function buildTrace(n) {
   add('start', 'result = []', 'result = []', `Start with n = ${n}. No fractions are kept yet.`)
   for (den = 2; den <= n; den++) {
     g = null
-    add('denominator', 'for den', 'for den', `Denominator ${den}: numerators 1 to ${den - 1} are candidates.`)
+    add('denominator', 'for (let den', 'for den', `Denominator ${den}: numerators 1 to ${den - 1} are candidates.`)
     for (num = 1; num < den; num++) {
-      add('numerator', 'for num', 'for num', `Try ${num}/${den}.`)
+      add('numerator', 'for (let num', 'for num', `Try ${num}/${den}.`)
       g = gcd(num, den)
-      add('check', 'if gcd', 'if gcd', `gcd(${num}, ${den}) = ${g}.`)
+      add('check', 'if (gcd(num', 'if gcd', `gcd(${num}, ${den}) = ${g}.`)
       if (g === 1) {
         result.push(`${num}/${den}`)
-        add('keep', 'result.append', 'result.append', `${num}/${den} is in lowest terms, so it is kept.`)
+        add('keep', 'result.push', 'result.append', `${num}/${den} is in lowest terms, so it is kept.`)
       } else {
-        add('skip', 'if gcd', 'if gcd', `${num}/${den} shares the factor ${g}, so it equals a smaller fraction and is skipped.`)
+        add('skip', 'if (gcd(num', 'if gcd', `${num}/${den} shares the factor ${g}, so it equals a smaller fraction and is skipped.`)
       }
     }
   }

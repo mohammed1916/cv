@@ -1,24 +1,24 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { meta } from './meta'
 import { buildTrace, parseInput, code, python, phases, examples, complexity, inputLabel } from './algorithm'
+import DisjointSetView from '../../components/shared/DisjointSetView'
 
 const definition = {
   number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, inputLabel,
   url: `https://leetcode.com/problems/${meta.slug}/`, complexity, examples,
 }
 
-function Clusters({ snapshot }) {
-  return <ul aria-label="Friendship groups" style={{ display: 'flex', gap: 10, listStyle: 'none', padding: 0, flexWrap: 'wrap' }}>
-    {snapshot.clusters.map((members, index) => <li key={index} style={{ border: '2px solid #0891b2', borderRadius: 10, padding: '8px 12px' }}>
-      <strong>Group {index + 1}</strong>: {members.join(', ')}
-    </li>)}
-  </ul>
+function Forest({ snapshot }) {
+  const { parent } = snapshot
+  const root = i => { let x = i; while (parent[x] !== x) x = parent[x]; return x }
+  const size = parent.map((_, i) => parent.filter((__, j) => root(j) === i).length)
+  return <DisjointSetView parent={parent} size={size} labels={parent.map(i => `person ${i}`)} />
 }
 
 export default function UnionFindVisual() {
   return <AlgorithmWorkspace definition={definition}
     renderVisual={({ run, step }) => <>
-      <Clusters snapshot={step.snapshot} />
+      <Forest snapshot={step.snapshot} />
       <p>Groups remaining: {step.snapshot.groups}{step.snapshot.time !== undefined ? ` · Time ${step.snapshot.time}` : ''}</p>
       <output aria-label="Result">{step.phase === 'done' ? `Result: ${run.result}` : step.message}</output>
     </>}

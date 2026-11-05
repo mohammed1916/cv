@@ -11,33 +11,36 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { nums, k } = input
   let total = 0
-  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('total = 0'), total, diff: null, flips: 0, message: 'Start with total XOR 0.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('let total = 0'), total, diff: null, flips: 0, message: 'Start with total XOR 0.' }]
   for (const value of nums) {
     total ^= value
-    frames.push({ pythonLine: 4, phase: 'fold', activeLine: L('total = total xor value'), total, diff: null, flips: 0, message: `XOR in ${value}: total is now ${total}.` })
+    frames.push({ pythonLine: 4, phase: 'fold', activeLine: L('total ^= value'), total, diff: null, flips: 0, message: `XOR in ${value}: total is now ${total}.` })
   }
   let diff = total ^ k
-  frames.push({ pythonLine: 5, phase: 'diff', activeLine: L('diff = total xor k'), total, diff, flips: 0, message: `${total} xor ${k} = ${diff}. Each set bit needs one flip.` })
+  frames.push({ pythonLine: 5, phase: 'diff', activeLine: L('let diff = total ^ k'), total, diff, flips: 0, message: `${total} xor ${k} = ${diff}. Each set bit needs one flip.` })
   let flips = 0
   while (diff !== 0) {
     diff &= diff - 1
     flips++
-    frames.push({ pythonLine: 8, phase: 'bit', activeLine: L('remove the lowest set bit'), total, diff, flips, message: `Fixed one bit. Flips so far: ${flips}.` })
+    frames.push({ pythonLine: 8, phase: 'bit', activeLine: L('diff &= diff - 1'), total, diff, flips, message: `Fixed one bit. Flips so far: ${flips}.` })
   }
   frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return flips'), total, diff, flips, message: `Minimum flips: ${flips}.` })
   return { input, nums, k, result: flips, frames }
 }
 
-export const code = `minimum flips so that the XOR of nums equals k
-  total = 0
-  for each value in nums do
-    total = total xor value
-  diff = total xor k
-  flips = 0
-  while diff is not zero do
-    remove the lowest set bit from diff
-    add 1 to flips
-  return flips`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minOperations(nums, k) {
+  let total = 0
+  for (const value of nums) {
+    total ^= value
+  }
+  let diff = total ^ k
+  let flips = 0
+  while (diff !== 0) {
+    diff &= diff - 1
+    flips++
+  }
+  return flips
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def min_operations(nums, k):

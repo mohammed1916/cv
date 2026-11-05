@@ -9,15 +9,21 @@ const PHASES = [
 export const phases = PHASES
 
 const CODE_LINES = [
-  'answer q ranges that have exactly k distinct values, each occurring an even number of times',
-  'l and r start at the given endpoints',
-  'for each of the q queries',
-  '  count each value in nums from l to r',
-  '  valid is true when the distinct count is k and every count is even',
-  '  record valid',
-  '  g is l plus r when valid, otherwise r minus l',
-  '  replace l and r by (l xor g) mod n and (r xor g) mod n, then sort them',
-  'return the recorded answers',
+  'function validQueries(nums, k, start, q) {',
+  '  const n = nums.length',
+  '  let [l, r] = start',
+  '  const answers = []',
+  '  for (let step = 0; step < q; step++) {',
+  '    const counts = new Map()',
+  '    for (let i = l; i <= r; i++) counts.set(nums[i], (counts.get(nums[i]) ?? 0) + 1)',
+  '    const valid = counts.size === k && [...counts.values()].every(c => c % 2 === 0)',
+  '    answers.push(valid)',
+  '    const g = valid ? l + r : r - l',
+  '    const a = (l ^ g) % n, b = (r ^ g) % n',
+  '    l = Math.min(a, b); r = Math.max(a, b)',
+  '  }',
+  '  return answers',
+  '}',
 ]
 
 export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }))
@@ -75,27 +81,27 @@ export function buildTrace({ nums, k, start, q }) {
   let l = start[0]
   let r = start[1]
   const base = () => ({ k, n, nums, answers: [...answers] })
-  frames.push({ ...base(), pythonLine: P('l, r = start'), phase: 'query', activeLine: L('l and r start'), l, r, counts: null, valid: null, g: null, message: `Start with range [${l}, ${r}].` })
+  frames.push({ ...base(), pythonLine: P('l, r = start'), phase: 'query', activeLine: L('let [l, r] = start'), l, r, counts: null, valid: null, g: null, message: `Start with range [${l}, ${r}].` })
   for (let step = 0; step < q; step++) {
-    frames.push({ ...base(), pythonLine: P('for _ in range(q)'), phase: 'query', activeLine: L('for each of the q queries'), l, r, counts: null, valid: null, g: null, message: `Query ${step + 1} of ${q}: range [${l}, ${r}].` })
+    frames.push({ ...base(), pythonLine: P('for _ in range(q)'), phase: 'query', activeLine: L('for (let step = 0'), l, r, counts: null, valid: null, g: null, message: `Query ${step + 1} of ${q}: range [${l}, ${r}].` })
     const counts = new Map()
     for (let i = l; i <= r; i++) {
       counts.set(nums[i], (counts.get(nums[i]) || 0) + 1)
-      frames.push({ ...base(), pythonLine: P('counts[x] = counts.get'), phase: 'count', activeLine: L('count each value'), l, r, at: i, counts: Object.fromEntries(counts), valid: null, g: null, message: `Index ${i} holds ${nums[i]}; ${counts.size} distinct so far.` })
+      frames.push({ ...base(), pythonLine: P('counts[x] = counts.get'), phase: 'count', activeLine: L('counts.set(nums[i]'), l, r, at: i, counts: Object.fromEntries(counts), valid: null, g: null, message: `Index ${i} holds ${nums[i]}; ${counts.size} distinct so far.` })
     }
     const even = [...counts.values()].every(c => c % 2 === 0)
     const valid = counts.size === k && even
     answers.push(valid)
-    frames.push({ ...base(), pythonLine: P('valid = len(counts)'), phase: 'check', activeLine: L('valid is true'), l, r, counts: Object.fromEntries(counts), valid, g: null, message: `${counts.size} distinct value${counts.size === 1 ? '' : 's'} (need ${k}), ${even ? 'all counts even' : 'some count is odd'}: ${valid ? 'valid' : 'not valid'}.` })
+    frames.push({ ...base(), pythonLine: P('valid = len(counts)'), phase: 'check', activeLine: L('const valid ='), l, r, counts: Object.fromEntries(counts), valid, g: null, message: `${counts.size} distinct value${counts.size === 1 ? '' : 's'} (need ${k}), ${even ? 'all counts even' : 'some count is odd'}: ${valid ? 'valid' : 'not valid'}.` })
     const g = valid ? l + r : r - l
     const a = (l ^ g) % n
     const b = (r ^ g) % n
     const nl = Math.min(a, b)
     const nr = Math.max(a, b)
-    frames.push({ ...base(), pythonLine: P('a, b = (l ^ g)'), phase: 'next', activeLine: L('replace l and r'), l, r, counts: Object.fromEntries(counts), valid, g, nextL: nl, nextR: nr, message: `g = ${g}; next endpoints ${a} and ${b}, sorted to [${nl}, ${nr}].` })
+    frames.push({ ...base(), pythonLine: P('a, b = (l ^ g)'), phase: 'next', activeLine: L('const a ='), l, r, counts: Object.fromEntries(counts), valid, g, nextL: nl, nextR: nr, message: `g = ${g}; next endpoints ${a} and ${b}, sorted to [${nl}, ${nr}].` })
     l = nl
     r = nr
   }
-  frames.push({ ...base(), pythonLine: P('return answers'), phase: 'done', activeLine: L('return the recorded'), l, r, counts: null, valid: null, g: null, message: `Answers: ${answers.map(v => (v ? 'true' : 'false')).join(', ')}.` })
+  frames.push({ ...base(), pythonLine: P('return answers'), phase: 'done', activeLine: L('return answers'), l, r, counts: null, valid: null, g: null, message: `Answers: ${answers.map(v => (v ? 'true' : 'false')).join(', ')}.` })
   return { input: { nums, k, start, q }, result: answers, frames }
 }

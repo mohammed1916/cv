@@ -19,33 +19,37 @@ export function buildTrace({ s, shift }) {
   const n = s.length
   let net = 0
   const snap = (opIndex, extra = {}) => ({ opIndex, net, s, ...extra })
-  const frames = [{ phase: 'start', activeLine: L('net = 0'), pythonLine: P('net = 0'), snapshot: snap(null), message: `Start with "${s}" and net shift 0.` }]
+  const frames = [{ phase: 'start', activeLine: L('let net = 0'), pythonLine: P('net = 0'), snapshot: snap(null), message: `Start with "${s}" and net shift 0.` }]
   shift.forEach(([direction, amount], i) => {
     net += direction === 1 ? amount : -amount
-    frames.push({ phase: 'operation', activeLine: L('net = net + amount'), pythonLine: P('net += amount'), snapshot: snap(i, { direction, amount }), message: `Operation ${i + 1}: ${direction === 1 ? 'right' : 'left'} by ${amount}. Net shift is now ${net}.` })
+    frames.push({ phase: 'operation', activeLine: L('net += direction'), pythonLine: P('net += amount'), snapshot: snap(i, { direction, amount }), message: `Operation ${i + 1}: ${direction === 1 ? 'right' : 'left'} by ${amount}. Net shift is now ${net}.` })
   })
   const r = ((net % n) + n) % n
-  frames.push({ phase: 'normalise', activeLine: L('r = net mod'), pythonLine: P('r = net % n'), snapshot: snap(null, { r }), message: `Net ${net} reduces to ${r} for a string of length ${n}.` })
+  frames.push({ phase: 'normalise', activeLine: L('const r = ((net'), pythonLine: P('r = net % n'), snapshot: snap(null, { r }), message: `Net ${net} reduces to ${r} for a string of length ${n}.` })
   const result = r === 0 ? s : s.slice(n - r) + s.slice(0, n - r)
   frames.push({ phase: 'rotate', activeLine: L('return'), pythonLine: P('return s[n - r'), snapshot: snap(null, { r, result }), message: r === 0 ? 'The net rotation is zero, so the string is unchanged.' : `Move the last ${r} character${r === 1 ? '' : 's'} to the front.` })
   frames.push({ phase: 'done', activeLine: L('return'), pythonLine: P('return s[n - r'), snapshot: snap(null, { r, result }), message: `Result "${result}".` })
   return { input: { s, shift }, result, frames }
 }
 
-export const code = `string shifts (s, shift):
-  net = 0
-  for each [direction, amount] in shift:
-    net = net + amount if direction is right, else net - amount
-  r = net mod length of s
-  return last r characters followed by the rest of s`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function stringShift(s, shift) {
+  let net = 0
+  for (const [direction, amount] of shift) {
+    net += direction === 1 ? amount : -amount
+  }
+  const n = s.length
+  const r = ((net % n) + n) % n
+  return r === 0 ? s : s.slice(n - r) + s.slice(0, n - r)
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def string_shift(s, shift):
     net = 0
     for direction, amount in shift:
         net += amount if direction == 1 else -amount
+
     n = len(s)
     r = net % n
-    return s[n - r:] + s[:n - r]
-`
+
+    return s[n - r:] + s[:n - r]`
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

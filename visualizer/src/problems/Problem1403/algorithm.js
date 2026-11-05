@@ -21,30 +21,30 @@ export function buildTrace(nums) {
   let chosen = 0
   const snap = (index, extra = {}) => ({ sorted, index, taken: [...taken], chosen, rest: total - chosen, total, ...extra })
   const frames = [{
-    phase: 'start', activeLine: L('total = sum'), pythonLine: PY('total = sum'), snapshot: snap(null),
+    phase: 'start', activeLine: L('const total'), pythonLine: PY('total = sum'), snapshot: snap(null),
     message: `The array sums to ${total}. Nothing is taken yet, so the chosen sum is 0 and the rest is ${total}.`,
   }]
   frames.push({
-    phase: 'sort', activeLine: L('sort'), pythonLine: PY('for value in'), snapshot: snap(null),
+    phase: 'sort', activeLine: L('sort('), pythonLine: PY('for value in'), snapshot: snap(null),
     message: `Largest first: ${sorted.join(', ')}. Taking the largest values gives the biggest chosen sum for each group size.`,
   })
   for (let i = 0; i < sorted.length; i++) {
     taken.push(sorted[i])
     chosen += sorted[i]
     frames.push({
-      phase: 'take', activeLine: L('append'), pythonLine: PY('taken.append'), snapshot: snap(i),
+      phase: 'take', activeLine: L('taken.push'), pythonLine: PY('taken.append'), snapshot: snap(i),
       message: `Take ${sorted[i]}. The chosen sum is now ${chosen}.`,
     })
     const rest = total - chosen
     if (chosen > rest) {
       frames.push({
-        phase: 'check', activeLine: L('stop'), pythonLine: PY('if chosen'), snapshot: snap(i),
+        phase: 'check', activeLine: L('break'), pythonLine: PY('if chosen'), snapshot: snap(i),
         message: `Chosen ${chosen} is greater than the rest ${rest}, so this shortest group is complete.`,
       })
       break
     }
     frames.push({
-      phase: 'check', activeLine: L('stop'), pythonLine: PY('if chosen'), snapshot: snap(i),
+      phase: 'check', activeLine: L('break'), pythonLine: PY('if chosen'), snapshot: snap(i),
       message: `Chosen ${chosen} does not yet beat the rest ${rest}. Keep taking.`,
     })
   }
@@ -55,15 +55,18 @@ export function buildTrace(nums) {
   return { input: nums, result: taken, frames }
 }
 
-export const code = `minimum subsequence (nums):
-  total = sum of nums
-  sort nums from largest to smallest
-  chosen = 0, taken = empty list
-  for each value in sorted order:
-    append value to taken
-    chosen = chosen + value
-    if chosen > total - chosen: stop
-  return taken`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minSubsequence(nums) {
+  const total = nums.reduce((sum, v) => sum + v, 0)
+  const sorted = [...nums].sort((a, b) => b - a)
+  const taken = []
+  let chosen = 0
+  for (const value of sorted) {
+    taken.push(value)
+    chosen += value
+    if (chosen > total - chosen) break
+  }
+  return taken
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 

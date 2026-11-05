@@ -24,6 +24,13 @@ export default function MaxXorWithElement() {
     return <>
       <IndexedSequence label="nums" length={run.input.nums.length} valueAt={index => run.input.nums[index]}
         roleAt={index => (run.input.nums[index] === step.chosen ? 'match' : m !== null && run.input.nums[index] > m ? 'blocked' : '')} />
+      <table aria-label="Bit walk for this query" style={{ borderCollapse: 'collapse', color: 'var(--text)', margin: '0.5rem 0' }}>
+        <thead><tr><th>bit</th><th>x bit</th><th>wanted bit</th><th>taken</th></tr></thead>
+        <tbody>{(step.walk || []).map(w => <tr key={w.bit}>
+          <td>{w.bit}</td><td>{w.xBit}</td><td>{w.want}</td>
+          <td>{w.ok ? 'wanted: a value at most m exists below' : 'other: the wanted branch has nothing at most m'}</td>
+        </tr>)}</tbody>
+      </table>
       <output aria-label="Query">{step.x === null ? 'Waiting for a query' : `Query x = ${step.x}, limit m = ${step.m}`}</output>
       <output aria-label="Answers so far">{`Answers so far: [${step.answers.join(', ')}]`}</output>
     </>

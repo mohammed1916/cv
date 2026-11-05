@@ -15,37 +15,38 @@ export function parseInput(text) {
   return { s: data.s }
 }
 
-export const code = [
-  'remove vowels(s):',
-  '  output = empty',
-  '  for each letter ch in s:',
-  '    if ch is not a, e, i, o or u:',
-  '      append ch to output',
-  '  return output',
-].map((text, index) => ({ line: index + 1, text }))
-
-export const python = `def remove_vowels(s):
-    output = []
-    for ch in s:
-        if ch not in 'aeiou':
-            output.append(ch)
-    return ''.join(output)`
+// Each line of JavaScript is paired with the Python line on the same row.
+const LINES = [
+  ['function removeVowels(s) {', 'def remove_vowels(s):'],
+  ["  let output = ''", '    output = []'],
+  ['  for (const ch of s) {', '    for ch in s:'],
+  ["    if (!'aeiou'.includes(ch)) {", "        if ch not in 'aeiou':"],
+  ['      output += ch', '            output.append(ch)'],
+  ['    }', ''],
+  ['  }', ''],
+  ["  return output", "    return ''.join(output)"],
+  ['}', ''],
+]
+export const code = LINES.map(([js], index) => ({ line: index + 1, text: js }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+export const python = LINES.map(([, py]) => py).join('\n')
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export function buildTrace(input) {
   const { s } = input
   const frames = []
   let output = ''
-  const frame = (phase, line, message, snapshot) => frames.push({ phase, activeLine: line, pythonLine: line, message, snapshot })
-  frame('start', 2, 'Start with an empty output. Each letter is looked at once, from left to right.', { index: -1, ch: '', kept: null, output, source: s })
+  const frame = (phase, activeLine, pythonLine, message, snapshot) => frames.push({ phase, activeLine, pythonLine, message, snapshot })
+  frame('start', L("let output = ''"), P('output = []'), 'Start with an empty output. Each letter is looked at once, from left to right.', { index: -1, ch: '', kept: null, output, source: s })
   for (let i = 0; i < s.length; i++) {
     const ch = s[i]
     const kept = !VOWELS.includes(ch)
-    frame('inspect', 4, kept ? `${ch} is not a vowel, so it survives.` : `${ch} is a vowel, so it is skipped.`, { index: i, ch, kept, output, source: s })
+    frame('inspect', L("if (!'aeiou'.includes(ch))"), P("if ch not in 'aeiou'"), kept ? `${ch} is not a vowel, so it survives.` : `${ch} is a vowel, so it is skipped.`, { index: i, ch, kept, output, source: s })
     if (kept) {
       output += ch
-      frame('update', 5, `Append ${ch}. Output is now ${output}.`, { index: i, ch, kept, output, source: s })
+      frame('update', L('output += ch'), P('output.append(ch)'), `Append ${ch}. Output is now ${output}.`, { index: i, ch, kept, output, source: s })
     }
   }
-  frame('done', 6, output ? `The output is ${output}.` : 'Every letter was a vowel, so the output is empty.', { index: s.length, ch: '', kept: null, output, source: s })
+  frame('done', L('return output'), P("return ''.join(output)"), output ? `The output is ${output}.` : 'Every letter was a vowel, so the output is empty.', { index: s.length, ch: '', kept: null, output, source: s })
   return { input, result: output, frames }
 }

@@ -1,6 +1,31 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { parseInput, buildTrace, code, python } from './algorithm'
 
+// Folder tree built from the stored full paths: each path is one node, and its value sits on that node.
+function FolderTree({ entries }) {
+  const root = { children: new Map(), value: null }
+  for (const [path, value] of entries) {
+    let node = root
+    for (const part of path.split('/').slice(1)) {
+      if (!node.children.has(part)) node.children.set(part, { name: part, children: new Map(), value: null })
+      node = node.children.get(part)
+    }
+    node.value = value
+  }
+  const render = (node, prefix) => <ul style={{ listStyle: 'none', paddingLeft: 18, margin: 0 }}>
+    {[...node.children.values()].map(child => {
+      const full = `${prefix}/${child.name}`
+      return <li key={full} style={{ margin: '4px 0' }}>
+        <code>{child.name}</code>{child.value !== null && <strong>{` = ${child.value}`}</strong>}
+        {child.children.size > 0 && render(child, full)}
+      </li>
+    })}
+  </ul>
+  return entries.length
+    ? <div aria-label="Stored paths as a tree">{render(root, '')}</div>
+    : <p>No paths stored yet. The root is always present.</p>
+}
+
 const definition = {
   number: '1166',
   phases: [
@@ -21,7 +46,7 @@ const definition = {
 
 export default function DesignFileSystem() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <ul aria-label="Stored paths">{step.state.map((line, index) => <li key={index}>{line}</li>)}</ul>
+    <FolderTree entries={step.entries} />
     <output aria-label="Current step">{step.message}</output>
   </>} renderReasoning={() => <>
     <p>A create checks two things: the parent path must already be stored (the root is always present), and the new path must not be stored yet.</p>

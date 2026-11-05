@@ -22,7 +22,7 @@ export default function MaximizeHappiness() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const ranked = [...run.input.happiness].sort((a, b) => b - a)
     return <>
-      <IndexedSequence label="Children ranked by happiness" length={ranked.length} valueAt={i => ranked[i]} active={step.index} roleAt={i => (i < step.turn ? 'picked' : '')} />
+      <IndexedSequence label="Children ranked by happiness (value shown is the current happiness)" length={ranked.length} valueAt={i => step.values[i]} active={step.index} roleAt={i => (i < step.turn ? 'picked' : 'waiting')} />
       <output aria-label="Total happiness">{`Total so far: ${step.total}`}</output>
     </>
   }} renderReasoning={() => <>

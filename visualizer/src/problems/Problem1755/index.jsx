@@ -26,8 +26,13 @@ export default function ClosestSubsequenceSum() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Left sums (sorted)" length={step.lsums.length} valueAt={i => step.lsums[i]}
       active={step.a} roleAt={i => (i === step.a ? 'current' : '')} />
-    <IndexedSequence label="Right sums (sorted)" length={step.rsums.length} valueAt={i => step.rsums[i]}
-      active={step.candidate} roleAt={i => (i === step.candidate ? 'closest' : '')} />
+    <IndexedSequence label="Right sums (sorted): binary search for goal minus the current left sum" length={step.rsums.length} valueAt={i => step.rsums[i]}
+      active={step.candidate} roleAt={i => {
+        if (step.lo === null || step.lo === undefined) return ''
+        if (i === step.lo && i < step.rsums.length) return 'l'
+        if (i === step.hi - 1 && step.hi < step.rsums.length + 1) return step.hi === step.lo ? 'l r' : 'r'
+        return i === step.candidate ? 'probe' : ''
+      }} />
     <output aria-label="Best">{`Goal ${run.input.goal}. Best difference: ${step.best ?? 'not yet'}`}</output>
   </>} renderReasoning={() => <>
     <p>Every subsequence is a left choice plus a right choice, so the sums of each half are enough. Sorting the right sums lets a binary search find the one closest to goal minus each left sum.</p>

@@ -1,4 +1,4 @@
-// Knowledge-derived teaching model. The sample table is invented for this visualization.
+// Teaching teaching model. The sample table is invented for this visualization.
 // Rule: within each state, keep the policies whose rank is at most 5 percent of the state's size, rounded up.
 export const sql = `SELECT policy_id, state, fraud_score
 FROM (

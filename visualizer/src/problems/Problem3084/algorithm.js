@@ -1,12 +1,11 @@
-export const code = [
-  { line: 1, text: "count substrings (s, c):" },
-  { line: 2, text: "  set count to 0" },
-  { line: 3, text: "  for each character ch in s" },
-  { line: 4, text: "    if ch equals c" },
-  { line: 5, text: "      add 1 to count" },
-  { line: 6, text: "  return count times (count plus 1) divided by 2" },
-];
-
+export const code = `function countSubstrings(s, c) {
+  let count = 0
+  for (const ch of s) {
+    if (ch === c) count += 1
+  }
+  return count * (count + 1) / 2
+}`.split('\n').map((text, index) => ({ line: index + 1, text }));
+const L = s => { const i = code.findIndex(c => c.text.includes(s)); if (i < 0) throw new Error('No code line: ' + s); return i + 1 };
 export const python = `def countSubstrings(s, c):
     count = 0
     for ch in s:
@@ -38,18 +37,18 @@ export function buildTrace(input) {
   const frames = [];
   const matches = [];
   let count = 0;
-  frames.push({ phase: "start", activeLine: 2, pythonLine: 2, message: `Start with count = 0, looking for "${c}".`, index: -1, matches: [], count });
+  frames.push({ phase: "start", activeLine: L('let count = 0'), pythonLine: 2, message: `Start with count = 0, looking for "${c}".`, index: -1, matches: [], count });
   for (let i = 0; i < s.length; i++) {
-    frames.push({ phase: "scan", activeLine: 3, pythonLine: 3, message: `Look at s[${i}] = "${s[i]}".`, index: i, matches: [...matches], count });
+    frames.push({ phase: "scan", activeLine: L('for (const ch of s)'), pythonLine: 3, message: `Look at s[${i}] = "${s[i]}".`, index: i, matches: [...matches], count });
     const hit = s[i] === c;
-    frames.push({ phase: "check", activeLine: 4, pythonLine: 4, message: `"${s[i]}" ${hit ? "equals" : "does not equal"} "${c}".`, index: i, matches: [...matches], count });
+    frames.push({ phase: "check", activeLine: L('if (ch === c)'), pythonLine: 4, message: `"${s[i]}" ${hit ? "equals" : "does not equal"} "${c}".`, index: i, matches: [...matches], count });
     if (hit) {
       count += 1;
       matches.push(i);
-      frames.push({ phase: "count", activeLine: 5, pythonLine: 5, message: `count = ${count}.`, index: i, matches: [...matches], count });
+      frames.push({ phase: "count", activeLine: L('count += 1'), pythonLine: 5, message: `count = ${count}.`, index: i, matches: [...matches], count });
     }
   }
   const result = (count * (count + 1)) / 2;
-  frames.push({ phase: "done", activeLine: 6, pythonLine: 6, message: `${count} occurrences give ${count} * ${count + 1} / 2 = ${result} substrings.`, index: -1, matches: [...matches], count });
+  frames.push({ phase: "done", activeLine: L('return count'), pythonLine: 6, message: `${count} occurrences give ${count} * ${count + 1} / 2 = ${result} substrings.`, index: -1, matches: [...matches], count });
   return { input, result, frames };
 }

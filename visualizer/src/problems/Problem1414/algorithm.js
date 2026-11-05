@@ -21,14 +21,14 @@ export function buildTrace(k) {
   let remaining = k
   const picks = []
   const frames = [{
-    phase: 'start', activeLine: L('fibs = [1, 2'), pythonLine: P('fibs = [1, 2]'),
+    phase: 'start', activeLine: L('const fibs'), pythonLine: P('fibs = [1, 2]'),
     snapshot: { remaining, picks: [], fibs: small, chosen: null },
     message: `Target ${k}. The Fibonacci values not above it are ${small.join(', ')}.`,
   }]
   while (remaining > 0) {
     const chosen = small.filter(f => f <= remaining).at(-1)
     frames.push({
-      phase: 'inspect', activeLine: L('chosen = largest'), pythonLine: P('f = max('),
+      phase: 'inspect', activeLine: L('const chosen ='), pythonLine: P('f = max('),
       snapshot: { remaining, picks: [...picks], fibs: small, chosen },
       message: `Remaining ${remaining}: the largest Fibonacci value not above it is ${chosen}.`,
     })
@@ -42,22 +42,25 @@ export function buildTrace(k) {
   }
   const result = picks.length
   frames.push({
-    phase: 'done', activeLine: L('return len(picks)'), pythonLine: P('return len(picks)'),
+    phase: 'done', activeLine: L('return picks.length'), pythonLine: P('return len(picks)'),
     snapshot: { remaining: 0, picks: [...picks], fibs: small, chosen: null },
     message: `${picks.join(' + ')} = ${k}, using ${result} Fibonacci number${result === 1 ? '' : 's'}.`,
   })
   return { input: k, result, frames }
 }
 
-export const code = `fewest Fibonacci numbers summing to k:
-  fibs = [1, 2, 3, 5, ...] up to k
-  picks = []
-  remaining = k
-  while remaining > 0:
-    chosen = largest value in fibs that is at most remaining
-    picks.append(chosen)
+export const code = `function findMinFibonacciNumbers(k) {
+  const fibs = [1, 2]
+  while (fibs.at(-1) <= k) fibs.push(fibs.at(-1) + fibs.at(-2))
+  let remaining = k
+  const picks = []
+  while (remaining > 0) {
+    const chosen = fibs.filter(f => f <= remaining).at(-1)
+    picks.push(chosen)
     remaining -= chosen
-  return len(picks)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+  }
+  return picks.length
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def min_fib_count(k):
     fibs = [1, 2]

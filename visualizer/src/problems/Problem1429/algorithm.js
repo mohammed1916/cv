@@ -13,33 +13,48 @@ export function buildTrace({ ops }) {
   const counts = new Map()
   const order = []
   const answers = []
-  const frames = [{ phase: 'start', pythonLine: PL('counts = {}'), activeLine: L('start with no counts'), state: [], message: 'No numbers have been added.' }]
+  const frames = [{ phase: 'start', pythonLine: PL('counts = {}'), activeLine: L('const counts'), state: [], message: 'No numbers have been added.' }]
   for (const op of ops) {
     if (op[0] === 'add') {
       const v = op[1]
       counts.set(v, (counts.get(v) || 0) + 1)
       if (counts.get(v) === 1) order.push(v)
-      frames.push({ phase: 'add', pythonLine: PL('order.append(op[1])'), activeLine: L('count it and remember'), state: order.map(x => `${x} seen ${counts.get(x)}x`), message: `Add ${v}; it now appears ${counts.get(v)} time${counts.get(v) === 1 ? '' : 's'}.` })
+      frames.push({ phase: 'add', pythonLine: PL('order.append(v)'), activeLine: L('counts.set(v'), state: order.map(x => `${x} seen ${counts.get(x)}x`), message: `Add ${v}; it now appears ${counts.get(v)} time${counts.get(v) === 1 ? '' : 's'}.` })
     } else {
       let answer = -1
       for (const v of order) {
         if (counts.get(v) === 1) { answer = v; break }
       }
       answers.push(answer)
-      frames.push({ phase: 'first', pythonLine: PL('for v in order'), activeLine: L('scan the remembered values'), state: order.map(x => `${x} seen ${counts.get(x)}x`), message: `The first unique value is ${answer}.` })
+      frames.push({ phase: 'first', pythonLine: PL('for v in order'), activeLine: L('for (const v of order)'), state: order.map(x => `${x} seen ${counts.get(x)}x`), message: `The first unique value is ${answer}.` })
     }
   }
-  frames.push({ phase: 'done', pythonLine: PL('return answers'), activeLine: L('return the answers'), state: order.map(x => `${x} seen ${counts.get(x)}x`), message: 'All operations are finished.' })
+  frames.push({ phase: 'done', pythonLine: PL('return answers'), activeLine: L('return answers'), state: order.map(x => `${x} seen ${counts.get(x)}x`), message: 'All operations are finished.' })
   return { input: { ops }, result: answers, frames }
 }
 
-export const code = `first unique number in a stream
-  start with no counts
-  for each operation in order
-    if the operation adds a value then count it and remember its first sighting
-    otherwise scan the remembered values in order for one with count one
-      record the answer, or -1 when none exists
-  return the answers`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function firstUnique(ops) {
+  const counts = new Map()
+  const order = []
+  const answers = []
+  for (const op of ops) {
+    if (op[0] === 'add') {
+      const v = op[1]
+      counts.set(v, (counts.get(v) || 0) + 1)
+      if (counts.get(v) === 1) order.push(v)
+    } else {
+      let answer = -1
+      for (const v of order) {
+        if (counts.get(v) === 1) {
+          answer = v
+          break
+        }
+      }
+      answers.push(answer)
+    }
+  }
+  return answers
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def first_unique(ops):
@@ -48,16 +63,20 @@ export const python = `def first_unique(ops):
     answers = []
     for op in ops:
         if op[0] == "add":
-            counts[op[1]] = counts.get(op[1], 0) + 1
-            if counts[op[1]] == 1:
-                order.append(op[1])
+            v = op[1]
+            counts[v] = counts.get(v, 0) + 1
+            if counts[v] == 1: order.append(v)
         else:
             answer = -1
             for v in order:
                 if counts[v] == 1:
                     answer = v
                     break
+
+
             answers.append(answer)
+
+
     return answers
 `
 const PL = s => python.split('\n').findIndex(l => l.includes(s)) + 1

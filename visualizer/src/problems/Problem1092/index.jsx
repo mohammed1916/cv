@@ -1,22 +1,14 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import DPDependencyView from '../../components/shared/DPDependencyView'
-import { buildTrace, parseInput, code, python } from './algorithm'
+import { buildTrace, parseInput, code, python, phases, inputLabel, complexity, examples } from './algorithm'
 
 const definition = {
-  phases: [
-    { id: 'start', label: 'Table', description: 'Set up the border values of the table.' },
-    { id: 'fill', label: 'Fill cell', description: 'Each cell uses its diagonal or its smaller neighbour.' },
-    { id: 'walk', label: 'Walk', description: 'Emit characters from the top-left corner along shortest moves.' },
-    { id: 'done', label: 'Complete', description: 'Report the supersequence.' },
-  ],
+  phases,
   parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'Two strings as JSON: str1, str2',
+  inputLabel,
   url: 'https://leetcode.com/problems/shortest-common-supersequence/',
-  complexity: 'O(n * m) time and O(n * m) space for the table. The visualization caps each string at 8 letters.',
-  examples: [
-    { label: 'Example 1', input: '{"str1":"abac","str2":"cab"}' },
-    { label: 'Example 2', input: '{"str1":"aaaa","str2":"aa"}' },
-  ],
+  complexity,
+  examples,
 }
 
 export default function ShortestCommonSupersequence() {

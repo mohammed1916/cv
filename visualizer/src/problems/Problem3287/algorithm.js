@@ -1,17 +1,31 @@
 const CODE = [
-  "FUNCTION maxSequenceValue(nums, k)",
-  "    n ← length(nums)",
-  "    pre[i][0] ← {0} for every i; pre[0][c] ← {} for c > 0",
-  "    FOR i FROM 1 TO n",
-  "        FOR c FROM 1 TO k",
-  "            pre[i][c] ← pre[i − 1][c] ∪ { a OR nums[i − 1] : a in pre[i − 1][c − 1] }",
-  "    suf[i][c] ← the same rule computed from the right end of nums",
-  "    best ← 0",
-  "    FOR split FROM k TO n − k",
-  "        FOR each a in pre[split][k] and b in suf[split][k]: best ← max(best, a XOR b)",
-  "    RETURN best",
+  "function maxSequenceValue(nums, k) {",
+  "  const n = nums.length",
+  "  const pre = Array.from({ length: n + 1 }, () => Array.from({ length: k + 1 }, () => new Set()))",
+  "  for (let i = 0; i <= n; i++) pre[i][0].add(0)",
+  "  for (let i = 1; i <= n; i++) {",
+  "    for (let c = 1; c <= k; c++) {",
+  "      for (const a of pre[i - 1][c]) pre[i][c].add(a)",
+  "      for (const a of pre[i - 1][c - 1]) pre[i][c].add(a | nums[i - 1])",
+  "    }",
+  "  }",
+  "  const suf = Array.from({ length: n + 1 }, () => Array.from({ length: k + 1 }, () => new Set()))",
+  "  for (let i = 0; i <= n; i++) suf[i][0].add(0)",
+  "  for (let i = n - 1; i >= 0; i--) {",
+  "    for (let c = 1; c <= k; c++) {",
+  "      for (const b of suf[i + 1][c]) suf[i][c].add(b)",
+  "      for (const b of suf[i + 1][c - 1]) suf[i][c].add(b | nums[i])",
+  "    }",
+  "  }",
+  "  let best = 0",
+  "  for (let split = k; split <= n - k; split++) {",
+  "    for (const a of pre[split][k]) for (const b of suf[split][k]) best = Math.max(best, a ^ b)",
+  "  }",
+  "  return best",
+  "}",
 ];
 export const code = CODE.map((text, index) => ({ line: index + 1, text }));
+const js = text => CODE.findIndex(line => line.includes(text)) + 1;
 export const python = `def maxSequenceValue(nums, k):
     n = len(nums)
     pre = [[set() for _ in range(k + 1)] for _ in range(n + 1)]
@@ -33,7 +47,7 @@ export const python = `def maxSequenceValue(nums, k):
                 best = max(best, a ^ b)
     return best
 `;
-export const pythonLineMap = { 1: 1, 2: 2, 3: 4, 4: 5, 5: 6, 6: 7, 7: 9, 8: 11, 9: 12, 10: 14, 11: 15 };
+export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 5, 5: 6, 6: 7, 7: 8, 8: 8, 9: 8, 10: 8, 11: 9, 12: 10, 13: 11, 14: 13, 15: 14, 16: 14, 17: 14, 18: 15, 19: 16, 20: 19, 21: 19, 22: 20, 23: 20 };
 
 const snapshot = table => table.map(row => row.map(cell => (Array.isArray(cell) ? [...cell] : cell)));
 function emit(frames, table, info, write = false) {
@@ -67,13 +81,13 @@ export function buildTrace(input) {
   const frames = [];
   for (let i = 0; i <= n; i++) { pre[i][0].add(0); table[0][i] = [0]; }
   for (let c = 1; c <= k; c++) table[c][0] = [];
-  emit(frames, table, { phase: "setup", line: 3, row: 0, column: 0, value: [0], message: "Empty picks give OR value 0. Other prefixes of length 0 cannot hold picks." });
+  emit(frames, table, { phase: "setup", line: js("const pre ="), row: 0, column: 0, value: [0], message: "Empty picks give OR value 0. Other prefixes of length 0 cannot hold picks." });
   for (let i = 1; i <= n; i++) {
     for (let c = 1; c <= k; c++) {
       for (const a of pre[i - 1][c]) pre[i][c].add(a);
       for (const a of pre[i - 1][c - 1]) pre[i][c].add(a | nums[i - 1]);
       table[c][i] = sorted(pre[i][c]);
-      emit(frames, table, { phase: "prefix", line: 6, row: c, column: i, value: table[c][i], message: `Prefix ${i} with ${c} picks: OR values {${table[c][i].join(", ")}}.` });
+      emit(frames, table, { phase: "prefix", line: js("for (const a of pre[i - 1][c - 1])"), row: c, column: i, value: table[c][i], message: `Prefix ${i} with ${c} picks: OR values {${table[c][i].join(", ")}}.` });
     }
   }
   for (let i = n; i >= 0; i--) suf[i][0].add(0);
@@ -83,12 +97,12 @@ export function buildTrace(input) {
       for (const b of suf[i + 1][c - 1]) suf[i][c].add(b | nums[i]);
     }
   }
-  emit(frames, table, { phase: "suffix", line: 7, row: k, column: n, value: table[k][n], message: "The matching suffix sets are built from the right the same way (not shown in the table)." });
+  emit(frames, table, { phase: "suffix", line: js("for (const b of suf[i + 1][c - 1])"), row: k, column: n, value: table[k][n], message: "The matching suffix sets are built from the right the same way (not shown in the table)." });
   let best = 0;
   for (let split = k; split <= n - k; split++) {
-    emit(frames, table, { phase: "combine", line: 9, row: k, column: split, value: table[k][split], message: `Split after index ${split - 1}: first half from the prefix, second half from the suffix.` });
+    emit(frames, table, { phase: "combine", line: js("for (let split"), row: k, column: split, value: table[k][split], message: `Split after index ${split - 1}: first half from the prefix, second half from the suffix.` });
     for (const a of pre[split][k]) for (const b of suf[split][k]) best = Math.max(best, a ^ b);
   }
-  emit(frames, table, { phase: "result", line: 11, row: k, column: n, value: best, message: `Return the maximum value ${best}.` });
+  emit(frames, table, { phase: "result", line: js("return best"), row: k, column: n, value: best, message: `Return the maximum value ${best}.` });
   return { input, result: best, frames, rowLabels, columnLabels };
 }

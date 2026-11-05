@@ -8,31 +8,27 @@ export const inputLabel = 'A balanced string of ( and ) characters, 2 to 100 lon
 export const complexity = 'O(n) time and O(n) output space: one pass tracks the depth and assigns each bracket a group.'
 export const examples = [{ label: 'Sample', input: '((())())()' }]
 
-export const code = [
-  'function split_groups(s):',
-  '    depth = 0',
-  '    groups = []',
-  '    for ch in s:',
-  '        if ch is "(":',
-  '            depth = depth + 1',
-  '            append depth mod 2',
-  '        else:',
-  '            append depth mod 2',
-  '            depth = depth - 1',
-  '    return groups',
-].map((text, index) => ({ line: index + 1, text }))
-
-export const python = `def split_groups(s):
-    depth = 0
-    groups = []
-    for ch in s:
-        if ch == '(':
-            depth += 1
-            groups.append(depth % 2)
-        else:
-            groups.append(depth % 2)
-            depth -= 1
-    return groups`
+// Each line of JavaScript is paired with the Python line on the same row.
+const LINES = [
+  ['function splitGroups(s) {', 'def split_groups(s):'],
+  ['  let depth = 0', '    depth = 0'],
+  ['  const groups = []', '    groups = []'],
+  ['  for (const ch of s) {', '    for ch in s:'],
+  ["    if (ch === '(') {", "        if ch == '(':"],
+  ['      depth += 1', '            depth += 1'],
+  ['      groups.push(depth % 2)', '            groups.append(depth % 2)'],
+  ['    } else {', '        else:'],
+  ['      groups.push(depth % 2)', '            groups.append(depth % 2)'],
+  ['      depth -= 1', '            depth -= 1'],
+  ['    }', ''],
+  ['  }', ''],
+  ['  return groups', '    return groups'],
+  ['}', ''],
+]
+export const code = LINES.map(([js], index) => ({ line: index + 1, text: js }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+export const python = LINES.map(([, py]) => py).join('\n')
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const pythonLineMap = Object.fromEntries(code.map(({ line }) => [line, line]))
 
@@ -56,7 +52,7 @@ export function buildTrace(s) {
   const snap = (current, extra = {}) => ({ chars: s, groups: [...groups], depth, current, ...extra })
 
   frames.push({
-    phase: 'start', activeLine: 2,
+    phase: 'start', activeLine: L('let depth = 0'), pythonLine: P('depth = 0'),
     message: `The string has ${s.length} brackets. Start at depth 0; bracket groups are decided one character at a time.`,
     snapshot: snap(-1),
   })
@@ -67,14 +63,14 @@ export function buildTrace(s) {
       depth += 1
       groups.push(depth % 2)
       frames.push({
-        phase: 'inspect', activeLine: 7,
+        phase: 'inspect', activeLine: L("if (ch === '(')"), pythonLine: P("if ch == '('"),
         message: `Character ${i + 1} is an opening bracket. Depth rises to ${depth}, so it joins group ${depth % 2}.`,
         snapshot: snap(i),
       })
     } else {
       groups.push(depth % 2)
       frames.push({
-        phase: 'inspect', activeLine: 9,
+        phase: 'inspect', activeLine: L('} else {'), pythonLine: P('else:'),
         message: `Character ${i + 1} is a closing bracket that closes depth ${depth}, so it joins group ${depth % 2}. Depth then falls to ${depth - 1}.`,
         snapshot: snap(i),
       })
@@ -83,7 +79,7 @@ export function buildTrace(s) {
   }
 
   frames.push({
-    phase: 'done', activeLine: 11,
+    phase: 'done', activeLine: L('return groups'), pythonLine: P('return groups'),
     message: `Return the group labels: ${groups.join(' ')}.`,
     snapshot: snap(s.length, { complete: true }),
   })

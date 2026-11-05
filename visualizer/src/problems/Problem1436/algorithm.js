@@ -8,13 +8,24 @@ const PYTHON = `def destination_city(paths):
     outgoing = set()
     for a, b in paths:
         outgoing.add(a)
+
     for a, b in paths:
-        if b not in outgoing:
-            return b
-    return None`
+        if b not in outgoing: return b
+
+    return None
+`
 
 export const python = PYTHON
-export const code = PYTHON.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function destinationCity(paths) {
+  const outgoing = new Set()
+  for (const [a] of paths) {
+    outgoing.add(a)
+  }
+  for (const [, b] of paths) {
+    if (!outgoing.has(b)) return b
+  }
+  return null
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 export const pythonLineMap = Object.fromEntries(code.map(({ line }) => [line, line]))
 const lineAt = marker => code.find(({ text }) => text.includes(marker)).line
 
@@ -39,7 +50,7 @@ export function buildTrace(paths) {
   const snap = (checking, answer) => ({ roads: paths, outgoing: [...outgoing], checking, answer })
 
   frames.push({
-    phase: 'collect', activeLine: lineAt('outgoing = set()'),
+    phase: 'collect', activeLine: lineAt('const outgoing'),
     message: 'Start with an empty set of cities that have a road leaving them.',
     snapshot: snap(null, null),
   })
@@ -57,7 +68,7 @@ export function buildTrace(paths) {
     const to = paths[i][1]
     const departs = outgoing.has(to)
     frames.push({
-      phase: 'search', activeLine: lineAt('if b not in outgoing'),
+      phase: 'search', activeLine: lineAt('if (!outgoing.has(b))'),
       message: departs
         ? `Road ${i + 1} arrives at ${to}, which is marked as departing. Keep looking.`
         : `Road ${i + 1} arrives at ${to}, which is never marked. That is the destination.`,

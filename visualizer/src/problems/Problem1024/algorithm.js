@@ -8,12 +8,35 @@ export function parseInput(text) {
   return { clips, time }
 }
 
+// Each line of JavaScript is paired with the Python line on the same row.
+const LINES = [
+  ['function videoStitching(clips, time) {', 'def video_stitching(clips, time):'],
+  ['  let covered = 0', '    covered = 0'],
+  ['  let used = 0', '    used = 0'],
+  ['  while (covered < time) {', '    while covered < time:'],
+  ['    let reach = covered', '        reach = covered'],
+  ['    for (const [start, end] of clips) {', '        for start, end in clips:'],
+  ['      if (start <= covered && end > reach) reach = end', '            if start <= covered and end > reach: reach = end'],
+  ['    }', ''],
+  ['    if (reach === covered) return -1', '        if reach == covered: return -1'],
+  ['    covered = reach', '        covered = reach'],
+  ['    used++', '        used += 1'],
+  ['  }', ''],
+  ['  return used', '    return used'],
+  ['}', ''],
+]
+const codeLines = LINES.map(([js]) => js)
+export const code = codeLines.map((text, index) => ({ line: index + 1, text }))
+const L = s => codeLines.findIndex(c => c.includes(s)) + 1
+export const python = LINES.map(([, py]) => py).join('\n')
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 export function buildTrace(input) {
   const { clips, time } = input
   let covered = 0
   let used = 0
   const picked = []
-  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set covered to 0'), viaIndex: -1, covered, used, picked: [], message: `Cover [0, ${time}] starting from 0 with no clips.` }]
+  const frames = [{ phase: 'start', pythonLine: P('covered = 0'), activeLine: L('let covered = 0'), viaIndex: -1, covered, used, picked: [], message: `Cover [0, ${time}] starting from 0 with no clips.` }]
   while (covered < time) {
     let reach = covered
     let viaIndex = -1
@@ -21,41 +44,14 @@ export function buildTrace(input) {
       if (start <= covered && end > reach) { reach = end; viaIndex = index }
     })
     if (reach === covered) {
-      frames.push({ phase: 'stuck', pythonLine: 10, activeLine: L('if reach is still covered'), viaIndex: -1, covered, used, picked: [...picked], message: `No clip starts at or before ${covered} and reaches past it, so the range cannot be covered.` })
+      frames.push({ phase: 'stuck', pythonLine: P('return -1'), activeLine: L('if (reach === covered)'), viaIndex: -1, covered, used, picked: [...picked], message: `No clip starts at or before ${covered} and reaches past it, so the range cannot be covered.` })
       return { input, result: -1, frames }
     }
     used += 1
     covered = reach
     picked.push(viaIndex)
-    frames.push({ phase: 'pick', pythonLine: 11, activeLine: L('set covered to reach'), viaIndex, covered, used, picked: [...picked], message: `Take clip [${clips[viaIndex].join(', ')}]; coverage now reaches ${covered}.` })
+    frames.push({ phase: 'pick', pythonLine: P('covered = reach'), activeLine: L('covered = reach'), viaIndex, covered, used, picked: [...picked], message: `Take clip [${clips[viaIndex].join(', ')}]; coverage now reaches ${covered}.` })
   }
-  frames.push({ phase: 'done', pythonLine: 13, activeLine: L('return used'), viaIndex: -1, covered, used, picked: [...picked], message: `Coverage reaches ${covered} with ${used} clips.` })
+  frames.push({ phase: 'done', pythonLine: P('return used'), activeLine: L('return used'), viaIndex: -1, covered, used, picked: [...picked], message: `Coverage reaches ${covered} with ${used} clips.` })
   return { input, result: used, frames }
 }
-
-export const code = `minimum clips to cover from 0 to time:
-  set covered to 0 and used to 0
-  while covered is less than time
-    set reach to covered
-    for each clip [start, end]
-      if start is at most covered and end is greater than reach then set reach to end
-    if reach is still covered then return -1
-    set covered to reach
-    add one to used
-  return used`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-
-export const python = `def video_stitching(clips, time):
-    covered = 0
-    used = 0
-    while covered < time:
-        reach = covered
-        for start, end in clips:
-            if start <= covered and end > reach:
-                reach = end
-        if reach == covered:
-            return -1
-        covered = reach
-        used += 1
-    return used
-`

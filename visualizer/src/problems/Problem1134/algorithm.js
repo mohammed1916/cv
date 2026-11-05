@@ -20,13 +20,15 @@ export function parseInput(text) {
   return { n: obj.n }
 }
 
-export const code = `is armstrong (n):
-  digits = the decimal digits of n
-  k = number of digits
-  total = 0
-  for each digit d in digits:
-    total = total + d raised to the power k
-  return total equals n`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function isArmstrong(n) {
+  const digits = String(n).split('').map(Number)
+  const k = digits.length
+  let total = 0
+  for (const d of digits) {
+    total += d ** k
+  }
+  return total === n
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def is_armstrong(n):
     digits = str(n)
@@ -57,14 +59,14 @@ export function buildTrace(input) {
     const term = d ** k
     total += term
     frames.push({
-      phase: 'power', activeLine: 5, pythonLine: P('total += int(d)'),
+      phase: 'power', activeLine: 6, pythonLine: P('total += int(d)'),
       message: `Digit ${d} contributes ${d}^${k} = ${term}. The total is now ${total}.`,
       snapshot: { n, digits, k, total, current: index },
     })
   })
   const isArmstrong = total === n
   frames.push({
-    phase: 'done', activeLine: 6, pythonLine: P('return total == n'),
+    phase: 'done', activeLine: 8, pythonLine: P('return total == n'),
     message: isArmstrong ? `The total ${total} equals ${n}, so it is an Armstrong number.` : `The total ${total} differs from ${n}, so it is not an Armstrong number.`,
     snapshot: { n, digits, k, total, current: null },
   })

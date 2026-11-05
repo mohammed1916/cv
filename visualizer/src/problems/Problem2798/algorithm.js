@@ -1,17 +1,25 @@
-export const code = [
-  { line: 1, text: "count = 0" },
-  { line: 2, text: "for each worked in hours" },
-  { line: 3, text: "if worked is at least target" },
-  { line: 4, text: "count += 1" },
-  { line: 5, text: "return count" },
+const JS = [
+  'function numberOfEmployeesWhoMetTarget(hours, target) {',
+  '  let count = 0',
+  '  for (const worked of hours) {',
+  '    if (worked >= target) {',
+  '      count += 1',
+  '    }',
+  '  }',
+  '  return count',
+  '}',
 ]
+export const code = JS.map((text, index) => ({ line: index + 1, text }))
+const L = s => JS.findIndex(t => t.includes(s)) + 1
 
-export const python = `def numberOfEmployeesWhoMetTarget(hours, target):
+const PY = `def numberOfEmployeesWhoMetTarget(hours, target):
     count = 0
     for worked in hours:
         if worked >= target:
             count += 1
     return count`
+export const python = PY
+const P = s => PY.split('\n').findIndex(t => t.includes(s)) + 1
 
 export function parseInput(text) {
   const data = JSON.parse(text)
@@ -25,16 +33,16 @@ export function parseInput(text) {
 export function buildTrace({ hours, target }) {
   const frames = []
   let count = 0
-  frames.push({ phase: 'setup', activeLine: 1, pythonLine: 2, index: -1, count, target, met: null, message: 'Start the count at 0.' })
+  frames.push({ phase: 'setup', activeLine: L('let count'), pythonLine: P('count = 0'), index: -1, count, target, met: null, message: 'Start the count at 0.' })
   for (let i = 0; i < hours.length; i++) {
-    frames.push({ phase: 'scan', activeLine: 2, pythonLine: 3, index: i, count, target, met: null, message: `Read employee ${i} with ${hours[i]} hours.` })
+    frames.push({ phase: 'scan', activeLine: L('for (const worked'), pythonLine: P('for worked in hours'), index: i, count, target, met: null, message: `Read employee ${i} with ${hours[i]} hours.` })
     const met = hours[i] >= target
-    frames.push({ phase: 'check', activeLine: 3, pythonLine: 4, index: i, count, target, met, message: met ? `${hours[i]} meets the target ${target}.` : `${hours[i]} is below the target ${target}.` })
+    frames.push({ phase: 'check', activeLine: L('if (worked'), pythonLine: P('if worked >= target'), index: i, count, target, met, message: met ? `${hours[i]} meets the target ${target}.` : `${hours[i]} is below the target ${target}.` })
     if (met) {
       count += 1
-      frames.push({ phase: 'count', activeLine: 4, pythonLine: 5, index: i, count, target, met, message: `Count is now ${count}.` })
+      frames.push({ phase: 'count', activeLine: L('count += 1'), pythonLine: P('count += 1'), index: i, count, target, met, message: `Count is now ${count}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: 5, pythonLine: 6, index: -1, count, target, met: null, result: count, message: `Return ${count}.` })
+  frames.push({ phase: 'done', activeLine: L('return count'), pythonLine: P('return count'), index: -1, count, target, met: null, result: count, message: `Return ${count}.` })
   return { input: { hours, target }, result: count, frames }
 }

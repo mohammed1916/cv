@@ -16,10 +16,11 @@ export function buildTrace(input) {
   const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set result to an empty list'), picked: null, taken: [], result: [], message: 'Pair each name with its height. Nobody has been placed yet.' }]
   while (working.length > 0) {
     let best = 0
+    // find the tallest remaining person
     for (let i = 1; i < working.length; i++) if (working[i].height > working[best].height) best = i
     frames.push({ phase: 'find', pythonLine: 6, activeLine: L('find the tallest'), picked: working[best].index, taken: [...taken], result: [...result], message: `${working[best].name} at ${working[best].height} cm is the tallest remaining.` })
     const [person] = working.splice(best, 1)
-    result.push(person.name)
+    result.push(person.name) // take the name and append it to the result
     taken.push(person.index)
     frames.push({ phase: 'take', pythonLine: 9, activeLine: L('take the name'), picked: person.index, taken: [...taken], result: [...result], message: `Append ${person.name} to the result.` })
   }
@@ -27,14 +28,20 @@ export function buildTrace(input) {
   return { input, result, frames }
 }
 
-export const code = `sort the people from tallest to shortest
-  set result to an empty list
-  pair each name with its height in a working list
-  repeat while the working list is not empty
-    find the tallest remaining person
-    take the name of that person and append it to the result
-  return result`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function sortThePeople(names, heights) {
+  const working = names.map((name, index) => ({ name, height: heights[index], index }))
+  const result = [] // set result to an empty list
+  while (working.length > 0) {
+    let best = 0
+    // find the tallest remaining person
+    for (let i = 1; i < working.length; i++) if (working[i].height > working[best].height) best = i
+    const [person] = working.splice(best, 1)
+    result.push(person.name) // take the name and append it to the result
+  }
+  return result
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def sort_the_people(names, heights):
     result = []

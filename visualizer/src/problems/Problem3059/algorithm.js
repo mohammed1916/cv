@@ -1,4 +1,4 @@
-// Knowledge-derived teaching model. The sample table is invented for this visualization.
+// Teaching teaching model. The sample table is invented for this visualization.
 // Teaching rule: keep emails whose lower-cased domain ends in .com, then count the rows for each domain.
 export const sql = `SELECT LOWER(SUBSTRING(email FROM POSITION('@' IN email) + 1)) AS domain,
        COUNT(*) AS cnt

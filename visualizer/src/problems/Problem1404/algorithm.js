@@ -20,7 +20,7 @@ export function buildTrace(bits) {
   let carry = 0
   const snap = (index, value, extra = {}) => ({ bits, index, value, carry, steps, ...extra })
   const frames = [{
-    phase: 'start', activeLine: L('steps = 0'), pythonLine: PY('steps = 0'), snapshot: snap(null, null),
+    phase: 'start', activeLine: L('let steps = 0'), pythonLine: PY('steps = 0'), snapshot: snap(null, null),
     message: `Binary ${bits}. Scan from the last digit toward the second digit, tracking a carry from any add-one step.`,
   }]
   for (let i = n - 1; i >= 1; i--) {
@@ -29,14 +29,14 @@ export function buildTrace(bits) {
       steps += 2
       carry = 1
       frames.push({
-        phase: 'odd', activeLine: L('value is 1'), pythonLine: PY('if value == 1'), snapshot: snap(i, value),
+        phase: 'odd', activeLine: L('value === 1'), pythonLine: PY('if value == 1'), snapshot: snap(i, value),
         message: `Digit ${i} with carry gives effective bit 1, which is odd. Add one (carry 1), then halve. Steps so far: ${steps}.`,
       })
     } else {
       steps += 1
       carry = value / 2
       frames.push({
-        phase: 'even', activeLine: L('else:'), pythonLine: PY('else:'), snapshot: snap(i, value),
+        phase: 'even', activeLine: L('} else {'), pythonLine: PY('else:'), snapshot: snap(i, value),
         message: value === 0
           ? `Digit ${i} is 0 with no carry, so the number is even. Halve once. Steps so far: ${steps}.`
           : `Digit ${i} is 1 with carry 1, so the effective bit is 0 and the number is even. Halve once. Steps so far: ${steps}.`,
@@ -46,7 +46,7 @@ export function buildTrace(bits) {
   if (carry === 1) {
     steps += 1
     frames.push({
-      phase: 'carry', activeLine: L('if carry is 1'), pythonLine: PY('if carry:'), snapshot: snap(null, null),
+      phase: 'carry', activeLine: L('carry === 1'), pythonLine: PY('if carry:'), snapshot: snap(null, null),
       message: `The leading 1 still carries, which needs one more add-one step. Steps: ${steps}.`,
     })
   }
@@ -57,14 +57,22 @@ export function buildTrace(bits) {
   return { input: bits, result: steps, frames }
 }
 
-export const code = `steps to reduce binary string s to one:
-  steps = 0, carry = 0
-  for each bit from the last digit down to the second digit:
-    value = bit + carry
-    if value is 1: steps = steps + 2, carry = 1 (add one, then halve)
-    else: steps = steps + 1, carry = value / 2 (halve only)
-  if carry is 1: steps = steps + 1
-  return steps`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function numSteps(s) {
+  let steps = 0
+  let carry = 0
+  for (let i = s.length - 1; i >= 1; i--) {
+    const value = Number(s[i]) + carry
+    if (value === 1) {
+      steps += 2
+      carry = 1
+    } else {
+      steps += 1
+      carry = value / 2
+    }
+  }
+  if (carry === 1) steps += 1
+  return steps
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 

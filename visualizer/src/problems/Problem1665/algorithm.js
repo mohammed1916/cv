@@ -15,26 +15,29 @@ export function buildTrace(input) {
   const order = tasks.map((_, i) => i).sort((a, b) => gap(b) - gap(a) || a - b)
   let spent = 0
   let best = 0
-  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('sort the tasks'), task: -1, spent, best, message: 'Sort the tasks by minimum minus actual, largest gap first.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('const order'), task: -1, spent, best, message: 'Sort the tasks by minimum minus actual, largest gap first.' }]
   for (const i of order) {
     const [actual, minimum] = tasks[i]
     const need = spent + minimum
     best = Math.max(best, need)
-    frames.push({ phase: 'task', pythonLine: 6, activeLine: L('larger of best'), task: i, spent, need, best, message: `Task [${actual}, ${minimum}] needs ${need} energy at its start; best is ${best}.` })
+    frames.push({ phase: 'task', pythonLine: 6, activeLine: L('best = Math.max'), task: i, spent, need, best, message: `Task [${actual}, ${minimum}] needs ${need} energy at its start; best is ${best}.` })
     spent += actual
-    frames.push({ phase: 'spend', pythonLine: 7, activeLine: L('add actual to spent'), task: i, spent, need, best, message: `Finishing the task spends ${actual}; ${spent} spent so far.` })
+    frames.push({ phase: 'spend', pythonLine: 7, activeLine: L('spent += actual'), task: i, spent, need, best, message: `Finishing the task spends ${actual}; ${spent} spent so far.` })
   }
   frames.push({ phase: 'done', pythonLine: 8, activeLine: L('return best'), task: -1, spent, best, message: `Minimum initial energy: ${best}.` })
   return { input, result: best, frames }
 }
 
-export const code = `minimum initial energy to finish all tasks:
-  sort the tasks by minimum minus actual, largest first
-  set spent to 0 and best to 0
-  for each task in that order
-    set best to the larger of best and spent plus minimum
-    add actual to spent
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minimumInitialEnergy(tasks) {
+  const order = [...tasks].sort((p, q) => (q[1] - q[0]) - (p[1] - p[0]))
+  let spent = 0
+  let best = 0
+  for (const [actual, minimum] of order) {
+    best = Math.max(best, spent + minimum)
+    spent += actual
+  }
+  return best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def minimum_initial_energy(tasks):

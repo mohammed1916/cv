@@ -8,7 +8,7 @@ export function parseInput(text) {
 }
 export function buildTrace(board) {
   const start = board.flat().join('')
-  const frames = [{ phase: 'start', activeLine: L('queue = new queue'), pythonLine: 7, state: start, dist: 0, queueSize: 1, seen: 1, added: [], message: `Encode the board as "${start}". BFS explores boards by number of moves, so the first time we pop "${TARGET}" is the shortest.` }]
+  const frames = [{ phase: 'start', activeLine: L('const queue = [[start, 0]]'), pythonLine: 7, state: start, dist: 0, queueSize: 1, seen: 1, added: [], message: `Encode the board as "${start}". BFS explores boards by number of moves, so the first time we pop "${TARGET}" is the shortest.` }]
   const seen = new Set([start])
   const queue = [[start, 0]]
   let head = 0
@@ -17,7 +17,7 @@ export function buildTrace(board) {
     const [s, d] = queue[head++]
     if (s === TARGET) {
       result = d
-      frames.push({ phase: 'solved', activeLine: L('if s equals target'), pythonLine: 12, state: s, dist: d, queueSize: queue.length - head, seen: seen.size, added: [], message: `Dequeued the solved board after ${d} moves.` })
+      frames.push({ phase: 'solved', activeLine: L("if (s === '123450')"), pythonLine: 12, state: s, dist: d, queueSize: queue.length - head, seen: seen.size, added: [], message: `Dequeued the solved board after ${d} moves.` })
       break
     }
     const z = s.indexOf('0')
@@ -28,28 +28,35 @@ export function buildTrace(board) {
       const key = t.join('')
       if (!seen.has(key)) { seen.add(key); queue.push([key, d + 1]); added.push(key) }
     }
-    frames.push({ phase: 'expand', activeLine: L('for each neighbour j'), pythonLine: 14, state: s, dist: d, queueSize: queue.length - head, seen: seen.size, added, message: `Dequeue "${s}" (${d} moves). Slide the blank from cell ${z} into its neighbours ${NEIGHBORS[z].join(', ')}: ${added.length ? `${added.length} new board${added.length > 1 ? 's' : ''} (${added.join(', ')}) queued at ${d + 1} moves` : 'all already seen'}.` })
+    frames.push({ phase: 'expand', activeLine: L('for (const j of NEIGHBORS[z])'), pythonLine: 14, state: s, dist: d, queueSize: queue.length - head, seen: seen.size, added, message: `Dequeue "${s}" (${d} moves). Slide the blank from cell ${z} into its neighbours ${NEIGHBORS[z].join(', ')}: ${added.length ? `${added.length} new board${added.length > 1 ? 's' : ''} (${added.join(', ')}) queued at ${d + 1} moves` : 'all already seen'}.` })
   }
   if (result === -1) frames.push({ phase: 'done', activeLine: L('return -1'), pythonLine: 21, state: start, dist: -1, queueSize: 0, seen: seen.size, added: [], message: `Queue exhausted after visiting ${seen.size} boards without reaching "${TARGET}". Unsolvable: return -1.` })
-  else frames.push({ phase: 'done', activeLine: L('then return d'), pythonLine: 12, state: TARGET, dist: result, queueSize: queue.length - head, seen: seen.size, added: [], message: `Minimum number of moves: ${result}.` })
+  else frames.push({ phase: 'done', activeLine: L("if (s === '123450')"), pythonLine: 12, state: TARGET, dist: result, queueSize: queue.length - head, seen: seen.size, added: [], message: `Minimum number of moves: ${result}.` })
   return { input: board, result, frames }
 }
-export const code = `function slidingPuzzle(board):
-  start = the 6 cells read row by row as a string
-  target = "123450"
-  nbr = the neighbouring cell positions of each cell
-  queue = new queue holding (start, 0)
-  seen = {start}
-  while the queue is not empty:
-    take the oldest (s, d) from the front of queue
-    if s equals target then return d
-    z = position of the blank "0" in s
-    for each neighbour j of z in nbr:
-      t = s with the blank and the tile at j swapped
-      if t is not seen then
-        mark t as seen
-        append (t, d + 1) to the back of queue
-  return -1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function slidingPuzzle(board) {
+  const NEIGHBORS = [[1, 3], [0, 2, 4], [1, 5], [0, 4], [1, 3, 5], [2, 4]]
+  const start = board.flat().join('')
+  const queue = [[start, 0]]
+  const seen = new Set([start])
+  for (let head = 0; head < queue.length; head++) {
+    const [s, d] = queue[head]
+    if (s === '123450') return d
+    const z = s.indexOf('0')
+    for (const j of NEIGHBORS[z]) {
+      const t = [...s]
+      const tile = t[j]
+      t[z] = tile
+      t[j] = '0'
+      const key = t.join('')
+      if (!seen.has(key)) {
+        seen.add(key)
+        queue.push([key, d + 1])
+      }
+    }
+  }
+  return -1
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `from collections import deque

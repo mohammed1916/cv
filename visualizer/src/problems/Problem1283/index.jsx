@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -22,6 +23,8 @@ export default function SmallestDivisor() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Values" length={run.input.nums.length} valueAt={i => run.input.nums[i]} active={-1}
       roleAt={() => ''} />
+    <AnswerRangeBar title="Divisor search" min={1} max={Math.max(...run.input.nums)} low={step.low} high={step.high} probe={step.mid}
+      verdict={step.mid === null ? null : step.sum <= run.input.threshold} />
     <output aria-label="Search range">{step.mid === null ? `Range ${step.low} to ${step.high}` : `Range ${step.low} to ${step.high}, divisor ${step.mid} gives sum ${step.sum} against ${run.input.threshold}`}</output>
   </>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>

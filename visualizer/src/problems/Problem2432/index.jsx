@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/the-employee-that-worked-on-the-longest-task/',
   complexity: 'O(m) time and O(1) extra space for m logs.',
   examples: [
-    { label: 'Example 1', input: '{"n":10,"logs":[[0,3],[2,5],[0,9],[1,15]]}' },
-    { label: 'Tie', input: '{"n":2,"logs":[[0,5],[1,10]]}' },
+    { label: 'Clear winner', input: '{"n":3,"logs":[[2,4],[0,7],[1,9],[2,12]]}' },
+    { label: 'Tie', input: '{"n":3,"logs":[[1,6],[0,9],[2,12]]}' },
   ],
 }
 

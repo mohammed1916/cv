@@ -46,7 +46,7 @@ export function buildTrace(input) {
       result: 0,
       frames: [
         { phase: 'start', activeLine: 2, pythonLine: P('if n == 0'), message: 'n is 0, so the answer is the first term, 0.', snapshot: { n, window: [], index: 0 } },
-        { phase: 'done', activeLine: 1, pythonLine: P('return 0'), message: 'The answer is 0.', snapshot: { n, window: [0], index: 0 } },
+        { phase: 'done', activeLine: 2, pythonLine: P('return 0'), message: 'The answer is 0.', snapshot: { n, window: [0], index: 0 } },
       ],
     }
   }
@@ -72,7 +72,7 @@ export function buildTrace(input) {
   }
   const result = window[2]
   frames.push({
-    phase: 'done', activeLine: 6, pythonLine: P('return window[2]'),
+    phase: 'done', activeLine: 7, pythonLine: P('return window[2]'),
     message: `The window ends with T${n} = ${result}.`,
     snapshot: { n, window: [...window], index: n },
   })

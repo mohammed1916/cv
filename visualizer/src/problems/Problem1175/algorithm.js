@@ -8,13 +8,13 @@ export const phases = [
 
 const MOD = 1000000007
 const CODE = [
-  'function countArrangements(n):',
-  '  primeCount = 0',
-  '  for x from 2 to n:',
-  '    if isPrime(x): primeCount += 1',
-  '  primeSlots = factorial(primeCount) mod MOD',
-  '  otherSlots = factorial(n - primeCount) mod MOD',
-  '  return primeSlots * otherSlots mod MOD',
+  'function countArrangements(n) {',
+  '  let primeCount = 0',
+  '  for (let x = 2; x <= n; x++) if (isPrime(x)) primeCount++',
+  '  const primeSlots = factorial(primeCount) % MOD',
+  '  const otherSlots = factorial(n - primeCount) % MOD',
+  '  return Number((BigInt(primeSlots) * BigInt(otherSlots)) % 1000000007n)',
+  '}',
 ]
 const PY = [
   'def num_prime_arrangements(n):',
@@ -30,7 +30,7 @@ const PY = [
 export const code = CODE.map((text, index) => ({ line: index + 1, text }))
 export const python = PY.join('\n')
 
-const L = { init: 2, test: 4, primes: 5, others: 6, ret: 7 }
+const L = { init: 2, test: 3, primes: 4, others: 5, ret: 6 }
 const P = { init: 2, test: 4, primes: 6, others: 7, ret: 8 }
 
 export function parseInput(text) {

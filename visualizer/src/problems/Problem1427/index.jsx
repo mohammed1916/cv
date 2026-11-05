@@ -25,7 +25,7 @@ export default function PerformStringShifts() {
         {[...rotated].map((ch, i) => <div key={i} style={{
           minWidth: 36, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
           border: `1px solid ${r && i < r ? 'var(--text)' : 'var(--border)'}`,
-          background: r && i < r ? '#fde68a' : 'transparent', color: '#1c1917',
+          background: r && i < r ? 'var(--primary)' : 'transparent', color: r && i < r ? '#fff' : 'var(--text)',
         }}>{ch}</div>)}
       </div>
       <p>{opIndex !== null && opIndex !== undefined ? `Operation ${opIndex + 1}: ${direction === 1 ? 'right' : 'left'} by ${amount}.` : 'Operations not applied yet.'}</p>

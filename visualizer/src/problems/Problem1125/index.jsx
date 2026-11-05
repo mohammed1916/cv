@@ -16,7 +16,7 @@ const definition = {
   url: 'https://leetcode.com/problems/smallest-sufficient-team/',
   complexity: 'O(people * 2^skills) time. The visualization caps input at 6 skills and 8 people.',
   examples: [
-    { label: 'Example 1', input: '{"req_skills":["java","nodejs","reactjs"],"people":[["java"],["nodejs"],["nodejs","reactjs"]]}' },
+    { label: 'Example 1', input: '{"req_skills":["go","rust","sql"],"people":[["go"],["rust","sql"],["sql"]]}' },
     { label: 'Single expert', input: '{"req_skills":["a","b"],"people":[["a"],["a","b"],["b"]]}' },
   ],
 }

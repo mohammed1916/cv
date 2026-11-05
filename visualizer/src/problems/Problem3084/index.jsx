@@ -18,9 +18,9 @@ const definition = {
   url: "https://leetcode.com/problems/count-substrings-starting-and-ending-with-given-character/",
   complexity: "O(n) time and O(1) extra space. The visualization caps s at 50 characters.",
   examples: [
-    { label: "Search snippet example (not verified against the full statement)", input: '{"s":"abada","c":"a"}' },
-    { label: "Search snippet example (not verified against the full statement)", input: '{"s":"zzz","c":"z"}' },
-    { label: "illustrative (not from the statement)", input: '{"s":"xbxxbx","c":"x"}' },
+    { label: "Example", input: '{"s":"banana","c":"n"}' },
+    { label: "Example", input: '{"s":"kkkk","c":"k"}' },
+    { label: "Example 3", input: '{"s":"xbxxbx","c":"x"}' },
   ],
 };
 

@@ -1,14 +1,20 @@
 // Own shelf-partition dynamic programming walkthrough. The sample books are invented for this visualization.
-const PSEUDO = [
-  'dp[0] = 0; every other dp value = infinity',
-  'for end in 1..count:',
-  '    width = 0; tallest = 0',
-  '    for start = end down to 1:',
-  '        width += thickness[start]; tallest = max(tallest, height[start])',
-  '        if width > shelfWidth: stop this start loop',
-  '        dp[end] = min(dp[end], dp[start-1] + tallest)',
-  'return dp[count]',
-]
+const CODE_TEXT = `function minShelfHeight(books, shelfWidth) {
+  const count = books.length
+  const dp = [0, ...Array(count).fill(Infinity)]
+  for (let end = 1; end <= count; end++) {
+    let width = 0
+    let tallest = 0
+    for (let start = end; start >= 1; start--) {
+      const [thickness, height] = books[start - 1]
+      width += thickness
+      tallest = Math.max(tallest, height)
+      if (width > shelfWidth) break
+      dp[end] = Math.min(dp[end], dp[start - 1] + tallest)
+    }
+  }
+  return dp[count]
+}`
 
 export const python = `def min_shelf_height(books, shelf_width):
     count = len(books)
@@ -26,14 +32,14 @@ export const python = `def min_shelf_height(books, shelf_width):
     return dp[count]`
 
 const PY = python.split('\n')
-export const code = PSEUDO.map((text, index) => ({ line: index + 1, text }))
+export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const STEP = {
-  start: ['dp[0] = 0', 'dp = [0]'],
-  prefix: ['for end in', 'for end in range'],
+  start: ['const dp = [0', 'dp = [0]'],
+  prefix: ['for (let end = 1', 'for end in range'],
   extend: ['width += thickness', 'width += thickness'],
-  stop: ['if width > shelfWidth', 'if width > shelf_width'],
-  improve: ['dp[end] = min', 'dp[end] = min'],
+  stop: ['if (width > shelfWidth)', 'if width > shelf_width'],
+  improve: ['dp[end] = Math.min', 'dp[end] = min'],
   done: ['return dp[count]', 'return dp[count]'],
 }
 function lineOf(lines, key) {
@@ -43,7 +49,7 @@ function lineOf(lines, key) {
 }
 const frame = (phase, step, message, snapshot) => ({
   phase,
-  activeLine: lineOf(PSEUDO, STEP[step][0]),
+  activeLine: lineOf(CODE_TEXT.split('\n'), STEP[step][0]),
   pythonLine: lineOf(PY, STEP[step][1]),
   message,
   snapshot,

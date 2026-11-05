@@ -17,16 +17,15 @@ export function parseInput(text) {
   return { arr1: data.arr1, arr2: data.arr2 }
 }
 
-export const code = [
-  'relative sort(arr1, arr2):',
-  '  count how many times each value appears in arr1',
-  '  result = empty',
-  '  for v in arr2, in order:',
-  '    append v to result, as many times as it was counted, then clear its count',
-  '  for each leftover value v in ascending order:',
-  '    append v to result, as many times as it was counted',
-  '  return result',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function relativeSort(arr1, arr2) {
+  const count = new Map()
+  for (const v of arr1) count.set(v, (count.get(v) ?? 0) + 1)
+  const result = []
+  for (const v of arr2) { for (let k = 0; k < count.get(v); k++) result.push(v); count.delete(v) }
+  const leftovers = [...count.keys()].sort((a, b) => a - b)
+  for (const v of leftovers) { for (let k = 0; k < count.get(v); k++) result.push(v) }
+  return result
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def relative_sort(arr1, arr2):
     count = Counter(arr1)
@@ -40,21 +39,22 @@ export const python = `def relative_sort(arr1, arr2):
 export function buildTrace(input) {
   const { arr1, arr2 } = input
   const frames = []
-  const frame = (phase, line, message, snapshot) => frames.push({ phase, activeLine: line, pythonLine: line, message, snapshot })
+  // Each frame names its JavaScript line (code) and its Python line (python).
+  const frame = (phase, jsLine, pyLine, message, snapshot) => frames.push({ phase, activeLine: jsLine, pythonLine: pyLine, message, snapshot })
   const counts = new Map()
   for (const v of arr1) counts.set(v, (counts.get(v) || 0) + 1)
   const countList = () => [...counts.entries()].sort((a, b) => a[0] - b[0]).map(([value, count]) => ({ value, count }))
   const result = []
   const listed = new Set(arr2)
 
-  frame('start', 1, `Read arr1 (${arr1.length} values) and arr2 (${arr2.length} values). arr2 sets the front of the answer.`, { counts: countList(), result: [], current: null, listed: arr2 })
-  frame('count', 2, 'Every value of arr1 now has a count. Counts are the only state we need to rebuild the array.', { counts: countList(), result: [], current: null, listed: arr2 })
+  frame('start', 2, 2, `Read arr1 (${arr1.length} values) and arr2 (${arr2.length} values). arr2 sets the front of the answer.`, { counts: countList(), result: [], current: null, listed: arr2 })
+  frame('count', 3, 2, 'Every value of arr1 now has a count. Counts are the only state we need to rebuild the array.', { counts: countList(), result: [], current: null, listed: arr2 })
 
   for (const v of arr2) {
     const copies = counts.get(v)
     for (let k = 0; k < copies; k++) result.push(v)
     counts.set(v, 0)
-    frame('place', 5, `Value ${v} is listed first in arr2, so write its ${copies} copies. The answer is now ${result.join(', ')}.`, { counts: countList(), result: [...result], current: v, listed: arr2 })
+    frame('place', 5, 4, `Value ${v} is listed first in arr2, so write its ${copies} copies. The answer is now ${result.join(', ')}.`, { counts: countList(), result: [...result], current: v, listed: arr2 })
   }
 
   const leftovers = [...counts.keys()].filter(v => !listed.has(v) && counts.get(v) > 0).sort((a, b) => a - b)
@@ -62,9 +62,9 @@ export function buildTrace(input) {
     const copies = counts.get(v)
     for (let k = 0; k < copies; k++) result.push(v)
     counts.set(v, 0)
-    frame('tail', 7, `Value ${v} is not in arr2, so it goes after the listed values, in ascending order. ${copies} copies are appended.`, { counts: countList(), result: [...result], current: v, listed: arr2 })
+    frame('tail', 7, 6, `Value ${v} is not in arr2, so it goes after the listed values, in ascending order. ${copies} copies are appended.`, { counts: countList(), result: [...result], current: v, listed: arr2 })
   }
 
-  frame('done', 8, `The rearranged array is ${result.join(', ')}.`, { counts: countList(), result: [...result], current: null, listed: arr2 })
+  frame('done', 8, 8, `The rearranged array is ${result.join(', ')}.`, { counts: countList(), result: [...result], current: null, listed: arr2 })
   return { input, result, frames }
 }

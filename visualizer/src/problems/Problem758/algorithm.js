@@ -21,7 +21,7 @@ function render(s, bold) {
 export function buildTrace(spec) {
   const { s, words } = spec
   const bold = Array(s.length).fill(false)
-  const frames = [{ phase: 'start', activeLine: L('bold = list of False'), pythonLine: 2, at: null, word: null, bold: [...bold], result: null, message: 'Find every occurrence of every word and bold its letters.' }]
+  const frames = [{ phase: 'start', activeLine: L('const bold = Array(s.length)'), pythonLine: 2, at: null, word: null, bold: [...bold], result: null, message: 'Find every occurrence of every word and bold its letters.' }]
   for (const word of words) {
     for (let i = 0; i + word.length <= s.length; i++) {
       if (!s.startsWith(word, i)) continue
@@ -34,19 +34,23 @@ export function buildTrace(spec) {
   return { input: spec, s, result, bold, frames }
 }
 
-export const code = `function addBoldTag(words, s):
-  bold = list of False, one per letter of s
-  for each word in words:
-    for each start index i where word fits in s:
-      if s has word at index i then
-        for k from i to i + length of word - 1:
-          mark letter k of s as bold
-  out = empty string
-  for each index i with letter ch in s:
-    if bold[i] and (i is the first letter or bold[i-1] is false) then append "<b>" to out
-    append ch to out
-    if bold[i] and (i is the last letter or bold[i+1] is false) then append "</b>" to out
-  return out`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function addBoldTag(words, s) {
+  const bold = Array(s.length).fill(false) // bold = list of False, one per letter
+  for (const word of words) {
+    for (let i = 0; i + word.length <= s.length; i++) {
+      if (!s.startsWith(word, i)) continue
+      for (let k = i; k < i + word.length; k++) bold[k] = true // mark letter k of s as bold
+    }
+  }
+  let out = ''
+  for (let i = 0; i < s.length; i++) {
+    if (bold[i] && (i === 0 || !bold[i - 1])) out += '<b>'
+    out += s[i]
+    if (bold[i] && (i === s.length - 1 || !bold[i + 1])) out += '</b>'
+  }
+  return out // return out
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def add_bold_tag(words, s):

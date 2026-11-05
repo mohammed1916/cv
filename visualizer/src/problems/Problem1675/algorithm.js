@@ -9,48 +9,51 @@ export function parseInput(text) {
 export function buildTrace({ nums }) {
   const values = nums.map(x => (x % 2 ? x * 2 : x))
   let best = Infinity
-  const frames = [{ phase: 'start', pythonLine: 7, activeLine: L('double every odd number'), values: [...values], picked: -1, best, message: 'Double every odd number, so each value can now only be halved.' }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('const values = nums.map'), values: [...values], picked: -1, best, message: 'Double every odd number, so each value can now only be halved.' }]
   for (;;) {
     let at = 0
     for (let i = 1; i < values.length; i++) if (values[i] > values[at]) at = i
     const top = values[at]
     const low = Math.min(...values)
     best = Math.min(best, top - low)
-    frames.push({ phase: 'measure', pythonLine: 13, activeLine: L('record the largest minus the smallest'), values: [...values], picked: at, best, message: `Largest ${top}, smallest ${low}, deviation ${top - low}. Best so far ${best}.` })
+    frames.push({ phase: 'measure', pythonLine: 10, activeLine: L('best = Math.min(best'), values: [...values], picked: at, best, message: `Largest ${top}, smallest ${low}, deviation ${top - low}. Best so far ${best}.` })
     if (top % 2) break
     values[at] = top / 2
-    frames.push({ phase: 'halve', pythonLine: 17, activeLine: L('halve the largest'), values: [...values], picked: at, best, message: `Halve ${top} to ${top / 2}.` })
+    frames.push({ phase: 'halve', pythonLine: 13, activeLine: L('values[top] /= 2'), values: [...values], picked: at, best, message: `Halve ${top} to ${top / 2}.` })
   }
-  frames.push({ phase: 'done', pythonLine: 19, activeLine: L('return best'), values: [...values], picked: -1, best, message: `Minimum deviation: ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 15, activeLine: L('return best'), values: [...values], picked: -1, best, message: `Minimum deviation: ${best}.` })
   return { input: { nums }, result: best, frames }
 }
 
-export const code = `minimize the deviation of nums, where deviation is largest minus smallest
-  double every odd number, so each value can only be halved from here
-  repeat
-    find the largest value and record the largest minus the smallest as a candidate
-    if the largest value is odd then stop
-    halve the largest value
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minimizeDeviation(nums) {
+  const values = nums.map(x => (x % 2 ? x * 2 : x))
+  let smallest = Math.min(...values)
+  let best = Infinity
+  for (;;) {
+    let top = 0
+    for (let i = 1; i < values.length; i++) if (values[i] > values[top]) top = i
+    best = Math.min(best, values[top] - smallest)
+    if (values[top] % 2) break
+    values[top] /= 2
+    smallest = Math.min(smallest, values[top])
+  }
+  return best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
-export const python = `import heapq
-
-def minimize_deviation(nums):
-    heap = []
-    smallest = float('inf')
-    for x in nums:
-        v = x * 2 if x % 2 else x
-        heapq.heappush(heap, -v)
-        smallest = min(smallest, v)
+export const python = `def minimize_deviation(nums):
+    values = [x * 2 if x % 2 else x for x in nums]
+    smallest = min(values)
     best = float('inf')
     while True:
-        top = -heap[0]
-        best = min(best, top - smallest)
-        if top % 2:
+        top = 0
+        for i in range(1, len(values)):
+            if values[i] > values[top]:
+                top = i
+        best = min(best, values[top] - smallest)
+        if values[top] % 2:
             break
-        heapq.heappop(heap)
-        heapq.heappush(heap, -(top // 2))
-        smallest = min(smallest, top // 2)
+        values[top] //= 2
+        smallest = min(smallest, values[top])
     return best
 `

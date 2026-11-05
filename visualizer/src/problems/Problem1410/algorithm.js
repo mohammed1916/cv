@@ -20,7 +20,7 @@ export function buildTrace(text) {
   const out = []
   let i = 0
   const frames = [{
-    phase: 'start', activeLine: L('output = ""'), pythonLine: P('out = []'),
+    phase: 'start', activeLine: L('let output'), pythonLine: P('out = []'),
     snapshot: { text, span: null, emitted: '' },
     message: `Read ${text.length} characters once. The output is empty and the scan starts at position 0.`,
   }]
@@ -28,7 +28,7 @@ export function buildTrace(text) {
     const name = NAMES.find(e => text.startsWith(e, i)) ?? null
     const end = name ? i + name.length : i + 1
     frames.push({
-      phase: 'inspect', activeLine: L('entity = supported'), pythonLine: P('entity = next'),
+      phase: 'inspect', activeLine: L('const entity = Object'), pythonLine: P('entity = next'),
       snapshot: { text, span: [i, end], emitted: out.join('') },
       message: name
         ? `Position ${i}: ${name} is a supported entity here, so it decodes to ${ENTITIES[name]}.`
@@ -39,7 +39,7 @@ export function buildTrace(text) {
     i = end
     frames.push({
       phase: 'update',
-      activeLine: name ? L('output += decoded') : L('output += text[i]'),
+      activeLine: name ? L('output += ENTITIES[entity]') : L('output += text[i]'),
       pythonLine: name ? P('out.append(ENTITIES') : P('out.append(text[i])'),
       snapshot: { text, span: [start, end], emitted: out.join('') },
       message: name
@@ -56,18 +56,23 @@ export function buildTrace(text) {
   return { input: text, result, frames }
 }
 
-export const code = `decode each supported entity once, scanning the original text:
-  output = ""
-  i = 0
-  while i < length(text):
-    entity = supported entity starting at text[i], if any
-    if entity is found:
-      output += decoded character of entity
-      i += length of entity
-    else:
+export const code = `const ENTITIES = { '&quot;': '"', '&apos;': "'", '&amp;': '&', '&gt;': '>', '&lt;': '<', '&frasl;': '/' }
+
+function entityParser(text) {
+  let output = ''
+  let i = 0
+  while (i < text.length) {
+    const entity = Object.keys(ENTITIES).find(e => text.startsWith(e, i))
+    if (entity) {
+      output += ENTITIES[entity]
+      i += entity.length
+    } else {
       output += text[i]
       i += 1
-  return output`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    }
+  }
+  return output
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `ENTITIES = {"&quot;": '"', "&apos;": "'", "&amp;": "&", "&gt;": ">", "&lt;": "<", "&frasl;": "/"}
 

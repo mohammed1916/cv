@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-pairs-satisfying-inequality/',
   complexity: 'O(n^2) time for this scan. A Fenwick tree over sorted differences gives O(n log n). The visualization caps input at 14 entries.',
   examples: [
-    { label: 'Example 1', input: '{"nums1":[3,2,5],"nums2":[2,2,1],"diff":2}' },
-    { label: 'Diff 0', input: '{"nums1":[1,2,3],"nums2":[1,1,1],"diff":0}' },
+    { label: 'Spread', input: '{"nums1":[4,1,6],"nums2":[2,2,5],"diff":1}' },
+    { label: 'Zero diff', input: '{"nums1":[0,3,3],"nums2":[1,4,2],"diff":0}' },
   ],
 }
 

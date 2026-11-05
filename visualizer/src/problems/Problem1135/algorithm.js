@@ -34,15 +34,23 @@ export function parseInput(text) {
   return { cities, roads }
 }
 
-export const code = `minimum connection cost (cities, roads):
-  sort roads by cost, cheapest first
-  give each city its own group
-  total = 0; used = 0
-  for each road (a, b, cost) in sorted order:
-    if a and b are in different groups then
-      join the two groups; total = total + cost; used = used + 1
-  if used equals cities - 1 then return total
-  otherwise return -1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minimumCost(cities, roads) {
+  const parent = Array.from({ length: cities + 1 }, (_, i) => i)
+  const find = x => { while (parent[x] !== x) x = parent[x]; return x }
+  const sorted = [...roads].sort((p, q) => p[2] - q[2])
+  let total = 0
+  let used = 0
+  for (const [a, b, cost] of sorted) {
+    const ra = find(a)
+    const rb = find(b)
+    if (ra !== rb) {
+      parent[ra] = rb
+      total += cost
+      used++
+    }
+  }
+  return used === cities - 1 ? total : -1
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def minimum_cost(cities, roads):
     parent = list(range(cities + 1))
@@ -70,13 +78,13 @@ export function buildTrace(input) {
   const find = x => { while (parent[x] !== x) x = parent[x]; return x }
   const snap = (extra = {}) => ({ parent: parent.slice(1), joined: [...extra.joined ?? []], total: extra.total ?? 0, current: extra.current ?? null })
   const frames = [{
-    phase: 'start', activeLine: 3, pythonLine: P('parent = list('),
+    phase: 'start', activeLine: 2, pythonLine: P('parent = list('),
     message: `Start with ${cities} separate ${cities === 1 ? 'city' : 'cities'}.`,
     snapshot: snap(),
   }]
   const sorted = roads.map((road, index) => ({ road, index })).sort((p, q) => p.road[2] - q.road[2] || p.index - q.index)
   frames.push({
-    phase: 'sort', activeLine: 1, pythonLine: P('sorted(roads'),
+    phase: 'sort', activeLine: 4, pythonLine: P('sorted(roads'),
     message: `Sorted roads by cost: ${sorted.map(s => `${s.road[0]}-${s.road[1]} (${s.road[2]})`).join(', ') || 'none'}.`,
     snapshot: snap(),
   })
@@ -86,7 +94,7 @@ export function buildTrace(input) {
     const ra = find(a)
     const rb = find(b)
     frames.push({
-      phase: 'consider', activeLine: 5, pythonLine: P('ra, rb = find'),
+      phase: 'consider', activeLine: 8, pythonLine: P('ra, rb = find'),
       message: `Road ${a}-${b} costs ${cost}. ${ra !== rb ? 'Its ends are in different groups.' : 'Its ends are already in one group.'}`,
       snapshot: snap({ joined: [...joined], total, current: [a, b] }),
     })
@@ -95,13 +103,13 @@ export function buildTrace(input) {
       total += cost
       joined.push([a, b])
       frames.push({
-        phase: 'join', activeLine: 6, pythonLine: P('parent[ra] = rb'),
+        phase: 'join', activeLine: 11, pythonLine: P('parent[ra] = rb'),
         message: `Build road ${a}-${b}. Total cost is now ${total}.`,
         snapshot: snap({ joined: [...joined], total, current: [a, b] }),
       })
     } else {
       frames.push({
-        phase: 'skip', activeLine: 5, pythonLine: P('if ra != rb'),
+        phase: 'skip', activeLine: 10, pythonLine: P('if ra != rb'),
         message: `Skip road ${a}-${b}. It would connect cities that are already linked.`,
         snapshot: snap({ joined: [...joined], total, current: [a, b] }),
       })
@@ -109,7 +117,7 @@ export function buildTrace(input) {
   }
   const result = joined.length === cities - 1 ? total : -1
   frames.push({
-    phase: 'done', activeLine: 7, pythonLine: P('return total if'),
+    phase: 'done', activeLine: 16, pythonLine: P('return total if'),
     message: result === -1 ? `Only ${joined.length} road${joined.length === 1 ? '' : 's'} were built, so some city cannot be reached.` : `All cities are connected with total cost ${result}.`,
     snapshot: snap({ joined: [...joined], total, current: null }),
   })

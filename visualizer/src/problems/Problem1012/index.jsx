@@ -15,12 +15,15 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '20' },
     { label: 'Example 2', input: '100' },
+    { label: 'Example 3', input: '1000' },
   ],
 }
 
 export default function RepeatedDigits() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="Digits of n" length={String(run.input).length} valueAt={index => String(run.input)[index]} active={step.index} />
+    <IndexedSequence label="Digits of n (fixed prefix is marked)" length={String(run.input).length} valueAt={index => String(run.input)[index]} active={step.index}
+      roleAt={index => (index < step.index ? 'prefix' : '')} />
+    <p aria-label="Digits used by the prefix">{`Digits used by the fixed prefix: ${step.used.length ? step.used.join(', ') : 'none'}`}</p>
     <output aria-label="Distinct count">{`Numbers with distinct digits so far: ${step.unique}`}</output>
   </>} renderReasoning={() => <>
     <p>It is easier to count the numbers whose digits are all distinct and subtract them from n.</p>

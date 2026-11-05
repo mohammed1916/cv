@@ -9,7 +9,7 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-equivalent-domino-pairs/',
   complexity: 'O(n) expected time and O(n) space for n dominoes. The visualization caps n at 40.',
   examples: [
-    { label: 'Turned copies', input: '[[1,2],[2,1],[3,4],[1,2]]' },
+    { label: 'Turned copies', input: '[[2,3],[3,2],[4,4],[2,3]]' },
     { label: 'All equal', input: '[[4,4],[4,4],[4,4]]' },
     { label: 'No matches', input: '[[1,2],[3,4],[5,6]]' },
   ],

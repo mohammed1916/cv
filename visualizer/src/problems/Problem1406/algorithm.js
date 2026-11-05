@@ -19,7 +19,7 @@ export function buildTrace(values) {
   const shown = () => best.map(v => (v === -Infinity ? null : v))
   const snap = (start, extra = {}) => ({ values, start, best: shown(), ...extra })
   const frames = [{
-    phase: 'start', activeLine: L('best = list'), pythonLine: PY('best = [0]'), snapshot: snap(null),
+    phase: 'start', activeLine: L('const best = Array'), pythonLine: PY('best = [0]'), snapshot: snap(null),
     message: `${n} stones. best[${n}] = 0 because no stones remain. Fill best from the right end toward stone 0.`,
   }]
   for (let start = n - 1; start >= 0; start--) {
@@ -29,34 +29,39 @@ export function buildTrace(values) {
       total += values[start + take - 1]
       const value = total - best[start + take]
       frames.push({
-        phase: 'option', activeLine: L('total = total +'), pythonLine: PY('total += values'), snapshot: snap(start, { take, total, option: value }),
+        phase: 'option', activeLine: L('total += values'), pythonLine: PY('total += values'), snapshot: snap(start, { take, total, option: value }),
         message: `From stone ${start}, taking ${take} earns ${total}. The opponent then gets advantage ${best[start + take]} from stone ${start + take}, so this option is worth ${value}.`,
       })
       best[start] = Math.max(best[start], value)
     }
     frames.push({
-      phase: 'store', activeLine: L('best[start] = max'), pythonLine: PY('best[start] = max'), snapshot: snap(start),
+      phase: 'store', activeLine: L('best[start] = Math.max'), pythonLine: PY('best[start] = max'), snapshot: snap(start),
       message: `Best advantage for the player to move at stone ${start} is ${best[start]}.`,
     })
   }
   const result = best[0] > 0 ? 'Alice' : best[0] < 0 ? 'Bob' : 'Tie'
   frames.push({
-    phase: 'decide', activeLine: L('if best[0] > 0'), pythonLine: PY("return 'Tie'"), snapshot: snap(0, { winner: result }),
+    phase: 'decide', activeLine: L('if (best[0] > 0)'), pythonLine: PY("return 'Tie'"), snapshot: snap(0, { winner: result }),
     message: `Alice moves first with advantage ${best[0]}. Result: ${result}.`,
   })
   return { input: values, result, frames }
 }
 
-export const code = `stone game (values):
-  n = number of stones; best = list of n+1 zeros
-  for start from n-1 down to 0:
-    total = 0; best[start] = negative infinity
-    for take in 1, 2, 3 while start + take <= n:
-      total = total + values[start + take - 1]
-      best[start] = max(best[start], total - best[start + take])
-  if best[0] > 0: return Alice
-  if best[0] < 0: return Bob
-  return Tie`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function stoneGameIII(values) {
+  const n = values.length
+  const best = Array(n + 1).fill(0)
+  for (let start = n - 1; start >= 0; start--) {
+    best[start] = -Infinity
+    let total = 0
+    for (let take = 1; take <= 3 && start + take <= n; take++) {
+      total += values[start + take - 1]
+      best[start] = Math.max(best[start], total - best[start + take])
+    }
+  }
+  if (best[0] > 0) return 'Alice'
+  if (best[0] < 0) return 'Bob'
+  return 'Tie'
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 

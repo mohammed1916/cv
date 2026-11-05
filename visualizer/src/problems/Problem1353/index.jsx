@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import IntervalView from '../../components/shared/IntervalView'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -23,6 +24,8 @@ export default function MaxEvents() {
     const sorted = run.input.events.map((e, i) => i).sort((a, b) => run.input.events[a][0] - run.input.events[b][0] || run.input.events[a][1] - run.input.events[b][1])
     return <>
       <IndexedSequence label="Events in start-day order" length={sorted.length} valueAt={i => JSON.stringify(run.input.events[sorted[i]])} active={sorted.indexOf(step.index)} roleAt={i => (step.attendedIdx.includes(sorted[i]) ? 'attended' : '')} />
+      <IntervalView title="Events on the day line" closed marker={step.day} markerLabel={`day ${step.day}`}
+        intervals={run.input.events.map(([s, e], i) => ({ start: s, end: e, label: `event ${i}`, role: step.attendedIdx.includes(i) ? 'kept' : 'pending' }))} />
       <output aria-label="Attended">{`Day ${step.day}. Attended: ${step.attended}`}</output>
     </>
   }} renderReasoning={() => <>

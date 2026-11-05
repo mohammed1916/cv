@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/water-bottles-ii/',
   complexity: 'O(answer) time for the drink rounds, which is small for the capped inputs.',
   examples: [
-    { label: 'Example 1', input: '{"numBottles":13,"numExchange":6}' },
-    { label: 'Example 2', input: '{"numBottles":10,"numExchange":3}' },
+    { label: 'Example 1', input: '{"numBottles":7,"numExchange":4}' },
+    { label: 'Example 2', input: '{"numBottles":5,"numExchange":2}' },
   ],
 }
 

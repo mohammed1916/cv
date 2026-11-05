@@ -1,13 +1,18 @@
-const CODE_TEXT = `list the runs of potholes, each run as a length
-sort the runs by length in decreasing order
-left = budget, repaired = 0
-for each run in decreasing length
-  if the run fits the budget whole, it costs length plus one
-    repair the whole run and pay length plus one from left
-  otherwise
-    if at least two remain then repair left minus one potholes from this run
-    stop after the partial repair
-return repaired`
+const CODE_TEXT = `function maxPotholes(road, budget) {
+  const runs = road.split('.').filter(part => part.length > 0).map(part => part.length).sort((x, y) => y - x)
+  let repaired = 0
+  let left = budget
+  for (const length of runs) {
+    if (left >= length + 1) {
+      left -= length + 1
+      repaired += length
+    } else {
+      if (left >= 2) repaired += left - 1
+      break
+    }
+  }
+  return repaired
+}`
 
 const PYTHON_TEXT = `def max_potholes(road, budget):
     runs = sorted((len(part) for part in road.split('.') if part), reverse=True)
@@ -49,17 +54,17 @@ export function buildTrace({ road, budget }) {
   const order = [...runs].sort((a, b) => b.length - a.length)
   let left = budget
   let repaired = 0
-  frames.push({ phase: 'start', activeLine: L('list the runs'), pythonLine: PY('runs = sorted'), run: null, left, repaired, order: order.map(r => r.length), message: `${runs.length} run${runs.length === 1 ? '' : 's'} of potholes; budget ${budget}.` })
+  frames.push({ phase: 'start', activeLine: L('const runs = road.split'), pythonLine: PY('runs = sorted'), run: null, left, repaired, order: order.map(r => r.length), message: `${runs.length} run${runs.length === 1 ? '' : 's'} of potholes; budget ${budget}.` })
   for (const run of order) {
     if (left >= run.length + 1) {
       left -= run.length + 1
       repaired += run.length
-      frames.push({ phase: 'full', activeLine: L('repair the whole run'), pythonLine: PY('repaired += length'), run: { start: run.start, length: run.length, taken: run.length }, left, repaired, order: order.map(r => r.length), message: `Fix the whole run of ${run.length} for ${run.length + 1}; ${left} budget left.` })
+      frames.push({ phase: 'full', activeLine: L('left -= length + 1'), pythonLine: PY('repaired += length'), run: { start: run.start, length: run.length, taken: run.length }, left, repaired, order: order.map(r => r.length), message: `Fix the whole run of ${run.length} for ${run.length + 1}; ${left} budget left.` })
     } else {
       const part = left >= 2 ? left - 1 : 0
       repaired += part
-      frames.push({ phase: 'partial', activeLine: L('repair left minus one'), pythonLine: PY('repaired += left - 1'), run: { start: run.start, length: run.length, taken: part }, left: 0, repaired, order: order.map(r => r.length), message: part > 0 ? `Only ${left} budget left: fix ${part} potholes of this run for ${part + 1}.` : `Only ${left} budget left, which cannot pay for any group.` })
-      frames.push({ phase: 'stop', activeLine: L('stop after the partial'), pythonLine: PY('break'), run: null, left: 0, repaired, order: order.map(r => r.length), message: 'The next run cannot be fixed whole with the leftover budget, so stop.' })
+      frames.push({ phase: 'partial', activeLine: L('if (left >= 2) repaired'), pythonLine: PY('repaired += left - 1'), run: { start: run.start, length: run.length, taken: part }, left: 0, repaired, order: order.map(r => r.length), message: part > 0 ? `Only ${left} budget left: fix ${part} potholes of this run for ${part + 1}.` : `Only ${left} budget left, which cannot pay for any group.` })
+      frames.push({ phase: 'stop', activeLine: L('break'), pythonLine: PY('break'), run: null, left: 0, repaired, order: order.map(r => r.length), message: 'The next run cannot be fixed whole with the leftover budget, so stop.' })
       break
     }
   }

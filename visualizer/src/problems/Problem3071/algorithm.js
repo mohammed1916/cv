@@ -16,15 +16,15 @@ export function buildTrace(grid) {
   const n = grid.length
   const yCounts = [0, 0, 0]
   const otherCounts = [0, 0, 0]
-  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('count the values inside the Y and outside the Y'), cell: null, yCounts: [...yCounts], otherCounts: [...otherCounts], pair: null, best: null, message: `Split the ${n} by ${n} grid into the Y and the rest.` })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('const yCounts'), cell: null, yCounts: [...yCounts], otherCounts: [...otherCounts], pair: null, best: null, message: `Split the ${n} by ${n} grid into the Y and the rest.` })
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < n; j++) {
       if (inY(i, j, n)) {
         yCounts[grid[i][j]] += 1
-        frames.push({ pythonLine: 10, phase: 'y', activeLine: L('count the values inside the Y and outside the Y'), cell: [i, j], yCounts: [...yCounts], otherCounts: [...otherCounts], pair: null, best: null, message: `(${i}, ${j}) is in the Y and holds ${grid[i][j]}.` })
+        frames.push({ pythonLine: 10, phase: 'y', activeLine: L('const yCounts'), cell: [i, j], yCounts: [...yCounts], otherCounts: [...otherCounts], pair: null, best: null, message: `(${i}, ${j}) is in the Y and holds ${grid[i][j]}.` })
       } else {
         otherCounts[grid[i][j]] += 1
-        frames.push({ pythonLine: 12, phase: 'other', activeLine: L('count the values inside the Y and outside the Y'), cell: [i, j], yCounts: [...yCounts], otherCounts: [...otherCounts], pair: null, best: null, message: `(${i}, ${j}) is outside the Y and holds ${grid[i][j]}.` })
+        frames.push({ pythonLine: 12, phase: 'other', activeLine: L('const yCounts'), cell: [i, j], yCounts: [...yCounts], otherCounts: [...otherCounts], pair: null, best: null, message: `(${i}, ${j}) is outside the Y and holds ${grid[i][j]}.` })
       }
     }
   }
@@ -35,10 +35,10 @@ export function buildTrace(grid) {
     for (let b = 0; b < 3; b++) {
       if (a === b) continue
       const cost = (yTotal - yCounts[a]) + (otherTotal - otherCounts[b])
-      frames.push({ pythonLine: 20, phase: 'pair', activeLine: L('cost = cells in the Y not equal to a'), cell: null, yCounts: [...yCounts], otherCounts: [...otherCounts], pair: [a, b], best, message: `Y becomes ${a} and the rest becomes ${b}: ${cost} changes.` })
+      frames.push({ pythonLine: 20, phase: 'pair', activeLine: L('const cost ='), cell: null, yCounts: [...yCounts], otherCounts: [...otherCounts], pair: [a, b], best, message: `Y becomes ${a} and the rest becomes ${b}: ${cost} changes.` })
       if (best === null || cost < best) {
         best = cost
-        frames.push({ pythonLine: 22, phase: 'improve', activeLine: L('keep the smaller'), cell: null, yCounts: [...yCounts], otherCounts: [...otherCounts], pair: [a, b], best, message: `${cost} changes is the best so far.` })
+        frames.push({ pythonLine: 22, phase: 'improve', activeLine: L('if (best === null || cost < best)'), cell: null, yCounts: [...yCounts], otherCounts: [...otherCounts], pair: [a, b], best, message: `${cost} changes is the best so far.` })
       }
     }
   }
@@ -46,14 +46,30 @@ export function buildTrace(grid) {
   return { input: grid, result: best, frames }
 }
 
-export const code = `minimum changes to write a Y with two distinct values
-  count the values inside the Y and outside the Y
-  yTotal and otherTotal are the number of cells in each group
-  best = none
-  for each value a for the Y and each different value b for the rest
-    cost = cells in the Y not equal to a, plus cells outside not equal to b
-    keep the smaller cost
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minOperationsToWriteY(grid) {
+  const n = grid.length
+  const mid = (n - 1) / 2
+  const inY = (i, j) => (j === mid && i >= mid) || (i < mid && (j === i || j === n - 1 - i))
+  const yCounts = [0, 0, 0]
+  const otherCounts = [0, 0, 0]
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n; j++) {
+      if (inY(i, j)) yCounts[grid[i][j]] += 1
+      else otherCounts[grid[i][j]] += 1
+    }
+  }
+  const yTotal = yCounts.reduce((x, y) => x + y, 0)
+  const otherTotal = otherCounts.reduce((x, y) => x + y, 0)
+  let best = null
+  for (let a = 0; a < 3; a++) {
+    for (let b = 0; b < 3; b++) {
+      if (a === b) continue
+      const cost = (yTotal - yCounts[a]) + (otherTotal - otherCounts[b])
+      if (best === null || cost < best) best = cost
+    }
+  }
+  return best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def min_ops(grid):

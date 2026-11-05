@@ -22,11 +22,15 @@ export function parseInput(text) {
   return { nums: obj.nums }
 }
 
-export const code = `largest unique (nums):
-  count how many times each value appears
-  for each value v from largest to smallest:
-    if count[v] equals 1 then return v
-  return -1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function largestUnique(nums) {
+  const counts = new Map()
+  for (const v of nums) counts.set(v, (counts.get(v) ?? 0) + 1)
+  const order = [...counts.keys()].sort((x, y) => y - x)
+  for (const v of order) {
+    if (counts.get(v) === 1) return v
+  }
+  return -1
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `from collections import Counter
 
@@ -51,7 +55,7 @@ export function buildTrace(input) {
   for (const v of nums) {
     counts.set(v, (counts.get(v) ?? 0) + 1)
     frames.push({
-      phase: 'count', activeLine: 2, pythonLine: P('counts = Counter'),
+      phase: 'count', activeLine: 3, pythonLine: P('counts = Counter'),
       message: `Read ${v}; its count is now ${counts.get(v)}.`,
       snapshot: { counts: Object.fromEntries(counts), current: v, answer: null },
     })
@@ -61,14 +65,14 @@ export function buildTrace(input) {
   for (const v of order) {
     const c = counts.get(v)
     frames.push({
-      phase: 'check', activeLine: 4, pythonLine: P('if counts[v] == 1'),
+      phase: 'check', activeLine: 6, pythonLine: P('if counts[v] == 1'),
       message: c === 1 ? `${v} appears once, so it is the answer.` : `${v} appears ${c} times, so keep looking downward.`,
       snapshot: { counts: Object.fromEntries(counts), current: v, answer: c === 1 ? v : null },
     })
     if (c === 1) { answer = v; break }
   }
   frames.push({
-    phase: 'done', activeLine: 5, pythonLine: P('return -1'),
+    phase: 'done', activeLine: answer === -1 ? 8 : 6, pythonLine: P('return -1'),
     message: answer === -1 ? 'No value appears exactly once, so the answer is -1.' : `The largest unique value is ${answer}.`,
     snapshot: { counts: Object.fromEntries(counts), current: null, answer },
   })

@@ -1,15 +1,29 @@
-const CODE_TEXT = `start with no answer, so the answer is [-1, -1]
-collect the literal digits that appear in the pattern
-for each top row r and left column c where the pattern fits
-  start an empty letter map for this window
-  for each pattern cell (p, q) in row-major order
-    if the pattern cell is a digit then the board value must equal that digit
-    else if the letter is already mapped then the board value must equal its digit
-    otherwise map the letter to the board value, when that digit is not a literal and not used
-    if a check fails then stop this window
-  if every cell passes then the answer is (r, c), so return it
-return the answer`
-
+const CODE_TEXT = `function matchAlphanumericPattern(board, pattern) {
+  const rows = board.length
+  const cols = board[0].length
+  const pr = pattern.length
+  const pc = pattern[0].length
+  const literal = new Set()
+  for (const row of pattern) for (const ch of row) if (/[0-9]/.test(ch)) literal.add(Number(ch))
+  for (let r = 0; r <= rows - pr; r++) {
+    for (let c = 0; c <= cols - pc; c++) {
+      const mapping = {}
+      let ok = true
+      for (let p = 0; p < pr && ok; p++) {
+        for (let q = 0; q < pc; q++) {
+          const ch = pattern[p][q]
+          const v = board[r + p][c + q]
+          if (/[0-9]/.test(ch)) { if (v !== Number(ch)) { ok = false; break } }
+          else if (ch in mapping) { if (mapping[ch] !== v) { ok = false; break } }
+          else if (literal.has(v) || Object.values(mapping).includes(v)) { ok = false; break }
+          else mapping[ch] = v
+        }
+      }
+      if (ok) return [r, c]
+    }
+  }
+  return [-1, -1]
+}`
 const PYTHON_TEXT = `def match_alphanumerical_pattern(board, pattern):
     rows, cols = len(board), len(board[0])
     pr, pc = len(pattern), len(pattern[0])
@@ -67,39 +81,39 @@ export function buildTrace({ board, pattern }) {
   const literal = new Set()
   for (const row of pattern) for (const ch of row) if (/[0-9]/.test(ch)) literal.add(Number(ch))
   let answer = [-1, -1]
-  frames.push({ phase: 'start', activeLine: L('start with no answer'), pythonLine: PY('rows, cols'), window: null, cell: null, mapping: {}, literal: [...literal], answer, message: `Literal digits in the pattern: ${[...literal].join(', ') || 'none'}.` })
+  frames.push({ phase: 'start', activeLine: L('const rows = board.length'), pythonLine: PY('rows, cols'), window: null, cell: null, mapping: {}, literal: [...literal], answer, message: `Literal digits in the pattern: ${[...literal].join(', ') || 'none'}.` })
   for (let r = 0; r <= rows - pr; r++) {
     for (let c = 0; c <= cols - pc; c++) {
       const mapping = {}
       let ok = true
-      frames.push({ phase: 'window', activeLine: L('for each top row'), pythonLine: PY('for c in range'), window: [r, c], cell: null, mapping: {}, literal: [...literal], answer, message: `Try the window with top-left corner (${r}, ${c}).` })
+      frames.push({ phase: 'window', activeLine: L('for (let r = 0'), pythonLine: PY('for c in range'), window: [r, c], cell: null, mapping: {}, literal: [...literal], answer, message: `Try the window with top-left corner (${r}, ${c}).` })
       for (let p = 0; p < pr && ok; p++) {
         for (let q = 0; q < pc; q++) {
           const ch = pattern[p][q]
           const v = board[r + p][c + q]
           if (/[0-9]/.test(ch)) {
-            if (v !== Number(ch)) { ok = false; frames.push({ phase: 'fail', activeLine: L('if the pattern cell is a digit'), pythonLine: PY('if v != int(ch)'), window: [r, c], cell: [p, q], mapping: { ...mapping }, literal: [...literal], answer, message: `Cell (${p}, ${q}) needs ${ch} but the board has ${v}.` }); break }
-            frames.push({ phase: 'literal', activeLine: L('if the pattern cell is a digit'), pythonLine: PY('if v != int(ch)'), window: [r, c], cell: [p, q], mapping: { ...mapping }, literal: [...literal], answer, message: `Literal ${ch} matches the board value ${v}.` })
+            if (v !== Number(ch)) { ok = false; frames.push({ phase: 'fail', activeLine: L('if (/[0-9]/.test(ch)) { if'), pythonLine: PY('if v != int(ch)'), window: [r, c], cell: [p, q], mapping: { ...mapping }, literal: [...literal], answer, message: `Cell (${p}, ${q}) needs ${ch} but the board has ${v}.` }); break }
+            frames.push({ phase: 'literal', activeLine: L('if (/[0-9]/.test(ch)) { if'), pythonLine: PY('if v != int(ch)'), window: [r, c], cell: [p, q], mapping: { ...mapping }, literal: [...literal], answer, message: `Literal ${ch} matches the board value ${v}.` })
           } else if (ch in mapping) {
-            if (mapping[ch] !== v) { ok = false; frames.push({ phase: 'fail', activeLine: L('else if the letter is already mapped'), pythonLine: PY('if mapping[ch] != v'), window: [r, c], cell: [p, q], mapping: { ...mapping }, literal: [...literal], answer, message: `Letter ${ch} is ${mapping[ch]}, not ${v}.` }); break }
-            frames.push({ phase: 'match', activeLine: L('else if the letter is already mapped'), pythonLine: PY('elif ch in mapping'), window: [r, c], cell: [p, q], mapping: { ...mapping }, literal: [...literal], answer, message: `Letter ${ch} keeps its digit ${v}.` })
+            if (mapping[ch] !== v) { ok = false; frames.push({ phase: 'fail', activeLine: L('else if (ch in mapping)'), pythonLine: PY('if mapping[ch] != v'), window: [r, c], cell: [p, q], mapping: { ...mapping }, literal: [...literal], answer, message: `Letter ${ch} is ${mapping[ch]}, not ${v}.` }); break }
+            frames.push({ phase: 'match', activeLine: L('else if (ch in mapping)'), pythonLine: PY('elif ch in mapping'), window: [r, c], cell: [p, q], mapping: { ...mapping }, literal: [...literal], answer, message: `Letter ${ch} keeps its digit ${v}.` })
           } else if (literal.has(v) || Object.values(mapping).includes(v)) {
             ok = false
-            frames.push({ phase: 'fail', activeLine: L('otherwise map the letter'), pythonLine: PY('elif v in literal'), window: [r, c], cell: [p, q], mapping: { ...mapping }, literal: [...literal], answer, message: `Digit ${v} is already a literal or taken by another letter.` })
+            frames.push({ phase: 'fail', activeLine: L('else if (literal.has(v)'), pythonLine: PY('elif v in literal'), window: [r, c], cell: [p, q], mapping: { ...mapping }, literal: [...literal], answer, message: `Digit ${v} is already a literal or taken by another letter.` })
             break
           } else {
             mapping[ch] = v
-            frames.push({ phase: 'map', activeLine: L('otherwise map the letter'), pythonLine: PY('mapping[ch] = v'), window: [r, c], cell: [p, q], mapping: { ...mapping }, literal: [...literal], answer, message: `Letter ${ch} is mapped to digit ${v}.` })
+            frames.push({ phase: 'map', activeLine: L('else mapping[ch] = v'), pythonLine: PY('mapping[ch] = v'), window: [r, c], cell: [p, q], mapping: { ...mapping }, literal: [...literal], answer, message: `Letter ${ch} is mapped to digit ${v}.` })
           }
         }
       }
       if (ok) {
         answer = [r, c]
-        frames.push({ phase: 'found', activeLine: L('if every cell passes'), pythonLine: PY('return [r, c]'), window: [r, c], cell: null, mapping: { ...mapping }, literal: [...literal], answer, message: `Every cell passes at (${r}, ${c}).` })
+        frames.push({ phase: 'found', activeLine: L('if (ok) return [r, c]'), pythonLine: PY('return [r, c]'), window: [r, c], cell: null, mapping: { ...mapping }, literal: [...literal], answer, message: `Every cell passes at (${r}, ${c}).` })
         return { input: { board, pattern }, result: answer, frames }
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return the answer'), pythonLine: PY('return [-1, -1]'), window: null, cell: null, mapping: {}, literal: [...literal], answer, message: 'No window matches, so the answer is [-1, -1].' })
+  frames.push({ phase: 'done', activeLine: L('return [-1, -1]'), pythonLine: PY('return [-1, -1]'), window: null, cell: null, mapping: {}, literal: [...literal], answer, message: 'No window matches, so the answer is [-1, -1].' })
   return { input: { board, pattern }, result: answer, frames }
 }

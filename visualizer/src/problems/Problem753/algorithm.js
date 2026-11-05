@@ -1,15 +1,20 @@
-export const code = `function crackSafe(n, k):
-  seen = empty set of used passwords
-  ans = empty list
-  define dfs(prefix):
-    for each digit x from 0 to k-1:
-      nei = prefix followed by x
-      if nei is not seen then
-        mark nei as seen
-        dfs(nei without its first character)
-        append x to ans
-  dfs(n-1 zeros)
-  return ans joined, followed by n-1 zeros`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function crackSafe(n, k) {
+  const seen = new Set() // seen = the passwords used so far
+  const ans = []
+  function dfs(prefix) {
+    for (let x = 0; x < k; x++) {
+      const nei = prefix + x
+      if (!seen.has(nei)) { // if nei is not seen
+        seen.add(nei) // mark nei as seen
+        dfs(nei.slice(1))
+        ans.push(x) // append x to ans
+      }
+    }
+  }
+  dfs('0'.repeat(n - 1))
+  return ans.join('') + '0'.repeat(n - 1) // return ans joined, then the zeros
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def crack_safe(n, k):

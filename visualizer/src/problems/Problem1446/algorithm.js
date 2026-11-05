@@ -7,16 +7,16 @@ export const phases = [
   { id: 'done', label: 'Result', description: 'Return the longest run found.' },
 ]
 
-export const code = `function longestRun(s):
-    best = 1
-    run = 1
-    for i from 1 to length(s) - 1:
-        if s[i] equals s[i - 1]:
-            run = run + 1
-        else:
-            run = 1
-        best = max(best, run)
-    return best`
+export const code = `function longestRun(s) {
+  let best = 1
+  let run = 1
+  for (let i = 1; i < s.length; i++) {
+    if (s[i] === s[i - 1]) run += 1
+    else run = 1
+    best = Math.max(best, run)
+  }
+  return best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def longest_run(s):
     best = 1
@@ -30,7 +30,7 @@ export const python = `def longest_run(s):
     return best`
 
 const lineOf = (source, fragment) => source.split('\n').findIndex(line => line.includes(fragment)) + 1
-const C = fragment => lineOf(code, fragment)
+const C = fragment => code.findIndex(c => c.text.includes(fragment)) + 1
 const P = fragment => lineOf(python, fragment)
 
 export function parseInput(text) {
@@ -48,21 +48,21 @@ export function buildTrace(s) {
   let bestEnd = 0
   const add = (phase, c, p, message, snapshot) => frames.push({ phase, activeLine: C(c), pythonLine: P(p), message, snapshot })
   const snap = (index, same = null) => ({ s, index, run, best, same, runStart: start, bestStart, bestEnd })
-  add('start', 'best = 1', 'best = 1', `Start with s[0] = '${s[0]}'. Its run has length 1, and so does the best run.`, snap(0))
+  add('start', 'let best = 1', 'best = 1', `Start with s[0] = '${s[0]}'. Its run has length 1, and so does the best run.`, snap(0))
   for (let i = 1; i < s.length; i++) {
     const same = s[i] === s[i - 1]
-    add('compare', 'if s[i]', 'if s[i]', `Compare s[${i}] = '${s[i]}' with the previous character '${s[i - 1]}'. ${same ? 'They match.' : 'They differ.'}`, snap(i, same))
+    add('compare', 'if (s[i] ===', 'if s[i]', `Compare s[${i}] = '${s[i]}' with the previous character '${s[i - 1]}'. ${same ? 'They match.' : 'They differ.'}`, snap(i, same))
     if (same) {
       run += 1
-      add('extend', 'run = run + 1', 'run += 1', `The run continues, so its length becomes ${run}.`, snap(i, same))
+      add('extend', 'run += 1', 'run += 1', `The run continues, so its length becomes ${run}.`, snap(i, same))
     } else {
       run = 1
       start = i
-      add('restart', 'else:', 'else:', `A new run starts at s[${i}], so its length resets to 1.`, snap(i, same))
+      add('restart', 'else run', 'else:', `A new run starts at s[${i}], so its length resets to 1.`, snap(i, same))
     }
     if (run > best) { best = run; bestStart = start; bestEnd = i }
     best = Math.max(best, run)
-    add('record', 'best = max', 'best = max', `The best run is now ${best}.`, snap(i, same))
+    add('record', 'best = Math.max', 'best = max', `The best run is now ${best}.`, snap(i, same))
   }
   add('done', 'return best', 'return best', `The longest run of one repeated character has length ${best}.`, snap(s.length - 1))
   return { input: s, result: best, frames }

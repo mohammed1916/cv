@@ -1,18 +1,21 @@
-export const code = [
-  'find the maximum number of distinct points where the chart meets one horizontal line',
-  '  let heights be the sorted distinct values of y',
-  '  let candidates be each height and the midpoint of each neighbouring pair',
-  '  set best to 0',
-  '  for each candidate line height h',
-  '    set hits to 0',
-  '    for each point i',
-  '      if y[i] equals h then add one to hits',
-  '    for each segment from i to i plus 1',
-  '      if h is strictly between y[i] and y[i + 1] then add one to hits',
-  '    if hits is greater than best then set best to hits',
-  '  return best',
-].map((text, index) => ({ line: index + 1, text }))
-
+export const code = `function maxChartIntersections(y) {
+  const heights = [...new Set(y)].sort((a, b) => a - b)
+  const candidates = []
+  heights.forEach((h, k) => {
+    candidates.push(h)
+    if (k + 1 < heights.length) candidates.push((h + heights[k + 1]) / 2)
+  })
+  let best = 0
+  for (const h of candidates) {
+    let hits = 0
+    for (const value of y) if (value === h) hits++
+    for (let i = 0; i + 1 < y.length; i++) {
+      if (Math.min(y[i], y[i + 1]) < h && h < Math.max(y[i], y[i + 1])) hits++
+    }
+    best = Math.max(best, hits)
+  }
+  return best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => {
   const index = code.findIndex(c => c.text.includes(s))
   if (index < 0) throw new Error(`Missing pseudocode line: ${s}`)
@@ -74,17 +77,17 @@ export function buildTrace(y) {
     })
   }
 
-  push('start', { heights }, 'let heights be the sorted', 'heights = sorted', `Points sit at heights ${heights.join(', ')}. Candidate lines sit on each height and between neighbours.`)
+  push('start', { heights }, 'const heights = [...new Set(y)]', 'heights = sorted', `Points sit at heights ${heights.join(', ')}. Candidate lines sit on each height and between neighbours.`)
 
   candidates.forEach((h, c) => {
     let hits = 0
     const crossings = []
-    push('candidate', { h, candidate: c, hits: 0 }, 'for each candidate line height', 'for h in candidates', `Try the line at height ${h}.`)
+    push('candidate', { h, candidate: c, hits: 0 }, 'for (const h of candidates)', 'for h in candidates', `Try the line at height ${h}.`)
     for (let i = 0; i < n; i++) {
       if (y[i] === h) {
         hits += 1
         crossings.push({ x: i, kind: 'vertex' })
-        push('point', { h, candidate: c, hits, crossings: [...crossings], point: i }, 'if y[i] equals h', 'if y[i] == h', `Point ${i} sits on the line, so it counts once.`)
+        push('point', { h, candidate: c, hits, crossings: [...crossings], point: i }, 'if (value === h)', 'if y[i] == h', `Point ${i} sits on the line, so it counts once.`)
       }
     }
     for (let i = 0; i + 1 < n; i++) {
@@ -94,11 +97,11 @@ export function buildTrace(y) {
         hits += 1
         const x = i + (h - y[i]) / (y[i + 1] - y[i])
         crossings.push({ x, kind: 'cross' })
-        push('segment', { h, candidate: c, hits, crossings: [...crossings], segment: i }, 'if h is strictly between', 'if min(y[i], y[i + 1]) < h', `Segment ${i} to ${i + 1} crosses height ${h} inside its span.`)
+        push('segment', { h, candidate: c, hits, crossings: [...crossings], segment: i }, 'if (Math.min(y[i], y[i + 1]) < h', 'if min(y[i], y[i + 1]) < h', `Segment ${i} to ${i + 1} crosses height ${h} inside its span.`)
       }
     }
     if (hits > best) best = hits
-    push('best', { h, candidate: c, hits, crossings: [...crossings] }, 'if hits is greater than best', 'best = max(best, hits)',
+    push('best', { h, candidate: c, hits, crossings: [...crossings] }, 'best = Math.max(best, hits)', 'best = max(best, hits)',
       `Line ${h} meets the chart ${hits} time${hits === 1 ? '' : 's'}. Best is ${best}.`)
   })
 

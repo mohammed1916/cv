@@ -55,7 +55,7 @@ export function parseInput(text) {
 export function buildTrace({ expression, evalvars, evalints }) {
   const env = new Map(evalvars.map((v, i) => [v, evalints[i]]))
   const tokens = tokenize(expression)
-  const frames = [{ phase: 'start', activeLine: L('tokens = split'), pythonLine: 5, pos: 0, depth: 0, poly: '', message: `Tokenize "${expression}" into ${tokens.length} tokens. Known variables: ${evalvars.length ? evalvars.map((v, i) => `${v}=${evalints[i]}`).join(', ') : 'none'}.` }]
+  const frames = [{ phase: 'start', activeLine: L('const tokens = expression.match'), pythonLine: 5, pos: 0, depth: 0, poly: '', message: `Tokenize "${expression}" into ${tokens.length} tokens. Known variables: ${evalvars.length ? evalvars.map((v, i) => `${v}=${evalints[i]}`).join(', ') : 'none'}.` }]
   let pos = 0
   let depth = 0
   const push = (phase, activeLine, message, poly, pythonLine) => frames.push({ phase, activeLine, pythonLine, pos, depth, poly: poly ? show(poly) : '', message })
@@ -63,20 +63,20 @@ export function buildTrace({ expression, evalvars, evalints }) {
     const t = tokens[pos++]
     if (t === '(') {
       depth++
-      push('atom', L('if next token is "("'), 'Open parenthesis: parse the inner expression as its own polynomial.', undefined, 41)
+      push('atom', L("if (t === '(')"), 'Open parenthesis: parse the inner expression as its own polynomial.', undefined, 41)
       const p = expr()
       pos++
       depth--
-      push('atom', L('skip the closing'), `Close parenthesis: inner polynomial is ${show(p)}.`, p, 42)
+      push('atom', L('skip the closing parenthesis'), `Close parenthesis: inner polynomial is ${show(p)}.`, p, 42)
       return p
     }
     let p
     let note
-    let line = L('token is a number')
+    let line = L('return constant(Number(t))')
     let pyLine = 44
     if (/^\d+$/.test(t)) { const v = Number(t); p = new Map(v ? [['', v]] : []); note = `Number ${t} is a constant term.` }
-    else if (env.has(t)) { const v = env.get(t); p = new Map(v ? [['', v]] : []); line = L('token is a known variable'); pyLine = 46; note = `Variable ${t} is known (${v}), so it becomes the constant ${v}.` }
-    else { p = new Map([[t, 1]]); line = L('otherwise return the unknown'); pyLine = 48; note = `Variable ${t} is unknown, so it stays symbolic as 1*${t}.` }
+    else if (env.has(t)) { const v = env.get(t); p = new Map(v ? [['', v]] : []); line = L('if (env.has(t))'); pyLine = 46; note = `Variable ${t} is known (${v}), so it becomes the constant ${v}.` }
+    else { p = new Map([[t, 1]]); line = L('return new Map([[t, 1]])'); pyLine = 48; note = `Variable ${t} is unknown, so it stays symbolic as 1*${t}.` }
     push('atom', line, note, p, pyLine)
     return p
   }
@@ -87,7 +87,7 @@ export function buildTrace({ expression, evalvars, evalints }) {
       const q = atom()
       const before = show(p)
       p = mul(p, q)
-      push('combine', L('while the next token is *'), `Multiply (${before}) by (${show(q)}): every term pairs with every term, variable lists are sorted, like terms add. Result: ${show(p)}.`, p, 35)
+      push('combine', L("while (pos < tokens.length && tokens[pos] === '*')"), `Multiply (${before}) by (${show(q)}): every term pairs with every term, variable lists are sorted, like terms add. Result: ${show(p)}.`, p, 35)
     }
     return p
   }
@@ -98,35 +98,50 @@ export function buildTrace({ expression, evalvars, evalints }) {
       const q = term()
       const before = show(p)
       p = add(p, q, op === '+' ? 1 : -1)
-      push('combine', L('while the next token is + or -'), `${op === '+' ? 'Add' : 'Subtract'} (${show(q)}) ${op === '+' ? 'to' : 'from'} (${before}); like terms combine and zero terms vanish. Result: ${show(p)}.`, p, 27)
+      push('combine', L('const op = tokens[pos++]'), `${op === '+' ? 'Add' : 'Subtract'} (${show(q)}) ${op === '+' ? 'to' : 'from'} (${before}); like terms combine and zero terms vanish. Result: ${show(p)}.`, p, 27)
     }
     return p
   }
   const poly = expr()
   const result = formatPoly(poly)
-  frames.push({ phase: 'done', activeLine: L('sort terms by degree'), pythonLine: 51, pos: tokens.length, depth: 0, poly: show(poly), message: `Sort terms by degree (descending) then lexicographically: ${JSON.stringify(result)}.` })
+  frames.push({ phase: 'done', activeLine: L('return formatPoly(expr())'), pythonLine: 51, pos: tokens.length, depth: 0, poly: show(poly), message: `Sort terms by degree (descending) then lexicographically: ${JSON.stringify(result)}.` })
   return { input: { expression, evalvars, evalints, tokens }, result, frames }
 }
-export const code = `function basicCalculatorIV(expression, evalvars, evalints):
-  env = map each known variable to its integer value
-  tokens = split expression into numbers, names and operators
-  pos = 0
-  define expr():
-    p = term()
-    while the next token is + or -: p = p plus or minus term()
-  define term():
-    p = atom()
-    while the next token is *: p = p times atom()
-  define atom():
-    if next token is "(" then
-      p = expr(), then skip the closing ")"
+export const code = `function basicCalculatorIV(expression, evalvars, evalints) {
+  const env = new Map(evalvars.map((v, i) => [v, evalints[i]]))
+  const tokens = expression.match(/[a-z]+|\\d+|[()+\\-*]/g) || []
+  const constant = v => new Map(v ? [['', v]] : [])
+  let pos = 0
+  function expr() {
+    let p = term()
+    while (pos < tokens.length && (tokens[pos] === '+' || tokens[pos] === '-')) {
+      const op = tokens[pos++]
+      p = add(p, term(), op === '+' ? 1 : -1)
+    }
+    return p
+  }
+  function term() {
+    let p = atom()
+    while (pos < tokens.length && tokens[pos] === '*') {
+      pos++
+      p = mul(p, atom())
+    }
+    return p
+  }
+  function atom() {
+    const t = tokens[pos++]
+    if (t === '(') {
+      const p = expr()
+      pos++ // skip the closing parenthesis
       return p
-    if token is a number then return it as a constant
-    if token is a known variable then return its value as a constant
-    otherwise return the unknown variable as a symbol
-  result = expr()
-  sort terms by degree (most variables first), then by variable names
-  return the terms formatted as coefficient times variables`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    }
+    if (/^\\d+$/.test(t)) return constant(Number(t))
+    if (env.has(t)) return constant(env.get(t))
+    return new Map([[t, 1]])
+  }
+  return formatPoly(expr())
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `import re

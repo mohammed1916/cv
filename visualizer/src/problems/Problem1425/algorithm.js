@@ -21,11 +21,11 @@ export function buildTrace({ nums, k }) {
   let window = []
   let answer = -Infinity
   const snap = (current, extra = {}) => ({ current, window: [...window], dp: dp.slice(), answer: answer === -Infinity ? null : answer, ...extra })
-  const frames = [{ phase: 'start', activeLine: L('dp = list'), pythonLine: P('dp = [0]'), snapshot: snap(null), message: `Window size k = ${k}. Each index can extend a pick made at most ${k} places earlier.` }]
+  const frames = [{ phase: 'start', activeLine: L('const dp = Array'), pythonLine: P('dp = [0]'), snapshot: snap(null), message: `Window size k = ${k}. Each index can extend a pick made at most ${k} places earlier.` }]
   for (let i = 0; i < n; i++) {
     const dropped = []
     while (window.length && window[0] < i - k) dropped.push(window.shift())
-    if (dropped.length) frames.push({ phase: 'expire', activeLine: L('drop from front'), pythonLine: P('window.popleft()'), snapshot: snap(i, { dropped }), message: `Indices ${dropped.join(', ')} are more than ${k} places back, so they cannot precede index ${i}.` })
+    if (dropped.length) frames.push({ phase: 'expire', activeLine: L('window.shift()'), pythonLine: P('window.pop(0)'), snapshot: snap(i, { dropped }), message: `Indices ${dropped.join(', ')} are more than ${k} places back, so they cannot precede index ${i}.` })
     const best = window.length ? Math.max(0, dp[window[0]]) : 0
     dp[i] = nums[i] + best
     answer = Math.max(answer, dp[i])
@@ -33,42 +33,41 @@ export function buildTrace({ nums, k }) {
     const popped = []
     while (window.length && dp[window[window.length - 1]] <= dp[i]) popped.push(window.pop())
     window.push(i)
-    frames.push({ phase: 'store', activeLine: L('append i to window'), pythonLine: P('window.append(i)'), snapshot: snap(i, { popped }), message: `${popped.length ? `Removed weaker candidates ${popped.join(', ')} from the back. ` : ''}Index ${i} joins the window with dp ${dp[i]}.` })
+    frames.push({ phase: 'store', activeLine: L('window.push(i)'), pythonLine: P('window.append(i)'), snapshot: snap(i, { popped }), message: `${popped.length ? `Removed weaker candidates ${popped.join(', ')} from the back. ` : ''}Index ${i} joins the window with dp ${dp[i]}.` })
   }
   const result = answer
   frames.push({ phase: 'done', activeLine: L('return answer'), pythonLine: P('return answer'), snapshot: snap(null, { result }), message: `The largest valid subsequence sum is ${result}.` })
   return { input: { nums, k }, result, frames }
 }
 
-export const code = `constrained subsequence (nums, k):
-  dp = list of best sums ending at each index
-  window = empty deque of indices
-  answer = negative infinity
-  for i from 0 to n-1:
-    drop from front while window[0] < i - k
-    best = max(0, dp[window front]) if window else 0
+export const code = `function constrainedSubsetSum(nums, k) {
+  const dp = Array(nums.length).fill(0)
+  const window = []
+  let answer = -Infinity
+  for (let i = 0; i < nums.length; i++) {
+    while (window.length && window[0] < i - k) window.shift()
+    const best = window.length ? Math.max(0, dp[window[0]]) : 0
     dp[i] = nums[i] + best
-    drop from back while dp[back] <= dp[i]
-    append i to window
-    answer = max(answer, dp[i])
-  return answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    while (window.length && dp[window[window.length - 1]] <= dp[i]) window.pop()
+    window.push(i)
+    answer = Math.max(answer, dp[i])
+  }
+  return answer
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
-export const python = `from collections import deque
-
-def constrained_subset_sum(nums, k):
+export const python = `def constrained_subset_sum(nums, k):
     dp = [0] * len(nums)
-    window = deque()
+    window = []
     answer = float("-inf")
     for i, value in enumerate(nums):
         while window and window[0] < i - k:
-            window.popleft()
+            window.pop(0)
         best = max(0, dp[window[0]]) if window else 0
         dp[i] = value + best
         while window and dp[window[-1]] <= dp[i]:
             window.pop()
         window.append(i)
         answer = max(answer, dp[i])
-    return answer
-`
+    return answer`
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

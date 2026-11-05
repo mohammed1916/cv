@@ -20,6 +20,7 @@ export default function MirrorSlotsView({ run, step }) {
             return (
               <li key={i} className={`msv__slot${i < letters.length ? ' is-filled' : ''}${current ? ' is-current' : ''}${mirrored ? ' is-mirror' : ''}`}>
                 <span className="msv__pos">{i}</span>
+                <span className="msv__role" aria-hidden="true">{current ? 'l' : mirrored ? 'r' : ''}</span>
                 <span className="msv__letter">{i < letters.length ? letters[i] : '·'}</span>
                 <span className="msv__pair">pairs with {mirror}</span>
               </li>

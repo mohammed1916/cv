@@ -1,9 +1,11 @@
-const CODE_TEXT = `set answer to zero
-for each bit position i from 0 to 29
-  ask the oracle commonSetBits with num = 1 shifted left by i
-  if the reply is 1 then bit i of n is set, so set bit i of answer
-return answer`
-
+const CODE_TEXT = `function guessNumber(commonSetBits) {
+  let answer = 0
+  for (let i = 0; i < 30; i++) {
+    const reply = commonSetBits(1 << i)
+    if (reply === 1) answer |= 1 << i
+  }
+  return answer
+}`
 const PYTHON_TEXT = `def guess_number_i(common_set_bits):
     answer = 0
     for i in range(30):
@@ -33,15 +35,15 @@ export function buildTrace(hidden) {
     return bits
   }
   let answer = 0
-  frames.push({ phase: 'start', activeLine: L('set answer to zero'), pythonLine: PY('answer = 0'), bit: -1, num: 0, reply: null, answer, message: 'Start with an answer of zero. Each oracle call tests one bit.' })
+  frames.push({ phase: 'start', activeLine: L('let answer = 0'), pythonLine: PY('answer = 0'), bit: -1, num: 0, reply: null, answer, message: 'Start with an answer of zero. Each oracle call tests one bit.' })
   for (let i = 0; i < 30; i++) {
     const num = 1 << i
     const reply = oracle(num)
     if (reply === 1) {
       answer |= num
-      frames.push({ phase: 'set', activeLine: L('set bit i of answer'), pythonLine: PY('answer |='), bit: i, num, reply, answer, message: `commonSetBits(${num}) = 1, so bit ${i} of the hidden number is set.` })
+      frames.push({ phase: 'set', activeLine: L('answer |= 1 << i'), pythonLine: PY('answer |='), bit: i, num, reply, answer, message: `commonSetBits(${num}) = 1, so bit ${i} of the hidden number is set.` })
     } else {
-      frames.push({ phase: 'probe', activeLine: L('if the reply is 1'), pythonLine: PY('if reply == 1'), bit: i, num, reply, answer, message: `commonSetBits(${num}) = 0, so bit ${i} is clear.` })
+      frames.push({ phase: 'probe', activeLine: L('if (reply === 1)'), pythonLine: PY('if reply == 1'), bit: i, num, reply, answer, message: `commonSetBits(${num}) = 0, so bit ${i} is clear.` })
     }
   }
   frames.push({ phase: 'done', activeLine: L('return answer'), pythonLine: PY('return answer'), bit: -1, num: 0, reply: null, answer, message: `The hidden number is ${answer}.` })

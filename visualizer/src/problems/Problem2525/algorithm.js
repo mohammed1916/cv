@@ -20,14 +20,15 @@ const py = (text) => {
 export const python = PYTHON_SOURCE
 
 export const code = [
-  { line: 1, text: 'function categorizeBox(length, width, height, mass)' },
-  { line: 2, text: 'volume = length times width times height' },
-  { line: 3, text: 'bulky = any dimension is at least 10000, or volume is at least 10^9' },
-  { line: 4, text: 'heavy = mass is at least 100' },
-  { line: 5, text: 'if bulky and heavy return Both' },
-  { line: 6, text: 'if bulky return Bulky' },
-  { line: 7, text: 'if heavy return Heavy' },
-  { line: 8, text: 'return Neither' },
+  { line: 1, text: "function categorizeBox(length, width, height, mass) {" },
+  { line: 2, text: "  const volume = length * width * height" },
+  { line: 3, text: "  const bulky = length >= 10000 || width >= 10000 || height >= 10000 || volume >= 1e9" },
+  { line: 4, text: "  const heavy = mass >= 100" },
+  { line: 5, text: "  if (bulky && heavy) return 'Both'" },
+  { line: 6, text: "  if (bulky) return 'Bulky'" },
+  { line: 7, text: "  if (heavy) return 'Heavy'" },
+  { line: 8, text: "  return 'Neither'" },
+  { line: 9, text: "}" },
 ]
 
 export function parseInput(text) {

@@ -5,16 +5,19 @@ export const phases = [
   { id: 'done', label: 'Complete', description: 'Return whether the load stays within capacity everywhere.' },
 ]
 
-export const code = `fits capacity (capacity, trips):
-  delta = zeros for stops 0 to 20
-  for each (passengers, start, end) in trips:
+export const code = `function fitsCapacity(capacity, trips) {
+  const delta = Array(21).fill(0)
+  for (const [passengers, start, end] of trips) {
     delta[start] += passengers
     delta[end] -= passengers
-  load = 0
-  for stop from 0 to 20:
+  }
+  let load = 0
+  for (let stop = 0; stop < 21; stop++) {
     load += delta[stop]
-    if load > capacity: return False
-  return True`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    if (load > capacity) return false
+  }
+  return true
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def fits_capacity(capacity, trips):
     delta = [0] * 21
@@ -60,7 +63,7 @@ export function buildTrace({ capacity, trips }) {
     state: { capacity, delta: [...delta], load, stop: null, trip: null, ...extra },
   })
 
-  push('start', 'delta = zeros', `Capacity ${capacity}. Every stop starts with no net change.`, {}, 'delta = [0]')
+  push('start', 'const delta = Array(21)', `Capacity ${capacity}. Every stop starts with no net change.`, {}, 'delta = [0] * 21')
   trips.forEach(([passengers, start, end], index) => {
     delta[start] += passengers
     delta[end] -= passengers
@@ -76,10 +79,18 @@ export function buildTrace({ capacity, trips }) {
       : `Stop ${stop}: load ${load} is within capacity ${capacity}.`, { stop })
     if (over) {
       result = false
-      push('done', 'if load > capacity', 'The trips cannot all be carried at once.', { stop })
+      push('done', 'if (load > capacity)', 'The trips cannot all be carried at once.', { stop }, 'if load > capacity')
       return { input: { capacity, trips }, result, frames }
     }
   }
-  push('done', 'return True', 'Every stop stays within capacity, so all trips fit.')
+  push('done', 'return true', 'Every stop stays within capacity, so all trips fit.', {}, 'return True')
   return { input: { capacity, trips }, result, frames }
 }
+
+export const inputLabel = 'JSON object with capacity and trips, each trip [passengers, start, end]'
+export const complexity = 'O(t + S) time for t trips and S stops, here at most 21 stops. Extra space is O(S).'
+export const examples = [
+  { label: 'Fits with room', input: '{"capacity":4,"trips":[[2,0,3],[2,3,6],[1,1,5]]}' },
+  { label: 'Over capacity', input: '{"capacity":2,"trips":[[2,0,3],[2,3,6],[1,1,5]]}' },
+  { label: 'Exact fill', input: '{"capacity":2,"trips":[[2,0,4]]}' },
+]

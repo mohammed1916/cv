@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/bitwise-xor-of-all-pairings/',
   complexity: 'O(n + m) time and O(1) extra space.',
   examples: [
-    { label: 'Example 1', input: '{"nums1":[2,1,3],"nums2":[10,2,5,0]}' },
-    { label: 'Example 2', input: '{"nums1":[1,2],"nums2":[3,4]}' },
+    { label: 'Odd nums2', input: '{"nums1":[4,1,2,7],"nums2":[3,8,5]}' },
+    { label: 'Two by two', input: '{"nums1":[6,1],"nums2":[2,9]}' },
   ],
 }
 

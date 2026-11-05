@@ -13,7 +13,7 @@ export function buildTrace(input) {
   const dec = new Array(n).fill(1)
   // inc[j]: length of the non-decreasing run that starts at index j.
   const inc = new Array(n).fill(1)
-  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('set dec[j] to 1'), index: -1, dec: [...dec], inc: [...inc], good: [], message: 'Every run has length 1 before it grows.' }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('const dec = new Array'), index: -1, dec: [...dec], inc: [...inc], good: [], message: 'Every run has length 1 before it grows.' }]
   for (let j = 1; j < n; j++) {
     dec[j] = nums[j - 1] >= nums[j] ? dec[j - 1] + 1 : 1
     frames.push({ phase: 'left', pythonLine: 5, activeLine: L('extend dec'), index: j, dec: [...dec], inc: [...inc], good: [], message: `Non-increasing run ending at ${j} has length ${dec[j]}.` })
@@ -32,17 +32,24 @@ export function buildTrace(input) {
   return { input, result: good, frames }
 }
 
-export const code = `find all good indices
-  set dec[j] to 1 and inc[j] to 1 for every index j
-  for each index j from 1 to n minus 1 do
-    if nums[j - 1] is at least nums[j] then extend dec[j] from dec[j - 1]
-  for each index j from n minus 2 down to 0 do
-    if nums[j] is at most nums[j + 1] then extend inc[j] from inc[j + 1]
-  set good to an empty list
-  for each index i from k to n minus 1 minus k do
-    if dec[i - 1] is at least k and inc[i + 1] is at least k then add i to good
-  return good`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function findGoodIndices(nums, k) {
+  const n = nums.length
+  const dec = new Array(n).fill(1) // dec[j]: length of the non-increasing run ending at j
+  const inc = new Array(n).fill(1) // inc[j]: length of the non-decreasing run starting at j
+  for (let j = 1; j < n; j++) {
+    if (nums[j - 1] >= nums[j]) dec[j] = dec[j - 1] + 1 // extend dec
+  }
+  for (let j = n - 2; j >= 0; j--) {
+    if (nums[j] <= nums[j + 1]) inc[j] = inc[j + 1] + 1 // extend inc
+  }
+  const good = []
+  for (let i = k; i <= n - 1 - k; i++) {
+    if (dec[i - 1] >= k && inc[i + 1] >= k) good.push(i) // if dec[i - 1] and inc[i + 1] are long enough
+  }
+  return good // return good
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def find_good_indices(nums, k):
     n = len(nums)

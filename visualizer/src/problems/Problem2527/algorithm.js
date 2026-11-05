@@ -7,25 +7,25 @@ export function parseInput(text) {
   return { nums }
 }
 
+export const code = `function xorBeauty(nums) {
+  let beauty = 0
+  for (const value of nums) {
+    beauty ^= value
+  }
+  return beauty
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
 export function buildTrace({ nums }) {
   let beauty = 0
-  const frames = [{ phase: 'start', activeLine: L('set beauty to 0'), pythonLine: 2, index: -1, beauty, message: 'The effective value of a triple (i, j, k) is (nums[i] AND nums[j]) OR nums[k]. Build the xor over all triples.' }]
+  const frames = [{ phase: 'start', activeLine: L('let beauty = 0'), pythonLine: 2, index: -1, beauty, message: 'For one bit, the triples (i, j, k) pair up so that only the parity of each bit survives. The xor-beauty is the xor of every element.' }]
   nums.forEach((value, index) => {
     beauty ^= value
-    frames.push({ phase: 'fold', activeLine: L('set beauty to beauty xor value'), pythonLine: 4, index, beauty, message: `Xor in ${value}. Running beauty: ${beauty}.` })
+    frames.push({ phase: 'fold', activeLine: L('beauty ^= value'), pythonLine: 4, index, beauty, message: `Xor in ${value}. Running beauty: ${beauty}.` })
   })
   frames.push({ phase: 'done', activeLine: L('return beauty'), pythonLine: 5, index: -1, beauty, message: `Xor-beauty: ${beauty}.` })
   return { input: { nums }, result: beauty, frames }
 }
-
-export const code = `xor-beauty of an array:
-  set beauty to 0
-  for each value in nums do
-    set beauty to beauty xor value
-  the effective values of triples that repeat an index cancel in pairs
-  the triples that remain each contribute one value of nums
-  return beauty`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def xor_beauty(nums):
     beauty = 0

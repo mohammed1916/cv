@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import RecordStateTable from '../../components/shared/RecordStateTable'
-import { phases, parseInput, buildTrace, code, python, pythonLineMap } from './algorithm'
+import { phases, parseInput, buildTrace, code, python } from './algorithm'
 import { Sequence, Vars } from './SeqKit'
 
 const definition = {
@@ -9,7 +9,6 @@ const definition = {
   build: buildTrace,
   code,
   python,
-  pythonLineMap,
   inputLabel: 'JSON: {"words":[...],"chars":"..."}',
   complexity: 'O(total word length + chars) time with O(26) counts. The trace accepts up to 6 words of up to 6 letters and 20 supply letters.',
   examples: [

@@ -20,44 +20,43 @@ export function parseInput(text) {
 export function buildTrace({ target, arr }) {
   const balance = new Map()
   const entries = () => [...balance].map(([value, count]) => ({ value, count }))
-  const frames = [{ phase: 'start', activeLine: L('balance = empty map'), pythonLine: P('balance = Counter()'), snapshot: { entries: [], side: null, index: null, mismatch: null }, message: 'The balance map starts empty. Each value will count up for target and down for arr.' }]
+  const frames = [{ phase: 'start', activeLine: L('const balance = new Map'), pythonLine: P('balance = {}'), snapshot: { entries: [], side: null, index: null, mismatch: null }, message: 'The balance map starts empty. Each value will count up for target and down for arr.' }]
   target.forEach((v, i) => {
     balance.set(v, (balance.get(v) ?? 0) + 1)
-    frames.push({ phase: 'count-target', activeLine: L('for each value in target'), pythonLine: P('for value in target'), snapshot: { entries: entries(), side: 'target', index: i, mismatch: null }, message: `target[${i}] = ${v}: its balance rises to ${balance.get(v)}.` })
+    frames.push({ phase: 'count-target', activeLine: L('for (const value of target)'), pythonLine: P('for value in target'), snapshot: { entries: entries(), side: 'target', index: i, mismatch: null }, message: `target[${i}] = ${v}: its balance rises to ${balance.get(v)}.` })
   })
   arr.forEach((v, i) => {
     balance.set(v, (balance.get(v) ?? 0) - 1)
-    frames.push({ phase: 'count-arr', activeLine: L('for each value in arr'), pythonLine: P('for value in arr'), snapshot: { entries: entries(), side: 'arr', index: i, mismatch: null }, message: `arr[${i}] = ${v}: its balance falls to ${balance.get(v)}.` })
+    frames.push({ phase: 'count-arr', activeLine: L('for (const value of arr)'), pythonLine: P('for value in arr'), snapshot: { entries: entries(), side: 'arr', index: i, mismatch: null }, message: `arr[${i}] = ${v}: its balance falls to ${balance.get(v)}.` })
   })
   let mismatch = null
   for (const [value, count] of balance) {
     if (count !== 0) { mismatch = { value, count }; break }
   }
-  frames.push({ phase: 'compare', activeLine: L('if its count is not 0'), pythonLine: P('if count != 0'), snapshot: { entries: entries(), side: null, index: null, mismatch }, message: mismatch ? `Value ${mismatch.value} has balance ${mismatch.count}, so the multisets differ.` : 'Every balance is zero, so the two arrays hold the same values with the same counts.' })
+  frames.push({ phase: 'compare', activeLine: L('if (count !== 0)'), pythonLine: P('if count != 0'), snapshot: { entries: entries(), side: null, index: null, mismatch }, message: mismatch ? `Value ${mismatch.value} has balance ${mismatch.count}, so the multisets differ.` : 'Every balance is zero, so the two arrays hold the same values with the same counts.' })
   const result = mismatch === null
   frames.push({ phase: 'done', activeLine: L(result ? 'return true' : 'return false'), pythonLine: P(result ? 'return True' : 'return False'), snapshot: { entries: entries(), side: null, index: null, mismatch }, message: result ? 'Return true. Adjacent swaps can reach any order, so the target is reachable.' : 'Return false.' })
   return { input: { target, arr }, result, frames }
 }
 
-export const code = `can reach target by reversals (target, arr):
-  balance = empty map from value to count
-  for each value in target: balance[value] += 1
-  for each value in arr: balance[value] -= 1
-  for each value in balance: if its count is not 0: return false
-  return true`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function canBeEqual(target, arr) {
+  const balance = new Map()
+  for (const value of target) balance.set(value, (balance.get(value) ?? 0) + 1)
+  for (const value of arr) balance.set(value, (balance.get(value) ?? 0) - 1)
+  for (const count of balance.values()) {
+    if (count !== 0) return false
+  }
+  return true
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
-export const python = `from collections import Counter
-
-def can_be_equal(target, arr):
-    balance = Counter()
+export const python = `def can_be_equal(target, arr):
+    balance = {}
     for value in target:
-        balance[value] += 1
+        balance[value] = balance.get(value, 0) + 1
     for value in arr:
-        balance[value] -= 1
+        balance[value] = balance.get(value, 0) - 1
     for count in balance.values():
-        if count != 0:
-            return False
-    return True
-`
+        if count != 0: return False
+    return True`

@@ -22,8 +22,8 @@ export default function FibonacciSumCount() {
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {fibs.map(f => <div key={f} style={{
           padding: '6px 10px', borderRadius: 6, fontFamily: 'monospace',
-          border: '2px solid', borderColor: f === chosen ? '#0891b2' : '#94a3b8',
-          background: f === chosen ? '#cffafe' : undefined,
+          border: '2px solid', borderColor: f === chosen ? 'var(--primary)' : 'var(--border)',
+          background: f === chosen ? 'var(--surface2)' : undefined, color: 'var(--text)',
         }}>{f}</div>)}
       </div>
     </>

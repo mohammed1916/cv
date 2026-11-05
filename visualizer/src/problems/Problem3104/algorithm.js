@@ -1,12 +1,23 @@
-const CODE_TEXT = `set best to -1
-record the first and last index of each letter
-for each start l that is the first occurrence of its letter
-  r = l
-  for each end k from l to the last index
-    if s[k] first occurs before l then stop this start
-    extend r to the last occurrence of s[k] when that is further right
-    if r equals k and the piece is not the whole string then record its length
-return best`
+const CODE_TEXT = `function longestSelfContained(s) {
+  const n = s.length
+  const first = new Map()
+  const last = new Map()
+  for (let i = 0; i < n; i++) {
+    if (!first.has(s[i])) first.set(s[i], i)
+    last.set(s[i], i)
+  }
+  let best = -1
+  for (let l = 0; l < n; l++) {
+    if (first.get(s[l]) !== l) continue
+    let r = l
+    for (let k = l; k < n; k++) {
+      if (first.get(s[k]) < l) break
+      r = Math.max(r, last.get(s[k]))
+      if (r === k && !(l === 0 && k === n - 1)) best = Math.max(best, k - l + 1)
+    }
+  }
+  return best
+}`
 
 const PYTHON_TEXT = `def longest_self_contained(s):
     n = len(s)
@@ -49,21 +60,21 @@ export function buildTrace(s) {
     last.set(s[i], i)
   }
   let best = -1
-  frames.push({ phase: 'start', activeLine: L('set best to -1'), pythonLine: PY('best = -1'), l: -1, k: -1, r: -1, span: null, best, message: 'Record where each letter first and last appears.' })
+  frames.push({ phase: 'start', activeLine: L('let best = -1'), pythonLine: PY('best = -1'), l: -1, k: -1, r: -1, span: null, best, message: 'Record where each letter first and last appears.' })
   for (let l = 0; l < n; l++) {
     if (first.get(s[l]) !== l) continue
     let r = l
-    frames.push({ phase: 'start-l', activeLine: L('for each start l'), pythonLine: PY('for l in range'), l, k: l, r, span: null, best, message: `Try a piece starting at ${l} with letter ${s[l]}.` })
+    frames.push({ phase: 'start-l', activeLine: L('for (let l = 0'), pythonLine: PY('for l in range'), l, k: l, r, span: null, best, message: `Try a piece starting at ${l} with letter ${s[l]}.` })
     for (let k = l; k < n; k++) {
       if (first.get(s[k]) < l) {
-        frames.push({ phase: 'stop', activeLine: L('stop this start'), pythonLine: PY('if first[s[k]] < l'), l, k, r, span: [l, k], best, message: `Letter ${s[k]} also appears before ${l}, so this start cannot work.` })
+        frames.push({ phase: 'stop', activeLine: L('if (first.get(s[k]) < l) break'), pythonLine: PY('if first[s[k]] < l'), l, k, r, span: [l, k], best, message: `Letter ${s[k]} also appears before ${l}, so this start cannot work.` })
         break
       }
       r = Math.max(r, last.get(s[k]))
       const closed = r === k
       const whole = l === 0 && k === n - 1
       if (closed && !whole) best = Math.max(best, k - l + 1)
-      frames.push({ phase: closed && !whole ? 'record' : 'extend', activeLine: L('if r equals k'), pythonLine: PY('if r == k'), l, k, r, span: [l, k], best, message: closed ? (whole ? `The piece ${l} to ${k} is the whole string, so it does not count.` : `The piece ${l} to ${k} is self-contained, length ${k - l + 1}.`) : `Extend r to ${r} because letter ${s[k]} reaches that far.` })
+      frames.push({ phase: closed && !whole ? 'record' : 'extend', activeLine: L('if (r === k'), pythonLine: PY('if r == k'), l, k, r, span: [l, k], best, message: closed ? (whole ? `The piece ${l} to ${k} is the whole string, so it does not count.` : `The piece ${l} to ${k} is self-contained, length ${k - l + 1}.`) : `Extend r to ${r} because letter ${s[k]} reaches that far.` })
     }
   }
   frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: PY('return best'), l: -1, k: -1, r: -1, span: null, best, message: best === -1 ? 'No proper self-contained piece exists, so the answer is -1.' : `The longest proper self-contained piece has length ${best}.` })

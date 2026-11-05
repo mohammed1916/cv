@@ -5,12 +5,15 @@ export const phases = [
   { id: 'done', label: 'Complete', description: 'Return every collected word in text order.' },
 ]
 
-export const code = `following words (words, first, second):
-  collected = []
-  for i from 0 to len(words) - 3:
-    if words[i] == first and words[i + 1] == second:
-      collected.append(words[i + 2])
-  return collected`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function followingWords(words, first, second) {
+  const collected = []
+  for (let i = 0; i + 2 < words.length; i++) {
+    if (words[i] === first && words[i + 1] === second) {
+      collected.push(words[i + 2])
+    }
+  }
+  return collected
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def following_words(words, first, second):
     collected = []
@@ -44,16 +47,23 @@ export function buildTrace({ words, first, second }) {
     state: { words, first, second, index: null, window: [], collected: [...collected], ...extra },
   })
 
-  push('start', 'collected = []', 'Start with an empty result and the full word list.', {}, 'collected = []')
+  push('start', 'const collected = []', 'Start with an empty result and the full word list.', {}, 'collected = []')
   for (let i = 0; i + 2 < words.length; i++) {
     const window = words.slice(i, i + 3)
     const matched = window[0] === first && window[1] === second
-    push('scan', 'if words[i] == first', `Window ${i}: "${window.join(' ')}". ${matched ? 'The phrase matches.' : 'The phrase does not match.'}`, { index: i, window })
+    push('scan', 'if (words[i] === first', `Window ${i}: "${window.join(' ')}". ${matched ? 'The phrase matches.' : 'The phrase does not match.'}`, { index: i, window }, 'if words[i] == first')
     if (matched) {
       collected.push(window[2])
-      push('collect', 'collected.append', `Record "${window[2]}", the word after the matched phrase.`, { index: i, window })
+      push('collect', 'collected.push', `Record "${window[2]}", the word after the matched phrase.`, { index: i, window }, 'collected.append')
     }
   }
   push('done', 'return collected', collected.length ? `Result: ${collected.join(', ')}.` : 'No phrase match, so the result is empty.')
   return { input: { words, first, second }, result: [...collected], frames }
 }
+
+export const inputLabel = 'Object with text, first and second'
+export const complexity = 'O(n) over the words, checking a window of three words at each start position.'
+export const examples = [
+  { label: 'Two matches', input: '{"text": "the cat was the cat ran", "first": "the", "second": "cat"}' },
+  { label: 'Overlapping', input: '{"text": "go go go", "first": "go", "second": "go"}' },
+]

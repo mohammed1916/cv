@@ -19,7 +19,7 @@ export function buildTrace({ n, blacklist, draws }) {
   for (let v = m; v < n; v++) if (!black.has(v)) tail.push(v)
   let t = 0
   for (const b of blacklist) if (b < m) mapping.set(b, tail[t++])
-  const frames = [{ phase: 'start', pythonLine: 10, draw: null, pick: null, mapping: [...mapping.entries()], activeLine: L('m = n minus'), message: `Map ${blacklist.length} blacklisted value(s) below ${m} to whitelisted values in [${m}, ${n}).` }]
+  const frames = [{ phase: 'start', pythonLine: 2, draw: null, pick: null, mapping: [...mapping.entries()], activeLine: L('m = n minus'), message: `Map ${blacklist.length} blacklisted value(s) below ${m} to whitelisted values in [${m}, ${n}).` }]
   const results = []
   draws.forEach((r, i) => {
     const pick = mapping.has(r) ? mapping.get(r) : r
@@ -30,18 +30,22 @@ export function buildTrace({ n, blacklist, draws }) {
   return { input: { n, blacklist, draws }, result: results, mapping, frames }
 }
 
-export const code = `pickWithBlacklist(n, blacklist, draws):
-  m = n minus the count of blacklist
-  black = set of blacklist values
-  tail = the values from m to n - 1 that are not in black, in order
-  mapping = empty map
-  for each b in blacklist below m, map b to the next value taken from tail
-  results = empty list
-  for each draw r
-    if r is a key in mapping, pick = mapping[r]
-    otherwise, pick = r
-    append pick to results
-  return results`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function pickWithBlacklist(n, blacklist, draws) {
+  const m = n - blacklist.length // m = n minus the count of blacklist
+  const black = new Set(blacklist)
+  const tail = []
+  for (let v = m; v < n; v++) if (!black.has(v)) tail.push(v)
+  const mapping = new Map()
+  let t = 0
+  for (const b of blacklist) if (b < m) mapping.set(b, tail[t++])
+  const results = []
+  for (const r of draws) {
+    if (mapping.has(r)) results.push(mapping.get(r)) // if r is a key in mapping, pick = mapping[r]
+    else results.push(r) // otherwise, pick = r
+  }
+  return results
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def random_pick_with_blacklist(n, blacklist, draws):

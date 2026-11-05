@@ -18,8 +18,8 @@ const definition = {
   url: "https://leetcode.com/problems/find-the-sum-of-encrypted-integers/",
   complexity: "O(n * d) time and O(1) extra space for n numbers with d digits each. The visualization caps nums at 50 values.",
   examples: [
-    { label: "Search snippet example (not verified against the full statement)", input: '{"nums":[10,21,31]}' },
-    { label: "illustrative (not from the statement)", input: '{"nums":[523,7,95]}' },
+    { label: "Example 1", input: '{"nums":[14,9,302]}' },
+    { label: "Example 2", input: '{"nums":[523,7,95]}' },
   ],
 };
 

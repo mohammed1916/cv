@@ -1,31 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-
-const code = `show the first three rows of a table
-  take rows from position 0 up to position 3
-  keep their original order
-  return them`
-const python = `import pandas as pd
-
-def first_three(employees):
-    return employees.head(3)`
-
-function parseInput(text) {
-  const input = JSON.parse(text)
-  if (!input || !Array.isArray(input.rows)) throw new Error('Use { "rows": [ {...}, ... ] }.')
-  return input
-}
-
-function buildTrace({ rows }) {
-  const frames = [{ phase: 'start', activeLine: 1, message: `The table has ${rows.length} row(s).`, at: -1, out: [] }]
-  const out = []
-  for (let i = 0; i < Math.min(3, rows.length); i++) {
-    out.push(JSON.stringify(rows[i]))
-    frames.push({ phase: 'step', activeLine: 2, message: `Keep row ${i}.`, at: i, out: [...out] })
-  }
-  frames.push({ phase: 'done', activeLine: 4, message: `${out.length} row(s) returned; the rest are not shown.`, at: -1, out: [...out] })
-  return { frames }
-}
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -45,8 +20,10 @@ const definition = {
 
 export default function DisplayFirstThreeRows() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <IndexedSequence label="Returned rows" length={step.out.length} valueAt={i => step.out[i]} active={step.at} />
-  </>} renderReasoning={() => <>
+    <IndexedSequence label="Table rows (first three kept)" length={Math.max(step.out.length, 1)} valueAt={i => step.out[i] ?? ''} active={step.at}
+      roleAt={i => (i < step.out.length ? 'kept' : 'dropped')} />
+  </>} renderReasoning={({ step }) => <>
+    <p>{step.message}</p>
     <p>A prefix is the first few items in the order they already have. Nothing is reordered or recomputed.</p>
   </>} />
 }

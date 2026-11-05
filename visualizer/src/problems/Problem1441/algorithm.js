@@ -15,10 +15,24 @@ const PYTHON = `def build_with_stack(target, n):
             cur += 1
         ops.append("Push")
         cur = v + 1
-    return ops`
+
+    return ops
+`
 
 export const python = PYTHON
-export const code = PYTHON.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function buildWithStack(target, n) {
+  const ops = []
+  let cur = 1
+  for (const v of target) {
+    while (cur < v) {
+      ops.push('Push', 'Pop')
+      cur += 1
+    }
+    ops.push('Push')
+    cur = v + 1
+  }
+  return ops
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 export const pythonLineMap = Object.fromEntries(code.map(({ line }) => [line, line]))
 const lineAt = marker => code.find(({ text }) => text.includes(marker)).line
 
@@ -44,12 +58,12 @@ export function buildTrace({ target, n }) {
   let cur = 1
   const snap = (index, skipped = null) => ({ target, n, index, stack: [...stack], next: cur, ops: [...ops], skipped })
 
-  frames.push({ phase: 'advance', activeLine: lineAt('ops = []'), message: `The stream will read 1 to ${n}. The target is [${target.join(', ')}].`, snapshot: snap(null) })
+  frames.push({ phase: 'advance', activeLine: lineAt('const ops = []'), message: `The stream will read 1 to ${n}. The target is [${target.join(', ')}].`, snapshot: snap(null) })
   target.forEach((v, index) => {
-    frames.push({ phase: 'advance', activeLine: lineAt('for v in target'), message: `The target needs ${v} next. The stream is at ${cur}.`, snapshot: snap(index) })
+    frames.push({ phase: 'advance', activeLine: lineAt('for (const v of target)'), message: `The target needs ${v} next. The stream is at ${cur}.`, snapshot: snap(index) })
     while (cur < v) {
       ops.push('Push', 'Pop')
-      frames.push({ phase: 'skip', activeLine: lineAt('ops.append("Push")'), message: `${cur} is not in the target, so push it and pop it again.`, snapshot: snap(index, cur) })
+      frames.push({ phase: 'skip', activeLine: lineAt("ops.push('Push', 'Pop')"), message: `${cur} is not in the target, so push it and pop it again.`, snapshot: snap(index, cur) })
       cur += 1
       frames.push({ phase: 'skip', activeLine: lineAt('cur += 1'), message: `Stream advances to ${cur}.`, snapshot: snap(index, null) })
     }

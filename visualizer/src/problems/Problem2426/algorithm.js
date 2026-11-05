@@ -17,7 +17,7 @@ export function buildTrace(input) {
   const n = nums1.length
   const d = nums1.map((v, i) => v - nums2[i])
   let total = 0
-  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set d[i]'), j: null, counted: null, total: 0, d: d.slice(), message: 'Each pair i < j satisfies the inequality when d[i] - d[j] is at most diff, where d[i] = nums1[i] - nums2[i].' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('const d = nums1.map'), j: null, counted: null, total: 0, d: d.slice(), message: 'Each pair i < j satisfies the inequality when d[i] - d[j] is at most diff, where d[i] = nums1[i] - nums2[i].' }]
   for (let j = 1; j < n; j++) {
     let counted = 0
     for (let i = 0; i < j; i++) if (d[i] <= d[j] + diff) counted++
@@ -28,14 +28,18 @@ export function buildTrace(input) {
   return { input, result: total, frames }
 }
 
-export const code = `count pairs i < j that satisfy the inequality:
-  set d[i] to nums1[i] - nums2[i] for each i
-  set total to 0
-  for j from 1 to n - 1:
-    count i below j with d[i] <= d[j] + diff
-    add that count to total
-  return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function numberOfPairs(nums1, nums2, diff) {
+  const d = nums1.map((v, i) => v - nums2[i]) // d[i] = nums1[i] - nums2[i]
+  let total = 0
+  for (let j = 1; j < d.length; j++) {
+    let counted = 0
+    for (let i = 0; i < j; i++) if (d[i] <= d[j] + diff) counted++ // count i below j
+    total += counted
+  }
+  return total // return total
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def number_of_pairs(nums1, nums2, diff):
     d = [a - b for a, b in zip(nums1, nums2)]

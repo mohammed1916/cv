@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-number-of-operations-to-make-array-xor-equal-to-k/',
   complexity: 'O(n) time and O(1) space.',
   examples: [
-    { label: 'Example 1', input: '{"nums": [2,1,3,4], "k": 1}' },
-    { label: 'Example 2', input: '{"nums": [2,0,2,0], "k": 0}' },
+    { label: 'Example 1', input: '{"nums": [7,4,1], "k": 5}' },
+    { label: 'Example 2', input: '{"nums": [9,9,6], "k": 0}' },
   ],
 }
 

@@ -19,7 +19,7 @@ export function buildTrace(data) {
   let closed = Array(k + 1).fill(-Infinity)
   closed[0] = 0
   let open = Array(k + 1).fill(-Infinity)
-  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('set closed[0]'), i: -1, closed: [...closed], open: [...open], message: 'Nothing chosen yet: zero subarrays and strength 0.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('closed[0] = 0'), i: -1, closed: [...closed], open: [...open], message: 'Nothing chosen yet: zero subarrays and strength 0.' }]
   for (let i = 0; i < nums.length; i++) {
     const x = nums[i]
     const nextClosed = closed.map((value, j) => Math.max(value, open[j]))
@@ -31,20 +31,30 @@ export function buildTrace(data) {
     }
     closed = nextClosed
     open = nextOpen
-    frames.push({ pythonLine: 15, phase: 'element', activeLine: L('an open count continues'), i, closed: [...closed], open: [...open], message: `Element ${i} is ${x}: each count either keeps its subarray going or starts a new one here.` })
+    frames.push({ pythonLine: 15, phase: 'element', activeLine: L('const nextClosed'), i, closed: [...closed], open: [...open], message: `Element ${i} is ${x}: each count either keeps its subarray going or starts a new one here.` })
   }
   const result = Math.max(closed[k], open[k])
-  frames.push({ pythonLine: 17, phase: 'done', activeLine: L('return the better'), i: nums.length - 1, closed: [...closed], open: [...open], message: `The maximum strength of ${k} disjoint subarrays is ${result}.` })
+  frames.push({ pythonLine: 17, phase: 'done', activeLine: L('return Math.max(closed[k]'), i: nums.length - 1, closed: [...closed], open: [...open], message: `The maximum strength of ${k} disjoint subarrays is ${result}.` })
   return { input: data, result, frames }
 }
 
-export const code = `maximum strength of exactly k disjoint subarrays:
-  set closed[0] to 0 and every other closed or open entry to minus infinity
-  for each element x from left to right:
-    a closed count keeps the better of closed and open values
-    an open count continues its subarray with x, or starts a new one with x
-    weight the j-th subarray by (-1)^(j+1) times (k - j + 1)
-  return the better of closed[k] and open[k]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function maxStrength(nums, k) {
+  const neg = -Infinity
+  let closed = Array(k + 1).fill(neg)
+  closed[0] = 0
+  let open = Array(k + 1).fill(neg)
+  for (const x of nums) {
+    const nextClosed = closed.map((value, j) => Math.max(value, open[j]))
+    const nextOpen = Array(k + 1).fill(neg)
+    for (let j = 1; j <= k; j++) {
+      const w = (j % 2 === 1 ? 1 : -1) * (k - j + 1)
+      nextOpen[j] = Math.max(open[j] + w * x, Math.max(closed[j - 1], open[j - 1]) + w * x)
+    }
+    closed = nextClosed
+    open = nextOpen
+  }
+  return Math.max(closed[k], open[k])
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def max_strength(nums, k):

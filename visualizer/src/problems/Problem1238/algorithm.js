@@ -7,40 +7,34 @@ export function parseInput(text) {
   return { n, start }
 }
 
-export const code = `circular permutation of all n-bit numbers starting at start
-  set size to two to the power n
-  for each index i from 0 to size minus 1
-    set gray to i XOR (i shifted right by one)
-    append start XOR gray to the answer
-  return the answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+// Each line of JavaScript is paired with the Python line on the same row.
+const LINES = [
+  ['function circularPermutation(n, start) {', 'def circular_permutation(n, start):'],
+  ['  const size = 2 ** n', '    size = 1 << n'],
+  ['  const answer = []', '    answer = []'],
+  ['  for (let index = 0; index < size; index++) {', '    for index in range(size):'],
+  ['    const gray = index ^ (index >> 1)', '        gray = index ^ (index >> 1)'],
+  ['    answer.push(start ^ gray)', '        answer.append(start ^ gray)'],
+  ['  }', ''],
+  ['  return answer', '    return answer'],
+  ['}', ''],
+]
+const codeLines = LINES.map(([js]) => js)
+export const code = codeLines.map((text, index) => ({ line: index + 1, text }))
+const L = s => codeLines.findIndex(c => c.includes(s)) + 1
+export const python = LINES.map(([, py]) => py).join('\n')
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export function buildTrace({ n, start }) {
   const size = 2 ** n
   const answer = []
-  const frames = [{ phase: 'size', activeLine: L('set size to'), pythonLine: PY('size = 1 << n'), index: -1, gray: null, answer: [], message: `There are ${size} numbers with ${n} bits.` }]
+  const frames = [{ phase: 'size', activeLine: L('const size'), pythonLine: P('size = 1 << n'), index: -1, gray: null, answer: [], message: `There are ${size} numbers with ${n} bits.` }]
   for (let index = 0; index < size; index++) {
     const gray = index ^ (index >> 1)
-    frames.push({ phase: 'gray', activeLine: L('set gray to'), pythonLine: PY('gray = index ^'), index, gray, answer: [...answer], message: `Gray code of ${index} is ${gray.toString(2).padStart(n, '0')}.` })
+    frames.push({ phase: 'gray', activeLine: L('const gray'), pythonLine: P('gray = index ^'), index, gray, answer: [...answer], message: `Gray code of ${index} is ${gray.toString(2).padStart(n, '0')}.` })
     answer.push(start ^ gray)
-    frames.push({ phase: 'append', activeLine: L('append start XOR gray'), pythonLine: PY('answer.append'), index, gray, answer: [...answer], message: `Append ${start} XOR ${gray} = ${start ^ gray}.` })
+    frames.push({ phase: 'append', activeLine: L('answer.push'), pythonLine: P('answer.append'), index, gray, answer: [...answer], message: `Append ${start} XOR ${gray} = ${start ^ gray}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the answer'), pythonLine: PY('return answer'), index: -1, gray: null, answer: [...answer], message: `Circular order starting at ${start}. Each step, including the wrap-around, changes one bit.` })
+  frames.push({ phase: 'done', activeLine: L('return answer'), pythonLine: P('return answer'), index: -1, gray: null, answer: [...answer], message: `Circular order starting at ${start}. Each step, including the wrap-around, changes one bit.` })
   return { input: { n, start }, result: answer, frames }
-}
-
-export const python = `def circular_permutation(n, start):
-    size = 1 << n
-    answer = []
-    for index in range(size):
-        gray = index ^ (index >> 1)
-        answer.append(start ^ gray)
-    return answer
-`
-
-const PY = (s, nth = 0) => {
-  let hits = -1
-  const i = python.split('\n').findIndex(line => line.includes(s) && ++hits === nth)
-  if (i < 0) throw new Error(`no Python line: ${s}`)
-  return i + 1
 }

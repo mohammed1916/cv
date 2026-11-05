@@ -17,7 +17,7 @@ export default function RepeatedBaseVisual() {
     return <>
       <Sequence label="first (block shaded when a shared base exists)" values={[...first]} marks={marks} />
       <Sequence label="second" values={[...second]} marks={marks} />
-      <Vars vars={{ 'first + second': joinedFirst, 'second + first': joinedSecond, 'a (length)': matches ? a : null, 'b (length)': matches ? b : null }} />
+      <Vars vars={{ 'first + second': joinedFirst, 'second + first': joinedSecond, 'base length a': matches ? a : null, 'Euclid remainder b': matches ? b : null, 'copies of base in first': matches && a ? first.length / a : null, 'copies of base in second': matches && a ? second.length / a : null }} />
       <p aria-label="Order check">{matches ? 'The two orders match, so both strings are built from one block.' : 'The two orders differ, so no shared block exists.'}</p>
       <output aria-label="Result">{step.phase === 'done' ? `Result: "${run.result}"` : step.message}</output>
     </>

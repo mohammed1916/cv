@@ -18,29 +18,35 @@ export function buildTrace({ candies, extraCandies }) {
   const best = Math.max(...candies)
   const flags = []
   const snap = (current, extra = {}) => ({ current, best, extra: extraCandies, flags: [...flags], ...extra })
-  const frames = [{ phase: 'start', activeLine: L('kids with greatest'), pythonLine: P('def kids_with_candies'), snapshot: snap(null), message: `Each child may receive the ${extraCandies} extra candies in turn.` }]
-  frames.push({ phase: 'maximum', activeLine: L('best = largest'), pythonLine: P('best = max'), snapshot: snap(null), message: `The largest original count is ${best}.` })
+  const frames = [{ phase: 'start', activeLine: L('function kidsWith'), pythonLine: P('def kids_with_candies'), snapshot: snap(null), message: `Each child may receive the ${extraCandies} extra candies in turn.` }]
+  frames.push({ phase: 'maximum', activeLine: L('const best'), pythonLine: P('best = max'), snapshot: snap(null), message: `The largest original count is ${best}.` })
   candies.forEach((count, i) => {
     const total = count + extraCandies
     const ok = total >= best
     flags.push(ok)
-    frames.push({ phase: 'test', activeLine: L('append'), pythonLine: P('count + extra >= best'), snapshot: snap(i, { count, total, ok }), message: `Child ${i} has ${count} + ${extraCandies} = ${total}, which is ${ok ? 'at least' : 'below'} ${best}, so the flag is ${ok}.` })
+    frames.push({ phase: 'test', activeLine: L('answer.push'), pythonLine: P('count + extra >= best'), snapshot: snap(i, { count, total, ok }), message: `Child ${i} has ${count} + ${extraCandies} = ${total}, which is ${ok ? 'at least' : 'below'} ${best}, so the flag is ${ok}.` })
   })
   const result = [...flags]
   frames.push({ phase: 'done', activeLine: L('return answer'), pythonLine: P('return'), snapshot: snap(null, { result }), message: `Flags: ${result.join(', ')}.` })
   return { input: { candies, extraCandies }, result, frames }
 }
 
-export const code = `kids with greatest (candies, extra):
-  best = largest value in candies
-  answer = empty list
-  for each count in candies:
-    append (count + extra >= best) to answer
-  return answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function kidsWithCandies(candies, extraCandies) {
+  const best = Math.max(...candies)
+  const answer = []
+  for (const count of candies) {
+    answer.push(count + extraCandies >= best)
+  }
+  return answer
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def kids_with_candies(candies, extra):
     best = max(candies)
-    return [count + extra >= best for count in candies]
+    answer = []
+    for count in candies:
+        answer.append(count + extra >= best)
+
+    return answer
 `
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

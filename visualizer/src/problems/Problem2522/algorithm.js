@@ -7,41 +7,46 @@ export function parseInput(text) {
   return { s, k }
 }
 
+export const code = `function minPartitions(s, k) {
+  const n = s.length
+  const dp = Array(n + 1).fill(Infinity)
+  dp[0] = 0
+  for (let i = 1; i <= n; i++) {
+    for (let j = 0; j < i; j++) {
+      if (s[j] === '0') continue
+      if (Number(s.slice(j, i)) <= k) dp[i] = Math.min(dp[i], dp[j] + 1)
+    }
+  }
+  return dp[n] === Infinity ? -1 : dp[n]
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
 export function buildTrace(input) {
   const { s, k } = input
   const n = s.length
   const dp = Array(n + 1).fill(null)
   dp[0] = 0
-  const frames = [{ phase: 'start', activeLine: L('set dp[0] to 0'), pythonLine: 5, end: 0, start: -1, dp: [...dp], message: 'The empty prefix needs zero substrings.' }]
+  const frames = [{ phase: 'start', activeLine: L('dp[0] = 0'), pythonLine: 5, end: 0, start: -1, dp: [...dp], message: 'The empty prefix needs zero pieces. Every other prefix starts unset.' }]
   for (let i = 1; i <= n; i++) {
     for (let j = 0; j < i; j++) {
       if (s[j] === '0') {
-        frames.push({ phase: 'skip', activeLine: L('skip this start'), pythonLine: 9, end: i, start: j, dp: [...dp], message: `Substrings cannot start with 0, so no piece starts at ${j}.` })
+        frames.push({ phase: 'skip', activeLine: L("if (s[j] === '0')"), pythonLine: 9, end: i, start: j, dp: [...dp], message: `A piece cannot start with 0, so the piece from ${j} to ${i - 1} is skipped.` })
         continue
       }
       const value = Number(s.slice(j, i))
       if (value <= k && dp[j] !== null) {
         const candidate = dp[j] + 1
         dp[i] = dp[i] === null ? candidate : Math.min(dp[i], candidate)
-        frames.push({ phase: 'piece', activeLine: L('if the number from j to i'), pythonLine: 11, end: i, start: j, dp: [...dp], message: `${s.slice(j, i)} = ${value} is at most ${k}, so the first ${i} digits can use ${dp[i]} pieces.` })
+        frames.push({ phase: 'piece', activeLine: L('if (Number(s.slice'), pythonLine: 11, end: i, start: j, dp: [...dp], message: `${s.slice(j, i)} = ${value} is at most ${k}. Taking it after prefix ${j} gives ${dp[i]} pieces for the first ${i} digits.` })
+      } else if (value > k) {
+        frames.push({ phase: 'big', activeLine: L('if (Number(s.slice'), pythonLine: 10, end: i, start: j, dp: [...dp], message: `${s.slice(j, i)} = ${value} is larger than ${k}, so this piece is not allowed.` })
       }
     }
   }
   const result = dp[n] === null ? -1 : dp[n]
-  frames.push({ phase: 'done', activeLine: L('return dp[n]'), pythonLine: 12, end: n, start: -1, dp: [...dp], message: result === -1 ? 'No valid partition exists.' : `Fewest substrings: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return dp[n]'), pythonLine: 12, end: n, start: -1, dp: [...dp], message: result === -1 ? 'No valid partition exists.' : `Fewest pieces: ${result}.` })
   return { input, result, frames }
 }
-
-export const code = `minimum substrings with values at most k (s, k):
-  set dp[0] to 0 and every other entry to nothing
-  for each end position i from 1 to n:
-    for each start j from 0 to i - 1:
-      if s[j] is 0 then skip this start, since a substring cannot start with 0
-      if the number from j to i is at most k then
-        set dp[i] to the smaller of dp[i] and dp[j] + 1
-  if dp[n] is nothing then return -1
-  return dp[n]`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def min_partitions(s, k):
     n = len(s)

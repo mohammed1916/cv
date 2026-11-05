@@ -24,9 +24,9 @@ export function buildTrace(data) {
   const boxes = data.boxes
   const n = boxes.length
   const trips = [0, ...Array(n).fill(Infinity)]
-  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('set trips[0]'), i: 0, j: null, trips: [...trips], message: 'Zero boxes need zero trips. Every other prefix is not reached yet.' }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('const trips = [0'), i: 0, j: null, trips: [...trips], message: 'Zero boxes need zero trips. Every other prefix is not reached yet.' }]
   for (let i = 1; i <= n; i++) {
-    frames.push({ phase: 'end', pythonLine: 4, activeLine: L('for each end position'), i, j: null, trips: [...trips], message: `Find the cheapest trip whose last box is box ${i}.` })
+    frames.push({ phase: 'end', pythonLine: 4, activeLine: L('for (let i = 1; i <= n; i++)'), i, j: null, trips: [...trips], message: `Find the cheapest trip whose last box is box ${i}.` })
     let changes = 0
     let count = 0
     let weight = 0
@@ -34,31 +34,39 @@ export function buildTrace(data) {
       count++
       weight += boxes[j][1]
       if (count > data.max_boxes || weight > data.max_weight) {
-        frames.push({ phase: 'limit', pythonLine: 12, activeLine: L('stop as soon'), i, j, trips: [...trips], message: `Adding box ${j + 1} breaks a limit (${count} boxes, weight ${weight}). Stop extending this trip.` })
+        frames.push({ phase: 'limit', pythonLine: 12, activeLine: L('if (count > maxBoxes'), i, j, trips: [...trips], message: `Adding box ${j + 1} breaks a limit (${count} boxes, weight ${weight}). Stop extending this trip.` })
         break
       }
       if (j < i - 1 && boxes[j][0] !== boxes[j + 1][0]) changes++
       const cost = trips[j] + 2 + changes
       if (cost < trips[i]) trips[i] = cost
-      frames.push({ phase: 'trip', pythonLine: 15, activeLine: L('the trip costs'), i, j, trips: [...trips], message: `Trip carrying boxes ${j + 1} to ${i}: ${trips[j]} + 2 + ${changes} port changes = ${cost}. Keep the cheapest, now ${trips[i]}.` })
+      frames.push({ phase: 'trip', pythonLine: 15, activeLine: L('trips[i] = Math.min'), i, j, trips: [...trips], message: `Trip carrying boxes ${j + 1} to ${i}: ${trips[j]} + 2 + ${changes} port changes = ${cost}. Keep the cheapest, now ${trips[i]}.` })
     }
   }
-  frames.push({ phase: 'done', pythonLine: 16, activeLine: L('return trips'), i: n, j: null, trips: [...trips], message: `The fewest trips for all ${n} boxes is ${trips[n]}.` })
+  frames.push({ phase: 'done', pythonLine: 16, activeLine: L('return trips[n]'), i: n, j: null, trips: [...trips], message: `The fewest trips for all ${n} boxes is ${trips[n]}.` })
   return { input: data, result: trips[n], frames, trips }
 }
 
-export const code = `minimum trips to deliver every box in order:
-  set trips[0] to 0 and every other entry to infinity
-  for each end position i from 1 to the number of boxes:
-    walk the start j backwards from box i-1
-    stop as soon as the boxes j to i-1 break a box or weight limit
-    add one port change when boxes j and j+1 go to different ports
-    the trip costs trips[j] + 2 + changes
-    keep the cheapest cost in trips[i]
-  return trips[n]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minimumTrips(boxes, portsCount, maxBoxes, maxWeight) {
+  const n = boxes.length
+  const trips = [0, ...Array(n).fill(Infinity)]
+  for (let i = 1; i <= n; i++) {
+    let changes = 0
+    let count = 0
+    let weight = 0
+    for (let j = i - 1; j >= 0; j--) {
+      count++
+      weight += boxes[j][1]
+      if (count > maxBoxes || weight > maxWeight) break
+      if (j < i - 1 && boxes[j][0] !== boxes[j + 1][0]) changes++
+      trips[i] = Math.min(trips[i], trips[j] + 2 + changes)
+    }
+  }
+  return trips[n]
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
-export const python = `def min_trips(boxes, ports_count, max_boxes, max_weight):
+export const python = `def minimum_trips(boxes, ports_count, max_boxes, max_weight):
     n = len(boxes)
     trips = [0] + [float('inf')] * n
     for i in range(1, n + 1):

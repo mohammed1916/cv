@@ -8,39 +8,50 @@ export function parseInput(text) {
   return { left, right }
 }
 
-export const code = `closest pair of primes in the range from left to right
-  let best be unset and the answer be minus one, minus one
-  let previous be unset
-  for each number x from left to right
-  if x is not prime then skip it
-  if previous is set and x minus previous is less than best then record the pair
-  set previous to x
-  return the answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-
 const isPrime = x => {
   if (x < 2) return false
   for (let d = 2; d * d <= x; d++) if (x % d === 0) return false
   return true
 }
 
-export function buildTrace({ left, right }) {
+export const code = `function closestPrimes(left, right) {
   let best = Infinity
   let answer = [-1, -1]
-  let previous = null
-  const frames = [{ phase: 'start', activeLine: L('let best be unset'), pythonLine: 12, index: -1, answer: [...answer], message: `Look for the closest primes between ${left} and ${right}.` }]
+  let previous = -1
   for (let x = left; x <= right; x++) {
     if (!isPrime(x)) continue
-    if (previous !== null && x - previous < best) {
+    if (previous !== -1 && x - previous < best) {
       best = x - previous
       answer = [previous, x]
-      frames.push({ phase: 'record', activeLine: L('if previous is set'), pythonLine: 19, index: x - left, answer: [...answer], message: `Gap ${best} between ${previous} and ${x} is the new best.` })
-    } else {
-      frames.push({ phase: 'prime', activeLine: L('if x is not prime'), pythonLine: 16, index: x - left, answer: [...answer], message: `${x} is prime; the best gap is still ${best === Infinity ? 'unset' : best}.` })
     }
     previous = x
   }
-  frames.push({ phase: 'done', activeLine: L('return the answer'), pythonLine: 22, index: -1, answer: [...answer], message: `Answer: [${answer.join(', ')}].` })
+  return answer
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export function buildTrace({ left, right }) {
+  let best = Infinity
+  let answer = [-1, -1]
+  let previous = -1
+  const primes = []
+  const frames = [{ phase: 'start', activeLine: L('let best = Infinity'), pythonLine: 12, index: -1, previous, answer: [...answer], best: null, primes: [], message: `Look for the closest primes between ${left} and ${right}.` }]
+  for (let x = left; x <= right; x++) {
+    if (!isPrime(x)) {
+      frames.push({ phase: 'composite', activeLine: L('if (!isPrime(x))'), pythonLine: 15, index: x - left, previous, answer: [...answer], best: best === Infinity ? null : best, primes: [...primes], message: `${x} has a divisor, so it is skipped.` })
+      continue
+    }
+    primes.push(x)
+    if (previous !== -1 && x - previous < best) {
+      best = x - previous
+      answer = [previous, x]
+      frames.push({ phase: 'record', activeLine: L('best = x - previous'), pythonLine: 18, index: x - left, previous, answer: [...answer], best, primes: [...primes], message: `${x} is prime. The gap from ${previous} is ${best}, which beats every earlier gap, so [${answer.join(', ')}] is the new pair.` })
+    } else {
+      frames.push({ phase: 'prime', activeLine: L('if (previous !== -1'), pythonLine: 16, index: x - left, previous, answer: [...answer], best: best === Infinity ? null : best, primes: [...primes], message: `${x} is prime. ${previous === -1 ? 'It is the first prime, so there is no gap yet.' : `Its gap to ${previous} is ${x - previous}, which does not beat ${best}.`}` })
+    }
+    previous = x
+  }
+  frames.push({ phase: 'done', activeLine: L('return answer'), pythonLine: 21, index: -1, previous, answer: [...answer], best: best === Infinity ? null : best, primes: [...primes], message: `Answer: [${answer.join(', ')}].` })
   return { input: { left, right }, result: answer, frames }
 }
 
@@ -55,13 +66,13 @@ export const python = `def closest_primes(left, right):
             d += 1
         return True
 
-    best = None
+    best = float('inf')
     answer = [-1, -1]
-    previous = None
+    previous = -1
     for x in range(left, right + 1):
         if not is_prime(x):
             continue
-        if previous is not None and (best is None or x - previous < best):
+        if previous != -1 and x - previous < best:
             best = x - previous
             answer = [previous, x]
         previous = x

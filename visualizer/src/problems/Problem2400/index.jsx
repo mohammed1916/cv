@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-ways-to-reach-a-position-after-exactly-k-steps/',
   complexity: 'O(k^2) time. The visualization caps all values at 40.',
   examples: [
-    { label: 'Example 1', input: '{"start_pos":1,"end_pos":2,"k":3}' },
-    { label: 'Unreachable', input: '{"start_pos":2,"end_pos":5,"k":10}' },
+    { label: 'Six steps', input: '{"start_pos":3,"end_pos":7,"k":6}' },
+    { label: 'Unreachable', input: '{"start_pos":9,"end_pos":2,"k":4}' },
   ],
 }
 

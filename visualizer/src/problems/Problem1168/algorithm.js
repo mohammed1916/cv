@@ -6,16 +6,17 @@ export const phases = [
   { id: 'done', label: 'Result', description: 'Report the total cost of the chosen wells and pipes.' },
 ]
 
-const CODE_LINES = [
-  'FUNCTION minCostToSupplyWater(n, wells, pipes)',
-  '  edges <- a source edge to each house (its well cost) plus each pipe',
-  '  sort edges by cost',
-  '  every house and the source starts as its own group',
-  '  total <- 0',
-  '  FOR each edge (u, v, cost) in sorted order',
-  '    IF u and v are in different groups THEN join them, total <- total + cost',
-  '  RETURN total',
-]
+export const code = `function minCostToSupplyWater(n, wells, pipes) {
+  const edges = [...wells.map((cost, i) => [0, i + 1, cost]), ...pipes]
+  edges.sort((x, y) => x[2] - y[2])
+  const parent = Array.from({ length: n + 1 }, (_, i) => i)
+  const find = x => { while (parent[x] !== x) x = parent[x]; return x }
+  let total = 0
+  for (const [u, v, cost] of edges) {
+    if (find(u) !== find(v)) { parent[find(u)] = find(v); total += cost }
+  }
+  return total
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 const PYTHON_LINES = [
   'def minCostToSupplyWater(n, wells, pipes):',
@@ -39,11 +40,6 @@ const PYTHON_LINES = [
 const py = text => PYTHON_LINES.findIndex(line => line.includes(text)) + 1
 
 export const python = PYTHON_LINES.join('\n')
-export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }))
-export const pythonLineMap = {
-  1: py('def minCost'), 2: py('edges = [(cost, 0'), 3: py('edges += '), 4: py('edges.sort'), 5: py('parent = list'),
-  6: py('total = 0'), 7: py('for cost'), 8: py('if ru != rv'), 9: py('return total'),
-}
 
 const HOUSE_LIMIT = 20
 const PIPE_LIMIT = 40
@@ -76,6 +72,10 @@ export function parseInput(text) {
   return { wells: [...wells], pipes: pipes.map(pipe => [...pipe]) }
 }
 
+// Code line (JavaScript) and Python line for each kind of step.
+const JS = { setup: 1, build: 2, sort: 3, groups: 4, total: 6, consider: 6, decide: 7, done: 9 }
+const PY = { setup: py('def minCost'), build: py('edges = [(cost, 0'), sort: py('edges.sort'), groups: py('parent = list'), total: py('total = 0'), consider: py('for cost, u, v'), decide: py('ru, rv = find'), take: py('total += cost'), done: py('return total') }
+
 export function buildTrace(text) {
   const { wells, pipes } = parseInput(text)
   const n = wells.length
@@ -95,38 +95,38 @@ export function buildTrace(text) {
   let sorted = []
   let states = []
   let current = -1
-  const snap = (phase, activeLine, message, extra = {}) => frames.push({
-    phase, activeLine, message,
+  const snap = (phase, activeLine, pythonLine, message, extra = {}) => frames.push({
+    phase, activeLine, pythonLine, message,
     snapshot: { edges: sorted, states: [...states], current, total, groups: groups(), ...extra },
   })
 
-  snap('setup', 1, `There are ${n} houses and ${pipes.length} pipes. Node 0 stands for the water source.`)
-  snap('build', 2, `Each house can get a well from the source. That gives ${n} source edges, plus ${pipes.length} pipes.`)
+  snap('setup', JS.setup, PY.setup, `There are ${n} houses and ${pipes.length} pipes. Node 0 stands for the water source.`)
+  snap('build', JS.build, PY.build, `Each house can get a well from the source. That gives ${n} source edges, plus ${pipes.length} pipes.`)
   sorted = order.map(index => ({ ...raw[index], id: index }))
   sorted.sort((x, y) => x.cost - y.cost || x.id - y.id)
   states = sorted.map(() => 'pending')
-  snap('sort', 3, `Sorted ${sorted.length} candidate edges by cost. Ties keep their listed order.`)
-  snap('sort', 4, 'Every house and the source starts in its own group.')
-  snap('sort', 5, 'The total cost starts at 0.')
+  snap('sort', JS.sort, PY.sort, `Sorted ${sorted.length} candidate edges by cost. Ties keep their listed order.`)
+  snap('sort', JS.groups, PY.groups, 'Every house and the source starts in its own group.')
+  snap('sort', JS.total, PY.total, 'The total cost starts at 0.')
 
   for (let k = 0; k < sorted.length; k++) {
     const edge = sorted[k]
     current = k
     const label = edge.kind === 'well' ? `well at house ${edge.v}` : `pipe ${edge.u}-${edge.v}`
-    snap('union', 6, `Consider the ${label} with cost ${edge.cost}.`)
+    snap('union', JS.consider, PY.consider, `Consider the ${label} with cost ${edge.cost}.`)
     const ru = find(edge.u)
     const rv = find(edge.v)
     if (ru !== rv) {
       parent[ru] = rv
       total += edge.cost
       states[k] = 'taken'
-      snap('union', 7, `The two groups differ, so take ${label}. Total ${total}.`)
+      snap('union', JS.decide, PY.take, `The two groups differ, so take ${label}. Total ${total}.`)
     } else {
       states[k] = 'skipped'
-      snap('union', 7, `Both ends are already connected, so skip ${label}.`)
+      snap('union', JS.decide, PY.decide, `Both ends are already connected, so skip ${label}.`)
     }
   }
   current = -1
-  snap('done', 8, `Every house is supplied. The total cost is ${total}.`, { total })
+  snap('done', JS.done, PY.done, `Every house is supplied. The total cost is ${total}.`, { total })
   return { input: { wells, pipes }, result: total, frames }
 }

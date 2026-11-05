@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/longest-common-suffix-queries/',
   complexity: 'O(total length) time and space for the trie. The visualization caps input at 6 words each.',
   examples: [
-    { label: 'Example 1', input: '{"words_container":["abcd","bcd","xbcd"],"words_query":["cd","bcd","xyz"]}' },
+    { label: 'Example 1', input: '{"words_container":["apple","pale","ple"],"words_query":["le","ale","zz"]}' },
   ],
 }
 

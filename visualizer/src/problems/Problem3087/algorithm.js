@@ -1,4 +1,4 @@
-// Knowledge-derived SQL walkthrough. The sample tweets and the tie rule are invented for this visualization.
+// Teaching SQL walkthrough. The sample tweets and the tie rule are invented for this visualization.
 export const sql = `SELECT hashtag, COUNT(*) AS hashtag_count
 FROM Tagged
 WHERE tweet_date >= '2024-02-01' AND tweet_date < '2024-03-01'
