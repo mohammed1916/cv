@@ -30,7 +30,7 @@
 .mk-chip {
   border: 1px solid var(--border);
   border-radius: 999px;
-  background: rgba(30, 41, 59, 0.8);
+  background: var(--surface2);
   color: var(--text-muted);
   padding: 4px 10px;
   cursor: pointer;
@@ -74,7 +74,7 @@
   min-width: 34px;
   border: 1px solid var(--border);
   border-radius: 8px;
-  background: rgba(30, 41, 59, 0.75);
+  background: var(--surface2);
   color: var(--text);
   font-family: monospace;
   display: grid;
@@ -103,7 +103,7 @@
 .mk-merged span {
   border: 1px solid var(--border);
   border-radius: 6px;
-  background: rgba(30, 41, 59, 0.75);
+  background: var(--surface2);
   color: var(--text);
   font-family: monospace;
   padding: 4px 6px;
