@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { buildTrace, parseInput, python } from './algorithm.js'
+import { buildTrace, parseInput, python, code } from './algorithm.js'
 
 const solve = (nums, forbidden) => buildTrace({ nums, forbidden }).result
 
@@ -127,7 +127,7 @@ test('3785 frames snapshot partial state for the visual', () => {
 test('3785 every frame line lookup resolves', () => {
   for (const [nums, forbidden] of [[[1, 1, 2, 3], [1, 1, 4, 5]], [[7, 7], [8, 7]], [[1, 2], [2, 1]]]) {
     for (const frame of buildTrace({ nums, forbidden }).frames) {
-      assert.ok(frame.activeLine >= 1 && frame.activeLine <= 9)
+      assert.ok(frame.activeLine >= 1 && frame.activeLine <= code.length)
       assert.equal(typeof frame.message, 'string')
     }
   }

@@ -21,7 +21,7 @@ const definition = {
 export default function MinimumCostToPartitionABinaryString() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="s" length={run.input.s.length} valueAt={i => run.input.s[i]} active={step.start}
-      roleAt={i => (i >= step.start && i < step.start + step.len ? (step.split ? 'split' : 'window') : '')} />
+      roleAt={i => (i === step.start ? 'l' : i === step.start + step.len - 1 ? 'r' : i > step.start && i < step.start + step.len - 1 ? (step.split ? 'split' : 'window') : '')} />
     <output aria-label="Segment cost">{`Segment ${step.start} to ${step.start + step.len - 1}: cost ${step.cost}${step.phase === 'choose' ? (step.split ? ' (split)' : ' (whole)') : ''}`}</output>
   </>} renderReasoning={() => <>
     <p>A segment with no sensitive element costs one flat charge. Otherwise it costs its length times its sensitive count times the encoding cost.</p>

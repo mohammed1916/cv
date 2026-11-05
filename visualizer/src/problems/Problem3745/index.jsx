@@ -5,19 +5,16 @@ import { buildTrace, parseInput, code, python } from './algorithm'
 const definition = {
   phases: [
     { id: 'start', label: 'Start', description: 'No expression is scored yet.' },
-    { id: 'pivot', label: 'Middle j', description: 'Fix the middle index.' },
-    { id: 'left', label: 'Left max', description: 'Largest value before the middle.' },
-    { id: 'right', label: 'Right min', description: 'Smallest value after the middle.' },
-    { id: 'value', label: 'Score', description: 'Combine the three choices.' },
+    { id: 'pick', label: 'Pick', description: 'Subtract one index and take the two largest of the others.' },
     { id: 'update', label: 'Update', description: 'Keep the larger score.' },
     { id: 'done', label: 'Result', description: 'Report the maximum expression.' },
   ],
   parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with nums (at least 3 integers)',
   url: 'https://leetcode.com/problems/maximize-expression-of-three-elements/',
-  complexity: 'O(n^2) in this trace, which takes prefix maxima and suffix minima directly. Prefix and suffix arrays would make it O(n).',
+  complexity: 'O(n log n) in this trace, which sorts the other values for each subtracted index.',
   examples: [
-    { label: 'Example', input: '{"nums":[1,5,3,2]}' },
+    { label: 'Example', input: '{"nums":[1,4,2,5]}' },
     { label: 'Ascending', input: '{"nums":[1,2,3,4]}' },
   ],
 }
@@ -25,10 +22,10 @@ const definition = {
 export default function MaximizeExpressionOfThreeElements() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} active={step.at}
-      roleAt={i => (step.at >= 0 && i === step.at ? 'middle j' : '')} />
-    <output aria-label="Expression state">{`middle j = ${step.at >= 0 ? step.at : 'none'}, best = ${step.best === null || step.best === undefined ? 'none' : step.best}`}</output>
+      roleAt={i => (i === step.at ? 'c' : i === step.a ? 'a' : i === step.b ? 'b' : '')} />
+    <output aria-label="Expression state">{`subtract index ${step.at >= 0 ? step.at : 'none'}, a + b = ${step.a >= 0 ? step.a : '-'} and ${step.b >= 0 ? step.b : '-'}, best = ${step.best ?? 'none'}`}</output>
   </>} renderReasoning={() => <>
-    <p>For a fixed middle index j, the first term should be the largest value before j and the last term the smallest value after j.</p>
-    <p>Trying every middle index and keeping the best score covers every valid triple.</p>
+    <p>The subtracted value should be the smallest one you can afford, and the two added values should be the largest among the rest.</p>
+    <p>Trying every index as the subtracted one and keeping the best score covers every valid triple.</p>
   </>} />
 }

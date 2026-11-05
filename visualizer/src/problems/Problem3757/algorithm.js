@@ -21,31 +21,48 @@ export function buildTrace({ nums }) {
   let total = 0
   for (const x of nums) total |= x
   const n = nums.length
-  frames.push({ phase: 'start', pythonLine: Y('for x in nums'), activeLine: L('the OR of every'), total, sub: total, inside: null, sign: null, eq: null, answer: null, message: `The strength is ${total} (binary ${bits(total)}).` })
+  frames.push({ phase: 'start', pythonLine: P('for x in nums'), activeLine: L('total |= x'), total, sub: total, inside: null, sign: null, eq: null, answer: null, message: `The strength is ${total} (binary ${bits(total)}).` })
   let eq = 0n
   let sub = total
   while (true) {
     const inside = nums.filter(x => (x & ~sub) === 0).length
     const sign = bitCount(total ^ sub) % 2 === 0 ? 1n : -1n
     eq += sign * (1n << BigInt(inside))
-    frames.push({ phase: 'subset', pythonLine: Y('inside = sum'), activeLine: L('count the numbers'), total, sub, inside, sign: Number(sign), eq: Number(eq), answer: null, message: `Keep bits ${bits(sub)}: ${inside} number${inside === 1 ? '' : 's'} fit, term ${sign > 0n ? '+' : '-'}2^${inside}.` })
+    frames.push({ phase: 'subset', pythonLine: P('inside = sum'), activeLine: L('const inside'), total, sub, inside, sign: Number(sign), eq: Number(eq), answer: null, message: `Keep bits ${bits(sub)}: ${inside} number${inside === 1 ? '' : 's'} fit, term ${sign > 0n ? '+' : '-'}2^${inside}.` })
     if (sub === 0) break
     sub = (sub - 1) & total
   }
   const pow = 1n << BigInt(n)
   const answer = Number(((pow - eq) % 1000000007n + 1000000007n) % 1000000007n)
-  frames.push({ phase: 'done', pythonLine: Y('return (2'), activeLine: L('return 2 to the n'), total, sub: null, inside: null, sign: null, eq: Number(eq), answer, message: `Subsets that leave a smaller strength: ${answer}.` })
+  frames.push({ phase: 'done', pythonLine: P('return (2'), activeLine: L('return Number'), total, sub: null, inside: null, sign: null, eq: Number(eq), answer, message: `Subsets that leave a smaller strength: ${answer}.` })
   return { input: { nums }, result: answer, total, frames }
 }
 
-export const code = `count the subsequences whose removal lowers the strength
-  find the strength T as the OR of every number
-  set eq to zero and let sub run over every submask of T
-    count the numbers that fit inside sub
-    add or subtract 2 to that count by the parity of the bits T drops
-    move to the next smaller submask, stopping after 0
-  return 2 to the n minus eq, modulo 1000000007`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+export const code = `function countEffective(nums) {
+  let total = 0
+  for (const x of nums) total |= x
+  let eq = 0n
+  let sub = total
+  for (;;) {
+    const inside = nums.filter(x => (x & ~sub) === 0).length
+    const sign = bitCount(total ^ sub) % 2 === 0 ? 1n : -1n
+    eq += sign * (1n << BigInt(inside))
+    if (sub === 0) break
+    sub = (sub - 1) & total
+  }
+  const pow = 1n << BigInt(nums.length)
+  return Number(((pow - eq) % 1000000007n + 1000000007n) % 1000000007n)
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => {
+  const hit = code.find(c => c.text.includes(s))
+  if (!hit) throw new Error(`No JavaScript line contains "${s}".`)
+  return hit.line
+}
+const P = s => {
+  const index = python.split('\n').findIndex(line => line.includes(s))
+  if (index < 0) throw new Error(`No Python line contains "${s}".`)
+  return index + 1
+}
 
 export const python = `def count_effective(nums):
     total = 0
@@ -62,4 +79,3 @@ export const python = `def count_effective(nums):
         sub = (sub - 1) & total
     return (2 ** len(nums) - eq) % (10**9 + 7)
 `
-const Y = s => python.split('\n').findIndex(line => line.includes(s)) + 1

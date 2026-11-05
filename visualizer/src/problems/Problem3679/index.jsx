@@ -20,7 +20,7 @@ const definition = {
 export default function MinimumDiscardsBalanceInventory() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="arrivals by day" length={run.input.arrivals.length} valueAt={i => run.input.arrivals[i]} active={step.at}
-      roleAt={i => (step.kept.includes(i) ? 'kept' : (i === step.at && step.keep === false ? 'discarded' : (step.at >= 0 && i >= step.start && i <= step.at ? 'window' : '')))} />
+      roleAt={i => (i === step.start && step.at >= 0 ? 'l' : (i === step.at ? (step.keep === false ? 'discarded' : 'r') : (step.kept.includes(i) ? 'kept' : (step.at >= 0 && i > step.start && i < step.at ? 'window' : ''))))} />
     <output aria-label="Discard count">{`discards so far: ${step.discards}`}</output>
   </>} renderReasoning={() => <>
     <p>Each arrival is only checked against the window that ends on its own day. Earlier days already satisfy their windows, so the new arrival is the only one that can break a limit.</p>

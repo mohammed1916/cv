@@ -22,34 +22,43 @@ export function buildTrace({ nums, k, queries }) {
   const answers = []
   queries.forEach(([l, r], qi) => {
     const piece = nums.slice(l, r + 1)
-    frames.push(frame({ span: [l, r], phase: 'window', pythonLine: Y('piece = nums'), activeLine: L('take the piece'), message: `Query ${qi + 1}: indices ${l} to ${r}.` }))
+    frames.push(frame({ span: [l, r], phase: 'window', pythonLine: P('piece = nums'), activeLine: L('const piece'), message: `Query ${qi + 1}: indices ${l} to ${r}.` }))
     const residue = piece[0] % k
     const bad = piece.findIndex(x => x % k !== residue)
     if (bad >= 0) {
       answers.push(-1)
-      frames.push(frame({ at: l + bad, span: [l, r], phase: 'mismatch', pythonLine: Y('answers.append(-1)'), activeLine: L('append -1'), answer: -1, message: `${piece[bad]} has a different remainder mod ${k}, so no operation sequence works. Answer -1.` }))
+      frames.push(frame({ at: l + bad, span: [l, r], phase: 'mismatch', pythonLine: P('answers.append(-1)'), activeLine: L('return -1'), answer: -1, message: `${piece[bad]} has a different remainder mod ${k}, so no operation sequence works. Answer -1.` }))
       return
     }
     const levels = piece.map(x => Math.floor(x / k)).sort((a, b) => a - b)
     const mid = levels[Math.floor(levels.length / 2)]
     const cost = levels.reduce((sum, v) => sum + Math.abs(v - mid), 0)
     answers.push(cost)
-    frames.push(frame({ span: [l, r], level: levels, mid, answer: cost, phase: 'median', pythonLine: Y('mid = levels'), activeLine: L('take the median'), message: `Levels ${levels.join(', ')}; target level ${mid}; cost ${cost}.` }))
+    frames.push(frame({ span: [l, r], level: levels, mid, answer: cost, phase: 'median', pythonLine: P('mid = levels'), activeLine: L('const mid'), message: `Levels ${levels.join(', ')}; target level ${mid}; cost ${cost}.` }))
   })
-  frames.push(frame({ phase: 'done', pythonLine: Y('return answers'), activeLine: L('return answers'), answer: answers[answers.length - 1], message: 'Every query has its answer.' }))
+  frames.push(frame({ phase: 'done', pythonLine: P('return answers'), activeLine: L('return queries.map'), answer: answers[answers.length - 1], message: 'Every query has its answer.' }))
   return { input: { nums, k, queries }, result: answers, frames }
 }
 
-export const code = `answer each query with the fewest steps that equalize its piece
-  answers starts as an empty list
-  for each query [l, r]
-    take the piece nums[l..r]
-    if the remainders mod k differ then append -1 and move on
-    otherwise divide each value by k and sort the levels
-    take the median level as the target
-    the cost is the sum of distances from the median
-  return answers`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+export const code = `function equalizeSubarrays(nums, k, queries) {
+  return queries.map(([l, r]) => {
+    const piece = nums.slice(l, r + 1)
+    if (piece.some(x => x % k !== piece[0] % k)) return -1
+    const levels = piece.map(x => Math.floor(x / k)).sort((a, b) => a - b)
+    const mid = levels[Math.floor(levels.length / 2)]
+    return levels.reduce((sum, v) => sum + Math.abs(v - mid), 0)
+  })
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => {
+  const hit = code.find(c => c.text.includes(s))
+  if (!hit) throw new Error(`No JavaScript line contains "${s}".`)
+  return hit.line
+}
+const P = s => {
+  const index = python.split('\n').findIndex(line => line.includes(s))
+  if (index < 0) throw new Error(`No Python line contains "${s}".`)
+  return index + 1
+}
 
 export const python = `def equalize_subarrays(nums, k, queries):
     answers = []
@@ -63,4 +72,3 @@ export const python = `def equalize_subarrays(nums, k, queries):
         answers.append(sum(abs(v - mid) for v in levels))
     return answers
 `
-const Y = s => python.split('\n').findIndex(line => line.includes(s)) + 1

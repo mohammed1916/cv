@@ -24,21 +24,21 @@ export function buildTrace({ s, queries }) {
   const dsum = [0]
   const pw = [1n]
   const frames = []
-  frames.push(frame({ phase: 'start', pythonLine: Y('val, cnt, dsum'), activeLine: L('build prefix'), message: 'Prefix arrays track the concatenation, the nonzero count and the digit sum.' }))
+  frames.push(frame({ phase: 'start', pythonLine: P('val, cnt, dsum'), activeLine: L('const val'), message: 'Prefix arrays track the concatenation, the nonzero count and the digit sum.' }))
   for (let i = 0; i < m; i++) {
     const d = Number(s[i])
     if (d === 0) {
       val.push(val[i]); cnt.push(cnt[i]); dsum.push(dsum[i])
-      frames.push(frame({ at: i, phase: 'skip', pythonLine: Y('if d == 0'), activeLine: L('if d is zero'), message: `Zero at index ${i} adds no digit to x.` }))
+      frames.push(frame({ at: i, phase: 'skip', pythonLine: P('if d == 0'), activeLine: L('if (d === 0)'), message: `Zero at index ${i} adds no digit to x.` }))
     } else {
       val.push((val[i] * 10n + BigInt(d)) % MOD); cnt.push(cnt[i] + 1); dsum.push(dsum[i] + d)
-      frames.push(frame({ at: i, phase: 'collect', pythonLine: Y('val.append((val'), activeLine: L('otherwise extend'), message: `Digit ${d} at index ${i} extends the concatenation.` }))
+      frames.push(frame({ at: i, phase: 'collect', pythonLine: P('val.append((val'), activeLine: L('} else {'), message: `Digit ${d} at index ${i} extends the concatenation.` }))
     }
   }
   for (let k = 0; k < m; k++) pw.push(pw[k] * 10n % MOD)
   const answers = []
   for (const [l, r] of queries) {
-    frames.push(frame({ span: [l, r], phase: 'window', pythonLine: Y('for l, r in queries'), activeLine: L('for each query'), message: `Window from ${l} to ${r}.` }))
+    frames.push(frame({ span: [l, r], phase: 'window', pythonLine: P('for l, r in queries'), activeLine: L('return queries.map'), message: `Window from ${l} to ${r}.` }))
     const a = l
     const b = r + 1
     const k = cnt[b] - cnt[a]
@@ -46,24 +46,44 @@ export function buildTrace({ s, queries }) {
     const total = dsum[b] - dsum[a]
     const answer = x * BigInt(total) % MOD
     answers.push(Number(answer))
-    frames.push(frame({ span: [l, r], x: Number(x), sum: total, answer: Number(answer), phase: 'combine', pythonLine: Y('x = (val'), activeLine: L('x is the concatenation'), message: `k = ${k} nonzero digits, x = ${x}, digit sum ${total}, answer ${answer}.` }))
+    frames.push(frame({ span: [l, r], x: Number(x), sum: total, answer: Number(answer), phase: 'combine', pythonLine: P('x = (val'), activeLine: L('const x ='), message: `k = ${k} nonzero digits, x = ${x}, digit sum ${total}, answer ${answer}.` }))
   }
-  frames.push(frame({ phase: 'done', pythonLine: Y('return answers'), activeLine: L('return the answers'), answer: answers[answers.length - 1], message: 'Every query has its answer.' }))
+  frames.push(frame({ phase: 'done', pythonLine: P('return answers'), activeLine: L('return queries.map'), answer: answers[answers.length - 1], message: 'Every query has its answer.' }))
   return { input: { s, queries }, result: answers, frames }
 }
 
-export const code = `answer each query as a concatenation times a digit sum
-  build prefix arrays of the concatenation, the nonzero count and the digit sum
-  for each digit d in s
-    if d is zero then keep the previous values
-    otherwise extend the concatenation with d, count it and add it to the sum
-  precompute the powers of ten
-  for each query [l, r]
-    k is the number of nonzero digits in the window
-    x is the concatenation: the whole prefix minus the old part shifted by 10 to the k
-    answer is x times the digit sum, modulo 1000000007
-  return the answers`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+export const code = `function concatenateAndMultiply(s, queries) {
+  const MOD = 1000000007n
+  const val = [0n]
+  const cnt = [0]
+  const dsum = [0]
+  const pw = [1n]
+  for (let i = 0; i < s.length; i++) {
+    const d = Number(s[i])
+    if (d === 0) {
+      val.push(val[i]); cnt.push(cnt[i]); dsum.push(dsum[i])
+    } else {
+      val.push((val[i] * 10n + BigInt(d)) % MOD); cnt.push(cnt[i] + 1); dsum.push(dsum[i] + d)
+    }
+  }
+  for (let k = 0; k < s.length; k++) pw.push((pw[k] * 10n) % MOD)
+  return queries.map(([l, r]) => {
+    const k = cnt[r + 1] - cnt[l]
+    const x = (((val[r + 1] - val[l] * pw[k]) % MOD) + MOD) % MOD
+    const total = dsum[r + 1] - dsum[l]
+    return Number((x * BigInt(total)) % MOD)
+  })
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => {
+  const hit = code.find(c => c.text.includes(s))
+  if (!hit) throw new Error(`No JavaScript line contains "${s}".`)
+  return hit.line
+}
+const P = s => {
+  const index = python.split('\n').findIndex(line => line.includes(s))
+  if (index < 0) throw new Error(`No Python line contains "${s}".`)
+  return index + 1
+}
 
 export const python = `def concatenate_and_multiply(s, queries):
     mod = 10**9 + 7
@@ -87,4 +107,3 @@ export const python = `def concatenate_and_multiply(s, queries):
         answers.append(x * total % mod)
     return answers
 `
-const Y = s => python.split('\n').findIndex(line => line.includes(s)) + 1

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import RootedTreeDiagram from '../../components/shared/RootedTreeDiagram'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, squareFreePart } from './algorithm'
 
@@ -18,12 +19,21 @@ const definition = {
 }
 
 export default function SumOfPerfectSquareAncestors() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="square-free part by node" length={run.input.n} valueAt={i => squareFreePart(run.input.nums[i])} active={step.node}
-      roleAt={i => (i === 0 ? 'root' : '')} />
-    <output aria-label="Node count">{step.node < 0 ? `total ${step.total}` : step.node === 0 ? 'root has no ancestors' : `node ${step.node}: ${step.t} matching ancestor${step.t === 1 ? '' : 's'}; total ${step.total}`}</output>
-  </>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const roles = {}
+    if (step.node >= 0) {
+      step.path.forEach(a => { roles[a] = 'best' })
+      step.matches.forEach(a => { roles[a] = 'target' })
+      roles[step.node] = 'focus'
+    }
+    return <>
+      <RootedTreeDiagram root={run.tree} roles={roles} title="Tree from node 0" />
+      <IndexedSequence label="square-free part by node" length={run.input.n} valueAt={i => squareFreePart(run.input.nums[i])} active={step.node}
+        roleAt={i => (step.node >= 0 && i === step.node ? 'focus' : (step.matches && step.matches.includes(i) ? 'match' : ''))} />
+      <output aria-label="Node count">{step.node < 0 ? `total ${step.total}` : step.node === 0 ? 'root has no ancestors' : `node ${step.node}: ${step.t} matching ancestor${step.t === 1 ? '' : 's'}; total ${step.total}`}</output>
+    </>
+  }} renderReasoning={() => <>
     <p>Two positive integers multiply to a perfect square exactly when they have the same square-free part, which is the product of primes that appear an odd number of times.</p>
-    <p>During a walk from the root, a count per square-free part tells how many ancestors match the current node.</p>
+    <p>During a walk from the root, a count per square-free part tells how many ancestors match the current node. The highlighted path is the set of ancestors being counted.</p>
   </>} />
 }

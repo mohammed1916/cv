@@ -1,7 +1,7 @@
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
 const PY = s => python.split('\n').findIndex(line => line.includes(s)) + 1
 
 const STEP = { U: [0, 1], D: [0, -1], L: [-1, 0], R: [1, 0] }
+const step = ([x, y], move) => [x + STEP[move][0], y + STEP[move][1]]
 
 export function parseInput(text) {
   const input = JSON.parse(text)
@@ -14,11 +14,7 @@ export function parseInput(text) {
 
 export function buildTrace({ s, k }) {
   const prefix = [[0, 0]]
-  for (const move of s) {
-    const [x, y] = prefix[prefix.length - 1]
-    const [dx, dy] = STEP[move]
-    prefix.push([x + dx, y + dy])
-  }
+  for (const move of s) prefix.push(step(prefix[prefix.length - 1], move))
   const [endX, endY] = prefix[s.length]
   const seen = new Set()
   const frames = []
@@ -29,21 +25,31 @@ export function buildTrace({ s, k }) {
     const key = point.join(',')
     const fresh = !seen.has(key)
     seen.add(key)
-    frames.push({ pythonLine: PY('endpoints.add'), phase: 'scan', activeLine: L('remove the window'), at: i, window: [i, i + k - 1], point, fresh, distinct: seen.size,
+    frames.push({ pythonLine: PY('endpoints.add'), phase: 'scan', activeLine: L('const [cutX'), at: i, window: [i, i + k - 1], point, fresh, distinct: seen.size,
       message: `Removing positions ${i + 1} to ${i + k} ends at (${point[0]}, ${point[1]}); ${fresh ? 'a new endpoint' : 'already counted'}.` })
   }
-  frames.push({ pythonLine: PY('return len'), phase: 'done', activeLine: L('return the count'), at: -1, window: null, point: null, fresh: false, distinct: seen.size,
+  frames.push({ pythonLine: PY('return len'), phase: 'done', activeLine: L('return ends.size'), at: -1, window: null, point: null, fresh: false, distinct: seen.size,
     message: `${seen.size} distinct final coordinate${seen.size === 1 ? '' : 's'}.` })
   return { input: { s, k }, result: seen.size, frames }
 }
 
-export const code = [
-  'count distinct endpoints after removing one length k window',
-  '  record the position after each prefix of moves',
-  '  the endpoint is the prefix before the window plus the moves after it',
-  '  for each window start, add that endpoint to a set',
-  '  return the number of distinct endpoints',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function distinctEndpoints(s, k) {
+  const prefix = [[0, 0]]
+  for (const move of s) prefix.push(step(prefix.at(-1), move))
+  const [endX, endY] = prefix[s.length]
+  const ends = new Set()
+  for (let i = 0; i + k <= s.length; i++) {
+    const [cutX, cutY] = prefix[i + k]
+    const [startX, startY] = prefix[i]
+    ends.add(\`\${startX + endX - cutX},\${startY + endY - cutY}\`)
+  }
+  return ends.size
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => {
+  const hit = code.find(c => c.text.includes(s))
+  if (!hit) throw new Error(`No JavaScript line contains "${s}".`)
+  return hit.line
+}
 
 export const python = `def distinct_endpoints(s, k):
     moves = {'U': (0, 1), 'D': (0, -1), 'L': (-1, 0), 'R': (1, 0)}

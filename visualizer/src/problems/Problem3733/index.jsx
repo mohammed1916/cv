@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -22,6 +23,7 @@ export default function MinimumTimeToCompleteAllDeliveries() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="hour" length={Math.max(step.time, 1)} valueAt={i => (i + 1 === step.time ? 'T' : i + 1)}
       active={step.time - 1} roleAt={i => (run.input.r.some(p => (i + 1) % p === 0) ? 'recharge' : 'free')} />
+    <AnswerRangeBar title="Total time search" min={1} max={Math.max(step.time, 1)} low={Math.max(1, step.time)} high={Math.max(1, step.time)} probe={step.time > 0 ? step.time : null} verdict={step.feasible} />
     <output aria-label="Feasibility">{step.feasible === null ? 'Setting up.' : `T = ${step.time}: ${step.feasible ? 'feasible' : 'not feasible'}`}</output>
   </>} renderReasoning={() => <>
     <p>A drone is blocked at each multiple of its recharge period. Counting its free hours in 1..T is a subtraction.</p>

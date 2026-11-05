@@ -21,7 +21,7 @@ const definition = {
 export default function EqualScoreSubstrings() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="letters" length={run.input.s.length} valueAt={i => run.input.s[i]} active={step.cut ?? -1}
-      roleAt={i => (step.cut === null || step.cut === undefined ? '' : (i <= step.cut ? 'left' : 'right'))} />
+      roleAt={i => (step.cut === null || step.cut === undefined ? '' : i === 0 ? 'l' : i === step.cut ? 'r' : (i < step.cut ? 'left' : 'right'))} />
     <output aria-label="Scores">{`left ${step.left}, right ${step.right}, total ${step.total}`}</output>
   </>} renderReasoning={() => <>
     <p>Two equal halves must each be exactly half of the total. Only a cut where the running left score doubles to the total can work.</p>

@@ -22,7 +22,9 @@ const definition = {
 export default function MinimumOperationsToEqualizeSubarrays() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} active={step.at}
-      roleAt={i => (step.span && i >= step.span[0] && i <= step.span[1] ? 'window' : '')} />
+      roleAt={i => (step.span && i === step.span[0] ? 'l' : step.span && i === step.span[1] ? 'r' : step.span && i > step.span[0] && i < step.span[1] ? 'window' : '')} />
+    {step.level && <IndexedSequence label="sorted levels (value divided by k)" length={step.level.length} valueAt={i => step.level[i]} active={Math.floor(step.level.length / 2)}
+      roleAt={i => (i === Math.floor(step.level.length / 2) ? 'median' : '')} />}
     <output aria-label="Equalizing cost">{step.level
       ? `Levels ${step.level.join(', ')}; target ${step.mid}; cost ${step.answer}`
       : step.answer === -1 ? 'Remainders differ: -1' : `k = ${run.input.k}`}</output>

@@ -22,8 +22,8 @@ const definition = {
 
 export default function MinimumDistanceThreeEqualI() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} active={step.at}
-      roleAt={i => (step.at >= 0 && run.input.nums[i] === run.input.nums[step.at] ? 'same value' : '')} />
+    <IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} active={step.right}
+      roleAt={i => (step.left < 0 ? '' : i === step.left ? 'l' : i === step.right ? 'r' : i > step.left && i < step.right ? 'window' : '')} />
     <output aria-label="Best distance">{`best = ${step.best}`}</output>
   </>} renderReasoning={() => <>
     <p>Three equal values at sorted indices p &lt; q &lt; r have pairwise distances that sum to 2 * (r - p).</p>

@@ -1,13 +1,29 @@
-export const code = [
-  'best starts at zero',
-  'for each left end l',
-  'lo and hi start at nums[l], x at zero',
-  'extend r and fold nums[r] into lo, hi and x',
-  'if hi minus lo exceeds k then stop this left end',
-  'otherwise best takes the larger of best and x',
-  'return best',
-].map((text, index) => ({ line: index + 1, text }))
-const L = key => code.findIndex(c => c.text.includes(key)) + 1
+export const code = `function maxSubarrayXorWithBoundedRange(nums, k) {
+  let best = 0
+  for (let l = 0; l < nums.length; l++) {
+    let lo = nums[l]
+    let hi = nums[l]
+    let x = 0
+    for (let r = l; r < nums.length; r++) {
+      lo = Math.min(lo, nums[r])
+      hi = Math.max(hi, nums[r])
+      x ^= nums[r]
+      if (hi - lo > k) break
+      best = Math.max(best, x)
+    }
+  }
+  return best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = key => {
+  const hit = code.findIndex(c => c.text.includes(key))
+  if (hit < 0) throw new Error(`Missing pseudocode line: ${key}`)
+  return hit + 1
+}
+const P = key => {
+  const index = python.split('\n').findIndex(line => line.includes(key))
+  if (index < 0) throw new Error(`Missing python line: ${key}`)
+  return index + 1
+}
 
 export function parseInput(text) {
   const input = JSON.parse(text)
@@ -21,7 +37,7 @@ export function parseInput(text) {
 export function buildTrace({ nums, k }) {
   const frames = []
   let best = 0
-  frames.push({ window: null, lo: null, hi: null, x: null, best, phase: 'setup', activeLine: L('best starts'), message: 'Best starts at 0, since every value is non-negative.' })
+  frames.push({ pythonLine: P('best = 0'), window: null, lo: null, hi: null, x: null, best, phase: 'setup', activeLine: L('let best = 0'), message: 'Best starts at 0, since every value is non-negative.' })
   for (let l = 0; l < nums.length; l++) {
     let lo = nums[l]
     let hi = nums[l]
@@ -30,16 +46,16 @@ export function buildTrace({ nums, k }) {
       lo = Math.min(lo, nums[r])
       hi = Math.max(hi, nums[r])
       x ^= nums[r]
-      frames.push({ window: [l, r], lo, hi, x, best, phase: 'extend', activeLine: L('extend r'), message: `Window ${l} to ${r}: range ${hi - lo}, XOR ${x}.` })
+      frames.push({ pythonLine: P('x ^= nums[r]'), window: [l, r], lo, hi, x, best, phase: 'extend', activeLine: L('x ^= nums[r]'), message: `Window ${l} to ${r}: range ${hi - lo}, XOR ${x}.` })
       if (hi - lo > k) {
-        frames.push({ window: [l, r], lo, hi, x, best, phase: 'stop', activeLine: L('then stop'), message: `Range ${hi - lo} is above k = ${k}; this start is finished.` })
+        frames.push({ pythonLine: P('break'), window: [l, r], lo, hi, x, best, phase: 'stop', activeLine: L('if (hi - lo > k)'), message: `Range ${hi - lo} is above k = ${k}; this start is finished.` })
         break
       }
       best = Math.max(best, x)
-      frames.push({ window: [l, r], lo, hi, x, best, phase: 'record', activeLine: L('otherwise best'), message: `Best is now ${best}.` })
+      frames.push({ pythonLine: P('best = max'), window: [l, r], lo, hi, x, best, phase: 'record', activeLine: L('best = Math.max'), message: `Best is now ${best}.` })
     }
   }
-  frames.push({ window: null, lo: null, hi: null, x: null, best, phase: 'done', activeLine: L('return best'), message: `Largest allowed XOR is ${best}.` })
+  frames.push({ pythonLine: P('return best'), window: null, lo: null, hi: null, x: null, best, phase: 'done', activeLine: L('return best'), message: `Largest allowed XOR is ${best}.` })
   return { input: { nums, k }, result: best, frames }
 }
 

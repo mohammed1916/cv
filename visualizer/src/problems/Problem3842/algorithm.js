@@ -16,23 +16,27 @@ export function buildTrace({ bulbs }) {
   const counts = Array(BULBS + 1).fill(0)
   const litBulbs = () => Array.from({ length: BULBS }, (_, k) => k + 1).filter(b => state[b])
   const frames = []
-  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('set every bulb'), at: -1, bulb: null, before: null, on: null, count: 0, lit: [], message: 'All 100 bulbs start off.' })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('const state'), at: -1, bulb: null, before: null, on: null, count: 0, lit: [], message: 'All 100 bulbs start off.' })
   bulbs.forEach((bulb, i) => {
     const before = state[bulb]
     state[bulb] = !state[bulb]
     counts[bulb] += 1
-    frames.push({ pythonLine: 4, phase: 'toggle', activeLine: L('flip the state'), at: i, bulb, before, on: state[bulb], count: counts[bulb], lit: litBulbs(), message: `Toggle bulb ${bulb}: ${before ? 'on' : 'off'} to ${state[bulb] ? 'on' : 'off'}.` })
+    frames.push({ pythonLine: 4, phase: 'toggle', activeLine: L('state[bulb] = !state'), at: i, bulb, before, on: state[bulb], count: counts[bulb], lit: litBulbs(), message: `Toggle bulb ${bulb}: ${before ? 'on' : 'off'} to ${state[bulb] ? 'on' : 'off'}.` })
   })
   const result = litBulbs()
-  frames.push({ pythonLine: 5, phase: 'done', activeLine: L('return the bulbs'), at: -1, bulb: null, before: null, on: null, count: 0, lit: result, message: result.length ? `Bulbs on: ${result.join(', ')}.` : 'No bulb is on.' })
+  frames.push({ pythonLine: 5, phase: 'done', activeLine: L('return result'), at: -1, bulb: null, before: null, on: null, count: 0, lit: result, message: result.length ? `Bulbs on: ${result.join(', ')}.` : 'No bulb is on.' })
   return { input: { bulbs }, result, frames }
 }
 
-export const code = `bulbs 1 to 100 start off and entries flip bulbs
-  set every bulb to off
-  for each entry bulb in the list
-    flip the state of that bulb
-  return the bulbs that are on, in increasing order`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function toggleLightBulbs(bulbs) {
+  const state = Array(101).fill(false)
+  for (const bulb of bulbs) state[bulb] = !state[bulb]
+  const result = []
+  for (let b = 1; b <= 100; b++) {
+    if (state[b]) result.push(b)
+  }
+  return result
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 // Throws when the pseudocode text is missing, so a frame can never point at line 0.
 function L(s) {

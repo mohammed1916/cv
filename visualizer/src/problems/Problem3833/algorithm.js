@@ -14,14 +14,14 @@ export function buildTrace({ nums }) {
   const dominant = Array(n).fill(false)
   for (let i = n - 1; i >= 0; i--) {
     if (i === n - 1) {
-      frames.push({ pythonLine: P('suffix = 0'), phase: 'scan', activeLine: C('walk from the right'), at: i, suffix, length: 0, dominant: false, count,
+      frames.push({ pythonLine: P('suffix = 0'), phase: 'scan', activeLine: C('for (let i = n - 1'), at: i, suffix, length: 0, dominant: false, count,
         message: 'The rightmost element is never dominant; nothing lies after it.' })
     } else {
       const after = n - 1 - i
       const isDominant = nums[i] * after > suffix
       if (isDominant) count++
       dominant[i] = isDominant
-      frames.push({ pythonLine: P('if nums[i] * after'), phase: 'scan', activeLine: C('if nums at i times'), at: i, suffix, length: after, dominant: isDominant, count,
+      frames.push({ pythonLine: P('if nums[i] * after'), phase: 'scan', activeLine: C('if (nums[i] * after'), at: i, suffix, length: after, dominant: isDominant, count,
         message: `Index ${i}: ${nums[i]} × ${after} is ${nums[i] * after} and the suffix sum is ${suffix}; ${isDominant ? 'dominant' : 'not dominant'}.` })
     }
     suffix += nums[i]
@@ -35,13 +35,19 @@ export function solve(input) {
   return buildTrace(input).result
 }
 
-export const code = `count the indices whose value beats the average of the elements after it
-  set suffix to 0 and count to 0
-  walk from the right end toward the left
-    the rightmost element is not dominant
-    if nums at i times the number after i is above the suffix sum then add one to count
-    add nums at i to the suffix sum
-  return count`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
+export const code = `function countDominantIndices(nums) {
+  const n = nums.length
+  let suffix = 0
+  let count = 0
+  for (let i = n - 1; i >= 0; i--) {
+    if (i < n - 1) {
+      const after = n - 1 - i
+      if (nums[i] * after > suffix) count += 1
+    }
+    suffix += nums[i]
+  }
+  return count
+}`.split('\n').map((text, index) => ({ line: index + 1, text: text.trim() }))
 
 export const python = `def count_dominant(nums):
     n = len(nums)

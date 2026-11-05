@@ -16,35 +16,48 @@ export function buildTrace({ nums, queries }) {
   for (const [l, r] of queries) {
     let total = 0
     let run = 0
-    frames.push({ pythonLine: PL('for l, r in queries'), phase: 'query', activeLine: L('for each query'), at: -1, l, r, run, total, answers: [...answers], message: `Query [${l}, ${r}]: count stable subarrays inside it.` })
+    frames.push({ pythonLine: P('for l, r in queries'), phase: 'query', activeLine: L('for (const [l, r]'), at: -1, l, r, run, total, answers: [...answers], message: `Query [${l}, ${r}]: count stable subarrays inside it.` })
     for (let i = l; i <= r; i++) {
       if (i > l && nums[i - 1] > nums[i]) {
         run = 0
-        frames.push({ pythonLine: PL('nums[i - 1] > nums[i]'), phase: 'break', activeLine: L('reset the run'), at: i, l, r, run, total, answers: [...answers], message: `${nums[i - 1]} > ${nums[i]} is an inversion; stable runs restart at index ${i}.` })
+        frames.push({ pythonLine: P('nums[i - 1] > nums[i]'), phase: 'break', activeLine: L('run = 0'), at: i, l, r, run, total, answers: [...answers], message: `${nums[i - 1]} > ${nums[i]} is an inversion; stable runs restart at index ${i}.` })
       }
       run += 1
       total += run
-      frames.push({ pythonLine: PL('total += run'), phase: 'extend', activeLine: L('add the run'), at: i, l, r, run, total, answers: [...answers],
+      frames.push({ pythonLine: P('total += run'), phase: 'extend', activeLine: L('total += run'), at: i, l, r, run, total, answers: [...answers],
         message: `Subarrays ending at index ${i}: ${run}; running total ${total}.` })
     }
     answers.push(total)
-    frames.push({ pythonLine: PL('answers.append'), phase: 'answer', activeLine: L('as the answer'), at: -1, l, r, run, total, answers: [...answers], message: `Answer for [${l}, ${r}] is ${total}.` })
+    frames.push({ pythonLine: P('answers.append'), phase: 'answer', activeLine: L('answers.push'), at: -1, l, r, run, total, answers: [...answers], message: `Answer for [${l}, ${r}] is ${total}.` })
   }
-  frames.push({ pythonLine: PL('return answers'), phase: 'done', activeLine: L('return every answer'), at: -1, l: null, r: null, run: 0, total: 0, answers: [...answers], message: 'All queries are answered.' })
+  frames.push({ pythonLine: P('return answers'), phase: 'done', activeLine: L('return answers'), at: -1, l: null, r: null, run: 0, total: 0, answers: [...answers], message: 'All queries are answered.' })
   return { input: { nums, queries }, result: answers, frames }
 }
 
-export const code = `answer each query with the count of stable subarrays inside it
-  a subarray is stable when no earlier value is larger than a later one
-  for each query l, r
-    total is 0 and run is 0
-    for each index i from l to r
-      if the value before i is larger than nums at i then reset the run to 0
-      add one to run
-      add the run to total, which counts subarrays ending at i
-    record total as the answer
-  return every answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+export const code = `function countStableSubarrays(nums, queries) {
+  const answers = []
+  for (const [l, r] of queries) {
+    let total = 0
+    let run = 0
+    for (let i = l; i <= r; i++) {
+      if (i > l && nums[i - 1] > nums[i]) run = 0
+      run += 1
+      total += run
+    }
+    answers.push(total)
+  }
+  return answers
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => {
+  const hit = code.find(c => c.text.includes(s))
+  if (!hit) throw new Error(`No JavaScript line contains "${s}".`)
+  return hit.line
+}
+const P = s => {
+  const index = python.split('\n').findIndex(line => line.includes(s))
+  if (index < 0) throw new Error(`No Python line contains "${s}".`)
+  return index + 1
+}
 
 export const python = `def count_stable(nums, queries):
     answers = []
@@ -59,4 +72,3 @@ export const python = `def count_stable(nums, queries):
         answers.append(total)
     return answers
 `
-const PL = s => python.split('\n').findIndex(c => c.includes(s)) + 1

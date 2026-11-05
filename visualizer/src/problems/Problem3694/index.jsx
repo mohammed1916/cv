@@ -20,7 +20,7 @@ const definition = {
 export default function DistinctPointsAfterSubstringRemoval() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="moves" length={run.input.s.length} valueAt={i => run.input.s[i]} active={step.at}
-      roleAt={i => (step.window && i >= step.window[0] && i <= step.window[1] ? 'removed' : '')} />
+      roleAt={i => (step.window && i === step.window[0] ? 'l' : step.window && i === step.window[1] ? 'r' : step.window && i > step.window[0] && i < step.window[1] ? 'removed' : '')} />
     <output aria-label="Endpoint">{step.point ? `endpoint (${step.point[0]}, ${step.point[1]}), ${step.fresh ? 'new' : 'repeat'}; distinct ${step.distinct}` : `distinct endpoints: ${step.distinct}`}</output>
   </>} renderReasoning={() => <>
     <p>Removing a window is the same as keeping the moves before it and the moves after it. The position before the window and the displacement after it can be read from prefix positions.</p>

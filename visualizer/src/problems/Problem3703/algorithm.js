@@ -1,5 +1,9 @@
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-const PY = s => python.split('\n').findIndex(line => line.includes(s)) + 1
+
+const PY = s => {
+  const index = python.split('\n').findIndex(line => line.includes(s))
+  if (index < 0) throw new Error(`No Python line contains "${s}".`)
+  return index + 1
+}
 
 export function parseInput(text) {
   const input = JSON.parse(text)
@@ -18,25 +22,33 @@ export function buildTrace({ s, k }) {
     stack.push(ch)
     const top = stack.slice(-2 * k).join('')
     const matched = stack.length >= 2 * k && top === pattern
-    frames.push({ pythonLine: PY('stack.append'), phase: 'push', activeLine: L('push'), stack: [...stack], matched, message: `Push ${ch}.` })
+    frames.push({ pythonLine: PY('stack.append'), phase: 'push', activeLine: L('stack.push(ch)'), stack: [...stack], matched, message: `Push ${ch}.` })
     if (matched) {
       stack.splice(stack.length - 2 * k, 2 * k)
-      frames.push({ pythonLine: PY('del stack'), phase: 'remove', activeLine: L('delete'), stack: [...stack], matched: true, message: `The top ${2 * k} symbols form a k-balanced block; they are deleted.` })
+      frames.push({ pythonLine: PY('del stack'), phase: 'remove', activeLine: L('stack.length -= 2 * k'), stack: [...stack], matched: true, message: `The top ${2 * k} symbols form a k-balanced block; they are deleted.` })
     }
   }
   const result = stack.join('')
-  frames.push({ pythonLine: PY('return'), phase: 'done', activeLine: L('return'), stack: [...stack], matched: false, message: `Final string: ${result === '' ? '(empty)' : result}.` })
+  frames.push({ pythonLine: PY('return'), phase: 'done', activeLine: L('return stack.join'), stack: [...stack], matched: false, message: `Final string: ${result === '' ? '(empty)' : result}.` })
   return { input: { s, k }, result, frames }
 }
 
-export const code = [
-  'remove k-balanced blocks until none remain',
-  '  stack = empty',
-  '  for each character',
-  '    push it onto the stack',
-  '    if the top 2k symbols are k opens then k closes, delete them',
-  '  return the stack contents',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function removeKBalanced(s, k) {
+  const pattern = '('.repeat(k) + ')'.repeat(k)
+  const stack = []
+  for (const ch of s) {
+    stack.push(ch)
+    if (stack.length >= 2 * k && stack.slice(-2 * k).join('') === pattern) {
+      stack.length -= 2 * k
+    }
+  }
+  return stack.join('')
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => {
+  const hit = code.find(c => c.text.includes(s))
+  if (!hit) throw new Error(`No JavaScript line contains "${s}".`)
+  return hit.line
+}
 
 export const python = `def remove_k_balanced(s, k):
     pattern = '(' * k + ')' * k

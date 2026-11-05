@@ -11,40 +11,47 @@ export function buildTrace({ nums }) {
   const n = nums.length
   const frames = []
   let total = 0
-  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('set total'), left: -1, right: -1, inner: null, total, message: 'No bowl subarrays counted yet.' })
+  frames.push({ pythonLine: P('total = 0'), phase: 'start', activeLine: L('let total'), left: -1, right: -1, inner: null, total, message: 'No bowl subarrays counted yet.' })
   for (let left = 0; left < n; left++) {
     let inner = -Infinity
-    frames.push({ pythonLine: 3, phase: 'left', activeLine: L('for each left'), left, right: -1, inner: null, total, message: `Anchor the left end at index ${left}, value ${nums[left]}.` })
-    frames.push({ pythonLine: 4, phase: 'left', activeLine: L('set inner max'), left, right: -1, inner: null, total, message: 'Reset the interior maximum.' })
+    frames.push({ pythonLine: P('for left in'), phase: 'left', activeLine: L('for (let left'), left, right: -1, inner: null, total, message: `Anchor the left end at index ${left}, value ${nums[left]}.` })
+    frames.push({ pythonLine: P("inner_max = float"), phase: 'left', activeLine: L('let inner'), left, right: -1, inner: null, total, message: 'Reset the interior maximum.' })
     for (let right = left + 2; right < n; right++) {
       inner = Math.max(inner, nums[right - 1])
-      frames.push({ pythonLine: 6, phase: 'extend', activeLine: L('raise inner max'), left, right, inner, total, message: `Interior now reaches ${inner} (index ${right - 1} joins).` })
+      frames.push({ pythonLine: P('inner_max = max'), phase: 'extend', activeLine: L('inner = Math.max'), left, right, inner, total, message: `Interior now reaches ${inner} (index ${right - 1} joins).` })
       if (inner >= nums[left]) {
-        frames.push({ pythonLine: 8, phase: 'stop', activeLine: L('then stop this left'), left, right, inner, total, message: `${inner} is at least ${nums[left]}, so no longer right end can form a bowl.` })
+        frames.push({ pythonLine: P('break'), phase: 'stop', activeLine: L('break'), left, right, inner, total, message: `${inner} is at least ${nums[left]}, so no longer right end can form a bowl.` })
         break
       }
       if (nums[right] > inner) {
         total += 1
-        frames.push({ pythonLine: 10, phase: 'count', activeLine: L('add one to total'), left, right, inner, total, message: `Both ends beat ${inner}: bowl [${left}..${right}] counted.` })
+        frames.push({ pythonLine: P('total += 1'), phase: 'count', activeLine: L('total += 1'), left, right, inner, total, message: `Both ends beat ${inner}: bowl [${left}..${right}] counted.` })
       } else {
-        frames.push({ pythonLine: 9, phase: 'skip', activeLine: L('add one to total'), left, right, inner, total, message: `End ${nums[right]} does not beat ${inner}; no bowl ends here.` })
+        frames.push({ pythonLine: P('if nums[right] > inner_max'), phase: 'skip', activeLine: L('if (nums[right] > inner)'), left, right, inner, total, message: `End ${nums[right]} does not beat ${inner}; no bowl ends here.` })
       }
     }
   }
-  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return total'), left: -1, right: -1, inner: null, total, message: `${total} bowl subarray${total === 1 ? '' : 's'} counted.` })
+  frames.push({ pythonLine: P('return total'), phase: 'done', activeLine: L('return total'), left: -1, right: -1, inner: null, total, message: `${total} bowl subarray${total === 1 ? '' : 's'} counted.` })
   return { input: { nums }, result: total, frames }
 }
 
-export const code = `count bowl subarrays of nums
-  set total to 0
-  for each left index
-    set inner max to negative infinity
-    for each right index from left plus 2 to the end
-      raise inner max to include nums at right minus 1
-      if inner max is at least nums at left then stop this left
-      if nums at right is above inner max then add one to total
-  return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+export const code = `function countBowlSubarrays(nums) {
+  let total = 0
+  for (let left = 0; left < nums.length; left++) {
+    let inner = -Infinity
+    for (let right = left + 2; right < nums.length; right++) {
+      inner = Math.max(inner, nums[right - 1])
+      if (inner >= nums[left]) break
+      if (nums[right] > inner) total += 1
+    }
+  }
+  return total
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => {
+  const hit = code.find(c => c.text.includes(s))
+  if (!hit) throw new Error(`No JavaScript line contains "${s}".`)
+  return hit.line
+}
 
 export const python = `def count_bowl_subarrays(nums):
     total = 0
@@ -58,3 +65,8 @@ export const python = `def count_bowl_subarrays(nums):
                 total += 1
     return total
 `
+const P = s => {
+  const index = python.split('\n').findIndex(line => line.includes(s))
+  if (index < 0) throw new Error(`No Python line contains "${s}".`)
+  return index + 1
+}

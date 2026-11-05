@@ -27,9 +27,9 @@ export default function CountBowlSubarrays() {
     <IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} active={step.right >= 0 ? step.right : step.left}
       roleAt={i => {
         if (step.left < 0) return ''
-        if (i === step.left) return 'left'
-        if (step.right >= 0 && i === step.right) return 'right'
-        if (step.right >= 0 && i > step.left && i < step.right) return 'interior'
+        if (i === step.left) return 'l'
+        if (step.right >= 0 && i === step.right) return 'r'
+        if (step.right >= 0 && i > step.left && i < step.right) return 'window'
         return ''
       }} />
     <output aria-label="Bowl count">{`bowls = ${step.total}${step.inner !== null && step.inner !== undefined && Number.isFinite(step.inner) ? `, interior max = ${step.inner}` : ''}`}</output>

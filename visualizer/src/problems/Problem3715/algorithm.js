@@ -1,6 +1,3 @@
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-const PY = s => python.split('\n').findIndex(line => line.includes(s)) + 1
-
 // Two positive integers multiply to a perfect square exactly when their square-free parts match.
 export function squareFreePart(value) {
   let x = value
@@ -32,35 +29,64 @@ export function parseInput(text) {
   return { n, edges, nums }
 }
 
+// Rooted children lists for the diagram: node 0 is the root.
+function rootedChildren(n, edges) {
+  const adj = Array.from({ length: n }, () => [])
+  for (const [u, v] of edges) { adj[u].push(v); adj[v].push(u) }
+  const build = (node, parent) => ({ id: node, children: adj[node].filter(x => x !== parent).map(x => build(x, node)) })
+  return build(0, -1)
+}
+
 export function buildTrace({ n, edges, nums }) {
   const adj = Array.from({ length: n }, () => [])
   for (const [u, v] of edges) { adj[u].push(v); adj[v].push(u) }
   const kern = nums.map(squareFreePart)
   const count = new Map()
+  const ancestors = []
   const frames = []
   let total = 0
   const visit = (node, parent) => {
-    const t = node === 0 ? 0 : (count.get(kern[node]) || 0)
+    const matches = ancestors.filter(a => kern[a] === kern[node])
+    const t = node === 0 ? 0 : matches.length
     if (node !== 0) total += t
-    frames.push({ pythonLine: PY('total += count'), phase: 'walk', activeLine: L('ancestors'), node, kernel: kern[node], t, total,
+    frames.push({ pythonLine: P('total += count'), phase: 'walk', activeLine: L('total += count'), node, kernel: kern[node], t, total,
+      path: [...ancestors], matches: [...matches],
       message: node === 0 ? 'Root 0 has no ancestors and adds nothing.' : `Node ${node} has ${t} ancestor${t === 1 ? '' : 's'} with square-free part ${kern[node]}.` })
     count.set(kern[node], (count.get(kern[node]) || 0) + 1)
+    ancestors.push(node)
+    for (const next of adj[node]) if (next !== parent) visit(next, node)
+    ancestors.pop()
+    count.set(kern[node], count.get(kern[node]) - 1)
+  }
+  visit(0, -1)
+  frames.push({ pythonLine: P('return total'), phase: 'done', activeLine: L('return total'), node: -1, kernel: null, t: 0, total, path: [], matches: [],
+    message: `Sum of the counts is ${total}.` })
+  return { input: { n, edges, nums }, result: total, frames, tree: rootedChildren(n, edges) }
+}
+
+export const code = `function sumPerfectSquareAncestors(n, edges, nums) {
+  const kern = nums.map(squareFreePart)
+  const count = new Map()
+  let total = 0
+  const visit = (node, parent) => {
+    if (node !== 0) total += count.get(kern[node]) ?? 0
+    count.set(kern[node], (count.get(kern[node]) ?? 0) + 1)
     for (const next of adj[node]) if (next !== parent) visit(next, node)
     count.set(kern[node], count.get(kern[node]) - 1)
   }
   visit(0, -1)
-  frames.push({ pythonLine: PY('return total'), phase: 'done', activeLine: L('return'), node: -1, kernel: null, t: 0, total,
-    message: `Sum of the counts is ${total}.` })
-  return { input: { n, edges, nums }, result: total, frames }
+  return total
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => {
+  const hit = code.find(c => c.text.includes(s))
+  if (!hit) throw new Error(`No JavaScript line contains "${s}".`)
+  return hit.line
 }
-
-export const code = [
-  'sum of perfect-square ancestor counts in a rooted tree',
-  '  replace each value by its square-free part',
-  '  walk from the root, counting square-free parts on the current path',
-  '  at each non-root node add the ancestors with the same part',
-  '  return the total',
-].map((text, index) => ({ line: index + 1, text }))
+const P = s => {
+  const index = python.split('\n').findIndex(line => line.includes(s))
+  if (index < 0) throw new Error(`No Python line contains "${s}".`)
+  return index + 1
+}
 
 export const python = `def sum_perfect_square_ancestors(n, edges, nums):
     adj = [[] for _ in range(n)]

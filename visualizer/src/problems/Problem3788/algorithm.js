@@ -50,11 +50,11 @@ export function buildTrace({ nums }) {
     ...extra,
   })
 
-  push('let n be the length', 'n = len(nums)', 'start', { message: `The array has ${n} values, so there are ${n - 1} possible splits.` })
+  push('const n = nums.length', 'n = len(nums)', 'start', { message: `The array has ${n} values, so there are ${n - 1} possible splits.` })
 
   sufVal[n - 1] = nums[n - 1]
   sufSrc[n - 1] = n - 1
-  push('suffix_min[n - 1] = nums[n - 1]', 'suffix_min[n - 1] = nums[n - 1]', 'suffix', {
+  push('sufMin[n - 1] = nums[n - 1]', 'suffix_min[n - 1] = nums[n - 1]', 'suffix', {
     at: n - 1,
     message: `suffix_min[${n - 1}] = ${nums[n - 1]}, the last value alone (source index ${n - 1}).`,
   })
@@ -63,20 +63,20 @@ export function buildTrace({ nums }) {
     const useCurrent = nums[i] <= sufVal[i + 1]
     sufVal[i] = useCurrent ? nums[i] : sufVal[i + 1]
     sufSrc[i] = useCurrent ? i : sufSrc[i + 1]
-    push('suffix_min[i] = min(nums[i], suffix_min[i + 1])', 'suffix_min[i] = min(nums[i], suffix_min[i + 1])', 'suffix', {
+    push('sufMin[i] = Math.min', 'suffix_min[i] = min(nums[i], suffix_min[i + 1])', 'suffix', {
       at: i,
       message: `suffix_min[${i}] = min(nums[${i}] = ${nums[i]}, suffix_min[${i + 1}] = ${sufVal[i + 1]}) = ${sufVal[i]}, from index ${sufSrc[i]}.`,
     })
   }
 
   prefix = 0
-  push('set best to none and prefix to 0', 'best = None', 'prefix', {
+  push('let best = null', 'best = None', 'prefix', {
     message: 'No retained optimum yet, and the prefix sum starts at 0.',
   })
 
   for (let k = 0; k < n - 1; k++) {
     prefix += nums[k]
-    push('add nums[k] to prefix', 'prefix += nums[k]', 'prefix', {
+    push('prefix += nums[k]', 'prefix += nums[k]', 'prefix', {
       at: k,
       split: k,
       prefix,
@@ -85,7 +85,7 @@ export function buildTrace({ nums }) {
 
     const suffixMin = sufVal[k + 1]
     const score = prefix - suffixMin
-    push('score is prefix minus suffix_min[k + 1]', 'score = prefix - suffix_min[k + 1]', 'score', {
+    push('const score = prefix', 'score = prefix - suffix_min[k + 1]', 'score', {
       at: k + 1,
       split: k,
       prefix,
@@ -96,7 +96,7 @@ export function buildTrace({ nums }) {
     })
 
     const improves = best === null || score > best
-    push('if best is none or score is greater than best', 'if best is None or score > best:', 'score', {
+    push('if (best === null', 'if best is None or score > best:', 'score', {
       at: k + 1,
       split: k,
       prefix,
@@ -114,7 +114,7 @@ export function buildTrace({ nums }) {
       bestSplit = k
       bestPrefix = prefix
       bestSuffixMin = suffixMin
-      push('then best = score', 'best = score', 'improve', {
+      push('best = score', 'best = score', 'improve', {
         at: k + 1,
         split: k,
         prefix,
@@ -138,18 +138,20 @@ export function buildTrace({ nums }) {
   return { input: { nums }, result: best, frames }
 }
 
-export const code = `maximum score of a split of nums
-  let n be the length of nums
-  suffix_min[n - 1] = nums[n - 1]
-  for i from n - 2 down to 0
-    suffix_min[i] = min(nums[i], suffix_min[i + 1])
-  set best to none and prefix to 0
-  for each split k from 0 to n - 2
-    add nums[k] to prefix
-    score is prefix minus suffix_min[k + 1]
-    if best is none or score is greater than best
-    then best = score
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function maximumScoreOfASplit(nums) {
+  const n = nums.length
+  const sufMin = new Array(n)
+  sufMin[n - 1] = nums[n - 1]
+  for (let i = n - 2; i >= 0; i--) sufMin[i] = Math.min(nums[i], sufMin[i + 1])
+  let best = null
+  let prefix = 0
+  for (let k = 0; k < n - 1; k++) {
+    prefix += nums[k]
+    const score = prefix - sufMin[k + 1]
+    if (best === null || score > best) best = score
+  }
+  return best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def maximum_score_of_a_split(nums):
     n = len(nums)

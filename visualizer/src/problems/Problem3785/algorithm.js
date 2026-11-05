@@ -30,10 +30,10 @@ export function buildTrace({ nums, forbidden }) {
   for (let i = 0; i < n; i++) {
     count.set(nums[i], (count.get(nums[i]) || 0) + 1)
     count.set(forbidden[i], (count.get(forbidden[i]) || 0) + 1)
-    frames.push(frame({ pythonLine: pyLine('count[nums[i]] = count.get'), phase: 'count', activeLine: L('count each value seen'), at: i, message: `Count ${nums[i]} from nums and ${forbidden[i]} from forbidden at index ${i}.` }))
+    frames.push(frame({ pythonLine: pyLine('count[nums[i]] = count.get'), phase: 'count', activeLine: L('count.set(nums[i]'), at: i, message: `Count ${nums[i]} from nums and ${forbidden[i]} from forbidden at index ${i}.` }))
   }
   for (const [value, c] of count) {
-    frames.push(frame({ pythonLine: pyLine('if count[value] > n'), phase: 'limit', activeLine: L('if a value appears more than n'), checking: value, message: `${value} appears ${c} times across both arrays; capacity is n = ${n}.` }))
+    frames.push(frame({ pythonLine: pyLine('if count[value] > n'), phase: 'limit', activeLine: L('if (c > n)'), checking: value, message: `${value} appears ${c} times across both arrays; capacity is n = ${n}.` }))
     if (c > n) {
       frames.push(frame({ pythonLine: pyLine('return -1'), phase: 'done', activeLine: L('return -1'), violator: value, checking: value, result: -1, message: `${value} appears ${c} times, more than n = ${n}, so it cannot avoid every forbidden position. Result -1.` }))
       return { input: { nums, forbidden }, result: -1, frames }
@@ -46,7 +46,7 @@ export function buildTrace({ nums, forbidden }) {
       bad.push(i)
       total++
     }
-    frames.push(frame({ pythonLine: pyLine('if nums[i] == forbidden[i]'), phase: 'conflict', activeLine: L('nums at i equals forbidden at i'), at: i, conflict: hit, total, message: hit ? `Index ${i} holds forbidden value ${nums[i]}; conflicts so far: ${total}.` : `Index ${i} is safe.` }))
+    frames.push(frame({ pythonLine: pyLine('if nums[i] == forbidden[i]'), phase: 'conflict', activeLine: L('if (nums[i] === forbidden[i])'), at: i, conflict: hit, total, message: hit ? `Index ${i} holds forbidden value ${nums[i]}; conflicts so far: ${total}.` : `Index ${i} is safe.` }))
   }
   if (total === 0) {
     frames.push(frame({ pythonLine: pyLine('return 0'), phase: 'done', activeLine: L('return 0'), total, most: 0, half: 0, chosen: 'none', result: 0, message: 'No index conflicts. Result 0.' }))
@@ -54,25 +54,38 @@ export function buildTrace({ nums, forbidden }) {
   }
   const most = Math.max(...conflict.values())
   const half = Math.ceil(total / 2)
-  frames.push(frame({ pythonLine: pyLine('most = max(conflict.values())'), phase: 'tally', activeLine: L('largest conflict count'), total, most, half, message: `Conflicts total ${total}, so ceil(${total} / 2) = ${half}; the largest value group has ${most}.` }))
+  frames.push(frame({ pythonLine: pyLine('most = max(conflict.values())'), phase: 'tally', activeLine: L('const most'), total, most, half, message: `Conflicts total ${total}, so ceil(${total} / 2) = ${half}; the largest value group has ${most}.` }))
   const result = Math.max(half, most)
   const chosen = most > half ? 'group' : 'half'
   const why = chosen === 'group'
     ? `the largest group (${most}) is bigger than half the conflicts`
     : `half the conflicts (${half}) is at least the largest group (${most})`
-  frames.push(frame({ pythonLine: pyLine('return max((total'), phase: 'done', activeLine: L('return the larger of'), total, most, half, chosen, result, message: `max(${half}, ${most}) = ${result}; ${why}.` }))
+  frames.push(frame({ pythonLine: pyLine('return max((total'), phase: 'done', activeLine: L('return Math.max'), total, most, half, chosen, result, message: `max(${half}, ${most}) = ${result}; ${why}.` }))
   return { input: { nums, forbidden }, result, frames }
 }
 
-export const code = `minimum swaps to avoid forbidden values
-  n is the length of nums
-  count each value seen in nums and in forbidden together
-  if a value appears more than n times in total then return -1
-  for each index i where nums at i equals forbidden at i
-    add one to the conflict count of that value and to the total
-  if the total is 0 then return 0
-  let most be the largest conflict count of any value
-  return the larger of ceil(total / 2) and most`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minimumSwaps(nums, forbidden) {
+  const n = nums.length
+  const count = new Map()
+  for (let i = 0; i < n; i++) {
+    count.set(nums[i], (count.get(nums[i]) ?? 0) + 1)
+    count.set(forbidden[i], (count.get(forbidden[i]) ?? 0) + 1)
+  }
+  for (const c of count.values()) {
+    if (c > n) return -1
+  }
+  const conflict = new Map()
+  let total = 0
+  for (let i = 0; i < n; i++) {
+    if (nums[i] === forbidden[i]) {
+      conflict.set(nums[i], (conflict.get(nums[i]) ?? 0) + 1)
+      total += 1
+    }
+  }
+  if (total === 0) return 0
+  const most = Math.max(...conflict.values())
+  return Math.max(Math.ceil(total / 2), most)
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 function L(s) {
   const index = code.findIndex(c => c.text.includes(s))

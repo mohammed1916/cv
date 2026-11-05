@@ -24,10 +24,14 @@ const definition = {
 export default function LongestBalancedSubarrayI() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} active={step.at}
-      roleAt={i => (step.start >= 0 && step.at >= 0 && i >= step.start && i <= step.at ? 'window' : '')} />
+      roleAt={i => (step.start >= 0 && step.at >= 0 && i === step.start ? 'l' : step.start >= 0 && step.at >= 0 && i === step.at ? 'r' : step.start >= 0 && step.at >= 0 && i > step.start && i < step.at ? 'window' : '')} />
+    <div className="algorithm-sets" aria-label="Distinct values in the window">
+      <p>{`Distinct evens: ${step.evens && step.evens.length ? step.evens.join(', ') : 'none'}`}</p>
+      <p>{`Distinct odds: ${step.odds && step.odds.length ? step.odds.join(', ') : 'none'}`}</p>
+    </div>
     <output aria-label="Balance state">{`start ${step.start >= 0 ? step.start : 'none'}, best ${step.best}, ${step.ok === false ? 'unbalanced' : step.ok ? 'balanced' : 'scanning'}`}</output>
   </>} renderReasoning={() => <>
-    <p>Every subarray is considered by fixing its start and growing its end, keeping a set of distinct evens and a set of distinct odds.</p>
+    <p>Every subarray is considered by fixing its start (left pointer) and growing its end (right pointer), keeping a set of distinct evens and a set of distinct odds.</p>
     <p>Repeated values do not change the distinct counts, so only the first occurrence of each value matters.</p>
   </>} />
 }

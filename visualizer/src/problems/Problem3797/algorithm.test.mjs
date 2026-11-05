@@ -51,11 +51,11 @@ test('3797 sideways moves never chain: sideways sums read arrivals only', () => 
 test('3797 each frame maps to the expected pseudocode and python text', () => {
   const { frames } = buildTrace({ grid: ['..', '#.'], d: 1 })
   const expectedCode = {
-    start: ['set the vertical reach', 'each available bottom cell starts'],
-    row: ['for each row'],
-    side: ['sideways count of each'],
-    down: ['vertical step gives'],
-    done: ['if this is the top row'],
+    start: ['let reach = 0', 'ways[c] = 1'],
+    row: ['for (let r = rows - 1'],
+    side: ['side[c] = (prefix'],
+    down: ['nxt[c] = '],
+    done: ['if (r === 0)'],
   }
   for (const f of frames) {
     const text = code[f.activeLine - 1].text

@@ -25,9 +25,9 @@ export function buildTrace({ n, target }) {
   const chosen = []
   let unused = all.slice()
   let need = target
-  frames.push({ pythonLine: PL('unused = set'), phase: 'start', activeLine: L('absolute values 1 to n'), at: -1, chosen: [], need, message: `Need signed values 1 to ${n} summing to ${target}.` })
+  frames.push({ pythonLine: P('unused = set'), phase: 'start', activeLine: L('let unused'), at: -1, chosen: [], need, message: `Need signed values 1 to ${n} summing to ${target}.` })
   if (!canFinish(unused, need)) {
-    frames.push({ pythonLine: PL('return []'), phase: 'empty', activeLine: L('then return empty'), at: -1, chosen: [], need, message: 'No signed permutation reaches the target, so the answer is empty.' })
+    frames.push({ pythonLine: P('return []'), phase: 'empty', activeLine: L('return []'), at: -1, chosen: [], need, message: 'No signed permutation reaches the target, so the answer is empty.' })
     return { input: { n, target }, result: [], frames }
   }
   for (let pos = 0; pos < n; pos++) {
@@ -36,28 +36,47 @@ export function buildTrace({ n, target }) {
     for (const c of candidates) {
       const rest = unused.filter(v => v !== Math.abs(c))
       const ok = canFinish(rest, need - c)
-      frames.push({ pythonLine: PL('if can_finish'), phase: 'try', activeLine: L('smallest value that still works'), at: pos, chosen: [...chosen], need,
+      frames.push({ pythonLine: P('if can_finish'), phase: 'try', activeLine: L('for (const c of'), at: pos, chosen: [...chosen], need,
         message: ok ? `Trying ${c} at position ${pos}: the rest can still reach the target.` : `Trying ${c} at position ${pos} leaves no valid completion.` })
       if (ok) { picked = c; break }
     }
     chosen.push(picked)
     unused = unused.filter(v => v !== Math.abs(picked))
     need -= picked
-    frames.push({ pythonLine: PL('chosen.append'), phase: 'keep', activeLine: L('is kept'), at: pos, chosen: [...chosen], need, message: `Keep ${picked} at position ${pos}; remaining target ${need}.` })
+    frames.push({ pythonLine: P('chosen.append'), phase: 'keep', activeLine: L('chosen.push(c)'), at: pos, chosen: [...chosen], need, message: `Keep ${picked} at position ${pos}; remaining target ${need}.` })
   }
-  frames.push({ pythonLine: PL('return chosen'), phase: 'done', activeLine: L('return the array'), at: -1, chosen: [...chosen], need, message: `Lexicographically smallest: [${chosen.join(', ')}].` })
+  frames.push({ pythonLine: P('return chosen'), phase: 'done', activeLine: L('return chosen'), at: -1, chosen: [...chosen], need, message: `Lexicographically smallest: [${chosen.join(', ')}].` })
   return { input: { n, target }, result: chosen, frames }
 }
 
-export const code = `lexicographically smallest signed permutation with a given sum
-  if no signing of 1 to n reaches target then return empty
-  unused is the set of absolute values 1 to n
-  need is target
-  for each position from left to right
-    try the candidate values in increasing order
-    the smallest value that still works is kept
-  return the array`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+export const code = `function smallestNegatedPermutation(n, target) {
+  let unused = Array.from({ length: n }, (_, k) => k + 1)
+  if (!canFinish(unused, target)) return []
+  const chosen = []
+  let need = target
+  for (let pos = 0; pos < n; pos++) {
+    for (const c of unused.flatMap(v => [-v, v]).sort((a, b) => a - b)) {
+      const rest = unused.filter(v => v !== Math.abs(c))
+      if (canFinish(rest, need - c)) {
+        chosen.push(c)
+        unused = rest
+        need -= c
+        break
+      }
+    }
+  }
+  return chosen
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => {
+  const hit = code.find(c => c.text.includes(s))
+  if (!hit) throw new Error(`No JavaScript line contains "${s}".`)
+  return hit.line
+}
+const P = s => {
+  const index = python.split('\n').findIndex(line => line.includes(s))
+  if (index < 0) throw new Error(`No Python line contains "${s}".`)
+  return index + 1
+}
 
 export const python = `def smallest_negated_permutation(n, target):
     unused = set(range(1, n + 1))
@@ -75,4 +94,3 @@ export const python = `def smallest_negated_permutation(n, target):
         need -= c
     return chosen
 `
-const PL = s => python.split('\n').findIndex(c => c.includes(s)) + 1

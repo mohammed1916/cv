@@ -22,7 +22,7 @@ const definition = {
 export default function CountSubarraysWithKDistinctIntegers() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} active={step.r ?? -1}
-      roleAt={i => (step.l !== null && i >= step.l && i <= step.r ? (step.ok ? 'valid' : 'window') : '')} />
+      roleAt={i => (step.l === null ? '' : i === step.l ? 'l' : i === step.r ? 'r' : i > step.l && i < step.r ? (step.ok ? 'valid' : 'window') : '')} />
     <output aria-label="Window counts">{step.l === null ? `Valid subarrays so far: ${step.count}` : `Window ${step.l} to ${step.r}: ${step.freq.map(([v, c]) => `${v} x${c}`).join(', ')} · total ${step.count}`}</output>
   </>} renderReasoning={() => <>
     <p>For each start, the window grows to the right and the program keeps a count for every value inside it.</p>

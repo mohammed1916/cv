@@ -1,12 +1,30 @@
-export const code = [
-  'a segment with no sensitive element costs flatCost',
-  'otherwise its length times its count times encCost',
-  'best(segment) starts with keeping it whole',
-  'if the length is even then try the two equal halves',
-  'the best cost is the smaller of the two options',
-  'return best of the whole string',
-].map((text, index) => ({ line: index + 1, text }))
-const L = key => code.findIndex(c => c.text.includes(key)) + 1
+export const code = `function minPartitionCost(s, encCost, flatCost) {
+  const memo = new Map()
+  const best = (l, len) => {
+    const key = l + ':' + len
+    if (memo.has(key)) return memo.get(key)
+    const x = [...s.slice(l, l + len)].filter(c => c === '1').length
+    let cost = x === 0 ? flatCost : len * x * encCost
+    if (len % 2 === 0) {
+      const half = len / 2
+      cost = Math.min(cost, best(l, half) + best(l + half, half))
+    }
+    memo.set(key, cost)
+    return cost
+  }
+  return best(0, s.length)
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = key => {
+  const hit = code.findIndex(c => c.text.includes(key))
+  if (hit < 0) throw new Error(`Missing pseudocode line: ${key}`)
+  return hit + 1
+}
+const P = key => {
+  const index = python.split('\n').findIndex(line => line.includes(key))
+  if (index < 0) throw new Error(`Missing python line: ${key}`)
+  return index + 1
+}
+
 
 export function parseInput(text) {
   const input = JSON.parse(text)
@@ -30,7 +48,7 @@ export function buildTrace({ s, encCost, flatCost }) {
     const key = `${l}:${len}`
     if (memo.has(key)) return memo.get(key)
     let cost = wholeCost(l, len)
-    frames.push({ start: l, len, cost, split: false, phase: 'segment', activeLine: L('best(segment) starts'),
+    frames.push({ start: l, len, cost, split: false, phase: 'segment', activeLine: L('let cost = x'),
       message: `Segment ${l} to ${l + len - 1} kept whole costs ${cost}.` })
     let split = false
     if (len % 2 === 0) {
@@ -39,12 +57,14 @@ export function buildTrace({ s, encCost, flatCost }) {
       if (pieces < cost) { cost = pieces; split = true }
     }
     memo.set(key, cost)
-    frames.push({ start: l, len, cost, split, phase: 'choose', activeLine: L('the best cost is the smaller'),
+    frames.push({ start: l, len, cost, split, phase: 'choose', activeLine: L('cost = Math.min'),
       message: split ? `Splitting segment ${l} to ${l + len - 1} is cheaper: ${cost}.` : `Keeping segment ${l} to ${l + len - 1} whole is best: ${cost}.` })
     return cost
   }
   const result = best(0, s.length)
-  frames.push({ start: 0, len: s.length, cost: result, split: false, phase: 'done', activeLine: L('return best of the whole'), message: `Minimum total cost: ${result}.` })
+  frames.push({ start: 0, len: s.length, cost: result, split: false, phase: 'done', activeLine: L('return best(0, s.length)'), message: `Minimum total cost: ${result}.` })
+  const PHASE_PY = {'segment': P('x = s[l'), 'choose': P('cost = min'), 'done': P('return best(0')}
+  frames.forEach(f => { f.pythonLine = PHASE_PY[f.phase] })
   return { input: { s, encCost, flatCost }, result, frames }
 }
 

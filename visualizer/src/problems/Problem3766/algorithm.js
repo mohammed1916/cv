@@ -14,37 +14,49 @@ const isBinaryPalindrome = v => {
 export function buildTrace({ nums }) {
   const frames = []
   let total = 0
-  frames.push({ pythonLine: 6, phase: 'start', activeLine: L('total = 0'), at: -1, total, message: 'Start with zero operations.' })
+  frames.push({ pythonLine: P('total = 0'), phase: 'start', activeLine: L('let total = 0'), at: -1, total, message: 'Start with zero operations.' })
   for (let i = 0; i < nums.length; i++) {
     const x = nums[i]
     let d = 0
-    frames.push({ pythonLine: 7, phase: 'pick', activeLine: L('for each element'), at: i, d, total, message: `Find the cost for ${x}.` })
+    frames.push({ pythonLine: P('for x in nums'), phase: 'pick', activeLine: L('for (const x of nums)'), at: i, d, total, message: `Find the cost for ${x}.` })
     for (;;) {
       const low = x - d
       const lowOk = low >= 1 && isBinaryPalindrome(low)
       const highOk = isBinaryPalindrome(x + d)
       const ok = lowOk || highOk
-      frames.push({ pythonLine: 9, phase: 'check', activeLine: L('if a palindrome'), at: i, d, total, ok, message: ok ? `${lowOk ? `${low} (${low.toString(2)})` : `${x + d} (${(x + d).toString(2)})`} is a binary palindrome at distance ${d}.` : `Neither ${low} nor ${x + d} is a binary palindrome.` })
+      frames.push({ pythonLine: P('while not'), phase: 'check', activeLine: L('while (!('), at: i, d, total, ok, message: ok ? `${lowOk ? `${low} (${low.toString(2)})` : `${x + d} (${(x + d).toString(2)})`} is a binary palindrome at distance ${d}.` : `Neither ${low} nor ${x + d} is a binary palindrome.` })
       if (ok) break
       d += 1
-      frames.push({ pythonLine: 10, phase: 'step', activeLine: L('d += 1'), at: i, d, total, ok: false, message: `Widen the search to distance ${d}.` })
+      frames.push({ pythonLine: P('d += 1'), phase: 'step', activeLine: L('d += 1'), at: i, d, total, ok: false, message: `Widen the search to distance ${d}.` })
     }
     total += d
-    frames.push({ pythonLine: 11, phase: 'add', activeLine: L('total = total + d'), at: i, d, total, ok: true, message: `Add ${d}; total is ${total}.` })
+    frames.push({ pythonLine: P('total += d'), phase: 'add', activeLine: L('total += d'), at: i, d, total, ok: true, message: `Add ${d}; total is ${total}.` })
   }
-  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return total'), at: -1, total, ok: true, message: `Minimum operations: ${total}.` })
+  frames.push({ pythonLine: P('return total'), phase: 'done', activeLine: L('return total'), at: -1, total, ok: true, message: `Minimum operations: ${total}.` })
   return { input: { nums }, result: total, frames }
 }
 
-export const code = `minimum total moves so each value becomes a binary palindrome
-  total = 0
-  for each value x of nums
-    d = 0
-    while neither x minus d (if positive) nor x plus d is a binary palindrome
-      d = d + 1
-    total = total + d
-  return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+export const code = `function minOperationsBinaryPalindrome(nums) {
+  let total = 0
+  for (const x of nums) {
+    let d = 0
+    while (!((x - d >= 1 && isBinaryPalindrome(x - d)) || isBinaryPalindrome(x + d))) {
+      d += 1
+    }
+    total += d
+  }
+  return total
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => {
+  const hit = code.find(c => c.text.includes(s))
+  if (!hit) throw new Error(`No JavaScript line contains "${s}".`)
+  return hit.line
+}
+const P = s => {
+  const index = python.split('\n').findIndex(line => line.includes(s))
+  if (index < 0) throw new Error(`No Python line contains "${s}".`)
+  return index + 1
+}
 
 export const python = `def is_binary_palindrome(v):
     bits = bin(v)[2:]

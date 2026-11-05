@@ -1,6 +1,3 @@
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-const PY = s => python.split('\n').findIndex(line => line.includes(s)) + 1
-
 export function parseInput(text) {
   const tasks = JSON.parse(text)
   if (!Array.isArray(tasks) || tasks.length < 1 || tasks.length > 100) throw new Error('Use a JSON array of 1 to 100 [start, duration] pairs.')
@@ -15,7 +12,7 @@ export function buildTrace({ tasks }) {
   tasks.forEach(([start, duration], index) => {
     const finish = start + duration
     if (finish < best) { best = finish; bestIndex = index }
-    frames.push({ pythonLine: PY('best = min'), phase: 'scan', activeLine: L('finish = start'), at: index, finish, best, bestIndex,
+    frames.push({ pythonLine: PY('best = min'), phase: 'scan', activeLine: L('const finish'), at: index, finish, best, bestIndex,
       message: `Task ${index} starts at ${start} and takes ${duration}, so it ends at ${finish}. Best so far: ${best}.` })
   })
   frames.push({ pythonLine: PY('return best'), phase: 'done', activeLine: L('return best'), at: -1, finish: null, best, bestIndex,
@@ -23,14 +20,19 @@ export function buildTrace({ tasks }) {
   return { input: { tasks }, result: best, frames }
 }
 
-export const code = [
-  'earliest time at which one task finishes',
-  '  best = infinity',
-  '  for each task with start and duration',
-  '    finish = start + duration',
-  '    keep the smaller finish time',
-  '  return best',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function earliestFinish(tasks) {
+  let best = Infinity
+  for (const [start, duration] of tasks) {
+    const finish = start + duration
+    best = Math.min(best, finish)
+  }
+  return best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => {
+  const hit = code.find(c => c.text.includes(s))
+  if (!hit) throw new Error(`No JavaScript line contains "${s}".`)
+  return hit.line
+}
 
 export const python = `def earliest_finish(tasks):
     best = float('inf')
@@ -38,3 +40,8 @@ export const python = `def earliest_finish(tasks):
         best = min(best, start + duration)
     return best
 `
+const PY = s => {
+  const index = python.split('\n').findIndex(line => line.includes(s))
+  if (index < 0) throw new Error(`No Python line contains "${s}".`)
+  return index + 1
+}

@@ -18,36 +18,37 @@ export function buildTrace({ words, weights }) {
   let value = 0
   let mapped = ''
   const snapshot = () => out.join('')
-  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('start with an empty result'), word: -1, letter: -1, total: 0, weight: 0, value: undefined, mapped: '', output: '', message: 'Start with an empty result string.' })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('const result = []'), word: -1, letter: -1, total: 0, weight: 0, value: undefined, mapped: '', output: '', message: 'Start with an empty result string.' })
   for (let w = 0; w < words.length; w++) {
     const word = words[w]
     total = 0
-    frames.push({ pythonLine: 3, phase: 'word', activeLine: L('for each word'), word: w, letter: -1, total, weight: 0, value: undefined, mapped: '', output: snapshot(), message: `Word ${w + 1} is "${word}". Reset total to 0.` })
+    frames.push({ pythonLine: 3, phase: 'word', activeLine: L('for (const word of words)'), word: w, letter: -1, total, weight: 0, value: undefined, mapped: '', output: snapshot(), message: `Word ${w + 1} is "${word}". Reset total to 0.` })
     for (let c = 0; c < word.length; c++) {
       const weight = weights[word.charCodeAt(c) - 97]
       total += weight
-      frames.push({ pythonLine: 6, phase: 'sum', activeLine: L('add the weight'), word: w, letter: c, total, weight, value: undefined, mapped: '', output: snapshot(), message: `Add the weight ${weight} of ${word[c]} to reach ${total}.` })
+      frames.push({ pythonLine: 6, phase: 'sum', activeLine: L('total += weights'), word: w, letter: c, total, weight, value: undefined, mapped: '', output: snapshot(), message: `Add the weight ${weight} of ${word[c]} to reach ${total}.` })
     }
     value = total % 26
-    frames.push({ pythonLine: 7, phase: 'mod', activeLine: L('take the total modulo 26'), word: w, letter: -1, total, weight: 0, value, mapped: '', output: snapshot(), message: `${total} mod 26 = ${value}.` })
+    frames.push({ pythonLine: 7, phase: 'mod', activeLine: L('const value'), word: w, letter: -1, total, weight: 0, value, mapped: '', output: snapshot(), message: `${total} mod 26 = ${value}.` })
     mapped = String.fromCharCode(122 - value)
     out.push(mapped)
-    frames.push({ pythonLine: 8, phase: 'emit', activeLine: L('append the letter at position 122 minus value'), word: w, letter: -1, total, weight: 0, value, mapped, output: snapshot(), message: `Reverse alphabet: 122 - ${value} = ${122 - value}, which is ${mapped}. Append it.` })
+    frames.push({ pythonLine: 8, phase: 'emit', activeLine: L('result.push('), word: w, letter: -1, total, weight: 0, value, mapped, output: snapshot(), message: `Reverse alphabet: 122 - ${value} = ${122 - value}, which is ${mapped}. Append it.` })
   }
   const result = out.join('')
-  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return the result'), word: -1, letter: -1, total, weight: 0, value, mapped, output: result, message: `The mapped string is "${result}".` })
+  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return result.join'), word: -1, letter: -1, total, weight: 0, value, mapped, output: result, message: `The mapped string is "${result}".` })
   return { input: { words, weights }, result, frames }
 }
 
-export const code = `weighted word mapping
-  start with an empty result
-  for each word in order
-    set total to 0
-    for each letter in the word
-      add the weight of that letter to total
-    take the total modulo 26 as value
-    append the letter at position 122 minus value to the result
-  return the result`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function weightedWordMapping(words, weights) {
+  const result = []
+  for (const word of words) {
+    let total = 0
+    for (const ch of word) total += weights[ch.charCodeAt(0) - 97]
+    const value = total % 26
+    result.push(String.fromCharCode(122 - value))
+  }
+  return result.join('')
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 // Throws when a pseudocode phrase is missing, so a wrong mapping fails in tests instead of silently using line 0.
 function L(phrase) {

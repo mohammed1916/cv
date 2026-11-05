@@ -1,5 +1,5 @@
-// Knowledge-derived model: for a fixed position and triple, the product is linear in the new value,
-// so the best replacement is always the lower or upper bound of the allowed range.
+// Replacing one value with x changes every triple that uses that position linearly in x,
+// so the best replacement is one of the two bounds of the allowed range.
 const LIMIT = 100000
 
 export function parseInput(text) {
@@ -23,27 +23,40 @@ export function buildTrace({ nums }) {
   const frames = []
   let best = -Infinity
   let bestAt = null
-  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('for each position'), at: -1, value: null, best: null, message: `Replace exactly one of ${nums.length} values; try only the two bounds.` })
+  frames.push({ pythonLine: P('best = float'), phase: 'start', activeLine: L('let best'), at: -1, value: null, best: null, message: `Replace exactly one of ${nums.length} values; try only the two bounds.` })
   for (let i = 0; i < nums.length; i++) {
     for (const x of [-LIMIT, LIMIT]) {
       const modified = nums.map((v, j) => (j === i ? x : v))
       const product = bestTriple(modified)
       if (product > best) { best = product; bestAt = { i, x } }
-      frames.push({ pythonLine: 5, phase: 'try', activeLine: L('for x in the two bounds'), at: i, value: x, product, best, message: `Replace position ${i} with ${x}: best triple product ${product}.` })
+      frames.push({ pythonLine: P('copy = nums'), phase: 'try', activeLine: L('const modified'), at: i, value: x, product, best, message: `Replace position ${i} with ${x}: best triple product ${product}.` })
     }
   }
-  frames.push({ pythonLine: 7, phase: 'done', activeLine: L('return best'), at: bestAt ? bestAt.i : -1, value: bestAt ? bestAt.x : null, product: best, best, message: `Maximum product: ${best}.` })
+  frames.push({ pythonLine: P('return best'), phase: 'done', activeLine: L('return best'), at: bestAt ? bestAt.i : -1, value: bestAt ? bestAt.x : null, product: best, best, message: `Maximum product: ${best}.` })
   return { input: { nums }, result: best, frames }
 }
 
-export const code = `maximum triple product after replacing exactly one value
-  best = negative infinity
-  for each position i
-    for x in the two bounds, minus 100000 and plus 100000
-      copy the list and set position i to x
-      best = max(best, largest triple product of the copy)
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+export const code = `function maxProductAfterOneReplacement(nums) {
+  const LIMIT = 100000
+  let best = -Infinity
+  for (let i = 0; i < nums.length; i++) {
+    for (const x of [-LIMIT, LIMIT]) {
+      const modified = nums.map((v, j) => (j === i ? x : v))
+      best = Math.max(best, bestTriple(modified))
+    }
+  }
+  return best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => {
+  const hit = code.find(c => c.text.includes(s))
+  if (!hit) throw new Error(`No JavaScript line contains "${s}".`)
+  return hit.line
+}
+const P = s => {
+  const index = python.split('\n').findIndex(line => line.includes(s))
+  if (index < 0) throw new Error(`No Python line contains "${s}".`)
+  return index + 1
+}
 
 export const python = `def max_product_after_one_replacement(nums):
     LIMIT = 100000

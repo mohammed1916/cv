@@ -1,13 +1,32 @@
-const code = [
-  'build an adjacency list from the edges',
-  'for each query in order',
-  'if the query is an update then set that letter',
-  'else find the path between the two nodes',
-  'count the letters on the path',
-  'answer true when at most one letter count is odd',
-  'return the answers',
-].map((text, index) => ({ line: index + 1, text }))
-const L = key => code.findIndex(c => c.text.includes(key)) + 1
+export const code = `function pathPalindromeQueries(n, edges, s, queries) {
+  const adj = Array.from({ length: n }, () => [])
+  for (const [u, v] of edges) { adj[u].push(v); adj[v].push(u) }
+  const chars = [...s]
+  const answers = []
+  for (const query of queries) {
+    const [kind, a, b] = query.trim().split(/\\s+/)
+    if (kind === 'update') {
+      chars[Number(a)] = b
+      continue
+    }
+    const path = treePath(adj, Number(a), Number(b))
+    const counts = new Map()
+    for (const node of path) counts.set(chars[node], (counts.get(chars[node]) || 0) + 1)
+    const odd = [...counts.values()].filter(c => c % 2 === 1).length
+    answers.push(odd <= 1)
+  }
+  return answers
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = key => {
+  const hit = code.findIndex(c => c.text.includes(key))
+  if (hit < 0) throw new Error(`Missing pseudocode line: ${key}`)
+  return hit + 1
+}
+const P = key => {
+  const index = python.split('\n').findIndex(line => line.includes(key))
+  if (index < 0) throw new Error(`Missing python line: ${key}`)
+  return index + 1
+}
 
 export function parseInput(text) {
   const input = JSON.parse(text)
@@ -43,12 +62,12 @@ export function buildTrace(input) {
   for (const [u, v] of edges) { adj[u].push(v); adj[v].push(u) }
   const frames = []
   const answers = []
-  frames.push({ chars: [...chars], path: [], odd: null, answer: null, phase: 'setup', activeLine: L('adjacency'), message: `Tree built; letters are ${chars.join('')}.` })
+  frames.push({ pythonLine: P('adj = [[]'), chars: [...chars], path: [], odd: null, answer: null, phase: 'setup', activeLine: L('const adj'), message: `Tree built; letters are ${chars.join('')}.` })
   queries.forEach((query, index) => {
     const [kind, a, b] = query.trim().split(/\s+/)
     if (kind === 'update') {
       chars[Number(a)] = b
-      frames.push({ chars: [...chars], path: [], odd: null, answer: null, phase: 'update', activeLine: L('update'), message: `Node ${a} becomes ${b}.` })
+      frames.push({ pythonLine: P('chars[int(a)]'), chars: [...chars], path: [], odd: null, answer: null, phase: 'update', activeLine: L("if (kind === 'update')"), message: `Node ${a} becomes ${b}.` })
       return
     }
     if (kind !== 'query') throw new Error(`Query ${index + 1} must start with update or query.`)
@@ -58,15 +77,32 @@ export function buildTrace(input) {
     const odd = [...counts.values()].filter(c => c % 2 === 1).length
     const answer = odd <= 1
     answers.push(answer)
-    frames.push({ chars: [...chars], path, odd, answer: null, phase: 'query', activeLine: L('else find the path'), message: `Path ${path.map(i => chars[i]).join('')} has ${odd} odd letter count${odd === 1 ? '' : 's'}.` })
-    frames.push({ chars: [...chars], path, odd, answer, phase: 'answer', activeLine: L('answer true'), message: answer ? 'At most one odd count: rearrangeable into a palindrome.' : 'Two or more odd counts: no palindrome arrangement.' })
+    frames.push({ pythonLine: P('path = tree_path'), chars: [...chars], path, odd, answer: null, phase: 'query', activeLine: L('const path = treePath'), message: `Path ${path.map(i => chars[i]).join('')} has ${odd} odd letter count${odd === 1 ? '' : 's'}.` })
+    frames.push({ pythonLine: P('answers.append'), chars: [...chars], path, odd, answer, phase: 'answer', activeLine: L('answers.push(odd'), message: answer ? 'At most one odd count: rearrangeable into a palindrome.' : 'Two or more odd counts: no palindrome arrangement.' })
   })
-  frames.push({ chars: [...chars], path: [], odd: null, answer: null, phase: 'done', activeLine: L('return the answers'), message: `Answers: ${answers.join(', ')}.` })
+  frames.push({ pythonLine: P('return answers'), chars: [...chars], path: [], odd: null, answer: null, phase: 'done', activeLine: L('return answers'), message: `Answers: ${answers.join(', ')}.` })
   return { input, answers, frames }
 }
 
-export { code }
-export const python = `def path_palindrome_queries(n, edges, s, queries):
+export const python = `from collections import Counter, deque
+
+def tree_path(adj, start, goal):
+    parent = {start: None}
+    queue = deque([start])
+    while queue:
+        node = queue.popleft()
+        for nxt in adj[node]:
+            if nxt not in parent:
+                parent[nxt] = node
+                queue.append(nxt)
+    path = []
+    node = goal
+    while node is not None:
+        path.append(node)
+        node = parent[node]
+    return path[::-1]
+
+def path_palindrome_queries(n, edges, s, queries):
     adj = [[] for _ in range(n)]
     for u, v in edges:
         adj[u].append(v)
@@ -82,4 +118,5 @@ export const python = `def path_palindrome_queries(n, edges, s, queries):
         counts = Counter(chars[node] for node in path)
         odd = sum(count % 2 for count in counts.values())
         answers.append(odd <= 1)
-    return answers`
+    return answers
+`

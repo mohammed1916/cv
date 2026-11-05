@@ -13,18 +13,18 @@ const definition = {
   ],
   parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with s (lowercase letters)',
-  url: 'https://leetcode.com/problems/longest-balanced-substring-i/',
-  complexity: 'O(n^2) substrings in this trace, each checked from running counts. This trace scans every substring directly, so it is a teaching model rather than the large-input solution.',
+  url: 'https://leetcode.com/problems/longest-balanced-substring-ii/',
+  complexity: 'O(n^2) in this teaching trace, which scans every substring directly.',
   examples: [
     { label: 'Whole string', input: '{"s":"abba"}' },
-    { label: 'Prefix wins', input: '{"s":"abbac"}' },
+    { label: 'Three letters', input: '{"s":"aabcc"}' },
   ],
 }
 
 export default function LongestBalancedSubstringII() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="s" length={run.input.s.length} valueAt={i => run.input.s[i]} active={step.at}
-      roleAt={i => (step.start >= 0 && step.at >= 0 && i >= step.start && i <= step.at ? 'window' : '')} />
+      roleAt={i => (step.start >= 0 && step.at >= 0 && i === step.start ? 'l' : step.start >= 0 && step.at >= 0 && i === step.at ? 'r' : step.start >= 0 && step.at >= 0 && i > step.start && i < step.at ? 'window' : '')} />
     <output aria-label="Balance state">{`start ${step.start >= 0 ? step.start : 'none'}, best ${step.best}, ${step.ok === false ? 'unbalanced' : step.ok ? 'balanced' : 'scanning'}`}</output>
   </>} renderReasoning={() => <>
     <p>Every substring is considered by fixing its start and growing its end, so the letter counts can be updated one letter at a time.</p>

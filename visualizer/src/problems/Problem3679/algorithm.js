@@ -1,6 +1,3 @@
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-const PY = s => python.split('\n').findIndex(line => line.includes(s)) + 1
-
 export function parseInput(text) {
   const input = JSON.parse(text)
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Use an object with arrivals, w and m.')
@@ -21,7 +18,7 @@ export function buildTrace({ arrivals, w, m }) {
     const keep = count + 1 <= m
     if (keep) kept.push(day)
     else discards += 1
-    frames.push({ pythonLine: PY('if count + 1'), phase: 'scan', activeLine: L('if keeping'), at: day, start, kept: [...kept], keep, count, discards,
+    frames.push({ pythonLine: PY('if count + 1'), phase: 'scan', activeLine: L('if (count + 1'), at: day, start, kept: [...kept], keep, count, discards,
       message: keep ? `Keep type ${kind} on day ${day + 1}; ${count} kept in the window before it.` : `Discard type ${kind} on day ${day + 1}: keeping it would exceed ${m} in the window.` })
   })
   frames.push({ pythonLine: PY('return discards'), phase: 'done', activeLine: L('return discards'), at: -1, start: 0, kept: [...kept], keep: null, count: 0, discards,
@@ -29,15 +26,22 @@ export function buildTrace({ arrivals, w, m }) {
   return { input: { arrivals, w, m }, result: discards, frames }
 }
 
-export const code = [
-  'minimum number of discarded arrivals',
-  '  kept = empty list of kept days',
-  '  for each day in order',
-  '    count kept days in the last w days with the same type',
-  '    if keeping it keeps that count at most m, keep it',
-  '    otherwise discard it and add one',
-  '  return the discard count',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function minDiscards(arrivals, w, m) {
+  const kept = []
+  let discards = 0
+  for (let day = 0; day < arrivals.length; day++) {
+    const start = day - w + 1
+    const count = kept.filter(j => j >= start && arrivals[j] === arrivals[day]).length
+    if (count + 1 <= m) kept.push(day)
+    else discards += 1
+  }
+  return discards
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => {
+  const hit = code.find(c => c.text.includes(s))
+  if (!hit) throw new Error(`No JavaScript line contains "${s}".`)
+  return hit.line
+}
 
 export const python = `def min_discards(arrivals, w, m):
     kept = []
@@ -51,3 +55,8 @@ export const python = `def min_discards(arrivals, w, m):
             discards += 1
     return discards
 `
+const PY = s => {
+  const index = python.split('\n').findIndex(line => line.includes(s))
+  if (index < 0) throw new Error(`No Python line contains "${s}".`)
+  return index + 1
+}

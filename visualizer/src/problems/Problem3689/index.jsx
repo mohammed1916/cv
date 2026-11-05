@@ -21,7 +21,7 @@ const definition = {
 export default function MaximumTotalSubarrayValueI() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} active={-1}
-      roleAt={i => (step.chosen && i >= step.chosen[0] && i <= step.chosen[1] ? 'span' : (run.input.nums[i] === step.largest ? 'largest' : (run.input.nums[i] === step.smallest ? 'smallest' : '')))} />
+      roleAt={i => (step.chosen && i === step.chosen[0] ? 'l' : step.chosen && i === step.chosen[1] ? 'r' : step.chosen && i > step.chosen[0] && i < step.chosen[1] ? 'span' : (run.input.nums[i] === step.largest ? 'largest' : (run.input.nums[i] === step.smallest ? 'smallest' : '')))} />
     <output aria-label="Total value">{`range ${step.largest} - ${step.smallest}; total so far ${step.total}`}</output>
   </>} renderReasoning={() => <>
     <p>A subarray can never be wider than the whole array, so the widest possible single value is the whole array's range.</p>

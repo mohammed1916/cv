@@ -24,7 +24,7 @@ const definition = {
 export default function LongestBalancedSubstringI() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="s" length={run.input.s.length} valueAt={i => run.input.s[i]} active={step.at}
-      roleAt={i => (step.start >= 0 && step.at >= 0 && i >= step.start && i <= step.at ? 'window' : '')} />
+      roleAt={i => (step.start >= 0 && step.at >= 0 && i === step.start ? 'l' : step.start >= 0 && step.at >= 0 && i === step.at ? 'r' : step.start >= 0 && step.at >= 0 && i > step.start && i < step.at ? 'window' : '')} />
     <output aria-label="Balance state">{`start ${step.start >= 0 ? step.start : 'none'}, best ${step.best}, ${step.ok === false ? 'unbalanced' : step.ok ? 'balanced' : 'scanning'}`}</output>
   </>} renderReasoning={() => <>
     <p>Every substring is considered by fixing its start and growing its end, so the letter counts can be updated one letter at a time.</p>

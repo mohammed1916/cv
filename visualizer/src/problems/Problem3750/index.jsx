@@ -22,7 +22,7 @@ const definition = {
 export default function MinimumNumberOfFlipsToReverseBinaryString() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="binary" length={run.input.s.length} valueAt={i => run.input.s[i]} active={step.i}
-      roleAt={i => (i === step.i || i === step.j ? 'window' : '')} />
+      roleAt={i => (i === step.i ? 'l' : i === step.j ? 'r' : '')} />
     <output aria-label="Flip count">{`flips so far: ${step.flips}`}</output>
   </>} renderReasoning={() => <>
     <p>After the reversal, position i must hold the bit that now sits at its mirror. A bit that already agrees with its mirror costs nothing.</p>

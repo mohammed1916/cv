@@ -1,5 +1,4 @@
-// Knowledge-derived model: one append costs 1 and copies some value of nums1.
-// Sorted matching pairs nums1 with nums2 minus the appended target at cost |a - b|.
+// One append costs 1 and copies a value from nums1; sorted matching pairs the rest at cost |a - b|.
 export function parseInput(text) {
   const input = JSON.parse(text)
   if (!input || Array.isArray(input) || !Array.isArray(input.nums1) || !Array.isArray(input.nums2)) throw new Error('Use an object with nums1 and nums2.')
@@ -18,7 +17,7 @@ export function buildTrace({ nums1, nums2 }) {
   const frames = []
   const sortedA = [...nums1].sort((x, y) => x - y)
   const sortedB = [...nums2].sort((x, y) => x - y)
-  frames.push({ pythonLine: 2, phase: 'sort', activeLine: L('sort both'), target: -1, cost: null, best: null, message: `Sorted: nums1 = [${sortedA}], nums2 = [${sortedB}].` })
+  frames.push({ pythonLine: P('a = sorted'), phase: 'sort', activeLine: L('const a = '), target: -1, cost: null, best: null, message: `Sorted: nums1 = [${sortedA}], nums2 = [${sortedB}].` })
   let best = Infinity
   let bestTarget = -1
   for (let k = 0; k < sortedB.length; k++) {
@@ -27,21 +26,34 @@ export function buildTrace({ nums1, nums2 }) {
     const copyCost = Math.min(...nums1.map(a => Math.abs(a - sortedB[k])))
     const total = 1 + copyCost + matched
     if (total < best) { best = total; bestTarget = k }
-    frames.push({ pythonLine: 6, phase: 'candidate', activeLine: L('try each nums2 value'), target: k, cost: total, best, message: `Let nums2 value ${sortedB[k]} be the appended one: matching costs ${matched}, copy costs ${1 + copyCost}, total ${total}.` })
+    frames.push({ pythonLine: P('rest = b'), phase: 'candidate', activeLine: L('for (let k'), target: k, cost: total, best, message: `Let nums2 value ${sortedB[k]} be the appended one: matching costs ${matched}, copy costs ${1 + copyCost}, total ${total}.` })
   }
-  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return best'), target: bestTarget, cost: best, best, message: `Minimum operations: ${best}.` })
+  frames.push({ pythonLine: P('return best'), phase: 'done', activeLine: L('return best'), target: bestTarget, cost: best, best, message: `Minimum operations: ${best}.` })
   return { input: { nums1, nums2 }, result: best, frames }
 }
 
-export const code = `minimum operations to turn nums1 into nums2
-  sort nums1 and nums2
-  best = infinity
-  for each value b at position k in sorted nums2
-    matched = sorted pairing of nums1 with nums2 without b
-    copy = 1 plus the smallest distance from b to any nums1 value
-    best = min(best, matched + copy)
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+export const code = `function minOperations(nums1, nums2) {
+  const a = [...nums1].sort((x, y) => x - y)
+  const b = [...nums2].sort((x, y) => x - y)
+  let best = Infinity
+  for (let k = 0; k < b.length; k++) {
+    const rest = b.filter((_, i) => i !== k)
+    const matched = a.reduce((sum, x, i) => sum + Math.abs(x - rest[i]), 0)
+    const copy = 1 + Math.min(...nums1.map(x => Math.abs(x - b[k])))
+    best = Math.min(best, matched + copy)
+  }
+  return best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => {
+  const hit = code.find(c => c.text.includes(s))
+  if (!hit) throw new Error(`No JavaScript line contains "${s}".`)
+  return hit.line
+}
+const P = s => {
+  const index = python.split('\n').findIndex(line => line.includes(s))
+  if (index < 0) throw new Error(`No Python line contains "${s}".`)
+  return index + 1
+}
 
 export const python = `def min_operations(nums1, nums2):
     a = sorted(nums1)
