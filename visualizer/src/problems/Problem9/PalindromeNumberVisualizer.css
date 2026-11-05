@@ -60,7 +60,7 @@
     font-size: 12px;
     padding: 4px 8px;
     border-radius: 999px;
-    color: #fecaca;
+    color: var(--error);
     background: rgba(239, 68, 68, 0.15);
     border: 1px solid rgba(248, 113, 113, 0.35);
 }
@@ -74,7 +74,7 @@
 .pn-example-btn {
     border: 1px solid var(--border);
     background: rgba(15, 23, 42, 0.55);
-    color: var(--border);
+    color: var(--text-muted);
     border-radius: 999px;
     padding: 7px 12px;
     cursor: pointer;
@@ -105,10 +105,10 @@
 .pn-input {
     flex: 1;
     min-width: 0;
-    background: rgba(2, 6, 23, 0.55);
+    background: var(--surface2);
     border: 1px solid #243244;
     border-radius: 12px;
-    color: var(--text-on-dark);
+    color: var(--text);
     padding: 10px 12px;
     font-size: 15px;
     outline: none;
@@ -128,7 +128,7 @@
 .pn-state-card {
     padding: 12px;
     border-radius: 14px;
-    background: rgba(2, 6, 23, 0.48);
+    background: var(--surface2);
     border: 1px solid rgba(71, 85, 105, 0.75);
 }
 
@@ -342,9 +342,9 @@
     align-items: center;
     justify-content: center;
     border-radius: 12px;
-    background: rgba(15, 23, 42, 0.95);
+    background: var(--surface2);
     border: 1px solid var(--border);
-    color: var(--text-on-dark);
+    color: var(--text);
     font-family:
         ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-weight: 800;
@@ -424,13 +424,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(
-        circle at 30% 30%,
-        rgba(255, 255, 255, 0.18),
-        rgba(14, 165, 233, 0.15)
-    );
+    background: var(--surface2);
     border: 1px solid rgba(56, 189, 248, 0.5);
-    color: #e0f2fe;
+    color: var(--text);
     font-size: 20px;
     font-weight: 900;
     box-shadow: 0 10px 30px rgba(14, 165, 233, 0.18);
@@ -519,7 +515,7 @@
     border-radius: 14px;
     border: 1px solid var(--border);
     background: rgba(15, 23, 42, 0.72);
-    color: var(--border);
+    color: var(--text-muted);
 }
 
 .pn-status.success {
@@ -543,19 +539,19 @@
 }
 
 .pn-badge.neutral {
-    color: var(--border);
+    color: var(--text-muted);
     background: rgba(100, 116, 139, 0.12);
     border-color: rgba(100, 116, 139, 0.25);
 }
 
 .pn-badge.success {
-    color: #86efac;
+    color: var(--success);
     background: rgba(34, 197, 94, 0.12);
     border-color: rgba(34, 197, 94, 0.25);
 }
 
 .pn-badge.danger {
-    color: #fca5a5;
+    color: var(--error);
     background: rgba(248, 113, 113, 0.12);
     border-color: rgba(248, 113, 113, 0.25);
 }
