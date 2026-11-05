@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef, useState } from "react";
-import { useWindowVirtualizer } from "@tanstack/react-virtual";
+import { useVirtualizer } from "@tanstack/react-virtual";
 import { accessLabel } from "../access/policy";
 import "./VirtualCardGrid.css";
 
@@ -15,13 +15,17 @@ export default function VirtualCardGrid({ items, pro, onSelect }) {
   const gridRef = useRef(null);
   const [width, setWidth] = useState(0);
   const [scrollMargin, setScrollMargin] = useState(0);
+  const [scroller, setScroller] = useState(null);
 
   useLayoutEffect(() => {
     const el = gridRef.current;
     if (!el) return undefined;
+    // The home page scrolls inside .home-page, not the window.
+    const container = el.closest(".home-page") || el.parentElement;
+    setScroller(container);
     const measure = () => {
       setWidth(el.clientWidth);
-      setScrollMargin(el.getBoundingClientRect().top + window.scrollY);
+      setScrollMargin(el.getBoundingClientRect().top - container.getBoundingClientRect().top + container.scrollTop);
     };
     measure();
     const observer = new ResizeObserver(measure);
@@ -35,8 +39,9 @@ export default function VirtualCardGrid({ items, pro, onSelect }) {
 
   const columns = Math.max(1, Math.floor((width + GAP) / (CARD_MIN + GAP)));
   const rowCount = Math.ceil(items.length / columns);
-  const virtualizer = useWindowVirtualizer({
+  const virtualizer = useVirtualizer({
     count: rowCount,
+    getScrollElement: () => scroller,
     estimateSize: () => ESTIMATED_ROW + GAP,
     overscan: 4,
     scrollMargin,
