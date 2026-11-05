@@ -39,7 +39,7 @@
 }
 
 /* Toolbar controls must opt back into clicks through the overlay. */
-.app-toolbar > button {
+.app-toolbar>button {
   pointer-events: auto;
 }
 
@@ -71,9 +71,15 @@
   max-width: calc(100vw - 24px);
 }
 
-body.chat-select-mode * { cursor: crosshair !important; }
+body.chat-select-mode * {
+  cursor: crosshair !important;
+}
+
 body.chat-select-mode .chat-launcher,
-body.chat-select-mode .chat-launcher * { cursor: pointer !important; }
+body.chat-select-mode .chat-launcher * {
+  cursor: pointer !important;
+}
+
 body.chat-select-mode [data-chat-selectable]:hover,
 body.chat-select-mode .svg-viewport-svg g:hover,
 body.chat-select-mode .trie-state svg g:hover {
@@ -99,8 +105,15 @@ body.chat-select-mode .trie-state svg g:hover {
 }
 
 @keyframes settings-panel-in {
-  from { opacity: 0; transform: translateY(-6px) scale(0.98); }
-  to { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .settings-menu[open]>.settings-panel {
@@ -110,7 +123,9 @@ body.chat-select-mode .trie-state svg g:hover {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .settings-menu[open]>.settings-panel { animation: none; }
+  .settings-menu[open]>.settings-panel {
+    animation: none;
+  }
 }
 
 .settings-menu>summary::-webkit-details-marker {
@@ -174,8 +189,13 @@ body.chat-select-mode .trie-state svg g:hover {
   color: var(--text);
 }
 
-.settings-about p { margin: 4px 0 8px; }
-.settings-about a { color: var(--primary-l); }
+.settings-about p {
+  margin: 4px 0 8px;
+}
+
+.settings-about a {
+  color: var(--primary-l);
+}
 
 .settings-toggle {
   display: flex;
@@ -943,7 +963,7 @@ body.chat-select-mode .trie-state svg g:hover {
 /* Most visualizers already declare a 100% shell.  The fallback makes that
    contract true for older problems too, so a diagram remains beside the code
    instead of being pushed below it by an unconstrained parent. */
-.problem-content > * {
+.problem-content>* {
   flex: 1 1 auto;
   min-height: 0;
 }
@@ -1002,4 +1022,15 @@ body.chat-select-mode .trie-state svg g:hover {
     flex: 1;
     text-align: center;
   }
+}
+
+
+/* Catalogue section breathing room */
+.home-page .cards-grid--virtual {
+  margin-top: 24px;
+}
+
+/* Keep virtualized rows aligned with the grid width. */
+.home-page .cards-grid--virtual .cards-row {
+  box-sizing: border-box;
 }

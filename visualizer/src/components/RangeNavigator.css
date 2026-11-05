@@ -1,0 +1,265 @@
+.range-navigator {
+    --range-violet: #ad8aff;
+    --range-cyan: #63d7e9;
+    --range-gold: #f4c96b;
+    --range-text: var(--text, #f5f2ff);
+    --range-muted: var(--text-muted, #a6a0ba);
+    --range-surface: var(--surface, #121021);
+    --range-border: var(--border, #38314f);
+    --range-track: rgba(150, 139, 185, 0.28);
+
+    position: fixed;
+    z-index: 850;
+    top: var(--range-top, 50%);
+    right: 20px;
+
+    width: 92px;
+    padding: 16px 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 13px;
+
+    border: 1px solid var(--range-border);
+    border-radius: 17px;
+
+    background: color-mix(in srgb,
+            var(--range-surface) 94%,
+            transparent);
+
+    backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.18),
+        0 0 24px rgba(173, 138, 255, 0.06);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transform: translate3d(18px, -65%, 0) scale(0.94);
+
+    transition:
+        opacity 350ms ease,
+        transform 550ms cubic-bezier(.2, .8, .2, 1),
+        visibility 350ms ease,
+        top 200ms ease;
+}
+
+.range-navigator.is-visible,
+.range-navigator.is-dragging {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate3d(0, -50%, 0) scale(1);
+}
+
+.range-navigator-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.range-navigator-eyebrow {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: var(--range-muted);
+}
+
+.range-navigator-number {
+    font-size: 25px;
+    line-height: 1.1;
+    font-weight: 850;
+    letter-spacing: -0.05em;
+    font-variant-numeric: tabular-nums;
+
+    background: linear-gradient(135deg,
+            var(--range-violet),
+            var(--range-cyan));
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.range-navigator-total {
+    font-size: 10px;
+    color: var(--range-muted);
+}
+
+.range-navigator-rail {
+    position: relative;
+    width: 52px;
+    height: min(33vh, 270px);
+    min-height: 165px;
+
+    cursor: ns-resize;
+    touch-action: none;
+    user-select: none;
+    outline: none;
+}
+
+.range-navigator-rail:focus-visible {
+    outline: 2px solid var(--range-violet);
+    outline-offset: 6px;
+    border-radius: 8px;
+}
+
+.range-navigator-track {
+    position: absolute;
+    left: 34px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+
+    border-radius: 99px;
+    background: var(--range-track);
+}
+
+.range-navigator-progress {
+    position: absolute;
+    top: 0;
+    left: 34px;
+    width: 2px;
+    border-radius: 99px;
+
+    background: linear-gradient(to bottom,
+            var(--range-violet),
+            var(--range-cyan),
+            var(--range-gold));
+
+    box-shadow: 0 0 10px rgba(173, 138, 255, 0.3);
+    pointer-events: none;
+}
+
+.range-navigator-ticks {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.range-navigator-tick {
+    position: absolute;
+    right: 20px;
+    width: 10px;
+    height: 1px;
+    background: var(--range-track);
+}
+
+.range-navigator-tick.major {
+    width: 18px;
+    background: var(--range-muted);
+    opacity: 0.8;
+}
+
+.range-navigator-indicator {
+    position: absolute;
+    left: 35px;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+
+    transition: top 160ms cubic-bezier(.2, .8, .2, 1);
+}
+
+.range-navigator-halo {
+    position: absolute;
+    left: -17px;
+    top: -17px;
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+    background: rgba(99, 215, 233, 0.12);
+
+    box-shadow:
+        0 0 22px rgba(99, 215, 233, 0.18),
+        0 0 36px rgba(173, 138, 255, 0.12);
+}
+
+.range-navigator-dot {
+    position: absolute;
+    left: -5px;
+    top: -5px;
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+    background: var(--range-gold);
+
+    box-shadow:
+        0 0 8px var(--range-gold),
+        0 0 20px rgba(244, 201, 107, 0.55);
+}
+
+.range-navigator-beam {
+    position: absolute;
+    right: 0;
+    top: -1px;
+    width: 24px;
+    height: 2px;
+
+    background: linear-gradient(90deg,
+            transparent,
+            var(--range-gold));
+}
+
+.range-navigator-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 6px;
+
+    font-size: 9px;
+    color: var(--range-muted);
+}
+
+.range-navigator.is-dragging {
+    border-color: var(--range-violet);
+    box-shadow:
+        0 16px 45px rgba(0, 0, 0, 0.2),
+        0 0 25px rgba(173, 138, 255, 0.18);
+}
+
+[data-theme="light"] .range-navigator,
+.theme-light .range-navigator,
+.light .range-navigator,
+.range-navigator[data-theme="light"] {
+    --range-violet: #7141bc;
+    --range-cyan: #087f9d;
+    --range-gold: #b17a08;
+    --range-track: rgba(70, 60, 100, 0.26);
+}
+
+@media (max-width: 700px) {
+    .range-navigator {
+        right: 8px;
+        width: 70px;
+        padding: 12px 7px;
+        border-radius: 13px;
+    }
+
+    .range-navigator-rail {
+        height: 180px;
+        min-height: 150px;
+    }
+
+    .range-navigator-number {
+        font-size: 19px;
+    }
+
+    .range-navigator-eyebrow {
+        font-size: 7px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .range-navigator,
+    .range-navigator-indicator {
+        transition: none;
+    }
+}
