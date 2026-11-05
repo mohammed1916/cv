@@ -1,0 +1,14 @@
+/* Shared state changes stay brief so the current algorithm step remains legible. */
+:root { --fluid-duration: 240ms; --fluid-ease: cubic-bezier(.2,.8,.2,1); }
+:where(.learning-page, .problem-content, .home-page) button {
+  transition: background-color var(--fluid-duration) var(--fluid-ease), border-color var(--fluid-duration) var(--fluid-ease), box-shadow var(--fluid-duration) var(--fluid-ease);
+}
+:where(.stackq-view, .hash-view, .dp-deps, .dsu-view, .heap-view, .gtv, .tree-walk, .trie-view, .fenwick-view, .segtree-view, .distance-matrix-view, .wgraph-view, .list-pointer-view, .interval-view) :is(td, rect, circle, path, line, b, li, span) {
+  transition: background-color var(--fluid-duration) var(--fluid-ease), border-color var(--fluid-duration) var(--fluid-ease), fill var(--fluid-duration) var(--fluid-ease), stroke var(--fluid-duration) var(--fluid-ease), opacity var(--fluid-duration) var(--fluid-ease), box-shadow var(--fluid-duration) var(--fluid-ease);
+}
+.learning-map svg > path { transition: opacity 240ms ease, stroke 240ms ease, stroke-width 240ms ease; }
+.learning-node { transition: box-shadow 240ms ease, background-color 240ms ease, border-color 240ms ease; }
+@media (prefers-reduced-motion: reduce) {
+  :root { --fluid-duration: 0ms; }
+  .learning-map svg > path, .learning-node { transition: none; }
+}

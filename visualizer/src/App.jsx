@@ -2,7 +2,8 @@ import { ALL_PROBLEMS } from './data/problemRoutes.js';
 import { createPortal } from 'react-dom';
 import { resolveVisualSelection } from './components/shared/visualSelection.js';
 import WelcomeHero from "./components/marketing/WelcomeHero";
-import PrerequisiteButton from './components/PrerequisiteButton';
+import PrerequisiteDrawer from './components/PrerequisiteDrawer';
+import './components/shared/FluidMotion.css';
 import LiveTutorial from './access/LiveTutorial';
 import { TUTORIAL_STEPS } from './access/tutorialSteps';
 import React, {
@@ -43,7 +44,7 @@ import {
 const RuntimePlayground = React.lazy(
   () => import("./playground/RuntimePlayground"),
 );
-const PrerequisitesPage = React.lazy(() => import('./components/PrerequisitesPage'));
+
 const TrailerStudio = import.meta.env.DEV ? React.lazy(() => import('./promo/TrailerStudio')) : null;
 
 /* ── Auto-discovery ──────────────────────────────────────────────────── */
@@ -627,7 +628,6 @@ function HomePage({
   onTrackChange,
   onSelect,
   onOpenPlayground,
-  onOpenPrerequisites,
   layoutWidth,
   onLayoutChange,
   enableTransitions,
@@ -817,7 +817,7 @@ function HomePage({
             Create Visualizer
           </button>
 
-          <PrerequisiteButton onClick={onOpenPrerequisites} />
+
           <LayoutControls layoutWidth={layoutWidth} onChange={onLayoutChange} />
         </div>
 
@@ -999,11 +999,10 @@ export default function App() {
     setShowPrerequisites(false);
   };
 
-  const openPrerequisites = () => {
-    window.history.pushState({ view: 'prerequisites' }, '', '#prerequisites');
-    setActive(null);
-    setShowPlayground(false);
-    setShowPrerequisites(true);
+  const openPrerequisites = () => setShowPrerequisites(true);
+  const closePrerequisites = () => {
+    setShowPrerequisites(false);
+    if (window.location.hash === '#prerequisites') window.history.replaceState({}, '', window.location.pathname + window.location.search);
   };
 
   const openPlayground = () => {
@@ -1083,11 +1082,7 @@ export default function App() {
     </>
   );
 
-  const pageContent = showPrerequisites ? (
-    <Suspense key="prerequisites-page" fallback={<div className="playground-loading">Loading learning map…</div>}>
-      <PrerequisitesPage onBack={goBack} onSelect={selectProblem} pro={access.pro} />
-    </Suspense>
-  ) : showPlayground ? (
+  const pageContent = showPlayground ? (
     <div
       key="playground-page"
       style={{
@@ -1154,7 +1149,6 @@ export default function App() {
       onTrackChange={handleTrackChange}
       onSelect={selectProblem}
       onOpenPlayground={openPlayground}
-      onOpenPrerequisites={openPrerequisites}
       layoutWidth={layoutWidth}
       onLayoutChange={setLayoutWidth}
       enableTransitions={navigationTransitionsEnabled}
@@ -1165,6 +1159,7 @@ export default function App() {
     <ThemeProvider>
       <ZoomProvider>
         {(active || showPlayground) && <ZoomControls />}
+        <PrerequisiteDrawer open={showPrerequisites} onOpen={openPrerequisites} onClose={closePrerequisites} onSelect={selectProblem} pro={access.pro} />
         <div className={`app layout-${layoutWidth}`}>
           {import.meta.env.VITE_ENABLE_VERCEL_ANALYTICS !== "false" && (
             <Analytics />

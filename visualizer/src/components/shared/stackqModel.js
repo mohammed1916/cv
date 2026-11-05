@@ -73,7 +73,7 @@ export function stackqView(log, limit = STACKQ_VIEW_LIMIT) {
   const lanes = log.lanes.map(lane => ({
     name: lane.name,
     kind: lane.kind,
-    items: lane.cells.map(cell => ({ label: lane.format(cell.value), fresh: pushed.has(cell.id), kept: kept.has(cell.id) })),
+    items: lane.cells.map(cell => ({ id: cell.id, label: lane.format(cell.value), fresh: pushed.has(cell.id), kept: kept.has(cell.id) })),
     removed: ops.filter(op => op.lane === lane.name && (op.type === 'pop' || op.type === 'popFront'))
       .map(op => ({ label: op.label, end: op.type === 'popFront' ? 'front' : 'back' })),
   }))

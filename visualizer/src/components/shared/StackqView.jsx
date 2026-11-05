@@ -1,3 +1,4 @@
+import { motion, useReducedMotion } from 'framer-motion'
 import { describeStackqOps } from './stackqModel.js'
 import './StackqView.css'
 
@@ -8,7 +9,8 @@ const ENDS = {
 }
 
 function Chip({ label, role }) {
-  return <b className={`stackq-view__chip${role ? ` is-${role}` : ''}`}>{label}</b>
+  const reduce = useReducedMotion()
+  return <motion.b layout={reduce ? false : 'position'} initial={reduce ? false : { opacity: 0, scale: .88, y: -8 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: reduce ? 0 : .24 }} className={`stackq-view__chip${role ? ` is-${role}` : ''}`}>{label}</motion.b>
 }
 
 /**
@@ -33,7 +35,7 @@ export default function StackqView({ lanes = [], ops = [] }) {
           <span className="stackq-view__end">{left}</span>
           <div className="stackq-view__cells">
             {lane.items.length
-              ? lane.items.map((item, i) => <Chip key={i} label={item.label} role={item.fresh ? 'fresh' : item.kept ? 'kept' : ''} />)
+              ? lane.items.map((item, i) => <Chip key={item.id ?? i} label={item.label} role={item.fresh ? 'fresh' : item.kept ? 'kept' : ''} />)
               : <em>empty</em>}
           </div>
           <span className="stackq-view__end">{right}</span>

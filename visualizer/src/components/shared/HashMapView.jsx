@@ -1,3 +1,4 @@
+import { motion, useReducedMotion } from 'framer-motion'
 import { describeHashOps, hashEntryRoles, hashKeyText, limitHashEntries } from './hashmapModel.js'
 import './HashMapView.css'
 
@@ -9,6 +10,7 @@ const ROLE_NAME = { hit: 'looked up: hit', miss: 'looked up: miss', insert: 'jus
  * Data comes from hashmapView() in hashmapModel.js.
  */
 export default function HashMapView({ maps = [], ops = [], skipped = 0 }) {
+  const reduce = useReducedMotion()
   const lines = describeHashOps(ops)
   const roles = {}
   ops.forEach(op => { (roles[op.map] ??= []).push(op) })
@@ -30,9 +32,9 @@ export default function HashMapView({ maps = [], ops = [], skipped = 0 }) {
           <ul>
             {shown.map(([key, value], index) => {
               const role = touched[hashKeyText(key)]
-              return <li key={index} className={role ? `is-${role}` : undefined} title={role ? ROLE_NAME[role] : undefined}>
+              return <motion.li layout={reduce ? false : 'position'} initial={reduce ? false : { opacity: 0, scale: .94 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: reduce ? 0 : .24 }} key={hashKeyText(key)} className={role ? `is-${role}` : undefined} title={role ? ROLE_NAME[role] : undefined}>
                 <i>{index}</i><b>{hashKeyText(key)}</b>{!map.isSet && <><em>→</em><span>{hashKeyText(value)}</span></>}
-              </li>
+              </motion.li>
             })}
             {misses.map(key => <li key={`miss-${key}`} className="is-miss is-ghost" title={ROLE_NAME.miss}><b>{key}</b><span>not in map</span></li>)}
             {deleted.map(key => <li key={`del-${key}`} className="is-delete is-ghost" title={ROLE_NAME.delete}><b>{key}</b><span>removed</span></li>)}

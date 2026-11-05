@@ -58,3 +58,15 @@ test('story solvers emit a stackq view whose lane matches the logged operations'
     }
   }
 })
+
+test('queue snapshots retain item identity when the front is removed', () => {
+  const log = new StackqLog()
+  const lane = log.lane('queue', 'queue')
+  lane.push(7, 'first duplicate')
+  lane.push(7, 'second duplicate')
+  const before = stackqView(log).stackq.lanes[0].items
+  lane.popFront('advance the queue')
+  const after = stackqView(log).stackq.lanes[0].items
+  assert.notEqual(before[0].id, before[1].id)
+  assert.equal(after[0].id, before[1].id)
+})
