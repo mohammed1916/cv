@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { accessCall, backendEnabled, checkoutEnabled } from './firebase';
-import { PLANS, FREE_MEDIUM } from './policy';
+import { PLANS, FREE_MEDIUM, BETA_FREE_ACCESS } from './policy';
 import './access.css';
 
 export function AccessDialog({ title, onClose, children }) {
@@ -107,7 +107,7 @@ export function PlaygroundGate({ access, onPlans, children }) {
   const [retry, setRetry] = useState(0);
   const [sessionId] = useState(() => crypto.randomUUID());
   useEffect(() => {
-    if (!access.user || !backendEnabled) return;
+    if (BETA_FREE_ACCESS || !access.user || !backendEnabled) return;
     let stopped = false, busy = false, nextAttempt = 0;
     let currentLease = null;
     async function tick() {
@@ -126,6 +126,7 @@ export function PlaygroundGate({ access, onPlans, children }) {
     const timer = setInterval(tick, 1000);
     return () => { stopped = true; clearInterval(timer); };
   }, [access.user, retry, sessionId]);
+  if (BETA_FREE_ACCESS) return children;
   const allowed = lease && lease.validUntil > now;
   if (!access.ready) return <div className="access-gate">Checking sign-in…</div>;
   if (!access.user) return <div className="access-gate"><h2>Your daily coding practice</h2><p>Sign in with Google for 30 minutes of free playground use every day.</p><GoogleSignIn access={access} /><p role="alert">{access.error}</p></div>;

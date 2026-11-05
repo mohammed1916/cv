@@ -45,6 +45,7 @@
     "@assistant-ui/react": "^0.15.14",
     "@assistant-ui/react-ai-sdk": "^1.4.5",
     "@monaco-editor/react": "^4.7.0",
+    "@tanstack/react-virtual": "^3.14.26",
     "@vercel/analytics": "^2.0.1",
     "ai": "^7.0.66",
     "firebase": "^12.19.0",

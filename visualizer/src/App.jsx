@@ -25,6 +25,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import { useVisualizationContext } from "./context/VisualizationContext";
 import { useChatContext } from "./context/ChatContext";
 import "./components/Chatbot/chatbot.css";
+import VirtualCardGrid from "./components/VirtualCardGrid";
 
 const ChatDrawer = React.lazy(() => import("./components/Chatbot/ChatDrawer"));
 import "./App.css";
@@ -637,7 +638,6 @@ function HomePage({
   const [difficulty, setDifficulty] = useState("All");
   const [status, setStatus] = useState("All");
   const [activeTag, setActiveTag] = useState("All");
-  const [visibleCount, setVisibleCount] = useState(60);
 
   // Keep the scroll container mounted while resetting track-specific filters.
   const changeTrack = (nextTrack) => {
@@ -646,7 +646,6 @@ function HomePage({
     setDifficulty("All");
     setStatus("All");
     setActiveTag("All");
-    setVisibleCount(60);
     onTrackChange(nextTrack);
   };
 
@@ -715,7 +714,6 @@ function HomePage({
     return haystack.includes(normalizedSearch);
   });
 
-  const visible = filtered.slice(0, visibleCount);
   const Shell = enableTransitions ? motion.div : "div";
   const shellProps = enableTransitions
     ? {
@@ -851,7 +849,6 @@ function HomePage({
             value={search}
             onChange={(event) => {
               setSearch(event.target.value);
-              setVisibleCount(60);
             }}
             placeholder="Search by number, title, slug, or tag"
           />
@@ -907,94 +904,7 @@ function HomePage({
         </div>
       </header>
 
-      <main className="cards-grid">
-        {visible.map((p, i) =>
-          enableTransitions ? (
-            <motion.button
-              key={p.id}
-              className="problem-card"
-              style={{ "--accent": p.accent }}
-              onClick={() => onSelect(p)}
-              initial={{ opacity: 0, y: 28 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                // Stagger is capped: with 60 visible cards an uncapped
-                // `i * 0.07` delayed the last card by ~4.3s, so the grid looked
-                // broken rather than animated. 25ms steps that stop at 0.3s keep
-                // the cascade visible while finishing quickly.
-                delay: Math.min(0.3, i * 0.025),
-                type: "spring",
-                stiffness: 420,
-                damping: 32,
-              }}
-              whileHover={{ y: -5, scale: 1.02 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              <div className="card-top">
-                <span
-                  className={`badge difficulty-${p.difficulty.toLowerCase()}`}
-                >
-                  {p.difficulty}
-                </span>
-                <span className="card-access-label">{accessLabel(p, pro)}</span>
-                <span className="card-num">#{p.number}</span>
-              </div>
-              <h2 className="card-title">{p.title}</h2>
-              <p className="card-desc">{p.description}</p>
-              <div className="card-footer">
-                <div className="card-tags">
-                  {p.tags.map((t) => (
-                    <span key={t} className="tag">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-                {p.implemented ? <span className="card-arrow">→</span> : <span className="card-access-label">Not implemented yet</span>}
-              </div>
-            </motion.button>
-          ) : (
-            <button
-              key={p.id}
-              className="problem-card"
-              style={{ "--accent": p.accent }}
-              onClick={() => onSelect(p)}
-            >
-              <div className="card-top">
-                <span
-                  className={`badge difficulty-${p.difficulty.toLowerCase()}`}
-                >
-                  {p.difficulty}
-                </span>
-                <span className="card-access-label">{accessLabel(p, pro)}</span>
-                <span className="card-num">#{p.number}</span>
-              </div>
-              <h2 className="card-title">{p.title}</h2>
-              <p className="card-desc">{p.description}</p>
-              <div className="card-footer">
-                <div className="card-tags">
-                  {p.tags.map((t) => (
-                    <span key={t} className="tag">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-                {p.implemented ? <span className="card-arrow">→</span> : <span className="card-access-label">Not implemented yet</span>}
-              </div>
-            </button>
-          ),
-        )}
-      </main>
-
-      {visibleCount < filtered.length && (
-        <div className="load-more-wrap">
-          <button
-            className="load-more-btn"
-            onClick={() => setVisibleCount((count) => count + 60)}
-          >
-            Load atmost 60 more problems
-          </button>
-        </div>
-      )}
+      <VirtualCardGrid items={filtered} pro={pro} onSelect={onSelect} />
     </Shell>
   );
 }

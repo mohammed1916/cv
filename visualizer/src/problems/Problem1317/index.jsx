@@ -6,7 +6,7 @@ const definition = {
   number: '1317', phases, parse: parseInput, build: buildTrace, code, python, examples,
   inputLabel: 'Integer n (JSON object)',
   url: 'https://leetcode.com/problems/convert-integer-to-the-sum-of-two-no-zero-integers/',
-  complexity: 'O(n log n) time in the worst case, since each candidate's digits are checked, and O(1) extra space.',
+  complexity: 'O(n log n) time in the worst case, since the digits of each candidate are checked, and O(1) extra space.',
 }
 
 export default function NoZeroSplitVisualizer() {

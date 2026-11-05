@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth, googleSignIn, accessCall, backendEnabled } from "./firebase";
+import { BETA_FREE_ACCESS } from "./policy";
 
 export function useAccess() {
   const [user, setUser] = useState(null);
@@ -19,7 +20,7 @@ export function useAccess() {
     [],
   );
   const refresh = useCallback(async () => {
-    if (!user || !backendEnabled) return;
+    if (BETA_FREE_ACCESS || !user || !backendEnabled) return;
     try {
       const next = await accessCall("accountStatus");
       if (auth.currentUser?.uid === user.uid) {
@@ -89,7 +90,7 @@ export function useAccess() {
   const realPro = Boolean(
     account?.pro && (!account.expiresAt || account.expiresAt > now),
   );
-  const pro = debugPro || realPro;
+  const pro = debugPro || realPro || BETA_FREE_ACCESS;
 
   return {
     user,

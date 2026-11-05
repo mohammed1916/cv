@@ -1,0 +1,17 @@
+/* Virtualized catalogue grid: rows are absolutely positioned inside a tall
+   container, so only the visible rows exist in the DOM. */
+.cards-grid.cards-grid--virtual {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+
+.cards-grid--virtual .cards-row {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: grid;
+  gap: 1.25rem;
+  padding-bottom: 1.25rem;
+}

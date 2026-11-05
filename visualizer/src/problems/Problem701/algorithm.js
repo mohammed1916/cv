@@ -91,3 +91,6 @@ export const python = `def insert_into_bst(root, val):
             node = node["right"]
     return root`
 const P = s => python.split('\n').findIndex(t => t.includes(s)) + 1
+
+// Legacy family trace: frames already carry the line numbers used by `code`.
+export const familyLine = frame => frame.activeLine

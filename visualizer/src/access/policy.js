@@ -1,3 +1,7 @@
+// While the site is in beta, Pro and the code playground are free for everyone.
+// The cloud-function access checks are skipped while this is true. Set it to
+// false to bring back Pro, playground limits and the sign-in gate.
+export const BETA_FREE_ACCESS = true;
 export const FREE_SECONDS = 30 * 60;
 const MONTHLY_RUPEES = 19;
 export const PLANS = {
