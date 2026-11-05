@@ -71,7 +71,7 @@ export function Plans({ access, reason }) {
     <p>{reason || 'Learn the foundations free. Go further with Pro.'}</p>
     <div className="plan-grid">
       <section className="plan-card"><span className="access-eyebrow">FREE</span><h3>₹0</h3>
-        <ul><li>All Basics and Easy visualizers</li><li>{FREE_MEDIUM.size} selected Medium problems, including Problem 2333</li><li>Beginner tutorial</li><li>30 minutes of playground every day</li></ul>
+        <ul><li>All Basics and Easy visualizers</li><li>{FREE_MEDIUM.size} selected Medium problems</li><li>Beginner tutorial</li><li>30 minutes of playground every day</li></ul>
         <small>Sign in for playground access. Resets at midnight India time.</small>
       </section>
       <section className="plan-card plan-pro"><span className="access-eyebrow">VISUALIZER PRO</span><h3>Every problem. More practice.</h3>
