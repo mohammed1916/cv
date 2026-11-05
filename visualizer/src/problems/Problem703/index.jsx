@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
+import KthStreamView from './KthStreamView'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -12,13 +13,14 @@ const definition = {
   url: 'https://leetcode.com/problems/kth-largest-element-in-a-stream/',
   complexity: 'O(k) per add with this sorted list. A min-heap of size k gives O(log k) per add.',
   examples: [
-    { label: 'Three largest', input: '{"k":3,"nums":[4,5,8,2],"adds":[3,5,10,9,4]}' },
-    { label: 'Single', input: '{"k":1,"nums":[],"adds":[-3,-2,-4,0,4]}' },
+    { label: 'Two kept', input: '{"k":2,"nums":[6,1],"adds":[4,9,3,7]}' },
+    { label: 'Single slot', input: '{"k":1,"nums":[5],"adds":[2,8,-1]}' },
   ],
 }
 
 export default function KthLargestStream() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <KthStreamView run={run} step={step} />
     <StackLane title={`Top ${run.input.k} kept (smallest first)`} items={step.top.map(String)} note={step.op !== null && step.op !== undefined ? `after add ${run.input.adds[step.op]}` : 'initial'} />
     <output aria-label="Kth largest">Kth largest: {step.top[0] ?? '—'}</output>
   </>} renderReasoning={({ run, step }) => <>

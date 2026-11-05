@@ -95,7 +95,8 @@ export function buildTrace(input) {
       const m = s.length;
       const best = Math.max(s[m - 1] * s[m - 2] * s[m - 3], s[0] * s[1] * s[m - 1]);
       coins[node] = Math.max(0, best);
-      push({ phase: "large", activeLine: 7, pythonLine: 18, index: node, stats: { subtree: m, best, coins: coins[node] }, message: `Best triple product is ${best}; node ${node} gets ${coins[node]} coin(s).` });
+      const pick = s[m - 1] * s[m - 2] * s[m - 3] >= s[0] * s[1] * s[m - 1] ? 'top3' : 'pair'
+      push({ phase: "large", activeLine: 7, pythonLine: 18, index: node, stats: { subtree: m, best, coins: coins[node] }, values: s, pick, message: `Best triple product is ${best}; node ${node} gets ${coins[node]} coin(s).` });
     }
     push({ phase: "return", activeLine: 8, pythonLine: 19, index: node, stats: { subtree: values.length }, message: `Return node ${node}'s subtree costs to its parent.` });
     return values;

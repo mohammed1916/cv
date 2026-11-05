@@ -1,0 +1,8 @@
+.hb-view { margin: 0; color: var(--text); display: grid; gap: 8px; }
+.hb-grid { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 6px; }
+.hb-col { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px 2px; min-height: 120px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface2); }
+.hb-col--now { border-color: var(--primary); box-shadow: 0 0 0 2px var(--primary-glow, transparent); background: color-mix(in srgb, var(--primary) 12%, var(--surface2)); }
+.hb-index { font-size: 12px; font-weight: 700; color: var(--text-muted); }
+.hb-cell { width: 100%; text-align: center; font-size: 12px; font-weight: 600; padding: 3px 0; border-radius: 5px; background: var(--surface); border: 1px solid var(--success); overflow-wrap: anywhere; }
+.hb-empty { color: var(--text-dim); font-size: 14px; }
+.hb-view figcaption { font-size: 13px; color: var(--text-muted); }

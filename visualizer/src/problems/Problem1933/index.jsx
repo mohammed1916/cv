@@ -11,9 +11,9 @@ const definition = {
   python,
   inputLabel: 'Digit string (e.g. 11122)',
   url: 'https://leetcode.com/problems/check-if-string-is-decomposable-into-value-equal-substrings/',
-  complexity: 'O(n) time and O(n) space with a fixed two-column reach table. The visualization caps the string at 20 digits; the draft does not verify the official length bound.',
+  complexity: 'O(n) time and O(n) space with a fixed two-column reach table. The visualization caps the string at 20 digits;',
   examples: [
-    { label: 'Decomposable', input: '11122' },
+    { label: 'Decomposable', input: '77788' },
     { label: 'Two 2-blocks', input: '2222' },
     { label: 'No 2-block', input: '111222333' },
   ],

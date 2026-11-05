@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import IndexedSequence from '../../components/shared/IndexedSequence'
+import EncodingPointerView from './EncodingPointerView'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -20,18 +20,15 @@ const definition = {
   url: 'https://leetcode.com/problems/check-if-an-original-string-exists-given-two-encoded-strings/',
   complexity: 'The search keeps each (position in s1, position in s2, difference) state once. The visualization caps each string at 40 characters.',
   examples: [
-    { label: 'Fits', input: '{"s1":"a5b","s2":"c5b"}' },
+    { label: 'Fits', input: '{"s1":"a4b","s2":"5b"}' },
     { label: 'Does not fit', input: '{"s1":"abc","s2":"dffe"}' },
-    { label: 'Numbers align', input: '{"s1":"2a2","s2":"5"}' },
+    { label: 'Numbers align', input: '{"s1":"3x","s2":"1y2"}' },
   ],
 }
 
 export default function CheckOriginalString() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="s1" length={run.input.s1.length} valueAt={i => run.input.s1[i]} active={step.i ?? -1}
-      roleAt={i => (i === step.i ? 'window' : '')} />
-    <IndexedSequence label="s2" length={run.input.s2.length} valueAt={i => run.input.s2[i]} active={step.j ?? -1}
-      roleAt={i => (i === step.j ? 'window' : '')} />
+    <EncodingPointerView s1={run.input.s1} s2={run.input.s2} i={step.i ?? 0} j={step.j ?? 0} d={step.d ?? 0} />
     <output aria-label="Pending difference">{`pending difference d = ${step.d ?? 0}`}</output>
   </>} renderReasoning={() => <>
     <p>Each digit run means that many unknown characters. A positive pending difference is wildcards in s1 that s2 must still cover, and a negative one is the reverse.</p>

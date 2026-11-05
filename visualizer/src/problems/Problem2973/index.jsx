@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import RootedTreeDiagram from '../../components/shared/RootedTreeDiagram'
+import SubtreeChipsView from './SubtreeChipsView'
 import { buildTrace, parseInput, code, python, rootTree } from './algorithm'
 
 const definition = {
@@ -35,6 +36,7 @@ export default function Problem2973() {
       <dl className="algorithm-workspace__stats">
         {Object.entries(step.stats || {}).map(([name, value]) => <div key={name}><dt>{name}</dt><dd>{typeof value === 'object' ? JSON.stringify(value) : String(value)}</dd></div>)}
       </dl>
+      {step.values && <SubtreeChipsView values={step.values} pick={step.pick} best={step.stats.best} />}
       <p role="status">{step.message}</p>
       <p>Result: <output>{JSON.stringify(run.result)}</output></p>
     </>}

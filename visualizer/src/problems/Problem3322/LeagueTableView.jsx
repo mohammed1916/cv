@@ -72,9 +72,26 @@ function TieBreakLadder({ step }) {
   </section>
 }
 
+const STAGES = [
+  { label: 'WITH scored: points and goal difference', phases: ['load', 'points', 'difference'] },
+  { label: 'RANK() OVER PARTITION BY season: position', phases: ['partition', 'compare', 'position'] },
+  { label: 'ORDER BY season, position, name: output', phases: ['order', 'done'] },
+]
+
+// Stage strip: which part of the query the current step belongs to.
+function StageStrip({ phase }) {
+  const active = STAGES.findIndex(stage => stage.phases.includes(phase))
+  return <ol aria-label="SQL stages" style={{ display: 'flex', flexWrap: 'wrap', gap: 6, listStyle: 'none', margin: 0, padding: 0 }}>
+    {STAGES.map((stage, i) => <li key={stage.label} data-stage={i} aria-current={i === active ? 'step' : undefined} style={{ flex: '1 1 200px', padding: '6px 10px', borderRadius: 8, border: `2px solid ${i === active ? 'var(--primary)' : 'var(--border)'}`, background: i === active ? 'var(--surface3)' : 'var(--surface2)', color: i <= active ? 'var(--text)' : 'var(--text-muted)', fontSize: 13 }}>
+      {stage.label}
+    </li>)}
+  </ol>
+}
+
 // Three stages of the query: computed columns, one league table per season, then the sorted output.
 export default function LeagueTableView({ step }) {
   return <section aria-label="League table ranking" style={{ display: 'grid', gap: 14, color: 'var(--text)' }}>
+    <StageStrip phase={step.phase} />
     {!step.seasons && <SourceTable step={step} />}
     {step.calc && <output aria-label="Current calculation" style={{ fontWeight: 600 }}>{step.table[step.at].team_name}: {step.calc}</output>}
     {step.seasons && !step.output && <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>{step.seasons.map(season => <SeasonPanel key={season.season_id} season={season} step={step} />)}</div>}

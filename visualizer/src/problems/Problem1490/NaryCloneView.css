@@ -1,9 +1,9 @@
-.nc-view { margin: 0; color: var(--text, #1f2937); }
+.nc-view { margin: 0; color: var(--text); }
 .nc-view svg { width: 100%; height: auto; display: block; }
-.nc-edge { stroke: #94a3b8; stroke-width: 2; }
-.nc-node { fill: #f8fafc; stroke: #64748b; stroke-width: 2; }
-.nc-node--copied { fill: #dcfce7; stroke: #15803d; stroke-width: 2.5; }
-.nc-node--now { fill: #fde68a; stroke: #b45309; stroke-width: 3; }
-.nc-text { font-size: 13px; font-weight: 700; fill: #1f2937; }
-.nc-tag { font-size: 10px; fill: #166534; }
+.nc-edge { stroke: var(--border); stroke-width: 2; }
+.nc-node { fill: var(--surface2); stroke: var(--text-muted); stroke-width: 2; }
+.nc-node--copied { fill: color-mix(in srgb, var(--success) 28%, var(--surface)); stroke: var(--success); stroke-width: 2.5; }
+.nc-node--now { fill: color-mix(in srgb, var(--warning) 35%, var(--surface)); stroke: var(--warning); stroke-width: 3; }
+.nc-text { font-size: 13px; font-weight: 700; fill: var(--text); }
+.nc-tag { font-size: 10px; fill: var(--success); }
 .nc-view figcaption { font-size: 13px; margin-top: 6px; }

@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import OperationLog from '../../components/shared/OperationLog'
-import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
+import HashSetBucketsView from './HashSetBucketsView'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -15,15 +15,13 @@ const definition = {
   url: 'https://leetcode.com/problems/design-hashset/',
   complexity: 'O(1) expected per operation with a good hash and a bounded bucket chain.',
   examples: [
-    { label: 'Mixed', input: '[["add",1],["add",2],["contains",1],["contains",3],["add",2],["remove",2],["contains",2],["add",11],["contains",11]]' },
+    { label: 'Collide in bucket 4', input: '[["add",4],["add",14],["contains",4],["remove",4],["contains",4],["add",24],["contains",24]]' },
   ],
 }
 
 export default function HashSet() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <div aria-label="Buckets" style={{ display: 'grid', gap: 6 }}>
-      {step.buckets.map((b, i) => <StackLane key={i} title={`Bucket ${i}`} items={b.map(String)} note={step.bucket === i ? 'current' : ''} />)}
-    </div>
+    <HashSetBucketsView step={step} />
     <OperationLog title="Operations" ops={step.log ?? []} current={step.op ?? -1} />
   </>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import PrefixLookupView from './PrefixLookupView'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -16,15 +17,16 @@ const definition = {
 
 export default function SquareThreshold() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
-    const { cell, side, sum, fits, best, threshold } = step.snapshot
+    const { cell, side, sum, fits, best, threshold, prefix } = step.snapshot
     return <>
+      <PrefixLookupView prefix={prefix} cell={cell} side={side} />
       <table aria-label="Matrix values" style={{ borderCollapse: 'collapse', fontFamily: 'monospace' }}>
         <tbody>{run.input.mat.map((row, i) => <tr key={i}>{row.map((v, j) => {
           const inSquare = cell && side && i <= cell[0] && i > cell[0] - side && j <= cell[1] && j > cell[1] - side
           const isCell = cell && cell[0] === i && cell[1] === j
           return <td key={j} style={{
             width: 36, height: 36, textAlign: 'center', border: `${isCell ? 2 : 1}px solid ${isCell ? 'var(--text)' : 'var(--border)'}`,
-            background: inSquare ? (fits ? '#bbf7d0' : '#fecaca') : 'transparent', color: '#1c1917',
+            background: inSquare ? (fits ? 'color-mix(in srgb, var(--success) 30%, var(--surface))' : 'color-mix(in srgb, var(--error) 30%, var(--surface))') : 'transparent', color: 'var(--text)',
           }}>{v}</td>
         })}</tr>)}</tbody>
       </table>

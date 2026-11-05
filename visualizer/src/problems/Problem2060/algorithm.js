@@ -26,47 +26,47 @@ export function buildTrace({ s1, s2 }) {
   const seen = new Set()
   const stack = [[0, 0, 0]]
   const frames = []
-  frames.push({ pythonLine: P('stack = [(0, 0, 0)]'), phase: 'start', activeLine: L('push the start state'), i: 0, j: 0, d: 0, message: 'Start at both first characters with no pending wildcards.' })
+  frames.push({ pythonLine: P('stack = [(0, 0, 0)]'), phase: 'start', activeLine: L('start a search at (0, 0)'), i: 0, j: 0, d: 0, message: 'Start at both first characters with no pending wildcards.' })
   let result = false
   while (stack.length && !result) {
     const [i, j, d] = stack.pop()
     const key = `${i},${j},${d}`
     if (seen.has(key)) {
-      frames.push({ pythonLine: P('if (i, j, d) in seen:'), phase: 'skip', activeLine: L('if the state was seen'), i, j, d, message: `State (${i}, ${j}, ${d}) was already explored.` })
+      frames.push({ pythonLine: P('if (i, j, d) in seen:'), phase: 'skip', activeLine: L('visited states are skipped'), i, j, d, message: `State (${i}, ${j}, ${d}) was already explored.` })
       continue
     }
     seen.add(key)
-    frames.push({ pythonLine: P('i, j, d = stack.pop()'), phase: 'visit', activeLine: L('pop a state'), i, j, d, message: `Visit i=${i}, j=${j}, pending d=${d}.` })
+    frames.push({ pythonLine: P('i, j, d = stack.pop()'), phase: 'visit', activeLine: L('pop (i, j, d)'), i, j, d, message: `Visit i=${i}, j=${j}, pending d=${d}.` })
     if (i === n1 && j === n2 && d === 0) {
       result = true
-      frames.push({ pythonLine: P('return True'), phase: 'found', activeLine: L('both ends reached with d zero'), i, j, d, message: 'Both encodings end with no pending wildcards.' })
+      frames.push({ pythonLine: P('return True'), phase: 'found', activeLine: L('both strings are used up'), i, j, d, message: 'Both encodings end with no pending wildcards.' })
       break
     }
     if (i < n1 && DIGITS.test(s1[i])) {
       const { value, next } = readNumber(s1, i)
       stack.push([next, j, d + value])
-      frames.push({ pythonLine: P('stack.append((ni, j, d + k))'), phase: 'wild1', activeLine: L('s1 has a number'), i, j, d, message: `s1 skips ${value} characters, so d becomes ${d + value}.` })
+      frames.push({ pythonLine: P('stack.append((ni, j, d + k))'), phase: 'wild1', activeLine: L('if s1 has a number'), i, j, d, message: `s1 skips ${value} characters, so d becomes ${d + value}.` })
     }
     if (j < n2 && DIGITS.test(s2[j])) {
       const { value, next } = readNumber(s2, j)
       stack.push([i, next, d - value])
-      frames.push({ pythonLine: P('stack.append((i, nj, d - k))'), phase: 'wild2', activeLine: L('s2 has a number'), i, j, d, message: `s2 skips ${value} characters, so d becomes ${d - value}.` })
+      frames.push({ pythonLine: P('stack.append((i, nj, d - k))'), phase: 'wild2', activeLine: L('if s2 has a number'), i, j, d, message: `s2 skips ${value} characters, so d becomes ${d - value}.` })
     }
     if (d > 0 && j < n2 && /[a-z]/.test(s2[j])) {
       stack.push([i, j + 1, d - 1])
-      frames.push({ pythonLine: P('stack.append((i, j + 1, d - 1))'), phase: 'cover2', activeLine: L('s2 letter covers a pending'), i, j, d, message: `s2 letter ${s2[j]} covers one pending wildcard of s1.` })
+      frames.push({ pythonLine: P('stack.append((i, j + 1, d - 1))'), phase: 'cover2', activeLine: L('if d is positive'), i, j, d, message: `s2 letter ${s2[j]} covers one pending wildcard of s1.` })
     }
     if (d < 0 && i < n1 && /[a-z]/.test(s1[i])) {
       stack.push([i + 1, j, d + 1])
-      frames.push({ pythonLine: P('stack.append((i + 1, j, d + 1))'), phase: 'cover1', activeLine: L('s1 letter covers a pending'), i, j, d, message: `s1 letter ${s1[i]} covers one pending wildcard of s2.` })
+      frames.push({ pythonLine: P('stack.append((i + 1, j, d + 1))'), phase: 'cover1', activeLine: L('if d is negative'), i, j, d, message: `s1 letter ${s1[i]} covers one pending wildcard of s2.` })
     }
     if (d === 0 && i < n1 && j < n2 && /[a-z]/.test(s1[i]) && /[a-z]/.test(s2[j]) && s1[i] === s2[j]) {
       stack.push([i + 1, j + 1, 0])
-      frames.push({ pythonLine: P('stack.append((i + 1, j + 1, 0))'), phase: 'match', activeLine: L('equal letters match'), i, j, d, message: `${s1[i]} matches ${s2[j]} directly.` })
+      frames.push({ pythonLine: P('stack.append((i + 1, j + 1, 0))'), phase: 'match', activeLine: L('if d is zero and the letters'), i, j, d, message: `${s1[i]} matches ${s2[j]} directly.` })
     }
   }
-  if (!result) frames.push({ pythonLine: P('return False'), phase: 'done', activeLine: L('no path reaches the end'), i: -1, j: -1, d: 0, message: 'No original string fits both encodings.' })
-  else frames.push({ pythonLine: P('return True'), phase: 'done', activeLine: L('both ends reached with d zero'), i: -1, j: -1, d: 0, message: 'An original string fits both encodings.' })
+  if (!result) frames.push({ pythonLine: P('return False'), phase: 'done', activeLine: L('return false'), i: -1, j: -1, d: 0, message: 'No original string fits both encodings.' })
+  else frames.push({ pythonLine: P('return True'), phase: 'done', activeLine: L('both strings are used up'), i: -1, j: -1, d: 0, message: 'An original string fits both encodings.' })
   return { input: { s1, s2 }, result, frames }
 }
 

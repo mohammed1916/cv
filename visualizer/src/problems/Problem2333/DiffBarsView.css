@@ -1,0 +1,12 @@
+.db-view { margin: 0; color: var(--text); }
+.db-view svg { width: 100%; height: auto; display: block; }
+.db-ghost { fill: none; stroke: var(--text-muted); stroke-dasharray: 4 3; stroke-width: 1.5; }
+.db-bar { fill: var(--primary); opacity: 0.85; }
+.db-bar--above { fill: var(--warning); }
+.db-bar--reduced { fill: var(--success); }
+.db-bar--at { fill: var(--primary); stroke: var(--text); stroke-width: 2; }
+.db-threshold { stroke: var(--error); stroke-width: 2; }
+.db-threshold--probe { stroke-dasharray: 6 4; }
+.db-floor { stroke: var(--text-muted); stroke-width: 1.5; }
+.db-tag { font-size: 11px; fill: var(--text); }
+.db-view figcaption { font-size: 13px; color: var(--text-muted); }

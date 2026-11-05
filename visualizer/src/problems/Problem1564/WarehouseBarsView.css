@@ -1,12 +1,11 @@
-.wb-view { margin: 0; color: var(--text, #1f2937); }
+.wb-view { margin: 0; color: var(--text); }
 .wb-view svg { width: 100%; height: auto; display: block; }
-.wb-room rect { fill: #cbd5e1; }
-.wb-room--now rect { fill: #fde68a; }
-.wb-effective { stroke: #2563eb; stroke-width: 4; }
-.wb-floor { stroke: #475569; stroke-width: 2; }
-.wb-tag { font-size: 11px; fill: #1f2937; }
-.wb-shelf { display: flex; align-items: flex-end; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
-.wb-box { display: inline-flex; align-items: flex-end; justify-content: center; width: 34px; background: #9a3412; color: #fff; border-radius: 4px 4px 0 0; font-size: 12px; font-weight: 700; padding-bottom: 2px; opacity: 0.55; }
-.wb-box--next { opacity: 1; outline: 2px solid #111827; }
-.wb-box--placed { opacity: 1; background: #15803d; }
-.wb-view figcaption { font-size: 13px; margin-top: 6px; }
+.wb-bar { fill: var(--surface3, var(--surface2)); stroke: var(--border); }
+.wb-room--now .wb-bar { fill: color-mix(in srgb, var(--primary) 25%, var(--surface)); stroke: var(--primary); stroke-width: 2; }
+.wb-effective { stroke: var(--info, var(--primary)); stroke-width: 3; }
+.wb-floor { stroke: var(--text-muted); stroke-width: 1.5; }
+.wb-tag { font-size: 11px; fill: var(--text-muted); }
+.wb-shelf { display: flex; align-items: flex-end; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.wb-box { display: inline-flex; align-items: flex-end; justify-content: center; min-width: 30px; padding: 2px 4px; border-radius: 4px; border: 1px dashed var(--border); color: var(--text); font-size: 12px; font-weight: 700; }
+.wb-box--placed { background: color-mix(in srgb, var(--success) 30%, var(--surface)); border: 1px solid var(--success); }
+.wb-box--next { outline: 2px solid var(--primary); outline-offset: 2px; }

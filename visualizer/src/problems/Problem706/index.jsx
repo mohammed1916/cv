@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import OperationLog from '../../components/shared/OperationLog'
-import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
+import HashMapBucketsView from './HashMapBucketsView'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -15,15 +15,13 @@ const definition = {
   url: 'https://leetcode.com/problems/design-hashmap/',
   complexity: 'O(1) expected per operation with a good hash and bounded chains.',
   examples: [
-    { label: 'Put, get, remove', input: '[["put",1,1],["put",2,2],["get",1],["get",3],["put",2,1],["get",2],["remove",2],["get",2]]' },
+    { label: 'Overwrite then remove', input: '[["put",3,7],["put",13,8],["get",3],["get",4],["put",13,9],["get",13],["remove",3],["get",3]]' },
   ],
 }
 
 export default function HashMap() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <div aria-label="Buckets" style={{ display: 'grid', gap: 6 }}>
-      {step.buckets.map((b, i) => <StackLane key={i} title={`Bucket ${i}`} items={b} note={step.bucket === i ? 'current' : ''} />)}
-    </div>
+    <HashMapBucketsView step={step} />
     <OperationLog title="Operations" ops={step.log ?? []} current={step.op ?? -1} />
   </>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>

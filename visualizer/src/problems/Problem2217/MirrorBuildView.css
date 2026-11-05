@@ -1,0 +1,11 @@
+.mb-view { margin: 0; color: var(--text); display: grid; gap: 8px; }
+.mb-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.mb-label { font-size: 12px; font-weight: 700; color: var(--text-muted); min-width: 72px; }
+.mb-tile { min-width: 34px; height: 40px; display: inline-grid; place-items: center; border-radius: 6px; border: 2px solid var(--border); font-weight: 700; font-family: monospace; background: var(--surface2); color: var(--text); }
+.mb-tile--free { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 22%, var(--surface)); }
+.mb-tile--mirror { border-style: dashed; color: var(--text-muted); }
+.mb-tile--empty { color: var(--text-dim); }
+.mb-half { font-family: monospace; font-weight: 700; }
+.mb-bar { height: 8px; border-radius: 4px; background: var(--surface2); border: 1px solid var(--border); overflow: hidden; }
+.mb-fill { display: block; height: 100%; background: var(--primary); }
+.mb-view figcaption { font-size: 13px; color: var(--text-muted); }

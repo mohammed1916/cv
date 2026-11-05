@@ -1,6 +1,6 @@
 import './SumScoreView.css'
 
-// Bars show nums. The table shows, for each index, the prefix, the suffix and the score it takes.
+// Bars show nums. Blue bars are the prefix up to the current index, orange bars the suffix from it; the table lists each index.
 export default function SumScoreView({ run, step }) {
   const { nums } = run.input
   const max = Math.max(1, ...nums.map(v => Math.abs(v)))
@@ -12,7 +12,7 @@ export default function SumScoreView({ run, step }) {
           const height = Math.max(4, (Math.abs(value) / max) * 130)
           return <div key={i} className="score-col">
             <span className="score-value">{value}</span>
-            <div className={`score-bar${i === step.index ? ' score-bar--current' : ''}`} style={{ height, background: value < 0 ? '#fca5a5' : undefined }} />
+            <div className={`score-bar${step.index >= 0 && i <= step.index ? ' score-bar--prefix' : ''}${step.index >= 0 && i >= step.index && step.index < nums.length ? ' score-bar--suffix' : ''}${value < 0 ? ' score-bar--neg' : ''}`} style={{ height }} />
             <span className="score-value">[{i}]</span>
           </div>
         })}

@@ -19,6 +19,7 @@ export default function ChainBlocksView({ run, step }) {
                 <span className="cb-value">{value}</span>
                 <small>{state === 'keep' ? 'kept' : state === 'drop' ? 'deleted' : 'pending'}</small>
               </div>
+              {current && <span className="cb-now-tag">cur</span>}
               {index < cells.length - 1 && <span className="cb-arrow" aria-hidden="true">→</span>}
             </div>
           )

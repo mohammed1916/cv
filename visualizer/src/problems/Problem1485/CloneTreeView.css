@@ -1,0 +1,11 @@
+.ct-view { margin: 0 0 10px; color: var(--text); }
+.ct-view svg { width: 100%; height: auto; display: block; max-height: 320px; }
+.ct-edge { stroke: var(--border); stroke-width: 2; }
+.ct-random { fill: none; stroke: var(--primary); stroke-width: 1.8; stroke-dasharray: 5 3; }
+.ct-arrowhead { fill: var(--primary); }
+.ct-node { fill: var(--surface2); stroke: var(--text-muted); stroke-width: 2; }
+.ct-node--copied { fill: color-mix(in srgb, var(--success) 28%, var(--surface)); stroke: var(--success); }
+.ct-node--now { fill: color-mix(in srgb, var(--warning) 35%, var(--surface)); stroke: var(--text); stroke-width: 3; }
+.ct-text { font-size: 13px; font-weight: 700; fill: var(--text); }
+.ct-sub { font-size: 11px; fill: var(--text-muted); }
+.ct-view figcaption { font-size: 13px; margin-top: 6px; color: var(--text-muted); }

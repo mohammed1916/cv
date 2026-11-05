@@ -1,0 +1,9 @@
+.rt-view { margin: 0; color: var(--text); }
+.rt-track { position: relative; height: 70px; margin: 36px 14px 26px; border-bottom: 3px solid var(--border); }
+.rt-bound { position: absolute; top: 6px; transform: translateX(-50%); font-weight: 700; font-size: 13px; color: var(--text); }
+.rt-bound::after { content: ''; position: absolute; left: 50%; top: 20px; width: 2px; height: 14px; background: var(--primary); }
+.rt-dot { position: absolute; bottom: -8px; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background: var(--success); }
+.rt-candidate { position: absolute; top: -8px; transform: translateX(-50%); padding: 2px 8px; border-radius: 6px; font-weight: 700; font-size: 13px; white-space: nowrap; border: 1px solid var(--border); background: var(--surface2); color: var(--text); }
+.rt-candidate--in { border-color: var(--success); background: color-mix(in srgb, var(--success) 25%, var(--surface)); }
+.rt-candidate--low, .rt-candidate--high { border-color: var(--error); color: var(--error); }
+.rt-view figcaption { font-size: 13px; color: var(--text-muted); }

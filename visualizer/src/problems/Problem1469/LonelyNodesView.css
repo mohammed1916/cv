@@ -1,10 +1,10 @@
 .ln-view { margin: 0; color: var(--text, #1f2937); }
 .ln-view svg { width: 100%; height: auto; display: block; }
-.ln-edge { stroke: #cbd5e1; stroke-width: 2; }
-.ln-edge--single { stroke: #b91c1c; stroke-width: 2.5; stroke-dasharray: 5 3; }
-.ln-node { fill: #f8fafc; stroke: #64748b; stroke-width: 2; }
-.ln-node--lonely { fill: #fee2e2; stroke: #b91c1c; stroke-width: 2.5; }
-.ln-node--now { fill: #fde68a; stroke: #111827; stroke-width: 3; }
-.ln-text { font-size: 13px; font-weight: 700; fill: #1f2937; }
-.ln-star { font-size: 14px; fill: #b91c1c; }
+.ln-edge { stroke: var(--border); stroke-width: 2; }
+.ln-edge--single { stroke: var(--error); stroke-width: 2.5; stroke-dasharray: 5 3; }
+.ln-node { fill: var(--surface2); stroke: var(--text-muted); stroke-width: 2; }
+.ln-node--lonely { fill: color-mix(in srgb, var(--error) 22%, var(--surface)); stroke: var(--error); stroke-width: 2.5; }
+.ln-node--now { fill: color-mix(in srgb, var(--warning) 35%, var(--surface)); stroke: var(--text); stroke-width: 3; }
+.ln-text { font-size: 13px; font-weight: 700; fill: var(--text); }
+.ln-star { font-size: 14px; fill: var(--error); }
 .ln-view figcaption { font-size: 13px; margin-top: 6px; }

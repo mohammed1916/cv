@@ -67,17 +67,17 @@ export function buildTrace({ vals, children }) {
   const frames = []
   let acc = 0
   const tally = new Map(vals.map(v => [v, 0]))
-  const frame = (phase, activeLine, pythonLine, node, message) => frames.push({
-    phase, activeLine, pythonLine, node, message, acc, tally: new Map(tally), vals, children,
+  const frame = (phase, activeLine, pythonLine, node, message, extra = {}) => frames.push({
+    phase, activeLine, pythonLine, node, message, acc, tally: new Map(tally), vals, children, ...extra,
   })
   frame('start', L('acc is 0'), P('acc = 0'), -1, 'The running XOR starts at 0.')
   vals.forEach((v, i) => {
     acc ^= v
-    frame('node', L('acc = acc XOR value of the node'), P('acc ^= v'), i, `XOR node ${v}: running value ${acc}.`)
+    frame('node', L('acc = acc XOR value of the node'), P('acc ^= v'), i, `XOR node ${v}: running value ${acc}.`, { operand: v, role: 'node' })
     for (const c of children[i]) {
       acc ^= c
       tally.set(c, tally.get(c) + 1)
-      frame('child', L('acc = acc XOR value of the child'), P('acc ^= c'), i, `XOR child ${c}: running value ${acc}.`)
+      frame('child', L('acc = acc XOR value of the child'), P('acc ^= c'), i, `XOR child ${c}: running value ${acc}.`, { operand: c, role: 'child' })
     }
   })
   const result = vals.indexOf(acc)

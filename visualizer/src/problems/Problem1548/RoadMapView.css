@@ -1,0 +1,9 @@
+.rm-view { margin: 0 0 10px; color: var(--text); max-width: 340px; }
+.rm-view svg { width: 100%; height: auto; display: block; }
+.rm-road { stroke: var(--border); stroke-width: 2; }
+.rm-road--walk { stroke: var(--warning); stroke-width: 4; }
+.rm-node { fill: var(--surface2); stroke: var(--text-muted); stroke-width: 2; }
+.rm-node--route { fill: color-mix(in srgb, var(--warning) 25%, var(--surface)); stroke: var(--warning); }
+.rm-node--now { fill: color-mix(in srgb, var(--primary) 30%, var(--surface)); stroke: var(--primary); stroke-width: 3; }
+.rm-text { font-size: 11px; font-weight: 700; fill: var(--text); }
+.rm-view figcaption { font-size: 13px; color: var(--text-muted); }

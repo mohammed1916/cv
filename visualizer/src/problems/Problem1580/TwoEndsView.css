@@ -1,15 +1,15 @@
-.te-view { margin: 0; color: var(--text, #1f2937); }
+.te-view { margin: 0; color: var(--text); }
 .te-view svg { width: 100%; height: auto; display: block; }
 .te-ends { display: flex; justify-content: space-between; font-size: 12px; opacity: 0.8; }
-.te-bar { fill: #cbd5e1; }
-.te-bar--now { fill: #fde68a; }
-.te-left { stroke: #2563eb; stroke-width: 4; }
-.te-right { stroke: #ea580c; stroke-width: 4; }
-.te-floor { stroke: #475569; stroke-width: 2; }
-.te-tag, .te-cap { font-size: 11px; fill: #1f2937; }
+.te-bar { fill: var(--surface3, var(--surface2)); stroke: var(--border); }
+.te-bar--now { fill: color-mix(in srgb, var(--primary) 25%, var(--surface)); stroke: var(--primary); stroke-width: 2; }
+.te-left { stroke: var(--info, var(--primary)); stroke-width: 4; }
+.te-right { stroke: var(--warning); stroke-width: 4; }
+.te-floor { stroke: var(--text-muted); stroke-width: 2; }
+.te-tag, .te-cap { font-size: 11px; fill: var(--text); }
 .te-cap { font-weight: 700; }
 .te-shelf { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
-.te-box { display: inline-flex; align-items: center; justify-content: center; min-width: 30px; height: 30px; background: #c2410c; color: #fff; border-radius: 6px; font-weight: 700; opacity: 0.55; }
-.te-box--next { opacity: 1; outline: 2px solid #111827; }
-.te-box--placed { opacity: 1; background: #15803d; }
+.te-box { display: inline-flex; align-items: center; justify-content: center; min-width: 30px; height: 30px; background: color-mix(in srgb, var(--warning) 35%, var(--surface)); color: var(--text); border-radius: 6px; font-weight: 700; opacity: 0.55; }
+.te-box--next { opacity: 1; outline: 2px solid var(--text); }
+.te-box--placed { opacity: 1; background: color-mix(in srgb, var(--success) 35%, var(--surface)); }
 .te-view figcaption { font-size: 13px; margin-top: 6px; }

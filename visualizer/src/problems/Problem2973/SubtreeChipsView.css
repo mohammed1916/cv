@@ -1,0 +1,6 @@
+.sc-view { margin: 0; color: var(--text); display: grid; gap: 6px; }
+.sc-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.sc-chip { min-width: 36px; text-align: center; padding: 4px 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface2); color: var(--text); font-family: monospace; font-weight: 700; }
+.sc-chip--neg { border-style: dashed; color: var(--error); }
+.sc-chip--picked { border: 2px solid var(--primary); background: color-mix(in srgb, var(--primary) 22%, var(--surface)); }
+.sc-view figcaption { font-size: 13px; color: var(--text-muted); }

@@ -1,0 +1,6 @@
+.pl-view { margin: 0; color: var(--text); overflow-x: auto; }
+.pl-view table { border-collapse: collapse; font-family: monospace; font-size: 13px; }
+.pl-view caption { font-size: 13px; color: var(--text-muted); text-align: left; padding-bottom: 4px; }
+.pl-cell { width: 34px; height: 30px; text-align: center; border: 1px solid var(--border); color: var(--text); }
+.pl-cell sup { font-weight: 700; color: var(--primary); margin-left: 2px; }
+.pl-cell--read { background: color-mix(in srgb, var(--primary) 22%, var(--surface)); font-weight: 700; }
