@@ -8,58 +8,76 @@ export function parseInput(text) {
   return { image, sr, sc, color }
 }
 
-// Breadth-first from the start pixel over pixels that share its original colour, repainting as they are reached.
+const JS_LINES = [
+  'function floodFill(image, sr, sc, color) {',
+  '  const original = image[sr][sc]',
+  '  if (original === color) return image // nothing to change',
+  '  const stack = [[sr, sc]] // cells waiting to be painted',
+  '  image[sr][sc] = color',
+  '  while (stack.length > 0) {',
+  '    const [r, c] = stack.pop() // take the next cell to inspect',
+  '    for (const [dr, dc] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {',
+  '      const nr = r + dr, nc = c + dc',
+  '      const inside = nr >= 0 && nc >= 0 && nr < image.length && nc < image[0].length',
+  '      if (inside && image[nr][nc] === original) { // neighbour has the old colour: paint it',
+  '        image[nr][nc] = color',
+  '        stack.push([nr, nc])',
+  '      }',
+  '    }',
+  '  }',
+  '  return image // return image',
+  '}',
+]
+const PY_LINES = [
+  'def flood_fill(image, sr, sc, color):',
+  '    original = image[sr][sc]',
+  '    if original == color:',
+  '        return image',
+  '    stack = [(sr, sc)]',
+  '    image[sr][sc] = color',
+  '    while stack:',
+  '        r, c = stack.pop()',
+  '        for dr, dc in ((-1, 0), (1, 0), (0, -1), (0, 1)):',
+  '            nr, nc = r + dr, c + dc',
+  '            inside = 0 <= nr < len(image) and 0 <= nc < len(image[0])',
+  '            if inside and image[nr][nc] == original:',
+  '                image[nr][nc] = color',
+  '                stack.append((nr, nc))',
+  '    return image',
+]
+const L = s => JS_LINES.findIndex(t => t.includes(s)) + 1
+const P = s => PY_LINES.findIndex(t => t.includes(s)) + 1
+
+export const code = JS_LINES.map((text, index) => ({ line: index + 1, text }))
+export const python = PY_LINES.join('\n')
+
+// An explicit stack replaces recursion, so the frontier is visible: each painted cell waits there until its neighbours are checked.
 export function buildTrace({ image, sr, sc, color }) {
-  const m = image.length, n = image[0].length
-  const out = image.map(r => [...r])
-  const original = image[sr][sc]
-  const frames = [{ phase: 'start', current: [sr, sc], out: out.map(r => [...r]), activeLine: 1, message: `Repaint the connected region of ${original} from (${sr}, ${sc}).` }]
+  const grid = image.map(row => [...row])
+  const original = grid[sr][sc]
+  const frames = [{ phase: 'start', cell: [sr, sc], painted: [], stack: [], grid: grid.map(r => [...r]), activeLine: L('const original'), pythonLine: P('original = image'), message: `The start pixel has colour ${original}; every connected pixel of that colour is repainted.` }]
   if (original === color) {
-    frames.push({ phase: 'done', current: null, out: out.map(r => [...r]), result: out, activeLine: 2, message: 'Same colour: nothing changes.' })
-    return { input: { image, sr, sc, color }, result: out, frames }
+    frames.push({ phase: 'done', cell: [sr, sc], painted: [], stack: [], grid: grid.map(r => [...r]), result: grid, activeLine: L('nothing to change'), pythonLine: P('return image'), message: `The colour is already ${color}, so the image is unchanged.` })
+    return { input: { image, sr, sc, color }, result: grid, frames }
   }
-  const queue = [[sr, sc]]
-  out[sr][sc] = color
-  for (let q = 0; q < queue.length; q++) {
-    const [r, c] = queue[q]
-    for (const [dr, dc] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+  const stack = [[sr, sc]]
+  const painted = [[sr, sc]]
+  grid[sr][sc] = color
+  frames.push({ phase: 'paint', cell: [sr, sc], painted: [...painted], stack: stack.map(c => [...c]), grid: grid.map(r => [...r]), activeLine: L('image[sr][sc] = color'), pythonLine: P('image[sr][sc] = color'), message: `Paint the start pixel ${color}.` })
+  while (stack.length > 0) {
+    const [r, c] = stack.pop()
+    frames.push({ phase: 'visit', cell: [r, c], painted: [...painted], stack: stack.map(x => [...x]), grid: grid.map(row => [...row]), activeLine: L('const [r, c] = stack.pop()'), pythonLine: P('r, c = stack.pop()'), message: `Look at the neighbours of (${r}, ${c}).` })
+    for (const [dr, dc] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {
       const nr = r + dr, nc = c + dc
-      if (nr < 0 || nc < 0 || nr >= m || nc >= n || out[nr][nc] !== original) continue
-      out[nr][nc] = color
-      queue.push([nr, nc])
-      frames.push({ phase: 'paint', current: [nr, nc], out: out.map(row => [...row]), activeLine: 7, message: `Paint (${nr}, ${nc}) to ${color}.` })
+      const inside = nr >= 0 && nc >= 0 && nr < grid.length && nc < grid[0].length
+      if (inside && grid[nr][nc] === original) {
+        grid[nr][nc] = color
+        stack.push([nr, nc])
+        painted.push([nr, nc])
+        frames.push({ phase: 'paint', cell: [nr, nc], painted: [...painted], stack: stack.map(x => [...x]), grid: grid.map(row => [...row]), activeLine: L('image[nr][nc] = color'), pythonLine: P('image[nr][nc]'), message: `(${nr}, ${nc}) had colour ${original} and touches the fill, so it becomes ${color} and joins the stack.` })
+      }
     }
   }
-  frames.push({ phase: 'done', current: null, out: out.map(r => [...r]), result: out, activeLine: 8, message: `${queue.length} pixel${queue.length === 1 ? '' : 's'} repainted.` })
-  return { input: { image, sr, sc, color }, result: out, frames }
+  frames.push({ phase: 'done', cell: null, painted: [...painted], stack: [], grid: grid.map(r => [...r]), result: grid, activeLine: L('return image'), pythonLine: P('return image'), message: `${painted.length} pixel${painted.length === 1 ? '' : 's'} repainted.` })
+  return { input: { image, sr, sc, color }, result: grid, frames }
 }
-
-export const code = `set original to the colour of the start pixel, and out to a copy of the image
-if original equals color, return the image unchanged
-set queue to the start pixel, and paint the start pixel color
-while queue is not empty
-  remove the first pixel (r, c) from the queue
-  for each orthogonal neighbour (nr, nc) of (r, c)
-    if (nr, nc) is inside the image and still has colour original, paint it color and add it to the queue
-return out`.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-// The scan-family visualizer reports its own step numbers (1 setup, 3 check, 4 update, 5 return).
-// This maps them onto the pseudocode lines above.
-export const LINE_MAP = { 1: 1, 3: 2, 4: 5, 5: 8 }
-
-export const python = `from collections import deque
-
-def flood_fill(image, sr, sc, color):
-    image = [row[:] for row in image]
-    original = image[sr][sc]
-    if original == color:
-        return image
-    queue = deque([(sr, sc)])
-    image[sr][sc] = color
-    while queue:
-        r, c = queue.popleft()
-        for nr, nc in ((r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1)):
-            if 0 <= nr < len(image) and 0 <= nc < len(image[0]) and image[nr][nc] == original:
-                image[nr][nc] = color
-                queue.append((nr, nc))
-    return image`

@@ -45,16 +45,22 @@ export function buildTrace(spec) {
   return { input: spec, result, frames, head: head.id }
 }
 
-export const code = `insertIntoCircularList(head, insert):
-  if head is empty, make a new node for insert that points to itself, and return it
-  prev = head
-  repeat
-    cur = prev.next
-    if insert fits between prev and cur in sorted order, or across the wrap, stop
+export const code = `function insertIntoCircularList(head, insert) {
+  if (head === null) { // if head is empty, make a new node that points to itself
+    const node = { val: insert, next: null }
+    node.next = node
+    return node
+  }
+  let prev = head
+  do {
+    const cur = prev.next // cur = prev.next
+    const fits = (prev.val <= insert && insert <= cur.val) || (prev.val > cur.val && (insert >= prev.val || insert <= cur.val))
+    if (fits) break // insert belongs between prev and cur, or across the wrap
     prev = cur
-    if prev is head, stop
-  link a new node holding insert after prev, so its next is prev's old next
-  return head`.split('\n').map((text, index) => ({ line: index + 1, text }))
+  } while (prev !== head)
+  prev.next = { val: insert, next: prev.next } // link a new node holding insert after prev
+  return head // return head
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `class Node:

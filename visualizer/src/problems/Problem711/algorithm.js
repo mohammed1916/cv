@@ -51,32 +51,45 @@ export function buildTrace(rows) {
       const key = canonicalShape(island)
       const isNew = !shapes.has(key)
       shapes.add(key)
-      frames.push({ phase: isNew ? 'new' : 'repeat', pythonLine: 34, activeLine: L('shapes.add('), cell: [r, c], island: [...island], shapes: shapes.size, message: isNew ? 'A shape not seen before, once every rotation and reflection of it is considered.' : 'Same shape as an earlier island once rotations and reflections are allowed.' })
+      frames.push({ phase: isNew ? 'new' : 'repeat', pythonLine: 34, activeLine: L('shapes.add('), cell: [r, c], island: [...island], shapes: shapes.size, key, message: isNew ? 'A shape not seen before, once every rotation and reflection of it is considered.' : 'Same shape as an earlier island once rotations and reflections are allowed.' })
     }
   }
   frames.push({ phase: 'done', pythonLine: 35, activeLine: L('return the number of shapes'), cell: null, island: [], shapes: shapes.size, message: `${shapes.size} distinct shape(s) up to rotation and reflection.` })
   return { input: rows, grid, result: shapes.size, frames }
 }
 
-export const code = `numDistinctIslands2(grid):
-  seen = empty set
-  shapes = empty set
-  for each cell (r, c) in grid
-    if the cell is land and not in seen
-      island = empty list
-      explore(r, c) to collect its connected land into island
-      shapes.add(canonical key of island)
-  return the number of shapes
-explore(r, c):
-  mark (r, c) as seen
-  append (r, c) to island
-  for each of the four neighbors (nr, nc) of (r, c)
-    if (nr, nc) is land and not seen, explore(nr, nc)
-canonical key of island:
-  for each of the 8 rotations and reflections of island
-    shift the cells so the smallest row and column are 0
-    sort the cells and join them into one string
-  return the smallest string`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function numDistinctIslands2(grid) {
+  const seen = new Set()
+  const shapes = new Set() // shapes = empty set
+  for (let r = 0; r < grid.length; r++) {
+    for (let c = 0; c < grid[0].length; c++) {
+      if (grid[r][c] === 1 && !seen.has(r + ',' + c)) {
+        const island = []
+        explore(r, c, island) // collect the connected land into island
+        shapes.add(canonicalKey(island)) // shapes.add(canonical key of island)
+      }
+    }
+  }
+  return shapes.size // return the number of shapes
+}
+function explore(r, c, island) {
+  seen.add(r + ',' + c)
+  island.push([r, c]) // append (r, c) to island
+  for (const [dr, dc] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {
+    const nr = r + dr, nc = c + dc
+    if (isLand(nr, nc) && !seen.has(nr + ',' + nc)) explore(nr, nc, island)
+  }
+}
+function canonicalKey(island) {
+  let best = null
+  for (const sym of SYMMETRIES) { // each of the 8 rotations and reflections
+    const moved = island.map(sym)
+    const minR = Math.min(...moved.map(([r]) => r)), minC = Math.min(...moved.map(([, c]) => c))
+    const key = moved.map(([r, c]) => (r - minR) + ',' + (c - minC)).sort().join(';')
+    if (best === null || key < best) best = key
+  }
+  return best // return the smallest string
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def number_of_distinct_islands2(grid):

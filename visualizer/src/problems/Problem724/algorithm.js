@@ -5,39 +5,49 @@ export function parseInput(text) {
   return nums
 }
 
-// Left sum grows as we pass each index; the right sum is total − left − nums[i].
+const JS_LINES = [
+  'function pivotIndex(nums) {',
+  '  const total = nums.reduce((sum, v) => sum + v, 0) // sum of every value',
+  '  let leftSum = 0 // sum strictly to the left of i',
+  '  for (let i = 0; i < nums.length; i++) {',
+  '    const rightSum = total - leftSum - nums[i] // sum strictly to the right of i',
+  '    if (leftSum === rightSum) return i // the leftmost pivot is the first match',
+  '    leftSum += nums[i] // move i one step right',
+  '  }',
+  '  return -1 // no index balances the two sides',
+  '}',
+]
+const PY_LINES = [
+  'def pivot_index(nums):',
+  '    total = sum(nums)',
+  '    left_sum = 0',
+  '    for i, value in enumerate(nums):',
+  '        right_sum = total - left_sum - value',
+  '        if left_sum == right_sum:',
+  '            return i',
+  '        left_sum += value',
+  '    return -1',
+]
+const L = s => JS_LINES.findIndex(t => t.includes(s)) + 1
+const P = s => PY_LINES.findIndex(t => t.includes(s)) + 1
+
+export const code = JS_LINES.map((text, index) => ({ line: index + 1, text }))
+export const python = PY_LINES.join('\n')
+
+// The total is computed once. Walking i left to right, the right sum is total - left - nums[i].
 export function buildTrace(nums) {
-  const total = nums.reduce((a, b) => a + b, 0)
-  let left = 0
-  const frames = [{ phase: 'start', index: -1, left, right: total, activeLine: 1, message: `Total ${total}; check each index as a pivot.` }]
+  const total = nums.reduce((sum, v) => sum + v, 0)
+  let leftSum = 0
+  const frames = [{ phase: 'start', index: -1, leftSum, rightSum: null, total, activeLine: L('const total'), pythonLine: P('total = sum'), message: `Total of all values is ${total}. Start with nothing on the left.` }]
   for (let i = 0; i < nums.length; i++) {
-    const right = total - left - nums[i]
-    if (left === right) {
-      frames.push({ phase: 'found', index: i, left, right, activeLine: 4, message: `Index ${i}: left ${left} = right ${right}.` })
-      return { input: nums, result: i, frames, done: true }
-    }
-    frames.push({ phase: 'scan', index: i, left, right, activeLine: 5, message: `Index ${i}: left ${left} ≠ right ${right}.` })
-    left += nums[i]
+    const rightSum = total - leftSum - nums[i]
+    const hit = leftSum === rightSum
+    frames.push({ phase: hit ? 'found' : 'check', index: i, leftSum, rightSum, total, activeLine: L('const rightSum'), pythonLine: P('right_sum ='),
+      message: hit ? `At index ${i}: left ${leftSum} equals right ${rightSum}. This is the leftmost pivot.` : `At index ${i}: left ${leftSum}, right ${rightSum}. Not equal; move on.` })
+    if (hit) return { input: nums, result: i, frames: [...frames, { phase: 'done', index: i, leftSum, rightSum, total, result: i, activeLine: L('return i'), pythonLine: P('return i'), message: `Pivot index ${i}.` }] }
+    leftSum += nums[i]
+    frames.push({ phase: 'advance', index: i, leftSum, rightSum, total, activeLine: L('leftSum += nums[i]'), pythonLine: P('left_sum += value'), message: `Include nums[${i}] = ${nums[i]} on the left; left is now ${leftSum}.` })
   }
-  frames.push({ phase: 'done', index: -1, left, right: 0, result: -1, activeLine: 6, message: 'No pivot index exists.' })
+  frames.push({ phase: 'done', index: nums.length - 1, leftSum, rightSum: null, total, result: -1, activeLine: L('return -1'), pythonLine: P('return -1'), message: 'No index balances the two sides. The answer is -1.' })
   return { input: nums, result: -1, frames }
 }
-
-export const code = `set total to the sum of nums, and left to 0
-for each index i from 0 to the last index
-  set right to total minus left minus nums[i]
-  if left equals right, stop with answer i
-  otherwise add nums[i] to left
-return the answer, or -1 if no index matched`.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-// The sequence-family visualizer reports its own step numbers (1 setup, 3 inspect, 4 update, 5 return).
-// This maps them onto the pseudocode lines above.
-export const LINE_MAP = { 1: 1, 3: 3, 4: 5, 5: 6 }
-
-export const python = `def pivot_index(nums):
-    total, left = sum(nums), 0
-    for i, x in enumerate(nums):
-        if left == total - left - x:
-            return i
-        left += x
-    return -1`

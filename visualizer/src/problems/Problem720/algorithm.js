@@ -5,45 +5,54 @@ export function parseInput(text) {
   return words
 }
 
-// A word qualifies when every prefix is itself a word. Sort so shorter prefixes are added first.
+const JS_LINES = [
+  'function longestWord(words) {',
+  '  const built = new Set([\'\']) // every word that can be built so far; the empty prefix is a start',
+  '  const sorted = [...words].sort((a, b) => a.length - b.length || (a < b ? -1 : a > b ? 1 : 0)) // shorter first, then alphabetical',
+  '  let best = \'\'',
+  '  for (const word of sorted) {',
+  '    const buildable = built.has(word.slice(0, -1)) // every shorter prefix must be a buildable word',
+  '    if (buildable) {',
+  '      built.add(word)',
+  '      if (word.length > best.length) best = word // a shorter-first scan keeps the smallest tie',
+  '    }',
+  '  }',
+  '  return best // return best',
+  '}',
+]
+const PY_LINES = [
+  'def longest_word(words):',
+  '    built = {\'\'}',
+  '    best = \'\'',
+  '    for word in sorted(words, key=lambda w: (len(w), w)):',
+  '        if word[:-1] in built:',
+  '            built.add(word)',
+  '            if len(word) > len(best):',
+  '                best = word',
+  '    return best',
+]
+const L = s => JS_LINES.findIndex(t => t.includes(s)) + 1
+const P = s => PY_LINES.findIndex(t => t.includes(s)) + 1
+
+export const code = JS_LINES.map((text, index) => ({ line: index + 1, text }))
+export const python = PY_LINES.join('\n')
+
+// Words are checked shortest first. A word is buildable when the word minus its last letter is already buildable.
 export function buildTrace(words) {
-  const sorted = [...words].sort((a, b) => a.length - b.length || (a < b ? -1 : a > b ? 1 : 0))
+  const sorted = [...new Set(words)].sort((a, b) => a.length - b.length || (a < b ? -1 : a > b ? 1 : 0))
   const built = new Set([''])
   let best = ''
-  const frames = [{ phase: 'start', word: null, built: [], best: '', activeLine: 1, message: 'Shorter words first; a word counts only if its prefix is already built.' }]
-  for (const w of sorted) {
-    const ok = built.has(w.slice(0, -1))
-    if (ok) {
-      built.add(w)
-      if (w.length > best.length || (w.length === best.length && w < best)) best = w
-    }
-    frames.push({ phase: ok ? 'build' : 'skip', word: w, built: [...built].filter(x => x), best, ok, activeLine: ok ? 5 : 4, message: ok ? `${w}: its prefix ${w.slice(0, -1) || '(empty)'} is built, so ${w} is built.` : `${w}: prefix ${w.slice(0, -1)} is not built.` })
+  const rows = []
+  const frames = [{ phase: 'start', current: null, rows: [], best, activeLine: L('const built'), pythonLine: P("built = {''}"), message: 'The empty prefix counts as built, so every single letter word can start a chain.' }]
+  for (const word of sorted) {
+    const parent = word.slice(0, -1)
+    const buildable = built.has(parent)
+    if (buildable) { built.add(word); if (word.length > best.length) best = word }
+    rows.push({ word, parent: parent === '' ? '(empty)' : parent, buildable })
+    frames.push({ phase: buildable ? 'build' : 'skip', current: word, rows: rows.map(r => ({ ...r })), best,
+      activeLine: L(buildable ? 'built.add(word)' : 'const buildable'), pythonLine: P(buildable ? 'built.add(word)' : 'if word[:-1] in built'),
+      message: buildable ? `"${word}" can be built: "${parent || 'nothing'}" is buildable, so "${word}" joins the set.` : `"${word}" cannot be built, because "${parent}" is not in the buildable set.` })
   }
-  const result = best
-  frames.push({ phase: 'done', word: null, built: [...built].filter(x => x), best, result, activeLine: 6, message: result ? `Longest buildable word: ${result}.` : 'No word can be built.' })
-  return { input: words, result, frames }
+  frames.push({ phase: 'done', current: null, rows: rows.map(r => ({ ...r })), best, result: best, activeLine: L('return best'), pythonLine: P('return best'), message: best ? `Longest buildable word: "${best}".` : 'No word can be built one letter at a time, so the answer is the empty string.' })
+  return { input: words, result: best, frames }
 }
-
-export const code = `set built to the empty word, and best to the empty word
-sort the words by length, then alphabetically
-for each word w in that order
-  if the prefix of w without its last letter is built, mark w as built
-  and keep w as best when it is longer, or equal in length and smaller
-return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-// The trie-family visualizer reports code stages rather than line numbers, and several stages share one
-// family line. This maps each family frame onto the pseudocode lines above.
-export function familyLine(frame) {
-  if (frame.phase === 'start') return 1
-  if (frame.phase === 'done') return 6
-  return { insert: 4, store: 4, lookup: 4, accept: 5 }[frame.codeStage] ?? 4
-}
-
-export const python = `def longest_word(words):
-    built, best = {''}, ''
-    for w in sorted(words, key=lambda x: (len(x), x)):
-        if w[:-1] in built:
-            built.add(w)
-            if len(w) > len(best) or (len(w) == len(best) and w < best):
-                best = w
-    return best`

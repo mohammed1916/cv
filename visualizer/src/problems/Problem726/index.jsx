@@ -1,31 +1,33 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
-    { id: 'start', label: 'Outer group', description: 'Counts for the whole formula.' },
+    { id: 'start', label: 'Outer level', description: 'Counts for the whole formula.' },
     { id: 'open', label: 'Open group', description: 'Start counting a parenthesised group.' },
     { id: 'atom', label: 'Atom', description: 'Add the element with its count.' },
     { id: 'close', label: 'Close group', description: 'Multiply the group and add it to its parent.' },
     { id: 'done', label: 'Complete', description: 'Print atoms in sorted order.' },
   ],
-  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Formula (JSON string)',
+  parse: parseInput, build: buildTrace, code, python,
+  inputLabel: 'Formula (JSON string)',
   url: 'https://leetcode.com/problems/number-of-atoms/',
-  complexity: 'O(n log n) time with n characters: each atom is counted once, and the final sort is over distinct atoms.',
+  complexity: 'O(n) time for the scan and O(n) space for the stack of levels.',
   examples: [
-    { label: 'Water', input: '"H2O"' },
-    { label: 'Magnesium hydroxide', input: '"Mg(OH)2"' },
-    { label: 'Nested', input: '"K4(ON(SO3)2)2"' },
+    { label: 'Ethanol', input: '"C2H5OH"' },
+    { label: 'Iron cyclo', input: '"Fe(C5H5)2"' },
+    { label: 'Alum', input: '"Al2(SO4)3"' },
   ],
 }
 
 export default function NumberOfAtoms() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <StackLane title={`Counts (depth ${step.depth})`} items={Object.entries(step.counts).map(([a, c]) => `${a}${c === 1 ? '' : c}`)} note={step.phase === 'done' ? 'sorted' : 'open group'} />
-    <output aria-label="Result">{step.phase === 'done' ? step.result : `Depth ${step.depth}`}</output>
-  </>} renderReasoning={({ step }) => <>
-    <p>{step.message}</p>
-    <p><strong>Groups:</strong> a parenthesised group’s counts multiply by the number that follows it before merging into the enclosing group.</p>
+    <RecordStateTable label="Count levels (top of stack is the last row)" columns={['level', 'atoms']}
+      rows={step.levels.map((atoms, level) => ({ level, atoms }))} activeRow={step.levels.length - 1} />
+    <output aria-label="Current step">{`Position ${step.position}: ${step.message}`}</output>
+  </>} renderReasoning={() => <>
+    <p>An opening parenthesis starts a new count level. A closing one multiplies that level by the number after it and adds the totals to the level below.</p>
+    <p>Element names are an uppercase letter followed by lowercase letters. A missing number means 1.</p>
   </>} />
 }

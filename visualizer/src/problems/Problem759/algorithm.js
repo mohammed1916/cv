@@ -1,11 +1,15 @@
-const CODE_TEXT = `employee free time
-  flatten every employee's busy intervals into one list
-  sort the list by start time
-  reach starts as no time yet
-  for each interval in sorted order
-    if reach exists and the start is after reach then add [reach, start] as free
-    set reach to the larger of reach and the interval's end
-  return the free gaps`
+const CODE_TEXT = `function employeeFreeTime(schedules) {
+  const flat = []
+  for (const busy of schedules) for (const [start, end] of busy) flat.push([start, end]) // flatten every employee's busy intervals
+  flat.sort((a, b) => a[0] - b[0] || a[1] - b[1]) // sort the list by start time
+  const free = []
+  let reach = null // no time seen yet
+  for (const [start, end] of flat) { // for each interval in sorted order
+    if (reach !== null && start > reach) free.push([reach, start]) // if reach exists and start is after it, that gap is free
+    reach = reach === null || end > reach ? end : reach // set reach to the later end
+  }
+  return free // return the free gaps
+}`
 
 export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
 

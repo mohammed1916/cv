@@ -5,50 +5,60 @@ export function parseInput(text) {
   return asteroids
 }
 
+const JS_LINES = [
+  'function asteroidCollision(asteroids) {',
+  '  const stack = [] // survivors that are still moving right',
+  '  for (const a of asteroids) {',
+  '    let alive = true',
+  '    while (alive && a < 0 && stack.length > 0 && stack[stack.length - 1] > 0) {',
+  '      const top = stack[stack.length - 1]',
+  '      if (top < -a) stack.pop() // the right-mover is smaller: it explodes and we keep checking',
+  '      else if (top === -a) { stack.pop(); alive = false } // equal sizes: both explode',
+  '      else alive = false // the left-mover is smaller: it explodes',
+  '    }',
+  '    if (alive) stack.push(a) // a survives this round',
+  '  }',
+  '  return stack',
+  '}',
+]
+const PY_LINES = [
+  'def asteroid_collision(asteroids):',
+  '    stack = []',
+  '    for a in asteroids:',
+  '        alive = True',
+  '        while alive and a < 0 and stack and stack[-1] > 0:',
+  '            top = stack[-1]',
+  '            if top < -a:',
+  '                stack.pop()',
+  '            elif top == -a:',
+  '                stack.pop()',
+  '                alive = False',
+  '            else:',
+  '                alive = False',
+  '        if alive:',
+  '            stack.append(a)',
+  '    return stack',
+]
+const L = s => JS_LINES.findIndex(t => t.includes(s)) + 1
+const P = s => PY_LINES.findIndex(t => t.includes(s)) + 1
+
+export const code = JS_LINES.map((text, index) => ({ line: index + 1, text }))
+export const python = PY_LINES.join('\n')
+
 // Stack of survivors moving right. A left-mover meets the stack top; the smaller one explodes (equal: both).
 export function buildTrace(asteroids) {
   const stack = []
-  const frames = [{ phase: 'start', index: -1, stack: [], activeLine: 1, message: 'Asteroids moving right wait on the stack.' }]
+  const frames = [{ phase: 'start', index: -1, stack: [], activeLine: L('const stack'), pythonLine: P('stack = []'), message: 'Asteroids moving right wait on the stack.' }]
   asteroids.forEach((a, i) => {
     let alive = true
     while (alive && a < 0 && stack.length && stack[stack.length - 1] > 0) {
       const top = stack[stack.length - 1]
-      if (top < -a) { stack.pop(); frames.push({ phase: 'explode', index: i, value: a, stack: [...stack], activeLine: 5, message: `${-a} meets ${top}: the smaller right-mover explodes.` }) }
-      else if (top === -a) { stack.pop(); alive = false; frames.push({ phase: 'both', index: i, value: a, stack: [...stack], activeLine: 6, message: `${-a} and ${top} are equal: both explode.` }) }
-      else { alive = false; frames.push({ phase: 'explode', index: i, value: a, stack: [...stack], activeLine: 7, message: `${-a} is smaller than ${top}: it explodes.` }) }
+      if (top < -a) { stack.pop(); frames.push({ phase: 'explode', index: i, value: a, stack: [...stack], activeLine: L('the right-mover is smaller'), pythonLine: P('stack.pop()'), message: `${-a} meets ${top}: the smaller right-mover explodes, so we keep checking.` }) }
+      else if (top === -a) { stack.pop(); alive = false; frames.push({ phase: 'both', index: i, value: a, stack: [...stack], activeLine: L('equal sizes'), pythonLine: P('alive = False'), message: `${-a} and ${top} are equal: both explode.` }) }
+      else { alive = false; frames.push({ phase: 'explode', index: i, value: a, stack: [...stack], activeLine: L('the left-mover is smaller'), pythonLine: P('else:'), message: `${-a} is smaller than ${top}: it explodes.` }) }
     }
-    if (alive) { stack.push(a); frames.push({ phase: 'push', index: i, value: a, stack: [...stack], activeLine: 8, message: `${a} survives this step.` }) }
+    if (alive) { stack.push(a); frames.push({ phase: 'push', index: i, value: a, stack: [...stack], activeLine: L('a survives this round'), pythonLine: P('stack.append(a)'), message: `${a} survives this round.` }) }
   })
-  frames.push({ phase: 'done', index: asteroids.length - 1, stack: [...stack], result: stack, activeLine: 9, message: `Survivors: [${stack.join(', ')}].` })
+  frames.push({ phase: 'done', index: asteroids.length - 1, stack: [...stack], result: stack, activeLine: L('return stack'), pythonLine: P('return stack'), message: `Survivors: [${stack.join(', ')}].` })
   return { input: asteroids, result: stack, frames }
 }
-
-export const code = `set stack to an empty list of survivors
-for each asteroid a in order
-  set alive to true
-  while alive, a moves left, and the top of stack moves right
-    if the top is smaller than a's size, pop the top and keep checking
-    otherwise if the sizes are equal, pop the top and set alive to false
-    otherwise set alive to false, because a is smaller and explodes
-  if alive, push a onto stack
-return stack`.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-// The scan-family visualizer reports its own step numbers (1 setup, 2 check, 4 update, 5 return).
-// This maps them onto the pseudocode lines above.
-export const LINE_MAP = { 1: 1, 3: 2, 4: 4, 5: 9 }
-
-export const python = `def asteroid_collision(asteroids):
-    stack = []
-    for a in asteroids:
-        alive = True
-        while alive and a < 0 and stack and stack[-1] > 0:
-            if stack[-1] < -a:
-                stack.pop()
-            elif stack[-1] == -a:
-                stack.pop()
-                alive = False
-            else:
-                alive = False
-        if alive:
-            stack.append(a)
-    return stack`

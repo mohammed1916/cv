@@ -13,23 +13,30 @@ export function parseInput(text) {
   return ops
 }
 
-export const code = `MyLinkedList():
-  dummy = sentinel node whose next is null
-  size = 0
-runOperation(name, index, value):
-  index is 0 for addAtHead, size for addAtTail, or the given index
-  if name is get or deleteAtIndex, require 0 <= index < size
-  otherwise require 0 <= index <= size
-  if the index is invalid, change nothing and return -1 for get
-  prev = dummy
-  walk prev forward index times
-  if name is get, cur = prev.next and return cur.value
-  if name is deleteAtIndex, doomed = prev.next
-    then prev.next = doomed.next and size -= 1
-  otherwise, new = node with value
-    new.next = prev.next
-    prev.next = new and size += 1
-  return the list`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `class MyLinkedList {
+  constructor() {
+    this.dummy = { val: 0, next: null } // dummy = sentinel node whose next is null
+    this.size = 0
+  }
+  runOperation(name, index, value) {
+    const valid = name === 'get' || name === 'deleteAtIndex' ? index >= 0 && index < this.size : index >= 0 && index <= this.size
+    if (!valid) return name === 'get' ? -1 : undefined // if the index is invalid, change nothing
+    let prev = this.dummy // prev = dummy
+    for (let hop = 0; hop < index; hop++) prev = prev.next // walk prev forward index times
+    if (name === 'get') return prev.next.val // return cur.value
+    if (name === 'deleteAtIndex') {
+      const doomed = prev.next // doomed = prev.next
+      prev.next = doomed.next // then prev.next = doomed.next
+      this.size -= 1
+      return undefined
+    }
+    const fresh = { val: value, next: null } // otherwise, new = node with value
+    fresh.next = prev.next // new.next = prev.next
+    prev.next = fresh // prev.next = new and size += 1
+    this.size += 1
+    return undefined // return the list
+  }
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 // Singly linked list with a sentinel head. Every operation walks `prev` from the dummy node, then rewrites next pointers.

@@ -54,21 +54,32 @@ export function buildTrace(ops) {
   return { input: ops, result: log.filter(x => x.name === 'queryRange').map(x => x.returned), log, frames }
 }
 
-export const code = `rangeModuleOperations(ops):
-  intervals = empty sorted list of disjoint [start, end) ranges
-  results = empty list
-  for each [name, l, r] in ops
-    if name is addRange
-      merged = [l, r]
-      for each interval [a, b] in intervals
-        if it does not touch merged, keep it; otherwise absorb it into merged
-      intervals = kept intervals plus merged, sorted by start
-    if name is removeRange
-      for each interval [a, b] in intervals
-        if it misses [l, r), keep it; otherwise keep only its parts outside [l, r)
-    if name is queryRange
-      append whether one interval covers [l, r) to results
-  return results`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function rangeModule(ops) {
+  let intervals = [] // intervals = empty sorted list of disjoint [start, end) ranges
+  const results = [] // results = empty list
+  for (const [name, l, r] of ops) {
+    if (name === 'addRange') {
+      let nl = l, nr = r
+      const kept = []
+      for (const [a, b] of intervals) {
+        if (b < nl || a > nr) kept.push([a, b]) // if it does not touch merged, keep it
+        else { nl = Math.min(nl, a); nr = Math.max(nr, b) } // otherwise absorb it into merged
+      }
+      intervals = [...kept, [nl, nr]].sort((x, y) => x[0] - y[0])
+    } else if (name === 'removeRange') {
+      const next = []
+      for (const [a, b] of intervals) {
+        if (b <= l || a >= r) next.push([a, b]) // if it misses [l, r), keep it
+        else { if (a < l) next.push([a, l]); if (b > r) next.push([r, b]) } // keep only its parts outside [l, r)
+      }
+      intervals = next
+    } else {
+      results.push(intervals.some(([a, b]) => a <= l && r <= b)) // append whether one interval covers [l, r)
+    }
+  }
+  return results // return results
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def range_module_operations(ops):

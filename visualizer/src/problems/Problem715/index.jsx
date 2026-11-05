@@ -17,7 +17,7 @@ const definition = {
   url: 'https://leetcode.com/problems/range-module/',
   complexity: 'O(n) per operation for this list version; a balanced ordered set gives O(log n) plus interval work.',
   examples: [
-    { label: 'Merge and split', input: '[["addRange",10,20],["removeRange",14,15],["queryRange",10,14],["queryRange",13,16],["queryRange",16,17]]' },
+    { label: 'Merge and split', input: '[["addRange",3,9],["removeRange",5,6],["queryRange",3,5],["queryRange",4,7],["queryRange",6,9]]' },
   ],
 }
 

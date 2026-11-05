@@ -20,8 +20,8 @@ const definition = {
   url: 'https://leetcode.com/problems/employee-free-time/description/',
   complexity: 'O(N log N) time for N total intervals, from the sort; O(N) extra space. The visualization caps input at 4 employees, 5 intervals each and times 0 to 50; the official bounds are not verified.',
   examples: [
-    { label: 'Three employees', input: '[[[1,2],[5,6]],[[1,3]],[[4,10]]]' },
-    { label: 'Overlapping busy time', input: '[[[1,3],[6,7]],[[2,4]],[[2,5],[9,12]]]' },
+    { label: 'Three employees', input: '[[[2,4],[9,10]],[[3,5]],[[7,8]]]' },
+    { label: 'Overlapping busy time', input: '[[[0,2],[6,7]],[[1,3],[11,12]]]' },
     { label: 'Touching busy time', input: '[[[1,2]],[[2,3]]]' },
   ],
 }

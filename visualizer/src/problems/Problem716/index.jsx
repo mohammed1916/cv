@@ -17,7 +17,7 @@ const definition = {
   url: 'https://leetcode.com/problems/max-stack/',
   complexity: 'O(n) per popMax with a plain array, which the visualization uses. The visualization caps input at 30 operations.',
   examples: [
-    { label: 'Example 1', input: '[["push",5],["push",1],["push",5],["top"],["popMax"],["top"],["peekMax"],["pop"],["top"]]' },
+    { label: 'Mixed', input: '[["push",4],["push",9],["push",2],["peekMax"],["popMax"],["top"],["pop"],["peekMax"]]' },
     { label: 'Tied maxima', input: '[["push",2],["push",2],["popMax"],["top"]]' },
   ],
 }

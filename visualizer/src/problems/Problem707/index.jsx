@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/design-linked-list/',
   complexity: 'O(index) per operation, which is O(n) in the worst case, and O(1) extra space.',
   examples: [
-    { label: 'Mixed', input: '[["addAtHead",1],["addAtTail",3],["addAtIndex",1,2],["get",1],["deleteAtIndex",0],["get",0]]' },
+    { label: 'Mixed', input: '[["addAtTail",5],["addAtHead",2],["addAtIndex",2,7],["get",2],["deleteAtIndex",1],["get",1],["get",9]]' },
   ],
 }
 

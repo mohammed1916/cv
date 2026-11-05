@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { DPTable } from '../../components/shared/AlgorithmStatePrimitives'
+import MatrixGrid from '../../components/shared/MatrixGrid'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -15,15 +15,18 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-distinct-islands-ii/',
   complexity: 'O(rows * columns) cells, with eight symmetric copies of each island. The visualization caps the grid at 10 by 10.',
   examples: [
-    { label: 'Mirror pair', input: '["11000","10000","00011","00001"]' },
-    { label: 'Square and L', input: '["11000","10000","00011","00011"]' },
+    { label: 'Rotated L', input: '["11000","10000","00100","00110"]' },
+    { label: 'Two shapes', input: '["1110","1000","0000","0011"]' },
   ],
 }
 
 export default function NumberOfDistinctIslandsII() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <DPTable title="Grid (island highlighted)" values={run.grid} activeCell={step.cell} relatedCells={step.island} />
+    <MatrixGrid label="Grid (island highlighted)" matrix={run.grid}
+      activeCell={step.cell ? { row: step.cell[0], col: step.cell[1] } : null}
+      highlightedCells={step.island.map(([row, col]) => ({ row, col }))} />
     <output aria-label="Shapes">{`Distinct shapes so far: ${step.shapes}`}</output>
+    {step.key && <p><strong>Canonical key:</strong> <code>{step.key}</code></p>}
   </>} renderReasoning={() => <>
     <p>Two islands are the same shape if one can be turned into the other by rotating or reflecting it, then sliding it. Each island therefore gets eight symmetric copies.</p>
     <p>Its key is the smallest of those copies, moved to the origin. Islands with the same key are counted once.</p>

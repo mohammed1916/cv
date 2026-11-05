@@ -17,17 +17,37 @@ export function parseInput(text) {
   return ops
 }
 
-export const code = `maxStackOperations(ops):
-  stack = empty list, bottom to top
-  results = empty list
-  for each operation in ops
-    if operation is push(value), append value to stack
-    if operation is pop, remove and return the top value
-    if operation is top, return the top value without removing it
-    if operation is peekMax, return the largest value in the stack
-    if operation is popMax, find the largest value, take its most recent position, and remove it
-    append the returned value to results, or null for push
-  return results`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `class MaxStack {
+  constructor() {
+    this.stack = [] // stack = empty list, bottom to top
+  }
+  push(value) {
+    this.stack.push(value) // append value to stack
+  }
+  pop() {
+    return this.stack.pop() // remove and return the top value
+  }
+  top() {
+    return this.stack[this.stack.length - 1] // return the top value without removing it
+  }
+  peekMax() {
+    return Math.max(...this.stack) // return the largest value in the stack
+  }
+  popMax() {
+    const best = Math.max(...this.stack)
+    const index = this.stack.lastIndexOf(best) // take its most recent position
+    return this.stack.splice(index, 1)[0] // remove that entry and return it
+  }
+}
+function maxStackOperations(ops) {
+  const stack = new MaxStack()
+  const results = [] // results = empty list
+  for (const [kind, value] of ops) {
+    if (kind === 'push') { stack.push(value); results.push(null) }
+    else results.push(stack[kind]())
+  }
+  return results // return results
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export function buildTrace(ops) {

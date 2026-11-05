@@ -6,34 +6,57 @@ export function parseInput(text) {
   return { prices, fee }
 }
 
-// Two states per day: cash (not holding) and hold (holding one share). Selling pays the fee.
+const JS_LINES = [
+  'function maxProfit(prices, fee) {',
+  '  let cash = 0 // best profit after the day while holding no stock',
+  '  let hold = -prices[0] // best profit after the day while holding one share',
+  '  for (let i = 1; i < prices.length; i++) {',
+  '    const nextCash = Math.max(cash, hold + prices[i] - fee) // sell today and pay the fee',
+  '    const nextHold = Math.max(hold, cash - prices[i]) // buy today from the cash state',
+  '    cash = nextCash',
+  '    hold = nextHold',
+  '  }',
+  '  return cash // holding a share at the end is never better than selling it',
+  '}',
+]
+const PY_LINES = [
+  'def max_profit(prices, fee):',
+  '    cash = 0',
+  '    hold = -prices[0]',
+  '    for price in prices[1:]:',
+  '        next_cash = max(cash, hold + price - fee)',
+  '        next_hold = max(hold, cash - price)',
+  '        cash, hold = next_cash, next_hold',
+  '    return cash',
+]
+const L = s => JS_LINES.findIndex(t => t.includes(s)) + 1
+const P = s => PY_LINES.findIndex(t => t.includes(s)) + 1
+
+export const code = JS_LINES.map((text, index) => ({ line: index + 1, text }))
+export const python = PY_LINES.join('\n')
+
+// Two states per day: cash (no share) and hold (one share). Each day both states are recomputed from yesterday's pair.
 export function buildTrace({ prices, fee }) {
   let cash = 0, hold = -prices[0]
-  const frames = [{ phase: 'start', day: 0, cash, hold, activeLine: 2, message: `Day 0: holding costs ${prices[0]}; holding nothing earns 0.` }]
+  const cashRow = [cash], holdRow = [hold], actions = ['start']
+  const frames = [{ phase: 'start', day: 0, cashRow: [...cashRow], holdRow: [...holdRow], actions: [...actions], activeLine: L('let cash'), pythonLine: P('cash = 0'), message: `Day 0 at price ${prices[0]}: buying gives hold = -${prices[0]}; not buying keeps cash = 0.` }]
   for (let i = 1; i < prices.length; i++) {
-    const nextCash = Math.max(cash, hold + prices[i] - fee)
-    const nextHold = Math.max(hold, cash - prices[i])
-    cash = nextCash; hold = nextHold
-    frames.push({ phase: 'day', day: i, cash, hold, price: prices[i], activeLine: 6, message: `Day ${i} at ${prices[i]}: best cash ${cash}, best hold ${hold}.` })
+    const sell = hold + prices[i] - fee
+    const nextCash = Math.max(cash, sell)
+    const buy = cash - prices[i]
+    const nextHold = Math.max(hold, buy)
+    const action = nextCash === sell && sell > cash ? 'sell' : nextHold === buy && buy > hold ? 'buy' : 'wait'
+    cash = nextCash
+    hold = nextHold
+    cashRow.push(cash)
+    holdRow.push(hold)
+    actions.push(action)
+    frames.push({ phase: action, day: i, cashRow: [...cashRow], holdRow: [...holdRow], actions: [...actions], activeLine: L('const nextCash'), pythonLine: P('next_cash ='),
+      message: action === 'sell' ? `Day ${i} (price ${prices[i]}): selling the share gives ${sell}, which beats cash ${nextCash === sell ? cashRow[i - 1] : cashRow[i - 1]}; the fee is paid.`
+        : action === 'buy' ? `Day ${i} (price ${prices[i]}): buying from cash gives ${buy}, better than keeping the share.`
+          : `Day ${i} (price ${prices[i]}): neither move beats yesterday, so both states carry over.` })
   }
   const result = cash
-  frames.push({ phase: 'done', day: prices.length - 1, cash, hold, result, activeLine: 8, message: `Best profit: ${result}.` })
+  frames.push({ phase: 'done', day: prices.length - 1, cashRow: [...cashRow], holdRow: [...holdRow], actions: [...actions], result, activeLine: L('return cash'), pythonLine: P('return cash'), message: `Best profit with no share in hand at the end: ${result}.` })
   return { input: { prices, fee }, result, frames }
 }
-
-export const code = `set cash to 0 and hold to the negative of the first price
-for each later price
-  compute the new cash as the larger of cash and hold plus price minus fee (sell today)
-  compute the new hold as the larger of hold and the previous cash minus price (buy today)
-  replace cash and hold with the new values
-return cash`.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-// Family line 4 compares keeping cash with selling and keeping stock with buying; line 5 is the return.
-export const LINE_MAP = { 1: 1, 4: 5, 5: 6 }
-
-export const python = `def max_profit(prices, fee):
-    cash = 0
-    hold = -prices[0]
-    for price in prices[1:]:
-        cash, hold = max(cash, hold + price - fee), max(hold, cash - price)
-    return cash`

@@ -1,10 +1,32 @@
-import authoredExamples0 from '../../config/examples/scan--856.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import RecordStateTable from '../../components/shared/RecordStateTable'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
-import SequenceStory from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/scanStories/definitions';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  phases: [
+    { id: 'start', label: 'Outer level', description: 'The whole string starts at score 0.' },
+    { id: 'open', label: 'Open', description: 'A new pair starts with score 0.' },
+    { id: 'bare', label: 'Bare pair', description: '"()" is worth 1.' },
+    { id: 'nested', label: 'Nested pair', description: '"(A)" is worth twice A.' },
+    { id: 'done', label: 'Complete', description: 'The outer score is the answer.' },
+  ],
+  parse: parseInput, build: buildTrace, code, python,
+  inputLabel: 'Balanced parentheses (JSON string)',
+  url: 'https://leetcode.com/problems/score-of-parentheses/',
+  complexity: 'O(n) time and O(n) space for the stack.',
+  examples: [
+    { label: 'Nested', input: '"(()(()))"' },
+    { label: 'Pairs', input: '"()()()"' },
+    { label: 'Deep', input: '"((()))"' },
+  ],
+}
 
-const definition = { ...definitions[856], examples: authoredExamples0 };
-function Visualizer() { return <SequenceStory definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function ScoreOfParentheses() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+    <RecordStateTable label="Stack of open levels (top is the last row)" columns={['level', 'score']}
+      rows={step.stack.map((score, level) => ({ level, score }))} activeRow={step.stack.length - 1} />
+    <output aria-label="Step">{`Position ${step.pos}: ${step.message}`}</output>
+  </>} renderReasoning={() => <>
+    <p>A pair that contains a score A is worth 2A, and a bare pair is worth 1. Summing at each level gives the total.</p>
+  </>} />
+}

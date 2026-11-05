@@ -1,10 +1,30 @@
-import authoredExamples0 from '../../config/examples/collection--839.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import DisjointSetView from '../../components/shared/DisjointSetView'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/unionRelationsBatch.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  phases: [
+    { id: 'start', label: 'Singletons', description: 'Each string starts in its own group.' },
+    { id: 'merge', label: 'Merge', description: 'A similar pair joins two groups.' },
+    { id: 'same', label: 'Already joined', description: 'The pair is similar, but its groups already match.' },
+    { id: 'done', label: 'Complete', description: 'Count the groups left.' },
+  ],
+  parse: parseInput, build: buildTrace, code, python,
+  inputLabel: 'Strings (JSON array of anagrams of equal length)',
+  url: 'https://leetcode.com/problems/similar-string-groups/',
+  complexity: 'O(n^2 * L) time for n strings of length L, with union-find for the groups.',
+  examples: [
+    { label: 'One group', input: '["abc","acb","bac","cba"]' },
+    { label: 'Swap chain', input: '["abcd","bacd","bcad","dbca"]' },
+  ],
+}
 
-const definition = { ...definitions[839], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function SimilarStringGroups() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <DisjointSetView parent={step.parent} size={step.size} labels={run.labels} />
+    <output aria-label="Groups">{`Groups: ${step.groups}`}</output>
+    <p role="status">{step.message}</p>
+  </>} renderReasoning={() => <>
+    <p>Two strings are similar when they are equal or when a single swap of two positions makes them equal. Similarity links strings into groups, and union-find keeps the group count.</p>
+  </>} />
+}

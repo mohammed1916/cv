@@ -5,35 +5,60 @@ export function parseInput(text) {
   return { left, right }
 }
 
-// A number is self-dividing when it has no zero digit and each digit divides it.
+const JS_LINES = [
+  'function selfDividingNumbers(left, right) {',
+  '  const result = []',
+  '  for (let n = left; n <= right; n++) {',
+  '    let rest = n, ok = true',
+  '    while (rest > 0 && ok) { // check each digit of n',
+  '      const digit = rest % 10',
+  '      if (digit === 0 || n % digit !== 0) ok = false // a zero digit or a non-divisor disqualifies n',
+  '      rest = Math.floor(rest / 10)',
+  '    }',
+  '    if (ok) result.push(n)',
+  '  }',
+  '  return result',
+  '}',
+]
+const PY_LINES = [
+  'def self_dividing_numbers(left, right):',
+  '    result = []',
+  '    for n in range(left, right + 1):',
+  '        rest, ok = n, True',
+  '        while rest > 0 and ok:',
+  '            digit = rest % 10',
+  '            if digit == 0 or n % digit != 0:',
+  '                ok = False',
+  '            rest //= 10',
+  '        if ok:',
+  '            result.append(n)',
+  '    return result',
+]
+const L = s => JS_LINES.findIndex(t => t.includes(s)) + 1
+const P = s => PY_LINES.findIndex(t => t.includes(s)) + 1
+
+export const code = JS_LINES.map((text, index) => ({ line: index + 1, text }))
+export const python = PY_LINES.join('\n')
+
+// Each number is tested digit by digit: every digit must be non-zero and must divide the whole number.
 export function buildTrace({ left, right }) {
-  const found = []
-  const frames = [{ phase: 'start', n: left, found: [], activeLine: 1, message: `Check every number from ${left} to ${right}.` }]
+  const result = []
+  const frames = [{ phase: 'start', n: left, digits: [], ok: null, result: [], activeLine: L('const result = []'), pythonLine: P('result = []'), message: `Test every number from ${left} to ${right}.` }]
   for (let n = left; n <= right; n++) {
-    const digits = String(n).split('').map(Number)
-    const ok = digits.every(d => d !== 0 && n % d === 0)
-    if (ok) found.push(n)
-    frames.push({ phase: ok ? 'keep' : 'skip', n, ok, found: [...found], activeLine: ok ? 5 : 4, message: `${n}: ${digits.map(d => (d === 0 ? '0 (rejected)' : n % d === 0 ? `${d} divides` : `${d} does not divide`)).join(', ')}.` })
+    const digits = []
+    let rest = n, ok = true
+    while (rest > 0 && ok) {
+      const digit = rest % 10
+      const divides = digit !== 0 && n % digit === 0
+      digits.push({ digit, divides })
+      if (!divides) ok = false
+      rest = Math.floor(rest / 10)
+    }
+    if (ok) result.push(n)
+    const why = digits.find(d => !d.divides)
+    frames.push({ phase: ok ? 'keep' : 'reject', n, digits: [...digits].reverse(), ok, result: [...result], activeLine: L(ok ? 'if (ok) result.push' : 'a zero digit or a non-divisor'), pythonLine: P(ok ? 'result.append(n)' : 'digit == 0'),
+      message: ok ? `${n} is self-dividing: every digit divides it.` : why.digit === 0 ? `${n} has a zero digit, so it is rejected.` : `${n} is not divisible by its digit ${why.digit}, so it is rejected.` })
   }
-  frames.push({ phase: 'done', n: right, found: [...found], result: found, activeLine: 6, message: `${found.length} self-dividing number${found.length === 1 ? '' : 's'} found.` })
-  return { input: { left, right }, result: found, frames }
+  frames.push({ phase: 'done', n: right, digits: [], ok: null, result: [...result], activeLine: L('return result'), pythonLine: P('return result'), message: `${result.length} self-dividing number${result.length === 1 ? '' : 's'} in the range.` })
+  return { input: { left, right }, result, frames }
 }
-
-export const code = `set found to an empty list
-for each candidate n from left to right
-  split n into its decimal digits
-  if a digit is zero or n is not divisible by some digit, skip n
-  otherwise append n to found
-return found`.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-// The scan-family visualizer reports its own step numbers (1 setup, 3 digits, 4 decision, 5 return).
-// This maps them onto the pseudocode lines above.
-export const LINE_MAP = { 1: 1, 3: 3, 4: 4, 5: 6 }
-
-export const python = `def self_dividing_numbers(left, right):
-    found = []
-    for n in range(left, right + 1):
-        digits = [int(d) for d in str(n)]
-        if all(d != 0 and n % d == 0 for d in digits):
-            found.append(n)
-    return found`

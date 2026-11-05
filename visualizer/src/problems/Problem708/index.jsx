@@ -13,9 +13,9 @@ const definition = {
   url: 'https://leetcode.com/problems/insert-into-a-sorted-circular-linked-list/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the list at 15 values.',
   examples: [
-    { label: 'Example 1', input: '{"values":[3,4,1],"insert":2}' },
+    { label: 'Mid gap', input: '{"values":[5,7,2],"insert":6}' },
     { label: 'Empty', input: '{"values":[],"insert":1}' },
-    { label: 'Wrap', input: '{"values":[3,4,1],"insert":5}' },
+    { label: 'Wrap', input: '{"values":[6,8,9],"insert":1}' },
   ],
 }
 
