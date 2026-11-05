@@ -1,92 +1,91 @@
-const CODE_LINES = [
-  'limit is infinity and effective is an empty list',
-  'for each room i from left to right',
-  'limit = min(limit, height of room i), then append limit to effective',
-  'sort effective ascending and sort boxes ascending',
-  'b is 0 and placed is 0',
-  'for each room value r in effective',
-  'if boxes[b] fits under r then place it: placed plus 1, b plus 1',
-  'return placed',
+export const phases = [
+  { id: 'start', label: 'Start', description: 'Boxes enter from the left only. A room can hold a box only if every room before it is at least as tall.' },
+  { id: 'capacity', label: 'Room capacities', description: 'Each room keeps the lowest height from the entrance up to it: that is the tallest box it can ever receive.' },
+  { id: 'skip', label: 'Room too short', description: 'The room capacity is smaller than the current box, so move to the next room.' },
+  { id: 'place', label: 'Place box', description: 'The room is tall enough for this box, so the box goes in and the room is used.' },
+  { id: 'done', label: 'Complete', description: 'Return how many boxes fit.' },
 ]
 
-export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }))
-const L = text => {
-  const index = CODE_LINES.findIndex(line => line.includes(text))
-  if (index < 0) throw new Error(`pseudocode line missing: ${text}`)
-  return index + 1
-}
-
-export const python = `def max_boxes(boxes, warehouse):
-    limit = float("inf")
-    effective = []
-    for h in warehouse:
-        limit = min(limit, h)
-        effective.append(limit)
-    effective.sort()
-    boxes = sorted(boxes)
-    b = 0
-    placed = 0
-    for r in effective:
-        if b < len(boxes) and boxes[b] <= r:
-            placed += 1
-            b += 1
-    return placed
-`
-const PY_LINES = python.split('\n')
-const P = text => {
-  const index = PY_LINES.findIndex(line => line.includes(text))
-  if (index < 0) throw new Error(`python line missing: ${text}`)
-  return index + 1
-}
-
-export const phases = [
-  { id: 'start', label: 'Ceiling', description: 'A box can only pass rooms at least as tall as itself.' },
-  { id: 'scan', label: 'Effective height', description: 'Each room is limited by the lowest ceiling before it.' },
-  { id: 'sort', label: 'Sort', description: 'Sort boxes and effective rooms, smallest first.' },
-  { id: 'try', label: 'Try room', description: 'Test the smallest unplaced box against this room.' },
-  { id: 'place', label: 'Place', description: 'The box fits and takes this room.' },
-  { id: 'skip', label: 'Skip room', description: 'The smallest unplaced box is too tall for this room.' },
-  { id: 'done', label: 'Result', description: 'Report the number of boxes placed.' },
+export const examples = [
+  { label: 'Tall start', input: '{"boxes":[2,5,3],"warehouse":[4,6,2,5]}' },
+  { label: 'Low entrance', input: '{"boxes":[3,3,3],"warehouse":[1,3,4]}' },
 ]
 
 export function parseInput(text) {
-  const input = JSON.parse(text)
-  if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Use an object with boxes and warehouse arrays.')
-  const { boxes, warehouse } = input
-  const ok = x => Number.isInteger(x) && x >= 1 && x <= 9
-  if (!Array.isArray(boxes) || boxes.length < 1 || boxes.length > 10 || !boxes.every(ok)) throw new Error('boxes has 1 to 10 heights from 1 to 9 (visualization cap).')
-  if (!Array.isArray(warehouse) || warehouse.length < 1 || warehouse.length > 10 || !warehouse.every(ok)) throw new Error('warehouse has 1 to 10 ceilings from 1 to 9 (visualization cap).')
-  return { boxes, warehouse }
+  const data = JSON.parse(text)
+  if (!data || typeof data !== 'object' || !Array.isArray(data.boxes) || !Array.isArray(data.warehouse)) throw new Error('Use an object with boxes and warehouse lists.')
+  if (data.boxes.length < 1 || data.boxes.length > 12) throw new Error('Use 1 to 12 boxes in this visualization.')
+  if (data.warehouse.length < 1 || data.warehouse.length > 12) throw new Error('Use 1 to 12 rooms in this visualization.')
+  if (!data.warehouse.every(h => Number.isInteger(h) && h >= 1 && h <= 20)) throw new Error('Room heights must be integers from 1 to 20.')
+  const tallest = Math.max(...data.warehouse)
+  if (!data.boxes.every(b => Number.isInteger(b) && b >= 1 && b <= tallest)) throw new Error('Each box must be an integer from 1 to the tallest room height.')
+  return { boxes: data.boxes, warehouse: data.warehouse }
 }
 
 export function buildTrace({ boxes, warehouse }) {
-  const frames = []
-  const effective = []
-  let limit = Infinity
-  const frame = (phase, activeLine, pythonLine, index, message, extra = {}) => frames.push({
-    phase, activeLine, pythonLine, index, message, warehouse, effective: [...effective], boxes, ...extra,
-  })
-  frame('start', L('limit is infinity'), P('limit = float'), -1, 'Boxes go in from the left, so each room is limited by every ceiling before it.')
-  warehouse.forEach((h, i) => {
-    limit = Math.min(limit, h)
-    effective.push(limit)
-    frame('scan', L('for each room i from left'), P('for h in warehouse'), i, `Room ${i} has ceiling ${h}; effective height ${limit}.`)
-  })
-  const rooms = [...effective].sort((a, b) => a - b)
-  const sortedBoxes = [...boxes].sort((a, b) => a - b)
-  frame('sort', L('sort effective ascending'), P('effective.sort()'), -1, `Rooms ascending: [${rooms.join(', ')}]. Boxes ascending: [${sortedBoxes.join(', ')}].`, { rooms, sortedBoxes, b: 0 })
-  let b = 0
-  let placed = 0
-  rooms.forEach((r, index) => {
-    if (b < sortedBoxes.length && sortedBoxes[b] <= r) {
-      placed++
-      b++
-      frame('place', L('if boxes[b] fits under r'), P('if b < len(boxes)'), index, `Box ${sortedBoxes[b - 1]} fits under ${r} and takes this room.`, { rooms, sortedBoxes, b, placed })
-    } else {
-      frame(b < sortedBoxes.length ? 'skip' : 'try', L('for each room value r'), P('for r in effective'), index,
-        b < sortedBoxes.length ? `Box ${sortedBoxes[b]} is taller than ${r}; this room stays empty.` : 'No boxes are left to place.', { rooms, sortedBoxes, b, placed })
+  const caps = []
+  let low = Infinity
+  for (const h of warehouse) { low = Math.min(low, h); caps.push(low) }
+  const snap = (extra = {}) => ({ caps: [...caps], boxes: [...boxes], ...extra })
+  const frames = [{ phase: 'start', activeLine: L('let low = Infinity'), pythonLine: P('low = float'), snapshot: snap(),
+    message: 'Boxes enter from the left, so each room is limited by the shortest room before it.' }]
+  frames.push({ phase: 'capacity', activeLine: L('caps.push(low)'), pythonLine: P('caps.append'), snapshot: snap({ caps: [...caps] }),
+    message: `Room capacities from the entrance: ${caps.join(', ')}.` })
+  const order = [...caps].sort((a, b) => a - b)
+  const sorted = [...boxes].sort((a, b) => a - b)
+  let j = 0, count = 0
+  for (const box of sorted) {
+    while (j < order.length && order[j] < box) {
+      frames.push({ phase: 'skip', activeLine: L('while (j < caps.length'), pythonLine: P('while j < len'), snapshot: snap({ box, room: j, cap: order[j] }),
+        message: `Room capacity ${order[j]} is below box ${box}; try a taller room.` })
+      j++
     }
-  })
-  frame('done', L('return placed'), P('return placed'), -1, `${placed} box${placed === 1 ? '' : 'es'} placed.`, { rooms, sortedBoxes, b, placed })
-  return { input: { boxes, warehouse }, result: placed, frames }
+    if (j === order.length) break
+    count++
+    frames.push({ phase: 'place', activeLine: L('count++'), pythonLine: P('count += 1'), snapshot: snap({ box, room: j, cap: order[j], count }),
+      message: `Box ${box} fits a room of capacity ${order[j]}; ${count} placed.` })
+    j++
+  }
+  frames.push({ phase: 'done', activeLine: L('return count'), pythonLine: P('return count'), snapshot: snap({ count, result: count }),
+    message: `Return ${count}.`, result: count })
+  for (const f of frames) f.scene = { ...f.snapshot }
+  return { input: { boxes, warehouse }, result: count, frames }
 }
+
+export const code = `function maxBoxesInWarehouse(boxes, warehouse) {
+  const caps = []
+  let low = Infinity
+  for (const h of warehouse) { low = Math.min(low, h); caps.push(low) }
+  caps.sort((a, b) => a - b)
+  const sorted = [...boxes].sort((a, b) => a - b)
+  let j = 0, count = 0
+  for (const box of sorted) {
+    while (j < caps.length && caps[j] < box) j++
+    if (j === caps.length) break
+    count++
+    j++
+  }
+  return count
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def max_boxes_in_warehouse(boxes, warehouse):
+    caps = []
+    low = float('inf')
+    for h in warehouse:
+        low = min(low, h)
+        caps.append(low)
+    caps.sort()
+    sorted_boxes = sorted(boxes)
+    j = 0
+    count = 0
+    for box in sorted_boxes:
+        while j < len(caps) and caps[j] < box:
+            j += 1
+        if j == len(caps):
+            break
+        count += 1
+        j += 1
+    return count
+`
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

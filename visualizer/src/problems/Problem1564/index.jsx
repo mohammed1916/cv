@@ -1,30 +1,26 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import WarehouseBarsView from './WarehouseBarsView'
-import { buildTrace, parseInput, code, python, phases } from './algorithm.js'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
+import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
-  number: '1564',
-  phases,
-  parse: parseInput,
-  build: buildTrace,
-  code,
-  python,
-  inputLabel: 'Object with boxes (heights) and warehouse (room ceilings, entered from the left)',
-  url: 'https://leetcode.com/problems/put-boxes-into-the-warehouse-i/description/',
-  complexity: 'O(n log n) time for sorting, O(n) space for n rooms and m boxes (the visualization caps both at 10 and heights at 1 to 9). The draft does not verify the official bounds.',
-  examples: [
-    { label: 'Three boxes', input: '{"boxes":[4,3,4,1],"warehouse":[5,3,4,1,2]}' },
-    { label: 'Tall room hidden', input: '{"boxes":[1,2,2,3,4],"warehouse":[3,4,1,2]}' },
-    { label: 'None fit', input: '{"boxes":[5],"warehouse":[1]}' },
-  ],
+  number: '1564', phases, parse: parseInput, build: buildTrace, code, python, examples,
+  inputLabel: 'Object with boxes and warehouse (JSON)',
+  url: 'https://leetcode.com/problems/put-boxes-into-the-warehouse-i/',
+  complexity: 'O(n log n) time for the sorts, and O(n) extra space for the capacities.',
 }
 
-export default function Problem1564Visualizer() {
-  return (
-    <AlgorithmWorkspace
-      definition={definition}
-      renderVisual={({ run, step }) => <WarehouseBarsView run={run} step={step} />}
-      renderReasoning={({ step }) => <p>{step.message}</p>}
-    />
-  )
+export default function WarehouseOneVisualizer() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const s = step.snapshot
+    return <>
+      <IndexedSequence label="Room capacities (from the entrance, after the shortest-so-far rule)" length={s.caps.length}
+        valueAt={i => s.caps[i]} active={s.room ?? -1} roleAt={i => (i === s.room ? 'l' : '')} />
+      <StackLane title="Boxes, smallest first" items={[...s.boxes].sort((a, b) => a - b).map(String)} note={s.box !== undefined ? `current box ${s.box}` : undefined} />
+      <StackLane title="Boxes placed" items={[String(s.count ?? 0)]} />
+    </>
+  }} renderReasoning={({ step }) => <>
+    <p><strong>Two pointers:</strong> the smallest unplaced box is matched with the first room whose capacity can hold it; both pointers only move forward.</p>
+    <p>{step.message}</p>
+  </>} />
 }
