@@ -79,13 +79,13 @@ export function Plans({ access, reason }) {
       </section>
       <section className="plan-card plan-pro"><span className="access-eyebrow">VISUALIZER PRO</span><h3>Every problem. More practice.</h3>
         <ul><li>All implemented problem visualizers unlocked</li><li>Unlimited code playground time</li><li>Future problem visualizers included during your plan</li></ul>
-        <p>Try Pro free for 3 days. No card required and no automatic charge.</p>
+        {BETA_FREE_ACCESS ? <p role="status"><strong>Beta / alpha stage: everything is unlocked.</strong> Every problem and the code playground are free for everyone until the website goes into production.</p> : <p>Try Pro free for 3 days. No card required and no automatic charge.</p>}
         {access.account?.trialActive && access.pro && <p role="status">Free trial active until {new Date(access.account.trialEndsAt).toLocaleString()}.</p>}
-        {(!access.user || access.account?.trialAvailable) && <button className="access-primary" disabled={pending || access.busy || !backendEnabled} onClick={access.startTrial}>
+        {!BETA_FREE_ACCESS && (!access.user || access.account?.trialAvailable) && <button className="access-primary" disabled={pending || access.busy || !backendEnabled} onClick={access.startTrial}>
           {access.user ? 'Start 3-day free trial' : 'Sign in to start your free trial'}
         </button>}
         {access.account?.trialEndsAt && !access.pro ? <p>Your free trial has ended. Subscribe to continue with Pro, or keep using the free problems and daily playground allowance.</p> : null}
-        {Object.entries(PLANS).map(([key, plan]) => <button className="access-primary" key={key} disabled={pending || access.busy || !checkoutEnabled || (access.pro && access.account?.paid)} onClick={(event) => purchase(key, event.currentTarget.closest('dialog'))}>
+        {!BETA_FREE_ACCESS && Object.entries(PLANS).map(([key, plan]) => <button className="access-primary" key={key} disabled={pending || access.busy || !checkoutEnabled || (access.pro && access.account?.paid)} onClick={(event) => purchase(key, event.currentTarget.closest('dialog'))}>
           {access.pro && access.account?.paid ? 'Paid Pro active' : `${plan.display} / ${plan.label}`}
         </button>)}
         <small>Annual price: {PLANS.monthly.display} × 12 = {PLANS.annual.display}. If you buy during your trial, your paid time starts after the trial ends.</small>
