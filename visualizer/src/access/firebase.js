@@ -5,7 +5,7 @@ import { getFunctions, httpsCallable } from 'firebase/functions';
 // Public web configuration; credentials and payment secrets never go here.
 const app = initializeApp({
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY || 'AIzaSyBU4M339PPVUEdhG3LWLsAmMuMbmC4e5PQ',
-  authDomain: 'teemtreat-visualizer.firebaseapp.com',
+  authDomain: 'visualizer.pro',
   projectId: 'teemtreat-visualizer',
 });
 export const auth = getAuth(app);
