@@ -21,7 +21,7 @@
     );
     border: 1px solid var(--border);
     border-radius: 18px;
-    padding: 16px;
+    padding: 20px;
     box-shadow: 0 16px 40px rgba(2, 6, 23, 0.26);
     min-width: 0;
 }
@@ -109,7 +109,7 @@
     border: 1px solid #243244;
     border-radius: 12px;
     color: var(--text);
-    padding: 10px 12px;
+    padding: 12px 16px;
     font-size: 15px;
     outline: none;
 }
@@ -126,7 +126,7 @@
 }
 
 .pn-state-card {
-    padding: 12px;
+    padding: 16px 18px;
     border-radius: 14px;
     background: var(--surface2);
     border: 1px solid rgba(71, 85, 105, 0.75);
@@ -175,7 +175,7 @@
 }
 
 .pn-note-box {
-    padding: 12px;
+    padding: 16px 18px;
 }
 
 .pn-note-title,
@@ -215,7 +215,7 @@
 }
 
 .pn-message {
-    padding: 12px 14px;
+    padding: 14px 18px;
     color: #5577a4;
     min-height: 48px;
     display: flex;
@@ -223,7 +223,7 @@
 }
 
 .pn-formula-box {
-    padding: 12px 14px;
+    padding: 16px 18px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -262,7 +262,7 @@
 }
 
 .pn-tape-card {
-    padding: 12px;
+    padding: 16px 18px;
     min-width: 0;
 }
 
@@ -315,7 +315,7 @@
     gap: 8px;
     flex-wrap: wrap;
     min-height: 82px;
-    padding: 10px;
+    padding: 14px 16px;
     border-radius: 12px;
     border: 1px dashed rgba(71, 85, 105, 0.8);
     background: rgba(15, 23, 42, 0.65);
@@ -439,7 +439,7 @@
 }
 
 .pn-result-box {
-    padding: 14px;
+    padding: 18px 20px;
 }
 
 .pn-result-value {
@@ -466,7 +466,7 @@
 }
 
 .pn-edge-card {
-    padding: 10px 12px;
+    padding: 12px 16px;
 }
 
 .pn-edge-card.active {
@@ -496,7 +496,7 @@
     display: flex;
     gap: 8px;
     align-items: center;
-    padding: 10px 12px;
+    padding: 12px 16px;
 }
 
 .pn-history-step {
