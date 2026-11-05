@@ -1,4 +1,4 @@
-.playground-launch-btn.prerequisite-launch-btn {
+.playground-launch-btn.create-visualizer-launch-btn {
   position: relative;
   isolation: isolate;
   overflow: visible;
@@ -7,9 +7,9 @@
   box-shadow: inset 0 0 12px var(--primary-glow), 0 0 10px var(--primary-glow);
 }
 
-.playground-launch-btn.prerequisite-launch-btn > span { color: var(--primary); }
+.playground-launch-btn.create-visualizer-launch-btn > span { color: var(--primary); }
 
-.prerequisite-launch-btn .prerequisite-electric {
+.create-visualizer-launch-btn .create-visualizer-electric {
   position: absolute;
   inset: -4px;
   width: calc(100% + 8px);
@@ -21,45 +21,45 @@
   stroke-linejoin: round;
 }
 
-.prerequisite-electric-trail {
+.create-visualizer-electric-trail {
   stroke: var(--primary);
   stroke-width: 2;
   stroke-dasharray: 25 75;
   stroke-dashoffset: 0;
   filter: drop-shadow(0 0 2px var(--primary)) drop-shadow(0 0 5px var(--primary));
-  animation: prerequisite-electric-orbit 3s linear infinite;
+  animation: create-visualizer-electric-orbit 3s linear infinite;
 }
 
-.prerequisite-electric-spark {
+.create-visualizer-electric-spark {
   stroke: color-mix(in srgb, var(--primary-l) 35%, white);
   stroke-width: 1.15;
   stroke-dasharray: 7 93;
   stroke-dashoffset: 0;
   filter: drop-shadow(0 0 2px var(--primary-l)) drop-shadow(0 0 4px var(--primary));
-  animation: prerequisite-electric-orbit 3s linear infinite;
+  animation: create-visualizer-electric-orbit 3s linear infinite;
 }
 
-.playground-launch-btn.prerequisite-launch-btn:hover {
+.playground-launch-btn.create-visualizer-launch-btn:hover {
   border-color: var(--primary);
   box-shadow: inset 0 0 14px var(--primary-glow), 0 0 18px var(--primary-glow);
 }
 
-.playground-launch-btn.prerequisite-launch-btn:focus-visible { outline-color: var(--primary); outline-offset: 6px; }
+.playground-launch-btn.create-visualizer-launch-btn:focus-visible { outline-color: var(--primary); outline-offset: 6px; }
 
-@keyframes prerequisite-electric-orbit {
+@keyframes create-visualizer-electric-orbit {
   from { stroke-dashoffset: 0; }
   to { stroke-dashoffset: -100; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .playground-launch-btn.prerequisite-launch-btn { transition: none; }
+  .playground-launch-btn.create-visualizer-launch-btn { transition: none; }
   /* Keep the requested effect visible without flickering or rapid movement. */
-  .prerequisite-electric-trail,
-  .prerequisite-electric-spark { animation-duration: 12s; }
-  .prerequisite-electric-trail { opacity: .7; }
+  .create-visualizer-electric-trail,
+  .create-visualizer-electric-spark { animation-duration: 12s; }
+  .create-visualizer-electric-trail { opacity: .7; }
 }
 
 @media (forced-colors: active) {
-  .prerequisite-launch-btn .prerequisite-electric { display: none; }
-  .playground-launch-btn.prerequisite-launch-btn { border-color: ButtonText; background: ButtonFace; box-shadow: none; }
+  .create-visualizer-launch-btn .create-visualizer-electric { display: none; }
+  .playground-launch-btn.create-visualizer-launch-btn { border-color: ButtonText; background: ButtonFace; box-shadow: none; }
 }

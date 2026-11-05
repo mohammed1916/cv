@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { resolveVisualSelection } from './components/shared/visualSelection.js';
 import WelcomeHero from "./components/marketing/WelcomeHero";
 import PrerequisiteDrawer from './components/PrerequisiteDrawer';
+import CreateVisualizerButton from './components/CreateVisualizerButton';
 import './components/shared/FluidMotion.css';
 import LiveTutorial from './access/LiveTutorial';
 import { TUTORIAL_STEPS } from './access/tutorialSteps';
@@ -808,14 +809,7 @@ function HomePage({
             </button> */}
           </div>
 
-          <button
-            type="button"
-            className="playground-launch-btn"
-            onClick={onOpenPlayground}
-          >
-            <span aria-hidden="true">{`{ }`}</span>
-            Create Visualizer
-          </button>
+          <CreateVisualizerButton onClick={onOpenPlayground} />
 
 
           <LayoutControls layoutWidth={layoutWidth} onChange={onLayoutChange} />
