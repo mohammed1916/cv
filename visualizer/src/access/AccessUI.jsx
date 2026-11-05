@@ -12,8 +12,11 @@ export function AccessDialog({ title, onClose, children }) {
     return () => dialog.close();
   }, []);
   return createPortal(<dialog className="access-dialog" ref={ref} onCancel={onClose} aria-labelledby="access-title">
-    <button className="access-close" onClick={onClose} aria-label="Close">×</button>
-    <h2 id="access-title">{title}</h2>{children}
+    <div className="access-dialog-head">
+      <h2 id="access-title">{title}</h2>
+      <button className="access-close" onClick={onClose} aria-label="Close">×</button>
+    </div>
+    <div className="access-dialog-body">{children}</div>
   </dialog>, document.body);
 }
 
