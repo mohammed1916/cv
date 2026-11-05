@@ -1,10 +1,30 @@
-import authoredExamples0 from '../../config/examples/collection--2188.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import RaceView from './RaceView'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/raceAndAncestryBatch.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '2188',
+  phases,
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  inputLabel: 'JSON with tires, changeTime and numLaps, e.g. {"tires":[[2,3],[3,3]],"changeTime":5,"numLaps":4}',
+  url: 'https://leetcode.com/problems/minimum-time-to-finish-the-race/',
+  complexity: 'O(tires * log(changeTime)) to build the stint costs and O(numLaps * 17) for the lap table. The page caps tires at 3, f at 5, r at 3, changeTime at 10 and laps at 6.',
+  examples: [
+    { label: 'Two tires', input: '{"tires":[[2,3],[3,3]],"changeTime":5,"numLaps":4}' },
+    { label: 'Three tires', input: '{"tires":[[1,3],[2,2],[3,3]],"changeTime":3,"numLaps":5}' },
+    { label: 'Single lap', input: '{"tires":[[1,2]],"changeTime":1,"numLaps":1}' },
+  ],
+}
 
-const definition = { ...definitions[2188], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem2188Visualizer() {
+  return (
+    <AlgorithmWorkspace
+      definition={definition}
+      renderVisual={({ run, step }) => <RaceView run={run} step={step} />}
+      renderReasoning={({ step }) => <p>{step.message}</p>}
+    />
+  )
+}

@@ -19,8 +19,18 @@ export const python = `def display_table(orders):
     return rows`
 
 const pythonLines = python.split('\n')
-export const code = pythonLines.map((text, index) => ({ line: index + 1, text }))
-export const pythonLineMap = Object.fromEntries(pythonLines.map((_, index) => [index + 1, index + 1]))
+export const code = `function displayTable(orders) {
+  const counts = new Map(), foods = new Set()
+  for (const [, table, food] of orders) {
+    counts.set(table, { ...counts.get(table), [food]: (counts.get(table)?.[food] ?? 0) + 1 })
+    foods.add(food)
+  }
+  const foodList = [...foods].sort()
+  const rows = [['Table', ...foodList]]
+  for (const t of [...counts.keys()].sort((a, b) => a - b)) rows.push([String(t), ...foodList.map(f => String(counts.get(t)[f] ?? 0))])
+  return rows
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const pythonLineMap = { 1: 1, 2: 2, 3: 4, 4: 5, 5: 6, 6: 6, 7: 7, 8: 8, 9: 10, 10: 11, 11: 11 }
 
 export function parseInput(text) {
   let value
@@ -54,12 +64,12 @@ export function buildTrace(orders) {
     },
   })
 
-  push('read', 4, `${orders.length} orders to tally. Tables and foods appear as they are first seen.`)
+  push('read', 3, `${orders.length} orders to tally. Tables and foods appear as they are first seen.`)
   orders.forEach(([, table, food], i) => {
     if (!counts[table]) { counts[table] = {}; tables.push(table) }
     if (!foods.includes(food)) foods.push(food)
     counts[table][food] = (counts[table][food] || 0) + 1
-    push('read', 5, `Order ${i + 1}: table ${table} gets one more ${food}.`, i)
+    push('read', 4, `Order ${i + 1}: table ${table} gets one more ${food}.`, i)
   })
 
   foods.sort()
@@ -71,8 +81,8 @@ export function buildTrace(orders) {
   push('fill', 8, 'The header row lists every food in the sorted column order.')
   for (const t of tables) {
     rows.push([t, ...foods.map(f => String(counts[t][f] || 0))])
-    push('fill', 10, `Table ${t}: ${foods.map(f => `${f} ${counts[t][f] || 0}`).join(', ')}.`)
+    push('fill', 9, `Table ${t}: ${foods.map(f => `${f} ${counts[t][f] || 0}`).join(', ')}.`)
   }
-  push('result', 11, `Done: ${rows.length - 1} table rows.`)
+  push('result', 10, `Done: ${rows.length - 1} table rows.`)
   return { input: orders, result: rows, frames }
 }

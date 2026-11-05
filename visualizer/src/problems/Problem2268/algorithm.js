@@ -11,14 +11,17 @@ export function parseInput(text) {
   return { word }
 }
 
-export const code = `FUNCTION minKeypresses(word)
-    freq ← count of each letter in word
-    ranked ← the letter counts sorted from largest to smallest
-    total ← 0
-    FOR each rank r with count c in ranked
-        presses ← floor(r / 9) + 1
-        total ← total + c * presses
-    RETURN total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minKeypresses(word) {
+  const freq = new Map();
+  for (const ch of word) freq.set(ch, (freq.get(ch) || 0) + 1);
+  const ranked = [...freq.values()].sort((a, b) => b - a);
+  let total = 0;
+  ranked.forEach((count, rank) => {
+    const presses = Math.floor(rank / 9) + 1;
+    total += count * presses;
+  });
+  return total;
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def minimum_keypresses(word):
     freq = {}
@@ -54,15 +57,15 @@ export function buildTrace({ word }) {
   for (const ch of word) freq.set(ch, (freq.get(ch) || 0) + 1)
   const ranked = [...freq].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
   const frames = []
-  frames.push({ phase: 'count', activeLine: L('freq ← count'), pythonLine: P('freq = {}'), message: `${freq.size} distinct letter${freq.size === 1 ? '' : 's'} in the word.`, rank: -1, letter: null, count: 0, presses: 0, slots: [], total: 0 })
+  frames.push({ phase: 'count', activeLine: L('const freq = new Map()'), pythonLine: P('freq = {}'), message: `${freq.size} distinct letter${freq.size === 1 ? '' : 's'} in the word.`, rank: -1, letter: null, count: 0, presses: 0, slots: [], total: 0 })
   let total = 0
   const slots = []
   ranked.forEach(([letter, count], rank) => {
     const presses = Math.floor(rank / 9) + 1
     total += count * presses
     slots.push({ letter, count, rank, key: (rank % 9) + 1, presses })
-    frames.push({ phase: 'place', activeLine: L('total ← total + c'), pythonLine: P('total += count * presses'), message: `${letter} (${count}×) takes slot ${rank}: key ${(rank % 9) + 1}, ${presses} press${presses === 1 ? '' : 'es'} each. Running total ${total}.`, rank, letter, count, presses, slots: slots.slice(), total })
+    frames.push({ phase: 'place', activeLine: L('total += count * presses'), pythonLine: P('total += count * presses'), message: `${letter} (${count}×) takes slot ${rank}: key ${(rank % 9) + 1}, ${presses} press${presses === 1 ? '' : 'es'} each. Running total ${total}.`, rank, letter, count, presses, slots: slots.slice(), total })
   })
-  frames.push({ phase: 'done', activeLine: L('RETURN total'), pythonLine: P('return total'), message: `Minimum keypresses: ${total}.`, rank: -1, letter: null, count: 0, presses: 0, slots: slots.slice(), total })
+  frames.push({ phase: 'done', activeLine: L('return total;'), pythonLine: P('return total'), message: `Minimum keypresses: ${total}.`, rank: -1, letter: null, count: 0, presses: 0, slots: slots.slice(), total })
   return { input: { word }, result: total, frames }
 }

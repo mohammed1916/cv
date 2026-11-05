@@ -20,17 +20,20 @@ export const python = [
   "    return answers",
 ].join("\n");
 
-export const code = [
-  "split s: A is the left half, B is the reversed right half",
-  "for each query [a, b, c, d]",
-  "map the right range to B positions [n-1-d, n-1-c]",
-  "for each position outside both ranges",
-  "if A[i] differs from B[i], the answer is false",
-  "left counts = letters of A on [a, b] minus B letters on X minus Y",
-  "right counts = letters of B on Y minus A letters on Y minus X",
-  "answer is true if both counts are non-negative and equal",
-  "append the answer",
-  "return the answers",
+export const code = ["function canMakePalindromeQueries(s, queries) {",
+  "  const n = s.length, h = n / 2",
+  "  const A = s.slice(0, h)",
+  "  const B = s.slice(h).split('').reverse().join('')",
+  "  return queries.map(([a, b, c, d]) => {",
+  "    const X = positions(a, b), Y = positions(n - 1 - d, n - 1 - c)",
+  "    for (let i = 0; i < h; i++) {",
+  "      if (!X.has(i) && !Y.has(i) && A[i] !== B[i]) return false",
+  "    }",
+  "    const left = countLetters(A, X).minus(countLetters(B, X minus Y))",
+  "    const right = countLetters(B, Y).minus(countLetters(A, Y minus X))",
+  "    return every count is non-negative and left equals right",
+  "  })",
+  "}"
 ].map((text, index) => ({ line: index + 1, text }));
 
 function parseJson(text) {
@@ -71,19 +74,19 @@ export function buildTrace(input) {
   const frames = [];
   const answers = [];
   const push = (f) => frames.push({ seq: A.split("").map((ch, i) => `${ch}|${B[i]}`), index: -1, stats: {}, answers: [...answers], ...f });
-  push({ phase: "setup", activeLine: 1, pythonLine: 5, message: `A = left half "${A}", B = reversed right half "${B}".` });
+  push({ phase: "setup", activeLine: 4, pythonLine: 5, message: `A = left half "${A}", B = reversed right half "${B}".` });
   queries.forEach(([a, b, c, d], qi) => {
     const cp = n - 1 - d;
     const dp = n - 1 - c;
     const X = new Set(span(a, b));
     const Y = new Set(span(cp, dp));
-    push({ phase: "query", activeLine: 2, pythonLine: 8, index: a, stats: { query: qi, X: `[${a},${b}]`, Y: `[${cp},${dp}]` }, message: `Query ${qi}: A range [${a},${b}], B range [${cp},${dp}].` });
+    push({ phase: "query", activeLine: 6, pythonLine: 8, index: a, stats: { query: qi, X: `[${a},${b}]`, Y: `[${cp},${dp}]` }, message: `Query ${qi}: A range [${a},${b}], B range [${cp},${dp}].` });
     let ok = true;
     for (let i = 0; i < h; i++) {
       if (X.has(i) || Y.has(i)) continue;
       if (A[i] !== B[i]) {
         ok = false;
-        push({ phase: "fixed", activeLine: 5, pythonLine: 11, index: i, stats: { query: qi, A: A[i], B: B[i] }, message: `Fixed position ${i} mismatches: A=${A[i]}, B=${B[i]}.` });
+        push({ phase: "fixed", activeLine: 8, pythonLine: 11, index: i, stats: { query: qi, A: A[i], B: B[i] }, message: `Fixed position ${i} mismatches: A=${A[i]}, B=${B[i]}.` });
         break;
       }
     }
@@ -91,17 +94,17 @@ export function buildTrace(input) {
       const xOnly = span(a, b).filter(i => !Y.has(i));
       const yOnly = span(cp, dp).filter(i => !X.has(i));
       const left = subtractTally(tally(span(a, b).map(i => A[i])), xOnly.map(i => B[i]));
-      push({ phase: "counts", activeLine: 6, pythonLine: 13, index: a, stats: { query: qi, left: JSON.stringify(Object.fromEntries(left)) }, message: "Left counts: letters of A on X minus the fixed B letters." });
+      push({ phase: "counts", activeLine: 9, pythonLine: 13, index: a, stats: { query: qi, left: JSON.stringify(Object.fromEntries(left)) }, message: "Left counts: letters of A on X minus the fixed B letters." });
       const right = subtractTally(tally(span(cp, dp).map(i => B[i])), yOnly.map(i => A[i]));
-      push({ phase: "counts", activeLine: 7, pythonLine: 15, index: cp, stats: { query: qi, right: JSON.stringify(Object.fromEntries(right)) }, message: "Right counts: letters of B on Y minus the fixed A letters." });
+      push({ phase: "counts", activeLine: 10, pythonLine: 15, index: cp, stats: { query: qi, right: JSON.stringify(Object.fromEntries(right)) }, message: "Right counts: letters of B on Y minus the fixed A letters." });
       const keys = new Set([...left.keys(), ...right.keys()]);
       const nonNegative = [...left.values(), ...right.values()].every(v => v >= 0);
       const equal = [...keys].every(k => (left.get(k) || 0) === (right.get(k) || 0));
       ok = nonNegative && equal;
     }
     answers.push(ok);
-    push({ phase: "answer", activeLine: 9, pythonLine: 18, index: qi, stats: { query: qi, ok }, message: `Query ${qi} is ${ok ? "palindromable" : "not palindromable"}.` });
+    push({ phase: "answer", activeLine: 11, pythonLine: 18, index: qi, stats: { query: qi, ok }, message: `Query ${qi} is ${ok ? "palindromable" : "not palindromable"}.` });
   });
-  push({ phase: "done", activeLine: 10, pythonLine: 19, index: -1, stats: { answers: answers.length }, message: "Return one boolean per query." });
+  push({ phase: "done", activeLine: 13, pythonLine: 19, index: -1, stats: { answers: answers.length }, message: "Return one boolean per query." });
   return { input, result: answers, frames };
 }

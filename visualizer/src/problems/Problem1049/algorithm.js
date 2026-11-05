@@ -5,18 +5,22 @@ export const phases = [
   { id: 'done', label: 'Answer', description: 'Report the smallest possible final weight.' },
 ]
 
-const PSEUDO = [
-  'last stone weight ii(stones):',
-  '  set total = sum of stones, half = total div 2',
-  '  reachable = [true, false, ..., false] of length half + 1',
-  '  for each stone s:',
-  '    for t from half down to s:',
-  '      if reachable[t - s] then mark reachable[t]',
-  '  best = largest t with reachable[t]',
-  '  return total - 2 * best',
-]
+export const code = `function lastStoneWeightII(stones) {
+  const total = stones.reduce((sum, v) => sum + v, 0)
+  const half = Math.floor(total / 2)
+  const reachable = Array(half + 1).fill(false)
+  reachable[0] = true
+  for (const s of stones) {
+    for (let t = half; t >= s; t--) {
+      if (reachable[t - s]) reachable[t] = true
+    }
+  }
+  let best = half
+  while (!reachable[best]) best--
+  return total - 2 * best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
-export const code = PSEUDO.map((text, index) => ({ line: index + 1, text }))
+export const pythonLineMap = {}
 
 export const python = `def last_stone_weight_ii(stones):
     total = sum(stones)
@@ -49,11 +53,11 @@ export function buildTrace(input) {
     for (let t = half; t >= s; t--) {
       if (reachable[t - s]) reachable[t] = true
     }
-    frames.push({ phase: 'stone', activeLine: 4, pythonLine: 5, message: s > half ? `Stone ${s} is heavier than ${half}, so no new sums up to half appear.` : `Add stone ${s}: sums up to ${half} that use it are now reachable.`, snapshot: { total, half, stone: s, reachable: [...reachable], sums: sums() } })
+    frames.push({ phase: 'stone', activeLine: 8, pythonLine: 5, message: s > half ? `Stone ${s} is heavier than ${half}, so no new sums up to half appear.` : `Add stone ${s}: sums up to ${half} that use it are now reachable.`, snapshot: { total, half, stone: s, reachable: [...reachable], sums: sums() } })
   }
   const best = Math.max(...sums())
-  frames.push({ phase: 'choose', activeLine: 7, pythonLine: 9, message: `The largest reachable sum up to ${half} is ${best}.`, snapshot: { total, half, stone: null, reachable: [...reachable], sums: sums(), best } })
+  frames.push({ phase: 'choose', activeLine: 12, pythonLine: 9, message: `The largest reachable sum up to ${half} is ${best}.`, snapshot: { total, half, stone: null, reachable: [...reachable], sums: sums(), best } })
   const result = total - 2 * best
-  frames.push({ phase: 'done', activeLine: 8, pythonLine: 10, message: `The two groups differ by ${total} - 2 × ${best} = ${result}, which is the final weight.`, snapshot: { total, half, stone: null, reachable: [...reachable], sums: sums(), best } })
+  frames.push({ phase: 'done', activeLine: 13, pythonLine: 10, message: `The two groups differ by ${total} - 2 × ${best} = ${result}, which is the final weight.`, snapshot: { total, half, stone: null, reachable: [...reachable], sums: sums(), best } })
   return { input, result, frames }
 }

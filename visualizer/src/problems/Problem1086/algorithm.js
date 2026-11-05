@@ -7,18 +7,21 @@ const MAX_RECORDS = 30;
 const MAX_STUDENTS = 6;
 const MAX_SCORE = 1000;
 
-const CODE_LINES = [
-  'FUNCTION highFive(items)',
-  '    top ← empty map from student id to a min-heap of kept scores',
-  '    FOR each [id, score] in items, in order',
-  '        IF top[id] holds fewer than 5 scores THEN push score into top[id]',
-  '        ELSE IF score is greater than the smallest kept score THEN replace that smallest score with score',
-  '    result ← empty list',
-  '    FOR each id in ascending order',
-  '        average ← sum of the 5 kept scores, integer-divided by 5',
-  '        append [id, average] to result',
-  '    RETURN result',
-];
+const CODE_LINES = `function highFive(items) {
+  const top = new Map()
+  for (const [id, score] of items) {
+    if (!top.has(id)) top.set(id, [])
+    const kept = top.get(id)
+    if (kept.length < 5) kept.push(score)
+    else if (score > Math.min(...kept)) kept[kept.indexOf(Math.min(...kept))] = score
+  }
+  const result = []
+  for (const id of [...top.keys()].sort((a, b) => a - b)) {
+    const average = Math.floor(top.get(id).reduce((a, b) => a + b, 0) / 5)
+    result.push([id, average])
+  }
+  return result
+}`.split('\n');
 
 const PY_LINES = [
   'import heapq',
@@ -56,7 +59,7 @@ export const phases = [
 
 const L = (text) => {
   const index = code.findIndex((entry) => entry.text.includes(text));
-  if (index < 0) throw new Error(`Missing pseudocode line: ${text}`);
+  if (index < 0) throw new Error(`Missing code line: ${text}`);
   return index + 1;
 };
 
@@ -98,13 +101,13 @@ export function buildTrace(input) {
   const frames = [];
   const ids = [...new Set(items.map(([id]) => id))].sort((a, b) => a - b);
   frames.push({
-    pythonLine: P('top = defaultdict(list)'), phase: 'setup', activeLine: L('top ← empty map'),
+    pythonLine: P('top = defaultdict(list)'), phase: 'setup', activeLine: L('const top = new Map()'),
     tops: {}, current: null, decision: null, evicted: null, averages: {}, answer: null,
     message: `Read ${items.length} records for ${ids.length} student${ids.length === 1 ? '' : 's'}.`,
   });
   items.forEach(([id, score], index) => {
     frames.push({
-      pythonLine: P('for student_id, score in items:'), phase: 'record', activeLine: L('FOR each [id, score]'),
+      pythonLine: P('for student_id, score in items:'), phase: 'record', activeLine: L('for (const [id, score] of items)'),
       tops: snapshot(top), current: { index, id, score }, decision: null, evicted: null, averages: {}, answer: null,
       message: `Record ${index + 1}: student ${id} scored ${score}.`,
     });
@@ -113,7 +116,7 @@ export function buildTrace(input) {
     if (heap.length < 5) {
       heap.push(score);
       frames.push({
-        pythonLine: P('heapq.heappush(heap, score)'), phase: 'decide', activeLine: L('IF top[id] holds fewer'),
+        pythonLine: P('heapq.heappush(heap, score)'), phase: 'decide', activeLine: L('if (kept.length < 5)'),
         tops: snapshot(top), current: { index, id, score }, decision: 'fill', evicted: null, averages: {}, answer: null,
         message: `Student ${id} has ${heap.length} of 5 slots filled, so ${score} takes an open slot.`,
       });
@@ -122,13 +125,13 @@ export function buildTrace(input) {
       if (score > smallest) {
         heap[heap.indexOf(smallest)] = score;
         frames.push({
-          pythonLine: P('heapq.heapreplace(heap, score)'), phase: 'decide', activeLine: L('ELSE IF score is greater'),
+          pythonLine: P('heapq.heapreplace(heap, score)'), phase: 'decide', activeLine: L('else if (score > Math.min'),
           tops: snapshot(top), current: { index, id, score }, decision: 'replace', evicted: smallest, averages: {}, answer: null,
           message: `${score} beats the smallest kept score ${smallest}, so ${smallest} is replaced.`,
         });
       } else {
         frames.push({
-          pythonLine: P('elif score > heap[0]:'), phase: 'decide', activeLine: L('ELSE IF score is greater'),
+          pythonLine: P('elif score > heap[0]:'), phase: 'decide', activeLine: L('else if (score > Math.min'),
           tops: snapshot(top), current: { index, id, score }, decision: 'skip', evicted: null, averages: {}, answer: null,
           message: `${score} does not beat the smallest kept score ${smallest}, so it is skipped.`,
         });
@@ -138,7 +141,7 @@ export function buildTrace(input) {
   const result = [];
   const averages = {};
   frames.push({
-    pythonLine: P('result = []'), phase: 'average', activeLine: L('result ← empty list'),
+    pythonLine: P('result = []'), phase: 'average', activeLine: L('const result = []'),
     tops: snapshot(top), current: null, decision: null, evicted: null, averages: {}, answer: null,
     message: 'All records are read. Average each student’s five kept scores.',
   });
@@ -149,13 +152,13 @@ export function buildTrace(input) {
     result.push([id, average]);
     averages[id] = average;
     frames.push({
-      pythonLine: P('result.append('), phase: 'average', activeLine: L('average ← sum'),
+      pythonLine: P('result.append('), phase: 'average', activeLine: L('const average = Math.floor'),
       tops: snapshot(top), current: null, decision: null, evicted: null, averages: { ...averages }, answer: result.map((pair) => [...pair]),
       message: `Student ${id}: sum ${sum} over five scores, integer average ${average}.`,
     });
   }
   frames.push({
-    pythonLine: P('return result'), phase: 'done', activeLine: L('RETURN result'),
+    pythonLine: P('return result'), phase: 'done', activeLine: L('return result'),
     tops: snapshot(top), current: null, decision: null, evicted: null, averages, answer: result,
     message: `Answer: ${result.map(([id, avg]) => `[${id}, ${avg}]`).join(', ')}.`,
   });

@@ -1,104 +1,76 @@
-import { treeFromLevelOrder, levelOrderFromTree } from '../../components/shared/treeLayout.js'
+import { treeFromLevelOrder } from '../../components/shared/treeLayout.js'
 
 export function parseInput(text) {
   const data = JSON.parse(text)
   const { root, low, high } = data ?? {}
-  if (!Array.isArray(root) || root.length < 1 || root.length > 10000 || root[0] === null || root.some(v => v !== null && (!Number.isInteger(v) || Math.abs(v) > 10000))) throw new Error('root must be a level-order BST array of 1–10,000 items; the first is not null.')
-  if (!Number.isInteger(low) || !Number.isInteger(high) || low > high || Math.abs(low) > 10000 || Math.abs(high) > 10000) throw new Error('low and high must be integers with low ≤ high and |v| ≤ 10,000.')
+  if (!Array.isArray(root) || root.length < 1 || root.length > 10000 || root.some(v => v !== null && (!Number.isInteger(v) || v < 0 || v > 10000))) throw new Error('root must be a level-order array of up to 10,000 items: integers from 0 to 10,000 or null.')
+  if (root[0] === null) throw new Error('The root cannot be null.')
+  if (!Number.isInteger(low) || !Number.isInteger(high) || low < 0 || high > 10000 || low > high) throw new Error('low and high must be integers from 0 to 10,000 with low ≤ high.')
   return { root, low, high }
 }
 
-// A node below low is replaced by its right subtree (trimmed); above high by its left; otherwise keep it and trim both sides.
+// Keep the BST shape inside [low, high]. A node below the range is replaced by its right subtree (its left
+// subtree is all smaller, so it is out too); a node above the range is replaced by its left subtree.
 export function buildTrace({ root, low, high }) {
-  const top = treeFromLevelOrder(root)
-  const frames = [{ phase: 'start', current: null, pruned: [], activeLine: 2, message: `Keep values in [${low}, ${high}].` }]
-  const pruned = []
-  function trim(node) {
+  const original = treeFromLevelOrder(root)
+  const tree = treeFromLevelOrder(root)
+  const removed = []
+  const frames = [{ phase: 'start', current: null, removed: [], kept: [], activeLine: L('if (!root) return null'), pythonLine: P('if node is None'), message: `Keep only values from ${low} to ${high}.` }]
+  const trim = node => {
     if (!node) return null
     if (node.value < low) {
-      pruned.push(node.id)
-      frames.push({ phase: 'prune', current: node.id, pruned: [...pruned], activeLine: 4, message: `${node.value} < ${low}: discard it and keep only its right subtree.` })
+      removed.push(node.id)
+      frames.push({ phase: 'cut', current: node.id, removed: [...removed], kept: [], activeLine: L('if (root.val < low)'), pythonLine: P('if node["val"] < low'), message: `${node.value} is below ${low}: drop it and keep its right subtree.` })
       return trim(node.right)
     }
     if (node.value > high) {
-      pruned.push(node.id)
-      frames.push({ phase: 'prune', current: node.id, pruned: [...pruned], activeLine: 5, message: `${node.value} > ${high}: discard it and keep only its left subtree.` })
+      removed.push(node.id)
+      frames.push({ phase: 'cut', current: node.id, removed: [...removed], kept: [], activeLine: L('if (root.val > high)'), pythonLine: P('if node["val"] > high'), message: `${node.value} is above ${high}: drop it and keep its left subtree.` })
       return trim(node.left)
     }
-    frames.push({ phase: 'keep', current: node.id, pruned: [...pruned], activeLine: 7, message: `${node.value} is in range: keep it and trim both subtrees.` })
+    frames.push({ phase: 'keep', current: node.id, removed: [...removed], kept: [], activeLine: L('root.left = trimBST'), pythonLine: P('node["left"] = trim'), message: `${node.value} is in range: keep it and trim both children.` })
     node.left = trim(node.left)
     node.right = trim(node.right)
     return node
   }
-  const trimmed = trim(top)
-  const result = levelOrderFromTree(trimmed)
-  frames.push({ phase: 'done', current: null, pruned: [...pruned], result, activeLine: 9, message: `Trimmed level order: [${result.map(v => (v === null ? 'null' : v)).join(', ')}].` })
-  return { input: { root, low, high }, root: trimmed, result, frames, prunedIds: new Set(pruned) }
+  const trimmed = trim(tree)
+  const result = toLevelOrder(trimmed)
+  frames.push({ phase: 'done', current: null, removed: [...removed], kept: [], result, activeLine: L('return root'), pythonLine: P('return node'), message: `Trimmed tree: [${result.map(v => (v === null ? 'null' : v)).join(', ')}].` })
+  return { input: { root, low, high }, original, root: trimmed, result, frames }
 }
 
-export const code = `define trim(node): if node is empty, return empty
-if node value is less than low, return trim(right child)
-if node value is greater than high, return trim(left child)
-otherwise trim both children, attach them to node, and return node
-return trim(root)`.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-// Tree trace: activeLine 1 (setup), 3 (inspect), 4 (update, final tree), 5 (return).
-// Inspect frames name the verdict: too small (line 2), too large (line 3), in range (line 4).
-export const LINE_MAP = { 1: 1, 4: 5, 5: 5 }
-
-export function familyLine(frame) {
-  if (frame.phase === 'inspect') return /too small/.test(frame.message) ? 2 : /too large/.test(frame.message) ? 3 : 4
-  if (frame.phase === 'done') return 5
-  return LINE_MAP[frame.activeLine] ?? frame.activeLine
+// Level-order list with nulls for missing children, without trailing nulls.
+function toLevelOrder(root) {
+  if (!root) return []
+  const out = []
+  const queue = [root]
+  for (let q = 0; q < queue.length; q++) {
+    const node = queue[q]
+    if (node) { out.push(node.value); queue.push(node.left, node.right) } else out.push(null)
+  }
+  while (out.at(-1) === null) out.pop()
+  return out
 }
 
-export const python = `def trim_bst(root, low, high):
-    def build_tree(values):
-        if not values or values[0] is None:
-            return None
-        top = {"val": values[0], "left": None, "right": None}
-        queue = [top]
-        index = 1
-        position = 0
-        while position < len(queue):
-            node = queue[position]
-            position += 1
-            for side in ("left", "right"):
-                if index < len(values) and values[index] is not None:
-                    child = {"val": values[index], "left": None, "right": None}
-                    node[side] = child
-                    queue.append(child)
-                index += 1
-        return top
+const SOURCE = `function trimBST(root, low, high) {
+  if (!root) return null
+  if (root.val < low) return trimBST(root.right, low, high)
+  if (root.val > high) return trimBST(root.left, low, high)
+  root.left = trimBST(root.left, low, high)
+  root.right = trimBST(root.right, low, high)
+  return root
+}`
+export const code = SOURCE.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
-    def serialize(top):
-        if top is None:
-            return []
-        queue = [top]
-        values = []
-        position = 0
-        while position < len(queue):
-            node = queue[position]
-            position += 1
-            if node is None:
-                values.append(None)
-            else:
-                values.append(node["val"])
-                queue.append(node["left"])
-                queue.append(node["right"])
-        while values and values[-1] is None:
-            values.pop()
-        return values
-
-    def trim(node):
-        if node is None:
-            return None
-        if node["val"] < low:
-            return trim(node["right"])
-        if node["val"] > high:
-            return trim(node["left"])
-        node["left"] = trim(node["left"])
-        node["right"] = trim(node["right"])
-        return node
-
-    return serialize(trim(build_tree(root)))`
+export const python = `def trim_bst(node, low, high):
+    if node is None:
+        return None
+    if node["val"] < low:
+        return trim_bst(node["right"], low, high)
+    if node["val"] > high:
+        return trim_bst(node["left"], low, high)
+    node["left"] = trim_bst(node["left"], low, high)
+    node["right"] = trim_bst(node["right"], low, high)
+    return node`
+const P = s => python.split('\n').findIndex(t => t.includes(s)) + 1

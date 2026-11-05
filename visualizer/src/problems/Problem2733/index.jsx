@@ -32,15 +32,15 @@ const definition = {
   examples: [
   {
     "label": "Example 1",
-    "input": "{\"nums\":[3,2,1,4]}"
+    "input": "{\"nums\":[4,7,5,9,6]}"
   },
   {
     "label": "Example 2",
-    "input": "{\"nums\":[1,2]}"
+    "input": "{\"nums\":[8,3]}"
   },
   {
     "label": "Example 3",
-    "input": "{\"nums\":[2,1,3]}"
+    "input": "{\"nums\":[9,5,6,1,8]}"
   }
 ],
 }

@@ -1,39 +1,40 @@
-import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
-import { phases, examples, parseInput, buildTrace, code, python, pythonLineMap } from './algorithm';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
+import { buildTrace, parseInput, code, python, pythonLineMap, phases, examples } from './algorithm'
 
 const definition = {
-  number: '1401', phases, examples, parse: parseInput, build: buildTrace, code, python, pythonLineMap,
-  inputLabel: 'Circle and rectangle (JSON object)',
+  number: '1401', phases, parse: parseInput, build: buildTrace, code, python, pythonLineMap, examples,
+  inputLabel: 'Circle and rectangle as a JSON object',
   url: 'https://leetcode.com/problems/circle-and-rectangle-overlapping/',
-  complexity: 'O(1) time and space. The visualization accepts coordinates from -10000 to 10000.',
-};
-
-function Shape({ snapshot: s }) {
-  const xs = [s.center[0] - s.radius, s.center[0] + s.radius, s.rect.left, s.rect.right, s.nearest[0]];
-  const ys = [s.center[1] - s.radius, s.center[1] + s.radius, s.rect.bottom, s.rect.top, s.nearest[1]];
-  const pad = 1, minX = Math.min(...xs) - pad, maxX = Math.max(...xs) + pad;
-  const minY = Math.min(...ys) - pad, maxY = Math.max(...ys) + pad, size = 240;
-  const scale = size / Math.max(maxX - minX, maxY - minY);
-  const X = x => (x - minX) * scale, Y = y => (maxY - y) * scale;
-  return <svg viewBox={`0 0 ${size} ${size}`} width={size} height={size} role="img" aria-label="Circle and rectangle">
-    <rect x={X(s.rect.left)} y={Y(s.rect.top)} width={(s.rect.right - s.rect.left) * scale}
-      height={(s.rect.top - s.rect.bottom) * scale} fill="rgba(8,145,178,0.15)" stroke="#0891b2" />
-    <circle cx={X(s.center[0])} cy={Y(s.center[1])} r={s.radius * scale} fill="rgba(234,88,12,0.12)" stroke="#ea580c" />
-    <circle cx={X(s.center[0])} cy={Y(s.center[1])} r={3} fill="#ea580c" />
-    <circle cx={X(s.nearest[0])} cy={Y(s.nearest[1])} r={4} fill="#0891b2" />
-  </svg>;
+  complexity: 'O(1) time and O(1) space.',
 }
 
-function Visualizer() {
-  return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ run, step }) => <>
-      <Shape snapshot={step.snapshot} />
-      <p>Centre ({run.input.cx}, {run.input.cy}), radius {run.input.radius}. Blue dot: nearest rectangle point.</p>
-      {step.snapshot.dist2 !== null && <output>Squared distance {step.snapshot.dist2} against radius² {run.input.radius * run.input.radius}</output>}
-    </>}
-    renderReasoning={({ step }) => <p>{step.message}</p>} />;
+const SCALE = 16, PAD = 20
+
+function Plane({ s }) {
+  const xs = [s.left, s.right, s.cx - s.radius, s.cx + s.radius, s.nx ?? s.cx]
+  const ys = [s.bottom, s.top, s.cy - s.radius, s.cy + s.radius, s.ny ?? s.cy]
+  const lo = Math.min(...xs, ...ys) - 1, hi = Math.max(...xs, ...ys) + 1
+  const span = Math.max(1, hi - lo)
+  const px = x => PAD + ((x - lo) / span) * (220 - 2 * PAD)
+  const py = y => 220 - (PAD + ((y - lo) / span) * (220 - 2 * PAD))
+  return <svg viewBox="0 0 220 220" role="img" aria-label="Circle and rectangle on the plane" style={{ maxWidth: 220, width: '100%' }}>
+    <rect x={px(s.left)} y={py(s.top)} width={px(s.right) - px(s.left)} height={py(s.bottom) - py(s.top)} fill="var(--surface2)" stroke="var(--border)" strokeWidth="2" />
+    <circle cx={px(s.cx)} cy={py(s.cy)} r={(s.radius / span) * (220 - 2 * PAD)} fill="none" stroke="var(--primary)" strokeWidth="2" />
+    <circle cx={px(s.cx)} cy={py(s.cy)} r="3" fill="var(--text)" />
+    {s.nx !== undefined && <circle cx={px(s.nx)} cy={py(s.ny)} r="4" fill="var(--text)" />}
+  </svg>
 }
 
-export default withProblemStory(Visualizer, storyGuide);
+export default function CircleRectangleVisualizer() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
+    const s = step.snapshot
+    return <>
+      <Plane s={s} />
+      <StackLane title="Squared distance against squared radius" items={[`${s.dist2 ?? '…'} vs ${s.radius * s.radius}`]} note={s.result === undefined ? undefined : s.result ? 'overlap' : 'no overlap'} />
+    </>
+  }} renderReasoning={({ step }) => <>
+    <p><strong>Nearest point:</strong> clamping the centre into the rectangle gives the closest rectangle point, so one distance check decides the overlap.</p>
+    <p>{step.message}</p>
+  </>} />
+}

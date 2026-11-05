@@ -20,8 +20,8 @@ const definition = {
   url: 'https://leetcode.com/problems/shortest-way-to-form-string/description/',
   complexity: 'O(m * n) time for source length m and target length n, since each piece scans source once; O(n) extra space. The visualization caps each string at 12 characters; the official bounds are not verified.',
   examples: [
-    { label: 'Two pieces', input: '{"source":"abc","target":"abcbc"}' },
-    { label: 'Impossible letter', input: '{"source":"abc","target":"acdbc"}' },
+    { label: 'Four pieces', input: '{"source":"abcd","target":"dcba"}' },
+    { label: 'Impossible letter', input: '{"source":"xyz","target":"xyq"}' },
     { label: 'Three pieces', input: '{"source":"xyz","target":"xzyxz"}' },
   ],
 }

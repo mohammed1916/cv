@@ -16,8 +16,8 @@ const definition = {
   url: 'https://leetcode.com/problems/query-kth-smallest-trimmed-number/',
   complexity: 'O(q * n * (L + log n)) time for q queries over n numbers of length L. The visualization caps the sizes.',
   examples: [
-    { label: 'Example', input: '{"nums":["102","473","251","814"],"queries":[[1,1],[2,3],[4,2],[1,2]]}' },
-    { label: 'Ties', input: '{"nums":["24","37","96","04"],"queries":[[2,1],[2,2]]}' },
+    { label: 'Example', input: '{"nums":["12","95","37","60"],"queries":[[1,1],[2,2],[4,1]]}' },
+    { label: 'Ties', input: '{"nums":["20","11","30"],"queries":[[2,1],[1,2]]}' },
   ],
 }
 

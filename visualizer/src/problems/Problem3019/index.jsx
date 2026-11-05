@@ -17,8 +17,8 @@ const definition = {
   url: "https://leetcode.com/problems/number-of-changing-keys/",
   complexity: "O(n) time and O(1) extra space.",
   examples: [
-    { label: "aAbBcC", input: "{\"s\": \"aAbBcC\"}" },
-    { label: "AaAaAaaA", input: "{\"s\": \"AaAaAaaA\"}" },
+    { label: "Case flips only", input: "{\"s\": \"xXyYzz\"}" },
+    { label: "Alternating case", input: "{\"s\": \"MmMnNn\"}" },
   ],
 }
 

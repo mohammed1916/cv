@@ -27,14 +27,14 @@ export function buildTrace({ s }) {
   const stack = []
   const snap = extra => ({ s, partner: [...partner], ...extra })
 
-  frames.push({ phase: 'start', activeLine: 3, message: 'Start at position 0, walking right. The output is empty.', snapshot: snap({ index: 0, direction: 1, out: '', pointer: 0 }) })
+  frames.push({ phase: 'start', activeLine: 3, pythonLine: 2, message: 'Start at position 0, walking right. The output is empty.', snapshot: snap({ index: 0, direction: 1, out: '', pointer: 0 }) })
   for (let i = 0; i < n; i++) {
     if (s[i] === '(') stack.push(i)
     else if (s[i] === ')') {
       const j = stack.pop()
       partner[i] = j
       partner[j] = i
-      frames.push({ phase: 'pair', activeLine: 2, message: `The closing bracket at ${i} matches the opening bracket at ${j}. Their positions are linked.`, snapshot: snap({ index: i, direction: 1, out: '', pointer: -1 }) })
+      frames.push({ phase: 'pair', activeLine: 8, pythonLine: 8, message: `The closing bracket at ${i} matches the opening bracket at ${j}. Their positions are linked.`, snapshot: snap({ index: i, direction: 1, out: '', pointer: -1 }) })
     }
   }
 
@@ -45,30 +45,45 @@ export function buildTrace({ s }) {
     if (s[i] === '(' || s[i] === ')') {
       const to = partner[i]
       step = -step
-      frames.push({ phase: 'jump', activeLine: 6, message: `Bracket at ${i} jumps to its partner at ${to} and the direction flips to ${step > 0 ? 'right' : 'left'}.`, snapshot: snap({ index: i, direction: step, out: out.join(''), pointer: to }) })
+      frames.push({ phase: 'jump', activeLine: 18, pythonLine: 13, message: `Bracket at ${i} jumps to its partner at ${to} and the direction flips to ${step > 0 ? 'right' : 'left'}.`, snapshot: snap({ index: i, direction: step, out: out.join(''), pointer: to }) })
       i = to
     } else {
       out.push(s[i])
-      frames.push({ phase: 'letter', activeLine: 7, message: `Write ${s[i]} from position ${i}. Output so far: ${out.join('')}.`, snapshot: snap({ index: i, direction: step, out: out.join(''), pointer: i }) })
+      frames.push({ phase: 'letter', activeLine: 21, pythonLine: 16, message: `Write ${s[i]} from position ${i}. Output so far: ${out.join('')}.`, snapshot: snap({ index: i, direction: step, out: out.join(''), pointer: i }) })
     }
     i += step
   }
   const result = out.join('')
-  frames.push({ phase: 'done', activeLine: 9, message: `The walk is complete. The answer is ${result || 'empty'}.`, snapshot: snap({ index: -1, direction: step, out: result, pointer: -1 }) })
+  frames.push({ phase: 'done', activeLine: 25, pythonLine: 18, message: `The walk is complete. The answer is ${result || 'empty'}.`, snapshot: snap({ index: -1, direction: step, out: result, pointer: -1 }) })
   return { input: { s }, result, frames }
 }
 
-export const code = [
-  'FUNCTION reverseInParentheses(s)',
-  '    partner ← bracket partner index for every bracket (stack)',
-  '    out ← empty list, i ← 0, step ← +1',
-  '    WHILE 0 ≤ i < LENGTH(s)',
-  '        IF s[i] IS a bracket THEN',
-  '            i ← partner[i], step ← -step',
-  '        ELSE APPEND s[i] TO out',
-  '        i ← i + step',
-  '    RETURN out',
-]
+export const code = `function reverseParentheses(s) {
+  const n = s.length
+  const partner = Array(n).fill(-1)
+  const stack = []
+  for (let i = 0; i < n; i++) {
+    if (s[i] === '(') stack.push(i)
+    else if (s[i] === ')') {
+      const j = stack.pop()
+      partner[i] = j
+      partner[j] = i
+    }
+  }
+  const out = []
+  let i = 0
+  let step = 1
+  while (i >= 0 && i < n) {
+    if (s[i] === '(' || s[i] === ')') {
+      i = partner[i]
+      step = -step
+    } else {
+      out.push(s[i])
+    }
+    i += step
+  }
+  return out.join('')
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def reverse_in_parentheses(s):
     partner = [0] * len(s)
@@ -89,4 +104,4 @@ export const python = `def reverse_in_parentheses(s):
         i += step
     return ''.join(out)`
 
-export const pythonLineMap = { 1: 1, 2: 2, 3: 10, 4: 11, 5: 12, 6: 13, 7: 16, 8: 17, 9: 18 }
+export const pythonLineMap = { 1: 2, 2: 8, 3: 2, 4: 4, 5: 5, 6: 13, 7: 16, 8: 8, 9: 18 }

@@ -22,17 +22,37 @@ export function parseInput(text) {
   return { n, edges, k }
 }
 
-export const code = `FUNCTION maxTripCost(n, edges, k)
-    best[a][b] ← the largest cost among highways between a and b, for both directions
-    IF k + 1 > n THEN RETURN -1
-    dp[1 << v][v] ← 0 for every city v
-    answer ← none
-    FOR each mask in increasing order with at most k + 1 cities
-        FOR each end city v in mask where dp[mask][v] is set
-            IF mask has k + 1 cities THEN answer ← max(answer, dp[mask][v])
-            ELSE FOR each city u not in mask with a highway from v
-                dp[mask + u][u] ← max(dp[mask + u][u], dp[mask][v] + best[v][u])
-    RETURN answer, or -1 when no trip exists`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function maxTripCost(n, edges, k) {
+  const best = Array.from({ length: n }, () => Array(n).fill(null));
+  for (const [a, b, cost] of edges) {
+    for (const [x, y] of [[a, b], [b, a]]) {
+      if (best[x][y] === null || cost > best[x][y]) best[x][y] = cost;
+    }
+  }
+  if (k + 1 > n) return -1;
+  const dp = Array.from({ length: 1 << n }, () => Array(n).fill(null));
+  for (let v = 0; v < n; v++) dp[1 << v][v] = 0;
+  let answer = null;
+  for (let mask = 0; mask < (1 << n); mask++) {
+    let size = 0;
+    for (let t = mask; t; t &= t - 1) size++;
+    if (size > k + 1) continue;
+    for (let v = 0; v < n; v++) {
+      if (dp[mask][v] === null) continue;
+      if (size === k + 1) {
+        if (answer === null || dp[mask][v] > answer) answer = dp[mask][v];
+        continue;
+      }
+      for (let u = 0; u < n; u++) {
+        if (((mask >> u) & 1) || best[v][u] === null) continue;
+        const value = dp[mask][v] + best[v][u];
+        const nxt = mask | (1 << u);
+        if (dp[nxt][u] === null || value > dp[nxt][u]) dp[nxt][u] = value;
+      }
+    }
+  }
+  return answer === null ? -1 : answer;
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def max_trip_cost(n, edges, k):
     best = [[None] * n for _ in range(n)]
@@ -106,9 +126,9 @@ export function buildTrace({ n, edges, k }) {
     }
     return cities
   }
-  frames.push({ phase: 'start', activeLine: L('best[a][b] ←'), pythonLine: P('best = [[None]'), message: `Best highway table built from ${edges.length} highway${edges.length === 1 ? '' : 's'}.`, mask: 0, from: null, to: null, value: null, bestValue: null, bestPath: [], best })
+  frames.push({ phase: 'start', activeLine: L('best[x][y] = cost'), pythonLine: P('best = [[None]'), message: `Best highway table built from ${edges.length} highway${edges.length === 1 ? '' : 's'}.`, mask: 0, from: null, to: null, value: null, bestValue: null, bestPath: [], best })
   if (k + 1 > n) {
-    frames.push({ phase: 'done', activeLine: L('IF k + 1 > n'), pythonLine: P('return -1'), message: `A trip with ${k} highways needs ${k + 1} cities; only ${n} exist.`, mask: 0, from: null, to: null, value: null, bestValue: null, bestPath: [], best, result: -1 })
+    frames.push({ phase: 'done', activeLine: L('if (k + 1 > n)'), pythonLine: P('return -1'), message: `A trip with ${k} highways needs ${k + 1} cities; only ${n} exist.`, mask: 0, from: null, to: null, value: null, bestValue: null, bestPath: [], best, result: -1 })
     return { input: { n, edges, k }, result: -1, frames }
   }
   for (let v = 0; v < n; v++) dp[1 << v][v] = 0
@@ -122,7 +142,7 @@ export function buildTrace({ n, edges, k }) {
       if (dp[mask][v] === null) continue
       if (size === k + 1) {
         if (answer === null || dp[mask][v] > answer) { answer = dp[mask][v]; answerMask = mask; answerEnd = v }
-        frames.push({ phase: 'record', activeLine: L('IF mask has k + 1'), pythonLine: P('if size == k + 1'), message: `Trip ending at ${v} visits ${size} cities for cost ${dp[mask][v]}. Best ${answer}.`, mask, from: v, to: null, value: dp[mask][v], bestValue: answer, bestPath: snapshotPath(answerMask, answerEnd), best })
+        frames.push({ phase: 'record', activeLine: L('if (size === k + 1)'), pythonLine: P('if size == k + 1'), message: `Trip ending at ${v} visits ${size} cities for cost ${dp[mask][v]}. Best ${answer}.`, mask, from: v, to: null, value: dp[mask][v], bestValue: answer, bestPath: snapshotPath(answerMask, answerEnd), best })
         continue
       }
       for (let u = 0; u < n; u++) {
@@ -131,12 +151,12 @@ export function buildTrace({ n, edges, k }) {
         const value = dp[mask][v] + best[v][u]
         const improved = dp[next][u] === null || value > dp[next][u]
         if (improved) { dp[next][u] = value; parent[next][u] = v }
-        frames.push({ phase: 'extend', activeLine: L(improved ? 'dp[mask + u][u] ←' : 'dp[mask + u][u] ←'), pythonLine: P(improved ? 'dp[nxt][u] = value' : 'if dp[nxt][u] is None'), message: `Trip ${v} → ${u} costs ${best[v][u]}; total ${value} ${improved ? 'is kept' : 'does not beat the stored trip'}.`, mask: next, from: v, to: u, value, bestValue: answer, bestPath: answer === null ? [] : snapshotPath(answerMask, answerEnd), best })
+        frames.push({ phase: 'extend', activeLine: L('dp[nxt][u] = value'), pythonLine: P(improved ? 'dp[nxt][u] = value' : 'if dp[nxt][u] is None'), message: `Trip ${v} → ${u} costs ${best[v][u]}; total ${value} ${improved ? 'is kept' : 'does not beat the stored trip'}.`, mask: next, from: v, to: u, value, bestValue: answer, bestPath: answer === null ? [] : snapshotPath(answerMask, answerEnd), best })
       }
     }
   }
   const result = answer === null ? -1 : answer
-  frames.push({ phase: 'done', activeLine: L('RETURN answer'), pythonLine: P('return -1 if answer is None'), message: result === -1 ? 'No simple trip uses exactly k highways.' : `The best trip with ${k} highway${k === 1 ? '' : 's'} costs ${result}.`, mask: answerMask, from: answerEnd, to: null, value: null, bestValue: result, bestPath: answer === null ? [] : snapshotPath(answerMask, answerEnd), best, result })
+  frames.push({ phase: 'done', activeLine: L('return answer === null'), pythonLine: P('return -1 if answer is None'), message: result === -1 ? 'No simple trip uses exactly k highways.' : `The best trip with ${k} highway${k === 1 ? '' : 's'} costs ${result}.`, mask: answerMask, from: answerEnd, to: null, value: null, bestValue: result, bestPath: answer === null ? [] : snapshotPath(answerMask, answerEnd), best, result })
   return { input: { n, edges, k }, result, frames }
 }
 

@@ -28,17 +28,18 @@ export default function FixedPoint() {
           const fixed = value - index === 0
           return <div key={index} data-index={index} style={{
             minWidth: 58, padding: '6px 8px', textAlign: 'center', fontFamily: 'monospace',
-            border: `2px solid ${index === mid ? 'var(--accent, #0891b2)' : 'var(--border)'}`,
+            border: `2px solid ${index === mid ? 'var(--primary)' : 'var(--border)'}`,
             opacity: inWindow ? 1 : 0.35,
-            background: fixed ? 'rgba(34,197,94,.18)' : 'transparent',
+            background: fixed ? 'var(--surface2)' : 'transparent', color: 'var(--text)',
           }}>
             <div>{value}</div>
             <small>index {index}</small>
+            <div style={{ fontSize: '.7rem', color: 'var(--primary)', minHeight: '1em' }}>{index === mid ? 'mid' : index === lo ? 'lo' : index === hi ? 'hi' : ''}</div>
             <div style={{ fontSize: '.75rem' }}>{`gap ${value - index}`}</div>
           </div>
         })}
       </div>
-      <output aria-label="Search window">{lo <= hi ? `Window ${lo} to ${hi}` : 'Window empty'} · answer {answer}</output>
+      <output aria-label="Search window">{lo <= hi ? `Search range lo = ${lo}, hi = ${hi}${mid !== null ? `, middle tested mid = ${mid}` : ''}` : 'Search range empty'} · answer {answer}</output>
     </div>
   }} renderReasoning={() => <>
     <p><strong>Gap idea:</strong> the gap value minus index never decreases, because consecutive integers differ by at least one.</p>

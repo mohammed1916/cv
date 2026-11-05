@@ -1,10 +1,28 @@
-import authoredExamples0 from '../../config/examples/collection--1730.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import View from './View'
+import { buildTrace, parseInput, code, python, pythonLineMap, phases, examples, complexity } from './algorithm.js'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/advance.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '1730',
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  pythonLineMap,
+  phases,
+  examples,
+  complexity,
+  inputLabel: 'JSON array of grid rows: * start, # food, O free cell, X obstacle',
+  url: 'https://leetcode.com/problems/shortest-path-to-get-food/',
+}
 
-const definition = { ...definitions[1730], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem1730Visualizer() {
+  return <AlgorithmWorkspace
+    definition={definition}
+    renderVisual={({ run, step }) => <View run={run} step={step} />}
+    renderReasoning={() => <>
+      <p>Every step costs the same, so breadth-first search reaches cells in order of distance.</p>
+      <p>The first food cell taken from the queue is therefore the nearest one.</p>
+    </>}
+  />
+}

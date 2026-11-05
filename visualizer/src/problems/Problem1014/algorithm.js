@@ -19,31 +19,33 @@ export function buildTrace({ values }) {
       best = score
       bestPair = [leftIndex, j]
     }
-    frames.push({ phase: 'score', activeLine: L('best = max(best, left'), pythonLine: P('best = max'), message: `Pair (${leftIndex}, ${j}) scores ${left} + ${values[j]} - ${j} = ${score}. Best so far is ${best}.`, state: { j, score, best, bestPair, left, leftIndex } })
+    frames.push({ phase: 'score', activeLine: L('best = Math.max(best, left'), pythonLine: P('best = max'), message: `Pair (${leftIndex}, ${j}) scores ${left} + ${values[j]} - ${j} = ${score}. Best so far is ${best}.`, state: { j, score, best, bestPair, left, leftIndex } })
     if (values[j] + j > left) {
       left = values[j] + j
       leftIndex = j
     }
-    frames.push({ phase: 'left', activeLine: L('left = max(left'), pythonLine: P('left = max(left'), message: `Index ${j} can serve as a left spot later, with contribution ${values[j] + j}. The strongest left contribution is now ${left}.`, state: { j, score, best, bestPair, left, leftIndex } })
+    frames.push({ phase: 'left', activeLine: L('left = Math.max(left'), pythonLine: P('left = max(left'), message: `Index ${j} can serve as a left spot later, with contribution ${values[j] + j}. The strongest left contribution is now ${left}.`, state: { j, score, best, bestPair, left, leftIndex } })
   }
 
   frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: P('return best'), message: `Best pair score is ${best}.`, state: { j: values.length - 1, score: null, best, bestPair, left, leftIndex } })
   return { input: { values }, result: best, frames }
 }
 
-export const code = `best sightseeing score (values):
-  left = values[0] + 0, left index = 0
-  best = negative infinity
-  for j from 1 to the last index:
-    best = max(best, left + values[j] - j)
-    left = max(left, values[j] + j), remembering its index
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function maxScoreSightseeingPair(values) {
+  let left = values[0]
+  let best = -Infinity
+  for (let j = 1; j < values.length; j++) {
+    best = Math.max(best, left + values[j] - j)
+    left = Math.max(left, values[j] + j)
+  }
+  return best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
-export const python = `def max_sightseeing_score(values):
+export const python = `def max_score_sightseeing_pair(values):
     left = values[0]
-    best = float('-inf')
+    best = float("-inf")
     for j in range(1, len(values)):
         best = max(best, left + values[j] - j)
         left = max(left, values[j] + j)

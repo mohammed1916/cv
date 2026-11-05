@@ -22,34 +22,40 @@ export function buildTrace(values) {
   const frames = []
   const dist = (r, c) => Math.abs(r - r0) + Math.abs(c - c0)
   const snap = (cur) => ({ rows, cols, centre: [r0, c0], current: cur, order: order.map(x => x.slice()), queue: queue.map(x => x.slice()) })
-  frames.push({ phase: 'start', activeLine: 2, message: `Start at the centre (${r0}, ${c0}). Its distance is 0.`, snapshot: snap(null) })
+  frames.push({ phase: 'start', activeLine: L('const seen'), pythonLine: P('queue = deque'), message: `Start at the centre (${r0}, ${c0}). Its distance is 0.`, snapshot: snap(null) })
   let head = 0
   while (head < queue.length) {
     const [r, c] = queue[head++]
     order.push([r, c])
-    frames.push({ phase: 'expand', activeLine: 6, message: `Pop (${r}, ${c}) at distance ${dist(r, c)} and append it to the order.`, snapshot: snap([r, c]) })
+    frames.push({ phase: 'expand', activeLine: L('for (let head'), pythonLine: P('while queue'), message: `Pop (${r}, ${c}) at distance ${dist(r, c)} and append it to the order.`, snapshot: snap([r, c]) })
     for (const [nr, nc] of [[r - 1, c], [r + 1, c], [r, c - 1], [r, c + 1]]) {
       if (nr < 0 || nc < 0 || nr >= rows || nc >= cols || seen[nr][nc]) continue
       seen[nr][nc] = true
       queue.push([nr, nc])
     }
   }
-  frames.push({ phase: 'done', activeLine: 10, message: `All ${order.length} cells are listed in distance order.`, snapshot: snap(null) })
+  frames.push({ phase: 'done', activeLine: L('return order'), pythonLine: P('return order'), message: `All ${order.length} cells are listed in distance order.`, snapshot: snap(null) })
   return { input: values, result: order, frames }
 }
 
-export const code = [
-  'FUNCTION cellsByDistance(rows, cols, r0, c0)',
-  '    queue ← [(r0, c0)] ; mark (r0, c0) as seen',
-  '    order ← empty list',
-  '    WHILE queue is not empty',
-  '        (r, c) ← pop the front of the queue',
-  '        append (r, c) to order',
-  '        FOR each neighbour (nr, nc) of (r, c)',
-  '            IF (nr, nc) is inside the grid and not seen THEN',
-  '                mark (nr, nc) as seen ; push it',
-  '    RETURN order',
-]
+export const code = `function cellsByDistance(rows, cols, r0, c0) {
+  const seen = Array.from({ length: rows }, () => Array(cols).fill(false))
+  const queue = [[r0, c0]]
+  seen[r0][c0] = true
+  const order = []
+  for (let head = 0; head < queue.length; head++) {
+    const [r, c] = queue[head]
+    order.push([r, c])
+    for (const [nr, nc] of [[r - 1, c], [r + 1, c], [r, c - 1], [r, c + 1]]) {
+      if (nr < 0 || nc < 0 || nr >= rows || nc >= cols || seen[nr][nc]) continue
+      seen[nr][nc] = true
+      queue.push([nr, nc])
+    }
+  }
+  return order
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `from collections import deque
 
@@ -66,4 +72,4 @@ def cells_by_distance(rows, cols, r0, c0):
                 queue.append((nr, nc))
     return order`
 
-export const pythonLineMap = { 2: 4, 3: 6, 4: 7, 5: 8, 6: 9, 7: 10, 8: 11, 9: 12, 10: 14 }
+export const pythonLineMap = {}

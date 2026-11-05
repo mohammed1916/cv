@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/subsequence-with-the-minimum-score/',
   complexity: 'O(n * m) time for the pair scan with prefix and suffix tables. The visualization caps s at 14 and t at 12 characters.',
   examples: [
-    { label: 'Example', input: '{"s":"abacaba","t":"bzaa"}' },
+    { label: 'Example', input: '{"s":"mississippi","t":"mpsx"}' },
     { label: 'No overlap', input: '{"s":"cde","t":"xyz"}' },
     { label: 'Already there', input: '{"s":"ace","t":"ae"}' },
   ],
@@ -25,7 +25,7 @@ export default function MinimumScoreSubsequence() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="s" length={run.input.s.length} valueAt={i => run.input.s[i]} active={-1} />
     <IndexedSequence label="t" length={run.input.t.length} valueAt={i => run.input.t[i]} active={step.j >= 0 ? step.j : (step.l > 0 ? step.l - 1 : -1)}
-      roleAt={i => (step.l >= 0 && i < step.l ? 'prefix' : step.j >= 0 && i >= step.j ? 'suffix' : step.l >= 0 && step.j >= 0 && i >= step.l && i < step.j ? 'removed' : '')} />
+      roleAt={i => (step.l >= 0 && i === step.l ? 'l' : step.j >= 0 && i === step.j ? 'r' : step.l >= 0 && i < step.l ? 'prefix' : step.j >= 0 && i > step.j ? 'suffix' : step.l >= 0 && step.j >= 0 && i > step.l && i < step.j ? 'removed' : '')} />
     <output aria-label="Cut">{step.l >= 0 && step.j >= 0 ? `Remove t[${step.l}..${step.j}), score ${step.j - step.l}` : 'Prefix from the left, suffix from the right.'}</output>
   </>} renderReasoning={() => <>
     <p>Keep the characters of t that match s from the left, and those that match from the right. The removed span is whatever lies between them.</p>

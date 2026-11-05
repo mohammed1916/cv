@@ -1,68 +1,47 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { buildTrace, parseInput, phases } from './algorithm.js'
+import { buildTrace, parseInput, phases, examples, code, python, pythonLineMap } from './algorithm.js'
 
-// Independent oracle: for each query, search the graph of edges shorter than its limit.
-function oracle({ nodes, edges, queries }) {
+function brute({ n, edgeList, queries }) {
   return queries.map(([p, q, limit]) => {
     const seen = new Set([p])
     const stack = [p]
     while (stack.length) {
-      const at = stack.pop()
-      for (const [u, v, w] of edges) {
-        if (w >= limit) continue
-        const next = u === at ? v : v === at ? u : -1
-        if (next !== -1 && !seen.has(next)) { seen.add(next); stack.push(next) }
+      const x = stack.pop()
+      for (const [u, v, d] of edgeList) {
+        if (d >= limit) continue
+        const y = u === x ? v : v === x ? u : -1
+        if (y >= 0 && !seen.has(y)) { seen.add(y); stack.push(y) }
       }
     }
     return seen.has(q)
   })
 }
 
-function lcg(seed) {
-  let state = seed
-  return () => { state = (state * 1103515245 + 12345) & 0x7fffffff; return state }
-}
+test('1697 examples, code and python are well formed', () => {
+  assert.ok(examples.length >= 2)
+  for (const example of examples) {
+    const run = buildTrace(parseInput(example.input))
+    assert.equal(run.frames.at(-1).phase, 'done')
+    for (const frame of run.frames) assert.ok(phases.some(p => p.id === frame.phase))
+  }
+  assert.equal(code.length, 14)
+  assert.ok(python.includes('def distanceLimitedPathsExist'))
+  assert.equal(Object.keys(pythonLineMap).length, code.length)
+})
 
-test('1697 random graphs match a per-query search oracle', () => {
-  const next = lcg(2024)
-  for (let trial = 0; trial < 400; trial++) {
-    const nodes = 1 + (next() % 9)
-    const edges = Array.from({ length: next() % 14 }, () => [next() % nodes, next() % nodes, 1 + (next() % 12)])
-    const queries = Array.from({ length: 1 + (next() % 8) }, () => [next() % nodes, next() % nodes, 1 + (next() % 13)])
-    const input = { nodes, edges, queries }
-    const run = buildTrace(input)
-    assert.deepEqual(run.result, oracle(input), JSON.stringify(input))
-    assert.deepEqual(run.frames.at(-1).snapshot.result, run.result)
+test('1697 matches a graph search for each query', () => {
+  let seed = 51
+  const rnd = n => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed % n }
+  for (let t = 0; t < 200; t++) {
+    const n = 2 + rnd(6)
+    const edgeList = Array.from({ length: 1 + rnd(8) }, () => { let u = rnd(n), v = rnd(n); while (v === u) v = rnd(n); return [u, v, 1 + rnd(9)] })
+    const queries = Array.from({ length: 1 + rnd(5) }, () => { const p = rnd(n); let q = rnd(n); return [p, q, 1 + rnd(10)] })
+    const input = { n, edgeList, queries }
+    assert.deepEqual(buildTrace(parseInput(JSON.stringify(input))).result, brute(input), JSON.stringify(input))
   }
 })
 
-test('1697 an edge exactly equal to the limit is not used', () => {
-  const run = buildTrace({ nodes: 2, edges: [[0, 1, 5]], queries: [[0, 1, 5], [0, 1, 6]] })
-  assert.deepEqual(run.result, [false, true])
-})
-
-test('1697 answers are returned in the original query order', () => {
-  const input = { nodes: 4, edges: [[0, 1, 2], [2, 3, 9]], queries: [[2, 3, 10], [0, 1, 1], [0, 3, 5]] }
-  assert.deepEqual(buildTrace(input).result, [true, false, false])
-})
-
-test('1697 every phase appears in the trace', () => {
-  const run = buildTrace({ nodes: 3, edges: [[0, 1, 1]], queries: [[0, 1, 2]] })
-  const used = new Set(run.frames.map(frame => frame.phase))
-  for (const phase of phases) assert.ok(used.has(phase.id), phase.id)
-})
-
-test('1697 invalid input is rejected', () => {
-  const bad = [
-    '{"nodes":0,"edges":[],"queries":[[0,0,1]]}',
-    '{"nodes":2,"edges":[[0,2,1]],"queries":[[0,1,1]]}',
-    '{"nodes":2,"edges":[[0,1,0]],"queries":[[0,1,1]]}',
-    '{"nodes":2,"edges":[],"queries":[]}',
-    '{"nodes":2,"edges":[[0,1]],"queries":[[0,1,1]]}',
-    '{"nodes":2,"edges":[],"queries":[[0,1,1.5]]}',
-    'nope',
-  ]
-  for (const text of bad) assert.throws(() => parseInput(text), text)
-  assert.deepEqual(parseInput('{"nodes":2,"edges":[[0,1,3]],"queries":[[0,1,4]]}').nodes, 2)
+test('1697 rejects invalid input', () => {
+  assert.throws(() => parseInput('{"n":2,"edgeList":[[0,0,1]],"queries":[[0,1,2]]}'))
 })

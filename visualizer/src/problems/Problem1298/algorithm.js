@@ -24,24 +24,34 @@ export function parseInput(text) {
   return { status, candies, keys, containedBoxes, initialBoxes }
 }
 
-export const code = [
-  { line: 1, text: 'hasKey and opened are all false; waiting is empty; queue = initialBoxes; total = 0' },
-  { line: 2, text: 'while queue is not empty:' },
-  { line: 3, text: '  box = take the last box from queue' },
-  { line: 4, text: '  if opened[box]: continue' },
-  { line: 5, text: '  if box is locked and no key is held: add box to waiting; continue' },
-  { line: 6, text: '  open box: opened[box] = true; total += candies[box]' },
-  { line: 7, text: '  for each key in keys[box]: hasKey[key] = true; if key is waiting, move it to queue' },
-  { line: 8, text: '  for each contained in containedBoxes[box]: add contained to queue' },
-  { line: 9, text: 'return total' },
-]
+export const code = `function maxCandies(status, candies, keys, containedBoxes, initialBoxes) {
+  const n = status.length
+  const hasKey = Array(n).fill(false)
+  const opened = Array(n).fill(false)
+  const waiting = new Set()
+  const queue = [...initialBoxes]
+  let total = 0
+  while (queue.length > 0) {
+    const box = queue.pop()
+    if (opened[box]) continue
+    if (status[box] === 0 && !hasKey[box]) { waiting.add(box); continue }
+    opened[box] = true
+    total += candies[box]
+    for (const key of keys[box]) {
+      hasKey[key] = true
+      if (waiting.has(key)) { waiting.delete(key); queue.push(key) }
+    }
+    for (const contained of containedBoxes[box]) queue.push(contained)
+  }
+  return total
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
-export const python = `def maxCandies(status, candies, keys, containedBoxes, initialBoxes):
+export const python = `def max_candies(status, candies, keys, contained_boxes, initial_boxes):
     n = len(status)
     has_key = [False] * n
     opened = [False] * n
     waiting = set()
-    queue = list(initialBoxes)
+    queue = list(initial_boxes)
     total = 0
     while queue:
         box = queue.pop()
@@ -57,11 +67,11 @@ export const python = `def maxCandies(status, candies, keys, containedBoxes, ini
             if key in waiting:
                 waiting.remove(key)
                 queue.append(key)
-        for contained in containedBoxes[box]:
+        for contained in contained_boxes[box]:
             queue.append(contained)
     return total`
 
-export const pythonLineMap = { 1: 6, 2: 8, 3: 9, 4: 10, 5: 12, 6: 15, 7: 17, 8: 22, 9: 24 }
+export const pythonLineMap = { 6: 6, 8: 8, 9: 9, 10: 10, 11: 12, 12: 15, 13: 16, 14: 17, 18: 22, 20: 24 }
 
 export function buildTrace(input) {
   const { status, candies, keys, containedBoxes, initialBoxes } = parseInput(input)
@@ -78,23 +88,23 @@ export function buildTrace(input) {
     hasKey: [...hasKey], opened: [...opened], waiting: [...waiting], queue: [...queue], total, ...extra,
   })
 
-  snap('start', 1, `Queue the ${initialBoxes.length} initial boxes. Nothing is open yet.`)
+  snap('start', 6, `Queue the ${initialBoxes.length} initial boxes. Nothing is open yet.`)
   while (queue.length) {
-    snap('loop', 2, `Queue has ${queue.length} box(es); take the last one.`)
+    snap('loop', 8, `Queue has ${queue.length} box(es); take the last one.`)
     const box = queue.pop()
     current = box
     if (opened[box]) {
-      snap('skip', 4, `Box ${box} is already open, so skip it.`)
+      snap('skip', 10, `Box ${box} is already open, so skip it.`)
       continue
     }
     if (status[box] === 0 && !hasKey[box]) {
       if (!waiting.includes(box)) waiting.push(box)
-      snap('wait', 5, `Box ${box} is locked and no key is held, so it waits.`)
+      snap('wait', 11, `Box ${box} is locked and no key is held, so it waits.`)
       continue
     }
     opened[box] = true
     total += candies[box]
-    snap('open', 6, `Open box ${box} and collect ${candies[box]} candies.`)
+    snap('open', 12, `Open box ${box} and collect ${candies[box]} candies.`)
     for (const key of keys[box]) {
       hasKey[key] = true
       const at = waiting.indexOf(key)
@@ -103,11 +113,11 @@ export function buildTrace(input) {
         queue.push(key)
       }
     }
-    snap('key', 7, keys[box].length ? `Box ${box} holds keys ${keys[box].join(', ')}.` : `Box ${box} holds no keys.`)
+    snap('key', 14, keys[box].length ? `Box ${box} holds keys ${keys[box].join(', ')}.` : `Box ${box} holds no keys.`)
     for (const contained of containedBoxes[box]) queue.push(contained)
-    snap('contain', 8, containedBoxes[box].length ? `Box ${box} contains boxes ${containedBoxes[box].join(', ')}.` : `Box ${box} contains no boxes.`)
+    snap('contain', 18, containedBoxes[box].length ? `Box ${box} contains boxes ${containedBoxes[box].join(', ')}.` : `Box ${box} contains no boxes.`)
   }
   current = null
-  snap('done', 9, `No reachable box is left. Return ${total} candies.`, { result: total })
+  snap('done', 20, `No reachable box is left. Return ${total} candies.`, { result: total })
   return { input: { status, candies, keys, containedBoxes, initialBoxes }, result: total, frames }
 }

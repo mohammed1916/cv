@@ -1,10 +1,30 @@
-import authoredExamples0 from '../../config/examples/collection--2212.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import SectionsView from './SectionsView'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/updatesAndChoicesBatch.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '2212',
+  phases,
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  inputLabel: 'JSON with numArrows and aliceArrows (12 counts that sum to numArrows)',
+  url: 'https://leetcode.com/problems/maximum-points-in-an-archery-competition/',
+  complexity: 'O(12 * numArrows) time with the knapsack table and O(12 * numArrows) space for the choices. The page caps numArrows at 12.',
+  examples: [
+    { label: 'Four arrows', input: '{"numArrows":4,"aliceArrows":[0,0,0,0,0,0,0,0,0,1,1,2]}' },
+    { label: 'Six arrows', input: '{"numArrows":6,"aliceArrows":[2,0,0,0,0,0,0,0,0,1,0,3]}' },
+    { label: 'Five arrows', input: '{"numArrows":5,"aliceArrows":[0,3,0,0,0,0,0,0,0,0,0,2]}' },
+  ],
+}
 
-const definition = { ...definitions[2212], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem2212Visualizer() {
+  return (
+    <AlgorithmWorkspace
+      definition={definition}
+      renderVisual={({ run, step }) => <SectionsView run={run} step={step} />}
+      renderReasoning={({ step }) => <p>{step.message}</p>}
+    />
+  )
+}

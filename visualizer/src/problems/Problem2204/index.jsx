@@ -1,10 +1,30 @@
-import authoredExamples0 from '../../config/examples/collection--2204.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import CycleView from './CycleView'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/pathsAndCoverageBatch.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '2204',
+  phases,
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  inputLabel: 'JSON with n and edges, e.g. {"n":5,"edges":[[0,1],[1,2],[2,0],[2,3],[3,4]]}',
+  url: 'https://leetcode.com/problems/distance-to-a-cycle-in-undirected-graph/',
+  complexity: 'O(n + m) time with leaf peeling and one multi-source BFS. The page caps the graph at 9 nodes.',
+  examples: [
+    { label: 'Triangle with tail', input: '{"n":5,"edges":[[0,1],[1,2],[2,0],[2,3],[3,4]]}' },
+    { label: 'Plain triangle', input: '{"n":3,"edges":[[0,1],[1,2],[2,0]]}' },
+    { label: 'Cycle of four', input: '{"n":4,"edges":[[0,1],[1,2],[2,3],[3,1]]}' },
+  ],
+}
 
-const definition = { ...definitions[2204], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem2204Visualizer() {
+  return (
+    <AlgorithmWorkspace
+      definition={definition}
+      renderVisual={({ run, step }) => <CycleView run={run} step={step} />}
+      renderReasoning={({ step }) => <p>{step.message}</p>}
+    />
+  )
+}

@@ -1,16 +1,25 @@
-const CODE_TEXT = `campus bikes II minimum total distance
-  let m be the number of bikes and n the number of workers
-  set dp[mask] to infinity for every mask, and dp[0] to 0
-  for each mask from 0 to 2 to the m minus 1, in increasing order
-    if dp[mask] is infinity then continue
-    let w be the number of bikes in mask, the next worker to place
-    if w equals n then continue
-    for each bike b that is not in mask
-      candidate = dp[mask] plus the distance from worker w to bike b
-      if candidate is less than dp[mask with b added] then store it
-  return the smallest dp[mask] whose mask has n bits`
-
-export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minTotalDistance(workers, bikes) {
+  const n = workers.length
+  const m = bikes.length
+  const dp = new Array(1 << m).fill(Infinity)
+  dp[0] = 0
+  let best = Infinity
+  for (let mask = 0; mask < 1 << m; mask++) {
+    if (dp[mask] === Infinity) continue
+    const w = [...mask.toString(2)].filter(c => c === '1').length
+    if (w === n) {
+      best = Math.min(best, dp[mask])
+      continue
+    }
+    for (let b = 0; b < m; b++) {
+      if (mask & (1 << b)) continue
+      const dist = Math.abs(workers[w][0] - bikes[b][0]) + Math.abs(workers[w][1] - bikes[b][1])
+      const next = mask | (1 << b)
+      dp[next] = Math.min(dp[next], dp[mask] + dist)
+    }
+  }
+  return best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def min_total_distance(workers, bikes):
     n, m = len(workers), len(bikes)
@@ -40,7 +49,7 @@ if __name__ == "__main__":
 const PY_LINES = python.split('\n')
 const L = text => {
   const index = code.findIndex(item => item.text.includes(text))
-  if (index < 0) throw new Error(`Missing pseudocode line: ${text}`)
+  if (index < 0) throw new Error(`Missing code line: ${text}`)
   return index + 1
 }
 const P = text => {
@@ -78,29 +87,29 @@ export function buildTrace({ workers, bikes }) {
   const frames = []
   const state = (extra = {}) => ({ workers, bikes, n, m, dp: dp.map(v => (v === INF ? null : v)), mask: -1, worker: -1, bike: -1, candidate: null, ...extra })
   const add = (phase, line, py, message, extra) => frames.push({ phase, activeLine: L(line), pythonLine: P(py), message, ...state(extra) })
-  add('start', 'set dp[mask] to infinity', 'dp[0] = 0', `Place ${n} worker${n === 1 ? '' : 's'} on ${m} bike${m === 1 ? '' : 's'}; dp[mask] is the least cost of seating the first popcount(mask) workers on the bikes in mask.`, {})
+  add('start', 'const dp = new Array', 'dp[0] = 0', `Place ${n} worker${n === 1 ? '' : 's'} on ${m} bike${m === 1 ? '' : 's'}; dp[mask] is the least cost of seating the first popcount(mask) workers on the bikes in mask.`, {})
   let result = INF
   for (let mask = 0; mask < size; mask++) {
     if (dp[mask] === INF) continue
     const w = popcount(mask)
     if (w === n) {
       result = Math.min(result, dp[mask])
-      add('full', 'if w equals n then continue', 'if w == n', `Mask ${mask} uses ${n} bikes: a full assignment costing ${dp[mask]}.`, { mask })
+      add('full', 'if (w === n)', 'if w == n', `Mask ${mask} uses ${n} bikes: a full assignment costing ${dp[mask]}.`, { mask })
       continue
     }
-    add('mask', 'if dp[mask] is infinity then continue', 'if dp[mask] == INF', `Mask ${mask} is reachable with cost ${dp[mask]}; worker ${w} is next.`, { mask, worker: w })
+    add('mask', 'if (dp[mask] === Infinity)', 'if dp[mask] == INF', `Mask ${mask} is reachable with cost ${dp[mask]}; worker ${w} is next.`, { mask, worker: w })
     for (let b = 0; b < m; b++) {
       if (mask & (1 << b)) continue
       const candidate = dp[mask] + dist(w, b)
       const next = mask | (1 << b)
       const improved = candidate < dp[next]
-      add('try', 'for each bike b that is not in mask', 'for b in range(m)', `Worker ${w} takes bike ${b}: ${dp[mask]} + ${dist(w, b)} = ${candidate}.`, { mask, worker: w, bike: b, candidate, nextMask: next })
+      add('try', 'for (let b = 0; b < m; b++)', 'for b in range(m)', `Worker ${w} takes bike ${b}: ${dp[mask]} + ${dist(w, b)} = ${candidate}.`, { mask, worker: w, bike: b, candidate, nextMask: next })
       if (improved) {
         dp[next] = candidate
-        add('store', 'if candidate is less than', 'dp[nxt] = dp[mask] + dist', `Mask ${next} now costs ${candidate}.`, { mask, worker: w, bike: b, candidate, nextMask: next })
+        add('store', 'dp[next] = Math.min', 'dp[nxt] = dp[mask] + dist', `Mask ${next} now costs ${candidate}.`, { mask, worker: w, bike: b, candidate, nextMask: next })
       }
     }
   }
-  add('done', 'return the smallest dp[mask]', 'return min(dp[mask]', `Minimum total distance is ${result}.`, { mask: -1, worker: -1, bike: -1, candidate: null, result })
+  add('done', 'return best', 'return min(dp[mask]', `Minimum total distance is ${result}.`, { mask: -1, worker: -1, bike: -1, candidate: null, result })
   return { input: { workers, bikes }, result, frames }
 }

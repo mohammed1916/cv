@@ -1,83 +1,86 @@
 export function parseInput(text) {
   const items = JSON.parse(text)
-  if (!Array.isArray(items) || items.length < 1 || items.length > 15) throw new Error('Use 1 to 15 three-digit strings such as "113".')
+  if (!Array.isArray(items) || items.length < 1 || items.length > 15 || items.some(s => typeof s !== 'string' || !/^[1-4][1-8][0-9]$/.test(s))) throw new Error('Enter 1–15 strings of three digits: depth 1–4, position 1–8, value 0–9.')
   const keys = new Set()
-  for (const item of items) {
-    if (typeof item !== 'string' || !/^[1-4][1-8][0-9]$/.test(item)) throw new Error(`"${item}" is not a valid code: depth 1-4, position, value 0-9.`)
-    const depth = Number(item[0]), position = Number(item[1])
-    if (position > 2 ** (depth - 1)) throw new Error(`"${item}": position ${position} does not exist at depth ${depth}.`)
-    if (keys.has(item.slice(0, 2))) throw new Error(`Two nodes share depth and position in "${item}".`)
-    keys.add(item.slice(0, 2))
+  for (const s of items) {
+    const depth = Number(s[0]), pos = Number(s[1])
+    if (pos > 2 ** (depth - 1)) throw new Error(`Position ${pos} is too large for depth ${depth}.`)
+    if (keys.has(`${depth}-${pos}`)) throw new Error(`Depth ${depth}, position ${pos} appears twice.`)
+    keys.add(`${depth}-${pos}`)
   }
-  for (const item of items) {
-    const depth = Number(item[0]), position = Number(item[1])
-    if (depth > 1 && !keys.has(`${depth - 1}${Math.ceil(position / 2)}`)) throw new Error(`"${item}" has no parent in the list.`)
+  if (!keys.has('1-1')) throw new Error('The root (depth 1, position 1) is missing.')
+  for (const key of keys) {
+    const [depth, pos] = key.split('-').map(Number)
+    if (depth > 1 && !keys.has(`${depth - 1}-${Math.ceil(pos / 2)}`)) throw new Error('A node has a missing parent.')
   }
-  if (!keys.has('11')) throw new Error('The root "1" must be present.')
   return items
 }
 
+// Read the digits of each three-digit string as depth, position and value. Walk from the root: a node's
+// children sit at positions 2p−1 (left) and 2p (right) on the next depth. Add up each root-to-leaf number.
 export function buildTrace(items) {
-  // A node at (depth, position) has children at (depth + 1, 2·position − 1) and (depth + 1, 2·position).
-  const valueAt = new Map(items.map(item => [`${item[0]}${item[1]}`, Number(item[2])]))
-  let nextId = 0
-  const make = (depth, position) => {
-    const key = `${depth}${position}`
-    if (!valueAt.has(key)) return null
-    const node = { id: nextId++, value: valueAt.get(key), left: null, right: null }
-    node.left = make(depth + 1, 2 * position - 1)
-    node.right = make(depth + 1, 2 * position)
-    return node
-  }
-  const root = make(1, 1)
+  const values = new Map(items.map(s => [`${s[0]}-${s[1]}`, Number(s[2])]))
   let total = 0
-  const visited = []
-  const paths = new Map()
-  const frames = [{ phase: 'start', pythonLine: 5, activeLine: L('set total to 0'), node: null, visited: [], paths: {}, total, message: 'Start at the root. Each step down appends one digit to the number on the path.' }]
-  const dfs = (node, prefix) => {
-    if (!node) return
-    const path = prefix * 10 + node.value
-    visited.push(node.id)
-    paths.set(node.id, path)
-    frames.push({ phase: 'visit', pythonLine: 9, activeLine: L('set path to prefix times 10'), node: node.id, visited: [...visited], paths: Object.fromEntries(paths), total, message: `Node ${node.value} makes the path number ${path}.` })
-    if (!node.left && !node.right) {
-      total += path
-      frames.push({ phase: 'leaf', pythonLine: 12, activeLine: L('if node has no children'), node: node.id, visited: [...visited], paths: Object.fromEntries(paths), total, message: `Leaf reached: add ${path} to the total, now ${total}.` })
+  const frames = [{ phase: 'start', path: [], total, leaves: [], activeLine: L('const values = new Map'), pythonLine: P('values = {}'), message: 'Store each node by depth and position, then walk down from the root.' }]
+  const leaves = []
+  const dfs = (depth, pos, acc) => {
+    const key = `${depth}-${pos}`
+    const here = acc * 10 + values.get(key)
+    const left = values.has(`${depth + 1}-${2 * pos - 1}`), right = values.has(`${depth + 1}-${2 * pos}`)
+    frames.push({ phase: 'visit', path: [key], total, leaves: [...leaves], value: here, activeLine: L('const here = '), pythonLine: P('here = acc'), message: `Visit ${key}: the number so far is ${here}.` })
+    if (!left && !right) {
+      total += here
+      leaves.push(here)
+      frames.push({ phase: 'leaf', path: [key], total, leaves: [...leaves], value: here, activeLine: L('total += here'), pythonLine: P('total += here'), message: `Leaf ${here}: add it to the total, now ${total}.` })
+      return
     }
-    dfs(node.left, path)
-    dfs(node.right, path)
+    if (left) dfs(depth + 1, 2 * pos - 1, here)
+    if (right) dfs(depth + 1, 2 * pos, here)
   }
-  dfs(root, 0)
-  frames.push({ phase: 'done', pythonLine: 17, activeLine: L('return total'), node: null, visited: [...visited], paths: Object.fromEntries(paths), total, message: `Every root-to-leaf path is counted once. The sum is ${total}.` })
-  return { input: items, root, result: total, frames }
+  dfs(1, 1, 0)
+  frames.push({ phase: 'done', path: [], total, leaves: [...leaves], result: total, activeLine: L('return total'), pythonLine: P('return total'), message: `Sum of root-to-leaf numbers: ${total}.` })
+  return { input: items, result: total, frames }
 }
 
-export const code = `function sumRootToLeaf(codes):
-  set total to 0
-  set nodes to a table from (depth, position) to value, read from each code
-  define dfs(node, prefix):
-    set path to prefix times 10 plus the value of node
-    if node has no children, add path to total
-    for each child of node that exists, call dfs(child, path)
-  call dfs(root, 0)
-  return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const SOURCE = `function pathSum(nums) {
+  const values = new Map(nums.map(s => [\`\${s[0]}-\${s[1]}\`, Number(s[2])]))
+  let total = 0
+  const dfs = (depth, pos, acc) => {
+    const here = acc * 10 + values.get(\`\${depth}-\${pos}\`)
+    const left = values.has(\`\${depth + 1}-\${2 * pos - 1}\`)
+    const right = values.has(\`\${depth + 1}-\${2 * pos}\`)
+    if (!left && !right) {
+      total += here
+      return
+    }
+    if (left) dfs(depth + 1, 2 * pos - 1, here)
+    if (right) dfs(depth + 1, 2 * pos, here)
+  }
+  dfs(1, 1, 0)
+  return total
+}`
+export const code = SOURCE.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
-export const python = `def sum_root_to_leaf(codes):
-    nodes = {}
-    for text in codes:
-        nodes[(int(text[0]), int(text[1]))] = int(text[2])
+export const python = `def path_sum(nums):
+    values = {}
+    for s in nums:
+        values[(int(s[0]), int(s[1]))] = int(s[2])
     total = 0
 
-    def dfs(depth, position, prefix):
+    def dfs(depth, pos, acc):
         nonlocal total
-        path = prefix * 10 + nodes[(depth, position)]
-        children = [c for c in ((depth + 1, 2 * position - 1), (depth + 1, 2 * position)) if c in nodes]
-        if not children:
-            total += path
-        for child in children:
-            dfs(child[0], child[1], path)
+        here = acc * 10 + values[(depth, pos)]
+        left = (depth + 1, 2 * pos - 1) in values
+        right = (depth + 1, 2 * pos) in values
+        if not left and not right:
+            total += here
+            return
+        if left:
+            dfs(depth + 1, 2 * pos - 1, here)
+        if right:
+            dfs(depth + 1, 2 * pos, here)
 
     dfs(1, 1, 0)
-    return total
-`
+    return total`
+const P = s => python.split('\n').findIndex(t => t.includes(s)) + 1

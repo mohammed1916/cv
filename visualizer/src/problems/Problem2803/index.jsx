@@ -1,59 +1,31 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-
-const code = `yield factorial values one at a time
-  current = 1
-  for k from 1 to count
-    current = current * k
-    yield current`
-const python = `def factorial_generator(count):
-    current = 1
-    for k in range(1, count + 1):
-        current *= k
-        yield current`
-
-function parseInput(text) {
-  const input = JSON.parse(text)
-  if (!input || !Number.isInteger(input.count) || input.count < 0 || input.count > 12) {
-    throw new Error('Use { "count": n } with n from 0 to 12.')
-  }
-  return input
-}
-
-function buildTrace({ count }) {
-  const out = []
-  let current = 1
-  const frames = [{ phase: 'start', activeLine: 2, message: 'The running product starts at 1.', at: -1, out: [] }]
-  for (let k = 1; k <= count; k++) {
-    current *= k
-    out.push(String(current))
-    frames.push({ phase: 'step', activeLine: 5, message: `Multiply by ${k}: yield ${current}.`, at: out.length - 1, out: [...out] })
-  }
-  frames.push({ phase: 'done', activeLine: 5, message: `${out.length} value(s) yielded.`, at: -1, out: [...out] })
-  return { frames }
-}
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
-    { id: 'start', label: 'Seed', description: 'Start the running product.' },
-    { id: 'step', label: 'Yield', description: 'Multiply and yield the next value.' },
-    { id: 'done', label: 'Finished', description: 'The requested values are produced.' },
+    { id: 'start', label: 'Start', description: 'Nothing has been produced yet.' },
+    { id: 'yield', label: 'Yield', description: 'next() resumes the generator and it yields the next product.' },
+    { id: 'done', label: 'Finished', description: 'The generator has no more values.' },
   ],
   parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'Object with count (number of values to produce)',
+  inputLabel: 'JSON {"n": 4}',
   url: 'https://leetcode.com/problems/factorial-generator/',
-  complexity: 'O(count) multiplications in total, one per yielded value.',
+  complexity: 'O(n) multiplications in total; each next() call does one multiplication. The visualization caps n at 10.',
   examples: [
-    { label: 'Five values', input: '{"count":5}' },
-    { label: 'Three values', input: '{"count":3}' },
+    { label: 'Four steps', input: '{"n":4}' },
+    { label: 'Zero', input: '{"n":0}' },
   ],
 }
 
 export default function FactorialGenerator() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <IndexedSequence label="Yielded values" length={step.out.length} valueAt={i => step.out[i]} active={step.at} />
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="Values yielded so far" length={step.values.length} valueAt={i => step.values[i]} active={step.values.length - 1}
+      roleAt={i => (i === step.values.length - 1 ? 'latest' : '')} />
+    <output aria-label="Generator state">{`n = ${run.input.n}; next() yields ${step.ans === null ? 'nothing yet' : step.ans}`}</output>
+    <p role="status" style={{ color: 'var(--text)' }}>{step.message}</p>
   </>} renderReasoning={() => <>
-    <p>Each yield reuses the previous product, so the generator holds only one number between steps.</p>
-    <p>Computing the next value is one multiplication, not a fresh loop from 1.</p>
+    <p>A generator pauses at each yield and keeps its local variables. Each next() call resumes after the last yield, multiplies once, and yields the new product.</p>
+    <p>For n = 0 the only value is 1, because the first yield runs before the loop.</p>
   </>} />
 }

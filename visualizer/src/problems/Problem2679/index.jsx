@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/sum-in-a-matrix/',
   complexity: 'O(n * m log m) time for n rows and m columns, dominated by sorting each row.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[[7,2,1],[6,4,2],[6,5,3],[3,2,1]]}' },
-    { label: 'Example 2', input: '{"nums":[[1]]}' },
+    { label: 'Two rows', input: '{"nums":[[4,9,1],[8,2,6]]}' },
+    { label: 'Equal tops', input: '{"nums":[[5,5],[5,0]]}' },
   ],
 }
 

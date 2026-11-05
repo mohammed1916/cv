@@ -8,7 +8,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-cost-tree-from-leaf-values/',
   complexity: 'O(n) time and O(n) space for n leaves. The visualization caps n at 30.',
   examples: [
-    { label: 'Mixed', input: '[6,2,4]' },
+    { label: 'Mixed', input: '[3,8,5,2]' },
     { label: 'Two leaves', input: '[4,11]' },
     { label: 'Equal leaves', input: '[5,5,5]' },
   ],

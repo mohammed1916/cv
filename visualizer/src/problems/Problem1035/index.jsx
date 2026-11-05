@@ -9,8 +9,8 @@ const definition = {
   url: 'https://leetcode.com/problems/uncrossed-lines/',
   complexity: 'O(n × m) time and space for the table.',
   examples: [
-    { label: 'Sample', input: '[[1,4,2],[1,2,4]]' },
-    { label: 'Longer', input: '[[2,5,1,2,5],[10,5,2,1,5,2]]' },
+    { label: 'Sample', input: '[[6,2,7],[2,6,7,1]]' },
+    { label: 'Longer', input: '[[2,5,1,2,5],[9,5,2,1,5,2]]' },
   ],
 }
 

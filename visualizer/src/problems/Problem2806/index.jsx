@@ -21,21 +21,21 @@ const definition = {
   }
 ],
   parse: parseInput, build: buildTrace, code, python,
-  inputLabel: "Object with purchaseAmount (JSON), e.g. {\"purchaseAmount\":9}",
+  inputLabel: "Object with purchaseAmount (JSON), e.g. {\"purchaseAmount\":37}",
   url: "https://leetcode.com/problems/account-balance-after-rounded-purchase/",
   complexity: "O(1) time and O(1) space. The input is a single integer from 0 to 100.",
   examples: [
   {
-    "label": "Example 1",
-    "input": "{\"purchaseAmount\":9}"
+    "label": "Round down",
+    "input": "{\"purchaseAmount\":23}"
   },
   {
-    "label": "Example 2",
-    "input": "{\"purchaseAmount\":15}"
+    "label": "Tie rounds up",
+    "input": "{\"purchaseAmount\":55}"
   },
   {
-    "label": "Example 3",
-    "input": "{\"purchaseAmount\":10}"
+    "label": "Full amount",
+    "input": "{\"purchaseAmount\":100}"
   }
 ],
 }

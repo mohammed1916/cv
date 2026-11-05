@@ -1,84 +1,86 @@
 export const phases = [
-  { id: 'scan', label: 'Scan from right', description: 'Start at the last character. Reading right to left keeps the two-digit groups unambiguous.' },
-  { id: 'single', label: 'Single digit', description: 'A digit that is not followed by a # stands alone and maps to one letter, 1 to 9.' },
-  { id: 'pair', label: 'Two-digit group', description: 'A # closes the two digits just before it. Those two digits, 10 to 26, map to one letter.' },
-  { id: 'done', label: 'Complete', description: 'Reverse the letters collected while scanning from the right.' },
+  { id: 'start', label: 'Start', description: 'Begin at the right end, because a # reaches back two characters.' },
+  { id: 'hash', label: 'Two-digit group', description: 'A # closes a group of two digits such as 10# to 26#; read the two digits before it.' },
+  { id: 'single', label: 'Single digit', description: 'Any other digit maps to one letter from a to i.' },
+  { id: 'done', label: 'Complete', description: 'The letters were collected from right to left, so reverse them.' },
 ]
 
-function decode(s) {
+export const examples = [
+  { label: 'Mixed groups', input: '{"s":"10#11#12"}' },
+  { label: 'All singles', input: '{"s":"1326#"}' },
+  { label: 'Full alphabet', input: '{"s":"12345678910#11#12#13#14#15#16#17#18#19#20#21#22#23#24#25#26#"}' },
+]
+
+export function parseInput(text) {
+  const s = text.trim().startsWith('{') ? JSON.parse(text).s : text
+  if (typeof s !== 'string' || s.length < 1 || s.length > 60) throw new Error('Use a string s of 1 to 60 characters, or an object such as {"s":"10#11#12"}.')
+  if (!/^[0-9#]+$/.test(s)) throw new Error('Use only digits and # in s.')
   let i = s.length - 1
-  const out = []
-  const frames = []
   while (i >= 0) {
     if (s[i] === '#') {
-      if (i < 2) throw new Error('A # needs two digits before it.')
-      const code = Number(s.slice(i - 2, i))
-      if (code < 10 || code > 26) throw new Error(`The group ${s.slice(i - 2, i)}# must be a number from 10 to 26.`)
-      out.push(String.fromCharCode(96 + code))
-      frames.push({ phase: 'pair', at: i, end: i - 2, letter: out.at(-1) })
+      const pair = Number(s.slice(i - 2, i))
+      if (i < 2 || !/^\d\d$/.test(s.slice(i - 2, i)) || pair < 10 || pair > 26) throw new Error('A # must follow two digits: a group from 10 to 26 followed by #.')
       i -= 3
     } else {
-      const code = Number(s[i])
-      if (code < 1) throw new Error('A single digit must be from 1 to 9.')
-      out.push(String.fromCharCode(96 + code))
-      frames.push({ phase: 'single', at: i, end: i, letter: out.at(-1) })
+      if (s[i] === '0') throw new Error('A single digit must be from 1 to 9; 0 is only valid inside 10 to 26 followed by #.')
       i -= 1
     }
   }
-  return { letters: out.reverse(), steps: frames }
-}
-
-export function parseInput(text) {
-  const s = text.trim()
-  if (!/^[0-9#]{1,60}$/.test(s)) throw new Error('Use only digits and # characters, up to 60 of them.')
-  decode(s)
   return s
 }
 
 export function buildTrace(s) {
-  const frames = []
-  const { letters, steps } = decode(s)
-  const collected = []
-  frames.push({ phase: 'scan', activeLine: L('i = last index'), pythonLine: P('i = len(s) - 1'), snapshot: { s, at: s.length - 1, letters: [], group: null },
-    message: `Start at position ${s.length - 1}, the last character, and move left.` })
-  for (const step of steps) {
-    collected.push(step.letter)
-    const pair = step.phase === 'pair'
-    const text = pair
-      ? `${s.slice(step.end, step.at)}# is a two-digit group, so it becomes ${step.letter}.`
-      : `${s[step.at]} stands alone and becomes ${step.letter}.`
-    frames.push({ phase: step.phase, activeLine: pair ? L('out.append(letter number') : L('out.append(letter for'),
-      pythonLine: pair ? P('int(s[i-2:i])') : P('int(s[i]) - 1'), snapshot: { s, at: step.at, letters: [...collected], group: [step.end, step.at] },
-      message: text + ' Next position: ' + (step.end - 1) + '.' })
+  const letters = []
+  let i = s.length - 1
+  const snap = (index, group) => ({ s, index, group, letters: [...letters] })
+  const frames = [{ phase: 'start', activeLine: L('const letters = []'), pythonLine: P('i = len(s) - 1'), snapshot: snap(i, null),
+    message: `Read ${JSON.stringify(s)} from right to left, collecting letters as we go.` }]
+  while (i >= 0) {
+    if (s[i] === '#') {
+      const code = Number(s.slice(i - 2, i))
+      const letter = String.fromCharCode(96 + code)
+      letters.push(letter)
+      frames.push({ phase: 'hash', activeLine: L("if (s[i] === '#')"), pythonLine: P("if s[i] == '#'"), snapshot: snap(i, { from: i - 2, to: i - 1, hash: i }),
+        message: `The # at ${i} closes the group ${s.slice(i - 2, i)}, which means ${letter}.` })
+      i -= 3
+    } else {
+      const letter = String.fromCharCode(96 + Number(s[i]))
+      letters.push(letter)
+      frames.push({ phase: 'single', activeLine: L('} else {'), pythonLine: P('chr(96 + int(s[i]))'), snapshot: snap(i, { from: i, to: i }),
+        message: `The digit ${s[i]} at ${i} maps to ${letter}.` })
+      i -= 1
+    }
   }
-  frames.push({ phase: 'done', activeLine: L('return reversed'), pythonLine: P("return ''.join"), snapshot: { s, at: -1, letters, group: null },
-    message: `Reverse the collected letters to read the answer: ${letters.join('')}.` })
-  return { input: s, result: letters.join(''), frames }
+  const result = letters.reverse().join('')
+  frames.push({ phase: 'done', activeLine: L('return letters.reverse()'), pythonLine: P('return'), snapshot: snap(null, null),
+    message: `Reverse the collected letters to get "${result}".`, result })
+  return { input: s, result, frames }
 }
 
-export const code = `decode the digit string s:
-  i = last index of s
-  out = empty list
-  while i >= 0:
-    if s[i] == '#':
-      take the two digits before it: s[i-2..i-1]
-      out.append(letter number 10..26)
-      i = i - 3
-    else:
-      out.append(letter for the single digit s[i])
-      i = i - 1
-  return reversed(out)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function freqAlphabets(s) {
+  const letters = []
+  let i = s.length - 1
+  while (i >= 0) {
+    if (s[i] === '#') {
+      letters.push(String.fromCharCode(96 + Number(s.slice(i - 2, i))))
+      i -= 3
+    } else { letters.push(String.fromCharCode(96 + Number(s[i]))); i -= 1 }
+  }
+  return letters.reverse().join('')
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
-export const python = `def freqalphabets(s):
-    out = []
+export const python = `def freq_alphabets(s):
+    letters = []
     i = len(s) - 1
     while i >= 0:
         if s[i] == '#':
-            out.append(chr(ord('a') + int(s[i-2:i]) - 1))
+            code = int(s[i - 2:i])
+            letters.append(chr(96 + code))
             i -= 3
         else:
-            out.append(chr(ord('a') + int(s[i]) - 1))
+            letters.append(chr(96 + int(s[i])))
             i -= 1
-    return ''.join(reversed(out))`
+    return ''.join(reversed(letters))
+`
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

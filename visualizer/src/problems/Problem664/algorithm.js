@@ -1,59 +1,69 @@
 export function parseInput(text) {
   const s = JSON.parse(text)
-  if (typeof s !== 'string' || s.length < 1 || s.length > 24 || ![...s].every(c => c >= 'a' && c <= 'z')) throw new Error('Enter a JSON string of 1–24 lowercase letters (the table is shown in full).')
+  if (typeof s !== 'string' || s.length < 1 || s.length > 30 || !/^[a-z]+$/.test(s)) throw new Error('Enter a JSON string of 1–30 lowercase letters.')
   return s
 }
 
-// best[i][j] = fewest turns to print s[i..j]. Either s[i] is printed with the first turn (and merged with the
-// matching position k), or it is printed alone.
+// dp[i][j] is the fewest turns to print s[i..j]. Start by printing s[i] alone; if s[k] matches s[i],
+// that character can be printed in the same turn, which merges s[i] with the turn that prints s[k..j].
 export function buildTrace(s) {
   const n = s.length
-  const best = Array.from({ length: n }, () => Array(n).fill(0))
-  const frames = [{ phase: 'start', i: 0, j: 0, table: best.map(r => [...r]), activeLine: 2, message: 'A single character needs one turn.' }]
-  for (let i = 0; i < n; i++) best[i][i] = 1
-  for (let len = 2; len <= n; len++) for (let i = 0; i + len - 1 < n; i++) {
-    const j = i + len - 1
-    let value = 1 + best[i + 1][j]
-    if (s[i] === s[i + 1]) value = best[i + 1][j]
-    for (let k = i + 1; k <= j; k++) {
-      if (s[k] === s[i]) {
-        const merged = (k > i + 1 ? best[i + 1][k - 1] : 0) + best[k][j]
-        if (merged < value) value = merged
+  const dp = Array.from({ length: n + 1 }, () => Array(n + 1).fill(0))
+  const frames = [{ phase: 'start', i: null, j: null, k: null, dp: snapshot(dp, n), activeLine: L('const dp = Array'), pythonLine: P('dp = [['), message: 'dp[i][j] is the fewest turns for the substring from i to j.' }]
+  for (let i = n - 1; i >= 0; i--) {
+    dp[i][i] = 1
+    for (let j = i + 1; j < n; j++) {
+      let best = dp[i + 1][j] + 1
+      let chosen = null
+      frames.push({ phase: 'cell', i, j, k: null, dp: snapshot(dp, n), activeLine: L('let best = dp[i + 1][j] + 1'), pythonLine: P('best = dp[i + 1][j] + 1'), message: `Substring ${s.slice(i, j + 1)}: printing ${s[i]} alone costs ${best}.` })
+      for (let k = i + 1; k <= j; k++) {
+        if (s[k] === s[i]) {
+          const candidate = dp[i + 1][k - 1] + dp[k][j]
+          if (candidate < best) { best = candidate; chosen = k }
+          frames.push({ phase: 'merge', i, j, k, dp: snapshot(dp, n), activeLine: L('if (s[k] === s[i])'), pythonLine: P('if s[k] == s[i]'), message: `${s[k]} at ${k} matches ${s[i]} at ${i}: merge to cost ${candidate} (best ${best}).` })
+        }
       }
+      dp[i][j] = best
+      frames.push({ phase: 'store', i, j, k: chosen, dp: snapshot(dp, n), activeLine: L('dp[i][j] = best'), pythonLine: P('dp[i][j] = best'), message: `dp[${i}][${j}] = ${best}.` })
     }
-    best[i][j] = value
-    frames.push({ phase: 'cell', i, j, table: best.map(r => [...r]), activeLine: 8, message: `s[${i}..${j}] = "${s.slice(i, j + 1)}": ${value} turns.` })
   }
-  frames.push({ phase: 'done', i: 0, j: n - 1, table: best.map(r => [...r]), result: best[0][n - 1], activeLine: 10, message: `Minimum turns: ${best[0][n - 1]}.` })
-  return { input: s, result: best[0][n - 1], table: best, frames }
+  const result = n === 0 ? 0 : dp[0][n - 1]
+  frames.push({ phase: 'done', i: 0, j: n - 1, k: null, dp: snapshot(dp, n), result, activeLine: L('dp[0][n - 1]'), pythonLine: P('return dp[0][n - 1]'), message: `Fewest turns for ${s}: ${result}.` })
+  return { input: s, result, frames }
 }
 
-export const code = `set dp[i][i] to 1 for every position i
-for start i from the last index down to 0
-  for end j from i + 1 to the last index
-    set dp[i][j] to 1 + dp[i + 1][j], printing s[i] alone
-    for each k from i + 1 through j where s[k] equals s[i]
-      candidate is dp[i + 1][k - 1] (zero if that interval is empty) plus dp[k][j]
-      set dp[i][j] to the smaller of dp[i][j] and candidate
-return dp[0][last index]`.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-// Collection trace: codeStage 'interval' is the per-interval update (line 7); 'return' is line 8.
-const STAGE_LINE = { interval: 7, return: 8 }
-export const LINE_MAP = { 1: 1, 4: 7, 5: 8 }
-
-export function familyLine(frame) {
-  return STAGE_LINE[frame.codeStage] ?? LINE_MAP[frame.activeLine] ?? frame.activeLine
+function snapshot(dp, n) {
+  return dp.slice(0, n).map((row, i) => row.slice(0, n).map((value, j) => (j < i ? '' : value)))
 }
+
+const SOURCE = `function strangePrinter(s) {
+  const n = s.length
+  const dp = Array.from({ length: n + 1 }, () => Array(n + 1).fill(0))
+  for (let i = n - 1; i >= 0; i--) {
+    dp[i][i] = 1
+    for (let j = i + 1; j < n; j++) {
+      let best = dp[i + 1][j] + 1
+      for (let k = i + 1; k <= j; k++) {
+        if (s[k] === s[i]) best = Math.min(best, dp[i + 1][k - 1] + dp[k][j])
+      }
+      dp[i][j] = best
+    }
+  }
+  return n === 0 ? 0 : dp[0][n - 1]
+}`
+export const code = SOURCE.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def strange_printer(s):
     n = len(s)
-    dp = [[0] * n for _ in range(n)]
+    dp = [[0] * (n + 1) for _ in range(n + 1)]
     for i in range(n - 1, -1, -1):
         dp[i][i] = 1
         for j in range(i + 1, n):
-            dp[i][j] = 1 + dp[i + 1][j]
+            best = dp[i + 1][j] + 1
             for k in range(i + 1, j + 1):
                 if s[k] == s[i]:
-                    inner = dp[i + 1][k - 1] if k - 1 >= i + 1 else 0
-                    dp[i][j] = min(dp[i][j], inner + dp[k][j])
-    return dp[0][n - 1]`
+                    best = min(best, dp[i + 1][k - 1] + dp[k][j])
+            dp[i][j] = best
+    return dp[0][n - 1] if n else 0`
+const P = s => python.split('\n').findIndex(t => t.includes(s)) + 1

@@ -6,19 +6,24 @@ export const phases = [
   { id: 'done', label: 'Complete', description: 'Return the smallest fixed index, or -1 when none exists.' },
 ]
 
-export const code = `fixed index (values):
-  lo = 0, hi = len(values) - 1, answer = -1
-  while lo <= hi:
-    mid = (lo + hi) // 2
-    gap = values[mid] - mid
-    if gap == 0:
+export const code = `function fixedIndex(values) {
+  let lo = 0
+  let hi = values.length - 1
+  let answer = -1
+  while (lo <= hi) {
+    const mid = Math.floor((lo + hi) / 2)
+    const gap = values[mid] - mid
+    if (gap === 0) {
       answer = mid
       hi = mid - 1
-    else if gap < 0:
+    } else if (gap < 0) {
       lo = mid + 1
-    else:
+    } else {
       hi = mid - 1
-  return answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    }
+  }
+  return answer
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def fixed_index(values):
     lo, hi, answer = 0, len(values) - 1, -1
@@ -61,11 +66,11 @@ export function buildTrace(values) {
     state: { values, lo, hi, mid, answer },
   })
 
-  push('start', 'lo = 0', `Search indices ${lo} to ${hi}.`, null, 'lo, hi, answer')
+  push('start', 'let lo = 0', `Search indices ${lo} to ${hi}.`, null, 'lo, hi, answer')
   while (lo <= hi) {
     const mid = Math.floor((lo + hi) / 2)
     const gap = values[mid] - mid
-    push('probe', 'mid = (lo + hi)', `Index ${mid} holds ${values[mid]}, so value minus index is ${gap}.`, mid)
+    push('probe', 'const mid = Math.floor', `Index ${mid} holds ${values[mid]}, so value minus index is ${gap}.`, mid, 'mid = (lo + hi)')
     if (gap === 0) {
       answer = mid
       hi = mid - 1

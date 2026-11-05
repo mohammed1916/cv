@@ -13,12 +13,12 @@ const definition = {
     { id: 'done', label: 'Result', description: 'Return the rearranged array.' },
   ],
   parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'JSON {"nums": [1,2,2,1,1,0]}',
+  inputLabel: 'JSON {"nums": [2,2,4,4,0]}',
   url: 'https://leetcode.com/problems/apply-operations-to-an-array/',
   complexity: 'O(n) time and O(n) extra space for the output. The visualization caps nums at 30 values.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,2,1,1,0]}' },
-    { label: 'Example 2', input: '{"nums":[0,1]}' },
+    { label: 'Example 1', input: '{"nums":[2,2,4,4,0]}' },
+    { label: 'Example 2', input: '{"nums":[3,3,1]}' },
   ],
 }
 

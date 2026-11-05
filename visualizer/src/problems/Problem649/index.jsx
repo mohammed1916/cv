@@ -1,30 +1,33 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
-    { id: 'start', label: 'Two queues', description: 'Queue R and D senators by position.' },
-    { id: 'ban', label: 'Ban opponent', description: 'The front senator bans the next opponent and rejoins later.' },
-    { id: 'done', label: 'Complete', description: 'The party with senators left wins.' },
+    { id: 'start', label: 'Two queues', description: 'Each party queues its seats in order.' },
+    { id: 'round', label: 'Face off', description: 'The two front senators meet; the earlier one bans the other.' },
+    { id: 'done', label: 'Winner', description: 'The party with senators left wins.' },
   ],
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Senate (JSON string of R and D)',
   url: 'https://leetcode.com/problems/dota2-senate/',
-  complexity: 'O(n) time with two queues; each senator is dequeued and requeued at most a constant number of times per round.',
+  complexity: 'O(n) time and O(n) space: every round removes one senator, so there are at most n − 1 rounds.',
   examples: [
-    { label: 'Radiant wins', input: '"RD"' },
-    { label: 'Dire wins', input: '"RDD"' },
-    { label: 'Longer', input: '"DDRRR"' },
+    { label: 'Short', input: '"RDD"' },
+    { label: 'Alternating', input: '"RDRDD"' },
+    { label: 'Radiant run', input: '"RRDRD"' },
   ],
 }
 
 export default function DotaSenate() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <StackLane title="Radiant queue (positions)" items={step.radiant.map(String)} note="front acts first" />
-    <StackLane title="Dire queue (positions)" items={step.dire.map(String)} note="front acts first" />
-    <output aria-label="Round">Round {step.round}{step.winner ? ` · ${step.actor} bans ${step.victim}` : ''}{step.result ? ` · winner ${step.result}` : ''}</output>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="Senate in seat order" length={run.input.length} active={-1}
+      valueAt={i => run.input[i]}
+      roleAt={i => (step.banned === i ? 'banned' : step.acting === i ? 'acting' : '')} />
+    <RecordStateTable label="Queues of seat turns" columns={['party', 'turns in queue']}
+      rows={[{ party: 'Radiant', 'turns in queue': step.radiant.join(', ') || 'none' }, { party: 'Dire', 'turns in queue': step.dire.join(', ') || 'none' }]} />
   </>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>
-    <p><strong>Why the front acts:</strong> the senator who acts first always bans the next opponent to ensure victory, and rejoining after n positions keeps the order consistent.</p>
+    <p><strong>Why queues:</strong> the senator who acts next is always the front of a queue, and a survivor goes to the back with its next turn.</p>
   </>} />
 }

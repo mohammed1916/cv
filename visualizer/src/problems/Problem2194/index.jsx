@@ -1,10 +1,30 @@
-import authoredExamples0 from '../../config/examples/collection--2194.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import SheetView from './SheetView'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/raceAndAncestryBatch.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '2194',
+  phases,
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  inputLabel: 'A range such as A1:C2',
+  url: 'https://leetcode.com/problems/cells-in-a-range-on-an-excel-sheet/',
+  complexity: 'O(rows * columns) time for the output, which is the size of the range. The page caps columns at F.',
+  examples: [
+    { label: 'Block', input: 'A1:C2' },
+    { label: 'Single cell', input: 'D4:D4' },
+    { label: 'One row', input: 'B3:C3' },
+  ],
+}
 
-const definition = { ...definitions[2194], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem2194Visualizer() {
+  return (
+    <AlgorithmWorkspace
+      definition={definition}
+      renderVisual={({ run, step }) => <SheetView run={run} step={step} />}
+      renderReasoning={({ step }) => <p>{step.message}</p>}
+    />
+  )
+}

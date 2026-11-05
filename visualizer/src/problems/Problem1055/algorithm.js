@@ -1,13 +1,16 @@
-const CODE_TEXT = `shortest way to form target from source
-  set pieces to 0 and next to 0
-  while next is less than the length of target
-    start a new subsequence and count it
-    walk through source once
-      if the source letter equals target at next then advance next
-    if no letter was matched in this pass then return -1
-  return the number of pieces`
-
-export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function shortestWayToFormString(source, target) {
+  let pieces = 0
+  let next = 0
+  while (next < target.length) {
+    pieces++
+    const before = next
+    for (const letter of source) {
+      if (next < target.length && letter === target[next]) next++
+    }
+    if (next === before) return -1
+  }
+  return pieces
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def shortest_way(source, target):
     pieces = 0
@@ -30,7 +33,7 @@ if __name__ == "__main__":
 const PY_LINES = python.split('\n')
 const L = text => {
   const index = code.findIndex(item => item.text.includes(text))
-  if (index < 0) throw new Error(`Missing pseudocode line: ${text}`)
+  if (index < 0) throw new Error(`Missing code line: ${text}`)
   return index + 1
 }
 const P = text => {
@@ -57,19 +60,19 @@ export function buildTrace({ source, target }) {
   let next = 0
   const state = (extra = {}) => ({ source, target, assign: assign.slice(), next, pieces, scan: -1, ...extra })
   const add = (phase, line, py, message, extra) => frames.push({ phase, activeLine: L(line), pythonLine: P(py), message, ...state(extra) })
-  add('start', 'set pieces to 0', 'pieces = 0', 'Nothing is formed yet. Target position 0 is the next letter needed.', {})
+  add('start', 'let pieces = 0', 'pieces = 0', 'Nothing is formed yet. Target position 0 is the next letter needed.', {})
   let result = null
   while (next < target.length) {
     pieces += 1
     const before = next
-    add('piece', 'start a new subsequence', 'pieces += 1', `Piece ${pieces} starts at target position ${next} (needs "${target[next]}").`, {})
+    add('piece', 'pieces++', 'pieces += 1', `Piece ${pieces} starts at target position ${next} (needs "${target[next]}").`, {})
     for (let j = 0; j < source.length; j++) {
       if (next < target.length && source[j] === target[next]) {
         assign[next] = pieces
-        add('take', 'advance next', 'next_index += 1', `source[${j}] = "${source[j]}" matches target[${next}]; piece ${pieces} takes it.`, { scan: j })
+        add('take', 'next++', 'next_index += 1', `source[${j}] = "${source[j]}" matches target[${next}]; piece ${pieces} takes it.`, { scan: j })
         next += 1
       } else {
-        add('scan', 'if the source letter equals', 'if next_index < len(target) and letter', `source[${j}] = "${source[j]}" does not help piece ${pieces}.`, { scan: j })
+        add('scan', 'if (next < target.length', 'if next_index < len(target) and letter', `source[${j}] = "${source[j]}" does not help piece ${pieces}.`, { scan: j })
       }
     }
     if (next === before) {
@@ -79,6 +82,6 @@ export function buildTrace({ source, target }) {
     }
   }
   if (result === null) result = pieces
-  add('done', 'return the number of pieces', 'return pieces', result === -1 ? 'The target cannot be formed.' : `${result} piece${result === 1 ? '' : 's'} form the target.`, { pieces: result === -1 ? pieces : result, next })
+  add('done', 'return pieces', 'return pieces', result === -1 ? 'The target cannot be formed.' : `${result} piece${result === 1 ? '' : 's'} form the target.`, { pieces: result === -1 ? pieces : result, next })
   return { input: { source, target }, result, frames }
 }

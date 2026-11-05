@@ -19,9 +19,9 @@ const definition = {
   url: "https://leetcode.com/problems/find-polygon-with-the-largest-perimeter/",
   complexity: "O(n log n) time for the sort, O(1) extra space. The visualization caps nums at 50 values; LeetCode allows up to 100000.",
   examples: [
-    { label: "[2,3,4]", input: "{\"nums\": [2, 3, 4]}" },
-    { label: "[1,2,3]", input: "{\"nums\": [1, 2, 3]}" },
-    { label: "[3,3,3,20]", input: "{\"nums\": [3, 3, 3, 20]}" },
+    { label: "Four sides", input: "{\"nums\": [4, 9, 5, 6]}" },
+    { label: "Too long a side", input: "{\"nums\": [2, 2, 9]}" },
+    { label: "Equal sides", input: "{\"nums\": [3, 3, 3, 3]}" },
     { label: "[5,5,50]", input: "{\"nums\": [5, 5, 50]}" },
   ],
 }

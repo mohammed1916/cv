@@ -1,4 +1,4 @@
-const MOD = 1000000007n
+const MOD = 1000000007
 
 export function parseInput(text) {
   const s = JSON.parse(text)
@@ -6,45 +6,53 @@ export function parseInput(text) {
   return s
 }
 
-// ways[i] = decodings of the first i characters. '*' stands for 1–9; '**' has 15 two-character readings.
+// ways[i] = decodings of the first i characters. A '*' stands for 1–9, and a '**' pair has 15 readings.
 export function buildTrace(s) {
   const n = s.length
-  const ways = Array(n + 1).fill(0n)
-  ways[0] = 1n
-  const frames = [{ phase: 'start', index: 0, ways: ways.map(String), activeLine: 2, message: 'Empty prefix has one decoding.' }]
-  const one = c => (c === '*' ? 9n : (c === '0' ? 0n : 1n))
-  const two = (a, b) => {
-    if (a === '*' && b === '*') return 15n
-    if (a === '*') return b <= '6' ? 2n : 1n
-    if (b === '*') return a === '1' ? 9n : a === '2' ? 6n : 0n
-    return BigInt(Number(a + b) >= 10 && Number(a + b) <= 26 ? 1 : 0)
+  const ways = Array(n + 1).fill(0)
+  ways[0] = 1
+  const frames = [{ phase: 'start', index: 0, ways: [...ways], chars: [...s], activeLine: L('let before = 0'), pythonLine: P('before, previous = 0, 1'), message: 'The empty prefix has exactly one decoding.' }]
+  const single = c => (c === '*' ? 9 : c === '0' ? 0 : 1)
+  const pair = (a, b) => {
+    if (a === '*' && b === '*') return 15
+    if (a === '*') return Number(b) <= 6 ? 2 : 1
+    if (b === '*') return a === '1' ? 9 : a === '2' ? 6 : 0
+    const v = Number(a + b)
+    return v >= 10 && v <= 26 ? 1 : 0
   }
   for (let i = 1; i <= n; i++) {
-    let v = ways[i - 1] * one(s[i - 1])
-    if (i >= 2) v += ways[i - 2] * two(s[i - 2], s[i - 1])
-    ways[i] = v % MOD
-    frames.push({ phase: 'extend', index: i, ways: ways.map(String), activeLine: 6, message: `Prefix length ${i}: one-digit reading and two-digit reading combined: ${ways[i]}.` })
+    const two = i >= 2 ? pair(s[i - 2], s[i - 1]) : 0
+    const current = (single(s[i - 1]) * ways[i - 1] + two * (i >= 2 ? ways[i - 2] : 0)) % MOD
+    ways[i] = current
+    frames.push({ phase: 'extend', index: i, ways: [...ways], chars: [...s], one: single(s[i - 1]), two, activeLine: L('const current'), pythonLine: P('current = (single'), message: `Prefix length ${i}: ${single(s[i - 1])} one-character reading(s) and ${two} two-character reading(s) give ${current}.` })
   }
-  const result = Number(ways[n])
-  frames.push({ phase: 'done', index: n, ways: ways.map(String), result, activeLine: 9, message: `Total decodings modulo 1e9+7: ${result}.` })
+  const result = ways[n]
+  frames.push({ phase: 'done', index: n, ways: [...ways], chars: [...s], result, activeLine: L('return previous'), pythonLine: P('return previous'), message: `Total decodings modulo 1e9+7: ${result}.` })
   return { input: s, result, ways, frames }
 }
 
-export const code = `set before to 0 and previous to 1, the ways for the empty prefix
-for each index i in s:
-  count single-symbol readings of s[i]: nine for an asterisk, zero for a zero, otherwise one
-  count two-symbol readings of s[i - 1] and s[i] when i is greater than 0
-  set current to (single readings times previous plus pair readings times before) modulo 1000000007
-  shift: before becomes previous, and previous becomes current
-return previous`.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-// Collection trace: codeStage 'decode' is the per-index update (line 5); 'return' is line 7.
-const STAGE_LINE = { decode: 5, return: 7 }
-export const LINE_MAP = { 1: 1, 4: 5, 5: 7 }
-
-export function familyLine(frame) {
-  return STAGE_LINE[frame.codeStage] ?? LINE_MAP[frame.activeLine] ?? frame.activeLine
-}
+const SOURCE = `function numDecodings(s) {
+  const MOD = 1000000007
+  const single = c => (c === '*' ? 9 : c === '0' ? 0 : 1)
+  const pair = (a, b) => {
+    if (a === '*' && b === '*') return 15
+    if (a === '*') return Number(b) <= 6 ? 2 : 1
+    if (b === '*') return a === '1' ? 9 : a === '2' ? 6 : 0
+    const v = Number(a + b)
+    return v >= 10 && v <= 26 ? 1 : 0
+  }
+  let before = 0
+  let previous = 1
+  for (let i = 0; i < s.length; i++) {
+    const two = i > 0 ? pair(s[i - 1], s[i]) : 0
+    const current = (single(s[i]) * previous + two * before) % MOD
+    before = previous
+    previous = current
+  }
+  return previous
+}`
+export const code = SOURCE.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def num_decodings(s):
     def single(c):
@@ -68,3 +76,4 @@ export const python = `def num_decodings(s):
         current = (single(character) * previous + two * before) % modulus
         before, previous = previous, current
     return previous`
+const P = s => python.split('\n').findIndex(t => t.includes(s)) + 1

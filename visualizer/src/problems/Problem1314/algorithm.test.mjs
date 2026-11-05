@@ -35,5 +35,7 @@ test('every frame points at a real code line and Python line', () => {
 test('rejects bad shapes and values', () => {
   assert.throws(() => parseInput('{"mat":[[1,2],[3]],"k":1}'), /rectangle/)
   assert.throws(() => parseInput('{"mat":[[10]],"k":1}'), /0 to 9/)
-  assert.throws(() => parseInput('{"mat":[[1]],"k":5}'), /k is/)
+  assert.throws(() => parseInput('{"mat":[[1]],"k":9}'), /k is/)
+  // k may exceed the matrix size; the block is clipped to the matrix edges.
+  assert.deepEqual(buildTrace(parseInput('{"mat":[[1]],"k":5}')).result, [[1]])
 })

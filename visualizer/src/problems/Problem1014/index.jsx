@@ -24,9 +24,9 @@ export default function BestSightseeingPair() {
         {run.input.values.map((v, i) => <div key={i} data-spot={i} style={{
           minWidth: 52, padding: '6px 4px', boxSizing: 'border-box', textAlign: 'center',
           borderWidth: i === s.j || i === s.leftIndex ? 2 : 1, borderStyle: 'solid',
-          borderColor: i === s.j ? 'var(--text)' : i === s.leftIndex ? '#2563eb' : 'var(--border)',
-          background: bestSpot(s, i) ? '#fef08a' : 'transparent', color: 'var(--text)',
-        }}><div>{v}</div><small style={{ color: 'var(--text-dim)' }}>{i}</small></div>)}
+          borderColor: i === s.j ? 'var(--text)' : i === s.leftIndex ? 'var(--primary)' : 'var(--border)',
+          background: bestSpot(s, i) ? 'var(--surface2)' : 'transparent', color: 'var(--text)',
+        }}><div>{v}</div><small style={{ color: 'var(--text-dim)' }}>{i}{i === s.j ? ' j' : ''}{i === s.leftIndex ? ' best i' : ''}</small></div>)}
       </div>
       <output aria-label="Sightseeing state">{`Left contribution ${s.left} (spot ${s.leftIndex}) · best ${s.best ?? '-'}`}</output>
     </>

@@ -1,49 +1,69 @@
 export function parseInput(text) {
   const ops = JSON.parse(text)
-  if (!Array.isArray(ops) || ops.length < 1 || ops.length > 1000) throw new Error('Enter a JSON array of 1–1,000 operations: integer strings, "+", "D" or "C".')
-  for (const op of ops) if (typeof op !== 'string' || !(/^-?\d{1,5}$/.test(op) || op === '+' || op === 'D' || op === 'C')) throw new Error(`Unknown operation ${JSON.stringify(op)}.`)
+  if (!Array.isArray(ops) || ops.length < 1 || ops.length > 1000 || ops.some(op => typeof op !== 'string')) throw new Error('Enter 1–1,000 operations as JSON strings: an integer, "C", "D" or "+".')
+  let depth = 0
+  for (const op of ops) {
+    if (op === 'C') { if (depth < 1) throw new Error('C needs a score to remove.'); depth-- }
+    else if (op === 'D' || op === '+') { if (depth < (op === '+' ? 2 : 1)) throw new Error(`${op} needs ${op === '+' ? 'two' : 'one'} previous score(s).`); depth++ }
+    else if (/^-?\d+$/.test(op) && Math.abs(Number(op)) <= 30000) depth++
+    else throw new Error(`Unknown operation: ${op}`)
+  }
   return ops
 }
 
-// A stack of scores: '+' adds the last two, 'D' doubles the last, 'C' removes the last.
+// Keep the valid scores on a stack. C removes the last score, D doubles the last score, + adds the last two.
 export function buildTrace(ops) {
   const stack = []
-  const frames = [{ phase: 'start', op: null, stack: [], activeLine: 2, message: 'Start with an empty record.' }]
+  const dropped = []
+  const frames = [{ phase: 'start', op: null, stack: [], dropped: [], result: null, activeLine: L('const stack = []'), pythonLine: P('stack = []'), message: 'The record starts empty.' }]
   for (const op of ops) {
-    if (op === '+') stack.push(stack[stack.length - 1] + stack[stack.length - 2])
-    else if (op === 'D') stack.push(stack[stack.length - 1] * 2)
-    else if (op === 'C') stack.pop()
-    else stack.push(Number(op))
-    const phase = op === '+' || op === 'D' ? 'derive' : op === 'C' ? 'undo' : 'record'
-    frames.push({ phase, op, stack: [...stack], activeLine: phase === 'derive' ? 5 : phase === 'undo' ? 7 : 3,
-      message: phase === 'record' ? `Record ${op}.` : phase === 'derive' ? `${op === '+' ? 'Sum of the last two' : 'Double the last'} score: ${stack.at(-1)}.` : `Cancel the last score (${stack.length ? 'now ' + stack.at(-1) : 'record empty'}).` })
+    if (op === 'C') {
+      dropped.push(stack.pop())
+      frames.push({ phase: 'cancel', op, stack: [...stack], dropped: [...dropped], result: null, activeLine: L("op === 'C'"), pythonLine: P("if op == 'C'"), message: `C: remove the last score, leaving ${stack.length} on the record.` })
+    } else if (op === 'D') {
+      stack.push(2 * stack[stack.length - 1])
+      frames.push({ phase: 'double', op, stack: [...stack], dropped: [...dropped], result: null, activeLine: L("op === 'D'"), pythonLine: P("elif op == 'D'"), message: `D: double the last score to ${stack[stack.length - 1]}.` })
+    } else if (op === '+') {
+      stack.push(stack[stack.length - 1] + stack[stack.length - 2])
+      frames.push({ phase: 'sum', op, stack: [...stack], dropped: [...dropped], result: null, activeLine: L("op === '+'"), pythonLine: P("elif op == '+'"), message: `+: add the last two scores to get ${stack[stack.length - 1]}.` })
+    } else {
+      stack.push(Number(op))
+      frames.push({ phase: 'score', op, stack: [...stack], dropped: [...dropped], result: null, activeLine: L('stack.push(Number(op))'), pythonLine: P('stack.append(int(op))'), message: `Record the score ${op}.` })
+    }
   }
   const result = stack.reduce((a, b) => a + b, 0)
-  frames.push({ phase: 'done', op: null, stack: [...stack], result, activeLine: 9, message: `Total of the record: ${result}.` })
+  frames.push({ phase: 'done', op: null, stack: [...stack], dropped: [...dropped], result, activeLine: L('return'), pythonLine: P('return sum'), message: `Total of the record: ${result}.` })
   return { input: ops, result, frames }
 }
 
-export const code = `create an empty stack of valid round scores
-for each operation in order
-  if the operation is a number then push it
-  otherwise if it is C then remove the last score, if D push twice the last score, if + push the sum of the last two scores
-return the sum of the scores left on the stack`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const SOURCE = `function calPoints(ops) {
+  const stack = []
+  for (const op of ops) {
+    if (op === 'C') {
+      stack.pop()
+    } else if (op === 'D') {
+      stack.push(2 * stack[stack.length - 1])
+    } else if (op === '+') {
+      stack.push(stack[stack.length - 1] + stack[stack.length - 2])
+    } else {
+      stack.push(Number(op))
+    }
+  }
+  return stack.reduce((a, b) => a + b, 0)
+}`
+export const code = SOURCE.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
-// Family line 4 applies any operation to the stack: a number pushes (line 3), a C, D or + edits the stack (line 4).
-export function familyLine(frame) {
-  if (frame.activeLine === 4) return /^Apply [-+]?\d+ /.test(frame.message) ? 3 : 4
-  return ({ 1: 1, 5: 5 })[frame.activeLine] ?? frame.activeLine
-}
-
-export const python = `def cal_points(operations):
-    scores = []
-    for op in operations:
+export const python = `def cal_points(ops):
+    stack = []
+    for op in ops:
         if op == 'C':
-            scores.pop()
+            stack.pop()
         elif op == 'D':
-            scores.append(2 * scores[-1])
+            stack.append(2 * stack[-1])
         elif op == '+':
-            scores.append(scores[-1] + scores[-2])
+            stack.append(stack[-1] + stack[-2])
         else:
-            scores.append(int(op))
-    return sum(scores)`
+            stack.append(int(op))
+    return sum(stack)`
+const P = s => python.split('\n').findIndex(t => t.includes(s)) + 1

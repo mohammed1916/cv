@@ -1,31 +1,27 @@
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
-import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace';
-import { buildTrace, parseInput, code, python, pythonLineMap, phases, examples, complexity } from './algorithm';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import RecordStateTable from '../../components/shared/RecordStateTable'
+import { code, python, pythonLineMap, parseInput, buildTrace, phases, examples } from './algorithm'
 
 const definition = {
-  parse: parseInput, build: buildTrace, code, python, pythonLineMap, phases, examples, complexity,
-  inputLabel: 'JSON with nums and p',
+  number: '1590', phases, parse: parseInput, build: buildTrace, code, python, pythonLineMap, examples,
+  inputLabel: 'Object with nums and p (JSON)',
   url: 'https://leetcode.com/problems/make-sum-divisible-by-p/',
-};
-
-function SnapshotTable({ snapshot }) {
-  return <table><caption>Algorithm state</caption><tbody>
-    {Object.entries(snapshot).map(([key, value]) => <tr key={key}><th>{key}</th><td><code>{JSON.stringify(value)}</code></td></tr>)}
-  </tbody></table>;
+  complexity: 'O(n) time with a map of prefix remainders, and O(min(n, p)) extra space.',
 }
 
-function Visualizer() {
-  return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ run, step }) => <>
-      <SnapshotTable snapshot={step.snapshot} />
-      {step.phase === 'done' && <output aria-label="Result">Result: {String(run.result)}</output>}
-    </>}
-    renderReasoning={() => <>
-      <p>The removed block must have the remainder of the whole sum. Prefix remainders convert each block check into a lookup.</p>
-      <p>Storing the latest index for each remainder gives the shortest matching block ending at the current index.</p>
-      <p>Removing the entire array is not a proper removal, so when only that works the answer is -1.</p>
-    </>} />;
+export default function SumDivisibleVisualizer() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const s = step.snapshot
+    const rows = run.input.nums.slice(0, (s.r ?? -1) + 1).map((v, i) => ({ position: i, value: v }))
+    return <>
+      <IndexedSequence label={`Array (sum mod ${s.p} must become ${0})`} length={run.input.nums.length} valueAt={i => run.input.nums[i]} active={s.r ?? -1}
+        roleAt={i => (s.l !== undefined && i === s.l ? 'l' : s.r !== undefined && i === s.r ? 'r' : (s.l !== undefined && i > s.l && i < s.r ? 'removed' : ''))} />
+      <RecordStateTable label="Positions scanned" columns={['position', 'value']} rows={rows} activeRow={s.r ?? -1} />
+      <p>Total remainder to remove: <strong>{s.total}</strong>. Shortest removal so far: <strong>{s.best === run.input.nums.length ? 'none yet' : s.best}</strong>.</p>
+    </>
+  }} renderReasoning={({ step }) => <>
+    <p><strong>Prefix remainders:</strong> a subarray removal fixes the total when its remainder equals the total remainder, so a map from earlier prefix remainders finds the shortest one.</p>
+    <p>{step.message}</p>
+  </>} />
 }
-
-export default withProblemStory(Visualizer, storyGuide);

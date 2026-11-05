@@ -1,63 +1,65 @@
-export const phases = [
-  { id: 'collect', label: 'Read x-coordinates', description: 'Only horizontal positions matter. Heights do not change the strip widths.' },
-  { id: 'sort', label: 'Sort by x', description: 'Put the x-coordinates in left-to-right order.' },
-  { id: 'gap', label: 'Compare neighbours', description: 'The strip between two neighbouring x-values holds no point inside it.' },
-  { id: 'done', label: 'Widest strip', description: 'The answer is the largest neighbouring gap.' },
+// Widest vertical area: sort the x coordinates; the widest gap between neighbours is the answer.
+const JS_LINES = [
+  { text: 'const xs = points.map(p => p[0]).sort((a, b) => a - b)', py: 'xs = sorted' },
+  { text: 'let widest = 0', py: 'widest = 0' },
+  { text: 'for (let i = 1; i < xs.length; i++) {', py: 'for i in range' },
+  { text: 'widest = Math.max(widest, xs[i] - xs[i - 1])', py: 'widest = max(' },
+  { text: '}', py: null },
+  { text: 'return widest', py: 'return widest' },
 ]
+
+export const code = JS_LINES.map(({ text }, i) => ({ line: i + 1, text }))
+
+export const python = `def maxWidthOfVerticalArea(points):
+    xs = sorted(p[0] for p in points)
+    widest = 0
+    for i in range(1, len(xs)):
+        widest = max(widest, xs[i] - xs[i - 1])
+    return widest
+`
+
+const PY = python.split('\n')
+const pyAt = needle => {
+  const index = PY.findIndex(line => line.includes(needle))
+  if (index < 0) throw new Error(`python line missing: ${needle}`)
+  return index + 1
+}
+export const pythonLineMap = Object.fromEntries(JS_LINES.map((line, i) => [i + 1, pyAt(line.py ?? 'return widest')]))
+
+export const phases = [
+  { id: 'sort', label: 'Sort', description: 'Line up the x coordinates from left to right; the y values do not matter.' },
+  { id: 'gap', label: 'Gap', description: 'The space between two neighbouring x values holds no points inside it.' },
+  { id: 'done', label: 'Result', description: 'The widest gap is the widest vertical area.' },
+]
+
+export const examples = [
+  { label: 'Four points', input: '{"points":[[2,5],[6,1],[9,3],[4,8]]}' },
+  { label: 'Shared x values', input: '{"points":[[3,1],[3,7],[10,2]]}' },
+  { label: 'Single x value', input: '{"points":[[5,5],[5,9]]}' },
+]
+
+export const complexity = 'O(n log n) time for n points, dominated by the sort of the x values. Space is O(n).'
 
 export function parseInput(text) {
-  const points = JSON.parse(text)
-  if (!Array.isArray(points) || points.length < 2 || points.length > 12) throw new Error('Enter a JSON array of 2–12 [x, y] points.')
-  return points.map((point, i) => {
-    if (!Array.isArray(point) || point.length !== 2 || !point.every(v => Number.isInteger(v) && Math.abs(v) <= 1e9)) {
-      throw new Error(`Point ${i + 1} must be [x, y] with integers between −1e9 and 1e9.`)
-    }
-    return { x: point[0], y: point[1] }
-  })
-}
-
-export function buildTrace(points) {
-  const xs = points.map(p => p.x)
-  const frames = []
-  frames.push({
-    phase: 'collect', activeLine: 1,
-    message: `Read ${xs.length} x-coordinates: ${xs.join(', ')}. The y-values are ignored.`,
-    snapshot: { xs: [...xs], sorted: [], gaps: [], best: 0, current: null },
-  })
-  const sorted = [...xs].sort((a, b) => a - b)
-  frames.push({
-    phase: 'sort', activeLine: 2,
-    message: `Sorted left to right: ${sorted.join(', ')}.`,
-    snapshot: { xs: [...xs], sorted: [...sorted], gaps: [], best: 0, current: null },
-  })
-  const gaps = []
-  let best = 0
-  for (let i = 1; i < sorted.length; i++) {
-    const gap = sorted[i] - sorted[i - 1]
-    gaps.push(gap)
-    best = Math.max(best, gap)
-    frames.push({
-      phase: 'gap', activeLine: 5,
-      message: `From ${sorted[i - 1]} to ${sorted[i]} is a strip of width ${gap}. ${gap === best ? 'It is the widest strip so far.' : `The widest so far is still ${best}.`}`,
-      snapshot: { xs: [...xs], sorted: [...sorted], gaps: [...gaps], best, current: i - 1 },
-    })
+  const input = JSON.parse(text)
+  if (!input || !Array.isArray(input.points) || input.points.length < 2 || input.points.length > 40) throw new Error('points is a list of 2 to 40 [x, y] pairs.')
+  for (const p of input.points) {
+    if (!Array.isArray(p) || p.length !== 2 || !p.every(v => Number.isInteger(v) && Math.abs(v) <= 1000000000)) throw new Error('Each point is an [x, y] pair of integers.')
   }
-  frames.push({
-    phase: 'done', activeLine: 6,
-    message: `Return ${best}: the widest vertical strip with no point strictly inside it.`,
-    snapshot: { xs: [...xs], sorted: [...sorted], gaps: [...gaps], best, current: null },
-  })
-  return { input: points, result: best, frames }
+  return { points: input.points }
 }
 
-const LINES = [
-  'def widest_strip(points):',
-  '    xs = sorted(p[0] for p in points)',
-  '    best = 0',
-  '    for i in range(1, len(xs)):',
-  '        best = max(best, xs[i] - xs[i - 1])',
-  '    return best',
-]
-export const code = LINES.map((text, index) => ({ line: index + 1, text }))
-export const python = LINES.join('\n')
-export const pythonLineMap = Object.fromEntries(LINES.map((_, i) => [i + 1, i + 1]))
+export function buildTrace({ points }) {
+  const frames = []
+  const xs = points.map(p => p[0]).sort((a, b) => a - b)
+  const snap = extra => ({ xs: [...xs], ...extra })
+  frames.push({ phase: 'sort', activeLine: 1, index: -1, message: `Sorted x values: [${xs.join(', ')}].`, snapshot: snap({}) })
+  let widest = 0
+  for (let i = 1; i < xs.length; i++) {
+    const gap = xs[i] - xs[i - 1]
+    widest = Math.max(widest, gap)
+    frames.push({ phase: 'gap', activeLine: 4, index: i, gap, message: `Gap from ${xs[i - 1]} to ${xs[i]} is ${gap}; widest so far ${widest}.`, snapshot: snap({ widest }) })
+  }
+  frames.push({ phase: 'done', activeLine: 6, index: -1, result: widest, message: `Widest vertical area is ${widest}.`, snapshot: snap({ widest, result: widest }) })
+  return { input: { points }, xs, result: widest, frames }
+}

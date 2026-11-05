@@ -5,8 +5,8 @@ import { buildTrace, parseInput } from './algorithm.js'
 const solve = (nums, queries) => buildTrace({ nums, queries }).result
 
 test('2343 worked examples', () => {
-  assert.deepEqual(solve(['102', '473', '251', '814'], [[1, 1], [2, 3], [4, 2], [1, 2]]), [2, 2, 1, 0])
-  assert.deepEqual(solve(['24', '37', '96', '04'], [[2, 1], [2, 2]]), [3, 0])
+  assert.deepEqual(solve(['12', '95', '37', '60'], [[1, 1], [2, 2], [4, 1]]), [3, 2, 2])
+  assert.deepEqual(solve(['20', '11', '30'], [[2, 1], [1, 2]]), [2, 1])
 })
 
 test('2343 ties break by original index', () => {

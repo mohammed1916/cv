@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/make-three-strings-equal/',
   complexity: 'O(min length) time and O(1) extra space. The visualization caps each string at 20 letters.',
   examples: [
-    { label: 'Example 1', input: '{"s1":"abc","s2":"abb","s3":"ab"}' },
-    { label: 'Example 2', input: '{"s1":"dac","s2":"bac","s3":"cac"}' },
+    { label: 'Shared start', input: '{"s1":"xyzab","s2":"xyzq","s3":"xyz"}' },
+    { label: 'No shared start', input: '{"s1":"ab","s2":"cd","s3":"ef"}' },
   ],
 }
 

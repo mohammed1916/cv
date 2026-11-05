@@ -12,12 +12,12 @@ const definition = {
     { id: 'done', label: 'Result', description: 'Return the floored average.' },
   ],
   parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'JSON {"nums": [1,3,6,10,12,15]}',
+  inputLabel: 'JSON {"nums": [2,6,9,12,18]}',
   url: 'https://leetcode.com/problems/average-value-of-even-numbers-that-are-divisible-by-three/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps nums at 50 values.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,3,6,10,12,15]}' },
-    { label: 'No match', input: '{"nums":[1,2,4,7,11]}' },
+    { label: 'Example 1', input: '{"nums":[2,6,9,12,18]}' },
+    { label: 'No match', input: '{"nums":[1,5,7]}' },
   ],
 }
 

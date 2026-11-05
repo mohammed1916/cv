@@ -1,10 +1,35 @@
-import authoredExamples0 from '../../config/examples/collection--2444.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/windowBoundsBatch.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '2444',
+  phases: [
+    { id: 'count', label: 'Count', description: 'Add the subarrays that end here and hold both bounds.' },
+    { id: 'skip', label: 'Skip', description: 'Nothing ends here that holds both bounds yet.' },
+    { id: 'done', label: 'Result', description: 'Return the total.' },
+  ],
+  parse: parseInput, build: buildTrace, code, python,
+  inputLabel: 'JSON {"nums": [1, 3, 5, 2, 7, 5], "minK": 1, "maxK": 5}',
+  url: 'https://leetcode.com/problems/count-subarrays-with-fixed-bounds/',
+  complexity: 'O(n) time and O(1) extra space. Three last-seen positions are enough.',
+  examples: [
+    { label: 'Example', input: '{"nums":[1,3,5,2,7,5],"minK":1,"maxK":5}' },
+    { label: 'Repeats', input: '{"nums":[2,2,2],"minK":2,"maxK":2}' },
+  ],
+}
 
-const definition = { ...definitions[2444], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function FixedBounds() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const nums = run.input.nums
+    return <>
+      <IndexedSequence label="nums" length={nums.length} valueAt={i => nums[i]} active={step.r}
+        roleAt={i => (i === step.lastMin ? 'min' : i === step.lastMax ? 'max' : step.l >= 0 && i === step.l ? 'l' : i === step.r ? 'r' : step.l >= 0 && i >= step.l && i <= step.r ? 'window' : '')} />
+      <output aria-label="Count">{`count ${step.count}`}</output>
+      <p role="status">{step.message}</p>
+    </>
+  }} renderReasoning={() => <>
+    <p>A subarray ending at r works when it contains minK, contains maxK, and has no value outside the range. Track the last position of each: the last out-of-range value (lastBad), the last minK, and the last maxK.</p>
+    <p>The subarrays ending at r that start after lastBad and include both bounds number min(lastMin, lastMax) - lastBad.</p>
+  </>} />
+}

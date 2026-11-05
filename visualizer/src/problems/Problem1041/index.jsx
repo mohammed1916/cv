@@ -13,7 +13,7 @@ const definition = {
   examples: [
     { label: 'Turns back', input: 'GRGRG' },
     { label: 'Drifts', input: 'RGL' },
-    { label: 'Straight', input: 'GG' },
+    { label: 'Wide loop', input: 'GGRGG' },
   ],
 }
 
@@ -33,9 +33,9 @@ function Path({ run, step }) {
   const height = (maxY - minY) * s + pad * 2
   const points = step.snapshot.path.map(([x, y]) => `${toX(x)},${toY(y)}`).join(' ')
   return <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label="Robot path" style={{ width, maxWidth: '100%' }}>
-    <polyline points={points} fill="none" stroke="#0891b2" strokeWidth="2" />
-    <circle cx={toX(0)} cy={toY(0)} r="4" fill="#facc15" />
-    <circle cx={toX(step.snapshot.x)} cy={toY(step.snapshot.y)} r="5" fill="#0d9488" />
+    <polyline points={points} fill="none" stroke="var(--primary)" strokeWidth="2" />
+    <circle cx={toX(0)} cy={toY(0)} r="4" fill="var(--surface2)" stroke="var(--text)" />
+    <circle cx={toX(step.snapshot.x)} cy={toY(step.snapshot.y)} r="5" fill="var(--text)" />
   </svg>
 }
 

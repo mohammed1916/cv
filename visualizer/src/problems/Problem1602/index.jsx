@@ -1,30 +1,28 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import LevelStripView from './LevelStripView'
-import { buildTrace, parseInput, code, python, phases } from './algorithm.js'
+import View from './View'
+import { buildTrace, parseInput, code, python, pythonLineMap, phases, examples, complexity } from './algorithm.js'
 
 const definition = {
   number: '1602',
-  phases,
   parse: parseInput,
   build: buildTrace,
   code,
   python,
-  inputLabel: 'Object with tree (LeetCode level-order array, null for missing children) and u (the array position of the node)',
-  url: 'https://leetcode.com/problems/find-nearest-right-node-in-binary-tree/description/',
-  complexity: 'O(n) time and O(w) space for n nodes and the widest level w. The visualization caps the tree at 15 positions with values from 0 to 9; the draft does not verify the official bounds. The node is named by its array position.',
-  examples: [
-    { label: 'Right neighbour', input: '{"tree":[1,2,3,null,4,5,6],"u":4}' },
-    { label: 'Rightmost on level', input: '{"tree":[1,2,3,null,4,5,6],"u":2}' },
-    { label: 'Root', input: '{"tree":[7],"u":0}' },
-  ],
+  pythonLineMap,
+  phases,
+  examples,
+  complexity,
+  inputLabel: 'Object with tree (level-order array, null for missing children) and u (a value in the tree)',
+  url: 'https://leetcode.com/problems/find-nearest-right-node-in-binary-tree/',
 }
 
 export default function Problem1602Visualizer() {
-  return (
-    <AlgorithmWorkspace
-      definition={definition}
-      renderVisual={({ run, step }) => <LevelStripView run={run} step={step} />}
-      renderReasoning={({ step }) => <p>{step.message}</p>}
-    />
-  )
+  return <AlgorithmWorkspace
+    definition={definition}
+    renderVisual={({ run, step }) => <View run={run} step={step} />}
+    renderReasoning={() => <>
+      <p>Level order lists each level from left to right, so the node after u in its level is the one to its right.</p>
+      <p>Once u is found, the search ends: the answer is the next entry of that level, or null for the rightmost node.</p>
+    </>}
+  />
 }

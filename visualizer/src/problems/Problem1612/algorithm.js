@@ -1,20 +1,26 @@
-const CODE_LINES = [
-  'counts1 and counts2 are empty maps from letter to count',
-  'define collect(node, counts)',
-  'if node is a letter then add 1 to counts[letter] and stop',
-  'for each child c of node: collect(c, counts)',
-  'collect(root1, counts1) and collect(root2, counts2)',
-  'return counts1 equals counts2',
+// Two expression trees with only '+' are equivalent when their leaf letters occur equally often.
+const JS_LINES = [
+  { text: 'const counts = new Map()', py: 'counts = {}' },
+  { text: 'for (const leaf of leaves(root1)) {', py: 'for leaf in leaf_letters(root1)' },
+  { text: 'counts.set(leaf, (counts.get(leaf) ?? 0) + 1)', py: 'counts[leaf] = counts.get(leaf, 0) + 1' },
+  { text: '}', py: null },
+  { text: 'for (const leaf of leaves(root2)) {', py: 'for leaf in leaf_letters(root2)' },
+  { text: 'counts.set(leaf, (counts.get(leaf) ?? 0) - 1)', py: 'counts[leaf] = counts.get(leaf, 0) - 1' },
+  { text: '}', py: null },
+  { text: 'return [...counts.values()].every(v => v === 0)', py: 'return all(' },
 ]
 
-export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }))
-const L = text => {
-  const index = CODE_LINES.findIndex(line => line.includes(text))
-  if (index < 0) throw new Error(`pseudocode line missing: ${text}`)
-  return index + 1
-}
+export const code = JS_LINES.map(({ text }, i) => ({ line: i + 1, text }))
 
-export const python = `def build_kids(tree):
+export const python = `def checkEquivalence(root1, root2):
+    counts = {}
+    for leaf in leaf_letters(root1):
+        counts[leaf] = counts.get(leaf, 0) + 1
+    for leaf in leaf_letters(root2):
+        counts[leaf] = counts.get(leaf, 0) - 1
+    return all(v == 0 for v in counts.values())
+
+def children(tree):
     kids = {}
     order = [0]
     nxt = 1
@@ -28,52 +34,41 @@ export const python = `def build_kids(tree):
                 nxt += 1
     return kids
 
-
-def expression_equivalent(t1, t2):
-    def collect(tree, kids, i, counts):
-        if tree[i] != "+":
-            counts[tree[i]] = counts.get(tree[i], 0) + 1
-            return
-        for c in kids[i]:
-            collect(tree, kids, c, counts)
-
-    counts1, counts2 = {}, {}
-    collect(t1, build_kids(t1), 0, counts1)
-    collect(t2, build_kids(t2), 0, counts2)
-    return counts1 == counts2
+def leaf_letters(tree):
+    kids = children(tree)
+    out = []
+    stack = [0]
+    while stack:
+        p = stack.pop()
+        if not kids[p]:
+            out.append(tree[p])
+        else:
+            stack.extend(reversed(kids[p]))
+    return out
 `
-const PY_LINES = python.split('\n')
-const P = text => {
-  const index = PY_LINES.findIndex(line => line.includes(text))
-  if (index < 0) throw new Error(`python line missing: ${text}`)
+
+const PY = python.split('\n')
+const pyAt = needle => {
+  const index = PY.findIndex(line => line.includes(needle))
+  if (index < 0) throw new Error(`python line missing: ${needle}`)
   return index + 1
 }
+export const pythonLineMap = Object.fromEntries(JS_LINES.map((line, i) => [i + 1, pyAt(line.py ?? 'return all(')]))
 
 export const phases = [
-  { id: 'start', label: 'Empty tallies', description: 'Start a letter tally for each tree.' },
-  { id: 'visit', label: 'Visit', description: 'Walk into this node.' },
-  { id: 'leaf', label: 'Variable', description: 'A letter adds one occurrence to its tally.' },
-  { id: 'sum', label: 'Plus', description: 'A plus node adds its two subtrees together.' },
-  { id: 'done', label: 'Compare', description: 'Equal tallies mean equal expressions.' },
+  { id: 'start', label: 'Start', description: 'Begin with an empty tally of leaf letters.' },
+  { id: 'tree1', label: 'Tree 1', description: 'Each leaf of the first tree adds one to its letter.' },
+  { id: 'tree2', label: 'Tree 2', description: 'Each leaf of the second tree takes one away from its letter.' },
+  { id: 'done', label: 'Result', description: 'Equivalent exactly when every letter nets to zero.' },
 ]
 
-// LeetCode level-order arrays. "+" nodes have two children; letter nodes are leaves.
-export function parseInput(text) {
-  const input = JSON.parse(text)
-  if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Use an object with t1 and t2 level-order arrays.')
-  const { t1, t2 } = input
-  for (const tree of [t1, t2]) {
-    if (!Array.isArray(tree) || tree.length < 1 || tree.length > 15) throw new Error('Each tree is a level-order array of 1 to 15 entries (visualization cap).')
-    if (!tree.every(value => value === null || value === '+' || (typeof value === 'string' && /^[a-z]$/.test(value)))) throw new Error('Entries are "+", a single lowercase letter, or null.')
-    if (tree[0] === null) throw new Error('Each tree needs a root.')
-    const kids = buildKids(tree)
-    for (const i of Object.keys(kids)) {
-      if (tree[i] === '+' && kids[i].length !== 2) throw new Error('A "+" node needs two children.')
-      if (tree[i] !== '+' && kids[i].length !== 0) throw new Error('A letter is a leaf and has no children.')
-    }
-  }
-  return { t1, t2 }
-}
+export const examples = [
+  { label: 'Reordered sum', input: '{"root1":["+","x","+",null,null,"y","z"],"root2":["+","+","z","y","x"]}' },
+  { label: 'Different letter', input: '{"root1":["+","x","+",null,null,"y","z"],"root2":["+","+","z","y","y"]}' },
+  { label: 'Single letters', input: '{"root1":["x"],"root2":["x"]}' },
+]
+
+export const complexity = 'O(n) time and O(n) space for two trees with n nodes in total. The visual caps each tree at 15 positions.'
 
 export function buildKids(tree) {
   const kids = {}
@@ -96,33 +91,58 @@ export function buildKids(tree) {
   return kids
 }
 
-export function buildTrace({ t1, t2 }) {
-  const frames = []
-  const counts = [new Map(), new Map()]
-  const trees = [t1, t2]
-  const kidsOf = trees.map(buildKids)
-  const frame = (phase, activeLine, pythonLine, tree, node, message) => frames.push({
-    phase, activeLine, pythonLine, tree, node, message,
-    counts: counts.map(m => new Map(m)), t1, t2, kids: kidsOf,
+function checkTree(tree, name) {
+  if (!Array.isArray(tree) || tree.length < 1 || tree.length > 15 || tree[0] === null) throw new Error(`${name} is a level-order array of 1 to 15 entries starting with a node.`)
+  const kids = buildKids(tree)
+  tree.forEach((value, p) => {
+    if (value === null) return
+    if (value === '+' && kids[p].length !== 2) throw new Error(`${name}: a "+" node needs two children.`)
+    if (value !== '+' && !/^[a-z]$/.test(value)) throw new Error(`${name}: nodes are "+" or a lowercase letter.`)
+    if (value !== '+' && kids[p].length !== 0) throw new Error(`${name}: a letter is a leaf.`)
   })
-  frame('start', L('counts1 and counts2 are empty'), P('counts1, counts2 = {}, {}'), -1, -1, 'Both tallies start empty.')
-  const collect = (which, i) => {
-    const tree = trees[which]
-    if (tree[i] !== '+') {
-      counts[which].set(tree[i], (counts[which].get(tree[i]) || 0) + 1)
-      frame('leaf', L('if node is a letter'), P('counts[tree[i]] = counts.get'), which, i, `Letter ${tree[i]} adds one to tree ${which + 1}.`)
-      return
-    }
-    frame('visit', L('for each child c of node'), P('for c in kids[i]'), which, i, `Plus node ${i} in tree ${which + 1}: visit both sides.`)
-    for (const c of kidsOf[which][i]) collect(which, c)
-    frame('sum', L('for each child c of node'), P('for c in kids[i]'), which, i, `Plus node ${i} is done; its letters are added together.`)
+  return kids
+}
+
+export function parseInput(text) {
+  const input = JSON.parse(text)
+  if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Use an object with root1 and root2.')
+  checkTree(input.root1, 'root1')
+  checkTree(input.root2, 'root2')
+  return { root1: input.root1, root2: input.root2 }
+}
+
+function leafOrder(tree) {
+  const kids = buildKids(tree)
+  const out = []
+  const stack = [0]
+  while (stack.length) {
+    const p = stack.pop()
+    if (!kids[p].length) out.push(p)
+    else stack.push(...[...kids[p]].reverse())
   }
-  collect(0, 0)
-  collect(1, 0)
-  frame('start', L('collect(root1, counts1)'), P('collect(t1, build_kids(t1)'), -1, -1, 'Both trees are tallied.')
-  const letters = [...new Set([...counts[0].keys(), ...counts[1].keys()])].sort()
-  const same = letters.length === counts[0].size && letters.every(l => counts[0].get(l) === counts[1].get(l))
-  frame('done', L('return counts1 equals counts2'), P('return counts1 == counts2'), -1, -1,
-    same ? 'The tallies match: the two expressions are equivalent.' : 'The tallies differ: the expressions are not equivalent.')
-  return { input: { t1, t2 }, result: same, frames, letters }
+  return out
+}
+
+export function buildTrace({ root1, root2 }) {
+  const frames = []
+  const counts = {}
+  const snap = extra => ({ counts: { ...counts }, ...extra })
+  const tally = letter => Object.entries(counts).map(([k, v]) => `${k}:${v}`).join(' ')
+  frames.push({ phase: 'start', activeLine: 1, tree: 0, message: 'The tally starts empty.', snapshot: snap({}) })
+  let order = leafOrder(root1)
+  for (const p of order) {
+    const letter = root1[p]
+    counts[letter] = (counts[letter] ?? 0) + 1
+    frames.push({ phase: 'tree1', activeLine: 3, tree: 1, position: p, message: `Leaf ${letter} in tree 1 adds one.`, snapshot: snap({ tally: tally() }) })
+  }
+  order = leafOrder(root2)
+  for (const p of order) {
+    const letter = root2[p]
+    counts[letter] = (counts[letter] ?? 0) - 1
+    frames.push({ phase: 'tree2', activeLine: 6, tree: 2, position: p, message: `Leaf ${letter} in tree 2 takes one away.`, snapshot: snap({ tally: tally() }) })
+  }
+  const equivalent = Object.values(counts).every(v => v === 0)
+  const nets = Object.entries(counts).filter(([, v]) => v !== 0).map(([k]) => k)
+  frames.push({ phase: 'done', activeLine: 8, tree: 0, result: equivalent, message: equivalent ? 'Every letter nets to zero: equivalent.' : `Letters ${nets.join(', ')} do not balance: not equivalent.`, snapshot: snap({ result: equivalent }) })
+  return { input: { root1, root2 }, result: equivalent, counts: { ...counts }, frames }
 }

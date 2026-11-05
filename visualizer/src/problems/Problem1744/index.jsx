@@ -1,10 +1,28 @@
-import authoredExamples0 from '../../config/examples/collection--1744.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import View from './View'
+import { buildTrace, parseInput, code, python, pythonLineMap, phases, examples, complexity } from './algorithm.js'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/advance.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '1744',
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  pythonLineMap,
+  phases,
+  examples,
+  complexity,
+  inputLabel: 'Object with candies (count per type) and queries ([type, day, cap] triples)',
+  url: 'https://leetcode.com/problems/can-you-eat-your-favorite-candy-on-your-favorite-day/',
+}
 
-const definition = { ...definitions[1744], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem1744Visualizer() {
+  return <AlgorithmWorkspace
+    definition={definition}
+    renderVisual={({ run, step }) => <View run={run} step={step} />}
+    renderReasoning={() => <>
+      <p>Candies are eaten in the order of their types. Your favourite type occupies a fixed range of candy numbers.</p>
+      <p>By day d you have eaten between d+1 and (d+1)×cap candies. The two ranges must overlap, which gives two simple checks.</p>
+    </>}
+  />
+}

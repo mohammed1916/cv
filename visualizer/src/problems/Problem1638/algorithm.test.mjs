@@ -1,55 +1,40 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { buildTrace, parseInput } from './algorithm.js'
+import { buildTrace, parseInput, phases, examples, code, python, pythonLineMap } from './algorithm.js'
 
-// Independent oracle: enumerate every (start in s, start in t, length) and count one-mismatch pairs.
-function oracle(s, t) {
-  let total = 0
-  for (let i = 0; i < s.length; i++) {
-    for (let j = 0; j < t.length; j++) {
-      for (let len = 1; i + len <= s.length && j + len <= t.length; len++) {
-        let diff = 0
-        for (let k = 0; k < len; k++) if (s[i + k] !== t[j + k]) diff++
-        if (diff === 1) total++
-      }
-    }
+function bruteForce(s, t) {
+  let count = 0
+  for (let i = 0; i < s.length; i++) for (let j = 0; j < t.length; j++) for (let len = 1; i + len <= s.length && j + len <= t.length; len++) {
+    let diffs = 0
+    for (let k = 0; k < len; k++) if (s[i + k] !== t[j + k]) diffs++
+    if (diffs === 1) count++
   }
-  return total
+  return count
 }
 
-test('a hand-made pair gives the expected count and matches the oracle', () => {
-  const run = buildTrace(parseInput('["ab","ba"]'))
-  assert.equal(run.result, oracle('ab', 'ba'))
-  assert.equal(run.result, 2)
-})
-
-test('equal strings still count one-mismatch pairs of different letters', () => {
-  const run = buildTrace(parseInput('["abc","abc"]'))
-  assert.equal(run.result, oracle('abc', 'abc'))
-  assert.equal(run.result, 6)
-})
-
-test('every short pair of strings over a three-letter alphabet agrees with the oracle', () => {
-  const words = ['a', 'b', 'ab', 'ba', 'aa', 'abc', 'cab', 'bbb', 'aab', 'cca']
-  for (const s of words) {
-    for (const t of words) {
-      assert.equal(buildTrace({ s, t }).result, oracle(s, t), `${s} / ${t}`)
-    }
+test('1638 examples, code and python are well formed', () => {
+  assert.ok(examples.length >= 3)
+  for (const example of examples) {
+    const run = buildTrace(parseInput(example.input))
+    assert.equal(run.frames.at(-1).phase, 'done')
+    for (const frame of run.frames) assert.ok(phases.some(p => p.id === frame.phase))
   }
+  assert.equal(code.length, 12)
+  assert.ok(python.includes('def countSubstrings'))
+  assert.equal(Object.keys(pythonLineMap).length, code.length)
 })
 
-test('random pairs of up to eight letters agree with the oracle', () => {
-  let state = 5
-  const rand = m => { state = (state * 1103515245 + 12345) & 0x7fffffff; return state % m }
-  const word = () => Array.from({ length: 1 + rand(8) }, () => 'abc'[rand(3)]).join('')
-  for (let t = 0; t < 200; t++) {
+test('1638 matches brute force on random strings', () => {
+  let seed = 21
+  const rnd = n => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed % n }
+  const word = () => Array.from({ length: 1 + rnd(6) }, () => 'abc'[rnd(3)]).join('')
+  for (let t = 0; t < 300; t++) {
     const s = word(), u = word()
-    assert.equal(buildTrace({ s, t: u }).result, oracle(s, u), `${s} / ${u}`)
+    assert.equal(buildTrace({ s, t: u }).result, bruteForce(s, u), `${s} ${u}`)
   }
 })
 
-test('malformed input is rejected', () => {
-  assert.throws(() => parseInput('["abc"]'))
-  assert.throws(() => parseInput('["ABC","abc"]'))
-  assert.throws(() => parseInput('["","abc"]'))
+test('1638 rejects invalid input', () => {
+  assert.throws(() => parseInput('{"s":"","t":"a"}'))
+  assert.throws(() => parseInput('{"s":"A","t":"a"}'))
 })

@@ -1,10 +1,28 @@
-import authoredExamples0 from '../../config/examples/collection--1734.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import View from './View'
+import { buildTrace, parseInput, code, python, pythonLineMap, phases, examples, complexity } from './algorithm.js'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/advance.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '1734',
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  pythonLineMap,
+  phases,
+  examples,
+  complexity,
+  inputLabel: 'JSON array of encoded values (even length, so the permutation length is odd)',
+  url: 'https://leetcode.com/problems/decode-xored-permutation/',
+}
 
-const definition = { ...definitions[1734], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem1734Visualizer() {
+  return <AlgorithmWorkspace
+    definition={definition}
+    renderVisual={({ run, step }) => <View run={run} step={step} />}
+    renderReasoning={() => <>
+      <p>XOR of a whole permutation of 1 to n is fixed. Pairing neighbours cancels every value except the first and last.</p>
+      <p>Taking the odd-positioned encoded values gives everything except perm[0], so perm[0] follows from the total.</p>
+    </>}
+  />
+}

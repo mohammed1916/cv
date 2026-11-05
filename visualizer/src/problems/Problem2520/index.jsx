@@ -14,13 +14,13 @@ const definition = {
   build: buildTrace,
   code,
   python,
-  inputLabel: 'Number object (JSON, e.g. {"num": 121})',
+  inputLabel: 'Number object (JSON, e.g. {"num": 363})',
   url: 'https://leetcode.com/problems/count-the-digits-that-divide-a-number/',
   complexity: 'O(log num) time and O(1) space. The visualization accepts num up to 10^9 without zero digits.',
   examples: [
     { label: 'Single digit', input: '{"num": 7}' },
-    { label: 'Repeated digit', input: '{"num": 121}' },
-    { label: 'All digits divide', input: '{"num": 1248}' },
+    { label: 'Repeated digit', input: '{"num": 363}' },
+    { label: 'All digits divide', input: '{"num": 1224}' },
   ],
 }
 

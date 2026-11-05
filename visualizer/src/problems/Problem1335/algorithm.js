@@ -1,93 +1,87 @@
 export const phases = [
-  { id: 'start', label: 'Start', description: 'Set up the table: zero jobs cost nothing, and every other prefix is not yet reachable.' },
-  { id: 'split', label: 'Day block', description: 'Begin one more day. Every prefix that uses this day must end with a block that starts on or after the previous day boundary.' },
-  { id: 'update', label: 'Best last block', description: 'For a prefix length, try every start of the last block and keep the cheapest total.' },
-  { id: 'done', label: 'Complete', description: 'Return the cost for all jobs, or -1 when there are fewer jobs than days.' },
+  { id: 'start', label: 'Start', description: 'Row 0 of the table says zero jobs are done before any day starts. Every other cell is unreachable for now.' },
+  { id: 'day', label: 'Next day', description: 'Each row adds one more working day; the day must finish at least one job.' },
+  { id: 'cell', label: 'Fill cell', description: 'dp[day][i] tries every split point j: the earlier days finish jobs 0 to j-1, and day finishes jobs j to i-1 at the hardest job in that block.' },
+  { id: 'done', label: 'Complete', description: 'The last cell is the minimum total difficulty.' },
+]
+
+export const examples = [
+  { label: 'Three days, six jobs', input: '{"jobDifficulty":[6,5,4,3,2,1],"d":3}' },
+  { label: 'Equal days', input: '{"jobDifficulty":[9,9,9],"d":3}' },
+  { label: 'One day', input: '{"jobDifficulty":[1,2,3],"d":1}' },
 ]
 
 export function parseInput(text) {
-  const input = JSON.parse(text)
-  if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Use an object such as {"jobDifficulty": [6, 5, 4], "d": 2}.')
-  const { jobDifficulty, d } = input
-  if (!Array.isArray(jobDifficulty) || jobDifficulty.length < 1 || jobDifficulty.length > 12 || !jobDifficulty.every(v => Number.isInteger(v) && v >= 0 && v <= 100)) throw new Error('jobDifficulty is a list of 1 to 12 integers from 0 to 100.')
-  if (!Number.isInteger(d) || d < 1 || d > 10) throw new Error('d is an integer from 1 to 10.')
-  return { jobDifficulty, d }
+  const data = JSON.parse(text)
+  if (!data || typeof data !== 'object' || Array.isArray(data)) throw new Error('Use an object with jobDifficulty and d, such as {"jobDifficulty":[6,5,4],"d":2}.')
+  if (!Array.isArray(data.jobDifficulty) || data.jobDifficulty.length < 1 || data.jobDifficulty.length > 12) throw new Error('jobDifficulty must list 1 to 12 jobs in this visualization.')
+  if (!data.jobDifficulty.every(v => Number.isInteger(v) && v >= 0 && v <= 1000)) throw new Error('Every job difficulty is an integer from 0 to 1000.')
+  if (!Number.isInteger(data.d) || data.d < 1 || data.d > 6) throw new Error('d is an integer from 1 to 6 in this visualization.')
+  return { jobDifficulty: data.jobDifficulty, d: data.d }
 }
-
-const INF = Infinity
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
-const at = s => ({ activeLine: L(s), pythonLine: P(s) })
 
 export function buildTrace({ jobDifficulty, d }) {
   const n = jobDifficulty.length
-  const cell = v => (v === INF ? null : v)
-  const snap = (day, previous, current, extra = {}) => ({
-    jobs: jobDifficulty, day, previous: previous.map(cell), current: current ? current.map(cell) : null, ...extra,
-  })
-  const frames = []
-
-  if (d > n) {
-    frames.push({ phase: 'start', ...at('if d > n'), message: `There are ${n} jobs for ${d} days. Every day needs at least one job, so no schedule exists.`, snapshot: snap(0, [0, ...Array(n).fill(INF)], null) })
-    frames.push({ phase: 'done', ...at('return previous[n]'), message: 'Return -1.', snapshot: snap(0, [0, ...Array(n).fill(INF)], null, { result: -1 }) })
-    return { input: { jobDifficulty, d }, result: -1, frames }
+  if (n < d) {
+    return { input: { jobDifficulty, d }, result: -1, frames: [{ phase: 'start', activeLine: L('if (n < d)'), pythonLine: P('if n < d'), snapshot: { table: [], day: 0 },
+      message: `There are ${n} jobs for ${d} days, so each day cannot get a job. Return -1.` }, { phase: 'done', activeLine: L('return -1'), pythonLine: P('return -1'), snapshot: { table: [], day: 0 }, message: 'Return -1.', result: -1 }] }
   }
-
-  let previous = [0, ...Array(n).fill(INF)]
-  frames.push({ phase: 'start', ...at('previous = ['), message: `Zero jobs cost 0. Build ${d} day block(s) on top of this table, one day at a time.`, snapshot: snap(0, previous, null) })
-
+  const INF = Infinity
+  const table = Array.from({ length: d + 1 }, () => Array(n + 1).fill(INF))
+  table[0][0] = 0
+  const show = () => table.map(row => row.map(v => (v === INF ? '∞' : v)))
+  const snap = (day, cell) => ({ table: show(), day, cell })
+  const frames = [{ phase: 'start', activeLine: L('const table = '), pythonLine: P('table = '), snapshot: snap(0, { row: 0, column: 0 }),
+    message: `Row 0, column 0 is 0: no jobs, no days. Fill ${d} rows for ${n} jobs.` }]
   for (let day = 1; day <= d; day++) {
-    const current = Array(n + 1).fill(INF)
-    frames.push({ phase: 'split', ...at('for day'), message: `Day ${day}: every prefix of jobs assigned to this day ends in a block. A prefix of length end needs at least ${day} job(s).`, snapshot: snap(day, previous, current) })
-    for (let end = day; end <= n; end++) {
+    frames.push({ phase: 'day', activeLine: L('for (let day = 1'), pythonLine: P('for day in range'), snapshot: snap(day, null),
+      message: `Day ${day}: each cell needs at least ${day} job(s) in total.` })
+    for (let i = day; i <= n; i++) {
       let hardest = 0
-      let bestStart = -1
-      let bestHardest = 0
-      for (let start = end - 1; start >= day - 1; start--) {
-        hardest = Math.max(hardest, jobDifficulty[start])
-        const candidate = previous[start] + hardest
-        if (candidate < current[end]) { current[end] = candidate; bestStart = start; bestHardest = hardest }
+      for (let j = i - 1; j >= day - 1; j--) {
+        hardest = Math.max(hardest, jobDifficulty[j])
+        table[day][i] = Math.min(table[day][i], table[day - 1][j] + hardest)
       }
-      frames.push({
-        phase: 'update', ...at('current[end] = min'),
-        message: `First ${end} job(s) with ${day} day(s): the last block starts at job ${bestStart + 1}. Its maximum is ${bestHardest}, so the cost is ${previous[bestStart]} + ${bestHardest} = ${current[end]}.`,
-        snapshot: snap(day, previous, current, { end, start: bestStart }),
-      })
+      frames.push({ phase: 'cell', activeLine: L('table[day][i] = Math.min'), pythonLine: P('cur[i] = min'), snapshot: snap(day, { row: day, column: i }),
+        message: `dp[${day}][${i}] = ${table[day][i] === INF ? 'unreachable' : table[day][i]}: the best split of the first ${i} jobs into ${day} day(s).` })
     }
-    previous = current
   }
-
-  const result = previous[n] === INF ? -1 : previous[n]
-  frames.push({ phase: 'done', ...at('return previous[n]'), message: `All ${n} jobs over ${d} day(s) cost ${result}.`, snapshot: snap(d, previous, null, { result }) })
+  const result = table[d][n]
+  frames.push({ phase: 'done', activeLine: L('return table[d][n]'), pythonLine: P('return prev[n]'), snapshot: snap(d, { row: d, column: n }),
+    message: `Return ${result}, the minimum total difficulty.`, result })
   return { input: { jobDifficulty, d }, result, frames }
 }
 
-export const code = `minimum difficulty (job_difficulty, d):
-  n = number of jobs
-  if d > n: return -1
-  previous = [0, inf, inf, ...]          // zero jobs cost 0
-  for day from 1 to d:
-    current = all inf
-    for end from day to n:
-      hardest = 0
-      for start from end - 1 down to day - 1:
-        hardest = max(hardest, job_difficulty[start])
-        current[end] = min(current[end], previous[start] + hardest)
-    previous = current
-  return previous[n] or -1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minDifficulty(jobDifficulty, d) {
+  const n = jobDifficulty.length
+  if (n < d) return -1
+  const table = Array.from({ length: d + 1 }, () => Array(n + 1).fill(Infinity))
+  table[0][0] = 0
+  for (let day = 1; day <= d; day++) {
+    for (let i = day; i <= n; i++) {
+      let hardest = 0
+      for (let j = i - 1; j >= day - 1; j--) {
+        hardest = Math.max(hardest, jobDifficulty[j])
+        table[day][i] = Math.min(table[day][i], table[day - 1][j] + hardest)
+      }
+    }
+  }
+  return table[d][n]
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def min_difficulty(job_difficulty, d):
     n = len(job_difficulty)
-    if d > n:
+    if n < d:
         return -1
-    previous = [0] + [INF] * n
+    table = [[float('inf')] * (n + 1) for _ in range(d + 1)]
+    table[0][0] = 0
     for day in range(1, d + 1):
-        current = [INF] * (n + 1)
-        for end in range(day, n + 1):
+        for i in range(day, n + 1):
             hardest = 0
-            for start in range(end - 1, day - 2, -1):
-                hardest = max(hardest, job_difficulty[start])
-                current[end] = min(current[end], previous[start] + hardest)
-        previous = current
-    return previous[n] if previous[n] < INF else -1
+            for j in range(i - 1, day - 2, -1):
+                hardest = max(hardest, job_difficulty[j])
+                table[day][i] = min(table[day][i], table[day - 1][j] + hardest)
+    return table[d][n]
 `
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

@@ -1,70 +1,90 @@
-export const phases = [
-  { id: 'start', label: 'Input', description: 'Read the text, keeping its leading and trailing spaces.' },
-  { id: 'count', label: 'Count spaces', description: 'Every space in the text must be placed in the output.' },
-  { id: 'split', label: 'Find words', description: 'Words are the non-empty runs of letters.' },
-  { id: 'single', label: 'One word', description: 'With one word there are no gaps, so every space goes after it.' },
-  { id: 'gap', label: 'Even gaps', description: 'Divide the spaces evenly between words; leftovers go at the end.' },
-  { id: 'build', label: 'Join words', description: 'Join the words with the even gap and append the leftover spaces.' },
-  { id: 'done', label: 'Return', description: 'Return the rearranged text.' },
+// Rearrange spaces: keep the words, share the spaces equally between gaps, put the remainder at the end.
+const JS_LINES = [
+  { text: 'const words = text.split(" ").filter(Boolean)', py: 'words = text.split()' },
+  { text: 'const spaces = text.split("").filter(c => c === " ").length', py: 'spaces = text.count' },
+  { text: 'if (words.length === 1) return words[0] + " ".repeat(spaces)', py: 'if len(words) == 1' },
+  { text: 'const gap = Math.floor(spaces / (words.length - 1))', py: 'gap, extra = divmod' },
+  { text: 'const extra = spaces % (words.length - 1)', py: 'gap, extra' },
+  { text: 'let out = words.join(" ".repeat(gap))', py: 'return (' },
+  { text: 'return out + " ".repeat(extra)', py: 'return (' },
 ]
 
-export const complexity = 'O(n) time for scanning and joining the text. O(n) extra space for the word list and output.'
+export const code = JS_LINES.map(({ text }, i) => ({ line: i + 1, text }))
+
+export const python = `def reorderSpaces(text):
+    words = text.split()
+    spaces = text.count(' ')
+    if len(words) == 1:
+        return words[0] + ' ' * spaces
+    gap, extra = divmod(spaces, len(words) - 1)
+    return (' ' * gap).join(words) + ' ' * extra
+`
+
+const PY = python.split('\n')
+const pyAt = needle => {
+  const index = PY.findIndex(line => line.includes(needle))
+  if (index < 0) throw new Error(`python line missing: ${needle}`)
+  return index + 1
+}
+export const pythonLineMap = Object.fromEntries(
+  JS_LINES.map((line, i) => [i + 1, pyAt(line.py)]),
+)
+
+export const phases = [
+  { id: 'scan', label: 'Scan', description: 'Read each character: letters belong to words, spaces are counted.' },
+  { id: 'share', label: 'Share', description: 'Divide the spaces by the number of gaps; the remainder goes at the end.' },
+  { id: 'build', label: 'Build', description: 'Place each word, then the equal gap, until the last word.' },
+  { id: 'done', label: 'Result', description: 'The rebuilt text has the same length as the input.' },
+]
 
 export const examples = [
-  { label: 'Uneven', input: ' quick  brown fox ' },
-  { label: 'Single word', input: '   lantern  ' },
-  { label: 'Tight', input: 'one two  three' },
+  { label: 'Uneven spread', input: ' red  green blue ' },
+  { label: 'Remainder at end', input: ' sun moon stars' },
+  { label: 'Single word', input: '  alpha  ' },
 ]
 
+export const complexity = 'O(n) time and O(n) space for a text of n characters.'
+
 export function parseInput(text) {
-  const s = String(text).replace(/\r?\n$/, '')
-  if (!/^[a-z ]{1,100}$/.test(s)) throw new Error('Use 1 to 100 lowercase letters and spaces.')
-  if (!/[a-z]/.test(s)) throw new Error('Include at least one word.')
-  return s
+  if (typeof text !== 'string') throw new Error('Enter the text as a string.')
+  if (text.length < 1 || text.length > 100) throw new Error('The text must be 1 to 100 characters long.')
+  if (!/^[a-z ]+$/.test(text)) throw new Error('Use lowercase letters and spaces only.')
+  if (!/[a-z]/.test(text)) throw new Error('The text must contain at least one word.')
+  return text
 }
 
 export function buildTrace(text) {
   const frames = []
-  const spaces = [...text].filter(c => c === ' ').length
   const words = text.split(' ').filter(Boolean)
-  const snap = extra => ({ spaces, words: [...words], gap: null, extra: null, result: null, ...extra })
-  frames.push({ phase: 'start', activeLine: 1, message: `Read ${text.length} characters, including leading and trailing spaces.`, snapshot: snap() })
-  frames.push({ phase: 'count', activeLine: 2, message: `Count ${spaces} spaces.`, snapshot: snap() })
-  frames.push({ phase: 'split', activeLine: 3, message: `Found ${words.length} word${words.length === 1 ? '' : 's'}: ${words.join(' | ')}.`, snapshot: snap() })
-  let result
+  const chars = [...text]
+  let spaces = 0
+  let scanned = 0
+  const snap = extra => ({ words: words.length, spaces, scanned, ...extra })
+  frames.push({ phase: 'scan', activeLine: 1, index: -1, message: 'Begin reading the text left to right.', snapshot: snap({}) })
+  chars.forEach((c, i) => {
+    if (c === ' ') spaces++
+    scanned = i + 1
+    frames.push({ phase: 'scan', activeLine: 2, index: i, message: c === ' ' ? `Position ${i} is a space; ${spaces} spaces so far.` : `Position ${i} belongs to a word.`, snapshot: snap({}) })
+  })
+
+  let gap = 0
+  let extra = 0
+  let out = ''
   if (words.length === 1) {
-    result = words[0] + ' '.repeat(spaces)
-    frames.push({ phase: 'single', activeLine: 4, message: `One word, so all ${spaces} spaces trail it.`, snapshot: snap({ result }) })
-    frames.push({ phase: 'done', activeLine: 4, message: 'Return the word followed by all spaces.', snapshot: snap({ result }) })
-    return { input: text, result, frames }
+    out = words[0] + ' '.repeat(spaces)
+    frames.push({ phase: 'share', activeLine: 3, index: -1, gap: 0, extra: spaces, message: 'One word has no gaps, so all spaces trail it.', snapshot: snap({ gap: 0, extra: spaces, out }) })
+  } else {
+    gap = Math.floor(spaces / (words.length - 1))
+    extra = spaces % (words.length - 1)
+    frames.push({ phase: 'share', activeLine: 4, index: -1, gap, extra, message: `${spaces} spaces over ${words.length - 1} gaps: ${gap} each, ${extra} left over.`, snapshot: snap({ gap, extra }) })
+    out = words.map((w, i) => (i === 0 ? w : ' '.repeat(gap) + w)).join('')
+    words.forEach((w, i) => {
+      const partial = words.slice(0, i + 1).map((x, j) => (j === 0 ? x : ' '.repeat(gap) + x)).join('')
+      frames.push({ phase: 'build', activeLine: 6, index: i, gap, extra, message: i === 0 ? `Place "${w}" first.` : `Add a gap of ${gap} and then "${w}".`, snapshot: snap({ placed: i + 1, out: partial }) })
+    })
+    out += ' '.repeat(extra)
+    frames.push({ phase: 'build', activeLine: 7, index: -1, gap, extra, message: `Add the ${extra} leftover spaces at the end.`, snapshot: snap({ placed: words.length, out }) })
   }
-  const gaps = words.length - 1
-  const gap = Math.floor(spaces / gaps)
-  const extra = spaces % gaps
-  frames.push({ phase: 'gap', activeLine: 5, message: `${gaps} gaps: each gets ${gap} space${gap === 1 ? '' : 's'}; ${extra} leftover go at the end.`, snapshot: snap({ gap, extra }) })
-  result = words.join(' '.repeat(gap)) + ' '.repeat(extra)
-  frames.push({ phase: 'build', activeLine: 6, message: `Joined the words, then appended ${extra} trailing space${extra === 1 ? '' : 's'}.`, snapshot: snap({ gap, extra, result }) })
-  frames.push({ phase: 'done', activeLine: 7, message: 'Return the rearranged text.', snapshot: snap({ gap, extra, result }) })
-  return { input: text, result, frames }
+  frames.push({ phase: 'done', activeLine: 7, index: -1, gap, extra, message: `Result has length ${out.length}, the same as the input.`, result: out, snapshot: snap({ out, length: out.length }) })
+  return { input: text, result: out, words, spaces, gap, extra, frames }
 }
-
-export const python = `def reorderSpaces(text):
-    spaces = text.count(" ")
-    words = text.split()
-    if len(words) == 1:
-        return words[0] + " " * spaces
-    gap, extra = divmod(spaces, len(words) - 1)
-    return (" " * gap).join(words) + " " * extra`
-
-export const code = [
-  'FUNCTION reorderSpaces(text)',
-  '    spaces = count of " " in text',
-  '    words = non-empty runs of letters in text',
-  '    IF one word RETURN word + spaces',
-  '    gap = floor(spaces / (words - 1)); extra = spaces mod (words - 1)',
-  '    result = words joined by gap spaces',
-  '    RETURN result + extra spaces',
-].map((text, index) => ({ line: index + 1, text }))
-
-// Pseudocode line -> Python line.
-export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 6, 6: 7, 7: 7 }

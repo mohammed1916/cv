@@ -1,12 +1,16 @@
-const CODE_LINES = [
-  'remove the interval [a, b) from each interval',
-  'result is an empty list',
-  'for each interval [s, e) in order',
-  'if e <= a or s >= b then append [s, e) unchanged',
-  'otherwise if s < a then append [s, a)',
-  'and if b < e then append [b, e)',
-  'return result',
-]
+const CODE_LINES = `function removeInterval(intervals, toBeRemoved) {
+  const [a, b] = toBeRemoved
+  const result = []
+  for (const [s, e] of intervals) {
+    if (e <= a || s >= b) {
+      result.push([s, e])
+      continue
+    }
+    if (s < a) result.push([s, a])
+    if (b < e) result.push([b, e])
+  }
+  return result
+}`.split('\n')
 
 export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }))
 const L = text => {
@@ -68,25 +72,25 @@ export function buildTrace({ intervals, toBeRemoved }) {
   const frame = (phase, activeLine, pythonLine, index, message) => frames.push({
     phase, activeLine, pythonLine, index, message, cut: [a, b], result: result.map(piece => [...piece]),
   })
-  frame('start', L('remove the interval'), P('a, b ='), -1, `Cut [${a}, ${b}) out of every interval.`)
-  frame('start', L('result is an empty list'), P('result = []'), -1, 'Start with no surviving pieces.')
+  frame('start', L('const [a, b] = toBeRemoved'), P('a, b ='), -1, `Cut [${a}, ${b}) out of every interval.`)
+  frame('start', L('const result = []'), P('result = []'), -1, 'Start with no surviving pieces.')
   intervals.forEach(([s, e], index) => {
-    frame('scan', L('for each interval'), P('for s, e in intervals'), index, `Look at [${s}, ${e}).`)
+    frame('scan', L('for (const [s, e] of intervals)'), P('for s, e in intervals'), index, `Look at [${s}, ${e}).`)
     if (e <= a || s >= b) {
       result.push([s, e])
-      frame('keep', L('append [s, e) unchanged'), P('result.append([s, e])'), index, `[${s}, ${e}) misses the cut and stays whole.`)
+      frame('keep', L('result.push([s, e])'), P('result.append([s, e])'), index, `[${s}, ${e}) misses the cut and stays whole.`)
       return
     }
-    frame('scan', L('if e <= a or s >= b'), P('if e <= a or s >= b'), index, `[${s}, ${e}) overlaps the cut [${a}, ${b}).`)
+    frame('scan', L('if (e <= a || s >= b)'), P('if e <= a or s >= b'), index, `[${s}, ${e}) overlaps the cut [${a}, ${b}).`)
     if (s < a) {
       result.push([s, a])
-      frame('left', L('if s < a'), P('result.append([s, a])'), index, `Keep the left piece [${s}, ${a}).`)
+      frame('left', L('if (s < a)'), P('result.append([s, a])'), index, `Keep the left piece [${s}, ${a}).`)
     }
     if (b < e) {
       result.push([b, e])
-      frame('right', L('and if b < e'), P('result.append([b, e])'), index, `Keep the right piece [${b}, ${e}).`)
+      frame('right', L('if (b < e)'), P('result.append([b, e])'), index, `Keep the right piece [${b}, ${e}).`)
     }
-    if (s >= a && e <= b) frame('gone', L('if s < a'), P('if s < a'), index, `[${s}, ${e}) lies inside the cut and disappears.`)
+    if (s >= a && e <= b) frame('gone', L('if (s < a)'), P('if s < a'), index, `[${s}, ${e}) lies inside the cut and disappears.`)
   })
   frame('done', L('return result'), P('return result'), -1, `${result.length} piece${result.length === 1 ? '' : 's'} survive, in order.`)
   return { input: { intervals, toBeRemoved }, result, frames }

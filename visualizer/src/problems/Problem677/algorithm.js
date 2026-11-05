@@ -1,53 +1,66 @@
 export function parseInput(text) {
   const ops = JSON.parse(text)
-  if (!Array.isArray(ops) || ops.length < 1 || ops.length > 1000) throw new Error('Enter a JSON array of 1–1,000 operations: ["insert", key, value] or ["sum", prefix].')
-  const keyOk = s => typeof s === 'string' && /^[a-z]{1,50}$/.test(s)
+  const word = s => typeof s === 'string' && /^[a-z]{1,50}$/.test(s)
+  if (!Array.isArray(ops) || ops.length < 1 || ops.length > 50) throw new Error('Enter 1–50 operations.')
   for (const op of ops) {
-    if (!Array.isArray(op) || (op[0] === 'insert' && (op.length !== 3 || !keyOk(op[1]) || !Number.isInteger(op[2]) || op[2] < 0 || op[2] > 1000)) || (op[0] === 'sum' && (op.length !== 2 || !keyOk(op[1]))) || !['insert', 'sum'].includes(op[0])) {
-      throw new Error('Operations: ["insert", key, value] with key a–z (≤ 50 letters) and value 0–1,000, or ["sum", prefix].')
-    }
+    if (!Array.isArray(op)) throw new Error('Each operation is ["insert", word, value] or ["sum", prefix].')
+    if (op[0] === 'insert' && (op.length !== 3 || !word(op[1]) || !Number.isInteger(op[2]) || op[2] < 1 || op[2] > 1000)) throw new Error('insert needs a lowercase word and an integer value from 1 to 1,000.')
+    else if (op[0] === 'sum' && (op.length !== 2 || !word(op[1]))) throw new Error('sum needs a lowercase prefix.')
+    else if (op[0] !== 'insert' && op[0] !== 'sum') throw new Error('Operations are "insert" or "sum".')
   }
   return ops
 }
 
-// Keys map to values; a sum scans the stored keys for the prefix (the trie version avoids the scan).
+// Keep the latest value of every key. A prefix sum scans the stored keys and adds the values that start with it.
 export function buildTrace(ops) {
   const map = new Map()
   const out = []
-  const frames = [{ phase: 'start', ops: [], map: [], activeLine: 2, message: 'Start with an empty map.' }]
-  ops.forEach((op, index) => {
+  const frames = [{ phase: 'start', op: null, entries: [], matches: [], total: null, outputs: [], activeLine: L('const map = new Map()'), pythonLine: P('table = {}'), message: 'Start with an empty map of word values.' }]
+  for (const op of ops) {
     if (op[0] === 'insert') {
       map.set(op[1], op[2])
-      out.push({ name: 'insert', args: [op[1], op[2]], returned: null })
-      frames.push({ phase: 'insert', index, map: [...map.entries()], ops: out.map(o => ({ ...o })), activeLine: 4, message: `Store ${op[1]} = ${op[2]}; overwrites the old value if the key existed.` })
+      frames.push({ phase: 'insert', op, entries: [...map], matches: [], total: null, outputs: [...out], activeLine: L('map.set(op[1], op[2])'), pythonLine: P('table[op[1]] = op[2]'), message: `insert ${op[1]} = ${op[2]}: a repeated word replaces its old value.` })
     } else {
-      let total = 0
-      const matches = []
-      for (const [key, value] of map) if (key.startsWith(op[1])) { total += value; matches.push(key) }
-      out.push({ name: 'sum', args: [op[1]], returned: total })
-      frames.push({ phase: 'sum', index, prefix: op[1], matches, total, map: [...map.entries()], ops: out.map(o => ({ ...o })), activeLine: 7, message: `Sum of keys starting with ${op[1]}: ${matches.join(', ') || 'none'} → ${total}.` })
+      const matches = [...map].filter(([key]) => key.startsWith(op[1]))
+      const total = matches.reduce((sum, [, value]) => sum + value, 0)
+      out.push(total)
+      frames.push({ phase: 'sum', op, entries: [...map], matches, total, outputs: [...out], activeLine: L('key.startsWith(op[1])'), pythonLine: P('if key.startswith'), message: `sum ${op[1]}: ${matches.length ? matches.map(([k, v]) => `${k}=${v}`).join(' + ') : 'no words'} = ${total}.` })
     }
-  })
-  frames.push({ phase: 'done', index: ops.length - 1, map: [...map.entries()], ops: out.map(o => ({ ...o })), result: out.filter(o => o.name === 'sum').map(o => o.returned), activeLine: 9, message: 'All operations complete.' })
-  return { input: ops, result: out.filter(o => o.name === 'sum').map(o => o.returned), ops: out, frames }
+  }
+  frames.push({ phase: 'done', op: null, entries: [...map], matches: [], total: null, outputs: [...out], result: out, activeLine: L('return out'), pythonLine: P('return results'), message: `Sums in order: [${out.join(', ')}].` })
+  return { input: ops, result: out, frames }
 }
 
-export const code = `create an empty map of key values and an empty list of answers
-for each operation in order
-  if it is an insert, store its value under its key, replacing any old value
-  if it is a sum query, add the values of all stored keys that start with the prefix and record that total
-return the recorded totals`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const SOURCE = `function mapSumPairs(ops) {
+  const map = new Map()
+  const out = []
+  for (const op of ops) {
+    if (op[0] === 'insert') {
+      map.set(op[1], op[2])
+    } else {
+      let total = 0
+      for (const [key, value] of map) {
+        if (key.startsWith(op[1])) total += value
+      }
+      out.push(total)
+    }
+  }
+  return out
+}`
+export const code = SOURCE.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
-// Family line 3 follows a sum query's prefix (line 4 here); family line 4 stores insert deltas (line 3 here).
-export const LINE_MAP = { 1: 1, 3: 4, 4: 3, 5: 5 }
-
-export const python = `def map_sum_pairs(operations):
-    values = {}
-    answers = []
-    for op in operations:
+export const python = `def map_sum_pairs(ops):
+    table = {}
+    results = []
+    for op in ops:
         if op[0] == 'insert':
-            values[op[1]] = op[2]
+            table[op[1]] = op[2]
         else:
-            prefix = op[1]
-            answers.append(sum(v for key, v in values.items() if key.startswith(prefix)))
-    return answers`
+            total = 0
+            for key, value in table.items():
+                if key.startswith(op[1]):
+                    total += value
+            results.append(total)
+    return results`
+const P = s => python.split('\n').findIndex(t => t.includes(s)) + 1

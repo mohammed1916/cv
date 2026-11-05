@@ -1,55 +1,57 @@
 export const phases = [
-  { id: 'start', label: 'Start', description: 'Read the clock time as an hour on a 12-hour face and a count of minutes past the hour.' },
-  { id: 'hour', label: 'Hour hand', description: 'The hour hand moves 30 degrees per hour and also creeps 0.5 degrees per minute.' },
-  { id: 'minute', label: 'Minute hand', description: 'The minute hand moves 6 degrees per minute, starting from twelve.' },
-  { id: 'gap', label: 'Gap', description: 'Take the absolute difference. The other way round the dial is 360 minus that difference.' },
-  { id: 'done', label: 'Complete', description: 'Return the smaller of the two gaps.' },
+  { id: 'start', label: 'Start', description: 'Read the clock time as hours and minutes.' },
+  { id: 'hour', label: 'Hour hand', description: 'The hour hand moves 30 degrees per hour and also 0.5 degrees per minute.' },
+  { id: 'minute', label: 'Minute hand', description: 'The minute hand moves 6 degrees per minute.' },
+  { id: 'gap', label: 'Gap', description: 'The gap is the difference between the two hands, measured the short way round the dial.' },
+  { id: 'done', label: 'Complete', description: 'Return the smaller angle between the hands.' },
+]
+
+export const examples = [
+  { label: 'Three o clock', input: '3:00' },
+  { label: 'Afternoon', input: '4:50' },
+  { label: 'Twelve thirty', input: '12:30' },
 ]
 
 export function parseInput(text) {
-  const match = /^\s*(\d{1,2}):(\d{2})\s*$/.exec(text)
-  if (!match) throw new Error('Enter a time such as 3:15 (hour then minutes).')
-  const hour = Number(match[1])
-  const minutes = Number(match[2])
+  const m = /^\s*(\d{1,2}):(\d{2})\s*$/.exec(String(text))
+  if (!m) throw new Error('Enter a time as h:mm, such as 3:15.')
+  const hour = Number(m[1]), minute = Number(m[2])
   if (hour < 1 || hour > 12) throw new Error('The hour must be from 1 to 12.')
-  if (minutes > 59) throw new Error('The minutes must be from 00 to 59.')
-  return { hour, minutes }
+  if (minute < 0 || minute > 59) throw new Error('The minutes must be from 00 to 59.')
+  return { hour, minute }
 }
 
+export function buildTrace({ hour, minute }) {
+  const hourHand = (hour % 12) * 30 + minute * 0.5
+  const minuteHand = minute * 6
+  const direct = Math.abs(hourHand - minuteHand)
+  const angle = Math.min(direct, 360 - direct)
+  const snap = (extra = {}) => ({ hour, minute, hourHand, minuteHand, ...extra })
+  const frames = [{ phase: 'start', activeLine: L('const hourHand'), pythonLine: P('hour_hand ='), snapshot: snap(),
+    message: `The time is ${hour}:${String(minute).padStart(2, '0')}.` }]
+  frames.push({ phase: 'hour', activeLine: L('const hourHand'), pythonLine: P('hour_hand ='), snapshot: snap(),
+    message: `The hour hand sits at ${hourHand} degrees from twelve.` })
+  frames.push({ phase: 'minute', activeLine: L('const minuteHand'), pythonLine: P('minute_hand ='), snapshot: snap(),
+    message: `The minute hand sits at ${minuteHand} degrees.` })
+  frames.push({ phase: 'gap', activeLine: L('const direct'), pythonLine: P('direct ='), snapshot: snap({ direct }),
+    message: `The direct gap is ${direct} degrees; the other way round is ${360 - direct}.` })
+  frames.push({ phase: 'done', activeLine: L('return Math.min'), pythonLine: P('return angle'), snapshot: snap({ angle, result: angle }),
+    message: `Return the smaller angle, ${angle} degrees.`, result: angle })
+  return { input: { hour, minute }, result: angle, frames }
+}
+
+export const code = `function angleClock(hour, minutes) {
+  const hourHand = (hour % 12) * 30 + minutes * 0.5
+  const minuteHand = minutes * 6
+  const direct = Math.abs(hourHand - minuteHand)
+  return Math.min(direct, 360 - direct)
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
-const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
-const at = (codeSub, pySub = codeSub) => ({ activeLine: L(codeSub), pythonLine: P(pySub) })
 
-const fmt = v => Number.isInteger(v) ? String(v) : v.toFixed(1)
-
-export function buildTrace({ hour, minutes }) {
-  const frames = []
-  frames.push({ phase: 'start', ...at('hour_angle ='), message: `Time ${hour}:${String(minutes).padStart(2, '0')}. Measure both hands clockwise from twelve.`, snapshot: { hour, minutes } })
-
-  const hourAngle = (hour % 12) * 30 + minutes * 0.5
-  frames.push({ phase: 'hour', ...at('hour_angle =', 'hour_angle ='), message: `Hour hand: ${hour % 12} × 30 + ${minutes} × 0.5 = ${fmt(hourAngle)}°.`, snapshot: { hour, minutes, hourAngle } })
-
-  const minuteAngle = minutes * 6
-  frames.push({ phase: 'minute', ...at('minute_angle ='), message: `Minute hand: ${minutes} × 6 = ${fmt(minuteAngle)}°.`, snapshot: { hour, minutes, hourAngle, minuteAngle } })
-
-  const gap = Math.abs(hourAngle - minuteAngle)
-  const other = 360 - gap
-  frames.push({ phase: 'gap', ...at('gap ='), message: `Difference ${fmt(gap)}°. The other way round the dial is ${fmt(other)}°.`, snapshot: { hour, minutes, hourAngle, minuteAngle, gap, other } })
-
-  const result = Math.min(gap, other)
-  frames.push({ phase: 'done', ...at('return min'), message: `The smaller angle between the hands is ${fmt(result)}°.`, snapshot: { hour, minutes, hourAngle, minuteAngle, gap, other, result } })
-  return { input: { hour, minutes }, result, frames }
-}
-
-export const code = `clock angle (hour, minutes):
-  hour_angle = (hour mod 12) * 30 + minutes * 0.5
-  minute_angle = minutes * 6
-  gap = |hour_angle - minute_angle|
-  return min(gap, 360 - gap)`.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-export const python = `def clock_angle(hour, minutes):
-    hour_angle = (hour % 12) * 30 + minutes * 0.5
-    minute_angle = minutes * 6
-    gap = abs(hour_angle - minute_angle)
-    return min(gap, 360 - gap)
+export const python = `def angle_clock(hour, minutes):
+    hour_hand = (hour % 12) * 30 + minutes * 0.5
+    minute_hand = minutes * 6
+    direct = abs(hour_hand - minute_hand)
+    return min(direct, 360 - direct)
 `
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

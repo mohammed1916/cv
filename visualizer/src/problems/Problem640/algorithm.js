@@ -5,7 +5,7 @@ export function parseInput(text) {
   return eq
 }
 
-// Each side becomes (coefficient of x, constant). Subtract the right side from the left.
+// Each side becomes (coefficient of x, constant). Moving everything left of "=" gives a·x = b.
 function side(text) {
   let coefficient = 0, constant = 0
   for (const [, sign, term] of text.matchAll(/([+-]?)([^+-]+)/g)) {
@@ -23,34 +23,40 @@ export function buildTrace(equation) {
   const a = leftSide.coefficient - rightSide.coefficient
   const b = rightSide.constant - leftSide.constant
   const frames = [
-    { phase: 'split', left: leftSide, right: rightSide, a: null, b: null, activeLine: L('split the equation'), pythonLine: 17, message: `Left side: ${leftSide.coefficient}x + ${leftSide.constant}; right side: ${rightSide.coefficient}x + ${rightSide.constant}.` },
-    { phase: 'move', left: leftSide, right: rightSide, a, b, activeLine: L('a = left.coefficient'), pythonLine: 20, message: `Move everything to one side: ${a}x = ${b}.` },
+    { phase: 'split', left: leftSide, right: rightSide, a: null, b: null, result: null, activeLine: L('const [left, right]'), pythonLine: P('left, right = equation.split'), message: `Left side: ${leftSide.coefficient}x + ${leftSide.constant}; right side: ${rightSide.coefficient}x + ${rightSide.constant}.` },
+    { phase: 'move', left: leftSide, right: rightSide, a, b, result: null, activeLine: L('const a = '), pythonLine: P('a, b = a1 - a2'), message: `Move everything to one side: ${a}x = ${b}.` },
   ]
   let result
   if (a === 0 && b === 0) result = 'Infinite solutions'
   else if (a === 0) result = 'No solution'
   else result = `x=${b / a}`
-  const pythonLine = result === 'Infinite solutions' || result === 'No solution' ? 22 : 24 // return 'Infinite solutions' if b == 0 else 'No solution' / return 'x=' + ...
-  frames.push({ phase: 'done', left: leftSide, right: rightSide, a, b, result, activeLine: result === 'No solution' ? L('if a is 0: return') : result === 'Infinite solutions' ? L('if a is 0 and b is 0') : L('followed by b / a'), pythonLine, message: `Result: ${result}.` })
+  const isLinear = a !== 0
+  frames.push({ phase: 'done', left: leftSide, right: rightSide, a, b, result, activeLine: L(isLinear ? 'return `x=' : "'Infinite solutions'"), pythonLine: P(isLinear ? "return 'x='" : "return 'Infinite"), message: `Result: ${result}.` })
   return { input: equation, result, frames }
 }
 
-export const code = `split the equation at "=" into left text and right text
-left = side(left text)
-right = side(right text)
-a = left.coefficient - right.coefficient
-b = right.constant - left.constant
-if a is 0 and b is 0: return "Infinite solutions"
-if a is 0: return "No solution"
-return "x=" followed by b / a
+const SOURCE = `function solveEquation(equation) {
+  const [left, right] = equation.split('=')
+  const leftSide = side(left)
+  const rightSide = side(right)
+  const a = leftSide.coefficient - rightSide.coefficient
+  const b = rightSide.constant - leftSide.constant
+  if (a === 0) return b === 0 ? 'Infinite solutions' : 'No solution'
+  return \`x=\${b / a}\`
+}
 
-side(text):
-  coefficient = 0, constant = 0
-  for each signed term in text:
-    if term is "x": coefficient += sign
-    else if term ends with "x": coefficient += sign * its number
-    else: constant += sign * its number
-  return (coefficient, constant)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+function side(text) {
+  let coefficient = 0
+  let constant = 0
+  for (const [, sign, term] of text.matchAll(/([+-]?)([^+-]+)/g)) {
+    const s = sign === '-' ? -1 : 1
+    if (term === 'x') coefficient += s
+    else if (term.endsWith('x')) coefficient += s * Number(term.slice(0, -1))
+    else constant += s * Number(term)
+  }
+  return { coefficient, constant }
+}`
+export const code = SOURCE.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `import re
@@ -77,4 +83,4 @@ def solve_equation(equation):
         return 'Infinite solutions' if b == 0 else 'No solution'
     q = b / a
     return 'x=' + (str(int(q)) if q == int(q) else repr(q))`
-
+const P = s => python.split('\n').findIndex(t => t.includes(s)) + 1

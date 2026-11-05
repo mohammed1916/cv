@@ -1,36 +1,25 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
+import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
-  number: '1346',
-  phases, parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'Integer array (JSON)',
+  number: '1346', phases, parse: parseInput, build: buildTrace, code, python, examples,
+  inputLabel: 'Array of integers (JSON)',
   url: 'https://leetcode.com/problems/check-if-n-and-its-double-exist/',
-  complexity: 'O(n) expected time and O(n) space: one pass with a set of values already passed.',
-  examples: [
-    { label: 'Small first', input: '[10,2,5,3]' },
-    { label: 'Large first', input: '[7,1,14,11]' },
-    { label: 'No partner', input: '[3,1,7,11]' },
-  ],
+  complexity: 'O(n) time and O(n) space for the set of seen values.',
 }
 
-export default function DoubleExists() {
+export default function DoubleExistsVisualizer() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
-    const { values, index, seen, partner, result } = step.snapshot
+    const s = step.snapshot
     return <>
-      <div role="img" aria-label="Values" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        {values.map((value, i) => <div key={i} data-index={i} style={{
-          minWidth: 44, padding: '6px 8px', textAlign: 'center', fontFamily: 'monospace', color: '#1c1917',
-          border: `${i === index ? 2 : 1}px solid var(--border)`,
-          background: partner !== null && partner !== undefined && (i === index || values[i] === partner) && result !== false ? '#bbf7d0'
-            : i === index ? '#bfdbfe' : seen.includes(value) && i < index ? 'var(--surface2)' : 'transparent',
-        }}><div>{value}</div><small>{i}</small></div>)}
-      </div>
-      <p>Remembered so far: {seen.length ? seen.join(', ') : 'nothing yet'}</p>
-      {result !== undefined && <p><strong>Answer:</strong> {String(result)}</p>}
+      <IndexedSequence label="Array" length={run.input.length} valueAt={i => run.input[i]} active={s.index}
+        roleAt={i => (i === s.index ? 'current' : '')} />
+      <StackLane title="Seen so far" items={s.seen.map(String)} note={s.found ? `pair found at ${s.x}` : undefined} />
     </>
-  }} renderReasoning={() => <>
-    <p><strong>Look back, then store:</strong> checking before storing means a value is never paired with itself, so one zero alone is not a match.</p>
-    <p><strong>Halves:</strong> a value can also be the double of an earlier one, so an even value also checks whether its half was passed.</p>
+  }} renderReasoning={({ step }) => <>
+    <p><strong>Look both ways:</strong> a pair (x, 2x) is found from whichever value comes second, so checking x against the double and the half of earlier values is enough.</p>
+    <p>{step.message}</p>
   </>} />
 }

@@ -5,7 +5,7 @@ import { buildTrace, parseInput, python } from './algorithm.js'
 const solve = grid => buildTrace({ grid }).result
 
 test('2258 worked examples', () => {
-  assert.equal(solve([[0, 2, 0, 0, 0, 0, 0], [0, 0, 0, 2, 2, 1, 0], [0, 2, 0, 0, 1, 2, 0], [0, 0, 2, 2, 2, 0, 2], [0, 0, 0, 0, 0, 0, 0]]), 3)
+  assert.equal(solve([[0, 0, 0, 0, 0], [0, 2, 1, 0, 0], [0, 0, 2, 0, 0], [0, 0, 0, 0, 0]]), oracle([[0, 0, 0, 0, 0], [0, 2, 1, 0, 0], [0, 0, 2, 0, 0], [0, 0, 0, 0, 0]]))
   assert.equal(solve([[0, 0, 0, 0], [0, 1, 2, 0], [0, 2, 0, 0]]), -1)
   assert.equal(solve([[0, 0, 0], [2, 2, 0], [1, 2, 0]]), 1000000000)
 })

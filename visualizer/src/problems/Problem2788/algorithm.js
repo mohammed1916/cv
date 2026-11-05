@@ -1,11 +1,8 @@
-export const code = [
-  { line: 1, text: "result = empty list" },
-  { line: 2, text: "for each word in words" },
-  { line: 3, text: "for each part of word split by separator" },
-  { line: 4, text: "if part is not empty" },
-  { line: 5, text: "append part to result" },
-  { line: 6, text: "return result" },
-]
+export const code = `const result = []
+for (const word of words)
+  for (const part of word.split(separator))
+    if (part !== '') result.push(part)
+return result`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def splitWordsBySeparator(words, separator):
     result = []

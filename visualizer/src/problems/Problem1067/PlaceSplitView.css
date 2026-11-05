@@ -1,24 +1,17 @@
-.psv { margin: 0; padding: 12px; font-size: 14px; color: #1f2937; background: #fff; }
-.psv__ask { margin: 0 0 10px; }
-.psv__bounds { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
-.psv__bound { flex: 1 1 160px; padding: 10px; border: 2px solid #cbd5e1; border-radius: 10px; background: #f8fafc; display: flex; flex-direction: column; }
-.psv__bound span { font-size: 11px; text-transform: uppercase; color: #64748b; }
-.psv__bound strong { font-size: 24px; }
-.psv__bound em { font-style: normal; font-weight: 700; color: #334155; }
-.psv__bound--on { border-color: #2563eb; background: #dbeafe; }
-.psv__table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
-.psv__table caption { text-align: left; font-weight: 600; margin-bottom: 4px; }
-.psv__table th, .psv__table td { padding: 5px 8px; border-bottom: 1px solid #e2e8f0; text-align: right; }
-.psv__table th { font-size: 12px; color: #64748b; }
-.psv__digit { font-weight: 800; color: #b45309; }
-.psv__row--now { background: #fef3c7; }
-.psv__status { margin: 12px 0 4px; font-weight: 700; }
-.psv__rule { margin: 0; font-size: 12px; color: #64748b; }
-@media (prefers-color-scheme: dark) {
-  .psv { color: #e5e7eb; background: #111827; }
-  .psv__bound { background: #1e293b; border-color: #334155; }
-  .psv__bound em { color: #cbd5e1; }
-  .psv__bound--on { background: #1e3a8a; border-color: #3b82f6; }
-  .psv__table th, .psv__table td { border-color: #334155; }
-  .psv__row--now { background: #78350f; }
-}
+.psv { margin:0; padding:12px; font-size:14px; color:var(--text); background:transparent; }
+.psv__ask { margin:0 0 10px; }
+.psv__bounds { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:12px; }
+.psv__bound { flex:1 1 160px; padding:10px; border:2px solid var(--border); border-radius:10px; background:transparent; display:flex; flex-direction:column; }
+.psv__bound span { font-size:11px; text-transform:uppercase; color:var(--text); }
+.psv__bound strong { font-size:24px; }
+.psv__bound em { font-style:normal; font-weight:700; color:var(--text); }
+.psv__bound--on { border-color:var(--border); background:var(--surface2); }
+.psv__table { width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums; }
+.psv__table caption { text-align:left; font-weight:600; margin-bottom:4px; }
+.psv__table th, .psv__table td { padding:5px 8px; border-bottom:1px solid var(--border); text-align:right; }
+.psv__table th { font-size:12px; color:var(--text); }
+.psv__digit { font-weight:800; color:var(--text); }
+.psv__row--now { background:var(--surface2); }
+.psv__status { margin:12px 0 4px; font-weight:700; }
+.psv__rule { margin:0; font-size:12px; color:var(--text); }
+

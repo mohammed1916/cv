@@ -17,16 +17,21 @@ const definition = {
 export default function ClumsyFactorial() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { terms, term, next, op } = step.snapshot
+    const ops = ['*', '/', '+', '-']
+    const n = run.input.n
+    const tokens = []
+    for (let x = n; x >= 1; x--) tokens.push({ x, before: x === n ? null : ops[(n - x - 1) % 4] })
     return <>
+      <p style={{ fontFamily: 'monospace', color: 'var(--text)', overflowWrap: 'anywhere' }} aria-label="Expression so far">{tokens.map(({ x, before }) => <span key={x} style={{ color: next !== null && x < next ? 'var(--text)' : next === x ? 'var(--primary)' : 'var(--muted, var(--text))', fontWeight: next === x ? 700 : 400 }}>{before ? ` ${before} ` : ''}{x}</span>)}</p>
       <div aria-label="Signed terms" style={{ display: 'flex', gap: 8, flexWrap: 'wrap', fontFamily: 'monospace' }}>
-        {terms.map((t, i) => <span key={i} style={{ border: '1px solid var(--border)', padding: '4px 8px', color: '#1c1917', background: t < 0 ? '#fecaca' : '#bbf7d0' }}>{t}</span>)}
-        {term !== null && <span style={{ border: '2px solid var(--text)', padding: '4px 8px', color: '#1c1917', background: 'var(--surface2)' }}>current {term}</span>}
+        {terms.map((t, i) => <span key={i} style={{ border: '1px solid var(--border)', padding: '4px 8px', color: 'var(--text)', background: t < 0 ? 'var(--surface2)' : 'transparent' }}>{t < 0 ? '-' : '+'} {Math.abs(t)}</span>)}
+        {term !== null && <span style={{ border: '2px solid var(--primary)', padding: '4px 8px', color: 'var(--text)', background: 'var(--surface2)' }}>current {term}</span>}
       </div>
-      <p>{next !== null ? `Next number ${next}, operation ${op}.` : 'All numbers are consumed.'}</p>
+      <p>{next !== null ? `Next number ${next}, operation ${op}.` : 'All numbers are consumed; the terms are added.'}</p>
     </>
   }} renderReasoning={({ step }) => <>
     <p>{step.message}</p>
     <p><strong>Precedence:</strong> multiply and divide bind to the term they touch, so the chain is resolved before any addition or subtraction.</p>
-    <p><strong>Signs:</strong> a subtraction starts a negative term. Truncating a product with a negative sign keeps the rounding toward zero consistent.</p>
+    <p><strong>Signs:</strong> a subtraction starts a negative term. Each multiply or divide acts on the current term, which stays positive until a subtraction.</p>
   </>} />
 }

@@ -1,40 +1,53 @@
 export const phases = [
-  { id: 'start', label: 'Empty answer', description: 'Start with an empty list. Every pair of opposite numbers adds zero to the total.' },
-  { id: 'pair', label: 'Add a pair', description: 'Add a positive number and its negative. Both are new, and the pair keeps the sum at zero.' },
-  { id: 'zero', label: 'Add zero', description: 'An odd count needs one more number. Zero is distinct from every pair and adds nothing to the sum.' },
-  { id: 'done', label: 'Complete', description: 'The list holds n distinct integers whose sum is zero.' },
+  { id: 'start', label: 'Start', description: 'Plan to fill n slots with distinct integers whose total is zero.' },
+  { id: 'pair', label: 'Add a pair', description: 'Add i and -i; the pair contributes zero to the total and no value repeats.' },
+  { id: 'zero', label: 'Add zero', description: 'An odd n leaves one slot, which is filled with 0 without breaking the total.' },
+  { id: 'done', label: 'Complete', description: 'Return the n distinct integers.' },
+]
+
+export const examples = [
+  { label: 'Even count', input: '{"n":4}' },
+  { label: 'Odd count', input: '{"n":7}' },
+  { label: 'Six values', input: '{"n":6}' },
 ]
 
 export function parseInput(text) {
-  const n = JSON.parse(text)
-  if (!Number.isInteger(n) || n < 1 || n > 50) throw new Error('Enter a single integer n from 1 to 50.')
+  const data = JSON.parse(text)
+  const n = typeof data === 'number' ? data : data && typeof data === 'object' ? data.n : undefined
+  if (!Number.isInteger(n)) throw new Error('Use an object with an integer n, such as {"n":5}.')
+  if (n < 1 || n > 50) throw new Error('n must be from 1 to 50 in this visualization.')
   return n
 }
 
 export function buildTrace(n) {
-  const frames = []
   const answer = []
-  const frame = (phase, line, message, snapshot, pyLine = line) => frames.push({ phase, activeLine: L(line), pythonLine: P(pyLine), snapshot, message })
-  const snap = (i = null) => ({ answer: [...answer], n, i, total: answer.reduce((s, v) => s + v, 0) })
-  frame('start', 'answer = []', `Build ${n} distinct integers with sum zero.`, snap())
+  const snap = (phaseIndex = null) => ({ answer: [...answer], sum: answer.reduce((a, b) => a + b, 0), target: n, phaseIndex })
+  const frames = [{ phase: 'start', activeLine: L('const answer = []'), pythonLine: P('answer = []'), snapshot: snap(),
+    message: `We need ${n} distinct integers that add up to 0.` }]
   for (let i = 1; i <= Math.floor(n / 2); i++) {
     answer.push(i, -i)
-    frame('pair', 'append i and -i', `Add ${i} and ${-i}. Their contribution to the sum is 0, and neither value has appeared before.`, snap(i), 'answer.append(-i)')
+    frames.push({ phase: 'pair', activeLine: L('answer.push(i, -i)'), pythonLine: P('answer.append(-i)'), snapshot: snap(i),
+      message: `Add the pair ${i} and ${-i}. Their sum is 0, and neither value has appeared before.` })
   }
   if (n % 2 === 1) {
     answer.push(0)
-    frame('zero', 'if n is odd', 'n is odd, so add 0. It differs from every pair value because the pairs use only nonzero numbers.', snap(), 'if n % 2 == 1')
+    frames.push({ phase: 'zero', activeLine: L('answer.push(0)'), pythonLine: P('answer.append(0)'), snapshot: snap(),
+      message: 'n is odd, so add 0 to fill the last slot. Zero is distinct from every pair and adds nothing.' })
   }
-  frame('done', 'return answer', `Result: [${answer.join(', ')}].`, snap(), 'return answer')
+  frames.push({ phase: 'done', activeLine: L('return answer'), pythonLine: P('return answer'), snapshot: snap(),
+    message: `Return ${JSON.stringify(answer)}; it holds ${answer.length} values and sums to 0.`, result: answer })
   return { input: n, result: answer, frames }
 }
 
-export const code = `unique sum zero (n):
-  answer = []
-  for i from 1 to n // 2:
-    append i and -i
-  if n is odd: append 0
-  return answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function sumZero(n) {
+  const answer = []
+  for (let i = 1; i <= Math.floor(n / 2); i++) {
+    answer.push(i, -i)
+  }
+  if (n % 2 === 1) answer.push(0)
+  return answer
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def sum_zero(n):
     answer = []
@@ -43,7 +56,6 @@ export const python = `def sum_zero(n):
         answer.append(-i)
     if n % 2 == 1:
         answer.append(0)
-    return answer`
-
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+    return answer
+`
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

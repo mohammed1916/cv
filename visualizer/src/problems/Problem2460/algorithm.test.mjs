@@ -6,8 +6,8 @@ const solve = nums => buildTrace({ nums }).result
 const PY = python.split('\n')
 
 test('2460 worked examples', () => {
-  assert.deepEqual(solve([1, 2, 2, 1, 1, 0]), [1, 4, 2, 0, 0, 0])
-  assert.deepEqual(solve([0, 1]), [1, 0])
+  assert.deepEqual(solve([2, 2, 4, 4, 0]), [4, 8, 0, 0, 0])
+  assert.deepEqual(solve([3, 3, 1]), [6, 1, 0])
 })
 
 test('2460 doubling does not cascade past the pair', () => {

@@ -9,18 +9,19 @@ const MAX_LENGTH = 16;
 const MAX_VALUE = 1000;
 const MAX_K = 16;
 
-const CODE_LINES = [
-  'FUNCTION canDivide(nums, k)',
-  '    n ← length of nums',
-  '    f ← largest number of equal values in nums',
-  '    IF n < k × f THEN RETURN false',
-  '    lanes ← f empty sequences',
-  '    FOR i from 0 to n - 1',
-  '        append nums[i] to lanes[i mod f]',
-  '    FOR each lane',
-  '        IF lane is not strictly increasing or is shorter than k THEN RETURN false',
-  '    RETURN true',
-];
+const CODE_LINES = `function canDivideIntoIncreasingSequences(nums, k) {
+  const n = nums.length
+  const counts = new Map()
+  for (const v of nums) counts.set(v, (counts.get(v) ?? 0) + 1)
+  const f = Math.max(...counts.values())
+  if (n < k * f) return false
+  const lanes = Array.from({ length: f }, () => [])
+  for (let i = 0; i < n; i++) lanes[i % f].push(nums[i])
+  for (const lane of lanes) {
+    if (lane.length < k || lane.some((v, j) => j > 0 && v <= lane[j - 1])) return false
+  }
+  return true
+}`.split('\n');
 
 const PY_LINES = [
   'from collections import Counter',
@@ -59,7 +60,7 @@ export const phases = [
 
 const L = (text) => {
   const index = code.findIndex((entry) => entry.text.includes(text));
-  if (index < 0) throw new Error(`Missing pseudocode line: ${text}`);
+  if (index < 0) throw new Error(`Missing code line: ${text}`);
   return index + 1;
 };
 
@@ -93,7 +94,7 @@ export function buildTrace(input) {
   const n = nums.length;
   const frames = [];
   frames.push({
-    pythonLine: P('n = len(nums)'), phase: 'setup', activeLine: L('n ← length of nums'),
+    pythonLine: P('n = len(nums)'), phase: 'setup', activeLine: L('const n = nums.length'),
     counts: null, f: null, lanes: null, dealt: -1, lane: null, verdict: null, n, k,
     message: `${n} value${n === 1 ? '' : 's'} and k = ${k}.`,
   });
@@ -104,32 +105,32 @@ export function buildTrace(input) {
     if (count > f) f = count;
   }
   frames.push({
-    pythonLine: P('f = max(Counter'), phase: 'count', activeLine: L('f ← largest number of equal values'),
+    pythonLine: P('f = max(Counter'), phase: 'count', activeLine: L('const f = Math.max'),
     counts: Object.fromEntries(counts), f, lanes: null, dealt: -1, lane: null, verdict: null, n, k,
     message: `The largest group of equal values has ${f} member${f === 1 ? '' : 's'}.`,
   });
   if (n < k * f) {
     mode = 'reject';
     frames.push({
-      pythonLine: P('if n < k * f:'), phase: 'check', activeLine: L('IF n < k × f THEN RETURN false'),
+      pythonLine: P('if n < k * f:'), phase: 'check', activeLine: L('if (n < k * f) return false'),
       counts: Object.fromEntries(counts), f, lanes: null, dealt: -1, lane: null, verdict: false, n, k,
       message: `${n} < ${k} × ${f} = ${k * f}, so there are too few values for ${f} sequences of length ${k}.`,
     });
     frames.push({
-      pythonLine: P('return False'), phase: 'done', activeLine: L('IF n < k × f THEN RETURN false'),
+      pythonLine: P('return False'), phase: 'done', activeLine: L('if (n < k * f) return false'),
       counts: Object.fromEntries(counts), f, lanes: null, dealt: -1, lane: null, verdict: false, n, k,
       message: 'Answer: false.',
     });
     return { input: { nums, k }, answer: false, mode, frames };
   }
   frames.push({
-    pythonLine: P('if n < k * f:'), phase: 'check', activeLine: L('IF n < k × f THEN RETURN false'),
+    pythonLine: P('if n < k * f:'), phase: 'check', activeLine: L('if (n < k * f) return false'),
     counts: Object.fromEntries(counts), f, lanes: null, dealt: -1, lane: null, verdict: null, n, k,
     message: `${n} ≥ ${k} × ${f} = ${k * f}, so ${f} sequences can each reach length ${k}.`,
   });
   const lanes = Array.from({ length: f }, () => []);
   frames.push({
-    pythonLine: P('lanes = [[] for'), phase: 'deal', activeLine: L('lanes ← f empty sequences'),
+    pythonLine: P('lanes = [[] for'), phase: 'deal', activeLine: L('const lanes = Array.from'),
     counts: null, f, lanes: lanes.map((lane) => [...lane]), dealt: -1, lane: null, verdict: null, n, k,
     message: `Open ${f} empty sequence${f === 1 ? '' : 's'}.`,
   });
@@ -137,7 +138,7 @@ export function buildTrace(input) {
     const lane = i % f;
     lanes[lane].push(value);
     frames.push({
-      pythonLine: P('lanes[i % f].append'), phase: 'deal', activeLine: L('append nums[i] to lanes[i mod f]'),
+      pythonLine: P('lanes[i % f].append'), phase: 'deal', activeLine: L('lanes[i % f].push'),
       counts: null, f, lanes: lanes.map((entry) => [...entry]), dealt: i, lane, verdict: null, n, k,
       message: `Index ${i} (value ${value}) goes to sequence ${lane + 1}.`,
     });
@@ -148,14 +149,14 @@ export function buildTrace(input) {
     const strict = items.every((value, j) => j === 0 || items[j - 1] < value);
     const longEnough = items.length >= k;
     frames.push({
-      pythonLine: P('for lane in lanes:'), phase: 'verify', activeLine: L('FOR each lane'),
+      pythonLine: P('for lane in lanes:'), phase: 'verify', activeLine: L('for (const lane of lanes)'),
       counts: null, f, lanes: lanes.map((entry) => [...entry]), dealt: -1, lane, verdict: strict && longEnough, n, k,
       message: `Sequence ${lane + 1} has ${items.length} value${items.length === 1 ? '' : 's'}: ${strict ? 'strictly increasing' : 'not strictly increasing'}, ${longEnough ? `length at least ${k}` : `shorter than ${k}`}.`,
     });
     if (!strict || !longEnough) ok = false;
   }
   frames.push({
-    pythonLine: P(ok ? 'return True' : 'return False'), phase: 'done', activeLine: ok ? L('RETURN true') : L('IF lane is not strictly increasing'),
+    pythonLine: P(ok ? 'return True' : 'return False'), phase: 'done', activeLine: ok ? L('return true') : L('if (lane.length < k'),
     counts: null, f, lanes: lanes.map((entry) => [...entry]), dealt: -1, lane: null, verdict: ok, n, k,
     message: `Answer: ${ok}.`,
   });

@@ -1,17 +1,30 @@
-const CODE_TEXT = `all paths from source lead to destination
-  build the outgoing list of every node
-  visit(node), starting at source
-    if node is already on the current path then return false
-    if node is already proven good then return true
-    mark node as on the current path
-    if node has no outgoing edges then return node is destination
-    if node is destination but has outgoing edges then return false
-    for each next node reached from node
-      if visit(next) is false then return false
-    mark node as proven good and return true
-  return the result of visit(source)`
-
-export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function leadsToDestination(n, edges, source, destination) {
+  const outgoing = Array.from({ length: n }, () => [])
+  for (const [u, v] of edges) outgoing[u].push(v)
+  const mark = new Array(n).fill(0)
+  function visit(node) {
+    if (mark[node] === 1) return false
+    if (mark[node] === 2) return true
+    mark[node] = 1
+    let ok
+    if (outgoing[node].length === 0) {
+      ok = node === destination
+    } else if (node === destination) {
+      ok = false
+    } else {
+      ok = true
+      for (const next of outgoing[node]) {
+        if (!visit(next)) {
+          ok = false
+          break
+        }
+      }
+    }
+    if (ok) mark[node] = 2
+    return ok
+  }
+  return visit(source)
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def leads_to_destination(n, edges, source, destination):
     graph = [[] for _ in range(n)]
@@ -84,38 +97,38 @@ export function buildTrace({ n, edges, source, destination }) {
   })
   function visit(node) {
     if (mark[node] === 1) {
-      add('cycle', 'if node is already on the current path', 'if state[node] == 1', `Node ${node} is already on the path: a cycle can repeat forever.`, { current: node, verdict: false })
+      add('cycle', 'if (mark[node] === 1)', 'if state[node] == 1', `Node ${node} is already on the path: a cycle can repeat forever.`, { current: node, verdict: false })
       return false
     }
     if (mark[node] === 2) {
-      add('known', 'if node is already proven good', 'if state[node] == 2', `Node ${node} was already proven to reach only the destination.`, { current: node })
+      add('known', 'if (mark[node] === 2)', 'if state[node] == 2', `Node ${node} was already proven to reach only the destination.`, { current: node })
       return true
     }
     mark[node] = 1
     path.push(node)
-    add('enter', 'mark node as on the current path', 'state[node] = 1', `Enter node ${node}.`, { current: node })
+    add('enter', 'mark[node] = 1', 'state[node] = 1', `Enter node ${node}.`, { current: node })
     let ok
     if (outgoing[node].length === 0) {
       ok = node === destination
-      add('sink', 'if node has no outgoing edges', 'if not graph[node]', ok ? `Node ${node} is the destination and has no way out.` : `Node ${node} is a dead end, not the destination.`, { current: node, verdict: ok })
+      add('sink', 'if (outgoing[node].length === 0)', 'if not graph[node]', ok ? `Node ${node} is the destination and has no way out.` : `Node ${node} is a dead end, not the destination.`, { current: node, verdict: ok })
     } else if (node === destination) {
       ok = false
-      add('continue', 'if node is destination but has outgoing edges', 'elif node == destination', `Destination ${node} can keep moving, so some path does not stop here.`, { current: node, verdict: false })
+      add('continue', 'else if (node === destination)', 'elif node == destination', `Destination ${node} can keep moving, so some path does not stop here.`, { current: node, verdict: false })
     } else {
       ok = true
       for (const next of outgoing[node]) {
-        add('edge', 'for each next node reached from node', 'for nxt in graph[node]', `Follow the edge ${node} → ${next}.`, { current: node, edge: [node, next] })
+        add('edge', 'for (const next of outgoing[node])', 'for nxt in graph[node]', `Follow the edge ${node} → ${next}.`, { current: node, edge: [node, next] })
         if (!visit(next)) { ok = false; break }
       }
     }
     if (ok) {
       mark[node] = 2
-      add('settle', 'mark node as proven good', 'state[node] = 2', `Node ${node} reaches only the destination.`, { current: node, verdict: true })
+      add('settle', 'if (ok) mark[node] = 2', 'state[node] = 2', `Node ${node} reaches only the destination.`, { current: node, verdict: true })
     }
     path.pop()
     return ok
   }
   const result = visit(source)
-  add('done', 'return the result of visit(source)', 'return visit(source)', result ? 'Every path from the source ends at the destination.' : 'Some path loops, dead-ends, or passes through the destination.', { verdict: result })
+  add('done', 'return visit(source)', 'return visit(source)', result ? 'Every path from the source ends at the destination.' : 'Some path loops, dead-ends, or passes through the destination.', { verdict: result })
   return { input: { n, edges, source, destination }, result, frames }
 }

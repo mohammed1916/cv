@@ -1,31 +1,27 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
+import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
-  number: '1304',
-  phases, parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'Integer n (JSON)',
+  number: '1304', phases, parse: parseInput, build: buildTrace, code, python, examples,
+  inputLabel: 'Count n (JSON object)',
   url: 'https://leetcode.com/problems/find-n-unique-integers-sum-up-to-zero/',
-  complexity: 'O(n) time and O(n) space for the output.',
-  examples: [
-    { label: 'Odd count', input: '5' },
-    { label: 'Even count', input: '4' },
-    { label: 'Single', input: '1' },
-  ],
+  complexity: 'O(n) time and O(n) space for the answer.',
 }
 
-export default function SumToZero() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
-    const { answer, n, total } = step.snapshot
+export default function ZeroSumVisualizer() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const s = step.snapshot
     return <>
-      <p>Target count {n} · running sum {total}</p>
-      <div role="img" aria-label="Integers built so far" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        {answer.length === 0 ? <span>empty</span> : answer.map((v, i) => <div key={i} style={{ minWidth: 44, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', color: '#1c1917', background: v === 0 ? '#e0f2fe' : v > 0 ? '#dcfce7' : '#fee2e2' }}>{v}</div>)}
-      </div>
+      <IndexedSequence label="Answer slots" length={run.input}
+        valueAt={i => (i < s.answer.length ? s.answer[i] : '·')} active={s.answer.length - 1}
+        roleAt={i => (i < s.answer.length ? '' : 'empty')} />
+      <StackLane title="Running total" items={[String(s.sum)]} />
     </>
   }} renderReasoning={({ step }) => <>
-    <p><strong>Cancel in pairs:</strong> each positive value i with -i contributes nothing, so the sum stays zero.</p>
-    <p><strong>Distinctness:</strong> the pairs use different magnitudes, and zero is added at most once, so no value repeats.</p>
+    <p><strong>Pairs cancel:</strong> i and -i sum to zero, and using distinct positive i gives distinct values.</p>
+    <p><strong>Odd count:</strong> a single 0 fills the leftover slot.</p>
     <p>{step.message}</p>
   </>} />
 }

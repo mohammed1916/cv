@@ -21,13 +21,13 @@ export default function MergeStones() {
     const n = stones.length
     return <>
       <div aria-label="Pile values" style={{ display: 'flex', gap: 6, fontFamily: 'monospace' }}>
-        {stones.map((v, idx) => <div key={idx} style={{ minWidth: 40, textAlign: 'center', border: '1px solid var(--border)', padding: 4, background: ci !== null && idx >= ci && idx <= cj ? 'var(--surface2)' : 'transparent' }}>{v}</div>)}
+        {stones.map((v, idx) => <div key={idx} style={{ minWidth: 40, textAlign: 'center', border: '1px solid var(--border)', padding: 4, background: ci !== null && idx >= ci && idx <= cj ? 'var(--surface2)' : 'transparent', color: 'var(--text)' }}><div>{v}</div><small style={{ color: 'var(--primary)' }}>{ci === idx ? 'l' : cj === idx ? 'r' : ''}</small></div>)}
       </div>
       {!feasible ? <p>The pile count cannot be reduced to one pile with these groups.</p> : <table aria-label="Single-pile block costs" style={{ fontFamily: 'monospace', borderCollapse: 'collapse', marginTop: 8 }}>
         <thead><tr><th>from \ to</th>{Array.from({ length: n }, (_, j) => <th key={j}>{j}</th>)}</tr></thead>
         <tbody>{single.map((row, i) => <tr key={i}><th>{i}</th>{row.map((value, j) => {
           const active = i === ci && j === cj
-          return <td key={j} data-block={`${i},${j}`} style={{ width: 40, textAlign: 'center', border: `${active ? 2 : 1}px solid ${active ? 'var(--text)' : 'var(--border)'}`, background: value === null ? 'transparent' : '#bbf7d0', color: '#1c1917' }}>{value === null ? '' : value}</td>
+          return <td key={j} data-block={`${i},${j}`} style={{ width: 40, textAlign: 'center', border: `${active ? 2 : 1}px solid ${active ? 'var(--text)' : 'var(--border)'}`, background: value === null ? 'transparent' : 'var(--surface2)', color: 'var(--text)' }}>{value === null ? '' : value}</td>
         })}</tr>)}</tbody>
       </table>}
     </>

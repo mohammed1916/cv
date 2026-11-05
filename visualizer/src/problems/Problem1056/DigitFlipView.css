@@ -1,19 +1,13 @@
-.dfv { margin: 0; padding: 12px; font-size: 14px; color: #1f2937; background: #fff; }
-.dfv__row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-.dfv__label { width: 70px; flex: none; font-size: 11px; font-weight: 600; text-transform: uppercase; color: #6b7280; }
-.dfv__tiles { display: flex; gap: 6px; flex-wrap: wrap; }
-.dfv__tile { min-width: 40px; padding: 8px 10px; text-align: center; font-size: 22px; font-weight: 700; border: 2px solid #cbd5e1; border-radius: 10px; background: #f8fafc; }
-.dfv__tile--current { border-color: #2563eb; background: #dbeafe; }
-.dfv__tile--done { background: #dcfce7; border-color: #16a34a; }
-.dfv__tile--bad { border-color: #dc2626; background: #fee2e2; color: #991b1b; }
-.dfv__tile--out { background: #fef9c3; border-color: #ca8a04; }
-.dfv__tile--empty { color: #94a3b8; background: transparent; border-style: dashed; }
-.dfv__value { margin: 12px 0 6px; font-weight: 700; }
-.dfv__rule { margin: 0; font-size: 12px; color: #64748b; }
-@media (prefers-color-scheme: dark) {
-  .dfv { color: #e5e7eb; background: #111827; }
-  .dfv__tile { background: #1e293b; border-color: #334155; }
-  .dfv__tile--current { background: #1e3a8a; }
-  .dfv__tile--done { background: #14532d; }
-  .dfv__tile--out { background: #422006; }
-}
+.dfv { margin:0; padding:12px; font-size:14px; color:var(--text); background:transparent; }
+.dfv__row { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+.dfv__label { width:70px; flex:none; font-size:11px; font-weight:600; text-transform:uppercase; color:var(--text); }
+.dfv__tiles { display:flex; gap:6px; flex-wrap:wrap; }
+.dfv__tile { min-width:40px; padding:8px 10px; text-align:center; font-size:22px; font-weight:700; border:2px solid var(--border); border-radius:10px; background:transparent; }
+.dfv__tile--current { border-color:var(--primary); background:var(--surface2); }
+.dfv__tile--done { background:var(--surface2); border-color:var(--success); }
+.dfv__tile--bad { border-color:var(--warning); background:var(--surface2); color:var(--text); }
+.dfv__tile--out { background:var(--surface2); border-color:var(--warning); }
+.dfv__tile--empty { color:var(--text); background:transparent; border-style:dashed; }
+.dfv__value { margin:12px 0 6px; font-weight:700; }
+.dfv__rule { margin:0; font-size:12px; color:var(--text); }
+

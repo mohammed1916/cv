@@ -30,7 +30,7 @@ test('random distinct matrices agree with the scan oracle', () => {
   const rand = m => { state = (state * 1103515245 + 12345) & 0x7fffffff; return (state >> 8) % m }
   for (let t = 0; t < 300; t++) {
     const rows = 1 + rand(6), cols = 1 + rand(6)
-    const pool = Array.from({ length: 100 }, (_, i) => i).sort(() => rand(3) - 1)
+    const pool = Array.from({ length: 100 }, (_, i) => i + 1).sort(() => rand(3) - 1) // official values start at 1
     const matrix = Array.from({ length: rows }, (_, i) => pool.slice(i * cols, (i + 1) * cols))
     if (matrix.some(row => row.length !== cols)) continue
     assert.deepEqual(solve(matrix), brute(matrix), JSON.stringify(matrix))

@@ -10,12 +10,14 @@ export const python = [
 ].join("\n");
 
 export const code = [
-  "sort nums in ascending order",
-  "set total to the sum of all sides",
-  "for i from the largest index down to 2",
-  "if total minus nums[i] is greater than nums[i]",
-  "return total",
-  "remove nums[i] from total",
+  "const sorted = [...nums].sort((a, b) => a - b)",
+  "let total = sorted.reduce((sum, v) => sum + v, 0)",
+  "for (let i = sorted.length - 1; i >= 2; i--) {",
+  "  if (total - sorted[i] > sorted[i]) {",
+  "    return total",
+  "  }",
+  "  total -= sorted[i]",
+  "}",
   "return -1",
 ].map((text, index) => ({ line: index + 1, text }));
 
@@ -52,8 +54,8 @@ export function buildTrace(input) {
       break;
     }
     total -= sorted[i];
-    push({ phase: "shrink", activeLine: 6, pythonLine: 7, index: i, message: `Drop ${sorted[i]}; it cannot be the longest side.` });
+    push({ phase: "shrink", activeLine: 7, pythonLine: 7, index: i, message: `Drop ${sorted[i]}; it cannot be the longest side.` });
   }
-  if (result === -1) push({ phase: "done", activeLine: 7, pythonLine: 8, index: -1, stats: { total, result: -1 }, message: "No polygon can be formed; return -1." });
+  if (result === -1) push({ phase: "done", activeLine: 9, pythonLine: 8, index: -1, stats: { total, result: -1 }, message: "No polygon can be formed; return -1." });
   return { input, result, frames };
 }

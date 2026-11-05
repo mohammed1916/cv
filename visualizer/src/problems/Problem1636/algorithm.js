@@ -1,54 +1,67 @@
-export const phases = [
-  { id: 'count', label: 'Count values', description: 'Count how often each value appears, listing values in the order they first appear.' },
-  { id: 'order', label: 'Order keys', description: 'Sort by count ascending. Among equal counts, larger values come first.' },
-  { id: 'place', label: 'Place elements', description: 'Write each element out in that order, repeating a value as many times as it appears.' },
+// Sort by increasing frequency: count values, order by count ascending then value descending, then expand.
+const JS_LINES = [
+  { text: 'const freq = new Map()', py: 'freq = Counter' },
+  { text: 'for (const x of nums) freq.set(x, (freq.get(x) ?? 0) + 1)', py: null },
+  { text: 'const order = [...freq.keys()].sort((a, b) => freq.get(a) - freq.get(b) || b - a)', py: 'order = sorted' },
+  { text: 'return order.flatMap(v => Array(freq.get(v)).fill(v))', py: 'return [v' },
 ]
 
+export const code = JS_LINES.map(({ text }, i) => ({ line: i + 1, text }))
+
+export const python = `from collections import Counter
+
+def frequencySort(nums):
+    freq = Counter(nums)
+    order = sorted(freq, key=lambda v: (freq[v], -v))
+    return [v for v in order for _ in range(freq[v])]
+`
+
+const PY = python.split('\n')
+const pyAt = needle => {
+  const index = PY.findIndex(line => line.includes(needle))
+  if (index < 0) throw new Error(`python line missing: ${needle}`)
+  return index + 1
+}
+export const pythonLineMap = Object.fromEntries(JS_LINES.map((line, i) => [i + 1, pyAt(line.py ?? 'freq = Counter')]))
+
+export const phases = [
+  { id: 'count', label: 'Count', description: 'Count how often each value appears.' },
+  { id: 'order', label: 'Order', description: 'Rarer values come first; equal counts put the larger value first.' },
+  { id: 'expand', label: 'Expand', description: 'Write each value out as many times as it appeared.' },
+  { id: 'done', label: 'Result', description: 'The expanded list is the answer.' },
+]
+
+export const examples = [
+  { label: 'Ties by value', input: '[5,5,7,9,9,9,4]' },
+  { label: 'All distinct', input: '[3,1,2]' },
+  { label: 'One value', input: '[8,8,8,8]' },
+]
+
+export const complexity = 'O(n + k log k) time for n values with k distinct values. Space is O(n).'
+
 export function parseInput(text) {
-  const data = JSON.parse(text)
-  if (!data || !Array.isArray(data.nums)) throw new Error('Use {"nums":[...]}.')
-  if (data.nums.length < 1 || data.nums.length > 20) throw new Error('Use 1 to 20 numbers.')
-  if (!data.nums.every(v => Number.isInteger(v) && v >= -100 && v <= 100)) throw new Error('Each number must be an integer from -100 to 100.')
-  return { nums: [...data.nums] }
+  const nums = JSON.parse(text)
+  if (!Array.isArray(nums) || nums.length < 1 || nums.length > 100) throw new Error('Use a JSON array of 1 to 100 integers.')
+  if (!nums.every(v => Number.isInteger(v) && v >= -100 && v <= 100)) throw new Error('Values are integers from -100 to 100.')
+  return nums
 }
 
-const CODE = `sort by increasing frequency (nums):
-  count = how many times each value appears
-  for each distinct value v, in first-appearance order:
-    record the pair (count[v], v)
-  sort the elements by count ascending, then value descending
-  place each element in that order
-  return the placed list`.split('\n')
-export const code = CODE.map((text, index) => ({ line: index + 1, text }))
-const L = { count: 2, tally: 4, order: 5, place: 6, done: 7 }
-
-export const python = `def frequency_sort(nums):
-    count = Counter(nums)
-    order = sorted(nums, key=lambda x: (count[x], -x))
-    return order`
-const PYLINE = { count: 2, tally: 2, order: 3, place: 3, done: 4 }
-
-export function buildTrace(input) {
-  const { nums } = input
-  const count = new Map()
-  for (const v of nums) count.set(v, (count.get(v) || 0) + 1)
-  const distinct = [...new Set(nums)]
+export function buildTrace(nums) {
   const frames = []
-  const tally = []
-  frames.push({ phase: 'count', activeLine: L.count, pythonLine: PYLINE.count, message: `Count each value in the list of ${nums.length} numbers.`, tally: [], keys: [], placed: [] })
-  for (const v of distinct) {
-    tally.push({ value: v, count: count.get(v) })
-    frames.push({ phase: 'count', activeLine: L.tally, pythonLine: PYLINE.tally, message: `${v} appears ${count.get(v)} time${count.get(v) === 1 ? '' : 's'}.`, tally: tally.map(t => ({ ...t })), keys: [], placed: [] })
+  const freq = new Map()
+  const snap = extra => ({ counts: Object.fromEntries(freq), ...extra })
+  frames.push({ phase: 'count', activeLine: 1, index: -1, message: 'Start with no counts.', snapshot: snap({}) })
+  nums.forEach((x, i) => {
+    freq.set(x, (freq.get(x) ?? 0) + 1)
+    frames.push({ phase: 'count', activeLine: 2, index: i, message: `${x} seen ${freq.get(x)} time${freq.get(x) === 1 ? '' : 's'}.`, snapshot: snap({}) })
+  })
+  const order = [...freq.keys()].sort((a, b) => freq.get(a) - freq.get(b) || b - a)
+  frames.push({ phase: 'order', activeLine: 3, index: -1, message: `Order of values: ${order.join(', ')}.`, snapshot: snap({ order }) })
+  const out = []
+  for (const v of order) {
+    for (let k = 0; k < freq.get(v); k++) out.push(v)
+    frames.push({ phase: 'expand', activeLine: 4, index: -1, message: `Write ${v} ${freq.get(v)} time${freq.get(v) === 1 ? '' : 's'}.`, snapshot: snap({ order, out: [...out] }) })
   }
-  const keys = [...distinct].sort((a, b) => count.get(a) - count.get(b) || b - a).map(v => ({ value: v, count: count.get(v) }))
-  frames.push({ phase: 'order', activeLine: L.order, pythonLine: PYLINE.order, message: `Order the values: ${keys.map(k => `${k.value} (×${k.count})`).join(', ')}.`, tally: [], keys, placed: [] })
-  const result = []
-  for (const k of keys) {
-    for (let c = 0; c < k.count; c++) {
-      result.push(k.value)
-      frames.push({ phase: 'place', activeLine: L.place, pythonLine: PYLINE.place, message: `Place ${k.value} (copy ${c + 1} of ${k.count}).`, tally: [], keys, placed: [...result] })
-    }
-  }
-  frames.push({ phase: 'place', activeLine: L.done, pythonLine: PYLINE.done, message: `The sorted list is ${result.join(', ')}.`, tally: [], keys, placed: [...result] })
-  return { input, result, frames }
+  frames.push({ phase: 'done', activeLine: 4, index: -1, result: out, message: `Result: [${out.join(', ')}].`, snapshot: snap({ order, out, result: out }) })
+  return { input: nums, result: out, frames }
 }

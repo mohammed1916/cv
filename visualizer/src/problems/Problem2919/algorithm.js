@@ -13,7 +13,7 @@ export function buildTrace(input) {
   const n = nums.length
   const frames = []
   if (n < 3) {
-    frames.push({ phase: 'short', activeLine: L('if n is less than 3'), index: -1, dp: [], cost: 0, result: 0, message: 'No subarray has length 3, so the array is already beautiful.' })
+    frames.push({ phase: 'short', activeLine: L('if (n < 3)'), index: -1, dp: [], cost: 0, result: 0, message: 'No subarray has length 3, so the array is already beautiful.' })
     frames.push({ phase: 'done', activeLine: L('return 0'), index: -1, dp: [], cost: 0, result: 0, message: 'Operations needed: 0.' })
     return { input, nums, k, result: 0, frames }
   }
@@ -26,19 +26,22 @@ export function buildTrace(input) {
     frames.push({ phase: 'cover', activeLine: L('dp[i] = cost + best'), index: i, dp: [...dp], cost: costs[i], result: null, message: `Raising index ${i} to ${k} costs ${costs[i]}. Best total ending here: ${dp[i]}.` })
   }
   const result = Math.min(...dp.slice(n - 3))
-  frames.push({ phase: 'done', activeLine: L('return the minimum'), index: -1, dp: [...dp], cost: 0, result, message: `Minimum increments: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return Math.min(dp'), index: -1, dp: [...dp], cost: 0, result, message: `Minimum increments: ${result}.` })
   return { input, nums, k, result, frames }
 }
 
-export const code = `minimum increments so every window of 3 has a raised index
-  if n is less than 3 then return 0
-  for each index i from 0 to n-1 do
-    cost = max(0, k minus nums[i])
-    best = 0 if i is at most 2, otherwise infinity
-    for p from i-1 down to i-3 that exist do
-      best = min(best, dp[p])
+export const code = `function minIncrements(nums, k) {
+  const n = nums.length
+  if (n < 3) return 0
+  const dp = []
+  for (let i = 0; i < n; i++) {
+    const cost = Math.max(0, k - nums[i])
+    let best = i <= 2 ? 0 : Infinity
+    for (let p = i - 1; p >= Math.max(0, i - 3); p--) best = Math.min(best, dp[p])
     dp[i] = cost + best
-  return the minimum of dp[i] for i from n-3 to n-1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+  }
+  return Math.min(dp[n - 3], dp[n - 2], dp[n - 1])
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def min_increments(nums, k):

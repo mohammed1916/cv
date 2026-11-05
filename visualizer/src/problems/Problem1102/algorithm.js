@@ -7,18 +7,29 @@
 const MAX_SIDE = 8;
 const MAX_VALUE = 1000;
 
-const CODE_LINES = [
-  'FUNCTION maximumMinimumPath(grid)',
-  '    rows, cols ← size of grid',
-  '    best ← rows × cols table filled with -1 (no path yet)',
-  '    best[0][0] ← grid[0][0]; frontier ← [(0, 0)]',
-  '    WHILE frontier is not empty',
-  '        (r, c) ← remove the frontier cell with the largest best value',
-  '        FOR each neighbour (nr, nc) inside the grid',
-  '            score ← min(best[r][c], grid[nr][nc])',
-  '            IF score > best[nr][nc] THEN best[nr][nc] ← score; add (nr, nc) to frontier',
-  '    RETURN best[rows-1][cols-1]',
-];
+const CODE_LINES = `function maximumMinimumPath(grid) {
+  const rows = grid.length
+  const cols = grid[0].length
+  const best = Array.from({ length: rows }, () => Array(cols).fill(-1))
+  best[0][0] = grid[0][0]
+  const frontier = [[0, 0]]
+  while (frontier.length) {
+    frontier.sort((a, b) => best[b[0]][b[1]] - best[a[0]][a[1]])
+    const [r, c] = frontier.shift()
+    for (const [dr, dc] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+      const nr = r + dr
+      const nc = c + dc
+      if (nr >= 0 && nr < rows && nc >= 0 && nc < cols) {
+        const score = Math.min(best[r][c], grid[nr][nc])
+        if (score > best[nr][nc]) {
+          best[nr][nc] = score
+          frontier.push([nr, nc])
+        }
+      }
+    }
+  }
+  return best[rows - 1][cols - 1]
+}`.split('\n');
 
 const PY_LINES = [
   'import heapq',
@@ -59,7 +70,7 @@ export const phases = [
 
 const L = (text) => {
   const index = code.findIndex((entry) => entry.text.includes(text));
-  if (index < 0) throw new Error(`Missing pseudocode line: ${text}`);
+  if (index < 0) throw new Error(`Missing code line: ${text}`);
   return index + 1;
 };
 
@@ -96,7 +107,7 @@ export function buildTrace(input) {
   let frontier = [{ r: 0, c: 0 }];
   const frames = [];
   frames.push({
-    pythonLine: P('best = [[-1]'), phase: 'setup', activeLine: L('best ← rows × cols table'),
+    pythonLine: P('best = [[-1]'), phase: 'setup', activeLine: L('const best = Array.from'),
     current: null, neighbour: null, score: null, improved: null, best: snapshot(best), frontier: frontier.map((cell) => ({ ...cell })),
     message: `Start at the top-left cell with score ${grid[0][0]}.`,
   });
@@ -107,7 +118,7 @@ export function buildTrace(input) {
     }
     const [{ r, c }] = frontier.splice(pick, 1);
     frames.push({
-      pythonLine: P('negative, r, c = heapq.heappop'), phase: 'expand', activeLine: L('(r, c) ← remove the frontier cell'),
+      pythonLine: P('negative, r, c = heapq.heappop'), phase: 'expand', activeLine: L('const [r, c] = frontier.shift()'),
       current: { r, c }, neighbour: null, score: null, improved: null, best: snapshot(best), frontier: frontier.map((cell) => ({ ...cell })),
       message: `Expand (${r}, ${c}) with path score ${best[r][c]}.`,
     });
@@ -122,7 +133,7 @@ export function buildTrace(input) {
         frontier.push({ r: nr, c: nc });
       }
       frames.push({
-        pythonLine: P(improved ? 'best[nr][nc] = score' : 'if score > best[nr][nc]:'), phase: 'relax', activeLine: L('score ← min(best[r][c]'),
+        pythonLine: P(improved ? 'best[nr][nc] = score' : 'if score > best[nr][nc]:'), phase: 'relax', activeLine: L('const score = Math.min(best[r][c]'),
         current: { r, c }, neighbour: { r: nr, c: nc }, score, improved, best: snapshot(best), frontier: frontier.map((cell) => ({ ...cell })),
         message: improved
           ? `(${nr}, ${nc}) gets score ${score}, which improves its best, so it joins the frontier.`
@@ -132,7 +143,7 @@ export function buildTrace(input) {
   }
   const answer = best[rows - 1][cols - 1];
   frames.push({
-    pythonLine: P('return best[rows - 1][cols - 1]'), phase: 'done', activeLine: L('RETURN best[rows-1][cols-1]'),
+    pythonLine: P('return best[rows - 1][cols - 1]'), phase: 'done', activeLine: L('return best[rows - 1][cols - 1]'),
     current: null, neighbour: null, score: null, improved: null, best: snapshot(best), frontier: [],
     message: `The bottom-right cell's best score is ${answer}.`,
   });

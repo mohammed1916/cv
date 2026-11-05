@@ -1,37 +1,26 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import RecordStateTable from '../../components/shared/RecordStateTable'
+import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
-  number: '1337',
-  phases, parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'Object with mat (0/1 rows) and k (JSON)',
+  number: '1337', phases, parse: parseInput, build: buildTrace, code, python, examples,
+  inputLabel: 'Object with mat and k (JSON)',
   url: 'https://leetcode.com/problems/the-k-weakest-rows-in-a-matrix/',
-  complexity: 'O(m·n + m log m) time: count each row once, then sort the m row pairs.',
-  examples: [
-    { label: 'Mixed', input: '{"mat":[[1,1,0,0,0],[1,1,1,1,0],[1,0,0,0,0],[1,1,0,0,0],[1,1,1,1,1]],"k":3}' },
-    { label: 'Ties', input: '{"mat":[[1,0],[1,0],[0,0],[1,0]],"k":4}' },
-    { label: 'Single', input: '{"mat":[[1,1,1],[0,0,1],[1,0,0]],"k":1}' },
-  ],
+  complexity: 'O(m log m + m n) time for counting and sorting the rows, and O(m) extra space.',
 }
 
-export default function KWeakestRows() {
+export default function WeakestRowsVisualizer() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
-    const { rows, keyed, order, chosen, current } = step.snapshot
-    const chosenSet = new Set(chosen ?? [])
+    const s = step.snapshot
+    const rows = s.strength.map(r => ({ row: r.row, soldiers: r.soldiers, rank: s.sorted ? s.sorted.indexOf(r.row) + 1 : '' }))
+    const picked = s.picked ?? []
     return <>
-      <table aria-label="Matrix rows" style={{ borderCollapse: 'collapse', fontFamily: 'monospace', marginBottom: 12 }}>
-        <tbody>{rows.map((row, i) => <tr key={i} data-row={i} style={{ background: i === current ? 'var(--surface2)' : chosenSet.has(i) ? '#bbf7d0' : 'transparent' }}>
-          <th style={{ padding: '2px 8px', textAlign: 'left' }}>row {i}</th>
-          {row.map((v, j) => <td key={j} style={{ padding: '2px 8px', color: '#1c1917', background: v ? '#fde68a' : '#f5f5f4' }}>{v}</td>)}
-        </tr>)}</tbody>
-      </table>
-      <p>{keyed.length ? `Stored pairs (strength, row): ${keyed.map(([c, i]) => `(${c}, ${i})`).join(' ')}` : 'No row has been scored yet.'}</p>
-      {order && <p>{`Sorted order: ${order.map(([c, i]) => `row ${i}`).join(' → ')}`}</p>}
-      {chosen && <p><strong>Answer so far:</strong> rows {chosen.join(', ')}</p>}
+      <RecordStateTable label={`Rows of the ${run.input.mat.length}-row matrix`} columns={['row', 'soldiers', 'rank']} rows={rows}
+        activeRow={s.current ?? rows.findIndex(r => picked.includes(r.row))} />
+      <p>Chosen so far: <strong>{picked.length ? picked.join(', ') : 'none'}</strong> (k = {s.k}).</p>
     </>
   }} renderReasoning={({ step }) => <>
-    <p><strong>Strength is a count:</strong> the soldiers in a row are its ones, so counting them is a single pass over that row.</p>
-    <p><strong>Ties need the index:</strong> pairing each count with its row index makes the sort deterministic, so equal rows come out in their original order.</p>
-    <p>{step.snapshot.chosen ? 'The first k entries of the sorted list are the answer.' : 'Score every row, then sort the pairs.'}</p>
+    <p><strong>Rank by count, then index:</strong> rows are scored by their soldier count, and equal counts keep the smaller row index first.</p>
+    <p>{step.message}</p>
   </>} />
 }

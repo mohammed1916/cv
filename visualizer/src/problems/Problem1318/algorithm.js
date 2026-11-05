@@ -1,73 +1,74 @@
 export const phases = [
-  { id: 'start', label: 'Start', description: 'Start with zero flips and walk the bit positions from the lowest upward.' },
-  { id: 'read', label: 'Read bits', description: 'Read the same bit position from a, b and c.' },
-  { id: 'one', label: 'Target bit is 1', description: 'a or b must supply this bit. Only a position where both are 0 costs one flip.' },
-  { id: 'zero', label: 'Target bit is 0', description: 'Every set bit of a or b at this position must be cleared, one flip each.' },
-  { id: 'done', label: 'Complete', description: 'Return the total number of flips across all bit positions.' },
+  { id: 'start', label: 'Start', description: 'Compare a, b and c one bit position at a time, starting from the lowest bit.' },
+  { id: 'both', label: 'c bit is 0, a and b are 1', description: 'When c needs 0, every 1 bit in a and in b must be flipped to 0.' },
+  { id: 'one', label: 'c bit is 0, one of a or b is 1', description: 'Flip that single 1 bit to 0.' },
+  { id: 'missing', label: 'c bit is 1, a and b are 0', description: 'When c needs 1 but neither a nor b has it, one flip creates it.' },
+  { id: 'match', label: 'Bits already match', description: 'No flip is needed at this bit position.' },
+  { id: 'done', label: 'Complete', description: 'Return the total number of flips.' },
+]
+
+export const examples = [
+  { label: 'Classic example', input: '{"a":2,"b":6,"c":5}' },
+  { label: 'Equal already', input: '{"a":4,"b":2,"c":7}' },
+  { label: 'Both ones need flips', input: '{"a":1,"b":2,"c":3}' },
 ]
 
 export function parseInput(text) {
-  const input = JSON.parse(text)
-  if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Use an object such as {"a": 2, "b": 6, "c": 5}.')
-  const { a, b, c } = input
-  for (const [name, value] of [['a', a], ['b', b], ['c', c]]) {
-    if (!Number.isInteger(value) || value < 0 || value > 1000) throw new Error(`${name} is an integer from 0 to 1000.`)
+  const data = JSON.parse(text)
+  if (!data || typeof data !== 'object' || ![data.a, data.b, data.c].every(Number.isInteger)) throw new Error('Use an object with integers a, b and c, such as {"a":2,"b":6,"c":5}.')
+  for (const [name, v] of [['a', data.a], ['b', data.b], ['c', data.c]]) {
+    if (v < 1 || v > 1000000000) throw new Error(`${name} must be from 1 to 1000000000.`)
   }
-  return { a, b, c }
+  return { a: data.a, b: data.b, c: data.c }
 }
 
-const BIT_COUNT = 10
-
 export function buildTrace({ a, b, c }) {
-  const rows = []
   let flips = 0
-  const frames = []
-  const snap = (bit, x, y, z) => ({ bit, x, y, z, flips, rows: [...rows] })
-  frames.push({ phase: 'start', activeLine: L('flips = 0'), pythonLine: P('flips = 0'), snapshot: snap(null, null, null, null), message: `Compare the bits of a=${a}, b=${b} and c=${c} from the lowest position upward.` })
-  for (let k = 0; k < BIT_COUNT; k++) {
-    const x = (a >> k) & 1
-    const y = (b >> k) & 1
-    const z = (c >> k) & 1
-    frames.push({ phase: 'read', activeLine: L('for each bit'), pythonLine: P('for k in range'), snapshot: snap(k, x, y, z), message: `Bit ${k}: a=${x}, b=${y}, c=${z}.` })
-    let cost
-    if (z === 1) {
-      cost = x === 0 && y === 0 ? 1 : 0
-      flips += cost
-      frames.push({ phase: 'one', activeLine: L('if z == 1'), pythonLine: P('if z == 1'), snapshot: snap(k, x, y, z), message: cost ? 'c needs a 1 here and both a and b have 0, so one flip is required.' : 'c needs a 1 here and a or b already supplies it, so no flip.' })
-    } else {
-      cost = x + y
-      flips += cost
-      frames.push({ phase: 'zero', activeLine: L('else'), pythonLine: P('else:'), snapshot: snap(k, x, y, z), message: cost ? `c needs a 0 here, so ${cost} set bit${cost === 1 ? '' : 's'} must be cleared.` : 'c needs a 0 here and a and b already have 0, so no flip.' })
-    }
-    rows.push({ bit: k, a: x, b: y, c: z, cost })
+  const rows = []
+  const snap = (bit, extra = {}) => ({ bit, rows: [...rows], flips, ...extra })
+  const frames = [{ phase: 'start', activeLine: L('let flips = 0'), pythonLine: P('flips = 0'), snapshot: snap(null),
+    message: `Compare the bits of ${a}, ${b} and ${c} from the lowest position upward.` }]
+  const bits = Math.max(a, b, c).toString(2).length
+  for (let bit = 0; bit < bits; bit++) {
+    const x = (a >> bit) & 1, y = (b >> bit) & 1, z = (c >> bit) & 1
+    let phase, message, add = 0, line, py
+    if (z === 0 && x === 1 && y === 1) { phase = 'both'; add = 2; line = L('flips += 2'); py = P('flips += 2'); message = `Bit ${bit}: a and b are both 1 but c is 0, so flip both (2 flips).` }
+    else if (z === 0 && (x === 1 || y === 1)) { phase = 'one'; add = 1; line = L('flips += 1'); py = P('flips += 1'); message = `Bit ${bit}: c is 0 and one of a or b is 1, so flip that bit (1 flip).` }
+    else if (z === 1 && x === 0 && y === 0) { phase = 'missing'; add = 1; line = L('flips += 1'); py = P('flips += 1'); message = `Bit ${bit}: c is 1 but a and b are 0, so flip one bit (1 flip).` }
+    else { phase = 'match'; line = L('if (z === 0'); py = P('if z == 0'); message = `Bit ${bit}: the bits already give c's value, so no flip.` }
+    flips += add
+    rows.push({ bit, a: x, b: y, c: z, flips: add })
+    frames.push({ phase, activeLine: line, pythonLine: py, snapshot: snap(bit, { x, y, z, add }), message })
   }
-  frames.push({ phase: 'done', activeLine: L('return flips'), pythonLine: P('return flips'), snapshot: snap(null, null, null, null), message: `Total flips needed: ${flips}.` })
+  frames.push({ phase: 'done', activeLine: L('return flips'), pythonLine: P('return flips'), snapshot: snap(null),
+    message: `Return ${flips}.`, result: flips })
   return { input: { a, b, c }, result: flips, frames }
 }
 
-export const code = `minimum flips (a, b, c):
-  flips = 0
-  for each bit position k from 0 to 9:
-    x, y, z = bit k of a, bit k of b, bit k of c
-    if z == 1:
-      if x == 0 and y == 0:
-        flips += 1
-    else:
+export const code = `function minFlips(a, b, c) {
+  let flips = 0
+  for (let bit = 0; bit < 31; bit++) {
+    const x = (a >> bit) & 1, y = (b >> bit) & 1, z = (c >> bit) & 1
+    if (z === 0) {
       flips += x + y
-  return flips`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    } else if (x === 0 && y === 0) {
+      flips += 1
+    }
+  }
+  return flips
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
-const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def min_flips(a, b, c):
     flips = 0
-    for k in range(10):
-        x = (a >> k) & 1
-        y = (b >> k) & 1
-        z = (c >> k) & 1
-        if z == 1:
-            if x == 0 and y == 0:
-                flips += 1
-        else:
+    for bit in range(31):
+        x = (a >> bit) & 1
+        y = (b >> bit) & 1
+        z = (c >> bit) & 1
+        if z == 0:
             flips += x + y
+        elif x == 0 and y == 0:
+            flips += 1
     return flips
 `
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

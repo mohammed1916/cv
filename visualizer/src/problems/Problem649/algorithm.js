@@ -1,52 +1,58 @@
 export function parseInput(text) {
-  const s = JSON.parse(text)
-  if (typeof s !== 'string' || s.length < 1 || s.length > 10000 || ![...s].every(c => c === 'R' || c === 'D')) throw new Error('Enter a JSON string of 1–10,000 characters, each R or D.')
-  return s
+  const senate = JSON.parse(text)
+  if (typeof senate !== 'string' || senate.length < 1 || senate.length > 10000 || ![...senate].every(c => c === 'R' || c === 'D')) throw new Error('Enter a JSON string of 1–10,000 letters, each R or D.')
+  return senate
 }
 
-// Two queues of senator positions; the front of each queue acts next, bans the first opponent, and re-queues.
+// Two queues of seat numbers. The front senator of each party bans the other party's front senator,
+// and the survivor re-queues at the back with a later turn number (position + n).
 export function buildTrace(senate) {
+  const n = senate.length
   const radiant = [], dire = []
   ;[...senate].forEach((c, i) => (c === 'R' ? radiant : dire).push(i))
-  const n = senate.length
-  const frames = [{ phase: 'start', radiant: [...radiant], dire: [...dire], round: 0, pythonLine: P('radiant, dire = deque()'), activeLine: L('radiant = empty queue'), message: 'Queue each senator by position.' }]
-  let round = 0
+  const frames = [{ phase: 'start', senate, radiant: [...radiant], dire: [...dire], banned: null, activeLine: L('const radiant = []'), pythonLine: P('radiant = deque('), message: 'Queue every senator by seat order in one queue per party.' }]
   while (radiant.length && dire.length) {
-    const r = radiant.shift(), d = dire.shift()
-    round++
-    if (r < d) { radiant.push(r + n); frames.push({ phase: 'ban', radiant: [...radiant], dire: [...dire], round, actor: r, victim: d, winner: 'R', pythonLine: P('radiant.append(r + n)'), activeLine: L('add r + n to the back of radiant'), message: `Senator ${r} (R) bans senator ${d} (D). R returns to the queue.` }) }
-    else { dire.push(d + n); frames.push({ phase: 'ban', radiant: [...radiant], dire: [...dire], round, actor: d, victim: r, winner: 'D', pythonLine: P('dire.append(d + n)'), activeLine: L('add d + n to the back of dire'), message: `Senator ${d} (D) bans senator ${r} (R). D returns to the queue.` }) }
+    const r = radiant.shift()
+    const d = dire.shift()
+    const winner = r < d ? 'R' : 'D'
+    if (r < d) radiant.push(r + n)
+    else dire.push(d + n)
+    frames.push({ phase: 'round', senate, radiant: [...radiant], dire: [...dire], banned: winner === 'R' ? d : r, acting: winner === 'R' ? r : d, activeLine: L('if (r < d)'), pythonLine: P('if r < d'), message: `Seat ${r} (R) and seat ${d} (D) face off; ${winner === 'R' ? 'the Radiant seat bans the Dire seat' : 'the Dire seat bans the Radiant seat'}.` })
   }
   const result = radiant.length ? 'Radiant' : 'Dire'
-  frames.push({ phase: 'done', radiant: [...radiant], dire: [...dire], round, result, pythonLine: P("return 'Radiant'"), activeLine: L('return "Radiant"'), message: `${result} wins: the other party has no senators left.` })
+  frames.push({ phase: 'done', senate, radiant: [...radiant], dire: [...dire], banned: null, result, activeLine: L("'Radiant' : 'Dire'"), pythonLine: P("return 'Radiant'"), message: `${result} wins: the other party has no senators left.` })
   return { input: senate, result, frames }
 }
 
-export const code = `radiant = empty queue, dire = empty queue
-for each position i and letter c in senate:
-  if c is R: add i to the back of radiant
-  else: add i to the back of dire
-n = length of senate
-while radiant and dire are both non-empty:
-  r = pop front of radiant, d = pop front of dire
-  if r < d: add r + n to the back of radiant
-  else: add d + n to the back of dire
-return "Radiant" if radiant is non-empty, else "Dire"`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const SOURCE = `function predictPartyVictory(senate) {
+  const n = senate.length
+  const radiant = []
+  const dire = []
+  ;[...senate].forEach((c, i) => (c === 'R' ? radiant : dire).push(i))
+  while (radiant.length > 0 && dire.length > 0) {
+    const r = radiant.shift()
+    const d = dire.shift()
+    if (r < d) radiant.push(r + n)
+    else dire.push(d + n)
+  }
+  return radiant.length > 0 ? 'Radiant' : 'Dire'
+}`
+export const code = SOURCE.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
-const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `from collections import deque
 
 
 def predict_party_victory(senate):
-    radiant, dire = deque(), deque()
-    for i, c in enumerate(senate):
-        (radiant if c == 'R' else dire).append(i)
     n = len(senate)
+    radiant = deque(i for i, c in enumerate(senate) if c == 'R')
+    dire = deque(i for i, c in enumerate(senate) if c == 'D')
     while radiant and dire:
-        r, d = radiant.popleft(), dire.popleft()
+        r = radiant.popleft()
+        d = dire.popleft()
         if r < d:
             radiant.append(r + n)
         else:
             dire.append(d + n)
     return 'Radiant' if radiant else 'Dire'`
+const P = s => python.split('\n').findIndex(t => t.includes(s)) + 1

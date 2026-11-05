@@ -4,32 +4,34 @@ import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
-    { id: 'visit', label: 'Sum subtrees', description: 'Each node gets the sum of its own subtree, children first.' },
-    { id: 'done', label: 'Decide', description: 'Look for a non-root subtree that sums to half the total.' },
+    { id: 'start', label: 'Collect sums', description: 'Start the bottom-up pass over the tree.' },
+    { id: 'subtree', label: 'Subtree sum', description: 'A node’s subtree sum is its value plus both child sums.' },
+    { id: 'check', label: 'Look for half', description: 'Half the total must appear as a subtree sum below the root.' },
+    { id: 'done', label: 'Answer', description: 'Report whether one cut makes two equal halves.' },
   ],
-  parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'Tree (JSON level order)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Tree (LeetCode level-order JSON array)',
   url: 'https://leetcode.com/problems/equal-tree-partition/',
-  complexity: 'O(n) time and O(h) stack space. The visualization caps input at 30 nodes.',
+  complexity: 'O(n) time and O(n) space for the subtree sums and the recursion.',
   examples: [
-    { label: 'Example 1', input: '[5,10,10,null,null,2,3]' },
-    { label: 'Example 2', input: '[1,2,10]' },
+    { label: 'Split', input: '[6,3,3,null,null,2,4]' },
+    { label: 'Odd total', input: '[3,1,1]' },
+    { label: 'Single', input: '[6]' },
   ],
 }
 
 export default function EqualTreePartition() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const roles = {}
-    for (const id of step.visited) roles[id] = 'visited'
-    if (step.node !== null) roles[step.node] = 'active'
-    const tags = Object.fromEntries(Object.entries(step.sums).map(([id, sum]) => [id, `sum ${sum}`]))
+    const tags = {}
+    step.sums.forEach(({ id, total }) => { tags[id] = String(total) })
+    if (step.node !== null && step.node !== undefined) roles[step.node] = 'current'
+    if (step.target !== null) step.sums.forEach(({ id, total }) => { if (total === step.target && id !== run.root?.id) roles[id] = 'found' })
     return <>
       <BinaryTreeLane title="Tree with subtree sums" root={run.root} roles={roles} tags={tags}
-        note={step.total === null ? undefined : `total ${step.total}`} />
-      <output aria-label="Result">{step.result === null ? 'Deciding after the walk' : `Equal partition possible: ${step.result}`}</output>
+        note={step.sum === null ? '' : `total ${step.sum}${step.target !== null ? `, half ${step.target}` : ''}`} />
     </>
-  }} renderReasoning={() => <>
-    <p>Removing the edge above a node splits the tree into that subtree and the rest. The two sums are equal exactly when the subtree sums to half the total.</p>
-    <p>The root itself is excluded, since cutting nothing above it does not split the tree.</p>
+  }} renderReasoning={({ step }) => <>
+    <p>{step.message}</p>
+    <p><strong>Why a subtree sum:</strong> removing the edge above a subtree leaves the rest of the tree with total minus that subtree sum.</p>
   </>} />
 }

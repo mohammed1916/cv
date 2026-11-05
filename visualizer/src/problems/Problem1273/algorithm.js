@@ -1,12 +1,24 @@
-const CODE_LINES = [
-  'build the list of children for each node',
-  'order the nodes so every child comes before its parent',
-  'for each node v in that order',
-  'sum[v] is value[v] plus the sums of its children',
-  'for each node v from the root downward',
-  'v is removed if its sum is zero or its parent was removed',
-  'return the number of nodes not removed',
-]
+const CODE_LINES = `function deleteTreeNodes(parent, value) {
+  const n = parent.length
+  const children = Array.from({ length: n }, () => [])
+  for (let v = 1; v < n; v++) children[parent[v]].push(v)
+  const order = []
+  const stack = [0]
+  while (stack.length) {
+    const v = stack.pop()
+    order.push(v)
+    stack.push(...children[v])
+  }
+  const total = [...value]
+  for (const v of [...order].reverse()) {
+    for (const c of children[v]) total[v] += total[c]
+  }
+  const removed = Array(n).fill(false)
+  for (const v of order) {
+    if (total[v] === 0 || (v !== 0 && removed[parent[v]])) removed[v] = true
+  }
+  return removed.filter(r => !r).length
+}`.split('\n')
 
 export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }))
 const L = text => {
@@ -80,7 +92,7 @@ export function buildTrace({ parent, value }) {
   const snapshot = (sum, removed, index, extra = {}) => ({ sum: [...sum], removed: [...removed], index, ...extra })
   const sum = [...value]
   const removed = Array(n).fill(false)
-  frames.push({ phase: 'build', activeLine: L('build the list of children'), pythonLine: P('children = [[] for'), message: 'Each node lists the children that point to it.', ...snapshot(sum, removed, -1) })
+  frames.push({ phase: 'build', activeLine: L('const children = Array.from'), pythonLine: P('children = [[] for'), message: 'Each node lists the children that point to it.', ...snapshot(sum, removed, -1) })
   const order = []
   const stack = [0]
   while (stack.length) {
@@ -88,23 +100,23 @@ export function buildTrace({ parent, value }) {
     order.push(v)
     stack.push(...children[v])
   }
-  frames.push({ phase: 'build', activeLine: L('order the nodes so every child'), pythonLine: P('order = []'), message: 'Visit parents before children, then process in reverse.', ...snapshot(sum, removed, -1) })
+  frames.push({ phase: 'build', activeLine: L('const order = []'), pythonLine: P('order = []'), message: 'Visit parents before children, then process in reverse.', ...snapshot(sum, removed, -1) })
   for (const v of [...order].reverse()) {
     for (const c of children[v]) sum[v] += sum[c]
-    frames.push({ phase: 'sum', activeLine: L('for each node v in that order'), pythonLine: P('for v in reversed(order)'), message: `Subtree of ${v} sums to ${sum[v]}.`, ...snapshot(sum, removed, v) })
+    frames.push({ phase: 'sum', activeLine: L('for (const v of [...order].reverse())'), pythonLine: P('for v in reversed(order)'), message: `Subtree of ${v} sums to ${sum[v]}.`, ...snapshot(sum, removed, v) })
   }
   for (const v of order) {
     if (sum[v] === 0) {
       removed[v] = true
-      frames.push({ phase: 'zero', activeLine: L('v is removed if its sum is zero'), pythonLine: P('if total[v] == 0'), message: `Subtree of ${v} sums to 0, so it is deleted with its descendants.`, ...snapshot(sum, removed, v) })
+      frames.push({ phase: 'zero', activeLine: L('if (total[v] === 0 ||'), pythonLine: P('if total[v] == 0'), message: `Subtree of ${v} sums to 0, so it is deleted with its descendants.`, ...snapshot(sum, removed, v) })
     } else if (v !== 0 && removed[parent[v]]) {
       removed[v] = true
-      frames.push({ phase: 'inherit', activeLine: L('v is removed if its sum is zero'), pythonLine: P('removed[parent[v]]'), message: `Node ${v} hangs under a deleted subtree.`, ...snapshot(sum, removed, v) })
+      frames.push({ phase: 'inherit', activeLine: L('if (total[v] === 0 ||'), pythonLine: P('removed[parent[v]]'), message: `Node ${v} hangs under a deleted subtree.`, ...snapshot(sum, removed, v) })
     } else {
-      frames.push({ phase: 'keep', activeLine: L('v is removed if its sum is zero'), pythonLine: P('if total[v] == 0'), message: `Node ${v} survives.`, ...snapshot(sum, removed, v) })
+      frames.push({ phase: 'keep', activeLine: L('if (total[v] === 0 ||'), pythonLine: P('if total[v] == 0'), message: `Node ${v} survives.`, ...snapshot(sum, removed, v) })
     }
   }
   const count = removed.filter(item => !item).length
-  frames.push({ phase: 'done', activeLine: L('return the number of nodes not removed'), pythonLine: P('return sum('), message: `${count} node${count === 1 ? '' : 's'} remain.`, ...snapshot(sum, removed, -1) })
+  frames.push({ phase: 'done', activeLine: L('return removed.filter'), pythonLine: P('return sum('), message: `${count} node${count === 1 ? '' : 's'} remain.`, ...snapshot(sum, removed, -1) })
   return { input: { parent, value }, result: count, frames }
 }

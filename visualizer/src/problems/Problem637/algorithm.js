@@ -7,42 +7,45 @@ export function parseInput(text) {
   return values
 }
 
-// Visits each level from left to right, averaging its values.
+// Walk the tree one level at a time: sum the values, divide by the number of nodes, and move to the children.
 export function buildTrace(values) {
   const root = treeFromLevelOrder(values)
-  const frames = [{ phase: 'start', depth: 0, current: null, sums: [], averages: [], activeLine: 2, message: 'Walk the tree one level at a time and average each level.' }]
+  const frames = [{ phase: 'start', depth: 0, levelIds: [], current: null, seen: [], averages: [], activeLine: L('let level = root'), pythonLine: P('frontier = [build_tree'), message: 'Start with the root as the only node on level 0.' }]
   const averages = []
+  const seen = []
   let level = root ? [root] : []
   let depth = 0
-  const seen = []
   while (level.length) {
     let sum = 0
+    const levelIds = level.map(node => node.id)
     for (const node of level) {
       sum += node.value
       seen.push(node.id)
-      frames.push({ phase: 'visit', depth, current: node.id, seen: [...seen], sums: [...averages], running: sum, activeLine: 5, message: `Level ${depth}: add ${node.value}; running sum ${sum}.` })
+      frames.push({ phase: 'visit', depth, levelIds, current: node.id, seen: [...seen], averages: [...averages], running: sum, activeLine: L('sum += node.value'), pythonLine: P('output.append'), message: `Level ${depth}: add ${node.value}; running sum ${sum}.` })
     }
     const average = sum / level.length
     averages.push(average)
-    frames.push({ phase: 'level', depth, current: null, seen: [...seen], sums: [...averages], activeLine: 7, message: `Level ${depth} average: ${sum} / ${level.length} = ${average}.` })
+    frames.push({ phase: 'level', depth, levelIds, current: null, seen: [...seen], averages: [...averages], running: sum, activeLine: L('result.push('), pythonLine: P('output.append'), message: `Level ${depth} average: ${sum} / ${level.length} = ${average}.` })
     level = level.flatMap(node => [node.left, node.right].filter(Boolean))
     depth++
   }
-  frames.push({ phase: 'done', depth, current: null, seen, sums: [...averages], result: averages, activeLine: 9, message: `Level averages: [${averages.join(', ')}].` })
+  frames.push({ phase: 'done', depth, levelIds: [], current: null, seen, averages: [...averages], result: averages, activeLine: L('return result'), pythonLine: P('return output'), message: `Level averages: [${averages.join(', ')}].` })
   return { input: values, root, result: averages, frames }
 }
 
-export const code = `set frontier to the root and output to an empty list
-while frontier is not empty:
-  sum the values on this level and count its nodes
-  append their average to output
-  replace frontier with all children of the frontier nodes
-return output`.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-// Tree trace: activeLine 1 (setup), 4 (update once per level), 5 (return).
-export const LINE_MAP = { 1: 1, 4: 4, 5: 6 }
-
-export const familyLine = frame => LINE_MAP[frame.activeLine] ?? frame.activeLine
+const SOURCE = `function averageOfLevels(root) {
+  const result = []
+  let level = root ? [root] : []
+  while (level.length > 0) {
+    let sum = 0
+    for (const node of level) sum += node.value
+    result.push(sum / level.length)
+    level = level.flatMap(node => [node.left, node.right].filter(Boolean))
+  }
+  return result
+}`
+export const code = SOURCE.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def average_of_levels(root):
     def build_tree(values):
@@ -69,3 +72,4 @@ export const python = `def average_of_levels(root):
         output.append(sum(node["val"] for node in frontier) / len(frontier))
         frontier = [child for node in frontier for child in (node["left"], node["right"]) if child is not None]
     return output`
+const P = s => python.split('\n').findIndex(t => t.includes(s)) + 1

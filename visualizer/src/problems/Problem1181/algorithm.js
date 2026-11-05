@@ -6,15 +6,18 @@
 const MAX_PHRASES = 12;
 const MAX_WORDS = 6;
 
-const CODE_LINES = [
-  'FUNCTION beforeAndAfterPuzzles(phrases)',
-  '    result ← empty set',
-  '    FOR each position i in phrases',
-  '        FOR each position j in phrases with j different from i',
-  '            IF last word of phrases[i] equals first word of phrases[j] THEN',
-  '                add phrases[i] joined with phrases[j] minus the repeated word to result',
-  '    RETURN result sorted in lexicographic order',
-];
+const CODE_LINES = `function beforeAndAfterPuzzles(phrases) {
+  const result = new Set()
+  for (let i = 0; i < phrases.length; i++) {
+    for (let j = 0; j < phrases.length; j++) {
+      if (i === j) continue
+      const lastWord = phrases[i].split(' ').at(-1)
+      const firstWord = phrases[j].split(' ')[0]
+      if (lastWord === firstWord) result.add(phrases[i] + phrases[j].slice(firstWord.length))
+    }
+  }
+  return [...result].sort()
+}`.split('\n');
 
 const PY_LINES = [
   'class Solution:',
@@ -47,7 +50,7 @@ export const phases = [
 
 const L = (text) => {
   const index = code.findIndex((entry) => entry.text.includes(text));
-  if (index < 0) throw new Error(`Missing pseudocode line: ${text}`);
+  if (index < 0) throw new Error(`Missing code line: ${text}`);
   return index + 1;
 };
 
@@ -77,7 +80,7 @@ export function buildTrace(input) {
   const found = new Set();
   const frames = [];
   frames.push({
-    pythonLine: P('result = set()'), phase: 'setup', activeLine: L('result ← empty set'),
+    pythonLine: P('result = set()'), phase: 'setup', activeLine: L('const result = new Set()'),
     i: null, j: null, matched: null, merged: null, result: [], message: `${phrases.length} phrase${phrases.length === 1 ? '' : 's'} to compare in order.`,
   });
   for (let i = 0; i < phrases.length; i += 1) {
@@ -88,7 +91,7 @@ export function buildTrace(input) {
       const matched = last === first;
       if (!matched) {
         frames.push({
-          pythonLine: P('if last_word == first_word:'), phase: 'pair', activeLine: L('IF last word of phrases[i] equals'),
+          pythonLine: P('if last_word == first_word:'), phase: 'pair', activeLine: L('if (lastWord === firstWord)'),
           i, j, matched: false, merged: null, result: [...found].sort(),
           message: `"${last}" does not match "${first}", so ${i} and ${j} do not join.`,
         });
@@ -98,7 +101,7 @@ export function buildTrace(input) {
       const isNew = !found.has(merged);
       found.add(merged);
       frames.push({
-        pythonLine: P('result.add('), phase: 'join', activeLine: L('add phrases[i] joined'),
+        pythonLine: P('result.add('), phase: 'join', activeLine: L('result.add('),
         i, j, matched: true, merged, isNew, result: [...found].sort(),
         message: isNew
           ? `"${last}" matches, so the merged phrase "${merged}" joins the result.`
@@ -108,7 +111,7 @@ export function buildTrace(input) {
   }
   const result = [...found].sort();
   frames.push({
-    pythonLine: P('return sorted(result)'), phase: 'done', activeLine: L('RETURN result sorted'),
+    pythonLine: P('return sorted(result)'), phase: 'done', activeLine: L('return [...result].sort()'),
     i: null, j: null, matched: null, merged: null, result, message: `${result.length} distinct phrase${result.length === 1 ? '' : 's'} in lexicographic order.`,
   });
   return { input: phrases, answer: result, frames };

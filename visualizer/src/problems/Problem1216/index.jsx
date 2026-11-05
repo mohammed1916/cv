@@ -25,13 +25,14 @@ export default function ValidPalindromeIII() {
             const filled = col >= r
             return <span key={`${r}-${col}`} data-cell={`${r},${col}`} style={{
               ...cell,
-              background: current ? '#facc15' : filled ? 'var(--surface2)' : 'transparent',
-              color: current ? '#1c1917' : 'var(--text)',
+              background: current ? 'var(--primary)' : filled ? 'var(--surface2)' : 'transparent',
+              color: 'var(--text)', outline: current ? '2px solid var(--text)' : undefined,
               visibility: filled ? 'visible' : 'hidden',
             }}>{filled ? value : ''}</span>
           })}
         </Fragment>)}
       </div>
+      {i !== null && i !== undefined && i >= 0 && <p>{`Current window: l = ${i} (start) and r = ${j} (end), the substring ${s.slice(i, j + 1)}.`}</p>}
       <p>Rows are start positions, columns are end positions. A cell holds the fewest deletions that make that substring a palindrome.</p>
     </>
   }} renderReasoning={({ step }) => <>

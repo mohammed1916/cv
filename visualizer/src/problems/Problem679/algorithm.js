@@ -6,69 +6,85 @@ export function parseInput(text) {
 
 const EPS = 1e-6
 
-// Repeatedly combine any two numbers with +, −, ×, ÷ (both orders for − and ÷); succeed at one value of 24.
+// Any expression over four numbers combines two of them first. So repeatedly pick a pair, apply each operator
+// (both orders for − and ÷), and recurse on the shorter list. Reaching one value close to 24 succeeds.
 export function buildTrace(cards) {
-  const frames = [{ phase: 'start', pythonLine: 18, values: cards.map(String), attempt: null, found: null, activeLine: L('start with the four cards'), message: `Combine the four cards ${cards.join(', ')} into 24.` }]
-  let answer = null
-  let attempts = 0
-  function solve(items) {
-    if (answer) return
-    if (items.length === 1) {
-      if (Math.abs(items[0].value - 24) < EPS) answer = items[0].expr
-      return
+  const frames = [{ phase: 'start', pool: [...cards], combine: null, depth: 0, found: false, activeLine: L('const solve = nums'), pythonLine: P('for i in range'), message: `Start with ${cards.join(', ')}. Combine any two numbers, then repeat.` }]
+  let found = false
+  const solve = (pool, depth, path) => {
+    if (pool.length === 1) {
+      const ok = Math.abs(pool[0] - 24) < EPS
+      frames.push({ phase: 'check', pool: [...pool], combine: path.join(' → ') || null, depth, found: ok, activeLine: L('return Math.abs'), pythonLine: P('return abs'), message: `One number left: ${pool[0].toFixed(3)}, ${ok ? 'which is 24.' : 'not 24.'}` })
+      return ok
     }
-    for (let i = 0; i < items.length && !answer; i++) for (let j = i + 1; j < items.length && !answer; j++) {
-      const a = items[i], b = items[j]
-      const rest = items.filter((_, k) => k !== i && k !== j)
-      const options = [
-        [`(${a.expr} + ${b.expr})`, a.value + b.value],
-        [`(${a.expr} − ${b.expr})`, a.value - b.value],
-        [`(${b.expr} − ${a.expr})`, b.value - a.value],
-        [`(${a.expr} × ${b.expr})`, a.value * b.value],
-      ]
-      if (Math.abs(b.value) > EPS) options.push([`(${a.expr} ÷ ${b.expr})`, a.value / b.value])
-      if (Math.abs(a.value) > EPS) options.push([`(${b.expr} ÷ ${a.expr})`, b.value / a.value])
-      for (const [expr, value] of options) {
-        if (answer) return
-        attempts++
-        const next = [...rest, { expr, value }]
-        frames.push({ phase: 'try', pythonLine: 15, values: next.map(x => x.expr), attempt: expr, found: null, activeLine: L('put the result back'), message: `Try ${expr} = ${Number(value.toFixed(4))}.` })
-        solve(next)
+    for (let i = 0; i < pool.length; i++) {
+      for (let j = 0; j < pool.length; j++) {
+        if (i === j) continue
+        const a = pool[i], b = pool[j]
+        const rest = pool.filter((_, k) => k !== i && k !== j)
+        const options = [['+', a + b], ['−', a - b], ['×', a * b]]
+        if (Math.abs(b) > EPS) options.push(['÷', a / b])
+        for (const [op, value] of options) {
+          const step = `${a} ${op} ${b} = ${round(value)}`
+          frames.push({ phase: 'combine', pool: [...pool], combine: step, depth, found: false, activeLine: L('for (const value of options)'), pythonLine: P('for value in options'), message: `Try ${step}: the list becomes ${[...rest, value].map(round).join(', ')}.` })
+          if (solve([...rest, value], depth + 1, [...path, step])) return true
+        }
       }
     }
+    return false
   }
-  solve(cards.map(v => ({ expr: String(v), value: v })))
-  frames.push({ phase: 'done', pythonLine: answer ? 16 : 17, values: [], attempt: null, found: answer, attempts, result: answer !== null, activeLine: answer ? L('if that reaches 24') : L('return false'), message: answer ? `Found: ${answer} = 24.` : 'No combination reaches 24.' })
-  return { input: cards, result: answer !== null, expression: answer, frames }
+  found = solve([...cards], 0, [])
+  frames.push({ phase: 'done', pool: [...cards], combine: null, depth: 0, found, result: found, activeLine: L('return false'), pythonLine: P('return False'), message: found ? '24 can be reached.' : 'No way combines these numbers to 24.' })
+  return { input: cards, result: found, frames }
 }
 
-export const code = `start with the four cards as the list of numbers
-if one number is left, return whether it equals 24
-for each pair of numbers in the list
-  remove the pair from the list
-  for each result of combining the pair with +, −, ×, ÷ (both orders for − and ÷)
-    put the result back into the list and try to reach 24 from it
-    if that reaches 24, return true
-return false`.split('\n').map((text, index) => ({ line: index + 1, text }))
+function round(value) {
+  return Math.round(value * 1000) / 1000
+}
 
+const SOURCE = `function judgePoint24(cards) {
+  const EPS = 1e-6
+  const solve = nums => {
+    if (nums.length === 1) return Math.abs(nums[0] - 24) < EPS
+    for (let i = 0; i < nums.length; i++) {
+      for (let j = 0; j < nums.length; j++) {
+        if (i === j) continue
+        const a = nums[i]
+        const b = nums[j]
+        const rest = nums.filter((_, k) => k !== i && k !== j)
+        const options = [a + b, a - b, a * b]
+        if (Math.abs(b) > EPS) options.push(a / b)
+        for (const value of options) {
+          if (solve([...rest, value])) return true
+        }
+      }
+    }
+    return false
+  }
+  return solve(cards)
+}`
+export const code = SOURCE.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def judge_point_24(cards):
+    EPS = 1e-6
+
     def solve(nums):
         if len(nums) == 1:
-            return abs(nums[0] - 24) < 1e-6
+            return abs(nums[0] - 24) < EPS
         for i in range(len(nums)):
-            for j in range(i + 1, len(nums)):
+            for j in range(len(nums)):
+                if i == j:
+                    continue
                 a, b = nums[i], nums[j]
                 rest = [nums[k] for k in range(len(nums)) if k != i and k != j]
-                options = [a + b, a - b, b - a, a * b]
-                if abs(b) > 1e-6:
+                options = [a + b, a - b, a * b]
+                if abs(b) > EPS:
                     options.append(a / b)
-                if abs(a) > 1e-6:
-                    options.append(b / a)
                 for value in options:
                     if solve(rest + [value]):
                         return True
         return False
-    return solve([float(card) for card in cards])
-`
+
+    return solve(list(cards))`
+const P = s => python.split('\n').findIndex(t => t.includes(s)) + 1

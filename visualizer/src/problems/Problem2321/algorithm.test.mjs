@@ -5,8 +5,8 @@ import { buildTrace, parseInput } from './algorithm.js'
 const solve = (nums1, nums2) => buildTrace({ nums1, nums2 }).result
 
 test('2321 worked examples', () => {
-  assert.equal(solve([60, 60, 60], [10, 90, 10]), 210)
-  assert.equal(solve([20, 40, 20, 70, 30], [50, 20, 50, 40, 20]), 220)
+  assert.equal(solve([5, 1, 8], [2, 9, 3]), 22)
+  assert.equal(solve([3, 3, 3], [1, 9, 2]), 15)
 })
 
 test('2321 no splice helps when nums1 is already best', () => {

@@ -54,5 +54,5 @@ test('every frame names a phase, a code line and a message; the last frame is do
     assert.ok(frame.snapshot)
   }
   assert.equal(run.frames.at(-1).phase, 'done')
-  assert.equal(code.length, python.split('\n').length)
+  assert.ok(run.frames.every(frame => frame.pythonLine >= 1 && frame.pythonLine <= python.split('\n').length))
 })

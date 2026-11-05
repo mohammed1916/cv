@@ -13,7 +13,8 @@ export function parseInput(text) {
   return { s: value.s }
 }
 
-const LINE = { start: 1, count: 2, up: 6, down: 8, done: 9 }
+const LINE = { start: 1, count: 3, up: 7, down: 10, done: 13 }
+export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 5, 5: 6, 6: 7, 7: 9, 9: 11, 10: 13, 13: 15 }
 const letter = i => String.fromCharCode(97 + i)
 
 export function buildTrace(input) {
@@ -57,15 +58,20 @@ export function buildTrace(input) {
   return { input, result, frames }
 }
 
-export const code = `increasing_decreasing(s):
-  count = number of copies of each letter 'a'..'z' in s
-  out = empty list
-  while len(out) < len(s):
-    for c from 'a' to 'z':            # increasing sweep
-      if count[c] > 0: append c to out; count[c] -= 1
-    for c from 'z' to 'a':            # decreasing sweep
-      if count[c] > 0: append c to out; count[c] -= 1
-  return out`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function increasingDecreasingString(s) {
+  const count = Array(26).fill(0)
+  for (const ch of s) count[ch.charCodeAt(0) - 97] += 1
+  const out = []
+  while (out.length < s.length) {
+    for (let i = 0; i < 26; i++) {
+      if (count[i] > 0) { out.push(letter(i)); count[i] -= 1 }
+    }
+    for (let i = 25; i >= 0; i--) {
+      if (count[i] > 0) { out.push(letter(i)); count[i] -= 1 }
+    }
+  }
+  return out.join('')
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def increasing_decreasing(s):
     count = [0] * 26

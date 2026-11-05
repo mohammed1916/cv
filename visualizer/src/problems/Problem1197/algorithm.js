@@ -6,19 +6,26 @@
 const MAX_COORD = 12;
 const MOVES = [[1, 2], [2, 1], [2, -1], [1, -2], [-1, -2], [-2, -1], [-2, 1], [-1, 2]];
 
-const CODE_LINES = [
-  'FUNCTION minKnightMoves(x, y)',
-  '    margin ← max(|x|, |y|) + 2',
-  '    dist ← unknown for every cell in the window; dist[(0, 0)] ← 0',
-  '    queue ← [(0, 0)]',
-  '    WHILE queue is not empty',
-  '        (r, c) ← pop the front of queue',
-  '        IF (r, c) equals (x, y) THEN RETURN dist[(r, c)]',
-  '        FOR each of the 8 knight moves (dr, dc)',
-  '            (nr, nc) ← (r + dr, c + dc)',
-  '            IF (nr, nc) is inside the window and dist is unknown THEN set dist and push it',
-  '    RETURN -1',
-];
+const CODE_LINES = `function minKnightMoves(x, y) {
+  const margin = Math.max(Math.abs(x), Math.abs(y)) + 2
+  const moves = [[1, 2], [2, 1], [2, -1], [1, -2], [-1, -2], [-2, -1], [-2, 1], [-1, 2]]
+  const dist = new Map([['0,0', 0]])
+  const queue = [[0, 0]]
+  for (let head = 0; head < queue.length; head++) {
+    const [r, c] = queue[head]
+    if (r === x && c === y) return dist.get(\`\${r},\${c}\`)
+    for (const [dr, dc] of moves) {
+      const nr = r + dr
+      const nc = c + dc
+      const key = \`\${nr},\${nc}\`
+      if (nr >= -margin && nr <= margin && nc >= -margin && nc <= margin && !dist.has(key)) {
+        dist.set(key, dist.get(\`\${r},\${c}\`) + 1)
+        queue.push([nr, nc])
+      }
+    }
+  }
+  return -1
+}`.split('\n');
 
 const PY_LINES = [
   'from collections import deque',
@@ -87,7 +94,7 @@ export function buildTrace(input) {
   let popped = 0;
   let answer = -1;
   frames.push({
-    pythonLine: P('margin = max(abs(x)'), phase: 'setup', activeLine: L('margin ← max(|x|, |y|) + 2'),
+    pythonLine: P('margin = max(abs(x)'), phase: 'setup', activeLine: L('const margin = Math.max'),
     current: null, discovered: 1, popped: 0, candidate: null, isNew: null, margin, target: { r: x, c: y },
     message: `Search a window from -${margin} to ${margin} for (${x}, ${y}).`,
   });
@@ -98,14 +105,14 @@ export function buildTrace(input) {
     head += 1;
     popped = head;
     frames.push({
-      pythonLine: P('r, c = queue.popleft()'), phase: 'expand', activeLine: L('(r, c) ← pop the front'),
+      pythonLine: P('r, c = queue.popleft()'), phase: 'expand', activeLine: L('const [r, c] = queue[head]'),
       current: { r: current.r, c: current.c, dist: current.dist }, discovered: order.length, popped, candidate: null, isNew: null,
       margin, target: { r: x, c: y }, message: `Pop (${current.r}, ${current.c}), which is ${current.dist} move${current.dist === 1 ? '' : 's'} away.`,
     });
     if (current.r === x && current.c === y) {
       answer = current.dist;
       frames.push({
-        pythonLine: P('return dist[(r, c)]'), phase: 'done', activeLine: L('IF (r, c) equals (x, y)'),
+        pythonLine: P('return dist[(r, c)]'), phase: 'done', activeLine: L('if (r === x && c === y)'),
         current: { r: current.r, c: current.c, dist: current.dist }, discovered: order.length, popped, candidate: null, isNew: null,
         margin, target: { r: x, c: y }, message: `The target is reached in ${answer} move${answer === 1 ? '' : 's'}.`,
       });
@@ -123,7 +130,7 @@ export function buildTrace(input) {
         order.push({ r: nr, c: nc, dist: current.dist + 1 });
       }
       frames.push({
-        pythonLine: P(isNew ? 'dist[(nr, nc)] = dist[(r, c)] + 1' : 'if -margin <= nr'), phase: 'relax', activeLine: L('IF (nr, nc) is inside the window'),
+        pythonLine: P(isNew ? 'dist[(nr, nc)] = dist[(r, c)] + 1' : 'if -margin <= nr'), phase: 'relax', activeLine: L('if (nr >= -margin'),
         current: { r: current.r, c: current.c, dist: current.dist }, discovered: order.length, popped, candidate: { r: nr, c: nc },
         isNew, margin, target: { r: x, c: y },
         message: isNew

@@ -13,19 +13,21 @@ export function parseInput(text) {
   return leaves
 }
 
-export const code = [
-  'min nonleaf sum(arr):',
-  '  stack = empty',
-  '  total = 0',
-  '  for x in arr:',
-  '    while stack and top(stack) <= x:',
-  '      mid = pop(stack)',
-  '      total += mid * (min(top(stack), x) if stack else x)',
-  '    push x onto stack',
-  '  for each adjacent pair (left, right) in stack:',
-  '    total += left * right',
-  '  return total',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function mctFromLeafValues(arr) {
+  const stack = []
+  let total = 0
+  for (const x of arr) {
+    while (stack.length && stack[stack.length - 1] <= x) {
+      const mid = stack.pop()
+      total += mid * (stack.length ? Math.min(stack[stack.length - 1], x) : x)
+    }
+    stack.push(x)
+  }
+  for (let i = 0; i < stack.length - 1; i++) total += stack[i] * stack[i + 1]
+  return total
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+const PYMAP = { 2: 2, 4: 4, 7: 7, 9: 8, 11: 10, 12: 11 }
 
 export const python = `def mct_from_leaf_values(arr):
     stack = []
@@ -42,7 +44,7 @@ export const python = `def mct_from_leaf_values(arr):
 export function buildTrace(input) {
   const arr = input
   const frames = []
-  const frame = (phase, line, message, snapshot) => frames.push({ phase, activeLine: line, pythonLine: line, message, snapshot })
+  const frame = (phase, line, message, snapshot) => frames.push({ phase, activeLine: line, pythonLine: PYMAP[line], message, snapshot })
   const stack = []
   let total = 0
 
@@ -56,13 +58,13 @@ export function buildTrace(input) {
       frame('combine', 7, `${mid} is no larger than ${x}, so it is the middle of a nonleaf of cost ${mid} × ${neighbour} = ${mid * neighbour}. Total is ${total}.`, { leaves: arr, index, stack: [...stack], total, dropped: [mid], mid, neighbour })
     }
     stack.push(x)
-    frame('scan', 8, `Push ${x}. The stack is now ${stack.join(', ')}.`, { leaves: arr, index, stack: [...stack], total, dropped: [] })
+    frame('scan', 9, `Push ${x}. The stack is now ${stack.join(', ')}.`, { leaves: arr, index, stack: [...stack], total, dropped: [] })
   })
 
   for (let i = 0; i < stack.length - 1; i++) {
     total += stack[i] * stack[i + 1]
-    frame('finish', 10, `The stack pair ${stack[i]} and ${stack[i + 1]} is joined, adding ${stack[i] * stack[i + 1]}. Total is ${total}.`, { leaves: arr, index: arr.length, stack: [...stack], total, dropped: [] })
+    frame('finish', 11, `The stack pair ${stack[i]} and ${stack[i + 1]} is joined, adding ${stack[i] * stack[i + 1]}. Total is ${total}.`, { leaves: arr, index: arr.length, stack: [...stack], total, dropped: [] })
   }
-  frame('done', 11, `The minimum total nonleaf cost is ${total}.`, { leaves: arr, index: arr.length, stack: [...stack], total, dropped: [] })
+  frame('done', 12, `The minimum total nonleaf cost is ${total}.`, { leaves: arr, index: arr.length, stack: [...stack], total, dropped: [] })
   return { input, result: total, frames }
 }

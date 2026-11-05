@@ -21,8 +21,8 @@ const definition = {
     { id: 'done', label: 'Result', description: 'Report the longest balanced substring length.' },
   ],
   examples: [
-    { label: 'Mixed runs', input: '{"s": "01000111"}' },
-    { label: 'Zeros then ones', input: '{"s": "00111"}' },
+    { label: 'Mixed runs', input: '{"s": "0011000111"}' },
+    { label: 'Zeros then ones', input: '{"s": "1000011"}' },
     { label: 'Only ones', input: '{"s": "111"}' },
   ],
 }
@@ -33,13 +33,14 @@ function LongestBalancedSubstring() {
     return <>
       <IndexedSequence label="String s" length={run.input.s.length} active={step.index ?? -1}
         valueAt={i => run.input.s[i]}
-        roleAt={i => inWindow(i) ? 'balanced' : (step.index !== null && i > step.index ? 'unread' : run.input.s[i] === '0' ? 'zero' : 'one')} />
+        roleAt={i => i === step.windowStart ? 'l' : i === step.index ? 'r' : inWindow(i) ? 'balanced' : (step.index !== null && i > step.index ? 'unread' : run.input.s[i] === '0' ? 'zero' : 'one')} />
       <output aria-label="Counters">
         Zeros in run: {step.zeros} · Ones in run: {step.ones} · Best: {step.best}
       </output>
     </>
   }} renderReasoning={({ step }) => <>
     <p>{step.message}</p>
+    <p>l marks the start of the balanced block being checked and r marks the character being read.</p>
     <p>A balanced substring has the form 0...01...1 with equal counts. Each one can close a block of length 2 * ones when the one count does not exceed the current zero run.</p>
   </>} />
 }

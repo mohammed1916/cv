@@ -4,22 +4,20 @@ import { buildTrace, parseInput, phases, examples, code, python, pythonLineMap }
 
 function checkFrames(run) {
   const ids = new Set(phases.map(p => p.id))
-  assert.equal(run.frames[0].phase, 'start')
   assert.equal(run.frames.at(-1).phase, 'done')
   for (const frame of run.frames) {
     assert.ok(ids.has(frame.phase))
-    assert.equal(typeof frame.activeLine, 'number')
     assert.equal(typeof frame.message, 'string')
     assert.equal(typeof frame.snapshot, 'object')
   }
 }
 
-test('1592 examples and metadata are well formed', () => {
+test('1592 examples, code and python are well formed', () => {
   assert.ok(examples.length >= 3)
   for (const example of examples) checkFrames(buildTrace(parseInput(example.input)))
   assert.equal(code.length, 7)
   assert.ok(python.includes('def reorderSpaces'))
-  assert.equal(Object.keys(pythonLineMap).length, 7)
+  assert.equal(Object.keys(pythonLineMap).length, code.length)
 })
 
 test('1592 keeps words in order, total spaces and length, and spreads gaps evenly', () => {

@@ -1,52 +1,78 @@
 export function parseInput(text) {
   const s = JSON.parse(text)
-  if (typeof s !== 'string' || s.length < 1 || s.length > 50000 || !/^[a-z]+$/.test(s)) throw new Error('Enter a JSON string of 1–50,000 lowercase letters.')
+  if (typeof s !== 'string' || s.length < 1 || s.length > 1000 || !/^[a-z]+$/.test(s)) throw new Error('Enter a JSON string of 1–1,000 lowercase letters.')
   return s
 }
 
-// Two pointers; at the first mismatch, the answer is true if either side of the mismatch is a palindrome.
+// Two pointers close in from both ends. The first mismatch is the only place a deletion can help, so test both
+// options there: drop the left letter, or drop the right letter.
 export function buildTrace(s) {
-  const isPal = (l, r) => { while (l < r) { if (s[l] !== s[r]) return false; l++; r-- } return true }
-  let l = 0, r = s.length - 1
-  const frames = [{ phase: 'start', left: l, right: r, activeLine: 2, message: 'Compare the two ends and move inward.' }]
+  let l = 0
+  let r = s.length - 1
+  const frames = [{ phase: 'start', l, r, skipped: null, activeLine: L('let l = 0'), pythonLine: P('l, r = 0, len(s) - 1'), message: 'Compare the two ends and move inward.' }]
+  let result = true
   while (l < r) {
-    if (s[l] === s[r]) {
-      l++; r--
-      frames.push({ phase: 'match', left: l, right: r, activeLine: 5, message: `${s[l - 1]} = ${s[r + 1]}: move both pointers inward.` })
-      continue
+    if (s[l] !== s[r]) {
+      const dropLeft = isPal(s, l + 1, r)
+      const dropRight = isPal(s, l, r - 1)
+      result = dropLeft || dropRight
+      frames.push({ phase: 'mismatch', l, r, skipped: null, activeLine: L('if (s[l] !== s[r])'), pythonLine: P('if s[l] != s[r]'), message: `${s[l]} ≠ ${s[r]}: try dropping one. Without ${s[l]}: ${dropLeft ? 'palindrome' : 'not'}. Without ${s[r]}: ${dropRight ? 'palindrome' : 'not'}.` })
+      frames.push({ phase: 'done', l, r, skipped: dropLeft ? 'left' : dropRight ? 'right' : null, activeLine: L(result ? 'return true' : 'return false'), pythonLine: P(result ? 'return True' : 'return False'), result, message: result ? 'One deletion makes it a palindrome.' : 'Neither deletion works.' })
+      return { input: s, result, frames }
     }
-    const skipLeft = isPal(l + 1, r), skipRight = isPal(l, r - 1)
-    frames.push({ phase: 'mismatch', left: l, right: r, skipLeft, skipRight, activeLine: 7, message: `${s[l]} ≠ ${s[r]}: deleting ${s[l]} ${skipLeft ? 'works' : 'fails'}; deleting ${s[r]} ${skipRight ? 'works' : 'fails'}.` })
-    const result = skipLeft || skipRight
-    frames.push({ phase: 'done', left: l, right: r, result, activeLine: 9, message: result ? 'Removing one character leaves a palindrome.' : 'Neither deletion helps.' })
-    return { input: s, result, frames }
+    l++
+    r--
+    frames.push({ phase: 'match', l, r, skipped: null, activeLine: L('l++'), pythonLine: P('l += 1'), message: `Ends match: move inward to ${l} and ${r}.` })
   }
-  frames.push({ phase: 'done', left: l, right: r, result: true, activeLine: 10, message: 'Already a palindrome.' })
-  return { input: s, result: true, frames }
+  frames.push({ phase: 'done', l, r, skipped: null, activeLine: L('return true'), pythonLine: P('return True'), result: true, message: 'Every pair matched, so it is already a palindrome.' })
+  return { input: s, result, frames }
 }
 
-export const code = `set left to the first index and right to the last index
-while left is less than right and the characters at left and right are equal
-  move left one step inward and right one step inward
-if left is at least right then return true
-return whether deleting the left character or the right character leaves a palindrome`.split('\n').map((text, index) => ({ line: index + 1, text }))
+function isPal(s, l, r) {
+  while (l < r) {
+    if (s[l] !== s[r]) return false
+    l++
+    r--
+  }
+  return true
+}
 
-// Family line 3 is the endpoint comparison, line 5 is the return.
-export const LINE_MAP = { 1: 1, 3: 2, 5: 5 }
+const SOURCE = `function validPalindrome(s) {
+  let l = 0
+  let r = s.length - 1
+  while (l < r) {
+    if (s[l] !== s[r]) return isPalindrome(s, l + 1, r) || isPalindrome(s, l, r - 1)
+    l++
+    r--
+  }
+  return true
+}
+
+function isPalindrome(s, l, r) {
+  while (l < r) {
+    if (s[l] !== s[r]) return false
+    l++
+    r--
+  }
+  return true
+}`
+export const code = SOURCE.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def valid_palindrome(s):
-    def is_palindrome(i, j):
-        while i < j:
-            if s[i] != s[j]:
+    def is_palindrome(l, r):
+        while l < r:
+            if s[l] != s[r]:
                 return False
-            i += 1
-            j -= 1
+            l += 1
+            r -= 1
         return True
 
-    left, right = 0, len(s) - 1
-    while left < right and s[left] == s[right]:
-        left += 1
-        right -= 1
-    if left >= right:
-        return True
-    return is_palindrome(left + 1, right) or is_palindrome(left, right - 1)`
+    l, r = 0, len(s) - 1
+    while l < r:
+        if s[l] != s[r]:
+            return is_palindrome(l + 1, r) or is_palindrome(l, r - 1)
+        l += 1
+        r -= 1
+    return True`
+const P = s => python.split('\n').findIndex(t => t.includes(s)) + 1

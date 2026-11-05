@@ -17,16 +17,19 @@ export function parseInput(text) {
   return { nums }
 }
 
-const pseudo = `count_valid(nums):
-  stack = empty, total = 0
-  for right from 0 to length:
-    while stack and (right is the end or stack top value > nums[right]):
-      start = pop the stack
-      total = total + (right - start)
-    if right < length:
-      push right onto the stack
-  return total`
-const py = `def count_valid(nums):
+export const code = `function countValidSubarrays(nums) {
+  const stack = []
+  let total = 0
+  for (let right = 0; right <= nums.length; right++) {
+    while (stack.length && (right === nums.length || nums[stack[stack.length - 1]] > nums[right])) {
+      const start = stack.pop()
+      total += right - start
+    }
+    if (right < nums.length) stack.push(right)
+  }
+  return total
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `def count_valid(nums):
     stack, total = [], 0
     for right in range(len(nums) + 1):
         while stack and (right == len(nums) or nums[stack[-1]] > nums[right]):
@@ -36,10 +39,9 @@ const py = `def count_valid(nums):
             stack.append(right)
     return total`
 
-export const code = pseudo.split('\n').map((text, index) => ({ line: index + 1, text }))
-export const python = py
 
-const LINE = { start: 2, scan: 4, close: 6, push: 8, done: 9 }
+const LINE = { start: 2, scan: 4, close: 6, push: 9, done: 11 }
+const PYLINE = { start: 2, scan: 3, close: 5, push: 8, done: 9 }
 
 export function buildTrace(input) {
   const { nums } = input
@@ -50,7 +52,7 @@ export function buildTrace(input) {
   const closed = []
 
   const frame = (phase, activeLine, message, right) => frames.push({
-    phase, activeLine, message,
+    phase, activeLine, pythonLine: PYLINE[phase], message,
     snapshot: { nums, right, stack: [...stack], total, closed: [...closed] },
   })
 

@@ -1,10 +1,28 @@
-import authoredExamples0 from '../../config/examples/collection--1722.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import View from './View'
+import { buildTrace, parseInput, code, python, pythonLineMap, phases, examples, complexity } from './algorithm.js'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/advance.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '1722',
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  pythonLineMap,
+  phases,
+  examples,
+  complexity,
+  inputLabel: 'Object with source, target (equal-length arrays) and allowedSwaps (position pairs)',
+  url: 'https://leetcode.com/problems/minimize-hamming-distance-after-swap-operations/',
+}
 
-const definition = { ...definitions[1722], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem1722Visualizer() {
+  return <AlgorithmWorkspace
+    definition={definition}
+    renderVisual={({ run, step }) => <View run={run} step={step} />}
+    renderReasoning={() => <>
+      <p>Swaps chain together: if 0 can swap with 1 and 1 with 2, then 0, 1 and 2 can be permuted arbitrarily among themselves.</p>
+      <p>Within a group, a position matches when the target value is still available among the group's source values.</p>
+    </>}
+  />
+}

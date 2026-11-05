@@ -1,31 +1,37 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import IndexedSequence from '../../components/shared/IndexedSequence'
-import SegtreeView from '../../components/shared/SegtreeView'
+import IntervalView from '../../components/shared/IntervalView'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
-    { id: 'start', label: 'Ground', description: 'Flat ground; nothing is stacked yet.' },
-    { id: 'drop', label: 'Drop square', description: 'Land on the tallest surface under the span.' },
-    { id: 'done', label: 'Complete', description: 'Return the tallest stack after each drop.' },
+    { id: 'start', label: 'Empty street', description: 'No squares have landed.' },
+    { id: 'drop', label: 'Drop a square', description: 'Find the tallest square it overlaps, then stack on top.' },
+    { id: 'done', label: 'Skyline', description: 'The tallest height after every drop.' },
   ],
-  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Squares (JSON array of [left, side])',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Squares (JSON array of [left, side] pairs)',
   url: 'https://leetcode.com/problems/falling-squares/',
-  complexity: 'O(n · w) time for this direct version over coordinate width w; a segment tree with lazy assignment gives O(n log w).',
+  complexity: 'O(n²) time for n squares with this direct overlap scan, and O(n) space.',
   examples: [
-    { label: 'Stacking', input: '[[1,2],[2,3],[6,1]]' },
-    { label: 'Overlap', input: '[[50,50],[80,50]]' },
-    { label: 'Nested', input: '[[1,2],[1,3]]' },
+    { label: 'Stacked', input: '[[1,2],[2,3],[6,1]]' },
+    { label: 'Side by side', input: '[[4,5],[9,3],[12,2]]' },
+    { label: 'Nested', input: '[[1,4],[2,1]]' },
   ],
 }
 
 export default function FallingSquares() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="Tallest stack after each drop" length={run.input.length} active={step.index} valueAt={i => step.heights[i] ?? '…'} />
-    <output aria-label="Current drop">{step.span ? `Square ${step.index} spans [${step.span[0]}, ${step.span[1]}] · lands at ${step.landed}${step.top == null ? '' : ` · top ${step.top}`}` : 'Ready'}</output>
-    {step.seg && <SegtreeView {...step.seg} />}
-  </>} renderReasoning={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
+    const intervals = step.placed.map(s => ({
+      start: s.left, end: s.right, group: 'street', label: `h${s.height}`,
+      role: step.index !== null && s.index === step.index ? 'current' : 'kept',
+    }))
+    return <>
+      <IntervalView title="Squares on the number line" intervals={intervals} note={`Tallest so far: ${step.best}`} />
+      <RecordStateTable label="Heights" columns={['square', 'height']}
+        rows={step.placed.map(s => ({ square: s.index + 1, height: s.height }))} activeRow={step.placed.length - 1} />
+    </>
+  }} renderReasoning={({ step }) => <>
     <p>{step.message}</p>
-    <p><strong>Span surface:</strong> the square rests on the highest point of any column it covers, so its bottom is the maximum height in that span.</p>
+    <p><strong>Why the overlap test:</strong> two squares rest on each other only when their horizontal spans share some width, so only overlapping squares set the base.</p>
   </>} />
 }

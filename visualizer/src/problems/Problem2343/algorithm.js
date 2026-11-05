@@ -16,29 +16,31 @@ export function parseInput(text) {
 export function buildTrace({ nums, queries }) {
   const frames = []
   const answer = []
-  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('empty answer'), at: -1, k: null, trim: null, keys: [], order: [], result: null, message: `Answer ${queries.length} queries over ${nums.length} numbers.` })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('const answer = []'), at: -1, k: null, trim: null, keys: [], order: [], result: null, message: `Answer ${queries.length} queries over ${nums.length} numbers.` })
   for (const [k, trim] of queries) {
-    frames.push({ pythonLine: 3, phase: 'query', activeLine: L('for each query'), at: -1, k, trim, keys: [], order: [], result: null, message: `Query k=${k}, keep the last ${trim} digits.` })
+    frames.push({ pythonLine: 3, phase: 'query', activeLine: L('for (const [k, trim] of queries)'), at: -1, k, trim, keys: [], order: [], result: null, message: `Query k=${k}, keep the last ${trim} digits.` })
     const keyed = nums.map((s, i) => ({ key: s.slice(-trim), i }))
-    frames.push({ pythonLine: 4, phase: 'keys', activeLine: L('trim each'), at: -1, k, trim, keys: keyed.map(x => x.key), order: [], result: null, message: `Trimmed values: ${keyed.map(x => x.key).join(', ')}.` })
+    frames.push({ pythonLine: 4, phase: 'keys', activeLine: L('const keyed = nums.map'), at: -1, k, trim, keys: keyed.map(x => x.key), order: [], result: null, message: `Trimmed values: ${keyed.map(x => x.key).join(', ')}.` })
     keyed.sort((a, b) => (a.key < b.key ? -1 : a.key > b.key ? 1 : a.i - b.i))
     const order = keyed.map(x => x.i)
-    frames.push({ pythonLine: 5, phase: 'sort', activeLine: L('sort'), at: -1, k, trim, keys: keyed.map(x => x.key), order, result: null, message: `Sorted by trimmed value, then index: ${order.join(', ')}.` })
+    frames.push({ pythonLine: 5, phase: 'sort', activeLine: L('keyed.sort'), at: -1, k, trim, keys: keyed.map(x => x.key), order, result: null, message: `Sorted by trimmed value, then index: ${order.join(', ')}.` })
     const picked = keyed[k - 1].i
     answer.push(picked)
-    frames.push({ pythonLine: 6, phase: 'pick', activeLine: L('append'), at: picked, k, trim, keys: keyed.map(x => x.key), order, result: picked, message: `The ${k}th entry is index ${picked}.` })
+    frames.push({ pythonLine: 6, phase: 'pick', activeLine: L('answer.push'), at: picked, k, trim, keys: keyed.map(x => x.key), order, result: picked, message: `The ${k}th entry is index ${picked}.` })
   }
-  frames.push({ pythonLine: 7, phase: 'done', activeLine: L('return answer'), at: -1, k: null, trim: null, keys: [], order: [], result: answer, message: `Answers: [${answer.join(', ')}].` })
+  frames.push({ pythonLine: 7, phase: 'done', activeLine: L('return answer;'), at: -1, k: null, trim: null, keys: [], order: [], result: answer, message: `Answers: [${answer.join(', ')}].` })
   return { input: { nums, queries }, result: answer, frames }
 }
 
-export const code = `answer the queries about trimmed numbers
-  answer = empty list
-  for each query [k, trim]
-    make a key for each number by keeping its last trim digits
-    sort the indices by key, then by index
-    append the index at position k minus 1
-  return answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function smallestTrimmedNumbers(nums, queries) {
+  const answer = [];
+  for (const [k, trim] of queries) {
+    const keyed = nums.map((s, i) => [s.slice(-trim), i]);
+    keyed.sort((a, b) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : a[1] - b[1]));
+    answer.push(keyed[k - 1][1]);
+  }
+  return answer;
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def smallest_trimmed_numbers(nums, queries):

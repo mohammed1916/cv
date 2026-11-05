@@ -8,18 +8,25 @@ export const phases = [
 const DIRS = [[0, 1], [1, 0], [0, -1], [-1, 0]]
 const NAMES = ['north', 'east', 'south', 'west']
 
-const PSEUDO = [
-  'is bounded(instructions):',
-  '  set x = 0, y = 0, heading = north',
-  '  repeat 4 times:',
-  '    for each c in instructions:',
-  '      if c is G: move one step along heading',
-  '      if c is L: turn heading counterclockwise',
-  '      if c is R: turn heading clockwise',
-  '  return (x, y) is (0, 0)',
-]
-
-export const code = PSEUDO.map((text, index) => ({ line: index + 1, text }))
+export const code = `function isRobotBounded(instructions) {
+  const dirs = [[0, 1], [1, 0], [0, -1], [-1, 0]]
+  let x = 0
+  let y = 0
+  let d = 0
+  for (let pass = 0; pass < 4; pass++) {
+    for (const c of instructions) {
+      if (c === 'G') {
+        x += dirs[d][0]
+        y += dirs[d][1]
+      } else if (c === 'L') {
+        d = (d + 3) % 4
+      } else {
+        d = (d + 1) % 4
+      }
+    }
+  }
+  return x === 0 && y === 0
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def is_bounded(instructions):
     dirs = [(0, 1), (1, 0), (0, -1), (-1, 0)]
@@ -62,14 +69,14 @@ export function buildTrace(instructions) {
       } else {
         d = (d + 1) % 4
       }
-      const activeLine = c === 'G' ? 5 : c === 'L' ? 6 : 7
+      const activeLine = c === 'G' ? 9 : c === 'L' ? 12 : 14
       const pythonLine = c === 'G' ? 9 : c === 'L' ? 11 : 13
       const effect = c === 'G' ? `move to (${x}, ${y})` : `now facing ${NAMES[d]}`
       frames.push({ phase: 'step', activeLine, pythonLine, message: `Pass ${pass}, instruction ${i + 1} (${c}): ${effect}.`, snapshot: { x, y, heading: NAMES[d], pass, index: i, path: [...path] } })
     }
-    frames.push({ phase: 'pass', activeLine: 3, pythonLine: 5, message: `End of pass ${pass}: at (${x}, ${y}) facing ${NAMES[d]}.`, snapshot: { x, y, heading: NAMES[d], pass, index: input.length - 1, path: [...path] } })
+    frames.push({ phase: 'pass', activeLine: 6, pythonLine: 5, message: `End of pass ${pass}: at (${x}, ${y}) facing ${NAMES[d]}.`, snapshot: { x, y, heading: NAMES[d], pass, index: input.length - 1, path: [...path] } })
   }
   const result = x === 0 && y === 0
-  frames.push({ phase: 'done', activeLine: 8, pythonLine: 14, message: result ? 'Back at the origin after four passes, so the robot stays in a circle.' : 'Not at the origin after four passes, so the robot drifts away forever.', snapshot: { x, y, heading: NAMES[d], pass: 4, index: input.length - 1, path: [...path] } })
+  frames.push({ phase: 'done', activeLine: 18, pythonLine: 14, message: result ? 'Back at the origin after four passes, so the robot stays in a circle.' : 'Not at the origin after four passes, so the robot drifts away forever.', snapshot: { x, y, heading: NAMES[d], pass: 4, index: input.length - 1, path: [...path] } })
   return { input, result, frames }
 }

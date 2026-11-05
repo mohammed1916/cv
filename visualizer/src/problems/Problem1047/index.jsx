@@ -24,7 +24,7 @@ function Stack({ step }) {
       {stack.length === 0 && <span style={{ color: 'var(--text-dim)' }}>empty stack</span>}
       {stack.map((ch, index) => <div key={index} data-stack={ch} style={{
         padding: '4px 12px', fontFamily: 'monospace', color: 'var(--text)',
-        border: `${index === stack.length - 1 ? 2 : 1}px solid ${index === stack.length - 1 ? '#0891b2' : 'var(--border)'}`,
+        border: `${index === stack.length - 1 ? 2 : 1}px solid ${index === stack.length - 1 ? 'var(--primary)' : 'var(--border)'}`,
         background: 'var(--surface2)',
       }}>{ch}</div>)}
     </div>

@@ -1,32 +1,37 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import IndexedSequence from '../../components/shared/IndexedSequence'
+import GraphTraversalView from '../../components/shared/GraphTraversalView'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
-    { id: 'start', label: 'Direct roads', description: 'Start from the road weights and the zero diagonal.' },
-    { id: 'floyd', label: 'Relax', description: 'Allow paths through each middle branch.' },
-    { id: 'mask', label: 'Subset', description: 'Test one set of open branches.' },
-    { id: 'count', label: 'Count', description: 'The open set satisfies the distance limit.' },
-    { id: 'done', label: 'Result', description: 'Report how many sets are valid.' },
+    { id: 'start', label: 'Start', description: 'Every subset of branches is a candidate open set.' },
+    { id: 'subset', label: 'Subset', description: 'Keep only roads between open branches, then check every pair.' },
+    { id: 'done', label: 'Result', description: 'Report how many open sets are valid.' },
   ],
   parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'Object with n, maxDistance and roads as [u, v, w] triples',
+  inputLabel: 'JSON {"n": 4, "maxDistance": 4, "roads": [[0,1,3],[1,2,2]]}',
   url: 'https://leetcode.com/problems/number-of-possible-sets-of-closing-branches/',
-  complexity: 'O(n^3 + n^2 * 2^n) time, O(n^2) space. The visualization caps n at 6.',
+  complexity: 'O(2^n * n^3) time with Floyd-Warshall per subset. The visualization caps n at 6 and roads at 15.',
   examples: [
-    { label: 'Example 1', input: '{"n":3,"maxDistance":5,"roads":[[0,1,2],[1,2,10],[0,2,10]]}' },
-    { label: 'Example 2', input: '{"n":3,"maxDistance":5,"roads":[[0,1,2],[1,2,10]]}' },
+    { label: 'Four branches', input: '{"n":4,"maxDistance":4,"roads":[[0,1,3],[1,2,2],[2,3,4],[0,3,9]]}' },
+    { label: 'Chain of three', input: '{"n":3,"maxDistance":6,"roads":[[0,1,2],[1,2,3]]}' },
   ],
 }
 
 export default function ClosingBranches() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="branches" length={run.input.n} valueAt={i => i} active={step.open?.length ? step.open[step.open.length - 1] : 0}
-      roleAt={i => (step.open?.includes(i) ? 'window' : '')} />
-    <output aria-label="Open set">{`open {${(step.open ?? []).join(', ')}}, valid so far ${step.count}`}</output>
-  </>} renderReasoning={() => <>
-    <p>Distances use every road, including roads to closed branches, so the shortest paths are computed once on the full network.</p>
-    <p>Each subset of open branches is checked independently: it is valid when every pair inside it is within maxDistance.</p>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const { n, roads } = run.input
+    const open = step.open || []
+    const tags = Object.fromEntries(Array.from({ length: n }, (_, i) => [i, open.includes(i) ? 'open' : 'closed']))
+    return <>
+      <GraphTraversalView title="Branches and roads" n={n} edges={roads.map(([u, v]) => [u, v])}
+        labels={Array.from({ length: n }, (_, i) => String(i))} visited={open} tags={step.mask >= 0 ? tags : {}} showFrontier={false}
+        legend={{ visited: 'open branch' }} />
+      <output aria-label="Valid sets so far">{`Valid sets so far: ${step.count}${step.mask >= 0 ? `; subset ${step.mask} (${open.length ? open.join(', ') : 'empty'}) worst distance ${step.worst ?? 'unreachable'}` : ''}`}</output>
+      <p role="status" style={{ color: 'var(--text)' }}>{step.message}</p>
+    </>
+  }} renderReasoning={() => <>
+    <p>Only roads whose two ends both stay open can be used. Each subset is judged on its own: the distances are recomputed for the open branches, and every pair of them must be within the limit.</p>
+    <p>The empty set and single branches always count.</p>
   </>} />
 }

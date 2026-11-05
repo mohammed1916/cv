@@ -1,36 +1,52 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import BinaryTreeLane from '../../components/shared/BinaryTreeLane'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
-    { id: 'start', label: 'Root', description: 'Start the depth-first walk at the root.' },
-    { id: 'visit', label: 'Extend path', description: 'Append this node’s digit to the path number.' },
-    { id: 'leaf', label: 'Leaf', description: 'A leaf adds its complete path number to the total.' },
-    { id: 'done', label: 'Complete', description: 'Report the total of all root-to-leaf paths.' },
+    { id: 'start', label: 'Index nodes', description: 'Each node is looked up by depth and position.' },
+    { id: 'visit', label: 'Walk down', description: 'Each node extends the number from its parent by one digit.' },
+    { id: 'leaf', label: 'Add a leaf', description: 'A leaf’s full number joins the total.' },
+    { id: 'done', label: 'Total', description: 'The sum of every root-to-leaf number.' },
   ],
-  parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'Three-digit codes (JSON array of strings)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Nodes (JSON array of three-digit strings DPV)',
   url: 'https://leetcode.com/problems/path-sum-iv/',
-  complexity: 'O(n) time and O(depth) stack space. The visualization caps input at 15 nodes.',
+  complexity: 'O(n) time for n nodes and O(depth) recursion space.',
   examples: [
-    { label: 'Example 1', input: '["113","215","221"]' },
-    { label: 'Single root', input: '["117"]' },
+    { label: 'Small tree', input: '["113","215","221"]' },
+    { label: 'Chain', input: '["111","222","333"]' },
+    { label: 'Two leaves', input: '["114","215","227","325"]' },
   ],
+}
+
+// Rebuild the linked tree from the DPV strings, so the lane draws the same shape the walk uses.
+function toTree(items) {
+  const byKey = new Map()
+  let nextId = 0
+  for (const s of items) byKey.set(`${s[0]}-${s[1]}`, { id: nextId++, key: `${s[0]}-${s[1]}`, value: Number(s[2]), left: null, right: null })
+  for (const node of byKey.values()) {
+    const [depth, pos] = node.key.split('-').map(Number)
+    node.left = byKey.get(`${depth + 1}-${2 * pos - 1}`) ?? null
+    node.right = byKey.get(`${depth + 1}-${2 * pos}`) ?? null
+  }
+  return byKey.get('1-1') ?? null
 }
 
 export default function PathSumIV() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const root = toTree(run.input)
     const roles = {}
-    for (const id of step.visited) roles[id] = 'visited'
-    if (step.node !== null) roles[step.node] = 'active'
-    const tags = Object.fromEntries(Object.entries(step.paths).map(([id, path]) => [id, `path ${path}`]))
+    const find = (node, key) => (!node ? null : node.key === key ? node : find(node.left, key) ?? find(node.right, key))
+    const current = step.path[0] ? find(root, step.path[0]) : null
+    if (current) roles[current.id] = 'current'
     return <>
-      <BinaryTreeLane title="Tree" root={run.root} roles={roles} tags={tags} note={`total ${step.total}`} />
-      <output aria-label="Total">{`Sum so far: ${step.total}`}</output>
+      <BinaryTreeLane title="Tree by depth and position" root={root} roles={roles} note={step.phase === 'done' ? 'total computed' : 'walking'} />
+      <RecordStateTable label="Leaves found" columns={['leaf number']} rows={step.leaves.map(v => ({ 'leaf number': v }))} activeRow={step.leaves.length - 1} />
+      <output aria-label="Running total">{`Total so far: ${step.total}`}</output>
     </>
-  }} renderReasoning={() => <>
-    <p>Each three-digit code gives depth, position and value. A node’s parent is at depth minus one and position halved, rounded up.</p>
-    <p>Walking down, every node extends the number formed so far by one digit. Each leaf finishes one root-to-leaf number, and those numbers are added.</p>
+  }} renderReasoning={({ step }) => <>
+    <p>{step.message}</p>
+    <p><strong>Why depth and position:</strong> a node at position p on depth d has children at positions 2p − 1 and 2p, so the tree never needs pointers in the input.</p>
   </>} />
 }

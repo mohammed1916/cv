@@ -23,7 +23,7 @@ function Plot({ points }) {
   return <svg viewBox="0 0 240 240" role="img" aria-label="Three points" style={{ width: 240, maxWidth: '100%' }}>
     <polygon points={pts.map(p => p.join(',')).join(' ')} fill="none" stroke="var(--text-dim)" strokeDasharray="4 3" />
     {pts.map(([x, y], i) => <g key={i}>
-      <circle cx={x} cy={y} r={5} fill="#0891b2" />
+      <circle cx={x} cy={y} r={5} fill="var(--primary)" />
       <text x={x + 7} y={y - 7} fontSize="12" fill="var(--text)">P{i}</text>
     </g>)}
   </svg>

@@ -7,15 +7,16 @@
 const MAX_BLOCKS = 8;
 const MAX_TIME = 1000;
 
-const CODE_LINES = [
-  'FUNCTION minBuildTime(blocks, split)',
-  '    pool ← min-heap of the block times',
-  '    WHILE pool holds more than one entry',
-  '        first ← remove the smallest entry from pool',
-  '        second ← remove the smallest entry from pool',
-  '        add second + split to pool',
-  '    RETURN the single entry left in pool',
-];
+const CODE_LINES = `function minBuildTime(blocks, split) {
+  const pool = [...blocks].sort((a, b) => a - b)
+  while (pool.length > 1) {
+    pool.sort((a, b) => a - b)
+    pool.shift()
+    const second = pool.shift()
+    pool.push(second + split)
+  }
+  return pool[0]
+}`.split('\n');
 
 const PY_LINES = [
   'import heapq',
@@ -74,7 +75,7 @@ export function buildTrace(input) {
   const merges = [];
   const frames = [];
   frames.push({
-    pythonLine: P('heapq.heapify(blocks)'), phase: 'setup', activeLine: L('pool ← min-heap'),
+    pythonLine: P('heapq.heapify(blocks)'), phase: 'setup', activeLine: L('const pool = [...blocks]'),
     pool: [...pool], first: null, second: null, merged: null, merges: [], answer: null,
     message: `${pool.length} block${pool.length === 1 ? '' : 's'} in the pool, split time ${split}.`,
   });
@@ -86,14 +87,14 @@ export function buildTrace(input) {
     pool.push(merged);
     merges.push({ first, second, merged });
     frames.push({
-      pythonLine: P('heapq.heappush(blocks, second'), phase: 'merge', activeLine: L('add second + split to pool'),
+      pythonLine: P('heapq.heappush(blocks, second'), phase: 'merge', activeLine: L('pool.push(second + split)'),
       pool: [...pool].sort((a, b) => a - b), first, second, merged, merges: merges.map((m) => ({ ...m })), answer: null,
       message: `Merge ${first} and ${second}: the pair finishes at ${second} + ${split} = ${merged}.`,
     });
   }
   const answer = pool[0];
   frames.push({
-    pythonLine: P('return blocks[0]'), phase: 'done', activeLine: L('RETURN the single entry'),
+    pythonLine: P('return blocks[0]'), phase: 'done', activeLine: L('return pool[0]'),
     pool: [answer], first: null, second: null, merged: null, merges: merges.map((m) => ({ ...m })), answer,
     message: `One entry is left: the minimum building time is ${answer}.`,
   });

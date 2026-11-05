@@ -7,79 +7,70 @@ export function parseInput(text) {
   return values
 }
 
-// Number every position as in a complete binary tree (children of p are 2p and 2p+1). A level's width
-// is last index − first index + 1, counting missing nodes between the outermost present nodes.
+// Number the nodes as in a complete binary tree: the children of position p are 2p and 2p + 1. A level's width
+// spans from its first to its last position, counting missing nodes in between. Positions are shifted
+// down by the first position of each level so the numbers stay small.
 export function buildTrace(values) {
   const root = treeFromLevelOrder(values)
-  const frames = [{ phase: 'start', depth: 0, width: null, best: 0, pythonLine: P('level = [(root, 1)]'), activeLine: L('set level to the list'), message: 'Assign heap positions to nodes; the width of a level spans its outermost nodes.' }]
+  const frames = [{ phase: 'start', depth: 0, level: [], width: null, best: 0, activeLine: L('let best = 0'), pythonLine: P('best = 0'), message: 'Give the root position 0; the width of a level spans its outermost nodes.' }]
   let best = 0
-  let level = root ? [{ node: root, p: 1 }] : []
+  let level = root ? [{ node: root, pos: 0 }] : []
   let depth = 0
   while (level.length) {
-    const width = level[level.length - 1].p - level[0].p + 1
+    const width = level[level.length - 1].pos - level[0].pos + 1
     best = Math.max(best, width)
-    frames.push({ phase: 'level', depth, width, best, first: level[0].p, last: level[level.length - 1].p, pythonLine: P('best = max(best'), activeLine: L('set best to the larger'), message: `Level ${depth}: positions ${level[0].p}…${level[level.length - 1].p}, width ${width}.` })
+    frames.push({ phase: 'level', depth, level: level.map(({ node, pos }) => ({ id: node.id, value: node.value, pos })), width, best, activeLine: L('best = Math.max'), pythonLine: P('best = max('), message: `Level ${depth}: positions ${level[0].pos}…${level[level.length - 1].pos}, width ${width}.` })
     const next = []
-    for (const { node, p } of level) {
-      if (node.left) next.push({ node: node.left, p: 2 * p })
-      if (node.right) next.push({ node: node.right, p: 2 * p + 1 })
+    for (const { node, pos } of level) {
+      if (node.left) next.push({ node: node.left, pos: 2 * pos })
+      if (node.right) next.push({ node: node.right, pos: 2 * pos + 1 })
+    }
+    if (next.length) {
+      const shift = next[0].pos
+      for (const item of next) item.pos -= shift
     }
     level = next
     depth++
   }
-  frames.push({ phase: 'done', depth, width: null, best, result: best, pythonLine: P('return best'), activeLine: L('return best'), message: `Maximum width: ${best}.` })
-  return { input: values, result: best, frames }
+  frames.push({ phase: 'done', depth, level: [], width: null, best, result: best, activeLine: L('return best'), pythonLine: P('return best'), message: `Maximum width: ${best}.` })
+  return { input: values, root, result: best, frames }
 }
 
-export const code = `function widthOfBinaryTree(root):
-  set best to 0
-  set level to the list containing (root, position 1), or empty if root is empty
-  while level is not empty:
-    set best to the larger of best and (last position - first position + 1) of level
-    set nxt to an empty list
-    for each (node, p) in level:
-      if node has a left child, append (left child, 2p) to nxt
-      if node has a right child, append (right child, 2p+1) to nxt
-    set level to nxt
-  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const SOURCE = `function widthOfBinaryTree(root) {
+  let best = 0
+  let level = root ? [{ node: root, pos: 0 }] : []
+  while (level.length > 0) {
+    best = Math.max(best, level[level.length - 1].pos - level[0].pos + 1)
+    const next = []
+    for (const { node, pos } of level) {
+      if (node.left) next.push({ node: node.left, pos: 2 * pos })
+      if (node.right) next.push({ node: node.right, pos: 2 * pos + 1 })
+    }
+    if (next.length > 0) {
+      const shift = next[0].pos
+      for (const item of next) item.pos -= shift
+    }
+    level = next
+  }
+  return best
+}`
+export const code = SOURCE.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
-const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
-export const python = `class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-
-def build_tree(values):
-    if not values or values[0] is None:
-        return None
-    root = TreeNode(values[0])
-    queue = [root]
-    cursor = 1
-    for node in queue:
-        if cursor < len(values) and values[cursor] is not None:
-            node.left = TreeNode(values[cursor])
-            queue.append(node.left)
-        cursor += 1
-        if cursor < len(values) and values[cursor] is not None:
-            node.right = TreeNode(values[cursor])
-            queue.append(node.right)
-        cursor += 1
-    return root
-
-def width_of_binary_tree(values):
-    root = build_tree(values)
+export const python = `def width_of_binary_tree(root):
     best = 0
-    level = [(root, 1)] if root else []
+    level = [(root, 0)] if root else []
     while level:
         best = max(best, level[-1][1] - level[0][1] + 1)
         nxt = []
-        for node, p in level:
-            if node.left is not None:
-                nxt.append((node.left, 2 * p))
-            if node.right is not None:
-                nxt.append((node.right, 2 * p + 1))
+        for node, pos in level:
+            if node["left"]:
+                nxt.append((node["left"], 2 * pos))
+            if node["right"]:
+                nxt.append((node["right"], 2 * pos + 1))
+        if nxt:
+            shift = nxt[0][1]
+            nxt = [(child, p - shift) for child, p in nxt]
         level = nxt
-    return best
-`
+    return best`
+const P = s => python.split('\n').findIndex(t => t.includes(s)) + 1

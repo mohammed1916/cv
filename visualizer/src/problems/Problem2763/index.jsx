@@ -36,25 +36,41 @@ const definition = {
   }
 ],
   parse: parseInput, build: buildTrace, code, python,
-  inputLabel: "Object with nums (JSON), e.g. {\"nums\":[2,3,1,4]}",
+  inputLabel: "Object with nums (JSON), e.g. {\"nums\":[3,1,2,4]}",
   url: "https://leetcode.com/problems/sum-of-imbalance-numbers-of-all-subarrays/",
   complexity: "O(n^2) distinct-count enumeration with set lookups. The visualization caps input at 20 values; the official limit is 1000.",
   examples: [
   {
-    "label": "Example 1",
-    "input": "{\"nums\":[2,3,1,4]}"
+    "label": "Four values",
+    "input": "{\"nums\":[3,1,2,4]}"
   },
   {
-    "label": "Example 2",
-    "input": "{\"nums\":[1,3,3,3,5]}"
+    "label": "Repeats",
+    "input": "{\"nums\":[2,2,4,1,4]}"
   }
 ],
 }
 
 export default function SumImbalanceNumbersVisualizer() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="Array" length={run.input.nums.length} valueAt={i => run.input.nums[i]} active={step.j}
-      roleAt={i => (step.window.length && i >= step.window[0] && i <= step.window[1] ? 'window' : '')} />
-    <output aria-label="Running total">{`Subarray ${step.i}-${step.j}, distinct ${step.distinct}, adjacent pairs ${step.adjacent}, total ${step.total}`}</output>
-  </>} renderReasoning={({ step }) => <p>{step.message}</p>} />
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const [a, b] = step.window.length ? step.window : [-1, -1]
+    const sorted = [...new Set(a >= 0 ? run.input.nums.slice(a, b + 1) : [])].sort((x, y) => x - y)
+    return <>
+      <IndexedSequence label="Array" length={run.input.nums.length} valueAt={k => run.input.nums[k]} active={step.j}
+        roleAt={k => (k === a ? 'l' : k === b ? 'r' : a >= 0 && k > a && k < b ? 'window' : '')} />
+      <section aria-label="Sorted distinct values in the window" style={{ color: 'var(--text)' }}>
+        <h3>Sorted distinct values in the window</h3>
+        <ol style={{ display: 'flex', flexWrap: 'wrap', gap: 6, listStyle: 'none', padding: 0 }}>
+          {sorted.map((v, k) => <li key={v} style={{ padding: '4px 8px', borderRadius: 6, background: 'var(--surface2)' }}>
+            {v}{k + 1 < sorted.length && sorted[k + 1] - v > 1 ? <span style={{ color: 'var(--primary)' }}> &nbsp;gap</span> : ''}
+          </li>)}
+        </ol>
+      </section>
+      <output aria-label="Running total">{`Subarray ${step.i}-${step.j}, distinct ${step.distinct}, adjacent pairs ${step.adjacent}, total ${step.total}`}</output>
+      <p role="status" style={{ color: 'var(--text)' }}>{step.message}</p>
+    </>
+  }} renderReasoning={({ step }) => <>
+    <p>l is the start of the subarray and r is its end. A subarray's imbalance counts the gaps between consecutive sorted distinct values, which equals distinct minus one minus the consecutive pairs already present.</p>
+    <p>{step.message}</p>
+  </>} />
 }

@@ -21,9 +21,9 @@ const definition = {
   url: "https://leetcode.com/problems/semi-ordered-permutation/",
   complexity: "O(n) time and O(1) extra space for permutation length n between 2 and 50.",
   examples: [
-    { label: "Example 1", input: '{"nums": [2,1,4,3]}' },
-    { label: "Example 2", input: '{"nums": [2,4,1,3]}' },
-    { label: "Example 3", input: '{"nums": [1,3,4,2,5]}' },
+    { label: "Overlapping moves", input: '{"nums": [3,1,2]}' },
+    { label: "Long walk", input: '{"nums": [4,1,3,2]}' },
+    { label: "Already in place", input: '{"nums": [1,4,2,3]}' },
   ],
 };
 

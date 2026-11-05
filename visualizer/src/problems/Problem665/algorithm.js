@@ -1,58 +1,63 @@
 export function parseInput(text) {
   const nums = JSON.parse(text)
-  if (!Array.isArray(nums) || nums.length < 1 || nums.length > 10000 || nums.some(v => !Number.isInteger(v) || Math.abs(v) > 100000)) throw new Error('Enter a JSON array of 1–10,000 integers with |v| ≤ 100,000.')
+  if (!Array.isArray(nums) || nums.length < 1 || nums.length > 10000 || nums.some(v => !Number.isInteger(v) || Math.abs(v) > 100000)) throw new Error('Enter a JSON array of 1–10,000 integers from −100,000 to 100,000.')
   return nums
 }
 
-// Find the first descent. Lowering the left value works if the value before it is not larger than the right
-// value; otherwise the right value must be raised. A second descent means the answer is false.
+// Scan left to right. At the first descent a[i-1] > a[i], lower a[i-1] or raise a[i], whichever keeps the
+// previous pair ordered. A second descent means one change is not enough.
 export function buildTrace(nums) {
   const a = [...nums]
   let changes = 0
-  const frames = [{ phase: 'start', index: -1, changes, values: [...a], activeLine: 2, message: 'Scan for descents; at most one is allowed.' }]
+  let result = true
+  const frames = [{ phase: 'start', a: [...a], index: 0, changes, fixed: null, activeLine: L('const a = [...nums]'), pythonLine: P('a = list(nums)'), message: 'Allow at most one change to make the array non-decreasing.' }]
   for (let i = 1; i < a.length; i++) {
-    if (a[i - 1] <= a[i]) continue
-    changes++
-    if (changes > 1) {
-      frames.push({ phase: 'reject', index: i, changes, values: [...a], activeLine: 6, message: `Second descent at ${i - 1}, ${i}: one change cannot fix both.` })
-      break
+    if (a[i - 1] > a[i]) {
+      changes++
+      if (changes > 1) {
+        result = false
+        frames.push({ phase: 'fail', a: [...a], index: i, changes, fixed: null, activeLine: L('return false'), pythonLine: P('return False'), message: `Second descent at ${i} (${a[i - 1]} > ${a[i]}): one change is not enough.` })
+        break
+      }
+      let fixed
+      if (i >= 2 && a[i - 2] > a[i]) { a[i] = a[i - 1]; fixed = i }
+      else { a[i - 1] = a[i]; fixed = i - 1 }
+      frames.push({ phase: 'fix', a: [...a], index: i, changes, fixed, activeLine: L('a[i] = a[i - 1]'), pythonLine: P('a[i] = a[i - 1]'), message: `Descent at ${i}: change position ${fixed} so the pair before it stays ordered.` })
+    } else {
+      frames.push({ phase: 'scan', a: [...a], index: i, changes, fixed: null, activeLine: L('for (let i = 1'), pythonLine: P('for i in range(1'), message: `${a[i - 1]} ≤ ${a[i]}: in order.` })
     }
-    if (i < 2 || a[i - 2] <= a[i]) { a[i - 1] = a[i]; frames.push({ phase: 'lower', index: i - 1, changes, values: [...a], activeLine: 8, message: `Lower a[${i - 1}] to ${a[i]}.` }) }
-    else { a[i] = a[i - 1]; frames.push({ phase: 'raise', index: i, changes, values: [...a], activeLine: 10, message: `Raise a[${i}] to ${a[i - 1]}.` }) }
   }
-  const result = changes <= 1
-  frames.push({ phase: 'done', index: a.length - 1, changes, values: [...a], result, activeLine: 12, message: result ? 'At most one change makes the array non-decreasing.' : 'More than one change is needed.' })
+  if (result) frames.push({ phase: 'done', a: [...a], index: a.length - 1, changes, fixed: null, result, activeLine: L('return true'), pythonLine: P('return True'), message: 'At most one change was needed.' })
   return { input: nums, result, frames }
 }
 
-export const code = `copy nums into a working array; set edits to 0
-for each index i from 1 to the last index:
-  if working[i] is less than working[i - 1], count one edit
-  if edits is more than 1, return false
-  if i < 2 or working[i] >= working[i - 2], lower working[i - 1] to working[i]
-  otherwise raise working[i] to working[i - 1]
-return true`.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-// Scan trace: activeLine 1 (setup), 4 (update per index, line 3 check), inspect (second descent rejects, line 4), done (line 7 or 4).
-// The rejection frame is the only inspect frame; the done frame is line 4 for false and 7 for true.
-export const LINE_MAP = { 1: 1, 4: 3 }
-
-export function familyLine(frame) {
-  if (frame.phase === 'done') return frame.result === false ? 4 : 7
-  if (frame.phase === 'inspect') return 4
-  return LINE_MAP[frame.activeLine] ?? frame.activeLine
-}
+const SOURCE = `function checkPossibility(nums) {
+  const a = [...nums]
+  let changes = 0
+  for (let i = 1; i < a.length; i++) {
+    if (a[i - 1] > a[i]) {
+      changes++
+      if (changes > 1) return false
+      if (i >= 2 && a[i - 2] > a[i]) a[i] = a[i - 1]
+      else a[i - 1] = a[i]
+    }
+  }
+  return true
+}`
+export const code = SOURCE.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def check_possibility(nums):
-    working = list(nums)
-    edits = 0
-    for i in range(1, len(working)):
-        if working[i] < working[i - 1]:
-            edits += 1
-            if edits > 1:
+    a = list(nums)
+    changes = 0
+    for i in range(1, len(a)):
+        if a[i - 1] > a[i]:
+            changes += 1
+            if changes > 1:
                 return False
-            if i < 2 or working[i] >= working[i - 2]:
-                working[i - 1] = working[i]
+            if i >= 2 and a[i - 2] > a[i]:
+                a[i] = a[i - 1]
             else:
-                working[i] = working[i - 1]
+                a[i - 1] = a[i]
     return True`
+const P = s => python.split('\n').findIndex(t => t.includes(s)) + 1

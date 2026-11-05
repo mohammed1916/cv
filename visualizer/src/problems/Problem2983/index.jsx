@@ -19,8 +19,8 @@ const definition = {
   url: "https://leetcode.com/problems/palindrome-rearrangement-queries/",
   complexity: "This view checks each query in O(n + 26) with plain counting, so O(n * q) time overall. The visualization caps s at 50 characters and 20 queries.",
   examples: [
-    { label: "abcabc", input: "{\"s\": \"abcabc\", \"queries\": [[1, 1, 3, 5], [0, 2, 5, 5]]}" },
-    { label: "abbcdecbba", input: "{\"s\": \"abbcdecbba\", \"queries\": [[0, 2, 7, 9]]}" },
+    { label: "Already a palindrome", input: "{\"s\": \"abccba\", \"queries\": [[0, 0, 5, 5], [1, 1, 4, 4]]}" },
+    { label: "One letter moves", input: "{\"s\": \"abcabc\", \"queries\": [[0, 0, 3, 5]]}" },
     { label: "acbcab", input: "{\"s\": \"acbcab\", \"queries\": [[1, 2, 4, 5]]}" },
   ],
 }

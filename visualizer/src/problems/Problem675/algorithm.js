@@ -2,91 +2,130 @@ export function parseInput(text) {
   const forest = JSON.parse(text)
   if (!Array.isArray(forest) || forest.length < 1 || forest.length > 8 || forest.some(r => !Array.isArray(r) || r.length !== forest[0].length || r.length < 1 || r.length > 8)) throw new Error('Enter a rectangular JSON array of up to 8×8 cells.')
   if (forest.flat().some(v => !Number.isInteger(v) || v < 0 || v > 1000000000)) throw new Error('Cells must be integers from 0 (blocked) to 1e9 (tree height); 1 is open ground.')
-  if (forest.flat().filter(v => v > 1).length > 12) throw new Error('At most 12 trees for the visualization.')
+  const trees = forest.flat().filter(v => v > 1).length
+  if (trees > 12) throw new Error('At most 12 trees, so the visualization can show every leg.')
   return forest
 }
 
-// Cut trees in increasing height. Between consecutive trees, a BFS finds the shortest walk over open cells.
+// Cut the trees in increasing height. Each leg is a breadth-first search from where the walker stands to the
+// next tree; any unreachable tree makes the whole cut impossible.
 export function buildTrace(forest) {
-  const m = forest.length, n = forest[0].length
   const trees = []
-  forest.forEach((row, r) => row.forEach((v, c) => { if (v > 1) trees.push({ r, c, h: v }) }))
+  forest.forEach((row, r) => row.forEach((h, c) => { if (h > 1) trees.push({ h, r, c }) }))
   trees.sort((a, b) => a.h - b.h)
-  const open = (r, c) => r >= 0 && r < m && c >= 0 && c < n && forest[r][c] !== 0
-  const bfs = (sr, sc, tr, tc) => {
-    if (sr === tr && sc === tc) return 0
-    const dist = Array.from({ length: m }, () => Array(n).fill(-1))
-    dist[sr][sc] = 0
-    const queue = [[sr, sc]]
-    for (let q = 0; q < queue.length; q++) {
-      const [r, c] = queue[q]
-      for (const [dr, dc] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
-        const nr = r + dr, nc = c + dc
-        if (!open(nr, nc) || dist[nr][nc] >= 0) continue
-        dist[nr][nc] = dist[r][c] + 1
-        if (nr === tr && nc === tc) return dist[nr][nc]
-        queue.push([nr, nc])
-      }
+  let total = 0
+  let at = [0, 0]
+  const frames = [{ phase: 'start', at: [...at], target: null, path: [], visited: [], total, activeLine: L('const trees = []'), pythonLine: P('trees = sorted('), message: `${trees.length} tree(s) to cut, shortest first.` }]
+  let result = 0
+  for (const tree of trees) {
+    const leg = search(forest, at[0], at[1], tree.r, tree.c)
+    if (leg.steps < 0) {
+      result = -1
+      frames.push({ phase: 'blocked', at: [...at], target: [tree.r, tree.c], path: [], visited: leg.visited, total, activeLine: L('return -1'), pythonLine: P('return -1'), message: `Tree ${tree.h} at (${tree.r}, ${tree.c}) cannot be reached: return −1.` })
+      break
     }
-    return -1
+    total += leg.steps
+    frames.push({ phase: 'leg', at: [tree.r, tree.c], target: [tree.r, tree.c], path: leg.path, visited: leg.visited, total, activeLine: L('total += steps'), pythonLine: P('total += steps'), message: `Walk ${leg.steps} step(s) to the tree ${tree.h} at (${tree.r}, ${tree.c}); total ${total}.` })
+    at = [tree.r, tree.c]
   }
-  const frames = [{ phase: 'start', pythonLine: 24, from: [0, 0], to: null, steps: 0, cut: 0, activeLine: L('start at the top-left'), message: 'Start at (0, 0); visit trees from shortest to tallest.' }]
-  let r0 = 0, c0 = 0, total = 0
-  for (let k = 0; k < trees.length; k++) {
-    const t = trees[k]
-    const d = bfs(r0, c0, t.r, t.c)
-    if (d < 0) {
-      frames.push({ phase: 'blocked', pythonLine: 27, from: [r0, c0], to: [t.r, t.c], steps: null, cut: k, activeLine: L('if no walk exists'), message: `No route from (${r0}, ${c0}) to the tree at (${t.r}, ${t.c}).` })
-      return { input: forest, result: -1, frames }
-    }
-    total += d
-    frames.push({ phase: 'walk', pythonLine: 29, from: [r0, c0], to: [t.r, t.c], steps: d, cut: k + 1, activeLine: L('add the walk length'), message: `Walk ${d} step${d === 1 ? '' : 's'} to the tree of height ${t.h}; cut it.` })
-    r0 = t.r; c0 = t.c
-  }
-  frames.push({ phase: 'done', pythonLine: 31, from: [r0, c0], to: null, steps: total, cut: trees.length, result: total, activeLine: L('return total'), message: `Total steps: ${total}.` })
-  return { input: forest, result: total, frames }
+  if (result !== -1) result = total
+  frames.push({ phase: 'done', at: [...at], target: null, path: [], visited: [], total: result, result, activeLine: L('return total'), pythonLine: P('return total'), message: `Total steps: ${result}.` })
+  return { input: forest, result, frames }
 }
 
-export const code = `sort every tree by height, shortest first
-start at the top-left cell with total = 0
-for each tree in height order
-  find the shortest walk from the current cell to the tree with BFS over open cells
-  if no walk exists, return -1
-  add the walk length to total
-  move the current cell to the tree
-return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+// Breadth-first search that also returns the path and the cells it visited.
+function search(forest, sr, sc, tr, tc) {
+  const rows = forest.length, cols = forest[0].length
+  const dist = Array.from({ length: rows }, () => Array(cols).fill(-1))
+  const parent = Array.from({ length: rows }, () => Array(cols).fill(null))
+  const visited = []
+  dist[sr][sc] = 0
+  const queue = [[sr, sc]]
+  for (let q = 0; q < queue.length; q++) {
+    const [r, c] = queue[q]
+    visited.push([r, c])
+    if (r === tr && c === tc) break
+    for (const [dr, dc] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+      const nr = r + dr, nc = c + dc
+      if (nr < 0 || nc < 0 || nr >= rows || nc >= cols || forest[nr][nc] === 0 || dist[nr][nc] !== -1) continue
+      dist[nr][nc] = dist[r][c] + 1
+      parent[nr][nc] = [r, c]
+      queue.push([nr, nc])
+    }
+  }
+  const steps = dist[tr][tc]
+  const path = []
+  for (let cell = steps >= 0 ? [tr, tc] : null; cell; cell = parent[cell[0]][cell[1]]) path.unshift(cell)
+  return { steps, path, visited }
+}
 
+const SOURCE = `function cutOffTree(forest) {
+  const trees = []
+  forest.forEach((row, r) => row.forEach((h, c) => { if (h > 1) trees.push({ h, r, c }) }))
+  trees.sort((a, b) => a.h - b.h)
+  let total = 0
+  let r0 = 0
+  let c0 = 0
+  for (const tree of trees) {
+    const steps = bfs(forest, r0, c0, tree.r, tree.c)
+    if (steps < 0) return -1
+    total += steps
+    r0 = tree.r
+    c0 = tree.c
+  }
+  return total
+}
+
+function bfs(forest, sr, sc, tr, tc) {
+  const rows = forest.length
+  const cols = forest[0].length
+  const dist = Array.from({ length: rows }, () => Array(cols).fill(-1))
+  dist[sr][sc] = 0
+  const queue = [[sr, sc]]
+  for (let q = 0; q < queue.length; q++) {
+    const [r, c] = queue[q]
+    if (r === tr && c === tc) return dist[r][c]
+    for (const [dr, dc] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+      const nr = r + dr
+      const nc = c + dc
+      if (nr < 0 || nc < 0 || nr >= rows || nc >= cols || forest[nr][nc] === 0 || dist[nr][nc] !== -1) continue
+      dist[nr][nc] = dist[r][c] + 1
+      queue.push([nr, nc])
+    }
+  }
+  return -1
+}`
+export const code = SOURCE.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `from collections import deque
 
 
-def walk_length(forest, start, goal):
-    if start == goal:
-        return 0
+def cut_off_tree(forest):
+    trees = sorted((h, r, c) for r, row in enumerate(forest) for c, h in enumerate(row) if h > 1)
+    total = 0
+    r0, c0 = 0, 0
+    for h, r, c in trees:
+        steps = bfs(forest, r0, c0, r, c)
+        if steps < 0:
+            return -1
+        total += steps
+        r0, c0 = r, c
+    return total
+
+
+def bfs(forest, sr, sc, tr, tc):
     rows, cols = len(forest), len(forest[0])
-    dist = {start: 0}
-    queue = deque([start])
+    dist = {(sr, sc): 0}
+    queue = deque([(sr, sc)])
     while queue:
         r, c = queue.popleft()
-        for nr, nc in ((r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1)):
+        if (r, c) == (tr, tc):
+            return dist[(r, c)]
+        for dr, dc in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            nr, nc = r + dr, c + dc
             if 0 <= nr < rows and 0 <= nc < cols and forest[nr][nc] != 0 and (nr, nc) not in dist:
                 dist[(nr, nc)] = dist[(r, c)] + 1
-                if (nr, nc) == goal:
-                    return dist[(nr, nc)]
                 queue.append((nr, nc))
-    return -1
-
-
-def cut_off_tree(forest):
-    rows, cols = len(forest), len(forest[0])
-    trees = sorted((forest[r][c], r, c) for r in range(rows) for c in range(cols) if forest[r][c] > 1)
-    r, c, total = 0, 0, 0
-    for h, tr, tc in trees:
-        d = walk_length(forest, (r, c), (tr, tc))
-        if d < 0:
-            return -1
-        total += d
-        r, c = tr, tc
-    return total
-`
+    return -1`
+const P = s => python.split('\n').findIndex(t => t.includes(s)) + 1

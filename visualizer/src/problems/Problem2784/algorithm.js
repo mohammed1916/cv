@@ -1,12 +1,10 @@
-export const code = [
-  { line: 1, text: "n = largest value in nums" },
-  { line: 2, text: "if length of nums is not n + 1, return false" },
-  { line: 3, text: "counts = zeros for values 0 to n" },
-  { line: 4, text: "for each x in nums, add one to counts[x]" },
-  { line: 5, text: "for each v from 1 to n - 1" },
-  { line: 6, text: "if counts[v] is not 1, return false" },
-  { line: 7, text: "return counts[n] equals 2" },
-]
+export const code = `const n = Math.max(...nums)
+if (nums.length !== n + 1) return false
+const count = new Array(n + 1).fill(0)
+for (const x of nums) count[x] += 1
+for (let v = 1; v < n; v++)
+  if (count[v] !== 1) return false
+return count[n] === 2`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def isGood(nums):
     n = max(nums)

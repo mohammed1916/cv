@@ -1,30 +1,28 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import TallyTreesView from './TallyTreesView'
-import { buildTrace, parseInput, code, python, phases } from './algorithm.js'
+import View from './View'
+import { buildTrace, parseInput, code, python, pythonLineMap, phases, examples, complexity } from './algorithm.js'
 
 const definition = {
   number: '1612',
-  phases,
   parse: parseInput,
   build: buildTrace,
   code,
   python,
-  inputLabel: 'Object with t1 and t2 (LeetCode level-order arrays of "+" and letters, null for missing children)',
-  url: 'https://leetcode.com/problems/check-if-two-expression-trees-are-equivalent/description/',
-  complexity: 'O(n) time and O(h + k) space for n tree positions, height h and k distinct letters. The visualization caps each tree at 15 positions; the draft does not verify the official bounds. Equivalence rests on addition being commutative and associative.',
-  examples: [
-    { label: 'Equivalent', input: '{"t1":["+","+","a","a","b"],"t2":["+","+","a","b","a"]}' },
-    { label: 'Different counts', input: '{"t1":["+","+","a","b","b"],"t2":["+","+","a","a","b"]}' },
-    { label: 'Single letter', input: '{"t1":["a"],"t2":["a"]}' },
-  ],
+  pythonLineMap,
+  phases,
+  examples,
+  complexity,
+  inputLabel: 'Object with root1 and root2: level-order arrays of "+" and lowercase letters, null for missing children',
+  url: 'https://leetcode.com/problems/check-if-two-expression-trees-are-equivalent/',
 }
 
 export default function Problem1612Visualizer() {
-  return (
-    <AlgorithmWorkspace
-      definition={definition}
-      renderVisual={({ run, step }) => <TallyTreesView run={run} step={step} />}
-      renderReasoning={({ step }) => <p>{step.message}</p>}
-    />
-  )
+  return <AlgorithmWorkspace
+    definition={definition}
+    renderVisual={({ run, step }) => <View run={run} step={step} />}
+    renderReasoning={() => <>
+      <p>Addition is order-independent, so the shape of the tree does not matter. Only how many times each letter appears.</p>
+      <p>The tally adds one for every letter in the first tree and takes one away for every letter in the second. Equivalent trees net to zero everywhere.</p>
+    </>}
+  />
 }

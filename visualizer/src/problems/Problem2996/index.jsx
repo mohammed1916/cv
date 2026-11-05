@@ -15,18 +15,18 @@ const definition = {
   url: 'https://leetcode.com/problems/smallest-missing-integer-greater-than-sequential-prefix-sum/',
   complexity: 'O(n) time and O(n) space for the set of values, plus the search for the missing integer.',
   examples: [
-    { label: 'Example 1', input: '[1,2,3,5]' },
-    { label: 'Example 2', input: '[3,4,5,1,12,14,13]' },
+    { label: 'Run then gap', input: '[4,5,6,9,2]' },
+    { label: 'Run of one', input: '[7,3,8]' },
   ],
 }
 
 export default function SmallestMissingSequentialPrefixSum() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="nums" length={run.input.length} valueAt={i => run.input[i]} active={step.at >= 0 ? step.at : step.end}
-      roleAt={i => (i <= step.end ? 'prefix' : '')} />
+      roleAt={i => (i === 0 ? 'l' : i === step.end ? 'r' : i < step.end ? 'run' : '')} />
     <output aria-label="Prefix sum and candidate">{`sum = ${step.total}, candidate = ${step.x ?? 'not yet'}`}</output>
   </>} renderReasoning={() => <>
-    <p>The sequential prefix is the longest run where each value is one more than the value before it. Its sum is the starting candidate.</p>
+    <p>The sequential prefix runs from l (the first value) to r (the last value that keeps adding one). Its sum is the starting candidate.</p>
     <p>A set of the array values answers each membership check in constant time, so the search only moves upward past values that are present.</p>
   </>} />
 }

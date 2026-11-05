@@ -27,7 +27,7 @@ function Stones({ step }) {
       display: 'flex', alignItems: 'flex-start', justifyContent: 'center', color: 'var(--text)', fontFamily: 'monospace',
     }}>{weight}</div>)}
     {picked.map((weight, index) => <div key={`p${index}`} data-picked={weight} style={{
-      width: 36, height: (weight / top) * 120, background: 'rgba(8,145,178,.35)', border: '2px solid #0891b2',
+      width: 36, height: (weight / top) * 120, background: 'var(--surface2)', border: '2px solid var(--primary)',
       display: 'flex', alignItems: 'flex-start', justifyContent: 'center', color: 'var(--text)', fontFamily: 'monospace',
     }}>{weight}</div>)}
   </div>

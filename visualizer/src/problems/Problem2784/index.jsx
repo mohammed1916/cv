@@ -31,17 +31,17 @@ const definition = {
   }
 ],
   parse: parseInput, build: buildTrace, code, python,
-  inputLabel: "Object with nums (JSON), e.g. {\"nums\":[1,3,3,2]}",
+  inputLabel: "Object with nums (JSON), e.g. {\"nums\":[2,2,3,1]}",
   url: "https://leetcode.com/problems/check-if-array-is-good/",
   complexity: "O(n) time and O(n) space for the count array. The visualization caps input at 30 values.",
   examples: [
   {
-    "label": "Example 1",
-    "input": "{\"nums\":[2,1,3]}"
+    "label": "Good array",
+    "input": "{\"nums\":[3,1,4,4,2]}"
   },
   {
-    "label": "Example 2",
-    "input": "{\"nums\":[1,3,3,2]}"
+    "label": "Repeated middle value",
+    "input": "{\"nums\":[2,2,3,1]}"
   }
 ],
 }

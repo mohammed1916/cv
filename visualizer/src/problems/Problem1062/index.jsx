@@ -20,9 +20,9 @@ const definition = {
   url: 'https://leetcode.com/problems/longest-repeating-substring/description/',
   complexity: 'O(n^2) time and O(n^2) space for a string of length n, using a table of runs for each pair of positions. The visualization caps s at 20 characters; the official bound is not verified.',
   examples: [
-    { label: 'Overlapping pair', input: '{"s":"abbaba"}' },
-    { label: 'No repeat', input: '{"s":"abcd"}' },
-    { label: 'Three copies', input: '{"s":"aabcaabdaab"}' },
+    { label: 'Overlapping pair', input: '{"s":"banana"}' },
+    { label: 'No repeat', input: '{"s":"qwerty"}' },
+    { label: 'Two pairs', input: '{"s":"xyzyz"}' },
   ],
 }
 

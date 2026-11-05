@@ -1,10 +1,29 @@
-import authoredExamples0 from '../../config/examples/collection--1729.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import View from './View'
+import { buildTrace, parseInput, code, sql, python, pythonLineMap, phases, examples, complexity } from './algorithm.js'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/database.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '1729',
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  sql,
+  python,
+  pythonLineMap,
+  phases,
+  examples,
+  complexity,
+  inputLabel: 'JSON array of Followers rows: user_id (the user followed) and follower_id',
+  url: 'https://leetcode.com/problems/find-followers-count/',
+}
 
-const definition = { ...definitions[1729], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem1729Visualizer() {
+  return <AlgorithmWorkspace
+    definition={definition}
+    renderVisual={({ run, step }) => <View run={run} step={step} />}
+    renderReasoning={() => <>
+      <p>Each follow row is one follower for one user, so counting rows per user gives the followers count.</p>
+      <p>GROUP BY collects the rows of one user; ORDER BY sorts the output by user_id.</p>
+    </>}
+  />
+}

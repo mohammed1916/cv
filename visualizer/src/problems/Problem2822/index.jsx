@@ -1,60 +1,32 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import IndexedSequence from '../../components/shared/IndexedSequence'
-
-const code = `invert an object
-  result = empty map from value to list of keys
-  for each key k with value v
-    append k to result[v]
-  return result`
-const python = `def invert(obj):
-    result = {}
-    for key, value in obj.items():
-        result.setdefault(str(value), []).append(key)
-    return result`
-
-function parseInput(text) {
-  const input = JSON.parse(text)
-  if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Use a plain object.')
-  return input
-}
-
-function buildTrace(obj) {
-  const keys = Object.keys(obj)
-  const result = {}
-  const frames = [{ phase: 'start', activeLine: 2, message: 'Start with an empty result.', at: -1, out: [] }]
-  const out = []
-  keys.forEach((key, i) => {
-    const value = String(obj[key])
-    result[value] = [...(result[value] || []), key]
-    const shown = Object.entries(result).map(([v, ks]) => `${v} → [${ks.join(', ')}]`)
-    out.splice(0, out.length, ...shown)
-    frames.push({ phase: 'step', activeLine: 4, message: `Key ${key} has value ${value}; file it under ${value}.`, at: i, out: [...out] })
-  })
-  frames.push({ phase: 'done', activeLine: 5, message: 'Every value now lists the keys that held it.', at: -1, out: [...out] })
-  return { frames }
-}
+import RecordStateTable from '../../components/shared/RecordStateTable'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
-    { id: 'start', label: 'Empty', description: 'No values are filed yet.' },
-    { id: 'step', label: 'File key', description: 'Add this key under its value.' },
-    { id: 'done', label: 'Inverted', description: 'Every value has its key list.' },
+    { id: 'start', label: 'Empty', description: 'The inverted object has no entries yet.' },
+    { id: 'assign', label: 'Assign', description: 'A new value maps to its key.' },
+    { id: 'make', label: 'List', description: 'A repeated value now lists both keys.' },
+    { id: 'append', label: 'Append', description: 'A value that already lists keys takes one more.' },
+    { id: 'done', label: 'Result', description: 'Every pair has been inverted.' },
   ],
   parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'Plain object to invert',
+  inputLabel: 'JSON {"pairs": [["a", 1], ["b", 2], ["c", 1]]}',
   url: 'https://leetcode.com/problems/inversion-of-object/',
-  complexity: 'O(n) expected time for n keys, using a hash map keyed by value.',
+  complexity: 'O(n) time and O(n) space for n pairs.',
   examples: [
-    { label: 'Shared value', input: '{"a":1,"b":2,"c":1}' },
-    { label: 'All unique', input: '{"x":"p","y":"q"}' },
+    { label: 'Shared value', input: '{"pairs":[["a","x"],["b","y"],["c","x"]]}' },
+    { label: 'Three keys share', input: '{"pairs":[["id",7],["code",7],["tag",9],["size",7]]}' },
   ],
 }
 
 export default function InversionOfObject() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <IndexedSequence label="Inverted buckets" length={step.out.length} valueAt={i => step.out[i]} active={step.at} />
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <RecordStateTable label="Input pairs in order" columns={['position', 'key', 'value', 'status']}
+      rows={run.input.pairs.map(([k, v], i) => ({ position: i, key: k, value: String(v), status: step.statuses[i] }))} activeRow={step.at} />
+    <output aria-label="Inverted object so far">{`{ ${step.entries.map(([k, v]) => `${k}: ${Array.isArray(v) ? `[${v.join(', ')}]` : v}`).join(', ')} }`}</output>
+    <p role="status" style={{ color: 'var(--text)' }}>{step.message}</p>
   </>} renderReasoning={() => <>
-    <p>Each original key is placed in the bucket named by its value. Two keys with the same value land in the same bucket.</p>
-    <p>Values become the lookup keys, so their order and repetition are what the buckets record.</p>
+    <p>Each value becomes a key in the result, and its key becomes the value. A value that appears twice stores a list of keys in the order they were met.</p>
   </>} />
 }

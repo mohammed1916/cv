@@ -1,10 +1,30 @@
-import authoredExamples0 from '../../config/examples/collection--2197.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import StackView from './StackView'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/raceAndAncestryBatch.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '2197',
+  phases,
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  inputLabel: 'JSON array of positive integers, e.g. [6,4,3,2,7,6,2]',
+  url: 'https://leetcode.com/problems/replace-non-coprime-numbers-in-array/',
+  complexity: 'O(n log V) time with the gcd step and O(n) space for the stack. The page caps the length at 10 and values at 60.',
+  examples: [
+    { label: 'Mixed factors', input: '[6,4,3,2,7,6,2]' },
+    { label: 'Runs', input: '[2,2,1,1,3,3,3]' },
+    { label: 'Pairs equal', input: '[4,4]' },
+  ],
+}
 
-const definition = { ...definitions[2197], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem2197Visualizer() {
+  return (
+    <AlgorithmWorkspace
+      definition={definition}
+      renderVisual={({ run, step }) => <StackView run={run} step={step} />}
+      renderReasoning={({ step }) => <p>{step.message}</p>}
+    />
+  )
+}

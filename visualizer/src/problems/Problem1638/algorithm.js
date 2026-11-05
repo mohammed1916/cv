@@ -1,76 +1,89 @@
-export const phases = [
-  { id: 'start', label: 'Read strings', description: 'A pair is an equal-length substring of s and a substring of t that differ at exactly one position.' },
-  { id: 'align', label: 'Choose starts', description: 'Fix a start i in s and j in t. Each extension adds one aligned character to both.' },
-  { id: 'extend', label: 'Extend and count', description: 'Count the pair when exactly one mismatch has appeared. Stop after the second mismatch.' },
-  { id: 'done', label: 'Total', description: 'The total is the number of qualifying pairs.' },
+// Count pairs of substrings (one from each string, same length) that differ in exactly one position.
+const JS_LINES = [
+  { text: 'let count = 0', py: 'count = 0' },
+  { text: 'for (let i = 0; i < s.length; i++) {', py: 'for i in range(len(s))' },
+  { text: 'for (let j = 0; j < t.length; j++) {', py: 'for j in range(len(t))' },
+  { text: 'let diffs = 0', py: 'diffs = 0' },
+  { text: 'for (let k = 0; i + k < s.length && j + k < t.length; k++) {', py: 'for k in range' },
+  { text: 'if (s[i + k] !== t[j + k]) diffs++', py: 'if s[i + k] != t[j + k]' },
+  { text: 'if (diffs === 1) count++', py: 'if diffs == 1' },
+  { text: 'if (diffs > 1) break', py: 'if diffs > 1' },
+  { text: '}', py: null },
+  { text: '}', py: null },
+  { text: '}', py: null },
+  { text: 'return count', py: 'return count' },
 ]
 
+export const code = JS_LINES.map(({ text }, i) => ({ line: i + 1, text }))
+
+export const python = `def countSubstrings(s, t):
+    count = 0
+    for i in range(len(s)):
+        for j in range(len(t)):
+            diffs = 0
+            for k in range(min(len(s) - i, len(t) - j)):
+                if s[i + k] != t[j + k]:
+                    diffs += 1
+                if diffs == 1:
+                    count += 1
+                if diffs > 1:
+                    break
+    return count
+`
+
+const PY = python.split('\n')
+const pyAt = needle => {
+  const index = PY.findIndex(line => line.includes(needle))
+  if (index < 0) throw new Error(`python line missing: ${needle}`)
+  return index + 1
+}
+export const pythonLineMap = Object.fromEntries(JS_LINES.map((line, i) => [i + 1, pyAt(line.py ?? 'return count')]))
+
+export const phases = [
+  { id: 'start', label: 'Start', description: 'Begin with no pairs counted.' },
+  { id: 'pair', label: 'Pair', description: 'Line up substrings that start at i in s and at j in t.' },
+  { id: 'extend', label: 'Extend', description: 'Grow both substrings one character at a time and track the mismatches.' },
+  { id: 'done', label: 'Result', description: 'Every length with exactly one mismatch was counted.' },
+]
+
+export const examples = [
+  { label: 'Two short words', input: '{"s":"abcd","t":"bacd"}' },
+  { label: 'Equal strings', input: '{"s":"aa","t":"aa"}' },
+  { label: 'Different letters', input: '{"s":"xyz","t":"pqr"}' },
+]
+
+export const complexity = 'O(n * m * min(n, m)) time for strings of lengths n and m. The visual caps each string at 8 characters.'
+
 export function parseInput(text) {
-  const pair = JSON.parse(text)
-  if (!Array.isArray(pair) || pair.length !== 2 || !pair.every(s => typeof s === 'string' && /^[a-z]{1,8}$/.test(s))) {
-    throw new Error('Enter a JSON array of two strings, each 1–8 lowercase letters.')
-  }
-  return { s: pair[0], t: pair[1] }
+  const input = JSON.parse(text)
+  if (!input || typeof input.s !== 'string' || typeof input.t !== 'string') throw new Error('Use an object with strings s and t.')
+  if (input.s.length < 1 || input.t.length < 1 || input.s.length > 8 || input.t.length > 8) throw new Error('Each string has 1 to 8 characters (visual cap).')
+  if (!/^[a-z]+$/.test(input.s) || !/^[a-z]+$/.test(input.t)) throw new Error('Use lowercase letters only.')
+  return { s: input.s, t: input.t }
 }
 
 export function buildTrace({ s, t }) {
   const frames = []
-  let total = 0
-  frames.push({
-    phase: 'start', activeLine: 2,
-    message: `Compare s = "${s}" with t = "${t}". Count pairs of equal-length substrings that differ in exactly one position.`,
-    snapshot: { s, t, i: null, j: null, length: 0, mismatches: 0, total: 0 },
-  })
+  let count = 0
+  const snap = extra => ({ count, ...extra })
+  frames.push({ phase: 'start', activeLine: 1, i: -1, j: -1, message: 'No pairs counted yet.', snapshot: snap({}) })
   for (let i = 0; i < s.length; i++) {
     for (let j = 0; j < t.length; j++) {
-      frames.push({
-        phase: 'align', activeLine: 5,
-        message: `Start s at ${i} and t at ${j}. Length 1 is the first pair from these starts.`,
-        snapshot: { s, t, i, j, length: 0, mismatches: 0, total },
-      })
-      let mismatches = 0
+      frames.push({ phase: 'pair', activeLine: 3, i, j, message: `Start at s[${i}] and t[${j}].`, snapshot: snap({}) })
+      let diffs = 0
       for (let k = 0; i + k < s.length && j + k < t.length; k++) {
-        if (s[i + k] !== t[j + k]) mismatches++
-        if (mismatches > 1) {
-          frames.push({
-            phase: 'extend', activeLine: 8,
-            message: `Length ${k + 1} now has ${mismatches} mismatches, and so does every longer pair from these starts. Stop extending.`,
-            snapshot: { s, t, i, j, length: k + 1, mismatches, total },
-          })
+        if (s[i + k] !== t[j + k]) diffs++
+        if (diffs === 1) {
+          count++
+          frames.push({ phase: 'extend', activeLine: 7, i, j, len: k + 1, diffs, message: `Length ${k + 1}: exactly one mismatch, count is ${count}.`, snapshot: snap({}) })
+        }
+        if (diffs > 1) {
+          frames.push({ phase: 'extend', activeLine: 8, i, j, len: k + 1, diffs, message: `Length ${k + 1} has ${diffs} mismatches: stop extending.`, snapshot: snap({}) })
           break
         }
-        const counted = mismatches === 1
-        if (counted) total++
-        frames.push({
-          phase: 'extend', activeLine: counted ? 9 : 7,
-          message: counted
-            ? `Length ${k + 1} has exactly one mismatch, so it counts. Total is now ${total}.`
-            : `Length ${k + 1} has no mismatch yet. Extend to the next character.`,
-          snapshot: { s, t, i, j, length: k + 1, mismatches, total },
-        })
       }
     }
   }
-  frames.push({
-    phase: 'done', activeLine: 10,
-    message: `Return ${total}: the number of pairs that differ in exactly one character.`,
-    snapshot: { s, t, i: null, j: null, length: 0, mismatches: 0, total },
-  })
-  return { input: { s, t }, result: total, frames }
+  frames.push({ phase: 'done', activeLine: 12, i: -1, j: -1, result: count, message: `Total pairs: ${count}.`, snapshot: snap({ result: count }) })
+  return { input: { s, t }, result: count, frames }
 }
-
-const LINES = [
-  'def count_one_mismatch(s, t):',
-  '    total = 0',
-  '    for i in range(len(s)):',
-  '        for j in range(len(t)):',
-  '            mismatches = 0',
-  '            for k in range(min(len(s) - i, len(t) - j)):',
-  '                mismatches += s[i + k] != t[j + k]',
-  '                if mismatches > 1: break',
-  '                if mismatches == 1: total += 1',
-  '    return total',
-]
-export const code = LINES.map((text, index) => ({ line: index + 1, text }))
-export const python = LINES.join('\n')
-export const pythonLineMap = Object.fromEntries(LINES.map((_, i) => [i + 1, i + 1]))

@@ -10,63 +10,70 @@ export function parseInput(text) {
   return { price, special, needs }
 }
 
-// Memoized search: buy the rest at list price, or apply any offer that fits the remaining needs.
+// Memoized search over the remaining needs. Each state either pays list price for everything left,
+// or applies an offer that fits without overbuying and continues from the smaller remainder.
 export function buildTrace({ price, special, needs }) {
   const memo = new Map()
-  const frames = [{ phase: 'start', needs: [...needs], best: null, path: [], activeLine: 2, message: 'Compare buying the remaining items at list price with applying each fitting offer.' }]
-  const listCost = n => n.reduce((sum, q, i) => sum + q * price[i], 0)
-  function solve(n, path) {
-    const key = n.join(',')
+  const frames = [{ phase: 'start', needs: [...needs], best: null, offer: null, activeLine: L('const memo = new Map()'), pythonLine: P('memo = {}'), message: 'Compare buying the remaining items at list price with applying each offer that fits.' }]
+  const listCost = counts => counts.reduce((sum, q, i) => sum + q * price[i], 0)
+  function solve(counts, offerPath) {
+    const key = counts.join(',')
     if (memo.has(key)) return memo.get(key)
-    let best = listCost(n)
-    frames.push({ phase: 'price', needs: [...n], best, path: [...path], activeLine: 4, message: `Remaining ${n.join(', ')}: list price ${best}.` })
+    let best = listCost(counts)
+    frames.push({ phase: 'price', needs: [...counts], best, offer: null, path: offerPath, activeLine: L('let best = listCost'), pythonLine: P('best = sum('), message: `Remaining [${counts.join(', ')}]: list price ${best}.` })
     for (const offer of special) {
-      const counts = offer.slice(0, -1)
-      if (counts.every((c, i) => c <= n[i])) {
-        const next = n.map((q, i) => q - counts[i])
-        const cost = offer.at(-1) + solve(next, [...path, `offer ${offer.join(' ')}`])
+      const take = offer.slice(0, -1)
+      if (take.every((c, i) => c <= counts[i])) {
+        const rest = counts.map((q, i) => q - take[i])
+        const cost = offer[offer.length - 1] + solve(rest, [...offerPath, offer])
         if (cost < best) best = cost
-        frames.push({ phase: 'offer', needs: [...n], best, path: [...path, `offer ${offer.join(' ')}`], activeLine: 7, message: `Offer [${offer.join(', ')}] fits; best for these needs is ${best}.` })
+        frames.push({ phase: 'offer', needs: [...counts], best, offer, path: offerPath, activeLine: L('best = Math.min'), pythonLine: P('best = min('), message: `Offer [${offer.join(', ')}] fits; best for these needs is ${best}.` })
       }
     }
     memo.set(key, best)
     return best
   }
   const result = solve([...needs], [])
-  frames.push({ phase: 'done', needs: [...needs], best: result, path: [], result, activeLine: 9, message: `Minimum price: ${result}.` })
+  frames.push({ phase: 'done', needs: [...needs], best: result, offer: null, result, activeLine: L('return solve'), pythonLine: P('return solve('), message: `Minimum price: ${result}.` })
   return { input: { price, special, needs }, result, frames }
 }
 
-export const code = `memoize each result by the remaining-needs vector
-keep only useful bundles: at least one item, and cheaper than buying those items one by one
-price all remaining units individually as the baseline
-for each useful bundle that fits without overbuying:
-  combine its cost with the optimal cost of the reduced needs
-keep the minimum as this state's answer and store it in the memo
-return the minimum cost for the original needs`.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-// Collection trace: codeStage 'needs' is the per-state update (line 6); 'return' is line 7.
-const STAGE_LINE = { needs: 6, return: 7 }
-export const LINE_MAP = { 1: 1, 4: 6, 5: 7 }
-
-export function familyLine(frame) {
-  return STAGE_LINE[frame.codeStage] ?? LINE_MAP[frame.activeLine] ?? frame.activeLine
-}
+const SOURCE = `function shoppingOffers(price, special, needs) {
+  const memo = new Map()
+  const listCost = counts => counts.reduce((sum, q, i) => sum + q * price[i], 0)
+  function solve(counts) {
+    const key = counts.join(',')
+    if (memo.has(key)) return memo.get(key)
+    let best = listCost(counts)
+    for (const offer of special) {
+      const take = offer.slice(0, -1)
+      if (take.every((c, i) => c <= counts[i])) {
+        const rest = counts.map((q, i) => q - take[i])
+        best = Math.min(best, offer[offer.length - 1] + solve(rest))
+      }
+    }
+    memo.set(key, best)
+    return best
+  }
+  return solve(needs)
+}`
+export const code = SOURCE.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def shopping_offers(price, special, needs):
-    useful = [offer for offer in special
-              if any(offer[:-1]) and offer[-1] < sum(q * p for q, p in zip(offer[:-1], price))]
     memo = {}
 
     def solve(remaining):
         if remaining in memo:
             return memo[remaining]
         best = sum(q * p for q, p in zip(remaining, price))
-        for offer in useful:
-            if all(q >= offer[i] for i, q in enumerate(remaining)):
-                reduced = tuple(q - offer[i] for i, q in enumerate(remaining))
-                best = min(best, offer[-1] + solve(reduced))
+        for offer in special:
+            take, offer_price = offer[:-1], offer[-1]
+            if all(q >= t for q, t in zip(remaining, take)):
+                reduced = tuple(q - t for q, t in zip(remaining, take))
+                best = min(best, offer_price + solve(reduced))
         memo[remaining] = best
         return best
 
     return solve(tuple(needs))`
+const P = s => python.split('\n').findIndex(t => t.includes(s)) + 1

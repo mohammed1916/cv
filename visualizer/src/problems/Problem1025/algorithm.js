@@ -1,16 +1,17 @@
 // Independently written teaching model. The sample inputs are invented for this visualization.
-export const code = [
-  'function canFirstPlayerWin(n):',
-  '  wins = array of n+1 false values',
-  '  for i = 1 to n:',
-  '    found = false',
-  '    for x = 1 to i-1:',
-  '      if x divides i and not wins[i - x]: found = true; stop loop',
-  '    wins[i] = found',
-  '  return wins[n]',
-].map((text, index) => ({ line: index + 1, text }))
+export const code = `function divisorGameWins(n) {
+  const wins = Array(n + 1).fill(false)
+  for (let i = 1; i <= n; i++) {
+    let found = false
+    for (let x = 1; x < i && !found; x++) {
+      if (i % x === 0 && !wins[i - x]) found = true
+    }
+    wins[i] = found
+  }
+  return wins[n]
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
-export const python = `def can_first_player_win(n):
+export const python = `def divisor_game_wins(n):
     wins = [False] * (n + 1)
     for i in range(1, n + 1):
         found = False
@@ -46,7 +47,7 @@ export const phases = [
 export const inputLabel = 'JSON object with n, for example {"n":9}'
 export const complexity = 'O(n^2) time and O(n) space for the table. The visualizer accepts n up to 60 so every table entry can be shown.'
 export const examples = [
-  { label: 'Small even pile', input: '{"n":2}' },
+  { label: 'Small even pile', input: '{"n":6}' },
   { label: 'Odd pile', input: '{"n":9}' },
   { label: 'Larger even pile', input: '{"n":16}' },
   { label: 'Starting pile of one', input: '{"n":1}' },
@@ -63,13 +64,13 @@ export function parseInput(text) {
 export function buildTrace({ n }) {
   const frames = []
   const wins = Array(n + 1).fill(false)
-  frames.push(frame('start', 'wins = array', 'wins = [False]', `Prepare states 0 through ${n}, all losing until shown otherwise.`, { n, i: 0, wins: [...wins] }))
+  frames.push(frame('start', 'const wins = Array(n + 1)', 'wins = [False]', `Prepare states 0 through ${n}, all losing until shown otherwise.`, { n, i: 0, wins: [...wins] }))
   for (let i = 1; i <= n; i++) {
-    frames.push(frame('inspect', 'for i = 1 to n', 'for i in range', `Decide pile size ${i}.`, { n, i, x: null, wins: [...wins] }))
+    frames.push(frame('inspect', 'for (let i = 1; i <= n; i++)', 'for i in range', `Decide pile size ${i}.`, { n, i, x: null, wins: [...wins] }))
     let found = false
     for (let x = 1; x < i && !found; x++) {
       const divides = i % x === 0
-      frames.push(frame('inspect', 'if x divides i', 'if i % x == 0', divides
+      frames.push(frame('inspect', 'if (i % x === 0', 'if i % x == 0', divides
         ? `Taking ${x} leaves ${i - x}.`
         : `${x} does not divide ${i}, so it is not a legal move.`, { n, i, x, wins: [...wins] }))
       if (divides && !wins[i - x]) {

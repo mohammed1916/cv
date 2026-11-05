@@ -12,12 +12,12 @@ const definition = {
     { id: 'done', label: 'Result', description: 'Return the smallest seed in the best group.' },
   ],
   parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'JSON {"nums": [3,7,8,1,1,5], "space": 2}',
+  inputLabel: 'JSON {"nums": [4,9,2,11,6], "space": 3}',
   url: 'https://leetcode.com/problems/destroy-sequential-targets/',
   complexity: 'O(n) expected time with a hash map of remainders, for n targets. The visualization caps nums at 20 values.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[3,7,8,1,1,5],"space":2}' },
-    { label: 'Example 2', input: '{"nums":[1,3,5,2,4,6],"space":2}' },
+    { label: 'Example 1', input: '{"nums":[4,9,2,11,6],"space":3}' },
+    { label: 'Example 2', input: '{"nums":[5,8,13],"space":4}' },
   ],
 }
 

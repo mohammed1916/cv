@@ -1,8 +1,6 @@
-export const code = [
-  { line: 1, text: "shifted = purchaseAmount + 5" },
-  { line: 2, text: "rounded = shifted // 10 * 10" },
-  { line: 3, text: "return 100 - rounded" },
-]
+export const code = `const shifted = purchaseAmount + 5
+const rounded = Math.floor(shifted / 10) * 10
+return 100 - rounded`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def accountBalanceAfterPurchase(purchaseAmount):
     shifted = purchaseAmount + 5

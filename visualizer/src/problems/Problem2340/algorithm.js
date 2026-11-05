@@ -14,16 +14,24 @@ export function parseInput(text) {
   return { nums }
 }
 
-export const code = `FUNCTION minSwaps(nums)
-    lo ← smallest value; hi ← largest value
-    swaps ← 0
-    p ← first index holding lo
-    FOR k from p DOWN TO 1
-        swap nums[k - 1] and nums[k]; swaps ← swaps + 1
-    q ← last index holding hi in the current array
-    FOR k from q UP TO len(nums) - 2
-        swap nums[k] and nums[k + 1]; swaps ← swaps + 1
-    RETURN swaps`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minSwaps(nums) {
+  const arr = [...nums];
+  const n = arr.length;
+  const lo = Math.min(...arr);
+  const hi = Math.max(...arr);
+  let swaps = 0;
+  const p = arr.indexOf(lo);
+  for (let k = p; k > 0; k--) {
+    [arr[k - 1], arr[k]] = [arr[k], arr[k - 1]];
+    swaps++;
+  }
+  const q = arr.lastIndexOf(hi);
+  for (let k = q; k < n - 1; k++) {
+    [arr[k], arr[k + 1]] = [arr[k + 1], arr[k]];
+    swaps++;
+  }
+  return swaps;
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def min_swaps(nums):
     nums = list(nums)
@@ -66,20 +74,20 @@ export function buildTrace({ nums }) {
   const hi = Math.max(...a)
   const frames = []
   let swaps = 0
-  frames.push({ phase: 'start', activeLine: L('lo ← smallest'), pythonLine: P('lo, hi = min(nums)'), message: `Smallest ${lo}, largest ${hi}.`, array: a.slice(), moving: -1, swapped: null, swaps })
+  frames.push({ phase: 'start', activeLine: L('const lo = Math.min'), pythonLine: P('lo, hi = min(nums)'), message: `Smallest ${lo}, largest ${hi}.`, array: a.slice(), moving: -1, swapped: null, swaps })
   const p = a.indexOf(lo)
   for (let k = p; k > 0; k--) {
     ;[a[k - 1], a[k]] = [a[k], a[k - 1]]
     swaps++
-    frames.push({ phase: 'front', activeLine: L('swap nums[k - 1] and nums[k]'),pythonLine: P('for k in range(p, 0, -1)'), message: `Swap moves ${lo} left to index ${k - 1}. Swaps ${swaps}.`, array: a.slice(), moving: k - 1, swapped: [k - 1, k], swaps })
+    frames.push({ phase: 'front', activeLine: L('[arr[k - 1], arr[k]] = [arr[k], arr[k - 1]]'),pythonLine: P('for k in range(p, 0, -1)'), message: `Swap moves ${lo} left to index ${k - 1}. Swaps ${swaps}.`, array: a.slice(), moving: k - 1, swapped: [k - 1, k], swaps })
   }
   const q = a.lastIndexOf(hi)
-  frames.push({ phase: 'back', activeLine: L('q ← last index'), pythonLine: P('q = max(i for i'), message: `Largest ${hi} sits at index ${q} now.`, array: a.slice(), moving: q, swapped: null, swaps })
+  frames.push({ phase: 'back', activeLine: L('const q = arr.lastIndexOf'), pythonLine: P('q = max(i for i'), message: `Largest ${hi} sits at index ${q} now.`, array: a.slice(), moving: q, swapped: null, swaps })
   for (let k = q; k < n - 1; k++) {
     ;[a[k], a[k + 1]] = [a[k + 1], a[k]]
     swaps++
-    frames.push({ phase: 'back', activeLine: L('swap nums[k] and nums[k + 1]'), pythonLine: P('for k in range(q, n - 1)'), message: `Swap moves ${hi} right to index ${k + 1}. Swaps ${swaps}.`, array: a.slice(), moving: k + 1, swapped: [k, k + 1], swaps })
+    frames.push({ phase: 'back', activeLine: L('[arr[k], arr[k + 1]] = [arr[k + 1], arr[k]]'), pythonLine: P('for k in range(q, n - 1)'), message: `Swap moves ${hi} right to index ${k + 1}. Swaps ${swaps}.`, array: a.slice(), moving: k + 1, swapped: [k, k + 1], swaps })
   }
-  frames.push({ phase: 'done', activeLine: L('RETURN swaps'), pythonLine: P('return swaps'), message: `Valid array after ${swaps} swap${swaps === 1 ? '' : 's'}.`, array: a.slice(), moving: -1, swapped: null, swaps })
+  frames.push({ phase: 'done', activeLine: L('return swaps;'), pythonLine: P('return swaps'), message: `Valid array after ${swaps} swap${swaps === 1 ? '' : 's'}.`, array: a.slice(), moving: -1, swapped: null, swaps })
   return { input: { nums }, result: swaps, frames }
 }

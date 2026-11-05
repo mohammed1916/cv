@@ -1,10 +1,28 @@
-import authoredExamples0 from '../../config/examples/collection--1704.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import View from './View'
+import { buildTrace, parseInput, code, python, pythonLineMap, phases, examples, complexity } from './algorithm.js'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/advance.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '1704',
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  pythonLineMap,
+  phases,
+  examples,
+  complexity,
+  inputLabel: 'JSON string of letters with even length',
+  url: 'https://leetcode.com/problems/determine-if-string-halves-are-alike/',
+}
 
-const definition = { ...definitions[1704], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem1704Visualizer() {
+  return <AlgorithmWorkspace
+    definition={definition}
+    renderVisual={({ run, step }) => <View run={run} step={step} />}
+    renderReasoning={() => <>
+      <p>The string is split exactly in half. Each half gets its own vowel count, and only the counts are compared.</p>
+      <p>Vowels are counted in both cases, so capital letters count too.</p>
+    </>}
+  />
+}

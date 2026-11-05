@@ -50,6 +50,7 @@ export default function MissingLineView({ run, step }) {
           ? `Probe ${step.mid}: ${step.probes.at(-1).missing} missing so far, target k = ${k}.`
           : answer !== null ? `The ${k}th missing number is ${answer}.` : `Looking for the ${k}th missing number.`}
       </p>
+      <p>{`Search range lo = ${step.lo}, hi = ${step.hi}${step.mid >= 0 ? `, middle tested mid = ${step.mid}` : ''}.`}</p>
       <p className="mlv__legend">● present in nums · numbered hollow cells are missing, counted upward from {nums[0]} · amber = answer</p>
     </figure>
   )

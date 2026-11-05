@@ -15,15 +15,15 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-operations-to-make-a-special-number/',
   complexity: 'O(n) time for four endings, each with two backward scans, and O(1) extra space.',
   examples: [
-    { label: 'Example 1', input: '{"num":"2245"}' },
-    { label: 'Example 2', input: '{"num":"100"}' },
+    { label: 'Ends in 75', input: '{"num":"7315"}' },
+    { label: 'Zero and no pair', input: '{"num":"9045"}' },
   ],
 }
 
 export default function MinimumOperationsSpecial() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="num" length={run.input.num.length} valueAt={i => run.input.num[i]} active={step.p >= 0 ? step.p : -1}
-      roleAt={i => (i === step.q ? 'window' : '')} />
+      roleAt={i => (i === step.q ? 'l keep' : i === step.p ? 'r keep' : '')} />
     <output aria-label="Deletion count">{`ending = ${step.pair ?? 'none'}, best deletions = ${step.best}`}</output>
   </>} renderReasoning={() => <>
     <p>A number is divisible by 25 exactly when it ends in 00, 25, 50 or 75, or it is the single digit 0. Each ending is tested independently.</p>

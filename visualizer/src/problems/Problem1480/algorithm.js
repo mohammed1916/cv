@@ -1,57 +1,58 @@
 export const phases = [
-  { id: 'start', label: 'Start', description: 'Begin with an empty answer and a total of 0.' },
-  { id: 'accumulate', label: 'Add value', description: 'Add the current value to the total and record the total.' },
-  { id: 'done', label: 'Complete', description: 'Every position holds its prefix sum.' },
+  { id: 'start', label: 'Start', description: 'The running sum begins at zero.' },
+  { id: 'accumulate', label: 'Accumulate', description: 'Add the next value to the running total.' },
+  { id: 'store', label: 'Store prefix', description: 'Store the running total as the answer at this position.' },
+  { id: 'done', label: 'Complete', description: 'Every position holds the sum of the values up to it.' },
+]
+
+export const examples = [
+  { label: 'Mixed signs', input: '[3,-1,4,1,-5,9]' },
+  { label: 'Increasing', input: '[1,2,3,4,5]' },
 ]
 
 export function parseInput(text) {
   const nums = JSON.parse(text)
-  if (!Array.isArray(nums) || nums.length < 1 || nums.length > 200) throw new Error('Enter a JSON array of 1 to 200 integers.')
-  if (!nums.every(v => Number.isInteger(v) && v >= -1000 && v <= 1000)) throw new Error('Every value must be an integer from -1000 to 1000.')
+  if (!Array.isArray(nums) || nums.length < 1 || nums.length > 200) throw new Error('Use a JSON array of 1 to 200 integers.')
+  if (!nums.every(Number.isInteger)) throw new Error('Every value must be an integer.')
+  if (!nums.every(v => v >= -1000 && v <= 1000)) throw new Error('Every value must be from -1000 to 1000.')
   return nums
 }
 
-export const code = `running sum (nums):
-  result = empty list
-  total = 0
-  for each value in nums, from left to right:
-    total = total + value
-    append total to result
-  return result`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export function buildTrace(nums) {
+  const result = []
+  let total = 0
+  const snap = (index, extra = {}) => ({ nums, index, total, result: [...result], ...extra })
+  const frames = [{ phase: 'start', activeLine: L('let total = 0'), pythonLine: P('total = 0'), snapshot: snap(-1),
+    message: 'Start with a running total of 0.' }]
+  for (let i = 0; i < nums.length; i++) {
+    total += nums[i]
+    frames.push({ phase: 'accumulate', activeLine: L('total += nums[i]'), pythonLine: P('total += nums[i]'), snapshot: snap(i),
+      message: `Add ${nums[i]}: the running total is now ${total}.` })
+    result.push(total)
+    frames.push({ phase: 'store', activeLine: L('result.push(total)'), pythonLine: P('result.append(total)'), snapshot: snap(i),
+      message: `Store ${total} at position ${i}.` })
+  }
+  frames.push({ phase: 'done', activeLine: L('return result'), pythonLine: P('return result'), snapshot: snap(-1, { result: [...result] }),
+    message: `Return [${result.join(', ')}].`, result })
+  return { input: nums, result, frames }
+}
+
+export const code = `function runningSum(nums) {
+  let total = 0, result = []
+  for (let i = 0; i < nums.length; i++) {
+    total += nums[i]
+    result.push(total)
+  }
+  return result
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
-const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def running_sum(nums):
     result = []
     total = 0
-    for value in nums:
-        total += value
+    for i in range(len(nums)):
+        total += nums[i]
         result.append(total)
     return result
 `
-
-export function buildTrace(nums) {
-  const frames = []
-  const output = []
-  let total = 0
-  frames.push({
-    phase: 'start', activeLine: L('result = empty list'), pythonLine: P('result = []'),
-    cursor: -1, total: 0, output: [], message: 'Start with an empty answer and a running total of 0. Nothing has been read yet.',
-  })
-  for (let i = 0; i < nums.length; i++) {
-    const before = total
-    total += nums[i]
-    output.push(total)
-    frames.push({
-      phase: 'accumulate', activeLine: L('total = total + value'), pythonLine: P('total += value'),
-      cursor: i, total, output: [...output], before,
-      message: `Read ${nums[i]} at position ${i}. The total becomes ${before} + ${nums[i]} = ${total}, and that is the answer at position ${i}.`,
-    })
-  }
-  frames.push({
-    phase: 'done', activeLine: L('return result'), pythonLine: P('return result'),
-    cursor: -1, total, output: [...output], before: null,
-    message: `Every position now holds the sum of its whole prefix: ${output.join(', ')}.`,
-  })
-  return { input: nums, result: output, frames }
-}
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

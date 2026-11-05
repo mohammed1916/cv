@@ -1,67 +1,90 @@
 export const phases = [
-  { id: 'start', label: 'Start', description: 'Read the palindrome. Every change must leave the result non-palindromic and as early in the alphabet as possible.' },
-  { id: 'length', label: 'Check length', description: 'A single character can only become the empty string when it is broken.' },
-  { id: 'scan', label: 'Scan first half', description: 'Look for the first position in the first half that is not a. Its mirror partner is unchanged, so changing it breaks the palindrome.' },
-  { id: 'replace', label: 'Set to a', description: 'Set that character to a. It is now smaller and the two mirrored ends differ.' },
-  { id: 'last', label: 'Change last to b', description: 'If the first half is all a, the last character must change. Setting it to b is the smallest option that breaks symmetry.' },
-  { id: 'done', label: 'Complete', description: 'Return the broken string, or the empty string for a single character.' },
+  { id: 'start', label: 'Start', description: 'A palindrome reads the same both ways; one changed letter must break the symmetry.' },
+  { id: 'single', label: 'One letter', description: 'A one-letter palindrome cannot be broken into a different palindrome-free string, so the answer is empty.' },
+  { id: 'compare', label: 'Check left half', description: 'Compare the left pointer l with the mirror position r; the first letter that is not a is the best place to change.' },
+  { id: 'change', label: 'Set to a', description: 'Replace that letter with a; the result is smaller and no longer a palindrome.' },
+  { id: 'last', label: 'Change last letter', description: 'If the left half is all a, change the last letter to b; that is the smallest change that breaks the palindrome.' },
+  { id: 'done', label: 'Complete', description: 'Return the new string, or an empty string when no change is possible.' },
+]
+
+export const examples = [
+  { label: 'Change the first non-a', input: '{"text":"abccba"}' },
+  { label: 'Left half all a', input: '{"text":"aaaaa"}' },
+  { label: 'One letter', input: '{"text":"z"}' },
 ]
 
 export function parseInput(text) {
-  const input = JSON.parse(text)
-  if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Use an object such as {"text": "level"}.')
-  const { text: value } = input
-  if (typeof value !== 'string' || value.length < 1 || value.length > 30) throw new Error('text is a string of 1 to 30 characters.')
-  if (!/^[a-z]+$/.test(value)) throw new Error('text uses lowercase letters only.')
-  if (value !== [...value].reverse().join('')) throw new Error('text must be a palindrome.')
-  return { text: value }
+  const data = JSON.parse(text)
+  if (!data || typeof data !== 'object') throw new Error('Use an object with a text string, such as {"text":"aba"}.')
+  const t = data.text
+  if (typeof t !== 'string' || t.length < 1 || t.length > 30) throw new Error('text must have 1 to 30 letters in this visualization.')
+  if (!/^[a-z]+$/.test(t)) throw new Error('text must use lowercase letters only.')
+  for (let i = 0, j = t.length - 1; i < j; i++, j--) {
+    if (t[i] !== t[j]) throw new Error('text must be a palindrome: it must read the same forward and backward.')
+  }
+  return t
 }
 
-export function buildTrace({ text }) {
-  const chars = text.split('')
-  const n = chars.length
-  const snap = (index, changed = null) => ({ chars: [...chars], index, changed, half: Math.floor(n / 2) })
-  const frames = [{ phase: 'start', activeLine: L('if length of text is 1'), pythonLine: P('if len(palindrome) == 1'), snapshot: snap(null), message: `Breaking "${text}" by changing one character.` }]
+export function buildTrace(input) {
+  const text = typeof input === 'string' ? input : input.text
+  const s = text.split('')
+  const n = s.length
+  const snap = (l, r, extra = {}) => ({ s: [...s], l, r, ...extra })
+  const frames = [{ phase: 'start', activeLine: L('if (n === 1)'), pythonLine: P('if n == 1'), snapshot: snap(0, n - 1),
+    message: `Start with ${JSON.stringify(text)}. Compare pairs from the outside in.` }]
   if (n === 1) {
-    frames.push({ phase: 'done', activeLine: L('return empty'), pythonLine: P('return ""'), snapshot: snap(null), message: 'A single character has no nonpalindrome from one change, so the answer is the empty string.' })
-    return { input: { text }, result: '', frames }
+    frames.push({ phase: 'single', activeLine: L('return ""'), pythonLine: P('return ""'), snapshot: snap(0, 0),
+      message: 'A one-letter string cannot become a different non-palindrome, so return an empty string.', result: '' })
+    return { input: text, result: '', frames }
   }
-  frames.push({ phase: 'length', activeLine: L('if length of text is 1'), pythonLine: P('if len(palindrome) == 1'), snapshot: snap(null), message: `Length ${n} is at least 2, so the first half can be searched.` })
+  let result = null
   for (let i = 0; i < Math.floor(n / 2); i++) {
-    if (chars[i] !== 'a') {
-      const before = chars[i]
-      chars[i] = 'a'
-      frames.push({ phase: 'scan', activeLine: L('if text[i] is not a'), pythonLine: P("if chars[i] != 'a'"), snapshot: snap(i), message: `Position ${i} holds ${before}, which is not a. Its mirror is unchanged, so the palindrome breaks here.` })
-      frames.push({ phase: 'replace', activeLine: L('set text[i] to a'), pythonLine: P("chars[i] = 'a'"), snapshot: snap(i, i), message: `Set position ${i} to a, giving "${chars.join('')}".` })
-      return { input: { text }, result: chars.join(''), frames: [...frames, { phase: 'done', activeLine: L('return text'), pythonLine: P("return ''.join(chars)"), snapshot: snap(null, i), message: `Return "${chars.join('')}".` }] }
+    frames.push({ phase: 'compare', activeLine: L('for (let i = 0'), pythonLine: P('for i in range'), snapshot: snap(i, n - 1 - i),
+      message: `Compare l = ${i} with r = ${n - 1 - i}. The letter ${s[i]} ${s[i] === 'a' ? 'is already a, so keep going' : 'is not a, so change it to a'}.` })
+    if (s[i] !== 'a') {
+      s[i] = 'a'
+      result = s.join('')
+      frames.push({ phase: 'change', activeLine: L("s[i] = 'a'"), pythonLine: P("s[i] = 'a'"), snapshot: snap(i, n - 1 - i),
+        message: `Change position ${i} to a, giving ${result}.` })
+      break
     }
-    frames.push({ phase: 'scan', activeLine: L('for each position i'), pythonLine: P('for i in range'), snapshot: snap(i), message: `Position ${i} is already a, so keep scanning the first half.` })
   }
-  chars[n - 1] = 'b'
-  frames.push({ phase: 'last', activeLine: L('set last character to b'), pythonLine: P("chars[-1] = 'b'"), snapshot: snap(n - 1, n - 1), message: `The first half is all a, so change the last character to b, giving "${chars.join('')}".` })
-  frames.push({ phase: 'done', activeLine: L('return text'), pythonLine: P("return ''.join(chars)"), snapshot: snap(null, n - 1), message: `Return "${chars.join('')}".` })
-  return { input: { text }, result: chars.join(''), frames }
+  if (result === null) {
+    s[n - 1] = 'b'
+    result = s.join('')
+    frames.push({ phase: 'last', activeLine: L("s[n - 1] = 'b'"), pythonLine: P("s[n - 1] = 'b'"), snapshot: snap(null, null),
+      message: `Every letter in the left half is a, so change the last letter to b: ${result}.` })
+  }
+  frames.push({ phase: 'done', activeLine: L('return s.join'), pythonLine: P('return'), snapshot: snap(null, null),
+    message: `Return "${result}".`, result })
+  return { input: text, result, frames }
 }
 
-export const code = `break palindrome (text):
-  if length of text is 1: return empty
-  for each position i in the first half:
-    if text[i] is not a:
-      set text[i] to a
-      return text
-  set last character to b
-  return text`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function breakPalindrome(text) {
+  const s = text.split('')
+  const n = s.length
+  if (n === 1) return ''
+  for (let i = 0; i < Math.floor(n / 2); i++) {
+    if (s[i] !== 'a') {
+      s[i] = 'a'
+      return s.join('')
+    }
+  }
+  s[n - 1] = 'b'
+  return s.join('')
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
-const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
-export const python = `def break_palindrome(palindrome):
-    if len(palindrome) == 1:
+export const python = `def break_palindrome(text):
+    s = list(text)
+    n = len(s)
+    if n == 1:
         return ""
-    chars = list(palindrome)
-    for i in range(len(chars) // 2):
-        if chars[i] != 'a':
-            chars[i] = 'a'
-            return ''.join(chars)
-    chars[-1] = 'b'
-    return ''.join(chars)
+    for i in range(n // 2):
+        if s[i] != 'a':
+            s[i] = 'a'
+            return "".join(s)
+    s[n - 1] = 'b'
+    return "".join(s)
 `
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

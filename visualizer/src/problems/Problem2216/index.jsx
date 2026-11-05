@@ -1,10 +1,30 @@
-import authoredExamples0 from '../../config/examples/collection--2216.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import KeptView from './KeptView'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/updatesAndChoicesBatch.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '2216',
+  phases,
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  inputLabel: 'JSON array of integers, e.g. [1,1,2,3,5]',
+  url: 'https://leetcode.com/problems/minimum-deletions-to-make-array-beautiful/',
+  complexity: 'O(n) time and O(n) space for the kept list. The page caps the array at 14 values from 0 to 5.',
+  examples: [
+    { label: 'Leading pair', input: '[1,1,2,3,5]' },
+    { label: 'Two pairs', input: '[1,1,2,2,3,3]' },
+    { label: 'Odd leftover', input: '[1,2,3]' },
+  ],
+}
 
-const definition = { ...definitions[2216], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem2216Visualizer() {
+  return (
+    <AlgorithmWorkspace
+      definition={definition}
+      renderVisual={({ run, step }) => <KeptView run={run} step={step} />}
+      renderReasoning={({ step }) => <p>{step.message}</p>}
+    />
+  )
+}

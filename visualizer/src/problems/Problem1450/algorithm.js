@@ -1,68 +1,69 @@
 export const phases = [
-  { id: 'start', label: 'Start count', description: 'Begin with zero busy students.' },
-  { id: 'check', label: 'Check interval', description: 'Test whether the query time lies between this student start and end times, inclusive.' },
-  { id: 'count', label: 'Count student', description: 'The query is inside the interval, so this student is busy at that time.' },
-  { id: 'skip', label: 'Outside interval', description: 'The query is outside this interval, so the student is not counted.' },
-  { id: 'done', label: 'Result', description: 'Return the total count.' },
+  { id: 'start', label: 'Start', description: 'Set the query time and a count of zero students doing homework.' },
+  { id: 'check', label: 'Check student', description: 'A student is doing homework at the query time when start <= query <= end.' },
+  { id: 'busy', label: 'Doing homework', description: 'The query time falls inside this student’s interval, so count them.' },
+  { id: 'idle', label: 'Not doing homework', description: 'The query time is outside this student’s interval.' },
+  { id: 'done', label: 'Complete', description: 'Return how many students are doing homework at the query time.' },
 ]
 
-export const code = `function busyStudents(startTime, endTime, queryTime):
-    count = 0
-    for i from 0 to length(startTime) - 1:
-        if startTime[i] <= queryTime and queryTime <= endTime[i]:
-            count = count + 1
-    return count`
-
-export const python = `def busy_students(start_time, end_time, query_time):
-    count = 0
-    for i in range(len(start_time)):
-        if start_time[i] <= query_time <= end_time[i]:
-            count += 1
-    return count`
-
-const lineOf = (source, fragment) => source.split('\n').findIndex(line => line.includes(fragment)) + 1
-const C = fragment => lineOf(code, fragment)
-const P = fragment => lineOf(python, fragment)
-
-const isInt = (v, lo, hi) => Number.isInteger(v) && v >= lo && v <= hi
+export const examples = [
+  { label: 'Three overlapping', input: '{"start":[1,3,3,8],"end":[3,3,8,10],"query":3}' },
+  { label: 'One at the time', input: '{"start":[2,5,7,9],"end":[4,6,8,12],"query":6}' },
+  { label: 'Nobody', input: '{"start":[1,2],"end":[3,4],"query":9}' },
+]
 
 export function parseInput(text) {
-  let obj
-  try { obj = JSON.parse(text) } catch { throw new Error('Use a JSON object such as {"start":[1,3],"end":[2,5],"query":4}.') }
-  if (!obj || typeof obj !== 'object' || Array.isArray(obj)) throw new Error('Use a JSON object with start, end and query.')
-  const { start, end, query } = obj
-  if (!Array.isArray(start) || !Array.isArray(end) || start.length < 1 || start.length > 100 || start.length !== end.length) {
-    throw new Error('start and end must be arrays of the same length, from 1 to 100.')
-  }
-  start.forEach((s, i) => {
-    if (!isInt(s, 1, 1000) || !isInt(end[i], 1, 1000)) throw new Error(`Student ${i + 1}: times must be whole numbers from 1 to 1000.`)
-    if (s > end[i]) throw new Error(`Student ${i + 1}: the start must not be after the end.`)
+  const data = JSON.parse(text)
+  if (!data || typeof data !== 'object' || !Array.isArray(data.start) || !Array.isArray(data.end)) throw new Error('Use an object with start and end lists, and an integer query.')
+  if (data.start.length !== data.end.length) throw new Error('start and end must have the same length.')
+  if (data.start.length < 1 || data.start.length > 20) throw new Error('Use 1 to 20 students in this visualization.')
+  data.start.forEach((s, i) => {
+    if (!Number.isInteger(s) || !Number.isInteger(data.end[i])) throw new Error(`Student ${i} needs integer start and end times.`)
+    if (s > data.end[i]) throw new Error(`Student ${i} starts after the end time.`)
   })
-  if (!isInt(query, 1, 1000)) throw new Error('query must be a whole number from 1 to 1000.')
-  return { start, end, query }
+  if (!Number.isInteger(data.query) || data.query < 1 || data.query > 100) throw new Error('query must be an integer from 1 to 100.')
+  return { start: data.start, end: data.end, query: data.query }
 }
 
 export function buildTrace({ start, end, query }) {
-  const frames = []
-  const flags = []
   let count = 0
-  const add = (phase, c, p, message, index, current) => frames.push({
-    phase, activeLine: C(c), pythonLine: P(p), message,
-    snapshot: { start, end, query, index, count, decided: flags.slice(), current },
-  })
-  add('start', 'count = 0', 'count = 0', `Start with count 0 and query time ${query}.`, -1, null)
-  for (let i = 0; i < start.length; i++) {
-    const inside = start[i] <= query && query <= end[i]
-    add('check', 'if startTime', 'if start_time', `Student ${i + 1} has interval [${start[i]}, ${end[i]}]. Is ${query} inside it?`, i, inside)
-    if (inside) {
-      count += 1
-      flags.push(true)
-      add('count', 'count = count + 1', 'count += 1', `Yes, so student ${i + 1} is counted. The count is now ${count}.`, i, true)
+  const rows = (upto) => start.slice(0, upto).map((s, i) => ({ student: i, start: s, end: end[i], busy: s <= query && query <= end[i] ? 'yes' : 'no' }))
+  const snap = (current, extra = {}) => ({ query, count, current, rows: rows(current === null ? 0 : current + 1), ...extra })
+  const frames = [{ phase: 'start', activeLine: L('let count = 0'), pythonLine: P('count = 0'), snapshot: snap(null),
+    message: `Query time ${query}. Count students whose interval covers it.` }]
+  start.forEach((s, i) => {
+    frames.push({ phase: 'check', activeLine: L('for (let i = 0'), pythonLine: P('for i in range'), snapshot: snap(i),
+      message: `Student ${i} is busy from ${s} to ${end[i]}; is ${query} inside?` })
+    if (s <= query && query <= end[i]) {
+      count++
+      frames.push({ phase: 'busy', activeLine: L('count++'), pythonLine: P('count += 1'), snapshot: snap(i),
+        message: `${query} is inside [${s}, ${end[i]}], so student ${i} counts; total ${count}.` })
     } else {
-      flags.push(false)
-      add('skip', 'if startTime', 'if start_time', `No, so student ${i + 1} is not counted.`, i, false)
+      frames.push({ phase: 'idle', activeLine: L('if (start[i] <= query'), pythonLine: P('if start[i] <= query'), snapshot: snap(i),
+        message: `${query} is outside [${s}, ${end[i]}], so student ${i} does not count.` })
     }
-  }
-  add('done', 'return count', 'return count', `${count} students are busy at time ${query}.`, start.length - 1, null)
+  })
+  frames.push({ phase: 'done', activeLine: L('return count'), pythonLine: P('return count'), snapshot: snap(null, { result: count }),
+    message: `Return ${count}: that many students are doing homework at time ${query}.`, result: count })
   return { input: { start, end, query }, result: count, frames }
 }
+
+export const code = `function busyStudent(start, end, query) {
+  let count = 0
+  for (let i = 0; i < start.length; i++) {
+    if (start[i] <= query && query <= end[i]) count++
+  }
+  return count
+}`
+export const codeLines = code.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => codeLines.findIndex(c => c.text.includes(s)) + 1
+export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6 }
+
+export const python = `def busy_student(start, end, query):
+    count = 0
+    for i in range(len(start)):
+        if start[i] <= query <= end[i]:
+            count += 1
+    return count
+`
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

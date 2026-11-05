@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/movement-of-robots/',
   complexity: 'O(n log n) time for the sort, then a linear pass over sorted positions. The visualization caps n at 12.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[-2,0,2],"s":"RLL","d":3}' },
-    { label: 'Example 2', input: '{"nums":[1,0],"s":"RL","d":2}' },
+    { label: 'Three robots', input: '{"nums":[-3,1,4],"s":"LRR","d":2}' },
+    { label: 'Two robots', input: '{"nums":[5,2],"s":"RL","d":1}' },
   ],
 }
 

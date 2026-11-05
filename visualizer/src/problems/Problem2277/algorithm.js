@@ -28,16 +28,40 @@ export function parseInput(text) {
   return { n, edges, queries }
 }
 
-export const code = `FUNCTION closestNodes(n, edges, queries)
-    adj ← adjacency lists built from edges
-    answers ← empty list
-    FOR each query (s, e, x)
-        parent ← BFS parents rooted at s
-        path ← vertices from e back to s by following parent
-        distX ← BFS distances from x
-        best ← the vertex on path with the smallest distX
-        append best to answers
-    RETURN answers`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function closestNodes(n, edges, queries) {
+  const adj = Array.from({ length: n }, () => []);
+  for (const [a, b] of edges) {
+    adj[a].push(b);
+    adj[b].push(a);
+  }
+  const bfs = src => {
+    const dist = Array(n).fill(-1);
+    const parent = Array(n).fill(-1);
+    dist[src] = 0;
+    const queue = [src];
+    for (let h = 0; h < queue.length; h++) {
+      const u = queue[h];
+      for (const w of adj[u]) {
+        if (dist[w] < 0) {
+          dist[w] = dist[u] + 1;
+          parent[w] = u;
+          queue.push(w);
+        }
+      }
+    }
+    return { dist, parent };
+  };
+  return queries.map(([s, e, x]) => {
+    const { parent } = bfs(s);
+    const path = [];
+    for (let v = e; ; v = parent[v]) {
+      path.push(v);
+      if (v === s) break;
+    }
+    const { dist: distX } = bfs(x);
+    return path.reduce((best, v) => (distX[v] < distX[best] ? v : best));
+  });
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `from collections import deque
 
@@ -113,19 +137,19 @@ export function buildTrace({ n, edges, queries }) {
   for (const [a, b] of edges) { adj[a].push(b); adj[b].push(a) }
   const frames = []
   const answers = []
-  frames.push({ phase: 'start', activeLine: L('adj ← adjacency'), pythonLine: P('adj = [[] for _ in range(n)]'), message: `Tree with ${n} nodes and ${edges.length} edges.`, query: -1, s: null, e: null, x: null, path: [], distX: [], best: null, answers: [] })
+  frames.push({ phase: 'start', activeLine: L('const adj = Array.from'), pythonLine: P('adj = [[] for _ in range(n)]'), message: `Tree with ${n} nodes and ${edges.length} edges.`, query: -1, s: null, e: null, x: null, path: [], distX: [], best: null, answers: [] })
   queries.forEach(([s, e, x], q) => {
     const { parent } = bfs(adj, s)
     const path = []
     for (let v = e; ; v = parent[v]) { path.push(v); if (v === s) break }
-    frames.push({ phase: 'path', activeLine: L('path ← vertices'), pythonLine: P('path = []'), message: `Query ${q}: path ${path.slice().reverse().join(' → ')}.`, query: q, s, e, x, path: path.slice().reverse(), distX: [], best: null, answers: answers.slice() })
+    frames.push({ phase: 'path', activeLine: L('const path = []'), pythonLine: P('path = []'), message: `Query ${q}: path ${path.slice().reverse().join(' → ')}.`, query: q, s, e, x, path: path.slice().reverse(), distX: [], best: null, answers: answers.slice() })
     const { dist } = bfs(adj, x)
-    frames.push({ phase: 'distance', activeLine: L('distX ← BFS'), pythonLine: P('dist_x, _ = bfs(x)'), message: `Distances from node ${x}: ${dist.join(', ')}.`, query: q, s, e, x, path: path.slice().reverse(), distX: dist.slice(), best: null, answers: answers.slice() })
+    frames.push({ phase: 'distance', activeLine: L('const { dist: distX }'), pythonLine: P('dist_x, _ = bfs(x)'), message: `Distances from node ${x}: ${dist.join(', ')}.`, query: q, s, e, x, path: path.slice().reverse(), distX: dist.slice(), best: null, answers: answers.slice() })
     let best = path[0]
     for (const v of path) if (dist[v] < dist[best]) best = v
     answers.push(best)
-    frames.push({ phase: 'pick', activeLine: L('best ← the vertex'), pythonLine: P('answers.append(min('), message: `Closest path vertex to ${x} is ${best} (distance ${dist[best]}).`, query: q, s, e, x, path: path.slice().reverse(), distX: dist.slice(), best, answers: answers.slice() })
+    frames.push({ phase: 'pick', activeLine: L('return path.reduce'), pythonLine: P('answers.append(min('), message: `Closest path vertex to ${x} is ${best} (distance ${dist[best]}).`, query: q, s, e, x, path: path.slice().reverse(), distX: dist.slice(), best, answers: answers.slice() })
   })
-  frames.push({ phase: 'done', activeLine: L('RETURN answers'), pythonLine: P('return answers'), message: `Answers: [${answers.join(', ')}].`, query: -1, s: null, e: null, x: null, path: [], distX: [], best: null, answers: answers.slice() })
+  frames.push({ phase: 'done', activeLine: L('return queries.map'), pythonLine: P('return answers'), message: `Answers: [${answers.join(', ')}].`, query: -1, s: null, e: null, x: null, path: [], distX: [], best: null, answers: answers.slice() })
   return { input: { n, edges, queries }, result: answers, frames }
 }

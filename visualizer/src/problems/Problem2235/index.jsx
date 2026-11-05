@@ -1,10 +1,27 @@
-import authoredExamples0 from '../../config/examples/collection--2235.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/gardenAndProductBatch.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '2235',
+  phases: [
+    { id: 'setup', label: 'Read', description: 'Read the two integers.' },
+    { id: 'done', label: 'Sum', description: 'Return their sum.' },
+  ],
+  parse: parseInput, build: buildTrace, code, python,
+  inputLabel: 'JSON {"num1": 7, "num2": -3}',
+  url: 'https://leetcode.com/problems/add-two-integers/',
+  complexity: 'O(1) time and O(1) space.',
+  examples: [
+    { label: 'Positive', input: '{"num1":7,"num2":-3}' },
+    { label: 'Mixed signs', input: '{"num1":-8,"num2":3}' },
+  ],
+}
 
-const definition = { ...definitions[2235], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function AddTwoIntegers() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <output aria-label="Addition">{`${run.input.num1} + ${run.input.num2}${step.sum === null ? '' : ` = ${step.sum}`}`}</output>
+    <p role="status">{step.message}</p>
+  </>} renderReasoning={() => <>
+    <p>Addition of two signed integers is direct: the result is their sum, with a negative operand moving the total below zero.</p>
+  </>} />
+}

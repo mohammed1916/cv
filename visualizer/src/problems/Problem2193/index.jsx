@@ -1,10 +1,30 @@
-import authoredExamples0 from '../../config/examples/collection--2193.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import PalindromeSwapView from './PalindromeSwapView'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/raceAndAncestryBatch.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '2193',
+  phases,
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  inputLabel: 'Lowercase letters, e.g. aabb',
+  url: 'https://leetcode.com/problems/minimum-number-of-moves-to-make-palindrome/',
+  complexity: 'O(n^2) time in the worst case for the match search and the swaps, and O(n) space. The page caps the string at 12 letters.',
+  examples: [
+    { label: 'Two pairs', input: 'aabb' },
+    { label: 'One odd letter', input: 'zyxzy' },
+    { label: 'Already a palindrome', input: 'racecar' },
+  ],
+}
 
-const definition = { ...definitions[2193], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem2193Visualizer() {
+  return (
+    <AlgorithmWorkspace
+      definition={definition}
+      renderVisual={({ run, step }) => <PalindromeSwapView run={run} step={step} />}
+      renderReasoning={({ step }) => <p>{step.message}</p>}
+    />
+  )
+}

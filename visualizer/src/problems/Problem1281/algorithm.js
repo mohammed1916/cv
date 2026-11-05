@@ -19,27 +19,29 @@ export function buildTrace({ n }) {
   let product = 1
   let total = 0
   const snap = (index, digit) => ({ n, digits, index, digit, product, total })
-  const frames = [{ phase: 'start', activeLine: L('product = 1'), pythonLine: P('product, total'), snapshot: snap(null, null), message: `Start with product 1 and sum 0 for the digits of ${n}.` }]
+  const frames = [{ phase: 'start', activeLine: L('let product = 1'), pythonLine: P('product, total'), snapshot: snap(null, null), message: `Start with product 1 and sum 0 for the digits of ${n}.` }]
   digits.forEach((digit, index) => {
-    frames.push({ phase: 'digit', activeLine: L('for each decimal digit'), pythonLine: P('for ch in'), snapshot: snap(index, digit), message: `Read digit ${digit} at position ${index + 1}.` })
+    frames.push({ phase: 'digit', activeLine: L('for (const ch of String(n))'), pythonLine: P('for ch in'), snapshot: snap(index, digit), message: `Read digit ${digit} at position ${index + 1}.` })
     product *= digit
-    frames.push({ phase: 'multiply', activeLine: L('product = product'), pythonLine: P('product *='), snapshot: snap(index, digit), message: `Product becomes ${product}.` })
+    frames.push({ phase: 'multiply', activeLine: L('product *= digit'), pythonLine: P('product *='), snapshot: snap(index, digit), message: `Product becomes ${product}.` })
     total += digit
-    frames.push({ phase: 'add', activeLine: L('total = total'), pythonLine: P('total +='), snapshot: snap(index, digit), message: `Sum becomes ${total}.` })
+    frames.push({ phase: 'add', activeLine: L('total += digit'), pythonLine: P('total +='), snapshot: snap(index, digit), message: `Sum becomes ${total}.` })
   })
   const result = product - total
-  frames.push({ phase: 'done', activeLine: L('return product'), pythonLine: P('return product'), snapshot: snap(null, null), message: `${product} - ${total} = ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return product - total'), pythonLine: P('return product'), snapshot: snap(null, null), message: `${product} - ${total} = ${result}.` })
   return { input: { n }, result, frames }
 }
 
-export const code = `subtract product and sum (n):
-  product = 1
-  total = 0
-  for each decimal digit of n from left to right:
-    read the digit
-    product = product * digit
-    total = total + digit
-  return product - total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function subtractProductAndSum(n) {
+  let product = 1
+  let total = 0
+  for (const ch of String(n)) {
+    const digit = Number(ch)
+    product *= digit
+    total += digit
+  }
+  return product - total
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 

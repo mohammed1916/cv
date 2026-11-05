@@ -1,71 +1,87 @@
 export const phases = [
-  { id: 'start', label: 'Start index', description: 'Begin at the start index and mark it as seen. Its value says how far a jump can reach.' },
-  { id: 'pop', label: 'Take next index', description: 'Take the earliest index still waiting in the queue.' },
-  { id: 'zero', label: 'Zero found', description: 'This index holds zero, so a jump can end here. The answer is true.' },
-  { id: 'jump', label: 'Try jump', description: 'Consider landing at the index reached by jumping forward or backward by its value.' },
-  { id: 'skip', label: 'Skip landing', description: 'The landing is off the array or was already seen, so it adds nothing new.' },
-  { id: 'enqueue', label: 'Queue landing', description: 'Mark the new landing as seen and queue it for later exploration.' },
-  { id: 'done', label: 'Complete', description: 'Every reachable index was explored without finding zero, or a zero was found.' },
+  { id: 'start', label: 'Start', description: 'Put the start index in the queue and mark it as seen.' },
+  { id: 'pop', label: 'Visit index', description: 'Take the next index from the queue and look at its value.' },
+  { id: 'found', label: 'Zero found', description: 'The value at this index is 0, so it can be reached.' },
+  { id: 'push', label: 'Queue jumps', description: 'Try the two landing spots i + arr[i] and i - arr[i] that stay inside the array.' },
+  { id: 'skip', label: 'Already seen', description: 'This landing spot was already queued, so it is skipped.' },
+  { id: 'done', label: 'Complete', description: 'Report whether a zero was reached.' },
+]
+
+export const examples = [
+  { label: 'Chain of jumps', input: '{"arr":[2,3,1,0,4],"start":1}' },
+  { label: 'Blocked early', input: '{"arr":[1,1,3,0,2],"start":0}' },
+  { label: 'Short path', input: '{"arr":[4,0,1,3,0],"start":2}' },
 ]
 
 export function parseInput(text) {
-  const input = JSON.parse(text)
-  if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Use an object such as {"arr": [4, 2, 3, 0, 3, 1, 2], "start": 5}.')
-  const { arr, start } = input
-  if (!Array.isArray(arr) || arr.length < 1 || arr.length > 20 || !arr.every(v => Number.isInteger(v) && v >= 0 && v <= 20)) throw new Error('arr is a list of 1 to 20 integers from 0 to 20.')
-  if (!Number.isInteger(start) || start < 0 || start >= arr.length) throw new Error(`start is an index from 0 to ${arr.length - 1}.`)
-  return { arr, start }
+  const data = JSON.parse(text)
+  if (!data || typeof data !== 'object' || !Array.isArray(data.arr) || !Number.isInteger(data.start)) throw new Error('Use an object with an array arr and an integer start, such as {"arr":[4,2,0],"start":0}.')
+  if (data.arr.length < 1 || data.arr.length > 30) throw new Error('arr must have 1 to 30 values in this visualization.')
+  if (data.start < 0 || data.start >= data.arr.length) throw new Error('start is an index inside arr.')
+  if (!data.arr.every(v => Number.isInteger(v) && v >= 0 && v < data.arr.length)) throw new Error('arr is a list of integers from 0 to arr.length - 1.')
+  return { arr: data.arr, start: data.start }
 }
 
 export function buildTrace({ arr, start }) {
   const n = arr.length
-  const frames = []
   const seen = new Set([start])
   const queue = [start]
-  let current = null
-  let candidate = null
+  const snap = (current, extra = {}) => ({ arr, current, queue: [...queue], seen: [...seen], ...extra })
+  const frames = [{ phase: 'start', activeLine: L('const queue = [start]'), pythonLine: P('queue = deque'), snapshot: snap(null),
+    message: `Start at index ${start}, whose value is ${arr[start]}. Jumps may go left or right by that value.` }]
   let result = false
-  const snap = () => ({ arr: [...arr], queue: [...queue], seen: [...seen].sort((a, b) => a - b), current, candidate, start })
-  const frame = (phase, line, message, pyLine = line) => frames.push({ phase, activeLine: L(line), pythonLine: P(pyLine), snapshot: snap(), message })
-
-  frame('start', 'queue = [start]', `Start at index ${start} with value ${arr[start]}.`, 'queue = deque')
-  search: while (queue.length > 0) {
-    current = queue.shift()
-    frame('pop', 'i = queue.pop_front()', `Visit index ${current} with value ${arr[current]}.`, 'queue.popleft()')
-    if (arr[current] === 0) {
+  while (queue.length > 0) {
+    const i = queue.shift()
+    frames.push({ phase: 'pop', activeLine: L('const i = queue.shift()'), pythonLine: P('i = queue.popleft()'), snapshot: snap(i),
+      message: `Visit index ${i} (value ${arr[i]}).` })
+    if (arr[i] === 0) {
+      frames.push({ phase: 'found', activeLine: L('if (arr[i] === 0)'), pythonLine: P('if arr[i] == 0'), snapshot: snap(i, { found: true }),
+        message: `Index ${i} holds 0, so a zero is reachable.` })
       result = true
-      frame('zero', 'arr[i] == 0', `Index ${current} holds zero, so a sequence of jumps reaches a zero.`, 'arr[i] == 0')
-      break search
+      break
     }
-    for (const next of [current + arr[current], current - arr[current]]) {
-      candidate = next
-      frame('jump', 'for next in', `From ${current}, a jump of ${arr[current]} lands at ${next}.`, 'for nxt in')
-      if (next < 0 || next >= n || seen.has(next)) {
-        frame('skip', 'if 0 <= next', next < 0 || next >= n ? `Index ${next} is off the array.` : `Index ${next} was already seen.`, 'if 0 <= nxt')
+    for (const next of [i + arr[i], i - arr[i]]) {
+      if (next < 0 || next >= n) {
+        frames.push({ phase: 'skip', activeLine: L('if (next >= 0'), pythonLine: P('if 0 <= next_index'), snapshot: snap(i, { outside: next }),
+          message: `Jump to ${next} would leave the array, so ignore it.` })
+        continue
+      }
+      if (seen.has(next)) {
+        frames.push({ phase: 'skip', activeLine: L('!seen.has(next)'), pythonLine: P('next_index not in seen'), snapshot: snap(i, { target: next }),
+          message: `Index ${next} is already queued or visited, so skip it.` })
         continue
       }
       seen.add(next)
       queue.push(next)
-      frame('enqueue', 'seen.add(next)', `Index ${next} is new, so mark it seen and queue it.`, 'seen.add(nxt)')
+      frames.push({ phase: 'push', activeLine: L('queue.push(next)'), pythonLine: P('queue.append(next_index)'), snapshot: snap(i, { target: next }),
+        message: `Jump from ${i} to ${next}; queue it for a later visit.` })
     }
   }
-  candidate = null
-  current = null
-  frame('done', result ? 'return true' : 'return false', result ? 'A zero is reachable, so the answer is true.' : 'Every reachable index was explored, and none holds zero. The answer is false.', result ? 'return True' : 'return False')
-  return { input: { arr: [...arr], start }, result, frames }
+  frames.push({ phase: 'done', activeLine: L('return false'), pythonLine: P('return False'), snapshot: snap(null, { result }),
+    message: `Return ${result}.`, result })
+  return { input: { arr, start }, result, frames }
 }
 
-export const code = `can reach zero (arr, start):
-  queue = [start]; seen = {start}
-  while queue is not empty:
-    i = queue.pop_front()
-    if arr[i] == 0: return true
-    for next in (i + arr[i], i - arr[i]):
-      if 0 <= next < n and next not in seen:
-        seen.add(next); queue.append(next)
-  return false`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function canReach(arr, start) {
+  const queue = [start]
+  const seen = new Set([start])
+  while (queue.length > 0) {
+    const i = queue.shift()
+    if (arr[i] === 0) return true
+    for (const next of [i + arr[i], i - arr[i]]) {
+      if (next >= 0 && next < arr.length && !seen.has(next)) {
+        seen.add(next)
+        queue.push(next)
+      }
+    }
+  }
+  return false
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
-export const python = `def can_reach(arr, start):
+export const python = `from collections import deque
+
+def can_reach(arr, start):
     n = len(arr)
     queue = deque([start])
     seen = {start}
@@ -73,11 +89,10 @@ export const python = `def can_reach(arr, start):
         i = queue.popleft()
         if arr[i] == 0:
             return True
-        for nxt in (i + arr[i], i - arr[i]):
-            if 0 <= nxt < n and nxt not in seen:
-                seen.add(nxt)
-                queue.append(nxt)
-    return False`
-
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+        for next_index in (i + arr[i], i - arr[i]):
+            if 0 <= next_index < n and next_index not in seen:
+                seen.add(next_index)
+                queue.append(next_index)
+    return False
+`
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

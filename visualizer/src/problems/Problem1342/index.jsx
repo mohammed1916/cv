@@ -1,35 +1,23 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
+import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
-  number: '1342',
-  phases, parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'Nonnegative integer',
+  number: '1342', phases, parse: parseInput, build: buildTrace, code, python, examples,
+  inputLabel: 'Whole number (for example 14)',
   url: 'https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero/',
-  complexity: 'O(log n) time: each halving removes a binary digit, and each set bit costs at most one subtraction.',
-  examples: [
-    { label: 'Mixed bits', input: '14' },
-    { label: 'Power of two', input: '64' },
-    { label: 'Zero', input: '0' },
-  ],
+  complexity: 'O(log num) time, because every two steps at least halve the value, and O(1) extra space.',
 }
 
-export default function ReduceToZero() {
+export default function StepsToZeroVisualizer() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
-    const { value, steps, path, from } = step.snapshot
+    const s = step.snapshot
     return <>
-      <div role="img" aria-label="Value path" style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
-        {path.map((v, i) => <span key={i} data-step={i} style={{
-          fontFamily: 'monospace', padding: '4px 8px', border: `${i === path.length - 1 ? 2 : 1}px solid var(--border)`,
-          background: i === path.length - 1 ? '#bfdbfe' : 'transparent', color: '#1c1917',
-        }}>{v}{i < path.length - 1 ? ' →' : ''}</span>)}
-      </div>
-      <p>Current value <strong>{value}</strong>, steps so far <strong>{steps}</strong>{from !== undefined ? `, last move from ${from}` : ''}.</p>
-      <p>Binary of current value: <code>{value.toString(2)}</code></p>
+      <StackLane title="Current value" items={[String(s.value)]} note={s.rule ? `last rule: ${s.rule}` : undefined} />
+      <StackLane title="Steps taken" items={[String(s.steps)]} />
     </>
   }} renderReasoning={({ step }) => <>
-    <p><strong>Even values halve:</strong> dividing by two drops the lowest binary digit in one step.</p>
-    <p><strong>Odd values subtract first:</strong> removing one turns the lowest digit to zero, and then the next step can halve.</p>
-    <p>{step.snapshot.result !== undefined ? `Total steps: ${step.snapshot.result}.` : 'Keep applying the rule until the value is zero.'}</p>
+    <p><strong>Two rules:</strong> halve when even, subtract one when odd. Each halving at least halves the value, so the count stays logarithmic.</p>
+    <p>{step.message}</p>
   </>} />
 }

@@ -1,10 +1,29 @@
-import authoredExamples0 from '../../config/examples/collection--1741.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import View from './View'
+import { buildTrace, parseInput, code, sql, python, pythonLineMap, phases, examples, complexity } from './algorithm.js'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/database.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '1741',
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  sql,
+  python,
+  pythonLineMap,
+  phases,
+  examples,
+  complexity,
+  inputLabel: 'JSON array of Employees rows: emp_id, event_day, in_time, out_time (minutes)',
+  url: 'https://leetcode.com/problems/find-total-time-spent-by-each-employee/',
+}
 
-const definition = { ...definitions[1741], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem1741Visualizer() {
+  return <AlgorithmWorkspace
+    definition={definition}
+    renderVisual={({ run, step }) => <View run={run} step={step} />}
+    renderReasoning={() => <>
+      <p>An employee can enter and leave several times in a day. Each stay is out_time minus in_time.</p>
+      <p>GROUP BY the employee and the day, then SUM the stays inside each group.</p>
+    </>}
+  />
+}

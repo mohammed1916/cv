@@ -24,7 +24,7 @@ export default function PairsDivisibleBy60() {
         {(s.buckets.length ? s.buckets : [{ remainder: null, count: 0 }]).map(bucket => <div key={bucket.remainder ?? 'none'} data-bucket={bucket.remainder ?? ''} style={{
           minWidth: 56, padding: 6, boxSizing: 'border-box', textAlign: 'center', borderWidth: bucket.remainder === s.remainder || bucket.remainder === s.need ? 2 : 1,
           borderStyle: 'solid', borderColor: bucket.remainder === s.need ? 'var(--text)' : 'var(--border)',
-          background: bucket.remainder === s.need ? '#fef08a' : 'transparent', color: 'var(--text)',
+          background: bucket.remainder === s.need ? 'var(--surface2)' : 'transparent', color: 'var(--text)',
         }}>{bucket.remainder === null ? 'empty' : `r ${bucket.remainder}: ${bucket.count}`}</div>)}
       </div>
       <output aria-label="Pair total">{`Song ${s.song ?? '-'}: partners ${s.partners}. Total ${s.total}.`}</output>

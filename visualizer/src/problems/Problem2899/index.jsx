@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/last-visited-integers/',
   complexity: 'O(n * n) time in the worst case for a run of prev words, O(n) space. The visualization caps the list at 20 words.',
   examples: [
-    { label: 'Example 1', input: '["1","2","prev","prev","prev"]' },
-    { label: 'Example 2', input: '["1","prev","2","prev","prev"]' },
+    { label: 'Growing record', input: '["5","8","prev","9","prev","prev","prev"]' },
+    { label: 'Too far back', input: '["4","prev","prev","7","prev"]' },
   ],
 }
 

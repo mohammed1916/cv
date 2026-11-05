@@ -1,37 +1,27 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, phases, code, python } from './algorithm'
+import MatrixGrid from '../../components/shared/MatrixGrid'
+import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
-  phases, parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'Grid (JSON array of rows)',
-  complexity: 'O(rows + columns) time and O(1) extra space. The walk never revisits a cell.',
-  examples: [
-    { label: 'Sample', input: '[[4,3,-1],[3,1,-2],[2,-1,-3]]' },
-    { label: 'Positive', input: '[[5,2],[3,1]]' },
-    { label: 'Negative', input: '[[-1,-2],[-3,-4]]' },
-  ],
+  number: '1351', phases, parse: parseInput, build: buildTrace, code, python, examples,
+  inputLabel: 'Sorted grid as a JSON array of rows',
+  url: 'https://leetcode.com/problems/count-negative-numbers-in-a-sorted-matrix/',
+  complexity: 'O(m + n) time, since the pointer only moves up or right, and O(1) extra space.',
 }
 
-function GridView({ snapshot }) {
-  const { grid, r, c, counted, focus } = snapshot
-  const isCounted = (row, col) => counted.some(([cr, cc]) => cr === row && cc === col)
-  return <table className="algorithm-grid-table">
-    <tbody>{grid.map((row, rowIndex) => <tr key={rowIndex}>{row.map((value, colIndex) => {
-      const here = rowIndex === r && colIndex === c
-      const focused = focus && focus[0] === rowIndex && focus[1] === colIndex
-      return <td key={colIndex} className={[here ? 'is-walker' : '', isCounted(rowIndex, colIndex) ? 'is-counted' : ''].join(' ').trim()}
-        data-focus={focused ? 'true' : undefined}>
-        {value}{here ? ' ◀' : ''}
-      </td>
-    })}</tr>)}</tbody>
-  </table>
-}
-
-export default function CountNegativesInSortedMatrix() {
-  return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ step }) => <>
-      <GridView snapshot={step.snapshot} />
-      <p>Negative cells counted: <strong>{step.snapshot.count}</strong></p>
-    </>}
-    renderReasoning={({ step }) => <p>{step.message}</p>} />
+export default function StaircaseVisualizer() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const s = step.snapshot
+    const counted = []
+    if (s.counted) for (let c = s.c; c < run.input[0].length; c++) counted.push({ row: s.r, col: c })
+    const grid = run.input
+    return <>
+      <MatrixGrid matrix={grid} label="Sorted grid; the pointer starts bottom-left" activeCell={s.r >= 0 && s.c < grid[0].length ? { row: s.r, col: s.c } : null}
+        highlightedCells={counted} />
+      <p>Negatives counted so far: <strong>{s.count}</strong></p>
+    </>
+  }} renderReasoning={({ step }) => <>
+    <p><strong>Staircase walk:</strong> a negative at (r, c) means the rest of that row to the right is negative as well, so the walk moves up; otherwise it moves right.</p>
+    <p>{step.message}</p>
+  </>} />
 }

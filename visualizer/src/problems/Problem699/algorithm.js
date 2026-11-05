@@ -1,60 +1,63 @@
-import { SegTree } from '../../components/shared/segtreeModel.js'
-
 export function parseInput(text) {
   const squares = JSON.parse(text)
-  if (!Array.isArray(squares) || squares.length < 1 || squares.length > 100 || squares.some(s => !Array.isArray(s) || s.length !== 2 || !Number.isInteger(s[0]) || !Number.isInteger(s[1]) || s[0] < 1 || s[0] > 100 || s[1] < 1 || s[1] > 100)) throw new Error('Enter 1–100 squares as [left, side] pairs with integers from 1 to 100.')
+  if (!Array.isArray(squares) || squares.length < 1 || squares.length > 40 || squares.some(p => !Array.isArray(p) || p.length !== 2 || !Number.isInteger(p[0]) || !Number.isInteger(p[1]) || p[0] < 1 || p[0] > 100000000 || p[1] < 1 || p[1] > 1000000)) throw new Error('Enter 1–40 squares as [left, side] pairs: left 1–100,000,000 and side 1–1,000,000.')
   return squares
 }
 
-// Each square lands on the tallest surface under its span, then its top becomes the new height there.
+// A square lands on top of every earlier square it overlaps: its base is the tallest of them, and its own
+// height is that base plus its side. The answer after each drop is the tallest height so far.
 export function buildTrace(squares) {
-  const heights = new Map()
-  const tops = []
-  // The same drops on a lazy max/assign segment tree over the compressed x-coordinates (one leaf per gap between edges).
-  const xs = [...new Set(squares.flatMap(([left, side]) => [left, left + side]))].sort((a, b) => a - b)
-  const seg = new SegTree(Math.max(1, xs.length - 1), 'max-assign')
-  const segView = (extra = {}) => ({ seg: { ...seg.snapshot(), coords: xs, title: 'Segment tree of heights (max, lazy assign)' }, ...extra })
-  const frames = [{ phase: 'start', index: -1, span: null, landed: null, heights: [], activeLine: L('heights = empty map from column to height'), pythonLine: 2, ...segView(), message: 'The ground is flat; each square lands on the tallest surface it touches.' }]
+  const placed = []
   let best = 0
-  for (let i = 0; i < squares.length; i++) {
-    const [left, side] = squares[i]
+  const result = []
+  const frames = [{ phase: 'start', index: null, placed: [], best, result: [...result], activeLine: L('const placed = []'), pythonLine: P('placed = []'), message: 'Drop the squares one at a time.' }]
+  squares.forEach(([left, side], index) => {
     const right = left + side
     let base = 0
-    for (let x = left; x < right; x++) base = Math.max(base, heights.get(x) ?? 0)
-    const top = base + side
-    const from = xs.indexOf(left), to = xs.indexOf(right) - 1
-    const segBase = seg.query(from, to)
-    frames.push({ phase: 'drop', index: i, span: [left, right - 1], landed: base, top: null, heights: [...tops], activeLine: L('base = highest height'), pythonLine: 5,...segView(), message: `Square ${i} spans [${left}, ${right - 1}]: query the maximum height under that span, which is ${segBase}.` })
-    seg.update(from, to, segBase + side)
-    for (let x = left; x < right; x++) heights.set(x, top)
-    best = Math.max(best, top)
-    tops.push(best)
-    frames.push({ phase: 'drop', index: i, span: [left, right - 1], landed: base, top, heights: [...tops], activeLine: L('set every column in the span to top'), pythonLine: 7,...segView(), message: `Square ${i} spans [${left}, ${right - 1}]: lands at ${base}, top ${top}. Tallest so far ${best}.` })
-  }
-  frames.push({ phase: 'done', index: squares.length - 1, span: null, landed: null, heights: [...tops], result: tops, activeLine: L('return out'), pythonLine: 11,...segView(), message: `Tallest stack after each drop: [${tops.join(', ')}].` })
-  return { input: squares, result: tops, frames }
+    for (const s of placed) if (s.left < right && s.right > left) base = Math.max(base, s.height)
+    const height = base + side
+    placed.push({ left, right, height, index })
+    best = Math.max(best, height)
+    result.push(best)
+    frames.push({ phase: 'drop', index, placed: placed.map(s => ({ ...s })), base, height, best, result: [...result], activeLine: L('const height = base + side'), pythonLine: P('height = base + side'), message: `Square ${index + 1} at [${left}, ${right}): base ${base}, height ${height}, tallest so far ${best}.` })
+  })
+  frames.push({ phase: 'done', index: null, placed: placed.map(s => ({ ...s })), best, result: [...result], activeLine: L('return result'), pythonLine: P('return result'), message: `Tallest height after each drop: [${result.join(', ')}].` })
+  return { input: squares, result, frames }
 }
 
-export const code = `fallingSquares(positions):
-  heights = empty map from column to height
-  out = empty list, best = 0
-  for each square [left, side] in positions
-    base = highest height among columns left through left + side - 1, or 0 if none
-    top = base + side
-    set every column in the span to top
-    best = larger of best and top
-    append best to out
-  return out`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const SOURCE = `function fallingSquares(positions) {
+  const placed = []
+  let best = 0
+  const result = []
+  for (const [left, side] of positions) {
+    const right = left + side
+    let base = 0
+    for (const s of placed) {
+      if (s.left < right && s.right > left) base = Math.max(base, s.height)
+    }
+    const height = base + side
+    placed.push({ left, right, height })
+    best = Math.max(best, height)
+    result.push(best)
+  }
+  return result
+}`
+export const code = SOURCE.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def falling_squares(positions):
-    heights = {}
-    out, best = [], 0
+    placed = []
+    best = 0
+    result = []
     for left, side in positions:
-        base = max((heights.get(x, 0) for x in range(left, left + side)), default=0)
-        top = base + side
-        for x in range(left, left + side):
-            heights[x] = top
-        best = max(best, top)
-        out.append(best)
-    return out`
+        right = left + side
+        base = 0
+        for s_left, s_right, s_height in placed:
+            if s_left < right and s_right > left:
+                base = max(base, s_height)
+        height = base + side
+        placed.append((left, right, height))
+        best = max(best, height)
+        result.append(best)
+    return result`
+const P = s => python.split('\n').findIndex(t => t.includes(s)) + 1

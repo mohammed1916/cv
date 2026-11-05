@@ -20,7 +20,7 @@ function ShortestBusRoute() {
     return <>
       <IndexedSequence label="Edge lengths around the loop" length={lengths.length} active={s.edge}
         valueAt={i => lengths[i]}
-        roleAt={i => step.phase === 'start' || step.phase === 'circle' ? '' : i >= s.lo && i < s.hi ? 'forward gap' : 'other side'} />
+        roleAt={i => step.phase === 'start' || step.phase === 'circle' ? '' : i === s.lo && i < s.hi ? 'l · forward gap' : i === s.hi - 1 && i >= s.lo ? 'r · forward gap' : i >= s.lo && i < s.hi ? 'forward gap' : 'other side'} />
       <table aria-label="Route totals">
         <tbody>
           <tr><th>Loop total</th><td>{s.total}</td></tr>

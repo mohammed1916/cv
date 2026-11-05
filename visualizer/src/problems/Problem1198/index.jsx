@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/find-smallest-common-element-in-all-rows/',
   complexity: 'O(R · C) time and O(R) space for R rows of C values, moving each pointer forward only. The visualization caps the matrix at 6 rows and 10 columns with values from 0 to 1000; the official bounds were not verified.',
   examples: [
-    { label: 'Common 5', input: '[[1,2,3,4,5],[2,4,5,8,10],[3,5,7,9,11],[1,3,5,7,9]]' },
+    { label: 'Common 3', input: '[[2,3,6,9],[1,3,4,9],[3,5,9,10],[3,9,11,12]]' },
     { label: 'No common value', input: '[[1,2],[3,4]]' },
   ],
 }

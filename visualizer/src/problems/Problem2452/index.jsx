@@ -15,12 +15,12 @@ const definition = {
     { id: 'done', label: 'Result', description: 'Return the kept queries in their original order.' },
   ],
   parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'JSON {"queries": ["word","note"], "dictionary": ["wood","joke"]}',
+  inputLabel: 'JSON {"queries": ["cat","dog"], "dictionary": ["cot","fog"]}',
   url: 'https://leetcode.com/problems/words-within-two-edits-of-dictionary/',
   complexity: 'O(q * d * L) time and O(q) extra space for q queries, d dictionary words and word length L. The visualization caps each list at 8 words of up to 8 letters.',
   examples: [
-    { label: 'Example 1', input: '{"queries":["word","note","ants","wood"],"dictionary":["wood","joke","moat"]}' },
-    { label: 'Example 2', input: '{"queries":["yes"],"dictionary":["not"]}' },
+    { label: 'Example', input: '{"queries":["cat","dog","sun"],"dictionary":["cot","fog","zzz"]}' },
+    { label: 'Far', input: '{"queries":["abc"],"dictionary":["xyz"]}' },
   ],
 }
 

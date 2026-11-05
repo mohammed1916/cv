@@ -37,11 +37,11 @@ function explore(start, goal, walls, limit, size, role, record) {
   const snap = (cur, status) => ({ role, origin: start, current: cur, seen: seen.size, limit, status, goal })
   while (head < queue.length) {
     const [r, c] = queue[head++]
-    record?.({ phase: role, activeLine: 13, message: `Expand (${r}, ${c}). ${seen.size} cell${seen.size === 1 ? '' : 's'} seen so far; the limit is ${limit}.`, snapshot: snap([r, c], 'walking') })
+    record?.({ phase: role, activeLine: CL('const [r, c] = queue[head]'), pythonLine: PY('r, c = queue.popleft()'), message: `Expand (${r}, ${c}). ${seen.size} cell${seen.size === 1 ? '' : 's'} seen so far; the limit is ${limit}.`, snapshot: snap([r, c], 'walking') })
     for (const [nr, nc] of [[r - 1, c], [r + 1, c], [r, c - 1], [r, c + 1]]) {
       if (nr < 0 || nc < 0 || nr >= size || nc >= size || walls.has(key(nr, nc))) continue
       if (nr === goal[0] && nc === goal[1]) {
-        record?.({ phase: role, activeLine: 15, message: `Reached the goal from (${r}, ${c}). These two cells are connected.`, snapshot: snap([nr, nc], 'found') })
+        record?.({ phase: role, activeLine: CL('if (nr === goal[0]'), pythonLine: PY('return \'found\''), message: `Reached the goal from (${r}, ${c}). These two cells are connected.`, snapshot: snap([nr, nc], 'found') })
         return 'found'
       }
       const k = key(nr, nc)
@@ -49,14 +49,17 @@ function explore(start, goal, walls, limit, size, role, record) {
       seen.add(k)
       queue.push([nr, nc])
       if (seen.size > limit) {
-        record?.({ phase: role, activeLine: 16, message: `More than ${limit} cells are reachable, so this start cannot be enclosed by the walls.`, snapshot: snap([nr, nc], 'open') })
+        record?.({ phase: role, activeLine: CL('if (seen.size > limit)'), pythonLine: PY('return \'open\''), message: `More than ${limit} cells are reachable, so this start cannot be enclosed by the walls.`, snapshot: snap([nr, nc], 'open') })
         return 'open'
       }
     }
   }
-  record?.({ phase: role, activeLine: 17, message: `The region has only ${seen.size} cells and no way out. It is enclosed.`, snapshot: snap(null, 'closed') })
+  record?.({ phase: role, activeLine: CL("return 'closed'"), pythonLine: PY('return \'closed\''), message: `The region has only ${seen.size} cells and no way out. It is enclosed.`, snapshot: snap(null, 'closed') })
   return 'closed'
 }
+
+const CL = s => code.findIndex(c => c.text.includes(s)) + 1
+const PY = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 function solve(input, size, record) {
   const { blocked, source, target } = input
@@ -64,16 +67,16 @@ function solve(input, size, record) {
   const k = blocked.length
   const limit = k * (k - 1) / 2
   if (source[0] === target[0] && source[1] === target[1]) {
-    record?.({ phase: 'decide', activeLine: 3, message: 'The start and goal are the same cell, so the answer is yes.', snapshot: { role: 'decide', origin: source, goal: target, current: null, seen: 0, limit, status: 'same', result: true } })
+    record?.({ phase: 'decide', activeLine: CL('if (source[0] === target[0]'), pythonLine: PY('if source == target'), message: 'The start and goal are the same cell, so the answer is yes.', snapshot: { role: 'decide', origin: source, goal: target, current: null, seen: 0, limit, status: 'same', result: true } })
     return true
   }
-  record?.({ phase: 'setup', activeLine: 4, message: `${k} blocked cell${k === 1 ? '' : 's'} gives a limit of ${limit}: an enclosed region cannot hold more cells than that.`, snapshot: { role: 'setup', origin: source, goal: target, current: null, seen: 0, limit, status: 'setup' } })
+  record?.({ phase: 'setup', activeLine: CL('const limit'), pythonLine: PY('limit = k'), message: `${k} blocked cell${k === 1 ? '' : 's'} gives a limit of ${limit}: an enclosed region cannot hold more cells than that.`, snapshot: { role: 'setup', origin: source, goal: target, current: null, seen: 0, limit, status: 'setup' } })
   const s = explore(source, target, walls, limit, size, 'source', record)
   if (s === 'found') return true
   if (s === 'closed') return false
   const t = explore(target, source, walls, limit, size, 'target', record)
   const result = t !== 'closed'
-  record?.({ phase: 'decide', activeLine: 9, message: result ? 'The goal side escapes the limit too, so both sides reach the open part of the grid.' : 'The goal side is enclosed, so no path exists.', snapshot: { role: 'decide', origin: source, goal: target, current: null, seen: 0, limit, status: result ? 'open' : 'closed', result } })
+  record?.({ phase: 'decide', activeLine: CL('return explore(target'), pythonLine: PY('return t != '), message: result ? 'The goal side escapes the limit too, so both sides reach the open part of the grid.' : 'The goal side is enclosed, so no path exists.', snapshot: { role: 'decide', origin: source, goal: target, current: null, seen: 0, limit, status: result ? 'open' : 'closed', result } })
   return result
 }
 
@@ -88,25 +91,34 @@ export function buildTrace(input) {
   return { input, result, frames }
 }
 
-export const code = [
-  'FUNCTION canEscape(blocked, source, target)',
-  '    walls ← set of blocked cells ; k ← count of blocked cells',
-  '    IF source = target THEN RETURN true',
-  '    limit ← k × (k − 1) / 2',
-  '    s ← explore(source, target, walls, limit)',
-  '    IF s = found THEN RETURN true',
-  '    IF s = closed THEN RETURN false',
-  '    t ← explore(target, source, walls, limit)',
-  '    RETURN t ≠ closed',
-  'FUNCTION explore(start, goal, walls, limit)',
-  '    queue ← [start] ; seen ← {start}',
-  '    WHILE queue is not empty',
-  '        cell ← pop the front of the queue',
-  '        FOR each neighbour x of cell inside the grid and not a wall',
-  '            IF x = goal THEN RETURN found',
-  '            IF x is new THEN mark it and push it ; IF |seen| > limit THEN RETURN open',
-  '    RETURN closed',
-]
+export const code = `function canEscape(blocked, source, target, size = 1000000) {
+  const walls = new Set(blocked.map(([r, c]) => \`\${r},\${c}\`))
+  const k = blocked.length
+  if (source[0] === target[0] && source[1] === target[1]) return true
+  const limit = (k * (k - 1)) / 2
+  const s = explore(source, target, walls, limit, size)
+  if (s === 'found') return true
+  if (s === 'closed') return false
+  return explore(target, source, walls, limit, size) !== 'closed'
+}
+
+function explore(start, goal, walls, limit, size) {
+  const seen = new Set([\`\${start[0]},\${start[1]}\`])
+  const queue = [start]
+  for (let head = 0; head < queue.length; head++) {
+    const [r, c] = queue[head]
+    for (const [nr, nc] of [[r - 1, c], [r + 1, c], [r, c - 1], [r, c + 1]]) {
+      if (nr < 0 || nc < 0 || nr >= size || nc >= size || walls.has(\`\${nr},\${nc}\`)) continue
+      if (nr === goal[0] && nc === goal[1]) return 'found'
+      const key = \`\${nr},\${nc}\`
+      if (seen.has(key)) continue
+      seen.add(key)
+      queue.push([nr, nc])
+      if (seen.size > limit) return 'open'
+    }
+  }
+  return 'closed'
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `from collections import deque
 
@@ -141,4 +153,4 @@ def explore(start, goal, walls, limit, n):
                     return 'open'
     return 'closed'`
 
-export const pythonLineMap = { 1: 3, 2: 4, 3: 6, 4: 8, 5: 9, 6: 10, 7: 12, 8: 14, 9: 15, 10: 17, 11: 18, 12: 20, 13: 21, 14: 22, 15: 25, 16: 27, 17: 32 }
+export const pythonLineMap = {}

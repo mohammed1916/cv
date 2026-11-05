@@ -1,30 +1,23 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
+import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
-  number: '1317',
-  phases, parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'Integer n',
+  number: '1317', phases, parse: parseInput, build: buildTrace, code, python, examples,
+  inputLabel: 'Integer n (JSON object)',
   url: 'https://leetcode.com/problems/convert-integer-to-the-sum-of-two-no-zero-integers/',
-  complexity: 'O(n × log n) time in the worst case, from checking the digits of each candidate.',
-  examples: [
-    { label: 'Eleven', input: '11' },
-    { label: 'One hundred one', input: '101' },
-    { label: 'Thousand', input: '1000' },
-  ],
+  complexity: 'O(n log n) time in the worst case, since each candidate's digits are checked, and O(1) extra space.',
 }
 
-export default function NoZeroIntegers() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
-    const { n, a, b, zeroIn } = step.snapshot
+export default function NoZeroSplitVisualizer() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const s = step.snapshot
     return <>
-      <div aria-label="Equation" style={{ fontFamily: 'monospace', fontSize: '1.4em' }}>
-        {a ?? '?'} + {b ?? '?'} = {n}
-      </div>
-      <p>{zeroIn !== null ? `${zeroIn} has a zero digit, so this split is rejected.` : a !== null ? 'Both parts have no zero digit.' : 'Searching...'}</p>
+      <StackLane title="Candidate split" items={s.a === null ? ['not chosen yet'] : [`${s.a} + ${s.b} = ${s.n}`]} note={s.ok === false ? 'rejected: contains 0' : s.ok ? 'accepted' : undefined} />
+      <p>Target sum: <strong>{run.input}</strong></p>
     </>
-  }} renderReasoning={() => <>
-    <p><strong>Search:</strong> try a from 1 upward. The first split where neither part has a zero digit is the answer.</p>
-    <p><strong>Why it exists:</strong> for n of at least 2, one of the split forms always works, so the loop always finds an answer.</p>
+  }} renderReasoning={({ step }) => <>
+    <p><strong>Try splits in order:</strong> a zero digit is the only thing that can break the rule, so the first split with no zero digit in either part is valid.</p>
+    <p>{step.message}</p>
   </>} />
 }

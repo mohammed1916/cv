@@ -5,18 +5,18 @@ import { buildTrace, parseInput, code, python } from './algorithm'
 const definition = {
   number: '2490',
   phases: [
-    { id: 'setup', label: 'Setup', description: 'Split the sentence into words.' },
+    { id: 'setup', label: 'Split', description: 'Split the sentence into words.' },
     { id: 'compare', label: 'Compare', description: 'Check one link of the circle.' },
     { id: 'fail', label: 'Fail', description: 'A link does not match.' },
     { id: 'done', label: 'Result', description: 'Every link matches.' },
   ],
   parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'JSON {"sentence": "leetcode exercises sound delightful"}',
+  inputLabel: 'JSON {"sentence": "tree eel lab bat"}',
   url: 'https://leetcode.com/problems/circular-sentence/',
-  complexity: 'O(n) time and O(n) extra space for a sentence of n characters. The visualization caps sentences at 500 characters.',
+  complexity: 'O(n) time and O(n) extra space for a sentence of n characters. The visualization caps sentences at 200 characters.',
   examples: [
-    { label: 'Circular', input: '{"sentence":"leetcode exercises sound delightful"}' },
-    { label: 'Not circular', input: '{"sentence":"Leetcode is cool"}' },
+    { label: 'Circular', input: '{"sentence":"tree eel lab bat"}' },
+    { label: 'Broken link', input: '{"sentence":"tree eel lab cat"}' },
   ],
 }
 

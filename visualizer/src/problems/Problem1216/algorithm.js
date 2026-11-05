@@ -21,17 +21,18 @@ export function parseInput(text) {
   return { s: data.s, k: data.k }
 }
 
-const codeText = `is_k_palindrome(s, k):
-  n = length of s
-  table[i][j] = 0 for every single character
-  for length from 2 to n:
-    for each start i:
-      j = i + length - 1
-      if s[i] equals s[j]:
-        table[i][j] = table[i+1][j-1]
-      else:
-        table[i][j] = 1 + min(table[i+1][j], table[i][j-1])
-  return table[0][n-1] <= k`
+const codeText = `function isKPalindrome(s, k) {
+  const n = s.length
+  const dp = Array.from({ length: n }, () => Array(n).fill(0))
+  for (let length = 2; length <= n; length++) {
+    for (let i = 0; i + length <= n; i++) {
+      const j = i + length - 1
+      if (s[i] === s[j]) dp[i][j] = dp[i + 1][j - 1]
+      else dp[i][j] = 1 + Math.min(dp[i + 1][j], dp[i][j - 1])
+    }
+  }
+  return dp[0][n - 1] <= k
+}`
 const pythonText = `def is_k_palindrome(s, k):
     n = len(s)
     dp = [[0] * n for _ in range(n)]     # dp[i][j]: fewest deletions to make s[i..j] a palindrome
@@ -55,7 +56,7 @@ export function buildTrace({ s, k }) {
   const frames = []
   const snap = (extra = {}) => ({ table: dp.map(row => [...row]), ...extra })
   frames.push({
-    phase: 'start', activeLine: L('table[i][j] = 0'), pythonLine: P('dp = [[0]'),
+    phase: 'start', activeLine: L('const dp = Array.from'), pythonLine: P('dp = [[0]'),
     message: `A string of ${n} characters. Every single character needs zero deletions to be a palindrome. We fill longer intervals from shorter ones.`,
     snapshot: snap({ i: null, j: null }),
   })
@@ -65,7 +66,7 @@ export function buildTrace({ s, k }) {
       if (s[i] === s[j]) {
         dp[i][j] = dp[i + 1][j - 1]
         frames.push({
-          phase: 'match', activeLine: L('table[i][j] = table[i+1][j-1]'), pythonLine: P('dp[i][j] = dp[i + 1][j - 1]'),
+          phase: 'match', activeLine: L('dp[i][j] = dp[i + 1][j - 1]'), pythonLine: P('dp[i][j] = dp[i + 1][j - 1]'),
           message: `"${s[i]}" matches "${s[j]}" at positions ${i} and ${j}. The cost stays ${dp[i][j]}, the cost of the inner part.`,
           snapshot: snap({ i, j }),
         })
@@ -74,7 +75,7 @@ export function buildTrace({ s, k }) {
         const dropRight = dp[i][j - 1]
         dp[i][j] = 1 + Math.min(dropLeft, dropRight)
         frames.push({
-          phase: 'split', activeLine: L('table[i][j] = 1 + min'), pythonLine: P('dp[i][j] = 1 + min'),
+          phase: 'split', activeLine: L('dp[i][j] = 1 + Math.min'), pythonLine: P('dp[i][j] = 1 + min'),
           message: `"${s[i]}" and "${s[j]}" differ. Deleting the left end costs ${dropLeft}, deleting the right end costs ${dropRight}; the cheaper one plus 1 gives ${dp[i][j]}.`,
           snapshot: snap({ i, j }),
         })
@@ -84,7 +85,7 @@ export function buildTrace({ s, k }) {
   const cost = dp[0][n - 1]
   const result = cost <= k
   frames.push({
-    phase: 'done', activeLine: L('return table[0][n-1]'), pythonLine: P('return dp[0][n - 1]'),
+    phase: 'done', activeLine: L('return dp[0][n - 1] <= k'), pythonLine: P('return dp[0][n - 1]'),
     message: `The whole string needs ${cost} deletion${cost === 1 ? '' : 's'}. With k = ${k}, the answer is ${result}.`,
     snapshot: snap({ i: 0, j: n - 1, cost }),
   })

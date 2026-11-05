@@ -1,11 +1,18 @@
 const CODE_LINES = [
-  'define check(node, k) that tests arr[k] against node',
-  'if node is missing or node.val differs from arr[k] then return false',
-  'if k is the last index then return true only if node is a leaf',
-  'for each child of node',
-  'if check(child, k + 1) then return true',
-  'return false',
-  'return check(root, 0)',
+  'function isValidSequence(root, arr) {',
+  '  const check = (node, k) => {',
+  '    // node is missing or node.val differs from arr[k]: return false',
+  '    if (node === null || node.val !== arr[k]) return false',
+  '    // if k is the last index, return true only when node is a leaf',
+  '    if (k === arr.length - 1) return node.left === null && node.right === null',
+  '    // for each child of node, try to continue the sequence',
+  '    for (const child of [node.left, node.right]) {',
+  '      if (child !== null && check(child, k + 1)) return true',
+  '    }',
+  '    return false',
+  '  }',
+  '  return root !== null && check(root, 0)',
+  '}',
 ]
 
 export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }))
@@ -14,6 +21,7 @@ const L = text => {
   if (index < 0) throw new Error(`pseudocode line missing: ${text}`)
   return index + 1
 }
+const LAST = text => CODE_LINES.length - [...CODE_LINES].reverse().findIndex(line => line.includes(text))
 
 export const python = `def is_valid_sequence(tree, arr):
     kids = {}
@@ -117,15 +125,15 @@ export function buildTrace({ tree, arr }) {
     for (const child of kids[i]) {
       frame('enter', L('for each child of node'), P('for c in kids[i]'), i, k, `Try child ${child} for arr[${k + 1}] = ${arr[k + 1]}.`)
       if (check(child, k + 1)) {
-        frame('found', L('if check(child, k + 1)'), P('if check(c, k + 1)'), child, k + 1, 'The child continues the valid path.')
+        frame('found', L('check(child, k + 1)'), P('if check(c, k + 1)'), child, k + 1, 'The child continues the valid path.')
         return true
       }
     }
-    frame('backtrack', L('return false'), P('return False'), i, k, `No child of ${i} continues the sequence.`)
+    frame('backtrack', LAST('return false'), P('return False'), i, k, `No child of ${i} continues the sequence.`)
     path.pop()
     return false
   }
   const result = tree[0] !== null && check(0, 0)
-  frame('done', L('return check(root, 0)'), P('return bool(tree)'), -1, -1, result ? 'A root-to-leaf path spells arr.' : 'No root-to-leaf path spells arr.')
+  frame('done', L('return root !== null'), P('return bool(tree)'), -1, -1, result ? 'A root-to-leaf path spells arr.' : 'No root-to-leaf path spells arr.')
   return { input: { tree, arr }, result, frames, kids }
 }

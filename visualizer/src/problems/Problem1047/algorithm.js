@@ -6,18 +6,19 @@ export const phases = [
   { id: 'done', label: 'Answer', description: 'The stack holds the string with no adjacent duplicates left.' },
 ]
 
-const PSEUDO = [
-  'remove adjacent duplicates(s):',
-  '  set stack to empty',
-  '  for each character c in s:',
-  '    if stack is not empty and its top equals c:',
-  '      pop the top of the stack',
-  '    else:',
-  '      push c onto the stack',
-  '  return the stack read as a string',
-]
+export const code = `function removeDuplicates(s) {
+  const stack = []
+  for (const c of s) {
+    if (stack.length && stack[stack.length - 1] === c) {
+      stack.pop()
+    } else {
+      stack.push(c)
+    }
+  }
+  return stack.join('')
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
-export const code = PSEUDO.map((text, index) => ({ line: index + 1, text }))
+export const pythonLineMap = {}
 
 export const python = `def remove_adjacent_duplicates(s):
     stack = []
@@ -50,6 +51,6 @@ export function buildTrace(input) {
     }
   }
   const result = stack.join('')
-  frames.push({ phase: 'done', activeLine: 8, pythonLine: 8, message: result ? `The reduced string is ${result}.` : 'Everything cancelled, so the reduced string is empty.', snapshot: { stack: [...stack], index: input.length - 1, c: null } })
+  frames.push({ phase: 'done', activeLine: 10, pythonLine: 8, message: result ? `The reduced string is ${result}.` : 'Everything cancelled, so the reduced string is empty.', snapshot: { stack: [...stack], index: input.length - 1, c: null } })
   return { input, result, frames }
 }

@@ -14,9 +14,9 @@ const definition = {
   url: 'https://leetcode.com/problems/make-array-empty/',
   complexity: 'The visualization caps nums at 12 values. The Python export simulates each operation, which is O(n^2) in the worst case.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[3,4,-1]}' },
-    { label: 'Example 2', input: '{"nums":[1,2,4,3]}' },
-    { label: 'Example 3', input: '{"nums":[1,2,3]}' },
+    { label: 'Rotate once', input: '{"nums":[5,1,4]}' },
+    { label: 'Spread values', input: '{"nums":[2,6,9,7]}' },
+    { label: 'Two values', input: '{"nums":[8,3]}' },
   ],
 }
 

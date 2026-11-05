@@ -8,16 +8,15 @@
 const MAX_LENGTH = 12;
 const ALPHABET = 26;
 
-const CODE_LINES = [
-  'FUNCTION canTransform(str1, str2)',
-  '    IF str1 equals str2 THEN RETURN true',
-  '    mapping ← empty map from letter to letter',
-  '    FOR each position i',
-  '        IF str1[i] already maps to a letter other than str2[i] THEN RETURN false',
-  '        mapping[str1[i]] ← str2[i]',
-  '    IF str2 uses all 26 letters THEN RETURN false',
-  '    RETURN true',
-];
+const CODE_LINES = `function canConvert(str1, str2) {
+  if (str1 === str2) return true
+  const mapping = new Map()
+  for (let i = 0; i < str1.length; i++) {
+    if (mapping.has(str1[i]) && mapping.get(str1[i]) !== str2[i]) return false
+    mapping.set(str1[i], str2[i])
+  }
+  return new Set(str2).size < 26
+}`.split('\n');
 
 const PY_LINES = [
   'class Solution:',
@@ -51,7 +50,7 @@ export const phases = [
 
 const L = (text) => {
   const index = code.findIndex((entry) => entry.text.includes(text));
-  if (index < 0) throw new Error(`Missing pseudocode line: ${text}`);
+  if (index < 0) throw new Error(`Missing code line: ${text}`);
   return index + 1;
 };
 
@@ -77,18 +76,18 @@ export function buildTrace(input, alphabetSize = ALPHABET) {
   const { str1, str2 } = parseInput(input);
   const frames = [];
   frames.push({
-    pythonLine: P('if str1 == str2:'), phase: 'setup', activeLine: L('IF str1 equals str2'),
+    pythonLine: P('if str1 == str2:'), phase: 'setup', activeLine: L('if (str1 === str2)'),
     index: -1, mapping: {}, conflict: null, used: null, verdict: null,
     message: `Can "${str1}" become "${str2}"?`,
   });
   if (str1 === str2) {
     frames.push({
-      pythonLine: P('return True'), phase: 'equal', activeLine: L('IF str1 equals str2'),
+      pythonLine: P('return True'), phase: 'equal', activeLine: L('if (str1 === str2)'),
       index: -1, mapping: {}, conflict: null, used: null, verdict: true,
       message: 'The strings already match, so zero operations are needed.',
     });
     frames.push({
-      pythonLine: P('return True'), phase: 'done', activeLine: L('RETURN true'),
+      pythonLine: P('return True'), phase: 'done', activeLine: L('return true') || L('if (str1 === str2)'),
       index: -1, mapping: {}, conflict: null, used: null, verdict: true, message: 'Answer: true.',
     });
     return { input: { str1, str2 }, answer: true, frames };
@@ -99,12 +98,12 @@ export function buildTrace(input, alphabetSize = ALPHABET) {
     const to = str2[i];
     if (mapping.has(from) && mapping.get(from) !== to) {
       frames.push({
-        pythonLine: P('if mapping.get(a, b) != b:'), phase: 'conflict', activeLine: L('IF str1[i] already maps'),
+        pythonLine: P('if mapping.get(a, b) != b:'), phase: 'conflict', activeLine: L('if (mapping.has(str1[i])'),
         index: i, mapping: Object.fromEntries(mapping), conflict: { from, to, was: mapping.get(from) }, used: null, verdict: false,
         message: `Position ${i}: ${from} must become ${to}, but it already becomes ${mapping.get(from)}.`,
       });
       frames.push({
-        pythonLine: P('return False'), phase: 'done', activeLine: L('IF str1[i] already maps'),
+        pythonLine: P('return False'), phase: 'done', activeLine: L('if (mapping.has(str1[i])'),
         index: i, mapping: Object.fromEntries(mapping), conflict: { from, to, was: mapping.get(from) }, used: null, verdict: false,
         message: 'Answer: false.',
       });
@@ -112,7 +111,7 @@ export function buildTrace(input, alphabetSize = ALPHABET) {
     }
     mapping.set(from, to);
     frames.push({
-      pythonLine: P('mapping[a] = b'), phase: 'map', activeLine: L('mapping[str1[i]] ← str2[i]'),
+      pythonLine: P('mapping[a] = b'), phase: 'map', activeLine: L('mapping.set(str1[i]'),
       index: i, mapping: Object.fromEntries(mapping), conflict: null, used: null, verdict: null,
       message: `Position ${i}: ${from} becomes ${to}.`,
     });
@@ -121,14 +120,14 @@ export function buildTrace(input, alphabetSize = ALPHABET) {
   const full = used.length === alphabetSize;
   const verdict = !full;
   frames.push({
-    pythonLine: P('return len(set(str2))'), phase: 'spare', activeLine: L('IF str2 uses all 26 letters'),
+    pythonLine: P('return len(set(str2))'), phase: 'spare', activeLine: L('return new Set(str2).size < 26'),
     index: str1.length, mapping: Object.fromEntries(mapping), conflict: null, used, verdict,
     message: full
       ? `str2 uses all ${alphabetSize} letters, so no spare letter can break the cycle.`
       : `str2 uses ${used.length} of ${alphabetSize} letters, so a spare letter is free.`,
   });
   frames.push({
-    pythonLine: P('return len(set(str2))'), phase: 'done', activeLine: L(verdict ? 'RETURN true' : 'IF str2 uses all 26 letters'),
+    pythonLine: P('return len(set(str2))'), phase: 'done', activeLine: L(verdict ? 'return new Set(str2).size < 26' : 'return new Set(str2).size < 26'),
     index: str1.length, mapping: Object.fromEntries(mapping), conflict: null, used, verdict,
     message: `Answer: ${verdict}.`,
   });

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-knight-moves/',
   complexity: 'O(W²) time and space for a search window of side W = 2·max(|x|,|y|) + 5. The visualization caps |x| and |y| at 12; the official bounds were not verified.',
   examples: [
-    { label: 'One move', input: '{"x":2,"y":1}' },
-    { label: 'Four moves', input: '{"x":5,"y":5}' },
+    { label: 'One move', input: '{"x":-1,"y":2}' },
+    { label: 'Four moves', input: '{"x":6,"y":-4}' },
   ],
 }
 

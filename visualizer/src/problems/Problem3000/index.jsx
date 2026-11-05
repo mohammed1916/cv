@@ -17,8 +17,8 @@ const definition = {
   url: "https://leetcode.com/problems/maximum-area-of-longest-diagonal-rectangle/",
   complexity: "O(n) time and O(1) extra space. The visualization caps input at 50 rectangles; LeetCode allows up to 100.",
   examples: [
-    { label: "[[9,3],[8,6]]", input: "{\"dimensions\": [[9, 3], [8, 6]]}" },
-    { label: "[[3,4],[4,3]]", input: "{\"dimensions\": [[3, 4], [4, 3]]}" },
+    { label: "Longest diagonal wins", input: "{\"dimensions\": [[5, 12], [9, 2], [7, 6]]}" },
+    { label: "Tie broken by area", input: "{\"dimensions\": [[2, 8], [8, 2], [6, 4]]}" },
   ],
 }
 

@@ -31,13 +31,16 @@ const definition = {
   }
 ],
   parse: parseInput, build: buildTrace, code, python,
-  inputLabel: "Object with nums (JSON), e.g. {\"nums\":[2,7,1,19,18,3]}",
+  inputLabel: "Object with nums (JSON), e.g. {\"nums\":[5,4,9,2,6,1]}",
   url: "https://leetcode.com/problems/sum-of-squares-of-special-elements/",
   complexity: "O(n) time and O(1) extra space. The visualization caps input at 30 values.",
   examples: [
   {
-    "label": "Example 1",
-    "input": "{\"nums\":[2,7,1,19,18,3]}"
+    "label": "Six values",
+    "input": "{\"nums\":[5,4,9,2,6,1]}"
+  }, {
+    "label": "Three values",
+    "input": "{\"nums\":[7,3,8]}"
   }
 ],
 }
@@ -45,7 +48,7 @@ const definition = {
 export default function SumOfSquaresOfSpecialElementsVisualizer() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Array" length={run.input.nums.length} valueAt={i => run.input.nums[i]} active={step.index}
-      roleAt={i => (step.special.includes(i) ? 'window' : '')} />
+      roleAt={i => (step.special.includes(i) ? 'divides n' : '')} />
     <output aria-label="Total">{`Total ${step.total}`}</output>
   </>} renderReasoning={({ step }) => <p>{step.message}</p>} />
 }

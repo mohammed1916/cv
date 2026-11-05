@@ -1,18 +1,22 @@
-const CODE_TEXT = `digit count in range low to high
-  return count(high, d) minus count(low minus 1, d)
-count(N, d) counts digit d in the numbers 1 to N
-  set total to 0
-  for each place p = 1, 10, 100 while p is at most N
-    high = N // (10 times p), cur = (N // p) mod 10, low = N mod p
-    if d is 0
-      if high is at least 1 then add (high minus 1) times p, plus p or low plus 1
-    otherwise
-      add high times p
-      if cur is above d then add p
-      otherwise if cur equals d then add low plus 1
-  return total`
-
-export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function countDigit(d, low, high) {
+  const countUpTo = n => {
+    let total = 0
+    for (let p = 1; p <= n; p *= 10) {
+      const highPart = Math.floor(n / (10 * p))
+      const cur = Math.floor(n / p) % 10
+      const lowPart = n % p
+      if (d === 0) {
+        if (highPart >= 1) total += (highPart - 1) * p + (cur > 0 ? p : lowPart + 1)
+      } else {
+        total += highPart * p
+        if (cur > d) total += p
+        else if (cur === d) total += lowPart + 1
+      }
+    }
+    return total
+  }
+  return countUpTo(high) - countUpTo(low - 1)
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def count_digit(d, low, high):
     def count_upto(n):
@@ -44,7 +48,7 @@ if __name__ == "__main__":
 const PY_LINES = python.split('\n')
 const L = text => {
   const index = code.findIndex(item => item.text.includes(text))
-  if (index < 0) throw new Error(`Missing pseudocode line: ${text}`)
+  if (index < 0) throw new Error(`Missing code line: ${text}`)
   return index + 1
 }
 const P = text => {
@@ -85,7 +89,7 @@ function countWithRows(n, d, frames, add, bound) {
     }
     total += added
     rows.push({ p, high, cur, low, added })
-    add('place', d === 0 ? 'if high is at least 1' : 'add high times p', d === 0 ? 'if high_part >= 1' : 'total += high_part * p',
+    add('place', d === 0 ? 'if (highPart >= 1)' : 'total += highPart * p', d === 0 ? 'if high_part >= 1' : 'total += high_part * p',
       `Place ${p}: prefix ${high}, digit ${cur}, suffix ${low} adds ${added} occurrence${added === 1 ? '' : 's'} of ${d} for ${bound}.`,
       { bound, n, rows: rows.map(r => ({ ...r })), total, p, high, cur, low })
     p *= 10
@@ -99,12 +103,12 @@ export function buildTrace({ d, low, high }) {
     phase, activeLine: L(line), pythonLine: P(py), message,
     d, low, high, bound: null, n: null, rows: [], total: 0, p: -1, upper: null, lower: null, result: null, ...extra,
   })
-  add('start', 'return count(high, d) minus', 'return count_upto(high) - count_upto(low - 1)', `Count digit ${d} in every number from ${low} to ${high}.`, {})
+  add('start', 'return countUpTo(high) - countUpTo(low - 1)', 'return count_upto(high) - count_upto(low - 1)', `Count digit ${d} in every number from ${low} to ${high}.`, {})
   const upper = countWithRows(high, d, frames, add, `high = ${high}`)
   add('upper', 'return total', 'return count_upto(high)', `count(${high}, ${d}) = ${upper}.`, { bound: 'high', n: high, upper, total: upper, rows: [] })
   const lower = countWithRows(low - 1, d, frames, add, `low - 1 = ${low - 1}`)
-  add('lower', 'return count(high, d) minus count(low minus 1', 'return count_upto(high) - count_upto(low - 1)', `count(${low - 1}, ${d}) = ${lower}.`, { bound: 'low-1', n: low - 1, upper, lower, total: lower, rows: [] })
+  add('lower', 'return countUpTo(high) - countUpTo(low - 1)', 'return count_upto(high) - count_upto(low - 1)', `count(${low - 1}, ${d}) = ${lower}.`, { bound: 'low-1', n: low - 1, upper, lower, total: lower, rows: [] })
   const result = upper - lower
-  add('done', 'return count(high, d) minus count(low minus 1, d)', 'return count_upto(high) - count_upto(low - 1)', `${upper} - ${lower} = ${result} occurrences of ${d}.`, { upper, lower, result })
+  add('done', 'return countUpTo(high) - countUpTo(low - 1)', 'return count_upto(high) - count_upto(low - 1)', `${upper} - ${lower} = ${result} occurrences of ${d}.`, { upper, lower, result })
   return { input: { d, low, high }, result, frames }
 }

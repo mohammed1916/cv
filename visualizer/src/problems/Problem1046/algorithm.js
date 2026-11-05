@@ -5,16 +5,21 @@ export const phases = [
   { id: 'done', label: 'Answer', description: 'Report the one stone left, or 0 if none is left.' },
 ]
 
-const PSEUDO = [
-  'last stone weight(stones):',
-  '  sort stones from heaviest to lightest',
-  '  while two or more stones remain:',
-  '    take the heaviest x and the next heaviest y out of the list',
-  '    if x != y: put x - y back into the sorted list',
-  '  return the one remaining stone, or 0 if none',
-]
+export const code = `function lastStoneWeight(stones) {
+  const pile = [...stones].sort((a, b) => b - a)
+  while (pile.length > 1) {
+    const x = pile.shift()
+    const y = pile.shift()
+    if (x !== y) {
+      pile.push(x - y)
+      pile.sort((a, b) => b - a)
+    }
+  }
+  return pile.length ? pile[0] : 0
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
-export const code = PSEUDO.map((text, index) => ({ line: index + 1, text }))
+
+export const pythonLineMap = {}
 
 export const python = `def last_stone_weight(stones):
     stones = sorted(stones, reverse=True)
@@ -40,15 +45,15 @@ export function buildTrace(input) {
   while (stones.length > 1) {
     const x = stones.shift()
     const y = stones.shift()
-    frames.push({ phase: 'pick', activeLine: 4, pythonLine: 4, message: `Take ${x} and ${y} off the top of the list.`, snapshot: { stones: [...stones], picked: [x, y] } })
+    frames.push({ phase: 'pick', activeLine: 5, pythonLine: 4, message: `Take ${x} and ${y} off the top of the list.`, snapshot: { stones: [...stones], picked: [x, y] } })
     if (x !== y) {
       stones.push(x - y)
       stones.sort((a, b) => b - a)
     }
     const message = x === y ? `${x} equals ${y}, so both stones vanish.` : `${x} - ${y} = ${x - y} goes back into the sorted list.`
-    frames.push({ phase: 'smash', activeLine: 5, pythonLine: 6, message, snapshot: { stones: [...stones], picked: [x, y] } })
+    frames.push({ phase: 'smash', activeLine: 6, pythonLine: 6, message, snapshot: { stones: [...stones], picked: [x, y] } })
   }
   const result = stones.length ? stones[0] : 0
-  frames.push({ phase: 'done', activeLine: 6, pythonLine: 8, message: result ? `One stone remains with weight ${result}.` : 'No stone remains, so the answer is 0.', snapshot: { stones: [...stones], picked: null } })
+  frames.push({ phase: 'done', activeLine: 11, pythonLine: 8, message: result ? `One stone remains with weight ${result}.` : 'No stone remains, so the answer is 0.', snapshot: { stones: [...stones], picked: null } })
   return { input, result, frames }
 }

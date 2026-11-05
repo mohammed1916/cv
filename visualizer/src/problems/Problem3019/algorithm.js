@@ -8,10 +8,10 @@ export const python = [
 ].join("\n");
 
 export const code = [
-  "changes = 0",
-  "for each position i from 1 to the end",
-  "compare s[i] and s[i - 1] after lowercasing both",
-  "if they differ, add 1 to changes",
+  "let changes = 0",
+  "for (let i = 1; i < s.length; i++) {",
+  "  if (s[i].toLowerCase() !== s[i - 1].toLowerCase()) changes += 1",
+  "}",
   "return changes",
 ].map((text, index) => ({ line: index + 1, text }));
 
@@ -38,10 +38,10 @@ export function buildTrace(input) {
   for (let i = 1; i < s.length; i++) {
     const prev = s[i - 1].toLowerCase();
     const cur = s[i].toLowerCase();
-    push({ phase: "scan", activeLine: 3, pythonLine: 4, index: i, stats: { prev: s[i - 1], cur: s[i], changes }, message: `Compare ${s[i - 1]} and ${s[i]} ignoring case.` });
+    push({ phase: "scan", activeLine: 2, pythonLine: 4, index: i, stats: { prev: s[i - 1], cur: s[i], changes }, message: `Compare ${s[i - 1]} and ${s[i]} ignoring case.` });
     if (cur !== prev) {
       changes += 1;
-      push({ phase: "count", activeLine: 4, pythonLine: 5, index: i, stats: { prev: s[i - 1], cur: s[i], changes }, message: `Different keys: changes is now ${changes}.` });
+      push({ phase: "count", activeLine: 3, pythonLine: 5, index: i, stats: { prev: s[i - 1], cur: s[i], changes }, message: `Different keys: changes is now ${changes}.` });
     }
   }
   push({ phase: "done", activeLine: 5, pythonLine: 6, index: -1, stats: { changes }, message: `Return ${changes}.` });

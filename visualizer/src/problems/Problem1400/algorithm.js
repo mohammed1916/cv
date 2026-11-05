@@ -1,71 +1,73 @@
 export const phases = [
-  { id: 'check', label: 'Length check', description: 'Every palindrome needs at least one character, so k cannot exceed the string length.' },
-  { id: 'tally', label: 'Count odd letters', description: 'Count letters whose total frequency is odd; each needs its own palindrome centre.' },
-  { id: 'decide', label: 'Compare', description: 'Feasible when odd letters are at most k.' },
-];
+  { id: 'start', label: 'Start', description: 'Every palindrome needs at most one odd-count letter, so count the letters first.' },
+  { id: 'count', label: 'Count letters', description: 'Tally each letter of s.' },
+  { id: 'odd', label: 'Odd counts', description: 'Each letter with an odd count needs its own palindrome center.' },
+  { id: 'decide', label: 'Enough palindromes', description: 'k palindromes need at least k letters in total, and at most k odd letters.' },
+  { id: 'done', label: 'Complete', description: 'Return true when k palindromes are possible.' },
+]
 
 export const examples = [
-  { label: 'Two odd letters, k = 4', input: JSON.stringify({ s: 'xyzz', k: 4 }) },
-  { label: 'Too many odd letters', input: JSON.stringify({ s: 'abcde', k: 2 }) },
-  { label: 'Even counts', input: JSON.stringify({ s: 'aabbcc', k: 3 }) },
-];
+  { label: 'Annabelle in two', input: '{"s":"annabelle","k":2}' },
+  { label: 'Too many odd letters', input: '{"s":"leetcode","k":3}' },
+  { label: 'Four singles', input: '{"s":"true","k":4}' },
+]
 
 export function parseInput(text) {
-  const data = JSON.parse(text);
-  const s = data?.s, k = data?.k;
-  if (typeof s !== 'string' || s.length < 1 || s.length > 200 || !/^[a-z]+$/.test(s)) {
-    throw new Error('Enter {"s":"...","k":2} where s has 1 to 200 lowercase letters.');
-  }
-  if (!Number.isInteger(k) || k < 1 || k > 200) {
-    throw new Error('k must be an integer from 1 to 200.');
-  }
-  return { s, k };
+  const data = JSON.parse(text)
+  if (!data || typeof data !== 'object' || typeof data.s !== 'string' || !Number.isInteger(data.k)) throw new Error('Use an object with a string s and an integer k, such as {"s":"annabelle","k":2}.')
+  if (data.s.length < 1 || data.s.length > 60) throw new Error('s must have 1 to 60 letters in this visualization.')
+  if (!/^[a-z]+$/.test(data.s)) throw new Error('s must use lowercase letters only.')
+  if (data.k < 1 || data.k > 60) throw new Error('k is an integer from 1 to 60 in this visualization.')
+  return { s: data.s, k: data.k }
 }
 
 export function buildTrace({ s, k }) {
-  const frames = [];
-  const counts = {};
-  frames.push({
-    phase: 'check', activeLine: 2, message: `Check whether k = ${k} can exceed the length ${s.length}.`,
-    snapshot: { k, length: s.length, counts: {}, odd: 0, letter: null, result: null },
-  });
-  if (k > s.length) {
-    frames.push({
-      phase: 'decide', activeLine: 2, message: `k = ${k} is larger than ${s.length}, so it is impossible. Return false.`,
-      snapshot: { k, length: s.length, counts: {}, odd: 0, letter: null, result: false },
-    });
-    return { input: { s, k }, result: false, frames };
+  if (s.length < k) {
+    return { input: { s, k }, result: false, frames: [{ phase: 'start', activeLine: L('const count = new Map()'), pythonLine: P('count = Counter'), snapshot: { rows: [], k, odd: 0 },
+      message: `Make ${k} palindromes from ${s.length} letters: impossible, since each palindrome needs a letter.` },
+    { phase: 'decide', activeLine: L('return odd <= k'), pythonLine: P('return odd <= k'), snapshot: { rows: [], k, odd: 0, result: false },
+      message: `${s.length} letter(s) cannot make ${k} palindromes, so the answer is false.`, result: false }] }
   }
-  let odd = 0;
-  for (const letter of [...new Set(s)]) {
-    counts[letter] = s.split(letter).length - 1;
-    if (counts[letter] % 2 === 1) odd++;
-    frames.push({
-      phase: 'tally', activeLine: 3,
-      message: `${letter} occurs ${counts[letter]} time(s), ${counts[letter] % 2 ? 'odd' : 'even'}; odd letters so far: ${odd}.`,
-      snapshot: { k, length: s.length, counts: { ...counts }, odd, letter, result: null },
-    });
+  const count = new Map()
+  for (const ch of s) count.set(ch, (count.get(ch) || 0) + 1)
+  const rows = () => [...count.entries()].sort((a, b) => a[0].localeCompare(b[0])).map(([letter, n]) => ({ letter, count: n, odd: n % 2 === 1 ? 'odd' : '' }))
+  const snap = (extra = {}) => ({ rows: rows(), k, odd: 0, ...extra })
+  const frames = [{ phase: 'start', activeLine: L('const count = new Map()'), pythonLine: P('count = Counter'), snapshot: snap(),
+    message: `Make ${k} palindrome(s) from the ${s.length} letters of ${s}.` }]
+  let odd = 0
+  for (const [letter, n] of [...count.entries()].sort((a, b) => a[0].localeCompare(b[0]))) {
+    if (n % 2 === 1) odd++
+    frames.push({ phase: 'odd', activeLine: L('if (n % 2 === 1)'), pythonLine: P('if n % 2'), snapshot: snap({ odd, current: letter }),
+      message: `${letter} appears ${n} time(s)${n % 2 === 1 ? ', an odd count, so it needs a center' : ', an even count'}. Odd letters so far: ${odd}.` })
   }
-  const result = odd <= k;
-  frames.push({
-    phase: 'decide', activeLine: 4,
-    message: `${odd} odd letter(s) against k = ${k}: ${result ? 'feasible' : 'not feasible'}.`,
-    snapshot: { k, length: s.length, counts: { ...counts }, odd, letter: null, result },
-  });
-  return { input: { s, k }, result, frames };
+  frames.push({ phase: 'decide', activeLine: L('return odd <= k'), pythonLine: P('return odd <= k'), snapshot: snap({ odd }),
+    message: `${odd} odd letter(s) against ${k} palindrome(s): ${odd <= k && s.length >= k ? 'enough' : 'not enough'}.` })
+  const result = s.length >= k && odd <= k
+  frames.push({ phase: 'done', activeLine: L('return odd <= k'), pythonLine: P('return odd <= k'), snapshot: snap({ odd, result }),
+    message: `Return ${result}.`, result })
+  return { input: { s, k }, result, frames }
 }
 
-export const code = [
-  'FUNCTION canConstructKPalindromes(s, k)',
-  '    IF k > length(s) THEN RETURN false',
-  '    odd ← number of letters whose frequency is odd',
-  '    RETURN odd ≤ k',
-].map((text, i) => ({ line: i + 1, text }));
+export const code = `function canConstructKPalindromes(s, k) {
+  const count = new Map()
+  for (const ch of s) count.set(ch, (count.get(ch) || 0) + 1)
+  let odd = 0
+  for (const n of count.values()) {
+    if (n % 2 === 1) odd++
+  }
+  return odd <= k && s.length >= k
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
-export const python = `def canConstructKPalindromes(s, k):
-    if k > len(s):
-        return False
-    odd = sum(1 for c in set(s) if s.count(c) % 2 == 1)
-    return odd <= k`;
+export const python = `from collections import Counter
 
-export const pythonLineMap = { 1: 1, 2: 2, 3: 4, 4: 5 };
+def can_construct_k_palindromes(s, k):
+    count = Counter(s)
+    odd = 0
+    for n in count.values():
+        if n % 2:
+            odd += 1
+    return odd <= k and len(s) >= k
+`
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+export const pythonLineMap = { 1: 4, 2: 5, 3: 6, 4: 7, 5: 8, 6: 9, 7: 10, 8: 10 }

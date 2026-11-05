@@ -8,21 +8,22 @@ const MAX_N = 1000;
 const DIGITS = [0, 1, 6, 8, 9];
 const ROTATE = { 0: 0, 1: 1, 6: 9, 8: 8, 9: 6 };
 
-const CODE_LINES = [
-  'FUNCTION confusingNumberII(n)',
-  '    ROTATE ← {0 to 0, 1 to 1, 6 to 9, 8 to 8, 9 to 6}',
-  '    count ← 0',
-  '    explore(x = 0, rot = 0, scale = 1)',
-  '    FUNCTION explore(x, rot, scale)',
-  '        FOR each digit d in 0, 1, 6, 8, 9',
-  '            IF x is 0 and d is 0 THEN CONTINUE',
-  '            y ← 10 · x + d',
-  '            IF y > n THEN CONTINUE',
-  '            r ← ROTATE[d] · scale + rot',
-  '            IF r ≠ y THEN count ← count + 1',
-  '            explore(y, r, 10 · scale)',
-  '    RETURN count',
-];
+const CODE_LINES = `function confusingNumberII(n) {
+  const rotate = { 0: 0, 1: 1, 6: 9, 8: 8, 9: 6 }
+  let count = 0
+  const explore = (x, rot, scale) => {
+    for (const d of [0, 1, 6, 8, 9]) {
+      if (x === 0 && d === 0) continue
+      const y = 10 * x + d
+      if (y > n) continue
+      const r = rotate[d] * scale + rot
+      if (r !== y) count++
+      explore(y, r, 10 * scale)
+    }
+  }
+  explore(0, 0, 1)
+  return count
+}`.split('\n');
 
 const PY_LINES = [
   'class Solution:',
@@ -63,7 +64,7 @@ export const phases = [
 
 const L = (text) => {
   const index = code.findIndex((entry) => entry.text.includes(text));
-  if (index < 0) throw new Error(`Missing pseudocode line: ${text}`);
+  if (index < 0) throw new Error(`Missing code line: ${text}`);
   return index + 1;
 };
 
@@ -85,7 +86,7 @@ export function buildTrace(input) {
   const frames = [];
   let count = 0;
   frames.push({
-    pythonLine: P('rotate = {0: 0'), phase: 'setup', activeLine: L('ROTATE ← {0 to 0'),
+    pythonLine: P('rotate = {0: 0'), phase: 'setup', activeLine: L('const rotate = {'),
     x: null, rot: null, confusing: null, visitedCount: 0, count, message: `Count confusing numbers from 1 to ${n}.`,
   });
   const explore = (x, rot, scale) => {
@@ -94,7 +95,7 @@ export function buildTrace(input) {
       const y = 10 * x + d;
       if (y > n) {
         frames.push({
-          pythonLine: P('if y > n:'), phase: 'prune', activeLine: L('IF y > n'),
+          pythonLine: P('if y > n:'), phase: 'prune', activeLine: L('if (y > n) continue'),
           x: y, rot: null, confusing: null, visitedCount: nodes.length, count,
           message: `${y} is above ${n}, so this branch stops here.`,
         });
@@ -105,7 +106,7 @@ export function buildTrace(input) {
       if (confusing) count += 1;
       nodes.push({ value: y, rot: r, confusing });
       frames.push({
-        pythonLine: P('r = rotate[d]'), phase: 'check', activeLine: L('r ← ROTATE[d]'),
+        pythonLine: P('r = rotate[d]'), phase: 'check', activeLine: L('const r = rotate[d]'),
         x: y, rot: r, confusing, visitedCount: nodes.length, count,
         message: confusing
           ? `${y} rotates to ${r}, a different number, so it counts (${count} so far).`
@@ -116,7 +117,7 @@ export function buildTrace(input) {
   };
   explore(0, 0, 1);
   frames.push({
-    pythonLine: P('return count'), phase: 'done', activeLine: L('RETURN count'),
+    pythonLine: P('return count'), phase: 'done', activeLine: L('return count'),
     x: null, rot: null, confusing: null, visitedCount: nodes.length, count,
     message: `${count} confusing number${count === 1 ? '' : 's'} from 1 to ${n}.`,
   });

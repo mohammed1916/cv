@@ -1,35 +1,35 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
-    { id: 'split', label: 'Split sides', description: 'Sum the x-coefficients and constants on each side.' },
-    { id: 'move', label: 'Move terms', description: 'Collect x on the left and constants on the right.' },
-    { id: 'done', label: 'Complete', description: 'Solve, or detect no or infinite solutions.' },
+    { id: 'split', label: 'Split sides', description: 'Read each side as an x-coefficient and a constant.' },
+    { id: 'move', label: 'Collect terms', description: 'Subtract the right side from the left: a·x = b.' },
+    { id: 'done', label: 'Decide', description: 'Pick the answer from a and b.' },
   ],
-  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Equation (JSON string)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Equation (JSON string with one =)',
   url: 'https://leetcode.com/problems/solve-the-equation/',
-  complexity: 'O(n) time and O(1) extra space for the equation length n.',
+  complexity: 'O(n) time for an equation of length n, with constant extra space.',
   examples: [
-    { label: 'Unique', input: '"x+5-3+x=6+x-2"' },
-    { label: 'No solution', input: '"x=x+2"' },
-    { label: 'Infinite', input: '"2x=x+x"' },
+    { label: 'Unique root', input: '"2x+3=7"' },
+    { label: 'Contradiction', input: '"x+1=x+4"' },
+    { label: 'Identity', input: '"3x-2=3x-2"' },
   ],
 }
 
 export default function SolveEquation() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <table aria-label="Equation terms">
-      <thead><tr><th /><th>x coefficient</th><th>constant</th></tr></thead>
-      <tbody>
-        <tr><th>left</th><td>{step.left.coefficient}</td><td>{step.left.constant}</td></tr>
-        <tr><th>right</th><td>{step.right.coefficient}</td><td>{step.right.constant}</td></tr>
-        {step.a !== null && step.a !== undefined && <tr><th>a x = b</th><td>{step.a}</td><td>{step.b}</td></tr>}
-      </tbody>
-    </table>
-    <output aria-label="Solution">{step.phase === 'done' ? step.result : `Equation: ${run.input}`}</output>
-  </>} renderReasoning={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
+    const row = (name, side) => ({ side: name, 'x coefficient': side.coefficient, constant: side.constant })
+    const rows = [row('left', step.left), row('right', step.right)]
+    if (step.a !== null) rows.push({ side: 'left − right', 'x coefficient': step.a, constant: step.b })
+    return <>
+      <RecordStateTable label="Sides as a·x + constant" columns={['side', 'x coefficient', 'constant']} rows={rows}
+        activeRow={step.phase === 'split' ? 1 : step.phase === 'move' ? 2 : -1} />
+      <output aria-label="Result">{step.phase === 'done' ? step.result : step.a === null ? 'Reading the sides' : `${step.a}x = ${step.b}`}</output>
+    </>
+  }} renderReasoning={({ step }) => <>
     <p>{step.message}</p>
-    <p><strong>Three outcomes:</strong> a ≠ 0 gives one solution; a = 0 with b ≠ 0 has none; a = 0 and b = 0 means every x works.</p>
+    <p><strong>Three outcomes:</strong> a non-zero x-coefficient gives one root (b / a); a zero coefficient with a non-zero constant is a contradiction; both zero means every x works.</p>
   </>} />
 }

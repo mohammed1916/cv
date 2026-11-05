@@ -22,30 +22,32 @@ export function buildTrace({ arr }) {
   const history = [{ keep, deleted, best }]
   const snap = (index, extra = {}) => ({ arr, index, keep, deleted, best, history: [...history], ...extra })
 
-  frames.push({ phase: 'start', activeLine: 2, message: `Start with ${arr[0]}. Its kept run is ${keep}, and no deletion exists yet.`, snapshot: snap(0) })
+  frames.push({ phase: 'start', activeLine: 2, pythonLine: 2, message: `Start with ${arr[0]}. Its kept run is ${keep}, and no deletion exists yet.`, snapshot: snap(0) })
   for (let i = 1; i < arr.length; i++) {
     const oldKeep = keep
     deleted = Math.max(deleted + arr[i], oldKeep)
-    frames.push({ phase: 'delete', activeLine: 4, message: `Deleted state at ${i}: ${arr[i]} is either added to the old deleted state or removed while keeping ${oldKeep}. The better value is ${deleted}.`, snapshot: snap(i) })
+    frames.push({ phase: 'delete', activeLine: 6, pythonLine: 4, message: `Deleted state at ${i}: ${arr[i]} is either added to the old deleted state or removed while keeping ${oldKeep}. The better value is ${deleted}.`, snapshot: snap(i) })
     keep = Math.max(keep + arr[i], arr[i])
-    frames.push({ phase: 'keep', activeLine: 5, message: `Kept state at ${i}: extend the run to get ${keep}, or restart at ${arr[i]}, whichever is larger.`, snapshot: snap(i) })
+    frames.push({ phase: 'keep', activeLine: 7, pythonLine: 5, message: `Kept state at ${i}: extend the run to get ${keep}, or restart at ${arr[i]}, whichever is larger.`, snapshot: snap(i) })
     best = Math.max(best, keep, deleted)
     history.push({ keep, deleted, best })
-    frames.push({ phase: 'record', activeLine: 6, message: `Compare kept ${keep} and deleted ${deleted} with the best ${best}.`, snapshot: snap(i) })
+    frames.push({ phase: 'record', activeLine: 8, pythonLine: 6, message: `Compare kept ${keep} and deleted ${deleted} with the best ${best}.`, snapshot: snap(i) })
   }
-  frames.push({ phase: 'done', activeLine: 7, message: `The best nonempty result is ${best}.`, snapshot: snap(arr.length - 1, { done: true }) })
+  frames.push({ phase: 'done', activeLine: 10, pythonLine: 7, message: `The best nonempty result is ${best}.`, snapshot: snap(arr.length - 1, { done: true }) })
   return { input: { arr }, result: best, frames }
 }
 
-export const code = [
-  'FUNCTION bestAfterOneDeletion(arr)',
-  '    keep ← arr[0], deleted ← -∞, best ← arr[0]',
-  '    FOR i FROM 1 TO LENGTH(arr) - 1',
-  '        deleted ← MAX(deleted + arr[i], keep)',
-  '        keep ← MAX(keep + arr[i], arr[i])',
-  '        best ← MAX(best, keep, deleted)',
-  '    RETURN best',
-]
+export const code = `function maximumSumAfterOneDeletion(arr) {
+  let keep = arr[0]
+  let deleted = -Infinity
+  let best = arr[0]
+  for (let i = 1; i < arr.length; i++) {
+    deleted = Math.max(deleted + arr[i], keep)
+    keep = Math.max(keep + arr[i], arr[i])
+    best = Math.max(best, keep, deleted)
+  }
+  return best
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def best_after_one_deletion(arr):
     keep, deleted, best = arr[0], float("-inf"), arr[0]

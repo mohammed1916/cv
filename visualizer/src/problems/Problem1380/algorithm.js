@@ -1,95 +1,88 @@
 export const phases = [
-  { id: 'start', label: 'Start', description: 'Read the matrix and its distinct values.' },
-  { id: 'inspect', label: 'Extremes', description: 'Find each row minimum and each column maximum.' },
-  { id: 'update', label: 'Check cell', description: 'A cell is lucky only if it is both its row minimum and its column maximum.' },
-  { id: 'done', label: 'Complete', description: 'The lucky values are collected in row-major order.' },
+  { id: 'start', label: 'Start', description: 'A lucky number is the smallest value in its row and the largest value in its column.' },
+  { id: 'rowmin', label: 'Row minimum', description: 'Find the smallest value in the current row and mark its column.' },
+  { id: 'colmax', label: 'Column maximum', description: 'Check whether that value is also the largest in its column.' },
+  { id: 'lucky', label: 'Lucky', description: 'The value is the row minimum and the column maximum, so it is lucky.' },
+  { id: 'done', label: 'Complete', description: 'Return every lucky number.' },
+]
+
+export const examples = [
+  { label: 'Single lucky', input: '{"matrix":[[3,7,8],[9,11,13],[15,16,17]]}' },
+  { label: 'Corner value', input: '{"matrix":[[1,10,4,2],[9,3,8,7],[15,16,17,12]]}' },
+  { label: 'None', input: '{"matrix":[[7,8],[1,2]]}' },
 ]
 
 export function parseInput(text) {
-  const value = JSON.parse(text)
-  const matrix = value?.matrix
-  if (!Array.isArray(matrix) || matrix.length < 1 || matrix.length > 10 || !Array.isArray(matrix[0]) || matrix[0].length < 1 || matrix[0].length > 10) {
-    throw new Error('Enter JSON like {"matrix":[[3,7],[1,9]]} with a 1–10 by 1–10 matrix.')
-  }
-  const width = matrix[0].length
-  const all = []
-  for (const row of matrix) {
-    if (!Array.isArray(row) || row.length !== width || row.some(v => !Number.isInteger(v) || v < 0 || v > 100)) {
-      throw new Error('Every row must have the same length, and every value must be an integer from 0 to 100.')
-    }
-    all.push(...row)
-  }
-  if (new Set(all).size !== all.length) throw new Error('Values must be distinct, so each lucky cell is unambiguous.')
-  return { matrix }
+  const data = JSON.parse(text)
+  if (!data || typeof data !== 'object' || !Array.isArray(data.matrix)) throw new Error('Use an object with a matrix list, such as {"matrix":[[1,2],[3,4]]}.')
+  const m = data.matrix.length
+  if (m < 1 || m > 8) throw new Error('matrix must have 1 to 8 rows in this visualization.')
+  const n = Array.isArray(data.matrix[0]) ? data.matrix[0].length : 0
+  if (n < 1 || n > 8) throw new Error('matrix must have 1 to 8 columns in this visualization.')
+  if (data.matrix.some(row => !Array.isArray(row) || row.length !== n)) throw new Error('Every row must have the same length.')
+  if (data.matrix.some(row => row.some(v => !Number.isInteger(v) || v < 1 || v > 100))) throw new Error('Every value must be an integer from 1 to 100.')
+  const flat = data.matrix.flat()
+  if (new Set(flat).size !== flat.length) throw new Error('All values must be distinct.')
+  return { matrix: data.matrix }
 }
 
-const LINE = { start: 1, rowMin: 2, colMax: 3, cell: 7, lucky: 8, done: 9 }
-
-export function buildTrace(input) {
-  const { matrix } = input
+export function buildTrace({ matrix }) {
   const m = matrix.length, n = matrix[0].length
-  const frames = []
-  const rowMin = [], colMax = []
-  const lucky = []
-  frames.push({
-    phase: 'start', activeLine: LINE.start,
-    message: `The matrix has ${m} rows and ${n} columns. Lucky cells need a row minimum and a column maximum at the same position.`,
-    snapshot: { matrix, rowMin: [], colMax: [], cell: null, lucky: [] },
-  })
-  for (let i = 0; i < m; i++) {
-    rowMin.push(Math.min(...matrix[i]))
-    frames.push({
-      phase: 'inspect', activeLine: LINE.rowMin,
-      message: `Row ${i} has minimum ${rowMin[i]}.`,
-      snapshot: { matrix, rowMin: [...rowMin], colMax: [], cell: null, lucky: [] },
-    })
-  }
-  for (let j = 0; j < n; j++) {
-    colMax.push(Math.max(...matrix.map(row => row[j])))
-    frames.push({
-      phase: 'inspect', activeLine: LINE.colMax,
-      message: `Column ${j} has maximum ${colMax[j]}.`,
-      snapshot: { matrix, rowMin: [...rowMin], colMax: [...colMax], cell: null, lucky: [] },
-    })
-  }
-  for (let i = 0; i < m; i++) {
-    for (let j = 0; j < n; j++) {
-      const v = matrix[i][j]
-      const isLucky = v === rowMin[i] && v === colMax[j]
-      if (isLucky) lucky.push(v)
-      frames.push({
-        phase: 'update', activeLine: LINE.cell,
-        message: isLucky
-          ? `${v} at [${i}, ${j}] is the minimum of row ${i} and the maximum of column ${j}, so it is lucky.`
-          : `${v} at [${i}, ${j}] fails: ${v !== rowMin[i] ? `row ${i} has a smaller value` : `column ${j} has a larger value`}.`,
-        snapshot: { matrix, rowMin: [...rowMin], colMax: [...colMax], cell: [i, j], lucky: [...lucky], isLucky },
-      })
+  const result = []
+  const snap = (extra = {}) => ({ matrix, found: [...result], ...extra })
+  const frames = [{ phase: 'start', activeLine: L('const result = []'), pythonLine: P('result = []'), snapshot: snap(),
+    message: 'Look at each row for its smallest value, then check that value against its column.' }]
+  for (let r = 0; r < m; r++) {
+    let minCol = 0
+    for (let c = 1; c < n; c++) if (matrix[r][c] < matrix[r][minCol]) minCol = c
+    const value = matrix[r][minCol]
+    frames.push({ phase: 'rowmin', activeLine: L('let minCol = 0'), pythonLine: P('min_col = 0'), snapshot: snap({ row: r, col: minCol, value }),
+      message: `Row ${r}: the smallest value is ${value}, in column ${minCol}.` })
+    let colMax = true
+    for (let rr = 0; rr < m; rr++) if (matrix[rr][minCol] > value) colMax = false
+    frames.push({ phase: 'colmax', activeLine: L('for (let rr = 0'), pythonLine: P('for rr in range'), snapshot: snap({ row: r, col: minCol, value, colMax }),
+      message: colMax ? `${value} is the largest in column ${minCol}, so it is lucky.` : `${value} has a bigger value below or above it in column ${minCol}, so it is not lucky.` })
+    if (colMax) {
+      result.push(value)
+      frames.push({ phase: 'lucky', activeLine: L('result.push(value)'), pythonLine: P('result.append'), snapshot: snap({ row: r, col: minCol, value, colMax: true }),
+        message: `${value} is lucky.` })
     }
   }
-  frames.push({
-    phase: 'done', activeLine: LINE.done,
-    message: lucky.length ? `Lucky values: ${lucky.join(', ')}.` : 'No cell is lucky, so the answer is empty.',
-    snapshot: { matrix, rowMin: [...rowMin], colMax: [...colMax], cell: null, lucky: [...lucky] },
-  })
-  return { input, result: lucky, frames }
+  frames.push({ phase: 'done', activeLine: L('return result'), pythonLine: P('return result'), snapshot: snap({ result: [...result] }),
+    message: `Return [${result.join(', ')}].`, result })
+  return { input: { matrix }, result, frames }
 }
 
-export const code = `lucky_numbers(matrix):
-  row_min[i] = smallest value in row i
-  col_max[j] = largest value in column j
-  result = empty list
-  for i in rows:
-    for j in columns:
-      if matrix[i][j] == row_min[i] and matrix[i][j] == col_max[j]:
-        append matrix[i][j] to result
-  return result`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function luckyNumbers(matrix) {
+  const m = matrix.length, n = matrix[0].length
+  const result = []
+  for (let r = 0; r < m; r++) {
+    let minCol = 0
+    for (let c = 1; c < n; c++) if (matrix[r][c] < matrix[r][minCol]) minCol = c
+    const value = matrix[r][minCol]
+    let colMax = true
+    for (let rr = 0; rr < m; rr++) if (matrix[rr][minCol] > value) colMax = false
+    if (colMax) result.push(value)
+  }
+  return result
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def lucky_numbers(matrix):
-    row_min = [min(row) for row in matrix]
-    col_max = [max(col) for col in zip(*matrix)]
+    m, n = len(matrix), len(matrix[0])
     result = []
-    for i in range(len(matrix)):
-        for j in range(len(matrix[0])):
-            if matrix[i][j] == row_min[i] and matrix[i][j] == col_max[j]:
-                result.append(matrix[i][j])
-    return result`
+    for r in range(m):
+        min_col = 0
+        for c in range(1, n):
+            if matrix[r][c] < matrix[r][min_col]:
+                min_col = c
+        value = matrix[r][min_col]
+        col_max = True
+        for rr in range(m):
+            if matrix[rr][min_col] > value:
+                col_max = False
+        if col_max:
+            result.append(value)
+    return result
+`
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

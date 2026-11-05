@@ -1,31 +1,28 @@
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
-import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace';
-import { buildTrace, parseInput, code, python, pythonLineMap, phases, examples, complexity } from './algorithm';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import View from './View'
+import { buildTrace, parseInput, code, python, pythonLineMap, phases, examples, complexity } from './algorithm.js'
 
 const definition = {
-  parse: parseInput, build: buildTrace, code, python, pythonLineMap, phases, examples, complexity,
-  inputLabel: 'JSON array of log entries',
+  number: '1598',
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  pythonLineMap,
+  phases,
+  examples,
+  complexity,
+  inputLabel: 'JSON array of log entries: "x/" enters, "../" goes up, "./" stays',
   url: 'https://leetcode.com/problems/crawler-log-folder/',
-};
-
-function SnapshotTable({ snapshot }) {
-  return <table><caption>Algorithm state</caption><tbody>
-    {Object.entries(snapshot).map(([key, value]) => <tr key={key}><th>{key}</th><td><code>{JSON.stringify(value)}</code></td></tr>)}
-  </tbody></table>;
 }
 
-function Visualizer() {
-  return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ run, step }) => <>
-      <SnapshotTable snapshot={step.snapshot} />
-      {step.phase === 'done' && <output aria-label="Result">Result: {String(run.result)}</output>}
-    </>}
+export default function Problem1598Visualizer() {
+  return <AlgorithmWorkspace
+    definition={definition}
+    renderVisual={({ run, step }) => <View run={run} step={step} />}
     renderReasoning={() => <>
-      <p>Each name followed by a slash moves one folder deeper, while a parent move steps back toward the main folder.</p>
-      <p>A parent move at the main folder is ignored, so depth never drops below zero.</p>
-      <p>A same-folder marker leaves the depth unchanged, so only the final depth is returned.</p>
-    </>} />;
+      <p>Only the depth matters: the answer is how far the folder is from the main folder.</p>
+      <p>"../" can never go above the main folder, so depth never drops below 0.</p>
+    </>}
+  />
 }
-
-export default withProblemStory(Visualizer, storyGuide);

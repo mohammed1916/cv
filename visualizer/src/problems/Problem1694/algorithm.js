@@ -1,70 +1,86 @@
-export const phases = [
-  { id: 'start', label: 'Clean', description: 'Keep only the digits; spaces and dashes are separators to discard.' },
-  { id: 'take', label: 'Blocks of 3', description: 'While more than 4 digits remain, take the next 3 as one block.' },
-  { id: 'finish', label: 'Last 2 to 4', description: 'Four remaining digits become two pairs; two or three form one block.' },
-  { id: 'done', label: 'Join', description: 'Join the blocks with dashes.' },
+// Reformat phone number: keep the digits, cut blocks of 3 while more than 4 remain, then 2+2, 2 or 3.
+const JS_LINES = [
+  { text: 'const digits = number.replace(/[ -]/g, "")', py: 'digits = ' },
+  { text: 'const blocks = []', py: 'blocks = []' },
+  { text: 'let rest = digits', py: 'rest = digits' },
+  { text: 'while (rest.length > 4) {', py: 'while len(rest) > 4' },
+  { text: 'blocks.push(rest.slice(0, 3))', py: 'blocks.append(rest[:3])' },
+  { text: 'rest = rest.slice(3)', py: 'rest = rest[3:]' },
+  { text: '}', py: null },
+  { text: 'if (rest.length === 4) blocks.push(rest.slice(0, 2), rest.slice(2))', py: 'if len(rest) == 4' },
+  { text: 'else if (rest.length > 0) blocks.push(rest)', py: 'elif rest' },
+  { text: 'return blocks.join("-")', py: 'return' },
 ]
 
-export function parseInput(text) {
-  let value
-  try { value = JSON.parse(text) } catch { throw new Error('Enter a JSON string such as "1-23 45".') }
-  if (typeof value !== 'string' || !/^[0-9 -]+$/.test(value)) throw new Error('Use only digits, spaces and dashes inside the string.')
-  const digitCount = value.replace(/[ -]/g, '').length
-  if (digitCount < 2 || digitCount > 100) throw new Error('Use between 2 and 100 digits.')
-  return value
-}
+export const code = JS_LINES.map(({ text }, i) => ({ line: i + 1, text }))
 
-export function buildTrace(input) {
-  const digits = input.replace(/[ -]/g, '')
-  const blocks = []
-  let cursor = 0
-  const frames = [{ phase: 'start', activeLine: 2, message: `Keep ${digits.length} digits; separators are discarded.`, snapshot: { digits, cursor, blocks: [] } }]
-  while (digits.length - cursor > 4) {
-    const block = digits.slice(cursor, cursor + 3)
-    frames.push({ phase: 'take', activeLine: 4, message: `${digits.length - cursor} digits remain, more than 4, so take three.`, snapshot: { digits, cursor, blocks: [...blocks] } })
-    blocks.push(block)
-    cursor += 3
-    frames.push({ phase: 'take', activeLine: 5, message: `Add block "${block}"; the cursor moves to position ${cursor}.`, snapshot: { digits, cursor, blocks: [...blocks] } })
-  }
-  const rest = digits.length - cursor
-  frames.push({ phase: 'finish', activeLine: 6, message: `${rest} digits remain, so the final group is handled without a lone digit.`, snapshot: { digits, cursor, blocks: [...blocks] } })
-  const tail = rest === 4 ? [digits.slice(cursor, cursor + 2), digits.slice(cursor + 2)] : [digits.slice(cursor)]
-  tail.forEach((block, index) => {
-    blocks.push(block)
-    frames.push({ phase: 'finish', activeLine: rest === 4 ? 8 : 10, message: rest === 4 ? `Four digits split into pairs; add "${block}".` : `Add the final block "${block}".`, snapshot: { digits, cursor: digits.length, blocks: [...blocks], part: index } })
-  })
-  const result = blocks.join('-')
-  frames.push({ phase: 'done', activeLine: 11, message: `Return "${result}".`, snapshot: { digits, cursor: digits.length, blocks: [...blocks], result } })
-  return { input, result, frames }
-}
-
-export const python = `def reformat_number(number):
-    digits = "".join(ch for ch in number if ch in "0123456789")
+export const python = `def reformatNumber(number):
+    digits = ''.join(c for c in number if c not in ' -')
     blocks = []
-    i = 0
-    while len(digits) - i > 4:
-        blocks.append(digits[i:i + 3])
-        i += 3
-    rest = len(digits) - i
-    if rest == 4:
-        blocks += [digits[i:i + 2], digits[i + 2:]]
-    else:
-        blocks.append(digits[i:])
-    return "-".join(blocks)`
+    rest = digits
+    while len(rest) > 4:
+        blocks.append(rest[:3])
+        rest = rest[3:]
+    if len(rest) == 4:
+        blocks.extend([rest[:2], rest[2:]])
+    elif rest:
+        blocks.append(rest)
+    return '-'.join(blocks)
+`
 
-export const code = [
-  'FUNCTION reformatNumber(text)',
-  '    digits = the digit characters of text',
-  '    blocks = empty list; i = 0',
-  '    WHILE remaining digits > 4',
-  '        append digits[i .. i+3) to blocks; i = i + 3',
-  '    rest = remaining digits',
-  '    IF rest = 4',
-  '        append two pairs of digits',
-  '    ELSE',
-  '        append the rest as one block',
-  '    RETURN blocks joined by "-"',
-].map((text, index) => ({ line: index + 1, text }))
+const PY = python.split('\n')
+const pyAt = needle => {
+  const index = PY.findIndex(line => line.includes(needle))
+  if (index < 0) throw new Error(`python line missing: ${needle}`)
+  return index + 1
+}
+export const pythonLineMap = Object.fromEntries(JS_LINES.map((line, i) => [i + 1, pyAt(line.py ?? 'return')]))
 
-// Pseudocode activeLine -> Python line.
-export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 5, 5: 6, 6: 8, 7: 9, 8: 10, 9: 11, 10: 12, 11: 13 }
+export const phases = [
+  { id: 'clean', label: 'Clean', description: 'Remove the spaces and dashes; only digits remain.' },
+  { id: 'triples', label: 'Triples', description: 'While more than four digits remain, cut off a block of three.' },
+  { id: 'tail', label: 'Tail', description: 'Four digits become 2+2; three become one block; two stay as one block.' },
+  { id: 'done', label: 'Result', description: 'Join the blocks with dashes.' },
+]
+
+export const examples = [
+  { label: 'Mixed separators', input: '"7-13 05 92"' },
+  { label: 'Four digits left', input: '"12 34-5678"' },
+  { label: 'Two digits left', input: '"4 5-6"' },
+]
+
+export const complexity = 'O(n) time and O(n) space for a phone number of n characters.'
+
+export function parseInput(text) {
+  const number = JSON.parse(text)
+  if (typeof number !== 'string') throw new Error('Enter the number as a JSON string.')
+  if (number.length < 2 || number.length > 100) throw new Error('The number is 2 to 100 characters long.')
+  if (!/^[0-9 -]+$/.test(number)) throw new Error('Use digits, spaces and dashes only.')
+  const digits = number.replace(/[ -]/g, '')
+  if (digits.length < 2) throw new Error('At least two digits are needed.')
+  return number
+}
+
+export function buildTrace(number) {
+  const frames = []
+  const digits = number.replace(/[ -]/g, '')
+  const blocks = []
+  const snap = extra => ({ blocks: [...blocks], rest: '', ...extra })
+  frames.push({ phase: 'clean', activeLine: 1, digits, message: `Digits only: ${digits}.`, snapshot: snap({ digits }) })
+  let rest = digits
+  while (rest.length > 4) {
+    blocks.push(rest.slice(0, 3))
+    rest = rest.slice(3)
+    frames.push({ phase: 'triples', activeLine: 5, digits, message: `Block ${blocks[blocks.length - 1]} cut off; ${rest.length} digits remain.`, snapshot: snap({ rest }) })
+  }
+  if (rest.length === 4) {
+    blocks.push(rest.slice(0, 2), rest.slice(2))
+    frames.push({ phase: 'tail', activeLine: 8, digits, message: `Four digits left: two blocks of 2, ${blocks.slice(-2).join(' and ')}.`, snapshot: snap({ rest }) })
+  } else if (rest.length > 0) {
+    blocks.push(rest)
+    frames.push({ phase: 'tail', activeLine: 9, digits, message: `${rest.length} digits left: one block ${rest}.`, snapshot: snap({ rest }) })
+  }
+  const result = blocks.join('-')
+  frames.push({ phase: 'done', activeLine: 10, digits, result, message: `Result: ${result}.`, snapshot: snap({ result }) })
+  return { input: number, digits, result, blocks, frames }
+}

@@ -18,13 +18,16 @@ export function parseInput(text) {
   return { present, future, budget }
 }
 
-export const code = `FUNCTION maxProfit(present, future, budget)
-    dp[b] ← 0 for every budget b from 0 to budget
-    FOR each stock i
-        profit ← future[i] - present[i]
-        FOR b from budget DOWN TO present[i]
-            dp[b] ← max(dp[b], dp[b - present[i]] + profit)
-    RETURN dp[budget]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function maxProfit(present, future, budget) {
+  const dp = Array(budget + 1).fill(0);
+  present.forEach((cost, i) => {
+    const profit = future[i] - cost;
+    for (let b = budget; b >= cost; b--) {
+      dp[b] = Math.max(dp[b], dp[b - cost] + profit);
+    }
+  });
+  return dp[budget];
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def max_profit(present, future, budget):
     dp = [0] * (budget + 1)
@@ -56,17 +59,17 @@ export const phases = [
 export function buildTrace({ present, future, budget }) {
   const frames = []
   const dp = Array(budget + 1).fill(0)
-  frames.push({ phase: 'start', activeLine: L('dp[b] ← 0 for every'), pythonLine: P('dp = [0] * (budget + 1)'), message: `dp has ${budget + 1} entries, all 0.`, stock: -1, b: -1, from: -1, skip: null, buy: null, dp: dp.slice() })
+  frames.push({ phase: 'start', activeLine: L('const dp = Array(budget + 1)'), pythonLine: P('dp = [0] * (budget + 1)'), message: `dp has ${budget + 1} entries, all 0.`, stock: -1, b: -1, from: -1, skip: null, buy: null, dp: dp.slice() })
   present.forEach((cost, i) => {
     const profit = future[i] - cost
-    frames.push({ phase: 'stock', activeLine: L('profit ← future[i]'), pythonLine: P('profit = sale - cost'), message: `Stock ${i}: buy ${cost}, sell ${future[i]}, profit ${profit}.`, stock: i, b: -1, from: -1, skip: null, buy: null, dp: dp.slice() })
+    frames.push({ phase: 'stock', activeLine: L('const profit = future[i] - cost'), pythonLine: P('profit = sale - cost'), message: `Stock ${i}: buy ${cost}, sell ${future[i]}, profit ${profit}.`, stock: i, b: -1, from: -1, skip: null, buy: null, dp: dp.slice() })
     for (let b = budget; b >= cost; b--) {
       const skip = dp[b]
       const buy = dp[b - cost] + profit
       dp[b] = Math.max(skip, buy)
-      frames.push({ phase: 'cell', activeLine: L('dp[b] ← max(dp[b]'), pythonLine: P('dp[b] = max(dp[b], dp[b - cost] + profit)'), message: `Budget ${b}: skip gives ${skip}, buy gives ${buy}; keep ${dp[b]}.`, stock: i, b, from: b - cost, skip, buy, dp: dp.slice() })
+      frames.push({ phase: 'cell', activeLine: L('dp[b] = Math.max(dp[b]'), pythonLine: P('dp[b] = max(dp[b], dp[b - cost] + profit)'), message: `Budget ${b}: skip gives ${skip}, buy gives ${buy}; keep ${dp[b]}.`, stock: i, b, from: b - cost, skip, buy, dp: dp.slice() })
     }
   })
-  frames.push({ phase: 'done', activeLine: L('RETURN dp[budget]'), pythonLine: P('return dp[budget]'), message: `Best profit with budget ${budget}: ${dp[budget]}.`, stock: -1, b: budget, from: -1, skip: null, buy: null, dp: dp.slice() })
+  frames.push({ phase: 'done', activeLine: L('return dp[budget]'), pythonLine: P('return dp[budget]'), message: `Best profit with budget ${budget}: ${dp[budget]}.`, stock: -1, b: budget, from: -1, skip: null, buy: null, dp: dp.slice() })
   return { input: { present, future, budget }, result: dp[budget], frames }
 }

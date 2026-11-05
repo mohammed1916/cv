@@ -1,80 +1,87 @@
 export function parseInput(text) {
   const data = JSON.parse(text)
   const { nums, k } = data ?? {}
-  if (!Array.isArray(nums) || nums.length < 1 || nums.length > 16 || nums.some(v => !Number.isInteger(v) || v < 1 || v > 500)) throw new Error('nums must be 1–16 integers from 1 to 500 (the search is shown in full).')
-  if (!Number.isInteger(k) || k < 1 || k > nums.length) throw new Error('k must be from 1 to the length of nums.')
+  if (!Array.isArray(nums) || nums.length < 1 || nums.length > 16 || nums.some(v => !Number.isInteger(v) || v < 1 || v > 10000)) throw new Error('nums must be 1–16 integers from 1 to 10,000 (the search places every number).')
+  if (!Number.isInteger(k) || k < 1 || k > nums.length) throw new Error('k must be an integer from 1 to the length of nums.')
   return { nums, k }
 }
 
-export const code = `canPartitionKSubsets(nums, k):
-  total = sum of nums
-  if total is not divisible by k, return false
-  target = total divided by k
-  set the sum of each of the k buckets to 0
-  sort nums from largest to smallest
-  place(i):
-    if i is past the last number, return true when every bucket sum equals target
-    for each bucket b
-      skip b if adding nums[i] would exceed target
-      skip b if it is empty and an earlier empty bucket was already tried
-      add nums[i] to bucket b
-      if place(i + 1) succeeds, return true
-      remove nums[i] from bucket b
-    return false
-  return place(0)`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-
-// Sort descending and place each number into the first bucket that still fits, backtracking on failure.
+// The bucket sum must be total / k. Place the largest numbers first and backtrack when a bucket cannot take one.
+// Buckets with equal sums are interchangeable, so only the first of them is tried.
 export function buildTrace({ nums, k }) {
   const total = nums.reduce((a, b) => a + b, 0)
-  const frames = [{ phase: 'start', buckets: [], sums: [], target: null, activeLine: L('total = sum of nums'), pythonLine: 2, message: 'The total must split evenly into k buckets.' }]
+  const sorted = [...nums].sort((a, b) => b - a)
+  const frames = [{ phase: 'start', index: null, sums: Array(k).fill(0), target: null, bucket: null, activeLine: L('const total = '), pythonLine: P('total = sum('), message: 'Split the numbers into k buckets with equal sums.' }]
   if (total % k !== 0) {
-    frames.push({ phase: 'done', buckets: [], sums: [], target: null, result: false, activeLine: L('if total is not divisible by k'), pythonLine: 4, message: `Total ${total} is not divisible by ${k}.` })
+    frames.push({ phase: 'done', index: null, sums: Array(k).fill(0), target: null, bucket: null, result: false, activeLine: L('if (total % k'), pythonLine: P('if total % k'), message: `Total ${total} does not split into ${k} equal parts.` })
     return { input: { nums, k }, result: false, frames }
   }
   const target = total / k
-  const sorted = [...nums].sort((a, b) => b - a)
+  if (sorted[0] > target) {
+    frames.push({ phase: 'done', index: null, sums: Array(k).fill(0), target, bucket: null, result: false, activeLine: L('if (sorted[0] > target)'), pythonLine: P('if ordered[0] > target'), message: `${sorted[0]} is larger than the target ${target}.` })
+    return { input: { nums, k }, result: false, frames }
+  }
   const sums = Array(k).fill(0)
-  const buckets = Array.from({ length: k }, () => [])
-  const pushFrame = (phase, activeLine, message) => frames.push({ phase, buckets: buckets.map(b => [...b]), sums: [...sums], target, activeLine, pythonLine: phase === 'place' ? 20 : 23, message })
-  function place(i) {
+  frames[0].target = target
+  const place = i => {
     if (i === sorted.length) return sums.every(s => s === target)
-    const seenEmpty = new Set()
     for (let b = 0; b < k; b++) {
-      if (sums[b] + sorted[i] > target || seenEmpty.has(sums[b])) continue
-      if (buckets[b].length === 0) seenEmpty.add(sums[b])
-      buckets[b].push(sorted[i]); sums[b] += sorted[i]
-      pushFrame('place', L('add nums[i] to bucket b'), `Place ${sorted[i]} in bucket ${b} (sum ${sums[b]} of ${target}).`)
+      if (sums[b] + sorted[i] > target) continue
+      if (b > 0 && sums[b] === sums[b - 1]) continue
+      sums[b] += sorted[i]
+      frames.push({ phase: 'place', index: i, sums: [...sums], target, bucket: b, activeLine: L('sums[b] += sorted[i]'), pythonLine: P('sums[b] += ordered[i]'), message: `Put ${sorted[i]} into bucket ${b + 1}: sum ${sums[b]} of ${target}.` })
       if (place(i + 1)) return true
-      buckets[b].pop(); sums[b] -= sorted[i]
-      pushFrame('undo', L('remove nums[i] from bucket b'), `Backtrack ${sorted[i]} from bucket ${b}.`)
+      sums[b] -= sorted[i]
+      frames.push({ phase: 'undo', index: i, sums: [...sums], target, bucket: b, activeLine: L('sums[b] -= sorted[i]'), pythonLine: P('sums[b] -= ordered[i]'), message: `Bucket ${b + 1} cannot finish with ${sorted[i]}: take it back out.` })
     }
     return false
   }
   const result = place(0)
-  frames.push({ phase: 'done', buckets: buckets.map(b => [...b]), sums: [...sums], target, result, activeLine: L('return place(0)'), pythonLine: 26, message: result ? `Each bucket sums to ${target}.` : 'No assignment works.' })
+  frames.push({ phase: 'done', index: null, sums: [...sums], target, bucket: null, result, activeLine: L('return place(0)'), pythonLine: P('return place(0)'), message: result ? 'Every bucket reached the target.' : 'No assignment reaches the target in every bucket.' })
   return { input: { nums, k }, result, frames }
 }
+
+const SOURCE = `function canPartitionKSubsets(nums, k) {
+  const total = nums.reduce((a, b) => a + b, 0)
+  if (total % k !== 0) return false
+  const target = total / k
+  const sorted = [...nums].sort((a, b) => b - a)
+  if (sorted[0] > target) return false
+  const sums = Array(k).fill(0)
+  const place = i => {
+    if (i === sorted.length) return sums.every(s => s === target)
+    for (let b = 0; b < k; b++) {
+      if (sums[b] + sorted[i] > target) continue
+      if (b > 0 && sums[b] === sums[b - 1]) continue
+      sums[b] += sorted[i]
+      if (place(i + 1)) return true
+      sums[b] -= sorted[i]
+    }
+    return false
+  }
+  return place(0)
+}`
+export const code = SOURCE.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def can_partition_k_subsets(nums, k):
     total = sum(nums)
     if total % k != 0:
         return False
     target = total // k
-    sums = [0] * k
     ordered = sorted(nums, reverse=True)
+    if ordered[0] > target:
+        return False
+    sums = [0] * k
 
     def place(i):
         if i == len(ordered):
             return all(s == target for s in sums)
-        tried_empty = False
         for b in range(k):
             if sums[b] + ordered[i] > target:
                 continue
-            if sums[b] == 0:
-                if tried_empty:
-                    continue
-                tried_empty = True
+            if b > 0 and sums[b] == sums[b - 1]:
+                continue
             sums[b] += ordered[i]
             if place(i + 1):
                 return True
@@ -82,3 +89,4 @@ export const python = `def can_partition_k_subsets(nums, k):
         return False
 
     return place(0)`
+const P = s => python.split('\n').findIndex(t => t.includes(s)) + 1

@@ -25,36 +25,39 @@ export function buildTrace(groupSizes) {
     buckets: [...open].map(([s, members]) => ({ size: s, members: [...members] })),
     groups: groups.map(g => [...g]),
   })
-  const frames = [{ phase: 'start', activeLine: L('set open to'), pythonLine: P('open_buckets = {}'), snapshot: snap(null, null, false), message: `Read ${groupSizes.length} people. Each person must join a bucket for their own size.` }]
+  const frames = [{ phase: 'start', activeLine: L('const open = new Map()'), pythonLine: P('open_buckets = {}'), snapshot: snap(null, null, false), message: `Read ${groupSizes.length} people. Each person must join a bucket for their own size.` }]
   groupSizes.forEach((size, person) => {
-    frames.push({ phase: 'read', activeLine: L('for each person'), pythonLine: P('for person, size'), snapshot: snap(person, size, false), message: `Person ${person} requires a group of ${size}.` })
+    frames.push({ phase: 'read', activeLine: L('for (let person = 0'), pythonLine: P('for person, size'), snapshot: snap(person, size, false), message: `Person ${person} requires a group of ${size}.` })
     if (!open.has(size)) {
       open.set(size, [])
-      frames.push({ phase: 'create', activeLine: L('if open has no'), pythonLine: P('if size not in'), snapshot: snap(person, size, false), message: `No bucket for size ${size} is open, so create an empty one.` })
+      frames.push({ phase: 'create', activeLine: L('if (!open.has(size))'), pythonLine: P('if size not in'), snapshot: snap(person, size, false), message: `No bucket for size ${size} is open, so create an empty one.` })
     }
     open.get(size).push(person)
-    frames.push({ phase: 'add', activeLine: L('add person to'), pythonLine: P('append(person)'), snapshot: snap(person, size, false), message: `Person ${person} joins the size-${size} bucket, which now holds ${open.get(size).length} of ${size}.` })
+    frames.push({ phase: 'add', activeLine: L('open.get(size).push(person)'), pythonLine: P('append(person)'), snapshot: snap(person, size, false), message: `Person ${person} joins the size-${size} bucket, which now holds ${open.get(size).length} of ${size}.` })
     if (open.get(size).length === size) {
       groups.push([...open.get(size)])
       open.delete(size)
-      frames.push({ phase: 'emit', activeLine: L('append bucket'), pythonLine: P('groups.append'), snapshot: snap(person, size, true), message: `The bucket is full, so it is finished as a group and the size-${size} bucket is cleared.` })
+      frames.push({ phase: 'emit', activeLine: L('groups.push([...open'), pythonLine: P('groups.append'), snapshot: snap(person, size, true), message: `The bucket is full, so it is finished as a group and the size-${size} bucket is cleared.` })
     }
   })
   frames.push({ phase: 'done', activeLine: L('return groups'), pythonLine: P('return groups'), snapshot: snap(null, null, false), message: `All people are placed. Return ${groups.length} groups.` })
   return { input: groupSizes, result: groups, frames }
 }
 
-export const code = `group people by required size:
-  set open to an empty map from size to bucket
-  set groups to an empty list
-  for each person with size s in order:
-    if open has no bucket for s:
-      create an empty bucket for s
-    add person to bucket s
-    if bucket s has s members:
-      append bucket s to groups
-      remove bucket s from open
-  return groups`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function groupThePeople(groupSizes) {
+  const open = new Map()
+  const groups = []
+  for (let person = 0; person < groupSizes.length; person++) {
+    const size = groupSizes[person]
+    if (!open.has(size)) open.set(size, [])
+    open.get(size).push(person)
+    if (open.get(size).length === size) {
+      groups.push([...open.get(size)])
+      open.delete(size)
+    }
+  }
+  return groups
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def group_the_people(group_sizes):

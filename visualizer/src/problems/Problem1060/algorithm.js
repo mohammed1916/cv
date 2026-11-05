@@ -1,14 +1,15 @@
-const CODE_TEXT = `kth missing element in a sorted array
-  set lo to 0 and hi to the length of nums
-  while lo is less than hi
-    set mid to the middle index between lo and hi
-    count missing(mid) as nums[mid] minus nums[0] minus mid
-    if missing(mid) is at least k then hi = mid
-    otherwise lo = mid plus 1
-  set prev to lo minus 1
-  return nums[prev] plus k minus missing(prev)`
-
-export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function missingElement(nums, k) {
+  const missingUpto = i => nums[i] - nums[0] - i
+  let lo = 0
+  let hi = nums.length
+  while (lo < hi) {
+    const mid = (lo + hi) >> 1
+    if (missingUpto(mid) >= k) hi = mid
+    else lo = mid + 1
+  }
+  const prev = lo - 1
+  return nums[prev] + k - missingUpto(prev)
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def missing_element(nums, k):
     def missing_upto(i):
@@ -64,23 +65,23 @@ export function buildTrace({ nums, k }) {
   let hi = nums.length
   const state = (extra = {}) => ({ nums, k, lo, hi, mid: -1, probes: probes.slice(), prev: -1, result: null, ...extra })
   const add = (phase, line, py, message, extra) => frames.push({ phase, activeLine: L(line), pythonLine: P(py), message, ...state(extra) })
-  add('start', 'set lo to 0', 'lo, hi = 0, len(nums)', `Search the first index whose missing count reaches ${k}; ${nums.length} indices to consider.`, {})
+  add('start', 'let lo = 0', 'lo, hi = 0, len(nums)', `Search the first index whose missing count reaches ${k}; ${nums.length} indices to consider.`, {})
   while (lo < hi) {
     const mid = (lo + hi) >> 1
     const missing = missingUpto(mid)
     probes.push({ index: mid, missing })
-    add('probe', 'set mid to the middle index', 'mid = (lo + hi) // 2', `Probe index ${mid} (value ${nums[mid]}): ${missing} missing before it.`, { mid, missing })
+    add('probe', 'const mid = (lo + hi)', 'mid = (lo + hi) // 2', `Probe index ${mid} (value ${nums[mid]}): ${missing} missing before it.`, { mid, missing })
     if (missing >= k) {
       hi = mid
-      add('left', 'if missing(mid) is at least k then hi = mid', 'hi = mid', `${missing} >= ${k}: the answer is at or before index ${mid}.`, { mid, missing })
+      add('left', 'if (missingUpto(mid) >= k) hi = mid', 'hi = mid', `${missing} >= ${k}: the answer is at or before index ${mid}.`, { mid, missing })
     } else {
       lo = mid + 1
-      add('right', 'otherwise lo = mid plus 1', 'lo = mid + 1', `${missing} < ${k}: the answer is after index ${mid}.`, { mid, missing })
+      add('right', 'else lo = mid + 1', 'lo = mid + 1', `${missing} < ${k}: the answer is after index ${mid}.`, { mid, missing })
     }
   }
   const prev = lo - 1
   const result = nums[prev] + k - missingUpto(prev)
-  add('answer', 'set prev to lo minus 1', 'prev = lo - 1', `Index ${prev} (value ${nums[prev]}) is the last index with fewer than ${k} missing numbers.`, { prev, lo, hi, mid: -1 })
-  add('done', 'return nums[prev] plus k minus missing(prev)', 'return nums[prev] + k - missing_upto(prev)', `Value ${nums[prev]} + ${k} - ${missingUpto(prev)} = ${result}.`, { prev, lo, hi, mid: -1, result })
+  add('answer', 'const prev = lo - 1', 'prev = lo - 1', `Index ${prev} (value ${nums[prev]}) is the last index with fewer than ${k} missing numbers.`, { prev, lo, hi, mid: -1 })
+  add('done', 'return nums[prev] + k', 'return nums[prev] + k - missing_upto(prev)', `Value ${nums[prev]} + ${k} - ${missingUpto(prev)} = ${result}.`, { prev, lo, hi, mid: -1, result })
   return { input: { nums, k }, result, frames }
 }

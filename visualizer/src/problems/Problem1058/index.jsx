@@ -22,9 +22,9 @@ const definition = {
   url: 'https://leetcode.com/problems/minimize-rounding-error-to-meet-target/description/',
   complexity: 'O(n log n) time for n prices, from sorting the round-up costs; O(n) space. Calculations use integer micro-units. The visualization caps input at 8 prices with up to 3 integer digits and 6 decimals; the official bounds are not verified.',
   examples: [
-    { label: 'Pick two round-ups', input: '{"prices":["0.700","2.800","4.900","0.000"],"target":8}' },
-    { label: 'Impossible', input: '{"prices":["1.500","2.500","3.500"],"target":10}' },
-    { label: 'Already integral', input: '{"prices":["1.000"],"target":1}' },
+    { label: 'Pick two round-ups', input: '{"prices":["0.400","3.250","1.600","0.000"],"target":6}' },
+    { label: 'Impossible', input: '{"prices":["1.200","2.300"],"target":6}' },
+    { label: 'Already integral', input: '{"prices":["2.000","0.500"],"target":2}' },
   ],
 }
 

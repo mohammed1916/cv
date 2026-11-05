@@ -29,7 +29,7 @@ export function buildTrace({ grid }) {
       }
     }
   }
-  frames.push({ pythonLine: P('fire = [[INF] * n for _ in range(m)]'), phase: 'fire', activeLine: L('fire time'), at: [-1, -1], lo: -1, hi: -1, t: -1, message: `Fire starts in ${queue.length} cell${queue.length === 1 ? '' : 's'}.` })
+  frames.push({ pythonLine: P('fire = [[INF] * n for _ in range(m)]'), phase: 'fire', activeLine: L('const fire = Array.from'), at: [-1, -1], lo: -1, hi: -1, t: -1, message: `Fire starts in ${queue.length} cell${queue.length === 1 ? '' : 's'}.` })
   for (let head = 0; head < queue.length; head++) {
     const [r, c] = queue[head]
     for (const [dr, dc] of MOVES) {
@@ -38,7 +38,7 @@ export function buildTrace({ grid }) {
       if (nr < 0 || nr >= m || nc < 0 || nc >= n || grid[nr][nc] !== 0 || fire[nr][nc] !== INF) continue
       fire[nr][nc] = fire[r][c] + 1
       queue.push([nr, nc])
-      frames.push({ pythonLine: P('fire[nr][nc] = fire[r][c] + 1'), phase: 'fire', activeLine: L('spread fire'), at: [nr, nc], lo: -1, hi: -1, t: -1, message: `Fire reaches (${nr}, ${nc}) at minute ${fire[nr][nc]}.` })
+      frames.push({ pythonLine: P('fire[nr][nc] = fire[r][c] + 1'), phase: 'fire', activeLine: L('fire[nr][nc] = fire[r][c] + 1;'), at: [nr, nc], lo: -1, hi: -1, t: -1, message: `Fire reaches (${nr}, ${nc}) at minute ${fire[nr][nc]}.` })
     }
   }
 
@@ -66,35 +66,87 @@ export function buildTrace({ grid }) {
   }
 
   if (!canWait(0)) {
-    frames.push({ pythonLine: P('return -1'), phase: 'done', activeLine: L('return -1'), at: [-1, -1], lo: -1, hi: -1, t: -1, message: 'The person cannot reach the safehouse even without waiting.' })
+    frames.push({ pythonLine: P('return -1'), phase: 'done', activeLine: L('if (!canWait(0)) return -1;'), at: [-1, -1], lo: -1, hi: -1, t: -1, message: 'The person cannot reach the safehouse even without waiting.' })
     return { input: { grid }, result: -1, frames }
   }
   if (canWait(m * n + 1)) {
-    frames.push({ pythonLine: P('return 10 ** 9'), phase: 'done', activeLine: L('return 10'), at: [-1, -1], lo: -1, hi: -1, t: -1, message: 'Any wait keeps the route safe, so the answer is 1000000000.' })
+    frames.push({ pythonLine: P('return 10 ** 9'), phase: 'done', activeLine: L('return 1e9;'), at: [-1, -1], lo: -1, hi: -1, t: -1, message: 'Any wait keeps the route safe, so the answer is 1000000000.' })
     return { input: { grid }, result: SAFE_WAIT, frames }
   }
   let lo = 0
   let hi = m * n
-  frames.push({ pythonLine: P('lo, hi = 0, m * n'), phase: 'search', activeLine: L('binary search'), at: [-1, -1], lo, hi, t: -1, message: `Search the largest wait in [${lo}, ${hi}].` })
+  frames.push({ pythonLine: P('lo, hi = 0, m * n'), phase: 'search', activeLine: L('let lo = 0'), at: [-1, -1], lo, hi, t: -1, message: `Search the largest wait in [${lo}, ${hi}].` })
   while (lo < hi) {
     const mid = Math.floor((lo + hi + 1) / 2)
     const ok = canWait(mid)
-    frames.push({ pythonLine: P('mid = (lo + hi + 1) // 2'), phase: 'search', activeLine: L('try the middle wait'), at: [-1, -1], lo, hi, t: mid, message: `Waiting ${mid} minutes ${ok ? 'works' : 'fails'}.` })
+    frames.push({ pythonLine: P('mid = (lo + hi + 1) // 2'), phase: 'search', activeLine: L('const mid = Math.floor'), at: [-1, -1], lo, hi, t: mid, verdict: ok, message: `Waiting ${mid} minutes ${ok ? 'works' : 'fails'}.` })
     if (ok) lo = mid
     else hi = mid - 1
   }
-  frames.push({ pythonLine: P('return lo'), phase: 'done', activeLine: L('return the largest'), at: [-1, -1], lo, hi: lo, t: -1, message: `The largest safe wait is ${lo} minutes.` })
+  frames.push({ pythonLine: P('return lo'), phase: 'done', activeLine: L('return lo;'), at: [-1, -1], lo, hi: lo, t: -1, message: `The largest safe wait is ${lo} minutes.` })
   return { input: { grid }, result: lo, frames }
 }
 
-export const code = `escape the spreading fire
-  run a breadth-first search from every fire cell to get the minute each cell burns
-  check(t) waits t minutes, then walks from the start
-  a cell is entered only if the person arrives before its fire, or at the same minute at the safehouse
-  if check(0) fails then return -1
-  if check(m * n + 1) passes then return 10 to the power 9
-  binary search the largest t with check(t) true
-  return that t`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function maxWait(grid) {
+  const m = grid.length;
+  const n = grid[0].length;
+  const INF = Infinity;
+  const fire = Array.from({ length: m }, () => Array(n).fill(INF));
+  const queue = [];
+  for (let r = 0; r < m; r++) {
+    for (let c = 0; c < n; c++) {
+      if (grid[r][c] === 1) {
+        fire[r][c] = 0;
+        queue.push([r, c]);
+      }
+    }
+  }
+  const dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+  for (let h = 0; h < queue.length; h++) {
+    const [r, c] = queue[h];
+    for (const [dr, dc] of dirs) {
+      const nr = r + dr;
+      const nc = c + dc;
+      if (nr >= 0 && nr < m && nc >= 0 && nc < n && grid[nr][nc] === 0 && fire[nr][nc] === INF) {
+        fire[nr][nc] = fire[r][c] + 1;
+        queue.push([nr, nc]);
+      }
+    }
+  }
+  const canWait = t => {
+    if (fire[0][0] <= t) return false;
+    const seen = Array.from({ length: m }, () => Array(n).fill(false));
+    seen[0][0] = true;
+    const walk = [[0, 0, 0]];
+    for (let h = 0; h < walk.length; h++) {
+      const [r, c, d] = walk[h];
+      if (r === m - 1 && c === n - 1) return true;
+      for (const [dr, dc] of dirs) {
+        const nr = r + dr;
+        const nc = c + dc;
+        if (nr >= 0 && nr < m && nc >= 0 && nc < n && grid[nr][nc] !== 2 && !seen[nr][nc]) {
+          const arrive = t + d + 1;
+          const ok = nr === m - 1 && nc === n - 1 ? arrive <= fire[nr][nc] : arrive < fire[nr][nc];
+          if (ok) {
+            seen[nr][nc] = true;
+            walk.push([nr, nc, d + 1]);
+          }
+        }
+      }
+    }
+    return false;
+  };
+  if (!canWait(0)) return -1;
+  if (canWait(m * n + 1)) return 1e9;
+  let lo = 0;
+  let hi = m * n;
+  while (lo < hi) {
+    const mid = Math.floor((lo + hi + 1) / 2);
+    if (canWait(mid)) lo = mid;
+    else hi = mid - 1;
+  }
+  return lo;
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `from collections import deque

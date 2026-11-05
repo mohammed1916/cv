@@ -1,26 +1,18 @@
-.bpv { margin: 0; padding: 12px; font-size: 14px; color: #1f2937; background: #fff; }
-.bpv__plane { display: block; width: 100%; max-width: 360px; height: auto; margin: 0 auto; }
-.bpv__grid line { stroke: #e2e8f0; stroke-width: 1; }
-.bpv__worker circle { fill: #dbeafe; stroke: #2563eb; stroke-width: 2; }
-.bpv__worker text, .bpv__bike text { font-size: 10px; font-weight: 700; fill: #1f2937; }
-.bpv__worker--done circle { fill: #bfdbfe; stroke: #1d4ed8; stroke-width: 3; }
-.bpv__worker--now circle { stroke: #b45309; }
-.bpv__bike rect { fill: #dcfce7; stroke: #15803d; stroke-width: 2; }
-.bpv__bike--used rect { fill: #86efac; stroke-width: 3; }
-.bpv__bike--now rect { stroke: #b45309; }
-.bpv__assigned { stroke: #15803d; stroke-width: 3; }
-.bpv__current { stroke: #b45309; stroke-width: 2; stroke-dasharray: 6 4; }
-.bpv__table { width: 100%; margin-top: 12px; border-collapse: collapse; font-size: 13px; }
-.bpv__table caption { text-align: left; font-weight: 600; margin-bottom: 4px; }
-.bpv__table th, .bpv__table td { padding: 4px 6px; border-bottom: 1px solid #e2e8f0; text-align: left; }
-.bpv__row--now { background: #fef3c7; font-weight: 700; }
-.bpv__status { margin: 10px 0 0; font-size: 12px; color: #64748b; }
-@media (prefers-color-scheme: dark) {
-  .bpv { color: #e5e7eb; background: #111827; }
-  .bpv__grid line { stroke: #334155; }
-  .bpv__worker circle { fill: #1e3a8a; }
-  .bpv__worker text, .bpv__bike text { fill: #e5e7eb; }
-  .bpv__bike rect { fill: #14532d; }
-  .bpv__row--now { background: #78350f; }
-  .bpv__table th, .bpv__table td { border-color: #334155; }
-}
+.bpv { margin:0; padding:12px; font-size:14px; color:var(--text); background:transparent; }
+.bpv__plane { display:block; width:100%; max-width:360px; height:auto; margin:0 auto; }
+.bpv__grid line { stroke:#e2e8f0; stroke-width:1; }
+.bpv__worker circle { fill:#dbeafe; stroke:#2563eb; stroke-width:2; }
+.bpv__worker text, .bpv__bike text { font-size:10px; font-weight:700; fill:#1f2937; }
+.bpv__worker--done circle { fill:#bfdbfe; stroke:#1d4ed8; stroke-width:3; }
+.bpv__worker--now circle { stroke:#b45309; }
+.bpv__bike rect { fill:#dcfce7; stroke:#15803d; stroke-width:2; }
+.bpv__bike--used rect { fill:#86efac; stroke-width:3; }
+.bpv__bike--now rect { stroke:#b45309; }
+.bpv__assigned { stroke:#15803d; stroke-width:3; }
+.bpv__current { stroke:#b45309; stroke-width:2; stroke-dasharray:6 4; }
+.bpv__table { width:100%; margin-top:12px; border-collapse:collapse; font-size:13px; }
+.bpv__table caption { text-align:left; font-weight:600; margin-bottom:4px; }
+.bpv__table th, .bpv__table td { padding:4px 6px; border-bottom:1px solid var(--border); text-align:left; }
+.bpv__row--now { background:var(--surface2); font-weight:700; }
+.bpv__status { margin:10px 0 0; font-size:12px; color:var(--text); }
+

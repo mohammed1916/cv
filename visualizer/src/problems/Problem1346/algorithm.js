@@ -1,67 +1,67 @@
 export const phases = [
-  { id: 'start', label: 'Start', description: 'Begin with an empty set of values already passed.' },
-  { id: 'probe', label: 'Probe', description: 'For the current value, look for its double, or its half when it is even, among the values already passed.' },
-  { id: 'store', label: 'Store', description: 'No partner found, so remember this value for later positions.' },
-  { id: 'found', label: 'Pair found', description: 'An earlier value is the double or half of the current one, so the answer is true.' },
-  { id: 'done', label: 'Complete', description: 'Every value has been checked without a match, so the answer is false.' },
+  { id: 'start', label: 'Start', description: 'Scan left to right, remembering the values already seen.' },
+  { id: 'check', label: 'Check against seen', description: 'For the current value x, look for an earlier value equal to 2x, or an earlier value equal to x / 2.' },
+  { id: 'found', label: 'Pair found', description: 'An earlier value and this value form a pair where one is double the other.' },
+  { id: 'remember', label: 'Remember', description: 'No pair yet; add x to the seen set and continue.' },
+  { id: 'done', label: 'Complete', description: 'Return whether a pair was found.' },
+]
+
+export const examples = [
+  { label: 'Double present', input: '[10,2,5,3]' },
+  { label: 'Halves only', input: '[3,1,7,11]' },
+  { label: 'Zero pair', input: '[0,0]' },
 ]
 
 export function parseInput(text) {
-  const input = JSON.parse(text)
-  if (!Array.isArray(input) || input.length < 2 || input.length > 500) throw new Error('Enter a JSON array of 2 to 500 integers.')
-  if (!input.every(v => Number.isInteger(v) && Math.abs(v) <= 1000)) throw new Error('Every value must be an integer from -1000 to 1000.')
-  return input
+  const values = JSON.parse(text)
+  if (!Array.isArray(values)) throw new Error('Use a JSON array of integers, such as [10,2,5,3].')
+  if (values.length < 2 || values.length > 500) throw new Error('The array needs 2 to 500 values.')
+  if (!values.every(Number.isInteger)) throw new Error('Every value must be an integer; 2.5 is not allowed.')
+  if (values.some(v => v < -1000 || v > 1000)) throw new Error('Every value must be from -1000 to 1000.')
+  return values
 }
-
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
-const at = (codeSub, pySub = codeSub) => ({ activeLine: L(codeSub), pythonLine: P(pySub) })
 
 export function buildTrace(values) {
-  const frames = []
   const seen = []
-  const snap = (index, extra = {}) => ({ values, index, seen: [...seen], ...extra })
-  frames.push({ phase: 'start', ...at('seen = empty set', 'seen = set()'), message: 'Nothing has been passed yet. A partner must sit at a different position, so each value only looks back.', snapshot: snap(null) })
-
-  let result = false
-  for (let index = 0; index < values.length && !result; index++) {
-    const value = values[index]
-    const doubleSeen = seen.includes(value * 2)
-    const halfSeen = value % 2 === 0 && seen.includes(value / 2)
-    const partner = doubleSeen ? value * 2 : halfSeen ? value / 2 : null
-    frames.push({
-      phase: 'probe', ...at('if 2 * v', 'if 2 * value'),
-      message: partner === null
-        ? `Value ${value}: neither ${value * 2} nor ${value % 2 === 0 ? value / 2 : 'a half (it is odd)'} has been passed.`
-        : `Value ${value}: ${partner} was passed earlier, and it is ${doubleSeen ? 'half' : 'double'} of ${value}.`,
-      snapshot: snap(index, { probe: value, partner }),
-    })
-    if (partner !== null) {
-      result = true
-      frames.push({ phase: 'found', ...at('return true', 'return True'), message: `Positions hold ${partner} and ${value}, so the answer is true.`, snapshot: snap(index, { probe: value, partner, result: true }) })
-      break
+  const snap = (index, extra = {}) => ({ index, seen: [...seen], ...extra })
+  const frames = [{ phase: 'start', activeLine: L('const seen = new Set()'), pythonLine: P('seen = set()'), snapshot: snap(-1),
+    message: 'Scan the values from left to right; each value is checked against those already seen.' }]
+  let found = false
+  for (let i = 0; i < values.length && !found; i++) {
+    const x = values[i]
+    frames.push({ phase: 'check', activeLine: L('for (const x of arr)'), pythonLine: P('for x in arr'), snapshot: snap(i, { x }),
+      message: `Check ${x}: is ${2 * x} seen (its double), or ${x % 2 === 0 ? `${x / 2} (its half)` : 'no half exists because it is odd'}?` })
+    if (seen.includes(2 * x) || (x % 2 === 0 && seen.includes(x / 2))) {
+      found = true
+      frames.push({ phase: 'found', activeLine: L('return true'), pythonLine: P('return True'), snapshot: snap(i, { x, found: true }),
+        message: `${x} pairs with an earlier value, so one value is double the other.` })
+    } else {
+      seen.push(x)
+      frames.push({ phase: 'remember', activeLine: L('seen.add(x)'), pythonLine: P('seen.add(x)'), snapshot: snap(i, { x }),
+        message: `No pair for ${x}; remember it.` })
     }
-    seen.push(value)
-    frames.push({ phase: 'store', ...at('add v', 'seen.add'), message: `Remember ${value} for the positions after it.`, snapshot: snap(index, { probe: value }) })
   }
-
-  if (!result) frames.push({ phase: 'done', ...at('return false', 'return False'), message: 'No value has a double or a half among the values before it, so the answer is false.', snapshot: snap(null, { result: false }) })
-  return { input: values, result, frames }
+  if (!found) frames.push({ phase: 'done', activeLine: L('return false'), pythonLine: P('return False'), snapshot: snap(-1, { found }),
+    message: 'No pair exists. Return false.', result: found })
+  return { input: values, result: found, frames }
 }
 
-export const code = `check double (values):
-  seen = empty set
-  for each value v in values:
-    if 2 * v is in seen, or v is even and v / 2 is in seen:
-      return true
-    add v to seen
-  return false`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function checkIfExist(arr) {
+  const seen = new Set()
+  for (const x of arr) {
+    if (seen.has(2 * x) || (x % 2 === 0 && seen.has(x / 2))) return true
+    seen.add(x)
+  }
+  return false
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
-export const python = `def check_if_double_exists(values):
+export const python = `def check_if_exist(arr):
     seen = set()
-    for value in values:
-        if 2 * value in seen or (value % 2 == 0 and value // 2 in seen):
+    for x in arr:
+        if 2 * x in seen or (x % 2 == 0 and x // 2 in seen):
             return True
-        seen.add(value)
+        seen.add(x)
     return False
 `
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

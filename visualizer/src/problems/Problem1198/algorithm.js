@@ -8,17 +8,19 @@ const MAX_ROWS = 6;
 const MAX_COLS = 10;
 const MAX_VALUE = 1000;
 
-const CODE_LINES = [
-  'FUNCTION smallestCommonElement(mat)',
-  '    pointers ← a zero for each row',
-  '    WHILE every pointer is inside its row',
-  '        values ← mat[r][pointers[r]] for each row r',
-  '        low ← minimum of values; high ← maximum of values',
-  '        IF low equals high THEN RETURN low',
-  '        FOR each row r',
-  '            IF mat[r][pointers[r]] < high THEN advance pointers[r] by one',
-  '    RETURN -1',
-];
+const CODE_LINES = `function smallestCommonElement(mat) {
+  const pointers = Array(mat.length).fill(0)
+  while (pointers.every((p, r) => p < mat[r].length)) {
+    const values = mat.map((row, r) => row[pointers[r]])
+    const low = Math.min(...values)
+    const high = Math.max(...values)
+    if (low === high) return low
+    mat.forEach((row, r) => {
+      if (row[pointers[r]] < high) pointers[r]++
+    })
+  }
+  return -1
+}`.split('\n');
 
 const PY_LINES = [
   'class Solution:',
@@ -83,7 +85,7 @@ export function buildTrace(input) {
   const pointers = Array.from({ length: rows }, () => 0);
   const frames = [];
   frames.push({
-    pythonLine: P('pointers = [0] * len(mat)'), phase: 'setup', activeLine: L('pointers ← a zero for each row'),
+    pythonLine: P('pointers = [0] * len(mat)'), phase: 'setup', activeLine: L('const pointers = Array(mat.length)'),
     pointers: [...pointers], values: null, low: null, high: null, advanced: [], answer: null,
     message: `${rows} row${rows === 1 ? '' : 's'} of ${cols} values, every pointer at its first value.`,
   });
@@ -94,7 +96,7 @@ export function buildTrace(input) {
     const low = Math.min(...values);
     const high = Math.max(...values);
     frames.push({
-      pythonLine: P('low, high = min(values)'), phase: 'compare', activeLine: L('low ← minimum of values'),
+      pythonLine: P('low, high = min(values)'), phase: 'compare', activeLine: L('const low = Math.min'),
       pointers: [...pointers], values, low, high, advanced: [], answer: null,
       message: `Heads are ${values.join(', ')}: low ${low}, high ${high}.`,
     });
@@ -102,7 +104,7 @@ export function buildTrace(input) {
       answer = low;
       found = true;
       frames.push({
-        pythonLine: P('return low'), phase: 'done', activeLine: L('IF low equals high THEN RETURN low'),
+        pythonLine: P('return low'), phase: 'done', activeLine: L('if (low === high) return low'),
         pointers: [...pointers], values, low, high, advanced: [], answer,
         message: `Every row shows ${low}, so ${low} is the smallest common value.`,
       });
@@ -116,14 +118,14 @@ export function buildTrace(input) {
       }
     }
     frames.push({
-      pythonLine: P('pointers[r] += 1'), phase: 'advance', activeLine: L('IF mat[r][pointers[r]] < high'),
+      pythonLine: P('pointers[r] += 1'), phase: 'advance', activeLine: L('if (row[pointers[r]] < high)'),
       pointers: [...pointers], values, low, high, advanced, answer: null,
       message: `Rows ${advanced.map((r) => r + 1).join(', ')} hold a value below ${high}, so they move on.`,
     });
   }
   if (!found) {
     frames.push({
-      pythonLine: P('return -1'), phase: 'done', activeLine: L('RETURN -1'),
+      pythonLine: P('return -1'), phase: 'done', activeLine: L('return -1'),
       pointers: [...pointers], values: null, low: null, high: null, advanced: [], answer: -1,
       message: 'A row ran out of values, so no common element exists.',
     });

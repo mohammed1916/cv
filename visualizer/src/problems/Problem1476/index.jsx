@@ -1,36 +1,26 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import RecurrenceGrid from '../../components/shared/RecurrenceGrid'
-import { buildTrace, parseInput, code, python } from './algorithm'
+import MatrixGrid from '../../components/shared/MatrixGrid'
+import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
-  phases: [
-    { id: 'start', label: 'Base', description: 'Keep the original rectangle.' },
-    { id: 'update', label: 'Update', description: 'Log a rectangle assignment without touching cells.' },
-    { id: 'scan', label: 'Scan log', description: 'Check the newest update first.' },
-    { id: 'answer', label: 'Answer', description: 'Return the newest covering value or the base value.' },
-    { id: 'done', label: 'Done', description: 'All operations processed.' },
-  ],
-  parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'Object with rectangle and ops (updateSubrectangle / getValue arrays)',
+  number: '1476', phases, parse: parseInput, build: buildTrace, code, python, examples,
+  inputLabel: 'Object with rectangle and ops (JSON)',
   url: 'https://leetcode.com/problems/subrectangle-queries/',
-  complexity: 'Update is O(1) and getValue is O(u) for u logged updates. The visualization caps the grid at 6 by 6 and ops at 20.',
-  examples: [
-    { label: 'Example', input: '{"rectangle":[[1,2,1],[4,3,4],[3,2,1],[1,1,1]],"ops":[["getValue",0,2],["updateSubrectangle",0,0,3,2,5],["getValue",0,2],["getValue",3,1],["updateSubrectangle",3,0,3,2,10],["getValue",3,1],["getValue",0,2]]}' },
-    { label: 'Base only', input: '{"rectangle":[[7,8],[9,10]],"ops":[["getValue",1,0],["getValue",0,1]]}' },
-  ],
+  complexity: 'O(r c) per update in this direct version, and O(1) per read.',
 }
 
-const sameCell = (step, r, c) => !!step.query && step.query[0] === r && step.query[1] === c
-
-export default function SubrectangleQueries() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <RecurrenceGrid label="Rectangle with logged updates" rowLabels={run.input.rectangle.map((_, r) => `row ${r}`)}
-      columnLabels={run.input.rectangle[0].map((_, c) => `col ${c}`)} row={step.row} column={step.column}
-      valueAt={(r, c) => step.grid[r][c]}
-      roleAt={(r, c) => sameCell(step, r, c) ? 'query' : step.region && r >= step.region[0] && r <= step.region[2] && c >= step.region[1] && c <= step.region[3] ? 'updated' : ''} />
-    <output aria-label="Query answer">{step.answer === null ? 'No answer yet' : `Answer ${step.answer}`}</output>
-  </>} renderReasoning={({ step }) => <>
-    <p>An update only appends its rectangle to a log. Each getValue walks the log from newest to oldest and stops at the first rectangle that covers the cell.</p>
-    <p>When no update covers the cell, the answer is the value from the original rectangle.</p>
+export default function SubrectangleVisualizer() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
+    const s = step.snapshot
+    const box = s.box ? Array.from({ length: s.box.r2 - s.box.r1 + 1 }, (_, i) => s.box.r1 + i).flatMap(r =>
+      Array.from({ length: s.box.c2 - s.box.c1 + 1 }, (_, j) => ({ row: r, col: s.box.c1 + j }))) : []
+    return <>
+      <MatrixGrid matrix={s.rect} label="Current rectangle (the updated block is highlighted)" highlightedCells={box}
+        activeCell={s.cell ? { row: s.cell.row, col: s.cell.col } : null} />
+      <p>Answers so far: <strong>{s.answers.length ? s.answers.map(a => (a === null ? 'null' : a)).join(', ') : 'none yet'}</strong></p>
+    </>
+  }} renderReasoning={({ step }) => <>
+    <p><strong>Apply in order:</strong> each update overwrites a block, and each read sees the latest write covering its cell.</p>
+    <p>{step.message}</p>
   </>} />
 }

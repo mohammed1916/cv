@@ -1,60 +1,31 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import IndexedSequence from '../../components/shared/IndexedSequence'
-
-const code = `build a table from rows and column names
-  table = empty list of records
-  for each row in the list
-    record = pair each column name with the row's value
-    append record to table
-  return table`
-const python = `import pandas as pd
-
-def create_dataframe(student_data):
-    return pd.DataFrame(student_data, columns=["student_id", "age"])`
-
-function parseInput(text) {
-  const input = JSON.parse(text)
-  if (!input || !Array.isArray(input.data) || !Array.isArray(input.columns)) {
-    throw new Error('Use { "columns": [...], "data": [[...], ...] }.')
-  }
-  if (input.data.some(row => !Array.isArray(row) || row.length !== input.columns.length)) {
-    throw new Error('Each row must have one value per column.')
-  }
-  return input
-}
-
-function buildTrace({ columns, data }) {
-  const out = []
-  const frames = [{ phase: 'start', activeLine: 1, message: `Columns: ${columns.join(', ')}.`, at: -1, out: [] }]
-  data.forEach((row, i) => {
-    const record = columns.map((c, j) => `${c}=${JSON.stringify(row[j])}`).join(' ')
-    out.push(record)
-    frames.push({ phase: 'step', activeLine: 4, message: `Row ${i} becomes ${record}.`, at: i, out: [...out] })
-  })
-  frames.push({ phase: 'done', activeLine: 5, message: `${data.length} row(s) in the table.`, at: -1, out: [...out] })
-  return { frames }
-}
+import RecordStateTable from '../../components/shared/RecordStateTable'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
-    { id: 'start', label: 'Columns', description: 'Read the column names.' },
-    { id: 'step', label: 'Row', description: 'Pair one row with its column names.' },
-    { id: 'done', label: 'Table', description: 'The table has every row.' },
+    { id: 'start', label: 'Columns', description: 'Name the two columns.' },
+    { id: 'row', label: 'Row', description: 'One row joins the table in its original position.' },
+    { id: 'done', label: 'Result', description: 'The table holds every row in order.' },
   ],
-  parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'Object with columns and data (rows)',
+  parse: parseInput, build: buildTrace,
+  code: code.map(c => c),
+  python,
+  inputLabel: 'JSON {"data": [[101, 18], [102, 22]]}',
   url: 'https://leetcode.com/problems/create-a-dataframe-from-list/',
-  complexity: 'O(rows * columns) to pair every value with its column name.',
+  complexity: 'O(n) rows. pandas builds the frame in one call; the visualization adds one row per step.',
   examples: [
-    { label: 'Two rows', input: '{"columns":["student_id","age"],"data":[[101,18],[102,20]]}' },
+    { label: 'Three students', input: '{"data":[[101,18],[102,22],[103,19]]}' },
+    { label: 'One student', input: '{"data":[[7,40]]}' },
   ],
 }
 
-export default function CreateDataFrameFromList() {
+export default function CreateDataframeFromList() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <IndexedSequence label="Table rows" length={step.out.length} valueAt={i => step.out[i]} active={step.at} />
+    <RecordStateTable label="DataFrame rows" columns={['student_id', 'age']}
+      rows={step.table} activeRow={step.at} />
+    <p role="status" style={{ color: 'var(--text)' }}>{step.message}</p>
   </>} renderReasoning={() => <>
-    <p>A table is a list of rows plus a list of names. The names give meaning to each position in a row.</p>
-    <p>Each row keeps its order, so the first list item is always the first table row.</p>
+    <p>The DataFrame is the list of rows with two named columns. Row order is kept, so the i-th row of the list is the i-th row of the frame.</p>
   </>} />
 }

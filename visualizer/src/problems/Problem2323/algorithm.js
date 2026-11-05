@@ -16,14 +16,16 @@ export function parseInput(text) {
   return { jobs, workers }
 }
 
-export const code = `FUNCTION minTime(jobs, workers)
-    sortedJobs ← jobs sorted ascending
-    sortedSpeeds ← workers sorted ascending
-    answer ← 0
-    FOR each position i
-        time ← ceil(sortedJobs[i] / sortedSpeeds[i])
-        answer ← max(answer, time)
-    RETURN answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minTime(jobs, workers) {
+  const sortedJobs = [...jobs].sort((a, b) => a - b);
+  const sortedSpeeds = [...workers].sort((a, b) => a - b);
+  let answer = 0;
+  for (let i = 0; i < sortedJobs.length; i++) {
+    const time = Math.ceil(sortedJobs[i] / sortedSpeeds[i]);
+    answer = Math.max(answer, time);
+  }
+  return answer;
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def min_time(jobs, workers):
     sorted_jobs = sorted(jobs)
@@ -56,7 +58,7 @@ export function buildTrace({ jobs, workers }) {
   const sortedJobs = [...jobs].sort((a, b) => a - b)
   const sortedSpeeds = [...workers].sort((a, b) => a - b)
   const frames = []
-  frames.push({ phase: 'sort', activeLine: L('sortedJobs ← jobs sorted'), pythonLine: P('sorted_jobs = sorted(jobs)'), message: `Jobs ${sortedJobs.join(', ')}; speeds ${sortedSpeeds.join(', ')}.`, index: -1, rows: [], answer: 0 })
+  frames.push({ phase: 'sort', activeLine: L('const sortedJobs = '), pythonLine: P('sorted_jobs = sorted(jobs)'), message: `Jobs ${sortedJobs.join(', ')}; speeds ${sortedSpeeds.join(', ')}.`, index: -1, rows: [], answer: 0 })
   const rows = []
   let answer = 0
   sortedJobs.forEach((job, i) => {
@@ -64,8 +66,8 @@ export function buildTrace({ jobs, workers }) {
     const time = Math.ceil(job / speed)
     answer = Math.max(answer, time)
     rows.push({ job, speed, time })
-    frames.push({ phase: 'pair', activeLine: L('time ← ceil'), pythonLine: P('time = (job + speed - 1)'), message: `Job ${job} with speed ${speed} takes ${time}. Largest so far ${answer}.`, index: i, rows: rows.slice(), answer })
+    frames.push({ phase: 'pair', activeLine: L('const time = Math.ceil'), pythonLine: P('time = (job + speed - 1)'), message: `Job ${job} with speed ${speed} takes ${time}. Largest so far ${answer}.`, index: i, rows: rows.slice(), answer })
   })
-  frames.push({ phase: 'done', activeLine: L('RETURN answer'), pythonLine: P('return answer'), message: `The minimum possible finish time is ${answer}.`, index: sortedJobs.length, rows: rows.slice(), answer })
+  frames.push({ phase: 'done', activeLine: L('return answer;'), pythonLine: P('return answer'), message: `The minimum possible finish time is ${answer}.`, index: sortedJobs.length, rows: rows.slice(), answer })
   return { input: { jobs, workers }, result: answer, frames }
 }

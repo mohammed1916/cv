@@ -16,11 +16,11 @@ const definition = {
   code,
   python,
   inputLabel: "JSON object: {\"s\": \"...\"} (3 to 60 lowercase letters for this view)",
-  url: "https://leetcode.com/problems/find-longest-special-substring-that-occurs-thrice-ii/",
-  complexity: "O(n) time and O(1) extra space. The visualization caps s at 60 characters; LeetCode allows up to 5 * 10^5.",
+  url: "https://leetcode.com/problems/find-longest-special-substring-that-occurs-thrice-i/",
+  complexity: "O(n) time and O(1) extra space for the 26-letter lists. The visualization caps s at 60 characters; the full problem allows up to 5 * 10^5.",
   examples: [
-    { label: "aaaa", input: "{\"s\": \"aaaa\"}" },
-    { label: "abcdef", input: "{\"s\": \"abcdef\"}" },
+    { label: "Long run", input: "{\"s\": \"bbbbbb\"}" },
+    { label: "Two runs", input: "{\"s\": \"xyzzyzz\"}" },
   ],
 }
 
@@ -36,7 +36,7 @@ export default function Problem2982() {
       <p>Result: <output>{JSON.stringify(run.result)}</output></p>
     </>}
     renderReasoning={({ step }) => <>
-      <p>{"The per-letter top-three lists are the same as in the first version. Only the input bound differs."}</p>
+      <p>{"A run of length r contributes lengths r, r-1 and r-2 as candidates. The third largest candidate per letter is the longest length that occurs three times."}</p>
       <p>{step.message}</p>
     </>}
   />

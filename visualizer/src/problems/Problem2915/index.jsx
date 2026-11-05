@@ -14,9 +14,9 @@ const definition = {
   url: 'https://leetcode.com/problems/length-of-the-longest-subsequence-that-sums-to-target/',
   complexity: 'O(n * target) time and O(target) space. The visualization caps nums at 12 entries and target at 30.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,3,4,5],"target":9}' },
-    { label: 'Example 2', input: '{"nums":[4,1,3,2,1,5],"target":7}' },
-    { label: 'Impossible', input: '{"nums":[1,1,5,4,5],"target":3}' },
+    { label: 'Three values', input: '{"nums":[2,3,5,4],"target":10}' },
+    { label: 'Repeats help', input: '{"nums":[1,3,3,1,2],"target":5}' },
+    { label: 'Impossible', input: '{"nums":[6,6,2],"target":4}' },
   ],
 }
 

@@ -1,38 +1,25 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import RecordStateTable from '../../components/shared/RecordStateTable'
+import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
+import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
-  number: '1318',
-  phases, parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'Object with a, b and c (JSON)',
+  number: '1318', phases, parse: parseInput, build: buildTrace, code, python, examples,
+  inputLabel: 'Integers a, b and c (JSON object)',
   url: 'https://leetcode.com/problems/minimum-flips-to-make-a-or-b-equal-to-c/',
-  complexity: 'O(1) for this fixed 10-bit scan: each bit position is inspected once.',
-  examples: [
-    { label: 'Mixed bits', input: '{"a":12,"b":5,"c":6}' },
-    { label: 'Both sources', input: '{"a":2,"b":6,"c":5}' },
-    { label: 'Clear only', input: '{"a":8,"b":8,"c":0}' },
-  ],
+  complexity: 'O(log max(a, b, c)) time and O(1) extra space, since only the bit positions are visited.',
 }
 
-const cell = { padding: '4px 10px', fontFamily: 'monospace', textAlign: 'center' }
-
-export default function MinimumFlips() {
+export default function FlipBitsVisualizer() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
-    const { bit, x, y, z, flips, rows } = step.snapshot
+    const s = step.snapshot
     return <>
-      <p style={{ fontFamily: 'monospace' }}>a = {run.input.a.toString(2).padStart(10, '0')} · b = {run.input.b.toString(2).padStart(10, '0')} · c = {run.input.c.toString(2).padStart(10, '0')}</p>
-      <table aria-label="Bit comparison" style={{ borderCollapse: 'collapse' }}>
-        <thead><tr><th style={cell}>bit</th><th style={cell}>a</th><th style={cell}>b</th><th style={cell}>c</th><th style={cell}>flips</th></tr></thead>
-        <tbody>
-          {rows.map(r => <tr key={r.bit}><td style={cell}>{r.bit}</td><td style={cell}>{r.a}</td><td style={cell}>{r.b}</td><td style={cell}>{r.c}</td><td style={cell}>{r.cost}</td></tr>)}
-          {bit !== null && <tr style={{ background: 'var(--surface2)', fontWeight: 600 }}><td style={cell}>{bit}</td><td style={cell}>{x}</td><td style={cell}>{y}</td><td style={cell}>{z}</td><td style={cell}>·</td></tr>}
-        </tbody>
-      </table>
-      <p>Running total: <strong>{flips}</strong></p>
+      <RecordStateTable label={`Bits of a = ${run.input.a}, b = ${run.input.b}, c = ${run.input.c}, from the lowest position`}
+        columns={['bit', 'a', 'b', 'c', 'flips']} rows={s.rows} activeRow={s.rows.length - 1} />
+      <StackLane title="Total flips" items={[String(s.flips)]} />
     </>
-  }} renderReasoning={() => <>
-    <p><strong>Per bit:</strong> the positions are independent, so each one contributes its own cost.</p>
-    <p><strong>Target 1:</strong> free only when a or b already has a 1; otherwise one flip is needed.</p>
-    <p><strong>Target 0:</strong> each 1 in a or b must be cleared, one flip each.</p>
+  }} renderReasoning={({ step }) => <>
+    <p><strong>Per bit:</strong> a OR b must match c at every position, so each bit position is decided on its own. A 0 in c needs both a and b to be 0 there; a 1 in c needs at least one of them to be 1.</p>
+    <p>{step.message}</p>
   </>} />
 }

@@ -1,10 +1,28 @@
-import authoredExamples0 from '../../config/examples/collection--1736.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import View from './View'
+import { buildTrace, parseInput, code, python, pythonLineMap, phases, examples, complexity } from './algorithm.js'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/advance.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '1736',
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  pythonLineMap,
+  phases,
+  examples,
+  complexity,
+  inputLabel: 'JSON string HH:MM where any digit may be ?',
+  url: 'https://leetcode.com/problems/latest-time-by-replacing-hidden-digits/',
+}
 
-const definition = { ...definitions[1736], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem1736Visualizer() {
+  return <AlgorithmWorkspace
+    definition={definition}
+    renderVisual={({ run, step }) => <View run={run} step={step} />}
+    renderReasoning={() => <>
+      <p>Fill the digits from the left, always taking the largest digit that still leaves a valid time.</p>
+      <p>The first hour digit depends on the second: 2 only when the hour can be 20 to 23.</p>
+    </>}
+  />
+}

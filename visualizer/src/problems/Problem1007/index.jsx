@@ -43,7 +43,7 @@ function cell(current, kind) {
   return {
     width: 44, height: 40, boxSizing: 'border-box', display: 'grid', placeItems: 'center',
     borderWidth: current ? 2 : 1, borderStyle: 'solid', borderColor: current ? 'var(--text)' : 'var(--border)',
-    background: kind === 'match' ? '#bbf7d0' : kind === 'rotate' ? 'var(--surface2)' : 'transparent',
-    color: '#1c1917',
+    background: kind === 'match' ? 'var(--surface2)' : kind === 'rotate' ? 'transparent' : 'transparent',
+    color: 'var(--text)',
   }
 }

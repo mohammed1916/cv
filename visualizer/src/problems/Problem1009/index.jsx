@@ -22,7 +22,7 @@ export default function ComplementBase10() {
     return <>
       <div aria-label="Binary digits" role="img" style={{ display: 'grid', gridTemplateColumns: `repeat(${cells.length}, 36px)`, gap: 4, fontFamily: 'monospace', width: 'max-content' }}>
         {cells.map((bit, i) => <div key={`b${i}`} data-bit={i} style={box(i === s.position)}>{bit}</div>)}
-        {cells.map((_, i) => <div key={`f${i}`} data-flip={i} style={box(i === s.position, i < s.flipped.length ? '#bbf7d0' : null)}>{s.flipped[i] ?? ''}</div>)}
+        {cells.map((_, i) => <div key={`f${i}`} data-flip={i} style={box(i === s.position, i < s.flipped.length ? 'var(--surface2)' : null)}>{s.flipped[i] ?? ''}</div>)}
       </div>
       <output aria-label="Complement so far">{`Written digits ${s.bits}; complement so far ${s.flipped || '-'}.`}</output>
     </>

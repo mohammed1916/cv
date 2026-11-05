@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/collecting-chocolates/',
   complexity: 'O(n^2) time with the running minimum per type and O(n) space. The visualization caps n at 12.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[20,1,15],"x":5}' },
-    { label: 'Example 2', input: '{"nums":[1,2,3],"x":4}' },
+    { label: 'One rotation pays', input: '{"nums":[7,3,9,4],"x":2}' },
+    { label: 'Three rotations pay', input: '{"nums":[5,5,1,6],"x":3}' },
   ],
 }
 

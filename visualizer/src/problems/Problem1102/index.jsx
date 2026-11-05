@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/path-with-maximum-minimum-value/',
   complexity: 'O(R·C·log(R·C)) time with a priority queue, and O(R·C) space for an R x C grid. The visualization caps the grid at 8 x 8 with values from 0 to 1000; the official bounds were not verified.',
   examples: [
-    { label: 'Example grid', input: '[[5,4,5],[1,2,6],[7,4,6]]' },
-    { label: 'Second grid', input: '[[2,2,1,2,2,2],[1,2,2,2,1,2]]' },
+    { label: 'Example grid', input: '[[4,8,3],[6,1,7],[9,2,5]]' },
+    { label: 'Second grid', input: '[[3,1,2,6],[5,4,1,3],[2,6,4,5]]' },
   ],
 }
 

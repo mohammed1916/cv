@@ -1,10 +1,28 @@
-import authoredExamples0 from '../../config/examples/collection--1706.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import View from './View'
+import { buildTrace, parseInput, code, python, pythonLineMap, phases, examples, complexity } from './algorithm.js'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/advance.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '1706',
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  pythonLineMap,
+  phases,
+  examples,
+  complexity,
+  inputLabel: 'JSON grid of 1 (moves right) and -1 (moves left) with equal row lengths',
+  url: 'https://leetcode.com/problems/where-will-the-ball-fall/',
+}
 
-const definition = { ...definitions[1706], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem1706Visualizer() {
+  return <AlgorithmWorkspace
+    definition={definition}
+    renderVisual={({ run, step }) => <View run={run} step={step} />}
+    renderReasoning={() => <>
+      <p>The ball follows the cell it is in: a 1 sends it one column right, a -1 one column left.</p>
+      <p>It gets stuck when the cell beside it sends it back, which forms a V, or when it reaches a wall.</p>
+    </>}
+  />
+}

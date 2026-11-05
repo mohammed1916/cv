@@ -6,8 +6,8 @@ const solve = nums => buildTrace({ nums }).result
 const PY = python.split('\n')
 
 test('2455 worked examples', () => {
-  assert.equal(solve([1, 3, 6, 10, 12, 15]), 9)
-  assert.equal(solve([1, 2, 4, 7, 11]), 0)
+  assert.equal(solve([2, 6, 9, 12, 18]), 12)
+  assert.equal(solve([1, 5, 7]), 0)
 })
 
 test('2455 a single qualifying value is its own average', () => {

@@ -37,11 +37,11 @@ const definition = {
   examples: [
   {
     "label": "Example 1",
-    "input": "{\"words\":[\"one.two.three\",\"four.five\",\"six\"],\"separator\":\".\"}"
+    "input": "{\"words\":[\"alpha-beta\",\"-gamma--\",\"delta\"],\"separator\":\"-\"}"
   },
   {
     "label": "Example 2",
-    "input": "{\"words\":[\"|||\"],\"separator\":\"|\"}"
+    "input": "{\"words\":[\"x||y\",\"|\"],\"separator\":\"|\"}"
   }
 ],
 }

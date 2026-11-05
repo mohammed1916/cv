@@ -1,13 +1,15 @@
-const CODE_TEXT = `confusing number n
-  set rotated to 0 and rest to n
-  while rest is greater than 0
-    take the last digit d of rest
-    if d cannot be rotated then return false
-    set rotated to rotated times 10 plus the rotation of d
-    remove the last digit from rest
-  return rotated is not equal to n`
-
-export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function confusingNumber(n) {
+  const flip = { 0: 0, 1: 1, 6: 9, 8: 8, 9: 6 }
+  let rotated = 0
+  let rest = n
+  while (rest > 0) {
+    const digit = rest % 10
+    if (!(digit in flip)) return false
+    rotated = rotated * 10 + flip[digit]
+    rest = Math.floor(rest / 10)
+  }
+  return rotated !== n
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def confusing_number(n):
     flip = {0: 0, 1: 1, 6: 9, 8: 8, 9: 6}
@@ -29,7 +31,7 @@ if __name__ == "__main__":
 const PY_LINES = python.split('\n')
 const L = text => {
   const index = code.findIndex(item => item.text.includes(text))
-  if (index < 0) throw new Error(`Missing pseudocode line: ${text}`)
+  if (index < 0) throw new Error(`Missing code line: ${text}`)
   return index + 1
 }
 const P = text => {
@@ -56,11 +58,11 @@ export function buildTrace(n) {
   let processed = 0
   const state = (extra = {}) => ({ digits, flipped: flipped.slice(), processed, rotated, current: -1, verdict: null, ...extra })
   const add = (phase, line, py, message, extra) => frames.push({ phase, activeLine: L(line), pythonLine: P(py), message, ...state(extra) })
-  add('start', 'set rotated to 0', 'rotated = 0', `Read ${n} from its last digit. Rotation table: 0→0, 1→1, 6→9, 8→8, 9→6.`, {})
+  add('start', 'let rotated = 0', 'rotated = 0', `Read ${n} from its last digit. Rotation table: 0→0, 1→1, 6→9, 8→8, 9→6.`, {})
   while (rest > 0) {
     const position = digits.length - 1 - processed
     const digit = rest % 10
-    add('digit', 'take the last digit', 'digit = rest % 10', `Last digit of ${rest} is ${digit}.`, { current: position })
+    add('digit', 'const digit = rest % 10', 'digit = rest % 10', `Last digit of ${rest} is ${digit}.`, { current: position })
     if (!(digit in FLIP)) {
       add('reject', 'return false', 'return False', `${digit} cannot be rotated into a digit, so ${n} is not confusing.`, { current: position, verdict: false })
       return { input: n, result: false, frames }
@@ -69,9 +71,9 @@ export function buildTrace(n) {
     rotated = rotated * 10 + FLIP[digit]
     rest = Math.floor(rest / 10)
     processed += 1
-    add('rotate', 'set rotated to rotated times 10', 'rotated = rotated * 10 + flip[digit]', `${digit} rotates to ${FLIP[digit]}; rotated so far is ${rotated}.`, { current: position })
+    add('rotate', 'rotated = rotated * 10', 'rotated = rotated * 10 + flip[digit]', `${digit} rotates to ${FLIP[digit]}; rotated so far is ${rotated}.`, { current: position })
   }
   const result = rotated !== n
-  add('compare', 'return rotated is not equal', 'return rotated != n', `Rotated value ${rotated} ${result ? 'differs from' : 'equals'} ${n}.`, { verdict: result })
+  add('compare', 'return rotated !== n', 'return rotated != n', `Rotated value ${rotated} ${result ? 'differs from' : 'equals'} ${n}.`, { verdict: result })
   return { input: n, result, frames }
 }

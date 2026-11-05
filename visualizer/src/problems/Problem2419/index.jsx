@@ -1,10 +1,36 @@
-import authoredExamples0 from '../../config/examples/collection--2419.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/windowBoundsBatch.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '2419',
+  phases: [
+    { id: 'setup', label: 'Top value', description: 'The largest AND of a subarray is the largest value itself.' },
+    { id: 'extend', label: 'Run', description: 'A value equal to the top extends the run.' },
+    { id: 'break', label: 'Break', description: 'A smaller value ends the run.' },
+    { id: 'done', label: 'Result', description: 'Return the longest run of the top value.' },
+  ],
+  parse: parseInput, build: buildTrace, code, python,
+  inputLabel: 'JSON {"nums": [1, 2, 3, 3, 2, 2]}',
+  url: 'https://leetcode.com/problems/longest-subarray-with-maximum-bitwise-and/',
+  complexity: 'O(n) time and O(1) extra space after finding the maximum.',
+  examples: [
+    { label: 'Example', input: '{"nums":[1,2,3,3,2,2]}' },
+    { label: 'Ties', input: '{"nums":[5,5,5]}' },
+  ],
+}
 
-const definition = { ...definitions[2419], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function LongestMaxAndSubarray() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const nums = run.input.nums
+    return <>
+      <IndexedSequence label="values" length={nums.length} valueAt={i => nums[i]} active={step.r}
+        roleAt={i => (step.l >= 0 && i === step.l ? 'l' : i === step.r ? 'r' : step.l >= 0 && i >= step.l && i <= step.r ? 'window' : '')} />
+      <output aria-label="Longest">{`longest run of the top value ${step.best}`}</output>
+      <p role="status">{step.message}</p>
+    </>
+  }} renderReasoning={() => <>
+    <p>A subarray's AND is never larger than its smallest element, and a single element achieves its own value. So the largest possible AND is the largest value in the array.</p>
+    <p>A subarray reaches that AND only when every element equals the largest value, so the answer is the longest run of that value.</p>
+  </>} />
+}

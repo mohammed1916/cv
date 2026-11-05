@@ -1,29 +1,31 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
     { id: 'start', label: 'Four cards', description: 'Start with the four numbers.' },
-    { id: 'try', label: 'Try a combination', description: 'Combine two numbers and recurse on the rest.' },
-    { id: 'done', label: 'Complete', description: 'Report the expression or failure.' },
+    { id: 'combine', label: 'Combine a pair', description: 'Pick two numbers and apply one operator; the result replaces them.' },
+    { id: 'check', label: 'Check result', description: 'When one number is left, it must be 24.' },
+    { id: 'done', label: 'Answer', description: 'True if any sequence of combinations reaches 24.' },
   ],
-  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Four cards (JSON array of integers 1–9)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Four cards (JSON array of four integers 1–9)',
   url: 'https://leetcode.com/problems/24-game/',
-  complexity: 'Constant for four cards: at most 6 pairs × 6 operations at each of 3 levels, about 4 000 combinations.',
+  complexity: 'O(1) time for four cards: at most a few hundred combinations are explored.',
   examples: [
-    { label: 'Classic', input: '[4,1,8,7]' },
-    { label: 'Impossible', input: '[1,2,1,2]' },
-    { label: 'Division', input: '[8,3,8,3]' },
+    { label: 'Reachable', input: '[3,3,8,8]' },
+    { label: 'Not reachable', input: '[1,1,1,2]' },
+    { label: 'Division', input: '[8,8,3,3]' },
   ],
 }
 
 export default function TwentyFourGame() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <StackLane title="Numbers left" items={step.values} note={step.phase === 'done' ? (step.result ? 'solved' : 'no solution') : 'combining'} />
-    <output aria-label="Expression">{step.phase === 'done' ? (step.found ? `${step.found} = 24` : 'No expression reaches 24') : `Trying ${step.attempt ?? '…'}`}</output>
+    <RecordStateTable label={`Numbers left (depth ${step.depth})`} columns={['slot', 'value']}
+      rows={step.pool.map((value, index) => ({ slot: index + 1, value: Number(value.toFixed(3)) }))} />
+    <output aria-label="Current combination">{step.combine ?? (step.phase === 'done' ? (step.result ? 'Reached 24' : 'Not reachable') : 'Choose a pair')}</output>
   </>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>
-    <p><strong>Completeness:</strong> any expression tree over four numbers has a pair of leaves combined first, so trying every pair and operation covers every possibility.</p>
+    <p><strong>Why pairs:</strong> any arithmetic expression over four numbers starts by combining two of them, so trying every pair and every operator covers all bracketings.</p>
   </>} />
 }

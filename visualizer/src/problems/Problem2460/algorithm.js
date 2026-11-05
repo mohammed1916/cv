@@ -11,31 +11,34 @@ export function buildTrace({ nums }) {
   const frames = []
   const work = [...nums]
   const n = work.length
-  frames.push({ pythonLine: PL('n = len(nums)'), phase: 'setup', activeLine: CL('n <-'), at: -1, state: [...work], message: 'Read the array in place from left to right.' })
+  frames.push({ pythonLine: PL('n = len(nums)'), phase: 'setup', activeLine: CL('const n = nums.length'), at: -1, state: [...work], message: 'Read the array in place from left to right.' })
   for (let i = 0; i < n - 1; i++) {
-    frames.push({ pythonLine: PL('if nums[i] == nums[i + 1]'), phase: 'compare', activeLine: CL('IF nums[i]'), at: i, state: [...work], message: `Compare ${work[i]} and ${work[i + 1]}.` })
+    frames.push({ pythonLine: PL('if nums[i] == nums[i + 1]'), phase: 'compare', activeLine: CL('if (nums[i] === nums[i + 1])'), at: i, state: [...work], message: `Compare ${work[i]} and ${work[i + 1]}.` })
     if (work[i] === work[i + 1]) {
       work[i] *= 2
-      frames.push({ pythonLine: PL('nums[i] *= 2'), phase: 'double', activeLine: CL('double nums[i]'), at: i, state: [...work], message: `Equal pair: double the left value to ${work[i]}.` })
+      frames.push({ pythonLine: PL('nums[i] *= 2'), phase: 'double', activeLine: CL('nums[i] *= 2'), at: i, state: [...work], message: `Equal pair: double the left value to ${work[i]}.` })
       work[i + 1] = 0
-      frames.push({ pythonLine: PL('nums[i + 1] = 0'), phase: 'zero', activeLine: CL('double nums[i]'), at: i + 1, state: [...work], message: 'Set the right value to zero.' })
+      frames.push({ pythonLine: PL('nums[i + 1] = 0'), phase: 'zero', activeLine: CL('nums[i] *= 2'), at: i + 1, state: [...work], message: 'Set the right value to zero.' })
     }
   }
   const nonzero = work.filter(x => x !== 0)
   const result = [...nonzero, ...Array(n - nonzero.length).fill(0)]
-  frames.push({ pythonLine: PL('nonzero = [x'), phase: 'shift', activeLine: CL('collect the nonzero'), at: -1, state: [...work], message: `Keep the ${nonzero.length} nonzero values in order.` })
-  frames.push({ pythonLine: PL('return nonzero'), phase: 'done', activeLine: CL('RETURN the result'), at: -1, state: result, message: 'Pad the end with zeros and return.' })
+  frames.push({ pythonLine: PL('nonzero = [x'), phase: 'shift', activeLine: CL('const nonzero'), at: -1, state: [...work], message: `Keep the ${nonzero.length} nonzero values in order.` })
+  frames.push({ pythonLine: PL('return nonzero'), phase: 'done', activeLine: CL('return [...nonzero'), at: -1, state: result, message: 'Pad the end with zeros and return.' })
   return { input: { nums }, result, frames }
 }
 
-export const code = `FUNCTION applyOperations(nums)
-  n <- length of nums
-  FOR i from 0 to n minus 2
-    IF nums[i] equals nums[i+1] THEN
-      double nums[i] and set nums[i+1] to 0
-  collect the nonzero values in order
-  pad with zeros at the end
-  RETURN the result`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function applyOperations(nums) {
+  const n = nums.length;
+  for (let i = 0; i < n - 1; i++) {
+    if (nums[i] === nums[i + 1]) {
+      nums[i] *= 2;
+      nums[i + 1] = 0;
+    }
+  }
+  const nonzero = nums.filter(x => x !== 0);
+  return [...nonzero, ...Array(n - nonzero.length).fill(0)];
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const CL = s => { const i = code.findIndex(c => c.text.includes(s)); if (i < 0) throw new Error(`missing ${s}`); return i + 1 }
 
 export const python = `def apply_operations(nums):

@@ -1,52 +1,57 @@
 export function parseInput(text) {
   const nums = JSON.parse(text)
-  if (!Array.isArray(nums) || nums.length < 2 || nums.length > 10000 || nums.some(v => !Number.isInteger(v) || v < 1 || v > nums.length)) throw new Error('Enter a JSON array of 2–10,000 integers, each from 1 to n.')
+  if (!Array.isArray(nums) || nums.length < 2 || nums.length > 10000 || nums.some(v => !Number.isInteger(v) || v < 1 || v > nums.length)) throw new Error('Enter a JSON array of 2–10,000 integers, each from 1 to the array length.')
   const counts = Array(nums.length + 1).fill(0)
   for (const v of nums) counts[v]++
-  if (!counts.some(c => c === 2) || counts.filter((c, i) => i && c === 0).length !== 1) throw new Error('The array must be a permutation of 1..n with exactly one value repeated and one missing.')
+  if (!counts.slice(1).includes(0)) throw new Error('No value is missing, so the array is not damaged.')
   return nums
 }
 
-// Count occurrences; the value seen twice is the duplicate, the value seen zero times is missing.
+// Count how often each value 1…n appears. The value seen twice is the duplicate; the value never seen is missing.
 export function buildTrace(nums) {
   const n = nums.length
   const counts = Array(n + 1).fill(0)
-  const frames = [{ phase: 'start', index: -1, counts: [...counts], activeLine: 2, message: 'Count how many times each value 1..n appears.' }]
-  let duplicate = null
-  for (let i = 0; i < n; i++) {
-    counts[nums[i]]++
-    if (counts[nums[i]] === 2) duplicate = nums[i]
-    frames.push({ phase: 'count', index: i, value: nums[i], counts: [...counts], duplicate, activeLine: 4, message: `Count ${nums[i]} → ${counts[nums[i]]}.` })
+  const frames = [{ phase: 'start', counts: [...counts], value: null, duplicate: null, missing: null, activeLine: L('const counts = Array'), pythonLine: P('count = [0] * (n + 1)'), message: `Make one counter for each value from 1 to ${n}.` }]
+  for (const v of nums) {
+    counts[v]++
+    frames.push({ phase: 'count', counts: [...counts], value: v, duplicate: null, missing: null, activeLine: L('counts[v]++'), pythonLine: P('count[v] += 1'), message: `Read ${v}: its counter is now ${counts[v]}.` })
   }
-  let missing = null
-  for (let v = 1; v <= n; v++) if (counts[v] === 0) missing = v
+  let duplicate = 0, missing = 0
+  for (let v = 1; v <= n; v++) {
+    if (counts[v] === 2) duplicate = v
+    if (counts[v] === 0) missing = v
+    frames.push({ phase: 'scan', counts: [...counts], value: v, duplicate: duplicate || null, missing: missing || null, activeLine: L('for (let v = 1'), pythonLine: P('for v in range(1, n + 1)'), message: `Value ${v} was seen ${counts[v]} time(s).` })
+  }
   const result = [duplicate, missing]
-  frames.push({ phase: 'done', index: n, counts: [...counts], duplicate, missing, result, activeLine: 7, message: `Duplicate ${duplicate}, missing ${missing}.` })
+  frames.push({ phase: 'done', counts: [...counts], value: null, duplicate, missing, result, activeLine: L('return [duplicate, missing]'), pythonLine: P('return [duplicate, missing]'), message: `Duplicate ${duplicate}, missing ${missing}.` })
   return { input: nums, result, frames }
 }
 
-export const code = `count[1..n] = 0; duplicate = none
-for each value in nums:
-  increase count[value] by one
-  if count[value] has just become 2, record value as duplicate
-find the slot in 1..n whose count is still zero
-return [duplicate, missing slot]`.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-// The sequence-family trace uses activeLine 1 (setup), 4 (per-value update), 3 (missing slot search), 5 (return).
-export const LINE_MAP = { 1: 1, 3: 5, 5: 6 }
-
-export function familyLine(frame) {
-  if (frame.phase === 'update') return frame.message.endsWith('appeared 2 time(s).') ? 4 : 3
-  return LINE_MAP[frame.activeLine] ?? frame.activeLine
-}
+const SOURCE = `function findErrorNums(nums) {
+  const n = nums.length
+  const counts = Array(n + 1).fill(0)
+  for (const v of nums) counts[v]++
+  let duplicate = 0
+  let missing = 0
+  for (let v = 1; v <= n; v++) {
+    if (counts[v] === 2) duplicate = v
+    if (counts[v] === 0) missing = v
+  }
+  return [duplicate, missing]
+}`
+export const code = SOURCE.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def find_error_nums(nums):
     n = len(nums)
     count = [0] * (n + 1)
-    duplicate = None
-    for value in nums:
-        count[value] += 1
-        if count[value] == 2:
-            duplicate = value
-    missing = next(slot for slot in range(1, n + 1) if count[slot] == 0)
+    for v in nums:
+        count[v] += 1
+    duplicate = missing = 0
+    for v in range(1, n + 1):
+        if count[v] == 2:
+            duplicate = v
+        if count[v] == 0:
+            missing = v
     return [duplicate, missing]`
+const P = s => python.split('\n').findIndex(t => t.includes(s)) + 1

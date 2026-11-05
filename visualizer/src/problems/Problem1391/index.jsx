@@ -1,24 +1,26 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import GraphTraversalView from '../../components/shared/GraphTraversalView'
-import { buildTrace, parseInput, code, python, pythonLineMap, examples } from './algorithm'
+import MatrixGrid from '../../components/shared/MatrixGrid'
+import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
+import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
-  phases: [
-    { id: 'start', label: 'Start', description: 'Begin at the top-left cell.' },
-    { id: 'search', label: 'Search', description: 'Move only to neighbours whose street opens back toward this cell.' },
-    { id: 'done', label: 'Result', description: 'Report whether the bottom-right cell was reached.' },
-  ],
-  parse: parseInput, build: buildTrace, code, python, pythonLineMap,
-  inputLabel: 'Grid (JSON object with grid, e.g. {"grid":[[2,4,3],[6,5,2]]})',
+  number: '1391', phases, parse: parseInput, build: buildTrace, code, python, examples,
+  inputLabel: 'Object with a grid of street types 1 to 6 (JSON)',
   url: 'https://leetcode.com/problems/check-if-there-is-a-valid-path-in-a-grid/',
-  complexity: 'O(m * n) time and space for an m x n grid. The visualization caps each side at 12.',
-  examples,
+  complexity: 'O(m n) time and O(m n) space, since each cell is queued at most once. The visualization caps the grid at 8 by 8.',
 }
 
-export default function CheckValidPathInGrid() {
-  return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ run, step }) => <GraphTraversalView title="Street grid" frontierKind="stack"
-      grid={{ rows: run.input.grid.length, cols: run.input.grid[0].length, cells: run.input.grid.map(row => row.map(String)) }}
-      current={step.current} neighbour={step.neighbour} visited={step.visited} frontier={step.frontier} done={step.done} />}
-    renderReasoning={({ step }) => <p>{step.message}</p>} />
+export default function StreetPathVisualizer() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const s = step.snapshot
+    const seen = s.seen.map(k => { const [r, c] = k.split(',').map(Number); return { row: r, col: c } })
+    const active = s.cell ? { row: s.cell[0], col: s.cell[1] } : null
+    return <>
+      <MatrixGrid matrix={run.input.grid} label="Street types; visited cells are highlighted" highlightedCells={seen} activeCell={active} />
+      <StackLane title="Queue of cells to visit" items={s.queue} />
+    </>
+  }} renderReasoning={({ step }) => <>
+    <p><strong>Two-way streets:</strong> a move is allowed only when the street on the current cell opens that way and the street on the neighbour opens back.</p>
+    <p>{step.message}</p>
+  </>} />
 }

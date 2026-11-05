@@ -1,10 +1,30 @@
-import authoredExamples0 from '../../config/examples/collection--2168.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import WindowView from './WindowView'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/capacityAndFrequencyBatch.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '2168',
+  phases,
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  inputLabel: 'Digit string, e.g. 1212',
+  url: 'https://leetcode.com/problems/unique-substrings-with-equal-digit-frequency/',
+  complexity: 'O(n^2) windows with a constant-size digit check each. The visualization caps the string at 12 digits.',
+  examples: [
+    { label: 'Alternating', input: '1212' },
+    { label: 'Mixed run', input: '12321' },
+    { label: 'Repeated digit', input: '1111' },
+  ],
+}
 
-const definition = { ...definitions[2168], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem2168Visualizer() {
+  return (
+    <AlgorithmWorkspace
+      definition={definition}
+      renderVisual={({ run, step }) => <WindowView run={run} step={step} />}
+      renderReasoning={({ step }) => <p>{step.message}</p>}
+    />
+  )
+}

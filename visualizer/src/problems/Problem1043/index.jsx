@@ -17,6 +17,11 @@ const definition = {
   ],
 }
 
+function blockStart_label(step) {
+  const { blockStart, blockEnd } = step.snapshot
+  return blockStart === null ? 'Choose a final block: l and r mark its first and last positions.' : `Final block window: l = ${blockStart}, r = ${blockEnd}.`
+}
+
 function Blocks({ run, step }) {
   const { arr } = run.input
   const { blockStart, blockEnd, i } = step.snapshot
@@ -26,12 +31,13 @@ function Blocks({ run, step }) {
       const inPrefix = index < i
       return <div key={index} data-index={index} style={{
         minWidth: 44, padding: '8px 6px', textAlign: 'center', fontFamily: 'monospace',
-        border: `${inBlock ? 2 : 1}px solid ${inBlock ? '#0891b2' : 'var(--border)'}`,
-        background: inBlock ? 'rgba(8,145,178,.18)' : inPrefix ? 'var(--surface2)' : 'transparent',
+        border: `${inBlock ? 2 : 1}px solid ${inBlock ? 'var(--primary)' : 'var(--border)'}`,
+        background: inBlock ? 'var(--surface2)' : inPrefix ? 'var(--surface2)' : 'transparent',
         color: 'var(--text)',
       }}>
         <div>{value}</div>
         <div style={{ fontSize: '.7rem', color: 'var(--text-dim)' }}>{index}</div>
+        <div style={{ fontSize: '.7rem', color: 'var(--primary)' }}>{blockStart === index ? 'l' : blockEnd === index ? 'r' : ''}</div>
       </div>
     })}
   </div>
@@ -43,6 +49,7 @@ export default function PartitionWorkspace() {
     renderVisual={({ run, step }) => <>
       <Blocks run={run} step={step} />
       <output aria-label="Best totals">{`best = [${step.snapshot.best.join(', ')}]`}</output>
+      <p>{blockStart_label(step)}</p>
     </>}
     renderReasoning={({ step }) => <>
       <p>{step.message}</p>

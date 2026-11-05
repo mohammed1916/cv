@@ -20,11 +20,11 @@ export function buildTrace({ arr, k }) {
   const snap = extra => ({ arr, k, ...extra })
   let single = 0
   let cur = 0
-  frames.push({ phase: 'start', activeLine: 2, message: `Start with ${k} cop${k === 1 ? 'y' : 'ies'} of the array. The empty run gives 0 so far.`, snapshot: snap({ index: -1, single, cur }) })
+  frames.push({ phase: 'start', activeLine: 2, pythonLine: 2, message: `Start with ${k} cop${k === 1 ? 'y' : 'ies'} of the array. The empty run gives 0 so far.`, snapshot: snap({ index: -1, single, cur }) })
   for (let i = 0; i < arr.length; i++) {
     cur = Math.max(0, cur + arr[i])
     single = Math.max(single, cur)
-    frames.push({ phase: 'one-copy', activeLine: 3, message: `Element ${arr[i]} at ${i}: the best run ending here is ${cur} (empty allowed), and the best inside one copy is ${single}.`, snapshot: snap({ index: i, single, cur }) })
+    frames.push({ phase: 'one-copy', activeLine: 5, pythonLine: 4, message: `Element ${arr[i]} at ${i}: the best run ending here is ${cur} (empty allowed), and the best inside one copy is ${single}.`, snapshot: snap({ index: i, single, cur }) })
   }
   const total = arr.reduce((a, b) => a + b, 0)
   let run = 0
@@ -33,32 +33,47 @@ export function buildTrace({ arr, k }) {
   run = 0
   let suffix = 0
   for (let i = arr.length - 1; i >= 0; i--) { run += arr[i]; suffix = Math.max(suffix, run) }
-  frames.push({ phase: 'totals', activeLine: 4, message: `One copy sums to ${total}. The best prefix is ${prefix} and the best suffix is ${suffix}, both allowed to be empty.`, snapshot: snap({ single, total, prefix, suffix }) })
+  frames.push({ phase: 'totals', activeLine: 8, pythonLine: 6, message: `One copy sums to ${total}. The best prefix is ${prefix} and the best suffix is ${suffix}, both allowed to be empty.`, snapshot: snap({ single, total, prefix, suffix }) })
 
   let result
   if (k === 1) {
     result = single
-    frames.push({ phase: 'combine', activeLine: 5, message: 'With one copy there is no boundary to cross, so the inside-copy answer is final.', snapshot: snap({ single, total, prefix, suffix, result }) })
+    frames.push({ phase: 'combine', activeLine: 21, pythonLine: 16, message: 'With one copy there is no boundary to cross, so the inside-copy answer is final.', snapshot: snap({ single, total, prefix, suffix, result }) })
   } else if (total > 0) {
     result = Math.max(single, prefix + suffix + (k - 2) * total)
-    frames.push({ phase: 'combine', activeLine: 6, message: `The total is positive, so every middle copy helps. Candidate: ${prefix} + ${suffix} + ${k - 2} × ${total} = ${prefix + suffix + (k - 2) * total}.`, snapshot: snap({ single, total, prefix, suffix, result: null }) })
+    frames.push({ phase: 'combine', activeLine: 22, pythonLine: 17, message: `The total is positive, so every middle copy helps. Candidate: ${prefix} + ${suffix} + ${k - 2} × ${total} = ${prefix + suffix + (k - 2) * total}.`, snapshot: snap({ single, total, prefix, suffix, result: null }) })
   } else {
     result = Math.max(single, prefix + suffix)
-    frames.push({ phase: 'combine', activeLine: 7, message: `The total is not positive, so only the two boundary pieces are combined: ${prefix} + ${suffix}.`, snapshot: snap({ single, total, prefix, suffix, result: null }) })
+    frames.push({ phase: 'combine', activeLine: 23, pythonLine: 19, message: `The total is not positive, so only the two boundary pieces are combined: ${prefix} + ${suffix}.`, snapshot: snap({ single, total, prefix, suffix, result: null }) })
   }
-  frames.push({ phase: 'done', activeLine: 7, message: `The largest candidate is ${result}.`, snapshot: snap({ single, total, prefix, suffix, result }) })
+  frames.push({ phase: 'done', activeLine: 24, pythonLine: 19, message: `The largest candidate is ${result}.`, snapshot: snap({ single, total, prefix, suffix, result }) })
   return { input: { arr, k }, result, frames }
 }
 
-export const code = [
-  'FUNCTION kConcatenationMax(arr, k)',
-  '    single ← 0, cur ← 0',
-  '    FOR EACH x IN arr: cur ← MAX(0, cur + x); single ← MAX(single, cur)',
-  '    total ← SUM(arr); prefix ← best prefix; suffix ← best suffix (both ≥ 0)',
-  '    IF k = 1 THEN RETURN single',
-  '    IF total > 0 THEN RETURN MAX(single, prefix + suffix + (k - 2) × total)',
-  '    RETURN MAX(single, prefix + suffix)',
-]
+export const code = `function kConcatenationMaxSum(arr, k) {
+  let single = 0
+  let cur = 0
+  for (const x of arr) {
+    cur = Math.max(0, cur + x)
+    single = Math.max(single, cur)
+  }
+  const total = arr.reduce((a, b) => a + b, 0)
+  let prefix = 0
+  let run = 0
+  for (const x of arr) {
+    run += x
+    prefix = Math.max(prefix, run)
+  }
+  let suffix = 0
+  run = 0
+  for (const x of [...arr].reverse()) {
+    run += x
+    suffix = Math.max(suffix, run)
+  }
+  if (k === 1) return single
+  if (total > 0) return Math.max(single, prefix + suffix + (k - 2) * total)
+  return Math.max(single, prefix + suffix)
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def k_concatenation_max(arr, k):
     single = cur = 0

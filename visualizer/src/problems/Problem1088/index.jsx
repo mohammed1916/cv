@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/confusing-number-ii/',
   complexity: 'O(V) time and O(depth) recursion space, where V is the number of valid digit strings up to n (at most about 5 per digit). The visualization caps n at 1000; the official bound was not verified.',
   examples: [
-    { label: 'n = 20', input: '20' },
-    { label: 'n = 100', input: '100' },
+    { label: 'n = 30', input: '30' },
+    { label: 'n = 250', input: '250' },
   ],
 }
 

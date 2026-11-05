@@ -4,37 +4,44 @@ export function parseInput(text) {
   return c
 }
 
+// Two pointers over the squares 0², 1², …, floor(√c)². The sum only grows when left moves right and
+// only shrinks when right moves left, so the pointers can never skip a valid pair.
 export function buildTrace(c) {
-  const frames = [{ phase: 'start', a: 0, b: null, c, activeLine: 2, message: `Look for a and b with a² + b² = ${c}.` }]
-  let found = null
-  for (let a = 0; a * a <= c && !found; a++) {
-    const rest = c - a * a
-    const b = Math.round(Math.sqrt(rest))
-    const isSquare = b * b === rest
-    frames.push({ phase: 'try', a, b, rest, isSquare, c, activeLine: 4, message: `a = ${a}: remainder ${rest} ${isSquare ? `= ${b}², a match` : 'is not a perfect square'}.` })
-    if (isSquare) found = [a, b]
+  const top = Math.floor(Math.sqrt(c))
+  let left = 0
+  let right = top
+  const frames = [{ phase: 'start', c, left, right, sum: null, result: null, activeLine: L('let left = 0'), pythonLine: P('left = 0'), message: `Put left on 0² and right on ${top}², the largest square not above ${c}.` }]
+  let result = false
+  while (left <= right) {
+    const sum = left * left + right * right
+    const hit = sum === c
+    frames.push({ phase: 'inspect', c, left, right, sum, result: null, activeLine: L('const sum'), pythonLine: P('total = '), message: `${left}² + ${right}² = ${sum} compared with ${c}.` })
+    if (hit) { result = true; break }
+    if (sum < c) {
+      left++
+      frames.push({ phase: 'update', c, left, right, sum, result: null, activeLine: L('left++'), pythonLine: P('left += 1'), message: `${sum} is below ${c}: move left up to ${left}², which increases the sum.` })
+    } else {
+      right--
+      frames.push({ phase: 'update', c, left, right, sum, result: null, activeLine: L('right--'), pythonLine: P('right -= 1'), message: `${sum} is above ${c}: move right down to ${right}², which decreases the sum.` })
+    }
   }
-  const result = found !== null
-  frames.push({ phase: 'done', a: found ? found[0] : null, b: found ? found[1] : null, c, result, activeLine: 7, message: result ? `${c} = ${found[0]}² + ${found[1]}².` : `${c} is not a sum of two squares.` })
+  frames.push({ phase: 'done', c, left, right, sum: null, result, activeLine: L(result ? 'return true' : 'return false'), pythonLine: P(result ? 'return True' : 'return False'), message: result ? `${c} = ${left}² + ${right}².` : `The pointers crossed without a match, so ${c} is not a sum of two squares.` })
   return { input: c, result, frames }
 }
 
-export const code = `set left to 0 and right to the integer square root of c
-while left is at most right
-  compute sum as left squared plus right squared
-  if sum equals c, return true
-  if sum is less than c, increase left by one
-  otherwise decrease right by one
-return false`.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-// The sequence-family trace reports activeLine 1 (setup), 3 (compare), 5 (return).
-export const LINE_MAP = { 1: 1, 3: 3, 5: 7 }
-
-// A true result returns from inside the loop, so the final frame highlights line 4.
-export function familyLine(frame) {
-  if (frame.phase === 'done' && frame.result === true) return 4
-  return LINE_MAP[frame.activeLine] ?? frame.activeLine
-}
+const SOURCE = `function judgeSquareSum(c) {
+  let left = 0
+  let right = Math.floor(Math.sqrt(c))
+  while (left <= right) {
+    const sum = left * left + right * right
+    if (sum === c) return true
+    if (sum < c) left++
+    else right--
+  }
+  return false
+}`
+export const code = SOURCE.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `from math import isqrt
 
@@ -50,3 +57,4 @@ def judge_square_sum(c):
         else:
             right -= 1
     return False`
+const P = s => python.split('\n').findIndex(t => t.includes(s)) + 1

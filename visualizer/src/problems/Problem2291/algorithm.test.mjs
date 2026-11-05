@@ -5,7 +5,7 @@ import { buildTrace, parseInput, code, python } from './algorithm.js'
 const solve = (present, future, budget) => buildTrace(parseInput(JSON.stringify({ present, future, budget }))).result
 
 test('2291 worked examples', () => {
-  assert.equal(solve([1, 2, 3], [4, 3, 2], 3), 4)
+  assert.equal(solve([2, 3, 4], [5, 4, 9], 6), 8)
   assert.equal(solve([5], [1], 5), 0)
   assert.equal(solve([2, 2], [5, 6], 4), 7)
   assert.equal(solve([1], [9], 0), 0)

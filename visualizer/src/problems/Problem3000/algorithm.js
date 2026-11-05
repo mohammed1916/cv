@@ -12,10 +12,11 @@ export const python = [
 ].join("\n");
 
 export const code = [
-  "best squared diagonal = -1, best area = 0",
-  "for each rectangle [length, width]",
-  "if its squared diagonal beats the best, or ties with a larger area, update the best",
-  "return the best area",
+  "let bestD2 = -1, bestArea = 0",
+  "for (const [length, width] of dimensions) {",
+  "  if (d2 > bestD2 || (d2 === bestD2 && area > bestArea)) { bestD2 = d2; bestArea = area }",
+  "}",
+  "return bestArea",
 ].map((text, index) => ({ line: index + 1, text }));
 
 function parseJson(text) {
@@ -51,6 +52,6 @@ export function buildTrace(input) {
       push({ phase: "update", activeLine: 3, pythonLine: 8, index, stats: { length, width, d2, area, bestD2, bestArea }, message: `New best: diagonal² ${d2}, area ${area}.` });
     }
   });
-  push({ phase: "done", activeLine: 4, pythonLine: 10, index: -1, stats: { bestD2, bestArea }, message: `Return ${bestArea}.` });
+  push({ phase: "done", activeLine: 5, pythonLine: 10, index: -1, stats: { bestD2, bestArea }, message: `Return ${bestArea}.` });
   return { input, result: bestArea, frames };
 }

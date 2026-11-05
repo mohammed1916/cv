@@ -1,10 +1,34 @@
-import authoredExamples0 from '../../config/examples/collection--2236.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import RootedTreeDiagram from '../../components/shared/RootedTreeDiagram'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/gardenAndProductBatch.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '2236',
+  phases: [
+    { id: 'setup', label: 'Tree', description: 'Read the root and its two children.' },
+    { id: 'compare', label: 'Compare', description: 'Compare the root with the sum of the children.' },
+  ],
+  parse: parseInput, build: buildTrace, code, python,
+  inputLabel: 'JSON {"root": 9, "left": 2, "right": 7}',
+  url: 'https://leetcode.com/problems/root-equals-sum-of-children/',
+  complexity: 'O(1) time and O(1) space for the three-node tree.',
+  examples: [
+    { label: 'Equal', input: '{"root":9,"left":2,"right":7}' },
+    { label: 'Not equal', input: '{"root":4,"left":1,"right":2}' },
+  ],
+}
 
-const definition = { ...definitions[2236], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function RootSumOfChildren() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <RootedTreeDiagram title="Three-node tree" root={step.tree} roles={step.roles} />
+    <ul aria-label="Node values">
+      <li>{`root ${run.input.root}`}</li>
+      <li>{`left ${run.input.left}`}</li>
+      <li>{`right ${run.input.right}`}</li>
+    </ul>
+    <output aria-label="Sum check">{step.sum === null ? 'children not added yet' : `${run.input.left} + ${run.input.right} = ${step.sum}`}</output>
+    <p role="status">{step.message}</p>
+  </>} renderReasoning={() => <>
+    <p>The check needs only the three values. Add the two children and compare the sum with the root.</p>
+  </>} />
+}

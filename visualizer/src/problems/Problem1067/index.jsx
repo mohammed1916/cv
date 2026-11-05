@@ -19,7 +19,7 @@ const definition = {
   url: 'https://leetcode.com/problems/digit-count-in-range/description/',
   complexity: 'O(log high) time and O(1) extra space: one pass over the decimal places of each bound. The visualization caps high at 99999; the official numeric bounds are not verified.',
   examples: [
-    { label: 'Digit 1 up to 13', input: '{"d":1,"low":1,"high":13}' },
+    { label: 'Digit 3 from 20 to 40', input: '{"d":3,"low":20,"high":40}' },
     { label: 'Zeros up to 105', input: '{"d":0,"low":1,"high":105}' },
     { label: 'Single value', input: '{"d":5,"low":5,"high":5}' },
   ],

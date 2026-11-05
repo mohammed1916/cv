@@ -26,34 +26,32 @@ export function buildTrace(input) {
   let forward = 0
   const snap = extra => ({ distance, lo, hi, total, forward, ...extra })
 
-  frames.push({ phase: 'start', activeLine: 2, message: `Stops ${start} and ${destination} are ordered as ${lo} and ${hi}. Edges ${lo} to ${hi - 1} form the forward gap.`, snapshot: snap({ edge: -1 }) })
+  frames.push({ phase: 'start', activeLine: 2, pythonLine: 2, message: `Stops ${start} and ${destination} are ordered as ${lo} and ${hi}. Edges ${lo} to ${hi - 1} form the forward gap.`, snapshot: snap({ edge: -1 }) })
   for (let i = 0; i < distance.length; i++) {
     total += distance[i]
-    frames.push({ phase: 'circle', activeLine: 6, message: `Edge ${i} has length ${distance[i]}. The loop total grows to ${total}.`, snapshot: snap({ edge: i }) })
+    frames.push({ phase: 'circle', activeLine: 6, pythonLine: 6, message: `Edge ${i} has length ${distance[i]}. The loop total grows to ${total}.`, snapshot: snap({ edge: i }) })
   }
   for (let i = lo; i < hi; i++) {
     forward += distance[i]
-    frames.push({ phase: 'forward', activeLine: 8, message: `Edge ${i} lies on the forward gap. The forward length is now ${forward}.`, snapshot: snap({ edge: i }) })
+    frames.push({ phase: 'forward', activeLine: 8, pythonLine: 8, message: `Edge ${i} lies on the forward gap. The forward length is now ${forward}.`, snapshot: snap({ edge: i }) })
   }
   const other = total - forward
-  frames.push({ phase: 'compare', activeLine: 9, message: `The other side is ${total} minus ${forward}, which is ${other}.`, snapshot: snap({ edge: -1, other }) })
+  frames.push({ phase: 'compare', activeLine: 9, pythonLine: 9, message: `The other side is ${total} minus ${forward}, which is ${other}.`, snapshot: snap({ edge: -1, other }) })
   const result = Math.min(forward, other)
-  frames.push({ phase: 'done', activeLine: 10, message: `The shorter side has length ${result}.`, snapshot: snap({ edge: -1, other, result }) })
+  frames.push({ phase: 'done', activeLine: 10, pythonLine: 10, message: `The shorter side has length ${result}.`, snapshot: snap({ edge: -1, other, result }) })
   return { input, result, frames }
 }
 
-export const code = [
-  'FUNCTION shortestBusRoute(distance, start, destination)',
-  '    lo ← MIN(start, destination)',
-  '    hi ← MAX(start, destination)',
-  '    total ← 0, forward ← 0',
-  '    FOR EACH length IN distance',
-  '        total ← total + length',
-  '    FOR i FROM lo TO hi - 1',
-  '        forward ← forward + distance[i]',
-  '    other ← total - forward',
-  '    RETURN MIN(forward, other)',
-]
+export const code = `function shortestBusRoute(distance, start, destination) {
+  const lo = Math.min(start, destination)
+  const hi = Math.max(start, destination)
+  let total = 0
+  let forward = 0
+  for (const length of distance) total += length
+  for (let i = lo; i < hi; i++) forward += distance[i]
+  const other = total - forward
+  return Math.min(forward, other)
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def shortest_bus_route(distance, start, destination):
     lo = min(start, destination)

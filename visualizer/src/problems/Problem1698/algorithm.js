@@ -1,54 +1,84 @@
-export const phases = [
-  { id: 'start', label: 'Start', description: 'The set of distinct substrings is empty.' },
-  { id: 'pick', label: 'Pick substring', description: 'Choose one start and end position; the substring is the text between them.' },
-  { id: 'record', label: 'Record text', description: 'Add the text to the set. A text already present is counted once only.' },
-  { id: 'done', label: 'Count', description: 'The set size is the number of distinct nonempty substrings.' },
+// Distinct substrings: sort the suffixes; each suffix adds its new prefixes, i.e. its length minus the LCP with the previous suffix.
+const JS_LINES = [
+  { text: 'const n = s.length', py: 'n = len(s)' },
+  { text: 'const starts = Array.from({ length: n }, (_, i) => i).sort((a, b) => (s.slice(a) < s.slice(b) ? -1 : 1))', py: 'starts = sorted' },
+  { text: 'let distinct = 0', py: 'distinct = 0' },
+  { text: 'for (let i = 0; i < n; i++) {', py: 'for i in range(n)' },
+  { text: 'distinct += n - starts[i]', py: 'distinct += n - starts[i]' },
+  { text: 'if (i > 0) distinct -= lcp(s, starts[i - 1], starts[i])', py: 'if i > 0' },
+  { text: '}', py: null },
+  { text: 'return distinct', py: 'return distinct' },
 ]
 
-// This visualizer enumerates every substring explicitly, so its input is kept short.
-const MAX_LENGTH = 30
+export const code = JS_LINES.map(({ text }, i) => ({ line: i + 1, text }))
+
+export const python = `def countDistinct(s):
+    n = len(s)
+    starts = sorted(range(n), key=lambda i: s[i:])
+    distinct = 0
+    for i in range(n):
+        distinct += n - starts[i]
+        if i > 0:
+            distinct -= lcp(s, starts[i - 1], starts[i])
+    return distinct
+
+def lcp(s, a, b):
+    k = 0
+    while a + k < len(s) and b + k < len(s) and s[a + k] == s[b + k]:
+        k += 1
+    return k
+`
+
+const PY = python.split('\n')
+const pyAt = needle => {
+  const index = PY.findIndex(line => line.includes(needle))
+  if (index < 0) throw new Error(`python line missing: ${needle}`)
+  return index + 1
+}
+export const pythonLineMap = Object.fromEntries(JS_LINES.map((line, i) => [i + 1, pyAt(line.py ?? 'return distinct')]))
+
+export const phases = [
+  { id: 'sort', label: 'Sort suffixes', description: 'Every suffix is listed; sorting puts shared beginnings next to each other.' },
+  { id: 'add', label: 'New prefixes', description: 'A suffix contributes its length, minus the prefix it shares with the suffix before it.' },
+  { id: 'done', label: 'Result', description: 'The sum of the new prefixes is the number of distinct substrings.' },
+]
+
+export const examples = [
+  { label: 'Repeated pair', input: '"abab"' },
+  { label: 'All distinct letters', input: '"abcd"' },
+  { label: 'One letter repeated', input: '"aaa"' },
+]
+
+export const complexity = 'O(n^2 log n) time for this sorted-suffix method on n characters (the visual caps n at 16). Space is O(n^2) for the suffix strings.'
 
 export function parseInput(text) {
-  let value
-  try { value = JSON.parse(text) } catch { throw new Error('Enter a JSON string such as "abab".') }
-  if (typeof value !== 'string' || !/^[a-z]+$/.test(value)) throw new Error('Use lowercase letters a to z only.')
-  if (value.length > MAX_LENGTH) throw new Error(`This visualizer accepts up to ${MAX_LENGTH} letters so every substring stays visible.`)
-  return value
+  const s = JSON.parse(text)
+  if (typeof s !== 'string' || s.length < 1 || s.length > 16) throw new Error('Use a JSON string of 1 to 16 lowercase letters (visual cap).')
+  if (!/^[a-z]+$/.test(s)) throw new Error('Use lowercase letters only.')
+  return s
+}
+
+function lcp(s, a, b) {
+  let k = 0
+  while (a + k < s.length && b + k < s.length && s[a + k] === s[b + k]) k++
+  return k
 }
 
 export function buildTrace(s) {
-  const seen = new Set()
-  const frames = [{ phase: 'start', activeLine: 2, message: `Start with an empty set for "${s}".`, snapshot: { start: -1, end: -1, text: '', isNew: false, count: 0 } }]
-  for (let start = 0; start < s.length; start++) {
-    for (let end = start + 1; end <= s.length; end++) {
-      const text = s.slice(start, end)
-      frames.push({ phase: 'pick', activeLine: 5, message: `Substring s[${start}..${end - 1}] is "${text}".`, snapshot: { start, end, text, isNew: null, count: seen.size } })
-      const isNew = !seen.has(text)
-      seen.add(text)
-      frames.push({ phase: 'record', activeLine: 6, message: isNew ? `"${text}" is new; the count rises to ${seen.size}.` : `"${text}" was already counted; the count stays ${seen.size}.`, snapshot: { start, end, text, isNew, count: seen.size } })
-    }
+  const n = s.length
+  const frames = []
+  const starts = Array.from({ length: n }, (_, i) => i).sort((a, b) => (s.slice(a) < s.slice(b) ? -1 : 1))
+  const rows = []
+  let distinct = 0
+  const snap = extra => ({ rows: [...rows], distinct, ...extra })
+  frames.push({ phase: 'sort', activeLine: 2, index: -1, message: `Suffixes sorted: ${starts.map(i => s.slice(i)).join(', ')}.`, snapshot: snap({}) })
+  for (let i = 0; i < n; i++) {
+    const shared = i > 0 ? lcp(s, starts[i - 1], starts[i]) : 0
+    const add = n - starts[i] - shared
+    distinct += add
+    rows.push({ start: starts[i], suffix: s.slice(starts[i]), shared, add })
+    frames.push({ phase: 'add', activeLine: 5, index: i, message: `"${s.slice(starts[i])}" shares ${shared} with the previous suffix, so adds ${add}.`, snapshot: snap({}) })
   }
-  const result = seen.size
-  frames.push({ phase: 'done', activeLine: 7, message: `Return ${result} distinct nonempty substrings.`, snapshot: { start: -1, end: -1, text: '', isNew: false, count: result, result } })
-  return { input: s, result, frames }
+  frames.push({ phase: 'done', activeLine: 8, index: -1, result: distinct, message: `${distinct} distinct substrings.`, snapshot: snap({ result: distinct }) })
+  return { input: s, result: distinct, frames }
 }
-
-export const python = `def count_distinct_substrings(s):
-    seen = set()
-    for start in range(len(s)):
-        for end in range(start + 1, len(s) + 1):
-            seen.add(s[start:end])
-    return len(seen)`
-
-export const code = [
-  'FUNCTION countDistinctSubstrings(s)',
-  '    seen = empty set',
-  '    FOR start = 0 TO length - 1',
-  '        FOR end = start + 1 TO length',
-  '            text = s from start up to end',
-  '            ADD text TO seen (repeats change nothing)',
-  '    RETURN size of seen',
-].map((text, index) => ({ line: index + 1, text }))
-
-// Pseudocode activeLine -> Python line.
-export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 5, 7: 6 }

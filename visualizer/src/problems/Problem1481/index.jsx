@@ -1,28 +1,25 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
-  phases,
-  number: '1481',
-  parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'Array and removals (JSON object with arr and k)',
+  number: '1481', phases, parse: parseInput, build: buildTrace, code, python, examples,
+  inputLabel: 'Object with arr and k (JSON)',
   url: 'https://leetcode.com/problems/least-number-of-unique-integers-after-k-removals/',
-  complexity: 'O(n log n) time because of the sort, and O(n) space for the counts. The visualization caps arr at 60 values.',
-  examples: [
-    { label: 'Sample', input: '{"arr":[7,7,8,9,9,9,10,10],"k":4}' },
-    { label: 'Ties', input: '{"arr":[1,2,3,4],"k":2}' },
-    { label: 'All removable', input: '{"arr":[5,5,5],"k":3}' },
-  ],
+  complexity: 'O(n log n) time for the sort of the distinct counts, and O(n) extra space.',
 }
 
-export default function LeastUniqueAfterRemovalsVisualizer() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <StackLane title="Values still present" items={step.scene.groups.filter(g => g.status !== 'removed').map(g => `${g.value}×${g.count}`)}
-      dropped={step.scene.groups.filter(g => g.status === 'removed').map(g => `${g.value}×${g.count}`)}
-      note={`${step.scene.remaining} removals left · ${step.scene.distinct} distinct`} />
-  </>} renderReasoning={({ step }) => <>
-    <p>Removing every copy of a value is the only way to lose a distinct value. Spending removals on the values with the fewest copies therefore removes the most distinct values.</p>
+export default function LeastUniqueVisualizer() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
+    const s = step.snapshot
+    const rows = s.counts.map(r => ({ ...r, cheapest: s.sorted ? (s.sorted[0] === r.count ? 'next' : '') : '' }))
+    return <>
+      <RecordStateTable label="Each value and how many copies it has" columns={['value', 'count']} rows={rows} activeRow={-1} />
+      <StackLane title="Removals left and distinct values" items={[`removals left ${s.left ?? s.k}`, `distinct values ${s.unique ?? s.counts.length}`]} />
+    </>
+  }} renderReasoning={({ step }) => <>
+    <p><strong>Remove whole values:</strong> removing a value means removing all of its copies, so the cheapest values to remove are those with the smallest counts.</p>
     <p>{step.message}</p>
   </>} />
 }

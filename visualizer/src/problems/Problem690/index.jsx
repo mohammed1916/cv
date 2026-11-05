@@ -1,44 +1,30 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import TreeOutline from '../../components/shared/TreeOutline'
-import TreeWalkView from '../../components/shared/TreeWalkView'
+import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
-    { id: 'start', label: 'Start', description: 'Begin at the chosen employee.' },
-    { id: 'visit', label: 'Add importance', description: 'Add this employee and push the reports.' },
-    { id: 'done', label: 'Complete', description: 'Return the total.' },
+    { id: 'start', label: 'Choose employee', description: 'Start the depth-first walk at the given id.' },
+    { id: 'visit', label: 'Count and descend', description: 'Add the importance, then visit each direct subordinate.' },
+    { id: 'done', label: 'Total', description: 'The walk has counted the whole subtree.' },
   ],
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Employees and id (JSON object)',
   url: 'https://leetcode.com/problems/employee-importance/',
-  complexity: 'O(n) time and O(n) space for the employee map and the stack.',
+  complexity: 'O(n) time for n employees and O(depth) recursion space.',
   examples: [
-    { label: 'Chain of three', input: '{"employees":[[1,5,[2,3]],[2,3,[]],[3,3,[]]],"id":1}' },
-    { label: 'Chain', input: '{"employees":[[1,2,[5]],[5,-3,[]]],"id":5}' },
+    { label: 'Two reports', input: '{"employees":[[1,5,[2,3]],[2,3,[]],[3,2,[]]],"id":1}' },
+    { label: 'Middle manager', input: '{"employees":[[10,4,[11]],[11,6,[12,13]],[12,1,[]],[13,2,[]]],"id":11}' },
+    { label: 'Leaf', input: '{"employees":[[7,9,[]]],"id":7}' },
   ],
 }
 
-// Reporting tree rooted at `id`; node ids are employee ids, so highlighting matches the walk.
-function toTree(employees, id) {
-  const byId = new Map(employees.map(e => [e[0], e]))
-  const build = current => {
-    const [, importance, subs] = byId.get(current)
-    return { id: current, value: `${current}:${importance}`, children: subs.map(build) }
-  }
-  return build(id)
-}
-
 export default function EmployeeImportance() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
-    const roles = Object.fromEntries(step.visited.map(id => [id, 'visited']))
-    if (step.current !== null && step.current !== undefined) roles[step.current] = 'active'
-    return <>
-      <TreeOutline title="Reporting tree (id:importance)" root={toTree(run.input.employees, run.input.id)} roles={roles} />
-      {step.treeWalk && <TreeWalkView {...step.treeWalk} />}
-      <output aria-label="Total importance">Total so far: {step.total} · visited {step.visited.join(', ') || '—'}</output>
-    </>
-  }} renderReasoning={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <RecordStateTable label={`Counted from ${run.input.id}`} columns={['employee', 'importance']}
+      rows={step.counted.map(c => ({ employee: c.id, importance: c.importance }))} activeRow={step.counted.length - 1} />
+    <output aria-label="Running total">{`Total so far: ${step.total}`}</output>
+  </>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>
-    <p><strong>Stack walk:</strong> each employee is visited once, so the walk adds each reachable importance exactly once.</p>
+    <p><strong>Why depth-first:</strong> an employee's total is their own importance plus their subordinates' totals, so the walk counts each subtree once.</p>
   </>} />
 }

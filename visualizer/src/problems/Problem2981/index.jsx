@@ -19,8 +19,8 @@ const definition = {
   url: "https://leetcode.com/problems/find-longest-special-substring-that-occurs-thrice-i/",
   complexity: "O(n) time and O(1) extra space for the 26-letter lists. The visualization caps s at 60 characters; LeetCode allows 3 to 50.",
   examples: [
-    { label: "aaaa", input: "{\"s\": \"aaaa\"}" },
-    { label: "abcdef", input: "{\"s\": \"abcdef\"}" },
+    { label: "Long run", input: "{\"s\": \"bbbbbb\"}" },
+    { label: "Two runs", input: "{\"s\": \"xyzzyzz\"}" },
   ],
 }
 

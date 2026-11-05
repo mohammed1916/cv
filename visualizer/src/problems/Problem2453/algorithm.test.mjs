@@ -6,8 +6,8 @@ const solve = (nums, space) => buildTrace({ nums, space }).result
 const PY = python.split('\n')
 
 test('2453 worked examples', () => {
-  assert.equal(solve([3, 7, 8, 1, 1, 5], 2), 1)
-  assert.equal(solve([1, 3, 5, 2, 4, 6], 2), 1)
+  assert.equal(solve([4, 9, 2, 11, 6], 3), 2)
+  assert.equal(solve([5, 8, 13], 4), 5)
   assert.equal(solve([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 1), 1)
 })
 

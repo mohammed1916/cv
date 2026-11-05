@@ -1,93 +1,80 @@
-// Teaching model written for this visualizer. The sample grids and wording are original.
 export const phases = [
-  { id: 'start', label: 'Start', description: 'Begin at the bottom-left cell.' },
-  { id: 'negative', label: 'Negative', description: 'A negative cell means every cell to its right in this row is negative too.' },
-  { id: 'positive', label: 'Move right', description: 'A non-negative cell means nothing above it in this column is negative.' },
-  { id: 'done', label: 'Result', description: 'The counted cells are the negative cells.' },
+  { id: 'start', label: 'Start', description: 'Begin at the bottom-left corner. Each row and column is sorted, so the boundary between negatives and non-negatives is a staircase.' },
+  { id: 'nonneg', label: 'Non-negative', description: 'The cell is not negative, so move one column right to find the first negative in this row.' },
+  { id: 'neg', label: 'Negative', description: 'Every cell from here to the end of this row is negative, so count them all and move up a row.' },
+  { id: 'done', label: 'Complete', description: 'The staircase has left the grid; return the total count.' },
 ]
 
-const CODE = [
-  'count negatives(grid):',
-  '  r = last row, c = 0, count = 0',
-  '  while r >= 0 and c < width:',
-  '    if grid[r][c] is negative:',
-  '      count += width - c',
-  '      r -= 1',
-  '    else:',
-  '      c += 1',
-  '  return count',
+export const examples = [
+  { label: 'Staircase', input: '[[4,3,2,-1],[3,2,1,-1],[1,1,-1,-2],[-1,-1,-2,-3]]' },
+  { label: 'Positive grid', input: '[[3,2],[1,0]]' },
+  { label: 'All negative', input: '[[-1,-2],[-3,-4]]' },
 ]
-const PYTHON = `def count_negatives(grid):
-    rows, cols = len(grid), len(grid[0])
-    r, c, count = rows - 1, 0, 0
-    while r >= 0 and c < cols:
-        if grid[r][c] < 0:
-            count += cols - c
-            r -= 1
-        else:
-            c += 1
-    return count`
-const PY = PYTHON.split('\n')
-const at = (lines, text) => {
-  const index = lines.findIndex(line => line.includes(text))
-  if (index < 0) throw new Error(`Missing solver line: ${text}`)
-  return index + 1
-}
-const L = text => at(CODE, text)
-const P = text => at(PY, text)
-
-export const code = CODE.map((text, index) => ({ line: index + 1, text }))
-export const python = PYTHON
 
 export function parseInput(text) {
   const grid = JSON.parse(text)
-  if (!Array.isArray(grid) || grid.length < 1 || grid.length > 8 || !grid.every(Array.isArray)) throw new Error('Enter a JSON array of 1 to 8 rows.')
-  const width = grid[0].length
-  if (width < 1 || width > 8 || grid.some(row => row.length !== width)) throw new Error('Every row needs the same length, from 1 to 8 values.')
-  if (grid.flat().some(v => !Number.isInteger(v) || v < -100 || v > 100)) throw new Error('Use whole numbers from -100 to 100.')
-  grid.forEach((row, r) => row.forEach((v, c) => {
-    if (c > 0 && row[c - 1] < v) throw new Error(`Row ${r + 1} must not increase from left to right.`)
-    if (r > 0 && grid[r - 1][c] < v) throw new Error(`Column ${c + 1} must not increase from top to bottom.`)
-  }))
+  if (!Array.isArray(grid) || grid.length < 1 || grid.length > 8) throw new Error('Use a JSON grid of 1 to 8 rows.')
+  const n = Array.isArray(grid[0]) ? grid[0].length : 0
+  if (n < 1 || n > 8) throw new Error('Each row must have 1 to 8 values.')
+  if (grid.some(row => !Array.isArray(row) || row.length !== n)) throw new Error('Every row must have the same length.')
+  if (grid.some(row => row.some(v => !Number.isInteger(v) || v < -100 || v > 100))) throw new Error('Every value must be an integer from -100 to 100.')
+  for (let r = 0; r < grid.length; r++) {
+    for (let c = 1; c < n; c++) if (grid[r][c] > grid[r][c - 1]) throw new Error('Each row must not increase from left to right.')
+  }
+  for (let r = 1; r < grid.length; r++) {
+    for (let c = 0; c < n; c++) if (grid[r][c] > grid[r - 1][c]) throw new Error('Each column must not increase from top to bottom.')
+  }
   return grid
 }
 
 export function buildTrace(grid) {
-  const rows = grid.length, width = grid[0].length
-  let r = rows - 1, c = 0, count = 0
-  const counted = []
-  const frames = []
-  const snap = (focus = null) => ({ grid, r, c, count, counted: counted.map(cell => [...cell]), focus })
-
-  frames.push({
-    phase: 'start', activeLine: L('r = last row'), pythonLine: P('r, c, count ='),
-    message: `Start at row ${rows}, column 1, the bottom-left cell. Rows and columns both decrease in one direction, so this walk visits each boundary once.`,
-    snapshot: snap(),
-  })
-  while (r >= 0 && c < width) {
+  const m = grid.length, n = grid[0].length
+  let r = m - 1, c = 0, count = 0
+  const snap = (extra = {}) => ({ grid, r, c, count, ...extra })
+  const frames = [{ phase: 'start', activeLine: L('let r = m - 1'), pythonLine: P('r, c = m - 1'), snapshot: snap(),
+    message: 'Start at the bottom-left corner and move up or right.' }]
+  while (r >= 0 && c < n) {
     if (grid[r][c] < 0) {
-      const add = width - c
-      for (let j = c; j < width; j++) counted.push([r, j])
-      count += add
-      frames.push({
-        phase: 'negative', activeLine: L('count += width - c'), pythonLine: P('count +='),
-        message: `Cell (${r + 1}, ${c + 1}) holds ${grid[r][c]}, which is negative. The rest of this row is negative too, so ${add} cell${add === 1 ? '' : 's'} are counted, and the walk moves up.`,
-        snapshot: snap([r, c]),
-      })
-      r -= 1
+      count += n - c
+      frames.push({ phase: 'neg', activeLine: L('count += n - c'), pythonLine: P('count += n - c'), snapshot: snap({ counted: n - c }),
+        message: `${grid[r][c]} at row ${r}, column ${c} is negative, so the ${n - c} cells to its right are negative too. Count ${count} so far.` })
+      r--
     } else {
-      frames.push({
-        phase: 'positive', activeLine: L('c += 1'), pythonLine: P('c += 1'),
-        message: `Cell (${r + 1}, ${c + 1}) holds ${grid[r][c]}, which is not negative. Every cell above it in this column is at least as large, so none is negative. The walk moves right.`,
-        snapshot: snap([r, c]),
-      })
-      c += 1
+      frames.push({ phase: 'nonneg', activeLine: L('c++'), pythonLine: P('c += 1'), snapshot: snap(),
+        message: `${grid[r][c]} at row ${r}, column ${c} is not negative, so move right.` })
+      c++
     }
   }
-  frames.push({
-    phase: 'done', activeLine: L('return count'), pythonLine: P('return count'),
-    message: `The walk has left the grid, and ${count} negative cell${count === 1 ? '' : 's'} were counted.`,
-    snapshot: snap(),
-  })
+  frames.push({ phase: 'done', activeLine: L('return count'), pythonLine: P('return count'), snapshot: snap({ r: -1, c: -1 }),
+    message: `Return ${count}: every negative has been counted once.`, result: count })
   return { input: grid, result: count, frames }
 }
+
+export const code = `function countNegatives(grid) {
+  const m = grid.length, n = grid[0].length
+  let r = m - 1, c = 0, count = 0
+  while (r >= 0 && c < n) {
+    if (grid[r][c] < 0) {
+      count += n - c
+      r--
+    } else {
+      c++
+    }
+  }
+  return count
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def count_negatives(grid):
+    m, n = len(grid), len(grid[0])
+    r, c = m - 1, 0
+    count = 0
+    while r >= 0 and c < n:
+        if grid[r][c] < 0:
+            count += n - c
+            r -= 1
+        else:
+            c += 1
+    return count
+`
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

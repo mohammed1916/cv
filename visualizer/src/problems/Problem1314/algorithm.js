@@ -1,71 +1,89 @@
 export const phases = [
-  { id: 'prefix', label: 'Build 2D prefix sums', description: 'Store the sum of the rectangle from the top-left corner to each cell. Any rectangle then costs four lookups.' },
-  { id: 'window', label: 'Block sum', description: 'For each cell, clip its k-neighbourhood to the grid and read that rectangle from the prefix table.' },
-  { id: 'done', label: 'Complete', description: 'Return the block sum for every cell.' },
+  { id: 'start', label: 'Start', description: 'Set up a prefix-sum table one row and one column larger than the matrix.' },
+  { id: 'prefix', label: 'Build prefix sums', description: 'Each prefix cell holds the sum of the matrix from the top-left corner down to that cell.' },
+  { id: 'block', label: 'Block sum', description: 'Clip the k-block to the matrix edges, then read its sum with four prefix lookups.' },
+  { id: 'done', label: 'Complete', description: 'Every cell holds the sum of its block.' },
+]
+
+export const examples = [
+  { label: 'Three by three, k = 1', input: '{"mat":[[1,2,3],[4,5,6],[7,8,9]],"k":1}' },
+  { label: 'Two by two, k = 2', input: '{"mat":[[1,2],[3,4]],"k":2}' },
 ]
 
 export function parseInput(text) {
-  const input = JSON.parse(text)
-  if (!input || !Array.isArray(input.mat) || !Number.isInteger(input.k)) throw new Error('Use an object such as {"mat": [[1, 2], [3, 4]], "k": 1}.')
-  const { mat, k } = input
-  if (mat.length < 1 || mat.length > 5 || mat.some(row => !Array.isArray(row) || row.length !== mat[0].length || row.length < 1 || row.length > 5)) throw new Error('mat is a rectangle of 1 to 5 rows and 1 to 5 columns.')
-  if (!mat.every(row => row.every(v => Number.isInteger(v) && v >= 0 && v <= 9))) throw new Error('Each cell is an integer from 0 to 9.')
-  if (k < 0 || k > 4) throw new Error('k is an integer from 0 to 4.')
-  return { mat, k }
+  const data = JSON.parse(text)
+  if (!data || typeof data !== 'object' || !Array.isArray(data.mat) || !Number.isInteger(data.k)) throw new Error('Use an object with mat and an integer k, such as {"mat":[[1,2],[3,4]],"k":1}.')
+  const m = data.mat.length
+  if (m < 1 || m > 8 || !Array.isArray(data.mat[0])) throw new Error('mat must have 1 to 8 rows.')
+  const n = data.mat[0].length
+  if (n < 1 || n > 8) throw new Error('mat must have 1 to 8 columns.')
+  if (data.mat.some(row => !Array.isArray(row) || row.length !== n)) throw new Error('Every row of mat must be a rectangle with the same length.')
+  if (data.mat.some(row => row.some(v => !Number.isInteger(v) || v < 0 || v > 9))) throw new Error('Every mat value must be an integer from 0 to 9 in this visualization.')
+  if (data.k < 1 || data.k > 8) throw new Error('k is an integer from 1 to 8 in this visualization.')
+  return { mat: data.mat, k: data.k }
 }
 
 export function buildTrace({ mat, k }) {
   const m = mat.length, n = mat[0].length
   const P = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0))
-  const frames = []
-  const snap = extra => ({ mat, P: P.map(row => [...row]), k, ...extra })
-  for (let r = 0; r < m; r++) {
-    for (let c = 0; c < n; c++) {
-      P[r + 1][c + 1] = mat[r][c] + P[r][c + 1] + P[r + 1][c] - P[r][c]
-      frames.push({ phase: 'prefix', activeLine: L('P[r + 1][c + 1]'), pythonLine: PY('P[r + 1][c + 1]'), snapshot: snap({ cell: [r, c], ans: null, rect: null }),
-        message: `Prefix at (${r + 1}, ${c + 1}) is ${mat[r][c]} plus the cells above and to the left, which is ${P[r + 1][c + 1]}.` })
-    }
-  }
-  const ans = Array.from({ length: m }, () => Array(n).fill(0))
+  const answer = Array.from({ length: m }, () => Array(n).fill(null))
+  const snap = (extra = {}) => ({ mat, P: P.map(row => [...row]), answer: answer.map(row => [...row]), k, ...extra })
+  const frames = [{ phase: 'start', activeLine: L('const P = Array.from'), pythonLine: P0('P = [[0]'), snapshot: snap(),
+    message: `Make a ${m + 1} by ${n + 1} table of zeros. Its first row and column stay 0.` }]
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
-      const r1 = Math.max(0, i - k), r2 = Math.min(m - 1, i + k)
-      const c1 = Math.max(0, j - k), c2 = Math.min(n - 1, j + k)
-      ans[i][j] = P[r2 + 1][c2 + 1] - P[r1][c2 + 1] - P[r2 + 1][c1] + P[r1][c1]
-      frames.push({ phase: 'window', activeLine: L('ans[i][j] ='), pythonLine: PY('ans[i][j] ='), snapshot: snap({ cell: [i, j], ans: ans.map(row => [...row]), rect: [r1, r2, c1, c2] }),
-        message: `Cell (${i}, ${j}) covers rows ${r1} to ${r2} and columns ${c1} to ${c2}. Four prefix lookups give ${ans[i][j]}.` })
+      P[i + 1][j + 1] = P[i][j + 1] + P[i + 1][j] - P[i][j] + mat[i][j]
+    }
+    frames.push({ phase: 'prefix', activeLine: L('P[i + 1][j + 1] ='), pythonLine: P0('P[i + 1][j + 1]'), snapshot: snap({ row: i }),
+      message: `Row ${i} of the prefix table is filled. The bottom-right value ${P[i + 1][n]} is the sum of rows 0 to ${i}.` })
+  }
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      const r1 = Math.max(0, i - k), c1 = Math.max(0, j - k)
+      const r2 = Math.min(m - 1, i + k), c2 = Math.min(n - 1, j + k)
+      const value = P[r2 + 1][c2 + 1] - P[r1][c2 + 1] - P[r2 + 1][c1] + P[r1][c1]
+      answer[i][j] = value
+      frames.push({ phase: 'block', activeLine: L('answer[i][j] ='), pythonLine: P0('answer[i][j]'), snapshot: snap({ cell: { row: i, col: j }, block: { r1, c1, r2, c2 }, value }),
+        message: `Cell (${i}, ${j}) uses rows ${r1} to ${r2} and columns ${c1} to ${c2}: sum ${value}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return ans'), pythonLine: PY('return ans'), snapshot: snap({ cell: null, ans: ans.map(row => [...row]), rect: null }),
-    message: 'Every cell now holds its block sum.' })
-  return { input: { mat, k }, result: ans, frames }
+  frames.push({ phase: 'done', activeLine: L('return answer'), pythonLine: P0('return answer'), snapshot: snap(),
+    message: 'Every block sum is ready.', result: answer })
+  return { input: { mat, k }, result: answer, frames }
 }
 
-export const code = `block sum(mat, k):
-  m = rows, n = columns
-  P = (m + 1) by (n + 1) table of zeros
-  for r from 0 to m - 1:
-    for c from 0 to n - 1:
-      P[r + 1][c + 1] = mat[r][c] + P[r][c + 1] + P[r + 1][c] - P[r][c]
-  for i from 0 to m - 1:
-    for j from 0 to n - 1:
-      r1 = max(0, i - k), r2 = min(m - 1, i + k)
-      c1 = max(0, j - k), c2 = min(n - 1, j + k)
-      ans[i][j] = P[r2 + 1][c2 + 1] - P[r1][c2 + 1] - P[r2 + 1][c1] + P[r1][c1]
-  return ans`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function matrixBlockSum(mat, k) {
+  const m = mat.length, n = mat[0].length
+  const P = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0))
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      P[i + 1][j + 1] = P[i][j + 1] + P[i + 1][j] - P[i][j] + mat[i][j]
+    }
+  }
+  const answer = Array.from({ length: m }, () => Array(n).fill(0))
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      const r1 = Math.max(0, i - k), c1 = Math.max(0, j - k)
+      const r2 = Math.min(m - 1, i + k), c2 = Math.min(n - 1, j + k)
+      answer[i][j] = P[r2 + 1][c2 + 1] - P[r1][c2 + 1] - P[r2 + 1][c1] + P[r1][c1]
+    }
+  }
+  return answer
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
-export const python = `def block_sum(mat, k):
+export const python = `def matrix_block_sum(mat, k):
     m, n = len(mat), len(mat[0])
     P = [[0] * (n + 1) for _ in range(m + 1)]
-    for r in range(m):
-        for c in range(n):
-            P[r + 1][c + 1] = mat[r][c] + P[r][c + 1] + P[r + 1][c] - P[r][c]
-    ans = [[0] * n for _ in range(m)]
     for i in range(m):
         for j in range(n):
-            r1, r2 = max(0, i - k), min(m - 1, i + k)
-            c1, c2 = max(0, j - k), min(n - 1, j + k)
-            ans[i][j] = P[r2 + 1][c2 + 1] - P[r1][c2 + 1] - P[r2 + 1][c1] + P[r1][c1]
-    return ans`
-const PY = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+            P[i + 1][j + 1] = P[i][j + 1] + P[i + 1][j] - P[i][j] + mat[i][j]
+    answer = [[0] * n for _ in range(m)]
+    for i in range(m):
+        for j in range(n):
+            r1, c1 = max(0, i - k), max(0, j - k)
+            r2, c2 = min(m - 1, i + k), min(n - 1, j + k)
+            answer[i][j] = P[r2 + 1][c2 + 1] - P[r1][c2 + 1] - P[r2 + 1][c1] + P[r1][c1]
+    return answer
+`
+const P0 = s => python.split('\n').findIndex(l => l.includes(s)) + 1

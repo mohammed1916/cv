@@ -1,49 +1,64 @@
 export const phases = [
-  { id: 'read', label: 'Read a pair', description: 'Take the next pair: the first number is how many times to repeat, the second is the value.' },
-  { id: 'expand', label: 'Append copies', description: 'Append the value to the output that many times, keeping the pairs in order.' },
-  { id: 'done', label: 'Complete', description: 'The output holds every expanded value in order.' },
+  { id: 'start', label: 'Start', description: 'Begin with an empty output list.' },
+  { id: 'pair', label: 'Read pair', description: 'The pair is [frequency, value]: the frequency comes first, then the value.' },
+  { id: 'emit', label: 'Emit copies', description: 'Append the value to the output once for each copy the frequency asks for.' },
+  { id: 'done', label: 'Complete', description: 'Every pair has been expanded, in order.' },
+]
+
+export const examples = [
+  { label: 'Two pairs', input: '[3,1,2,4]' },
+  { label: 'Mixed run lengths', input: '[2,5,1,7,3,9]' },
 ]
 
 export function parseInput(text) {
   const nums = JSON.parse(text)
-  if (!Array.isArray(nums) || nums.length < 2 || nums.length > 20 || nums.length % 2 !== 0) throw new Error('Use a JSON array of an even number of integers, 2 to 20 values long.')
+  if (!Array.isArray(nums) || nums.length < 2 || nums.length > 100 || nums.length % 2 !== 0) throw new Error('Use a JSON array with an even number of values, from 2 to 100 values, such as [1,2,3,4].')
   for (let i = 0; i < nums.length; i += 2) {
-    if (!Number.isInteger(nums[i]) || nums[i] < 1 || nums[i] > 6) throw new Error('Each frequency is an integer from 1 to 6.')
-    if (!Number.isInteger(nums[i + 1]) || nums[i + 1] < 1 || nums[i + 1] > 100) throw new Error('Each value is an integer from 1 to 100.')
+    if (!Number.isInteger(nums[i]) || nums[i] < 1 || nums[i] > 100) throw new Error(`Each frequency must be 1 to 100; ${nums[i]} is not valid.`)
+    if (!Number.isInteger(nums[i + 1]) || nums[i + 1] < 1 || nums[i + 1] > 100) throw new Error(`Each value must be 1 to 100; ${nums[i + 1]} is not valid.`)
   }
   return nums
 }
 
 export function buildTrace(nums) {
-  const frames = []
   const out = []
-  frames.push({ phase: 'read', activeLine: L('out = empty list'), pythonLine: P('out = []'), snapshot: { nums, pair: -1, out: [] },
-    message: `${nums.length / 2} pairs to expand. The output starts empty.` })
+  const snap = (pair, extra = {}) => ({ nums, pair, out: [...out], ...extra })
+  const frames = [{ phase: 'start', activeLine: L('const out = []'), pythonLine: P('out = []'), snapshot: snap(null),
+    message: `Read ${nums.length / 2} pairs from the list, left to right.` }]
   for (let i = 0; i < nums.length; i += 2) {
-    const freq = nums[i], value = nums[i + 1]
-    frames.push({ phase: 'read', activeLine: L('freq = nums[i]'), pythonLine: P('for i in range'), snapshot: { nums, pair: i, out: [...out] },
-      message: `Pair ${i / 2 + 1} is (${freq}, ${value}): repeat ${value} ${freq} time${freq === 1 ? '' : 's'}.` })
-    for (let k = 0; k < freq; k++) out.push(value)
-    frames.push({ phase: 'expand', activeLine: L('append value freq'), pythonLine: P('out.extend'), snapshot: { nums, pair: i, out: [...out] },
-      message: `Appended ${value} ${freq} time${freq === 1 ? '' : 's'}. The output now has ${out.length} values.` })
+    const freq = nums[i]
+    const val = nums[i + 1]
+    frames.push({ phase: 'pair', activeLine: L('const freq = nums[i]'), pythonLine: P('freq = nums[i]'), snapshot: snap(i, { freq, val }),
+      message: `Pair ${i / 2 + 1}: frequency ${freq}, value ${val}.` })
+    for (let k = 0; k < freq; k++) {
+      out.push(val)
+      frames.push({ phase: 'emit', activeLine: L('out.push(val)'), pythonLine: P('out.append(val)'), snapshot: snap(i, { freq, val, copy: k + 1 }),
+        message: `Append ${val} (copy ${k + 1} of ${freq}).` })
+    }
   }
-  frames.push({ phase: 'done', activeLine: L('return out'), pythonLine: P('return out'), snapshot: { nums, pair: -1, out: [...out] },
-    message: `Expanded list: ${out.join(', ')}.` })
+  frames.push({ phase: 'done', activeLine: L('return out'), pythonLine: P('return out'), snapshot: snap(null),
+    message: `Return the ${out.length}-value list.`, result: out })
   return { input: nums, result: out, frames }
 }
 
-export const code = `decompress(nums):
-  out = empty list
-  for i from 0 to length - 1 in steps of 2:
-    freq = nums[i]
-    value = nums[i + 1]
-    append value freq times to out
-  return out`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function decompressRLElist(nums) {
+  const out = []
+  for (let i = 0; i < nums.length; i += 2) {
+    const freq = nums[i]
+    const val = nums[i + 1]
+    for (let k = 0; k < freq; k++) out.push(val)
+  }
+  return out
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def decompress_rle_list(nums):
     out = []
     for i in range(0, len(nums), 2):
-        out.extend([nums[i + 1]] * nums[i])
-    return out`
+        freq = nums[i]
+        val = nums[i + 1]
+        for k in range(freq):
+            out.append(val)
+    return out
+`
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

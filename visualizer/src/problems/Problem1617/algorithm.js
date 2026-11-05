@@ -1,151 +1,142 @@
-export const phases = [
-  { id: 'start', label: 'Start', description: 'Read the tree and measure the distance between every pair of cities.' },
-  { id: 'enumerate', label: 'Choose a subset', description: 'Take the next subset of cities, written as a bitmask, with at least two cities.' },
-  { id: 'connect', label: 'Check connected', description: 'A subset is a subtree only when its cities are linked to each other without leaving the subset.' },
-  { id: 'count', label: 'Count by diameter', description: 'Add the subtree to the count for its largest pairwise distance.' },
-  { id: 'done', label: 'Result', description: 'Report how many subtrees have each diameter.' },
+// Count connected city subsets by their largest pairwise distance (the diameter of the subset).
+const JS_LINES = [
+  { text: 'const dist = allPairsDistances(n, edges)', py: 'dist = [bfs' },
+  { text: 'const counts = new Array(n - 1).fill(0)', py: 'counts = [0]' },
+  { text: 'for (let mask = 1; mask < 1 << n; mask++) {', py: 'for mask in range' },
+  { text: 'const nodes = members(mask)', py: 'nodes = [i' },
+  { text: 'if (nodes.length < 2 || !isConnected(nodes, mask)) continue', py: 'if len(nodes) < 2' },
+  { text: 'const d = Math.max(...nodes.flatMap(a => nodes.map(b => dist[a][b])))', py: 'd = max(' },
+  { text: 'counts[d - 1]++', py: 'counts[d - 1] += 1' },
+  { text: '}', py: null },
+  { text: 'return counts', py: 'return counts' },
 ]
 
-export function parseInput(text) {
-  const input = JSON.parse(text)
-  if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Use an object such as {"n": 4, "edges": [[1, 2], [2, 3], [2, 4]]}.')
-  const { n, edges } = input
-  if (!Number.isInteger(n) || n < 2 || n > 10) throw new Error('n must be an integer from 2 to 10 for this visualization.')
-  if (!Array.isArray(edges) || edges.length !== n - 1) throw new Error(`edges must list exactly ${n - 1} pairs for a tree on ${n} cities.`)
-  const parent = Array.from({ length: n }, (_, i) => i)
-  const find = x => (parent[x] === x ? x : (parent[x] = find(parent[x])))
-  for (const edge of edges) {
-    if (!Array.isArray(edge) || edge.length !== 2 || !edge.every(v => Number.isInteger(v) && v >= 1 && v <= n)) throw new Error('Each edge is a pair of city numbers from 1 to n.')
-    const [u, v] = edge
-    if (u === v) throw new Error('An edge cannot join a city to itself.')
-    const ru = find(u - 1), rv = find(v - 1)
-    if (ru === rv) throw new Error('The edges contain a cycle, so they do not form a tree.')
-    parent[ru] = rv
-  }
-  return { n, edges }
-}
+export const code = JS_LINES.map(({ text }, i) => ({ line: i + 1, text }))
 
-// Lines of the solver the story points at (1-based, matching `code` below).
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-const P = s => python.split('\n').findIndex(line => line.includes(s)) + 1
-
-function treeDistances(n, edges) {
-  const adj = Array.from({ length: n }, () => [])
-  for (const [u, v] of edges) { adj[u - 1].push(v - 1); adj[v - 1].push(u - 1) }
-  return Array.from({ length: n }, (_, source) => {
-    const dist = Array(n).fill(-1)
-    dist[source] = 0
-    const queue = [source]
-    for (let head = 0; head < queue.length; head++) {
-      const u = queue[head]
-      for (const w of adj[u]) if (dist[w] < 0) { dist[w] = dist[u] + 1; queue.push(w) }
-    }
-    return dist
-  })
-}
-
-function reachWithin(mask, members, adj) {
-  const seen = new Set([members[0]])
-  const stack = [members[0]]
-  while (stack.length) {
-    const u = stack.pop()
-    for (const w of adj[u]) if ((mask >> w) & 1 && !seen.has(w)) { seen.add(w); stack.push(w) }
-  }
-  return [...seen]
-}
-
-export function buildTrace({ n, edges }) {
-  const frames = []
-  const at = (pseudo, py) => ({ activeLine: L(pseudo), pythonLine: P(py) })
-  const adj = Array.from({ length: n }, () => [])
-  for (const [u, v] of edges) { adj[u - 1].push(v - 1); adj[v - 1].push(u - 1) }
-  const dist = treeDistances(n, edges)
-  const answer = Array(n - 1).fill(0)
-  let tried = 0
-
-  frames.push({ phase: 'start', ...at('dist = tree distances', 'dist = all_pairs'),
-    message: `Tree on ${n} cities. Every pair of cities has one path, and its length is the distance between them.`,
-    snapshot: { n, edges, mask: 0, members: [], reached: [], connected: null, diameter: null, answer: [...answer], tried } })
-
-  for (let mask = 1; mask < (1 << n); mask++) {
-    const members = []
-    for (let i = 0; i < n; i++) if ((mask >> i) & 1) members.push(i)
-    if (members.length < 2) continue
-    tried++
-    frames.push({ phase: 'enumerate', ...at('for mask from 1', 'for mask in range'),
-      message: `Subset ${members.map(i => i + 1).join(', ')} is the next one to test.`,
-      snapshot: { n, edges, mask, members, reached: [], connected: null, diameter: null, answer: [...answer], tried } })
-    const reached = reachWithin(mask, members, adj)
-    const connected = reached.length === members.length
-    frames.push({ phase: 'connect', ...at('not connected(members)', 'is_connected(mask'),
-      message: connected
-        ? `Starting from city ${members[0] + 1} the search reaches all ${members.length} cities inside the subset, so it is a subtree.`
-        : `Starting from city ${members[0] + 1} the search reaches only ${reached.length} of ${members.length} cities inside the subset, so it is not connected.`,
-      snapshot: { n, edges, mask, members, reached, connected, diameter: null, answer: [...answer], tried } })
-    if (!connected) continue
-    const diameter = Math.max(...members.flatMap(u => members.map(v => dist[u][v])))
-    answer[diameter - 1]++
-    frames.push({ phase: 'count', ...at('answer[d - 1] += 1', 'answer[d - 1] += 1'),
-      message: `This subtree has largest distance ${diameter}. Count ${answer[diameter - 1]} now sits at diameter ${diameter}.`,
-      snapshot: { n, edges, mask, members, reached, connected: true, diameter, answer: [...answer], tried } })
-  }
-
-  frames.push({ phase: 'done', ...at('return answer', 'return answer'),
-    message: `Counts for diameters 1 to ${n - 1}: [${answer.join(', ')}].`,
-    snapshot: { n, edges, mask: null, members: [], reached: [], connected: null, diameter: null, answer: [...answer], tried } })
-  return { input: { n, edges }, result: answer, frames }
-}
-
-export const code = `count subtrees (n, edges):
-  dist = tree distances between all pairs
-  answer = zeros of length n - 1
-  for mask from 1 to 2^n - 1:
-    members = cities in mask
-    if size(members) < 2: skip
-    if not connected(members): skip
-    d = largest dist among members
-    answer[d - 1] += 1
-  return answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-export const python = `def count_subtrees(n, edges):
+export const python = `def countSubgraphsForEachDiameter(n, edges):
     adj = [[] for _ in range(n)]
     for u, v in edges:
         adj[u - 1].append(v - 1)
         adj[v - 1].append(u - 1)
-    dist = all_pairs(n, adj)
-    answer = [0] * (n - 1)
+    dist = [bfs(adj, s) for s in range(n)]
+    counts = [0] * (n - 1)
     for mask in range(1, 1 << n):
-        members = [i for i in range(n) if mask >> i & 1]
-        if len(members) < 2:
+        nodes = [i for i in range(n) if mask >> i & 1]
+        if len(nodes) < 2 or not connected(nodes, mask, adj):
             continue
-        if not is_connected(mask, members, adj):
-            continue
-        d = max(dist[u][v] for u in members for v in members)
-        answer[d - 1] += 1
-    return answer
+        d = max(dist[a][b] for a in nodes for b in nodes)
+        counts[d - 1] += 1
+    return counts
 
-def all_pairs(n, adj):
-    result = []
-    for s in range(n):
-        d = [-1] * n
-        d[s] = 0
-        queue = [s]
-        for u in queue:
-            for w in adj[u]:
-                if d[w] < 0:
-                    d[w] = d[u] + 1
-                    queue.append(w)
-        result.append(d)
-    return result
+def bfs(adj, s):
+    d = [-1] * len(adj)
+    d[s] = 0
+    queue = [s]
+    for x in queue:
+        for y in adj[x]:
+            if d[y] < 0:
+                d[y] = d[x] + 1
+                queue.append(y)
+    return d
 
-def is_connected(mask, members, adj):
-    seen = {members[0]}
-    stack = [members[0]]
+def connected(nodes, mask, adj):
+    seen = {nodes[0]}
+    stack = [nodes[0]]
     while stack:
-        u = stack.pop()
-        for w in adj[u]:
-            if mask >> w & 1 and w not in seen:
-                seen.add(w)
-                stack.append(w)
-    return len(seen) == len(members)
+        x = stack.pop()
+        for y in adj[x]:
+            if mask >> y & 1 and y not in seen:
+                seen.add(y)
+                stack.append(y)
+    return len(seen) == len(nodes)
 `
+
+const PY = python.split('\n')
+const pyAt = needle => {
+  const index = PY.findIndex(line => line.includes(needle))
+  if (index < 0) throw new Error(`python line missing: ${needle}`)
+  return index + 1
+}
+export const pythonLineMap = Object.fromEntries(JS_LINES.map((line, i) => [i + 1, pyAt(line.py ?? 'return counts')]))
+
+export const phases = [
+  { id: 'start', label: 'Start', description: 'Compute the distance between every pair of cities in the tree.' },
+  { id: 'subset', label: 'Subset', description: 'A subset of cities counts only if it is connected inside the tree.' },
+  { id: 'count', label: 'Count', description: 'The largest distance inside the subset is its diameter; count it.' },
+  { id: 'done', label: 'Result', description: 'counts[d-1] holds the number of subsets whose diameter is d.' },
+]
+
+export const examples = [
+  { label: 'Path of four cities', input: '{"n":4,"edges":[[1,2],[2,3],[3,4]]}' },
+  { label: 'Two cities', input: '{"n":2,"edges":[[2,1]]}' },
+  { label: 'Branch at city one', input: '{"n":3,"edges":[[3,1],[1,2]]}' },
+]
+
+export const complexity = 'O(2^n * n^2) time for n cities, with n up to 15 in the statement. The visual caps n at 10 so every connected subset gets its own frame.'
+
+export function parseInput(text) {
+  const input = JSON.parse(text)
+  if (!input || typeof input !== 'object') throw new Error('Use an object with n and edges.')
+  const { n, edges } = input
+  if (!Number.isInteger(n) || n < 2 || n > 10) throw new Error('n is an integer from 2 to 10 (visual cap).')
+  if (!Array.isArray(edges) || edges.length !== n - 1) throw new Error('edges has exactly n-1 pairs.')
+  const parent = Array.from({ length: n + 1 }, (_, i) => i)
+  const find = x => (parent[x] === x ? x : (parent[x] = find(parent[x])))
+  for (const edge of edges) {
+    if (!Array.isArray(edge) || edge.length !== 2) throw new Error('Each edge is a pair of cities.')
+    const [u, v] = edge
+    if (!Number.isInteger(u) || !Number.isInteger(v) || u < 1 || v < 1 || u > n || v > n || u === v) throw new Error('Cities are numbered 1 to n.')
+    if (find(u) === find(v)) throw new Error('The edges must form a tree.')
+    parent[find(u)] = find(v)
+  }
+  return { n, edges }
+}
+
+export function allPairsDistances(n, edges) {
+  const adj = Array.from({ length: n }, () => [])
+  for (const [u, v] of edges) {
+    adj[u - 1].push(v - 1)
+    adj[v - 1].push(u - 1)
+  }
+  return Array.from({ length: n }, (_, s) => {
+    const d = new Array(n).fill(-1)
+    d[s] = 0
+    const queue = [s]
+    for (let q = 0; q < queue.length; q++) {
+      const x = queue[q]
+      for (const y of adj[x]) if (d[y] < 0) { d[y] = d[x] + 1; queue.push(y) }
+    }
+    return d
+  })
+}
+
+export function buildTrace({ n, edges }) {
+  const dist = allPairsDistances(n, edges)
+  const adj = Array.from({ length: n }, () => [])
+  for (const [u, v] of edges) { adj[u - 1].push(v - 1); adj[v - 1].push(u - 1) }
+  const counts = new Array(n - 1).fill(0)
+  const frames = []
+  const snap = extra => ({ counts: [...counts], ...extra })
+  frames.push({ phase: 'start', activeLine: 1, subset: [], message: 'Distances between all city pairs are computed.', snapshot: snap({}) })
+  for (let mask = 1; mask < 1 << n; mask++) {
+    const nodes = []
+    for (let i = 0; i < n; i++) if (mask >> i & 1) nodes.push(i)
+    if (nodes.length < 2 || !isConnected(nodes, mask, adj)) continue
+    const d = Math.max(...nodes.flatMap(a => nodes.map(b => dist[a][b])))
+    frames.push({ phase: 'subset', activeLine: 5, subset: nodes, diameter: d, message: `Cities {${nodes.map(x => x + 1).join(', ')}} form a connected subset.`, snapshot: snap({ diameter: null }) })
+    counts[d - 1]++
+    frames.push({ phase: 'count', activeLine: 7, subset: nodes, diameter: d, message: `Largest distance is ${d}: counts[${d - 1}] becomes ${counts[d - 1]}.`, snapshot: snap({ diameter: d }) })
+  }
+  frames.push({ phase: 'done', activeLine: 9, subset: [], result: counts, message: 'All connected subsets are counted by diameter.', snapshot: snap({ result: counts }) })
+  return { input: { n, edges }, result: counts, frames }
+}
+
+function isConnected(nodes, mask, adj) {
+  const seen = new Set([nodes[0]])
+  const stack = [nodes[0]]
+  while (stack.length) {
+    const x = stack.pop()
+    for (const y of adj[x]) if ((mask >> y & 1) && !seen.has(y)) { seen.add(y); stack.push(y) }
+  }
+  return seen.size === nodes.length
+}

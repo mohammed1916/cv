@@ -20,18 +20,21 @@ const PYTHON_LINES = [
 
 export const python = PYTHON_LINES.join("\n");
 
-export const code = [
-  { line: 1, text: "function contains(head, root)" },
-  { line: 2, text: "stack = [root]" },
-  { line: 3, text: "while stack is not empty: node = pop (skip null nodes)" },
-  { line: 4, text: "if matches(node, 0): return true" },
-  { line: 5, text: "push node.right, then node.left" },
-  { line: 6, text: "return false" },
-  { line: 7, text: "function matches(node, k)" },
-  { line: 8, text: "if k == length of head: return true" },
-  { line: 9, text: "if node is null or node.val != head[k]: return false" },
-  { line: 10, text: "return matches(node.left, k+1) or matches(node.right, k+1)" },
-];
+export const code = `function isSubPath(head, root) {
+  const matches = (node, k) => {
+    if (k === head.length) return true
+    if (node === null || node.val !== head[k]) return false
+    return matches(node.left, k + 1) || matches(node.right, k + 1)
+  }
+  const stack = [root]
+  while (stack.length > 0) {
+    const node = stack.pop()
+    if (node === null) continue
+    if (matches(node, 0)) return true
+    stack.push(node.right, node.left)
+  }
+  return false
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const pythonLineMap = { 1: 1, 2: 8, 3: 10, 4: 13, 5: 15, 6: 17, 7: 2, 8: 3, 9: 5, 10: 7 };
 
@@ -96,16 +99,16 @@ export function buildTrace(input) {
 
   function matches(id, k) {
     if (k === head.length) {
-      frame("match", 8, `The whole list is matched on this path.`, id === -1 ? null : id, k, true);
+      frame("match", 3, `The whole list is matched on this path.`, id === -1 ? null : id, k, true);
       return true;
     }
     if (id === -1 || nodes[id].val !== head[k]) {
       const why = id === -1 ? "Null node" : `Node ${id} (value ${nodes[id].val})`;
-      frame("match", 9, `${why} does not match head[${k}] = ${head[k]}.`, id === -1 ? null : id, k, false);
+      frame("match", 4, `${why} does not match head[${k}] = ${head[k]}.`, id === -1 ? null : id, k, false);
       return false;
     }
     path.push(id);
-    frame("match", 10, `Node ${id} matches head[${k}] = ${head[k]}; try its children.`, id, k);
+    frame("match", 5, `Node ${id} matches head[${k}] = ${head[k]}; try its children.`, id, k);
     const hit = matches(nodes[id].left, k + 1) || matches(nodes[id].right, k + 1);
     if (!hit) path.pop();
     return hit;
@@ -113,22 +116,22 @@ export function buildTrace(input) {
 
   frame("scan", 1, "Start the search over the tree.", null, null);
   stack.push(0);
-  frame("scan", 2, "Put the root on the stack.", null, null);
+  frame("scan", 7, "Put the root on the stack.", null, null);
   let found = false;
   while (stack.length && !found) {
     const id = stack.pop();
-    frame("scan", 3, `Pop node ${id}.`, id, null);
+    frame("scan", 9, `Pop node ${id}.`, id, null);
     if (matches(id, 0)) {
       found = true;
-      frame("scan", 4, `A downward path from node ${id} matches; the answer is true.`, id, 0, true);
+      frame("scan", 11, `A downward path from node ${id} matches; the answer is true.`, id, 0, true);
       break;
     }
-    frame("scan", 4, `No match starts at node ${id}.`, id, 0, false);
+    frame("scan", 11, `No match starts at node ${id}.`, id, 0, false);
     const { left, right } = nodes[id];
     if (right !== -1) stack.push(right);
     if (left !== -1) stack.push(left);
-    frame("scan", 5, `Push the children of node ${id}.`, id, null);
+    frame("scan", 12, `Push the children of node ${id}.`, id, null);
   }
-  frame("done", 6, found ? "Some node starts a matching downward path." : "No node starts a matching downward path.", null, null, found);
+  frame("done", 14, found ? "Some node starts a matching downward path." : "No node starts a matching downward path.", null, null, found);
   return { input, result: found, frames };
 }

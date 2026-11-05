@@ -20,9 +20,9 @@ const definition = {
   url: 'https://leetcode.com/problems/missing-element-in-sorted-array/description/',
   complexity: 'O(log n) time for n array elements and O(1) extra space, from a binary search. The visualization caps nums at 10 values from 0 to 100 and k at 50; the official bounds are not verified.',
   examples: [
-    { label: 'First missing', input: '{"nums":[4,7,9,10],"k":1}' },
-    { label: 'Middle missing', input: '{"nums":[4,7,9,10],"k":3}' },
-    { label: 'Beyond the last element', input: '{"nums":[4,7,9,10],"k":5}' },
+    { label: 'First missing', input: '{"nums":[2,5,6,11,14],"k":1}' },
+    { label: 'Middle missing', input: '{"nums":[2,5,6,11,14],"k":4}' },
+    { label: 'Beyond the last element', input: '{"nums":[2,5,6,11,14],"k":9}' },
   ],
 }
 

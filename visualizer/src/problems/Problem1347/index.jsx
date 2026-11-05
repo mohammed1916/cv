@@ -1,35 +1,24 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, phases, code, python } from './algorithm'
+import RecordStateTable from '../../components/shared/RecordStateTable'
+import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
+import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
-  phases, parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'Two words (JSON object with s and t)',
-  complexity: 'O(n + 26) time and O(26) space. Each letter is counted once.',
-  examples: [
-    { label: 'Mixed', input: '{"s":"bab","t":"aba"}' },
-    { label: 'Equal letters', input: '{"s":"abcd","t":"dcba"}' },
-    { label: 'Disjoint', input: '{"s":"aabbcc","t":"xxyyzz"}' },
-  ],
+  number: '1347', phases, parse: parseInput, build: buildTrace, code, python, examples,
+  inputLabel: 'Object with strings s and t of equal length (JSON)',
+  url: 'https://leetcode.com/problems/minimum-number-of-steps-to-make-two-strings-anagram/',
+  complexity: 'O(n + 26) time and O(26) extra space for the letter counts.',
 }
 
-function LetterTable({ snapshot }) {
-  const letters = [...'abcdefghijklmnopqrstuvwxyz'].filter(c => snapshot.countS[c] || snapshot.countT[c])
-  return <table className="algorithm-count-table">
-    <thead><tr><th>Letter</th><th>In s</th><th>In t</th><th>Surplus in t</th></tr></thead>
-    <tbody>{letters.map(c => {
-      const surplus = Math.max(0, snapshot.countT[c] - snapshot.countS[c])
-      return <tr key={c} aria-current={snapshot.letter === c ? 'step' : undefined}>
-        <td>{c}</td><td>{snapshot.countS[c]}</td><td>{snapshot.countT[c]}</td><td>{surplus}</td>
-      </tr>
-    })}</tbody>
-  </table>
-}
-
-export default function MinimumStepsAnagram() {
-  return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ step }) => <>
-      <LetterTable snapshot={step.snapshot} />
-      <p>Steps so far: <strong>{step.snapshot.steps}</strong></p>
-    </>}
-    renderReasoning={({ step }) => <p>{step.message}</p>} />
+export default function AnagramStepsVisualizer() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
+    const s = step.snapshot
+    return <>
+      <RecordStateTable label="Letters of s (count) and how many more t needs" columns={['letter', 'n']} rows={s.counts} activeRow={s.counts.findIndex(r => r.letter === s.letter)} />
+      <StackLane title="Changes needed" items={[String(s.steps ?? 0)]} />
+    </>
+  }} renderReasoning={({ step }) => <>
+    <p><strong>Count the mismatch:</strong> a letter of t that s lacks must be made by changing one letter of s, so the answer is the total shortfall.</p>
+    <p>{step.message}</p>
+  </>} />
 }

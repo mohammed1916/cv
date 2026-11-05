@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import MatrixGrid from '../../components/shared/MatrixGrid'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -14,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/escape-the-spreading-fire/',
   complexity: 'O(m * n * log(m * n)) time: each binary-search check is one breadth-first walk. The visualization caps the grid at 6 by 6.',
   examples: [
-    { label: 'Example', input: '{"grid":[[0,2,0,0,0,0,0],[0,0,0,2,2,1,0],[0,2,0,0,1,2,0],[0,0,2,2,2,0,2],[0,0,0,0,0,0,0]]}' },
+    { label: 'Example', input: '{"grid":[[0,0,0,0,0],[0,2,1,0,0],[0,0,2,0,0],[0,0,0,0,0]]}' },
     { label: 'Blocked', input: '{"grid":[[0,0,0,0],[0,1,2,0],[0,2,0,0]]}' },
     { label: 'Safe forever', input: '{"grid":[[0,0,0],[2,2,0],[1,2,0]]}' },
   ],
@@ -23,6 +24,7 @@ const definition = {
 export default function EscapeSpreadingFire() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <MatrixGrid label="Grid" matrix={run.input.grid} activeCell={step.at && step.at[0] >= 0 ? { row: step.at[0], col: step.at[1] } : null} />
+    {step.lo >= 0 && step.hi >= 0 && <AnswerRangeBar title="Safe wait search" min={0} max={run.input.grid.length * run.input.grid[0].length} low={step.lo} high={step.hi} probe={step.t >= 0 ? step.t : null} verdict={step.verdict ?? null} />}
     <output aria-label="Wait search">{step.t >= 0 ? `Testing wait ${step.t}; range [${step.lo}, ${step.hi}]` : step.lo >= 0 && step.hi >= 0 && step.phase === 'search' ? `Range [${step.lo}, ${step.hi}]` : 'Fire spreads from every fire cell.'}</output>
   </>} renderReasoning={() => <>
     <p>Each cell gets the minute the fire reaches it. The person must enter a cell strictly before the fire, except the safehouse, where arriving in the same minute is safe.</p>

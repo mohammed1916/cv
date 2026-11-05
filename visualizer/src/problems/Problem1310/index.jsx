@@ -1,36 +1,26 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import { buildTrace, parseInput, code, python, phases, examples } from './algorithm'
 
 const definition = {
-  number: '1310',
-  phases, parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'Array and inclusive queries (JSON)',
+  number: '1310', phases, parse: parseInput, build: buildTrace, code, python, examples,
+  inputLabel: 'Array and queries (JSON object)',
   url: 'https://leetcode.com/problems/xor-queries-of-a-subarray/',
-  complexity: 'O(n + q) time after the prefix build, and O(n) space for the prefix array.',
-  examples: [
-    { label: 'Mixed', input: '{"arr":[5,2,6,7],"queries":[[0,2],[1,3],[2,2]]}' },
-    { label: 'Single', input: '{"arr":[9],"queries":[[0,0]]}' },
-    { label: 'Whole row', input: '{"arr":[1,2,3,4],"queries":[[0,3]]}' },
-  ],
+  complexity: 'O(n + q) time: one pass for the prefix XORs and one constant-time lookup per query. O(n) extra space.',
 }
 
-export default function XorQueries() {
+export default function XorRangeVisualizer() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
-    const { arr, pre, query } = step.snapshot
-    const [l, r] = query ?? []
+    const s = step.snapshot
     return <>
-      <table aria-label="Prefix XOR table" style={{ borderCollapse: 'collapse', fontFamily: 'monospace' }}>
-        <thead><tr><th>Index</th>{pre.map((_, i) => <th key={i}>{i}</th>)}</tr></thead>
-        <tbody>
-          <tr><th>Prefix</th>{pre.map((v, i) => <td key={i} data-prefix={i} style={{ padding: 4, border: '1px solid var(--border)',
-            background: query && (i === r + 1 || i === l) ? 'var(--surface2)' : 'transparent' }}>{v}</td>)}</tr>
-          <tr><th>Value</th><td />{arr.map((v, i) => <td key={i} style={{ padding: 4 }}>{v}</td>)}</tr>
-        </tbody>
-      </table>
-      <p role="status">{query ? `Query [${l}, ${r}] answers ${run.result[step.snapshot.answers.length - 1]}.` : 'Each prefix holds the XOR from the start to that position.'}</p>
+      <IndexedSequence label="arr" length={run.input.arr.length} valueAt={i => run.input.arr[i]} active={-1}
+        roleAt={i => (s.l !== undefined && i === s.l ? 'l' : s.r !== undefined && i === s.r ? 'r' : (s.l !== undefined && i >= s.l && i <= s.r ? 'in range' : ''))} />
+      <IndexedSequence label="Prefix XOR (index 0 is the empty prefix)" length={s.pre.length} valueAt={i => s.pre[i]} active={s.pre.length - 1}
+        roleAt={i => (s.l !== undefined && i === s.l ? 'l' : s.r !== undefined && i === s.r + 1 ? 'r+1' : '')} />
+      <p>Answers so far: {s.answer.length ? s.answer.join(', ') : 'none yet'}</p>
     </>
-  }} renderReasoning={() => <>
-    <p><strong>Cancellation:</strong> XOR of a value with itself is 0, so the prefix after r XOR the prefix before l keeps exactly the values from l through r.</p>
-    <p><strong>Why precompute:</strong> the prefixes are built once, so each query costs two lookups instead of a loop.</p>
+  }} renderReasoning={({ step }) => <>
+    <p><strong>Prefix trick:</strong> XOR-ing the prefix up to r+1 with the prefix up to l removes everything before l, leaving exactly arr[l] through arr[r].</p>
+    <p>{step.message}</p>
   </>} />
 }

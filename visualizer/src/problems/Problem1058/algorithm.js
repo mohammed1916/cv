@@ -1,14 +1,16 @@
-const CODE_TEXT = `minimize rounding error to meet target
-  set floor sum to the sum of floor(price) for every price
-  set ups to target minus floor sum
-  if ups is negative or more than the fractional prices then return -1
-  set error to the sum of every fractional part (all rounded down)
-  for each fractional price compute the extra cost of rounding up
-  sort those extra costs from smallest to largest
-  add the smallest ups extra costs to error
-  return error with three decimals`
-
-export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minimizeError(prices, target) {
+  const SCALE = 1000000
+  const micro = prices.map(p => Math.round(parseFloat(p) * SCALE))
+  const floorSum = micro.reduce((sum, m) => sum + Math.floor(m / SCALE), 0)
+  const ups = target - floorSum
+  const fractions = micro.map(m => m % SCALE).filter(f => f !== 0)
+  if (ups < 0 || ups > fractions.length) return '-1'
+  let error = fractions.reduce((a, b) => a + b, 0)
+  const extra = fractions.map(f => SCALE - 2 * f).sort((a, b) => a - b)
+  error += extra.slice(0, ups).reduce((a, b) => a + b, 0)
+  const thousandths = Math.floor((error + 500) / 1000)
+  return \`\${Math.floor(thousandths / 1000)}.\${String(thousandths % 1000).padStart(3, '0')}\`
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `from decimal import Decimal, ROUND_HALF_UP
 
@@ -34,7 +36,7 @@ if __name__ == "__main__":
 const PY_LINES = python.split('\n')
 const L = text => {
   const index = code.findIndex(item => item.text.includes(text))
-  if (index < 0) throw new Error(`Missing pseudocode line: ${text}`)
+  if (index < 0) throw new Error(`Missing code line: ${text}`)
   return index + 1
 }
 const P = text => {
@@ -85,25 +87,25 @@ export function buildTrace({ prices, target }) {
   let error = rows.reduce((sum, r) => sum + r.frac, 0)
   const state = (extra = {}) => ({ rows: rows.map(r => ({ ...r })), floorSum, ups, error, current: -1, result: null, ...extra })
   const add = (phase, line, py, message, extra) => frames.push({ phase, activeLine: L(line), pythonLine: P(py), message, ...state(extra) })
-  add('start', 'set floor sum', 'floor_sum = sum', `Rounding every price down gives a floor sum of ${floorSum}; target ${target} needs ${ups} round-up${ups === 1 ? '' : 's'}.`, {})
-  rows.forEach((row, index) => add('floor', 'set floor sum to the sum', 'micro = [int', `${row.text} rounds down to ${row.floor}, with fractional part ${(row.frac / SCALE).toFixed(6)}.`, { current: index }))
+  add('start', 'const floorSum', 'floor_sum = sum', `Rounding every price down gives a floor sum of ${floorSum}; target ${target} needs ${ups} round-up${ups === 1 ? '' : 's'}.`, {})
+  rows.forEach((row, index) => add('floor', 'const floorSum', 'micro = [int', `${row.text} rounds down to ${row.floor}, with fractional part ${(row.frac / SCALE).toFixed(6)}.`, { current: index }))
   if (ups < 0 || ups > fractional) {
-    add('impossible', 'return -1', 'return "-1"', `The target needs ${ups} round-ups, but only ${fractional} prices are fractional.`, { result: '-1' })
+    add('impossible', "return '-1'", 'return "-1"', `The target needs ${ups} round-ups, but only ${fractional} prices are fractional.`, { result: '-1' })
     return { input: { prices, target }, result: '-1', frames }
   }
-  add('need', 'set ups to target minus floor sum', 'ups = target - floor_sum', `${ups} of the ${fractional} fractional prices must round up.`, {})
+  add('need', 'const ups', 'ups = target - floor_sum', `${ups} of the ${fractional} fractional prices must round up.`, {})
   rows.forEach((row, index) => {
-    if (row.delta !== null) add('cost', 'compute the extra cost', 'extra = sorted', `${row.text}: rounding up adds ${(row.delta / SCALE).toFixed(6)} to the error.`, { current: index })
+    if (row.delta !== null) add('cost', 'const extra', 'extra = sorted', `${row.text}: rounding up adds ${(row.delta / SCALE).toFixed(6)} to the error.`, { current: index })
   })
   const order = rows.map((r, i) => i).filter(i => rows[i].delta !== null).sort((a, b) => rows[a].delta - rows[b].delta || a - b)
-  add('sort', 'sort those extra costs', 'extra = sorted', 'Cheapest round-up first.', { order: order.slice() })
+  add('sort', '.sort((a, b) => a - b)', 'extra = sorted', 'Cheapest round-up first.', { order: order.slice() })
   for (let k = 0; k < ups; k++) {
     const index = order[k]
     rows[index].choice = 'up'
     error += rows[index].delta
-    add('pick', 'add the smallest ups extra costs', 'error += sum(extra[:ups])', `Round ${rows[index].text} up; error is now ${(error / SCALE).toFixed(6)}.`, { current: index, order: order.slice(), picked: k + 1 })
+    add('pick', 'error += extra', 'error += sum(extra[:ups])', `Round ${rows[index].text} up; error is now ${(error / SCALE).toFixed(6)}.`, { current: index, order: order.slice(), picked: k + 1 })
   }
   const result = formatThousandths(error)
-  add('done', 'return error with three decimals', 'return str(', `Minimum error is ${result}.`, { result, current: -1, order: order.slice(), picked: ups })
+  add('done', 'return `', 'return str(', `Minimum error is ${result}.`, { result, current: -1, order: order.slice(), picked: ups })
   return { input: { prices, target }, result, frames }
 }

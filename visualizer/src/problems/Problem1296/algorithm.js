@@ -1,87 +1,97 @@
 export const phases = [
-  { id: 'start', label: 'Count values', description: 'Count how often each value occurs and check that the length splits evenly into groups of k.' },
-  { id: 'group', label: 'Smallest value', description: 'The smallest value still left must begin a group, so every remaining copy of it starts a run here.' },
-  { id: 'check', label: 'Check run', description: 'Each of the k consecutive values starting here must still have at least as many copies as the run needs.' },
-  { id: 'consume', label: 'Consume run', description: 'Remove one run for every copy of the start value from each value in the run.' },
-  { id: 'fail', label: 'Impossible', description: 'A required value is missing or too rare, so no partition exists.' },
-  { id: 'done', label: 'Complete', description: 'Every value was consumed in complete runs, so the partition exists.' },
+  { id: 'start', label: 'Start', description: 'Check that the array length is a multiple of k.' },
+  { id: 'count', label: 'Count values', description: 'Record how many copies of each value there are.' },
+  { id: 'group', label: 'Open a group', description: 'Take the smallest value that still has copies; it must start a run of k consecutive values.' },
+  { id: 'take', label: 'Take a run', description: 'Remove one run of k consecutive values starting here, from the smallest value upward.' },
+  { id: 'fail', label: 'Missing value', description: 'A value in the run has too few copies, so the array cannot be divided.' },
+  { id: 'done', label: 'Complete', description: 'Every value was placed in a run of k consecutive numbers.' },
+]
+
+export const examples = [
+  { label: 'Two runs of three', input: '{"nums":[5,3,1,2,6,4],"k":3}' },
+  { label: 'Gap in the middle', input: '{"nums":[1,2,3,5,6,7],"k":3}' },
+  { label: 'Repeated values', input: '{"nums":[1,1,2,2,3,3],"k":3}' },
 ]
 
 export function parseInput(text) {
-  const input = JSON.parse(text)
-  if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Use an object such as {"nums": [1, 2, 3, 3, 4, 4], "k": 3}.')
-  const { nums, k } = input
-  if (!Array.isArray(nums) || nums.length < 1 || nums.length > 24 || !nums.every(v => Number.isInteger(v) && Math.abs(v) <= 50)) throw new Error('nums is a list of 1 to 24 integers from -50 to 50.')
-  if (!Number.isInteger(k) || k < 1 || k > 8) throw new Error('k is an integer from 1 to 8.')
-  return { nums, k }
+  const data = JSON.parse(text)
+  if (!data || typeof data !== 'object' || Array.isArray(data)) throw new Error('Use an object with a nums list and an integer k, such as {"nums":[1,2,3,4],"k":2}.')
+  if (!Array.isArray(data.nums) || data.nums.length < 1 || data.nums.length > 40) throw new Error('nums is a list of 1 to 40 values in this visualization.')
+  if (!data.nums.every(v => Number.isInteger(v) && v >= 1 && v <= 1000)) throw new Error('Every value must be an integer from 1 to 1000.')
+  if (!Number.isInteger(data.k) || data.k < 1 || data.k > data.nums.length) throw new Error('k is an integer from 1 to the length of nums.')
+  return { nums: data.nums, k: data.k }
 }
 
 export function buildTrace({ nums, k }) {
-  const counts = new Map()
-  for (const v of nums) counts.set(v, (counts.get(v) ?? 0) + 1)
-  const sortedKeys = () => [...counts.keys()].sort((a, b) => a - b)
-  const snap = (focus, offset, need) => ({ remaining: sortedKeys().map(v => [v, counts.get(v)]), focus, offset, need, k })
   const frames = []
-  const frame = (phase, line, message, snapshot, pyLine = line) => frames.push({ phase, activeLine: L(line), pythonLine: P(pyLine), snapshot, message })
-
-  frame('start', 'counts = count each', `Count the ${nums.length} values. Groups have ${k} consecutive values, so the length must be a multiple of ${k}.`, snap(null, null, null), 'counts = Counter')
+  const sorted = [...nums].sort((a, b) => a - b)
+  const count = new Map()
+  const rows = () => [...count.keys()].sort((a, b) => a - b).map(v => ({ value: v, count: count.get(v) }))
+  const scene = (extra = {}) => ({ sorted, remaining: rows(), groupStart: null, groupEnd: null, current: null, ...extra })
+  frames.push({ phase: 'start', activeLine: L('if (nums.length % k'), pythonLine: P('if len(nums) % k'), snapshot: scene(),
+    message: `${nums.length} values must split into groups of ${k}. ${nums.length % k === 0 ? 'The length divides evenly, so keep going.' : 'The length does not divide evenly, so the answer is false.'}` })
   if (nums.length % k !== 0) {
-    frame('fail', 'len(nums) % k', `${nums.length} values cannot split into groups of ${k}.`, snap(null, null, null))
-    frame('done', 'return true', 'The answer is false.', snap(null, null, null), 'return True')
+    frames.push({ phase: 'done', activeLine: L('return false'), pythonLine: P('return False'), snapshot: scene(), message: 'Return false.', result: false })
     return { input: { nums, k }, result: false, frames }
   }
-
-  let ok = true
-  const original = sortedKeys()
-  for (const value of original) {
-    const need = counts.get(value)
-    if (need === 0) {
-      frame('group', 'if need == 0', `${value} was already used by an earlier run, so skip it.`, snap(value, null, 0))
-      continue
-    }
-    frame('group', 'need = counts[value]', `${value} is the smallest value left, so ${need} run(s) must start here.`, snap(value, null, need))
-    for (let offset = 0; offset < k; offset++) {
-      const v = value + offset
-      const have = counts.get(v) ?? 0
-      frame('check', 'if counts[value + offset] < need', `Value ${v} has ${have} copies left; the runs need ${need}.`, snap(value, offset, need))
-      if (have < need) {
-        ok = false
-        frame('fail', 'if counts[value + offset] < need', `Value ${v} is short by ${need - have}, so a run starting at ${value} cannot be completed.`, snap(value, offset, need))
-        break
+  for (const x of nums) count.set(x, (count.get(x) || 0) + 1)
+  frames.push({ phase: 'count', activeLine: L('for (const x of nums)'), pythonLine: P('count = Counter'), snapshot: scene(),
+    message: `Counted ${count.size} distinct values. Groups will be taken starting from the smallest value.` })
+  const keys = [...count.keys()].sort((a, b) => a - b)
+  for (const start of keys) {
+    const need = count.get(start)
+    if (need === 0) continue
+    frames.push({ phase: 'group', activeLine: L('for (const start of keys)'), pythonLine: P('for start in sorted'), snapshot: scene({ groupStart: start, groupEnd: start + k - 1, current: start }),
+      message: `${start} is the smallest value left, with ${need} cop${need === 1 ? 'y' : 'ies'}. Each needs a run ${start} to ${start + k - 1}.` })
+    for (let v = start; v < start + k; v++) {
+      const left = count.get(v) || 0
+      if (left < need) {
+        frames.push({ phase: 'fail', activeLine: L('if (left < need)'), pythonLine: P('if count[v] < need'), snapshot: scene({ groupStart: start, groupEnd: start + k - 1, current: v }),
+          message: `${v} has ${left} cop${left === 1 ? 'y' : 'ies'} left but the run needs ${need}. The array cannot be divided, so return false.`, verdict: false })
+        frames.push({ phase: 'done', activeLine: L('return false'), pythonLine: P('return False'), snapshot: scene(), message: 'Return false.', result: false })
+        return { input: { nums, k }, result: false, frames }
       }
-      counts.set(v, have - need)
-      frame('consume', 'counts[value + offset] -= need', `Use ${need} copies of ${v}; ${have - need} remain.`, snap(value, offset, need))
+      count.set(v, left - need)
+      frames.push({ phase: 'take', activeLine: L('count.set(v'), pythonLine: P('count[v] -= need'), snapshot: scene({ groupStart: start, groupEnd: start + k - 1, current: v }),
+        message: `Take ${need} cop${need === 1 ? 'y' : 'ies'} of ${v}; ${left - need} remain.` })
     }
-    if (!ok) break
   }
-  frame('done', 'return true', ok ? 'Every value was used in complete runs, so the answer is true.' : 'The answer is false.', snap(null, null, null), 'return True')
-  return { input: { nums, k }, result: ok, frames }
+  frames.push({ phase: 'done', activeLine: L('return true'), pythonLine: P('return True'), snapshot: scene(), message: 'Every value was placed in a run of consecutive numbers. Return true.', result: true })
+  return { input: { nums, k }, result: true, frames }
 }
 
-export const code = `can divide (nums, k):
-  if len(nums) % k != 0: return false
-  counts = count each value in nums
-  for value in sorted distinct values:
-    need = counts[value]
-    if need == 0: continue
-    for offset in 0 .. k-1:
-      if counts[value + offset] < need: return false
-      counts[value + offset] -= need
-  return true`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function isPossibleDivide(nums, k) {
+  if (nums.length % k !== 0) return false
+  const count = new Map()
+  for (const x of nums) count.set(x, (count.get(x) || 0) + 1)
+  const keys = [...count.keys()].sort((a, b) => a - b)
+  for (const start of keys) {
+    const need = count.get(start)
+    if (need === 0) continue
+    for (let v = start; v < start + k; v++) {
+      const left = count.get(v) || 0
+      if (left < need) return false
+      count.set(v, left - need)
+    }
+  }
+  return true
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
-export const python = `def can_divide(nums, k):
+export const python = `from collections import Counter
+
+def is_possible_divide(nums, k):
     if len(nums) % k != 0:
         return False
-    counts = Counter(nums)
-    for value in sorted(counts):
-        need = counts[value]
+    count = Counter(nums)
+    for start in sorted(count):
+        need = count[start]
         if need == 0:
             continue
-        for offset in range(k):
-            if counts[value + offset] < need:
+        for v in range(start, start + k):
+            if count[v] < need:
                 return False
-            counts[value + offset] -= need
-    return True`
-
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+            count[v] -= need
+    return True
+`
 const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

@@ -1,9 +1,9 @@
-.ri-view { margin: 0; color: var(--text, #1f2937); }
-.ri-view svg { width: 100%; height: auto; display: block; }
-.ri-label { font-size: 13px; font-weight: 600; fill: currentColor; }
-.ri-tag, .ri-tick { font-size: 11px; fill: currentColor; opacity: 0.75; }
-.ri-cut { fill: rgba(220, 38, 38, 0.28); stroke: #dc2626; stroke-dasharray: 4 3; }
-.ri-input { fill: #2563eb; opacity: 0.55; }
-.ri-input--current { opacity: 1; stroke: #111827; stroke-width: 2; }
-.ri-output { fill: #16a34a; }
-.ri-view figcaption { font-size: 13px; margin-top: 6px; }
+.ri-view { margin:0; color:var(--text, var(--text)); }
+.ri-view svg { width:100%; height:auto; display:block; }
+.ri-label { font-size:13px; font-weight:600; fill:currentColor; }
+.ri-tag, .ri-tick { font-size:11px; fill:currentColor; opacity:0.75; }
+.ri-cut { fill:rgba(220, 38, 38, 0.28); stroke:#dc2626; stroke-dasharray:4 3; }
+.ri-input { fill:#2563eb; opacity:0.55; }
+.ri-input--current { opacity:1; stroke:#111827; stroke-width:2; }
+.ri-output { fill:#16a34a; }
+.ri-view figcaption { font-size:13px; margin-top:6px; }

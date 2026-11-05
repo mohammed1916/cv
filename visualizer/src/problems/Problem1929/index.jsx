@@ -1,10 +1,32 @@
-import authoredExamples0 from '../../config/examples/collection--1929.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/nextSequence.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '1929',
+  phases,
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  inputLabel: 'JSON array (e.g. [2,5,2])',
+  url: 'https://leetcode.com/problems/concatenation-of-array/',
+  complexity: 'O(n) time and O(n) space for the 2n output values.',
+  examples: [
+    { label: 'Three values', input: '[2,5,2]' },
+    { label: 'Single value', input: '[7]' },
+  ],
+}
 
-const definition = { ...definitions[1929], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem1929Visualizer() {
+  return <AlgorithmWorkspace
+    definition={definition}
+    renderVisual={({ run, step }) => <>
+      <IndexedSequence label="Input nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]}
+        active={step.i} roleAt={i => (i === step.i ? 'l' : '')} />
+      <IndexedSequence label="Answer ans (first half, then copy)" length={step.ans.length} valueAt={i => (step.ans[i] ?? '·')}
+        active={step.i >= 0 ? step.i + run.input.nums.length : -1} roleAt={i => (step.ans[i] !== null ? 'written' : '')} />
+    </>}
+    renderReasoning={({ step }) => <p>{step.message}</p>}
+  />
+}

@@ -1,10 +1,30 @@
-import authoredExamples0 from '../../config/examples/collection--2177.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import TripleView from './TripleView'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/capacityAndFrequencyBatch.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '2177',
+  phases,
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  inputLabel: 'A non-negative integer, e.g. 33',
+  url: 'https://leetcode.com/problems/find-three-consecutive-integers-that-sum-to-a-given-number/',
+  complexity: 'O(1) time and O(1) space. The visualization accepts totals up to 1,000,000.',
+  examples: [
+    { label: 'Multiple of 3', input: '33' },
+    { label: 'Not a multiple', input: '4' },
+    { label: 'Around zero', input: '0' },
+  ],
+}
 
-const definition = { ...definitions[2177], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem2177Visualizer() {
+  return (
+    <AlgorithmWorkspace
+      definition={definition}
+      renderVisual={({ run, step }) => <TripleView run={run} step={step} />}
+      renderReasoning={({ step }) => <p>{step.message}</p>}
+    />
+  )
+}

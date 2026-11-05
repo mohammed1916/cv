@@ -1,10 +1,28 @@
-import authoredExamples0 from '../../config/examples/collection--1716.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import View from './View'
+import { buildTrace, parseInput, code, python, pythonLineMap, phases, examples, complexity } from './algorithm.js'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/advance.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '1716',
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  pythonLineMap,
+  phases,
+  examples,
+  complexity,
+  inputLabel: 'Integer n of days, from 1 to 1000',
+  url: 'https://leetcode.com/problems/calculate-money-in-leetcode-bank/',
+}
 
-const definition = { ...definitions[1716], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem1716Visualizer() {
+  return <AlgorithmWorkspace
+    definition={definition}
+    renderVisual={({ run, step }) => <View run={run} step={step} />}
+    renderReasoning={() => <>
+      <p>Within a week the deposits rise by one each day. Each new week starts one higher than the Monday before.</p>
+      <p>So day i deposits the week number plus the weekday offset plus one, and the total is their sum.</p>
+    </>}
+  />
+}

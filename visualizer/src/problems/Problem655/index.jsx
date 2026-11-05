@@ -1,37 +1,30 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import BinaryTreeLane from '../../components/shared/BinaryTreeLane'
+import MatrixGrid from '../../components/shared/MatrixGrid'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
-    { id: 'start', label: 'Grid', description: 'Size the grid from the tree height.' },
-    { id: 'place', label: 'Place node', description: 'Put each node in the middle of its column range.' },
-    { id: 'done', label: 'Complete', description: 'Return the grid.' },
+    { id: 'start', label: 'Size the grid', description: 'Height sets the number of rows and the width.' },
+    { id: 'place', label: 'Place a node', description: 'A node sits in the middle of its column range.' },
+    { id: 'done', label: 'Complete', description: 'The matrix shows every node at its fixed position.' },
   ],
-  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Tree (LeetCode level-order JSON array)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Tree (LeetCode level-order JSON array, up to 127 items)',
   url: 'https://leetcode.com/problems/print-binary-tree/',
-  complexity: 'O(n + rows × cols) time, where cols = 2^(height+1) − 1 grows exponentially in height; the 64-item limit keeps the grid small.',
+  complexity: 'O(n) placements; the matrix has (height + 1) × (2^(height+1) − 1) cells.',
   examples: [
     { label: 'Two levels', input: '[1,2]' },
-    { label: 'Three levels', input: '[1,2,3,null,4]' },
-    { label: 'Single', input: '[1]' },
+    { label: 'Three levels', input: '[4,2,7,1,null,6]' },
+    { label: 'Chain', input: '[3,null,5,null,9]' },
   ],
 }
 
 export default function PrintBinaryTree() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
-    const roles = {}
-    if (step.current !== null && step.current !== undefined) roles[step.current] = 'active'
-    return <>
-      <BinaryTreeLane title="Tree" root={run.root} roles={roles} />
-      <div aria-label="Printed grid" style={{ overflowX: 'auto' }}>
-        <table style={{ borderCollapse: 'collapse', fontFamily: 'monospace', fontSize: '.75rem' }}>
-          <tbody>{step.matrix.map((row, r) => <tr key={r}>{row.map((cell, c) => <td key={c} style={{ border: '1px solid var(--border)', minWidth: 22, height: 22, textAlign: 'center', background: cell ? 'var(--surface2)' : 'transparent' }}>{cell}</td>)}</tr>)}</tbody>
-        </table>
-      </div>
-    </>
-  }} renderReasoning={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+    <MatrixGrid label={`Layout: ${step.rows} × ${step.cols}`} matrix={step.matrix}
+      activeCell={step.cell} highlightedCells={step.cell ? [step.cell] : []} showFlatIndices={false} />
+    <output aria-label="Layout size">{`Rows ${step.rows}, columns ${step.cols}`}</output>
+  </>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>
-    <p><strong>Halving columns:</strong> the root sits in the middle; the left child takes the left half of the columns and the right child the right half, so every node is centred over its subtree.</p>
+    <p><strong>Why the middle:</strong> each child takes one half of its parent's column range, so siblings never collide and the empty cells keep the structure visible.</p>
   </>} />
 }

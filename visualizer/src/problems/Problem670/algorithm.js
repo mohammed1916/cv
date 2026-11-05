@@ -1,52 +1,61 @@
 export function parseInput(text) {
   const num = JSON.parse(text)
-  if (!Number.isInteger(num) || num < 0 || num > 100000000) throw new Error('Enter an integer from 0 to 100,000,000.')
+  if (!Number.isInteger(num) || num < 0 || num > 100000000) throw new Error('Enter a JSON integer from 0 to 100,000,000.')
   return num
 }
 
-// Swap the largest digit found after position i with digit i, using the last occurrence of each digit.
+// Remember where each digit last appears. Scan from the left: the first position that has a larger digit
+// somewhere to its right is where the swap must happen, with the largest such digit's last occurrence.
 export function buildTrace(num) {
   const digits = String(num).split('').map(Number)
   const last = Array(10).fill(-1)
   digits.forEach((d, i) => { last[d] = i })
-  const frames = [{ phase: 'start', digits: [...digits], swap: null, activeLine: 2, message: `Digits of ${num}; record the last position of each digit.` }]
+  const frames = [{ phase: 'start', digits: [...digits], i: null, j: null, last: [...last], activeLine: L('const last = Array'), pythonLine: P('last = {'), message: `Record the last position of each digit in ${num}.` }]
+  let result = num
   let done = false
   for (let i = 0; i < digits.length && !done; i++) {
+    frames.push({ phase: 'scan', digits: [...digits], i, j: null, last: [...last], activeLine: L('for (let i = 0'), pythonLine: P('for i, ch in enumerate'), message: `Position ${i} holds ${digits[i]}. Look for a larger digit later in the number.` })
     for (let d = 9; d > digits[i]; d--) {
       if (last[d] > i) {
         const j = last[d]
         ;[digits[i], digits[j]] = [digits[j], digits[i]]
-        frames.push({ phase: 'swap', digits: [...digits], swap: [i, j], activeLine: 7, message: `Swap position ${i} (${num.toString()[i]}) with the larger digit ${d} at ${j}.` })
+        result = Number(digits.join(''))
+        frames.push({ phase: 'swap', digits: [...digits], i, j, last: [...last], activeLine: L('[digits[i], digits[j]]'), pythonLine: P('digits[i], digits[j] = digits[j], digits[i]'), message: `Swap the ${digits[j]} at ${i} with the ${digits[i]} at ${j}: the result is ${result}.` })
         done = true
         break
       }
     }
-    if (!done) frames.push({ phase: 'scan', digits: [...digits], swap: null, index: i, activeLine: 5, message: `Position ${i} (${digits[i]}) has no larger digit later.` })
   }
-  const result = Number(digits.join(''))
-  frames.push({ phase: 'done', digits: [...digits], swap: null, result, activeLine: 9, message: `Maximum after at most one swap: ${result}.` })
+  frames.push({ phase: 'done', digits: [...digits], i: null, j: null, last: [...last], result, activeLine: L('return num'), pythonLine: P('return num'), message: `Largest number after at most one swap: ${result}.` })
   return { input: num, result, frames }
 }
 
-export const code = `record the last position of each digit in num
-for each digit position i from left to right:
-  look for a greater digit to the right, trying 9 downward
-  if one exists, swap position i with its rightmost occurrence, then stop
-return the resulting number`.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-// Scan trace: activeLine 1 (setup), 3 (no greater digit at this position), 4 (swap), 5 (return).
-export const LINE_MAP = { 1: 1, 3: 3, 4: 4, 5: 5 }
-
-export const familyLine = frame => LINE_MAP[frame.activeLine] ?? frame.activeLine
+const SOURCE = `function maximumSwap(num) {
+  const digits = String(num).split('').map(Number)
+  const last = Array(10).fill(-1)
+  digits.forEach((d, i) => { last[d] = i })
+  for (let i = 0; i < digits.length; i++) {
+    for (let d = 9; d > digits[i]; d--) {
+      if (last[d] > i) {
+        const j = last[d]
+        ;[digits[i], digits[j]] = [digits[j], digits[i]]
+        return Number(digits.join(''))
+      }
+    }
+  }
+  return num
+}`
+export const code = SOURCE.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def maximum_swap(num):
     digits = list(str(num))
-    last = {digit: index for index, digit in enumerate(digits)}
-    for i, current in enumerate(digits):
-        for d in range(9, int(current), -1):
-            digit = str(d)
-            if digit in last and last[digit] > i:
-                j = last[digit]
+    last = {ch: i for i, ch in enumerate(digits)}
+    for i, ch in enumerate(digits):
+        for d in range(9, int(ch), -1):
+            j = last.get(str(d), -1)
+            if j > i:
                 digits[i], digits[j] = digits[j], digits[i]
                 return int(''.join(digits))
     return num`
+const P = s => python.split('\n').findIndex(t => t.includes(s)) + 1

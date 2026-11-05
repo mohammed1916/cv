@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.doocs.org/en/lc/2919/',
   complexity: 'O(n) time and O(n) space for the DP table.',
   examples: [
-    { label: 'Example 1', input: '{"nums": [2,3,0,0,2], "k": 4}' },
-    { label: 'Example 2', input: '{"nums": [0,1,3,3], "k": 5}' },
+    { label: 'Spread raises', input: '{"nums": [1,4,0,2,1], "k": 3}' },
+    { label: 'All small', input: '{"nums": [0,0,0,0,0], "k": 2}' },
   ],
 }
 

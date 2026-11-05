@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/construct-product-matrix/',
   complexity: 'O(n * m) time and space. The visualization caps the grid at 12 cells.',
   examples: [
-    { label: 'Example 1', input: '{"grid":[[1,2],[3,4]]}' },
-    { label: 'Example 2', input: '{"grid":[[12345],[2],[1]]}' },
+    { label: 'Two by two', input: '{"grid":[[2,5],[7,3]]}' },
+    { label: 'Modulus hit', input: '{"grid":[[12345,6]]}' },
   ],
 }
 

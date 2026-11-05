@@ -6,10 +6,10 @@ const solve = text => {
   const input = parseInput(text)
   return buildTrace(input).result
 }
-const EX = { n: 4, edges: [[0, 1, 3], [1, 2, 5], [2, 3, 2], [1, 3, 7]] }
+const EX = { n: 4, edges: [[0, 2, 4], [2, 3, 1], [3, 1, 6], [0, 1, 2]] }
 
 test('2247 worked examples', () => {
-  assert.equal(solve(JSON.stringify({ ...EX, k: 2 })), 12)
+  assert.equal(solve(JSON.stringify({ ...EX, k: 2 })), 8)
   assert.equal(solve(JSON.stringify({ ...EX, k: 3 })), 12)
   assert.equal(solve(JSON.stringify({ ...EX, k: 4 })), -1)
   assert.equal(solve(JSON.stringify({ n: 2, edges: [[0, 1, 9]], k: 1 })), 9)

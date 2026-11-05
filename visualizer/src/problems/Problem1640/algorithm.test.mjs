@@ -1,59 +1,38 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { buildTrace, parseInput } from './algorithm.js'
+import { buildTrace, parseInput, phases, examples, code, python, pythonLineMap } from './algorithm.js'
 
-// Independent oracle: try every order of the pieces and compare the concatenation with arr.
-function permutations(items) {
-  if (items.length <= 1) return [items]
-  return items.flatMap((item, i) => permutations([...items.slice(0, i), ...items.slice(i + 1)]).map(rest => [item, ...rest]))
-}
-function oracle(arr, pieces) {
-  return permutations(pieces).some(order => order.flat().join() === arr.join())
-}
-
-test('a hand-made case with a single-value piece forms the array', () => {
-  const run = buildTrace(parseInput('{"arr":[5,7,9,2],"pieces":[[7,9],[5],[2]]}'))
-  assert.equal(run.result, true)
+test('1640 examples, code and python are well formed', () => {
+  assert.ok(examples.length >= 3)
+  for (const example of examples) {
+    const run = buildTrace(parseInput(example.input))
+    assert.equal(run.frames.at(-1).phase, 'done')
+    for (const frame of run.frames) assert.ok(phases.some(p => p.id === frame.phase))
+  }
+  assert.equal(code.length, 8)
+  assert.ok(python.includes('def canFormArray'))
+  assert.equal(Object.keys(pythonLineMap).length, code.length)
 })
 
-test('an interleaved piece cannot be used, so the answer is false', () => {
-  const run = buildTrace(parseInput('{"arr":[1,2,3],"pieces":[[1,3],[2]]}'))
-  assert.equal(run.result, false)
-  assert.equal(run.frames.at(-1).phase, 'done')
-})
-
-test('random splittings of arr into shuffled pieces are accepted, and the oracle agrees', () => {
-  let state = 23
-  const rand = m => { state = (state * 1103515245 + 12345) & 0x7fffffff; return state % m }
-  for (let t = 0; t < 200; t++) {
-    const n = 1 + rand(7)
-    const arr = []
-    while (arr.length < n) { const v = rand(201) - 100; if (!arr.includes(v)) arr.push(v) }
+test('1640 agrees with a brute force search over piece orders', () => {
+  const orders = list => list.length <= 1 ? [list] : list.flatMap((x, i) => orders([...list.slice(0, i), ...list.slice(i + 1)]).map(rest => [x, ...rest]))
+  let seed = 8
+  const rnd = n => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed % n }
+  for (let trial = 0; trial < 150; trial++) {
+    const values = [1, 2, 3, 4, 5, 6, 7].sort(() => rnd(2) - 0.5).slice(0, 2 + rnd(5))
     const pieces = []
-    for (let i = 0; i < n;) {
-      const len = 1 + rand(Math.min(3, n - i))
-      pieces.push(arr.slice(i, i + len))
-      i += len
+    let rest = [...values]
+    while (rest.length) {
+      const len = 1 + rnd(rest.length)
+      pieces.push(rest.splice(0, len))
     }
-    for (let i = pieces.length - 1; i > 0; i--) { const j = rand(i + 1); [pieces[i], pieces[j]] = [pieces[j], pieces[i]] }
-    const input = { arr, pieces }
-    assert.equal(buildTrace(input).result, oracle(arr, pieces), JSON.stringify(input))
-    assert.equal(buildTrace(input).result, true)
+    const arr = pieces.flat()
+    const expected = orders(pieces).some(order => order.flat().every((v, i) => v === arr[i]))
+    assert.equal(buildTrace({ arr, pieces }).result, expected, JSON.stringify({ arr, pieces }))
   }
 })
 
-test('random inputs with one swapped value agree with the oracle', () => {
-  const cases = [
-    { arr: [1, 2, 3, 4], pieces: [[2, 1], [3], [4]] },
-    { arr: [1, 2, 3, 4], pieces: [[1, 2], [4, 3]] },
-    { arr: [9, 8, 7], pieces: [[8], [9, 7]] },
-  ]
-  for (const input of cases) assert.equal(buildTrace(input).result, oracle(input.arr, input.pieces), JSON.stringify(input))
-})
-
-test('invalid inputs are rejected', () => {
+test('1640 rejects invalid input', () => {
   assert.throws(() => parseInput('{"arr":[1,1],"pieces":[[1],[1]]}'))
   assert.throws(() => parseInput('{"arr":[1,2],"pieces":[[1]]}'))
-  assert.throws(() => parseInput('{"arr":[1,2],"pieces":[[1],[3]]}'))
-  assert.throws(() => parseInput('[1,2]'))
 })

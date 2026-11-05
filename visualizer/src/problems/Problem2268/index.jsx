@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-number-of-keypresses/',
   complexity: 'O(n + k log k) time for n letters and k distinct letters, with O(1) extra space for the 26-letter alphabet. The visualization caps the word at 26 letters; the draft does not verify the official length bound.',
   examples: [
-    { label: 'apple', input: 'apple' },
+    { label: 'apple', input: 'banana' },
     { label: 'Full alphabet', input: 'abcdefghijklmnopqrstuvwxyz' },
     { label: 'Repeats', input: 'aaaabbc' },
   ],

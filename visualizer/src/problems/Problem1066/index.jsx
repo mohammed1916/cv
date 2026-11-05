@@ -20,8 +20,8 @@ const definition = {
   url: 'https://leetcode.com/problems/campus-bikes-ii/description/',
   complexity: 'O(2^M * M) time for M bikes and O(2^M) space, using a bitmask over bikes. The visualization caps input at 6 workers, 8 bikes and coordinates 0 to 20; the official bounds are not verified.',
   examples: [
-    { label: 'Two workers', input: '{"workers":[[0,0],[2,1]],"bikes":[[1,2],[3,3]]}' },
-    { label: 'Three workers', input: '{"workers":[[0,0],[1,1],[2,0]],"bikes":[[1,0],[2,2],[2,1]]}' },
+    { label: 'Two workers', input: '{"workers":[[1,1],[4,3]],"bikes":[[0,4],[5,0],[3,3]]}' },
+    { label: 'Three workers', input: '{"workers":[[2,2],[6,1],[0,5]],"bikes":[[1,3],[4,4],[7,0],[3,6]]}' },
     { label: 'Greedy trap', input: '{"workers":[[2,0],[3,1]],"bikes":[[3,0],[0,0]]}' },
   ],
 }

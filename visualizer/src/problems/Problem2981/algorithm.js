@@ -21,19 +21,27 @@ export const python = [
   "    return ans",
 ].join("\n");
 
-export const code = [
-  "keep the three largest candidate lengths for each letter",
-  "i = 0",
-  "while i is inside s",
-  "find the run [i, j) of the same letter",
-  "c = letter of s[i]; r = run length",
-  "for each length in r, r - 1, r - 2 that is positive",
-  "insert length into top[c] and keep the three largest",
-  "i = j",
-  "ans = -1",
-  "for each letter that has three candidates",
-  "ans = max(ans, third candidate of that letter)",
-  "return ans",
+export const code = ["function maximumLength(s) {",
+  "  const top = Array.from({ length: 26 }, () => [])",
+  "  let i = 0",
+  "  while (i < s.length) {",
+  "    let j = i",
+  "    while (j < s.length && s[j] === s[i]) j += 1",
+  "    const c = s.charCodeAt(i) - 97",
+  "    const r = j - i",
+  "    for (const length of [r, r - 1, r - 2]) {",
+  "      if (length > 0) {",
+  "        top[c].push(length)",
+  "        top[c].sort((a, b) => b - a)",
+  "        top[c] = top[c].slice(0, 3)",
+  "      }",
+  "    }",
+  "    i = j",
+  "  }",
+  "  let ans = -1",
+  "  for (let c = 0; c < 26; c++) if (top[c].length === 3) ans = Math.max(ans, top[c][2])",
+  "  return ans",
+  "}"
 ].map((text, index) => ({ line: index + 1, text }));
 
 function parseJson(text) {
@@ -55,21 +63,21 @@ export function buildTrace(input) {
   const top = Array.from({ length: 26 }, () => []);
   const frames = [];
   const push = (f) => frames.push({ seq: s.split(""), index: -1, stats: {}, ...f });
-  push({ phase: "init", activeLine: 1, pythonLine: 2, index: 0, message: "Create an empty list of top candidate lengths for each letter." });
+  push({ phase: "init", activeLine: 2, pythonLine: 2, index: 0, message: "Create an empty list of top candidate lengths for each letter." });
   let i = 0;
   while (i < s.length) {
-    push({ phase: "scan", activeLine: 2, pythonLine: 4, index: i, message: `Start a run at index ${i}.` });
+    push({ phase: "scan", activeLine: 4, pythonLine: 4, index: i, message: `Start a run at index ${i}.` });
     let j = i;
     while (j < s.length && s[j] === s[i]) j++;
     const c = s.charCodeAt(i) - 97;
     const r = j - i;
-    push({ phase: "run", activeLine: 3, pythonLine: 8, index: i, stats: { letter: s[i], run: r }, message: `Run of '${s[i]}' covers [${i}, ${j - 1}], length ${r}.` });
+    push({ phase: "run", activeLine: 8, pythonLine: 8, index: i, stats: { letter: s[i], run: r }, message: `Run of '${s[i]}' covers [${i}, ${j - 1}], length ${r}.` });
     for (const length of [r, r - 1, r - 2]) {
       if (length <= 0) continue;
       top[c].push(length);
       top[c].sort((a, b) => b - a);
       top[c] = top[c].slice(0, 3);
-      push({ phase: "candidate", activeLine: 4, pythonLine: 12, index: i, stats: { letter: s[i], length, top: top[c].join(",") }, message: `Candidate length ${length} for '${s[i]}'; keep the three largest.` });
+      push({ phase: "candidate", activeLine: 11, pythonLine: 12, index: i, stats: { letter: s[i], length, top: top[c].join(",") }, message: `Candidate length ${length} for '${s[i]}'; keep the three largest.` });
     }
     i = j;
   }
@@ -77,9 +85,9 @@ export function buildTrace(input) {
   for (let c = 0; c < 26; c++) {
     if (top[c].length === 3) {
       ans = Math.max(ans, top[c][2]);
-      push({ phase: "answer", activeLine: 5, pythonLine: 19, index: -1, stats: { letter: String.fromCharCode(97 + c), third: top[c][2], ans }, message: `Letter '${String.fromCharCode(97 + c)}' has third candidate ${top[c][2]}; best so far ${ans}.` });
+      push({ phase: "answer", activeLine: 19, pythonLine: 19, index: -1, stats: { letter: String.fromCharCode(97 + c), third: top[c][2], ans }, message: `Letter '${String.fromCharCode(97 + c)}' has third candidate ${top[c][2]}; best so far ${ans}.` });
     }
   }
-  push({ phase: "done", activeLine: 6, pythonLine: 20, index: -1, stats: { ans }, message: `Return ${ans}.` });
+  push({ phase: "done", activeLine: 20, pythonLine: 20, index: -1, stats: { ans }, message: `Return ${ans}.` });
   return { input, result: ans, frames };
 }

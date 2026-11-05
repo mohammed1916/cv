@@ -16,7 +16,7 @@ export function buildTrace({ s, k }) {
   let v = 0
   let c = 0
   let answer = 0
-  frames.push({ pythonLine: P('counts = {(0, 0): 1}'), phase: 'start', activeLine: L('remember the empty prefix'), at: -1, v, c, found: 0, answer, message: `Vowel count must be a multiple of ${m} to make the product divisible by ${k}.` })
+  frames.push({ pythonLine: P('counts = {(0, 0): 1}'), phase: 'start', activeLine: L("new Map([['0,0', 1]])"), at: -1, v, c, found: 0, answer, message: `Vowel count must be a multiple of ${m} to make the product divisible by ${k}.` })
   for (let i = 0; i < s.length; i++) {
     if (VOWELS.has(s[i])) v += 1
     else c += 1
@@ -24,22 +24,26 @@ export function buildTrace({ s, k }) {
     const found = counts.get(key) ?? 0
     answer += found
     counts.set(key, (counts.get(key) ?? 0) + 1)
-    frames.push({ pythonLine: P('answer += counts.get(key, 0)'), phase: 'scan', activeLine: L('count earlier prefixes'), at: i, v, c, found, answer, message: `Ends at ${s[i]}: ${found} earlier prefix${found === 1 ? '' : 'es'} balance this one, total ${answer}.` })
+    frames.push({ pythonLine: P('answer += counts.get(key, 0)'), phase: 'scan', activeLine: L('answer += counts.get'), at: i, v, c, found, answer, message: `Ends at ${s[i]}: ${found} earlier prefix${found === 1 ? '' : 'es'} balance this one, total ${answer}.` })
   }
-  frames.push({ pythonLine: P('return answer'), phase: 'done', activeLine: L('return the answer'), at: -1, v, c, found: 0, answer, message: `${answer} beautiful substring${answer === 1 ? '' : 's'}.` })
+  frames.push({ pythonLine: P('return answer'), phase: 'done', activeLine: L('return answer'), at: -1, v, c, found: 0, answer, message: `${answer} beautiful substring${answer === 1 ? '' : 's'}.` })
   return { input: { s, k }, result: answer, frames }
 }
 
-export const code = `count beautiful substrings of s for a given k
-  find the smallest m with m times m divisible by k
-  start counts with the empty prefix balance (0, 0) seen once
-  set v and c to the running vowel and consonant counts
-  for each letter of s
-    update v or c
-    key is (v minus c, v modulo m)
-    add the number of earlier prefixes with that key to answer
-    record this key
-  return answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function countBeautifulSubstrings(s, k) {
+  let m = 1
+  while ((m * m) % k !== 0) m += 1
+  const counts = new Map([['0,0', 1]])
+  let v = 0, c = 0, answer = 0
+  for (const ch of s) {
+    if (VOWELS.has(ch)) v += 1
+    else c += 1
+    const key = \`\${v - c},\${v % m}\`
+    answer += counts.get(key) ?? 0
+    counts.set(key, (counts.get(key) ?? 0) + 1)
+  }
+  return answer
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def count_beautiful_substrings(s, k):

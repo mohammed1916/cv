@@ -1,10 +1,40 @@
-import authoredExamples0 from '../../config/examples/collection--2241.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import OperationLog from '../../components/shared/OperationLog'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/transactionsAndCornersBatch.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const DENOMS = [20, 50, 100, 200, 500]
 
-const definition = { ...definitions[2241], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+const definition = {
+  number: '2241',
+  phases: [
+    { id: 'deposit', label: 'Deposit', description: 'Add the notes to the stock.' },
+    { id: 'withdraw', label: 'Withdraw', description: 'Start a withdrawal from the largest note.' },
+    { id: 'pick', label: 'Pick', description: 'Use as many of this note as fit the remaining amount.' },
+    { id: 'accept', label: 'Hand over', description: 'The amount was paid exactly, so the notes leave the stock.' },
+    { id: 'reject', label: 'Reject', description: 'The amount cannot be paid, so nothing changes.' },
+  ],
+  parse: parseInput, build: buildTrace, code, python,
+  inputLabel: 'JSON {"ops":[{"op":"deposit","counts":[0,0,0,3,1]},{"op":"withdraw","amount":600}]}',
+  url: 'https://leetcode.com/problems/design-an-atm-machine/',
+  complexity: 'O(1) time per call and O(1) space, since there are five note values.',
+  examples: [
+    { label: 'Largest first', input: '{"ops":[{"op":"deposit","counts":[0,0,0,3,1]},{"op":"withdraw","amount":600},{"op":"withdraw","amount":500},{"op":"withdraw","amount":400},{"op":"withdraw","amount":20}]}' },
+    { label: 'Small notes', input: '{"ops":[{"op":"deposit","counts":[2,1,0,0,0]},{"op":"withdraw","amount":70},{"op":"withdraw","amount":50}]}' },
+  ],
+}
+
+export default function AtmMachine() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+    <table aria-label="Notes in the machine">
+      <thead><tr>{DENOMS.map(d => <th key={d} scope="col">${d}</th>)}</tr></thead>
+      <tbody><tr>{step.counts.map((c, k) => <td key={k} data-current={step.pick === k ? 'true' : undefined}
+        style={{ textAlign: 'center', background: step.pick === k ? 'var(--primary)' : 'var(--surface2)', color: step.pick === k ? 'var(--surface)' : 'var(--text)' }}>{c}</td>)}</tr></tbody>
+    </table>
+    {step.remaining !== null && <output aria-label="Amount still to pay">{`remaining ${step.remaining}`}</output>}
+    <OperationLog title="Calls" ops={step.log} current={step.log.length - 1} />
+    <p role="status">{step.message}</p>
+  </>} renderReasoning={() => <>
+    <p>The machine always tries the largest note first. Each note value is used as many times as it fits the remaining amount and the stock allows.</p>
+    <p>If something is left at the end, the request is refused and the stock stays unchanged. The greedy order is the rule the problem asks for, not the fewest notes overall.</p>
+  </>} />
+}

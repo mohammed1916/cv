@@ -14,76 +14,91 @@ export function parseInput(text) {
   return { words: data.words, letters: data.letters }
 }
 
-const END = '#'
-const newNode = () => ({ next: new Map(), end: false })
+// Each trie node is an object: letter keys lead to children, and `end` marks a stored word.
+const toTree = (node, label) => ({
+  label, end: Boolean(node.end),
+  kids: Object.keys(node).filter(k => k !== 'end').sort().map(k => toTree(node[k], k)),
+})
 
 export function buildTrace({ words, letters }) {
-  const root = newNode()
+  const root = {}
   const frames = []
   const stored = []
   const answers = []
   let history = ''
-  const snap = (extra = {}) => ({ stored: stored.slice(), history, answers: answers.slice(), walk: '', hit: null, ...extra })
+  const snap = (extra = {}) => ({ stored: stored.slice(), history, answers: answers.slice(), walk: '', hit: null, tree: toTree(root, 'root'), ...extra })
+  const PY = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+  const CL = s => code.findIndex(c => c.text.includes(s)) + 1
 
   for (const word of words) {
     const reversed = [...word].reverse().join('')
     let node = root
     for (const ch of reversed) {
-      if (!node.next.has(ch)) node.next.set(ch, newNode())
-      node = node.next.get(ch)
+      node[ch] ??= {}
+      node = node[ch]
     }
     node.end = true
     stored.push(reversed)
-    frames.push({ phase: 'build', activeLine: 7, message: `Store "${word}" as "${reversed}" in the reversed trie. Reading the stored form from its start follows the word's last letter first.`, snapshot: snap() })
+    frames.push({ phase: 'build', activeLine: CL('node[ch] ??= {}'), pythonLine: PY('node = node.setdefault'), message: `Store "${word}" as "${reversed}" in the reversed trie. Reading the stored form from its start follows the word's last letter first.`, snapshot: snap() })
   }
 
   for (const letter of letters) {
     history += letter
-    frames.push({ phase: 'read', activeLine: 10, message: `Stream letter "${letter}". The history is now "${history}".`, snapshot: snap({ letter }) })
+    frames.push({ phase: 'read', activeLine: CL('history.push(letter)'), pythonLine: PY('history.append(letter)'), message: `Stream letter "${letter}". The history is now "${history}".`, snapshot: snap({ letter }) })
     let node = root
     let walk = ''
     let hit = false
     for (let k = history.length - 1; k >= 0; k--) {
       const ch = history[k]
-      const child = node.next.get(ch)
+      const child = node[ch]
       if (!child) {
-        frames.push({ phase: 'walk', activeLine: 13, message: `No edge for "${ch}" from "${walk}". Stop walking.`, snapshot: snap({ letter, walk, hit: null }) })
+        frames.push({ phase: 'walk', activeLine: CL('if (!node) break'), pythonLine: PY('if node is None'), message: `No edge for "${ch}" from "${walk}". Stop walking.`, snapshot: snap({ letter, walk, hit: null }) })
         break
       }
       node = child
       walk += ch
       if (node.end) {
         hit = true
-        frames.push({ phase: 'walk', activeLine: 14, message: `"${walk}" reaches the end of a stored word, so the stream ends with a dictionary word.`, snapshot: snap({ letter, walk, hit: true }) })
+        frames.push({ phase: 'walk', activeLine: CL('if (node.end) {'), pythonLine: PY('if "#" in node'), message: `"${walk}" reaches the end of a stored word, so the stream ends with a dictionary word.`, snapshot: snap({ letter, walk, hit: true }) })
         break
       }
-      frames.push({ phase: 'walk', activeLine: 13, message: `Follow "${ch}" to reach "${walk}". No word ends here yet, so keep walking.`, snapshot: snap({ letter, walk, hit: null }) })
+      frames.push({ phase: 'walk', activeLine: CL('if (node.end) {'), pythonLine: PY('if "#" in node'), message: `Follow "${ch}" to reach "${walk}". No word ends here yet, so keep walking.`, snapshot: snap({ letter, walk, hit: null }) })
     }
     answers.push(hit)
-    frames.push({ phase: 'answer', activeLine: 15, message: hit ? `Answer true for this letter.` : `Answer false for this letter.`, snapshot: snap({ letter, walk, hit }) })
+    frames.push({ phase: 'answer', activeLine: CL('answers.push(hit)'), pythonLine: PY('answers.append(hit)'), message: hit ? 'Answer true for this letter.' : 'Answer false for this letter.', snapshot: snap({ letter, walk, hit }) })
   }
-  frames.push({ phase: 'answer', activeLine: 16, message: `All ${letters.length} answers are ready.`, snapshot: snap() })
+  frames.push({ phase: 'answer', activeLine: CL('return answers'), pythonLine: PY('return answers'), message: `All ${letters.length} answers are ready.`, snapshot: snap() })
   return { input: { words, letters }, result: answers, frames }
 }
 
-export const code = [
-  'FUNCTION streamAnswers(words, letters)',
-  '    root ← empty trie node',
-  '    FOR EACH word IN words',
-  '        node ← root',
-  '        FOR EACH character ch of word, read backwards',
-  '            node ← child of node for ch (create if missing)',
-  '        mark node as the end of a word',
-  '    history ← empty ; answers ← empty',
-  '    FOR EACH letter IN letters',
-  '        append letter to history',
-  '        node ← root ; hit ← false',
-  '        FOR k FROM newest position DOWN TO 0',
-  '            node ← child of node for history[k] (stop if missing)',
-  '            IF node is a word end THEN hit ← true ; stop',
-  '        append hit to answers',
-  '    RETURN answers',
-]
+export const code = `function streamAnswers(words, letters) {
+  const root = {}
+  for (const word of words) {
+    let node = root
+    for (const ch of [...word].reverse()) {
+      node[ch] ??= {}
+      node = node[ch]
+    }
+    node.end = true
+  }
+  const history = []
+  const answers = []
+  for (const letter of letters) {
+    history.push(letter)
+    let node = root
+    let hit = false
+    for (let k = history.length - 1; k >= 0; k--) {
+      node = node[history[k]]
+      if (!node) break
+      if (node.end) {
+        hit = true
+        break
+      }
+    }
+    answers.push(hit)
+  }
+  return answers
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def stream_answers(words, letters):
     root = {}
@@ -91,7 +106,7 @@ export const python = `def stream_answers(words, letters):
         node = root
         for ch in reversed(word):
             node = node.setdefault(ch, {})
-        node[END] = True
+        node["#"] = True
     history = []
     answers = []
     for letter in letters:
@@ -102,10 +117,10 @@ export const python = `def stream_answers(words, letters):
             node = node.get(ch)
             if node is None:
                 break
-            if END in node:
+            if "#" in node:
                 hit = True
                 break
         answers.append(hit)
     return answers`
 
-export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 10, 10: 11, 11: 12, 12: 14, 13: 15, 14: 18, 15: 21, 16: 22 }
+export const pythonLineMap = {}

@@ -4,45 +4,55 @@ export function parseInput(text) {
   return nums
 }
 
-// The degree is the largest frequency. For each value, the shortest subarray with that degree spans its first to last occurrence.
+// The degree is the largest frequency. Among values reaching it, the shortest span from first to last
+// occurrence is the answer: the subarray that holds all copies of one value.
 export function buildTrace(nums) {
-  const first = new Map(), last = new Map(), count = new Map()
-  const frames = [{ phase: 'start', index: -1, degree: 0, best: null, activeLine: 2, message: 'Record first and last positions and counts.' }]
+  const info = new Map()
+  const frames = [{ phase: 'start', index: null, info: [], degree: null, best: null, activeLine: L('const info = new Map()'), pythonLine: P('info = {}'), message: 'Record the count, first index and last index of every value.' }]
   nums.forEach((v, i) => {
-    if (!first.has(v)) first.set(v, i)
-    last.set(v, i)
-    count.set(v, (count.get(v) ?? 0) + 1)
+    const entry = info.get(v)
+    if (entry) { entry.count++; entry.last = i } else info.set(v, { value: v, count: 1, first: i, last: i })
+    frames.push({ phase: 'record', index: i, info: [...info.values()].map(e => ({ ...e })), degree: null, best: null, activeLine: L('info.set(v'), pythonLine: P('info[v]'), message: `Index ${i} holds ${v}: its count is now ${info.get(v).count}.` })
   })
-  const degree = Math.max(...count.values())
-  let best = null
-  for (const [v, c] of count) {
-    if (c !== degree) continue
-    const len = last.get(v) - first.get(v) + 1
-    if (best === null || len < best) best = len
-    frames.push({ phase: 'candidate', index: last.get(v), value: v, degree, span: [first.get(v), last.get(v)], best, activeLine: 7, message: `${v} occurs ${c} times; its span is ${len} long.` })
+  const degree = Math.max(...[...info.values()].map(e => e.count))
+  let best = Infinity
+  for (const e of info.values()) {
+    if (e.count === degree) best = Math.min(best, e.last - e.first + 1)
   }
-  frames.push({ phase: 'done', index: nums.length - 1, degree, best, result: best, activeLine: 9, message: `Degree ${degree}; shortest span ${best}.` })
+  frames.push({ phase: 'done', index: null, info: [...info.values()].map(e => ({ ...e })), degree, best, result: best, activeLine: L('return best'), pythonLine: P('return best'), message: `Degree ${degree}; shortest span ${best}.` })
   return { input: nums, result: best, frames }
 }
 
-export const code = `set the count, first-index, and last-index maps to empty; set degree and shortest to 0
-for each index i with value v in nums
-  record the first index of v if new, set its last index to i, and increase its count
-  if the count of v is above degree, set degree to it and shortest to the span of v
-  otherwise if the count of v equals degree, set shortest to the smaller of shortest and the span of v
-return shortest`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const SOURCE = `function findShortestSubArray(nums) {
+  const info = new Map()
+  nums.forEach((v, i) => {
+    const entry = info.get(v)
+    if (entry) {
+      entry.count++
+      entry.last = i
+    } else {
+      info.set(v, { count: 1, first: i, last: i })
+    }
+  })
+  const degree = Math.max(...[...info.values()].map(e => e.count))
+  let best = Infinity
+  for (const e of info.values()) {
+    if (e.count === degree) best = Math.min(best, e.last - e.first + 1)
+  }
+  return best
+}`
+export const code = SOURCE.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
-// Family lines 1-5 are setup, the loop header, the per-value update, the span comparison and the return.
-export const LINE_MAP = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 6 }
-
-export const python = `def find_shortest_subarray(nums):
-    first = {}
-    last = {}
-    count = {}
-    for i, value in enumerate(nums):
-        if value not in first:
-            first[value] = i
-        last[value] = i
-        count[value] = count.get(value, 0) + 1
-    degree = max(count.values())
-    return min(last[v] - first[v] + 1 for v in count if count[v] == degree)`
+export const python = `def find_shortest_sub_array(nums):
+    info = {}
+    for i, v in enumerate(nums):
+        if v in info:
+            info[v][0] += 1
+            info[v][2] = i
+        else:
+            info[v] = [1, i, i]
+    degree = max(entry[0] for entry in info.values())
+    best = min(entry[2] - entry[1] + 1 for entry in info.values() if entry[0] == degree)
+    return best`
+const P = s => python.split('\n').findIndex(t => t.includes(s)) + 1

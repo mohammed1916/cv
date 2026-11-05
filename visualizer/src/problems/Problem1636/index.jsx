@@ -1,27 +1,28 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import IndexedSequence from '../../components/shared/IndexedSequence'
-import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
-import { phases, parseInput, buildTrace, code, python } from './algorithm'
+import View from './View'
+import { buildTrace, parseInput, code, python, pythonLineMap, phases, examples, complexity } from './algorithm.js'
 
 const definition = {
-  phases, parse: parseInput, build: buildTrace, code, python,
-  inputLabel: 'Numbers (JSON with nums)',
+  number: '1636',
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  pythonLineMap,
+  phases,
+  examples,
+  complexity,
+  inputLabel: 'JSON array of integers',
   url: 'https://leetcode.com/problems/sort-array-by-increasing-frequency/',
-  complexity: 'O(n log n) time and O(n) space. The visualization accepts up to 20 values.',
-  examples: [
-    { label: 'Mixed counts', input: '{"nums":[4,1,1,7,4,9,9,9,2]}' },
-    { label: 'One value', input: '{"nums":[5,5,5]}' },
-    { label: 'Negatives', input: '{"nums":[-2,3,-2,3,0]}' },
-  ],
 }
 
-export default function SortByIncreasingFrequency() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="Input" length={run.input.nums.length} valueAt={i => run.input.nums[i]} />
-    <StackLane title="Count pairs (value:count)" items={(step.keys?.length ? step.keys : step.tally).map(t => `${t.value}:${t.count}`)} />
-    <StackLane title="Placed so far" items={step.placed.map(String)} />
-  </>} renderReasoning={({ step }) => <>
-    <p>Counting first turns each value into a single key. Sorting keys by count, then by value descending, decides the order of whole groups.</p>
-    <p>Repeated values stay together because every copy shares the same key.</p>
-  </>} />
+export default function Problem1636Visualizer() {
+  return <AlgorithmWorkspace
+    definition={definition}
+    renderVisual={({ run, step }) => <View run={run} step={step} />}
+    renderReasoning={() => <>
+      <p>Frequency is the first sort key, so every value stays together in one block.</p>
+      <p>Within a block of equal frequency, the larger value goes first.</p>
+    </>}
+  />
 }

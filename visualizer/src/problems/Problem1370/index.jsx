@@ -1,10 +1,10 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import FrequencyCountTable from '../../components/shared/FrequencyCountTable'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import { buildTrace, parseInput, code, python, pythonLineMap, phases } from './algorithm'
 
 const definition = {
-  phases, parse: parseInput, build: buildTrace, code, python,
+  phases, parse: parseInput, build: buildTrace, code, python, pythonLineMap,
   inputLabel: 'Letters (JSON object with s)',
   url: 'https://leetcode.com/problems/increasing-decreasing-string/',
   complexity: 'O(n) time and O(1) extra space for the 26 letter counts. The visualization accepts up to 200 letters.',

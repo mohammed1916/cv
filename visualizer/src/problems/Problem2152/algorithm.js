@@ -19,18 +19,38 @@ export function parseInput(text) {
   return { points }
 }
 
-export const code = `FUNCTION minLines(points)
-    lines ← one line per point alone, plus, for each pair, the mask of points on their line
-    RETURN solve(covered = nothing)
-FUNCTION solve(covered)
-    IF every point is covered THEN RETURN 0
-    IF covered is memoised THEN RETURN the memo value
-    i ← lowest point not yet covered
-    best ← infinity
-    FOR each line that contains point i
-        best ← min(best, 1 + solve(covered plus line))
-    memo[covered] ← best
-    RETURN best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `function minLines(points) {
+  const n = points.length
+  const full = (1 << n) - 1
+  const lines = []
+  for (let i = 0; i < n; i++) {
+    lines.push(1 << i)
+    for (let j = i + 1; j < n; j++) {
+      let mask = 0
+      for (let k = 0; k < n; k++) {
+        const [x1, y1] = points[i]
+        const [x2, y2] = points[j]
+        const [x3, y3] = points[k]
+        if ((x2 - x1) * (y3 - y1) === (y2 - y1) * (x3 - x1)) mask |= 1 << k
+      }
+      lines.push(mask)
+    }
+  }
+  const memo = new Map()
+  const solve = covered => {
+    if (covered === full) return 0
+    if (memo.has(covered)) return memo.get(covered)
+    let i = 0
+    while (covered >> i & 1) i++
+    let best = Infinity
+    for (const line of lines) {
+      if (line >> i & 1) best = Math.min(best, 1 + solve(covered | line))
+    }
+    memo.set(covered, best)
+    return best
+  }
+  return solve(0)
+}`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def min_lines(points):
     n = len(points)
@@ -105,25 +125,25 @@ export function buildTrace({ points }) {
   const lines = candidateLines(points)
   const frames = []
   const memo = new Map()
-  frames.push({ phase: 'start', activeLine: L('lines ← one line per point'), pythonLine: P('lines = set()'), message: `${lines.length} distinct candidate lines cover the points.`, covered: 0, target: -1, line: null, lines, value: null })
+  frames.push({ phase: 'start', activeLine: L('const lines = []'), pythonLine: P('lines = set()'), message: `${lines.length} distinct candidate lines cover the points.`, covered: 0, target: -1, line: null, lines, value: null })
   function solve(covered, depth) {
     if (covered === full) return 0
     if (memo.has(covered)) return memo.get(covered)
     const i = [...Array(n).keys()].find(k => !(covered >> k & 1))
-    frames.push({ phase: 'call', activeLine: L('i ← lowest point'), pythonLine: P('i = next('), message: `Point ${i} is the lowest uncovered point; try the lines through it.`, covered, target: i, line: null, lines, value: null, depth })
+    frames.push({ phase: 'call', activeLine: L('let i = 0'), pythonLine: P('i = next('), message: `Point ${i} is the lowest uncovered point; try the lines through it.`, covered, target: i, line: null, lines, value: null, depth })
     let best = Infinity
     for (const line of lines) {
       if (!(line.mask >> i & 1)) continue
       const rest = solve(covered | line.mask, depth + 1)
       best = Math.min(best, 1 + rest)
-      frames.push({ phase: 'try', activeLine: L('best ← min('), pythonLine: P('best = min('), message: `Line through points ${line.a}${line.b === line.a ? '' : ' and ' + line.b} covers ${bits(line.mask, n).join(', ')}; ${1 + rest} line(s) in total from here.`, covered, target: i, line, lines, value: best, depth })
+      frames.push({ phase: 'try', activeLine: L('best = Math.min(best'), pythonLine: P('best = min('), message: `Line through points ${line.a}${line.b === line.a ? '' : ' and ' + line.b} covers ${bits(line.mask, n).join(', ')}; ${1 + rest} line(s) in total from here.`, covered, target: i, line, lines, value: best, depth })
     }
     memo.set(covered, best)
-    frames.push({ phase: 'call', activeLine: L('memo[covered] ← best'), pythonLine: P('memo[covered] = best'), message: `Best from this covered set is ${best}.`, covered, target: i, line: null, lines, value: best, depth })
+    frames.push({ phase: 'call', activeLine: L('memo.set(covered, best)'), pythonLine: P('memo[covered] = best'), message: `Best from this covered set is ${best}.`, covered, target: i, line: null, lines, value: best, depth })
     return best
   }
   const result = solve(0, 0)
-  frames.push({ phase: 'done', activeLine: L('RETURN best'), pythonLine: P('return solve(0)'), message: `${result} line${result === 1 ? '' : 's'} cover every point.`, covered: full, target: -1, line: null, lines, value: result })
+  frames.push({ phase: 'done', activeLine: L('return solve(0)'), pythonLine: P('return solve(0)'), message: `${result} line${result === 1 ? '' : 's'} cover every point.`, covered: full, target: -1, line: null, lines, value: result })
   return { input: { points }, result, frames }
 }
 

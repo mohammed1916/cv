@@ -1,10 +1,30 @@
-import authoredExamples0 from '../../config/examples/collection--2206.js';
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import PairCountView from './PairCountView'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitionGroups/pathsAndCoverageBatch.js';
-import withProblemStory from '../../components/shared/withProblemStory';
-import storyGuide from './storyGuide.json';
+const definition = {
+  number: '2206',
+  phases,
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  inputLabel: 'JSON array with an even number of integers, e.g. [3,2,3,2,2,2]',
+  url: 'https://leetcode.com/problems/divide-array-into-equal-pairs/',
+  complexity: 'O(n) time and O(n) space for the counts. The page caps the array at 16 values from 1 to 9.',
+  examples: [
+    { label: 'Even counts', input: '[3,2,3,2,2,2]' },
+    { label: 'All distinct', input: '[1,2,3,4]' },
+    { label: 'Mixed counts', input: '[1,1,1,1,2,2]' },
+  ],
+}
 
-const definition = { ...definitions[2206], examples: authoredExamples0 };
-function Visualizer() { return <Story definition={definition} />; }
-export default withProblemStory(Visualizer, storyGuide);
+export default function Problem2206Visualizer() {
+  return (
+    <AlgorithmWorkspace
+      definition={definition}
+      renderVisual={({ run, step }) => <PairCountView run={run} step={step} />}
+      renderReasoning={({ step }) => <p>{step.message}</p>}
+    />
+  )
+}

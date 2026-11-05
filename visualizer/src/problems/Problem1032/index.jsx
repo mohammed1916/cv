@@ -20,17 +20,29 @@ function StreamChecker() {
     return <>
       <p>Stream so far: <strong>{s.history || '(empty)'}</strong></p>
       <p>Walk from the newest letter backwards: <strong>{s.walk || '—'}</strong>{s.hit === true ? ' · word found' : ''}</p>
-      <table>
-        <caption>Stored words, each reversed</caption>
-        <thead><tr><th>Stored reversed form</th></tr></thead>
-        <tbody>{s.stored.map(w => <tr key={w}><td>{w}</td></tr>)}</tbody>
-      </table>
+      <section aria-label="Reversed trie">
+        <p>Reversed trie of the stored words. The highlighted path is the walk so far, read from the newest letter.</p>
+        <TrieTree tree={s.tree} path="" walk={s.walk ?? ''} />
+      </section>
       <p>Answers: {s.answers.length ? s.answers.map(a => a ? 'true' : 'false').join(', ') : 'none yet'}</p>
     </>
   }} renderReasoning={() => <>
     <p>Reversing each word turns "ends with this word" into "starts from the newest letter". One trie walk per query therefore checks every word at once.</p>
     <p>The walk stops at the first missing edge, or at the first point where a stored word ends.</p>
   </>} />
+}
+
+function TrieTree({ tree, path, walk }) {
+  const here = path === walk
+  const onWalk = walk.startsWith(path)
+  return <ul style={{ listStyle: 'none', margin: 0, paddingLeft: path === '' ? 0 : 18, fontFamily: 'monospace' }}>
+    <li>
+      <span style={{ padding: '1px 6px', border: here ? '2px solid var(--primary)' : '1px solid var(--border)', borderRadius: 4, background: onWalk && path !== '' ? 'var(--surface2)' : 'transparent', color: 'var(--text)' }}>
+        {path === '' ? 'root' : path[path.length - 1]}{tree.end ? ' (word end)' : ''}
+      </span>
+      {tree.kids.map(kid => <TrieTree key={kid.label} tree={kid} path={path + kid.label} walk={walk} />)}
+    </li>
+  </ul>
 }
 
 export default withProblemStory(StreamChecker, storyGuide);

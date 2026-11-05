@@ -23,8 +23,8 @@ function Sums({ step }) {
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
       {reachable.map((ok, t) => <div key={t} data-sum={t} style={{
         width: 34, padding: '4px 0', textAlign: 'center', fontFamily: 'monospace', color: 'var(--text)',
-        border: `${best === t ? 2 : 1}px solid ${best === t ? '#0891b2' : 'var(--border)'}`,
-        background: ok ? 'rgba(8,145,178,.25)' : 'transparent',
+        border: `${best === t ? 2 : 1}px solid ${best === t ? 'var(--primary)' : 'var(--border)'}`,
+        background: ok ? 'var(--surface2)' : 'transparent',
       }}>{t}</div>)}
     </div>
     <p aria-label="Half of the total">{`Sums are checked up to ${half}; shaded sums are reachable by some group.`}</p>

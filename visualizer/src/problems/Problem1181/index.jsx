@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/before-and-after-puzzle/',
   complexity: 'O(n² · w) time for n phrases with w words each, plus a sort of the distinct results. The visualization caps the input at 12 phrases of at most 6 words; the official bounds were not verified.',
   examples: [
-    { label: 'One join', input: '["writing code","code rocks"]' },
-    { label: 'Repeated phrase', input: '["mission statement","statement of purpose","mission statement","purpose"]' },
+    { label: 'One join', input: '["red blue","blue green","green sea"]' },
+    { label: 'Repeated phrase', input: '["ink pen","pen cap","ink pen","cap"]' },
   ],
 }
 

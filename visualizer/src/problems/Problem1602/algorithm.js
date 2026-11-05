@@ -1,21 +1,19 @@
-const CODE_LINES = [
-  'queue holds the root',
-  'while the queue is not empty',
-  'level is the list of nodes currently in the queue',
-  'for each node at index i in level',
-  'if node is u then return the next node in level, or null if u is last',
-  'replace the queue with the children of level, left to right',
-  'return null',
+// Nearest right node: breadth-first search by level; the node after u on the same level is the answer.
+const JS_LINES = [
+  { text: 'const kids = buildKids(tree)', py: 'kids = {}' },
+  { text: 'let level = [0]', py: 'level = [0]' },
+  { text: 'while (level.length > 0) {', py: 'while level' },
+  { text: 'for (let i = 0; i < level.length; i++) {', py: 'for i, p in enumerate' },
+  { text: 'if (tree[level[i]] === u) return i + 1 < level.length ? tree[level[i + 1]] : null', py: 'if tree[p] == u' },
+  { text: '}', py: null },
+  { text: 'level = level.flatMap(p => kids[p])', py: 'level = [c' },
+  { text: '}', py: null },
+  { text: 'return null', py: 'return None' },
 ]
 
-export const code = CODE_LINES.map((text, index) => ({ line: index + 1, text }))
-const L = text => {
-  const index = CODE_LINES.findIndex(line => line.includes(text))
-  if (index < 0) throw new Error(`pseudocode line missing: ${text}`)
-  return index + 1
-}
+export const code = JS_LINES.map(({ text }, i) => ({ line: i + 1, text }))
 
-export const python = `def find_nearest_right(tree, u):
+export const python = `def findNearestRightNode(tree, u):
     kids = {}
     order = [0]
     nxt = 1
@@ -27,40 +25,51 @@ export const python = `def find_nearest_right(tree, u):
                     kids[i].append(nxt)
                     order.append(nxt)
                 nxt += 1
-    queue = [0]
-    while queue:
-        level = queue
-        for i, node in enumerate(level):
-            if node == u:
-                return level[i + 1] if i + 1 < len(level) else None
-        queue = [c for node in level for c in kids[node]]
+    level = [0]
+    while level:
+        for i, p in enumerate(level):
+            if tree[p] == u:
+                return tree[level[i + 1]] if i + 1 < len(level) else None
+        level = [c for p in level for c in kids[p]]
     return None
 `
-const PY_LINES = python.split('\n')
-const P = text => {
-  const index = PY_LINES.findIndex(line => line.includes(text))
-  if (index < 0) throw new Error(`python line missing: ${text}`)
+
+const PY = python.split('\n')
+const pyAt = needle => {
+  const index = PY.findIndex(line => line.includes(needle))
+  if (index < 0) throw new Error(`python line missing: ${needle}`)
   return index + 1
 }
+export const pythonLineMap = Object.fromEntries(JS_LINES.map((line, i) => [i + 1, pyAt(line.py ?? 'return None')]))
 
 export const phases = [
-  { id: 'level', label: 'Level', description: 'Read the nodes of the current level, left to right.' },
-  { id: 'scan', label: 'Scan', description: 'Compare this node with u.' },
-  { id: 'found', label: 'Found u', description: 'u is on this level; its right neighbour is the answer.' },
-  { id: 'last', label: 'Rightmost', description: 'u is the last node of its level.' },
-  { id: 'down', label: 'Next level', description: 'Move to the children, left to right.' },
-  { id: 'done', label: 'Result', description: 'Report the nearest right node, or null.' },
+  { id: 'level', label: 'Level', description: 'List the nodes of the current level, left to right.' },
+  { id: 'scan', label: 'Scan', description: 'Compare each node in the level with u.' },
+  { id: 'found', label: 'Found u', description: 'u has a node to its right on this level: that node is the answer.' },
+  { id: 'last', label: 'Rightmost', description: 'u is the last node of its level, so the answer is null.' },
+  { id: 'down', label: 'Next level', description: 'Move on to the children of this level, left to right.' },
+  { id: 'done', label: 'Result', description: 'Report the nearest right node value, or null.' },
 ]
 
-// LeetCode level-order array: positions are the node references used by u.
+export const examples = [
+  { label: 'Right neighbour', input: '{"tree":[5,3,8,1,4,null,9],"u":4}' },
+  { label: 'Rightmost on level', input: '{"tree":[5,3,8,1,4,null,9],"u":8}' },
+  { label: 'Root alone', input: '{"tree":[7],"u":7}' },
+]
+
+export const complexity = 'O(n) time and O(w) space for n nodes and the widest level w. The visual caps the tree at 15 positions with distinct values 1 to 99.'
+
+// LeetCode level-order array: a null marks a missing child. Positions are used as node references.
 export function parseInput(text) {
   const input = JSON.parse(text)
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Use an object with tree and u.')
   const { tree, u } = input
-  if (!Array.isArray(tree) || tree.length < 1 || tree.length > 15 || tree[0] === null) throw new Error('tree is a level-order array of 1 to 15 entries starting with a non-null root (visualization cap).')
-  if (!tree.every(value => value === null || (Number.isInteger(value) && value >= 0 && value <= 9))) throw new Error('Tree values are integers from 0 to 9 (visualization cap).')
+  if (!Array.isArray(tree) || tree.length < 1 || tree.length > 15 || tree[0] === null) throw new Error('tree is a level-order array of 1 to 15 entries starting with a non-null root (visual cap).')
+  if (!tree.every(value => value === null || (Number.isInteger(value) && value >= 1 && value <= 99))) throw new Error('Values are integers from 1 to 99 (visual cap).')
+  const present = tree.filter(value => value !== null)
+  if (new Set(present).size !== present.length) throw new Error('Values in the tree are distinct.')
   buildKids(tree)
-  if (!Number.isInteger(u) || u < 0 || u >= tree.length || tree[u] === null) throw new Error('u is the array position of a non-null node.')
+  if (!present.includes(u)) throw new Error('u is a value present in the tree.')
   return { tree, u }
 }
 
@@ -88,32 +97,35 @@ export function buildKids(tree) {
 export function buildTrace({ tree, u }) {
   const kids = buildKids(tree)
   const frames = []
+  const levels = []
   let level = [0]
   let result = null
   let done = false
-  const frame = (phase, activeLine, pythonLine, node, message, extra = {}) => frames.push({
-    phase, activeLine, pythonLine, node, message, level: [...level], u, tree, kids, result, ...extra,
+  const snap = extra => ({ u, ...extra })
+  const frame = (phase, activeLine, message, extra = {}) => frames.push({
+    phase, activeLine, message, level: [...level], levels, u, tree, kids, result, snapshot: snap({ result }), ...extra,
   })
   while (level.length && !done) {
-    frame('level', L('level is the list of nodes'), P('level = queue'), -1, `Level holds [${level.join(', ')}] (positions).`)
+    levels.push([...level])
+    frame('level', 3, `Level holds values [${level.map(p => tree[p]).join(', ')}].`)
     for (let i = 0; i < level.length && !done; i++) {
       const node = level[i]
-      frame('scan', L('for each node at index i'), P('for i, node in enumerate(level)'), node, `Position ${node} (value ${tree[node]}) ${node === u ? 'is' : 'is not'} u.`, { index: i })
-      if (node === u) {
+      frame('scan', 5, `Value ${tree[node]} ${tree[node] === u ? 'is' : 'is not'} u.`, { index: i, scanning: node })
+      if (tree[node] === u) {
         done = true
         if (i + 1 < level.length) {
-          result = level[i + 1]
-          frame('found', L('if node is u then return'), P('return level[i + 1]'), node, `u is at index ${i}; its right neighbour is position ${result} (value ${tree[result]}).`, { index: i, result })
+          result = tree[level[i + 1]]
+          frame('found', 5, `u sits at index ${i}; its right neighbour is ${result}.`, { index: i, result })
         } else {
           result = null
-          frame('last', L('if node is u then return'), P('return None'), node, `u is the rightmost node of its level, so the answer is null.`, { index: i, result: null })
+          frame('last', 5, 'u is the rightmost node of its level, so the answer is null.', { index: i, result: null })
         }
       }
     }
     if (done) break
     level = level.flatMap(node => kids[node])
-    if (level.length) frame('down', L('replace the queue'), P('queue = [c for node'), -1, `Next level: [${level.join(', ')}].`)
+    if (level.length) frame('down', 7, `Next level: [${level.map(p => tree[p]).join(', ')}].`)
   }
-  frame('done', L('return null'), P('return None'), -1, result === null ? 'No node to the right: null.' : `Answer is position ${result}, value ${tree[result]}.`, { result })
-  return { input: { tree, u }, result, frames }
+  frame('done', 9, result === null ? 'No node to the right: null.' : `Answer is ${result}.`, { result })
+  return { input: { tree, u }, result, levels, frames }
 }

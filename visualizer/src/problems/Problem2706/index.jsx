@@ -14,15 +14,15 @@ const definition = {
   url: 'https://leetcode.com/problems/buy-two-chocolates/',
   complexity: 'O(n) time and O(1) extra space: one pass keeps the two smallest prices.',
   examples: [
-    { label: 'Example 1', input: '{"prices":[1,2,2],"money":3}' },
-    { label: 'Example 2', input: '{"prices":[3,2,3],"money":3}' },
+    { label: 'Cheap pair fits', input: '{"prices":[4,1,3,6],"money":7}' },
+    { label: 'Pair too costly', input: '{"prices":[5,9],"money":12}' },
   ],
 }
 
 export default function BuyTwoChocolates() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="prices" length={run.input.prices.length} valueAt={i => run.input.prices[i]} active={step.index}
-      roleAt={i => (step.first !== null && run.input.prices[i] === step.first ? 'window' : '')} />
+      roleAt={i => (step.first !== null && i === step.firstIndex ? 'first' : step.second !== null && i === step.secondIndex ? 'second' : '')} />
     <output aria-label="Cheapest pair">{`first = ${step.first ?? 'none'}, second = ${step.second ?? 'none'}${step.leftover !== null && step.leftover !== undefined ? `, leftover = ${step.leftover}` : ''}`}</output>
   </>} renderReasoning={() => <>
     <p>The cheapest pair of chocolates is always the two smallest prices, so one pass that tracks the two smallest values is enough.</p>

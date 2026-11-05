@@ -39,7 +39,7 @@ test('1590 matches brute force on random arrays', () => {
   const rnd = n => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed % n }
   for (let trial = 0; trial < 400; trial++) {
     const len = 1 + rnd(8)
-    const nums = Array.from({ length: len }, () => rnd(12))
+    const nums = Array.from({ length: len }, () => 1 + rnd(12)) // official values start at 1
     const p = 1 + rnd(9)
     const run = buildTrace(parseInput(JSON.stringify({ nums, p })))
     assert.equal(run.result, brute(nums, p), JSON.stringify({ nums, p }))
