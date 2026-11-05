@@ -12,7 +12,7 @@
   border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
-  background: rgba(15, 23, 42, 0.72);
+  background: var(--surface2);
 }
 
 .mk-body {
@@ -31,7 +31,7 @@
   border: 1px solid var(--border);
   border-radius: 999px;
   background: rgba(30, 41, 59, 0.8);
-  color: var(--border);
+  color: var(--text-muted);
   padding: 4px 10px;
   cursor: pointer;
 }
@@ -53,13 +53,13 @@
 }
 
 .mk-row-label {
-  color: #627794;
+  color: var(--text-muted);
   font-size: 12px;
   width: 24px;
 }
 
 .mk-row-label-title {
-  color: #627794;
+  color: var(--text-muted);
   font-size: 12px;
   font-weight: 600;
   margin-bottom: 6px;
@@ -75,7 +75,7 @@
   border: 1px solid var(--border);
   border-radius: 8px;
   background: rgba(30, 41, 59, 0.75);
-  color: var(--text-on-dark);
+  color: var(--text);
   font-family: monospace;
   display: grid;
   place-items: center;
@@ -104,21 +104,21 @@
   border: 1px solid var(--border);
   border-radius: 6px;
   background: rgba(30, 41, 59, 0.75);
-  color: var(--text-on-dark);
+  color: var(--text);
   font-family: monospace;
   padding: 4px 6px;
 }
 
 .mk-heap-item small {
-  color: #627794;
+  color: var(--text-muted);
 }
 
 .mk-status {
   border: 1px solid var(--border);
   border-radius: 8px;
-  background: rgba(15, 23, 42, 0.7);
+  background: var(--surface2);
   padding: 10px 12px;
-  color: var(--border);
+  color: var(--text-muted);
   font-family: monospace;
   font-size: 13px;
 }
