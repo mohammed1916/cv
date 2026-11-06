@@ -1,28 +1,18 @@
-.tree1902 { display: grid; gap: 0.8rem; padding: 0.75rem; color: #1f2937; }
-.tree1902__queue { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-.tree1902__token { padding: 0.2rem 0.55rem; border-radius: 0.4rem; border: 1px solid #94a3b8; background: #f1f5f9; font-size: 0.9rem; }
+.tree1902 { display: grid; gap: 12px; padding: 12px; color: var(--text); }
+.tree1902__queue { display: flex; flex-wrap: wrap; gap: 6px; }
+.tree1902__token { padding: 4px 9px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface2); color: var(--text); font-size: 0.9rem; }
 .tree1902__token--done { opacity: 0.45; text-decoration: line-through; }
-.tree1902__token--current { background: #fde68a; border-color: #b45309; font-weight: 700; }
+.tree1902__token--current { background: color-mix(in srgb, var(--primary) 22%, var(--surface2)); border-color: var(--primary); font-weight: 700; }
 .tree1902__svg { width: 100%; max-width: 760px; height: auto; overflow: visible; }
-.tree1902__edge { stroke: #94a3b8; stroke-width: 2; }
-.tree1902__node circle { fill: #f8fafc; stroke: #334155; stroke-width: 2; }
-.tree1902__node text { font-size: 13px; font-weight: 700; fill: #1f2937; }
-.tree1902__node--path circle { fill: #dbeafe; stroke: #2563eb; }
-.tree1902__node--cur circle { fill: #fde68a; stroke: #b45309; stroke-width: 3; }
-.tree1902__node--new circle { fill: #dcfce7; stroke: #15803d; stroke-width: 3; }
-.tree1902__status { margin: 0; font-size: 0.92rem; }
-.tree1902__key { display: flex; flex-wrap: wrap; gap: 0.9rem; list-style: none; margin: 0; padding: 0; font-size: 0.8rem; }
-.tree1902__swatch { display: inline-block; width: 0.8rem; height: 0.8rem; border-radius: 50%; margin-right: 0.3rem; vertical-align: -0.1rem; border: 2px solid #334155; }
-.tree1902__swatch--cur { background: #fde68a; border-color: #b45309; }
-.tree1902__swatch--path { background: #dbeafe; border-color: #2563eb; }
-.tree1902__swatch--new { background: #dcfce7; border-color: #15803d; }
-@media (prefers-color-scheme: dark) {
-  .tree1902 { color: #e5e7eb; }
-  .tree1902__token { background: #1e293b; border-color: #475569; }
-  .tree1902__edge { stroke: #64748b; }
-  .tree1902__node circle { fill: #1e293b; stroke: #cbd5e1; }
-  .tree1902__node text { fill: #f1f5f9; }
-  .tree1902__node--path circle { fill: #1e3a8a; }
-  .tree1902__node--cur circle { fill: #78350f; }
-  .tree1902__node--new circle { fill: #14532d; }
-}
+.tree1902__edge { stroke: var(--text-dim); stroke-width: 2; }
+.tree1902__node circle { fill: var(--surface); stroke: var(--text-muted); stroke-width: 2; }
+.tree1902__node text { font-size: 13px; font-weight: 700; fill: var(--text); }
+.tree1902__node--path circle { fill: color-mix(in srgb, var(--primary) 18%, var(--surface)); stroke: var(--primary); }
+.tree1902__node--cur circle { fill: color-mix(in srgb, var(--primary) 35%, var(--surface)); stroke: var(--primary); stroke-width: 3; }
+.tree1902__node--new circle { fill: color-mix(in srgb, var(--success) 22%, var(--surface)); stroke: var(--success); stroke-width: 3; }
+.tree1902__status { margin: 0; font-size: 0.92rem; color: var(--text); }
+.tree1902__key { display: flex; flex-wrap: wrap; gap: 0.9rem; list-style: none; margin: 0; padding: 0; font-size: 0.8rem; color: var(--text-muted); }
+.tree1902__swatch { display: inline-block; width: 0.8rem; height: 0.8rem; border-radius: 50%; margin-right: 0.3rem; vertical-align: -0.1rem; border: 2px solid var(--text-muted); }
+.tree1902__swatch--cur { background: var(--primary); border-color: var(--primary); }
+.tree1902__swatch--path { background: color-mix(in srgb, var(--primary) 18%, var(--surface)); border-color: var(--primary); }
+.tree1902__swatch--new { background: var(--success); border-color: var(--success); }

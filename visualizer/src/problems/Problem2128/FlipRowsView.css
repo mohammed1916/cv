@@ -1,10 +1,10 @@
-.flip-view { display: grid; gap: 10px; }
-.flip-table { border-collapse: collapse; }
-.flip-table td, .flip-table th { border: 1px solid #cbd5e1; padding: 4px 8px; font-family: ui-monospace, monospace; }
-.flip-bit { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 4px; background: #f1f5f9; }
-.flip-bit--one { background: #1e293b; color: #fff; }
-.flip-row--current td { background: #fef9c3; }
-.flip-row--bad td { background: #fee2e2; }
-.flip-verdict { font-weight: 700; margin: 0; }
-.flip-verdict--ok { color: #15803d; }
-.flip-verdict--bad { color: #b91c1c; }
+.flip-view { display: grid; gap: 12px; color: var(--text); }
+.flip-table { border-collapse: collapse; color: var(--text); }
+.flip-table td, .flip-table th { border: 1px solid var(--border); padding: 6px 8px; font-family: ui-monospace, monospace; }
+.flip-bit { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 4px; border: 1px solid var(--border); background: var(--surface2); color: var(--text); }
+.flip-bit--one { background: var(--primary); border-color: var(--primary); color: var(--surface); }
+.flip-row--current td { background: color-mix(in srgb, var(--primary) 14%, var(--surface2)); }
+.flip-row--bad td { background: color-mix(in srgb, var(--error) 14%, var(--surface2)); }
+.flip-verdict { font-weight: 700; margin: 0; color: var(--text); }
+.flip-verdict--ok { color: var(--success); }
+.flip-verdict--bad { color: var(--error); }

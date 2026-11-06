@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -24,9 +25,18 @@ export default function Problem1977Visualizer() {
       const num = run.input.num
       const n = num.length
       return <>
-        <div aria-label="Digits" style={{ display: 'flex', gap: 4 }}>
-          {[...num].map((d, i) => <span key={i} style={{ width: 28, textAlign: 'center', padding: '4px 0', fontFamily: 'monospace', borderRadius: 4, border: '1px solid var(--border)', background: step.start >= 0 && i >= step.start && i < step.start + Math.max(0, step.len) ? 'color-mix(in srgb, var(--primary) 22%, var(--surface2))' : 'var(--surface2)' }}>{d}</span>)}
-        </div>
+        <IndexedSequence
+          label="Digits; the last number is shaded between l and r"
+          length={n}
+          active={step.start >= 0 ? step.start : -1}
+          valueAt={i => num[i]}
+          roleAt={i => {
+            if (step.start < 0 || i < step.start || i >= step.start + Math.max(0, step.len)) return ''
+            if (i === step.start) return 'l'
+            if (i === step.start + step.len - 1) return 'r'
+            return 'window'
+          }}
+        />
         {step.table && <table aria-label="Ways table (start by length)" style={{ borderCollapse: 'collapse', marginTop: 8 }}>
           <thead><tr><th>start \ length</th>{Array.from({ length: n }, (_, k) => <th key={k}>{k + 1}</th>)}</tr></thead>
           <tbody>{Array.from({ length: n }, (_, i) => <tr key={i}><th>{i}</th>{Array.from({ length: n }, (_, k) => {

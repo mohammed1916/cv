@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import RecordStateTable from '../../components/shared/RecordStateTable'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -23,8 +24,9 @@ export default function Problem2131Visualizer() {
   return (
     <AlgorithmWorkspace
       definition={definition}
-      renderVisual={({ step }) => (
+      renderVisual={({ run, step }) => (
         <>
+          <IndexedSequence label="Input words; the word being doubled is current" length={run.input.words.length} active={run.input.words.indexOf(step.current)} valueAt={i => run.input.words[i]} roleAt={i => (run.input.words[i] === run.input.words[i].split('').reverse().join('') ? 'palindrome' : '')} />
           <RecordStateTable label="Word counts and pairing" columns={['word', 'count', 'used']} rows={step.rows} activeRow={step.rows.findIndex(r => r.word === step.current)} />
           <p>Length so far: {step.length}{step.middle ? ' · a middle word is available' : ''}</p>
         </>

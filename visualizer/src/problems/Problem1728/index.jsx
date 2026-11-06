@@ -22,7 +22,7 @@ const definition = {
 function cellStyle(ch) {
   const base = { width: 40, height: 40, boxSizing: 'border-box', display: 'grid', placeItems: 'center', fontFamily: 'monospace', fontWeight: 700, borderRadius: 6, border: '1px solid var(--border)' }
   if (ch === '#') return { ...base, background: 'var(--text)', color: 'var(--surface)' }
-  if (ch === 'F') return { ...base, background: 'var(--primary)', color: 'var(--on-primary, #fff)' }
+  if (ch === 'F') return { ...base, background: 'var(--primary)', color: 'var(--surface)' }
   if (ch === 'M' || ch === 'C') return { ...base, background: 'var(--surface2)', color: 'var(--text)', borderWidth: 2, borderColor: 'var(--primary)' }
   return { ...base, background: 'var(--surface)', color: 'var(--text-muted, var(--text))' }
 }

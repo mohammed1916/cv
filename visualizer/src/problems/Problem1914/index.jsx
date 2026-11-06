@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python, phases, ringCells } from './algorithm'
 
-const LAYER_COLOURS = ['var(--primary)', 'var(--success, #16a34a)', 'var(--warning, #d97706)']
+const LAYER_COLOURS = ['var(--primary)', 'var(--success)', 'var(--text-muted)']
 
 const definition = {
   number: '1914',

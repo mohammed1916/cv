@@ -19,6 +19,7 @@ export default function NumberOfInterchangeableRectangles() {
     return <>
       <table aria-label="Rectangles and their ratio keys" style={{ borderCollapse: 'collapse', fontFamily: 'monospace', color: 'var(--text)' }}>
         <tbody>{rects.map(([w, h], i) => <tr key={i} style={{ background: i === index ? 'var(--primary-glow)' : 'transparent' }}>
+          <td style={{ border: '1px solid var(--border)', padding: '2px 8px', color: 'var(--text-muted)' }}>[{i}]</td>
           <td style={{ border: '1px solid var(--border)', padding: '2px 8px' }}>{w} x {h}</td>
           <td style={{ border: '1px solid var(--border)', padding: '2px 8px' }}>{i <= index ? (() => { const g = gcdOf(w, h); return `${w / g}/${h / g}` })() : ''}</td>
         </tr>)}</tbody>

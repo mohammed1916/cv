@@ -1,24 +1,17 @@
-.fib-tree { display: grid; gap: 12px; padding: 12px 0; }
+.fib-tree { display: grid; gap: 12px; padding: 12px 0; color: var(--text); }
 .fib-tree__head { display: flex; gap: 8px; flex-wrap: wrap; }
-.fib-tree__pill { border: 1px solid currentColor; border-radius: 999px; padding: 4px 10px; font-weight: 600; }
-.fib-tree__pill[data-state='win'] { color: #15803d; }
-.fib-tree__pill[data-state='lose'] { color: #b91c1c; }
-.fib-tree__pill[data-state='idle'] { color: #475569; }
+.fib-tree__pill { border: 1px solid var(--border); border-radius: 999px; padding: 4px 10px; font-weight: 600; background: var(--surface2); color: var(--text-muted); }
+.fib-tree__pill[data-state='win'] { color: var(--success); }
+.fib-tree__pill[data-state='lose'] { color: var(--error); }
+.fib-tree__pill[data-state='idle'] { color: var(--text-muted); }
 .fib-tree__svg { width: 100%; max-width: 420px; height: auto; }
-.fib-tree__edge { stroke: #94a3b8; stroke-width: 2; }
-.fib-tree__node, .fib-tree__root { stroke: #475569; stroke-width: 2; }
-.fib-tree__node { fill: #f1f5f9; }
-.fib-tree__root { fill: #ede9fe; stroke: #7c3aed; }
-.fib-tree__svg text { font-size: 12px; font-weight: 700; fill: #1e293b; }
-.fib-tree__note { margin: 0; color: #475569; }
+.fib-tree__edge { stroke: var(--text-dim); stroke-width: 2; }
+.fib-tree__node { fill: var(--surface2); stroke: var(--text-muted); stroke-width: 2; }
+.fib-tree__root { fill: color-mix(in srgb, var(--primary) 18%, var(--surface)); stroke: var(--primary); stroke-width: 2; }
+.fib-tree__svg text { font-size: 12px; font-weight: 700; fill: var(--text); }
+.fib-tree__note { margin: 0; color: var(--text-muted); }
 .fib-tree__branches ol { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 0; }
-.fib-tree__branches li { border: 1px solid #94a3b8; border-radius: 6px; padding: 4px 8px; display: flex; gap: 6px; }
-.fib-tree__branches li.is-current { border: 2px solid #7c3aed; }
-.fib-tree__branches span { color: #475569; font-size: 0.8rem; }
-.fib-tree h4 { margin: 0 0 6px; font-size: 0.9rem; }
-@media (prefers-color-scheme: dark) {
-  .fib-tree__node { fill: #1e293b; }
-  .fib-tree__root { fill: #2e1065; }
-  .fib-tree__svg text { fill: #e2e8f0; }
-  .fib-tree__edge { stroke: #64748b; }
-}
+.fib-tree__branches li { border: 1px solid var(--border); background: var(--surface2); color: var(--text); border-radius: 6px; padding: 6px 10px; display: flex; gap: 6px; }
+.fib-tree__branches li.is-current { border: 2px solid var(--primary); }
+.fib-tree__branches span { color: var(--text-muted); font-size: 0.8rem; }
+.fib-tree h4 { margin: 0 0 6px; font-size: 0.9rem; color: var(--text); }

@@ -29,7 +29,7 @@ export default function Problem1937Visualizer() {
           <tbody>
             <tr><th>points</th>{row.map((v, c) => <td key={c} style={{ textAlign: 'center', padding: '4px 8px', border: '1px solid var(--border)' }}>{v}</td>)}</tr>
             <tr><th>from left</th>{Array.from({ length: n }, (_, c) => <td key={c} style={{ textAlign: 'center', padding: '4px 8px', border: '1px solid var(--border)', background: step.left && step.left[c] !== undefined ? 'color-mix(in srgb, var(--primary) 12%, var(--surface2))' : 'transparent' }}>{step.left && step.left[c] !== undefined ? step.left[c] : ''}</td>)}</tr>
-            <tr><th>from right</th>{Array.from({ length: n }, (_, c) => <td key={c} style={{ textAlign: 'center', padding: '4px 8px', border: '1px solid var(--border)', background: step.right && step.right[c] !== undefined ? 'color-mix(in srgb, var(--success, #16a34a) 14%, var(--surface2))' : 'transparent' }}>{step.right && step.right[c] !== undefined ? step.right[c] : ''}</td>)}</tr>
+            <tr><th>from right</th>{Array.from({ length: n }, (_, c) => <td key={c} style={{ textAlign: 'center', padding: '4px 8px', border: '1px solid var(--border)', background: step.right && step.right[c] !== undefined ? 'color-mix(in srgb, var(--success) 14%, var(--surface2))' : 'transparent' }}>{step.right && step.right[c] !== undefined ? step.right[c] : ''}</td>)}</tr>
             <tr><th>best total</th>{step.dp.map((v, c) => <td key={c} style={{ textAlign: 'center', padding: '4px 8px', border: '1px solid var(--border)', fontWeight: 600 }}>{v}</td>)}</tr>
           </tbody>
         </table>

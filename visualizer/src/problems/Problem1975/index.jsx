@@ -25,7 +25,7 @@ export default function Problem1975Visualizer() {
         {run.input.matrix.flatMap((row, r) => row.map((v, c) => {
           const current = step.cell && step.cell[0] === r && step.cell[1] === c
           const small = step.smallestAt && step.smallestAt[0] === r && step.smallestAt[1] === c
-          return <div key={`${r}-${c}`} style={{ height: 48, display: 'grid', placeItems: 'center', borderRadius: 6, border: current ? '2px solid var(--primary)' : '1px solid var(--border)', background: small ? 'color-mix(in srgb, var(--primary) 22%, var(--surface2))' : v < 0 ? 'color-mix(in srgb, var(--danger, #dc2626) 14%, var(--surface2))' : 'var(--surface2)', color: 'var(--text)' }}>{v}</div>
+          return <div key={`${r}-${c}`} style={{ height: 48, display: 'grid', placeItems: 'center', borderRadius: 6, border: current ? '2px solid var(--primary)' : '1px solid var(--border)', background: small ? 'color-mix(in srgb, var(--primary) 22%, var(--surface2))' : v < 0 ? 'color-mix(in srgb, var(--error) 14%, var(--surface2))' : 'var(--surface2)', color: 'var(--text)' }}>{v}</div>
         }))}
       </div>
       <p>Total of absolute values: <strong>{step.total}</strong> · negatives: <strong>{step.negatives}</strong> · smallest magnitude: <strong>{step.smallest === Infinity ? '-' : step.smallest}</strong></p>

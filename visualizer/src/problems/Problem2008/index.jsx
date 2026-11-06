@@ -18,17 +18,20 @@ export default function MaximumEarningsFromTaxi() {
     const { n, rides, x, best, chosen } = step.snapshot
     const pct = v => `${((v - 1) / Math.max(1, n - 1)) * 100}%`
     return <>
-      <div aria-label="Road with rides" style={{ position: 'relative', height: 90, margin: '8px 0' }}>
-        <div style={{ position: 'absolute', top: 40, left: 0, right: 0, height: 2, background: 'var(--border)' }} />
-        {Array.from({ length: n }, (_, i) => i + 1).map(p => <span key={p} style={{
-          position: 'absolute', top: 46, left: pct(p), transform: 'translateX(-50%)', fontSize: 11, color: 'var(--text-muted)',
-        }}>{p}</span>)}
+      <div aria-label="Road with rides" style={{ position: 'relative', height: 110, margin: '8px 0' }}>
+        <div style={{ position: 'absolute', top: 56, left: 0, right: 0, height: 2, background: 'var(--border)' }} />
         {rides.map(([s, e, tip], i) => <div key={i} title={`ride ${s} to ${e}, tip ${tip}`} style={{
           position: 'absolute', top: 8 + (i % 3) * 10, left: pct(s), width: `${((e - s) / Math.max(1, n - 1)) * 100}%`,
           height: 8, borderRadius: 4,
           background: chosen && chosen[0] === s && chosen[1] === e ? 'var(--primary)' : 'var(--surface2)',
           border: '1px solid var(--border)',
         }} />)}
+        {Array.from({ length: n }, (_, i) => i + 1).map(p => <span key={p} style={{
+          position: 'absolute', top: 60, left: pct(p), transform: 'translateX(-50%)', fontSize: 11, color: 'var(--text-muted)',
+        }}>{p}</span>)}
+        {x !== undefined && x !== null && <span aria-label={`Pointer x at ${x}`} style={{
+          position: 'absolute', top: 78, left: pct(x), transform: 'translateX(-50%)', fontSize: 12, fontWeight: 700, color: 'var(--primary)',
+        }}>x</span>}
       </div>
       <p>Point <strong>{x}</strong>: best earnings so far <strong>{best[x]}</strong>. Earnings by point: {best.join(', ')}.</p>
       {chosen && <p>Ride {chosen[0]} → {chosen[1]} sets the new best here.</p>}

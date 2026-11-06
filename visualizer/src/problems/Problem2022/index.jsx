@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -18,12 +19,12 @@ export default function Convert1dTo2d() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
     const { original, m, n, rows, r, ok } = step.snapshot
     return <>
-      <div aria-label="Flat array" style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginBottom: 8 }}>
-        {original.map((v, i) => <span key={i} style={{
-          border: '1px solid var(--border)', borderRadius: 4, padding: '2px 6px', fontFamily: 'monospace', color: 'var(--text)',
-          background: ok && r >= 0 && i >= r * n && i < (r + 1) * n ? 'var(--primary-glow)' : 'transparent',
-        }}>{v}</span>)}
-      </div>
+      <IndexedSequence
+        label="Flat array; the row being copied is shaded"
+        length={original.length}
+        valueAt={i => original[i]}
+        roleAt={i => (ok && r >= 0 && i >= r * n && i < (r + 1) * n ? 'row ' + r : '')}
+      />
       {ok ? <table aria-label="Constructed grid" style={{ borderCollapse: 'collapse', color: 'var(--text)' }}>
         <tbody>{Array.from({ length: m }, (_, row) => <tr key={row}>
           {Array.from({ length: n }, (_, col) => <td key={col} style={{ border: '1px solid var(--border)', padding: '2px 8px', fontFamily: 'monospace', textAlign: 'center' }}>

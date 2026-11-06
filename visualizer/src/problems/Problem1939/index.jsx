@@ -26,7 +26,7 @@ export default function Problem1939Visualizer() {
         <thead><tr>{step.cols.map(c => <th key={c} style={{ padding: '4px 8px', border: '1px solid var(--border)' }}>{c}</th>)}</tr></thead>
         <tbody>
           {step.rows.length === 0 && <tr><td colSpan={step.cols.length}><em>no rows</em></td></tr>}
-          {step.rows.map((row, i) => <tr key={i} style={{ background: step.match.includes(row[0]) && step.stage !== 'source' ? 'color-mix(in srgb, var(--success, #16a34a) 14%, transparent)' : 'transparent' }}>
+          {step.rows.map((row, i) => <tr key={i} style={{ background: step.match.includes(row[0]) && step.stage !== 'source' ? 'color-mix(in srgb, var(--success) 14%, transparent)' : 'transparent' }}>
             {row.map((v, k) => <td key={k} style={{ padding: '4px 8px', border: '1px solid var(--border)', fontFamily: 'monospace' }}>{String(v)}</td>)}
           </tr>)}
         </tbody>

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -18,9 +19,9 @@ export default function PartitionArrayMinimizeSumDifference() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
     const { left, right, total, c, best, bestPair } = step.snapshot
     return <>
-      <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-        <div aria-label="Left half" style={{ color: 'var(--text)' }}><strong>Left half</strong><div style={{ fontFamily: 'monospace' }}>{left.join(', ')}</div></div>
-        <div aria-label="Right half" style={{ color: 'var(--text)' }}><strong>Right half</strong><div style={{ fontFamily: 'monospace' }}>{right.join(', ')}</div></div>
+      <div style={{ display: 'grid', gap: 12 }}>
+        <IndexedSequence label="Left half" length={left.length} valueAt={i => left[i]} />
+        <IndexedSequence label="Right half" length={right.length} valueAt={i => right[i]} />
       </div>
       <p>Total <strong>{total}</strong>; a balanced split has group sums near <strong>{total / 2}</strong>.</p>
       <p>{c !== null && c !== undefined ? <>Taking <strong>{c}</strong> value(s) from the left.</> : 'Preparing subset sums.'} Best difference so far: <strong>{best === Infinity ? '-' : best}</strong>{bestPair ? ` (sums ${bestPair[0]} and ${bestPair[1]})` : ''}.</p>

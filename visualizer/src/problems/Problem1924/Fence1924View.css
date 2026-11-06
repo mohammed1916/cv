@@ -1,23 +1,18 @@
-.fence1924 { display: grid; gap: 0.8rem; padding: 0.75rem; color: #1f2937; }
+.fence1924 { display: grid; gap: 12px; padding: 12px; color: var(--text); }
 .fence1924__svg { width: 100%; max-width: 360px; height: auto; justify-self: center; }
-.fence1924__frame { fill: #f8fafc; stroke: #cbd5e1; }
-.fence1924__circle circle { fill: rgba(13, 148, 136, 0.12); stroke: #0f766e; stroke-width: 2; }
-.fence1924__circle--candidate circle:first-child { stroke-dasharray: 6 4; stroke: #b45309; fill: rgba(180, 83, 9, 0.08); }
-.fence1924__center { fill: #0f766e; stroke: none; }
-.fence1924__point circle { fill: #64748b; stroke: #1f2937; stroke-width: 1; }
-.fence1924__point text { font-size: 11px; fill: #1f2937; }
-.fence1924__point--i circle { fill: #dc2626; }
-.fence1924__point--j circle { fill: #2563eb; }
-.fence1924__point--k circle { fill: #7c3aed; }
-.fence1924__status { margin: 0; font-size: 0.92rem; }
-.fence1924__key { display: grid; gap: 0.3rem; list-style: none; margin: 0; padding: 0; font-size: 0.8rem; }
+.fence1924__frame { fill: var(--surface2); stroke: var(--border); }
+.fence1924__circle circle { fill: color-mix(in srgb, var(--success) 14%, transparent); stroke: var(--success); stroke-width: 2; }
+.fence1924__circle--candidate circle:first-child { stroke-dasharray: 6 4; stroke: var(--primary); fill: color-mix(in srgb, var(--primary) 10%, transparent); }
+.fence1924__center { fill: var(--success); stroke: none; }
+.fence1924__point circle { fill: var(--text-dim); stroke: var(--text); stroke-width: 1; }
+.fence1924__point text { font-size: 11px; fill: var(--text); }
+.fence1924__point--i circle { fill: var(--error); }
+.fence1924__point--j circle { fill: var(--primary); }
+.fence1924__point--k circle { fill: var(--success); }
+.fence1924__status { margin: 0; font-size: 0.92rem; color: var(--text); }
+.fence1924__key { display: grid; gap: 0.3rem; list-style: none; margin: 0; padding: 0; font-size: 0.8rem; color: var(--text-muted); }
 .fence1924__swatch { display: inline-block; width: 0.75rem; height: 0.75rem; border-radius: 50%; margin-right: 0.35rem; vertical-align: -0.1rem; }
-.fence1924__swatch--i { background: #dc2626; }
-.fence1924__swatch--j { background: #2563eb; }
-.fence1924__swatch--k { background: #7c3aed; }
-.fence1924__swatch--circle { background: #0f766e; }
-@media (prefers-color-scheme: dark) {
-  .fence1924 { color: #e5e7eb; }
-  .fence1924__frame { fill: #0f172a; stroke: #334155; }
-  .fence1924__point text { fill: #f1f5f9; }
-}
+.fence1924__swatch--i { background: var(--error); }
+.fence1924__swatch--j { background: var(--primary); }
+.fence1924__swatch--k { background: var(--success); }
+.fence1924__swatch--circle { background: var(--success); }

@@ -21,12 +21,15 @@ export default function BrightestPositionOnStreet() {
     const span = Math.max(1, hi - lo)
     const pct = v => `${((v - lo) / span) * 100}%`
     return <>
-      <div aria-label="Street lamps on the number line" style={{ position: 'relative', height: 16 + lights.length * 12, margin: '8px 0' }}>
+      <div aria-label="Street lamps on the number line" style={{ position: 'relative', height: 40 + lights.length * 12, margin: '8px 0' }}>
         {lights.map(([p, r], i) => <div key={i} style={{
           position: 'absolute', top: 4 + i * 12, height: 8, left: pct(p - r), width: `${(2 * r / span) * 100}%`,
           background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: 4,
         }} title={`lamp at ${p} range ${r}`} />)}
         {point !== null && <div style={{ position: 'absolute', top: 0, bottom: 0, left: pct(point), width: 2, background: 'var(--primary)' }} />}
+        {point !== null && <span aria-label={`Sweep pointer p at ${point}`} style={{
+          position: 'absolute', bottom: 0, left: pct(point), transform: 'translateX(-50%)', fontSize: 12, fontWeight: 700, color: 'var(--primary)',
+        }}>p</span>}
       </div>
       <p>Event positions: {points.join(', ')}. Sweep at <strong>{point ?? '-'}</strong> gives brightness <strong>{brightness}</strong>.</p>
       <p>Brightest so far: <strong>{best}</strong> at position <strong>{answer}</strong>.</p>

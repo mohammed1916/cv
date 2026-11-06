@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import PointerRail from '../../components/shared/PointerRail'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -17,17 +18,17 @@ const definition = {
 export default function MinimumOperationsContinuous() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
     const { values, l, r, count, best, bestWindow, n } = step.snapshot
+    const pointers = l >= 0 ? [
+      { id: 'l', index: l, label: 'l' },
+      { id: 'r', index: r, label: 'r' },
+    ] : []
     return <>
-      <div aria-label="Distinct sorted values" style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-        {values.map((v, i) => {
-          const inside = l >= 0 && i >= l && i <= r
-          return <span key={i} style={{
-            border: `${i === l || i === r ? 2 : 1}px solid ${inside ? 'var(--primary)' : 'var(--border)'}`,
-            borderRadius: 4, padding: '2px 8px', fontFamily: 'monospace', color: 'var(--text)',
-            background: inside ? 'var(--primary-glow)' : 'transparent',
-          }}>{v}{i === l ? ' l' : ''}{i === r ? ' r' : ''}</span>
-        })}
-      </div>
+      <PointerRail
+        title="Distinct sorted values with the window pointers"
+        values={values}
+        pointers={pointers}
+        range={l >= 0 ? { start: l, end: r } : null}
+      />
       <p>Window length target <strong>n = {n}</strong>: values from <strong>{l >= 0 ? values[l] : '-'}</strong> to <strong>{r >= 0 ? values[r] : '-'}</strong> keep <strong>{count}</strong>.</p>
       <p>Best so far: keep {n - best} values, replace <strong>{best}</strong>{bestWindow ? ` (window ${bestWindow[0]} to ${bestWindow[1]})` : ''}.</p>
     </>

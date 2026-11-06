@@ -5,7 +5,7 @@ const money = value => `$${value.toLocaleString('en-US')}`
 const LEVEL_COLOR = { Senior: 'var(--primary)', Junior: 'var(--info)' }
 const STATUS = {
   waiting: { text: 'waiting', color: 'var(--text-muted)' },
-  checking: { text: 'checking', color: 'var(--warning)' },
+  checking: { text: 'checking', color: 'var(--text-muted)' },
   hired: { text: 'hired', color: 'var(--success)' },
   unaffordable: { text: 'out of reach', color: 'var(--error)' },
 }

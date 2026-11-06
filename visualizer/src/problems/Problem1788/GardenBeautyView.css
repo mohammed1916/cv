@@ -1,19 +1,19 @@
-.garden { display: grid; gap: 12px; color: var(--text, #1f2937); font-size: 14px; }
+.garden { display: grid; gap: 12px; color: var(--text); font-size: 14px; }
 .garden__status { font-weight: 600; }
 .garden__row { display: flex; flex-wrap: wrap; gap: 6px; }
-.garden__cell { min-width: 52px; padding: 6px 4px; border-radius: 8px; border: 2px solid #cbd5e1; background: #f8fafc; text-align: center; display: grid; gap: 2px; }
-.garden__cell.is-kept { background: #ccfbf1; border-color: #0f766e; }
-.garden__cell.is-skipped { background: #e5e7eb; color: #6b7280; }
-.garden__cell.is-left { border-style: dashed; border-color: #1d4ed8; }
-.garden__cell.is-right { outline: 3px solid #b45309; outline-offset: 2px; }
-.garden__index { font-size: 11px; opacity: 0.7; }
+.garden__cell { min-width: 52px; padding: 12px 6px; border-radius: 8px; border: 2px solid var(--border); background: var(--surface2); color: var(--text); text-align: center; display: grid; gap: 4px; }
+.garden__cell.is-kept { background: color-mix(in srgb, var(--success) 18%, var(--surface2)); border-color: var(--success); }
+.garden__cell.is-skipped { background: var(--surface); color: var(--text-dim); }
+.garden__cell.is-left { border-style: dashed; border-color: var(--primary); }
+.garden__cell.is-right { outline: 3px solid var(--error); outline-offset: 2px; }
+.garden__index { font-size: 11px; color: var(--text-muted); }
 .garden__value { font-weight: 700; font-size: 16px; }
-.garden__tag { font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; min-height: 12px; }
-.garden__legend { margin: 0; font-size: 12px; opacity: 0.8; }
+.garden__tag { font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; min-height: 12px; color: var(--text-muted); }
+.garden__legend { margin: 0; font-size: 12px; color: var(--text-muted); }
 .garden__stats { display: flex; gap: 16px; margin: 0; }
 .garden__stats div { display: grid; }
-.garden__stats dt { font-size: 12px; opacity: 0.7; }
-.garden__stats dd { margin: 0; font-weight: 700; font-size: 18px; }
-.garden__table { border-collapse: collapse; width: 100%; max-width: 320px; }
-.garden__table th, .garden__table td { border-bottom: 1px solid #e2e8f0; padding: 4px 8px; text-align: left; }
+.garden__stats dt { font-size: 12px; color: var(--text-muted); }
+.garden__stats dd { margin: 0; font-weight: 700; font-size: 18px; color: var(--text); }
+.garden__table { border-collapse: collapse; width: 100%; max-width: 320px; color: var(--text); }
+.garden__table th, .garden__table td { border-bottom: 1px solid var(--border); padding: 6px 8px; text-align: left; }
 @media (max-width: 480px) { .garden__cell { min-width: 44px; } }

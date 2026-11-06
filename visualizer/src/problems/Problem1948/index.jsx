@@ -26,7 +26,7 @@ export default function Problem1948Visualizer() {
         <tbody>{step.rows.map((r, i) => {
           const dup = r.repeats > 1
           const deleted = step.marked.some(p => p.length <= r.path.length && p.every((n, k) => n === r.path[k]))
-          return <tr key={i} style={{ background: deleted ? 'color-mix(in srgb, var(--danger, #dc2626) 16%, transparent)' : dup ? 'color-mix(in srgb, var(--primary) 14%, transparent)' : 'transparent' }}>
+          return <tr key={i} style={{ background: deleted ? 'color-mix(in srgb, var(--error) 16%, transparent)' : dup ? 'color-mix(in srgb, var(--primary) 14%, transparent)' : 'transparent' }}>
             <td style={{ fontFamily: 'monospace' }}>/{r.path.join('/')}</td><td style={{ fontFamily: 'monospace' }}>{r.sig || '(empty)'}</td><td style={{ textAlign: 'center' }}>{r.repeats}</td>
           </tr>
         })}</tbody>

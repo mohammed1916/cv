@@ -6,7 +6,7 @@
 .lca2-node--target circle { fill: var(--surface2); stroke: var(--primary); stroke-width: 3; }
 .lca2-node--current circle { fill: var(--surface2); stroke: var(--text); stroke-width: 3; stroke-dasharray: 4 3; }
 .lca2-node--answer circle { fill: var(--primary); stroke: var(--primary); stroke-width: 4; }
-.lca2-node--answer text { fill: var(--on-primary, #fff); }
+.lca2-node--answer text { fill: var(--surface); }
 .lca2-edge { stroke: var(--border); stroke-width: 2; }
 .lca2-legend { font: 500 13px system-ui, sans-serif; color: var(--text-muted, var(--text)); display: flex; flex-wrap: wrap; gap: 12px; }
 .lca2-result { font: 600 14px system-ui, sans-serif; color: var(--text); }

@@ -1,26 +1,14 @@
 .ear-view {
-  --ear-remove: #64748b;
-  --ear-restore: #2563eb;
-  --ear-present: #0f766e;
-  --ear-asked: #b45309;
-  --ear-ink: #0f172a;
-  --ear-muted: #475569;
-  --ear-card: #ffffff;
+  --ear-remove: var(--text-dim);
+  --ear-restore: var(--primary);
+  --ear-present: var(--success);
+  --ear-asked: var(--error);
+  --ear-ink: var(--text);
+  --ear-muted: var(--text-muted);
+  --ear-card: var(--surface2);
   display: grid;
-  gap: 0.75rem;
+  gap: 12px;
   color: var(--ear-ink);
-}
-
-@media (prefers-color-scheme: dark) {
-  .ear-view {
-    --ear-remove: #94a3b8;
-    --ear-restore: #60a5fa;
-    --ear-present: #5eead4;
-    --ear-asked: #fbbf24;
-    --ear-ink: #e2e8f0;
-    --ear-muted: #94a3b8;
-    --ear-card: #0f172a;
-  }
 }
 
 .ear-view__caption {
@@ -38,7 +26,7 @@
   min-width: 1.9rem;
   padding: 0.15rem 0.3rem;
   border-radius: 4px;
-  border: 1px solid currentColor;
+  border: 1px solid var(--border);
   text-align: center;
   font-size: 0.8rem;
   color: var(--ear-ink);
@@ -46,12 +34,12 @@
 
 .ear-view__tick--remove {
   border-style: solid;
-  background: color-mix(in srgb, var(--ear-remove) 18%, transparent);
+  background: color-mix(in srgb, var(--ear-remove) 18%, var(--surface2));
 }
 
 .ear-view__tick--restore {
   border-style: dashed;
-  background: color-mix(in srgb, var(--ear-restore) 18%, transparent);
+  background: color-mix(in srgb, var(--ear-restore) 18%, var(--surface2));
 }
 
 .ear-view__tick.is-now {
@@ -77,9 +65,10 @@
   justify-items: center;
   gap: 0.15rem;
   min-width: 4.25rem;
-  padding: 0.5rem 0.4rem;
+  padding: 12px 8px;
   border-radius: 8px;
   background: var(--ear-card);
+  color: var(--ear-ink);
   border: 2px solid var(--ear-muted);
 }
 

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -18,15 +19,13 @@ export default function FindMiddleIndex() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
     const { nums, total, index, left, right, answer } = step.snapshot
     return <>
-      <table aria-label="Sides around each index" style={{ borderCollapse: 'collapse', fontFamily: 'monospace', color: 'var(--text)' }}>
-        <thead><tr><th style={{ padding: '2px 6px' }} /> {nums.map((_, i) => <th key={i} style={{ padding: '2px 6px' }}>{i}</th>)}</tr></thead>
-        <tbody>
-          <tr><th style={{ padding: '2px 6px', textAlign: 'left' }}>value</th>{nums.map((v, i) => <td key={i} style={{
-            border: '1px solid var(--border)', padding: '2px 6px', textAlign: 'center',
-            background: i === index ? 'var(--primary-glow)' : 'transparent',
-          }}>{v}</td>)}</tr>
-        </tbody>
-      </table>
+      <IndexedSequence
+        label="Values; the sum left of the current index is shaded"
+        length={nums.length}
+        active={index >= 0 ? index : -1}
+        valueAt={i => nums[i]}
+        roleAt={i => (index < 0 ? '' : i < index ? 'left' : i > index ? 'right' : '')}
+      />
       <p>Total <strong>{total}</strong>. At index <strong>{index >= 0 ? index : '-'}</strong>: left sum <strong>{left}</strong>, right sum <strong>{right ?? '-'}</strong>.</p>
       {answer >= 0 && <p>Answer found: <strong>{answer}</strong>.</p>}
     </>

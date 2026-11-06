@@ -1,4 +1,5 @@
 import './FeatureRankView.css'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 // Each feature is a bar whose length is its response count. The response being read lists its distinct words.
 export default function FeatureRankView({ run, step }) {
@@ -16,6 +17,8 @@ export default function FeatureRankView({ run, step }) {
             </>
           : step.phase === 'sort' || step.phase === 'done' ? 'All responses counted' : 'Waiting for responses'}
       </div>
+      <IndexedSequence label="Responses; the one being read is current" length={responses.length} active={step.ri >= 0 ? step.ri : -1} valueAt={i => `#${i + 1}`} roleAt={() => ''} />
+      <IndexedSequence label="Features; the one being counted is current" length={features.length} active={step.fi >= 0 ? step.fi : -1} valueAt={i => features[i]} roleAt={i => (step.counts[features[i]] ? `${step.counts[features[i]]}` : '')} />
       <ul className="feature-rank__list" aria-label="Feature counts">
         {features.map((f, i) => {
           const count = step.counts[f] ?? 0

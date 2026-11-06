@@ -28,7 +28,7 @@ export default function Problem1958Visualizer() {
             const isMove = r === step.cell[0] && c === step.cell[1]
             const onRay = rayKeys.has(`${r},${c}`)
             return <td key={c} style={{ width: 30, height: 30, textAlign: 'center', border: '1px solid var(--border)', fontWeight: 700,
-              background: isMove ? 'color-mix(in srgb, var(--primary) 30%, var(--surface2))' : onRay ? (step.closes ? 'color-mix(in srgb, var(--success, #16a34a) 25%, var(--surface2))' : 'color-mix(in srgb, var(--primary) 12%, var(--surface2))') : 'var(--surface2)' }}>{ch === '.' ? '' : ch}</td>
+              background: isMove ? 'color-mix(in srgb, var(--primary) 30%, var(--surface2))' : onRay ? (step.closes ? 'color-mix(in srgb, var(--success) 25%, var(--surface2))' : 'color-mix(in srgb, var(--primary) 12%, var(--surface2))') : 'var(--surface2)' }}>{ch === '.' ? '' : ch}</td>
           })}</tr>)}</tbody>
         </table>
         <p>Blue cell: the proposed move. Shaded cells: the ray being walked.</p>

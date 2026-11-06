@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 const code = [
   'function costOf(node) {',
@@ -132,9 +133,17 @@ const definition = {
 
 export default function MinimumCostToChangeFinalValue() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <p aria-label="Expression with the group being priced highlighted" className="algorithm-sequence">
-      {[...run.input.expression].map((ch, i) => <span key={i} className="algorithm-sequence__cell" data-role={step.span && i >= step.span[0] && i < step.span[1] ? 'window' : undefined}>{ch}</span>)}
-    </p>
+    <IndexedSequence
+      label="Expression characters; the group being priced is shaded"
+      length={run.input.expression.length}
+      valueAt={i => run.input.expression[i]}
+      roleAt={i => {
+        if (!step.span || i < step.span[0] || i >= step.span[1]) return ''
+        if (i === step.span[0]) return 'l'
+        if (i === step.span[1] - 1) return 'r'
+        return 'window'
+      }}
+    />
     <table aria-label="Subexpression costs">
       <thead><tr><th>Node</th><th>Value</th><th>Cost to 0</th><th>Cost to 1</th></tr></thead>
       <tbody>{step.nodes.map((node, i) => <tr key={i} data-current={i === step.nodes.length - 1 ? 'yes' : undefined}>
