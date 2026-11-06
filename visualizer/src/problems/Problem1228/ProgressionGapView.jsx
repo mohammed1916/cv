@@ -1,4 +1,5 @@
 import './ProgressionGapView.css'
+import PointerRail from '../../components/shared/PointerRail'
 
 export default function ProgressionGapView({ run, step }) {
   const arr = run.input
@@ -9,6 +10,13 @@ export default function ProgressionGapView({ run, step }) {
   const inRange = index => step.lo >= 0 && index >= step.lo && index <= step.hi
   return <div className="gap-view">
     <section aria-label="Array values">
+      <PointerRail title="Binary search pointers" values={arr}
+        pointers={step.lo >= 0 ? [
+          { id: 'lo', index: step.lo, label: 'lo', tone: 'primary' },
+          { id: 'hi', index: step.hi, label: 'hi', tone: 'primary' },
+          ...(step.mid >= 0 ? [{ id: 'mid', index: step.mid, label: 'mid', tone: 'primary' }] : []),
+        ] : []}
+        range={step.lo >= 0 ? { start: step.lo, end: step.hi } : null} />
       <p className="gap-view__label">array (remaining terms)</p>
       <ol className="gap-view__row">
         {arr.map((value, index) => <li key={index}

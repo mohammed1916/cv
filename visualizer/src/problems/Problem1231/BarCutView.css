@@ -1,13 +1,13 @@
 .cut-view { display: grid; gap: 10px; padding: 8px; }
 .cut-view svg { width: 100%; max-width: 640px; height: auto; justify-self: center; }
-.cut-view__bar { fill: rgba(100, 116, 139, 0.3); stroke: currentColor; stroke-opacity: 0.4; }
-.cut-view__bar.is-scanned { fill: rgba(13, 148, 136, 0.35); }
-.cut-view__bar.is-current { fill: rgba(245, 158, 11, 0.6); stroke: #b45309; stroke-opacity: 1; }
-.cut-view__cut { stroke: #dc2626; stroke-width: 2; stroke-dasharray: 4 3; }
+.cut-view__bar { fill: var(--surface2); stroke: currentColor; stroke-opacity: 0.4; }
+.cut-view__bar.is-scanned { fill: var(--primary); }
+.cut-view__bar.is-current { fill: var(--primary); stroke: var(--primary); stroke-opacity: 1; }
+.cut-view__cut { stroke: var(--error); stroke-width: 2; stroke-dasharray: 4 3; }
 .cut-view__value, .cut-view__index { font-size: 11px; fill: currentColor; }
 .cut-view__axis { stroke: currentColor; opacity: 0.3; }
-.cut-view__bracket { fill: rgba(37, 99, 235, 0.2); stroke: #1d4ed8; }
-.cut-view__mid { stroke: #7c3aed; stroke-width: 3; }
-.cut-view__mid.is-accept { stroke: #15803d; }
-.cut-view__mid.is-reject { stroke: #b91c1c; }
+.cut-view__bracket { fill: var(--surface2); stroke: var(--primary); }
+.cut-view__mid { stroke: var(--primary); stroke-width: 3; }
+.cut-view__mid.is-accept { stroke: var(--success); }
+.cut-view__mid.is-reject { stroke: var(--error); }
 .cut-view output { text-align: center; font-variant-numeric: tabular-nums; }

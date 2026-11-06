@@ -28,7 +28,7 @@ export default function PointerTracksView({ run, step }) {
                   return (
                     <span key={j} role="cell" className={classes}>
                       {value}
-                      {isPointer && <small className="pt-cell__tag">{isHighCell ? "high" : "ptr"}</small>}
+                      {isPointer && <small className="pt-cell__tag">{isHighCell ? "high" : `ptr ${r + 1}`}</small>}
                     </span>
                   );
                 })}

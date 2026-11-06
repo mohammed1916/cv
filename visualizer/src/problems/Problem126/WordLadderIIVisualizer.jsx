@@ -167,30 +167,30 @@ function generateSteps(beginWord, endWord, wordList) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: "var(--recovered-ink-627794, #627794)" }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: "var(--primary)" }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fed7aa, #fed7aa)", borderRadius: 6, borderLeft: '4px solid #f59e0b' }}>
-        <div style={{ fontSize: 12, color: '#92400e', fontStyle: 'italic' }}>
+      <div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6, borderLeft: '4px solid var(--primary)' }}>
+        <div style={{ fontSize: 12, color: 'var(--primary)', fontStyle: 'italic' }}>
           Two-phase approach: BFS to build neighbor graph, then DFS to find all shortest paths.
         </div>
       </div>
 
       {step.beginWord && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dbeafe, #dbeafe)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--primary)', marginBottom: 8 }}>
             Task
           </div>
-          <div style={{ fontSize: 11, color: '#0c4a6e' }}>
+          <div style={{ fontSize: 11, color: 'var(--primary)' }}>
             Begin: <strong>{step.beginWord}</strong> → End: <strong>{step.endWord}</strong>
           </div>
         </motion.div>
       )}
 
       {step.distance && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-f3e8ff, #f3e8ff)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#5b21b6', marginBottom: 8 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--primary)', marginBottom: 8 }}>
             Distances
           </div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -199,11 +199,11 @@ function VisualizationPanel({ step }) {
                 key={word}
                 style={{
                   padding: '4px 8px',
-                  backgroundColor: dist === Infinity ? "var(--recovered-surface-e9d5ff, #e9d5ff)" : "var(--recovered-surface-c7d2fe, #c7d2fe)",
+                  backgroundColor: dist === Infinity ? "var(--surface2)" : "var(--surface2)",
                   borderRadius: 3,
                   fontSize: 10,
                   fontWeight: 600,
-                  color: '#5b21b6',
+                  color: 'var(--primary)',
                 }}
               >
                 {word}: {dist === Infinity ? '∞' : dist}
@@ -214,18 +214,18 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.neighbor && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-d1fae5, #d1fae5)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 8 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--success)', marginBottom: 8 }}>
             Edge Found
           </div>
-          <div style={{ fontSize: 11, color: '#065f46', fontFamily: 'monospace' }}>
+          <div style={{ fontSize: 11, color: 'var(--success)', fontFamily: 'monospace' }}>
             {step.current} ↔ {step.neighbor}
           </div>
         </motion.div>
       )}
 
       {step.message && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fef3c7, #fef3c7)", borderRadius: 6, fontSize: 12, color: '#92400e' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6, fontSize: 12, color: 'var(--primary)' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           {step.message}
         </motion.div>
       )}

@@ -6,13 +6,13 @@
 .pair-tree__edge { stroke: currentColor; opacity: 0.35; stroke-width: 2; }
 .pair-tree__node circle { fill: transparent; stroke: currentColor; stroke-width: 2; opacity: 0.6; }
 .pair-tree__node text { fill: currentColor; font-size: 12px; }
-.pair-tree__node.is-seen circle { fill: rgba(37, 99, 235, 0.18); opacity: 1; }
-.pair-tree__node.is-current circle { fill: rgba(245, 158, 11, 0.45); stroke: #b45309; opacity: 1; }
-.pair-tree__node.is-pointer circle { stroke: #7c3aed; stroke-width: 4; opacity: 1; }
-.pair-tree__node.is-pair circle { fill: rgba(22, 163, 74, 0.4); stroke: #15803d; opacity: 1; }
+.pair-tree__node.is-seen circle { fill: var(--surface2); opacity: 1; }
+.pair-tree__node.is-current circle { fill: var(--primary); stroke: var(--primary); opacity: 1; }
+.pair-tree__node.is-pointer circle { stroke: var(--primary); stroke-width: 4; opacity: 1; }
+.pair-tree__node.is-pair circle { fill: var(--success); stroke: var(--success); opacity: 1; }
 .pair-lanes { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
 .pair-lane ol { display: flex; gap: 6px; list-style: none; padding: 0; margin: 6px 0 0; }
 .pair-lane li { display: grid; justify-items: center; min-width: 34px; padding: 4px 8px; border: 1px solid currentColor; border-radius: 6px; opacity: 0.85; }
-.pair-lane li.is-pointer { background: rgba(124, 58, 237, 0.2); font-weight: 700; opacity: 1; }
-.pair-lane em { font-style: normal; font-size: 11px; color: #7c3aed; }
+.pair-lane li.is-pointer { background: var(--surface2); font-weight: 700; opacity: 1; }
+.pair-lane em { font-style: normal; font-size: 11px; color: var(--primary); }
 .pair-view output { text-align: center; font-variant-numeric: tabular-nums; }

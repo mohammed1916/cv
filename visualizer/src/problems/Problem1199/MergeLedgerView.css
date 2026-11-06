@@ -1,12 +1,12 @@
 .ml-view {
-  --ml-ink:#0f172a;
-  --ml-muted:#475569;
-  --ml-line:#cbd5e1;
-  --ml-chip:#f1f5f9;
-  --ml-min:#0369a1;
-  --ml-new:#15803d;
-  --ml-taking:#b45309;
-  --ml-current:#1d4ed8;
+  --ml-ink:var(--text);
+  --ml-muted:var(--text-muted);
+  --ml-line:var(--border);
+  --ml-chip:var(--surface2);
+  --ml-min:var(--primary);
+  --ml-new:var(--success);
+  --ml-taking:var(--primary);
+  --ml-current:var(--primary);
   color:var(--ml-ink);
   display:grid;
   gap:14px;

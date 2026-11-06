@@ -97,7 +97,7 @@ function DPTablePanel({ EXAMPLES, t1, t2, dp, step, stepIndex, steps, CELL, appl
                             <th />
                             <th className="lcs-th-label">ε</th>
                             {t2.split('').map((c, j) => (
-                                <th key={j} className={`lcs-th-label ${step?.activeJ === j + 1 ? 'active-col' : ''}`}>{c}</th>
+                                <th key={j} className={`lcs-th-label ${step?.activeJ === j + 1 ? 'active-col' : ''}`}>{c}{step?.activeJ === j + 1 && <small className="lcs-ptr"> j</small>}</th>
                             ))}
                         </tr>
                     </thead>
@@ -105,7 +105,7 @@ function DPTablePanel({ EXAMPLES, t1, t2, dp, step, stepIndex, steps, CELL, appl
                         {dp.map((row, i) => (
                             <tr key={i}>
                                 <td className={`lcs-th-label ${step?.activeI === i ? 'active-row' : ''}`}>
-                                    {i === 0 ? 'ε' : t1[i - 1]}
+                                    {i === 0 ? 'ε' : t1[i - 1]}{step?.activeI === i && <small className="lcs-ptr"> i</small>}
                                 </td>
                                 {row.map((val, j) => {
                                     const isActive = step?.activeI === i && step?.activeJ === j

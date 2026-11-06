@@ -1,12 +1,12 @@
 .kw-view {
-  --kw-ink:#0f172a;
-  --kw-muted:#475569;
-  --kw-line:#e2e8f0;
-  --kw-queue:#ca8a04;
-  --kw-current:#1d4ed8;
-  --kw-new:#15803d;
-  --kw-seen:#b45309;
-  --kw-target:#be185d;
+  --kw-ink:var(--text);
+  --kw-muted:var(--text-muted);
+  --kw-line:var(--border);
+  --kw-queue:var(--primary);
+  --kw-current:var(--primary);
+  --kw-new:var(--success);
+  --kw-seen:var(--text-muted);
+  --kw-target:var(--error);
   color:var(--kw-ink);
   display:grid;
   gap:10px;

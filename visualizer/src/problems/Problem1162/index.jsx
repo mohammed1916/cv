@@ -14,8 +14,8 @@ function DistanceGrid({ snapshot }) {
         const isCurrent = current && current[0] === r && current[1] === c
         return <div key={k} style={{
           height: 44, borderRadius: 4, border: '1px solid currentColor', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column',
-          background: value === 1 ? 'rgba(120,113,108,0.35)' : 'rgba(14,165,233,0.12)',
-          outline: isCurrent ? '3px solid #f59e0b' : reachedSet.has(k) ? '2px dashed #0891b2' : bestKey === k ? '2px solid #16a34a' : 'none',
+          background: 'var(--surface2)',
+          outline: isCurrent ? '3px solid var(--primary)' : reachedSet.has(k) ? '2px dashed var(--primary)' : bestKey === k ? '2px solid var(--success)' : 'none',
         }}>
           <small>{value === 1 ? 'land' : 'water'}</small>
           <strong>{dist[r][c] === -1 ? '·' : dist[r][c]}</strong>

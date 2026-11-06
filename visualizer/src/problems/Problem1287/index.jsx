@@ -23,9 +23,9 @@ export default function QuarterValue() {
           const inRun = start !== null && i >= start && i < end
           return <div key={i} data-index={i} style={{
             minWidth: 40, padding: '6px 4px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
-            border: `${inRun ? 2 : 1}px solid ${inRun ? 'var(--text)' : 'var(--border)'}`,
-            background: found !== null && i >= start && i < end ? '#bbf7d0' : inRun ? 'var(--surface2)' : 'transparent', color: '#1c1917',
-          }}><div>{v}</div><small>{i}</small><div style={{ fontSize: 11, color: 'var(--text)' }}>{start === i ? 'i' : ''}{start !== null && end - 1 === i ? ' j-1' : ''}</div></div>
+            border: `${inRun ? 2 : 1}px solid ${found !== null && i >= start && i < end ? 'var(--success)' : inRun ? 'var(--primary)' : 'var(--border)'}`,
+            background: found !== null && i >= start && i < end ? 'var(--surface)' : inRun ? 'var(--surface2)' : 'var(--surface)', color: 'var(--text)',
+          }}><div>{v}</div><small style={{ color: 'var(--text-muted)' }}>{i}</small><div style={{ fontSize: 11, color: 'var(--primary)', fontWeight: 700 }}>{start === i ? 'i' : ''}{start !== null && end - 1 === i ? ' j-1' : ''}</div></div>
         })}
       </div>
       {start !== null && <p>Window for the current run: i = {start}, j = {end} (the run is arr[i] to arr[j-1]).</p>}

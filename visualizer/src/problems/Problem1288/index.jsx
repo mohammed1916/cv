@@ -26,9 +26,9 @@ export default function CoveredIntervals() {
           const isCurrent = it.index === current
           return <div key={it.index} style={{
             position: 'absolute', top: 6 + row * 22, left: `${it.start * width}%`, width: `${Math.max((it.end - it.start) * width, 1)}%`,
-            height: 16, boxSizing: 'border-box', fontFamily: 'monospace', fontSize: 11, color: '#1c1917',
-            background: isKept ? '#bbf7d0' : covered && isCurrent ? '#fecaca' : '#e7e5e4',
-            border: `${isCurrent ? 2 : 1}px solid ${isCurrent ? 'var(--text)' : 'var(--border)'}`,
+            height: 16, boxSizing: 'border-box', fontFamily: 'monospace', fontSize: 11, color: 'var(--text)',
+            background: 'var(--surface2)',
+            border: `${isCurrent ? 2 : 1}px solid ${isKept ? 'var(--success)' : covered && isCurrent ? 'var(--error)' : isCurrent ? 'var(--primary)' : 'var(--border)'}`,
           }}>[{it.start},{it.end}]</div>
         })}
       </div>

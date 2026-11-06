@@ -1,3 +1,4 @@
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
@@ -18,13 +19,8 @@ export default function DigitProductAndSum() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { digits, index, digit, product, total } = step.snapshot
     return <>
-      <div role="img" aria-label="Digits of n" style={{ display: 'flex', gap: 6 }}>
-        {digits.map((d, k) => <div key={k} style={{
-          minWidth: 40, padding: '6px 8px', textAlign: 'center', fontFamily: 'monospace', color: 'var(--text)',
-          border: `${k === index ? 2 : 1}px solid ${k === index ? 'var(--text)' : 'var(--border)'}`,
-          background: k === index ? 'var(--surface2)' : 'transparent',
-        }}>{d}</div>)}
-      </div>
+      <IndexedSequence label="Digits of n, read left to right" length={digits.length} active={index}
+        valueAt={k => digits[k]} roleAt={k => k === index ? 'digit pointer' : ''} />
       <p>{digit === null ? `Number: ${run.input.n}` : `Current digit: ${digit}`}</p>
       <p>Product so far: {product} · Sum so far: {total}</p>
     </>

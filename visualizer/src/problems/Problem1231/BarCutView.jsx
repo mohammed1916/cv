@@ -1,4 +1,5 @@
 import './BarCutView.css'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 
 const BAR_W = 34
 const GAP = 8
@@ -16,6 +17,8 @@ export default function BarCutView({ run, step }) {
   const x = index => 10 + index * (BAR_W + GAP)
   const axisX = value => 10 + (value / Math.max(1, total)) * (width - 20)
   return <div className="cut-view">
+    <AnswerRangeBar title="Answer search over the minimum piece sum" min={0} max={total} low={step.lo} high={step.hi}
+      probe={step.feasible == null ? null : (step.mid ?? null)} verdict={step.feasible === true} />
     <svg viewBox={`0 0 ${width} ${BASE + 36}`} role="img" aria-label={`Sweetness bars with ${step.cuts.length} cut${step.cuts.length === 1 ? '' : 's'} for the candidate ${step.mid ?? 'none'}`}>
       {values.map((value, index) => {
         const h = scaleH(value)

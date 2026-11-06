@@ -22,8 +22,8 @@ export default function GroupThePeople() {
         {run.input.map((s, i) => <div key={i} data-index={i} style={{
           minWidth: 56, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
           border: `${i === person ? 2 : 1}px solid ${i === person ? 'var(--text)' : 'var(--border)'}`,
-          background: groups.some(g => g.includes(i)) ? '#bbf7d0' : 'transparent', color: '#1c1917',
-        }}><div>person {i}</div><small>size {s}</small></div>)}
+          background: 'var(--surface2)', color: 'var(--text)', borderBottom: groups.some(g => g.includes(i)) ? '3px solid var(--success)' : undefined,
+        }}><div>person {i}{i === person ? ' (pointer)' : ''}</div><small>size {s}</small></div>)}
       </div>
       <p>{size === null ? 'No person is being placed.' : `Placing person ${person} into size ${size}${emitted ? ' (group emitted)' : ''}.`}</p>
       <table aria-label="Open buckets" style={{ fontFamily: 'monospace', borderCollapse: 'collapse' }}>

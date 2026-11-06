@@ -1,5 +1,6 @@
 import StoryPanel from "../../components/shared/StoryPanel";
 import "./TriangleStory.css";
+import PointerRail from "../../components/shared/PointerRail";
 
 export default function TriangleStory({ story, step }) {
   if (!step) {
@@ -62,6 +63,16 @@ export default function TriangleStory({ story, step }) {
       description={step.message}
     >
       <p>{step.explanation}</p>
+
+      {Array.isArray(dp) && dp.length > 0 && currentCol !== undefined && currentCol !== null && (
+        <PointerRail
+          title="Row pointer i and column pointer j over the dp array"
+          values={dp}
+          pointers={[{ id: "j", index: currentCol, label: `j = ${currentCol}`, tone: "primary" },
+            { id: "j1", index: currentCol + 1, label: "j + 1", tone: "primary" }].filter((pointer) => pointer.index < dp.length)}
+          note={`Row i = ${currentRow}. dp[j] and dp[j + 1] are the two child costs being compared.`}
+        />
+      )}
 
       {triangle && triangle.length > 0 && (
         <div

@@ -1,3 +1,4 @@
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
@@ -20,14 +21,10 @@ export default function GreatestSumDivisibleByThree() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
     const { nums, best, index, x } = step.snapshot
     return <>
-      <div aria-label="Numbers" style={{ display: 'flex', gap: 6, flexWrap: 'wrap', fontFamily: 'monospace' }}>
-        {nums.map((v, i) => <div key={i} style={{
-          minWidth: 40, textAlign: 'center', padding: 4, border: '1px solid var(--border)',
-          background: i === index ? 'var(--surface2)' : 'transparent', fontWeight: i === index ? 700 : 400,
-        }}>{v}</div>)}
-      </div>
+      <IndexedSequence label="Numbers read left to right" length={nums.length} active={index}
+        valueAt={i => nums[i]} roleAt={i => i === index ? 'current number' : ''} />
       <div aria-label="Best sum per remainder" style={{ display: 'flex', gap: 10, marginTop: 12 }}>
-        {best.map((v, r) => <div key={r} data-slot={r} style={{ minWidth: 120, border: `${r === 0 ? 2 : 1}px solid ${r === 0 ? 'var(--text)' : 'var(--border)'}`, padding: 8, fontFamily: 'monospace' }}>
+        {best.map((v, r) => <div key={r} data-slot={r} style={{ minWidth: 120, border: `${r === 0 ? 2 : 1}px solid ${r === 0 ? 'var(--primary)' : 'var(--border)'}`, padding: 8, fontFamily: 'monospace' }}>
           <div>{SLOT_NAMES[r]}</div>
           <strong>{v === null ? 'none' : v}</strong>
         </div>)}

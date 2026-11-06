@@ -69,8 +69,8 @@
 
 .lcs-table th,
 .lcs-table td {
-    width: var(--cell, 40px);
-    height: var(--cell, 40px);
+    width: var(--cell);
+    height: var(--cell);
     text-align: center;
     vertical-align: middle;
     font-size: 14px;
@@ -78,19 +78,19 @@
 }
 
 .lcs-th-label {
-    color: var(--recovered-ink-7e8297, #7e8297);
+    color: var(--text-muted);
     font-size: 13px;
-    background: var(--recovered-surface-181825, #181825);
+    background: var(--surface2);
 }
 
 .lcs-th-label.active-col {
-    color: var(--recovered-ink-a6e3a1, #a6e3a1);
-    background: var(--recovered-surface-1d3a2a, #1d3a2a);
+    color: var(--success);
+    background: var(--surface2);
 }
 
 .lcs-th-label.active-row {
-    color: var(--recovered-ink-89b4fa, #89b4fa);
-    background: var(--recovered-surface-1e2a3a, #1e2a3a);
+    color: var(--primary);
+    background: var(--surface2);
 }
 
 .lcs-cell {
@@ -101,21 +101,21 @@
 }
 
 .lcs-cell.active {
-    background: var(--recovered-surface-2a2a3e, #2a2a3e);
-    border-color: #f9e2af;
-    color: var(--recovered-ink-f9e2af, #f9e2af);
+    background: var(--surface2);
+    border-color: var(--primary);
+    color: var(--primary);
 }
 
 .lcs-cell.match {
-    background: var(--recovered-surface-1d3a2a, #1d3a2a);
-    border-color: #a6e3a1;
-    color: var(--recovered-ink-a6e3a1, #a6e3a1);
+    background: var(--surface2);
+    border-color: var(--success);
+    color: var(--success);
 }
 
 .lcs-cell.no-match {
-    background: var(--recovered-surface-2a1d1d, #2a1d1d);
-    border-color: #f38ba8;
-    color: var(--recovered-ink-f38ba8, #f38ba8);
+    background: var(--surface2);
+    border-color: var(--error);
+    color: var(--error);
 }
 
 .lcs-info-row {
@@ -136,19 +136,19 @@
 
 .lcs-val {
     font-size: 18px;
-    color: var(--recovered-ink-4f6ed8, #4f6ed8);
+    color: var(--primary);
 }
 
 .lcs-val.match-ok {
-    color: var(--recovered-ink-2f8628, #2f8628);
+    color: var(--success);
 }
 
 .lcs-val.match-fail {
-    color: var(--recovered-ink-e51851, #e51851);
+    color: var(--error);
 }
 
 .lcs-val.accent {
-    color: var(--recovered-ink-964cef, #964cef);
+    color: var(--primary);
 }
 
 .lcs-result {
@@ -157,13 +157,15 @@
     background: var(--code-line);
     border-radius: 8px;
     font-size: 14px;
-    color: var(--recovered-ink-999cad, #999cad);
+    color: var(--text-muted);
 }
 
 .lcs-result.done {
-    background: var(--recovered-surface-2a1e3a, #2a1e3a);
-    color: var(--recovered-ink-cba6f7, #cba6f7);
+    background: var(--surface2);
+    color: var(--primary);
     font-weight: 700;
     font-size: 18px;
 }
 
+
+.lcs-ptr { font-size: 11px; color: var(--primary); font-weight: 700; }

@@ -1,13 +1,13 @@
 .pt-view {
-  --pt-ink:#0f172a;
-  --pt-muted:#475569;
-  --pt-line:#cbd5e1;
-  --pt-cell:#f8fafc;
-  --pt-out:#94a3b8;
-  --pt-pointer:#1d4ed8;
-  --pt-high:#b45309;
-  --pt-common:#15803d;
-  --pt-advance:#fef3c7;
+  --pt-ink:var(--text);
+  --pt-muted:var(--text-muted);
+  --pt-line:var(--border);
+  --pt-cell:var(--surface2);
+  --pt-out:var(--text-dim);
+  --pt-pointer:var(--primary);
+  --pt-high:var(--error);
+  --pt-common:var(--success);
+  --pt-advance:var(--surface);
   color:var(--pt-ink);
   display:grid;
   gap:12px;
@@ -34,6 +34,7 @@
 
 .pt-track--advancing {
   background:var(--pt-advance);
+  border:1px solid var(--primary);
 }
 
 .pt-track__name {

@@ -32,13 +32,12 @@ export default function KnightWaveView({ run, step }) {
           const isCandidate = candidate && candidate.r === r && candidate.c === c;
           const isTarget = r === run.input.x && c === run.input.y;
           const isOrigin = r === 0 && c === 0;
-          const hue = reached ? Math.round(255 - (dist / maxDist) * 150) : 0;
           const classes = ["kw-cell", reached ? "" : "kw-cell--unknown", queue.has(k) ? "kw-cell--queue" : "",
             isCurrent ? "kw-cell--current" : "", isCandidate ? (step.isNew ? "kw-cell--new" : "kw-cell--seen") : "",
             isTarget ? "kw-cell--target" : "", isOrigin ? "kw-cell--origin" : ""].filter(Boolean).join(" ");
           return (
             <span key={k} role="gridcell" className={classes}
-              style={reached ? { background: `hsl(${hue} 70% 85%)` } : undefined}
+              style={reached ? { background: `color-mix(in srgb, var(--primary) ${Math.round(12 + (dist / maxDist) * 30)}%, var(--surface2))` } : undefined}
               aria-label={`(${r}, ${c}) ${reached ? `distance ${dist}` : "not reached"}`}>
               {isCurrent ? "♞" : isTarget ? "★" : isOrigin ? "O" : reached ? dist : ""}
             </span>
