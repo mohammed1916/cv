@@ -93,7 +93,7 @@ export default function PathSumVisualizer() {
 
   const statusPanel = (
     <div className="ps-status">
-      <div style={{ fontSize: 12, color: '#627794', padding: '4px 8px' }}>
+      <div style={{ fontSize: 12, color: 'var(--primary)', padding: '4px 8px' }}>
         Step {stepIndex + 1} / {steps.length}
       </div>
     </div>

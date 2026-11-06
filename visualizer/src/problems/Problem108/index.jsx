@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
 import { getExamples } from "../../config/examplesRegistry";
 import SortedTreeStory from "../../components/shared/SortedTreeStory.jsx";
+import IndexedSequence from "../../components/shared/IndexedSequence";
 import { code, python, pythonLineMap, parseInput, buildTrace } from "./algorithm";
 import "./ConvertSortedArrayToBinarySearchTreeVisualizer.css";
 
@@ -28,7 +29,11 @@ export default function ConvertSortedArrayToBinarySearchTreeWorkspace() {
   return (
     <AlgorithmWorkspace
       definition={definition}
-      renderVisual={({ run, step }) => <SortedTreeStory story={run.story} values={run.input} stepIndex={step.index} sourceKind="array" />}
+      renderVisual={({ run, step }) => <>
+        <IndexedSequence label="Sorted values" length={run.input.length} valueAt={i => run.input[i]} active={step.mid ?? -1}
+          roleAt={i => (i === step.lo ? "lo" : i === (step.hi ?? 0) - 1 ? "hi" : "")} />
+        <SortedTreeStory story={run.story} values={run.input} stepIndex={step.index} sourceKind="array" />
+      </>}
       renderReasoning={({ step }) => <p>{step.explanation ?? step.message}</p>}
     />
   );

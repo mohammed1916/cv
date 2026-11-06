@@ -1,12 +1,12 @@
 .cn-view {
-  --cn-ink:#0f172a;
-  --cn-muted:#475569;
-  --cn-line:#cbd5e1;
-  --cn-yes:#047857;
-  --cn-yes-bg:#d1fae5;
-  --cn-same-bg:#e2e8f0;
-  --cn-current:#1d4ed8;
-  --cn-prune:#b45309;
+  --cn-ink: var(--text);
+  --cn-muted: var(--text-muted);
+  --cn-line: var(--border);
+  --cn-yes: var(--success);
+  --cn-yes-bg: var(--surface2);
+  --cn-same-bg: var(--surface2);
+  --cn-current: var(--primary);
+  --cn-prune: var(--error);
   color:var(--cn-ink);
   display:grid;
   gap:12px;

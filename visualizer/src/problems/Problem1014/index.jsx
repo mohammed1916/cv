@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 import authoredExamples from '../../config/examples/collection--1014.js'
 
@@ -20,6 +21,7 @@ export default function BestSightseeingPair() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const s = step.state
     return <>
+      <IndexedSequence label="Values" length={run.input.values.length} valueAt={k => run.input.values[k]} active={s.j} roleAt={k => (k === s.leftIndex ? 'left' : '')} />
       <div aria-label="Spots" role="img" style={{ display: 'flex', flexWrap: 'wrap', gap: 4, fontFamily: 'monospace' }}>
         {run.input.values.map((v, i) => <div key={i} data-spot={i} style={{
           minWidth: 52, padding: '6px 4px', boxSizing: 'border-box', textAlign: 'center',

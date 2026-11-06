@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 import authoredExamples from '../../config/examples/collection--1013.js'
 
@@ -26,13 +27,14 @@ export default function PartitionThreeEqualParts() {
     const segmentOf = i => cuts.filter(c => c < i).length
     const segmentColors = ['#bfdbfe', '#bbf7d0', '#fde68a']
     return <>
+      <IndexedSequence label="Array" length={arr.length} valueAt={k => arr[k]} active={s.index} />
       <div aria-label="Array elements split into parts" role="img" style={{ display: 'flex', flexWrap: 'wrap', gap: 4, fontFamily: 'monospace' }}>
         {arr.map((v, i) => <div key={i} data-index={i} style={{
-          minWidth: 40, padding: '6px 4px', boxSizing: 'border-box', textAlign: 'center', color: '#1c1917',
+          minWidth: 40, padding: '6px 4px', boxSizing: 'border-box', textAlign: 'center', color: 'var(--text)',
           borderWidth: i === s.index ? 2 : 1, borderStyle: 'solid', borderColor: i === s.index ? 'var(--text)' : 'var(--border)',
           background: cuts.length && segmentOf(i) < 3 ? segmentColors[Math.min(segmentOf(i), 2)] : 'transparent',
           borderRight: cuts.includes(i) ? '4px solid var(--text)' : undefined,
-        }}><div>{v}</div><small style={{ color: '#1c1917' }}>{i}</small></div>)}
+        }}><div>{v}</div><small style={{ color: 'var(--text)' }}>{i}</small></div>)}
       </div>
       <p style={{ color: 'var(--text)' }}>
         Cut positions: {cuts.length ? cuts.map((c, k) => `after ${c}${k === 0 ? ' (left part ends)' : ' (middle part ends)'}`).join(', ') : 'none yet'}.

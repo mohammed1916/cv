@@ -374,8 +374,8 @@ function VisualizationPanel({ s, p, step }) {
           from,
           to: target,
           color: step.match
-            ? "var(--success-color, #22c55e)"
-            : "var(--error-color, #ef4444)",
+            ? "var(--success)"
+            : "var(--error)",
         },
       ];
     }
@@ -396,7 +396,7 @@ function VisualizationPanel({ s, p, step }) {
             key: `zero-${step.i}-${step.j}`,
             from: zeroFrom,
             to: target,
-            color: "var(--active-border, #3b82f6)",
+            color: "var(--active-border, var(--primary))",
           });
         }
       }
@@ -414,9 +414,9 @@ function VisualizationPanel({ s, p, step }) {
             to: target,
             color: multiKnown
               ? step.match
-                ? "var(--success-color, #22c55e)"
-                : "var(--error-color, #ef4444)"
-              : "var(--active-border, #3b82f6)",
+                ? "var(--success)"
+                : "var(--error)"
+              : "var(--primary)",
           });
         }
       }
@@ -472,6 +472,7 @@ function VisualizationPanel({ s, p, step }) {
                       .join(" ")}
                   >
                     {char}
+                    {isActive && <small className="rem-ptr-tag">i</small>}
                   </div>
                 );
               })}
@@ -502,6 +503,7 @@ function VisualizationPanel({ s, p, step }) {
                       .join(" ")}
                   >
                     {char}
+                    {isActive && <small className="rem-ptr-tag">j</small>}
                   </div>
                 );
               })}

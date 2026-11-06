@@ -1,6 +1,7 @@
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, pythonLineMap, phases } from './algorithm'
 
 const definition = {
@@ -18,6 +19,7 @@ function TwoCityScheduling() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const s = step.snapshot
     return <>
+      <IndexedSequence label="People (cost A / cost B)" length={run.input.length} valueAt={k => `${run.input[k][0]}/${run.input[k][1]}`} active={-1} />
       <p>Each city receives {s.n} people. Running total: <strong>{s.total}</strong>.</p>
       <table>
         <caption>People ordered by A minus B</caption>

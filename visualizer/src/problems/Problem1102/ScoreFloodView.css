@@ -1,13 +1,13 @@
 .sf-view {
-  --sf-ink:#0f172a;
-  --sf-muted:#475569;
-  --sf-line:#cbd5e1;
-  --sf-base:#f8fafc;
-  --sf-heat:#7c3aed;
-  --sf-current:#1d4ed8;
-  --sf-improved:#15803d;
-  --sf-rejected:#b45309;
-  --sf-frontier:#ca8a04;
+  --sf-ink: var(--text);
+  --sf-muted: var(--text-muted);
+  --sf-line: var(--border);
+  --sf-base: var(--surface2);
+  --sf-heat: var(--surface2);
+  --sf-current: var(--primary);
+  --sf-improved: var(--success);
+  --sf-rejected: var(--error);
+  --sf-frontier: var(--primary);
   color:var(--sf-ink);
   display:grid;
   gap:10px;

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import MatrixGrid from '../../components/shared/MatrixGrid'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
@@ -25,7 +26,8 @@ const definition = {
 }
 
 export default function AlphabetBoardPath() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="Target letters" length={run.input.target.length} valueAt={k => run.input.target[k]} active={step.typed.length - 1} roleAt={k => (k === step.typed.length ? 'next' : '')} />
     <MatrixGrid label="Letter board" matrix={board} activeCell={{ row: step.row, col: step.col }} showFlatIndices={false} />
     <output aria-label="Typed so far">{`Typed: ${step.typed || '(nothing yet)'}`}</output>
     <output aria-label="Moves">{`Moves: ${step.moves || '(none yet)'}`}</output>

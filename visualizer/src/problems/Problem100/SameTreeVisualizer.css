@@ -22,7 +22,7 @@
 
 .st-head {
     padding: 10px 14px;
-    background: #181825;
+    background: var(--surface2);
     font-size: 13px;
     font-weight: 600;
     color: var(--code-text);
@@ -32,7 +32,7 @@
 }
 
 .st-error {
-    color: #e51851;
+    color: var(--error);
     font-size: 11px;
 }
 
@@ -62,7 +62,7 @@
 .st-tree-label {
     font-size: 12px;
     font-weight: 700;
-    color: #1a6df5;
+    color: var(--primary);
     text-transform: uppercase;
     letter-spacing: 0.1em;
 }
@@ -111,15 +111,15 @@
 }
 
 .st-vs-badge.true {
-    background: #1e3a2e;
-    color: #a6e3a1;
-    border: 1px solid #a6e3a1;
+    background: var(--surface2);
+    color: var(--success);
+    border: 1px solid var(--success);
 }
 
 .st-vs-badge.false {
-    background: #3a1e1e;
-    color: #f38ba8;
-    border: 1px solid #f38ba8;
+    background: var(--surface2);
+    color: var(--error);
+    border: 1px solid var(--error);
 }
 
 /* ── Nodes ──────────────────────────────────────────────────────────────────── */
@@ -140,34 +140,34 @@
 }
 
 .st-node.active {
-    border-color: #f9e2af;
-    background: #2e2a1a;
+    border-color: var(--primary);
+    background: var(--surface2);
     box-shadow: 0 0 14px #f9e2af55;
-    color: #f9e2af;
+    color: var(--primary);
     z-index: 2;
 }
 
 .st-node.match {
-    border-color: #a6e3a1;
-    background: #1a2e1e;
-    color: #a6e3a1;
+    border-color: var(--success);
+    background: var(--surface2);
+    color: var(--success);
 }
 
 .st-node.active.match {
-    border-color: #a6e3a1;
-    background: #1a2e1e;
+    border-color: var(--success);
+    background: var(--surface2);
     box-shadow: 0 0 14px #a6e3a155;
 }
 
 .st-node.mismatch {
-    border-color: #f38ba8;
-    background: #2e1a1e;
-    color: #f38ba8;
+    border-color: var(--error);
+    background: var(--surface2);
+    color: var(--error);
 }
 
 .st-node.active.mismatch {
-    border-color: #f38ba8;
-    background: #2e1a1e;
+    border-color: var(--error);
+    background: var(--surface2);
     box-shadow: 0 0 14px #f38ba855;
 }
 
@@ -183,7 +183,7 @@
     align-items: center;
     gap: 8px;
     font-size: 12px;
-    color: #6773a1;
+    color: var(--primary);
 }
 
 .st-dot {
@@ -194,9 +194,9 @@
     flex-shrink: 0;
 }
 
-.st-dot.active   { border-color: #f9e2af; background: #2e2a1a; }
-.st-dot.match    { border-color: #a6e3a1; background: #1a2e1e; }
-.st-dot.mismatch { border-color: #f38ba8; background: #2e1a1e; }
+.st-dot.active   { border-color: var(--primary); background: var(--surface2); }
+.st-dot.match    { border-color: var(--success); background: var(--surface2); }
+.st-dot.mismatch { border-color: var(--error); background: var(--surface2); }
 
 .st-state-row {
     display: flex;
@@ -213,13 +213,13 @@
 }
 
 .st-state-val {
-    color: #4f6ed8;
+    color: var(--primary);
     font-weight: 700;
     font-size: 15px;
 }
 
 .st-mismatch-count {
-    color: #e51851;
+    color: var(--error);
 }
 
 .st-result-box {
@@ -228,22 +228,22 @@
     background: var(--code-line);
     border-radius: 8px;
     font-size: 13px;
-    color: #999cad;
+    color: var(--text-muted);
     margin-top: 4px;
     font-weight: 600;
     transition: background 0.2s, color 0.2s;
 }
 
 .st-result-box.true {
-    background: #1e3a2e;
-    color: #a6e3a1;
-    border: 1px solid #a6e3a1;
+    background: var(--surface2);
+    color: var(--success);
+    border: 1px solid var(--success);
 }
 
 .st-result-box.false {
-    background: #3a1e1e;
-    color: #f38ba8;
-    border: 1px solid #f38ba8;
+    background: var(--surface2);
+    color: var(--error);
+    border: 1px solid var(--error);
 }
 
 /* ── Status bar ─────────────────────────────────────────────────────────────── */
@@ -259,13 +259,13 @@
 }
 
 .st-status.ok {
-    color: #2f8628;
-    border-color: #a6e3a1;
+    color: var(--success);
+    border-color: var(--success);
 }
 
 .st-status.bad {
-    color: #e51851;
-    border-color: #f38ba8;
+    color: var(--error);
+    border-color: var(--error);
 }
 
 .st-tree-wrap { max-width: 100%; overflow: auto; align-items: flex-start; }

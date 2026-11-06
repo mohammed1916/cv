@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 import authoredExamples from '../../config/examples/collection--1010.js'
 
@@ -20,6 +21,7 @@ export default function PairsDivisibleBy60() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const s = step.state
     return <>
+      <IndexedSequence label="Songs (time)" length={run.input.time.length} valueAt={k => run.input.time[k]} active={s.index} roleAt={k => (k < s.index ? 'paired' : '')} />
       <div aria-label="Remainder buckets" role="img" style={{ display: 'flex', flexWrap: 'wrap', gap: 6, fontFamily: 'monospace', maxWidth: 520 }}>
         {(s.buckets.length ? s.buckets : [{ remainder: null, count: 0 }]).map(bucket => <div key={bucket.remainder ?? 'none'} data-bucket={bucket.remainder ?? ''} style={{
           minWidth: 56, padding: 6, boxSizing: 'border-box', textAlign: 'center', borderWidth: bucket.remainder === s.remainder || bucket.remainder === s.need ? 2 : 1,

@@ -10,7 +10,7 @@
 
 .sym-panel-head {
     padding: 10px 14px;
-    background: #181825;
+    background: var(--surface2);
     font-size: 13px;
     font-weight: 600;
     color: var(--code-text);
@@ -30,7 +30,7 @@
 }
 
 .sym-error {
-    color: #e51851;
+    color: var(--error);
     font-size: 11px;
 }
 
@@ -46,7 +46,7 @@
 .sym-canvas-label {
     font-size: 12px;
     font-weight: 700;
-    color: #8553f6;
+    color: var(--primary);
     text-transform: uppercase;
     letter-spacing: 0.1em;
 }
@@ -62,15 +62,15 @@
 }
 
 .sym-result-badge.symmetric {
-    background: #1e3a2e;
-    color: #a6e3a1;
-    border: 1px solid #a6e3a1;
+    background: var(--surface2);
+    color: var(--success);
+    border: 1px solid var(--success);
 }
 
 .sym-result-badge.not-symmetric {
-    background: #3a1e1e;
-    color: #f38ba8;
-    border: 1px solid #f38ba8;
+    background: var(--surface2);
+    color: var(--error);
+    border: 1px solid var(--error);
 }
 
 /* ── Nodes ──────────────────────────────────────────────────────────────────── */
@@ -85,7 +85,7 @@
     align-items: center;
     gap: 8px;
     font-size: 12px;
-    color: #6773a1;
+    color: var(--primary);
 }
 
 .sym-dot {
@@ -96,9 +96,9 @@
     flex-shrink: 0;
 }
 
-.sym-dot.active        { border-color: #8b5cf6; background: #3d2c5a; }
-.sym-dot.mirror-ok     { border-color: #a6e3a1; background: #1a2e1e; }
-.sym-dot.mirror-fail   { border-color: #f38ba8; background: #2e1a1e; }
+.sym-dot.active        { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 22%, var(--surface2)); }
+.sym-dot.mirror-ok     { border-color: var(--success); background: var(--surface2); }
+.sym-dot.mirror-fail   { border-color: var(--error); background: var(--surface2); }
 
 .sym-state-row {
     display: flex;
@@ -115,13 +115,13 @@
 }
 
 .sym-state-val {
-    color: #4f6ed8;
+    color: var(--primary);
     font-weight: 700;
     font-size: 15px;
 }
 
 .sym-fail-count {
-    color: #e51851;
+    color: var(--error);
 }
 
 .sym-result-box {
@@ -130,22 +130,22 @@
     background: var(--code-line);
     border-radius: 8px;
     font-size: 13px;
-    color: #999cad;
+    color: var(--text-muted);
     margin-top: 4px;
     font-weight: 600;
     transition: background 0.2s, color 0.2s;
 }
 
 .sym-result-box.symmetric {
-    background: #1e3a2e;
-    color: #a6e3a1;
-    border: 1px solid #a6e3a1;
+    background: var(--surface2);
+    color: var(--success);
+    border: 1px solid var(--success);
 }
 
 .sym-result-box.not-symmetric {
-    background: #3a1e1e;
-    color: #f38ba8;
-    border: 1px solid #f38ba8;
+    background: var(--surface2);
+    color: var(--error);
+    border: 1px solid var(--error);
 }
 
 /* ── Status bar ─────────────────────────────────────────────────────────────── */
@@ -161,13 +161,13 @@
 }
 
 .sym-status.ok {
-    color: #2f8628;
-    border-color: #a6e3a1;
+    color: var(--success);
+    border-color: var(--success);
 }
 
 .sym-status.bad {
-    color: #e51851;
-    border-color: #f38ba8;
+    color: var(--error);
+    border-color: var(--error);
 }
 
 .mirror-story { width: 100%; }

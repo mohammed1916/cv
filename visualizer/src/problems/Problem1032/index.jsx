@@ -1,6 +1,7 @@
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, pythonLineMap, phases } from './algorithm'
 
 const definition = {
@@ -17,7 +18,10 @@ const definition = {
 function StreamChecker() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
     const s = step.snapshot
+    const hist = s.history ?? ''
     return <>
+      <IndexedSequence label="Stream history" length={hist.length} valueAt={k => hist[k]} active={hist.length - 1}
+        roleAt={k => (s.walk && k === hist.length - s.walk.length ? 'walk start' : '')} />
       <p>Stream so far: <strong>{s.history || '(empty)'}</strong></p>
       <p>Walk from the newest letter backwards: <strong>{s.walk || '—'}</strong>{s.hit === true ? ' · word found' : ''}</p>
       <section aria-label="Reversed trie">

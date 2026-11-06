@@ -1,6 +1,7 @@
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, pythonLineMap, phases } from './algorithm'
 
 const definition = {
@@ -19,6 +20,7 @@ function LongestArithmetic() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const s = step.snapshot
     return <>
+      <IndexedSequence label="Numbers" length={run.input.length} valueAt={k => run.input[k]} active={s.i} roleAt={k => (k === s.j ? 'j' : '')} />
       <p>Current pair: end index {s.i < 0 ? '—' : s.i}, earlier index {s.j < 0 ? '—' : s.j}. Best length so far: <strong>{s.best}</strong>.</p>
       <table>
         <caption>Best chain length for each end index and difference</caption>

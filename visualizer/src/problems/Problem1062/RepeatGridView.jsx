@@ -1,4 +1,5 @@
 import './RepeatGridView.css'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 export default function RepeatGridView({ run, step }) {
   const { s, n } = step
@@ -7,6 +8,8 @@ export default function RepeatGridView({ run, step }) {
   const highlightRow = step.i
   const highlightCol = step.j
   return (
+    <>
+    <IndexedSequence label="String s with pointers i and j" length={s.length} valueAt={k => s[k]} active={highlightRow ?? -1} roleAt={k => (k === highlightRow ? 'i' : k === highlightCol ? 'j' : '')} />
     <figure className="rgv1062" aria-label="Table comparing each pair of positions in the string">
       <div className="rgv1062__scroll">
         <table className="rgv1062__grid">
@@ -51,5 +54,6 @@ export default function RepeatGridView({ run, step }) {
       </p>
       <p className="rgv1062__legend">Each cell (i, j) with i below j counts equal letters ending at i and j. Green = letters match, red = they differ, gold = best run so far.</p>
     </figure>
+    </>
   )
 }

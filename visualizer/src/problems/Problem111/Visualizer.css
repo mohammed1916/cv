@@ -7,17 +7,17 @@
 .mdbt-depth-band.is-current { fill: color-mix(in srgb, var(--primary) 12%, var(--surface)); }
 .mdbt-depth-label { fill: var(--text-muted); font: 11px ui-monospace, monospace; }
 .mdbt-route-edge { stroke: var(--border); stroke-width: 2; }
-.mdbt-route-edge.on-route { stroke: #0ea5e9; stroke-width: 4; }
+.mdbt-route-edge.on-route { stroke: var(--primary); stroke-width: 4; }
 .mdbt-story-node circle { fill: var(--surface); stroke: var(--text-muted); stroke-width: 1.5; }
-.mdbt-story-node.on-route circle { stroke: #0ea5e9; stroke-width: 3; }
-.mdbt-story-node.winner circle { fill: color-mix(in srgb, #22c55e 20%, var(--surface)); stroke: #22c55e; }
+.mdbt-story-node.on-route circle { stroke: var(--primary); stroke-width: 3; }
+.mdbt-story-node.winner circle { fill: color-mix(in srgb, var(--success) 20%, var(--surface)); stroke: var(--success); }
 .mdbt-story-node text { fill: var(--text); font: 13px ui-monospace, monospace; }
 .mdbt-story-node .mdbt-node-note { font-size: 10px; }
 .mdbt-missing-edge { stroke: var(--text-muted); stroke-dasharray: 3 3; }
 .mdbt-missing-box { fill: var(--surface); stroke: var(--text-muted); stroke-dasharray: 3 3; }
 .mdbt-leaf-routes { padding-left: 20px; margin: 0; }
 .mdbt-leaf-routes li { padding: 10px; margin-bottom: 8px; border: 1px solid var(--border); border-radius: 8px; overflow-wrap: anywhere; }
-.mdbt-leaf-routes li[aria-current] { border-color: #22c55e; }
+.mdbt-leaf-routes li[aria-current] { border-color: var(--success); }
 .mdbt-leaf-routes strong { display: block; margin-top: 6px; }
 .mdbt-story small { color: var(--text-muted); line-height: 1.6; }
 .mdbt-story h3 { margin: 0; }

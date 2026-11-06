@@ -12,15 +12,15 @@
 .ps-story > small { order: 4; }
 .ps-tree-scroll svg { display: block; margin: auto; }
 .ps-tree-edge { stroke: var(--border); stroke-width: 2; }
-.ps-tree-edge.on-route { stroke: #0ea5e9; stroke-width: 4; }
+.ps-tree-edge.on-route { stroke: var(--primary); stroke-width: 4; }
 .ps-tree-node circle { fill: var(--surface2); stroke: var(--text-muted); stroke-width: 1.5; }
 .ps-tree-node text, .ps-empty-tree { fill: var(--text); font: 13px ui-monospace, monospace; }
-.ps-tree-node.on-route circle { stroke: #0ea5e9; stroke-width: 3; }
+.ps-tree-node.on-route circle { stroke: var(--primary); stroke-width: 3; }
 .ps-tree-node.is-current circle { stroke-width: 5; }
-.ps-tree-node.is-solution circle { fill: color-mix(in srgb, #22c55e 25%, var(--surface)); stroke: #22c55e; }
+.ps-tree-node.is-solution circle { fill: color-mix(in srgb, var(--success) 25%, var(--surface)); stroke: var(--success); }
 .ps-tree-node.is-explored circle { stroke-dasharray: 4 3; }
 .ps-tree-node .ps-node-caption { font-size: 10px; fill: var(--text-muted); }
-.ps-route { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; padding: 10px; border-left: 3px solid #0ea5e9; background: var(--surface2); font: 12px ui-monospace, monospace; line-height: 1.8; overflow-wrap: anywhere; order: 3; }
+.ps-route { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; padding: 10px; border-left: 3px solid var(--primary); background: var(--surface2); font: 12px ui-monospace, monospace; line-height: 1.8; overflow-wrap: anywhere; order: 3; }
 
 .ps-panel {
   flex: 1;

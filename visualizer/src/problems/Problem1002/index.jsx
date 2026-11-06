@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -26,6 +27,7 @@ export default function CommonCharacters() {
     const common = new Map(step.snapshot.common ?? [])
     const countIn = (word, ch) => word.split(ch).length - 1
     return <>
+      <IndexedSequence label="Words" length={run.input.length} valueAt={k => run.input[k]} active={processed} roleAt={k => (k < shownCount ? 'counted' : '')} />
       <div style={{ overflowX: 'auto' }}>
         <table aria-label="Letter counts per word and shared minimum" style={{ borderCollapse: 'collapse' }}>
           <thead><tr><th style={cell}>word</th>{letters.map(ch => <th key={ch} style={cell}>{ch}</th>)}</tr></thead>

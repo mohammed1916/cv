@@ -15,7 +15,7 @@
 
 .mdbt-head {
     padding: 10px 14px;
-    background: #181825;
+    background: var(--surface2);
     font-size: 13px;
     font-weight: 600;
     color: var(--code-text);
@@ -25,7 +25,7 @@
 }
 
 .mdbt-error {
-    color: #e51851;
+    color: var(--error);
     font-size: 11px;
 }
 
@@ -71,9 +71,9 @@
 }
 
 .mdbt-frame.top {
-    border-left-color: #f9e2af;
-    color: #f9e2af;
-    background: #2a2a3e;
+    border-left-color: var(--primary);
+    color: var(--primary);
+    background: var(--surface2);
 }
 
 .mdbt-empty {
@@ -87,12 +87,12 @@
     background: var(--code-line);
     border-radius: 8px;
     font-size: 14px;
-    color: #999cad;
+    color: var(--text-muted);
 }
 
 .mdbt-result.ok {
-    background: #1e3a2e;
-    color: #a6e3a1;
+    background: var(--surface2);
+    color: var(--success);
     font-weight: 700;
 }
 
@@ -107,6 +107,6 @@
 }
 
 .mdbt-status.ok {
-    color: #2f8628;
-    border-color: #a6e3a1;
+    color: var(--success);
+    border-color: var(--success);
 }

@@ -31,26 +31,26 @@
 }
 
 .bbt-node.active {
-    border-color: #f9e2af;
-    background: #2a2a3e;
+    border-color: var(--primary);
+    background: var(--surface2);
     box-shadow: 0 0 12px #f9e2af55;
 }
 
 .bbt-node.balanced {
-    border-color: #a6e3a1;
-    background: #1d3a2a;
+    border-color: var(--success);
+    background: var(--surface2);
 }
 
 .bbt-node.unbalanced {
-    border-color: #f38ba8;
-    background: #3a1d1d;
+    border-color: var(--error);
+    background: var(--surface2);
 }
 
 .bbt-height-badge {
     position: absolute;
     top: -6px;
     right: -6px;
-    background: #89b4fa;
+    background: color-mix(in srgb, var(--primary) 22%, var(--surface2));
     color: var(--code-surface);
     border-radius: 10px;
     font-size: 10px;
@@ -64,7 +64,7 @@
 }
 
 .bbt-height-badge.unbal {
-    background: #f38ba8;
+    background: color-mix(in srgb, var(--error) 22%, var(--surface2));
 }
 
 .bbt-metric {
@@ -85,7 +85,7 @@
 
 .bbt-val {
     font-size: 18px;
-    color: #996d0c;
+    color: var(--primary);
 }
 
 .bbt-legend {
@@ -99,7 +99,7 @@
     align-items: center;
     gap: 8px;
     font-size: 12px;
-    color: #6773a1;
+    color: var(--primary);
 }
 
 .bbt-dot {
@@ -111,18 +111,18 @@
 }
 
 .bbt-dot.active {
-    border-color: #f9e2af;
-    background: #2a2a3e;
+    border-color: var(--primary);
+    background: var(--surface2);
 }
 
 .bbt-dot.balanced {
-    border-color: #a6e3a1;
-    background: #1d3a2a;
+    border-color: var(--success);
+    background: var(--surface2);
 }
 
 .bbt-dot.unbalanced {
-    border-color: #f38ba8;
-    background: #3a1d1d;
+    border-color: var(--error);
+    background: var(--surface2);
 }
 
 .bbt-result {
@@ -131,18 +131,18 @@
     background: var(--code-line);
     border-radius: 8px;
     font-size: 14px;
-    color: #999cad;
+    color: var(--text-muted);
 }
 
 .bbt-result.ok {
-    background: #1e3a2e;
-    color: #a6e3a1;
+    background: var(--surface2);
+    color: var(--success);
     font-weight: 700;
 }
 
 .bbt-result.fail {
-    background: #3a1d1d;
-    color: #f38ba8;
+    background: var(--surface2);
+    color: var(--error);
     font-weight: 700;
 }
 

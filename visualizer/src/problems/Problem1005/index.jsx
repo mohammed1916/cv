@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -18,6 +19,7 @@ export default function MaximizeSum() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { values, flipped, remaining, sum, pointer } = step.snapshot
     return <>
+      <IndexedSequence label="Sorted values" length={step.snapshot.values.length} valueAt={k => step.snapshot.values[k]} active={pointer} roleAt={k => (flipped.includes(k) ? 'flipped' : '')} />
       <div aria-label="Working values" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {values.map((v, i) => <div key={i} style={{
           minWidth: 48, textAlign: 'center', fontFamily: 'monospace', padding: '6px 8px', boxSizing: 'border-box', color: 'var(--text)',

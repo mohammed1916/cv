@@ -1,19 +1,19 @@
 .tree-average { margin: 0; display: grid; gap: 10px; }
 .tree-average svg { width: 100%; max-width: 520px; height: auto; }
-.tree-average .edge { stroke: #94a3b8; stroke-width: 2; }
-.tree-average circle { fill: #f8fafc; stroke: #64748b; stroke-width: 2; }
-.tree-average .node.done circle { fill: #dbeafe; stroke: #1d4ed8; }
-.tree-average .node.current circle { fill: #fde68a; stroke: #b45309; stroke-width: 3; }
-.tree-average .node.best circle { fill: #bbf7d0; stroke: #15803d; stroke-width: 3; }
-.tree-average .value { font-size: 14px; font-weight: 700; fill: #0f172a; }
-.tree-average .avg { font-size: 11px; fill: #334155; }
+.tree-average .edge { stroke: var(--border); stroke-width: 2; }
+.tree-average circle { fill: var(--border); stroke: var(--border); stroke-width: 2; }
+.tree-average .node.done circle { fill: var(--border); stroke: var(--primary); }
+.tree-average .node.current circle { fill: var(--primary); stroke: var(--error); stroke-width: 3; }
+.tree-average .node.best circle { fill: var(--success); stroke: var(--success); stroke-width: 3; }
+.tree-average .value { font-size: 14px; font-weight: 700; fill: var(--border); }
+.tree-average .avg { font-size: 11px; fill: var(--border); }
 .tree-average .legend { display: flex; flex-wrap: wrap; gap: 12px; list-style: none; padding: 0; margin: 0; font-size: 13px; }
-.tree-average .swatch { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; vertical-align: middle; border: 2px solid #64748b; }
-.tree-average .swatch.current { background: #fde68a; border-color: #b45309; }
-.tree-average .swatch.done { background: #dbeafe; border-color: #1d4ed8; }
-.tree-average .swatch.best { background: #bbf7d0; border-color: #15803d; }
+.tree-average .swatch { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; vertical-align: middle; border: 2px solid var(--border); }
+.tree-average .swatch.current { background: color-mix(in srgb, var(--primary) 22%, var(--surface2)); border-color: var(--error); }
+.tree-average .swatch.done { background: var(--surface2); border-color: var(--primary); }
+.tree-average .swatch.best { background: color-mix(in srgb, var(--success) 22%, var(--surface2)); border-color: var(--success); }
 @media (prefers-color-scheme: dark) {
-  .tree-average circle { fill: #1e293b; stroke: #94a3b8; }
-  .tree-average .value { fill: #f1f5f9; }
-  .tree-average .avg { fill: #cbd5e1; }
+  .tree-average circle { fill: var(--border); stroke: var(--border); }
+  .tree-average .value { fill: var(--border); }
+  .tree-average .avg { fill: var(--border); }
 }

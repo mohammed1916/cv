@@ -1,4 +1,5 @@
 import './RoundingTableView.css'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 const SCALE = 1000000
 const bar = (value, max) => `${Math.max(2, Math.round((value / max) * 100))}%`
@@ -7,6 +8,8 @@ export default function RoundingTableView({ run, step }) {
   const maxFrac = SCALE
   const need = step.ups
   return (
+    <>
+    <IndexedSequence label="Prices" length={run.input.prices.length} valueAt={k => run.input.prices[k]} active={step.current ?? -1} />
     <figure className="rtv" aria-label="Prices split into rounded-down and rounded-up choices">
       <table className="rtv__table">
         <thead>
@@ -41,5 +44,6 @@ export default function RoundingTableView({ run, step }) {
         <div><dt>Result</dt><dd>{step.result ?? 'pending'}</dd></div>
       </dl>
     </figure>
+    </>
   )
 }

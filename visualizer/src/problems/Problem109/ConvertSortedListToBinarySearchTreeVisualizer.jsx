@@ -132,7 +132,7 @@ export default function ConvertSortedListToBinarySearchTreeVisualizer() {
 
   const statusPanel = (
     <div className="cslbtbst-status">
-      <div style={{ fontSize: 11, color: "#627794", padding: "4px 8px" }}>
+      <div style={{ fontSize: 11, color: "var(--primary)", padding: "4px 8px" }}>
         Step {stepIndex >= 0 ? stepIndex + 1 : 0} / {steps.length}
       </div>
     </div>

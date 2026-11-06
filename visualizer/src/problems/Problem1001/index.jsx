@@ -35,11 +35,11 @@ export default function GridIllumination() {
           const lamp = lampKeys.has(key)
           const off = offKeys.has(key)
           const query = isQuery(r, c)
-          const background = lamp ? '#facc15' : off ? 'var(--surface2)' : 'transparent'
+          const background = lamp ? 'color-mix(in srgb, var(--primary) 22%, var(--surface2))' : off ? 'var(--surface2)' : 'transparent'
           return <div key={key} data-cell={key} style={{
             width: 40, height: 40, boxSizing: 'border-box', display: 'grid', placeItems: 'center',
             borderWidth: query ? 2 : 1, borderStyle: off ? 'dashed' : 'solid', borderColor: query ? 'var(--text)' : 'var(--border)',
-            background, fontSize: '.7rem', color: lamp ? '#1c1917' : 'var(--text-dim)',
+            background, fontSize: '.7rem', color: lamp ? 'var(--text)' : 'var(--text-dim)',
           }}>{lamp ? 'L' : `${r},${c}`}</div>
         })}
       </div>

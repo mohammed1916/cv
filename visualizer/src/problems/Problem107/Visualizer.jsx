@@ -224,7 +224,7 @@ export default function BinaryTreeLevelOrderTraversalIIVisualizer() {
     const allNodes = step?.allNodes ?? []
 
     // Color level bands
-    const LEVEL_COLORS = ['#89b4fa', '#a6e3a1', '#f9e2af', '#cba6f7', '#f38ba8', '#89dceb']
+    const LEVEL_COLORS = ['var(--primary)', 'var(--success)', 'var(--primary)', 'var(--error)', 'var(--primary)', 'var(--success)']
 
     // Create dock panels
     const panelConfigs = useMemo(() => [

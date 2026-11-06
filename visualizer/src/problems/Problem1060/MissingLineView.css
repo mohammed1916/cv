@@ -16,3 +16,6 @@
 .mlv__status { margin:12px 0 4px; font-weight:700; }
 .mlv__legend { margin:0; font-size:12px; color:var(--text); }
 
+
+.mlv__pointers { display: flex; gap: 4px; min-height: 1em; }
+.mlv__pointers small { color: var(--primary); font-weight: 700; }

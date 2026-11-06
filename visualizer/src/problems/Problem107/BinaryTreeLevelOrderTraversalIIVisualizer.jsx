@@ -98,7 +98,7 @@ export function ResultPanel({ step, inputError, LEVEL_COLORS }) {
 }
 
 // Scene for the workspace: the traversal tree beside the queue and the top-down levels.
-const SCENE_LEVEL_COLORS = ["#89b4fa", "#a6e3a1", "#f9e2af", "#cba6f7", "#f38ba8", "#89dceb"];
+const SCENE_LEVEL_COLORS = ['var(--primary)', 'var(--success)', 'var(--primary)', 'var(--error)', 'var(--primary)', 'var(--success)'];
 export function LevelOrderIIScene({ step }) {
   return (
     <>
@@ -150,14 +150,7 @@ export default function BinaryTreeLevelOrderTraversalIIVisualizer() {
   const allNodes = (step ?? steps[0])?.allNodes ?? [];
 
   // Color level bands
-  const LEVEL_COLORS = [
-    "#89b4fa",
-    "#a6e3a1",
-    "#f9e2af",
-    "#cba6f7",
-    "#f38ba8",
-    "#89dceb",
-  ];
+  const LEVEL_COLORS = ['var(--primary)', 'var(--success)', 'var(--primary)', 'var(--error)', 'var(--primary)', 'var(--success)'];
 
   // Extract panels as consts
   const primaryPanel = (

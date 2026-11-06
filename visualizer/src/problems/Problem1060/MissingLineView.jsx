@@ -20,6 +20,7 @@ export default function MissingLineView({ run, step }) {
           return (
             <span key={i} className={`mlv__index${i === step.mid ? ' mlv__index--mid' : ''}${inRange ? ' mlv__index--range' : ''}`}>
               <b>{v}</b><small>i={i}</small>
+              <span className="mlv__pointers">{i === step.lo ? <small>lo</small> : null}{i === step.mid ? <small>mid</small> : null}{i === step.hi ? <small>hi</small> : null}</span>
               <small>missing {v - nums[0] - i}</small>
             </span>
           )

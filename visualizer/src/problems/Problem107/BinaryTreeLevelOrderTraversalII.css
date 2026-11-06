@@ -10,8 +10,8 @@
 
 .btloti-status {
   padding: 8px 12px;
-  border-top: 1px solid var(--border-color, #e5e7eb);
-  background-color: var(--bg-secondary, #f9fafb);
+  border-top: 1px solid var(--border-color, var(--border));
+  background-color: var(--bg-secondary, var(--surface2));
   display: flex;
   align-items: center;
   height: 100%;
@@ -20,14 +20,14 @@
 
 .btloti-status-message {
   font-size: 0.875rem;
-  color: var(--text-secondary, #6b7280);
+  color: var(--text-secondary, var(--text-muted));
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .btloti-status-message.ok {
-  color: var(--text-success, #10b981);
+  color: var(--text-success, var(--success));
   font-weight: 500;
 }
 
@@ -42,9 +42,9 @@
 .btloti-queue-label {
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--text-primary, #1f2937);
+  color: var(--text-primary, var(--text));
   padding: 8px 12px;
-  background-color: var(--bg-tertiary, #f3f4f6);
+  background-color: var(--bg-tertiary, var(--surface2));
   border-radius: 4px;
   font-family: 'Courier New', monospace;
 }
@@ -59,7 +59,7 @@
   font-size: 0.8rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--text-secondary, #6b7280);
+  color: var(--text-secondary, var(--text-muted));
   letter-spacing: 0.05em;
 }
 
@@ -67,54 +67,54 @@
   display: flex;
   gap: 12px;
   padding: 8px;
-  border-left: 4px solid #ccc;
-  background-color: var(--bg-secondary, #f9fafb);
+  border-left: 4px solid var(--border);
+  background-color: var(--bg-secondary, var(--surface2));
   border-radius: 2px;
 }
 
 .btloti-level-idx {
   font-weight: 600;
-  color: var(--text-primary, #1f2937);
+  color: var(--text-primary, var(--text));
   min-width: 30px;
 }
 
 .btloti-level-vals {
   font-family: 'Courier New', monospace;
   font-size: 0.85rem;
-  color: var(--text-primary, #1f2937);
+  color: var(--text-primary, var(--text));
 }
 
 .btloti-empty {
   font-size: 0.875rem;
-  color: var(--text-tertiary, #9ca3af);
+  color: var(--text-tertiary, var(--text-muted));
   font-style: italic;
   padding: 8px;
 }
 
 .btloti-separator {
   height: 1px;
-  background-color: var(--border-color, #e5e7eb);
+  background-color: var(--border-color, var(--surface2));
 }
 
 .btloti-result {
   padding: 12px;
-  background-color: var(--bg-tertiary, #f3f4f6);
+  background-color: var(--bg-tertiary, var(--surface2));
   border-radius: 4px;
   font-weight: 600;
-  color: var(--text-secondary, #6b7280);
+  color: var(--text-secondary, var(--text-muted));
   text-align: center;
 }
 
 .btloti-result.ok {
-  background-color: #d1fae5;
-  color: #065f46;
+  background-color: color-mix(in srgb, var(--success) 22%, var(--surface2));
+  color: var(--success);
 }
 
 .btloti-error-box {
   padding: 12px;
-  background-color: #fee2e2;
-  border: 1px solid #fecaca;
+  background-color: var(--surface2);
+  border: 1px solid var(--error);
   border-radius: 4px;
-  color: #991b1b;
+  color: var(--error);
   font-size: 0.875rem;
 }
