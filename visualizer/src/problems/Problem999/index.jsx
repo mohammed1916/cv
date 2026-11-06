@@ -32,25 +32,29 @@ export default function Problem999() {
     const [rr, rc] = run.rook
     const rayKeys = new Set(step.ray.map(([r, c]) => `${r},${c}`))
     const stop = step.stop ? `${step.stop[0]},${step.stop[1]}` : null
-    return <section aria-label="Board with the rook's rays" style={{ display: 'grid', gap: 8 }}>
-      <div role="img" aria-label="Chessboard with the rook" style={{ display: 'grid', gridTemplateColumns: 'repeat(8, 36px)', gap: 2, width: 'max-content' }}>
-        {board.flatMap((row, r) => [...row].map((ch, c) => {
-          const key = `${r},${c}`
-          const isRook = r === rr && c === rc
-          const isStop = key === stop
-          const onRay = rayKeys.has(key)
-          const bg = isStop && step.outcome === 'pawn' ? 'var(--primary)' : onRay ? 'var(--primary-glow)' : (r + c) % 2 ? 'var(--surface2)' : 'var(--surface)'
-          return <div key={key} data-cell={key} data-piece={ch} style={{
-            width: 36, height: 36, borderRadius: 4, display: 'grid', placeItems: 'center',
-            background: bg, color: isStop && step.outcome === 'pawn' ? 'var(--on-primary)' : 'var(--text)',
-            fontWeight: isRook ? 700 : 400, border: isStop ? '2px solid var(--primary)' : '1px solid var(--border)',
-          }}>{ch === '.' ? '' : ch}</div>
-        }))}
+    const stopIsPawn = step.outcome === 'pawn'
+    return <section aria-label="Board with the rook's rays" style={{ display: 'grid', gap: 12 }}>
+      <div style={{ display: 'grid', justifyItems: 'start', gap: 12, padding: 12, borderRadius: 8, background: 'var(--surface)', border: '1px solid var(--border)' }}>
+        <div role="img" aria-label="Chessboard with the rook" style={{ display: 'grid', gridTemplateColumns: 'repeat(8, 36px)', gap: 2, width: 'max-content' }}>
+          {board.flatMap((row, r) => [...row].map((ch, c) => {
+            const key = `${r},${c}`
+            const isRook = r === rr && c === rc
+            const isStop = key === stop
+            const onRay = rayKeys.has(key)
+            const bg = (r + c) % 2 ? 'var(--surface2)' : 'var(--surface)'
+            const border = isStop && stopIsPawn ? '2px solid var(--success)' : isStop ? '2px solid var(--error)' : onRay ? '2px solid var(--primary)' : '1px solid var(--border)'
+            return <div key={key} data-cell={key} data-piece={ch} style={{
+              width: 36, height: 36, borderRadius: 4, display: 'grid', placeItems: 'center', boxSizing: 'border-box',
+              background: bg, color: 'var(--text)',
+              fontWeight: isRook || isStop ? 700 : 400, border,
+            }}>{ch === '.' ? '' : ch}</div>
+          }))}
+        </div>
+        <p style={{ margin: 0, padding: 12, borderRadius: 8, width: '100%', boxSizing: 'border-box', background: 'var(--surface2)', border: '1px solid var(--border)', color: 'var(--text)' }}>
+          Direction: <strong>{step.direction ? DIRECTION_LABEL[step.direction] : 'all four done'}</strong> · captures so far: <strong>{step.captures}</strong>
+        </p>
+        <p style={{ margin: 0, color: 'var(--text-muted)' }}>Blue outlined squares are the current ray. A green outline marks a capturable pawn, and a red outline marks a piece that blocks the ray.</p>
       </div>
-      <p style={{ margin: 0, color: 'var(--text)' }}>
-        Direction: <strong>{step.direction ? DIRECTION_LABEL[step.direction] : 'all four done'}</strong> · captures so far: <strong>{step.captures}</strong>
-      </p>
-      <p style={{ margin: 0, color: 'var(--text-muted)' }}>Shaded squares are the current ray. A ray stops at the first piece it meets.</p>
     </section>
   }} renderReasoning={({ step }) => <p>{step.message}</p>} />
 }
