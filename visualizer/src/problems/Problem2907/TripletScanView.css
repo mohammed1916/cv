@@ -20,23 +20,23 @@
 .triplet-table th,
 .triplet-table td {
   padding: 6px 10px;
-  border: 1px solid rgba(127, 127, 127, 0.35);
+  border: 1px solid var(--border);
   text-align: center;
   min-width: 44px;
 }
 
 .triplet-table td.is-middle {
-  background: rgba(180, 83, 9, 0.2);
+  background: var(--surface2);
   font-weight: 700;
 }
 
 .triplet-table td.is-scan {
-  outline: 3px dashed #1d4ed8;
+  outline: 3px dashed var(--primary);
   outline-offset: -3px;
 }
 
 .triplet-table td.is-best {
-  background: rgba(15, 118, 110, 0.22);
+  background: var(--surface2);
   font-weight: 700;
 }
 
@@ -55,7 +55,7 @@
 .triplet-facts div {
   padding: 6px 10px;
   border-radius: 8px;
-  background: rgba(127, 127, 127, 0.1);
+  background: var(--surface2);
 }
 
 .triplet-facts dt {

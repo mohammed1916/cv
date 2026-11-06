@@ -1,4 +1,5 @@
 import './HiddenArrayView.css'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 
 export default function HiddenArrayView({ run, step }) {
   const { values } = run.input
@@ -23,6 +24,15 @@ export default function HiddenArrayView({ run, step }) {
           )
         })}
       </ol>
+      {step.lo !== null && step.hi !== null && (
+        <AnswerRangeBar
+          title="Search pointers over the hidden indices"
+          min={0}
+          max={values.length}
+          low={step.lo}
+          high={step.hi}
+        />
+      )}
       <dl className="hidden-facts">
         <div><dt>Blocks found</dt><dd>{step.blocks}</dd></div>
         <div><dt>Block value</dt><dd>{step.value ?? 'none'}</dd></div>

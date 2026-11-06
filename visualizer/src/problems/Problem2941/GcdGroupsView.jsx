@@ -1,4 +1,5 @@
 import './GcdGroupsView.css'
+import PointerRail from '../../components/shared/PointerRail'
 
 export default function GcdGroupsView({ run, step }) {
   const { nums, k } = run.input
@@ -39,6 +40,14 @@ export default function GcdGroupsView({ run, step }) {
           })}
         </tbody>
       </table>
+      <PointerRail
+        title="Pointers on the numbers"
+        values={nums}
+        pointers={[
+          ...(cand && cand.s >= 0 ? [{ id: 's', label: 's', index: cand.s, tone: 'warning' }] : []),
+          ...(step.r >= 0 ? [{ id: 'r', label: 'r', index: step.r, tone: 'primary' }] : []),
+        ]}
+      />
       <output className="gcd-message" aria-label="Group status">{step.message}</output>
       <p className="gcd-best">Best product: {step.best}{bestStart >= 0 ? ` from indices ${bestStart} to ${bestEnd}` : ''}</p>
     </div>

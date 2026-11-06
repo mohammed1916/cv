@@ -7,7 +7,7 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with heroes (strengths) and monsters ([strength, coins] pairs)',
   url: 'https://leetcode.com/problems/maximum-coins-heroes-can-collect/',
-  complexity: 'O((m + h) log m) time for m monsters and h heroes after sorting: one sort, one prefix pass and a binary search per hero. The visualization caps heroes at 6 and monsters at 8; the official bounds and the >= rule are not verified here.',
+  complexity: 'O((m + h) log m) time for m monsters and h heroes after sorting: one sort, one prefix pass and a binary search per hero. The visualization caps heroes at 6 and monsters at 8.',
   examples: [
     { label: 'Three monsters', input: '{"heroes":[4,1],"monsters":[[2,10],[5,7],[3,1]]}' },
     { label: 'Equal strength', input: '{"heroes":[5,10],"monsters":[[5,3],[11,9]]}' },

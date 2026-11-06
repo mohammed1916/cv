@@ -1,4 +1,5 @@
 import './RoadRunsView.css'
+import PointerRail from '../../components/shared/PointerRail'
 
 export default function RoadRunsView({ run, step }) {
   const { road, budget } = run.input
@@ -21,6 +22,14 @@ export default function RoadRunsView({ run, step }) {
           )
         })}
       </ol>
+      <PointerRail
+        title="Pointers on the road"
+        values={[...road]}
+        pointers={current ? [
+          { id: 'start', label: 'start', index: current.start, tone: 'primary' },
+          { id: 'end', label: 'end', index: current.start + current.length - 1, tone: 'warning' },
+        ] : []}
+      />
       <div className="rrv__runs" aria-label="Runs in ascending length">
         <span className="rrv__label">Runs by length</span>
         {lengths.length === 0 ? <span>none</span> : lengths.map((len, i) => (

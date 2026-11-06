@@ -7,7 +7,7 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Grid as a JSON list of rows; -1 is blocked, other cells hold 0 to 9',
   url: 'https://leetcode.com/problems/sum-of-remoteness-of-all-cells/',
-  complexity: 'O(R * C) time and space for an R x C grid: one flood fill labels every component once. The visualization caps the grid at 6 x 6; the official bounds are not verified here.',
+  complexity: 'O(R * C) time and space for an R x C grid: one flood fill labels every component once. The visualization caps the grid at 6 x 6.',
   examples: [
     { label: 'Two islands', input: '[[1, -1], [-1, 3]]' },
     { label: 'One pocket', input: '[[4, 0, -1], [2, 7, -1], [-1, -1, 5]]' },

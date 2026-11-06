@@ -1,4 +1,5 @@
 import './FenwickTripletView.css'
+import PointerRail from '../../components/shared/PointerRail'
 
 export default function FenwickTripletView({ run, step }) {
   const { prices, profits } = run.input
@@ -27,6 +28,11 @@ export default function FenwickTripletView({ run, step }) {
           <tr><th scope="row">right best</th>{prices.map((_, i) => <td key={i}>{step.right?.[i] ?? '-'}</td>)}</tr>
         </tbody>
       </table>
+      <PointerRail
+        title="Pointer on the prices"
+        values={prices}
+        pointers={step.j >= 0 ? [{ id: 'j', label: 'j', index: step.j, tone: 'primary' }] : []}
+      />
       <div className="fenwick-tree" aria-label="Fenwick tree of best profits by rank">
         <span className="fenwick-label">Fenwick tree (index 0 unused)</span>
         <ol>

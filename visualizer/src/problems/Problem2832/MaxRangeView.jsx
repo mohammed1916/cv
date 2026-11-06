@@ -1,3 +1,4 @@
+import PointerRail from '../../components/shared/PointerRail'
 import './MaxRangeView.css'
 
 // Bars show each value. The active index brackets the range where it stays a maximum, between the boundary greater values.
@@ -29,6 +30,16 @@ export default function MaxRangeView({ run, step }) {
       {step.stack.length ? step.stack.map((j, k) => <b key={`${j}-${k}`}>{j}</b>) : <i>empty</i>}
     </div>
     {step.answer && <p className="max-range__answer" aria-label="Range lengths so far">Lengths: {step.answer.join(', ')}</p>}
+    <PointerRail
+      title="Pointers on the array"
+      values={nums}
+      pointers={i >= 0 ? [
+        { id: 'i', label: 'i', index: i, tone: 'primary' },
+        ...(step.left[i] >= 0 ? [{ id: 'L', label: 'L', index: step.left[i], tone: 'warning' }] : []),
+        ...(step.right[i] < nums.length ? [{ id: 'R', label: 'R', index: step.right[i], tone: 'warning' }] : []),
+      ] : []}
+      note="i is the index being measured. L and R are the nearest strictly greater values found so far."
+    />
     <p className="max-range__legend">Teal bars are inside the active index&apos;s range. Index labels sit under each bar; L and R show the boundary indices found so far.</p>
     <output aria-label="Pass state">{step.phase === 'answer' || step.phase === 'done' ? 'Ranges are complete' : `${step.phase === 'right' ? 'Right' : 'Left'} pass${i >= 0 ? `, index ${i}` : ''}`}</output>
   </div>

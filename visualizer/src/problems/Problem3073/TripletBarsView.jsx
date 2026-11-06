@@ -1,4 +1,5 @@
 import './TripletBarsView.css'
+import PointerRail from '../../components/shared/PointerRail'
 
 export default function TripletBarsView({ run, step }) {
   const nums = run.input
@@ -21,6 +22,15 @@ export default function TripletBarsView({ run, step }) {
           </div>
         ))}
       </div>
+      <PointerRail
+        title="Pointers on the values"
+        values={nums}
+        pointers={[
+          ...(step.leftIndex >= 0 ? [{ id: 'i', label: 'i', index: step.leftIndex, tone: 'warning' }] : []),
+          ...(step.j >= 0 ? [{ id: 'j', label: 'j', index: step.j, tone: 'primary' }] : []),
+          ...(step.rightIndex >= 0 ? [{ id: 'k', label: 'k', index: step.rightIndex, tone: 'warning' }] : []),
+        ]}
+      />
       <dl className="tbv__facts">
         <div><dt>best</dt><dd>{step.best}</dd></div>
         <div><dt>left (i)</dt><dd>{step.left === null ? 'none' : step.left}</dd></div>

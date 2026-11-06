@@ -28,10 +28,10 @@ export default function MinimumRectanglesToCoverPoints() {
     return <>
       <div aria-label="Number line of x values" style={{ position: 'relative', height: 64, margin: '12px 0' }}>
         <div style={{ position: 'absolute', top: 30, left: 0, right: 0, height: 2, background: 'currentColor', opacity: 0.4 }} />
-        {step.start !== null && step.start !== undefined && <div aria-label="Current rectangle" style={{ position: 'absolute', top: 14, height: 12, left: pct(step.start), width: `${(((step.end - step.start) / span) * 100)}%`, background: '#0f766e', opacity: 0.55, borderRadius: 4 }} />}
+        {step.start !== null && step.start !== undefined && <div aria-label="Current rectangle" style={{ position: 'absolute', top: 14, height: 12, left: pct(step.start), width: `${(((step.end - step.start) / span) * 100)}%`, background: 'var(--surface2)', opacity: 0.55, borderRadius: 4 }} />}
         {step.start !== null && step.start !== undefined && <span aria-hidden="true" style={{ position: 'absolute', top: 0, left: pct(step.start), transform: 'translateX(-50%)', fontSize: 12, fontWeight: 700 }}>l</span>}
         {step.start !== null && step.start !== undefined && <span aria-hidden="true" style={{ position: 'absolute', top: 0, left: pct(step.end), transform: 'translateX(-50%)', fontSize: 12, fontWeight: 700 }}>r</span>}
-        {xs.map(x => <div key={x} title={`x = ${x}`} style={{ position: 'absolute', top: 24, left: pct(x), width: 14, height: 14, marginLeft: -7, borderRadius: '50%', background: (step.covered || []).includes(x) ? '#0f766e' : 'transparent', border: '2px solid #0f766e' }}>
+        {xs.map(x => <div key={x} title={`x = ${x}`} style={{ position: 'absolute', top: 24, left: pct(x), width: 14, height: 14, marginLeft: -7, borderRadius: '50%', background: (step.covered || []).includes(x) ? 'var(--surface2)' : 'transparent', border: '2px solid var(--success)' }}>
           <span style={{ position: 'absolute', top: 18, left: -6, fontSize: 12 }}>{x}</span></div>)}
       </div>
       <output aria-label="Rectangle count">{`rectangles so far: ${step.count}${step.start !== null && step.start !== undefined ? `, current reach ${step.start} to ${step.end}` : ''}`}</output>

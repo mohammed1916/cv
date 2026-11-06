@@ -25,7 +25,7 @@ function Rows({ columns = [], rows = [] }) {
   </div>
 }
 
-export default function KnowledgeDerivedSqlVisual() {
+export default function SqlStageVisual() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <Rows columns={step.columns} rows={step.rows} />
     <output aria-label="Query output">{step.phase === 'done' ? `Output rows: ${run.result.length}` : step.message}</output>

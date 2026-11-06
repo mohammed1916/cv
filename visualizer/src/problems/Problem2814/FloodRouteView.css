@@ -2,21 +2,21 @@
 .flood-route__grid { display: grid; gap: 4px; justify-content: start; }
 .flood-route__cell {
   position: relative; display: grid; place-items: center; min-height: 2.6rem; border-radius: 6px;
-  background: #f8fafc; border: 1px solid #cbd5e1; color: #0f172a; font-weight: 600;
+  background: var(--surface2); border: 1px solid var(--border); color: var(--text); font-weight: 600;
 }
 .flood-route__symbol { font-size: 1.05rem; }
-.flood-route__time { position: absolute; right: 3px; bottom: 1px; font-size: 0.62rem; color: #475569; }
-.flood-route__tag { position: absolute; left: 2px; top: 1px; font-size: 0.56rem; text-transform: uppercase; color: #7c2d12; }
-.flood-route__cell.is-water { background: #bfdbfe; border-color: #2563eb; }
-.flood-route__cell.is-stone { background: #334155; color: #f8fafc; border-color: #0f172a; }
-.flood-route__cell.is-destination { background: #bbf7d0; border-color: #15803d; }
-.flood-route__cell.is-start { background: #e0e7ff; border-color: #4338ca; }
-.flood-route__cell.is-reached { box-shadow: inset 0 0 0 2px #15803d; }
-.flood-route__cell.is-traveler { outline: 3px solid #f59e0b; outline-offset: 1px; }
-.flood-route__cell.is-next { background: #fef3c7; border-color: #d97706; }
-.flood-route__cell.is-blocked { background: #fecaca; border-color: #b91c1c; text-decoration: line-through; }
-.flood-route__legend, .flood-route output { font-size: 0.9rem; margin: 0; color: #334155; }
+.flood-route__time { position: absolute; right: 3px; bottom: 1px; font-size: 0.62rem; color: var(--primary); }
+.flood-route__tag { position: absolute; left: 2px; top: 1px; font-size: 0.56rem; text-transform: uppercase; color: var(--error); }
+.flood-route__cell.is-water { background: var(--surface2); border-color: var(--primary); }
+.flood-route__cell.is-stone { background: var(--surface2); color: var(--text); border-color: var(--border); }
+.flood-route__cell.is-destination { background: var(--surface2); border-color: var(--success); }
+.flood-route__cell.is-start { background: var(--surface2); border-color: var(--primary); }
+.flood-route__cell.is-reached { box-shadow: inset 0 0 0 2px var(--success); }
+.flood-route__cell.is-traveler { outline: 3px solid var(--error); outline-offset: 1px; }
+.flood-route__cell.is-next { background: var(--surface2); border-color: var(--error); }
+.flood-route__cell.is-blocked { background: var(--surface2); border-color: var(--error); text-decoration: line-through; }
+.flood-route__legend, .flood-route output { font-size: 0.9rem; margin: 0; color: var(--primary); }
 @media (prefers-color-scheme: dark) {
-  .flood-route__cell { background: #1e293b; color: #e2e8f0; border-color: #475569; }
-  .flood-route__time, .flood-route__legend, .flood-route output { color: #cbd5e1; }
+  .flood-route__cell { background: var(--surface2); color: var(--text); border-color: var(--primary); }
+  .flood-route__time, .flood-route__legend, .flood-route output { color: var(--text-muted); }
 }

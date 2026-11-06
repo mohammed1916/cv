@@ -1,4 +1,5 @@
 import './FruitWindowView.css'
+import PointerRail from '../../components/shared/PointerRail'
 
 export default function FruitWindowView({ run, step }) {
   const { prices } = run.input
@@ -31,6 +32,15 @@ export default function FruitWindowView({ run, step }) {
           <span className="fruit-cost">cost 0</span>
         </li>
       </ol>
+      <PointerRail
+        title="Pointers on the prices"
+        values={prices}
+        pointers={[
+          ...(step.i >= 1 ? [{ id: 'i', label: 'i', index: step.i - 1, tone: 'primary' }] : []),
+          ...(wStart >= 1 ? [{ id: 'l', label: 'l', index: wStart - 1, tone: 'warning' }] : []),
+          ...(wEnd >= 1 ? [{ id: 'r', label: 'r', index: Math.min(wEnd, n) - 1, tone: 'warning' }] : []),
+        ]}
+      />
       <p className="fruit-deque">Candidates (front to back): {(step.deque ?? []).map(d => (d.index === n + 1 ? 'end' : d.index)).join(', ') || 'none'}</p>
       <p className="fruit-window">Reach window: {wStart >= 0 ? `fruits ${wStart} to ${Math.min(wEnd, n + 1)}` : 'none yet'}</p>
       <output className="fruit-message" aria-label="Deque status">{step.message}</output>

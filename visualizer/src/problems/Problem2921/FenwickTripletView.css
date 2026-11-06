@@ -19,18 +19,18 @@
 .fenwick-table th,
 .fenwick-table td {
   padding: 5px 9px;
-  border: 1px solid rgba(127, 127, 127, 0.35);
+  border: 1px solid var(--border);
   text-align: center;
   min-width: 40px;
 }
 
 .fenwick-table .is-current {
-  background: rgba(29, 78, 216, 0.18);
+  background: var(--surface2);
   font-weight: 700;
 }
 
 .fenwick-table .is-best {
-  background: rgba(15, 118, 110, 0.22);
+  background: var(--surface2);
   font-weight: 700;
 }
 
@@ -59,8 +59,8 @@
   min-width: 56px;
   padding: 4px 8px;
   border-radius: 8px;
-  border: 2px solid #1d4ed8;
-  background: rgba(29, 78, 216, 0.1);
+  border: 2px solid var(--primary);
+  background: var(--surface2);
 }
 
 .fenwick-tree li.is-empty {

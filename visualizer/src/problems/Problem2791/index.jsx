@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import RootedTreeDiagram from '../../components/shared/RootedTreeDiagram'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -26,6 +27,7 @@ export default function CountPalindromePaths() {
     if (step.v >= 0) roles[step.v] = 'new'
     return <>
       <RootedTreeDiagram root={run.root} roles={roles} title="Tree (node ids)" />
+      <IndexedSequence label="Letters by node" length={run.input.s.length} valueAt={i => run.input.s[i]} active={step.v ?? -1} roleAt={i => (step.path.includes(i) ? 'path' : '')} />
       <output aria-label="Path letters">{step.u < 0 ? `Pairs counted: ${step.count}` : `Path ${step.u} to ${step.v} reads "${step.text}": ${step.ok ? 'palindrome-able' : 'not'}. Count ${step.count}`}</output>
     </>
   }} renderReasoning={() => <>

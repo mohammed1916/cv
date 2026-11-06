@@ -142,7 +142,7 @@ function VisualizationPanel({ dividend, divisor, step, applyExample, examples })
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: "var(--recovered-ink-5577a4, #5577a4)", marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: "var(--primary)", marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -168,33 +168,33 @@ function VisualizationPanel({ dividend, divisor, step, applyExample, examples })
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
         <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Dividend</div>
-          <div style={{ fontSize: 16, fontWeight: 700, color: "var(--recovered-ink-067db1, #067db1)" }}>{dividend}</div>
+          <div style={{ fontSize: 16, fontWeight: 700, color: "var(--primary)" }}>{dividend}</div>
         </div>
         <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Divisor</div>
-          <div style={{ fontSize: 16, fontWeight: 700, color: "var(--recovered-ink-067db1, #067db1)" }}>{divisor}</div>
+          <div style={{ fontSize: 16, fontWeight: 700, color: "var(--primary)" }}>{divisor}</div>
         </div>
       </div>
 
       {step?.quotient !== undefined && (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-          <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #a78bfa' }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: "var(--recovered-ink-7e56f8, #7e56f8)", marginBottom: 6 }}>Quotient</div>
-            <div style={{ fontSize: 16, fontWeight: 700, color: "var(--recovered-ink-7957fa, #7957fa)" }}>{step.quotient}</div>
+          <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid var(--primary)' }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: "var(--primary)", marginBottom: 6 }}>Quotient</div>
+            <div style={{ fontSize: 16, fontWeight: 700, color: "var(--primary)" }}>{step.quotient}</div>
           </div>
-          <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #a78bfa' }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: "var(--recovered-ink-7e56f8, #7e56f8)", marginBottom: 6 }}>Remainder</div>
-            <div style={{ fontSize: 16, fontWeight: 700, color: "var(--recovered-ink-7957fa, #7957fa)" }}>{step.dividend}</div>
+          <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid var(--primary)' }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: "var(--primary)", marginBottom: 6 }}>Remainder</div>
+            <div style={{ fontSize: 16, fontWeight: 700, color: "var(--primary)" }}>{step.dividend}</div>
           </div>
         </div>
       )}
 
       {step?.tempDivisor !== undefined && step.phase === 'find_multiple' && (
-        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #f59e0b' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: "var(--recovered-ink-a36907, #a36907)", marginBottom: 6 }}>Finding Multiple</div>
-          <div style={{ fontSize: 12, color: "var(--recovered-ink-5577a4, #5577a4)", fontFamily: 'monospace' }}>
-            Temp Divisor: <span style={{ color: "var(--recovered-ink-178740, #178740)", fontWeight: 600 }}>{step.tempDivisor}</span>
-            {' '} | Multiple: <span style={{ color: "var(--recovered-ink-178740, #178740)", fontWeight: 600 }}>{step.multiple}</span>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid var(--error)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: "var(--error)", marginBottom: 6 }}>Finding Multiple</div>
+          <div style={{ fontSize: 12, color: "var(--primary)", fontFamily: 'monospace' }}>
+            Temp Divisor: <span style={{ color: "var(--success)", fontWeight: 600 }}>{step.tempDivisor}</span>
+            {' '} | Multiple: <span style={{ color: "var(--success)", fontWeight: 600 }}>{step.multiple}</span>
           </div>
         </div>
       )}
@@ -205,7 +205,7 @@ function VisualizationPanel({ dividend, divisor, step, applyExample, examples })
             padding: 16,
             backgroundColor: 'var(--surface2)',
             borderRadius: 6,
-            border: '2px solid #22c55e',
+            border: '2px solid var(--success)',
             textAlign: 'center',
           }}
           initial={{ opacity: 0, scale: 0.9 }}
@@ -213,7 +213,7 @@ function VisualizationPanel({ dividend, divisor, step, applyExample, examples })
           transition={{ duration: 0.3 }}
         >
           <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Result</div>
-          <div style={{ fontSize: 24, fontWeight: 'bold', color: "var(--recovered-ink-178740, #178740)" }}>{step.result}</div>
+          <div style={{ fontSize: 24, fontWeight: 'bold', color: "var(--success)" }}>{step.result}</div>
         </motion.div>
       )}
     </div>
@@ -278,7 +278,7 @@ export default function DivideTwoIntegersVisualizer() {
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
               <div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: "var(--recovered-ink-5577a4, #5577a4)", marginBottom: 6 }}>Dividend</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: "var(--primary)", marginBottom: 6 }}>Dividend</div>
                 <input
                   type="number"
                   value={dividend}
@@ -299,7 +299,7 @@ export default function DivideTwoIntegersVisualizer() {
                 />
               </div>
               <div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: "var(--recovered-ink-5577a4, #5577a4)", marginBottom: 6 }}>Divisor</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: "var(--primary)", marginBottom: 6 }}>Divisor</div>
                 <input
                   type="number"
                   value={divisor}

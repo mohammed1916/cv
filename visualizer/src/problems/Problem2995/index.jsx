@@ -26,7 +26,7 @@ function Rows({ columns = [], rows = [] }) {
   </div>
 }
 
-export default function KnowledgeDerivedSqlVisual() {
+export default function SqlStageVisual() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <SessionLanes sessions={run.input.Sessions} firsts={step.phase === 'load' ? [] : (step.columns.includes('first_type') ? step.rows : [])} counted={step.columns.includes('sessions_count') ? step.rows : []} />
     <Rows columns={step.columns} rows={step.rows} />

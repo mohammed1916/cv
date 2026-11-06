@@ -1,4 +1,5 @@
 import "./SemiDecreasingView.css";
+import PointerRail from '../../components/shared/PointerRail';
 
 // Bars show each value's height. The left end, the right end being tested, and the best span
 // found so far are drawn as brackets under the bars, so the scan and its result read together.
@@ -27,6 +28,14 @@ export default function SemiDecreasingView({ run, step }) {
           );
         })}
       </div>
+      <PointerRail
+        title="Pointers on the values"
+        values={nums}
+        pointers={[
+          ...(l !== null && l !== undefined ? [{ id: 'l', label: 'l', index: l, tone: 'primary' }] : []),
+          ...(r !== null && r !== undefined ? [{ id: 'r', label: 'r', index: r, tone: 'warning' }] : []),
+        ]}
+      />
       <div className="sd-brackets" aria-label="Current candidate and best span">
         <div className="sd-track">
           {nums.map((_, i) => (

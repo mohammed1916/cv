@@ -37,7 +37,7 @@ export default function MinimumMovesSpreadStones() {
               const isCurrent = step.path.length && step.path[step.path.length - 1].to === i;
               return <div key={i} data-cell={i} data-role={isCurrent ? "current" : isTo ? "target" : isFrom ? "source" : ""} style={{
                 height: 56, display: "grid", placeItems: "center", borderRadius: 8, border: "2px solid var(--border, currentColor)",
-                background: isCurrent ? "var(--primary)" : isTo ? "var(--surface2)" : "transparent", color: isCurrent ? "#fff" : "var(--text)",
+                background: isCurrent ? "var(--primary)" : isTo ? "var(--surface2)" : "transparent", color: isCurrent ? "var(--surface)" : "var(--text)",
               }}>
                 <div style={{ textAlign: "center" }}><small>cell {i}</small><div style={{ fontSize: 20, fontWeight: 700 }}>{step.cells[i]}</div></div>
               </div>;

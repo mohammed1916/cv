@@ -7,7 +7,7 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Array of integers (e.g. [3, 1, 3, 2])',
   url: 'https://leetcode.com/problems/maximal-range-that-each-element-is-maximum-in-it/',
-  complexity: 'O(n) time and O(n) space: two monotonic-stack passes find each boundary once. The visualization caps the array at 12 values; the official bounds are not verified here.',
+  complexity: 'O(n) time and O(n) space: two monotonic-stack passes find each boundary once. The visualization caps the array at 12 values.',
   examples: [
     { label: 'Mixed heights', input: '[2, 7, 3, 3, 1]' },
     { label: 'Ties', input: '[4, 4, 4]' },

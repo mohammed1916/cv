@@ -7,7 +7,7 @@ export default function SqlStageBoard({ stages, active = 0, title = 'Query stage
     <ol aria-label="Pipeline" style={{ display: 'flex', flexWrap: 'wrap', gap: 6, padding: 0, margin: 0, listStyle: 'none' }}>
       {stages.map((s, i) => <li key={s.id} data-active={i === active} aria-current={i === active ? 'step' : undefined}
         style={{ padding: '4px 10px', borderRadius: 999, border: '1px solid var(--border, currentColor)', fontWeight: i === active ? 700 : 400,
-          background: i === active ? 'var(--primary)' : i < active ? 'var(--surface2)' : 'transparent', color: i === active ? '#fff' : 'var(--text)' }}>
+          background: i === active ? 'var(--primary)' : i < active ? 'var(--surface2)' : 'transparent', color: i === active ? 'var(--surface)' : 'var(--text)' }}>
         <code>{s.clause}</code> <span>{s.label}</span> <small>({s.rows.length} rows)</small>
       </li>)}
     </ol>

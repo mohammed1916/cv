@@ -12,7 +12,7 @@ export default function PatternWindowView({ run, step }) {
   return (
     <div className="pwv">
       <figure className="pwv__board">
-        <figcaption>Board digits</figcaption>
+        <figcaption>Board digits{wr >= 0 ? ` · window pointer at row ${wr}, column ${wc}` : ''}</figcaption>
         <table>
           <tbody>
             {board.map((row, r) => (

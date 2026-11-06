@@ -25,17 +25,17 @@
   min-width: 40px;
   padding: 6px 6px;
   border-radius: 8px;
-  border: 2px solid rgba(127, 127, 127, 0.4);
-  background: rgba(127, 127, 127, 0.08);
+  border: 2px solid var(--border);
+  background: var(--surface2);
 }
 
 .residue-cell.is-seen {
-  background: rgba(190, 18, 60, 0.1);
+  background: var(--surface2);
 }
 
 .residue-cell.is-current {
-  border-color: #be123c;
-  background: rgba(190, 18, 60, 0.24);
+  border-color: var(--error);
+  background: var(--surface2);
   font-weight: 700;
 }
 
@@ -53,17 +53,17 @@
 .residue-table th,
 .residue-table td {
   padding: 5px 10px;
-  border: 1px solid rgba(127, 127, 127, 0.35);
+  border: 1px solid var(--border);
   text-align: center;
   min-width: 44px;
 }
 
 .residue-table td.is-filled {
-  background: rgba(127, 127, 127, 0.1);
+  background: var(--surface2);
 }
 
 .residue-table td.is-answer {
-  background: rgba(190, 18, 60, 0.26);
+  background: var(--surface2);
   font-weight: 700;
 }
 

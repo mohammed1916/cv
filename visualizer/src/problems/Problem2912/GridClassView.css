@@ -22,25 +22,25 @@
   place-items: center;
   min-height: 48px;
   border-radius: 6px;
-  border: 1px solid rgba(127, 127, 127, 0.4);
+  border: 1px solid var(--border);
   font-size: 0.8rem;
 }
 
 .grid-class-cell.is-d {
-  background: rgba(180, 83, 9, 0.28);
+  background: var(--surface2);
   font-weight: 700;
 }
 
 .grid-class-cell.is-r {
-  background: rgba(29, 78, 216, 0.18);
+  background: var(--surface2);
 }
 
 .grid-class-cell.is-c {
-  background: rgba(15, 118, 110, 0.2);
+  background: var(--surface2);
 }
 
 .grid-class-cell.is-o {
-  background: rgba(127, 127, 127, 0.1);
+  background: var(--surface2);
 }
 
 .grid-class-coord {
@@ -62,8 +62,8 @@
   font-size: 0.6rem;
   padding: 0 3px;
   border-radius: 4px;
-  background: #b45309;
-  color: #fff;
+  background: var(--surface2);
+  color: var(--text);
 }
 
 .grid-class-counts {
@@ -75,7 +75,7 @@
 .grid-class-counts th,
 .grid-class-counts td {
   padding: 4px 10px;
-  border-bottom: 1px solid rgba(127, 127, 127, 0.35);
+  border-bottom: 1px solid var(--border);
   text-align: left;
 }
 

@@ -1,4 +1,5 @@
 import './HeroSearchView.css'
+import PointerRail from '../../components/shared/PointerRail'
 
 // Monsters sorted by strength form a row. The hero's strength is a marker; the search window narrows around the cut.
 export default function HeroSearchView({ run, step }) {
@@ -19,6 +20,15 @@ export default function HeroSearchView({ run, step }) {
         </div>
       })}
     </div>
+    <PointerRail
+      title="Search pointers on the sorted strengths"
+      values={sorted.map(([s]) => s)}
+      pointers={step.phase === 'search' && step.lo >= 0 ? [
+        { id: 'lo', label: 'lo', index: step.lo, tone: 'primary' },
+        ...(step.mid >= 0 ? [{ id: 'mid', label: 'mid', index: step.mid, tone: 'warning' }] : []),
+        ...(step.hi < sorted.length ? [{ id: 'hi', label: 'hi', index: step.hi, tone: 'primary' }] : []),
+      ] : []}
+    />
     {h !== null && <p className="hero-search__hero">Hero strength <b>{h}</b> beats every monster with strength up to {h}.</p>}
     {(step.phase === 'prefix' || step.phase === 'search' || step.phase === 'answer' || step.phase === 'done') &&
       <div className="hero-search__prefix" aria-label="Prefix sums of coins">

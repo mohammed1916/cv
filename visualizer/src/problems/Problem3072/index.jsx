@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import FenwickView from '../../components/shared/FenwickView'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -19,7 +20,8 @@ const definition = {
 }
 
 export default function DistributeElementsTwoArrays() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="Input values" length={run.input.length} valueAt={i => run.input[i]} active={step.index ?? -1} roleAt={i => (step.arr1.includes(run.input[i]) ? 'arr1' : step.arr2.includes(run.input[i]) ? 'arr2' : '')} />
     <output aria-label="Decision">{step.index === null ? step.message : `Value ${step.value}: greater counts ${step.g1} (arr1) and ${step.g2} (arr2), goes to arr${step.target}`}</output>
     <div className="fenwick-pair">
       <FenwickView title="arr1 counts by rank" tree={step.tree1} ops={step.ops1} />

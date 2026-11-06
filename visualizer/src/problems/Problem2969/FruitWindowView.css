@@ -26,23 +26,23 @@
   min-width: 84px;
   padding: 8px 6px;
   border-radius: 10px;
-  border: 2px solid rgba(127, 127, 127, 0.4);
-  background: rgba(127, 127, 127, 0.08);
+  border: 2px solid var(--border);
+  background: var(--surface2);
 }
 
 .fruit-cell.is-window {
-  background: rgba(202, 138, 4, 0.16);
-  border-color: rgba(202, 138, 4, 0.6);
+  background: var(--surface2);
+  border-color: var(--error);
 }
 
 .fruit-cell.is-candidate {
-  border-color: #0f766e;
-  box-shadow: inset 0 -4px 0 #0f766e;
+  border-color: var(--success);
+  box-shadow: inset 0 -4px 0 var(--success);
 }
 
 .fruit-cell.is-current {
-  border-color: #b45309;
-  background: rgba(180, 83, 9, 0.2);
+  border-color: var(--error);
+  background: var(--surface2);
   font-weight: 700;
 }
 

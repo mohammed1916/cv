@@ -1,4 +1,5 @@
 import "./StreamWindowView.css";
+import PointerRail from "../../components/shared/PointerRail";
 
 // Draws the bit tape as the stream yields it, with the last m bits boxed as the window.
 export default function StreamWindowView({ run, step }) {
@@ -44,6 +45,15 @@ export default function StreamWindowView({ run, step }) {
           );
         })}
       </div>
+      <PointerRail
+        title="Pointers on the stream"
+        values={bits.split("")}
+        pointers={[
+          ...(winStart >= 0 ? [{ id: "start", label: "start", index: winStart, tone: "warning" }] : []),
+          ...(index >= 0 ? [{ id: "end", label: "end", index, tone: "primary" }] : []),
+          ...(compareAt >= 0 ? [{ id: "j", label: "j", index: compareAt, tone: "primary" }] : []),
+        ]}
+      />
       <p className="swStatus">
         {`window = ${step.window || "(empty)"}`}
         {step.start >= 0 ? `, candidate start ${step.start}` : ""}

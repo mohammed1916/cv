@@ -1,4 +1,5 @@
 import './TripletScanView.css'
+import PointerRail from '../../components/shared/PointerRail'
 
 export default function TripletScanView({ run, step }) {
   const { prices, profits } = run.input
@@ -34,6 +35,14 @@ export default function TripletScanView({ run, step }) {
           </tr>
         </tbody>
       </table>
+      <PointerRail
+        title="Pointers on the prices"
+        values={prices}
+        pointers={[
+          ...(step.j >= 0 ? [{ id: 'j', label: 'j', index: step.j, tone: 'primary' }] : []),
+          ...(step.scan >= 0 && step.scan !== undefined ? [{ id: 'scan', label: 'scan', index: step.scan, tone: 'warning' }] : []),
+        ]}
+      />
       <dl className="triplet-facts">
         <div><dt>Middle j</dt><dd>{step.j >= 0 ? step.j : 'none'}</dd></div>
         <div><dt>Left best</dt><dd>{step.leftBest ?? 'none'}</dd></div>

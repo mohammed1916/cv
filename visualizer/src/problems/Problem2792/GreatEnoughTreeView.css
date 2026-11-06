@@ -1,7 +1,7 @@
 .great-tree {
   display: grid;
   gap: 12px;
-  color: var(--text, #1f2937);
+  color: var(--text);
 }
 .great-tree-svg {
   width: 100%;
@@ -10,16 +10,16 @@
   justify-self: center;
 }
 .great-tree-svg .edge {
-  stroke: #94a3b8;
+  stroke: var(--primary);
   stroke-width: 2;
 }
 .great-tree-svg .node circle {
-  fill: #f1f5f9;
-  stroke: #64748b;
+  fill: var(--surface2);
+  stroke: var(--primary);
   stroke-width: 2;
 }
 .great-tree-svg .node-value {
-  fill: #0f172a;
+  fill: var(--surface2);
   font-weight: 700;
   font-size: 14px;
 }
@@ -28,24 +28,24 @@
   font-weight: 700;
 }
 .great-tree-svg .node.current circle {
-  fill: #ddd6fe;
-  stroke: #6d28d9;
+  fill: var(--surface2);
+  stroke: var(--primary);
   stroke-width: 4;
 }
 .great-tree-svg .node.counted circle {
-  fill: #d1fae5;
-  stroke: #047857;
+  fill: var(--surface2);
+  stroke: var(--success);
 }
 .great-tree-svg .node.counted .node-mark {
-  fill: #047857;
+  fill: var(--surface2);
 }
 .great-tree-svg .node.skipped circle {
-  fill: #e2e8f0;
-  stroke: #64748b;
+  fill: var(--surface2);
+  stroke: var(--primary);
   stroke-dasharray: 4 3;
 }
 .great-tree-svg .node.skipped .node-mark {
-  fill: #b91c1c;
+  fill: var(--surface2);
 }
 .great-tree-readout {
   display: flex;
@@ -53,7 +53,7 @@
   gap: 8px 16px;
   padding: 10px 12px;
   border-radius: 8px;
-  background: #f1f5f9;
+  background: var(--surface2);
 }
 .great-tree-count {
   font-weight: 700;
@@ -64,14 +64,14 @@
   font-size: 0.9rem;
 }
 @media (prefers-color-scheme: dark) {
-  .great-tree { color: #e2e8f0; }
-  .great-tree-svg .edge { stroke: #64748b; }
-  .great-tree-svg .node circle { fill: #1e293b; stroke: #94a3b8; }
-  .great-tree-svg .node-value { fill: #f8fafc; }
-  .great-tree-svg .node.current circle { fill: #4c1d95; stroke: #c4b5fd; }
-  .great-tree-svg .node.counted circle { fill: #064e3b; stroke: #34d399; }
-  .great-tree-svg .node.counted .node-mark { fill: #6ee7b7; }
-  .great-tree-svg .node.skipped circle { fill: #334155; }
-  .great-tree-svg .node.skipped .node-mark { fill: #fca5a5; }
-  .great-tree-readout { background: #1e293b; }
+  .great-tree { color: var(--text); }
+  .great-tree-svg .edge { stroke: var(--primary); }
+  .great-tree-svg .node circle { fill: var(--surface2); stroke: var(--primary); }
+  .great-tree-svg .node-value { fill: var(--text); }
+  .great-tree-svg .node.current circle { fill: var(--surface2); stroke: var(--primary); }
+  .great-tree-svg .node.counted circle { fill: var(--surface2); stroke: var(--success); }
+  .great-tree-svg .node.counted .node-mark { fill: var(--success); }
+  .great-tree-svg .node.skipped circle { fill: var(--surface2); }
+  .great-tree-svg .node.skipped .node-mark { fill: var(--error); }
+  .great-tree-readout { background: var(--surface2); }
 }
