@@ -1,14 +1,14 @@
 .fw-view {
-  --fw-now: #b45309;
-  --fw-now-fill: #fde68a;
-  --fw-in: #0369a1;
-  --fw-in-fill: #bae6fd;
-  --fw-leave: #be123c;
-  --fw-leave-fill: #fecdd3;
-  --fw-out-fill: #f1f5f9;
-  --fw-edge: #94a3b8;
-  --fw-ink: #0f172a;
-  --fw-muted: #475569;
+  --fw-now: var(--primary);
+  --fw-now-fill: color-mix(in srgb, var(--primary) 16%, var(--surface));
+  --fw-in: var(--primary);
+  --fw-in-fill: color-mix(in srgb, var(--primary) 16%, var(--surface));
+  --fw-leave: var(--error);
+  --fw-leave-fill: var(--surface2);
+  --fw-out-fill: var(--surface2);
+  --fw-edge: var(--border);
+  --fw-ink: var(--text);
+  --fw-muted: var(--text-muted);
   color: var(--fw-ink);
   display: grid;
   gap: 12px;
@@ -16,17 +16,7 @@
   font-family: system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  .fw-view {
-    --fw-now-fill: #78350f;
-    --fw-in-fill: #0c4a6e;
-    --fw-leave-fill: #881337;
-    --fw-out-fill: #1e293b;
-    --fw-edge: #64748b;
-    --fw-ink: #e2e8f0;
-    --fw-muted: #94a3b8;
-  }
-}
+
 
 .fw-rule, .fw-note { margin: 0; font-size: 14px; color: var(--fw-muted); }
 .fw-row { display: flex; flex-wrap: wrap; gap: 6px; }

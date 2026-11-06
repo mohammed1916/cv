@@ -1,13 +1,13 @@
 .ur-view {
   display: grid;
   gap: 0.75rem;
-  color: var(--text, #1f2937);
+  color: var(--text, var(--text));
 }
 
 .ur-empty {
   margin: 0;
   padding: 1rem;
-  color: var(--muted, #6b7280);
+  color: var(--muted, var(--text));
 }
 
 .ur-svg {
@@ -18,62 +18,62 @@
 }
 
 .ur-bar rect {
-  fill: #bfdbfe;
-  stroke: #1d4ed8;
+  fill: var(--surface2);
+  stroke: var(--primary);
   stroke-width: 1;
 }
 
 .ur-bar text {
   font-size: 12px;
-  fill: #1e3a8a;
+  fill: var(--primary);
   font-weight: 600;
 }
 
 .ur-bar--active rect {
-  fill: #93c5fd;
+  fill: var(--surface2);
   stroke-width: 3;
 }
 
 .ur-cell rect {
-  fill: #ffffff;
-  stroke: #94a3b8;
+  fill: var(--surface2);
+  stroke: var(--border);
   stroke-width: 1.5;
 }
 
 .ur-cell text {
   font-size: 12px;
-  fill: #1f2937;
+  fill: var(--text);
   font-weight: 600;
 }
 
 .ur-cell .ur-status {
   font-size: 9px;
   font-weight: 500;
-  fill: #475569;
+  fill: var(--text);
 }
 
 .ur-cell--covered rect {
-  fill: #e2e8f0;
+  fill: var(--surface2);
 }
 
 .ur-cell--looking rect {
-  stroke: #1d4ed8;
+  stroke: var(--primary);
   stroke-width: 2.5;
 }
 
 .ur-cell--gap rect {
-  fill: #bbf7d0;
-  stroke: #15803d;
+  fill: var(--surface2);
+  stroke: var(--success);
   stroke-width: 2.5;
 }
 
 .ur-cursor path {
-  fill: #b45309;
+  fill: var(--primary);
 }
 
 .ur-cursor text {
   font-size: 11px;
-  fill: #b45309;
+  fill: var(--primary);
   font-weight: 700;
 }
 
@@ -94,12 +94,12 @@
 .ur-gap {
   padding: 0.3rem 0.6rem;
   border-radius: 999px;
-  background: #dcfce7;
-  color: #14532d;
+  background: var(--surface2);
+  color: var(--success);
   font-weight: 600;
 }
 
 .ur-gap--empty {
-  background: #f3f4f6;
-  color: #6b7280;
+  background: var(--surface2);
+  color: var(--text);
 }

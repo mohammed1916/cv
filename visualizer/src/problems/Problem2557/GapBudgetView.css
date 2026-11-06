@@ -1,10 +1,10 @@
 .gap-view { display: grid; gap: 12px; }
 .gap-strip { display: flex; flex-wrap: wrap; gap: 4px; }
-.gap-cell { min-width: 32px; text-align: center; padding: 6px 4px; border-radius: 6px; border: 1px solid #cbd5e1; background: #f8fafc; color: #0f172a; font-weight: 700; font-variant-numeric: tabular-nums; }
-.gap-cell--banned { background: #fee2e2; border-color: #dc2626; color: #7f1d1d; text-decoration: line-through; }
+.gap-cell { min-width: 32px; text-align: center; padding: 6px 4px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-weight: 700; font-variant-numeric: tabular-nums; }
+.gap-cell--banned { background: var(--surface2); border-color: var(--error); color: var(--error); text-decoration: line-through; }
 .gap-x { text-decoration: none; display: inline-block; }
-.gap-cell--taken { background: #dcfce7; border-color: #16a34a; }
-.gap-cell--skipped { outline: 2px dashed #f59e0b; outline-offset: 1px; }
+.gap-cell--taken { background: var(--surface2); border-color: var(--success); }
+.gap-cell--skipped { outline: 2px dashed var(--primary); outline-offset: 1px; }
 .gap-state { display: flex; flex-wrap: wrap; gap: 14px; margin: 0; }
 .gap-state div { min-width: 110px; }
 .gap-state dt { font-size: 12px; opacity: 0.75; }

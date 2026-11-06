@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import HashMapView from '../../components/shared/HashMapView'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
@@ -20,7 +21,8 @@ const definition = {
 }
 
 export default function SquareStreak() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} roleAt={i => (step.chain.includes(run.input.nums[i]) ? 'chain' : '')} />
     <HashMapView maps={step.maps} ops={step.ops} />
     <output aria-label="Current chain">{`Current chain: ${step.chain.length ? step.chain.join(' → ') : '(none)'}`}</output>
     <output aria-label="Longest streak">{`Longest streak so far: ${step.result === -1 ? 'none' : step.result}`}</output>

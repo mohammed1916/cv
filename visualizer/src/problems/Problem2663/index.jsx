@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -20,9 +21,10 @@ const definition = {
 }
 
 export default function SmallestBeautiful() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => (
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => (<>
+    <IndexedSequence label="Letters of the current string" length={step.text.length} valueAt={i => step.text[i]} active={step.index} />
     <output aria-label="Current string">{`String: ${step.text || '(empty)'}${step.index >= 0 ? `, position ${step.index}` : ''}`}</output>
-  )} renderReasoning={() => <>
+  </>)} renderReasoning={() => <>
     <p>A palindrome of length 2 or 3 is the only kind to avoid locally, so each letter just needs to differ from the two before it.</p>
     <p>Raising the rightmost possible position gives the smallest string above s, and filling the rest with the smallest safe letters finishes it.</p>
   </>} />

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import HashMapView from '../../components/shared/HashMapView'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
@@ -22,6 +23,7 @@ const definition = {
 export default function SmallestMissingMex() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <p>{`Target m = ${step.target ?? 'not started'}, remainder ${step.target === null ? '-' : step.target % run.input.value} (mod ${run.input.value})`}</p>
+    <IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} roleAt={i => (step.target !== null && run.input.nums[i] % run.input.value === step.target % run.input.value ? 'group' : '')} />
     <HashMapView maps={step.maps} ops={step.ops} />
     <output aria-label="Current m">{step.phase === 'missing' ? `Answer: ${step.result}` : `Building m = ${step.target ?? 0}`}</output>
   </>} renderReasoning={() => <>

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import IntervalView from '../../components/shared/IntervalView'
 import { buildTrace, parseInput, code, python, viewFor } from './algorithm'
 
@@ -23,6 +24,7 @@ export default function CountWaysOverlappingRanges() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const view = viewFor(run, step)
     return <>
+      <IndexedSequence label="Ranges" length={run.input.length} valueAt={i => JSON.stringify(run.input[i])} active={step.index ?? -1} />
       {view && <IntervalView {...view} />}
       <output aria-label="Components">{`Components so far: ${step.groups}`}</output>
     </>

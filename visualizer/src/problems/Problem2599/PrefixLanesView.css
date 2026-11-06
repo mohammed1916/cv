@@ -1,15 +1,15 @@
 .pl-view {
-  --pl-now: #b45309;
-  --pl-now-fill: #fde68a;
-  --pl-read: #0369a1;
-  --pl-read-fill: #bae6fd;
-  --pl-heap: #7c3aed;
-  --pl-heap-fill: #ddd6fe;
-  --pl-moved: #be123c;
-  --pl-moved-fill: #fecdd3;
-  --pl-edge: #94a3b8;
-  --pl-ink: #0f172a;
-  --pl-muted: #475569;
+  --pl-now: var(--primary);
+  --pl-now-fill: color-mix(in srgb, var(--primary) 16%, var(--surface));
+  --pl-read: var(--primary);
+  --pl-read-fill: color-mix(in srgb, var(--primary) 16%, var(--surface));
+  --pl-heap: var(--primary);
+  --pl-heap-fill: var(--surface2);
+  --pl-moved: var(--error);
+  --pl-moved-fill: var(--surface2);
+  --pl-edge: var(--border);
+  --pl-ink: var(--text);
+  --pl-muted: var(--text-muted);
   color: var(--pl-ink);
   display: grid;
   gap: 12px;
@@ -17,17 +17,7 @@
   font-family: system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  .pl-view {
-    --pl-now-fill: #78350f;
-    --pl-read-fill: #0c4a6e;
-    --pl-heap-fill: #4c1d95;
-    --pl-moved-fill: #881337;
-    --pl-edge: #64748b;
-    --pl-ink: #e2e8f0;
-    --pl-muted: #94a3b8;
-  }
-}
+
 
 .pl-rule, .pl-empty { margin: 0; font-size: 14px; color: var(--pl-muted); }
 .pl-lane h3 { margin: 0 0 6px; font-size: 14px; }

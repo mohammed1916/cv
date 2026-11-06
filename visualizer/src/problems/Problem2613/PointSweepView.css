@@ -1,17 +1,17 @@
 .ps-view {
-  --ps-now: #b45309;
-  --ps-now-fill: #fde68a;
-  --ps-partner: #7c3aed;
-  --ps-partner-fill: #ddd6fe;
-  --ps-seen: #0369a1;
-  --ps-seen-fill: #bae6fd;
-  --ps-ahead-fill: #f1f5f9;
-  --ps-a: #15803d;
-  --ps-b: #be123c;
-  --ps-best: #15803d;
-  --ps-edge: #94a3b8;
-  --ps-ink: #0f172a;
-  --ps-muted: #475569;
+  --ps-now: var(--primary);
+  --ps-now-fill: color-mix(in srgb, var(--primary) 16%, var(--surface));
+  --ps-partner: var(--primary);
+  --ps-partner-fill: var(--surface2);
+  --ps-seen: var(--primary);
+  --ps-seen-fill: color-mix(in srgb, var(--primary) 16%, var(--surface));
+  --ps-ahead-fill: var(--surface2);
+  --ps-a: var(--success);
+  --ps-b: var(--error);
+  --ps-best: var(--success);
+  --ps-edge: var(--border);
+  --ps-ink: var(--text);
+  --ps-muted: var(--text-muted);
   color: var(--ps-ink);
   display: grid;
   gap: 10px;
@@ -19,17 +19,7 @@
   font-family: system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  .ps-view {
-    --ps-now-fill: #78350f;
-    --ps-partner-fill: #4c1d95;
-    --ps-seen-fill: #0c4a6e;
-    --ps-ahead-fill: #1e293b;
-    --ps-edge: #64748b;
-    --ps-ink: #e2e8f0;
-    --ps-muted: #94a3b8;
-  }
-}
+
 
 .ps-rule, .ps-note { margin: 0; font-size: 14px; color: var(--ps-muted); }
 .ps-plot { width: 100%; max-width: 320px; height: auto; justify-self: center; }

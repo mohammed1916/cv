@@ -1,4 +1,5 @@
 import './FrequencyWindowView.css'
+import PointerRail from '../../components/shared/PointerRail'
 
 export default function FrequencyWindowView({ run, step }) {
   const { nums, k } = run.input
@@ -18,6 +19,7 @@ export default function FrequencyWindowView({ run, step }) {
           )
         })}
       </div>
+      {win && <PointerRail title="Pointers on the numbers" values={nums} pointers={[{ id: 'l', label: 'l', index: win.from, tone: 'primary' }, { id: 'r', label: 'r', index: win.to, tone: 'success' }]} />}
       {win && <p className="fw-note">Window [{win.from}..{win.to}]</p>}
       <table className="fw-table" aria-label="Terms of the current window">
         <thead><tr><th scope="col">Value</th><th scope="col">Count</th><th scope="col">Term value^count</th></tr></thead>

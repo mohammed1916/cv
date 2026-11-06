@@ -1,4 +1,5 @@
 import './PointSweepView.css'
+import PointerRail from '../../components/shared/PointerRail'
 
 const SIZE = 300
 const PAD = 28
@@ -23,6 +24,7 @@ export default function PointSweepView({ run, step }) {
       <p className="ps-rule">
         Each index is a point (nums1[i], nums2[i]). Distance is |x - x'| + |y - y'|. Points are swept left to right.
       </p>
+      {j >= 0 && <PointerRail title="Pointer j on nums1 and nums2" values={nums1.map((x, i) => `${x},${nums2[i]}`)} pointers={[{ id: 'j', label: 'j', index: j, tone: 'primary' }]} />}
       <svg className="ps-plot" viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={`Points sweep; current point ${j >= 0 ? j : 'none'}`}>
         <line x1={PAD} y1={sy(0)} x2={SIZE - PAD} y2={sy(0)} className="ps-axis" />
         <line x1={sx(0)} y1={PAD} x2={sx(0)} y2={SIZE - PAD} className="ps-axis" />

@@ -1,4 +1,5 @@
 import "./MinOperationsView.css";
+import AnswerRangeBar from "../../components/shared/AnswerRangeBar";
 
 // Search track for k, then one bar per value: grey is what the k shared operations remove, orange is what still needs chosen operations.
 export default function MinOperationsView({ run, step }) {
@@ -20,6 +21,7 @@ export default function MinOperationsView({ run, step }) {
 
   return (
     <section className="mo-view" aria-label="Minimum operations search">
+      <AnswerRangeBar title="Operations to test" min={0} max={Math.max(hi, 1)} low={lo} high={hi} probe={mid ?? null} verdict={step.phase === "feasible"} />
       <div className="mo-track" aria-label={`Search range from ${lo} to ${hi}`}>
         <div className="mo-track-bar">
           <span className="mo-marker mo-marker--lo" style={{ left: `${(lo / Math.max(hi, 1)) * 100}%` }}>lo {lo}</span>

@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import OperationLog from '../../components/shared/OperationLog'
+import PointerRail from '../../components/shared/PointerRail'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -25,6 +26,7 @@ export default function LUPrefixVisual() {
       <tbody><tr>{step.uploaded.map((u, i) => <td key={i} data-role={i + 1 <= step.prefix ? 'prefix' : u ? 'uploaded' : 'missing'}
         style={{ textAlign: 'center', background: i + 1 <= step.prefix ? 'var(--primary)' : u ? 'var(--surface2)' : 'transparent', color: i + 1 <= step.prefix ? 'var(--surface)' : 'var(--text)', border: '1px solid var(--text-muted)' }}>{u ? 'up' : '-'}</td>)}</tr></tbody>
     </table>
+    <PointerRail title="Videos 1 to n" values={step.uploaded.map(u => (u ? 'up' : '-'))} pointers={step.prefix > 0 ? [{ id: 'prefix', label: 'prefix', index: step.prefix - 1, tone: 'primary' }] : []} />
     <output aria-label="Longest prefix">{`longest prefix ${step.prefix}`}</output>
     <OperationLog title="Calls" ops={step.log} current={step.log.length - 1} />
     <p role="status">{step.message}</p>

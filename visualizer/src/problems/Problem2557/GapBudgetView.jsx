@@ -1,4 +1,5 @@
 import "./GapBudgetView.css";
+import AnswerRangeBar from "../../components/shared/AnswerRangeBar";
 
 // The range 1..n as a strip. Banned values are crossed out; each gap is shaded by how much of it the budget takes.
 export default function GapBudgetView({ run, step }) {
@@ -12,6 +13,7 @@ export default function GapBudgetView({ run, step }) {
   const taken = step.k ?? 0;
   return (
     <section className="gap-view" aria-label="Gaps and budget">
+      {step.gap && <AnswerRangeBar title="Count taken from this gap" min={0} max={Math.max(step.len, 1)} low={0} high={step.len} probe={taken} verdict={true} />}
       <div className="gap-strip" role="list">
         {cells.map(x => {
           const isBanned = banned.has(x);

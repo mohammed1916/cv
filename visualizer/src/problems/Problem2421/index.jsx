@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -20,10 +21,9 @@ const definition = {
 
 export default function GoodPaths() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <table aria-label="Node values">
-      <thead><tr>{run.input.vals.map((_, i) => <th key={i} scope="col">{`node ${i}`}</th>)}</tr></thead>
-      <tbody><tr>{run.input.vals.map((v, i) => <td key={i} style={{ textAlign: 'center', color: 'var(--text)' }}>{v}</td>)}</tr></tbody>
-    </table>
+    <IndexedSequence label="Node values" length={run.input.vals.length} valueAt={i => run.input.vals[i]}
+      active={step.edge ? step.edge[1] : -1}
+      roleAt={i => (step.edge && i === step.edge[0] ? 'l' : step.edge && i === step.edge[1] ? 'r' : '')} />
     <ul aria-label="Groups joined so far">
       {step.groups.map((g, i) => (g.length > 1 || g[0][1] > 0) && <li key={i}>{`node ${i}: ${g.map(([v, c]) => `${c} x value ${v}`).join(', ')}`}</li>)}
     </ul>

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import MatrixGrid from '../../components/shared/MatrixGrid'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
@@ -22,6 +23,7 @@ export default function FirstPainted() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const painted = step.painted.map(({ row, col }) => ({ row, col }))
     return <>
+      <IndexedSequence label="Paint order (arr)" length={run.input.arr.length} valueAt={i => run.input.arr[i]} active={step.index} />
       <MatrixGrid label="Matrix" matrix={run.input.mat} highlightedCells={painted}
         activeCell={step.row >= 0 ? { row: step.row, col: step.col } : null} />
       <output aria-label="Paint status">{step.message}</output>

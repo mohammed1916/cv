@@ -1,4 +1,5 @@
 import "./WindowCountView.css";
+import PointerRail from "../../components/shared/PointerRail";
 
 // Character tiles with the sliding window drawn as a bracket, the right end as a pointer,
 // the substrings that end at the right end listed, and a running per-end bar chart.
@@ -28,6 +29,7 @@ export default function WindowCountView({ run, step }) {
           );
         })}
       </div>
+      {right >= 0 && <PointerRail title="Pointers on the string" values={Array.from(s)} pointers={[{ id: 'l', label: 'l', index: left, tone: 'primary' }, { id: 'r', label: 'r', index: right, tone: 'success' }]} />}
       <p className="wc-note">
         {right >= 0 ? <>Window [{left}..{right}] {c !== null && <>with new character <b>{c}</b></>}. </> : null}
         {repeatAt !== null && <span className="wc-warn">'{c}' was at {repeatAt}, so left jumps to {left}.</span>}

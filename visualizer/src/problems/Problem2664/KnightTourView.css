@@ -1,13 +1,13 @@
 .kt-view {
   display: grid;
   gap: 0.6rem;
-  color: var(--text, #1f2937);
+  color: var(--text, var(--text));
 }
 
 .kt-empty {
   margin: 0;
   padding: 1rem;
-  color: var(--muted, #6b7280);
+  color: var(--muted, var(--text));
 }
 
 .kt-svg {
@@ -17,74 +17,74 @@
 }
 
 .kt-path {
-  stroke: #7c3aed;
+  stroke: var(--primary);
   stroke-width: 2;
   stroke-dasharray: 5 4;
   opacity: 0.6;
 }
 
 .kt-cell rect {
-  stroke: #94a3b8;
+  stroke: var(--border);
   stroke-width: 1;
 }
 
 .kt-cell--light rect {
-  fill: #f8fafc;
+  fill: var(--surface2);
 }
 
 .kt-cell--dark rect {
-  fill: #e2e8f0;
+  fill: var(--surface2);
 }
 
 .kt-cell--visited rect {
-  fill: #ede9fe;
+  fill: var(--surface2);
 }
 
 .kt-cell--option rect {
-  fill: #fef9c3;
-  stroke: #a16207;
+  fill: var(--surface2);
+  stroke: var(--primary);
   stroke-width: 2;
 }
 
 .kt-cell--chosen rect {
-  fill: #fde68a;
-  stroke: #b45309;
+  fill: var(--surface2);
+  stroke: var(--primary);
   stroke-width: 3;
 }
 
 .kt-cell--current rect {
-  fill: #c4b5fd;
-  stroke: #5b21b6;
+  fill: var(--surface2);
+  stroke: var(--primary);
   stroke-width: 3;
 }
 
 .kt-cell--dead rect {
-  fill: #fecaca;
-  stroke: #b91c1c;
+  fill: var(--surface2);
+  stroke: var(--error);
   stroke-width: 3;
 }
 
 .kt-cell--start rect {
-  stroke: #15803d;
+  stroke: var(--success);
   stroke-width: 3;
 }
 
 .kt-label {
   font-size: 18px;
   font-weight: 700;
-  fill: #1e1b4b;
+  fill: var(--primary);
 }
 
 .kt-onward {
   font-size: 10px;
   font-weight: 600;
-  fill: #713f12;
+  fill: var(--primary);
 }
 
 .kt-tag {
   font-size: 9px;
   font-weight: 700;
-  fill: #15803d;
+  fill: var(--success);
 }
 
 .kt-status {
@@ -95,5 +95,5 @@
 .kt-legend {
   margin: 0;
   font-size: 0.85rem;
-  color: var(--muted, #6b7280);
+  color: var(--muted, var(--text));
 }

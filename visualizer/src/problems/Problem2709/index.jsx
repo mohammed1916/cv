@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import GraphTraversalView from '../../components/shared/GraphTraversalView'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
@@ -24,6 +25,7 @@ const definition = {
 
 export default function GcdTraversal() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} active={step.current ?? -1} roleAt={i => (step.neighbour === i ? 'r' : '')} />
     <GraphTraversalView title="Indices sharing a prime factor" n={run.input.nums.length} edges={step.edges}
       labels={run.input.nums.map((v, i) => `${i}:${v}`)} current={step.current} neighbour={step.neighbour} tags={step.tags} showFrontier={false} />
     <p role="status" style={{ color: 'var(--text)' }}>{step.prime !== null ? `Prime ${step.prime}. ` : ''}{step.message}</p>

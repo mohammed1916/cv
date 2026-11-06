@@ -2,7 +2,7 @@
   display: grid;
   gap: 14px;
   padding: 12px;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .layered-view table {
@@ -20,29 +20,29 @@
 
 .layered-view th,
 .layered-view td {
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border);
   padding: 6px 8px;
   text-align: center;
-  background: #ffffff;
+  background: var(--surface);
 }
 
 .layered-view .tag {
   font-size: 0.7rem;
   font-weight: 600;
-  color: #5b21b6;
+  color: var(--primary);
 }
 
 .layered-view .cell.settled {
-  background: #ede9fe;
+  background: var(--surface2);
 }
 
 .layered-view .cell.target {
-  background: #fde68a;
+  background: color-mix(in srgb, var(--primary) 16%, var(--surface));
   font-weight: 700;
 }
 
 .layered-view .cell.current {
-  outline: 3px solid #7c3aed;
+  outline: 3px solid var(--primary);
   outline-offset: -3px;
   font-weight: 700;
 }
@@ -57,19 +57,10 @@
 
 .edge-list li.active {
   font-weight: 700;
-  color: #5b21b6;
+  color: var(--primary);
 }
 
-@media (prefers-color-scheme: dark) {
-  .layered-view { color: #e2e8f0; }
-  .layered-view th,
-  .layered-view td { background: #0f172a; border-color: #475569; }
-  .layered-view .cell.settled { background: #3b0764; }
-  .layered-view .cell.target { background: #78350f; }
-  .layered-view .cell.current { outline-color: #c4b5fd; }
-  .layered-view .tag { color: #c4b5fd; }
-  .edge-list li.active { color: #c4b5fd; }
-}
+
 
 @media (max-width: 480px) {
   .layered-view table { font-size: 0.8rem; }

@@ -1,4 +1,5 @@
 import './FixedRatioView.css'
+import PointerRail from '../../components/shared/PointerRail'
 
 export default function FixedRatioView({ run, step }) {
   const { s, num1, num2 } = run.input
@@ -19,6 +20,7 @@ export default function FixedRatioView({ run, step }) {
           )
         })}
       </div>
+      {r > 0 && <PointerRail title="Characters of s" values={s.split('')} pointers={[{ id: 'r', label: 'r', index: r - 1, tone: 'primary' }]} />}
       <p className="fr-note">
         {step.matches?.length
           ? `Earlier prefixes ${step.matches.join(', ')} match the key ${step.keys[r]}; each gives a substring ending at ${r}.`

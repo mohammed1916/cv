@@ -1,4 +1,5 @@
 import './PrefixLanesView.css'
+import PointerRail from '../../components/shared/PointerRail'
 
 export default function PrefixLanesView({ run, step }) {
   const { nums } = run.input
@@ -14,6 +15,7 @@ export default function PrefixLanesView({ run, step }) {
           })}
         </div>
       </section>
+      {step.i >= 0 && <PointerRail title="Pointer i on the values" values={nums} pointers={[{ id: 'i', label: 'i', index: step.i, tone: 'primary' }]} />}
       <section className="pl-lane" aria-label="Heap of values read and kept">
         <h3>Heap (smallest first)</h3>
         <div className="pl-row">
