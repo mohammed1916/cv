@@ -35,7 +35,7 @@
 }
 
 .es-char--cursor {
-  border-bottom-color: var(--warning);
+  border-bottom-color: var(--primary);
   font-weight: 800;
 }
 
@@ -50,10 +50,11 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
-  padding: 6px 10px;
+  padding: 12px;
   border: 2px solid var(--primary);
   border-radius: 8px;
-  background: var(--primary-glow);
+  background: var(--surface2);
+  color: var(--text);
   font-size: 0.9rem;
 }
 
@@ -64,9 +65,11 @@
 }
 
 .es-arg {
-  padding: 2px 6px;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
   border-radius: 6px;
-  background: var(--success-glow);
+  background: var(--surface);
+  color: var(--text);
   font-family: ui-monospace, monospace;
 }
 
@@ -76,6 +79,11 @@
 }
 
 .es-readout {
+  color: var(--text);
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface2);
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

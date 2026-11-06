@@ -1,3 +1,4 @@
+import PointerRail from '../../components/shared/PointerRail'
 import './ExpressionStackView.css'
 
 // The expression as characters: consumed text is shaded and the cursor sits on the next character.
@@ -7,14 +8,12 @@ export default function ExpressionStackView({ run, step }) {
   const text = run.input
   return (
     <section className="es-view" aria-label="Expression parse">
-      <div className="es-tape" aria-label="Expression text">
-        {[...text].map((ch, index) => {
-          const classes = ['es-char']
-          if (index < step.pos) classes.push('es-char--read')
-          if (index === step.pos) classes.push('es-char--cursor')
-          return <span key={index} className={classes.join(' ')}>{ch}</span>
-        })}
-      </div>
+      <PointerRail
+        title="Expression characters"
+        values={[...text]}
+        pointers={step.pos < text.length ? [{ id: 'pos', index: step.pos, label: 'pos', tone: 'primary' }] : []}
+        note="Characters before pos are already read; pos is the next character to read."
+      />
       <div className="es-stack" aria-label="Open calls">
         {step.stack.length === 0 ? <span className="es-none">no call is open</span> : null}
         {step.stack.map((frame, depth) => (

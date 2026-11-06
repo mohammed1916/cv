@@ -2,16 +2,16 @@
   --rq-ink: var(--text);
   --rq-muted: var(--text-muted);
   --rq-keep: var(--success);
-  --rq-keep-fill: var(--success-glow);
+  --rq-keep-fill: var(--surface2);
   --rq-drop: var(--error);
-  --rq-drop-fill: var(--error-glow);
+  --rq-drop-fill: var(--surface2);
   --rq-cur: var(--primary);
-  --rq-compare: var(--warning);
-  --rq-band: var(--primary-glow);
+  --rq-compare: var(--primary);
+  --rq-band: var(--surface2);
   --rq-line: var(--primary);
   color: var(--rq-ink);
   display: grid;
-  gap: 10px;
+  gap: 12px;
   padding: 16px;
   font-family: system-ui, sans-serif;
 }
@@ -21,12 +21,12 @@
     --rq-ink: var(--text);
     --rq-muted: var(--text-muted);
     --rq-keep: var(--success);
-    --rq-keep-fill: var(--success-glow);
+    --rq-keep-fill: var(--surface2);
     --rq-drop: var(--error);
-    --rq-drop-fill: var(--error-glow);
-    --rq-cur: var(--info);
-    --rq-compare: var(--warning);
-    --rq-band: var(--primary-glow);
+    --rq-drop-fill: var(--surface2);
+    --rq-cur: var(--primary);
+    --rq-compare: var(--primary);
+    --rq-band: var(--surface2);
     --rq-line: var(--primary);
   }
 }
@@ -35,7 +35,8 @@
 .rq-empty, .rq-rule, .rq-total { margin: 0; color: var(--rq-muted); font-size: 0.95rem; }
 .rq-label { font-size: 14px; font-weight: 600; fill: var(--rq-ink); }
 .rq-axis { stroke: var(--rq-line); stroke-width: 2; }
-.rq-band { fill: var(--rq-band); }
+.rq-band { fill: var(--rq-band); stroke: var(--border); stroke-width: 1; }
+.rq-pointer { font-size: 12px; font-weight: 700; fill: var(--rq-cur); }
 .rq-current-row { fill: none; stroke: var(--rq-cur); stroke-dasharray: 4 3; }
 .rq-req circle { fill: transparent; stroke: var(--rq-muted); stroke-width: 2; }
 .rq-req--keep circle { fill: var(--rq-keep-fill); stroke: var(--rq-keep); }

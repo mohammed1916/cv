@@ -1,3 +1,4 @@
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import './Problem3851View.css'
 
 const WIDTH = 640
@@ -26,7 +27,11 @@ export default function Problem3851View({ run, step }) {
       <p className="rq-rule">Each user may have at most {k} kept request{k === 1 ? '' : 's'} in any window of length {span}, counted inclusively.</p>
       <svg viewBox={`0 0 ${WIDTH} ${height}`} role="img" aria-label={`Timeline with ${requests.length} requests`}>
         {step.user !== null && step.lo !== null && step.hi !== null && (
-          <rect className="rq-band" x={x(Math.max(step.lo, 0))} y={rowY(step.user) - 22} width={Math.max(x(step.hi) - x(Math.max(step.lo, 0)), 2)} height={44} rx={6} />
+          <g aria-label="Window pointers">
+            <rect className="rq-band" x={x(Math.max(step.lo, 0))} y={rowY(step.user) - 22} width={Math.max(x(step.hi) - x(Math.max(step.lo, 0)), 2)} height={44} rx={6} />
+            <text className="rq-pointer" x={x(Math.max(step.lo, 0))} y={rowY(step.user) - 28} textAnchor="middle">lo</text>
+            <text className="rq-pointer" x={x(step.hi)} y={rowY(step.user) - 28} textAnchor="middle">hi</text>
+          </g>
         )}
         {users.map(user => (
           <g key={user}>
@@ -59,6 +64,13 @@ export default function Problem3851View({ run, step }) {
         <li><span className="rq-swatch rq-swatch--cur" /> being checked</li>
         <li><span className="rq-swatch rq-swatch--compare" /> k-th last kept time</li>
       </ul>
+      <IndexedSequence
+        label="Requests in input order"
+        length={requests.length}
+        active={step.cur}
+        roleAt={index => (step.status[index] === 'keep' ? 'kept' : step.status[index] === 'drop' ? 'dropped' : '')}
+        valueAt={index => `${requests[index][0]} @ ${requests[index][1]}`}
+      />
     </section>
   )
 }
