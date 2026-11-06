@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import ZeroSwapView from './ZeroSwapView'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 const definition = {
   number: '3936',
@@ -22,7 +23,7 @@ export default function Problem3936Visualizer() {
   return (
     <AlgorithmWorkspace
       definition={definition}
-      renderVisual={({ run, step }) => <ZeroSwapView run={run} step={step} />}
+      renderVisual={({ run, step }) => <><IndexedSequence label="array" length={step.arr.length} valueAt={i => step.arr[i]} roleAt={i => i === step.left ? 'l' : i === step.right ? 'r' : ''} /><ZeroSwapView run={run} step={step} /></>}
       renderReasoning={({ step }) => <p>{step.message}</p>}
     />
   )

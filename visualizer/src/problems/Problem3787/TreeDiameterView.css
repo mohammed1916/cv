@@ -1,11 +1,11 @@
 .td {
-  --td-ink: #0f172a;
-  --td-muted: #64748b;
-  --td-edge: #94a3b8;
-  --td-node: #e2e8f0;
-  --td-current: #facc15;
-  --td-source: #38bdf8;
-  --td-end: #16a34a;
+  --td-ink: var(--text);
+  --td-muted: var(--text-muted);
+  --td-edge: var(--primary);
+  --td-node: var(--primary-glow);
+  --td-current: var(--warning-glow);
+  --td-source: var(--primary-glow);
+  --td-end: var(--success);
   color: var(--td-ink);
   display: grid;
   gap: 10px;
@@ -68,9 +68,9 @@
 
 @media (prefers-color-scheme: dark) {
   .td {
-    --td-ink: #e2e8f0;
-    --td-muted: #94a3b8;
-    --td-edge: #64748b;
-    --td-node: #1e293b;
+    --td-ink: var(--text);
+    --td-muted: var(--text-muted);
+    --td-edge: var(--primary);
+    --td-node: var(--primary-glow);
   }
 }

@@ -6,7 +6,7 @@ import './SemiWindowView.css'
 export default function SemiWindowView({ run, step }) {
   const [left, right] = step.window || [0, -1]
   const counts = Object.entries(step.counts).filter(([, c]) => c > 0)
-  return <div className="semi-window" style={{ '--accent': '#15803d' }}>
+  return <div className="semi-window" style={{ '--accent': 'var(--success)' }}>
     <ol className="semi-window__row" aria-label="Array with window">
       {run.input.nums.map((value, index) => {
         const inWindow = step.window && index >= left && index <= right

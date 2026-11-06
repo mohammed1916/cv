@@ -5,7 +5,7 @@ function PopcountChips({ n, c }) {
   const bits = n.toString(2).length
   return <ol aria-label="Popcount classes" style={{ display: 'flex', gap: 6, flexWrap: 'wrap', listStyle: 'none', padding: 0 }}>
     {Array.from({ length: bits }, (_, i) => i + 1).map(value => <li key={value} data-current={value === c ? 'yes' : undefined}
-      style={{ border: '1px solid var(--surface2)', borderRadius: 6, padding: '4px 8px', background: value === c ? 'var(--primary)' : 'var(--surface2)', color: value === c ? 'var(--on-primary, #fff)' : 'var(--text)' }}>
+      style={{ border: '1px solid var(--surface2)', borderRadius: 6, padding: '4px 8px', background: value === c ? 'var(--primary)' : 'var(--surface2)', color: value === c ? 'var(--primary-contrast)' : 'var(--text)' }}>
       popcount {value}
     </li>)}
   </ol>

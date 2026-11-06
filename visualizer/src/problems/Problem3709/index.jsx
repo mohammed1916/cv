@@ -21,7 +21,7 @@ export default function DesignExamScoresTracker() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <ol aria-label="Call list" style={{ listStyle: 'none', padding: 0, display: 'grid', gap: 4 }}>
       {run.input.operations.map((op, i) => <li key={i} data-current={i === step.call ? 'yes' : undefined}
-        style={{ border: '1px solid var(--surface2)', borderRadius: 6, padding: '4px 8px', background: i === step.call ? 'var(--primary)' : 'transparent', color: i === step.call ? 'var(--on-primary, #fff)' : 'var(--text)' }}>
+        style={{ border: '1px solid var(--surface2)', borderRadius: 6, padding: '4px 8px', background: i === step.call ? 'var(--primary)' : 'transparent', color: i === step.call ? 'var(--primary-contrast)' : 'var(--text)' }}>
         <small>{i + 1}.</small> <strong>{op}</strong>({JSON.stringify(run.input.arguments[i])})
       </li>)}
     </ol>

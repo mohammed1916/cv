@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import KeyboardTripView from './KeyboardTripView'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 const definition = {
   phases: [
@@ -19,7 +20,7 @@ const definition = {
 }
 
 export default function TotalDistanceToTypeAStringUsingOneFinger() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <KeyboardTripView run={run} step={step} />} renderReasoning={({ run, step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <><IndexedSequence label="typed text" length={run.input.s.length} valueAt={i => run.input.s[i]} roleAt={i => i === step.step - 1 ? 'current' : i < step.step - 1 ? 'typed' : ''} /><KeyboardTripView run={run} step={step} /></>} renderReasoning={({ run, step }) => <>
     <p>{step.message}</p>
     <p>Each key has a fixed row and column, so the distance between two letters is the Manhattan distance of their coordinates. The finger's position after each letter is the next letter's key.</p>
     {run ? <p>Final answer: {run.result}.</p> : null}

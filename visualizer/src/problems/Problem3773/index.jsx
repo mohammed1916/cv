@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import RunsView from './RunsView'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 const definition = {
   phases: [
@@ -20,7 +21,7 @@ const definition = {
 }
 
 export default function MaximumNumberOfEqualLengthRuns() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <RunsView run={run} step={step} />} renderReasoning={({ run, step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <><IndexedSequence label="s" length={run.input.s.length} valueAt={i => run.input.s[i]} roleAt={i => { const r = step.runs && step.current >= 0 ? step.runs[step.current] : null; if (!r) return ''; return i === r.start ? 'l' : i === r.start + r.length - 1 ? 'r' : i > r.start && i < r.start + r.length - 1 ? 'window' : '' }} /><RunsView run={run} step={step} /></>} renderReasoning={({ run, step }) => <>
     <p>{step.message}</p>
     <p>Each maximal run is measured once, then runs are grouped by length. The answer is the largest group size, whatever character fills the runs.</p>
     {run ? <p>Final answer: {run.result}.</p> : null}

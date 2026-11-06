@@ -1,12 +1,12 @@
 .kt {
-  --kt-ink: #0f172a;
-  --kt-muted: #64748b;
-  --kt-key: #f1f5f9;
-  --kt-key-line: #94a3b8;
-  --kt-used: #dbeafe;
-  --kt-finger: #facc15;
-  --kt-target: #16a34a;
-  --kt-route: #7c3aed;
+  --kt-ink: var(--text);
+  --kt-muted: var(--text-muted);
+  --kt-key: var(--primary-glow);
+  --kt-key-line: var(--primary);
+  --kt-used: var(--primary-glow);
+  --kt-finger: var(--warning);
+  --kt-target: var(--success);
+  --kt-route: var(--primary);
   color: var(--kt-ink);
   display: grid;
   gap: 10px;
@@ -70,11 +70,11 @@
 
 @media (prefers-color-scheme: dark) {
   .kt {
-    --kt-ink: #e2e8f0;
-    --kt-muted: #94a3b8;
-    --kt-key: #1e293b;
-    --kt-key-line: #64748b;
-    --kt-used: #1e3a8a;
-    --kt-route: #c4b5fd;
+    --kt-ink: var(--text);
+    --kt-muted: var(--text-muted);
+    --kt-key: var(--primary-glow);
+    --kt-key-line: var(--primary);
+    --kt-used: var(--primary-glow);
+    --kt-route: var(--primary);
   }
 }

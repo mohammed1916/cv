@@ -1,11 +1,11 @@
 .dc {
-  --dc-ink: #0f172a;
-  --dc-muted: #64748b;
-  --dc-line: #cbd5e1;
-  --dc-region: #dbeafe;
-  --dc-added: #facc15;
-  --dc-i: #7c3aed;
-  --dc-match: #bbf7d0;
+  --dc-ink: var(--text);
+  --dc-muted: var(--text-muted);
+  --dc-line: var(--info);
+  --dc-region: var(--primary-glow);
+  --dc-added: var(--warning);
+  --dc-i: var(--primary);
+  --dc-match: var(--success-glow);
   color: var(--dc-ink);
   display: grid;
   gap: 12px;
@@ -85,11 +85,11 @@
 
 @media (prefers-color-scheme: dark) {
   .dc {
-    --dc-ink: #e2e8f0;
-    --dc-muted: #94a3b8;
-    --dc-line: #475569;
-    --dc-region: #1e3a8a;
-    --dc-i: #c4b5fd;
-    --dc-match: #14532d;
+    --dc-ink: var(--text);
+    --dc-muted: var(--text-muted);
+    --dc-line: var(--primary);
+    --dc-region: var(--primary-glow);
+    --dc-i: var(--primary);
+    --dc-match: var(--success-glow);
   }
 }

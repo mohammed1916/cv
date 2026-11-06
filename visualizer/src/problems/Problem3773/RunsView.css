@@ -1,8 +1,8 @@
 .rv {
-  --rv-ink: #0f172a;
-  --rv-muted: #64748b;
-  --rv-bar: #7c3aed;
-  --rv-line: #cbd5e1;
+  --rv-ink: var(--text);
+  --rv-muted: var(--text-muted);
+  --rv-bar: var(--primary-glow);
+  --rv-line: var(--info);
   color: var(--rv-ink);
   display: grid;
   gap: 14px;
@@ -34,7 +34,7 @@
 }
 
 .rv-cell--current {
-  box-shadow: 0 0 0 3px #facc15;
+  box-shadow: 0 0 0 3px var(--warning);
 }
 
 .rv-runs {
@@ -84,9 +84,9 @@
 
 @media (prefers-color-scheme: dark) {
   .rv {
-    --rv-ink: #e2e8f0;
-    --rv-muted: #94a3b8;
-    --rv-bar: #a78bfa;
-    --rv-line: #475569;
+    --rv-ink: var(--text);
+    --rv-muted: var(--text-muted);
+    --rv-bar: var(--primary-glow);
+    --rv-line: var(--primary);
   }
 }

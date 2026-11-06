@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import Problem3929View from './Problem3929View'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 const definition = {
   phases: [
@@ -19,7 +20,7 @@ const definition = {
 }
 
 export default function Problem3929Visualizer() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <Problem3929View run={run} step={step} />} renderReasoning={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <><IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} roleAt={i => i === step.p ? 'p' : i === step.i - 1 ? 'i' : ''} /><Problem3929View run={run} step={step} /></>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>
     <p>Each cell chooses where its last part starts; the cost of a part depends only on its sum, so prefix sums make each choice a subtraction.</p>
   </>} />

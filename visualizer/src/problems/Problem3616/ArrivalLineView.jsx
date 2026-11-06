@@ -3,7 +3,7 @@ import './ArrivalLineView.css'
 // Arrivals are cards in line order. The selected card is filled, the card being
 // compared is outlined, and a card that just took over is darker.
 export default function ArrivalLineView({ run, step }) {
-  return <div className="arrival-line" style={{ '--accent': '#0f766e' }}>
+  return <div className="arrival-line" style={{ '--accent': 'var(--info)' }}>
     <ol className="arrival-line__row" aria-label="Arrivals in order">
       {run.input.map((rank, i) => {
         let role = i === step.index && step.phase !== 'done' ? 'current' : ''

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import SlidingSortView from './SlidingSortView'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
@@ -23,7 +24,16 @@ const definition = {
 
 export default function SmallestSubarrayToSortInEverySlidingWindow() {
   return <AlgorithmWorkspace definition={definition}
-    renderVisual={({ run, step }) => <SlidingSortView run={run} step={step} />}
+    renderVisual={({ run, step }) => <>
+      <IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} roleAt={i => {
+        const l = step.start >= 0 && step.left >= 0 ? step.start + step.left : -1
+        const r = step.start >= 0 && step.right >= 0 ? step.start + step.right : -1
+        if (i === l) return 'l'
+        if (i === r) return 'r'
+        return step.start >= 0 && i >= step.start && i < step.start + run.input.k ? 'window' : ''
+      }} />
+      <SlidingSortView run={run} step={step} />
+    </>}
     renderReasoning={({ step }) => <>
       <p>{step.message}</p>
       <p>A window is repaired exactly by sorting the span between its first and last mismatch with the sorted copy.</p>

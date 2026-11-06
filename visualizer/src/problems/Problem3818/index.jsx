@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import PrefixRemovalView from './PrefixRemovalView'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 const definition = {
   phases: [
@@ -22,7 +23,7 @@ const definition = {
 }
 
 export default function MinimumPrefixRemoval() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <PrefixRemovalView run={run} step={step} />} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <><IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} roleAt={i => i === step.left ? 'l' : i === step.right ? 'r' : ''} /><PrefixRemovalView run={run} step={step} /></>} renderReasoning={() => <>
     <p>The retained suffix must be strictly increasing. Starting at the end and moving left, the suffix grows while each pair is strictly increasing: nums[k-1] &lt; nums[k].</p>
     <p>The first pair that is not strictly increasing (including equal values) stops the scan. Its right side becomes the suffix start, and everything before it is the removed prefix. Before the scan finishes, that count is provisional.</p>
   </>} />

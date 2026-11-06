@@ -1,11 +1,11 @@
 .wg {
-  --wg-ink: #0f172a;
-  --wg-muted: #64748b;
-  --wg-edge: #94a3b8;
-  --wg-node: #e2e8f0;
-  --wg-current: #facc15;
-  --wg-target: #16a34a;
-  --wg-done: #dbeafe;
+  --wg-ink: var(--text);
+  --wg-muted: var(--text-muted);
+  --wg-edge: var(--primary);
+  --wg-node: var(--primary-glow);
+  --wg-current: var(--warning-glow);
+  --wg-target: var(--success);
+  --wg-done: var(--primary-glow);
   color: var(--wg-ink);
   display: grid;
   gap: 12px;
@@ -83,10 +83,10 @@
 
 @media (prefers-color-scheme: dark) {
   .wg {
-    --wg-ink: #e2e8f0;
-    --wg-muted: #94a3b8;
-    --wg-edge: #64748b;
-    --wg-node: #1e293b;
-    --wg-done: #1e3a5f;
+    --wg-ink: var(--text);
+    --wg-muted: var(--text-muted);
+    --wg-edge: var(--primary);
+    --wg-node: var(--primary-glow);
+    --wg-done: var(--primary-glow);
   }
 }

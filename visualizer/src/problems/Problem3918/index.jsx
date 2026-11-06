@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 
 const definition = {
   phases: [
@@ -22,6 +23,7 @@ const definition = {
 
 export default function SumPrimesReverse() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    {step.low != null && step.high != null ? <AnswerRangeBar title="Range of numbers" min={0} max={Math.max(1, run.input.n)} low={step.low} high={step.high} /> : null}
     <output aria-label="Range">{`n = ${run.input.n}, reverse = ${step.r ?? '-'}, range = ${step.r === null || step.r === undefined ? '-' : `[${step.low}, ${step.high}]`}`}</output>
     <output aria-label="Current number">{`Checking: ${step.x ?? '-'}. Running total: ${step.total}.`}</output>
     <output aria-label="Step message">{step.message}</output>

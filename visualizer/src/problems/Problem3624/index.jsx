@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import DepthForestView from './DepthForestView'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 const definition = {
   number: '3624',
@@ -17,7 +18,7 @@ const definition = {
 }
 
 export default function NumberOfIntegersWithPopcountDepthEqualToKII() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <DepthForestView step={step} />} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <><IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} roleAt={i => i === step.l ? 'l' : i === step.r ? 'r' : ''} /><DepthForestView step={step} /></>} renderReasoning={() => <>
     <p>Popcount shrinks numbers drastically: anything up to 10^15 has at most 50 bits, so one step leaves a number no larger than 50, and only a handful of depths are possible. That small set means one counting structure per depth is affordable.</p>
     <p>A count for depth k over l..r is then just a question to tree k: positions up to r, minus positions before l. Other depths are never looked at.</p>
     <p>An update can move a position from one tree to another, so it subtracts one from the tree of the old depth and adds one to the tree of the new depth, each in logarithmic time. Rescanning the range would be far too slow when both n and q are large.</p>

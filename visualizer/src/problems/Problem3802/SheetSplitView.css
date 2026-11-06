@@ -1,10 +1,10 @@
 .ss {
-  --ss-ink: #0f172a;
-  --ss-muted: #64748b;
-  --ss-a: #2563eb;
-  --ss-a-fill: #dbeafe;
-  --ss-b: #ea580c;
-  --ss-b-fill: #ffedd5;
+  --ss-ink: var(--text);
+  --ss-muted: var(--text-muted);
+  --ss-a: var(--primary);
+  --ss-a-fill: var(--primary-glow);
+  --ss-b: var(--warning);
+  --ss-b-fill: var(--warning-glow);
   color: var(--ss-ink);
   display: grid;
   gap: 12px;
@@ -60,11 +60,11 @@
 
 @media (prefers-color-scheme: dark) {
   .ss {
-    --ss-ink: #e2e8f0;
-    --ss-muted: #94a3b8;
-    --ss-a: #93c5fd;
-    --ss-a-fill: #1e3a8a;
-    --ss-b: #fdba74;
-    --ss-b-fill: #7c2d12;
+    --ss-ink: var(--text);
+    --ss-muted: var(--text-muted);
+    --ss-a: var(--info);
+    --ss-a-fill: var(--primary-glow);
+    --ss-b: var(--warning);
+    --ss-b-fill: var(--warning-glow);
   }
 }

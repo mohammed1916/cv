@@ -1,8 +1,8 @@
 .bp {
-  --bp-ink: #0f172a;
-  --bp-muted: #64748b;
-  --bp-line: #cbd5e1;
-  --bp-active: #facc15;
+  --bp-ink: var(--text);
+  --bp-muted: var(--text-muted);
+  --bp-line: var(--info);
+  --bp-active: var(--warning);
   color: var(--bp-ink);
   display: grid;
   gap: 12px;
@@ -52,7 +52,7 @@
 }
 
 .bp-value {
-  background: color-mix(in srgb, var(--hue, #64748b) 16%, transparent);
+  background: color-mix(in srgb, var(--hue, var(--primary-glow)) 16%, transparent);
   border-radius: 4px;
   font-family: ui-monospace, monospace;
   padding: 1px 5px;
@@ -70,9 +70,9 @@
 
 @media (prefers-color-scheme: dark) {
   .bp {
-    --bp-ink: #e2e8f0;
-    --bp-muted: #94a3b8;
-    --bp-line: #475569;
-    --bp-active: #fde047;
+    --bp-ink: var(--text);
+    --bp-muted: var(--text-muted);
+    --bp-line: var(--primary);
+    --bp-active: var(--warning);
   }
 }

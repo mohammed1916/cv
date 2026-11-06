@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import DigitWindowView from './DigitWindowView'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 const definition = {
   phases: [
@@ -20,7 +21,7 @@ const definition = {
 }
 
 export default function GoodIndicesInADigitString() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <DigitWindowView run={run} step={step} />} renderReasoning={({ run, step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <><IndexedSequence label="digits" length={run.input.s.length} valueAt={i => run.input.s[i]} roleAt={i => i === step.index ? 'r' : step.start >= 0 && i === step.start ? 'l' : ''} /><DigitWindowView run={run} step={step} /></>} renderReasoning={({ run, step }) => <>
     <p>{step.message}</p>
     <p>Index i is checked by reading only the characters that would end at position i, with the same length as its decimal text.</p>
     {run ? <p>Final answer: {run.result.length ? run.result.join(', ') : 'no good indices'}.</p> : null}

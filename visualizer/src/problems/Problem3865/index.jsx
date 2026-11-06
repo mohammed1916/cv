@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import Problem3865View from './Problem3865View'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 const definition = {
   phases: [
@@ -22,7 +23,7 @@ const definition = {
 }
 
 export default function Problem3865Visualizer() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <Problem3865View run={run} step={step} />} renderReasoning={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <><IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} roleAt={i => i === step.lo ? 'l' : i === step.hi ? 'r' : ''} /><Problem3865View run={run} step={step} /></>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>
     <p>Blocks never overlap, so each block is reversed on its own with two indices walking inward.</p>
   </>} />

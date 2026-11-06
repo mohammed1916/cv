@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import ConflictView from './ConflictView'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 const definition = {
   phases: [
@@ -23,7 +24,7 @@ const definition = {
 }
 
 export default function MinimumSwapsToAvoidForbiddenValues() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <ConflictView run={run} step={step} />} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <><IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} roleAt={i => i === step.at ? 'i' : ''} /><ConflictView run={run} step={step} /></>} renderReasoning={() => <>
     <p>An index conflicts when nums and forbidden hold the same value there. Each swap can fix at most two conflicts, and only when the two conflicts hold different values.</p>
     <p>The answer is the larger of two bounds: ceil(conflicts / 2), and the size of the largest group of conflicts sharing one value. A value that appears more than n times across both arrays cannot be placed at all, so the answer is -1.</p>
   </>} />

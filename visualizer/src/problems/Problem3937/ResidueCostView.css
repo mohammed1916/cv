@@ -1,7 +1,7 @@
-.residue-cost__values code { margin-right: 6px; padding: 2px 6px; border: 1px solid rgba(127, 127, 127, 0.5); border-radius: 6px; }
+.residue-cost__values code { margin-right: 6px; padding: 2px 6px; border: 1px solid var(--border); border-radius: 6px; }
 .residue-cost table { border-collapse: collapse; width: 100%; max-width: 480px; font-variant-numeric: tabular-nums; }
-.residue-cost th, .residue-cost td { padding: 6px 8px; border-bottom: 1px solid rgba(127, 127, 127, 0.3); text-align: left; }
+.residue-cost th, .residue-cost td { padding: 6px 8px; border-bottom: 1px solid var(--border); text-align: left; }
 .residue-cost tr.is-current { font-weight: 700; }
-.residue-cost tr.is-pair { background: rgba(37, 99, 235, 0.12); }
-.residue-cost__bar { display: block; height: 6px; margin-bottom: 4px; border-radius: 3px; background: #0f766e; }
-.residue-cost__bar--odd { background: #b45309; }
+.residue-cost tr.is-pair { background: var(--primary-glow); }
+.residue-cost__bar { display: block; height: 6px; margin-bottom: 4px; border-radius: 3px; background: var(--primary-glow); }
+.residue-cost__bar--odd { background: var(--warning-glow); }

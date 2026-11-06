@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import CoordinatePlane from '../../components/shared/CoordinatePlane'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 const definition = {
   phases: [
@@ -20,6 +21,7 @@ const definition = {
 
 export default function MaximumTriangleArea() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="points" length={run.input.coords.length} valueAt={i => `(${run.input.coords[i][0]}, ${run.input.coords[i][1]})`} roleAt={i => step.triple && step.triple.includes(i) ? 'triangle' : ''} />
     <CoordinatePlane points={run.input.coords} />
     <output aria-label="Best">{`Best twice-area: ${step.best}`}</output>
   </>} renderReasoning={({ step }) => <>

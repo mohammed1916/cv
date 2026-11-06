@@ -1,11 +1,11 @@
 .rt {
-  --rt-ink: #0f172a;
-  --rt-muted: #64748b;
-  --rt-damaged: #94a3b8;
-  --rt-repaired: #16a34a;
-  --rt-node: #e2e8f0;
-  --rt-target: #7c3aed;
-  --rt-mid: #facc15;
+  --rt-ink: var(--text);
+  --rt-muted: var(--text-muted);
+  --rt-damaged: var(--primary);
+  --rt-repaired: var(--success);
+  --rt-node: var(--primary-glow);
+  --rt-target: var(--primary);
+  --rt-mid: var(--warning);
   color: var(--rt-ink);
   display: grid;
   gap: 12px;
@@ -110,10 +110,10 @@
 
 @media (prefers-color-scheme: dark) {
   .rt {
-    --rt-ink: #e2e8f0;
-    --rt-muted: #94a3b8;
-    --rt-damaged: #64748b;
-    --rt-node: #1e293b;
-    --rt-target: #c4b5fd;
+    --rt-ink: var(--text);
+    --rt-muted: var(--text-muted);
+    --rt-damaged: var(--primary);
+    --rt-node: var(--primary-glow);
+    --rt-target: var(--primary);
   }
 }

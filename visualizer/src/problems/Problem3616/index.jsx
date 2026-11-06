@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import ArrivalLineView from './ArrivalLineView'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 const definition = {
   number: '3616',
@@ -22,7 +23,7 @@ const definition = {
 export default function Problem3616Visualizer() {
   return <AlgorithmWorkspace
     definition={definition}
-    renderVisual={({ run, step }) => <ArrivalLineView run={run} step={step} />}
+    renderVisual={({ run, step }) => <><IndexedSequence label="ranks" length={run.input.length} valueAt={i => run.input[i]} roleAt={i => i === step.index ? 'i' : i === step.selectedIndex ? 'selected' : ''} /><ArrivalLineView run={run} step={step} /></>}
     renderReasoning={({ step }) => <p>{step.message}</p>}
   />
 }

@@ -1,6 +1,6 @@
 import './BlockProductView.css'
 
-const HUES = ['#2563eb', '#16a34a', '#d97706', '#db2777', '#0891b2', '#7c3aed', '#65a30d', '#dc2626']
+const HUES = ['var(--primary)', 'var(--success)', 'var(--warning)', 'var(--error)', 'var(--info)', 'var(--primary)', 'var(--success)', 'var(--error)']
 
 export default function BlockProductView({ run, step }) {
   if (!run || !step) return <p className="bp-empty">Press Play to build the blocks one by one.</p>

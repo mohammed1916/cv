@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import DegreeBarsView from './DegreeBarsView'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 const definition = {
   number: '3656',
@@ -22,7 +23,7 @@ const definition = {
 export default function Problem3656Visualizer() {
   return <AlgorithmWorkspace
     definition={definition}
-    renderVisual={({ run, step }) => <DegreeBarsView run={run} step={step} />}
+    renderVisual={({ run, step }) => <><IndexedSequence label="sorted degrees" length={(step.sorted ?? run.input).length} valueAt={i => (step.sorted ?? run.input)[i]} roleAt={i => step.k == null ? '' : i === step.k - 1 ? 'k' : i < step.k ? 'window' : ''} /><DegreeBarsView run={run} step={step} /></>}
     renderReasoning={({ step }) => <p>{step.message}</p>}
   />
 }

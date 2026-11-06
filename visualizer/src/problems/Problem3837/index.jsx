@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import DelayedCountView from './DelayedCountView'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 const definition = {
   phases: [
@@ -20,7 +21,7 @@ const definition = {
 }
 
 export default function DelayedCountOfEqualElements() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <DelayedCountView run={run} step={step} />} renderReasoning={({ run, step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <><IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} roleAt={i => i === step.i ? 'i' : i === step.j ? 'j' : step.window && i >= step.window[0] && i <= step.window[1] ? 'window' : ''} /><DelayedCountView run={run} step={step} /></>} renderReasoning={({ run, step }) => <>
     <p>{step.message}</p>
     <p>The valid indices for position i form a suffix starting at i plus k plus one. As i moves left that suffix only grows, so one tally updated by a single addition per step is enough.</p>
     {run ? <p>Final answer: {run.result.join(', ')}.</p> : null}

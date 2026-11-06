@@ -1,11 +1,11 @@
 .lm {
-  --lm-ink: #0f172a;
-  --lm-muted: #64748b;
-  --lm-edge: #94a3b8;
-  --lm-node: #e2e8f0;
-  --lm-level: #bfdbfe;
-  --lm-current: #facc15;
-  --lm-found: #16a34a;
+  --lm-ink: var(--text);
+  --lm-muted: var(--text-muted);
+  --lm-edge: var(--primary);
+  --lm-node: var(--primary-glow);
+  --lm-level: var(--primary-glow);
+  --lm-current: var(--warning-glow);
+  --lm-found: var(--success);
   color: var(--lm-ink);
   display: grid;
   gap: 10px;
@@ -63,10 +63,10 @@
 
 @media (prefers-color-scheme: dark) {
   .lm {
-    --lm-ink: #e2e8f0;
-    --lm-muted: #94a3b8;
-    --lm-edge: #64748b;
-    --lm-node: #1e293b;
-    --lm-level: #1e3a8a;
+    --lm-ink: var(--text);
+    --lm-muted: var(--text-muted);
+    --lm-edge: var(--primary);
+    --lm-node: var(--primary-glow);
+    --lm-level: var(--primary-glow);
   }
 }

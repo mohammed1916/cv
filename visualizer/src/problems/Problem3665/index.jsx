@@ -27,7 +27,7 @@ export default function TwistedMirrorPathCount() {
         const onPath = step.path.some(([r, c]) => r === i && c === j)
         const current = step.at[0] === i && step.at[1] === j
         return <td key={j} data-mirror={cell === 1} data-path={onPath} data-current={current}
-          style={{ border: '1px solid currentColor', padding: '0.4rem 0.6rem', textAlign: 'center', background: cell === 1 ? 'rgba(127,127,127,0.35)' : onPath ? 'rgba(29,78,216,0.18)' : 'transparent', outline: current ? '2px solid currentColor' : 'none' }}>
+          style={{ border: '1px solid currentColor', padding: '0.4rem 0.6rem', textAlign: 'center', background: cell === 1 ? 'var(--border)' : onPath ? 'var(--primary-glow)' : 'transparent', outline: current ? '2px solid currentColor' : 'none' }}>
           <small>{cell === 1 ? 'mirror' : 'empty'}</small><br /><strong>{step.ways[i][j]}</strong>
         </td>
       })}</tr>)}</tbody>

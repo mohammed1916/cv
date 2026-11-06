@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import JumpZigzagView from './JumpZigzagView'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 const definition = {
   phases,
@@ -22,7 +23,7 @@ export default function Problem3730Visualizer() {
   return (
     <AlgorithmWorkspace
       definition={definition}
-      renderVisual={({ run, step }) => <JumpZigzagView run={run} step={step} />}
+      renderVisual={({ run, step }) => <><IndexedSequence label="sorted heights" length={run.input.length} valueAt={i => [...run.input].sort((a, b) => a - b)[i]} roleAt={i => i === step.lo ? 'lo' : i === step.hi ? 'hi' : ''} /><JumpZigzagView run={run} step={step} /></>}
       renderReasoning={({ run, step }) => (
         <p>
           {step ? step.message : ''} {run ? `Result: ${JSON.stringify(run.result)}.` : ''}

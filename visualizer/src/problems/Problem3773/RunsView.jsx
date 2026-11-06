@@ -1,6 +1,6 @@
 import './RunsView.css'
 
-const HUES = ['#2563eb', '#16a34a', '#d97706', '#db2777', '#0891b2', '#7c3aed', '#65a30d', '#dc2626']
+const HUES = ['var(--primary)', 'var(--success)', 'var(--warning)', 'var(--error)', 'var(--info)', 'var(--primary)', 'var(--success)', 'var(--error)']
 
 export default function RunsView({ run, step }) {
   if (!run || !step) return <p className="rv-empty">Press Play to split the string into runs.</p>

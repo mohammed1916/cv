@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 const definition = {
   phases: [
@@ -32,6 +33,7 @@ export default function MinimumOperationsToSortAString() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const target = [...run.input.s].sort().join('')
     return <>
+      <IndexedSequence label="input string" length={run.input.s.length} valueAt={i => run.input.s[i]} roleAt={i => run.input.s[i] !== target[i] ? 'misplaced' : ''} />
       <LevelStrings target={target} level={step.level} count={step.count} />
       <output aria-label="Operation count">{`Operations so far: ${step.ops} · strings in this level: ${step.count}`}</output>
     </>

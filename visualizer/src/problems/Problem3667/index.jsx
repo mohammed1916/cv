@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import AbsSelectionView from './AbsSelectionView'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 const definition = {
   number: '3667',
@@ -22,7 +23,7 @@ const definition = {
 export default function Problem3667Visualizer() {
   return <AlgorithmWorkspace
     definition={definition}
-    renderVisual={({ run, step }) => <AbsSelectionView run={run} step={step} />}
+    renderVisual={({ run, step }) => <><IndexedSequence label="values" length={step.remaining.length} valueAt={i => run.input[step.remaining[i]]} roleAt={i => i === step.m ? 'm' : i === step.i ? 'i' : ''} /><AbsSelectionView run={run} step={step} /></>}
     renderReasoning={({ step }) => <p>{step.message}</p>}
   />
 }

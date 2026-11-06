@@ -1,9 +1,9 @@
 .degree-bars { display: grid; gap: 12px; }
 .degree-bars__bars { display: flex; align-items: flex-end; gap: 6px; height: 160px; margin: 0; padding: 0; list-style: none; }
 .degree-bars__bar { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; font-size: 0.75rem; }
-.degree-bars__fill { width: 100%; background: rgba(190, 18, 60, 0.3); border: 2px solid #be123c; border-radius: 4px 4px 0 0; }
-.degree-bars__bar[data-top="yes"] .degree-bars__fill { background: rgba(190, 18, 60, 0.75); }
-.degree-bars__bar[data-rest="yes"] .degree-bars__fill { background: rgba(120, 113, 108, 0.25); border-color: #78716c; }
+.degree-bars__fill { width: 100%; background: var(--error-glow); border: 2px solid var(--error); border-radius: 4px 4px 0 0; }
+.degree-bars__bar[data-top="yes"] .degree-bars__fill { background: var(--error-glow); }
+.degree-bars__bar[data-rest="yes"] .degree-bars__fill { background: var(--overlay-medium); border-color: var(--border); }
 .degree-bars__compare { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0; }
 .degree-bars__compare div { border: 1px solid currentColor; border-radius: 6px; padding: 6px; }
 .degree-bars__compare strong { display: block; font-size: 1.1rem; }

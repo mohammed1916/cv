@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import ResidueCostView from './ResidueCostView'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 const definition = {
   number: '3937',
@@ -22,7 +23,7 @@ export default function Problem3937Visualizer() {
   return (
     <AlgorithmWorkspace
       definition={definition}
-      renderVisual={({ run, step }) => <ResidueCostView run={run} step={step} />}
+      renderVisual={({ run, step }) => <><IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} roleAt={i => i % run.input.k === step.r ? 'r' : ''} /><ResidueCostView run={run} step={step} /></>}
       renderReasoning={({ step }) => <p>{step.message}</p>}
     />
   )

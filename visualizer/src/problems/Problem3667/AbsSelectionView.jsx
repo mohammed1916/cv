@@ -8,7 +8,7 @@ export default function AbsSelectionView({ run, step }) {
     <strong>{run.input[index]}</strong>
     <span>|x| = {Math.abs(run.input[index])}</span>
   </li>
-  return <div className="abs-select" style={{ '--accent': '#0e7490' }}>
+  return <div className="abs-select" style={{ '--accent': 'var(--info)' }}>
     <p className="abs-select__label">Remaining</p>
     <ol className="abs-select__lane" aria-label="Remaining values">
       {step.remaining.map((index, pos) => {

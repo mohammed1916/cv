@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import Problem3874View from './Problem3874View'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 const definition = {
   phases: [
@@ -21,7 +22,7 @@ const definition = {
 }
 
 export default function Problem3874Visualizer() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <Problem3874View run={run} step={step} />} renderReasoning={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <><IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} roleAt={i => i === step.left ? 'l' : i === step.right ? 'r' : i === step.cur ? 'peak' : ''} /><Problem3874View run={run} step={step} /></>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>
     <p>A subarray with exactly one peak must sit between the peaks on either side of it, so each peak's count depends only on its neighbours.</p>
   </>} />

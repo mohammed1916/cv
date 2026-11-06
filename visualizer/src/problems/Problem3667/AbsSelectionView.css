@@ -2,7 +2,7 @@
 .abs-select__lane { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; min-height: 52px; }
 .abs-select__cell { min-width: 48px; border: 2px solid currentColor; border-radius: 8px; padding: 6px; text-align: center; font-variant-numeric: tabular-nums; }
 .abs-select__cell span { display: block; font-size: 0.7rem; }
-.abs-select__cell[data-role="scan"] { outline: 2px dashed #0e7490; }
-.abs-select__cell[data-role="best"] { outline: 3px solid #0e7490; background: rgba(14, 116, 144, 0.2); }
-.abs-select__cell[data-role="taken"] { background: rgba(14, 116, 144, 0.12); }
+.abs-select__cell[data-role="scan"] { outline: 2px dashed var(--info); }
+.abs-select__cell[data-role="best"] { outline: 3px solid var(--info); background: var(--primary-glow); }
+.abs-select__cell[data-role="taken"] { background: var(--primary-glow); }
 .abs-select__label { font-size: 0.8rem; margin: 0; }

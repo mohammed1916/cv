@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import SemiWindowView from './SemiWindowView'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 const definition = {
   number: '3641',
@@ -22,7 +23,7 @@ const definition = {
 export default function Problem3641Visualizer() {
   return <AlgorithmWorkspace
     definition={definition}
-    renderVisual={({ run, step }) => <SemiWindowView run={run} step={step} />}
+    renderVisual={({ run, step }) => <><IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} roleAt={i => i === step.window[0] ? 'l' : i === step.window[1] ? 'r' : i > step.window[0] && i < step.window[1] ? 'window' : ''} /><SemiWindowView run={run} step={step} /></>}
     renderReasoning={({ step }) => <p>{step.message}</p>}
   />
 }

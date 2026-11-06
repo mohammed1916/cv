@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import MagicalLayersView from './MagicalLayersView'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 const definition = {
   phases,
@@ -16,7 +17,7 @@ const definition = {
 }
 
 export default function FindSumOfArrayProductOfMagicalSequences() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <MagicalLayersView run={run} step={step} />} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <><IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} roleAt={i => i === step.index ? 'i' : ''} /><MagicalLayersView run={run} step={step} /></>} renderReasoning={() => <>
     <p>Only how many times each index appears matters to the sum of powers of two, so decide those counts one index at a time, exactly like adding binary numbers from the lowest position up.</p>
     <p>Holding t copies of 2^i plus an incoming carry leaves the low bit of that total at position i and sends the rest up. Each decided position can add at most one set bit, so the state is copies used, carry and set bits.</p>
     <p>The weight merges all sequences that share a state: C(remaining, t) picks which sequence positions hold index i, and nums[i]^t is what they multiply in. After the last index, the carry has nowhere to merge, so its own set bits count too.</p>

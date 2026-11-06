@@ -1,16 +1,16 @@
 .tp-view {
-  --tp-ink: #0f172a;
-  --tp-muted: #475569;
-  --tp-node: #f8fafc;
-  --tp-line: #94a3b8;
-  --tp-start: #2563eb;
-  --tp-path: #7c3aed;
-  --tp-path-fill: #ede9fe;
-  --tp-best: #15803d;
-  --tp-best-fill: #dcfce7;
-  --tp-blocked: #b91c1c;
-  --tp-blocked-fill: #fee2e2;
-  --tp-cur: #ea580c;
+  --tp-ink: var(--text);
+  --tp-muted: var(--text-muted);
+  --tp-node: var(--primary-glow);
+  --tp-line: var(--primary);
+  --tp-start: var(--primary);
+  --tp-path: var(--primary);
+  --tp-path-fill: var(--primary-glow);
+  --tp-best: var(--success);
+  --tp-best-fill: var(--success-glow);
+  --tp-blocked: var(--error);
+  --tp-blocked-fill: var(--error-glow);
+  --tp-cur: var(--warning);
   color: var(--tp-ink);
   display: grid;
   gap: 10px;
@@ -20,18 +20,18 @@
 
 @media (prefers-color-scheme: dark) {
   .tp-view {
-    --tp-ink: #e2e8f0;
-    --tp-muted: #94a3b8;
-    --tp-node: #1e293b;
-    --tp-line: #475569;
-    --tp-start: #93c5fd;
-    --tp-path: #c4b5fd;
-    --tp-path-fill: #4c1d95;
-    --tp-best: #4ade80;
-    --tp-best-fill: #14532d;
-    --tp-blocked: #f87171;
-    --tp-blocked-fill: #7f1d1d;
-    --tp-cur: #fdba74;
+    --tp-ink: var(--text);
+    --tp-muted: var(--text-muted);
+    --tp-node: var(--primary-glow);
+    --tp-line: var(--primary);
+    --tp-start: var(--info);
+    --tp-path: var(--primary);
+    --tp-path-fill: var(--primary-glow);
+    --tp-best: var(--success);
+    --tp-best-fill: var(--success-glow);
+    --tp-blocked: var(--error);
+    --tp-blocked-fill: var(--error-glow);
+    --tp-cur: var(--warning);
   }
 }
 

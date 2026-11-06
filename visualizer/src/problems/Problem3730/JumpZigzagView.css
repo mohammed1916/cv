@@ -21,7 +21,7 @@
   height: 200px;
   padding: 0 8px 26px;
   box-sizing: border-box;
-  border-bottom: 2px solid rgba(127, 127, 127, 0.6);
+  border-bottom: 2px solid var(--border);
   overflow-x: auto;
 }
 
@@ -55,22 +55,22 @@
 .jz-column {
   width: 30px;
   border-radius: 6px 6px 0 0;
-  background: #2563eb;
+  background: var(--primary-glow);
   opacity: 0.8;
 }
 
 .jz-block--visited .jz-column {
-  background: #9ca3af;
+  background: var(--surface3);
   opacity: 0.55;
 }
 
 .jz-block--lo .jz-column {
-  background: #7c3aed;
+  background: var(--primary-glow);
   opacity: 0.95;
 }
 
 .jz-block--hi .jz-column {
-  background: #d97706;
+  background: var(--warning-glow);
   opacity: 0.95;
 }
 
@@ -97,13 +97,13 @@
 .jz-chip {
   padding: 3px 8px;
   border-radius: 6px;
-  background: rgba(37, 99, 235, 0.16);
+  background: var(--primary-glow);
   font-family: ui-monospace, monospace;
   font-size: 0.85rem;
 }
 
 .jz-chip--ground {
-  background: rgba(127, 127, 127, 0.25);
+  background: var(--overlay-medium);
 }
 
 .jz-readout {
@@ -116,5 +116,5 @@
 
 .jz-total {
   font-weight: 700;
-  color: #7c3aed;
+  color: var(--primary);
 }

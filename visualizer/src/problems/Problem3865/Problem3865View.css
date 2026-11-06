@@ -1,14 +1,14 @@
 .rk-view {
-  --rk-ink: #0f172a;
-  --rk-muted: #475569;
-  --rk-line: #cbd5e1;
-  --rk-cell: #f1f5f9;
-  --rk-swap: #f59e0b;
-  --rk-swap-fill: #fef3c7;
-  --rk-a: #0369a1; --rk-a-fill: #e0f2fe;
-  --rk-b: #7c3aed; --rk-b-fill: #ede9fe;
-  --rk-c: #047857; --rk-c-fill: #d1fae5;
-  --rk-d: #be185d; --rk-d-fill: #fce7f3;
+  --rk-ink: var(--text);
+  --rk-muted: var(--text-muted);
+  --rk-line: var(--info);
+  --rk-cell: var(--primary-glow);
+  --rk-swap: var(--warning);
+  --rk-swap-fill: var(--warning-glow);
+  --rk-a: var(--primary-glow); --rk-a-fill: var(--primary-glow);
+  --rk-b: var(--primary-glow); --rk-b-fill: var(--primary-glow);
+  --rk-c: var(--success-glow); --rk-c-fill: var(--success-glow);
+  --rk-d: var(--error-glow); --rk-d-fill: var(--primary-glow);
   color: var(--rk-ink);
   display: grid;
   gap: 8px;
@@ -18,16 +18,16 @@
 
 @media (prefers-color-scheme: dark) {
   .rk-view {
-    --rk-ink: #e2e8f0;
-    --rk-muted: #94a3b8;
-    --rk-line: #334155;
-    --rk-cell: #1e293b;
-    --rk-swap: #fbbf24;
-    --rk-swap-fill: #78350f;
-    --rk-a: #7dd3fc; --rk-a-fill: #0c4a6e;
-    --rk-b: #c4b5fd; --rk-b-fill: #4c1d95;
-    --rk-c: #6ee7b7; --rk-c-fill: #064e3b;
-    --rk-d: #f9a8d4; --rk-d-fill: #831843;
+    --rk-ink: var(--text);
+    --rk-muted: var(--text-muted);
+    --rk-line: var(--primary);
+    --rk-cell: var(--primary-glow);
+    --rk-swap: var(--warning);
+    --rk-swap-fill: var(--warning-glow);
+    --rk-a: var(--primary-glow); --rk-a-fill: var(--primary-glow);
+    --rk-b: var(--primary-glow); --rk-b-fill: var(--primary-glow);
+    --rk-c: var(--success-glow); --rk-c-fill: var(--success-glow);
+    --rk-d: var(--primary-glow); --rk-d-fill: var(--error-glow);
   }
 }
 

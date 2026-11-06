@@ -1,7 +1,7 @@
 const cellStyle = (active, inWindow, blocked) => ({
   width: 52, height: 48, display: 'inline-flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-  border: `2px solid ${active ? '#0f766e' : inWindow ? '#67e8f9' : 'var(--border, #cbd5e1)'}`,
-  background: blocked ? 'repeating-linear-gradient(45deg, #e2e8f0 0 6px, #cbd5e1 6px 12px)' : active ? '#ccfbf1' : inWindow ? '#ecfeff' : 'transparent',
+  border: `2px solid ${active ? 'var(--info)' : inWindow ? 'var(--info)' : 'var(--border, var(--info))'}`,
+  background: blocked ? 'repeating-linear-gradient(45deg, var(--primary-glow) 0 6px, var(--primary-glow) 6px 12px)' : active ? 'var(--success-glow)' : inWindow ? 'var(--primary-glow)' : 'transparent',
   borderRadius: 6, fontVariantNumeric: 'tabular-nums', fontSize: 14, margin: 2,
 })
 
@@ -17,8 +17,8 @@ function ArrayRow({ label, values, window, activeCol, highlight }) {
         return (
           <span key={col} data-col={col} style={{
             minWidth: 44, textAlign: 'center', padding: '4px 6px', borderRadius: 4,
-            border: `1px solid ${col === activeCol ? '#0f766e' : inWindow ? '#67e8f9' : 'var(--border, #cbd5e1)'}`,
-            background: col === activeCol ? '#ccfbf1' : inWindow && highlight ? '#ecfeff' : 'transparent',
+            border: `1px solid ${col === activeCol ? 'var(--info)' : inWindow ? 'var(--info)' : 'var(--border, var(--info))'}`,
+            background: col === activeCol ? 'var(--success-glow)' : inWindow && highlight ? 'var(--primary-glow)' : 'transparent',
             fontWeight: self ? 700 : 400,
           }}>
             {value}{self ? ' (self)' : ''}

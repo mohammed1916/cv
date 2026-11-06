@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import RepairThresholdView from './RepairThresholdView'
 import { buildTrace, parseInput, code, python } from './algorithm'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 
 const definition = {
   phases: [
@@ -21,7 +22,7 @@ const definition = {
 }
 
 export default function MinimumCostToRepairEdgesToTraverseAGraph() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <RepairThresholdView run={run} step={step} />} renderReasoning={({ run, step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>{step.candidates && step.lo != null && step.hi != null ? <AnswerRangeBar title="Candidate thresholds" min={step.candidates[0]} max={step.candidates[step.candidates.length - 1]} low={step.candidates[step.lo]} high={step.candidates[step.hi]} probe={step.mid == null ? null : step.candidates[step.mid]} verdict={step.ok} /> : null}<RepairThresholdView run={run} step={step} /></>} renderReasoning={({ run, step }) => <>
     <p>{step.message}</p>
     <p>A larger threshold repairs more edges, so whether a path of at most k edges exists only gets easier. That monotone property lets a binary search find the smallest workable threshold.</p>
     {run ? <p>Final answer: {run.result}.</p> : null}

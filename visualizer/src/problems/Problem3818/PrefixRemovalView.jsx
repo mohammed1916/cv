@@ -21,11 +21,11 @@ export default function PrefixRemovalView({ run, step }) {
   const styleFor = (i) => {
     const role = roleOf(i)
     const isCompared = s.left === i || s.right === i
-    if (role === 'removed') return box('#b45309', 'rgba(180,83,9,0.18)', 500)
-    if (role === 'provisional-removed') return box('#b45309', 'transparent', 500)
-    if (isCompared && s.verdict === 'violation') return box('#b91c1c', 'rgba(185,28,28,0.22)', 800)
-    if (isCompared) return box('#0f766e', 'rgba(15,118,110,0.25)', 800)
-    return box('#0f766e', 'rgba(15,118,110,0.08)')
+    if (role === 'removed') return box('var(--warning)', 'var(--warning-glow)', 500)
+    if (role === 'provisional-removed') return box('var(--warning)', 'transparent', 500)
+    if (isCompared && s.verdict === 'violation') return box('var(--error)', 'var(--error-glow)', 800)
+    if (isCompared) return box('var(--info)', 'var(--primary-glow)', 800)
+    return box('var(--info)', 'var(--primary-glow)')
   }
   const tagFor = i => {
     const role = roleOf(i)
@@ -43,7 +43,7 @@ export default function PrefixRemovalView({ run, step }) {
   return <section aria-label="Shortest removed prefix" style={{ display: 'grid', gap: 12 }}>
     <div role="group" aria-label="array with suffix boundary" style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'flex-end' }}>
       {nums.map((value, i) => <React.Fragment key={i}>
-        {i === k && k > 0 && <div aria-label={`removal boundary before index ${k}`} data-testid="boundary" style={{ alignSelf: 'stretch', width: 4, borderRadius: 2, background: provisional ? '#b45309' : '#0f766e' }} />}
+        {i === k && k > 0 && <div aria-label={`removal boundary before index ${k}`} data-testid="boundary" style={{ alignSelf: 'stretch', width: 4, borderRadius: 2, background: provisional ? 'var(--warning-glow)' : 'var(--info)' }} />}
         <div style={cell} data-index={i} data-role={roleOf(i)}>
           <span style={{ fontSize: 11, opacity: 0.7 }}>i={i}</span>
           <div style={styleFor(i)}>{value}</div>

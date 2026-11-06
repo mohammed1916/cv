@@ -1,10 +1,10 @@
 .dw {
-  --dw-ink: #0f172a;
-  --dw-muted: #64748b;
-  --dw-line: #cbd5e1;
-  --dw-window: #dbeafe;
-  --dw-index: #facc15;
-  --dw-good: #bbf7d0;
+  --dw-ink: var(--text);
+  --dw-muted: var(--text-muted);
+  --dw-line: var(--info);
+  --dw-window: var(--primary-glow);
+  --dw-index: var(--warning);
+  --dw-good: var(--success-glow);
   color: var(--dw-ink);
   display: grid;
   gap: 12px;
@@ -34,11 +34,11 @@
 
 .dw-cell--window {
   background: var(--dw-window);
-  border-color: #2563eb;
+  border-color: var(--primary);
 }
 
 .dw-cell--index {
-  border-color: #ca8a04;
+  border-color: var(--warning);
   box-shadow: 0 0 0 2px var(--dw-index);
 }
 
@@ -81,10 +81,10 @@
 
 @media (prefers-color-scheme: dark) {
   .dw {
-    --dw-ink: #e2e8f0;
-    --dw-muted: #94a3b8;
-    --dw-line: #475569;
-    --dw-window: #1e3a8a;
-    --dw-good: #14532d;
+    --dw-ink: var(--text);
+    --dw-muted: var(--text-muted);
+    --dw-line: var(--primary);
+    --dw-window: var(--primary-glow);
+    --dw-good: var(--success-glow);
   }
 }

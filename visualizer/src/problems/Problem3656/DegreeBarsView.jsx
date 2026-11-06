@@ -6,7 +6,7 @@ export default function DegreeBarsView({ run, step }) {
   const sorted = step.sorted || [...run.input].sort((a, b) => b - a)
   const k = step.k
   const max = Math.max(1, ...sorted)
-  return <div className="degree-bars" style={{ '--accent': '#be123c' }}>
+  return <div className="degree-bars" style={{ '--accent': 'var(--error)' }}>
     <ol className="degree-bars__bars" aria-label="Degrees sorted from largest to smallest">
       {sorted.map((d, i) => <li key={i} className="degree-bars__bar" data-top={k !== null && i < k ? 'yes' : undefined} data-rest={k !== null && i >= k ? 'yes' : undefined}>
         <span>{d}</span>
