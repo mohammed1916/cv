@@ -26,6 +26,8 @@ export default function RingView({ run, step }) {
               <circle cx={p.x} cy={p.y} r={18} />
               <text x={p.x} y={p.y + 5} textAnchor="middle">{value}</text>
               <text x={p.x} y={p.y - 24} textAnchor="middle" className="ring-pos">{i}</text>
+              {i === step.leftIdx && <text x={p.x} y={p.y + 34} textAnchor="middle" className="ring-pointer">out</text>}
+              {i === step.enterIdx && <text x={p.x} y={p.y + 34} textAnchor="middle" className="ring-pointer">in</text>}
             </g>
           )
         })}

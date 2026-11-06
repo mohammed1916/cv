@@ -1,3 +1,4 @@
+import PointerRail from "../../components/shared/PointerRail";
 import "./PeakRangeView.css";
 
 export default function PeakRangeView({ run, step }) {
@@ -15,6 +16,15 @@ export default function PeakRangeView({ run, step }) {
 
   return (
     <section className="pk-view" aria-label="Subarrays containing a peak">
+      <PointerRail
+        title="Array with range pointers"
+        values={nums}
+        pointers={[
+          ...(hasRange ? [{ id: "l", label: "l", index: step.left, tone: "primary" }] : []),
+          ...(hasRange ? [{ id: "r", label: "r", index: step.right, tone: "success" }] : []),
+          ...(step.x >= 0 ? [{ id: "x", label: "x", index: step.x, tone: "warning" }] : []),
+        ]}
+      />
       <div className="pk-bars" role="img" aria-label="Array values with peaks marked">
         {nums.map((v, i) => {
           const inRange = hasRange && i >= step.left && i <= step.right;

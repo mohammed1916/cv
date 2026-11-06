@@ -1,3 +1,4 @@
+import PointerRail from '../../components/shared/PointerRail'
 import './ValidSubarrayView.css'
 
 // Draws the array with the active query window, the running count table, and one chip per query.
@@ -8,6 +9,14 @@ export default function ValidSubarrayView({ run, step }) {
 
   return (
     <section className="vsk" aria-label="Valid K-Unique Subarrays query">
+      <PointerRail
+        title="Array with query pointers"
+        values={nums}
+        pointers={[
+          ...(step.query >= 0 && step.l >= 0 ? [{ id: 'l', label: 'l', index: step.l, tone: 'primary' }] : []),
+          ...(step.query >= 0 && step.r >= 0 ? [{ id: 'r', label: 'r', index: step.r, tone: 'success' }] : []),
+        ]}
+      />
       <div className="vsk-row" role="list" aria-label="Array values">
         {nums.map((value, i) => (
           <div

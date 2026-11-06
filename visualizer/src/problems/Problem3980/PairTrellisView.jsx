@@ -20,7 +20,7 @@ function Trellis({ s1, s2, step }) {
     {s1.split('').map((ch, i) => {
       const cx = (x(i) + x(i + 1)) / 2
       return <g key={i} data-index={i}>
-        {i === step.i && <rect x={cx - 18} y={6} width={36} height={46} rx={6} fill="var(--primary-glow)" stroke="var(--primary)" />}
+        {i === step.i && <rect x={cx - 18} y={6} width={36} height={46} rx={6} fill="color-mix(in srgb, var(--primary) 24%, var(--surface2))" stroke="var(--primary)" />}
         <text x={cx} y={22} textAnchor="middle" fontSize="15" fontWeight="600" fill="var(--text)">{ch}</text>
         <text x={cx} y={44} textAnchor="middle" fontSize="15" fontWeight="600" fill="var(--text)">{s2[i]}</text>
       </g>
@@ -69,7 +69,7 @@ function PriceCard({ step }) {
 }
 
 function Replay({ s2, step }) {
-  const cell = changed => ({ width: 34, padding: '6px 0', textAlign: 'center', borderRadius: 6, color: 'var(--text)', fontWeight: 600, background: changed ? 'var(--primary-glow)' : 'var(--surface2)', border: changed ? '2px solid var(--primary)' : '1px solid var(--border)' })
+  const cell = changed => ({ width: 34, padding: '6px 0', textAlign: 'center', borderRadius: 6, color: 'var(--text)', fontWeight: 600, background: changed ? 'color-mix(in srgb, var(--primary) 24%, var(--surface2))' : 'var(--surface2)', border: changed ? '2px solid var(--primary)' : '1px solid var(--border)' })
   const op = step.op
   const isOp = i => op && (i === op.at || (op.kind === 'clear' && i === op.at + 1))
   return <div aria-label="Operations replayed" style={{ display: 'grid', gap: 6 }}>

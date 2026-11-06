@@ -1,5 +1,5 @@
 .shf {
-  color: var(--code-text, #1f2937);
+  color: var(--text);
 }
 
 .shf-layout {
@@ -12,7 +12,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  border-left: 4px solid #475569;
+  border-left: 4px solid var(--border);
 }
 
 .shf-floor {
@@ -22,46 +22,47 @@
   gap: 6px;
   min-height: 34px;
   padding: 4px 8px;
-  border-bottom: 1px dashed #cbd5e1;
+  border-bottom: 1px dashed var(--border);
   font-size: 13px;
+  color: var(--text);
 }
 
 .shf-floor--start {
-  background: #eff6ff;
+  background: color-mix(in srgb, var(--primary) 12%, var(--surface2));
 }
 
 .shf-floor--from {
-  background: #fef9c3;
+  background: color-mix(in srgb, var(--warning) 14%, var(--surface2));
 }
 
 .shf-floor--to {
-  background: #ecfdf5;
+  background: color-mix(in srgb, var(--success) 14%, var(--surface2));
   font-weight: 700;
 }
 
 .shf-num {
   min-width: 64px;
-  color: #475569;
+  color: var(--text-muted);
 }
 
 .shf-tag {
   font-size: 11px;
   padding: 1px 6px;
   border-radius: 999px;
-  background: #1d4ed8;
-  color: #ffffff;
+  background: var(--primary);
+  color: var(--surface);
 }
 
 .shf-req {
   padding: 2px 8px;
-  border: 1px solid #b45309;
+  border: 1px solid var(--warning);
   border-radius: 999px;
-  color: #92400e;
+  color: var(--text);
 }
 
 .shf-req--done {
-  border-color: #047857;
-  color: #047857;
+  border-color: var(--success);
+  color: var(--success);
   text-decoration: line-through;
 }
 
@@ -69,17 +70,19 @@
   border-collapse: collapse;
   width: 100%;
   font-size: 14px;
+  color: var(--text);
 }
 
 .shf-table th,
 .shf-table td {
   text-align: left;
-  padding: 4px 8px;
-  border-bottom: 1px solid #e2e8f0;
+  padding: 12px 8px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
 }
 
 .shf-row-now td {
-  background: #fef3c7;
+  background: color-mix(in srgb, var(--warning) 18%, var(--surface2));
   font-weight: 700;
 }
 
@@ -87,7 +90,7 @@
 .shf-msg {
   margin: 4px 0;
   font-size: 13px;
-  color: #475569;
+  color: var(--text-muted);
 }
 
 @media (max-width: 560px) {

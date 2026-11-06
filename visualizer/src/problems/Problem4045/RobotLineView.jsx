@@ -1,6 +1,6 @@
 import "./RobotLineView.css";
 
-const PALETTE = ["#0f766e", "#b45309", "#6d28d9", "#be123c", "#1d4ed8", "#4d7c0f", "#a16207", "#0e7490"];
+const PALETTE = ["var(--primary)", "var(--success)", "var(--error)", "var(--text-muted)"];
 
 // Robots are drawn on a number line at the event time. Each robot takes the colour of the group
 // it belongs to; a group is the run of robots up to its rightmost member.
@@ -24,8 +24,9 @@ export default function RobotLineView({ run, step }) {
           const x = scale(xs[i]);
           return (
             <g key={i}>
-              <circle cx={x} cy="70" r="11" fill={color} className={i === step.left ? "rl-dot rl-dot--left" : "rl-dot"} />
+              <circle cx={x} cy="70" r="11" fill={`color-mix(in srgb, ${color} 35%, var(--surface2))`} stroke={color} className={i === step.left ? "rl-dot rl-dot--left" : "rl-dot"} />
               <text x={x} y="74" textAnchor="middle" className="rl-id">{i}</text>
+              {i === step.left && <text x={x} y="100" textAnchor="middle" className="rl-pointer">left</text>}
               <text x={x} y="40" textAnchor="middle" className="rl-speed">{`v${speeds[i]}`}</text>
             </g>
           );

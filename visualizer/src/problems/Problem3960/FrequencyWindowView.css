@@ -1,16 +1,12 @@
-.freq-window { display: grid; gap: 12px; }
+.freq-window { display: grid; gap: 12px; color: var(--text); }
 .freq-window__cells { display: flex; flex-wrap: wrap; gap: 6px; }
-.freq-window__cell { display: grid; justify-items: center; min-width: 46px; padding: 6px; border-radius: 8px; border: 2px solid #cbd5e1; background: #f8fafc; color: #0f172a; font-weight: 700; }
-.freq-window__cell small { font-weight: 400; color: #475569; }
-.freq-window__cell--in { border-color: #0891b2; background: #cffafe; }
-.freq-window__cell--best { outline: 3px solid #16a34a; }
+.freq-window__cell { display: grid; justify-items: center; min-width: 46px; padding: 12px; margin-bottom: 12px; border-radius: 8px; border: 2px solid var(--border); background: var(--surface2); color: var(--text); font-weight: 700; }
+.freq-window__cell small { font-weight: 400; color: var(--text-muted); }
+.freq-window__cell--in { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 16%, var(--surface2)); }
+.freq-window__cell--best { outline: 3px solid var(--success); }
 .freq-window__bars { display: grid; gap: 4px; }
-.freq-window__row { display: grid; grid-template-columns: 4rem 1fr; align-items: center; gap: 8px; }
+.freq-window__row { display: grid; grid-template-columns: 4rem 1fr; align-items: center; gap: 8px; margin-bottom: 12px; color: var(--text); }
 .freq-window__label { font-variant-numeric: tabular-nums; }
-.freq-window__bar { display: inline-block; min-width: 2rem; padding: 2px 6px; border-radius: 4px; background: #0891b2; color: #fff; font-weight: 600; }
-.freq-window__levels, .freq-window__bars p { margin: 0; }
-@media (prefers-color-scheme: dark) {
-  .freq-window__cell { background: #1e293b; color: #e2e8f0; border-color: #475569; }
-  .freq-window__cell--in { background: #164e63; border-color: #22d3ee; }
-  .freq-window__cell small { color: #94a3b8; }
-}
+.freq-window__bar { display: inline-block; min-width: 2rem; padding: 2px 6px; border-radius: 4px; background: var(--surface); border: 1px solid var(--primary); color: var(--text); font-weight: 600; }
+.freq-window__levels, .freq-window__bars p { margin: 0; color: var(--text-muted); }
+.freq-window output { display: block; color: var(--text); font-weight: 600; }

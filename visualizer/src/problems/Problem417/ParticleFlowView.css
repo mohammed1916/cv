@@ -1,36 +1,21 @@
 .pf-view {
-  --pf-pacific: #0369a1;
-  --pf-pacific-fill: #bae6fd;
-  --pf-atlantic: #c2410c;
-  --pf-atlantic-fill: #fed7aa;
-  --pf-both: #6d28d9;
-  --pf-both-fill: #ddd6fe;
-  --pf-dry-fill: #f1f5f9;
-  --pf-frontier: #ca8a04;
-  --pf-neighbour: #be185d;
-  --pf-answer: #15803d;
-  --pf-ink: #0f172a;
-  --pf-muted: #475569;
+  --pf-pacific: var(--primary);
+  --pf-pacific-fill: color-mix(in srgb, var(--primary) 24%, var(--surface2));
+  --pf-atlantic: var(--warning);
+  --pf-atlantic-fill: color-mix(in srgb, var(--warning) 24%, var(--surface2));
+  --pf-both: var(--success);
+  --pf-both-fill: color-mix(in srgb, var(--success) 30%, var(--surface2));
+  --pf-dry-fill: var(--surface2);
+  --pf-frontier: var(--warning);
+  --pf-neighbour: var(--error);
+  --pf-answer: var(--success);
+  --pf-ink: var(--text);
+  --pf-muted: var(--text-muted);
   color: var(--pf-ink);
   display: grid;
   gap: 12px;
   padding: 16px;
   font-family: system-ui, sans-serif;
-}
-
-@media (prefers-color-scheme: dark) {
-  .pf-view {
-    --pf-pacific-fill: #0c4a6e;
-    --pf-atlantic-fill: #7c2d12;
-    --pf-both-fill: #4c1d95;
-    --pf-dry-fill: #1e293b;
-    --pf-ink: #e2e8f0;
-    --pf-muted: #94a3b8;
-    --pf-pacific: #7dd3fc;
-    --pf-atlantic: #fdba74;
-    --pf-both: #c4b5fd;
-    --pf-answer: #4ade80;
-  }
 }
 
 .pf-title { margin: 0; font-size: 1.05rem; }

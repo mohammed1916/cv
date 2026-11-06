@@ -1,14 +1,14 @@
-/* Catppuccin Mocha Theme Colors */
+/* Theme tokens only */
 :root {
-  --paw-base: var(--code-bg);
-  --paw-surface0: var(--code-line);
-  --paw-surface1: var(--code-line);
-  --paw-surface2: #585b70;
-  --paw-text: var(--code-text);
-  --paw-blue: #89b4fa;
-  --paw-yellow: #f9e2af;
-  --paw-lavender: #6366f1;
-  --paw-border: var(--code-line);
+  --paw-base: var(--surface);
+  --paw-surface0: var(--surface);
+  --paw-surface1: var(--surface2);
+  --paw-surface2: var(--surface2);
+  --paw-text: var(--text);
+  --paw-blue: var(--primary);
+  --paw-yellow: var(--warning);
+  --paw-lavender: var(--success);
+  --paw-border: var(--border);
 }
 
 .paw-shell {
@@ -124,19 +124,19 @@
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s ease;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border);
 }
 
 .paw-cell:hover {
-  border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 8px rgba(137, 180, 250, 0.3);
+  border-color: var(--text-dim);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--primary) 30%, transparent);
 }
 
 .paw-cell-value {
   font-size: 12px;
   font-weight: 600;
   color: var(--paw-text);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  text-shadow: none;
 }
 
 .paw-state-item {
@@ -183,7 +183,7 @@
 .paw-input:focus {
   outline: none;
   border-color: var(--paw-blue);
-  box-shadow: 0 0 0 2px rgba(137, 180, 250, 0.2);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 20%, transparent);
 }
 
 .paw-button {
@@ -201,9 +201,9 @@
 }
 
 .paw-button:hover {
-  background: #a6d7ff;
+  background: color-mix(in srgb, var(--primary) 80%, var(--surface));
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(137, 180, 250, 0.3);
+  box-shadow: 0 4px 8px color-mix(in srgb, var(--primary) 30%, transparent);
 }
 
 .paw-button:active {

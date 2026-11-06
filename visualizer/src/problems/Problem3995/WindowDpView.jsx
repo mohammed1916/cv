@@ -1,3 +1,4 @@
+import PointerRail from "../../components/shared/PointerRail";
 import "./WindowDpView.css";
 
 const cell = (ch, i, cls) => (
@@ -15,6 +16,15 @@ export default function WindowDpView({ run, step }) {
   const tone = step.phase === "apply" ? "wdp__cell--apply" : step.phase === "reject" ? "wdp__cell--reject" : "";
   return (
     <div className="wdp" role="img" aria-label={`Convert ${source} to ${target}`}>
+      <PointerRail
+        title="Source window pointers"
+        values={[...source]}
+        pointers={[
+          ...(from >= 0 ? [{ id: "l", label: "l", index: from, tone: "primary" }] : []),
+          ...(from >= 0 ? [{ id: "r", label: "r", index: to, tone: "success" }] : []),
+          ...(step.at >= 0 ? [{ id: "i", label: "i", index: step.at, tone: "info" }] : []),
+        ]}
+      />
       <div className="wdp__row">
         <span className="wdp__label">source</span>
         {[...source].map((ch, i) => cell(ch, i, [inWindow(i) ? "wdp__cell--window" : "", i === step.at ? "wdp__cell--at" : ""].join(" ")))}

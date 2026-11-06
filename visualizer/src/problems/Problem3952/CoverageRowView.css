@@ -1,18 +1,13 @@
-.coverage-row { display: grid; gap: 12px; }
+.coverage-row { display: grid; gap: 12px; color: var(--text); }
 .coverage-row__cells { display: flex; flex-wrap: wrap; gap: 6px; }
-.coverage-row__cell { display: grid; justify-items: center; gap: 2px; min-width: 64px; padding: 8px; border-radius: 8px; border: 2px solid #94a3b8; background: #f8fafc; color: #0f172a; }
-.coverage-row__cell--token { border-color: #7c3aed; background: #ede9fe; }
-.coverage-row__cell--active { outline: 3px solid #f59e0b; }
-.coverage-row__index { font-size: 0.75rem; color: #475569; }
-.coverage-row__value { font-weight: 700; font-size: 1.1rem; }
-.coverage-row__mark { font-size: 0.8rem; font-weight: 600; }
-.coverage-row__arrow { font-size: 0.75rem; color: #6d28d9; }
-.coverage-row__state { display: grid; grid-template-columns: max-content 1fr; gap: 4px 12px; margin: 0; }
-.coverage-row__state dd { margin: 0; font-weight: 700; }
-.coverage-row__message { margin: 0; }
-@media (prefers-color-scheme: dark) {
-  .coverage-row__cell { background: #1e293b; color: #e2e8f0; border-color: #475569; }
-  .coverage-row__cell--token { background: #2e1065; border-color: #a78bfa; }
-  .coverage-row__index { color: #94a3b8; }
-  .coverage-row__arrow { color: #c4b5fd; }
-}
+.coverage-row__cell { display: grid; justify-items: center; gap: 2px; min-width: 64px; padding: 12px; margin-bottom: 12px; border-radius: 8px; border: 2px solid var(--border); background: var(--surface2); color: var(--text); }
+.coverage-row__cell--token { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 16%, var(--surface2)); }
+.coverage-row__cell--active { outline: 3px solid var(--success); }
+.coverage-row__index { font-size: 0.75rem; color: var(--text-muted); }
+.coverage-row__value { font-weight: 700; font-size: 1.1rem; color: var(--text); }
+.coverage-row__mark { font-size: 0.8rem; font-weight: 600; color: var(--text); }
+.coverage-row__arrow { font-size: 0.75rem; color: var(--text-muted); }
+.coverage-row__state { display: grid; grid-template-columns: max-content 1fr; gap: 4px 12px; margin: 0; padding: 12px; border: 1px solid var(--border); background: var(--surface2); border-radius: 8px; }
+.coverage-row__state dt { color: var(--text-muted); }
+.coverage-row__state dd { margin: 0; font-weight: 700; color: var(--text); }
+.coverage-row__message { margin: 0; color: var(--text); }

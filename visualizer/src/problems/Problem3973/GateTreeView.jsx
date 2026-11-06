@@ -7,7 +7,7 @@ const GAP_X = 104
 const GAP_Y = 92
 const PAD = 40
 const RADIUS = 16
-const CARD = { [BLUE]: '#2563eb', [RED]: '#dc2626' }
+const CARD = { [BLUE]: 'var(--primary)', [RED]: 'var(--error)' }
 const WARN = 'var(--warning, #d97706)'
 
 const pathEdges = (parent, from, to) => {

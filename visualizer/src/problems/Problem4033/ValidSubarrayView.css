@@ -1,7 +1,7 @@
 .vsk {
   display: grid;
   gap: 16px;
-  color: var(--code-text, #1f2937);
+  color: var(--text);
 }
 
 .vsk-row {
@@ -14,30 +14,41 @@
   display: grid;
   justify-items: center;
   min-width: 44px;
-  padding: 6px 8px;
-  border: 2px solid #cbd5e1;
+  padding: 12px 8px;
+  margin-bottom: 12px;
+  border: 2px solid var(--border);
   border-radius: 8px;
-  background: #f8fafc;
+  background: var(--surface2);
+  color: var(--text);
 }
 
 .vsk-cell--in {
-  border-color: #0f766e;
-  background: #ccfbf1;
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 16%, var(--surface2));
 }
 
 .vsk-cell--now {
-  outline: 3px solid #f59e0b;
+  outline: 3px solid var(--warning);
   outline-offset: 2px;
 }
 
 .vsk-index {
   font-size: 11px;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .vsk-value {
   font-weight: 700;
   font-size: 18px;
+  color: var(--text);
+}
+
+.vsk-table {
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface2);
+  color: var(--text);
 }
 
 .vsk-table ul {
@@ -46,25 +57,25 @@
 }
 
 .vsk-odd {
-  color: #b45309;
+  color: var(--warning);
   font-weight: 600;
 }
 
 .vsk-even {
-  color: #047857;
+  color: var(--success);
 }
 
 .vsk-muted {
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .vsk-yes {
-  color: #047857;
+  color: var(--success);
   font-weight: 700;
 }
 
 .vsk-no {
-  color: #b91c1c;
+  color: var(--error);
   font-weight: 700;
 }
 
@@ -76,23 +87,26 @@
 
 .vsk-chip {
   padding: 4px 10px;
+  margin-bottom: 12px;
   border-radius: 999px;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text);
   font-size: 13px;
 }
 
 .vsk-chip--yes {
-  border-color: #047857;
-  color: #047857;
+  border-color: var(--success);
+  color: var(--success);
 }
 
 .vsk-chip--no {
-  border-color: #b91c1c;
-  color: #b91c1c;
+  border-color: var(--error);
+  color: var(--error);
 }
 
 .vsk-chip--now {
-  box-shadow: 0 0 0 2px #f59e0b;
+  box-shadow: 0 0 0 2px var(--warning);
 }
 
 @media (max-width: 480px) {

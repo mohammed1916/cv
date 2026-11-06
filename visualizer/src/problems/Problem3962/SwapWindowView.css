@@ -1,17 +1,12 @@
-.swap-window { display: grid; gap: 12px; }
+.swap-window { display: grid; gap: 12px; color: var(--text); }
 .swap-window__cells { display: flex; flex-wrap: wrap; gap: 6px; }
-.swap-window__cell { display: grid; justify-items: center; min-width: 46px; padding: 6px; border-radius: 8px; border: 2px solid #cbd5e1; background: #f8fafc; color: #0f172a; font-weight: 700; }
-.swap-window__cell small { font-weight: 400; color: #475569; }
-.swap-window__cell--inside { border-color: #ea580c; background: #ffedd5; }
+.swap-window__cell { display: grid; justify-items: center; min-width: 46px; padding: 12px; margin-bottom: 12px; border-radius: 8px; border: 2px solid var(--border); background: var(--surface2); color: var(--text); font-weight: 700; }
+.swap-window__cell small { font-weight: 400; color: var(--text-muted); }
+.swap-window__cell--inside { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 16%, var(--surface2)); }
 .swap-window__cell--swapped { border-style: dashed; }
-.swap-window__pairs { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; }
-.swap-window__pair { padding: 2px 8px; border-radius: 999px; background: #fed7aa; color: #7c2d12; font-size: 0.85rem; }
-.swap-window__totals { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; margin: 0; }
-.swap-window__totals dd { margin: 0; font-weight: 700; }
-.swap-window__message { margin: 0; }
-@media (prefers-color-scheme: dark) {
-  .swap-window__cell { background: #1e293b; color: #e2e8f0; border-color: #475569; }
-  .swap-window__cell--inside { background: #431407; border-color: #fb923c; }
-  .swap-window__cell small { color: #94a3b8; }
-  .swap-window__pair { background: #7c2d12; color: #ffedd5; }
-}
+.swap-window__pairs { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; color: var(--text); }
+.swap-window__pair { padding: 2px 8px; border-radius: 999px; background: var(--surface2); border: 1px solid var(--success); color: var(--text); font-size: 0.85rem; }
+.swap-window__totals { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; margin: 0; padding: 12px; border: 1px solid var(--border); background: var(--surface2); border-radius: 8px; }
+.swap-window__totals dt { color: var(--text-muted); }
+.swap-window__totals dd { margin: 0; font-weight: 700; color: var(--text); }
+.swap-window__message { margin: 0; color: var(--text); }

@@ -1,3 +1,4 @@
+import PointerRail from "../../components/shared/PointerRail";
 import "./ColumnChainView.css";
 
 export default function ColumnChainView({ run, step }) {
@@ -7,6 +8,14 @@ export default function ColumnChainView({ run, step }) {
   const pairRow = step.phase === "pair" ? step.row : -1;
   return (
     <div className="colchain" role="img" aria-label={`Grid with ${grid.length} rows and ${cols} columns, limit ${limit}`}>
+      <PointerRail
+        title="Best chain length by column with i and j"
+        values={step.length}
+        pointers={[
+          ...(step.j >= 0 ? [{ id: "j", label: "j", index: step.j, tone: "primary" }] : []),
+          ...(step.i >= 0 ? [{ id: "i", label: "i", index: step.i, tone: "success" }] : []),
+        ]}
+      />
       <table className="colchain__grid">
         <thead>
           <tr>

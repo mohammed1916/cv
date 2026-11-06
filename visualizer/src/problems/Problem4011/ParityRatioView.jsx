@@ -1,3 +1,4 @@
+import PointerRail from "../../components/shared/PointerRail";
 import "./ParityRatioView.css";
 
 export default function ParityRatioView({ run, step }) {
@@ -14,6 +15,14 @@ export default function ParityRatioView({ run, step }) {
 
   return (
     <section className="pr-view" aria-label="Even and odd ratio subarrays">
+      <PointerRail
+        title="Values with subarray pointers"
+        values={nums}
+        pointers={[
+          ...(step.left >= 0 ? [{ id: "l", label: "l", index: step.left, tone: "primary" }] : []),
+          ...(step.right >= 0 && step.right >= step.left ? [{ id: "r", label: "r", index: step.right, tone: "success" }] : []),
+        ]}
+      />
       <p className="pr-target">Allowed even-to-odd ratio: at most {a} / {b}</p>
       <div className="pr-row">
         {nums.map((v, i) => (

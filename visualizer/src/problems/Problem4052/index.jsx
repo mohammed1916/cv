@@ -18,8 +18,8 @@ const definition = {
 
 const cellStyle = (on, extra = {}) => ({
   padding: '0.35rem 0.55rem', textAlign: 'center', minWidth: '2.2rem',
-  border: '1px solid var(--border, #888)',
-  background: on ? 'var(--primary)' : 'var(--surface2)', color: on ? '#fff' : 'var(--text)', ...extra,
+  border: '1px solid var(--border)',
+  background: on ? 'var(--primary)' : 'var(--surface2)', color: on ? 'var(--surface)' : 'var(--text)', ...extra,
 })
 
 function GridPanel({ title, rows, mode, index, note }) {

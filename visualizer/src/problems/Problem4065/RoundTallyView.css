@@ -2,22 +2,24 @@
   display: grid;
   gap: 14px;
   padding: 12px;
-  color: inherit;
+  color: var(--text);
 }
 
 .rt-empty,
 .rt-none,
 .rt-caption {
   margin: 0;
+  color: var(--text);
 }
 
 .rt-empty {
-  opacity: 0.75;
+  color: var(--text-muted);
 }
 
 .rt-heading {
   margin: 0 0 6px;
   font-size: 0.9rem;
+  color: var(--text);
 }
 
 .rt-counts,
@@ -35,22 +37,26 @@
   justify-items: center;
   gap: 4px;
   min-width: 64px;
-  padding: 8px;
-  border: 1px solid rgba(127, 127, 127, 0.4);
+  padding: 12px 8px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
   border-radius: 10px;
+  background: var(--surface2);
+  color: var(--text);
 }
 
 .rt-count--round {
-  border-color: #0369a1;
+  border-color: var(--primary);
 }
 
 .rt-count--active {
-  border-color: #b45309;
-  box-shadow: 0 0 0 2px rgba(180, 83, 9, 0.35);
+  border-color: var(--warning);
+  box-shadow: 0 0 0 2px var(--warning);
 }
 
 .rt-value {
   font-weight: 700;
+  color: var(--text);
 }
 
 .rt-stack {
@@ -65,12 +71,12 @@
   width: 22px;
   height: 10px;
   border-radius: 4px;
-  background: #0369a1;
+  background: var(--primary);
 }
 
 .rt-number {
   font-size: 0.75rem;
-  opacity: 0.8;
+  color: var(--text-muted);
 }
 
 .rt-answer li {
@@ -79,12 +85,14 @@
   width: 36px;
   height: 36px;
   border-radius: 8px;
-  background: rgba(127, 127, 127, 0.15);
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text);
   font-weight: 600;
 }
 
 .rt-answer--last {
-  outline: 2px solid #b45309;
+  outline: 2px solid var(--warning);
 }
 
 @media (max-width: 600px) {

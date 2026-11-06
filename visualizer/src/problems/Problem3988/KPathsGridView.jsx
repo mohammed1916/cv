@@ -24,7 +24,7 @@ export default function KPathsGridView({ run, step }) {
             const corner = r === m - 1 && c === n - 1
             return <div key={`${r},${c}`} data-cell={`${r},${c}`} data-state={ch === '#' ? 'blocked' : 'free'} data-active={Boolean(active)} data-source={source}
               style={{ width: CELL, height: CELL, boxSizing: 'border-box', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 5, fontWeight: 700,
-                background: ch === '#' ? 'var(--surface3)' : active ? 'var(--primary-glow)' : source ? 'var(--warning-glow)' : onPath ? 'var(--success-glow)' : 'var(--surface)',
+                background: ch === '#' ? 'var(--surface2)' : active ? 'color-mix(in srgb, var(--primary) 24%, var(--surface2))' : source ? 'color-mix(in srgb, var(--warning) 24%, var(--surface2))' : onPath ? 'color-mix(in srgb, var(--success) 24%, var(--surface2))' : 'var(--surface)',
                 border: active ? '3px solid var(--primary)' : corner ? '2px solid var(--success)' : '1px solid var(--border)', color: ch === '#' ? 'var(--text-muted)' : 'var(--text)' }}>
               {ch === '#' ? '#' : step.ways[r][c] ?? ''}
             </div>

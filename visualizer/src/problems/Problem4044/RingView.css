@@ -2,7 +2,7 @@
   display: grid;
   gap: 12px;
   justify-items: center;
-  color: var(--code-text, #1f2937);
+  color: var(--text);
 }
 
 .ring-svg {
@@ -12,57 +12,65 @@
 
 .ring-track {
   fill: none;
-  stroke: #cbd5e1;
+  stroke: var(--border);
   stroke-width: 6;
 }
 
 .ring-node circle {
   stroke-width: 2;
+  fill: var(--surface2);
+  stroke: var(--text-muted);
 }
 
 .ring-node text {
   font-size: 13px;
   font-weight: 700;
-  fill: #1f2937;
+  fill: var(--text);
 }
 
 .ring-node .ring-pos {
   font-size: 10px;
   font-weight: 400;
-  fill: #64748b;
+  fill: var(--text-muted);
+}
+
+.ring-node .ring-pointer {
+  font-size: 10px;
+  font-weight: 700;
+  fill: var(--primary);
 }
 
 .ring-node--first circle {
-  fill: #ccfbf1;
-  stroke: #0f766e;
+  fill: color-mix(in srgb, var(--primary) 18%, var(--surface2));
+  stroke: var(--primary);
 }
 
 .ring-node--second circle {
-  fill: #f1f5f9;
-  stroke: #94a3b8;
+  fill: var(--surface);
+  stroke: var(--text-dim);
 }
 
 .ring-node--leave circle {
-  fill: #fee2e2;
-  stroke: #b91c1c;
+  fill: color-mix(in srgb, var(--error) 18%, var(--surface2));
+  stroke: var(--error);
   stroke-width: 3;
 }
 
 .ring-node--enter circle {
-  fill: #fef3c7;
-  stroke: #b45309;
+  fill: color-mix(in srgb, var(--warning) 18%, var(--surface2));
+  stroke: var(--warning);
   stroke-width: 3;
 }
 
 .ring-shift {
   font-size: 14px;
   font-weight: 700;
-  fill: #1f2937;
+  fill: var(--text);
 }
 
 .ring-sums {
   font-size: 11px;
-  fill: #475569;
+  fill: var(--text-muted);
 }
 
 .ring-legend {
@@ -72,6 +80,7 @@
   font-size: 13px;
   display: grid;
   gap: 4px;
+  color: var(--text);
 }
 
 .ring-key {
@@ -81,20 +90,21 @@
   margin-right: 6px;
   border-radius: 3px;
   vertical-align: middle;
-  border: 2px solid #0f766e;
-  background: #ccfbf1;
+  border: 2px solid var(--primary);
+  background: color-mix(in srgb, var(--primary) 18%, var(--surface2));
 }
 
 .ring-key--leave {
-  border-color: #b91c1c;
-  background: #fee2e2;
+  border-color: var(--error);
+  background: color-mix(in srgb, var(--error) 18%, var(--surface2));
 }
 
 .ring-key--enter {
-  border-color: #b45309;
-  background: #fef3c7;
+  border-color: var(--warning);
+  background: color-mix(in srgb, var(--warning) 18%, var(--surface2));
 }
 
 .ring-count {
   font-weight: 700;
+  color: var(--text);
 }

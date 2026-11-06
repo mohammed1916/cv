@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -33,12 +34,7 @@ function FloorShaft({ n, floor, target }) {
 
 export default function ElevatorRequestsI() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <table aria-label="Floors">
-      <thead><tr><th>Request</th><th>Floor</th></tr></thead>
-      <tbody>{run.input.requests.map((r, i) => <tr key={i} data-active={i === step.index ? 'true' : undefined}>
-        <td>{i + 1}</td><td>{r}</td>
-      </tr>)}</tbody>
-    </table>
+    <IndexedSequence label="Requests in order" length={run.input.requests.length} valueAt={i => run.input.requests[i]} active={step.index} />
     <FloorShaft n={run.input.n} floor={step.floor} target={step.index >= 0 ? run.input.requests[step.index] : null} />
     <output aria-label="Elevator">{`Floor ${step.floor}, time ${step.time}`}</output>
   </>} renderReasoning={() => <>

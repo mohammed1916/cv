@@ -34,7 +34,7 @@ function Person({ i, n, step }) {
   const at = point(angle)
   const out = point(angle, RING + 52)
   const value = step.now[i]
-  const fill = value < 0 ? 'var(--error-glow)' : step.supply[i] > 0 ? 'var(--success-glow)' : 'var(--surface2)'
+  const fill = value < 0 ? 'color-mix(in srgb, var(--error) 22%, var(--surface2))' : step.supply[i] > 0 ? 'color-mix(in srgb, var(--success) 22%, var(--surface2))' : 'var(--surface2)'
   const isCurrent = step.u === i
   const updated = step.updated.includes(i)
   const endpoint = step.from === i || step.to === i

@@ -1,7 +1,7 @@
 .gtv {
   display: grid;
   gap: 12px;
-  color: var(--code-text, #1f2937);
+  color: var(--text);
 }
 
 .gtv-grid {
@@ -22,39 +22,41 @@
   align-content: center;
   width: 56px;
   height: 56px;
-  border: 2px solid #cbd5e1;
+  border: 2px solid var(--border);
   border-radius: 8px;
-  background: #f8fafc;
+  background: var(--surface2);
+  color: var(--text);
 }
 
 .gtv-cell--reached {
-  background: #ecfdf5;
-  border-color: #6ee7b7;
+  background: color-mix(in srgb, var(--success) 14%, var(--surface2));
+  border-color: var(--success);
 }
 
 .gtv-cell--next {
   border-style: dashed;
-  border-color: #0369a1;
+  border-color: var(--primary);
 }
 
 .gtv-cell--now {
-  outline: 3px solid #f59e0b;
+  outline: 3px solid var(--warning);
   outline-offset: 1px;
 }
 
 .gtv-cell--goal {
-  border-color: #7c3aed;
+  border-color: var(--primary);
   border-width: 3px;
 }
 
 .gtv-value {
   font-size: 11px;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .gtv-best {
   font-weight: 700;
   font-size: 16px;
+  color: var(--text);
 }
 
 .gtv-arrow {
@@ -62,13 +64,18 @@
   top: 0;
   right: 3px;
   font-size: 14px;
-  color: #b45309;
+  color: var(--warning);
 }
 
 .gtv-key,
 .gtv-facts {
   margin: 0;
   font-size: 13px;
+  color: var(--text);
+}
+
+.gtv-key {
+  color: var(--text-muted);
 }
 
 .gtv-facts {

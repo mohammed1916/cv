@@ -1,11 +1,11 @@
-.colchain { display: flex; flex-direction: column; gap: 14px; padding: 16px; background: var(--surface, #0f172a); color: var(--text, #f8fafc); }
-.colchain__grid { border-collapse: collapse; margin: 0 auto; font-size: 14px; }
-.colchain__grid th, .colchain__grid td { padding: 6px 10px; border: 1px solid var(--border, #334155); text-align: center; }
-.colchain__grid th { color: var(--text-muted, #94a3b8); font-weight: 500; background: var(--surface2, #1e293b); }
-.colchain--current { background: rgba(190, 24, 93, 0.35); font-weight: 700; }
-.colchain--other { background: rgba(56, 189, 248, 0.22); }
-.colchain__row--fail td { color: #fca5a5; }
+.colchain { display: flex; flex-direction: column; gap: 14px; padding: 16px; background: var(--surface); color: var(--text); }
+.colchain__grid { border-collapse: collapse; margin: 0 auto; font-size: 14px; background: var(--surface2); }
+.colchain__grid th, .colchain__grid td { padding: 12px 10px; border: 1px solid var(--border); text-align: center; color: var(--text); }
+.colchain__grid th { color: var(--text-muted); font-weight: 500; background: var(--surface); }
+.colchain--current { background: color-mix(in srgb, var(--primary) 26%, var(--surface2)); font-weight: 700; }
+.colchain--other { background: color-mix(in srgb, var(--success) 22%, var(--surface2)); }
+.colchain__row--fail td { color: var(--error); font-weight: 700; }
 .colchain__lengths { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
-.colchain__len { display: flex; flex-direction: column; align-items: center; min-width: 60px; padding: 6px; border-radius: 8px; background: var(--surface2, #1e293b); border: 1px solid var(--border, #334155); font-size: 12px; }
-.colchain__len--current { border-color: #f472b6; }
-.colchain__legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 14px; }
+.colchain__len { display: flex; flex-direction: column; align-items: center; min-width: 60px; padding: 12px; margin-bottom: 12px; border-radius: 8px; background: var(--surface2); border: 1px solid var(--border); color: var(--text); font-size: 12px; }
+.colchain__len--current { border-color: var(--primary); border-width: 2px; }
+.colchain__legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 14px; color: var(--text); }

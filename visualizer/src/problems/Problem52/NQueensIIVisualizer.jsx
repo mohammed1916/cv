@@ -86,7 +86,7 @@ export function BoardPanel({ EXAMPLES, ex, n, board, activeRow, activeCol, phase
         </div>
         <div className="nqii-tracker">
           <span className="nqii-tracker-label">Count</span>
-          <motion.span key={step?.solutions} className="nqii-tracker-val nqii-sol" initial={{ scale: 1.4, color: "#2f8628" }} animate={{ scale: 1, color: "#4f6ed8" }}>
+          <motion.span key={step?.solutions} className="nqii-tracker-val nqii-sol" initial={{ scale: 1.4 }} animate={{ scale: 1 }}>
             {step?.solutions ?? 0}
           </motion.span>
         </div>

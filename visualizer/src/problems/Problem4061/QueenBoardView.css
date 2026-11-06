@@ -2,37 +2,39 @@
   display: grid;
   gap: 10px;
   padding: 12px;
-  color: inherit;
+  color: var(--text);
   justify-items: center;
 }
 
 .qb-empty {
-  opacity: 0.75;
+  color: var(--text-muted);
+  margin: 0;
 }
 
 .qb-board {
   display: grid;
   grid-template-columns: repeat(8, minmax(28px, 44px));
   grid-template-rows: repeat(8, minmax(28px, 44px));
-  border: 2px solid rgba(127, 127, 127, 0.6);
+  border: 2px solid var(--border);
 }
 
 .qb-square {
   display: grid;
   place-items: center;
   position: relative;
+  color: var(--text);
 }
 
 .qb-square--light {
-  background: rgba(127, 127, 127, 0.08);
+  background: var(--surface);
 }
 
 .qb-square--dark {
-  background: rgba(127, 127, 127, 0.28);
+  background: var(--surface2);
 }
 
 .qb-square--line {
-  box-shadow: inset 0 0 0 2px rgba(3, 105, 161, 0.55);
+  box-shadow: inset 0 0 0 2px var(--primary);
 }
 
 .qb-tag {
@@ -43,30 +45,31 @@
   border-radius: 999px;
   font-weight: 700;
   font-size: 0.85rem;
-  color: #fff;
+  color: var(--surface);
 }
 
 .qb-square--source .qb-tag {
-  background: #b45309;
+  background: var(--warning);
 }
 
 .qb-square--target .qb-tag {
-  background: #0369a1;
+  background: var(--primary);
 }
 
 .qb-square--pivot .qb-tag {
-  background: #15803d;
+  background: var(--success);
 }
 
 .qb-caption,
 .qb-legend {
   margin: 0;
   text-align: center;
+  color: var(--text);
 }
 
 .qb-legend {
   font-size: 0.85rem;
-  opacity: 0.8;
+  color: var(--text-muted);
 }
 
 @media (max-width: 600px) {

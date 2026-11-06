@@ -1,3 +1,4 @@
+import AnswerRangeBar from "../../components/shared/AnswerRangeBar";
 import "./StrengthSearchView.css";
 
 export default function StrengthSearchView({ run, step }) {
@@ -11,16 +12,11 @@ export default function StrengthSearchView({ run, step }) {
 
   const { strengths, boosts } = run.input;
   const top = Math.max(1, step.high);
-  const pct = value => `${Math.min(100, (100 * value) / top)}%`;
   const bonusFor = i => boosts.reduce((sum, [l, r, v]) => (l <= i && i <= r ? sum + v : sum), 0);
 
   return (
     <section className="ss-view" aria-label="Minimum initial strength">
-      <div className="ss-range" role="img" aria-label={`answer between ${step.low} and ${step.high}`}>
-        <div className="ss-range__fill" style={{ left: 0, width: pct(step.high) }} />
-        <div className="ss-range__lo" style={{ left: pct(step.low) }} />
-        {step.probe !== null && <div className="ss-range__probe" style={{ left: pct(step.probe) }} aria-label={`probe ${step.probe}`} />}
-      </div>
+      <AnswerRangeBar title="Starting strength search" min={0} max={top} low={step.low} high={step.high} probe={step.probe} verdict={step.ok === true} />
       <p className="ss-caption">Answer between {step.low} and {step.high}{step.probe !== null ? `, testing ${step.probe}` : ""}</p>
       <ol className="ss-monsters" aria-label="Monsters in order">
         {strengths.map((need, i) => {

@@ -1,10 +1,16 @@
+import PointerRail from '../../components/shared/PointerRail'
 import './DigitWindowView.css'
 
 export default function DigitWindowView({ run, step }) {
   const { nums, x } = run.input
   const inWindow = i => step.l >= 0 && step.r >= step.l && i >= step.l && i <= step.r
+  const pointers = [
+    ...(step.l >= 0 ? [{ id: 'l', label: 'l', index: step.l, tone: 'primary' }] : []),
+    ...(step.r >= 0 && step.r >= step.l ? [{ id: 'r', label: 'r', index: step.r, tone: 'success' }] : []),
+  ]
   return (
     <section className="digit-window" aria-label="Digit window">
+      <PointerRail title="Array with window pointers" values={nums} pointers={pointers} />
       <div className="digit-window__cells" role="list" aria-label="Values">
         {nums.map((v, i) => (
           <div key={i} role="listitem" className={`digit-window__cell${inWindow(i) ? ' digit-window__cell--in' : ''}`}>

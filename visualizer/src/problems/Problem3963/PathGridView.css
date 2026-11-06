@@ -1,16 +1,10 @@
-.path-grid { display: grid; gap: 12px; }
+.path-grid { display: grid; gap: 12px; color: var(--text); }
 .path-grid__board { display: grid; gap: 4px; max-width: 100%; overflow-x: auto; }
-.path-grid__cell { position: relative; display: grid; place-items: center; min-height: 36px; border-radius: 6px; border: 1px solid #cbd5e1; font-weight: 700; background: #f8fafc; color: #0f172a; }
-.path-grid__cell--wall { background: #1e293b; color: #94a3b8; border-color: #0f172a; }
-.path-grid__cell--free { background: #dcfce7; border-color: #16a34a; }
-.path-grid__cell--active { outline: 3px solid #f59e0b; }
-.path-grid__cell small { position: absolute; right: 3px; bottom: 1px; font-size: 0.65rem; font-weight: 600; color: #14532d; }
-.path-grid__tag { position: absolute; left: 3px; top: 1px; font-size: 0.65rem; color: #1d4ed8; }
-.path-grid__legend, .path-grid__message { margin: 0; }
-@media (prefers-color-scheme: dark) {
-  .path-grid__cell { background: #0f172a; color: #e2e8f0; border-color: #334155; }
-  .path-grid__cell--wall { background: #020617; color: #475569; }
-  .path-grid__cell--free { background: #14532d; border-color: #22c55e; }
-  .path-grid__cell small { color: #bbf7d0; }
-  .path-grid__tag { color: #93c5fd; }
-}
+.path-grid__cell { position: relative; display: grid; place-items: center; min-height: 36px; border-radius: 6px; border: 1px solid var(--border); font-weight: 700; background: var(--surface2); color: var(--text); }
+.path-grid__cell--wall { background: var(--surface); color: var(--text-dim); border-color: var(--border); }
+.path-grid__cell--free { background: color-mix(in srgb, var(--success) 14%, var(--surface2)); border-color: var(--success); }
+.path-grid__cell--active { outline: 3px solid var(--primary); }
+.path-grid__cell small { position: absolute; right: 3px; bottom: 1px; font-size: 0.65rem; font-weight: 600; color: var(--text); }
+.path-grid__tag { position: absolute; left: 3px; top: 1px; font-size: 0.65rem; color: var(--primary); }
+.path-grid__legend, .path-grid__message { margin: 0; color: var(--text); }
+.path-grid__legend { color: var(--text-muted); }

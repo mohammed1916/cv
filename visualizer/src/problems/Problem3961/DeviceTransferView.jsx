@@ -4,10 +4,10 @@ const chip = { minWidth: 34, padding: '4px 8px', borderRadius: 6, textAlign: 'ce
 
 const ROLE = {
   lowest: { borderColor: 'var(--warning)', fontWeight: 700 },
-  overall: { borderColor: 'var(--warning)', fontWeight: 700, background: 'var(--surface3)', outline: '2px solid var(--warning)', outlineOffset: 1 },
+  overall: { borderColor: 'var(--warning)', fontWeight: 700, background: 'var(--surface2)', outline: '2px solid var(--warning)', outlineOffset: 1 },
   second: { borderColor: 'var(--primary)', fontWeight: 700 },
   gone: { borderStyle: 'dashed', color: 'var(--text-muted)', textDecoration: 'line-through', background: 'transparent' },
-  received: { borderColor: 'var(--error)', background: 'var(--surface3)' },
+  received: { borderColor: 'var(--error)', background: 'var(--surface2)' },
 }
 
 const Unit = ({ value, role }) => <span data-unit={value} data-role={role || undefined} style={{ ...chip, ...(ROLE[role] || {}) }}>{value}</span>

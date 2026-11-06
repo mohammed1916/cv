@@ -1,11 +1,17 @@
+import PointerRail from '../../components/shared/PointerRail'
 import './SwapWindowView.css'
 
 export default function SwapWindowView({ run, step }) {
   const { nums } = run.input
   const inWindow = i => step.l >= 0 && i >= step.l && i <= step.r
   const swappedIn = new Set(step.pairs.map(([low]) => low))
+  const pointers = [
+    ...(step.l >= 0 ? [{ id: 'l', label: 'l', index: step.l, tone: 'primary' }] : []),
+    ...(step.r >= 0 && step.r >= step.l ? [{ id: 'r', label: 'r', index: step.r, tone: 'success' }] : []),
+  ]
   return (
     <section className="swap-window" aria-label="Swap window">
+      <PointerRail title="Array with window pointers" values={nums} pointers={pointers} />
       <div className="swap-window__cells" role="list" aria-label="Array values">
         {nums.map((v, i) => {
           const inside = inWindow(i)

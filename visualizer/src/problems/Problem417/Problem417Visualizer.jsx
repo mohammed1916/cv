@@ -258,10 +258,10 @@ function Problem417Visualizer() {
     const isAtlantic = activeStep?.atlantic?.has(cellKey)
     const isBoth = isPacific && isAtlantic
 
-    if (isBoth) return '#6366f1' // Catppuccin Lavender (both)
-    if (isPacific) return '#89b4fa' // Catppuccin Blue (Pacific)
-    if (isAtlantic) return '#f9e2af' // Catppuccin Yellow (Atlantic)
-    return 'var(--code-line)' // Catppuccin Surface 2
+    if (isBoth) return 'var(--success)' // both
+    if (isPacific) return 'var(--primary)' // Pacific
+    if (isAtlantic) return 'var(--warning)' // Atlantic
+    return 'var(--surface2)'
   }
 
   const visualizationPanel = (
