@@ -308,6 +308,9 @@
 
 .local-dock-content {
   overflow: auto;
+  /* A docked floating panel sizes itself to this box (inset: 0). Without a
+     containing block here it resolved to the whole page and covered the screen. */
+  position: relative;
 }
 
 /* Noninteractive edge fades leave wheel, touch, selection and controls usable. */
