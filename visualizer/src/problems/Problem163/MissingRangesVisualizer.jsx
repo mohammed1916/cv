@@ -278,21 +278,23 @@ function VisualizationPanel({ step }) {
       </div>
 
       {step.nums && step.lower !== undefined && step.upper !== undefined && (
-        <IndexedSequence label="Input nums (pointer i marks the current index)" length={step.nums.length} active={step.currentIdx ?? -1}
-          valueAt={i => step.nums[i]} />
-        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--primary)', marginBottom: 8 }}>
-            Number Line
-          </div>
-          <NumberLine
-            nums={step.nums}
-            lower={step.lower}
-            upper={step.upper}
-            currentIdx={step.currentIdx}
-            gap={step.gap}
-            finalGap={step.finalGap}
-          />
-        </motion.div>
+        <>
+          <IndexedSequence label="Input nums (pointer i marks the current index)" length={step.nums.length} active={step.currentIdx ?? -1}
+            valueAt={i => step.nums[i]} />
+          <motion.div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--primary)', marginBottom: 8 }}>
+              Number Line
+            </div>
+            <NumberLine
+              nums={step.nums}
+              lower={step.lower}
+              upper={step.upper}
+              currentIdx={step.currentIdx}
+              gap={step.gap}
+              finalGap={step.finalGap}
+            />
+          </motion.div>
+        </>
       )}
 
       {step.currentNum !== undefined && (
