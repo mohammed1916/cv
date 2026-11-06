@@ -266,7 +266,10 @@ body.resizing-playback * {
   cursor:
     nwse-resize !important;
 }
-.floating-panel.is-docked { position: absolute; inset: 0 !important; width: 100% !important; height: 100% !important; min-width: 0; min-height: 0; border-radius: 0; box-shadow: none; animation: none; }
+.floating-panel.is-docked { position: absolute; inset: 0 !important; width: 100% !important; height: 100% !important; max-width: none; min-width: 0; min-height: 0; border-radius: 0; box-shadow: none; animation: none; display: flex; flex-direction: column; }
+.floating-panel.is-docked .floating-panel-body { flex: 1; min-height: 0; height: auto; }
+.floating-panel.is-docked .floating-panel-handle,
+.floating-panel.is-docked .floating-panel-scale-area { flex-shrink: 0; }
 .floating-panel.is-docked .floating-panel-handle { cursor: default; }
 .floating-panel.collapsed { min-height: 0; }
 .floating-panel { max-width: calc(100vw - 16px); color: var(--text); }

@@ -25,7 +25,7 @@ export default function FloatingPanel({
   useLayoutEffect(() => {
     document.body.appendChild(host);
     const frame = requestAnimationFrame(() => setCanDock(Boolean(document.querySelector('.lumino-dock-container'))));
-    return () => { cancelAnimationFrame(frame); undockRef.current?.(); host.remove(); document.body.classList.remove('dragging-floating-panel'); };
+    return () => { cancelAnimationFrame(frame); undockRef.current?.(); host.remove(); };
   }, [host]);
   const dockPanel = (side = 'bottom', workspace = document.querySelector('.lumino-dock-container')) => {
     if (!workspace) return;
@@ -41,11 +41,6 @@ export default function FloatingPanel({
   const floatPanel = () => {
     undockRef.current?.(); undockRef.current = null; setDocked(false);
   };
-  useEffect(() => {
-    const stop = () => document.body.classList.remove('dragging-floating-panel');
-    window.addEventListener('pointerup', stop);
-    return () => window.removeEventListener('pointerup', stop);
-  }, []);
   const dragState = useRef(null);
   const resizeState = useRef(null);
 
@@ -149,7 +144,6 @@ export default function FloatingPanel({
 
     const rect = node.getBoundingClientRect();
 
-    document.body.classList.add("dragging-floating-panel");
     dragState.current = {
       offsetX: event.clientX - rect.left,
       offsetY: event.clientY - rect.top,
@@ -182,14 +176,6 @@ export default function FloatingPanel({
       return;
     }
 
-    if (event.type !== 'pointercancel') {
-      const target = [...document.querySelectorAll('[data-dock-side]')].find(node => {
-        const rect = node.getBoundingClientRect();
-        return event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom;
-      });
-      if (target) dockPanel(target.dataset.dockSide, target.closest('.lumino-dock-container'));
-    }
-    document.body.classList.remove('dragging-floating-panel');
     dragState.current = null;
 
     if (

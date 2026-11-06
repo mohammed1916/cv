@@ -193,6 +193,13 @@ export default function DockWorkspace({ panels, onPanelReady }) {
   const flights = useRef(new Map());
 
   const [tree, setTree] = useState(null);
+  // Keep collapse stable: the external-panel effect must only release its
+  // hosts on unmount, not whenever docking or resizing changes the tree.
+  const treeRef = useRef(null);
+
+  useLayoutEffect(() => {
+    treeRef.current = tree;
+  }, [tree]);
 
   const [hidden, setHidden] = useState(new Set());
 
@@ -282,7 +289,7 @@ export default function DockWorkspace({ panels, onPanelReady }) {
       // If the user collapses the active panel while its group
       // is maximized, leave maximize mode first.
       setMaximizedGroupKey((current) => {
-        const group = findGroup(tree, id);
+        const group = findGroup(treeRef.current, id);
 
         return group?.key === current ? null : current;
       });
@@ -324,7 +331,7 @@ export default function DockWorkspace({ panels, onPanelReady }) {
 
       flights.current.set(id, cancel);
     },
-    [tree],
+    [],
   );
 
   useEffect(() => {
@@ -462,6 +469,7 @@ export default function DockWorkspace({ panels, onPanelReady }) {
 
       host.classList.add("local-dock-content");
 
+      setMaximizedGroupKey(null);
       setEntries(new Map([...records.current, ...mounted]));
 
       setTree((current) => insert(current, id, null, side, 0.3));
@@ -811,17 +819,6 @@ export default function DockWorkspace({ panels, onPanelReady }) {
 
       <div ref={parking} hidden />
 
-      <div className="workspace-drop-targets" aria-hidden="true">
-        {["left", "right", "bottom"].map((side) => (
-          <div
-            key={side}
-            data-dock-side={side}
-            className={`workspace-drop-target ${side}`}
-          >
-            Dock {side}
-          </div>
-        ))}
-      </div>
     </div>
   );
 }
