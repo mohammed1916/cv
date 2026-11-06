@@ -5,7 +5,7 @@
 .ct-arrowhead { fill: var(--primary); }
 .ct-node { fill: var(--surface2); stroke: var(--text-muted); stroke-width: 2; }
 .ct-node--copied { fill: color-mix(in srgb, var(--success) 28%, var(--surface)); stroke: var(--success); }
-.ct-node--now { fill: color-mix(in srgb, var(--warning) 35%, var(--surface)); stroke: var(--text); stroke-width: 3; }
+.ct-node--now { fill: color-mix(in srgb, var(--primary) 35%, var(--surface)); stroke: var(--text); stroke-width: 3; }
 .ct-text { font-size: 13px; font-weight: 700; fill: var(--text); }
 .ct-sub { font-size: 11px; fill: var(--text-muted); }
 .ct-view figcaption { font-size: 13px; margin-top: 6px; color: var(--text-muted); }

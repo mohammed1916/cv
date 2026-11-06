@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
-const cell = { minWidth: 36, padding: '4px 6px', textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', color: '#1c1917' }
+const cell = { minWidth: 36, padding: '4px 6px', textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', color: 'var(--text)' }
 
 const definition = {
   number: '1463',
@@ -22,11 +22,11 @@ export default function CherryPickupII() {
     const { row, table, best } = step.snapshot
     return <>
       <table aria-label="Grid" style={{ borderCollapse: 'collapse', marginBottom: 12 }}>
-        <tbody>{grid.map((values, r) => <tr key={r}>{values.map((v, c) => <td key={c} style={{ ...cell, background: r === row ? '#fde68a' : 'transparent' }}>{v}</td>)}</tr>)}</tbody>
+        <tbody>{grid.map((values, r) => <tr key={r}>{values.map((v, c) => <td key={c} style={{ ...cell, background: r === row ? 'var(--surface2)' : 'transparent' }}>{v}</td>)}</tr>)}</tbody>
       </table>
       <table aria-label="Best totals by robot columns" style={{ borderCollapse: 'collapse' }}>
         <thead><tr><th style={cell}>a \ b</th>{table.map((_, b) => <th key={b} style={cell}>{b}</th>)}</tr></thead>
-        <tbody>{table.map((line, a) => <tr key={a}><th style={cell}>{a}</th>{line.map((v, b) => <td key={b} style={{ ...cell, background: v !== null && v === best ? '#bbf7d0' : 'transparent' }}>{v === null ? '-' : v}</td>)}</tr>)}</tbody>
+        <tbody>{table.map((line, a) => <tr key={a}><th style={cell}>{a}</th>{line.map((v, b) => <td key={b} style={{ ...cell, background: v !== null && v === best ? 'var(--surface2)' : 'transparent' }}>{v === null ? '-' : v}</td>)}</tr>)}</tbody>
       </table>
       <p>{`Row ${row} is the current row. Best total: ${best}.`}</p>
     </>

@@ -41,8 +41,8 @@ export default function MinimumStartingVertices() {
           const isTarget = edge && edge[1] === v
           return <div key={v} data-vertex={v} style={{
             minWidth: 64, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
-            border: `${isSource || isTarget ? 2 : 1}px solid ${isSource ? '#0891b2' : 'var(--border)'}`,
-            background: isSource ? '#a5f3fc' : isTarget ? 'var(--surface2)' : 'transparent', color: 'var(--text)',
+            border: `${isSource || isTarget ? 2 : 1}px solid ${isSource ? 'var(--primary)' : 'var(--border)'}`,
+            background: isSource ? 'var(--surface2)' : isTarget ? 'var(--surface2)' : 'transparent', color: 'var(--text)',
           }}><div>vertex {v}</div><small>arrows in: {indegree[v]}</small></div>
         })}
       </div>

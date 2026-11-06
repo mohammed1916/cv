@@ -262,19 +262,19 @@ export default function ReorderListVisualizer() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  backgroundColor: "var(--recovered-surface-dbeafe, #dbeafe)",
-                  border: "1px solid #0ea5e9",
+                  backgroundColor: "var(--surface2, var(--surface2))",
+                  border: "1px solid var(--primary)",
                   borderRadius: 4,
                   fontSize: 12,
                   fontWeight: "bold",
-                  color: "var(--text-on-light)",
+                  color: "var(--text)",
                 }}
               >
                 {v}
               </motion.div>
 
               {i < displayList.length - 1 && (
-                <span style={{ color: "var(--recovered-ink-5a779b, #5a779b)" }}>→</span>
+                <span style={{ color: "var(--text, var(--text))" }}>→</span>
               )}
             </div>
           ))}
@@ -291,7 +291,7 @@ export default function ReorderListVisualizer() {
             <div
               style={{
                 padding: 8,
-                backgroundColor: "var(--recovered-surface-dbeafe, #dbeafe)",
+                backgroundColor: "var(--surface2, var(--surface2))",
                 borderRadius: 6,
               }}
             >
@@ -299,7 +299,7 @@ export default function ReorderListVisualizer() {
                 style={{
                   fontSize: 11,
                   fontWeight: 600,
-                  color: "#1e40af",
+                  color: "var(--text)",
                   marginBottom: 4,
                 }}
               >
@@ -322,12 +322,12 @@ export default function ReorderListVisualizer() {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      backgroundColor: "var(--recovered-surface-f0f9ff, #f0f9ff)",
-                      border: "1px solid #0ea5e9",
+                      backgroundColor: "var(--surface2, var(--surface2))",
+                      border: "1px solid var(--primary)",
                       borderRadius: 3,
                       fontSize: 11,
                       fontWeight: "bold",
-                      color: "#1e40af",
+                      color: "var(--text)",
                     }}
                   >
                     {v}
@@ -339,7 +339,7 @@ export default function ReorderListVisualizer() {
             <div
               style={{
                 padding: 8,
-                backgroundColor: "var(--recovered-surface-fee2e2, #fee2e2)",
+                backgroundColor: "var(--surface2, var(--surface2))",
                 borderRadius: 6,
               }}
             >
@@ -347,7 +347,7 @@ export default function ReorderListVisualizer() {
                 style={{
                   fontSize: 11,
                   fontWeight: 600,
-                  color: "#991b1b",
+                  color: "var(--text)",
                   marginBottom: 4,
                 }}
               >
@@ -370,12 +370,12 @@ export default function ReorderListVisualizer() {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      backgroundColor: "var(--recovered-surface-fecaca, #fecaca)",
-                      border: "1px solid #fca5a5",
+                      backgroundColor: "var(--surface2, var(--surface2))",
+                      border: "1px solid var(--error)",
                       borderRadius: 3,
                       fontSize: 11,
                       fontWeight: "bold",
-                      color: "#991b1b",
+                      color: "var(--text)",
                     }}
                   >
                     {v}

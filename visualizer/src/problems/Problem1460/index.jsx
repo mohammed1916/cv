@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 const definition = {
   number: '1460',
@@ -17,17 +18,20 @@ const definition = {
 const sign = n => (n > 0 ? `+${n}` : String(n))
 
 export default function ReverseToEqual() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { entries, side, index, mismatch } = step.snapshot
+    const { target, arr } = run.input
     const sorted = [...entries].sort((a, b) => a.value - b.value)
     return <>
+      <IndexedSequence label="target" length={target.length} valueAt={i => target[i]} active={side === 'target' ? index : -1} />
+      <IndexedSequence label="arr" length={arr.length} valueAt={i => arr[i]} active={side === 'arr' ? index : -1} />
       <p>{side === null ? 'Balances after the passes so far.' : `Reading ${side === 'target' ? 'target' : 'arr'}[${index}].`}</p>
       <table aria-label="Balance per value" style={{ borderCollapse: 'collapse', fontFamily: 'monospace' }}>
         <thead><tr><th>value</th><th>target minus arr so far</th><th>zero?</th></tr></thead>
         <tbody>
           {sorted.length === 0 && <tr><td colSpan={3}>no values yet</td></tr>}
           {sorted.map(({ value, count }) => <tr key={value} style={{
-            background: mismatch && mismatch.value === value ? '#fecaca' : 'transparent',
+            background: mismatch && mismatch.value === value ? 'var(--surface2)' : 'transparent',
           }}>
             <td style={{ padding: '2px 10px' }}>{value}</td>
             <td style={{ padding: '2px 10px', textAlign: 'right' }}>{sign(count)}</td>

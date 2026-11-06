@@ -25,7 +25,7 @@
     font-size: 13px;
     font-weight: 700;
     color: var(--text);
-    background: var(--surface3);
+    background: var(--surface2);
     flex-shrink: 0;
     display: flex;
     justify-content: space-between;
@@ -33,7 +33,7 @@
 }
 
 .fmr-error {
-    color: var(--recovered-ink-ea0c0c, #ea0c0c);
+    color: var(--text, var(--text));
     font-size: 12px;
     font-weight: 400;
 }
@@ -62,7 +62,7 @@
 .fmr-chip {
     border: 1px solid var(--border);
     color: var(--text-muted);
-    background: var(--recovered-surface-rgba30415908, rgba(30, 41, 59, 0.8));
+    background: var(--surface2, var(--surface2));
     border-radius: 999px;
     padding: 4px 12px;
     font-size: 12px;
@@ -91,7 +91,7 @@
     padding: 7px 11px;
     border-radius: 7px;
     border: 1px solid var(--border);
-    background: var(--code-bg);
+    background: var(--surface2);
     color: var(--text);
     font-family: monospace;
     font-size: 13px;
@@ -135,28 +135,28 @@
 }
 
 .fmr-cell.lo {
-    border-color: var(--info);
-    background: rgba(56, 189, 248, 0.12);
-    color: var(--info);
+    border-color: var(--primary);
+    background: var(--surface2);
+    color: var(--primary);
 }
 
 .fmr-cell.hi {
-    border-color: #a855f7;
-    background: rgba(168, 85, 247, 0.12);
-    color: var(--recovered-ink-c084fc, #c084fc);
+    border-color: var(--primary);
+    background: var(--surface2);
+    color: var(--text, var(--text));
 }
 
 .fmr-cell.lohi {
-    border-color: var(--warning);
-    background: rgba(251, 191, 36, 0.12);
-    color: var(--warning);
+    border-color: var(--primary);
+    background: var(--surface2);
+    color: var(--primary);
 }
 
 .fmr-cell.mid {
-    border-color: var(--warning);
-    background: rgba(251, 191, 36, 0.15);
-    color: var(--warning);
-    box-shadow: 0 0 10px rgba(251, 191, 36, 0.25);
+    border-color: var(--primary);
+    background: var(--surface2);
+    color: var(--primary);
+    box-shadow: 0 0 10px var(--primary);
 }
 
 .fmr-cell.elim {
@@ -165,9 +165,9 @@
 
 .fmr-cell.result {
     border-color: var(--success);
-    background: rgba(34, 197, 94, 0.15);
+    background: var(--surface2);
     color: var(--success);
-    box-shadow: 0 0 14px var(--success-glow);
+    box-shadow: 0 0 14px var(--success);
 }
 
 .fmr-idx {
@@ -192,18 +192,18 @@
 }
 
 .fmr-lo {
-    background: rgba(56, 189, 248, 0.2);
-    color: var(--info);
+    background: var(--surface2);
+    color: var(--primary);
 }
 
 .fmr-hi {
-    background: rgba(168, 85, 247, 0.2);
-    color: var(--recovered-ink-c084fc, #c084fc);
+    background: var(--surface2);
+    color: var(--text, var(--text));
 }
 
 .fmr-mid {
-    background: rgba(251, 191, 36, 0.2);
-    color: var(--warning);
+    background: var(--surface2);
+    color: var(--primary);
 }
 
 /* ── Compare box ── */
@@ -215,22 +215,22 @@
 }
 
 .fmr-compare.right {
-    background: rgba(56, 189, 248, 0.08);
-    border: 1px solid rgba(56, 189, 248, 0.25);
-    color: var(--info);
+    background: var(--surface2);
+    border: 1px solid var(--primary);
+    color: var(--primary);
 }
 
 .fmr-compare.left {
-    background: rgba(168, 85, 247, 0.08);
-    border: 1px solid rgba(168, 85, 247, 0.25);
-    color: var(--recovered-ink-c084fc, #c084fc);
+    background: var(--surface2);
+    border: 1px solid var(--primary);
+    color: var(--text, var(--text));
 }
 
 /* ── Result ── */
 .fmr-result {
     padding: 10px 14px;
-    background: rgba(34, 197, 94, 0.12);
-    border: 1px solid rgba(34, 197, 94, 0.3);
+    background: var(--surface2);
+    border: 1px solid var(--success);
     border-radius: 8px;
     color: var(--success);
     font-size: 16px;
@@ -241,7 +241,7 @@
 /* ── Status ── */
 .fmr-status {
     padding: 8px 14px;
-    background: var(--surface3);
+    background: var(--surface2);
     border: 1px solid var(--border);
     border-radius: 8px;
     font-size: 13px;
@@ -251,5 +251,5 @@
 
 .fmr-status.ok {
     color: var(--success);
-    border-color: rgba(34, 197, 94, 0.3);
+    border-color: var(--success);
 }

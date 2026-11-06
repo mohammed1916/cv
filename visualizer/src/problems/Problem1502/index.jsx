@@ -15,7 +15,7 @@ const definition = {
 }
 
 const MATCH = 'color-mix(in srgb, var(--success) 35%, var(--surface2))'
-const MISMATCH = 'color-mix(in srgb, var(--warning) 45%, var(--surface2))'
+const MISMATCH = 'color-mix(in srgb, var(--primary) 45%, var(--surface2))'
 
 export default function ArithmeticFromSequence() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {

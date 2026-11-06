@@ -14,8 +14,6 @@ const definition = {
   ],
 }
 
-const GOOD = 'color-mix(in srgb, var(--success) 35%, var(--surface2))'
-const BAD = 'color-mix(in srgb, var(--danger, var(--warning)) 40%, var(--surface2))'
 
 export default function PairsDivisibleByK() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
@@ -41,7 +39,8 @@ export default function PairsDivisibleByK() {
           <tbody>
             <tr><th style={cellStyle}>count</th>{counts.map((c, r) => <td key={r} style={{
               ...cellStyle,
-              background: r === remainder || r === partner ? (ok === false ? BAD : GOOD) : 'transparent',
+              background: r === remainder || r === partner ? 'var(--surface2)' : 'transparent',
+              border: `${r === remainder || r === partner ? 2 : 1}px solid ${r === remainder || r === partner ? (ok === false ? 'var(--error)' : 'var(--success)') : 'var(--border)'}`,
             }}>{c}</td>)}</tr>
             <tr><th style={cellStyle}>partner</th>{counts.map((_, r) => <td key={r} style={cellStyle}>{(k - r) % k}</td>)}</tr>
           </tbody>

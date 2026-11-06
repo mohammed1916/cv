@@ -59,7 +59,7 @@
 .ms-chip {
     border: 1px solid var(--border);
     color: var(--text-muted);
-    background: var(--recovered-surface-rgba30415908, rgba(30, 41, 59, 0.8));
+    background: var(--surface2, var(--surface2));
     border-radius: 999px;
     padding: 4px 12px;
     font-size: 12px;
@@ -92,7 +92,7 @@
     padding: 7px 10px;
     border-radius: 7px;
     border: 1px solid var(--border);
-    background: var(--code-bg);
+    background: var(--surface2);
     color: var(--text);
     font-family: monospace;
     font-size: 13px;
@@ -115,31 +115,31 @@
 }
 
 .ms-op-btn.push {
-    background: rgba(56, 189, 248, 0.1);
-    color: var(--info);
-    border-color: rgba(56, 189, 248, 0.3);
+    background: var(--surface2);
+    color: var(--primary);
+    border-color: var(--primary);
 }
 
 .ms-op-btn.pop {
-    background: rgba(248, 113, 113, 0.1);
+    background: var(--surface2);
     color: var(--error);
-    border-color: rgba(248, 113, 113, 0.3);
+    border-color: var(--error);
 }
 
 .ms-op-btn.top {
-    background: rgba(251, 191, 36, 0.1);
-    color: var(--warning);
-    border-color: rgba(251, 191, 36, 0.3);
+    background: var(--surface2);
+    color: var(--primary);
+    border-color: var(--error);
 }
 
 .ms-op-btn.min {
-    background: rgba(168, 85, 247, 0.1);
-    color: var(--recovered-ink-c084fc, #c084fc);
-    border-color: rgba(168, 85, 247, 0.3);
+    background: var(--surface2);
+    color: var(--text, var(--text));
+    border-color: var(--primary);
 }
 
 .ms-op-btn.reset {
-    background: var(--recovered-surface-rgba30415908, rgba(30, 41, 59, 0.8));
+    background: var(--surface2, var(--surface2));
     color: var(--text-dim);
 }
 
@@ -162,28 +162,28 @@
     font-weight: 600;
     font-family: monospace;
     border: 1px solid var(--border);
-    background: var(--recovered-surface-rgba30415906, rgba(30, 41, 59, 0.6));
+    background: var(--surface2, var(--surface2));
     color: var(--text-muted);
 }
 
 .ms-op-tag.push {
-    color: var(--info);
-    border-color: rgba(56, 189, 248, 0.2);
+    color: var(--primary);
+    border-color: var(--primary);
 }
 
 .ms-op-tag.pop {
     color: var(--error);
-    border-color: rgba(248, 113, 113, 0.2);
+    border-color: var(--error);
 }
 
 .ms-op-tag.top {
-    color: var(--warning);
-    border-color: rgba(251, 191, 36, 0.2);
+    color: var(--primary);
+    border-color: var(--error);
 }
 
 .ms-op-tag.getMin {
-    color: var(--recovered-ink-9d40fa, #9d40fa);
-    border-color: rgba(168, 85, 247, 0.2);
+    color: var(--text, var(--text));
+    border-color: var(--primary);
 }
 
 /* ── Stacks ── */
@@ -214,7 +214,7 @@
     gap: 4px;
     min-height: 80px;
     min-width: 100px;
-    background: var(--recovered-surface-rgba15234205, rgba(15, 23, 42, 0.5));
+    background: var(--surface2, var(--surface2));
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 8px;
@@ -222,7 +222,7 @@
 }
 
 .ms-stack-box.min-box {
-    border-color: rgba(168, 85, 247, 0.25);
+    border-color: var(--primary);
 }
 
 .ms-cell {
@@ -243,24 +243,24 @@
 }
 
 .ms-cell.top {
-    border-color: var(--info);
-    background: rgba(56, 189, 248, 0.1);
+    border-color: var(--primary);
+    background: var(--surface2);
 }
 
 .ms-cell.highlight {
-    border-color: var(--warning);
-    background: rgba(251, 191, 36, 0.1);
+    border-color: var(--primary);
+    background: var(--surface2);
 }
 
 .ms-cell.min-cell.top {
-    border-color: #a855f7;
-    background: rgba(168, 85, 247, 0.1);
+    border-color: var(--primary);
+    background: var(--surface2);
 }
 
 .ms-cell.highlight-min {
-    border-color: #a855f7;
-    background: rgba(168, 85, 247, 0.18);
-    box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
+    border-color: var(--primary);
+    background: var(--surface2);
+    box-shadow: 0 0 10px var(--primary);
 }
 
 .ms-top-badge {
@@ -268,8 +268,8 @@
     font-weight: 700;
     padding: 1px 5px;
     border-radius: 4px;
-    background: rgba(56, 189, 248, 0.2);
-    color: var(--info);
+    background: var(--surface2);
+    color: var(--primary);
     text-transform: uppercase;
 }
 
@@ -278,8 +278,8 @@
     font-weight: 700;
     padding: 1px 5px;
     border-radius: 4px;
-    background: rgba(168, 85, 247, 0.2);
-    color: var(--recovered-ink-c084fc, #c084fc);
+    background: var(--surface2);
+    color: var(--text, var(--text));
     text-transform: uppercase;
 }
 
@@ -312,22 +312,22 @@
 }
 
 .ms-result-box.top-result {
-    border-color: var(--warning);
-    background: rgba(251, 191, 36, 0.12);
-    color: var(--warning);
+    border-color: var(--primary);
+    background: var(--surface2);
+    color: var(--primary);
 }
 
 .ms-result-box.min-result {
-    border-color: #a855f7;
-    background: rgba(168, 85, 247, 0.12);
-    color: var(--recovered-ink-c084fc, #c084fc);
-    box-shadow: 0 0 14px rgba(168, 85, 247, 0.3);
+    border-color: var(--primary);
+    background: var(--surface2);
+    color: var(--text, var(--text));
+    box-shadow: 0 0 14px var(--primary);
 }
 
 /* ── Status ── */
 .ms-status {
     padding: 8px 14px;
-    background: var(--surface3);
+    background: var(--surface2);
     border: 1px solid var(--border);
     border-radius: 8px;
     font-size: 13px;

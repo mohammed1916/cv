@@ -1,4 +1,5 @@
 import './LargeIndexView.css'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 
 // Values stay hidden, as in the reader problem; only ranges, comparisons and the answer are drawn.
 export default function LargeIndexView({ run, step }) {
@@ -19,10 +20,12 @@ export default function LargeIndexView({ run, step }) {
           const role = roleOf(i)
           return <li key={i} className={`large-index__cell large-index__cell--${role}`} aria-label={`index ${i}, ${role}`}>
             <span className="large-index__index">{i}</span>
+            <span className="large-index__ptrs" aria-hidden="true">{[step.lo === i && 'lo', step.hi === i && 'hi'].filter(Boolean).join('/')}</span>
             <span className="large-index__value" aria-hidden="true">?</span>
           </li>
         })}
       </ol>
+      <AnswerRangeBar title="Index search range" min={0} max={Math.max(0, n - 1)} low={step.lo} high={step.hi} />
       <div className="large-index__compare" role="status">
         <span>{step.left ? `sum[${step.left[0]}..${step.left[1]}]` : 'no comparison yet'}</span>
         <strong aria-label={`comparison ${symbol}`}>{symbol}</strong>

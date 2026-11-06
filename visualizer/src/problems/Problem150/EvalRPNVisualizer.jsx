@@ -113,7 +113,7 @@ export default function EvalRPNVisualizer() {
             </div>
 
             <input style={{ padding: '8px', borderRadius: 4, border: '1px solid var(--border)', fontSize: 12, fontFamily: 'monospace' }} value={input} onChange={(e) => { setInput(e.target.value); handleReset(); }} placeholder='["2","1","+","3","*"]' />
-            {err && <div style={{ padding: 8, backgroundColor: "var(--recovered-surface-fee2e2, #fee2e2)", color: '#991b1b', borderRadius: 4, fontSize: 12 }}>{err}</div>}
+            {err && <div style={{ padding: 8, backgroundColor: "var(--surface2, var(--surface2))", color: 'var(--text)', borderRadius: 4, fontSize: 12 }}>{err}</div>}
 
             <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 4 }}>Tokens</div>
             <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', minHeight: 40 }}>
@@ -123,9 +123,9 @@ export default function EvalRPNVisualizer() {
                     return (
                         <motion.div key={i} animate={{ scale: isCurrent ? 1.3 : 1 }} style={{
                             padding: '6px 10px',
-                            backgroundColor: isOp ? "var(--recovered-surface-fee2e2, #fee2e2)" : "var(--recovered-surface-dbeafe, #dbeafe)",
-                            border: isCurrent ? '3px solid #0ea5e9' : '1px solid var(--border)',
-                            borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: isOp ? '#991b1b' : '#1e3a8a'
+                            backgroundColor: isOp ? "var(--surface2, var(--surface2))" : "var(--surface2, var(--surface2))",
+                            border: isCurrent ? '3px solid var(--primary)' : '1px solid var(--border)',
+                            borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: isOp ? 'var(--text)' : 'var(--text)'
                         }}>
                             {t}
                         </motion.div>
@@ -139,9 +139,9 @@ export default function EvalRPNVisualizer() {
                     {(step?.stack ?? []).map((v, i) => (
                         <motion.div key={`${i}-${v}`} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} style={{
                             padding: '8px 12px',
-                            backgroundColor: i === (step?.stack?.length ?? 0) - 1 ? "var(--recovered-surface-dbeafe, #dbeafe)" : "var(--recovered-surface-f3f4f6, #f3f4f6)",
-                            border: i === (step?.stack?.length ?? 0) - 1 ? '2px solid #0ea5e9' : '1px solid var(--border)',
-                            borderRadius: 4, fontSize: 14, fontWeight: 'bold', color: 'var(--text-on-light)'
+                            backgroundColor: i === (step?.stack?.length ?? 0) - 1 ? "var(--surface2, var(--surface2))" : "var(--surface2, var(--surface2))",
+                            border: i === (step?.stack?.length ?? 0) - 1 ? '2px solid var(--primary)' : '1px solid var(--border)',
+                            borderRadius: 4, fontSize: 14, fontWeight: 'bold', color: 'var(--text)'
                         }}>
                             {v}
                         </motion.div>
@@ -151,9 +151,9 @@ export default function EvalRPNVisualizer() {
             </div>
 
             {step?.a != null && (
-                <div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fef3c7, #fef3c7)", borderRadius: 6, border: '1px solid #fcd34d', display: 'flex', gap: 8, alignItems: 'center', justifyContent: 'center', fontSize: 16, fontWeight: 'bold' }}>
+                <div style={{ padding: 12, backgroundColor: "var(--surface2, var(--surface2))", borderRadius: 6, border: '1px solid var(--error)', display: 'flex', gap: 8, alignItems: 'center', justifyContent: 'center', fontSize: 16, fontWeight: 'bold' }}>
                     <span>{step.a}</span>
-                    <span style={{ color: "var(--recovered-ink-a36907, #a36907)" }}>{step.op}</span>
+                    <span style={{ color: "var(--text, var(--text))" }}>{step.op}</span>
                     <span>{step.b}</span>
                 </div>
             )}

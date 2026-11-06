@@ -285,7 +285,7 @@ function TreeVisualization({ root, currentNode, processedIds }) {
             y1={edge.y1}
             x2={edge.x2}
             y2={edge.y2}
-            stroke="var(--text-muted, #94a3b8)"
+            stroke="var(--text-muted, var(--text))"
             strokeWidth={3}
             strokeLinecap="round"
           />
@@ -304,17 +304,17 @@ function TreeVisualization({ root, currentNode, processedIds }) {
                 r={22}
                 fill={
                   isCurrent
-                    ? "var(--recovered-ink-fbbf24, #fbbf24)"
+                    ? "var(--text, var(--text))"
                     : isProcessed
-                      ? "var(--recovered-ink-ec4899, #ec4899)"
-                      : "var(--surface-raised, #64748b)"
+                      ? "var(--text, var(--text))"
+                      : "var(--surface2, var(--text))"
                 }
                 stroke={
                   isCurrent
-                    ? "var(--recovered-ink-d97706, #d97706)"
+                    ? "var(--text, var(--text))"
                     : isProcessed
-                      ? "#be185d"
-                      : "var(--border, #cbd5e1)"
+                      ? "var(--text)"
+                      : "var(--border, var(--text))"
                 }
                 strokeWidth={isCurrent ? 3 : 2}
                 animate={{ scale: isCurrent ? 1.15 : 1 }}
@@ -329,8 +329,8 @@ function TreeVisualization({ root, currentNode, processedIds }) {
                 fontWeight={700}
                 fill={
                   isCurrent || isProcessed
-                    ? "var(--text-on-dark)"
-                    : "var(--text-inverse, #ffffff)"
+                    ? "var(--text)"
+                    : "var(--text, var(--text))"
                 }
                 style={{ pointerEvents: "none", userSelect: "none" }}
               >
@@ -346,7 +346,7 @@ function TreeVisualization({ root, currentNode, processedIds }) {
 
 function VisualizationPanel({ step, root }) {
   if (!step)
-    return <div style={{ padding: 16, color: "var(--recovered-ink-627794, #627794)" }}>Press play</div>;
+    return <div style={{ padding: 16, color: "var(--text, var(--text))" }}>Press play</div>;
 
   return (
     <div
@@ -355,12 +355,12 @@ function VisualizationPanel({ step, root }) {
       <div
         style={{
           padding: 12,
-          backgroundColor: "var(--recovered-surface-fbcfe8, #fbcfe8)",
+          backgroundColor: "var(--surface2, var(--surface2))",
           borderRadius: 6,
-          borderLeft: "4px solid #ec4899",
+          borderLeft: "4px solid var(--error)",
         }}
       >
-        <div style={{ fontSize: 12, color: "#831843", fontStyle: "italic" }}>
+        <div style={{ fontSize: 12, color: "var(--text)", fontStyle: "italic" }}>
           Two-stack postorder: reverse the preorder result to get postorder.
         </div>
       </div>
@@ -373,7 +373,7 @@ function VisualizationPanel({ step, root }) {
 
       {step.stack1 && step.stack1.length > 0 && (
         <motion.div
-          style={{ padding: 12, backgroundColor: "var(--recovered-surface-dbeafe, #dbeafe)", borderRadius: 6 }}
+          style={{ padding: 12, backgroundColor: "var(--surface2, var(--surface2))", borderRadius: 6 }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
@@ -381,7 +381,7 @@ function VisualizationPanel({ step, root }) {
             style={{
               fontSize: 12,
               fontWeight: 600,
-              color: "#0c4a6e",
+              color: "var(--text)",
               marginBottom: 8,
             }}
           >
@@ -393,11 +393,11 @@ function VisualizationPanel({ step, root }) {
                 key={idx}
                 style={{
                   padding: "4px 8px",
-                  backgroundColor: "var(--recovered-surface-a5b4fc, #a5b4fc)",
+                  backgroundColor: "var(--surface2, var(--surface2))",
                   borderRadius: 3,
                   fontSize: 11,
                   fontWeight: 600,
-                  color: "#1e1b4b",
+                  color: "var(--text)",
                 }}
               >
                 {node.val}
@@ -409,7 +409,7 @@ function VisualizationPanel({ step, root }) {
 
       {step.stack2 && step.stack2.length > 0 && (
         <motion.div
-          style={{ padding: 12, backgroundColor: "var(--recovered-surface-fbcfe8, #fbcfe8)", borderRadius: 6 }}
+          style={{ padding: 12, backgroundColor: "var(--surface2, var(--surface2))", borderRadius: 6 }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
@@ -417,7 +417,7 @@ function VisualizationPanel({ step, root }) {
             style={{
               fontSize: 12,
               fontWeight: 600,
-              color: "#831843",
+              color: "var(--text)",
               marginBottom: 8,
             }}
           >
@@ -430,8 +430,8 @@ function VisualizationPanel({ step, root }) {
                 style={{
                   padding: "4px 8px",
                   backgroundColor:
-                    "color-mix(in srgb, #f472b6 24%, var(--surface))",
-                  border: "1px solid #ec4899",
+                    "color-mix(in srgb, var(--text) 24%, var(--surface))",
+                  border: "1px solid var(--error)",
                   borderRadius: 3,
                   fontSize: 11,
                   fontWeight: 600,
@@ -447,7 +447,7 @@ function VisualizationPanel({ step, root }) {
 
       {step.result && step.result.length > 0 && (
         <motion.div
-          style={{ padding: 12, backgroundColor: "var(--recovered-surface-dcfce7, #dcfce7)", borderRadius: 6 }}
+          style={{ padding: 12, backgroundColor: "var(--surface2, var(--surface2))", borderRadius: 6 }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
@@ -455,14 +455,14 @@ function VisualizationPanel({ step, root }) {
             style={{
               fontSize: 12,
               fontWeight: 600,
-              color: "#065f46",
+              color: "var(--text)",
               marginBottom: 8,
             }}
           >
             Result
           </div>
           <div
-            style={{ fontSize: 12, color: "#065f46", fontFamily: "monospace" }}
+            style={{ fontSize: 12, color: "var(--text)", fontFamily: "monospace" }}
           >
             {step.result.join(" → ")}
           </div>
@@ -473,10 +473,10 @@ function VisualizationPanel({ step, root }) {
         <motion.div
           style={{
             padding: 12,
-            backgroundColor: "var(--recovered-surface-fef3c7, #fef3c7)",
+            backgroundColor: "var(--surface2, var(--surface2))",
             borderRadius: 6,
             fontSize: 12,
-            color: "#92400e",
+            color: "var(--text)",
           }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -610,7 +610,7 @@ export default function BinaryTreePostorderTraversalVisualizer() {
   const statusPanel = (
     <div className="btp-status">
       {step?.message && (
-        <div style={{ fontSize: 13, color: "var(--recovered-ink-627794, #627794)", padding: "8px 12px" }}>
+        <div style={{ fontSize: 13, color: "var(--text, var(--text))", padding: "8px 12px" }}>
           {step.message}
         </div>
       )}

@@ -21,7 +21,7 @@ export default function MinIncrements() {
     return <>
       <div role="img" aria-label="Target heights as columns" style={{ display: 'flex', alignItems: 'flex-end', gap: 8, height: 180 }}>
         {heights.map((h, i) => <div key={i} data-index={i} style={{ width: 44, textAlign: 'center', fontFamily: 'monospace' }}>
-          <div style={{ height: `${(h / max) * 140}px`, background: i === index ? '#0891b2' : i < (index ?? -1) ? '#a5f3fc' : 'var(--surface2)', border: '1px solid var(--border)', boxSizing: 'border-box' }} />
+          <div style={{ height: `${(h / max) * 140}px`, background: i === index ? 'var(--surface2)' : i < (index ?? -1) ? 'var(--surface2)' : 'var(--surface2)', border: '1px solid var(--border)', boxSizing: 'border-box' }} />
           <div>{h}</div><small>{i}</small>
         </div>)}
       </div>

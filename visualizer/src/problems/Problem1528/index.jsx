@@ -20,12 +20,12 @@ export default function ShuffleString() {
     return <>
       <div role="img" aria-label="Letters in their original order" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {s.split('').map((ch, k) => <div key={k} style={{ width: 40, textAlign: 'center', fontFamily: 'monospace', border: `${k === i ? 2 : 1}px solid ${k === i ? 'var(--text)' : 'var(--border)'}`, padding: 4, boxSizing: 'border-box', background: k === i ? 'var(--surface2)' : 'transparent' }}>
-          <div>{ch}</div><small>from {k}</small><br /><small>to {indices[k]}</small>
+          <div>{ch}</div><small>from {k}{k === i ? ' (i)' : ''}</small><br /><small>to {indices[k]}</small>
         </div>)}
       </div>
       <p>Slots by destination:</p>
       <div role="img" aria-label="Destination slots" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        {slots.map((ch, k) => <div key={k} style={{ width: 40, textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', padding: 4, boxSizing: 'border-box', background: ch ? '#a5f3fc' : 'transparent', color: 'var(--text)' }}>
+        {slots.map((ch, k) => <div key={k} style={{ width: 40, textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', padding: 4, boxSizing: 'border-box', background: ch ? 'var(--surface2)' : 'transparent', color: 'var(--text)' }}>
           <div>{ch ?? '·'}</div><small>{k}</small>
         </div>)}
       </div>

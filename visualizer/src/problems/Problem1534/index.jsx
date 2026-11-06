@@ -21,7 +21,7 @@ export default function CountGoodTriplets() {
     return <>
       <div role="img" aria-label="Values with the current triple highlighted" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {arr.map((v, idx) => <div key={idx} style={{ width: 48, textAlign: 'center', fontFamily: 'monospace', padding: 6, boxSizing: 'border-box', border: `${picked.has(idx) ? 2 : 1}px solid ${picked.has(idx) ? 'var(--text)' : 'var(--border)'}`, background: picked.has(idx) ? 'var(--surface2)' : 'transparent' }}>
-          <div>{v}</div><small>{idx}</small>
+          <div>{v}</div><small>{idx}</small><div style={{ fontSize: 11, fontWeight: 700, color: 'var(--text)', minHeight: 14 }}>{[i === idx && 'i', j === idx && 'j', k === idx && 'k'].filter(Boolean).join(' ')}</div>
         </div>)}
       </div>
       {checks ? <ul>

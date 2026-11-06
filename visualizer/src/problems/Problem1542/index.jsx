@@ -26,7 +26,7 @@ export default function AwesomeSubstring() {
             minWidth: 36, padding: '6px 8px', textAlign: 'center', fontFamily: 'monospace', color: 'var(--text)',
             border: `${i === r - 1 ? 2 : 1}px solid ${i === r - 1 ? 'var(--text)' : 'var(--border)'}`,
             background: inBest ? 'var(--surface2)' : 'transparent',
-          }}>{ch}</div>
+          }}><div>{ch}</div><small>{i}</small><div style={{ fontSize: 11, fontWeight: 700, color: 'var(--text)', minHeight: 14 }}>{[i === r - 1 && 'r', i === from && span[0] !== span[1] && 'l'].filter(Boolean).join(' ')}</div></div>
         })}
       </div>
       <p>{`Prefix mask: ${(mask ?? 0).toString(2).padStart(10, '0')}. Best length so far: ${best}.`}</p>

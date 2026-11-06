@@ -24,7 +24,7 @@ export default function ShiftMoves() {
         <tbody>{[...s].map((ch, index) => {
           const shift = (t.charCodeAt(index) - ch.charCodeAt(0) + 26) % 26
           return <tr key={index} style={{ background: index === i ? 'var(--surface2)' : 'transparent' }}>
-            <td>{index}</td><td>{ch}</td><td>{t[index]}</td><td>{shift}</td>
+            <td>{index}{index === i ? ' (i)' : ''}</td><td>{ch}</td><td>{t[index]}</td><td>{shift}</td>
           </tr>
         })}</tbody>
       </table>

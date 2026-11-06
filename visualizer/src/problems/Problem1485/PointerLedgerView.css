@@ -3,6 +3,6 @@
 .pl-view th, .pl-view td { border: 1px solid var(--border); padding: 4px 6px; text-align: center; }
 .pl-view thead th { background: var(--surface2); }
 .pl-row--copied td:last-child { background: color-mix(in srgb, var(--success) 25%, var(--surface)); font-weight: 600; }
-.pl-row--now { background: color-mix(in srgb, var(--warning) 30%, var(--surface)); }
+.pl-row--now { background: color-mix(in srgb, var(--primary) 30%, var(--surface)); }
 .pl-row--now th, .pl-row--now td { font-weight: 700; }
 .pl-view figcaption { font-size: 13px; margin-top: 6px; }

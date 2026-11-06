@@ -22,8 +22,8 @@
 }
 
 .rpn-chip {
-    background: var(--code-line);
-    color: var(--code-text);
+    background: var(--border);
+    color: var(--text);
     border: none;
     border-radius: 6px;
     padding: 4px 10px;
@@ -32,13 +32,13 @@
 }
 
 .rpn-chip:hover {
-    background: var(--code-line);
+    background: var(--border);
 }
 
 .rpn-input {
-    background: var(--code-surface);
-    color: var(--code-text);
-    border: 1px solid var(--code-line);
+    background: var(--surface2);
+    color: var(--text);
+    border: 1px solid var(--border);
     border-radius: 6px;
     padding: 6px 10px;
     font-size: 13px;
@@ -46,13 +46,13 @@
 }
 
 .rpn-error {
-    color: var(--recovered-ink-e51851, #e51851);
+    color: var(--text, var(--text));
     font-size: 12px;
 }
 
 .rpn-panel {
-    background: var(--code-bg);
-    border: 1px solid var(--code-line);
+    background: var(--surface2);
+    border: 1px solid var(--border);
     border-radius: 10px;
     padding: 12px 14px;
 }
@@ -60,7 +60,7 @@
 .rpn-panel-label {
     font-size: 11px;
     font-weight: 700;
-    color: var(--code-dim);
+    color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: 10px;
@@ -81,29 +81,29 @@
     font-size: 16px;
     font-weight: 700;
     border-radius: 8px;
-    border: 2px solid var(--code-line);
-    background: var(--code-line);
-    color: var(--code-text);
+    border: 2px solid var(--border);
+    background: var(--border);
+    color: var(--text);
     font-family: monospace;
 }
 
 .rpn-token.op {
-    border-color: #f9e2af;
-    color: var(--recovered-ink-f9e2af, #f9e2af);
-    background: var(--recovered-surface-1e1800, #1e1800);
+    border-color: var(--border);
+    color: var(--text, var(--text));
+    background: var(--surface2, var(--surface2));
 }
 
 .rpn-token.num {
-    border-color: #89b4fa;
-    color: var(--recovered-ink-89b4fa, #89b4fa);
-    background: var(--recovered-surface-0d1424, #0d1424);
+    border-color: var(--primary);
+    color: var(--text, var(--text));
+    background: var(--surface2, var(--surface2));
 }
 
 .rpn-token.current {
-    box-shadow: 0 0 12px #a6e3a166;
-    border-color: #a6e3a1;
-    color: var(--recovered-ink-a6e3a1, #a6e3a1);
-    background: var(--recovered-surface-0d1f14, #0d1f14);
+    box-shadow: 0 0 12px var(--primary);
+    border-color: var(--success);
+    color: var(--text, var(--text));
+    background: var(--surface2, var(--surface2));
 }
 
 .rpn-stack-row {
@@ -123,21 +123,21 @@
     font-size: 18px;
     font-weight: 700;
     border-radius: 8px;
-    border: 2px solid var(--code-line);
-    background: var(--code-line);
-    color: var(--code-text);
+    border: 2px solid var(--border);
+    background: var(--border);
+    color: var(--text);
     font-family: monospace;
 }
 
 .rpn-stack-cell.top {
-    border-color: #a6e3a1;
-    color: var(--recovered-ink-a6e3a1, #a6e3a1);
-    background: var(--recovered-surface-0d1f14, #0d1f14);
-    box-shadow: 0 0 10px #a6e3a144;
+    border-color: var(--success);
+    color: var(--text, var(--text));
+    background: var(--surface2, var(--surface2));
+    box-shadow: 0 0 10px var(--primary);
 }
 
 .rpn-empty {
-    color: var(--code-line);
+    color: var(--border);
     font-size: 14px;
     font-style: italic;
     align-self: center;
@@ -149,7 +149,7 @@
     align-items: center;
     margin-top: 10px;
     padding: 8px;
-    background: var(--recovered-surface-1a1a2e, #1a1a2e);
+    background: var(--surface2, var(--surface2));
     border-radius: 8px;
     width: fit-content;
 }
@@ -158,22 +158,22 @@
 .rpn-op-b {
     font-size: 20px;
     font-weight: 700;
-    color: var(--recovered-ink-1a6df5, #1a6df5);
+    color: var(--text, var(--text));
     font-family: monospace;
 }
 
 .rpn-op-sym {
     font-size: 22px;
     font-weight: 900;
-    color: var(--recovered-ink-996d0c, #996d0c);
+    color: var(--text, var(--text));
 }
 
 .rpn-status {
     padding: 8px 12px;
-    background: var(--code-bg);
-    border: 1px solid var(--code-line);
+    background: var(--surface2);
+    border: 1px solid var(--border);
     border-radius: 8px;
     font-size: 13px;
-    color: var(--code-dim);
+    color: var(--text-muted);
     min-height: 36px;
 }

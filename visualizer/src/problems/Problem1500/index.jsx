@@ -22,7 +22,7 @@ const definition = {
 
 const HOLDER = 'color-mix(in srgb, var(--success) 35%, var(--surface2))'
 const REQUESTER = 'color-mix(in srgb, var(--primary) 30%, var(--surface2))'
-const FREED = 'color-mix(in srgb, var(--warning) 35%, var(--surface2))'
+const FREED = 'color-mix(in srgb, var(--primary) 35%, var(--surface2))'
 
 const chip = (text, background) => <span key={text} style={{
   display: 'inline-block', margin: 2, padding: '2px 8px', fontFamily: 'monospace', color: 'var(--text)', background,

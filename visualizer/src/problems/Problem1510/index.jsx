@@ -17,7 +17,7 @@ const definition = {
 
 const STATE_STYLE = {
   W: 'color-mix(in srgb, var(--success) 35%, var(--surface2))',
-  L: 'color-mix(in srgb, var(--warning) 35%, var(--surface2))',
+  L: 'color-mix(in srgb, var(--primary) 35%, var(--surface2))',
 }
 
 export default function StoneGameIV() {

@@ -1,16 +1,16 @@
-.pm-view { margin: 0; color: var(--text, #1f2937); }
+.pm-view { margin: 0; color: var(--text, var(--text)); }
 .pm-view svg { width: 100%; height: auto; display: block; }
 .pm-array { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
-.pm-cell { min-width: 30px; text-align: center; padding: 4px 6px; border-radius: 6px; border: 1px solid #94a3b8; font-weight: 700; }
+.pm-cell { min-width: 30px; text-align: center; padding: 4px 6px; border-radius: 6px; border: 1px solid var(--primary); font-weight: 700; }
 .pm-cell small { display: block; font-size: 10px; font-weight: 400; opacity: 0.7; }
-.pm-cell--done { background: #dcfce7; }
-.pm-cell--now { background: #fde68a; border-color: #b45309; }
-.pm-edge { stroke: #94a3b8; stroke-width: 2; }
-.pm-edge--path { stroke: #0369a1; stroke-width: 3; }
-.pm-node { fill: #f8fafc; stroke: #64748b; stroke-width: 2; }
-.pm-node--path { fill: #e0f2fe; stroke: #0369a1; }
-.pm-node--now { fill: #fde68a; stroke: #b45309; stroke-width: 3; }
-.pm-node--bad { fill: #fecaca; stroke: #dc2626; stroke-width: 3; }
-.pm-node--good { fill: #bbf7d0; stroke: #15803d; stroke-width: 3; }
-.pm-text { font-size: 13px; font-weight: 700; fill: #1f2937; }
+.pm-cell--done { background: var(--surface2); }
+.pm-cell--now { background: var(--surface2); border-color: var(--error); }
+.pm-edge { stroke: var(--primary); stroke-width: 2; }
+.pm-edge--path { stroke: var(--primary); stroke-width: 3; }
+.pm-node { fill: var(--surface2); stroke: var(--border); stroke-width: 2; }
+.pm-node--path { fill: var(--surface2); stroke: var(--primary); }
+.pm-node--now { fill: var(--surface2); stroke: var(--error); stroke-width: 3; }
+.pm-node--bad { fill: var(--surface2); stroke: var(--error); stroke-width: 3; }
+.pm-node--good { fill: var(--surface2); stroke: var(--success); stroke-width: 3; }
+.pm-text { font-size: 13px; font-weight: 700; fill: var(--surface2); }
 .pm-view figcaption { font-size: 13px; margin-top: 6px; }

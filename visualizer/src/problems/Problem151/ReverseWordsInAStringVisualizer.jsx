@@ -123,12 +123,12 @@ function WordBox({ word, isReversed }) {
     <motion.div
       style={{
         padding: '8px 12px',
-        backgroundColor: isReversed ? "var(--recovered-surface-86efac, #86efac)" : "var(--recovered-surface-dbeafe, #dbeafe)",
+        backgroundColor: isReversed ? "var(--surface2, var(--surface2))" : "var(--surface2, var(--surface2))",
         borderRadius: 4,
-        border: `2px solid ${isReversed ? '#22c55e' : '#0c4a6e'}`,
+        border: `2px solid ${isReversed ? 'var(--success)' : 'var(--border)'}`,
         fontSize: 13,
         fontWeight: 600,
-        color: isReversed ? '#065f46' : '#0c4a6e',
+        color: isReversed ? 'var(--text)' : 'var(--text)',
         fontFamily: 'monospace',
       }}
       initial={{ opacity: 0, scale: 0.8 }}
@@ -141,30 +141,30 @@ function WordBox({ word, isReversed }) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: "var(--recovered-ink-627794, #627794)" }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: "var(--text, var(--text))" }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fed7aa, #fed7aa)", borderRadius: 6, borderLeft: '4px solid #f59e0b' }}>
-        <div style={{ fontSize: 12, color: '#92400e', fontStyle: 'italic' }}>
+      <div style={{ padding: 12, backgroundColor: "var(--surface2, var(--surface2))", borderRadius: 6, borderLeft: '4px solid var(--error)' }}>
+        <div style={{ fontSize: 12, color: 'var(--text)', fontStyle: 'italic' }}>
           Split → Reverse → Join: three-step word reversal.
         </div>
       </div>
 
       {step.input && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dbeafe, #dbeafe)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2, var(--surface2))", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
             Input String
           </div>
-          <div style={{ fontSize: 13, color: '#0c4a6e', fontFamily: 'monospace', wordBreak: 'break-all' }}>
+          <div style={{ fontSize: 13, color: 'var(--text)', fontFamily: 'monospace', wordBreak: 'break-all' }}>
             "{step.input}"
           </div>
         </motion.div>
       )}
 
       {step.words && step.words.length > 0 && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dbeafe, #dbeafe)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2, var(--surface2))", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
             Words (Original Order)
           </div>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -176,8 +176,8 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.reversed && step.reversed.length > 0 && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-d1fae5, #d1fae5)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 8 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2, var(--surface2))", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
             Words (Reversed Order)
           </div>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -189,18 +189,18 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.result && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dcfce7, #dcfce7)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 8 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2, var(--surface2))", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
             Result String
           </div>
-          <div style={{ fontSize: 13, color: '#065f46', fontFamily: 'monospace', wordBreak: 'break-all' }}>
+          <div style={{ fontSize: 13, color: 'var(--text)', fontFamily: 'monospace', wordBreak: 'break-all' }}>
             "{step.result}"
           </div>
         </motion.div>
       )}
 
       {step.message && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fef3c7, #fef3c7)", borderRadius: 6, fontSize: 12, color: '#92400e' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2, var(--surface2))", borderRadius: 6, fontSize: 12, color: 'var(--text)' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           {step.message}
         </motion.div>
       )}
@@ -266,7 +266,7 @@ export default function ReverseWordsInAStringVisualizer() {
 
   const statusPanel = (
     <div className="rwias-status">
-      {step?.message && <div style={{ fontSize: 12, color: "var(--recovered-ink-627794, #627794)" }}>{step.message}</div>}
+      {step?.message && <div style={{ fontSize: 12, color: "var(--text, var(--text))" }}>{step.message}</div>}
     </div>
   )
 

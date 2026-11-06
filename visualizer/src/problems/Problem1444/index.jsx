@@ -17,7 +17,7 @@ const definition = {
 const cell = (highlight, apple) => ({
   width: 34, height: 30, boxSizing: 'border-box', display: 'grid', placeItems: 'center', fontFamily: 'monospace',
   border: `${highlight ? 2 : 1}px solid ${highlight ? 'var(--text)' : 'var(--border)'}`,
-  background: apple ? '#fde68a' : 'transparent',
+  background: apple ? 'var(--surface2)' : 'transparent',
 })
 
 export default function NumberOfWaysOfCuttingAPizza() {

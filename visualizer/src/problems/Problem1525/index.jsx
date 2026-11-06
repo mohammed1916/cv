@@ -24,7 +24,7 @@ export default function GoodSplits() {
           minWidth: 34, padding: '4px 6px', textAlign: 'center', fontFamily: 'monospace', boxSizing: 'border-box',
           border: `${i === pos ? 2 : 1}px solid ${i === pos ? 'var(--text)' : 'var(--border)'}`,
           marginRight: i === split ? 14 : 0,
-        }}><div>{ch}</div><small>{i}</small></div>)}
+        }}><div>{ch}</div><small>{i}</small><div style={{ fontSize: 11, fontWeight: 700, color: 'var(--text)', minHeight: 14 }}>{[i === pos && 'i', i === split && 'split'].filter(Boolean).join(' ')}</div></div>)}
       </div>
       <table aria-label="Distinct letter counts" style={{ fontFamily: 'monospace', borderCollapse: 'collapse', marginTop: 8 }}>
         <thead><tr><th>pos</th><th>letter</th><th>left prefix</th><th>right suffix</th></tr></thead>

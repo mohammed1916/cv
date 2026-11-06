@@ -432,7 +432,7 @@ export default function ThreeSumVisualizer() {
               </div>
 
               {step?.message && (
-                <div style={{ padding: 10, backgroundColor: 'color-mix(in srgb, var(--info) 8%, var(--surface))', borderRadius: 6, fontSize: 11, color: 'var(--text)', border: '1px solid var(--info)' }}>
+                <div style={{ padding: 10, backgroundColor: 'color-mix(in srgb, var(--primary) 8%, var(--surface))', borderRadius: 6, fontSize: 11, color: 'var(--text)', border: '1px solid var(--primary)' }}>
                   {step.message}
                 </div>
               )}

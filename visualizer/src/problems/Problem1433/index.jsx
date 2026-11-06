@@ -20,7 +20,7 @@ const cell = { minWidth: 28, padding: '4px 6px', textAlign: 'center', fontFamily
 function Row({ label, letters, index, failedAt }) {
   return <div style={{ display: 'flex', gap: 4, alignItems: 'center', color: 'var(--text)' }}>
     <small style={{ width: 60 }}>{label}</small>
-    {letters.map((ch, i) => <span key={i} style={{ ...cell, borderWidth: i === index ? 2 : 1, borderColor: i === failedAt ? '#b91c1c' : i === index ? 'var(--primary)' : 'var(--border)', opacity: index !== null && i > index ? 0.5 : 1 }}>{ch}</span>)}
+    {letters.map((ch, i) => <span key={i} style={{ ...cell, borderWidth: i === index ? 2 : 1, borderColor: i === failedAt ? 'var(--error)' : i === index ? 'var(--primary)' : 'var(--border)', opacity: index !== null && i > index ? 0.5 : 1 }}>{ch}</span>)}
   </div>
 }
 

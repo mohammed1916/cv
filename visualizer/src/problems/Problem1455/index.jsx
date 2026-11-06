@@ -24,7 +24,7 @@ export default function FirstPrefixWord() {
           return <div key={i} data-index={i} style={{
             padding: '6px 8px', boxSizing: 'border-box', fontFamily: 'monospace', textAlign: 'center',
             border: `${i === index ? 2 : 1}px solid ${i === index ? 'var(--text)' : 'var(--border)'}`,
-            background: answer === i + 1 ? '#bbf7d0' : 'transparent', color: 'inherit',
+            background: answer === i + 1 ? 'var(--surface2)' : 'transparent', color: 'inherit',
           }}>
             <div>{hit || (i === index) ? <><strong>{word.slice(0, searchWord.length)}</strong>{word.slice(searchWord.length)}</> : word}</div>
             <small>position {i + 1}</small>
