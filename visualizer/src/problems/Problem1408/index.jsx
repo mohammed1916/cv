@@ -14,7 +14,7 @@ const definition = {
   ],
 }
 
-const chip = { minWidth: 34, padding: '4px 8px', textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', borderRadius: 6, color: 'var(--text)', background: 'var(--surface2)' }
+const chip = { minWidth: 34, padding: 12, textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', borderRadius: 6, color: 'var(--text)', background: 'var(--surface2)' }
 
 // Result of every pair checked so far: rows are the word being tested, columns the word it may sit inside.
 function PairGrid({ run, step }) {

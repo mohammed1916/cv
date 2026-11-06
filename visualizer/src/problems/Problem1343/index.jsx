@@ -21,9 +21,9 @@ export default function WindowAverages() {
     return <>
       <div role="img" aria-label="Array with current window" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {arr.map((value, i) => <div key={i} data-index={i} style={{
-          minWidth: 44, padding: '6px 8px', textAlign: 'center', fontFamily: 'monospace', color: '#1c1917',
-          border: `${inWindow(i) ? 2 : 1}px solid var(--border)`,
-          background: inWindow(i) ? (ok === false ? '#fecaca' : ok ? '#bbf7d0' : '#bfdbfe') : 'transparent',
+          minWidth: 44, padding: 12, boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace', color: 'var(--text)',
+          border: `${inWindow(i) ? 2 : 1}px solid ${inWindow(i) ? 'var(--primary)' : 'var(--border)'}`,
+          background: inWindow(i) ? (ok === false ? 'color-mix(in srgb, var(--error) 22%, var(--surface2))' : ok ? 'color-mix(in srgb, var(--success) 22%, var(--surface2))' : 'color-mix(in srgb, var(--primary) 22%, var(--surface2))') : 'var(--surface2)',
         }}><div>{value}</div><small>{i}{start === i ? ' l' : ''}{start !== null && start !== undefined && start + k - 1 === i ? ' r' : ''}</small></div>)}
       </div>
       <p>Target sum: <strong>{target}</strong>{sum !== null && sum !== undefined ? <> · window sum: <strong>{sum}</strong></> : null} · counted: <strong>{count}</strong></p>

@@ -208,7 +208,7 @@ export default function WordBreak2Story({ story, step }) {
             return (
               <div key={idx} className={`wb2-char-box ${statusClass}`}>
                 <span className="wb2-char-letter">{char}</span>
-                <span className="wb2-char-index">{idx}</span>
+                <span className="wb2-char-index">{idx}{idx === start ? " start" : ""}{idx === end ? " end" : ""}</span>
               </div>
             );
           })}

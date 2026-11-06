@@ -14,7 +14,7 @@ const definition = {
   ],
 }
 
-const cell = { minWidth: 22, padding: '2px 4px', textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', borderRadius: 4, color: 'var(--text)' }
+const cell = { minWidth: 22, padding: 12, textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', borderRadius: 4, color: 'var(--text)' }
 
 // The original text, with the characters the current step reads outlined; the output is built beside it.
 export default function AlgorithmPage() {
@@ -25,7 +25,7 @@ export default function AlgorithmPage() {
       <div aria-label="Original text" style={{ display: 'flex', gap: 2, flexWrap: 'wrap', marginBottom: 10 }}>
         {[...text].map((ch, i) => {
           const inSpan = span && i >= from && i < to
-          return <span key={i} style={{ ...cell, borderWidth: inSpan ? 2 : 1, borderColor: inSpan ? 'var(--primary)' : 'var(--border)', background: inSpan ? 'var(--surface2)' : 'transparent', fontWeight: inSpan ? 700 : 400 }}>{ch === ' ' ? ' ' : ch}</span>
+          return <span key={i} style={{ ...cell, borderWidth: inSpan ? 2 : 1, borderColor: inSpan ? 'var(--primary)' : 'var(--border)', background: inSpan ? 'color-mix(in srgb, var(--primary) 18%, var(--surface2))' : 'var(--surface)', color: 'var(--text)', fontWeight: inSpan ? 700 : 400 }}>{ch === ' ' ? ' ' : ch}{span && i === from ? <sub> l</sub> : null}{span && i === to - 1 ? <sub> r</sub> : null}</span>
         })}
       </div>
       <p style={{ color: 'var(--text)' }}>{span ? `Reading positions ${from} to ${to - 1}.` : 'Nothing read yet.'}</p>

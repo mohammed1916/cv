@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 16px;
   padding: 16px;
-  color: var(--text, #f8fafc);
+  color: var(--text);
   font-family: inherit;
 }
 
@@ -11,14 +11,14 @@
   margin: 0;
   font-size: 13px;
   line-height: 1.6;
-  color: var(--text-muted, #94a3b8);
+  color: var(--text-muted);
 }
 
 .mincut-story__explanation {
   margin: 0;
   font-size: 13px;
   line-height: 1.6;
-  color: var(--text-muted, #94a3b8);
+  color: var(--text-muted);
 }
 
 /* ── Telemetry Bar ────────────────────────────────────────────── */
@@ -33,8 +33,8 @@
   flex-direction: column;
   gap: 4px;
   padding: 8px 12px;
-  background: var(--surface2, #1e293b);
-  border: 1px solid var(--border, #334155);
+  background: var(--surface2);
+  border: 1px solid var(--border);
   border-radius: 6px;
 }
 
@@ -43,19 +43,19 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--text-muted, #94a3b8);
+  color: var(--text-muted);
 }
 
 .telemetry-val {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 14px;
   font-weight: 700;
-  color: var(--text, #f8fafc);
+  color: var(--text);
   word-break: break-all;
 }
 
 .telemetry-val.highlight {
-  color: var(--info, #38bdf8);
+  color: var(--primary);
 }
 
 /* ── String & Wings Track ─────────────────────────────────────── */
@@ -66,8 +66,8 @@
   flex-direction: column;
   gap: 10px;
   padding: 12px 14px;
-  background: var(--surface2, #1e293b);
-  border: 1px solid var(--border, #334155);
+  background: var(--surface2);
+  border: 1px solid var(--border);
   border-radius: 8px;
 }
 
@@ -84,7 +84,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--text-muted, #94a3b8);
+  color: var(--text-muted);
 }
 
 .track-card__badge {
@@ -92,9 +92,9 @@
   font-weight: 600;
   padding: 2px 8px;
   border-radius: 4px;
-  background: var(--surface, #0f172a);
-  color: var(--info, #38bdf8);
-  border: 1px solid var(--border, #334155);
+  background: var(--surface);
+  color: var(--primary);
+  border: 1px solid var(--border);
 }
 
 .mincut-story__track {
@@ -119,29 +119,29 @@
   min-width: 44px;
   padding: 6px 4px;
   border-radius: 6px;
-  background: var(--surface, #0f172a);
-  border: 1.5px solid var(--border, #334155);
+  background: var(--surface);
+  border: 1.5px solid var(--border);
   transition: all 0.2s ease;
 }
 
 .track-slot.is-mid {
-  border-color: var(--primary, #6366f1);
-  box-shadow: 0 0 8px color-mix(in srgb, var(--primary, #6366f1) 40%, transparent);
+  border-color: var(--primary);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--primary) 40%, transparent);
 }
 
 .track-slot.is-window {
-  border-color: var(--info, #38bdf8);
-  background: color-mix(in srgb, var(--info, #38bdf8) 12%, var(--surface, #0f172a));
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 12%, var(--surface));
 }
 
 .track-slot.is-palindrome {
-  border-color: var(--success, #10b981);
-  background: color-mix(in srgb, var(--success, #10b981) 18%, var(--surface, #0f172a));
+  border-color: var(--success);
+  background: color-mix(in srgb, var(--success) 18%, var(--surface));
 }
 
 .track-slot.is-mismatch {
-  border-color: var(--error, #ef4444);
-  background: color-mix(in srgb, var(--error, #ef4444) 18%, var(--surface, #0f172a));
+  border-color: var(--error);
+  background: color-mix(in srgb, var(--error) 18%, var(--surface));
 }
 
 .track-tags {
@@ -162,32 +162,32 @@
 }
 
 .tag-mid {
-  background: var(--primary, #6366f1);
-  color: #ffffff;
+  background: var(--primary);
+  color: var(--text);
 }
 
 .tag-l {
-  background: var(--info, #38bdf8);
-  color: #0c4a6e;
+  background: var(--primary);
+  color: var(--primary);
 }
 
 .tag-r {
-  background: var(--warning, #f59e0b);
-  color: #78350f;
+  background: var(--primary);
+  color: var(--primary);
 }
 
 .track-cell {
   font-family: ui-monospace, SFMono-Regular, monospace;
   font-size: 20px;
   font-weight: 800;
-  color: var(--text, #f8fafc);
+  color: var(--text);
 }
 
 .track-index {
   font-family: ui-monospace, SFMono-Regular, monospace;
   font-size: 10px;
   font-weight: 600;
-  color: var(--text-muted, #94a3b8);
+  color: var(--text-muted);
 }
 
 /* Even Seam Indicator */
@@ -208,15 +208,15 @@
 .even-seam-line {
   width: 2px;
   height: 24px;
-  background: var(--primary, #6366f1);
-  box-shadow: 0 0 6px var(--primary, #6366f1);
+  background: var(--primary);
+  box-shadow: 0 0 6px var(--primary);
 }
 
 .even-seam-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--primary, #6366f1);
+  background: var(--primary);
   margin-top: 2px;
 }
 
@@ -224,7 +224,7 @@
   font-size: 8px;
   font-weight: 800;
   text-transform: uppercase;
-  color: var(--primary, #6366f1);
+  color: var(--primary);
   margin-top: 2px;
 }
 
@@ -235,13 +235,13 @@
   gap: 12px;
   padding: 14px 16px;
   border-radius: 8px;
-  background: var(--surface2, #1e293b);
-  border: 1.5px solid var(--border, #334155);
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
 }
 
 .mincut-story__dp-hero.is-improved {
-  border-color: var(--success, #10b981);
-  background: color-mix(in srgb, var(--success, #10b981) 10%, var(--surface2, #1e293b));
+  border-color: var(--success);
+  background: color-mix(in srgb, var(--success) 10%, var(--surface2));
 }
 
 .dp-hero__header {
@@ -255,7 +255,7 @@
 .dp-hero__title {
   font-size: 13px;
   font-weight: 700;
-  color: var(--text, #f8fafc);
+  color: var(--text);
 }
 
 .dp-hero__badge {
@@ -266,14 +266,14 @@
 }
 
 .badge-improved {
-  background: var(--success, #10b981);
-  color: #022c22;
+  background: var(--success);
+  color: var(--success);
 }
 
 .badge-retained {
-  background: var(--surface, #0f172a);
-  color: var(--text-muted, #94a3b8);
-  border: 1px solid var(--border, #334155);
+  background: var(--surface);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
 }
 
 .equation-block {
@@ -285,12 +285,12 @@
 .equation-math {
   font-family: ui-monospace, SFMono-Regular, monospace;
   font-size: 15px;
-  color: var(--text, #f8fafc);
+  color: var(--text);
 }
 
 .equation-note {
   font-size: 12px;
-  color: var(--text-muted, #94a3b8);
+  color: var(--text-muted);
 }
 
 .equation-segments {
@@ -307,32 +307,32 @@
   gap: 2px;
   padding: 8px 12px;
   border-radius: 6px;
-  background: var(--surface, #0f172a);
-  border: 1px solid var(--border, #334155);
+  background: var(--surface);
+  border: 1px solid var(--border);
 }
 
 .segment-sub {
   font-size: 10px;
   font-family: ui-monospace, monospace;
   font-weight: 700;
-  color: var(--text-muted, #94a3b8);
+  color: var(--text-muted);
 }
 
 .segment-str {
   font-size: 14px;
   font-weight: 700;
   font-family: ui-monospace, monospace;
-  color: var(--text, #f8fafc);
+  color: var(--text);
 }
 
 .segment-cuts {
   font-size: 11px;
   font-weight: 700;
-  color: var(--info, #38bdf8);
+  color: var(--primary);
 }
 
 .segment-card.suffix .segment-cuts {
-  color: var(--success, #10b981);
+  color: var(--success);
 }
 
 .segment-cut {
@@ -341,7 +341,7 @@
   align-items: center;
   gap: 2px;
   font-size: 14px;
-  color: var(--warning, #f59e0b);
+  color: var(--primary);
 }
 
 .cut-label {
@@ -356,8 +356,8 @@
   flex-direction: column;
   gap: 10px;
   padding: 12px 14px;
-  background: var(--surface2, #1e293b);
-  border: 1px solid var(--border, #334155);
+  background: var(--surface2);
+  border: 1px solid var(--border);
   border-radius: 8px;
 }
 
@@ -374,12 +374,12 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--text-muted, #94a3b8);
+  color: var(--text-muted);
 }
 
 .dp-section__hint {
   font-size: 11px;
-  color: var(--text-muted, #94a3b8);
+  color: var(--text-muted);
   font-family: ui-monospace, monospace;
 }
 
@@ -395,18 +395,18 @@
   gap: 6px;
   padding: 8px 10px;
   border-radius: 6px;
-  background: var(--surface, #0f172a);
-  border: 1px solid var(--border, #334155);
+  background: var(--surface);
+  border: 1px solid var(--border);
   transition: all 0.2s ease;
 }
 
 .dp-cell-card.is-updated {
-  border-color: var(--success, #10b981);
-  box-shadow: 0 0 10px color-mix(in srgb, var(--success, #10b981) 35%, transparent);
+  border-color: var(--success);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--success) 35%, transparent);
 }
 
 .dp-cell-card.is-target {
-  border-color: var(--warning, #f59e0b);
+  border-color: var(--primary);
 }
 
 .dp-cell-card__top {
@@ -420,14 +420,14 @@
   font-size: 10px;
   font-weight: 800;
   font-family: ui-monospace, monospace;
-  color: var(--text-muted, #94a3b8);
+  color: var(--text-muted);
 }
 
 .dp-cell-prefix {
   font-size: 10px;
   font-weight: 600;
   font-family: ui-monospace, monospace;
-  color: var(--info, #38bdf8);
+  color: var(--primary);
   max-width: 50px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -444,13 +444,13 @@
   font-size: 22px;
   font-weight: 900;
   font-family: ui-monospace, monospace;
-  color: var(--text, #f8fafc);
+  color: var(--text);
 }
 
 .val-unit {
   font-size: 10px;
   font-weight: 600;
-  color: var(--text-muted, #94a3b8);
+  color: var(--text-muted);
 }
 
 .dp-cell-card__partition {
@@ -463,7 +463,7 @@
   font-size: 9px;
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--text-muted, #94a3b8);
+  color: var(--text-muted);
 }
 
 .partition-pills {
@@ -476,11 +476,11 @@
   font-size: 9px;
   font-weight: 700;
   font-family: ui-monospace, monospace;
-  background: var(--surface2, #1e293b);
-  border: 1px solid var(--border, #334155);
+  background: var(--surface2);
+  border: 1px solid var(--border);
   padding: 1px 4px;
   border-radius: 3px;
-  color: var(--text, #f8fafc);
+  color: var(--text);
 }
 
 /* ── Done Banner ──────────────────────────────────────────────── */
@@ -489,15 +489,15 @@
   gap: 16px;
   padding: 16px 20px;
   border-radius: 8px;
-  background: color-mix(in srgb, var(--success, #10b981) 12%, var(--surface2, #1e293b));
-  border: 1.5px solid var(--success, #10b981);
-  box-shadow: 0 0 16px color-mix(in srgb, var(--success, #10b981) 25%, transparent);
+  background: color-mix(in srgb, var(--success) 12%, var(--surface2));
+  border: 1.5px solid var(--success);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--success) 25%, transparent);
 }
 
 .done-card__icon {
   font-size: 28px;
   font-weight: 900;
-  color: var(--success, #10b981);
+  color: var(--success);
 }
 
 .done-card__body {
@@ -510,17 +510,17 @@
   margin: 0;
   font-size: 16px;
   font-weight: 800;
-  color: var(--text, #f8fafc);
+  color: var(--text);
 }
 
 .done-card__cuts {
   margin: 0;
   font-size: 14px;
-  color: var(--text, #f8fafc);
+  color: var(--text);
 }
 
 .done-card__cuts strong {
-  color: var(--success, #10b981);
+  color: var(--success);
   font-size: 18px;
 }
 
@@ -543,18 +543,18 @@
   font-weight: 800;
   padding: 4px 10px;
   border-radius: 6px;
-  background: var(--surface, #0f172a);
-  border: 1.5px solid var(--success, #10b981);
-  color: var(--success, #10b981);
+  background: var(--surface);
+  border: 1.5px solid var(--success);
+  color: var(--success);
 }
 
 .flow-cut {
   font-size: 16px;
-  color: var(--warning, #f59e0b);
+  color: var(--primary);
 }
 
 .done-card__note {
   margin: 0;
   font-size: 12px;
-  color: var(--text-muted, #94a3b8);
+  color: var(--text-muted);
 }

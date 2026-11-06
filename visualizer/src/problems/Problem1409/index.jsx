@@ -14,7 +14,7 @@ const definition = {
   ],
 }
 
-const tile = { minWidth: 44, padding: '6px 8px', textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', borderRadius: 8, color: 'var(--text)', background: 'var(--surface2)' }
+const tile = { minWidth: 44, padding: 12, textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', borderRadius: 8, color: 'var(--text)', background: 'var(--surface2)' }
 
 export default function AlgorithmPage() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {

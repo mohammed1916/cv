@@ -107,7 +107,7 @@ export default function CandyStory({ story, step }) {
   let arcD = "";
   let arcMidX = 0;
   let arcPeak = 0;
-  let arcColor = conditionMet ? "#22c55e" : "#94a3b8";
+  let arcColor = conditionMet ? "var(--success)" : "var(--primary)";
 
   if (hasComparisonArc) {
     const xFrom = cxForChild(compareIndex);
@@ -118,7 +118,7 @@ export default function CandyStory({ story, step }) {
     arcMidX = (xFrom + xTo) / 2;
     arcPeak = Math.max(25, Math.min(yFrom, yTo) - 45);
     arcD = `M ${xFrom} ${yFrom - 6} Q ${arcMidX} ${arcPeak} ${xTo} ${yTo - 6}`;
-    arcColor = conditionMet ? "#22c55e" : "#94a3b8";
+    arcColor = conditionMet ? "var(--success)" : "var(--primary)";
   }
 
   return (
@@ -287,18 +287,18 @@ export default function CandyStory({ story, step }) {
 
           {/* Gradients for bars */}
           <linearGradient id="candyBarDone" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#22c55e" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#15803d" stopOpacity="0.75" />
+            <stop offset="0%" stopColor="var(--success)" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="var(--success)" stopOpacity="0.75" />
           </linearGradient>
 
           <linearGradient id="candyBarActive" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.95" />
-            <stop offset="100%" stopColor="#b45309" stopOpacity="0.8" />
+            <stop offset="0%" stopColor="var(--primary)" stopOpacity="0.95" />
+            <stop offset="100%" stopColor="var(--primary)" stopOpacity="0.8" />
           </linearGradient>
 
           <linearGradient id="candyBarNeighbor" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.95" />
-            <stop offset="100%" stopColor="#0284c7" stopOpacity="0.8" />
+            <stop offset="0%" stopColor="var(--primary)" stopOpacity="0.95" />
+            <stop offset="100%" stopColor="var(--primary)" stopOpacity="0.8" />
           </linearGradient>
         </defs>
 
@@ -358,7 +358,7 @@ export default function CandyStory({ story, step }) {
               width={120}
               height={20}
               rx={10}
-              fill={conditionMet ? "rgba(34, 197, 94, 0.2)" : "rgba(148, 163, 184, 0.2)"}
+              fill={conditionMet ? "var(--success)" : "var(--primary)"}
               stroke={arcColor}
               strokeWidth="1.2"
             />
@@ -455,7 +455,7 @@ export default function CandyStory({ story, step }) {
                 <g className="candy-story__active-pointer">
                   <polygon
                     points={`${cx},${by - 18} ${cx - 5},${by - 26} ${cx + 5},${by - 26}`}
-                    fill="#f59e0b"
+                    fill="var(--primary)"
                   />
                   <rect
                     x={cx - 22}
@@ -463,7 +463,7 @@ export default function CandyStory({ story, step }) {
                     width={44}
                     height={16}
                     rx={3}
-                    fill="#f59e0b"
+                    fill="var(--primary)"
                   />
                   <text
                     x={cx}
@@ -481,7 +481,7 @@ export default function CandyStory({ story, step }) {
                 <g className="candy-story__neighbor-pointer">
                   <polygon
                     points={`${cx},${by - 18} ${cx - 5},${by - 26} ${cx + 5},${by - 26}`}
-                    fill="#38bdf8"
+                    fill="var(--primary)"
                   />
                   <rect
                     x={cx - 28}
@@ -489,7 +489,7 @@ export default function CandyStory({ story, step }) {
                     width={56}
                     height={16}
                     rx={3}
-                    fill="#38bdf8"
+                    fill="var(--primary)"
                   />
                   <text
                     x={cx}

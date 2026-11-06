@@ -14,7 +14,7 @@ const definition = {
   ],
 }
 
-const cell = { minWidth: 30, padding: '4px 8px', textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', borderRadius: 6, color: 'var(--text)', background: 'var(--surface2)' }
+const cell = { minWidth: 30, padding: 12, textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', borderRadius: 6, color: 'var(--text)', background: 'var(--surface2)' }
 
 // Two row shapes: ABA reuses its first colour in the third column, ABC uses three different colours.
 function Pattern({ label, letters }) {

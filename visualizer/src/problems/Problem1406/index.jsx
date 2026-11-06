@@ -16,7 +16,7 @@ const definition = {
 
 import { DPTable } from '../../components/shared/AlgorithmStatePrimitives'
 
-const tile = { minWidth: 52, padding: '6px 8px', textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', borderRadius: 8, color: 'var(--text)', background: 'var(--surface2)' }
+const tile = { minWidth: 52, padding: 12, textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', borderRadius: 8, color: 'var(--text)', background: 'var(--surface2)' }
 
 // The stones in a row. The current start and the stones it may take are outlined; the sum of the taken stones is shown.
 function StoneRow({ values, start, take }) {

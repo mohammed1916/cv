@@ -23,9 +23,9 @@ export default function EvenDigitCount() {
           const done = i < digitCounts.length
           const isCurrent = i === index
           return <div key={i} data-index={i} style={{
-            minWidth: 64, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
+            minWidth: 64, padding: 12, boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
             border: `${isCurrent ? 2 : 1}px solid ${isCurrent ? 'var(--text)' : 'var(--border)'}`,
-            background: done && digitCounts[i] % 2 === 0 ? '#bbf7d0' : done ? '#e7e5e4' : 'transparent', color: '#1c1917',
+            background: done && digitCounts[i] % 2 === 0 ? 'color-mix(in srgb, var(--success) 18%, var(--surface2))' : done ? 'var(--surface)' : 'transparent', color: 'var(--text-muted)',
           }}><div>{v}</div><small>{done ? `${digitCounts[i]} digits` : '...'}</small></div>
         })}
       </div>

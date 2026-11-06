@@ -25,7 +25,7 @@ export function RomanToIntegerScene({ s, step }) {
                 key={index}
                 className={`lookup-cell ${index === step.index ? "is-current" : ""} ${index === step.index + 1 && step.index >= 0 ? "is-next" : ""}`}
               >
-                <small>[{index}]</small>
+                <small>[{index}]{index === step.index ? " i" : ""}{index === step.index + 1 && step.index >= 0 ? " i+1" : ""}</small>
                 <strong>{char}</strong>
               </div>
             ))}

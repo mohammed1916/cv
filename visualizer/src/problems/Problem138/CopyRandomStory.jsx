@@ -229,7 +229,7 @@ export default function CopyRandomStory({ story, step }) {
                 markerHeight="6"
                 orient="auto-start-reverse"
               >
-                <path d="M 0 1 L 9 5 L 0 9 z" fill="#3b82f6" />
+                <path d="M 0 1 L 9 5 L 0 9 z" fill="var(--primary)" />
               </marker>
 
               <marker
@@ -241,7 +241,7 @@ export default function CopyRandomStory({ story, step }) {
                 markerHeight="6"
                 orient="auto-start-reverse"
               >
-                <path d="M 0 1 L 9 5 L 0 9 z" fill="#a855f7" />
+                <path d="M 0 1 L 9 5 L 0 9 z" fill="var(--primary)" />
               </marker>
 
               <marker
@@ -253,7 +253,7 @@ export default function CopyRandomStory({ story, step }) {
                 markerHeight="6"
                 orient="auto-start-reverse"
               >
-                <path d="M 0 1 L 9 5 L 0 9 z" fill="#38bdf8" />
+                <path d="M 0 1 L 9 5 L 0 9 z" fill="var(--primary)" />
               </marker>
 
               <marker
@@ -265,7 +265,7 @@ export default function CopyRandomStory({ story, step }) {
                 markerHeight="6"
                 orient="auto-start-reverse"
               >
-                <path d="M 0 1 L 9 5 L 0 9 z" fill="#c084fc" />
+                <path d="M 0 1 L 9 5 L 0 9 z" fill="var(--primary)" />
               </marker>
 
               <marker
@@ -277,7 +277,7 @@ export default function CopyRandomStory({ story, step }) {
                 markerHeight="6"
                 orient="auto-start-reverse"
               >
-                <path d="M 0 1 L 9 5 L 0 9 z" fill="#f59e0b" />
+                <path d="M 0 1 L 9 5 L 0 9 z" fill="var(--primary)" />
               </marker>
             </defs>
 

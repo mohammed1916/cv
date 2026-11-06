@@ -14,7 +14,7 @@ const definition = {
   ],
 }
 
-const tile = { minWidth: 34, padding: '4px 6px', textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', borderRadius: 6, color: 'var(--text)', background: 'var(--surface2)' }
+const tile = { minWidth: 34, padding: 12, textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', borderRadius: 6, color: 'var(--text)', background: 'var(--surface2)' }
 const LETTERS = ['a', 'b', 'c']
 
 // One bar per letter: the filled part is the copies still available, the total is the starting budget.

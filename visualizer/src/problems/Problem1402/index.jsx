@@ -14,7 +14,7 @@ const definition = {
   ],
 }
 
-const tile = { minWidth: 52, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', borderRadius: 8, color: 'var(--text)' }
+const tile = { minWidth: 52, padding: 12, boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', borderRadius: 8, color: 'var(--text)' }
 
 export default function ReducingDishes() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
@@ -23,8 +23,8 @@ export default function ReducingDishes() {
       <div role="img" aria-label="Dishes from highest to lowest satisfaction" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {sorted.map((value, i) => <div key={i} style={{
           ...tile, borderWidth: i === index ? 2 : 1,
-          background: i < kept.length ? '#bbf7d0' : 'transparent', color: i < kept.length ? '#1c1917' : 'var(--text)',
-        }}><div>{value}</div><small>{i + 1}</small></div>)}
+          background: i < kept.length ? 'color-mix(in srgb, var(--success) 18%, var(--surface2))' : 'transparent', color: i < kept.length ? 'var(--text-muted)' : 'var(--text)',
+        }}><div>{value}</div><small>{i + 1}{i === index ? ' i' : ''}</small></div>)}
       </div>
       <p>Running sum: <strong>{running}</strong> · Best total so far: <strong>{total}</strong></p>
       <p>Green dishes form the chosen prefix. Each one adds the running sum to the total.</p>

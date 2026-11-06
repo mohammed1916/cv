@@ -14,7 +14,7 @@ const definition = {
   ],
 }
 
-const cell = { minWidth: 40, padding: '6px 8px', textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', borderRadius: 8, color: 'var(--text)' }
+const cell = { minWidth: 40, padding: 12, textAlign: 'center', fontFamily: 'monospace', border: '1px solid var(--border)', borderRadius: 8, color: 'var(--text)' }
 
 export default function ReduceBinaryToOne() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
@@ -24,7 +24,7 @@ export default function ReduceBinaryToOne() {
         {[...bits].map((digit, i) => <div key={i} style={{
           ...cell, borderWidth: i === index ? 2 : 1,
           background: i === index ? 'var(--surface2)' : 'transparent',
-        }}><div>{digit}</div><small>{i}</small></div>)}
+        }}><div>{digit}</div><small>{i}{i === index ? ' i' : ''}</small></div>)}
       </div>
       <p>Current digit: {index === null || index === undefined ? 'none' : `${index} (${bits[index]})`} · Carry: <strong>{carry}</strong> · Steps: <strong>{steps}</strong></p>
       {value !== null && value !== undefined && <p>Effective bit (digit plus carry): <strong>{value}</strong>, so the number is {value === 1 ? 'odd' : 'even'} at this point.</p>}

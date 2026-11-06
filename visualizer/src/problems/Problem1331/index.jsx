@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -14,19 +15,19 @@ const definition = {
   ],
 }
 
-const cell = { padding: '4px 10px', fontFamily: 'monospace', textAlign: 'center' }
+const cell = { padding: '12px', fontFamily: 'monospace', textAlign: 'center', color: 'var(--text)', border: '1px solid var(--border)', background: 'var(--surface2)' }
 
 export default function RankTransform() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { ordered, pairs, current, output } = step.snapshot
     return <>
-      <p style={{ fontFamily: 'monospace' }}>Original: [{run.input.arr.join(', ')}]</p>
+      <IndexedSequence label="Input array (highlighted: value being ranked)" length={run.input.arr.length} valueAt={i => run.input.arr[i]} active={current === null || current === undefined ? -1 : run.input.arr.indexOf(current)} roleAt={i => (run.input.arr[i] === current ? 'value' : '')} />
       <table aria-label="Rank table" style={{ borderCollapse: 'collapse' }}>
         <thead><tr><th style={cell}>distinct value</th><th style={cell}>rank</th></tr></thead>
         <tbody>
           {ordered.map(v => {
             const pair = pairs.find(p => p.value === v)
-            return <tr key={v} style={{ background: v === current ? 'var(--surface2)' : undefined }}>
+            return <tr key={v} style={{ background: v === current ? 'color-mix(in srgb, var(--primary) 18%, var(--surface2))' : undefined }}>
               <td style={cell}>{v}</td><td style={cell}>{pair ? pair.rank : '·'}</td>
             </tr>
           })}
