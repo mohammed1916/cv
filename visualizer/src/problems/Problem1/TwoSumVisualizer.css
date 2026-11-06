@@ -77,23 +77,23 @@
 }
 
 .twosum-cell.stored {
-  background: rgba(168, 85, 247, 0.15);
-  border-color: #a855f7;
-  color: #c084fc;
+  background: color-mix(in srgb, var(--primary) 22%, var(--surface2));
+  border-color: var(--primary);
+  color: var(--primary);
 }
 
 .twosum-cell.active {
-  background: rgba(14, 165, 233, 0.2);
-  border-color: #0ea5e9;
+  background: color-mix(in srgb, var(--primary) 22%, var(--surface2));
+  border-color: var(--primary);
   box-shadow: 0 0 15px rgba(14, 165, 233, 0.3);
-  color: #38bdf8;
+  color: var(--primary);
 }
 
 .twosum-cell.match {
-  background: rgba(34, 197, 94, 0.2);
-  border-color: #22c55e;
+  background: color-mix(in srgb, var(--success) 22%, var(--surface2));
+  border-color: var(--success);
   box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
-  color: #4ade80;
+  color: var(--success);
 }
 
 .twosum-ptr-container {
@@ -110,13 +110,13 @@
   font-family: monospace;
   padding: 2px 6px;
   border-radius: 4px;
-  background: color-mix(in srgb, #0ea5e9 24%, var(--surface));
+  background: color-mix(in srgb, color-mix(in srgb, var(--primary) 22%, var(--surface2)) 24%, var(--surface));
   color: var(--text);
-  border: 1px solid #0ea5e9;
+  border: 1px solid var(--primary);
 }
 
 .twosum-ptr.match {
-  background: #22c55e;
+  background: color-mix(in srgb, var(--success) 22%, var(--surface2));
 }
 
 .twosum-formula-box {
@@ -144,12 +144,12 @@
   font-weight: bold;
 }
 
-.twosum-formula .var { color: #627794; }
+.twosum-formula .var { color: var(--primary); }
 .twosum-formula .op { color: var(--text-muted); }
-.twosum-formula .val { color: #4879a9; }
+.twosum-formula .val { color: var(--primary); }
 
 .twosum-formula .diff {
-  color: #9e42f6;
+  color: var(--primary);
 }
 
 .twosum-formula .diff.val {
@@ -162,7 +162,7 @@
 }
 
 .twosum-formula .diff.val.match {
-  color: #178740;
+  color: var(--success);
   text-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
 }
 
@@ -183,7 +183,7 @@
   border-bottom: 1px solid var(--border);
   font-size: 11px;
   text-transform: uppercase;
-  color: #8392a6;
+  color: var(--text-muted);
   font-weight: 600;
   justify-content: space-between;
 }
@@ -192,7 +192,7 @@
   display: flex;
   align-items: center;
   padding: 8px 16px;
-  border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+  border-bottom: 1px solid var(--border);
   font-family: monospace;
   font-size: 14px;
   transition: all 0.3s ease;
@@ -203,7 +203,7 @@
 }
 
 .twosum-map-key {
-  color: #9d40fa;
+  color: var(--primary);
   font-weight: bold;
   width: 40px;
 }
@@ -214,24 +214,24 @@
 }
 
 .twosum-map-val {
-  color: #627794;
+  color: var(--primary);
   width: 40px;
   text-align: right;
 }
 
 .twosum-map-row.checking {
-  background: rgba(168, 85, 247, 0.2);
-  border-left: 3px solid #a855f7;
+  background: color-mix(in srgb, var(--primary) 22%, var(--surface2));
+  border-left: 3px solid var(--primary);
 }
 
 .twosum-map-row.match {
-  background: rgba(34, 197, 94, 0.2);
-  border-left: 3px solid #22c55e;
+  background: color-mix(in srgb, var(--success) 22%, var(--surface2));
+  border-left: 3px solid var(--success);
 }
 
 .twosum-map-row.match .twosum-map-key,
 .twosum-map-row.match .twosum-map-val {
-  color: #198741;
+  color: var(--success);
 }
 
 .twosum-empty-map {
@@ -255,8 +255,8 @@
   transition: all 0.3s ease;
 }
 
-.twosum-status.success { border-left-color: #22c55e; background: rgba(34, 197, 94, 0.1); }
-.twosum-status.fail { border-left-color: #ef4444; background: rgba(239, 68, 68, 0.1); }
+.twosum-status.success { border-left-color: var(--success); background: color-mix(in srgb, var(--success) 22%, var(--surface2)); }
+.twosum-status.fail { border-left-color: var(--error); background: color-mix(in srgb, var(--error) 22%, var(--surface2)); }
 
 .twosum-dock {
   background: var(--surface-2);
