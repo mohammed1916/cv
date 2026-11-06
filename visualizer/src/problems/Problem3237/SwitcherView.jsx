@@ -13,11 +13,11 @@ export default function SwitcherView({ run, step }) {
   return (
     <section className="sw-view" aria-label="Window switcher">
       <div>
-        <p className="sw-label">Activation sequence (current window highlighted)</p>
+        <p className="sw-label">Activation sequence, indexed by time (current activation highlighted)</p>
         <div className="sw-seq" role="list" aria-label="Activations">
           {activations.map((w, t) => {
             const cls = t === step.time ? "sw-seq--now" : t < step.time ? "sw-seq--past" : "";
-            return <span key={t} role="listitem" className={cls}>{w}</span>;
+            return <span key={t} role="listitem" className={cls}><small>[{t}]</small> {w}</span>;
           })}
         </div>
       </div>

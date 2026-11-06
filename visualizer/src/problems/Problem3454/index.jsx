@@ -18,7 +18,7 @@ const definition = {
   ],
 }
 
-const cell = { padding: '4px 10px', textAlign: 'right', borderBottom: '1px solid var(--border, #ddd)' }
+const cell = { padding: '6px 12px', textAlign: 'right', borderBottom: '1px solid var(--border)' }
 
 export default function SeparateSquares() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
@@ -29,7 +29,7 @@ export default function SeparateSquares() {
       <tbody>{step.strips.map((st, i) => {
         const before = step.strips.slice(0, i).reduce((sum, prior) => sum + prior.area, 0)
         const current = i === step.index
-        return <tr key={i} style={current ? { background: 'rgba(250, 204, 21, 0.25)' } : undefined} aria-current={current ? 'step' : undefined}>
+        return <tr key={i} style={current ? { background: 'var(--surface2)', outline: '2px solid var(--primary)', outlineOffset: -2, fontWeight: 700, color: 'var(--text)' } : { color: 'var(--text)' }} aria-current={current ? 'step' : undefined}>
           <td style={cell}>{i + 1}</td><td style={cell}>{st.lo}</td><td style={cell}>{st.hi}</td><td style={cell}>{st.width}</td><td style={cell}>{st.area}</td><td style={cell}>{before}</td>
         </tr>
       })}</tbody>

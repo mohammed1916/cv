@@ -40,7 +40,7 @@ export default function ConstructGridLayout() {
           const node = at.get(`${r},${c}`)
           const current = focus && focus[0] === r && focus[1] === c
           return <div key={`${r}-${c}`} role="gridcell" data-row={r} data-col={c}
-            style={{ border: `2px ${node === undefined ? 'dashed' : 'solid'} ${current ? 'var(--primary)' : 'var(--border, #94a3b8)'}`, borderRadius: 6, padding: '0.5rem 0', textAlign: 'center', opacity: node === undefined ? 0.45 : 1 }}>
+            style={{ border: `2px ${node === undefined ? 'dashed' : 'solid'} ${current ? 'var(--primary)' : 'var(--border)'}`, borderRadius: 6, padding: '0.5rem 0', textAlign: 'center', opacity: node === undefined ? 0.45 : 1 }}>
             <strong>{node === undefined ? '·' : node}</strong>
             <small style={{ display: 'block' }}>{node === undefined ? '' : `(${r}, ${c})`}</small>
           </div>

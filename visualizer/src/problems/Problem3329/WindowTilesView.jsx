@@ -21,6 +21,7 @@ export default function WindowTilesView({ run, step }) {
               i === visibleRight ? 'wt-view__tile--right' : '',
               step.leaving && i === step.left - 1 ? 'wt-view__tile--leaving' : '',
             ].join(' ')}>
+            <span className="wt-view__tag">{i === step.left && step.right >= 0 ? 'l' : ''}{i === visibleRight ? 'r' : ''}</span>
             <span className="wt-view__char">{ch}</span>
             <span className="wt-view__index">{i}</span>
           </li>

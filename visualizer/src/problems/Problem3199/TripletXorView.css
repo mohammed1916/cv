@@ -1,12 +1,12 @@
 .tx-view {
-  --tx-ink: #0f172a;
-  --tx-muted: #475569;
-  --tx-line: #cbd5e1;
-  --tx-chip: #f5f3ff;
-  --tx-pick: #ddd6fe;
-  --tx-pick-edge: #6d28d9;
-  --tx-even: #15803d;
-  --tx-odd: #b91c1c;
+  --tx-ink: var(--text);
+  --tx-muted: var(--text-muted);
+  --tx-line: var(--border);
+  --tx-chip: var(--surface2);
+  --tx-pick: color-mix(in srgb, var(--primary) 22%, var(--surface2));
+  --tx-pick-edge: var(--primary);
+  --tx-even: var(--success);
+  --tx-odd: var(--error);
   color: var(--tx-ink);
   display: grid;
   gap: 12px;
@@ -14,18 +14,7 @@
   font-family: system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  .tx-view {
-    --tx-ink: #e2e8f0;
-    --tx-muted: #94a3b8;
-    --tx-line: #334155;
-    --tx-chip: #1e293b;
-    --tx-pick: #4c1d95;
-    --tx-pick-edge: #c4b5fd;
-    --tx-even: #4ade80;
-    --tx-odd: #f87171;
-  }
-}
+
 
 .tx-lane {
   align-items: center;
@@ -46,6 +35,10 @@
 }
 
 .tx-chip {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text);
   background: var(--tx-chip);
   border: 1px solid var(--tx-line);
   border-radius: 6px;
@@ -97,3 +90,6 @@
 .tx-empty {
   color: var(--tx-muted);
 }
+
+.tx-ptr { color: var(--primary); font-size: 12px; min-height: 14px; }
+.tx-idx { color: var(--text-muted); font-size: 11px; font-weight: 400; }

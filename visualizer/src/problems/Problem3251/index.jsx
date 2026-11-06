@@ -1,3 +1,4 @@
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { DPTable } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python } from './algorithm'
@@ -20,6 +21,7 @@ const definition = {
 
 export default function MonotonicPairsTwo() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="nums" length={run.input.nums.length} valueAt={index => run.input.nums[index]} active={step.cell ? step.cell[0] : -1} />
     <DPTable title="Ways by index (rows) and arr1 value (columns)" values={step.table}
       activeCell={step.cell ? { row: step.cell[0], column: step.cell[1] } : null} />
     <output aria-label="Result">{step.phase === 'done' ? `Answer: ${run.result}` : `Index ${step.cell ? step.cell[0] : 0} of ${run.input.nums.length - 1}`}</output>

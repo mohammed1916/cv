@@ -1,6 +1,6 @@
 import DPDependencyView from '../../components/shared/DPDependencyView'
 
-const COLORS = { 1: '--primary', 2: '--info' }
+const COLORS = { 1: '--primary', 2: '--success' }
 const tint = token => `color-mix(in srgb, var(${token}) 24%, var(--surface))`
 const box = { background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: 8, padding: 10, overflowX: 'auto', color: 'var(--text)' }
 const heading = { margin: '0 0 8px', fontSize: 13, color: 'var(--text-muted)', fontWeight: 600 }
@@ -13,7 +13,7 @@ function Lane({ name, bits, placed, which, lastIndex }) {
       const value = placed[index] ?? null
       const isLast = index === lastIndex
       return <div key={index} data-index={index} data-value={value ?? undefined} style={{ width: 46, flex: 'none', textAlign: 'center', borderRadius: 6, padding: '3px 0', border: `${isLast ? 2 : 1}px ${value === null ? 'dashed' : 'solid'} ${value === null ? 'var(--border)' : `var(${COLORS[which]})`}`, background: value === null ? 'transparent' : tint(COLORS[which]) }}>
-        <small style={{ display: 'block', color: 'var(--text-muted)' }}>{bit === 0 ? 'even' : 'odd'}</small>
+        <small style={{ display: 'block', color: 'var(--text-muted)' }}>{isLast ? `${which === 1 ? 'i' : 'j'} = ${index + 1}` : (bit === 0 ? 'even' : 'odd')}</small>
         <strong>{value ?? '·'}</strong>
       </div>
     })}

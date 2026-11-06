@@ -17,6 +17,7 @@ export default function LcpRemovalView({ run, step }) {
         <div className="lcp-tiles">
           {firstCells.map((ch, i) => (
             <span key={`f${i}`} className={`lcp-tile${i === removed ? ' lcp-tile--removed' : ''}${i < pre && removed < 0 ? ' lcp-tile--shared' : ''}`}>
+              <b className="lcp-tag">{i === removed ? 'removed' : ''}</b>
               {ch}
               <small>{i}</small>
             </span>
@@ -28,6 +29,7 @@ export default function LcpRemovalView({ run, step }) {
         <div className="lcp-tiles">
           {secondCells.map((ch, i) => (
             <span key={`s${i}`} className={`lcp-tile lcp-tile--second${i < reach ? ' lcp-tile--reached' : ''}`}>
+              <b className="lcp-tag">{i === reach ? 'reach' : ''}</b>
               {ch}
               <small>{i}</small>
             </span>

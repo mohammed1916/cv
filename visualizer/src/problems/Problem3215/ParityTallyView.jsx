@@ -1,10 +1,5 @@
 import "./ParityTallyView.css";
-
-function parityOf(v) {
-  let n = 0;
-  for (let t = v; t > 0; t >>= 1) n += t & 1;
-  return n % 2 === 0 ? "even" : "odd";
-}
+import IndexedSequence from "../../components/shared/IndexedSequence";
 
 export default function ParityTallyView({ run, step }) {
   if (!run || !step) {
@@ -35,7 +30,7 @@ export default function ParityTallyView({ run, step }) {
               ) : (
                 <p className="pt-empty">not tallied yet</p>
               )}
-              <p className="pt-values">{step[name].map((v) => `${v}(${parityOf(v)[0]})`).join("  ")}</p>
+              <IndexedSequence label={`Array ${name}`} length={step[name].length} valueAt={(index) => step[name][index]} active={-1} />
             </div>
           );
         })}

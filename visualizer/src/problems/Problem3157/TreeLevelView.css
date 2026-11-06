@@ -1,22 +1,14 @@
-.tree-level { display: grid; gap: 10px; padding: 12px; }
+.tree-level { display: grid; gap: 12px; padding: 12px; color: var(--text); }
 .tree-level svg { width: 100%; max-width: 620px; height: auto; }
-.tree-level__edge { stroke: var(--border, #94a3b8); stroke-width: 2; }
-.tree-level__node circle { stroke-width: 3; fill: var(--surface, #f8fafc); stroke: var(--border, #94a3b8); }
-.tree-level__node text { font-size: 13px; font-weight: 700; fill: var(--text, #0f172a); font-variant-numeric: tabular-nums; }
-.tree-level__node.is-done circle { fill: #e5e7eb; stroke: #6b7280; }
-.tree-level__node.is-visited circle { fill: #15803d; stroke: #14532d; }
-.tree-level__node.is-visited text { fill: #f0fdf4; }
-.tree-level__node.is-current circle { stroke: #f59e0b; stroke-width: 4; }
+.tree-level__edge { stroke: var(--border); stroke-width: 2; }
+.tree-level__node circle { stroke-width: 3; fill: var(--surface2); stroke: var(--border); }
+.tree-level__node text { font-size: 13px; font-weight: 700; fill: var(--text); font-variant-numeric: tabular-nums; }
+.tree-level__node.is-done circle { fill: var(--surface); stroke: var(--text-dim); }
+.tree-level__node.is-visited circle { fill: color-mix(in srgb, var(--success) 22%, var(--surface2)); stroke: var(--success); }
+.tree-level__node.is-visited text { fill: var(--text); }
+.tree-level__node.is-current circle { stroke: var(--primary); stroke-width: 4; }
 .tree-level__node.is-waiting circle { stroke-dasharray: 4 3; }
-.tree-level__label { font-size: 12px; fill: var(--muted, #64748b); }
+.tree-level__label { font-size: 12px; fill: var(--text-muted); }
 .tree-level__sums { margin: 0; padding-left: 18px; display: grid; gap: 2px; font-variant-numeric: tabular-nums; }
-.tree-level__sums li.is-best { font-weight: 700; color: #15803d; }
-.tree-level__caption { margin: 0; }
-@media (prefers-color-scheme: dark) {
-  .tree-level__node circle { fill: #1e293b; stroke: #64748b; }
-  .tree-level__node text { fill: #e2e8f0; }
-  .tree-level__node.is-done circle { fill: #334155; stroke: #94a3b8; }
-  .tree-level__node.is-visited circle { fill: #22c55e; stroke: #bbf7d0; }
-  .tree-level__node.is-visited text { fill: #052e16; }
-  .tree-level__sums li.is-best { color: #4ade80; }
-}
+.tree-level__sums li.is-best { font-weight: 700; color: var(--success); }
+.tree-level__caption { margin: 0; color: var(--text); }

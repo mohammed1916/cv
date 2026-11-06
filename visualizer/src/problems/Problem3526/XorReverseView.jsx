@@ -11,6 +11,7 @@ export default function XorReverseView({ run, step }) {
       <div className="xr-array" aria-label="Current nums">
         {nums.map((v, i) => (
           <span key={i} className={`xr-cell${inRange(i) ? ' xr-cell--range' : ''}${i === at ? ' xr-cell--at' : ''}${pairEnd === i ? ' xr-cell--pair' : ''}`}>
+            <b className="xr-tag">{range && i === a ? 'l' : ''}{range && i === b ? 'r' : ''}{i === at ? 'i' : ''}</b>
             {v}
             <small>{i}</small>
           </span>

@@ -16,6 +16,11 @@ export default function SortedBlocksView({ run, step }) {
     <section className="sb-view" aria-label="Grid of sorted blocks">
       <table className="sb-view__grid">
         <caption>Left column {step.left >= 0 ? step.left : 'none'}, k = {k}</caption>
+        <thead>
+          <tr><th scope="col" aria-label="pointer" />{Array.from({ length: cols }, (_, c) => (
+            <td key={c} className="sb-view__pointer">{c === step.left ? 'left' : ''}</td>
+          ))}<td /></tr>
+        </thead>
         <tbody>
           {Array.from({ length: rows }, (_, r) => (
             <tr key={r} className={step.row === r ? 'sb-view__row--active' : ''}>
@@ -37,7 +42,7 @@ export default function SortedBlocksView({ run, step }) {
         </tbody>
       </table>
       <p className="sb-view__legend">
-        Dark cells are above k. Shaded cells are the row run from the left column. Outlined cells are the block being counted.
+        Struck, dashed cells are above k. Shaded cells are the row run from the left column. Outlined cells are the block being counted.
       </p>
       <dl className="sb-view__stats">
         <div><dt>Top to bottom</dt><dd>{step.top >= 0 ? `${step.top} to ${step.bottom}` : 'none'}</dd></div>

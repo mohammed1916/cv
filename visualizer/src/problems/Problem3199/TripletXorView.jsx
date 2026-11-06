@@ -26,7 +26,9 @@ export default function TripletXorView({ run, step }) {
             {step[name].map((v, idx) => (
               <span key={idx} role="listitem"
                 className={`tx-chip${hasPick && picks[name] === idx ? " tx-chip--pick" : ""}`}>
+                <b className="tx-ptr">{hasPick && picks[name] === idx ? { a: 'i', b: 'j', c: 'k' }[name] : ''}</b>
                 {v}
+                <small className="tx-idx">{idx}</small>
               </span>
             ))}
           </div>

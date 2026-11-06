@@ -1,92 +1,48 @@
 .pb-view {
-  --pb-ink: #0f172a;
-  --pb-muted: #475569;
-  --pb-line: #cbd5e1;
-  --pb-cell: #f8fafc;
-  --pb-target: #ccfbf1;
-  --pb-target-edge: #0f766e;
-  --pb-rook: #0f766e;
-  --pb-now: #fde68a;
-  color: var(--pb-ink);
+  color: var(--text);
   display: grid;
   gap: 12px;
   padding: 16px;
   font-family: system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  .pb-view {
-    --pb-ink: #e2e8f0;
-    --pb-muted: #94a3b8;
-    --pb-line: #334155;
-    --pb-cell: #1e293b;
-    --pb-target: #134e4a;
-    --pb-target-edge: #5eead4;
-    --pb-rook: #5eead4;
-    --pb-now: #854d0e;
-  }
-}
-
-.pb-board {
-  display: grid;
-  gap: 3px;
-  justify-content: start;
-}
+.pb-board { display: grid; gap: 3px; justify-content: start; }
 
 .pb-cell {
   align-items: center;
-  background: var(--pb-cell);
-  border: 1px solid var(--pb-line);
+  background: var(--surface2);
+  border: 1px solid var(--border);
   border-radius: 4px;
   display: flex;
   height: 42px;
   justify-content: center;
   width: 42px;
+  color: var(--text);
 }
 
 .pb-cell--target {
-  background: var(--pb-target);
-  border-color: var(--pb-target-edge);
+  background: color-mix(in srgb, var(--success) 20%, var(--surface2));
+  border-color: var(--success);
   border-width: 2px;
 }
 
-.pb-rook {
-  color: var(--pb-rook);
-  font-weight: 700;
-  font-size: 18px;
-}
+.pb-rook { color: var(--primary); font-weight: 700; font-size: 18px; }
+.pb-count { font-size: 11px; color: var(--text-muted); margin-left: 2px; }
+.pb-caption { color: var(--text-muted); margin: 0; font-size: 14px; }
 
-.pb-count {
-  font-size: 11px;
-  color: var(--pb-muted);
-  margin-left: 2px;
-}
-
-.pb-caption {
-  color: var(--pb-muted);
-  margin: 0;
-  font-size: 14px;
-}
-
-.pb-ranks {
-  display: grid;
-  gap: 6px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
+.pb-ranks { display: grid; gap: 6px; list-style: none; margin: 0; padding: 0; }
 .pb-ranks li {
-  border: 1px solid var(--pb-line);
+  border: 1px solid var(--border);
   border-radius: 6px;
-  padding: 6px 10px;
+  padding: 8px 12px;
+  background: var(--surface);
+  color: var(--text);
 }
 
 .pb-now {
-  background: var(--pb-now);
+  background: color-mix(in srgb, var(--primary) 18%, var(--surface));
+  border-color: var(--primary);
   font-weight: 600;
 }
 
-.pb-empty {
-  color: var(--pb-muted);
-}
+.pb-empty { color: var(--text-muted); }

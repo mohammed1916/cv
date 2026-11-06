@@ -20,6 +20,7 @@ function ArrayStrip({ step, k }) {
         const changed = step.changed === index
         return <div key={index} data-index={index} data-removed={removed ? 'true' : undefined} data-hit={hit ? 'true' : undefined}
           style={{ ...cell, minWidth: 62, opacity: removed ? 0.42 : 1, borderColor: hit ? 'var(--success)' : changed ? 'var(--primary)' : 'var(--border)', borderWidth: hit || changed ? 2 : 1 }}>
+          <small style={{ color: 'var(--primary)', display: 'block', minHeight: 15, fontWeight: 700 }}>{query && index === start ? 'start' : ' '}</small>
           <small style={{ color: 'var(--text-muted)' }}>[{index}]</small>
           <strong style={{ display: 'block', overflowWrap: 'anywhere' }}>{value}</strong>
           <small style={{ display: 'block', color: 'var(--text-muted)' }}>mod {k} = {value % k}</small>

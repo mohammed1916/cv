@@ -30,12 +30,12 @@ export default function FindCitiesInEachState() {
       {step.groups.map(g => {
         const status = g.count < 3 ? 'fewer than 3 cities' : g.matching === 0 ? 'no city starts with the state letter' : 'kept'
         const kept = g.count >= 3 && g.matching > 0
-        return <div key={g.state} style={{ padding: 10, borderRadius: 8, color: 'var(--text)', border: `2px solid ${step.current === g.state ? 'var(--primary, #2563eb)' : 'var(--surface2, #d1d5db)'}`, opacity: kept ? 1 : 0.6 }}>
+        return <div key={g.state} style={{ padding: 10, borderRadius: 8, color: 'var(--text)', border: `2px solid ${step.current === g.state ? 'var(--primary)' : 'var(--border)'}`, opacity: kept ? 1 : 0.6 }}>
           <strong>{g.state}</strong>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, margin: '6px 0' }}>
             {g.cities.split(', ').map(city => {
               const match = g.matchingCities.includes(city)
-              return <span key={city} style={{ padding: '2px 6px', borderRadius: 5, fontSize: 12, background: match ? 'var(--primary, #2563eb)' : 'var(--surface2, transparent)', color: match ? '#fff' : 'var(--text)', border: '1px solid var(--surface2, #d1d5db)' }}>{city}</span>
+              return <span key={city} style={{ padding: '2px 6px', borderRadius: 5, fontSize: 12, background: match ? 'color-mix(in srgb, var(--primary) 22%, var(--surface2))' : 'var(--surface2)', color: 'var(--text)', border: '1px solid var(--border)' }}>{city}</span>
             })}
           </div>
           <small style={{ color: 'var(--muted, var(--text))' }}>{g.count} cities, {g.matching} starting with {g.state[0]}: {status}</small>

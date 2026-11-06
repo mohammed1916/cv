@@ -32,7 +32,7 @@ export default function SmallestDivisibleDigitProduct() {
       <div aria-label="Digits" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {[...digits].map((ch, i) => {
           const role = i === raise ? 'raised' : i < keep ? 'kept' : i > raise && raise >= 0 ? 'filler' : ''
-          return <div key={i} data-role={role} style={{ minWidth: 40, padding: '0.5rem', textAlign: 'center', borderRadius: 6, border: `2px solid ${role === 'raised' ? 'var(--primary)' : 'var(--border, #94a3b8)'}`, opacity: role === 'filler' ? 0.8 : 1 }}>
+          return <div key={i} data-role={role} style={{ minWidth: 40, padding: '0.5rem', textAlign: 'center', borderRadius: 6, border: `2px solid ${role === 'raised' ? 'var(--primary)' : 'var(--border)'}`, opacity: role === 'filler' ? 0.8 : 1 }}>
             <strong>{ch}</strong>
             <small style={{ display: 'block' }}>{role || (i === keep ? 'split' : ' ')}</small>
           </div>

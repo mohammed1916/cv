@@ -11,6 +11,7 @@ export default function WindowHitView({ run, step }) {
       <div className="win-array" aria-label="Array">
         {nums.map((v, i) => (
           <span key={i} className={`win-cell${replaced.includes(i) ? ' win-cell--replaced' : ''}${inWindow(i) ? ' win-cell--window' : ''}`}>
+            <b className="win-tag">{w && i === w.l ? 'l' : ''}{w && i === w.r ? 'r' : ''}</b>
             {v}
             <small>{replaced.includes(i) ? 'replaced' : i}</small>
           </span>

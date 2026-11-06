@@ -1,3 +1,4 @@
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { DPTable } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python } from './algorithm'
@@ -20,6 +21,7 @@ const definition = {
 
 export default function GoodSubsequenceI() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="nums" length={run.input.nums.length} valueAt={index => run.input.nums[index]} active={step.index >= 0 ? step.index : -1} />
     <DPTable title="dp[i][c]: longest good subsequence ending at i with c changes"
       values={step.dp.map(row => row.map(v => (v === null ? '-' : v)))}
       rowLabels={step.dp.map((_, i) => `${i}:${run.input.nums[i]}`)}

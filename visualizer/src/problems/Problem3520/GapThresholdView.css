@@ -1,103 +1,24 @@
 .gap-view {
-  --gap-ink: #0f172a;
-  --gap-muted: #475569;
-  --gap-bar: #94a3b8;
-  --gap-pair: #fb923c;
-  --gap-fill: #bbf7d0;
-  --gap-mid: #7c3aed;
-  color: var(--gap-ink);
+  color: var(--text);
   display: grid;
   gap: 12px;
   padding: 16px;
   font-family: system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  .gap-view {
-    --gap-ink: #e2e8f0;
-    --gap-muted: #94a3b8;
-    --gap-bar: #475569;
-    --gap-pair: #c2410c;
-    --gap-fill: #14532d;
-    --gap-mid: #c4b5fd;
-  }
-}
+.gap-bars { align-items: end; display: flex; gap: 8px; min-height: 120px; overflow-x: auto; }
 
-.gap-bars {
-  align-items: end;
-  display: flex;
-  gap: 8px;
-  min-height: 120px;
-  overflow-x: auto;
-}
-
-.gap-col {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  min-width: 40px;
-}
-
-.gap-value {
-  font-family: ui-monospace, monospace;
-  font-size: 0.9rem;
-}
-
-.gap-bar {
-  background: var(--gap-bar);
-  border-radius: 4px 4px 0 0;
-  width: 26px;
-}
-
-.gap-col--pair .gap-bar {
-  background: var(--gap-pair);
-}
-
-.gap-col--left .gap-bar {
-  outline: 2px solid #9a3412;
-}
-
-.gap-col small {
-  color: var(--gap-muted);
-  font-size: 0.7rem;
-}
-
-.gap-range {
-  display: grid;
-  gap: 4px;
-}
-
-.gap-range-track {
-  background: #e2e8f0;
-  border-radius: 6px;
-  height: 12px;
-  position: relative;
-  width: 100%;
-}
-
-.gap-range-fill {
-  background: var(--gap-fill);
-  border-radius: 6px;
-  bottom: 0;
-  position: absolute;
-  top: 0;
-}
-
-.gap-mid {
-  background: var(--gap-mid);
-  bottom: -4px;
-  position: absolute;
-  top: -4px;
-  width: 4px;
-}
+.gap-col { align-items: center; display: flex; flex-direction: column; gap: 4px; min-width: 40px; }
+.gap-tag { color: var(--primary); font-size: 0.75rem; min-height: 14px; }
+.gap-value { font-family: ui-monospace, monospace; font-size: 0.9rem; color: var(--text); }
+.gap-bar { background: var(--text-muted); border-radius: 4px 4px 0 0; width: 26px; }
+.gap-col--pair .gap-bar { background: var(--error); }
+.gap-col--left .gap-bar { outline: 2px solid var(--primary); }
+.gap-col small { color: var(--text-muted); font-size: 0.7rem; }
 
 .gap-range-text,
 .gap-count,
 .gap-pair,
 .gap-summary,
-.gap-empty {
-  color: var(--gap-muted);
-  font-size: 0.9rem;
-  margin: 0;
-}
+.gap-empty { color: var(--text-muted); font-size: 0.9rem; margin: 0; }
+.gap-summary { color: var(--text); }

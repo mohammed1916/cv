@@ -1,4 +1,5 @@
 import './GapThresholdView.css'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 
 // Bars show each value. The pair being tested is outlined. The threshold range is a bar from lo to hi, with the midpoint marked.
 export default function GapThresholdView({ run, step }) {
@@ -10,11 +11,13 @@ export default function GapThresholdView({ run, step }) {
   const span = Math.max(1, max - min)
   const pct = value => `${((value - min) / span) * 100}%`
   const [pi, pj] = pair || [-1, -1]
+  const verdict = step.hi === mid ? true : step.lo === (mid ?? -2) + 1 ? false : null
   return (
     <section className="gap-view" aria-label="Inversion pairs and threshold search">
       <div className="gap-bars" aria-label="Values">
         {nums.map((v, i) => (
           <div key={i} className={`gap-col${i === pi || i === pj ? ' gap-col--pair' : ''}${i === pi ? ' gap-col--left' : ''}`}>
+            <b className="gap-tag">{i === pi ? 'i' : ''}{i === pj ? 'j' : ''}</b>
             <span className="gap-value">{v}</span>
             <span className="gap-bar" style={{ height: `${Math.max(8, ((v - min) / span) * 90 + 10)}px` }} />
             <small>{i}</small>
@@ -22,13 +25,8 @@ export default function GapThresholdView({ run, step }) {
         ))}
       </div>
       {lo !== null && lo !== undefined && hi !== null && hi !== undefined && (
-        <div className="gap-range" aria-label={`Threshold range ${lo} to ${hi}`}>
-          <span className="gap-range-track">
-            <span className="gap-range-fill" style={{ left: pct(Math.min(lo, max)), width: `${Math.max(0, ((Math.min(hi, max) - Math.min(lo, max)) / span) * 100)}%` }} />
-            {mid !== null && mid !== undefined && <span className="gap-mid" style={{ left: pct(Math.min(mid, max)) }} title={`mid ${mid}`} />}
-          </span>
-          <span className="gap-range-text">threshold in [{lo}, {hi}]{mid !== null && mid !== undefined ? `, mid ${mid}` : ''}</span>
-        </div>
+        <AnswerRangeBar title="Threshold search" min={0} max={Math.max(span, hi, 1)} low={lo} high={hi}
+          probe={mid !== null && mid !== undefined && verdict !== null ? mid : null} verdict={verdict} />
       )}
       <p className="gap-count">
         {limit !== undefined && limit !== Infinity ? `limit ${limit}` : limit === Infinity ? 'limit infinity' : ''}

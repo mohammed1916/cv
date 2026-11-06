@@ -12,6 +12,7 @@ export default function PairDeletionTableView({ run, step }) {
       <div className="pd-array" aria-label="Values">
         {nums.map((v, i) => (
           <span key={i} className={`pd-value${inWindow(i) ? ' pd-value--window' : ''}${l >= 0 && (i === l || i === l + 1) ? ' pd-value--front' : ''}${l >= 0 && (i === r || i === r - 1) && r > l + 1 ? ' pd-value--back' : ''}`}>
+            <b className="pd-tag">{l >= 0 && i === l ? 'l' : ''}{l >= 0 && i === r ? 'r' : ''}</b>
             {v}
             <small>{i}</small>
           </span>

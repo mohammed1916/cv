@@ -38,16 +38,17 @@ export default function HopScoreView({ run, step }) {
               </marker>
             </defs>
             {step.from.map((from, to) => (to > 0 && from >= 0 && step.best[to] !== null ? (
-              <path key={`chosen-${to}`} d={arcPath(from, to, base)} fill="none" stroke="var(--hs-chosen)" strokeWidth="2.5" markerEnd="url(#hs-head)" />
+              <path key={`chosen-${to}`} d={arcPath(from, to, base)} fill="none" stroke="var(--text-muted)" strokeWidth="2.5" markerEnd="url(#hs-head)" />
             ) : null))}
             {i >= 0 && j >= 0 && i < j && (
-              <path d={arcPath(i, j, base)} fill="none" stroke={step.improves ? "var(--hs-best)" : "var(--hs-try)"}
+              <path d={arcPath(i, j, base)} fill="none" stroke={step.improves ? "var(--success)" : "var(--primary)"}
                 strokeWidth="2" strokeDasharray="6 4" markerEnd="url(#hs-head)" />
             )}
           </svg>
           <div className="hs-cells">
             {nums.map((v, idx) => (
               <div key={idx} className="hs-col">
+                <span className="hs-tag">{idx === i ? "i" : ""}{idx === j ? "j" : ""}</span>
                 <div className={`hs-cell${idx === j ? " hs-cell--target" : ""}${idx === i ? " hs-cell--from" : ""}`}
                   aria-label={`index ${idx}, value ${v}`}>{v}</div>
                 <span className="hs-index">{idx}</span>

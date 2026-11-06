@@ -26,6 +26,7 @@ export default function MinimumAreaOnesI() {
     }
     return <>
       <MatrixGrid matrix={run.input} label="Grid with covering box" highlightedCells={highlighted} />
+      <output aria-label="Box pointers">{step.box ? `top = ${step.box.top}, bottom = ${step.box.bottom}, left = ${step.box.left}, right = ${step.box.right}` : 'top, bottom, left and right are not set yet'}</output>
       <output aria-label="Box area">{step.area === null ? 'No 1 seen yet' : `Box area so far: ${step.area}`}</output>
       <p>{step.message}</p>
     </>
