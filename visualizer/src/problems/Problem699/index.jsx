@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import IntervalView from '../../components/shared/IntervalView'
 import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python } from './algorithm'
@@ -20,12 +21,13 @@ const definition = {
 }
 
 export default function FallingSquares() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const intervals = step.placed.map(s => ({
       start: s.left, end: s.right, group: 'street', label: `h${s.height}`,
       role: step.index !== null && s.index === step.index ? 'current' : 'kept',
     }))
     return <>
+      <IndexedSequence label="Squares in input order" length={run.input.length} valueAt={k => `[${run.input[k][0]}, ${run.input[k][0] + run.input[k][1]})`} active={step.index ?? -1} />
       <IntervalView title="Squares on the number line" intervals={intervals} note={`Tallest so far: ${step.best}`} />
       <RecordStateTable label="Heights" columns={['square', 'height']}
         rows={step.placed.map(s => ({ square: s.index + 1, height: s.height }))} activeRow={step.placed.length - 1} />

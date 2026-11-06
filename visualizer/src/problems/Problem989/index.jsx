@@ -16,9 +16,9 @@ const definition = {
 }
 
 const cellStyle = active => ({
-  minWidth: 40, padding: '6px 8px', borderRadius: 6, textAlign: 'center', color: 'var(--text)',
+  minWidth: 40, padding: 12, borderRadius: 6, textAlign: 'center', color: 'var(--text)',
   border: `2px solid ${active ? 'var(--primary)' : 'var(--border)'}`,
-  background: active ? 'var(--primary-glow)' : 'var(--surface)',
+  background: active ? 'var(--surface2)' : 'var(--surface)',
 })
 
 export default function Problem989() {
@@ -34,7 +34,7 @@ export default function Problem989() {
     return <section aria-label="Column addition" style={{ display: 'grid', gap: 8, justifyItems: 'start' }}>
       <div style={{ display: 'flex', gap: 4 }}>
         {numRow.map((digit, column) => <div key={`n${column}`} style={cellStyle(column === cursorColumn)}>
-          <small style={{ display: 'block', color: 'var(--text-muted)' }}>num</small>
+          <small style={{ display: 'block', color: 'var(--text-muted)' }}>{column === cursorColumn ? 'num, pointer i' : 'num'}</small>
           <strong>{digit ?? ''}</strong>
         </div>)}
       </div>

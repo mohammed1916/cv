@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
@@ -20,7 +21,8 @@ const definition = {
 }
 
 export default function LongestWordInDictionary() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="Words" length={run.input.length} valueAt={k => run.input[k]} active={run.input.indexOf(step.current)} />
     <RecordStateTable label="Words checked shortest first" columns={['word', 'parent', 'buildable']}
       rows={step.rows.map(r => ({ word: r.word, parent: r.parent, buildable: r.buildable ? 'yes' : 'no' }))}
       activeRow={step.rows.findIndex(r => r.word === step.current)} />

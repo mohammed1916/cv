@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import MatrixGrid from '../../components/shared/MatrixGrid'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
@@ -21,6 +22,8 @@ const definition = {
 
 export default function MinimumAsciiDeleteSum() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="s1 (rows)" length={run.input.s1.length} valueAt={k => run.input.s1[k]} active={step.phase === 'done' ? -1 : step.row - 1} />
+    <IndexedSequence label="s2 (columns)" length={run.input.s2.length} valueAt={k => run.input.s2[k]} active={step.phase === 'done' ? -1 : step.column - 1} />
     <MatrixGrid label="dp table: rows follow s1, columns follow s2" matrix={step.table}
       activeCell={step.row ? { row: step.row, col: step.column } : null}
       highlightedCells={step.sources.map(([row, col]) => ({ row, col }))} />

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
@@ -19,7 +20,9 @@ const definition = {
 }
 
 export default function MinSwapIncreasing() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="a" length={run.input.a.length} valueAt={k => run.input.a[k]} active={step.i ?? -1} />
+    <IndexedSequence label="b" length={run.input.b.length} valueAt={k => run.input.b[k]} active={step.i ?? -1} />
     <RecordStateTable label="Pairs and the cost of each choice" columns={['i', 'a[i]', 'b[i]', 'keep', 'swap']}
       rows={step.rows.map(r => ({ i: r.i, 'a[i]': r.a, 'b[i]': r.b, keep: r.keep === Infinity ? '–' : r.keep, swap: r.swap === Infinity ? '–' : r.swap }))}
       activeRow={step.rows.length - 1} />

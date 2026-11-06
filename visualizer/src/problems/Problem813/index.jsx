@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import MatrixGrid from '../../components/shared/MatrixGrid'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
@@ -20,6 +21,7 @@ const definition = {
 
 export default function LargestSumOfAverages() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="nums (the last group ends at the active position)" length={run.input.nums.length} valueAt={k => run.input.nums[k]} active={step.i !== null && step.i > 0 ? step.i - 1 : -1} roleAt={k => (step.cut !== undefined && k === step.cut ? 'cut' : '')} />
     <MatrixGrid label="Best totals: row = number of groups, column = prefix length" matrix={step.table}
       activeCell={step.i !== null ? { row: step.g - 1, col: step.i } : null} />
     <output aria-label="Step">{step.message}</output>

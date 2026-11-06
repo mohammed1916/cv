@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
@@ -20,7 +21,8 @@ const definition = {
 }
 
 export default function NumberOfLines() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="Text s" length={run.input.s.length} valueAt={k => run.input.s[k]} active={step.i ?? -1} />
     <RecordStateTable label="Letters placed so far" columns={['letter', 'width', 'line', 'used on line']}
       rows={step.rows.map(r => ({ letter: r.letter, width: r.w, line: r.line, 'used on line': r.used }))}
       activeRow={step.rows.length - 1} />

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { DPTable } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
@@ -20,6 +21,7 @@ const definition = {
 
 export default function DifferentPalindromes() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="String s with pointers" length={run.input.length} valueAt={k => run.input[k]} active={-1} roleAt={k => (k === step.row ? 'i' : k === step.column ? 'j' : k === step.l ? 'l' : k === step.r ? 'r' : '')} />
     <DPTable title="Distinct palindromes in s[i..j]" values={step.table} rowLabels={run.input.split('').map((c, i) => `${i}${c}`)}
       columnLabels={run.input.split('').map((c, j) => `${j}${c}`)} activeCell={{ row: step.row, column: step.column }} />
     <output aria-label="Count">{step.phase === 'done' ? `Count: ${step.result}` : `Cell [${step.row}, ${step.column}]`}</output>

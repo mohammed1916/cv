@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
@@ -20,7 +21,8 @@ const definition = {
 }
 
 export default function BinaryTreesWithFactors() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="arr" length={run.input.arr.length} valueAt={k => run.input.arr[k]} active={run.input.arr.indexOf(step.x)} />
     <RecordStateTable label="Roots processed in order" columns={['root', 'factor pairs', 'trees rooted here']}
       rows={step.rows.map(r => ({ root: r.value, 'factor pairs': r.pairs, 'trees rooted here': r.trees }))}
       activeRow={step.rows.length - 1} />

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
@@ -21,6 +22,7 @@ const definition = {
 
 export default function StringWithoutTriples() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+    <IndexedSequence label="Letters so far" length={step.s.length} valueAt={k => step.s[k]} active={step.s.length - 1} />
     <StackLane title="String so far" items={[...step.s]} note={`a ${step.left.a} · b ${step.left.b} · c ${step.left.c} left`} />
     <output aria-label="Message">{step.message}</output>
   </>} renderReasoning={() => <>

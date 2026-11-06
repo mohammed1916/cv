@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { DPTable } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
@@ -24,6 +25,7 @@ export default function NumberOfLis() {
     const labels = run.input.map(String)
     const related = step.j !== null ? [{ row: 0, column: step.j }] : []
     return <>
+      <IndexedSequence label="Input array with current indices" length={run.input.length} valueAt={k => run.input[k]} active={step.i ?? -1} roleAt={k => (k === step.j ? 'j' : '')} />
       <DPTable title="Longest run length and count ending at each value" values={step.table} rowLabels={['length', 'count']}
         columnLabels={labels} activeCell={step.i !== null ? { row: 0, column: step.i } : null} relatedCells={related} />
       <output aria-label="Current cell">{step.i !== null ? `Ending at ${run.input[step.i]}: length ${step.table[0][step.i]}, count ${step.table[1][step.i]}` : 'Start of the table'}</output>

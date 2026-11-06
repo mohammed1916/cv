@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import RecordStateTable from '../../components/shared/RecordStateTable'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
@@ -20,7 +21,8 @@ const definition = {
 }
 
 export default function UniqueMorseCodeWords() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="Words" length={run.input.length} valueAt={k => run.input[k]} active={step.index ?? -1} />
     <RecordStateTable label="Words, their Morse strings, and whether they are new" columns={['word', 'morse', 'status']}
       rows={step.rows.map(r => ({ word: r.word, morse: r.code, status: r.fresh ? 'new' : 'repeat' }))}
       activeRow={step.rows.length - 1} />
