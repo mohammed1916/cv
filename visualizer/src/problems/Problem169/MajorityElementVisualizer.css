@@ -16,15 +16,15 @@
 }
 
 .majority_element-status.success {
-  background: rgba(34, 197, 94, 0.1);
-  border-color: rgba(34, 197, 94, 0.3);
-  color: var(--recovered-ink-22c55e, #22c55e);
+  background: color-mix(in srgb, var(--success) 22%, var(--surface));
+  border-color: var(--success);
+  color: var(--success);
 }
 
 .majority_element-status.fail {
-  background: rgba(239, 68, 68, 0.1);
-  border-color: rgba(239, 68, 68, 0.3);
-  color: var(--recovered-ink-ef4444, #ef4444);
+  background: color-mix(in srgb, var(--error) 22%, var(--surface));
+  border-color: var(--error);
+  color: var(--error);
 }
 
 .majority_element-dock {
@@ -62,7 +62,7 @@
 .majority_element-input:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.1);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 10%, transparent);
 }
 
 .majority_element-visualization {

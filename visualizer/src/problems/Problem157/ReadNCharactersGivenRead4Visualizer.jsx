@@ -1,3 +1,4 @@
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import authoredExamples0 from '../../config/examples/read-n-characters-given-read4.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
@@ -134,11 +135,11 @@ function CharacterBox({ char, style = {} }) {
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 4,
-        backgroundColor: "var(--recovered-surface-a5b4fc, #a5b4fc)",
-        border: '2px solid #4f46e5',
+        backgroundColor: "color-mix(in srgb, var(--primary) 22%, var(--surface))",
+        border: '2px solid var(--primary)',
         fontSize: 12,
         fontWeight: 600,
-        color: '#1e1b4b',
+        color: 'var(--primary)',
         fontFamily: 'monospace',
         ...style,
       }}
@@ -151,19 +152,22 @@ function CharacterBox({ char, style = {} }) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: "var(--recovered-ink-627794, #627794)" }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: "var(--primary)" }}>Press play</div>
+  const consumed = (step.readChunks || []).reduce((total, chunk) => total + chunk.length, 0)
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ padding: 12, backgroundColor: "var(--recovered-surface-cffafe, #cffafe)", borderRadius: 6, borderLeft: '4px solid #06b6d4' }}>
-        <div style={{ fontSize: 12, color: '#164e63', fontStyle: 'italic' }}>
+      {step.file && <IndexedSequence label="File (pointer marks the next unread character)" length={step.file.length} active={Math.min(consumed, step.file.length - 1)}
+        valueAt={i => step.file[i]} roleAt={i => (i < consumed ? 'read' : '')} />}
+      <div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6, borderLeft: '4px solid var(--primary)' }}>
+        <div style={{ fontSize: 12, color: 'var(--primary)', fontStyle: 'italic' }}>
           Simulate read4: read 4 chars at a time, accumulate, return n.
         </div>
       </div>
 
       {step.chunk && step.chunk.length > 0 && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fef3c7, #fef3c7)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#92400e', marginBottom: 8 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "color-mix(in srgb, var(--warning) 22%, var(--surface))", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--warning)', marginBottom: 8 }}>
             Current Chunk (read4)
           </div>
           <div style={{ display: 'flex', gap: 6 }}>
@@ -175,8 +179,8 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.buf && step.buf.length > 0 && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dbeafe, #dbeafe)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--primary)', marginBottom: 8 }}>
             Buffer (accumulated)
           </div>
           <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
@@ -185,9 +189,9 @@ function VisualizationPanel({ step }) {
                 key={idx}
                 char={char}
                 style={{
-                  backgroundColor: "var(--recovered-surface-d1fae5, #d1fae5)",
-                  border: '2px solid #10b981',
-                  color: '#065f46',
+                  backgroundColor: "color-mix(in srgb, var(--success) 22%, var(--surface))",
+                  border: '2px solid var(--success)',
+                  color: 'var(--success)',
                 }}
               />
             ))}
@@ -196,14 +200,14 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.readChunks && step.readChunks.length > 0 && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-f3e8ff, #f3e8ff)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#5b21b6', marginBottom: 8 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--info)', marginBottom: 8 }}>
             Read4 Calls ({step.readChunks.length})
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {step.readChunks.map((chunk, chunkIdx) => (
               <div key={chunkIdx} style={{ display: 'flex', gap: 4 }}>
-                <span style={{ fontSize: 11, color: '#5b21b6', fontWeight: 600, minWidth: 40 }}>
+                <span style={{ fontSize: 11, color: 'var(--info)', fontWeight: 600, minWidth: 40 }}>
                   Call {chunkIdx + 1}:
                 </span>
                 <div style={{ display: 'flex', gap: 4 }}>
@@ -215,9 +219,9 @@ function VisualizationPanel({ step }) {
                         width: 28,
                         height: 28,
                         fontSize: 11,
-                        backgroundColor: "var(--recovered-surface-e9d5ff, #e9d5ff)",
-                        border: '1px solid #a78bfa',
-                        color: '#5b21b6',
+                        backgroundColor: "var(--surface2)",
+                        border: '1px solid var(--info)',
+                        color: 'var(--info)',
                       }}
                     />
                   ))}
@@ -229,8 +233,8 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.result && step.result.length > 0 && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dcfce7, #dcfce7)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 8 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--success)', marginBottom: 8 }}>
             Result (first {step.result.length})
           </div>
           <div style={{ display: 'flex', gap: 4 }}>
@@ -239,9 +243,9 @@ function VisualizationPanel({ step }) {
                 key={idx}
                 char={char}
                 style={{
-                  backgroundColor: "var(--recovered-surface-86efac, #86efac)",
-                  border: '2px solid #22c55e',
-                  color: '#065f46',
+                  backgroundColor: "color-mix(in srgb, var(--success) 22%, var(--surface))",
+                  border: '2px solid var(--success)',
+                  color: 'var(--success)',
                 }}
               />
             ))}
@@ -250,7 +254,7 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.message && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fef3c7, #fef3c7)", borderRadius: 6, fontSize: 12, color: '#92400e' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "color-mix(in srgb, var(--warning) 22%, var(--surface))", borderRadius: 6, fontSize: 12, color: 'var(--warning)' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           {step.message}
         </motion.div>
       )}
@@ -275,6 +279,7 @@ export default function ReadNCharactersGivenRead4Visualizer() {
     () =>
       generateSteps(file, n).map((s) => ({
         ...s,
+        file,
         relatedLines: s.relatedLines ?? (s.activeLine ? [s.activeLine] : []),
       })),
     [file, n]
@@ -318,7 +323,7 @@ export default function ReadNCharactersGivenRead4Visualizer() {
     </>)
 
   const statusPanel = (
-    <div className="rn4-status" style={{ padding: 8, fontSize: 12, color: "var(--recovered-ink-627794, #627794)" }}>
+    <div className="rn4-status" style={{ padding: 8, fontSize: 12, color: "var(--primary)" }}>
       {step ? `Step ${stepIndex + 1} / ${steps.length}: ${step.message || 'Processing'}` : 'Ready'}
     </div>
   )

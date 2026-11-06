@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import FontFitView from './FontFitView'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -29,7 +30,16 @@ const definition = {
 export default function MaxFontToFit() {
   return <AlgorithmWorkspace
     definition={definition}
-    renderVisual={({ run, step }) => <FontFitView run={run} step={step} />}
+    renderVisual={({ run, step }) => {
+      const { sizes } = run.input
+      const low = step.lo >= 0 && step.lo < sizes.length ? sizes[step.lo] : sizes[sizes.length - 1]
+      const high = step.hi >= 0 && step.hi < sizes.length ? sizes[step.hi] : sizes[0]
+      return <>
+        <AnswerRangeBar title="Font size search" min={sizes[0]} max={sizes[sizes.length - 1]} low={Math.min(low, high)} high={Math.max(low, high)}
+          probe={step.size ?? null} verdict={step.verdict === 'fit'} />
+        <FontFitView run={run} step={step} />
+      </>
+    }}
     renderReasoning={({ step }) => <>
       <p>{step.message}</p>
       <p>The width and height both grow with the font size, so a size that fits makes every smaller size fit too, and the search can halve the range each probe.</p>

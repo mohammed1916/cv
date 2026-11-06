@@ -197,16 +197,16 @@ function StringComparison({ s1, s2, highlightIdx, mismatchPos }) {
                   alignItems: 'center',
                   justifyContent: 'center',
                   borderRadius: 4,
-                  backgroundColor: isMismatch ? "var(--recovered-surface-fecaca, #fecaca)" : isHighlight ? "var(--recovered-surface-fbbf24, #fbbf24)" : 'var(--text)',
-                  border: isMismatch ? '2px solid #ef4444' : isHighlight ? '2px solid #f59e0b' : '1px solid var(--border)',
+                  backgroundColor: isMismatch ? "color-mix(in srgb, var(--error) 22%, var(--surface))" : isHighlight ? "color-mix(in srgb, var(--warning) 22%, var(--surface))" : 'var(--surface2)',
+                  border: isMismatch ? '2px solid var(--error)' : isHighlight ? '2px solid var(--warning)' : '1px solid var(--border)',
                   fontSize: 12,
                   fontWeight: 600,
-                  color: (isMismatch ? 'var(--text-on-light)' : (isHighlight ? 'var(--text-on-light)' : 'var(--text-inverse)')),
+                  color: (isMismatch ? 'var(--text)' : (isHighlight ? 'var(--text)' : 'var(--text)')),
                   fontFamily: 'monospace',
                 }}
                 animate={{ scale: isHighlight ? 1.15 : 1 }}
               >
-                {char}
+                {char}{isHighlight && <small> i</small>}
               </motion.div>
             )
           })}
@@ -232,16 +232,16 @@ function StringComparison({ s1, s2, highlightIdx, mismatchPos }) {
                   alignItems: 'center',
                   justifyContent: 'center',
                   borderRadius: 4,
-                  backgroundColor: isMismatch ? "var(--recovered-surface-fecaca, #fecaca)" : isHighlight ? "var(--recovered-surface-fbbf24, #fbbf24)" : 'var(--text)',
-                  border: isMismatch ? '2px solid #ef4444' : isHighlight ? '2px solid #f59e0b' : '1px solid var(--border)',
+                  backgroundColor: isMismatch ? "color-mix(in srgb, var(--error) 22%, var(--surface))" : isHighlight ? "color-mix(in srgb, var(--warning) 22%, var(--surface))" : 'var(--surface2)',
+                  border: isMismatch ? '2px solid var(--error)' : isHighlight ? '2px solid var(--warning)' : '1px solid var(--border)',
                   fontSize: 12,
                   fontWeight: 600,
-                  color: (isMismatch ? 'var(--text-on-light)' : (isHighlight ? 'var(--text-on-light)' : 'var(--text-inverse)')),
+                  color: (isMismatch ? 'var(--text)' : (isHighlight ? 'var(--text)' : 'var(--text)')),
                   fontFamily: 'monospace',
                 }}
                 animate={{ scale: isHighlight ? 1.15 : 1 }}
               >
-                {char}
+                {char}{isHighlight && <small> i</small>}
               </motion.div>
             )
           })}
@@ -252,19 +252,19 @@ function StringComparison({ s1, s2, highlightIdx, mismatchPos }) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: "var(--recovered-ink-627794, #627794)" }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: "var(--primary)" }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fbcfe8, #fbcfe8)", borderRadius: 6, borderLeft: '4px solid #ec4899' }}>
-        <div style={{ fontSize: 12, color: '#831843', fontStyle: 'italic' }}>
+      <div style={{ padding: 12, backgroundColor: "color-mix(in srgb, var(--info) 22%, var(--surface))", borderRadius: 6, borderLeft: '4px solid var(--info)' }}>
+        <div style={{ fontSize: 12, color: 'var(--info)', fontStyle: 'italic' }}>
           Compare strings: mismatch check rest, length check insertion.
         </div>
       </div>
 
       {step.s1 && step.s2 && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dbeafe, #dbeafe)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--primary)', marginBottom: 8 }}>
             String Comparison
           </div>
           <StringComparison
@@ -277,22 +277,22 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.lenDiff !== undefined && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-f0fdf4, #f0fdf4)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 4 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--success)', marginBottom: 4 }}>
             Length Difference
           </div>
-          <div style={{ fontSize: 13, color: '#065f46' }}>
+          <div style={{ fontSize: 13, color: 'var(--success)' }}>
             |{step.s1?.length || 0} - {step.s2?.length || 0}| = {step.lenDiff}
           </div>
         </motion.div>
       )}
 
       {step.aRest !== undefined && step.bRest !== undefined && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-f3e8ff, #f3e8ff)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#5b21b6', marginBottom: 8 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--info)', marginBottom: 8 }}>
             After Mismatch
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 11, color: '#5b21b6', fontFamily: 'monospace' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 11, color: 'var(--info)', fontFamily: 'monospace' }}>
             <div>Rest 1: "{step.aRest}"</div>
             <div>Rest 2: "{step.bRest}"</div>
             <div>Match: {step.aRest === step.bRest ? '✓ Yes' : '✗ No'}</div>
@@ -304,23 +304,23 @@ function VisualizationPanel({ step }) {
         <motion.div
           style={{
             padding: 12,
-            backgroundColor: step.result ? "var(--recovered-surface-dcfce7, #dcfce7)" : "var(--recovered-surface-fee2e2, #fee2e2)",
+            backgroundColor: step.result ? "var(--surface2)" : "var(--surface2)",
             borderRadius: 6,
           }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: step.result ? '#065f46' : '#7f1d1d', marginBottom: 4 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: step.result ? 'var(--success)' : 'var(--error)', marginBottom: 4 }}>
             Result
           </div>
-          <div style={{ fontSize: 16, fontWeight: 700, color: step.result ? "var(--recovered-ink-10b981, #10b981)" : "var(--recovered-ink-ef4444, #ef4444)" }}>
+          <div style={{ fontSize: 16, fontWeight: 700, color: step.result ? "var(--success)" : "var(--error)" }}>
             {step.result ? 'True' : 'False'}
           </div>
         </motion.div>
       )}
 
       {step.message && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fef3c7, #fef3c7)", borderRadius: 6, fontSize: 12, color: '#92400e' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "color-mix(in srgb, var(--warning) 22%, var(--surface))", borderRadius: 6, fontSize: 12, color: 'var(--warning)' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           {step.message}
         </motion.div>
       )}

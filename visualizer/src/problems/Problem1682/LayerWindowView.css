@@ -3,7 +3,7 @@
 .lps2-tile { width: 44px; height: 44px; display: grid; place-items: center; border: 2px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); font: 700 18px ui-monospace, monospace; position: relative; }
 .lps2-tile small { position: absolute; bottom: -18px; font-size: 10px; color: var(--text-muted, var(--text)); }
 .lps2-tile--window { border-color: var(--primary); background: var(--surface2); }
-.lps2-tile--pair { border-color: var(--primary); background: var(--primary); color: var(--on-primary, #fff); }
+.lps2-tile--pair { border-color: var(--primary); background: var(--primary); color: var(--on-primary, var(--primary-contrast)); }
 .lps2-tag { position: absolute; top: -18px; font-size: 11px; font-weight: 700; color: var(--primary); }
 .lps2-facts { display: flex; gap: 12px; flex-wrap: wrap; }
 .lps2-table { border-collapse: collapse; font-family: ui-monospace, monospace; font-size: 13px; }

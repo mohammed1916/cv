@@ -1,5 +1,5 @@
 .tsc3-shell {
-  --tsc3-fixed: #92400e;
+  --tsc3-fixed: color-mix(in srgb, var(--warning) 22%, var(--surface));
   position: relative;
   display: flex;
   flex-direction: column;
@@ -12,7 +12,7 @@
 }
 
 :root[data-theme="dark"] .tsc3-shell {
-  --tsc3-fixed: #fbbf24;
+  --tsc3-fixed: color-mix(in srgb, var(--warning) 22%, var(--surface));
 }
 
 .tsc3-panel {
@@ -97,8 +97,8 @@
 
 .tsc3-input:focus {
   outline: none;
-  border-color: #0ea5e9;
-  box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.1);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 10%, transparent);
 }
 
 .tsc3-array {
@@ -148,7 +148,7 @@
 }
 
 .tsc3-cell.active {
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 30%, transparent);
 }
 
 .tsc3-idx {

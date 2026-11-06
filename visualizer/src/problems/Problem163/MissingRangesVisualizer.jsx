@@ -1,3 +1,4 @@
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import authoredExamples0 from '../../config/examples/missing-ranges.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
@@ -236,23 +237,23 @@ function NumberLine({ nums, lower, upper, currentIdx, gap, finalGap }) {
               borderRadius: 4,
               backgroundColor:
                 isGap || isFinalGap
-                  ? "var(--recovered-surface-fecaca, #fecaca)"
+                  ? "color-mix(in srgb, var(--error) 22%, var(--surface))"
                   : isNum
-                  ? "var(--recovered-surface-86efac, #86efac)"
+                  ? "color-mix(in srgb, var(--success) 22%, var(--surface))"
                   : isInRange
-                  ? 'var(--text)'
-                  : "var(--recovered-surface-f5f5f5, #f5f5f5)",
+                  ? 'var(--surface2)'
+                  : "var(--surface2)",
               border:
                 isGap || isFinalGap
-                  ? '2px solid #ef4444'
+                  ? '2px solid var(--error)'
                   : isNum
-                  ? '2px solid #22c55e'
+                  ? '2px solid var(--success)'
                   : isInRange
                   ? '1px solid var(--border)'
                   : 'none',
               fontSize: 11,
               fontWeight: 600,
-              color: (isGap || isFinalGap ? 'var(--text-on-light)' : (isNum ? 'var(--text-on-light)' : (isInRange ? 'var(--text-inverse)' : 'var(--text-on-light)'))),
+              color: (isGap || isFinalGap ? 'var(--text)' : (isNum ? 'var(--text)' : (isInRange ? 'var(--text)' : 'var(--text)'))),
               fontFamily: 'monospace',
             }}
             animate={{ scale: isGap || isFinalGap ? 1.1 : 1 }}
@@ -266,19 +267,21 @@ function NumberLine({ nums, lower, upper, currentIdx, gap, finalGap }) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: "var(--recovered-ink-627794, #627794)" }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: "var(--primary)" }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ padding: 12, backgroundColor: "var(--recovered-surface-cffafe, #cffafe)", borderRadius: 6, borderLeft: '4px solid #06b6d4' }}>
-        <div style={{ fontSize: 12, color: '#164e63', fontStyle: 'italic' }}>
+      <div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6, borderLeft: '4px solid var(--primary)' }}>
+        <div style={{ fontSize: 12, color: 'var(--primary)', fontStyle: 'italic' }}>
           Scan through numbers: identify gaps in range.
         </div>
       </div>
 
       {step.nums && step.lower !== undefined && step.upper !== undefined && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dbeafe, #dbeafe)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>
+        <IndexedSequence label="Input nums (pointer i marks the current index)" length={step.nums.length} active={step.currentIdx ?? -1}
+          valueAt={i => step.nums[i]} />
+        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--primary)', marginBottom: 8 }}>
             Number Line
           </div>
           <NumberLine
@@ -293,35 +296,35 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.currentNum !== undefined && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-f0fdf4, #f0fdf4)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 4 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--success)', marginBottom: 4 }}>
             Current Number
           </div>
-          <div style={{ fontSize: 14, fontFamily: 'monospace', color: '#065f46', fontWeight: 600 }}>
+          <div style={{ fontSize: 14, fontFamily: 'monospace', color: 'var(--success)', fontWeight: 600 }}>
             {step.currentNum}
           </div>
         </motion.div>
       )}
 
       {step.gap && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fee2e2, #fee2e2)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#7f1d1d', marginBottom: 4 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--error)', marginBottom: 4 }}>
             Gap Found
           </div>
-          <div style={{ fontSize: 13, color: '#7f1d1d', fontFamily: 'monospace', fontWeight: 600 }}>
+          <div style={{ fontSize: 13, color: 'var(--error)', fontFamily: 'monospace', fontWeight: 600 }}>
             {step.gap.start} to {step.gap.end}
           </div>
         </motion.div>
       )}
 
       {step.result && step.result.length > 0 && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dcfce7, #dcfce7)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 8 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--success)', marginBottom: 8 }}>
             Missing Ranges ({step.result.length})
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
             {step.result.map((range, idx) => (
-              <div key={idx} style={{ fontSize: 11, color: '#065f46', fontFamily: 'monospace' }}>
+              <div key={idx} style={{ fontSize: 11, color: 'var(--success)', fontFamily: 'monospace' }}>
                 {range.start === range.end ? range.start : `${range.start}->${range.end}`}
               </div>
             ))}
@@ -330,7 +333,7 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.message && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fef3c7, #fef3c7)", borderRadius: 6, fontSize: 12, color: '#92400e' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "color-mix(in srgb, var(--warning) 22%, var(--surface))", borderRadius: 6, fontSize: 12, color: 'var(--warning)' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           {step.message}
         </motion.div>
       )}
@@ -402,7 +405,7 @@ export default function MissingRangesVisualizer() {
   const statusPanel = (
     <div className="mrv-status">
       {step?.message ? (
-        <div style={{ padding: '8px 12px', fontSize: 12, color: "var(--recovered-ink-627794, #627794)" }}>
+        <div style={{ padding: '8px 12px', fontSize: 12, color: "var(--primary)" }}>
           {step.message}
         </div>
       ) : (

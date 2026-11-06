@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import CoordinatePlane from '../../components/shared/CoordinatePlane'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -32,6 +33,9 @@ export default function MaxVisiblePoints() {
     const wedge = { cx: lx, cy: ly, startDeg: step.start ?? 0, widthDeg: angle, label: 'view' }
     return <>
       <CoordinatePlane title="Viewer and visible points" points={drawn} wedge={step.start !== null ? wedge : null} />
+      <IndexedSequence label="Sorted directions in degrees (second copy adds 360)" length={step.doubled?.length ?? 0}
+        active={step.right ?? -1} valueAt={i => Math.round(step.doubled[i])}
+        roleAt={i => (i === step.left ? 'l' : i === step.right ? 'r' : step.left !== null && i > step.left && i < step.right ? 'window' : '')} />
       <output aria-label="Window">{step.phase === 'window' ? `Window holds ${step.count} point(s); best so far ${step.best}` : `Best so far ${step.best} (plus ${step.same} at the viewer)`}</output>
     </>
   }} renderReasoning={() => <>

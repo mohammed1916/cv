@@ -27,7 +27,7 @@ function Ranking({ order, total, takenBy, current }) {
         minWidth: 74, padding: '6px 8px', borderRadius: 8, textAlign: 'center', fontFamily: 'monospace', boxSizing: 'border-box',
         border: `2px solid ${isNow ? 'var(--primary)' : 'var(--border)'}`,
         background: player === 'Alice' ? 'var(--primary)' : player === 'Bob' ? 'var(--surface2)' : 'var(--surface)',
-        color: player === 'Alice' ? 'var(--on-primary, #fff)' : 'var(--text)',
+        color: player === 'Alice' ? 'var(--on-primary, var(--primary-contrast))' : 'var(--text)',
       }}>
         <div>turn {turn + 1}</div>
         <strong>stone {stone}</strong>

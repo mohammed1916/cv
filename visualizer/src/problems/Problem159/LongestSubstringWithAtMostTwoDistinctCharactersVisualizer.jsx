@@ -198,31 +198,34 @@ function StringVisualization({ s, left, right }) {
   if (!s) return null
 
   return (
-    <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+    <div role="img" aria-label="Input string with window pointers l and r" style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
       {s.split('').map((char, idx) => {
         const inWindow = idx >= left && idx <= right
+        const tag = idx === left && idx === right ? 'l, r' : idx === left ? 'l' : idx === right ? 'r' : ''
 
         return (
-          <motion.div
-            key={idx}
-            style={{
-              width: 36,
-              height: 36,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: 4,
-              backgroundColor: inWindow ? "var(--recovered-surface-a5b4fc, #a5b4fc)" : 'var(--text)',
-              border: idx === left || idx === right ? '3px solid #4f46e5' : '1px solid var(--border)',
-              fontSize: 13,
-              fontWeight: 600,
-              color: (inWindow ? 'var(--text-on-light)' : 'var(--text-inverse)'),
-              fontFamily: 'monospace',
-            }}
-            animate={{ scale: inWindow ? 1.1 : 1 }}
-          >
-            {char}
-          </motion.div>
+          <div key={idx} style={{ display: 'grid', justifyItems: 'center', gap: 2 }}>
+            <small style={{ minHeight: 16, fontWeight: 700, color: 'var(--primary)' }}>{tag}</small>
+            <motion.div
+              style={{
+                width: 36,
+                height: 36,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: 4,
+                backgroundColor: inWindow ? 'color-mix(in srgb, var(--primary) 22%, var(--surface))' : 'var(--surface2)',
+                border: idx === left || idx === right ? '3px solid var(--primary)' : '1px solid var(--border)',
+                fontSize: 13,
+                fontWeight: 600,
+                color: inWindow ? 'var(--text)' : 'var(--text-muted)',
+                fontFamily: 'monospace',
+              }}
+              animate={{ scale: inWindow ? 1.1 : 1 }}
+            >
+              {char}
+            </motion.div>
+          </div>
         )
       })}
     </div>
@@ -230,19 +233,19 @@ function StringVisualization({ s, left, right }) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: "var(--recovered-ink-627794, #627794)" }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: "var(--primary)" }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ padding: 12, backgroundColor: "var(--recovered-surface-f3e8ff, #f3e8ff)", borderRadius: 6, borderLeft: '4px solid #8b5cf6' }}>
-        <div style={{ fontSize: 12, color: '#5b21b6', fontStyle: 'italic' }}>
+      <div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6, borderLeft: '4px solid var(--info)' }}>
+        <div style={{ fontSize: 12, color: 'var(--info)', fontStyle: 'italic' }}>
           Sliding window: expand right, shrink left to maintain ≤2 distinct chars.
         </div>
       </div>
 
       {step.s && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dbeafe, #dbeafe)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--primary)', marginBottom: 8 }}>
             String
           </div>
           <StringVisualization s={step.s} left={step.left} right={step.right} />
@@ -250,11 +253,11 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.left !== undefined && step.right !== undefined && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-f0fdf4, #f0fdf4)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 8 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--success)', marginBottom: 8 }}>
             Window Info
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 12, color: '#065f46' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 12, color: 'var(--success)' }}>
             <div>left: {step.left}, right: {step.right}</div>
             {step.currentLen && <div>current length: {step.currentLen}</div>}
           </div>
@@ -262,13 +265,13 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.charCount && Object.keys(step.charCount).length > 0 && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-f3e8ff, #f3e8ff)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#5b21b6', marginBottom: 8 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--info)', marginBottom: 8 }}>
             Character Count ({Object.keys(step.charCount).length} distinct)
           </div>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             {Object.entries(step.charCount).map(([char, count]) => (
-              <div key={char} style={{ fontSize: 11, color: '#5b21b6', fontFamily: 'monospace', fontWeight: 600 }}>
+              <div key={char} style={{ fontSize: 11, color: 'var(--info)', fontFamily: 'monospace', fontWeight: 600 }}>
                 '{char}': {count}
               </div>
             ))}
@@ -277,19 +280,19 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.maxLen !== undefined && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dcfce7, #dcfce7)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 8 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--success)', marginBottom: 8 }}>
             Maximum Length
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 4, fontSize: 12, color: '#065f46' }}>
-            <div style={{ fontSize: 16, fontWeight: 700, color: "var(--recovered-ink-0c865d, #0c865d)" }}>{step.maxLen}</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 4, fontSize: 12, color: 'var(--success)' }}>
+            <div style={{ fontSize: 16, fontWeight: 700, color: "var(--success)" }}>{step.maxLen}</div>
             {step.maxSubstring && <div>"{step.maxSubstring}"</div>}
           </div>
         </motion.div>
       )}
 
       {step.message && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fef3c7, #fef3c7)", borderRadius: 6, fontSize: 12, color: '#92400e' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "color-mix(in srgb, var(--warning) 22%, var(--surface))", borderRadius: 6, fontSize: 12, color: 'var(--warning)' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           {step.message}
         </motion.div>
       )}
@@ -355,7 +358,7 @@ export default function LongestSubstringWithAtMostTwoDistinctCharactersVisualize
 
   const statusPanel = (
     <div className="lsatdc-status">
-      <div style={{ fontSize: 12, color: "var(--recovered-ink-627794, #627794)" }}>
+      <div style={{ fontSize: 12, color: "var(--primary)" }}>
         {step && step.message ? step.message : 'Press play to begin'}
       </div>
     </div>

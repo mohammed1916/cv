@@ -1,3 +1,4 @@
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import authoredExamples0 from '../../config/examples/read-n-characters-given-read4-ii.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
@@ -70,7 +71,7 @@ function generateSteps(file, callSequence) {
   for (let callIdx = 0; callIdx < callSequence.length; callIdx++) {
     const n = callSequence[callIdx][0]
 
-    allSteps.push({
+    allSteps.push({ fileIndex,
       activeLine: 4,
       callNum: callIdx + 1,
       n,
@@ -81,7 +82,7 @@ function generateSteps(file, callSequence) {
 
     // Fill queue
     while (globalQueue.length < n && fileIndex < file.length) {
-      allSteps.push({
+      allSteps.push({ fileIndex,
         activeLine: 5,
         callNum: callIdx + 1,
         n,
@@ -96,7 +97,7 @@ function generateSteps(file, callSequence) {
       fileIndex += chunkSize
 
       if (chunkSize === 0) {
-        allSteps.push({
+        allSteps.push({ fileIndex,
           activeLine: 7,
           callNum: callIdx + 1,
           n,
@@ -109,7 +110,7 @@ function generateSteps(file, callSequence) {
 
       globalQueue.push(...chunk)
 
-      allSteps.push({
+      allSteps.push({ fileIndex,
         activeLine: 9,
         callNum: callIdx + 1,
         n,
@@ -122,7 +123,7 @@ function generateSteps(file, callSequence) {
 
     const result = globalQueue.slice(0, n)
 
-    allSteps.push({
+    allSteps.push({ fileIndex,
       activeLine: 10,
       callNum: callIdx + 1,
       n,
@@ -134,7 +135,7 @@ function generateSteps(file, callSequence) {
 
     globalQueue = globalQueue.slice(n)
 
-    allSteps.push({
+    allSteps.push({ fileIndex,
       activeLine: 11,
       callNum: callIdx + 1,
       n,
@@ -144,7 +145,7 @@ function generateSteps(file, callSequence) {
       relatedLines: [11],
     })
 
-    allSteps.push({
+    allSteps.push({ fileIndex,
       activeLine: 12,
       callNum: callIdx + 1,
       n,
@@ -155,7 +156,7 @@ function generateSteps(file, callSequence) {
     })
   }
 
-  allSteps.push({
+  allSteps.push({ fileIndex,
     activeLine: 12,
     done: true,
     message: 'All read() calls completed',
@@ -175,11 +176,11 @@ function CharacterBox({ char, style = {} }) {
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 4,
-        backgroundColor: "var(--recovered-surface-a5b4fc, #a5b4fc)",
-        border: '2px solid #4f46e5',
+        backgroundColor: "color-mix(in srgb, var(--primary) 22%, var(--surface))",
+        border: '2px solid var(--primary)',
         fontSize: 12,
         fontWeight: 600,
-        color: '#1e1b4b',
+        color: 'var(--primary)',
         fontFamily: 'monospace',
         ...style,
       }}
@@ -192,30 +193,33 @@ function CharacterBox({ char, style = {} }) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: "var(--recovered-ink-627794, #627794)" }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: "var(--primary)" }}>Press play</div>
+  const consumed = step.fileIndex ?? 0
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fed7aa, #fed7aa)", borderRadius: 6, borderLeft: '4px solid #f97316' }}>
-        <div style={{ fontSize: 12, color: '#92400e', fontStyle: 'italic' }}>
+      {step.file && <IndexedSequence label="File (pointer marks the next unread character)" length={step.file.length} active={Math.min(consumed, step.file.length - 1)}
+        valueAt={i => step.file[i]} roleAt={i => (i < consumed ? 'read' : '')} />}
+      <div style={{ padding: 12, backgroundColor: "color-mix(in srgb, var(--warning) 22%, var(--surface))", borderRadius: 6, borderLeft: '4px solid var(--warning)' }}>
+        <div style={{ fontSize: 12, color: 'var(--warning)', fontStyle: 'italic' }}>
           Multiple calls with cache: queue holds between calls, fill on demand.
         </div>
       </div>
 
       {step.callNum !== undefined && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fecaca, #fecaca)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#7f1d1d', marginBottom: 4 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "color-mix(in srgb, var(--error) 22%, var(--surface))", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--error)', marginBottom: 4 }}>
             Call #{step.callNum}
           </div>
-          <div style={{ fontSize: 13, color: '#7f1d1d' }}>
+          <div style={{ fontSize: 13, color: 'var(--error)' }}>
             read({step.n})
           </div>
         </motion.div>
       )}
 
       {step.chunk && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fef3c7, #fef3c7)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#92400e', marginBottom: 8 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "color-mix(in srgb, var(--warning) 22%, var(--surface))", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--warning)', marginBottom: 8 }}>
             Read4 Chunk
           </div>
           <div style={{ display: 'flex', gap: 6 }}>
@@ -227,8 +231,8 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.globalQueue && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dbeafe, #dbeafe)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--primary)', marginBottom: 8 }}>
             Queue (cache)
           </div>
           <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
@@ -238,22 +242,22 @@ function VisualizationPanel({ step }) {
                   key={idx}
                   char={char}
                   style={{
-                    backgroundColor: "var(--recovered-surface-d1fae5, #d1fae5)",
-                    border: '2px solid #10b981',
-                    color: '#065f46',
+                    backgroundColor: "color-mix(in srgb, var(--success) 22%, var(--surface))",
+                    border: '2px solid var(--success)',
+                    color: 'var(--success)',
                   }}
                 />
               ))
             ) : (
-              <div style={{ fontSize: 11, color: '#0c4a6e' }}>empty</div>
+              <div style={{ fontSize: 11, color: 'var(--primary)' }}>empty</div>
             )}
           </div>
         </motion.div>
       )}
 
       {step.result && step.result.length > 0 && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-dcfce7, #dcfce7)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 8 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--success)', marginBottom: 8 }}>
             Return Value
           </div>
           <div style={{ display: 'flex', gap: 4 }}>
@@ -262,9 +266,9 @@ function VisualizationPanel({ step }) {
                 key={idx}
                 char={char}
                 style={{
-                  backgroundColor: "var(--recovered-surface-86efac, #86efac)",
-                  border: '2px solid #22c55e',
-                  color: '#065f46',
+                  backgroundColor: "color-mix(in srgb, var(--success) 22%, var(--surface))",
+                  border: '2px solid var(--success)',
+                  color: 'var(--success)',
                 }}
               />
             ))}
@@ -273,7 +277,7 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.message && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-fef3c7, #fef3c7)", borderRadius: 6, fontSize: 12, color: '#92400e' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div style={{ padding: 12, backgroundColor: "color-mix(in srgb, var(--warning) 22%, var(--surface))", borderRadius: 6, fontSize: 12, color: 'var(--warning)' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           {step.message}
         </motion.div>
       )}
@@ -298,6 +302,7 @@ export default function ReadNCharactersGivenRead4IIVisualizer() {
     () =>
       generateSteps(file, calls).map((s) => ({
         ...s,
+        file,
         relatedLines: s.relatedLines ?? (s.activeLine ? [s.activeLine] : []),
       })),
     [file, calls]

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -14,19 +15,12 @@ const definition = {
   ],
 }
 
-const tile = active => ({
-  minWidth: 48, boxSizing: 'border-box', padding: '6px 8px', textAlign: 'center', fontFamily: 'monospace',
-  border: `${active ? 2 : 1}px solid ${active ? 'var(--text)' : 'var(--border)'}`,
-})
-
 export default function MaxPositiveProductSubarray() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { index, pos, neg, best } = step.snapshot
     return <>
-      <div role="img" aria-label="Input values" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        {run.input.map((v, i) => <div key={i} data-index={i} style={tile(i === index)}>{v}<small> {i}</small></div>)}
-      </div>
-      <table aria-label="Running lengths" style={{ fontFamily: 'monospace', borderCollapse: 'collapse', marginTop: 12 }}>
+      <IndexedSequence label="Input array (current index i)" length={run.input.length} active={index ?? -1} valueAt={i => run.input[i]} />
+      <table aria-label="Running lengths" style={{ fontFamily: 'monospace', borderCollapse: 'collapse', marginTop: 12, color: 'var(--text)' }}>
         <tbody>
           <tr><th style={{ textAlign: 'left', paddingRight: 12 }}>pos (positive product)</th><td>{pos}</td></tr>
           <tr><th style={{ textAlign: 'left', paddingRight: 12 }}>neg (negative product)</th><td>{neg}</td></tr>

@@ -25,12 +25,12 @@ export function buildTrace({ points, angle, location }) {
   const doubled = [...angles, ...angles.map(a => a + 360)]
   const n = angles.length
   let best = 0, left = 0
-  const frames = [{ phase: 'start', pythonLine: 15, left: 0, right: -1, start: null, count: 0, best, same, activeLine: L('set best to 0'), message: `${same} point(s) sit exactly at the viewer and are always visible.` }]
+  const frames = [{ phase: 'start', pythonLine: 15, left: 0, right: -1, doubled, start: null, count: 0, best, same, activeLine: L('set best to 0'), message: `${same} point(s) sit exactly at the viewer and are always visible.` }]
   for (let right = 0; right < doubled.length; right++) {
     while (doubled[right] - doubled[left] > angle + EPS) left++
     const count = Math.min(right - left + 1, n)
     best = Math.max(best, count)
-    frames.push({ phase: 'window', pythonLine: 19, left, right, start: n ? ((doubled[left] % 360) + 360) % 360 : null, count, best, same, activeLine: L('set best to the larger'), message: `Window from angle ${doubled[left].toFixed(1)} to ${doubled[right].toFixed(1)} holds ${count} point(s). Best so far: ${best}.` })
+    frames.push({ phase: 'window', pythonLine: 19, left, right, doubled, start: n ? ((doubled[left] % 360) + 360) % 360 : null, count, best, same, activeLine: L('set best to the larger'), message: `Window from angle ${doubled[left].toFixed(1)} to ${doubled[right].toFixed(1)} holds ${count} point(s). Best so far: ${best}.` })
   }
   const result = best + same
   frames.push({ phase: 'done', pythonLine: 20, left: null, right: null, start: null, count: best, best, same, activeLine: L('return best plus'), message: `Most visible points: ${result}.` })

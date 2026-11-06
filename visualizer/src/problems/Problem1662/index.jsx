@@ -26,8 +26,8 @@ export default function ArrayStrings() {
         {chunks.map((chunk, ci) => <span key={ci} style={{ ...cell, display: 'inline-flex', gap: 2 }}>
           {[...chunk].map((ch, pos) => <span key={pos} style={{
             padding: '0 2px',
-            background: active && active.chunk === ci && active.pos === pos ? 'var(--primary)' : 'transparent',
-            color: active && active.chunk === ci && active.pos === pos ? 'var(--text-inverse)' : 'var(--text)',
+            background: active && active.chunk === ci && active.pos === pos ? 'color-mix(in srgb, var(--primary) 35%, var(--surface))' : 'transparent',
+            color: 'var(--text)',
           }}>{ch}</span>)}
         </span>)}
       </div>

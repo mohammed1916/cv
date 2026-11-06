@@ -1,21 +1,21 @@
-.font-view { display: grid; gap: 14px; }
+.font-view { display: grid; gap: 12px; color: var(--text); }
 .font-ladder { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; }
-.rung { display: grid; justify-items: center; min-width: 56px; padding: 6px 8px; border-radius: 8px; border: 1px solid #94a3b8; }
+.rung { display: grid; justify-items: center; min-width: 56px; padding: 12px; margin: 0 0 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface2); color: var(--text); }
 .rung-size { font-family: ui-monospace, monospace; font-weight: 600; }
 .rung-tags { font-size: 0.72rem; min-height: 1em; opacity: 0.85; }
-.rung.is-lo { border-color: #2563eb; }
-.rung.is-hi { border-color: #7c3aed; }
-.rung.is-mid { background: #fef3c7; border: 2px solid #b45309; color: #1c1917; }
-.rung.is-answer { background: #dcfce7; color: #14532d; }
+.rung.is-lo { border-color: var(--primary); }
+.rung.is-hi { border-color: var(--success); }
+.rung.is-mid { background: var(--surface); border: 2px solid var(--text); color: var(--text); }
+.rung.is-answer { background: color-mix(in srgb, var(--success) 25%, var(--surface)); color: var(--text); }
 .font-screen-wrap { overflow-x: auto; }
-.font-screen { position: relative; border: 2px solid #334155; border-radius: 6px; background: #f8fafc; color: #0f172a; max-width: 100%; }
+.font-screen { position: relative; border: 2px solid var(--border); border-radius: 6px; background: var(--surface2); color: var(--text); max-width: 100%; }
 .font-screen-label { position: absolute; top: -22px; left: 0; font-size: 0.8rem; }
 .font-glyphs { position: absolute; inset: 0; }
 .glyph {
   position: absolute; top: 0; display: flex; align-items: flex-end; justify-content: center;
-  background: #bfdbfe; border: 1px solid #1d4ed8; border-radius: 3px; font-family: ui-monospace, monospace;
+  background: color-mix(in srgb, var(--primary) 25%, var(--surface)); color: var(--text); border: 1px solid var(--primary); border-radius: 3px; font-family: ui-monospace, monospace;
   font-size: 0.75rem; overflow: hidden; box-sizing: border-box;
 }
-.glyph.is-over { background: #fecaca; border-color: #b91c1c; }
+.glyph.is-over { background: color-mix(in srgb, var(--error) 25%, var(--surface)); border-color: var(--error); }
 .glyph.is-space { background: transparent; border-style: dashed; }
 .font-readout { font-weight: 600; }

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { DPTable } from '../../components/shared/AlgorithmStatePrimitives'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
@@ -22,6 +23,8 @@ export default function RepeatingIntegers() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const m = run.input.quantity.length
     return <>
+      <IndexedSequence label="Customer values (nums)" length={run.input.nums.length} valueAt={i => run.input.nums[i]} />
+      <IndexedSequence label="Demands (quantity)" length={run.input.quantity.length} valueAt={i => run.input.quantity[i]} />
       <DPTable title="reachable[served set]: ✓ when a split exists" values={step.table} rowLabels={['reachable']}
         columnLabels={step.table[0].map((_, mask) => mask.toString(2).padStart(m, '0'))} />
       <output aria-label="Status">{step.message}</output>

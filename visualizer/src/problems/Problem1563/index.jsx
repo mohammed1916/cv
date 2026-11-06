@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { DPTable } from '../../components/shared/AlgorithmStatePrimitives'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -20,7 +21,9 @@ const definition = {
 }
 
 export default function StoneGameV() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="Stones" length={run.input.stones.length} valueAt={i => run.input.stones[i]}
+      roleAt={i => !step.cell ? '' : i === step.cell[0] ? 'l' : i === step.cell[1] ? 'r' : i === step.split ? 'split' : i > step.cell[0] && i < step.cell[1] ? 'window' : ''} />
     <DPTable title="best[i][j]: score from stones i to j" values={step.table}
       rowLabels={step.table.map((_, i) => i + 1)} columnLabels={step.table.map((_, j) => j + 1)}
       activeCell={step.cell ? { row: step.cell[0], column: step.cell[1] } : null} />

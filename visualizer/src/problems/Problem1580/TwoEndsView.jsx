@@ -32,7 +32,7 @@ export default function TwoEndsView({ run, step }) {
       </svg>
       <div className="te-shelf" aria-label="Boxes, smallest first">
         {boxes.map((h, i) => (
-          <span key={i} className={`te-box${i < (step.b ?? 0) ? ' te-box--placed' : i === step.b ? ' te-box--next' : ''}`}>{h}</span>
+          <span key={i} className={`te-box${i < (step.b ?? 0) ? ' te-box--placed' : i === step.b ? ' te-box--next' : ''}`}>{h}{i === step.b && <small> b</small>}</span>
         ))}
       </div>
       <figcaption>Blue: limit from the left. Orange: limit from the right. Placed {step.placed ?? 0}. {step.message}</figcaption>

@@ -33,7 +33,7 @@
 }
 
 .ts2-error {
-    color: var(--recovered-ink-ea0c0c, #ea0c0c);
+    color: var(--error);
     font-size: 12px;
     font-weight: 400;
 }
@@ -62,7 +62,7 @@
 .ts2-chip {
     border: 1px solid var(--border);
     color: var(--text-muted);
-    background: var(--recovered-surface-rgba30415908, rgba(30, 41, 59, 0.8));
+    background: color-mix(in srgb, var(--primary) 22%, var(--surface));
     border-radius: 999px;
     padding: 4px 12px;
     font-size: 12px;
@@ -147,25 +147,25 @@
 
 .ts2-cell.lo {
     border-color: var(--info);
-    background: rgba(56, 189, 248, 0.12);
+    background: color-mix(in srgb, var(--primary) 22%, var(--surface));
     color: var(--info);
 }
 
 .ts2-cell.hi {
-    border-color: #a855f7;
-    background: rgba(168, 85, 247, 0.12);
-    color: var(--recovered-ink-c084fc, #c084fc);
+    border-color: var(--info);
+    background: color-mix(in srgb, var(--info) 22%, var(--surface));
+    color: var(--info);
 }
 
 .ts2-cell.both {
     border-color: var(--warning);
-    background: rgba(251, 191, 36, 0.12);
+    background: color-mix(in srgb, var(--warning) 22%, var(--surface));
     color: var(--warning);
 }
 
 .ts2-cell.found {
     border-color: var(--success);
-    background: rgba(34, 197, 94, 0.15);
+    background: color-mix(in srgb, var(--success) 22%, var(--surface));
     color: var(--success);
     box-shadow: 0 0 12px var(--success-glow);
 }
@@ -194,13 +194,13 @@
 }
 
 .lo-ptr {
-    background: rgba(56, 189, 248, 0.2);
+    background: color-mix(in srgb, var(--primary) 22%, var(--surface));
     color: var(--info);
 }
 
 .hi-ptr {
-    background: rgba(168, 85, 247, 0.2);
-    color: var(--recovered-ink-c084fc, #c084fc);
+    background: color-mix(in srgb, var(--info) 22%, var(--surface));
+    color: var(--info);
 }
 
 /* ── Verdict ── */
@@ -213,28 +213,28 @@
 }
 
 .ts2-verdict.match {
-    background: rgba(34, 197, 94, 0.1);
-    border: 1px solid rgba(34, 197, 94, 0.3);
+    background: color-mix(in srgb, var(--success) 22%, var(--surface));
+    border: 1px solid var(--success);
     color: var(--success);
 }
 
 .ts2-verdict.low {
-    background: rgba(56, 189, 248, 0.08);
-    border: 1px solid rgba(56, 189, 248, 0.2);
+    background: color-mix(in srgb, var(--primary) 22%, var(--surface));
+    border: 1px solid var(--primary);
     color: var(--info);
 }
 
 .ts2-verdict.high {
-    background: rgba(168, 85, 247, 0.08);
-    border: 1px solid rgba(168, 85, 247, 0.2);
-    color: var(--recovered-ink-c084fc, #c084fc);
+    background: color-mix(in srgb, var(--info) 22%, var(--surface));
+    border: 1px solid var(--info);
+    color: var(--info);
 }
 
 /* ── Result ── */
 .ts2-result {
     padding: 10px 14px;
-    background: rgba(34, 197, 94, 0.12);
-    border: 1px solid rgba(34, 197, 94, 0.3);
+    background: color-mix(in srgb, var(--success) 22%, var(--surface));
+    border: 1px solid var(--success);
     border-radius: 8px;
     color: var(--success);
     font-size: 15px;
@@ -255,5 +255,5 @@
 
 .ts2-status.ok {
     color: var(--success);
-    border-color: rgba(34, 197, 94, 0.3);
+    border-color: var(--success);
 }

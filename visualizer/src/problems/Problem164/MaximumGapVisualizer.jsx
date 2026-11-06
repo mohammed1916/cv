@@ -57,11 +57,12 @@ function generateSteps(nums) {
 
     steps.push({ activeLine: 5, nums, buckets: buckets.map(b => [...b]), phase: "init", res: 0, lo, hi, bsize, message: `lo=${lo}, hi=${hi}, bsize=${bsize}, ${n + 1} buckets` });
 
-    for (const x of nums) {
+    for (let k = 0; k < nums.length; k++) {
+        const x = nums[k];
         const b = Math.floor((x - lo) / bsize);
         buckets[b][0] = Math.min(buckets[b][0], x);
         buckets[b][1] = Math.max(buckets[b][1], x);
-        steps.push({ activeLine: 10, nums, buckets: buckets.map(b => [...b]), phase: "fill", res: 0, lo, hi, bsize, activeB: b, message: `x=${x} → bucket ${b}, range=[${buckets[b][0] === Infinity ? "∞" : buckets[b][0]}, ${buckets[b][1] === -Infinity ? "-∞" : buckets[b][1]}]` });
+        steps.push({ activeLine: 10, nums, buckets: buckets.map(b => [...b]), phase: "fill", res: 0, lo, hi, bsize, activeB: b, idx: k, message: `x=${x} → bucket ${b}, range=[${buckets[b][0] === Infinity ? "∞" : buckets[b][0]}, ${buckets[b][1] === -Infinity ? "-∞" : buckets[b][1]}]` });
     }
 
     let res = 0, prev_max = lo;
@@ -187,7 +188,8 @@ export default function MaximumGapVisualizer() {
                             label={`nums[${i}] = ${v}`}
                             data={{ index: i, value: v, arrayLength: nums.length, step }}
                         >
-                            <span className="mg-num">{v}</span>
+                            <span className="mg-num" style={step?.idx === i ? { outline: '2px solid var(--primary)' } : undefined}>{v}</span>
+                            <small className="mg-idx" style={{ color: 'var(--text-muted)' }}>{i}{step?.idx === i ? ' (current)' : ''}</small>
                             {/* Render any annotations targeting this array element */}
                             {annotations && annotations.filter(a => a.target === `nums-${i}` || (a.target === 'array-item' && a.index === i)).map(a => (
                                 <div key={a.id} className="mg-annotation">{a.text}</div>

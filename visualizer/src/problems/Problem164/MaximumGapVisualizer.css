@@ -26,8 +26,8 @@
 
 .mg-chip.active,
 .mg-chip:hover {
-    border-color: #89dceb;
-    color: var(--recovered-ink-198093, #198093);
+    border-color: var(--primary);
+    color: var(--primary);
 }
 
 .mg-panel {
@@ -58,7 +58,7 @@
     font-weight: 700;
     padding: 4px 10px;
     border-radius: 5px;
-    background: var(--recovered-surface-252535, #252535);
+    background: color-mix(in srgb, var(--primary) 22%, var(--surface));
     border: 1px solid var(--code-line);
     color: var(--code-text);
 }
@@ -78,25 +78,25 @@
 .mg-annotation {
     margin-top: 6px;
     font-size: 12px;
-    color: var(--recovered-ink-93c5fd, #93c5fd);
-    background: rgba(59,130,246,0.08);
+    color: var(--primary);
+    background: color-mix(in srgb, var(--primary) 22%, var(--surface));
     padding: 4px 6px;
     border-radius: 6px;
     margin-left: 6px;
 }
     border-radius: 6px;
-    background: var(--recovered-surface-252535, #252535);
+    background: color-mix(in srgb, var(--primary) 22%, var(--surface));
     border: 1px solid var(--code-line);
 }
 
 .mg-bucket.active-fill {
-    background: var(--recovered-surface-001a1a, #001a1a);
-    border-color: #89dceb;
+    background: color-mix(in srgb, var(--primary) 22%, var(--surface));
+    border-color: var(--primary);
 }
 
 .mg-bucket.active-scan {
-    background: var(--recovered-surface-1a0a00, #1a0a00);
-    border-color: #fab387;
+    background: color-mix(in srgb, var(--warning) 22%, var(--surface));
+    border-color: var(--warning);
 }
 
 .mg-bi {
@@ -109,7 +109,7 @@
     font-family: monospace;
     font-size: 13px;
     font-weight: 700;
-    color: var(--recovered-ink-4f6ed8, #4f6ed8);
+    color: var(--primary);
 }
 
 .mg-empty {
@@ -144,16 +144,16 @@
 .mg-tracker-val {
     font-size: 15px;
     font-weight: 700;
-    color: var(--recovered-ink-4f6ed8, #4f6ed8);
+    color: var(--primary);
     font-family: monospace;
 }
 
 .mg-tracker-val.mg-gap {
-    color: var(--recovered-ink-c65108, #c65108);
+    color: var(--warning);
 }
 
 .mg-tracker-val.mg-res {
-    color: var(--recovered-ink-198093, #198093);
+    color: var(--primary);
     font-size: 20px;
 }
 
@@ -162,9 +162,9 @@
     border-radius: 8px;
     font-size: 14px;
     font-weight: 700;
-    background: var(--recovered-surface-001a1a, #001a1a);
-    border: 2px solid #89dceb;
-    color: var(--recovered-ink-89dceb, #89dceb);
+    background: color-mix(in srgb, var(--primary) 22%, var(--surface));
+    border: 2px solid var(--primary);
+    color: var(--primary);
 }
 
 .mg-status {

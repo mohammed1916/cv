@@ -17,7 +17,7 @@ const definition = {
 const cell = (on, emphasis) => ({
   width: 28, height: 28, boxSizing: 'border-box', display: 'grid', placeItems: 'center', fontFamily: 'monospace', borderRadius: 4,
   border: `${emphasis ? 2 : 1}px solid ${emphasis ? 'var(--primary)' : 'var(--border)'}`,
-  background: on ? 'var(--primary)' : 'var(--surface)', color: on ? 'var(--on-primary, #fff)' : 'var(--text-muted, var(--text))',
+  background: on ? 'var(--primary)' : 'var(--surface)', color: on ? 'var(--on-primary, var(--primary-contrast))' : 'var(--text-muted, var(--text))',
 })
 
 // Each column is one digit of n. Each row is one deci-binary number: a 1 is placed where the digit

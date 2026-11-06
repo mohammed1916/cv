@@ -4,6 +4,6 @@
 .stir-cell--head { background: transparent; border-color: transparent; font-weight: 700; color: var(--text-muted, var(--text)); font-family: system-ui, sans-serif; }
 .stir-cell--source { border-color: var(--primary); background: var(--surface2); }
 .stir-cell--current { border-color: var(--primary); background: var(--surface2); box-shadow: 0 0 0 3px var(--primary); }
-.stir-cell--target { border-color: var(--primary); background: var(--primary); color: var(--on-primary, #fff); }
+.stir-cell--target { border-color: var(--primary); background: var(--primary); color: var(--on-primary, var(--primary-contrast)); }
 .stir-legend, .stir-message { color: var(--text-muted, var(--text)); margin: 0; }
 .stir-formula { font: 600 14px ui-monospace, monospace; color: var(--text); margin: 0; }

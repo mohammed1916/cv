@@ -41,7 +41,7 @@ export default function Problem1660View({ run, step }) {
           return <line key={`${a}-${b}`} className="lca2-edge" style={gone ? { opacity: 0.2 } : undefined} x1={pa.x} y1={pa.y} x2={pb.x} y2={pb.y} />;
         })}
         {step.defect !== null && step.defect !== undefined && (
-          <line x1={fromPt.x + R} y1={fromPt.y} x2={toPt.x - R} y2={toPt.y} stroke="#dc2626" strokeWidth="2" strokeDasharray="6 4" />
+          <line x1={fromPt.x + R} y1={fromPt.y} x2={toPt.x - R} y2={toPt.y} stroke="var(--error)" strokeWidth="2" strokeDasharray="6 4" />
         )}
         {values.map((v, i) => {
           if (v === null) return null;

@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -14,23 +15,15 @@ const definition = {
   ],
 }
 
-const cell = (active, tone) => ({
-  minWidth: 44, boxSizing: 'border-box', padding: '6px 8px', textAlign: 'center', fontFamily: 'monospace',
-  background: tone ?? 'transparent', color: tone ? '#1c1917' : 'inherit',
-  border: `${active ? 2 : 1}px solid ${active ? 'var(--text)' : 'var(--border)'}`,
-})
-
 export default function SparseDotProduct() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const { index, store, total } = step.snapshot
     const stored = new Set(store.map(entry => entry.index))
-    const row = (label, values, pick) => <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center', marginBottom: 8 }}>
-      <strong style={{ minWidth: 24 }}>{label}</strong>
-      {values.map((v, i) => <div key={i} style={cell(i === index, pick(i) ? '#bbf7d0' : undefined)}>{v}<small> {i}</small></div>)}
-    </div>
     return <>
-      {row('a', run.input.a, i => stored.has(i))}
-      {row('b', run.input.b, i => stored.has(i) && run.input.b[i] !== 0)}
+      <IndexedSequence label="Vector a" length={run.input.a.length} active={index ?? -1} valueAt={i => run.input.a[i]}
+        roleAt={i => (stored.has(i) ? 'stored' : '')} />
+      <IndexedSequence label="Vector b" length={run.input.b.length} active={index ?? -1} valueAt={i => run.input.b[i]}
+        roleAt={i => (stored.has(i) && run.input.b[i] !== 0 ? 'matched' : '')} />
       <p>Stored from a (index: value): <code>{store.length ? store.map(e => `${e.index}: ${e.value}`).join(', ') : 'none yet'}</code></p>
       <p>Running total: <strong>{total}</strong></p>
     </>

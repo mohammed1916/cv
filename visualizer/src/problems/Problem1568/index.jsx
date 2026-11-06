@@ -27,12 +27,12 @@ export default function DisconnectIsland() {
         <tbody>{run.input.map((row, r) => <tr key={r}>{row.map((value, c) => {
           const k = `${r},${c}`
           return <td key={c} data-land={value} data-current={k === current ? 'true' : undefined} data-cut={cuts.has(k) ? 'true' : undefined}
-            style={{ background: value ? 'var(--accent-soft, #d1fae5)' : 'transparent', border: '1px solid currentColor', width: 34, height: 34, textAlign: 'center', outline: k === current ? '3px solid #f59e0b' : 'none' }}>
+            style={{ background: value ? 'var(--surface2)' : 'var(--surface)', color: 'var(--text)', border: '1px solid var(--border)', width: 34, height: 34, textAlign: 'center', outline: k === current ? '3px solid var(--primary)' : 'none' }}>
             {cuts.has(k) ? 'cut' : value ? 'L' : ''}
           </td>
         })}</tr>)}</tbody>
       </table>
-      <output aria-label="Cut cells">{`Cut cells found: ${step.cuts.length}`}</output>
+      <output aria-label="Cut cells" style={{ display: 'block', marginTop: 12, color: 'var(--text)' }}>{`Cut cells found: ${step.cuts.length}`}</output>
     </>
   }} renderReasoning={() => <>
     <p>A cell whose removal splits the island is a cut point. A DFS tree finds them: a child that cannot reach above its parent makes the parent a cut point.</p>

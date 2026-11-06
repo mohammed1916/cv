@@ -27,8 +27,8 @@ export default function MostVisitedSector() {
           const entered = segment?.entered?.includes(sector)
           return <div key={sector} data-sector={sector} style={{
             minWidth: 56, padding: '6px 8px', boxSizing: 'border-box', textAlign: 'center', fontFamily: 'monospace',
-            border: `${chosen.has(sector) ? 2 : 1}px solid ${chosen.has(sector) ? '#0891b2' : 'var(--border)'}`,
-            background: entered ? '#a5f3fc' : 'transparent', color: 'var(--text)',
+            border: `${chosen.has(sector) ? 2 : 1}px solid ${chosen.has(sector) ? 'var(--primary)' : 'var(--border)'}`,
+            background: entered ? 'color-mix(in srgb, var(--primary) 22%, var(--surface))' : 'transparent', color: 'var(--text)',
           }}><div>sector {sector}</div><small>visits: {visits[i]}{visits[i] === top && top > 0 ? ' (max)' : ''}</small></div>
         })}
       </div>

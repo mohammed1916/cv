@@ -30,7 +30,7 @@ export default function StoneGameVII() {
             border: `2px solid ${inside ? 'var(--primary)' : 'var(--border)'}`, borderRadius: 6,
             background: inside ? 'var(--surface2)' : 'var(--surface)', color: 'var(--text)' }}>
             {v}
-            <small style={{ position: 'absolute', bottom: 1, left: 0, right: 0, fontSize: 10, color: 'var(--text-muted, var(--text))' }}>{k}</small>
+            <small style={{ position: 'absolute', bottom: 1, left: 0, right: 0, fontSize: 10, color: 'var(--text-muted)' }}>{k}{k === l ? ' l' : ''}{k === r ? ' r' : ''}</small>
             {l === k && <span style={{ position: 'absolute', top: -16, left: 0, fontSize: 11, fontWeight: 700, color: 'var(--primary)' }}>l</span>}
             {r === k && <span style={{ position: 'absolute', top: -16, right: 0, fontSize: 11, fontWeight: 700, color: 'var(--primary)' }}>r</span>}
           </div>
@@ -41,7 +41,7 @@ export default function StoneGameVII() {
         <thead><tr><th style={cell}>i \ j</th>{Array.from({ length: n }, (_, j) => <th key={j} style={cell}>{j}</th>)}</tr></thead>
         <tbody>{table.map((row, i) => <tr key={i}><th style={cell}>{i}</th>{row.map((v, j) => {
           const active = i === l && j === r
-          return <td key={j} style={{ ...cell, background: active ? 'var(--primary)' : j >= i ? 'var(--surface)' : 'var(--surface2)', color: active ? 'var(--on-primary, #fff)' : 'var(--text)' }}>{j >= i ? v : ''}</td>
+          return <td key={j} style={{ ...cell, background: active ? 'var(--primary)' : j >= i ? 'var(--surface)' : 'var(--surface2)', color: active ? 'var(--on-primary, var(--primary-contrast))' : 'var(--text)' }}>{j >= i ? v : ''}</td>
         })}</tr>)}</tbody>
       </table>
     </>
