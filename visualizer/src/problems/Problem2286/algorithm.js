@@ -41,7 +41,9 @@ export function buildTrace({ n, m, ops }) {
       let lo = 0, hi = maxRow
       while (lo < hi) {
         const mid = (lo + hi) >> 1
-        if (runTree.query(0, mid) >= k) hi = mid
+        const enough = runTree.query(0, mid) >= k
+        frames.push({ phase: 'search', op: i, result: null, seats: seats.map(r => r.slice()), seg: snap(`Search rows ${lo} to ${hi}; probe ${mid}`), lo, hi, probe: mid, verdict: enough, pythonLine: P('row = next'), activeLine: L('otherwise find the first row'), message: `gather(${k}, ${maxRow}): probe row ${mid}. ${enough ? `Rows 0 to ${mid} have a run of ${k}, so the answer is ${mid} or earlier.` : `Rows 0 to ${mid} have no run of ${k}, so the answer is after ${mid}.`}` })
+        if (enough) hi = mid
         else lo = mid + 1
       }
       const row = lo
@@ -89,6 +91,7 @@ export const code = `seat bookings with a row tree of longest free runs and a ro
       otherwise fill from the smallest row, update the trees, and append true
   return answers`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(line => line.includes(s)) + 1
 
 export const python = `def book_my_show(n, m, ops):
     seats = [[False] * m for _ in range(n)]

@@ -22,6 +22,7 @@ const definition = {
 export default function XMatrix() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <MatrixGrid matrix={run.input.grid} label="Matrix" activeCell={step.row === null ? null : { row: step.row, col: step.col }} cellWidth={44} cellHeight={40} />
+    <p>{step.row === null ? 'Pointers i and j wait for the first cell.' : `Pointers: i = row ${step.row}, j = column ${step.col}`}</p>
     <output aria-label="Result">{step.message}</output>
   </>} renderReasoning={() => <>
     <p>An X-matrix has nonzero values exactly on its two diagonals, so each cell is tested against whether it lies on a diagonal.</p>

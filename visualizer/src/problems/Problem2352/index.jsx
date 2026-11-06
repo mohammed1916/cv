@@ -23,6 +23,7 @@ export default function EqualRowColumnPairs() {
     const row = step.row >= 0 ? run.input.grid[step.row].map((_, col) => ({ row: step.row, col })) : []
     return <>
       <MatrixGrid label="Grid" matrix={run.input.grid} highlightedCells={row} activeCell={step.row >= 0 ? { row: step.row, col: 0 } : null} />
+      <p>{step.row >= 0 ? `Pointer r = row ${step.row}` : 'Pointer r waits for the first row.'}</p>
       <output aria-label="Pair total">{`Equal pairs so far: ${step.total}`}</output>
     </>
   }} renderReasoning={() => <>

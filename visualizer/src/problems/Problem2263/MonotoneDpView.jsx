@@ -1,3 +1,4 @@
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import './MonotoneDpView.css'
 
 // Rows are elements of nums, columns are candidate target values, and each cell is the cheapest
@@ -9,6 +10,7 @@ export default function MonotoneDpView({ run, step }) {
   const minCost = lastRow.length ? Math.min(...lastRow) : null
   return (
     <div className="dp-view">
+      <IndexedSequence label="nums (input array): the current row is i" length={nums.length} valueAt={i => nums[i]} active={step.index ?? -1} />
       <table className="dp-table" aria-label="Cost table">
         <thead><tr><th>element</th>{values.map(v => <th key={v}>target {v}</th>)}</tr></thead>
         <tbody>

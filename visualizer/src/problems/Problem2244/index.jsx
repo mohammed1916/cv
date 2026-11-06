@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -20,7 +21,8 @@ const definition = {
 }
 
 export default function MinimumRounds() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="tasks (input array)" length={run.input.tasks.length} valueAt={i => run.input.tasks[i]} roleAt={i => (step.groups[step.at] && step.groups[step.at].level === run.input.tasks[i] ? 'counting' : '')} />
     <table aria-label="Tasks by difficulty">
       <thead><tr><th scope="col">Difficulty</th><th scope="col">Tasks</th><th scope="col">Rounds</th></tr></thead>
       <tbody>{step.groups.map((g, i) => <tr key={g.level} data-current={step.at === i ? 'true' : undefined}

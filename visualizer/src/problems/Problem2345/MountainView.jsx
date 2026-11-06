@@ -1,3 +1,4 @@
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import './MountainView.css'
 
 const STATUS_LABEL = { open: 'not checked', visible: 'visible', hidden: 'hidden' }
@@ -43,6 +44,7 @@ export default function MountainView({ run, step }) {
           )
         })}
       </svg>
+      <IndexedSequence label="peaks (input array): interval [left, right] per mountain" length={peaks.length} valueAt={i => `[${left[i]}, ${right[i]}]`} active={current >= 0 ? current : -1} roleAt={i => (i === other ? 'j' : '')} />
       <p className="mountain-view__detail" aria-live="polite">
         {current >= 0
           ? `Mountain ${current} interval [${left[current]}, ${right[current]}]`

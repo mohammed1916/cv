@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import RecordStateTable from '../../components/shared/RecordStateTable'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -22,8 +23,10 @@ export default function Problem2136Visualizer() {
   return (
     <AlgorithmWorkspace
       definition={definition}
-      renderVisual={({ step }) => (
+      renderVisual={({ run, step }) => (
         <>
+          <IndexedSequence label="plantTime (input array)" length={run.input.plantTime.length} valueAt={i => run.input.plantTime[i]} active={step.current} roleAt={i => step.rows.some(r => r.seed === i) ? 'planted' : ''} />
+          <IndexedSequence label="growTime (input array)" length={run.input.growTime.length} valueAt={i => run.input.growTime[i]} active={step.current} roleAt={i => step.rows.some(r => r.seed === i) ? 'planted' : ''} />
           <RecordStateTable label="Planting schedule (longest growth first)" columns={['seed', 'plant', 'grow', 'planted', 'blooms']} rows={step.rows} activeRow={step.rows.length - 1} />
           <p>Latest bloom so far: {step.best}</p>
         </>

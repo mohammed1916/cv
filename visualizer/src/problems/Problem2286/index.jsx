@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import MatrixGrid from '../../components/shared/MatrixGrid'
 import SegtreeView from '../../components/shared/SegtreeView'
+import AnswerRangeBar from '../../components/shared/AnswerRangeBar'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -21,7 +22,8 @@ const definition = {
 }
 
 export default function BookingConcertTickets() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    {step.phase === 'search' && <AnswerRangeBar title="Row search (binary search on the first row that has a long enough run)" min={0} max={run.input.n - 1} low={step.lo} high={step.hi} probe={step.probe} verdict={step.verdict} />}
     <MatrixGrid matrix={step.seats.map(row => row.map(t => (t ? 1 : 0)))} label="Seats (1 is booked)" />
     <SegtreeView {...step.seg} />
     <output aria-label="Result">{step.result === null ? 'No booking yet' : `Result: ${JSON.stringify(step.result)}`}</output>

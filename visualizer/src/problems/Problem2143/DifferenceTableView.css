@@ -1,26 +1,14 @@
 .dtv {
-  --dtv-a: #2563eb;
-  --dtv-b: #c2410c;
-  --dtv-zero: #0f766e;
-  --dtv-ink: #0f172a;
-  --dtv-muted: #475569;
-  --dtv-track: #e2e8f0;
-  --dtv-card: #ffffff;
+  --dtv-a: var(--primary);
+  --dtv-b: var(--error);
+  --dtv-zero: var(--success);
+  --dtv-ink: var(--text);
+  --dtv-muted: var(--text-muted);
+  --dtv-track: var(--surface2);
+  --dtv-card: var(--surface);
   display: grid;
   gap: 0.75rem;
   color: var(--dtv-ink);
-}
-
-@media (prefers-color-scheme: dark) {
-  .dtv {
-    --dtv-a: #93c5fd;
-    --dtv-b: #fdba74;
-    --dtv-zero: #5eead4;
-    --dtv-ink: #e2e8f0;
-    --dtv-muted: #94a3b8;
-    --dtv-track: #1e293b;
-    --dtv-card: #0f172a;
-  }
 }
 
 .dtv__pairs {

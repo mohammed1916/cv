@@ -1,3 +1,4 @@
+import IndexedSequence from '../../components/shared/IndexedSequence'
 // Grid of cells. Dug cells are filled. The artifact being checked is outlined; its cells show how many are dug.
 export default function DigGridView({ run, step }) {
   const { n, artifacts } = run.input
@@ -12,6 +13,7 @@ export default function DigGridView({ run, step }) {
           return <div key={idx} className={`dig-cell${dug.has(`${r},${c}`) ? ' is-dug' : ''}${inCurrent(r, c) ? ' in-check' : ''}`}>{r},{c}</div>
         })}
       </div>
+      <IndexedSequence label="artifacts (input array): [r1, c1, r2, c2]" length={artifacts.length} valueAt={i => artifacts[i].join(', ')} active={step.index ?? -1} />
       <ul className="artifact-list">
         {artifacts.map((a, i) => <li key={i} className={current && a.join() === current.join() ? 'is-current' : ''}>Artifact {i}: rows {a[0]}-{a[2]}, columns {a[1]}-{a[3]}{step.index > i || step.phase === 'done' ? ' (checked)' : ''}</li>)}
       </ul>

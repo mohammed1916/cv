@@ -28,7 +28,7 @@ export default function AtmMachine() {
     <table aria-label="Notes in the machine">
       <thead><tr>{DENOMS.map(d => <th key={d} scope="col">${d}</th>)}</tr></thead>
       <tbody><tr>{step.counts.map((c, k) => <td key={k} data-current={step.pick === k ? 'true' : undefined}
-        style={{ textAlign: 'center', background: step.pick === k ? 'var(--primary)' : 'var(--surface2)', color: step.pick === k ? 'var(--surface)' : 'var(--text)' }}>{c}</td>)}</tr></tbody>
+        style={{ textAlign: 'center', background: step.pick === k ? 'var(--primary)' : 'var(--surface2)', color: step.pick === k ? 'var(--surface)' : 'var(--text)' }}>{c}</td>)}</tr><tr aria-hidden="true">{DENOMS.map((_, k) => <td key={k} style={{ textAlign: 'center', color: 'var(--text-muted)', fontSize: 12 }}>{step.pick === k ? 'pick' : ''}</td>)}</tr></tbody>
     </table>
     {step.remaining !== null && <output aria-label="Amount still to pay">{`remaining ${step.remaining}`}</output>}
     <OperationLog title="Calls" ops={step.log} current={step.log.length - 1} />

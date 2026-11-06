@@ -18,7 +18,7 @@ export default function SwapTrackView({ run, step }) {
           return <span key={i} role="listitem" className={classes.join(' ')}>{v}</span>
         })}
       </div>
-      <div className="swap-index" aria-hidden="true">{values.map((_, i) => <span key={i}>{i}</span>)}</div>
+      <div className="swap-index" aria-hidden="true">{values.map((_, i) => <span key={i}>{i}{i === step.moving && <b className="swap-pointer"> k</b>}</span>)}</div>
       <p className="swap-caption">{step.phase === 'front' ? 'Moving the smallest value to the front.' : step.phase === 'back' ? 'Moving the largest value to the back.' : step.phase === 'done' ? 'The array is valid.' : 'Preparing the moves.'}</p>
       <p className="swap-count">Swaps so far: {step.swaps}</p>
     </div>

@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import RecordStateTable from '../../components/shared/RecordStateTable'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 
 const definition = {
@@ -22,8 +23,9 @@ export default function Problem2150Visualizer() {
   return (
     <AlgorithmWorkspace
       definition={definition}
-      renderVisual={({ step }) => (
+      renderVisual={({ run, step }) => (
         <>
+          <IndexedSequence label="nums (input array)" length={run.input.nums.length} valueAt={i => run.input.nums[i]} roleAt={i => step.lonely.includes(run.input.nums[i]) ? 'lonely' : ''} />
           <RecordStateTable label="Distinct values in order: count and neighbours" columns={['value', 'occurs', 'neighbourBelow', 'neighbourAbove', 'lonely']} rows={step.rows} activeRow={step.rows.length - 1} />
           <p>Lonely so far: {step.lonely.join(', ') || 'none'}</p>
         </>

@@ -3,12 +3,12 @@
 .lane-grid { display: grid; gap: 4px; align-items: center; overflow-x: auto; }
 .lane-corner, .lane-head, .lane-label { font-size: 12px; font-weight: 600; text-align: center; padding: 4px; }
 .lane-label { text-align: left; white-space: nowrap; }
-.lane-cell { text-align: center; padding: 8px 4px; border-radius: 6px; border: 1px solid #94a3b8; font-variant-numeric: tabular-nums; }
-.lane-cell--regular { background: #dbeafe; color: #1e3a8a; }
-.lane-cell--express { background: #ffedd5; color: #7c2d12; }
-.lane-cell--best { background: #f1f5f9; color: #0f172a; }
-.lane-cell--known { background: #dcfce7; border-color: #16a34a; font-weight: 700; }
-.lane-cell--active, .lane-head--active { outline: 3px solid #f59e0b; outline-offset: 1px; }
+.lane-cell { text-align: center; padding: 8px 4px; border-radius: 6px; border: 1px solid var(--text-dim); font-variant-numeric: tabular-nums; }
+.lane-cell--regular { background: var(--surface2); color: var(--text); }
+.lane-cell--express { background: var(--surface2); color: var(--text); }
+.lane-cell--best { background: var(--surface); color: var(--text); }
+.lane-cell--known { background: var(--surface2); border-color: var(--success); font-weight: 700; }
+.lane-cell--active, .lane-head--active { outline: 3px solid var(--primary); outline-offset: 1px; }
 .lane-state { display: flex; flex-wrap: wrap; gap: 12px; margin: 0; }
 .lane-state div { min-width: 120px; }
 .lane-state dt { font-size: 12px; opacity: 0.75; }

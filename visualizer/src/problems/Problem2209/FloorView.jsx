@@ -12,7 +12,7 @@ export default function FloorView({ run, step }) {
   return (
     <div className="floor-view">
       <div className="floor-row" role="img" aria-label={`Floor ${floor}`}>
-        {floor.split('').map((t, i) => <div key={i} className={`floor-tile${t === '1' ? ' is-white' : ''}${i === step.i - 1 ? ' is-current' : ''}`}>{t}</div>)}
+        {floor.split('').map((t, i) => <div key={i} className={`floor-tile${t === '1' ? ' is-white' : ''}${i === step.i - 1 ? ' is-current' : ''}`}>{t}{i === step.i - 1 && <sup className="floor-pointer">i</sup>}</div>)}
       </div>
       <RecordStateTable label="dp: tiles covered so far by carpets used" columns={['tiles', ...cols.map(c => `carpets ${c}`)]} rows={rows} activeRow={step.i ?? -1} />
       <p>{step.message}</p>

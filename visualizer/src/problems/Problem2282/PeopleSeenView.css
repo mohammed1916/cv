@@ -1,32 +1,18 @@
 .ps-view {
-  --ps-ink: #0f172a;
-  --ps-muted: #475569;
-  --ps-cell: #f8fafc;
-  --ps-band: #e0f2fe;
-  --ps-current: #1e3a8a;
-  --ps-seen: #0f766e;
-  --ps-seen-fill: #ccfbf1;
-  --ps-stack: #7e22ce;
-  --ps-stack-fill: #f3e8ff;
+  --ps-ink: var(--text);
+  --ps-muted: var(--text-muted);
+  --ps-cell: var(--surface);
+  --ps-band: var(--surface2);
+  --ps-current: var(--primary);
+  --ps-seen: var(--success);
+  --ps-seen-fill: var(--surface2);
+  --ps-stack: var(--error);
+  --ps-stack-fill: var(--surface2);
   color: var(--ps-ink);
   display: grid;
   gap: 10px;
   padding: 16px;
   font-family: system-ui, sans-serif;
-}
-
-@media (prefers-color-scheme: dark) {
-  .ps-view {
-    --ps-ink: #e2e8f0;
-    --ps-muted: #94a3b8;
-    --ps-cell: #1e293b;
-    --ps-band: #0c4a6e;
-    --ps-current: #93c5fd;
-    --ps-seen: #5eead4;
-    --ps-seen-fill: #134e4a;
-    --ps-stack: #d8b4fe;
-    --ps-stack-fill: #3b0764;
-  }
 }
 
 .ps-title { margin: 0; font-size: 1.05rem; }

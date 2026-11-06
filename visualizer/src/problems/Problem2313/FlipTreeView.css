@@ -1,32 +1,18 @@
 .ft-view {
-  --ft-ink: #0f172a;
-  --ft-muted: #475569;
-  --ft-leaf: #0369a1;
-  --ft-leaf-fill: #e0f2fe;
-  --ft-op: #7c2d12;
-  --ft-op-fill: #ffedd5;
-  --ft-done: #15803d;
-  --ft-current: #7e22ce;
-  --ft-edge: #94a3b8;
+  --ft-ink: var(--text);
+  --ft-muted: var(--text-muted);
+  --ft-leaf: var(--primary);
+  --ft-leaf-fill: var(--surface2);
+  --ft-op: var(--error);
+  --ft-op-fill: var(--surface2);
+  --ft-done: var(--success);
+  --ft-current: var(--text);
+  --ft-edge: var(--text-dim);
   color: var(--ft-ink);
   display: grid;
   gap: 10px;
   padding: 16px;
   font-family: system-ui, sans-serif;
-}
-
-@media (prefers-color-scheme: dark) {
-  .ft-view {
-    --ft-ink: #e2e8f0;
-    --ft-muted: #94a3b8;
-    --ft-leaf: #7dd3fc;
-    --ft-leaf-fill: #0c4a6e;
-    --ft-op: #fdba74;
-    --ft-op-fill: #7c2d12;
-    --ft-done: #4ade80;
-    --ft-current: #d8b4fe;
-    --ft-edge: #64748b;
-  }
 }
 
 .ft-title { margin: 0; font-size: 1.05rem; }
@@ -37,7 +23,7 @@
 .ft-edge { stroke: var(--ft-edge); stroke-width: 2; }
 .ft-edge--done { stroke: var(--ft-done); }
 
-.ft-node circle { stroke-width: 2; stroke: var(--ft-muted); fill: var(--ft-cell, #f8fafc); }
+.ft-node circle { stroke-width: 2; stroke: var(--ft-muted); fill: var(--surface); }
 .ft-node--leaf circle { fill: var(--ft-leaf-fill); stroke: var(--ft-leaf); }
 .ft-node--op circle { fill: var(--ft-op-fill); stroke: var(--ft-op); }
 .ft-node--done circle { stroke: var(--ft-done); stroke-width: 3; }

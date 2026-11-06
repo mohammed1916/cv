@@ -1,3 +1,5 @@
+import './RoadView.css'
+
 // The road is a row of cells. Leading L cars and trailing R cars are dimmed (they drive away); the middle is active.
 export default function RoadView({ run, step }) {
   const { road } = run.input
@@ -11,6 +13,8 @@ export default function RoadView({ run, step }) {
           const away = i < left || i > right
           return <div key={i} className={`road-cell${away ? ' is-away' : ''}${i === step.index ? ' is-current' : ''}`}>
             <small>{i}</small><strong>{arrow[d]}</strong><span>{d}</span>
+            {i === left && <em className="road-pointer">left</em>}
+            {i === right && <em className="road-pointer road-pointer--r">right</em>}
           </div>
         })}
       </div>

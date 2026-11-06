@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import SegtreeView from '../../components/shared/SegtreeView'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
@@ -19,7 +20,8 @@ const definition = {
 }
 
 export default function LongestIncreasingSubsequenceII() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="nums (input array): i is the current value" length={run.input.nums.length} valueAt={i => run.input.nums[i]} active={step.index ?? -1} />
     <SegtreeView {...step.seg} />
     <output aria-label="Best length">{`Best so far: ${step.best}`}</output>
     <p>{step.message}</p>

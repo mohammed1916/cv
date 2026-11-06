@@ -1,4 +1,5 @@
 import TreeDiagram from '../../components/shared/TreeDiagram'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 // Draw the links attached so far. Positions use in-order x and depth y, so the shape of the tree reads directly.
 export default function BuildTreeView({ run, step }) {
@@ -27,6 +28,7 @@ export default function BuildTreeView({ run, step }) {
   const labelFor = n => (step.child === n.id ? 'just attached' : n.id === root ? 'root' : '')
   return (
     <div className="build-tree-view">
+      <IndexedSequence label="rows (input array): [parent, child, isLeft]" length={run.input.rows.length} valueAt={i => `${run.input.rows[i][0]}, ${run.input.rows[i][1]}, ${run.input.rows[i][2]}`} active={run.input.rows.findIndex(row => row[1] === step.child)} />
       <TreeDiagram positions={positions} edges={edges} nodes={nodes} activeIds={active} labelForNode={labelFor} />
       <p>{step.message}</p>
     </div>

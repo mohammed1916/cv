@@ -1,18 +1,12 @@
 .mountain-view { display: grid; gap: 10px; }
 .mountain-view svg { width: 100%; height: auto; max-width: 560px; }
-.mountain-view__ground { stroke: #475569; stroke-width: 2; }
-.mountain-view__axis, .mountain-view__tag { font-size: 11px; fill: #475569; }
-.mountain-view__label { font-size: 12px; font-weight: 600; fill: #0f172a; }
-.mountain-view__peak { stroke: #334155; stroke-width: 1.5; fill: #cbd5e1; fill-opacity: 0.55; transition: fill 200ms ease; }
-.mountain-view__peak.is-visible { fill: #16a34a; fill-opacity: 0.7; }
-.mountain-view__peak.is-hidden { fill: #94a3b8; fill-opacity: 0.25; stroke-dasharray: 4 3; }
-.mountain-view__peak.is-current { stroke: #1d4ed8; stroke-width: 3; }
-.mountain-view__peak.is-other { stroke: #b45309; stroke-width: 3; stroke-dasharray: 6 3; }
-.mountain-view__detail { margin: 0; font-size: 14px; color: #1e293b; }
-.mountain-view output { font-weight: 600; color: #14532d; }
-@media (prefers-color-scheme: dark) {
-  .mountain-view__axis, .mountain-view__tag { fill: #cbd5e1; }
-  .mountain-view__label { fill: #f8fafc; }
-  .mountain-view__detail { color: #e2e8f0; }
-  .mountain-view output { color: #86efac; }
-}
+.mountain-view__ground { stroke: var(--text-muted); stroke-width: 2; }
+.mountain-view__axis, .mountain-view__tag { font-size: 11px; fill: var(--text-muted); }
+.mountain-view__label { font-size: 12px; font-weight: 600; fill: var(--text); }
+.mountain-view__peak { stroke: var(--text-dim); stroke-width: 1.5; fill: var(--surface2); fill-opacity: 0.55; transition: fill 200ms ease; }
+.mountain-view__peak.is-visible { fill: var(--success); fill-opacity: 0.7; }
+.mountain-view__peak.is-hidden { fill: var(--text-dim); fill-opacity: 0.25; stroke-dasharray: 4 3; }
+.mountain-view__peak.is-current { stroke: var(--primary); stroke-width: 3; }
+.mountain-view__peak.is-other { stroke: var(--error); stroke-width: 3; stroke-dasharray: 6 3; }
+.mountain-view__detail { margin: 0; font-size: 14px; color: var(--text); }
+.mountain-view output { font-weight: 600; color: var(--success); }

@@ -1,26 +1,14 @@
 .cgv {
-  --cgv-live: #1d4ed8;
-  --cgv-live-ink: #ffffff;
-  --cgv-chosen: #b45309;
-  --cgv-cleared: repeating-linear-gradient(45deg, #cbd5e1 0 4px, #f8fafc 4px 8px);
-  --cgv-ink: #0f172a;
-  --cgv-muted: #475569;
-  --cgv-card: #ffffff;
+  --cgv-live: var(--primary);
+  --cgv-live-ink: var(--surface);
+  --cgv-chosen: var(--success);
+  --cgv-cleared: repeating-linear-gradient(45deg, var(--border) 0 4px, var(--surface2) 4px 8px);
+  --cgv-ink: var(--text);
+  --cgv-muted: var(--text-muted);
+  --cgv-card: var(--surface);
   display: grid;
   gap: 0.75rem;
   color: var(--cgv-ink);
-}
-
-@media (prefers-color-scheme: dark) {
-  .cgv {
-    --cgv-live: #60a5fa;
-    --cgv-live-ink: #0f172a;
-    --cgv-chosen: #fbbf24;
-    --cgv-cleared: repeating-linear-gradient(45deg, #334155 0 4px, #0f172a 4px 8px);
-    --cgv-ink: #e2e8f0;
-    --cgv-muted: #94a3b8;
-    --cgv-card: #0f172a;
-  }
 }
 
 .cgv__stats {

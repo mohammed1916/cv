@@ -23,6 +23,7 @@ export default function LargestLocalValues() {
     const window = []
     if (step.top >= 0) for (let a = step.top; a < step.top + 3; a++) for (let b = step.left; b < step.left + 3; b++) window.push({ row: a, col: b })
     return <>
+      <p>{`top = ${step.top}, left = ${step.left} (3 by 3 window)`}</p>
       <MatrixGrid label="Input grid" matrix={run.input.grid} highlightedCells={window} activeCell={step.top >= 0 ? { row: step.top + 1, col: step.left + 1 } : null} />
       <MatrixGrid label="Largest local values" matrix={step.answer} tone="accent" showRowLabels={false} />
     </>
