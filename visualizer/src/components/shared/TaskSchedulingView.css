@@ -1,6 +1,7 @@
 .task-scheduling { display: grid; gap: 12px; min-width: 0; }
 .task-scheduling h2, .task-scheduling h3, .task-scheduling p { margin: 0; }
 .task-scheduling__queue, .task-scheduling__servers { display: flex; flex-wrap: wrap; gap: 10px; }
+.task-scheduling__queue { min-height: 48px; align-items: center; }
 .task-scheduling__queue > span, .task-scheduling__servers > article { border: 1px solid currentColor; border-radius: 8px; padding: 12px; }
 .task-scheduling__servers > article { display: grid; gap: 8px; min-width: 150px; }
 .task-scheduling .is-selected { outline: 3px solid #539bf5; outline-offset: 2px; }
