@@ -62,7 +62,7 @@
 .binary_tree_upside_down-input:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 2px var(--primary), 0.1);
+  box-shadow: 0 0 0 2px var(--primary), 0 0 0 4px color-mix(in srgb, var(--primary) 10%, transparent);
 }
 
 .binary_tree_upside_down-visualization {

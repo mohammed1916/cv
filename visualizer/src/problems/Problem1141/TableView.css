@@ -3,5 +3,5 @@
 .sql-table-view__note { margin: 0; opacity: 0.85; }
 .sql-table-view__scroll { overflow-x: auto; max-width: 100%; }
 .sql-table-view table { border-collapse: collapse; min-width: 100%; font-variant-numeric: tabular-nums; }
-.sql-table-view th, .sql-table-view td { border: 1px solid currentColor; padding: 0.3rem 0.5rem; text-align: left; var(--border)-space: nowrap; }
+.sql-table-view th, .sql-table-view td { border: 1px solid currentColor; padding: 0.3rem 0.5rem; text-align: left; white-space: nowrap; }
 .sql-table-view th { background: var(--surface2); }
