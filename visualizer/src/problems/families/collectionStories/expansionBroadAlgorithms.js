@@ -1,18 +1,6 @@
 import {intervalView} from '../../../components/shared/intervalModel.js';
+import {TracedHeap,heapView} from '../../../components/shared/heapModel.js';
 const total=a=>a.reduce((x,y)=>x+y,0);
-// Binary min-heap ordered by `less`; the 1882 trace uses it for idle and busy servers.
-function minHeap(cmp){
-  const a=[];
-  const up=i=>{while(i>0){const p=(i-1)>>1;if(cmp(a[i],a[p])>=0)break;[a[i],a[p]]=[a[p],a[i]];i=p;}};
-  const down=i=>{for(;;){const l=2*i+1,r=l+1;let m=i;if(l<a.length&&cmp(a[l],a[m])<0)m=l;if(r<a.length&&cmp(a[r],a[m])<0)m=r;if(m===i)break;[a[i],a[m]]=[a[m],a[i]];i=m;}};
-  return {
-    get size(){return a.length;},
-    top(){return a[0];},
-    items(){return a;},
-    push(x){a.push(x);up(a.length-1);},
-    pop(){const t=a[0],last=a.pop();if(a.length){a[0]=last;down(0);}return t;},
-  };
-}
 const byPair=(x,y)=>x[0]-y[0]||x[1]-y[1];
 export const broadSolvers={
 1870({dist,hour},emit){if(hour<=dist.length-1){emit('Every nonfinal train consumes at least one rounded hour, leaving no positive time for the final ride.',{codeStage:'impossible'});return -1;}const units=Math.round(hour*100);let low=1,high=10000000;while(low<high){const speed=Math.floor((low+high)/2);let whole=0;for(let i=0;i<dist.length-1;i++)whole+=Math.ceil(dist[i]/speed);const feasible=100*(whole*speed+dist.at(-1))<=units*speed;emit('Round each nonfinal ride up to a whole hour. Keep the final ride fractional and compare in hundredths without repeated floating-point division.',{sequence:dist,codeStage:'search',metrics:{low,high,speed,wholeHours:whole,feasible,hour}},'update');if(feasible)high=speed;else low=speed+1;}return low;},
@@ -27,7 +15,8 @@ export const broadSolvers={
 1882({servers,tasks},emit) {
   const smallInput = tasks.length <= 2000;
   // Two heaps: idle servers by (weight, index), busy servers by (finish time, index).
-  const idle = minHeap(byPair), busy = minHeap(byPair);
+  const idle = new TracedHeap(byPair, {order:'min', format: p => `S${p[1]} · w${p[0]}`});
+  const busy = new TracedHeap(byPair, {order:'min', format: p => `S${p[1]} · free ${p[0]}`});
   const serverView = servers.map((weight,id)=>({id,weight,freeAt:0}));
   const taskView = tasks.map((duration,id)=>({id,arrival:id,duration}));
   const answer = [], assignments = [];
@@ -35,19 +24,27 @@ export const broadSolvers={
   for (let i=0;i<servers.length;i++) idle.push([servers[i],i]);
   const release = () => {
     let count = 0;
-    while (busy.size && busy.top()[0] <= ts) { const [,idx] = busy.pop(); idle.push([servers[idx],idx]); count++; }
+    while (busy.size && busy.peek()[0] <= ts) { const [,idx] = busy.pop(); idle.push([servers[idx],idx]); count++; }
     return count;
   };
   // Frame state stays small: clock, heap tops, the selected server, and the answer so far (shared, not copied).
   const eligibleState = () => idle.size <= 50
-    ? {eligible: idle.items().slice().sort(byPair).map(p=>p[1]), eligibleCount: idle.size}
+    ? {eligible: idle.data.slice().sort(byPair).map(p=>p[1]), eligibleCount: idle.size}
     : {eligible: [], eligibleCount: idle.size};
+  // Heap cells and their operations, for small inputs only. Each show() drains both logs, so each frame carries the ops since the last one.
+  const heapFields = () => {
+    if (!smallInput) { idle.takeOps(); busy.takeOps(); return {}; }
+    const idleView = heapView(idle, {title:'Idle servers · min by weight, then index'});
+    const busyView = heapView(busy, {title:'Busy servers · min by finish time, then index'});
+    return {idle: idleView.heap, busy: busyView.heap};
+  };
   const show = (event, nextTask, message, {selected=null, jumpTo=null, phase='inspect', activeLine, pythonLine, codeStage}) => {
     emit(message, { codeStage, pythonLine, activeLine, scheduling: {
       time: ts, event, nextTask, selected, jumpTo,
       ...eligibleState(),
-      idleTop: idle.size ? idle.top() : null,
-      busyTop: busy.size ? busy.top() : null,
+      idleTop: idle.size ? idle.peek() : null,
+      busyTop: busy.size ? busy.peek() : null,
+      ...heapFields(),
       tasks: taskView, servers: serverView,
       // Small inputs keep exact copies. Large ones share the arrays and record counts (the view slices), so frames stay O(1).
       assignments: smallInput ? assignments.map(a=>({...a})) : assignments, assignmentCount: assignments.length,
@@ -60,13 +57,13 @@ export const broadSolvers={
     const released = release();
     if (released) show('Release', i, `At time ${ts}, ${released} server(s) with finish time at most ${ts} return to the idle pool.`, {activeLine:2, pythonLine:14, codeStage:'release'});
     if (!idle.size) {
-      const next = busy.top()[0];
+      const next = busy.peek()[0];
       show('Wait', i, `T${i} is waiting and every server is busy. Advance the clock from ${ts} to ${next}, the earliest completion.`, {jumpTo:next, activeLine:3, pythonLine:16, codeStage:'wait'});
       ts = next;
       release();
     }
-    const [weight, server] = idle.top();
-    const tied = idle.size <= 50 ? idle.items().filter(p=>p[0]===weight).map(p=>p[1]).sort((a,b)=>a-b) : [];
+    const [weight, server] = idle.peek();
+    const tied = idle.size <= 50 ? idle.data.filter(p=>p[0]===weight).map(p=>p[1]).sort((a,b)=>a-b) : [];
     const tieNote = tied.length > 1 ? `; among equal weights (${tied.map(s=>'S'+s).join(', ')}), index ${server} is smallest` : '';
     show('Choose', i, `At time ${ts}, T${i} is first in the queue. Choose S${server}: weight ${weight} is smallest${tieNote}.`, {selected:server, activeLine:4, pythonLine:18, codeStage:'choose'});
     idle.pop();
