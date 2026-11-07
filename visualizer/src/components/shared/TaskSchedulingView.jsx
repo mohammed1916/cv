@@ -4,7 +4,9 @@ import './TaskSchedulingView.css';
 
 // A domain view composed from shared sequence and interval primitives.
 // Eligibility and ordering are supplied by the problem, never inferred here.
-export default function TaskSchedulingView({ time, event, tasks, servers, eligible, assignments, nextTask, selected, jumpTo, output }) {
+export default function TaskSchedulingView({ time, event, tasks, servers, eligible, eligibleCount = eligible.length, assignments: allAssignments, assignmentCount, nextTask, selected, jumpTo, output: allOutput, outputCount }) {
+  const assignments = allAssignments.slice(0, assignmentCount ?? allAssignments.length);
+  const output = allOutput.slice(0, outputCount ?? allOutput.length);
   const waiting = tasks.filter(t => t.id >= nextTask && t.arrival <= time);
   const future = tasks.filter(t => t.id >= nextTask && t.arrival > time);
   return <section className="task-scheduling" aria-label="Task scheduling">
@@ -17,7 +19,7 @@ export default function TaskSchedulingView({ time, event, tasks, servers, eligib
       <p>{s.freeAt<=time ? 'Idle / eligible' : `Busy until ${s.freeAt}`}</p>
       {s.id===selected && <b>{event==='Choose' ? 'Chosen for queue head' : 'Just assigned'}</b>}
     </article>)}</div>
-    <p>Eligible order (weight, then index): {eligible.length ? eligible.map(i=>`S${i}`).join(' → ') : 'none'}</p>
+    <p>Eligible order (weight, then index): {eligibleCount > eligible.length ? `${eligibleCount} idle servers (too many to list; the head has the smallest weight, then index)` : eligible.length ? eligible.map(i=>`S${i}`).join(' → ') : 'none'}</p>
     {assignments.length > 0 && <IntervalView title="Execution timeline by server" marker={time} markerLabel={`clock ${time}`} note="Bars are [start, finish): a server is free exactly at finish. The clock stops once all tasks are assigned; running tasks may finish later."
       intervals={assignments.map(a=>({start:a.start,end:a.end,label:`T${a.task} [${a.start}, ${a.end})`,group:`S${a.server}`,role:a.end<=time ? 'kept' : 'active'}))} />}
     <IndexedSequence label="Answer: task index → assigned server index" length={output.length} valueAt={i=>`S${output[i]}`} active={output.length-1} />

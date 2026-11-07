@@ -76,20 +76,27 @@ export const broadPython={
             break
         index += 1
     return n[:index] + str(x) + n[index:]  # step: return`,
-1882:`def solve(servers, tasks):
-    free_at = [0] * len(servers)
-    answer = []
-    time = 0
-    for index, duration in enumerate(tasks):
-        time = max(time, index)
-        available = [server for server in range(len(servers)) if free_at[server] <= time]
-        if not available:
-            time = min(free_at)
-            available = [server for server in range(len(servers)) if free_at[server] <= time]
-        server = min(available, key=lambda server: (servers[server], server))
-        free_at[server] = time + duration
-        answer.append(server)  # step: update
-    return answer  # step: return`,
+1882:`class Solution:
+    def assignTasks(self, servers: List[int], tasks: List[int]) -> List[int]:
+        busy = list()
+        idle = [(w, i) for i, w in enumerate(servers)]
+        heapq.heapify(idle)
+        ts = 0
+        def release():
+            while busy and busy[0][0] <= ts:
+                _, idx = heapq.heappop(busy)
+                heapq.heappush(idle, (servers[idx], idx))
+        ans = list()
+        for i, task in enumerate(tasks):
+            ts = max(ts, i)
+            release()
+            if not idle:
+                ts = busy[0][0]
+                release()
+            _, idx = heapq.heappop(idle)
+            ans.append(idx)
+            heapq.heappush(busy, (ts + task, idx))
+        return ans`,
 1884:`def solve(n):
     moves = covered = 0
     while covered < n:

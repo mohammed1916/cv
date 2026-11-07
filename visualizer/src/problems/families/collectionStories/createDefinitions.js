@@ -177,7 +177,10 @@ return Object.fromEntries(Object.entries(specs).map(([key,[fields,goal,strategy,
       const initialState = id in authoredSpecs ? authoredInputState(id,input) : {};
       const emit = (message,state = {},phase = 'inspect') => {
         const codeStage = state.codeStage ?? (id in rangeSpecs ? rangeCodeStage(id,state,phase) : undefined);
-        frames.push(structuredClone({sequence,index:-1,metrics:{},...initialState,...state,message,phase,codeStage,activeLine:authoredPseudocodeStages[id]?.[codeStage] ?? rangePseudocodeStages[id]?.[codeStage] ?? triePseudocodeStages[id]?.[codeStage] ?? {start:1,inspect:3,update:4}[phase]}));
+        const { scheduling, ...rest } = state;
+        // Scheduling snapshots are immutable and can be large (1882), so they are shared by reference instead of cloned per frame.
+        const shared = id === 1882 ? undefined : sequence;
+        frames.push({ ...structuredClone({sequence: shared,index:-1,metrics:{},...initialState,...rest,message,phase,codeStage,activeLine:rest.activeLine ?? authoredPseudocodeStages[id]?.[codeStage] ?? rangePseudocodeStages[id]?.[codeStage] ?? triePseudocodeStages[id]?.[codeStage] ?? {start:1,inspect:3,update:4}[phase]}), ...(scheduling ? { scheduling } : {}) });
       };
       emit(goal,id in databaseSpecs ? {sourceRecords:databaseInput(id,input.rows)} : {},'start');
       const result = solvers[id](input,emit);
