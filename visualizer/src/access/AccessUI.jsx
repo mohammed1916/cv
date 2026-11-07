@@ -3,6 +3,14 @@ import { createPortal } from 'react-dom';
 import { accessCall, backendEnabled, checkoutEnabled } from './firebase';
 import { PLANS, FREE_MEDIUM, BETA_FREE_ACCESS } from './policy';
 import './access.css';
+import './PlansToggle.css';
+
+// Amounts are stored in paise; the saving is 12 monthly payments minus one annual payment.
+const YEARLY_SAVING_RUPEES = (12 * PLANS.monthly.amount - PLANS.annual.amount) / 100;
+const CYCLES = {
+  monthly: { period: 'per month', key: 'monthly' },
+  annual: { period: 'per year', key: 'annual' },
+};
 
 export function AccessDialog({ title, onClose, children }) {
   const ref = useRef(null);
@@ -41,6 +49,8 @@ function loadCheckout() {
 export function Plans({ access, reason, onHideForever }) {
   const [pending, setPending] = useState(false);
   const [message, setMessage] = useState('');
+  const [cycle, setCycle] = useState('monthly');
+  const selected = PLANS[cycle];
   async function purchase(plan, dialog) {
     if (!access.user) { await access.login(); return; }
     const restoreDialog = () => {
@@ -78,6 +88,16 @@ export function Plans({ access, reason, onHideForever }) {
         <small>Sign in for playground access. Resets at midnight India time.</small>
       </section>
       <section className="plan-card plan-pro"><span className="access-eyebrow">VISUALIZER PRO</span><h3>Every problem. More practice.</h3>
+        <div className="plans-toggle" role="group" aria-label="Billing period">
+          {Object.keys(CYCLES).map((key) => <button type="button" key={key} className="plans-toggle-btn" aria-pressed={cycle === key} onClick={() => setCycle(key)}>
+            {key === 'monthly' ? 'Monthly' : 'Yearly'}
+          </button>)}
+        </div>
+        <div className="plans-price">
+          <strong className="plans-price-amount">{selected.display}</strong>
+          <span className="plans-price-period">{CYCLES[cycle].period}</span>
+        </div>
+        {cycle === 'annual' && <p className="plans-saving">Save ₹{YEARLY_SAVING_RUPEES.toLocaleString('en-IN')} a year</p>}
         <ul><li>All implemented problem visualizers unlocked</li><li>Unlimited code playground time</li><li>Future problem visualizers included during your plan</li></ul>
         {BETA_FREE_ACCESS ? <p role="status"><strong>Beta / alpha stage: everything is unlocked.</strong> Every problem and the code playground are free for everyone until the website goes into production.</p> : <p>Try Pro free for 3 days. No card required and no automatic charge.</p>}
         {access.account?.trialActive && access.pro && <p role="status">Free trial active until {new Date(access.account.trialEndsAt).toLocaleString()}.</p>}
@@ -85,9 +105,9 @@ export function Plans({ access, reason, onHideForever }) {
           {access.user ? 'Start 3-day free trial' : 'Sign in to start your free trial'}
         </button>}
         {access.account?.trialEndsAt && !access.pro ? <p>Your free trial has ended. Subscribe to continue with Pro, or keep using the free problems and daily playground allowance.</p> : null}
-        {!BETA_FREE_ACCESS && Object.entries(PLANS).map(([key, plan]) => <button className="access-primary" key={key} disabled={pending || access.busy || !checkoutEnabled || (access.pro && access.account?.paid)} onClick={(event) => purchase(key, event.currentTarget.closest('dialog'))}>
-          {access.pro && access.account?.paid ? 'Paid Pro active' : `${plan.display} / ${plan.label}`}
-        </button>)}
+        {!BETA_FREE_ACCESS && <button className="access-primary" disabled={pending || access.busy || !checkoutEnabled || (access.pro && access.account?.paid)} onClick={(event) => purchase(cycle, event.currentTarget.closest('dialog'))}>
+          {access.pro && access.account?.paid ? 'Paid Pro active' : `${selected.display} / ${selected.label}`}
+        </button>}
         <small>Yearly plan: {PLANS.annual.display} for 365 days, instead of {PLANS.monthly.display} a month. If you buy during your trial, your paid time starts after the trial ends.</small>
         <small>One-time payment. No automatic renewal. Catalog-only entries are coming soon. AI provider limits remain separate.</small>
         {!checkoutEnabled && <p className="access-notice">Pro purchases are coming soon. Checkout is not open yet.</p>}
