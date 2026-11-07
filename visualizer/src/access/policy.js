@@ -3,11 +3,12 @@
 // false to bring back Pro, playground limits and the sign-in gate.
 export const BETA_FREE_ACCESS = false;
 export const FREE_SECONDS = 30 * 60;
-const MONTHLY_RUPEES = 300;
-const YEARLY_RUPEES = 1200;
+// Beta prices are charged now. Regular prices apply once the website leaves beta.
+const BETA = { monthly: 99, annual: 799 };
+const REGULAR = { monthly: 199, annual: 1499 };
 export const PLANS = {
-  monthly: { label: 'month (30 days)', amount: MONTHLY_RUPEES * 100, days: 30, display: `₹${MONTHLY_RUPEES}` },
-  annual: { label: 'year (365 days)', amount: YEARLY_RUPEES * 100, days: 365, display: `₹${YEARLY_RUPEES}` },
+  monthly: { label: 'month (30 days)', amount: BETA.monthly * 100, days: 30, display: `₹${BETA.monthly}`, regular: `₹${REGULAR.monthly}`, regularAmount: REGULAR.monthly * 100 },
+  annual: { label: 'year (365 days)', amount: BETA.annual * 100, days: 365, display: `₹${BETA.annual}`, regular: `₹${REGULAR.annual}`, regularAmount: REGULAR.annual * 100 },
 };
 // A useful sample of the next step after Easy: arrays, windows, lists, trees,
 // graphs, backtracking and dynamic programming. Basics always remain free.

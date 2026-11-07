@@ -79,7 +79,7 @@ test('checkout sends the trusted new monthly and annual prices, ignoring client 
     assert.equal(body.currency, 'INR');
     return { ok: true, json: async () => ({ id: 'order_new', amount: body.amount }) };
   });
-  for (const [plan, expected] of [['monthly', 30000], ['annual', 120000]]) {
+  for (const [plan, expected] of [['monthly', 9900], ['annual', 79900]]) {
     reset();
     records.set('config/billing', { enabled: true });
     const order = await createProOrder.run({ ...request(), data: { plan, amount: 1 } });

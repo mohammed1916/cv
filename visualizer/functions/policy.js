@@ -1,6 +1,7 @@
 export const FREE_SECONDS = 1800;
-const MONTHLY_PAISE = 30000;
-const YEARLY_PAISE = 120000;
+// Beta prices (₹99 a month, ₹799 a year). Keep in step with src/access/policy.js.
+const MONTHLY_PAISE = 9900;
+const YEARLY_PAISE = 79900;
 export const PLANS = { monthly: { amount: MONTHLY_PAISE, days: 30 }, annual: { amount: YEARLY_PAISE, days: 365 } };
 export const TRIAL_MS = 3 * 86400000;
 export const indiaDay = (now) => new Date(now + 19800000).toISOString().slice(0, 10);

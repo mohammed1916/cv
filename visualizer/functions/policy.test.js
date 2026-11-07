@@ -31,8 +31,8 @@ test('entitlements expire and renewal extends only the remaining period', () => 
   assert.equal(entitlementEnd(now + 1000, 30, now), now + 1000 + 30 * 86400000);
 });
 test('UI prices match trusted backend amounts', () => {
-  assert.equal(PLANS.monthly.amount, 30000);
-  assert.equal(PLANS.annual.amount, 120000);
+  assert.equal(PLANS.monthly.amount, 9900);
+  assert.equal(PLANS.annual.amount, 79900);
   for (const key of Object.keys(PLANS)) {
     assert.equal(UI_PLANS[key].amount, PLANS[key].amount);
     assert.equal(UI_PLANS[key].days, PLANS[key].days);

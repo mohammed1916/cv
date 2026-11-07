@@ -94,8 +94,10 @@ export function Plans({ access, reason, onHideForever }) {
           </button>)}
         </div>
         <div className="plans-price">
+          <s className="plans-price-regular" aria-label="Regular price">{selected.regular}</s>
           <strong className="plans-price-amount">{selected.display}</strong>
           <span className="plans-price-period">{CYCLES[cycle].period}</span>
+          <span className="plans-price-beta">Beta price</span>
         </div>
         {cycle === 'annual' && <p className="plans-saving">Save ₹{YEARLY_SAVING_RUPEES.toLocaleString('en-IN')} a year</p>}
         <ul><li>All implemented problem visualizers unlocked</li><li>Unlimited code playground time</li><li>Future problem visualizers included during your plan</li></ul>
