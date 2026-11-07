@@ -18,5 +18,30 @@ export const continuedSolvers={
 1829({nums,maximumBit},emit){let xor=nums.reduce((a,b)=>a^b,0);const mask=2**maximumBit-1,output=[];for(let end=nums.length-1;end>=0;end--){const answer=mask^xor;output.push(answer);emit('Within the allowed bit width, complementing the current XOR makes every result bit one. Remove the last array value by XORing it again before the next query.',{sequence:nums,window:[0,end],output,metrics:{xor,mask,answer,removed:nums[end]}},'update');xor^=nums[end];}return output;},
 1832({sentence},emit){const letters=new Set();[...sentence].forEach((c,i)=>{letters.add(c);emit('A pangram needs each of the twenty-six lowercase letters at least once. Repeated letters do not increase distinct coverage.',{sequence:sentence,index:i,metrics:{distinct:letters.size,missing:'abcdefghijklmnopqrstuvwxyz'.split('').filter(c=>!letters.has(c)).join('')}},'update');});return letters.size===26;},
 1833({costs,coins},emit){const sorted=[...costs].sort((a,b)=>a-b);let bought=0;for(let i=0;i<sorted.length;i++){const affordable=sorted[i]<=coins;emit('Every bar contributes one to the goal, so buy the cheapest remaining bar first. If it is unaffordable, every later bar is too expensive.',{sequence:sorted,index:i,metrics:{price:sorted[i],coins,affordable,bought}});if(!affordable)break;coins-=sorted[i];bought++;}return bought;},
-1834({tasks},emit){const pending=tasks.map(([enqueue,duration],index)=>({enqueue,duration,index})).sort((a,b)=>a.enqueue-b.enqueue||a.index-b.index),ready=[],output=[];let time=0,next=0;while(next<pending.length||ready.length){if(ready.length===0)time=Math.max(time,pending[next].enqueue);while(next<pending.length&&pending[next].enqueue<=time)ready.push(pending[next++]);ready.sort((a,b)=>a.duration-b.duration||a.index-b.index);const task=ready.shift();emit('Among tasks already available, select the shortest processing time, breaking ties by original index. An idle CPU advances to the next arrival, and running tasks are never interrupted.',{sequence:pending.map(t=>`${t.index}:${t.enqueue}/${t.duration}`),table:ready.map(t=>[t.index,t.duration]),output:[...output,task.index],metrics:{time,selected:task.index,duration:task.duration,finish:time+task.duration}},'update');time+=task.duration;output.push(task.index);}return output;},
+1834({tasks},emit){
+  const pending=tasks.map(([enqueue,duration],index)=>({enqueue,duration,index})).sort((a,b)=>a.enqueue-b.enqueue||a.index-b.index),ready=[],output=[],busy=[];
+  let time=0,next=0;
+  const label=id=>`T${id}`;
+  const snapshot=(event,extra)=>({time,event,all:tasks.map(([arrival,duration],id)=>({id,arrival,duration})),future:pending.slice(next).map(t=>({id:t.index,arrival:t.enqueue,duration:t.duration})),ready:[...ready].sort((a,b)=>a.duration-b.duration||a.index-b.index).map(t=>({id:t.index,duration:t.duration})),busy:busy.map(b=>({...b})),output:[...output],...extra});
+  while(next<pending.length||ready.length){
+    if(ready.length===0){
+      const from=time;
+      time=Math.max(time,pending[next].enqueue);
+      if(time>from)emit(`No task is ready at clock ${from}, so the CPU stays idle. Jump the clock to ${time}, the next arrival.`,{scheduling:snapshot('Idle',{from,jumpTo:time,selected:null,arrived:[]})},'inspect');
+    }
+    const arrived=[];
+    while(next<pending.length&&pending[next].enqueue<=time){ready.push(pending[next]);arrived.push(pending[next].index);next++;}
+    ready.sort((a,b)=>a.duration-b.duration||a.index-b.index);
+    const task=ready[0],tied=ready.filter(t=>t!==task&&t.duration===task.duration).map(t=>label(t.index));
+    const arrivalText=arrived.length?`Tasks ${arrived.map(label).join(', ')} have arrived and join the ready set. `:'';
+    emit(`Clock ${time}: ${arrivalText}Among ready tasks, ${label(task.index)} has the shortest duration, ${task.duration}${tied.length?`; ${tied.join(', ')} tie on duration, so the smaller original index wins`:''}. Select ${label(task.index)}; no task is preempted once it starts.`,{scheduling:snapshot('Choose',{selected:task.index,arrived,rejected:ready.slice(1).map(t=>t.index)})},'update');
+    ready.shift();
+    const start=time;
+    time+=task.duration;
+    busy.push({task:task.index,start,end:time});
+    output.push(task.index);
+    emit(`${label(task.index)} runs on the CPU from ${start} to ${time}. Tasks that arrive meanwhile wait in the ready set until the CPU is free at clock ${time}.`,{scheduling:snapshot('Run',{selected:task.index,arrived:[],rejected:[],running:{task:task.index,start,end:time}})},'update');
+  }
+  return output;
+},
 };

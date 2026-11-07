@@ -1,0 +1,8 @@
+.cpu-schedule { display: grid; gap: 12px; min-width: 0; }
+.cpu-schedule h2, .cpu-schedule h3, .cpu-schedule p { margin: 0; }
+.cpu-schedule h2 { font-size: 1.05rem; }
+.cpu-schedule h3 { font-size: .9rem; color: var(--text-muted); }
+.cpu-schedule__idle, .cpu-schedule__arrivals { border-left: 4px solid var(--warning); padding: 8px 10px; font-size: .9rem; line-height: 1.45; }
+.cpu-schedule__ready { display: flex; flex-wrap: wrap; gap: 10px; }
+.cpu-schedule__ready > span { border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: .85rem; background: var(--surface); color: var(--text); }
+.cpu-schedule__ready .is-selected { outline: 3px solid var(--primary); outline-offset: 2px; }
