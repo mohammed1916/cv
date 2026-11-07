@@ -19,7 +19,7 @@ function uid(request) {
 const COMPLIMENTARY_EMAILS = new Set(['greenelitesolutions@gmail.com']);
 // While the site is in beta, every verified Google sign-in gets Pro for free.
 // Set to false to return to the allowlist above.
-const BETA_FREE_PRO = true;
+const BETA_FREE_PRO = false;
 function complimentary(request) {
   const token = request.auth?.token;
   if (token?.email_verified !== true) return false;

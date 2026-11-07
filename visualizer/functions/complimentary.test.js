@@ -30,13 +30,12 @@ test('allowlisted email without verification does not get Pro', async () => {
   assert.equal((await playgroundLease.run(req)).pro, false);
 });
 
-test('during beta every verified Google sign-in gets Pro', async () => {
+test('verified accounts outside the allowlist do not get complimentary Pro', async () => {
   const req = request({ email: 'developermohammed01@gmail.com', email_verified: true });
-  assert.equal((await accountStatus.run(req)).pro, true);
-  assert.equal((await playgroundLease.run(req)).pro, true);
+  assert.equal((await accountStatus.run(req)).pro, false);
 });
 
-test('unverified emails do not get beta Pro', async () => {
+test('unverified emails do not get complimentary Pro', async () => {
   const req = request({ email: 'developermohammed01@gmail.com', email_verified: false });
   assert.equal((await accountStatus.run(req)).pro, false);
 });
