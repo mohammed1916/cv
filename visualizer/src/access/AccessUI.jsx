@@ -88,7 +88,7 @@ export function Plans({ access, reason }) {
         {!BETA_FREE_ACCESS && Object.entries(PLANS).map(([key, plan]) => <button className="access-primary" key={key} disabled={pending || access.busy || !checkoutEnabled || (access.pro && access.account?.paid)} onClick={(event) => purchase(key, event.currentTarget.closest('dialog'))}>
           {access.pro && access.account?.paid ? 'Paid Pro active' : `${plan.display} / ${plan.label}`}
         </button>)}
-        <small>Annual price: {PLANS.monthly.display} × 12 = {PLANS.annual.display}. If you buy during your trial, your paid time starts after the trial ends.</small>
+        <small>Yearly plan: {PLANS.annual.display} for 365 days, instead of {PLANS.monthly.display} a month. If you buy during your trial, your paid time starts after the trial ends.</small>
         <small>One-time payment. No automatic renewal. Catalog-only entries are coming soon. AI provider limits remain separate.</small>
         {!checkoutEnabled && <p className="access-notice">Pro purchases are coming soon. Checkout is not open yet.</p>}
       </section>

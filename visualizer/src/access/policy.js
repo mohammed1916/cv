@@ -3,10 +3,11 @@
 // false to bring back Pro, playground limits and the sign-in gate.
 export const BETA_FREE_ACCESS = true;
 export const FREE_SECONDS = 30 * 60;
-const MONTHLY_RUPEES = 19;
+const MONTHLY_RUPEES = 300;
+const YEARLY_RUPEES = 1200;
 export const PLANS = {
   monthly: { label: 'month (30 days)', amount: MONTHLY_RUPEES * 100, days: 30, display: `₹${MONTHLY_RUPEES}` },
-  annual: { label: 'year (365 days)', amount: MONTHLY_RUPEES * 12 * 100, days: 365, display: `₹${MONTHLY_RUPEES * 12}` },
+  annual: { label: 'year (365 days)', amount: YEARLY_RUPEES * 100, days: 365, display: `₹${YEARLY_RUPEES}` },
 };
 // A useful sample of the next step after Easy: arrays, windows, lists, trees,
 // graphs, backtracking and dynamic programming. Basics always remain free.
