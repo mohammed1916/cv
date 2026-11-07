@@ -138,6 +138,15 @@ function Split({ node, children, resize }) {
   );
 }
 
+function PanelShelfIcon({ title = '' }) {
+  const label = title.toLowerCase();
+  const path = /code|solution/.test(label) ? 'm8 7-5 5 5 5m8-10 5 5-5 5m-3-13-2 16'
+    : /story|narrat/.test(label) ? 'M12 5C9 3 5 3 3 4v15c3-1 6-1 9 1m0-15c3-2 7-2 9-1v15c-3-1-6-1-9 1V5'
+    : /why|how|reason/.test(label) ? 'M9 18h6m-5 3h4M8 14a6 6 0 1 1 8 0l-1 2H9l-1-2'
+    : 'M4 4h16v16H4zM4 9h16M9 9v11';
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={path} /></svg>;
+}
+
 function MaximizeIcon() {
   return (
     <svg
@@ -191,6 +200,8 @@ export default function DockWorkspace({ panels, onPanelReady }) {
   const serial = useRef(0);
 
   const flights = useRef(new Map());
+  const opening = useRef(new Map());
+  const openingAnimations = useRef(new Set());
 
   const [tree, setTree] = useState(null);
   // Keep collapse stable: the external-panel effect must only release its
@@ -202,6 +213,25 @@ export default function DockWorkspace({ panels, onPanelReady }) {
   }, [tree]);
 
   const [hidden, setHidden] = useState(new Set());
+
+  useLayoutEffect(() => {
+    for (const [id, from] of opening.current) {
+      const panel = container.current?.querySelector(`[data-dock-tab="${CSS.escape(id)}"]`)?.closest('.local-dock-group');
+      opening.current.delete(id);
+      if (!panel || window.matchMedia('(prefers-reduced-motion: reduce)').matches) continue;
+      const to = panel.getBoundingClientRect();
+      if (!to.width || !to.height) continue;
+      const animation = panel.animate([
+        { transform: `translate(${from.left-to.left}px, ${from.top-to.top}px) scale(${from.width/to.width}, ${from.height/to.height})`, opacity: 0, borderRadius: '28px' },
+        { transform: 'translate(0, 0) scale(1, 1)', opacity: 1, borderRadius: '8px' },
+      ], { duration: 420, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' });
+      panel.style.transformOrigin = 'top left';
+      openingAnimations.current.add(animation);
+      const cleanup = () => { panel.style.transformOrigin = ''; openingAnimations.current.delete(animation); };
+      animation.onfinish = cleanup;
+      animation.oncancel = cleanup;
+    }
+  }, [hidden]);
 
   const [dragged, setDragged] = useState(null);
 
@@ -281,7 +311,14 @@ export default function DockWorkspace({ panels, onPanelReady }) {
         ?.querySelector(`[data-dock-tab="${CSS.escape(id)}"]`)
         ?.closest(".local-dock-group");
 
-      if (!collapsed || !source) {
+      if (!collapsed) {
+        const button = workspace?.querySelector(`[data-restore-panel="${CSS.escape(id)}"]`);
+        if (button) opening.current.set(id, button.getBoundingClientRect());
+      }
+      // A background tab has no visible content to animate. Hiding it must
+      // not animate the different tab currently displayed in its group.
+      const isActiveTab = source?.querySelector(`[data-dock-tab="${CSS.escape(id)}"]`)?.getAttribute('aria-selected') === 'true';
+      if (!collapsed || !source || !isActiveTab) {
         commit();
         return;
       }
@@ -311,7 +348,7 @@ export default function DockWorkspace({ panels, onPanelReady }) {
           `[data-restore-panel="${CSS.escape(id)}"]`,
         );
 
-        button?.animate(
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) button?.animate(
           [
             {
               boxShadow: "0 0 0 3px var(--primary)",
@@ -323,7 +360,7 @@ export default function DockWorkspace({ panels, onPanelReady }) {
             },
           ],
           {
-            duration: 1400,
+            duration: 320,
             easing: "ease-out",
           },
         );
@@ -340,6 +377,7 @@ export default function DockWorkspace({ panels, onPanelReady }) {
     return () => {
       active.forEach((cancel) => cancel());
       active.clear();
+      openingAnimations.current.forEach(animation => animation.cancel());
     };
   }, []);
 
@@ -794,23 +832,31 @@ export default function DockWorkspace({ panels, onPanelReady }) {
         )}
       </div>
 
-      <footer className="local-dock-restore" aria-label="Collapsed panels">
-        {[...new Set([...hidden, ...minimizing])]
+      <footer className="local-dock-restore" aria-label="Panel visibility">
+        <div className="local-dock-shelf" aria-label="Toggle workspace panels">
+        <span className="local-dock-shelf-label"><PanelShelfIcon /> Panels</span>
+        {[...entries.keys()]
           .filter((id) => recordFor(id))
           .map((id) => (
             <button
               type="button"
               key={id}
               data-restore-panel={id}
-              className={minimizing.has(id) ? "is-arriving" : ""}
-              onClick={() => restore(id)}
+              className={minimizing.has(id) ? "is-arriving" : !hidden.has(id) ? "is-enabled" : ""}
+              aria-label={`${hidden.has(id) || minimizing.has(id) ? "Show" : "Hide"} ${recordFor(id).title}`}
+              aria-pressed={!hidden.has(id) && !minimizing.has(id)}
+              title={`${hidden.has(id) || minimizing.has(id) ? "Show" : "Hide"} ${recordFor(id).title}`}
+              aria-busy={minimizing.has(id)}
+              onClick={() => hidden.has(id) || minimizing.has(id) ? restore(id) : collapse(id)}
             >
-              {minimizing.has(id) ? "↓ Minimizing" : "Restore"}{" "}
-              {recordFor(id).title}
+              <PanelShelfIcon title={recordFor(id).title} />
+              <span className="local-dock-shelf-title">{recordFor(id).title}</span>
+              <svg className="local-dock-shelf-open" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 14 5-5 5 5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </button>
           ))}
 
-        <span>
+        </div>
+        <span className="local-dock-hint">
           {maximizedGroupKey
             ? "Panel maximized · press Esc or the restore-size button to return"
             : "Drag a tab or use Move to arrange panels · Drag dividers to resize"}
