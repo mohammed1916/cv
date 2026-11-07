@@ -9,6 +9,9 @@ const app = initializeApp({
   authDomain: 'visualizer.pro',
   projectId: 'teemtreat-visualizer',
   // Set VITE_FIREBASE_MEASUREMENT_ID after enabling Google Analytics in the Firebase console.
+  storageBucket: 'teemtreat-visualizer.firebasestorage.app',
+  messagingSenderId: '209065055325',
+  appId: '1:209065055325:web:b29889d959eb39a48ca9b4',
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || 'G-N7TMKW7YXH',
 });
 // Unique users are counted from Google Analytics page views (measurementId above).
