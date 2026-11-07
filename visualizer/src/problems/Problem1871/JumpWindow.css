@@ -1,0 +1,11 @@
+.jump-window { display: grid; gap: 12px; }
+.jump-window__facts { display: grid; grid-template-columns: max-content 1fr; gap: 4px 12px; margin: 0; }
+.jump-window__facts dt { color: var(--text-muted); }
+.jump-window__facts dd { margin: 0; color: var(--text); }
+.jump-window__reason { margin: 0; color: var(--text); }
+.algorithm-sequence__cell[data-role="destination"] { border: 2px solid var(--primary); }
+.algorithm-sequence__cell[data-role="entering"] { border: 2px dashed var(--success); }
+.algorithm-sequence__cell[data-role="leaving"] { border: 2px dashed var(--warning); }
+.algorithm-sequence__cell[data-role="contributor"] { background: color-mix(in srgb, var(--success) 22%, var(--surface)); }
+.algorithm-sequence__cell[data-role="window"] { background: color-mix(in srgb, var(--primary) 10%, var(--surface)); }
+.algorithm-sequence__cell[data-role="blocked"] { background: color-mix(in srgb, var(--warning) 22%, var(--surface)); }

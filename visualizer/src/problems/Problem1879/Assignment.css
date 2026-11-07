@@ -1,0 +1,9 @@
+.assignment-view { display: grid; gap: 12px; }
+.assignment-view__facts { display: grid; grid-template-columns: max-content 1fr; gap: 4px 12px; margin: 0; }
+.assignment-view__facts dt { color: var(--text-muted); }
+.assignment-view__facts dd { margin: 0; color: var(--text); }
+.algorithm-sequence__cell[data-role="assigned"] { background: color-mix(in srgb, var(--text-muted) 14%, var(--surface)); }
+.algorithm-sequence__cell[data-role="next"] { border: 2px solid var(--primary); }
+.algorithm-sequence__cell[data-role="used"] { background: color-mix(in srgb, var(--text-muted) 14%, var(--surface)); }
+.algorithm-sequence__cell[data-role="unused"] { background: color-mix(in srgb, var(--primary) 10%, var(--surface)); }
+.algorithm-sequence__cell[data-role="pair"] { background: color-mix(in srgb, var(--success) 26%, var(--surface)); border: 2px solid var(--success); }
