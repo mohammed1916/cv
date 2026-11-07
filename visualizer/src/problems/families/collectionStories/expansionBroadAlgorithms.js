@@ -10,7 +10,38 @@ export const broadSolvers={
 1879({nums1,nums2},emit){const n=nums1.length,dp=Array(1<<n).fill(Infinity);dp[0]=0;for(let mask=0;mask<dp.length-1;mask++){let used=0;for(let m=mask;m;m&=m-1)used++;for(let j=0;j<n;j++)if(!(mask&(1<<j))){const next=mask|(1<<j),cost=nums1[used]^nums2[j];dp[next]=Math.min(dp[next],dp[mask]+cost);emit('The used-position mask fixes the next first-array position. Try each unused second-array position and retain the cheapest cost for the enlarged mask.',{sequence:nums2,index:j,codeStage:'update',metrics:{firstIndex:used,firstValue:nums1[used],mask:mask.toString(2).padStart(n,'0'),pairCost:cost,nextBest:dp[next]}},'update');}}return dp.at(-1);},
 1880({firstWord,secondWord,targetWord},emit){const convert=word=>{let value=0;for(let i=0;i<word.length;i++){value=value*10+word.charCodeAt(i)-97;emit('Map a through j to decimal digits zero through nine. Accumulate by multiplying the prior value by ten and adding the next digit.',{sequence:word,index:i,codeStage:'convert',metrics:{value}},'update');}return value;};return convert(firstWord)+convert(secondWord)===convert(targetWord);},
 1881({n,x},emit){const negative=n[0]==='-';let index=negative?1:0;for(;index<n.length;index++){const digit=Number(n[index]),insert=negative?digit>x:digit<x;emit('The earliest differing digit decides numeric order. Insert a larger digit early for positive values, but a smaller digit early for negative values to reduce their magnitude.',{sequence:n,index,codeStage:'search',metrics:{negative,digit,x,insert}});if(insert)break;}return n.slice(0,index)+x+n.slice(index);},
-1882({servers,tasks},emit){const freeAt=Array(servers.length).fill(0),answer=[];let time=0;for(let index=0;index<tasks.length;index++){time=Math.max(time,index);let available=servers.map((_,i)=>i).filter(i=>freeAt[i]<=time);if(!available.length){time=Math.min(...freeAt);available=servers.map((_,i)=>i).filter(i=>freeAt[i]<=time);}available.sort((a,b)=>servers[a]-servers[b]||a-b);const server=available[0];freeAt[server]=time+tasks[index];answer.push(server);emit('Serve queued tasks in arrival order. At the current time choose the available server with smallest weight then index; if all are busy, jump to the first completion.',{sequence:servers,index:server,table:servers.map((weight,i)=>[i,weight,freeAt[i]]),tableHeaders:['Server','Weight','Available at'],output:answer,codeStage:'update',metrics:{task:index,time,duration:tasks[index],server}},'update');}return answer;},
+1882({servers,tasks},emit) {
+  const freeAt = Array(servers.length).fill(0), answer = [], assignments = [];
+  let time = 0;
+  const available = () => servers.map((_,i)=>i).filter(i=>freeAt[i]<=time)
+    .sort((a,b)=>servers[a]-servers[b]||a-b);
+  const show = (event, nextTask, message, selected = null, phase = 'inspect', jumpTo = null) => {
+    emit(message, { scheduling: {
+      time, event, nextTask, selected, jumpTo,
+      tasks: tasks.map((duration,id)=>({id,arrival:id,duration})),
+      servers: servers.map((weight,id)=>({id,weight,freeAt:freeAt[id]})),
+      eligible: available(), assignments: assignments.map(a=>({...a})),
+      output: [...answer],
+    }, activeLine: phase === 'start' ? 1 : phase === 'update' ? 4 : 3 }, phase);
+  };
+  show('Ready',0,'Task i arrives at time i. Keep tasks in arrival order; server weight decides which idle server takes the head task.',null,'start');
+  for (let index=0;index<tasks.length;index++) {
+    time=Math.max(time,index);
+    if (!available().length) {
+      const nextTime=Math.min(...freeAt);
+      show('Wait',index,`T${index} is waiting and every server is busy. Advance the clock from ${time} to ${nextTime}, the earliest completion.`,null,'inspect',nextTime);
+      time=nextTime;
+    }
+    const candidates=available(), server=candidates[0];
+    const tied=candidates.filter(i=>servers[i]===servers[server]);
+    show('Choose',index,`At time ${time}, release every server whose finish time is at most ${time}. T${index} is first in the queue. Choose S${server}: weight ${servers[server]} is smallest${tied.length>1 ? `; among equal weights (${tied.map(i=>'S'+i).join(', ')}), index ${server} is smallest` : ''}.`,server);
+    freeAt[server]=time+tasks[index];
+    answer.push(server);
+    assignments.push({task:index,server,start:time,end:freeAt[server]});
+    show('Assign',index+1,`T${index} → S${server}, running from ${time} to ${freeAt[server]}. Duration ${tasks[index]} sets the finish time; weight ${servers[server]} only sets selection priority.`,server,'update');
+  }
+  return answer;
+},
 1884({n},emit){let moves=0,covered=0;while(covered<n){moves++;covered+=moves;emit('With two eggs and this many moves, choose decreasing test gaps. The newly added gap equals the move budget, growing coverage by a triangular number.',{codeStage:'update',metrics:{moves,covered,requiredFloors:n}},'update');}return moves;},
 1885({nums1,nums2},emit){const differences=nums1.map((v,i)=>v-nums2[i]).sort((a,b)=>a-b);let left=0,right=differences.length-1,answer=0;while(left<right){const valid=differences[left]+differences[right]>0;if(valid){answer+=right-left;emit('Even the smallest remaining difference pairs positively with this right endpoint, so every index between them qualifies with it.',{sequence:differences,window:[left,right],codeStage:'accept',metrics:{added:right-left,answer}},'update');right--;}else{emit('This smallest difference cannot pair with the largest remaining value, so it cannot form any remaining valid pair.',{sequence:differences,window:[left,right],codeStage:'discard',metrics:{answer}});left++;}}return answer;},
 1886({mat,target},emit){let current=mat.map(row=>[...row]);for(let turn=0;turn<4;turn++){const equal=current.every((row,r)=>row.every((v,c)=>v===target[r][c]));emit('Compare every cell at this orientation. Four quarter-turns cover every distinct allowed rotation.',{matrix:current,outputMatrix:target,outputMatrixLabel:'Target matrix',codeStage:'compare',metrics:{degrees:turn*90,equal}});if(equal)return true;current=current[0].map((_,c)=>current.map(row=>row[c]).reverse());}return false;},

@@ -1,3 +1,7 @@
+# Latest user direction: problem-specific teaching visuals — 2026-11-07
+
+Read [the 1882 reference repair and concrete continuation instructions](docs/reviews/2026-11-07-unique-teaching-visuals.md). Improve visuals that hide the unique problem mechanics. Reuse, compose, or introduce shared components as appropriate. Start with 1834, 1871, and 1879; preserve their different selection rules. This instruction supersedes older requirements-only restrictions for this task.
+
 # Latest user direction: finish functional coverage; paste inbox available
 
 Read [the paste inbox and completion handoff](docs/requirements/CLAUDE-PASTE-HANDOFF.md). The user accepts basic visual presentation and wants all problems finished. New statement copies go in `local-reference/leetcode/user-pastes-326/<ID>.txt`; its README links all 326 pages. Read nonempty files immediately and continue ready work without waiting for every paste. Earlier requirements-only instructions describe the previous task; visual polish is no longer a completion blocker. The current inbox-creation task itself does not change implementations.
