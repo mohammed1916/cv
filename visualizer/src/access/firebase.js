@@ -9,10 +9,10 @@ const app = initializeApp({
   authDomain: 'visualizer.pro',
   projectId: 'teemtreat-visualizer',
   // Set VITE_FIREBASE_MEASUREMENT_ID after enabling Google Analytics in the Firebase console.
-  ...(import.meta.env.VITE_FIREBASE_MEASUREMENT_ID ? { measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID } : {}),
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || 'G-N7TMKW7YXH',
 });
 // Unique users are counted from Google Analytics page views. Nothing is sent until a measurement ID is configured.
-if (import.meta.env.VITE_FIREBASE_MEASUREMENT_ID) isSupported().then(ok => { if (ok) getAnalytics(app); }).catch(() => {});
+isSupported().then(ok => { if (ok) getAnalytics(app); }).catch(() => {});
 export const auth = getAuth(app);
 const functions = getFunctions(app, 'asia-south1');
 export const backendEnabled = import.meta.env.VITE_ACCESS_BACKEND_ENABLED === 'true';
