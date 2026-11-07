@@ -38,7 +38,7 @@ function loadCheckout() {
   });
   return checkoutScript;
 }
-export function Plans({ access, reason }) {
+export function Plans({ access, reason, onHideForever }) {
   const [pending, setPending] = useState(false);
   const [message, setMessage] = useState('');
   async function purchase(plan, dialog) {
@@ -93,6 +93,7 @@ export function Plans({ access, reason }) {
         {!checkoutEnabled && <p className="access-notice">Pro purchases are coming soon. Checkout is not open yet.</p>}
       </section>
     </div>
+    {onHideForever && <p><button onClick={onHideForever}>Don't show this again</button></p>}
     {!access.user && <>
       <GoogleSignIn access={access} />
     </>}

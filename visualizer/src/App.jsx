@@ -29,6 +29,7 @@ import { useVisualizationContext } from "./context/VisualizationContext";
 import { useChatContext } from "./context/ChatContext";
 import "./components/Chatbot/chatbot.css";
 import VirtualCardGrid from "./components/VirtualCardGrid";
+import { plansHiddenByVisitor, hidePlansForever } from "./access/visitorPrefs";
 
 const ChatDrawer = React.lazy(() => import("./components/Chatbot/ChatDrawer"));
 import "./App.css";
@@ -933,6 +934,10 @@ export default function App() {
     [navCatalog],
   );
   const [dialog, setDialog] = useState(null);
+  // Pricing opens on each visit until the visitor chooses not to see it again.
+  useEffect(() => {
+    if (!plansHiddenByVisitor()) setDialog("plans");
+  }, []);
   const [tourStep, setTourStep] = useState(null);
   const [lockedTitle, setLockedTitle] = useState("");
   const [active, setActive] = useState(
@@ -1256,6 +1261,7 @@ export default function App() {
               ) : (
                 <Plans
                   access={access}
+                  onHideForever={() => { hidePlansForever(); setDialog(null); }}
                   reason={
                     lockedTitle
                       ? `${lockedTitle} is included in Pro. Unlock it and every other implemented visualizer.`
