@@ -23,6 +23,8 @@ export default function CountServers() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <MatrixGrid label="Server grid" matrix={run.input.grid} highlightedCells={step.counted}
       activeCell={step.cell ? { row: step.cell[0], col: step.cell[1] } : null} />
+    <IndexedSequence label="Row tally: servers in each row" length={run.input.grid.length} active={step.cell ? step.cell[0] : -1} valueAt={i => step.rowCount[i]} />
+    <IndexedSequence label="Column tally: servers in each column" length={run.input.grid[0].length} active={step.cell ? step.cell[1] : -1} valueAt={i => step.colCount[i]} />
     <output aria-label="Server total">{`Communicating servers: ${step.total}`}</output>
   </>} renderReasoning={() => <>
     <p>Two servers communicate when they share a row or a column. A server counts when its row tally or its column tally exceeds one.</p>
