@@ -12,6 +12,10 @@ const definition = {
     { label: 'Distinct', input: '[4,10,20,3]' },
     { label: 'Repeats', input: '[5,5,-3,5,0]' },
     { label: 'Mixed', input: '[7,-1,7,2]' },
+    { label: "Single value", input: "[5]" },
+    { label: "Equal values", input: "[-7,-7]" },
+    { label: "Twelve values at the extremes", input: "[20,-20,20,-20,20,-20,20,-20,20,-20,20,-20]" },
+    { label: "Long run: twelve random values", input: "[-3,-11,-8,-13,-7,9,16,12,5,12,0,-18]" },
   ],
 }
 

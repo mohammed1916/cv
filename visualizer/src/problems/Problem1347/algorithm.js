@@ -9,6 +9,10 @@ export const examples = [
   { label: 'Two swaps', input: '{"s":"bab","t":"aba"}' },
   { label: 'Disjoint letters', input: '{"s":"aabbcc","t":"xxyyzz"}' },
   { label: 'Already anagrams', input: '{"s":"abcd","t":"dcba"}' },
+    { label: "Single letter", input: "{\"s\":\"a\",\"t\":\"b\"}" },
+    { label: "Identical strings", input: "{\"s\":\"aaaa\",\"t\":\"aaaa\"}" },
+    { label: "Twenty letters, reversed", input: "{\"s\":\"abcdefghijklmnopqrst\",\"t\":\"tsrqponmlkjihgfedcba\"}" },
+    { label: "Long run: twenty random letters", input: "{\"s\":\"abcbabcbbcacbcaabaaa\",\"t\":\"ccbbcabaaacbabccaabc\"}" },
 ]
 
 export function parseInput(text) {

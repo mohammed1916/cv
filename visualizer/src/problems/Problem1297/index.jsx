@@ -11,6 +11,9 @@ const definition = {
     { label: 'Repeated pair', input: '{"s":"aabbaabbaa","maxLetters":2,"minSize":2,"maxSize":4}' },
     { label: 'Three letters', input: '{"s":"abcabcabc","maxLetters":2,"minSize":2,"maxSize":3}' },
     { label: 'Too many letters', input: '{"s":"abcdef","maxLetters":1,"minSize":2,"maxSize":3}' },
+    { label: 'Single letter', input: '{"s":"a","maxLetters":1,"minSize":1,"maxSize":1}' },
+    { label: 'Equal substrings', input: '{"s":"aaaa","maxLetters":1,"minSize":2,"maxSize":2}' },
+    { label: 'Long run: 40 letters', input: '{"s":"caaaacaacbccbcaacbababbbaabbabcaaaacacba","maxLetters":3,"minSize":3,"maxSize":6}' },
   ],
 }
 

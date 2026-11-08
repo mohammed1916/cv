@@ -10,6 +10,10 @@ export const examples = [
   { label: 'Three o clock', input: '3:00' },
   { label: 'Afternoon', input: '4:50' },
   { label: 'Twelve thirty', input: '12:30' },
+    { label: "One o clock", input: "1:00" },
+    { label: "Hands overlap at twelve", input: "12:00" },
+    { label: "Near the end of the dial", input: "11:59" },
+    { label: "Half past six", input: "6:30" },
 ]
 
 export function parseInput(text) {

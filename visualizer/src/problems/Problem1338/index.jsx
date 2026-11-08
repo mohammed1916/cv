@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[3,3,3,3,5,5,5,2,2,7]' },
     { label: 'Example 2', input: '[7,7,7,7,7,7]' },
+    { label: "Single pair", input: "[1,1]" },
+    { label: "Two equal pairs", input: "[2,2,9,9]" },
+    { label: "Fourteen values, extremes", input: "[9,9,9,9,9,9,9,9,9,9,9,9,9,1]" },
+    { label: "Long run: fourteen random values", input: "[8,2,2,8,7,7,2,1,8,7,7,5,6,4]" },
   ],
 }
 

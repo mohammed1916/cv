@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"operations":[["add",3],["add",0],["add",2],["add",5],["add",4],["getProduct",2],["getProduct",3],["getProduct",4],["add",8],["getProduct",2]]}' },
     { label: 'Single', input: '{"operations":[["add",7],["getProduct",1]]}' },
+    { label: "Zero in the product", input: "{\"operations\":[[\"add\",0],[\"getProduct\",1]]}" },
+    { label: "Equal values", input: "{\"operations\":[[\"add\",2],[\"add\",2],[\"getProduct\",2]]}" },
+    { label: "Eleven nines", input: "{\"operations\":[[\"add\",9],[\"add\",9],[\"add\",9],[\"add\",9],[\"add\",9],[\"add\",9],[\"add\",9],[\"add\",9],[\"add\",9],[\"add\",9],[\"add\",9],[\"getProduct\",11]]}" },
+    { label: "Long run: twelve operations", input: "{\"operations\":[[\"add\",4],[\"add\",2],[\"add\",1],[\"add\",7],[\"add\",5],[\"add\",1],[\"add\",9],[\"add\",4],[\"getProduct\",6],[\"getProduct\",4],[\"getProduct\",7],[\"getProduct\",3]]}" },
   ],
 }
 

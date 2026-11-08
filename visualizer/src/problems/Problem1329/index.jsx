@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"mat":[[3,3,1,1],[2,2,1,2],[1,1,1,2]]}' },
     { label: 'Single row', input: '{"mat":[[5,2,9]]}' },
+    { label: "Single cell", input: "{\"mat\":[[9]]}" },
+    { label: "Equal values", input: "{\"mat\":[[5,5],[5,5]]}" },
+    { label: "Six by six, extremes alternate", input: "{\"mat\":[[1,100,1,100,1,100],[1,100,1,100,1,100],[1,100,1,100,1,100],[1,100,1,100,1,100],[1,100,1,100,1,100],[1,100,1,100,1,100]]}" },
+    { label: "Long run: six by six random", input: "{\"mat\":[[23,89,69,51,55,68],[35,71,10,69,69,58],[62,54,14,32,56,27],[92,33,33,37,31,45],[44,21,49,4,79,92],[100,25,20,59,69,66]]}" },
   ],
 }
 

@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Official', input: '{"board":["E23","2X2","12S"]}' },
     { label: 'Blocked', input: '{"board":["E11","XXX","11S"]}' },
+    { label: 'Two by two', input: '{"board":["E1","1S"]}' },
+    { label: 'Blocked centre', input: '{"board":["E99","X9X","99S"]}' },
+    { label: 'Largest board', input: '{"board":["E0556","417X1","9X290","35X81","5356S"]}' },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"root1":[2,1,4],"root2":[1,0,3]}' },
     { label: 'Example 2', input: '{"root1":[1,null,8],"root2":[8,1]}' },
+    { label: "Single node per tree", input: "{\"root1\":[7],\"root2\":[-3]}" },
+    { label: "Equal values in both trees", input: "{\"root1\":[4,2,6],\"root2\":[4,1]}" },
+    { label: "Extreme values -50 and 50", input: "{\"root1\":[-50,null,50],\"root2\":[0]}" },
+    { label: "Long run: ten nodes per tree", input: "{\"root1\":[20,-5,36,-16,13,24,37,-36,null,12,null,22],\"root2\":[11,-16,36,-23,8,19,41,-26,null,-7,null,12]}" },
   ],
 }
 

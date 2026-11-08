@@ -9,6 +9,10 @@ export const examples = [
   { label: 'Three days, six jobs', input: '{"jobDifficulty":[6,5,4,3,2,1],"d":3}' },
   { label: 'Equal days', input: '{"jobDifficulty":[9,9,9],"d":3}' },
   { label: 'One day', input: '{"jobDifficulty":[1,2,3],"d":1}' },
+    { label: "Single job", input: "{\"jobDifficulty\":[7],\"d\":1}" },
+    { label: "Equal difficulties", input: "{\"jobDifficulty\":[3,3,3,3],\"d\":2}" },
+    { label: "One job per day, extremes", input: "{\"jobDifficulty\":[1,1000,0],\"d\":3}" },
+    { label: "Long run: twelve jobs, six days", input: "{\"jobDifficulty\":[345,516,459,281,346,553,558,656,950,219,252,829],\"d\":6}" },
 ]
 
 export function parseInput(text) {

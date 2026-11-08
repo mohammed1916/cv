@@ -10,6 +10,10 @@ export const examples = [
   { label: 'One tree', input: '{"n":4,"leftChild":[1,-1,3,-1],"rightChild":[2,-1,-1,-1]}' },
   { label: 'Node with two parents', input: '{"n":4,"leftChild":[1,-1,3,-1],"rightChild":[2,3,-1,-1]}' },
   { label: 'Two components', input: '{"n":4,"leftChild":[1,0,-1,-1],"rightChild":[-1,-1,-1,-1]}' },
+  { label: "Single node", input: "{\"n\":1,\"leftChild\":[-1],\"rightChild\":[-1]}" },
+  { label: "Cycle has no root", input: "{\"n\":3,\"leftChild\":[1,2,0],\"rightChild\":[-1,-1,-1]}" },
+  { label: "Twelve isolated roots", input: "{\"n\":12,\"leftChild\":[-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],\"rightChild\":[-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]}" },
+  { label: "Long run: 12-node chain", input: "{\"n\":12,\"leftChild\":[10,3,5,-1,11,-1,8,9,-1,-1,-1,-1],\"rightChild\":[-1,-1,-1,0,-1,1,-1,-1,4,-1,7,2]}" },
 ]
 
 export function parseInput(text) {

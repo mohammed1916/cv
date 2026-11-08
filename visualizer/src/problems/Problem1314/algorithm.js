@@ -8,6 +8,10 @@ export const phases = [
 export const examples = [
   { label: 'Three by three, k = 1', input: '{"mat":[[1,2,3],[4,5,6],[7,8,9]],"k":1}' },
   { label: 'Two by two, k = 2', input: '{"mat":[[1,2],[3,4]],"k":2}' },
+    { label: "Single cell", input: "{\"mat\":[[7]],\"k\":1}" },
+    { label: "Equal values", input: "{\"mat\":[[1,1],[1,1]],\"k\":3}" },
+    { label: "Eight by eight, all nines", input: "{\"mat\":[[9,9,9,9,9,9,9,9],[9,9,9,9,9,9,9,9],[9,9,9,9,9,9,9,9],[9,9,9,9,9,9,9,9],[9,9,9,9,9,9,9,9],[9,9,9,9,9,9,9,9],[9,9,9,9,9,9,9,9],[9,9,9,9,9,9,9,9]],\"k\":8}" },
+    { label: "Long run: eight by eight random", input: "{\"mat\":[[4,8,8,0,9,7,0,3],[4,9,6,5,0,2,8,6],[1,9,9,2,1,7,2,3],[7,2,1,8,3,3,5,0],[4,6,3,3,6,3,0,6],[0,0,5,6,5,9,5,2],[0,6,8,0,7,7,7,2],[3,6,0,0,2,0,1,1]],\"k\":5}" },
 ]
 
 export function parseInput(text) {

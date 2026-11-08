@@ -11,6 +11,10 @@ export const examples = [
   { label: 'Change the first non-a', input: '{"text":"abccba"}' },
   { label: 'Left half all a', input: '{"text":"aaaaa"}' },
   { label: 'One letter', input: '{"text":"z"}' },
+    { label: "Single letter", input: "{\"text\":\"a\"}" },
+    { label: "All letters equal", input: "{\"text\":\"aaaa\"}" },
+    { label: "Longest palindrome, 30 letters", input: "{\"text\":\"abcdefghijklmnoonmlkjihgfedcba\"}" },
+    { label: "Long run: generated palindrome", input: "{\"text\":\"cccacbabaaaabbbbbbaaaababcaccc\"}" },
 ]
 
 export function parseInput(text) {

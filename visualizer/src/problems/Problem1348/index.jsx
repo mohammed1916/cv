@@ -16,6 +16,10 @@ const definition = {
   complexity: 'Each record is a sorted insert and each bucket is two binary searches. The visualization caps times at 200 and operations at 12.',
   examples: [
     { label: 'Example 1', input: '{"ops":[["record","tweet",0],["record","tweet",60],["record","tweet",10],["query","minute","tweet",0,59],["query","minute","tweet",0,60]]}' },
+    { label: "Single record", input: "{\"ops\":[[\"record\",\"a\",0]]}" },
+    { label: "Equal times stack up", input: "{\"ops\":[[\"record\",\"bo\",5],[\"record\",\"bo\",5],[\"query\",\"minute\",\"bo\",0,59]]}" },
+    { label: "Largest time value", input: "{\"ops\":[[\"record\",\"cy\",200],[\"query\",\"day\",\"cy\",0,200]]}" },
+    { label: "Long run: twelve operations", input: "{\"ops\":[[\"record\",\"cy\",137],[\"record\",\"bo\",153],[\"record\",\"bo\",8],[\"record\",\"bo\",104],[\"record\",\"cy\",18],[\"record\",\"cy\",57],[\"record\",\"ana\",179],[\"record\",\"ana\",43],[\"query\",\"hour\",\"cy\",1,86],[\"query\",\"hour\",\"cy\",27,50],[\"query\",\"minute\",\"cy\",8,187],[\"query\",\"day\",\"bo\",80,95]]}" },
   ],
 }
 

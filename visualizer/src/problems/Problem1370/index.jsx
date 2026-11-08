@@ -12,6 +12,10 @@ const definition = {
     { label: 'Short', input: '{"s":"aab"}' },
     { label: 'Four each', input: '{"s":"aaaabbbbcccc"}' },
     { label: 'Mixed', input: '{"s":"zzyxa"}' },
+    { label: "Single letter", input: "{\"s\":\"a\"}" },
+    { label: "Equal counts take turns", input: "{\"s\":\"abcabc\"}" },
+    { label: "Longest input, all z", input: "{\"s\":\"zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz\"}" },
+    { label: "Long run: 200 letters", input: "{\"s\":\"towjlzwulhkyxwvbndlniqqmwobnywjocdkudiwhtwfimyzxjqqdahcwsxpiogohebwzxddnausliytgysucacbviqcgokcsevzimkhqgrftbvzqdydlwqrussslofswfjzzsyovuhfuxyrztikyfkwbddqjwxichipsqibemkckqyfslnwxyribiabsjacjhwbcjcqs\"}" },
   ],
 }
 

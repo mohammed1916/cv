@@ -9,6 +9,10 @@ export const examples = [
   { label: 'Fourteen', input: '14' },
   { label: 'Eight', input: '8' },
   { label: 'Zero', input: '0' },
+    { label: "Single step", input: "1" },
+    { label: "Power of two", input: "1024" },
+    { label: "Largest allowed value", input: "1000000" },
+    { label: "Long run: generated value", input: "640504" },
 ]
 
 export function parseInput(text) {

@@ -16,6 +16,10 @@ const definition = {
     { label: 'Example 1', input: '{"target":[9,3,5]}' },
     { label: 'Example 2', input: '{"target":[1,1,1,2]}' },
     { label: 'Example 3', input: '{"target":[8,5]}' },
+    { label: "Single value", input: "{\"target\":[1]}" },
+    { label: "Equal values", input: "{\"target\":[6,6]}" },
+    { label: "Five largest values", input: "{\"target\":[12,12,12,12,12]}" },
+    { label: "Long run: five random values", input: "{\"target\":[9,5,7,3,8]}" },
   ],
 }
 

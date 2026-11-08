@@ -8,6 +8,10 @@ export const phases = [
 export const examples = [
   { label: 'Two pairs', input: '[3,1,2,4]' },
   { label: 'Mixed run lengths', input: '[2,5,1,7,3,9]' },
+    { label: "Single pair", input: "[1,1]" },
+    { label: "Same pair twice", input: "[2,9,2,9]" },
+    { label: "Largest frequency and value", input: "[100,100]" },
+    { label: "Long run: 50 pairs", input: "[4,42,3,30,3,1,3,64,4,43,4,9,5,46,1,25,6,36,2,28,3,60,4,47,2,97,1,30,4,73,1,52,5,49,3,70,6,43,6,49,4,40,1,25,6,20,4,36,1,76]" },
 ]
 
 export function parseInput(text) {

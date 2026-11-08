@@ -48,7 +48,11 @@ export const sample = {
   ],
 }
 
-export const examples = [{ label: 'Five ads', input: JSON.stringify(sample) }]
+export const examples = [{ label: 'Five ads', input: JSON.stringify(sample) },
+    { label: "Single viewed ad", input: "{\"Ads\":[{\"ad_id\":1,\"user_id\":1,\"action\":\"Viewed\"}]}" },
+    { label: "Zero clicks, ties by ad id", input: "{\"Ads\":[{\"ad_id\":3,\"user_id\":1,\"action\":\"Ignored\"},{\"ad_id\":2,\"user_id\":1,\"action\":\"Ignored\"}]}" },
+    { label: "Twelve clicks on one ad", input: "{\"Ads\":[{\"ad_id\":9,\"user_id\":1,\"action\":\"Clicked\"},{\"ad_id\":9,\"user_id\":2,\"action\":\"Clicked\"},{\"ad_id\":9,\"user_id\":3,\"action\":\"Clicked\"},{\"ad_id\":9,\"user_id\":4,\"action\":\"Clicked\"},{\"ad_id\":9,\"user_id\":5,\"action\":\"Clicked\"},{\"ad_id\":9,\"user_id\":6,\"action\":\"Clicked\"},{\"ad_id\":9,\"user_id\":7,\"action\":\"Clicked\"},{\"ad_id\":9,\"user_id\":8,\"action\":\"Clicked\"},{\"ad_id\":9,\"user_id\":9,\"action\":\"Clicked\"},{\"ad_id\":9,\"user_id\":10,\"action\":\"Clicked\"},{\"ad_id\":9,\"user_id\":11,\"action\":\"Clicked\"},{\"ad_id\":9,\"user_id\":12,\"action\":\"Clicked\"}]}" },
+    { label: "Long run: twelve random rows", input: "{\"Ads\":[{\"ad_id\":3,\"user_id\":1,\"action\":\"Clicked\"},{\"ad_id\":3,\"user_id\":2,\"action\":\"Clicked\"},{\"ad_id\":4,\"user_id\":3,\"action\":\"Viewed\"},{\"ad_id\":4,\"user_id\":4,\"action\":\"Viewed\"},{\"ad_id\":3,\"user_id\":5,\"action\":\"Ignored\"},{\"ad_id\":3,\"user_id\":6,\"action\":\"Viewed\"},{\"ad_id\":3,\"user_id\":7,\"action\":\"Ignored\"},{\"ad_id\":4,\"user_id\":8,\"action\":\"Ignored\"},{\"ad_id\":1,\"user_id\":9,\"action\":\"Viewed\"},{\"ad_id\":2,\"user_id\":10,\"action\":\"Viewed\"},{\"ad_id\":3,\"user_id\":11,\"action\":\"Viewed\"},{\"ad_id\":2,\"user_id\":12,\"action\":\"Clicked\"}]}" }]
 export const inputLabel = 'Object with an Ads list (action is Clicked, Viewed or Ignored)'
 export const complexity = 'O(r log a) for r action rows and a ads, dominated by the final sort. The visualization caps the table at 12 rows.'
 export const reasoning = [

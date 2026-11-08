@@ -11,6 +11,10 @@ export const examples = [
   { label: 'Not a palindrome', input: '{"s":"ababa"}' },
   { label: 'Palindrome', input: '{"s":"abba"}' },
   { label: 'Mixed letters', input: '{"s":"baabb"}' },
+    { label: "Single letter", input: "{\"s\":\"a\"}" },
+    { label: "Alternating letters", input: "{\"s\":\"abab\"}" },
+    { label: "Twenty letters, alternating", input: "{\"s\":\"abababababababababab\"}" },
+    { label: "Long run: twenty random letters", input: "{\"s\":\"baaabaabaabbaabaaaaa\"}" },
 ]
 
 export function parseInput(text) {

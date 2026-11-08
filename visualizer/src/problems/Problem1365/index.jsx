@@ -11,6 +11,10 @@ const definition = {
     { label: 'Sample', input: '[8,1,2,2,3]' },
     { label: 'Mixed', input: '[6,5,4,8]' },
     { label: 'All equal', input: '[7,7,7,7]' },
+    { label: "Single zero", input: "[0]" },
+    { label: "Equal values share a count", input: "[5,5,5]" },
+    { label: "Largest values", input: "[100,0,100,0,100,0,100,0,100,0,100,0]" },
+    { label: "Long run: 12 items", input: "[77,9,45,19,11,24,71,19,91,100,13,51]" },
   ],
 }
 

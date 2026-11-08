@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"values":[6,7,8,2,7,1,3,9,null,1,4,null,null,null,5]}' },
     { label: 'Small tree', input: '{"values":[2,3,4,5,6,7,8]}' },
+    { label: "Single node", input: "{\"values\":[4]}" },
+    { label: "All values equal", input: "{\"values\":[2,2,2,2,2,2,2]}" },
+    { label: "Fifteen nodes at 100", input: "{\"values\":[100,100,100,100,100,100,100,100,100,100,100,100,100,100,100]}" },
+    { label: "Long run: fifteen random entries", input: "{\"values\":[8,88,77,36,9,28,12,41,50,null,58,16,21,36,15]}" },
   ],
 }
 

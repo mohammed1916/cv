@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":5,"ranges":[3,4,1,1,0,0]}' },
     { label: 'Example 2', input: '{"n":3,"ranges":[0,0,0,0]}' },
+    { label: "Impossible: zero reach", input: "{\"n\":1,\"ranges\":[0,0]}" },
+    { label: "Equal ranges", input: "{\"n\":3,\"ranges\":[1,1,1,1]}" },
+    { label: "Twenty taps, all reach ten", input: "{\"n\":20,\"ranges\":[10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]}" },
+    { label: "Long run: twenty random taps", input: "{\"n\":20,\"ranges\":[6,10,5,2,10,4,2,1,0,3,6,7,8,5,6,8,2,4,1,4,6]}" },
   ],
 }
 

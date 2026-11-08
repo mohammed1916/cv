@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Mostly there', input: '{"s":"mbadm"}' },
     { label: 'Already close', input: '{"s":"zzazz"}' },
+    { label: "Single letter", input: "{\"s\":\"a\"}" },
+    { label: "Already a palindrome", input: "{\"s\":\"racecar\"}" },
+    { label: "Longest allowed, all different", input: "{\"s\":\"abcdefghij\"}" },
+    { label: "Long run: ten random letters", input: "{\"s\":\"snddlujptp\"}" },
   ],
 }
 

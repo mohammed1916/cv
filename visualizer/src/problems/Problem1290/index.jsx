@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"head":[1,0,1]}' },
     { label: 'Example 2', input: '{"head":[0]}' },
+    { label: 'Single one', input: '{"head":[1]}' },
+    { label: 'Equal bits', input: '{"head":[1,1,1,1]}' },
+    { label: 'Long run: 20 bits', input: '{"head":[1,1,1,1,0,1,0,1,0,1,0,1,1,0,1,0,1,0,1,0]}' },
   ],
 }
 

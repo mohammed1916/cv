@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Two orders', input: '{"n":2}' },
     { label: 'Three orders', input: '{"n":3}' },
+    { label: "Single order", input: "{\"n\":1}" },
+    { label: "Five orders", input: "{\"n\":5}" },
+    { label: "Largest allowed n", input: "{\"n\":8}" },
   ],
 }
 

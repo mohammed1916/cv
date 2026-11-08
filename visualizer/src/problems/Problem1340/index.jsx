@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"arr":[6,4,14,6,8,13,9,7,10,6,12],"d":2}' },
     { label: 'Flat', input: '{"arr":[3,3,3,3,3],"d":3}' },
+    { label: "Single value", input: "{\"arr\":[5],\"d\":1}" },
+    { label: "Repeated values", input: "{\"arr\":[9,1,9,1],\"d\":2}" },
+    { label: "Extremes, twelve values", input: "{\"arr\":[100000,1,100000,1,100000,1,100000,1,100000,1,100000,1],\"d\":6}" },
+    { label: "Long run: twelve random values", input: "{\"arr\":[51239,13704,80886,77982,8402,37185,36325,65028,73586,58810,87500,59928],\"d\":5}" },
   ],
 }
 

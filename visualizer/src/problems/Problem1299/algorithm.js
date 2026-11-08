@@ -10,6 +10,9 @@ export const examples = [
   { label: 'Mixed heights', input: '[17,4,9,2,6]' },
   { label: 'Ascending', input: '[1,3,5,7]' },
   { label: 'Single value', input: '[8]' },
+  { label: 'Equal values', input: '[4,4,4]' },
+  { label: 'Largest values', input: '[100000,1,100000]' },
+  { label: 'Long run: 30 values', input: '[76260,32954,27059,86208,14373,96802,28614,44740,73421,96201,83390,49198,66664,31852,27686,77338,5601,64999,13515,12803,40293,2582,10170,31238,67520,74708,88764,83647,76446,47999]' },
 ]
 
 export function parseInput(text) {

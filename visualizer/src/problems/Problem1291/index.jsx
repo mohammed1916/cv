@@ -12,6 +12,9 @@ const definition = {
     { label: 'Three-digit range', input: '{"low":200,"high":400}' },
     { label: 'Mixed lengths', input: '{"low":2000,"high":4500}' },
     { label: 'Empty range', input: '{"low":90,"high":99}' },
+    { label: 'Single number', input: '{"low":1,"high":1}' },
+    { label: 'Largest range', input: '{"low":1,"high":1000000}' },
+    { label: 'Long run: six digits', input: '{"low":123456,"high":987654}' },
   ],
 }
 

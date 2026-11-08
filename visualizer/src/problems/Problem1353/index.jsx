@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"events":[[1,2],[2,3],[3,4]]}' },
     { label: 'Example 2', input: '{"events":[[1,2],[2,2],[3,4],[3,4]]}' },
+    { label: "Single day", input: "{\"events\":[[5,5]]}" },
+    { label: "Equal events", input: "{\"events\":[[1,3],[1,3]]}" },
+    { label: "Eight events across the month", input: "{\"events\":[[1,30],[1,30],[30,30],[1,1],[15,16],[2,29],[29,30],[3,4]]}" },
+    { label: "Long run: eight random events", input: "{\"events\":[[28,28],[8,22],[13,26],[12,28],[30,30],[20,28],[14,27],[29,29]]}" },
   ],
 }
 

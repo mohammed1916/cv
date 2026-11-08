@@ -11,6 +11,10 @@ const definition = {
     { label: 'Sample', input: '[0,1,2,3,4,5,6,7,8]' },
     { label: 'Powers', input: '[512,256,1,2,768]' },
     { label: 'Small', input: '[15,7,3]' },
+    { label: "Single value", input: "[0]" },
+    { label: "Equal values", input: "[8,8,8,8]" },
+    { label: "Sixteen values, extremes", input: "[1000,512,256,128,64,32,16,8,4,2,1,0,1000,999,512,1]" },
+    { label: "Long run: sixteen random values", input: "[826,334,390,343,822,729,778,258,446,237,29,256,922,530,837,963]" },
   ],
 }
 

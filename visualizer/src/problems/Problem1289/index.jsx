@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Official', input: '{"grid":[[1,2,3],[4,5,6],[7,8,9]]}' },
     { label: 'Same column', input: '{"grid":[[1,5],[1,9]]}' },
+    { label: 'Single cell', input: '{"grid":[[-9]]}' },
+    { label: 'Equal values', input: '{"grid":[[4,4],[4,4]]}' },
+    { label: 'Largest grid', input: '{"grid":[[0,-3,0,8,-1],[0,2,8,8,-2],[-3,-7,-9,2,2],[5,-8,-9,-2,0],[-3,1,-7,-6,9]]}' },
   ],
 }
 

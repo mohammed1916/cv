@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '"abcabcabc"' },
     { label: 'Repeated letter', input: '"aaaa"' },
+    { label: "Single letter", input: "\"a\"" },
+    { label: "Repeated pair", input: "\"abab\"" },
+    { label: "Twenty distinct letters", input: "\"abcdefghijklmnopqrst\"" },
+    { label: "Long run: twenty letters a and b", input: "\"abaabbbbababbabbbbbb\"" },
   ],
 }
 

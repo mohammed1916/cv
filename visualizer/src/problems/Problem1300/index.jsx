@@ -12,6 +12,10 @@ const definition = {
     { label: 'Exact hit', input: '{"arr":[1,5,9,2],"target":14}' },
     { label: 'Below the top', input: '{"arr":[2,3,5],"target":10}' },
     { label: 'Tie goes lower', input: '{"arr":[7,7],"target":9}' },
+    { label: 'Single value', input: '{"arr":[0],"target":0}' },
+    { label: 'Zero target', input: '{"arr":[3,4],"target":0}' },
+    { label: 'Largest target', input: '{"arr":[30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30],"target":300}' },
+    { label: 'Long run: 20 values', input: '{"arr":[12,8,17,9,29,6,7,18,7,21,17,12,17,13,30,19,7,24,26,4],"target":150}' },
   ],
 }
 

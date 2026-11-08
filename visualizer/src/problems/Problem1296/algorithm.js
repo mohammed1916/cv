@@ -11,6 +11,9 @@ export const examples = [
   { label: 'Two runs of three', input: '{"nums":[5,3,1,2,6,4],"k":3}' },
   { label: 'Gap in the middle', input: '{"nums":[1,2,3,5,6,7],"k":3}' },
   { label: 'Repeated values', input: '{"nums":[1,1,2,2,3,3],"k":3}' },
+  { label: 'Single value', input: '{"nums":[4],"k":1}' },
+  { label: 'Equal values', input: '{"nums":[2,2,2],"k":2}' },
+  { label: 'Long run: 40 values', input: '{"nums":[657,555,493,163,276,330,853,527,256,141,3,325,687,730,266,315,62,387,856,843,697,725,847,194,619,820,884,172,321,420,986,516,423,776,879,951,137,805,213,185],"k":10}' },
 ]
 
 export function parseInput(text) {

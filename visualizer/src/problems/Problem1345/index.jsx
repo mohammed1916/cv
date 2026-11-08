@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"arr":[100,-23,-23,404,100,23,23,23,3,404]}' },
     { label: 'Example 2', input: '{"arr":[7,6,9,6,9,6,9,7]}' },
+    { label: "Single value", input: "{\"arr\":[5]}" },
+    { label: "Equal values", input: "{\"arr\":[7,7,7,7]}" },
+    { label: "Extremes, twelve values", input: "{\"arr\":[1000,-1000,1000,-1000,0,0,1000,-1000,-1000,1000,0,0]}" },
+    { label: "Long run: twelve random values", input: "{\"arr\":[-116,-57,560,-262,-633,600,-391,-467,224,943,-422,431]}" },
   ],
 }
 

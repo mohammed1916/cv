@@ -21,6 +21,10 @@ const definition = {
   examples: [
     { label: "A BRIGHT TEA", input: '{"s":"A BRIGHT TEA"}' },
     { label: "LATE NIGHT WALK", input: '{"s":"LATE NIGHT WALK"}' },
+    { label: "Single word", input: "{\"s\":\"HI\"}" },
+    { label: "Equal-length words", input: "{\"s\":\"ONE TWO\"}" },
+    { label: "One word of 200 letters", input: "{\"s\":\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"}" },
+    { label: "Long run: words up to 200 characters", input: "{\"s\":\"K KXTSYRPS NQKZ OELGI IZ Y G UB DFEWXFMN RWPL UM QOADBISYC OMZ V DXRTE WXCZQR Q RYYVK ABDVXGAF RN SXGRNCIA NYF SFNYUI MLD GWP QMJ AMAYLYSZ KJIM HYL WMCF IRNR WVJNLTVQK DJAK JIDISUIVE TZFIVFKAT\"}" },
   ],
 };
 

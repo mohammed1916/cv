@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"root":[1,2,3,2,null,2,4],"target":2}' },
     { label: 'Example 2', input: '{"root":[1,3,3,3,2],"target":3}' },
+    { label: "Single node equal to target", input: "{\"root\":[2],\"target\":2}" },
+    { label: "Every node equal to target", input: "{\"root\":[3,3,3,3,3,3,3],\"target\":3}" },
+    { label: "Fifteen nodes, target four", input: "{\"root\":[1,2,3,4,1,2,3,4,1,2,3,4,1,2,3],\"target\":4}" },
+    { label: "Long run: fifteen random entries", input: "{\"root\":[3,2,3,1,4,2,null,3,1,3,null,4,null,4,null],\"target\":2}" },
   ],
 }
 

@@ -11,6 +11,10 @@ const definition = {
     { label: 'Rising tail', input: '{"arr":[2,2,2,2,5,5,5,8],"k":3,"threshold":4}' },
     { label: 'Exact match', input: '{"arr":[4,4,4],"k":2,"threshold":4}' },
     { label: 'Single values', input: '{"arr":[1,5,3,7],"k":1,"threshold":4}' },
+    { label: "Single value", input: "{\"arr\":[7],\"k\":1,\"threshold\":5}" },
+    { label: "Averages equal the threshold", input: "{\"arr\":[2,6,2,6],\"k\":2,\"threshold\":4}" },
+    { label: "Whole array as one window", input: "{\"arr\":[0,20,0,20,0,20,0,20,0,20,0,20],\"k\":12,\"threshold\":10}" },
+    { label: "Long run: twelve random values", input: "{\"arr\":[1,1,19,14,17,14,4,14,1,3,13,8],\"k\":6,\"threshold\":10}" },
   ],
 }
 

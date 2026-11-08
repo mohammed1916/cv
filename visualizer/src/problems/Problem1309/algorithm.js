@@ -9,6 +9,10 @@ export const examples = [
   { label: 'Mixed groups', input: '{"s":"10#11#12"}' },
   { label: 'All singles', input: '{"s":"1326#"}' },
   { label: 'Full alphabet', input: '{"s":"12345678910#11#12#13#14#15#16#17#18#19#20#21#22#23#24#25#26#"}' },
+    { label: "Single digit", input: "{\"s\":\"1\"}" },
+    { label: "Largest two-digit group", input: "{\"s\":\"26#\"}" },
+    { label: "Repeated group", input: "{\"s\":\"10#10#10#\"}" },
+    { label: "Long run: up to 60 characters", input: "{\"s\":\"18#14#616#9120#26#124#22#16#15#11#23#10#19#18#11#14#25#10#\"}" },
 ]
 
 export function parseInput(text) {

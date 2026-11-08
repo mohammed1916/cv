@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"num":8}' },
     { label: 'Example 2', input: '{"num":123}' },
+    { label: "Smallest number", input: "{\"num\":1}" },
+    { label: "Square target wins", input: "{\"num\":8994000}" },
+    { label: "Near the largest number", input: "{\"num\":999999839}" },
+    { label: "Long run: 9-digit value", input: "{\"num\":912348538}" },
   ],
 }
 

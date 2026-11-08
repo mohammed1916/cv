@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Level 1', input: `{${base},"level":1}` },
     { label: 'Level 2', input: `{${base},"level":2}` },
+    { label: "Single person", input: "{\"watchedVideos\":[[\"alpha\"]],\"friends\":[[]],\"id\":0,\"level\":1}" },
+    { label: "Equal counts sort by name", input: "{\"watchedVideos\":[[\"x\"],[\"beta\"],[\"alpha\"]],\"friends\":[[1,2],[0],[0]],\"id\":0,\"level\":1}" },
+    { label: "Chain of eight, deepest level", input: "{\"watchedVideos\":[[\"alpha\"],[\"beta\",\"gamma\"],[\"alpha\"],[\"beta\",\"gamma\"],[\"alpha\"],[\"beta\",\"gamma\"],[\"alpha\"],[\"beta\",\"gamma\"]],\"friends\":[[1],[0,2],[1,3],[2,4],[3,5],[4,6],[5,7],[6]],\"id\":0,\"level\":8}" },
+    { label: "Long run: eight people, random friends", input: "{\"watchedVideos\":[[\"gamma\"],[\"beta\",\"gamma\",\"alpha\"],[\"beta\"],[\"sigma\"],[\"alpha\"],[\"alpha\",\"beta\",\"gamma\"],[\"delta\",\"sigma\",\"gamma\"],[\"alpha\"]],\"friends\":[[1,2,4,5],[0,2,6,7],[0,1,7],[6],[0,5],[0,4,7],[1,3],[1,2,5]],\"id\":0,\"level\":3}" },
   ],
 }
 

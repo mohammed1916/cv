@@ -9,6 +9,10 @@ export const phases = [
 export const examples = [
   { label: 'Small array', input: '{"arr":[1,3,4,8],"queries":[[0,1],[1,2],[0,3],[3,3]]}' },
   { label: 'Single element queries', input: '{"arr":[4,8,2,10],"queries":[[2,3],[1,3],[0,0],[0,3]]}' },
+    { label: "Single element", input: "{\"arr\":[7],\"queries\":[[0,0]]}" },
+    { label: "Equal values", input: "{\"arr\":[4,4,4,4],\"queries\":[[0,3],[1,2]]}" },
+    { label: "Extreme values", input: "{\"arr\":[1000,1,1000],\"queries\":[[0,2],[0,0],[1,1]]}" },
+    { label: "Long run: 40 values, 20 queries", input: "{\"arr\":[543,524,599,336,92,791,117,434,983,265,223,737,266,486,128,402,263,784,735,580,702,432,828,533,689,662,149,129,27,204,779,946,71,546,556,195,303,140,91,765],\"queries\":[[3,31],[14,29],[24,31],[3,21],[9,15],[12,23],[13,25],[9,29],[26,36],[30,35],[25,36],[35,37],[16,19],[33,34],[30,39],[30,39],[5,12],[25,34],[35,35],[9,35]]}" },
 ]
 
 export function parseInput(text) {

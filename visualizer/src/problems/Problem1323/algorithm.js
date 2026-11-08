@@ -10,6 +10,10 @@ export const examples = [
   { label: 'Leading six', input: '{"num":9669}' },
   { label: 'Middle six', input: '{"num":9996}' },
   { label: 'No six', input: '{"num":9999}' },
+    { label: "Single digit", input: "{\"num\":6}" },
+    { label: "Mixed six and nine", input: "{\"num\":9696}" },
+    { label: "Largest allowed value", input: "{\"num\":9999}" },
+    { label: "Long run: four random digits", input: "{\"num\":9666}" },
 ]
 
 export function parseInput(text) {

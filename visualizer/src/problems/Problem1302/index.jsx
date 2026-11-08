@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[1,2,3,4,5,null,6,7,null,null,null,null,8]' },
     { label: 'Example 2', input: '[6,7,8,2,7,1,3,9,null,1,4,null,null,null,5]' },
+    { label: 'Single root', input: '[7]' },
+    { label: 'Equal values', input: '[5,5,5]' },
+    { label: 'Long run: 15 entries', input: '[63,45,null,25,61,null,null,78,null,null,73,null,null,null,75]' },
   ],
 }
 

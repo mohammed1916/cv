@@ -11,6 +11,10 @@ const definition = {
     { label: 'Sample', input: '{"s":"abcabc"}' },
     { label: 'Repeated a', input: '{"s":"aaacb"}' },
     { label: 'Missing b', input: '{"s":"abab"}' },
+    { label: "Single letter", input: "{\"s\":\"a\"}" },
+    { label: "Equal counts", input: "{\"s\":\"aabbcc\"}" },
+    { label: "Thirty of one letter", input: "{\"s\":\"cccccccccccccccccccccccccccccc\"}" },
+    { label: "Long run: thirty random letters", input: "{\"s\":\"abbbaacacccbabcbacbcbcbcccaccb\"}" },
   ],
 }
 

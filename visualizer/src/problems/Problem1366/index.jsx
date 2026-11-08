@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"votes":["ABC","ACB","ABC","ACB","ACB"]}' },
     { label: 'Example 2', input: '{"votes":["WXYZ","XYZW"]}' },
+    { label: "Single team", input: "{\"votes\":[\"A\"]}" },
+    { label: "Full tie is alphabetical", input: "{\"votes\":[\"ABC\",\"BCA\",\"CAB\"]}" },
+    { label: "Alphabet ballot", input: "{\"votes\":[\"ABCDEFGHIJKLMNOPQRSTUVWXYZ\"]}" },
+    { label: "Long run: 10 ballots of 26 teams", input: "{\"votes\":[\"YVIWSXGLMPOKNQZJAHBCURFDET\",\"TCGOPFHWLRJVDZXBNMESAIYKQU\",\"NBXLVCZYOJEKIHAPSGMQFUDTRW\",\"RJEWDPGBCOTNYXAVHKZISUQMLF\",\"GRAHCJTXLKFVYBMNUDOSEWQPIZ\",\"HTLOKNJVQPFMACXZYWSBUDGREI\",\"GESPMIQULDXZBRWACJYVKOFHNT\",\"JLNEAXDZOFBYWGHIMKQTSURCVP\",\"ZDHPUEXQSYCLGTFAONMKJVIBWR\",\"MWFSTGBUQPKZIYLJCRDVEHAXNO\"]}" },
   ],
 }
 

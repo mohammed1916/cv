@@ -9,6 +9,9 @@ export const examples = [
   { label: 'Even count', input: '{"n":4}' },
   { label: 'Odd count', input: '{"n":7}' },
   { label: 'Six values', input: '{"n":6}' },
+  { label: 'Single value', input: '{"n":1}' },
+  { label: 'Largest n', input: '{"n":50}' },
+  { label: 'Long run: 49 values', input: '{"n":49}' },
 ]
 
 export function parseInput(text) {

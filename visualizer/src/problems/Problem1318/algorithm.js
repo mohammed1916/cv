@@ -11,6 +11,10 @@ export const examples = [
   { label: 'Classic example', input: '{"a":2,"b":6,"c":5}' },
   { label: 'Equal already', input: '{"a":4,"b":2,"c":7}' },
   { label: 'Both ones need flips', input: '{"a":1,"b":2,"c":3}' },
+    { label: "All ones", input: "{\"a\":1,\"b\":1,\"c\":1}" },
+    { label: "Equal values", input: "{\"a\":6,\"b\":6,\"c\":6}" },
+    { label: "Largest values", input: "{\"a\":1000000000,\"b\":1000000000,\"c\":1000000000}" },
+    { label: "Long run: large random values", input: "{\"a\":472836607,\"b\":68321721,\"c\":965354052}" },
 ]
 
 export function parseInput(text) {

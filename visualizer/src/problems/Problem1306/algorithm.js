@@ -11,6 +11,10 @@ export const examples = [
   { label: 'Chain of jumps', input: '{"arr":[2,3,1,0,4],"start":1}' },
   { label: 'Blocked early', input: '{"arr":[1,1,3,0,2],"start":0}' },
   { label: 'Short path', input: '{"arr":[4,0,1,3,0],"start":2}' },
+    { label: "Single element", input: "{\"arr\":[0],\"start\":0}" },
+    { label: "Repeated target value", input: "{\"arr\":[2,2,2],\"start\":1}" },
+    { label: "Chain of 30 ending in a self loop", input: "{\"arr\":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,29],\"start\":0}" },
+    { label: "Long run: 30 random links", input: "{\"arr\":[17,11,25,23,13,20,12,23,13,26,21,7,17,8,3,6,10,17,19,3,11,15,15,4,9,10,25,28,19,20],\"start\":21}" },
 ]
 
 export function parseInput(text) {

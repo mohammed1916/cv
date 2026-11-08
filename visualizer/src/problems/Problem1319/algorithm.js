@@ -10,6 +10,11 @@ export const examples = [
   { label: 'Two groups', input: '{"n":4,"links":[[0,1],[0,2],[1,2]]}' },
   { label: 'Not enough cables', input: '{"n":6,"links":[[0,1],[0,2],[0,3],[1,2]]}' },
   { label: 'Connected already', input: '{"n":5,"links":[[0,1],[1,2],[2,3],[3,4]]}' },
+    { label: "Single computer", input: "{\"n\":1,\"links\":[]}" },
+    { label: "Three isolated computers", input: "{\"n\":3,\"links\":[]}" },
+    { label: "Two equal pairs", input: "{\"n\":4,\"links\":[[0,1],[2,3]]}" },
+    { label: "Ring of twelve", input: "{\"n\":12,\"links\":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11],[11,0]]}" },
+    { label: "Long run: twelve computers", input: "{\"n\":12,\"links\":[[3,5],[10,6],[8,7],[5,10],[1,11],[3,2],[8,11],[0,10],[0,11],[1,5],[3,4],[7,2],[1,10],[8,5]]}" },
 ]
 
 export function parseInput(text) {

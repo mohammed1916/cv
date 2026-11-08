@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"word":"CAKE"}' },
     { label: 'Example 2', input: '{"word":"HAPPY"}' },
+    { label: "Single letter", input: "{\"word\":\"A\"}" },
+    { label: "Same letter twice", input: "{\"word\":\"LOOK\"}" },
+    { label: "Longest word, 30 letters", input: "{\"word\":\"ABCDEFGHIJKLMNOPQRSTUVWXYZABCD\"}" },
+    { label: "Long run: 30 random letters", input: "{\"word\":\"MMOATBNUKQYGZJMYIOIQWACJQOIQZO\"}" },
   ],
 }
 

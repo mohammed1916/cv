@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Two rows', input: '{"seats":[".#..","#..#"]}' },
     { label: 'Full hall', input: '{"seats":["....","....","...."]}' },
+    { label: "Single seat", input: "{\"seats\":[\".\"]}" },
+    { label: "All broken, no open seats", input: "{\"seats\":[\"##\",\"##\"]}" },
+    { label: "Largest hall, all open", input: "{\"seats\":[\"....\",\"....\",\"....\",\"....\",\"....\"]}" },
+    { label: "Long run: largest hall, random seats", input: "{\"seats\":[\"####\",\".##.\",\"....\",\"####\",\"##..\"]}" },
   ],
 }
 

@@ -64,6 +64,10 @@ export const examples = [
   { label: "[5,3,0,6,2,4]", input: '{"digits":[5,3,0,6,2,4]}' },
   { label: "[2,8]", input: '{"digits":[2,8]}' },
   { label: "Zeros after a drop", input: '{"digits":[4,0,0,0,0]}' },
+  { label: "Single zero", input: "{\"digits\":[0]}" },
+  { label: "Single digit three", input: "{\"digits\":[3]}" },
+  { label: "Equal values", input: "{\"digits\":[9,9,9,9]}" },
+  { label: "Long run: 50 digits", input: "{\"digits\":[7,9,0,1,7,7,8,3,8,8,2,1,0,2,2,8,4,0,3,3,4,6,9,9,0,4,8,1,2,5,2,4,3,8,6,3,1,5,5,2,6,6,3,4,2,9,1,7,2,1]}" },
 ];
 
 export function parseInput(text) {
