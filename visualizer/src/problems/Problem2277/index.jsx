@@ -16,6 +16,10 @@ const definition = {
     { label: 'Side branch', input: '{"n":5,"edges":[[0,1],[1,2],[2,3],[1,4]],"queries":[[0,3,4]]}' },
     { label: 'Node on path', input: '{"n":5,"edges":[[0,1],[1,2],[2,3],[1,4]],"queries":[[0,3,2]]}' },
     { label: 'Reversed query', input: '{"n":5,"edges":[[0,1],[1,2],[2,3],[1,4]],"queries":[[3,4,0]]}' },
+    { label: 'Two nodes', input: '{"n":2,"edges":[[0,1]],"queries":[[0,1,0]]}' },
+    { label: 'Endpoint on path', input: '{"n":3,"edges":[[0,1],[1,2]],"queries":[[0,2,0]]}' },
+    { label: 'Largest path, four queries', input: '{"n":10,"edges":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9]],"queries":[[0,9,5],[9,0,3],[2,7,4],[4,6,1]]}' },
+    { label: 'Long run: 10 nodes', input: '{"n":10,"edges":[[0,1],[0,2],[1,3],[3,4],[4,5],[0,6],[5,7],[5,8],[7,9]],"queries":[[9,6,0],[0,6,3],[4,0,4],[5,4,6]]}' },
   ],
 }
 

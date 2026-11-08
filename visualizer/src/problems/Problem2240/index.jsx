@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"total":12,"cost1":4,"cost2":3}' },
     { label: 'Small', input: '{"total":7,"cost1":2,"cost2":5}' },
+    { label: 'Smallest values', input: '{"total":1,"cost1":1,"cost2":1}' },
+    { label: 'Equal costs tie', input: '{"total":10,"cost1":5,"cost2":5}' },
+    { label: 'Largest values', input: '{"total":30,"cost1":29,"cost2":30}' },
   ],
 }
 

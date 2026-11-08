@@ -16,6 +16,9 @@ const definition = {
     { label: 'Diamond', input: '{"n":4,"edges":[[0,1],[0,2],[1,3],[2,3]]}' },
     { label: 'Chain', input: '{"n":3,"edges":[[0,1],[1,2]]}' },
     { label: 'No edges', input: '{"n":2,"edges":[]}' },
+    { label: 'Smallest graph', input: '{"n":1,"edges":[]}' },
+    { label: 'Largest tree', input: '{"n":8,"edges":[[0,1],[0,2],[1,3],[2,4],[3,5],[4,6],[5,7]]}' },
+    { label: 'Long run: eight nodes, branching', input: '{"n":8,"edges":[[0,1],[0,2],[1,3],[2,4],[3,5],[3,6],[5,7]]}' },
   ],
 }
 

@@ -16,6 +16,9 @@ const definition = {
     { label: 'Mixed road', input: 'RLRSLL' },
     { label: 'Leading left cars', input: 'LLRS' },
     { label: 'All stationary', input: 'SSS' },
+    { label: 'Single right car', input: 'R' },
+    { label: 'Same direction', input: 'RRRRRRRRRRRRRRRR' },
+    { label: 'Long run: 16 cars', input: 'LLRRSLRLRSRLLSRS' },
   ],
 }
 

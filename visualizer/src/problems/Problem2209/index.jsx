@@ -16,6 +16,9 @@ const definition = {
     { label: 'Mixed floor', input: '{"floor":"10110101","numCarpets":2,"carpetLen":2}' },
     { label: 'All white covered', input: '{"floor":"11111","numCarpets":2,"carpetLen":3}' },
     { label: 'No white', input: '{"floor":"0000","numCarpets":1,"carpetLen":2}' },
+    { label: 'Single white tile', input: '{"floor":"1","numCarpets":1,"carpetLen":1}' },
+    { label: 'Equal white runs', input: '{"floor":"1111","numCarpets":3,"carpetLen":1}' },
+    { label: 'Largest floor: 12 tiles', input: '{"floor":"110100111011","numCarpets":3,"carpetLen":4}' },
   ],
 }
 

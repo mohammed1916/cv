@@ -16,6 +16,9 @@ const definition = {
     { label: 'Mixed letters', input: '{"text":"abdcdbc","pattern":"ac"}' },
     { label: 'Repeated pair', input: '{"text":"aabb","pattern":"ab"}' },
     { label: 'Same letter', input: '{"text":"aaa","pattern":"aa"}' },
+    { label: 'Single letter text', input: '{"text":"a","pattern":"ab"}' },
+    { label: 'Pattern absent', input: '{"text":"abc","pattern":"zz"}' },
+    { label: 'Longest allowed: 12 letters', input: '{"text":"abcabcabcabc","pattern":"ca"}' },
   ],
 }
 

@@ -19,6 +19,9 @@ const definition = {
     { label: 'Consecutive', input: '{"nums":[4,2,5,3]}' },
     { label: 'Gap', input: '{"nums":[7,9]}' },
     { label: 'Repeat', input: '{"nums":[2,2,4]}' },
+    { label: 'Single value', input: '{"nums":[0]}' },
+    { label: 'Equal values', input: '{"nums":[9,9,9,9]}' },
+    { label: 'Long run: 14 values', input: '{"nums":[31,12,30,47,13,11,46,14,10,48,29,15,16,100]}' },
   ],
 }
 

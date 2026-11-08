@@ -16,6 +16,9 @@ const definition = {
     { label: 'Four arrows', input: '{"numArrows":4,"aliceArrows":[0,0,0,0,0,0,0,0,0,1,1,2]}' },
     { label: 'Six arrows', input: '{"numArrows":6,"aliceArrows":[2,0,0,0,0,0,0,0,0,1,0,3]}' },
     { label: 'Five arrows', input: '{"numArrows":5,"aliceArrows":[0,3,0,0,0,0,0,0,0,0,0,2]}' },
+    { label: 'Single arrow', input: '{"numArrows":1,"aliceArrows":[0,0,0,0,0,0,0,0,0,0,0,1]}' },
+    { label: 'Tie at two sections', input: '{"numArrows":4,"aliceArrows":[0,0,0,0,0,0,0,0,0,0,2,2]}' },
+    { label: 'Largest: twelve arrows', input: '{"numArrows":12,"aliceArrows":[1,1,1,1,1,1,1,1,1,1,1,1]}' },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"cards":[3,4,2,3,4,7]}' },
     { label: 'Example 2', input: '{"cards":[1,0,5,3]}' },
+    { label: 'Single card', input: '{"cards":[5]}' },
+    { label: 'Repeated value', input: '{"cards":[4,4,4,4]}' },
+    { label: 'Twenty cards, extreme values', input: '{"cards":[99,0,99,0,99,0,99,0,99,0,99,0,99,0,99,0,99,0,99,0]}' },
+    { label: 'Long run: 20 cards', input: '{"cards":[66,9,98,15,22,9,44,87,73,2,66,80,67,54,41,8,48,76,98,86]}' },
   ],
 }
 

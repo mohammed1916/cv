@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"tree":[4,8,5,0,1,null,6]}' },
     { label: 'Single node', input: '{"tree":[1]}' },
+    { label: 'Root with one child', input: '{"tree":[3,1]}' },
+    { label: 'Equal values in full tree', input: '{"tree":[5,5,5,5,5,5,5]}' },
+    { label: 'Full tree of 15 nodes', input: '{"tree":[50,0,50,0,50,0,50,0,50,0,50,0,50,0,50]}' },
+    { label: 'Long run: 15 entries', input: '{"tree":[48,25,42,24,2,22,22,13,22,38,22,28,2,18,30]}' },
   ],
 }
 

@@ -16,6 +16,9 @@ const definition = {
     { label: 'Block', input: 'A1:C2' },
     { label: 'Single cell', input: 'D4:D4' },
     { label: 'One row', input: 'B3:C3' },
+    { label: 'Full width', input: 'A1:F9' },
+    { label: 'Tall column', input: 'E2:E9' },
+    { label: 'Single corner cell', input: 'F1:F1' },
   ],
 }
 

@@ -15,6 +15,10 @@ const definition = {
   complexity: 'O(log M) per operation with a lazy segment tree over M values; the visualization caps M at 32.',
   examples: [
     { label: 'Example', input: '[["add",2,3],["add",7,10],["count"],["add",5,8],["count"]]' },
+    { label: 'Count on empty set', input: '[["count"]]' },
+    { label: 'Full span then one point', input: '[["add",1,32],["count"],["add",32,32],["count"]]' },
+    { label: 'Repeated range', input: '[["add",4,4],["add",4,4],["count"]]' },
+    { label: 'Long run: 12 operations', input: '[["add",9,9],["count"],["add",11,14],["add",24,32],["add",11,22],["count"],["count"],["count"],["add",18,24],["add",17,17],["count"],["add",19,19]]' },
   ],
 }
 

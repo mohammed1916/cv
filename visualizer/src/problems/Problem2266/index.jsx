@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"pressed_keys":"22233"}' },
     { label: 'Example 2', input: '{"pressed_keys":"7777"}' },
+    { label: 'Single key press', input: '{"pressed_keys":"2"}' },
+    { label: 'Run of four twos', input: '{"pressed_keys":"2222"}' },
+    { label: 'Twelve nines', input: '{"pressed_keys":"999999999999"}' },
+    { label: 'Long run: 12 presses', input: '{"pressed_keys":"379772272785"}' },
   ],
 }
 

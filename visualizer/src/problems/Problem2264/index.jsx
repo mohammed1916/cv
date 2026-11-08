@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 1', input: '{"num":"6777133339"}' },
     { label: 'Zeros', input: '{"num":"2300019"}' },
     { label: 'None', input: '{"num":"42352338"}' },
+    { label: 'Shortest input', input: '{"num":"333"}' },
+    { label: 'Repeated best piece', input: '{"num":"999999"}' },
+    { label: 'Thirty nines', input: '{"num":"999999999999999999999999999999"}' },
+    { label: 'Long run: 30 digits', input: '{"num":"619894819709860504533657348060"}' },
   ],
 }
 

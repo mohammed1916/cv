@@ -16,6 +16,9 @@ const definition = {
     { label: 'Mixed factors', input: '[6,4,3,2,7,6,2]' },
     { label: 'Runs', input: '[2,2,1,1,3,3,3]' },
     { label: 'Pairs equal', input: '[4,4]' },
+    { label: 'Single value', input: '[1]' },
+    { label: 'All equal at max', input: '[60,60,60,60,60,60,60,60,60,60]' },
+    { label: 'Long run: 10 values', input: '[12,18,24,30,36,42,48,54,60,6]' },
   ],
 }
 

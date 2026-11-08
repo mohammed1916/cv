@@ -14,6 +14,9 @@ const definition = {
   examples: [
     { label: 'One circle', input: '{"circles":[[2,2,1]]}' },
     { label: 'Two circles', input: '{"circles":[[2,2,2],[3,4,1]]}' },
+    { label: 'Corner circle', input: '{"circles":[[-6,-6,1]]}' },
+    { label: 'Equal circles tie', input: '{"circles":[[0,0,2],[0,0,2]]}' },
+    { label: 'Long run: six circles', input: '{"circles":[[-2,-1,3],[0,0,2],[2,1,4],[4,-3,1],[-5,4,2],[3,5,3]]}' },
   ],
 }
 

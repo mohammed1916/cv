@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"candidates":[16,17,71,62,12,24,14]}' },
     { label: 'Example 2', input: '{"candidates":[8,8]}' },
+    { label: 'Single candidate', input: '{"candidates":[1]}' },
+    { label: 'Equal candidates', input: '{"candidates":[7,7,7]}' },
+    { label: 'Thirty large candidates', input: '{"candidates":[1000000,999999,524288,1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768,65536,131072,262144,3,5,6,9,10,12,15,1000]}' },
+    { label: 'Long run: 30 candidates', input: '{"candidates":[520678,495580,517215,102056,31000,504897,537326,54012,666236,38919,989722,533479,961799,568368,965445,677566,321732,614133,260077,178037,421728,82170,159081,539546,888509,222425,741692,360343,927453,446157]}' },
   ],
 }
 

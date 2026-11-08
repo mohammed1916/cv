@@ -12,6 +12,9 @@ const definition = {
   examples: [
     { label: 'Sample interval', input: '{"purchases":[[7,10,30],[3,12,15],[7,15,25],[3,40,90],[9,11,20],[7,33,5],[9,18,40],[3,22,10]],"start":10,"end":25,"minAmount":30}' },
     { label: 'Nobody qualifies', input: '{"purchases":[[1,5,10]],"start":1,"end":9,"minAmount":11}' },
+    { label: 'Amount equal to minimum', input: '{"purchases":[[2,5,50]],"start":1,"end":9,"minAmount":50}' },
+    { label: 'Boundary days', input: '{"purchases":[[4,10,30],[4,25,30],[5,9,30],[5,26,30]],"start":10,"end":25,"minAmount":30}' },
+    { label: 'Long run: twelve purchases', input: '{"purchases":[[1,3,40],[2,7,12],[1,11,35],[3,14,50],[2,18,31],[4,20,44],[3,22,8],[1,24,60],[4,26,90],[2,28,33],[5,30,70],[5,12,30]],"start":10,"end":25,"minAmount":30}' },
   ],
 }
 

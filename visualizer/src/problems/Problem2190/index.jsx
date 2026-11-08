@@ -16,6 +16,9 @@ const definition = {
     { label: 'Repeated follower', input: '{"nums":[1,100,200,1,100],"key":1}' },
     { label: 'Run of key', input: '{"nums":[2,2,2,2,3],"key":2}' },
     { label: 'Two followers', input: '{"nums":[1,2,3,1,3],"key":1}' },
+    { label: 'Equal values at both ends', input: '{"nums":[5,5],"key":5}' },
+    { label: 'Long run: 14 values', input: '{"nums":[17,42,17,9,42,17,88,9,42,17,3,88,9,42],"key":42}' },
+    { label: 'Largest values', input: '{"nums":[200,0,200,0,200,0,200,0,200,0,200,0,200,0],"key":0}' },
   ],
 }
 

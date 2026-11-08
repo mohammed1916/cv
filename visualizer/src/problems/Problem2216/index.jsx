@@ -16,6 +16,9 @@ const definition = {
     { label: 'Leading pair', input: '[1,1,2,3,5]' },
     { label: 'Two pairs', input: '[1,1,2,2,3,3]' },
     { label: 'Odd leftover', input: '[1,2,3]' },
+    { label: 'Single zero', input: '[0]' },
+    { label: 'Equal values', input: '[4,4,4,4,4,4]' },
+    { label: 'Long run: 14 values', input: '[5,0,3,3,1,5,2,4,0,1,2,5,3,4]' },
   ],
 }
 

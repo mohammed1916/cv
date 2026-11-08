@@ -16,6 +16,9 @@ const definition = {
     { label: 'Mixed', input: '[5,19,8,1]' },
     { label: 'Small trio', input: '[3,8,20]' },
     { label: 'Two equal', input: '[4,4]' },
+    { label: 'Single value', input: '[7]' },
+    { label: 'Eight values with ties', input: '[20,1,20,1,20,1,20,1]' },
+    { label: 'Long run: 8 values', input: '[13,4,17,9,2,11,6,15]' },
   ],
 }
 

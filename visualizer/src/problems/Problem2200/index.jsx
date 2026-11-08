@@ -16,6 +16,9 @@ const definition = {
     { label: 'Two keys', input: '{"nums":[3,4,9,1,3,9,5],"key":9,"k":1}' },
     { label: 'All equal', input: '{"nums":[2,2,2,2,2],"key":2,"k":0}' },
     { label: 'Edge key', input: '{"nums":[1,0,0,0,0],"key":1,"k":1}' },
+    { label: 'Single value key', input: '{"nums":[5],"key":5,"k":0}' },
+    { label: 'Repeated key', input: '{"nums":[4,4,4,4],"key":4,"k":2}' },
+    { label: 'Long run: 14 values', input: '{"nums":[3,1,4,1,5,9,2,6,5,3,5,8,9,7],"key":5,"k":7}' },
   ],
 }
 

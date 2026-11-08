@@ -10,6 +10,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[[3,1,2,4,5],[1,2,3,4],[3,4,5,6]]' },
     { label: 'Empty', input: '[[1,2],[3,4]]' },
+    { label: 'Single array', input: '[[9]]' },
+    { label: 'Equal values across arrays', input: '[[4,8],[4,8]]' },
+    { label: 'Longest arrays', input: '[[1,2,3,4,5,6,7,8],[8,7,6,5,4,3,2,1],[10,20,30,40,50,25,35,45],[2,4,6,8,10,12,14,16],[49,48,47,46,45,44,43,42],[1,50,2,49,3,48,4,47]]' },
   ],
 }
 

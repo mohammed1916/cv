@@ -21,6 +21,9 @@ const definition = {
   examples: [
     { label: "Four values", input: '{"nums":[2,5,7,8]}' },
     { label: "Five values", input: '{"nums":[3,4,6,9,10]}' },
+    { label: 'Smallest allowed', input: '{"nums":[1,2,3]}' },
+    { label: 'All equal values', input: '{"nums":[5,5,5,5,5]}' },
+    { label: 'Long run: ten values', input: '{"nums":[3,7,11,14,18,21,25,27,29,30]}' },
   ],
 };
 

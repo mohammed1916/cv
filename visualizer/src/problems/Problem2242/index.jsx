@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Star', input: '{"scores":[5,1,3,2,4],"edges":[[0,1],[0,2],[0,3],[3,4]]}' },
     { label: 'Too short', input: '{"scores":[1,2,3,4],"edges":[[0,1],[1,2]]}' },
+    { label: 'Smallest graph', input: '{"scores":[7,2,9,4],"edges":[]}' },
+    { label: 'Equal scores tie', input: '{"scores":[5,5,5,5],"edges":[[0,1],[1,2],[2,3]]}' },
+    { label: 'Long run: eight nodes', input: '{"scores":[12,50,3,27,8,41,19,33],"edges":[[0,1],[0,2],[1,3],[2,4],[3,5],[4,6],[5,7],[6,7],[1,6]]}' },
   ],
 }
 

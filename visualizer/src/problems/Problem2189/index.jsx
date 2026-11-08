@@ -19,6 +19,9 @@ const definition = {
   examples: [
     { label: "Eight cards", input: '{"n":8}' },
     { label: "Fourteen cards", input: '{"n":14}' },
+    { label: 'Smallest house', input: '{"n":1}' },
+    { label: 'Largest allowed n', input: '{"n":40}' },
+    { label: 'Long run: 40 cards', input: '{"n":37}' },
   ],
 };
 

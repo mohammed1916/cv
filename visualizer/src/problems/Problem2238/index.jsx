@@ -8,7 +8,11 @@ const complexity = "Roughly O(d * n) for d distinct drivers and n ride rows in t
 const examples = [{
   label: 'Sample',
   input: "{\"Rides\":[{\"ride_id\":1,\"driver_id\":10,\"passenger_id\":20},{\"ride_id\":2,\"driver_id\":10,\"passenger_id\":30},{\"ride_id\":3,\"driver_id\":20,\"passenger_id\":10},{\"ride_id\":4,\"driver_id\":30,\"passenger_id\":20},{\"ride_id\":5,\"driver_id\":40,\"passenger_id\":10}]}",
-}]
+},
+  { label: 'Single ride', input: '{"Rides":[{"ride_id":1,"driver_id":10,"passenger_id":20}]}' },
+  { label: 'Repeated driver and passenger', input: '{"Rides":[{"ride_id":1,"driver_id":10,"passenger_id":20},{"ride_id":2,"driver_id":10,"passenger_id":20}]}' },
+  { label: 'Long run: twelve rides', input: '{"Rides":[{"ride_id":1,"driver_id":13,"passenger_id":22},{"ride_id":2,"driver_id":10,"passenger_id":23},{"ride_id":3,"driver_id":11,"passenger_id":20},{"ride_id":4,"driver_id":12,"passenger_id":21},{"ride_id":5,"driver_id":13,"passenger_id":22},{"ride_id":6,"driver_id":10,"passenger_id":23},{"ride_id":7,"driver_id":11,"passenger_id":20},{"ride_id":8,"driver_id":12,"passenger_id":21},{"ride_id":9,"driver_id":13,"passenger_id":22},{"ride_id":10,"driver_id":10,"passenger_id":23},{"ride_id":11,"driver_id":11,"passenger_id":20},{"ride_id":12,"driver_id":12,"passenger_id":21}]}' },
+]
 
 const definition = {
   number: meta.number,

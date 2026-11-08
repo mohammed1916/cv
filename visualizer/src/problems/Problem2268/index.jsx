@@ -16,6 +16,10 @@ const definition = {
     { label: 'apple', input: 'banana' },
     { label: 'Full alphabet', input: 'abcdefghijklmnopqrstuvwxyz' },
     { label: 'Repeats', input: 'aaaabbc' },
+    { label: 'Single letter', input: 'a' },
+    { label: 'Equal frequencies', input: 'aabb' },
+    { label: 'Twenty-six of one letter', input: 'aaaaaaaaaaaaaaaaaaaaaaaaaa' },
+    { label: 'Long run: 26 letters', input: 'qzkwmjpvhtbnlgcxdyrsfeoiua' },
   ],
 }
 

@@ -16,6 +16,9 @@ const definition = {
     { label: 'Even counts', input: '[3,2,3,2,2,2]' },
     { label: 'All distinct', input: '[1,2,3,4]' },
     { label: 'Mixed counts', input: '[1,1,1,1,2,2]' },
+    { label: 'Smallest pair', input: '[1,1]' },
+    { label: 'Long run: 16 values', input: '[7,2,7,5,2,9,5,1,3,8,1,4,6,9,2,6]' },
+    { label: 'Largest values', input: '[9,9,9,9,9,9,9,9,1,1,1,1,1,1,1,1]' },
   ],
 }
 

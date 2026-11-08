@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"rectangles":[[1,2],[2,3],[2,5]],"points":[[2,1],[1,4]]}' },
     { label: 'Example 2', input: '{"rectangles":[[1,1],[2,2],[3,3]],"points":[[1,3],[1,1]]}' },
+    { label: 'Single rectangle', input: '{"rectangles":[[1,1]],"points":[[1,0]]}' },
+    { label: 'Equal rectangles', input: '{"rectangles":[[5,5],[5,5]],"points":[[5,5],[5,4]]}' },
+    { label: 'Long run: twelve rectangles', input: '{"rectangles":[[10,3],[7,9],[2,12],[15,4],[9,9],[3,20],[12,1],[8,6],[1,50],[6,6],[20,2],[4,30]],"points":[[5,2],[9,40],[2,9],[13,1],[11,100],[1,50],[7,7],[20,20],[3,3],[16,8],[8,25],[4,0]]}' },
   ],
 }
 

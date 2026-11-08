@@ -16,6 +16,9 @@ const definition = {
     { label: 'k = 2', input: '{"n":4,"edges":[[0,2,4],[2,3,1],[3,1,6],[0,1,2]],"k":2}' },
     { label: 'k = 3', input: '{"n":4,"edges":[[0,2,4],[2,3,1],[3,1,6],[0,1,2]],"k":3}' },
     { label: 'Too many highways', input: '{"n":4,"edges":[[0,2,4],[2,3,1],[3,1,6],[0,1,2]],"k":4}' },
+    { label: 'Single city', input: '{"n":1,"edges":[],"k":0}' },
+    { label: 'Equal costs tie', input: '{"n":3,"edges":[[0,1,5],[1,2,5],[0,2,5]],"k":2}' },
+    { label: 'Largest graph: six cities', input: '{"n":6,"edges":[[0,1,100],[1,2,3],[2,3,50],[3,4,7],[4,5,100],[5,0,2],[1,4,9]],"k":3}' },
   ],
 }
 

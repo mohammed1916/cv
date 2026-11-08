@@ -16,6 +16,10 @@ const definition = {
     { label: 'Example 1', input: '{"number":"123","digit":"3"}' },
     { label: 'Example 2', input: '{"number":"1231","digit":"1"}' },
     { label: 'Example 3', input: '{"number":"551","digit":"5"}' },
+    { label: 'Two digits, zero', input: '{"number":"10","digit":"0"}' },
+    { label: 'Every digit matches', input: '{"number":"7777","digit":"7"}' },
+    { label: 'Thirty nines', input: '{"number":"999999999999999999999999999999","digit":"9"}' },
+    { label: 'Long run: 30 digits', input: '{"number":"434232806030102708828877951895","digit":"0"}' },
   ],
 }
 

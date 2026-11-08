@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"bottom":2,"top":9,"special":[4,6]}' },
     { label: 'Example 2', input: '{"bottom":6,"top":8,"special":[7,6,8]}' },
+    { label: 'Single floor', input: '{"bottom":5,"top":5,"special":[]}' },
+    { label: 'Special floors at both ends', input: '{"bottom":1,"top":4,"special":[1,4]}' },
+    { label: 'Largest range, 12 special', input: '{"bottom":1,"top":61,"special":[17,45,2,12,8,41,56,16,37,39,46,26]}' },
+    { label: 'Long run: 61 floors', input: '{"bottom":10,"top":70,"special":[26,54,11,21,17,50]}' },
   ],
 }
 

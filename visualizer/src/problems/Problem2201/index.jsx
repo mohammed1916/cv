@@ -16,6 +16,9 @@ const definition = {
     { label: 'Mixed', input: '{"n":3,"artifacts":[[0,0,0,0],[0,1,1,2]],"dig":[[0,0],[0,1],[1,1],[1,2]]}' },
     { label: 'Buried', input: '{"n":2,"artifacts":[[0,0,1,1]],"dig":[[0,0],[1,1]]}' },
     { label: 'Fully dug', input: '{"n":2,"artifacts":[[0,0,1,1]],"dig":[[0,0],[0,1],[1,0],[1,1]]}' },
+    { label: 'Smallest grid', input: '{"n":1,"artifacts":[[0,0,0,0]],"dig":[[0,0]]}' },
+    { label: 'Two single cells', input: '{"n":2,"artifacts":[[0,0,0,0],[1,1,1,1]],"dig":[[0,0],[0,1],[1,0],[1,1]]}' },
+    { label: 'Long run: 6 by 6 grid', input: '{"n":6,"artifacts":[[0,0,1,1],[2,2,3,4],[4,0,5,5],[5,5,5,5],[1,4,2,5]],"dig":[[0,0],[1,1],[2,2],[3,3],[4,4],[5,5],[0,5],[5,0]]}' },
   ],
 }
 

@@ -16,6 +16,9 @@ const definition = {
     { label: 'Repeats collapse', input: '[2,4,1,1,6,5]' },
     { label: 'Monotone runs', input: '[6,6,5,5,4,1]' },
     { label: 'Single valley', input: '[3,1,1,3]' },
+    { label: 'Three equal values', input: '[5,5,5]' },
+    { label: 'Largest: 14 values', input: '[9,0,9,0,9,0,9,0,9,0,9,0,9,0]' },
+    { label: 'Long run: 14 values', input: '[4,7,2,8,1,6,3,9,0,5,7,2,8,4]' },
   ],
 }
 

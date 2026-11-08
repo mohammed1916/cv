@@ -17,6 +17,9 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"n":4,"lights":[[1,1],[3,0]],"requirement":[0,1,1,2]}' },
     { label: 'Short street', input: '{"n":4,"lights":[[0,2]],"requirement":[1,1,1,0]}' },
+    { label: 'Single house', input: '{"n":1,"lights":[[0,0]],"requirement":[0]}' },
+    { label: 'Equal requirements', input: '{"n":3,"lights":[[1,1]],"requirement":[1,1,1]}' },
+    { label: 'Long run: twelve houses', input: '{"n":12,"lights":[[0,2],[3,1],[5,3],[7,0],[9,2],[10,1],[11,0],[4,1]],"requirement":[1,1,2,1,1,2,1,2,1,1,2,1]}' },
   ],
 }
 

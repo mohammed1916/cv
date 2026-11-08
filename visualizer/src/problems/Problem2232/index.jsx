@@ -17,6 +17,9 @@ const definition = {
     { label: 'Example', input: '{"expression":"316+52"}' },
     { label: 'Short', input: '{"expression":"8+943"}' },
     { label: 'Long right', input: '{"expression":"5+6789"}' },
+    { label: 'Smallest sum', input: '{"expression":"1+1"}' },
+    { label: 'Equal lengths tie', input: '{"expression":"555+555"}' },
+    { label: 'Longest allowed', input: '{"expression":"98765+4321"}' },
   ],
 }
 

@@ -17,6 +17,9 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"s":"1234567","k":3}' },
     { label: 'Two digits', input: '{"s":"8745","k":2}' },
+    { label: 'Smallest string', input: '{"s":"5","k":2}' },
+    { label: 'Equal digits tie', input: '{"s":"7777","k":2}' },
+    { label: 'Long run: forty digits', input: '{"s":"3141592653589793238462643383279502884197","k":10}' },
   ],
 }
 

@@ -17,6 +17,9 @@ const definition = {
   examples: [
     { label: 'Mixed', input: '{"tasks":[5,5,6,6,6,8,8,8,8,8]}' },
     { label: 'Lone task', input: '{"tasks":[1,1,2]}' },
+    { label: 'Single task', input: '{"tasks":[4]}' },
+    { label: 'Equal difficulty', input: '{"tasks":[9,9,9,9]}' },
+    { label: 'Long run: thirty tasks', input: '{"tasks":[3,7,1,9,4,4,8,2,6,5,1,9,3,7,2,8,6,4,5,9,1,3,7,2,8,6,4,5,9,1]}' },
   ],
 }
 

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"m":4,"n":6,"guards":[[0,0],[1,1],[2,3]],"walls":[[0,1],[2,2],[1,4]]}' },
     { label: 'Walled row', input: '{"m":1,"n":4,"guards":[[0,0]],"walls":[[0,2]]}' },
+    { label: 'Single empty cell', input: '{"m":1,"n":1,"guards":[],"walls":[]}' },
+    { label: 'Single guard fills the grid', input: '{"m":1,"n":1,"guards":[[0,0]],"walls":[]}' },
+    { label: 'Largest grid, 6 by 6', input: '{"m":6,"n":6,"guards":[[0,0],[5,5],[2,3],[3,1]],"walls":[[0,5],[5,0],[1,1],[2,2],[3,4],[4,2]]}' },
+    { label: 'Long run: 6 by 6 random', input: '{"m":6,"n":6,"guards":[[1,1],[0,4],[0,5],[0,3],[2,1],[2,5],[4,0],[1,2]],"walls":[[0,1],[5,3],[4,1],[3,4],[0,2],[5,4],[5,1],[1,4],[4,5],[1,3]]}' },
   ],
 }
 

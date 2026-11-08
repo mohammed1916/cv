@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Equal', input: '{"root":9,"left":2,"right":7}' },
     { label: 'Not equal', input: '{"root":4,"left":1,"right":2}' },
+    { label: 'All zeros', input: '{"root":0,"left":0,"right":0}' },
+    { label: 'Equal children', input: '{"root":-100,"left":-100,"right":100}' },
+    { label: 'Long run: repeated values', input: '{"root":57,"left":-23,"right":57}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"words":["abba","baba","bbaa","cd","cd"]}' },
     { label: 'No anagrams', input: '{"words":["a","b","c","d","e"]}' },
+    { label: 'Single word', input: '{"words":["abc"]}' },
+    { label: 'Three anagrams', input: '{"words":["abc","cab","bca"]}' },
+    { label: 'Twenty words, length ten', input: '{"words":["jihgfedcba","abcdefghij","jihgfedcba","abcdefghij","jihgfedcba","abcdefghij","jihgfedcba","abcdefghij","jihgfedcba","abcdefghij","jihgfedcba","abcdefghij","jihgfedcba","abcdefghij","jihgfedcba","abcdefghij","jihgfedcba","abcdefghij","jihgfedcba","abcdefghij"]}' },
+    { label: 'Long run: 20 words', input: '{"words":["agdbbfcddb","bggdegdfgg","bbbgdeeeaf","cbdgceabeg","bcbeddagcb","defbcacebe","bggfaeeedd","bgbbdbfedf","dbabaadbgf","fcfgbfecdb","bddcfbbdga","ggfdgedggb","faeeedgbbb","gebaecgdbc","bcgaddebcb","ebecacbfed","ddeeeafggb","fdefbdbbgb","fgbdaababd","bdcefbgfcf"]}' },
   ],
 }
 

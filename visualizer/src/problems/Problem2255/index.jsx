@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"words":["a","b","c","ab","bc","abc"],"s":"abc"}' },
     { label: 'No prefix', input: '{"words":["x","abcd"],"s":"abc"}' },
+    { label: 'Single word matches', input: '{"words":["a"],"s":"a"}' },
+    { label: 'Duplicate words count twice', input: '{"words":["ab","ab","a"],"s":"ab"}' },
+    { label: 'Word longer than s', input: '{"words":["abcdefghij"],"s":"abc"}' },
+    { label: 'Long run: 10 words', input: '{"words":["babbb","b","babbbcbcbb","babbbc","bab","babb","babbbcbcbb","babbb","bab","babb"],"s":"babbbcbcbbccccbabaac"}' },
   ],
 }
 

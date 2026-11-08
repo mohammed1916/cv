@@ -16,6 +16,9 @@ const definition = {
     { label: 'Gap fill', input: '{"nums":[5,6,8],"k":2}' },
     { label: 'Start at one', input: '{"nums":[1,2,3],"k":2}' },
     { label: 'Single value', input: '{"nums":[7],"k":3}' },
+    { label: 'Smallest input', input: '{"nums":[1],"k":1}' },
+    { label: 'Repeated values', input: '{"nums":[4,4,4,9],"k":3}' },
+    { label: 'Long run: 10 values', input: '{"nums":[2,9,4,11,6,13,8,15,10,17],"k":10}' },
   ],
 }
 

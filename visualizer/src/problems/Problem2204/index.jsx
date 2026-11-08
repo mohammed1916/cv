@@ -16,6 +16,9 @@ const definition = {
     { label: 'Triangle with tail', input: '{"n":5,"edges":[[0,1],[1,2],[2,0],[2,3],[3,4]]}' },
     { label: 'Plain triangle', input: '{"n":3,"edges":[[0,1],[1,2],[2,0]]}' },
     { label: 'Cycle of four', input: '{"n":4,"edges":[[0,1],[1,2],[2,3],[3,1]]}' },
+    { label: 'Largest graph with tail', input: '{"n":9,"edges":[[0,1],[1,2],[2,0],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8]]}' },
+    { label: 'Cycle of six', input: '{"n":6,"edges":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,0]]}' },
+    { label: 'Long run: two tails', input: '{"n":8,"edges":[[0,1],[1,2],[2,3],[3,0],[0,4],[4,5],[2,6],[6,7]]}' },
   ],
 }
 

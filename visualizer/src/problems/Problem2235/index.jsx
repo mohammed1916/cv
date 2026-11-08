@@ -14,6 +14,9 @@ const definition = {
   examples: [
     { label: 'Positive', input: '{"num1":7,"num2":-3}' },
     { label: 'Mixed signs', input: '{"num1":-8,"num2":3}' },
+    { label: 'Zero and negative', input: '{"num1":0,"num2":-100}' },
+    { label: 'Equal magnitudes', input: '{"num1":100,"num2":-100}' },
+    { label: 'Long run: mixed signs', input: '{"num1":-97,"num2":64}' },
   ],
 }
 

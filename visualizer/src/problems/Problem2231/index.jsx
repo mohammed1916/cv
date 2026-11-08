@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Mixed', input: '{"num":2736}' },
     { label: 'Zero digit', input: '{"num":9083}' },
+    { label: 'Smallest number', input: '{"num":1}' },
+    { label: 'All same digits', input: '{"num":7777}' },
+    { label: 'Largest number', input: '{"num":999999999}' },
   ],
 }
 

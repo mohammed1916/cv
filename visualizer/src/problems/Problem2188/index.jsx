@@ -16,6 +16,9 @@ const definition = {
     { label: 'Two tires', input: '{"tires":[[2,3],[3,3]],"changeTime":5,"numLaps":4}' },
     { label: 'Three tires', input: '{"tires":[[1,3],[2,2],[3,3]],"changeTime":3,"numLaps":5}' },
     { label: 'Single lap', input: '{"tires":[[1,2]],"changeTime":1,"numLaps":1}' },
+    { label: 'Equal tires tie', input: '{"tires":[[2,2],[2,2]],"changeTime":1,"numLaps":3}' },
+    { label: 'One tire, many laps', input: '{"tires":[[3,2]],"changeTime":4,"numLaps":6}' },
+    { label: 'Largest values, six laps', input: '{"tires":[[5,3],[4,3],[5,2]],"changeTime":10,"numLaps":6}' },
   ],
 }
 

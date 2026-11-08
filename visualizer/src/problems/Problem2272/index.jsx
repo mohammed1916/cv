@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s": "aababbb"}' },
     { label: 'No variance', input: '{"s": "abcde"}' },
+    { label: 'Single letter', input: '{"s":"a"}' },
+    { label: 'One letter only', input: '{"s":"aaaa"}' },
+    { label: 'Ten a and ten b', input: '{"s":"aaaaaaaaaabbbbbbbbbb"}' },
+    { label: 'Long run: 20 letters', input: '{"s":"caabbaccbadabdbcaddb"}' },
   ],
 }
 

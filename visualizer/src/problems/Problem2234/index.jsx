@@ -21,6 +21,9 @@ const definition = {
   examples: [
     { label: 'Mixed', input: '{"flowers":[3,1,6],"newFlowers":9,"target":7,"full":4,"partial":2}' },
     { label: 'Few flowers', input: '{"flowers":[5,5,2],"newFlowers":4,"target":6,"full":3,"partial":1}' },
+    { label: 'Single garden', input: '{"flowers":[4],"newFlowers":2,"target":5,"full":3,"partial":1}' },
+    { label: 'Equal gardens tie', input: '{"flowers":[5,5,5],"newFlowers":6,"target":5,"full":4,"partial":2}' },
+    { label: 'Long run: eight gardens', input: '{"flowers":[2,9,4,13,7,1,18,6],"newFlowers":60,"target":20,"full":20,"partial":1}' },
   ],
 }
 

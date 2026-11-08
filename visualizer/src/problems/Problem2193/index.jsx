@@ -16,6 +16,9 @@ const definition = {
     { label: 'Two pairs', input: 'aabb' },
     { label: 'One odd letter', input: 'zyxzy' },
     { label: 'Already a palindrome', input: 'racecar' },
+    { label: 'Single letter', input: 'a' },
+    { label: 'Equal letters', input: 'aaaaaa' },
+    { label: 'Longest allowed: 12 letters', input: 'mmxyzyxmmabc' },
   ],
 }
 

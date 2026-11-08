@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[2,3,3,2,2],"k":2,"p":2}' },
     { label: 'Example 2', input: '{"nums":[1,2,3,4],"k":4,"p":1}' },
+    { label: 'Single element', input: '{"nums":[1],"k":1,"p":1}' },
+    { label: 'Equal values all divisible', input: '{"nums":[2,2,2],"k":1,"p":2}' },
+    { label: 'Eight maximum values', input: '{"nums":[20,20,20,20,20,20,20,20],"k":8,"p":1}' },
+    { label: 'Long run: 8 values', input: '{"nums":[19,18,10,2,3,19,1,14],"k":3,"p":3}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Valid path', input: '{"grid":["(()",")()"]}' },
     { label: 'Wrong start', input: '{"grid":[")(","()"]}' },
+    { label: 'Single open bracket', input: '{"grid":["("]}' },
+    { label: 'Two-cell row', input: '{"grid":["()"]}' },
+    { label: 'Largest grid, 6 by 6', input: '{"grid":["()()()","(()())","()()()",")(()()","()()()","(()())"]}' },
+    { label: 'Long run: 6 by 6 random', input: '{"grid":["(())))","))()((",")())((","(()(((","()()()","))()))"]}' },
   ],
 }
 

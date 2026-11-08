@@ -17,6 +17,9 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[5,1,4],"k":3}' },
     { label: 'Two values', input: '{"nums":[2,7],"k":4}' },
+    { label: 'Single value', input: '{"nums":[7],"k":7}' },
+    { label: 'Equal values', input: '{"nums":[3,3,3,3],"k":3}' },
+    { label: 'Long run: eight values', input: '{"nums":[12,4,19,0,8,15,3,10],"k":20}' },
   ],
 }
 

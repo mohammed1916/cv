@@ -8,7 +8,11 @@ const complexity = "Roughly O(n log n) to group and sort n purchase rows. The vi
 const examples = [{
   label: 'Sample',
   input: "{\"Purchases\":[{\"purchase_id\":1,\"user_id\":1,\"purchase_date\":\"2024-01-01\"},{\"purchase_id\":2,\"user_id\":1,\"purchase_date\":\"2024-01-05\"},{\"purchase_id\":3,\"user_id\":2,\"purchase_date\":\"2024-01-01\"},{\"purchase_id\":4,\"user_id\":2,\"purchase_date\":\"2024-01-09\"},{\"purchase_id\":5,\"user_id\":2,\"purchase_date\":\"2024-01-17\"},{\"purchase_id\":6,\"user_id\":3,\"purchase_date\":\"2024-02-01\"},{\"purchase_id\":7,\"user_id\":3,\"purchase_date\":\"2024-02-01\"}]}",
-}]
+},
+  { label: 'Single purchase', input: '{"Purchases":[{"purchase_id":1,"user_id":1,"purchase_date":"2024-01-01"}]}' },
+  { label: 'Same user, same day', input: '{"Purchases":[{"purchase_id":1,"user_id":7,"purchase_date":"2024-03-09"},{"purchase_id":2,"user_id":7,"purchase_date":"2024-03-09"}]}' },
+  { label: 'Long run: twelve purchases', input: '{"Purchases":[{"purchase_id":1,"user_id":2,"purchase_date":"2024-01-01"},{"purchase_id":2,"user_id":3,"purchase_date":"2024-02-08"},{"purchase_id":3,"user_id":6,"purchase_date":"2024-03-15"},{"purchase_id":4,"user_id":1,"purchase_date":"2024-01-22"},{"purchase_id":5,"user_id":2,"purchase_date":"2024-02-01"},{"purchase_id":6,"user_id":5,"purchase_date":"2024-03-08"},{"purchase_id":7,"user_id":6,"purchase_date":"2024-01-15"},{"purchase_id":8,"user_id":5,"purchase_date":"2024-02-22"},{"purchase_id":9,"user_id":4,"purchase_date":"2024-03-01"},{"purchase_id":10,"user_id":1,"purchase_date":"2024-01-08"},{"purchase_id":11,"user_id":4,"purchase_date":"2024-02-15"},{"purchase_id":12,"user_id":3,"purchase_date":"2024-03-22"}]}' },
+]
 
 const definition = {
   number: meta.number,

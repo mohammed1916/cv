@@ -16,6 +16,9 @@ const definition = {
     { label: 'Mixed pile', input: '{"nums":[1,7,2],"k":3}' },
     { label: 'Single value, even moves', input: '{"nums":[2],"k":2}' },
     { label: 'No moves', input: '{"nums":[9,1,3],"k":0}' },
+    { label: 'Smallest pile', input: '{"nums":[0],"k":1}' },
+    { label: 'Equal values', input: '{"nums":[5,5,5],"k":4}' },
+    { label: 'Long run: ten values', input: '{"nums":[8,3,0,6,1,9,2,7,4,5],"k":12}' },
   ],
 }
 

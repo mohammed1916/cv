@@ -8,6 +8,10 @@ const complexity = 'O(n log n + p * s) time for n rows, p products and s store c
 const examples = [
   { label: 'Three products', input: '{"rows":[[101,"north",40],[101,"west",55],[102,"south",18],[103,"north",7],[103,"south",9]]}' },
   { label: 'One price', input: '{"rows":[[7,"west",3]]}' },
+    { label: 'Equal prices, two stores', input: '{"rows":[[5,"east",8],[5,"west",8]]}' },
+    { label: 'Zero price and underscore store', input: '{"rows":[[9,"solo_shop",0]]}' },
+    { label: 'Largest ids and prices', input: '{"rows":[[999,"a",1000],[999,"zeta",0],[1,"a",1000]]}' },
+    { label: 'Long run: 12 rows', input: '{"rows":[[611,"north",974],[717,"harbor",471],[593,"east",231],[556,"central",547],[260,"south",56],[102,"east",386],[777,"harbor",151],[210,"north",158],[164,"harbor",387],[893,"east",401],[219,"central",329],[599,"east",915]]}' },
 ]
 
 function renderVisual({ run, step }) {

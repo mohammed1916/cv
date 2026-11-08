@@ -16,6 +16,9 @@ const definition = {
     { label: 'Partial overlap', input: '{"nums1":[1,2,3,3],"nums2":[1,4,6]}' },
     { label: 'Same values', input: '{"nums1":[5,5],"nums2":[5]}' },
     { label: 'Disjoint', input: '{"nums1":[0,9],"nums2":[7]}' },
+    { label: 'Smallest input', input: '{"nums1":[0],"nums2":[0]}' },
+    { label: 'Largest values', input: '{"nums1":[9,9,9,9,9,9,9,9,9,9],"nums2":[9,8,7,6,5,4,3,2,1,0]}' },
+    { label: 'Long run: ten values', input: '{"nums1":[3,1,4,1,5,9,2,6,5,3],"nums2":[5,8,9,7,9,3,2,3,8,4]}' },
   ],
 }
 

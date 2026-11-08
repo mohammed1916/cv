@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Small', input: '{"grid":[[2,5],[10,1]]}' },
     { label: 'Row', input: '{"grid":[[5,10,25,50]]}' },
+    { label: 'Single cell', input: '{"grid":[[7]]}' },
+    { label: 'Equal cells tie', input: '{"grid":[[4,4],[4,4]]}' },
+    { label: 'Long run: five by five', input: '{"grid":[[3,8,1,9,4],[7,2,6,5,10],[11,4,8,2,7],[1,9,3,6,5],[12,10,4,8,1]]}' },
   ],
 }
 

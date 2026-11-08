@@ -16,6 +16,9 @@ const definition = {
     { label: 'Three levels', input: '[[1,2,1],[1,3,0],[2,4,1]]' },
     { label: 'Single link', input: '[[5,6,0]]' },
     { label: 'Chain up', input: '[[3,1,1],[1,2,0]]' },
+    { label: 'Long run: nine descriptions', input: '[[8,3,1],[8,10,0],[3,1,1],[3,2,0],[10,15,1],[15,12,0],[12,9,1],[9,4,0],[4,6,1]]' },
+    { label: 'Two children of root', input: '[[7,3,1],[7,9,0]]' },
+    { label: 'Right-leaning chain', input: '[[2,4,0],[4,6,0],[6,8,0]]' },
   ],
 }
 

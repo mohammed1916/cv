@@ -20,6 +20,9 @@ const definition = {
   examples: [
     { label: 'Largest first', input: '{"ops":[{"op":"deposit","counts":[0,0,0,3,1]},{"op":"withdraw","amount":600},{"op":"withdraw","amount":500},{"op":"withdraw","amount":400},{"op":"withdraw","amount":20}]}' },
     { label: 'Small notes', input: '{"ops":[{"op":"deposit","counts":[2,1,0,0,0]},{"op":"withdraw","amount":70},{"op":"withdraw","amount":50}]}' },
+    { label: 'Single deposit', input: '{"ops":[{"op":"deposit","counts":[1,0,0,0,0]}]}' },
+    { label: 'Largest counts, big withdraw', input: '{"ops":[{"op":"deposit","counts":[0,0,0,0,20]},{"op":"withdraw","amount":5000}]}' },
+    { label: 'Long run: twelve calls', input: '{"ops":[{"op":"deposit","counts":[3,1,4,1,5]},{"op":"withdraw","amount":600},{"op":"deposit","counts":[2,7,1,8,2]},{"op":"withdraw","amount":400},{"op":"deposit","counts":[0,5,9,0,3]},{"op":"withdraw","amount":1200},{"op":"deposit","counts":[6,2,0,1,4]},{"op":"withdraw","amount":300},{"op":"deposit","counts":[1,1,1,1,1]},{"op":"withdraw","amount":200},{"op":"deposit","counts":[4,4,4,4,4]},{"op":"withdraw","amount":900}]}' },
   ],
 }
 

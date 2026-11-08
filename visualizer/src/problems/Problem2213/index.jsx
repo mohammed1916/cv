@@ -16,6 +16,9 @@ const definition = {
     { label: 'Runs grow', input: '{"s":"aabbb","queryCharacters":"ab","queryIndices":[0,2]}' },
     { label: 'Single letter', input: '{"s":"x","queryCharacters":"x","queryIndices":[0]}' },
     { label: 'Split a run', input: '{"s":"aaaaa","queryCharacters":"bb","queryIndices":[2,3]}' },
+    { label: 'Longest string, four queries', input: '{"s":"abcdefghijkl","queryCharacters":"mnop","queryIndices":[0,4,8,11]}' },
+    { label: 'Same letters repeated', input: '{"s":"aaaa","queryCharacters":"aa","queryIndices":[1,1]}' },
+    { label: 'Long run: one letter string', input: '{"s":"zzzzzzzzzzzz","queryCharacters":"yxzw","queryIndices":[0,5,6,11]}' },
   ],
 }
 

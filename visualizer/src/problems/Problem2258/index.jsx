@@ -18,6 +18,10 @@ const definition = {
     { label: 'Example', input: '{"grid":[[0,0,0,0,0],[0,2,1,0,0],[0,0,2,0,0],[0,0,0,0,0]]}' },
     { label: 'Blocked', input: '{"grid":[[0,0,0,0],[0,1,2,0],[0,2,0,0]]}' },
     { label: 'Safe forever', input: '{"grid":[[0,0,0],[2,2,0],[1,2,0]]}' },
+    { label: 'Smallest grid, no fire', input: '{"grid":[[0,0],[0,0]]}' },
+    { label: 'Fire blocks the top route', input: '{"grid":[[0,1],[0,0]]}' },
+    { label: 'Largest grid, 6 by 6', input: '{"grid":[[0,0,0,0,0,0],[0,1,0,0,0,0],[0,0,1,0,0,0],[0,0,0,1,0,0],[0,0,0,0,1,0],[0,0,0,0,0,0]]}' },
+    { label: 'Long run: 6 by 6 random', input: '{"grid":[[0,1,2,0,0,0],[0,0,1,0,2,0],[1,0,0,0,1,2],[1,1,1,2,2,2],[0,1,1,2,0,0],[2,0,2,2,2,0]]}' },
   ],
 }
 

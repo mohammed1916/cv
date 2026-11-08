@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"tiles":[[1,5],[10,11],[12,18],[20,25],[30,32]],"carpet_length":10}' },
     { label: 'Unsorted input', input: '{"tiles":[[10,11],[1,1]],"carpet_length":2}' },
+    { label: 'Single tile covers carpet', input: '{"tiles":[[1,40]],"carpet_length":40}' },
+    { label: 'Carpet shorter than tile', input: '{"tiles":[[3,9]],"carpet_length":1}' },
+    { label: 'Largest carpet, one tile', input: '{"tiles":[[40,40]],"carpet_length":40}' },
+    { label: 'Long run: six tiles, carpet 25', input: '{"tiles":[[1,3],[7,9],[12,16],[20,24],[28,31],[35,40]],"carpet_length":25}' },
   ],
 }
 

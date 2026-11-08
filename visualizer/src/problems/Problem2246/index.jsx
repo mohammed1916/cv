@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"parent":[-1,0,0,1,1,2],"s":"abacbe"}' },
     { label: 'Example 2', input: '{"parent":[-1,0,0,0],"s":"aabc"}' },
+    { label: 'Single node', input: '{"parent":[-1],"s":"a"}' },
+    { label: 'Equal letters', input: '{"parent":[-1,0,0,0],"s":"aaaa"}' },
+    { label: 'Long run: twelve nodes', input: '{"parent":[-1,0,0,1,1,2,3,3,4,6,6,8],"s":"abcabcabcaba"}' },
   ],
 }
 

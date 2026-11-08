@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[-6,5,-2,9]}' },
     { label: 'Tie', input: '{"nums":[4,-4,7]}' },
+    { label: 'Single negative', input: '{"nums":[-7]}' },
+    { label: 'Equal absolute values', input: '{"nums":[-5,5,-5,5]}' },
+    { label: 'Long run: twelve values', input: '{"nums":[13,-44,8,-19,100,-3,27,-61,5,-100,40,-8]}' },
   ],
 }
 
