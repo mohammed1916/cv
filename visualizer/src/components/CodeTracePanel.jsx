@@ -9,6 +9,9 @@ import { useNarrativeTrace } from './shared/NarrativeTraceContext';
 import OpenProblemInPlayground from "../playground/OpenProblemInPlayground";
 import { useCodeSelection } from './shared/CodeSelection.jsx';
 
+// After a manual scroll, auto-follow waits this long so the reader can stay where they scrolled.
+const MANUAL_SCROLL_GRACE_MS = 5000;
+
 export default function CodeTracePanel({
   step,
   codeLines,
@@ -78,7 +81,7 @@ export default function CodeTracePanel({
     }
 
     // Auto-scroll if enabled
-    if (selection.enabled || !autoScroll || Date.now() - lastManualScrollTsRef.current < 600) return;
+    if (selection.enabled || !autoScroll || Date.now() - lastManualScrollTsRef.current < MANUAL_SCROLL_GRACE_MS) return;
 
     const container = codeRef.current;
     const elTop = el.offsetTop;
