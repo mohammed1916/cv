@@ -53,6 +53,7 @@ export function Plans({ access, reason, onHideForever }) {
   const [cycle, setCycle] = useState('monthly');
   const selected = PLANS[cycle];
   async function purchase(plan, dialog) {
+    if (BETA_FREE_ACCESS) return;
     if (!access.user) { await access.login(); return; }
     const restoreDialog = () => {
       if (dialog?.isConnected && !dialog.open) dialog.showModal();
@@ -84,11 +85,11 @@ export function Plans({ access, reason, onHideForever }) {
     } catch (err) { setMessage(err.message || 'Checkout could not start. Please retry.'); setPending(false); restoreDialog(); }
   }
   return <>
-    <p>{reason || 'Learn the foundations free. Go further with Pro.'}</p>
+    <p>{BETA_FREE_ACCESS ? 'Everything is free during beta. No account or payment required.' : reason || 'Learn the foundations free. Go further with Pro.'}</p>
     <div className="plan-grid">
       <section className="plan-card"><span className="access-eyebrow">FREE</span><h3>₹0</h3>
         <ul><li>All Basics and Easy visualizers</li><li>{FREE_MEDIUM.size} selected Medium problems</li><li>Beginner tutorial</li><li>Free visualizer practice without a daily timer</li></ul>
-        <small>Sign in for playground access. Resets at midnight India time.</small>
+        <small>{BETA_FREE_ACCESS ? "Beta also includes every Pro feature below, for everyone." : "Pro includes full playground access."}</small>
       </section>
       <section className="plan-card plan-pro"><span className="access-eyebrow">VISUALIZER PRO</span><h3>Every problem. More practice.</h3>
         <div className="plans-toggle" role="group" aria-label="Billing period">
@@ -97,13 +98,14 @@ export function Plans({ access, reason, onHideForever }) {
           </button>)}
         </div>
         <div className="plans-price">
-          <s className="plans-price-regular" aria-label="Regular price">{selected.regular}</s>
-          <strong className="plans-price-amount">{selected.display}</strong>
-          <span className="plans-price-period">{CYCLES[cycle].period}</span>
-          <span className="plans-price-beta">Beta price</span>
+          <s className="plans-price-regular" aria-label="Regular reference price">{selected.regular}</s>
+          {BETA_FREE_ACCESS && <s className="plans-price-regular" aria-label="Paid plan reference price">{selected.display} {CYCLES[cycle].period}</s>}
+          <strong className="plans-price-amount">{BETA_FREE_ACCESS ? '₹0' : selected.display}</strong>
+          {!BETA_FREE_ACCESS && <span className="plans-price-period">{CYCLES[cycle].period}</span>}
+          <span className="plans-price-beta">{BETA_FREE_ACCESS ? 'Free during beta' : 'Beta price'}</span>
         </div>
-        {cycle === 'annual' && <p className="plans-saving">Save ₹{YEARLY_SAVING_RUPEES.toLocaleString('en-IN')} a year</p>}
-        <ul><li>All implemented problem visualizers unlocked</li><li>Unlimited code playground time</li><li>Future problem visualizers included during your plan</li></ul>
+        {!BETA_FREE_ACCESS && cycle === 'annual' && <p className="plans-saving">Save ₹{YEARLY_SAVING_RUPEES.toLocaleString('en-IN')} a year</p>}
+        <ul><li>All implemented problem visualizers unlocked</li><li>Unlimited code playground time</li><li>New visualizers included during beta</li></ul>
         {BETA_FREE_ACCESS ? <p role="status"><strong>Beta / alpha stage: everything is unlocked.</strong> Every problem and the code playground are free for everyone until the website goes into production.</p> : <p>Try Pro free for 3 days. No card required and no automatic charge.</p>}
         {access.account?.trialActive && access.pro && <p role="status">Free trial active until {new Date(access.account.trialEndsAt).toLocaleString()}.</p>}
         {!BETA_FREE_ACCESS && (!access.user || access.account?.trialAvailable) && <button className="access-primary" disabled={pending || access.busy || !backendEnabled} onClick={access.startTrial}>
@@ -113,16 +115,16 @@ export function Plans({ access, reason, onHideForever }) {
         {!BETA_FREE_ACCESS && <button className="access-primary" disabled={pending || access.busy || !checkoutEnabled || (access.pro && access.account?.paid)} onClick={(event) => purchase(cycle, event.currentTarget.closest('dialog'))}>
           {access.pro && access.account?.paid ? 'Paid Pro active' : `${selected.display} / ${selected.label}`}
         </button>}
-        <small>Yearly plan: {PLANS.annual.display} for 365 days, instead of {PLANS.monthly.display} a month. If you buy during your trial, your paid time starts after the trial ends.</small>
-        <small>One-time payment. No automatic renewal. Catalog-only entries are coming soon. AI provider limits remain separate.</small>
-        {!checkoutEnabled && <p className="access-notice">Pro purchases are coming soon. Checkout is not open yet.</p>}
+        {!BETA_FREE_ACCESS && <small>Yearly plan: {PLANS.annual.display} for 365 days, instead of {PLANS.monthly.display} a month. If you buy during your trial, your paid time starts after the trial ends.</small>}
+        <small>{BETA_FREE_ACCESS ? "No payment, trial countdown or automatic charge. Reference prices are not charged during beta." : "One-time payment. No automatic renewal."} Catalog-only entries are coming soon. AI provider limits remain separate.</small>
+        {!BETA_FREE_ACCESS && !checkoutEnabled && <p className="access-notice">Pro purchases are coming soon. Checkout is not open yet.</p>}
       </section>
     </div>
     {onHideForever && <p><button onClick={onHideForever}>Don't show this again</button></p>}
-    {!access.user && <>
+    {!BETA_FREE_ACCESS && !access.user && <>
       <GoogleSignIn access={access} />
     </>}
-    {access.user && <button onClick={access.refresh}>Refresh access</button>}
+    {!BETA_FREE_ACCESS && access.user && <button onClick={access.refresh}>Refresh access</button>}
     <p role="status">{message || access.error}</p>
   </>;
 }

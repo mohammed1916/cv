@@ -48,6 +48,7 @@ export function useAccess() {
     }
   }, [user]);
   useEffect(() => {
+    if (BETA_FREE_ACCESS) return;
     const first = setTimeout(() => refresh(false), 0);
     const clock = setInterval(() => setNow(Date.now()), 1000);
     return () => {
@@ -89,6 +90,7 @@ export function useAccess() {
     }
   };
   const startTrial = async () => {
+    if (BETA_FREE_ACCESS) return;
     if (!user) { await login(); return; }
     setBusy(true);
     setError('');

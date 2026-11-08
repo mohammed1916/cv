@@ -1,3 +1,4 @@
+import { BETA_FREE_ACCESS } from './policy';
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { getFunctions, httpsCallable } from 'firebase/functions';
@@ -16,7 +17,7 @@ export const firebaseApp = app;
 // Analytics is initialized only after opt-in by analytics/client.js.
 export const auth = getAuth(app);
 const functions = getFunctions(app, 'asia-south1');
-export const backendEnabled = import.meta.env.VITE_ACCESS_BACKEND_ENABLED === 'true';
+export const backendEnabled = !BETA_FREE_ACCESS && import.meta.env.VITE_ACCESS_BACKEND_ENABLED === 'true';
 export const checkoutEnabled = backendEnabled && import.meta.env.VITE_CHECKOUT_ENABLED === 'true';
 export const googleSignIn = () => signInWithPopup(auth, new GoogleAuthProvider());
 export async function accessCall(name, data = {}) {

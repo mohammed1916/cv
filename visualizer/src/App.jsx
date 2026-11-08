@@ -38,7 +38,7 @@ import { TRACKS } from "./data/implementedProblems";
 import { mergeCatalog } from './data/catalogCoverage';
 import { loadLeetCodeCatalog } from './data/leetcodeCatalogLoader';
 import { useAccess } from "./access/useAccess";
-import { isFreeProblem, accessLabel, PLANS } from "./access/policy";
+import { isFreeProblem, accessLabel, PLANS, BETA_FREE_ACCESS } from "./access/policy";
 import {
   AccessDialog,
   Plans,
@@ -939,7 +939,7 @@ export default function App() {
   const [dialog, setDialog] = useState(null);
   // Pricing opens on each visit until the visitor chooses not to see it again.
   useEffect(() => {
-    if (!plansHiddenByVisitor()) setDialog("plans");
+    if (!BETA_FREE_ACCESS && !plansHiddenByVisitor()) setDialog("plans");
   }, []);
   const [tourStep, setTourStep] = useState(null);
   const [lockedTitle, setLockedTitle] = useState("");
@@ -1067,7 +1067,7 @@ export default function App() {
           setDialog("plans");
         }}
       >
-        {access.debugPro
+        {BETA_FREE_ACCESS ? "Free beta · All features" : access.debugPro
           ? "Pro · DEV"
           : access.pro
             ? (access.account?.trialActive ? "Free trial · Pro" : "Pro account")
@@ -1232,7 +1232,7 @@ export default function App() {
                         {access.user.displayName} · {access.user.email}
                       </p>
                       <p>
-                        {access.debugPro
+                        {BETA_FREE_ACCESS ? "Free beta · All features unlocked" : access.debugPro
                           ? "Pro enabled locally for development"
                           : access.pro && access.account?.expiresAt
                             ? `${access.account.trialActive ? 'Free trial' : 'Pro'} active until ${new Date(
@@ -1243,13 +1243,12 @@ export default function App() {
                               : "Free account"}
                       </p>
                       <button onClick={access.logout}>Sign out</button>
-                      <button onClick={access.refresh}>Refresh access</button>
+                      {!BETA_FREE_ACCESS && <button onClick={access.refresh}>Refresh access</button>}
                     </>
                   ) : (
                     <>
                       <p>
-                        Use Google to access your Pro subscription and
-                        Pro access linked to your account.
+                        {BETA_FREE_ACCESS ? 'Sign-in is optional. Every visualizer and the playground are free during beta.' : 'Use Google to access the Pro subscription linked to your account.'}
                       </p>
                       <div className="access-signin">
                         <button

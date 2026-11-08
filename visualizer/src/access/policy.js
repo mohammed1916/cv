@@ -1,8 +1,8 @@
 // While the site is in beta, Pro and the code playground are free for everyone.
 // The cloud-function access checks are skipped while this is true. Set it to
 // false to require an active Pro account for the playground.
-export const BETA_FREE_ACCESS = false;
-// Beta prices are charged now. Regular prices apply once the website leaves beta.
+export const BETA_FREE_ACCESS = true;
+// Reference paid prices are retained for display; nothing is charged during free beta.
 const BETA = { monthly: 99, annual: 799 };
 const REGULAR = { monthly: 199, annual: 1499 };
 export const PLANS = {
@@ -19,5 +19,6 @@ export function isFreeProblem(problem) {
 }
 export function accessLabel(problem, pro = false) {
   if (!problem.implemented) return 'Coming soon';
+  if (BETA_FREE_ACCESS) return 'Free in beta';
   return isFreeProblem(problem) ? 'Free' : pro ? 'Pro · Unlocked' : '🔒 Pro';
 }
