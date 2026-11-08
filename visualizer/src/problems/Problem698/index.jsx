@@ -17,6 +17,10 @@ const definition = {
     { label: 'Three buckets', input: '{"nums":[4,3,2,3,5,2,1],"k":4}' },
     { label: 'Impossible', input: '{"nums":[1,2,3,4],"k":3}' },
     { label: 'Two halves', input: '{"nums":[2,2,2,2,3,3],"k":2}' },
+    { label: 'Single number', input: '{"nums":[1],"k":1}' },
+    { label: 'Equal values split evenly', input: '{"nums":[5,5,5,5],"k":2}' },
+    { label: 'Largest values, 16 numbers', input: '{"nums":[10000,10000,10000,10000,10000,10000,10000,10000,10000,10000,10000,10000,10000,10000,10000,10000],"k":4}' },
+    { label: 'Long run: 16 numbers', input: '{"nums":[5066,5898,7460,5053,5776,5240,2076,1149,5910,6809,4973,7365,4630,2539,3788,8493],"k":3}' },
   ],
 }
 

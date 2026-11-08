@@ -16,6 +16,11 @@ const definition = {
     { label: 'Two roots', input: '{"dictionary":["ca","ar"],"sentence":"car arrive cat"}' },
     { label: 'Longer root', input: '{"dictionary":["tree","tr","go"],"sentence":"trees go trace"}' },
     { label: 'No root', input: '{"dictionary":["bat"],"sentence":"battery is ready"}' },
+    { label: 'One letter root', input: '{"dictionary":["a"],"sentence":"a"}' },
+    { label: 'Shortest root wins', input: '{"dictionary":["abc","ab"],"sentence":"abcd"}' },
+    { label: 'Longest root', input: '{"dictionary":["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"],"sentence":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa b"}' },
+    { label: 'No root matches', input: '{"dictionary":["xyz"],"sentence":"abc def"}' },
+    { label: 'Long run: 60 words', input: '{"dictionary":["a","dad","dbd","a","cc","adc","ca","aaac","cccc","cadc","dcd","c","adb","dc","cc","ac","dd","d","c","bbba","ac","adca","cca","a","aad","ddac","aa","bd","d","aacd","cb","dc","acb","dab","c","cadd","aad","dac","bca","dd"],"sentence":"aacbc ddccd ca dccccb cdccab dda ddad db cbcd a a bb acabab aadc dcaa cba ba acaa da dccbcc cc dacb ccacdb a dbdbbd badbc dcc aa b abdc cdbb cd a dcaabb bddab dbba c bacdad abddd caddaa a aabaaa dbbcd bdca bccaad bd aba dbcadd bdb ddaccb dbba acaa bbddb bddcbc bccb acba aaaa bbabb dbddad babaa"}' },
   ],
 }
 

@@ -15,6 +15,10 @@ const definition = {
     { label: 'Unique root', input: '"2x+3=7"' },
     { label: 'Contradiction', input: '"x+1=x+4"' },
     { label: 'Identity', input: '"3x-2=3x-2"' },
+    { label: 'Bare unknown', input: '"x=5"' },
+    { label: 'Cancels on both sides', input: '"-x=-x"' },
+    { label: 'Largest coefficient', input: '"1000000x=1000000"' },
+    { label: 'Long run: 80 added ones', input: '"3x+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1=x+80"' },
   ],
 }
 

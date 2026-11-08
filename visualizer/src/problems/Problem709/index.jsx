@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Mixed', input: '"Quiet NIGHT, 42!"' },
     { label: 'Symbols', input: '"[ZED]@"' },
+    { label: 'Single letter', input: '"A"' },
+    { label: 'Repeated characters', input: '"aaaaa"' },
+    { label: 'Longest allowed, one symbol', input: '"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"' },
+    { label: 'Long run: 100 characters', input: '"PW:vvgz21=N93dt|;(\'CPWX(7PvL\\\\lz B=eqw||JVo@H9RULMUNi^[(+df]ut{oXZ|PEZe.%+!J:l\\\\Q{2PZACyCu>o|+3Zg*L&*:"' },
   ],
 }
 

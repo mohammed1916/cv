@@ -14,6 +14,10 @@ const definition = {
     { label: 'One bulb, one press', input: '{"n":1,"presses":1}' },
     { label: 'Two bulbs, one press', input: '{"n":2,"presses":1}' },
     { label: 'Three bulbs, two presses', input: '{"n":3,"presses":2}' },
+    { label: 'No presses', input: '{"n":1,"presses":0}' },
+    { label: 'Three bulbs, no presses', input: '{"n":3,"presses":0}' },
+    { label: 'Largest n and presses', input: '{"n":6,"presses":6}' },
+    { label: 'Long run: six bulbs, four presses', input: '{"n":6,"presses":4}' },
   ],
 }
 

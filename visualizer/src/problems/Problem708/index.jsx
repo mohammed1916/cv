@@ -16,6 +16,10 @@ const definition = {
     { label: 'Mid gap', input: '{"values":[5,7,2],"insert":6}' },
     { label: 'Empty', input: '{"values":[],"insert":1}' },
     { label: 'Wrap', input: '{"values":[6,8,9],"insert":1}' },
+    { label: 'Empty cycle', input: '{"values":[],"insert":4}' },
+    { label: 'Equal values', input: '{"values":[2,2,2],"insert":2}' },
+    { label: 'Largest values', input: '{"values":[-100,-50,0,50,100],"insert":100}' },
+    { label: 'Long run: 15 values', input: '{"values":[-49,-45,-1,2,4,17,19,33,36,55,75,-100,-94,-54,-52],"insert":0}' },
   ],
 }
 

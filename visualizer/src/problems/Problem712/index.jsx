@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Gap', input: '{"s1":"tree","s2":"tea"}' },
     { label: 'Swap', input: '{"s1":"cab","s2":"abc"}' },
+    { label: 'Equal single letters', input: '{"s1":"a","s2":"a"}' },
+    { label: 'No shared letter', input: '{"s1":"a","s2":"b"}' },
+    { label: 'Longest allowed, identical', input: '{"s1":"abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij","s2":"abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij"}' },
+    { label: 'Long run: 60 and 55 letters', input: '{"s1":"nwiaxzgysmwidpojtdzaphphpvsubrsmgdxqmlrxtnaccntsjqbjvzmjqlov","s2":"vqvbpyscytepeagzffolmtzgotqcdwsglakywvrfqbaexsvmcfofuzl"}' },
   ],
 }
 

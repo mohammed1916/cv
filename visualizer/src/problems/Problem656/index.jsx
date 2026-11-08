@@ -17,6 +17,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"coins":[1,2,4,-1,2],"maxJump":2}' },
     { label: 'No path', input: '{"coins":[1,2,4,-1,2],"maxJump":1}' },
+    { label: 'Single coin', input: '{"coins":[0],"maxJump":1}' },
+    { label: 'Equal costs tie-break', input: '{"coins":[0,0,0,0],"maxJump":2}' },
+    { label: 'Blocked last coin', input: '{"coins":[1,-1],"maxJump":1}' },
+    { label: 'Largest coins and jump', input: '{"coins":[100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100],"maxJump":30}' },
+    { label: 'Long run: 30 coins', input: '{"coins":[1,49,98,83,-1,75,62,7,69,-1,39,-1,49,-1,41,5,89,17,-1,77,9,-1,-1,42,56,27,-1,1,69,92],"maxJump":4}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"bulbs":[1,3,2],"k":1}' },
     { label: 'No match', input: '{"bulbs":[1,2,3],"k":1}' },
+    { label: 'One bulb', input: '{"bulbs":[1],"k":0}' },
+    { label: 'Adjacent on the first day', input: '{"bulbs":[2,1],"k":0}' },
+    { label: 'Largest n, reverse order', input: '{"bulbs":[30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1],"k":0}' },
+    { label: 'Long run: 30 bulbs', input: '{"bulbs":[6,19,28,2,23,17,7,25,22,10,26,30,9,11,8,5,16,12,15,4,24,13,20,18,14,29,27,21,3,1],"k":5}' },
   ],
 }
 

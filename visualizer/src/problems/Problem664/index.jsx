@@ -17,6 +17,10 @@ const definition = {
     { label: 'Interleaved', input: '"abcab"' },
     { label: 'Mirror', input: '"xyzyx"' },
     { label: 'Repeats', input: '"zzyz"' },
+    { label: 'One letter', input: '"a"' },
+    { label: 'Repeats print once', input: '"aaaa"' },
+    { label: 'Longest alphabet cycle', input: '"abcdefghijklmnopqrstuvwxyzabcd"' },
+    { label: 'Long run: 30 letters', input: '"baacccabcbabbacacacacabbbbcaab"' },
   ],
 }
 

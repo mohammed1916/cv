@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"arr":[-1,0,3,5,9,12],"target":9}' },
     { label: 'Missing', input: '{"arr":[-1,0,3,5,9,12],"target":2}' },
+    { label: 'Single value found', input: '{"arr":[7],"target":7}' },
+    { label: 'Single value missing', input: '{"arr":[7],"target":3}' },
+    { label: 'Extreme values', input: '{"arr":[-1000,1000],"target":-1000}' },
+    { label: 'Long run: 30 values', input: '{"arr":[-878,-802,-671,-556,-513,-416,-376,-259,-166,-149,-49,-31,-27,16,30,174,252,295,307,336,422,427,559,808,822,864,906,940,965,981],"target":422}' },
   ],
 }
 

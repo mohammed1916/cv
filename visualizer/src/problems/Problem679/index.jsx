@@ -16,6 +16,9 @@ const definition = {
     { label: 'Reachable', input: '[3,3,8,8]' },
     { label: 'Not reachable', input: '[1,1,1,2]' },
     { label: 'Division', input: '[8,8,3,3]' },
+    { label: 'All ones', input: '[1,1,1,1]' },
+    { label: 'Equal cards', input: '[6,6,6,6]' },
+    { label: 'Largest cards', input: '[9,9,9,9]' },
   ],
 }
 

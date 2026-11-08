@@ -16,6 +16,11 @@ const definition = {
     { label: 'Two trees', input: '[[1,2,3],[0,0,4],[7,6,5]]' },
     { label: 'Blocked', input: '[[2,3,0],[0,0,4],[7,6,5]]' },
     { label: 'Corner tree', input: '[[1,1],[1,5]]' },
+    { label: 'One tree', input: '[[2]]' },
+    { label: 'No trees', input: '[[1,1],[1,1]]' },
+    { label: 'Equal heights', input: '[[2,2],[1,2]]' },
+    { label: 'Largest tree height', input: '[[1000000000]]' },
+    { label: 'Long run: 8 by 8 forest', input: '[[1,1,1,1,23,1,1,1],[41,1,1,0,3,0,1,0],[1,1,0,0,1,1,1,1],[1,1,1,1,42,1,34,1],[1,1,0,1,26,1,11,0],[0,1,10,3,1,0,1,1],[1,1,26,1,47,1,0,1],[1,1,1,1,17,1,1,1]]' },
   ],
 }
 

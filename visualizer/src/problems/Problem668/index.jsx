@@ -17,6 +17,10 @@ const definition = {
     { label: '3×3 fifth', input: '{"m":3,"n":3,"k":5}' },
     { label: '2×3 sixth', input: '{"m":2,"n":3,"k":6}' },
     { label: 'Large', input: '{"m":30,"n":30,"k":500}' },
+    { label: 'One cell', input: '{"m":1,"n":1,"k":1}' },
+    { label: 'Repeated products', input: '{"m":4,"n":4,"k":8}' },
+    { label: 'Last cell of a 40 by 40 table', input: '{"m":40,"n":40,"k":1600}' },
+    { label: 'Long run: 60 by 45 table', input: '{"m":60,"n":45,"k":1000}' },
   ],
 }
 

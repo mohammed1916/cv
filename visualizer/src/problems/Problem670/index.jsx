@@ -16,6 +16,10 @@ const definition = {
     { label: 'Far swap', input: '1993' },
     { label: 'Already max', input: '9876' },
     { label: 'Repeated digits', input: '5518' },
+    { label: 'Single digit', input: '7' },
+    { label: 'Equal digits', input: '1111' },
+    { label: 'Largest allowed value', input: '100000000' },
+    { label: 'Long run: eight digits', input: '11355419' },
   ],
 }
 

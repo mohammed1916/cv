@@ -19,6 +19,10 @@ const definition = {
   examples: [
     { label: 'Mixed', input: '[["push",4],["push",9],["push",2],["peekMax"],["popMax"],["top"],["pop"],["peekMax"]]' },
     { label: 'Tied maxima', input: '[["push",2],["push",2],["popMax"],["top"]]' },
+    { label: 'Single value', input: '[["push",7],["top"],["peekMax"]]' },
+    { label: 'Equal maxima', input: '[["push",5],["push",5],["popMax"],["top"],["peekMax"]]' },
+    { label: 'Extreme values', input: '[["push",-1000],["push",1000],["peekMax"],["popMax"],["pop"]]' },
+    { label: 'Long run: 30 operations', input: '[["push",27],["push",-859],["push",148],["popMax"],["pop"],["pop"],["push",-874],["push",-227],["push",-522],["push",-610],["push",159],["push",54],["push",182],["push",204],["push",676],["push",-742],["push",-821],["push",108],["peekMax"],["pop"],["push",-57],["top"],["push",-362],["push",53],["push",332],["top"],["popMax"],["push",-797],["popMax"],["push",379]]' },
   ],
 }
 

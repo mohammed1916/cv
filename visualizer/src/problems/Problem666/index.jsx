@@ -17,6 +17,10 @@ const definition = {
     { label: 'Small tree', input: '["113","215","221"]' },
     { label: 'Chain', input: '["111","222","333"]' },
     { label: 'Two leaves', input: '["114","215","227","325"]' },
+    { label: 'Root only', input: '["111"]' },
+    { label: 'Equal path sums', input: '["110","211","221"]' },
+    { label: 'Largest values down a chain', input: '["119","219","319","419"]' },
+    { label: 'Long run: fifteen nodes', input: '["111","210","226","315","328","336","343","419","420","430","441","456","462","477","481"]' },
   ],
 }
 

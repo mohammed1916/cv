@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '"19:34"' },
     { label: 'Wraps midnight', input: '"23:59"' },
+    { label: 'Midnight', input: '"00:00"' },
+    { label: 'Repeated digit', input: '"11:11"' },
+    { label: 'One repeated digit', input: '"22:22"' },
+    { label: 'Other digits', input: '"07:38"' },
   ],
 }
 

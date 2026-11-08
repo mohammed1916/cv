@@ -15,6 +15,11 @@ const definition = {
     { label: 'Square', input: '"URDL"' },
     { label: 'Two up', input: '"UUD"' },
     { label: 'Loop', input: '"LRLRUD"' },
+    { label: 'One move', input: '"U"' },
+    { label: 'Cancelling pairs', input: '"UDLR"' },
+    { label: 'Longest allowed path', input: '"UUUUUUUUUUUUUUUUUUUUDDDDDDDDDDDDDDDDDDDD"' },
+    { label: 'Empty path', input: '""' },
+    { label: 'Long run: 40 moves', input: '"RURRLDDLDRULRRURRUUURRUDLULRUUDLDRRRLULD"' },
   ],
 }
 

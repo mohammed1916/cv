@@ -17,6 +17,10 @@ const definition = {
     { label: 'Ties', input: '[2,4,3,5,4,7,2]' },
     { label: 'Flat', input: '[6,6,6,6]' },
     { label: 'Zigzag', input: '[3,1,2,1,4]' },
+    { label: 'Single value', input: '[5]' },
+    { label: 'Two longest chains', input: '[1,3,2,3]' },
+    { label: 'Extreme values', input: '[1000000,-1000000,1000000,-1000000]' },
+    { label: 'Long run: 30 values', input: '[-970,-547,421,-892,-132,323,158,720,872,-232,-469,-716,682,677,-277,-235,950,384,481,59,900,465,-276,-64,465,-777,704,-149,-387,760]' },
   ],
 }
 

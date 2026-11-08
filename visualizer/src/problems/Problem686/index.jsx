@@ -15,6 +15,10 @@ const definition = {
     { label: 'Overlap', input: '{"a":"xyz","b":"zxyzx"}' },
     { label: 'Exact fit', input: '{"a":"pq","b":"qpq"}' },
     { label: 'Impossible', input: '{"a":"ab","b":"c"}' },
+    { label: 'Single letters', input: '{"a":"a","b":"a"}' },
+    { label: 'Identical strings', input: '{"a":"abc","b":"abc"}' },
+    { label: 'Longest b', input: '{"a":"a","b":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}' },
+    { label: 'Long run: 200 letters', input: '{"a":"abbaaaaaaaaaaaaabaab","b":"ababbbabaabaabbaaaababbaabaabaaaaaababbaabbaababbbaaabaababbbabaaabbabaabbbbbbbbbbbaaaaabbaabbbbabaabbbbbbabaaaabbabbbaabbabbaababaabbabaaabbaabaaabbbabbbbabbabaaaaababbbabbbbbababbbbaaabbabababbaabbb"}' },
   ],
 }
 

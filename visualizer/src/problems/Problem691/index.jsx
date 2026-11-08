@@ -14,6 +14,11 @@ const definition = {
   examples: [
     { label: 'Two stickers', input: '{"stickers":["with","example","science"],"target":"thehat"}' },
     { label: 'Impossible', input: '{"stickers":["notice","possible"],"target":"basic"}' },
+    { label: 'One letter', input: '{"stickers":["a"],"target":"a"}' },
+    { label: 'Equal stickers', input: '{"stickers":["ab","ba"],"target":"ab"}' },
+    { label: 'One long sticker', input: '{"stickers":["abcdefghij"],"target":"abcdefgh"}' },
+    { label: 'Missing letter', input: '{"stickers":["a"],"target":"b"}' },
+    { label: 'Long run: eight stickers', input: '{"stickers":["dca","aeadde","bca","ddeeb","cbec","edaeca","bdaabd","dbe"],"target":"acccbaba"}' },
   ],
 }
 

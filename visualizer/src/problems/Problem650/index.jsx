@@ -15,6 +15,9 @@ const definition = {
     { label: 'Prime', input: '7' },
     { label: 'Square', input: '16' },
     { label: 'Mixed', input: '18' },
+    { label: 'Already one', input: '1' },
+    { label: 'Powers of two', input: '512' },
+    { label: 'Long run: largest n', input: '1000' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":9}' },
     { label: 'Larger', input: '{"n":1000}' },
+    { label: 'One', input: '{"n":1}' },
+    { label: 'Largest n', input: '{"n":1000000}' },
+    { label: 'Long run: 999999', input: '{"n":999999}' },
+    { label: 'Eight stays', input: '{"n":8}' },
   ],
 }
 

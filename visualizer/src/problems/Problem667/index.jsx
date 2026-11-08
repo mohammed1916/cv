@@ -16,6 +16,10 @@ const definition = {
     { label: 'Three distinct', input: '{"n":3,"k":1}' },
     { label: 'Two distinct', input: '{"n":3,"k":2}' },
     { label: 'Longer', input: '{"n":6,"k":3}' },
+    { label: 'Two values', input: '{"n":2,"k":1}' },
+    { label: 'Largest k at n 60', input: '{"n":60,"k":59}' },
+    { label: 'Single distinct difference', input: '{"n":200,"k":1}' },
+    { label: 'Long run: n 120', input: '{"n":120,"k":60}' },
   ],
 }
 

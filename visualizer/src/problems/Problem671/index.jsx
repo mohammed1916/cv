@@ -16,6 +16,10 @@ const definition = {
     { label: 'Two levels', input: '[3,3,7,3,3]' },
     { label: 'Flat', input: '[4,4,4]' },
     { label: 'Deep candidate', input: '[5,5,9,null,null,9,11]' },
+    { label: 'Single node', input: '[1]' },
+    { label: 'Equal values', input: '[2,2,2]' },
+    { label: 'Largest 32-bit value', input: '[0,0,2147483647]' },
+    { label: 'Full tree of fifteen nodes', input: '[15,15,63,15,271,282,63,15,56,508,271,498,282,549,63]' },
   ],
 }
 

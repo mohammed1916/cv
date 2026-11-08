@@ -16,6 +16,10 @@ const definition = {
     { label: 'Alternating', input: '21' },
     { label: 'Repeated pair', input: '11' },
     { label: 'Single bit', input: '1' },
+    { label: 'Largest 32-bit value', input: '2147483647' },
+    { label: 'Single high bit', input: '1073741824' },
+    { label: 'Alternating high bits', input: '1431655765' },
+    { label: 'Power of two plus one', input: '1025' },
   ],
 }
 

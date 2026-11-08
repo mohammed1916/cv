@@ -18,6 +18,11 @@ const definition = {
     { label: 'One bundle', input: '{"price":[3,4],"special":[[2,1,6]],"needs":[2,2]}' },
     { label: 'Overbuy trap', input: '{"price":[5,2],"special":[[1,1,4]],"needs":[1,3]}' },
     { label: 'No offers', input: '{"price":[1,9],"special":[],"needs":[4,1]}' },
+    { label: 'Single item offer', input: '{"price":[4],"special":[[3,10]],"needs":[3]}' },
+    { label: 'Offer equals list price', input: '{"price":[2,2],"special":[[1,1,4]],"needs":[1,1]}' },
+    { label: 'Nothing needed', input: '{"price":[3,5],"special":[[1,1,1]],"needs":[0,0]}' },
+    { label: 'Largest prices and counts', input: '{"price":[10000,10000,10000,10000,10000,10000],"special":[],"needs":[6,6,6,6,6,6]}' },
+    { label: 'Long run: six items, six offers', input: '{"price":[144,2508,6630,8480,5558,221],"special":[[1,1,1,1,0,2,6462],[2,1,2,2,1,0,9163],[0,1,1,1,0,1,15908],[1,0,2,2,0,2,14718],[2,2,1,0,0,0,14406],[1,1,2,1,2,1,9846]],"needs":[3,6,5,2,0,3]}' },
   ],
 }
 

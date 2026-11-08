@@ -17,6 +17,11 @@ const definition = {
     { label: 'Star closes', input: '"(*)"' },
     { label: 'Extra close', input: '"*)(*"' },
     { label: 'Star needed', input: '"(()*"' },
+    { label: 'Single star', input: '"*"' },
+    { label: 'Only stars', input: '"**"' },
+    { label: 'Longest balanced pairs', input: '"(((((((((((((((((((((((((((((((((((((((((((((((((())))))))))))))))))))))))))))))))))))))))))))))))))"' },
+    { label: 'Closing only', input: '")"' },
+    { label: 'Long run: 100 characters', input: '")*)()(*((****(*)*)))***(****)*(((()(())(()***)()(**()(*)((*(()((*(()(**)((()()(***(*(()(**(*(()*()**"' },
   ],
 }
 

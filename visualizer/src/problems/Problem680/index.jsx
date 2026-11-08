@@ -16,6 +16,10 @@ const definition = {
     { label: 'One drop', input: '"racecarx"' },
     { label: 'Mirror pair', input: '"abcdba"' },
     { label: 'No help', input: '"abcde"' },
+    { label: 'One letter', input: '"a"' },
+    { label: 'Already palindrome', input: '"aa"' },
+    { label: 'Longest alternating', input: '"abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab"' },
+    { label: 'Long run: 500 letters', input: '"vxhfzequpxbxnnzcrvhasrbbvalryqytdxbqcvrlysovnsmbqcijvtpkdbtkmzsyvprkjvvtknjgbumvtfadkoqpkhhsupyngsdbwkfqzzwmnyifpfcsqyzdcuamyeczyidriazrnweakzvraztbvuvodhvcajkwfmhszkshbnfjrooykhzyydwelgqeiqjrxawyogidyrctwgvouxmbrlkpekhbxqqpcieyqncxeugoaromxvxeepfoeekloezmypgxmwtpxlrtybeowjqksjzefoafzzxfillvqelktrhawcdwlngtfzsmjzpeyqbiuhnlgrszlbqhtphkcxoseuxljptxshakbemjkohbpwfydfxgmvqipnvrtjlvbjpbsyxpfcnblxhtzjxzfwvswinbtowxlecmvbxyjearxyrdfyoidfqcqrcsvgtrhsxhoghlsfryuolbvyujdcqunrubplcsvqoxqgycjmuubcouarvemvod"' },
   ],
 }
 

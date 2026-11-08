@@ -17,6 +17,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"sentences":["i love you","island","ironman","i love leetcode"],"times":[5,3,2,2],"typed":"i a#"}' },
     { label: 'Saving', input: '{"sentences":["abc","abd"],"times":[1,1],"typed":"abd#ab"}' },
+    { label: 'One sentence', input: '{"sentences":["a"],"times":[1],"typed":"a#"}' },
+    { label: 'Equal hotness sorted by text', input: '{"sentences":["ac","aa","ab"],"times":[2,2,2],"typed":"a"}' },
+    { label: 'Largest counts and typed text', input: '{"sentences":["zzz","zz","z","zzzz","zzzzz","zz z","z z","zz zz","zzz z","z zz"],"times":[100,100,100,100,100,100,100,100,100,100],"typed":"zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz#"}' },
+    { label: 'Empty save gives nothing', input: '{"sentences":["ab"],"times":[4],"typed":"#"}' },
+    { label: 'Long run: forty typed characters', input: '{"sentences":["baa","bbbba","bbbab","babbbaa","abbabaa","bba","aaaab","aaaaabbb","bbbbb","baaaa"],"times":[98,62,94,69,5,63,95,68,9,73],"typed":"## a aba##b#ab# #  ba b aabaaaaba#a# #b#"}' },
   ],
 }
 

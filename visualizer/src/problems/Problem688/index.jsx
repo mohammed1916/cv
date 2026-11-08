@@ -15,6 +15,11 @@ const definition = {
     { label: 'One move', input: '{"n":3,"k":1,"row":1,"column":1}' },
     { label: 'Corner, two moves', input: '{"n":4,"k":2,"row":0,"column":0}' },
     { label: 'No moves', input: '{"n":5,"k":0,"row":2,"column":2}' },
+    { label: 'One square board', input: '{"n":1,"k":3,"row":0,"column":0}' },
+    { label: 'No legal move', input: '{"n":2,"k":1,"row":0,"column":0}' },
+    { label: 'Centre start', input: '{"n":8,"k":1,"row":3,"column":3}' },
+    { label: 'Largest board and moves', input: '{"n":25,"k":100,"row":12,"column":12}' },
+    { label: 'Long run: 100 moves from a corner', input: '{"n":20,"k":100,"row":0,"column":19}' },
   ],
 }
 

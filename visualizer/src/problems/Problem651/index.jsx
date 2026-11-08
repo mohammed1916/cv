@@ -16,6 +16,9 @@ const definition = {
     { label: 'Small', input: '3' },
     { label: 'Copy wins', input: '7' },
     { label: 'Longer', input: '12' },
+    { label: 'Single press', input: '1' },
+    { label: 'Nine presses', input: '9' },
+    { label: 'Long run: 50 presses', input: '50' },
   ],
 }
 
