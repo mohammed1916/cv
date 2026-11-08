@@ -5,9 +5,9 @@
     --ts-muted: var(--text-muted, #64748b);
     --ts-border: var(--border, #dbe2ed);
     --ts-primary: var(--primary, #6366f1);
-    --ts-cyan: #0891b2;
-    --ts-green: #0d9488;
-    --ts-amber: #b7791f;
+    --ts-cyan: var(--info, #0369a1);
+    --ts-green: var(--success, #047857);
+    --ts-amber: var(--warning, #9a3412);
 
     display: grid;
     gap: 14px;
@@ -663,30 +663,6 @@
     font-size: 10px;
     color: var(--ts-muted);
     white-space: nowrap;
-}
-
-@media (prefers-color-scheme: dark) {
-    .task-scheduling {
-        --ts-cyan: #67d5e9;
-        --ts-green: #54d7bb;
-        --ts-amber: #f0bf68;
-    }
-}
-
-[data-theme="dark"] .task-scheduling,
-.dark .task-scheduling,
-.theme-dark .task-scheduling {
-    --ts-cyan: #67d5e9;
-    --ts-green: #54d7bb;
-    --ts-amber: #f0bf68;
-}
-
-[data-theme="light"] .task-scheduling,
-.light .task-scheduling,
-.theme-light .task-scheduling {
-    --ts-cyan: #0891b2;
-    --ts-green: #0d9488;
-    --ts-amber: #b7791f;
 }
 
 @media (max-width: 900px) {
