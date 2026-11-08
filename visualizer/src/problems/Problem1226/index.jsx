@@ -34,6 +34,9 @@ const definition = {
   complexity: 'O(1) per event with one fork per seat. Taking the lower numbered fork first removes the circular wait.',
   examples: [
     { label: 'Ordered', input: '{"n":3,"events":[["hungry",0],["hungry",1],["hungry",2],["finish",0],["hungry",1],["finish",1],["hungry",2],["finish",2]]}' },
+    { label: 'Single finish each, reversed order', input: '{\"n\":3,\"events\":[[\"hungry\",2],[\"finish\",2],[\"hungry\",0],[\"finish\",0]]}' },
+    { label: 'Two philosophers take turns', input: '{\"n\":2,\"events\":[[\"hungry\",0],[\"finish\",0],[\"hungry\",1],[\"finish\",1]]}' },
+    { label: 'Long run: six philosophers, twenty events', input: '{\"n\":6,\"events\":[[\"hungry\",4],[\"finish\",4],[\"hungry\",2],[\"finish\",2],[\"hungry\",1],[\"finish\",1],[\"hungry\",0],[\"finish\",0],[\"hungry\",2],[\"finish\",2],[\"hungry\",1],[\"finish\",1],[\"hungry\",4],[\"finish\",4],[\"hungry\",5],[\"finish\",5],[\"hungry\",1],[\"finish\",1],[\"hungry\",0],[\"finish\",0]]}' },
   ],
 }
 

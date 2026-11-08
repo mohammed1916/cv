@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"startTime":[1,2,3,3],"endTime":[3,4,5,6],"profit":[50,10,40,70]}' },
     { label: 'Chain', input: '{"startTime":[1,1,1],"endTime":[2,3,4],"profit":[5,6,4]}' },
+    { label: 'Single job', input: '{\"startTime\":[0],\"endTime\":[5],\"profit\":[10]}' },
+    { label: 'Identical jobs with equal profit', input: '{\"startTime\":[1,1],\"endTime\":[4,4],\"profit\":[5,5]}' },
+    { label: 'Back-to-back jobs both fit', input: '{\"startTime\":[0,3],\"endTime\":[3,6],\"profit\":[4,4]}' },
+    { label: 'Long run: ten jobs', input: '{\"startTime\":[12,6,11,9,0,2,2,10,16,16],\"endTime\":[15,13,12,11,8,18,17,12,20,19],\"profit\":[44,5,78,49,100,9,2,81,16,52]}' },
   ],
 }
 

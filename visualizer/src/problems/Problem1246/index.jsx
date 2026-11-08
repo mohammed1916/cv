@@ -12,6 +12,10 @@ const definition = {
     { label: 'Whole palindrome', input: '[1,2,3,2,1]' },
     { label: 'Pair it up', input: '[1,3,4,1,5]' },
     { label: 'Single value', input: '[7]' },
+    { label: 'One value, no pairs', input: '[5]' },
+    { label: 'Equal values', input: '[3,3,3]' },
+    { label: 'Alternating extremes', input: '[10,-10,10,-10,10,-10,10,-10,10,-10]' },
+    { label: 'Long run: ten values', input: '[5,-4,10,6,6,-5,-2,-7,-3,-7]' },
   ],
 }
 

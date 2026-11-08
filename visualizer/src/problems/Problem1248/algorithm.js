@@ -12,6 +12,10 @@ export const examples = [
   { label: 'Two odds', input: '{"nums":[1,1,2,1,1],"k":3}' },
   { label: 'No odds', input: '{"nums":[2,4,6],"k":1}' },
   { label: 'Alternating', input: '{"nums":[1,2,1,2,1],"k":2}' },
+  { label: 'Single value', input: '{\"nums\":[7],\"k\":1}' },
+  { label: 'Equal values', input: '{\"nums\":[4,4,4],\"k\":2}' },
+  { label: 'Largest allowed values', input: '{\"nums\":[1000,1,1000],\"k\":3}' },
+  { label: 'Long run: twenty values', input: '{\"nums\":[720,477,336,865,134,765,278,999,385,278,47,384,737,754,959,202,845,282,18,348],\"k\":7}' },
 ]
 
 export const code = `function numberOfSubarrays(nums, k) {

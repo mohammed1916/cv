@@ -51,6 +51,10 @@ export const examples = [
   { label: 'Window of two', input: '{"nums":[3,-2,4,1,5],"k":2}' },
   { label: 'Jump of one', input: '{"nums":[2,6,-1,4],"k":1}' },
   { label: 'Large window', input: '{"nums":[-4,-3,2,-6,5],"k":4}' },
+  { label: 'Single item window', input: '{"nums":[5],"k":1}' },
+  { label: 'Whole array window', input: '{"nums":[-1,-2,-3],"k":3}' },
+  { label: 'Equal values', input: '{"nums":[7,7,7,7],"k":2}' },
+  { label: 'Long run: 16 numbers', input: '{"nums":[79,-78,-83,-11,42,48,-24,-13,-42,-98,-37,-65,-26,-67,-50,-98],"k":5}' },
 ]
 
 export const complexity = 'O(n) time and O(n) space for n positions: each index enters and leaves the deque once.'

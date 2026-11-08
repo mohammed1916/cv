@@ -15,6 +15,9 @@ const definition = {
     { label: 'Four items', input: '4' },
     { label: 'Two items', input: '2' },
     { label: 'Single item', input: '1' },
+    { label: 'Three items', input: '3' },
+    { label: 'Five items', input: '5' },
+    { label: 'Long run: 40 items', input: '40' },
   ],
 }
 

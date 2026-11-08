@@ -66,6 +66,9 @@ export const examples = [
   { label: 'Sample', input: '[[1,1,1,0,1],[1,0,1,1,1],[1,1,1,1,0],[0,1,1,1,1],[1,1,0,1,1]]' },
   { label: 'Single one', input: '[[0,0],[0,1]]' },
   { label: 'No ones', input: '[[0,0],[0,0]]' },
+  { label: 'All ones 2x2', input: '[[1,1],[1,1]]' },
+  { label: 'Single row', input: '[[1,0,1,1]]' },
+  { label: 'Long run: 8x8 grid', input: '[[1,1,1,1,1,1,1,0],[0,1,0,1,0,1,1,1],[1,0,1,0,1,0,1,1],[1,1,1,1,0,1,0,1],[0,1,1,0,1,1,1,0],[1,1,1,1,1,1,0,1],[1,1,0,0,0,0,1,1],[0,1,1,1,0,0,0,0]]' },
 ]
 
 export function parseInput(text) {

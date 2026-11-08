@@ -75,7 +75,12 @@ const SAMPLE = { events: [
   { business_id: 3, event_type: 'ads', occurrences: 1 },
   { business_id: 3, event_type: 'page views', occurrences: 12 },
 ] }
-export const examples = [{ label: 'Teaching sample', input: JSON.stringify(SAMPLE) }]
+export const examples = [
+  { label: 'Teaching sample', input: JSON.stringify(SAMPLE) },
+  { label: 'Single row', input: '{"events":[{"business_id":1,"event_type":"ads","occurrences":3}]}' },
+  { label: 'Equal counts', input: '{"events":[{"business_id":2,"event_type":"reviews","occurrences":4},{"business_id":3,"event_type":"reviews","occurrences":4}]}' },
+  { label: 'Long run: 12 rows, 4 businesses', input: '{"events":[{"business_id":2,"event_type":"page views","occurrences":2},{"business_id":2,"event_type":"reviews","occurrences":17},{"business_id":4,"event_type":"reviews","occurrences":8},{"business_id":4,"event_type":"reviews","occurrences":19},{"business_id":4,"event_type":"reviews","occurrences":16},{"business_id":1,"event_type":"ads","occurrences":1},{"business_id":1,"event_type":"ads","occurrences":10},{"business_id":1,"event_type":"ads","occurrences":13},{"business_id":3,"event_type":"ads","occurrences":8},{"business_id":3,"event_type":"reviews","occurrences":17},{"business_id":4,"event_type":"ads","occurrences":12},{"business_id":4,"event_type":"page views","occurrences":17}]}' },
+]
 
 export function parseInput(text) {
   const input = parseJsonObject(text)

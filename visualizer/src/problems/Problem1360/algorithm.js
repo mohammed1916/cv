@@ -9,6 +9,9 @@ export const examples = [
   { label: 'Same year', input: '{"first":"2020-01-15","second":"2020-02-20"}' },
   { label: 'Across a leap day', input: '{"first":"2019-12-31","second":"2020-03-01"}' },
   { label: 'Order does not matter', input: '{"first":"2020-03-01","second":"2019-12-31"}' },
+  { label: "Same date is zero", input: "{\"first\":\"2020-01-01\",\"second\":\"2020-01-01\"}" },
+  { label: "Leap century edge", input: "{\"first\":\"1900-02-28\",\"second\":\"1900-03-01\"}" },
+  { label: "Full span, 1900 to 2100", input: "{\"first\":\"1900-01-01\",\"second\":\"2100-12-31\"}" },
 ]
 
 const isLeap = y => (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0

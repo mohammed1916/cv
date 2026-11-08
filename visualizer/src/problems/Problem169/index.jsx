@@ -12,6 +12,10 @@ const definition = {
     { label: 'Clear majority', input: '[2,2,1,1,1,2,2]' },
     { label: 'Single value', input: '[5]' },
     { label: 'Early candidate', input: '[-1,-1,7,-1]' },
+    { label: 'Exactly more than half', input: '[7,7,7,7,1,2]' },
+    { label: 'Extreme values at the limits', input: '[100,100,100,-100,-100,100,100]' },
+    { label: 'Single negative value', input: '[-100]' },
+    { label: 'Long run: 30 values with a majority', input: '[86,42,42,14,42,42,30,42,42,62,42,42,35,42,42,-5,42,42,20,42,42,-46,42,42,-70,42,42,-77,42,42]' },
   ],
 }
 

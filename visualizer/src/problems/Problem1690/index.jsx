@@ -11,6 +11,10 @@ const definition = {
     { label: 'Four stones', input: '[4,9,2,7]' },
     { label: 'Five stones', input: '[3,1,8,2,6]' },
     { label: 'Single stone', input: '[5]' },
+  { label: 'Two stones', input: '[1,100]' },
+  { label: 'Equal stones', input: '[7,7,7,7]' },
+  { label: 'Largest values', input: '[100,1,100,100,1,100]' },
+  { label: 'Long run: 16 stones', input: '[90,57,98,23,72,26,80,94,24,67,60,8,51,46,88,22]' },
   ],
 }
 

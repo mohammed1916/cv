@@ -82,7 +82,12 @@ const SAMPLE = { spending: [
   { user_id: 3, spend_date: '2019-07-01', platform: 'desktop', amount: 300 },
   { user_id: 2, spend_date: '2019-07-02', platform: 'desktop', amount: 10 },
 ] }
-export const examples = [{ label: 'Teaching sample', input: JSON.stringify(SAMPLE) }]
+export const examples = [
+  { label: 'Teaching sample', input: JSON.stringify(SAMPLE) },
+  { label: 'Single row', input: '{"spending":[{"user_id":5,"spend_date":"2019-07-01","platform":"mobile","amount":10}]}' },
+  { label: 'Both platforms on one day', input: '{"spending":[{"user_id":6,"spend_date":"2019-07-02","platform":"mobile","amount":30},{"user_id":6,"spend_date":"2019-07-02","platform":"desktop","amount":30}]}' },
+  { label: 'Long run: 12 rows, 4 users', input: '{"spending":[{"user_id":4,"spend_date":"2019-07-02","platform":"desktop","amount":110},{"user_id":4,"spend_date":"2019-07-02","platform":"desktop","amount":30},{"user_id":3,"spend_date":"2019-07-04","platform":"desktop","amount":200},{"user_id":1,"spend_date":"2019-07-03","platform":"desktop","amount":180},{"user_id":2,"spend_date":"2019-07-04","platform":"mobile","amount":100},{"user_id":4,"spend_date":"2019-07-04","platform":"mobile","amount":90},{"user_id":2,"spend_date":"2019-07-04","platform":"desktop","amount":30},{"user_id":1,"spend_date":"2019-07-04","platform":"desktop","amount":140},{"user_id":4,"spend_date":"2019-07-01","platform":"mobile","amount":40},{"user_id":1,"spend_date":"2019-07-03","platform":"desktop","amount":40},{"user_id":4,"spend_date":"2019-07-03","platform":"desktop","amount":30},{"user_id":1,"spend_date":"2019-07-04","platform":"mobile","amount":150}]}' },
+]
 const CATEGORIES = ['both', 'desktop', 'mobile']
 
 export function parseInput(text) {

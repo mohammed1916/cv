@@ -18,6 +18,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"req_skills":["go","rust","sql"],"people":[["go"],["rust","sql"],["sql"]]}' },
     { label: 'Single expert', input: '{"req_skills":["a","b"],"people":[["a"],["a","b"],["b"]]}' },
+    { label: 'Single skill', input: '{"req_skills":["x"],"people":[["x"]]}' },
+    { label: 'Every person needed', input: '{"req_skills":["a","b","c"],"people":[["a"],["b"],["c"]]}' },
+    { label: 'Long run: 6 skills, 8 people', input: '{"req_skills":["a","b","c","d","e","f"],"people":[["a","b"],["c"],["d","e"],["f"],["a","c","e"],["b","d"],["f","a"],["c","d","e","f"]]}' },
   ],
 }
 

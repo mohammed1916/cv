@@ -35,6 +35,10 @@ export const examples = [
   { label: 'Largest start in the middle', input: '{"nums":[3,8,1,6,5],"k":3}' },
   { label: 'Whole array', input: '{"nums":[2,9,4],"k":3}' },
   { label: 'Short window', input: '{"nums":[5,1,7,2,6],"k":2}' },
+  { label: 'Single value', input: '{"nums":[42],"k":1}' },
+  { label: 'Descending order', input: '{"nums":[9,7,4,2],"k":2}' },
+  { label: 'Largest values', input: '{"nums":[100,99,98,1],"k":3}' },
+  { label: 'Long run: 16 values', input: '{"nums":[67,100,38,1,24,8,43,60,78,58,14,5,80,46,91,42],"k":8}' },
 ]
 
 export const complexity = 'O(n) time and O(k) extra space for the answer, with n the array length.'

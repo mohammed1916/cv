@@ -11,6 +11,10 @@ const definition = {
     { label: 'Three digits', input: '{"n":370}' },
     { label: 'Not Armstrong', input: '{"n":10}' },
     { label: 'Four digits', input: '{"n":9474}' },
+    { label: 'Single digit', input: '{"n":7}' },
+    { label: 'Armstrong 153', input: '{"n":153}' },
+    { label: 'Largest allowed n', input: '{"n":100000000}' },
+    { label: 'Long run: eight digits', input: '{"n":24678050}' },
   ],
 }
 

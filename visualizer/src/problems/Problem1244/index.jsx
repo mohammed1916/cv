@@ -16,6 +16,10 @@ const definition = {
   complexity: 'O(1) per add or reset, and O(p log p) per top query for p players. The visualization caps the input at 20 operations.',
   examples: [
     { label: 'Example', input: '{"ops":[["add",1,30],["add",2,50],["add",3,10],["top",2],["add",3,60],["top",2],["reset",2],["top",1]]}' },
+    { label: 'Top query on an empty board', input: '{\"ops\":[[\"top\",1]]}' },
+    { label: 'Equal scores tie', input: '{\"ops\":[[\"add\",1,50],[\"add\",2,50],[\"top\",1]]}' },
+    { label: 'Largest allowed score', input: '{\"ops\":[[\"add\",7,100],[\"top\",1],[\"reset\",7],[\"top\",1]]}' },
+    { label: 'Long run: twenty mixed operations', input: '{\"ops\":[[\"reset\",1],[\"top\",3],[\"top\",3],[\"top\",2],[\"top\",1],[\"add\",4,83],[\"reset\",1],[\"top\",1],[\"add\",5,80],[\"add\",4,17],[\"top\",1],[\"reset\",3],[\"reset\",5],[\"add\",2,100],[\"reset\",4],[\"add\",3,19],[\"reset\",4],[\"reset\",3],[\"reset\",4],[\"add\",2,6]]}' },
   ],
 }
 

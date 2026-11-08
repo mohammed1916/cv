@@ -12,6 +12,10 @@ export const examples = [
   { label: 'Pairs', input: '["ab","cd","ea"]' },
   { label: 'Clash', input: '["ax","by","cz","aa"]' },
   { label: 'Repeats', input: '["aa","bb"]' },
+  { label: 'Single word', input: '[\"a\"]' },
+  { label: 'Duplicate words', input: '[\"abc\",\"abc\"]' },
+  { label: 'Longest allowed word', input: '[\"abcdefghijklmnopqrstuvwxyz\"]' },
+  { label: 'Long run: ten words', input: '[\"renda\",\"tutz\",\"yex\",\"mdi\",\"uxvc\",\"roaw\",\"jfxsix\",\"qdcuix\",\"jbzs\",\"glmk\"]' },
 ]
 
 export const code = `function maxUniqueLength(words) {

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,1,1]}' },
     { label: 'Example 2', input: '{"nums":[1,2,2,2,5,0]}' },
+  { label: 'Three equal digits', input: '{"nums":[0,0,0]}' },
+  { label: 'Increasing digits', input: '{"nums":[1,2,3,4]}' },
+  { label: 'Largest digits', input: '{"nums":[9,9,9,9,9,9]}' },
+  { label: 'Long run: 30 digits', input: '{"nums":[8,5,0,0,3,7,2,0,4,9,5,1,0,3,9,4,9,3,5,8,6,1,8,0,9,6,0,8,9,9]}' },
   ],
 }
 

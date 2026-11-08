@@ -16,6 +16,9 @@ const definition = {
     { label: 'Uneven tree', input: '[4,2,9,1,null,null,6,3]' },
     { label: 'Gap in the middle', input: '[5,3,8,1,null,null,9]' },
     { label: 'Single node', input: '[7]' },
+    { label: 'Equal values on every level', input: '[2,2,2,2,2,2,2]' },
+    { label: 'Boundary values with gaps', input: '[99,-99,99,null,null,-99,99]' },
+    { label: 'Long run: 30 nodes', input: '[79,35,12,7,26,8,33,69,62,73,96,68,42,5,30,11,42,71,53,27,30,5,7,10,42,32,94,42,89,73]' },
   ],
 }
 

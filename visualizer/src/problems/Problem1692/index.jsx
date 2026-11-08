@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: "Four candies, two bags", input: '{"n":4,"k":2}' },
     { label: "Three candies, two bags", input: '{"n":3,"k":2}' },
+  { label: 'One bag', input: '{"n":1,"k":1}' },
+  { label: 'Bags equal to candies', input: '{"n":3,"k":3}' },
+  { label: 'Largest n', input: '{"n":12,"k":6}' },
+  { label: 'Long run: 12 candies', input: '{"n":12,"k":7}' },
   ],
 };
 

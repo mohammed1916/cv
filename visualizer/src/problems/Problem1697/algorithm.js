@@ -57,6 +57,10 @@ export const phases = [
 export const examples = [
   { label: 'Limit blocks the path', input: '{"n":4,"edgeList":[[0,1,3],[1,2,7],[2,3,2],[0,3,9]],"queries":[[0,2,8],[1,3,3],[0,3,10]]}' },
   { label: 'Direct edge', input: '{"n":2,"edgeList":[[0,1,5]],"queries":[[1,0,6],[0,1,5]]}' },
+  { label: 'No edge fits the limit', input: '{"n":2,"edgeList":[[0,1,1]],"queries":[[0,1,0]]}' },
+  { label: 'Limit equals the edge length', input: '{"n":2,"edgeList":[[0,1,4]],"queries":[[0,1,4]]}' },
+  { label: 'Largest weight', input: '{"n":3,"edgeList":[[0,1,100],[1,2,100]],"queries":[[0,2,100],[0,2,199]]}' },
+  { label: 'Long run: 20 edges', input: '{"n":12,"edgeList":[[10,2,39],[5,4,25],[9,4,40],[0,9,44],[4,1,24],[5,7,6],[0,6,15],[7,9,47],[2,0,3],[4,9,36],[6,3,6],[5,4,27],[2,1,33],[2,3,40],[2,3,48],[7,9,26],[9,4,26],[3,5,45],[3,4,16],[5,6,16]],"queries":[[1,11,25],[0,3,20],[5,11,49],[5,9,57],[2,4,24],[6,5,36]]}' },
 ]
 
 export const complexity = 'O((E + Q) log(E + Q) + (E + Q) * alpha(n)) time for E edges and Q queries, with union-find.'

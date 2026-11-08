@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":2,"m":3}' },
     { label: 'Example 2', input: '{"n":5,"m":8}' },
+    { label: 'Single cell', input: '{\"n\":1,\"m\":1}' },
+    { label: 'Square board', input: '{\"n\":3,\"m\":3}' },
+    { label: 'Long run: largest board', input: '{\"n\":8,\"m\":8}' },
   ],
 }
 

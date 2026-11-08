@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Basic', input: '{"k":3,"ops":[["enQueue",1],["enQueue",2],["enQueue",3],["enQueue",4],["Rear"],["isFull"],["deQueue"],["enQueue",4],["Rear"]]}' },
     { label: 'Empty checks', input: '{"k":1,"ops":[["isEmpty"],["Front"],["enQueue",9],["isFull"],["Rear"]]}' },
+    { label: 'Single slot ring', input: '{"k":1,"ops":[["enQueue",5],["isFull"],["deQueue"],["isEmpty"]]}' },
+    { label: 'Wraparound after full cycle', input: '{"k":3,"ops":[["enQueue",1],["enQueue",2],["deQueue"],["deQueue"],["enQueue",3],["enQueue",4],["Front"],["Rear"]]}' },
+    { label: 'Extreme values at the limits', input: '{"k":2,"ops":[["enQueue",1000],["enQueue",-1000],["Front"],["Rear"],["isFull"]]}' },
+    { label: 'Long run: 40 operations on 6 slots', input: '{"k":6,"ops":[["enQueue",63],["deQueue"],["Front"],["Rear"],["enQueue",-73],["deQueue"],["Front"],["Rear"],["enQueue",-68],["deQueue"],["Front"],["Rear"],["enQueue",-21],["deQueue"],["Front"],["Rear"],["enQueue",-15],["deQueue"],["Front"],["Rear"],["enQueue",10],["deQueue"],["Front"],["Rear"],["enQueue",-53],["deQueue"],["Front"],["Rear"],["enQueue",36],["deQueue"],["Front"],["Rear"],["enQueue",-97],["deQueue"],["Front"],["Rear"],["enQueue",64],["deQueue"],["Front"],["Rear"]]}' },
   ],
 }
 

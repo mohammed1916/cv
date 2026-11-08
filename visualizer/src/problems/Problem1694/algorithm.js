@@ -47,6 +47,10 @@ export const examples = [
   { label: 'Mixed separators', input: '"7-13 05 92"' },
   { label: 'Four digits left', input: '"12 34-5678"' },
   { label: 'Two digits left', input: '"4 5-6"' },
+  { label: 'Two digits', input: '"42"' },
+  { label: 'Dashes between every digit', input: '"1-2-3-4-5-6-7-8-9"' },
+  { label: 'Leading space', input: '" 7-1"' },
+  { label: 'Long run: 48 characters', input: '"93268820 -9760876-67 6-2375083 63244 8 538056513"' },
 ]
 
 export const complexity = 'O(n) time and O(n) space for a phone number of n characters.'

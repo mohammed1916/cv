@@ -10,6 +10,9 @@ const definition = {
     { label: 'Two points', input: '{"a":[0,10],"b":[0,0]}' },
     { label: 'Only index distance', input: '{"a":[5,5,5],"b":[2,2,2]}' },
     { label: 'Mixed signs', input: '{"a":[1,4,2,-3],"b":[3,0,5,-1]}' },
+    { label: 'Identical points', input: '{"a":[0,0],"b":[0,0]}' },
+    { label: 'Extreme values', input: '{"a":[-50,50],"b":[50,-50]}' },
+    { label: 'Long run: 10 points', input: '{"a":[8,-12,-49,13,9,-14,35,-20,-30,-40],"b":[4,-32,-21,27,26,21,23,49,-38,-30]}' },
   ],
 }
 

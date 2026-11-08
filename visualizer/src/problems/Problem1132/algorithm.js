@@ -88,7 +88,12 @@ const SAMPLE = {
     { post_id: 2, remove_date: '2019-07-09' },
   ],
 }
-export const examples = [{ label: 'Teaching sample', input: JSON.stringify(SAMPLE) }]
+export const examples = [
+  { label: 'Teaching sample', input: JSON.stringify(SAMPLE) },
+  { label: 'Single report, no removal', input: '{"actions":[{"user_id":1,"post_id":1,"action_date":"2019-07-04","action":"report","extra":"spam"}],"removals":[]}' },
+  { label: 'Removal on the same day is kept', input: '{"actions":[{"user_id":1,"post_id":1,"action_date":"2019-07-04","action":"report","extra":"spam"},{"user_id":2,"post_id":2,"action_date":"2019-07-04","action":"report","extra":"spam"}],"removals":[{"post_id":1,"remove_date":"2019-07-04"}]}' },
+  { label: 'Long run: 12 actions, 4 removals', input: '{"actions":[{"user_id":3,"post_id":5,"action_date":"2019-07-04","action":"report","extra":"abuse"},{"user_id":1,"post_id":3,"action_date":"2019-07-04","action":"view","extra":"abuse"},{"user_id":4,"post_id":3,"action_date":"2019-07-05","action":"report","extra":"spam"},{"user_id":2,"post_id":5,"action_date":"2019-07-04","action":"report","extra":"abuse"},{"user_id":1,"post_id":1,"action_date":"2019-07-05","action":"view","extra":"spam"},{"user_id":1,"post_id":1,"action_date":"2019-07-04","action":"view","extra":"abuse"},{"user_id":4,"post_id":5,"action_date":"2019-07-05","action":"view","extra":"abuse"},{"user_id":3,"post_id":3,"action_date":"2019-07-05","action":"report","extra":"spam"},{"user_id":1,"post_id":3,"action_date":"2019-07-04","action":"report","extra":"spam"},{"user_id":4,"post_id":4,"action_date":"2019-07-05","action":"report","extra":"abuse"},{"user_id":4,"post_id":2,"action_date":"2019-07-04","action":"view","extra":"spam"},{"user_id":2,"post_id":4,"action_date":"2019-07-04","action":"report","extra":"spam"}],"removals":[{"post_id":3,"remove_date":"2019-07-05"},{"post_id":4,"remove_date":"2019-07-04"},{"post_id":2,"remove_date":"2019-07-05"},{"post_id":5,"remove_date":"2019-07-05"}]}' },
+]
 
 export function parseInput(text) {
   const input = parseJsonObject(text)

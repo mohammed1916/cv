@@ -72,7 +72,7 @@ export function buildTrace(input) {
   }
   const result = window[2]
   frames.push({
-    phase: 'done', activeLine: 7, pythonLine: P('return window[2]'),
+    phase: 'done', activeLine: 6, pythonLine: P('return window[2]'),
     message: `The window ends with T${n} = ${result}.`,
     snapshot: { n, window: [...window], index: n },
   })

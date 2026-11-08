@@ -17,6 +17,10 @@ const definition = {
     { label: 'Biased trio', input: '{"prob":[0.25,0.75,0.5],"target":2}' },
     { label: 'Mostly tails', input: '{"prob":[0.9,0.1],"target":0}' },
     { label: 'Mixed odds', input: '{"prob":[0.3,0.6,0.8,0.2],"target":3}' },
+    { label: 'Single fair coin', input: '{\"prob\":[0.5],\"target\":1}' },
+    { label: 'Certain heads and tails', input: '{\"prob\":[1,0],\"target\":1}' },
+    { label: 'Equal odds, middle count', input: '{\"prob\":[0.5,0.5,0.5,0.5],\"target\":2}' },
+    { label: 'Long run: eight coins', input: '{\"prob\":[0.71,0.84,0.02,0.2,0.14,0.31,0.52,0.51],\"target\":4}' },
   ],
 }
 

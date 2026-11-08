@@ -11,6 +11,9 @@ const definition = {
     { label: 'Term 6', input: '{"n":6}' },
     { label: 'Term 10', input: '{"n":10}' },
     { label: 'Start', input: '{"n":0}' },
+    { label: 'First term', input: '{"n":1}' },
+    { label: 'Second term', input: '{"n":2}' },
+    { label: 'Long run: n = 37', input: '{"n":37}' },
   ],
 }
 

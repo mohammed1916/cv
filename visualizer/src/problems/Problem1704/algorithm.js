@@ -42,6 +42,10 @@ export const examples = [
   { label: 'Even split', input: '"lemonade"' },
   { label: 'Unequal vowels', input: '"ouchat"' },
   { label: 'Capital vowels', input: '"AbCdEf"' },
+  { label: 'Smallest pair', input: '"ab"' },
+  { label: 'All vowels', input: '"aeiouAEI"' },
+  { label: 'No vowels', input: '"bcdfgh"' },
+  { label: 'Long run: 40 letters', input: '"URDMcLRNsyXIjOdMJliLhFywdfmKxbGsSIgZlSWl"' },
 ]
 
 export const complexity = 'O(n) time and O(1) extra space for a string of length n.'

@@ -16,6 +16,9 @@ const definition = {
     { label: 'Pair found', input: '13' },
     { label: 'Two equal squares', input: '8' },
     { label: 'No pair', input: '6' },
+    { label: 'Zero is 0 squared plus 0 squared', input: '0' },
+    { label: 'Prime three mod four has no pair', input: '1000003' },
+    { label: 'Long run: nine-digit value', input: '123456789' },
   ],
 }
 

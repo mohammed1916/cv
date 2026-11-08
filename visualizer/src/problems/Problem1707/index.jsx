@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[0,1,2,3,4],"queries":[[3,1],[1,3],[5,6]]}' },
     { label: 'Example 2', input: '{"nums":[5,2,4,6,6,3],"queries":[[12,4],[8,1],[6,3]]}' },
+  { label: 'Single number', input: '{"nums":[7],"queries":[[7,10]]}' },
+  { label: 'No value under the limit', input: '{"nums":[8,9],"queries":[[3,2]]}' },
+  { label: 'Equal numbers', input: '{"nums":[4,4,4],"queries":[[4,4]]}' },
+  { label: 'Long run: 10 numbers', input: '{"nums":[27,3,19,26,1,29,3,15,27,20],"queries":[[9,22],[3,19],[23,4],[4,8],[2,11],[6,9]]}' },
   ],
 }
 

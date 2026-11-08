@@ -12,6 +12,9 @@ const definition = {
     { label: 'Short ladder', input: '{"beginWord":"cat","endWord":"dog","wordList":["cot","dot","dog"]}' },
     { label: 'Direct neighbour', input: '{"beginWord":"ab","endWord":"ad","wordList":["ac","ad"]}' },
     { label: 'Disconnected', input: '{"beginWord":"aaa","endWord":"bbb","wordList":["xxx","bbb"]}' },
+    { label: 'Direct change', input: '{"beginWord":"a","endWord":"c","wordList":["b","c"]}' },
+    { label: 'Two equal routes', input: '{"beginWord":"cab","endWord":"dab","wordList":["cob","dob","cat","dat","dab"]}' },
+    { label: 'Long run: ten four-letter words', input: '{"beginWord":"aaaa","endWord":"bbbb","wordList":["aaab","aabb","abbb","bbbb","aaba","abba","baba","bbab","abab","baaa"]}' },
   ],
 }
 

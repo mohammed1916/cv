@@ -11,6 +11,9 @@ const definition = {
     { label: 'Mixed repeats', input: '{"nums":[5,7,7,3,5,9]}' },
     { label: 'No unique value', input: '{"nums":[4,4,2,2]}' },
     { label: 'Single zero', input: '{"nums":[0]}' },
+    { label: 'Single largest value', input: '{"nums":[1000]}' },
+    { label: 'All distinct', input: '{"nums":[1,2,3,4]}' },
+    { label: 'Long run: 20 values', input: '{"nums":[0,16,20,0,20,2,6,18,1,4,11,1,13,11,12,13,15,15,4,13]}' },
   ],
 }
 

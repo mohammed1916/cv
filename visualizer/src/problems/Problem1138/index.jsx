@@ -22,6 +22,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"target":"leet"}' },
     { label: 'Example 2', input: '{"target":"code"}' },
+    { label: 'Single letter', input: '{"target":"a"}' },
+    { label: 'Repeated letter', input: '{"target":"zz"}' },
+    { label: 'Long run: 100 letters', input: '{"target":"aejnnzyglkqgtneqllllyhgqzrwtcfyaamtzpzgnbfvacqocxrtrjquqasguqpclyrxukesgzcqxftutmavzcslrgkpnulnsbacl"}' },
   ],
 }
 

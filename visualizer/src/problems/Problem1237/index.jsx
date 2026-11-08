@@ -17,6 +17,9 @@ const definition = {
   examples: [
     { label: 'Sum, z = 5', input: '{"z":5,"operation":"sum"}' },
     { label: 'Product, z = 5', input: '{"z":5,"operation":"product"}' },
+    { label: 'Smallest z, sum', input: '{\"z\":1,\"operation\":\"sum\"}' },
+    { label: 'Largest z, product', input: '{\"z\":100,\"operation\":\"product\"}' },
+    { label: 'Long run: largest z, sum', input: '{\"z\":100,\"operation\":\"sum\"}' },
   ],
 }
 

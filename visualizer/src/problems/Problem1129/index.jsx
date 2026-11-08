@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":3,"red_edges":[[0,1],[1,2]],"blue_edges":[]}' },
     { label: 'Example 2', input: '{"n":3,"red_edges":[[0,1]],"blue_edges":[[1,2]]}' },
+    { label: 'Single node', input: '{"n":1,"red_edges":[],"blue_edges":[]}' },
+    { label: 'Same pair in both colours', input: '{"n":2,"red_edges":[[0,1]],"blue_edges":[[1,0]]}' },
+    { label: 'Red path only', input: '{"n":4,"red_edges":[[0,1],[1,2],[2,3]],"blue_edges":[]}' },
+    { label: 'Long run: 10 nodes, 12 edges each', input: '{"n":10,"red_edges":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,0],[0,5],[2,7]],"blue_edges":[[1,6],[3,8],[4,9],[0,2],[5,7],[1,3],[6,8],[2,4],[7,9],[9,1],[5,0],[4,3]]}' },
   ],
 }
 

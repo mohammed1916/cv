@@ -12,6 +12,10 @@ const definition = {
     { label: 'Settles fast', input: '[6,2,3,4,1]' },
     { label: 'Several rounds', input: '[1,6,3,4,3,5]' },
     { label: 'Already stable', input: '[1,2,3,4,5]' },
+    { label: 'Single value', input: '[7]' },
+    { label: 'Equal values', input: '[5,5,5]' },
+    { label: 'Extreme values at both limits', input: '[-100,100,-100,100]' },
+    { label: 'Long run: twelve values', input: '[44,-96,83,36,61,-95,-76,-16,68,99,56,92]' },
   ],
 }
 

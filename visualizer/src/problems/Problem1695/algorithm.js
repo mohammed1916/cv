@@ -48,6 +48,10 @@ export const examples = [
   { label: 'Repeat in the middle', input: '[7,3,7,2,9]' },
   { label: 'Several repeats', input: '[6,1,6,2,3,1]' },
   { label: 'All distinct', input: '[3,1,2]' },
+  { label: 'Single value', input: '[9]' },
+  { label: 'Same value twice', input: '[4,4]' },
+  { label: 'Largest values', input: '[10000,1,10000,10000]' },
+  { label: 'Long run: 20 numbers', input: '[36,1,17,17,2,40,39,21,32,39,35,20,16,9,1,22,13,4,20,30]' },
 ]
 
 export const complexity = 'O(n) time and O(n) space for n numbers: l and r each move at most n times.'

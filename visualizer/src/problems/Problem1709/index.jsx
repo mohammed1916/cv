@@ -63,6 +63,10 @@ const definition = {
   complexity: 'O(n log n) to sort the visits by user and date, then one pass for the windows.',
   examples: [
     { label: 'Example', input: '{"UserVisits":[{"user_id":2,"visit_date":"2020-06-15"},{"user_id":1,"visit_date":"2020-12-01"},{"user_id":3,"visit_date":"2020-12-31"},{"user_id":1,"visit_date":"2020-01-01"},{"user_id":3,"visit_date":"2020-12-31"},{"user_id":1,"visit_date":"2020-01-11"}]}' },
+  { label: 'One visit', input: '{"UserVisits":[{"user_id":4,"visit_date":"2020-05-05"}]}' },
+  { label: 'Same date twice', input: '{"UserVisits":[{"user_id":1,"visit_date":"2020-03-03"},{"user_id":1,"visit_date":"2020-03-03"}]}' },
+  { label: 'Visit on the window end', input: '{"UserVisits":[{"user_id":2,"visit_date":"2021-01-01"},{"user_id":2,"visit_date":"2020-12-31"}]}' },
+  { label: 'Long run: 12 visits', input: '{"UserVisits":[{"user_id":4,"visit_date":"2020-04-28"},{"user_id":4,"visit_date":"2020-05-13"},{"user_id":4,"visit_date":"2020-05-26"},{"user_id":4,"visit_date":"2020-03-03"},{"user_id":1,"visit_date":"2020-07-07"},{"user_id":1,"visit_date":"2020-06-09"},{"user_id":3,"visit_date":"2020-02-17"},{"user_id":2,"visit_date":"2020-10-23"},{"user_id":3,"visit_date":"2020-04-07"},{"user_id":3,"visit_date":"2020-06-04"},{"user_id":3,"visit_date":"2020-02-19"},{"user_id":3,"visit_date":"2020-02-17"}]}' },
   ],
 }
 

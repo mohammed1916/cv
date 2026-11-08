@@ -12,6 +12,10 @@ export const examples = [
   { label: 'Mixed', input: '["xxyy","yyxx"]' },
   { label: 'Small', input: '["xy","yx"]' },
   { label: 'Impossible', input: '["xxy","yyx"]' },
+  { label: 'Single letter pair', input: '[\"x\",\"y\"]' },
+  { label: 'Equal strings', input: '[\"xy\",\"xy\"]' },
+  { label: 'Largest allowed length, opposite strings', input: '[\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\"yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy\"]' },
+  { label: 'Long run: forty letters each', input: '[\"yxyyxxyxyxyyyyyyyxyxxxxyxxxxxyxxyyyxyxxx\",\"yxxyxxxyyxyxyxyxyxxyyyyxxxxyyyxxyyxyxyyx\"]' },
 ]
 
 export const code = `function minimumSwaps(s1, s2) {

@@ -44,6 +44,10 @@ export const phases = [
 export const examples = [
   { label: 'Best density first', input: '{"boxTypes":[[4,2],[1,9],[3,5]],"truckSize":5}' },
   { label: 'Room for all', input: '{"boxTypes":[[2,3],[1,1]],"truckSize":10}' },
+  { label: 'Single box type', input: '{"boxTypes":[[1,1]],"truckSize":1}' },
+  { label: 'Truck too small for any box', input: '{"boxTypes":[[5,4]],"truckSize":3}' },
+  { label: 'Equal density', input: '{"boxTypes":[[2,3],[3,3]],"truckSize":6}' },
+  { label: 'Long run: 8 box types', input: '{"boxTypes":[[18,8],[14,20],[1,5],[9,6],[9,17],[14,16],[1,10],[9,11]],"truckSize":60}' },
 ]
 
 export const complexity = 'O(m log m) time for m box types, dominated by the sort. Space is O(m).'

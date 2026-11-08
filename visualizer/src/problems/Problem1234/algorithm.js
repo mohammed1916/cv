@@ -14,6 +14,10 @@ export const examples = [
   { label: 'Balanced', input: 'QWERRWEQ' },
   { label: 'Heavy Q', input: 'QQQQWWEE' },
   { label: 'All Q', input: 'QQQQQQQQ' },
+  { label: 'Shortest valid string', input: 'QWER' },
+  { label: 'Only one letter repeated', input: 'QQQQWWWW' },
+  { label: 'Largest allowed length, one letter', input: 'QQQQQQQQQQQQQQQQQQQQQQQQ' },
+  { label: 'Long run: 24 letters', input: 'EQEWRWQQWWERQWREEQRRWQWE' },
 ]
 
 export const code = `function balancedReplacement(s) {

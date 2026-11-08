@@ -50,6 +50,10 @@ export const phases = [
 export const examples = [
   { label: 'Two batches overlap', input: '{"apples":[2,0,3,1,2],"days":[2,1,4,3,1]}' },
   { label: 'Rot before eating', input: '{"apples":[3,1],"days":[1,4]}' },
+  { label: 'Single day', input: '{"apples":[4],"days":[2]}' },
+  { label: 'Nothing to eat', input: '{"apples":[0,0],"days":[0,3]}' },
+  { label: 'Equal expiry days', input: '{"apples":[2,3],"days":[3,3]}' },
+  { label: 'Long run: 10 days', input: '{"apples":[18,19,5,16,14,9,5,14,18,11],"days":[8,7,3,15,6,4,17,4,9,12]}' },
 ]
 
 export const complexity = 'O(D * log n) with a heap, where D is the number of days simulated. This visual sorts the batches each day and caps n at 10.'

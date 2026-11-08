@@ -12,6 +12,11 @@ export const examples = [
   { label: 'Mixed', input: 'a)b(c)d(' },
   { label: 'Closers', input: '))((' },
   { label: 'Nested', input: '(a(b)c)' },
+  { label: 'Single letter', input: 'a' },
+  { label: 'Letter inside one pair', input: '(a)' },
+  { label: 'Only opening brackets', input: '(((' },
+  { label: 'Longest allowed input', input: '((((((((((((((((((((a)))))))))))))))))))' },
+  { label: 'Long run: forty mixed characters', input: 'aa(bbaabb)a(aa(ab))(aaaba(aab()bab)()b(a' },
 ]
 
 export const code = `function minRemoveToMakeValid(s) {

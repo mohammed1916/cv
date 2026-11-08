@@ -12,6 +12,10 @@ const definition = {
     { label: 'Nine bars', input: '{"sweetness":[1,2,3,4,5,6,7,8,9],"k":5}' },
     { label: 'Four bars', input: '{"sweetness":[5,6,7,8],"k":2}' },
     { label: 'No cuts', input: '{"sweetness":[4,1],"k":0}' },
+    { label: 'Single bar, no cuts', input: '{\"sweetness\":[7],\"k\":0}' },
+    { label: 'Equal bars', input: '{\"sweetness\":[3,3,3,3],\"k\":1}' },
+    { label: 'Large sweetness values', input: '{\"sweetness\":[1000000,1,1000000],\"k\":1}' },
+    { label: 'Long run: twelve bars, eleven cuts', input: '{\"sweetness\":[36,47,35,12,41,3,48,22,37,16,17,38],\"k\":11}' },
   ],
 }
 

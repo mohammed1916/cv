@@ -51,6 +51,10 @@ export const phases = [
 export const examples = [
   { label: 'Ball escapes from the left', input: '[[1,1,1],[1,1,1]]' },
   { label: 'Single column', input: '[[1],[-1]]' },
+  { label: 'Single cell', input: '[[1]]' },
+  { label: 'Mixed directions', input: '[[1,-1,1],[-1,1,-1]]' },
+  { label: 'Largest grid, all right', input: '[[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1]]' },
+  { label: 'Long run: 6 by 6', input: '[[-1,1,-1,-1,1,1],[-1,-1,1,-1,-1,1],[1,-1,-1,-1,-1,1],[-1,1,-1,-1,-1,-1],[1,-1,1,1,1,1],[-1,-1,-1,-1,-1,-1]]' },
 ]
 
 export const complexity = 'O(m * n * n) time for an m by n grid, since each ball may move one cell per row. The visual caps the grid at 6 by 6.'

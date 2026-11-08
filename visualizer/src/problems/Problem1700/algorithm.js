@@ -45,6 +45,10 @@ export const examples = [
   { label: 'Shortage of one type', input: '{"students":[1,0,1,1,0],"sandwiches":[1,1,0,0,1]}' },
   { label: 'Everyone eats', input: '{"students":[0,0,1],"sandwiches":[0,1,0]}' },
   { label: 'Top sandwich blocks', input: '{"students":[1,1,1],"sandwiches":[0,1,1]}' },
+  { label: 'Single student match', input: '{"students":[1],"sandwiches":[1]}' },
+  { label: 'Single mismatch', input: '{"students":[0],"sandwiches":[1]}' },
+  { label: 'All equal preferences', input: '{"students":[1,1,1,1],"sandwiches":[1,1,1,1]}' },
+  { label: 'Long run: 20 students', input: '{"students":[1,0,1,1,0,1,0,0,0,0,0,1,0,1,0,1,0,0,1,0],"sandwiches":[0,0,1,0,1,0,1,1,0,1,0,1,0,0,1,0,1,1,0,1]}' },
 ]
 
 export const complexity = 'O(n) time and O(1) extra space for n students.'

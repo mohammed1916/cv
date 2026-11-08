@@ -47,6 +47,10 @@ export const examples = [
   { label: 'Repeated pair', input: '"abab"' },
   { label: 'All distinct letters', input: '"abcd"' },
   { label: 'One letter repeated', input: '"aaa"' },
+  { label: 'Single letter', input: '"a"' },
+  { label: 'Two letters, reversed', input: '"ba"' },
+  { label: 'Repeated substrings', input: '"banana"' },
+  { label: 'Long run: 16 letters', input: '"ebccabbbbabcbade"' },
 ]
 
 export const complexity = 'O(n^2 log n) time for this sorted-suffix method on n characters (the visual caps n at 16). Space is O(n^2) for the suffix strings.'

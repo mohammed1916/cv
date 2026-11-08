@@ -12,6 +12,9 @@ const definition = {
     { label: 'Gap after 7', input: '[5,7,11,13]' },
     { label: 'Decreasing', input: '[15,13,11,7]' },
     { label: 'Constant', input: '[4,4,4]' },
+    { label: 'Smallest valid array', input: '[1,3]' },
+    { label: 'Large common difference', input: '[1000,3000,4000]' },
+    { label: 'Long run: twenty terms, step three', input: '[5,8,11,14,17,20,23,26,29,32,38,41,44,47,50,53,56,59,62,65]' },
   ],
 }
 

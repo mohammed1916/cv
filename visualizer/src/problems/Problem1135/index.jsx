@@ -11,6 +11,10 @@ const definition = {
     { label: 'Triangle', input: '{"cities":3,"roads":[[1,2,4],[2,3,2],[1,3,9]]}' },
     { label: 'Unreachable city', input: '{"cities":4,"roads":[[1,2,3],[3,4,4]]}' },
     { label: 'Single city', input: '{"cities":1,"roads":[]}' },
+    { label: 'Two cities one road', input: '{"cities":2,"roads":[[1,2,5]]}' },
+    { label: 'Equal costs', input: '{"cities":3,"roads":[[1,2,7],[2,3,7],[1,3,7]]}' },
+    { label: 'Zero cost roads', input: '{"cities":3,"roads":[[1,2,0],[2,3,0]]}' },
+    { label: 'Long run: 8 cities, 14 roads', input: '{"cities":8,"roads":[[6,7,970],[6,5,462],[1,8,537],[7,1,900],[1,4,920],[6,2,262],[1,6,143],[5,7,287],[3,4,338],[2,3,198],[4,6,741],[5,8,405],[8,4,477],[3,6,808]]}' },
   ],
 }
 

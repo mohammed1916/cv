@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Two bits', input: '{"n":2,"start":3}' },
     { label: 'Three bits', input: '{"n":3,"start":2}' },
+    { label: 'Single bit', input: '{\"n\":1,\"start\":0}' },
+    { label: 'Start in the middle', input: '{\"n\":3,\"start\":5}' },
+    { label: 'Long run: six bits', input: '{\"n\":6,\"start\":42}' },
   ],
 }
 

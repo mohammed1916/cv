@@ -21,6 +21,9 @@ const definition = {
     { label: 'Row 3', input: '3' },
     { label: 'Row 4', input: '4' },
     { label: 'Row 10', input: '10' },
+    { label: 'Row 1', input: '1' },
+    { label: 'Row 33 at the limit', input: '33' },
+    { label: 'Long run: row 30', input: '30' },
   ],
 };
 

@@ -11,6 +11,8 @@ const definition = {
     { label: 'One passenger', input: '{"n":1}' },
     { label: 'Two passengers', input: '{"n":2}' },
     { label: 'Large count', input: '{"n":9999}' },
+    { label: 'Three passengers', input: '{\"n\":3}' },
+    { label: 'Long run: 100000 passengers', input: '{\"n\":100000}' },
   ],
 }
 

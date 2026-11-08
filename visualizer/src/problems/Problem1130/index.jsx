@@ -11,6 +11,9 @@ const definition = {
     { label: 'Mixed', input: '[3,8,5,2]' },
     { label: 'Two leaves', input: '[4,11]' },
     { label: 'Equal leaves', input: '[5,5,5]' },
+    { label: 'Smallest leaves', input: '[1,1]' },
+    { label: 'Largest leaves', input: '[40,40,40,40]' },
+    { label: 'Long run: 30 leaves', input: '[7,26,34,16,22,13,35,14,34,9,27,19,37,2,40,14,14,11,17,22,40,29,15,1,18,36,25,1,1,32]' },
   ],
 }
 

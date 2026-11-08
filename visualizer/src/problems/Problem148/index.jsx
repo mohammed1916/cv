@@ -13,6 +13,10 @@ const definition = {
     { label: 'Mixed', input: '[9,-3,5,0,7,2]' },
     { label: 'Duplicates', input: '[4,4,1,4]' },
     { label: 'Empty', input: '[]' },
+    { label: 'Equal values keep one sorted block', input: '[5,5,5,5]' },
+    { label: 'Extreme values at the limits', input: '[100000,-100000,0,100000,-100000]' },
+    { label: 'Three values with a tie', input: '[2,-1,2]' },
+    { label: 'Long run: 32 values', input: '[-6595,-10730,20285,77015,86323,-92884,92173,-52213,83996,-51994,-70803,21871,10454,-62103,-42524,-46286,-20060,-92090,91709,28614,-61382,-94675,71906,58975,59608,-2254,11253,-74721,19458,36049,-91766,-47574]' },
   ],
 }
 

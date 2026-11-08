@@ -17,6 +17,9 @@ const definition = {
   complexity: 'O(V + E) for the pages and links reached. The concurrent version uses the same visited rule under a lock.',
   examples: [
     { label: 'Example', input: '{"start":"http://ex.com/a","links":{"http://ex.com/a":["http://ex.com/b","http://other.org/c"],"http://ex.com/b":["http://ex.com/a","http://ex.com/d"]}}' },
+    { label: 'Start page with no links', input: '{\"start\":\"https://site.test/\",\"links\":{\"https://site.test/\":[]}}' },
+    { label: 'Two pages link to each other', input: '{\"start\":\"https://site.test/a\",\"links\":{\"https://site.test/a\":[\"https://site.test/b\"],\"https://site.test/b\":[\"https://site.test/a\"]}}' },
+    { label: 'Long run: ten pages', input: '{\"start\":\"https://site.test/a\",\"links\":{\"https://site.test/a\":[\"https://site.test/h\",\"https://site.test/j\"],\"https://site.test/b\":[\"https://site.test/c\",\"https://site.test/g\"],\"https://site.test/c\":[\"https://site.test/b\"],\"https://site.test/d\":[\"https://site.test/g\",\"https://site.test/f\"],\"https://site.test/e\":[\"https://site.test/d\",\"https://site.test/j\"],\"https://site.test/f\":[\"https://site.test/d\",\"https://site.test/c\"],\"https://site.test/g\":[\"https://site.test/i\",\"https://site.test/a\"],\"https://site.test/h\":[\"https://site.test/f\",\"https://site.test/e\"],\"https://site.test/i\":[\"https://site.test/j\",\"https://site.test/b\"],\"https://site.test/j\":[\"https://site.test/c\",\"https://site.test/a\"]}}' },
   ],
 }
 

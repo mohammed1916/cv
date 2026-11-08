@@ -13,6 +13,9 @@ const definition = {
     { label: 'Chain of three', input: '{"courses":3,"relations":[[1,2],[2,3]]}' },
     { label: 'Diamond', input: '{"courses":4,"relations":[[1,2],[1,3],[2,4],[3,4]]}' },
     { label: 'Cycle', input: '{"courses":2,"relations":[[1,2],[2,1]]}' },
+    { label: 'Single course', input: '{"courses":1,"relations":[]}' },
+    { label: 'No relations', input: '{"courses":3,"relations":[]}' },
+    { label: 'Long run: 10 courses, 15 relations', input: '{"courses":10,"relations":[[1,2],[1,3],[2,4],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[2,7],[3,8],[4,9],[5,10],[1,6]]}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"target":[5,1,3],"arr":[9,4,2,3,4]}' },
     { label: 'Example 2', input: '{"target":[6,4,8,1,3,2],"arr":[4,7,6,2,3,8,6,1]}' },
+  { label: 'Single target value', input: '{"target":[4],"arr":[4]}' },
+  { label: 'Target value absent', input: '{"target":[7],"arr":[1,2,3]}' },
+  { label: 'Repeated values in arr', input: '{"target":[3,5],"arr":[5,5,3,3,10,10]}' },
+  { label: 'Long run: 8 targets, 10 values', input: '{"target":[4,2,8,5,3,7,1,10],"arr":[10,1,9,10,4,2,10,1,4,9]}' },
   ],
 }
 

@@ -37,6 +37,10 @@ export const examples = [
   { label: 'Four zeros', input: '"0100"' },
   { label: 'Leading ones', input: '"110010"' },
   { label: 'No zero', input: '"1111"' },
+  { label: 'Single zero', input: '"0"' },
+  { label: 'Zeros only', input: '"000"' },
+  { label: 'Alternating, 40 characters', input: '"0101010101010101010101010101010101010101"' },
+  { label: 'Long run: 40 bits', input: '"1101101100000111001110001000110010000001"' },
 ]
 
 export const complexity = 'O(n) time and O(n) space for a binary string of length n.'

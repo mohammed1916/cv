@@ -23,6 +23,10 @@ const definition = {
   examples: [
     { label: 'Posts and replies', input: '{"submissions":[{"sub_id":21,"parent_id":null},{"sub_id":22,"parent_id":null},{"sub_id":23,"parent_id":21},{"sub_id":24,"parent_id":21},{"sub_id":23,"parent_id":21},{"sub_id":25,"parent_id":22},{"sub_id":26,"parent_id":null}]}' },
     { label: 'Single post', input: '{"submissions":[{"sub_id":9,"parent_id":null}]}' },
+    { label: 'Lone post with no replies', input: '{\"submissions\":[{\"sub_id\":1,\"parent_id\":null}]}' },
+    { label: 'Two posts, each with a comment', input: '{\"submissions\":[{\"sub_id\":5,\"parent_id\":null},{\"sub_id\":6,\"parent_id\":null},{\"sub_id\":7,\"parent_id\":5},{\"sub_id\":8,\"parent_id\":6}]}' },
+    { label: 'Largest allowed id', input: '{\"submissions\":[{\"sub_id\":999,\"parent_id\":null},{\"sub_id\":998,\"parent_id\":999}]}' },
+    { label: 'Long run: four posts, eight comments', input: '{\"submissions\":[{\"sub_id\":10,\"parent_id\":null},{\"sub_id\":20,\"parent_id\":null},{\"sub_id\":30,\"parent_id\":null},{\"sub_id\":40,\"parent_id\":null},{\"sub_id\":100,\"parent_id\":30},{\"sub_id\":101,\"parent_id\":40},{\"sub_id\":102,\"parent_id\":30},{\"sub_id\":103,\"parent_id\":30},{\"sub_id\":104,\"parent_id\":20},{\"sub_id\":105,\"parent_id\":30},{\"sub_id\":106,\"parent_id\":20},{\"sub_id\":107,\"parent_id\":30}]}' },
   ],
 }
 

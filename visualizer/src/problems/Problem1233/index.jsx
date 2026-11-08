@@ -21,6 +21,9 @@ const definition = {
   examples: [
     { label: "Nested folders", input: '{"folder": ["/src/app/ui", "/src", "/src/app", "/lib/io", "/src/appx", "/lib/io/tmp/x", "/lib"]}' },
     { label: "Prefix is not a parent", input: '{"folder": ["/app/log", "/app/logs", "/app/log/archive", "/app/cache"]}' },
+    { label: 'Single folder', input: '{\"folder\":[\"/a\"]}' },
+    { label: 'Sibling folders are both kept', input: '{\"folder\":[\"/a/b\",\"/a/c\"]}' },
+    { label: 'Long run: sixty-four nested paths', input: '{\"folder\":[\"/b/d/vg\",\"/gc/m/fo/n\",\"/nu\",\"/ayk/h/hdb\",\"/ts/fkz/bs/p\",\"/cg/c\",\"/om\",\"/yxs/zs/hox\",\"/ytq\",\"/ptr/nxn\",\"/dw/fan/n/eb\",\"/yb/oas\",\"/ze/sz\",\"/tt/cin/afl\",\"/mf/v/k/s\",\"/bke/blj/a/nci\",\"/zc/xyx\",\"/v/cn/mjx/bje\",\"/ak/o/o/oy\",\"/mzx/ne\",\"/gy/k/op/c\",\"/x/xs\",\"/cs/b/i\",\"/oz/evu\",\"/r/n\",\"/ioz\",\"/zyf\",\"/fv/oj/fe\",\"/ajz/tuh/q\",\"/v/o/con\",\"/lh/in/fy/mai\",\"/vze/gxn/lmo/j\",\"/zfe/v\",\"/n/l/i\",\"/jh/dk/mex\",\"/na/ilx\",\"/p/lk/hh\",\"/i\",\"/s/gl/j\",\"/ctw/oho\",\"/if\",\"/fxw\",\"/hy/px\",\"/k/df/y\",\"/stg/zdp\",\"/qqi\",\"/moy/ek/fx\",\"/jqc\",\"/k/mw\",\"/sp/nh/k/yix\",\"/jj\",\"/f/igj/s\",\"/hvl/mtu/rhv/wep\",\"/x\",\"/qwv/it\",\"/cs/os/o/cr\",\"/z/f\",\"/kgy/x/swo/x\",\"/ju/k/v\",\"/hg/htf/x\",\"/bm\",\"/y/ht/py/uov\",\"/sha\",\"/tm/t/aa\"]}' },
   ],
 };
 

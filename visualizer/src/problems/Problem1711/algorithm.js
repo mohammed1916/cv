@@ -43,6 +43,10 @@ export const phases = [
 export const examples = [
   { label: 'Small set', input: '[1,3,5,7,9]' },
   { label: 'Repeated values', input: '[2,2,6,2]' },
+  { label: 'Single meal', input: '[5]' },
+  { label: 'All zeros', input: '[0,0,0]' },
+  { label: 'Largest allowed value', input: '[1048576,0,1048576]' },
+  { label: 'Long run: 20 meals', input: '[942849,495671,372651,3008,742229,1001497,889285,186387,964031,918731,127202,473105,24543,466688,706423,3858,791245,334924,274314,971510]' },
 ]
 
 export const complexity = 'O(n * 22) time and O(n) space for n meals. Values are at most 2^20, so the sums stay below 2^21.'

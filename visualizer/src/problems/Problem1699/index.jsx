@@ -35,6 +35,10 @@ const definition = {
   complexity: 'O(n) pass over the calls, with one running total per unordered pair.',
   examples: [
     { label: 'Example', input: '{"Calls":[{"from_id":1,"to_id":2,"duration":60},{"from_id":2,"to_id":1,"duration":30},{"from_id":3,"to_id":4,"duration":100},{"from_id":4,"to_id":3,"duration":40},{"from_id":3,"to_id":4,"duration":10}]}' },
+  { label: 'Single call', input: '{"Calls":[{"from_id":5,"to_id":6,"duration":120}]}' },
+  { label: 'Zero durations', input: '{"Calls":[{"from_id":1,"to_id":2,"duration":0},{"from_id":2,"to_id":1,"duration":0}]}' },
+  { label: 'Equal totals', input: '{"Calls":[{"from_id":1,"to_id":2,"duration":50},{"from_id":2,"to_id":1,"duration":50},{"from_id":8,"to_id":9,"duration":100}]}' },
+  { label: 'Long run: 12 calls', input: '{"Calls":[{"from_id":6,"to_id":3,"duration":27},{"from_id":4,"to_id":5,"duration":197},{"from_id":5,"to_id":2,"duration":163},{"from_id":2,"to_id":5,"duration":46},{"from_id":2,"to_id":1,"duration":187},{"from_id":3,"to_id":6,"duration":27},{"from_id":5,"to_id":2,"duration":137},{"from_id":5,"to_id":1,"duration":16},{"from_id":3,"to_id":6,"duration":48},{"from_id":6,"to_id":3,"duration":190},{"from_id":5,"to_id":4,"duration":7},{"from_id":4,"to_id":1,"duration":75}]}' },
   ],
 }
 

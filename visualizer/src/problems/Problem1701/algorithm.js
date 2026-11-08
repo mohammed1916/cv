@@ -42,6 +42,10 @@ export const phases = [
 export const examples = [
   { label: 'Chef busy at arrival', input: '[[2,4],[3,2],[9,1]]' },
   { label: 'Chef always free', input: '[[1,1],[5,2]]' },
+  { label: 'Single customer', input: '[[1,1]]' },
+  { label: 'Same arrival moment', input: '[[5,3],[5,2]]' },
+  { label: 'Latest arrival listed first', input: '[[100000,100],[1,1]]' },
+  { label: 'Long run: 12 customers', input: '[[6268,57],[11559,64],[16303,48],[27765,2],[37827,31],[44089,61],[49784,93],[58734,35],[65562,17],[73931,6],[80447,92],[91264,23]]' },
 ]
 
 export const complexity = 'O(n) time and O(1) extra space for n customers.'

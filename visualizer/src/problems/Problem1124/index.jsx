@@ -11,6 +11,9 @@ const definition = {
     { label: 'Mixed', input: '[9,9,6,1]' },
     { label: 'Long run', input: '[6,9,9,6,6,9,9,9]' },
     { label: 'No tiring days', input: '[8,8,8]' },
+    { label: 'Single day', input: '[9]' },
+    { label: 'Maximum hours every day', input: '[16,16,16,16]' },
+    { label: 'Long run: 40 days', input: '[12,14,13,7,10,2,8,2,12,3,6,2,13,3,4,7,8,13,11,14,2,11,15,6,10,14,16,2,10,7,7,3,13,10,1,13,4,14,1,14]' },
   ],
 }
 
