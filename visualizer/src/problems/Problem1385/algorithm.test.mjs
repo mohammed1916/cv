@@ -25,8 +25,8 @@ function brute(arr1, arr2, d) {
 test('hand-checked examples', () => {
   assert.equal(solve([6, 2, 20], [1, 30], 3), 2)
   assert.equal(solve([4, 5, 8], [10, 9, 1, 8], 2), 2)
-  assert.equal(solve([1, 4, 9], [2, 8], 1), 0)
-  assert.equal(solve([-5, 0, 7], [-4, 3], 2), 1)
+  assert.equal(solve([1, 4, 9], [2, 8], 1), 1)
+  assert.equal(solve([-5, 0, 7], [-4, 3], 2), 2)
 })
 
 test('strict boundary conditions', () => {
