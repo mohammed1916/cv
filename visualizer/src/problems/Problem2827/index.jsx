@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"low":10,"high":20,"k":3}' },
     { label: 'Divisor 1', input: '{"low":1,"high":10,"k":1}' },
+    { label: "Single number", input: "{\"low\":7,\"high\":7,\"k\":1}" },
+    { label: "Full range, many divisors", input: "{\"low\":1,\"high\":10000,\"k\":20}" },
+    { label: "Equal bounds", input: "{\"low\":12,\"high\":12,\"k\":4}" },
+    { label: "Long run: seeded range", input: "{\"low\":3065,\"high\":3906,\"k\":7}" },
   ],
 }
 

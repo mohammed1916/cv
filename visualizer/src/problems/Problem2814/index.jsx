@@ -12,6 +12,10 @@ const definition = {
     { label: 'Dry detour', input: '["S...D", ".....", "*...."]' },
     { label: 'Caught by water', input: '["S..*", ".X..", "...D"]' },
     { label: 'Short hop', input: '["S.D"]' },
+    { label: "Adjacent start and goal", input: "[\"SD\"]" },
+    { label: "Water between start and goal", input: "[\"S*D\"]" },
+    { label: "Blocked corridor", input: "[\"S*X*D\"]" },
+    { label: "Long run: 8 by 8 seeded grid", input: "[\"SX*X**.X\",\".X*****X\",\"**X*.***\",\"..***.*X\",\"*X**.*.X\",\"X**XXX*.\",\"*XXX*X**\",\"X.****XD\"]" },
   ],
 }
 

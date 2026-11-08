@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums1":[2,3,1],"nums2":[1,2,1]}' },
     { label: 'Example 2', input: '{"nums1":[1,3,2,1],"nums2":[2,2,3,4]}' },
+    { label: 'Single pair', input: '{"nums1":[1],"nums2":[1]}' },
+    { label: 'Equal values in both arrays', input: '{"nums1":[4,4,4],"nums2":[4,4,4]}' },
+    { label: 'Boundary: values 20 and 1', input: '{"nums1":[20,1,20,1,20,1,20,1,20,1],"nums2":[1,20,1,20,1,20,1,20,1,20]}' },
+    { label: 'Long run: 10 pairs', input: '{"nums1":[4,14,6,3,4,8,8,1,8,18],"nums2":[16,13,2,18,14,18,7,2,10,16]}' },
   ],
 }
 

@@ -20,6 +20,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"items":[[3,2],[5,1],[10,1]],"k":2}' },
     { label: 'Swap case', input: '{"items":[[5,1],[5,1],[3,2]],"k":2}' },
+    { label: "Single item", input: "{\"items\":[[4,2]],\"k\":1}" },
+    { label: "Equal profits by category", input: "{\"items\":[[5,1],[5,2],[5,3],[5,4]],\"k\":4}" },
+    { label: "Largest profits", input: "{\"items\":[[10,4],[10,4],[10,1],[10,2],[10,3],[10,4],[10,1],[10,2]],\"k\":8}" },
+    { label: "Long run: 8 seeded items", input: "{\"items\":[[1,4],[8,1],[5,2],[6,3],[7,4],[2,1],[5,2],[6,3]],\"k\":5}" },
   ],
 }
 

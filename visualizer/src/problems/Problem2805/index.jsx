@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Growing waits', input: '{"delay":50,"period":20,"cancelTime":225}' },
     { label: 'Cancel early', input: '{"delay":30,"period":40,"cancelTime":60}' },
+    { label: "Tie: call lands exactly on cancel", input: "{\"delay\":20,\"period\":20,\"cancelTime\":20}" },
+    { label: "No call before cancel", input: "{\"delay\":250,\"period\":250,\"cancelTime\":0}" },
+    { label: "Largest cancel time", input: "{\"delay\":250,\"period\":250,\"cancelTime\":1000}" },
+    { label: "Long run: seeded delay and period", input: "{\"delay\":60,\"period\":46,\"cancelTime\":1000}" },
   ],
 }
 

@@ -12,6 +12,10 @@ const definition = {
     { label: 'Mixed heights', input: '[2, 7, 3, 3, 1]' },
     { label: 'Ties', input: '[4, 4, 4]' },
     { label: 'Single', input: '[9]' },
+    { label: "Single bar", input: "[9]" },
+    { label: "Twelve equal bars", input: "[5,5,5,5,5,5,5,5,5,5,5,5]" },
+    { label: "Tall bars at both ends", input: "[20,1,20,1]" },
+    { label: "Long run: 12 seeded heights", input: "[6,19,16,13,18,7,20,9,6,7,16,1]" },
   ],
 }
 

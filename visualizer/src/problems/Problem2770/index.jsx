@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Target 2', input: '{"nums":[1,3,6,4,1,2],"target":2}' },
     { label: 'Target 0', input: '{"nums":[1,3,6,4,1,2],"target":0}' },
+    { label: 'Single value hits target', input: '{"nums":[5],"target":5}' },
+    { label: 'Equal values', input: '{"nums":[2,2,2,2],"target":4}' },
+    { label: 'Boundary: alternating -20 and 20', input: '{"nums":[-20,20,-20,20,-20,20,-20,20,-20,20],"target":0}' },
+    { label: 'Long run: 10 values', input: '{"nums":[-19,18,-6,11,9,8,-14,-11,-17,11],"target":25}' },
   ],
 }
 

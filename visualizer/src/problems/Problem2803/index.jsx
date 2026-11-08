@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Four steps', input: '{"n":4}' },
     { label: 'Zero', input: '{"n":0}' },
+    { label: 'One step', input: '{"n":1}' },
+    { label: 'Largest n', input: '{"n":10}' },
+    { label: 'Mid n', input: '{"n":7}' },
   ],
 }
 

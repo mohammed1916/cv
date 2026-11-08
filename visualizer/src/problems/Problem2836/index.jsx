@@ -21,6 +21,10 @@ const definition = {
   examples: [
     { label: "Example 1", input: "{\"receiver\": [2, 0, 1], \"k\": 4}" },
     { label: "Example 2", input: "{\"receiver\": [1, 1, 1, 2, 3], \"k\": 3}" },
+    { label: "Single self loop", input: "{\"receiver\":[0],\"k\":5}" },
+    { label: "Equal receivers", input: "{\"receiver\":[1,1,1,1],\"k\":1000}" },
+    { label: "Very large k", input: "{\"receiver\":[1,2,0],\"k\":10000000000}" },
+    { label: "Long run: 24 seeded receivers", input: "{\"receiver\":[5,18,3,8,9,6,23,20,5,2,19,8,9,6,15,4,5,2,3,0,17,6,23,12],\"k\":1000000}" },
   ],
 };
 

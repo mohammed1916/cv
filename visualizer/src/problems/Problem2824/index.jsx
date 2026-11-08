@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[-6,2,5,-2,-7,-1,3],"target":-2}' },
     { label: 'Small', input: '{"nums":[-1,1,2,3,1],"target":3}' },
+    { label: "Single number", input: "{\"nums\":[7],\"target\":7}" },
+    { label: "Equal values", input: "{\"nums\":[2,2,2,2],\"target\":2}" },
+    { label: "Extreme negative target", input: "{\"nums\":[-50,50,-50,50],\"target\":-100}" },
+    { label: "Long run: 30 seeded values", input: "{\"nums\":[22,29,41,-15,3,26,45,27,-49,40,44,45,39,-12,12,4,13,4,5,45,33,-16,-34,-31,25,-31,-21,-9,24,45],\"target\":0}" },
   ],
 }
 

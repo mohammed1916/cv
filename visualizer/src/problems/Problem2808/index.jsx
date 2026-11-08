@@ -22,6 +22,10 @@ const definition = {
     { label: "Example 1", input: "{\"nums\": [1, 2, 1, 2]}" },
     { label: "Example 2", input: "{\"nums\": [2, 1, 3, 3, 2]}" },
     { label: "Example 3", input: "{\"nums\": [5, 5, 5, 5]}" },
+    { label: "Single element", input: "{\"nums\":[7]}" },
+    { label: "Equal neighbours", input: "{\"nums\":[4,4,2,2]}" },
+    { label: "Largest values", input: "{\"nums\":[1000000000,1000000000,1]}" },
+    { label: "Long run: 50 seeded values", input: "{\"nums\":[10,7,20,13,14,11,8,5,18,15,16,13,6,19,8,5,18,7,8,17,10,15,12,17,2,3,12,1,6,3,4,1,10,7,8,1,6,19,12,5,18,19,20,17,14,19,20,1,14,3]}" },
   ],
 };
 

@@ -12,7 +12,11 @@ export const COMPLEXITY = 'O(log n) time for the binary search. This model retur
 export const EXAMPLES = [
   { label: 'Found', input: '{"arr":[1,2,2,2,5],"target":2}' },
   { label: 'Missing', input: '{"arr":[1,2,2,2,5],"target":3}' },
-]
+    { label: 'Single item found', input: '{"arr":[7],"target":7}' },
+    { label: 'Equal values: first match', input: '{"arr":[4,4,4,4],"target":4}' },
+    { label: 'Boundary: repeated negatives and largest value', input: '{"arr":[-3,-3,0,0,5,5,5,9,9,9,12,12],"target":12}' },
+    { label: 'Long run: 12 sorted values, target absent', input: '{"arr":[-37,-34,-33,-27,-19,3,4,5,20,38,44,45],"target":1000}' },
+  ]
 export const WHY = [
   'The sorted list lets a binary search halve the range each step instead of checking every item.',
   'Searching for the first index whose value is greater than the target finds the boundary just after every copy of it.',

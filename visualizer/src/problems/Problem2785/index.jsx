@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"lEetcOde"}' },
     { label: 'Example 2', input: '{"s":"lYmpH"}' },
+    { label: 'Single letter', input: '{"s":"a"}' },
+    { label: 'Equal letters, two cases', input: '{"s":"AaAa"}' },
+    { label: 'Boundary: 30 letters Z and z', input: '{"s":"ZzZzZzZzZzZzZzZzZzZzZzZzZzZzZz"}' },
+    { label: 'Long run: 30 letters', input: '{"s":"JjMdRkJySiHyHyYeNqMmSzWjTxXyCp"}' },
   ],
 }
 

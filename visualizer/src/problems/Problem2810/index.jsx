@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"string"}' },
     { label: 'Example 2', input: '{"s":"poiinter"}' },
+    { label: "Single letter", input: "{\"s\":\"a\"}" },
+    { label: "Repeated letters", input: "{\"s\":\"aabbaa\"}" },
+    { label: "All 26 letters", input: "{\"s\":\"abcdefghijklmnopqrstuvwxyz\"}" },
+    { label: "Long run: 100 seeded letters", input: "{\"s\":\"xgvupungrqzavmxcrchchwpwpyjafifudyhijulmrqrwvsxkbchwnmlghixovovcbchcpmvqvgxqzovylcjcxwjilormpsnkbcfs\"}" },
   ],
 }
 

@@ -21,6 +21,10 @@ const definition = {
     { label: 'Removal cascades', input: '{"obj":{"id":7,"tags":["new","old",3],"meta":{"size":-2,"owner":{"age":-1}}},"fn":"positive"}' },
     { label: 'Array positions close up', input: '{"obj":[1,[4,-4,[8]],"x",[3],{"a":6,"b":5}],"fn":"even"}' },
     { label: 'Nothing survives', input: '{"obj":[[],{"x":[null]},"hi"],"fn":"number"}' },
+    { label: "Single kept value", input: "{\"obj\":[5],\"fn\":\"positive\"}" },
+    { label: "Zero is not positive", input: "{\"obj\":[0,0],\"fn\":\"positive\"}" },
+    { label: "Single removed value", input: "{\"obj\":[-5],\"fn\":\"positive\"}" },
+    { label: "Long run: 10 seeded objects", input: "{\"obj\":[{\"v\":20,\"w\":[0,-5]},{\"v\":-15,\"w\":[0,5]},{\"v\":4,\"w\":[2,-8]},{\"v\":0,\"w\":[-2,1]},{\"v\":-16,\"w\":[8,7]},{\"v\":-12,\"w\":[-2,-9]},{\"v\":-3,\"w\":[9,-1]},{\"v\":1,\"w\":[4,-6]},{\"v\":-1,\"w\":[2,4]},{\"v\":3,\"w\":[-8,8]}],\"fn\":\"even\"}" },
   ],
 }
 

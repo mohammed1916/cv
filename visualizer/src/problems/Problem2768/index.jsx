@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"m":3,"n":3,"coordinates":[[0,0]]}' },
     { label: 'Example 2', input: '{"m":3,"n":3,"coordinates":[[0,0],[1,1],[0,2]]}' },
+    { label: 'Smallest grid, one black cell', input: '{"m":2,"n":2,"coordinates":[[0,0]]}' },
+    { label: 'Two black cells in one row', input: '{"m":3,"n":3,"coordinates":[[1,0],[1,2]]}' },
+    { label: 'Boundary: four corners of 8 by 8', input: '{"m":8,"n":8,"coordinates":[[0,0],[7,7],[0,7],[7,0]]}' },
+    { label: 'Long run: 12 cells on 8 by 8', input: '{"m":8,"n":8,"coordinates":[[0,2],[1,5],[4,4],[3,3],[7,2],[6,0],[7,1],[2,3],[5,2],[0,0],[3,2],[5,6]]}' },
   ],
 }
 

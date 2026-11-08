@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":5,"offers":[[0,0,1],[0,2,2],[1,3,2]]}' },
     { label: 'Big offer', input: '{"n":5,"offers":[[0,0,1],[0,2,10],[1,3,2]]}' },
+    { label: "Single house, no offers", input: "{\"n\":1,\"offers\":[]}" },
+    { label: "Single house with offer", input: "{\"n\":1,\"offers\":[[0,0,3]]}" },
+    { label: "Equal gold offers", input: "{\"n\":3,\"offers\":[[0,1,4],[1,2,4],[0,2,4]]}" },
+    { label: "Long run: 12 houses, 8 seeded offers", input: "{\"n\":12,\"offers\":[[11,11,8],[6,7,7],[1,11,10],[8,9,9],[11,11,6],[6,9,5],[1,7,10],[0,5,3]]}" },
   ],
 }
 

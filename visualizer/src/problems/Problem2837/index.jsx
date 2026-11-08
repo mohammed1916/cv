@@ -13,7 +13,11 @@ const definition = {
   inputLabel: 'Users and rides as JSON',
   url: 'https://leetcode.com/problems/total-traveled-distance/',
   complexity: 'Walkthrough: one left join and one sum per user.',
-  examples: [{ label: 'Sample tables', input: JSON.stringify(sample) }],
+  examples: [{ label: 'Sample tables', input: JSON.stringify(sample) },
+    { label: "User with no rides", input: "{\"users\":[{\"user_id\":9,\"name\":\"Dan\"}],\"rides\":[]}" },
+    { label: "Equal distances", input: "{\"users\":[{\"user_id\":1,\"name\":\"Ann\"},{\"user_id\":2,\"name\":\"Ben\"}],\"rides\":[{\"ride_id\":1,\"user_id\":1,\"distance\":50},{\"ride_id\":2,\"user_id\":2,\"distance\":50}]}" },
+    { label: "Zero distance ride", input: "{\"users\":[{\"user_id\":1,\"name\":\"Eve\"}],\"rides\":[{\"ride_id\":1,\"user_id\":1,\"distance\":0}]}" },
+    { label: "Long run: 12 seeded rides", input: "{\"users\":[{\"user_id\":1,\"name\":\"U1\"},{\"user_id\":2,\"name\":\"U2\"},{\"user_id\":3,\"name\":\"U3\"},{\"user_id\":4,\"name\":\"U4\"}],\"rides\":[{\"ride_id\":1,\"user_id\":3,\"distance\":294},{\"ride_id\":2,\"user_id\":4,\"distance\":127},{\"ride_id\":3,\"user_id\":1,\"distance\":19},{\"ride_id\":4,\"user_id\":2,\"distance\":179},{\"ride_id\":5,\"user_id\":3,\"distance\":181},{\"ride_id\":6,\"user_id\":4,\"distance\":286},{\"ride_id\":7,\"user_id\":1,\"distance\":114},{\"ride_id\":8,\"user_id\":2,\"distance\":250},{\"ride_id\":9,\"user_id\":3,\"distance\":58},{\"ride_id\":10,\"user_id\":4,\"distance\":153},{\"ride_id\":11,\"user_id\":1,\"distance\":107},{\"ride_id\":12,\"user_id\":2,\"distance\":88}]}" },],
 }
 
 function RowTable({ rows }) {

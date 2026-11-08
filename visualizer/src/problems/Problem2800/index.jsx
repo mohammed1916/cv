@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"a":"abc","b":"bca","c":"aaa"}' },
     { label: 'Example 2', input: '{"a":"ab","b":"ba","c":"aba"}' },
+    { label: 'Single letters', input: '{"a":"a","b":"b","c":"c"}' },
+    { label: 'Equal words', input: '{"a":"aa","b":"aa","c":"aa"}' },
+    { label: 'Boundary: six letters each', input: '{"a":"zzzzzz","b":"abcdef","c":"ffffff"}' },
+    { label: 'Long run: six letters each', input: '{"a":"pksauf","b":"gzhbcv","c":"otdbwf"}' },
   ],
 }
 

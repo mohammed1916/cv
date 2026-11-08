@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[2,2,3,1,1,0],"k":3}' },
     { label: 'Example 2', input: '{"nums":[1,3,1,1],"k":2}' },
+    { label: 'Single value, k 1', input: '{"nums":[0],"k":1}' },
+    { label: 'Equal values', input: '{"nums":[5,5,5,5],"k":2}' },
+    { label: 'Boundary: k equals length 12', input: '{"nums":[10,0,10,0,10,0,10,0,10,0,10,0],"k":12}' },
+    { label: 'Long run: 12 values', input: '{"nums":[7,9,7,4,10,5,10,6,3,4,9,10],"k":5}' },
   ],
 }
 

@@ -19,6 +19,10 @@ const definition = {
   examples: [
     { label: "Example 1", input: "{\"s1\": \"abcd\", \"s2\": \"cdab\"}" },
     { label: "Example 2", input: "{\"s1\": \"abcd\", \"s2\": \"dacb\"}" },
+    { label: "Equal strings", input: "{\"s1\":\"abcd\",\"s2\":\"abcd\"}" },
+    { label: "Reversed alphabet", input: "{\"s1\":\"zyxw\",\"s2\":\"wxyz\"}" },
+    { label: "Repeated letters", input: "{\"s1\":\"aaaa\",\"s2\":\"zzzz\"}" },
+    { label: "Mixed letters", input: "{\"s1\":\"lobe\",\"s2\":\"bole\"}" },
   ],
 };
 

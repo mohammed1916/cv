@@ -41,8 +41,12 @@ const definition = {
   }, {
     "label": "Three values",
     "input": "{\"nums\":[7,3,8]}"
-  }
-],
+  },
+    { label: 'Single value', input: '{"nums":[1]}' },
+    { label: 'Equal values', input: '{"nums":[9,9,9,9]}' },
+    { label: 'Boundary: 30 values with 1 and 1000', input: '{"nums":[1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1]}' },
+    { label: 'Long run: 30 values', input: '{"nums":[880,740,606,660,469,226,597,430,811,221,684,894,59,629,619,201,897,499,497,903,409,537,747,455,709,857,99,744,78,382]}' },
+  ],
 }
 
 export default function SumOfSquaresOfSpecialElementsVisualizer() {

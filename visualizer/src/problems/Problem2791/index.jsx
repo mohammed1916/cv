@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"parent":[-1,0,0],"s":"aba"}' },
     { label: 'Two nodes', input: '{"parent":[-1,0],"s":"ab"}' },
+    { label: 'Single root', input: '{"parent":[-1],"s":"a"}' },
+    { label: 'Equal letters', input: '{"parent":[-1,0,0,0],"s":"aaaa"}' },
+    { label: 'Boundary: 10-node chain', input: '{"parent":[-1,0,1,2,3,4,5,6,7,8],"s":"abcdeabcde"}' },
+    { label: 'Long run: 10 nodes', input: '{"parent":[-1,0,1,1,0,3,2,1,0,2],"s":"cbbaadcdbc"}' },
   ],
 }
 

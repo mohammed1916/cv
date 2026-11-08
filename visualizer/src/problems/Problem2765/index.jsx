@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[2,3,4,3,4]}' },
     { label: 'Example 2', input: '{"nums":[4,5,6]}' },
+    { label: 'Smallest: two equal values', input: '{"nums":[5,5]}' },
+    { label: 'Equal values', input: '{"nums":[7,7,7,7]}' },
+    { label: 'Boundary: alternating 20 and 1', input: '{"nums":[20,1,20,1,20,1,20,1,20,1,20,1]}' },
+    { label: 'Long run: 12 values', input: '{"nums":[18,6,12,4,4,2,4,17,16,12,8,9]}' },
   ],
 }
 

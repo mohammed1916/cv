@@ -42,8 +42,12 @@ const definition = {
   {
     "label": "Repeated middle value",
     "input": "{\"nums\":[2,2,3,1]}"
-  }
-],
+  },
+    { label: 'Single value', input: '{"nums":[1]}' },
+    { label: 'Equal values', input: '{"nums":[4,4,4,4]}' },
+    { label: 'Boundary: 1 and 30 alternating', input: '{"nums":[1,30,1,30,1,30,1,30,1,30,1,30,1,30,1,30,1,30,1,30,1,30,1,30,1,30,1,30,1,30]}' },
+    { label: 'Long run: 30 values', input: '{"nums":[16,18,21,29,29,4,3,23,1,17,30,21,27,13,11,28,3,20,10,26,3,8,11,22,23,14,9,12,22,5]}' },
+  ],
 }
 
 export default function CheckIfArrayIsGoodVisualizer() {

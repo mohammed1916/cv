@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"word":"cbaaaabc","forbidden":["aaa","cb"]}' },
     { label: 'Example 2', input: '{"word":"leetcode","forbidden":["de","le","e"]}' },
+    { label: 'Single letter', input: '{"word":"a","forbidden":["b"]}' },
+    { label: 'Repeated letters', input: '{"word":"aaaa","forbidden":["aa"]}' },
+    { label: 'Boundary: 20 letters, 4-letter bans', input: '{"word":"abcdefghijklmnopqrst","forbidden":["abcd","bcde","tsrq","zzzz","mnop","qrst"]}' },
+    { label: 'Long run: 20 letters, 6 bans', input: '{"word":"mpdtqmcimfbzttaqadxr","forbidden":["aab","cd","ef","ghij","ab","zz"]}' },
   ],
 }
 

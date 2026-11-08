@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"num":4,"t":1}' },
     { label: 'Example 2', input: '{"num":3,"t":2}' },
+    { label: 'Smallest values', input: '{"num":1,"t":1}' },
+    { label: 'Largest values', input: '{"num":50,"t":50}' },
+    { label: 'Equal values', input: '{"num":7,"t":7}' },
+    { label: 'Long run: num 37, t 49', input: '{"num":37,"t":49}' },
   ],
 }
 

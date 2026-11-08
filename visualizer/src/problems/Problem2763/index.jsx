@@ -47,8 +47,12 @@ const definition = {
   {
     "label": "Repeats",
     "input": "{\"nums\":[2,2,4,1,4]}"
-  }
-],
+  },
+    { label: 'Single value', input: '{"nums":[1]}' },
+    { label: 'Equal values', input: '{"nums":[2,2,2]}' },
+    { label: 'Boundary: values up to the length 20', input: '{"nums":[20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1]}' },
+    { label: 'Long run: 20 values', input: '{"nums":[9,17,20,7,14,1,1,14,16,19,4,10,8,3,8,2,7,17,17,13]}' },
+  ],
 }
 
 export default function SumImbalanceNumbersVisualizer() {

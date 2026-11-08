@@ -12,7 +12,10 @@ export const COMPLEXITY = 'O(total nodes) time: each object and array node is vi
 export const EXAMPLES = [
   { label: 'Example', input: '{"a":{"$undefined":true},"b":[1,{"$undefined":true}]}' },
   { label: 'Nested', input: '{"x":{"y":{"z":{"$undefined":true}}}}' },
-]
+    { label: 'Empty object', input: '{}' },
+    { label: 'Array with a marker', input: '[{"$undefined":true}]' },
+    { label: 'Deep nesting', input: '{"a":{"b":{"c":{"d":{"$undefined":true}}}}}' },
+  ]
 export const WHY = [
   'JSON cannot store undefined, so this visual marks each undefined with a small object and replaces it with null.',
   'The walk visits every nested object and array, so undefined values buried deep inside are also replaced.',

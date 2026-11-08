@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"1011"}' },
     { label: 'Example 2', input: '{"s":"111"}' },
+    { label: 'Single zero', input: '{"s":"0"}' },
+    { label: 'All ones, equal values', input: '{"s":"1111"}' },
+    { label: 'Boundary: 15 characters', input: '{"s":"101010101010101"}' },
+    { label: 'Long run: 15 random bits', input: '{"s":"110001101010111"}' },
   ],
 }
 

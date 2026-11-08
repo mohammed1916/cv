@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"hours":[0,1,2,3,4],"target":2}' },
     { label: 'Example 2', input: '{"hours":[5,1,4,2,2],"target":6}' },
+    { label: 'Single hour', input: '{"hours":[5],"target":5}' },
+    { label: 'Equal hours', input: '{"hours":[7,7,7,7],"target":7}' },
+    { label: 'Boundary: largest hour value', input: '{"hours":[100000,0,100000],"target":100000}' },
+    { label: 'Long run: 50 hours', input: '{"hours":[25965,8463,1352,24933,27246,21608,8062,14362,20075,2283,5282,2341,19011,28905,23003,12411,15394,20812,30385,17160,3742,28808,10126,1406,30100,2111,11256,993,7361,9655,15500,5583,9247,9468,25786,23440,1541,13012,15426,32738,17149,359,15474,19073,28516,7083,11548,20344,32452,913],"target":50000}' },
   ],
 }
 

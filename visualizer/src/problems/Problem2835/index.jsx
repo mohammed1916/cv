@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,8],"target":7}' },
     { label: 'Example 2', input: '{"nums":[1,32,1,2],"target":12}' },
+    { label: "Single power", input: "{\"nums\":[1],\"target\":1}" },
+    { label: "Equal powers", input: "{\"nums\":[8,8,8],\"target\":16}" },
+    { label: "Largest powers", input: "{\"nums\":[1024,512,1024],\"target\":1024}" },
+    { label: "Long run: 12 seeded powers", input: "{\"nums\":[16,64,1024,1,8,128,32,2,4,16,1024,1],\"target\":1000}" },
   ],
 }
 

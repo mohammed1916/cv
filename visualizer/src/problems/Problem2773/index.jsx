@@ -17,6 +17,9 @@ const definition = {
     { label: 'Single node', input: '{"v":5}' },
     { label: 'Right-leaning chain', input: '{"v":2,"r":{"v":7,"r":{"v":1,"r":{"v":4}}}}' },
     { label: 'Perfect small tree', input: '{"v":10,"l":{"v":5},"r":{"v":15,"l":{"v":12},"r":{"v":20}}}' },
+    { label: 'Boundary: 12 nodes, deep and wide', input: '{"v":50,"l":{"v":25,"l":{"v":12,"l":{"v":6},"r":{"v":18}},"r":{"v":37,"l":{"v":30},"r":{"v":44}}},"r":{"v":75,"l":{"v":60,"r":{"v":66}},"r":{"v":88}}}' },
+    { label: 'Largest value 99 as root', input: '{"v":99,"l":{"v":1},"r":{"v":98}}' },
+    { label: 'Smallest value 1 as a single node', input: '{"v":1}' },
   ],
 }
 

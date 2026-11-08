@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums1": [1, 2, 3], "nums2": [1, 2, 3], "x": 4}' },
     { label: 'Impossible', input: '{"nums1": [1, 2, 3], "nums2": [3, 3, 3], "x": 4}' },
+    { label: "Single pair", input: "{\"nums1\":[0],\"nums2\":[0],\"x\":0}" },
+    { label: "Equal arrays", input: "{\"nums1\":[2,2,2],\"nums2\":[2,2,2],\"x\":6}" },
+    { label: "Largest values", input: "{\"nums1\":[20,20,20,20,20,20,20,20],\"nums2\":[20,20,20,20,20,20,20,20],\"x\":200}" },
+    { label: "Long run: 8 seeded pairs", input: "{\"nums1\":[9,0,12,9,11,9,20,9],\"nums2\":[9,17,5,3,19,7,14,13],\"x\":100}" },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"head":[1,8,9]}' },
     { label: 'Example 2', input: '{"head":[9,9,9]}' },
+    { label: "Single digit zero", input: "{\"head\":[0]}" },
+    { label: "Carry through twelve nines", input: "{\"head\":[9,9,9,9,9,9,9,9,9,9,9,9]}" },
+    { label: "Zeros inside", input: "{\"head\":[1,0,0]}" },
+    { label: "Long run: 12 seeded digits", input: "{\"head\":[2,4,9,0,3,6,3,8,5,6,5,8]}" },
   ],
 }
 

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[51,71,17,24,42]' },
     { label: 'Example 2', input: '[1,2,3,4]' },
+    { label: "Single value", input: "[42]" },
+    { label: "Equal values", input: "[7,7,7,7]" },
+    { label: "Largest values", input: "[9999,9998,9997,9996,9995,9994,9993,9992,9991,9990,9989,9988]" },
+    { label: "Long run: 12 seeded values", input: "[5431,4748,6358,5592,7154,3215,6379,3866,903,4550,1124,2454]" },
   ],
 }
 

@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"low":"1","high":"11"}' },
     { label: 'Two digits', input: '{"low":"90","high":"101"}' },
+    { label: 'Single digit', input: '{"low":"5","high":"5"}' },
+    { label: 'Equal bounds', input: '{"low":"1000","high":"1000"}' },
+    { label: 'Boundary: 1 to 4-digit maximum', input: '{"low":"1","high":"9999"}' },
+    { label: 'Long run: 1234 to 9876', input: '{"low":"1234","high":"9876"}' },
   ],
 }
 

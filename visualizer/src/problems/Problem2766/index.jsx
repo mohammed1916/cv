@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,6,7,8],"moveFrom":[1,7,2],"moveTo":[2,9,5]}' },
     { label: 'Example 2', input: '{"nums":[1,1,3,3],"moveFrom":[1,3],"moveTo":[2,2]}' },
+    { label: 'Single marble, no moves', input: '{"nums":[5],"moveFrom":[],"moveTo":[]}' },
+    { label: 'Move to the same spot', input: '{"nums":[3],"moveFrom":[3],"moveTo":[3]}' },
+    { label: 'Boundary: marbles at 1 and 20', input: '{"nums":[1,20],"moveFrom":[1],"moveTo":[20]}' },
+    { label: 'Long run: 10 marbles, 10 moves', input: '{"nums":[8,19,2,15,7,13,4,17,16,14],"moveFrom":[2,14,11,1,8,17,10,4,12,13],"moveTo":[1,11,9,10,2,18,12,3,20,17]}' },
   ],
 }
 

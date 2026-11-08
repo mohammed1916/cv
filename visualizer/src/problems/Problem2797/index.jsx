@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Two holes, one extra', input: '{"bound":[1,"_",3,"_"],"call":[2,4,5]}' },
     { label: 'Leading hole', input: '{"bound":["_","x"],"call":[9]}' },
+    { label: 'Empty bound and call', input: '{"bound":[],"call":[]}' },
+    { label: 'Equal values in both lists', input: '{"bound":[1,1],"call":[1]}' },
+    { label: 'Boundary: six and six values', input: '{"bound":["_","_","_","_","_","_"],"call":[null,true,"x",1,2,3]}' },
+    { label: 'Long run: six mixed values', input: '{"bound":[1,"b",true,null,2,"_"],"call":["c",3,false,4,"_",5]}' },
   ],
 }
 

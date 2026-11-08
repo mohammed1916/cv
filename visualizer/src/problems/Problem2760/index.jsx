@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[3,2,5,4],"threshold":5}' },
     { label: 'Example 3', input: '{"nums":[2,3,4,5],"threshold":4}' },
+    { label: 'Single element', input: '{"nums":[7],"threshold":7}' },
+    { label: 'Equal values', input: '{"nums":[4,4,4],"threshold":4}' },
+    { label: 'Boundary: alternating 10 and 1 at threshold 10', input: '{"nums":[10,1,10,1,10,1,10,1,10,1,10,1],"threshold":10}' },
+    { label: 'Long run: 12 values', input: '{"nums":[2,7,3,4,8,2,5,2,3,2,2,7],"threshold":5}' },
   ],
 }
 

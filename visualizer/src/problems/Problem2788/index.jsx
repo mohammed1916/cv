@@ -42,8 +42,12 @@ const definition = {
   {
     "label": "Example 2",
     "input": "{\"words\":[\"x||y\",\"|\"],\"separator\":\"|\"}"
-  }
-],
+  },
+    { label: 'Single word', input: '{"words":["solo"],"separator":"-"}' },
+    { label: 'Empty words keep separators', input: '{"words":["","x",""],"separator":"-"}' },
+    { label: 'Boundary: 20 words of 30 characters', input: '{"words":["abcdefghijklmnopqrstuvwxyzabcd","hijklmnopqrstuvwxyzabcdefghijk","opqrstuvwxyzabcdefghijklmnopqr","vwxyzabcdefghijklmnopqrstuvwxy","cdefghijklmnopqrstuvwxyzabcdef","jklmnopqrstuvwxyzabcdefghijklm","qrstuvwxyzabcdefghijklmnopqrst","xyzabcdefghijklmnopqrstuvwxyza","efghijklmnopqrstuvwxyzabcdefgh","lmnopqrstuvwxyzabcdefghijklmno","stuvwxyzabcdefghijklmnopqrstuv","zabcdefghijklmnopqrstuvwxyzabc","ghijklmnopqrstuvwxyzabcdefghij","nopqrstuvwxyzabcdefghijklmnopq","uvwxyzabcdefghijklmnopqrstuvwx","bcdefghijklmnopqrstuvwxyzabcde","ijklmnopqrstuvwxyzabcdefghijkl","pqrstuvwxyzabcdefghijklmnopqrs","wxyzabcdefghijklmnopqrstuvwxyz","defghijklmnopqrstuvwxyzabcdefg"],"separator":"+"}' },
+    { label: 'Long run: 20 words', input: '{"words":["ybrezxtl","genfkpqv","wyinvzox","fbeopklz","vwaoacij","dyvplmyl","utrpxxvv","cvnqipsw","sqjqtzqy","btezmkfi","rnazycck","zqwajmam","pksaufxw","ynnbfpuy","oijbrzki","wkfccshj","nfbkvcel","vhwlhncv","lcslsfzx","ufomdpoz"],"separator":"_"}' },
+  ],
 }
 
 export default function SplitStringsBySeparatorVisualizer() {

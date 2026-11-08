@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[5,4,2,4]' },
     { label: 'Ascending', input: '[1,2,3]' },
+    { label: 'Single value', input: '[1]' },
+    { label: 'Equal values', input: '[4,4,4,4]' },
+    { label: 'Boundary: all 10s', input: '[10,10,10,10,10,10,10,10,10,10,10,10]' },
+    { label: 'Long run: 12 values', input: '[1,7,5,9,8,3,6,6,6,3,6,5]' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[4,6,1,2],"k":2}' },
     { label: 'Equal values', input: '{"nums":[1,1,1,1],"k":10}' },
+    { label: 'Single zero, k 0', input: '{"nums":[0],"k":0}' },
+    { label: 'Equal values', input: '{"nums":[5,5,5,5],"k":2}' },
+    { label: 'Boundary: 30 and 0 alternating, k 10', input: '{"nums":[30,0,30,0,30,0,30,0,30,0,30,0],"k":10}' },
+    { label: 'Long run: 12 values', input: '{"nums":[19,2,18,15,28,13,4,10,26,17,6,14],"k":6}' },
   ],
 }
 

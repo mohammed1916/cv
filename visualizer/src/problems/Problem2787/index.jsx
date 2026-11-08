@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Squares', input: '{"n":10,"x":2}' },
     { label: 'Linear', input: '{"n":4,"x":1}' },
+    { label: 'Smallest n and x', input: '{"n":1,"x":1}' },
+    { label: 'Largest n with x 5', input: '{"n":60,"x":5}' },
+    { label: 'Long run: n 40, x 3', input: '{"n":40,"x":3}' },
   ],
 }
 

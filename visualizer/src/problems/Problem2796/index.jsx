@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Three copies', input: '{"str":"ab","times":3}' },
     { label: 'Zero copies', input: '{"str":"xyz","times":0}' },
+    { label: 'Empty string', input: '{"str":"","times":5}' },
+    { label: 'One copy', input: '{"str":"ab","times":1}' },
+    { label: 'Long run: twenty copies', input: '{"str":"abc","times":20}' },
   ],
 }
 

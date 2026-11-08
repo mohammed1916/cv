@@ -18,6 +18,10 @@ const definition = {
     { label: 'Three children', input: '[[1,-1],[2,1],[3,1],[4,1]]' },
     { label: 'Chain down', input: '[[4,-1],[9,4],[2,9],[7,2],[5,7]]' },
     { label: 'Child before parent', input: '[[3,-1],[6,4],[4,3]]' },
+    { label: 'Single root', input: '[[7,-1]]' },
+    { label: 'Siblings with the same parent', input: '[[1,-1],[2,1],[3,1]]' },
+    { label: 'Boundary: largest node 99 as root', input: '[[99,-1],[1,99]]' },
+    { label: 'Long run: 12-node chain', input: '[[90,-1],[80,90],[70,80],[60,70],[50,60],[40,50],[30,40],[20,30],[10,20],[9,10],[8,9],[7,8]]' },
   ],
 }
 

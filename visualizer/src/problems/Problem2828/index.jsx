@@ -21,6 +21,10 @@ const definition = {
     { label: "Example 1", input: "{\"words\": [\"alice\", \"bob\", \"charlie\"], \"s\": \"abc\"}" },
     { label: "Example 2", input: "{\"words\": [\"an\", \"apple\"], \"s\": \"a\"}" },
     { label: "Example 3", input: "{\"words\": [\"never\", \"gonna\", \"give\", \"up\", \"on\", \"you\"], \"s\": \"ngguoy\"}" },
+    { label: "Single word", input: "{\"words\":[\"a\"],\"s\":\"a\"}" },
+    { label: "Repeated word", input: "{\"words\":[\"ab\",\"ab\"],\"s\":\"abab\"}" },
+    { label: "Longest word", input: "{\"words\":[\"abcdefghij\"],\"s\":\"j\"}" },
+    { label: "Long run: 100 seeded words", input: "{\"words\":[\"j\",\"kz\",\"nob\",\"ofaz\",\"ruzaf\",\"slydgd\",\"vaxghmt\",\"wrwjgtkz\",\"zivmhczox\",\"axupilobaf\",\"d\",\"ed\",\"hur\",\"ijqz\",\"lapcl\",\"mpofmj\",\"pgninqt\",\"qvmlozil\",\"tmlopixad\",\"ubkpqpmpgz\",\"x\",\"yh\",\"byh\",\"engb\",\"fefet\",\"itehun\",\"jkditwr\",\"mzclufgz\",\"nqbovmvmj\",\"qfarwvkbmt\",\"r\",\"un\",\"vcx\",\"ytwb\",\"zivez\",\"czuhat\",\"dotkbap\",\"gfsncjel\",\"hurqdstyr\",\"klqtczinul\",\"l\",\"or\",\"pgn\",\"sxmd\",\"tmlgh\",\"wdkjgx\",\"xsjmhgn\",\"ajinipcx\",\"byhqjwrmx\",\"epgtkfizaf\",\"f\",\"iv\",\"jkd\",\"mbcf\",\"nqbgn\",\"qhajod\",\"ryzmpml\",\"unypotaj\",\"xexspcpyd\",\"ytwvqjglgz\",\"b\",\"cz\",\"fqt\",\"gfsf\",\"jwrit\",\"klqluh\",\"ncpovqj\",\"ororwzyv\",\"rinsxgpkj\",\"sxmvypezmt\",\"v\",\"wd\",\"zuj\",\"ajih\",\"dahkb\",\"epgncn\",\"hgfobwh\",\"ivercdwj\",\"lmdudmnwr\",\"mdcxevclul\",\"p\",\"qj\",\"tyz\",\"upyh\",\"xexkh\",\"yvwnit\",\"bkvqjaf\",\"cbutkjwv\",\"fqtwlqlkx\",\"ghszkzaxaf\",\"j\",\"kn\",\"ncp\",\"otoj\",\"rinmp\",\"uzmpox\",\"volspgf\",\"yfktqnuh\",\"zujwrwjwd\",\"clizsfyjgz\"],\"s\":\"kzctcvurafihsjaxqnmhkrulstyhktgbwfczslozmjurqbivgjwvirkfohilibwnknwhkvabofijibqtutifmlqzufmpsfaxcvot\"}" },
   ],
 };
 

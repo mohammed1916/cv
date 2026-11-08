@@ -12,7 +12,10 @@ export const COMPLEXITY = 'O(1) work: one callback call and one settlement. The 
 export const EXAMPLES = [
   { label: 'Success', input: '{"ok":true,"value":42,"ms":20}' },
   { label: 'Failure', input: '{"ok":false,"error":"boom","ms":5}' },
-]
+    { label: 'Zero delay success', input: '{"ok":true,"value":0,"ms":0}' },
+    { label: 'Maximum delay failure', input: '{"ok":false,"error":"timeout","ms":1000}' },
+    { label: 'Failure with empty error text', input: '{"ok":false,"error":"","ms":3}' },
+  ]
 export const WHY = [
   'The wrapper creates a promise and calls the old callback-style function with a handler that takes an error first.',
   'If the error is set, the promise rejects; otherwise it resolves with the value.',

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Three values', input: '{"arr":[3,1,4]}' },
     { label: 'Mixed', input: '{"arr":["x",true,null]}' },
+    { label: 'Single value', input: '{"arr":[9]}' },
+    { label: 'Equal values', input: '{"arr":[2,2,2]}' },
+    { label: 'Boundary: negatives and large values', input: '{"arr":[-10000,10000,0]}' },
+    { label: 'Long run: 20 values', input: '{"arr":[-43,38,37,45,-9,5,-33,-44,-20,-31,-40,39,-28,2,5,32,-5,4,7,-44]}' },
   ],
 }
 

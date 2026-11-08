@@ -17,6 +17,9 @@ const definition = {
     { label: "k = 5 gives 74", input: "5" },
     { label: "k = 4 gives 47", input: "4" },
     { label: "k = 7 gives 444", input: "7" },
+    { label: 'Smallest k', input: '1' },
+    { label: 'Middle k', input: '20' },
+    { label: 'Largest k allowed', input: '126' },
   ],
 };
 

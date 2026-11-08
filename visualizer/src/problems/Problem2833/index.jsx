@@ -19,6 +19,10 @@ const definition = {
     { label: "Example 1", input: "{\"moves\": \"L_RL__R\"}" },
     { label: "Example 2", input: "{\"moves\": \"_R__LL_\"}" },
     { label: "Example 3", input: "{\"moves\": \"_______\"}" },
+    { label: "Single underscore", input: "{\"moves\":\"_\"}" },
+    { label: "Single left move", input: "{\"moves\":\"L\"}" },
+    { label: "Fifty symbols", input: "{\"moves\":\"LR_LR_LR_LR_LR_LR_LR_LR_LR_LR_LR_LR_LR_LR_LR_LR_LR\"}" },
+    { label: "Long run: 50 seeded symbols", input: "{\"moves\":\"LRL_RRRLR__LLL___L___L_R___LLLRLLRL_LLLRLRLLR_RLL_\"}" },
   ],
 };
 

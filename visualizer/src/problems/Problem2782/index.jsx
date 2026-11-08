@@ -19,6 +19,10 @@ const definition = {
     { label: 'Mixed groups', input: '[0,1,0,2,1,2,3]' },
     { label: 'One group', input: '[5,5,5,5]' },
     { label: 'All distinct', input: '[4,0,7,2,9]' },
+    { label: 'Single label', input: '[0]' },
+    { label: 'Equal labels', input: '[3,3,3,3]' },
+    { label: 'Boundary: labels 0 and 11', input: '[11,0,11,0,11,0,11,0,11,0,11,0]' },
+    { label: 'Long run: 12 labels', input: '[0,6,8,1,5,11,5,4,10,9,3,10]' },
   ],
 }
 

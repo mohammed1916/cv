@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[2,2,1],"m":4}' },
     { label: 'Example 2', input: '{"nums":[2,1,3],"m":5}' },
+    { label: "Single number", input: "{\"nums\":[7],\"m\":1}" },
+    { label: "Equal values", input: "{\"nums\":[3,3,3],\"m\":9}" },
+    { label: "Largest m", input: "{\"nums\":[10,10,10,10,10,10,10,10],\"m\":30}" },
+    { label: "Long run: 8 seeded values", input: "{\"nums\":[9,2,7,2,1,2,9,2],\"m\":30}" },
   ],
 }
 

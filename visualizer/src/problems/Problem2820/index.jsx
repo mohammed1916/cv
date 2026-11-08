@@ -13,7 +13,11 @@ const definition = {
   inputLabel: 'Votes as JSON',
   url: 'https://leetcode.com/problems/election-results/',
   complexity: 'Walkthrough: distinct picks, equal shares, then tie-aware maximum.',
-  examples: [{ label: 'Sample tables', input: JSON.stringify(sample) }],
+  examples: [{ label: 'Sample tables', input: JSON.stringify(sample) },
+    { label: "Single vote", input: "{\"votes\":[{\"voter\":\"A\",\"candidate\":\"X\"}]}" },
+    { label: "Tie between candidates", input: "{\"votes\":[{\"voter\":\"A\",\"candidate\":\"X\"},{\"voter\":\"B\",\"candidate\":\"Y\"}]}" },
+    { label: "Only empty candidates", input: "{\"votes\":[{\"voter\":\"A\",\"candidate\":null},{\"voter\":\"B\",\"candidate\":null}]}" },
+    { label: "Long run: 12 seeded votes", input: "{\"votes\":[{\"voter\":\"V4\",\"candidate\":\"Z\"},{\"voter\":\"V3\",\"candidate\":\"X\"},{\"voter\":\"V1\",\"candidate\":\"Z\"},{\"voter\":\"V3\",\"candidate\":\"X\"},{\"voter\":\"V3\",\"candidate\":\"Z\"},{\"voter\":\"V5\",\"candidate\":\"X\"},{\"voter\":\"V1\",\"candidate\":\"Z\"},{\"voter\":\"V5\",\"candidate\":\"X\"},{\"voter\":\"V4\",\"candidate\":\"Z\"},{\"voter\":\"V1\",\"candidate\":\"X\"},{\"voter\":\"V1\",\"candidate\":\"Z\"},{\"voter\":\"V4\",\"candidate\":\"X\"}]}" },],
 }
 
 function RowTable({ rows }) {

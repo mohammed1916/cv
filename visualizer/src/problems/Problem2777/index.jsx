@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Summer days', input: '{"start":"2023-07-28","end":"2023-08-06","step":4}' },
     { label: 'Leap day', input: '{"start":"2024-02-27","end":"2024-03-02","step":2}' },
+    { label: 'Single day range', input: '{"start":"2025-01-01","end":"2025-01-01","step":1}' },
+    { label: 'Step of 31 days across a month end', input: '{"start":"2026-02-28","end":"2026-03-01","step":31}' },
+    { label: 'Long run: one year, step 31', input: '{"start":"2025-12-25","end":"2026-12-25","step":31}' },
   ],
 }
 

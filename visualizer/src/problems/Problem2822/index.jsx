@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Shared value', input: '{"pairs":[["a","x"],["b","y"],["c","x"]]}' },
     { label: 'Three keys share', input: '{"pairs":[["id",7],["code",7],["tag",9],["size",7]]}' },
+    { label: "Single pair", input: "{\"pairs\":[[\"only\",1]]}" },
+    { label: "Empty string key", input: "{\"pairs\":[[\"\",0]]}" },
+    { label: "Equal string values", input: "{\"pairs\":[[\"a\",\"same\"],[\"b\",\"same\"],[\"c\",\"other\"]]}" },
+    { label: "Long run: 12 seeded pairs", input: "{\"pairs\":[[\"k0\",35],[\"k1\",68],[\"k2\",45],[\"k3\",86],[\"k4\",91],[\"k5\",44],[\"k6\",5],[\"k7\",66],[\"k8\",43],[\"k9\",28],[\"k10\",81],[\"k11\",78]]}" },
   ],
 }
 

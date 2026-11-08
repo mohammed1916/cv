@@ -14,6 +14,10 @@ const definition = {
   complexity: 'O(n log n) here because the visual sorts tasks by delay. The real work is O(n).',
   examples: [
     { label: 'Out of order', input: '{"tasks":[{"value":"slow","delay":90},{"value":"fast","delay":10},{"value":"mid","delay":40}]}' },
+    { label: 'Single task', input: '{"tasks":[{"value":"only","delay":0}]}' },
+    { label: 'Equal delays keep input order', input: '{"tasks":[{"value":"a","delay":5},{"value":"b","delay":5},{"value":"c","delay":5}]}' },
+    { label: 'Boundary: delays 0 and 1000', input: '{"tasks":[{"value":"slow","delay":1000},{"value":"now","delay":0}]}' },
+    { label: 'Long run: 10 tasks', input: '{"tasks":[{"value":"t0","delay":37},{"value":"t1","delay":98},{"value":"t2","delay":66},{"value":"t3","delay":11},{"value":"t4","delay":22},{"value":"t5","delay":14},{"value":"t6","delay":37},{"value":"t7","delay":77},{"value":"t8","delay":28},{"value":"t9","delay":3}]}' },
   ],
 }
 

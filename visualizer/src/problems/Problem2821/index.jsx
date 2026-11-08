@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Short delay', input: '{"value":"ready","ms":40}' },
     { label: 'Number', input: '{"value":42,"ms":120}' },
+    { label: "Null value at zero delay", input: "{\"value\":null,\"ms\":0}" },
+    { label: "Nested array at zero delay", input: "{\"value\":[1,[2]],\"ms\":0}" },
+    { label: "Object value after 60 ms", input: "{\"value\":{\"ok\":true},\"ms\":60}" },
+    { label: "Long run: 1000 ms delay", input: "{\"value\":\"late\",\"ms\":1000}" },
   ],
 }
 

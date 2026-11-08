@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Repeated id', input: '{"keys":["id","name","id"],"values":[7,"Ada",9]}' },
     { label: 'Keys of mixed types', input: '{"keys":[3,"3",true],"values":["x","y","z"]}' },
+    { label: 'Single key', input: '{"keys":["a"],"values":[1]}' },
+    { label: 'Boolean keys', input: '{"keys":[true,false,true],"values":[1,2,3]}' },
+    { label: 'Boundary: 12 keys', input: '{"keys":["k0","k1","k2","k3","k4","k5","k6","k7","k8","k9","k10","k11"],"values":[0,1,2,3,4,5,6,7,8,9,10,11]}' },
+    { label: 'Long run: 12 mixed keys', input: '{"keys":["x0",1,"x2",true,"x4",5,"x6",7,"x8",true,"x10",11],"values":[48,65,49,71,37,71,69,83,14,78,62,12]}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"usageLimits":[1,2,5]}' },
     { label: 'Example 2', input: '{"usageLimits":[2,1,2]}' },
+    { label: 'Single limit', input: '{"usageLimits":[1]}' },
+    { label: 'Equal limits', input: '{"usageLimits":[3,3,3]}' },
+    { label: 'Boundary: six limits at 6', input: '{"usageLimits":[6,6,6,6,6,6]}' },
+    { label: 'Long run: 6 limits', input: '{"usageLimits":[5,1,5,4,2,4]}' },
   ],
 }
 

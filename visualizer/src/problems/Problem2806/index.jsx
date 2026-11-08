@@ -36,8 +36,12 @@ const definition = {
   {
     "label": "Full amount",
     "input": "{\"purchaseAmount\":100}"
-  }
-],
+  },
+    { label: "Zero purchase", input: "{\"purchaseAmount\":0}" },
+    { label: "Tie at five rounds up", input: "{\"purchaseAmount\":5}" },
+    { label: "Just below tie rounds down", input: "{\"purchaseAmount\":54}" },
+    { label: "Tie at 95 rounds up", input: "{\"purchaseAmount\":95}" },
+  ],
 }
 
 export default function AccountBalanceAfterRoundedPurchaseVisualizer() {

@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,3,2,3,1,3],"k":3}' },
     { label: 'Example 2', input: '{"nums":[1,1,2,2,1,1],"k":2}' },
+    { label: "Single value", input: "{\"nums\":[2],\"k\":0}" },
+    { label: "Equal values", input: "{\"nums\":[4,4,4,4],\"k\":5}" },
+    { label: "Zero removals", input: "{\"nums\":[1,2,3,4],\"k\":0}" },
+    { label: "Long run: 12 seeded values", input: "{\"nums\":[1,2,3,4,1,2,3,4,1,2,3,4],\"k\":5}" },
   ],
 }
 

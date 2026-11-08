@@ -20,6 +20,10 @@ const definition = {
     { label: 'Mixed tree', input: '{"tree":[4,2,6,1,3,5,7],"k":2}' },
     { label: 'Sparse tree', input: '{"tree":[5,1,8,null,4,9,null],"k":1}' },
     { label: 'Equal values', input: '{"tree":[3,3,3,1],"k":1}' },
+    { label: 'Single root, k 0', input: '{"tree":[1],"k":0}' },
+    { label: 'Equal values', input: '{"tree":[5,5,5],"k":1}' },
+    { label: 'Boundary: 15 entries with nulls', input: '{"tree":[-99,99,null,null,null,null,null,null,null,null,null,null,null,null,null],"k":15}' },
+    { label: 'Long run: 15 entries with nulls', input: '{"tree":[7,-34,48,24,null,20,null,9,-48,-25,null,-36,-18,41,-40],"k":6}' },
   ],
 }
 

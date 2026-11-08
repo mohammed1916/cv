@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"head":[18,6,10,3]}' },
     { label: 'Two nodes', input: '{"head":[7,5]}' },
+    { label: "Single node", input: "{\"head\":[5]}" },
+    { label: "Equal values", input: "{\"head\":[6,6,6]}" },
+    { label: "Largest values", input: "{\"head\":[1000,999,1000]}" },
+    { label: "Long run: 12 seeded values", input: "{\"head\":[645,798,11,836,401,290,455,184,45,78,75,388]}" },
   ],
 }
 

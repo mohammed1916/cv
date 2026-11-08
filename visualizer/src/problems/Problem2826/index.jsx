@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[2,1,3,2,1]}' },
     { label: 'Example 2', input: '{"nums":[1,3,2,1,3,3]}' },
+    { label: "Single value", input: "{\"nums\":[2]}" },
+    { label: "All equal", input: "{\"nums\":[3,3,3,3,3,3,3,3,3,3,3,3]}" },
+    { label: "Twelve in a cycle", input: "{\"nums\":[1,2,3,1,2,3,1,2,3,1,2,3]}" },
+    { label: "Long run: 12 seeded values", input: "{\"nums\":[1,3,2,1,3,1,1,1,3,2,2,2]}" },
   ],
 }
 

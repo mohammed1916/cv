@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"str1":"abc","str2":"ad"}' },
     { label: 'Example 2', input: '{"str1":"ab","str2":"d"}' },
+    { label: "Single letters", input: "{\"str1\":\"a\",\"str2\":\"a\"}" },
+    { label: "Equal strings", input: "{\"str1\":\"same\",\"str2\":\"same\"}" },
+    { label: "Longest 20 letters", input: "{\"str1\":\"abcdefghijklmnopqrst\",\"str2\":\"tsrqponmlkjihgfedcba\"}" },
+    { label: "Long run: 20 seeded letters", input: "{\"str1\":\"cnghapknmtgnodmnwvgr\",\"str2\":\"fcfkbybarqhepexqvaho\"}" },
   ],
 }
 
