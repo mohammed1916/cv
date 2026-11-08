@@ -18,6 +18,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"ababccc"}' },
     { label: 'Example 2', input: '{"s":"aba"}' },
+    { label: "Single letter", input: "{\"s\":\"a\"}" },
+    { label: "All letters equal", input: "{\"s\":\"aaaa\"}" },
+    { label: "Mixed repeats", input: "{\"s\":\"abcabcab\"}" },
+    { label: "Twelve distinct letters", input: "{\"s\":\"abcdefghijkl\"}" },
+    { label: "Long run: 12 letters", input: "{\"s\":\"acacbccaebde\"}" },
   ],
 }
 

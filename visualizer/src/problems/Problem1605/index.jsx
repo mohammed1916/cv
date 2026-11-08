@@ -11,6 +11,11 @@ const definition = {
     { label: 'Sample', input: '{"rows":[5,0,4],"cols":[2,6,1]}' },
     { label: 'Single cell', input: '{"rows":[7],"cols":[7]}' },
     { label: 'Zero row', input: '{"rows":[3,0,2],"cols":[1,4]}' },
+    { label: "Single cell", input: "{\"rows\":[4],\"cols\":[4]}" },
+    { label: "All zero sums", input: "{\"rows\":[0,0],\"cols\":[0]}" },
+    { label: "Equal row and column sums", input: "{\"rows\":[2,2],\"cols\":[2,2]}" },
+    { label: "Eight by eight at maximum", input: "{\"rows\":[50,50,50,50,50,50,50,50],\"cols\":[50,50,50,50,50,50,50,50]}" },
+    { label: "Long run: 8 rows and columns", input: "{\"rows\":[37,43,5,6,16,14,1,24],\"cols\":[50,50,46,0,0,0,0,0]}" },
   ],
 }
 

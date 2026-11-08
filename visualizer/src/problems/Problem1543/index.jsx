@@ -13,7 +13,7 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, python, sql,
   inputLabel: INPUT_LABEL,
   complexity: COMPLEXITY,
-  examples: [{ label: 'Sample', input: EXAMPLE }],
+  examples: [{ label: 'Sample', input: EXAMPLE }, { label: 'Single sale', input: '{"sales":[{"sale_id":1,"product_name":"Pear","sale_date":"2021-01-05"}]}' }, { label: 'Same product, same month', input: '{"sales":[{"sale_id":1,"product_name":"Kiwi","sale_date":"2021-03-01"},{"sale_id":2,"product_name":"kiwi ","sale_date":"2021-03-30"}]}' }, { label: 'No sales', input: '{"sales":[]}' }, { label: 'Long run: 12 sales', input: '{"sales":[{"sale_id":1,"product_name":"apple ","sale_date":"2021-02-06"},{"sale_id":2,"product_name":"BANANA","sale_date":"2021-03-10"},{"sale_id":3,"product_name":"apple ","sale_date":"2021-01-07"},{"sale_id":4,"product_name":"Apple","sale_date":"2021-02-18"},{"sale_id":5,"product_name":"Cherry","sale_date":"2021-03-13"},{"sale_id":6,"product_name":"BANANA","sale_date":"2021-01-02"},{"sale_id":7,"product_name":"apple ","sale_date":"2021-01-15"},{"sale_id":8,"product_name":"Apple","sale_date":"2021-02-01"},{"sale_id":9,"product_name":"BANANA","sale_date":"2021-01-13"},{"sale_id":10,"product_name":"Cherry","sale_date":"2021-03-23"},{"sale_id":11,"product_name":"Cherry","sale_date":"2021-03-05"},{"sale_id":12,"product_name":"Apple","sale_date":"2021-01-16"}]}' }],
 }
 
 const formatValue = value => value === undefined || value === null ? '' : typeof value === 'boolean' ? (value ? 'yes' : 'no') : String(value)

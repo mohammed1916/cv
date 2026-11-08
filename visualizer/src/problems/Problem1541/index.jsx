@@ -17,6 +17,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"(()))"}' },
     { label: 'Example 2', input: '{"s":"())"}' },
+    { label: 'Single bracket', input: '{"s":")"}' },
+    { label: 'Balanced pair', input: '{"s":"()"}' },
+    { label: 'Only opening brackets', input: '{"s":"((("}' },
+    { label: 'Largest: 20 brackets', input: '{"s":"(((((((((())))))))))"}' },
+    { label: 'Long run: 20 brackets', input: '{"s":"))((()(((((((())))(("}' },
   ],
 }
 

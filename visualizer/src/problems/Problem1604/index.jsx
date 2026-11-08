@@ -18,6 +18,10 @@ const definition = {
     { label: 'Morning run', input: '{"keyName":["ava","ava","ava","ben","ben"],"keyTime":["08:05","08:30","09:04","12:00","12:30"]}' },
     { label: 'Exactly an hour', input: '{"keyName":["mia","mia","mia","mia"],"keyTime":["07:00","08:01","08:59","09:01"]}' },
     { label: 'Two alerts', input: '{"keyName":["kai","kai","kai","eli","eli","eli"],"keyTime":["18:00","18:45","18:59","06:00","06:20","06:40"]}' },
+    { label: "Single swipe", input: "{\"keyName\":[\"ana\"],\"keyTime\":[\"10:00\"]}" },
+    { label: "Three swipes, one hour exactly", input: "{\"keyName\":[\"bo\",\"bo\",\"bo\"],\"keyTime\":[\"10:00\",\"10:30\",\"11:00\"]}" },
+    { label: "Twenty swipes, one name", input: "{\"keyName\":[\"cy\",\"cy\",\"cy\",\"cy\",\"cy\",\"cy\",\"cy\",\"cy\",\"cy\",\"cy\",\"cy\",\"cy\",\"cy\",\"cy\",\"cy\",\"cy\",\"cy\",\"cy\",\"cy\",\"cy\"],\"keyTime\":[\"00:00\",\"01:07\",\"02:14\",\"03:21\",\"04:28\",\"05:35\",\"06:42\",\"07:49\",\"08:56\",\"09:03\",\"10:10\",\"11:17\",\"12:24\",\"13:31\",\"14:38\",\"15:45\",\"16:52\",\"17:59\",\"18:06\",\"19:13\"]}" },
+    { label: "Long run: 20 swipes", input: "{\"keyName\":[\"userd\",\"userb\",\"usera\",\"userb\",\"userc\",\"userc\",\"usere\",\"userd\",\"userb\",\"userd\",\"userc\",\"usere\",\"usera\",\"userd\",\"userd\",\"userd\",\"usera\",\"userb\",\"userc\",\"userb\"],\"keyTime\":[\"06:48\",\"07:06\",\"08:55\",\"09:45\",\"06:49\",\"07:40\",\"08:13\",\"09:02\",\"06:43\",\"07:56\",\"08:45\",\"09:04\",\"06:13\",\"07:30\",\"08:45\",\"09:25\",\"06:36\",\"07:45\",\"08:07\",\"09:33\"]}" },
   ],
 }
 

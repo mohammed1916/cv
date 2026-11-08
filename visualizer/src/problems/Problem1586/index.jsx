@@ -17,6 +17,10 @@ const definition = {
   complexity: 'O(1) per call in this array model, where the in-order values stand in for the tree walk.',
   examples: [
     { label: 'Example', input: '{"values":[2,5,9,12,20],"ops":["next","hasNext","next","next","prev","hasPrevious","next","next","hasNext"]}' },
+    { label: "Single value", input: "{\"values\":[7],\"ops\":[\"hasNext\",\"next\",\"hasNext\",\"prev\",\"hasPrevious\"]}" },
+    { label: "Walk forward and back", input: "{\"values\":[1,2,3],\"ops\":[\"next\",\"next\",\"hasNext\",\"prev\",\"prev\",\"hasPrevious\"]}" },
+    { label: "Ten values, twenty calls", input: "{\"values\":[1,2,3,4,5,6,7,8,9,10],\"ops\":[\"next\",\"next\",\"next\",\"prev\",\"next\",\"hasNext\",\"next\",\"next\",\"next\",\"next\",\"hasPrevious\",\"prev\",\"prev\",\"next\",\"hasNext\",\"next\",\"next\",\"prev\",\"hasPrevious\",\"next\"]}" },
+    { label: "Long run: 10 values, 20 calls", input: "{\"values\":[3,5,6,7,8,10,12,13,16,17],\"ops\":[\"prev\",\"next\",\"hasNext\",\"hasPrevious\",\"hasNext\",\"hasNext\",\"hasNext\",\"prev\",\"next\",\"hasPrevious\",\"hasNext\",\"next\",\"prev\",\"hasPrevious\",\"hasNext\",\"next\",\"hasNext\",\"hasNext\",\"prev\",\"prev\"]}" },
   ],
 }
 

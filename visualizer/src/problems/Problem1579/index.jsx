@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Invented mesh', input: '{"n":5,"edges":[[3,1,2],[1,2,3],[2,3,4],[1,4,5],[2,1,5],[3,4,5]]}' },
     { label: 'Two islands', input: '{"n":4,"edges":[[1,1,2],[2,3,4],[3,1,4]]}' },
+    { label: 'Two nodes, one edge', input: '{"n":2,"edges":[[1,1,2]]}' },
+    { label: 'Same pair, two types', input: '{"n":2,"edges":[[3,1,2],[3,2,1]]}' },
+    { label: 'Largest: 6 nodes, 10 edges', input: '{"n":6,"edges":[[1,1,2],[2,2,3],[3,3,4],[1,4,5],[2,5,6],[3,6,1],[1,1,2],[2,2,3],[3,3,4],[1,4,5]]}' },
+    { label: 'Long run: 10 edges', input: '{"n":6,"edges":[[3,2,5],[1,5,4],[2,3,2],[1,2,5],[3,3,4],[1,1,2],[3,6,2],[1,6,5],[2,3,5],[1,3,1]]}' },
   ],
 }
 

@@ -11,6 +11,10 @@ const definition = {
     { label: 'Six piles', input: '{"piles":[9,1,5,3,8,2]}' },
     { label: 'Repeated values', input: '{"piles":[2,4,1,2,7,8]}' },
     { label: 'Equal piles', input: '{"piles":[1,1,1]}' },
+    { label: 'Smallest: three piles', input: '{"piles":[1,2,3]}' },
+    { label: 'Nine equal piles', input: '{"piles":[4,4,4,4,4,4,4,4,4]}' },
+    { label: 'Largest: 30 piles', input: '{"piles":[1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1]}' },
+    { label: 'Long run: 30 piles', input: '{"piles":[32,31,161,381,32,652,781,519,382,672,199,650,592,429,13,874,514,644,653,620,132,531,993,515,529,809,852,248,371,342]}' },
   ],
 }
 

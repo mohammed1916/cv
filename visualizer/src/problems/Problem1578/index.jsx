@@ -11,6 +11,10 @@ const definition = {
     { label: 'Sample A', input: '{"colors":"aabaa","neededTime":[1,2,3,4,1]}' },
     { label: 'Long run', input: '{"colors":"cccca","neededTime":[5,1,7,2,3]}' },
     { label: 'No repeats', input: '{"colors":"abcd","neededTime":[4,3,2,1]}' },
+    { label: 'Single ball', input: '{"colors":"a","neededTime":[3]}' },
+    { label: 'Equal times', input: '{"colors":"aaa","neededTime":[2,2,2]}' },
+    { label: 'Largest: 30 balls', input: '{"colors":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","neededTime":[1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000]}' },
+    { label: 'Long run: 30 balls', input: '{"colors":"abababbcaaababcaacbcaaacabcaac","neededTime":[296,119,445,969,928,965,40,773,309,382,670,183,505,896,385,962,528,111,715,624,23,207,280,912,631,766,949,785,841,992]}' },
   ],
 }
 

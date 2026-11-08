@@ -12,6 +12,10 @@ const definition = {
     { label: 'Five slots', input: '{"positions":[1,2,3,4,7],"m":3}' },
     { label: 'Two balls', input: '{"positions":[5,4,3,2,1,9],"m":2}' },
     { label: 'Tight', input: '{"positions":[1,4,9,10],"m":4}' },
+    { label: 'Two positions', input: '{"positions":[1,2],"m":2}' },
+    { label: 'Consecutive positions', input: '{"positions":[1,2,3,4],"m":2}' },
+    { label: 'Largest: 12 positions, m 12', input: '{"positions":[1,4,7,10,13,16,19,22,25,28,29,30],"m":12}' },
+    { label: 'Long run: 12 positions', input: '{"positions":[23,2,22,14,9,20,27,17,4,1,11,29],"m":5}' },
   ],
 }
 

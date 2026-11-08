@@ -13,7 +13,7 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, python, sql,
   inputLabel: INPUT_LABEL,
   complexity: COMPLEXITY,
-  examples: [{ label: 'Sample', input: EXAMPLE }],
+  examples: [{ label: 'Sample', input: EXAMPLE }, { label: 'Single user, no transfers', input: '{"users":[{"user_id":1,"user_name":"Ann","credit":0}],"transactions":[]}' }, { label: 'Balanced after transfer', input: '{"users":[{"user_id":1,"user_name":"Ann","credit":10},{"user_id":2,"user_name":"Ben","credit":10}],"transactions":[{"paid_by":1,"paid_to":2,"amount":10}]}' }, { label: 'Long run: 12 transfers', input: '{"users":[{"user_id":1,"user_name":"Ann","credit":55},{"user_id":2,"user_name":"Ben","credit":66},{"user_id":3,"user_name":"Cy","credit":85},{"user_id":4,"user_name":"Dee","credit":93},{"user_id":5,"user_name":"Eli","credit":70},{"user_id":6,"user_name":"Fay","credit":97},{"user_id":7,"user_name":"Gus","credit":55},{"user_id":8,"user_name":"Hal","credit":79}],"transactions":[{"paid_by":2,"paid_to":3,"amount":49},{"paid_by":5,"paid_to":3,"amount":30},{"paid_by":4,"paid_to":5,"amount":21},{"paid_by":2,"paid_to":7,"amount":13},{"paid_by":2,"paid_to":3,"amount":47},{"paid_by":5,"paid_to":6,"amount":22},{"paid_by":7,"paid_to":3,"amount":30},{"paid_by":3,"paid_to":7,"amount":29},{"paid_by":1,"paid_to":3,"amount":23},{"paid_by":2,"paid_to":4,"amount":34},{"paid_by":3,"paid_to":5,"amount":40},{"paid_by":3,"paid_to":6,"amount":31}]}' }],
 }
 
 const formatValue = value => value === undefined || value === null ? '' : typeof value === 'boolean' ? (value ? 'yes' : 'no') : String(value)

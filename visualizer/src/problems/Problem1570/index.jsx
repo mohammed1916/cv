@@ -12,6 +12,10 @@ const definition = {
     { label: 'Sparse overlap', input: '{"a":[0,4,0,-2,1],"b":[3,0,1,2,0]}' },
     { label: 'No overlap', input: '{"a":[5,0,0],"b":[0,0,2]}' },
     { label: 'Dense-ish', input: '{"a":[2,0,5],"b":[1,0,2]}' },
+    { label: 'Single zero pair', input: '{"a":[0],"b":[0]}' },
+    { label: 'Equal sequences', input: '{"a":[2,2],"b":[2,2]}' },
+    { label: 'Largest: 12 items, extremes', input: '{"a":[5,-5,5,-5,5,-5,5,-5,5,-5,5,-5],"b":[-5,5,-5,5,-5,5,-5,5,-5,5,-5,5]}' },
+    { label: 'Long run: 12 items', input: '{"a":[-3,3,5,0,0,1,-2,5,-4,0,-4,-2],"b":[3,2,3,5,-5,3,0,1,-3,-4,3,2]}' },
   ],
 }
 

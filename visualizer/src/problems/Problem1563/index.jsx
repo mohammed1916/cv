@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Six stones', input: '{"stones":[6,2,3,4,5,5]}' },
     { label: 'Seven equal', input: '{"stones":[7,7,7,7,7,7,7]}' },
+    { label: 'Single stone', input: '{"stones":[4]}' },
+    { label: 'Two stones', input: '{"stones":[2,9]}' },
+    { label: 'Largest: 8 stones', input: '{"stones":[20,1,20,1,20,1,20,1]}' },
+    { label: 'Long run: 8 stones', input: '{"stones":[14,19,6,1,20,18,16,2]}' },
   ],
 }
 

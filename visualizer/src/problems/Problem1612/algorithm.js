@@ -66,6 +66,9 @@ export const examples = [
   { label: 'Reordered sum', input: '{"root1":["+","x","+",null,null,"y","z"],"root2":["+","+","z","y","x"]}' },
   { label: 'Different letter', input: '{"root1":["+","x","+",null,null,"y","z"],"root2":["+","+","z","y","y"]}' },
   { label: 'Single letters', input: '{"root1":["x"],"root2":["x"]}' },
+    { label: "Single letter", input: "{\"root1\":[\"q\"],\"root2\":[\"q\"]}" },
+    { label: "Sums in different order", input: "{\"root1\":[\"+\",\"a\",\"+\",null,null,\"b\",\"c\"],\"root2\":[\"+\",\"+\",\"c\",\"b\",\"a\"]}" },
+    { label: "Regrouped letters, long run", input: "{\"root1\":[\"+\",\"+\",\"+\",\"a\",\"b\",\"c\",\"d\"],\"root2\":[\"+\",\"+\",\"+\",\"d\",\"c\",\"b\",\"a\"]}" },
 ]
 
 export const complexity = 'O(n) time and O(n) space for two trees with n nodes in total. The visual caps each tree at 15 positions.'

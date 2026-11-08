@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"10101"}' },
     { label: 'Zeros', input: '{"s":"0000"}' },
+    { label: 'Shortest: three bits', input: '{"s":"010"}' },
+    { label: 'Balanced bits', input: '{"s":"0110"}' },
+    { label: 'Largest: 12 bits', input: '{"s":"101010101010"}' },
+    { label: 'Long run: 12 bits', input: '{"s":"111111110010"}' },
   ],
 }
 

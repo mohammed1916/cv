@@ -9,6 +9,10 @@ export const phases = [
 export const examples = [
   { label: 'Tall start', input: '{"boxes":[2,5,3],"warehouse":[4,6,2,5]}' },
   { label: 'Low entrance', input: '{"boxes":[3,3,3],"warehouse":[1,3,4]}' },
+  { label: 'Single box, single room', input: '{"boxes":[1],"warehouse":[1]}' },
+  { label: 'Equal boxes and rooms', input: '{"boxes":[3,3],"warehouse":[3,3]}' },
+  { label: 'Largest: 12 boxes, 12 rooms', input: '{"boxes":[1,1,1,1,1,1,1,1,1,1,1,1],"warehouse":[20,20,20,20,20,20,20,20,20,20,20,20]}' },
+  { label: 'Long run: 12 boxes', input: '{"boxes":[14,5,13,10,15,14,16,17,12,11,7,10],"warehouse":[5,13,5,11,14,1,10,7,8,11,5,17]}' },
 ]
 
 export function parseInput(text) {

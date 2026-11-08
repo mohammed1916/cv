@@ -10,6 +10,10 @@ const definition = {
     { label: 'Left half', input: '{"n":3,"k":6}' },
     { label: 'Center bit', input: '{"n":5,"k":16}' },
     { label: 'Deep right', input: '{"n":4,"k":11}' },
+    { label: 'Single level', input: '{"n":1,"k":1}' },
+    { label: 'Middle position', input: '{"n":4,"k":8}' },
+    { label: 'Largest: depth 20, last position', input: '{"n":20,"k":1048575}' },
+    { label: 'Long run: depth 20', input: '{"n":20,"k":129871}' },
   ],
 }
 

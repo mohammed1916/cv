@@ -13,6 +13,11 @@ const definition = {
     { label: 'Mixed signs', input: '{"nums":[1,-1,2,2,-2,2,2],"target":2}' },
     { label: 'All zeros', input: '{"nums":[0,0,0],"target":0}' },
     { label: 'No match', input: '{"nums":[5,5],"target":1}' },
+    { label: 'Single element', input: '{"nums":[4],"target":4}' },
+    { label: 'Target unreachable', input: '{"nums":[1,1],"target":5}' },
+    { label: 'All zeros', input: '{"nums":[0,0,0],"target":0}' },
+    { label: 'Largest: 30 nines', input: '{"nums":[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],"target":-20}' },
+    { label: 'Long run: 30 items', input: '{"nums":[-8,-8,0,1,4,4,0,5,-4,1,-1,3,-2,-4,6,7,1,-2,-8,-5,2,1,-5,3,-2,-1,5,5,4,-1],"target":3}' },
   ],
 }
 

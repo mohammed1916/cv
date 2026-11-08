@@ -23,6 +23,10 @@ const definition = {
     { label: 'Majority of ones', input: '{"bits":[1,0,1,1,1,0,1]}' },
     { label: 'Majority of zeros', input: '{"bits":[0,0,1,0,0]}' },
     { label: 'Exact tie', input: '{"bits":[1,0,1,0,1,0]}' },
+    { label: 'Smallest: 5 zeros', input: '{"bits":[0,0,0,0,0]}' },
+    { label: 'All ones', input: '{"bits":[1,1,1,1,1]}' },
+    { label: 'Largest: 20 bits, exact tie', input: '{"bits":[1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0]}' },
+    { label: 'Long run: 20 bits', input: '{"bits":[0,0,0,1,0,1,0,0,0,1,1,1,1,1,0,1,0,0,0,0]}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"k":3,"arrival":[1,2,3,4,5],"load":[5,2,3,3,3]}' },
     { label: 'Example 2', input: '{"k":3,"arrival":[1,2,3],"load":[10,12,11]}' },
+    { label: "Single request", input: "{\"k\":1,\"arrival\":[1],\"load\":[2]}" },
+    { label: "Equal loads, three requests", input: "{\"k\":2,\"arrival\":[1,2,3],\"load\":[5,5,5]}" },
+    { label: "Twelve requests, six servers", input: "{\"k\":6,\"arrival\":[1,6,11,16,21,26,31,36,41,46,51,56],\"load\":[20,20,20,20,20,20,20,20,20,20,20,20]}" },
+    { label: "Long run: 12 requests, 3 servers", input: "{\"k\":3,\"arrival\":[1,5,9,13,15,17,19,20,23,25,30,31],\"load\":[9,13,4,2,6,14,4,9,17,17,3,19]}" },
   ],
 }
 

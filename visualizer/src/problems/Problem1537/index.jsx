@@ -17,6 +17,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums1": [2,4,5,8,10], "nums2": [4,6,8,9]}' },
     { label: 'Example 2', input: '{"nums1": [1,3,5,7,9], "nums2": [3,5,100]}' },
+    { label: 'Single value each', input: '{"nums1":[1],"nums2":[1]}' },
+    { label: 'Identical lists', input: '{"nums1":[3,6],"nums2":[3,6]}' },
+    { label: 'No shared value', input: '{"nums1":[1],"nums2":[100]}' },
+    { label: 'Largest values, 8 each', input: '{"nums1":[10,20,30,40,50,60,70,100],"nums2":[5,15,25,35,45,55,65,100]}' },
+    { label: 'Long run: 8 values each', input: '{"nums1":[28,29,55,69,74,80,81,95],"nums2":[2,16,22,45,46,59,89,93]}' },
   ],
 }
 

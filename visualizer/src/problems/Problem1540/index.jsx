@@ -10,6 +10,11 @@ const definition = {
     { label: 'Spread moves', input: '{"s":"abc","t":"bcd","k":60}' },
     { label: 'Budget too small', input: '{"s":"aaaa","t":"bbbb","k":3}' },
     { label: 'Already equal', input: '{"s":"ab","t":"ab","k":0}' },
+    { label: 'Empty strings', input: '{"s":"","t":"","k":0}' },
+    { label: 'Single letter, exact budget', input: '{"s":"a","t":"b","k":1}' },
+    { label: 'Equal strings', input: '{"s":"zz","t":"zz","k":0}' },
+    { label: 'Largest: 40 letters, big budget', input: '{"s":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","t":"zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz","k":1000000000}' },
+    { label: 'Long run: 40 letters', input: '{"s":"mqizoinaahbfoszgkacatcxlqwddkwxitaacvcia","t":"obdtmkcncldpbnevnolgesvffpaigpshharsiitk","k":500}' },
   ],
 }
 

@@ -12,6 +12,10 @@ const definition = {
     { label: 'Late run', input: '[2,6,4,1,3,5,7]' },
     { label: 'Broken run', input: '[1,2,3,4,5]' },
     { label: 'Negative odds', input: '[-3,-5,-7]' },
+    { label: 'Single value', input: '[5]' },
+    { label: 'Repeated values', input: '[3,3,3]' },
+    { label: 'Extremes: 20 items', input: '[20,-20,20,-20,20,-20,20,-20,20,-20,20,-20,20,-20,20,-20,20,-20,20,-20]' },
+    { label: 'Long run: 20 values', input: '[-9,11,-10,-7,2,13,16,16,-20,-17,-10,5,-11,9,0,-3,-8,-18,1,18]' },
   ],
 }
 

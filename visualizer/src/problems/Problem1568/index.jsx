@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: 'Two by two', input: '[[1,1],[1,1]]' },
     { label: 'Cut cell', input: '[[1,1,0],[0,1,0],[0,1,1]]' },
+    { label: 'Single water cell', input: '[[0]]' },
+    { label: 'Single land cell', input: '[[1]]' },
+    { label: 'All water', input: '[[0,0],[0,0]]' },
+    { label: 'Largest: 6 by 6 checkerboard', input: '[[0,1,0,1,0,1],[1,0,1,0,1,0],[0,1,0,1,0,1],[1,0,1,0,1,0],[0,1,0,1,0,1],[1,0,1,0,1,0]]' },
+    { label: 'Long run: 6 by 6 grid', input: '[[0,1,0,0,1,1],[1,0,0,1,0,0],[0,1,0,0,0,0],[0,1,1,0,0,1],[1,1,0,1,1,1],[0,0,1,1,0,0]]' },
   ],
 }
 

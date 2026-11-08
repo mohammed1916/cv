@@ -10,6 +10,10 @@ const definition = {
     { label: 'Full cancel', input: 'abBAcC' },
     { label: 'Partial', input: 'xXyYzq' },
     { label: 'Nothing cancels', input: 'aBcD' },
+    { label: 'Single letter', input: 'a' },
+    { label: 'Mixed case pair', input: 'Zz' },
+    { label: 'Largest: 40 letters, all cancel', input: 'xXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxX' },
+    { label: 'Long run: 40 letters', input: 'cEeddeEbECeBbBAdCcCdbAcbAcbbaDDedecCdcab' },
   ],
 }
 

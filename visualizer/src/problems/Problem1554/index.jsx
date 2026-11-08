@@ -23,6 +23,10 @@ const definition = {
     { label: 'Pair at position 2', input: '["abcd","abce","axyz"]' },
     { label: 'No single-letter pair', input: '["aaa","bbb","abc","cab"]' },
     { label: 'Pair found last', input: '["hello","world","hellp","pearl"]' },
+    { label: 'Two words', input: '["ab","cd"]' },
+    { label: 'One letter apart', input: '["abc","xbc"]' },
+    { label: 'No one-letter pair', input: '["aaa","bbb","ccc"]' },
+    { label: 'Long run: 12 words', input: '["oqihyiiy","sdvuegfl","oecafado","cindhyeq","jsavcdcj","zdvxhnly","raubabqg","zmyasslg","koyxkpfm","hppzytgp","zneewfut","sivrnuhe"]' },
   ],
 }
 

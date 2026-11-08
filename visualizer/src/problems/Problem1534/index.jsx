@@ -11,6 +11,10 @@ const definition = {
     { label: 'Mixed', input: '{"arr":[4,2,6,3,8],"a":3,"b":2,"c":4}' },
     { label: 'Single good', input: '{"arr":[1,2,3],"a":1,"b":1,"c":2}' },
     { label: 'All equal', input: '{"arr":[7,7,7,7],"a":0,"b":0,"c":0}' },
+    { label: 'Smallest input, all zero', input: '{"arr":[0,0,0],"a":0,"b":0,"c":0}' },
+    { label: 'Equal values', input: '{"arr":[5,5,5,5],"a":5,"b":5,"c":5}' },
+    { label: 'Largest limits', input: '{"arr":[20,0,20,0,20,0,20,0,20,0,20,0],"a":20,"b":0,"c":20}' },
+    { label: 'Long run: 12 items', input: '{"arr":[13,17,14,2,8,18,2,19,7,5,5,4],"a":3,"b":2,"c":6}' },
   ],
 }
 

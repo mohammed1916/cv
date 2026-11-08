@@ -12,7 +12,11 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, python, sql,
   inputLabel: INPUT_LABEL,
   complexity: COMPLEXITY,
-  examples: [{ label: 'Sample', input: EXAMPLE }],
+  examples: [{ label: 'Sample', input: EXAMPLE },
+    { label: "Single visit, no transactions", input: "{\"visits\":[{\"visit_id\":1,\"customer_id\":5}],\"transactions\":[]}" },
+    { label: "Same customer, one silent visit", input: "{\"visits\":[{\"visit_id\":1,\"customer_id\":7},{\"visit_id\":2,\"customer_id\":7}],\"transactions\":[{\"transaction_id\":10,\"visit_id\":1,\"amount\":5}]}" },
+    { label: "Twelve visits, none with transactions", input: "{\"visits\":[{\"visit_id\":1,\"customer_id\":100},{\"visit_id\":2,\"customer_id\":101},{\"visit_id\":3,\"customer_id\":102},{\"visit_id\":4,\"customer_id\":103},{\"visit_id\":5,\"customer_id\":104},{\"visit_id\":6,\"customer_id\":105},{\"visit_id\":7,\"customer_id\":106},{\"visit_id\":8,\"customer_id\":107},{\"visit_id\":9,\"customer_id\":108},{\"visit_id\":10,\"customer_id\":109},{\"visit_id\":11,\"customer_id\":110},{\"visit_id\":12,\"customer_id\":111}],\"transactions\":[]}" },
+    { label: "Long run: 12 visits, 12 transactions", input: "{\"visits\":[{\"visit_id\":1,\"customer_id\":4},{\"visit_id\":2,\"customer_id\":3},{\"visit_id\":3,\"customer_id\":1},{\"visit_id\":4,\"customer_id\":6},{\"visit_id\":5,\"customer_id\":6},{\"visit_id\":6,\"customer_id\":6},{\"visit_id\":7,\"customer_id\":5},{\"visit_id\":8,\"customer_id\":7},{\"visit_id\":9,\"customer_id\":9},{\"visit_id\":10,\"customer_id\":2},{\"visit_id\":11,\"customer_id\":7},{\"visit_id\":12,\"customer_id\":1}],\"transactions\":[{\"transaction_id\":200,\"visit_id\":3,\"amount\":30},{\"transaction_id\":201,\"visit_id\":10,\"amount\":60},{\"transaction_id\":202,\"visit_id\":7,\"amount\":90},{\"transaction_id\":203,\"visit_id\":4,\"amount\":20},{\"transaction_id\":204,\"visit_id\":3,\"amount\":20},{\"transaction_id\":205,\"visit_id\":1,\"amount\":20},{\"transaction_id\":206,\"visit_id\":9,\"amount\":40},{\"transaction_id\":207,\"visit_id\":3,\"amount\":70},{\"transaction_id\":208,\"visit_id\":10,\"amount\":90},{\"transaction_id\":209,\"visit_id\":7,\"amount\":10},{\"transaction_id\":210,\"visit_id\":12,\"amount\":20},{\"transaction_id\":211,\"visit_id\":12,\"amount\":30}]}" }],
 }
 
 const formatValue = value => value === undefined || value === null ? '' : typeof value === 'boolean' ? (value ? 'yes' : 'no') : String(value)

@@ -10,6 +10,11 @@ export const examples = [
   { label: 'Short block', input: '{"nums":[6,3,5,2],"p":9}' },
   { label: 'Already fine', input: '{"nums":[2,4,6],"p":2}' },
   { label: 'Whole only', input: '{"nums":[5],"p":3}' },
+    { label: "Single element, divisible", input: "{\"nums\":[8],\"p\":4}" },
+    { label: "No cut can work, answer -1", input: "{\"nums\":[1,2],\"p\":5}" },
+    { label: "Equal values, ties on length", input: "{\"nums\":[2,2,2,2],\"p\":3}" },
+    { label: "Twenty large values", input: "{\"nums\":[1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000],\"p\":1000}" },
+    { label: "Long run: 20 values, p = 97", input: "{\"nums\":[530,239,365,520,722,402,717,343,553,111,632,78,545,947,204,561,431,745,387,750],\"p\":97}" },
 ]
 
 export function parseInput(text) {

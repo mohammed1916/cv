@@ -11,6 +11,10 @@ const definition = {
     { label: 'Mixed values', input: '{"nums":[3,5,1]}' },
     { label: 'Equal powers', input: '{"nums":[8,8]}' },
     { label: 'All zero', input: '{"nums":[0,0,0]}' },
+    { label: 'Single value', input: '{"nums":[7]}' },
+    { label: 'Four equal values', input: '{"nums":[6,6,6,6]}' },
+    { label: 'Largest: 12 values', input: '{"nums":[60,1,60,1,60,1,60,1,60,1,60,1]}' },
+    { label: 'Long run: 12 values', input: '{"nums":[50,31,58,4,49,3,0,58,26,26,3,36]}' },
   ],
 }
 

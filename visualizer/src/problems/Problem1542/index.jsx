@@ -10,6 +10,11 @@ const definition = {
     { label: 'Palindrome core', input: '1221' },
     { label: 'Mixed digits', input: '2024' },
     { label: 'All distinct', input: '0123' },
+    { label: 'Single digit', input: '7' },
+    { label: 'Repeated digit', input: '1111' },
+    { label: 'Two digits, no pair', input: '90' },
+    { label: 'Largest: 40 digits', input: '0123456789012345678901234567890123456789' },
+    { label: 'Long run: 40 digits', input: '2136824970665225103088124299435197958932' },
   ],
 }
 

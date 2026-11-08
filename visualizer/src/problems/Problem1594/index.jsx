@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: 'Two negatives', input: '{"grid":[[1,-2,1],[1,-2,1],[3,-4,1]]}' },
     { label: 'Always negative', input: '{"grid":[[-1,-2,-3],[-2,-3,-3],[-3,-3,-2]]}' },
+    { label: "Single negative cell", input: "{\"grid\":[[-3]]}" },
+    { label: "Zero cells", input: "{\"grid\":[[0,-1],[-2,0]]}" },
+    { label: "Equal cells", input: "{\"grid\":[[1,1],[1,1]]}" },
+    { label: "Six by six, all minus four", input: "{\"grid\":[[-4,-4,-4,-4,-4,-4],[-4,-4,-4,-4,-4,-4],[-4,-4,-4,-4,-4,-4],[-4,-4,-4,-4,-4,-4],[-4,-4,-4,-4,-4,-4],[-4,-4,-4,-4,-4,-4]]}" },
+    { label: "Long run: 6 by 6 mixed signs", input: "{\"grid\":[[4,3,3,4,4,0],[-4,-2,2,2,-1,-1],[2,3,3,4,0,1],[-2,1,2,3,2,-3],[0,4,3,-3,1,-3],[-4,1,3,-2,-1,0]]}" },
   ],
 }
 

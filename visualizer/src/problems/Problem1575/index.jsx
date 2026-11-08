@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"locations":[2,3,6,8,4],"start":1,"finish":3,"fuel":5}' },
     { label: 'Example 2', input: '{"locations":[4,3,1],"start":1,"finish":0,"fuel":6}' },
+    { label: 'Two stops, no fuel', input: '{"locations":[4,9],"start":0,"finish":1,"fuel":0}' },
+    { label: 'Start is finish', input: '{"locations":[3,7,5],"start":2,"finish":2,"fuel":4}' },
+    { label: 'Largest: 8 locations, fuel 20', input: '{"locations":[1000,1,999,2,998,3,997,4],"start":0,"finish":7,"fuel":20}' },
+    { label: 'Long run: 8 locations', input: '{"locations":[826,500,742,888,548,920,859,354],"start":0,"finish":5,"fuel":12}' },
   ],
 }
 

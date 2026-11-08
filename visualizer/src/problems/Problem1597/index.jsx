@@ -26,6 +26,10 @@ const definition = {
     { label: 'Precedence', input: '"12+3*4"' },
     { label: 'Left associativity', input: '"100/7/2"' },
     { label: 'Parentheses', input: '"(2+9)*(10-4)/3"' },
+    { label: "Single number", input: "\"7\"" },
+    { label: "Same precedence, left to right", input: "\"9-3-2\"" },
+    { label: "Nested groups, twenty-one characters", input: "\"(9+9)*(9+9)*(9+9)*9\"" },
+    { label: "Long run: 21 characters", input: "\"3*2/5/3-3+7/4/5*1-8+7\"" },
   ],
 }
 

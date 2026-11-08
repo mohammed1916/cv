@@ -11,6 +11,10 @@ const definition = {
     { label: 'Mixed types', input: '{"slots":[2,1,1],"cars":[1,1,2,1,3,3,1,2]}' },
     { label: 'Empty big lot', input: '{"slots":[0,2,0],"cars":[1,3,2,1]}' },
     { label: 'Exact fill', input: '{"slots":[1,1,1],"cars":[3,2,1,1]}' },
+    { label: "One big car, one slot", input: "{\"slots\":[1,0,0],\"cars\":[1]}" },
+    { label: "No slots left", input: "{\"slots\":[0,0,0],\"cars\":[2,3]}" },
+    { label: "Thirty cars, ten slots each", input: "{\"slots\":[10,10,10],\"cars\":[1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3]}" },
+    { label: "Long run: 30 cars", input: "{\"slots\":[4,6,8],\"cars\":[2,1,3,2,1,2,3,3,2,2,2,3,1,3,2,1,3,1,1,2,2,1,3,1,2,1,2,1,3,2]}" },
   ],
 }
 

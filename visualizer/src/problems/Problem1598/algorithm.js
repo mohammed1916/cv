@@ -41,6 +41,10 @@ export const examples = [
   { label: 'Back and forth', input: '["m1/","n2/","./","m3/","../","x9/","../","../"]' },
   { label: 'Stay and enter', input: '["a/","../","../","b/"]' },
   { label: 'Already at root', input: '["k1/","k2/","../","../","../"]' },
+    { label: "Single folder", input: "[\"d1/\"]" },
+    { label: "Only stay here", input: "[\"./\",\"./\"]" },
+    { label: "Back past root twice", input: "[\"../\",\"../\"]" },
+    { label: "Long run: 60 log entries", input: "[\"k8/\",\"k5/\",\"k3/\",\"../\",\"k5/\",\"./\",\"k4/\",\"k7/\",\"k4/\",\"k2/\",\"../\",\"k6/\",\"k7/\",\"k8/\",\"k8/\",\"k2/\",\"./\",\"../\",\"k8/\",\"k9/\",\"k5/\",\"k4/\",\"k5/\",\"k3/\",\"../\",\"k0/\",\"k0/\",\"./\",\"k7/\",\"k8/\",\"k5/\",\"../\",\"k4/\",\"k2/\",\"k8/\",\"k5/\",\"k1/\",\"k9/\",\"../\",\"k8/\",\"k6/\",\"k6/\",\"k9/\",\"k8/\",\"k7/\",\"../\",\"k1/\",\"k4/\",\"k7/\",\"./\",\"k7/\",\"k7/\",\"../\",\"k0/\",\"k0/\",\"k9/\",\"k1/\",\"k3/\",\"k1/\",\"../\"]" },
 ]
 
 export const complexity = 'O(n) time and O(1) space for n log entries.'

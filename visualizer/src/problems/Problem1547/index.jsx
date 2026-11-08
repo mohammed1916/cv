@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":7,"cuts":[1,3,4,5]}' },
     { label: 'Example 2', input: '{"n":9,"cuts":[5,6,1,4,2]}' },
+    { label: 'Smallest stick', input: '{"n":2,"cuts":[1]}' },
+    { label: 'Symmetric cuts', input: '{"n":8,"cuts":[2,6]}' },
+    { label: 'Largest: 6 cuts near the end', input: '{"n":20,"cuts":[19,17,13,11,7,2]}' },
+    { label: 'Long run: 6 cuts on 20', input: '{"n":20,"cuts":[13,7,6,16,10,8]}' },
   ],
 }
 

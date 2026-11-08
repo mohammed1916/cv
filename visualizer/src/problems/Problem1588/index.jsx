@@ -11,6 +11,10 @@ const definition = {
     { label: 'Sample A', input: '{"arr":[2,1,3]}' },
     { label: 'Mixed signs', input: '{"arr":[-4,5,-1,2]}' },
     { label: 'Single value', input: '{"arr":[7]}' },
+    { label: "Single negative value", input: "{\"arr\":[-9]}" },
+    { label: "Repeated values", input: "{\"arr\":[5,5,5,5]}" },
+    { label: "Thirty values at both extremes", input: "{\"arr\":[-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100]}" },
+    { label: "Long run: 30 values", input: "{\"arr\":[-67,30,65,-77,16,-3,-9,44,52,42,5,-23,-18,43,-99,-61,-47,70,2,51,58,20,-89,95,14,-61,69,-28,56,73]}" },
   ],
 }
 

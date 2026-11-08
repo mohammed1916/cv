@@ -41,6 +41,11 @@ export const examples = [
   { label: 'Uneven spread', input: ' red  green blue ' },
   { label: 'Remainder at end', input: ' sun moon stars' },
   { label: 'Single word', input: '  alpha  ' },
+    { label: "Single word, padded", input: "  hello  " },
+    { label: "One space between two words", input: "a b" },
+    { label: "Single letter, wide margins", input: "   x   " },
+    { label: "Hundred characters", input: "abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc " },
+    { label: "Long run: scattered spaces", input: "y   ff  ppp  j  cc  rrr  m  cc  www  d gg  nnn a  ww ggg  r " },
 ]
 
 export const complexity = 'O(n) time and O(n) space for a text of n characters.'

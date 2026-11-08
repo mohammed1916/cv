@@ -13,6 +13,10 @@ const definition = {
     { label: 'Three', input: '3' },
     { label: 'Six', input: '6' },
     { label: 'Ten', input: '10' },
+    { label: 'Smallest n', input: '1' },
+    { label: 'Two', input: '2' },
+    { label: 'Largest n', input: '100' },
+    { label: 'Long run: n 99', input: '99' },
   ],
 }
 

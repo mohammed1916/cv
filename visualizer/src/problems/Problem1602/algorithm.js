@@ -55,6 +55,10 @@ export const examples = [
   { label: 'Right neighbour', input: '{"tree":[5,3,8,1,4,null,9],"u":4}' },
   { label: 'Rightmost on level', input: '{"tree":[5,3,8,1,4,null,9],"u":8}' },
   { label: 'Root alone', input: '{"tree":[7],"u":7}' },
+    { label: "Right neighbour on a full level", input: "{\"tree\":[1,2,3,4,5,6,7],\"u\":5}" },
+    { label: "Right neighbour at a deeper level", input: "{\"tree\":[50,20,70,10,30,60,80,5,15,25,35,55,65,75,85],\"u\":35}" },
+    { label: "Rightmost on a full level", input: "{\"tree\":[1,2,3,4,5,6,7],\"u\":7}" },
+    { label: "Long run: fifteen nodes", input: "{\"tree\":[9,5,28,88,null,64,38,83,16,null,71,32,72,40,89],\"u\":83}" },
 ]
 
 export const complexity = 'O(n) time and O(w) space for n nodes and the widest level w. The visual caps the tree at 15 positions with distinct values 1 to 99.'

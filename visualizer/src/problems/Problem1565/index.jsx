@@ -13,7 +13,7 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, python, sql,
   inputLabel: INPUT_LABEL,
   complexity: COMPLEXITY,
-  examples: [{ label: 'Sample', input: EXAMPLE }],
+  examples: [{ label: 'Sample', input: EXAMPLE }, { label: 'Single order', input: '{"orders":[{"order_id":1,"order_date":"2021-04-01","customer_id":1,"invoice":10}]}' }, { label: 'Repeat customer in one month', input: '{"orders":[{"order_id":1,"order_date":"2021-04-01","customer_id":1,"invoice":10},{"order_id":2,"order_date":"2021-04-09","customer_id":1,"invoice":20}]}' }, { label: 'No orders', input: '{"orders":[]}' }, { label: 'Long run: 12 orders', input: '{"orders":[{"order_id":1,"order_date":"2021-02-08","customer_id":4,"invoice":60},{"order_id":2,"order_date":"2021-02-20","customer_id":3,"invoice":31},{"order_id":3,"order_date":"2021-01-23","customer_id":4,"invoice":76},{"order_id":4,"order_date":"2021-01-08","customer_id":4,"invoice":65},{"order_id":5,"order_date":"2021-01-16","customer_id":4,"invoice":91},{"order_id":6,"order_date":"2021-01-04","customer_id":4,"invoice":58},{"order_id":7,"order_date":"2021-02-21","customer_id":4,"invoice":96},{"order_id":8,"order_date":"2021-01-04","customer_id":3,"invoice":44},{"order_id":9,"order_date":"2021-02-04","customer_id":3,"invoice":73},{"order_id":10,"order_date":"2021-01-17","customer_id":3,"invoice":33},{"order_id":11,"order_date":"2021-02-23","customer_id":2,"invoice":41},{"order_id":12,"order_date":"2021-01-17","customer_id":4,"invoice":90}]}' }],
 }
 
 const formatValue = value => value === undefined || value === null ? '' : typeof value === 'boolean' ? (value ? 'yes' : 'no') : String(value)

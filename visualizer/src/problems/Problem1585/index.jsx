@@ -17,6 +17,11 @@ const definition = {
   examples: [
     { label: 'Official', input: '{"s":"84532","t":"34852"}' },
     { label: 'Blocked', input: '{"s":"12345","t":"12435"}' },
+    { label: "Single digit, equal", input: "{\"s\":\"5\",\"t\":\"5\"}" },
+    { label: "Already equal", input: "{\"s\":\"2024\",\"t\":\"2024\"}" },
+    { label: "Two digits swapped", input: "{\"s\":\"21\",\"t\":\"12\"}" },
+    { label: "Eight digits, full range", input: "{\"s\":\"98765432\",\"t\":\"23456789\"}" },
+    { label: "Long run: 8 digits", input: "{\"s\":\"10060380\",\"t\":\"92304144\"}" },
   ],
 }
 

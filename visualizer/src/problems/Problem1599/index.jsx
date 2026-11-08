@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"customers":[8,3],"boardingCost":5,"runningCost":6}' },
     { label: 'Example 2', input: '{"customers":[10,9,6],"boardingCost":6,"runningCost":4}' },
+    { label: "Single group", input: "{\"customers\":[4],\"boardingCost\":5,\"runningCost\":6}" },
+    { label: "Running and boarding cost equal", input: "{\"customers\":[2,2],\"boardingCost\":3,\"runningCost\":3}" },
+    { label: "Twenty large groups", input: "{\"customers\":[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50],\"boardingCost\":100,\"runningCost\":0}" },
+    { label: "Long run: 20 groups", input: "{\"customers\":[5,20,10,4,42,16,18,50,2,33,25,40,2,8,21,27,22,48,25,23],\"boardingCost\":82,\"runningCost\":9}" },
   ],
 }
 

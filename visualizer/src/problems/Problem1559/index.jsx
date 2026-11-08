@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"grid": ["aaaa","abba","abba","aaaa"]}' },
     { label: 'Example 2', input: '{"grid": ["abb","bzb","bba"]}' },
+    { label: 'Single cell', input: '{"grid":["a"]}' },
+    { label: 'Uniform grid', input: '{"grid":["aa","aa"]}' },
+    { label: 'Largest: 6 by 6', input: '{"grid":["abcabc","bcabca","cabcab","abcabc","bcabca","cabcab"]}' },
+    { label: 'Long run: 6 by 6 letters', input: '{"grid":["cacbca","acaabb","cbcbab","aacaaa","cacbac","caacbc"]}' },
   ],
 }
 

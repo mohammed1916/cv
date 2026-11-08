@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"points":[[2,1],[2,2],[3,3]],"angle":90,"location":[1,1]}' },
     { label: 'On the viewer', input: '{"points":[[1,1],[2,2],[1,1]],"angle":0,"location":[1,1]}' },
+    { label: "Single point", input: "{\"points\":[[1,0]],\"angle\":0,\"location\":[0,0]}" },
+    { label: "Point at the viewer", input: "{\"points\":[[0,0],[1,1]],\"angle\":90,\"location\":[0,0]}" },
+    { label: "Full turn, points on the edge", input: "{\"points\":[[10,0],[-10,0],[0,10],[0,-10]],\"angle\":360,\"location\":[0,0]}" },
+    { label: "Long run: 12 points", input: "{\"points\":[[-9,1],[-3,-5],[-8,-2],[-5,0],[4,-8],[0,9],[9,4],[-7,-5],[0,5],[-7,7],[-4,-7],[-7,0]],\"angle\":90,\"location\":[0,0]}" },
   ],
 }
 

@@ -11,6 +11,10 @@ const definition = {
     { label: 'Four digits', input: '1000' },
     { label: 'Nine digits', input: '123456789' },
     { label: 'Zero', input: '0' },
+    { label: 'Smallest positive', input: '1' },
+    { label: 'Two digits', input: '10' },
+    { label: 'Largest value', input: '2147483647' },
+    { label: 'Long run: 10 digits', input: '1075109676' },
   ],
 }
 

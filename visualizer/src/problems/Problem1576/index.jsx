@@ -11,6 +11,10 @@ const definition = {
     { label: 'Mixed', input: '"a?b??c"' },
     { label: 'All marks', input: '"???"' },
     { label: 'Between letters', input: '"ab?c?d"' },
+    { label: 'Single mark', input: '"?"' },
+    { label: 'Same letter around a mark', input: '"a?a"' },
+    { label: 'Largest: 20 characters', input: '"?a?b?c?d?e?f?g?h?i?j"' },
+    { label: 'Long run: 20 characters', input: '"bc?eded?cde??edbd??a"' },
   ],
 }
 

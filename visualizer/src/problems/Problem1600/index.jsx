@@ -31,6 +31,10 @@ const definition = {
   complexity: 'birth and death take O(1) time; an order request takes O(n) time for n people.',
   examples: [
     { label: 'Invented family', input: '{"king":"ruth","operations":[["birth","ruth","ivo"],["birth","ruth","lena"],["birth","ivo","tom"],["order"],["death","lena"],["birth","lena","ada"],["order"]]}' },
+    { label: "King alone", input: "{\"king\":\"arthur\",\"operations\":[[\"order\"]]}" },
+    { label: "Siblings in birth order", input: "{\"king\":\"leo\",\"operations\":[[\"birth\",\"leo\",\"ada\"],[\"birth\",\"leo\",\"bo\"],[\"order\"]]}" },
+    { label: "Death, then order", input: "{\"king\":\"leo\",\"operations\":[[\"birth\",\"leo\",\"ada\"],[\"death\",\"leo\"],[\"order\"]]}" },
+    { label: "Long run: 20 operations", input: "{\"king\":\"king\",\"operations\":[[\"birth\",\"king\",\"ada\"],[\"birth\",\"king\",\"bo\"],[\"birth\",\"ada\",\"cy\"],[\"birth\",\"bo\",\"dan\"],[\"order\"],[\"death\",\"ada\"],[\"order\"],[\"birth\",\"cy\",\"eve\"],[\"birth\",\"king\",\"fay\"],[\"death\",\"dan\"],[\"order\"],[\"birth\",\"eve\",\"gus\"],[\"birth\",\"fay\",\"hal\"],[\"death\",\"king\"],[\"order\"],[\"birth\",\"gus\",\"ivy\"],[\"death\",\"bo\"],[\"order\"],[\"birth\",\"hal\",\"jo\"],[\"order\"]]}" },
   ],
 }
 

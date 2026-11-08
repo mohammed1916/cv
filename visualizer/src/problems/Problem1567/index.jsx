@@ -12,6 +12,10 @@ const definition = {
     { label: 'Mixed signs', input: '[2,-3,4,-1,5]' },
     { label: 'Zero splits', input: '[3,-1,-2,0,5,-4]' },
     { label: 'All negative', input: '[-4,-2,-7]' },
+    { label: 'Single value', input: '[5]' },
+    { label: 'All zeros', input: '[0,0,0]' },
+    { label: 'Largest: 16 extremes', input: '[9,-9,9,-9,9,-9,9,-9,9,-9,9,-9,9,-9,9,-9]' },
+    { label: 'Long run: 16 values', input: '[-5,-2,8,-4,-8,7,-5,-3,5,-4,-8,5,-1,-3,7,-7]' },
   ],
 }
 

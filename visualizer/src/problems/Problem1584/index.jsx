@@ -11,6 +11,11 @@ const definition = {
     { label: 'Square corners', input: '{"points":[[1,1],[5,1],[1,6],[4,4]]}' },
     { label: 'Line', input: '{"points":[[1,1],[4,1],[7,1]]}' },
     { label: 'Single point', input: '{"points":[[3,-2]]}' },
+    { label: "Single point at origin", input: "{\"points\":[[0,0]]}" },
+    { label: "Two far corners", input: "{\"points\":[[-100,-100],[100,100]]}" },
+    { label: "Equal distances from origin", input: "{\"points\":[[0,0],[3,4],[-3,4],[0,-5]]}" },
+    { label: "Board corners and centre", input: "{\"points\":[[-100,-100],[100,100],[-100,100],[100,-100],[0,0]]}" },
+    { label: "Long run: 15 points", input: "{\"points\":[[-89,-59],[74,-15],[-50,-50],[-53,-50],[47,-89],[-69,-91],[58,-53],[55,5],[68,-11],[-61,13],[-34,2],[-98,97],[67,75],[76,96],[-52,99]]}" },
   ],
 }
 

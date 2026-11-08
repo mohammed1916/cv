@@ -16,6 +16,10 @@ const definition = {
     { label: 'Example 1', input: '[1,10,4,3,null,7,9,12,8,6,null,null,2]' },
     { label: 'Root even', input: '[2]' },
     { label: 'Not increasing', input: '[1,4,10]' },
+    { label: "Single even root", input: "[2]" },
+    { label: "Equal siblings on one level", input: "[1,2,2]" },
+    { label: "Thirteen nodes, mixed levels", input: "[1,10,4,3,null,7,9,12,8,6,null,null,2]" },
+    { label: "Long run: fifteen nodes", input: "[580,205,950,631,null,129,622,766,775,null,273,617,847,447,null]" },
   ],
 }
 

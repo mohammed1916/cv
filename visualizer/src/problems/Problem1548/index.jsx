@@ -17,6 +17,11 @@ const definition = {
     { label: 'Two vertices', input: '{"n":2,"roads":[[0,1]],"names":["A","B"],"targetPath":["A","B","A"]}' },
     { label: 'Mismatch needed', input: '{"n":5,"roads":[[0,1],[1,2],[2,3],[3,4],[0,4],[1,3]],"names":["Mon","Tue","Wed","Thu","Fri"],"targetPath":["Mon","Thu","Fri","Sat"]}' },
     { label: 'Single position', input: '{"n":3,"roads":[[0,1],[1,2]],"names":["x","y","z"],"targetPath":["y"]}' },
+    { label: 'Single city', input: '{"n":1,"roads":[],"names":["A"],"targetPath":["A"]}' },
+    { label: 'Unreachable step', input: '{"n":3,"roads":[[0,1]],"names":["A","B","C"],"targetPath":["A","C"]}' },
+    { label: 'Two routes', input: '{"n":3,"roads":[[0,1],[1,2],[0,2]],"names":["X","Y","Z"],"targetPath":["X","Z"]}' },
+    { label: 'Largest: 6 cities, 15 roads', input: '{"n":6,"roads":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,0],[0,3],[1,4],[2,5],[0,2],[1,3],[2,4],[3,5],[4,0],[5,1]],"names":["Alp","Bet","Gam","Del","Eps","Zet"],"targetPath":["Alp","Bet","Gam","Del","Eps","Zet"]}' },
+    { label: 'Long run: 15 roads', input: '{"n":6,"roads":[[0,1],[2,1],[1,2],[0,3],[5,1],[2,0],[5,2],[3,1],[0,4],[3,0],[3,1],[3,1],[0,2],[2,4],[1,0]],"names":["Ka","Lo","Mi","Ne","Ov","Pa"],"targetPath":["Pa","Ne","Mi","Lo","Ka","Ov"]}' },
   ],
 }
 

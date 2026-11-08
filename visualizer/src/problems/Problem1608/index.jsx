@@ -12,6 +12,10 @@ const definition = {
     { label: 'Answer 3', input: '[1,9,2,0,5,5]' },
     { label: 'No answer', input: '[0,0,0]' },
     { label: 'Length answer', input: '[7,7,7,7,7,7,7]' },
+    { label: "Single zero", input: "[0]" },
+    { label: "All values equal", input: "[3,3,3]" },
+    { label: "Twenty maximum values", input: "[1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000]" },
+    { label: "Long run: 20 values", input: "[510,446,780,334,377,91,35,456,62,312,330,510,359,775,936,174,713,889,780,305]" },
   ],
 }
 

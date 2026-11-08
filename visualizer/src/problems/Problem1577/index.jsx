@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 1', input: '{"nums1":[7,4],"nums2":[5,2,8,9]}' },
     { label: 'Example 2', input: '{"nums1":[1,1],"nums2":[1,1,1]}' },
     { label: 'Example 3', input: '{"nums1":[7,7,8,3],"nums2":[1,2,9,7]}' },
+    { label: 'Single value each', input: '{"nums1":[1],"nums2":[1]}' },
+    { label: 'Repeated values', input: '{"nums1":[5,5],"nums2":[5,5]}' },
+    { label: 'Largest values', input: '{"nums1":[100000,1,100000,1,100000,1,100000,1],"nums2":[100000]}' },
+    { label: 'Long run: 8 each', input: '{"nums1":[23368,28441,37867,36868,32336,1639,86534,81717],"nums2":[81850,36204,44841,22139,46074,88402,92151,53122]}' },
   ],
 }
 

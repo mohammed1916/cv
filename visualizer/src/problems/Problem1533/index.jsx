@@ -22,6 +22,10 @@ const definition = {
     { label: 'Large value at the end', input: '{"array":[5,5,5,5,5,8]}' },
     { label: 'Odd leftover', input: '{"array":[2,2,2,4,2]}' },
     { label: 'Two elements', input: '{"array":[7,9]}' },
+    { label: 'Two elements', input: '{"array":[1,2]}' },
+    { label: 'Negative values', input: '{"array":[-5,-5,-5,-2]}' },
+    { label: 'Extremes: 20 elements', input: '{"array":[-1000,-1000,-1000,-1000,-1000,-1000,-1000,-1000,-1000,-1000,-1000,-1000,-1000,-1000,-1000,-1000,-1000,-1000,-1000,1000]}' },
+    { label: 'Long run: 20 elements', input: '{"array":[18,18,18,18,18,18,18,18,18,18,18,111,18,18,18,18,18,18,18,18]}' },
   ],
 }
 

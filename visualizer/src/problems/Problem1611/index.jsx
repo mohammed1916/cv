@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Five', input: '{"n":5}' },
     { label: 'Nine', input: '{"n":9}' },
+    { label: "Zero needs no steps", input: "{\"n\":0}" },
+    { label: "Five", input: "{\"n\":5}" },
+    { label: "Largest allowed, ten bits", input: "{\"n\":1023}" },
+    { label: "Long run: n = 731", input: "{\"n\":731}" },
   ],
 }
 

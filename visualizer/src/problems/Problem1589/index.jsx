@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,3,4,5],"requests":[[1,3],[0,1]]}' },
     { label: 'Example 2', input: '{"nums":[1,2,3,4,5,6],"requests":[[0,1]]}' },
+    { label: "Single number", input: "{\"nums\":[5],\"requests\":[[0,0]]}" },
+    { label: "Equal values, overlapping ranges", input: "{\"nums\":[4,4,4],\"requests\":[[0,2],[1,1]]}" },
+    { label: "Ten large values, full coverage", input: "{\"nums\":[99,99,99,99,99,99,99,99,99,99],\"requests\":[[0,9],[0,0],[9,9],[2,5],[1,8],[0,4],[5,9],[3,3]]}" },
+    { label: "Long run: 10 values, 8 requests", input: "{\"nums\":[30,44,75,4,89,13,93,98,97,59],\"requests\":[[0,8],[6,9],[3,6],[8,8],[9,9],[4,8],[8,9],[4,9]]}" },
   ],
 }
 

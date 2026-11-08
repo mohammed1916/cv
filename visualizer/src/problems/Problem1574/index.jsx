@@ -11,6 +11,10 @@ const definition = {
     { label: 'Two breaks', input: '[4,3,1,2,6,5,1,9]' },
     { label: 'One gap', input: '[1,2,8,3,5]' },
     { label: 'Already sorted', input: '[1,2,3]' },
+    { label: 'Single value', input: '[7]' },
+    { label: 'Equal values', input: '[5,5,5]' },
+    { label: 'Largest: 12 values', input: '[9,0,9,0,9,0,9,0,9,0,9,0]' },
+    { label: 'Long run: 12 values', input: '[4,5,2,7,3,6,4,8,3,4,4,4]' },
   ],
 }
 

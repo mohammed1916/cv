@@ -11,6 +11,10 @@ const definition = {
     { label: 'Sample A', input: '{"arr":[1,4,2,3],"k":2}' },
     { label: 'Long streak', input: '{"arr":[5,1,3,2],"k":3}' },
     { label: 'First duel', input: '{"arr":[2,9,4],"k":1}' },
+    { label: 'Two values', input: '{"arr":[5,9],"k":1}' },
+    { label: 'k equals length minus one', input: '{"arr":[3,7,11,15],"k":3}' },
+    { label: 'Largest values, k 10', input: '{"arr":[99,1,98,2,97,3,96,4,95,5,94,6],"k":10}' },
+    { label: 'Long run: 12 values', input: '{"arr":[30,18,8,93,99,50,97,37,58,22,6,14],"k":6}' },
   ],
 }
 

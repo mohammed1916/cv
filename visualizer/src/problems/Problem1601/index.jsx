@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":5,"requests":[[0,1],[1,0],[0,1],[1,2],[2,0],[3,4]]}' },
     { label: 'Example 3', input: '{"n":4,"requests":[[0,3],[3,1],[1,0],[2,1]]}' },
+    { label: "Single building", input: "{\"n\":1,\"requests\":[[0,0]]}" },
+    { label: "Same pair twice", input: "{\"n\":2,\"requests\":[[0,1],[0,1]]}" },
+    { label: "Six buildings, eight requests", input: "{\"n\":6,\"requests\":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,0],[0,3],[2,5]]}" },
+    { label: "Long run: 6 buildings, 8 requests", input: "{\"n\":6,\"requests\":[[1,5],[3,5],[1,4],[5,2],[2,2],[4,4],[5,2],[2,4]]}" },
   ],
 }
 

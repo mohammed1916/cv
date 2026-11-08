@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Two by two', input: '{"cost":[[15,96],[36,2]]}' },
     { label: 'One by two', input: '{"cost":[[1,9]]}' },
+    { label: "Single pair", input: "{\"cost\":[[7]]}" },
+    { label: "Equal costs", input: "{\"cost\":[[5,5],[5,5]]}" },
+    { label: "Four by four, all maximum", input: "{\"cost\":[[100,100,100,100],[100,100,100,100],[100,100,100,100],[100,100,100,100]]}" },
+    { label: "Long run: 4 by 4 costs", input: "{\"cost\":[[82,58,98,38],[37,51,57,39],[66,92,62,16],[44,58,25,9]]}" },
   ],
 }
 
