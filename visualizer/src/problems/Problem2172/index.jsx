@@ -16,6 +16,11 @@ const definition = {
     { label: 'Full slots', input: '{"nums":[1,2,3,4,5,6],"slots":3}' },
     { label: 'Spare room', input: '{"nums":[1,3,10,4,7,1],"slots":3}' },
     { label: 'One slot', input: '{"nums":[2,3],"slots":1}' },
+    { label: 'One number, one slot', input: '{"nums":[5],"slots":1}' },
+    { label: 'Equal numbers share a slot', input: '{"nums":[3,3],"slots":1}' },
+    { label: 'No overlapping bits', input: '{"nums":[8],"slots":3}' },
+    { label: 'Largest values, full slots', input: '{"nums":[15,15,15,15,15,15],"slots":3}' },
+    { label: 'Long run: six numbers', input: '{"nums":[8,8,9,10,14,5],"slots":3}' },
   ],
 }
 

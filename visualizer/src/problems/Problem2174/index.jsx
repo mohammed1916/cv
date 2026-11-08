@@ -20,6 +20,11 @@ const definition = {
   examples: [
     { label: "Three by three", input: '{"grid":[[1,0,1],[0,1,0],[1,1,1]]}' },
     { label: "Four by four", input: '{"grid":[[1,1,1,1],[1,0,0,1],[0,1,1,0],[1,0,1,1]]}' },
+    { label: 'Single cell', input: '{"grid":[[1]]}' },
+    { label: 'Identical rows', input: '{"grid":[[1,0],[1,0]]}' },
+    { label: 'No ones', input: '{"grid":[[0,0],[0,0]]}' },
+    { label: 'Largest grid, all ones', input: '{"grid":[[1,1,1,1],[1,1,1,1],[1,1,1,1],[1,1,1,1]]}' },
+    { label: 'Long run: 4 by 4 grid', input: '{"grid":[[1,0,0,0],[0,1,1,1],[1,0,1,0],[0,1,1,1]]}' },
   ],
 };
 

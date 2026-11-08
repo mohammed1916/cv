@@ -16,6 +16,11 @@ const definition = {
     { label: 'Two matches', input: '{"words":["pay","attention","practice","attend"],"pref":"at"}' },
     { label: 'No match', input: '{"words":["leetcode","win","loops"],"pref":"code"}' },
     { label: 'Whole word', input: '{"words":["abc","ab"],"pref":"abc"}' },
+    { label: 'Single word', input: '{"words":["cat"],"pref":"ca"}' },
+    { label: 'Duplicate words count twice', input: '{"words":["ab","ab"],"pref":"ab"}' },
+    { label: 'Prefix longer than some words', input: '{"words":["ab","abc","abcdefghijkl"],"pref":"abcd"}' },
+    { label: 'No word starts with the prefix', input: '{"words":["xyz","pqr"],"pref":"a"}' },
+    { label: 'Long run: 10 words', input: '{"words":["cba","ba","ca","ac","acaab","acbca","cabb","abaccc","accaa","bacb"],"pref":"a"}' },
   ],
 }
 

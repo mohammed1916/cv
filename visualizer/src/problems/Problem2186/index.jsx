@@ -16,6 +16,10 @@ const definition = {
     { label: 'Mixed', input: '{"s":"leetcode","t":"coats"}' },
     { label: 'Anagrams', input: '{"s":"night","t":"thing"}' },
     { label: 'Disjoint', input: '{"s":"a","t":"b"}' },
+    { label: 'Identical single letters', input: '{"s":"a","t":"a"}' },
+    { label: 'Equal counts, different letters', input: '{"s":"aab","t":"abb"}' },
+    { label: 'Longest strings', input: '{"s":"abcdefghijklmnop","t":"zyxwvutsrqponmlk"}' },
+    { label: 'Long run: 16 letters', input: '{"s":"qfzzncjqsnrtikja","t":"scamgmmkmupfzqhx"}' },
   ],
 }
 

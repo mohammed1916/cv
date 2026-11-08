@@ -16,6 +16,10 @@ const definition = {
     { label: 'Mixed letters', input: '{"s":"cczazcc","limit":3}' },
     { label: 'Two letters', input: '{"s":"aababab","limit":2}' },
     { label: 'All distinct', input: '{"s":"abc","limit":1}' },
+    { label: 'Single letter', input: '{"s":"a","limit":1}' },
+    { label: 'Limit one, separator missing', input: '{"s":"aaa","limit":1}' },
+    { label: 'Largest string, limit six', input: '{"s":"zzzzyyyyxxxxwwwwvvvvuuuu","limit":6}' },
+    { label: 'Long run: 24 letters', input: '{"s":"fbghgahcgdeghdahghbagcbh","limit":4}' },
   ],
 }
 

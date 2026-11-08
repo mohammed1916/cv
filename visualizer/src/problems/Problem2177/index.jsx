@@ -16,6 +16,10 @@ const definition = {
     { label: 'Multiple of 3', input: '33' },
     { label: 'Not a multiple', input: '4' },
     { label: 'Around zero', input: '0' },
+    { label: 'Smallest positive', input: '1' },
+    { label: 'Smallest multiple of three', input: '3' },
+    { label: 'Largest multiple of three', input: '999999' },
+    { label: 'Largest allowed, not a multiple', input: '1000000' },
   ],
 }
 

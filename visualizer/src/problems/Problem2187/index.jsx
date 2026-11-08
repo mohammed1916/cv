@@ -16,6 +16,10 @@ const definition = {
     { label: 'Three buses', input: '{"time":[1,2,3],"totalTrips":5}' },
     { label: 'Single bus', input: '{"time":[2],"totalTrips":1}' },
     { label: 'Equal buses', input: '{"time":[1,1,1],"totalTrips":4}' },
+    { label: 'One bus', input: '{"time":[4],"totalTrips":3}' },
+    { label: 'Identical buses', input: '{"time":[2,2,2],"totalTrips":6}' },
+    { label: 'Largest times and trips', input: '{"time":[9,9,9,9,9,9],"totalTrips":30}' },
+    { label: 'Long run: six buses', input: '{"time":[5,3,9,6,7,1],"totalTrips":30}' },
   ],
 }
 

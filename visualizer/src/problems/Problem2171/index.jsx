@@ -16,6 +16,10 @@ const definition = {
     { label: 'Four bags', input: '[4,1,6,5]' },
     { label: 'Repeated size', input: '[2,10,3,2]' },
     { label: 'Equal bags', input: '[3,3,3]' },
+    { label: 'Single bag', input: '[7]' },
+    { label: 'Pairs of equal bags', input: '[2,2,9,9]' },
+    { label: 'Largest bags, twelve', input: '[20,1,20,1,20,1,20,1,20,1,20,1]' },
+    { label: 'Long run: 12 bags', input: '[7,3,7,10,17,2,7,4,13,16,15,1]' },
   ],
 }
 

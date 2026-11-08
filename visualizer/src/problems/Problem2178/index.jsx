@@ -16,6 +16,10 @@ const definition = {
     { label: 'Even total', input: '28' },
     { label: 'Small even', input: '12' },
     { label: 'Odd total', input: '7' },
+    { label: 'Smallest total, one part', input: '2' },
+    { label: 'Exactly one part', input: '4' },
+    { label: 'Long run: many even parts', input: '390' },
+    { label: 'Largest total', input: '400' },
   ],
 }
 

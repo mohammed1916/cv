@@ -16,6 +16,11 @@ const definition = {
     { label: 'Two rows', input: '{"height":2,"width":3,"bricks":[1,2]}' },
     { label: 'Four width', input: '{"height":1,"width":4,"bricks":[1,2]}' },
     { label: 'Three rows', input: '{"height":3,"width":4,"bricks":[1,2]}' },
+    { label: 'Single cell wall', input: '{"height":1,"width":1,"bricks":[1]}' },
+    { label: 'Equal rows, two layouts', input: '{"height":2,"width":2,"bricks":[1,2]}' },
+    { label: 'No layout fits', input: '{"height":2,"width":3,"bricks":[2]}' },
+    { label: 'Largest wall', input: '{"height":3,"width":10,"bricks":[1,2,3,4]}' },
+    { label: 'Long run: nine wide', input: '{"height":3,"width":9,"bricks":[1,3,4]}' },
   ],
 }
 

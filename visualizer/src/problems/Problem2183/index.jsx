@@ -16,6 +16,11 @@ const definition = {
     { label: 'Five values', input: '{"nums":[1,2,3,4,5],"k":2}' },
     { label: 'No pair', input: '{"nums":[1,2,3,4],"k":5}' },
     { label: 'Split factors', input: '{"nums":[2,3],"k":6}' },
+    { label: 'Single value', input: '{"nums":[6],"k":6}' },
+    { label: 'Equal values', input: '{"nums":[2,2,2],"k":4}' },
+    { label: 'No divisible pairs', input: '{"nums":[1,1,1],"k":7}' },
+    { label: 'Largest values and k', input: '{"nums":[30,30,30,30,30,30,30,30,30,30],"k":30}' },
+    { label: 'Long run: 10 values', input: '{"nums":[26,4,2,17,10,19,17,18,14,2],"k":12}' },
   ],
 }
 

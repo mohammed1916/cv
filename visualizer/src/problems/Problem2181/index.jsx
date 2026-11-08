@@ -16,6 +16,10 @@ const definition = {
     { label: 'Two runs', input: '[0,3,1,0,4,5,2,0]' },
     { label: 'Three runs', input: '[0,1,0,3,0,2,2,0]' },
     { label: 'Single value run', input: '[0,7,0]' },
+    { label: 'Single run', input: '[0,5,0]' },
+    { label: 'Equal runs', input: '[0,2,0,2,0]' },
+    { label: 'Largest list, one long run', input: '[0,9,9,9,9,9,9,9,9,9,9,9,9,0]' },
+    { label: 'Long run: 14 nodes', input: '[0,9,5,0,7,0,9,2,6,0,9,8,9,0]' },
   ],
 }
 

@@ -8,7 +8,14 @@ const definition = {
   inputLabel: 'Matches as JSON: {"matches":[{"player_id","match_day","result"}]}',
   url: 'https://leetcode.com/problems/longest-winning-streak/',
   complexity: 'One ordering of the matches, then one pass per player: O(m log m) for m matches, plus a linear walk.',
-  examples: [{ label: 'Sample matches', input: JSON.stringify(sample) }],
+  examples: [
+    { label: 'Sample matches', input: JSON.stringify(sample) },
+    { label: 'No matches', input: '{"matches":[]}' },
+    { label: 'One match', input: '{"matches":[{"player_id":1,"match_day":1,"result":"Win"}]}' },
+    { label: 'Equal results for two players', input: '{"matches":[{"player_id":1,"match_day":1,"result":"Win"},{"player_id":2,"match_day":1,"result":"Win"}]}' },
+    { label: 'Twenty matches, one player', input: '{"matches":[{"player_id":1,"match_day":1,"result":"Win"},{"player_id":1,"match_day":2,"result":"Draw"},{"player_id":1,"match_day":3,"result":"Lose"},{"player_id":1,"match_day":4,"result":"Win"},{"player_id":1,"match_day":5,"result":"Draw"},{"player_id":1,"match_day":6,"result":"Lose"},{"player_id":1,"match_day":7,"result":"Win"},{"player_id":1,"match_day":8,"result":"Draw"},{"player_id":1,"match_day":9,"result":"Lose"},{"player_id":1,"match_day":10,"result":"Win"},{"player_id":1,"match_day":11,"result":"Draw"},{"player_id":1,"match_day":12,"result":"Lose"},{"player_id":1,"match_day":13,"result":"Win"},{"player_id":1,"match_day":14,"result":"Draw"},{"player_id":1,"match_day":15,"result":"Lose"},{"player_id":1,"match_day":16,"result":"Win"},{"player_id":1,"match_day":17,"result":"Draw"},{"player_id":1,"match_day":18,"result":"Lose"},{"player_id":1,"match_day":19,"result":"Win"},{"player_id":1,"match_day":20,"result":"Draw"}]}' },
+    { label: 'Long run: 20 matches', input: '{"matches":[{"player_id":1,"match_day":1,"result":"Win"},{"player_id":2,"match_day":1,"result":"Draw"},{"player_id":3,"match_day":1,"result":"Lose"},{"player_id":4,"match_day":1,"result":"Draw"},{"player_id":1,"match_day":2,"result":"Win"},{"player_id":2,"match_day":2,"result":"Win"},{"player_id":3,"match_day":2,"result":"Draw"},{"player_id":4,"match_day":2,"result":"Win"},{"player_id":1,"match_day":3,"result":"Lose"},{"player_id":2,"match_day":3,"result":"Lose"},{"player_id":3,"match_day":3,"result":"Lose"},{"player_id":4,"match_day":3,"result":"Lose"},{"player_id":1,"match_day":4,"result":"Lose"},{"player_id":2,"match_day":4,"result":"Draw"},{"player_id":3,"match_day":4,"result":"Draw"},{"player_id":4,"match_day":4,"result":"Draw"},{"player_id":1,"match_day":5,"result":"Win"},{"player_id":2,"match_day":5,"result":"Win"},{"player_id":3,"match_day":5,"result":"Draw"},{"player_id":4,"match_day":5,"result":"Lose"}]}' },
+  ],
 }
 
 function RowTable({ rows, label }) {

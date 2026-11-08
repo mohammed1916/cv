@@ -16,6 +16,10 @@ const definition = {
     { label: 'Two digit range', input: '30' },
     { label: 'Small', input: '4' },
     { label: 'Just past nine', input: '10' },
+    { label: 'Smallest input', input: '1' },
+    { label: 'Ends at nine', input: '9' },
+    { label: 'Largest allowed value', input: '80' },
+    { label: 'Long run: up to 79', input: '79' },
   ],
 }
 
