@@ -24,5 +24,25 @@ export default [
     "label": "Empty to one",
     "s1": "",
     "s2": "q"
+  },
+  {
+    "label": "Both strings differ by one letter",
+    "s1": "a",
+    "s2": "b"
+  },
+  {
+    "label": "Repeated letters with one deletion",
+    "s1": "aaaa",
+    "s2": "aaa"
+  },
+  {
+    "label": "Longest allowed strings differ at the last letter",
+    "s1": "abcdefghijklmnopqrstuvwxyzabcd",
+    "s2": "abcdefghijklmnopqrstuvwxyzabce"
+  },
+  {
+    "label": "Long run: insertion deep inside",
+    "s1": "tgzgmihgvgpewoocvhzehcyrthio",
+    "s2": "tgzgmihgvgpewqoocvhzehcyrthio"
   }
 ];

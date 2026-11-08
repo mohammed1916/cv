@@ -15,5 +15,21 @@ export default [
   {
     "label": "Equal maxima",
     "input": "{\"nums\":[6,6,6,6]}"
+  },
+  {
+    "label": "Exactly three values",
+    "input": "{\"nums\":[1,2,3]}"
+  },
+  {
+    "label": "All negative values",
+    "input": "{\"nums\":[-1,-2,-3,-4,-5]}"
+  },
+  {
+    "label": "Extreme values at the limits",
+    "input": "{\"nums\":[1000,1000,-1000,-1000,1000]}"
+  },
+  {
+    "label": "Long run: 40 values",
+    "input": "{\"nums\":[892,170,-618,-145,685,296,-156,-746,920,-629,260,955,-998,380,206,-655,234,-308,-5,-265,640,-342,347,-831,-903,886,909,-548,-979,-148,-822,270,397,16,-158,820,-565,-928,-927,861]}"
   }
 ];

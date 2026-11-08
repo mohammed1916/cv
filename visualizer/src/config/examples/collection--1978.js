@@ -15,5 +15,21 @@ export default [
   {
     "label": "No employees means no result",
     "input": "{\"employees\":[]}"
+  },
+  {
+    "label": "Single employee without a manager",
+    "input": "{\"employees\":[[1,\"Ada\",null,50000]]}"
+  },
+  {
+    "label": "Equal salaries under one manager",
+    "input": "{\"employees\":[[10,\"Bea\",99,40000],[11,\"Cal\",99,40000],[99,\"Dev\",null,90000]]}"
+  },
+  {
+    "label": "Manager id that is not in the table",
+    "input": "{\"employees\":[[20,\"Eve\",777,25000]]}"
+  },
+  {
+    "label": "Long run: 10 employees in a tree",
+    "input": "{\"employees\":[[1,\"Root\",null,100000],[2,\"E2\",1,49078],[3,\"E3\",1,53628],[4,\"E4\",2,37904],[5,\"E5\",4,36463],[6,\"E6\",4,68861],[7,\"E7\",6,23384],[8,\"E8\",3,73147],[9,\"E9\",8,23442],[10,\"E10\",1,89107]]}"
   }
 ];

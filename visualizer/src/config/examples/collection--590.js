@@ -15,5 +15,21 @@ export default [
   {
     "label": "A single long child chain exposes reversed traversal order",
     "input": "{\"root\":{\"val\":3,\"children\":[{\"val\":8,\"children\":[{\"val\":15,\"children\":[{\"val\":24,\"children\":[{\"val\":35,\"children\":[]}]}]}]}]}}"
+  },
+  {
+    "label": "Single node with no children",
+    "input": "{\"root\":{\"val\":4,\"children\":[]}}"
+  },
+  {
+    "label": "Equal values in sibling branches",
+    "input": "{\"root\":{\"val\":7,\"children\":[{\"val\":7,\"children\":[]},{\"val\":7,\"children\":[]}]}}"
+  },
+  {
+    "label": "Extreme values at the limits",
+    "input": "{\"root\":{\"val\":10000,\"children\":[{\"val\":0,\"children\":[]},{\"val\":10000,\"children\":[]}]}}"
+  },
+  {
+    "label": "Long run: 30 nodes with generated branches",
+    "input": "{\"root\":{\"val\":11,\"children\":[{\"val\":13,\"children\":[{\"val\":33,\"children\":[{\"val\":41,\"children\":[{\"val\":55,\"children\":[{\"val\":45,\"children\":[]}]},{\"val\":52,\"children\":[{\"val\":91,\"children\":[{\"val\":25,\"children\":[]}]}]}]}]}]},{\"val\":4,\"children\":[{\"val\":70,\"children\":[{\"val\":31,\"children\":[{\"val\":82,\"children\":[{\"val\":52,\"children\":[]}]}]},{\"val\":22,\"children\":[]},{\"val\":54,\"children\":[]}]},{\"val\":29,\"children\":[{\"val\":93,\"children\":[]}]}]},{\"val\":89,\"children\":[{\"val\":16,\"children\":[{\"val\":93,\"children\":[{\"val\":41,\"children\":[{\"val\":84,\"children\":[]}]},{\"val\":9,\"children\":[{\"val\":10,\"children\":[]}]}]}]},{\"val\":12,\"children\":[{\"val\":10,\"children\":[{\"val\":37,\"children\":[]}]},{\"val\":11,\"children\":[]}]}]},{\"val\":93,\"children\":[]}]}}"
   }
 ];

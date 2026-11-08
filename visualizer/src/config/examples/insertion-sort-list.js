@@ -50,5 +50,69 @@ export default [
       2,
       -3
     ]
+  },
+  {
+    "label": "Equal values keep their order",
+    "head": [
+      6,
+      6,
+      6,
+      6
+    ]
+  },
+  {
+    "label": "Extreme values at both ends",
+    "head": [
+      99,
+      -99,
+      0,
+      99,
+      -99
+    ]
+  },
+  {
+    "label": "Negative and positive ties",
+    "head": [
+      -4,
+      4,
+      -4,
+      4,
+      0
+    ]
+  },
+  {
+    "label": "Long run: 30 nodes",
+    "head": [
+      -11,
+      8,
+      30,
+      -6,
+      62,
+      11,
+      -66,
+      86,
+      24,
+      9,
+      -1,
+      29,
+      -10,
+      40,
+      -62,
+      94,
+      -26,
+      -4,
+      76,
+      -25,
+      29,
+      -49,
+      86,
+      61,
+      -1,
+      93,
+      -31,
+      11,
+      8,
+      30
+    ]
   }
 ];

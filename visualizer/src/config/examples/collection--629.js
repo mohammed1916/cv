@@ -15,5 +15,21 @@ export default [
   {
     "label": "An unattainable inversion count returns zero",
     "input": "{\"n\":4,\"k\":8}"
+  },
+  {
+    "label": "Single element with zero inversions",
+    "input": "{\"n\":1,\"k\":0}"
+  },
+  {
+    "label": "Two elements with no attainable count",
+    "input": "{\"n\":2,\"k\":2}"
+  },
+  {
+    "label": "Largest inversion count for twelve",
+    "input": "{\"n\":12,\"k\":60}"
+  },
+  {
+    "label": "Long run: eleven elements with a middle count",
+    "input": "{\"n\":11,\"k\":27}"
   }
 ];

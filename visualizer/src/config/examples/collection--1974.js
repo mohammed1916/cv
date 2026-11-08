@@ -15,5 +15,21 @@ export default [
   {
     "label": "Opposite alphabet positions tie",
     "input": "{\"word\":\"nan\"}"
+  },
+  {
+    "label": "Single letter",
+    "input": "a"
+  },
+  {
+    "label": "Two equal letters",
+    "input": "bb"
+  },
+  {
+    "label": "Thirty copies of z",
+    "input": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+  },
+  {
+    "label": "Long run: 30 letters",
+    "input": "eepdzosojjqmjytsvrldfwfcttweod"
   }
 ];

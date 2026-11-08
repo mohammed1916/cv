@@ -15,5 +15,21 @@ export default [
   {
     "label": "One building supplies one segment",
     "input": "{\"buildings\":[[5,14,13]]}"
+  },
+  {
+    "label": "Single building",
+    "input": "[[1,2,1]]"
+  },
+  {
+    "label": "Identical overlapping buildings",
+    "input": "[[2,5,3],[2,5,3],[2,5,3]]"
+  },
+  {
+    "label": "Full width with a tall building",
+    "input": "[[1,30,30],[1,30,1]]"
+  },
+  {
+    "label": "Long run: 10 buildings",
+    "input": "[[26,30,18],[5,20,8],[21,22,19],[6,9,10],[1,5,3],[22,25,4],[24,28,12],[3,16,25],[28,29,13],[9,24,22]]"
   }
 ];

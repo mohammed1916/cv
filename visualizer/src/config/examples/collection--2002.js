@@ -15,5 +15,21 @@ export default [
   {
     "label": "Two positions form the smallest valid pair",
     "input": "{\"s\":\"zz\"}"
+  },
+  {
+    "label": "Two distinct letters",
+    "input": "{\"s\":\"ab\"}"
+  },
+  {
+    "label": "Twelve equal letters",
+    "input": "{\"s\":\"aaaaaaaaaaaa\"}"
+  },
+  {
+    "label": "Repeats then a new letter",
+    "input": "{\"s\":\"abcabcbb\"}"
+  },
+  {
+    "label": "Long run: 12 letters",
+    "input": "{\"s\":\"ipihbrdjimbr\"}"
   }
 ];

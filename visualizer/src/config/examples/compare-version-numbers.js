@@ -24,5 +24,25 @@ export default [
     "label": "First revision decides",
     "version1": "11.0",
     "version2": "9.99"
+  },
+  {
+    "label": "Equal after leading zeros",
+    "version1": "001",
+    "version2": "1"
+  },
+  {
+    "label": "Zero revisions compare equal",
+    "version1": "1.0.0.0",
+    "version2": "1"
+  },
+  {
+    "label": "Longest allowed versions differ at the end",
+    "version1": "1.2.3.4.5.6.7.8.9.10.11.12.13.14.15.16.17.18.19",
+    "version2": "1.2.3.4.5.6.7.8.9.10.11.12.13.14.15.16.17.18.20"
+  },
+  {
+    "label": "Long run: 12 revisions",
+    "version1": "83.85.77.91.94.23.47.47.2.3.21.2",
+    "version2": "83.85.77.91.94.23.47.47.2.4.21.2"
   }
 ];

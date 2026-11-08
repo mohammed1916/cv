@@ -56,5 +56,93 @@ export default [
   {
     "label": "Empty tree",
     "arr": []
+  },
+  {
+    "label": "Repeated values in different positions",
+    "arr": [
+      3,
+      3,
+      3,
+      3,
+      null,
+      null,
+      3
+    ]
+  },
+  {
+    "label": "Full tree of 30 entries with extreme values",
+    "arr": [
+      100,
+      -100,
+      100,
+      -100,
+      100,
+      -100,
+      100,
+      -100,
+      100,
+      -100,
+      100,
+      -100,
+      100,
+      -100,
+      100,
+      -100,
+      100,
+      -100,
+      100,
+      -100,
+      100,
+      -100,
+      100,
+      -100,
+      100,
+      -100,
+      100,
+      -100,
+      100,
+      -100
+    ]
+  },
+  {
+    "label": "Long run: 24 entries with gaps",
+    "arr": [
+      -20,
+      50,
+      15,
+      15,
+      -97,
+      null,
+      null,
+      -50,
+      100,
+      -39,
+      45,
+      12,
+      -86,
+      78,
+      84,
+      -14,
+      -24,
+      null,
+      -39,
+      -64,
+      null,
+      null,
+      -39,
+      -89
+    ]
+  },
+  {
+    "label": "Right-leaning chain",
+    "arr": [
+      1,
+      null,
+      2,
+      null,
+      3,
+      null,
+      4
+    ]
   }
 ];

@@ -15,5 +15,21 @@ export default [
   {
     "label": "Equal rows create symmetric choices",
     "input": "{\"grid\":[[6,6,6,6],[6,6,6,6]]}"
+  },
+  {
+    "label": "Two columns of zeros",
+    "input": "[[0,0],[0,0]]"
+  },
+  {
+    "label": "Equal values in three columns",
+    "input": "[[5,5,5],[5,5,5]]"
+  },
+  {
+    "label": "Alternating maximum and zero",
+    "input": "[[100,0,100,0,100,0,100,0,100,0,100,0],[0,100,0,100,0,100,0,100,0,100,0,100]]"
+  },
+  {
+    "label": "Long run: 12 columns",
+    "input": "[[45,20,59,94,57,17,73,75,58,62,77,68],[48,64,1,99,26,77,51,17,54,97,57,50]]"
   }
 ];

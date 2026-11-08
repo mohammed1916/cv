@@ -43,5 +43,71 @@ export default [
       27,
       31
     ]
+  },
+  {
+    "label": "Odd length with equal values",
+    "arr": [
+      5,
+      5,
+      5
+    ]
+  },
+  {
+    "label": "Three nodes with mixed signs",
+    "arr": [
+      -4,
+      0,
+      4
+    ]
+  },
+  {
+    "label": "Extreme values at the limits",
+    "arr": [
+      99,
+      -99,
+      99,
+      -99,
+      99,
+      -99,
+      99,
+      -99,
+      99,
+      -99,
+      99,
+      -99,
+      99,
+      -99,
+      99,
+      -99,
+      99,
+      -99,
+      99,
+      -99
+    ]
+  },
+  {
+    "label": "Long run: 20 nodes",
+    "arr": [
+      -28,
+      82,
+      69,
+      63,
+      -32,
+      24,
+      97,
+      39,
+      -16,
+      54,
+      78,
+      56,
+      -90,
+      49,
+      61,
+      58,
+      -52,
+      -51,
+      13,
+      -41
+    ]
   }
 ];

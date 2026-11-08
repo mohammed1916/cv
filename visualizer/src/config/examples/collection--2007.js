@@ -15,5 +15,21 @@ export default [
   {
     "label": "Odd length cannot be a doubled array",
     "input": "{\"changed\":[3,6,9]}"
+  },
+  {
+    "label": "Single zero",
+    "input": "[0]"
+  },
+  {
+    "label": "Equal changes",
+    "input": "[9,9,9,9,9]"
+  },
+  {
+    "label": "Maximum values around a zero",
+    "input": "[100,0,100]"
+  },
+  {
+    "label": "Long run: 20 values",
+    "input": "[12,61,63,8,67,81,90,14,93,35,81,100,76,50,27,22,84,22,90,29]"
   }
 ];

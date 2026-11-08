@@ -15,5 +15,17 @@ export default [
   {
     "label": "Largest allowed bit width",
     "input": "{\"p\":60}"
+  },
+  {
+    "label": "Three steps",
+    "input": "3"
+  },
+  {
+    "label": "Four steps",
+    "input": "4"
+  },
+  {
+    "label": "Long run: largest p",
+    "input": "5"
   }
 ];

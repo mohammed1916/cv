@@ -15,5 +15,21 @@ export default [
   {
     "label": "Only one interior position exists",
     "input": "{\"nums\":[8,3,12]}"
+  },
+  {
+    "label": "Three equal values",
+    "input": "[5,5,5]"
+  },
+  {
+    "label": "Descending run",
+    "input": "[9,7,5,3,1]"
+  },
+  {
+    "label": "Alternating extremes",
+    "input": "[100,1,100,1,100,1]"
+  },
+  {
+    "label": "Long run: 30 values",
+    "input": "[21,81,75,72,81,40,21,63,17,39,83,29,10,48,46,84,68,54,75,100,34,16,49,88,95,100,36,34,92,38]"
   }
 ];

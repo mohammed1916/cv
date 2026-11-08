@@ -15,5 +15,21 @@ export default [
   {
     "label": "Repeated digits allow equal consecutive numbers",
     "input": "{\"num\":\"777777\"}"
+  },
+  {
+    "label": "Single digit",
+    "input": "7"
+  },
+  {
+    "label": "Repeated zeros",
+    "input": "0000"
+  },
+  {
+    "label": "Twelve nines",
+    "input": "999999999999"
+  },
+  {
+    "label": "Long run: 12 digits",
+    "input": "737904259607"
   }
 ];

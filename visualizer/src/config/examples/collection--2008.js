@@ -15,5 +15,21 @@ export default [
   {
     "label": "A ride need not start at position one",
     "input": "{\"n\":10,\"rides\":[[6,9,8]]}"
+  },
+  {
+    "label": "One ride with zero tip",
+    "input": "{\"n\":2,\"rides\":[[1,2,0]]}"
+  },
+  {
+    "label": "Duplicate rides",
+    "input": "{\"n\":3,\"rides\":[[1,3,5],[1,3,5],[2,3,5]]}"
+  },
+  {
+    "label": "Whole street with a large tip",
+    "input": "{\"n\":20,\"rides\":[[1,20,1000],[19,20,1]]}"
+  },
+  {
+    "label": "Long run: 20 points, 12 rides",
+    "input": "{\"n\":20,\"rides\":[[6,20,50],[15,17,4],[19,20,27],[11,18,29],[13,19,37],[11,12,31],[16,19,0],[5,20,22],[17,19,46],[7,20,18],[12,20,42],[8,11,44]]}"
   }
 ];

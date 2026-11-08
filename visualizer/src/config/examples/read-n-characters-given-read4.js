@@ -24,5 +24,25 @@ export default [
     "label": "Empty file",
     "file": "",
     "n": 5
+  },
+  {
+    "label": "Single character read",
+    "file": "a",
+    "n": 1
+  },
+  {
+    "label": "Request exactly the file length",
+    "file": "kestrel",
+    "n": 7
+  },
+  {
+    "label": "Long run: request beyond a 20-character file",
+    "file": "rivermoonlightwillow",
+    "n": 30
+  },
+  {
+    "label": "Maximum request on a short file",
+    "file": "birchwoodglade",
+    "n": 30
   }
 ];

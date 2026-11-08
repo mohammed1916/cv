@@ -15,5 +15,21 @@ export default [
   {
     "label": "An alternating bound is itself valid and must be included",
     "input": "{\"n\":341}"
+  },
+  {
+    "label": "Bound two includes one and two",
+    "input": "{\"n\":2}"
+  },
+  {
+    "label": "Largest allowed bound",
+    "input": "{\"n\":1000000000}"
+  },
+  {
+    "label": "All ones in binary",
+    "input": "{\"n\":255}"
+  },
+  {
+    "label": "Long run: a large mixed bound",
+    "input": "{\"n\":536870911}"
   }
 ];

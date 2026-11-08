@@ -59,5 +59,96 @@ export default [
       21
     ],
     "intersectVal": 17
+  },
+  {
+    "label": "Single shared node",
+    "listA": [],
+    "listB": [],
+    "shared": [
+      9
+    ],
+    "intersectVal": 9
+  },
+  {
+    "label": "Equal values in different nodes",
+    "listA": [
+      5,
+      5
+    ],
+    "listB": [
+      5,
+      5,
+      5
+    ],
+    "shared": [
+      5
+    ],
+    "intersectVal": 5
+  },
+  {
+    "label": "Largest allowed first list",
+    "listA": [
+      0,
+      99,
+      0,
+      99,
+      0,
+      99,
+      0,
+      99,
+      0,
+      99,
+      0,
+      99,
+      0,
+      99,
+      0,
+      99,
+      0,
+      99,
+      0,
+      99
+    ],
+    "listB": [
+      0
+    ],
+    "shared": [
+      99
+    ],
+    "intersectVal": 99
+  },
+  {
+    "label": "Long run: shared tail of ten nodes",
+    "listA": [
+      18,
+      64,
+      73,
+      88,
+      20,
+      14,
+      67,
+      90
+    ],
+    "listB": [
+      20,
+      55,
+      68,
+      30,
+      32,
+      62
+    ],
+    "shared": [
+      23,
+      46,
+      63,
+      71,
+      44,
+      11,
+      26,
+      52,
+      53,
+      48
+    ],
+    "intersectVal": 0
   }
 ];

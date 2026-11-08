@@ -15,5 +15,21 @@ export default [
   {
     "label": "A single task needs one session",
     "input": "{\"tasks\":[5],\"sessionTime\":8}"
+  },
+  {
+    "label": "Single task that fills the session",
+    "input": "{\"tasks\":[3],\"sessionTime\":3}"
+  },
+  {
+    "label": "Two tasks at the session limit",
+    "input": "{\"tasks\":[15,15],\"sessionTime\":15}"
+  },
+  {
+    "label": "Eight equal tasks",
+    "input": "{\"tasks\":[2,2,2,2,2,2,2,2],\"sessionTime\":4}"
+  },
+  {
+    "label": "Long run: 8 tasks",
+    "input": "{\"tasks\":[6,14,9,15,7,7,5,1],\"sessionTime\":15}"
   }
 ];

@@ -15,5 +15,21 @@ export default [
   {
     "label": "No earlier triple reaches a later value",
     "input": "{\"nums\":[9,8,7,6,5]}"
+  },
+  {
+    "label": "Shortest allowed list",
+    "input": "[1,1,1,1]"
+  },
+  {
+    "label": "Maximum values with a tie",
+    "input": "[100,100,99,98,100]"
+  },
+  {
+    "label": "Powers of two",
+    "input": "[2,4,8,16,32,64]"
+  },
+  {
+    "label": "Long run: 30 values",
+    "input": "[51,94,67,50,86,39,87,36,79,82,22,47,15,27,77,87,45,85,50,45,58,4,44,17,68,81,27,8,29,8]"
   }
 ];

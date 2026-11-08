@@ -43,5 +43,53 @@ export default [
       "9",
       "-"
     ]
+  },
+  {
+    "label": "Extreme operands at the limits",
+    "tokens": [
+      "-20",
+      "20",
+      "*",
+      "-20",
+      "/"
+    ]
+  },
+  {
+    "label": "Division truncates toward zero",
+    "tokens": [
+      "7",
+      "-2",
+      "/",
+      "3",
+      "+"
+    ]
+  },
+  {
+    "label": "Subtracting two negatives",
+    "tokens": [
+      "-5",
+      "-6",
+      "-"
+    ]
+  },
+  {
+    "label": "Long run: 15 tokens",
+    "tokens": [
+      "4",
+      "-3",
+      "*",
+      "2",
+      "+",
+      "9",
+      "1",
+      "-",
+      "/",
+      "6",
+      "*",
+      "5",
+      "+",
+      "-1",
+      "-"
+    ]
   }
 ];

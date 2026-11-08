@@ -15,5 +15,21 @@ export default [
   {
     "label": "Only the owner may unlock an already locked node",
     "input": "{\"parent\":[-1,0],\"operations\":[[\"lock\",1,4],[\"lock\",1,5],[\"unlock\",1,5],[\"unlock\",1,4]]}"
+  },
+  {
+    "label": "Single node",
+    "input": "{\"parent\":[-1],\"operations\":[[\"lock\",0,1]]}"
+  },
+  {
+    "label": "Repeated lock and unlock by one user",
+    "input": "{\"parent\":[-1,0],\"operations\":[[\"lock\",1,2],[\"unlock\",1,2],[\"lock\",1,2]]}"
+  },
+  {
+    "label": "Chain of twelve nodes",
+    "input": "{\"parent\":[-1,0,1,2,3,4,5,6,7,8,9,10],\"operations\":[[\"lock\",11,3],[\"upgrade\",10,4],[\"unlock\",11,3],[\"lock\",0,5]]}"
+  },
+  {
+    "label": "Long run: 12 nodes, 20 operations",
+    "input": "{\"parent\":[-1,0,1,2,3,2,0,3,4,3,2,0],\"operations\":[[\"lock\",10,8],[\"unlock\",5,6],[\"lock\",1,2],[\"lock\",10,3],[\"upgrade\",4,3],[\"unlock\",8,7],[\"lock\",8,8],[\"upgrade\",9,1],[\"unlock\",2,1],[\"lock\",4,3],[\"lock\",2,6],[\"upgrade\",1,6],[\"upgrade\",4,5],[\"lock\",4,7],[\"lock\",10,7],[\"unlock\",8,8],[\"lock\",5,3],[\"unlock\",0,4],[\"lock\",5,8],[\"lock\",8,1]]}"
   }
 ];

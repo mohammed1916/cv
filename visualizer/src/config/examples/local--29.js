@@ -41,5 +41,26 @@ export default [
       "dividend": "-2147483648",
       "divisor": "1"
     }
+  },
+  {
+    "label": "Equal dividend and divisor",
+    "values": {
+      "dividend": 7,
+      "divisor": 7
+    }
+  },
+  {
+    "label": "Largest positive dividend",
+    "values": {
+      "dividend": 2147483647,
+      "divisor": 1
+    }
+  },
+  {
+    "label": "Long run: large dividend, small divisor",
+    "values": {
+      "dividend": 1999999999,
+      "divisor": 7
+    }
   }
 ];

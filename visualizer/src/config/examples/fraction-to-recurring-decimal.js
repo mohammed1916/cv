@@ -29,5 +29,25 @@ export default [
     "label": "Zero numerator",
     "numerator": 0,
     "denominator": 19
+  },
+  {
+    "label": "Extreme negative integer result",
+    "numerator": -2147483647,
+    "denominator": 1
+  },
+  {
+    "label": "Negative numerator and denominator",
+    "numerator": -7,
+    "denominator": -14
+  },
+  {
+    "label": "Single-digit repeating cycle",
+    "numerator": 1,
+    "denominator": 9
+  },
+  {
+    "label": "Long run: a 60-digit cycle",
+    "numerator": 37,
+    "denominator": 61
   }
 ];

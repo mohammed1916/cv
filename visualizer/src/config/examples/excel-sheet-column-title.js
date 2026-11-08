@@ -19,5 +19,21 @@ export default [
   {
     "label": "First triple letters",
     "n": 703
+  },
+  {
+    "label": "Largest allowed column number",
+    "n": 2147483647
+  },
+  {
+    "label": "Exact multiple of 26",
+    "n": 52
+  },
+  {
+    "label": "Long run: nine-digit column number",
+    "n": 987654321
+  },
+  {
+    "label": "Smallest two-letter column",
+    "n": 26
   }
 ];

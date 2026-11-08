@@ -15,5 +15,21 @@ export default [
   {
     "label": "Repeated equal characters form a longer answer",
     "input": "{\"s\":\"aaaaaaaaaaaa\",\"k\":3}"
+  },
+  {
+    "label": "Two letters with k two",
+    "input": "{\"s\":\"ab\",\"k\":2}"
+  },
+  {
+    "label": "Repeated letter",
+    "input": "{\"s\":\"xxxxxx\",\"k\":2}"
+  },
+  {
+    "label": "Twenty-four letters",
+    "input": "{\"s\":\"abcdefghijklmnopqrstuvwx\",\"k\":6}"
+  },
+  {
+    "label": "Long run: 24 letters",
+    "input": "{\"s\":\"seypenbzudcgadlrdifregfi\",\"k\":4}"
   }
 ];

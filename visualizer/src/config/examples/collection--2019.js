@@ -15,5 +15,21 @@ export default [
   {
     "label": "One operation still scores repeated answers independently",
     "input": "{\"s\":\"8*3\",\"answers\":[24,11,24,32]}"
+  },
+  {
+    "label": "One sum",
+    "input": "{\"s\":\"2+3\",\"answers\":[5,6]}"
+  },
+  {
+    "label": "Only products of two",
+    "input": "{\"s\":\"2*2*2*2\",\"answers\":[16,8]}"
+  },
+  {
+    "label": "Nine digits",
+    "input": "{\"s\":\"9+9*9+9*9+9*9+9*9\",\"answers\":[1000,0]}"
+  },
+  {
+    "label": "Long run: nine digits with mixed operators",
+    "input": "{\"s\":\"4*8*8+3*1*7*4+9+6\",\"answers\":[512,565,746,677,489,694,953,985,866,987,262,692,965,192,970,948,599,101,142,171]}"
   }
 ];

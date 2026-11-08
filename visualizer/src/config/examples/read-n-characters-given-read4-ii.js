@@ -38,5 +38,54 @@ export default [
       1,
       4
     ]
+  },
+  {
+    "label": "One call on one character",
+    "file": "x",
+    "calls": [
+      1
+    ]
+  },
+  {
+    "label": "Every call asks for ten",
+    "file": "tidewater",
+    "calls": [
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10
+    ]
+  },
+  {
+    "label": "Longest allowed file name",
+    "file": "abcdefghijklmnopqrstuvwxyzabcdefghijklmn",
+    "calls": [
+      3,
+      7,
+      2,
+      9,
+      1,
+      8,
+      4,
+      6
+    ]
+  },
+  {
+    "label": "Long run: eight calls on a generated file",
+    "file": "rncadwxixergobgfsqtiqtdsvsrvdzgidqgbcnjl",
+    "calls": [
+      8,
+      6,
+      8,
+      7,
+      9,
+      5,
+      8,
+      8
+    ]
   }
 ];

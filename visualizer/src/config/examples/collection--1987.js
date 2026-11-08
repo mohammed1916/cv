@@ -15,5 +15,21 @@ export default [
   {
     "label": "Only one leading-one subsequence exists",
     "input": "{\"binary\":\"00001\"}"
+  },
+  {
+    "label": "Single character",
+    "input": "{\"binary\":\"1\"}"
+  },
+  {
+    "label": "Alternating characters",
+    "input": "{\"binary\":\"0101010101\"}"
+  },
+  {
+    "label": "Sixty ones",
+    "input": "{\"binary\":\"111111111111111111111111111111111111111111111111111111111111\"}"
+  },
+  {
+    "label": "Long run: 60 characters",
+    "input": "{\"binary\":\"100101001011010011000000010010000100011110000100101001010001\"}"
   }
 ];

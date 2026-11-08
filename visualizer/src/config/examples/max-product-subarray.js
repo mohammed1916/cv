@@ -44,5 +44,75 @@ export default [
     "nums": [
       -13
     ]
+  },
+  {
+    "label": "Single negative value",
+    "nums": [
+      -7
+    ]
+  },
+  {
+    "label": "Zeros split the product",
+    "nums": [
+      0,
+      -2,
+      0,
+      3
+    ]
+  },
+  {
+    "label": "Extreme values at the limits",
+    "nums": [
+      10,
+      -10,
+      10,
+      -10,
+      10
+    ]
+  },
+  {
+    "label": "Long run: 40 values",
+    "nums": [
+      1,
+      -9,
+      -2,
+      1,
+      -2,
+      10,
+      -8,
+      -1,
+      -8,
+      -10,
+      5,
+      -1,
+      10,
+      -7,
+      4,
+      -1,
+      1,
+      -5,
+      -5,
+      5,
+      -3,
+      -8,
+      2,
+      5,
+      -10,
+      2,
+      -2,
+      -2,
+      7,
+      6,
+      9,
+      8,
+      -1,
+      -4,
+      6,
+      7,
+      4,
+      4,
+      1,
+      -7
+    ]
   }
 ];
