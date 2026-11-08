@@ -11,6 +11,9 @@ const definition = {
     { label: 'One row', input: '1' },
     { label: 'Two rows', input: '2' },
     { label: 'Five rows', input: '5' },
+    { label: "Eight rows", input: "8" },
+    { label: "Largest, sixty rows", input: "60" },
+    { label: "Long run: 37 rows", input: "37" },
   ],
 }
 

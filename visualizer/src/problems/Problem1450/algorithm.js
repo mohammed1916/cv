@@ -10,6 +10,10 @@ export const examples = [
   { label: 'Three overlapping', input: '{"start":[1,3,3,8],"end":[3,3,8,10],"query":3}' },
   { label: 'One at the time', input: '{"start":[2,5,7,9],"end":[4,6,8,12],"query":6}' },
   { label: 'Nobody', input: '{"start":[1,2],"end":[3,4],"query":9}' },
+    { label: 'One student at the exact time', input: '{"start":[5],"end":[5],"query":5}' },
+    { label: 'Query at an end time', input: '{"start":[2,4],"end":[4,4],"query":4}' },
+    { label: 'Largest query time: 20 students', input: '{"start":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"end":[100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100],"query":100}' },
+    { label: 'Long run: 20 students', input: '{"start":[45,58,34,54,38,57,46,54,60,5,59,36,44,8,52,43,27,45,37,10],"end":[81,85,65,74,44,93,78,80,94,32,88,37,51,47,65,73,47,82,65,30],"query":62}' },
 ]
 
 export function parseInput(text) {

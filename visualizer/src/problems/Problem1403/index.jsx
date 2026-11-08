@@ -11,6 +11,10 @@ const definition = {
     { label: 'Small', input: '[2, 7, 5, 1]' },
     { label: 'Equal values', input: '[3, 3, 3, 3]' },
     { label: 'One value', input: '[9]' },
+    { label: "Single value", input: "[1]" },
+    { label: "Equal values both needed", input: "[5,5]" },
+    { label: "Sixteen maximum values", input: "[100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100]" },
+    { label: "Long run: 16 values", input: "[78,54,47,61,44,67,9,1,24,19,38,53,16,29,35,45]" },
   ],
 }
 

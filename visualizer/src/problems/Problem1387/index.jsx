@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"lo":12,"hi":15,"k":2}' },
     { label: 'Example 2', input: '{"lo":7,"hi":11,"k":4}' },
+    { label: "Single integer", input: "{\"lo\":1,\"hi\":1,\"k\":1}" },
+    { label: "Equal powers use the smaller number", input: "{\"lo\":3,\"hi\":20,\"k\":2}" },
+    { label: "Largest range, k at the top", input: "{\"lo\":941,\"hi\":1000,\"k\":60}" },
+    { label: "Long run: sixty integers", input: "{\"lo\":697,\"hi\":756,\"k\":30}" },
   ],
 }
 

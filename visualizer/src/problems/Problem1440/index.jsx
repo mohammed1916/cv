@@ -19,6 +19,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"Variables":[{"name":"x","value":66},{"name":"y","value":77}],"Expressions":[{"left_operand":"x","operator":">","right_operand":"y"},{"left_operand":"x","operator":"<","right_operand":"y"},{"left_operand":"y","operator":"=","right_operand":"y"}]}' },
     { label: 'Equal values', input: '{"Variables":[{"name":"a","value":3},{"name":"b","value":3}],"Expressions":[{"left_operand":"a","operator":"=","right_operand":"b"}]}' },
+    { label: 'One comparison', input: '{"Variables":[{"name":"x","value":1}],"Expressions":[{"left_operand":"x","operator":"=","right_operand":"x"}]}' },
+    { label: 'Equal values', input: '{"Variables":[{"name":"x","value":5},{"name":"y","value":5}],"Expressions":[{"left_operand":"x","operator":"=","right_operand":"y"},{"left_operand":"x","operator":"<","right_operand":"y"}]}' },
+    { label: 'Largest values', input: '{"Variables":[{"name":"a","value":100},{"name":"b","value":99}],"Expressions":[{"left_operand":"a","operator":">","right_operand":"b"}]}' },
+    { label: 'Long run: 12 variables', input: '{"Variables":[{"name":"a","value":28},{"name":"b","value":55},{"name":"c","value":80},{"name":"d","value":12},{"name":"e","value":51},{"name":"f","value":80},{"name":"g","value":22},{"name":"h","value":96},{"name":"i","value":49},{"name":"j","value":80},{"name":"k","value":45},{"name":"l","value":4}],"Expressions":[{"left_operand":"k","operator":">","right_operand":"l"},{"left_operand":"k","operator":"=","right_operand":"h"},{"left_operand":"b","operator":">","right_operand":"i"},{"left_operand":"g","operator":"=","right_operand":"l"},{"left_operand":"a","operator":">","right_operand":"i"},{"left_operand":"k","operator":"<","right_operand":"k"},{"left_operand":"g","operator":">","right_operand":"d"},{"left_operand":"b","operator":">","right_operand":"b"},{"left_operand":"d","operator":"<","right_operand":"j"},{"left_operand":"l","operator":"<","right_operand":"g"},{"left_operand":"e","operator":"=","right_operand":"j"},{"left_operand":"g","operator":"=","right_operand":"e"}]}' },
   ],
 }
 

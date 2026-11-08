@@ -11,6 +11,10 @@ const definition = {
     { label: 'Double a', input: '{"s":"aa"}' },
     { label: 'Mixed', input: '{"s":"xaabyy"}' },
     { label: 'Vowels', input: '{"s":"aeiou"}' },
+    { label: "Single consonant", input: "{\"s\":\"b\"}" },
+    { label: "Repeated vowel", input: "{\"s\":\"aa\"}" },
+    { label: "Longest input, all a", input: "{\"s\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}" },
+    { label: "Long run: 200 letters", input: "{\"s\":\"tqokcthryiwpxvbnrdtkaehozzrhtmysbtuszdtlmtuwbyjqrzvzbbxhrlxzfvolmtpfruvajlzauutcsuxskavoyiqhqfrrhkvhwxrwchoahsnidtbflrbbranlfspklqffecqkkvazgymjabetnbqlvqjcqfgcpohwegzadeeltrbtccxkypsktxlazocvdjlalueg\"}" },
   ],
 }
 

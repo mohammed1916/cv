@@ -11,6 +11,10 @@ const definition = {
     { label: 'Triple o', input: 'mooo' },
     { label: 'Mixed runs', input: 'aabbbbcc' },
     { label: 'All different', input: 'abcd' },
+    { label: 'Single letter', input: 'a' },
+    { label: 'Two equal letters', input: 'aa' },
+    { label: 'Largest allowed: 200 letters', input: 'abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab' },
+    { label: 'Long run: 200 letters', input: 'dbicobftjlqkuphvghtavaocverkwcvsvfghrjzirfxxabzykbfvhcurpxecduqmztdufqgfvtnwraavrxsxmutubhlqlfetvwzytvoadpquelzowdgegocjxnebthuoblhxgrvwiphqwsuofhgrhzbecslwahaotxauafghapusghpzulflebenqhmmqerdzvooqrxv' },
   ],
 }
 

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 2', input: '{"n":6,"headID":2,"manager":[2,2,-1,2,2,2],"informTime":[0,0,1,0,0,0]}' },
     { label: 'Chain', input: '{"n":7,"headID":6,"manager":[1,2,3,4,5,6,-1],"informTime":[0,6,5,4,3,2,1]}' },
+    { label: "Single employee", input: "{\"n\":1,\"headID\":0,\"manager\":[-1],\"informTime\":[0]}" },
+    { label: "Equal branches tie", input: "{\"n\":3,\"headID\":0,\"manager\":[-1,0,0],\"informTime\":[5,0,0]}" },
+    { label: "Chain of twelve", input: "{\"n\":12,\"headID\":0,\"manager\":[-1,0,1,2,3,4,5,6,7,8,9,10],\"informTime\":[100,100,100,100,100,100,100,100,100,100,100,100]}" },
+    { label: "Long run: 12 employees", input: "{\"n\":12,\"headID\":0,\"manager\":[-1,0,1,1,1,2,0,5,1,4,2,5],\"informTime\":[0,8,60,47,26,63,3,59,87,22,86,100]}" },
   ],
 }
 

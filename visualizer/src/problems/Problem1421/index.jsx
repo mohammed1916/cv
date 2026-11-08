@@ -19,6 +19,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"NPV":[{"id":1,"year":2018,"npv":100},{"id":2,"year":2019,"npv":40}],"Queries":[{"id":1,"year":2018},{"id":1,"year":2019},{"id":2,"year":2019}]}' },
     { label: 'All missing', input: '{"NPV":[],"Queries":[{"id":7,"year":2021}]}' },
+    { label: 'One row each', input: '{"NPV":[{"id":1,"year":2018,"npv":0}],"Queries":[{"id":1,"year":2018}]}' },
+    { label: 'Repeated query', input: '{"NPV":[{"id":1,"year":2018,"npv":5}],"Queries":[{"id":1,"year":2018},{"id":1,"year":2018}]}' },
+    { label: 'Unknown id gives zero', input: '{"NPV":[{"id":1,"year":2018,"npv":5}],"Queries":[{"id":9,"year":2018}]}' },
+    { label: 'Long run: 12 rows', input: '{"NPV":[{"id":1,"year":2011,"npv":85},{"id":2,"year":2012,"npv":239},{"id":3,"year":2013,"npv":394},{"id":4,"year":2014,"npv":146},{"id":5,"year":2015,"npv":230},{"id":6,"year":2016,"npv":344},{"id":7,"year":2017,"npv":149},{"id":8,"year":2018,"npv":39},{"id":9,"year":2019,"npv":177},{"id":10,"year":2020,"npv":79},{"id":11,"year":2021,"npv":245},{"id":12,"year":2022,"npv":476}],"Queries":[{"id":1,"year":2011},{"id":2,"year":2012},{"id":3,"year":2013},{"id":4,"year":2014},{"id":5,"year":2015},{"id":6,"year":2016},{"id":7,"year":2017},{"id":8,"year":2018},{"id":9,"year":2019},{"id":10,"year":2020},{"id":11,"year":2021},{"id":12,"year":2022}]}' },
   ],
 }
 

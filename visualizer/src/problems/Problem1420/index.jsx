@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":2,"m":2,"k":1}' },
     { label: 'Example 2', input: '{"n":2,"m":3,"k":2}' },
+    { label: 'Smallest case', input: '{"n":1,"m":1,"k":0}' },
+    { label: 'Every choice counted (k equals n)', input: '{"n":3,"m":1,"k":3}' },
+    { label: 'Largest n and m', input: '{"n":8,"m":6,"k":8}' },
+    { label: 'Long run: n 8, m 6', input: '{"n":8,"m":6,"k":8}' },
   ],
 }
 

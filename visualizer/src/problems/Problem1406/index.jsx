@@ -11,6 +11,10 @@ const definition = {
     { label: 'Alice wins', input: '[4, -1, 6]' },
     { label: 'Single stone', input: '[0]' },
     { label: 'Negative start', input: '[-2, 5, -3]' },
+    { label: "Single value", input: "[7]" },
+    { label: "Equal values", input: "[3,3]" },
+    { label: "Twelve maximum values", input: "[50,50,50,50,50,50,50,50,50,50,50,50]" },
+    { label: "Long run: 12 values", input: "[28,31,2,22,-7,41,-12,25,26,-15,24,8]" },
   ],
 }
 

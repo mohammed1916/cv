@@ -11,6 +11,10 @@ const definition = {
     { label: 'Move-to-front', input: '{"m":5,"queries":[3,1,2,1]}' },
     { label: 'Repeat one', input: '{"m":4,"queries":[4,4,4]}' },
     { label: 'Single item', input: '{"m":1,"queries":[1]}' },
+    { label: "Single item", input: "{\"m\":1,\"queries\":[1]}" },
+    { label: "Repeated query stays first", input: "{\"m\":4,\"queries\":[2,2,2]}" },
+    { label: "Largest list, all twelve", input: "{\"m\":12,\"queries\":[12,12,12,12,12,12,12,12,12,12,12,12]}" },
+    { label: "Long run: twelve queries", input: "{\"m\":12,\"queries\":[10,1,7,10,6,2,9,6,4,7,2,8]}" },
   ],
 }
 

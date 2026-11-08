@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"cost":[4,3,2,5,6,7,2,5,5],"target":9}' },
     { label: 'Impossible', input: '{"cost":[2,4,6,2,4,6,4,4,4],"target":5}' },
+    { label: 'Cheapest digit, target 1', input: '{"cost":[1,1,1,1,1,1,1,1,1],"target":1}' },
+    { label: 'Equal costs', input: '{"cost":[2,2,2,2,2,2,2,2,2],"target":6}' },
+    { label: 'Largest target 15', input: '{"cost":[9,1,9,1,9,1,9,1,9],"target":15}' },
+    { label: 'Long run: target 15', input: '{"cost":[5,3,2,3,3,4,1,7,5],"target":15}' },
   ],
 }
 

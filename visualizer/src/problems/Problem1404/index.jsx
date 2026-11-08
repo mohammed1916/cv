@@ -11,6 +11,10 @@ const definition = {
     { label: 'Mixed bits', input: '"1101"' },
     { label: 'Two digits', input: '"11"' },
     { label: 'Power of two', input: '"1000"' },
+    { label: "Single one", input: "\"1\"" },
+    { label: "Carry chain", input: "\"111\"" },
+    { label: "Longest, forty digits", input: "\"1111111111111111111111111111111111111111\"" },
+    { label: "Long run: forty digits", input: "\"1110100111010001111111101110101011110000\"" },
   ],
 }
 

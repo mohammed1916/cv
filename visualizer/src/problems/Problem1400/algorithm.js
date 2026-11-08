@@ -10,6 +10,10 @@ export const examples = [
   { label: 'Annabelle in two', input: '{"s":"annabelle","k":2}' },
   { label: 'Too many odd letters', input: '{"s":"leetcode","k":3}' },
   { label: 'Four singles', input: '{"s":"true","k":4}' },
+  { label: "One letter, one palindrome", input: "{\"s\":\"a\",\"k\":1}" },
+  { label: "Equal pairs split evenly", input: "{\"s\":\"aabb\",\"k\":2}" },
+  { label: "Every letter its own palindrome", input: "{\"s\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"k\":60}" },
+  { label: "Long run: sixty letters", input: "{\"s\":\"ugkmlkugsaamflrbdpkdbnsqjubngjzfaiimvzursoaapxwehgkxntwfrvts\",\"k\":7}" },
 ]
 
 export function parseInput(text) {

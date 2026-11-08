@@ -11,6 +11,10 @@ const definition = {
     { label: 'Mixed signs', input: '{"nums":[10,-2,-10,-5,20],"k":2}' },
     { label: 'All negative', input: '{"nums":[-1,-2,-3],"k":1}' },
     { label: 'Wide window', input: '{"nums":[4,-3,6,-8,2],"k":3}' },
+    { label: 'One number', input: '{"nums":[7],"k":1}' },
+    { label: 'Equal values', input: '{"nums":[3,3,3,3],"k":2}' },
+    { label: 'Extreme values, 16 numbers', input: '{"nums":[-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100],"k":8}' },
+    { label: 'Long run: 16 numbers', input: '{"nums":[-17,-27,-9,-52,13,-54,1,88,-4,-6,-37,42,-95,86,23,61],"k":5}' },
   ],
 }
 

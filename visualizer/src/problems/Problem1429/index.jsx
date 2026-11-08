@@ -15,6 +15,10 @@ const definition = {
   complexity: 'O(1) per add and O(k) per query, where k is the number of distinct values seen. The visualization caps the input at 20 operations.',
   examples: [
     { label: 'Example', input: '{"ops":[["add",7],["first"],["add",4],["first"],["add",7],["first"],["add",9],["first"]]}' },
+    { label: 'One add, one query', input: '{"ops":[["add",1],["first"]]}' },
+    { label: 'Equal values added twice', input: '{"ops":[["add",5],["add",5],["first"]]}' },
+    { label: 'Largest value allowed', input: '{"ops":[["add",20],["add",1],["first"],["add",20],["first"]]}' },
+    { label: 'Long run: 20 operations', input: '{"ops":[["add",19],["add",9],["first"],["first"],["first"],["add",18],["first"],["first"],["first"],["first"],["first"],["first"],["first"],["first"],["first"],["add",14],["first"],["add",14],["first"],["add",19]]}' },
   ],
 }
 

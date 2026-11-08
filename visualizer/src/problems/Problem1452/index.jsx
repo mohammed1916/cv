@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"favorite_companies":[["leetcode","google","facebook"],["google","microsoft"],["google","facebook"],["google"],["amazon"]]}' },
     { label: 'Example 2', input: '{"favorite_companies":[["leetcode","google","facebook"],["leetcode","amazon"],["facebook","google"]]}' },
+    { label: 'One list, one company', input: '{"favorite_companies":[["ibm"]]}' },
+    { label: 'Shared companies', input: '{"favorite_companies":[["aa","bb"],["aa","cc"]]}' },
+    { label: 'Largest input: 6 lists of 4', input: '{"favorite_companies":[["ca","dd","ee","ff"],["caa","dd","ee","ff"],["caaa","dd","ee","ff"],["caaaa","dd","ee","ff"],["caaaaa","dd","ee","ff"],["caaaaaa","dd","ee","ff"]]}' },
+    { label: 'Long run: 6 lists', input: '{"favorite_companies":[["mn","ab","cd","ef"],["gh","ef","cd","mn"],["gh","ab","ef","cd"],["ab","ij","kl","gh"],["ab","kl","op","mn"],["mn","ab","op","ij"]]}' },
   ],
 }
 

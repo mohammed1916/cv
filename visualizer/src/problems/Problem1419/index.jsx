@@ -16,6 +16,10 @@ const definition = {
     { label: 'One frog', input: '"croak"' },
     { label: 'Two overlapping', input: '"ccrrooaakk"' },
     { label: 'Broken order', input: '"crrk"' },
+    { label: 'Single letter', input: '"c"' },
+    { label: 'Five letters from 1 frog', input: '"croak"' },
+    { label: 'Boundary: 500 letters', input: '"croakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroakcroak"' },
+    { label: 'Long run: 40 overlapping frogs', input: '"ccccccccccccccccccccccccccccccccccccccccrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrooooooooooooooooooooooooooooooooooooooooaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"' },
   ],
 }
 

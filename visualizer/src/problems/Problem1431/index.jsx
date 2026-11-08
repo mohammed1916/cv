@@ -11,6 +11,10 @@ const definition = {
     { label: 'Clear leader', input: '{"candies":[2,3,5,1,3],"extraCandies":3}' },
     { label: 'Tie at the top', input: '{"candies":[5,5,3],"extraCandies":0}' },
     { label: 'Large bonus', input: '{"candies":[12,1,12],"extraCandies":10}' },
+    { label: 'Two zeros', input: '{"candies":[0,0],"extraCandies":0}' },
+    { label: 'All equal, no extra', input: '{"candies":[5,5,5],"extraCandies":0}' },
+    { label: 'Largest values, 20 children', input: '{"candies":[100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0],"extraCandies":100}' },
+    { label: 'Long run: 20 children', input: '{"candies":[71,45,94,85,44,82,1,20,82,87,6,13,24,6,20,2,13,96,43,45],"extraCandies":37}' },
   ],
 }
 

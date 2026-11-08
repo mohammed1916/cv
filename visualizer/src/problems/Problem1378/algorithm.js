@@ -33,7 +33,13 @@ export const sample = {
   ],
 }
 
-export const examples = [{ label: 'Five employees', input: JSON.stringify(sample) }]
+export const examples = [
+  { label: 'Five employees', input: JSON.stringify(sample) },
+  { label: "Single employee, no mapping", input: "{\"Employees\":[{\"id\":1,\"name\":\"Ada\"}],\"EmployeeUNI\":[]}" },
+  { label: "Every employee mapped", input: "{\"Employees\":[{\"id\":3,\"name\":\"Bea\"},{\"id\":5,\"name\":\"Cal\"}],\"EmployeeUNI\":[{\"id\":5,\"unique_id\":2},{\"id\":3,\"unique_id\":1}]}" },
+  { label: "Twelve employees, half mapped", input: "{\"Employees\":[{\"id\":1,\"name\":\"Nia\"},{\"id\":2,\"name\":\"Omar\"},{\"id\":3,\"name\":\"Kai\"},{\"id\":4,\"name\":\"Lena\"},{\"id\":5,\"name\":\"Ravi\"},{\"id\":6,\"name\":\"Sana\"},{\"id\":7,\"name\":\"Theo\"},{\"id\":8,\"name\":\"Uma\"},{\"id\":9,\"name\":\"Vik\"},{\"id\":10,\"name\":\"Wren\"},{\"id\":11,\"name\":\"Xan\"},{\"id\":12,\"name\":\"Yara\"}],\"EmployeeUNI\":[{\"id\":2,\"unique_id\":50},{\"id\":4,\"unique_id\":51},{\"id\":6,\"unique_id\":52},{\"id\":8,\"unique_id\":53},{\"id\":10,\"unique_id\":54},{\"id\":12,\"unique_id\":55}]}" },
+  { label: "Long run: twelve employees", input: "{\"Employees\":[{\"id\":77,\"name\":\"Nia\"},{\"id\":27,\"name\":\"Omar\"},{\"id\":35,\"name\":\"Kai\"},{\"id\":67,\"name\":\"Lena\"},{\"id\":96,\"name\":\"Ravi\"},{\"id\":31,\"name\":\"Sana\"},{\"id\":10,\"name\":\"Theo\"},{\"id\":52,\"name\":\"Uma\"},{\"id\":74,\"name\":\"Vik\"},{\"id\":4,\"name\":\"Wren\"},{\"id\":41,\"name\":\"Xan\"},{\"id\":73,\"name\":\"Yara\"}],\"EmployeeUNI\":[{\"id\":77,\"unique_id\":100},{\"id\":35,\"unique_id\":107},{\"id\":96,\"unique_id\":114},{\"id\":10,\"unique_id\":121},{\"id\":74,\"unique_id\":128},{\"id\":41,\"unique_id\":135}]}" },
+]
 export const inputLabel = 'Object with Employees and EmployeeUNI lists'
 export const complexity = 'O(e + u) with a hash lookup on employee id. The visualization caps each table at 12 rows.'
 export const reasoning = [

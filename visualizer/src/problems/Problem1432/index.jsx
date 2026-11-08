@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"num":555}' },
     { label: 'Example 2', input: '{"num":9}' },
+    { label: 'Smallest number', input: '{"num":1}' },
+    { label: 'Repeated digit', input: '{"num":1111}' },
+    { label: 'Largest allowed', input: '{"num":99999999}' },
+    { label: 'Long run: 8 digits', input: '{"num":46733354}' },
   ],
 }
 

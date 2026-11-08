@@ -11,6 +11,10 @@ const definition = {
     { label: 'Balanced', input: '{"a": 2, "b": 2, "c": 1}' },
     { label: 'One dominant', input: '{"a": 1, "b": 1, "c": 7}' },
     { label: 'Single letter', input: '{"a": 0, "b": 0, "c": 4}' },
+    { label: "One letter", input: "{\"a\":1,\"b\":0,\"c\":0}" },
+    { label: "Two equal kinds", input: "{\"a\":5,\"b\":0,\"c\":5}" },
+    { label: "Largest equal counts", input: "{\"a\":20,\"b\":20,\"c\":20}" },
+    { label: "Long run: random counts", input: "{\"a\":16,\"b\":15,\"c\":17}" },
   ],
 }
 

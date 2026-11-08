@@ -17,6 +17,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"root":[1,null,2,null,3,null,4]}' },
     { label: 'Already balanced', input: '{"root":[2,1,3]}' },
+    { label: "Single node", input: "{\"root\":[1]}" },
+    { label: "Ten nodes at the top of the range", input: "{\"root\":[50,40,null,30,45,20,35,42,48,null,null,null,null,null,null,47,49]}" },
+    { label: "Long run: ten nodes", input: "{\"root\":[29,4,45,null,27,38,48,23,null,36,null,null,null,12,null,null,null,null,14]}" },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"root":[7,4,3,null,null,6,19],"target":3}' },
     { label: 'Example 2', input: '{"root":[7],"target":7}' },
+    { label: "Single node", input: "{\"root\":[1],\"target\":1}" },
+    { label: "Deep target in a clone", input: "{\"root\":[5,3,8,1,4,7,9,null,2],\"target\":2}" },
+    { label: "Fifteen nodes", input: "{\"root\":[10,3,14,null,19,2,20,null,null,4,6,null,null,null,12],\"target\":12}" },
+    { label: "Long run: fifteen levels with gaps", input: "{\"root\":[10,3,14,null,19,2,null,null,20,null,4,6,null,null,null],\"target\":19}" },
   ],
 }
 

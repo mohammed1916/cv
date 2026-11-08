@@ -11,6 +11,10 @@ const definition = {
     { label: 'Mixed', input: '[4, -2, 6, -1]' },
     { label: 'All negative', input: '[-3, -5]' },
     { label: 'Single dish', input: '[7]' },
+    { label: "Single value", input: "[5]" },
+    { label: "All zeros", input: "[0,0,0]" },
+    { label: "Sixteen maximum values", input: "[100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100]" },
+    { label: "Long run: 16 values", input: "[56,-11,56,13,54,83,32,-83,46,-75,84,69,-66,-33,-76,97]" },
   ],
 }
 

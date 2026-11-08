@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"n":2,"s1":"aa","s2":"da","evil":"b"}' },
     { label: 'Zero', input: '{"n":2,"s1":"ab","s2":"ab","evil":"a"}' },
+    { label: "Single letter, one string", input: "{\"n\":1,\"s1\":\"a\",\"s2\":\"a\",\"evil\":\"b\"}" },
+    { label: "Equal bounds count once", input: "{\"n\":2,\"s1\":\"ab\",\"s2\":\"ab\",\"evil\":\"a\"}" },
+    { label: "Full range with a short evil", input: "{\"n\":4,\"s1\":\"aaaa\",\"s2\":\"zzzz\",\"evil\":\"a\"}" },
+    { label: "Long run: four letters, three-letter evil", input: "{\"n\":4,\"s1\":\"lenn\",\"s2\":\"uzjj\",\"evil\":\"xyz\"}" },
   ],
 }
 

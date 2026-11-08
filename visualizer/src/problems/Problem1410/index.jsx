@@ -11,6 +11,10 @@ const definition = {
     { label: 'Escaped ampersand', input: '&amp;lt;' },
     { label: 'Mixed text', input: 'Tom &amp; Jerry &lt;3 &unknown;' },
     { label: 'Apostrophe', input: '&&apos;' },
+    { label: "One letter", input: "a" },
+    { label: "Single ampersand", input: "&" },
+    { label: "Longest text, repeated entity", input: "&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;" },
+    { label: "Long run: mixed entities", input: " &lt;&gt;&&lt;&&lt;&apos; xx&quot;;;;yy &apos;&amp;;&lt;&apos;&quot;&frac;&gt;&amp;&gt;&quot;&frac;" },
   ],
 }
 

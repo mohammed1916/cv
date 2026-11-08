@@ -10,6 +10,10 @@ export const examples = [
   { label: 'Ten', input: '{"n":10}' },
   { label: 'One', input: '{"n":1}' },
   { label: 'Thirteen', input: '{"n":13}' },
+  { label: "Smallest n", input: "{\"n\":1}" },
+  { label: "Largest n", input: "{\"n\":10000}" },
+  { label: "Long run: n from the generator", input: "{\"n\":8891}" },
+  { label: "Power of two", input: "{\"n\":1024}" },
 ]
 
 export function parseInput(text) {

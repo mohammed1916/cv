@@ -16,6 +16,10 @@ const definition = {
     { label: 'Valid path', input: '{"tree":[0,1,0,0,1,0,null,null,1,0,0],"arr":[0,1,0,1]}' },
     { label: 'Prefix ends early', input: '{"tree":[0,1,0,0,1,0,null,null,1,0,0],"arr":[0,0,1]}' },
     { label: 'Mismatch at root', input: '{"tree":[1,2,3],"arr":[2,3]}' },
+    { label: 'Single node', input: '{"tree":[1],"arr":[1]}' },
+    { label: 'Equal values in the tree', input: '{"tree":[1,1,1],"arr":[1,1]}' },
+    { label: 'Largest tree: 15 nodes', input: '{"tree":[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],"arr":[9,9,9,9,9,9,9,9,9,9]}' },
+    { label: 'Long run: 15 nodes, 10 values', input: '{"tree":[2,3,7,1,2,7,9,2,2,3,2,0,4,0,4],"arr":[7,3,8,5,3,1,6,2,4,1]}' },
   ],
 }
 

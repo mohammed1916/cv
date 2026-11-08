@@ -11,6 +11,10 @@ const definition = {
     { label: 'First can break second', input: '{"first":"abc","second":"xya"}' },
     { label: 'Neither breaks', input: '{"first":"abe","second":"acd"}' },
     { label: 'Anagram pair', input: '{"first":"ab","second":"ba"}' },
+    { label: 'Single letter pair', input: '{"first":"a","second":"b"}' },
+    { label: 'Equal strings', input: '{"first":"aaaa","second":"aaaa"}' },
+    { label: 'Longest allowed: 12 letters', input: '{"first":"abcdefghijkl","second":"lkjihgfedcba"}' },
+    { label: 'Long run: 12 letters', input: '{"first":"kcfofippwekg","second":"jsszqewsrqyw"}' },
   ],
 }
 

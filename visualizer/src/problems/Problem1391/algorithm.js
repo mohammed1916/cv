@@ -11,6 +11,10 @@ export const examples = [
   { label: 'Two streets connect', input: '{"grid":[[2,4,3],[6,5,2]]}' },
   { label: 'Dead end', input: '{"grid":[[1,2,1],[1,2,1]]}' },
   { label: 'Single cell', input: '{"grid":[[1]]}' },
+  { label: "Single cell", input: "{\"grid\":[[1]]}" },
+  { label: "Dead end, no path", input: "{\"grid\":[[1,1],[1,1]]}" },
+  { label: "Largest grid, eight by eight", input: "{\"grid\":[[6,6,6,6,6,6,6,6],[6,6,6,6,6,6,6,6],[6,6,6,6,6,6,6,6],[6,6,6,6,6,6,6,6],[6,6,6,6,6,6,6,6],[6,6,6,6,6,6,6,6],[6,6,6,6,6,6,6,6],[6,6,6,6,6,6,6,6]]}" },
+  { label: "Long run: 8 by 8 grid", input: "{\"grid\":[[5,3,2,1,3,5,6,1],[1,3,6,2,3,6,4,6],[5,3,5,1,5,3,5,6],[2,5,4,4,6,5,5,5],[3,6,5,2,1,4,5,3],[1,4,6,1,1,6,2,3],[4,1,4,2,1,5,5,4],[6,5,6,6,1,6,4,4]]}" },
 ]
 
 // Each street type lists the directions it opens to, as [row step, column step].

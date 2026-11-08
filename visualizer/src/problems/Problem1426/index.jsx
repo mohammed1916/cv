@@ -11,6 +11,10 @@ const definition = {
     { label: 'Chain with duplicates', input: '[1,1,2]' },
     { label: 'Mixed values', input: '[1,3,2,3,5,0]' },
     { label: 'No successors', input: '[7,7,9,9]' },
+    { label: 'One value', input: '[0]' },
+    { label: 'Equal values', input: '[5,5,5]' },
+    { label: 'Largest values, 30 items', input: '[99,0,99,0,99,0,99,0,99,0,99,0,99,0,99,0,99,0,99,0,99,0,99,0,99,0,99,0,99,0]' },
+    { label: 'Long run: 30 values', input: '[83,20,94,20,3,12,67,41,52,91,75,5,43,84,89,96,85,94,35,39,46,18,36,30,88,50,27,68,58,82]' },
   ],
 }
 

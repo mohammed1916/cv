@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"tree":[1,4,3,2,4,2,5,null,null,null,null,null,null,4,6]}' },
     { label: 'Example 2', input: '{"tree":[4,3,null,1,2]}' },
+    { label: "Single node", input: "{\"tree\":[7]}" },
+    { label: "Negative sums give zero", input: "{\"tree\":[-5,-9,-2]}" },
+    { label: "Extremes at both limits", input: "{\"tree\":[0,-40,40,-40,null,-30,40]}" },
+    { label: "Long run: 15 entries with gaps", input: "{\"tree\":[0,34,-5,null,null,38,21,28,0,40,null,-25,-16,17,null]}" },
   ],
 }
 

@@ -9,6 +9,10 @@ export const examples = [
   { label: 'Shifting inserts', input: '{"nums":[0,1,2,3,4],"index":[0,1,2,2,1]}' },
   { label: 'Front inserts', input: '{"nums":[1,2,3,4,0],"index":[0,1,2,3,0]}' },
   { label: 'Single value', input: '{"nums":[1],"index":[0]}' },
+  { label: "Single insert", input: "{\"nums\":[5],\"index\":[0]}" },
+  { label: "Equal values insert at front", input: "{\"nums\":[1,1,1],\"index\":[0,0,0]}" },
+  { label: "Largest case, all at the front", input: "{\"nums\":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],\"index\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}" },
+  { label: "Long run: 30 inserts", input: "{\"nums\":[78,27,88,9,11,20,6,18,12,38,3,95,48,96,16,93,44,43,12,39,45,32,36,86,8,95,45,8,34,59],\"index\":[0,0,1,2,4,1,2,7,8,0,7,9,11,12,14,14,8,17,0,6,5,10,22,3,3,18,1,17,11,18]}" },
 ]
 
 export function parseInput(text) {

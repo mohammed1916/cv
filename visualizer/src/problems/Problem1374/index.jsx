@@ -12,6 +12,9 @@ const definition = {
     { label: 'Odd n', input: '{"n":7}' },
     { label: 'Even n', input: '{"n":6}' },
     { label: 'One', input: '{"n":1}' },
+    { label: "Two letters", input: "{\"n\":2}" },
+    { label: "Largest n", input: "{\"n\":500}" },
+    { label: "Long run: n 300 to 499", input: "{\"n\":453}" },
   ],
 }
 

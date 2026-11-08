@@ -11,6 +11,10 @@ const definition = {
     { label: 'Cancelling shifts', input: '{"s":"abcde","shift":[[0,1],[1,2],[1,3]]}' },
     { label: 'Single right shift', input: '{"s":"abcde","shift":[[1,1]]}' },
     { label: 'Full cycle', input: '{"s":"wxyz","shift":[[0,8],[1,0]]}' },
+    { label: 'One letter, no shift', input: '{"s":"a","shift":[[1,0]]}' },
+    { label: 'Equal letters cancel', input: '{"s":"aaaa","shift":[[0,1],[1,1]]}' },
+    { label: 'Largest shift amounts', input: '{"s":"zzzzzzzzzzzzzzzzzzzzzzzzzzzzzz","shift":[[0,100],[1,100]]}' },
+    { label: 'Long run: 30 letters, 20 shifts', input: '{"s":"jpkiidguvozubmvakijsudjayzgrfp","shift":[[0,98],[1,89],[1,23],[0,30],[0,75],[1,17],[1,0],[0,87],[0,90],[1,74],[1,78],[1,74],[1,85],[0,12],[0,67],[1,65],[1,81],[0,65],[0,38],[0,50]]}' },
   ],
 }
 

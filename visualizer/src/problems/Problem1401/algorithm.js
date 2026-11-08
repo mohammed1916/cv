@@ -8,6 +8,10 @@ export const examples = [
   { label: 'Touching the edge', input: '{"radius":1,"cx":0,"cy":0,"left":1,"bottom":-1,"right":2,"top":1}' },
   { label: 'Far away', input: '{"radius":1,"cx":0,"cy":0,"left":2,"bottom":2,"right":3,"top":3}' },
   { label: 'Touching the right edge', input: '{"radius":1,"cx":2,"cy":0,"left":-1,"bottom":-1,"right":1,"top":1}' },
+  { label: "Circle inside rectangle", input: "{\"radius\":1,\"cx\":0,\"cy\":0,\"left\":-5,\"bottom\":-5,\"right\":5,\"top\":5}" },
+  { label: "Corner exactly on the circle", input: "{\"radius\":5,\"cx\":0,\"cy\":0,\"left\":3,\"bottom\":4,\"right\":10,\"top\":10}" },
+  { label: "Largest circle far away", input: "{\"radius\":100,\"cx\":-100,\"cy\":-100,\"left\":150,\"bottom\":150,\"right\":160,\"top\":160}" },
+  { label: "Long run: radius 37 near the edge", input: "{\"radius\":37,\"cx\":50,\"cy\":50,\"left\":-20,\"bottom\":80,\"right\":90,\"top\":120}" },
 ]
 
 export function parseInput(text) {

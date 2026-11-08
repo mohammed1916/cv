@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":7,"edges":[[0,1],[0,2],[1,4],[1,5],[2,3],[2,6]],"has_apple":[false,false,true,false,true,true,false]}' },
     { label: 'Example 2', input: '{"n":5,"edges":[[0,1],[1,2],[0,3],[3,4]],"has_apple":[false,false,false,false,false]}' },
+    { label: 'Single vertex with apple', input: '{"n":1,"edges":[],"has_apple":[true]}' },
+    { label: 'Star with equal leaves', input: '{"n":3,"edges":[[0,1],[0,2]],"has_apple":[false,true,true]}' },
+    { label: 'Path of 12 vertices', input: '{"n":12,"edges":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11]],"has_apple":[true,false,false,true,false,false,true,false,false,true,false,false]}' },
+    { label: 'Long run: 12 vertices, random tree', input: '{"n":12,"edges":[[0,1],[1,2],[2,3],[3,4],[1,5],[4,6],[2,7],[5,8],[7,9],[6,10],[9,11]],"has_apple":[false,true,true,false,false,true,true,true,false,false,true,true]}' },
   ],
 }
 

@@ -11,6 +11,9 @@ const definition = {
     { label: 'Target 7', input: '7' },
     { label: 'Target 19', input: '19' },
     { label: 'Exact Fibonacci', input: '21' },
+    { label: "Target one", input: "1" },
+    { label: "Largest target", input: "1000000000" },
+    { label: "Long run: generated target", input: "805660394" },
   ],
 }
 

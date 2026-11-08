@@ -11,6 +11,10 @@ const definition = {
     { label: 'Mixed lengths', input: 'Reading books keeps minds bright' },
     { label: 'Tie order', input: 'Tiny cat sat' },
     { label: 'One word', input: 'Ant' },
+    { label: 'Single word', input: 'Hello' },
+    { label: 'Equal lengths keep order', input: 'cat sat map' },
+    { label: 'Largest: 50 words', input: 'w wo woo wooo woooo wooooo woooooo w wo woo wooo woooo wooooo woooooo w wo woo wooo woooo wooooo woooooo w wo woo wooo woooo wooooo woooooo w wo woo wooo woooo wooooo woooooo w wo woo wooo woooo wooooo woooooo w wo woo wooo woooo wooooo woooooo w' },
+    { label: 'Long run: 50 words', input: 'light cat lampxxx sat satx doorxx teax cat longxx tiny keep sat keepxx sat doorx stone stonexx catx lightxx tiny satxx lightx keepxxx teax lamp longxx satxx cat catxxx river doorxx stonex riverxxx stone wordx doorxxx lampx wordxxx stonexxx doorxx doorx keepxx satx longxxx tiny keep long sat catx lampxxx' },
   ],
 }
 

@@ -11,6 +11,10 @@ const definition = {
     { label: 'Dip to -4', input: '[-3,2,-3,4,2]' },
     { label: 'All positive', input: '[1,2,3]' },
     { label: 'One negative', input: '[-5]' },
+    { label: "Single value", input: "[5]" },
+    { label: "Equal zeros", input: "[0,0]" },
+    { label: "Twelve extreme values", input: "[100,-100,100,-100,100,-100,100,-100,100,-100,100,-100]" },
+    { label: "Long run: 12 values", input: "[57,-11,-38,95,-80,-73,-20,-68,-36,52,83,-25]" },
   ],
 }
 

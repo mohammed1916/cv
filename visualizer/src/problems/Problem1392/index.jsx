@@ -18,6 +18,10 @@ const definition = {
     { label: 'Example 1', input: '"level"' },
     { label: 'Example 2', input: '"ababab"' },
     { label: 'Repeated letters', input: '"aaaa"' },
+    { label: "Single letter", input: "\"a\"" },
+    { label: "Two letters, no border", input: "\"ab\"" },
+    { label: "Longest input, forty letters", input: "\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"" },
+    { label: "Long run: 40 letters", input: "\"unyfcljyqojzkvvixmabnzjblggjtlhyhmdcykpn\"" },
   ],
 }
 

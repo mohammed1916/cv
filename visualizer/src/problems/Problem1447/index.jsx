@@ -11,6 +11,9 @@ const definition = {
     { label: 'Six', input: '6' },
     { label: 'Two', input: '2' },
     { label: 'Eight', input: '8' },
+    { label: 'Smallest: 1', input: '1' },
+    { label: 'Largest allowed: 100', input: '100' },
+    { label: 'Long run: 97', input: '97' },
   ],
 }
 

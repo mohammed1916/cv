@@ -19,6 +19,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"Sessions":[{"session_id":1,"duration":100},{"session_id":2,"duration":400},{"session_id":3,"duration":1000},{"session_id":4,"duration":299},{"session_id":5,"duration":900}]}' },
     { label: 'Boundaries', input: '{"Sessions":[{"session_id":1,"duration":299},{"session_id":2,"duration":300},{"session_id":3,"duration":899},{"session_id":4,"duration":900}]}' },
+    { label: 'One zero-length session', input: '{"Sessions":[{"session_id":1,"duration":0}]}' },
+    { label: 'Equal durations', input: '{"Sessions":[{"session_id":1,"duration":300},{"session_id":2,"duration":300}]}' },
+    { label: 'Largest durations, 12 rows', input: '{"Sessions":[{"session_id":1,"duration":100000},{"session_id":2,"duration":100001},{"session_id":3,"duration":100002},{"session_id":4,"duration":100003},{"session_id":5,"duration":100004},{"session_id":6,"duration":100005},{"session_id":7,"duration":100006},{"session_id":8,"duration":100007},{"session_id":9,"duration":100008},{"session_id":10,"duration":100009},{"session_id":11,"duration":100010},{"session_id":12,"duration":100011}]}' },
+    { label: 'Long run: 12 sessions', input: '{"Sessions":[{"session_id":1,"duration":2330},{"session_id":2,"duration":1674},{"session_id":3,"duration":2027},{"session_id":4,"duration":2238},{"session_id":5,"duration":1978},{"session_id":6,"duration":1412},{"session_id":7,"duration":757},{"session_id":8,"duration":2694},{"session_id":9,"duration":674},{"session_id":10,"duration":1415},{"session_id":11,"duration":2862},{"session_id":12,"duration":2422}]}' },
   ],
 }
 

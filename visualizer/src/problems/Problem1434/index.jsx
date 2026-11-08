@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"hats":[[3,4],[4,5],[5]]}' },
     { label: 'Example 2', input: '{"hats":[[3,5,1],[3,5]]}' },
+    { label: 'One person, one hat', input: '{"hats":[[1]]}' },
+    { label: 'Equal hat lists', input: '{"hats":[[3,4],[3,4]]}' },
+    { label: 'Largest hat numbers', input: '{"hats":[[40,39,38,37,36],[1,2,3,4,5],[40,1,2]]}' },
+    { label: 'Long run: 5 people', input: '{"hats":[[2,20,8,23,10],[25,24,20,23,37],[16,33,17,19,22],[23,28,17,22,19],[35,22,3,37,38]]}' },
   ],
 }
 

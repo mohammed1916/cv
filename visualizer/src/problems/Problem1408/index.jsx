@@ -11,6 +11,10 @@ const definition = {
     { label: 'Nested words', input: '["mass", "as", "hero", "superhero"]' },
     { label: 'No match', input: '["cat", "dog"]' },
     { label: 'Chain', input: '["ab", "abc", "abcd"]' },
+    { label: "Single word", input: "[\"a\"]" },
+    { label: "Shorter word inside a longer one", input: "[\"ab\",\"xab\"]" },
+    { label: "Ten words of twelve letters", input: "[\"aaaaaaaaaaaa\",\"bbbbbbbbbbbb\",\"cccccccccccc\",\"dddddddddddd\",\"eeeeeeeeeeee\",\"ffffffffffff\",\"gggggggggggg\",\"hhhhhhhhhhhh\",\"iiiiiiiiiiii\",\"jjjjjjjjjjjj\"]" },
+    { label: "Long run: five words inside five others", input: "[\"ywttj\",\"otl\",\"xabm\",\"irtfo\",\"cfh\",\"zywttj\",\"zotl\",\"zxabm\",\"zirtfo\",\"zcfh\"]" },
   ],
 }
 

@@ -11,6 +11,10 @@ const definition = {
     { label: 'Rank 4 of 3', input: '3 4' },
     { label: 'Last of 3', input: '3 12' },
     { label: 'Beyond the end', input: '2 7' },
+    { label: 'Smallest case: length 1', input: '1 1' },
+    { label: 'First of length 2', input: '2 1' },
+    { label: 'Largest rank allowed', input: '10 200' },
+    { label: 'Long run: length 10', input: '10 139' },
   ],
 }
 
