@@ -14,7 +14,7 @@ const definition = {
   complexity: 'O(query_row^2) time and O(query_row) extra space per row.',
   examples: [
     { label: 'Two units', input: '{"poured":2,"query_row":1,"query_glass":0}' },
-    { label: 'Deep', input: '{"poured":6,"query_row":3,"query_glass":1}' },
+    { label: 'Deep', input: '{"poured":6,"query_row":3,"query_glass":1}' }, { label: 'Nothing poured', input: '{"poured":0,"query_row":0,"query_glass":0}' }, { label: 'Equal split at row 1', input: '{"poured":3,"query_row":1,"query_glass":1}' }, { label: 'Edge glass of row 99', input: '{"poured":100000,"query_row":99,"query_glass":0}' }, { label: 'Long run: middle glass of row 99', input: '{"poured":100000,"query_row":99,"query_glass":50}' },
   ],
 }
 

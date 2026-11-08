@@ -19,7 +19,7 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"grid":[[1,0,0,0],[1,1,1,0]],"hits":[[1,0]]}' },
     { label: 'Example 2', input: '{"grid":[[1,0,0,0],[1,1,0,0]],"hits":[[1,1],[1,0]]}' },
-    { label: 'Empty-cell hit', input: '{"grid":[[1,1,1],[0,1,0],[0,1,0]],"hits":[[2,1],[0,2],[1,0],[1,1]]}' },
+    { label: 'Empty-cell hit', input: '{"grid":[[1,1,1],[0,1,0],[0,1,0]],"hits":[[2,1],[0,2],[1,0],[1,1]]}' }, { label: 'Single brick', input: '{"grid":[[1]],"hits":[[0,0]]}' }, { label: 'Hit on an empty cell', input: '{"grid":[[1,0],[1,1]],"hits":[[0,1]]}' }, { label: 'Long run: full 8 by 8 grid, 16 hits', input: '{"grid":[[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1]],"hits":[[0,5],[3,6],[6,6],[3,3],[3,7],[0,6],[2,3],[6,3],[1,7],[2,7],[3,1],[2,6],[5,1],[6,4],[0,0],[7,3]]}' },
   ],
 }
 export default function BricksFallingWhenHit() {

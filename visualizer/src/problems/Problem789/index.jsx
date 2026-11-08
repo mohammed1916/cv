@@ -15,7 +15,7 @@ const definition = {
   examples: [
     { label: 'Escape (true)', input: '{"ghosts":[[1,0],[0,3]],"target":[0,1]}' },
     { label: 'Blocked (false)', input: '{"ghosts":[[1,0]],"target":[2,0]}' },
-    { label: 'Tie (false)', input: '{"ghosts":[[2,0]],"target":[1,0]}' },
+    { label: 'Tie (false)', input: '{"ghosts":[[2,0]],"target":[1,0]}' }, { label: 'Ghost far away', input: '{"ghosts":[[5,5]],"target":[1,0]}' }, { label: 'Equal distance loses', input: '{"ghosts":[[1,1]],"target":[2,0]}' }, { label: 'Corners of the range', input: '{"ghosts":[[-20,-20],[20,20]],"target":[20,-20]}' }, { label: 'Long run: 20 ghosts', input: '{"ghosts":[[7,12],[13,4],[-18,-10],[-1,6],[18,-8],[-7,16],[-14,-10],[15,-12],[-12,16],[-12,-14],[-13,6],[-14,19],[-20,-4],[-17,-19],[-13,6],[13,-18],[1,16],[15,-20],[-3,14],[15,-8]],"target":[13,-7]}' },
   ],
 }
 const S = 12

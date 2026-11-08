@@ -15,7 +15,7 @@ const definition = {
   examples: [
     { label: '[4,3,2,1,0]', input: '[4,3,2,1,0]' },
     { label: '[1,0,2,3,4]', input: '[1,0,2,3,4]' },
-    { label: '[2,0,1,4,3]', input: '[2,0,1,4,3]' },
+    { label: '[2,0,1,4,3]', input: '[2,0,1,4,3]' }, { label: 'Single element', input: '[0]' }, { label: 'Ten in order', input: '[0,1,2,3,4,5,6,7,8,9]' }, { label: 'Reversed ten', input: '[9,8,7,6,5,4,3,2,1,0]' }, { label: 'Long run: 10 items', input: '[1,0,3,2,5,4,7,6,9,8]' },
   ],
 }
 export default function MaxChunksToMakeSorted() {

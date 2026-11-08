@@ -17,7 +17,7 @@ const definition = {
   examples: [
     { label: 'cba / abcd', input: '{"order":"cba","s":"abcd"}' },
     { label: 'bcafg / abcd', input: '{"order":"bcafg","s":"abcd"}' },
-    { label: 'kqep / pekeq', input: '{"order":"kqep","s":"pekeq"}' },
+    { label: 'kqep / pekeq', input: '{"order":"kqep","s":"pekeq"}' }, { label: 'Single letter', input: '{"order":"a","s":"a"}' }, { label: 'Repeated letters stay together', input: '{"order":"xy","s":"yyxx"}' }, { label: 'Reversed alphabet, 40 letters', input: '{"order":"zyxwvutsrqponmlkjihgfedcba","s":"abcdefghijklmnopqrstuvwxyzabcdefghijklmn"}' }, { label: 'Long run: 40 random letters', input: '{"order":"mqzaexkbrnwgcjtipysuholdfv","s":"lkdprkxyyccwcwqybzqleookihcattocztkrrlwv"}' },
   ],
 }
 export default function CustomSortString() {

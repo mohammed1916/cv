@@ -16,7 +16,7 @@ const definition = {
   complexity: 'O(n) time and O(1) extra space.',
   examples: [
     { label: 'Two lines', input: '{"widths":[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],"s":"abcdefghijklmnopqrstuvwxyz"}' },
-    { label: 'Mixed widths', input: '{"widths":[10,3,7,10,2,5,6,8,9,10,4,2,3,6,7,8,9,10,2,3,4,5,6,7,8,9],"s":"zyxwvut"}' },
+    { label: 'Mixed widths', input: '{"widths":[10,3,7,10,2,5,6,8,9,10,4,2,3,6,7,8,9,10,2,3,4,5,6,7,8,9],"s":"zyxwvut"}' }, { label: 'Single letter', input: '{"widths":[10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10],"s":"a"}' }, { label: 'Exact fill: ten lines', input: '{"widths":[10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10],"s":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}' }, { label: 'Long run: 100 letters, mixed widths', input: '{"widths":[7,6,5,6,7,2,8,2,2,8,10,5,6,5,5,10,6,5,8,5,9,2,2,10,7,5],"s":"tmnmfuxlelasnaevckbhqbqjjsoepflrsebzclxlpoanqnublxnyfuiarkcibezhxljpllhmsnovrpflezzmszdwopqwmbuvyynp"}' },
   ],
 }
 

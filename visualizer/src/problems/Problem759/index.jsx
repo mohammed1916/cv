@@ -22,7 +22,7 @@ const definition = {
   examples: [
     { label: 'Three employees', input: '[[[2,4],[9,10]],[[3,5]],[[7,8]]]' },
     { label: 'Overlapping busy time', input: '[[[0,2],[6,7]],[[1,3],[11,12]]]' },
-    { label: 'Touching busy time', input: '[[[1,2]],[[2,3]]]' },
+    { label: 'Touching busy time', input: '[[[1,2]],[[2,3]]]' }, { label: 'Single employee', input: '[[[2,5]]]' }, { label: 'No busy time', input: '[[],[]]' }, { label: 'Boundary times', input: '[[[0,1],[49,50]],[[0,50]]]' }, { label: 'Long run: four employees, five intervals each', input: '[[[0,1],[2,18],[19,23],[27,30],[36,43]],[[12,14],[17,24],[25,38],[41,43],[44,50]],[[12,15],[18,28],[33,35],[37,38],[43,44]],[[2,9],[11,12],[17,21],[22,24],[39,40]]]' },
   ],
 }
 

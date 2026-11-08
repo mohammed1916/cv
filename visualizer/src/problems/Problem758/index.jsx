@@ -16,7 +16,7 @@ const definition = {
   complexity: 'O(words * n * length) time with direct comparison. The visualization caps input at 10 words and 50 letters.',
   examples: [
     { label: 'Example 1', input: '{"words":["ab","bc"],"s":"aabcd"}' },
-    { label: 'Whole word', input: '{"words":["abc","def"],"s":"abcdef"}' },
+    { label: 'Whole word', input: '{"words":["abc","def"],"s":"abcdef"}' }, { label: 'Single letter word', input: '{"words":["a"],"s":"a"}' }, { label: 'Overlapping matches merge', input: '{"words":["ab","ba"],"s":"abab"}' }, { label: 'Whole string bold', input: '{"words":["abcdefghij","xyz"],"s":"abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwx"}' }, { label: 'Long run: 10 words, 50 letters', input: '{"words":["bd","dd","cba","bca","bdd","cd","bda","dbd","ca","ba"],"s":"ddccadbabbdbdbddbddaacbaadcbbccbddabbbbbabbaadadad"}' },
   ],
 }
 

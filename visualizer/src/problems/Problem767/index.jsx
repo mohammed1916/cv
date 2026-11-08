@@ -18,7 +18,7 @@ const definition = {
     { label: 'aab', input: '"aab"' },
     { label: 'aaab (impossible)', input: '"aaab"' },
     { label: 'vvvlo', input: '"vvvlo"' },
-    { label: 'aabbcc', input: '"aabbcc"' },
+    { label: 'aabbcc', input: '"aabbcc"' }, { label: 'Single letter', input: '"a"' }, { label: 'Impossible: three equal letters', input: '"aaa"' }, { label: 'Long run: 500 letters', input: '"edaefdaeddadfdefebbacfbffeafbfdabdbdcecefedbcaabdeffdfbbdbfbfcccfecbadbcebbfabbddfcfdecdadebbeacbbcfccdacaebcaebaebbabffaeefcbdeeabdbbaacdcbbfafedfdaedbbfffcacacbdfffbcfefefcfdedefabcfdcbcefaadecfdcdcfdeecdbddcefdcfdddaabadabbbfadceebcacdaffdbfbddbcefafbbddaddacdbcadceabefeedfaecaffeeeafacccfddbcdccfddacbceaacaecaaebdfebdafacbdcacfeccacbeeddafebaabdfeefebdcddbfeffbedbcebcaefffabacdfdeecebdbebeeafafaacddeecacefffffaaacccbabcdebcafcdebadeadcffadfcdbcafabccbddceccbdccdacaabfcdefeaacfadbdebbbcdaaecc"' },
   ],
 }
 export default function ReorganizeString() {

@@ -18,7 +18,7 @@ const definition = {
     { label: 'n=2, k=1 -> 0', input: '{"n":2,"k":1}' },
     { label: 'n=2, k=2 -> 1', input: '{"n":2,"k":2}' },
     { label: 'n=5, k=11', input: '{"n":5,"k":11}' },
-    { label: 'n=30, k=434991989', input: '{"n":30,"k":434991989}' },
+    { label: 'n=30, k=434991989', input: '{"n":30,"k":434991989}' }, { label: 'Last symbol of n = 3', input: '{"n":3,"k":4}' }, { label: 'Largest k for n = 30', input: '{"n":30,"k":536870912}' }, { label: 'Long run: n = 30, k = 123456789', input: '{"n":30,"k":123456789}' },
   ],
 }
 export default function KthSymbolInGrammar() {

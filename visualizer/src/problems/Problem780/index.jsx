@@ -16,7 +16,7 @@ const definition = {
     { label: '(1,1) -> (3,5) true', input: '{"sx":1,"sy":1,"tx":3,"ty":5}' },
     { label: '(1,1) -> (2,2) false', input: '{"sx":1,"sy":1,"tx":2,"ty":2}' },
     { label: '(1,1) -> (1,1) true', input: '{"sx":1,"sy":1,"tx":1,"ty":1}' },
-    { label: 'Huge target', input: '{"sx":9,"sy":5,"tx":1000000000,"ty":7}' },
+    { label: 'Huge target', input: '{"sx":9,"sy":5,"tx":1000000000,"ty":7}' }, { label: 'Coprime large pair', input: '{"sx":2,"sy":3,"tx":999999999,"ty":1000000000}' }, { label: 'Maximum coordinates', input: '{"sx":1000000000,"sy":1,"tx":1,"ty":1000000000}' }, { label: 'Long run: Fibonacci pair', input: '{"sx":1,"sy":1,"tx":832040,"ty":1346269}' },
   ],
 }
 export default function ReachingPoints() {

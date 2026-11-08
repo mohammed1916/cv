@@ -17,7 +17,7 @@ const definition = {
   examples: [
     { label: 'arr=[1,2,3,5], k=3', input: '{"arr":[1,2,3,5],"k":3}' },
     { label: 'arr=[1,7], k=1', input: '{"arr":[1,7],"k":1}' },
-    { label: 'arr=[1,2,3,5,7,11], k=10', input: '{"arr":[1,2,3,5,7,11],"k":10}' },
+    { label: 'arr=[1,2,3,5,7,11], k=10', input: '{"arr":[1,2,3,5,7,11],"k":10}' }, { label: 'Two values', input: '{"arr":[1,2],"k":1}' }, { label: 'Largest prime', input: '{"arr":[1,997],"k":1}' }, { label: 'Largest k for 12 values', input: '{"arr":[1,2,3,5,7,11,13,17,19,23,29,31],"k":66}' }, { label: 'Long run: 12 values, k = 40', input: '{"arr":[1,2,3,5,7,11,13,17,19,23,29,31],"k":40}' },
   ],
 }
 export default function KthSmallestPrimeFraction() {

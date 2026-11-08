@@ -16,7 +16,7 @@ const definition = {
   examples: [
     { label: 'a1b2', input: '"a1b2"' },
     { label: '3z4', input: '"3z4"' },
-    { label: 'C', input: '"C"' },
+    { label: 'C', input: '"C"' }, { label: 'Digits only', input: '"123"' }, { label: 'Two letters', input: '"ab"' }, { label: 'Long run: 8 letters', input: '"AbCdEfGh"' },
   ],
 }
 export default function LetterCasePermutation() {

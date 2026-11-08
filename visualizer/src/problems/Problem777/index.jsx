@@ -17,7 +17,7 @@ const definition = {
     { label: 'RXXLRXRXL -> XRLXXRRLX', input: '{"start":"RXXLRXRXL","end":"XRLXXRRLX"}' },
     { label: 'X -> L (false)', input: '{"start":"X","end":"L"}' },
     { label: 'XXRXLX -> XRXXXL (false)', input: '{"start":"XXRXLX","end":"XRXXXL"}' },
-    { label: 'Identical strings (true)', input: '{"start":"LXXR","end":"LXXR"}' },
+    { label: 'Identical strings (true)', input: '{"start":"LXXR","end":"LXXR"}' }, { label: 'Single symbol match', input: '{"start":"X","end":"X"}' }, { label: 'Identical strings', input: '{"start":"LR","end":"LR"}' }, { label: 'Impossible order swap', input: '{"start":"LR","end":"RL"}' }, { label: 'Boundary: 60 letters', input: '{"start":"RXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXL","end":"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXRL"}' }, { label: 'Long run: 60 letters, scrambled', input: '{"start":"RXXRXRRRXRXXRRLLLXLXXRLLXLXXRRLXRRRLXRXLXRXRLLRRXRXLLXLRXLXR","end":"XXXXRRXRRXRRRRLLLLXXXRLLLXXXRRLXRRRLXXRLXXRRLLXRRRLLLXXRLXXR"}' },
   ],
 }
 export default function SwapAdjacentLR() {

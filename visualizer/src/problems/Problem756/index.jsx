@@ -21,7 +21,7 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"bottom": "BCD", "allowed": ["BCC","CDE","CEA","FFF"]}' },
     { label: 'Example 2', input: '{"bottom": "AAAA", "allowed": ["AAB","AAC","BCD","BBE","DEF"]}' },
-    { label: 'Backtracking', input: '{"bottom": "ABC", "allowed": ["ABD","ABE","BCD","DEF","DDF"]}' },
+    { label: 'Backtracking', input: '{"bottom": "ABC", "allowed": ["ABD","ABE","BCD","DEF","DDF"]}' }, { label: 'Two-letter base', input: '{"bottom":"AB","allowed":[]}' }, { label: 'Repeated letters reuse a triple', input: '{"bottom":"AAB","allowed":["AAC","ABC","CCB"]}' }, { label: 'No top block', input: '{"bottom":"ABC","allowed":["ABD"]}' }, { label: 'Long run: 40 triples', input: '{"bottom":"ABCDEF","allowed":["CAC","ADF","FAB","BEB","CED","DAA","EFC","ECE","ADC","ABF","DEC","BBD","ACD","CBD","EDB","FDE","FFB","AFD","AEF","AEC","FBB","AFE","EBF","BEA","CCF","BBC","DAE","CBA","FEC","EFD","CCC","ACE","DBB","DFE","ECA","CAB","EFA","BEF","EDC","DEF"]}' },
   ],
 }
 

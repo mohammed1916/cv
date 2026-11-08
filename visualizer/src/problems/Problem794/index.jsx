@@ -17,7 +17,7 @@ const definition = {
     { label: 'O first (false)', input: '["O  ","   ","   "]' },
     { label: 'Both win (false)', input: '["XXX","   ","OOO"]' },
     { label: 'Valid midgame (true)', input: '["XOX","O O","XOX"]' },
-    { label: 'X wins validly (true)', input: '["XXX","OO ","   "]' },
+    { label: 'X wins validly (true)', input: '["XXX","OO ","   "]' }, { label: 'Empty board', input: '["   ","   ","   "]' }, { label: 'Single winning row', input: '["XXX","OO ","   "]' }, { label: 'Full board draw', input: '["XOX","XOO","OXX"]' }, { label: 'Both players win', input: '["XXX","OOO","   "]' },
   ],
 }
 export default function ValidTicTacToeState() {

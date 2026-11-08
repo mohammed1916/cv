@@ -14,7 +14,7 @@ const definition = {
   inputLabel: 'n and k (JSON)',
   url: 'https://leetcode.com/problems/cracking-the-safe/',
   complexity: 'O(k^n) edges visited, each with O(n) string work. The visualization caps k^n at 500.',
-  examples: [{ label: 'Example 1', input: '{"n": 1, "k": 2}' }, { label: 'Example 2', input: '{"n": 2, "k": 2}' }, { label: 'Three digits', input: '{"n": 3, "k": 3}' }],
+  examples: [{ label: 'Example 1', input: '{"n": 1, "k": 2}' }, { label: 'Example 2', input: '{"n": 2, "k": 2}' }, { label: 'Three digits', input: '{"n": 3, "k": 3}' }, { label: 'Single digit', input: '{"n":1,"k":1}' }, { label: 'One-symbol alphabet', input: '{"n":3,"k":1}' }, { label: 'Ten symbols, two wide', input: '{"n":2,"k":10}' }, { label: 'Long run: 256 passwords', input: '{"n":4,"k":4}' }],
 }
 
 export default function CrackingTheSafe() {

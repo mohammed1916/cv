@@ -16,7 +16,7 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[6, 10]' },
     { label: 'Example 2', input: '[10, 15]' },
-    { label: 'Wider range', input: '[1, 40]' },
+    { label: 'Wider range', input: '[1, 40]' }, { label: 'Single number', input: '[1,1]' }, { label: 'Equal bit counts', input: '[5,6]' }, { label: 'Top of the range', input: '[999800,1000000]' }, { label: 'Long run: 201 numbers', input: '[1,201]' },
   ],
 }
 

@@ -14,7 +14,7 @@ const definition = {
   inputLabel: 'String s (JSON)',
   url: 'https://leetcode.com/problems/partition-labels/',
   complexity: 'O(n) time, O(26) extra space; the visualization caps the string at 200 characters.',
-  examples: [{ label: 'Example 1', input: '"ababcbacadefegdehijhklij"' }, { label: 'Example 2', input: '"eccbbbbdec"' }, { label: 'One letter', input: '"aaaa"' }],
+  examples: [{ label: 'Example 1', input: '"ababcbacadefegdehijhklij"' }, { label: 'Example 2', input: '"eccbbbbdec"' }, { label: 'One letter', input: '"aaaa"' }, { label: 'Single letter', input: '"a"' }, { label: 'Nested letters stay together', input: '"abba"' }, { label: 'Repeating blocks', input: '"abcabc"' }, { label: 'Long run: 200 letters', input: '"rhjrebeghtzogvqowgwwasugkrjlkzfehkqdlygkluockmzgeldadavsottvwwncptcvblrknfzgfzgopuwidlpshekvlvewmojdtsncearqriwgdjkyweeenntzbwyscimhchutklegtyhatyhqopkzlmzrcvxoytyjkenzpcskethiyxeieardatwlciuqlkrbdyjn"' }],
 }
 
 export default function PartitionLabels() {

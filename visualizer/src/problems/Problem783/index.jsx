@@ -16,7 +16,7 @@ const definition = {
   examples: [
     { label: '[4,2,6,1,3] -> 1', input: '[4,2,6,1,3]' },
     { label: '[1,0,48,null,null,12,49] -> 1', input: '[1,0,48,null,null,12,49]' },
-    { label: 'Skewed', input: '[10,null,20,null,25]' },
+    { label: 'Skewed', input: '[10,null,20,null,25]' }, { label: 'Two nodes', input: '[1,null,2]' }, { label: 'Equal gaps tie', input: '[2,1,3]' }, { label: 'Widest gap', input: '[0,null,100000]' }, { label: 'Long run: 31 nodes', input: '[49517,21783,83938,6630,36763,75121,91840,5101,7538,29823,45641,63918,78850,90195,94876,4679,6237,6913,18343,26290,36327,45541,46597,58648,63941,75455,82268,84434,91663,91883,95048]' },
   ],
 }
 export default function MinimumDistanceBST() {

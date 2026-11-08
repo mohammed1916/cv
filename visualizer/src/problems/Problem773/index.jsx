@@ -17,7 +17,7 @@ const definition = {
     { label: '[[1,2,3],[4,0,5]] -> 1', input: '[[1,2,3],[4,0,5]]' },
     { label: '[[1,2,3],[5,4,0]] -> -1', input: '[[1,2,3],[5,4,0]]' },
     { label: '[[4,1,2],[5,0,3]] -> 5', input: '[[4,1,2],[5,0,3]]' },
-    { label: 'Long solve (14 moves)', input: '[[3,2,4],[1,5,0]]' },
+    { label: 'Long solve (14 moves)', input: '[[3,2,4],[1,5,0]]' }, { label: 'Already solved', input: '[[1,2,3],[4,5,0]]' }, { label: 'Swapped tiles, no solution', input: '[[2,1,3],[4,5,0]]' }, { label: 'Blank in a corner', input: '[[0,1,2],[3,4,5]]' },
   ],
 }
 export default function SlidingPuzzle() {

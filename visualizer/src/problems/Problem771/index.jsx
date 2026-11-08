@@ -15,7 +15,7 @@ const definition = {
   complexity: 'O(j + s) time for j jewel types and s stones, and O(j) extra space.',
   examples: [
     { label: 'Mixed case', input: '{"jewels":"aB","stones":"aAbBcC"}' },
-    { label: 'None', input: '{"jewels":"xyz","stones":"abc"}' },
+    { label: 'None', input: '{"jewels":"xyz","stones":"abc"}' }, { label: 'Single stone match', input: '{"jewels":"a","stones":"a"}' }, { label: 'Case matters', input: '{"jewels":"aA","stones":"aAaA"}' }, { label: 'No matches', input: '{"jewels":"xyz","stones":"abc"}' }, { label: 'Long run: 50 stones', input: '{"jewels":"aeiouAEIOU","stones":"eaddozczAxxuzuAecbAcezbxaIuIAoOyazeocdoOcuzyzAuoeA"}' },
   ],
 }
 

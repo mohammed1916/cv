@@ -18,7 +18,7 @@ const definition = {
   examples: [
     { label: '4 nodes, 2 paths', input: '[[1,2],[3],[3],[]]' },
     { label: '5 nodes, 5 paths', input: '[[4,3,1],[3,2,4],[3],[4],[]]' },
-    { label: 'Single edge', input: '[[1],[]]' },
+    { label: 'Single edge', input: '[[1],[]]' }, { label: 'Two nodes, one edge', input: '[[1],[]]' }, { label: 'Chain of ten nodes', input: '[[1],[2],[3],[4],[5],[6],[7],[8],[9],[]]' }, { label: 'Dense: ten nodes, all forward edges', input: '[[1,2,3,4,5,6,7,8,9],[2,3,4,5,6,7,8,9],[3,4,5,6,7,8,9],[4,5,6,7,8,9],[5,6,7,8,9],[6,7,8,9],[7,8,9],[8,9],[9],[]]' },
   ],
 }
 export default function AllPathsSourceTarget() {

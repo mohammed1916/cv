@@ -14,7 +14,7 @@ const definition = {
   complexity: 'O(1) time: each channel has only 16 candidates.',
   examples: [
     { label: 'Example 1', input: '"#09f166"' },
-    { label: 'Already short', input: '"#112233"' },
+    { label: 'Already short', input: '"#112233"' }, { label: 'All black', input: '"#000000"' }, { label: 'All white', input: '"#ffffff"' }, { label: 'Mid grey', input: '"#7f7f7f"' },
   ],
 }
 

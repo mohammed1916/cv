@@ -14,7 +14,7 @@ const definition = {
   complexity: 'O(volume * n) time with this scan. The visualization caps input at 30 heights and 50 units.',
   examples: [
     { label: 'Example 1', input: '{"heights":[2,1,1,2,1,2,2],"volume":4,"k":3}' },
-    { label: 'Example 2', input: '{"heights":[1,2,3,4],"volume":2,"k":2}' },
+    { label: 'Example 2', input: '{"heights":[1,2,3,4],"volume":2,"k":2}' }, { label: 'Single column', input: '{"heights":[3],"volume":5,"k":0}' }, { label: 'Equal heights tie', input: '{"heights":[2,2,2,2],"volume":4,"k":1}' }, { label: 'Largest heights and volume', input: '{"heights":[20,0,20,0,20],"volume":50,"k":2}' }, { label: 'Long run: 30 columns', input: '{"heights":[19,13,9,11,6,19,3,1,0,7,9,0,6,10,11,2,14,1,2,14,3,12,20,18,15,17,7,0,4,17],"volume":50,"k":14}' },
   ],
 }
 

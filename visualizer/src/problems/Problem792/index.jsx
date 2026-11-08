@@ -16,7 +16,7 @@ const definition = {
   examples: [
     { label: 'abcde', input: '{"s":"abcde","words":["a","bb","acd","ace"]}' },
     { label: 'dsahjpjauf', input: '{"s":"dsahjpjauf","words":["ahjpjau","ja","ahbwzgqnuk","tnmlanowax"]}' },
-    { label: 'repeated letters', input: '{"s":"aab","words":["aa","ab","ba","aaa"]}' },
+    { label: 'repeated letters', input: '{"s":"aab","words":["aa","ab","ba","aaa"]}' }, { label: 'Single letter word', input: '{"s":"a","words":["a"]}' }, { label: 'Duplicate words count twice', input: '{"s":"abc","words":["ab","ab","c"]}' }, { label: 'No matches', input: '{"s":"abc","words":["d"]}' }, { label: 'Long run: 40 letters, 10 words', input: '{"s":"caaaabbacbababcababbbcaaacccaaacaaaacccc","words":["aa","ab","ab","bbb","acb","cca","bcc","bc","bbb","cac"]}' },
   ],
 }
 export default function NumberOfMatchingSubsequences() {

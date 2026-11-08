@@ -13,7 +13,7 @@ const definition = {
   complexity: 'O(n) time and recursion depth proportional to nesting. The visualization caps input at 40 characters.',
   examples: [
     { label: 'Precedence', input: '"6-4/2"' },
-    { label: 'Nested', input: '"2*(5+5*2)/3+(6/2+8)"' },
+    { label: 'Nested', input: '"2*(5+5*2)/3+(6/2+8)"' }, { label: 'Single digit', input: '"7"' }, { label: 'Left to right subtraction', input: '"1-2-3"' }, { label: 'Parentheses override order', input: '"(1+2)*3"' }, { label: 'Long run: 40 characters', input: '"12*3-45/6+78*9-1/2+34*5-67/8+9*2-1/3+4"' },
   ],
 }
 

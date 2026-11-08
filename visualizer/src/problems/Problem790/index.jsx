@@ -14,7 +14,7 @@ const definition = {
   complexity: 'O(n) time and O(n) space with the table; O(1) space is also possible.',
   examples: [
     { label: 'Width four', input: '4' },
-    { label: 'Width seven', input: '7' },
+    { label: 'Width seven', input: '7' }, { label: 'Width one', input: '1' }, { label: 'Width two', input: '2' }, { label: 'Long run: width 60', input: '60' },
   ],
 }
 

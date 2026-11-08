@@ -17,7 +17,7 @@ const definition = {
     { label: 'e + 8 - a + 5', input: '{"expression":"e + 8 - a + 5","evalvars":["e"],"evalints":[1]}' },
     { label: 'e - 8 + temperature - pressure', input: '{"expression":"e - 8 + temperature - pressure","evalvars":["e","temperature"],"evalints":[1,12]}' },
     { label: '(e + 8) * (e - 8)', input: '{"expression":"(e + 8) * (e - 8)","evalvars":[],"evalints":[]}' },
-    { label: 'cancel to zero', input: '{"expression":"a * b - b * a","evalvars":[],"evalints":[]}' },
+    { label: 'cancel to zero', input: '{"expression":"a * b - b * a","evalvars":[],"evalints":[]}' }, { label: 'Single variable', input: '{"expression":"a","evalvars":[],"evalints":[]}' }, { label: 'Repeated term combines', input: '{"expression":"x + x + x","evalvars":[],"evalints":[]}' }, { label: 'Long run: 12 products', input: '{"expression":"p*q + q*r + r*s + s*p + p*q + q*r + r*s + s*p + p*q + q*r + r*s + s*p","evalvars":["p","q","r","s"],"evalints":[2,3,4,5]}' },
   ],
 }
 export default function BasicCalculatorIV() {

@@ -18,7 +18,7 @@ const definition = {
     { label: 'k = 0 (answer 5)', input: '0' },
     { label: 'k = 5 (answer 0)', input: '5' },
     { label: 'k = 3 (answer 5)', input: '3' },
-    { label: 'k = 1000000000', input: '1000000000' },
+    { label: 'k = 1000000000', input: '1000000000' }, { label: 'k = 1', input: '1' }, { label: 'k = 24', input: '24' }, { label: 'Long run: k = 999999999', input: '999999999' },
   ],
 }
 export default function PreimageSizeFactorialZeroes() {

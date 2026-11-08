@@ -14,7 +14,7 @@ const definition = {
   complexity: 'O(h) time for height h, since each step descends one level. The visualization caps input at 30 nodes.',
   examples: [
     { label: 'Example 1', input: '{"arr":[4,2,6,1,3,5,7],"target":2}' },
-    { label: 'Split high', input: '{"arr":[5,3,8],"target":6}' },
+    { label: 'Split high', input: '{"arr":[5,3,8],"target":6}' }, { label: 'Single node', input: '{"arr":[1],"target":1}' }, { label: 'Target equals a root value', input: '{"arr":[4,2,6,1,3],"target":4}' }, { label: 'Target above every value', input: '{"arr":[50,25,75],"target":100}' }, { label: 'Long run: 15 nodes', input: '{"arr":[50,19,69,7,48,52,95,2,10,44,49,51,63,81,100],"target":37}' },
   ],
 }
 

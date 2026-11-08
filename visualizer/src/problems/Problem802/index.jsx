@@ -21,7 +21,7 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[[1,2],[2,3],[5],[0],[5],[],[]]' },
     { label: 'Example 2 (all cyclic but 4)', input: '[[1,2,3,4],[1,2],[3,4],[0,4],[]]' },
-    { label: 'Self loop', input: '[[0],[0,2],[]]' },
+    { label: 'Self loop', input: '[[0],[0,2],[]]' }, { label: 'Single node', input: '[[]]' }, { label: 'Two-node cycle', input: '[[1],[0]]' }, { label: 'Long run: 24 nodes', input: '[[11],[7,6],[16,12],[],[],[6,8],[23],[],[0],[],[],[],[5,16],[19],[],[],[9,10,21],[21],[],[10,5,15],[],[5,15],[5],[]]' },
   ],
 }
 export default function EventualSafeStates() {

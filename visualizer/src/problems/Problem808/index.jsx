@@ -14,7 +14,7 @@ const definition = {
   examples: [
     { label: 'Small', input: '100' },
     { label: 'Medium', input: '300' },
-    { label: 'Large', input: '5000' },
+    { label: 'Large', input: '5000' }, { label: 'No soup', input: '0' }, { label: 'Largest allowed', input: '10000' }, { label: 'Long run: 9999', input: '9999' },
   ],
 }
 

@@ -16,7 +16,7 @@ const definition = {
   examples: [
     { label: 'n = 10', input: '10' },
     { label: 'n = 1', input: '1' },
-    { label: 'n = 100', input: '100' },
+    { label: 'n = 100', input: '100' }, { label: 'n = 2', input: '2' }, { label: 'n = 50', input: '50' }, { label: 'Largest cap: n = 1000', input: '1000' },
   ],
 }
 export default function RotatedDigits() {

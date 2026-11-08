@@ -13,7 +13,7 @@ const definition = {
   inputLabel: 'Target (JSON integer)',
   url: 'https://leetcode.com/problems/reach-a-number/',
   complexity: 'O(sqrt(|target|)) steps; the visualization caps |target| at 20,000.',
-  examples: [{ label: 'Example 1', input: '2' }, { label: 'Example 2', input: '3' }, { label: 'Negative', input: '-10' }, { label: 'Parity fix', input: '5' }],
+  examples: [{ label: 'Example 1', input: '2' }, { label: 'Example 2', input: '3' }, { label: 'Negative', input: '-10' }, { label: 'Parity fix', input: '5' }, { label: 'Single step', input: '1' }, { label: 'Largest target', input: '20000' }, { label: 'Long run: -19999', input: '-19999' }],
 }
 
 export default function ReachANumber() {

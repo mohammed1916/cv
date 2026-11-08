@@ -15,7 +15,7 @@ const definition = {
   complexity: 'O(n^3) for this direct version; a run-length table gives O(n^2).',
   examples: [
     { label: 'Central', input: '{"n":5,"mines":[[1,1],[3,3]]}' },
-    { label: 'Dense', input: '{"n":4,"mines":[[0,0],[2,3]]}' },
+    { label: 'Dense', input: '{"n":4,"mines":[[0,0],[2,3]]}' }, { label: 'Single cell', input: '{"n":1,"mines":[]}' }, { label: 'One mine in a 2 by 2 grid', input: '{"n":2,"mines":[[0,0]]}' }, { label: 'No plus fits', input: '{"n":2,"mines":[[0,0],[0,1],[1,0],[1,1]]}' }, { label: 'Long run: 12 by 12 with 20 mines', input: '{"n":12,"mines":[[1,3],[4,10],[5,7],[5,5],[8,8],[9,7],[3,5],[10,3],[9,3],[9,10],[0,10],[6,11],[6,5],[1,4],[4,2],[9,11],[10,7],[7,1],[3,9],[3,1]]}' },
   ],
 }
 

@@ -15,7 +15,7 @@ const definition = {
   complexity: 'O(n log(range / precision)) time. The visualization caps input at 20 stations and runs a fixed 50 iterations.',
   examples: [
     { label: 'Example 1', input: '{"stations":[1,2,3,4,5,6,7,8,9,10],"k":9}' },
-    { label: 'Example 2', input: '{"stations":[23,24,36,39,46,56,57,65,84,98],"k":1}' },
+    { label: 'Example 2', input: '{"stations":[23,24,36,39,46,56,57,65,84,98],"k":1}' }, { label: 'Two stations, one gap', input: '{"stations":[0,1],"k":1}' }, { label: 'Evenly spaced tie', input: '{"stations":[0,10,20,30],"k":3}' }, { label: 'Full range, k = 10', input: '{"stations":[0,1000],"k":10}' }, { label: 'Long run: 20 stations', input: '{"stations":[34,86,173,231,262,263,392,437,440,442,502,521,553,622,662,730,812,826,901,920],"k":10}' },
   ],
 }
 
