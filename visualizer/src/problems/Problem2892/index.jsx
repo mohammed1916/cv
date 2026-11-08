@@ -14,6 +14,10 @@ const definition = {
     { label: 'All merge', input: '{"nums":[1,1,1,1],"k":1}' },
     { label: 'Equal values', input: '{"nums":[4,4,4,4,4,4],"k":16}' },
     { label: 'Several splits', input: '{"nums":[5,2,3,1,6,2,7],"k":12}' },
+    { label: "Single element", input: "{\"nums\":[1],\"k\":1}" },
+    { label: "Equal large values, k = 1000", input: "{\"nums\":[1000,1000,1000],\"k\":1000}" },
+    { label: "Largest values and k", input: "{\"nums\":[1000,1,1000,1,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000],\"k\":1000000}" },
+    { label: "Long run: 20 values", input: "{\"nums\":[357,594,996,720,805,2,903,155,712,723,972,215,697,542,328,463,630,271,890,215],\"k\":5000}" },
   ],
 }
 

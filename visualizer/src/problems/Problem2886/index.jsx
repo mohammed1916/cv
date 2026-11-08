@@ -12,6 +12,10 @@ const definition = {
     { label: 'Whole grades', input: '{"students":[{"student_id":31,"name":"Noor","age":12,"grade":64.0},{"student_id":32,"name":"Theo","age":14,"grade":91.0},{"student_id":33,"name":"Priya","age":13,"grade":58.0}]}' },
     { label: 'Fractions are cut', input: '{"students":[{"student_id":7,"name":"Ines","age":16,"grade":79.9},{"student_id":8,"name":"Omar","age":15,"grade":0.5}]}' },
     { label: 'No rows', input: '{"students":[]}' },
+    { label: "Single student with zero grade", input: "{\"students\":[{\"student_id\":1,\"name\":\"Ana\",\"age\":14,\"grade\":0}]}" },
+    { label: "Equal grades", input: "{\"students\":[{\"student_id\":2,\"name\":\"Bo\",\"age\":15,\"grade\":90.5},{\"student_id\":3,\"name\":\"Cy\",\"age\":16,\"grade\":90.5}]}" },
+    { label: "Largest grades", input: "{\"students\":[{\"student_id\":4,\"name\":\"Di\",\"age\":17,\"grade\":999999999.9},{\"student_id\":5,\"name\":\"Ed\",\"age\":17,\"grade\":-999999999.9}]}" },
+    { label: "Long run: 12 students", input: "{\"students\":[{\"student_id\":600,\"name\":\"bxm\",\"age\":17,\"grade\":51.5},{\"student_id\":601,\"name\":\"rrj\",\"age\":13,\"grade\":10.5},{\"student_id\":602,\"name\":\"vyrse\",\"age\":12,\"grade\":89.4},{\"student_id\":603,\"name\":\"wr\",\"age\":13,\"grade\":82.3},{\"student_id\":604,\"name\":\"qkr\",\"age\":16,\"grade\":16.7},{\"student_id\":605,\"name\":\"mlvr\",\"age\":16,\"grade\":46.8},{\"student_id\":606,\"name\":\"kfoob\",\"age\":12,\"grade\":59.2},{\"student_id\":607,\"name\":\"rykeq\",\"age\":15,\"grade\":25.4},{\"student_id\":608,\"name\":\"exttk\",\"age\":14,\"grade\":24},{\"student_id\":609,\"name\":\"uhznq\",\"age\":15,\"grade\":6.5},{\"student_id\":610,\"name\":\"jd\",\"age\":14,\"grade\":64.3},{\"student_id\":611,\"name\":\"qlum\",\"age\":13,\"grade\":47.9}]}" },
   ],
 }
 

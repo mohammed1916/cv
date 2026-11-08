@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Ends in 75', input: '{"num":"7315"}' },
     { label: 'Zero and no pair', input: '{"num":"9045"}' },
+    { label: "Single digit", input: "{\"num\":\"5\"}" },
+    { label: "Zero", input: "{\"num\":\"0\"}" },
+    { label: "Fourteen digits", input: "{\"num\":\"98765432109876\"}" },
+    { label: "Long run: 14 seeded digits", input: "{\"num\":\"12321214783096\"}" },
   ],
 }
 

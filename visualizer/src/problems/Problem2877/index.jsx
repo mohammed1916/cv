@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Three students', input: '{"data":[[101,18],[102,22],[103,19]]}' },
     { label: 'One student', input: '{"data":[[7,40]]}' },
+    { label: "One row", input: "{\"data\":[[1,20]]}" },
+    { label: "Equal ages", input: "{\"data\":[[1,20],[2,20],[3,20]]}" },
+    { label: "Extreme ids and ages", input: "{\"data\":[[2147483647,150],[-1,0]]}" },
+    { label: "Long run: 10 rows", input: "{\"data\":[[415,23],[752,16],[826,78],[493,41],[173,86],[248,94],[139,26],[912,47],[399,4],[469,91]]}" },
   ],
 }
 

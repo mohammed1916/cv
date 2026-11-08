@@ -21,6 +21,10 @@ const definition = {
   examples: [
     { label: "Example 1", input: '{"grid":[[1,1,0],[1,1,1],[1,2,1]]}' },
     { label: "Example 2", input: '{"grid":[[1,3,0],[1,0,0],[1,0,3]]}' },
+    { label: "All stones in one cell", input: "{\"grid\":[[9,0,0],[0,0,0],[0,0,0]]}" },
+    { label: "Even spread", input: "{\"grid\":[[1,1,1],[1,1,1],[1,1,1]]}" },
+    { label: "Centre cell only", input: "{\"grid\":[[0,0,0],[0,9,0],[0,0,0]]}" },
+    { label: "Long run: nine seeded stones", input: "{\"grid\":[[1,0,1],[4,2,0],[0,0,1]]}" },
   ],
 };
 

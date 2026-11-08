@@ -12,6 +12,10 @@ const definition = {
     { label: 'Small team', input: '{"employees":[{"name":"Mira","salary":1200},{"name":"Tomas","salary":950},{"name":"Noor","salary":3100},{"name":"Ivo","salary":2045}]}' },
     { label: 'One row, zero salary', input: '{"employees":[{"name":"Intern","salary":0}]}' },
     { label: 'Same name twice', input: '{"employees":[{"name":"Sam","salary":700},{"name":"Sam","salary":815}]}' },
+    { label: "Single employee", input: "{\"employees\":[{\"name\":\"Ana\",\"salary\":1}]}" },
+    { label: "Equal salaries", input: "{\"employees\":[{\"name\":\"Bo\",\"salary\":500},{\"name\":\"Cem\",\"salary\":500}]}" },
+    { label: "Largest exact salary", input: "{\"employees\":[{\"name\":\"Max\",\"salary\":4503599627370495},{\"name\":\"Zero\",\"salary\":0}]}" },
+    { label: "Long run: 12 employees", input: "{\"employees\":[{\"name\":\"pmim\",\"salary\":3884},{\"name\":\"bdc\",\"salary\":4902},{\"name\":\"ybviy\",\"salary\":518},{\"name\":\"lobiv\",\"salary\":1176},{\"name\":\"qoq\",\"salary\":3050},{\"name\":\"yrk\",\"salary\":4129},{\"name\":\"kjk\",\"salary\":3407},{\"name\":\"cthap\",\"salary\":4108},{\"name\":\"lqfifj\",\"salary\":4648},{\"name\":\"bxf\",\"salary\":827},{\"name\":\"lxz\",\"salary\":3245},{\"name\":\"xmpsq\",\"salary\":3952}]}" },
   ],
 }
 

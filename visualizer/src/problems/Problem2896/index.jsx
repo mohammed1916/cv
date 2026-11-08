@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s1": "1100011000", "s2": "0101001010", "x": 2}' },
     { label: 'Impossible', input: '{"s1": "10110", "s2": "00011", "x": 4}' },
+    { label: "Equal one-digit strings", input: "{\"s1\":\"0\",\"s2\":\"0\",\"x\":1}" },
+    { label: "Equal strings, no change needed", input: "{\"s1\":\"1111\",\"s2\":\"1111\",\"x\":3}" },
+    { label: "Longest strings, opposite digits", input: "{\"s1\":\"111111111111\",\"s2\":\"000000000000\",\"x\":20}" },
+    { label: "Long run: 12 digits", input: "{\"s1\":\"011101111111\",\"s2\":\"100000011001\",\"x\":7}" },
   ],
 }
 

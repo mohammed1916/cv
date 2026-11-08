@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Five rows', input: '{"rows":[{"id":1},{"id":2},{"id":3},{"id":4},{"id":5}]}' },
     { label: 'Two rows', input: '{"rows":[{"id":"a"},{"id":"b"}]}' },
+    { label: "One row", input: "{\"rows\":[{\"id\":1}]}" },
+    { label: "Exactly three rows", input: "{\"rows\":[{\"id\":1,\"name\":\"a\"},{\"id\":2,\"name\":\"b\"},{\"id\":3,\"name\":\"c\"}]}" },
+    { label: "Four rows with text ids", input: "{\"rows\":[{\"id\":\"x\"},{\"id\":\"y\"},{\"id\":\"z\"},{\"id\":\"w\"}]}" },
+    { label: "Long run: 25 rows", input: "{\"rows\":[{\"id\":1,\"score\":35},{\"id\":2,\"score\":41},{\"id\":3,\"score\":9},{\"id\":4,\"score\":24},{\"id\":5,\"score\":14},{\"id\":6,\"score\":28},{\"id\":7,\"score\":30},{\"id\":8,\"score\":24},{\"id\":9,\"score\":9},{\"id\":10,\"score\":98},{\"id\":11,\"score\":7},{\"id\":12,\"score\":31},{\"id\":13,\"score\":100},{\"id\":14,\"score\":16},{\"id\":15,\"score\":36},{\"id\":16,\"score\":40},{\"id\":17,\"score\":64},{\"id\":18,\"score\":7},{\"id\":19,\"score\":0},{\"id\":20,\"score\":69},{\"id\":21,\"score\":16},{\"id\":22,\"score\":93},{\"id\":23,\"score\":0},{\"id\":24,\"score\":70},{\"id\":25,\"score\":0}]}" },
   ],
 }
 

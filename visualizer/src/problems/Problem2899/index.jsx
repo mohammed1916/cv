@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Growing record', input: '["5","8","prev","9","prev","prev","prev"]' },
     { label: 'Too far back', input: '["4","prev","prev","7","prev"]' },
+    { label: "Single prev with no history", input: "[\"prev\"]" },
+    { label: "Repeated number then prev", input: "[\"5\",\"5\",\"prev\",\"prev\"]" },
+    { label: "Maximum length, alternating", input: "[\"100\",\"prev\",\"100\",\"prev\",\"100\",\"prev\",\"100\",\"prev\",\"100\",\"prev\",\"100\",\"prev\",\"100\",\"prev\",\"100\",\"prev\",\"100\",\"prev\",\"100\",\"prev\"]" },
+    { label: "Long run: 20 words", input: "[\"prev\",\"prev\",\"98\",\"24\",\"57\",\"prev\",\"prev\",\"prev\",\"prev\",\"21\",\"73\",\"38\",\"43\",\"19\",\"14\",\"prev\",\"prev\",\"37\",\"prev\",\"81\"]" },
   ],
 }
 

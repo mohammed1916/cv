@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,3],"target":5}' },
     { label: 'Whole copies', input: '{"nums":[3,1],"target":8}' },
+    { label: "Target smaller than the only entry", input: "{\"nums\":[7],\"target\":1}" },
+    { label: "Equal values sum exactly to target", input: "{\"nums\":[4,4,4],\"target\":12}" },
+    { label: "Largest entry and target", input: "{\"nums\":[100],\"target\":5000}" },
+    { label: "Long run: 30 entries", input: "{\"nums\":[36,6,36,9,48,30,58,58,7,75,26,58,9,37,45,54,3,2,82,14,40,68,32,42,54,48,5,96,79,91],\"target\":5000}" },
   ],
 }
 

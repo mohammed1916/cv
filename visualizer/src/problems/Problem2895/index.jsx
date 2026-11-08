@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"processorTime":[8,10],"tasks":[2,2,3,1,8,7,4,5]}' },
     { label: 'Example 2', input: '{"processorTime":[10,20],"tasks":[2,3,1,2,5,8,4,3]}' },
+    { label: "Single processor with zero start", input: "{\"processorTime\":[0],\"tasks\":[1,1,1,1]}" },
+    { label: "Equal processor times", input: "{\"processorTime\":[5,5],\"tasks\":[2,2,2,2,2,2,2,2]}" },
+    { label: "Largest times, three processors", input: "{\"processorTime\":[1000,1000,1000],\"tasks\":[1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000]}" },
+    { label: "Long run: 3 processors, 12 tasks", input: "{\"processorTime\":[3,8,12],\"tasks\":[359,866,50,831,804,245,196,903,239,896,333,269]}" },
   ],
 }
 

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Diagonal source', input: '{"n":3,"m":4,"k":3,"source":[1,1],"destination":[2,3]}' },
     { label: 'Same cell', input: '{"n":2,"m":2,"k":2,"source":[1,2],"destination":[1,2]}' },
+    { label: "Single cell, zero moves", input: "{\"n\":1,\"m\":1,\"k\":0,\"source\":[1,1],\"destination\":[1,1]}" },
+    { label: "Zero moves cannot reach another cell", input: "{\"n\":2,\"m\":2,\"k\":0,\"source\":[1,1],\"destination\":[2,2]}" },
+    { label: "Opposite corners on an 8 by 8 grid", input: "{\"n\":8,\"m\":8,\"k\":12,\"source\":[1,1],\"destination\":[8,8]}" },
+    { label: "Long run: 8 by 8 grid, 10 moves", input: "{\"n\":8,\"m\":8,\"k\":10,\"source\":[4,4],\"destination\":[5,6]}" },
   ],
 }
 

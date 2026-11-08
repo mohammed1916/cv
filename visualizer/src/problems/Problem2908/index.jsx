@@ -23,6 +23,10 @@ const definition = {
     { label: "Example 1", input: '{"nums":[8,6,1,5,3]}' },
     { label: "Example 2", input: '{"nums":[5,4,8,7,10,2]}' },
     { label: "Example 3", input: '{"nums":[6,5,4,3,4,5]}' },
+    { label: "Smallest length", input: "{\"nums\":[1,1,1]}" },
+    { label: "Equal values", input: "{\"nums\":[4,4,4,4]}" },
+    { label: "Maximum length, alternating extremes", input: "{\"nums\":[50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1]}" },
+    { label: "Long run: 50 values", input: "{\"nums\":[19,3,48,16,24,49,40,41,43,33,12,9,17,39,50,46,5,26,34,21,11,13,22,39,21,3,42,14,26,14,5,6,35,39,28,49,27,28,33,32,17,7,44,16,16,29,28,1,25,11]}" },
   ],
 };
 

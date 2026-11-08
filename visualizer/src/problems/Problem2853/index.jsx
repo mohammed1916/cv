@@ -44,7 +44,13 @@ const SAMPLE = {
     }
   ]
 }
-const examples = [{ label: 'Teaching sample', input: JSON.stringify(SAMPLE) }]
+const examples = [
+  { label: 'Teaching sample', input: JSON.stringify(SAMPLE) },
+  { label: "Equal top salaries", input: "{\"Salaries\":[{\"employee_id\":1,\"employee_name\":\"Ann\",\"salary\":70,\"department\":\"Marketing\"},{\"employee_id\":2,\"employee_name\":\"Ben\",\"salary\":70,\"department\":\"Marketing\"},{\"employee_id\":3,\"employee_name\":\"Cy\",\"salary\":70,\"department\":\"Engineering\"}]}" },
+  { label: "Single row per department", input: "{\"Salaries\":[{\"employee_id\":4,\"employee_name\":\"Di\",\"salary\":10,\"department\":\"Marketing\"},{\"employee_id\":5,\"employee_name\":\"Ed\",\"salary\":20,\"department\":\"Engineering\"}]}" },
+  { label: "Zero salary", input: "{\"Salaries\":[{\"employee_id\":6,\"employee_name\":\"Fay\",\"salary\":0,\"department\":\"Marketing\"},{\"employee_id\":7,\"employee_name\":\"Gus\",\"salary\":0,\"department\":\"Engineering\"}]}" },
+  { label: "Long run: 12 seeded salaries", input: "{\"Salaries\":[{\"employee_id\":1,\"employee_name\":\"E1\",\"salary\":6300,\"department\":\"Engineering\"},{\"employee_id\":2,\"employee_name\":\"E2\",\"salary\":2900,\"department\":\"Marketing\"},{\"employee_id\":3,\"employee_name\":\"E3\",\"salary\":1100,\"department\":\"Engineering\"},{\"employee_id\":4,\"employee_name\":\"E4\",\"salary\":3100,\"department\":\"Marketing\"},{\"employee_id\":5,\"employee_name\":\"E5\",\"salary\":1400,\"department\":\"Engineering\"},{\"employee_id\":6,\"employee_name\":\"E6\",\"salary\":9000,\"department\":\"Marketing\"},{\"employee_id\":7,\"employee_name\":\"E7\",\"salary\":1200,\"department\":\"Engineering\"},{\"employee_id\":8,\"employee_name\":\"E8\",\"salary\":6600,\"department\":\"Marketing\"},{\"employee_id\":9,\"employee_name\":\"E9\",\"salary\":1500,\"department\":\"Engineering\"},{\"employee_id\":10,\"employee_name\":\"E10\",\"salary\":7600,\"department\":\"Marketing\"},{\"employee_id\":11,\"employee_name\":\"E11\",\"salary\":8100,\"department\":\"Engineering\"},{\"employee_id\":12,\"employee_name\":\"E12\",\"salary\":7800,\"department\":\"Marketing\"}]}" },
+]
 
 const definition = {
   number: meta.number,

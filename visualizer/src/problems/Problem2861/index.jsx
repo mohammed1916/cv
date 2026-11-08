@@ -16,6 +16,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":3,"k":2,"budget":15,"composition":[[1,1,1],[1,1,10]],"stock":[0,0,0],"cost":[1,2,3]}' },
     { label: 'Example 2', input: '{"n":3,"k":2,"budget":15,"composition":[[1,1,10],[1,1,1]],"stock":[0,0,100],"cost":[1,2,3]}' },
+    { label: "One metal, one machine, no budget", input: "{\"n\":1,\"k\":1,\"budget\":0,\"composition\":[[1]],\"stock\":[0],\"cost\":[1]}" },
+    { label: "Identical machines tie", input: "{\"n\":2,\"k\":2,\"budget\":10,\"composition\":[[2,2],[2,2]],\"stock\":[3,3],\"cost\":[1,1]}" },
+    { label: "No stock and no budget gives zero alloys", input: "{\"n\":2,\"k\":1,\"budget\":0,\"composition\":[[1,1]],\"stock\":[0,0],\"cost\":[2,3]}" },
+    { label: "Largest budget and stock", input: "{\"n\":3,\"k\":3,\"budget\":50,\"composition\":[[10,10,10],[1,1,1],[10,1,10]],\"stock\":[100,100,100],\"cost\":[3,3,3]}" },
+    { label: "Long run: 3 machines, 3 metals", input: "{\"n\":3,\"k\":3,\"budget\":50,\"composition\":[[4,8,8],[6,2,9],[6,8,10]],\"stock\":[95,91,99],\"cost\":[2,1,1]}" },
   ],
 }
 

@@ -21,6 +21,10 @@ const definition = {
     { label: "Example 1", input: '{"nums":[5,1,4,1],"indexDifference":2,"valueDifference":4}' },
     { label: "Example 2", input: '{"nums":[2,1],"indexDifference":0,"valueDifference":0}' },
     { label: "Example 3", input: '{"nums":[1,2,3],"indexDifference":2,"valueDifference":4}' },
+    { label: "Single value", input: "{\"nums\":[3],\"indexDifference\":0,\"valueDifference\":0}" },
+    { label: "Equal values with zero difference", input: "{\"nums\":[4,4,4],\"indexDifference\":1,\"valueDifference\":0}" },
+    { label: "Longest input, largest limits", input: "{\"nums\":[50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0],\"indexDifference\":100,\"valueDifference\":50}" },
+    { label: "Long run: 100 values", input: "{\"nums\":[18,30,26,6,6,11,32,11,15,18,49,38,22,0,42,30,16,22,8,49,38,22,4,21,41,42,42,22,23,9,7,17,44,37,28,18,12,22,8,46,34,34,3,27,15,29,28,15,0,22,22,11,16,27,18,8,15,16,47,18,20,37,44,20,40,8,45,26,32,23,24,6,7,37,7,13,28,49,46,28,10,41,32,14,25,49,44,7,20,43,15,38,32,43,38,32,48,3,21,36],\"indexDifference\":37,\"valueDifference\":12}" },
   ],
 };
 

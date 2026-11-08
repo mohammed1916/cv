@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"s":"abcd","t":"cdab","k":2}' },
     { label: 'Two letters', input: '{"s":"ab","t":"ba","k":1}' },
+    { label: "Two letters equal", input: "{\"s\":\"aa\",\"t\":\"aa\",\"k\":1}" },
+    { label: "Six letters reversed", input: "{\"s\":\"abcdef\",\"t\":\"fedcba\",\"k\":8}" },
+    { label: "Repeated pattern", input: "{\"s\":\"abcabc\",\"t\":\"abcabc\",\"k\":8}" },
+    { label: "Long run: six seeded letters, k 8", input: "{\"s\":\"engbsx\",\"t\":\"bsxeng\",\"k\":8}" },
   ],
 }
 

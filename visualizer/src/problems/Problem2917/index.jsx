@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[7,12,9,8,9,15],"k":4}' },
     { label: 'Example 2', input: '{"nums":[10,8,5,9,11,6,8],"k":1}' },
+    { label: 'Single number, k = 1', input: '{"nums":[5],"k":1}' },
+    { label: 'Equal numbers', input: '{"nums":[6,6,6],"k":3}' },
+    { label: 'All five bits set in every number', input: '{"nums":[31,31,31,31,31,31,31,31],"k":8}' },
+    { label: 'Zero when no bit repeats', input: '{"nums":[1,2,4],"k":3}' },
+    { label: 'Long run: 8 items', input: '{"nums":[29,20,17,7,7,4,16,11],"k":4}' },
   ],
 }
 

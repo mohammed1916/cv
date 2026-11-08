@@ -48,7 +48,13 @@ const SAMPLE = {
     }
   ]
 }
-const examples = [{ label: 'Teaching sample', input: JSON.stringify(SAMPLE) }]
+const examples = [
+  { label: 'Teaching sample', input: JSON.stringify(SAMPLE) },
+  { label: "Single step row", input: "{\"Steps\":[{\"user_id\":1,\"steps_count\":0,\"steps_date\":\"2026-01-01\"}]}" },
+  { label: "Two users on one day", input: "{\"Steps\":[{\"user_id\":1,\"steps_count\":500,\"steps_date\":\"2026-01-31\"},{\"user_id\":2,\"steps_count\":500,\"steps_date\":\"2026-01-31\"}]}" },
+  { label: "Month boundary", input: "{\"Steps\":[{\"user_id\":1,\"steps_count\":10,\"steps_date\":\"2026-01-30\"},{\"user_id\":1,\"steps_count\":20,\"steps_date\":\"2026-01-31\"},{\"user_id\":1,\"steps_count\":30,\"steps_date\":\"2026-02-01\"}]}" },
+  { label: "Long run: 12 seeded rows", input: "{\"Steps\":[{\"user_id\":1,\"steps_count\":12536,\"steps_date\":\"2026-03-01\"},{\"user_id\":2,\"steps_count\":16449,\"steps_date\":\"2026-03-02\"},{\"user_id\":3,\"steps_count\":18030,\"steps_date\":\"2026-03-03\"},{\"user_id\":1,\"steps_count\":9338,\"steps_date\":\"2026-03-04\"},{\"user_id\":2,\"steps_count\":18738,\"steps_date\":\"2026-03-05\"},{\"user_id\":3,\"steps_count\":15126,\"steps_date\":\"2026-03-06\"},{\"user_id\":1,\"steps_count\":13074,\"steps_date\":\"2026-03-07\"},{\"user_id\":2,\"steps_count\":10720,\"steps_date\":\"2026-03-08\"},{\"user_id\":3,\"steps_count\":17839,\"steps_date\":\"2026-03-09\"},{\"user_id\":1,\"steps_count\":7121,\"steps_date\":\"2026-03-10\"},{\"user_id\":2,\"steps_count\":13567,\"steps_date\":\"2026-03-11\"},{\"user_id\":3,\"steps_count\":4365,\"steps_date\":\"2026-03-12\"}]}" },
+]
 
 const definition = {
   number: meta.number,

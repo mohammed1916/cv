@@ -17,6 +17,11 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"n":6,"edges":[[2,1],[2,3],[2,4],[4,5],[4,6]]}' },
     { label: 'Path', input: '{"n":3,"edges":[[1,2],[2,3]]}' },
+    { label: "Single node, no edges", input: "{\"n\":1,\"edges\":[]}" },
+    { label: "Two nodes, one edge", input: "{\"n\":2,\"edges\":[[1,2]]}" },
+    { label: "Star with equal branches", input: "{\"n\":4,\"edges\":[[1,2],[1,3],[1,4]]}" },
+    { label: "Longest path, n = 10", input: "{\"n\":10,\"edges\":[[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10]]}" },
+    { label: "Long run: random tree on 10 nodes", input: "{\"n\":10,\"edges\":[[2,1],[3,1],[4,3],[5,4],[6,1],[7,2],[8,1],[9,3],[10,9]]}" },
   ],
 }
 

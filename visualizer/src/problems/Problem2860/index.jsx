@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Two groups', input: '{"nums":[4,4,1,0,4,2]}' },
     { label: 'Single group', input: '{"nums":[2,3,0,1,4]}' },
+    { label: "Single student", input: "{\"nums\":[0]}" },
+    { label: "Equal values share one bucket", input: "{\"nums\":[1,1,1]}" },
+    { label: "Maximum values, n = 12", input: "{\"nums\":[11,0,11,0,11,0,11,0,11,0,11,0]}" },
+    { label: "Long run: 12 students", input: "{\"nums\":[4,8,1,6,5,0,1,10,5,10,5,3]}" },
   ],
 }
 

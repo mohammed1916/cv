@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":10,"m":3}' },
     { label: 'No multiples', input: '{"n":5,"m":6}' },
+    { label: "Single number", input: "{\"n\":1,\"m\":1}" },
+    { label: "Divisor equals n", input: "{\"n\":5,\"m\":5}" },
+    { label: "Largest n and m", input: "{\"n\":1000,\"m\":1000}" },
+    { label: "Long run: n = 1000", input: "{\"n\":1000,\"m\":7}" },
   ],
 }
 

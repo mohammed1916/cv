@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: "Example 1", input: "{\"sx\": 2, \"sy\": 4, \"fx\": 7, \"fy\": 7, \"t\": 6}" },
     { label: "Example 2", input: "{\"sx\": 3, \"sy\": 1, \"fx\": 7, \"fy\": 3, \"t\": 3}" },
+    { label: "Zero time", input: "{\"sx\":1,\"sy\":1,\"fx\":1,\"fy\":1,\"t\":0}" },
+    { label: "Same column", input: "{\"sx\":5,\"sy\":2,\"fx\":5,\"fy\":9,\"t\":7}" },
+    { label: "Largest values", input: "{\"sx\":1000000000,\"sy\":1000000000,\"fx\":1,\"fy\":1,\"t\":1000000000}" },
+    { label: "Long run: seeded coordinates", input: "{\"sx\":368327,\"sy\":688456,\"fx\":903989,\"fy\":682718,\"t\":132563}" },
   ],
 };
 

@@ -11,6 +11,10 @@ const definition = {
   examples: [
     { label: 'Two islands', input: '[[1, -1], [-1, 3]]' },
     { label: 'One pocket', input: '[[4, 0, -1], [2, 7, -1], [-1, -1, 5]]' },
+    { label: "Single cell", input: "[[5]]" },
+    { label: "All blocked", input: "[[-1,-1],[-1,-1]]" },
+    { label: "Equal values", input: "[[3,3,3],[3,3,3],[3,3,3]]" },
+    { label: "Long run: 6 by 6 seeded grid", input: "[[0,4,9,8,8,-1],[6,5,9,7,1,0],[3,4,9,8,7,-1],[9,5,9,7,0,9],[6,4,9,6,4,-1],[1,5,9,5,8,9]]" },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"edges": [1,2,0,0]}' },
     { label: 'Example 2', input: '{"edges": [1,2,3,4,0]}' },
+    { label: "Two nodes pointing at each other", input: "{\"edges\":[1,0]}" },
+    { label: "Four-node cycle", input: "{\"edges\":[1,2,3,0]}" },
+    { label: "One cycle through 12 nodes", input: "{\"edges\":[1,2,3,4,5,6,7,8,9,10,11,0]}" },
+    { label: "Long run: 12 random edges", input: "{\"edges\":[4,3,3,5,6,6,7,1,3,6,6,2]}" },
   ],
 }
 

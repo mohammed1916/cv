@@ -20,6 +20,10 @@ const definition = {
   examples: [
     { label: 'Best middle', input: '{"prices":[2,5,3,6,4],"profits":[5,1,8,4,2]}' },
     { label: 'Decreasing', input: '{"prices":[4,3,2,1],"profits":[1,2,3,4]}' },
+    { label: "Single price and profit", input: "{\"prices\":[1],\"profits\":[1]}" },
+    { label: "Equal prices and profits", input: "{\"prices\":[2,2,2],\"profits\":[5,5,5]}" },
+    { label: "Extreme values, 8 entries", input: "{\"prices\":[-30,30,-30,30,-30,30,-30,30],\"profits\":[30,-30,30,-30,30,-30,30,-30]}" },
+    { label: "Long run: 8 entries", input: "{\"prices\":[-8,28,-14,-14,18,-17,-8,24],\"profits\":[-10,5,17,-1,-9,19,15,-3]}" },
   ],
 }
 

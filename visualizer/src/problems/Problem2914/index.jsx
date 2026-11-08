@@ -20,6 +20,10 @@ const definition = {
     { label: "Example 1", input: '{"s": "1001"}' },
     { label: "Example 2", input: '{"s": "10"}' },
     { label: "Example 3", input: '{"s": "0000"}' },
+    { label: "Shortest even length", input: "{\"s\":\"00\"}" },
+    { label: "All ones", input: "{\"s\":\"1111\"}" },
+    { label: "Longest string, alternating", input: "{\"s\":\"10101010101010101010101010101010101010101010101010\"}" },
+    { label: "Long run: 50 digits", input: "{\"s\":\"01010000111000011101010001010110001110011001111000\"}" },
   ],
 };
 

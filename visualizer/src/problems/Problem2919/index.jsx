@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Spread raises', input: '{"nums": [1,4,0,2,1], "k": 3}' },
     { label: 'All small', input: '{"nums": [0,0,0,0,0], "k": 2}' },
+    { label: 'Single value', input: '{"nums":[0],"k":1}' },
+    { label: 'Equal values', input: '{"nums":[3,3,3],"k":3}' },
+    { label: 'Upper limits', input: '{"nums":[20,20,20,20],"k":20}' },
+    { label: 'Long run: 20 values', input: '{"nums":[20,9,9,1,9,2,2,20,9,6,1,12,5,19,13,9,5,19,14,11],"k":5}' },
   ],
 }
 

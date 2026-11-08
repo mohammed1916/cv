@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[5,10,1,5,2],"k":1}' },
     { label: 'Example 2', input: '{"nums":[4,3,2,1],"k":2}' },
+    { label: "Single value", input: "{\"nums\":[7],\"k\":0}" },
+    { label: "Equal values", input: "{\"nums\":[5,5,5,5],\"k\":2}" },
+    { label: "Largest values", input: "{\"nums\":[50,50,50,50,50,50,50,50,50,50,50,50],\"k\":4}" },
+    { label: "Long run: 12 seeded values", input: "{\"nums\":[32,20,22,14,18,45,19,42,27,18,6,38],\"k\":3}" },
   ],
 }
 

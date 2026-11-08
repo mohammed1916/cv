@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Peak in the middle', input: '{"maxHeights":[4,2,6,3,1]}' },
     { label: 'Two equal tops', input: '{"maxHeights":[7,2,5,5]}' },
+    { label: "Single maximum tower", input: "{\"maxHeights\":[20]}" },
+    { label: "Five equal heights", input: "{\"maxHeights\":[2,2,2,2,2]}" },
+    { label: "Tall tower between short ones", input: "{\"maxHeights\":[1,20,1]}" },
+    { label: "Long run: 12 towers", input: "{\"maxHeights\":[7,5,4,16,10,12,14,7,10,5,4,9]}" },
   ],
 }
 

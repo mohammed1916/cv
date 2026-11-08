@@ -21,6 +21,10 @@ const definition = {
   examples: [
     { label: "Example 1", input: '{"nums":[12,6,1,2,7]}' },
     { label: "Example 2", input: '{"nums":[1,10,3,4,19]}' },
+    { label: "Smallest length", input: "{\"nums\":[1,1,1]}" },
+    { label: "Equal values", input: "{\"nums\":[5,5,5,5]}" },
+    { label: "Largest value at the ends", input: "{\"nums\":[1000000,1,1000000]}" },
+    { label: "Long run: 30 values", input: "{\"nums\":[349507,870485,986401,15887,141636,795129,713120,747495,46357,631320,350514,202930,136166,457146,989300,606331,719785,982171,216462,365710,17762,548955,978837,268327,296071,588688,850018,419223,160855,671540]}" },
   ],
 };
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"words":["e","a","b"],"groups":[0,0,1]}' },
     { label: 'Alternating', input: '{"words":["a","b","c","d"],"groups":[1,0,1,1]}' },
+    { label: "Single word", input: "{\"words\":[\"a\"],\"groups\":[1]}" },
+    { label: "All words in one group", input: "{\"words\":[\"a\",\"b\",\"c\"],\"groups\":[0,0,0]}" },
+    { label: "Maximum words, 10 entries", input: "{\"words\":[\"x\",\"y\",\"xy\",\"z\",\"ab\",\"c\",\"d\",\"e\",\"f\",\"g\"],\"groups\":[1,0,1,0,1,0,1,0,1,0]}" },
+    { label: "Long run: 10 words", input: "{\"words\":[\"im\",\"d\",\"jmu\",\"p\",\"nee\",\"w\",\"hi\",\"tbf\",\"na\",\"a\"],\"groups\":[0,0,1,1,1,0,1,1,1,0]}" },
   ],
 }
 

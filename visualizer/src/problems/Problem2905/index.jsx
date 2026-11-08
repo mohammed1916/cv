@@ -22,6 +22,10 @@ const definition = {
     { label: "Example 1", input: '{"nums":[5,1,4,1],"indexDifference":2,"valueDifference":4}' },
     { label: "Example 2", input: '{"nums":[2,1],"indexDifference":0,"valueDifference":0}' },
     { label: "Example 3", input: '{"nums":[1,2,3],"indexDifference":2,"valueDifference":4}' },
+    { label: "Two values, smallest difference", input: "{\"nums\":[1,2],\"indexDifference\":0,\"valueDifference\":1}" },
+    { label: "Equal values", input: "{\"nums\":[7,7],\"indexDifference\":1,\"valueDifference\":0}" },
+    { label: "Largest gap at the far ends", input: "{\"nums\":[50,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,0],\"indexDifference\":99,\"valueDifference\":50}" },
+    { label: "Long run: 100 values", input: "{\"nums\":[18,39,45,10,23,36,25,3,16,23,44,5,20,46,15,26,31,23,39,37,6,28,21,28,2,37,1,49,3,21,16,33,40,48,18,10,48,4,49,10,7,23,9,33,25,29,17,40,30,7,42,48,21,5,48,50,12,23,27,33,35,43,44,36,22,24,17,50,8,41,41,7,43,3,34,20,24,34,47,10,37,49,45,27,14,43,20,31,31,10,23,42,40,22,44,27,11,12,5,33],\"indexDifference\":10,\"valueDifference\":25}" },
   ],
 };
 

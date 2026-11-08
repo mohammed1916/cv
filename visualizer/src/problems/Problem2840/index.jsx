@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s1":"abcdba","s2":"cabdab"}' },
     { label: 'Example 2', input: '{"s1":"abe","s2":"bea"}' },
+    { label: "Single letter", input: "{\"s1\":\"a\",\"s2\":\"a\"}" },
+    { label: "Repeated letters", input: "{\"s1\":\"aaaa\",\"s2\":\"aaaa\"}" },
+    { label: "Twelve letters reversed", input: "{\"s1\":\"abcdefghijkl\",\"s2\":\"lkjihgfedcba\"}" },
+    { label: "Long run: 12 seeded letters", input: "{\"s1\":\"hurwlkjsjwly\",\"s2\":\"ijqzkryhmtmr\"}" },
   ],
 }
 

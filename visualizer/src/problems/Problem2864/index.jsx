@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"010"}' },
     { label: 'Example 2', input: '{"s":"0101"}' },
+    { label: "Single digit", input: "{\"s\":\"1\"}" },
+    { label: "All ones", input: "{\"s\":\"1111\"}" },
+    { label: "Longest string, one 1 at the front", input: "{\"s\":\"10000000000000000000\"}" },
+    { label: "Long run: 20 digits", input: "{\"s\":\"00110011000001100110\"}" },
   ],
 }
 

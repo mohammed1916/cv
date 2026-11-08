@@ -20,6 +20,10 @@ const definition = {
   examples: [
     { label: "Example 1", input: "{\"low\": 1, \"high\": 100}" },
     { label: "Example 2", input: "{\"low\": 1200, \"high\": 1230}" },
+    { label: "Single number", input: "{\"low\":1,\"high\":1}" },
+    { label: "Equal bounds at the top", input: "{\"low\":10000,\"high\":10000}" },
+    { label: "Full allowed span", input: "{\"low\":1,\"high\":120}" },
+    { label: "Long run: 120 seeded numbers", input: "{\"low\":5699,\"high\":5818}" },
   ],
 };
 

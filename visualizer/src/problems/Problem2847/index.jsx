@@ -12,6 +12,10 @@ const definition = {
     { label: 'Mixed factors', input: '360' },
     { label: 'Prime seven', input: '7' },
     { label: 'Impossible', input: '11' },
+    { label: "Smallest n", input: "1" },
+    { label: "Power of two", input: "65536" },
+    { label: "Prime near the top", input: "99991" },
+    { label: "Largest n", input: "100000" },
   ],
 }
 

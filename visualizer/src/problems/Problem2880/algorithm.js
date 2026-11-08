@@ -45,6 +45,10 @@ export const examples = [
     { student_id: 100, name: 'Lena', age: 11 },
     { student_id: 102, name: 'Omar', age: 13 },
   ] }) },
+  { label: "Single student", input: "{\"students\":[{\"student_id\":1,\"name\":\"Ada\",\"age\":19}]}" },
+  { label: "Equal ages", input: "{\"students\":[{\"student_id\":4,\"name\":\"Ben\",\"age\":20},{\"student_id\":5,\"name\":\"Cy\",\"age\":20}]}" },
+  { label: "Maximum rows, 12 students", input: "{\"students\":[{\"student_id\":1,\"name\":\"S1\",\"age\":12},{\"student_id\":2,\"name\":\"S2\",\"age\":13},{\"student_id\":3,\"name\":\"S3\",\"age\":14},{\"student_id\":4,\"name\":\"S4\",\"age\":15},{\"student_id\":5,\"name\":\"S5\",\"age\":16},{\"student_id\":6,\"name\":\"S6\",\"age\":17},{\"student_id\":7,\"name\":\"S7\",\"age\":18},{\"student_id\":8,\"name\":\"S8\",\"age\":19},{\"student_id\":9,\"name\":\"S9\",\"age\":20},{\"student_id\":10,\"name\":\"S10\",\"age\":21},{\"student_id\":11,\"name\":\"S11\",\"age\":22},{\"student_id\":12,\"name\":\"S12\",\"age\":23}]}" },
+  { label: "Long run: 12 students", input: "{\"students\":[{\"student_id\":352,\"name\":\"uhua\",\"age\":20},{\"student_id\":161,\"name\":\"anzzd\",\"age\":17},{\"student_id\":869,\"name\":\"chowm\",\"age\":19},{\"student_id\":770,\"name\":\"rb\",\"age\":21},{\"student_id\":829,\"name\":\"qusuld\",\"age\":16},{\"student_id\":536,\"name\":\"nvff\",\"age\":20},{\"student_id\":407,\"name\":\"lgdh\",\"age\":5},{\"student_id\":459,\"name\":\"od\",\"age\":19},{\"student_id\":112,\"name\":\"xnn\",\"age\":23},{\"student_id\":886,\"name\":\"iaegvb\",\"age\":25},{\"student_id\":275,\"name\":\"lb\",\"age\":10},{\"student_id\":854,\"name\":\"tnr\",\"age\":5}]}" },
 ]
 
 export function parseInput(text) {

@@ -68,4 +68,8 @@ export const examples = [
   { label: 'Workshop crew', input: JSON.stringify({ employees: [{ name: 'Noor', salary: 41000 }, { name: 'Tomas', salary: 58250 }, { name: 'Ife', salary: 30500 }, { name: 'Tomas', salary: 72125 }] }) },
   { label: 'Zero salary', input: JSON.stringify({ employees: [{ name: 'Intern', salary: 0 }, { name: 'Lead', salary: 90000 }] }) },
   { label: 'Empty frame', input: JSON.stringify({ employees: [] }) },
+  { label: "Single employee", input: "{\"employees\":[{\"name\":\"Ada\",\"salary\":100}]}" },
+  { label: "Equal salaries, different names", input: "{\"employees\":[{\"name\":\"Lee\",\"salary\":70},{\"name\":\"Kim\",\"salary\":70}]}" },
+  { label: "Largest exact salary", input: "{\"employees\":[{\"name\":\"Max\",\"salary\":4503599627370495}]}" },
+  { label: "Long run: 12 employees with negative pay", input: "{\"employees\":[{\"name\":\"wnkm\",\"salary\":-961},{\"name\":\"vqgi\",\"salary\":472},{\"name\":\"yntkd\",\"salary\":2},{\"name\":\"qtj\",\"salary\":-886},{\"name\":\"llwb\",\"salary\":-76},{\"name\":\"kofav\",\"salary\":938},{\"name\":\"cdtul\",\"salary\":920},{\"name\":\"pafis\",\"salary\":580},{\"name\":\"jrhjz\",\"salary\":205},{\"name\":\"ccd\",\"salary\":770},{\"name\":\"qrce\",\"salary\":863},{\"name\":\"rilcc\",\"salary\":26}]}" },
 ]

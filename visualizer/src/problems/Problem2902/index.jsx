@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,2,3],"l":6,"r":6}' },
     { label: 'Zeros', input: '{"nums":[0,0,2],"l":0,"r":2}' },
+    { label: "Single zero, empty range check", input: "{\"nums\":[0],\"l\":0,\"r\":0}" },
+    { label: "Equal values, middle range", input: "{\"nums\":[2,2,2,2],\"l\":4,\"r\":6}" },
+    { label: "Largest values, full range", input: "{\"nums\":[9,9,9,9,9,9,9,9],\"l\":0,\"r\":40}" },
+    { label: "No sub-multiset fits the range", input: "{\"nums\":[9,9],\"l\":1,\"r\":8}" },
+    { label: "Long run: 8 values", input: "{\"nums\":[3,5,8,0,4,4,2,3],\"l\":5,\"r\":30}" },
   ],
 }
 

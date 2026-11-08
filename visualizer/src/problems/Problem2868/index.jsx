@@ -12,6 +12,10 @@ const definition = {
     { label: 'Bob stuck', input: '{"alice":["ab"],"bob":["ac"]}' },
     { label: 'Chain of letters', input: '{"alice":["a","c"],"bob":["b"]}' },
     { label: 'Longer game', input: '{"alice":["ba","acd","dd"],"bob":["c","d","db"]}' },
+    { label: "Alice alone with one word", input: "{\"alice\":[\"a\"],\"bob\":[]}" },
+    { label: "Same word for both players", input: "{\"alice\":[\"a\"],\"bob\":[\"a\"]}" },
+    { label: "Six words each, maximum length 5", input: "{\"alice\":[\"abcde\",\"zzzzz\",\"m\",\"xy\",\"q\",\"ab\"],\"bob\":[\"abcde\",\"zzzzz\",\"m\",\"xy\",\"q\",\"ab\"]}" },
+    { label: "Long run: six words each", input: "{\"alice\":[\"ko\",\"vboen\",\"cu\",\"sw\",\"yx\",\"yotq\"],\"bob\":[\"sjwpc\",\"pxd\",\"rbg\",\"subo\",\"bep\",\"iobs\"]}" },
   ],
 }
 

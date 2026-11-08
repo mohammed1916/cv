@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Two nodes', input: '{"n":2,"edges":[[0,1]]}' },
     { label: 'Star', input: '{"n":4,"edges":[[2,0],[2,1],[1,3]]}' },
+    { label: "Chain of three", input: "{\"n\":3,\"edges\":[[0,1],[1,2]]}" },
+    { label: "Reversed directions", input: "{\"n\":3,\"edges\":[[1,0],[2,1]]}" },
+    { label: "Chain of twelve, alternating", input: "{\"n\":12,\"edges\":[[1,0],[1,2],[3,2],[3,4],[5,4],[5,6],[7,6],[7,8],[9,8],[9,10],[11,10]]}" },
+    { label: "Long run: 12 seeded nodes", input: "{\"n\":12,\"edges\":[[0,1],[2,0],[2,3],[4,2],[2,5],[6,2],[0,7],[8,2],[4,9],[10,2],[9,11]]}" },
   ],
 }
 

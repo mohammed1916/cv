@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"s":"wwwtxxyy","k":2}' },
     { label: 'Tied letters', input: '{"s":"gggeeff","k":2}' },
+    { label: "Single letter", input: "{\"s\":\"a\",\"k\":1}" },
+    { label: "Same letter repeated", input: "{\"s\":\"qqqqqq\",\"k\":26}" },
+    { label: "Alphabet once, k 26", input: "{\"s\":\"abcdefghijklmnopqrstuvwxyz\",\"k\":26}" },
+    { label: "Long run: 60 seeded letters", input: "{\"s\":\"lapclanurqnijwvexwhabcfopunmtwrsfudmbwbqrahmzulczylyjidybevu\",\"k\":5}" },
   ],
 }
 

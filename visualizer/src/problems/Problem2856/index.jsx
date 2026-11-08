@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Balanced', input: '{"nums":[1,3,4,9]}' },
     { label: 'Dominant', input: '{"nums":[1,1,1,1,2,3]}' },
+    { label: "Single value", input: "{\"nums\":[0]}" },
+    { label: "Two extremes", input: "{\"nums\":[0,20]}" },
+    { label: "All equal", input: "{\"nums\":[5,5,5,5]}" },
+    { label: "Long run: 30 sorted seeded values", input: "{\"nums\":[0,1,2,3,3,4,5,6,6,6,6,6,6,10,10,10,11,12,12,13,13,13,14,15,15,17,18,19,19,20]}" },
   ],
 }
 

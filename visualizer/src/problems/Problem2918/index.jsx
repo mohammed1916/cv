@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums1":[3,2,0,1,0],"nums2":[6,5,0]}' },
     { label: 'Example 2', input: '{"nums1":[2,0,2,0],"nums2":[1,4]}' },
+    { label: 'Single zero on each side', input: '{"nums1":[0],"nums2":[0]}' },
+    { label: 'Equal sums already', input: '{"nums1":[2,2],"nums2":[2,2]}' },
+    { label: 'Zeros only in one array', input: '{"nums1":[6,6,6,6,6,6,6,6],"nums2":[0,0,0,0,0,0,0,0]}' },
+    { label: 'No zeros to replace', input: '{"nums1":[1,2],"nums2":[3,4]}' },
+    { label: 'Long run: 8 entries each', input: '{"nums1":[6,3,3,4,2,4,2,4],"nums2":[1,4,3,4,1,3,3,1]}' },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Mixed run', input: '{"prices":[4,7,2,9,5,11]}' },
     { label: 'Equal prices', input: '{"prices":[3,3,3]}' },
+    { label: "Single price", input: "{\"prices\":[5]}" },
+    { label: "Equal prices", input: "{\"prices\":[7,7,7,7]}" },
+    { label: "Largest prices, 12 entries", input: "{\"prices\":[30,1,30,1,30,1,30,1,30,1,30,1]}" },
+    { label: "Long run: 12 prices", input: "{\"prices\":[11,5,4,29,25,15,15,20,23,3,21,10]}" },
   ],
 }
 

@@ -19,6 +19,10 @@ const definition = {
   complexity: "O(n * sqrt(n)) time and O(n) space for n values. The visualization caps the array at 30 elements.",
   examples: [
     { label: "Example", input: '{"nums":[8,7,3,5,7,2,4,9]}' },
+    { label: "Single element", input: "{\"nums\":[5]}" },
+    { label: "Equal values", input: "{\"nums\":[4,4,4,4]}" },
+    { label: "Largest allowed values", input: "{\"nums\":[1000000000,1,1000000000,1]}" },
+    { label: "Long run: 30 elements", input: "{\"nums\":[346,873,455,609,811,571,972,670,451,1000,360,670,391,988,478,480,36,815,933,612,416,358,607,480,5,729,258,982,253,882]}" },
   ],
 };
 
