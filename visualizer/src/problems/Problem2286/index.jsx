@@ -18,6 +18,10 @@ const definition = {
   complexity: 'O(log n) tree work per operation plus O(m) to scan one row. The visualization caps the hall at 4 rows by 6 seats.',
   examples: [
     { label: 'Example', input: '{"n":2,"m":5,"ops":[["gather",4,0],["gather",2,0],["scatter",5,1],["scatter",5,1]]}' },
+    { label: 'Single seat', input: '{"n":1,"m":1,"ops":[["gather",1,0]]}' },
+    { label: 'Repeated group request', input: '{"n":2,"m":3,"ops":[["gather",2,1],["gather",2,1]]}' },
+    { label: 'Largest hall, eight requests', input: '{"n":4,"m":6,"ops":[["gather",6,3],["scatter",24,3],["gather",3,0],["scatter",1,0],["gather",2,2],["scatter",5,3],["gather",6,0],["scatter",24,2]]}' },
+    { label: 'Long run: 8 requests', input: '{"n":4,"m":6,"ops":[["gather",6,0],["gather",1,2],["gather",6,1],["gather",6,0],["gather",3,3],["scatter",15,3],["scatter",1,2],["scatter",18,1]]}' },
   ],
 }
 

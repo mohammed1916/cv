@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"spells":[5,1,3],"potions":[1,2,3,4,5],"success":7}' },
     { label: 'Example 2', input: '{"spells":[3,1,2],"potions":[8,5,8],"success":16}' },
+    { label: 'Single spell and potion', input: '{"spells":[4],"potions":[3],"success":12}' },
+    { label: 'Equal spells and potions', input: '{"spells":[2,2],"potions":[4,4],"success":8}' },
+    { label: 'Twelve strong spells', input: '{"spells":[20,20,20,20,20,20,20,20,20,20,20,20],"potions":[1,2,3,4,5,6,7,8,9,10,11,12],"success":100}' },
+    { label: 'Long run: 12 and 12', input: '{"spells":[19,11,2,7,1,4,14,8,5,8,18,2],"potions":[16,19,5,20,1,14,1,14,18,18,4,11],"success":99}' },
   ],
 }
 

@@ -16,6 +16,9 @@ const definition = {
     { label: 'Example 1', input: '{"n":1}' },
     { label: 'Example 2', input: '{"n":2}' },
     { label: 'Example 3', input: '{"n":4}' },
+    { label: 'Three rolls', input: '{"n":3}' },
+    { label: 'Five rolls', input: '{"n":5}' },
+    { label: 'Long run: 10 rolls', input: '{"n":10}' },
   ],
 }
 

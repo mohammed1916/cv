@@ -16,6 +16,10 @@ const definition = {
     { label: 'Two mismatches', input: 'kitten' },
     { label: 'Three mismatches', input: 'harbors' },
     { label: 'Odd length', input: 'abcdeba' },
+    { label: 'Single letter', input: 'a' },
+    { label: 'Equal ends, no change', input: 'aa' },
+    { label: 'Longest input, 20 letters', input: 'abcdefghijklmnopqrst' },
+    { label: 'Long run: 20 letters', input: 'dqexgurhvlzjsqanoscv' },
   ],
 }
 

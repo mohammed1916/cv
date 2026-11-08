@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"foobar","letter":"o"}' },
     { label: 'Example 2', input: '{"s":"jjjj","letter":"k"}' },
+    { label: 'Single matching letter', input: '{"s":"a","letter":"a"}' },
+    { label: 'Letter absent', input: '{"s":"abc","letter":"z"}' },
+    { label: 'Thirty letters, letter repeats', input: '{"s":"abcdefghijklmnopqrstuvwxyzabcd","letter":"a"}' },
+    { label: 'Long run: 30 letters', input: '{"s":"chaihjdeiiaigbehedhahjajjgdihd","letter":"c"}' },
   ],
 }
 

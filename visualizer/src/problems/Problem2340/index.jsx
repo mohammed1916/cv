@@ -16,6 +16,10 @@ const definition = {
     { label: 'Six values', input: '[4,2,6,1,5]' },
     { label: 'Four values', input: '[3,4,1,2]' },
     { label: 'Max before min', input: '[5,1]' },
+    { label: 'Single value', input: '[7]' },
+    { label: 'Equal values', input: '[3,3,3,3]' },
+    { label: 'Longest list, largest values', input: '[10,10,10,10,10,10,10,10,10,10]' },
+    { label: 'Long run: 10 values', input: '[2,6,1,3,10,3,10,5,10,1]' },
   ],
 }
 

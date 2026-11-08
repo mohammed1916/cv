@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"ababcbarc","target":"baca"}' },
     { label: 'Missing letter', input: '{"s":"aaa","target":"ab"}' },
+    { label: 'Single letter match', input: '{"s":"a","target":"a"}' },
+    { label: 'Overlapping repeats', input: '{"s":"aaaa","target":"aa"}' },
+    { label: 'Largest source and target', input: '{"s":"zyxwvutsrqponmlkjihg","target":"ponml"}' },
+    { label: 'Long run: 20 letters', input: '{"s":"bbbaabccbaacbcaaccab","target":"bbcaa"}' },
   ],
 }
 

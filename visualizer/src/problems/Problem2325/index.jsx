@@ -16,6 +16,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"key":"the quick brown fox jumps over the lazy dog","message":"vkbs bs t suepuv"}' },
     { label: 'Example 2', input: '{"key":"eljuxhpwnyrdgtqkviszcfmabo","message":"zwx hnfx lqantp mnoeius ycgk vcnjrdb"}' },
+    { label: 'Identity key, one letter', input: '{"key":"abcdefghijklmnopqrstuvwxyz","message":"a"}' },
+    { label: 'Spaces pass through', input: '{"key":"zyxwvutsrqponmlkjihgfedcba","message":" "}' },
+    { label: 'Repeated letter reuses its entry', input: '{"key":"zyxwvutsrqponmlkjihgfedcba","message":"abc zzz"}' },
+    { label: 'Longest message, 40 characters', input: '{"key":"zyxwvutsrqponmlkjihgfedcba","message":"abcdefghijklmnopqrstuvwxyzabcdefghijklmn"}' },
+    { label: 'Long run: shuffled key, 40 characters', input: '{"key":"jizgavmrfhwto pxlcynkbuqsed","message":"k jr x  whqf  vheel mv ewomm brzetyjehcp"}' },
   ],
 }
 

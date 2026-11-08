@@ -16,6 +16,10 @@ const definition = {
     { label: 'Three jobs', input: '{"jobs":[5,7,9],"workers":[2,3,4]}' },
     { label: 'Equal times', input: '{"jobs":[10,20,30],"workers":[1,2,3]}' },
     { label: 'One job', input: '{"jobs":[7],"workers":[2]}' },
+    { label: 'Single job', input: '{"jobs":[4],"workers":[4]}' },
+    { label: 'Equal job and worker times', input: '{"jobs":[3,3,3],"workers":[3,3,3]}' },
+    { label: 'Largest values, six jobs', input: '{"jobs":[100,1,100,1,50,50],"workers":[1,100,1,100,50,50]}' },
+    { label: 'Long run: six jobs', input: '{"jobs":[14,99,40,66,59,56],"workers":[65,87,26,4,81,56]}' },
   ],
 }
 

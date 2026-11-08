@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"strength":[1,3,1,2]}' },
     { label: 'Three', input: '{"strength":[5,4,6]}' },
+    { label: 'Single wizard', input: '{"strength":[4]}' },
+    { label: 'Equal strengths', input: '{"strength":[2,2,2]}' },
+    { label: 'Twelve wizards, extremes', input: '{"strength":[20,1,20,1,20,1,20,1,20,1,20,1]}' },
+    { label: 'Long run: 12 wizards', input: '{"strength":[2,2,11,14,12,10,4,19,1,13,3,5]}' },
   ],
 }
 

@@ -18,6 +18,11 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"books":[8,5,2,7,9]}' },
     { label: 'Rising', input: '{"books":[1,2,3]}' },
+    { label: 'Single shelf', input: '{"books":[12]}' },
+    { label: 'Equal shelves', input: '{"books":[3,3,3,3]}' },
+    { label: 'Empty shelves end a section', input: '{"books":[0,5,0,4]}' },
+    { label: 'Largest input: 12 shelves', input: '{"books":[12,11,10,9,8,7,6,5,4,3,2,1]}' },
+    { label: 'Long run: 12 shelves', input: '{"books":[1,11,3,10,11,6,5,2,6,11,4,6]}' },
   ],
 }
 

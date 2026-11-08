@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 1', input: '[1,3,2,1,3,2,2]' },
     { label: 'Example 2', input: '[1,1]' },
     { label: 'Example 3', input: '[0]' },
+    { label: 'Single maximum value', input: '[20]' },
+    { label: 'Equal values pair up', input: '[2,2,2,2]' },
+    { label: 'Longest list, all equal', input: '[7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7]' },
+    { label: 'Long run: 20 values', input: '[3,12,15,6,12,0,8,7,8,1,20,18,9,1,10,13,5,18,7,12]' },
   ],
 }
 

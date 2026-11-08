@@ -7,6 +7,18 @@ const complexity = 'O(n log n) to sort the users inside each gender group. The v
 const examples = [{
   label: 'Sample',
   input: '{"Genders":[{"user_id":6,"gender":"other"},{"user_id":5,"gender":"male"},{"user_id":4,"gender":"female"},{"user_id":3,"gender":"other"},{"user_id":2,"gender":"male"},{"user_id":1,"gender":"female"}]}',
+}, {
+  label: 'Single row',
+  input: '{"Genders":[{"user_id":7,"gender":"male"}]}',
+}, {
+  label: 'Equal user ids in different groups',
+  input: '{"Genders":[{"user_id":4,"gender":"male"},{"user_id":4,"gender":"female"},{"user_id":4,"gender":"other"}]}',
+}, {
+  label: 'Largest user id, two groups',
+  input: '{"Genders":[{"user_id":2147483647,"gender":"female"},{"user_id":2147483646,"gender":"female"},{"user_id":1,"gender":"male"}]}',
+}, {
+  label: 'Long run: 30 users',
+  input: '{"Genders":[{"user_id":24,"gender":"other"},{"user_id":6,"gender":"female"},{"user_id":33,"gender":"male"},{"user_id":3,"gender":"other"},{"user_id":75,"gender":"other"},{"user_id":51,"gender":"male"},{"user_id":30,"gender":"male"},{"user_id":66,"gender":"female"},{"user_id":72,"gender":"female"},{"user_id":39,"gender":"female"},{"user_id":45,"gender":"other"},{"user_id":21,"gender":"other"},{"user_id":87,"gender":"female"},{"user_id":69,"gender":"male"},{"user_id":54,"gender":"female"},{"user_id":78,"gender":"other"},{"user_id":36,"gender":"male"},{"user_id":63,"gender":"female"},{"user_id":18,"gender":"other"},{"user_id":60,"gender":"other"},{"user_id":84,"gender":"other"},{"user_id":42,"gender":"male"},{"user_id":81,"gender":"female"},{"user_id":15,"gender":"male"},{"user_id":27,"gender":"female"},{"user_id":48,"gender":"other"},{"user_id":9,"gender":"female"},{"user_id":90,"gender":"male"},{"user_id":57,"gender":"female"},{"user_id":12,"gender":"male"}]}',
 }]
 
 const definition = {

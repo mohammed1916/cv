@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Flush', input: '{"ranks":[13,2,3,1,9],"suits":["a","a","a","a","a"]}' },
     { label: 'Pair', input: '{"ranks":[4,4,2,6,10],"suits":["a","b","c","d","a"]}' },
+    { label: 'Three of a kind', input: '{"ranks":[5,5,5,2,9],"suits":["a","b","c","d","a"]}' },
+    { label: 'High card', input: '{"ranks":[1,3,5,7,9],"suits":["a","b","c","d","a"]}' },
+    { label: 'Flush with top ranks', input: '{"ranks":[13,13,12,11,1],"suits":["d","d","d","d","d"]}' },
+    { label: 'Long run: random hand', input: '{"ranks":[2,3,11,8,8],"suits":["b","d","d","b","b"]}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[5,3,4,4,7,3,6,11,8,5,11]}' },
     { label: 'Example 2', input: '{"nums":[4,5,7,7,13]}' },
+    { label: 'Single value', input: '{"nums":[9]}' },
+    { label: 'Equal values', input: '{"nums":[4,4,4,4]}' },
+    { label: 'Thirty values, extremes', input: '{"nums":[100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1]}' },
+    { label: 'Long run: 30 values', input: '{"nums":[12,14,55,12,92,10,3,43,54,12,96,49,70,7,35,90,77,54,39,87,81,40,62,73,47,34,27,21,100,74]}' },
   ],
 }
 

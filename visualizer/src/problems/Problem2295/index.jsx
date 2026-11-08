@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,4,6],"operations":[[1,3],[4,7],[6,1]]}' },
     { label: 'Example 2', input: '{"nums":[1,2],"operations":[[1,3],[2,1],[3,2]]}' },
+    { label: 'Single number moved', input: '{"nums":[5],"operations":[[5,6]]}' },
+    { label: 'Replace with an unused value', input: '{"nums":[3,8],"operations":[[3,4]]}' },
+    { label: 'Largest lists, ten replacements', input: '{"nums":[1,10,20,30,40,50,60,70,80,90,100,5],"operations":[[1,2],[2,3],[10,11],[20,21],[30,31],[40,41],[50,51],[60,61],[70,71],[80,81]]}' },
+    { label: 'Long run: 12 numbers', input: '{"nums":[12,47,3,88,25,60,9,71,33,50,14,96],"operations":[[12,13],[47,48],[3,4],[88,89],[25,26],[60,61],[9,10],[71,72],[33,34],[50,51]]}' },
   ],
 }
 

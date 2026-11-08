@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"m":3,"n":5,"prices":[[1,4,2],[2,2,7],[2,1,3]]}' },
     { label: 'Example 2', input: '{"m":4,"n":6,"prices":[[3,2,10],[1,4,2],[4,1,3]]}' },
+    { label: 'One cell board', input: '{"m":1,"n":1,"prices":[[1,1,4]]}' },
+    { label: 'Equal cut values', input: '{"m":2,"n":2,"prices":[[1,1,3],[2,2,12]]}' },
+    { label: 'Only one piece type', input: '{"m":3,"n":4,"prices":[[3,4,50]]}' },
+    { label: 'Largest board, 6 by 6', input: '{"m":6,"n":6,"prices":[[6,6,1000],[1,1,1],[2,3,5],[3,2,5],[1,6,30],[6,1,30]]}' },
+    { label: 'Long run: 6 by 6, six pieces', input: '{"m":6,"n":6,"prices":[[1,6,866],[2,2,330],[6,5,658],[3,5,24],[1,3,899],[1,5,455]]}' },
   ],
 }
 

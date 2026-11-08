@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"capacity":[2,3,4,5],"rocks":[1,2,4,4],"additional_rocks":2}' },
     { label: 'Example 2', input: '{"capacity":[10,2,2],"rocks":[2,2,0],"additional_rocks":100}' },
+    { label: 'Single bag', input: '{"capacity":[3],"rocks":[0],"additional_rocks":3}' },
+    { label: 'No extra rocks, equal bags', input: '{"capacity":[2,2],"rocks":[1,1],"additional_rocks":0}' },
+    { label: 'Twelve large bags', input: '{"capacity":[100,100,100,100,100,100,100,100,100,100,100,100],"rocks":[0,0,0,0,0,0,0,0,0,0,0,0],"additional_rocks":100}' },
+    { label: 'Long run: 12 bags', input: '{"capacity":[55,54,53,83,72,82,97,31,92,78,41,67],"rocks":[9,38,34,14,64,25,84,21,75,69,0,50],"additional_rocks":62}' },
   ],
 }
 

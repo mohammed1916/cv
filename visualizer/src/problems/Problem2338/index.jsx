@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":2,"max_value":5}' },
     { label: 'Example 2', input: '{"n":5,"max_value":3}' },
+    { label: 'Smallest case', input: '{"n":1,"max_value":1}' },
+    { label: 'Only the value one', input: '{"n":3,"max_value":1}' },
+    { label: 'Largest input', input: '{"n":12,"max_value":40}' },
+    { label: 'Long run: n 11, max 35', input: '{"n":11,"max_value":35}' },
   ],
 }
 

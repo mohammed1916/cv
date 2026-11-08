@@ -16,6 +16,10 @@ const definition = {
   complexity: 'O(k) per operation for k letters moved, with a cap of 10 letters per answer.',
   examples: [
     { label: 'Example 1', input: '{"operations":[["addText","leetcode"],["deleteText",4],["addText","practice"],["cursorRight",3],["cursorLeft",8],["deleteText",10],["cursorLeft",2],["cursorRight",6]]}' },
+    { label: 'Single letter typed', input: '{"operations":[["addText","a"]]}' },
+    { label: 'Cursor and delete on empty text', input: '{"operations":[["cursorLeft",1],["deleteText",1]]}' },
+    { label: 'Sixteen operations, maximum sizes', input: '{"operations":[["addText","abcdefghij"],["deleteText",10],["addText","klmnopqrst"],["cursorLeft",10],["cursorRight",10],["addText","uvwxyzabcd"],["cursorLeft",4],["deleteText",5],["addText","efghijklmn"],["cursorRight",8],["deleteText",7],["addText","opqrstuvwx"],["cursorLeft",1],["addText","yz"],["deleteText",3],["cursorRight",2]]}' },
+    { label: 'Long run: 16 operations', input: '{"operations":[["cursorRight",5],["addText","jwhczql"],["cursorRight",6],["cursorRight",6],["cursorLeft",5],["cursorRight",5],["addText","biigx"],["addText","nw"],["deleteText",7],["deleteText",3],["cursorLeft",5],["addText","vbffuaz"],["cursorRight",1],["cursorLeft",6],["deleteText",2],["deleteText",9]]}' },
   ],
 }
 

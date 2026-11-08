@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[3,2,4,6]}' },
     { label: 'Example 2', input: '{"nums":[1,2,3,9,2]}' },
+    { label: 'Single value', input: '{"nums":[7]}' },
+    { label: 'Single zero', input: '{"nums":[0]}' },
+    { label: 'Equal values', input: '{"nums":[5,5,5]}' },
+    { label: 'Largest values, 12 entries', input: '{"nums":[15,15,15,15,15,15,15,15,15,15,15,15]}' },
+    { label: 'Long run: 12 values', input: '{"nums":[2,7,4,6,9,1,0,5,3,11,1,7]}' },
   ],
 }
 

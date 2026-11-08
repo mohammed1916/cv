@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"ideas":["coffee","donuts","time","toffee"]}' },
     { label: 'Example 2', input: '{"ideas":["lack","back"]}' },
+    { label: 'Two names, anagram', input: '{"ideas":["ab","ba"]}' },
+    { label: 'Three names, repeated letters', input: '{"ideas":["aa","ab","ba"]}' },
+    { label: 'Thirty names, length 8', input: '{"ideas":["mbbyoeif","pzzucegg","jfykmoyi","cvkpwyyc","prgpnmxz","szvmcfds","rtkmgzbb","hpvssvna","prgvtrbs","qwpddwgt","ayvsmctx","qgpvcsns","bgljftti","cpatroxu","dyjtaira","qlaodetn","eadgexsx","vcjdamsu","hjbmcecs","xvvkwmcm","vzrwhojm","vemyiolg","idaghkbi","eyiqbptd","kpjungxd","copmpgdf","usinmwkf","gefglcdn","asnahqfa","uxjbuuci"]}' },
+    { label: 'Long run: 20 names', input: '{"ideas":["aagdb","begg","abbbcbg","ddgc","fc","gggaee","edd","gfgfdaba","efcdbg","ac","ffffda","ebffea","egeaaf","fag","fdafgeb","fafdea","dcb","fcaeafe","gfagc","aceaeda"]}' },
   ],
 }
 

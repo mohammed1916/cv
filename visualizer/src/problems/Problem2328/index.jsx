@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"grid":[[1,1],[3,4]]}' },
     { label: 'Column', input: '{"grid":[[1],[2]]}' },
+    { label: 'One cell', input: '{"grid":[[5]]}' },
+    { label: 'Equal neighbours are not increasing', input: '{"grid":[[2,2],[2,2]]}' },
+    { label: 'Largest grid, 5 by 5', input: '{"grid":[[1,2,3,4,5],[6,7,8,9,1],[2,3,4,5,6],[7,8,9,1,2],[3,4,5,6,7]]}' },
+    { label: 'Long run: 5 by 5 random grid', input: '{"grid":[[2,4,8,8,9],[3,8,4,8,3],[1,9,7,7,5],[6,3,7,5,1],[4,8,7,2,3]]}' },
   ],
 }
 

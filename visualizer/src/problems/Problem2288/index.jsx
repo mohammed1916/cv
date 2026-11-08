@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"sentence":"there are $1 $2 and 5$ candies in the shop","discount":50}' },
     { label: 'Example 2', input: '{"sentence":"1 2 $3 4 $5 $6 7 8$ $9 $10$","discount":100}' },
+    { label: 'Single price', input: '{"sentence":"$5","discount":10}' },
+    { label: 'No prices, no change', input: '{"sentence":"apple pear","discount":30}' },
+    { label: 'Zero discount', input: '{"sentence":"$7 $8","discount":0}' },
+    { label: 'Long run: fills 80 characters', input: '{"sentence":"$860 $190 item k6 $141 item k3 k6 k5 item $703 item k8 item k8 item k2 k8 k2","discount":25}' },
   ],
 }
 

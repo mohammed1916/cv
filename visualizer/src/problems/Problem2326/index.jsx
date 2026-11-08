@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"m":3,"n":5,"head":[3,0,2,6,8,1,7,9,4,2,5,5,0]}' },
     { label: 'Short list', input: '{"m":1,"n":4,"head":[1,2]}' },
+    { label: 'One cell', input: '{"m":1,"n":1,"head":[5]}' },
+    { label: 'Equal values along the spiral', input: '{"m":2,"n":2,"head":[0,0,0,0]}' },
+    { label: 'Largest grid, 20 values', input: '{"m":6,"n":6,"head":[0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95]}' },
+    { label: 'Long run: 5 by 6 spiral', input: '{"m":5,"n":6,"head":[13,25,45,76,58,79,93,61,77,20,16,61,79,81,9,65,94,66,89,29]}' },
   ],
 }
 

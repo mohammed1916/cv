@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"amount":[1,4,2]}' },
     { label: 'Example 2', input: '{"amount":[5,4,4]}' },
+    { label: 'All cups empty', input: '{"amount":[0,0,0]}' },
+    { label: 'Equal cups', input: '{"amount":[4,4,4]}' },
+    { label: 'Largest cups', input: '{"amount":[12,12,12]}' },
+    { label: 'Long run: mixed cups', input: '{"amount":[11,3,7]}' },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums1":[5,1,8],"nums2":[2,9,3]}' },
     { label: 'Ties', input: '{"nums1":[3,3,3],"nums2":[1,9,2]}' },
+    { label: 'Single pair', input: '{"nums1":[4],"nums2":[9]}' },
+    { label: 'Identical arrays', input: '{"nums1":[2,2],"nums2":[2,2]}' },
+    { label: 'Largest values, 16 entries', input: '{"nums1":[100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100],"nums2":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]}' },
+    { label: 'Long run: 16 pairs', input: '{"nums1":[14,81,3,59,26,6,79,4,24,92,90,19,91,6,96,33],"nums2":[18,60,40,87,54,87,2,69,50,71,3,100,13,92,18,7]}' },
   ],
 }
 

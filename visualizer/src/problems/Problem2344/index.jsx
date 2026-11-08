@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[2,3,2,4,3],"nums_divide":[9,6,9,3,15]}' },
     { label: 'Impossible', input: '{"nums":[4,3,6],"nums_divide":[8,2,6,10]}' },
+    { label: 'Single values', input: '{"nums":[1],"nums_divide":[1]}' },
+    { label: 'Equal values', input: '{"nums":[6,6,6],"nums_divide":[6,12]}' },
+    { label: 'Largest lists', input: '{"nums":[50,49,48,47,46,45,44,43],"nums_divide":[50,25,10,5,2,1]}' },
+    { label: 'Long run: 8 and 6 values', input: '{"nums":[8,45,39,22,30,13,35,6],"nums_divide":[47,13,17,47,19,48]}' },
   ],
 }
 

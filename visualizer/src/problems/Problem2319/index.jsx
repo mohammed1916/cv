@@ -16,6 +16,11 @@ const definition = {
   examples: [
     { label: 'X-matrix', input: '{"grid":[[2,0,0,1],[0,3,1,0],[0,5,2,0],[4,0,0,2]]}' },
     { label: 'Not X', input: '{"grid":[[5,7,0],[0,3,1],[0,5,0]]}' },
+    { label: 'Smallest X-matrix', input: '{"grid":[[1,0,1],[0,2,0],[3,0,4]]}' },
+    { label: 'Stray value in a corner', input: '{"grid":[[1,0,0],[0,1,0],[9,0,1]]}' },
+    { label: 'Zero on the diagonal breaks it', input: '{"grid":[[0,0,0],[0,1,0],[0,0,1]]}' },
+    { label: 'Largest 6 by 6 X-matrix', input: '{"grid":[[2,0,0,0,0,6],[0,6,0,0,5,0],[0,0,9,6,0,0],[0,0,9,2,0,0],[0,2,0,0,8,0],[9,0,0,0,0,8]]}' },
+    { label: 'Long run: 6 by 6 with one stray value', input: '{"grid":[[9,0,0,0,0,2],[0,5,0,0,0,0],[3,0,8,6,0,0],[0,0,8,1,0,0],[0,2,0,0,7,0],[7,0,0,0,0,5]]}' },
   ],
 }
 

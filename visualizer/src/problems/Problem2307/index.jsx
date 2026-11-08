@@ -17,6 +17,10 @@ const definition = {
     { label: 'Consistent', input: '{"equations":[["a","b"],["b","c"],["a","c"]],"values":[2,3,6]}' },
     { label: 'Contradiction', input: '{"equations":[["a","b"],["b","c"],["a","c"]],"values":[2,3,5]}' },
     { label: 'Self', input: '{"equations":[["x","x"]],"values":[2]}' },
+    { label: 'Single equation', input: '{"equations":[["x","y"]],"values":[1.5]}' },
+    { label: 'Reciprocal pair', input: '{"equations":[["p","q"],["q","p"]],"values":[2,0.5]}' },
+    { label: 'Largest and smallest values', input: '{"equations":[["m","n"],["n","o"]],"values":[10,0.01]}' },
+    { label: 'Long run: ten equations', input: '{"equations":[["edf","ff"],["d","cdd"],["cde","a"],["d","fa"],["dfc","bfd"],["ba","f"],["fa","a"],["dd","cdb"],["c","f"],["be","b"]],"values":[1.5,1,0.5,1.5,1.5,2.5,2.5,3,5,1.5]}' },
   ],
 }
 

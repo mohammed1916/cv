@@ -17,6 +17,11 @@ const definition = {
     { label: 'Example 1', input: '{"s":"lEeTcOdE"}' },
     { label: 'Example 2', input: '{"s":"arRAzFif"}' },
     { label: 'None', input: '{"s":"AbCdEfGhIjK"}' },
+    { label: 'Single letter', input: '{"s":"q"}' },
+    { label: 'Two letters, both cases', input: '{"s":"aA"}' },
+    { label: 'No letter in both cases', input: '{"s":"abcXYZ"}' },
+    { label: 'Longest input, 30 letters', input: '{"s":"ZzZzZzZzZzZzZzZzZzZzZzZzZzZzZz"}' },
+    { label: 'Long run: 30 letters', input: '{"s":"sDcAfzqskFcVkUnfNGewGYCPcmgyZd"}' },
   ],
 }
 

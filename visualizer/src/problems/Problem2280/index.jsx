@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[[1,7],[2,6],[3,5],[4,4],[5,4],[6,3],[7,2],[8,1]]' },
     { label: 'Collinear', input: '[[3,4],[1,2],[7,8],[2,3]]' },
+    { label: 'Single point', input: '[[3,9]]' },
+    { label: 'Equal prices', input: '[[1,5],[2,5],[3,5]]' },
+    { label: 'Ten alternating extremes', input: '[[1,20],[2,1],[3,20],[4,1],[5,20],[6,1],[7,20],[8,1],[9,20],[10,1]]' },
+    { label: 'Long run: 10 points', input: '[[17,15],[6,5],[1,17],[16,11],[13,6],[12,5],[3,1],[20,6],[15,19],[9,17]]' },
   ],
 }
 

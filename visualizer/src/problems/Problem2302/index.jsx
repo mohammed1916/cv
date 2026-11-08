@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[1,2,3],"k":6}' },
     { label: 'Wider', input: '{"nums":[4,2,1,6],"k":13}' },
+    { label: 'Single value', input: '{"nums":[7],"k":1}' },
+    { label: 'Equal values', input: '{"nums":[2,2,2],"k":4}' },
+    { label: 'Twelve maximum values, k 500', input: '{"nums":[20,20,20,20,20,20,20,20,20,20,20,20],"k":500}' },
+    { label: 'Long run: 12 values', input: '{"nums":[10,1,2,5,18,17,19,20,8,6,12,13],"k":100}' },
   ],
 }
 

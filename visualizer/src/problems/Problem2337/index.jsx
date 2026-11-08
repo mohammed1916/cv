@@ -17,6 +17,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"start": "_L__R__R_", "target": "L______RR"}' },
     { label: 'Example 2', input: '{"start": "R_L_", "target": "__LR"}' },
+    { label: 'Single piece in place', input: '{"start":"L","target":"L"}' },
+    { label: 'Right piece cannot move left', input: '{"start":"_R","target":"R_"}' },
+    { label: 'Blanks only', input: '{"start":"____","target":"____"}' },
+    { label: 'Longest input, 12 cells', input: '{"start":"L_____R_____","target":"L_________R_"}' },
+    { label: 'Long run: 12 cells, moves applied', input: '{"start":"L_R_L__R__L_","target":"L_RL____RL__"}' },
   ],
 }
 

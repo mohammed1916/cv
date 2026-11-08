@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"brackets":[[3,50],[7,10],[12,25]],"income":10}' },
     { label: 'Example 2', input: '{"brackets":[[1,0],[4,25],[5,50]],"income":2}' },
+    { label: 'Single bracket, full income', input: '{"brackets":[[10,20]],"income":10}' },
+    { label: 'Zero income', input: '{"brackets":[[5,10],[9,20]],"income":0}' },
+    { label: 'Ten brackets up to 100', input: '{"brackets":[[10,0],[20,10],[30,20],[40,30],[50,40],[60,50],[70,60],[80,70],[90,80],[100,90]],"income":100}' },
+    { label: 'Long run: ten brackets', input: '{"brackets":[[14,43],[20,42],[42,55],[52,73],[58,11],[68,21],[72,46],[79,50],[81,56],[93,18]],"income":92}' },
   ],
 }
 

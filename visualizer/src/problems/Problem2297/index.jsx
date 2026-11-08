@@ -22,6 +22,10 @@ const definition = {
     { label: 'Mixed climb', input: '{"nums":[3,1,4,1,5],"costs":[2,9,1,4,6]}' },
     { label: 'Descending', input: '{"nums":[9,7,5,2],"costs":[4,1,8,3]}' },
     { label: 'Flat then rise', input: '{"nums":[2,2,6,3,7],"costs":[5,0,2,9,1]}' },
+    { label: 'Two indices, zero costs', input: '{"nums":[1,2],"costs":[0,0]}' },
+    { label: 'All equal values', input: '{"nums":[5,5,5,5],"costs":[1,1,1,1]}' },
+    { label: 'Twelve maximum values', input: '{"nums":[99,0,99,0,99,0,99,0,99,0,99,0],"costs":[0,99,0,99,0,99,0,99,0,99,0,99]}' },
+    { label: 'Long run: 12 indices', input: '{"nums":[17,22,55,55,28,71,87,91,3,58,79,73],"costs":[11,34,70,88,87,91,59,83,59,0,29,12]}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":5,"roads":[[0,1],[1,2],[2,3],[0,2],[1,3],[2,4]]}' },
     { label: 'Example 2', input: '{"n":5,"roads":[[0,3],[2,4],[1,3]]}' },
+    { label: 'Two cities, one road', input: '{"n":2,"roads":[[0,1]]}' },
+    { label: 'Triangle, equal importance', input: '{"n":3,"roads":[[0,1],[1,2],[0,2]]}' },
+    { label: 'Seven cities, twelve roads', input: '{"n":7,"roads":[[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[1,2],[2,3],[3,4],[4,5],[5,6],[6,1]]}' },
+    { label: 'Long run: 7 cities', input: '{"n":7,"roads":[[1,2],[0,1],[4,5],[2,6],[4,6],[2,5],[1,4],[3,6],[2,3],[3,4],[0,6],[3,5]]}' },
   ],
 }
 

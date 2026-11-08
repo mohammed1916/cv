@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"num":58,"k":9}' },
     { label: 'Impossible', input: '{"num":37,"k":2}' },
+    { label: 'Zero target', input: '{"num":0,"k":0}' },
+    { label: 'Single number equals target', input: '{"num":5,"k":5}' },
+    { label: 'Digit zero: multiples of ten', input: '{"num":20,"k":0}' },
+    { label: 'Largest target and digit', input: '{"num":3000,"k":9}' },
+    { label: 'Long run: 2,718 with k 7', input: '{"num":2718,"k":7}' },
   ],
 }
 

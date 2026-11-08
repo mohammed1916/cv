@@ -19,6 +19,10 @@ const definition = {
     { label: 'Twin peaks', input: '[[4,3],[1,1],[9,4],[4,1]]' },
     { label: 'Identical pair', input: '[[2,2],[2,2],[3,2]]' },
     { label: 'Lone peak', input: '[[5,5]]' },
+    { label: 'Three identical peaks', input: '[[7,3],[7,3],[7,3]]' },
+    { label: 'Tall peak at the left edge', input: '[[0,20],[0,1],[40,1]]' },
+    { label: 'Largest count: 10 peaks', input: '[[0,1],[4,2],[8,3],[12,4],[16,5],[20,6],[24,7],[28,8],[32,9],[36,10]]' },
+    { label: 'Long run: 10 random peaks', input: '[[5,20],[18,10],[10,1],[5,1],[18,6],[32,13],[14,18],[17,11],[35,20],[23,3]]' },
   ],
 }
 

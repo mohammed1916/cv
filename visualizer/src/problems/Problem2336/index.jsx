@@ -15,6 +15,10 @@ const definition = {
   complexity: 'O(log n) per operation with a min heap of added-back numbers. The visualization caps input at 12 operations.',
   examples: [
     { label: 'Example', input: '{"operations":["addBack","popSmallest","popSmallest","popSmallest","addBack","popSmallest","popSmallest","popSmallest"],"arguments":[[2],[],[],[],[1],[],[],[]]}' },
+    { label: 'Single pop', input: '{"operations":["popSmallest"],"arguments":[[]]}' },
+    { label: 'Duplicate add-back is ignored', input: '{"operations":["popSmallest","addBack","addBack","popSmallest","popSmallest"],"arguments":[[],[1],[1],[],[]]}' },
+    { label: 'Largest value added back', input: '{"operations":["addBack","popSmallest","popSmallest","addBack","popSmallest","popSmallest","popSmallest","popSmallest","popSmallest","popSmallest","popSmallest","popSmallest"],"arguments":[[30],[],[],[29],[],[],[],[],[],[],[],[]]}' },
+    { label: 'Long run: 12 operations', input: '{"operations":["addBack","addBack","addBack","addBack","addBack","addBack","addBack","popSmallest","popSmallest","popSmallest","popSmallest","addBack"],"arguments":[[17],[10],[12],[10],[15],[25],[27],[],[],[],[],[5]]}' },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[1,5,0,3,5]}' },
     { label: 'All zero', input: '{"nums":[0,0,0]}' },
+    { label: 'Single positive value', input: '{"nums":[7]}' },
+    { label: 'Repeated value counts once', input: '{"nums":[2,2,2,2]}' },
+    { label: 'Largest input: 24 values', input: '{"nums":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]}' },
+    { label: 'Long run: 24 values', input: '{"nums":[15,6,68,92,24,98,30,1,55,99,23,84,7,32,17,10,69,14,14,79,42,13,14,26]}' },
   ],
 }
 

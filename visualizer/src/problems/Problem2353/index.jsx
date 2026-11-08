@@ -15,6 +15,10 @@ const definition = {
   complexity: 'O(log n) per changeRating and amortised O(log n) per highestRated with lazy heaps. The visualization caps input at 8 foods and 12 operations.',
   examples: [
     { label: 'Example', input: '{"foods":["pho","bun","taco","burrito"],"cuisines":["viet","viet","mex","mex"],"ratings":[7,9,4,4],"operations":["highestRated","changeRating","highestRated","highestRated","changeRating","highestRated"],"arguments":[["viet"],["bun",3],["viet"],["mex"],["taco",6],["mex"]]}' },
+    { label: 'One food', input: '{"foods":["soup"],"cuisines":["stew"],"ratings":[3],"operations":["highestRated"],"arguments":[["stew"]]}' },
+    { label: 'Equal ratings in one cuisine', input: '{"foods":["ramen","pho"],"cuisines":["asia","asia"],"ratings":[5,5],"operations":["highestRated","changeRating","highestRated"],"arguments":[["asia"],["pho",4],["asia"]]}' },
+    { label: 'Largest input: 8 foods, 12 operations', input: '{"foods":["ramen","pho","taco","curry","kebab","pasta","sushi","bagel"],"cuisines":["asia","asia","mex","asia","mid","it","asia","us"],"ratings":[20,1,20,9,9,3,7,2],"operations":["highestRated","changeRating","highestRated","changeRating","highestRated","highestRated","changeRating","highestRated","highestRated","changeRating","highestRated","highestRated"],"arguments":[["asia"],["ramen",1],["asia"],["sushi",20],["asia"],["mex"],["bagel",20],["us"],["mid"],["pho",19],["asia"],["it"]]}' },
+    { label: 'Long run: 8 foods, 12 operations', input: '{"foods":["ramen","pho","taco","curry","kebab","pasta","sushi","bagel"],"cuisines":["mex","it","mex","asia","asia","mex","asia","asia"],"ratings":[3,15,19,16,12,20,12,7],"operations":["changeRating","changeRating","highestRated","changeRating","highestRated","highestRated","changeRating","highestRated","changeRating","highestRated","changeRating","highestRated"],"arguments":[["ramen",14],["bagel",1],["asia"],["pho",1],["it"],["asia"],["taco",1],["asia"],["sushi",8],["asia"],["curry",3],["asia"]]}' },
   ],
 }
 

@@ -19,6 +19,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"s":"fooleyzbar","sub":"leet","mappings":[["e","3"],["t","7"],["t","8"]]}' },
     { label: 'No match', input: '{"s":"abcd","sub":"ef","mappings":[["e","b"]]}' },
+    { label: 'Single letter match', input: '{"s":"a","sub":"a","mappings":[]}' },
+    { label: 'No mappings, sub absent', input: '{"s":"xyz","sub":"a","mappings":[]}' },
+    { label: 'Largest strings, ten mappings', input: '{"s":"abcdefghijklmnopqrst","sub":"ijklmnop","mappings":[["i","j"],["j","k"],["k","l"],["l","m"],["m","n"],["n","o"],["o","p"],["p","q"],["q","r"],["r","s"]]}' },
+    { label: 'Long run: 20 letters', input: '{"s":"eeabdedbacabaecabcec","sub":"ecbdaada","mappings":[["b","c"],["e","c"],["h","a"],["c","b"],["c","c"],["b","g"],["c","d"],["d","c"],["d","e"],["b","c"]]}' },
   ],
 }
 

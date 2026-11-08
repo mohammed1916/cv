@@ -16,6 +16,11 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[0,0,1,0,0,0]}' },
     { label: 'Mixed', input: '{"nums":[-1,0,0,-2]}' },
+    { label: 'Single zero', input: '{"nums":[0]}' },
+    { label: 'Single non-zero', input: '{"nums":[2]}' },
+    { label: 'All zeros', input: '{"nums":[0,0,0,0]}' },
+    { label: 'Largest input, mixed values', input: '{"nums":[1,-1,0,2,0,0,-3,0,0,0,0,1,0,0,0,-2]}' },
+    { label: 'Long run: 16 values', input: '{"nums":[-2,-2,0,1,-2,-2,-1,2,3,0,-2,1,-2,2,-3,3]}' },
   ],
 }
 

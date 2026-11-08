@@ -19,6 +19,11 @@ const definition = {
     { label: 'Mixed tree', input: '{"root":{"val":3,"left":{"val":2,"left":{"val":1},"right":{"val":0}},"right":{"val":4,"left":{"val":1},"right":{"val":1}}},"result":false}' },
     { label: 'Negated leaf', input: '{"root":{"val":5,"left":{"val":0}},"result":true}' },
     { label: 'Xor chain', input: '{"root":{"val":4,"left":{"val":1},"right":{"val":4,"left":{"val":0},"right":{"val":1}}},"result":true}' },
+    { label: 'Single true leaf', input: '{"root":{"val":1},"result":true}' },
+    { label: 'Leaf already matches', input: '{"root":{"val":0},"result":false}' },
+    { label: 'Two NOT nodes over a false leaf', input: '{"root":{"val":5,"left":{"val":5,"left":{"val":0}}},"result":true}' },
+    { label: 'Largest tree, 15 nodes', input: '{"root":{"val":2,"left":{"val":3,"left":{"val":4,"left":{"val":1},"right":{"val":0}},"right":{"val":2,"left":{"val":0},"right":{"val":1}}},"right":{"val":4,"left":{"val":3,"left":{"val":1},"right":{"val":1}},"right":{"val":2,"left":{"val":1},"right":{"val":0}}}},"result":false}' },
+    { label: 'Long run: random 15-node tree', input: '{"root":{"val":2,"left":{"val":2,"left":{"val":3,"left":{"val":0},"right":{"val":1}},"right":{"val":2,"left":{"val":0},"right":{"val":1}}},"right":{"val":2,"left":{"val":3,"left":{"val":0},"right":{"val":1}},"right":{"val":2,"left":{"val":0},"right":{"val":0}}}},"result":true}' },
   ],
 }
 

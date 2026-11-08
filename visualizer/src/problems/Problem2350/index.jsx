@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"rolls":[4,2,1,2,3,3,2,4,1],"k":4}' },
     { label: 'Example 2', input: '{"rolls":[1,1,2,2],"k":2}' },
+    { label: 'Single roll, k one', input: '{"rolls":[1],"k":1}' },
+    { label: 'Repeated faces', input: '{"rolls":[2,2,2],"k":2}' },
+    { label: 'Largest input: 10 rolls', input: '{"rolls":[4,1,2,3,4,1,2,3,4,1],"k":4}' },
+    { label: 'Long run: 10 rolls', input: '{"rolls":[1,2,3,2,2,3,1,2,3,2],"k":3}' },
   ],
 }
 

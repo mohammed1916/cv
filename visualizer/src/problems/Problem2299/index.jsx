@@ -21,6 +21,10 @@ const definition = {
     { label: 'Strong', input: '{"password":"IloveLe3tcode!"}' },
     { label: 'Adjacent repeat', input: '{"password":"Me+You--IsMyDream"}' },
     { label: 'Too short', input: '{"password":"1aB!"}' },
+    { label: 'Single character', input: '{"password":"a"}' },
+    { label: 'Repeated character', input: '{"password":"aaaa"}' },
+    { label: 'Maximum length, 30 characters', input: '{"password":"Aa1!Bb2@Cc3#Dd4$Ee5%Ff6^Gg7&Hh"}' },
+    { label: 'Long run: 30 characters', input: '{"password":"afUH,C)S0KP=5G%[^hu\'kv5d<;\\\\`@k"}' },
   ],
 }
 

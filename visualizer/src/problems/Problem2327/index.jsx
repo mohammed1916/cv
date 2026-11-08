@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":6,"delay":2,"forget":4}' },
     { label: 'Example 2', input: '{"n":4,"delay":1,"forget":3}' },
+    { label: 'Two days, forget at once', input: '{"n":2,"delay":1,"forget":2}' },
+    { label: 'Equal delay and forget gaps', input: '{"n":5,"delay":2,"forget":4}' },
+    { label: 'Longest run: 40 days', input: '{"n":40,"delay":1,"forget":40}' },
+    { label: 'Long run: 40 days, random delays', input: '{"n":40,"delay":3,"forget":16}' },
   ],
 }
 

@@ -17,6 +17,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":7,"edges":[[0,2],[0,5],[2,4],[1,6],[5,4]]}' },
     { label: 'Example 2', input: '{"n":3,"edges":[[0,1],[0,2],[1,2]]}' },
+    { label: 'Single node, no edges', input: '{"n":1,"edges":[]}' },
+    { label: 'Two isolated nodes', input: '{"n":2,"edges":[]}' },
+    { label: 'One cycle joins all nodes', input: '{"n":4,"edges":[[0,1],[1,2],[2,3],[3,0]]}' },
+    { label: 'Largest graph, no edges', input: '{"n":20,"edges":[]}' },
+    { label: 'Long run: 20 nodes, 30 edges', input: '{"n":20,"edges":[[2,6],[12,7],[18,6],[12,9],[13,12],[12,15],[0,5],[16,19],[8,10],[18,8],[13,6],[18,9],[0,3],[1,16],[4,5],[8,15],[6,14],[15,17],[13,9],[11,16],[15,2],[10,15],[3,11],[11,10],[0,16],[15,18],[11,13],[2,4],[4,15],[11,14]]}' },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example', input: '{"nums":[1,3,4,3,1],"threshold":6}' },
     { label: 'Single peak', input: '{"nums":[6,5,6,5,8],"threshold":7}' },
     { label: 'None', input: '{"nums":[1,1,1],"threshold":9}' },
+    { label: 'Single value', input: '{"nums":[5],"threshold":5}' },
+    { label: 'Equal values', input: '{"nums":[4,4,4,4],"threshold":12}' },
+    { label: 'Largest values, 12 entries', input: '{"nums":[20,20,20,20,20,20,20,20,20,20,20,20],"threshold":100}' },
+    { label: 'Long run: 12 values', input: '{"nums":[3,20,19,2,19,16,8,19,17,14,16,2],"threshold":60}' },
   ],
 }
 

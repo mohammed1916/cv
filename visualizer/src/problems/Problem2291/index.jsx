@@ -16,6 +16,10 @@ const definition = {
     { label: 'Three stocks', input: '{"present":[2,3,4],"future":[5,4,9],"budget":6}' },
     { label: 'Nothing worth buying', input: '{"present":[5],"future":[1],"budget":5}' },
     { label: 'Two stocks', input: '{"present":[2,2],"future":[5,6],"budget":4}' },
+    { label: 'Single stock affordable', input: '{"present":[3],"future":[7],"budget":3}' },
+    { label: 'Zero budget', input: '{"present":[4,6],"future":[9,9],"budget":0}' },
+    { label: 'Equal stocks', input: '{"present":[5,5],"future":[8,8],"budget":5}' },
+    { label: 'Long run: 6 stocks', input: '{"present":[13,14,11,20,16,15],"future":[5,1,14,20,14,1],"budget":15}' },
   ],
 }
 

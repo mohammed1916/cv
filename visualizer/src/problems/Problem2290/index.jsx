@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'remove 2', input: '[[0,1,1],[1,1,0],[1,1,0]]' },
     { label: 'remove 0', input: '[[0,1,0,0,0],[0,1,0,1,0],[0,0,0,1,0]]' },
+    { label: 'Single empty cell', input: '[[0]]' },
+    { label: 'Obstacles force a detour', input: '[[0,1,0],[1,1,0],[0,0,0]]' },
+    { label: 'Largest grid, 6 by 6', input: '[[0,0,0,0,0,0],[0,1,1,1,0,0],[0,0,0,1,0,0],[1,1,0,1,0,1],[0,0,0,0,0,0],[0,1,1,0,1,0]]' },
+    { label: 'Long run: 6 by 6 random', input: '[[0,0,1,1,0,0],[0,1,0,1,0,1],[1,0,0,1,1,0],[0,0,0,0,0,0],[1,1,0,1,0,1],[0,0,1,1,1,0]]' },
   ],
 }
 

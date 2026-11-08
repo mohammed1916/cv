@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Path', input: '{"nums":[1,2,3],"edges":[[0,1],[1,2]]}' },
     { label: 'Star', input: '{"nums":[4,4,4,4],"edges":[[0,1],[0,2],[0,3]]}' },
+    { label: 'Three nodes, tied values', input: '{"nums":[6,6,6],"edges":[[1,0],[2,0]]}' },
+    { label: 'Largest values, 12-node path', input: '{"nums":[1000,1,1000,1,1000,1,1000,1,1000,1,1000,1],"edges":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11]]}' },
+    { label: 'Long run: random 12-node tree', input: '{"nums":[136,893,713,620,919,807,212,948,745,978,348,872],"edges":[[1,0],[2,0],[3,0],[4,3],[5,1],[6,3],[7,4],[8,5],[9,2],[10,4],[11,7]]}' },
   ],
 }
 

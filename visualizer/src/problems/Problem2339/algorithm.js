@@ -41,6 +41,15 @@ export const complexity = 'O(n²) pairs for n teams, plus O(n² log n) to sort t
 export const examples = [{
   label: 'Sample',
   input: '{"Teams":[{"team_name":"Eagles"},{"team_name":"Lions"},{"team_name":"Tigers"}]}',
+}, {
+  label: 'Single team',
+  input: '{"Teams":[{"team_name":"Owls"}]}',
+}, {
+  label: 'Two single-letter names',
+  input: '{"Teams":[{"team_name":"A"},{"team_name":"B"}]}',
+}, {
+  label: 'Long run: 12 teams',
+  input: '{"Teams":[{"team_name":"teama"},{"team_name":"teamb"},{"team_name":"teamc"},{"team_name":"teamd"},{"team_name":"teame"},{"team_name":"teamf"},{"team_name":"teamg"},{"team_name":"teamh"},{"team_name":"teami"},{"team_name":"teamj"},{"team_name":"teamk"},{"team_name":"teaml"}]}',
 }]
 
 function tableRows(input, name, columns) {

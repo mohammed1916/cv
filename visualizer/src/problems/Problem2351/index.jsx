@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"abccbaacz"}' },
     { label: 'Example 2', input: '{"s":"abcdd"}' },
+    { label: 'Smallest input', input: '{"s":"aa"}' },
+    { label: 'Earliest repeat wins', input: '{"s":"abab"}' },
+    { label: 'Longest string, 50 letters', input: '{"s":"abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwx"}' },
+    { label: 'Long run: 50 letters', input: '{"s":"beefbdfedfefbegcgacdcgagahaaddgfaabadfbacebchadfeh"}' },
   ],
 }
 

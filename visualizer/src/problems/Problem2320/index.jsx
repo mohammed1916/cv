@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'One plot', input: '1' },
     { label: 'Three plots', input: '3' },
+    { label: 'Two plots', input: '2' },
+    { label: 'Five plots', input: '5' },
+    { label: 'Largest street, 60 plots', input: '60' },
+    { label: 'Long run: 45 plots', input: '45' },
   ],
 }
 

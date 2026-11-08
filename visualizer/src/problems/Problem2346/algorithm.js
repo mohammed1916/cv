@@ -43,6 +43,18 @@ export const complexity = 'O(n²) for this visual rank count over n students. A 
 export const examples = [{
   label: 'Sample',
   input: '{"Students":[{"student_id":1,"department_id":1,"mark":88},{"student_id":2,"department_id":1,"mark":91},{"student_id":3,"department_id":1,"mark":88},{"student_id":4,"department_id":1,"mark":75},{"student_id":5,"department_id":2,"mark":60}]}',
+}, {
+  label: 'One student',
+  input: '{"Students":[{"student_id":1,"department_id":1,"mark":90}]}',
+}, {
+  label: 'Equal marks keep ids in order',
+  input: '{"Students":[{"student_id":3,"department_id":1,"mark":80},{"student_id":1,"department_id":1,"mark":80},{"student_id":2,"department_id":1,"mark":80}]}',
+}, {
+  label: 'Largest marks, 12 students',
+  input: '{"Students":[{"student_id":1,"department_id":1,"mark":100},{"student_id":2,"department_id":2,"mark":99},{"student_id":3,"department_id":1,"mark":98},{"student_id":4,"department_id":2,"mark":97},{"student_id":5,"department_id":1,"mark":96},{"student_id":6,"department_id":2,"mark":95},{"student_id":7,"department_id":1,"mark":94},{"student_id":8,"department_id":2,"mark":93},{"student_id":9,"department_id":1,"mark":92},{"student_id":10,"department_id":2,"mark":91},{"student_id":11,"department_id":1,"mark":90},{"student_id":12,"department_id":2,"mark":89}]}',
+}, {
+  label: 'Long run: 12 students',
+  input: '{"Students":[{"student_id":1,"department_id":1,"mark":7},{"student_id":2,"department_id":1,"mark":51},{"student_id":3,"department_id":3,"mark":75},{"student_id":4,"department_id":2,"mark":94},{"student_id":5,"department_id":3,"mark":35},{"student_id":6,"department_id":1,"mark":30},{"student_id":7,"department_id":1,"mark":85},{"student_id":8,"department_id":2,"mark":98},{"student_id":9,"department_id":1,"mark":98},{"student_id":10,"department_id":3,"mark":3},{"student_id":11,"department_id":3,"mark":94},{"student_id":12,"department_id":3,"mark":48}]}',
 }]
 
 function tableRows(input, name, columns) {

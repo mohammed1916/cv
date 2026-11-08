@@ -42,6 +42,15 @@ export const complexity = 'O(n + m) to join and group, plus O(k log k) to sort k
 export const examples = [{
   label: 'Sample',
   input: '{"Sales":[{"sale_id":1,"product_id":1,"user_id":7,"quantity":2},{"sale_id":2,"product_id":2,"user_id":5,"quantity":1},{"sale_id":3,"product_id":3,"user_id":7,"quantity":5},{"sale_id":4,"product_id":1,"user_id":9,"quantity":3},{"sale_id":5,"product_id":2,"user_id":3,"quantity":1}],"Product":[{"product_id":1,"price":10},{"product_id":2,"price":25},{"product_id":3,"price":4}]}',
+}, {
+  label: 'One product, one sale',
+  input: '{"Sales":[{"sale_id":1,"product_id":1,"user_id":1,"quantity":1}],"Product":[{"product_id":1,"price":2}]}',
+}, {
+  label: 'Twelve sales of one product',
+  input: '{"Sales":[{"sale_id":1,"product_id":1,"user_id":1,"quantity":9},{"sale_id":2,"product_id":1,"user_id":1,"quantity":9},{"sale_id":3,"product_id":1,"user_id":1,"quantity":9},{"sale_id":4,"product_id":1,"user_id":1,"quantity":9},{"sale_id":5,"product_id":1,"user_id":1,"quantity":9},{"sale_id":6,"product_id":1,"user_id":1,"quantity":9},{"sale_id":7,"product_id":1,"user_id":1,"quantity":9},{"sale_id":8,"product_id":1,"user_id":1,"quantity":9},{"sale_id":9,"product_id":1,"user_id":1,"quantity":9},{"sale_id":10,"product_id":1,"user_id":1,"quantity":9},{"sale_id":11,"product_id":1,"user_id":1,"quantity":9},{"sale_id":12,"product_id":1,"user_id":1,"quantity":9}],"Product":[{"product_id":1,"price":100}]}',
+}, {
+  label: 'Long run: 12 sales, 3 products',
+  input: '{"Sales":[{"sale_id":1,"product_id":1,"user_id":3,"quantity":5},{"sale_id":2,"product_id":3,"user_id":3,"quantity":1},{"sale_id":3,"product_id":1,"user_id":2,"quantity":3},{"sale_id":4,"product_id":2,"user_id":3,"quantity":6},{"sale_id":5,"product_id":3,"user_id":4,"quantity":8},{"sale_id":6,"product_id":1,"user_id":3,"quantity":7},{"sale_id":7,"product_id":3,"user_id":5,"quantity":1},{"sale_id":8,"product_id":2,"user_id":2,"quantity":3},{"sale_id":9,"product_id":2,"user_id":2,"quantity":8},{"sale_id":10,"product_id":1,"user_id":4,"quantity":8},{"sale_id":11,"product_id":3,"user_id":2,"quantity":9},{"sale_id":12,"product_id":2,"user_id":3,"quantity":7}],"Product":[{"product_id":1,"price":5},{"product_id":2,"price":8},{"product_id":3,"price":13}]}',
 }]
 
 function tableRows(input, name, columns) {

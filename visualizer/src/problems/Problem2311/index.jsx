@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s": "1001010", "k": 5}' },
     { label: 'Example 2', input: '{"s": "00101001", "k": 1}' },
+    { label: 'Single bit fits', input: '{"s":"1","k":1}' },
+    { label: 'Leading zeros are free', input: '{"s":"0000","k":1}' },
+    { label: 'Twenty ones, k at the limit', input: '{"s":"11111111111111111111","k":1000000}' },
+    { label: 'Long run: 20 bits', input: '{"s":"01001101000001111001","k":40000}' },
   ],
 }
 

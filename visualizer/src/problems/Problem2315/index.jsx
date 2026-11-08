@@ -17,6 +17,11 @@ const definition = {
     { label: 'Example 1', input: '{"s":"yo|uar|e**|b|e***au|tifu|l"}' },
     { label: 'No bars', input: '{"s":"iamprogrammer"}' },
     { label: 'Unpaired bar', input: '{"s":"a*|b*c"}' },
+    { label: 'Single letter', input: '{"s":"a"}' },
+    { label: 'Stars with no bars', input: '{"s":"***"}' },
+    { label: 'Stars between bars and after', input: '{"s":"a|*|b*"}' },
+    { label: 'Longest input, 30 characters', input: '{"s":"*|*|*|*|*|*|*|*|*|*|*|*|*|*|*|"}' },
+    { label: 'Long run: 30 characters', input: '{"s":"ab|bbcacacaaabccbc*cbc|b*acbbb"}' },
   ],
 }
 

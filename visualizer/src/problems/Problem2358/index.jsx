@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"grades":[10,6,12]}' },
     { label: 'Example 2', input: '{"grades":[8,8]}' },
+    { label: 'One student', input: '{"grades":[5]}' },
+    { label: 'Equal grades', input: '{"grades":[1,1,1,1,1,1]}' },
+    { label: 'Largest input: 12 students', input: '{"grades":[8,16,24,32,40,48,56,64,72,80,88,96]}' },
+    { label: 'Long run: 12 students', input: '{"grades":[15,16,37,96,92,73,73,93,6,5,69,53]}' },
   ],
 }
 

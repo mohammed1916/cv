@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"messages":["Hello userTwooo","Hi userThree","Wonderful day Alice","Nice day userThree"],"senders":["Alice","userTwo","userThree","Alice"]}' },
     { label: 'Example 2', input: '{"messages":["How is leetcode for everyone","Leetcode is useful for practice"],"senders":["Bob","Charlie"]}' },
+    { label: 'Single message', input: '{"messages":["Hi"],"senders":["Ann"]}' },
+    { label: 'Same sender twice', input: '{"messages":["Hi there","Hi there"],"senders":["Ann","Ann"]}' },
+    { label: 'Eight messages, one sender', input: '{"messages":["Good day team","Good day team","Good day team","Good day team","Good day team","Good day team","Good day team","Good day team"],"senders":["Zed","Zed","Zed","Zed","Zed","Zed","Zed","Zed"]}' },
+    { label: 'Long run: 8 messages', input: '{"messages":["there hi","there thanks","there there","hi team","there team","thanks thanks","day there","thanks day"],"senders":["Ann","Ben","Cy","Dee","Ben","Ann","Dee","Ann"]}' },
   ],
 }
 

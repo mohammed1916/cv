@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"cookies":[8,15,10,20,8],"k":2}' },
     { label: 'Example 2', input: '{"cookies":[6,1,3,2,2,4,1,2],"k":3}' },
+    { label: 'Two bags, equal sizes', input: '{"cookies":[3,3],"k":2}' },
+    { label: 'All bags equal', input: '{"cookies":[5,5,5,5],"k":4}' },
+    { label: 'Eight bags, extreme sizes', input: '{"cookies":[50,1,50,1,50,1,50,1],"k":4}' },
+    { label: 'Long run: 8 bags', input: '{"cookies":[12,16,29,50,33,17,37,21],"k":3}' },
   ],
 }
 
