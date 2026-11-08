@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Mixed gaps', input: '{"nums":[4,4,7,2,2,9]}' },
     { label: 'Negative values', input: '{"nums":[3,-1,-1,6,5]}' },
+    { label: 'Single value', input: '{"nums":[0]}' },
+    { label: 'Equal neighbours', input: '{"nums":[3,3,3]}' },
+    { label: 'Extreme values, longest list', input: '{"nums":[-50,50,-50,50,-50,50,-50,50,-50,50]}' },
+    { label: 'Long run: 10 values', input: '{"nums":[-7,41,-21,7,43,3,-50,20,19,-16]}' },
   ],
 }
 

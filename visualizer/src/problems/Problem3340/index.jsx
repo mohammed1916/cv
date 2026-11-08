@@ -20,6 +20,10 @@ const definition = {
   examples: [
     { label: "Invented balanced", input: '{"num": "4411"}' },
     { label: "Invented unbalanced", input: '{"num": "2468"}' },
+    { label: 'Two equal digits', input: '{"num":"11"}' },
+    { label: 'Two different digits', input: '{"num":"12"}' },
+    { label: 'Equal digits', input: '{"num":"1111"}' },
+    { label: 'Long run: 100 digits', input: '{"num":"1191326673107629525301547058272463729563480300368887705003461511773533920150240266557524164689307435"}' },
   ],
 };
 

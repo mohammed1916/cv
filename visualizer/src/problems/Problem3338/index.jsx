@@ -12,6 +12,10 @@ const definition = {
   complexity: 'Teaching model: one pass to group, then one sort per department. Visualization caps the table at 12 rows.',
   examples: [
     { label: 'Example', input: '{"employees":[{"emp_id":1,"name":"Ana","salary":900,"dept":"Eng"},{"emp_id":2,"name":"Bo","salary":700,"dept":"Eng"},{"emp_id":3,"name":"Cy","salary":700,"dept":"Eng"},{"emp_id":4,"name":"Di","salary":500,"dept":"Ops"},{"emp_id":5,"name":"Ed","salary":800,"dept":"Ops"},{"emp_id":6,"name":"Fay","salary":900,"dept":"Eng"},{"emp_id":7,"name":"Gil","salary":400,"dept":"Solo"}]}' },
+    { label: 'Single employee', input: '{"employees":[{"emp_id":1,"name":"Ana","salary":500,"dept":"Eng"}]}' },
+    { label: 'Equal salaries in one department', input: '{"employees":[{"emp_id":1,"name":"Ana","salary":700,"dept":"Eng"},{"emp_id":2,"name":"Bo","salary":700,"dept":"Eng"},{"emp_id":3,"name":"Cy","salary":400,"dept":"Eng"}]}' },
+    { label: 'Largest table, 12 employees', input: '{"employees":[{"emp_id":1,"name":"Worker 1","salary":107,"dept":"Eng"},{"emp_id":2,"name":"Worker 2","salary":306,"dept":"Ops"},{"emp_id":3,"name":"Worker 3","salary":21,"dept":"Eng"},{"emp_id":4,"name":"Worker 4","salary":364,"dept":"Ops"},{"emp_id":5,"name":"Worker 5","salary":152,"dept":"Eng"},{"emp_id":6,"name":"Worker 6","salary":292,"dept":"Ops"},{"emp_id":7,"name":"Worker 7","salary":87,"dept":"Eng"},{"emp_id":8,"name":"Worker 8","salary":80,"dept":"Ops"},{"emp_id":9,"name":"Worker 9","salary":183,"dept":"Eng"},{"emp_id":10,"name":"Worker 10","salary":942,"dept":"Ops"},{"emp_id":11,"name":"Worker 11","salary":864,"dept":"Eng"},{"emp_id":12,"name":"Worker 12","salary":75,"dept":"Ops"}]}' },
+    { label: 'Empty table', input: '{"employees":[]}' },
   ],
 }
 

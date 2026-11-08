@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"move_time":[[0,4],[4,4]]}' },
     { label: 'Zeros', input: '{"move_time":[[0,0,0],[0,0,0]]}' },
+    { label: 'Equal times', input: '{"move_time":[[1,1],[1,1]]}' },
+    { label: 'Diagonal extremes', input: '{"move_time":[[0,2],[2,0]]}' },
+    { label: 'Largest 5 by 5 grid', input: '{"move_time":[[9,9,9,9,9],[9,9,9,9,9],[9,9,9,9,9],[9,9,9,9,9],[9,9,9,9,9]]}' },
+    { label: 'Long run: 5 by 5 grid', input: '{"move_time":[[1,9,8,0,6],[2,2,3,3,7],[4,9,9,5,4],[5,6,3,7,8],[1,7,3,4,3]]}' },
   ],
 }
 

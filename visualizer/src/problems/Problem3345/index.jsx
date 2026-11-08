@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Invented n and t', input: '{"n":15,"t":7}' },
     { label: 'Zero digit', input: '{"n":99,"t":10}' },
+    { label: 'Single number, one step', input: '{"n":1,"t":1}' },
+    { label: 'Repeated digits', input: '{"n":77,"t":3}' },
+    { label: 'Largest allowed n and t', input: '{"n":100,"t":10}' },
+    { label: 'Long run: ten steps', input: '{"n":89,"t":10}' },
   ],
 }
 

@@ -22,6 +22,10 @@ const definition = {
   examples: [
     { label: 'Two bridges', input: '{"intervals":[[1,3],[2,5],[8,10],[15,18]],"k":3}' },
     { label: 'Short bridges only', input: '{"intervals":[[0,2],[4,5],[9,11],[12,12],[20,21]],"k":4}' },
+    { label: 'Single point interval', input: '{"intervals":[[4,4]],"k":1}' },
+    { label: 'Equal intervals', input: '{"intervals":[[5,5],[5,5]],"k":1}' },
+    { label: 'Widest allowed interval', input: '{"intervals":[[0,30]],"k":0}' },
+    { label: 'Long run: 8 intervals', input: '{"intervals":[[20,23],[19,19],[9,9],[4,6],[17,19],[2,4],[0,1],[16,20]],"k":4}' },
   ],
 }
 

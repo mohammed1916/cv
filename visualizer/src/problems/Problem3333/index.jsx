@@ -21,6 +21,10 @@ const definition = {
     { label: 'Example 1', input: '{"word": "mmnnnoop", "k": 6}' },
     { label: 'Example 2', input: '{"word": "mmnnnoop", "k": 8}' },
     { label: 'Example 3', input: '{"word": "abbbcc", "k": 2}' },
+    { label: 'Single letter', input: '{"word":"a","k":1}' },
+    { label: 'Repeated letter', input: '{"word":"aaaa","k":4}' },
+    { label: 'Longest word, k = 40', input: '{"word":"abcdefghijklmnopqrstuvwxyzabcdefghijklmn","k":40}' },
+    { label: 'Long run: 40 letters', input: '{"word":"ccaabcabcbbaaabcbbabacabbbaccbcbbbbbbabb","k":7}' },
   ],
 }
 

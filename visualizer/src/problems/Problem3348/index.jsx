@@ -18,6 +18,10 @@ const definition = {
     { label: 'Raise a digit', input: '{"num":"3579","t":30}' },
     { label: 'Already fits', input: '{"num":"2468","t":64}' },
     { label: 'Impossible', input: '{"num":"7","t":11}' },
+    { label: 'Smallest input', input: '{"num":"1","t":1}' },
+    { label: 'Largest input', input: '{"num":"999999","t":1000000}' },
+    { label: 'Six digits, t = 1', input: '{"num":"123456","t":1}' },
+    { label: 'Long run: t = 907200', input: '{"num":"393016","t":907200}' },
   ],
 }
 

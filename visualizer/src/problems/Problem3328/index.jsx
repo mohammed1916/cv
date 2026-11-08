@@ -12,6 +12,10 @@ const definition = {
   examples: [
     { label: 'Three states', input: sample },
     { label: 'Too few cities', input: fewCities },
+    { label: 'Single city', input: '{"Cities":[{"state":"Solo","city":"Only"}]}' },
+    { label: 'One state, three cities', input: '{"Cities":[{"state":"Dorin","city":"Dune"},{"state":"Dorin","city":"Lake"},{"state":"Dorin","city":"Mesa"}]}' },
+    { label: 'Two states, equal city counts', input: '{"Cities":[{"state":"Ardena","city":"Town A"},{"state":"Belmar","city":"Town B"},{"state":"Ardena","city":"Town C"},{"state":"Belmar","city":"Town D"},{"state":"Ardena","city":"Town E"},{"state":"Belmar","city":"Town F"}]}' },
+    { label: 'Largest table, 14 cities', input: '{"Cities":[{"state":"Ardena","city":"Town A"},{"state":"Belmar","city":"Town B"},{"state":"Cassel","city":"Town C"},{"state":"Dorin","city":"Town D"},{"state":"Ardena","city":"Town E"},{"state":"Belmar","city":"Town F"},{"state":"Cassel","city":"Town G"},{"state":"Dorin","city":"Town H"},{"state":"Ardena","city":"Town I"},{"state":"Belmar","city":"Town J"},{"state":"Cassel","city":"Town K"},{"state":"Dorin","city":"Town L"},{"state":"Ardena","city":"Town M"},{"state":"Belmar","city":"Town N"}]}' },
   ],
 }
 

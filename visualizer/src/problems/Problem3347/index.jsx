@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Invented spread', input: '{"nums":[2,6,7],"k":1,"numOperations":2}' },
     { label: 'Equal values', input: '{"nums":[2,2,9,9,9],"k":3,"numOperations":0}' },
+    { label: 'Single value, no operations', input: '{"nums":[2],"k":0,"numOperations":0}' },
+    { label: 'Equal values, every element changed', input: '{"nums":[4,4],"k":1,"numOperations":2}' },
+    { label: 'Largest list and k', input: '{"nums":[30,1,30,1,30,1,30,1,30,1],"k":10,"numOperations":10}' },
+    { label: 'Long run: 10 values', input: '{"nums":[10,14,18,3,7,20,8,26,27,6],"k":5,"numOperations":6}' },
   ],
 }
 

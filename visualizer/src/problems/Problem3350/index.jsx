@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[4,6,1,2,5,9,3]}' },
     { label: 'Example 2', input: '{"nums":[3,3,1,2,4,2,5,6]}' },
+    { label: 'Smallest input', input: '{"nums":[1,2]}' },
+    { label: 'Equal values', input: '{"nums":[7,7]}' },
+    { label: 'Extreme values', input: '{"nums":[-100,100,-100,100]}' },
+    { label: 'Long run: 30 values', input: '{"nums":[-26,-63,-13,-35,15,-84,25,56,57,-47,35,32,50,1,-50,78,83,74,-25,-98,-8,85,62,-25,48,-55,27,20,60,-91]}' },
   ],
 }
 

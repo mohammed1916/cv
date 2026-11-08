@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"abcyy","t":2}' },
     { label: 'Example 2', input: '{"s":"azbk","t":1}' },
+    { label: 'Zero transformations', input: '{"s":"a","t":0}' },
+    { label: 'Repeated letter, one round', input: '{"s":"zzzz","t":1}' },
+    { label: 'Longest allowed s, most rounds', input: '{"s":"bpeduvsehwxegeullmfy","t":20}' },
   ],
 }
 

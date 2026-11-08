@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"target":"abc"}' },
     { label: 'Example 2', input: '{"target":"he"}' },
+    { label: 'Single letter', input: '{"target":"a"}' },
+    { label: 'Repeated letter', input: '{"target":"aaaaa"}' },
+    { label: 'Longest allowed target', input: '{"target":"zyxwv"}' },
   ],
 }
 

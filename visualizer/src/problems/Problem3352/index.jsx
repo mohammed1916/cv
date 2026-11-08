@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"s":"111","k":1}' },
     { label: 'Four bits', input: '{"s":"1000","k":2}' },
+    { label: 'Single bit', input: '{"s":"1","k":1}' },
+    { label: 'All ones', input: '{"s":"111111111111","k":6}' },
+    { label: 'Longest string, one set bit', input: '{"s":"100000000000","k":6}' },
+    { label: 'Long run: 12 bits', input: '{"s":"101001000011","k":4}' },
   ],
 }
 

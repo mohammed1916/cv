@@ -19,6 +19,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,0,2,0,3]}' },
     { label: 'Example 2', input: '{"nums":[0]}' },
+    { label: 'All zeros', input: '{"nums":[0,0,0]}' },
+    { label: 'Single value', input: '{"nums":[5]}' },
+    { label: 'Equal values, longest list', input: '{"nums":[5,5,5,5,5,5,5,5,5,5]}' },
+    { label: 'Long run: 10 values', input: '{"nums":[2,4,1,5,0,0,4,0,5,0]}' },
   ],
 }
 

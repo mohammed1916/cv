@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"abacb","k":2}' },
     { label: 'Example 2', input: '{"s":"abcde","k":1}' },
+    { label: 'Single letter', input: '{"s":"a","k":1}' },
+    { label: 'All letters distinct', input: '{"s":"abcdefghijkl","k":2}' },
+    { label: 'Longest allowed string, one repeated letter', input: '{"s":"aaaaaaaaaaaa","k":5}' },
+    { label: 'Long run: 12 letters', input: '{"s":"cbbcbacaacbb","k":3}' },
   ],
 }
 

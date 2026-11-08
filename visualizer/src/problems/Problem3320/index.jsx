@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s": "WEF"}' },
     { label: 'Example 2', input: '{"s": "EWFFE"}' },
+    { label: 'Single letter', input: '{"s":"W"}' },
+    { label: 'Repeated letters', input: '{"s":"EEEE"}' },
+    { label: 'Longest allowed string', input: '{"s":"FWEFWEFWEF"}' },
+    { label: 'Long run: 10 letters', input: '{"s":"EEEEFWEWEW"}' },
   ],
 }
 

@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Mixed letters', input: '{"s":"abacbab","k":2}' },
     { label: 'Long run', input: '{"s":"aaabb","k":3}' },
+    { label: 'Single letter', input: '{"s":"a","k":1}' },
+    { label: 'Longest allowed string, one letter', input: '{"s":"aaaaaaaaaaaaaaaaaaaa","k":10}' },
+    { label: 'All letters distinct', input: '{"s":"abcdefghijklmnopqrst","k":2}' },
+    { label: 'Long run: 20 letters', input: '{"s":"cabbaccabcabbaacaacb","k":4}' },
   ],
 }
 

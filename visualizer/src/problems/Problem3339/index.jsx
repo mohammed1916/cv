@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Small table', input: '{"n":4,"m":5,"k":2}' },
     { label: 'Single good pair', input: '{"n":3,"m":4,"k":1}' },
+    { label: 'Smallest values', input: '{"n":1,"m":1,"k":0}' },
+    { label: 'Single row, widest', input: '{"n":1,"m":30,"k":0}' },
+    { label: 'Largest allowed values', input: '{"n":12,"m":30,"k":11}' },
+    { label: 'Long run: 10 by 25', input: '{"n":10,"m":25,"k":5}' },
   ],
 }
 

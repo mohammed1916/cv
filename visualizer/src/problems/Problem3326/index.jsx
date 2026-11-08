@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[12,9,8]}' },
     { label: 'Stuck prime', input: '{"nums":[5,5,4]}' },
+    { label: 'Single value', input: '{"nums":[1]}' },
+    { label: 'Equal values', input: '{"nums":[7,7]}' },
+    { label: 'Largest allowed values', input: '{"nums":[1000000,999999,2]}' },
+    { label: 'Long run: 12 values', input: '{"nums":[845298,427526,607113,400534,729421,501695,550476,382929,581914,617508,51081,491451]}' },
   ],
 }
 

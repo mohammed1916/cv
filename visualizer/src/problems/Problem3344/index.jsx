@@ -18,6 +18,9 @@ const definition = {
   examples: [
     { label: 'Small limit', input: '{"s":50}' },
     { label: 'Medium limit', input: '{"s":1000}' },
+    { label: 'Zero limit', input: '{"s":0}' },
+    { label: 'Smallest positive limit', input: '{"s":1}' },
+    { label: 'Largest allowed limit', input: '{"s":5000}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"abcyy","t":2,"nums":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2]}' },
     { label: 'Example 2', input: '{"s":"a","t":2,"nums":[2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]}' },
+    { label: 'Zero transformations', input: '{"s":"a","t":0,"nums":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]}' },
+    { label: 'Repeated letter, largest mapping', input: '{"s":"zz","t":1,"nums":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,25]}' },
+    { label: 'Longest allowed s, t = 1000', input: '{"s":"ckbyavhuwgfc","t":1000,"nums":[11,4,25,2,13,16,9,13,10,22,19,13,21,12,22,5,3,17,15,7,7,6,1,5,18,16]}' },
+    { label: 'Long run: 777 rounds', input: '{"s":"bybcbcyyacyz","t":777,"nums":[23,8,18,4,16,25,15,25,9,20,6,2,5,11,3,8,7,22,13,23,19,20,12,9,4,25]}' },
   ],
 }
 

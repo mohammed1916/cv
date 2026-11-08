@@ -20,6 +20,10 @@ const definition = {
     { label: 'Example 1', input: '{"word": "gigaaatt"}' },
     { label: 'Example 2', input: '{"word": "quiz"}' },
     { label: 'Example 3', input: '{"word": "ooooooo"}' },
+    { label: 'Single letter', input: '{"word":"a"}' },
+    { label: 'Every letter once', input: '{"word":"abcdefghijklmnopqrstuvwxyz"}' },
+    { label: 'Longest allowed word, one letter', input: '{"word":"zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"}' },
+    { label: 'Long run: 100 letters', input: '{"word":"cabaabcbcbbbccacaccbbbabccbacbabaabbaaacacbbbbcaabcaabccaabbabbcccccaaaacaabbbcaacbacbcbccabbabbbbca"}' },
   ],
 }
 
