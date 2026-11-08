@@ -38,6 +38,18 @@ export const complexity = 'O(n log n) to sort n countries. The visualizer caps t
 export const examples = [{
   label: 'Sample',
   input: '{"Olympic":[{"country":"Norway","gold_medals":2,"silver_medals":3,"bronze_medals":0},{"country":"Brazil","gold_medals":2,"silver_medals":1,"bronze_medals":0},{"country":"Chile","gold_medals":3,"silver_medals":0,"bronze_medals":0},{"country":"Peru","gold_medals":0,"silver_medals":5,"bronze_medals":1},{"country":"Oman","gold_medals":2,"silver_medals":2,"bronze_medals":0}]}',
+}, {
+  label: 'Single country',
+  input: '{"Olympic":[{"country":"Norway","gold_medals":1,"silver_medals":0,"bronze_medals":0}]}',
+}, {
+  label: 'Equal medal counts',
+  input: '{"Olympic":[{"country":"Chile","gold_medals":1,"silver_medals":1,"bronze_medals":1},{"country":"Peru","gold_medals":1,"silver_medals":1,"bronze_medals":1},{"country":"Oman","gold_medals":1,"silver_medals":1,"bronze_medals":1}]}',
+}, {
+  label: 'Large counts',
+  input: '{"Olympic":[{"country":"Brazil","gold_medals":99,"silver_medals":99,"bronze_medals":99},{"country":"Japan","gold_medals":0,"silver_medals":0,"bronze_medals":0}]}',
+}, {
+  label: 'Long run: 12 countries',
+  input: '{"Olympic":[{"country":"Norway","gold_medals":15,"silver_medals":1,"bronze_medals":15},{"country":"Brazil","gold_medals":10,"silver_medals":7,"bronze_medals":4},{"country":"Chile","gold_medals":1,"silver_medals":9,"bronze_medals":9},{"country":"Peru","gold_medals":1,"silver_medals":6,"bronze_medals":16},{"country":"Oman","gold_medals":11,"silver_medals":10,"bronze_medals":13},{"country":"Japan","gold_medals":5,"silver_medals":11,"bronze_medals":8},{"country":"Kenya","gold_medals":10,"silver_medals":9,"bronze_medals":9},{"country":"Mali","gold_medals":15,"silver_medals":6,"bronze_medals":16},{"country":"Italy","gold_medals":5,"silver_medals":16,"bronze_medals":0},{"country":"Spain","gold_medals":11,"silver_medals":14,"bronze_medals":3},{"country":"Egypt","gold_medals":13,"silver_medals":18,"bronze_medals":4},{"country":"Fiji","gold_medals":1,"silver_medals":5,"bronze_medals":17}]}',
 }]
 
 function tableRows(input, name, columns) {

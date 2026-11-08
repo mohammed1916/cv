@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Pairs', input: '{"s":"ab*c*d"}' },
     { label: 'Cascade', input: '{"s":"xy**z"}' },
+    { label: 'Single letter', input: '{"s":"a"}' },
+    { label: 'Letter then one star', input: '{"s":"a*"}' },
+    { label: 'Three letters, three stars', input: '{"s":"abc***"}' },
+    { label: 'Long run: 30 characters', input: '{"s":"hzmbm*u*****uma*nv*hkdm*uscgpw"}' },
   ],
 }
 

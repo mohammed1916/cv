@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Official', input: '{"matrix":[[0,0,0],[1,0,1],[0,1,1],[0,0,1]],"num_select":2}' },
     { label: 'Single column', input: '{"matrix":[[1],[0]],"num_select":1}' },
+    { label: 'Single zero', input: '{"matrix":[[0]],"num_select":1}' },
+    { label: 'Full ones row', input: '{"matrix":[[1,1,1]],"num_select":3}' },
+    { label: 'Largest 6 by 6', input: '{"matrix":[[1,0,1,0,1,0],[1,0,1,0,1,0],[1,0,1,0,1,0],[1,0,1,0,1,0],[1,0,1,0,1,0],[1,0,1,0,1,0]],"num_select":6}' },
+    { label: 'Long run: 6 by 6 matrix', input: '{"matrix":[[0,1,0,0,0,0],[0,1,0,0,1,1],[0,0,1,1,0,1],[1,1,0,1,0,1],[1,0,0,1,1,1],[1,0,0,1,1,1]],"num_select":3}' },
   ],
 }
 

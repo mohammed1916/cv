@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Gap closes', input: '{"n":4,"ops":[["upload",3],["longest"],["upload",1],["longest"],["upload",2],["longest"]]}' },
     { label: 'Early', input: '{"n":3,"ops":[["upload",2],["longest"],["upload",1],["longest"],["upload",3],["longest"]]}' },
+    { label: 'Single video', input: '{"n":1,"ops":[["upload",1],["longest"]]}' },
+    { label: 'Gap blocks prefix', input: '{"n":4,"ops":[["upload",2],["longest"],["upload",1],["longest"],["upload",4],["longest"]]}' },
+    { label: 'Largest n, reverse order', input: '{"n":10,"ops":[["upload",10],["longest"],["upload",9],["longest"],["upload",8],["longest"],["upload",7],["longest"],["upload",6],["longest"],["upload",5],["longest"],["upload",4],["longest"],["upload",3],["longest"],["upload",2],["longest"],["upload",1],["longest"]]}' },
+    { label: 'Long run: 20 calls', input: '{"n":10,"ops":[["upload",2],["longest"],["upload",8],["longest"],["upload",6],["longest"],["upload",4],["longest"],["upload",8],["longest"],["upload",3],["longest"],["upload",8],["longest"],["upload",5],["longest"],["upload",10],["longest"],["upload",10],["longest"]]}' },
   ],
 }
 

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"root":[1,5,3,null,4,10,6,9,2],"start":3}' },
     { label: 'Chain', input: '{"root":[1,2,null,3,null,4,null,5],"start":3}' },
+    { label: 'Single node', input: '{"root":[1],"start":1}' },
+    { label: 'Start at the root', input: '{"root":[1,2,3],"start":1}' },
+    { label: 'Full tree of 15 nodes', input: '{"root":[100,90,80,70,60,50,40,30,20,10,95,85,75,65,55],"start":55}' },
+    { label: 'Long run: 15-slot tree', input: '{"root":[50,30,70,20,40,null,80,null,null,35,45,null,null,null,null],"start":45}' },
   ],
 }
 

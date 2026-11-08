@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '"IIIDIDDD"' },
     { label: 'All decreasing', input: '"DDD"' },
+    { label: 'Single increase', input: '"I"' },
+    { label: 'All increasing', input: '"IIII"' },
+    { label: 'Longest pattern', input: '"DIDIDIDI"' },
+    { label: 'Long run: 8 steps', input: '"DIDIIDII"' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Two coupons', input: '{"price":[10,6,8,4],"tastiness":[5,8,3,2],"maxAmount":12,"maxCoupons":2}' },
     { label: 'No coupons', input: '{"price":[7,3],"tastiness":[4,9],"maxAmount":8,"maxCoupons":0}' },
+    { label: 'Single fruit', input: '{"price":[3],"tastiness":[7],"maxAmount":3,"maxCoupons":0}' },
+    { label: 'Equal prices', input: '{"price":[4,4,4],"tastiness":[2,2,2],"maxAmount":8,"maxCoupons":1}' },
+    { label: 'Largest limits', input: '{"price":[12,12,12,12,12,12,12,12],"tastiness":[20,0,20,0,20,0,20,0],"maxAmount":24,"maxCoupons":3}' },
+    { label: 'Long run: 8 fruits', input: '{"price":[4,1,4,3,8,8,4,8],"tastiness":[0,17,8,10,20,11,12,4],"maxAmount":21,"maxCoupons":0}' },
   ],
 }
 

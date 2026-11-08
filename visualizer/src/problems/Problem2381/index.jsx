@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"abc","shifts":[[0,1,0],[1,2,1],[0,2,1]]}' },
     { label: 'Example 2', input: '{"s":"dztz","shifts":[[0,0,0],[1,1,1]]}' },
+    { label: 'Single letter', input: '{"s":"a","shifts":[[0,0,1]]}' },
+    { label: 'Forward and backward on same range', input: '{"s":"aaaa","shifts":[[0,3,1],[0,3,0]]}' },
+    { label: 'Longest string, 8 shifts', input: '{"s":"zzzzzzzzzzzzzzzzzzzz","shifts":[[0,19,0],[0,19,1],[0,19,0],[0,19,1],[0,19,0],[0,19,1],[0,19,0],[0,19,1]]}' },
+    { label: 'Long run: 20 letters, 8 shifts', input: '{"s":"dfdrbsbwjqteljuzuvsh","shifts":[[4,13,1],[5,15,1],[0,5,1],[15,17,0],[1,14,1],[7,9,1],[16,18,0],[2,6,1]]}' },
   ],
 }
 

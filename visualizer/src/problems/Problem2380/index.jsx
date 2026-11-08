@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"0110101"}' },
     { label: 'Example 2', input: '{"s":"11100"}' },
+    { label: 'Single zero', input: '{"s":"0"}' },
+    { label: 'All ones', input: '{"s":"1111"}' },
+    { label: 'Longest string of 30', input: '{"s":"101010101010101010101010101010"}' },
+    { label: 'Long run: 30 bits', input: '{"s":"100001110100010100011000000111"}' },
   ],
 }
 

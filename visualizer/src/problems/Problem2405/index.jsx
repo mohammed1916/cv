@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Mixed', input: '{"s":"kqmkwq"}' },
     { label: 'Repeats', input: '{"s":"ttttt"}' },
+    { label: 'Single letter', input: '{"s":"a"}' },
+    { label: 'Two letters repeated', input: '{"s":"abab"}' },
+    { label: 'Sixteen distinct letters', input: '{"s":"abcdefghijklmnop"}' },
+    { label: 'Long run: 16 letters', input: '{"s":"gykcicosewipxrit"}' },
   ],
 }
 

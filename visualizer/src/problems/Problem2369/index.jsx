@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[4,4,4,5,6]}' },
     { label: 'Example 2', input: '{"nums":[1,1,1,2]}' },
+    { label: 'Two equal values', input: '{"nums":[3,3]}' },
+    { label: 'All distinct values', input: '{"nums":[1,2,3,4,5,6]}' },
+    { label: 'Ten sixes', input: '{"nums":[6,6,6,6,6,6,6,6,6,6]}' },
+    { label: 'Long run: 10 values', input: '{"nums":[1,1,5,1,4,4,5,2,3,2]}' },
   ],
 }
 

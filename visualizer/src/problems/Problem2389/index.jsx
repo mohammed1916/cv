@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Mixed sizes', input: '{"nums":[6,1,3,9],"queries":[4,11,20]}' },
     { label: 'Single query', input: '{"nums":[7,7,2],"queries":[8]}' },
+    { label: 'Single number, one query', input: '{"nums":[5],"queries":[1]}' },
+    { label: 'Equal numbers', input: '{"nums":[4,4,4],"queries":[4,8,12]}' },
+    { label: 'Largest numbers and queries', input: '{"nums":[20,20,20,20,20,20,20,20],"queries":[60,1,20,40,30,10]}' },
+    { label: 'Long run: 8 numbers, 6 queries', input: '{"nums":[4,17,17,14,5,20,9,11],"queries":[38,28,28,27,33,43]}' },
   ],
 }
 

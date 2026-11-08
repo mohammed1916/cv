@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"s":"dcfgbcdef"}' },
     { label: 'Short', input: '{"s":"bcdz"}' },
+    { label: 'Single letter', input: '{"s":"a"}' },
+    { label: 'Repeated letters', input: '{"s":"aaaa"}' },
+    { label: 'Longest decreasing run', input: '{"s":"zyxwvutsrqponmlkjihgfedc"}' },
+    { label: 'Long run: 24 letters', input: '{"s":"kuqwqayqolnozugaoiniuldu"}' },
   ],
 }
 

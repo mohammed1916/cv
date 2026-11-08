@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Mixed', input: '{"players":[5,2,9,3],"trainers":[4,10,1,6]}' },
     { label: 'Weak trainers', input: '{"players":[6,6],"trainers":[2,3]}' },
+    { label: 'One player, one trainer', input: '{"players":[4],"trainers":[4]}' },
+    { label: 'Equal abilities', input: '{"players":[5,5,5],"trainers":[5,5]}' },
+    { label: 'Extremes, eight each', input: '{"players":[20,1,20,1,20,1,20,1],"trainers":[20,1,20,1,20,1,20,1]}' },
+    { label: 'Long run: 8 and 8', input: '{"players":[11,19,20,15,6,3,1,12],"trainers":[10,14,9,11,5,11,8,14]}' },
   ],
 }
 

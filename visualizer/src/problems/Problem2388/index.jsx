@@ -10,6 +10,18 @@ const examples = [{
 }, {
   label: 'Leading row',
   input: '{"CoffeeShop":[{"id":9,"drink":"mint"},{"id":10,"drink":null},{"id":11,"drink":null}]}',
+}, {
+  label: 'Single row',
+  input: '{"CoffeeShop":[{"id":1,"drink":"latte"}]}',
+}, {
+  label: 'Null drink after a drink',
+  input: '{"CoffeeShop":[{"id":5,"drink":"tea"},{"id":2,"drink":"espresso"},{"id":9,"drink":null}]}',
+}, {
+  label: 'Twelve rows, some null',
+  input: '{"CoffeeShop":[{"id":1,"drink":"tea"},{"id":2,"drink":"tea"},{"id":3,"drink":"tea"},{"id":4,"drink":null},{"id":5,"drink":"tea"},{"id":6,"drink":"tea"},{"id":7,"drink":"tea"},{"id":8,"drink":"tea"},{"id":9,"drink":null},{"id":10,"drink":"tea"},{"id":11,"drink":"tea"},{"id":12,"drink":"tea"}]}',
+}, {
+  label: 'Long run: 12 rows',
+  input: '{"CoffeeShop":[{"id":27,"drink":"tea"},{"id":69,"drink":"cocoa"},{"id":98,"drink":null},{"id":137,"drink":"chai"},{"id":151,"drink":"latte"},{"id":155,"drink":null},{"id":181,"drink":"tea"},{"id":206,"drink":"cocoa"},{"id":239,"drink":null},{"id":267,"drink":"chai"},{"id":310,"drink":"latte"},{"id":348,"drink":null}]}',
 }]
 
 const definition = {

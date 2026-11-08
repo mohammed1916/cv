@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Four values', input: '{"pref":[6,3,5,4]}' },
     { label: 'Single value', input: '{"pref":[13]}' },
+    { label: 'Single value', input: '{"pref":[0]}' },
+    { label: 'Equal values', input: '{"pref":[7,7,7,7]}' },
+    { label: 'Largest values', input: '{"pref":[15,0,15,0,15,0,15,0,15,0,15,0]}' },
+    { label: 'Long run: 12 items', input: '{"pref":[5,14,2,0,13,9,13,3,9,3,11,6]}' },
   ],
 }
 

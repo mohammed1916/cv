@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '"bdda"' },
     { label: 'Descending', input: '"zza"' },
+    { label: 'Single letter', input: '"a"' },
+    { label: 'Equal letters', input: '"aaaa"' },
+    { label: 'Longest string', input: '"zyxwvutsrq"' },
+    { label: 'Long run: 10 letters', input: '"juclzcroxx"' },
   ],
 }
 

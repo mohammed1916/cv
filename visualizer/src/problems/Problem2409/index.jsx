@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Overlap', input: '{"arriveAlice":"08-15","leaveAlice":"08-18","arriveBob":"08-16","leaveBob":"08-19"}' },
     { label: 'No overlap', input: '{"arriveAlice":"10-01","leaveAlice":"10-31","arriveBob":"11-01","leaveBob":"12-31"}' },
+    { label: 'Same single day', input: '{"arriveAlice":"06-10","leaveAlice":"06-10","arriveBob":"06-10","leaveBob":"06-10"}' },
+    { label: 'Overlap on one day', input: '{"arriveAlice":"03-01","leaveAlice":"03-05","arriveBob":"03-05","leaveBob":"03-09"}' },
+    { label: 'Whole year, both', input: '{"arriveAlice":"01-01","leaveAlice":"12-31","arriveBob":"01-01","leaveBob":"12-31"}' },
+    { label: 'Long run: months of overlap', input: '{"arriveAlice":"02-03","leaveAlice":"11-20","arriveBob":"05-14","leaveBob":"09-30"}' },
   ],
 }
 

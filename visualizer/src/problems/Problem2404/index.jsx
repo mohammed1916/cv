@@ -18,6 +18,10 @@ const definition = {
     { label: 'Example 1', input: '[0,1,2,2,4,4,1]' },
     { label: 'Example 2', input: '[1,3,5]' },
     { label: 'Example 3', input: '[29,47,21,41,13,37,25,7]' },
+    { label: 'Single zero', input: '[0]' },
+    { label: 'Repeated values', input: '[7,7,7,7]' },
+    { label: 'Extremes, 20 values', input: '[100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0]' },
+    { label: 'Long run: 20 values', input: '[19,6,76,99,46,99,14,62,95,92,96,88,54,84,21,78,7,17,7,63]' },
   ],
 }
 

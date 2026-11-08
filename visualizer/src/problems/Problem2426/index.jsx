@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Spread', input: '{"nums1":[4,1,6],"nums2":[2,2,5],"diff":1}' },
     { label: 'Zero diff', input: '{"nums1":[0,3,3],"nums2":[1,4,2],"diff":0}' },
+    { label: 'Two entries', input: '{"nums1":[9,0],"nums2":[0,9],"diff":9}' },
+    { label: 'Equal values', input: '{"nums1":[3,3,3],"nums2":[3,3,3],"diff":0}' },
+    { label: 'Largest values', input: '{"nums1":[9,0,9,0,9,0,9,0,9,0,9,0,9,0],"nums2":[0,9,0,9,0,9,0,9,0,9,0,9,0,9],"diff":9}' },
+    { label: 'Long run: 14 entries', input: '{"nums1":[1,5,5,1,0,2,3,0,5,3,1,6,4,0],"nums2":[8,9,6,3,7,6,0,1,5,2,2,1,3,9],"diff":8}' },
   ],
 }
 

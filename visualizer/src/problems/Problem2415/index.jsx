@@ -16,6 +16,10 @@ const definition = {
     { label: 'Example 1', input: '{"root":[2,3,5,8,13,21,34]}' },
     { label: 'Example 2', input: '{"root":[7,13,11]}' },
     { label: 'Four levels', input: '{"root":[0,1,2,0,0,0,0,1,1,1,1,2,2,2,2]}' },
+    { label: 'Single node', input: '{"root":[9]}' },
+    { label: 'Equal values', input: '{"root":[5,5,5]}' },
+    { label: 'Extremes, 15 nodes', input: '{"root":[100,0,100,0,100,0,100,0,100,0,100,0,100,0,100]}' },
+    { label: 'Long run: 15 nodes', input: '{"root":[56,57,46,65,99,24,62,14,12,0,48,46,71,9,38]}' },
   ],
 }
 

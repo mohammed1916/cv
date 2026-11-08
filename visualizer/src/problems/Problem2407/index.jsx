@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[4,2,1,4,3,4,5,8,15],"k":3}' },
     { label: 'Gap of 2', input: '{"nums":[1,3],"k":2}' },
+    { label: 'Single value', input: '{"nums":[7],"k":1}' },
+    { label: 'Equal values', input: '{"nums":[5,5,5,5],"k":1}' },
+    { label: 'Largest values, k five', input: '{"nums":[32,1,32,1,32,1,32,1,32,1,32,1],"k":5}' },
+    { label: 'Long run: 12 values', input: '{"nums":[20,8,18,22,13,3,23,31,17,18,6,2],"k":3}' },
   ],
 }
 

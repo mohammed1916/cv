@@ -11,6 +11,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"words":["abc","ab","bc","b"]}' },
     { label: 'Single word', input: '{"words":["abcd"]}' },
+    { label: 'Single letter', input: '{"words":["a"]}' },
+    { label: 'Duplicate words', input: '{"words":["ab","ab","ab"]}' },
+    { label: 'Longest words', input: '{"words":["abcdef","bcdef","cdef","def"]}' },
+    { label: 'Long run: 6 words', input: '{"words":["h","qummm","e","lhm","mmom","hucxx"]}' },
   ],
 }
 

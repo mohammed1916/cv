@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: "Example", input: "[[1,3,5],[2,6,9],[3,6,9]]" },
     { label: "Repeats", input: "[[1,1,2],[1,1,2],[3,3,3]]" },
+    { label: 'Single cell', input: '[[9]]' },
+    { label: 'Single row', input: '[[2,4,8]]' },
+    { label: 'All equal', input: '[[3,3,3],[3,3,3],[3,3,3]]' },
+    { label: 'Largest 5 by 5 grid', input: '[[1,2,3,4,5],[10,20,30,40,50],[60,70,80,90,100],[1,1,1,1,1],[100,100,100,100,100]]' },
+    { label: 'Long run: 5 by 5 grid', input: '[[24,32,40,40,79],[11,16,27,28,40],[23,42,54,67,95],[7,53,56,57,74],[6,23,80,87,100]]' },
   ],
 };
 

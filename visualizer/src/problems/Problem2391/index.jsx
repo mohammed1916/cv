@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Mixed houses', input: '{"garbage":["MP","G","PP","M"],"travel":[1,2,5]}' },
     { label: 'Only glass', input: '{"garbage":["GG","G","G"],"travel":[4,1]}' },
+    { label: 'Two houses', input: '{"garbage":["M","P"],"travel":[3]}' },
+    { label: 'Same garbage at both houses', input: '{"garbage":["G","G"],"travel":[2]}' },
+    { label: 'Eight dense houses', input: '{"garbage":["MPGM","PPPP","GGGG","M","P","MMMM","PG","GPM"],"travel":[10,10,10,10,10,10,10]}' },
+    { label: 'Long run: 8 houses', input: '{"garbage":["P","PMP","PMM","MMMG","MGM","PMMM","G","PPGM"],"travel":[10,5,1,4,2,10,1]}' },
   ],
 }
 

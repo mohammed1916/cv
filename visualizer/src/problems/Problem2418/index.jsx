@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Three people', input: '{"names":["Ana","Ben","Cleo"],"heights":[150,190,170]}' },
     { label: 'Two people', input: '{"names":["Dev","Eli"],"heights":[160,175]}' },
+    { label: 'Single person', input: '{"names":["Zoe"],"heights":[100]}' },
+    { label: 'Extreme heights', input: '{"names":["Ivy","Max"],"heights":[1,1000]}' },
+    { label: 'Twelve people', input: '{"names":["Ana","Bo","Cy","Dee","Eve","Fay","Gus","Hal","Ivy","Jo","Kai","Lu"],"heights":[1000,999,998,997,996,995,994,993,992,991,990,989]}' },
+    { label: 'Long run: 12 people', input: '{"names":["Ras","Dqp","Yut","Vxo","Kgg","Vxe","Kho","Ieq","Zde","Nel","Qmw","Yvy"],"heights":[417,50,580,558,712,106,606,332,251,547,148,936]}' },
   ],
 }
 

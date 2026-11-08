@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Six steps', input: '{"start_pos":3,"end_pos":7,"k":6}' },
     { label: 'Unreachable', input: '{"start_pos":9,"end_pos":2,"k":4}' },
+    { label: 'Start equals end', input: '{"start_pos":5,"end_pos":5,"k":1}' },
+    { label: 'Exact two-step move', input: '{"start_pos":10,"end_pos":12,"k":2}' },
+    { label: 'Opposite ends, maximum k', input: '{"start_pos":1,"end_pos":40,"k":40}' },
+    { label: 'Long run: 33-cell gap', input: '{"start_pos":37,"end_pos":4,"k":39}' },
   ],
 }
 

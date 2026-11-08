@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"initial_energy":5,"initial_experience":3,"energy":[1,4,3,2],"experience":[2,6,3,1]}' },
     { label: 'Already strong', input: '{"initial_energy":2,"initial_experience":4,"energy":[1],"experience":[3]}' },
+    { label: 'Single opponent', input: '{"initial_energy":10,"initial_experience":10,"energy":[3],"experience":[2]}' },
+    { label: 'Equal opponents', input: '{"initial_energy":4,"initial_experience":4,"energy":[4,4],"experience":[4,4]}' },
+    { label: 'Largest energy, eight opponents', input: '{"initial_energy":50,"initial_experience":1,"energy":[20,20,20,20,20,20,20,20],"experience":[20,20,20,20,20,20,20,20]}' },
+    { label: 'Long run: 8 opponents', input: '{"initial_energy":25,"initial_experience":25,"energy":[9,6,5,16,3,16,19,4],"experience":[16,5,14,1,19,6,9,13]}' },
   ],
 }
 

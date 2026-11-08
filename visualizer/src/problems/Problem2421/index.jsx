@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"vals":[2,2,1],"edges":[[0,1],[1,2]]}' },
     { label: 'Chain', input: '{"vals":[3,1,3,2],"edges":[[0,1],[1,2],[2,3]]}' },
+    { label: 'Single node', input: '{"vals":[4],"edges":[]}' },
+    { label: 'Equal values', input: '{"vals":[2,2,2,2],"edges":[[0,1],[0,2],[0,3]]}' },
+    { label: 'Largest values', input: '{"vals":[5,0,5,0,5,0,5,0,5,0],"edges":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9]]}' },
+    { label: 'Long run: 10 nodes', input: '{"vals":[0,0,4,0,2,4,2,3,0,5],"edges":[[0,1],[0,2],[2,3],[0,4],[2,5],[4,6],[2,7],[4,8],[0,9]]}' },
   ],
 }
 

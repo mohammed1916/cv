@@ -16,6 +16,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"edges": [2,2,3,-1], "first": 0, "second": 1}' },
     { label: 'Example 2', input: '{"edges": [1,2,-1], "first": 0, "second": 2}' },
+    { label: 'Two nodes in a chain', input: '{"edges":[1,-1],"first":0,"second":1}' },
+    { label: 'No shared node', input: '{"edges":[1,0,-1,-1],"first":2,"second":3}' },
+    { label: 'Same start node', input: '{"edges":[1,2,0],"first":0,"second":0}' },
+    { label: 'Longest chain, 12 nodes', input: '{"edges":[1,2,3,4,5,6,7,8,9,10,11,-1],"first":0,"second":5}' },
+    { label: 'Long run: 12 nodes', input: '{"edges":[-1,-1,-1,6,1,6,-1,-1,-1,-1,-1,0],"first":11,"second":2}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Match', input: '{"nums":[1,2,1,2]}' },
     { label: 'No match', input: '{"nums":[1,2,4,8,16]}' },
+    { label: 'Two equal values', input: '{"nums":[1,1]}' },
+    { label: 'All zeros', input: '{"nums":[0,0,0,0]}' },
+    { label: 'Extremes, 12 values', input: '{"nums":[9,-9,9,-9,9,-9,9,-9,9,-9,9,-9]}' },
+    { label: 'Long run: 12 values', input: '{"nums":[2,8,-3,-9,6,-4,-5,-7,-7,-2,-6,7]}' },
   ],
 }
 

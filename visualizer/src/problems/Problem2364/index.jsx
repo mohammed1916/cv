@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Official', input: '{"nums":[4,1,3,3]}' },
     { label: 'No bad pairs', input: '{"nums":[1,2,3,4,5]}' },
+    { label: 'Single element', input: '{"nums":[0]}' },
+    { label: 'Equal keys', input: '{"nums":[2,3,4,5]}' },
+    { label: 'Extremes at max length', input: '{"nums":[20,0,20,0,20,0,20,0,20,0,20,0]}' },
+    { label: 'Long run: 12 items', input: '{"nums":[15,6,8,4,19,1,12,16,11,11,15,4]}' },
   ],
 }
 

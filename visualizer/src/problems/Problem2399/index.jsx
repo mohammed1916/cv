@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"abaccb","distance":[1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}' },
     { label: 'Example 2', input: '{"s":"aa","distance":[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}' },
+    { label: 'Pair of z', input: '{"s":"zz","distance":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}' },
+    { label: 'Equal distances', input: '{"s":"aabb","distance":[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5]}' },
+    { label: 'All 26 letters, maximum distances', input: '{"s":"abcdefghijklmnopqrstuvwxyzzyxwvutsrqponmlkjihgfedcba","distance":[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50]}' },
+    { label: 'Long run: 52 characters', input: '{"s":"qxrgwcvcyoivpjfeodhazdutbpzksnxjmrqwknbmsilyhglateuf","distance":[16,40,43,36,20,35,5,22,10,16,13,30,34,2,36,43,11,41,0,3,49,13,0,38,14,28]}' },
   ],
 }
 

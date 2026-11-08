@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":7,"edges":[[0,1],[1,2],[3,1],[4,0],[0,5],[5,6]],"restricted":[4,5]}' },
     { label: 'Example 2', input: '{"n":7,"edges":[[0,1],[0,2],[0,5],[0,4],[3,2],[6,5]],"restricted":[4,2,1]}' },
+    { label: 'Two nodes, one restricted', input: '{"n":2,"edges":[[0,1]],"restricted":[1]}' },
+    { label: 'No restricted nodes', input: '{"n":4,"edges":[[0,1],[0,2],[0,3]],"restricted":[]}' },
+    { label: 'Path of 12 nodes', input: '{"n":12,"edges":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11]],"restricted":[1]}' },
+    { label: 'Long run: 12 nodes', input: '{"n":12,"edges":[[0,1],[1,2],[0,3],[1,4],[0,5],[1,6],[4,7],[0,8],[6,9],[0,10],[4,11]],"restricted":[5,9,11]}' },
   ],
 }
 

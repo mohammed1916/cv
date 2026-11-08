@@ -20,6 +20,10 @@ const definition = {
   examples: [
     { label: 'Mixed digits', input: '{"num":"444947137"}' },
     { label: 'Only zeros', input: '{"num":"00009"}' },
+    { label: 'Single digit', input: '{"num":"7"}' },
+    { label: 'Repeated digits', input: '{"num":"5555"}' },
+    { label: 'Thirty nines', input: '{"num":"999999999999999999999999999999"}' },
+    { label: 'Long run: 30 digits', input: '{"num":"783853180599791060645111152905"}' },
   ],
 }
 

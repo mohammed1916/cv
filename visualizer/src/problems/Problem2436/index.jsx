@@ -18,6 +18,10 @@ const definition = {
     { label: 'Mixed', input: '[6,10,15,7,9]' },
     { label: 'Blocked by one', input: '[12,18,1,8]' },
     { label: 'Singletons', input: '[5,7,11]' },
+    { label: 'Single value', input: '[42]' },
+    { label: 'Equal values', input: '[12,12,12,12]' },
+    { label: 'Largest values', input: '[60,1,60,1,60,1,60,1,60,1]' },
+    { label: 'Long run: 10 items', input: '[25,37,1,17,13,4,16,11,31,17]' },
   ],
 }
 

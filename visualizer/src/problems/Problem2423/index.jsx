@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '"abcc"' },
     { label: 'Example 2', input: '"aazz"' },
+    { label: 'Shortest word', input: '"ab"' },
+    { label: 'Equal letters', input: '"aabb"' },
+    { label: 'Longest word', input: '"zyxwvutsrqpo"' },
+    { label: 'Long run: 12 letters', input: '"dvqxruyepgeu"' },
   ],
 }
 

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: "Example", input: '{"parents":[-1,0,0,1,1,2],"weights":[0,4,-3,6,2,5]}' },
     { label: "Skip negative", input: '{"parents":[-1,0,0],"weights":[0,-4,-7]}' },
+    { label: 'Only the root', input: '{"parents":[-1],"weights":[9]}' },
+    { label: 'All zero weights', input: '{"parents":[-1,0,0],"weights":[0,0,0]}' },
+    { label: 'Extreme weights, chain of 10', input: '{"parents":[-1,0,1,2,3,4,5,6,7,8],"weights":[100,-100,100,-100,100,-100,100,-100,100,-100]}' },
+    { label: 'Long run: 10 nodes', input: '{"parents":[-1,0,1,2,0,3,3,0,7,1],"weights":[-75,-44,-86,72,12,89,49,56,60,-46]}' },
   ],
 };
 

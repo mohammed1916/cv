@@ -16,6 +16,9 @@ const definition = {
     { label: "Example", input: "2" },
     { label: "Already fair", input: "10" },
     { label: "Hundreds", input: "999" },
+    { label: 'Smallest n', input: '1' },
+    { label: 'Largest n', input: '1000' },
+    { label: 'Long run: n = 777', input: '777' },
   ],
 };
 

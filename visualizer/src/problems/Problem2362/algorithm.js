@@ -49,6 +49,18 @@ export const complexity = 'O(n + m) to join and total, plus O(k) to find the max
 export const examples = [{
   label: 'Sample',
   input: '{"Products":[{"product_id":1,"price":120},{"product_id":2,"price":75},{"product_id":3,"price":40}],"Purchases":[{"invoice_id":1,"product_id":1,"quantity":2},{"invoice_id":1,"product_id":2,"quantity":1},{"invoice_id":2,"product_id":3,"quantity":4},{"invoice_id":2,"product_id":1,"quantity":3},{"invoice_id":3,"product_id":1,"quantity":5}]}',
+}, {
+  label: 'One purchase',
+  input: '{"Products":[{"product_id":1,"price":10}],"Purchases":[{"invoice_id":1,"product_id":1,"quantity":2}]}',
+}, {
+  label: 'Equal invoice totals',
+  input: '{"Products":[{"product_id":1,"price":10},{"product_id":2,"price":5}],"Purchases":[{"invoice_id":1,"product_id":1,"quantity":1},{"invoice_id":2,"product_id":2,"quantity":2}]}',
+}, {
+  label: 'Largest input: 12 purchases',
+  input: '{"Products":[{"product_id":1,"price":100},{"product_id":2,"price":99},{"product_id":3,"price":98},{"product_id":4,"price":97},{"product_id":5,"price":96},{"product_id":6,"price":95},{"product_id":7,"price":94},{"product_id":8,"price":93},{"product_id":9,"price":92},{"product_id":10,"price":91},{"product_id":11,"price":90},{"product_id":12,"price":89}],"Purchases":[{"invoice_id":1,"product_id":1,"quantity":100},{"invoice_id":2,"product_id":2,"quantity":100},{"invoice_id":3,"product_id":3,"quantity":100},{"invoice_id":4,"product_id":4,"quantity":100},{"invoice_id":5,"product_id":5,"quantity":100},{"invoice_id":6,"product_id":6,"quantity":100},{"invoice_id":7,"product_id":7,"quantity":100},{"invoice_id":8,"product_id":8,"quantity":100},{"invoice_id":9,"product_id":9,"quantity":100},{"invoice_id":10,"product_id":10,"quantity":100},{"invoice_id":11,"product_id":11,"quantity":100},{"invoice_id":12,"product_id":12,"quantity":100}]}',
+}, {
+  label: 'Long run: 12 purchases',
+  input: '{"Products":[{"product_id":1,"price":16},{"product_id":2,"price":53},{"product_id":3,"price":11},{"product_id":4,"price":11},{"product_id":5,"price":58},{"product_id":6,"price":72}],"Purchases":[{"invoice_id":2,"product_id":4,"quantity":1},{"invoice_id":2,"product_id":3,"quantity":3},{"invoice_id":4,"product_id":1,"quantity":3},{"invoice_id":2,"product_id":3,"quantity":2},{"invoice_id":3,"product_id":2,"quantity":8},{"invoice_id":4,"product_id":3,"quantity":6},{"invoice_id":2,"product_id":5,"quantity":6},{"invoice_id":2,"product_id":2,"quantity":3},{"invoice_id":2,"product_id":3,"quantity":7},{"invoice_id":3,"product_id":4,"quantity":2},{"invoice_id":4,"product_id":5,"quantity":1},{"invoice_id":3,"product_id":3,"quantity":4}]}',
 }]
 
 function tableRows(input, name, columns) {

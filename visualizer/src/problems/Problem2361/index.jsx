@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: "Example", input: '{"regular":[4,2,8,3],"express":[1,6,2,9],"expressCost":5}' },
     { label: "Switch once", input: '{"regular":[3,9,2],"express":[8,1,4],"expressCost":2}' },
+    { label: 'One stop', input: '{"regular":[5],"express":[3],"expressCost":1}' },
+    { label: 'Equal lines', input: '{"regular":[2,2,2],"express":[2,2,2],"expressCost":2}' },
+    { label: 'Largest input: 20 stops', input: '{"regular":[100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100],"express":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"expressCost":100}' },
+    { label: 'Long run: 20 stops', input: '{"regular":[16,44,42,7,92,97,3,68,59,22,5,58,99,13,9,97,31,20,35,34],"express":[19,39,82,56,19,39,100,68,52,61,68,27,76,7,20,24,99,92,21,50],"expressCost":37}' },
   ],
 };
 

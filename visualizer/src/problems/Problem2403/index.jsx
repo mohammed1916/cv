@@ -18,6 +18,9 @@ const definition = {
     { label: 'Staircase', input: '[7,3,9,5]' },
     { label: 'Flat powers', input: '[1,1,1]' },
     { label: 'Mixed', input: '[4,12,6,2,9]' },
+    { label: 'Single monster', input: '[9]' },
+    { label: 'Largest powers', input: '[60,1,60,1,60,1]' },
+    { label: 'Long run: 6 monsters', input: '[38,55,39,41,32,11]' },
   ],
 }
 

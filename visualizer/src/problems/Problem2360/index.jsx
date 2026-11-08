@@ -16,6 +16,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"edges":[3,3,4,2,3]}' },
     { label: 'Example 2', input: '{"edges":[2,-1,3,1]}' },
+    { label: 'One node, no edge', input: '{"edges":[-1]}' },
+    { label: 'Self loop', input: '{"edges":[0]}' },
+    { label: 'Two-node cycle', input: '{"edges":[1,0]}' },
+    { label: 'Largest cycle: 12 nodes', input: '{"edges":[1,2,3,4,5,6,7,8,9,10,11,0]}' },
+    { label: 'Long run: 12 nodes', input: '{"edges":[-1,8,-1,2,9,-1,-1,10,-1,-1,5,-1]}' },
   ],
 }
 

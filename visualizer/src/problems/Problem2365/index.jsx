@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"tasks":[1,2,1,2,3,1],"space":3}' },
     { label: 'Tight', input: '{"tasks":[5,5,5],"space":1}' },
+    { label: 'Single task', input: '{"tasks":[7],"space":1}' },
+    { label: 'Equal task types', input: '{"tasks":[4,4,4,4],"space":4}' },
+    { label: 'Largest space', input: '{"tasks":[20,1,20,1,20],"space":20}' },
+    { label: 'Long run: 24 tasks', input: '{"tasks":[6,3,9,9,19,4,17,15,1,11,20,10,16,20,9,4,15,19,2,14,20,7,9,4],"space":5}' },
   ],
 }
 

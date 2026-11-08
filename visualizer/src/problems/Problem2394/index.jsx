@@ -7,6 +7,18 @@ const complexity = 'O(n + m) after grouping the log sessions by employee. The vi
 const examples = [{
   label: 'Sample',
   input: '{"Employees":[{"employee_id":1,"needed_hours":1},{"employee_id":2,"needed_hours":1},{"employee_id":3,"needed_hours":1}],"Logs":[{"employee_id":1,"in_time":0,"out_time":50},{"employee_id":1,"in_time":100,"out_time":190},{"employee_id":2,"in_time":0,"out_time":3599}]}',
+}, {
+  label: 'Single employee, no logs',
+  input: '{"Employees":[{"employee_id":1,"needed_hours":0}],"Logs":[]}',
+}, {
+  label: 'Overlapping sessions',
+  input: '{"Employees":[{"employee_id":1,"needed_hours":2},{"employee_id":2,"needed_hours":2}],"Logs":[{"employee_id":1,"in_time":0,"out_time":7200},{"employee_id":1,"in_time":3600,"out_time":10800},{"employee_id":2,"in_time":0,"out_time":0}]}',
+}, {
+  label: 'Full day boundary',
+  input: '{"Employees":[{"employee_id":1,"needed_hours":24}],"Logs":[{"employee_id":1,"in_time":0,"out_time":86400}]}',
+}, {
+  label: 'Long run: 12 employees and logs',
+  input: '{"Employees":[{"employee_id":1,"needed_hours":2},{"employee_id":2,"needed_hours":6},{"employee_id":3,"needed_hours":5},{"employee_id":4,"needed_hours":2},{"employee_id":5,"needed_hours":4},{"employee_id":6,"needed_hours":8},{"employee_id":7,"needed_hours":4},{"employee_id":8,"needed_hours":0},{"employee_id":9,"needed_hours":2},{"employee_id":10,"needed_hours":8},{"employee_id":11,"needed_hours":4},{"employee_id":12,"needed_hours":2}],"Logs":[{"employee_id":7,"in_time":13568,"out_time":15212},{"employee_id":10,"in_time":2125,"out_time":3839},{"employee_id":4,"in_time":12050,"out_time":12691},{"employee_id":2,"in_time":1155,"out_time":2295},{"employee_id":9,"in_time":39154,"out_time":40625},{"employee_id":8,"in_time":18067,"out_time":18146},{"employee_id":6,"in_time":11331,"out_time":14193},{"employee_id":11,"in_time":15846,"out_time":16384},{"employee_id":12,"in_time":38183,"out_time":40786},{"employee_id":2,"in_time":39835,"out_time":42509},{"employee_id":2,"in_time":36284,"out_time":37729},{"employee_id":10,"in_time":16620,"out_time":17963}]}',
 }]
 
 const definition = {

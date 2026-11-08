@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Two valleys', input: '{"nums":[9,7,4,4,6,8,8,3,5],"k":2}' },
     { label: 'Short', input: '{"nums":[3,3,1,5],"k":1}' },
+    { label: 'Smallest pair', input: '{"nums":[5,5],"k":1}' },
+    { label: 'Equal values', input: '{"nums":[4,4,4,4,4],"k":2}' },
+    { label: 'Largest values', input: '{"nums":[1,10,1,10,1,10,1,10,1,10,1,10],"k":5}' },
+    { label: 'Long run: 12 items', input: '{"nums":[1,2,8,7,4,4,6,3,8,2,3,9],"k":3}' },
   ],
 }
 

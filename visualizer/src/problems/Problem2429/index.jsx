@@ -11,6 +11,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"num1":3,"num2":5}' },
     { label: 'Example 2', input: '{"num1":1,"num2":12}' },
+    { label: 'Smallest values', input: '{"num1":1,"num2":1}' },
+    { label: 'Equal values', input: '{"num1":10,"num2":10}' },
+    { label: 'Largest values', input: '{"num1":1023,"num2":1023}' },
+    { label: 'Long run: large mixed values', input: '{"num1":646,"num2":646}' },
   ],
 }
 

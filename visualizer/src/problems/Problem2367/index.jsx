@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[0,1,4,6,7,10],"diff":3}' },
     { label: 'Example 2', input: '{"nums":[4,5,6,7,8,9],"diff":2}' },
+    { label: 'Shortest sequence', input: '{"nums":[0,5,10],"diff":5}' },
+    { label: 'Every gap equals diff', input: '{"nums":[1,3,5,7,9,11],"diff":2}' },
+    { label: 'Largest value and diff', input: '{"nums":[0,20,200],"diff":20}' },
+    { label: 'Long run: 20 values', input: '{"nums":[0,8,11,16,24,29,33,41,43,46,53,54,60,65,68,72,81,84,93,97],"diff":4}' },
   ],
 }
 

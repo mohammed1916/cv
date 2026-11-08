@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[1,2,3,3,2,2]}' },
     { label: 'Ties', input: '{"nums":[5,5,5]}' },
+    { label: 'Single value', input: '{"nums":[3]}' },
+    { label: 'Alternating values', input: '{"nums":[7,1,7,1,7,1,7]}' },
+    { label: 'Twelve values, all seven values', input: '{"nums":[1,2,3,4,5,6,7,7,6,5,4,3]}' },
+    { label: 'Long run: 12 values', input: '{"nums":[2,5,4,2,7,4,2,2,6,2,6,6]}' },
   ],
 }
 

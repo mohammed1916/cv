@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"time":"?5:00"}' },
     { label: 'Example 2', input: '{"time":"0?:0?"}' },
+    { label: 'All unknown', input: '{"time":"??:??"}' },
+    { label: 'Equal digits', input: '{"time":"11:11"}' },
+    { label: 'Largest time', input: '{"time":"23:59"}' },
+    { label: 'Mixed unknowns', input: '{"time":"?9:5?"}' },
   ],
 }
 

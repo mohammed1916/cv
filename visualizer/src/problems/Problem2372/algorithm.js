@@ -43,6 +43,18 @@ export const complexity = 'O(n + m + s) with a customer-to-salesperson lookup ma
 export const examples = [{
   label: 'Sample',
   input: '{"Salesperson":[{"salesperson_id":1,"name":"Ana"},{"salesperson_id":2,"name":"Ben"},{"salesperson_id":3,"name":"Cy"}],"Customer":[{"customer_id":10,"salesperson_id":1},{"customer_id":11,"salesperson_id":1},{"customer_id":12,"salesperson_id":2}],"Sales":[{"sale_id":1,"customer_id":10,"price":100},{"sale_id":2,"customer_id":11,"price":50},{"sale_id":3,"customer_id":12,"price":30},{"sale_id":4,"customer_id":10,"price":20}]}',
+}, {
+  label: 'Single salesperson',
+  input: '{"Salesperson":[{"salesperson_id":1,"name":"Ada"}],"Customer":[{"customer_id":7,"salesperson_id":1}],"Sales":[{"sale_id":1,"customer_id":7,"price":500}]}',
+}, {
+  label: 'Salesperson with zero sales',
+  input: '{"Salesperson":[{"salesperson_id":1,"name":"Ada"},{"salesperson_id":2,"name":"Ben"}],"Customer":[{"customer_id":7,"salesperson_id":1},{"customer_id":8,"salesperson_id":2}],"Sales":[{"sale_id":1,"customer_id":7,"price":10}]}',
+}, {
+  label: 'Equal totals keep both rows',
+  input: '{"Salesperson":[{"salesperson_id":1,"name":"Ada"},{"salesperson_id":2,"name":"Ben"}],"Customer":[{"customer_id":7,"salesperson_id":1},{"customer_id":8,"salesperson_id":2}],"Sales":[{"sale_id":1,"customer_id":7,"price":30},{"sale_id":2,"customer_id":8,"price":30}]}',
+}, {
+  label: 'Long run: 12 sales',
+  input: '{"Salesperson":[{"salesperson_id":1,"name":"Ada"},{"salesperson_id":2,"name":"Ben"},{"salesperson_id":3,"name":"Cy"},{"salesperson_id":4,"name":"Dee"},{"salesperson_id":5,"name":"Eli"},{"salesperson_id":6,"name":"Fay"}],"Customer":[{"customer_id":100,"salesperson_id":1},{"customer_id":101,"salesperson_id":4},{"customer_id":102,"salesperson_id":1},{"customer_id":103,"salesperson_id":6},{"customer_id":104,"salesperson_id":1},{"customer_id":105,"salesperson_id":6},{"customer_id":106,"salesperson_id":2},{"customer_id":107,"salesperson_id":1},{"customer_id":108,"salesperson_id":6},{"customer_id":109,"salesperson_id":3},{"customer_id":110,"salesperson_id":2},{"customer_id":111,"salesperson_id":1}],"Sales":[{"sale_id":1,"customer_id":111,"price":159},{"sale_id":2,"customer_id":103,"price":168},{"sale_id":3,"customer_id":104,"price":410},{"sale_id":4,"customer_id":104,"price":339},{"sale_id":5,"customer_id":101,"price":29},{"sale_id":6,"customer_id":108,"price":278},{"sale_id":7,"customer_id":110,"price":385},{"sale_id":8,"customer_id":109,"price":166},{"sale_id":9,"customer_id":110,"price":334},{"sale_id":10,"customer_id":108,"price":498},{"sale_id":11,"customer_id":103,"price":299},{"sale_id":12,"customer_id":104,"price":409}]}',
 }]
 
 function tableRows(input, name, columns) {

@@ -19,6 +19,10 @@ const definition = {
   examples: [
     { label: 'Two chains', input: '{"k":3,"row_conditions":[[2,1],[3,1]],"col_conditions":[[1,3]]}' },
     { label: 'Cycle', input: '{"k":3,"row_conditions":[[1,2],[2,3],[3,1]],"col_conditions":[[2,1]]}' },
+    { label: 'Single value', input: '{"k":1,"row_conditions":[],"col_conditions":[]}' },
+    { label: 'Repeated row condition', input: '{"k":2,"row_conditions":[[1,2],[1,2]],"col_conditions":[[2,1]]}' },
+    { label: 'Largest k, chain of conditions', input: '{"k":6,"row_conditions":[[1,2],[2,3],[3,4],[4,5],[5,6]],"col_conditions":[[6,1],[2,6],[3,5]]}' },
+    { label: 'Long run: 8 pairs each', input: '{"k":6,"row_conditions":[[3,4],[6,3],[3,5],[2,6],[5,2],[5,3],[3,2],[5,2]],"col_conditions":[[5,1],[3,4],[2,6],[4,2],[1,6],[1,4],[6,5],[3,5]]}' },
   ],
 }
 

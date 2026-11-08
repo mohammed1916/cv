@@ -16,6 +16,10 @@ const definition = {
   complexity: 'O(log n + q * log n) time for q queries, since at most 30 powers exist.',
   examples: [
     { label: 'Example 1', input: '{"n": 15, "queries": [[0,1],[2,2],[0,3]]}' },
+    { label: 'Single bit', input: '{"n":1,"queries":[[0,0]]}' },
+    { label: 'Repeated query', input: '{"n":8,"queries":[[0,0],[0,0]]}' },
+    { label: 'Largest n', input: '{"n":1000,"queries":[[0,5],[1,4]]}' },
+    { label: 'Long run: 10 queries', input: '{"n":736,"queries":[[1,3],[0,1],[0,3],[3,3],[2,3],[1,3],[3,3],[1,3],[0,0],[2,2]]}' },
   ],
 }
 

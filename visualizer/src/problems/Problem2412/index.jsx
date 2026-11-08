@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Mixed', input: '{"transactions":[[4,2],[1,3],[6,6]]}' },
     { label: 'Pure loss', input: '{"transactions":[[7,1],[3,0]]}' },
+    { label: 'Single break-even', input: '{"transactions":[[5,5]]}' },
+    { label: 'Identical transactions', input: '{"transactions":[[4,2],[4,2],[4,2]]}' },
+    { label: 'Extreme costs and cashbacks', input: '{"transactions":[[20,0],[1,20],[20,20],[1,0],[10,10],[20,19],[1,1],[15,0]]}' },
+    { label: 'Long run: 8 transactions', input: '{"transactions":[[16,20],[18,18],[10,16],[19,17],[20,1],[1,13],[2,12],[6,8]]}' },
   ],
 }
 

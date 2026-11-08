@@ -11,6 +11,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s": "abcabcdabc"}' },
     { label: 'Example 2', input: '{"s": "aaabaab"}' },
+    { label: 'Single letter', input: '{"s":"a"}' },
+    { label: 'Equal letters', input: '{"s":"aaaaaa"}' },
+    { label: 'Longest string', input: '{"s":"abcdefghijklmnopqrstuvwxyzabcdefghijklmn"}' },
+    { label: 'Long run: 40 letters', input: '{"s":"hehumemisdtnxbmxtpljagikiejgeufcydvxpopy"}' },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Sliding window', input: '{"charge_times":[4,2,7,5,1],"running_costs":[1,3,2,2,6],"budget":24}' },
     { label: 'No robot fits', input: '{"charge_times":[11,12,19],"running_costs":[10,8,7],"budget":19}' },
+    { label: 'Single robot', input: '{"charge_times":[5],"running_costs":[2],"budget":7}' },
+    { label: 'Identical robots', input: '{"charge_times":[3,3,3],"running_costs":[2,2,2],"budget":9}' },
+    { label: 'Extreme values, large budget', input: '{"charge_times":[100,1,100,1],"running_costs":[100,100,1,1],"budget":1000}' },
+    { label: 'Long run: 12 robots', input: '{"charge_times":[2,19,16,6,3,15,40,59,26,99,81,52],"running_costs":[34,70,69,11,53,43,48,70,93,67,16,45],"budget":500}' },
   ],
 }
 

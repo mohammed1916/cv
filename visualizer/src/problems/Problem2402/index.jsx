@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Tight rooms', input: '{"n":2,"meetings":[[0,4],[1,2],[3,6],[5,7]]}' },
     { label: 'Three rooms', input: '{"n":3,"meetings":[[1,9],[2,5],[3,4],[6,8],[10,12]]}' },
+    { label: 'One room, one meeting', input: '{"n":1,"meetings":[[0,1]]}' },
+    { label: 'Equal end times', input: '{"n":2,"meetings":[[0,5],[1,5],[2,5]]}' },
+    { label: 'Longest spans, five rooms', input: '{"n":5,"meetings":[[0,40],[1,39],[2,38],[3,37],[4,36],[5,35],[6,34],[7,33],[8,32],[30,31]]}' },
+    { label: 'Long run: 10 meetings', input: '{"n":3,"meetings":[[19,25],[8,9],[29,30],[22,39],[28,34],[26,38],[18,20],[6,20],[11,18],[9,39]]}' },
   ],
 }
 

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Shared factors', input: '{"a":18,"b":24}' },
     { label: 'Sevens', input: '{"a":35,"b":14}' },
+    { label: 'Smallest values', input: '{"a":1,"b":1}' },
+    { label: 'Equal values', input: '{"a":36,"b":36}' },
+    { label: 'Largest values', input: '{"a":60,"b":48}' },
+    { label: 'Long run: large mixed values', input: '{"a":44,"b":49}' },
   ],
 }
 

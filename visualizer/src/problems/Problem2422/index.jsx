@@ -16,6 +16,10 @@ const definition = {
     { label: "Example", input: "[4,3,2,1,2,3,1]" },
     { label: "Already palindrome", input: "[1,2,1]" },
     { label: "Two values", input: "[1,2]" },
+    { label: 'Single value', input: '[7]' },
+    { label: 'Equal values', input: '[5,5,5,5]' },
+    { label: 'Largest values', input: '[100,1,100,1,100,1,100,1,100,1,100,1]' },
+    { label: 'Long run: 12 items', input: '[12,92,70,48,55,30,14,86,31,57,54,82]' },
   ],
 };
 
