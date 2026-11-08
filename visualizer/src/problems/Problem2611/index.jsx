@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"reward1":[1,1,3,4],"reward2":[4,4,1,1],"k":2}' },
     { label: 'Example 2', input: '{"reward1":[1,1],"reward2":[3,4],"k":1}' },
+    { label: 'Single cheese type, none chosen', input: '{"reward1":[7],"reward2":[2],"k":0}' },
+    { label: 'Equal rewards tie', input: '{"reward1":[5,5],"reward2":[5,5],"k":1}' },
+    { label: 'Alternating reward limits, all chosen', input: '{"reward1":[1000,1,1000,1,1000,1,1000,1,1000,1,1000,1],"reward2":[1,1000,1,1000,1,1000,1,1000,1,1000,1,1000],"k":12}' },
+    { label: 'Long run: twelve types', input: '{"reward1":[703,366,657,264,899,562,357,476,327,46,809,280],"reward2":[228,71,998,345,384,987,18,189,892,447,630,857],"k":6}' },
   ],
 }
 

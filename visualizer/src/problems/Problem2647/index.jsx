@@ -13,6 +13,9 @@ const definition = {
     { label: 'Side 6', input: '{"n":6}' },
     { label: 'Single cell', input: '{"n":1}' },
     { label: 'Side 9', input: '{"n":9}' },
+    { label: 'Side 2', input: '{"n":2}' },
+    { label: 'Side 11', input: '{"n":11}' },
+    { label: 'Largest side: 12', input: '{"n":12}' },
   ],
 }
 

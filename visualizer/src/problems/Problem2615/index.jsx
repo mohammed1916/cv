@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,3,1,1,2]}' },
     { label: 'Example 2', input: '{"nums":[0,5,3]}' },
+    { label: 'Single zero', input: '{"nums":[0]}' },
+    { label: 'Equal values', input: '{"nums":[3,3,3]}' },
+    { label: 'Alternating limit values', input: '{"nums":[5,0,5,0,5,0,5,0,5,0,5,0]}' },
+    { label: 'Long run: twelve values', input: '{"nums":[4,1,2,5,0,5,2,3,2,1,2,1]}' },
   ],
 }
 

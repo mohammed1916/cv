@@ -13,6 +13,10 @@ const definition = {
     { label: 'Order and length matter', input: '{"fn":"add","calls":[[3,4],[4,3],[3,4],[3],[3,4,0]]}' },
     { label: 'Shared vs new objects', input: '{"fn":"merge","objects":{"cart":{"apples":2}},"calls":[["@cart",{"pears":1}],["@cart",{"pears":1}],["@cart","@cart"],["@cart","@cart"]]}' },
     { label: 'No arguments, 1 vs "1"', input: '{"fn":"list","calls":[[],[],[1],["1"],[1]]}' },
+    { label: 'Single call with no arguments', input: '{"fn":"list","calls":[[]]}' },
+    { label: 'Equal numbers repeated', input: '{"fn":"add","calls":[[2,2],[2,2],[0]]}' },
+    { label: 'Shared references and new objects', input: '{"fn":"merge","objects":{"a":{"x":1},"b":{"y":2}},"calls":[["@a","@b"],["@a",{"z":3}],["@b"]]}' },
+    { label: 'Long run: fourteen calls', input: '{"fn":"add","calls":[[0,0,0,7],[1,-1,2,7],[2,-2,4,7],[3,-3,6,7],[4,-4,8,7],[5,-5,10,7],[6,-6,12,7],[7,-7,14,7],[8,-8,16,7],[9,-9,18,7],[10,-10,20,7],[11,-11,22,7],[12,-12,24,7],[13,-13,26,7]]}' },
   ],
 }
 

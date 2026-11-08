@@ -17,6 +17,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":7,"cost":[1,5,2,2,3,3,1]}' },
     { label: 'Example 2', input: '{"n":3,"cost":[5,3,3]}' },
+    { label: 'Smallest odd n, equal costs', input: '{"n":3,"cost":[1,1,1]}' },
+    { label: 'Largest cost 9', input: '{"n":5,"cost":[9,9,9,9,9]}' },
+    { label: 'Long run: n = 15', input: '{"n":15,"cost":[6,3,9,9,8,9,9,4,9,6,8,6,6,8,1]}' },
   ],
 }
 

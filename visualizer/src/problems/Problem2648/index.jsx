@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Six values', input: '{"count":6}' },
     { label: 'Ten values', input: '{"count":10}' },
+    { label: 'Zero values', input: '{"count":0}' },
+    { label: 'Single value', input: '{"count":1}' },
+    { label: 'Largest count: 15 values', input: '{"count":15}' },
   ],
 }
 

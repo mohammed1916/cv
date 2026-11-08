@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Pool of two', input: '{"limit":2,"durations":[300,100,200,50]}' },
     { label: 'Pool of one', input: '{"limit":1,"durations":[10,20]}' },
+    { label: 'Single zero duration', input: '{"limit":1,"durations":[0]}' },
+    { label: 'Equal durations', input: '{"limit":2,"durations":[100,100,100,100]}' },
+    { label: 'Largest pool with alternating limits', input: '{"limit":4,"durations":[500,0,500,0,500,0,500,0]}' },
+    { label: 'Long run: eight durations', input: '{"limit":3,"durations":[496,317,243,241,496,136,41,254]}' },
   ],
 }
 

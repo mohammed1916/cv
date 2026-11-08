@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Split', input: '{"arity":3,"calls":[[1],[2,3]]}' },
     { label: 'Early', input: '{"arity":2,"calls":[[1],[2],[3]]}' },
+    { label: 'Single argument list', input: '{"arity":1,"calls":[[5]]}' },
+    { label: 'Equal arguments repeated', input: '{"arity":2,"calls":[[4],[4],[4,4]]}' },
+    { label: 'Limit values and empty call', input: '{"arity":4,"calls":[[99,-99,0],[1],[],[-99]]}' },
+    { label: 'Long run: six calls', input: '{"arity":3,"calls":[[98],[-12,-28],[77,-86,46],[-33],[56,-3],[-54,-61,-72]]}' },
   ],
 }
 

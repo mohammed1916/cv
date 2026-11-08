@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Distinct', input: '{"durations":[300,100,200]}' },
     { label: 'Ties', input: '{"durations":[50,50,10]}' },
+    { label: 'Single zero duration', input: '{"durations":[0]}' },
+    { label: 'Equal durations', input: '{"durations":[500,500,500]}' },
+    { label: 'Largest and zero durations', input: '{"durations":[1000,0,1000,0,1000,0,1000,0]}' },
+    { label: 'Long run: eight durations', input: '{"durations":[376,760,419,109,230,314,616,199]}' },
   ],
 }
 

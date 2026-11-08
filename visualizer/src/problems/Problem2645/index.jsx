@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"word":"aabcbc"}' },
     { label: 'Example 2', input: '{"word":"abcabcababcc"}' },
+    { label: 'Single letter', input: '{"word":"a"}' },
+    { label: 'Already a valid block', input: '{"word":"abcabc"}' },
+    { label: 'Longest word: 40 a', input: '{"word":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}' },
+    { label: 'Long run: 40 letters', input: '{"word":"bbcaacacbabccabbcbbcbacccacbcbabbbcbcaca"}' },
   ],
 }
 

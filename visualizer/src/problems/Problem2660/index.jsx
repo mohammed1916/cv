@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"player1":[4,10,7,9],"player2":[6,5,2,3]}' },
     { label: 'Tie', input: '{"player1":[1,2],"player2":[1,2]}' },
+    { label: 'Single turn', input: '{"player1":[3],"player2":[5]}' },
+    { label: 'All zero pins', input: '{"player1":[0,0,0],"player2":[0,0,0]}' },
+    { label: 'Largest: 10 turns of 10', input: '{"player1":[10,10,10,10,10,10,10,10,10,10],"player2":[10,10,10,10,10,10,10,10,10,10]}' },
+    { label: 'Long run: 10 turns', input: '{"player1":[3,5,7,9,1,10,2,10,7,3],"player2":[2,6,2,3,8,6,3,3,4,9]}' },
   ],
 }
 

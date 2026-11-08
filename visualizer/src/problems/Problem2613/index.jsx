@@ -24,6 +24,10 @@ const definition = {
     { label: 'Five points', input: '{"nums1":[1,4,2,7,5],"nums2":[3,1,6,2,4]}' },
     { label: 'Diagonal', input: '{"nums1":[0,3,6,9],"nums2":[0,3,6,9]}' },
     { label: 'Tie breaking', input: '{"nums1":[2,2,8],"nums2":[5,5,5]}' },
+    { label: 'Two points', input: '{"nums1":[0,1],"nums2":[0,1]}' },
+    { label: 'Equal x values', input: '{"nums1":[2,2,2,2],"nums2":[1,-1,3,0]}' },
+    { label: 'Extreme coordinates', input: '{"nums1":[-9,9,-9,9,-9,9,-9,9],"nums2":[-9,-9,9,9,0,0,-9,9]}' },
+    { label: 'Long run: eight points', input: '{"nums1":[3,-4,-6,4,-6,-8,-7,-9],"nums2":[-5,9,-7,8,-7,8,-3,4]}' },
   ],
 }
 

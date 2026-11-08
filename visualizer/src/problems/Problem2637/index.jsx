@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Finishes in time', input: '{"delay":30,"limit":80,"value":"ready"}' },
     { label: 'Too slow', input: '{"delay":120,"limit":50,"value":"late"}' },
+    { label: 'Zero delay and limit', input: '{"delay":0,"limit":0,"value":""}' },
+    { label: 'Delay equals limit', input: '{"delay":100,"limit":100,"value":"edge"}' },
+    { label: 'Longest allowed value', input: '{"delay":500,"limit":500,"value":"12345678901234567890"}' },
+    { label: 'Long run: mid-range timing', input: '{"delay":247,"limit":311,"value":"almost there"}' },
   ],
 }
 

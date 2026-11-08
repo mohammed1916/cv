@@ -16,6 +16,10 @@ const definition = {
     { label: "Example", input: '{"calls":[[1,2],[3],[]]}' },
     { label: "Single call", input: '{"calls":[[4]]}' },
     { label: "No arguments", input: '{"calls":[[],[7]]}' },
+    { label: 'Single empty call', input: '{"calls":[[]]}' },
+    { label: 'Four arguments', input: '{"calls":[[1,2,3,4]]}' },
+    { label: 'Zero and negative arguments', input: '{"calls":[[0,-1],[5]]}' },
+    { label: 'Long run: 6 calls', input: '{"calls":[[64],[2,7],[95,65,3],[78,15,68,57],[17],[0,68]]}' },
   ],
 };
 

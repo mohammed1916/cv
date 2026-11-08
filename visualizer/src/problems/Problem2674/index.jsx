@@ -16,6 +16,9 @@ const definition = {
     { label: "Even count", input: '{"values":[7,3,9,4,8,2]}' },
     { label: "Odd count", input: '{"values":[5,1,6,2,9]}' },
     { label: "Single node", input: '{"values":[42]}' },
+    { label: 'Two equal values', input: '{"values":[4,4]}' },
+    { label: 'Largest values: 12 entries', input: '{"values":[99,0,99,0,99,0,99,0,99,0,99,0]}' },
+    { label: 'Long run: 12 values', input: '{"values":[38,47,98,67,52,63,29,77,47,42,95,60]}' },
   ],
 };
 

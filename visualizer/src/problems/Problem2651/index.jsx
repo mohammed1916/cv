@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Before midnight', input: '{"arrivalTime":9,"delayedTime":4}' },
     { label: 'Wraps', input: '{"arrivalTime":21,"delayedTime":6}' },
+    { label: 'Smallest values', input: '{"arrivalTime":1,"delayedTime":1}' },
+    { label: 'Largest values', input: '{"arrivalTime":23,"delayedTime":24}' },
+    { label: 'Exactly 24 hours later', input: '{"arrivalTime":12,"delayedTime":12}' },
   ],
 }
 

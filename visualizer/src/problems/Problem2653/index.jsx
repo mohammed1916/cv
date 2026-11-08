@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,-1,-3,-2,3],"k":3,"x":2}' },
     { label: 'Example 3', input: '{"nums":[-3,1,2,-3,0,-3],"k":2,"x":1}' },
+    { label: 'Single entry', input: '{"nums":[7],"k":1,"x":1}' },
+    { label: 'Equal values tie', input: '{"nums":[2,2,2,2],"k":2,"x":1}' },
+    { label: 'Boundary values -50 and 50', input: '{"nums":[-50,50,-50,50,0],"k":3,"x":3}' },
+    { label: 'Long run: 40 entries', input: '{"nums":[-34,-35,5,31,34,4,-49,-6,-28,25,-20,20,-20,33,-18,-46,38,12,11,-15,-21,-18,15,15,26,-23,-48,40,-41,-26,-50,5,23,41,-10,-37,-15,-19,46,-39],"k":12,"x":5}' },
   ],
 }
 

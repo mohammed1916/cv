@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Overwrite', input: '{"ops":[[0,"set","a",1,100],[40,"set","a",5,100],[60,"get","a"],[100,"get","a"],[100,"count"]]}' },
     { label: 'Expiry', input: '{"ops":[[0,"set","k",1,10],[10,"get","k"],[10,"count"]]}' },
+    { label: 'Single count', input: '{"ops":[[0,"count"]]}' },
+    { label: 'Same-time writes and read', input: '{"ops":[[5,"set","x",1,10],[5,"set","x",2,10],[5,"get","x"]]}' },
+    { label: 'Longest duration at the boundary', input: '{"ops":[[0,"set","a",9,1000],[999,"get","a"],[1000,"get","a"],[1000,"count"]]}' },
+    { label: 'Long run: ten operations', input: '{"ops":[[0,"set","k1",3,20],[4,"set","k2",8,6],[9,"get","k1"],[12,"set","k1",5,30],[15,"count"],[20,"get","k2"],[25,"set","k3",1,4],[26,"count"],[33,"get","k1"],[40,"count"]]}' },
   ],
 }
 

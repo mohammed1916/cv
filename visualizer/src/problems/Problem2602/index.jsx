@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[3,1,6,8],"queries":[1,5]}' },
     { label: 'Example 2', input: '{"nums":[2,9,6,3],"queries":[10]}' },
+    { label: 'Single number and query', input: '{"nums":[1],"queries":[1]}' },
+    { label: 'Equal numbers and repeated queries', input: '{"nums":[5,5,5],"queries":[5,5]}' },
+    { label: 'Limit values', input: '{"nums":[20,1,20,1,20,1,20,1],"queries":[20,1,10,2,15]}' },
+    { label: 'Long run: eight numbers and five queries', input: '{"nums":[18,17,20,11,6,9,8,3],"queries":[3,2,1,16,11]}' },
   ],
 }
 

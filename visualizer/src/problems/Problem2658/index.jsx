@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"grid":[[0,2,1,0],[4,0,0,3],[1,0,0,4],[0,3,2,0]]}' },
     { label: 'Diagonal', input: '{"grid":[[5,0],[0,7]]}' },
+    { label: 'Single cell of land', input: '{"grid":[[0]]}' },
+    { label: 'Single nonzero cell', input: '{"grid":[[9]]}' },
+    { label: 'Largest grid: 7 by 7 ones', input: '{"grid":[[1,1,1,1,1,1,1],[1,1,1,1,1,1,1],[1,1,1,1,1,1,1],[1,1,1,1,1,1,1],[1,1,1,1,1,1,1],[1,1,1,1,1,1,1],[1,1,1,1,1,1,1]]}' },
+    { label: 'Long run: 7 by 7 fixed sequence', input: '{"grid":[[1,5,2,10,6,6,0],[0,0,7,4,9,8,4],[3,5,7,9,1,10,2],[7,4,2,8,5,6,6],[10,10,1,2,8,8,10],[9,4,7,8,0,10,8],[1,10,7,2,3,1,2]]}' },
   ],
 }
 

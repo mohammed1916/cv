@@ -17,6 +17,10 @@ const definition = {
     { label: 'Rotate once', input: '{"nums":[5,1,4]}' },
     { label: 'Spread values', input: '{"nums":[2,6,9,7]}' },
     { label: 'Two values', input: '{"nums":[8,3]}' },
+    { label: 'Single value', input: '{"nums":[4]}' },
+    { label: 'Sorted ascending', input: '{"nums":[1,2,3,4,5]}' },
+    { label: 'Negative and large values', input: '{"nums":[-1000000,1000000,0,-1]}' },
+    { label: 'Long run: 12 distinct values', input: '{"nums":[7,68,60,26,53,96,8,19,38,69,61,90]}' },
   ],
 }
 

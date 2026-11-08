@@ -17,6 +17,9 @@ const definition = {
     { label: "Fully covered", input: '{"n":6,"ranges":[[0,5]]}' },
     { label: "Overlapping ranges", input: '{"n":8,"ranges":[[4,4],[1,6],[7,7]]}' },
     { label: "Nothing covered", input: '{"n":5,"ranges":[]}' },
+    { label: 'Single cell, uncovered', input: '{"n":1,"ranges":[]}' },
+    { label: 'Single cell, covered', input: '{"n":1,"ranges":[[0,0]]}' },
+    { label: 'Long run: 30 cells, 12 ranges', input: '{"n":30,"ranges":[[16,25],[5,20],[23,23],[21,28],[17,22],[5,25],[23,26],[21,26],[12,21],[22,25],[22,25],[20,21]]}' },
   ],
 };
 

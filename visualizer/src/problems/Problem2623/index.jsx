@@ -19,6 +19,10 @@ const definition = {
   examples: [
     { label: 'Repeats', input: '{"calls":[[1,2],[1,2],[3]]}' },
     { label: 'Empty args', input: '{"calls":[[],[],[5]]}' },
+    { label: 'Single call with one argument', input: '{"calls":[[7]]}' },
+    { label: 'Repeated identical calls', input: '{"calls":[[2,2],[2,2],[2,2]]}' },
+    { label: 'Limit arguments and an empty call', input: '{"calls":[[99,-99,0],[-99],[]]}' },
+    { label: 'Long run: ten calls', input: '{"calls":[[93],[-17,-57],[72,84,2],[-38],[51,-32],[-59,-90,83],[30],[-80,-7],[9,-65,-35],[98]]}' },
   ],
 }
 

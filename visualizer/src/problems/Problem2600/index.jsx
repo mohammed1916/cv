@@ -20,6 +20,10 @@ const definition = {
   examples: [
     { label: 'Only ones', input: '{"numOnes": 3, "numZeros": 2, "numNegOnes": 0, "k": 2}' },
     { label: 'Negatives forced', input: '{"numOnes": 3, "numZeros": 2, "numNegOnes": 3, "k": 4}' },
+    { label: 'Single one', input: '{"numOnes":1,"numZeros":0,"numNegOnes":0,"k":0}' },
+    { label: 'Only negative ones with k zero', input: '{"numOnes":0,"numZeros":0,"numNegOnes":2,"k":1}' },
+    { label: 'Largest counts and k at total', input: '{"numOnes":50,"numZeros":50,"numNegOnes":50,"k":150}' },
+    { label: 'Long run: 80 items', input: '{"numOnes":37,"numZeros":24,"numNegOnes":19,"k":61}' },
   ],
 }
 

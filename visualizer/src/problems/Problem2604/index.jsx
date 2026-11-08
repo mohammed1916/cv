@@ -19,6 +19,10 @@ const definition = {
     { label: "Two hens split the grains", input: '{"hens":[3,8],"grains":[0,1,5,10,12]}' },
     { label: "Hens on opposite ends", input: '{"hens":[0,6],"grains":[2,4,8]}' },
     { label: "No grains", input: '{"hens":[5],"grains":[]}' },
+    { label: 'One hen and one grain', input: '{"hens":[15],"grains":[30]}' },
+    { label: 'Grain equidistant from two hens', input: '{"hens":[2,6],"grains":[4]}' },
+    { label: 'Six hens at spacing six', input: '{"hens":[0,6,12,18,24,30],"grains":[1,2,3,4,5,29,28,27]}' },
+    { label: 'Long run: six hens and eight grains', input: '{"hens":[3,9,17,23,28,6],"grains":[0,1,5,12,14,21,26,30]}' },
   ],
 };
 

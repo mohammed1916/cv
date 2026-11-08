@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Mixed', input: '{"items":["a",2,null]}' },
     { label: 'Empty', input: '{"items":[]}' },
+    { label: 'Single value', input: '{"items":[1]}' },
+    { label: 'Equal values', input: '{"items":[1,1,1]}' },
+    { label: 'Mixed kinds at the limit', input: '{"items":[null,true,false,0,"",[],{},1.5,"x",-1]}' },
+    { label: 'Long run: ten values', input: '{"items":["b","a","c","a","d","b","e",1,2,3]}' },
   ],
 }
 

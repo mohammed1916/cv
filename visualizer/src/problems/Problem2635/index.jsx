@@ -18,6 +18,10 @@ const definition = {
     { label: 'Three', input: '{"arr":[5,0,4]}' },
     { label: 'Squares', input: '{"arr":[-3,6],"fn":"square"}' },
     { label: 'Negative', input: '{"arr":[-1]}' },
+    { label: 'Single zero', input: '{"arr":[0]}' },
+    { label: 'Equal values', input: '{"arr":[4,4,4]}' },
+    { label: 'Limit values squared', input: '{"arr":[99,-99,99,-99,99,-99,99,-99],"fn":"square"}' },
+    { label: 'Long run: eight values', input: '{"arr":[-33,55,-75,65,-11,-98,-1,93]}' },
   ],
 }
 

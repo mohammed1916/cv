@@ -24,6 +24,10 @@ const definition = {
     { label: 'Mixed runs', input: '{"s": "0011000111"}' },
     { label: 'Zeros then ones', input: '{"s": "1000011"}' },
     { label: 'Only ones', input: '{"s": "111"}' },
+    { label: 'Single zero', input: '{"s":"0"}' },
+    { label: 'Alternating equal runs', input: '{"s":"0101"}' },
+    { label: 'All ones at the length limit', input: '{"s":"11111111111111111111111111111111111111111111111111"}' },
+    { label: 'Long run: 50 random bits', input: '{"s":"01010101010101010101010101010101010101010101010101"}' },
   ],
 }
 

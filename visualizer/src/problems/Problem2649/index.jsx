@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"arr":[1,2,3]}' },
     { label: 'Nested', input: '{"arr":[[1,2],3,[[4]]]}' },
+    { label: 'Empty array', input: '{"arr":[]}' },
+    { label: 'Smallest value nested', input: '{"arr":[[[-1000]]]}' },
+    { label: 'Five levels deep', input: '{"arr":[[[[[1000]]]]]}' },
+    { label: 'Long run: 16 items, 21 values', input: '{"arr":[[-552],[[-698,698]],-196,[614],[[-664,664]],-885,[788],[[-521,521]],-75,[-413],[[-44,44]],650,[-829],[[806,-806]],365,[421]]}' },
   ],
 }
 

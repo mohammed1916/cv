@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":4,"p":0,"banned":[1,2],"k":4}' },
     { label: 'Window 1', input: '{"n":4,"p":2,"banned":[0,1,3],"k":1}' },
+    { label: 'Single position', input: '{"n":1,"p":0,"banned":[],"k":1}' },
+    { label: 'Full-length window', input: '{"n":5,"p":2,"banned":[],"k":5}' },
+    { label: 'Most positions banned', input: '{"n":12,"p":11,"banned":[0,1,2,3,4,5,6,7,8,9],"k":12}' },
+    { label: 'Long run: twelve positions', input: '{"n":12,"p":6,"banned":[0,2,4,8,10],"k":7}' },
   ],
 }
 

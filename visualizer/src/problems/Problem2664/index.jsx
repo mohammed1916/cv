@@ -17,6 +17,9 @@ const definition = {
     { label: "Open tour from the centre", input: '{"rows":5,"cols":5,"start":[2,2]}' },
     { label: "No tour on 3 by 3", input: '{"rows":3,"cols":3,"start":[1,1]}' },
     { label: "Single square", input: '{"rows":1,"cols":1,"start":[0,0]}' },
+    { label: 'Two by two from an edge', input: '{"rows":2,"cols":2,"start":[1,0]}' },
+    { label: 'Row strip 1 by 5', input: '{"rows":1,"cols":5,"start":[0,2]}' },
+    { label: 'Long run: 5 by 5 from the far corner', input: '{"rows":5,"cols":5,"start":[4,4]}' },
   ],
 };
 

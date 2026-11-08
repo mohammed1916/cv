@@ -17,6 +17,10 @@ const definition = {
     { label: "Three pairs", input: '{"nums":[1,2,3,4,5,6],"k":3}' },
     { label: "No conflicts", input: '{"nums":[1,3,5,7],"k":1}' },
     { label: "Empty input", input: '{"nums":[],"k":4}' },
+    { label: 'Single value with large k', input: '{"nums":[9],"k":10}' },
+    { label: 'Two values with k one', input: '{"nums":[5,6],"k":1}' },
+    { label: 'Alternating extremes at the limit', input: '{"nums":[1,40,2,39,3,38,4,37,5,36,6,35],"k":10}' },
+    { label: 'Long run: twelve distinct values', input: '{"nums":[38,5,2,12,33,26,19,28,37,32,6,11],"k":4}' },
   ],
 };
 

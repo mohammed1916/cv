@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s": "abcz", "k": 26}' },
     { label: 'Example 2', input: '{"s": "dc", "k": 4}' },
+    { label: 'Single letter', input: '{"s":"a","k":4}' },
+    { label: 'Two different letters', input: '{"s":"ab","k":4}' },
+    { label: 'Largest k and 40 letters', input: '{"s":"abcdefghijklmnopqrstuvwxyzabcdefghijklmn","k":26}' },
+    { label: 'Long run: 40 letters, k = 10', input: '{"s":"gaecbdjhacigbidbidcgfidgfcbidgfhedjghjei","k":10}' },
   ],
 }
 

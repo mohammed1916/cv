@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Path with coins at both ends', input: '{"coins":[1,0,0,0,0,1],"edges":[[0,1],[1,2],[2,3],[3,4],[4,5]]}' },
     { label: 'Star', input: '{"coins":[0,0,1,0,0],"edges":[[0,1],[1,2],[1,3],[3,4]]}' },
+    { label: 'Single node', input: '{"coins":[1],"edges":[]}' },
+    { label: 'Two nodes with one coin', input: '{"coins":[0,1],"edges":[[0,1]]}' },
+    { label: 'Star with equal coins', input: '{"coins":[1,1,1,1],"edges":[[0,1],[0,2],[0,3]]}' },
+    { label: 'Long run: eight nodes branching', input: '{"coins":[1,0,1,0,0,1,0,1],"edges":[[0,1],[0,2],[2,3],[2,4],[4,5],[5,6],[6,7]]}' },
   ],
 }
 

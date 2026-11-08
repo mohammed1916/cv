@@ -42,7 +42,12 @@ const definition = {
   python,
   inputLabel: 'JSON object with a Salary table',
   complexity: 'Linear in the salary records: one pass for each employee maximum and one pass to keep the matching rows.',
-  examples: [{ label: 'Teaching sample', input: JSON.stringify(SAMPLE) }],
+  examples: [
+    { label: 'Teaching sample', input: JSON.stringify(SAMPLE) },
+    { label: 'Single row', input: '{"Salary":[{"employee_id":1,"name":"Ada","salary":5000}]}' },
+    { label: 'Equal salaries tie', input: '{"Salary":[{"employee_id":1,"name":"Ann","salary":3000},{"employee_id":2,"name":"Bo","salary":3000},{"employee_id":3,"name":"Cy","salary":1000}]}' },
+    { label: 'Long run: 14 rows', input: '{"Salary":[{"employee_id":1,"name":"Ava","salary":2100},{"employee_id":2,"name":"Ben","salary":4300},{"employee_id":3,"name":"Cara","salary":1500},{"employee_id":4,"name":"Dan","salary":4300},{"employee_id":5,"name":"Eva","salary":2500},{"employee_id":6,"name":"Finn","salary":900},{"employee_id":7,"name":"Gia","salary":3100},{"employee_id":8,"name":"Hal","salary":4700},{"employee_id":9,"name":"Ivy","salary":2100},{"employee_id":10,"name":"Jon","salary":3900},{"employee_id":11,"name":"Kai","salary":1200},{"employee_id":12,"name":"Lea","salary":4700},{"employee_id":13,"name":"Max","salary":2800},{"employee_id":14,"name":"Nia","salary":3300}]}' },
+  ],
 }
 
 function Table({ columns, rows, empty }) {

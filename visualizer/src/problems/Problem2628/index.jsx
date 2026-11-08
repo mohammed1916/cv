@@ -18,6 +18,10 @@ const definition = {
     { label: "Array order matters", input: '{"o1":[1,2],"o2":[2,1]}' },
     { label: "Array versus object", input: '{"o1":[],"o2":{}}' },
     { label: "Boolean versus number", input: '{"o1":[1,{"x":true}],"o2":[1,{"x":1}]}' },
+    { label: 'Equal numbers', input: '{"o1":1,"o2":1}' },
+    { label: 'Null versus empty string', input: '{"o1":null,"o2":""}' },
+    { label: 'Deep nesting at the limit', input: '{"o1":[[[[1]]]],"o2":[[[[1]]]]}' },
+    { label: 'Long run: shared keys in other order', input: '{"o1":{"a":[1,2,3,{"b":4}],"c":{"d":[5,6]}},"o2":{"c":{"d":[5,6]},"a":[1,2,3,{"b":4}]}}' },
   ],
 };
 

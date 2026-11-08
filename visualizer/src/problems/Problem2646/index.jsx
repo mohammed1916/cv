@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"n":4,"edges":[[0,1],[1,2],[1,3]],"price":[2,2,10,6],"trips":[[0,3],[2,1],[2,3]]}' },
     { label: 'Pair', input: '{"n":2,"edges":[[0,1]],"price":[2,4],"trips":[[0,1]]}' },
+    { label: 'Trip from a node to itself', input: '{"n":3,"edges":[[0,1],[1,2]],"price":[4,4,4],"trips":[[1,1]]}' },
+    { label: 'Equal prices on a star', input: '{"n":4,"edges":[[0,1],[0,2],[0,3]],"price":[6,6,6,6],"trips":[[1,2],[2,3]]}' },
+    { label: 'Largest tree: 8 nodes, prices 20', input: '{"n":8,"edges":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7]],"price":[20,20,20,20,20,20,20,20],"trips":[[0,7],[7,0],[3,4],[2,6]]}' },
+    { label: 'Long run: 8 nodes, mixed prices', input: '{"n":8,"edges":[[1,0],[2,1],[3,1],[4,2],[5,3],[6,4],[7,0]],"price":[14,4,10,8,16,2,6,10],"trips":[[7,5],[6,3],[4,0],[2,7]]}' },
   ],
 }
 

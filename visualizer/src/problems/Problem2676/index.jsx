@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Burst then a late call', input: '{"wait":100,"calls":[0,40,90,260]}' },
     { label: 'Spaced calls', input: '{"wait":50,"calls":[0,60,130]}' },
+    { label: 'Single call', input: '{"wait":1,"calls":[0]}' },
+    { label: 'Calls exactly one wait apart', input: '{"wait":100,"calls":[0,100,200]}' },
+    { label: 'Largest: wait 500, eight calls', input: '{"wait":500,"calls":[0,100,200,300,400,500,600,1000]}' },
+    { label: 'Long run: 8 calls', input: '{"wait":73,"calls":[24,79,141,225,292,471,650,850]}' },
   ],
 }
 

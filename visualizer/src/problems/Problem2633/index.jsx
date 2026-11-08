@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Nested', input: '{"value":{"a":[1,true,null],"b":"hi there"}}' },
     { label: 'Array', input: '{"value":[3,"ab"]}' },
+    { label: 'Single null', input: '{"value":null}' },
+    { label: 'Equal strings in an array', input: '{"value":["ab","ab"]}' },
+    { label: 'Limit depth and item counts', input: '{"value":{"a":[1,2,3,4,5],"b":{"c":[true,false,null],"d":"x y"},"e":1,"f":"z","g":[[1]]}}' },
+    { label: 'Long run: nested object', input: '{"value":{"alpha":[1,-2,3,4,5],"beta":{"gamma":[true,null,"deep one"]},"delta":"x y z"}}' },
   ],
 }
 

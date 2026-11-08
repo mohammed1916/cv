@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[10,1,2,7,1,3],"p":2}' },
     { label: 'Example 2', input: '{"nums":[4,2,1,2],"p":1}' },
+    { label: 'Two values, p at half length', input: '{"nums":[3,9],"p":1}' },
+    { label: 'Equal values', input: '{"nums":[4,4,4,4],"p":2}' },
+    { label: 'Alternating limit values', input: '{"nums":[30,0,30,0,30,0,30,0,30,0],"p":5}' },
+    { label: 'Long run: ten values', input: '{"nums":[30,17,26,9,24,4,20,28,7,22],"p":3}' },
   ],
 }
 

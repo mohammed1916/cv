@@ -17,6 +17,10 @@ const definition = {
     { label: 'Sum', input: '{"nums":[2,5,1],"init":3}' },
     { label: 'Squares', input: '{"nums":[2,-3],"init":10,"fn":"squareSum"}' },
     { label: 'Empty', input: '{"nums":[],"init":7}' },
+    { label: 'Single value', input: '{"nums":[4],"init":0}' },
+    { label: 'Equal values squared', input: '{"nums":[3,3,3],"init":0,"fn":"squareSum"}' },
+    { label: 'Limit values and init', input: '{"nums":[-9,9,-9,9,-9,9,-9,9],"init":-99,"fn":"squareSum"}' },
+    { label: 'Long run: eight values', input: '{"nums":[-6,7,5,-1,5,9,-8,-5],"init":42}' },
   ],
 }
 

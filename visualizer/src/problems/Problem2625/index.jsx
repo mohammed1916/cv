@@ -17,6 +17,10 @@ const definition = {
     { label: 'Limit 1', input: '{"arr":[4,[5,[6,7]],[8]],"n":1}' },
     { label: 'Limit 0', input: '{"arr":[4,[5,[6,7]],[8]],"n":0}' },
     { label: 'Limit 2', input: '{"arr":[[1,2],[3,[9,4]],[5]],"n":2}' },
+    { label: 'Single leaf, n zero', input: '{"arr":[1],"n":0}' },
+    { label: 'Equal leaves at different depths', input: '{"arr":[7,7,[7]],"n":1}' },
+    { label: 'Twenty four leaves at the limit', input: '{"arr":[[1,2,3,4,5,6],[7,8,9,10,11,12],[[13,14,15,16],[17,18,19,20]],[21,22,23,24]],"n":5}' },
+    { label: 'Long run: twenty leaves nested', input: '{"arr":[[1,2,3,4,5],[6,[7,8,[9,10]]],[11,12,[13,14,15,[16,17,18]]],19,20],"n":3}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"root":[5,4,9,1,10,null,7]}' },
     { label: 'Example 2', input: '{"root":[3,1,2]}' },
+    { label: 'Single node', input: '{"root":[7]}' },
+    { label: 'Equal values across levels', input: '{"root":[2,2,2,2,2,2,2]}' },
+    { label: 'Largest values with gaps', input: '{"root":[100,1,100,null,100,null,100]}' },
+    { label: 'Long run: 15 entries', input: '{"root":[50,23,71,null,64,88,9,30,null,46,12,null,null,77,3]}' },
   ],
 }
 

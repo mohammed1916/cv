@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Ancestor', input: '{"chain":["Dog","Animal","Object"],"target":"Animal"}' },
     { label: 'Primitive', input: '{"chain":["Object"],"target":"Object","primitive":true}' },
+    { label: 'Empty chain', input: '{"chain":[],"target":"Object"}' },
+    { label: 'Repeated class name', input: '{"chain":["Alpha","Alpha"],"target":"Alpha"}' },
+    { label: 'Eight nearest-first names', input: '{"chain":["Leaf","Node7","Node6","Node5","Node4","Node3","Node2","Root"],"target":"Leaf"}' },
+    { label: 'Primitive with empty chain', input: '{"chain":[],"target":"Number","primitive":true}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
     { label: 'Two shared keys', input: '{"rows":[{"color":"red","size":2},{"size":5,"shape":"round"}]}' },
     { label: 'Only one object', input: '{"rows":[{"id":7,"ok":true}]}' },
     { label: 'Nested paths', input: '{"rows":[{"name":"Ada","address":{"city":"Oslo"}},[9,{"ok":false}]]}' },
+    { label: 'Single empty object', input: '{"rows":[{}]}' },
+    { label: 'Equal keys in both rows', input: '{"rows":[{"a":1,"b":2},{"a":1,"b":2}]}' },
+    { label: 'Deepest nesting: 4 levels', input: '{"rows":[{"a":{"b":{"c":{"d":1}}}}]}' },
+    { label: 'Long run: six mixed rows', input: '{"rows":[{"id":1,"tags":["x","y"]},[1,2,{"k":null}],{"a":{"b":true}},[[3]],{"name":"Ana","score":7},[false,"z"]]}' },
   ],
 }
 

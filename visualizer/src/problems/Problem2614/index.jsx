@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[[1,2],[3,4]]}' },
     { label: 'No prime', input: '{"nums":[[4,6],[8,9]]}' },
+    { label: 'Single cell', input: '{"nums":[[7]]}' },
+    { label: 'Equal values', input: '{"nums":[[5,5],[5,5]]}' },
+    { label: 'Six by six limit values', input: '{"nums":[[50,1,50,1,50,1],[1,50,1,50,1,50],[50,1,50,1,50,1],[1,50,1,50,1,50],[50,1,50,1,50,1],[1,50,1,50,1,50]]}' },
+    { label: 'Long run: six by six', input: '{"nums":[[28,31,26,7,50,37],[36,15,18,49,26,7],[40,37,44,37,50,39],[14,3,42,5,12,31],[12,11,14,23,18,23],[26,31,8,11,6,5]]}' },
   ],
 }
 

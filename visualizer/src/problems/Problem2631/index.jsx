@@ -17,6 +17,10 @@ const definition = {
   complexity: 'O(n) time for n items, O(n) extra space for the buckets.',
   examples: [
     { label: 'Two groups', input: '{"items":[{"id":1,"g":"a"},{"id":2,"g":"b"},{"id":3,"g":"a"}],"key":"g"}' },
+    { label: 'Single item', input: '{"items":[{"id":1,"g":"x"}],"key":"g"}' },
+    { label: 'Equal groups tie', input: '{"items":[{"id":1,"g":"a"},{"id":2,"g":"a"}],"key":"g"}' },
+    { label: 'Eight items alternating groups', input: '{"items":[{"id":1,"kind":"odd"},{"id":2,"kind":"even"},{"id":3,"kind":"odd"},{"id":4,"kind":"even"},{"id":5,"kind":"odd"},{"id":6,"kind":"even"},{"id":7,"kind":"odd"},{"id":8,"kind":"even"}],"key":"kind"}' },
+    { label: 'Long run: eight items in three groups', input: '{"items":[{"id":1,"team":"blue"},{"id":2,"team":"green"},{"id":3,"team":"red"},{"id":4,"team":"blue"},{"id":5,"team":"green"},{"id":6,"team":"red"},{"id":7,"team":"blue"},{"id":8,"team":"green"}],"key":"team"}' },
   ],
 }
 

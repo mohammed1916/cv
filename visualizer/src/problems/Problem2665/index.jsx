@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Mixed calls', input: '{"init":3,"ops":["increment","decrement","reset","increment"]}' },
     { label: 'Only decrements', input: '{"init":-2,"ops":["decrement","decrement"]}' },
+    { label: 'No calls', input: '{"init":0,"ops":[]}' },
+    { label: 'Upper limit start 100', input: '{"init":100,"ops":["increment"]}' },
+    { label: 'Lower limit start -100, then reset', input: '{"init":-100,"ops":["reset","decrement","increment"]}' },
+    { label: 'Long run: 20 calls', input: '{"init":7,"ops":["reset","reset","decrement","increment","decrement","reset","decrement","increment","reset","increment","reset","reset","reset","decrement","increment","reset","reset","increment","decrement","reset"]}' },
   ],
 }
 

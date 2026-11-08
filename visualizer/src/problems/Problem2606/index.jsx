@@ -21,6 +21,10 @@ const definition = {
   examples: [
     { label: "Example 1", input: "{\"s\": \"adaa\", \"chars\": \"d\", \"vals\": [-1000]}" },
     { label: "Example 2", input: "{\"s\": \"abc\", \"chars\": \"abc\", \"vals\": [-1, -1, -1]}" },
+    { label: 'Single letter', input: '{"s":"a","chars":"a","vals":[5]}' },
+    { label: 'Repeated letter', input: '{"s":"bbbb","chars":"b","vals":[1]}' },
+    { label: 'Value limits on four letters', input: '{"s":"zyxw","chars":"zyxw","vals":[1000,-1000,1000,-1000]}' },
+    { label: 'Long run: 50 letters', input: '{"s":"poxafejapivuncxgxqvifuzmvajurydybozixerupkdsdwzeti","chars":"aeiou","vals":[3,-2,7,-5,1]}' },
   ],
 };
 

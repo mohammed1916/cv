@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Chain', input: '{"fns":["inc","dbl","sq"],"x":2}' },
     { label: 'Empty', input: '{"fns":[],"x":5}' },
+    { label: 'Single function', input: '{"fns":["inc"],"x":0}' },
+    { label: 'Repeated doubling', input: '{"fns":["dbl","dbl"],"x":3}' },
+    { label: 'Limit input with five steps', input: '{"fns":["sq","sq","inc","dbl","sq"],"x":-99}' },
+    { label: 'Long run: five steps', input: '{"fns":["dbl","inc","sq","inc","dbl"],"x":7}' },
   ],
 }
 

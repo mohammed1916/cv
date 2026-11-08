@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Cancelled midway', input: '{"steps":[20,30,50,10],"cancelAt":60}' },
     { label: 'Finishes first', input: '{"steps":[20,30],"cancelAt":80}' },
+    { label: 'Single step, cancelled at start', input: '{"steps":[5],"cancelAt":0}' },
+    { label: 'Cancel lands on a step boundary', input: '{"steps":[20,30,50],"cancelAt":50}' },
+    { label: 'Largest job: 8 steps of 100', input: '{"steps":[100,100,100,100,100,100,100,100],"cancelAt":1000}' },
+    { label: 'Long run: 8 steps, cancel at 400', input: '{"steps":[97,86,70,91,47,89,25,71],"cancelAt":400}' },
   ],
 }
 

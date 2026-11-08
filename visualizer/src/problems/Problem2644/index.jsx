@@ -22,6 +22,10 @@ const definition = {
     { label: "Example 1", input: '{"nums": [2,9,15,50], "divisors": [5,3,7,2]}' },
     { label: "Example 2", input: '{"nums": [4,7,9,3,9], "divisors": [5,2,3]}' },
     { label: "Example 3", input: '{"nums": [20,14,21,10], "divisors": [10,16,20]}' },
+    { label: 'Single element', input: '{"nums":[6],"divisors":[3]}' },
+    { label: 'Tie between two divisors', input: '{"nums":[6,10,15],"divisors":[5,3]}' },
+    { label: 'Largest values and divisor 1', input: '{"nums":[1000000000,999999999,1],"divisors":[1,1000000000]}' },
+    { label: 'Long run: 40 values', input: '{"nums":[774,987,438,384,453,845,187,744,928,895,642,103,715,254,295,225,745,973,214,913,783,265,90,701,993,566,440,543,770,864,604,875,623,363,570,623,844,50,149,173],"divisors":[18,12,14,20,4,10]}' },
   ],
 };
 

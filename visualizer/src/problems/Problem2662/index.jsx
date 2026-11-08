@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"start":[1,1],"target":[5,5],"special_roads":[[1,2,3,3,2],[3,4,4,5,1]]}' },
     { label: 'Example 2', input: '{"start":[3,2],"target":[5,7],"special_roads":[[3,2,3,4,4],[3,3,1,0,2],[4,0,0,4,4]]}' },
+    { label: 'Start equals target', input: '{"start":[4,4],"target":[4,4],"special_roads":[[0,0,1,1,5]]}' },
+    { label: 'Road equal to walking cost', input: '{"start":[0,0],"target":[2,2],"special_roads":[[0,0,2,2,4]]}' },
+    { label: 'Corners of the 20 by 20 grid', input: '{"start":[0,0],"target":[20,20],"special_roads":[[0,0,20,20,30],[19,20,20,19,1],[20,20,0,0,1]]}' },
+    { label: 'Long run: 5 roads', input: '{"start":[20,15],"target":[14,13],"special_roads":[[6,14,12,16,18],[6,14,17,6,14],[5,14,3,16,24],[5,14,9,5,21],[3,13,15,15,17]]}' },
   ],
 }
 

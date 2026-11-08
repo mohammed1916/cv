@@ -21,6 +21,9 @@ const definition = {
   examples: [
     { label: "nums = [4,9,2,9,6], k = 4 (repeated maximum)", input: '{"nums": [4, 9, 2, 9, 6], "k": 4}' },
     { label: "nums = [20,20,20,20,4], k = 6 (tied block)", input: '{"nums": [20, 20, 20, 20, 4], "k": 6}' },
+    { label: 'Single element', input: '{"nums":[5],"k":1}' },
+    { label: 'All equal, k at the limit', input: '{"nums":[7,7,7,7],"k":100}' },
+    { label: 'Long run: 40 values', input: '{"nums":[4,68,2,81,56,32,47,98,73,17,74,10,5,43,75,16,85,5,69,37,69,60,49,77,96,36,47,44,51,48,15,69,18,54,32,81,57,44,83,60],"k":20}' },
   ],
 };
 

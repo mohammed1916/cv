@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Mixed', input: '{"nums":[3,1,4,1,5]}' },
     { label: 'Single', input: '{"nums":[5]}' },
+    { label: 'Equal values', input: '{"nums":[4,4,4,4]}' },
+    { label: 'Largest values: 12 entries of 10', input: '{"nums":[10,10,10,10,10,10,10,10,10,10,10,10]}' },
+    { label: 'Long run: 12 items', input: '{"nums":[5,4,3,4,5,7,1,8,8,3,1,1]}' },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[["add",3],["add",3],["hasFrequency",2],["hasFrequency",1],["deleteOne",3],["hasFrequency",2]]' },
     { label: 'Absent delete', input: '[["deleteOne",4],["hasFrequency",1]]' },
+    { label: 'Single add', input: '[["add",1],["hasFrequency",1]]' },
+    { label: 'Equal values', input: '[["add",2],["add",2],["hasFrequency",2],["deleteOne",2],["hasFrequency",2]]' },
+    { label: 'Largest value 5, 12 commands', input: '[["add",5],["add",5],["add",5],["hasFrequency",3],["deleteOne",5],["hasFrequency",2],["deleteOne",5],["deleteOne",5],["hasFrequency",1],["add",1],["hasFrequency",1],["deleteOne",1]]' },
+    { label: 'Long run: 12 commands', input: '[["add",3],["deleteOne",5],["hasFrequency",2],["add",5],["deleteOne",1],["hasFrequency",4],["add",1],["deleteOne",3],["deleteOne",1],["add",3],["add",1],["hasFrequency",2]]' },
   ],
 }
 

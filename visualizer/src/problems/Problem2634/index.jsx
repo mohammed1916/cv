@@ -19,6 +19,10 @@ const definition = {
     { label: 'Above index', input: '{"arr":[4,1,9,0,12]}' },
     { label: 'Positive', input: '{"arr":[3,-2,0,7],"fn":"positive"}' },
     { label: 'Dropped', input: '{"arr":[0,1,2]}' },
+    { label: 'Single zero', input: '{"arr":[0]}' },
+    { label: 'Equal values', input: '{"arr":[2,2,2]}' },
+    { label: 'Extreme values with positive rule', input: '{"arr":[30,-5,30,-5,30,-5,30,-5,30,-5],"fn":"positive"}' },
+    { label: 'Long run: ten values', input: '{"arr":[28,7,10,13,8,23,26,1,4,19]}' },
   ],
 }
 

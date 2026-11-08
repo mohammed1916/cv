@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Positive', input: '{"init":7,"calls":4}' },
     { label: 'Negative', input: '{"init":-5,"calls":3}' },
+    { label: 'Zero start with one call', input: '{"init":0,"calls":1}' },
+    { label: 'Lowest start at the call limit', input: '{"init":-20,"calls":10}' },
+    { label: 'Highest start at the call limit', input: '{"init":20,"calls":10}' },
+    { label: 'Long run: ten calls', input: '{"init":-13,"calls":10}' },
   ],
 }
 

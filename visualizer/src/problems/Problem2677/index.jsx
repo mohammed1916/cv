@@ -16,6 +16,10 @@ const definition = {
     { label: "Example", input: '{"arr":[1,2,3,4,5],"size":2}' },
     { label: "Size larger than the array", input: '{"arr":[7,8,9],"size":5}' },
     { label: "Empty", input: '{"arr":[],"size":3}' },
+    { label: 'Single value, size 1', input: '{"arr":[5],"size":1}' },
+    { label: 'Size equals length, equal values', input: '{"arr":[3,3,3],"size":3}' },
+    { label: 'Largest: 12 values, size 12', input: '{"arr":[99,-99,99,-99,99,-99,99,-99,99,-99,99,-99],"size":12}' },
+    { label: 'Long run: 12 values, size 4', input: '{"arr":[29,95,78,-94,-63,-49,51,-4,47,33,-28,-41],"size":4}' },
   ],
 };
 
