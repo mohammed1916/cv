@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Example', input: '[[0,1,2,3,4],[2,3,4],[4,0,1,2,3]]' },
     { label: 'Alternating', input: '[[0,1,0,1],[1,0,1,0],[0,1,0,1,0]]' },
+    { label: 'Single city', input: '[[3]]' },
+    { label: 'Equal paths', input: '[[1,1],[1,1]]' },
+    { label: 'Long run: 4 paths of 8 cities', input: '[[4,2,1,0,0,2,2,4],[3,0,0,1,4,4,0,2],[2,1,0,3,3,4,2,1],[2,2,4,3,2,0,2,1]]' },
   ],
 }
 

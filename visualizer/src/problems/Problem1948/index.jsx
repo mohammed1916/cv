@@ -14,6 +14,9 @@ const definition = {
   examples: [
     { label: 'Two identical branches', input: '[["a"],["a","x"],["a","x","y"],["a","z"],["b"],["b","x"],["b","x","y"],["b","z"]]' },
     { label: 'Distinct sibling', input: '[["a"],["a","x"],["a","x","y"],["a","z"],["b"],["b","w"],["b","x"],["b","x","y"],["b","z"]]' },
+    { label: 'Single folder', input: '[["a"]]' },
+    { label: 'Identical subfolders', input: '[["a","x"],["a","x"]]' },
+    { label: 'Long run: twelve paths', input: '[["c","z"],["b"],["z","a","z"],["x","c","x"],["b","c","b"],["b","c","b"],["z","a","b"],["x","c","b"],["b","a","b"],["z","y","b"],["z","a","z"],["z","a","z"]]' },
   ],
 }
 

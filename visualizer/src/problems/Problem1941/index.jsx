@@ -14,6 +14,9 @@ const definition = {
   examples: [
     { label: 'Equal counts', input: 'xxyyzz' },
     { label: 'Unequal counts', input: 'xxxyz' },
+    { label: 'Single letter', input: 'a' },
+    { label: 'Equal counts, four letters', input: 'aabbccdd' },
+    { label: 'Long run: 40 letters', input: 'edyxwbabatydmjkvyhqfibylgfwdgxorcnklinqt' },
   ],
 }
 

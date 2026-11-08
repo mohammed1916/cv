@@ -11,7 +11,7 @@ const definition = {
   examples: [
     { label: 'Four values', input: '[5,1,4,2]' },
     { label: 'Negatives', input: '[-7,3,2,-1,6,4]' },
-    { label: 'Pair', input: '[10,-10]' },
+    { label: 'Pair', input: '[10,-10]' }, { label: "Smallest pair", input: "[-1000,1000]" }, { label: "Equal values", input: "[4,4,4,4]" }, { label: "Extreme values", input: "[1000,-1000,1000,-1000,1000,-1000,1000,-1000,1000,-1000,1000,-1000,1000,-1000,1000,-1000]" }, { label: "Long run: 16 values", input: "[324,-829,141,-191,326,123,159,250,-649,-735,198,-551,-966,-860,-269,-741]" },
   ],
 }
 

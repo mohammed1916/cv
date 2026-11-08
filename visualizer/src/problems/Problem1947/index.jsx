@@ -14,6 +14,8 @@ const definition = {
   examples: [
     { label: 'Two pairs', input: '{"students":[[1,1,0],[1,0,1]],"mentors":[[1,0,0],[0,1,1]]}' },
     { label: 'Single pair', input: '{"students":[[0]],"mentors":[[0]]}' },
+    { label: 'Identical students', input: '{"students":[[1,0],[1,0]],"mentors":[[1,0],[0,1]]}' },
+    { label: 'Long run: four by six', input: '{"students":[[0,0,0,1,0,0],[1,1,1,1,0,0],[1,0,0,0,0,1],[0,1,1,0,0,0]],"mentors":[[0,0,0,0,1,1],[1,1,0,0,1,1],[1,1,0,0,1,0],[0,1,1,0,0,1]]}' },
   ],
 }
 

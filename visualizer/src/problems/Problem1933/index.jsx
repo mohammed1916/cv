@@ -16,6 +16,9 @@ const definition = {
     { label: 'Decomposable', input: '77788' },
     { label: 'Two 2-blocks', input: '2222' },
     { label: 'No 2-block', input: '111222333' },
+    { label: 'Single digit', input: '5' },
+    { label: 'Repeated digits', input: '1111' },
+    { label: 'Long run: 20 digits', input: '17377639759191912735' },
   ],
 }
 

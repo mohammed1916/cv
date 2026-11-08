@@ -27,6 +27,10 @@ const definition = {
     { label: 'Acute triangle', input: '[[0,0],[4,0],[2,3]]' },
     { label: 'Obtuse triangle', input: '[[0,0],[6,0],[1,1]]' },
     { label: 'Interior point', input: '[[0,0],[4,0],[2,3],[2,1]]' },
+    { label: 'Single point', input: '[[0,0]]' },
+    { label: 'Repeated points', input: '[[1,1],[1,1],[1,1]]' },
+    { label: 'Corners of the coordinate range', input: '[[-100,-100],[100,100],[100,-100],[-100,100]]' },
+    { label: 'Long run: 8 generated points', input: '[[-39,-86],[22,33],[-66,65],[53,-61],[-53,25],[78,-36],[-81,34],[19,-47]]' },
   ],
 }
 

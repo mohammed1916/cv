@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Exit one step away', input: '{"maze":["+.+","...","+.+"],"entrance":[1,1]}' },
     { label: 'Walled in', input: '{"maze":["+++","+.+","+++"],"entrance":[1,1]}' },
+    { label: 'Single open cell', input: '{"maze":["."],"entrance":[0,0]}' },
+    { label: 'Corridor of open cells', input: '{"maze":["....."],"entrance":[0,2]}' },
+    { label: 'Long run: 8 by 8 generated maze', input: '{"maze":["....+...","...+...+","+...+...","+...+...",".+++..++","..+.....","+.......","..+....."],"entrance":[0,0]}' },
   ],
 }
 

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Five values', input: '[2,9,4,1,7]' },
     { label: 'Repeated values', input: '[3,3,8,1]' },
+    { label: 'Smallest valid input', input: '[1,2,3,4]' },
+    { label: 'Equal values give zero difference', input: '[6,6,6,6,6]' },
+    { label: 'Largest allowed values', input: '[10000,1,10000,1,9999]' },
+    { label: 'Long run: 12 values', input: '[47,5520,9357,9030,4203,7132,5833,9714,5831,6536,7541,6478]' },
   ],
 }
 

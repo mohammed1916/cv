@@ -14,6 +14,9 @@ const definition = {
   examples: [
     { label: 'One swap', input: '][][' },
     { label: 'Two swaps', input: ']]][[[' },
+    { label: 'Already balanced', input: '[]' },
+    { label: 'Smallest swap', input: '][' },
+    { label: 'Long run: 30 characters', input: '[[[[]]]][][][[[]]][]][[[]]]][[' },
   ],
 }
 

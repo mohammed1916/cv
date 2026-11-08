@@ -14,6 +14,9 @@ const definition = {
   complexity: 'O(r²) for the self-join of r rows in this trace; a database answers the same query with an index on (user_id, time_stamp).',
   examples: [
     { label: 'Mixed users', input: '{"confirmations":[[2,"2024-01-01 10:00:00","confirmed"],[2,"2024-01-02 10:00:00","timeout"],[3,"2024-01-01 12:00:00","confirmed"],[3,"2024-01-01 12:06:59","timeout"],[6,"2024-01-01 09:00:00","confirmed"],[6,"2024-01-03 09:01:00","timeout"]]}' },
+    { label: 'Single timeout', input: '{"confirmations":[[1,"2024-01-01 09:00:00","timeout"]]}' },
+    { label: 'Same time, different users', input: '{"confirmations":[[1,"2024-01-01 09:00:00","confirmed"],[2,"2024-01-01 09:00:00","timeout"]]}' },
+    { label: 'Long run: 12 rows', input: '{"confirmations":[[1,"2024-01-06 14:23:00","confirmed"],[4,"2024-01-11 03:04:00","timeout"],[1,"2024-01-12 20:45:00","confirmed"],[2,"2024-01-25 09:46:00","timeout"],[3,"2024-01-10 18:31:00","confirmed"],[2,"2024-01-03 07:08:00","timeout"],[5,"2024-01-20 00:53:00","confirmed"],[4,"2024-01-21 05:38:00","timeout"],[5,"2024-01-18 14:03:00","confirmed"],[4,"2024-01-19 19:24:00","timeout"],[1,"2024-01-12 20:05:00","confirmed"],[6,"2024-01-21 01:58:00","timeout"]]}' },
   ],
 }
 

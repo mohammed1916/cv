@@ -14,6 +14,9 @@ const definition = {
   examples: [
     { label: 'Capped by the largest', input: '[4,1,1]' },
     { label: 'Balanced', input: '[1,2,3]' },
+    { label: 'Single project at the limit', input: '[30]' },
+    { label: 'Equal projects', input: '[5,5,5]' },
+    { label: 'Long run: eight projects', input: '[17,2,7,28,1,26,19,24]' },
   ],
 }
 

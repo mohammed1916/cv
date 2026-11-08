@@ -14,6 +14,9 @@ const definition = {
   examples: [
     { label: 'Run of four', input: 'aaaabbcc' },
     { label: 'Mixed run', input: 'xxxyzzzz' },
+    { label: 'Single letter', input: 'a' },
+    { label: 'Equal letters', input: 'aaaa' },
+    { label: 'Long run: 30 letters', input: 'kzingdmvatghebijcfqrufutefyjar' },
   ],
 }
 

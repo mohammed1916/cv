@@ -10,7 +10,7 @@ const definition = {
   examples: [
     { label: 'Common pair', input: '{"nums1":[7,8],"nums2":[8,9],"nums3":[4,9]}' },
     { label: 'Repeats', input: '{"nums1":[5,5,5],"nums2":[6],"nums3":[7]}' },
-    { label: 'Disjoint', input: '{"nums1":[1],"nums2":[2],"nums3":[3]}' },
+    { label: 'Disjoint', input: '{"nums1":[1],"nums2":[2],"nums3":[3]}' }, { label: "Single values", input: "{\"nums1\":[1],\"nums2\":[1],\"nums3\":[1]}" }, { label: "Repeated values", input: "{\"nums1\":[2,2],\"nums2\":[2,2],\"nums3\":[2]}" }, { label: "Maximum value", input: "{\"nums1\":[100,1],\"nums2\":[100],\"nums3\":[100,50]}" }, { label: "Long run: 20 each", input: "{\"nums1\":[60,37,72,17,31,12,20,71,28,6,65,33,72,61,8,25,13,15,30,82],\"nums2\":[8,39,68,31,91,53,47,97,28,56,28,11,66,86,42,17,25,77,15,6],\"nums3\":[79,85,7,3,39,12,25,99,27,28,72,4,100,90,50,59,80,92,34,38]}" },
   ],
 }
 

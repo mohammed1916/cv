@@ -20,6 +20,9 @@ const definition = {
     { label: 'Scattered four', input: '{"points":[[0,0],[4,1],[1,3],[2,2]],"k":3}' },
     { label: 'Five seeds', input: '{"points":[[1,1],[3,8],[9,2],[4,4],[0,7]],"k":3}' },
     { label: 'Corners', input: '{"points":[[0,0],[6,0],[0,6],[6,6]],"k":4}' },
+    { label: 'Single point', input: '{"points":[[0,0]],"k":1}' },
+    { label: 'Repeated points', input: '{"points":[[2,2],[2,2],[5,5]],"k":2}' },
+    { label: 'Long run: eight points', input: '{"points":[[-7,1],[-4,5],[10,2],[9,3],[9,7],[-9,8],[6,-10],[2,9]],"k":4}' },
   ],
 }
 

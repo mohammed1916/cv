@@ -17,6 +17,9 @@ const definition = {
     { label: 'Order four', input: '{"n":4}' },
     { label: 'Order nine', input: '{"n":9}' },
     { label: 'Order thirteen', input: '{"n":13}' },
+    { label: "Order one", input: "{\"n\":1}" },
+    { label: "Order two", input: "{\"n\":2}" },
+    { label: "Long run: order 100", input: "{\"n\":100}" },
   ],
 }
 

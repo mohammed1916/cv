@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Sorted', input: '[1,2,3,4,5]' },
     { label: 'One survivor', input: '[1,3,2]' },
+    { label: 'Single value', input: '[7]' },
+    { label: 'Extreme values', input: '[-10000,10000]' },
+    { label: 'Long run: twelve values', input: '[-9915,-9663,-7307,-7295,-7077,-6789,-6309,-5704,-5659,-5355,-4590,-4405]' },
   ],
 }
 

@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Three values', input: '[2,5,2]' },
     { label: 'Single value', input: '[7]' },
+    { label: 'Extreme values', input: '[-1000,1000]' },
+    { label: 'Equal values, ten items', input: '[4,4,4,4,4,4,4,4,4,4]' },
+    { label: 'Long run: 10 values', input: '[-399,-301,803,959,792,413,-39,115,-813,472]' },
   ],
 }
 

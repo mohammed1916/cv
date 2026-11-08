@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'One cell', input: '{"m":1,"n":1}' },
     { label: 'Three by three', input: '{"m":3,"n":3}' },
+    { label: 'Single row, widest', input: '{"m":1,"n":6}' },
+    { label: 'Two rows of four', input: '{"m":2,"n":4}' },
+    { label: 'Largest grid: 3 by 6', input: '{"m":3,"n":6}' },
   ],
 }
 

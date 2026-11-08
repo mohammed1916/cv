@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"login_time":"12:01","logout_time":"12:44"}' },
     { label: 'Overnight', input: '{"login_time":"21:30","logout_time":"03:00"}' },
+  { label: 'Same minute', input: "{\"login_time\":\"08:15\",\"logout_time\":\"08:15\"}" },
+  { label: 'Whole day', input: "{\"login_time\":\"00:00\",\"logout_time\":\"23:59\"}" },
+  { label: 'Overnight span', input: "{\"login_time\":\"22:10\",\"logout_time\":\"06:45\"}" },
+  { label: 'Last minute', input: "{\"login_time\":\"23:58\",\"logout_time\":\"23:59\"}" },
   ],
 }
 

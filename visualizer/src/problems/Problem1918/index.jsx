@@ -16,6 +16,10 @@ const definition = {
     { label: "Third smallest", input: '{"nums":[3,1,2],"k":3}' },
     { label: "First smallest", input: '{"nums":[3,1,2],"k":1}' },
     { label: "Repeated values", input: '{"nums":[2,2,2],"k":4}' },
+    { label: 'Single value', input: '{"nums":[5],"k":1}' },
+    { label: 'Equal values', input: '{"nums":[4,4],"k":2}' },
+    { label: 'Largest k for ten values', input: '{"nums":[9,9,9,9,9,9,9,9,9,9],"k":55}' },
+    { label: 'Long run: ten values', input: '{"nums":[8,6,9,3,3,6,9,3,8,7],"k":28}' },
   ],
 };
 

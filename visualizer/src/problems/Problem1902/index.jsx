@@ -23,6 +23,10 @@ const definition = {
     { label: 'Balanced', input: '[4,2,6,1,3,5,7]' },
     { label: 'Zigzag', input: '[1,3,2]' },
     { label: 'Ascending', input: '[5,4,3,2,1]' },
+  { label: 'Single value', input: "[42]" },
+  { label: 'Two values', input: "[7,3]" },
+  { label: 'Fifteen distinct values', input: "[50,25,75,12,37,62,87,6,18,31,43,56,68,81,93]" },
+  { label: 'Long run: 15 values', input: "[41,21,20,45,66,57,3,69,16,82,70,64,99,58,39]" },
   ],
 }
 

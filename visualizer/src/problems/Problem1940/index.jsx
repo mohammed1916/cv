@@ -14,6 +14,9 @@ const definition = {
   examples: [
     { label: 'Three arrays', input: '[[1,3,4],[1,4,5],[1,4,6]]' },
     { label: 'No overlap', input: '[[2,5],[3,6]]' },
+    { label: 'Single value', input: '[[7]]' },
+    { label: 'Identical arrays', input: '[[2,4],[2,4]]' },
+    { label: 'Long run: five arrays of eight', input: '[[4,5,7,11,12,13,15,16],[2,3,6,8,15,16,19,20],[2,3,6,7,8,11,13,14],[1,2,7,8,11,12,15,19],[1,2,3,12,14,21,28,30]]' },
   ],
 }
 

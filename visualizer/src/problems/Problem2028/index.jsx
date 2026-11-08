@@ -10,7 +10,7 @@ const definition = {
   examples: [
     { label: 'Even split', input: '{"rolls":[1,6,1],"mean":3,"n":2}' },
     { label: 'Remainder', input: '{"rolls":[2,3],"mean":2,"n":3}' },
-    { label: 'Impossible', input: '{"rolls":[6,6],"mean":6,"n":3}' },
+    { label: 'Impossible', input: '{"rolls":[6,6],"mean":6,"n":3}' }, { label: "Single die", input: "{\"rolls\":[4],\"mean\":4,\"n\":1}" }, { label: "Equal rolls", input: "{\"rolls\":[3,3],\"mean\":3,\"n\":2}" }, { label: "Largest faces", input: "{\"rolls\":[6,1,6,1],\"mean\":6,\"n\":30}" }, { label: "Long run: 30 rolls", input: "{\"rolls\":[4,5,6,4,5,2,1,3,1,2,1,3,2,4,5,1,1,6,6,5,6,2,6,3,5,3,4,5,1,3],\"mean\":4,\"n\":30}" },
   ],
 }
 

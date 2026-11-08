@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Dense group', input: '{"friendship":[[1,2],[1,3],[1,4],[2,3],[2,4],[2,5],[3,4],[3,5],[4,5]]}' },
     { label: 'Sparse', input: '{"friendship":[[1,2],[1,3],[2,3],[2,4],[3,4]]}' },
+    { label: 'One pair', input: '{"friendship":[[1,2]]}' },
+    { label: 'Triangle', input: '{"friendship":[[1,2],[1,3],[2,3]]}' },
+    { label: 'Long run: 14 pairs', input: '{"friendship":[[4,5],[1,5],[4,7],[1,3],[3,6],[3,7],[2,5],[3,5],[1,6],[1,7],[2,3],[1,8],[5,8],[6,7]]}' },
   ],
 }
 

@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Two operations', input: '{"piles":[5,4,9],"k":2}' },
     { label: 'One pile', input: '{"piles":[7],"k":1}' },
+    { label: 'Single pile', input: '{"piles":[1],"k":1}' },
+    { label: 'Equal piles', input: '{"piles":[4,4,4],"k":2}' },
+    { label: 'Largest values', input: '{"piles":[100,100,100,100,100,100,100,100],"k":12}' },
+    { label: 'Long run: eight piles', input: '{"piles":[52,5,98,59,84,77,10,83],"k":12}' },
   ],
 }
 

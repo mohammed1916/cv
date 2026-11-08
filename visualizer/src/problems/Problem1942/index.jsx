@@ -14,6 +14,9 @@ const definition = {
   examples: [
     { label: 'Target friend 1', input: '{"times":[[1,4],[2,3],[4,6]],"targetFriend":1}' },
     { label: 'Reuse at the same moment', input: '{"times":[[1,2],[2,4],[3,5]],"targetFriend":2}' },
+    { label: 'Two friends', input: '{"times":[[1,2],[3,4]],"targetFriend":0}' },
+    { label: 'Leaves as another arrives', input: '{"times":[[1,3],[3,5]],"targetFriend":1}' },
+    { label: 'Long run: eight friends', input: '{"times":[[1,9],[2,7],[3,9],[4,7],[5,9],[6,7],[7,9],[8,15]],"targetFriend":3}' },
   ],
 }
 

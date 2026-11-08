@@ -10,7 +10,7 @@ const definition = {
   examples: [
     { label: 'Mixed', input: '[1,0,1,1,0]' },
     { label: 'Single one', input: '[1]' },
-    { label: 'Zeros first', input: '[0,0,1]' },
+    { label: 'Zeros first', input: '[0,0,1]' }, { label: "Single one", input: "[1]" }, { label: "All zeros tie", input: "[0,0,0]" }, { label: "Alternating 40", input: "[1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0]" }, { label: "Long run: 40 bits", input: "[1,0,1,1,0,1,0,0,1,0,1,0,1,0,1,1,0,1,0,1,1,1,1,0,1,1,0,0,0,1,0,1,0,0,1,1,0,0,0,1]" },
   ],
 }
 

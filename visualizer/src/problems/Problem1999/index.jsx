@@ -19,6 +19,10 @@ const definition = {
     { label: 'Nines and twos', input: '{"k":7,"digit1":9,"digit2":2}' },
     { label: 'Zero and eight', input: '{"k":11,"digit1":0,"digit2":8}' },
     { label: 'Coinciding digits', input: '{"k":6,"digit1":3,"digit2":3}' },
+    { label: "Smallest k", input: "{\"k\":1,\"digit1\":0,\"digit2\":1}" },
+    { label: "Equal digits", input: "{\"k\":5,\"digit1\":4,\"digit2\":4}" },
+    { label: "Largest k", input: "{\"k\":1000000,\"digit1\":9,\"digit2\":0}" },
+    { label: "Long run: k near the limit", input: "{\"k\":999999,\"digit1\":7,\"digit2\":1}" },
   ],
 }
 

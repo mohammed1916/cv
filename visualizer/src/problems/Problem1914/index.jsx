@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Two by two', input: '{"grid":[[1,2],[3,4]],"k":1}' },
     { label: 'Four by four', input: '{"grid":[[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]],"k":1}' },
+    { label: 'Zero shifts', input: '{"grid":[[1,2],[3,4]],"k":0}' },
+    { label: 'Equal values', input: '{"grid":[[5,5],[5,5]],"k":3}' },
+    { label: 'Tall grid with many shifts', input: '{"grid":[[1,2],[3,4],[5,6],[7,8],[9,10],[11,12]],"k":1000}' },
+    { label: 'Long run: 6 by 6 generated values', input: '{"grid":[[210,660,211,264,508,852],[509,911,612,623,311,19],[487,394,935,58,682,527],[160,361,681,930,288,214],[577,552,526,380,58,361],[137,86,105,489,363,879]],"k":250}' },
   ],
 }
 

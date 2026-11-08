@@ -11,7 +11,7 @@ const definition = {
   examples: [
     { label: 'Scattered', input: '{"s":"XOXOXOX"}' },
     { label: 'Two blocks', input: '{"s":"XXXOXXX"}' },
-    { label: 'All O', input: '{"s":"OOO"}' },
+    { label: 'All O', input: '{"s":"OOO"}' }, { label: "Single X", input: "{\"s\":\"X\"}" }, { label: "All X", input: "{\"s\":\"XXXXXXXXXX\"}" }, { label: "Longest alternating", input: "{\"s\":\"XOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXO\"}" }, { label: "Long run: 60 cells", input: "{\"s\":\"XOOXOOXXOOXOXXOOOXOXXOXXXOXXOXXXXXOXOOXXOXXXXOXOOOXXXXOXXXOO\"}" },
   ],
 }
 

@@ -14,6 +14,9 @@ const definition = {
   examples: [
     { label: 'Two letters', input: 'ab' },
     { label: 'Repeats', input: 'abab' },
+    { label: 'Single letter', input: 'a' },
+    { label: 'Repeated letter', input: 'jjjj' },
+    { label: 'Long run: 16 letters', input: 'ifebidihgjabcfij' },
   ],
 }
 

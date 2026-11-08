@@ -11,7 +11,7 @@ const definition = {
   examples: [
     { label: 'Three of one', input: '{"answerKey":"TFTFT","k":1}' },
     { label: 'Two flips', input: '{"answerKey":"FFFTFT","k":2}' },
-    { label: 'No flips', input: '{"answerKey":"TTFF","k":0}' },
+    { label: 'No flips', input: '{"answerKey":"TTFF","k":0}' }, { label: "Single answer", input: "{\"answerKey\":\"T\",\"k\":0}" }, { label: "Equal counts", input: "{\"answerKey\":\"TFTF\",\"k\":2}" }, { label: "Every answer flips", input: "{\"answerKey\":\"TTTFFFTTTF\",\"k\":10}" }, { label: "Long run: 40 answers", input: "{\"answerKey\":\"TTTFTTFTFFTFFFTFFFFFFTTTTTFTFTFFTTTTFFTF\",\"k\":13}" },
   ],
 }
 

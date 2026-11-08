@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'All eliminated', input: '{"dist":[1,3,4],"speed":[1,1,1]}' },
     { label: 'Second monster too early', input: '{"dist":[1,1,2,3],"speed":[1,1,1,1]}' },
+    { label: 'Single monster', input: '{"dist":[5],"speed":[1]}' },
+    { label: 'Equal arrival times', input: '{"dist":[4,8],"speed":[2,4]}' },
+    { label: 'Largest values, eight monsters', input: '{"dist":[100,100,100,100,100,100,100,100],"speed":[1,1,1,1,1,1,1,1]}' },
+    { label: 'Long run: 8 monsters', input: '{"dist":[15,64,29,82,75,96,29,2],"speed":[27,80,13,38,47,52,85,6]}' },
   ],
 }
 

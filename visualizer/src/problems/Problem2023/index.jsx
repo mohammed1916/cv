@@ -10,7 +10,7 @@ const definition = {
   examples: [
     { label: 'Two strings', input: '{"nums":["4","44","8"],"target":"448"}' },
     { label: 'Split target', input: '{"nums":["1","23","2","3"],"target":"123"}' },
-    { label: 'Repeats', input: '{"nums":["9","9"],"target":"99"}' },
+    { label: 'Repeats', input: '{"nums":["9","9"],"target":"99"}' }, { label: "Two single digits", input: "{\"nums\":[\"1\",\"2\"],\"target\":\"12\"}" }, { label: "Equal pieces", input: "{\"nums\":[\"5\",\"5\",\"5\"],\"target\":\"555\"}" }, { label: "Longest pieces", input: "{\"nums\":[\"12345678\",\"87654321\"],\"target\":\"1234567887654321\"}" }, { label: "No way to build target", input: "{\"nums\":[\"3\",\"4\"],\"target\":\"99\"}" }, { label: "Long run: 30 pieces", input: "{\"nums\":[\"21\",\"27\",\"9\",\"87\",\"82\",\"5\",\"153\",\"4\",\"3\",\"8\",\"87\",\"2\",\"64\",\"7\",\"08\",\"5\",\"5\",\"3\",\"357\",\"0\",\"81\",\"447\",\"6\",\"770\",\"7\",\"1\",\"204\",\"247\",\"2\",\"15\"],\"target\":\"212798782\"}" },
   ],
 }
 

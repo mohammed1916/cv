@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Four values', input: '[3,0,1,2]' },
     { label: 'Shuffled', input: '[4,2,0,1,3]' },
+    { label: 'Single value', input: '[0]' },
+    { label: 'Two values swapped', input: '[1,0]' },
+    { label: 'Identity order', input: '[0,1,2,3]' },
+    { label: 'Long run: 12 shuffled values', input: '[8,6,0,1,3,7,4,11,2,9,10,5]' },
   ],
 }
 

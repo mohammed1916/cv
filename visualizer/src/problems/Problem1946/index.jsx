@@ -14,6 +14,9 @@ const definition = {
   examples: [
     { label: 'Raise a block', input: '{"num":"132","change":[9,8,5,0,3,6,4,2,6,8]}' },
     { label: 'No raise possible', input: '{"num":"021","change":[0,1,2,3,4,5,6,7,8,9]}' },
+    { label: 'Single digit', input: '{"num":"9","change":[0,1,2,3,4,5,6,7,8,9]}' },
+    { label: 'Repeated digits', input: '{"num":"555","change":[0,1,2,3,4,5,6,7,8,9]}' },
+    { label: 'Long run: twelve digits', input: '{"num":"343012567830","change":[7,0,7,8,7,4,5,2,5,8]}' },
   ],
 }
 

@@ -14,6 +14,9 @@ const definition = {
   examples: [
     { label: 'Row closes', input: '{"board":["WB......","........","........","........","........","........","........","........"],"rMove":0,"cMove":2,"color":"W"}' },
     { label: 'Diagonal closes', input: '{"board":["W.......",".B......","..B.....","........","........","........","........","........"],"rMove":3,"cMove":3,"color":"W"}' },
+    { label: 'Empty board', input: '{"board":["........","........","........","........","........","........","........","........"],"rMove":0,"cMove":0,"color":"W"}' },
+    { label: 'Move in the corner', input: '{"board":["W.......","........","........","........","........","........","........","........"],"rMove":7,"cMove":7,"color":"B"}' },
+    { label: 'Long run: busy board', input: '{"board":[".....BWW","...BW.BB",".B.BBBB.",".WW..WW.","WWB..W.W","WWWBWW..",".BW.WW..","B..BWW.."],"rMove":5,"cMove":4,"color":"B"}' },
   ],
 }
 

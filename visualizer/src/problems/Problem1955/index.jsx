@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Two trailing 2s', input: '[0,1,2,2]' },
     { label: 'Mixed', input: '[0,1,2,0,1,2]' },
+    { label: 'Single two', input: '[2]' },
+    { label: 'All twos', input: '[2,2,2,2,2,2,2,2,2,2,2,2]' },
+    { label: 'Long run: twelve values', input: '[2,1,1,0,2,2,1,2,2,0,1,1]' },
   ],
 }
 

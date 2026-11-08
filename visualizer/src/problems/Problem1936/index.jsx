@@ -14,6 +14,9 @@ const definition = {
   examples: [
     { label: 'One gap too wide', input: '{"rungs":[2,5,9],"dist":3}' },
     { label: 'Already reachable', input: '{"rungs":[3,6,8,10],"dist":3}' },
+    { label: 'Single rung', input: '{"rungs":[5],"dist":1}' },
+    { label: 'Gap exactly reachable', input: '{"rungs":[1,3,5],"dist":2}' },
+    { label: 'Largest span: ten rungs', input: '{"rungs":[10,20,30,40,50,60,70,80,90,100],"dist":50}' },
   ],
 }
 

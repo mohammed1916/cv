@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Five rooms', input: '[-1,0,0,1,1]' },
     { label: 'Chain', input: '[-1,0,1,2]' },
+    { label: 'Single room', input: '[-1]' },
+    { label: 'Siblings share a parent', input: '[-1,0,0,0]' },
+    { label: 'Chain of twelve rooms', input: '[-1,0,1,2,3,4,5,6,7,8,9,10]' },
+    { label: 'Long run: 12 rooms, random parents', input: '[-1,0,0,1,0,1,0,4,4,3,6,6]' },
   ],
 }
 

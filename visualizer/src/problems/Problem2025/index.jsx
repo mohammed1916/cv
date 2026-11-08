@@ -10,7 +10,7 @@ const definition = {
   examples: [
     { label: 'Change to fix', input: '{"nums":[1,2,3],"k":4}' },
     { label: 'Equal split', input: '{"nums":[1,1,1,1],"k":1}' },
-    { label: 'Negative pivot', input: '{"nums":[-1,4,-1,2],"k":-3}' },
+    { label: 'Negative pivot', input: '{"nums":[-1,4,-1,2],"k":-3}' }, { label: "Two zeros", input: "{\"nums\":[0,0],\"k\":0}" }, { label: "Equal values", input: "{\"nums\":[3,3,3],\"k\":6}" }, { label: "Extreme values", input: "{\"nums\":[100,-100,100,-100],\"k\":100}" }, { label: "Long run: 30 values", input: "{\"nums\":[-11,-96,-89,-47,-5,47,27,9,-65,-61,-83,14,-99,-63,-20,-66,81,-54,51,84,-48,95,-65,-25,58,74,95,95,77,-32],\"k\":-37}" },
   ],
 }
 

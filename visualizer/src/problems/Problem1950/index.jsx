@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Small mix', input: '[3,1,2]' },
     { label: 'Equal values', input: '[2,2,2]' },
+    { label: 'Single value', input: '[5]' },
+    { label: 'Extreme values', input: '[-100000,100000]' },
+    { label: 'Long run: 12 values', input: '[24419,-75557,92336,-1423,83048,1702,20896,-53926,-81550,6331,16433,-51824]' },
   ],
 }
 

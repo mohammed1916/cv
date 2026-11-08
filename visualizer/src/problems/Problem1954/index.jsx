@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Thirteen apples', input: '13' },
     { label: 'One apple', input: '1' },
+    { label: 'Two apples', input: '2' },
+    { label: 'Largest allowed: 1000000000', input: '1000000000' },
+    { label: 'Large odd value', input: '999999999' },
   ],
 }
 

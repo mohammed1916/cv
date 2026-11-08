@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Square of a prime (9)', input: '9' },
     { label: 'Not three divisors (12)', input: '12' },
+    { label: 'One', input: '1' },
+    { label: 'Square of two', input: '64' },
+    { label: 'Largest allowed: 100', input: '100' },
   ],
 }
 

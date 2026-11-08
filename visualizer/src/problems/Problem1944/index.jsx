@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Mixed heights', input: '[10,6,8,5,11]' },
     { label: 'Increasing', input: '[1,2,3,4]' },
+    { label: 'Single person', input: '[5]' },
+    { label: 'Two people', input: '[2,1]' },
+    { label: 'Long run: 12 distinct heights', input: '[31204,22177,25046,22459,24168,4956,23452,18933,573,24649,2073,11875]' },
   ],
 }
 

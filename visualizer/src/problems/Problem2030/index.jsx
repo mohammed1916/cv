@@ -10,7 +10,7 @@ const definition = {
   examples: [
     { label: 'Two copies', input: '{"s":"hello","k":3,"letter":"l","repetition":2}' },
     { label: 'Second letter', input: '{"s":"banana","k":3,"letter":"a","repetition":1}' },
-    { label: 'All same', input: '{"s":"zzz","k":2,"letter":"z","repetition":2}' },
+    { label: 'All same', input: '{"s":"zzz","k":2,"letter":"z","repetition":2}' }, { label: "Single letter", input: "{\"s\":\"a\",\"k\":1,\"letter\":\"a\",\"repetition\":1}" }, { label: "No copies needed", input: "{\"s\":\"abab\",\"k\":2,\"letter\":\"a\",\"repetition\":0}" }, { label: "Full length", input: "{\"s\":\"zzzzzzzzzzzzzzzzzzzzzzzzzzzzzz\",\"k\":30,\"letter\":\"z\",\"repetition\":30}" }, { label: "Long run: 30 letters", input: "{\"s\":\"ccebaadaddbbcdedaaabeeebbcaeac\",\"k\":10,\"letter\":\"c\",\"repetition\":3}" },
   ],
 }
 

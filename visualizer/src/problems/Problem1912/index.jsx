@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Search, rent, report', input: '{"entries":[[0,4,8],[0,5,9],[1,4,6],[2,4,2]],"ops":[["search",4],["rent",2,4],["report"],["drop",2,4],["search",4]]}' },
     { label: 'Five shops', input: '{"entries":[[0,7,10],[1,7,9],[2,7,8],[3,7,7],[4,7,6],[5,7,5]],"ops":[["search",7],["rent",5,7],["search",7]]}' },
+  { label: 'Single entry', input: "{\"entries\":[[1,2,5]],\"ops\":[[\"search\",2]]}" },
+  { label: 'Equal prices at two shops', input: "{\"entries\":[[0,3,6],[1,3,6]],\"ops\":[[\"search\",3],[\"rent\",0,3],[\"search\",3]]}" },
+  { label: 'Report with no rentals', input: "{\"entries\":[[4,4,9]],\"ops\":[[\"report\"]]}" },
+  { label: 'Long run: 12 entries, 20 operations', input: "{\"entries\":[[3,0,20],[1,3,17],[4,1,1],[1,4,45],[4,4,13],[2,3,2],[1,0,13],[0,1,2],[1,1,49],[0,3,39],[4,2,7],[0,4,6]],\"ops\":[[\"search\",3],[\"drop\",1,0],[\"rent\",0,1],[\"drop\",1,4],[\"report\"],[\"report\"],[\"search\",2],[\"search\",4],[\"rent\",0,4],[\"search\",2],[\"search\",2],[\"search\",0],[\"drop\",1,4],[\"search\",1],[\"report\"],[\"report\"],[\"search\",2],[\"drop\",3,1],[\"search\",0],[\"rent\",1,2]]}" },
   ],
 }
 

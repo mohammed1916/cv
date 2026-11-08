@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Dip and rise', input: '[1,2,3,2]' },
     { label: 'Mixed', input: '[5,1,5,5,1]' },
+    { label: 'Single obstacle', input: '[1]' },
+    { label: 'Equal heights', input: '[3,3,3]' },
+    { label: 'Long run: fourteen heights', input: '[694,491,116,921,290,919,496,669,686,811,452,161,274,975]' },
   ],
 }
 

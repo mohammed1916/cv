@@ -18,6 +18,9 @@ const definition = {
     { label: 'Example 1', input: '{"num":"5023"}' },
     { label: 'Example 2', input: '{"num":"25??"}' },
     { label: 'Example 3', input: '{"num":"?3295???"}' },
+    { label: 'Two unknown digits', input: '{"num":"??"}' },
+    { label: 'Eight unknown digits', input: '{"num":"????????"}' },
+    { label: 'Long run: eight mixed characters', input: '{"num":"4?2?9?1?"}' },
   ],
 }
 

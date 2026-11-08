@@ -14,6 +14,9 @@ const definition = {
   examples: [
     { label: 'Matches after two words', input: '{"s":"catdog","words":["cat","dog","bird"]}' },
     { label: 'Overshoots', input: '{"s":"catdo","words":["cat","dog"]}' },
+    { label: 'Single letter', input: '{"s":"a","words":["a"]}' },
+    { label: 'Duplicate words', input: '{"s":"abab","words":["ab","ab"]}' },
+    { label: 'Long run: eight words', input: '{"s":"ecdijk","words":["ab","cd","e","fgh","ij","k","lm","n"]}' },
   ],
 }
 

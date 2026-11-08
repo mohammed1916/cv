@@ -8,6 +8,9 @@ const complexity = 'O(u^2 * f) time for u users and f followers per user in this
 const examples = [
   { label: 'Sample', input: '{"Relations":[{"user_id":1,"follower_id":10},{"user_id":1,"follower_id":11},{"user_id":1,"follower_id":12},{"user_id":2,"follower_id":10},{"user_id":2,"follower_id":11},{"user_id":2,"follower_id":13},{"user_id":3,"follower_id":11},{"user_id":3,"follower_id":12},{"user_id":3,"follower_id":10},{"user_id":4,"follower_id":13}]}' },
   { label: 'Three-way tie', input: '{"Relations":[{"user_id":1,"follower_id":5},{"user_id":1,"follower_id":6},{"user_id":2,"follower_id":5},{"user_id":2,"follower_id":6},{"user_id":3,"follower_id":5},{"user_id":3,"follower_id":6}]}' },
+    { label: 'Single relation', input: '{"Relations":[{"user_id":1,"follower_id":2}]}' },
+    { label: 'Relations with no shared follower', input: '{"Relations":[{"user_id":1,"follower_id":5},{"user_id":2,"follower_id":6}]}' },
+    { label: 'Long run: twelve relations', input: '{"Relations":[{"user_id":4,"follower_id":6},{"user_id":2,"follower_id":6},{"user_id":4,"follower_id":6},{"user_id":2,"follower_id":5},{"user_id":4,"follower_id":5},{"user_id":2,"follower_id":8},{"user_id":4,"follower_id":9},{"user_id":2,"follower_id":8},{"user_id":4,"follower_id":7},{"user_id":2,"follower_id":7},{"user_id":4,"follower_id":9},{"user_id":2,"follower_id":6}]}' },
 ]
 
 const definition = {

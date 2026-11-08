@@ -14,6 +14,9 @@ const definition = {
   examples: [
     { label: 'Two palindromes', input: 'abcbaxyzy' },
     { label: 'Repeated letters', input: 'aaaa' },
+    { label: 'Two letters', input: 'ab' },
+    { label: 'Longest repeated letters', input: 'aaaaaaaaaaaaaa' },
+    { label: 'Long run: 14 letters', input: 'rwfwjchmlihkjg' },
   ],
 }
 

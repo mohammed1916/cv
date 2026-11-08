@@ -14,6 +14,9 @@ const definition = {
   examples: [
     { label: 'Branching tree', input: '{"parents":[-1,0,0,2],"queries":[[3,1],[1,3]]}' },
     { label: 'Chain', input: '{"parents":[-1,0,1,2],"queries":[[3,2],[2,0]]}' },
+    { label: 'Single node', input: '{"parents":[-1],"queries":[[0,5]]}' },
+    { label: 'Two children of the root', input: '{"parents":[-1,0,0],"queries":[[1,0],[2,0]]}' },
+    { label: 'Long run: eight nodes', input: '{"parents":[-1,0,0,0,2,4,0,2],"queries":[[2,27],[0,17],[6,55],[4,13],[2,19],[0,9],[6,47],[4,5]]}' },
   ],
 }
 

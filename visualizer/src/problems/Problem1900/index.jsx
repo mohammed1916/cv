@@ -102,6 +102,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"n":5,"first":1,"second":3}' },
     { label: 'Pair', input: '{"n":4,"first":1,"second":4}' },
+  { label: 'Smallest tournament', input: "{\"n\":2,\"first\":1,\"second\":2}" },
+  { label: 'Largest tournament', input: "{\"n\":8,\"first\":1,\"second\":8}" },
+  { label: 'Adjacent players', input: "{\"n\":6,\"first\":3,\"second\":4}" },
+  { label: 'Long run: eight players', input: "{\"n\":8,\"first\":3,\"second\":6}" },
   ],
 }
 

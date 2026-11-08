@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Chain of three', input: '{"trees":[{"value":7,"left":{"value":2,"left":null,"right":null},"right":{"value":9,"left":null,"right":null}},{"value":2,"left":{"value":1,"left":null,"right":null},"right":null},{"value":9,"left":{"value":8,"left":null,"right":null},"right":{"value":11,"left":null,"right":null}}]}' },
     { label: 'Stuck', input: '{"trees":[{"value":5,"left":{"value":1,"left":null,"right":null},"right":null},{"value":4,"left":null,"right":null}]}' },
+    { label: 'Single node', input: '{"trees":[{"value":4,"left":null,"right":null}]}' },
+    { label: 'Equal values', input: '{"trees":[{"value":3,"left":{"value":3,"left":null,"right":null},"right":null}]}' },
+    { label: 'Long run: four trees of three nodes', input: '{"trees":[{"value":3,"left":{"value":3,"left":null,"right":null},"right":{"value":4,"left":null,"right":null}},{"value":7,"left":{"value":1,"left":null,"right":null},"right":{"value":9,"left":null,"right":null}},{"value":6,"left":{"value":5,"left":null,"right":null},"right":{"value":5,"left":null,"right":null}},{"value":6,"left":{"value":6,"left":null,"right":null},"right":{"value":8,"left":null,"right":null}}]}' },
   ],
 }
 

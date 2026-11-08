@@ -14,6 +14,9 @@ const definition = {
   examples: [
     { label: 'Two transforms', input: '{"s":"hello","k":2}' },
     { label: 'One transform', input: '{"s":"abc","k":1}' },
+    { label: 'Single letter', input: '{"s":"a","k":1}' },
+    { label: 'Repeated letter, largest k', input: '{"s":"zz","k":6}' },
+    { label: 'Long run: twelve letters', input: '{"s":"mpuhyhihofax","k":6}' },
   ],
 }
 

@@ -8,7 +8,7 @@ const definition = {
   url: 'https://leetcode.com/problems/stock-price-fluctuation/',
   complexity: 'update is O(1); maximum and minimum scan the stored prices in this visual (O(n) each).',
   examples: [
-    { label: 'Overwrite', input: '[["update",[3,20]],["update",[5,8]],["minimum"],["update",[3,9]],["maximum"],["current"]]' },
+    { label: 'Overwrite', input: '[["update",[3,20]],["update",[5,8]],["minimum"],["update",[3,9]],["maximum"],["current"]]' }, { label: "Single update", input: "[[\"update\",[1,1]],[\"current\"]]" }, { label: "Equal prices", input: "[[\"update\",[1,7]],[\"update\",[2,7]],[\"maximum\"],[\"minimum\"]]" }, { label: "Largest price", input: "[[\"update\",[1,1]],[\"update\",[99999,1000]],[\"maximum\"],[\"minimum\"],[\"current\"]]" }, { label: "Long run: 40 operations", input: "[[\"update\",[1,500]],[\"current\"],[\"minimum\"],[\"update\",[4,79]],[\"current\"],[\"maximum\"],[\"current\"],[\"maximum\"],[\"update\",[9,835]],[\"update\",[10,261]],[\"update\",[11,353]],[\"update\",[12,936]],[\"update\",[13,288]],[\"update\",[14,564]],[\"current\"],[\"update\",[16,620]],[\"minimum\"],[\"update\",[18,287]],[\"update\",[19,917]],[\"update\",[20,34]],[\"update\",[21,153]],[\"current\"],[\"minimum\"],[\"update\",[24,44]],[\"current\"],[\"update\",[26,963]],[\"update\",[27,354]],[\"minimum\"],[\"update\",[29,620]],[\"current\"],[\"minimum\"],[\"update\",[32,68]],[\"minimum\"],[\"current\"],[\"update\",[35,288]],[\"update\",[36,377]],[\"minimum\"],[\"update\",[38,651]],[\"minimum\"],[\"update\",[40,144]]]" },
   ],
 }
 

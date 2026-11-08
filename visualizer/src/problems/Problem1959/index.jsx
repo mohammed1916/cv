@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'One resize', input: '{"nums":[10,20,5],"k":1}' },
     { label: 'No resize', input: '{"nums":[10,20],"k":0}' },
+    { label: 'Single value', input: '{"nums":[7],"k":0}' },
+    { label: 'Equal values', input: '{"nums":[5,5,5],"k":2}' },
+    { label: 'Largest values, eight items', input: '{"nums":[50,50,50,50,50,50,50,50],"k":7}' },
+    { label: 'Long run: eight values', input: '{"nums":[13,50,21,38,27,16,29,6],"k":3}' },
   ],
 }
 

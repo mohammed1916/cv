@@ -14,6 +14,9 @@ const definition = {
   examples: [
     { label: 'Repeated outer letters', input: 'abcaba' },
     { label: 'Short', input: 'aabca' },
+    { label: 'Single letter', input: 'a' },
+    { label: 'Repeated letters', input: 'aaaa' },
+    { label: 'Long run: 30 letters', input: 'hijsnmlarcvmxwhupiziludmdkhylw' },
   ],
 }
 

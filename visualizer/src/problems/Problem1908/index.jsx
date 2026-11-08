@@ -16,6 +16,10 @@ const definition = {
     { label: "Balanced", input: "[1,2,3]" },
     { label: "Winning", input: "[1,2]" },
     { label: "Single heap", input: "[7]" },
+  { label: 'Empty heap', input: "[0]" },
+  { label: 'Equal heaps', input: "[4,4,4,4]" },
+  { label: 'Largest heaps', input: "[15,15,15,15,15,15]" },
+  { label: 'Long run: six heaps', input: "[4,13,12,6,13,8]" },
   ],
 };
 

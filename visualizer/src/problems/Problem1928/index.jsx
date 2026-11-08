@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"max_time":3,"edges":[[0,1,1],[1,2,1],[0,2,3]],"passing_fees":[1,5,1]}' },
     { label: 'Example 2', input: '{"max_time":1,"edges":[[0,1,2]],"passing_fees":[1,2]}' },
+    { label: 'Single edge', input: '{"max_time":1,"edges":[[0,1,1]],"passing_fees":[1,1]}' },
+    { label: 'Equal-cost routes', input: '{"max_time":4,"edges":[[0,1,2],[0,2,2],[1,2,1]],"passing_fees":[2,3,2]}' },
+    { label: 'Largest limits', input: '{"max_time":8,"edges":[[0,1,4],[1,2,4],[2,3,4],[0,3,4],[0,2,4],[1,3,4]],"passing_fees":[9,9,9,9]}' },
+    { label: 'Long run: 4 cities, 6 edges', input: '{"max_time":8,"edges":[[0,1,2],[1,2,3],[2,3,4],[0,3,1],[0,2,2],[1,3,3]],"passing_fees":[2,4,6,1]}' },
   ],
 }
 

@@ -71,6 +71,9 @@ export const examples = [
   { label: 'No senior fits', input: asInput([row(201, 'Senior', 88000), row(202, 'Junior', 45000), row(203, 'Senior', 71000), row(204, 'Junior', 30000)]) },
   { label: 'Spends it all', input: asInput([row(301, 'Senior', 40000), row(302, 'Senior', 30000), row(303, 'Junior', 5000)]) },
   { label: 'Empty table', input: asInput([]) },
+  { label: "One junior at the budget", input: "{\"Candidates\":[{\"employee_id\":11,\"experience\":\"Junior\",\"salary\":70000}]}" },
+  { label: "One senior just above the budget", input: "{\"Candidates\":[{\"employee_id\":12,\"experience\":\"Senior\",\"salary\":70001}]}" },
+  { label: "Long run: 14 candidates", input: "{\"Candidates\":[{\"employee_id\":300,\"experience\":\"Senior\",\"salary\":8195},{\"employee_id\":301,\"experience\":\"Senior\",\"salary\":28361},{\"employee_id\":302,\"experience\":\"Junior\",\"salary\":25435},{\"employee_id\":303,\"experience\":\"Junior\",\"salary\":33568},{\"employee_id\":304,\"experience\":\"Senior\",\"salary\":87451},{\"employee_id\":305,\"experience\":\"Senior\",\"salary\":59488},{\"employee_id\":306,\"experience\":\"Junior\",\"salary\":75789},{\"employee_id\":307,\"experience\":\"Junior\",\"salary\":57252},{\"employee_id\":308,\"experience\":\"Junior\",\"salary\":26761},{\"employee_id\":309,\"experience\":\"Junior\",\"salary\":19768},{\"employee_id\":310,\"experience\":\"Senior\",\"salary\":39855},{\"employee_id\":311,\"experience\":\"Junior\",\"salary\":32411},{\"employee_id\":312,\"experience\":\"Senior\",\"salary\":8192},{\"employee_id\":313,\"experience\":\"Senior\",\"salary\":31998}]}" },
 ]
 
 export function parseInput(text) {

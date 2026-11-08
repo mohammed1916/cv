@@ -14,6 +14,9 @@ const definition = {
   examples: [
     { label: 'Mixed words', input: '{"text":"tree sun gold","broken":"xq"}' },
     { label: 'All broken', input: '{"text":"red blue","broken":"e"}' },
+    { label: 'No broken keys', input: '{"text":"tree","broken":""}' },
+    { label: 'Repeated word', input: '{"text":"tree tree","broken":"x"}' },
+    { label: 'Long run: ten words', input: '{"text":"notgh zwn rwn xkz zul tu ebszgf fm ihw elqxkh","broken":"zq"}' },
   ],
 }
 

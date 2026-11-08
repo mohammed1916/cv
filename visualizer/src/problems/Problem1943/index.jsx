@@ -14,6 +14,9 @@ const definition = {
   examples: [
     { label: 'Overlap', input: '[[1,4,5],[1,7,7]]' },
     { label: 'Gap between', input: '[[1,3,2],[4,6,9]]' },
+    { label: 'Single segment', input: '[[1,2,1]]' },
+    { label: 'Touching at a point', input: '[[1,3,1],[3,5,2]]' },
+    { label: 'Long run: six segments', input: '[[1,14,1],[2,14,2],[3,6,3],[5,18,4],[7,16,5],[8,16,6]]' },
   ],
 }
 

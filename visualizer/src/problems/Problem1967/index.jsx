@@ -14,6 +14,9 @@ const definition = {
   examples: [
     { label: 'Two found', input: '{"patterns":["ab","cd","a"],"word":"xaby"}' },
     { label: 'None found', input: '{"patterns":["z"],"word":"abc"}' },
+    { label: 'Single letter match', input: '{"patterns":["a"],"word":"a"}' },
+    { label: 'Duplicate patterns', input: '{"patterns":["ab","ab"],"word":"abab"}' },
+    { label: 'Long run: eight patterns', input: '{"patterns":["ab","cd","ef","gh","xy","q","zz","abc"],"word":"qbyhebgdabyzqxgzqxyhafydaxyhaf"}' },
   ],
 }
 

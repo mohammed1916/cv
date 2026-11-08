@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Missing name and salary', input: '{"employees":[[2,"Ann"],[3,null],[4,"Bo"]],"salaries":[[2,5000],[4,700]]}' },
     { label: 'Salary without employee', input: '{"employees":[[1,"Cy"]],"salaries":[[9,300]]}' },
+    { label: 'No salary rows', input: '{"employees":[[1,"Ann"]],"salaries":[]}' },
+    { label: 'Equal salaries', input: '{"employees":[[1,"Ann"],[2,"Bo"]],"salaries":[[1,5000],[2,5000]]}' },
+    { label: 'Long run: eight employees', input: '{"employees":[[1,null],[2,"E2"],[3,"E3"],[4,null],[5,"E5"],[6,"E6"],[7,null],[8,"E8"]],"salaries":[[1,5405],[3,2621],[5,3652],[7,8126]]}' },
   ],
 }
 
