@@ -15,7 +15,7 @@ const definition = {
   examples: [
     { label: 'Chain of recipes', input: '{"recipes":["bread","toast"],"ingredients":[["flour","water"],["bread","jam"]],"supplies":["flour","water","jam"]}' },
     { label: 'Missing item blocks', input: '{"recipes":["soup","stock"],"ingredients":[["stock","salt"],["bone"]],"supplies":["salt","water"]}' },
-    { label: 'Cycle never starts', input: '{"recipes":["a","b"],"ingredients":[["b"],["a"]],"supplies":["x"]}' },
+    { label: 'Cycle never starts', input: '{"recipes":["a","b"],"ingredients":[["b"],["a"]],"supplies":["x"]}' }, { label: "Single recipe", input: "{\"recipes\":[\"a\"],\"ingredients\":[[\"b\"]],\"supplies\":[\"b\"]}" }, { label: "Shared ingredient", input: "{\"recipes\":[\"r1\",\"r2\"],\"ingredients\":[[\"x\"],[\"x\"]],\"supplies\":[\"x\"]}" }, { label: "Ten recipes", input: "{\"recipes\":[\"r0\",\"r1\",\"r2\",\"r3\",\"r4\",\"r5\",\"r6\",\"r7\",\"r8\",\"r9\"],\"ingredients\":[[\"s0\"],[\"s1\"],[\"s2\"],[\"s3\"],[\"s4\"],[\"s5\"],[\"s6\"],[\"s7\"],[\"s8\"],[\"s9\"]],\"supplies\":[\"s0\",\"s1\",\"s2\",\"s3\",\"s4\",\"s5\",\"s6\",\"s7\",\"s8\",\"s9\"]}" }, { label: "Long run: chained recipes", input: "{\"recipes\":[\"r0\",\"r1\",\"r2\",\"r3\",\"r4\",\"r5\",\"r6\",\"r7\",\"r8\",\"r9\"],\"ingredients\":[[\"s4\",\"s6\"],[\"s7\",\"s5\"],[\"s1\"],[\"s2\",\"s3\"],[\"s2\",\"s8\"],[\"r0\",\"s6\"],[\"s1\",\"s2\"],[\"s1\",\"r3\"],[\"r3\",\"s9\"],[\"r5\",\"s4\"]],\"supplies\":[\"s0\",\"s1\",\"s2\",\"s3\",\"s4\",\"s5\",\"s6\",\"s7\",\"s8\",\"s9\"]}" },
   ],
 }
 

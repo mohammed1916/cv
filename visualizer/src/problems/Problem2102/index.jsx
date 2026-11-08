@@ -15,7 +15,7 @@ const definition = {
   complexity: 'Each add is O(log n) to find the slot plus an insertion shift; each get is O(1). The visualization keeps every ranking snapshot for scrubbing.',
   examples: [
     { label: 'Tie on score', input: '[["add","bob",5],["add","ann",7],["get"],["add","cy",7],["get"],["get"]]' },
-    { label: 'Insert above the answer', input: '[["add","zed",3],["get"],["add","amy",9],["get"],["add","kit",3],["get"]]' },
+    { label: 'Insert above the answer', input: '[["add","zed",3],["get"],["add","amy",9],["get"],["add","kit",3],["get"]]' }, { label: "Single location", input: "[[\"add\",\"a\",1],[\"get\"]]" }, { label: "Equal scores", input: "[[\"add\",\"bob\",5],[\"add\",\"ann\",5],[\"get\"]]" }, { label: "Largest score", input: "[[\"add\",\"max\",100000],[\"add\",\"min\",1],[\"get\"],[\"get\"]]" }, { label: "Long run: 40 operations", input: "[[\"add\",\"aa\",12441],[\"add\",\"ba\",82370],[\"add\",\"ca\",30285],[\"add\",\"da\",11768],[\"add\",\"ea\",60655],[\"add\",\"fa\",89046],[\"add\",\"ga\",82497],[\"add\",\"ha\",26769],[\"add\",\"ia\",28103],[\"add\",\"ja\",60617],[\"add\",\"ka\",21665],[\"add\",\"la\",90313],[\"add\",\"ma\",78003],[\"add\",\"na\",80258],[\"add\",\"oa\",83035],[\"add\",\"pa\",93723],[\"add\",\"qa\",34634],[\"add\",\"ra\",27109],[\"add\",\"sa\",77358],[\"add\",\"ta\",72996],[\"get\"],[\"get\"],[\"get\"],[\"get\"],[\"get\"],[\"get\"],[\"get\"],[\"get\"],[\"get\"],[\"get\"],[\"get\"],[\"get\"],[\"get\"],[\"get\"],[\"get\"],[\"get\"],[\"get\"],[\"get\"],[\"get\"],[\"get\"]]" },
   ],
 }
 

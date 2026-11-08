@@ -15,7 +15,7 @@ const definition = {
   examples: [
     { label: 'Full 3 x 3', input: '[[1,1,1],[1,1,1],[1,1,1]]' },
     { label: 'Diagonal only', input: '[[1,0],[0,1]]' },
-    { label: 'Square', input: '[[1,1],[1,1]]' },
+    { label: 'Square', input: '[[1,1],[1,1]]' }, { label: "Single cell", input: "[[0]]" }, { label: "Empty grid tie", input: "[[0,0],[0,0]]" }, { label: "Largest grid", input: "[[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1]]" }, { label: "Long run: 6 by 6", input: "[[1,1,0,1,0,0],[1,1,1,0,1,0],[1,0,1,0,0,0],[0,0,1,1,0,0],[0,0,1,1,0,0],[0,0,0,0,1,0]]" },
   ],
 }
 

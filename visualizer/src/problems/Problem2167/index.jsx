@@ -16,6 +16,10 @@ const definition = {
     { label: 'Mixed', input: '1100101' },
     { label: 'Trailing clean cars', input: '0010' },
     { label: 'All clean', input: '0000' },
+    { label: 'Single clean car', input: '0' },
+    { label: 'Single illegal car', input: '1' },
+    { label: 'Longest, all illegal', input: '1111111111111111' },
+    { label: 'Long run: 16 cars', input: '0101110101110011' },
   ],
 }
 

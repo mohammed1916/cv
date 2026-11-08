@@ -16,6 +16,11 @@ const definition = {
   examples: [
     { label: 'Padded last group', input: '{"s":"abcdefghij","k":3,"fill":"x"}' },
     { label: 'Exact fit', input: '{"s":"nolog","k":5,"fill":"q"}' },
+    { label: 'Single letter', input: '{"s":"a","k":1,"fill":"z"}' },
+    { label: 'Group longer than the string', input: '{"s":"ab","k":5,"fill":"x"}' },
+    { label: 'Repeated letters, exact fit', input: '{"s":"aaaa","k":2,"fill":"b"}' },
+    { label: 'Largest string, one group', input: '{"s":"abcdefghijklmnopqrstuvwxyzabcdefghijklmn","k":40,"fill":"q"}' },
+    { label: 'Long run: 40 letters', input: '{"s":"mjruusqgqtnphrmsyakuzqtyjahyyzsxcpidmmzm","k":7,"fill":"x"}' },
   ],
 }
 

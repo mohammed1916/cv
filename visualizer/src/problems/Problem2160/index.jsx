@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Repeated digit', input: '4441' },
     { label: 'Zero present', input: '7306' },
+    { label: 'Smallest number', input: '1000' },
+    { label: 'All digits equal', input: '2222' },
+    { label: 'Largest number', input: '9999' },
+    { label: 'Descending digits', input: '9753' },
   ],
 }
 

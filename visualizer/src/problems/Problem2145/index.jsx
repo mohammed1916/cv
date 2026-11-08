@@ -16,6 +16,11 @@ const definition = {
   examples: [
     { label: 'Span fits twice', input: '{"differences":[2,-1,3],"lower":0,"upper":6}' },
     { label: 'Too wide', input: '{"differences":[5,5],"lower":0,"upper":4}' },
+    { label: 'One value fixed', input: '{"differences":[0],"lower":1,"upper":1}' },
+    { label: 'Span equals the window', input: '{"differences":[1,1],"lower":0,"upper":2}' },
+    { label: 'Window too narrow', input: '{"differences":[5,5],"lower":0,"upper":3}' },
+    { label: 'Largest differences', input: '{"differences":[100000,-100000],"lower":-500000,"upper":500000}' },
+    { label: 'Long run: 30 differences', input: '{"differences":[16,20,47,-16,-38,1,4,-49,41,-35,46,-6,41,-48,-45,39,45,-11,14,-22,-22,-35,30,20,-33,-22,-11,9,46,32],"lower":0,"upper":1000}' },
   ],
 }
 

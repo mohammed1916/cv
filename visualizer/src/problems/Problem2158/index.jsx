@@ -16,6 +16,11 @@ const definition = {
   examples: [
     { label: 'Overlap on day two', input: '[[1,4],[2,6],[0,3]]' },
     { label: 'Disjoint days', input: '[[5,7],[0,2],[9,10]]' },
+    { label: 'One day', input: '[[0,1]]' },
+    { label: 'Repeat paints nothing new', input: '[[1,4],[1,4]]' },
+    { label: 'Whole range in one day', input: '[[0,60]]' },
+    { label: 'Nothing new after overlap', input: '[[2,5],[3,4]]' },
+    { label: 'Long run: 15 days', input: '[[4,20],[8,10],[26,58],[1,52],[48,51],[17,51],[9,17],[14,28],[19,30],[19,43],[44,57],[32,34],[49,54],[22,58],[47,51]]' },
   ],
 }
 

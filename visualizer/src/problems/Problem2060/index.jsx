@@ -22,7 +22,7 @@ const definition = {
   examples: [
     { label: 'Fits', input: '{"s1":"a4b","s2":"5b"}' },
     { label: 'Does not fit', input: '{"s1":"abc","s2":"dffe"}' },
-    { label: 'Numbers align', input: '{"s1":"3x","s2":"1y2"}' },
+    { label: 'Numbers align', input: '{"s1":"3x","s2":"1y2"}' }, { label: "Single characters", input: "{\"s1\":\"a\",\"s2\":\"1\"}" }, { label: "Equal strings", input: "{\"s1\":\"ab3\",\"s2\":\"ab3\"}" }, { label: "Largest number", input: "{\"s1\":\"x999\",\"s2\":\"y999\"}" }, { label: "Long run: 40 characters", input: "{\"s1\":\"a1b22c3d4e5f6g7h8i9j10k11l12m13\",\"s2\":\"z9y8x7w6v5u4t3s2r1q5\"}" },
   ],
 }
 

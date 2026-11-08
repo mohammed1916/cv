@@ -16,6 +16,10 @@ const definition = {
     { label: 'Mixed', input: '[5,4]' },
     { label: 'Small pair', input: '[2,3]' },
     { label: 'Equal', input: '[10,10]' },
+    { label: 'Both zero', input: '[0,0]' },
+    { label: 'Equal values', input: '[7,7]' },
+    { label: 'Largest values', input: '[60,1]' },
+    { label: 'Largest pair, reversed', input: '[1,60]' },
   ],
 }
 

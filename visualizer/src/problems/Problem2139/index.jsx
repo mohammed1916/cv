@@ -16,6 +16,10 @@ const definition = {
     { label: 'Mixed moves', input: '{"target":26,"maxDoubles":3}' },
     { label: 'No doublings', input: '{"target":7,"maxDoubles":0}' },
     { label: 'Plenty of doublings', input: '{"target":40,"maxDoubles":10}' },
+    { label: 'Smallest target', input: '{"target":1,"maxDoubles":0}' },
+    { label: 'Exact powers of two', input: '{"target":16,"maxDoubles":4}' },
+    { label: 'Largest target', input: '{"target":1000000000,"maxDoubles":100}' },
+    { label: 'Long run: random large target', input: '{"target":109695608,"maxDoubles":10}' },
   ],
 }
 

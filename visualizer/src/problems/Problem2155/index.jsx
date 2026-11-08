@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Two best divisions', input: '[0,0,1,0]' },
     { label: 'All ones', input: '[1,1,1]' },
+    { label: 'Single zero', input: '[0]' },
+    { label: 'Every division ties', input: '[0,1]' },
+    { label: 'Largest input, all zeros', input: '[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]' },
+    { label: 'Long run: 40 values', input: '[1,0,1,0,0,1,0,1,1,0,1,1,0,1,1,0,0,1,0,1,0,0,1,1,1,0,0,0,0,1,1,0,0,1,0,0,0,0,1,1]' },
   ],
 }
 

@@ -16,6 +16,11 @@ const definition = {
     { label: 'Two gaps', input: 'SSPPSPSPSS' },
     { label: 'Odd seats', input: 'SSPPS' },
     { label: 'Adjacent pairs', input: 'SSSS' },
+    { label: 'Single seat', input: 'S' },
+    { label: 'One pair, plants between', input: 'SPPS' },
+    { label: 'Only plants', input: 'PPPP' },
+    { label: 'Longest corridor, far apart', input: 'SPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPS' },
+    { label: 'Long run: 40 letters', input: 'SPPPSPPSPSSPPSSSPSSSSSPSSPPSPSPSSPPPSSPS' },
   ],
 }
 

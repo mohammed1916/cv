@@ -15,7 +15,7 @@ const definition = {
   complexity: 'O(m^2) time for m instructions in this straightforward simulation (each start walks its own suffix); O(m) extra space.',
   examples: [
     { label: 'Stops at the edge', input: '{"n":3,"startPos":[2,0],"s":"UULRD"}' },
-    { label: 'Stays inside', input: '{"n":2,"startPos":[1,0],"s":"RLRU"}' },
+    { label: 'Stays inside', input: '{"n":2,"startPos":[1,0],"s":"RLRU"}' }, { label: "Single cell", input: "{\"n\":1,\"startPos\":[0,0],\"s\":\"L\"}" }, { label: "Return to start", input: "{\"n\":3,\"startPos\":[1,1],\"s\":\"LR\"}" }, { label: "Longest walk", input: "{\"n\":12,\"startPos\":[11,11],\"s\":\"RDRDRDRDRDRDRDRDRDRDRDRDRDRDRDRDRDRDRDRD\"}" }, { label: "Long run: 40 moves", input: "{\"n\":12,\"startPos\":[5,5],\"s\":\"ULRUUULDULDRUUURDRLULRRRURLLLRUDLDDRLUUR\"}" },
   ],
 }
 

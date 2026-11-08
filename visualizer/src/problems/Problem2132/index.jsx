@@ -16,6 +16,11 @@ const definition = {
     { label: 'Single cells fit', input: '{"grid":[[0,0,0],[0,1,0],[0,0,0]],"stampHeight":1,"stampWidth":1}' },
     { label: 'Blocked pocket', input: '{"grid":[[0,0,0,0],[0,1,0,0],[0,0,0,0]],"stampHeight":1,"stampWidth":2}' },
     { label: 'Full cover', input: '{"grid":[[0,0,0],[0,0,0]],"stampHeight":2,"stampWidth":3}' },
+    { label: 'Single cell grid', input: '{"grid":[[0]],"stampHeight":1,"stampWidth":1}' },
+    { label: 'Overlapping stamps share cells', input: '{"grid":[[0,0,0],[0,0,0],[0,0,0]],"stampHeight":2,"stampWidth":2}' },
+    { label: 'No stamp covers the corner', input: '{"grid":[[0,0,0],[0,1,0],[0,0,0]],"stampHeight":2,"stampWidth":2}' },
+    { label: 'Largest grid, full stamp', input: '{"grid":[[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]],"stampHeight":8,"stampWidth":8}' },
+    { label: 'Long run: 8 by 8 grid', input: '{"grid":[[1,0,1,0,1,0,1,0],[0,0,0,0,0,0,0,0],[1,0,0,0,1,0,1,0],[1,0,0,0,0,0,0,0],[0,1,0,1,1,0,0,1],[1,0,0,0,0,0,0,1],[0,0,0,0,1,0,0,0],[0,0,1,1,1,0,0,0]],"stampHeight":2,"stampWidth":3}' },
   ],
 }
 

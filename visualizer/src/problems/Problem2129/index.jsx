@@ -14,7 +14,7 @@ const definition = {
   complexity: 'O(n) time over the characters of the title.',
   examples: [
     { label: 'Mixed lengths', input: 'river BEND on a hill' },
-    { label: 'Short only', input: 'Go to IT' },
+    { label: 'Short only', input: 'Go to IT' }, { label: "Single word", input: "Go" }, { label: "Equal length words", input: "aa bb cc" }, { label: "Largest title", input: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" }, { label: "Long run: 100 characters", input: "pZoQVoE rPYAZ VksUb vOsngisFB EftZIIt uEAjWMgrn uLEWLouqf dksZy TncWl TPYI dih UMxGo pMcHLB" },
   ],
 }
 

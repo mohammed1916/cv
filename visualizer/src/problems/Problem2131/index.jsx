@@ -16,7 +16,7 @@ const definition = {
   examples: [
     { label: 'Mirror pairs', input: '["ab","ba","ca","ac","zz"]' },
     { label: 'Doubled letters', input: '["qq","qq","qq","rs"]' },
-    { label: 'Only middle', input: '["aa"]' },
+    { label: 'Only middle', input: '["aa"]' }, { label: "Single word", input: "[\"ab\"]" }, { label: "Equal words", input: "[\"aa\",\"aa\"]" }, { label: "Largest list", input: "[\"aa\",\"bh\",\"co\",\"dv\",\"ec\",\"fj\",\"gq\",\"hx\",\"ie\",\"jl\",\"ks\",\"lz\",\"mg\",\"nn\",\"ou\",\"pb\",\"qi\",\"rp\",\"sw\",\"td\",\"uk\",\"vr\",\"wy\",\"xf\",\"ym\",\"zt\",\"aa\",\"bh\",\"co\",\"dv\",\"ec\",\"fj\",\"gq\",\"hx\",\"ie\",\"jl\",\"ks\",\"lz\",\"mg\",\"nn\"]" }, { label: "Long run: 40 words", input: "[\"tc\",\"xc\",\"bw\",\"wf\",\"zs\",\"cx\",\"sz\",\"qn\",\"gm\",\"bo\",\"bz\",\"qi\",\"we\",\"pn\",\"sp\",\"dk\",\"av\",\"vk\",\"uq\",\"em\",\"qs\",\"bw\",\"qb\",\"wj\",\"bc\",\"ix\",\"qr\",\"fl\",\"hj\",\"ur\",\"vi\",\"hy\",\"fw\",\"yd\",\"ex\",\"mw\",\"vd\",\"xy\",\"ui\",\"fv\"]" },
   ],
 }
 

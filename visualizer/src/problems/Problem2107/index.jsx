@@ -16,7 +16,7 @@ const definition = {
   examples: [
     { label: 'Give away a middle block', input: '{"candies":[1,2,2,3,1],"k":2}' },
     { label: 'Repeats on both sides', input: '{"candies":[4,4,5,4,4],"k":2}' },
-    { label: 'Give everything but one', input: '{"candies":[1,2,3,1],"k":3}' },
+    { label: 'Give everything but one', input: '{"candies":[1,2,3,1],"k":3}' }, { label: "Single candy", input: "{\"candies\":[5],\"k\":1}" }, { label: "Equal flavours", input: "{\"candies\":[2,2,2,2],\"k\":2}" }, { label: "Whole box", input: "{\"candies\":[1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9,1,2,3],\"k\":30}" }, { label: "Long run: 30 candies", input: "{\"candies\":[3,4,1,2,2,3,8,8,8,1,5,7,3,3,3,4,5,1,2,1,9,4,4,6,6,6,5,8,4,8],\"k\":15}" },
   ],
 }
 

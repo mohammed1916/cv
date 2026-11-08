@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: 'Leftmost match', input: '{"s":"leetcode","power":7,"modulo":20,"k":2,"hashValue":0}' },
     { label: 'Longer window', input: '{"s":"abcdefgh","power":3,"modulo":50,"k":4,"hashValue":21}' },
+    { label: 'Single letter', input: '{"s":"a","power":2,"modulo":5,"k":1,"hashValue":1}' },
+    { label: 'Several matches, leftmost wins', input: '{"s":"aaaa","power":1,"modulo":3,"k":2,"hashValue":2}' },
+    { label: 'Largest power and modulo', input: '{"s":"zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz","power":100,"modulo":100000,"k":40,"hashValue":99999}' },
+    { label: 'No window matches', input: '{"s":"abcdef","power":2,"modulo":7,"k":3,"hashValue":6}' },
+    { label: 'Long run: 40 letters', input: '{"s":"iaehwnjpilxpkxiecysmkcudtofgmsmaloctnwyj","power":31,"modulo":99991,"k":10,"hashValue":18548}' },
   ],
 }
 

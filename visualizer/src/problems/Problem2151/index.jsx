@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Two good people', input: '[[2,1,2],[1,2,0],[2,1,2]]' },
     { label: 'Contradiction', input: '[[2,0],[0,2]]' },
+    { label: 'Two people agree', input: '[[2,1],[1,2]]' },
+    { label: 'Three people, no statements', input: '[[2,0,0],[0,2,0],[0,0,2]]' },
+    { label: 'Everyone says good', input: '[[2,1,1,1,1,1],[1,2,1,1,1,1],[1,1,2,1,1,1],[1,1,1,2,1,1],[1,1,1,1,2,1],[1,1,1,1,1,2]]' },
+    { label: 'Long run: 6 people', input: '[[2,0,0,0,0,1],[1,2,1,1,1,0],[0,0,2,0,0,0],[1,0,1,2,0,1],[0,1,0,0,2,1],[0,1,0,1,0,2]]' },
   ],
 }
 

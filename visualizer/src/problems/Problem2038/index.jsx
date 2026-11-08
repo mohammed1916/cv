@@ -11,7 +11,7 @@ const definition = {
   examples: [
     { label: 'Bob ahead', input: '{"colors":"BBBABBB"}' },
     { label: 'Alice plays', input: '{"colors":"AAAABA"}' },
-    { label: 'Tie', input: '{"colors":"ABAB"}' },
+    { label: 'Tie', input: '{"colors":"ABAB"}' }, { label: "Single move", input: "{\"colors\":\"A\"}" }, { label: "Equal split", input: "{\"colors\":\"AABB\"}" }, { label: "Longest split", input: "{\"colors\":\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\"}" }, { label: "Long run: 60 moves", input: "{\"colors\":\"BBABAABBAABAABBAAABAAAAABBBABBBBAABABBBABABBABBABABBABABBBAA\"}" },
   ],
 }
 

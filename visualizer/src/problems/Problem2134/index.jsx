@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: 'Wraps around', input: '[1,0,1,0,1,0,0,1]' },
     { label: 'Already grouped', input: '[0,1,1,1,0]' },
+    { label: 'Single value', input: '[1]' },
+    { label: 'Equal split around the circle', input: '[1,0,1,0]' },
+    { label: 'No ones to group', input: '[0,0,0]' },
+    { label: 'Largest input, one zero', input: '[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0]' },
+    { label: 'Long run: 30 values', input: '[0,1,0,1,1,0,0,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,0,0,1,0]' },
   ],
 }
 

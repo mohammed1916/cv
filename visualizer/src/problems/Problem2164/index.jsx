@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Four values', input: '[9,4,2,7]' },
     { label: 'Five values', input: '[5,30,1,2,8]' },
+    { label: 'Single value', input: '[7]' },
+    { label: 'Equal values on both sides', input: '[5,5,5,5]' },
+    { label: 'Largest input, 30 values', input: '[100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1]' },
+    { label: 'Long run: 30 values', input: '[58,31,74,24,71,90,54,43,84,26,83,7,60,59,22,87,17,44,22,50,21,95,17,83,92,26,93,87,44,89]' },
   ],
 }
 

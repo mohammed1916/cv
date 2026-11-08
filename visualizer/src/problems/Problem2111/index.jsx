@@ -15,7 +15,7 @@ const definition = {
   examples: [
     { label: 'Two classes', input: '{"arr":[3,1,2,5,4,4],"k":2}' },
     { label: 'Already sorted by class', input: '{"arr":[1,2,3,4],"k":2}' },
-    { label: 'Single class', input: '{"arr":[5,4,3,2,1],"k":1}' },
+    { label: 'Single class', input: '{"arr":[5,4,3,2,1],"k":1}' }, { label: "Single item", input: "{\"arr\":[7],\"k\":1}" }, { label: "Equal values", input: "{\"arr\":[2,2,2,2],\"k\":2}" }, { label: "Largest values", input: "{\"arr\":[50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1],\"k\":1}" }, { label: "Long run: 30 values", input: "{\"arr\":[17,50,44,43,34,12,49,3,50,43,4,30,35,10,35,30,32,16,24,9,7,25,3,27,41,38,17,5,31,50],\"k\":5}" },
   ],
 }
 

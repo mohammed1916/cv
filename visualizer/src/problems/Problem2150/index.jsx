@@ -16,6 +16,11 @@ const definition = {
   examples: [
     { label: 'Some lonely', input: '[10,6,5,8]' },
     { label: 'Adjacent pairs', input: '[1,3,5,3]' },
+    { label: 'Single value', input: '[0]' },
+    { label: 'Repeats are never lonely', input: '[4,4]' },
+    { label: 'Edges of the range', input: '[0,40,1]' },
+    { label: 'No lonely numbers', input: '[1,2,3]' },
+    { label: 'Long run: 40 values', input: '[10,8,3,21,39,10,14,19,2,18,9,14,21,31,22,39,37,10,27,31,4,32,40,28,11,37,1,16,24,11,28,35,19,40,21,12,2,31,24,28]' },
   ],
 }
 

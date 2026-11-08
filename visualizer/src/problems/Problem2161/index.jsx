@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: 'Equal and both sides', input: '{"nums":[4,-2,8,4,0,-5],"pivot":4}' },
     { label: 'Nothing equal', input: '{"nums":[3,9,1],"pivot":5}' },
+    { label: 'Single value equals pivot', input: '{"nums":[4],"pivot":4}' },
+    { label: 'Equal values keep order', input: '{"nums":[1,5,5,1],"pivot":5}' },
+    { label: 'Extreme values at the pivot', input: '{"nums":[-100,100,0,-100,100],"pivot":-100}' },
+    { label: 'Pivot below every value', input: '{"nums":[3,4],"pivot":0}' },
+    { label: 'Long run: 30 values', input: '{"nums":[-78,-74,85,-17,43,99,-59,-44,80,41,67,47,-39,100,99,-44,35,44,50,-82,10,91,-61,83,92,50,-54,-87,-62,64],"pivot":0}' },
   ],
 }
 

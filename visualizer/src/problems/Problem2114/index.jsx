@@ -14,7 +14,7 @@ const definition = {
   complexity: 'O(total length) time and O(1) extra space beyond the split.',
   examples: [
     { label: 'Middle sentence wins', input: '["one two","red blue green","solo"]' },
-    { label: 'Single words', input: '["a","b"]' },
+    { label: 'Single words', input: '["a","b"]' }, { label: "Single sentence", input: "[\"a\"]" }, { label: "Equal sentences", input: "[\"ab\",\"ab\"]" }, { label: "Longest sentence", input: "[\"abcdefghij klmnopqrst uvwxyzabcd efghijk\"]" }, { label: "Long run: 12 sentences", input: "[\"scar zw\",\"m rzmsz zuvv shy\",\"ckmk harv ddey bew\",\"h es qc\",\"fm\",\"f cmass\",\"lag ubxh b b\",\"c w k pjgi\",\"ml etbop lmnh\",\"j kvaru hxbei\",\"lzx w\",\"noz ffc opcj uinn\"]" },
   ],
 }
 

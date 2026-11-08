@@ -16,7 +16,7 @@ const definition = {
   examples: [
     { label: 'Free start fixes it', input: '{"s":"))()","locked":"0100"}' },
     { label: 'Fixed close too early', input: '{"s":"())(","locked":"1111"}' },
-    { label: 'Odd length', input: '{"s":"((","locked":"00"}' },
+    { label: 'Odd length', input: '{"s":"((","locked":"00"}' }, { label: "Single fixed pair", input: "{\"s\":\"(\",\"locked\":\"1\"}" }, { label: "Already balanced", input: "{\"s\":\"()\",\"locked\":\"00\"}" }, { label: "Largest nested", input: "{\"s\":\"(((((((((())))))))))\",\"locked\":\"11111111111111111111\"}" }, { label: "Long run: 20 brackets", input: "{\"s\":\"()))()))((((()(()())\",\"locked\":\"10100001101000011000\"}" },
   ],
 }
 

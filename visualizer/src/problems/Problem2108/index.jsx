@@ -16,7 +16,7 @@ const definition = {
   examples: [
     { label: 'Third word', input: '["abc","car","ada","racecar","cool"]' },
     { label: 'None', input: '["abcd","xyz"]' },
-    { label: 'Single letter', input: '["ab","z","aa"]' },
+    { label: 'Single letter', input: '["ab","z","aa"]' }, { label: "Single word", input: "[\"a\"]" }, { label: "Repeated words", input: "[\"abc\",\"abc\"]" }, { label: "Longest words", input: "[\"abcdefghijkl\",\"abcdefghijkl\",\"abcdefghijkl\",\"abcdefghijkl\",\"abcdefghijkl\",\"abcdefghijkl\",\"abcdefghijkl\",\"abcdefghijkl\",\"abcdefghijkl\",\"abcdefghijkl\",\"abcdefghijkl\",\"abcdefghijkl\"]" }, { label: "Long run: 12 words", input: "[\"gapi\",\"pdctdsktks\",\"qgjnego\",\"erjlxbasivt\",\"aywz\",\"gpjjhisf\",\"fpktag\",\"cqpdhl\",\"oyjaucmxtb\",\"vkduiqwl\",\"yanlcuuxpn\",\"fxakxqulu\"]" },
   ],
 }
 

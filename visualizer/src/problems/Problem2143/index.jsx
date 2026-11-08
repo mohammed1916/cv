@@ -20,6 +20,11 @@ const definition = {
   examples: [
     { label: "Three indices", input: '{"nums1":[1,2,3],"nums2":[3,2,1]}' },
     { label: "Mixed values", input: '{"nums1":[4,0,2,5],"nums2":[1,3,2,0]}' },
+    { label: 'One index', input: '{"nums1":[7],"nums2":[2]}' },
+    { label: 'Equal values cancel', input: '{"nums1":[2,2],"nums2":[2,2]}' },
+    { label: 'All zeros', input: '{"nums1":[0,0,0],"nums2":[0,0,0]}' },
+    { label: 'Largest values, eight indices', input: '{"nums1":[9,9,9,9,9,9,9,9],"nums2":[0,0,0,0,0,0,0,0]}' },
+    { label: 'Long run: 8 indices', input: '{"nums1":[8,7,3,5,1,7,9,0],"nums2":[3,8,3,4,1,6,9,3]}' },
   ],
 };
 

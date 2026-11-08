@@ -13,7 +13,7 @@ const examples = [
   { label: 'Tie', input: JSON.stringify({
     NewYork: [{ student_id: 1, score: 90 }],
     California: [{ student_id: 5, score: 91 }],
-  }) },
+  }) }, { label: "Single score", input: "{\"NewYork\":[{\"student_id\":1,\"score\":0}],\"California\":[]}" }, { label: "Equal scores", input: "{\"NewYork\":[{\"student_id\":1,\"score\":80}],\"California\":[{\"student_id\":2,\"score\":80}]}" }, { label: "Perfect scores", input: "{\"NewYork\":[{\"student_id\":1,\"score\":100}],\"California\":[{\"student_id\":2,\"score\":100},{\"student_id\":3,\"score\":0}]}" }, { label: "Long run: 16 scores each", input: "{\"NewYork\":[{\"student_id\":1,\"score\":47},{\"student_id\":2,\"score\":63},{\"student_id\":3,\"score\":77},{\"student_id\":4,\"score\":71},{\"student_id\":5,\"score\":5},{\"student_id\":6,\"score\":41},{\"student_id\":7,\"score\":99},{\"student_id\":8,\"score\":2},{\"student_id\":9,\"score\":28},{\"student_id\":10,\"score\":80},{\"student_id\":11,\"score\":69},{\"student_id\":12,\"score\":95},{\"student_id\":13,\"score\":75},{\"student_id\":14,\"score\":14},{\"student_id\":15,\"score\":94},{\"student_id\":16,\"score\":6}],\"California\":[{\"student_id\":101,\"score\":39},{\"student_id\":102,\"score\":50},{\"student_id\":103,\"score\":43},{\"student_id\":104,\"score\":62},{\"student_id\":105,\"score\":88},{\"student_id\":106,\"score\":33},{\"student_id\":107,\"score\":83},{\"student_id\":108,\"score\":92},{\"student_id\":109,\"score\":1},{\"student_id\":110,\"score\":39},{\"student_id\":111,\"score\":0},{\"student_id\":112,\"score\":81},{\"student_id\":113,\"score\":47},{\"student_id\":114,\"score\":79},{\"student_id\":115,\"score\":11},{\"student_id\":116,\"score\":38}]}" },
 ]
 
 const definition = {

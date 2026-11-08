@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: 'Two groups', input: '["abc","ab","bcd","xyz","yz"]' },
     { label: 'Replace joins', input: '["ab","cd","ac","bd"]' },
+    { label: 'Single word', input: '["a"]' },
+    { label: 'Anagrams form one group', input: '["ab","ba"]' },
+    { label: 'Two separate groups', input: '["abc","xyz"]' },
+    { label: 'Twelve full-length words', input: '["abcdefgh","bcdefghi","cdefghij","defghijk","efghijkl","fghijklm","ghijklmn","hijklmno","ijklmnop","jklmnopq","klmnopqr","lmnopqrs"]' },
+    { label: 'Long run: 12 words', input: '["lkeyx","arhmd","jiubcdgh","okythz","mnkfhb","m","zb","bjmwkolf","zn","afizetkn","qvifsb","vrm"]' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
     { label: 'Three on a line plus one', input: '[[0,0],[1,1],[2,2],[0,3]]' },
     { label: 'Unit square', input: '[[0,0],[1,0],[0,1],[1,1]]' },
     { label: 'One line', input: '[[0,0],[1,1],[2,2],[3,3]]' },
+    { label: 'Single point', input: '[[0,0]]' },
+    { label: 'Two points', input: '[[0,0],[5,7]]' },
+    { label: 'Largest coordinates', input: '[[-100,-100],[100,100],[-100,100],[100,-100],[0,0],[100,0]]' },
+    { label: 'Long run: six points', input: '[[-82,11],[-99,-98],[-22,35],[97,1],[14,-22],[76,16]]' },
   ],
 }
 

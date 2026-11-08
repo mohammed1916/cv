@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Positive with zeros', input: '3091' },
     { label: 'Negative', input: '-4520' },
+    { label: 'Zero', input: '0' },
+    { label: 'All digits equal', input: '5555' },
+    { label: 'Largest 12-digit value', input: '999999999999' },
+    { label: 'Negative with zeros', input: '-100000000001' },
   ],
 }
 

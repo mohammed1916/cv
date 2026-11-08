@@ -16,6 +16,11 @@ const definition = {
     { label: 'Fix, flip, count', input: '{"size":4,"ops":[["fix",2],["flip"],["count"],["toString"]]}' },
     { label: 'Single bit', input: '{"size":1,"ops":[["all"],["fix",0],["all"],["flip"],["one"]]}' },
     { label: 'Unfix on empty', input: '{"size":3,"ops":[["unfix",1],["count"],["one"]]}' },
+    { label: 'Single bit', input: '{"size":1,"ops":[["flip"],["count"]]}' },
+    { label: 'Repeated fix keeps one bit', input: '{"size":3,"ops":[["fix",1],["fix",1],["count"]]}' },
+    { label: 'Empty bitset', input: '{"size":4,"ops":[["count"],["toString"]]}' },
+    { label: 'Largest size, all bits', input: '{"size":16,"ops":[["all"],["count"],["unfix",3],["one"],["toString"]]}' },
+    { label: 'Long run: 24 operations', input: '{"size":16,"ops":[["count"],["count"],["count"],["all"],["count"],["flip"],["all"],["unfix",5],["all"],["count"],["fix",9],["count"],["fix",11],["toString"],["fix",1],["one"],["toString"],["fix",12],["toString"],["fix",2],["count"],["fix",11],["fix",9],["all"]]}' },
   ],
 }
 

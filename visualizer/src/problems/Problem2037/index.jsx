@@ -10,7 +10,7 @@ const definition = {
   examples: [
     { label: 'Three students', input: '{"seats":[2,8,5],"students":[6,1,4]}' },
     { label: 'Repeated seats', input: '{"seats":[3,3],"students":[1,6]}' },
-    { label: 'Single', input: '{"seats":[9],"students":[2]}' },
+    { label: 'Single', input: '{"seats":[9],"students":[2]}' }, { label: "Single student", input: "{\"seats\":[5],\"students\":[9]}" }, { label: "Equal positions", input: "{\"seats\":[3,3],\"students\":[3,3]}" }, { label: "Reversed extremes", input: "{\"seats\":[1,100],\"students\":[100,1]}" }, { label: "Long run: 30 pairs", input: "{\"seats\":[71,90,48,24,90,53,17,25,78,52,91,16,22,5,56,73,29,94,70,17,81,26,33,26,42,13,54,83,55,72],\"students\":[39,14,90,44,99,5,58,94,86,81,94,29,82,87,63,44,7,21,56,99,21,84,75,74,39,68,20,55,74,91]}" },
   ],
 }
 

@@ -16,6 +16,11 @@ const definition = {
   examples: [
     { label: 'Ranked by distance', input: '{"grid":[[1,2,0,3],[1,1,1,4],[2,0,1,5]],"pricing":[2,5],"start":[0,0],"k":3}' },
     { label: 'Walls block', input: '{"grid":[[1,0,2],[0,0,3],[4,1,1]],"pricing":[2,4],"start":[2,2],"k":2}' },
+    { label: 'Single priced cell', input: '{"grid":[[2]],"pricing":[2,2],"start":[0,0],"k":1}' },
+    { label: 'Equal distance and price', input: '{"grid":[[1,3],[3,1]],"pricing":[3,3],"start":[0,0],"k":2}' },
+    { label: 'No items in price range', input: '{"grid":[[1,9],[9,1]],"pricing":[2,5],"start":[0,0],"k":2}' },
+    { label: 'Largest grid, k twenty', input: '{"grid":[[0,5,0,5,0,5,0,5],[3,8,3,8,3,8,3,8],[6,1,6,1,6,1,6,1],[9,4,9,4,9,4,9,4],[2,7,2,7,2,7,2,7],[5,0,5,0,5,0,5,0],[8,3,8,3,8,3,8,3],[1,6,1,6,1,6,1,6]],"pricing":[2,9],"start":[0,1],"k":20}' },
+    { label: 'Long run: 8 by 8 grid', input: '{"grid":[[1,1,6,0,0,1,0,0],[7,9,2,2,0,2,4,1],[7,4,2,6,7,4,0,3],[9,5,2,7,2,3,0,2],[8,6,1,7,4,4,2,6],[8,6,0,7,2,2,7,8],[0,8,1,6,0,8,7,5],[5,1,7,3,3,0,5,1]],"pricing":[2,6],"start":[0,0],"k":12}' },
   ],
 }
 

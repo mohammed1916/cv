@@ -15,7 +15,7 @@ const definition = {
   examples: [
     { label: 'Short array', input: '[1,3,2]' },
     { label: 'Repeated values', input: '[4,4,-1,2]' },
-    { label: 'Descending', input: '[5,4,3]' },
+    { label: 'Descending', input: '[5,4,3]' }, { label: "Single value", input: "[5]" }, { label: "Equal values", input: "[2,2,2]" }, { label: "Extreme values", input: "[1000,-1000,0]" }, { label: "Long run: 30 values", input: "[-664,274,-590,890,688,711,-171,768,763,987,37,668,964,560,-954,57,-181,-222,860,-459,-356,-832,100,202,389,-823,656,-833,-535,540]" },
   ],
 }
 

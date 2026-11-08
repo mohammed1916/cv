@@ -15,7 +15,7 @@ const definition = {
   examples: [
     { label: 'Ordered', input: 'aaabbb' },
     { label: 'Out of order', input: 'abab' },
-    { label: 'Only b', input: 'bb' },
+    { label: 'Only b', input: 'bb' }, { label: "Single letter", input: "a" }, { label: "Reversed pair", input: "ba" }, { label: "Largest input", input: "abababababababababababababababababababababababababababababababababababababababababababababababababab" }, { label: "Long run: 100 letters", input: "bbaaabaabbbaabbaabababaabbabaabbbbabaaabaaaabbbabbababaabaabbbbabababaaaaaaabbbabbbababbaaabbbaaaaba" },
   ],
 }
 

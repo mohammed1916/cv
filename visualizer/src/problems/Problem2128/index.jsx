@@ -15,7 +15,7 @@ const definition = {
   examples: [
     { label: 'Complementary rows', input: '[[1,0],[0,1]]' },
     { label: 'Mismatched rows', input: '[[1,0,1],[1,1,0]]' },
-    { label: 'All ones', input: '[[1,1],[1,1]]' },
+    { label: 'All ones', input: '[[1,1],[1,1]]' }, { label: "Single cell", input: "[[1]]" }, { label: "Equal rows", input: "[[1,1],[1,1]]" }, { label: "Largest grid", input: "[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]" }, { label: "Long run: 6 by 6", input: "[[1,0,0,1,1,0],[0,0,0,1,0,0],[0,1,0,1,0,1],[1,1,0,1,1,0],[1,1,1,1,1,1],[0,0,1,1,0,0]]" },
   ],
 }
 

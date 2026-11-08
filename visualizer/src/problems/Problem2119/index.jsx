@@ -15,7 +15,7 @@ const definition = {
   examples: [
     { label: 'No trailing zero', input: '1234' },
     { label: 'Trailing zero lost', input: '4090' },
-    { label: 'Zero', input: '9009' },
+    { label: 'Zero', input: '9009' }, { label: "Smallest number", input: "0" }, { label: "Largest allowed", input: "1000000" }, { label: "Trailing zeros", input: "700700" }, { label: "Long run: six digits", input: "987600" },
   ],
 }
 

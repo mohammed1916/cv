@@ -8,7 +8,12 @@ const complexity = 'O(n log n) for the two sorts over the at most 12 rows the vi
 const examples = [{
   label: 'Sample',
   input: '{"Data":[{"first_col":4,"second_col":1},{"first_col":2,"second_col":8},{"first_col":9,"second_col":3},{"first_col":2,"second_col":6}]}',
-}]
+},
+  { label: 'Single row', input: '{"Data":[{"first_col":5,"second_col":2}]}' },
+  { label: 'Equal first values', input: '{"Data":[{"first_col":3,"second_col":1},{"first_col":3,"second_col":4}]}' },
+  { label: 'Zero values', input: '{"Data":[{"first_col":0,"second_col":0},{"first_col":0,"second_col":7}]}' },
+  { label: 'Long run: 12 rows', input: '{"Data":[{"first_col":18,"second_col":15},{"first_col":17,"second_col":15},{"first_col":16,"second_col":15},{"first_col":0,"second_col":13},{"first_col":10,"second_col":20},{"first_col":12,"second_col":19},{"first_col":4,"second_col":8},{"first_col":3,"second_col":14},{"first_col":3,"second_col":9},{"first_col":0,"second_col":20},{"first_col":10,"second_col":5},{"first_col":2,"second_col":3}]}' },
+]
 const reasoning = 'The two columns no longer belong to the same rows. Sort the first column ascending and the second descending, number the positions, and pair the values that share a position.'
 
 const definition = {

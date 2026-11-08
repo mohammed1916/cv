@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Long growth goes first', input: '{"plantTime":[3,1,6],"growTime":[4,2,1]}' },
     { label: 'Equal growth', input: '{"plantTime":[2,2],"growTime":[5,5]}' },
+    { label: 'Single seed', input: '{"plantTime":[5],"growTime":[3]}' },
+    { label: 'Equal seeds', input: '{"plantTime":[2,2,2],"growTime":[4,4,4]}' },
+    { label: 'Largest times', input: '{"plantTime":[50,1],"growTime":[50,50]}' },
+    { label: 'Long run: 12 seeds', input: '{"plantTime":[6,41,41,21,20,47,7,13,24,29,32,42],"growTime":[28,50,8,18,46,42,20,21,27,24,29,16]}' },
   ],
 }
 

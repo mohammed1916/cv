@@ -20,7 +20,7 @@ const definition = {
   complexity: "O(n + q) time and O(n) space for n elements and q queries, using the cycle length 2n. Restored elements are appended in their removal order, so the array after k restores is nums[0..k-1]. Time 0 is nums. The visualization caps nums at 10 values and queries at 8.",
   examples: [
     { label: "Cycle walk", input: '{"nums":[4,8,15,16,23,42],"queries":[[0,2],[5,0],[7,4],[12,1],[20,5]]}' },
-    { label: "Short cycle", input: '{"nums":[7,3,9],"queries":[[1,0],[2,1],[4,2],[6,0]]}' },
+    { label: "Short cycle", input: '{"nums":[7,3,9],"queries":[[1,0],[2,1],[4,2],[6,0]]}' }, { label: "Single number", input: "{\"nums\":[5],\"queries\":[[0,0]]}" }, { label: "Equal values", input: "{\"nums\":[3,3,3],\"queries\":[[2,1]]}" }, { label: "Largest values", input: "{\"nums\":[99,99,99,99,99,99,99,99,99,99],\"queries\":[[60,9],[0,0]]}" }, { label: "Long run: 8 queries", input: "{\"nums\":[37,79,76,67,91,20,57,66,58,24],\"queries\":[[23,5],[54,1],[54,1],[42,4],[38,7],[13,0],[55,5],[25,7]]}" },
   ],
 };
 

@@ -16,7 +16,7 @@ const definition = {
   complexity: 'Backtracking over each piece\'s reachable squares with pairwise clash checks. The visualization caps input at 3 pieces.',
   examples: [
     { label: 'Rook', input: '{"pieces":["rook"],"positions":[[1,1]]}' },
-    { label: 'Two pieces', input: '{"pieces":["rook","bishop"],"positions":[[1,1],[8,8]]}' },
+    { label: 'Two pieces', input: '{"pieces":["rook","bishop"],"positions":[[1,1],[8,8]]}' }, { label: "Single queen", input: "{\"pieces\":[\"queen\"],\"positions\":[[8,8]]}" }, { label: "Rooks share a row", input: "{\"pieces\":[\"rook\",\"rook\"],\"positions\":[[4,1],[4,8]]}" }, { label: "Long run: three pieces", input: "{\"pieces\":[\"queen\",\"bishop\",\"rook\"],\"positions\":[[1,1],[8,1],[1,8]]}" },
   ],
 }
 

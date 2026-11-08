@@ -16,6 +16,10 @@ const definition = {
     { label: 'Mixed parity', input: '[3,1,3,2,4,3]' },
     { label: 'Shared mode', input: '[4,4,4,4]' },
     { label: 'Single value', input: '[1,2,2,2,2]' },
+    { label: 'Single value', input: '[5]' },
+    { label: 'Both parities peak on one value', input: '[3,3,3,3,4,4]' },
+    { label: 'Largest length, one value', input: '[9,9,9,9,9,9,9,9,9,9,9,9]' },
+    { label: 'Long run: 12 values', input: '[4,9,6,2,4,4,1,6,9,7,9,2]' },
   ],
 }
 

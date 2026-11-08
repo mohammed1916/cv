@@ -16,7 +16,7 @@ const definition = {
   examples: [
     { label: 'Two repeated values', input: '[2,5,2,4,5]' },
     { label: 'All different', input: '[1,2,3]' },
-    { label: 'One value repeated', input: '[7,7,7,7]' },
+    { label: 'One value repeated', input: '[7,7,7,7]' }, { label: "Single value", input: "[1]" }, { label: "All equal", input: "[4,4,4]" }, { label: "Largest values", input: "[20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1]" }, { label: "Long run: 30 values", input: "[11,1,8,20,18,2,19,3,20,16,12,5,14,2,14,12,19,18,6,18,12,5,7,9,17,20,10,16,4,6]" },
   ],
 }
 

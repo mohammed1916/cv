@@ -7,7 +7,7 @@ const complexity = 'O(n log n) for ordering at most 12 term rows; the visualizer
 const examples = [{
   label: 'Sample',
   input: '{"Terms":[{"power":3,"factor":2},{"power":2,"factor":-1},{"power":1,"factor":1},{"power":0,"factor":-1}]}',
-}]
+}, { label: "Single term", input: "{\"Terms\":[{\"power\":0,\"factor\":5}]}" }, { label: "All zero factors", input: "{\"Terms\":[{\"power\":0,\"factor\":0}]}" }, { label: "High power", input: "{\"Terms\":[{\"power\":100,\"factor\":-9},{\"power\":0,\"factor\":1}]}" }, { label: "Long run: 12 terms", input: "{\"Terms\":[{\"power\":0,\"factor\":0},{\"power\":1,\"factor\":-3},{\"power\":2,\"factor\":0},{\"power\":3,\"factor\":4},{\"power\":4,\"factor\":0},{\"power\":5,\"factor\":2},{\"power\":6,\"factor\":1},{\"power\":7,\"factor\":-6},{\"power\":8,\"factor\":-8},{\"power\":9,\"factor\":4},{\"power\":10,\"factor\":3},{\"power\":11,\"factor\":-3}]}" }]
 const reasoning = 'Drop zero factors, order the terms from the highest power down, spell each term with its sign, coefficient and X part, then join the pieces and append =0. The first term carries no plus sign.'
 
 const definition = {

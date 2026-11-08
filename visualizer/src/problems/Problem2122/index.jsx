@@ -15,7 +15,7 @@ const definition = {
   complexity: 'O(n^2 log n) worst case with up to n candidates and a map pass each; O(n) extra space per attempt.',
   examples: [
     { label: 'Partner gap of 4', input: '[3,7,7,11]' },
-    { label: 'Small pair', input: '[1,3,3,5]' },
+    { label: 'Small pair', input: '[1,3,3,5]' }, { label: "Smallest pair", input: "[1,1]" }, { label: "Equal values", input: "[5,5,5,5]" }, { label: "Extreme values", input: "[1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1]" }, { label: "Long run: 20 values", input: "[562,955,328,391,978,541,720,430,283,479,237,211,799,574,761,850,981,451,338,136]" },
   ],
 }
 

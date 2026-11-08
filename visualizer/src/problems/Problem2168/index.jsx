@@ -16,6 +16,10 @@ const definition = {
     { label: 'Alternating', input: '1212' },
     { label: 'Mixed run', input: '12321' },
     { label: 'Repeated digit', input: '1111' },
+    { label: 'Single digit', input: '7' },
+    { label: 'Repeated digit', input: '11' },
+    { label: 'Twelve distinct digits', input: '123456789012' },
+    { label: 'Long run: 12 digits', input: '738497523775' },
   ],
 }
 
