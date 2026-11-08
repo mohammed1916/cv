@@ -23,6 +23,9 @@ const definition = {
     { label: "Four values", input: "[1,2,3,4]" },
     { label: "Zero in the middle", input: "[8,0,5]" },
     { label: "Single value", input: "[6]" },
+    { label: "Single zero", input: "[0]" },
+    { label: "Largest values", input: "[1023, 1023]" },
+    { label: "Long run: 12 values", input: "[5, 900, 33, 512, 1023, 7, 256, 64, 0, 777, 128, 300]" },
   ],
 };
 

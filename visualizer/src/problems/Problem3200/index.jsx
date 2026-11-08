@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 2', input: '{"red":2,"blue":1}' },
     { label: 'Example 3', input: '{"red":1,"blue":1}' },
     { label: 'Example 4', input: '{"red":10,"blue":1}' },
+    { label: 'Both empty', input: '{"red":0,"blue":0}' },
+    { label: 'Only blue', input: '{"red":0,"blue":5}' },
+    { label: 'Maximum counts', input: '{"red":100,"blue":100}' },
+    { label: 'Long run: 197 total', input: '{"red":97,"blue":100}' },
   ],
 }
 

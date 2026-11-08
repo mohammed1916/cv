@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"word":"abcde"}' },
     { label: 'Long run', input: '{"word":"aaaaaaaaaaaaaaabc"}' },
+    { label: "Single letter", input: "{\"word\":\"q\"}" },
+    { label: "Longest allowed word", input: "{\"word\":\"abcdefghijklmnopqrstuvwxyzabcdefghijklmn\"}" },
+    { label: "Long run: 40 letters, repeats", input: "{\"word\":\"aabbbaacccbbbcaabbbacccaabbcbacaabbcbbac\"}" },
   ],
 }
 

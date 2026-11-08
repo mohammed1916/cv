@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Invented example', input: '{"enemies":[5,1,4],"energy":4}' },
     { label: 'Single enemy', input: '{"enemies":[6],"energy":13}' },
+    { label: 'One enemy, no energy', input: '{"enemies":[1],"energy":0}' },
+    { label: 'Equal enemies with exact energy', input: '{"enemies":[3,3,3,3],"energy":6}' },
+    { label: 'Largest values and energy', input: '{"enemies":[20,20,20,20,20,20,20,20],"energy":40}' },
+    { label: 'Long run: 8 enemies', input: '{"enemies":[18,7,3,18,20,18,16,11],"energy":37}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,3],"head":[1,2,3,4,5]}' },
     { label: 'Example 2', input: '{"nums":[1],"head":[1,2,1,2,1,2]}' },
+    { label: 'One node each', input: '{"nums":[1],"head":[1]}' },
+    { label: 'Equal values', input: '{"nums":[10,10],"head":[10,10,10]}' },
+    { label: 'Largest lists', input: '{"nums":[1,2,3,4,5,6,7,8],"head":[4,6,2,6,10,10,4,3,3,8,7,3]}' },
+    { label: 'Long run: 8 and 12 values', input: '{"nums":[7,1,3,6,5,5,8,9],"head":[6,10,3,2,3,2,5,1,2,6,8,10]}' },
   ],
 }
 

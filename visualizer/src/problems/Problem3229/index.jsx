@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[3,5,1,2],"target":[4,6,2,4]}' },
     { label: 'Example 2', input: '{"nums":[1,3,2],"target":[2,1,4]}' },
+    { label: 'One pair', input: '{"nums":[1],"target":[1]}' },
+    { label: 'Equal values tie', input: '{"nums":[5,5,5],"target":[5,5,5]}' },
+    { label: 'Largest values alternating', input: '{"nums":[20,1,20,1,20,1,20,1,20,1],"target":[1,20,1,20,1,20,1,20,1,20]}' },
+    { label: 'Long run: 10 pairs', input: '{"nums":[16,11,12,13,7,5,17,16,14,7],"target":[18,12,13,11,4,11,13,10,13,13]}' },
   ],
 }
 

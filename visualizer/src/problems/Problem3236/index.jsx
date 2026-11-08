@@ -12,7 +12,12 @@ const SAMPLE = { Employees: [
 ] }
 const inputLabel = 'JSON object with an Employees table (employee_id, employee_name, manager_id, salary; one row has a null manager)'
 const complexity = 'Each employee is visited once while walking the tree and once while counting below: O(n) with a per-person count, O(n^2) in the worst case.'
-const examples = [{ label: 'Teaching sample', input: JSON.stringify(SAMPLE) }]
+const examples = [
+  { label: 'Teaching sample', input: JSON.stringify(SAMPLE) },
+  { label: 'Only the CEO', input: '{"Employees":[{"employee_id":1,"employee_name":"Ada","manager_id":null,"salary":100}]}' },
+  { label: 'Two reports under one manager', input: '{"Employees":[{"employee_id":1,"employee_name":"Ada","manager_id":null,"salary":100},{"employee_id":2,"employee_name":"Ben","manager_id":1,"salary":50},{"employee_id":3,"employee_name":"Cy","manager_id":1,"salary":50}]}' },
+  { label: 'Long run: 12 employees', input: '{"Employees":[{"employee_id":1,"employee_name":"Emp1","manager_id":null,"salary":42},{"employee_id":2,"employee_name":"Emp2","manager_id":1,"salary":93},{"employee_id":3,"employee_name":"Emp3","manager_id":1,"salary":199},{"employee_id":4,"employee_name":"Emp4","manager_id":1,"salary":118},{"employee_id":5,"employee_name":"Emp5","manager_id":3,"salary":99},{"employee_id":6,"employee_name":"Emp6","manager_id":3,"salary":85},{"employee_id":7,"employee_name":"Emp7","manager_id":5,"salary":120},{"employee_id":8,"employee_name":"Emp8","manager_id":7,"salary":73},{"employee_id":9,"employee_name":"Emp9","manager_id":2,"salary":134},{"employee_id":10,"employee_name":"Emp10","manager_id":2,"salary":40},{"employee_id":11,"employee_name":"Emp11","manager_id":1,"salary":139},{"employee_id":12,"employee_name":"Emp12","manager_id":4,"salary":161}]}' },
+]
 
 const definition = { number: meta.number, phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel, complexity, examples }
 

@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"edges1":[[0,1]],"edges2":[[0,1],[1,2]]}' },
     { label: 'Single node', input: '{"edges1":[],"edges2":[[0,1]]}' },
+    { label: 'Single nodes', input: '{"edges1":[],"edges2":[]}' },
+    { label: 'Star with six edges', input: '{"edges1":[[0,1],[0,2],[0,3],[0,4],[0,5],[0,6]],"edges2":[[0,1]]}' },
+    { label: 'Equal shapes', input: '{"edges1":[[0,1],[1,2]],"edges2":[[0,1],[1,2]]}' },
+    { label: 'Long run: two six-edge trees', input: '{"edges1":[[0,1],[1,2],[1,3],[0,4],[0,5],[1,6]],"edges2":[[0,1],[1,2],[2,3],[1,4],[2,5],[4,6]]}' },
   ],
 }
 

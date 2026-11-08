@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '"abaacbcbb"' },
     { label: 'Example 2', input: '"aa"' },
+    { label: 'One letter', input: '"a"' },
+    { label: 'Twenty repeats', input: '"aaaaaaaaaaaaaaaaaaaa"' },
+    { label: 'Alternating pair', input: '"abababababababababab"' },
+    { label: 'Long run: 20 letters', input: '"shwpwihuzcpjslyytdrj"' },
   ],
 }
 

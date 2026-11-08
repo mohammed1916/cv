@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 1', input: '{"n":13,"k":4}' },
     { label: 'Example 2', input: '{"n":21,"k":21}' },
     { label: 'Example 3', input: '{"n":14,"k":13}' },
+    { label: 'Both zero', input: '{"n":0,"k":0}' },
+    { label: 'Maximum values', input: '{"n":255,"k":255}' },
+    { label: 'Zero choices', input: '{"n":255,"k":0}' },
+    { label: 'Long run: 200 and 113', input: '{"n":200,"k":113}' },
   ],
 }
 

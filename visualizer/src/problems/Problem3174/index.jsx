@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '"cb34"' },
     { label: 'Mixed', input: '"ab12c"' },
+    { label: "Single letter", input: "\"a\"" },
+    { label: "Digit removes the last letter", input: "\"ab1\"" },
+    { label: "Long run: letters then digits", input: "\"abcdefghijklmnopqrstuvwxyz0123456789\"" },
   ],
 }
 

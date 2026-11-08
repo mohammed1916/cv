@@ -16,6 +16,9 @@ const definition = {
     { label: "Two rooks share a row", input: '{"n":3,"rooks":[[0,0],[0,1],[2,2]]}' },
     { label: "Single rook", input: '{"n":1,"rooks":[[0,0]]}' },
     { label: "Stacked row", input: '{"n":5,"rooks":[[4,4],[4,3],[4,2],[4,1],[4,0]]}' },
+    { label: "Two rooks share a column", input: "{\"n\": 2, \"rooks\": [[0, 1], [1, 1]]}" },
+    { label: "Largest board, diagonal", input: "{\"n\": 8, \"rooks\": [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7]]}" },
+    { label: "Long run: eight rooks", input: "{\"n\": 8, \"rooks\": [[0, 3], [5, 1], [2, 7], [7, 0], [3, 3], [6, 5], [1, 6], [4, 2]]}" },
   ],
 };
 

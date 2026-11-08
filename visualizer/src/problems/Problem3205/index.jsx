@@ -16,6 +16,10 @@ const definition = {
     { label: "Five values", input: "[4,1,6,2,5]" },
     { label: "Single index", input: "[7]" },
     { label: "Spike in the middle", input: "[0,9,0,3]" },
+    { label: 'One value zero', input: '[0]' },
+    { label: 'Equal values tie', input: '[5,5,5,5]' },
+    { label: 'Extremes alternate', input: '[100,0,100,0,100,0,100,0,100,0]' },
+    { label: 'Long run: 10 values', input: '[50,59,88,56,51,56,59,88,80,35]' },
   ],
 };
 

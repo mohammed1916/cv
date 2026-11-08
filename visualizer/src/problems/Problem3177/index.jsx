@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,1,1,3],"k":2}' },
     { label: 'No changes', input: '{"nums":[1,2,3,4,1],"k":0}' },
+    { label: "Single value", input: "{\"nums\": [3], \"k\": 1}" },
+    { label: "Each value once, k zero", input: "{\"nums\": [1, 2, 3, 4], \"k\": 0}" },
+    { label: "Long run: 12 values", input: "{\"nums\": [4, 1, 2, 3, 4, 1, 1, 2, 3, 4, 2, 2], \"k\": 2}" },
   ],
 }
 

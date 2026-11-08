@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '"45320"' },
     { label: 'Example 2', input: '"001"' },
+    { label: 'One digit', input: '"7"' },
+    { label: 'All zeros', input: '"0000"' },
+    { label: 'Twenty nines', input: '"99999999999999999999"' },
+    { label: 'Long run: 20 digits', input: '"46191269297297113651"' },
   ],
 }
 

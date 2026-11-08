@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[0,1,1,0,1]' },
     { label: 'Example 2', input: '[1,0,0,0]' },
+    { label: 'Single one', input: '[1]' },
+    { label: 'All zeros at maximum length', input: '[0,0,0,0,0,0,0,0,0,0,0,0]' },
+    { label: 'Equal neighbours', input: '[0,0,1,1,0,0,1,1]' },
+    { label: 'Long run: 12 entries', input: '[0,1,0,1,0,1,0,0,0,1,1,1]' },
   ],
 }
 

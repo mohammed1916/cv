@@ -16,6 +16,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[1,2,3,4]' },
     { label: 'Example 2', input: '[3,6,9]' },
+    { label: 'Single element', input: '[5]' },
+    { label: 'Equal values count separately', input: '[2,2,2,2]' },
+    { label: 'Boundary values 1 and 50', input: '[1,50,50,1]' },
+    { label: 'Zero steps when all divisible', input: '[12,27,48]' },
+    { label: 'Long run: 40 numbers', input: '[42,1,11,26,45,14,10,23,25,12,18,18,19,42,30,32,33,35,48,36,49,5,7,14,44,38,34,7,9,46,26,35,46,26,1,13,44,26,35,46]' },
   ],
 }
 

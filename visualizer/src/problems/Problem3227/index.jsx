@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"leetcoder"}' },
     { label: 'Example 2', input: '{"s":"bbcd"}' },
+    { label: 'One letter', input: '{"s":"a"}' },
+    { label: 'Twelve repeats', input: '{"s":"zzzzzzzzzzzz"}' },
+    { label: 'Two letter pattern', input: '{"s":"abababababab"}' },
+    { label: 'Long run: 12 letters', input: '{"s":"kuihvyqcupdh"}' },
   ],
 }
 

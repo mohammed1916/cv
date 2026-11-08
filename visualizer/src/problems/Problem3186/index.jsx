@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[1,1,3,4]' },
     { label: 'Example 2', input: '[7,1,6,6]' },
+    { label: "Single spell", input: "[4]" },
+    { label: "Equal powers", input: "[10, 10, 10, 10, 10]" },
+    { label: "Long run: ten spells", input: "[3, 9, 1, 7, 10, 2, 8, 4, 6, 5]" },
   ],
 }
 

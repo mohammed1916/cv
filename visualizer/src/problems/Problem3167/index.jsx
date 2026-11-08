@@ -23,6 +23,9 @@ const definition = {
     { label: "Split letters", input: '"b12a3b4"' },
     { label: "One group", input: '"z1"' },
     { label: "Repeated letter", input: '"c2c2c2a10a1"' },
+    { label: "Single group", input: "\"a1\"" },
+    { label: "Largest frequency", input: "\"z999999\"" },
+    { label: "Long run: sixteen groups", input: "\"a1b2c3d4e5f6g7h8i9j10k11l12m13n14o15p16\"" },
   ],
 };
 

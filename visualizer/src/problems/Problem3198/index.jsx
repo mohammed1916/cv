@@ -11,7 +11,12 @@ const SAMPLE = { Cities: [
 ] }
 const inputLabel = 'JSON object with a Cities table (state, city)'
 const complexity = 'Sorting the rows dominates: O(n log n) for n city rows.'
-const examples = [{ label: 'Teaching sample', input: JSON.stringify(SAMPLE) }]
+const examples = [
+  { label: 'Teaching sample', input: JSON.stringify(SAMPLE) },
+  { label: 'One city', input: '{"Cities":[{"state":"Maine","city":"Bangor"}]}' },
+  { label: 'Same city name in two states', input: '{"Cities":[{"state":"Iowa","city":"Ames"},{"state":"Maine","city":"Ames"},{"state":"Iowa","city":"Ankeny"}]}' },
+  { label: 'Table at the 12-row limit', input: '{"Cities":[{"state":"Iowa","city":"Town 01"},{"state":"Maine","city":"Town 02"},{"state":"Ohio","city":"Town 03"},{"state":"Iowa","city":"Town 04"},{"state":"Maine","city":"Town 05"},{"state":"Ohio","city":"Town 06"},{"state":"Iowa","city":"Town 07"},{"state":"Maine","city":"Town 08"},{"state":"Ohio","city":"Town 09"},{"state":"Iowa","city":"Town 10"},{"state":"Maine","city":"Town 11"},{"state":"Ohio","city":"Town 12"}]}' },
+]
 
 const definition = { number: meta.number, phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel, complexity, examples }
 

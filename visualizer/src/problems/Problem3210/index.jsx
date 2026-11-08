@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"dart","k":3}' },
     { label: 'Repeats', input: '{"s":"aaa","k":1}' },
+    { label: 'One letter', input: '{"s":"a","k":1}' },
+    { label: 'Repeated letter at the limit', input: '{"s":"zzzzzzzzzzzz","k":20}' },
+    { label: 'Distinct letters', input: '{"s":"abcdefghijkl","k":5}' },
+    { label: 'Long run: 12 letters', input: '{"s":"kllxsibaosyx","k":7}' },
   ],
 }
 

@@ -14,7 +14,12 @@ const SAMPLE = { transactions: [
 ] }
 const inputLabel = 'JSON object with a transactions table (transaction_id, amount as a non-negative integer, transaction_date)'
 const complexity = 'One pass over the rows plus a sort of the distinct dates: O(n log n).'
-const examples = [{ label: 'Teaching sample', input: JSON.stringify(SAMPLE) }]
+const examples = [
+  { label: 'Teaching sample', input: JSON.stringify(SAMPLE) },
+  { label: 'One transaction', input: '{"transactions":[{"transaction_id":1,"amount":0,"transaction_date":"2026-03-01"}]}' },
+  { label: 'Equal amounts on the same day', input: '{"transactions":[{"transaction_id":1,"amount":25,"transaction_date":"2026-03-02"},{"transaction_id":2,"amount":25,"transaction_date":"2026-03-02"}]}' },
+  { label: 'Long run: 12 rows', input: '{"transactions":[{"transaction_id":1,"amount":84,"transaction_date":"2026-03-01"},{"transaction_id":2,"amount":86,"transaction_date":"2026-03-02"},{"transaction_id":3,"amount":275,"transaction_date":"2026-03-03"},{"transaction_id":4,"amount":301,"transaction_date":"2026-03-04"},{"transaction_id":5,"amount":66,"transaction_date":"2026-03-05"},{"transaction_id":6,"amount":431,"transaction_date":"2026-03-01"},{"transaction_id":7,"amount":496,"transaction_date":"2026-03-02"},{"transaction_id":8,"amount":149,"transaction_date":"2026-03-03"},{"transaction_id":9,"amount":52,"transaction_date":"2026-03-04"},{"transaction_id":10,"amount":237,"transaction_date":"2026-03-05"},{"transaction_id":11,"amount":110,"transaction_date":"2026-03-01"},{"transaction_id":12,"amount":89,"transaction_date":"2026-03-02"}]}' },
+]
 
 const definition = { number: meta.number, phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel, complexity, examples }
 

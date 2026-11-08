@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[1,1,3,3]' },
     { label: 'Example 2', input: '[1,6,4,3,2]' },
+    { label: "Single reward", input: "[5]" },
+    { label: "Largest rewards, all equal", input: "[12, 12, 12, 12, 12, 12, 12, 12]" },
+    { label: "Long run: 8 rewards", input: "[12, 1, 11, 2, 10, 3, 9, 4]" },
   ],
 }
 

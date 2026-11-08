@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"1001101"}' },
     { label: 'No zero after one', input: '{"s":"00111"}' },
+    { label: 'Single zero', input: '{"s":"0"}' },
+    { label: 'Single one', input: '{"s":"1"}' },
+    { label: 'All zeros at maximum length', input: '{"s":"0000000000000000000000000000000000000000"}' },
+    { label: 'Long run: 40 bits', input: '{"s":"1001001110000010010010110000111000111000"}' },
   ],
 }
 

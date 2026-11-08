@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"skills":[4,2,6,3,9],"k":2}' },
     { label: 'Example 2', input: '{"skills":[2,5,4],"k":3}' },
+    { label: "Two players", input: "{\"skills\": [5, 9], \"k\": 1}" },
+    { label: "Largest k", input: "{\"skills\": [1, 50, 100], \"k\": 20}" },
+    { label: "Long run: 12 players", input: "{\"skills\": [4, 88, 17, 63, 29, 91, 2, 57, 36, 74, 13, 99], \"k\": 5}" },
   ],
 }
 

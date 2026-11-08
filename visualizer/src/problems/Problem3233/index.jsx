@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"l":1,"r":10}' },
     { label: 'Short', input: '{"l":5,"r":8}' },
+    { label: 'Single number', input: '{"l":1,"r":1}' },
+    { label: 'Whole range', input: '{"l":1,"r":200}' },
+    { label: 'Short equal start and end', input: '{"l":200,"r":200}' },
+    { label: 'Long run: 37 to 163', input: '{"l":37,"r":163}' },
   ],
 }
 

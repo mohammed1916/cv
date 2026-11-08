@@ -17,6 +17,9 @@ const definition = {
     { label: 'Example 1', input: '"EEELLE"' },
     { label: 'Example 2', input: '"EELLEE"' },
     { label: 'Example 3', input: '"EELELL"' },
+    { label: "Single E", input: "\"E\"" },
+    { label: "Only L", input: "\"LLLLLLLL\"" },
+    { label: "Long run: 50 letters", input: "\"LELELELELELELELELELELELELELELELELELELELELELELELELE\"" },
   ],
 }
 

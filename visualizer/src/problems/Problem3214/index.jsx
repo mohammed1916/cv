@@ -16,7 +16,12 @@ const SAMPLE = { user_transactions: [
 ] }
 const inputLabel = 'JSON object with a user_transactions table (transaction_id, product_id, spend, transaction_date as YYYY-MM-DD)'
 const complexity = 'Grouping and pairing the rows is linear in the transactions plus the product-years: about O(n) with hashing.'
-const examples = [{ label: 'Teaching sample', input: JSON.stringify(SAMPLE) }]
+const examples = [
+  { label: 'Teaching sample', input: JSON.stringify(SAMPLE) },
+  { label: 'One transaction', input: '{"user_transactions":[{"transaction_id":1,"product_id":101,"spend":0,"transaction_date":"2026-01-01"}]}' },
+  { label: 'Equal spend on the same day', input: '{"user_transactions":[{"transaction_id":1,"product_id":101,"spend":40,"transaction_date":"2026-02-14"},{"transaction_id":2,"product_id":102,"spend":40,"transaction_date":"2026-02-14"}]}' },
+  { label: 'Long run: 12 rows', input: '{"user_transactions":[{"transaction_id":1,"product_id":100,"spend":101,"transaction_date":"2026-03-01"},{"transaction_id":2,"product_id":101,"spend":940,"transaction_date":"2026-03-02"},{"transaction_id":3,"product_id":102,"spend":881,"transaction_date":"2026-03-03"},{"transaction_id":4,"product_id":103,"spend":583,"transaction_date":"2026-03-04"},{"transaction_id":5,"product_id":100,"spend":684,"transaction_date":"2026-03-01"},{"transaction_id":6,"product_id":101,"spend":940,"transaction_date":"2026-03-02"},{"transaction_id":7,"product_id":102,"spend":429,"transaction_date":"2026-03-03"},{"transaction_id":8,"product_id":103,"spend":327,"transaction_date":"2026-03-04"},{"transaction_id":9,"product_id":100,"spend":381,"transaction_date":"2026-03-01"},{"transaction_id":10,"product_id":101,"spend":222,"transaction_date":"2026-03-02"},{"transaction_id":11,"product_id":102,"spend":447,"transaction_date":"2026-03-03"},{"transaction_id":12,"product_id":103,"spend":811,"transaction_date":"2026-03-04"}]}' },
+]
 
 const definition = { number: meta.number, phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel, complexity, examples }
 

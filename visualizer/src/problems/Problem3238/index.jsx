@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":4,"pick":[[0,0],[1,0],[1,0],[2,1],[2,1],[2,0]]}' },
     { label: 'Example 2', input: '{"n":5,"pick":[[1,1],[2,4],[2,4],[2,4]]}' },
+    { label: 'Smallest game', input: '{"n":2,"pick":[[0,0]]}' },
+    { label: 'Tie between two players', input: '{"n":3,"pick":[[0,1],[1,1],[2,1]]}' },
+    { label: 'Largest player count', input: '{"n":6,"pick":[[5,10]]}' },
+    { label: 'Long run: 20 picks', input: '{"n":6,"pick":[[2,9],[3,7],[2,6],[4,2],[1,2],[3,3],[5,9],[0,7],[4,2],[4,3],[0,1],[0,10],[5,0],[0,4],[3,8],[5,0],[0,5],[3,9],[4,1],[4,8]]}' },
   ],
 }
 

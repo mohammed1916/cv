@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"aaba*"}' },
     { label: 'Example 2', input: '{"s":"abc"}' },
+    { label: "Single letter", input: "{\"s\": \"a\"}" },
+    { label: "Two stars cancel two letters", input: "{\"s\": \"ab**\"}" },
+    { label: "Longest allowed string", input: "{\"s\": \"aaaaaaaa******\"}" },
   ],
 }
 

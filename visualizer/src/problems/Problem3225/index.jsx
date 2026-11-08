@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Small', input: '{"grid":[[0,0,0],[0,2,0],[3,0,0]]}' },
     { label: 'Two columns', input: '{"grid":[[4,6],[4,6]]}' },
+    { label: 'Single cell', input: '{"grid":[[0]]}' },
+    { label: 'Largest value', input: '{"grid":[[99]]}' },
+    { label: 'Equal cells 2 by 2', input: '{"grid":[[7,7],[7,7]]}' },
+    { label: 'Long run: 5 by 5', input: '{"grid":[[5,3,10,95,33],[62,45,44,87,84],[86,81,5,36,75],[44,88,29,42,54],[33,46,41,65,61]]}' },
   ],
 }
 

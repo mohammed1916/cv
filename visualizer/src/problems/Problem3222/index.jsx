@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Alice', input: '{"x":2,"y":7}' },
     { label: 'Bob', input: '{"x":4,"y":11}' },
+    { label: 'Smallest start', input: '{"x":1,"y":1}' },
+    { label: 'Largest values', input: '{"x":40,"y":80}' },
+    { label: 'Equal values tie', input: '{"x":20,"y":20}' },
+    { label: 'Long run: 37 by 73', input: '{"x":37,"y":73}' },
   ],
 }
 

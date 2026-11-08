@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[[0,1,0],[1,0,1]]' },
     { label: 'Corner', input: '[[1,0],[0,0]]' },
+    { label: 'One cell', input: '[[1]]' },
+    { label: 'Single one in a corner', input: '[[0,0],[0,1]]' },
+    { label: 'Full 6 by 6 grid', input: '[[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1]]' },
+    { label: 'Long run: 6 by 6 grid', input: '[[1,1,1,1,0,0],[1,1,0,1,0,1],[1,1,1,1,1,0],[0,1,1,1,1,1],[0,1,0,0,1,1],[0,1,0,1,0,1]]' },
   ],
 }
 

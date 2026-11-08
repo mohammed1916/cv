@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Overlapping', input: '{"days":10,"meetings":[[5,7],[1,3],[3,6]]}' },
     { label: 'Covered', input: '{"days":5,"meetings":[[2,4],[1,5]]}' },
+    { label: "Single day", input: "{\"days\": 1, \"meetings\": [[1, 1]]}" },
+    { label: "Identical meetings", input: "{\"days\": 5, \"meetings\": [[2, 4], [2, 4]]}" },
+    { label: "Long run: eight meetings over 30 days", input: "{\"days\": 30, \"meetings\": [[1, 30], [2, 5], [6, 9], [10, 14], [15, 20], [21, 25], [26, 28], [29, 30]]}" },
   ],
 }
 

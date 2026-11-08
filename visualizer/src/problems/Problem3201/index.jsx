@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Alternating', input: '[1,2,3,4]' },
     { label: 'Mixed parity', input: '[1,2,1,1,2,1,2]' },
+    { label: 'Single value', input: '[9]' },
+    { label: 'Equal values', input: '[4,4,4,4,4]' },
+    { label: 'Extremes alternate at full length', input: '[1,9,1,9,1,9,1,9,1,9,1,9]' },
+    { label: 'Long run: 12 values', input: '[8,1,4,8,5,9,2,6,9,8,7,4]' },
   ],
 }
 

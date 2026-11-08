@@ -34,7 +34,7 @@ export function buildTrace({ grid }) {
   let best = -1
   let bestHeights = heights.slice()
   const frames = []
-  frames.push({ pythonLine: 4, phase: 'start', activeLine: L('try every height'), heights: heights.slice(), score: null, best: null, message: 'Each column is described by how many rows from the top are black.' })
+  frames.push({ pythonLine: 4, phase: 'start', activeLine: L('try every combination'), heights: heights.slice(), score: null, best: null, message: 'Each column is described by how many rows from the top are black.' })
   const total = (n + 1) ** n
   for (let step = 0; step < total; step++) {
     const score = scoreHeights(grid, heights)

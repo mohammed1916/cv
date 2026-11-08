@@ -16,6 +16,10 @@ const definition = {
     { label: "Mixed small arrays", input: '{"a":[1,2],"b":[3],"c":[0,4]}' },
     { label: "Parity split", input: '{"a":[0,5,6],"b":[7],"c":[1,2]}' },
     { label: "Single choice", input: '{"a":[9],"b":[12],"c":[3]}' },
+    { label: 'Single values', input: '{"a":[0],"b":[0],"c":[0]}' },
+    { label: 'Equal values in every array', input: '{"a":[7,7],"b":[7],"c":[7,7,7]}' },
+    { label: 'Largest value 255 with zero', input: '{"a":[255],"b":[0,255],"c":[255,0,128,1,2,3,4,5]}' },
+    { label: 'Long run: 8 values each', input: '{"a":[110,92,54,137,17,164,6,230],"b":[124,248,58,161,207,139,144,241],"c":[170,87,87,77,12,178,168,197]}' },
   ],
 };
 

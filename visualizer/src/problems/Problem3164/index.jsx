@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums1":[1,3,4],"nums2":[1,3,4],"k":1}' },
     { label: 'Example 2', input: '{"nums1":[1,2,4,12],"nums2":[2,4],"k":3}' },
+    { label: "Single values", input: "{\"nums1\":[1],\"nums2\":[1],\"k\":1}" },
+    { label: "Largest k, repeated values", input: "{\"nums1\":[30,30,1,1,15,15,22,22,9,9],\"nums2\":[8,8,1,1,4,4,7,7],\"k\":4}" },
+    { label: "Long run: ten and eight values", input: "{\"nums1\":[3,11,2,27,9,14,25,6,18,21],\"nums2\":[4,1,7,2,8,5,3,6],\"k\":3}" },
   ],
 }
 

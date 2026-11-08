@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":4,"k":5}' },
     { label: 'Example 2', input: '{"n":5,"k":3}' },
+    { label: "Single item", input: "{\"n\": 1, \"k\": 1}" },
+    { label: "Largest n and k", input: "{\"n\": 30, \"k\": 30}" },
+    { label: "Long run: 30 with step 7", input: "{\"n\": 30, \"k\": 7}" },
   ],
 }
 

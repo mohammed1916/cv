@@ -21,6 +21,10 @@ const definition = {
   examples: [
     { label: "Mixed (illustrative)", input: '{"s": "101101"}' },
     { label: "Zeros heavy (illustrative)", input: '{"s": "00011"}' },
+    { label: 'One zero', input: '{"s":"0"}' },
+    { label: 'One one', input: '{"s":"1"}' },
+    { label: 'Alternating at maximum length', input: '{"s":"101010101010101010101010101010101010101010101010101010101010"}' },
+    { label: 'Long run: 60 bits', input: '{"s":"100110010100010101010111111100010111111111111111011000100110"}' },
   ],
 };
 

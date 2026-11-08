@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,3,4,5],"k":2}' },
     { label: 'Modulo 3', input: '{"nums":[1,2,3],"k":3}' },
+    { label: 'Single value with k one', input: '{"nums":[4],"k":1}' },
+    { label: 'Equal values with k five', input: '{"nums":[9,9,9,9],"k":5}' },
+    { label: 'Largest list, alternating extremes', input: '{"nums":[1,9,1,9,1,9,1,9,1,9],"k":3}' },
+    { label: 'Long run: 10 values', input: '{"nums":[9,5,5,5,8,1,3,4,9,7],"k":4}' },
   ],
 }
 

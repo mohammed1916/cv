@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"grid":["XY.","Y.."]}' },
     { label: 'No X', input: '{"grid":["..",".."]}' },
+    { label: 'One empty cell', input: '{"grid":["."]}' },
+    { label: 'Single X', input: '{"grid":["X"]}' },
+    { label: 'Full 6 by 6 of X', input: '{"grid":["XXXXXX","XXXXXX","XXXXXX","XXXXXX","XXXXXX","XXXXXX"]}' },
+    { label: 'Long run: 6 by 6 mixed', input: '{"grid":[".XYXXY","X.YYXY","X.YXXX","X.Y..Y","YXY..Y","XXYX.."]}' },
   ],
 }
 

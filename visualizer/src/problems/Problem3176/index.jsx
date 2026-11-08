@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,1,1,3],"k":2}' },
     { label: 'No changes', input: '{"nums":[1,2,3,4,1],"k":0}' },
+    { label: "Single value, k zero", input: "{\"nums\": [2], \"k\": 0}" },
+    { label: "Repeated value", input: "{\"nums\": [1, 1, 1, 1], \"k\": 3}" },
+    { label: "Longest allowed, ten values", input: "{\"nums\": [4, 3, 2, 1, 4, 3, 2, 1, 4, 4], \"k\": 3}" },
   ],
 }
 

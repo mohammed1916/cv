@@ -19,7 +19,11 @@ const definition = {
   inputLabel: 'JSON: {"nums1": [1,3,4], "nums2": [1,3,4], "k": 1}',
   url: "https://leetcode.com/problems/find-the-number-of-good-pairs-i/",
   complexity: "O(m * n) time and O(1) space for arrays of length m and n. The visualization caps each array at 20 values.",
-  examples: [{ label: "Illustrative input", input: '{"nums1":[1,3,4],"nums2":[1,3,4],"k":1}' }],
+  examples: [{ label: "Illustrative input", input: '{"nums1":[1,3,4],"nums2":[1,3,4],"k":1}' },
+    { label: "Single value each", input: "{\"nums1\":[7],\"nums2\":[7],\"k\":1}" },
+    { label: "Largest k", input: "{\"nums1\":[50,1],\"nums2\":[1,50],\"k\":50}" },
+    { label: "Long run: 20 values each", input: "{\"nums1\":[12,30,5,44,17,8,23,41,3,36,19,50,26,9,33,14,47,6,28,21],\"nums2\":[30,12,44,5,8,17,41,23,36,3,50,19,9,26,47,14,6,33,21,28],\"k\":7}" },
+  ],
 };
 
 export default function GoodPairsVisualizer() {

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Increasing', input: '[1,2,3,4]' },
     { label: 'Alternating', input: '[1,-1,1,-1]' },
+    { label: 'Single negative', input: '[-10]' },
+    { label: 'Equal values with mixed signs', input: '[0,0,0]' },
+    { label: 'Boundary values -10 and 10', input: '[-10,10,-10,10,-10,10,-10,10,-10,10]' },
+    { label: 'Long run: 10 values', input: '[8,-5,8,1,-3,-7,5,-2,-6,-1]' },
   ],
 }
 

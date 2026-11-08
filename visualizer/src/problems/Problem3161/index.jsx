@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[[1,2],[2,3,3],[2,3,1],[2,2,2]]' },
     { label: 'Example 2', input: '[[2,0,1],[2,1,2]]' },
+    { label: "Obstacle at the start", input: "[[1,0]]" },
+    { label: "Full-width block check", input: "[[1,15],[2,15,16]]" },
+    { label: "Long run: twelve queries", input: "[[1,3],[2,7,4],[1,8],[2,15,5],[1,0],[2,4,2],[1,12],[2,11,6],[1,6],[2,9,1],[1,14],[2,15,16]]" },
   ],
 }
 

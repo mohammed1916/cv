@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[[1,0,1],[1,1,1]]' },
     { label: 'Example 2', input: '[[1,0,1,0],[0,1,0,1]]' },
+    { label: 'Exactly three ones', input: '[[1,0,0],[0,0,1],[1,0,0]]' },
+    { label: 'Single row of ones', input: '[[1,1,1,1,1,1]]' },
+    { label: 'Full 6 by 6 grid', input: '[[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1]]' },
+    { label: 'Long run: 6 by 6 grid', input: '[[1,1,1,0,1,0],[1,0,0,0,0,0],[0,1,0,0,0,0],[0,1,0,0,1,1],[1,0,0,1,0,1],[0,1,1,1,1,0]]' },
   ],
 }
 

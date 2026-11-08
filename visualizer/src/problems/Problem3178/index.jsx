@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":3,"k":5}' },
     { label: 'Example 2', input: '{"n":5,"k":6}' },
+    { label: "Two children, one second", input: "{\"n\": 2, \"k\": 1}" },
+    { label: "Largest group and time", input: "{\"n\": 100, \"k\": 200}" },
+    { label: "Long run: 100 children", input: "{\"n\": 100, \"k\": 137}" },
   ],
 }
 

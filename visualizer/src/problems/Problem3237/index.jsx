@@ -16,6 +16,10 @@ const definition = {
     { label: "Repeat and switch", input: '{"windows":4,"activations":[2,1,2,3]}' },
     { label: "Single window", input: '{"windows":1,"activations":[1,1]}' },
     { label: "Cycle", input: '{"windows":3,"activations":[3,2,1]}' },
+    { label: 'One window, repeated', input: '{"windows":1,"activations":[1,1]}' },
+    { label: 'No activations', input: '{"windows":3,"activations":[]}' },
+    { label: 'Every window once', input: '{"windows":10,"activations":[1,2,3,4,5,6,7,8,9,10]}' },
+    { label: 'Long run: 30 activations', input: '{"windows":10,"activations":[2,5,5,10,3,5,6,4,4,4,5,6,2,9,7,5,7,2,9,7,4,3,9,9,7,7,7,1,4,4]}' },
   ],
 };
 

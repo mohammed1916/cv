@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,3,4,5,14]}' },
     { label: 'Example 2', input: '{"nums":[5,5,5,25]}' },
+    { label: 'One value', input: '{"nums":[1]}' },
+    { label: 'Repeated maximum', input: '{"nums":[99,99,99]}' },
+    { label: 'Mixed extremes', input: '{"nums":[99,1,50,50,2,98,3,97,4,96]}' },
+    { label: 'Long run: 10 values', input: '{"nums":[31,63,88,64,3,70,12,24,55,97]}' },
   ],
 }
 

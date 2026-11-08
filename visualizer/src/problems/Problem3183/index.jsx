@@ -24,6 +24,9 @@ const definition = {
     { label: "Mixed sum", input: "10" },
     { label: "Single big coin", input: "6" },
     { label: "Zero", input: "0" },
+    { label: "Smallest amount", input: "1" },
+    { label: "Largest amount", input: "200" },
+    { label: "Long run: amount 137", input: "137" },
   ],
 };
 

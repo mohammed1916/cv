@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Length 3', input: '3' },
     { label: 'Length 1', input: '1' },
+    { label: 'Length eight, the maximum', input: '8' },
+    { label: 'Length two', input: '2' },
+    { label: 'Length five', input: '5' },
   ],
 }
 

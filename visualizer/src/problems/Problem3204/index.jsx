@@ -9,7 +9,13 @@ const SAMPLE = { user_permissions: [
 ] }
 const inputLabel = 'JSON object with a user_permissions table (user_id, permissions as integers)'
 const complexity = 'Constant work per user: O(n) for n users.'
-const examples = [{ label: 'Teaching sample', input: JSON.stringify(SAMPLE) }]
+const examples = [
+  { label: 'Teaching sample', input: JSON.stringify(SAMPLE) },
+  { label: 'Single user', input: '{"user_permissions":[{"user_id":1,"permissions":0}]}' },
+  { label: 'Equal permissions tie', input: '{"user_permissions":[{"user_id":1,"permissions":5},{"user_id":2,"permissions":5},{"user_id":3,"permissions":5}]}' },
+  { label: 'Top of the allowed range', input: '{"user_permissions":[{"user_id":7,"permissions":1048575},{"user_id":8,"permissions":1048575}]}' },
+  { label: 'Long run: 12 users', input: '{"user_permissions":[{"user_id":1,"permissions":336880},{"user_id":2,"permissions":231385},{"user_id":3,"permissions":806300},{"user_id":4,"permissions":929367},{"user_id":5,"permissions":285770},{"user_id":6,"permissions":427643},{"user_id":7,"permissions":517848},{"user_id":8,"permissions":45310},{"user_id":9,"permissions":883472},{"user_id":10,"permissions":494759},{"user_id":11,"permissions":166950},{"user_id":12,"permissions":559355}]}' },
+]
 
 const definition = { number: meta.number, phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel, complexity, examples }
 

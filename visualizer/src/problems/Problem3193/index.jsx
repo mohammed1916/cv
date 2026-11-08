@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":3,"requirements":[[2,2],[0,0]]}' },
     { label: 'Example 2', input: '{"n":3,"requirements":[[2,2],[1,1],[0,0]]}' },
+    { label: 'Smallest array', input: '{"n":2,"requirements":[[0,0]]}' },
+    { label: 'Largest array with a full requirement', input: '{"n":7,"requirements":[[6,21]]}' },
+    { label: 'Zero counts on every end', input: '{"n":5,"requirements":[[1,0],[2,0],[3,0],[4,0]]}' },
+    { label: 'Long run: n 7 with five requirements', input: '{"n":7,"requirements":[[2,0],[3,3],[4,7],[3,6],[2,3]]}' },
   ],
 }
 

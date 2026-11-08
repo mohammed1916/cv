@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[0,1,1,1]' },
     { label: 'Example 2', input: '[0,1,1,1,0,0]' },
+    { label: 'Single zero', input: '[0]' },
+    { label: 'All ones at maximum length', input: '[1,1,1,1,1,1,1,1,1,1,1,1]' },
+    { label: 'Alternating bits', input: '[1,0,1,0,1,0,1,0,1,0,1,0]' },
+    { label: 'Long run: 12 entries', input: '[0,0,0,0,0,0,0,0,0,0,0,0]' },
   ],
 }
 

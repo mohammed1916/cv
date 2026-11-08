@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[12,12,30,24,24]' },
     { label: 'Example 2', input: '[72,48,24,3]' },
+    { label: "Single entry", input: "[1]" },
+    { label: "Largest hours, tied", input: "[1000, 1000]" },
+    { label: "Long run: 24 entries", input: "[5, 12, 7, 3, 9, 14, 2, 11, 8, 6, 10, 4, 13, 1, 15, 16, 3, 7, 9, 12, 5, 8, 2, 6]" },
   ],
 }
 

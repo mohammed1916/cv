@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"grid":[[1,0,0],[0,0,0],[0,0,1]]}' },
     { label: 'Example 2', input: '{"grid":[[0,1],[0,1],[0,0]]}' },
+    { label: 'One empty cell', input: '{"grid":[[0]]}' },
+    { label: 'One filled cell', input: '{"grid":[[1]]}' },
+    { label: 'Full 6 by 6 grid', input: '{"grid":[[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1]]}' },
+    { label: 'Long run: 6 by 6 grid', input: '{"grid":[[1,0,1,0,1,1],[1,0,0,0,1,0],[1,1,0,1,1,0],[1,1,1,0,0,0],[0,0,0,1,1,0],[0,1,1,1,0,0]]}' },
   ],
 }
 

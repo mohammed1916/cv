@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"colors":[0,1,0,1,0],"k":3}' },
     { label: 'Example 2', input: '{"colors":[0,1,0,0,1,0,1],"k":6}' },
+    { label: 'Smallest array', input: '{"colors":[0,0,0],"k":3}' },
+    { label: 'All ones with k four', input: '{"colors":[1,1,1,1],"k":4}' },
+    { label: 'Largest k equals length', input: '{"colors":[0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1],"k":40}' },
+    { label: 'Long run: 40 entries, k 12', input: '{"colors":[0,1,0,1,0,0,1,0,1,1,1,0,1,0,1,0,1,0,1,0,1,0,0,0,0,1,0,0,1,1,1,1,1,0,0,1,0,0,1,0],"k":12}' },
   ],
 }
 

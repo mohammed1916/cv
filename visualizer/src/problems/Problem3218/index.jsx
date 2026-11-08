@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"m":3,"n":2,"horizontalCut":[1,3],"verticalCut":[5]}' },
     { label: 'Example 2', input: '{"m":2,"n":2,"horizontalCut":[7],"verticalCut":[4]}' },
+    { label: 'Single cell', input: '{"m":1,"n":1,"horizontalCut":[],"verticalCut":[]}' },
+    { label: 'Equal costs tie', input: '{"m":2,"n":2,"horizontalCut":[1],"verticalCut":[1]}' },
+    { label: 'Largest column of cuts at 100', input: '{"m":30,"n":1,"horizontalCut":[100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100],"verticalCut":[]}' },
+    { label: 'Long run: 30 by 30 grid', input: '{"m":30,"n":30,"horizontalCut":[82,43,33,27,65,56,81,65,20,73,97,73,32,66,92,69,44,77,33,38,7,20,56,98,87,42,81,38,63],"verticalCut":[100,81,44,94,90,71,90,47,16,60,10,46,100,62,33,94,51,85,20,98,82,9,68,8,12,80,17,79,93]}' },
   ],
 }
 

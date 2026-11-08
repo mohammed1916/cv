@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[7,8,3,4,15,13,4,1]' },
     { label: 'Example 2', input: '[1,9,8,3,10,5]' },
+    { label: 'Two values', input: '[1,50]' },
+    { label: 'Equal values at every position', input: '[7,7,7,7]' },
+    { label: 'Boundary values alternate', input: '[50,1,50,1,50,1]' },
+    { label: 'Long run: 40 numbers', input: '[28,26,33,10,44,44,28,38,16,37,44,13,4,33,11,33,46,50,22,5,50,34,32,33,44,14,7,37,19,24,49,49,29,14,33,24,6,45,40,37]' },
   ],
 }
 

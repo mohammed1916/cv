@@ -17,6 +17,10 @@ const definition = {
     { label: "Zig-zag", input: "[4,2,5,1,3]" },
     { label: "Falling run", input: "[9,7,5,3]" },
     { label: "Already rising", input: "[1,2,3,4]" },
+    { label: 'One value', input: '[0]' },
+    { label: 'Equal values tie', input: '[7,7,7,7]' },
+    { label: 'Boundary values 0 and 99', input: '[99,0,99,0,99,0,99,0,99,0,99,0]' },
+    { label: 'Long run: 12 values', input: '[12,26,77,96,78,54,1,41,59,9,63,18]' },
   ],
 };
 

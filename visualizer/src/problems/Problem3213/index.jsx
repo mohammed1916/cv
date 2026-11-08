@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"target": "abcdef", "words": ["abdef", "abc", "d", "def", "ef"], "costs": [100, 1, 1, 10, 5]}' },
     { label: 'Repeated word', input: '{"target": "aaaa", "words": ["a"], "costs": [2]}' },
+    { label: 'One letter target', input: '{"target":"a","words":["a"],"costs":[1]}' },
+    { label: 'Equal costs tie', input: '{"target":"aa","words":["a","aa"],"costs":[1,1]}' },
+    { label: 'Largest costs with six words', input: '{"target":"abcdefghijklmnopqrst","words":["abcdef","abcde","abcd","abc","ab","a"],"costs":[100,100,100,100,100,100]}' },
+    { label: 'Long run: 20 letter target', input: '{"target":"youxluimljicywxldkzk","words":["kb","pkx","tuas","yedkh"],"costs":[12,54,26,7]}' },
   ],
 }
 

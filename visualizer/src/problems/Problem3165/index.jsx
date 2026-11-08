@@ -17,6 +17,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[3,5,9],"queries":[[1,-2],[0,-3]]}' },
     { label: 'Example 2', input: '{"nums":[0,-1],"queries":[[0,-5]]}' },
+    { label: "Single number", input: "{\"nums\":[5],\"queries\":[[0,-3]]}" },
+    { label: "All zeros, one update", input: "{\"nums\":[0,0,0],\"queries\":[[1,20]]}" },
+    { label: "Long run: eight numbers, five queries", input: "{\"nums\":[-20,15,0,7,-9,20,3,-4],\"queries\":[[0,20],[3,-20],[7,0],[5,11],[2,-1]]}" },
   ],
 }
 

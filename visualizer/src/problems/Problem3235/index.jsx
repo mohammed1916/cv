@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Reachable', input: '{"x":3,"y":3,"circles":[[2,1,1]]}' },
     { label: 'Blocked', input: '{"x":3,"y":3,"circles":[[1,1,3]]}' },
+    { label: 'One circle near the corner', input: '{"x":1,"y":1,"circles":[[0,0,1]]}' },
+    { label: 'Largest grid with a centred circle', input: '{"x":10,"y":10,"circles":[[5,5,5]]}' },
+    { label: 'Tie with two identical circles', input: '{"x":4,"y":4,"circles":[[2,2,1],[2,2,1]]}' },
+    { label: 'Long run: five circles', input: '{"x":10,"y":10,"circles":[[9,8,2],[7,8,1],[4,7,3],[6,1,1],[9,10,5]]}' },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
     { label: "Spread values", input: "[3,0,8,2,6]" },
     { label: "Two values", input: "[5,9]" },
     { label: "Late peak", input: "[1,1,1,20,1]" },
+    { label: 'One value', input: '[0]' },
+    { label: 'Equal values', input: '[4,4,4,4]' },
+    { label: 'Boundary values', input: '[100,0,50,50,0,100,1,99,2,98]' },
+    { label: 'Long run: 10 values', input: '[35,54,66,27,37,1,8,12,5,35]' },
   ],
 };
 

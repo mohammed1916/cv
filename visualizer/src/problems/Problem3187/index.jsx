@@ -17,6 +17,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[3,1,4,2,5],"queries":[[2,2,4],[1,0,2],[1,0,4]]}' },
     { label: 'Example 2', input: '{"nums":[4,1,4,2,1,5],"queries":[[2,2,4],[1,0,2],[1,0,5]]}' },
+    { label: "Shortest allowed array", input: "{\"nums\":[5,5,5],\"queries\":[[1,0,2]]}" },
+    { label: "Update creates a tie", input: "{\"nums\":[2,9,2,9,2],\"queries\":[[2,1,2],[1,0,4]]}" },
+    { label: "Long run: twelve numbers, eight queries", input: "{\"nums\":[7,3,12,5,9,1,15,4,11,6,2,8],\"queries\":[[1,0,11],[2,5,14],[1,2,9],[2,0,20],[1,0,11],[2,11,1],[1,4,7],[1,1,3]]}" },
   ],
 }
 

@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,4,5],"k":3}' },
     { label: 'Example 2', input: '{"nums":[1,3,1,3],"k":2}' },
+    { label: "Single value", input: "{\"nums\": [7], \"k\": 7}" },
+    { label: "Largest values", input: "{\"nums\": [255, 255, 255], \"k\": 255}" },
+    { label: "Long run: 20 values", input: "{\"nums\": [12, 200, 45, 7, 128, 99, 64, 3, 255, 18, 77, 140, 33, 91, 6, 250, 119, 58, 201, 22], \"k\": 200}" },
   ],
 }
 

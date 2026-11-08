@@ -19,7 +19,12 @@ const SAMPLE = { Products: [
 ] }
 const inputLabel = 'JSON object with Transactions and Products tables'
 const complexity = 'Joining and counting is linear in the purchases; the per-customer ranking adds a sort: O(n log n).'
-const examples = [{ label: 'Teaching sample', input: JSON.stringify(SAMPLE) }]
+const examples = [
+  { label: 'Teaching sample', input: JSON.stringify(SAMPLE) },
+  { label: 'One product sale', input: '{"Transactions":[{"transaction_id":1,"customer_id":9,"product_id":501,"amount":0}],"Products":[{"product_id":501,"category":"Books","price":12}]}' },
+  { label: 'Equal amounts in one category', input: '{"Transactions":[{"transaction_id":1,"customer_id":9,"product_id":501,"amount":10},{"transaction_id":2,"customer_id":8,"product_id":502,"amount":10}],"Products":[{"product_id":501,"category":"Games","price":10},{"product_id":502,"category":"Games","price":10}]}' },
+  { label: 'Long run: 12 transactions', input: '{"Transactions":[{"transaction_id":1,"customer_id":1,"product_id":501,"amount":285},{"transaction_id":2,"customer_id":2,"product_id":502,"amount":268},{"transaction_id":3,"customer_id":3,"product_id":503,"amount":199},{"transaction_id":4,"customer_id":4,"product_id":501,"amount":89},{"transaction_id":5,"customer_id":1,"product_id":502,"amount":163},{"transaction_id":6,"customer_id":2,"product_id":503,"amount":118},{"transaction_id":7,"customer_id":3,"product_id":501,"amount":278},{"transaction_id":8,"customer_id":4,"product_id":502,"amount":175},{"transaction_id":9,"customer_id":1,"product_id":503,"amount":194},{"transaction_id":10,"customer_id":2,"product_id":501,"amount":67},{"transaction_id":11,"customer_id":3,"product_id":502,"amount":152},{"transaction_id":12,"customer_id":4,"product_id":503,"amount":137}],"Products":[{"product_id":501,"category":"Books","price":12},{"product_id":502,"category":"Games","price":30},{"product_id":503,"category":"Books","price":8}]}' },
+]
 
 const definition = { number: meta.number, phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel, complexity, examples }
 
