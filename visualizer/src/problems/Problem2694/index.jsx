@@ -17,6 +17,9 @@ const definition = {
   examples: [
     { label: 'Two listeners, one removed', input: '{"script":[["subscribe","save","a"],["subscribe","save","b"],["emit","save"],["unsubscribe","save","a"],["emit","save"]]}' },
     { label: 'Other event', input: '{"script":[["subscribe","open","x"],["emit","close"],["emit","open"]]}' },
+    { label: 'Emit with no listeners', input: '{"script":[["emit","tick"]]}' },
+    { label: 'Same listener subscribed twice', input: '{"script":[["subscribe","tick","a"],["subscribe","tick","a"],["emit","tick"],["unsubscribe","tick","a"],["emit","tick"]]}' },
+    { label: 'Longest script: 10 operations', input: '{"script":[["subscribe","tick","a"],["subscribe","tick","b"],["emit","tick"],["subscribe","open","c"],["emit","open"],["unsubscribe","tick","a"],["emit","tick"],["unsubscribe","open","c"],["emit","open"],["emit","tick"]]}' },
   ],
 }
 

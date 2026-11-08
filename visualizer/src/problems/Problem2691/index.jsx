@@ -9,6 +9,10 @@ const definition = {
   examples: [
     { label: 'Nested set', input: '{"obj":{"a":{"b":1,"c":2},"d":3},"writes":[[["a","b"],9]]}' },
     { label: 'Two writes', input: '{"obj":{"x":5,"a":{"b":[1,2]}},"writes":[[["x"],6],[["a","b",1],9]]}' },
+    { label: 'Single write at a key', input: '{"obj":{"n":1},"writes":[[["n"],2]]}' },
+    { label: 'Same key written twice', input: '{"obj":{"a":1},"writes":[[["a"],2],[["a"],3]]}' },
+    { label: 'Deep path, three levels', input: '{"obj":{"a":{"b":{"c":0}}},"writes":[[["a","b","c"],7]]}' },
+    { label: 'Long run: four writes', input: '{"obj":{"a":{"b":[1,2,3]},"x":0,"y":{"z":5}},"writes":[[["x"],10],[["a","b",0],-1],[["y","z"],"done"],[["a","b",2],8]]}' },
   ],
 }
 

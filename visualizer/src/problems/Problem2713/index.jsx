@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Mixed', input: '[[3,1,6],[-9,5,7]]' },
     { label: 'Equal neighbours', input: '[[1,1],[1,2]]' },
+    { label: 'Single cell', input: '[[-20]]' },
+    { label: 'Single row', input: '[[0,1,-1,2,-2]]' },
+    { label: 'Equal values', input: '[[5,5],[5,5]]' },
+    { label: 'Long run: 5 by 5 matrix', input: '[[18,-6,-2,-11,19],[17,-6,4,-11,0],[18,-4,10,-11,-19],[17,-4,16,-11,1],[18,-2,-19,-11,-18]]' },
   ],
 }
 

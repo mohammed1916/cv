@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"mainTank":5,"additionalTank":10}' },
     { label: 'Example 2', input: '{"mainTank":1,"additionalTank":2}' },
+    { label: 'No extra fuel', input: '{"mainTank":7,"additionalTank":0}' },
+    { label: 'Equal tanks', input: '{"mainTank":10,"additionalTank":10}' },
+    { label: 'Largest tanks', input: '{"mainTank":100,"additionalTank":100}' },
+    { label: 'Mid-sized tanks', input: '{"mainTank":50,"additionalTank":3}' },
   ],
 }
 

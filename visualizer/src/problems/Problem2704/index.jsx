@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Mixed checks', input: '{"value":5,"checks":[["toBe",5],["notToBe",5],["toBe",6]]}' },
     { label: 'Strings', input: '{"value":"a","checks":[["notToBe","b"]]}' },
+    { label: 'Boolean value', input: '{"value":true,"checks":[["toBe",true],["notToBe",false]]}' },
+    { label: 'No checks', input: '{"value":0,"checks":[]}' },
+    { label: 'Equal string checks', input: '{"value":"x","checks":[["toBe","x"],["toBe","x"]]}' },
+    { label: 'Long run: 8 checks', input: '{"value":3,"checks":[["notToBe",2],["toBe",3],["notToBe",3],["toBe",4],["notToBe",4],["toBe",2],["notToBe",2],["toBe",3]]}' },
   ],
 }
 

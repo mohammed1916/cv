@@ -47,7 +47,11 @@ const definition = {
   {
     "label": "Window slides",
     "input": "{\"n\":4,\"logs\":[[2,4],[3,9],[2,12],[4,7]],\"x\":4,\"queries\":[9,12,15]}"
-  }
+  },
+  { label: 'Single server', input: '{"n":1,"logs":[[1,5]],"x":3,"queries":[5]}' },
+  { label: 'Equal times', input: '{"n":2,"logs":[[1,10],[2,10]],"x":10,"queries":[10,20]}' },
+  { label: 'Largest window', input: '{"n":10,"logs":[[10,100],[1,1]],"x":100,"queries":[100,1]}' },
+  { label: 'Long run: 10 logs', input: '{"n":10,"logs":[[3,76],[10,73],[5,18],[2,15],[7,60],[4,57],[9,2],[6,99],[1,44],[8,41]],"x":40,"queries":[73,66,75,8,93,74,91,36,5,38]}' },
 ],
 }
 

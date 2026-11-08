@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,4,3]}' },
     { label: 'Powers of two', input: '{"nums":[2,4,8]}' },
+    { label: 'Two values', input: '{"nums":[3,6]}' },
+    { label: 'Smallest pair', input: '{"nums":[1,2]}' },
+    { label: 'Largest values', input: '{"nums":[100,99,98,97,96,95,94,93]}' },
+    { label: 'Long run: 8 distinct values', input: '{"nums":[7,8,65,42,23,100,89,94]}' },
   ],
 }
 

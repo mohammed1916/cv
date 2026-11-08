@@ -11,6 +11,10 @@ const definition = {
     { label: 'Index write into an array', input: '{"obj":{"list":[1,2]},"path":["list",0],"action":"set"}' },
     { label: 'Mutating method call', input: '{"obj":{"list":[1,2]},"path":["list"],"action":"call","method":"push"}' },
     { label: 'Read-only method call', input: '{"obj":{"list":[1,2]},"path":["list"],"action":"call","method":"map"}' },
+    { label: 'Set a top-level key', input: '{"obj":{"n":1},"path":["n"],"action":"set"}' },
+    { label: 'Call sort on an array', input: '{"obj":{"list":[3,1,2]},"path":["list"],"action":"call","method":"sort"}' },
+    { label: 'Call push on a nested array', input: '{"obj":{"a":{"list":[]}},"path":["a","list"],"action":"call","method":"push"}' },
+    { label: 'Long run: four keys into an array', input: '{"obj":{"a":{"b":{"c":[{"d":1}]}}},"path":["a","b","c",0],"action":"set"}' },
   ],
 }
 

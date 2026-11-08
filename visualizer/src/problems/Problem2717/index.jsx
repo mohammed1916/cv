@@ -24,6 +24,10 @@ const definition = {
     { label: "Overlapping moves", input: '{"nums": [3,1,2]}' },
     { label: "Long walk", input: '{"nums": [4,1,3,2]}' },
     { label: "Already in place", input: '{"nums": [1,4,2,3]}' },
+    { label: 'Two values swapped', input: '{"nums":[2,1]}' },
+    { label: 'Already sorted', input: '{"nums":[1,2,3,4,5]}' },
+    { label: 'Reverse order', input: '{"nums":[5,4,3,2,1]}' },
+    { label: 'Long run: 50 values', input: '{"nums":[3,26,49,32,9,12,47,30,22,37,36,39,38,28,7,2,24,43,33,42,31,11,20,4,17,44,25,14,35,8,21,34,19,50,27,15,41,5,48,1,46,13,10,23,29,6,16,40,45,18]}' },
   ],
 };
 

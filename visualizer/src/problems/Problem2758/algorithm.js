@@ -79,7 +79,11 @@ export const examples = [
   { label: 'Leap February', input: '{"date":"2028-02-28"}' },
   { label: 'Century, not leap', input: '{"date":"2100-02-28"}' },
   { label: 'New year', input: '{"date":"2023-12-31"}' },
-]
+    { label: 'Earliest year in range', input: '{"date":"0001-01-01"}' },
+    { label: 'Leap day in a leap year', input: '{"date":"2028-02-29"}' },
+    { label: 'Century divisible by 400 is a leap year', input: '{"date":"2400-02-29"}' },
+    { label: 'Largest year: last day of 9998', input: '{"date":"9998-12-31"}' },
+  ]
 
 export function buildTrace({ date }) {
   const start = date.split('-').map(Number)

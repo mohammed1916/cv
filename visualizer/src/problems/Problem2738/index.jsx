@@ -7,7 +7,7 @@ const definition = {
   inputLabel: 'Files as JSON',
   url: 'https://leetcode.com/problems/count-occurrences-in-text/',
   complexity: 'One substring check per file and per target word, so O(files × targets) checks on the file text.',
-  examples: [{ label: 'Sample tables', input: JSON.stringify(sample) }],
+  examples: [{ label: 'Sample tables', input: JSON.stringify(sample) }, { label: 'Single match', input: '{"files":[{"file_name":"x.txt","content":"bull"}]}' }, { label: 'No matches', input: '{"files":[{"file_name":"n.txt","content":"quiet day"}]}' }, { label: 'Equal counts tie', input: '{"files":[{"file_name":"a.txt","content":"bull bear"},{"file_name":"b.txt","content":"bear bull"}]}' }, { label: 'Long run: 12 files', input: '{"files":[{"file_name":"f0.txt","content":"market market market market"},{"file_name":"f1.txt","content":"bull bull bull bull"},{"file_name":"f2.txt","content":"bear bear bear bear"},{"file_name":"f3.txt","content":"stocks stocks stocks stocks"},{"file_name":"f4.txt","content":"market market market market"},{"file_name":"f5.txt","content":"bull bull bull bull"},{"file_name":"f6.txt","content":"bear bear bear bear"},{"file_name":"f7.txt","content":"stocks stocks stocks stocks"},{"file_name":"f8.txt","content":"market market market market"},{"file_name":"f9.txt","content":"bull bull bull bull"},{"file_name":"f10.txt","content":"bear bear bear bear"},{"file_name":"f11.txt","content":"stocks stocks stocks stocks"}]}' }],
 }
 
 function RowTable({ rows }) {

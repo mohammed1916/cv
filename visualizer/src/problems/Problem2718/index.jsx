@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":3,"m":3,"queries":[[0,0,1],[1,2,2],[0,2,3],[1,0,4]]}' },
     { label: 'Small', input: '{"n":2,"m":2,"queries":[[0,0,5],[1,1,1]]}' },
+    { label: 'Single cell', input: '{"n":1,"m":1,"queries":[[0,0,7]]}' },
+    { label: 'Same value twice', input: '{"n":2,"m":2,"queries":[[0,1,4],[1,1,4]]}' },
+    { label: 'Zero values', input: '{"n":3,"m":1,"queries":[[1,0,0],[0,2,0]]}' },
+    { label: 'Long run: 6 by 6, 10 queries', input: '{"n":6,"m":6,"queries":[[1,1,14],[0,2,14],[1,5,12],[0,0,12],[1,3,10],[0,4,10],[1,1,8],[0,2,8],[1,5,6],[0,0,6]]}' },
   ],
 }
 

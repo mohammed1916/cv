@@ -13,6 +13,10 @@ export const COMPLEXITY = 'O(n log n) to order the simulated finish times. Each 
 export const EXAMPLES = [
   { label: 'All succeed', input: '[{"id":"a","ms":30},{"id":"b","ms":10},{"id":"c","ms":20}]' },
   { label: 'One rejects', input: '[{"id":"a","ms":30},{"id":"b","ms":10,"fail":true},{"id":"c","ms":5}]' },
+  { label: 'One task', input: '[{"id":"solo","ms":0}]' },
+  { label: 'Equal delays', input: '[{"id":"a","ms":20},{"id":"b","ms":20}]' },
+  { label: 'Longest and shortest', input: '[{"id":"a","ms":1000},{"id":"b","ms":999}]' },
+  { label: 'Long run: 8 tasks', input: '[{"id":"a","ms":715},{"id":"b","ms":547},{"id":"c","ms":69},{"id":"d","ms":902},{"id":"e","ms":424},{"id":"f","ms":256},{"id":"g","ms":779},{"id":"h","ms":611}]' },
 ]
 export const WHY = [
   'Every task is started before any result is read, so the tasks overlap in time.',

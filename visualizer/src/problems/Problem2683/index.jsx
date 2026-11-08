@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"derived":[1,1]}' },
     { label: 'Example 2', input: '{"derived":[1,0]}' },
+    { label: 'Single zero', input: '{"derived":[0]}' },
+    { label: 'Odd parity: no original array', input: '{"derived":[1]}' },
+    { label: 'Equal entries, twelve values', input: '{"derived":[1,1,1,1,1,1,1,1,1,1,1,1]}' },
+    { label: 'Long run: 12 entries', input: '{"derived":[0,0,0,1,0,1,0,1,0,1,0,0]}' },
   ],
 }
 

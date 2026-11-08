@@ -16,6 +16,9 @@ const definition = {
     { label: 'Symbol stays hidden', input: '{"fn":"keyCount","args":[{"red":1,"blue":2}]}' },
     { label: 'Array as context', input: '{"fn":"lastItem","args":[[5,6,9]]}' },
     { label: 'Missing property', input: '{"fn":"readOwner","args":[{"city":"Oslo"}]}' },
+    { label: 'Empty context only', input: '{"fn":"keyCount","args":[{}]}' },
+    { label: 'Twelve context keys', input: '{"fn":"keyCount","args":[{"k0":0,"k1":1,"k2":2,"k3":3,"k4":4,"k5":5,"k6":6,"k7":7,"k8":8,"k9":9,"k10":10,"k11":11}]}' },
+    { label: 'Long run: six arguments', input: '{"fn":"badge","args":[{"name":"Ivo"},"[","]","<",">",";"]}' },
   ],
 }
 

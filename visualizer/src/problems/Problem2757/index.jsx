@@ -13,6 +13,10 @@ const definition = {
     { label: 'Both directions', input: '{"arr":[7,3,9,1,6,4,8],"steps":[2,-4,10,-1],"startIndex":2}' },
     { label: 'Whole laps', input: '{"arr":[5,10,15,20],"steps":[8,-12,0,3],"startIndex":1}' },
     { label: 'One value', input: '{"arr":[42],"steps":[3,-7],"startIndex":0}' },
+    { label: 'Single entry, zero jump', input: '{"arr":[5],"steps":[0],"startIndex":0}' },
+    { label: 'Equal values in arr', input: '{"arr":[3,3,3,3],"steps":[1,1],"startIndex":1}' },
+    { label: 'Boundary: values at plus and minus 10000', input: '{"arr":[10000,-10000,10000],"steps":[-10000,10000],"startIndex":2}' },
+    { label: 'Long run: 24 entries, 30 jumps', input: '{"arr":[-6279,-44,-1036,6987,1673,-3859,7396,-1952,6222,5712,-7941,961,-320,-9951,-4907,-3679,8910,1232,6683,-9262,-9397,-523,7167,6662],"steps":[-5313,-4890,-6722,1755,4497,2244,-6247,-5038,-5556,1571,1800,9099,6526,3272,-3234,-7990,-8421,-4351,-2924,-6426,-5351,-8768,-2945,-2244,-6382,-6183,-8804,9391,-8687,-2860],"startIndex":7}' },
   ],
 }
 

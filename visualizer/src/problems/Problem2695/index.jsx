@@ -15,6 +15,14 @@ const definition = {
   examples: [
     { label: 'Two wrappers', input: '{"a":[1,2],"b":[3]}' },
     { label: 'Negative values', input: '{"a":[],"b":[-4,1]}' },
+    { label: 'Single values cancel', input: '{"a":[7],"b":[-7]}' },
+    { label: 'Equal lists', input: '{"a":[5,5],"b":[5,5]}' },
+    { label: 'Largest values', input: '{"a":[1000,1000,1000,1000,1000,1000,1000,1000],"b":[-1000,-1000,-1000,-1000,-1000,-1000,-1000,-1000]}' },
+    { label: 'Long run: 16 items', input: '{"a":[138,-219,-293,144,115,480,-848,678],"b":[-897,863,-891,-205,-151,279,-189,-993]}' },
+    { label: 'Single values cancel', input: '{"a":[7],"b":[-7]}' },
+    { label: 'Equal lists', input: '{"a":[5,5],"b":[5,5]}' },
+    { label: 'Largest values', input: '{"a":[1000,1000,1000,1000,1000,1000,1000,1000],"b":[-1000,-1000,-1000,-1000,-1000,-1000,-1000,-1000]}' },
+    { label: 'Long run: 16 items', input: '{"a":[138,-219,-293,144,115,480,-848,678],"b":[-897,863,-891,-205,-151,279,-189,-993]}' },
   ],
 }
 

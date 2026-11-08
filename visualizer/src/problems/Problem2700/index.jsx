@@ -15,6 +15,14 @@ const definition = {
   examples: [
     { label: 'Nested change', input: '{"obj1":{"a":1,"nest":{"x":true,"y":[1,2]}},"obj2":{"a":1,"nest":{"x":false,"y":[1,2]},"extra":"new"}}' },
     { label: 'Same objects', input: '{"obj1":{"k":"v"},"obj2":{"k":"v"}}' },
+    { label: 'Single key changed', input: '{"obj1":{"a":1},"obj2":{"a":2}}' },
+    { label: 'Equal arrays', input: '{"obj1":[1,2,3],"obj2":[1,2,3]}' },
+    { label: 'Array length change', input: '{"obj1":[1,2],"obj2":[1,2,3]}' },
+    { label: 'Long run: 16 keys', input: '{"obj1":{"k0":9,"k1":4,"k2":1,"k3":6,"k4":3,"k5":0,"k6":5,"k7":2,"k8":7,"k9":4,"k10":9,"k11":6,"k12":1,"k13":8,"k14":3,"k15":0},"obj2":{"k0":10,"k1":4,"k2":1,"k3":7,"k4":3,"k5":0,"k6":6,"k7":2,"k8":7,"k9":5,"k10":9,"k11":6,"k12":2,"k13":8,"k14":3,"k15":1}}' },
+    { label: 'Single key changed', input: '{"obj1":{"a":1},"obj2":{"a":2}}' },
+    { label: 'Equal arrays', input: '{"obj1":[1,2,3],"obj2":[1,2,3]}' },
+    { label: 'Array length change', input: '{"obj1":[1,2],"obj2":[1,2,3]}' },
+    { label: 'Long run: 16 keys', input: '{"obj1":{"k0":9,"k1":4,"k2":1,"k3":6,"k4":3,"k5":0,"k6":5,"k7":2,"k8":7,"k9":4,"k10":9,"k11":6,"k12":1,"k13":8,"k14":3,"k15":0},"obj2":{"k0":10,"k1":4,"k2":1,"k3":7,"k4":3,"k5":0,"k6":6,"k7":2,"k8":7,"k9":5,"k10":9,"k11":6,"k12":2,"k13":8,"k14":3,"k15":1}}' },
   ],
 }
 

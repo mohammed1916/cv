@@ -12,7 +12,11 @@ export const COMPLEXITY = 'O(k) time to join k words. Binding stores references 
 export const EXAMPLES = [
   { label: 'Example', input: '{"name":"Ada","args":["hi"],"call":["there"]}' },
   { label: 'No bound words', input: '{"name":"Bo","args":[],"call":["ok"]}' },
-]
+    { label: 'Zero words: empty bind and call', input: '{"name": "A", "args": [], "call": []}' },
+    { label: 'Equal lengths: two bound and two called', input: '{"name": "Mo", "args": ["a", "b"], "call": ["c", "d"]}' },
+    { label: 'Boundary: 10 words in total', input: '{"name": "Max", "args": ["p", "q", "r", "s", "t"], "call": ["u", "v", "w", "x", "y"]}' },
+    { label: 'Long run: 10 words, one bound each', input: '{"name": "Run", "args": ["one", "two", "three", "four", "five"], "call": ["six", "seven", "eight", "nine", "ten"]}' },
+  ]
 export const WHY = [
   'Binding fixes two things ahead of time: the value of this inside the function and any leading arguments.',
   'Arguments given when the bound function is later called are appended after the bound ones.',

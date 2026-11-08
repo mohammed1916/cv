@@ -7,6 +7,15 @@ const complexity = 'O(n) over the ride rows plus a sort of the bikes. The visual
 const examples = [{
   label: 'Sample',
   input: '{"Bikes":[{"ride_id":1,"bike_number":7,"start_time":"2025-03-01 08:00:00","end_time":"2025-03-01 08:20:00"},{"ride_id":2,"bike_number":3,"start_time":"2025-03-01 09:00:00","end_time":"2025-03-01 10:15:00"},{"ride_id":3,"bike_number":7,"start_time":"2025-03-02 07:00:00","end_time":"2025-03-02 07:40:00"},{"ride_id":4,"bike_number":9,"start_time":"2025-02-28 12:00:00","end_time":"2025-02-28 12:30:00"},{"ride_id":5,"bike_number":3,"start_time":"2025-03-01 11:00:00","end_time":"2025-03-01 11:05:00"}]}',
+}, {
+  label: 'Single ride',
+  input: '{"Bikes":[{"ride_id":1,"bike_number":4,"start_time":"2025-05-01 10:00:00","end_time":"2025-05-01 10:05:00"}]}',
+}, {
+  label: 'Equal end times',
+  input: '{"Bikes":[{"ride_id":1,"bike_number":2,"start_time":"2025-05-01 10:00:00","end_time":"2025-05-01 11:00:00"},{"ride_id":2,"bike_number":5,"start_time":"2025-05-01 10:30:00","end_time":"2025-05-01 11:00:00"}]}',
+}, {
+  label: 'Long run: 12 rides on 4 bikes',
+  input: '{"Bikes":[{"ride_id":1,"bike_number":4,"start_time":"2025-05-01 08:00:00","end_time":"2025-05-01 08:30:00"},{"ride_id":2,"bike_number":9,"start_time":"2025-05-02 09:00:00","end_time":"2025-05-02 09:30:00"},{"ride_id":3,"bike_number":2,"start_time":"2025-05-03 10:00:00","end_time":"2025-05-03 10:30:00"},{"ride_id":4,"bike_number":7,"start_time":"2025-05-01 11:00:00","end_time":"2025-05-01 11:30:00"},{"ride_id":5,"bike_number":9,"start_time":"2025-05-02 12:00:00","end_time":"2025-05-02 12:30:00"},{"ride_id":6,"bike_number":4,"start_time":"2025-05-03 13:00:00","end_time":"2025-05-03 13:30:00"},{"ride_id":7,"bike_number":2,"start_time":"2025-05-01 14:00:00","end_time":"2025-05-01 14:30:00"},{"ride_id":8,"bike_number":7,"start_time":"2025-05-02 15:00:00","end_time":"2025-05-02 15:30:00"},{"ride_id":9,"bike_number":7,"start_time":"2025-05-03 16:00:00","end_time":"2025-05-03 16:30:00"},{"ride_id":10,"bike_number":9,"start_time":"2025-05-01 17:00:00","end_time":"2025-05-01 17:30:00"},{"ride_id":11,"bike_number":4,"start_time":"2025-05-02 18:00:00","end_time":"2025-05-02 18:30:00"},{"ride_id":12,"bike_number":2,"start_time":"2025-05-03 19:00:00","end_time":"2025-05-03 19:30:00"}]}',
 }]
 const reasoning = 'Each bike keeps the largest end time among its rides. The rows are then listed with the newest last-use time first, so the bike used most recently appears at the top.'
 

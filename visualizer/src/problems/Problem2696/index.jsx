@@ -16,6 +16,14 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"ABFCACDB"}' },
     { label: 'Example 2', input: '{"s":"ACBBD"}' },
+    { label: 'Single letter', input: '{"s":"A"}' },
+    { label: 'Equal letters', input: '{"s":"AAAA"}' },
+    { label: 'Maximum length: 30 same letters', input: '{"s":"ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"}' },
+    { label: 'Long run: 30 letters', input: '{"s":"BYDWRIXUJYDONMNEBOHCRYFGXARIHY"}' },
+    { label: 'Single letter', input: '{"s":"A"}' },
+    { label: 'Equal letters', input: '{"s":"AAAA"}' },
+    { label: 'Maximum length: 30 same letters', input: '{"s":"ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"}' },
+    { label: 'Long run: 30 letters', input: '{"s":"BYDWRIXUJYDONMNEBOHCRYFGXARIHY"}' },
   ],
 }
 

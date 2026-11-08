@@ -41,7 +41,11 @@ const definition = {
   {
     "label": "Example 3",
     "input": "{\"nums\":[9,5,6,1,8]}"
-  }
+  },
+  { label: 'Single value', input: '{"nums":[42]}' },
+  { label: 'Two values reversed', input: '{"nums":[9,4]}' },
+  { label: 'Largest value', input: '{"nums":[100,1]}' },
+  { label: 'Long run: 60 values', input: '{"nums":[39,64,93,38,3,88,41,6,95,60,85,54,44,58,9,66,76,49,22,83,40,45,14,31,16,21,2,91,80,17,32,5,94,59,53,78,15,56,73,26,10,75,52,25,92,37,98,47,4,69,90,19,7,68,11,96,34,57,63,20]}' },
 ],
 }
 

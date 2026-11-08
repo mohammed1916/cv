@@ -12,7 +12,7 @@ const definition = {
     { id: 'done', label: 'Result', description: 'The smallest working count, or -1.' },
   ], parse: model.parseInput, build: model.buildTrace, code: model.code, python: model.python,
   inputLabel: 'Object with num1 and num2 (integers)', url: 'https://leetcode.com/problems/minimum-operations-to-make-the-integer-zero/', complexity: 'Each k is tried once, up to 64 trials, and each trial counts set bits. The visualization caps the inputs.',
-  examples: [{ label: 'Small positive step', input: '{"num1":17,"num2":-2}' }, { label: 'Zero step', input: '{"num1":9,"num2":0}' }],
+  examples: [{ label: 'Small positive step', input: '{"num1":17,"num2":-2}' }, { label: 'Zero step', input: '{"num1":9,"num2":0}' }, { label: 'Step of one', input: '{"num1":1,"num2":1}' }, { label: 'Largest start, large negative step', input: '{"num1":1000,"num2":-1000}' }, { label: 'Zero step from mid value', input: '{"num1":500,"num2":0}' }, { label: 'Long run: start 1, step 1000', input: '{"num1":1,"num2":1000}' }],
 }
 
 export default function ProblemVisual() {

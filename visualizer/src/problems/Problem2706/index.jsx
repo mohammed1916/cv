@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Cheap pair fits', input: '{"prices":[4,1,3,6],"money":7}' },
     { label: 'Pair too costly', input: '{"prices":[5,9],"money":12}' },
+    { label: 'Two equal prices', input: '{"prices":[2,2],"money":4}' },
+    { label: 'Exact budget', input: '{"prices":[10,20,30],"money":30}' },
+    { label: 'Largest prices', input: '{"prices":[100,100,100,100,100,100,100,100,100,100,100,100],"money":100}' },
+    { label: 'Long run: 12 prices', input: '{"prices":[96,77,50,7,80,89,18,67,28,69,42,99],"money":100}' },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
     { label: "abcab", input: JSON.stringify("abcab") },
     { label: "aaaa", input: JSON.stringify("aaaa") },
     { label: "abc", input: JSON.stringify("abc") },
+    { label: 'Single letter', input: '"z"' },
+    { label: 'Equal letters', input: '"zzzz"' },
+    { label: 'Alphabet order', input: '"abcdefghijklmnop"' },
+    { label: 'Long run: 16 letters', input: '"cccaacabccbbcacb"' },
   ],
 };
 

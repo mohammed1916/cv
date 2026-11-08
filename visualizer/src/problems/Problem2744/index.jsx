@@ -16,6 +16,10 @@ const definition = {
     { label: 'Example 1', input: '["cd","ac","dc","ca","zz"]' },
     { label: 'Example 2', input: '["ab","ba","cc"]' },
     { label: 'No pairs', input: '["aa","ab"]' },
+    { label: 'Single word', input: '["ab"]' },
+    { label: 'Two reverse pairs', input: '["xy","yx","xz","zx"]' },
+    { label: 'No reverse pairs', input: '["aa","bb","cc"]' },
+    { label: 'Long run: 12 words', input: '["vo","wd","zu","aj","da","ep","hg","iv","lm","mb","ps","qh"]' },
   ],
 }
 

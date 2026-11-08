@@ -7,7 +7,11 @@ const complexity = 'O(n log n) for the sort of users plus one pass over the frie
 const examples = [{
   label: 'Sample',
   input: '{"Friends":[{"user1":1,"user2":2},{"user1":1,"user2":3},{"user1":2,"user2":3},{"user1":4,"user2":1},{"user1":5,"user2":6}]}',
-}]
+},
+  { label: 'Single friendship', input: '{"Friends":[{"user1":1,"user2":2}]}' },
+  { label: 'Star network tie', input: '{"Friends":[{"user1":1,"user2":2},{"user1":1,"user2":3},{"user1":1,"user2":4}]}' },
+  { label: 'Two disjoint pairs', input: '{"Friends":[{"user1":5,"user2":9},{"user1":3,"user2":8}]}' },
+  { label: 'Long run: 12 friendships', input: '{"Friends":[{"user1":10,"user2":9},{"user1":6,"user2":1},{"user1":8,"user2":3},{"user1":6,"user2":7},{"user1":2,"user2":3},{"user1":8,"user2":5},{"user1":6,"user2":5},{"user1":2,"user2":7},{"user1":8,"user2":9},{"user1":6,"user2":3},{"user1":6,"user2":9},{"user1":10,"user2":1}]}' },]
 const reasoning = 'A friendship counts for both people, so each row adds one to each user. The denominator in this teaching version is the number of distinct users named in the table. User 1 has three friends out of six users, which is 50 percent.'
 
 const definition = {

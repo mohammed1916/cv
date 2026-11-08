@@ -16,6 +16,10 @@ const definition = {
     { label: "Example", input: '{"nums":[3,4],"x":3,"y":1}' },
     { label: "Three equal values", input: '{"nums":[1,1,1],"x":2,"y":1}' },
     { label: "Single value", input: '{"nums":[5],"x":3,"y":1}' },
+    { label: 'Two values, smallest bounds', input: '{"nums":[1,1],"x":2,"y":1}' },
+    { label: 'Equal values, wide gap', input: '{"nums":[7,7,7,7],"x":10,"y":2}' },
+    { label: 'Largest values', input: '{"nums":[50,50,50,50,50,50,50,50],"x":10,"y":9}' },
+    { label: 'Long run: 8 values', input: '{"nums":[12,5,14,31,20,7,44,47],"x":10,"y":1}' },
   ],
 };
 

@@ -11,7 +11,7 @@ const definition = {
   ], parse: model.parseInput, build: model.buildTrace, code: model.code, python: model.python,
   inputLabel: 'Object with nums (a list of 0 and 1 values)', url: 'https://leetcode.com/problems/ways-to-split-array-into-good-subarrays/',
   complexity: 'O(n^2) for this teaching model, which checks every start point. The visualization caps nums at 50 values.',
-  examples: [{ label: 'Ones spread out', input: '{"nums":[0,1,1,0,0,1,0]}' }, { label: 'Single one', input: '{"nums":[0,0,1]}' }],
+  examples: [{ label: 'Ones spread out', input: '{"nums":[0,1,1,0,0,1,0]}' }, { label: 'Single one', input: '{"nums":[0,0,1]}' }, { label: 'Single element', input: '{"nums":[1]}' }, { label: 'All zeros: no good split', input: '{"nums":[0,0,0,0]}' }, { label: 'Equal values: every item is 1', input: '{"nums":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]}' }, { label: 'Boundary: one 1 at the far end', input: '{"nums":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]}' }, { label: 'Long run: 50 values', input: '{"nums":[0,0,1,0,0,0,1,0,0,1,1,0,1,1,0,0,1,1,1,1,1,0,1,1,0,0,1,1,0,0,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,1,0,1,0]}' }],
 }
 
 export default function ProblemVisual() {

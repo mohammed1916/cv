@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Cancelled first', input: '{"delay":40,"cancelAt":15}' },
     { label: 'No cancel', input: '{"delay":25,"cancelAt":null}' },
+    { label: 'Zero delay', input: '{"delay":0,"cancelAt":0}' },
+    { label: 'Cancel at the same time', input: '{"delay":30,"cancelAt":30}' },
+    { label: 'Largest delay', input: '{"delay":1000,"cancelAt":999}' },
+    { label: 'Cancel after finish', input: '{"delay":10,"cancelAt":500}' },
   ],
 }
 

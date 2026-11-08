@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '"cbabc"' },
     { label: 'Example 2', input: '"acbbc"' },
+    { label: 'Single letter', input: '"a"' },
+    { label: 'Equal run of 20', input: '"aaaaaaaaaaaaaaaaaaaa"' },
+    { label: 'Reverse pair', input: '"ba"' },
+    { label: 'Long run: 20 letters', input: '"aacbccbbbaabbcbaaaca"' },
   ],
 }
 

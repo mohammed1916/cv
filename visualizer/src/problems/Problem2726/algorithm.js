@@ -12,6 +12,10 @@ export const COMPLEXITY = 'O(k) time for k operations. Each operation changes on
 export const EXAMPLES = [
   { label: 'Example', input: '{"init":10,"ops":[["add",5],["multiply",2],["divide",3]]}' },
   { label: 'Divide by zero', input: '{"init":4,"ops":[["divide",0]]}' },
+  { label: 'No operations', input: '{"init":5,"ops":[]}' },
+  { label: 'Power zero', input: '{"init":3,"ops":[["power",0]]}' },
+  { label: 'Subtract below zero', input: '{"init":2,"ops":[["subtract",9],["multiply",-3]]}' },
+  { label: 'Long run: 10 operations', input: '{"init":1,"ops":[["add",3],["multiply",2],["subtract",1],["multiply",2],["add",4],["power",2],["subtract",5],["multiply",3],["add",1],["power",1]]}' },
 ]
 export const WHY = [
   'Each method returns the calculator itself, so calls chain into one left-to-right fold over the running value.',

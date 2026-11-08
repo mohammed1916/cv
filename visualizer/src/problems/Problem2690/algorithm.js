@@ -14,6 +14,9 @@ export const examples = [
   { label: 'Made-up names', input: '{"methods":["greetUser","sum-of-2 odds!"]}' },
   { label: 'Names a plain object already has', input: '{"methods":["toString","constructor","__proto__"]}' },
   { label: 'Edge: empty name', input: '{"methods":[""]}' },
+  { label: 'Single name', input: '{"methods":["add"]}' },
+  { label: 'Repeated name', input: '{"methods":["sum","sum"]}' },
+  { label: 'Longest list: eight names', input: '{"methods":["alpha","beta","gamma","delta","epsilon","zeta","eta","theta"]}' },
 ]
 
 export const phases = [

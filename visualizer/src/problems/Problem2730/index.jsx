@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"52233"}' },
     { label: 'Two pairs', input: '{"s":"1111111"}' },
+    { label: 'Single digit', input: '{"s":"7"}' },
+    { label: 'Two equal digits', input: '{"s":"11"}' },
+    { label: 'Zeros', input: '{"s":"0000"}' },
+    { label: 'Long run: 20 digits', input: '{"s":"98583690501476703618"}' },
   ],
 }
 

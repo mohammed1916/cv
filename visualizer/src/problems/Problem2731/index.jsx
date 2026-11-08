@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Three robots', input: '{"nums":[-3,1,4],"s":"LRR","d":2}' },
     { label: 'Two robots', input: '{"nums":[5,2],"s":"RL","d":1}' },
+    { label: 'Zero distance', input: '{"nums":[3,8],"s":"RL","d":0}' },
+    { label: 'Robots meet at the same point', input: '{"nums":[0,10],"s":"RL","d":5}' },
+    { label: 'Largest coordinates', input: '{"nums":[2000000000,-2000000000],"s":"LR","d":1000000000}' },
+    { label: 'Long run: 12 robots', input: '{"nums":[-12,-292,326,410,307,-32,-183,-124,417,-240,493,474],"s":"RLRLRLRLRLRL","d":1000}' },
   ],
 }
 

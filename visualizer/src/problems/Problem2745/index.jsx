@@ -21,6 +21,10 @@ const definition = {
   examples: [
     { label: "Example 1", input: "{\"x\": 2, \"y\": 5, \"z\": 1}" },
     { label: "Example 2", input: "{\"x\": 3, \"y\": 2, \"z\": 2}" },
+    { label: 'Equal counts', input: '{"x":3,"y":3,"z":3}' },
+    { label: 'Single pair each', input: '{"x":1,"y":1,"z":1}' },
+    { label: 'Largest counts', input: '{"x":50,"y":50,"z":50}' },
+    { label: 'Long run: 50, 1, 50', input: '{"x":50,"y":1,"z":50}' },
   ],
 };
 

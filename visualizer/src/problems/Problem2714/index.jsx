@@ -18,6 +18,10 @@ const definition = {
     { label: 'Free hop on the costly leg', input: '{"n":5,"edges":[[0,1,4],[1,2,7],[0,3,1],[3,2,9],[2,4,2],[1,4,8]],"source":0,"destination":4,"k":1}' },
     { label: 'Unreachable', input: '{"n":3,"edges":[[0,1,2]],"source":2,"destination":0,"k":2}' },
     { label: 'Chain with two free hops', input: '{"n":4,"edges":[[0,1,3],[1,2,3],[2,3,3]],"source":0,"destination":3,"k":2}' },
+    { label: 'Single node', input: '{"n":1,"edges":[],"source":0,"destination":0,"k":0}' },
+    { label: 'Zero-weight tie', input: '{"n":3,"edges":[[0,1,0],[1,2,0],[0,2,0]],"source":0,"destination":2,"k":0}' },
+    { label: 'Costly chain, no free hops', input: '{"n":4,"edges":[[0,1,9],[1,2,9],[2,3,9]],"source":0,"destination":3,"k":0}' },
+    { label: 'Long run: 8 nodes, 16 edges', input: '{"n":8,"edges":[[0,3,7],[1,2,2],[2,3,9],[3,1,4],[4,2,1],[5,1,6],[6,2,3],[7,1,8],[0,2,5],[2,1,0],[4,3,7],[6,3,2],[1,6,9],[3,6,4],[5,0,1],[7,0,6]],"source":0,"destination":7,"k":6}' },
   ],
 }
 

@@ -12,7 +12,11 @@ export const COMPLEXITY = 'O(n) time over the characters, with a depth counter t
 export const EXAMPLES = [
   { label: 'Nested', input: '{"a":[1,{"b":2}],"c":{}}' },
   { label: 'Array', input: '[1,[2,[3]]]' },
-]
+    { label: 'Empty array', input: '[]' },
+    { label: 'Equal values in a list', input: '[[],[]]' },
+    { label: 'Boundary: 120 characters', input: '{"items":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]}' },
+    { label: 'Long run: nested lists', input: '[[1,[2,[3,[4,[5]]]]],{"a":[6,{"b":[7,8,9]}]},[10,[11,[12,[13]]]]]' },
+  ]
 export const WHY = [
   'Brackets open and close nesting; the depth counter shows how deep the current position is.',
   'The visual reads the brackets to track depth, then the built-in parser builds the value that is returned.',

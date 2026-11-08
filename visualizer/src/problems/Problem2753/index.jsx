@@ -13,6 +13,10 @@ const definition = {
     { label: 'Loose bound', input: '{"street":[0,1,0,0,1,1],"k":9}' },
     { label: 'One open door, tight bound', input: '{"street":[0,0,1,0],"k":4}' },
     { label: 'Single house', input: '{"street":[1],"k":4}' },
+    { label: 'Open door at the far end, maximum k', input: '{"street":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],"k":60}' },
+    { label: 'Every door open: equal values', input: '{"street":[1,1,1,1],"k":4}' },
+    { label: 'Minimum k equals house count', input: '{"street":[1,0,1],"k":3}' },
+    { label: 'Long run: 24 houses, k 57', input: '{"street":[1,0,0,1,0,1,1,0,0,1,1,0,0,0,0,0,1,1,0,1,0,0,1,0],"k":57}' },
   ],
 }
 

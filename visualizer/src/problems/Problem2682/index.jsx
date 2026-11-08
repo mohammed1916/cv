@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":5,"k":2}' },
     { label: 'Example 2', input: '{"n":4,"k":4}' },
+    { label: 'One friend', input: '{"n":1,"k":1}' },
+    { label: 'Largest n and k', input: '{"n":30,"k":30}' },
+    { label: 'Long run: n = 30, k = 7', input: '{"n":30,"k":7}' },
   ],
 }
 

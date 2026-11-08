@@ -12,6 +12,10 @@ export const COMPLEXITY = 'O(calls) time: the function runs once per period unti
 export const EXAMPLES = [
   { label: 'Example', input: '{"periodMs":20,"cancelMs":70}' },
   { label: 'Cancel on a tick', input: '{"periodMs":50,"cancelMs":50}' },
+  { label: 'Cancel at zero', input: '{"periodMs":1,"cancelMs":0}' },
+  { label: 'Long period, short cancel', input: '{"periodMs":200,"cancelMs":5}' },
+  { label: 'Largest cancel time', input: '{"periodMs":7,"cancelMs":1000}' },
+  { label: 'Long run: period 3, cancel 1000', input: '{"periodMs":3,"cancelMs":1000}' },
 ]
 export const WHY = [
   'The function is called immediately at time 0 and then again after each period.',

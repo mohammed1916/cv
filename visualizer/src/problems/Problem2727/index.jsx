@@ -16,6 +16,10 @@ const definition = {
     { label: "Empty object", input: "{}" },
     { label: "Null value is a key", input: '{"a":null}' },
     { label: "Empty array", input: "[]" },
+    { label: 'Single key', input: '{"x":1}' },
+    { label: 'Falsy values', input: '{"a":0,"b":false,"c":""}' },
+    { label: 'Single null element', input: '[null]' },
+    { label: 'Long run: 12 keys', input: '{"k0":null,"k1":7,"k2":null,"k3":9,"k4":null,"k5":1,"k6":null,"k7":3,"k8":null,"k9":5,"k10":null,"k11":7}' },
   ],
 };
 

@@ -12,7 +12,11 @@ export const COMPLEXITY = 'O(n log n) to order the simulated finish times. Every
 export const EXAMPLES = [
   { label: 'Mixed', input: '[{"id":"a","ms":30},{"id":"b","ms":10,"fail":true},{"id":"c","ms":20}]' },
   { label: 'All succeed', input: '[{"id":"x","ms":5},{"id":"y","ms":1}]' },
-]
+    { label: 'Single task', input: '[{"id": "solo", "ms": 0}]' },
+    { label: 'Equal times keep both tasks', input: '[{"id": "a", "ms": 5}, {"id": "b", "ms": 5}, {"id": "c", "ms": 5}]' },
+    { label: 'Boundary: 0 and 1000 ms', input: '[{"id": "zero", "ms": 0}, {"id": "full", "ms": 1000}]' },
+    { label: 'Long run: 8 tasks', input: '[{"id":"t0","ms":878},{"id":"t1","ms":886},{"id":"t2","ms":811},{"id":"t3","ms":568},{"id":"t4","ms":872},{"id":"t5","ms":670},{"id":"t6","ms":421},{"id":"t7","ms":596}]' },
+  ]
 export const WHY = [
   'Unlike a version that stops at the first rejection, every task is allowed to finish and report its own outcome.',
   'Each slot records either a fulfilled value or a rejected reason, so the caller can inspect each result separately.',

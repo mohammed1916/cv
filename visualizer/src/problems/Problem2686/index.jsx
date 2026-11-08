@@ -7,6 +7,15 @@ const complexity = 'O(n) over the delivery rows. The visualizer caps the table a
 const examples = [{
   label: 'Sample',
   input: '{"Delivery":[{"delivery_id":1,"customer_id":1,"order_date":"2025-01-01","customer_pref_delivery_date":"2025-01-02"},{"delivery_id":2,"customer_id":2,"order_date":"2025-01-01","customer_pref_delivery_date":"2025-01-01"},{"delivery_id":3,"customer_id":3,"order_date":"2025-01-02","customer_pref_delivery_date":"2025-01-02"},{"delivery_id":4,"customer_id":4,"order_date":"2025-01-02","customer_pref_delivery_date":"2025-01-05"},{"delivery_id":5,"customer_id":5,"order_date":"2025-01-02","customer_pref_delivery_date":"2025-01-02"},{"delivery_id":6,"customer_id":6,"order_date":"2025-01-03","customer_pref_delivery_date":"2025-01-03"}]}',
+}, {
+  label: 'Single order',
+  input: '{"Delivery":[{"delivery_id":1,"customer_id":1,"order_date":"2025-06-10","customer_pref_delivery_date":"2025-06-10"}]}',
+}, {
+  label: 'Equal preferred dates tie',
+  input: '{"Delivery":[{"delivery_id":1,"customer_id":1,"order_date":"2025-06-10","customer_pref_delivery_date":"2025-06-11"},{"delivery_id":2,"customer_id":2,"order_date":"2025-06-10","customer_pref_delivery_date":"2025-06-11"}]}',
+}, {
+  label: 'Long run: 12 orders on 3 dates',
+  input: '{"Delivery":[{"delivery_id":1,"customer_id":1,"order_date":"2025-07-01","customer_pref_delivery_date":"2025-07-01"},{"delivery_id":2,"customer_id":2,"order_date":"2025-07-02","customer_pref_delivery_date":"2025-07-03"},{"delivery_id":3,"customer_id":3,"order_date":"2025-07-03","customer_pref_delivery_date":"2025-07-02"},{"delivery_id":4,"customer_id":4,"order_date":"2025-07-01","customer_pref_delivery_date":"2025-07-01"},{"delivery_id":5,"customer_id":5,"order_date":"2025-07-02","customer_pref_delivery_date":"2025-07-03"},{"delivery_id":6,"customer_id":6,"order_date":"2025-07-03","customer_pref_delivery_date":"2025-07-02"},{"delivery_id":7,"customer_id":7,"order_date":"2025-07-01","customer_pref_delivery_date":"2025-07-01"},{"delivery_id":8,"customer_id":8,"order_date":"2025-07-02","customer_pref_delivery_date":"2025-07-03"},{"delivery_id":9,"customer_id":9,"order_date":"2025-07-03","customer_pref_delivery_date":"2025-07-02"},{"delivery_id":10,"customer_id":10,"order_date":"2025-07-01","customer_pref_delivery_date":"2025-07-01"},{"delivery_id":11,"customer_id":11,"order_date":"2025-07-02","customer_pref_delivery_date":"2025-07-03"},{"delivery_id":12,"customer_id":12,"order_date":"2025-07-03","customer_pref_delivery_date":"2025-07-02"}]}',
 }]
 const reasoning = 'An order is immediate when its preferred delivery date equals its order date. Every order on a date stays in the denominator, so each date gets immediate orders divided by all orders on that date, shown as a percentage rounded to two decimals.'
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Five values', input: '{"nums":[2,5,1,4]}' },
     { label: 'Two-digit', input: '{"nums":[11,21,12]}' },
+    { label: 'Two values', input: '{"nums":[9,1]}' },
+    { label: 'Equal values', input: '{"nums":[7,7,7]}' },
+    { label: 'Largest values', input: '{"nums":[9999,1,9999,1,9999,1,9999,1,9999,1]}' },
+    { label: 'Long run: 10 values', input: '{"nums":[5931,3002,8857,8094,9990,8373,9479,5968,3926,9468]}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"positions":[5,4,3,2,1],"healths":[2,17,9,15,10],"directions":"RRRRR"}' },
     { label: 'Example 2', input: '{"positions":[3,5,2,6],"healths":[10,10,15,12],"directions":"RLRL"}' },
+    { label: 'Single robot', input: '{"positions":[5],"healths":[7],"directions":"R"}' },
+    { label: 'Equal health collision: both removed', input: '{"positions":[1,2],"healths":[3,3],"directions":"RL"}' },
+    { label: 'Boundary: health 20 at position 2 and 20', input: '{"positions":[2,20],"healths":[20,19],"directions":"RL"}' },
+    { label: 'Long run: 8 robots', input: '{"positions":[17,13,6,16,2,12,1,20],"healths":[17,2,17,7,13,15,10,5],"directions":"RRLLRRLR"}' },
   ],
 }
 

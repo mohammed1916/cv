@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[12,9],"k":1}' },
     { label: 'Example 2', input: '{"nums":[8,1,2],"k":2}' },
+    { label: 'Zero operations', input: '{"nums":[5,9],"k":0}' },
+    { label: 'Equal values tie', input: '{"nums":[7,7,7],"k":2}' },
+    { label: 'Largest values, k = 6', input: '{"nums":[100,99,98,97,96,95,94,93,92,91,90,89],"k":6}' },
+    { label: 'Long run: 12 values, k = 4', input: '{"nums":[62,30,31,75,62,8,52,21,78,46,70,6],"k":4}' },
   ],
 }
 

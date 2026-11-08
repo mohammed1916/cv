@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"leetscode","dictionary":["leet","code","leetcode"]}' },
     { label: 'Example 2', input: '{"s":"sayhelloworld","dictionary":["hello","world"]}' },
+    { label: 'One letter, no match', input: '{"s":"a","dictionary":["b"]}' },
+    { label: 'Repeated letters', input: '{"s":"aaaa","dictionary":["a","aa"]}' },
+    { label: 'Long run: 16 letters', input: '{"s":"abababababababab","dictionary":["ab","ba","aab","bb"]}' },
+    { label: 'Full string as word', input: '{"s":"abcdabcd","dictionary":["abcd","abcdabcd","a","d"]}' },
   ],
 }
 

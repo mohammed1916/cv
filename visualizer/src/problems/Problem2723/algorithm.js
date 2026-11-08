@@ -12,6 +12,10 @@ export const COMPLEXITY = 'O(1): two values, one sum. The delays only decide whi
 export const EXAMPLES = [
   { label: 'Example', input: '{"a":2,"b":5,"aMs":30,"bMs":10}' },
   { label: 'Equal delays', input: '{"a":-4,"b":9,"aMs":0,"bMs":0}' },
+  { label: 'Zero delays', input: '{"a":1,"b":2,"aMs":0,"bMs":0}' },
+  { label: 'Equal values', input: '{"a":7,"b":7,"aMs":5,"bMs":500}' },
+  { label: 'Largest delays', input: '{"a":-1000,"b":1000,"aMs":1000,"bMs":999}' },
+  { label: 'Negative values', input: '{"a":-3,"b":-8,"aMs":40,"bMs":120}' },
 ]
 export const WHY = [
   'Both promises are waiting at the same time, so the total is ready when the slower one settles.',

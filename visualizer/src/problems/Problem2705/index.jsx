@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: "Example", input: '[null,0,5,"a",false,[],{"x":0,"y":[false,2]}]' },
     { label: "Object", input: '{"a":1,"b":null,"c":{"d":""},"e":[0,{}]}' },
+    { label: 'Empty array', input: '[]' },
+    { label: 'Single null', input: '[null]' },
+    { label: 'Equal falsy values', input: '[0,0,"",false,null]' },
+    { label: 'Long run: 30 entries', input: '[{"v":[0,7,0]},{"v":[5,6,9]},{"v":[2,3,8]},{"v":[7,2,7]},{"v":[4,9,6]},{"v":[9,8,5]}]' },
   ],
 };
 

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: "Example", input: '{"args":[1,null,"x"]}' },
     { label: "No arguments", input: '{"args":[]}' },
+    { label: 'Single argument', input: '{"args":[0]}' },
+    { label: 'Only undefined values', input: '{"args":[null,null,null]}' },
+    { label: 'Equal values', input: '{"args":[7,7,7]}' },
+    { label: 'Long run: 10 arguments', input: '{"args":[1,"x",null,2,3,null,"y",4,5,6]}' },
   ],
 };
 

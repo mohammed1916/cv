@@ -7,6 +7,15 @@ const complexity = 'O(n squared) pair checks in this visualizer, which caps the 
 const examples = [{
   label: 'Sample',
   input: '{"Users":[{"user_id":1,"item":"pen","created_at":"2025-04-01","amount":10},{"user_id":1,"item":"ink","created_at":"2025-04-06","amount":4},{"user_id":2,"item":"pad","created_at":"2025-04-01","amount":7},{"user_id":2,"item":"pad","created_at":"2025-04-09","amount":3},{"user_id":3,"item":"cap","created_at":"2025-04-02","amount":9},{"user_id":3,"item":"cap","created_at":"2025-04-02","amount":2},{"user_id":4,"item":"box","created_at":"2025-04-03","amount":5},{"user_id":4,"item":"box","created_at":"2025-04-10","amount":5}]}',
+}, {
+  label: 'Single purchase',
+  input: '{"Users":[{"user_id":1,"item":"pen","created_at":"2025-04-01","amount":10}]}',
+}, {
+  label: 'Equal amounts tie',
+  input: '{"Users":[{"user_id":1,"item":"pen","created_at":"2025-04-01","amount":10},{"user_id":2,"item":"ink","created_at":"2025-04-02","amount":10}]}',
+}, {
+  label: 'Long run: 12 purchases, four users',
+  input: '{"Users":[{"user_id":1,"item":"pen","created_at":"2025-04-01","amount":5},{"user_id":2,"item":"ink","created_at":"2025-04-04","amount":12},{"user_id":3,"item":"pad","created_at":"2025-04-07","amount":19},{"user_id":4,"item":"cup","created_at":"2025-04-10","amount":6},{"user_id":1,"item":"pen","created_at":"2025-04-13","amount":13},{"user_id":2,"item":"ink","created_at":"2025-04-16","amount":20},{"user_id":3,"item":"pad","created_at":"2025-04-19","amount":7},{"user_id":4,"item":"cup","created_at":"2025-04-22","amount":14},{"user_id":1,"item":"pen","created_at":"2025-04-25","amount":21},{"user_id":2,"item":"ink","created_at":"2025-04-28","amount":8},{"user_id":3,"item":"pad","created_at":"2025-04-03","amount":15},{"user_id":4,"item":"cup","created_at":"2025-04-06","amount":22}]}',
 }]
 const reasoning = 'Every pair of purchases by the same user is compared. A later purchase within seven days of an earlier one makes the user active, so user 1 (5 days) and user 4 (exactly 7 days) are active, user 2 (8 days) is not, and user 3 (two purchases on the same day) is active because a repeat on the same day is within seven days.'
 

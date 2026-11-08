@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"words": ["aa", "ab", "bc"]}' },
     { label: 'Example 2', input: '{"words": ["ab", "b"]}' },
+    { label: 'Single word', input: '{"words":["abc"]}' },
+    { label: 'Equal words', input: '{"words":["aa","aa"]}' },
+    { label: 'Longest words', input: '{"words":["abcdef","fedcba","zzzzzz"]}' },
+    { label: 'Long run: 8 words', input: '{"words":["zu","aje","dadgzy","e","hgbm","ivapc","lm","mby"]}' },
   ],
 }
 

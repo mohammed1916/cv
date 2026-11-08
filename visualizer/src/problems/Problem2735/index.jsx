@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'One rotation pays', input: '{"nums":[7,3,9,4],"x":2}' },
     { label: 'Three rotations pay', input: '{"nums":[5,5,1,6],"x":3}' },
+    { label: 'Single value', input: '{"nums":[5],"x":5}' },
+    { label: 'No rotation tie', input: '{"nums":[9,9],"x":1}' },
+    { label: 'Largest values', input: '{"nums":[1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000],"x":1000}' },
+    { label: 'Long run: 12 values', input: '{"nums":[981,350,411,652,57,178,327,192,181,934,315,756],"x":500}' },
   ],
 }
 

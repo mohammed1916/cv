@@ -12,6 +12,10 @@ export const COMPLEXITY = 'O(n^2) comparisons with the insertion method shown he
 export const EXAMPLES = [
   { label: 'Example', input: '{"key":"v","items":[{"id":"a","v":3},{"id":"b","v":1},{"id":"c","v":2}]}' },
   { label: 'Ties', input: '{"key":"v","items":[{"id":"a","v":2},{"id":"b","v":1},{"id":"c","v":2}]}' },
+  { label: 'Single item', input: '{"key":"v","items":[{"id":"a","v":4}]}' },
+  { label: 'All equal values', input: '{"key":"v","items":[{"id":"a","v":5},{"id":"b","v":5},{"id":"c","v":5}]}' },
+  { label: 'Negative and zero', input: '{"key":"v","items":[{"id":"a","v":-1},{"id":"b","v":0},{"id":"c","v":-9}]}' },
+  { label: 'Long run: 8 items', input: '{"key":"v","items":[{"id":"a","v":73},{"id":"b","v":70},{"id":"c","v":15},{"id":"d","v":12},{"id":"e","v":57},{"id":"f","v":54},{"id":"g","v":99},{"id":"h","v":96}]}' },
 ]
 export const WHY = [
   'The sort reads one number per object, given by the chosen key, and orders objects by that number.',

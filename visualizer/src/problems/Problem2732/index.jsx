@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Pair of rows', input: '{"grid": [[1,0,1],[0,1,0],[1,1,0]]}' },
     { label: 'No good subset', input: '{"grid": [[1,1,1],[1,1,1],[1,1,0]]}' },
+    { label: 'Single cell', input: '{"grid":[[1]]}' },
+    { label: 'Single row', input: '{"grid":[[1,0,1]]}' },
+    { label: 'All zeros', input: '{"grid":[[0,0],[0,0]]}' },
+    { label: 'Long run: 6 by 5 grid', input: '{"grid":[[1,0,1,0,1],[0,1,0,1,0],[1,0,1,0,1],[0,1,0,1,0],[1,0,1,0,1],[0,1,0,1,0]]}' },
   ],
 }
 

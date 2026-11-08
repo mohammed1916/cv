@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"cost":[1,2,3,2],"time":[1,2,3,2]}' },
     { label: 'Example 2', input: '{"cost":[2,3,4,2],"time":[1,1,1,1]}' },
+    { label: 'Single task', input: '{"cost":[5],"time":[3]}' },
+    { label: 'Equal costs and times', input: '{"cost":[4,4,4],"time":[2,2,2]}' },
+    { label: 'Largest input', input: '{"cost":[100,100,100,100,100,100,100,100,100,100],"time":[10,10,10,10,10,10,10,10,10,10]}' },
+    { label: 'Long run: 10 tasks', input: '{"cost":[4,77,74,99,76,69,82,87,84,41],"time":[6,7,6,5,6,9,8,1,8,5]}' },
   ],
 }
 

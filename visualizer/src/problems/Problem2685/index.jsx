@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Triangle and pair', input: '{"n":5,"edges":[[0,1],[1,2],[0,2],[3,4]]}' },
     { label: 'Path is not complete', input: '{"n":4,"edges":[[0,1],[1,2],[2,3]]}' },
+    { label: 'Single vertex', input: '{"n":1,"edges":[]}' },
+    { label: 'Complete graph on four vertices', input: '{"n":4,"edges":[[0,1],[0,2],[0,3],[1,2],[1,3],[2,3]]}' },
+    { label: 'Largest n: 8-cycle', input: '{"n":8,"edges":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,0]]}' },
+    { label: 'Long run: 8 vertices, 12 edges', input: '{"n":8,"edges":[[6,1],[6,3],[6,4],[0,2],[5,6],[7,4],[7,5],[7,2],[3,2],[2,4],[1,3],[4,1]]}' },
   ],
 }
 

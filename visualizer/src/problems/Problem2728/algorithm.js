@@ -12,6 +12,10 @@ export const COMPLEXITY = 'O(n) time: one clockwise pass over the circle, visiti
 export const EXAMPLES = [
   { label: 'Example', input: '{"street":[0,1,1,0,1,0],"start":4}' },
   { label: 'Empty street', input: '{"street":[0,0,0],"start":0}' },
+  { label: 'Single empty cell', input: '{"street":[0],"start":0}' },
+  { label: 'Single occupied cell', input: '{"street":[1],"start":0}' },
+  { label: 'Full street', input: '{"street":[1,1,1,1,1,1,1,1,1,1,1,1],"start":0}' },
+  { label: 'Long run: 12 cells', input: '{"street":[1,0,1,0,1,0,1,0,1,0,1,0],"start":6}' },
 ]
 export const WHY = [
   'The street is a circle, so the walk wraps from the last position back to index 0 and stops after one full lap.',

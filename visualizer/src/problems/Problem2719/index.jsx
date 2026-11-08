@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"num1":"1","num2":"12","min_sum":1,"max_sum":8}' },
     { label: 'Example 2', input: '{"num1":"1","num2":"5","min_sum":2,"max_sum":3}' },
+    { label: 'Single sum', input: '{"num1":"5","num2":"5","min_sum":5,"max_sum":5}' },
+    { label: 'Zero-ending value', input: '{"num1":"10","num2":"10","min_sum":1,"max_sum":1}' },
+    { label: 'Largest bounds', input: '{"num1":"1000","num2":"9999","min_sum":1,"max_sum":36}' },
+    { label: 'Long run: 1 to 9999', input: '{"num1":"1","num2":"9999","min_sum":20,"max_sum":30}' },
   ],
 }
 

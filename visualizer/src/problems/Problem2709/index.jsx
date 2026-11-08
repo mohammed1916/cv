@@ -20,6 +20,10 @@ const definition = {
     { label: 'Chain through primes', input: '{"nums":[6,10,15]}' },
     { label: 'Isolated value', input: '{"nums":[8,12,18,25]}' },
     { label: 'Single value', input: '{"nums":[7]}' },
+    { label: 'Equal values', input: '{"nums":[12,12,12]}' },
+    { label: 'Coprime pair', input: '{"nums":[2,3]}' },
+    { label: 'Largest values', input: '{"nums":[100,50,25,75,100,90,60,80]}' },
+    { label: 'Long run: 8 values', input: '{"nums":[50,36,14,37,88,36,10,76]}' },
   ],
 }
 

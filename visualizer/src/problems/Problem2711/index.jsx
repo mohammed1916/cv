@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"grid":[[1,2,3],[3,1,5],[3,2,1]]}' },
     { label: 'Single cell', input: '{"grid":[[1]]}' },
+    { label: 'Single row', input: '{"grid":[[4,9,2]]}' },
+    { label: 'Single column', input: '{"grid":[[5],[1],[9]]}' },
+    { label: 'Equal cells', input: '{"grid":[[3,3],[3,3]]}' },
+    { label: 'Long run: 6 by 6 grid', input: '{"grid":[[27,16,45,40,43,40],[22,35,4,47,46,11],[19,4,13,4,49,30],[14,21,22,11,2,1],[11,40,31,18,5,22],[6,7,40,25,6,41]]}' },
   ],
 }
 

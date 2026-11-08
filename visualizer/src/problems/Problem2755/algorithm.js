@@ -12,7 +12,11 @@ export const COMPLEXITY = 'O(total size of both values). Each position of each v
 export const EXAMPLES = [
   { label: 'Nested objects', input: '{"a":{"x":1,"n":{"p":1,"q":2}},"b":{"n":{"q":5},"y":[1]}}' },
   { label: 'Arrays by index', input: '{"a":[{"k":1},4,7],"b":[[8],6]}' },
-]
+    { label: 'Empty objects merge to empty', input: '{"a": {}, "b": {}}' },
+    { label: 'Equal keys with equal values', input: '{"a": {"k": 2}, "b": {"k": 2}}' },
+    { label: 'Scalar on one side: take from b', input: '{"a": 1, "b": "x"}' },
+    { label: 'Long run: 20 keys on each side, overlapping', input: '{"a":{"k0":14,"k1":7,"k2":13,"k3":90,"k4":2,"k5":73,"k6":65,"k7":26,"k8":42,"k9":59,"k10":83,"k11":64,"k12":31,"k13":12,"k14":18,"k15":17,"k16":99,"k17":64,"k18":1,"k19":29},"b":{"k0":2,"k2":19,"k4":64,"k6":82,"k8":87,"k10":62,"k12":87,"k14":62,"k16":80,"k18":8,"n":{"deep":[1,2,3]}}}' },
+  ]
 export const WHY = [
   'Two objects merge key by key: keys from either side are kept, and a key on both sides is merged again.',
   'Two arrays merge index by index. The result is as long as the longer array, and a position that only one side has is kept as it is.',

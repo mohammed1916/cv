@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Three points, three queries', input: '{"nums1":[6,2,7,3],"nums2":[1,8,4,5],"queries":[[3,4],[6,1],[1,9]]}' },
     { label: 'Equal points', input: '{"nums1":[5,5],"nums2":[5,5],"queries":[[5,5],[6,1]]}' },
+    { label: 'Single point', input: '{"nums1":[1],"nums2":[20],"queries":[[10,10]]}' },
+    { label: 'Equal points tie', input: '{"nums1":[4,4],"nums2":[4,4],"queries":[[4,4]]}' },
+    { label: 'Largest values', input: '{"nums1":[20,20,20,20,20,20,20,20],"nums2":[1,1,1,1,1,1,1,1],"queries":[[20,1],[1,20],[10,10],[20,20],[1,1],[5,5]]}' },
+    { label: 'Long run: 8 points, 6 queries', input: '{"nums1":[6,7,20,9,10,19,12,13],"nums2":[14,3,16,1,6,19,12,17],"queries":[[19,12],[16,9],[1,18],[18,7],[3,4],[20,13]]}' },
   ],
 }
 

@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Three-digit check', input: '{"n":192}' },
     { label: 'Not fascinating', input: '{"n":100}' },
+    { label: 'Largest three-digit n', input: '{"n":999}' },
+    { label: 'Repeated digits', input: '{"n":111}' },
+    { label: 'Fascinating 327', input: '{"n":327}' },
   ],
 }
 

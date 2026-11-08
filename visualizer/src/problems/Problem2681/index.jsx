@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[2,1,4]}' },
     { label: 'Example 2', input: '{"nums":[1,1,1]}' },
+    { label: 'Single strength', input: '{"nums":[9]}' },
+    { label: 'Largest strengths 1000', input: '{"nums":[1000,1,1000,1]}' },
+    { label: 'Long run: 12 strengths', input: '{"nums":[268,525,812,590,294,796,483,56,317,897,389,94]}' },
   ],
 }
 

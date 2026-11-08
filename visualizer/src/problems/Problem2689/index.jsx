@@ -18,6 +18,10 @@ const definition = {
     { label: 'Split at the top', input: '{"k":5,"root":{"len":8,"left":{"len":4,"left":{"len":2,"text":"ca"},"right":{"len":2,"text":"ts"}},"right":{"len":4,"left":{"len":1,"text":"e"},"right":{"len":3,"text":"dog"}}}}' },
     { label: 'Single leaf', input: '{"k":3,"root":{"len":3,"text":"run"}}' },
     { label: 'Right spine', input: '{"k":6,"root":{"len":6,"left":{"len":1,"text":"x"},"right":{"len":5,"left":{"len":2,"text":"yz"},"right":{"len":3,"text":"abc"}}}}' },
+    { label: 'Single letter', input: '{"k":1,"root":{"len":1,"text":"q"}}' },
+    { label: 'Equal halves', input: '{"k":4,"root":{"len":8,"left":{"len":4,"text":"abcd"},"right":{"len":4,"text":"abcd"}}}' },
+    { label: 'k at the full length', input: '{"k":8,"root":{"len":8,"left":{"len":5,"text":"hello"},"right":{"len":3,"text":"abc"}}}' },
+    { label: 'Long run: 15 nodes, 40 characters', input: '{"k":17,"root":{"len":40,"left":{"len":20,"left":{"len":10,"left":{"len":5,"text":"abcde"},"right":{"len":5,"text":"fghij"}},"right":{"len":10,"left":{"len":5,"text":"klmno"},"right":{"len":5,"text":"pqrst"}}},"right":{"len":20,"left":{"len":10,"left":{"len":5,"text":"uvwxy"},"right":{"len":5,"text":"zabcd"}},"right":{"len":10,"left":{"len":5,"text":"efghi"},"right":{"len":5,"text":"jklmn"}}}}}' },
   ],
 }
 

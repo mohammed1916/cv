@@ -16,6 +16,14 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"n":2,"edges":[[0,1,-1]],"source":0,"destination":1,"target":5}' },
     { label: 'Impossible', input: '{"n":3,"edges":[[0,1,4],[1,2,3],[0,2,-1]],"source":0,"destination":2,"target":3}' },
+    { label: 'Single -1 edge', input: '{"n":2,"edges":[[0,1,-1]],"source":0,"destination":1,"target":1}' },
+    { label: 'Two -1 edges tie', input: '{"n":3,"edges":[[0,1,-1],[1,2,-1]],"source":0,"destination":2,"target":2}' },
+    { label: 'Largest target', input: '{"n":5,"edges":[[0,1,-1],[1,2,6],[2,3,-1],[3,4,6],[0,4,-1],[1,3,2]],"source":0,"destination":4,"target":12}' },
+    { label: 'Long run: 8 edges', input: '{"n":5,"edges":[[0,1,-1],[1,2,-1],[2,3,4],[3,4,-1],[0,2,-1],[1,4,3],[2,4,6],[0,3,-1]],"source":0,"destination":4,"target":10}' },
+    { label: 'Single -1 edge', input: '{"n":2,"edges":[[0,1,-1]],"source":0,"destination":1,"target":1}' },
+    { label: 'Two -1 edges tie', input: '{"n":3,"edges":[[0,1,-1],[1,2,-1]],"source":0,"destination":2,"target":2}' },
+    { label: 'Largest target', input: '{"n":5,"edges":[[0,1,-1],[1,2,6],[2,3,-1],[3,4,6],[0,4,-1],[1,3,2]],"source":0,"destination":4,"target":12}' },
+    { label: 'Long run: 8 edges', input: '{"n":5,"edges":[[0,1,-1],[1,2,-1],[2,3,4],[3,4,-1],[0,2,-1],[1,4,3],[2,4,6],[0,3,-1]],"source":0,"destination":4,"target":10}' },
   ],
 }
 
