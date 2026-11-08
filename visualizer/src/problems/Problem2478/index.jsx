@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"23542185131","k":3,"min_length":2}' },
     { label: 'Example 2', input: '{"s":"2468","k":1,"min_length":4}' },
+    { label: 'One digit', input: '{"s":"2","k":1,"min_length":1}' },
+    { label: 'Equal digits, no prime start', input: '{"s":"1111","k":2,"min_length":1}' },
+    { label: 'Largest k and length', input: '{"s":"123456789123","k":6,"min_length":1}' },
+    { label: 'Long run: 12 digits', input: '{"s":"379623622498","k":3,"min_length":2}' },
   ],
 }
 

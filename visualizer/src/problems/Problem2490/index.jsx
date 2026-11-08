@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Circular', input: '{"sentence":"tree eel lab bat"}' },
     { label: 'Broken link', input: '{"sentence":"tree eel lab cat"}' },
+    { label: 'Single word', input: '{"sentence":"abc"}' },
+    { label: 'Repeated words', input: '{"sentence":"aba aba"}' },
+    { label: 'Longest sentence, 200 characters', input: '{"sentence":"ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab ba ab"}' },
+    { label: 'Long run: random words', input: '{"sentence":"ojp cev tvl jgqq d srb nmen qm vdq pr y vylc cec rmh adkm om vd nbn wzgb q lr rj xa yuru ift rou jwg ugq d ql xc zzh ac id egb c p uc j ouy h crv xg abte ubti g l qqty fxo yxz cqx rwfr sjoq k fahc"}' },
   ],
 }
 

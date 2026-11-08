@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":999,"target":1}' },
     { label: 'Example 2', input: '{"n":1999,"target":1}' },
+    { label: 'Smallest values', input: '{"n":1,"target":1}' },
+    { label: 'Target equals n', input: '{"n":30,"target":30}' },
+    { label: 'Largest n', input: '{"n":1000,"target":30}' },
+    { label: 'Long run: large n', input: '{"n":938,"target":23}' },
   ],
 }
 

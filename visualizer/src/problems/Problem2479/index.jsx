@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: "Star", input: '{"values":[1,2,3,4],"edges":[[0,1],[0,2],[0,3]]}' },
     { label: "Path", input: '{"values":[1,2,3],"edges":[[0,1],[1,2]]}' },
+    { label: 'Single node', input: '{"values":[7],"edges":[]}' },
+    { label: 'Equal values', input: '{"values":[3,3,3],"edges":[[0,1],[1,2]]}' },
+    { label: 'Extreme values', input: '{"values":[50,1,50,1,50,1,50,1,50,1],"edges":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9]]}' },
+    { label: 'Long run: 10 nodes', input: '{"values":[18,30,46,3,16,41,22,22,21,6],"edges":[[0,1],[1,2],[2,3],[3,4],[1,5],[2,6],[2,7],[0,8],[2,9]]}' },
   ],
 };
 

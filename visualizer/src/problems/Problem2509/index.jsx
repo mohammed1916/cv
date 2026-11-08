@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":3,"queries":[[5,3],[4,7],[2,3]]}' },
     { label: 'Example 2', input: '{"n":2,"queries":[[1,2]]}' },
+    { label: 'Same node', input: '{"n":2,"queries":[[1,1]]}' },
+    { label: 'Equal labels', input: '{"n":3,"queries":[[4,4],[2,2]]}' },
+    { label: 'Largest tree, leaf pairs', input: '{"n":4,"queries":[[15,8],[1,15]]}' },
+    { label: 'Long run: 8 queries', input: '{"n":4,"queries":[[1,12],[7,7],[13,5],[5,10],[7,14],[3,13],[13,10],[2,4]]}' },
   ],
 }
 

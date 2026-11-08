@@ -18,6 +18,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"positive_feedback":["smart","brilliant","studious"],"negative_feedback":["not"],"report":["this student is studious","the student is smart"],"student_id":[1,2],"k":2}' },
     { label: 'Negative word', input: '{"positive_feedback":["smart","brilliant","studious"],"negative_feedback":["not"],"report":["this student is not studious","the student is smart"],"student_id":[1,2],"k":2}' },
+    { label: 'Single student', input: '{"positive_feedback":["smart"],"negative_feedback":["not"],"report":["the smart one"],"student_id":[1],"k":1}' },
+    { label: 'Equal scores', input: '{"positive_feedback":["smart"],"negative_feedback":["not"],"report":["smart","smart"],"student_id":[7,3],"k":2}' },
+    { label: 'Largest feedback, six students', input: '{"positive_feedback":["alpha","beta","gamma","delta","omega"],"negative_feedback":["zeta"],"report":["alpha beta gamma","zeta","omega omega","beta","delta alpha beta gamma","gamma"],"student_id":[99,1,50,12,88,2],"k":6}' },
   ],
 }
 

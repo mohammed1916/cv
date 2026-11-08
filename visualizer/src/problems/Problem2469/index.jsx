@@ -11,6 +11,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"celsius":36.5}' },
     { label: 'Freezing', input: '{"celsius":0}' },
+    { label: 'Just above zero', input: '{"celsius":0.01}' },
+    { label: 'Upper limit', input: '{"celsius":1000}' },
+    { label: 'Boiling point', input: '{"celsius":100}' },
+    { label: 'Fractional value', input: '{"celsius":136.3}' },
   ],
 }
 

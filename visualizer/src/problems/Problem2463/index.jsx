@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"robot":[0,4,6],"factory":[[2,2],[6,2]]}' },
     { label: 'Example 2', input: '{"robot":[1,-1],"factory":[[-2,1],[2,1]]}' },
+    { label: 'Single robot', input: '{"robot":[0],"factory":[[0,1]]}' },
+    { label: 'Equal positions', input: '{"robot":[3,3],"factory":[[3,1],[3,1]]}' },
+    { label: 'Largest values', input: '{"robot":[-20,-10,0,10,20],"factory":[[-20,4],[0,4],[20,4]]}' },
+    { label: 'Long run: 5 robots', input: '{"robot":[-20,-17,8,-3,-4],"factory":[[-17,4],[9,4],[0,4]]}' },
   ],
 }
 

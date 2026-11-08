@@ -16,6 +16,10 @@ const definition = {
     { label: 'Mixed', input: '{"s":"101101","k":3}' },
     { label: 'Whole string', input: '{"s":"0000","k":4}' },
     { label: 'Pairs', input: '{"s":"1100110","k":2}' },
+    { label: 'Single digit', input: '{"s":"1","k":1}' },
+    { label: 'Equal digits', input: '{"s":"0000","k":4}' },
+    { label: 'Largest length', input: '{"s":"101010101010","k":6}' },
+    { label: 'Long run: 12 digits', input: '{"s":"100011001111","k":11}' },
   ],
 }
 

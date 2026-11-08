@@ -16,6 +16,10 @@ const definition = {
     { label: "Example", input: '{"nums":[2,3,6,5,2,3],"k":2}' },
     { label: "k zero", input: '{"nums":[1,1,1],"k":0}' },
     { label: "Impossible", input: '{"nums":[5,4,3],"k":1}' },
+    { label: 'Single value', input: '{"nums":[4],"k":1}' },
+    { label: 'Equal values', input: '{"nums":[3,3,3,3],"k":3}' },
+    { label: 'Largest array, k = 12', input: '{"nums":[20,20,20,20,20,20,20,20,20,20,20,20],"k":12}' },
+    { label: 'Long run: 12 numbers', input: '{"nums":[5,18,20,13,1,3,5,15,9,18,14,10],"k":6}' },
   ],
 };
 

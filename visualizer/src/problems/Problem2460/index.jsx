@@ -19,6 +19,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[2,2,4,4,0]}' },
     { label: 'Example 2', input: '{"nums":[3,3,1]}' },
+    { label: 'Smallest pair', input: '{"nums":[0,0]}' },
+    { label: 'Equal values', input: '{"nums":[7,7,7,7,7]}' },
+    { label: 'Largest values', input: '{"nums":[1000,0,1000,0,1000,0,1000,0,1000,0,1000,0,1000,0,1000,0,1000,0,1000,0,1000,0,1000,0,1000,0,1000,0,1000,0]}' },
+    { label: 'Long run: 30 values', input: '{"nums":[940,365,843,197,52,635,331,568,711,929,277,498,915,701,374,774,696,383,772,483,362,467,195,107,422,842,773,375,823,706]}' },
   ],
 }
 

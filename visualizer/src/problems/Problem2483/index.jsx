@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"customers":"YYNY"}' },
     { label: 'Example 2', input: '{"customers":"NNNNN"}' },
+    { label: 'Single customer', input: '{"customers":"Y"}' },
+    { label: 'Tie between two closing hours', input: '{"customers":"YN"}' },
+    { label: 'All customers come', input: '{"customers":"YYYYYYYYYYYY"}' },
+    { label: 'Long run: 12 hours', input: '{"customers":"YYNNNNNNNNYN"}' },
   ],
 }
 

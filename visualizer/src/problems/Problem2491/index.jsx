@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Valid', input: '{"skill":[3,2,5,1,3,4]}' },
     { label: 'Impossible', input: '{"skill":[1,1,2,3]}' },
+    { label: 'Two players', input: '{"skill":[1,5]}' },
+    { label: 'All equal skill', input: '{"skill":[2,2,2,2]}' },
+    { label: 'Largest roster, equal pairs', input: '{"skill":[1,100,2,99,3,98,4,97,5,96,6,95,7,94,8,93,9,92,10,91,11,90,12,89,13,88,14,87,15,86]}' },
+    { label: 'Long run: 30 players', input: '{"skill":[5,34,28,4,16,44,55,47,41,46,85,12,54,97,89,58,73,39,99,62,2,99,96,60,2,43,67,64,57,37]}' },
   ],
 }
 

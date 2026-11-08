@@ -17,6 +17,10 @@ const definition = {
     { label: "Singletons", input: "[2,3,5]" },
     { label: "Impossible", input: "[1,2]" },
     { label: "Split", input: "[2,6,3,4,3]" },
+    { label: 'Single value', input: '[7]' },
+    { label: 'Equal values', input: '[6,6,6,6]' },
+    { label: 'Largest values', input: '[30,1,30,1,30,1,30,1,30,1,30,1]' },
+    { label: 'Long run: 12 values', input: '[1,30,20,26,16,17,16,25,28,22,27,11]' },
   ],
 };
 

@@ -22,6 +22,10 @@ const definition = {
     { label: 'Two zeros per one', input: '{"s":"1001101","num1":2,"num2":1}' },
     { label: 'Balanced pairs', input: '{"s":"0011101","num1":2,"num2":3}' },
     { label: 'No zeros', input: '{"s":"1111","num1":1,"num2":1}' },
+    { label: 'Single character', input: '{"s":"1","num1":1,"num2":1}' },
+    { label: 'Equal ratio counts', input: '{"s":"0101","num1":1,"num2":1}' },
+    { label: 'Longest string, extreme ratio', input: '{"s":"0000000000000000000000000000000000000000","num1":9,"num2":1}' },
+    { label: 'Long run: 40 characters', input: '{"s":"1100010100001100110001010111010000101010","num1":3,"num2":2}' },
   ],
 }
 

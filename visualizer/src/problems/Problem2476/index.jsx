@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"root":[6,2,13,1,4,9,15,null,null,null,null,null,null,14],"queries":[2,5,16]}' },
     { label: 'Small', input: '{"root":[4,2,6,1,3],"queries":[0,3,7]}' },
+    { label: 'Single node', input: '{"root":[5],"queries":[0,9]}' },
+    { label: 'Query on a node', input: '{"root":[4,2,6,1,3],"queries":[3,4,6]}' },
+    { label: 'Smallest and largest values', input: '{"root":[25,0,50],"queries":[0,50]}' },
+    { label: 'Long run: 31 nodes', input: '{"root":[30,13,41,8,24,35,47,5,10,17,27,32,38,45,49,4,6,9,12,15,23,26,29,31,34,36,40,42,46,48,50],"queries":[23,12,19,18,16,44,36,37]}' },
   ],
 }
 

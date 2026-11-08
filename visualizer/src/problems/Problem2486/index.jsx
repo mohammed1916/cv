@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"coaching","t":"coding"}' },
     { label: 'Example 2', input: '{"s":"abcde","t":"a"}' },
+    { label: 'Single equal letters', input: '{"s":"a","t":"a"}' },
+    { label: 'Letters out of order', input: '{"s":"ab","t":"ba"}' },
+    { label: 'Longest strings, no shared letters', input: '{"s":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","t":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}' },
+    { label: 'Long run: 30 letters', input: '{"s":"nyoydezpnzfpokwlnxunnpiwhkifgn","t":"pxagzzicnswleoiuazvhlvwacbnzqi"}' },
   ],
 }
 

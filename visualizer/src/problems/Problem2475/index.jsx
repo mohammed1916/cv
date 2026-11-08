@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[4,4,2,4,3]' },
     { label: 'Example 2', input: '[1,1,1,1,1]' },
+    { label: 'Minimum length', input: '[1,2,3]' },
+    { label: 'Equal values have no triplet', input: '[6,6,6,6]' },
+    { label: 'Edge values 1 and 10', input: '[1,10,1,10,5,5,5,10,1,2,3,10]' },
+    { label: 'Long run: 12 items', input: '[3,10,2,5,9,9,3,2,3,4,1,10]' },
   ],
 }
 

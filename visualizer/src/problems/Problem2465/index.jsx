@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[4,1,4,0,3,5]}' },
     { label: 'Repeated', input: '{"nums":[1,100,1,100]}' },
+    { label: 'Smallest pair', input: '{"nums":[0,0]}' },
+    { label: 'Equal values', input: '{"nums":[7,7,7,7]}' },
+    { label: 'Largest values', input: '{"nums":[100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0]}' },
+    { label: 'Long run: 30 values', input: '{"nums":[4,90,60,26,65,4,30,10,21,40,53,32,42,14,86,25,86,17,16,84,8,33,84,5,94,45,84,23,9,86]}' },
   ],
 }
 

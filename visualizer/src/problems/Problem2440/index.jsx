@@ -19,6 +19,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[6,2,2,2,6],"edges":[[0,1],[1,2],[1,3],[3,4]]}' },
     { label: 'Two parts', input: '{"nums":[3,3,3],"edges":[[0,1],[1,2]]}' },
+    { label: 'Single vertex', input: '{"nums":[9],"edges":[]}' },
+    { label: 'Equal values', input: '{"nums":[2,2,2,2],"edges":[[0,1],[0,2],[0,3]]}' },
+    { label: 'Largest values', input: '{"nums":[9,9,9,9,9,9,9,9,9,9],"edges":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9]]}' },
+    { label: 'Long run: 10 vertices', input: '{"nums":[5,3,8,9,7,9,4,4,7,1],"edges":[[0,1],[0,2],[2,3],[3,4],[2,5],[5,6],[0,7],[1,8],[1,9]]}' },
   ],
 }
 

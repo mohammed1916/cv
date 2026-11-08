@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"values":[4,9,1,7,2]}' },
     { label: 'Equal', input: '{"values":[1,1,1]}' },
+    { label: 'Single node', input: '{"values":[5]}' },
+    { label: 'Repeated values', input: '{"values":[6,2,6,2,6]}' },
+    { label: 'Largest values', input: '{"values":[20,1,20,1,20,1,20,1,20,1,20,1]}' },
+    { label: 'Long run: 12 nodes', input: '{"values":[11,17,11,8,6,14,16,18,17,14,18,12]}' },
   ],
 }
 

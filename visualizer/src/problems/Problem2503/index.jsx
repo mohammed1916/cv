@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Three queries', input: '{"grid":[[2,4,6],[3,8,1],[5,2,9]],"queries":[4,7,3]}' },
     { label: 'Blocked start', input: '{"grid":[[5,2,1],[1,1,2]],"queries":[3]}' },
+    { label: 'Smallest grid', input: '{"grid":[[1,1],[1,1]],"queries":[1]}' },
+    { label: 'Repeated query', input: '{"grid":[[2,2],[2,2]],"queries":[2,2]}' },
+    { label: 'Largest grid and values', input: '{"grid":[[9,9,9,9],[9,0,0,9],[9,0,0,9],[9,9,9,9]],"queries":[9,10]}' },
+    { label: 'Long run: 4 by 4 grid', input: '{"grid":[[8,3,7,9],[1,3,5,8],[6,7,2,0],[2,7,5,4]],"queries":[1,5,2,2]}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"words":["aba","aabb","abcd","bac","aabc"]}' },
     { label: 'Example 2', input: '{"words":["aabb","ab","ba"]}' },
+    { label: 'Single word', input: '{"words":["a"]}' },
+    { label: 'Same letter sets', input: '{"words":["ab","ba","aabb","abab"]}' },
+    { label: 'Longest words', input: '{"words":["abcdefghij","jihgfedcba","aaaaaaaaaa","abcdefghij","bbbbbbbbbb","aabbccddee","eeddccbbaa","fedcbafedc","abcdef","fedcba","ffffffffff","a"]}' },
+    { label: 'Long run: 12 words', input: '{"words":["adbdefedfb","dbecaacfca","dcfddcaaaf","bddecec","afb","b","aacafcdca","bccabf","cdceafacc","abaebde","ffacfeedfe","bffbaeeefb"]}' },
   ],
 }
 

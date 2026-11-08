@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums1":[1,2,3,4,5],"nums2":[1,2,3,4,5]}' },
     { label: 'Example 2', input: '{"nums1":[1,1],"nums2":[1,1]}' },
+    { label: 'Single pair', input: '{"nums1":[1],"nums2":[2]}' },
+    { label: 'Equal values', input: '{"nums1":[2,2],"nums2":[3,3]}' },
+    { label: 'Largest values, all equal', input: '{"nums1":[9,9,9,9,9,9],"nums2":[9,9,9,9,9,9]}' },
+    { label: 'Long run: 6 pairs', input: '{"nums1":[8,7,9,3,7,5],"nums2":[3,6,4,9,7,2]}' },
   ],
 }
 

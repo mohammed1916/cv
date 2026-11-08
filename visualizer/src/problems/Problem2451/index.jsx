@@ -19,6 +19,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"words":["adc","wzy","abc"]}' },
     { label: 'Example 2', input: '{"words":["aaa","bob","ccc","ddd"]}' },
+    { label: 'Length two words', input: '{"words":["ab","ba","ba"]}' },
+    { label: 'Shared difference pattern', input: '{"words":["abc","bcd","zzz"]}' },
+    { label: 'Largest size', input: '{"words":["bcdefghi","bcdefghi","bcdefghi","bcdefghi","bcdefghi","bcdefghi","bcdefghi","bcdefghi","bcdefghi","zyxwvuts"]}' },
+    { label: 'Long run: 10 words', input: '{"words":["jcdgmdck","kdehnedl","lefiofem","mfgjpgfn","nghkqhgo","ohilrihp","pijmsjiq","qjkntkjr","rkloulks","zzzzzzzz"]}' },
   ],
 }
 

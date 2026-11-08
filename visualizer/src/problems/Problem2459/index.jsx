@@ -18,6 +18,10 @@ const definition = {
     { label: 'Five slots', input: '[4,2,0,3,1]' },
     { label: 'Already zero last', input: '[1,2,3,0]' },
     { label: 'Swapped pairs', input: '[2,1,4,3,0]' },
+    { label: 'Single slot', input: '[0]' },
+    { label: 'Identity order', input: '[0,1,2,3]' },
+    { label: 'Largest permutation', input: '[7,0,6,1,5,2,4,3]' },
+    { label: 'Long run: 8 slots', input: '[2,1,0,4,6,5,3,7]' },
   ],
 }
 

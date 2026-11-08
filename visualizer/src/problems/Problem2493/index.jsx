@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":6,"edges":[[1,2],[1,4],[1,5],[2,6],[2,3],[4,6]]}' },
     { label: 'Triangle', input: '{"n":3,"edges":[[1,2],[2,3],[3,1]]}' },
+    { label: 'Single node', input: '{"n":1,"edges":[]}' },
+    { label: 'Single edge', input: '{"n":2,"edges":[[1,2]]}' },
+    { label: 'Complete graph, no grouping', input: '{"n":6,"edges":[[1,2],[1,3],[1,4],[1,5],[1,6],[2,3],[2,4],[2,5],[2,6],[3,4],[3,5],[3,6],[4,5],[4,6],[5,6]]}' },
+    { label: 'Long run: 8 edges', input: '{"n":6,"edges":[[4,2],[2,6],[6,4],[4,5],[5,3],[2,5],[3,6],[6,5]]}' },
   ],
 }
 

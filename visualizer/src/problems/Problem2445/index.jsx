@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: "Example", input: '{"n":5,"queries":[1,2]}' },
     { label: "Repeat", input: '{"n":7,"queries":[2,2,3]}' },
+    { label: 'Single node', input: '{"n":1,"queries":[1]}' },
+    { label: 'No queries', input: '{"n":4,"queries":[]}' },
+    { label: 'Largest n', input: '{"n":31,"queries":[31,1,16]}' },
+    { label: 'Long run: 10 queries', input: '{"n":27,"queries":[21,16,27,8,11,12,26,6,15,14]}' },
   ],
 };
 

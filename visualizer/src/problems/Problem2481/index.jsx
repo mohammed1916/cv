@@ -11,6 +11,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":4}' },
     { label: 'Example 2', input: '{"n":3}' },
+    { label: 'Smallest n', input: '{"n":1}' },
+    { label: 'Even n', input: '{"n":2}' },
+    { label: 'Largest n', input: '{"n":100}' },
+    { label: 'Long run: n = 97', input: '{"n":97}' },
   ],
 }
 

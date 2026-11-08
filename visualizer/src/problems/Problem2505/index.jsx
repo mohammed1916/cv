@@ -23,6 +23,10 @@ const definition = {
     { label: 'Consecutive', input: '{"nums":[1,2,3]}' },
     { label: 'Duplicates', input: '{"nums":[4,4,1]}' },
     { label: 'Pair', input: '{"nums":[5,6]}' },
+    { label: 'Single zero', input: '{"nums":[0]}' },
+    { label: 'Repeated value', input: '{"nums":[2,2,2,2]}' },
+    { label: 'Largest sum', input: '{"nums":[9,9,9,9,9,9]}' },
+    { label: 'Long run: 6 numbers', input: '{"nums":[9,1,6,8,3,3]}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"roads":[[0,1],[0,2],[0,3]],"seats":5}' },
     { label: 'Example 2', input: '{"roads":[[3,1],[3,2],[1,0],[0,4],[0,5],[4,6]],"seats":2}' },
+    { label: 'No roads', input: '{"roads":[],"seats":1}' },
+    { label: 'Two equal branches', input: '{"roads":[[0,1],[0,2]],"seats":2}' },
+    { label: 'Chain with one seat', input: '{"roads":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9]],"seats":1}' },
+    { label: 'Long run: 10 cities', input: '{"roads":[[0,1],[1,2],[0,3],[0,4],[0,5],[5,6],[5,7],[6,8],[7,9]],"seats":3}' },
   ],
 }
 

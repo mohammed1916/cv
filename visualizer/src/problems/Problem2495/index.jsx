@@ -16,6 +16,10 @@ const definition = {
     { label: "Mixed", input: "[5,8,3,4]" },
     { label: "All odd", input: "[1,3,5]" },
     { label: "Even first", input: "[2,1,1]" },
+    { label: 'Single value', input: '[7]' },
+    { label: 'Equal values', input: '[4,4,4,4]' },
+    { label: 'Largest values', input: '[20,19,18,17,16,15,14,13,12,11,10,9]' },
+    { label: 'Long run: 12 values', input: '[15,2,3,14,5,11,3,8,5,5,2,6]' },
   ],
 };
 

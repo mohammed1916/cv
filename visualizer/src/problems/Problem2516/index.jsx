@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"aabaaaacaabc","k":2}' },
     { label: 'Impossible', input: '{"s":"a","k":1}' },
+    { label: 'Zero needed', input: '{"s":"abc","k":0}' },
+    { label: 'Equal letter counts', input: '{"s":"abcabc","k":2}' },
+    { label: 'Largest string, k = 13', input: '{"s":"abcabcabcabcabcabcabcabcabcabcabcabcabc","k":13}' },
+    { label: 'Long run: 40 letters', input: '{"s":"aaabcbccbccbbacabcabccabbacbcbaabcbaaaca","k":5}' },
   ],
 }
 

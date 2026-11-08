@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[3,2,1,4,5],"k":4}' },
     { label: 'Example 2', input: '{"nums":[1,2,3],"k":2}' },
+    { label: 'Single element', input: '{"nums":[1],"k":1}' },
+    { label: 'Median in the middle', input: '{"nums":[2,4,1,3],"k":3}' },
+    { label: 'Reversed largest permutation', input: '{"nums":[12,11,10,9,8,7,6,5,4,3,2,1],"k":1}' },
+    { label: 'Long run: 12 numbers', input: '{"nums":[6,11,12,10,1,4,2,3,8,5,9,7],"k":6}' },
   ],
 }
 

@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Light road off the path', input: '{"n":5,"roads":[[1,2,8],[2,3,4],[3,5,6],[2,4,3],[4,5,9]]}' },
     { label: 'Detour to a light road', input: '{"n":3,"roads":[[1,2,12],[2,3,5],[1,3,11]]}' },
+    { label: 'Two cities', input: '{"n":2,"roads":[[1,2,5]]}' },
+    { label: 'Equal distances', input: '{"n":3,"roads":[[1,2,4],[2,3,4],[1,3,8]]}' },
+    { label: 'Largest distance', input: '{"n":8,"roads":[[1,2,9999],[2,3,9999],[3,4,9999],[4,5,9999],[5,6,9999],[6,7,9999],[7,8,9999],[1,8,9999]]}' },
+    { label: 'Long run: 12 roads', input: '{"n":8,"roads":[[1,2,6384],[2,3,3740],[3,4,2822],[4,5,4333],[5,6,8466],[6,7,755],[7,8,7620],[4,3,1245],[1,4,1449],[3,4,2345],[6,3,2740],[2,7,2203]]}' },
   ],
 }
 

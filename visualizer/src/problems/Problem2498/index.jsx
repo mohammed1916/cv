@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"stones":[0,2,5,6,7]}' },
     { label: 'Example 2', input: '{"stones":[0,3,9]}' },
+    { label: 'Two stones', input: '{"stones":[0,1]}' },
+    { label: 'Equal gaps', input: '{"stones":[0,2,4,6]}' },
+    { label: 'Largest position', input: '{"stones":[0,1,3,6,10,15,21,28,36,45,55,1000]}' },
+    { label: 'Long run: 12 stones', input: '{"stones":[0,70,144,234,317,368,456,504,529,540,566,568]}' },
   ],
 }
 

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"root":[1,4,3,7,6,8,5]}' },
     { label: 'Example 2', input: '{"root":[1,3,2,7,null,5,4]}' },
+    { label: 'Single node', input: '{"root":[5]}' },
+    { label: 'Left chain', input: '{"root":[3,2,null,1]}' },
+    { label: 'Largest complete tree', input: '{"root":[50,40,45,30,35,42,48,20,25,32,38,41,43,46,49]}' },
+    { label: 'Long run: 15 nodes', input: '{"root":[8,44,20,23,47,35,38,26,5,32,41,29,14,17,11]}' },
   ],
 }
 

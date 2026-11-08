@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"price":[13,5,1,8,21,2],"k":3}' },
     { label: 'Example 2', input: '{"price":[1,3,1],"k":2}' },
+    { label: 'Two candy types', input: '{"price":[1,2],"k":2}' },
+    { label: 'Equal prices', input: '{"price":[5,5,5],"k":3}' },
+    { label: 'Largest basket, widest range', input: '{"price":[1,50,2,49,3,48,4,47,5,46,6,45],"k":12}' },
+    { label: 'Long run: 12 prices', input: '{"price":[10,2,4,39,41,7,32,7,41,24,20,27],"k":4}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"strs":["alic3","bob","3","4","00000"]}' },
     { label: 'Leading zeros', input: '{"strs":["1","01","001","0001"]}' },
+    { label: 'Single string', input: '{"strs":["abc"]}' },
+    { label: 'Equal lengths', input: '{"strs":["12","ab","ab"]}' },
+    { label: 'Longest allowed strings', input: '{"strs":["999999999","1","zzzzzzzzz"]}' },
+    { label: 'Long run: 20 strings', input: '{"strs":["addla7x","6zjtk","p4svh9lw","lwq7232","spd09q8if","xi2p","ppzqqnz","jkipnmh1","7qf4s4","hgxn","xgu9d","csgd5at6f","j","rp","i1ps5cnp","a","ivhh4em","iug","k2","qgnqn"]}' },
   ],
 }
 

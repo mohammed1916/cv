@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":15}' },
     { label: 'Example 2', input: '{"n":3}' },
+    { label: 'Smallest n', input: '{"n":2}' },
+    { label: 'Square of a prime', input: '{"n":4}' },
+    { label: 'Largest n', input: '{"n":1000}' },
+    { label: 'Long run: prime near 1000', input: '{"n":997}' },
   ],
 }
 

@@ -52,7 +52,13 @@ const definition = {
   python,
   inputLabel: 'JSON object with a HallEvents table',
   complexity: 'Sorting dominates: O(n log n) for n events, plus one pass to flag groups and one pass to collapse them.',
-  examples: [{ label: 'Teaching sample', input: JSON.stringify(SAMPLE) }],
+  examples: [
+    { label: 'Teaching sample', input: JSON.stringify(SAMPLE) },
+    { label: 'Single day event', input: '{"HallEvents":[{"hall_id":1,"start_day":4,"end_day":4}]}' },
+    { label: 'Same start day', input: '{"HallEvents":[{"hall_id":2,"start_day":5,"end_day":5},{"hall_id":2,"start_day":5,"end_day":9}]}' },
+    { label: 'Largest table, far days', input: '{"HallEvents":[{"hall_id":1,"start_day":1,"end_day":1},{"hall_id":2,"start_day":71,"end_day":101},{"hall_id":1,"start_day":141,"end_day":201},{"hall_id":2,"start_day":211,"end_day":211},{"hall_id":1,"start_day":281,"end_day":311},{"hall_id":2,"start_day":351,"end_day":411},{"hall_id":1,"start_day":421,"end_day":421},{"hall_id":2,"start_day":491,"end_day":521},{"hall_id":1,"start_day":561,"end_day":621},{"hall_id":2,"start_day":631,"end_day":631},{"hall_id":1,"start_day":701,"end_day":731},{"hall_id":2,"start_day":771,"end_day":831},{"hall_id":1,"start_day":841,"end_day":841},{"hall_id":2,"start_day":911,"end_day":941}]}' },
+    { label: 'Long run: 14 events', input: '{"HallEvents":[{"hall_id":1,"start_day":35,"end_day":37},{"hall_id":1,"start_day":14,"end_day":14},{"hall_id":1,"start_day":18,"end_day":28},{"hall_id":2,"start_day":26,"end_day":29},{"hall_id":1,"start_day":18,"end_day":25},{"hall_id":3,"start_day":42,"end_day":46},{"hall_id":3,"start_day":22,"end_day":31},{"hall_id":3,"start_day":39,"end_day":47},{"hall_id":2,"start_day":36,"end_day":36},{"hall_id":3,"start_day":40,"end_day":48},{"hall_id":1,"start_day":18,"end_day":24},{"hall_id":1,"start_day":1,"end_day":11},{"hall_id":1,"start_day":43,"end_day":50},{"hall_id":1,"start_day":7,"end_day":8}]}' },
+  ],
 }
 
 function Table({ columns, rows, empty }) {

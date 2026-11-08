@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Match', input: '{"num":443}' },
     { label: 'No match', input: '{"num":63}' },
+    { label: 'Smallest value', input: '{"num":0}' },
+    { label: 'Equal digits', input: '{"num":111}' },
+    { label: 'Largest value', input: '{"num":1000}' },
+    { label: 'Near upper limit', input: '{"num":956}' },
   ],
 }
 

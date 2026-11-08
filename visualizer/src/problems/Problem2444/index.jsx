@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[1,3,5,2,7,5],"minK":1,"maxK":5}' },
     { label: 'Repeats', input: '{"nums":[2,2,2],"minK":2,"maxK":2}' },
+    { label: 'Single value', input: '{"nums":[4],"minK":4,"maxK":4}' },
+    { label: 'Equal values', input: '{"nums":[5,5,5,5],"minK":1,"maxK":4}' },
+    { label: 'Largest bounds', input: '{"nums":[9,1,9,1,9,1,9,1,9,1,9,1,9,1],"minK":1,"maxK":9}' },
+    { label: 'Long run: 14 values', input: '{"nums":[6,8,6,6,2,9,6,6,9,8,8,1,3,8],"minK":2,"maxK":6}' },
   ],
 }
 

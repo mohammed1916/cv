@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '"103301"' },
     { label: 'All zeros', input: '"0000000"' },
+    { label: 'Minimum length', input: '"12321"' },
+    { label: 'All equal digits', input: '"11111"' },
+    { label: 'Longest string, 40 digits', input: '"0123456789012345678901234567890123456789"' },
+    { label: 'Long run: 40 digits', input: '"4161824995963468476940486380141018121826"' },
   ],
 }
 

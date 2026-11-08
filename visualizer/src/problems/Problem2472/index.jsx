@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"s":"abaccbdb","k":3}' },
     { label: 'Single letters', input: '{"s":"ten","k":1}' },
+    { label: 'Single letter', input: '{"s":"a","k":1}' },
+    { label: 'Equal letters', input: '{"s":"aaaa","k":2}' },
+    { label: 'Longest string', input: '{"s":"abcdefghijklmnopqrstuvwxyzabcd","k":15}' },
+    { label: 'Long run: 30 letters', input: '{"s":"fggemlwgigccdonibcssxtizbcifmb","k":15}' },
   ],
 }
 

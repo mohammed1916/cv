@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Two words', input: '{"s":"ab cd"}' },
     { label: 'Repeated letters', input: '{"s":"aab bc"}' },
+    { label: 'Single letter', input: '{"s":"a"}' },
+    { label: 'Identical words', input: '{"s":"aa aa"}' },
+    { label: 'Most words', input: '{"s":"abcde abcde abcde abcde abcde abcde"}' },
+    { label: 'Six words', input: '{"s":"zz yy xx ww vv uu"}' },
   ],
 }
 

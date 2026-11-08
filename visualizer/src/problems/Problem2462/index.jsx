@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"costs":[17,12,10,2,7,2,11,20,8],"k":3,"candidates":4}' },
     { label: 'Example 2', input: '{"costs":[1,2,4,1],"k":3,"candidates":3}' },
+    { label: 'Single worker', input: '{"costs":[5],"k":1,"candidates":1}' },
+    { label: 'Equal costs', input: '{"costs":[4,4,4,4],"k":2,"candidates":2}' },
+    { label: 'Largest values', input: '{"costs":[20,1,20,1,20,1,20,1,20,1],"k":5,"candidates":3}' },
+    { label: 'Long run: 10 workers', input: '{"costs":[20,4,15,1,6,12,19,4,7,7],"k":6,"candidates":5}' },
   ],
 }
 

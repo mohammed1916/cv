@@ -21,6 +21,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"queries":["cat","dog","sun"],"dictionary":["cot","fog","zzz"]}' },
     { label: 'Far', input: '{"queries":["abc"],"dictionary":["xyz"]}' },
+    { label: 'Single letter', input: '{"queries":["a"],"dictionary":["b"]}' },
+    { label: 'Exact match', input: '{"queries":["abc"],"dictionary":["abc"]}' },
+    { label: 'Largest lists', input: '{"queries":["abcdefgh","abcdefgh","abcdefgh","abcdefgh","abcdefgh","abcdefgh","abcdefgh","abcdefgh"],"dictionary":["hgfedcba","hgfedcba","hgfedcba","hgfedcba","hgfedcba","hgfedcba","hgfedcba","hgfedcba"]}' },
+    { label: 'Long run: 8 words each', input: '{"queries":["tcgxcuzc","ijbucupk","lxdiahte","arbujlbb","uxyebnsa","xkwqdabm","wrhkzdwl","fslxotaa"],"dictionary":["uvvkmism","jbxnllni","bqnpmopv","cazyicvx","kajpbojc","mhtlkrpg","zgwmoyzc","ygcmsefj"]}' },
   ],
 }
 

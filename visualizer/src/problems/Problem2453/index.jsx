@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[4,9,2,11,6],"space":3}' },
     { label: 'Example 2', input: '{"nums":[5,8,13],"space":4}' },
+    { label: 'Single number', input: '{"nums":[7],"space":1}' },
+    { label: 'Equal values', input: '{"nums":[5,5,5],"space":2}' },
+    { label: 'Largest values', input: '{"nums":[50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1],"space":10}' },
+    { label: 'Long run: 20 numbers', input: '{"nums":[40,1,10,16,12,13,39,21,31,4,37,38,11,15,35,36,24,24,12,30],"space":6}' },
   ],
 }
 

@@ -57,7 +57,13 @@ const definition = {
   python,
   inputLabel: 'JSON object with an elements table',
   complexity: 'Quadratic in the number of metals times nonmetals: every metal is checked against every nonmetal once.',
-  examples: [{ label: 'Teaching sample', input: JSON.stringify(SAMPLE) }],
+  examples: [
+    { label: 'Teaching sample', input: JSON.stringify(SAMPLE) },
+    { label: 'Single metal and nonmetal', input: '{"elements":[{"symbol":"Na","type":"Metal","electrons":1},{"symbol":"Cl","type":"Nonmetal","electrons":7}]}' },
+    { label: 'Equal sums for every pair', input: '{"elements":[{"symbol":"Li","type":"Metal","electrons":1},{"symbol":"O","type":"Nonmetal","electrons":7},{"symbol":"Be","type":"Metal","electrons":1},{"symbol":"F","type":"Nonmetal","electrons":7}]}' },
+    { label: 'Largest table, edge electron counts', input: '{"elements":[{"symbol":"Na","type":"Metal","electrons":0},{"symbol":"Mg","type":"Metal","electrons":8},{"symbol":"Al","type":"Metal","electrons":0},{"symbol":"Si","type":"Metal","electrons":8},{"symbol":"P","type":"Nonmetal","electrons":0},{"symbol":"S","type":"Nonmetal","electrons":8},{"symbol":"Cl","type":"Nonmetal","electrons":0},{"symbol":"Ar","type":"Nonmetal","electrons":8},{"symbol":"K","type":"Metalloid","electrons":0},{"symbol":"Ca","type":"Metal","electrons":8},{"symbol":"Ga","type":"Nonmetal","electrons":0},{"symbol":"Ge","type":"Metalloid","electrons":8},{"symbol":"As","type":"Metal","electrons":0},{"symbol":"Se","type":"Nonmetal","electrons":8}]}' },
+    { label: 'Long run: 14 rows', input: '{"elements":[{"symbol":"Na","type":"Nonmetal","electrons":4},{"symbol":"Mg","type":"Metalloid","electrons":4},{"symbol":"Al","type":"Nonmetal","electrons":2},{"symbol":"Si","type":"Metal","electrons":6},{"symbol":"P","type":"Metalloid","electrons":7},{"symbol":"S","type":"Metal","electrons":7},{"symbol":"Cl","type":"Metalloid","electrons":4},{"symbol":"Ar","type":"Metal","electrons":6},{"symbol":"K","type":"Metal","electrons":5},{"symbol":"Ca","type":"Nonmetal","electrons":7},{"symbol":"Ga","type":"Metal","electrons":8},{"symbol":"Ge","type":"Metalloid","electrons":8},{"symbol":"As","type":"Nonmetal","electrons":2},{"symbol":"Se","type":"Metal","electrons":7}]}' },
+  ],
 }
 
 function Table({ columns, rows, empty }) {

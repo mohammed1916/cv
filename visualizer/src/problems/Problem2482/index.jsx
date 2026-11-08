@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"grid":[[0,1,1],[1,0,1],[0,0,1]]}' },
     { label: 'All ones', input: '{"grid":[[1,1,1],[1,1,1]]}' },
+    { label: 'Single cell', input: '{"grid":[[1]]}' },
+    { label: 'Equal counts', input: '{"grid":[[1,0],[0,1]]}' },
+    { label: 'Largest grid, all zeros', input: '{"grid":[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]}' },
+    { label: 'Long run: 6 by 6 grid', input: '{"grid":[[0,0,1,0,1,0],[1,0,0,0,1,1],[0,0,0,0,0,1],[0,0,0,0,1,1],[0,0,0,1,0,0],[1,0,0,0,0,0]]}' },
   ],
 }
 

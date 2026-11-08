@@ -12,6 +12,9 @@ const definition = {
   examples: [
     { label: 'Shared minute', input: '{"event1":["01:15","02:00"],"event2":["02:00","03:00"]}' },
     { label: 'Apart', input: '{"event1":["10:00","11:00"],"event2":["14:00","15:00"]}' },
+    { label: 'Same minute', input: '{"event1":["09:00","09:00"],"event2":["09:00","09:00"]}' },
+    { label: 'Full day edges', input: '{"event1":["00:00","00:00"],"event2":["23:59","23:59"]}' },
+    { label: 'Nested events', input: '{"event1":["08:15","17:45"],"event2":["12:00","12:30"]}' },
   ],
 }
 

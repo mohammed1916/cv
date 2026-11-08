@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":8}' },
     { label: 'No pivot', input: '{"n":4}' },
+    { label: 'Smallest n', input: '{"n":1}' },
+    { label: 'Perfect square total', input: '{"n":49}' },
+    { label: 'Largest n', input: '{"n":1000}' },
+    { label: 'Long run: n = 997', input: '{"n":997}' },
   ],
 }
 

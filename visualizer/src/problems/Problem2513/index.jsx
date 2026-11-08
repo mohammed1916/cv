@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"divisor1":2,"divisor2":7,"uniqueCnt1":1,"uniqueCnt2":3}' },
     { label: 'Example 2', input: '{"divisor1":3,"divisor2":5,"uniqueCnt1":2,"uniqueCnt2":1}' },
+    { label: 'Equal divisors, one each', input: '{"divisor1":2,"divisor2":2,"uniqueCnt1":1,"uniqueCnt2":1}' },
+    { label: 'Largest counts, equal divisors', input: '{"divisor1":10,"divisor2":10,"uniqueCnt1":8,"uniqueCnt2":8}' },
+    { label: 'Largest counts, distinct divisors', input: '{"divisor1":10,"divisor2":9,"uniqueCnt1":8,"uniqueCnt2":8}' },
+    { label: 'Long run: 8 and 6 unique', input: '{"divisor1":7,"divisor2":3,"uniqueCnt1":8,"uniqueCnt2":6}' },
   ],
 }
 

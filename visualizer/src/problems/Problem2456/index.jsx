@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"creators":["alice","bob","alice","charlie"],"ids":["one","two","three","four"],"views":[5,10,5,4]}' },
     { label: 'Example 2', input: '{"creators":["alice","alice","alice"],"ids":["a","b","c"],"views":[1,2,2]}' },
+    { label: 'Single video', input: '{"creators":["ada"],"ids":["v1"],"views":[0]}' },
+    { label: 'Equal views', input: '{"creators":["ann","ben","ann"],"ids":["x1","x2","x3"],"views":[4,4,4]}' },
+    { label: 'Largest set', input: '{"creators":["zeta","echo","omega","kilo","zeta","echo","omega","kilo","zeta","echo","omega","kilo","zeta","echo","omega","kilo","zeta","echo","omega","kilo"],"ids":["v0","v1","v2","v3","v4","v5","v6","v7","v8","v9","v10","v11","v12","v13","v14","v15","v16","v17","v18","v19"],"views":[10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]}' },
+    { label: 'Long run: 20 videos', input: '{"creators":["fay","eli","amy","dee","dee","eli","amy","cal","dee","amy","eli","dee","dee","eli","fay","dee","dee","amy","cal","cal"],"ids":["id0","id1","id2","id3","id4","id5","id6","id7","id8","id9","id10","id11","id12","id13","id14","id15","id16","id17","id18","id19"],"views":[1,4,5,1,2,8,10,0,6,6,10,7,6,8,6,7,3,0,3,2]}' },
   ],
 }
 

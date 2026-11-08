@@ -21,6 +21,10 @@ const definition = {
     { label: 'Wraps the other way', input: '{"words": ["p","q","r","s","t","u","v","w"], "target": "p", "startIndex": 7}' },
     { label: 'Halfway round', input: '{"words": ["one","two","three","four","five","six"], "target": "four", "startIndex": 0}' },
     { label: 'Not present', input: '{"words": ["cat","dog","cat","bird"], "target": "fish", "startIndex": 2}' },
+    { label: 'Single word', input: '{"words":["hello"],"target":"hello","startIndex":0}' },
+    { label: 'Repeated target', input: '{"words":["a","b","a","b"],"target":"b","startIndex":0}' },
+    { label: 'Target at the far end', input: '{"words":["x","y","x","z"],"target":"x","startIndex":3}' },
+    { label: 'Long run: 100 words', input: '{"words":["aaa","dca","aca","aac","bcc","aba","abb","abc","acc","ddb","dca","abd","acc","cca","ccb","bab","caa","baa","bcb","cba","bba","add","dba","cbc","acc","bad","cad","daa","dbb","bdc","dab","ddd","acd","acd","bbc","bca","bda","add","bca","dac","bdd","cdb","dca","abd","adb","dac","daa","acb","dbd","cad","dcc","bdd","aad","aac","ccc","aba","ccb","cdc","bbd","bca","zzz","ddc","adc","ddd","aab","aab","adb","cbc","ddd","bcb","acd","bbc","ddc","bca","cca","bbd","ddb","bbd","bad","dba","aca","cdc","ccc","bdb","dca","acc","ddd","ddb","caa","bbb","bdc","aad","cca","acc","ccb","ddd","bcb","bdd","cdb","caa"],"target":"zzz","startIndex":99}' },
   ],
 }
 

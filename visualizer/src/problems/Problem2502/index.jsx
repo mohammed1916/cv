@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Reuse a freed gap', input: '{"n":6,"ops":[["allocate",2,5],["allocate",2,6],["allocate",2,7],["free",6],["allocate",2,8]]}' },
     { label: 'Fragmented', input: '{"n":5,"ops":[["allocate",2,1],["allocate",2,2],["free",1],["allocate",3,3]]}' },
+    { label: 'One unit', input: '{"n":1,"ops":[["allocate",1,1]]}' },
+    { label: 'Freed neighbours merge', input: '{"n":4,"ops":[["allocate",2,1],["allocate",2,2],["free",1],["free",2]]}' },
+    { label: 'Whole memory', input: '{"n":16,"ops":[["allocate",16,1],["free",1],["allocate",16,2]]}' },
+    { label: 'Long run: 12 operations', input: '{"n":16,"ops":[["allocate",2,1],["allocate",3,2],["allocate",2,3],["free",2],["allocate",1,4],["free",1],["allocate",4,5],["free",3],["allocate",2,6],["free",5],["allocate",3,7],["allocate",2,8]]}' },
   ],
 }
 

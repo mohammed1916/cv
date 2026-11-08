@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Five nodes', input: '{"root":[1,2,3,4,5],"queries":[2,4,3,1]}' },
     { label: 'Chain', input: '{"root":[1,null,2,null,3],"queries":[2,3]}' },
+    { label: 'Single node', input: '{"root":[1],"queries":[1]}' },
+    { label: 'Repeated query', input: '{"root":[2,1,3],"queries":[3,3,3]}' },
+    { label: 'Largest complete tree', input: '{"root":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],"queries":[15,1,8]}' },
+    { label: 'Long run: 15 nodes', input: '{"root":[11,2,6,3,12,4,1,15,10,7,9,5,13,8,14],"queries":[3,3,10,4,10,15,5,14,6,2,13,12,6,4,11]}' },
   ],
 }
 
