@@ -35,10 +35,17 @@ export const phases = [
 
 export const inputLabel = 'Object with an ActorDirector table'
 export const complexity = 'O(n) over the collaboration rows. The visualizer caps the table at 12 rows.'
-export const examples = [{
-  label: 'Sample',
-  input: '{"ActorDirector":[{"actor_id":4,"director_id":9,"timestamp":10},{"actor_id":4,"director_id":9,"timestamp":11},{"actor_id":4,"director_id":9,"timestamp":12},{"actor_id":4,"director_id":8,"timestamp":13},{"actor_id":6,"director_id":8,"timestamp":14},{"actor_id":6,"director_id":8,"timestamp":15},{"actor_id":6,"director_id":8,"timestamp":16},{"actor_id":6,"director_id":9,"timestamp":17}]}',
-}]
+export const examples = [
+  {
+    label: 'Sample',
+    input: '{"ActorDirector":[{"actor_id":4,"director_id":9,"timestamp":10},{"actor_id":4,"director_id":9,"timestamp":11},{"actor_id":4,"director_id":9,"timestamp":12},{"actor_id":4,"director_id":8,"timestamp":13},{"actor_id":6,"director_id":8,"timestamp":14},{"actor_id":6,"director_id":8,"timestamp":15},{"actor_id":6,"director_id":8,"timestamp":16},{"actor_id":6,"director_id":9,"timestamp":17}]}',
+  },
+  { label: 'Single collaboration', input: '{"ActorDirector":[{"actor_id":1,"director_id":2,"timestamp":1}]}' },
+  { label: 'Exactly three collaborations qualify', input: '{"ActorDirector":[{"actor_id":1,"director_id":2,"timestamp":1},{"actor_id":1,"director_id":2,"timestamp":2},{"actor_id":1,"director_id":2,"timestamp":3},{"actor_id":3,"director_id":4,"timestamp":4},{"actor_id":3,"director_id":4,"timestamp":5}]}' },
+  { label: 'Largest table: one pair, twelve rows', input: '{"ActorDirector":[{"actor_id":1,"director_id":2,"timestamp":1},{"actor_id":1,"director_id":2,"timestamp":2},{"actor_id":1,"director_id":2,"timestamp":3},{"actor_id":1,"director_id":2,"timestamp":4},{"actor_id":1,"director_id":2,"timestamp":5},{"actor_id":1,"director_id":2,"timestamp":6},{"actor_id":1,"director_id":2,"timestamp":7},{"actor_id":1,"director_id":2,"timestamp":8},{"actor_id":1,"director_id":2,"timestamp":9},{"actor_id":1,"director_id":2,"timestamp":10},{"actor_id":1,"director_id":2,"timestamp":11},{"actor_id":1,"director_id":2,"timestamp":12}]}' },
+  { label: 'No pair reaches three', input: '{"ActorDirector":[{"actor_id":1,"director_id":2,"timestamp":1},{"actor_id":1,"director_id":3,"timestamp":2},{"actor_id":2,"director_id":3,"timestamp":3},{"actor_id":4,"director_id":5,"timestamp":4}]}' },
+  { label: 'Long run: 12 collaborations', input: '{"ActorDirector":[{"actor_id":3,"director_id":1,"timestamp":1},{"actor_id":2,"director_id":3,"timestamp":2},{"actor_id":3,"director_id":2,"timestamp":3},{"actor_id":1,"director_id":2,"timestamp":4},{"actor_id":1,"director_id":3,"timestamp":5},{"actor_id":3,"director_id":3,"timestamp":6},{"actor_id":1,"director_id":1,"timestamp":7},{"actor_id":3,"director_id":2,"timestamp":8},{"actor_id":1,"director_id":3,"timestamp":9},{"actor_id":2,"director_id":1,"timestamp":10},{"actor_id":1,"director_id":2,"timestamp":11},{"actor_id":1,"director_id":3,"timestamp":12}]}' },
+]
 
 function tableRows(input, name, columns) {
   const rows = input[name]

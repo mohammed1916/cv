@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 1', input: '{"values":[2,1,5]}' },
     { label: 'Example 2', input: '{"values":[2,7,4,3,5]}' },
     { label: 'Example 3', input: '{"values":[1,7,5,1,9,2,5,1]}' },
+    { label: 'Single node', input: '{"values":[1]}' },
+    { label: 'Equal values in order', input: '{"values":[5,5,5,5]}' },
+    { label: 'Ten values at the extremes', input: '{"values":[10,1,10,1,10,1,10,1,10,1]}' },
+    { label: 'Long run: 10 values', input: '{"values":[4,2,3,6,8,7,2,8,1,5]}' },
   ],
 }
 

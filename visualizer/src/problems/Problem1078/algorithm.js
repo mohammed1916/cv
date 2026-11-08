@@ -66,4 +66,9 @@ export const complexity = 'O(n) over the words, checking a window of three words
 export const examples = [
   { label: 'Two matches', input: '{"text": "the cat was the cat ran", "first": "the", "second": "cat"}' },
   { label: 'Overlapping', input: '{"text": "go go go", "first": "go", "second": "go"}' },
+  { label: 'Same word for both', input: '{"text":"red","first":"red","second":"red"}' },
+  { label: 'Closest pair is adjacent', input: '{"text":"red blue red","first":"red","second":"blue"}' },
+  { label: 'Repeated pattern, distance one', input: '{"text":"a b a b","first":"a","second":"b"}' },
+  { label: 'Largest input: thirty words', input: '{"text":"ant bee cat bee cat bee cat bee cat bee cat bee cat bee cat bee cat bee cat bee cat bee cat bee cat bee cat bee cat dog","first":"ant","second":"dog"}' },
+  { label: 'Long run: thirty words', input: '{"text":"ant elk ant elk dog dog cat cat elk cat cat ant elk dog bee elk dog dog elk elk ant ant dog dog ant bee cat ant bee bee","first":"ant","second":"elk"}' },
 ]

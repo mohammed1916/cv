@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[8,3,10,1,6,null,14,null,null,4,7,13]' },
     { label: 'Example 2', input: '[1,null,2,null,0,3]' },
+    { label: 'Single node', input: '[5]' },
+    { label: 'Repeated values', input: '[5,5,5,5,5]' },
+    { label: 'Extremes at the limit', input: '[99,0,99,0,99,0,99,0,99,0,99,0,99,0,99]' },
+    { label: 'Long run: 15 nodes', input: '[67,22,92,26,25,23,22,3,42,54,70,24,9,94,45]' },
   ],
 }
 

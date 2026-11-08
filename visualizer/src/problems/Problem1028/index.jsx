@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Seven values', input: '{"traversal":"1-2--3--4-5--6--7"}' },
     { label: 'Left-heavy', input: '{"traversal":"1-401--349---90--88"}' },
+    { label: 'Single value', input: '{"traversal":"1"}' },
+    { label: 'Chain: each level adds one dash', input: '{"traversal":"1-2--3---4"}' },
+    { label: 'Fifteen values in a chain', input: '{"traversal":"1-2--3---4----5-----6------7-------8--------9---------10----------11-----------12------------13-------------14--------------15"}' },
+    { label: 'Long run: 15 values', input: '{"traversal":"1-4--23-21--25---70---67--91---78---33----23----33-----62-----10------11"}' },
   ],
 }
 

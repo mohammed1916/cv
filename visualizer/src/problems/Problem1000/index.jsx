@@ -11,6 +11,10 @@ const definition = {
     { label: 'Pairs', input: '{"stones":[1,2,3],"k":2}' },
     { label: 'Triples', input: '{"stones":[1,1,1,1,1],"k":3}' },
     { label: 'Impossible count', input: '{"stones":[4,1,1,6],"k":3}' },
+    { label: 'Single stone', input: '{"stones":[5],"k":2}' },
+    { label: 'Equal stones form groups', input: '{"stones":[3,3,3,3],"k":2}' },
+    { label: 'Eight stones of the largest size', input: '{"stones":[100,100,100,100,100,100,100,100],"k":8}' },
+    { label: 'Long run: 8 stones', input: '{"stones":[15,98,17,22,57,54,63,89],"k":3}' },
   ],
 }
 

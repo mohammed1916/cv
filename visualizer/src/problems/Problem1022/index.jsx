@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"root":[1,0,1,0,1,0,1]}' },
     { label: 'Missing child', input: '{"root":[1,0,1,null,1]}' },
+    { label: 'Single zero node', input: '{"root":[0]}' },
+    { label: 'Equal values on a path', input: '{"root":[1,1,1]}' },
+    { label: 'Fifteen ones at the depth limit', input: '{"root":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]}' },
+    { label: 'Long run: 15 nodes', input: '{"root":[1,1,0,null,1,1,1,1,1,0,null,0,0,1,1]}' },
   ],
 }
 

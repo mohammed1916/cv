@@ -15,6 +15,9 @@ const definition = {
     { label: 'Run of fixed points', input: '[-3,1,2,3,7]' },
     { label: 'Single fixed point', input: '[-2,0,1,3,5]' },
     { label: 'None', input: '[-6,-2,1,4,9]' },
+    { label: 'Single entry at zero', input: '[0]' },
+    { label: 'Extremes only', input: '[-50,50]' },
+    { label: 'Long run: 30 values', input: '[-50,-44,-37,-26,-25,-23,-18,-17,-13,-10,-9,-6,-5,1,2,4,15,16,18,19,21,22,25,26,29,37,40,41,47,48]' },
   ],
 }
 

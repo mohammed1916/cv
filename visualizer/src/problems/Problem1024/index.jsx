@@ -18,6 +18,10 @@ const definition = {
     { label: 'Example 1', input: '{"clips":[[0,2],[4,6],[8,10],[1,9],[1,5],[5,9]],"time":10}' },
     { label: 'Gap', input: '{"clips":[[0,1],[1,2]],"time":5}' },
     { label: 'Short but enough', input: '{"clips":[[0,4],[2,8]],"time":6}' },
+    { label: 'Single clip', input: '{"clips":[[0,1]],"time":1}' },
+    { label: 'Repeated clips', input: '{"clips":[[0,3],[0,3],[3,6]],"time":6}' },
+    { label: 'One clip covers the largest time', input: '{"clips":[[0,100]],"time":100}' },
+    { label: 'Long run: 12 clips', input: '{"clips":[[28,48],[26,39],[10,72],[99,100],[38,62],[77,98],[39,75],[97,97],[99,99],[81,81],[89,97],[58,70]],"time":1}' },
   ],
 }
 

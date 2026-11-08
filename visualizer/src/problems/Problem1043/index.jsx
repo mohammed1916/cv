@@ -14,6 +14,10 @@ const definition = {
     { label: 'Mixed blocks', input: '{"arr":[4,1,7,2],"k":2}' },
     { label: 'Peak inside', input: '{"arr":[1,9,2,8,3],"k":3}' },
     { label: 'Single value', input: '{"arr":[5],"k":1}' },
+    { label: 'Single value', input: '{"arr":[9],"k":1}' },
+    { label: 'Equal values', input: '{"arr":[5,5,5,5],"k":2}' },
+    { label: 'Largest input: k equals length', input: '{"arr":[0,100,50,25,75,10,90,30,60,5,95,40],"k":12}' },
+    { label: 'Long run: 12 values', input: '{"arr":[62,64,60,8,96,90,19,91,33,41,45,20],"k":4}' },
   ],
 }
 

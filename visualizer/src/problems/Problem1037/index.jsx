@@ -14,6 +14,10 @@ const definition = {
     { label: 'Triangle', input: '[[0,0],[1,2],[2,5]]' },
     { label: 'Horizontal line', input: '[[0,1],[3,1],[7,1]]' },
     { label: 'Repeated point', input: '[[4,4],[4,4],[9,0]]' },
+    { label: 'Collinear points', input: '[[0,0],[1,1],[2,2]]' },
+    { label: 'Largest coordinates', input: '[[-100,-100],[100,-100],[0,100]]' },
+    { label: 'Right angle at the origin', input: '[[0,0],[3,0],[0,4]]' },
+    { label: 'Negative coordinates', input: '[[-5,-7],[-2,3],[4,-1]]' },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 1', input: '{"s1":"parker","s2":"morris","baseStr":"parser"}' },
     { label: 'Example 2', input: '{"s1":"hello","s2":"world","baseStr":"hold"}' },
     { label: 'Chain', input: '{"s1":"xyz","s2":"yzw","baseStr":"wxyzq"}' },
+    { label: 'Single letter pair', input: '{"s1":"a","s2":"b","baseStr":"a"}' },
+    { label: 'Identical pairs leave base unchanged', input: '{"s1":"aa","s2":"aa","baseStr":"aab"}' },
+    { label: 'Longest strings: eight and ten letters', input: '{"s1":"abcdefgh","s2":"ijklmnop","baseStr":"zyxwvutsrq"}' },
+    { label: 'Long run: eight letters', input: '{"s1":"daddeeba","s2":"cadaedea","baseStr":"eadebcaebd"}' },
   ],
 }
 

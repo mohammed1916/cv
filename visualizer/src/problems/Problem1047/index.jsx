@@ -14,6 +14,10 @@ const definition = {
     { label: 'Exposed pair', input: 'mnoonpq' },
     { label: 'Full cancel', input: 'xxyyzz' },
     { label: 'No duplicates', input: 'abcde' },
+    { label: 'Single letter', input: 'a' },
+    { label: 'Nested pairs collapse', input: 'abba' },
+    { label: 'Longest input, no repeats', input: 'abcdefghijklmnopqrst' },
+    { label: 'Long run: 20 letters', input: 'aacbaccbabbabccababa' },
   ],
 }
 

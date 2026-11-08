@@ -46,6 +46,9 @@ export const examples = [
   { label: 'Leading zeros', input: '{"nums":[0,0,0,1]}' },
   { label: 'Repeated ones', input: '{"nums":[1,1,1,1,1,1]}' },
   { label: 'Single zero', input: '{"nums":[0]}' },
+  { label: 'Single one', input: '{"nums":[1]}' },
+  { label: 'Largest width: 24 bits', input: '{"nums":[1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0]}' },
+  { label: 'Long run: 24 bits', input: '{"nums":[1,1,1,1,0,0,1,0,0,0,0,1,1,1,1,0,1,0,0,1,0,0,1,1]}' },
 ]
 
 export function parseInput(text) {

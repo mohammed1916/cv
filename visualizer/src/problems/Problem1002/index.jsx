@@ -12,6 +12,10 @@ const definition = {
     { label: 'Repeats kept', input: '["pepper","paper","reap"]' },
     { label: 'Two words', input: '["ab","ba"]' },
     { label: 'Nothing shared', input: '["abc","xyz"]' },
+    { label: 'Single letter word', input: '["a"]' },
+    { label: 'Identical words', input: '["aa","aa"]' },
+    { label: 'Six longest words', input: '["abcdefghij","jihgfedcba","ghijabcdef","aaaaaaaaaa","bbbbbbbbbb","ababababab"]' },
+    { label: 'Long run: six 10-letter words', input: '["dedebaedbb","ebebcbbede","dddbbedaca","bebbbddabd","baeabecdec","eeecbeecac"]' },
   ],
 }
 

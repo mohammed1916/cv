@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 1', input: '{"preorder":[8,5,1,7,10,12]}' },
     { label: 'Two values', input: '{"preorder":[1,3]}' },
     { label: 'Trimmed', input: '{"preorder":[5,3,2,6]}' },
+    { label: 'Single value', input: '{"preorder":[1]}' },
+    { label: 'Strictly decreasing run', input: '{"preorder":[9,8,7,6]}' },
+    { label: 'Twelve values at the extremes', input: '{"preorder":[100,1,99,2,98,3,97,4,96,5,95,6]}' },
+    { label: 'Long run: 12 values', input: '{"preorder":[37,4,65,22,77,25,58,70,88,45,40,60]}' },
   ],
 }
 

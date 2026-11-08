@@ -26,6 +26,10 @@ const definition = {
     { label: 'Chain', input: '{"n":3,"edges":[[0,1],[1,2]],"source":0,"destination":2}' },
     { label: 'Diamond', input: '{"n":4,"edges":[[0,1],[0,2],[1,3],[2,3]],"source":0,"destination":3}' },
     { label: 'Self loop', input: '{"n":3,"edges":[[0,1],[1,1]],"source":0,"destination":1}' },
+    { label: 'Single node, same start and end', input: '{"n":1,"edges":[],"source":0,"destination":0}' },
+    { label: 'Direct edge', input: '{"n":2,"edges":[[0,1]],"source":0,"destination":1}' },
+    { label: 'Largest graph: eight nodes, twelve edges', input: '{"n":8,"edges":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,0],[0,4],[2,6],[1,5],[3,7]],"source":0,"destination":5}' },
+    { label: 'Long run: eight nodes, twelve random edges', input: '{"n":8,"edges":[[6,0],[7,4],[0,7],[3,7],[6,5],[6,1],[1,2],[3,0],[5,2],[3,2],[1,3],[2,7]],"source":0,"destination":7}' },
   ],
 }
 

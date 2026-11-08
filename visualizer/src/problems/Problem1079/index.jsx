@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"tiles":"AAB"}' },
     { label: 'Example 2', input: '{"tiles":"AAABBC"}' },
+    { label: 'Single tile', input: '{"tiles":"A"}' },
+    { label: 'Two different tiles', input: '{"tiles":"AB"}' },
+    { label: 'Largest input: seven identical tiles', input: '{"tiles":"AAAAAAA"}' },
+    { label: 'Long run: seven tiles', input: '{"tiles":"AAABCBC"}' },
   ],
 }
 

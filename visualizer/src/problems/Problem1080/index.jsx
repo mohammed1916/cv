@@ -15,6 +15,10 @@ const definition = {
   complexity: 'O(n) time and O(h) space. The visualization caps input at 15 nodes.',
   examples: [
     { label: 'Example 3', input: '{"root":[1,2,-3,-5,null,4,null],"limit":-1}' },
+    { label: 'Single node', input: '{"root":[5],"limit":-1}' },
+    { label: 'Left-leaning chain with gap', input: '{"root":[1,2,null,3],"limit":-1000}' },
+    { label: 'Extreme values, large limit', input: '{"root":[100,-100,100,-100,100,-100,100],"limit":1000}' },
+    { label: 'Long run: fifteen nodes', input: '{"root":[41,99,-61,-41,-39,80,46,74,-22,91,5,-86,-26,84,-89],"limit":-150}' },
   ],
 }
 

@@ -17,6 +17,11 @@ const definition = {
     { label: 'Example 1', input: '{"nums":[0,6,5,2,2,5,1,9,4],"first_len":1,"second_len":2}' },
     { label: 'Example 2', input: '{"nums":[3,8,1,3,2,1,8,9,0],"first_len":3,"second_len":2}' },
     { label: 'Example 3', input: '{"nums":[5,1,9,2,7,3],"first_len":2,"second_len":2}' },
+    { label: 'Two numbers, one window each', input: '{"nums":[5,3],"first_len":1,"second_len":1}' },
+    { label: 'Equal values keep the first pair', input: '{"nums":[4,4,4,4],"first_len":1,"second_len":1}' },
+    { label: 'Largest input: 12 numbers, windows of 6', input: '{"nums":[100,100,100,100,100,100,100,100,100,100,100,100],"first_len":6,"second_len":6}' },
+    { label: 'All zeros give zero', input: '{"nums":[0,0,0,0,0],"first_len":2,"second_len":3}' },
+    { label: 'Long run: 12 items', input: '{"nums":[65,48,67,36,66,69,94,18,83,24,85,22],"first_len":3,"second_len":4}' },
   ],
 }
 

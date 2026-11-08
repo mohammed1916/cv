@@ -16,6 +16,10 @@ const definition = {
     { label: 'Example 1', input: '[[0,1],[1,1]]' },
     { label: 'Example 2', input: '[[0,1],[1,0]]' },
     { label: 'Example 3', input: '[[0,0,0],[0,0,1],[1,1,0]]' },
+    { label: 'Single cell', input: '[[1]]' },
+    { label: 'All zeros', input: '[[0,0],[0,0]]' },
+    { label: 'Largest grid, all ones', input: '[[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1]]' },
+    { label: 'Long run: 6 by 6 mixed', input: '[[0,0,0,1,1,1],[0,1,0,1,0,1],[1,1,1,0,1,0],[1,0,1,0,0,0],[1,1,1,1,0,0],[0,1,1,1,1,1]]' },
   ],
 }
 

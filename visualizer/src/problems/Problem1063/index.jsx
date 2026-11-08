@@ -13,6 +13,10 @@ const definition = {
     { label: 'Equal values', input: '{"nums":[8,8,8,8]}' },
     { label: 'Decreasing', input: '{"nums":[9,7,5,3]}' },
     { label: 'Increasing', input: '{"nums":[1,4,6,10]}' },
+    { label: 'Single value', input: '{"nums":[5]}' },
+    { label: 'Two equal values', input: '{"nums":[3,3]}' },
+    { label: 'Extreme values alternate', input: '{"nums":[0,1000,0,1000,0,1000]}' },
+    { label: 'Long run: 40 values', input: '{"nums":[784,290,562,137,783,217,603,491,710,647,284,868,592,178,563,844,292,562,995,927,147,413,545,738,636,571,39,420,72,835,340,590,612,733,128,338,889,12,720,547]}' },
   ],
 }
 

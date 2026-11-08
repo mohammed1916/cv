@@ -23,6 +23,10 @@ const definition = {
     { label: 'Four pieces', input: '{"source":"abcd","target":"dcba"}' },
     { label: 'Impossible letter', input: '{"source":"xyz","target":"xyq"}' },
     { label: 'Three pieces', input: '{"source":"xyz","target":"xzyxz"}' },
+    { label: 'Single letter match', input: '{"source":"a","target":"a"}' },
+    { label: 'Whole string in one piece', input: '{"source":"abcdef","target":"abcdef"}' },
+    { label: 'Repeated letters, longest input', input: '{"source":"abcabcabcabc","target":"cbacbacbacba"}' },
+    { label: 'Long run: 12 letters', input: '{"source":"caabcbbbabba","target":"bccbbbacbabc"}' },
   ],
 }
 

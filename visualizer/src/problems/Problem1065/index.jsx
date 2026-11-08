@@ -25,6 +25,10 @@ const definition = {
     { label: 'Three words', input: '{"text":"abracadabra","words":["abra","cad","ra"]}' },
     { label: 'Overlapping', input: '{"text":"aaaa","words":["aa"]}' },
     { label: 'No match', input: '{"text":"abc","words":["x","y"]}' },
+    { label: 'Single letter match', input: '{"text":"a","words":["a"]}' },
+    { label: 'Duplicate word listed twice', input: '{"text":"abc","words":["abc","abc"]}' },
+    { label: 'Largest input: 30 characters, 8 words', input: '{"text":"abcdefghijklmnopqrstuvwxyzabcd","words":["abc","xyz","cd","zzzzzzzzzz","bcd","efg","a","wxyz"]}' },
+    { label: 'Long run: 30 characters', input: '{"text":"aabccaccabcccaaccbbcaaabcaccab","words":["ab","aaa","a","c","a","c","c","bab"]}' },
   ],
 }
 

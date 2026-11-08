@@ -22,6 +22,10 @@ const definition = {
     { label: 'Confusing', input: '89' },
     { label: 'Rotates to itself', input: '1001' },
     { label: 'Bad digit', input: '2' },
+    { label: 'Zero', input: '0' },
+    { label: 'Single rotating digit', input: '6' },
+    { label: 'Largest input: nine digits', input: '888888888' },
+    { label: 'Long run: nine digits', input: '861013238' },
   ],
 }
 

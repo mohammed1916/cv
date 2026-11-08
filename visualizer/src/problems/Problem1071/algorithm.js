@@ -76,4 +76,7 @@ export const complexity = 'O(n + m) to build and compare the joined strings, plu
 export const examples = [
   { label: 'Shared base', input: '{"first": "XYXYXY", "second": "XY"}' },
   { label: 'No base', input: '{"first": "PQR", "second": "PQ"}' },
+  { label: 'Single letter', input: '{"first":"A","second":"A"}' },
+  { label: 'Longest input, forty letters', input: '{"first":"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA","second":"AAAAAAAAAAAAAAAAAAAA"}' },
+  { label: 'Long run: repeated block', input: '{"first":"CBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCB","second":"CBCBCBCBCBCBCBCBCBCBCBCB"}' },
 ]

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"matrix":[[0,1,0],[1,1,1],[0,1,0]],"target":0}' },
     { label: 'Pair', input: '{"matrix":[[1,-1],[-1,1]],"target":0}' },
+    { label: 'Single cell', input: '{"matrix":[[5]],"target":5}' },
+    { label: 'Extreme values, target zero', input: '{"matrix":[[-9,9],[9,-9]],"target":0}' },
+    { label: 'Largest grid, repeated rows', input: '{"matrix":[[1,2,3,4,5,6],[1,2,3,4,5,6],[1,2,3,4,5,6],[1,2,3,4,5,6],[1,2,3,4,5,6],[1,2,3,4,5,6]],"target":12}' },
+    { label: 'Long run: 6 by 6 mixed signs', input: '{"matrix":[[-1,6,2,-2,-3,3],[-9,-9,-5,-6,7,1],[-5,7,7,-9,-8,6],[7,-9,0,6,2,-7],[-8,7,-8,3,-7,-9],[3,-9,4,-1,4,-4]],"target":7}' },
   ],
 }
 

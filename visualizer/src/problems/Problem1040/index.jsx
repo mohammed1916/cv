@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"stones":[7,4,9]}' },
     { label: 'Example 2', input: '{"stones":[6,5,4,3,10]}' },
+    { label: 'Already consecutive', input: '{"stones":[1,2,3]}' },
+    { label: 'Unsorted input, same answer', input: '{"stones":[30,1,15]}' },
+    { label: 'Full run of stones', input: '{"stones":[1,2,3,4,5,6,7,8,9,10]}' },
+    { label: 'Long run: ten stones', input: '{"stones":[17,30,23,12,1,15,7,4,21,3]}' },
   ],
 }
 

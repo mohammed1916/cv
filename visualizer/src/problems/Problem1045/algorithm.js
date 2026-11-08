@@ -37,10 +37,17 @@ export const phases = [
 
 export const inputLabel = 'Object with Customer and Product tables'
 export const complexity = 'O(n) over the purchase rows. The visualizer caps each table at 12 rows.'
-export const examples = [{
-  label: 'Sample',
-  input: '{"Customer":[{"customer_id":1,"product_key":5},{"customer_id":1,"product_key":6},{"customer_id":1,"product_key":7},{"customer_id":1,"product_key":5},{"customer_id":2,"product_key":5},{"customer_id":2,"product_key":6},{"customer_id":3,"product_key":5},{"customer_id":3,"product_key":6},{"customer_id":3,"product_key":7},{"customer_id":3,"product_key":7},{"customer_id":4,"product_key":5},{"customer_id":4,"product_key":5}],"Product":[{"product_key":5},{"product_key":6},{"product_key":7}]}',
-}]
+export const examples = [
+  {
+    label: 'Sample',
+    input: '{"Customer":[{"customer_id":1,"product_key":5},{"customer_id":1,"product_key":6},{"customer_id":1,"product_key":7},{"customer_id":1,"product_key":5},{"customer_id":2,"product_key":5},{"customer_id":2,"product_key":6},{"customer_id":3,"product_key":5},{"customer_id":3,"product_key":6},{"customer_id":3,"product_key":7},{"customer_id":3,"product_key":7},{"customer_id":4,"product_key":5},{"customer_id":4,"product_key":5}],"Product":[{"product_key":5},{"product_key":6},{"product_key":7}]}',
+  },
+  { label: 'Single customer and product', input: '{"Customer":[{"customer_id":1,"product_key":5}],"Product":[{"product_key":5}]}' },
+  { label: 'Tie: two customers buy everything', input: '{"Customer":[{"customer_id":1,"product_key":5},{"customer_id":1,"product_key":6},{"customer_id":2,"product_key":5},{"customer_id":2,"product_key":6}],"Product":[{"product_key":5},{"product_key":6}]}' },
+  { label: 'Largest tables: 12 rows each', input: '{"Customer":[{"customer_id":1,"product_key":1},{"customer_id":1,"product_key":2},{"customer_id":1,"product_key":3},{"customer_id":1,"product_key":4},{"customer_id":1,"product_key":5},{"customer_id":1,"product_key":6},{"customer_id":1,"product_key":7},{"customer_id":1,"product_key":8},{"customer_id":1,"product_key":9},{"customer_id":1,"product_key":10},{"customer_id":1,"product_key":11},{"customer_id":1,"product_key":12}],"Product":[{"product_key":1},{"product_key":2},{"product_key":3},{"product_key":4},{"product_key":5},{"product_key":6},{"product_key":7},{"product_key":8},{"product_key":9},{"product_key":10},{"product_key":11},{"product_key":12}]}' },
+  { label: 'No customer buys every product', input: '{"Customer":[{"customer_id":1,"product_key":5}],"Product":[{"product_key":5},{"product_key":6}]}' },
+  { label: 'Long run: 12 purchases', input: '{"Customer":[{"customer_id":1,"product_key":4},{"customer_id":2,"product_key":4},{"customer_id":1,"product_key":2},{"customer_id":1,"product_key":1},{"customer_id":2,"product_key":3},{"customer_id":2,"product_key":1},{"customer_id":1,"product_key":4},{"customer_id":2,"product_key":1},{"customer_id":1,"product_key":2},{"customer_id":3,"product_key":3},{"customer_id":1,"product_key":2},{"customer_id":3,"product_key":2}],"Product":[{"product_key":1},{"product_key":2},{"product_key":3},{"product_key":4}]}' },
+]
 
 function tableRows(input, name, columns) {
   const rows = input[name]

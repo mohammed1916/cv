@@ -49,6 +49,9 @@ export const examples = [
   { label: 'Single unit', input: '{"n":1}' },
   { label: 'Needs a sign flip', input: '{"n":2}' },
   { label: 'Mixed digits', input: '{"n":173}' },
+  { label: 'Largest n allowed', input: '{"n":1000000}' },
+  { label: 'All ones in binary', input: '{"n":255}' },
+  { label: 'Long run: generated n', input: '{"n":573149}' },
 ]
 
 export function parseInput(text) {

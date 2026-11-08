@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Triangle', input: '{"values":[1,2,3]}' },
     { label: 'Square', input: '{"values":[3,7,4,5]}' },
+    { label: 'All ones, triangle', input: '{"values":[1,1,1]}' },
+    { label: 'Largest values: eight vertices of 20', input: '{"values":[20,20,20,20,20,20,20,20]}' },
+    { label: 'Alternating extremes', input: '{"values":[1,20,1,20,1,20,1,20]}' },
+    { label: 'Long run: eight vertices', input: '{"values":[17,9,18,3,15,9,10,19]}' },
   ],
 }
 

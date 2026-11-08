@@ -38,10 +38,16 @@ export const phases = [
 
 export const inputLabel = 'Object with a Project table'
 export const complexity = 'O(n) to count and O(p) to compare the counts. The visualizer caps the table at 12 rows.'
-export const examples = [{
-  label: 'Sample',
-  input: '{"Project":[{"project_id":1,"employee_id":1},{"project_id":1,"employee_id":2},{"project_id":1,"employee_id":3},{"project_id":2,"employee_id":1},{"project_id":2,"employee_id":2},{"project_id":3,"employee_id":4},{"project_id":4,"employee_id":5},{"project_id":4,"employee_id":6},{"project_id":4,"employee_id":7}]}',
-}]
+export const examples = [
+  {
+    label: 'Sample',
+    input: '{"Project":[{"project_id":1,"employee_id":1},{"project_id":1,"employee_id":2},{"project_id":1,"employee_id":3},{"project_id":2,"employee_id":1},{"project_id":2,"employee_id":2},{"project_id":3,"employee_id":4},{"project_id":4,"employee_id":5},{"project_id":4,"employee_id":6},{"project_id":4,"employee_id":7}]}',
+  },
+  { label: 'Single row', input: '{"Project":[{"project_id":1,"employee_id":1}]}' },
+  { label: 'Two employees on one project', input: '{"Project":[{"project_id":1,"employee_id":1},{"project_id":1,"employee_id":2}]}' },
+  { label: 'Largest table: twelve rows', input: '{"Project":[{"project_id":1,"employee_id":1},{"project_id":1,"employee_id":2},{"project_id":1,"employee_id":3},{"project_id":1,"employee_id":4},{"project_id":2,"employee_id":5},{"project_id":2,"employee_id":6},{"project_id":2,"employee_id":7},{"project_id":2,"employee_id":8},{"project_id":3,"employee_id":9},{"project_id":3,"employee_id":10},{"project_id":3,"employee_id":11},{"project_id":3,"employee_id":12}]}' },
+  { label: 'Long run: twelve rows', input: '{"Project":[{"project_id":3,"employee_id":17},{"project_id":4,"employee_id":1},{"project_id":4,"employee_id":15},{"project_id":1,"employee_id":4},{"project_id":2,"employee_id":13},{"project_id":3,"employee_id":9},{"project_id":1,"employee_id":11},{"project_id":2,"employee_id":12},{"project_id":3,"employee_id":13},{"project_id":1,"employee_id":6},{"project_id":1,"employee_id":20},{"project_id":2,"employee_id":4}]}' },
+]
 
 function tableRows(input, name, columns) {
   const rows = input[name]

@@ -17,6 +17,10 @@ const definition = {
     { label: 'Banana', input: '"banana"' },
     { label: 'Repeats', input: '"abab"' },
     { label: 'No repeat', input: '"abcd"' },
+    { label: 'Single letter', input: '"a"' },
+    { label: 'Overlapping repeat', input: '"aa"' },
+    { label: 'Longest allowed, one letter', input: '"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"' },
+    { label: 'Long run: 30 letters', input: '"baabccaacccbabacbcbabbaaacaaba"' },
   ],
 }
 

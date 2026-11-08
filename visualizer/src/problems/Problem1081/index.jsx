@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"bcabc"}' },
     { label: 'Example 2', input: '{"s":"cbacdcbc"}' },
+    { label: 'Single letter', input: '{"s":"a"}' },
+    { label: 'One letter repeated', input: '{"s":"aaaa"}' },
+    { label: 'Longest input: forty letters', input: '{"s":"abcdefghijklmnopqrstuvwxyzabcdefghijklmn"}' },
+    { label: 'Long run: forty letters', input: '{"s":"aaabaabcbbbcacabbaacccacccbcacbbbaccbbac"}' },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,1,1,0,0,0,1,1,1,1,0],"k":2}' },
     { label: 'Example 2', input: '{"nums":[0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1],"k":3}' },
+    { label: 'Single one, no flips', input: '{"nums":[1],"k":0}' },
+    { label: 'Zeros fit exactly', input: '{"nums":[0,0,0],"k":3}' },
+    { label: 'Longest allowed with k at its limit', input: '{"nums":[1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0],"k":30}' },
+    { label: 'Long run: 30 values', input: '{"nums":[0,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,1,0,0,0,0,1,1,1,1,0],"k":5}' },
   ],
 }
 

@@ -12,6 +12,10 @@ const definition = {
     { label: 'No grumpy minutes', input: '{"customers":[3,7,4,9],"grumpy":[0,0,0,0],"minutes":2}' },
     { label: 'Whole day', input: '{"customers":[6,2,8,4],"grumpy":[1,0,1,1],"minutes":4}' },
     { label: 'Empty minutes', input: '{"customers":[0,5,0,7,0],"grumpy":[1,1,0,1,1],"minutes":1}' },
+    { label: 'Single grumpy minute', input: '{"customers":[3],"grumpy":[1],"minutes":1}' },
+    { label: 'Never grumpy', input: '{"customers":[2,4],"grumpy":[0,0],"minutes":1}' },
+    { label: 'Window covers every minute', input: '{"customers":[1,2,3,4],"grumpy":[1,1,1,1],"minutes":4}' },
+    { label: 'Long run: 40 minutes', input: '{"customers":[159,244,180,969,617,448,531,222,234,688,606,167,696,879,372,192,72,580,136,530,516,988,44,673,286,185,19,850,278,382,918,874,41,710,923,180,514,334,377,853],"grumpy":[0,1,1,1,0,0,1,0,0,1,0,1,0,0,1,1,1,1,0,1,1,1,0,0,0,0,0,0,1,0,1,1,0,0,0,1,0,1,1,1],"minutes":7}' },
   ],
 }
 

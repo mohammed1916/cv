@@ -21,6 +21,10 @@ const definition = {
       label: 'Open board, one pawn',
       input: JSON.stringify({ board: ['R......p', '........', '........', '........', '........', '........', '........', '........'] }),
     },
+    { label: 'Rook alone on the board', input: '{"board":["R.......","........","........","........","........","........","........","........"]}' },
+    { label: 'Rook boxed in on four sides', input: '{"board":["........","........","...p....","..pRp...","...p....","........","........","........"]}' },
+    { label: 'Full alternating board', input: '{"board":["RpBpBpBp","BpBpBpBp","BpBpBpBp","BpBpBpBp","BpBpBpBp","BpBpBpBp","BpBpBpBp","BpBpBpBp"]}' },
+    { label: 'Long run: random 8 by 8 board', input: '{"board":["pppp..pB","p.B..ppp","..pB.ppB",".pR.BpB.","B..BBp.B",".BBpBppB","..pBppp.","BB......"]}' },
   ],
 }
 

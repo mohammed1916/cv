@@ -13,6 +13,10 @@ const definition = {
     { label: 'Everyone trusts four', input: JSON.stringify({ n: 4, trust: [[1, 4], [2, 4], [3, 4]] }) },
     { label: 'Two trust each other', input: JSON.stringify({ n: 3, trust: [[1, 2], [2, 1], [3, 2]] }) },
     { label: 'Judge is trusted by one', input: JSON.stringify({ n: 2, trust: [[2, 1]] }) },
+    { label: 'Smallest: one person', input: '{"n":1,"trust":[]}' },
+    { label: 'Mutual trust, no judge', input: '{"n":2,"trust":[[1,2],[2,1]]}' },
+    { label: 'Largest n with a clear judge', input: '{"n":8,"trust":[[1,8],[2,8],[3,8],[4,8],[5,8],[6,8],[7,8],[1,2]]}' },
+    { label: 'Long run: twenty trust pairs', input: '{"n":8,"trust":[[5,8],[6,3],[8,2],[3,1],[4,3],[4,8],[6,2],[3,6],[1,8],[7,6],[1,3],[1,4],[2,5],[6,5],[1,5],[3,4],[3,5],[6,8],[5,4],[8,4]]}' },
   ],
 }
 

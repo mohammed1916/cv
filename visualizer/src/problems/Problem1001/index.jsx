@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 1', input: '{"n":5,"lamps":[[0,0],[4,4]],"queries":[[1,1],[1,0]]}' },
     { label: 'Shared diagonal', input: '{"n":5,"lamps":[[0,0],[4,4]],"queries":[[1,1],[1,1]]}' },
     { label: 'Single cell', input: '{"n":1,"lamps":[[0,0]],"queries":[[0,0],[0,0]]}' },
+    { label: 'No lamps lit', input: '{"n":1,"lamps":[],"queries":[[0,0]]}' },
+    { label: 'Anti-diagonal lamps', input: '{"n":3,"lamps":[[0,2],[2,0]],"queries":[[1,1],[0,0],[2,2]]}' },
+    { label: 'Largest grid with ten lamps', input: '{"n":8,"lamps":[[0,0],[7,7],[0,7],[7,0],[3,4],[4,3],[1,6],[6,1],[2,5],[5,2]],"queries":[[3,3],[7,0],[4,4],[0,0],[5,5],[6,6],[1,1],[2,2],[7,7],[0,7]]}' },
+    { label: 'Long run: ten lamps and ten queries', input: '{"n":8,"lamps":[[4,2],[7,1],[0,3],[0,0],[2,2],[7,6],[5,0],[3,6],[5,3],[5,4]],"queries":[[6,5],[2,5],[5,5],[7,4],[5,4],[7,5],[2,0],[7,4],[1,4],[1,5]]}' },
   ],
 }
 

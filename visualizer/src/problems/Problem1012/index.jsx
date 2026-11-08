@@ -16,6 +16,10 @@ const definition = {
     { label: 'Example 1', input: '20' },
     { label: 'Example 2', input: '100' },
     { label: 'Example 3', input: '1000' },
+    { label: 'Smallest: one', input: '1' },
+    { label: 'Round ten thousand', input: '10000' },
+    { label: 'Largest n allowed', input: '100000' },
+    { label: 'Long run: 98765', input: '98765' },
   ],
 }
 

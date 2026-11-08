@@ -58,6 +58,10 @@ export const examples = [
   { label: 'Inserted lowercase', input: '{"queries":["FooBarTest","FootBall","FrameBuffer"],"pattern":"FB"}' },
   { label: 'Unmatched capital', input: '{"queries":["AbCd","ABcd"],"pattern":"AC"}' },
   { label: 'Pattern exhausted early', input: '{"queries":["Mon","MonX"],"pattern":"MX"}' },
+  { label: 'Single letter query', input: '{"queries":["A"],"pattern":"A"}' },
+  { label: 'Equal queries repeat', input: '{"queries":["AB","AB","AB"],"pattern":"AB"}' },
+  { label: 'Longest allowed pattern', input: '{"queries":["ABCDEFGHIJKLMNOPQRSTUVWX","aAbBcCdDeEfFgGhHiIjJkK","abcdefghijklmnopqrstuvwx"],"pattern":"ABCDEFGHIJKLMNOPQRSTUVWX"}' },
+  { label: 'Long run: 12 queries', input: '{"queries":["oUPUXeLftafFxDECf","cOjhVeJRKEOjcSNSF","aLDwaJlQsEcDAUqq","dVXzgoUpgEQmlr","msjObDnQPMYhJig","xyxVcDeoE","keDACrFMXIEiafqBA","CBPpcWRuRBFTcBIHtKw","QlYddAAHppwMnoh","XjOsWsXzTKAR","haiblYLWXa","UmYaoijUmMi"],"pattern":"Ab"}' },
 ]
 
 export function parseInput(text) {

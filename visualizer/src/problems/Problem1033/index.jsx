@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"a":1,"b":2,"c":5}' },
     { label: 'Example 2', input: '{"a":4,"b":3,"c":2}' },
+    { label: 'Already consecutive', input: '{"a":1,"b":2,"c":3}' },
+    { label: 'Unsorted input, same answer', input: '{"a":30,"b":1,"c":15}' },
+    { label: 'Stone at the far end', input: '{"a":1,"b":2,"c":30}' },
   ],
 }
 

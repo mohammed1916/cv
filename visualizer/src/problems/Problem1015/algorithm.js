@@ -52,6 +52,9 @@ export const examples = [
   { label: 'Divisible by one', input: '{"k":1}' },
   { label: 'Even divisor', input: '{"k":8}' },
   { label: 'Factor of five', input: '{"k":25}' },
+  { label: 'Largest k allowed', input: '{"k":200}' },
+  { label: 'Prime near the limit', input: '{"k":197}' },
+  { label: 'Long run: generated k', input: '{"k":145}' },
 ]
 
 export function parseInput(text) {

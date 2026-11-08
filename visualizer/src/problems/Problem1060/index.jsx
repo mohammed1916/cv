@@ -23,6 +23,10 @@ const definition = {
     { label: 'First missing', input: '{"nums":[2,5,6,11,14],"k":1}' },
     { label: 'Middle missing', input: '{"nums":[2,5,6,11,14],"k":4}' },
     { label: 'Beyond the last element', input: '{"nums":[2,5,6,11,14],"k":9}' },
+    { label: 'Single number', input: '{"nums":[1],"k":1}' },
+    { label: 'Dense start from zero', input: '{"nums":[0,1,2,3],"k":2}' },
+    { label: 'Large k', input: '{"nums":[1,2,4,5,8,9,10,20,30,31],"k":50}' },
+    { label: 'Long run: ten numbers, k 25', input: '{"nums":[27,31,54,59,60,77,87,89,94,97],"k":25}' },
   ],
 }
 

@@ -24,6 +24,10 @@ const definition = {
     { label: 'Two workers', input: '{"workers":[[1,1],[4,3]],"bikes":[[0,4],[5,0],[3,3]]}' },
     { label: 'Three workers', input: '{"workers":[[2,2],[6,1],[0,5]],"bikes":[[1,3],[4,4],[7,0],[3,6]]}' },
     { label: 'Tie on distance', input: '{"workers":[[0,0],[5,5]],"bikes":[[0,0],[5,5],[9,9]]}' },
+    { label: 'One worker on a bike', input: '{"workers":[[0,0]],"bikes":[[0,0]]}' },
+    { label: 'Workers share a spot', input: '{"workers":[[2,2],[2,2]],"bikes":[[2,2],[2,3]]}' },
+    { label: 'Largest input: six workers, eight bikes', input: '{"workers":[[0,0],[20,20],[0,20],[20,0],[10,10],[5,5]],"bikes":[[0,0],[20,20],[0,20],[20,0],[10,10],[5,5],[1,1],[19,19]]}' },
+    { label: 'Long run: six workers, eight bikes', input: '{"workers":[[5,2],[18,11],[17,7],[7,11],[5,1],[17,5]],"bikes":[[11,1],[17,1],[11,18],[14,15],[7,4],[12,4],[10,20],[1,0]]}' },
   ],
 }
 

@@ -12,6 +12,11 @@ const definition = {
   examples: [
     { label: 'Suffix match', input: '{"words":["ab","cd","bcd"],"letters":"xabcd"}' },
     { label: 'Repeats', input: '{"words":["a","aa"],"letters":"baa"}' },
+    { label: 'Single word, single letter', input: '{"words":["a"],"letters":"a"}' },
+    { label: 'Overlapping matches', input: '{"words":["aa"],"letters":"aaaa"}' },
+    { label: 'No match at all', input: '{"words":["xyz"],"letters":"abcab"}' },
+    { label: 'Largest input: 20 words, 40 letters', input: '{"words":["euszddoz","upozpodb","crkaagal","tmgalqym","bobbwbvo","rjxbitsy","aetkbdia","qgpkmofk","ybklygcm","pdgljqzo","xycmubxy","nbxmftmz","wvtnzdjb","mypvkohl","uslwvgen","cvgwhqtx","tqcxsbrz","bsyxdtob","rnuyodlk","aqpyiojm"],"letters":"ybklygcmpkgkkokupghxzttnohispgemiuxiiupv"}' },
+    { label: 'Long run: 20 mixed-length words', input: '{"words":["ep","u","dmfewyxc","thbnhqm","bkw","se","ahoox","q","zefpu","pzb","xb","owtzklir","wyozv","mtkagnv","uwgar","lqc","ttx","jntk","sqpk","il"],"letters":"pdgljqzoxkkzcdujqaayndyrppzuuiboeybjobup"}' },
   ],
 }
 

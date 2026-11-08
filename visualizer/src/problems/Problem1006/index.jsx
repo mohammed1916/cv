@@ -11,6 +11,9 @@ const definition = {
     { label: 'Seven', input: '{"n":7}' },
     { label: 'Four', input: '{"n":4}' },
     { label: 'Ten', input: '{"n":10}' },
+    { label: 'Smallest: one', input: '{"n":1}' },
+    { label: 'Three', input: '{"n":3}' },
+    { label: 'Largest n in this view', input: '{"n":60}' },
   ],
 }
 

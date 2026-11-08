@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"barcodes":[1,1,1,2,2,2]}' },
     { label: 'Example 2', input: '{"barcodes":[1,1,1,1,2,2,3,3]}' },
+    { label: 'Single barcode', input: '{"barcodes":[1]}' },
+    { label: 'Two different barcodes', input: '{"barcodes":[1,2]}' },
+    { label: 'Largest input: all pairs', input: '{"barcodes":[1,1,2,2,3,3,4,4,5,5,6,6]}' },
+    { label: 'Long run: 12 barcodes', input: '{"barcodes":[6,6,2,5,1,2,6,1,5,2,1,4]}' },
   ],
 }
 

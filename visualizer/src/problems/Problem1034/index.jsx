@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"grid":[[1,1],[1,2]],"row":0,"col":0,"color":3}' },
     { label: 'Example 2', input: '{"grid":[[1,2,2],[2,3,2]],"row":0,"col":1,"color":3}' },
+    { label: 'Single cell', input: '{"grid":[[2]],"row":0,"col":0,"color":1}' },
+    { label: 'Whole grid is one region', input: '{"grid":[[1,1],[1,1]],"row":0,"col":0,"color":2}' },
+    { label: 'Largest grid, one region', input: '{"grid":[[3,3,3,3,3,3],[3,3,3,3,3,3],[3,3,3,3,3,3],[3,3,3,3,3,3],[3,3,3,3,3,3],[3,3,3,3,3,3]],"row":2,"col":3,"color":5}' },
+    { label: 'Long run: 6 by 6 mixed regions', input: '{"grid":[[0,3,0,2,0,2],[3,2,2,0,1,2],[1,0,3,3,2,3],[3,3,1,1,0,3],[2,2,3,0,1,3],[0,0,1,2,2,0]],"row":3,"col":2,"color":4}' },
   ],
 }
 

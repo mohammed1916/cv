@@ -12,6 +12,10 @@ const definition = {
     { label: 'Flips then parity', input: '{"nums":[3,-7,-2,6],"k":3}' },
     { label: 'Odd leftover', input: '{"nums":[5,-1,2],"k":2}' },
     { label: 'Single negative', input: '{"nums":[-3],"k":2}' },
+    { label: 'Single zero', input: '{"nums":[0],"k":1}' },
+    { label: 'Equal even values', input: '{"nums":[2,2,2,2],"k":2}' },
+    { label: 'Largest magnitudes, k at its limit', input: '{"nums":[100,-100,100,-100,100,-100,100,-100,100,-100,100,-100],"k":10}' },
+    { label: 'Long run: 12 numbers', input: '{"nums":[10,85,54,19,88,-23,3,-8,44,-75,89,8],"k":7}' },
   ],
 }
 

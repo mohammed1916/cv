@@ -12,6 +12,10 @@ const definition = {
   examples: [
     { label: 'Sample', input: '[[6,2,7],[2,6,7,1]]' },
     { label: 'Longer', input: '[[2,5,1,2,5],[9,5,2,1,5,2]]' },
+    { label: 'Single matching pair', input: '[[4],[4]]' },
+    { label: 'No shared values', input: '[[1,2],[3,4]]' },
+    { label: 'Largest arrays: all nines', input: '[[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]]' },
+    { label: 'Long run: 20 values each', input: '[[9,0,4,0,5,8,6,0,1,8,2,0,0,5,0,6,9,9,5,9],[3,5,9,5,9,2,6,0,0,3,5,6,6,8,7,6,7,7,9,6]]' },
   ],
 }
 

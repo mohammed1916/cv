@@ -59,6 +59,33 @@ const EXAMPLES = [
     source: [0, 0],
     target: [3, 1],
   },
+  {
+    name: "Source equals target",
+    blocked: [],
+    source: [0, 0],
+    target: [0, 0],
+  },
+  {
+    name: "Single wall, far target",
+    blocked: [[0, 1]],
+    source: [0, 0],
+    target: [999999, 999999],
+  },
+  {
+    name: "Enclosed source, far target",
+    blocked: [
+      [0, 1],
+      [1, 0],
+    ],
+    source: [0, 0],
+    target: [999999, 999999],
+  },
+  {
+    name: "Long run: 40 scattered walls",
+    blocked: [[9, 8], [10, 19], [1, 8], [11, 5], [10, 15], [4, 18], [18, 14], [18, 10], [2, 13], [5, 14], [13, 5], [15, 11], [11, 12], [6, 12], [0, 10], [10, 4], [2, 4], [7, 2], [4, 17], [17, 8], [14, 18], [5, 10], [12, 10], [0, 11], [19, 14], [7, 4], [6, 15], [4, 19], [4, 0], [2, 19], [6, 6], [19, 1], [6, 2], [11, 2], [4, 5], [1, 15], [7, 17], [17, 4], [17, 5], [8, 8]],
+    source: [0, 0],
+    target: [19, 19],
+  },
 ];
 
 const CODE_TEXT = [

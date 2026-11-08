@@ -12,6 +12,9 @@ const definition = {
     { label: 'Leftmost duplicate', input: '{"arr":[8,3,3,6,6]}' },
     { label: 'Smallest already', input: '{"arr":[1,2,2,4,7]}' },
     { label: 'Single value', input: '{"arr":[9]}' },
+    { label: 'Two equal values', input: '{"arr":[4,4]}' },
+    { label: 'Strictly falling', input: '{"arr":[10,9,8,7,6,5,4,3,2,1]}' },
+    { label: 'Long run: 40 values', input: '{"arr":[49,14,18,98,25,73,100,69,47,80,27,58,25,89,18,72,4,54,65,46,98,46,83,89,41,63,75,99,38,11,74,58,27,59,75,24,19,78,78,84]}' },
   ],
 }
 

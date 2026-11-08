@@ -23,6 +23,10 @@ const definition = {
     { label: 'Overlapping pair', input: '{"s":"banana"}' },
     { label: 'No repeat', input: '{"s":"qwerty"}' },
     { label: 'Two pairs', input: '{"s":"xyzyz"}' },
+    { label: 'Single letter', input: '{"s":"a"}' },
+    { label: 'Repeated letter', input: '{"s":"aaaa"}' },
+    { label: 'Longest input, no repeats', input: '{"s":"abcdefghijklmnopqrst"}' },
+    { label: 'Long run: 20 letters', input: '{"s":"xzyyzxyxzyxzyyyxzxyz"}' },
   ],
 }
 

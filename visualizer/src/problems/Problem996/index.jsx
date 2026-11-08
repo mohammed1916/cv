@@ -19,6 +19,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,17,8]}' },
     { label: 'Example 2', input: '{"nums":[2,2,2]}' },
+    { label: 'Smallest: one value', input: '{"nums":[0]}' },
+    { label: 'Equal values repeat', input: '{"nums":[4,4,4,4]}' },
+    { label: 'Largest values at the limit', input: '{"nums":[20,0,20,0,20,0,20,0]}' },
+    { label: 'Long run: 8 values', input: '{"nums":[4,9,8,3,19,0,14,3]}' },
   ],
 }
 

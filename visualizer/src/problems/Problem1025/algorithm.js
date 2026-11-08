@@ -51,6 +51,9 @@ export const examples = [
   { label: 'Odd pile', input: '{"n":9}' },
   { label: 'Larger even pile', input: '{"n":16}' },
   { label: 'Starting pile of one', input: '{"n":1}' },
+  { label: 'Largest pile allowed', input: '{"n":60}' },
+  { label: 'Prime pile', input: '{"n":37}' },
+  { label: 'Long run: generated pile', input: '{"n":6}' },
 ]
 
 export function parseInput(text) {

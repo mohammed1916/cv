@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 1', input: '{"words":["a","b","ba","bca","bda","bdca"]}' },
     { label: 'Example 2', input: '{"words":["xbc","pcxbcf","xb","cxbc","pcxbc"]}' },
     { label: 'Two branches', input: '{"words":["t","tx","ty","txy","tyz"]}' },
+    { label: 'Single word', input: '{"words":["a"]}' },
+    { label: 'Duplicate words count once', input: '{"words":["ab","ab"]}' },
+    { label: 'Full chain of six', input: '{"words":["a","ab","abc","abcd","abcde","abcdef"]}' },
+    { label: 'Long run: 8 words', input: '{"words":["baabcd","d","b","aabac","ccddd","ab","ddda","bca"]}' },
   ],
 }
 

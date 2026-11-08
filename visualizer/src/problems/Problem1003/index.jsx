@@ -17,6 +17,10 @@ const definition = {
     { label: 'Valid', input: '{"s":"aabcbc"}' },
     { label: 'Nested', input: '{"s":"abcabcababcc"}' },
     { label: 'Invalid', input: '{"s":"abccba"}' },
+    { label: 'Single letter', input: '{"s":"a"}' },
+    { label: 'One of each letter', input: '{"s":"abc"}' },
+    { label: 'Maximum length, repeating pattern', input: '{"s":"abcabcabcabcabcabcab"}' },
+    { label: 'Long run: 20 letters', input: '{"s":"abbcbaacccaccbaccaba"}' },
   ],
 }
 

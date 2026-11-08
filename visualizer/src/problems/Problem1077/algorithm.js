@@ -42,10 +42,16 @@ export const phases = [
 
 export const inputLabel = 'Object with Project and Employee tables'
 export const complexity = 'O(n) with a per-project maximum map. The visualizer caps each table at 12 rows.'
-export const examples = [{
-  label: 'Sample',
-  input: '{"Project":[{"project_id":1,"employee_id":1},{"project_id":1,"employee_id":2},{"project_id":1,"employee_id":3},{"project_id":2,"employee_id":2},{"project_id":2,"employee_id":4}],"Employee":[{"employee_id":1,"experience_years":3},{"employee_id":2,"experience_years":10},{"employee_id":3,"experience_years":10},{"employee_id":4,"experience_years":5}]}',
-}]
+export const examples = [
+  {
+    label: 'Sample',
+    input: '{"Project":[{"project_id":1,"employee_id":1},{"project_id":1,"employee_id":2},{"project_id":1,"employee_id":3},{"project_id":2,"employee_id":2},{"project_id":2,"employee_id":4}],"Employee":[{"employee_id":1,"experience_years":3},{"employee_id":2,"experience_years":10},{"employee_id":3,"experience_years":10},{"employee_id":4,"experience_years":5}]}',
+  },
+  { label: 'Single project and employee', input: '{"Project":[{"project_id":1,"employee_id":1}],"Employee":[{"employee_id":1,"experience_years":3}]}' },
+  { label: 'Tie on average experience', input: '{"Project":[{"project_id":1,"employee_id":1},{"project_id":1,"employee_id":2}],"Employee":[{"employee_id":1,"experience_years":5},{"employee_id":2,"experience_years":5}]}' },
+  { label: 'Largest tables: twelve rows each', input: '{"Project":[{"project_id":1,"employee_id":1},{"project_id":1,"employee_id":2},{"project_id":1,"employee_id":3},{"project_id":1,"employee_id":4},{"project_id":2,"employee_id":5},{"project_id":2,"employee_id":6},{"project_id":2,"employee_id":7},{"project_id":2,"employee_id":8},{"project_id":3,"employee_id":9},{"project_id":3,"employee_id":10},{"project_id":3,"employee_id":11},{"project_id":3,"employee_id":12}],"Employee":[{"employee_id":1,"experience_years":1},{"employee_id":2,"experience_years":2},{"employee_id":3,"experience_years":3},{"employee_id":4,"experience_years":4},{"employee_id":5,"experience_years":5},{"employee_id":6,"experience_years":6},{"employee_id":7,"experience_years":7},{"employee_id":8,"experience_years":8},{"employee_id":9,"experience_years":9},{"employee_id":10,"experience_years":10},{"employee_id":11,"experience_years":11},{"employee_id":12,"experience_years":12}]}' },
+  { label: 'Long run: twelve rows', input: '{"Project":[{"project_id":2,"employee_id":1},{"project_id":3,"employee_id":2},{"project_id":2,"employee_id":3},{"project_id":3,"employee_id":4},{"project_id":3,"employee_id":5},{"project_id":1,"employee_id":6},{"project_id":2,"employee_id":7},{"project_id":2,"employee_id":8},{"project_id":3,"employee_id":9},{"project_id":1,"employee_id":10},{"project_id":1,"employee_id":11},{"project_id":2,"employee_id":12}],"Employee":[{"employee_id":1,"experience_years":24},{"employee_id":2,"experience_years":16},{"employee_id":3,"experience_years":6},{"employee_id":4,"experience_years":30},{"employee_id":5,"experience_years":27},{"employee_id":6,"experience_years":5},{"employee_id":7,"experience_years":22},{"employee_id":8,"experience_years":11},{"employee_id":9,"experience_years":23},{"employee_id":10,"experience_years":25},{"employee_id":11,"experience_years":5},{"employee_id":12,"experience_years":1}]}' },
+]
 
 function tableRows(input, name, columns) {
   const rows = input[name]

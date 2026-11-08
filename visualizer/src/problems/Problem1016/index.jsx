@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 1', input: '{"s":"0110","n":3}' },
     { label: 'Example 2', input: '{"s":"0110","n":4}' },
     { label: 'Example 3', input: '{"s":"1011","n":3}' },
+    { label: 'Single zero', input: '{"s":"0","n":1}' },
+    { label: 'Equal bits', input: '{"s":"1111","n":4}' },
+    { label: 'Forty bits at the limit', input: '{"s":"0101010101010101010101010101010101010101","n":40}' },
+    { label: 'Long run: 40 bits', input: '{"s":"0100001010011010100110001101010011110001","n":37}' },
   ],
 }
 

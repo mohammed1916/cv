@@ -14,6 +14,10 @@ const definition = {
     { label: 'Chain', input: '[6,2,9,4]' },
     { label: 'Equal pair', input: '[3,3]' },
     { label: 'Single stone', input: '[7]' },
+    { label: 'Largest weight alone', input: '[1000]' },
+    { label: 'Odd count of equal weights', input: '[5,5,5]' },
+    { label: 'Largest input: twelve heaviest', input: '[1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000]' },
+    { label: 'Long run: 12 stones', input: '[453,207,438,841,160,735,279,620,485,877,175,348]' },
   ],
 }
 

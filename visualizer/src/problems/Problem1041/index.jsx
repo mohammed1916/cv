@@ -14,6 +14,10 @@ const definition = {
     { label: 'Turns back', input: 'GRGRG' },
     { label: 'Drifts', input: 'RGL' },
     { label: 'Wide loop', input: 'GGRGG' },
+    { label: 'Single step', input: 'G' },
+    { label: 'Turns without moving', input: 'LLRR' },
+    { label: 'Largest input: 100 instructions', input: 'GLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGLGL' },
+    { label: 'Long run: 100 instructions', input: 'LRLRRRLRLLGRGLRRGLGRGRRGLRGGGRGRLGLGRGLLLRLLRRGGGLRGLLRRGRLLRGRGGRRGRGGGGLLRGRRLLGLRGRRGGLLGRGRGLGRG' },
   ],
 }
 

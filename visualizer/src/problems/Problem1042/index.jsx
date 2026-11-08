@@ -19,6 +19,10 @@ const definition = {
     { label: 'Example 1', input: '{"n": 3, "paths": [[1,2],[2,3],[3,1]]}' },
     { label: 'Example 2', input: '{"n": 4, "paths": [[1,2],[3,4]]}' },
     { label: 'Star of three', input: '{"n": 4, "paths": [[1,2],[1,3],[1,4]]}' },
+    { label: 'Single garden, no paths', input: '{"n":1,"paths":[]}' },
+    { label: 'Two gardens joined', input: '{"n":2,"paths":[[1,2]]}' },
+    { label: 'Four gardens in a ring', input: '{"n":4,"paths":[[1,2],[2,3],[3,4],[4,1]]}' },
+    { label: 'Long run: twelve gardens', input: '{"n":12,"paths":[[8,5],[11,7],[11,2],[2,1],[12,8],[7,3],[4,12],[11,10],[7,2],[12,3],[10,9],[10,5]]}' },
   ],
 }
 

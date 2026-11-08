@@ -34,10 +34,16 @@ export const phases = [
 
 export const inputLabel = 'Object with Sales and Product tables'
 export const complexity = 'O(n + m) with a lookup map from product to name. The visualizer caps each table at 12 rows.'
-export const examples = [{
-  label: 'Sample',
-  input: '{"Sales":[{"sale_id":5,"product_id":11,"year":2010,"quantity":3,"price":40},{"sale_id":6,"product_id":11,"year":2011,"quantity":2,"price":41},{"sale_id":8,"product_id":22,"year":2011,"quantity":7,"price":95},{"sale_id":9,"product_id":44,"year":2012,"quantity":1,"price":10}],"Product":[{"product_id":11,"product_name":"Lamp"},{"product_id":22,"product_name":"Desk"},{"product_id":33,"product_name":"Chair"}]}',
-}]
+export const examples = [
+  {
+    label: 'Sample',
+    input: '{"Sales":[{"sale_id":5,"product_id":11,"year":2010,"quantity":3,"price":40},{"sale_id":6,"product_id":11,"year":2011,"quantity":2,"price":41},{"sale_id":8,"product_id":22,"year":2011,"quantity":7,"price":95},{"sale_id":9,"product_id":44,"year":2012,"quantity":1,"price":10}],"Product":[{"product_id":11,"product_name":"Lamp"},{"product_id":22,"product_name":"Desk"},{"product_id":33,"product_name":"Chair"}]}',
+  },
+  { label: 'Single sale', input: '{"Sales":[{"sale_id":1,"product_id":1,"year":2010,"quantity":1,"price":10}],"Product":[{"product_id":1,"product_name":"Pen"},{"product_id":2,"product_name":"Notebook"},{"product_id":3,"product_name":"Stapler"}]}' },
+  { label: 'Equal totals for two products', input: '{"Sales":[{"sale_id":1,"product_id":1,"year":2010,"quantity":2,"price":5},{"sale_id":2,"product_id":2,"year":2010,"quantity":1,"price":10}],"Product":[{"product_id":1,"product_name":"Pen"},{"product_id":2,"product_name":"Notebook"},{"product_id":3,"product_name":"Stapler"}]}' },
+  { label: 'Largest table: twelve sales rows', input: '{"Sales":[{"sale_id":1,"product_id":2,"year":2011,"quantity":2,"price":11},{"sale_id":2,"product_id":3,"year":2012,"quantity":3,"price":12},{"sale_id":3,"product_id":1,"year":2010,"quantity":4,"price":13},{"sale_id":4,"product_id":2,"year":2011,"quantity":5,"price":14},{"sale_id":5,"product_id":3,"year":2012,"quantity":6,"price":15},{"sale_id":6,"product_id":1,"year":2010,"quantity":7,"price":16},{"sale_id":7,"product_id":2,"year":2011,"quantity":1,"price":17},{"sale_id":8,"product_id":3,"year":2012,"quantity":2,"price":18},{"sale_id":9,"product_id":1,"year":2010,"quantity":3,"price":19},{"sale_id":10,"product_id":2,"year":2011,"quantity":4,"price":20},{"sale_id":11,"product_id":3,"year":2012,"quantity":5,"price":21},{"sale_id":12,"product_id":1,"year":2010,"quantity":6,"price":22}],"Product":[{"product_id":1,"product_name":"Pen"},{"product_id":2,"product_name":"Notebook"},{"product_id":3,"product_name":"Stapler"}]}' },
+  { label: 'Long run: twelve sales', input: '{"Sales":[{"sale_id":1,"product_id":3,"year":2011,"quantity":7,"price":11},{"sale_id":2,"product_id":1,"year":2012,"quantity":7,"price":42},{"sale_id":3,"product_id":1,"year":2012,"quantity":4,"price":17},{"sale_id":4,"product_id":3,"year":2010,"quantity":2,"price":29},{"sale_id":5,"product_id":1,"year":2011,"quantity":7,"price":41},{"sale_id":6,"product_id":1,"year":2010,"quantity":6,"price":30},{"sale_id":7,"product_id":1,"year":2011,"quantity":5,"price":15},{"sale_id":8,"product_id":3,"year":2010,"quantity":4,"price":14},{"sale_id":9,"product_id":2,"year":2012,"quantity":10,"price":38},{"sale_id":10,"product_id":1,"year":2010,"quantity":2,"price":47},{"sale_id":11,"product_id":1,"year":2011,"quantity":4,"price":27},{"sale_id":12,"product_id":1,"year":2010,"quantity":7,"price":3}],"Product":[{"product_id":1,"product_name":"Pen"},{"product_id":2,"product_name":"Notebook"},{"product_id":3,"product_name":"Stapler"}]}' },
+]
 
 function tableRows(input, name, columns) {
   const rows = input[name]

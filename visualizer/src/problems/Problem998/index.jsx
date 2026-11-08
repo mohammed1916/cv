@@ -19,6 +19,9 @@ const definition = {
     { label: 'Example 1', input: '{"arr":[4,1,3,null,null,2],"val":5}' },
     { label: 'Example 2', input: '{"arr":[5,2,4,null,1],"val":3}' },
     { label: 'Smallest', input: '{"arr":[5],"val":3}' },
+    { label: 'Value becomes the new root', input: '{"arr":[3,1,2],"val":4}' },
+    { label: 'Insert between two existing values', input: '{"arr":[100,1,99,null,null,50,98],"val":97}' },
+    { label: 'Long run: 12 nodes', input: '{"arr":[100,76,73,70,63,53,51,30,28,25,9,4],"val":48}' },
   ],
 }
 

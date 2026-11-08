@@ -14,6 +14,10 @@ const definition = {
     { label: 'Uneven split', input: '[5,3,9,4]' },
     { label: 'Perfect split', input: '[10,10]' },
     { label: 'Single stone', input: '[8]' },
+    { label: 'Wide weight gap', input: '[1,100]' },
+    { label: 'Odd count of equal stones', input: '[7,7,7]' },
+    { label: 'Largest input: twelve stones of 100', input: '[100,100,100,100,100,100,100,100,100,100,100,100]' },
+    { label: 'Long run: 12 stones', input: '[32,15,15,36,16,4,7,22,87,74,7,62]' },
   ],
 }
 

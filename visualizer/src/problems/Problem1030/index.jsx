@@ -11,6 +11,10 @@ const definition = {
   examples: [
     { label: '3 × 3 centre', input: '[3,3,1,1]' },
     { label: '2 × 4 corner', input: '[2,4,0,0]' },
+    { label: 'Single cell', input: '[1,1,0,0]' },
+    { label: 'Equal distances on both sides', input: '[1,5,0,2]' },
+    { label: 'Single long row', input: '[1,400,0,200]' },
+    { label: 'Long run: 20 by 20 from the middle', input: '[20,20,10,9]' },
   ],
 }
 

@@ -25,6 +25,10 @@ const definition = {
     { label: 'Pick two round-ups', input: '{"prices":["0.400","3.250","1.600","0.000"],"target":6}' },
     { label: 'Impossible', input: '{"prices":["1.200","2.300"],"target":6}' },
     { label: 'Already integral', input: '{"prices":["2.000","0.500"],"target":2}' },
+    { label: 'Single exact price', input: '{"prices":["1.000"],"target":1}' },
+    { label: 'Equal prices', input: '{"prices":["0.500","0.500"],"target":1}' },
+    { label: 'Largest input: eight prices near 999', input: '{"prices":["999.999","999.999","999.999","999.999","999.999","999.999","999.999","999.999"],"target":7992}' },
+    { label: 'Long run: eight prices', input: '{"prices":["904.458","302.777","946.611","390.174","119.513","210.514","558.066","593.233"],"target":1500}' },
   ],
 }
 
