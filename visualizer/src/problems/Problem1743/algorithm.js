@@ -46,6 +46,10 @@ export const phases = [
 export const examples = [
   { label: 'Chain of five', input: '[[7,3],[3,9],[9,4],[4,1]]' },
   { label: 'Two values', input: '[[5,-2]]' },
+  { label: 'Reversed pair', input: '[[-2,5]]' },
+  { label: 'Chain of three', input: '[[1,2],[2,3]]' },
+  { label: 'Extreme values', input: '[[-100,100],[100,0]]' },
+  { label: 'Long run: 12 pairs', input: '[[86,-67],[54,86],[54,27],[27,18],[89,18],[-81,89],[-81,82],[82,16],[-22,16],[43,-22],[0,43],[0,28]]' },
 ]
 
 export const complexity = 'O(n) time and O(n) space for n values.'

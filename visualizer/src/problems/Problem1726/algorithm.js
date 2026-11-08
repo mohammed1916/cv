@@ -45,6 +45,10 @@ export const phases = [
 export const examples = [
   { label: 'One matching product', input: '[2,3,4,6]' },
   { label: 'Two products repeat', input: '[1,2,3,4,6,8]' },
+  { label: 'Single value', input: '[7]' },
+  { label: 'No pair product in the list', input: '[2,5,9]' },
+  { label: 'Powers of two', input: '[1,2,4,8,16]' },
+  { label: 'Long run: 12 values', input: '[7,59,44,19,6,42,4,31,53,13,26,56]' },
 ]
 
 export const complexity = 'O(n^2) time and O(n^2) space for n distinct positive numbers.'

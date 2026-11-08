@@ -43,6 +43,10 @@ export const phases = [
 export const examples = [
   { label: 'Staircase', input: '[[0,1,1],[1,1,0],[1,1,1]]' },
   { label: 'Single row', input: '[[1,0,1]]' },
+  { label: 'Single zero', input: '[[0]]' },
+  { label: 'All ones', input: '[[1,1],[1,1]]' },
+  { label: 'Single column', input: '[[1],[0],[1]]' },
+  { label: 'Long run: 6 by 6', input: '[[1,1,0,1,0,1],[1,1,0,1,0,0],[1,1,0,0,0,1],[0,0,0,1,1,0],[1,0,0,0,0,0],[0,1,0,1,0,0]]' },
 ]
 
 export const complexity = 'O(m * n log n) time for an m by n matrix, dominated by sorting each row. The visual caps the matrix at 6 by 6.'

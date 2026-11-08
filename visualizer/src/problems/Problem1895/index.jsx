@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"grid":[[7,1,4,5,6],[2,5,1,6,4],[1,5,4,3,2],[1,2,7,3,4]]}' },
     { label: 'Small', input: '{"grid":[[1,2],[3,4]]}' },
+  { label: 'Single cell', input: "{\"grid\":[[3]]}" },
+  { label: 'All equal values', input: "{\"grid\":[[2,2],[2,2]]}" },
+  { label: 'Five by five, extremes', input: "{\"grid\":[[9,0,9,0,9],[0,9,0,9,0],[9,0,9,0,9],[0,9,0,9,0],[9,0,9,0,9]]}" },
+  { label: 'Long run: five by five', input: "{\"grid\":[[1,1,1,9,6],[2,6,8,8,3],[7,9,1,7,5],[2,7,2,7,6],[3,4,5,3,2]]}" },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"num":"5489355142","k":4}' },
     { label: 'Example 2', input: '{"num":"11112","k":4}' },
+  { label: 'Two digits', input: "{\"num\":\"12\",\"k\":1}" },
+  { label: 'Repeated digits', input: "{\"num\":\"1112\",\"k\":1}" },
+  { label: 'Largest k for ten digits', input: "{\"num\":\"0123456789\",\"k\":30}" },
+  { label: 'Long run: eight digits', input: "{\"num\":\"13579246\",\"k\":10}" },
   ],
 }
 

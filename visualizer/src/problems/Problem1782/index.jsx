@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":4,"edges":[[1,2],[2,4],[1,3],[2,3],[2,1]],"queries":[2,3]}' },
     { label: 'Parallel edges', input: '{"n":2,"edges":[[1,2],[1,2]],"queries":[1,2]}' },
+  { label: 'Single edge', input: "{\"n\":2,\"edges\":[[1,2]],\"queries\":[0,1]}" },
+  { label: 'Repeated query values', input: "{\"n\":3,\"edges\":[[1,2],[2,3]],\"queries\":[2,2,0]}" },
+  { label: 'Largest graph and queries', input: "{\"n\":8,\"edges\":[[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[1,8],[2,6],[3,7],[4,8],[1,5]],\"queries\":[0,20]}" },
+  { label: 'Long run: 8 nodes, 12 edges', input: "{\"n\":8,\"edges\":[[3,6],[4,5],[8,4],[8,7],[2,5],[8,2],[7,5],[4,2],[6,8],[5,6],[4,6],[8,1]],\"queries\":[5,3,17,14,10,3]}" },
   ],
 }
 

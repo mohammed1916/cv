@@ -17,6 +17,9 @@ const definition = {
     { label: 'Example 1', input: '3' },
     { label: 'Example 2', input: '4' },
     { label: 'Example 3', input: '10' },
+  { label: 'One box', input: '1' },
+  { label: 'Two boxes', input: '2' },
+  { label: 'Long run: 1000000000 boxes', input: '1000000000' },
   ],
 }
 

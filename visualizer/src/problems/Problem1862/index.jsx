@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[2,5,9]}' },
     { label: 'Equal values', input: '{"nums":[7,7,7,7,7,7,7]}' },
+  { label: 'Single number', input: "{\"nums\":[7]}" },
+  { label: 'Largest values', input: "{\"nums\":[100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100]}" },
+  { label: 'Mixed extremes', input: "{\"nums\":[1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100]}" },
+  { label: 'Long run: 20 numbers', input: "{\"nums\":[66,67,85,22,43,82,14,14,54,44,27,10,32,49,67,18,90,9,51,32]}" },
   ],
 }
 

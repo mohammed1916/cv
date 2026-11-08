@@ -12,6 +12,10 @@ const definition = {
   examples: [
     { label: 'Ties keep order', input: '{"features":["cooler","lock","touch"],"responses":["i like cooler cooler","lock touch cool","locker like tap"]}' },
     { label: 'Repeated words', input: '{"features":["a","bb","c"],"responses":["bb a","c","bb"]}' },
+  { label: 'Single feature', input: "{\"features\":[\"cool\"],\"responses\":[\"cool cool\"]}" },
+  { label: 'Equal counts keep feature order', input: "{\"features\":[\"ab\",\"cd\"],\"responses\":[\"ab cd\",\"cd ab\"]}" },
+  { label: 'Eight features, six responses', input: "{\"features\":[\"alpha\",\"beta\",\"gamma\",\"delta\",\"epsilon\",\"zeta\",\"eta\",\"theta\"],\"responses\":[\"alpha beta gamma\",\"delta delta\",\"zeta eta theta eta\",\"beta\",\"epsilon zeta\",\"theta\"]}" },
+  { label: 'Long run: pooled features', input: "{\"features\":[\"ab\",\"bc\",\"cd\",\"de\",\"ef\",\"fg\",\"gh\",\"hi\"],\"responses\":[\"fg ef fg fg ef\",\"hi de de ab\",\"bc hi ef de de\",\"cd fg\",\"gh gh bc\",\"bc\"]}" },
   ],
 }
 

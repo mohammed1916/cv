@@ -42,6 +42,10 @@ export const phases = [
 export const examples = [
   { label: 'Two tied', input: '[[5,8],[3,9],[5,12],[2,2]]' },
   { label: 'One winner', input: '[[4,4],[7,3],[9,5]]' },
+  { label: 'Single rectangle', input: '[[7,3]]' },
+  { label: 'Squares only', input: '[[4,4],[9,9]]' },
+  { label: 'Largest sides', input: '[[1000,1000],[1000,999]]' },
+  { label: 'Long run: 20 rectangles', input: '[[905,743],[942,522],[39,424],[883,4],[42,681],[474,39],[700,771],[871,530],[899,533],[442,342],[650,422],[552,946],[524,390],[823,817],[450,998],[960,609],[85,404],[462,368],[200,125],[798,308]]' },
 ]
 
 export const complexity = 'O(n) time and O(1) extra space for n rectangles.'

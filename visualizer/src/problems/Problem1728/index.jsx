@@ -15,6 +15,10 @@ const definition = {
     { label: 'Example 1', input: '{"grid":["####F","#C...","M...."],"catJump":1,"mouseJump":2}' },
     { label: 'Example 2', input: '{"grid":["M.C...F"],"catJump":1,"mouseJump":4}' },
     { label: 'Example 3', input: '{"grid":["M.C...F"],"catJump":1,"mouseJump":3}' },
+  { label: 'Adjacent start', input: '{"grid":["CMF"],"catJump":1,"mouseJump":1}' },
+  { label: 'Walls in between', input: '{"grid":["C#M#F"],"catJump":1,"mouseJump":1}' },
+  { label: 'Long jumps', input: '{"grid":["C.M..F"],"catJump":2,"mouseJump":3}' },
+  { label: 'Long run: 8 by 8 board', input: '{"grid":["M#..#.#.","...#....","...#.#.#","...#.C.#","...#....","......#.","#.F.##.#","....#..."],"catJump":2,"mouseJump":3}' },
   ],
 }
 

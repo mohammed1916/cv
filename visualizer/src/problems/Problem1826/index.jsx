@@ -26,6 +26,10 @@ const definition = {
     { label: 'Ambiguous', input: '{"sensor1":[7,7,7],"sensor2":[7,7,7]}' },
     { label: 'Sensor 1 faulty', input: '{"sensor1":[4,2,8,1],"sensor2":[4,9,2,8]}' },
     { label: 'Unrelated', input: '{"sensor1":[5,6,7],"sensor2":[1,2,3]}' },
+  { label: 'Two readings, one mismatch', input: "{\"sensor1\":[1,2],\"sensor2\":[1,3]}" },
+  { label: 'All zero readings', input: "{\"sensor1\":[0,0,0,0],\"sensor2\":[0,0,0,0]}" },
+  { label: 'Largest values, ten readings', input: "{\"sensor1\":[10,20,30,40,50,60,70,80,90,99],\"sensor2\":[10,20,30,40,50,60,70,80,90,98]}" },
+  { label: 'Long run: ten readings', input: "{\"sensor1\":[77,23,90,39,34,18,48,44,4,84],\"sensor2\":[77,23,90,40,34,18,48,49,4,84]}" },
   ],
 }
 

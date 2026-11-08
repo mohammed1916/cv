@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"abcbdd"}' },
     { label: 'No split', input: '{"s":"leetcode"}' },
+  { label: 'Shortest allowed string', input: "{\"s\":\"aaa\"}" },
+  { label: 'Equal letters throughout', input: "{\"s\":\"aaaaaa\"}" },
+  { label: 'Thirty letters, every letter once', input: "{\"s\":\"abcdefghijklmnopqrstuvwxyzabcd\"}" },
+  { label: 'Long run: 30 letters', input: "{\"s\":\"cccbbbaabccbbcbabbacbacbcaabcc\"}" },
   ],
 }
 

@@ -155,6 +155,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"grid":[[1,1,0],[1,0,1],[1,1,1]],"target":[2,2]}' },
     { label: 'Walled off', input: '{"grid":[[1,0,1],[1,0,1]],"target":[0,2]}' },
+  { label: 'Single open cell', input: "{\"grid\":[[1]],\"target\":[0,0]}" },
+  { label: 'Equal length routes', input: "{\"grid\":[[1,1],[1,1]],\"target\":[1,1]}" },
+  { label: 'Full six by six grid', input: "{\"grid\":[[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1]],\"target\":[5,5]}" },
+  { label: 'Long run: six by six', input: "{\"grid\":[[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,0],[1,1,1,1,0,1],[0,1,1,1,0,1],[0,1,0,1,1,1]],\"target\":[5,5]}" },
   ],
 }
 

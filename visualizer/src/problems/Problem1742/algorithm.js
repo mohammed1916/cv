@@ -41,6 +41,10 @@ export const phases = [
 export const examples = [
   { label: 'Short range', input: '{"lowLimit":5,"highLimit":15}' },
   { label: 'Ten to twenty', input: '{"lowLimit":10,"highLimit":20}' },
+  { label: 'Single number', input: '{"lowLimit":1,"highLimit":1}' },
+  { label: 'Digit change', input: '{"lowLimit":9,"highLimit":11}' },
+  { label: 'Equal limits at the top', input: '{"lowLimit":200,"highLimit":200}' },
+  { label: 'Long run: 1 to 200', input: '{"lowLimit":1,"highLimit":200}' },
 ]
 
 export const complexity = 'O(n * d) time for n balls with d digits each, and O(d * 9) space for the box sums.'

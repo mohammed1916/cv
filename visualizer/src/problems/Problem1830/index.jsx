@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Descending', input: '{"s":"cba"}' },
     { label: 'Repeated letters', input: '{"s":"aabaa"}' },
+  { label: 'Single letter', input: "{\"s\":\"a\"}" },
+  { label: 'Equal letters', input: "{\"s\":\"zzzz\"}" },
+  { label: 'Longest allowed', input: "{\"s\":\"abcdefgh\"}" },
+  { label: 'Long run: eight letters', input: "{\"s\":\"dbhrvwak\"}" },
   ],
 }
 

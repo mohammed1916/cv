@@ -36,6 +36,9 @@ export const examples = [
   { label: 'Within the first week', input: '5' },
   { label: 'Into the second week', input: '9' },
   { label: 'Three weeks', input: '15' },
+  { label: 'First day', input: '1' },
+  { label: 'Exact week', input: '7' },
+  { label: 'Long run: 1000 days', input: '1000' },
 ]
 
 export const complexity = 'O(n) time and O(1) space for n days.'

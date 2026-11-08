@@ -128,6 +128,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"expression":"1|(0&1)"}' },
     { label: 'Nested', input: '{"expression":"((0&1)|1)"}' },
+  { label: 'Single value', input: "{\"expression\":\"1\"}" },
+  { label: 'Single zero', input: "{\"expression\":\"0\"}" },
+  { label: 'Equal operands', input: "{\"expression\":\"(1|1)&(1|1)\"}" },
+  { label: 'Longest allowed expression', input: "{\"expression\":\"((1&0)|(1&1))|0\"}" },
   ],
 }
 

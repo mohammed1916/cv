@@ -12,6 +12,10 @@ const definition = {
   examples: [
     { label: 'Diagonal gap', input: '{"s":"abcd","t":"bcde"}' },
     { label: 'Reversed', input: '{"s":"ab","t":"ba"}' },
+  { label: 'Single letters', input: "{\"s\":\"a\",\"t\":\"a\"}" },
+  { label: 'Equal strings', input: "{\"s\":\"aaa\",\"t\":\"aaa\"}" },
+  { label: 'Ten letters, reversed', input: "{\"s\":\"abcdefghij\",\"t\":\"jihgfedcba\"}" },
+  { label: 'Long run: 10 letters', input: "{\"s\":\"uyixcfqayz\",\"t\":\"wgszfntbmu\"}" },
   ],
 }
 

@@ -45,6 +45,10 @@ export const phases = [
 export const examples = [
   { label: 'Small grid', input: '{"matrix":[[3,1],[2,4]],"k":2}' },
   { label: 'Single row', input: '{"matrix":[[6,1,2]],"k":3}' },
+  { label: 'Single cell', input: '{"matrix":[[9]],"k":1}' },
+  { label: 'k equals cells', input: '{"matrix":[[1,2],[3,4]],"k":4}' },
+  { label: 'Equal values', input: '{"matrix":[[5,5],[5,5]],"k":3}' },
+  { label: 'Long run: 6 by 6 matrix', input: '{"matrix":[[14,14,13,0,11,2],[7,14,10,6,5,15],[6,2,13,9,14,11],[5,13,10,11,4,14],[0,2,9,12,15,0],[9,9,9,4,10,5]],"k":20}' },
 ]
 
 export const complexity = 'O(m * n log(m * n)) time and O(m * n) space for an m by n matrix.'

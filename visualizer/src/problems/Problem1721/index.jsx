@@ -23,6 +23,10 @@ const definition = {
     { label: "Example 2", input: JSON.stringify({ head: [7, 9, 6, 6, 7, 8, 3, 0, 9, 5], k: 5 }) },
     { label: "Example 3", input: JSON.stringify({ head: [1], k: 1 }) },
     { label: "Example 4", input: JSON.stringify({ head: [1, 2], k: 1 }) },
+  { label: 'Single node, k = 1', input: '{"head":[5],"k":1}' },
+  { label: 'Equal values swapped', input: '{"head":[5,5],"k":2}' },
+  { label: 'Largest values', input: '{"head":[100,0,100,0],"k":1}' },
+  { label: 'Long run: 30 nodes', input: '{"head":[91,38,20,37,37,43,16,34,0,45,66,30,79,97,96,67,28,47,24,80,89,17,87,66,5,62,42,75,21,53],"k":12}' },
   ],
 };
 

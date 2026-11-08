@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,4,2,7],"low":2,"high":6}' },
     { label: 'Example 2', input: '{"nums":[9,8,4,2,1],"low":5,"high":14}' },
+  { label: 'Single number, exact bounds', input: "{\"nums\":[10],\"low\":10,\"high\":10}" },
+  { label: 'Equal values in range', input: "{\"nums\":[4,4,4],\"low\":3,\"high\":5}" },
+  { label: 'Widest range', input: "{\"nums\":[1,50,1,50,1,50,1,50,1,50,1,50],\"low\":1,\"high\":60}" },
+  { label: 'Long run: 12 numbers', input: "{\"nums\":[26,15,1,19,11,32,10,15,13,49,37,6],\"low\":10,\"high\":40}" },
   ],
 }
 

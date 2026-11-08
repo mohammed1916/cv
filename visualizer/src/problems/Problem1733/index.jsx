@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"n":2,"languages":[[1],[2],[1,2]],"friendships":[[1,2],[1,3],[2,3]]}' },
     { label: 'Already shared', input: '{"n":3,"languages":[[1,3],[2],[1,2],[3]],"friendships":[[1,3],[2,3]]}' },
+  { label: 'Smallest network', input: '{"n":1,"languages":[[1],[1]],"friendships":[[1,2]]}' },
+  { label: 'No friendships', input: '{"n":2,"languages":[[1],[2]],"friendships":[]}' },
+  { label: 'Largest language set', input: '{"n":10,"languages":[[1,2,3,4,5,6,7,8,9,10],[1],[10]],"friendships":[[1,3],[2,3]]}' },
+  { label: 'Long run: 12 users', input: '{"n":10,"languages":[[5,9,4],[4,2],[2],[6,4],[3,2,7],[5,2,10],[6,5,10],[10,7],[8,3,7],[1,8,10],[7,9],[4,7]],"friendships":[[8,1],[3,6],[2,6],[3,4],[1,11],[2,1],[10,6],[7,5],[1,5],[8,1],[1,8],[3,8],[8,1],[6,11],[4,12],[12,3],[5,8],[10,7],[5,6],[5,6]]}' },
   ],
 }
 

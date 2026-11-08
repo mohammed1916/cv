@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 1', input: '{"word1":"cacb","word2":"cbba"}' },
     { label: 'Example 2', input: '{"word1":"ab","word2":"ab"}' },
     { label: 'No pair', input: '{"word1":"aa","word2":"bb"}' },
+  { label: 'Single letters', input: "{\"word1\":\"a\",\"word2\":\"a\"}" },
+  { label: 'Single letter mismatch', input: "{\"word1\":\"a\",\"word2\":\"b\"}" },
+  { label: 'Equal words', input: "{\"word1\":\"abab\",\"word2\":\"abab\"}" },
+  { label: 'Longest words', input: "{\"word1\":\"zzzzzz\",\"word2\":\"zyzyzy\"}" },
   ],
 }
 

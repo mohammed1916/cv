@@ -46,6 +46,10 @@ const definition = {
   complexity: 'O(n * m) in this teaching trace for clarity; SQL groups the self-join in one pass.',
   examples: [
     { label: 'Example', input: '{"Employees":[{"employee_id":1,"name":"Ava","reports_to":null,"age":40},{"employee_id":2,"name":"Ben","reports_to":1,"age":20},{"employee_id":3,"name":"Cy","reports_to":1,"age":21},{"employee_id":4,"name":"Dee","reports_to":2,"age":30},{"employee_id":5,"name":"Eli","reports_to":2,"age":33},{"employee_id":6,"name":"Fay","reports_to":null,"age":25}]}' },
+  { label: 'No employees', input: '{"Employees":[]}' },
+  { label: 'One employee, no manager', input: '{"Employees":[{"employee_id":1,"name":"Lia","reports_to":null,"age":50}]}' },
+  { label: 'Managers of the same age', input: '{"Employees":[{"employee_id":1,"name":"Ola","reports_to":null,"age":30},{"employee_id":2,"name":"Pim","reports_to":1,"age":30}]}' },
+  { label: 'Long run: 12 employees', input: '{"Employees":[{"employee_id":1,"name":"E1","reports_to":null,"age":57},{"employee_id":2,"name":"E2","reports_to":1,"age":50},{"employee_id":3,"name":"E3","reports_to":null,"age":57},{"employee_id":4,"name":"E4","reports_to":2,"age":23},{"employee_id":5,"name":"E5","reports_to":null,"age":28},{"employee_id":6,"name":"E6","reports_to":null,"age":42},{"employee_id":7,"name":"E7","reports_to":2,"age":33},{"employee_id":8,"name":"E8","reports_to":5,"age":29},{"employee_id":9,"name":"E9","reports_to":7,"age":52},{"employee_id":10,"name":"E10","reports_to":4,"age":29},{"employee_id":11,"name":"E11","reports_to":null,"age":37},{"employee_id":12,"name":"E12","reports_to":4,"age":48}]}' },
   ],
 }
 

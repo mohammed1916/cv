@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"dist":[1,3,2],"speed":4,"hours_before":2}' },
     { label: 'Example 2', input: '{"dist":[7,3,5,5],"speed":2,"hours_before":10}' },
+  { label: 'Single road', input: "{\"dist\":[3],\"speed\":1,\"hours_before\":3}" },
+  { label: 'Equal roads', input: "{\"dist\":[4,4,4],\"speed\":2,\"hours_before\":6}" },
+  { label: 'Largest values', input: "{\"dist\":[9,9,9,9,9],\"speed\":4,\"hours_before\":12}" },
+  { label: 'Long run: five roads', input: "{\"dist\":[6,1,5,1,4],\"speed\":3,\"hours_before\":10}" },
   ],
 }
 

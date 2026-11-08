@@ -32,6 +32,10 @@ export const phases = [
 export const examples = [
   { label: 'Pace fits', input: '{"candies":[4,2,6],"queries":[[0,3,2],[2,1,3],[1,0,2]]}' },
   { label: 'Too slow', input: '{"candies":[5,1],"queries":[[1,0,2]]}' },
+  { label: 'Single type', input: '{"candies":[1],"queries":[[0,0,1]]}' },
+  { label: 'Cap equals count', input: '{"candies":[3],"queries":[[0,0,3]]}' },
+  { label: 'Largest counts', input: '{"candies":[20,20],"queries":[[1,60,20]]}' },
+  { label: 'Long run: 10 types', input: '{"candies":[19,10,20,5,15,13,2,9,15,16],"queries":[[0,3,6],[8,12,8],[8,50,3],[1,47,3],[2,18,16],[7,12,8],[8,44,3],[5,23,19]]}' },
 ]
 
 export const complexity = 'O(n + q) time for n types and q queries, with prefix sums built once.'

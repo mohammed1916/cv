@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"a":"aba","b":"caa"}' },
     { label: 'Example 2', input: '{"a":"dabadd","b":"cda"}' },
+  { label: 'Single letters', input: '{"a":"a","b":"b"}' },
+  { label: 'Equal strings', input: '{"a":"abc","b":"abc"}' },
+  { label: 'Longest strings', input: '{"a":"abcdefghijklmnopqrst","b":"tsrqponmlkjihgfedcba"}' },
+  { label: 'Long run: 20 letters', input: '{"a":"eeaeabaeabebcadaddae","b":"eaceedaaacacddbcceca"}' },
   ],
 }
 

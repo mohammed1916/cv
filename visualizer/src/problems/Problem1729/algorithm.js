@@ -39,6 +39,10 @@ export const phases = [
 export const examples = [
   { label: 'Three users', input: '[{"user_id":7,"follower_id":3},{"user_id":2,"follower_id":5},{"user_id":7,"follower_id":4},{"user_id":2,"follower_id":8},{"user_id":9,"follower_id":5}]' },
   { label: 'One follower', input: '[{"user_id":4,"follower_id":1}]' },
+  { label: 'Duplicate follow row', input: '[{"user_id":3,"follower_id":1},{"user_id":3,"follower_id":1}]' },
+  { label: 'Two separate users', input: '[{"user_id":1,"follower_id":2},{"user_id":3,"follower_id":4}]' },
+  { label: 'Large ids', input: '[{"user_id":99999,"follower_id":1},{"user_id":99999,"follower_id":2}]' },
+  { label: 'Long run: 30 rows', input: '[{"user_id":8,"follower_id":2},{"user_id":6,"follower_id":9},{"user_id":6,"follower_id":5},{"user_id":5,"follower_id":9},{"user_id":1,"follower_id":11},{"user_id":3,"follower_id":10},{"user_id":5,"follower_id":7},{"user_id":7,"follower_id":5},{"user_id":5,"follower_id":8},{"user_id":6,"follower_id":11},{"user_id":4,"follower_id":9},{"user_id":2,"follower_id":3},{"user_id":8,"follower_id":2},{"user_id":2,"follower_id":11},{"user_id":6,"follower_id":7},{"user_id":3,"follower_id":4},{"user_id":8,"follower_id":10},{"user_id":1,"follower_id":2},{"user_id":6,"follower_id":5},{"user_id":4,"follower_id":11},{"user_id":6,"follower_id":4},{"user_id":1,"follower_id":2},{"user_id":3,"follower_id":8},{"user_id":4,"follower_id":5},{"user_id":3,"follower_id":9},{"user_id":6,"follower_id":10},{"user_id":1,"follower_id":11},{"user_id":6,"follower_id":7},{"user_id":2,"follower_id":7},{"user_id":3,"follower_id":12}]' },
 ]
 
 export const complexity = 'O(n + k log k) time for n follow rows and k distinct users. Space is O(k).'

@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"prime_factors":3}' },
     { label: 'Example 2', input: '{"prime_factors":8}' },
+  { label: 'Smallest input', input: "{\"prime_factors\":1}" },
+  { label: 'Two factors', input: "{\"prime_factors\":2}" },
+  { label: 'Long run: 60 factors', input: "{\"prime_factors\":60}" },
   ],
 }
 

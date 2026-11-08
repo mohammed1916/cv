@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"events":[[1,2,4],[3,4,3],[2,3,1]],"k":2}' },
     { label: 'Example 2', input: '{"events":[[1,1,1],[2,2,2],[3,3,3],[4,4,4]],"k":3}' },
+  { label: 'Single event', input: "{\"events\":[[1,1,5]],\"k\":1}" },
+  { label: 'Identical events', input: "{\"events\":[[2,4,7],[2,4,7],[2,4,7]],\"k\":2}" },
+  { label: 'Full range, largest values', input: "{\"events\":[[1,20,1000000],[1,20,1000000],[1,20,1000000],[1,20,1000000]],\"k\":4}" },
+  { label: 'Long run: 8 events', input: "{\"events\":[[8,12,199138],[10,12,913813],[11,12,780256],[5,8,180836],[11,14,877538],[3,4,182826],[12,17,147654],[2,2,335605]],\"k\":4}" },
   ],
 }
 

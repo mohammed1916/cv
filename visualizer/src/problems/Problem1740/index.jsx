@@ -16,6 +16,10 @@ const definition = {
     { label: "Siblings", input: '{"root":[3,5,1,6,2,0,8,null,null,7,4],"p":7,"q":4}' },
     { label: "Across the root", input: '{"root":[3,5,1,6,2,0,8,null,null,7,4],"p":7,"q":1}' },
     { label: "Same node", input: '{"root":[3,5,1,6,2,0,8,null,null,7,4],"p":6,"q":6}' },
+  { label: 'Single node', input: '{"root":[5],"p":5,"q":5}' },
+  { label: 'Root and child', input: '{"root":[1,2],"p":1,"q":2}' },
+  { label: 'Left chain under the root', input: '{"root":[1,2,3,4],"p":4,"q":3}' },
+  { label: 'Long run: 15 nodes', input: '{"root":[12,10,7,9,14,8,4,5,3,6,11,0,2,1,13],"p":1,"q":5}' },
   ],
 };
 

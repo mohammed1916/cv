@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":5,"restrictions":[[2,1],[4,1]]}' },
     { label: 'No caps', input: '{"n":6,"restrictions":[]}' },
+  { label: 'Smallest n', input: "{\"n\":2,\"restrictions\":[]}" },
+  { label: 'Equal caps', input: "{\"n\":4,\"restrictions\":[[2,3],[3,3]]}" },
+  { label: 'Caps at the maximum', input: "{\"n\":8,\"restrictions\":[[2,10],[3,10],[4,10],[5,10],[6,10],[7,10],[8,10]]}" },
+  { label: 'Long run: n = 8, varied caps', input: "{\"n\":8,\"restrictions\":[[2,1],[3,4],[4,3],[5,6],[6,5],[7,1],[8,0]]}" },
   ],
 }
 

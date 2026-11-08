@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"rooms":[[2,2],[1,2],[3,2]],"queries":[[3,1],[3,3],[5,2]]}' },
     { label: 'Example 2', input: '{"rooms":[[4,1],[6,1]],"queries":[[5,1],[5,2]]}' },
+  { label: 'Single room', input: "{\"rooms\":[[1,5]],\"queries\":[[1,5]]}" },
+  { label: 'Equal room sizes', input: "{\"rooms\":[[2,4],[5,4]],\"queries\":[[3,4]]}" },
+  { label: 'Largest values', input: "{\"rooms\":[[1,10],[2,10],[3,10],[4,10],[5,10],[6,10]],\"queries\":[[10,10],[10,10],[10,10],[10,10],[10,10],[10,10]]}" },
+  { label: 'Long run: 6 rooms, 6 queries', input: "{\"rooms\":[[1,7],[2,6],[3,7],[4,3],[5,1],[6,5]],\"queries\":[[2,6],[5,6],[5,4],[5,5],[9,9],[8,7]]}" },
   ],
 }
 

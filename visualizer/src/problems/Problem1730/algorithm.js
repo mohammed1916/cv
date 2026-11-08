@@ -55,6 +55,10 @@ export const phases = [
 export const examples = [
   { label: 'Food around a wall', input: '["*O#","XXO","O#O"]' },
   { label: 'Blocked off', input: '["*X#","XXO","OOO"]' },
+  { label: 'Single cell', input: '["*"]' },
+  { label: 'Single row, mixed', input: '["*O#X"]' },
+  { label: 'Largest grid, all open', input: '["*OOOOOOO","OOOOOOOO","OOOOOOOO","OOOOOOOO","OOOOOOOO","OOOOOOOO","OOOOOOOO","OOOOOOOO"]' },
+  { label: 'Long run: 8 by 8 grid', input: '["*OX#XOOX","X##XXXO#","XX##OO#O","OX#XXO#X","#XX#XOOO","XO###X#O","XO#XO#X#","OOXXXXXO"]' },
 ]
 
 export const complexity = 'O(m * n) time and O(m * n) space for an m by n grid. The visual caps the grid at 8 by 8.'

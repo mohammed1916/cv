@@ -45,6 +45,10 @@ export const phases = [
 export const examples = [
   { label: 'Five numbers', input: '[2,3,6,1]' },
   { label: 'Three numbers', input: '[6,5]' },
+  { label: 'Smallest array', input: '[1,2]' },
+  { label: 'Repeated values', input: '[7,7,7,7]' },
+  { label: 'Largest values', input: '[31,31]' },
+  { label: 'Long run: 18 numbers', input: '[29,18,4,27,2,5,24,8,20,7,18,7,16,11,29,23,9,21]' },
 ]
 
 export const complexity = 'O(n) time and O(1) extra space for n numbers (n is odd).'

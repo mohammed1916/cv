@@ -16,6 +16,10 @@ const definition = {
     { label: "Value 2 repeats", input: "[1,2,3,2]" },
     { label: "Mixed repeats", input: "[1,1,1,2,3]" },
     { label: "All repeat", input: "[4,4]" },
+  { label: 'Single value', input: "[9]" },
+  { label: 'Twelve equal values', input: "[6,6,6,6,6,6,6,6,6,6,6,6]" },
+  { label: 'Twelve distinct values', input: "[1,2,3,4,5,6,7,8,9,10,11,12]" },
+  { label: 'Long run: 12 values', input: "[3,3,3,3,3,3,3,3,3,3,3,3]" },
   ],
 };
 

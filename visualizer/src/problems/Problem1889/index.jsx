@@ -17,6 +17,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"packages":[2,3,5],"boxes":[[4,8],[2,8]]}' },
     { label: 'Example 2', input: '{"packages":[3,5,8,10,11,12],"boxes":[[12],[11,9],[10,5,14]]}' },
+  { label: 'Single package, exact box', input: "{\"packages\":[5],\"boxes\":[[5]]}" },
+  { label: 'Equal sizes', input: "{\"packages\":[4,4],\"boxes\":[[4,4]]}" },
+  { label: 'No box is large enough', input: "{\"packages\":[5],\"boxes\":[[4]]}" },
+  { label: 'Largest sizes', input: "{\"packages\":[20,20,20,20,20,20],\"boxes\":[[20,20,20,20],[20,20,20,20],[20,20,20,20]]}" },
+  { label: 'Long run: six packages', input: "{\"packages\":[7,12,20,1,6,9],\"boxes\":[[7,2,9,13],[14,7,17,14],[6,7,18,17]]}" },
   ],
 }
 

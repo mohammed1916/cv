@@ -33,6 +33,10 @@ export const phases = [
 export const examples = [
   { label: 'Three steps', input: '{"encoded":[5,2,7],"first":4}' },
   { label: 'Single step', input: '{"encoded":[6],"first":1}' },
+  { label: 'Single value', input: '{"encoded":[3],"first":0}' },
+  { label: 'Zero values', input: '{"encoded":[0,0],"first":0}' },
+  { label: 'Largest values', input: '{"encoded":[100000,100000,100000],"first":100000}' },
+  { label: 'Long run: 20 values', input: '{"encoded":[90266,28904,51776,33601,70604,68450,72742,42313,49781,39321,20484,61450,81516,1142,72864,19853,13297,45621,94887,90753],"first":19447}' },
 ]
 
 export const complexity = 'O(n) time and O(n) space for an encoded array of length n.'

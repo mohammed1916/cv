@@ -61,6 +61,10 @@ export const phases = [
 export const examples = [
   { label: 'Two groups', input: '{"source":[5,1,2,4,3],"target":[1,5,4,2,3],"allowedSwaps":[[0,1],[1,2],[3,4]]}' },
   { label: 'No swaps', input: '{"source":[1,2],"target":[2,1],"allowedSwaps":[]}' },
+  { label: 'Single position', input: '{"source":[4],"target":[4],"allowedSwaps":[]}' },
+  { label: 'Impossible without swaps', input: '{"source":[1],"target":[2],"allowedSwaps":[]}' },
+  { label: 'Equal values in one group', input: '{"source":[3,3,3],"target":[3,3,3],"allowedSwaps":[[0,2]]}' },
+  { label: 'Long run: 12 positions', input: '{"source":[9,5,8,4,1,2,6,3,5,5,2,9],"target":[6,4,2,1,3,5,5,5,2,9,9,8],"allowedSwaps":[[9,10],[1,2],[6,8],[0,2],[0,6],[0,1],[2,7],[3,7],[1,10],[0,7]]}' },
 ]
 
 export const complexity = 'O(n + s * alpha(n)) time for n positions and s swaps, plus the counting inside each group. Space is O(n).'

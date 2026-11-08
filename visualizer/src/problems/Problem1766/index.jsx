@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[2,3,3,2],"edges":[[0,1],[1,2],[1,3]]}' },
     { label: 'Example 2', input: '{"nums":[5,6,10,2,3,6,15],"edges":[[0,1],[0,2],[1,3],[1,4],[2,5],[2,6]]}' },
+  { label: 'Single node', input: "{\"nums\":[7],\"edges\":[]}" },
+  { label: 'Equal values on a path', input: "{\"nums\":[6,6,6],\"edges\":[[0,1],[1,2]]}" },
+  { label: 'Largest values on a path', input: "{\"nums\":[50,1,50,1,50,1,50,1,50,1,50,1],\"edges\":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11]]}" },
+  { label: 'Long run: 12 nodes', input: "{\"nums\":[41,27,19,22,20,23,22,3,16,39,25,15],\"edges\":[[0,1],[1,2],[0,3],[1,4],[4,5],[3,6],[4,7],[5,8],[6,9],[7,10],[9,11]]}" },
   ],
 }
 

@@ -6,7 +6,7 @@ import { buildTrace, parseInput, code, sql, python, phases } from './algorithm'
 const examples = [{
   label: 'Sample',
   input: '{"Days":[{"day":"2020-11-03"},{"day":"2021-01-01"},{"day":"2000-02-29"}]}',
-}]
+}, { label: 'Leap day', input: "{\"Days\":[{\"day\":\"2020-02-29\"}]}" }, { label: 'Repeated dates', input: "{\"Days\":[{\"day\":\"2021-07-04\"},{\"day\":\"2021-07-04\"}]}" }, { label: 'Range ends', input: "{\"Days\":[{\"day\":\"1970-01-01\"},{\"day\":\"2099-12-31\"}]}" }, { label: 'Long run: 12 dates', input: "{\"Days\":[{\"day\":\"2010-05-22\"},{\"day\":\"2009-02-27\"},{\"day\":\"2016-08-14\"},{\"day\":\"2029-02-02\"},{\"day\":\"2007-01-13\"},{\"day\":\"2008-05-18\"},{\"day\":\"2026-08-31\"},{\"day\":\"2004-07-22\"},{\"day\":\"2014-12-17\"},{\"day\":\"2001-02-05\"},{\"day\":\"2008-06-27\"},{\"day\":\"2028-11-28\"}]}" }]
 
 const definition = {
   number: meta.number,

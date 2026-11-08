@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Six groups', input: '{"batchSize":3,"groups":[1,2,3,4,5,6]}' },
     { label: 'Eight groups', input: '{"batchSize":4,"groups":[1,3,2,5,2,2,1,6]}' },
+  { label: 'Single group, batch of one', input: "{\"batchSize\":1,\"groups\":[9]}" },
+  { label: 'Equal groups', input: "{\"batchSize\":2,\"groups\":[3,3,3,3]}" },
+  { label: 'Largest batch and groups', input: "{\"batchSize\":4,\"groups\":[9,9,9,9,9,9,9,9]}" },
+  { label: 'Long run: 8 groups', input: "{\"batchSize\":3,\"groups\":[8,2,9,6,4,8,3,1]}" },
   ],
 }
 

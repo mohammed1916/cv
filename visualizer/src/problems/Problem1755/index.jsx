@@ -19,6 +19,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[5,-7,3,5],"goal":6}' },
     { label: 'Example 2', input: '{"nums":[7,-9,15,-2],"goal":-5}' },
+  { label: 'Single number', input: "{\"nums\":[5],\"goal\":5}" },
+  { label: 'Equal numbers', input: "{\"nums\":[3,3,3,3],\"goal\":6}" },
+  { label: 'Extreme values', input: "{\"nums\":[20,20,20,20,20,20,20,20],\"goal\":40}" },
+  { label: 'Long run: 8 numbers', input: "{\"nums\":[10,17,-5,6,-10,9,-2,4],\"goal\":32}" },
   ],
 }
 

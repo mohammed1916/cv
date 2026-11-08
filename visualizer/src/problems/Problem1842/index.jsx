@@ -16,6 +16,10 @@ const definition = {
     { label: "Even length", input: "1221" },
     { label: "Odd length", input: "12321" },
     { label: "No larger", input: "11" },
+  { label: 'Single digit', input: "7" },
+  { label: 'All zeros', input: "0000" },
+  { label: 'Ten digits, largest', input: "9999999999" },
+  { label: 'Long run: 10 digits', input: "6806336086" },
   ],
 };
 

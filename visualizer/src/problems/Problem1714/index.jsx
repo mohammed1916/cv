@@ -12,6 +12,10 @@ const definition = {
   examples: [
     { label: 'Mixed strides', input: '{"nums":[4,8,1,9,3,6],"queries":[[0,2],[1,3],[5,1]]}' },
     { label: 'Single element', input: '{"nums":[7],"queries":[[0,1]]}' },
+  { label: 'Single step', input: '{"nums":[3,5],"queries":[[0,1]]}' },
+  { label: 'Step equals length', input: '{"nums":[2,4,6],"queries":[[1,3]]}' },
+  { label: 'Largest values', input: '{"nums":[100,100,100,100],"queries":[[0,12]]}' },
+  { label: 'Long run: 12 numbers', input: '{"nums":[90,75,41,11,71,20,14,93,44,4,48,51],"queries":[[11,4],[4,5],[2,5],[1,8],[0,3],[2,2]]}' },
   ],
 }
 

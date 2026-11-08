@@ -63,6 +63,10 @@ export const phases = [
 export const examples = [
   { label: 'Path blocked by a long edge', input: '{"n":4,"edgeList":[[0,1,3],[1,2,7],[2,3,2],[0,3,9]],"queries":[[0,2,8],[1,3,3],[0,3,10]]}' },
   { label: 'Two components', input: '{"n":4,"edgeList":[[0,1,2],[2,3,4]],"queries":[[0,1,3],[0,3,9]]}' },
+  { label: 'Limit equals the edge', input: '{"n":2,"edgeList":[[0,1,6]],"queries":[[0,1,6]]}' },
+  { label: 'Unreachable target', input: '{"n":3,"edgeList":[[0,1,2]],"queries":[[0,2,9]]}' },
+  { label: 'Parallel edges', input: '{"n":3,"edgeList":[[0,1,4],[0,1,2]],"queries":[[0,1,3]]}' },
+  { label: 'Long run: 15 edges', input: '{"n":10,"edgeList":[[9,6,6],[4,3,14],[4,0,11],[6,0,8],[7,8,13],[0,7,11],[1,4,20],[8,9,18],[4,9,5],[0,6,8],[3,4,3],[7,0,9],[3,4,18],[1,0,17],[3,4,6]],"queries":[[6,5,14],[8,9,18],[4,8,25],[7,4,10],[7,8,19],[5,0,10],[2,0,3],[1,2,18]]}' },
 ]
 
 export const complexity = 'O(E log E) to build the forest, then O(n) per query for the walk in this visual. A binary-lifting table would answer queries in O(log n).'

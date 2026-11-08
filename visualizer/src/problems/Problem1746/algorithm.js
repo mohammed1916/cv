@@ -43,6 +43,10 @@ export const phases = [
 export const examples = [
   { label: 'Negative to positive', input: '[3,-5,2,-1]' },
   { label: 'Small negatives', input: '[-2,4,-3,0,1]' },
+  { label: 'Single element', input: "[-3]" },
+  { label: 'Equal values', input: "[-2,-2,-2]" },
+  { label: 'Alternating extremes', input: "[100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100]" },
+  { label: 'Long run: 20 values', input: "[-53,-53,-53,-53,-53,-53,-53,-53,-53,-53,-53,-53,-53,-53,-53,-53,-53,-53,-53,-53]" },
 ]
 
 export const complexity = 'O(n) time and O(1) extra space for n numbers.'

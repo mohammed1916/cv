@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"jobs":[3,2,3],"k":3}' },
     { label: 'Example 2', input: '{"jobs":[1,2,4,7,8],"k":2}' },
+  { label: 'Single job', input: '{"jobs":[5],"k":1}' },
+  { label: 'Equal jobs', input: '{"jobs":[4,4,4,4],"k":2}' },
+  { label: 'Longest job times', input: '{"jobs":[60,60,60,60,60,60,60,60],"k":3}' },
+  { label: 'Long run: 8 jobs', input: '{"jobs":[55,34,35,27,43,56,2,11],"k":3}' },
   ],
 }
 

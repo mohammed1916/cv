@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Two queries', input: '{"queries":[[2,6],[5,1]]}' },
     { label: 'Three queries', input: '{"queries":[[2,6],[5,1],[3,4]]}' },
+  { label: 'Single query', input: '{"queries":[[1,1]]}' },
+  { label: 'Largest n and k', input: '{"queries":[[6,20]]}' },
+  { label: 'Mixed largest queries', input: '{"queries":[[6,1],[5,20],[6,10],[4,4]]}' },
   ],
 }
 

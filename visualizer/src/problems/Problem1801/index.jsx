@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"orders":[[10,5,0],[15,2,1],[25,1,1],[30,4,0]]}' },
     { label: 'Example 2', input: '{"orders":[[7,1000000000,1],[15,3,0],[5,999999995,0],[5,1,1]]}' },
+  { label: 'Single buy order', input: "{\"orders\":[[5,3,0]]}" },
+  { label: 'Equal prices match', input: "{\"orders\":[[10,4,0],[10,4,1]]}" },
+  { label: 'Largest prices and amounts', input: "{\"orders\":[[1000000000,1000000000,1],[1000000000,1000000000,0]]}" },
+  { label: 'Long run: 8 orders', input: "{\"orders\":[[22,8,1],[39,17,1],[14,7,1],[48,16,1],[39,9,1],[15,2,0],[40,12,1],[18,13,1]]}" },
   ],
 }
 

@@ -170,6 +170,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"grid":[[1,3,1],[0,2,9],[4,1,1]],"target":[2,2]}' },
     { label: 'Walled', input: '{"grid":[[1,0],[0,5]],"target":[1,1]}' },
+  { label: 'Single open cell', input: "{\"grid\":[[5]],\"target\":[0,0]}" },
+  { label: 'Equal costs', input: "{\"grid\":[[1,1],[1,1]],\"target\":[1,1]}" },
+  { label: 'Largest costs', input: "{\"grid\":[[9,9,9,9,9,9],[9,9,9,9,9,9],[9,9,9,9,9,9],[9,9,9,9,9,9],[9,9,9,9,9,9],[9,9,9,9,9,9]],\"target\":[5,5]}" },
+  { label: 'Long run: six by six with walls', input: "{\"grid\":[[1,2,1,0,9,3],[7,8,4,2,6,6],[8,9,5,5,0,0],[7,3,5,9,5,2],[3,2,0,6,6,3],[4,7,5,7,2,1]],\"target\":[5,5]}" },
   ],
 }
 

@@ -54,6 +54,10 @@ export const phases = [
 export const examples = [
   { label: 'Ba worth more', input: '{"s":"abbbaaba","x":4,"y":6}' },
   { label: 'Ab worth more', input: '{"s":"aabbab","x":5,"y":2}' },
+  { label: 'Single a', input: '{"s":"a","x":3,"y":1}' },
+  { label: 'Equal scores', input: '{"s":"ab","x":2,"y":2}' },
+  { label: 'No pair to remove', input: '{"s":"aaaa","x":9,"y":1}' },
+  { label: 'Long run: 30 letters', input: '{"s":"baaabaabbabbbaabbaaaabaabbabba","x":5000,"y":7000}' },
 ]
 
 export const complexity = 'O(n) time and O(n) space for a string of length n.'

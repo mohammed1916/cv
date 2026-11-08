@@ -36,6 +36,10 @@ export const phases = [
 export const examples = [
   { label: 'Down then up', input: '[-3,4,-1,2,-5]' },
   { label: 'Only down', input: '[-2,-4]' },
+  { label: 'Single gain', input: '[5]' },
+  { label: 'Zero gains', input: '[0,0,0]' },
+  { label: 'Extreme gains', input: '[100,-100,100,-100]' },
+  { label: 'Long run: 40 gains', input: '[82,-25,47,56,41,32,80,-17,21,-84,30,67,8,-13,-6,59,95,28,6,10,-3,-28,-52,-10,-31,-4,-97,-63,-77,-37,-86,39,66,30,-52,66,-61,76,-83,-34]' },
 ]
 
 export const complexity = 'O(n) time and O(1) extra space for n gains.'

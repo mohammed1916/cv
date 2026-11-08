@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'One way', input: '{"pairs":[[1,2],[2,3]]}' },
     { label: 'Two ways', input: '{"pairs":[[1,2],[2,3],[1,3]]}' },
+  { label: 'Single pair', input: '{"pairs":[[1,2]]}' },
+  { label: 'Star around one value', input: '{"pairs":[[1,2],[1,3],[1,4]]}' },
+  { label: 'Largest values', input: '{"pairs":[[499,500],[1,500]]}' },
+  { label: 'Long run: 14 pairs', input: '{"pairs":[[1,3],[2,8],[3,7],[6,8],[1,4],[1,5],[2,4],[4,7],[3,5],[4,5],[1,6],[2,7],[2,5],[5,8]]}' },
   ],
 }
 

@@ -43,6 +43,9 @@ export const examples = [
   { label: 'All hidden', input: '"??:??"' },
   { label: 'Hour forced by tens', input: '"1?:2?"' },
   { label: 'Zero tens', input: '"0?:??"' },
+  { label: 'Largest time, all fixed', input: '"23:59"' },
+  { label: 'Minutes forced by tens', input: '"??:5?"' },
+  { label: 'Hour starts with two', input: '"2?:??"' },
 ]
 
 export const complexity = 'O(1) time and O(1) space: the clock has five characters.'
