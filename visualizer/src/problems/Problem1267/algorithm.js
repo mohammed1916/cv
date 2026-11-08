@@ -16,21 +16,21 @@ export function parseInput(text) {
     grid[0].length < 1 ||
     grid[0].length > 6
   ) {
-    throw new Error('grid must be at most 6 by 6.');
+    throw new Error('grid must be between 1x1 and 6x6.');
   }
 
-  const n = grid[0].length;
+  const cols = grid[0].length;
 
   if (
     grid.some(
       (row) =>
         !Array.isArray(row) ||
-        row.length !== n ||
-        row.some((v) => v !== 0 && v !== 1)
+        row.length !== cols ||
+        row.some((value) => value !== 0 && value !== 1)
     )
   ) {
     throw new Error(
-      'grid must be rectangular, with only 0 and 1 values.'
+      'grid must be rectangular, containing only 0 and 1.'
     );
   }
 
@@ -77,9 +77,10 @@ export function buildTrace(input) {
 
   const frames = [];
   const counted = [];
+
   let total = 0;
 
-  function addFrame({
+  function pushFrame({
     phase,
     stage,
     activeLine,
@@ -88,6 +89,7 @@ export function buildTrace(input) {
     scanAxis = null,
     scanIndex = null,
     scanValue = null,
+    previousSum = null,
     runningSum = null,
     message,
   }) {
@@ -100,56 +102,58 @@ export function buildTrace(input) {
       scanAxis,
       scanIndex,
       scanValue,
+      previousSum,
       runningSum,
       rowCount: [...rowCount],
       colCount: [...colCount],
-      counted: counted.map((p) => ({ ...p })),
-      total,
+      counted: counted.map((point) => ({ ...point })),
       rows,
       cols,
+      total,
       message,
     });
   }
 
-  addFrame({
+  pushFrame({
     phase: 'start',
     stage: 'input',
     activeLine: 1,
     pythonLine: 1,
     message:
-      'Start with the original grid. Each 1 represents a server; each 0 is an empty cell.',
+      'Inspect the input grid. A value of 1 represents a server.',
   });
 
-  addFrame({
+  pushFrame({
     phase: 'dimensions',
     stage: 'dimensions',
     activeLine: L('determine rows and columns'),
     pythonLine: P('rows, cols ='),
-    message:
-      `The grid has ${rows} row${rows === 1 ? '' : 's'} ` +
-      `and ${cols} column${cols === 1 ? '' : 's'}.`,
+    message: `The grid has ${rows} rows and ${cols} columns.`,
   });
 
-  // Build row_count one cell at a time.
+  // Construct row_count, one row at a time.
   for (let r = 0; r < rows; r++) {
     let sum = 0;
 
-    addFrame({
-      phase: 'row-scan',
+    pushFrame({
+      phase: 'row-begin',
       stage: 'rows',
       activeLine: L('count the servers in each row'),
       pythonLine: P('row_count ='),
       scanAxis: 'row',
       scanIndex: r,
+      previousSum: 0,
       runningSum: 0,
-      message: `Begin constructing row_count[${r}].`,
+      message: `Begin scanning row ${r}. Running sum = 0.`,
     });
 
     for (let c = 0; c < cols; c++) {
-      const value = grid[r][c];
-      sum += value;
+      const previousSum = sum;
+      const scanValue = grid[r][c];
 
-      addFrame({
+      sum += scanValue;
+
+      pushFrame({
         phase: 'row-scan',
         stage: 'rows',
         activeLine: L('count the servers in each row'),
@@ -157,50 +161,53 @@ export function buildTrace(input) {
         cell: [r, c],
         scanAxis: 'row',
         scanIndex: r,
-        scanValue: value,
+        scanValue,
+        previousSum,
         runningSum: sum,
         message:
-          `Row ${r}: read grid[${r}][${c}] = ${value}. ` +
-          `Running sum = ${sum}.`,
+          `Read grid[${r}][${c}] = ${scanValue}. ` +
+          `${previousSum} + ${scanValue} = ${sum}.`,
       });
     }
 
     rowCount[r] = sum;
 
-    addFrame({
+    pushFrame({
       phase: 'row-commit',
       stage: 'rows',
       activeLine: L('count the servers in each row'),
       pythonLine: P('row_count ='),
       scanAxis: 'row',
       scanIndex: r,
+      previousSum: sum,
       runningSum: sum,
-      message:
-        `Store row_count[${r}] = ${sum}. ` +
-        'This row will not need to be counted again.',
+      message: `Store row_count[${r}] = ${sum}.`,
     });
   }
 
-  // Build col_count one cell at a time.
+  // Construct col_count, one column at a time.
   for (let c = 0; c < cols; c++) {
     let sum = 0;
 
-    addFrame({
-      phase: 'col-scan',
+    pushFrame({
+      phase: 'col-begin',
       stage: 'columns',
       activeLine: L('count the servers in each column'),
       pythonLine: P('col_count ='),
       scanAxis: 'column',
       scanIndex: c,
+      previousSum: 0,
       runningSum: 0,
-      message: `Begin constructing col_count[${c}].`,
+      message: `Begin scanning column ${c}. Running sum = 0.`,
     });
 
     for (let r = 0; r < rows; r++) {
-      const value = grid[r][c];
-      sum += value;
+      const previousSum = sum;
+      const scanValue = grid[r][c];
 
-      addFrame({
+      sum += scanValue;
+
+      pushFrame({
         phase: 'col-scan',
         stage: 'columns',
         activeLine: L('count the servers in each column'),
@@ -208,52 +215,52 @@ export function buildTrace(input) {
         cell: [r, c],
         scanAxis: 'column',
         scanIndex: c,
-        scanValue: value,
+        scanValue,
+        previousSum,
         runningSum: sum,
         message:
-          `Column ${c}: read grid[${r}][${c}] = ${value}. ` +
-          `Running sum = ${sum}.`,
+          `Read grid[${r}][${c}] = ${scanValue}. ` +
+          `${previousSum} + ${scanValue} = ${sum}.`,
       });
     }
 
     colCount[c] = sum;
 
-    addFrame({
+    pushFrame({
       phase: 'col-commit',
       stage: 'columns',
       activeLine: L('count the servers in each column'),
       pythonLine: P('col_count ='),
       scanAxis: 'column',
       scanIndex: c,
+      previousSum: sum,
       runningSum: sum,
-      message:
-        `Store col_count[${c}] = ${sum}. ` +
-        'This column will not need to be counted again.',
+      message: `Store col_count[${c}] = ${sum}.`,
     });
   }
 
-  addFrame({
+  pushFrame({
     phase: 'initialize',
     stage: 'initialize',
     activeLine: L('set total to 0'),
     pythonLine: P('total = 0'),
     message:
-      'Both count arrays are ready. Initialize total = 0.',
+      'Both count arrays are ready. Initialize total to zero.',
   });
 
-  // Check every cell using the precomputed counts.
+  // Reuse the precomputed information.
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
       const isServer = grid[r][c] === 1;
 
-      addFrame({
+      pushFrame({
         phase: 'inspect',
         stage: 'check',
         activeLine: L('for each cell in the grid'),
-        pythonLine: P('if grid[r][c] == 1'),
+        pythonLine: P('for c in range(cols)'),
         cell: [r, c],
         message: isServer
-          ? `Inspect server (${r}, ${c}). Look up its row and column counts.`
+          ? `Inspect server (${r}, ${c}).`
           : `Cell (${r}, ${c}) is empty. Skip it.`,
       });
 
@@ -262,52 +269,54 @@ export function buildTrace(input) {
       const sharesRow = rowCount[r] > 1;
       const sharesColumn = colCount[c] > 1;
 
-      addFrame({
+      pushFrame({
         phase: 'compare',
         stage: 'check',
         activeLine: L('if the cell holds a server'),
         pythonLine: P('if grid[r][c] == 1'),
         cell: [r, c],
         message:
-          `row_count[${r}] = ${rowCount[r]}, ` +
+          `row_count[${r}] = ${rowCount[r]} and ` +
           `col_count[${c}] = ${colCount[c]}. ` +
-          `Communication = ${sharesRow} OR ${sharesColumn}.`,
+          `${sharesRow} OR ${sharesColumn} = ` +
+          `${sharesRow || sharesColumn}.`,
       });
 
       if (sharesRow || sharesColumn) {
-        total += 1;
+        total++;
         counted.push({ row: r, col: c });
 
-        addFrame({
+        pushFrame({
           phase: 'count',
           stage: 'check',
           activeLine: L('add one to total'),
           pythonLine: P('total += 1'),
           cell: [r, c],
           message:
-            `Server (${r}, ${c}) can communicate. ` +
+            `Server (${r}, ${c}) communicates. ` +
             `Increment total to ${total}.`,
         });
       } else {
-        addFrame({
+        pushFrame({
           phase: 'skip',
           stage: 'check',
           activeLine: L('if the cell holds a server'),
           pythonLine: P('if grid[r][c] == 1'),
           cell: [r, c],
           message:
-            `Server (${r}, ${c}) is alone in both its row and column.`,
+            `Server (${r}, ${c}) is isolated. ` +
+            'Neither count exceeds one.',
         });
       }
     }
   }
 
-  addFrame({
+  pushFrame({
     phase: 'done',
     stage: 'done',
     activeLine: L('return total'),
     pythonLine: P('return total'),
-    message: `${total} servers communicate.`,
+    message: `${total} servers can communicate.`,
   });
 
   return { input, result: total, frames };
