@@ -23,6 +23,10 @@ const definition = {
     { label: "Negative values", input: "[-2,0,5]" },
     { label: "Single node", input: "[9]" },
     { label: "Empty list", input: "[]" },
+    { label: 'Single zero', input: '[0]' },
+    { label: 'Two equal values', input: '[5,5]' },
+    { label: 'Ten values at the limit', input: '[-99,99,0,-99,99,0,5,5,-1,1]' },
+    { label: 'Long run: ten generated values', input: '[37,-75,53,49,-32,46,-85,6,11,-66]' },
   ],
 };
 

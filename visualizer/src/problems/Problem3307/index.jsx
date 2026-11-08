@@ -20,6 +20,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"k": 7, "operations": [1, 0, 1]}' },
     { label: 'Example 2', input: '{"k": 11, "operations": [1, 1, 0, 1]}' },
+    { label: 'Single operation', input: '{"k":1,"operations":[0]}' },
+    { label: 'Last position after one operation', input: '{"k":2,"operations":[1]}' },
+    { label: 'Largest allowed k over 47 operations', input: '{"k":100000000000000,"operations":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]}' },
+    { label: 'Long run: 100 operations', input: '{"k":987654321,"operations":[0,0,1,1,0,0,0,1,1,0,1,0,0,0,0,0,1,1,0,0,0,1,1,1,1,1,0,0,0,1,1,0,1,1,1,1,1,1,1,0,1,1,1,0,0,1,0,0,1,1,1,1,0,0,0,0,0,0,1,1,1,0,1,0,0,1,1,0,0,1,1,1,1,1,0,0,1,1,1,0,1,1,1,0,1,1,1,1,0,0,1,0,0,0,0,1,0,1,0,1]}' },
   ],
 }
 

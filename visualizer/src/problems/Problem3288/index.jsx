@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Invented staircase', input: '{"coordinates":[[1,4],[3,1],[6,2],[2,6],[8,8],[5,5]],"k":5}' },
     { label: 'Invented pair', input: '{"coordinates":[[2,1],[7,0],[5,6]],"k":1}' },
+    { label: 'Single point', input: '{"coordinates":[[5,5]],"k":0}' },
+    { label: 'Equal distances tie', input: '{"coordinates":[[0,0],[3,4],[4,3]],"k":0}' },
+    { label: 'Corners and centre', input: '{"coordinates":[[0,0],[100,100],[100,0],[0,100],[50,50]],"k":4}' },
+    { label: 'Long run: ten generated points', input: '{"coordinates":[[49,85],[64,93],[64,76],[5,33],[26,53],[73,66],[27,21],[32,31],[44,45],[55,71]],"k":9}' },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":5,"queries":[[2,4],[0,2],[0,4]]}' },
     { label: 'Two roads', input: '{"n":4,"queries":[[0,3],[1,3]]}' },
+    { label: 'Smallest graph', input: '{"n":3,"queries":[[0,2]]}' },
+    { label: 'Full range', input: '{"n":12,"queries":[[0,11]]}' },
+    { label: 'Two far queries', input: '{"n":4,"queries":[[0,2],[1,3]]}' },
+    { label: 'Long run: 8 queries on 12 cities', input: '{"n":12,"queries":[[2,9],[1,3],[6,9],[1,6],[0,8],[1,11],[2,8],[0,11]]}' },
   ],
 }
 

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"num1":452,"num2":61,"num3":7}' },
     { label: 'Leading zeros', input: '{"num1":9,"num2":999,"num3":42}' },
+    { label: 'Single digit ones', input: '{"num1":1,"num2":1,"num3":1}' },
+    { label: 'Equal numbers', input: '{"num1":1234,"num2":1234,"num3":1234}' },
+    { label: 'Largest values', input: '{"num1":9999,"num2":9000,"num3":9999}' },
+    { label: 'Zero-padded pattern', input: '{"num1":10,"num2":100,"num3":1000}' },
   ],
 }
 

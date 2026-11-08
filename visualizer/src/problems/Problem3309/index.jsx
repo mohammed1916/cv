@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[1,2,3]' },
     { label: 'Example 2', input: '[1,1,1]' },
+    { label: 'Largest allowed values', input: '[127,127,127]' },
+    { label: 'Mixed digit counts', input: '[9,90,12]' },
+    { label: 'Equal values', input: '[6,6,6]' },
   ],
 }
 

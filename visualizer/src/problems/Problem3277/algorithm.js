@@ -23,21 +23,21 @@ export function buildTrace({ nums, queries }) {
   for (let i = 0; i < n; i++) {
     score[i][i] = nums[i]
     best[i][i] = nums[i]
-    frames.push({ pythonLine: 4, phase: 'single', activeLine: L('score of a single element'), l: i, r: i, value: nums[i], best: nums[i], message: `nums[${i}] alone scores ${nums[i]}.` })
+    frames.push({ pythonLine: 4, phase: 'single', activeLine: L('for each single element'), l: i, r: i, value: nums[i], best: nums[i], message: `nums[${i}] alone scores ${nums[i]}.` })
   }
   for (let len = 2; len <= n; len++) {
     for (let l = 0; l + len - 1 < n; l++) {
       const r = l + len - 1
       score[l][r] = score[l][r - 1] ^ score[l + 1][r]
       best[l][r] = Math.max(score[l][r], best[l][r - 1], best[l + 1][r])
-      frames.push({ pythonLine: 8, phase: 'combine', activeLine: L('score of the window is'), l, r, value: score[l][r], best: best[l][r], message: `Window ${l}..${r} scores ${score[l][r]}; the best inside it is ${best[l][r]}.` })
+      frames.push({ pythonLine: 8, phase: 'combine', activeLine: L('score[l][r] = score'), l, r, value: score[l][r], best: best[l][r], message: `Window ${l}..${r} scores ${score[l][r]}; the best inside it is ${best[l][r]}.` })
     }
   }
   const answer = queries.map(([l, r]) => best[l][r])
   for (const [l, r] of queries) {
-    frames.push({ pythonLine: 12, phase: 'query', activeLine: L('record the best for the query'), l, r, value: score[l][r], best: best[l][r], message: `Query ${l}..${r} reads ${best[l][r]} from the table.` })
+    frames.push({ pythonLine: 12, phase: 'query', activeLine: L('for each query'), l, r, value: score[l][r], best: best[l][r], message: `Query ${l}..${r} reads ${best[l][r]} from the table.` })
   }
-  frames.push({ pythonLine: 13, phase: 'done', activeLine: L('return answer'), l: -1, r: -1, value: null, best: null, message: `Answers: ${answer.join(', ')}.` })
+  frames.push({ pythonLine: 13, phase: 'done', activeLine: L('return the recorded answers'), l: -1, r: -1, value: null, best: null, message: `Answers: ${answer.join(', ')}.` })
   return { input: { nums, queries }, result: answer, frames }
 }
 

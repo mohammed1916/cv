@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"grid":[[0,0,1],[1,0,0],[1,1,0]],"health":2}' },
     { label: 'Too costly', input: '{"grid":[[0,1,0],[0,1,0],[0,0,0]],"health":2}' },
+    { label: 'Single safe cell', input: '{"grid":[[0]],"health":1}' },
+    { label: 'Health equals cost', input: '{"grid":[[0,1,0]],"health":2}' },
+    { label: 'Largest grid, full health', input: '{"grid":[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]],"health":10}' },
+    { label: 'Long run: generated 6x6 grid', input: '{"grid":[[1,0,1,0,1,0],[1,0,1,0,1,0],[1,0,1,0,1,0],[1,0,1,0,1,0],[1,0,1,0,1,0],[1,0,1,0,1,0]],"health":5}' },
   ],
 }
 

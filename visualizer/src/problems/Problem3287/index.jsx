@@ -23,6 +23,10 @@ const definition = {
   examples: [
     { label: "Invented four values", input: "{\"nums\": [3, 9, 12, 5], \"k\": 1}" },
     { label: "Invented six values", input: "{\"nums\": [1, 8, 2, 4, 16, 3], \"k\": 2}" },
+    { label: 'Two values', input: '{"nums":[1,2],"k":1}' },
+    { label: 'Equal values', input: '{"nums":[7,7,7,7],"k":2}' },
+    { label: 'Largest k for twenty values', input: '{"nums":[26,1,26,1,26,1,26,1,26,1,26,1,26,1,26,1,26,1,26,1],"k":10}' },
+    { label: 'Long run: twenty generated values', input: '{"nums":[5,14,15,18,5,8,15,18,7,20,19,16,1,12,13,22,5,6,21,24],"k":6}' },
   ],
 };
 

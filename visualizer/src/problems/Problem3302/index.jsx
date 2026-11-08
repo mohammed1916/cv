@@ -22,6 +22,10 @@ const definition = {
     { label: 'Example 2', input: '{"word1": "zzmmp", "word2": "mp"}' },
     { label: 'Example 3', input: '{"word1": "bbbaa", "word2": "cccc"}' },
     { label: 'Example 4', input: '{"word1": "xbzd", "word2": "bd"}' },
+    { label: 'Shortest valid pair', input: '{"word1":"ab","word2":"a"}' },
+    { label: 'Repeated letters', input: '{"word1":"aaaa","word2":"aa"}' },
+    { label: 'Longest allowed word1', input: '{"word1":"abcdefghijklmnopqrstuvwxyzabcd","word2":"zzzz"}' },
+    { label: 'Long run: 30 letters', input: '{"word1":"accbccbcbcbacabcbabaacacaabaab","word2":"cabaacbbabbb"}' },
   ],
 }
 

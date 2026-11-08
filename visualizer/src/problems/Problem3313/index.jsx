@@ -22,6 +22,10 @@ const definition = {
     { label: "Branching tree", input: '{"n":6,"edges":[[0,1],[1,2],[1,3],[3,4],[3,5]]}' },
     { label: "Star", input: '{"n":4,"edges":[[0,1],[0,2],[0,3]]}' },
     { label: "Single edge", input: '{"n":2,"edges":[[1,0]]}' },
+    { label: 'Single node', input: '{"n":1,"edges":[]}' },
+    { label: 'Path with reversed edges', input: '{"n":4,"edges":[[3,2],[2,1],[1,0]]}' },
+    { label: 'Largest star, 12 nodes', input: '{"n":12,"edges":[[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[0,8],[0,9],[0,10],[0,11]]}' },
+    { label: 'Long run: random tree of 12 nodes', input: '{"n":12,"edges":[[1,0],[2,1],[3,0],[4,0],[5,0],[6,1],[7,1],[8,3],[9,6],[10,6],[11,6]]}' },
   ],
 };
 

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[1,3,1,5]' },
     { label: 'Example 2', input: '[4,3,1,3,2]' },
+    { label: 'Two equal values', input: '[1,1]' },
+    { label: 'Extremes', input: '[50,1]' },
+    { label: 'Equal values in a row', input: '[7,7,7,7,7,7]' },
+    { label: 'Long run: 30 generated values', input: '[8,19,38,27,24,37,32,1,40,29,24,49,42,1,48,37,20,23,16,33,30,15,16,13,42,31,20,31,24,27]' },
   ],
 }
 

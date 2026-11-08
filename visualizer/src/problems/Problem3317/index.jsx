@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'One performer', input: '{"n":1,"x":2,"y":3}' },
     { label: 'Five performers', input: '{"n":5,"x":2,"y":1}' },
+    { label: 'Smallest values', input: '{"n":1,"x":1,"y":1}' },
+    { label: 'Largest allowed values', input: '{"n":8,"x":6,"y":5}' },
+    { label: 'x and y at their minimum', input: '{"n":4,"x":1,"y":1}' },
+    { label: 'Long run: eight performers', input: '{"n":8,"x":3,"y":4}' },
   ],
 }
 

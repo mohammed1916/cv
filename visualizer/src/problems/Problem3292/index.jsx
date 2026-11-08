@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"words":["abc","aaaaa","bcdef"],"target":"aabcdabc"}' },
     { label: 'Overlapping', input: '{"words":["abababab","ab"],"target":"ababaababa"}' },
+    { label: 'Single letter', input: '{"words":["a"],"target":"a"}' },
+    { label: 'Equal words tie', input: '{"words":["aa","aa"],"target":"aaaa"}' },
+    { label: 'Overlapping words', input: '{"words":["aba","bab"],"target":"ababab"}' },
+    { label: 'Long run: five generated words', input: '{"words":["aba","ab","bab","baba","a"],"target":"babababababa"}' },
   ],
 }
 

@@ -23,6 +23,10 @@ const definition = {
     { label: "Three nodes", input: '{"edges": [[0,1],[1,2]]}' },
     { label: "Two nodes", input: '{"edges": [[0,1]]}' },
     { label: "Five nodes", input: '{"edges": [[0,1],[1,2],[1,3],[3,4]]}' },
+    { label: 'One node, no edges', input: '{"edges":[]}' },
+    { label: 'Two nodes, one road', input: '{"edges":[[0,1]]}' },
+    { label: 'Star with eleven edges', input: '{"edges":[[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[0,8],[0,9],[0,10],[0,11]]}' },
+    { label: 'Long run: 12 nodes', input: '{"edges":[[0,1],[1,2],[2,3],[2,4],[0,5],[0,6],[6,7],[5,8],[1,9],[8,10],[10,11]]}' },
   ],
 };
 

@@ -24,6 +24,10 @@ const definition = {
   examples: [
     { label: "n 3, k 5 (from statement)", input: '{"n": 3, "k": 5}' },
     { label: "n 5, k 6 (from statement)", input: '{"n": 5, "k": 6}' },
+    { label: 'Single digit, largest k', input: '{"n":1,"k":9}' },
+    { label: 'Two places, k nine', input: '{"n":2,"k":9}' },
+    { label: 'Digit one with four places', input: '{"n":4,"k":1}' },
+    { label: 'Largest allowed n: 40 digits', input: '{"n":40,"k":7}' },
   ],
 };
 

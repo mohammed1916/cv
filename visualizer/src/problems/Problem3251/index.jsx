@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[4,1,3]}' },
     { label: 'Example 2', input: '{"nums":[5,2,5]}' },
+    { label: 'Single value', input: '{"nums":[0]}' },
+    { label: 'Equal values tie', input: '{"nums":[3,3,3]}' },
+    { label: 'Longest allowed input', input: '{"nums":[6,0,6,0,6,0]}' },
   ],
 }
 

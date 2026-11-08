@@ -87,6 +87,10 @@ export const examples = [
     team(2, 'Oakford', 1, 1, 1),
     team(3, 'Pine Bank', 1, 1, 1),
   ] }) },
+  { label: 'Single team', input: '{"TeamStats":[{"team_id":21,"team_name":"Solo","matches_played":2,"wins":1,"draws":0,"losses":1}]}' },
+  { label: 'Equal records tie', input: '{"TeamStats":[{"team_id":22,"team_name":"Tidewater","matches_played":5,"wins":3,"draws":1,"losses":1},{"team_id":23,"team_name":"Rushmoor","matches_played":5,"wins":3,"draws":1,"losses":1}]}' },
+  { label: 'Zero matches for one team', input: '{"TeamStats":[{"team_id":24,"team_name":"Early","matches_played":0,"wins":0,"draws":0,"losses":0},{"team_id":25,"team_name":"Late","matches_played":3,"wins":3,"draws":0,"losses":0}]}' },
+  { label: 'Long run: twelve generated teams', input: '{"TeamStats":[{"team_id":40,"team_name":"Club A","matches_played":7,"wins":3,"draws":1,"losses":3},{"team_id":41,"team_name":"Club B","matches_played":11,"wins":7,"draws":3,"losses":1},{"team_id":42,"team_name":"Club C","matches_played":8,"wins":3,"draws":2,"losses":3},{"team_id":43,"team_name":"Club D","matches_played":6,"wins":5,"draws":1,"losses":0},{"team_id":44,"team_name":"Club E","matches_played":13,"wins":8,"draws":1,"losses":4},{"team_id":45,"team_name":"Club F","matches_played":12,"wins":4,"draws":3,"losses":5},{"team_id":46,"team_name":"Club G","matches_played":10,"wins":6,"draws":3,"losses":1},{"team_id":47,"team_name":"Club H","matches_played":5,"wins":0,"draws":4,"losses":1},{"team_id":48,"team_name":"Club I","matches_played":7,"wins":5,"draws":1,"losses":1},{"team_id":49,"team_name":"Club J","matches_played":10,"wins":7,"draws":1,"losses":2},{"team_id":50,"team_name":"Club K","matches_played":9,"wins":3,"draws":0,"losses":6},{"team_id":51,"team_name":"Club L","matches_played":2,"wins":0,"draws":1,"losses":1}]}' },
 ]
 
 export function parseInput(text) {

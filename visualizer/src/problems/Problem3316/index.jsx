@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"source":"abbaa","pattern":"aba","targetIndices":[0,1,2]}' },
     { label: 'Example 2', input: '{"source":"bcda","pattern":"d","targetIndices":[0,3]}' },
+    { label: 'Single letter', input: '{"source":"a","pattern":"a","targetIndices":[0]}' },
+    { label: 'No target indices', input: '{"source":"aaaa","pattern":"aa","targetIndices":[]}' },
+    { label: 'Equal letters, adjacent targets', input: '{"source":"aaaa","pattern":"aa","targetIndices":[1,2]}' },
+    { label: 'Longest source, 12 targets', input: '{"source":"abababababababab","pattern":"abab","targetIndices":[0,1,2,3,4,5,6,7,8,9,10,11]}' },
+    { label: 'Long run: 16 letters', input: '{"source":"baaabbbabbbbabbb","pattern":"babbbbab","targetIndices":[0,2,3,5,6,8,9,10,12,13,14,15]}' },
   ],
 }
 

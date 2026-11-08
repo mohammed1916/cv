@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"abcd","k":2}' },
     { label: 'Example 2', input: '{"s":"mxz","k":3}' },
+    { label: 'Single letter', input: '{"s":"a","k":1}' },
+    { label: 'Equal letters', input: '{"s":"aaaa","k":2}' },
+    { label: 'Longest string, k six', input: '{"s":"zyxwvuzyxwvuzyxwvuzyxwvu","k":6}' },
+    { label: 'Long run: 24 generated letters', input: '{"s":"wrezsdaxgtklitohchulcjev","k":4}' },
   ],
 }
 

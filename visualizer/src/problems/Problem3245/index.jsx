@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"colors":[0,1,0,1,0],"queries":[[1,3]]}' },
     { label: 'Updates', input: '{"colors":[0,1,0,0,1],"queries":[[1,3],[2,2,1],[1,4]]}' },
+    { label: 'Smallest circle of three', input: '{"colors":[0,1,1],"queries":[[1,3]]}' },
+    { label: 'Equal colours give zero groups', input: '{"colors":[0,0,0,0,0],"queries":[[1,3]]}' },
+    { label: 'Largest size on ten tiles', input: '{"colors":[0,1,0,1,0,1,0,1,0,1],"queries":[[1,10],[1,3]]}' },
+    { label: 'Long run: 8 queries on 10 tiles', input: '{"colors":[0,1,0,1,0,1,0,1,0,1],"queries":[[2,1,0],[1,7],[1,5],[1,3],[1,9],[1,7],[1,5],[1,3]]}' },
   ],
 }
 

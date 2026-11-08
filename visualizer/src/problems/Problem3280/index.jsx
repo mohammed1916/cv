@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Leap day (illustrative)', input: '{"date":"2024-02-29"}' },
     { label: 'Single-digit month and day (illustrative)', input: '{"date":"1999-07-04"}' },
+    { label: 'First day of range', input: '{"date":"1900-01-01"}' },
+    { label: 'Last day of range', input: '{"date":"2100-12-31"}' },
+    { label: 'Century leap day', input: '{"date":"2000-02-29"}' },
+    { label: 'Century non-leap end of February', input: '{"date":"2100-02-28"}' },
   ],
 }
 

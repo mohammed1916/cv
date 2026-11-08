@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"power":4,"damage":[1,2,3,4],"health":[4,5,6,8]}' },
     { label: 'Example 2', input: '{"power":1,"damage":[1,1,1,1],"health":[1,2,3,4]}' },
+    { label: 'Single monster', input: '{"power":1,"damage":[1],"health":[1]}' },
+    { label: 'Equal monsters', input: '{"power":3,"damage":[3,3,3],"health":[6,6,6]}' },
+    { label: 'Largest values', input: '{"power":20,"damage":[20,20,20,20,20,20],"health":[50,50,50,50,50,50]}' },
+    { label: 'Long run: six generated monsters', input: '{"power":3,"damage":[16,17,18,11,4,1],"health":[20,49,48,11,14,19]}' },
   ],
 }
 

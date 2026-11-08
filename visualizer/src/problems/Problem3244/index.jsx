@@ -23,6 +23,10 @@ const definition = {
   examples: [
     { label: "Four cities (from search summary)", input: '{"n": 4, "queries": [[0,3],[0,2]]}' },
     { label: "Five cities (illustrative)", input: '{"n": 5, "queries": [[0,2],[1,4],[2,4]]}' },
+    { label: 'Smallest graph', input: '{"n":3,"queries":[[0,1]]}' },
+    { label: 'Largest node count', input: '{"n":12,"queries":[[0,11]]}' },
+    { label: 'Repeated query tie', input: '{"n":4,"queries":[[0,3],[0,3]]}' },
+    { label: 'Long run: 12 queries', input: '{"n":12,"queries":[[4,5],[2,9],[10,11],[2,4],[10,11],[3,9],[10,11],[4,6],[1,9],[10,11],[7,10],[8,10]]}' },
   ],
 };
 

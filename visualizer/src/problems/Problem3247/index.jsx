@@ -21,6 +21,10 @@ const definition = {
     { label: "Mixed parities", input: "[1,2,3]" },
     { label: "All even", input: "[2,4,6]" },
     { label: "Single odd", input: "[7]" },
+    { label: 'Single zero', input: '[0]' },
+    { label: 'Equal values', input: '[5,5,5,5]' },
+    { label: 'Largest allowed values', input: '[1000,0,1000,999,1]' },
+    { label: 'Long run: 16 generated values', input: '[819,10,899,375,483,583,839,760,474,734,351,227,992,316,692,220]' },
   ],
 };
 

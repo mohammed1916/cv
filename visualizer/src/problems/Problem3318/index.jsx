@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,1,2,2,3,4,2,3],"k":6,"x":2}' },
     { label: 'Example 2', input: '{"nums":[3,8,7,8,7,5],"k":2,"x":2}' },
+    { label: 'Single entry', input: '{"nums":[5],"k":1,"x":1}' },
+    { label: 'Equal values', input: '{"nums":[7,7,7,7],"k":4,"x":2}' },
+    { label: 'Largest allowed size, equal values', input: '{"nums":[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50],"k":40,"x":40}' },
+    { label: 'Long run: 40 entries', input: '{"nums":[34,9,50,5,40,33,10,46,10,4,43,39,26,44,9,22,45,50,44,19,1,9,5,35,3,27,41,17,2,4,20,27,38,31,34,1,23,28,27,15],"k":20,"x":5}' },
   ],
 }
 

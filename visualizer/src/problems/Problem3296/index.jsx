@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"mountainHeight":4,"workerTimes":[2,1,1]}' },
     { label: 'Example 2', input: '{"mountainHeight":10,"workerTimes":[3,2,2,4]}' },
+    { label: 'Single layer, one worker', input: '{"mountainHeight":1,"workerTimes":[1]}' },
+    { label: 'Equal workers', input: '{"mountainHeight":6,"workerTimes":[2,2,2,2]}' },
+    { label: 'Largest height, slow workers', input: '{"mountainHeight":12,"workerTimes":[8,8,8,8]}' },
+    { label: 'Long run: twelve layers, four workers', input: '{"mountainHeight":12,"workerTimes":[2,7,8,5]}' },
   ],
 }
 

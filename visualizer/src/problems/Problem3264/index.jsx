@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[2,1,3,5,6],"k":5,"multiplier":2}' },
     { label: 'Example 2', input: '{"nums":[1,2],"k":3,"multiplier":4}' },
+    { label: 'Single number', input: '{"nums":[1],"k":1,"multiplier":1}' },
+    { label: 'Equal values tie', input: '{"nums":[3,3,3],"k":2,"multiplier":2}' },
+    { label: 'Largest values and multiplier', input: '{"nums":[20,20,20,20,20,20,20,20],"k":10,"multiplier":5}' },
+    { label: 'Long run: eight values, ten steps', input: '{"nums":[10,3,16,17,6,11,20,1],"k":10,"multiplier":3}' },
   ],
 }
 

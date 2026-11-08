@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Stay on B', input: '{"energy_drink_a":[1,3,1],"energy_drink_b":[3,1,1]}' },
     { label: 'Switch once', input: '{"energy_drink_a":[4,1,1],"energy_drink_b":[1,1,3]}' },
+    { label: 'Single hour', input: '{"energy_drink_a":[5],"energy_drink_b":[3]}' },
+    { label: 'Equal drinks tie', input: '{"energy_drink_a":[2,2,2],"energy_drink_b":[2,2,2]}' },
+    { label: 'Largest allowed length', input: '{"energy_drink_a":[10,10,10,10,10,10,10,10],"energy_drink_b":[1,1,1,1,1,1,1,1]}' },
+    { label: 'Long run: eight generated hours', input: '{"energy_drink_a":[9,4,1,4,3,10,3,10],"energy_drink_b":[5,4,5,8,9,2,1,10]}' },
   ],
 }
 

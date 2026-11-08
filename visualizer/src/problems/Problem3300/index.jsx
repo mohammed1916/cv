@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[10,12,13,14]}' },
     { label: 'Example 3', input: '{"nums":[999,19,199]}' },
+    { label: 'Single element', input: '{"nums":[7]}' },
+    { label: 'Equal digit sums', input: '{"nums":[10,1,100]}' },
+    { label: 'Largest allowed value', input: '{"nums":[10000,9999,1]}' },
+    { label: 'Long run: 30 numbers', input: '{"nums":[2777,8576,8752,6462,6468,9561,8881,3724,7798,5830,1249,3924,7007,772,4263,1067,3259,9197,4647,5008,2086,2461,3693,8649,6108,1362,9695,496,466,5117]}' },
   ],
 }
 

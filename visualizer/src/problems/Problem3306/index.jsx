@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"word":"aeioqq","k":1}' },
     { label: 'Example 3', input: '{"word":"ieaouqqieaouqq","k":1}' },
+    { label: 'Single letter', input: '{"word":"a","k":0}' },
+    { label: 'Longest word, no consonants', input: '{"word":"aeiouaeiouaeioua","k":0}' },
+    { label: 'Longest word, k = 4', input: '{"word":"aeioubcdfghjklmn","k":4}' },
+    { label: 'Long run: 16 letters', input: '{"word":"uoteumritvaioaam","k":3}' },
   ],
 }
 

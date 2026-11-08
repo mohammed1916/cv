@@ -21,6 +21,10 @@ const definition = {
     { label: "Rising then falling", input: "[1,2,3,2]" },
     { label: "Break in the run", input: "[5,4,9,10]" },
     { label: "Single value", input: "[7]" },
+    { label: 'Two equal values', input: '[4,4]' },
+    { label: 'Extreme magnitudes', input: '[-100,100,-100,100]' },
+    { label: 'Negative run', input: '[-5,-7,-9,-12,-3]' },
+    { label: 'Long run: twelve generated values', input: '[-27,98,89,58,90,-46,90,77,-37,-39,47,60]' },
   ],
 };
 

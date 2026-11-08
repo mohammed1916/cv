@@ -12,6 +12,10 @@ const definition = {
   examples: [
     { label: 'Four products', input: sample },
     { label: 'Half unit', input: halfUp },
+    { label: 'One product, no discount', input: '{"Products":[{"product_id":1,"category":"food","price":10}],"Discounts":[]}' },
+    { label: 'Full discount', input: '{"Products":[{"product_id":2,"category":"toys","price":7}],"Discounts":[{"category":"toys","discount":100}]}' },
+    { label: 'Equal prices tie', input: '{"Products":[{"product_id":3,"category":"books","price":20},{"product_id":4,"category":"books","price":20}],"Discounts":[{"category":"books","discount":50}]}' },
+    { label: 'Long run: eight products, six discounts', input: '{"Products":[{"product_id":10,"category":"food","price":496},{"product_id":11,"category":"food","price":163},{"product_id":12,"category":"food","price":71},{"product_id":13,"category":"food","price":51},{"product_id":14,"category":"garden","price":270},{"product_id":15,"category":"food","price":495},{"product_id":16,"category":"food","price":66},{"product_id":17,"category":"food","price":286}],"Discounts":[{"category":"food","discount":96},{"category":"toys","discount":37},{"category":"books","discount":67},{"category":"tools","discount":83},{"category":"garden","discount":5},{"category":"music","discount":41}]}' },
   ],
 }
 

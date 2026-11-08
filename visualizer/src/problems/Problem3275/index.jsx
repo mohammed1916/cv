@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"queries":[[1,2],[3,4],[2,3],[-3,0]],"k":2}' },
     { label: 'Example 2', input: '{"queries":[[5,5],[4,4],[3,3]],"k":1}' },
+    { label: 'Single point', input: '{"queries":[[0,0]],"k":1}' },
+    { label: 'Equal distances tie', input: '{"queries":[[1,1],[-1,-1],[1,-1]],"k":2}' },
+    { label: 'Corners of the range', input: '{"queries":[[10,10],[-10,-10],[10,-10],[-10,10]],"k":4}' },
+    { label: 'Long run: eight generated points', input: '{"queries":[[4,0],[-7,2],[7,-4],[-2,0],[1,2],[7,10],[3,1],[-1,-7]],"k":5}' },
   ],
 }
 

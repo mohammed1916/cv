@@ -25,6 +25,10 @@ const definition = {
   examples: [
     { label: "n 3, k 5 (search summary, not official)", input: '{"n": 3, "k": 5}' },
     { label: "n 1, k 4 (search summary, not official)", input: '{"n": 1, "k": 4}' },
+    { label: 'Smallest n and k', input: '{"n":1,"k":1}' },
+    { label: 'Equal size and k', input: '{"n":2,"k":2}' },
+    { label: 'Mid-size input', input: '{"n":4,"k":6}' },
+    { label: 'Largest n and k', input: '{"n":6,"k":9}' },
   ],
 };
 

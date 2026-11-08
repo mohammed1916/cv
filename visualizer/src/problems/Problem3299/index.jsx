@@ -21,6 +21,10 @@ const definition = {
     { label: "Rising then falling", input: "[1,2,3,2]" },
     { label: "Mixed steps", input: "[4,5,3,4]" },
     { label: "Descending run", input: "[3,2,1]" },
+    { label: 'Single value', input: '[0]' },
+    { label: 'Equal values', input: '[4,4,4,4]' },
+    { label: 'Extreme steps', input: '[-20,20,-20,20,-20,20]' },
+    { label: 'Long run: twelve generated values', input: '[-7,-11,-8,-11,15,-17,5,-11,-19,7,19,-9]' },
   ],
 };
 

@@ -17,6 +17,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[0,1,1,0]}' },
     { label: 'Example 2', input: '{"nums":[0,3,2,1,3,2]}' },
+    { label: 'Smallest length', input: '{"nums":[0,0,1,1]}' },
+    { label: 'Two repeats among four values', input: '{"nums":[0,2,1,0,2,3]}' },
+    { label: 'Long run: 30 values, generated order', input: '{"nums":[5,21,13,7,18,20,26,9,17,19,27,23,15,6,3,0,12,14,22,16,5,11,11,8,25,4,1,24,2,10]}' },
   ],
 }
 

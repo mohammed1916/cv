@@ -22,6 +22,10 @@ const definition = {
   examples: [
     { label: "Invented four values", input: '{"nums": [1032, 2301, 2130, 31]}' },
     { label: "Three values", input: '{"nums": [123, 321, 213]}' },
+    { label: 'Two values', input: '{"nums":[12,21]}' },
+    { label: 'Equal values', input: '{"nums":[111,111,111]}' },
+    { label: 'Largest allowed value', input: '{"nums":[999999,999990]}' },
+    { label: 'Long run: twelve generated values', input: '{"nums":[758123,447986,871308,408110,823502,918979,404395,715228,729568,877378,316158,141380]}' },
   ],
 };
 

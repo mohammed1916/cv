@@ -21,6 +21,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"coordinate1": "e4", "coordinate2": "b7"}' },
     { label: 'Example 2', input: '{"coordinate1": "d5", "coordinate2": "g3"}' },
+    { label: 'Same square', input: '{"coordinate1":"e4","coordinate2":"e4"}' },
+    { label: 'Same colour corners', input: '{"coordinate1":"a1","coordinate2":"h8"}' },
+    { label: 'Different colours on rank one', input: '{"coordinate1":"a1","coordinate2":"h1"}' },
   ],
 }
 

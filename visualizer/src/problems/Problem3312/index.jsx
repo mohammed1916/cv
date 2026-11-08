@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[2,3,4],"queries":[0,2,2]}' },
     { label: 'Example 2', input: '{"nums":[4,3,12,8],"queries":[0,4]}' },
+    { label: 'Smallest input', input: '{"nums":[1,1],"queries":[0]}' },
+    { label: 'Equal values', input: '{"nums":[6,6,6],"queries":[0,1,2]}' },
+    { label: 'Largest values, length 10', input: '{"nums":[200,1,200,1,200,1,200,1,200,1],"queries":[0,9,18,27,36,44]}' },
+    { label: 'Long run: 10 numbers', input: '{"nums":[108,148,58,122,14,150,85,14,77,182],"queries":[42,43,41,42,26,29,31,28,18,33]}' },
   ],
 }
 

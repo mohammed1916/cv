@@ -22,6 +22,10 @@ const definition = {
   examples: [
     { label: "Small tree", input: '{"edges": [[0,1],[0,2],[1,3],[1,4]]}' },
     { label: "Path", input: '{"edges": [[0,1],[1,2],[2,3]]}' },
+    { label: 'Single edge', input: '{"edges":[[0,1]]}' },
+    { label: 'Equal branches from one node', input: '{"edges":[[0,1],[0,2],[0,3]]}' },
+    { label: 'Path across the largest tree', input: '{"edges":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11]]}' },
+    { label: 'Long run: 12 nodes, generated tree', input: '{"edges":[[0,1],[1,2],[2,3],[1,4],[1,5],[1,6],[6,7],[1,8],[6,9],[5,10],[2,11]]}' },
   ],
 };
 

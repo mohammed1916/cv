@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Complete tree', input: '{"tree":[1,2,3,4,5,6,7],"k":2}' },
     { label: 'Chain', input: '{"tree":[1,null,2,null,3],"k":1}' },
+    { label: 'Single node', input: '{"tree":[0],"k":1}' },
+    { label: 'Equal values', input: '{"tree":[5,5,5],"k":2}' },
+    { label: 'Largest complete tree', input: '{"tree":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],"k":3}' },
+    { label: 'Long run: 15 entries, k = 15', input: '{"tree":[50,8,50,12,22,76,73,35,null,92,95,56,1,36,null],"k":15}' },
   ],
 }
 

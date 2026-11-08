@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[2,3,4,3]' },
     { label: 'Example 2', input: '[2,2,1]' },
+    { label: 'Single tower', input: '[7]' },
+    { label: 'Equal limits', input: '[3,3,3]' },
+    { label: 'Largest limits, eight towers', input: '[15,15,15,15,15,15,15,15]' },
+    { label: 'Long run: 8 towers', input: '[5,12,13,1,12,7,11,11]' },
   ],
 }
 

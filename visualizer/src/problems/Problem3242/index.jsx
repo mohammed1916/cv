@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"grid":[[5,1,6],[2,8,3],[7,0,4]],"calls":[["adjacentSum",8],["diagonalSum",3]]}' },
     { label: 'Corner', input: '{"grid":[[4,0,3,8],[1,6,2,7],[5,9,10,11],[12,13,14,15]],"calls":[["diagonalSum",0],["adjacentSum",15]]}' },
+    { label: 'Three by three, one call', input: '{"grid":[[0,1,2],[3,4,5],[6,7,8]],"calls":[["diagonalSum",0]]}' },
+    { label: 'Largest side with edge values', input: '{"grid":[[0,1,2,3,4],[5,6,7,8,9],[10,11,12,13,14],[15,16,17,18,19],[20,21,22,23,24]],"calls":[["adjacentSum",24],["diagonalSum",0]]}' },
+    { label: 'Tie: repeated call', input: '{"grid":[[0,1,2],[3,4,5],[6,7,8]],"calls":[["adjacentSum",4],["adjacentSum",4]]}' },
+    { label: 'Long run: twelve calls', input: '{"grid":[[0,1,2,3,4],[5,6,7,8,9],[10,11,12,13,14],[15,16,17,18,19],[20,21,22,23,24]],"calls":[["adjacentSum",8],["diagonalSum",8],["adjacentSum",5],["adjacentSum",13],["adjacentSum",18],["adjacentSum",4],["diagonalSum",16],["diagonalSum",18],["diagonalSum",13],["adjacentSum",16],["adjacentSum",17],["adjacentSum",7]]}' },
   ],
 }
 

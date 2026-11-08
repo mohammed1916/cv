@@ -12,6 +12,10 @@ const definition = {
     { label: 'Mixed parities', input: '{"nums1":[1,1,0],"nums2":[0,1]}' },
     { label: 'nums1 empty', input: '{"nums1":[],"nums2":[0,0,1]}' },
     { label: 'All even competition', input: '{"nums1":[0,0],"nums2":[0,0]}' },
+    { label: 'Single entry each', input: '{"nums1":[1],"nums2":[1]}' },
+    { label: 'Equal bit lists', input: '{"nums1":[1,1],"nums2":[1,1]}' },
+    { label: 'Largest lists', input: '{"nums1":[1,0,1,0,1,0,1,0],"nums2":[0,1,0,1,0,1,0,1]}' },
+    { label: 'Long run: eight generated bits per list', input: '{"nums1":[0,1,0,1,0,1,0,1],"nums2":[0,1,0,1,0,1,0,1]}' },
   ],
 }
 

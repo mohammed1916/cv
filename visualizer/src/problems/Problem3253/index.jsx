@@ -23,6 +23,10 @@ const definition = {
     { label: "Two routes", input: '{"target":"abcdab","words":["ab","abc","cd","d"],"costs":[2,5,3,1]}' },
     { label: "Repeated letters", input: '{"target":"aaaa","words":["a","aa"],"costs":[4,3]}' },
     { label: "Unreachable", input: '{"target":"xyz","words":["ab"],"costs":[1]}' },
+    { label: 'Single letter, zero cost', input: '{"target":"a","words":["a"],"costs":[0]}' },
+    { label: 'Equal cost routes', input: '{"target":"ab","words":["a","b","ab"],"costs":[3,3,6]}' },
+    { label: 'Longest target, largest cost', input: '{"target":"abcabcabcabcabcabcabcabcabcabc","words":["abc","ab","c"],"costs":[1000,1,1000]}' },
+    { label: 'Long run: 30-letter target, eight words', input: '{"target":"cdabcdabcdabcdabcdabcdabcdabcd","words":["ab","b","cd","bcd","cd","d","cdab","bcd"],"costs":[573,412,129,886,565,498,79,424]}' },
   ],
 };
 

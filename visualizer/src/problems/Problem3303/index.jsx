@@ -18,6 +18,10 @@ const definition = {
     { label: 'Example 1', input: '{"s":"abcdefg","pattern":"bcdffg"}' },
     { label: 'Example 2', input: '{"s":"ababbababa","pattern":"bacaba"}' },
     { label: 'No match', input: '{"s":"abcd","pattern":"dba"}' },
+    { label: 'Shortest s', input: '{"s":"ab","pattern":"a"}' },
+    { label: 'Every window matches exactly', input: '{"s":"aaaaaa","pattern":"aaaaa"}' },
+    { label: 'Longest pattern, one shorter than s', input: '{"s":"abcdefghijklmnopqrstuvwxyzabcdefghijklmn","pattern":"abcdefghijklmnopqrstuvwxyzabcdefghijklm"}' },
+    { label: 'Long run: 40 and 15 letters', input: '{"s":"ipsxakhhrrchaoszkpsivoevnsptfpclawzjlaka","pattern":"xakhhrrchaoszkp"}' },
   ],
 }
 

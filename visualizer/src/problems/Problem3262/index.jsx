@@ -13,6 +13,10 @@ const definition = {
   examples: [
     { label: 'Mixed shifts', input: mixed },
     { label: 'Touching only', input: touching },
+    { label: 'Single shift', input: '{"EmployeeShifts":[{"shift_id":1,"employee_id":4,"start_time":0,"end_time":30}]}' },
+    { label: 'Touching shifts, same employee', input: '{"EmployeeShifts":[{"shift_id":1,"employee_id":2,"start_time":0,"end_time":60},{"shift_id":2,"employee_id":2,"start_time":60,"end_time":90}]}' },
+    { label: 'Equal times, different staff', input: '{"EmployeeShifts":[{"shift_id":1,"employee_id":5,"start_time":540,"end_time":600},{"shift_id":2,"employee_id":6,"start_time":540,"end_time":600}]}' },
+    { label: 'Long run: twelve generated shifts', input: '{"EmployeeShifts":[{"shift_id":1,"employee_id":1,"start_time":650,"end_time":718},{"shift_id":2,"employee_id":4,"start_time":502,"end_time":620},{"shift_id":3,"employee_id":3,"start_time":351,"end_time":458},{"shift_id":4,"employee_id":2,"start_time":1093,"end_time":1153},{"shift_id":5,"employee_id":1,"start_time":114,"end_time":161},{"shift_id":6,"employee_id":4,"start_time":1157,"end_time":1185},{"shift_id":7,"employee_id":3,"start_time":36,"end_time":147},{"shift_id":8,"employee_id":2,"start_time":279,"end_time":343},{"shift_id":9,"employee_id":1,"start_time":1130,"end_time":1171},{"shift_id":10,"employee_id":4,"start_time":487,"end_time":565},{"shift_id":11,"employee_id":3,"start_time":806,"end_time":870},{"shift_id":12,"employee_id":2,"start_time":161,"end_time":175}]}' },
   ],
 }
 

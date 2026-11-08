@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,3,4,3,2,5],"k":3}' },
     { label: 'Example 2', input: '{"nums":[2,2,2,2,2],"k":4}' },
+    { label: 'Single element', input: '{"nums":[9],"k":1}' },
+    { label: 'Two values', input: '{"nums":[1,50],"k":2}' },
+    { label: 'Alternating window', input: '{"nums":[50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1],"k":20}' },
+    { label: 'Long run: 40 generated values', input: '{"nums":[15,32,45,46,3,40,9,10,21,36,33,42,23,34,21,40,45,10,25,46,33,40,1,26,11,14,27,32,35,48,23,26,21,42,7,18,35,18,7,30],"k":7}' },
   ],
 }
 

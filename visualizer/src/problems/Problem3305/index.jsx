@@ -18,6 +18,10 @@ const definition = {
     { label: 'Example 1', input: '{"word":"aeioqq","k":1}' },
     { label: 'Example 2', input: '{"word":"aeiou","k":0}' },
     { label: 'Example 3', input: '{"word":"ieaouqqieaouqq","k":1}' },
+    { label: 'Single letter', input: '{"word":"a","k":0}' },
+    { label: 'Repeated vowels', input: '{"word":"uuuuaaaaeeeeoo","k":0}' },
+    { label: 'Longest word, k = 4', input: '{"word":"aeioubcdfghjkl","k":4}' },
+    { label: 'Long run: 14 letters', input: '{"word":"uurviummoauiit","k":2}' },
   ],
 }
 

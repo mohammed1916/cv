@@ -13,6 +13,9 @@ const definition = {
   examples: [
     { label: 'Three projects', input: sample },
     { label: 'No match', input: noMatch },
+    { label: 'One project, one candidate', input: '{"Projects":[{"project_id":1,"skill":"sql","importance":1}],"Candidates":[{"candidate_id":1,"skill":"sql","proficiency":1}]}' },
+    { label: 'Equal candidates tie', input: '{"Projects":[{"project_id":2,"skill":"python","importance":3}],"Candidates":[{"candidate_id":5,"skill":"python","proficiency":4},{"candidate_id":6,"skill":"python","proficiency":4}]}' },
+    { label: 'Long run: eight projects, ten candidates', input: '{"Projects":[{"project_id":100,"skill":"data","importance":2},{"project_id":101,"skill":"python","importance":1},{"project_id":102,"skill":"data","importance":2},{"project_id":103,"skill":"python","importance":1},{"project_id":104,"skill":"data","importance":1},{"project_id":105,"skill":"python","importance":3},{"project_id":106,"skill":"data","importance":5},{"project_id":107,"skill":"python","importance":2}],"Candidates":[{"candidate_id":200,"skill":"data","proficiency":1},{"candidate_id":201,"skill":"python","proficiency":5},{"candidate_id":202,"skill":"data","proficiency":3},{"candidate_id":203,"skill":"python","proficiency":4},{"candidate_id":204,"skill":"data","proficiency":2},{"candidate_id":205,"skill":"python","proficiency":3},{"candidate_id":206,"skill":"data","proficiency":4},{"candidate_id":207,"skill":"python","proficiency":3},{"candidate_id":208,"skill":"data","proficiency":4},{"candidate_id":209,"skill":"python","proficiency":5}]}' },
   ],
 }
 

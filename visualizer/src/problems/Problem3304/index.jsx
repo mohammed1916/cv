@@ -20,6 +20,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"k": 7}' },
     { label: 'Example 2', input: '{"k": 12}' },
+    { label: 'Smallest k', input: '{"k":1}' },
+    { label: 'Largest allowed k', input: '{"k":500}' },
+    { label: 'Long run: k = 377', input: '{"k":377}' },
   ],
 }
 

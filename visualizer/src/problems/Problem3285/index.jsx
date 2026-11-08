@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"height":[5,9,2,8,7,1],"threshold":6}' },
     { label: 'None stable', input: '{"height":[3,1,4],"threshold":9}' },
+    { label: 'Equal heights tie', input: '{"height":[3,3,3],"threshold":3}' },
+    { label: 'Largest heights', input: '{"height":[100,1,100,1,100,1,100,1,100,1,100,1],"threshold":50}' },
+    { label: 'Threshold equals a height', input: '{"height":[2,5,5,2,9],"threshold":5}' },
+    { label: 'Long run: twelve generated heights', input: '{"height":[47,72,65,98,83,48,61,78,19,88,45,26],"threshold":40}' },
   ],
 }
 

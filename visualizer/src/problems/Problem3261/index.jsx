@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"0001111","k":2,"queries":[[0,6]]}' },
     { label: 'Two queries', input: '{"s":"010101","k":1,"queries":[[0,2],[2,5]]}' },
+    { label: 'Single zero', input: '{"s":"0","k":0,"queries":[[0,0]]}' },
+    { label: 'Equal bits, two queries', input: '{"s":"1111","k":0,"queries":[[0,3],[1,2]]}' },
+    { label: 'Largest string, k at limit', input: '{"s":"101101101101","k":12,"queries":[[0,11]]}' },
+    { label: 'Long run: twelve bits, five queries', input: '{"s":"010101010101","k":2,"queries":[[2,11],[0,5],[7,10],[0,1],[10,11]]}' },
   ],
 }
 

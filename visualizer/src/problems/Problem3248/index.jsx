@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":2,"commands":["RIGHT","DOWN"]}' },
     { label: 'Example 2', input: '{"n":3,"commands":["DOWN","RIGHT","UP"]}' },
+    { label: 'Smallest grid, one move', input: '{"n":2,"commands":["RIGHT"]}' },
+    { label: 'Return to the start', input: '{"n":2,"commands":["RIGHT","DOWN","LEFT","UP"]}' },
+    { label: 'Largest grid, full sweep', input: '{"n":8,"commands":["RIGHT","RIGHT","RIGHT","RIGHT","RIGHT","RIGHT","RIGHT","DOWN","LEFT","LEFT","LEFT","LEFT","LEFT","LEFT","LEFT"]}' },
+    { label: 'Long run: 40 generated moves', input: '{"n":8,"commands":["RIGHT","RIGHT","DOWN","UP","LEFT","DOWN","RIGHT","UP","LEFT","DOWN","RIGHT","UP","LEFT","DOWN","RIGHT","UP","RIGHT","LEFT","RIGHT","LEFT","DOWN","LEFT","RIGHT","UP","DOWN","LEFT","RIGHT","UP","LEFT","DOWN","RIGHT","UP","LEFT","LEFT","RIGHT","RIGHT","RIGHT","LEFT","DOWN","UP"]}' },
   ],
 }
 

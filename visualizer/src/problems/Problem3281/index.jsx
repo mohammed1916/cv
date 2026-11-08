@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"start":[6,0,3],"d":2}' },
     { label: 'Example 2', input: '{"start":[2,6,13,13],"d":5}' },
+    { label: 'Two starts, zero spread', input: '{"start":[0,0],"d":0}' },
+    { label: 'Equal starts tie', input: '{"start":[4,4,4],"d":1}' },
+    { label: 'Largest range and gap', input: '{"start":[0,30],"d":10}' },
+    { label: 'Long run: eight generated starts', input: '{"start":[21,11,24,6,17,14,28,16],"d":4}' },
   ],
 }
 

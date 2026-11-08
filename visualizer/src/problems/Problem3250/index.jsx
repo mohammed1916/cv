@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Dip then rise', input: '{"nums":[3,1,4,4]}' },
     { label: 'Flat run', input: '{"nums":[6,6,6]}' },
+    { label: 'Single value', input: '{"nums":[4]}' },
+    { label: 'Zeros only', input: '{"nums":[0,0,0,0]}' },
+    { label: 'Longest allowed input', input: '{"nums":[1,6,2,5,3,4]}' },
   ],
 }
 

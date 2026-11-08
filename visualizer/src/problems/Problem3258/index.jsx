@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"10101","k":1}' },
     { label: 'Example 2', input: '{"s":"1010101","k":2}' },
+    { label: 'Single zero', input: '{"s":"0","k":0}' },
+    { label: 'Zero limit', input: '{"s":"1111","k":0}' },
+    { label: 'Largest string, k at its length', input: '{"s":"1010101010101010101010101010101010101010","k":40}' },
+    { label: 'Long run: 40 generated bits', input: '{"s":"1010101010101010101010101010101010101010","k":6}' },
   ],
 }
 

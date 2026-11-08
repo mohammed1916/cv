@@ -23,6 +23,10 @@ const definition = {
     { label: "Middle node", input: '{"values":[5,8,2,6],"node":2}' },
     { label: "Head given", input: '{"values":[1,2,3],"node":0}' },
     { label: "Tail given", input: '{"values":[7,-3,4,9,0],"node":4}' },
+    { label: 'Single node', input: '{"values":[5],"node":0}' },
+    { label: 'Equal values', input: '{"values":[2,2,2],"node":1}' },
+    { label: 'Ten nodes, last given', input: '{"values":[-99,99,-99,99,-99,99,-99,99,-99,99],"node":9}' },
+    { label: 'Long run: ten generated values', input: '{"values":[47,-95,98,-20,17,40,-70,-90,-74,-16],"node":5}' },
   ],
 };
 

@@ -13,6 +13,10 @@ const definition = {
   examples: [
     { label: 'Mixed shifts', input: mixed },
     { label: 'Back to back', input: backToBack },
+    { label: 'Single shift', input: '{"EmployeeShifts":[{"employee_id":4,"start_time":0,"end_time":45}]}' },
+    { label: 'Same start, different staff', input: '{"EmployeeShifts":[{"employee_id":1,"start_time":0,"end_time":60},{"employee_id":2,"start_time":0,"end_time":60}]}' },
+    { label: 'Gap between shifts', input: '{"EmployeeShifts":[{"employee_id":3,"start_time":0,"end_time":30},{"employee_id":3,"start_time":45,"end_time":90}]}' },
+    { label: 'Long run: twelve generated shifts', input: '{"EmployeeShifts":[{"employee_id":4,"start_time":0,"end_time":26},{"employee_id":2,"start_time":60,"end_time":87},{"employee_id":3,"start_time":120,"end_time":162},{"employee_id":4,"start_time":180,"end_time":220},{"employee_id":4,"start_time":240,"end_time":257},{"employee_id":3,"start_time":300,"end_time":324},{"employee_id":2,"start_time":360,"end_time":399},{"employee_id":5,"start_time":420,"end_time":467},{"employee_id":4,"start_time":480,"end_time":503},{"employee_id":3,"start_time":540,"end_time":564},{"employee_id":5,"start_time":600,"end_time":647},{"employee_id":5,"start_time":660,"end_time":684}]}' },
   ],
 }
 

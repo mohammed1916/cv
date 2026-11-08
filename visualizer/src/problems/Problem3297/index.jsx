@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 1', input: '{"word1":"bcca","word2":"abc"}' },
     { label: 'Example 2', input: '{"word1":"abcabc","word2":"abc"}' },
     { label: 'Example 3', input: '{"word1":"abcabc","word2":"aaabc"}' },
+    { label: 'Single letter', input: '{"word1":"a","word2":"a"}' },
+    { label: 'Repeated letters', input: '{"word1":"aaaaaa","word2":"aa"}' },
+    { label: 'Longest word1', input: '{"word1":"abcabcabcabc","word2":"abc"}' },
+    { label: 'Long run: twelve generated letters', input: '{"word1":"cccaccbaacca","word2":"abacc"}' },
   ],
 }
 

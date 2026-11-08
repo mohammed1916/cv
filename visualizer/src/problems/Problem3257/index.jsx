@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"grid":[[-3,1,1,-3],[-3,1,-3,1],[-3,2,1,2]]}' },
     { label: 'Example 2', input: '{"grid":[[1,2,3],[4,5,6],[7,8,9]]}' },
+    { label: 'Minimum values', input: '{"grid":[[-9,-9,-9],[-9,-9,-9],[-9,-9,-9]]}' },
+    { label: 'Checker pattern', input: '{"grid":[[9,-9,9],[-9,9,-9],[9,-9,9]]}' },
+    { label: 'Ties near zero', input: '{"grid":[[0,1,0],[1,0,1],[0,1,0]]}' },
+    { label: 'Long run: generated 6x6 grid', input: '{"grid":[[0,-7,1,-9,-9,-2],[1,1,3,4,-2,-6],[-9,5,-9,-6,9,-4],[1,-6,2,5,3,-6],[-1,9,-1,2,9,-7],[0,-4,7,-5,7,-1]]}' },
   ],
 }
 

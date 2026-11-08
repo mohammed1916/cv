@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,3,4,3,2,5],"k":3}' },
     { label: 'Example 3', input: '{"nums":[3,2,3,2,3,2],"k":2}' },
+    { label: 'Single element', input: '{"nums":[7],"k":1}' },
+    { label: 'Equal values', input: '{"nums":[4,4,4,4],"k":2}' },
+    { label: 'Largest values, full window', input: '{"nums":[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50],"k":40}' },
+    { label: 'Long run: 40 generated values', input: '{"nums":[20,13,36,39,50,19,16,17,28,49,42,17,4,15,2,47,16,37,50,47,2,37,4,9,18,9,20,37,24,35,44,43,50,11,48,39,2,3,10,21],"k":5}' },
   ],
 }
 

@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"words":["abc","aaaaa","bcdef"],"target":"aabcdabc"}' },
     { label: 'Impossible', input: '{"words":["abcdef"],"target":"xyz"}' },
+    { label: 'Single letter', input: '{"words":["a"],"target":"a"}' },
+    { label: 'Repeated word', input: '{"words":["ab","b"],"target":"abab"}' },
+    { label: 'Long run: five generated words', input: '{"words":["bcb","baaa","baabb","acacb","cccca"],"target":"babcccaabcca"}' },
   ],
 }
 

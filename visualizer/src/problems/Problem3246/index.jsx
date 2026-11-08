@@ -12,6 +12,9 @@ const definition = {
   examples: [
     { label: 'Five teams with a tie', input: sample },
     { label: 'Two teams sharing first place', input: allDraws },
+    { label: 'Single team', input: '{"TeamStats":[{"team_id":11,"team_name":"Lonely","matches_played":0,"wins":0,"draws":0,"losses":0}]}' },
+    { label: 'Equal records share a rank', input: '{"TeamStats":[{"team_id":3,"team_name":"Pinewood","matches_played":4,"wins":2,"draws":0,"losses":2},{"team_id":9,"team_name":"Quarry","matches_played":4,"wins":2,"draws":0,"losses":2}]}' },
+    { label: 'Long run: eight generated teams', input: '{"TeamStats":[{"team_id":20,"team_name":"Club A","matches_played":8,"wins":2,"draws":3,"losses":3},{"team_id":21,"team_name":"Club B","matches_played":2,"wins":1,"draws":0,"losses":1},{"team_id":22,"team_name":"Club C","matches_played":6,"wins":2,"draws":1,"losses":3},{"team_id":23,"team_name":"Club D","matches_played":5,"wins":5,"draws":0,"losses":0},{"team_id":24,"team_name":"Club E","matches_played":6,"wins":3,"draws":1,"losses":2},{"team_id":25,"team_name":"Club F","matches_played":8,"wins":4,"draws":4,"losses":0},{"team_id":26,"team_name":"Club G","matches_played":8,"wins":6,"draws":1,"losses":1},{"team_id":27,"team_name":"Club H","matches_played":4,"wins":4,"draws":0,"losses":0}]}' },
   ],
 }
 

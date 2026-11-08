@@ -22,6 +22,10 @@ const definition = {
   examples: [
     { label: "2 by 3 (illustrative)", input: '{"grid": [[1,0,0],[0,1,1]]}' },
     { label: "3 by 3 (illustrative)", input: '{"grid": [[1,0,1],[0,1,0],[1,1,0]]}' },
+    { label: 'One cell', input: '{"grid":[[1]]}' },
+    { label: 'One row of six', input: '{"grid":[[1,0,1,0,1,0]]}' },
+    { label: 'Full 6 by 6 grid', input: '{"grid":[[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1]]}' },
+    { label: 'Long run: 6 by 6 grid', input: '{"grid":[[1,1,1,1,1,1],[1,1,0,1,1,1],[0,1,1,0,1,0],[0,0,1,1,0,0],[0,1,1,0,0,1],[0,0,0,0,0,0]]}' },
   ],
 };
 

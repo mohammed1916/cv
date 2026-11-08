@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"message":["hello","world","leetcode"],"banned_words":["world","hello"]}' },
     { label: 'Example 2', input: '{"message":["hello","programming","fellow","leetcode"],"banned_words":["world","hello"]}' },
+    { label: 'Single word, no match', input: '{"message":["a"],"banned_words":["b"]}' },
+    { label: 'Repeated banned word', input: '{"message":["go","go","go"],"banned_words":["go"]}' },
+    { label: 'Long run: eight words each list', input: '{"message":["fcdab","hefcdab","hefcdab","hef","dabghefcdab","hef","dabghefcdab","hefcdab"],"banned_words":["hef","dab","hefcdab","hefcdabghef","dab","hef","dabghefcdab","hefcdab"]}' },
   ],
 }
 

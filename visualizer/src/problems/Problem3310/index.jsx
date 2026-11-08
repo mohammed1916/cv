@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Blocked', input: '{"n":4,"k":1,"invocations":[[1,2],[0,1],[3,2]]}' },
     { label: 'Removed', input: '{"n":5,"k":0,"invocations":[[1,2],[0,2],[0,1],[3,4]]}' },
+    { label: 'Single method, no invocations', input: '{"n":1,"k":0,"invocations":[]}' },
+    { label: 'Nothing invoked', input: '{"n":2,"k":1,"invocations":[]}' },
+    { label: 'Repeated pair', input: '{"n":3,"k":0,"invocations":[[0,0],[0,0]]}' },
+    { label: 'Long run: 14 invocations', input: '{"n":10,"k":9,"invocations":[[4,9],[3,7],[8,7],[8,4],[7,5],[6,0],[7,9],[3,0],[6,5],[2,2],[6,9],[6,7],[6,3],[1,7]]}' },
   ],
 }
 
