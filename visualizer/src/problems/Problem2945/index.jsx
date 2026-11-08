@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[5,2,2]' },
     { label: 'Merge the middle', input: '[4,3,2,6]' },
+    { label: 'Single value', input: '[5]' },
+    { label: 'Equal values', input: '[4,4,4]' },
+    { label: 'Largest values', input: '[6,1,6,1,6,1,6,1]' },
+    { label: 'Long run: 8 values', input: '[4,1,2,5,4,4,5,6]' },
   ],
 }
 

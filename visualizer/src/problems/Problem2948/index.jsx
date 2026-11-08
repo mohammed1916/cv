@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Two groups', input: '{"nums":[9,3,7,4,8],"limit":2}' },
     { label: 'One chain', input: '{"nums":[4,12,9,2],"limit":5}' },
+    { label: 'Single value', input: '{"nums":[7],"limit":0}' },
+    { label: 'Equal values', input: '{"nums":[5,5,5],"limit":0}' },
+    { label: 'Extremes near limit', input: '{"nums":[50,1,50,1,50,1,50,1,50,1],"limit":49}' },
+    { label: 'Long run: 10 values', input: '{"nums":[30,38,3,3,46,6,8,47,8,22],"limit":12}' },
   ],
 }
 

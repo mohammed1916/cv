@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":4,"sick":[1]}' },
     { label: 'Two ends', input: '{"n":5,"sick":[0,4]}' },
+    { label: 'Two children, one sick', input: '{"n":2,"sick":[0]}' },
+    { label: 'Sick at alternating spots', input: '{"n":4,"sick":[0,2]}' },
+    { label: 'Ten children, spread out', input: '{"n":10,"sick":[0,9]}' },
+    { label: 'Long run: 10 children', input: '{"n":10,"sick":[2,5,7]}' },
   ],
 }
 

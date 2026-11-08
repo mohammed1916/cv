@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"coins":[1,4,10],"target":19}' },
     { label: 'Example 2', input: '{"coins":[1,1,1],"target":20}' },
+    { label: 'Single coin', input: '{"coins":[1],"target":1}' },
+    { label: 'Equal coins', input: '{"coins":[2,2],"target":4}' },
+    { label: 'Largest coins', input: '{"coins":[60,60,60,60,60,60,60,60],"target":60}' },
+    { label: 'Long run: 8 coins', input: '{"coins":[41,23,51,43,24,3,20,10],"target":47}' },
   ],
 }
 

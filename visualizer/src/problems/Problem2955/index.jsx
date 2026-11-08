@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Three ranges', input: '{"s":"abcabca","queries":[[0,6],[1,3],[2,2]]}' },
     { label: 'Repeated letters', input: '{"s":"zzyz","queries":[[0,3],[1,2]]}' },
+    { label: 'One letter', input: '{"s":"a","queries":[[0,0]]}' },
+    { label: 'Same letter at both ends', input: '{"s":"aaaa","queries":[[0,3]]}' },
+    { label: 'Whole word at max length', input: '{"s":"abcdefghijklmnopqrstuvwxyzabcd","queries":[[0,29],[0,0]]}' },
+    { label: 'Long run: 30 letters', input: '{"s":"tcsytmscghnjwndckbmgejygfdjbbx","queries":[[5,23],[4,12],[6,13],[11,29],[1,19],[11,12]]}' },
   ],
 }
 

@@ -20,6 +20,10 @@ const definition = {
   examples: [
     { label: "Example 1", input: '{"words": ["leet", "code"], "x": "e"}' },
     { label: "Second example", input: '{"words": ["abc", "bcd", "aaaa", "cbc"], "x": "a"}' },
+    { label: 'One letter word', input: '{"words":["q"],"x":"q"}' },
+    { label: 'No match', input: '{"words":["abc","def"],"x":"z"}' },
+    { label: 'Repeated letters', input: '{"words":["aaaa","aa","ba"],"x":"a"}' },
+    { label: 'Long run: 50 words', input: '{"words":["iioffjbjg","uoewhz","mtciwjhipqj","imiciontf","agdaekjco","uzlcrpeigwho","qsxpnr","bpojyn","wkxipmypmyd","zrlarruzdfg","bjfyuneeca","zhtfzgifvxhc","kkvrzdnxvmmu","ihwfpg","lqhmelih","xffxhilnycfm","rhxarhxcjjf","piezbanpmczt","aqbpterhj","nmwmaserf","egohoaqdq","vkibtqcgpao","zlutijatt","alxcxjqus","zpnhxwgyz","zlxrfeoahcr","ixrrvwkpegg","ssgupuhqm","auessfmgun","upnrabcuhdc","niwvfzz","ohunzicgo","bvmkhnryhde","gsthnduogax","dedmnlgzovhw","zctrrdnlqgf","bgnexvo","sxrcaiocwqr","juidwyq","urwgnhjrmvw","urcbapk","gdqsppwbyyr","epvxusq","sqzgwgglsugp","ipugtvhcbsj","gjmqkxchjdd","dhyljmos","hdnuwbjvkksx","ddkswnmzp","kvxtripk"],"x":"q"}' },
   ],
 };
 

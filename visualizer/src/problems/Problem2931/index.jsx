@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Single shop', input: '[[3,2,1]]' },
     { label: 'Two shops', input: '[[2,1],[2,1]]' },
+    { label: 'Single shop, single item', input: '[[5]]' },
+    { label: 'Equal prices', input: '[[4,4],[4,4]]' },
+    { label: 'Maximum shops and items', input: '[[20,20,20,20],[20,20,20,20],[20,20,20,20],[20,20,20,20]]' },
+    { label: 'Long run: 4 shops, 4 items', input: '[[18,7,5,1],[19,18,14,13],[19,13,4,1],[17,17,10,1]]' },
   ],
 }
 

@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Mixed', input: '{"nums":[3,6,9,4,8],"k":2}' },
     { label: 'Single', input: '{"nums":[5],"k":1}' },
+    { label: 'Single value', input: '{"nums":[12],"k":1}' },
+    { label: 'Equal values', input: '{"nums":[6,6,6],"k":2}' },
+    { label: 'Largest value', input: '{"nums":[60,60,1,60,60,60,60,60,60,60],"k":10}' },
+    { label: 'Long run: 10 values', input: '{"nums":[27,25,24,10,5,44,36,46,4,35],"k":4}' },
   ],
 }
 

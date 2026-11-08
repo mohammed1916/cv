@@ -80,6 +80,22 @@ export const examples = [
     ] }),
   },
   { label: 'Edge: no calls', input: '{"Calls":[]}' },
+  {
+    label: "Single call",
+    input: '{"Calls":[{"caller_id":1,"recipient_id":2,"call_time":"2023-05-01 08:00:00","city":"Quito"}]}',
+  },
+  {
+    label: "Equal counts take the earlier hour",
+    input: '{"Calls":[{"caller_id":1,"recipient_id":2,"call_time":"2023-05-01 08:10:00","city":"Quito"},{"caller_id":3,"recipient_id":4,"call_time":"2023-05-02 14:20:00","city":"Quito"},{"caller_id":5,"recipient_id":6,"call_time":"2023-05-03 08:30:00","city":"Quito"},{"caller_id":7,"recipient_id":8,"call_time":"2023-05-04 14:40:00","city":"Quito"}]}',
+  },
+  {
+    label: "Midnight and year end",
+    input: '{"Calls":[{"caller_id":9,"recipient_id":10,"call_time":"2023-12-31 23:59:59","city":"Oslo"},{"caller_id":9,"recipient_id":10,"call_time":"2023-01-01 00:00:00","city":"Oslo"}]}',
+  },
+  {
+    label: "Long run: 16 calls",
+    input: '{"Calls":[{"caller_id":2,"recipient_id":22,"call_time":"2023-02-23 07:18:20","city":"Oslo"},{"caller_id":5,"recipient_id":6,"call_time":"2023-06-19 13:16:49","city":"Lima"},{"caller_id":30,"recipient_id":1,"call_time":"2023-02-13 14:58:31","city":"Quito"},{"caller_id":33,"recipient_id":1,"call_time":"2023-08-02 04:29:52","city":"Quito"},{"caller_id":9,"recipient_id":27,"call_time":"2023-08-10 16:23:40","city":"Oslo"},{"caller_id":10,"recipient_id":18,"call_time":"2023-01-19 05:29:25","city":"Oslo"},{"caller_id":15,"recipient_id":11,"call_time":"2023-08-12 03:19:04","city":"Oslo"},{"caller_id":11,"recipient_id":32,"call_time":"2023-02-04 19:29:17","city":"Oslo"},{"caller_id":2,"recipient_id":39,"call_time":"2023-11-06 23:18:37","city":"Quito"},{"caller_id":32,"recipient_id":34,"call_time":"2023-07-20 17:22:59","city":"Quito"},{"caller_id":38,"recipient_id":6,"call_time":"2023-03-27 17:26:06","city":"Oslo"},{"caller_id":34,"recipient_id":15,"call_time":"2023-03-07 10:17:28","city":"Lima"},{"caller_id":37,"recipient_id":25,"call_time":"2023-04-25 03:10:35","city":"Lima"},{"caller_id":37,"recipient_id":6,"call_time":"2023-09-27 08:31:17","city":"Oslo"},{"caller_id":35,"recipient_id":21,"call_time":"2023-12-01 00:30:25","city":"Oslo"},{"caller_id":29,"recipient_id":30,"call_time":"2023-04-28 15:28:46","city":"Quito"}]}',
+  },
 ]
 
 export const phases = [

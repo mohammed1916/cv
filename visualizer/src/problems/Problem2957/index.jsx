@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"word":"aaaaa"}' },
     { label: 'Example 2', input: '{"word":"abddez"}' },
+    { label: 'One letter', input: '{"word":"a"}' },
+    { label: 'Two equal letters', input: '{"word":"zz"}' },
+    { label: 'Upper length', input: '{"word":"zyxwvutsrqponmlkjihgfedcbazyxw"}' },
+    { label: 'Long run: 30 letters', input: '{"word":"uxpuzlhswrvhcnislequgxufveueez"}' },
   ],
 }
 

@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[3,3,5,6]' },
     { label: 'Example 2', input: '[5,-1,-3,8]' },
+    { label: 'Single positive', input: '[7]' },
+    { label: 'Equal values', input: '[4,4,4,4]' },
+    { label: 'Alternating extremes', input: '[10,-10,10,-10,10,-10,10,-10,10,-10]' },
+    { label: 'All negative', input: '[-5,-2,-9]' },
+    { label: 'Long run: 10 values', input: '[-8,7,-8,9,-4,0,3,-8,1,-7]' },
   ],
 }
 

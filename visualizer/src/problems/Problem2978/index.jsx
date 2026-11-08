@@ -44,7 +44,14 @@ const SAMPLE = {
     }
   ]
 }
-const examples = [{ label: 'Teaching sample', input: JSON.stringify(SAMPLE) }]
+const examples = [
+  { label: 'Teaching sample', input: JSON.stringify(SAMPLE) },
+  { label: "Single point", input: '{"Coordinates":[{"X":4,"Y":4}]}' },
+  { label: "Repeated point and mirror", input: '{"Coordinates":[{"X":1,"Y":2},{"X":2,"Y":1},{"X":1,"Y":2}]}' },
+  { label: "No mirror pair", input: '{"Coordinates":[{"X":1,"Y":5},{"X":2,"Y":3},{"X":3,"Y":9}]}' },
+  { label: "Boundary values across the axes", input: '{"Coordinates":[{"X":1000,"Y":0},{"X":0,"Y":1000}]}' },
+  { label: "Long run: 12 points", input: '{"Coordinates":[{"X":5,"Y":6},{"X":5,"Y":2},{"X":6,"Y":4},{"X":5,"Y":3},{"X":5,"Y":4},{"X":2,"Y":2},{"X":3,"Y":4},{"X":5,"Y":6},{"X":6,"Y":4},{"X":1,"Y":2},{"X":6,"Y":4},{"X":2,"Y":3}]}' },
+]
 
 const definition = {
   number: meta.number,

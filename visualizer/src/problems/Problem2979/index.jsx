@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Five and seven', input: '{"coins":[5,7]}' },
     { label: 'Three and eleven', input: '{"coins":[3,11]}' },
+    { label: "Smallest primes", input: '{"coins":[2,3]}' },
+    { label: "Largest primes", input: '{"coins":[13,17]}' },
+    { label: "Smallest and largest", input: '{"coins":[2,17]}' },
   ],
 }
 

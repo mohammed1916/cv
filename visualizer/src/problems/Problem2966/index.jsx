@@ -16,6 +16,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,3,4,8,7,9,3,5,1],"k":2}' },
     { label: 'Example 2', input: '{"nums":[1,3,3,2,7,3],"k":3}' },
+    { label: 'Smallest three', input: '{"nums":[1,1,1],"k":0}' },
+    { label: 'Equal values', input: '{"nums":[4,4,4,4,4,4],"k":0}' },
+    { label: 'Largest spread', input: '{"nums":[0,50,25,0,50,25,0,50,25,0,50,25],"k":50}' },
+    { label: 'Impossible under k', input: '{"nums":[1,1,10],"k":2}' },
+    { label: 'Long run: 12 values', input: '{"nums":[50,3,8,25,2,40,23,23,28,46,35,49],"k":12}' },
   ],
 }
 

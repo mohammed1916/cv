@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums1":[4,3,2,3,1],"nums2":[2,2,5,2,3,6]}' },
     { label: 'Example 2', input: '{"nums1":[3,4,2,3],"nums2":[1,5]}' },
+    { label: 'Nothing shared', input: '{"nums1":[4],"nums2":[9]}' },
+    { label: 'Equal lists', input: '{"nums1":[7,7],"nums2":[7,7]}' },
+    { label: 'Extreme values', input: '{"nums1":[50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1],"nums2":[1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50]}' },
+    { label: 'Long run: 20 values each', input: '{"nums1":[39,1,33,18,44,49,26,20,28,49,9,16,49,1,12,21,22,32,29,27],"nums2":[36,8,44,13,26,33,30,31,6,48,22,10,30,8,7,41,24,32,10,11]}' },
   ],
 }
 

@@ -22,6 +22,10 @@ const definition = {
   examples: [
     { label: "Example 1", input: '{"s": "abba", "k": 1}' },
     { label: "Example 2", input: '{"s": "bcdf", "k": 1}' },
+    { label: 'Single letter', input: '{"s":"a","k":1}' },
+    { label: 'Repeated vowel', input: '{"s":"aaaa","k":2}' },
+    { label: 'Upper length', input: '{"s":"aeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiou","k":1000}' },
+    { label: 'Long run: 50 letters', input: '{"s":"owcquqjpwsiqbqjtdpwcueniuyrmqrlnosxlwxxgerxwkseivr","k":7}' },
   ],
 };
 

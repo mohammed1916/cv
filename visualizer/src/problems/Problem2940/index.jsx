@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Scan right of Bob', input: '{"heights":[3,7,2,5,9,4],"queries":[[0,2],[2,5],[4,3],[1,1]]}' },
     { label: 'Mixed queries', input: '{"heights":[4,9,1,6,2,8],"queries":[[2,0],[1,4],[3,5]]}' },
+    { label: 'One building', input: '{"heights":[5],"queries":[[0,0]]}' },
+    { label: 'Equal heights both ways', input: '{"heights":[3,3,3],"queries":[[0,2],[2,0]]}' },
+    { label: 'Tall towers at both ends', input: '{"heights":[20,1,20,1,20,1,20,1,20,1],"queries":[[0,9],[9,0]]}' },
+    { label: 'Long run: 10 buildings', input: '{"heights":[9,11,9,15,20,5,16,10,16,18],"queries":[[7,8],[3,2],[6,6],[9,6],[3,2],[9,7]]}' },
   ],
 }
 

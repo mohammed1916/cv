@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Run then gap', input: '[4,5,6,9,2]' },
     { label: 'Run of one', input: '[7,3,8]' },
+    { label: "Single element", input: '[1]' },
+    { label: "All equal values", input: '[4,4,4,4]' },
+    { label: "Maximum values", input: '[50,50,1,50]' },
+    { label: "Long run: 50 values", input: '[32,50,42,11,43,39,40,21,47,14,47,38,20,48,26,31,24,1,43,29,17,12,41,36,20,44,27,22,18,2,32,10,19,44,11,40,35,30,23,50,23,18,49,28,1,41,22,10,20,49]' },
   ],
 }
 

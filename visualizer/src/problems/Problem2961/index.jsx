@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"variables":[[2,3,3,10],[3,3,3,1],[6,1,1,4]],"target":2}' },
     { label: 'No match', input: '{"variables":[[39,3,1000,1000]],"target":17}' },
+    { label: 'Unit values', input: '{"variables":[[1,1,1,1]],"target":0}' },
+    { label: 'Equal rows', input: '{"variables":[[2,2,2,5],[2,2,2,5]],"target":0}' },
+    { label: 'Upper limits', input: '{"variables":[[1000,1000,1000,1000]],"target":1000}' },
+    { label: 'Long run: 6 rows', input: '{"variables":[[878,541,409,426],[454,380,482,927],[52,441,433,139],[484,462,716,887],[579,429,953,883],[435,14,514,192]],"target":0}' },
   ],
 }
 

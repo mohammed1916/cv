@@ -22,6 +22,10 @@ const definition = {
   examples: [
     { label: "Example 1", input: '{"nums": [1, 2, 3, 4, 5]}' },
     { label: "Example 2", input: '{"nums": [10, 12, 13, 14, 15]}' },
+    { label: 'Palindrome already', input: '{"nums":[1]}' },
+    { label: 'Equal values', input: '{"nums":[7,7]}' },
+    { label: 'Largest value', input: '{"nums":[1000]}' },
+    { label: 'Long run: 50 values', input: '{"nums":[9,980,116,908,165,276,250,775,853,602,340,931,90,393,295,661,769,782,422,505,706,655,87,133,844,384,931,893,723,282,852,671,510,33,173,957,190,613,744,252,734,475,892,217,331,3,445,191,6,506]}' },
   ],
 };
 

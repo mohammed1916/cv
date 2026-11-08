@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Pairs in a row', input: '{"word":"aabbcc","k":2}' },
     { label: 'Wrapped alphabet', input: '{"word":"abcabc","k":2}' },
+    { label: 'Single letter', input: '{"word":"a","k":1}' },
+    { label: 'Equal runs', input: '{"word":"aaaaaa","k":3}' },
+    { label: 'Longest word, k 20', input: '{"word":"aabbccddeeffgghhiijj","k":20}' },
+    { label: 'Long run: 20 letters', input: '{"word":"shudnndlqxfkroyniyis","k":2}' },
   ],
 }
 

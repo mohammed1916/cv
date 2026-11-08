@@ -23,6 +23,11 @@ const definition = {
     { label: "Too long a side", input: "{\"nums\": [2, 2, 9]}" },
     { label: "Equal sides", input: "{\"nums\": [3, 3, 3, 3]}" },
     { label: "[5,5,50]", input: "{\"nums\": [5, 5, 50]}" },
+    { label: "Smallest polygon", input: '{"nums":[1,1,1]}' },
+    { label: "Five equal sides", input: '{"nums":[7,7,7,7,7]}' },
+    { label: "Longest side equals the rest", input: '{"nums":[1,2,3]}' },
+    { label: "Largest values", input: '{"nums":[1000000000,1000000000,1000000000]}' },
+    { label: "Long run: 50 sides", input: '{"nums":[2,26,9,91,93,56,17,9,83,76,96,24,9,98,34,81,73,29,56,68,74,54,63,69,69,9,44,82,35,89,88,42,23,95,48,39,96,13,20,21,25,99,36,6,52,18,52,25,79,44]}' },
   ],
 }
 

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Four branches', input: '{"n":4,"maxDistance":4,"roads":[[0,1,3],[1,2,2],[2,3,4],[0,3,9]]}' },
     { label: 'Chain of three', input: '{"n":3,"maxDistance":6,"roads":[[0,1,2],[1,2,3]]}' },
+    { label: 'One branch', input: '{"n":1,"maxDistance":1,"roads":[]}' },
+    { label: 'Road exactly at the limit', input: '{"n":2,"maxDistance":5,"roads":[[0,1,5]]}' },
+    { label: 'Wide limit, heavy roads', input: '{"n":6,"maxDistance":60,"roads":[[0,1,20],[0,2,20],[0,3,20],[0,4,20],[0,5,20],[1,2,20],[1,3,20],[1,4,20],[1,5,20],[2,3,20],[2,4,20],[2,5,20],[3,4,20],[3,5,20],[4,5,20]]}' },
+    { label: 'Long run: 6 branches', input: '{"n":6,"maxDistance":25,"roads":[[0,1,17],[0,2,15],[0,3,11],[0,4,12],[0,5,5],[1,2,9],[1,3,18],[1,4,7],[1,5,10],[2,3,2],[2,4,3],[2,5,5],[3,4,6],[3,5,10],[4,5,11]]}' },
   ],
 }
 

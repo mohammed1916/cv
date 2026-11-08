@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,3,1,2,3,1,2],"k":2}' },
     { label: 'Repeats', input: '{"nums":[1,2,1,2,1,2,1,2],"k":1}' },
+    { label: 'One value', input: '{"nums":[4],"k":1}' },
+    { label: 'Equal values', input: '{"nums":[3,3,3,3],"k":2}' },
+    { label: 'Upper length', input: '{"nums":[20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1,20,1],"k":30}' },
+    { label: 'Long run: 30 values', input: '{"nums":[17,17,12,4,2,19,2,1,4,8,10,5,4,20,9,20,10,16,15,2,16,14,15,5,3,14,1,16,5,1],"k":4}' },
   ],
 }
 

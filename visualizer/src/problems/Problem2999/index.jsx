@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"start":"1","finish":"5000","limit":5,"s":"12"}' },
     { label: 'No match', input: '{"start":"100","finish":"900","limit":2,"s":"10"}' },
+    { label: "Single number", input: '{"start":"7","finish":"7","limit":3,"s":"7"}' },
+    { label: "Equal bounds, limit one", input: '{"start":"55","finish":"55","limit":1,"s":"5"}' },
+    { label: "Largest finish", input: '{"start":"99999","finish":"100000","limit":9,"s":"9"}' },
+    { label: "Long run: 1 to 100000", input: '{"start":"1","finish":"100000","limit":9,"s":"1"}' },
   ],
 }
 

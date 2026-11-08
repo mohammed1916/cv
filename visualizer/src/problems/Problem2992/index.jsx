@@ -25,6 +25,9 @@ const definition = {
   examples: [
     { label: "Small", input: "3" },
     { label: "Five positions", input: "5" },
+    { label: "Smallest n", input: '1' },
+    { label: "Two positions", input: '2' },
+    { label: "Largest n", input: '6' },
   ],
 };
 

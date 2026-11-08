@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"x":18,"y":7}' },
     { label: 'Example 2', input: '{"x":9,"y":20}' },
+    { label: "Smallest pair", input: '{"x":1,"y":1}' },
+    { label: "Equal large values", input: '{"x":200,"y":200}' },
+    { label: "Extreme pair", input: '{"x":200,"y":1}' },
+    { label: "Long run: near the cap", input: '{"x":200,"y":199}' },
   ],
 }
 

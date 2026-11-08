@@ -31,6 +31,10 @@ const definition = {
   examples: [
     { label: 'Two brands', input: '{"items":[{"item_id":1,"item_brand":"Acme"},{"item_id":2,"item_brand":"Bolt"},{"item_id":3,"item_brand":"Acme"},{"item_id":4,"item_brand":"Cora"}],"orders":[{"order_id":10,"item_id":1,"seller_id":7},{"order_id":11,"item_id":3,"seller_id":7},{"order_id":12,"item_id":2,"seller_id":8},{"order_id":13,"item_id":4,"seller_id":8},{"order_id":14,"item_id":2,"seller_id":9}]}' },
     { label: 'Single brand', input: '{"items":[{"item_id":1,"item_brand":"Acme"},{"item_id":2,"item_brand":"Bolt"}],"orders":[{"order_id":20,"item_id":1,"seller_id":5},{"order_id":21,"item_id":2,"seller_id":6}]}' },
+    { label: 'One item, one order', input: '{"items":[{"item_id":1,"item_brand":"Acme"}],"orders":[{"order_id":1,"item_id":1,"seller_id":3}]}' },
+    { label: 'Tied brand totals', input: '{"items":[{"item_id":1,"item_brand":"Acme"},{"item_id":2,"item_brand":"Bolt"}],"orders":[{"order_id":1,"item_id":1,"seller_id":4},{"order_id":2,"item_id":2,"seller_id":5}]}' },
+    { label: 'Longest brand name', input: '{"items":[{"item_id":1,"item_brand":"Lumenarray"},{"item_id":2,"item_brand":"Ox"}],"orders":[{"order_id":1,"item_id":1,"seller_id":9},{"order_id":2,"item_id":2,"seller_id":9},{"order_id":3,"item_id":2,"seller_id":10}]}' },
+    { label: 'Long run: 8 items, 10 orders', input: '{"items":[{"item_id":1,"item_brand":"Acme"},{"item_id":2,"item_brand":"Acme"},{"item_id":3,"item_brand":"Acme"},{"item_id":4,"item_brand":"Acme"},{"item_id":5,"item_brand":"Cora"},{"item_id":6,"item_brand":"Bolt"},{"item_id":7,"item_brand":"Bolt"},{"item_id":8,"item_brand":"Cora"}],"orders":[{"order_id":100,"item_id":3,"seller_id":2},{"order_id":101,"item_id":1,"seller_id":2},{"order_id":102,"item_id":5,"seller_id":2},{"order_id":103,"item_id":8,"seller_id":2},{"order_id":104,"item_id":3,"seller_id":3},{"order_id":105,"item_id":8,"seller_id":2},{"order_id":106,"item_id":2,"seller_id":4},{"order_id":107,"item_id":3,"seller_id":3},{"order_id":108,"item_id":2,"seller_id":4},{"order_id":109,"item_id":3,"seller_id":1}]}' },
   ],
 }
 

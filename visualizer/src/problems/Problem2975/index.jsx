@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"m":4,"n":3,"h_fences":[2,3],"v_fences":[2]}' },
     { label: 'Example 2', input: '{"m":6,"n":7,"h_fences":[2],"v_fences":[4]}' },
+    { label: "Smallest grid, no fences", input: '{"m":3,"n":3,"h_fences":[],"v_fences":[]}' },
+    { label: "Single horizontal fence", input: '{"m":3,"n":5,"h_fences":[2],"v_fences":[]}' },
+    { label: "Largest grid", input: '{"m":10,"n":10,"h_fences":[9],"v_fences":[2,5,8]}' },
+    { label: "Long run: four fences each way", input: '{"m":10,"n":10,"h_fences":[2,4,6,8],"v_fences":[3,5,7,9]}' },
   ],
 }
 

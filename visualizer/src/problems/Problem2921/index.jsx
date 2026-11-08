@@ -22,6 +22,10 @@ const definition = {
   examples: [
     { label: 'Interior peak', input: '{"prices":[9,1,5,3,8,7],"profits":[2,6,4,7,1,5]}' },
     { label: 'No increase', input: '{"prices":[6,6,6],"profits":[1,2,3]}' },
+    { label: 'Too short for a triplet', input: '{"prices":[4,9],"profits":[1,2]}' },
+    { label: 'Equal prices', input: '{"prices":[5,5,5,5],"profits":[2,2,2,2]}' },
+    { label: 'Extreme values', input: '{"prices":[-30,0,30,-30,30],"profits":[30,30,-30,30,30]}' },
+    { label: 'Long run: 12 items', input: '{"prices":[-30,-13,-9,23,13,-26,12,6,-28,12,-7,2],"profits":[-3,26,22,-27,-12,-26,20,-26,8,-26,-8,5]}' },
   ],
 }
 

@@ -8,7 +8,12 @@ const complexity = 'One filter pass plus one grouping pass: O(n) time with one e
 const examples = [{
   label: 'Sample',
   input: '{"Purchases":[{"user_id":1,"purchase_date":"2023-11-03","amount_spend":40},{"user_id":2,"purchase_date":"2023-11-03","amount_spend":25},{"user_id":1,"purchase_date":"2023-11-10","amount_spend":15},{"user_id":3,"purchase_date":"2023-11-08","amount_spend":99},{"user_id":4,"purchase_date":"2023-11-17","amount_spend":60},{"user_id":2,"purchase_date":"2023-11-17","amount_spend":5},{"user_id":5,"purchase_date":"2023-12-01","amount_spend":70},{"user_id":3,"purchase_date":"2023-11-24","amount_spend":30}]}',
-}]
+},
+  { label: "Single Friday purchase", input: '{"Purchases":[{"user_id":1,"purchase_date":"2023-11-03","amount_spend":40}]}' },
+  { label: "No Friday purchases", input: '{"Purchases":[{"user_id":1,"purchase_date":"2023-11-06","amount_spend":12}]}' },
+  { label: "Equal Friday totals", input: '{"Purchases":[{"user_id":1,"purchase_date":"2023-11-10","amount_spend":25},{"user_id":2,"purchase_date":"2023-11-24","amount_spend":25}]}' },
+  { label: "Long run: 20 purchases", input: '{"Purchases":[{"user_id":5,"purchase_date":"2023-11-23","amount_spend":96},{"user_id":5,"purchase_date":"2023-11-12","amount_spend":5},{"user_id":6,"purchase_date":"2023-11-26","amount_spend":58},{"user_id":7,"purchase_date":"2023-11-08","amount_spend":18},{"user_id":5,"purchase_date":"2023-11-03","amount_spend":46},{"user_id":3,"purchase_date":"2023-11-24","amount_spend":28},{"user_id":2,"purchase_date":"2023-11-27","amount_spend":75},{"user_id":5,"purchase_date":"2023-11-23","amount_spend":83},{"user_id":2,"purchase_date":"2023-11-15","amount_spend":28},{"user_id":1,"purchase_date":"2023-11-01","amount_spend":10},{"user_id":4,"purchase_date":"2023-11-10","amount_spend":16},{"user_id":6,"purchase_date":"2023-11-22","amount_spend":6},{"user_id":7,"purchase_date":"2023-11-22","amount_spend":56},{"user_id":3,"purchase_date":"2023-11-01","amount_spend":88},{"user_id":7,"purchase_date":"2023-11-19","amount_spend":30},{"user_id":2,"purchase_date":"2023-11-06","amount_spend":52},{"user_id":2,"purchase_date":"2023-11-26","amount_spend":92},{"user_id":5,"purchase_date":"2023-11-07","amount_spend":63},{"user_id":5,"purchase_date":"2023-11-28","amount_spend":74},{"user_id":7,"purchase_date":"2023-11-18","amount_spend":82}]}' },
+]
 
 const definition = {
   number: meta.number,

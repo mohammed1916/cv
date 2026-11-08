@@ -23,6 +23,10 @@ const definition = {
     { label: "Example 1", input: "{\"nums\": [1, 2, 3, 4]}" },
     { label: "Example 2", input: "{\"nums\": [1, 1, 1, 1]}" },
     { label: "Example 3", input: "{\"nums\": [1, 2, 1, 3]}" },
+    { label: 'Single value', input: '{"nums":[7]}' },
+    { label: 'Equal values', input: '{"nums":[2,2,2]}' },
+    { label: 'Large values', input: '{"nums":[1000,999,1000,1]}' },
+    { label: 'Long run: 50 values', input: '{"nums":[28,11,10,8,21,11,3,17,20,25,23,3,21,14,28,15,20,17,4,13,16,17,12,6,19,9,3,19,16,5,30,2,22,5,16,14,28,3,6,2,19,4,3,11,17,5,12,1,24,5]}' },
   ],
 };
 

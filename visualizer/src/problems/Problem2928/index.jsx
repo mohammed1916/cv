@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":5,"limit":2}' },
     { label: 'Example 2', input: '{"n":3,"limit":3}' },
+    { label: 'One candy, limit one', input: '{"n":1,"limit":1}' },
+    { label: 'Equal n and limit', input: '{"n":4,"limit":4}' },
+    { label: 'Upper limits', input: '{"n":50,"limit":50}' },
+    { label: 'Too few seats for n', input: '{"n":10,"limit":2}' },
+    { label: 'Long run: n = 48', input: '{"n":48,"limit":19}' },
   ],
 }
 

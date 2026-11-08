@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":2,"m":1,"h_bars":[2,3],"v_bars":[2]}' },
     { label: 'Example 2', input: '{"n":2,"m":3,"h_bars":[2,3],"v_bars":[2,4]}' },
+    { label: 'No bars', input: '{"n":1,"m":1,"h_bars":[],"v_bars":[]}' },
+    { label: 'Two bars each way', input: '{"n":2,"m":2,"h_bars":[2,3],"v_bars":[2,3]}' },
+    { label: 'Largest grid, six bars', input: '{"n":8,"m":8,"h_bars":[2,4,6,8,9,3],"v_bars":[9,7,5,3,2,4]}' },
+    { label: 'Long run: six bars each way', input: '{"n":8,"m":8,"h_bars":[9,2,4,7,6,8],"v_bars":[2,3,4,8,9,7]}' },
   ],
 }
 

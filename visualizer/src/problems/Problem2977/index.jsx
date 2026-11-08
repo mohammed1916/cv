@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Two pieces', input: '{"source":"abab","target":"caca","original":["ab"],"changed":["ca"],"cost":[3]}' },
     { label: 'Chain', input: '{"source":"aba","target":"cbc","original":["a","b"],"changed":["b","c"],"cost":[2,5]}' },
+    { label: "Single letter", input: '{"source":"a","target":"c","original":["a"],"changed":["c"],"cost":[4]}' },
+    { label: "Equal costs swap", input: '{"source":"ab","target":"ba","original":["ab","ba"],"changed":["ba","ab"],"cost":[2,2]}' },
+    { label: "No rules: impossible", input: '{"source":"a","target":"b","original":[],"changed":[],"cost":[]}' },
+    { label: "Long run: 8 letters", input: '{"source":"acabbcca","target":"acbaacab","original":["a","bc","ca","b","cb","ab"],"changed":["c","ca","bc","c","ac","ba"],"cost":[3,16,20,10,7,20]}' },
   ],
 }
 

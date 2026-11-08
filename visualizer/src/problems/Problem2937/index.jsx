@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Shared start', input: '{"s1":"xyzab","s2":"xyzq","s3":"xyz"}' },
     { label: 'No shared start', input: '{"s1":"ab","s2":"cd","s3":"ef"}' },
+    { label: 'One letter each, equal', input: '{"s1":"a","s2":"a","s3":"a"}' },
+    { label: 'Last letter differs', input: '{"s1":"abc","s2":"abc","s3":"abd"}' },
+    { label: 'Length 20 strings', input: '{"s1":"abcdefghijklmnopqrst","s2":"abcdefghijklmnopqrsu","s3":"abcdefghijklmnopqrst"}' },
+    { label: 'Long run: 20 letters', input: '{"s1":"jupmpuknwuvzbtkuvabk","s2":"jupmpuknwuvzjlfltsnt","s3":"jupmpuknwuvzbjflbnur"}' },
   ],
 }
 

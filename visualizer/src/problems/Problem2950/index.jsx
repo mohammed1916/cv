@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Mixed letters', input: '{"word":"kitchen"}' },
     { label: 'Repeated letter', input: '{"word":"aaaa"}' },
+    { label: 'Single letter', input: '{"word":"a"}' },
+    { label: 'Repeated pattern', input: '{"word":"abcabc"}' },
+    { label: 'Upper length', input: '{"word":"abcdefghijklmnopqrstuvwxyzabcd"}' },
+    { label: 'Long run: 30 letters', input: '{"word":"qoywdbtntvhnjcrqfhcxlnhhsnheut"}' },
   ],
 }
 

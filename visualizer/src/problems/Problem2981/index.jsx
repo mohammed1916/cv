@@ -21,6 +21,10 @@ const definition = {
   examples: [
     { label: "Long run", input: "{\"s\": \"bbbbbb\"}" },
     { label: "Two runs", input: "{\"s\": \"xyzzyzz\"}" },
+    { label: "Three letters", input: '{"s":"abc"}' },
+    { label: "Longest allowed run", input: '{"s":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}' },
+    { label: "Equal run lengths", input: '{"s":"aabbcc"}' },
+    { label: "Long run: 60 letters", input: '{"s":"ydnasttucqrttzslyoerwjopwzstkavzgygtnfttrpamttbxgeoziddhvaim"}' },
   ],
 }
 

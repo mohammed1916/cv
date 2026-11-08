@@ -31,6 +31,10 @@ const definition = {
         row(4, 'Spain', 45, 'Alameda'), row(5, 'Spain', 10, 'Ermita'),
       ] }),
     },
+    { label: "Single winery", input: '{"Wineries":[{"id":50,"country":"Lebanon","points":44,"winery":"Bekaa Terrace"}]}' },
+    { label: "Equal points keep both", input: '{"Wineries":[{"id":1,"country":"Chile","points":41,"winery":"Andes"},{"id":2,"country":"Chile","points":41,"winery":"Valle"}]}' },
+    { label: "Boundary points", input: '{"Wineries":[{"id":1,"country":"Spain","points":0,"winery":"Ermita"},{"id":2,"country":"Spain","points":100,"winery":"Bodega Mar"}]}' },
+    { label: "Long run: 24 wineries", input: '{"Wineries":[{"id":1,"country":"Portugal","points":34,"winery":"Estate 1"},{"id":2,"country":"Chile","points":22,"winery":"Estate 2"},{"id":3,"country":"Portugal","points":51,"winery":"Estate 3"},{"id":4,"country":"Chile","points":27,"winery":"Estate 4"},{"id":5,"country":"Georgia","points":15,"winery":"Estate 5"},{"id":6,"country":"Spain","points":79,"winery":"Estate 6"},{"id":7,"country":"Portugal","points":46,"winery":"Estate 7"},{"id":8,"country":"Georgia","points":37,"winery":"Estate 8"},{"id":9,"country":"Chile","points":62,"winery":"Estate 9"},{"id":10,"country":"Georgia","points":86,"winery":"Estate 10"},{"id":11,"country":"Spain","points":43,"winery":"Estate 11"},{"id":12,"country":"Spain","points":72,"winery":"Estate 12"},{"id":13,"country":"Portugal","points":80,"winery":"Estate 13"},{"id":14,"country":"Portugal","points":44,"winery":"Estate 14"},{"id":15,"country":"Spain","points":48,"winery":"Estate 15"},{"id":16,"country":"Spain","points":58,"winery":"Estate 16"},{"id":17,"country":"Georgia","points":83,"winery":"Estate 17"},{"id":18,"country":"Georgia","points":29,"winery":"Estate 18"},{"id":19,"country":"Georgia","points":82,"winery":"Estate 19"},{"id":20,"country":"Portugal","points":14,"winery":"Estate 20"},{"id":21,"country":"Spain","points":17,"winery":"Estate 21"},{"id":22,"country":"Georgia","points":65,"winery":"Estate 22"},{"id":23,"country":"Chile","points":78,"winery":"Estate 23"},{"id":24,"country":"Georgia","points":82,"winery":"Estate 24"}]}' },
   ],
 }
 

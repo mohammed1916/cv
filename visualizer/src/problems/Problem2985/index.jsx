@@ -20,7 +20,13 @@ const SAMPLE = {
     }
   ]
 }
-const examples = [{ label: 'Teaching sample', input: JSON.stringify(SAMPLE) }]
+const examples = [
+  { label: 'Teaching sample', input: JSON.stringify(SAMPLE) },
+  { label: "Single compressed row", input: '{"Orders":[{"item_count":3,"order_occurrences":2}]}' },
+  { label: "Zero items", input: '{"Orders":[{"item_count":0,"order_occurrences":4},{"item_count":2,"order_occurrences":1}]}' },
+  { label: "Equal rows", input: '{"Orders":[{"item_count":5,"order_occurrences":3},{"item_count":5,"order_occurrences":3}]}' },
+  { label: "Long run: 12 rows", input: '{"Orders":[{"item_count":20,"order_occurrences":4},{"item_count":18,"order_occurrences":7},{"item_count":17,"order_occurrences":7},{"item_count":10,"order_occurrences":9},{"item_count":8,"order_occurrences":8},{"item_count":15,"order_occurrences":3},{"item_count":20,"order_occurrences":1},{"item_count":14,"order_occurrences":7},{"item_count":20,"order_occurrences":5},{"item_count":4,"order_occurrences":4},{"item_count":0,"order_occurrences":5},{"item_count":13,"order_occurrences":6}]}' },
+]
 
 const definition = {
   number: meta.number,

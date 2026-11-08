@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"source":"abcd","target":"acbe","original":["a","b","c","c","e","d"],"changed":["b","c","b","e","b","e"],"cost":[2,5,5,1,2,20]}' },
     { label: 'Small', input: '{"source":"aaaa","target":"bbbb","original":["a","c"],"changed":["c","b"],"cost":[1,2]}' },
+    { label: "Single letter", input: '{"source":"a","target":"b","original":["a"],"changed":["b"],"cost":[3]}' },
+    { label: "Equal costs on one letter", input: '{"source":"aa","target":"bb","original":["a","a"],"changed":["b","b"],"cost":[4,4]}' },
+    { label: "No rules: impossible", input: '{"source":"abc","target":"abd","original":[],"changed":[],"cost":[]}' },
+    { label: "Long run: 8 letters, 10 rules", input: '{"source":"aaecabee","target":"ececccda","original":["b","a","e","c","b","b","e","c","c","d"],"changed":["a","a","e","c","d","c","e","e","a","e"],"cost":[9,8,20,3,9,12,11,5,11,13]}' },
   ],
 }
 

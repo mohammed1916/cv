@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"prices":[3,1,2]}' },
     { label: 'Example 2', input: '{"prices":[1,10,1,1]}' },
+    { label: 'Single fruit', input: '{"prices":[9]}' },
+    { label: 'Equal prices', input: '{"prices":[4,4,4,4]}' },
+    { label: 'Alternating extremes', input: '{"prices":[1,20,1,20,1,20,1,20,1,20]}' },
+    { label: 'Long run: 10 fruits', input: '{"prices":[11,3,5,8,9,4,20,14,20,13]}' },
   ],
 }
 

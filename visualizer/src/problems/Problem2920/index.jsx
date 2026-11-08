@@ -16,6 +16,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":4,"edges":[[0,1],[1,2],[2,3]],"coins":[10,10,3,3],"k":5}' },
     { label: 'Example 2', input: '{"n":3,"edges":[[0,1],[0,2]],"coins":[8,4,4],"k":0}' },
+    { label: 'Two nodes', input: '{"n":2,"edges":[[0,1]],"coins":[5,5],"k":0}' },
+    { label: 'Equal coins', input: '{"n":3,"edges":[[0,1],[0,2]],"coins":[4,4,4],"k":4}' },
+    { label: 'Largest coins and k', input: '{"n":2,"edges":[[1,0]],"coins":[10000,10000],"k":10000}' },
+    { label: 'Zero coins', input: '{"n":2,"edges":[[0,1]],"coins":[0,0],"k":0}' },
+    { label: 'Long run: 15 nodes', input: '{"n":15,"edges":[[0,1],[0,2],[1,3],[1,4],[2,5],[3,6],[6,7],[2,8],[6,9],[0,10],[8,11],[6,12],[4,13],[6,14]],"coins":[7598,7658,2789,5103,7463,8022,873,2982,4335,5937,6207,8602,9045,537,1358],"k":2500}' },
   ],
 }
 

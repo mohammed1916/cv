@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"a":12,"b":5,"n":4}' },
     { label: 'Example 2', input: '{"a":6,"b":7,"n":5}' },
+    { label: 'Single bit', input: '{"a":0,"b":0,"n":1}' },
+    { label: 'Equal inputs', input: '{"a":5,"b":5,"n":3}' },
+    { label: 'Upper limits', input: '{"a":255,"b":255,"n":8}' },
+    { label: 'Long run: 8 bits', input: '{"a":173,"b":211,"n":8}' },
   ],
 }
 

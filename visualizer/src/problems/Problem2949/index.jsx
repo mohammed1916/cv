@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Vowels and consonants', input: '{"s":"xaybe","k":2}' },
     { label: 'Balanced run', input: '{"s":"aeibc","k":1}' },
+    { label: 'Single vowel', input: '{"s":"a","k":1}' },
+    { label: 'Only consonants', input: '{"s":"bcdfg","k":2}' },
+    { label: 'Upper length', input: '{"s":"aeiouaeiouaeiouaeiou","k":1000}' },
+    { label: 'Long run: 20 letters', input: '{"s":"przmapyfldqohpoifsaq","k":3}' },
   ],
 }
 

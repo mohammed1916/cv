@@ -22,6 +22,10 @@ const definition = {
     { label: "Already a palindrome", input: "{\"s\": \"abccba\", \"queries\": [[0, 0, 5, 5], [1, 1, 4, 4]]}" },
     { label: "One letter moves", input: "{\"s\": \"abcabc\", \"queries\": [[0, 0, 3, 5]]}" },
     { label: "acbcab", input: "{\"s\": \"acbcab\", \"queries\": [[1, 2, 4, 5]]}" },
+    { label: "Two letters", input: '{"s":"ab","queries":[[0,0,1,1]]}' },
+    { label: "Equal letters", input: '{"s":"aaaa","queries":[[0,1,2,3]]}' },
+    { label: "Full halves", input: '{"s":"abcdefghij","queries":[[0,4,5,9]]}' },
+    { label: "Long run: 50 letters, 20 queries", input: '{"s":"dedaddbcdcbbdcaaabecdebaedeedeecddeebededacdccceab","queries":[[9,12,47,49],[2,18,40,40],[13,15,45,45],[23,23,46,46],[21,21,35,43],[8,24,42,49],[0,19,40,45],[18,22,39,46],[11,12,37,39],[18,23,35,43],[17,17,32,37],[18,23,39,47],[7,18,49,49],[1,5,28,36],[23,24,26,27],[8,23,42,47],[0,5,25,42],[5,6,33,42],[0,12,29,49],[22,23,47,47]]}' },
   ],
 }
 

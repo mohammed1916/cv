@@ -16,6 +16,11 @@ const definition = {
   examples: [
     { label: 'Tight limit', input: '{"n":5,"limit":2}' },
     { label: 'Loose limit', input: '{"n":3,"limit":3}' },
+    { label: 'One child', input: '{"n":1,"limit":1}' },
+    { label: 'Equal split', input: '{"n":4,"limit":2}' },
+    { label: 'Largest n and limit', input: '{"n":30,"limit":30}' },
+    { label: 'Limit zero', input: '{"n":5,"limit":0}' },
+    { label: 'Long run: n = 29', input: '{"n":29,"limit":10}' },
   ],
 }
 

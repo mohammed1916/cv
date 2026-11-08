@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Five blocks', input: '{"values":[1,1,1,4,4,7,9,9,9,9,12]}' },
     { label: 'Negative start', input: '{"values":[-3,-3,0,0,0,2,2,8]}' },
+    { label: 'Single value', input: '{"values":[0]}' },
+    { label: 'One repeated block', input: '{"values":[5,5,5,5]}' },
+    { label: 'Negative to positive', input: '{"values":[-20,-20,-20,20,20,20]}' },
+    { label: 'Long run: 40 values', input: '{"values":[-20,-20,-20,-18,-17,-16,-15,-15,-14,-13,-12,-12,-11,-10,-8,-8,-8,-8,-7,-7,-7,-6,-3,-2,-2,0,0,2,5,5,5,7,12,13,13,15,15,17,19,20]}' },
   ],
 }
 

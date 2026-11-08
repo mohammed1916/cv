@@ -20,6 +20,10 @@ const definition = {
     { label: "Example 1", input: '{"s": "101"}' },
     { label: "Example 2", input: '{"s": "100"}' },
     { label: "Example 3", input: '{"s": "0111"}' },
+    { label: 'Single zero', input: '{"s":"0"}' },
+    { label: 'All ones', input: '{"s":"1111"}' },
+    { label: 'Upper length', input: '{"s":"11111111111111111111111110000000000000000000000000"}' },
+    { label: 'Long run: 48 cells', input: '{"s":"011110010001000011011000001000011010001011000101"}' },
   ],
 };
 

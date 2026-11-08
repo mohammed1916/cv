@@ -20,6 +20,10 @@ const definition = {
   examples: [
     { label: "Example 1 (from a community test, not the statement)", input: '{"mountain": [1, 4, 3, 8, 5]}' },
     { label: "Second example", input: '{"mountain": [2, 1, 2, 1, 2]}' },
+    { label: 'Smallest peak', input: '{"mountain":[1,2,1]}' },
+    { label: 'Flat top', input: '{"mountain":[5,5,5]}' },
+    { label: 'Peaks at the bounds', input: '{"mountain":[100,1,100,1,100]}' },
+    { label: 'Long run: 50 values', input: '{"mountain":[66,48,90,29,27,56,54,85,6,51,93,49,48,58,76,94,27,84,18,19,99,28,23,29,1,4,52,76,85,80,32,16,35,57,57,94,13,46,48,46,28,5,70,73,18,58,23,49,7,5]}' },
   ],
 };
 

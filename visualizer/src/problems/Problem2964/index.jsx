@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Counting five', input: '{"nums":[1,2,3,4,5],"d":3}' },
     { label: 'Equal values', input: '{"nums":[1,1,1,1],"d":3}' },
+    { label: 'Three zeros', input: '{"nums":[0,0,0],"d":1}' },
+    { label: 'Equal values', input: '{"nums":[3,3,3,3],"d":3}' },
+    { label: 'Upper value and d', input: '{"nums":[20,20,20,20,20,20,20,20,20,20],"d":10}' },
+    { label: 'Long run: 10 values', input: '{"nums":[19,5,5,13,16,17,18,17,19,10],"d":7}' },
   ],
 }
 

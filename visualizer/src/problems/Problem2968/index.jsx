@@ -14,6 +14,10 @@ const definition = {
     { label: 'No budget', input: '{"nums":[5,5,1,5,8],"k":0}' },
     { label: 'One value', input: '{"nums":[6],"k":0}' },
     { label: 'Huge gap, huge budget', input: '{"nums":[1000000000,1,500000000],"k":100000000000000}' },
+    { label: 'Equal values', input: '{"nums":[4,4,4],"k":0}' },
+    { label: 'Large values, large budget', input: '{"nums":[1000000000,1000000000,1],"k":1000000000}' },
+    { label: 'Upper length, zero budget', input: '{"nums":[1,8,15,1,8,15,1,8,15,1,8,15,1,8,15,1,8,15,1,8,15,1,8,15],"k":0}' },
+    { label: 'Long run: 24 values', input: '{"nums":[2988,88654,6714,32108,28335,75756,4416,8289,15241,29557,99003,89618,19009,88085,39135,95620,80068,34095,50019,77461,25006,42851,1483,12270],"k":5000}' },
   ],
 }
 
