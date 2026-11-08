@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-absolute-difference-queries/',
   complexity: 'O(V * (n + q)) time for V distinct values. The visualization caps input at 12 numbers and 5 queries.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,3,4,8],"queries":[[0,1],[1,2],[2,3],[0,3]]}' },
+    { label: 'Own case 1', input: '{"nums":[8,4,3,1],"queries":[[0,3],[2,3],[1,2],[0,1]]}' },
     { label: 'Example 2', input: '{"nums":[4,5,2,2,7,10],"queries":[[2,3],[0,2],[0,5]]}' },
   { label: 'Single element query', input: "{\"nums\":[7],\"queries\":[[0,0]]}" },
   { label: 'Equal values', input: "{\"nums\":[5,5,5,5],\"queries\":[[0,3],[1,2]]}" },

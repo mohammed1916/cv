@@ -17,9 +17,9 @@ const definition = {
   url: 'https://leetcode.com/problems/numbers-at-most-n-given-digit-set/',
   complexity: 'O(k * d) time for k digits in n and d set digits, O(k) space.',
   examples: [
-    { label: 'Example 1', input: '{"digits":["1","3","5","7"],"n":100}' },
+    { label: 'Own case 1', input: '{"digits":["2","4","6","8"],"n":101}' },
     { label: 'Example 2', input: '{"digits":["1","4","9"],"n":1000000000}' },
-    { label: 'Example 3', input: '{"digits":["7"],"n":8}' },
+    { label: 'Own case 3', input: '{"digits":["8"],"n":9}' },
     { label: 'Prefix stops', input: '{"digits":["1","3"],"n":5231}' },
     { label: 'Single digit', input: '{"digits":["5"],"n":1}' },
     { label: 'All nine digits, largest n', input: '{"digits":["1","2","3","4","5","6","7","8","9"],"n":1000000000}' },

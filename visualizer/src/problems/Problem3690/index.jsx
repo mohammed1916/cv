@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'One move', input: '{"nums1":[2,3,1,4],"nums2":[1,4,2,3]}' },
     { label: 'Three moves', input: '{"nums1":[1,2,3,4,5],"nums2":[5,4,3,2,1]}' },
+    { label: 'Two values swapped', input: '{"nums1":[2,1],"nums2":[1,2]}' },
+    { label: 'Already matching', input: '{"nums1":[1,2,3],"nums2":[1,2,3]}' },
+    { label: 'Duplicate values', input: '{"nums1":[2,2,1],"nums2":[1,2,2]}' },
+    { label: 'Long run: 6 values', input: '{"nums1":[-44,4,-11,37,15,-38],"nums2":[4,37,15,-44,-38,-11]}' },
   ],
 }
 

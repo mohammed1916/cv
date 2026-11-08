@@ -14,9 +14,9 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-deletions-to-make-string-k-special/',
   complexity: 'O(n + m * d) time where m is the largest count and d the number of distinct letters.',
   examples: [
-    { label: 'Example 1', input: '{"word":"aabcaba","k":0}' },
-    { label: 'Example 2', input: '{"word":"dabdcbdcdcd","k":2}' },
-    { label: 'Example 3', input: '{"word":"aaabaaa","k":2}' },
+    { label: 'Own case 1', input: '{"word":"bbcdbcb","k":1}' },
+    { label: 'Own case 2', input: '{"word":"ebcedcedede","k":3}' },
+    { label: 'Own case 3', input: '{"word":"bbbcbbb","k":3}' },
     { label: "Single letter", input: "{\"word\":\"a\",\"k\":0}" },
     { label: "Repeated pattern", input: "{\"word\":\"abab\",\"k\":2}" },
     { label: "Largest k with 20 letters", input: "{\"word\":\"aaaaaaaaaaaaaaaaaaaa\",\"k\":5}" },

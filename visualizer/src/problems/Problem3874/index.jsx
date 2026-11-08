@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Two peaks', input: '{"nums":[1,3,2,4,1,5,0],"k":1}' },
     { label: 'Flat run', input: '{"nums":[2,2,2,2],"k":3}' },
+    { label: 'Single value, k zero', input: '{"nums":[7],"k":0}' },
+    { label: 'Equal values, k zero', input: '{"nums":[0,0,0],"k":0}' },
+    { label: 'Largest values, k at limit', input: '{"nums":[9,9,9,9,9,9,9,9,9,9,9,9,9,9],"k":4}' },
+    { label: 'Long run: 14 values', input: '{"nums":[4,3,1,0,1,4,9,3,8,4,2,8,3,4],"k":3}' },
   ],
 }
 

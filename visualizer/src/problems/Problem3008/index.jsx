@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-beautiful-indices-in-the-given-array-ii/',
   complexity: 'O(n + m) time after finding occurrences, and O(n) space. The visualization caps s at 40 letters.',
   examples: [
-    { label: 'Example 1', input: '{"s":"isawsquirrelnearmysquirrelhouseohmy","a":"my","b":"squirrel","k":15}' },
-    { label: 'Example 2', input: '{"s":"abcd","a":"a","b":"a","k":4}' },
+    { label: 'Own case 1', input: '{"s":"jtbxtrvjssfmofbsnztrvjssfmipvtfpinz","a":"nz","b":"trvjssfm","k":16}' },
+    { label: 'Own case 2', input: '{"s":"bcde","a":"b","b":"b","k":5}' },
     { label: "Single letter", input: '{"s":"a","a":"a","b":"b","k":0}' },
     { label: "Equal patterns", input: '{"s":"aaaa","a":"a","b":"a","k":2}' },
     { label: "No occurrence", input: '{"s":"abcd","a":"x","b":"yz","k":3}' },

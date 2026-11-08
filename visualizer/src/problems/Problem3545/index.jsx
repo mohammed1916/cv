@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Two pairs', input: '{"s":"aabbcc","k":1}' },
     { label: 'Already fits', input: '{"s":"abcabc","k":3}' },
+    { label: 'One letter, k zero', input: '{"s":"a","k":0}' },
+    { label: 'Equal letters', input: '{"s":"aaaa","k":2}' },
+    { label: 'Largest k', input: '{"s":"zyxwvutsrqponmlkjihgfedcba","k":26}' },
+    { label: 'Long run: 30 letters', input: '{"s":"frplizchduypxyjhyvdhnvmfwwrlvh","k":13}' },
   ],
 }
 

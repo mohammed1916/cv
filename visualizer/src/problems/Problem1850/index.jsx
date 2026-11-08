@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-adjacent-swaps-to-reach-the-kth-smallest-number/',
   complexity: 'O(k * n + n^2) time for the steps and the swap count, where n is the number of digits.',
   examples: [
-    { label: 'Example 1', input: '{"num":"5489355142","k":4}' },
+    { label: 'Own case 1', input: '{"num":"6590466253","k":5}' },
     { label: 'Example 2', input: '{"num":"11112","k":4}' },
   { label: 'Two digits', input: "{\"num\":\"12\",\"k\":1}" },
   { label: 'Repeated digits', input: "{\"num\":\"1112\",\"k\":1}" },

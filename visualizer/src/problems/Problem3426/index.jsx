@@ -21,6 +21,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"m":2,"n":3,"k":2}' },
     { label: 'Example 2', input: '{"m":1,"n":3,"k":3}' },
+    { label: 'Smallest grid', input: '{"m":1,"n":2,"k":2}' },
+    { label: 'Square tie', input: '{"m":2,"n":2,"k":4}' },
+    { label: 'Largest grid', input: '{"m":6,"n":6,"k":36}' },
+    { label: 'Long run: 6 by 6, k 17', input: '{"m":6,"n":6,"k":17}' },
   ],
 }
 

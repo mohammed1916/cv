@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":3,"k":1}' },
     { label: 'Example 2', input: '{"n":1,"k":0}' },
+    { label: 'Two nodes, one edge', input: '{"n":2,"k":1}' },
+    { label: 'Zero edges', input: '{"n":4,"k":0}' },
+    { label: 'Complete graph', input: '{"n":8,"k":28}' },
+    { label: 'Long run: n = 8, k = 13', input: '{"n":8,"k":13}' },
   ],
 }
 

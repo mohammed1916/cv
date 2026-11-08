@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Two blocks', input: '{"nums":[4,2,3,1],"k":2}' },
     { label: 'One block', input: '{"nums":[1,2,3],"k":1}' },
+    { label: 'One value', input: '{"nums":[5],"k":1}' },
+    { label: 'Equal values', input: '{"nums":[3,3,3],"k":3}' },
+    { label: 'Alternating extremes', input: '{"nums":[9,1,9,1,9,1,9,1],"k":8}' },
+    { label: 'Long run: 8 values', input: '{"nums":[5,6,2,5,4,1,1,5],"k":4}' },
   ],
 }
 

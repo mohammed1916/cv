@@ -16,7 +16,7 @@ const definition = {
   url: 'https://leetcode.com/problems/kth-largest-sum-in-a-binary-tree/',
   complexity: 'O(n log k) time for n nodes. The visualization caps the tree at 15 entries.',
   examples: [
-    { label: 'Example 1', input: '{"root":[5,8,9,2,1,3,7,4,6],"k":2}' },
+    { label: 'Own case 1', input: '{"root":[6,9,10,3,2,4,8,5,7],"k":3}' },
     { label: 'Too few levels', input: '{"root":[1,2,null,3],"k":4}' },
     { label: 'Single node', input: '{"root":[1],"k":1}' },
     { label: 'Equal values', input: '{"root":[3,3,3],"k":2}' },

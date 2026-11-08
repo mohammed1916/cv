@@ -14,9 +14,9 @@ const definition = {
   url: 'https://leetcode.com/problems/ambiguous-coordinates/',
   complexity: 'O(n^3) for the splits, decimal positions and string building; the output itself is the dominant cost.',
   examples: [
-    { label: 'Example 1', input: '"(123)"' },
-    { label: 'Example 2', input: '"(0123)"' },
-    { label: 'Example 3', input: '"(00011)"' },
+    { label: 'Own case 1', input: '"(234)"' },
+    { label: 'Own case 2', input: '"(1234)"' },
+    { label: 'Own case 3', input: '"(11122)"' },
     { label: 'Trailing zeros', input: '"(100)"' },
     { label: 'Two digits, equal', input: '"(11)"' },
     { label: 'Leading zero', input: '"(01)"' },

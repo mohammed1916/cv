@@ -21,6 +21,10 @@ const definition = {
   examples: [
     { label: 'Diagonal', input: '{"source":[2,6],"target":[5,3]}' },
     { label: 'Two moves', input: '{"source":[1,1],"target":[2,3]}' },
+    { label: "Same square, zero moves", input: "{\"source\":[1,1],\"target\":[1,1]}" },
+    { label: "Equal coordinates on both axes", input: "{\"source\":[3,3],\"target\":[6,6]}" },
+    { label: "Opposite corners", input: "{\"source\":[1,1],\"target\":[8,8]}" },
+    { label: "Long run: random squares", input: "{\"source\":[1,3],\"target\":[1,7]}" },
   ],
 }
 

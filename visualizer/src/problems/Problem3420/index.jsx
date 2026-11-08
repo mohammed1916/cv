@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Invented run', input: JSON.stringify({ nums: [4, 1, 5, 2], k: 3 }) },
     { label: 'Tight budget', input: JSON.stringify({ nums: [5, 2, 6, 1], k: 2 }) },
+    { label: 'Single value', input: '{"nums":[3],"k":0}' },
+    { label: 'Equal values tie', input: '{"nums":[4,4,4],"k":2}' },
+    { label: 'Extreme values, large budget', input: '{"nums":[1,9,1,9,1,9,1,9],"k":20}' },
+    { label: 'Long run: 8 values', input: '{"nums":[6,4,4,7,4,4,8,8],"k":12}' },
   ],
 }
 

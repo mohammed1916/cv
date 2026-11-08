@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"s":"(()())((","k":1}' },
     { label: 'Nested', input: '{"s":"(((())))","k":2}' },
+    { label: 'Single parenthesis', input: '{"s":"(","k":1}' },
+    { label: 'Repeated pairs', input: '{"s":"()()()","k":1}' },
+    { label: 'Longest string, k 5', input: '{"s":"()()()()()()()()()()()()()()()","k":5}' },
+    { label: 'Long run: 30 characters', input: '{"s":"()()()()()()()()()()()()()()()","k":3}' },
   ],
 }
 

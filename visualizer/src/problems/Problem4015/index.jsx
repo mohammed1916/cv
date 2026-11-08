@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"parent":[-1,0,0,1,1,3],"nums":[2,4,1,3,5,6]}' },
     { label: 'Example 2', input: '{"parent":[-1,0,0],"nums":[7,1,2]}' },
+    { label: "Single node", input: '{"parent":[-1],"nums":[5]}' },
+    { label: "Equal values", input: '{"parent":[-1,0,0],"nums":[3,3,3]}' },
+    { label: "Chain at the value limit", input: '{"parent":[-1,0,1,2,3,4,5,6,7,8,9,10],"nums":[1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000]}' },
+    { label: "Long run: 12 nodes", input: '{"parent":[-1,0,0,2,1,1,4,6,7,8,2,5],"nums":[792479,544888,607956,325593,912569,428650,388448,910331,507754,294948,958930,943240]}' },
   ],
 }
 

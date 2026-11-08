@@ -19,5 +19,21 @@ export default [
   {
     "label": "Zero itself",
     "input": "{\"n\":0,\"x\":0}"
+  },
+  {
+    "label": "Zero value",
+    "input": "{\"n\":0,\"x\":0}"
+  },
+  {
+    "label": "Single digit",
+    "input": "{\"n\":7,\"x\":7}"
+  },
+  {
+    "label": "Largest allowed n",
+    "input": "{\"n\":100000,\"x\":9}"
+  },
+  {
+    "label": "Long run: n = 48213",
+    "input": "{\"n\":48213,\"x\":3}"
   }
 ];

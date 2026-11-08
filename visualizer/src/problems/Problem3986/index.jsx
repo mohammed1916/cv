@@ -18,6 +18,10 @@ const definition = {
     { label: 'Morning span', input: '{"start":"08:15:30","end":"09:45:10"}' },
     { label: 'One second', input: '{"start":"23:59:58","end":"23:59:59"}' },
     { label: 'Same instant', input: '{"start":"12:00:00","end":"12:00:00"}' },
+    { label: "Start of the day", input: '{"start":"00:00:00","end":"00:00:01"}' },
+    { label: "Hour boundary crossed", input: '{"start":"09:59:59","end":"10:00:00"}' },
+    { label: "Full day span", input: '{"start":"00:00:00","end":"23:59:59"}' },
+    { label: "Long run: nearly a full day", input: '{"start":"00:00:01","end":"23:59:58"}' },
   ],
 }
 

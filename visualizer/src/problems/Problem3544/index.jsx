@@ -13,8 +13,12 @@ const definition = {
   url: 'https://leetcode.com/problems/subtree-inversion-sum/',
   complexity: 'O(n * k) time and space. The visualization caps the tree at 12 nodes and k at 6.',
   examples: [
-    { label: 'Example 1', input: '{"edges":[[0,1],[0,2],[1,3],[1,4],[2,5],[2,6]],"nums":[4,-8,-6,3,7,-2,5],"k":2}' },
-    { label: 'Example 3', input: '{"edges":[[0,1],[0,2]],"nums":[0,-1,-2],"k":3}' },
+    { label: 'Own case 1', input: '{"edges":[[2,6],[2,5],[1,4],[1,3],[0,2],[0,1]],"nums":[5,-2,7,3,-6,-8,4],"k":2}' },
+    { label: 'Own case 2', input: '{"edges":[[0,2],[0,1]],"nums":[-2,-1,0],"k":3}' },
+    { label: 'Two nodes', input: '{"edges":[[0,1]],"nums":[0,5],"k":1}' },
+    { label: 'Equal values', input: '{"edges":[[0,1],[0,2]],"nums":[3,3,3],"k":2}' },
+    { label: 'Extreme values', input: '{"edges":[[0,1],[1,2],[2,3]],"nums":[20,-20,20,-20],"k":6}' },
+    { label: 'Long run: 12 nodes', input: '{"edges":[[0,1],[1,2],[2,3],[3,4],[4,5],[2,6],[2,7],[2,8],[4,9],[9,10],[7,11]],"nums":[-16,9,2,3,12,8,11,14,-14,13,-13,-4],"k":3}' },
   ],
 }
 

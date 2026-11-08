@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/longest-mountain-in-array/',
   complexity: 'O(n) time and O(n) space for the two run-length arrays (an O(1) two-pointer version also exists).',
   examples: [
-    { label: 'Example 1', input: '[2,1,4,7,3,2,5]' },
-    { label: 'Example 2', input: '[2,2,2]' },
+    { label: 'Own case 1', input: '[3,2,5,8,4,3,6]' },
+    { label: 'Own case 2', input: '[3,3,3]' },
     { label: 'Two mountains', input: '[0,1,2,1,0,3,5,6,2,1,1,4,3]' },
     { label: 'Single value', input: '[1]' },
     { label: 'Equal values, flat', input: '[2,2,2]' },

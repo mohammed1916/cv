@@ -14,8 +14,12 @@ const definition = {
   url: 'https://leetcode.com/problems/eat-pizzas/',
   complexity: 'O(n log n) for the sort. The visualization caps input at 12 pizzas.',
   examples: [
-    { label: 'Example 1', input: '[1,2,3,4,5,6,7,8]' },
+    { label: 'Own case 1', input: '[2,3,4,5,6,7,8,9]' },
     { label: 'Example 2', input: '[4,4,4,4]' },
+    { label: 'Smallest group', input: '[1,2,3,4]' },
+    { label: 'Equal weights tie', input: '[5,5,5,5,5,5,5,5]' },
+    { label: 'Largest, extremes', input: '[50,50,50,50,1,1,1,1,25,25,25,25]' },
+    { label: 'Long run: 12 pizzas', input: '[8,10,28,50,38,22,42,44,48,28,27,35]' },
   ],
 }
 

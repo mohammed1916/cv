@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"code":["SAVE20","","PHARMA5","SAVE@20"],"business_line":["restaurant","grocery","pharmacy","restaurant"],"is_active":[true,true,true,true]}' },
     { label: 'Example 2', input: '{"code":["GROCERY15","ELECTRONICS_50","DISCOUNT10"],"business_line":["grocery","electronics","invalid"],"is_active":[false,true,true]}' },
+    { label: 'Single code', input: '{"code":["A"],"business_line":["grocery"],"is_active":[true]}' },
+    { label: 'Duplicate codes', input: '{"code":["SAVE10","SAVE10"],"business_line":["grocery","grocery"],"is_active":[true,true]}' },
+    { label: 'Longest code and line', input: '{"code":["ABCDEFGH"],"business_line":["restaurant_franchise"],"is_active":[false]}' },
+    { label: 'Long run: 8 codes', input: '{"code":["BA9OBPA","NS14_1","519FH84Q","MMYWOO7E","LTEOY8P","PP","3_IS","A"],"business_line":["grocery","grocery","restaurant","restaurant","electronics","restaurant","pharmacy","grocery"],"is_active":[true,false,true,true,true,false,false,true]}' },
   ],
 }
 

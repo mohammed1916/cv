@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Mixed bands', input: '{"nums":[5,1,8,3,9,2],"a":3,"b":6}' },
     { label: 'Two in order', input: '{"nums":[7,7,2,9],"a":5,"b":8}' },
+    { label: "Single value", input: '{"nums":[5],"a":1,"b":2}' },
+    { label: "Equal values", input: '{"nums":[4,4,4,4],"a":3,"b":4}' },
+    { label: "Full value range", input: '{"nums":[1,20,1,20,1,20,1,20,1,20],"a":1,"b":20}' },
+    { label: "Long run: 10 values", input: '{"nums":[16,11,11,11,6,20,19,16,7,1],"a":6,"b":14}' },
   ],
 }
 

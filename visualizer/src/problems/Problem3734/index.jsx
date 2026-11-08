@@ -14,8 +14,12 @@ const definition = {
   url: 'https://leetcode.com/problems/lexicographically-smallest-palindromic-permutation-greater-than-target/',
   complexity: 'O(n * 26) time for strings of length n. The visualization caps the strings at 8 letters.',
   examples: [
-    { label: 'Example 1', input: '{"s":"baba","target":"abba"}' },
-    { label: 'Example 4', input: '{"s":"aac","target":"abb"}' },
+    { label: 'Own case 1', input: '{"s":"cbcb","target":"bccb"}' },
+    { label: 'Own case 2', input: '{"s":"bbd","target":"bcc"}' },
+    { label: 'Single letter', input: '{"s":"a","target":"a"}' },
+    { label: 'Two letters swapped', input: '{"s":"ab","target":"ba"}' },
+    { label: 'Longest allowed', input: '{"s":"abcdefgh","target":"hgfedcba"}' },
+    { label: 'Long run: 8 letters', input: '{"s":"bcbaccab","target":"accccaac"}' },
   ],
 }
 

@@ -18,6 +18,10 @@ const definition = {
     { label: 'Mixed', input: '[1,0,2,0]' },
     { label: 'Repeated zeros', input: '[0,1,0,0]' },
     { label: 'Single cut', input: '[2,3,0]' },
+    { label: 'Single value', input: '[1]' },
+    { label: 'Equal values', input: '[2,2,2,2]' },
+    { label: 'Full run to eleven', input: '[0,1,2,3,4,5,6,7,8,9,10,11]' },
+    { label: 'Long run: 12 items', input: '[8,6,5,14,10,13,18,0,4,1,20,19]' },
   ],
 }
 

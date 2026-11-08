@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Mixed', input: '{"nums":[1,2,3,4]}' },
     { label: 'Single', input: '{"nums":[10]}' },
+    { label: "Largest single value", input: "{\"nums\":[200]}" },
+    { label: "Equal values", input: "{\"nums\":[6,6,6,6,6]}" },
+    { label: "Alternating extremes at length 12", input: "{\"nums\":[200,1,200,1,200,1,200,1,200,1,200,1]}" },
+    { label: "Long run: 12 values", input: "{\"nums\":[71,104,91,187,126,61,48,38,10,195,70,44]}" },
   ],
 }
 

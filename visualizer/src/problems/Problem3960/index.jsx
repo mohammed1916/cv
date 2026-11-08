@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Levels one and two', input: '[1,1,2,2,2]' },
     { label: 'Single value', input: '[7,7,7,3]' },
+    { label: 'Single value', input: '[5]' },
+    { label: 'Equal counts tie', input: '[4,4,9,9]' },
+    { label: 'Largest values', input: '[1000000000,1000000000,1,1000000000]' },
+    { label: 'Long run: 12 items', input: '[3,7,3,3,11,7,7,3,11,7,11,3]' },
   ],
 }
 

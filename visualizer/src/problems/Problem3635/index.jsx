@@ -28,6 +28,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"land":[[2,8]],"water":[[6,3]]}' },
     { label: 'Several rides', input: '{"land":[[2,15],[30,5]],"water":[[20,10],[40,5]]}' },
+    { label: 'One ride per side', input: '{"land":[[0,1]],"water":[[0,1]]}' },
+    { label: 'Equal opening times', input: '{"land":[[5,3],[5,3]],"water":[[5,2]]}' },
+    { label: 'Largest times and durations', input: '{"land":[[100,100]],"water":[[0,100],[100,1]]}' },
+    { label: 'Long run: 6 rides each', input: '{"land":[[90,73],[74,32],[26,48],[29,65],[14,29],[84,6]],"water":[[11,20],[20,4],[90,1],[82,78],[76,8],[87,4]]}' },
   ],
 }
 

@@ -14,8 +14,12 @@ const definition = {
   url: 'https://leetcode.com/problems/lexicographically-smallest-permutation-greater-than-target/',
   complexity: 'O(n^2) time with 26 letters. The visualization caps the strings at 8 letters.',
   examples: [
-    { label: 'Example 1', input: '{"s":"abc","target":"bba"}' },
-    { label: 'Example 2', input: '{"s":"leet","target":"code"}' },
+    { label: 'Own case 1', input: '{"s":"bcd","target":"ccb"}' },
+    { label: 'Own case 2', input: '{"s":"mffu","target":"dpef"}' },
+    { label: 'Single letter', input: '{"s":"a","target":"b"}' },
+    { label: 'Target equals s', input: '{"s":"aab","target":"aab"}' },
+    { label: 'Longest allowed', input: '{"s":"zyxwvuts","target":"zzzzzzzz"}' },
+    { label: 'Long run: 8 letters', input: '{"s":"caabdaba","target":"anghczsj"}' },
   ],
 }
 

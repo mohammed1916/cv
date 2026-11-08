@@ -17,6 +17,10 @@ const definition = {
     { label: "Four digits", input: "{\"n\":4,\"s\":23}" },
     { label: "Sum too large", input: "{\"n\":3,\"s\":30}" },
     { label: "All zeros", input: "{\"n\":5,\"s\":0}" },
+    { label: "One digit", input: '{"n":1,"s":9}' },
+    { label: "Two digits with sum nine", input: '{"n":2,"s":9}' },
+    { label: "Maximum sum for ten digits", input: '{"n":10,"s":90}' },
+    { label: "Long run: 10 digits, sum 45", input: '{"n":10,"s":45}' },
   ],
 }
 

@@ -18,6 +18,10 @@ const definition = {
     { label: 'Different colours', input: '{"start":[0,0],"target":[2,1]}' },
     { label: 'Same colour', input: '{"start":[0,0],"target":[1,1]}' },
     { label: 'Zero moves', input: '{"start":[4,4],"target":[4,4]}' },
+    { label: "Opposite corners share a colour", input: '{"start":[0,0],"target":[7,7]}' },
+    { label: "Adjacent squares", input: '{"start":[0,0],"target":[0,1]}' },
+    { label: "Corner to the other colour", input: '{"start":[0,0],"target":[7,6]}' },
+    { label: "Long run: a far pair of squares", input: '{"start":[6,2],"target":[7,6]}' },
   ],
 }
 

@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-submatrices-that-sum-to-target/',
   complexity: 'O(rows^2 * cols) time and O(cols) extra space. The visualization caps input at 6 by 6 with values from -9 to 9.',
   examples: [
-    { label: 'Example 1', input: '{"matrix":[[0,1,0],[1,1,1],[0,1,0]],"target":0}' },
+    { label: 'Own case 1', input: '{"matrix":[[1,2,1],[2,2,2],[1,2,1]],"target":1}' },
     { label: 'Pair', input: '{"matrix":[[1,-1],[-1,1]],"target":0}' },
     { label: 'Single cell', input: '{"matrix":[[5]],"target":5}' },
     { label: 'Extreme values, target zero', input: '{"matrix":[[-9,9],[9,-9]],"target":0}' },

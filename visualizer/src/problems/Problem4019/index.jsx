@@ -16,6 +16,11 @@ const definition = {
     { label: "Adjacent pair", input: '{"s":"aab","k":1}' },
     { label: "Far end matches", input: '{"s":"abca","k":3}' },
     { label: "Chained merges", input: '{"s":"banana","k":2}' },
+    { label: "Single letter", input: "{\"s\":\"a\",\"k\":1}" },
+    { label: "Equal letters", input: "{\"s\":\"aaaa\",\"k\":2}" },
+    { label: "Longest word, largest k", input: "{\"s\":\"zyxwvutsrqponmlk\",\"k\":16}" },
+    { label: "All distinct letters", input: "{\"s\":\"abcdefghijklmnop\",\"k\":1}" },
+    { label: "Long run: 16 letters", input: "{\"s\":\"adebbbdcdaebedec\",\"k\":8}" },
   ],
 };
 

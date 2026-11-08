@@ -15,6 +15,10 @@ const definition = {
     { label: "Full reversal", input: "\"dcba\"" },
     { label: "Prefix fix", input: "\"bacd\"" },
     { label: "Reverse tail", input: "\"zyxw\"" },
+    { label: 'Single letter', input: '"a"' },
+    { label: 'Repeated letters', input: '"aaaa"' },
+    { label: 'Longest string', input: '"abcdefghijkl"' },
+    { label: 'Long run: 12 letters', input: '"snqduhalmxsr"' },
   ],
 }
 

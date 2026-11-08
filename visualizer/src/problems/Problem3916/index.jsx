@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Three values', input: '{"n":3,"l":1,"r":3}' },
     { label: 'Four long', input: '{"n":4,"l":1,"r":4}' },
+    { label: 'Single value', input: '{"n":1,"l":1,"r":1}' },
+    { label: 'Equal start and end', input: '{"n":2,"l":2,"r":2}' },
+    { label: 'Widest range', input: '{"n":8,"l":1,"r":6}' },
+    { label: 'Long run: n = 8, range 3 to 8', input: '{"n":8,"l":3,"r":8}' },
   ],
 }
 

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/shortest-string-that-contains-three-strings/',
   complexity: 'O(1) orders, each merge O(n^2) for n total letters. The visualization caps each string at 6 letters.',
   examples: [
-    { label: 'Example 1', input: '{"a":"abc","b":"bca","c":"aaa"}' },
-    { label: 'Example 2', input: '{"a":"ab","b":"ba","c":"aba"}' },
+    { label: 'Own case 1', input: '{"a":"bcd","b":"cdb","c":"bbb"}' },
+    { label: 'Own case 2', input: '{"a":"bc","b":"cb","c":"bcb"}' },
     { label: 'Single letters', input: '{"a":"a","b":"b","c":"c"}' },
     { label: 'Equal words', input: '{"a":"aa","b":"aa","c":"aa"}' },
     { label: 'Boundary: six letters each', input: '{"a":"zzzzzz","b":"abcdef","c":"ffffff"}' },

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Invented example', input: '{"nums":[2,0,1]}' },
     { label: 'Already sorted', input: '{"nums":[0,1]}' },
+    { label: 'One value', input: '{"nums":[0]}' },
+    { label: 'Already in order', input: '{"nums":[0,1,2,3,4,5,6]}' },
+    { label: 'Reverse order', input: '{"nums":[6,5,4,3,2,1,0]}' },
+    { label: 'Long run: 7 values', input: '{"nums":[0,1,4,6,5,2,3]}' },
   ],
 }
 

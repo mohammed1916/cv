@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"abc"}' },
     { label: 'Example 2', input: '{"s":"yb"}' },
+    { label: "Two equal letters", input: "{\"s\":\"aa\"}" },
+    { label: "Longest repeated run", input: "{\"s\":\"zzzzzzzzzzzz\"}" },
+    { label: "Mirror pattern", input: "{\"s\":\"abcba\"}" },
+    { label: "Long run: 12 letters", input: "{\"s\":\"cxbedtskdrbi\"}" },
   ],
 }
 

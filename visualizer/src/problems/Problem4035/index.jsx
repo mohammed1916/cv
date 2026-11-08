@@ -21,6 +21,10 @@ const definition = {
   examples: [
     { label: 'Removal helps', input: '[2,4,8,3,6]' },
     { label: 'Shared factor', input: '[12,6,9,3,15,6]' },
+    { label: "Two values", input: "[7,1]" },
+    { label: "Equal values", input: "[6,6,6]" },
+    { label: "Largest values", input: "[1000,1,1000,1000,999,1]" },
+    { label: "Long run: 12 values", input: "[91,106,458,652,702,399,928,964,827,73,326,174]" },
   ],
 }
 

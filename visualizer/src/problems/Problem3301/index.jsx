@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximize-the-total-height-of-unique-towers/',
   complexity: 'O(n log n) for the sort. The visualization caps input at 8 towers.',
   examples: [
-    { label: 'Example 1', input: '[2,3,4,3]' },
-    { label: 'Example 2', input: '[2,2,1]' },
+    { label: 'Own case 1', input: '[3,4,5,4]' },
+    { label: 'Own case 2', input: '[3,3,2]' },
     { label: 'Single tower', input: '[7]' },
     { label: 'Equal limits', input: '[3,3,3]' },
     { label: 'Largest limits, eight towers', input: '[15,15,15,15,15,15,15,15]' },

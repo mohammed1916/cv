@@ -13,8 +13,12 @@ const definition = {
   url: 'https://leetcode.com/problems/maximize-count-of-distinct-primes-after-split/',
   complexity: 'O(q * n * m) time with a set per split. The visualization caps n at 10 and queries at 6.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[2,1,3,1,2],"queries":[[1,2],[3,3]]}' },
-    { label: 'Example 2', input: '{"nums":[2,1,4],"queries":[[0,1]]}' },
+    { label: 'Own case 1', input: '{"nums":[3,2,4,2,3],"queries":[[2,3],[4,4]]}' },
+    { label: 'Own case 2', input: '{"nums":[3,2,5],"queries":[[1,2]]}' },
+    { label: 'Two values', input: '{"nums":[1,2],"queries":[[0,3]]}' },
+    { label: 'Equal values', input: '{"nums":[4,4,4],"queries":[[1,4],[2,4]]}' },
+    { label: 'Largest values', input: '{"nums":[50,1,50,1,50],"queries":[[4,50],[0,1]]}' },
+    { label: 'Long run: 10 values, 6 queries', input: '{"nums":[50,46,23,50,42,9,21,6,44,49],"queries":[[6,34],[4,49],[3,20],[5,40],[0,3],[8,26]]}' },
   ],
 }
 

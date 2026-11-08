@@ -16,6 +16,10 @@ const definition = {
     { label: "Rising prices", input: '{"prices":[1,2,3],"costs":[0,0,0],"cooldown":0}' },
     { label: "Cooldown blocks a second trade", input: '{"prices":[1,5,2,8],"costs":[0,1,0,1],"cooldown":1}' },
     { label: "Fee too high", input: '{"prices":[4,3,2],"costs":[0,5,5],"cooldown":0}' },
+    { label: "One day", input: "{\"prices\":[5],\"costs\":[0],\"cooldown\":0}" },
+    { label: "Equal prices", input: "{\"prices\":[4,4,4],\"costs\":[1,1,1],\"cooldown\":1}" },
+    { label: "Largest prices and costs", input: "{\"prices\":[100,0,100,0,100],\"costs\":[0,100,0,100,0],\"cooldown\":5}" },
+    { label: "Long run: twelve days", input: "{\"prices\":[9,100,91,97,61,85,44,50,77,35,37,22],\"costs\":[1,2,10,3,0,20,20,2,19,12,1,1],\"cooldown\":2}" },
   ],
 };
 

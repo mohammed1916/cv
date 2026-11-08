@@ -16,8 +16,8 @@ const definition = {
   url: 'https://leetcode.com/problems/the-latest-time-to-catch-a-bus/',
   complexity: 'O(n log n + m log m) time for the sorts, O(1) extra space for the walk.',
   examples: [
-    { label: 'Example 1', input: '{"buses":[10,20],"passengers":[2,17,18,19],"capacity":2}' },
-    { label: 'Example 2', input: '{"buses":[20,30,10],"passengers":[19,13,26,4,25,11,21],"capacity":2}' },
+    { label: 'Own case 1', input: '{"buses":[11,21],"passengers":[3,18,19,20],"capacity":3}' },
+    { label: 'Own case 2', input: '{"buses":[21,31,11],"passengers":[20,14,27,5,26,12,22],"capacity":3}' },
     { label: 'One bus, one passenger', input: '{"buses":[10],"passengers":[10],"capacity":1}' },
     { label: 'Passenger arrives at a bus time', input: '{"buses":[10,10],"passengers":[10,10],"capacity":2}' },
     { label: 'Largest input: 10 buses, 20 passengers', input: '{"buses":[2,11,20,29,38,47,56,65,74,83],"passengers":[2,6,10,14,18,22,26,30,34,38,42,46,50,54,58,62,66,70,74,78],"capacity":5}' },

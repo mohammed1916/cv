@@ -15,8 +15,13 @@ const definition = {
   url: 'https://leetcode.com/problems/fruits-into-baskets-ii/',
   complexity: 'O(n^2) time and O(n) space for n fruits. The visualization caps n at 12.',
   examples: [
-    { label: 'Example 1', input: '{"fruits":[4,2,5],"baskets":[3,5,4]}' },
+    { label: 'Own case 1', input: '{"fruits":[5,3,6],"baskets":[4,6,5]}' },
     { label: 'Same size', input: '{"fruits":[1,1,1],"baskets":[1,1,1]}' },
+    { label: 'Single fruit fits', input: '{"fruits":[7],"baskets":[9]}' },
+    { label: 'Equal quantities and capacities', input: '{"fruits":[4,4,4],"baskets":[4,4,4]}' },
+    { label: 'Largest values', input: '{"fruits":[50,1],"baskets":[1,50]}' },
+    { label: 'Baskets too small', input: '{"fruits":[9,8],"baskets":[1,1]}' },
+    { label: 'Long run: 12 fruits', input: '{"fruits":[44,2,43,23,47,4,26,28,46,9,27,33],"baskets":[34,15,37,43,1,43,36,33,27,22,21,11]}' },
   ],
 }
 

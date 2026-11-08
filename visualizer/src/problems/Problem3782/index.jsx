@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":8}' },
     { label: 'Example 2', input: '{"n":5}' },
+    { label: "Smallest n", input: "{\"n\":1}" },
+    { label: "Two", input: "{\"n\":2}" },
+    { label: "Largest n", input: "{\"n\":200}" },
+    { label: "Long run: LCG n", input: "{\"n\":128}" },
   ],
 }
 

@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Small range', input: '{"l":"0","r":"300","directions":"DDDRRR"}' },
     { label: 'Mixed route', input: '{"l":"1234","r":"5678","directions":"RDRDRD"}' },
+    { label: 'Single position', input: '{"l":"7","r":"7","directions":"RRRDDD"}' },
+    { label: 'Equal endpoints', input: '{"l":"5","r":"5","directions":"DRDRDR"}' },
+    { label: 'Top of range', input: '{"l":"9999999999999990","r":"9999999999999999","directions":"RRRDDD"}' },
+    { label: 'Long run: 1001 positions', input: '{"l":"1000000000000000","r":"1000000000001000","directions":"DRRDRD"}' },
   ],
 }
 

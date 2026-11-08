@@ -24,6 +24,10 @@ const definition = {
     { label: "Two friends", input: '{"word":"dbca","numFriends":2}' },
     { label: "Repeated letters", input: '{"word":"gggg","numFriends":2}' },
     { label: "One friend", input: '{"word":"zyxzw","numFriends":1}' },
+    { label: 'Single letter, one friend', input: '{"word":"a","numFriends":1}' },
+    { label: 'Twelve equal letters', input: '{"word":"aaaaaaaaaaaa","numFriends":3}' },
+    { label: 'Longest word, all friends', input: '{"word":"abcdefghijkl","numFriends":12}' },
+    { label: 'Long run: 12 letters', input: '{"word":"mbhwupvyefsw","numFriends":5}' },
   ],
 };
 

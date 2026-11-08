@@ -14,8 +14,12 @@ const definition = {
   url: 'https://leetcode.com/problems/properties-graph/',
   complexity: 'O(m^2 * w) time with a hash set per row, plus near-constant union-find. The visualization caps the table at 8 rows.',
   examples: [
-    { label: 'Example 1', input: '{"properties":[[1,2],[1,1],[3,4],[4,5],[5,6],[7,7]],"k":1}' },
+    { label: 'Own case 1', input: '{"properties":[[2,3],[2,2],[4,5],[5,6],[6,7],[8,8]],"k":2}' },
     { label: 'Example 2', input: '{"properties":[[1,2,3],[2,3,4],[4,5,6]],"k":2}' },
+    { label: 'Single cell with k 1', input: '{"properties":[[5]],"k":1}' },
+    { label: 'Equal rows tie', input: '{"properties":[[3,3],[3,3]],"k":2}' },
+    { label: 'Largest values and k', input: '{"properties":[[10,1,10],[1,10,1]],"k":6}' },
+    { label: 'Long run: 8 by 6 grid', input: '{"properties":[[3,7,4,5,8,8],[8,2,1,7,5,2],[9,2,6,1,6,5],[3,9,9,6,7,4],[7,2,4,9,2,9],[10,10,9,3,1,1],[2,5,2,1,9,6],[6,3,8,1,7,5]],"k":4}' },
   ],
 }
 

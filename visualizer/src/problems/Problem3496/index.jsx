@@ -16,6 +16,11 @@ const definition = {
     { label: 'Mixed signs', input: '[4,-1,7,2,3]' },
     { label: 'Ends pay best', input: '[-5,8,-2,9,1,-3]' },
     { label: 'Short array', input: '[6,1]' },
+    { label: 'Single value', input: '[0]' },
+    { label: 'Equal values', input: '[4,4,4]' },
+    { label: 'Extremes', input: '[-9,9,-9,9,-9,9,-9,9,-9,9]' },
+    { label: 'Descending run', input: '[9,8,7,6,5,4,3,2,1,0]' },
+    { label: 'Long run: 10 values', input: '[-8,-2,-7,0,7,6,8,8,0,-2]' },
   ],
 }
 

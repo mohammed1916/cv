@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Three', input: '{"nums":[1,2,3]}' },
     { label: 'Four', input: '{"nums":[3,1,4,2]}' },
+    { label: 'Single element', input: '{"nums":[1]}' },
+    { label: 'Reversed pair', input: '{"nums":[2,1]}' },
+    { label: 'Identity permutation', input: '{"nums":[1,2,3,4,5]}' },
+    { label: 'Long run: 12 shuffled values', input: '{"nums":[2,5,1,12,8,10,7,3,4,9,6,11]}' },
   ],
 }
 

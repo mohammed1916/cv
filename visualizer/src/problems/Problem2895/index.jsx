@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-processing-time/',
   complexity: 'O(n log n) time for the sorts, where n is the number of tasks. The visualization caps input at 3 processors.',
   examples: [
-    { label: 'Example 1', input: '{"processorTime":[8,10],"tasks":[2,2,3,1,8,7,4,5]}' },
-    { label: 'Example 2', input: '{"processorTime":[10,20],"tasks":[2,3,1,2,5,8,4,3]}' },
+    { label: 'Own case 1', input: '{"processorTime":[9,11],"tasks":[3,3,4,2,9,8,5,6]}' },
+    { label: 'Own case 2', input: '{"processorTime":[11,21],"tasks":[3,4,2,3,6,9,5,4]}' },
     { label: "Single processor with zero start", input: "{\"processorTime\":[0],\"tasks\":[1,1,1,1]}" },
     { label: "Equal processor times", input: "{\"processorTime\":[5,5],\"tasks\":[2,2,2,2,2,2,2,2]}" },
     { label: "Largest times, three processors", input: "{\"processorTime\":[1000,1000,1000],\"tasks\":[1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000]}" },

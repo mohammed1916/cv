@@ -15,9 +15,13 @@ const definition = {
   url: 'https://leetcode.com/problems/rearrange-k-substrings-to-form-target-string/',
   complexity: 'O(n) time and O(n) space for the block counts.',
   examples: [
-    { label: 'Example 1', input: '{"s":"abcd","t":"cdab","k":2}' },
-    { label: 'Example 2', input: '{"s":"aabbcc","t":"bbaacc","k":3}' },
+    { label: 'Own case 1', input: '{"s":"cdef","t":"efcd","k":4}' },
+    { label: 'Own case 2', input: '{"s":"ddeeff","t":"eeddff","k":6}' },
     { label: 'Example 3', input: '{"s":"abcd","t":"acbd","k":2}' },
+    { label: 'Single letter', input: '{"s":"a","t":"a","k":1}' },
+    { label: 'Equal strings', input: '{"s":"aaaa","t":"aaaa","k":2}' },
+    { label: 'Longest string, k four', input: '{"s":"abcdefghijkl","t":"lkjihgfedcba","k":4}' },
+    { label: 'Long run: 12 letters', input: '{"s":"gatkjekjbsfo","t":"ofsbjkejktag","k":3}' },
   ],
 }
 

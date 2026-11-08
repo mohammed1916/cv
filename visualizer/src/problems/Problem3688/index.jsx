@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Mixed', input: '{"nums":[1,2,4,5,6]}' },
     { label: 'All odd', input: '{"nums":[1,3,5]}' },
+    { label: 'Single number', input: '{"nums":[1]}' },
+    { label: 'Equal numbers', input: '{"nums":[4,4,4]}' },
+    { label: 'Largest values allowed', input: '{"nums":[100,99]}' },
+    { label: 'Long run: 12 numbers', input: '{"nums":[28,39,58,61,8,3,6,17,16,71,82,53]}' },
   ],
 }
 

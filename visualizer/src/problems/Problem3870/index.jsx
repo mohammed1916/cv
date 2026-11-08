@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"n":12345}' },
     { label: 'Upper range', input: '{"n":99999}' },
+    { label: 'Single integer', input: '{"n":1}' },
+    { label: 'Power of two', input: '{"n":65536}' },
+    { label: 'Upper limit', input: '{"n":100000}' },
+    { label: 'Long run: 99998', input: '{"n":99998}' },
   ],
 }
 

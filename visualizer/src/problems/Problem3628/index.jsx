@@ -13,8 +13,12 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-number-of-subsequences-after-one-inserting/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps input at 30 letters.',
   examples: [
-    { label: 'Example 1', input: '"LMCT"' },
-    { label: 'Example 2', input: '"LCCT"' },
+    { label: 'Own case 1', input: '"MNDU"' },
+    { label: 'Own case 2', input: '"MDDU"' },
+    { label: 'Single letter', input: '"A"' },
+    { label: 'Repeated letter', input: '"AAAA"' },
+    { label: 'Longest allowed string', input: '"ABCDEFGHIJKLMNOPQRSTUVWXYZABCD"' },
+    { label: 'Long run: 30 letters', input: '"ZAGSWKNRAPCHSYCTEUQIFHCKBZCQSZ"' },
   ],
 }
 

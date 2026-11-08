@@ -14,9 +14,9 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-number-of-pairs-in-array/',
   complexity: 'O(n) time and O(n) space.',
   examples: [
-    { label: 'Example 1', input: '[1,3,2,1,3,2,2]' },
-    { label: 'Example 2', input: '[1,1]' },
-    { label: 'Example 3', input: '[0]' },
+    { label: 'Own case 1', input: '[2,4,3,2,4,3,3]' },
+    { label: 'Own case 2', input: '[2,2]' },
+    { label: 'Own case 3', input: '[1]' },
     { label: 'Single maximum value', input: '[20]' },
     { label: 'Equal values pair up', input: '[2,2,2,2]' },
     { label: 'Longest list, all equal', input: '[7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7]' },

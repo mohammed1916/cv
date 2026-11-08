@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-operations-to-maximize-last-elements-in-arrays/',
   complexity: 'O(n) time. The visualization caps the arrays at eight entries.',
   examples: [
-    { label: 'Example 1', input: '{"nums1":[1,2,7],"nums2":[4,5,3]}' },
+    { label: 'Own case 1', input: '{"nums1":[2,3,8],"nums2":[5,6,4]}' },
     { label: 'Example 2', input: '{"nums1":[1,9],"nums2":[9,2]}' },
     { label: 'One pair', input: '{"nums1":[3],"nums2":[3]}' },
     { label: 'Equal pairs', input: '{"nums1":[2,2],"nums2":[2,2]}' },

@@ -20,6 +20,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"users":[{"user_id":1,"email":"ann@example.com"},{"user_id":2,"email":"1bob@example.com"},{"user_id":3,"email":"carl_9@example.com"},{"user_id":4,"email":"dee@example.org"}]}' },
     { label: 'Empty', input: '{"users":[]}' },
+    { label: 'Single user', input: '{"users":[{"user_id":9,"email":"solo@example.com"}]}' },
+    { label: 'Equal emails tie', input: '{"users":[{"user_id":1,"email":"a@example.com"},{"user_id":2,"email":"a@example.com"}]}' },
+    { label: 'Edge characters', input: '{"users":[{"user_id":1,"email":"x.y-z_1@example.com"},{"user_id":2,"email":"1bad@example.com"}]}' },
+    { label: 'Long run: 12 rows', input: '{"users":[{"user_id":1,"email":"u1_900@example.com"},{"user_id":2,"email":"u2_876@example.com"},{"user_id":3,"email":"u3_36@example.com"},{"user_id":4,"email":"u4_526@example.com"},{"user_id":5,"email":"u5_824@example.com"},{"user_id":6,"email":"u6_387@example.com"},{"user_id":7,"email":"u7_259@example.com"},{"user_id":8,"email":"u8_164@example.com"},{"user_id":9,"email":"u9_92@example.com"},{"user_id":10,"email":"u10_87@example.com"},{"user_id":11,"email":"u11_470@example.com"},{"user_id":12,"email":"u12_903@example.com"}]}' },
   ],
 }
 

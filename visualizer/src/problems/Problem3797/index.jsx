@@ -18,6 +18,10 @@ const definition = {
     { label: 'Example 1', input: '{"grid":["..."],"d":2}' },
     { label: 'Example 2', input: '{"grid":["..","..","#."],"d":1}' },
     { label: 'Single row', input: '{"grid":["#..",".#."],"d":2}' },
+    { label: 'One cell', input: '{"grid":["."],"d":1}' },
+    { label: 'Equal rows', input: '{"grid":["..",".."],"d":1}' },
+    { label: 'Full wall with wide distance', input: '{"grid":["#.#",".#.","#.#"],"d":750}' },
+    { label: 'Long run: 8 by 8 grid', input: '{"grid":[".#..#.##","......#.",".##.#...","#.......","....#.##","#......#","...#....","...#...."],"d":5}' },
   ],
 }
 

@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/keys-and-rooms/',
   complexity: 'O(n + total keys) time and O(n) space: each room is pushed once and each key examined once.',
   examples: [
-    { label: 'Example 1', input: '[[1],[2],[3],[]]' },
-    { label: 'Example 2', input: '[[1,3],[3,0,1],[2],[0]]' },
+    { label: 'Own case 1', input: '[[],[3],[2],[1]]' },
+    { label: 'Own case 2', input: '[[0],[2],[3,0,1],[1,3]]' },
     { label: 'Branching', input: '[[1,2],[3],[3,4],[],[0]]' },
     { label: 'Two rooms, key to the second', input: '[[1],[]]' },
     { label: 'Duplicate keys', input: '[[1,1],[]]' },

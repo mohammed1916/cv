@@ -18,6 +18,9 @@ const definition = {
   examples: [
     { label: 'Three teams', input: '{"n":3}' },
     { label: 'Four teams', input: '{"n":4}' },
+    { label: 'Two teams', input: '{"n":2}' },
+    { label: 'Three teams', input: '{"n":3}' },
+    { label: 'Largest team count', input: '{"n":4}' },
   ],
 }
 

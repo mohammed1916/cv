@@ -16,6 +16,10 @@ const definition = {
     { label: "Three letters", input: '{"s":"abc"}' },
     { label: "Two letters", input: '{"s":"ab"}' },
     { label: "Wrap around", input: '{"s":"xyz"}' },
+    { label: "One letter", input: "{\"s\":\"a\"}" },
+    { label: "Equal letters", input: "{\"s\":\"mmmm\"}" },
+    { label: "Longest repeated letters", input: "{\"s\":\"zzzzzzzzzzzz\"}" },
+    { label: "Long run: 12 letters", input: "{\"s\":\"cngkybiezwsg\"}" },
   ],
 };
 

@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Chain', input: '{"n":4,"conversions":[[0,1,2],[1,2,3],[1,3,5]],"queries":[[2,0],[0,3],[3,2]]}' },
     { label: 'Two units', input: '{"n":2,"conversions":[[0,1,3]],"queries":[[0,1],[1,0]]}' },
+    { label: 'Two units, factor 4', input: '{"n":2,"conversions":[[0,1,4]],"queries":[[0,1]]}' },
+    { label: 'Equal factors', input: '{"n":3,"conversions":[[0,1,2],[1,2,2]],"queries":[[0,2],[2,0]]}' },
+    { label: 'Largest factors', input: '{"n":4,"conversions":[[0,1,9],[2,3,9],[1,2,9]],"queries":[[0,3],[3,0],[2,2]]}' },
+    { label: 'Long run: 8 units, 6 queries', input: '{"n":8,"conversions":[[0,1,4],[1,2,1],[0,3,5],[3,4,7],[2,5,6],[3,6,6],[0,7,8]],"queries":[[3,5],[1,3],[0,1],[6,1],[7,5],[1,3]]}' },
   ],
 }
 

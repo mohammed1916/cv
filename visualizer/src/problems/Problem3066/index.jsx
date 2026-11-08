@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-operations-to-exceed-threshold-value-ii/',
   complexity: 'O(n log n + ops log n) time with a min heap. The visualization caps input at 8 numbers and threshold 30.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[2,11,10,1,3],"k":10}' },
-    { label: 'Example 2', input: '{"nums":[1,1,2,4,9],"k":20}' },
+    { label: 'Own case 1', input: '{"nums":[3,12,11,2,4],"k":11}' },
+    { label: 'Own case 2', input: '{"nums":[2,2,3,5,10],"k":21}' },
     { label: 'Equal values', input: '{"nums":[4,4,4],"k":4}' },
     { label: 'Two values', input: '{"nums":[2,2],"k":2}' },
     { label: 'Largest values', input: '{"nums":[30,29,28,27,26,25,24,23],"k":30}' },

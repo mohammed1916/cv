@@ -16,7 +16,7 @@ const definition = {
   url: 'https://leetcode.com/problems/reward-top-k-students/',
   complexity: 'O(n * w * log k) time for n reports with w words each. The visualization caps the input at 6 students.',
   examples: [
-    { label: 'Example 1', input: '{"positive_feedback":["smart","brilliant","studious"],"negative_feedback":["not"],"report":["this student is studious","the student is smart"],"student_id":[1,2],"k":2}' },
+    { label: 'Own case 1', input: '{"positive_feedback":["studious","brilliant","smart"],"negative_feedback":["not"],"report":["the student is smart","this student is studious"],"student_id":[2,1],"k":2}' },
     { label: 'Negative word', input: '{"positive_feedback":["smart","brilliant","studious"],"negative_feedback":["not"],"report":["this student is not studious","the student is smart"],"student_id":[1,2],"k":2}' },
     { label: 'Single student', input: '{"positive_feedback":["smart"],"negative_feedback":["not"],"report":["the smart one"],"student_id":[1],"k":1}' },
     { label: 'Equal scores', input: '{"positive_feedback":["smart"],"negative_feedback":["not"],"report":["smart","smart"],"student_id":[7,3],"k":2}' },

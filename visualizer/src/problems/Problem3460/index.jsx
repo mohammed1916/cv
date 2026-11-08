@@ -16,6 +16,10 @@ const definition = {
     { label: 'Gap closed', input: '{"first":"abxcd","second":"abcd"}' },
     { label: 'No help', input: '{"first":"xyz","second":"abc"}' },
     { label: 'Second ends early', input: '{"first":"mnop","second":"mn"}' },
+    { label: 'Single letter each', input: '{"first":"a","second":"a"}' },
+    { label: 'Equal strings tie', input: '{"first":"abc","second":"abc"}' },
+    { label: 'Longest reversed', input: '{"first":"abcdefghijklmnopqrst","second":"tsrqponmlkjihgfedcba"}' },
+    { label: 'Long run: 20 letters', input: '{"first":"gzwgmqxruqgssxplnnfp","second":"otsgyamtcikhkmriohyq"}' },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Scattered zeros', input: '{"n":1020030}' },
     { label: 'Trailing zeros', input: '{"n":1000}' },
+    { label: 'Smallest n', input: '{"n":1}' },
+    { label: 'Single digit', input: '{"n":7}' },
+    { label: 'Largest allowed', input: '{"n":1000000000000}' },
+    { label: 'Long run: 12 digits', input: '{"n":987654321098}' },
   ],
 }
 

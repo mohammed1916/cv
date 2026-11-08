@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-subarray-with-bitwise-or-closest-to-k/',
   complexity: 'O(n * log V) time and O(log V) space, since each end index keeps at most log V distinct ORs. The visualization caps the input at 20 values.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,4,5],"k":3}' },
-    { label: 'Example 2', input: '{"nums":[1,3,1,3],"k":2}' },
+    { label: 'Own case 1', input: '{"nums":[2,3,5,6],"k":4}' },
+    { label: 'Own case 2', input: '{"nums":[2,4,2,4],"k":3}' },
     { label: "Single value", input: "{\"nums\": [7], \"k\": 7}" },
     { label: "Largest values", input: "{\"nums\": [255, 255, 255], \"k\": 255}" },
     { label: "Long run: 20 values", input: "{\"nums\": [12, 200, 45, 7, 128, 99, 64, 3, 255, 18, 77, 140, 33, 91, 6, 250, 119, 58, 201, 22], \"k\": 200}" },

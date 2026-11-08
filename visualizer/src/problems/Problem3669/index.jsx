@@ -23,6 +23,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"n":60,"k":3}' },
     { label: 'Square', input: '{"n":36,"k":2}' },
+    { label: 'Smallest n', input: '{"n":4,"k":2}' },
+    { label: 'Twelve divisors', input: '{"n":12,"k":5}' },
+    { label: 'Largest n', input: '{"n":1000,"k":5}' },
+    { label: 'Long run: n = 840', input: '{"n":840,"k":3}' },
   ],
 }
 

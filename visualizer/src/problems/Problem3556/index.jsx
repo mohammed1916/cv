@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"12234"}' },
     { label: 'Example 2', input: '{"s":"111"}' },
+    { label: 'Single digit', input: '{"s":"7"}' },
+    { label: 'Zeros', input: '{"s":"0000"}' },
+    { label: 'Ten nines', input: '{"s":"9999999999"}' },
+    { label: 'Long run: 10 digits', input: '{"s":"6002209585"}' },
   ],
 }
 

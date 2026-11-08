@@ -15,7 +15,7 @@ const definition = {
   complexity: 'O(n log n) for the sort. The visualization caps input at 8 points.',
   examples: [
     { label: 'Example 1', input: '{"points":[[-2,-2],[0,0]],"s":"ab"}' },
-    { label: 'Example 2', input: '{"points":[[1,1],[-1,-1],[2,-2]],"s":"ccd"}' },
+    { label: 'Own case 1', input: '{"points":[[2,2],[-2,-2],[3,-3]],"s":"dde"}' },
     { label: "Single point at the origin", input: "{\"points\":[[0,0]],\"s\":\"q\"}" },
     { label: "Equal distance pairs", input: "{\"points\":[[2,-2],[-2,2],[1,0]],\"s\":\"xyz\"}" },
     { label: "Corners of the coordinate range", input: "{\"points\":[[-10,-10],[10,10],[0,10],[-10,0]],\"s\":\"abcd\"}" },

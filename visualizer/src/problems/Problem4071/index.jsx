@@ -20,6 +20,10 @@ const definition = {
   examples: [
     { label: 'Reverse the tail', input: '91' },
     { label: 'Mixed digits', input: '3072' },
+    { label: "Single digit", input: "7" },
+    { label: "Equal digits", input: "5555" },
+    { label: "Largest input length", input: "011752422853277179405483145879" },
+    { label: "Zeros inside", input: "100000000" },
   ],
 }
 

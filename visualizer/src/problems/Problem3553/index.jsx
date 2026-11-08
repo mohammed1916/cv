@@ -27,6 +27,10 @@ const definition = {
   examples: [
     { label: 'Path', input: '{"n":3,"edges":[[0,1,2],[1,2,3]],"queries":[[0,2,1]]}' },
     { label: 'Star', input: '{"n":4,"edges":[[0,1,1],[0,2,2],[0,3,4]],"queries":[[1,2,3]]}' },
+    { label: 'Two nodes', input: '{"n":2,"edges":[[0,1,5]],"queries":[[0,1,0]]}' },
+    { label: 'Equal weights', input: '{"n":3,"edges":[[0,1,2],[1,2,2]],"queries":[[0,2,1],[2,0,2]]}' },
+    { label: 'Largest weights', input: '{"n":4,"edges":[[0,1,9],[1,2,9],[2,3,9]],"queries":[[0,3,3]]}' },
+    { label: 'Long run: 8 nodes, 6 queries', input: '{"n":8,"edges":[[0,1,2],[0,2,3],[0,3,2],[2,4,8],[0,5,2],[1,6,4],[2,7,2]],"queries":[[0,5,3],[1,3,1],[3,2,7],[7,4,4],[3,4,1],[7,3,5]]}' },
   ],
 }
 

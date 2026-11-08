@@ -19,6 +19,10 @@ const definition = {
   examples: [
     { label: 'Two blocks', input: '{"nums":[1,2,3,4,5,6,7,8],"k":2}' },
     { label: 'Three blocks', input: '{"nums":[5,-1,0,3,9,9],"k":3}' },
+    { label: 'Single block', input: '{"nums":[4],"k":1}' },
+    { label: 'Equal values', input: '{"nums":[2,2,2,2],"k":2}' },
+    { label: 'Extreme values, one block', input: '{"nums":[-9,9,-9,9,-9,9,-9,9,-9,9,-9,9,-9,9,-9,9],"k":16}' },
+    { label: 'Long run: 16 values', input: '{"nums":[3,2,1,-5,-7,-6,4,6,-8,-4,9,2,-1,-7,1,-6],"k":4}' },
   ],
 }
 

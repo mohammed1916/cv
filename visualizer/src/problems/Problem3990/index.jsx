@@ -13,6 +13,10 @@ const definition = {
     { label: 'One path', input: '{"k":1}' },
     { label: 'Power of two', input: '{"k":64}' },
     { label: 'Many added ones, k = 991', input: '{"k":991}' },
+    { label: "Two", input: '{"k":2}' },
+    { label: "Maximum k", input: '{"k":1000}' },
+    { label: "Long run: k = 997", input: '{"k":997}' },
+    { label: "Power of two: 512", input: '{"k":512}' },
   ],
 }
 

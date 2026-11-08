@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree/',
   complexity: 'O(E^2 * α(n)) after sorting, for E edges. The visualization caps input at 6 vertices and 8 edges.',
   examples: [
-    { label: 'Example 1', input: '{"n":5,"edges":[[0,1,1],[1,2,1],[2,3,2],[0,3,2],[0,4,3],[3,4,3],[1,4,6]]}' },
+    { label: 'Own case 1', input: '{"n":5,"edges":[[1,4,6],[3,4,3],[0,4,3],[0,3,2],[2,3,2],[1,2,1],[0,1,1]]}' },
     { label: 'Square', input: '{"n":4,"edges":[[0,1,1],[1,2,1],[2,3,1],[0,3,1]]}' },
     { label: 'Two vertices', input: '{"n":2,"edges":[[0,1,4]]}' },
     { label: 'Repeated weights', input: '{"n":3,"edges":[[0,1,2],[1,2,2],[0,2,2]]}' },

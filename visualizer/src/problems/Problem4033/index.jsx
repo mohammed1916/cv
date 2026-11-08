@@ -22,6 +22,10 @@ const definition = {
   examples: [
     { label: 'Mixed ranges', input: '{"nums":[2,2,5,5,2,2,8,8],"k":2,"queries":[[0,3],[0,5],[4,7],[1,7]]}' },
     { label: 'Three values', input: '{"nums":[1,2,2,3,1,3],"k":3,"queries":[[0,5],[1,2],[0,3]]}' },
+    { label: "Two values", input: "{\"nums\":[5,9],\"k\":1,\"queries\":[[0,1]]}" },
+    { label: "Equal values", input: "{\"nums\":[4,4,4],\"k\":2,\"queries\":[[0,2],[1,2]]}" },
+    { label: "Largest and smallest values", input: "{\"nums\":[100,1,100,1,100],\"k\":5,\"queries\":[[0,4],[1,3]]}" },
+    { label: "Long run: 20 values, 10 queries", input: "{\"nums\":[10,94,26,87,77,2,90,17,31,59,15,6,14,99,21,74,47,18,82,35],\"k\":7,\"queries\":[[4,8],[12,16],[16,19],[5,9],[5,17],[16,17],[0,11],[14,16],[5,6],[3,13]]}" },
   ],
 }
 

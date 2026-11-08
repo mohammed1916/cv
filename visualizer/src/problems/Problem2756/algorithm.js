@@ -1,5 +1,5 @@
 const lines = text => text.split('\n').map((t, i) => ({ line: i + 1, text: t }))
-const PY_OF = {1: 47, 2: 47, 3: 48, 4: 49, 5: 50}
+const PY_OF = {1: 2, 2: 2, 3: 3, 4: 4, 5: 5}
 const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: PY_OF[line] ?? line, activeLine: line, message, state })
 export const PHASES = [
   { id: 'setup', label: 'Setup', description: 'Read the input and prepare the model.' },
@@ -38,7 +38,7 @@ export function buildTrace(tasks) {
     results[index] = task.fail
       ? { status: 'rejected', reason: task.id }
       : { status: 'fulfilled', value: `${task.id}-done` }
-    frames.push(frame('step', 3, `Task ${task.id} ${task.fail ? 'rejects' : 'fulfils'} at ${task.ms}ms; record it in slot ${index}.`, { time: task.ms, results: results.map(r => r && r.status) }))
+    frames.push(frame('step', 4, `Task ${task.id} ${task.fail ? 'rejects' : 'fulfils'} at ${task.ms}ms; record it in slot ${index}.`, { time: task.ms, results: results.map(r => r && r.status) }))
   }
   frames.push(frame('done', 5, 'Every task is recorded; results keep input order.', { results }))
   return { input: tasks, result: results, frames }

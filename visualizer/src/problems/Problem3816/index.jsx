@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"aaccb"}' },
     { label: 'Ends early', input: '{"s":"bcdcbbc"}' },
+    { label: 'One letter', input: '{"s":"a"}' },
+    { label: 'Repeated letters', input: '{"s":"aaaa"}' },
+    { label: 'Ten of one letter', input: '{"s":"zzzzzzzzzz"}' },
+    { label: 'Long run: 10 letters', input: '{"s":"ouganvtujf"}' },
   ],
 }
 

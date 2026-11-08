@@ -1,5 +1,5 @@
 const lines = text => text.split('\n').map((t, i) => ({ line: i + 1, text: t }))
-const PY_OF = {1: 54, 2: 55, 3: 56, 4: 57, 5: 60, 6: 61, 7: 62}
+const PY_OF = {1: 2, 2: 3, 3: 4, 4: 6, 5: 8, 6: 10, 7: 10}
 const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: PY_OF[line] ?? line, activeLine: line, message, state })
 export const PHASES = [
   { id: 'setup', label: 'Setup', description: 'Read the input and prepare the model.' },
@@ -45,7 +45,7 @@ export function buildTrace({ arr, target }) {
   }
   const last = lo - 1
   const result = last >= 0 && arr[last] === target ? last : -1
-  frames.push(frame('done', 7, result === -1 ? 'No copy of the target.' : `Last copy is at index ${result}.`, { boundary: lo, result }))
+  frames.push(frame('done', 6, result === -1 ? 'No copy of the target.' : `Last copy is at index ${result}.`, { boundary: lo, result }))
   return { input: { arr, target }, result, frames }
 }
 export const code = lines(`let lo = 0, hi = arr.length; // set lo to 0 and hi to the length

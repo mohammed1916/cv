@@ -14,7 +14,7 @@ const definition = {
   complexity: 'O(n) time with a deque of candidate indices, O(n) space. The visualization caps input at 12 points.',
   examples: [
     { label: 'Example 1', input: '{"points":[[1,3],[2,0],[5,10],[6,-10]],"k":1}' },
-    { label: 'Example 2', input: '{"points":[[0,0],[3,0],[9,2]],"k":3}' },
+    { label: 'Own case 2', input: '{"points":[[1,1],[4,1],[10,3]],"k":4}' },
     { label: 'Two points', input: '{"points":[[0,0],[1,5]],"k":1}' },
     { label: 'Even spacing', input: '{"points":[[0,0],[2,1],[4,2],[6,3]],"k":2}' },
     { label: 'Coordinate limits', input: '{"points":[[-10,10],[-9,-10],[0,10],[10,-10]],"k":10}' },

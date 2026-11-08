@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/smallest-subtree-with-all-the-deepest-nodes/',
   complexity: 'O(n) time, O(h) recursion space; every node is processed once.',
   examples: [
-    { label: 'Official example 1', input: '[3,5,1,6,2,0,8,null,null,7,4]' },
+    { label: 'Own case 1', input: '[4,6,2,7,3,1,9,null,null,8,5]' },
     { label: 'Single node', input: '[1]' },
     { label: 'Deepest only on one side', input: '[0,1,3,null,2]' },
     { label: 'Skewed', input: '[1,2,null,3,null,4]' },

@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-profit-of-operating-a-centennial-wheel/',
   complexity: 'O(customers + rotations) time. The visualization caps the group list at 20.',
   examples: [
-    { label: 'Example 1', input: '{"customers":[8,3],"boardingCost":5,"runningCost":6}' },
-    { label: 'Example 2', input: '{"customers":[10,9,6],"boardingCost":6,"runningCost":4}' },
+    { label: 'Own case 1', input: '{"customers":[9,4],"boardingCost":6,"runningCost":7}' },
+    { label: 'Own case 2', input: '{"customers":[11,10,7],"boardingCost":7,"runningCost":5}' },
     { label: "Single group", input: "{\"customers\":[4],\"boardingCost\":5,\"runningCost\":6}" },
     { label: "Running and boarding cost equal", input: "{\"customers\":[2,2],\"boardingCost\":3,\"runningCost\":3}" },
     { label: "Twenty large groups", input: "{\"customers\":[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50],\"boardingCost\":100,\"runningCost\":0}" },

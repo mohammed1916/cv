@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Two pairs', input: '{"nums1":[2,4,1],"nums2":[3,1,5,2],"k":2}' },
     { label: 'Negatives', input: '{"nums1":[-4,1,-2],"nums2":[2,-1,3],"k":2}' },
+    { label: 'One value each', input: '{"nums1":[0],"nums2":[0],"k":1}' },
+    { label: 'Equal values', input: '{"nums1":[3,3],"nums2":[3,3],"k":2}' },
+    { label: 'Extremes', input: '{"nums1":[9,9,9,9,9],"nums2":[-9,-9,-9,-9,-9],"k":5}' },
+    { label: 'Long run: 5 values each', input: '{"nums1":[7,-6,0,-4,4],"nums2":[8,-3,9,8,-2],"k":3}' },
   ],
 }
 

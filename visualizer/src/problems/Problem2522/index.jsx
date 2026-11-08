@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/partition-string-into-substrings-with-values-at-most-k/',
   complexity: 'O(n^2) substring checks, each in O(n) time. The visualization caps s at 12 digits and k at 1000.',
   examples: [
-    { label: 'Example 1', input: '{"s":"165462","k":60}' },
-    { label: 'Example 2', input: '{"s":"238182","k":5}' },
+    { label: 'Own case 1', input: '{"s":"276573","k":61}' },
+    { label: 'Own case 2', input: '{"s":"349293","k":6}' },
     { label: 'Single digit', input: '{"s":"7","k":7}' },
     { label: 'Equal digits', input: '{"s":"5555","k":5}' },
     { label: 'Twelve nines, largest k', input: '{"s":"999999999999","k":1000}' },

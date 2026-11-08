@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Shifted start', input: '[3, 0, 4, 1]' },
     { label: 'Mixed run', input: '[5, 2, 6, 2, 1]' },
+    { label: 'Single value', input: '[0]' },
+    { label: 'Equal values', input: '[4,4,4]' },
+    { label: 'Largest values alternating', input: '[12,0,12,0]' },
+    { label: 'Long run: 12 items', input: '[10,11,8,1,2,1,7,5,10,8,9,11]' },
   ],
 }
 

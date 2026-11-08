@@ -14,8 +14,12 @@ const definition = {
   url: 'https://leetcode.com/problems/find-most-frequent-vowel-and-consonant/',
   complexity: 'O(n + 26) time and O(1) extra space. The visualization caps input at 30 letters.',
   examples: [
-    { label: 'Example 1', input: '"successes"' },
+    { label: 'Own case 1', input: '"tvddfttft"' },
     { label: 'Vowels only', input: '"aeiou"' },
+    { label: 'One letter', input: '"a"' },
+    { label: 'Repeated letters', input: '"aaaaaa"' },
+    { label: 'Largest allowed length', input: '"abcdefghijklmnopqrstuvwxyzabcd"' },
+    { label: 'Long run: 30 letters', input: '"xpbkuuwgzruhuzuknfkhkrtrfabqys"' },
   ],
 }
 

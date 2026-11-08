@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/max-pair-sum-in-an-array/',
   complexity: 'O(n times d) time for n values with d digits, and O(10) extra space. The visualization caps input at 12 values.',
   examples: [
-    { label: 'Example 1', input: '[51,71,17,24,42]' },
+    { label: 'Own case 1', input: '[52,72,18,25,43]' },
     { label: 'Example 2', input: '[1,2,3,4]' },
     { label: "Single value", input: "[42]" },
     { label: "Equal values", input: "[7,7,7,7]" },

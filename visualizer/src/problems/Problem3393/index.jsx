@@ -13,8 +13,12 @@ const definition = {
   url: 'https://leetcode.com/problems/count-paths-with-the-given-xor-value/',
   complexity: 'O(m * n * 16) time, since every XOR value stays within 0 to 15. The visualization caps the grid at 5 by 5.',
   examples: [
-    { label: 'Official', input: '{"grid":[[2,1,5],[7,10,0],[12,6,4]],"k":11}' },
+    { label: 'Own case 1', input: '{"grid":[[3,2,6],[8,11,1],[13,7,5]],"k":12}' },
     { label: 'Single cell', input: '{"grid":[[7]],"k":7}' },
+    { label: 'Single cell, k zero', input: '{"grid":[[15]],"k":0}' },
+    { label: 'Equal cells', input: '{"grid":[[3,3],[3,3]],"k":3}' },
+    { label: 'Largest grid, largest values', input: '{"grid":[[15,15,15,15,15],[15,15,15,15,15],[15,15,15,15,15],[15,15,15,15,15],[15,15,15,15,15]],"k":15}' },
+    { label: 'Long run: 5 by 5 grid', input: '{"grid":[[5,5,7,12,13],[4,7,5,10,8],[15,12,1,4,1],[5,4,12,3,5],[9,4,8,15,4]],"k":7}' },
   ],
 }
 

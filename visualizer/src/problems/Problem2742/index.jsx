@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/painting-the-walls/',
   complexity: 'O(n^2) time and O(n) space. The visualization caps input at 10 walls.',
   examples: [
-    { label: 'Example 1', input: '{"cost":[1,2,3,2],"time":[1,2,3,2]}' },
-    { label: 'Example 2', input: '{"cost":[2,3,4,2],"time":[1,1,1,1]}' },
+    { label: 'Own case 1', input: '{"cost":[2,3,4,3],"time":[2,3,4,3]}' },
+    { label: 'Own case 2', input: '{"cost":[3,4,5,3],"time":[2,2,2,2]}' },
     { label: 'Single task', input: '{"cost":[5],"time":[3]}' },
     { label: 'Equal costs and times', input: '{"cost":[4,4,4],"time":[2,2,2]}' },
     { label: 'Largest input', input: '{"cost":[100,100,100,100,100,100,100,100,100,100],"time":[10,10,10,10,10,10,10,10,10,10]}' },

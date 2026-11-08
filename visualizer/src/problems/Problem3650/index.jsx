@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"n":4,"edges":[[0,1,3],[3,1,1],[2,3,4],[0,2,1]]}' },
     { label: 'Reversal', input: '{"n":2,"edges":[[1,0,2]]}' },
+    { label: 'Two nodes, one edge', input: '{"n":2,"edges":[[0,1,1]]}' },
+    { label: 'Equal-weight routes', input: '{"n":3,"edges":[[0,1,2],[1,2,2],[0,2,4]]}' },
+    { label: 'Largest weights', input: '{"n":6,"edges":[[0,1,6],[1,2,6],[2,3,6],[3,4,6],[4,5,6],[5,0,6],[0,3,1],[3,0,1]]}' },
+    { label: 'Long run: 8 edges', input: '{"n":6,"edges":[[2,0,6],[0,3,1],[2,3,4],[2,0,5],[4,1,1],[1,2,1],[4,1,1],[0,5,3]]}' },
   ],
 }
 

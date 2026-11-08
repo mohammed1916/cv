@@ -13,6 +13,10 @@ const definition = {
     { label: 'Three grids', input: '{"c":7,"connections":[[2,5],[5,7],[1,3],[4,6]],"queries":[[1,5],[2,2],[1,2],[2,5],[2,7],[1,7],[1,1],[2,3],[1,3],[2,1],[1,3]]}' },
     { label: 'No cables, repeat shutdown', input: '{"c":4,"connections":[],"queries":[[2,2],[2,2],[1,2],[1,4]]}' },
     { label: 'Loop of cables', input: '{"c":5,"connections":[[1,2],[2,3],[3,1],[4,5]],"queries":[[2,1],[2,2],[1,3],[1,1],[2,3],[1,2],[1,4]]}' },
+    { label: 'Single station', input: '{"c":1,"connections":[],"queries":[[1,1]]}' },
+    { label: 'Duplicate cable', input: '{"c":2,"connections":[[1,2],[2,1]],"queries":[[1,1],[2,2],[1,2]]}' },
+    { label: 'Largest station count', input: '{"c":16,"connections":[],"queries":[[2,16],[1,16],[2,1],[1,1]]}' },
+    { label: 'Long run: 16 stations, 20 queries', input: '{"c":16,"connections":[[5,11],[1,16],[3,1],[6,7],[10,7],[7,16],[10,5],[4,11],[8,15],[16,13],[7,9],[15,9],[11,8],[5,3],[3,2],[7,3],[15,5],[12,16],[1,13],[7,11],[11,13],[13,9],[3,9],[3,12]],"queries":[[2,5],[2,10],[2,6],[1,7],[1,15],[2,5],[2,4],[1,10],[2,9],[1,9],[1,3],[1,6],[2,5],[1,6],[1,3],[1,11],[2,1],[2,11],[1,4],[2,10]]}' },
   ],
 }
 

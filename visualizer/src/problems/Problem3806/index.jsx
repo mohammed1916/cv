@@ -13,8 +13,12 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-bitwise-and-after-increment-operations/',
   complexity: 'O(bits * n log n) time. The visualization caps n at 5 and values at 15.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[3,1,2],"k":8,"m":2}' },
-    { label: 'Example 2', input: '{"nums":[1,2,8,4],"k":7,"m":3}' },
+    { label: 'Own case 1', input: '{"nums":[4,2,3],"k":9,"m":3}' },
+    { label: 'Own case 2', input: '{"nums":[2,3,9,5],"k":8,"m":4}' },
+    { label: 'One value', input: '{"nums":[7],"k":7,"m":1}' },
+    { label: 'Equal values', input: '{"nums":[4,4,4],"k":4,"m":2}' },
+    { label: 'Maximum values, five blocks', input: '{"nums":[15,15,15,15,15],"k":30,"m":5}' },
+    { label: 'Long run: 5 values', input: '{"nums":[12,14,11,12,9],"k":25,"m":3}' },
   ],
 }
 

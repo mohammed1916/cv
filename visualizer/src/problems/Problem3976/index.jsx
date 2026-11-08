@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Mixed signs', input: '{"nums":[-2,5,-3,4],"k":3}' },
     { label: 'Negative run', input: '{"nums":[-4,-1,-6,2],"k":2}' },
+    { label: "Single value", input: '{"nums":[-3],"k":1}' },
+    { label: "Equal values", input: '{"nums":[5,5,5],"k":2}' },
+    { label: "Extremes with maximum k", input: '{"nums":[20,-20,20,-20,20,-20,20,-20],"k":20}' },
+    { label: "Long run: 8 values", input: '{"nums":[11,17,-11,14,-10,1,-14,-10],"k":7}' },
   ],
 }
 

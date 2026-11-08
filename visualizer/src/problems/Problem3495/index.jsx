@@ -16,6 +16,11 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"ranges":[[3,7],[10,12]]}' },
     { label: 'Single range', input: '{"ranges":[[1,5]]}' },
+    { label: 'Single point range', input: '{"ranges":[[7,7]]}' },
+    { label: 'Equal ranges tie', input: '{"ranges":[[3,9],[3,9],[3,9]]}' },
+    { label: 'Full and edge ranges', input: '{"ranges":[[1,60],[60,60],[1,1]]}' },
+    { label: 'Disjoint ranges', input: '{"ranges":[[1,5],[10,12],[20,20]]}' },
+    { label: 'Long run: 6 ranges', input: '{"ranges":[[51,57],[33,58],[41,49],[14,24],[30,51],[2,44]]}' },
   ],
 }
 

@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Invented market', input: JSON.stringify({ initialCurrency: 'AA', pairs1: [['AA', 'BB']], rates1: [2], pairs2: [['BB', 'AA']], rates2: [3] }) },
     { label: 'Middle hop', input: JSON.stringify({ initialCurrency: 'AA', pairs1: [['AA', 'BB'], ['BB', 'CC']], rates1: [1.5, 2], pairs2: [['CC', 'AA']], rates2: [1.25] }) },
+    { label: 'No trades', input: '{"initialCurrency":"AA","pairs1":[],"rates1":[],"pairs2":[],"rates2":[]}' },
+    { label: 'Equal rates', input: '{"initialCurrency":"AA","pairs1":[["AA","BB"]],"rates1":[1],"pairs2":[["BB","AA"]],"rates2":[1]}' },
+    { label: 'Largest rate limit', input: '{"initialCurrency":"A","pairs1":[["A","B"],["B","C"],["C","D"],["D","E"],["E","F"]],"rates1":[10,10,10,10,10],"pairs2":[["F","A"]],"rates2":[10]}' },
+    { label: 'Long run: five pairs a day', input: '{"initialCurrency":"AB","pairs1":[["FD","AC"],["DA","BC"],["ED","DA"],["DC","FA"],["FE","EA"]],"rates1":[1.5,3.5,3.5,5,2.5],"pairs2":[["CA","CE"],["DA","BC"],["AA","CD"],["FA","EC"],["AC","AE"]],"rates2":[1.75,1.25,1.75,2.25,0.5]}' },
   ],
 }
 

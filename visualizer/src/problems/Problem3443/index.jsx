@@ -22,6 +22,10 @@ const definition = {
     { label: 'Short walk', input: '{"s":"NNEW","k":1}' },
     { label: 'Mixed walk', input: '{"s":"SWSEN","k":2}' },
     { label: 'Straight line', input: '{"s":"EEEEN","k":0}' },
+    { label: 'Single step', input: '{"s":"E","k":0}' },
+    { label: 'Cancelling pair tie', input: '{"s":"NSNS","k":1}' },
+    { label: 'Longest walk', input: '{"s":"NNNNNNNNNNNN","k":12}' },
+    { label: 'Long run: 12 steps', input: '{"s":"NESNSENSWSES","k":6}' },
   ],
 }
 

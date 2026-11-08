@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Mostly singles', input: '{"s":"pqrsttuuu"}' },
     { label: 'Pairs and triples', input: '{"s":"xxyyzzzaaaab"}' },
+    { label: "Single letter", input: "{\"s\":\"z\"}" },
+    { label: "One run of equal letters", input: "{\"s\":\"bbbb\"}" },
+    { label: "Longest allowed string", input: "{\"s\":\"abcdefghijklmnopqrstuvwxyzabcd\"}" },
+    { label: "Long run: 30 letters", input: "{\"s\":\"cabccaacaccacccbbcbaccabbcaaba\"}" },
   ],
 }
 

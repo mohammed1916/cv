@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[2,3,4]}' },
     { label: 'Sixth game', input: '{"nums":[7,2,2,2,2,2]}' },
+    { label: 'One value', input: '{"nums":[1]}' },
+    { label: 'Equal values', input: '{"nums":[2,2,2]}' },
+    { label: 'Largest values', input: '{"nums":[1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000]}' },
+    { label: 'Long run: 16 values', input: '{"nums":[538,950,932,330,947,839,661,179,161,438,670,45,77,446,93,838]}' },
   ],
 }
 

@@ -15,6 +15,10 @@ const definition = {
     { label: "Early partner", input: "[\"sun\",\"sun\",\"moon\",\"sun\"]" },
     { label: "Alternating runs", input: "[\"a\",\"b\",\"b\",\"b\",\"a\",\"a\",\"b\"]" },
     { label: "Equal pair", input: "[\"fox\",\"fox\"]" },
+    { label: 'Single word', input: '["owl"]' },
+    { label: 'Repeated partners', input: '["ab","ab","cd","cd"]' },
+    { label: 'Longest words', input: '["abcdefgh","abcdefgh","hgfedcba"]' },
+    { label: 'Long run: 12 words', input: '["f","eb","dcd","cdef","befed","afefad","f","ed","def","cfab","babaf","abafcf"]' },
   ],
 }
 

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-flowers-in-full-bloom/',
   complexity: 'O((F + P) log F) time with binary search. The visualization caps input at 10 flowers and 10 arrivals.',
   examples: [
-    { label: 'Example 1', input: '{"flowers":[[1,6],[3,7],[9,12],[4,13]],"people":[2,3,7,11]}' },
-    { label: 'Example 2', input: '{"flowers":[[1,10],[3,3]],"people":[3,3,2]}' },
+    { label: 'Own case 1', input: '{"flowers":[[2,7],[4,8],[10,13],[5,14]],"people":[3,4,8,12]}' },
+    { label: 'Own case 2', input: '{"flowers":[[2,11],[4,4]],"people":[4,4,3]}' },
     { label: 'Single flower', input: '{"flowers":[[5,5]],"people":[5]}' },
     { label: 'Equal arrival tie', input: '{"flowers":[[1,20],[1,20]],"people":[10,10]}' },
     { label: 'Long run: ten people', input: '{"flowers":[[1,4],[2,9],[5,5],[6,14],[8,20],[11,12],[13,16],[15,15],[17,20],[3,18]],"people":[1,6,2,9,12,4,25,15,7,20]}' },

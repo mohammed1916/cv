@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-losers-of-the-circular-game/',
   complexity: 'O(n) time for the passes until a repeat. The visualization caps n at 30.',
   examples: [
-    { label: 'Example 1', input: '{"n":5,"k":2}' },
-    { label: 'Example 2', input: '{"n":4,"k":4}' },
+    { label: 'Own case 1', input: '{"n":6,"k":3}' },
+    { label: 'Own case 2', input: '{"n":5,"k":5}' },
     { label: 'One friend', input: '{"n":1,"k":1}' },
     { label: 'Largest n and k', input: '{"n":30,"k":30}' },
     { label: 'Long run: n = 30, k = 7', input: '{"n":30,"k":7}' },

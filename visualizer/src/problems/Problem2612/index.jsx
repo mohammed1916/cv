@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-reverse-operations/',
   complexity: 'O(n * k) time for this visualization, which caps n at 12. Efficient solutions use sorted sets per parity.',
   examples: [
-    { label: 'Example 1', input: '{"n":4,"p":0,"banned":[1,2],"k":4}' },
+    { label: 'Own case 1', input: '{"n":5,"p":1,"banned":[2,3],"k":5}' },
     { label: 'Window 1', input: '{"n":4,"p":2,"banned":[0,1,3],"k":1}' },
     { label: 'Single position', input: '{"n":1,"p":0,"banned":[],"k":1}' },
     { label: 'Full-length window', input: '{"n":5,"p":2,"banned":[],"k":5}' },

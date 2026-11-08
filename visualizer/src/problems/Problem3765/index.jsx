@@ -16,6 +16,10 @@ const definition = {
     { label: 'Complete', input: '{"num":23}' },
     { label: 'Not complete', input: '{"num":39}' },
     { label: 'Single prime', input: '{"num":7}' },
+    { label: "Smallest value", input: "{\"num\":1}" },
+    { label: "Two digits", input: "{\"num\":10}" },
+    { label: "Largest value", input: "{\"num\":1000000000}" },
+    { label: "Long run: 9-digit value", input: "{\"num\":111663568}" },
   ],
 }
 

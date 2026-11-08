@@ -7,6 +7,10 @@ const complexity = 'O(n) time and O(z) space for n session rows and z zombies.'
 const examples = [
   { label: 'Mixed rows', input: '{"now":600,"idle":30,"sessions":[{"session_id":"S101","last_active":540,"is_open":true},{"session_id":"S102","last_active":585,"is_open":true},{"session_id":"S103","last_active":500,"is_open":false},{"session_id":"S104","last_active":570,"is_open":true},{"session_id":"S105","last_active":300,"is_open":true}]}' },
   { label: 'All active', input: '{"now":120,"idle":60,"sessions":[{"session_id":"A1","last_active":100,"is_open":true},{"session_id":"B2","last_active":40,"is_open":false}]}' },
+  { label: 'One session', input: '{"now":0,"idle":1,"sessions":[{"session_id":"A","last_active":0,"is_open":true}]}' },
+  { label: 'Equal last activity', input: '{"now":30,"idle":10,"sessions":[{"session_id":"B1","last_active":20,"is_open":true},{"session_id":"B2","last_active":20,"is_open":false}]}' },
+  { label: 'Largest times', input: '{"now":1439,"idle":240,"sessions":[{"session_id":"ZZ9","last_active":1439,"is_open":false}]}' },
+  { label: 'Long run: 8 sessions', input: '{"now":900,"idle":120,"sessions":[{"session_id":"S1","last_active":198,"is_open":true},{"session_id":"S2","last_active":625,"is_open":false},{"session_id":"S3","last_active":761,"is_open":false},{"session_id":"S4","last_active":252,"is_open":true},{"session_id":"S5","last_active":717,"is_open":true},{"session_id":"S6","last_active":29,"is_open":true},{"session_id":"S7","last_active":726,"is_open":true},{"session_id":"S8","last_active":360,"is_open":false}]}' },
 ]
 const reasoning = [
   'A session is a zombie when it is still open and its last activity is at least the idle threshold before the reference time.',

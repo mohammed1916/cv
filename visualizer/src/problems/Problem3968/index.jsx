@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Two blanks', input: 'L_R_U' },
     { label: 'Leading blanks', input: '__LLU' },
+    { label: "Single blank", input: '_' },
+    { label: "Balanced moves", input: 'UD' },
+    { label: "Longest allowed string", input: 'UUDDLLRR__UUDDLLRR__UUDDLLRR__' },
+    { label: "Long run: 30 moves", input: 'RURL_LR_ULUURRU_LRUDR__R_DUD_R' },
   ],
 }
 

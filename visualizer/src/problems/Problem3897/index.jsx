@@ -14,6 +14,11 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums1":[2,0,1],"nums0":[1,3,0]}' },
     { label: 'Three segments', input: '{"nums1":[0,3,1],"nums0":[2,0,1]}' },
+    { label: 'Single segment of ones', input: '{"nums1":[1],"nums0":[0]}' },
+    { label: 'Single segment of zeros', input: '{"nums1":[0],"nums0":[1]}' },
+    { label: 'Equal segments', input: '{"nums1":[2,2],"nums0":[2,2]}' },
+    { label: 'Maximum counts', input: '{"nums1":[8,0,8],"nums0":[0,8,8]}' },
+    { label: 'Long run: 8 segments', input: '{"nums1":[0,2,6,0,8,8,1,6],"nums0":[2,1,3,4,0,5,7,4]}' },
   ],
 }
 

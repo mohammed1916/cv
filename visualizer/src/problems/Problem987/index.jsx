@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/',
   complexity: 'O(n log n) time for the sort. The visualization caps input at 15 nodes.',
   examples: [
-    { label: 'Example 1', input: '[3,9,20,null,null,15,7]' },
+    { label: 'Own case 1', input: '[4,10,21,null,null,16,8]' },
     { label: 'Ties', input: '[1,2,3,4,6,5,7]' },
     { label: 'Single node', input: '[0]' },
     { label: 'Equal values in every row', input: '[7,7,7,7,7,7,7]' },

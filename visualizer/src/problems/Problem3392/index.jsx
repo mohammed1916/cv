@@ -13,8 +13,12 @@ const definition = {
   url: 'https://leetcode.com/problems/count-subarrays-of-length-three-with-a-condition/',
   complexity: 'O(n) time and O(1) extra space.',
   examples: [
-    { label: 'Example 1', input: '[1,2,1,4,1]' },
-    { label: 'Example 2', input: '[1,1,1]' },
+    { label: 'Own case 1', input: '[2,3,2,5,2]' },
+    { label: 'Own case 2', input: '[2,2,2]' },
+    { label: 'Three ascending values', input: '[1,2,3]' },
+    { label: 'Equal values', input: '[5,5,5,5]' },
+    { label: 'Extreme values', input: '[-100,100,-100]' },
+    { label: 'Long run: 12 values', input: '[42,17,4,-75,-19,-13,34,-15,94,69,-34,59]' },
   ],
 }
 

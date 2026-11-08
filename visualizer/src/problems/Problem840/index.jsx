@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/magic-squares-in-grid/',
   complexity: 'O(R*C) time (each window costs a constant 9 cells) and O(1) extra space.',
   examples: [
-    { label: 'Example 1', input: '[[4,3,8,4],[9,5,1,9],[2,7,6,2]]' },
-    { label: 'Example 2', input: '[[8]]' },
+    { label: 'Own case 1', input: '[[5,4,9,5],[10,6,2,10],[3,8,7,3]]' },
+    { label: 'Own case 2', input: '[[9]]' },
     { label: 'Two squares', input: '[[4,3,8,4,3,8],[9,5,1,9,5,1],[2,7,6,2,7,6],[1,1,1,1,1,1]]' },
     { label: 'Single cell', input: '[[0]]' },
     { label: 'Equal values in a 3 by 3 block', input: '[[1,1,1],[1,1,1],[1,1,1]]' },

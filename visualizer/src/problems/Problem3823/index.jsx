@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Mixed', input: '{"s":"ab-cd"}' },
     { label: 'Two specials', input: '{"s":"a!b@c"}' },
+    { label: 'One letter', input: '{"s":"a"}' },
+    { label: 'Repeated specials', input: '{"s":"!!--"}' },
+    { label: 'Thirty characters, all kinds', input: '{"s":"Ab!c@d#e-Ab!c@d#e-Ab!c@d#e-AbC"}' },
+    { label: 'Long run: 30 characters', input: '{"s":"@-@!A@c!!baCACB#cB#Cbcac#BAC"}' },
   ],
 }
 

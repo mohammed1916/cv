@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Invented list', input: JSON.stringify({ nums: [-3, 2, -2, -1, 3, -2, 3] }) },
     { label: 'Negative edge', input: JSON.stringify({ nums: [-4, -1, -2] }) },
+    { label: 'Single element', input: '{"nums":[5]}' },
+    { label: 'Equal values, one removal', input: '{"nums":[-2,-2,-2]}' },
+    { label: 'Extreme values', input: '{"nums":[9,-9,9,-9,9,-9,9,-9,9,9]}' },
+    { label: 'Long run: 10 items', input: '{"nums":[-3,-6,9,5,-1,3,-9,8,8,8]}' },
   ],
 }
 

@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/find-maximum-removals-from-source-string/',
   complexity: 'O(n * m) time and O(m) space for the pattern DP. The visualization caps source at 16 characters.',
   examples: [
-    { label: 'Example 1', input: '{"source":"abbaa","pattern":"aba","targetIndices":[0,1,2]}' },
+    { label: 'Own case 1', input: '{"source":"bccbb","pattern":"bcb","targetIndices":[1,2,3]}' },
     { label: 'Example 2', input: '{"source":"bcda","pattern":"d","targetIndices":[0,3]}' },
     { label: 'Single letter', input: '{"source":"a","pattern":"a","targetIndices":[0]}' },
     { label: 'No target indices', input: '{"source":"aaaa","pattern":"aa","targetIndices":[]}' },

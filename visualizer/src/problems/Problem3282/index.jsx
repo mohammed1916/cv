@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/reach-end-of-array-with-max-score/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the array at 30 numbers.',
   examples: [
-    { label: 'Example 1', input: '[1,3,1,5]' },
-    { label: 'Example 2', input: '[4,3,1,3,2]' },
+    { label: 'Own case 1', input: '[2,4,2,6]' },
+    { label: 'Own case 2', input: '[5,4,2,4,3]' },
     { label: 'Two equal values', input: '[1,1]' },
     { label: 'Extremes', input: '[50,1]' },
     { label: 'Equal values in a row', input: '[7,7,7,7,7,7]' },

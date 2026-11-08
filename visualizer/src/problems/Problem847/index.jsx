@@ -18,8 +18,8 @@ const definition = {
   url: 'https://leetcode.com/problems/shortest-path-visiting-all-nodes/',
   complexity: 'O(2^n * n * deg) time and O(2^n * n) space. Visualization cap: 7 nodes.',
   examples: [
-    { label: 'Example 1', input: '[[1,2,3],[0],[0],[0]]' },
-    { label: 'Example 2', input: '[[1],[0,2,4],[1,3,4],[2],[1,2]]' },
+    { label: 'Own case 1', input: '[[3,2,1],[0],[0],[0]]' },
+    { label: 'Own case 2', input: '[[1],[4,2,0],[4,3,1],[2],[2,1]]' },
     { label: 'Cycle', input: '[[1,4],[0,2],[1,3],[2,4],[3,0]]' },
     { label: 'Single node', input: '[[]]' },
     { label: 'Symmetric pair', input: '[[1],[0]]' },

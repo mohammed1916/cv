@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Path', input: '{"n":4,"edges":[[0,1],[1,2],[2,3]]}' },
     { label: 'Cycle', input: '{"n":6,"edges":[[0,3],[4,5],[2,0],[1,3],[2,4],[1,5]]}' },
+    { label: 'Two nodes', input: '{"n":2,"edges":[[0,1]]}' },
+    { label: 'Simple cycle', input: '{"n":3,"edges":[[0,1],[1,2],[2,0]]}' },
+    { label: 'Largest path', input: '{"n":12,"edges":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11]]}' },
+    { label: 'Long run: 12-node cycle', input: '{"n":12,"edges":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11],[11,0]]}' },
   ],
 }
 

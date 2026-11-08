@@ -18,6 +18,10 @@ const definition = {
     { label: "Mixed string", input: "{\"s\":\"1011000\"}" },
     { label: "Three ones", input: "{\"s\":\"111000\"}" },
     { label: "Single zero", input: "{\"s\":\"0\"}" },
+    { label: "Single one", input: '{"s":"1"}' },
+    { label: "All equal bits", input: '{"s":"0000"}' },
+    { label: "Longest allowed string", input: '{"s":"1010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010"}' },
+    { label: "Long run: 100 bits", input: '{"s":"1111010101001111001000010011100001100001110001011111111110110101100010101111101111000011101000011011"}' },
   ],
 }
 

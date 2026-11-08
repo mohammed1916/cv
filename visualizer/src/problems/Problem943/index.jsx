@@ -17,8 +17,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-shortest-superstring/',
   complexity: 'O(2^n * n^2) time, O(2^n * n) space. The visualization caps words at 8.',
   examples: [
-    { label: 'Example 1', input: '["alex","loves","leetcode"]' },
-    { label: 'Example 2', input: '["catg","ctaagt","gcta","ttca","atgcatc"]' },
+    { label: 'Own case 1', input: '["bmfy","mpwft","mffudpef"]' },
+    { label: 'Own case 2', input: '["dbuh","dubbhu","hdub","uudb","buhdbud"]' },
     { label: 'Overlaps', input: '["abc","bcd","cde"]' },
     { label: 'Single word', input: '["a"]' },
     { label: 'Equal lengths', input: '["ab","cd","ef"]' },

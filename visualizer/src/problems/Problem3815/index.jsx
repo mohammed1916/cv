@@ -16,6 +16,10 @@ const definition = {
   complexity: 'Each query scans one item here; a per-item ordered structure would answer queries faster.',
   examples: [
     { label: 'Tie on amount', input: '{"ops":[["addBid",1,1,5],["addBid",2,1,7],["addBid",3,1,7],["getHighestBidder",1],["updateBid",1,1,9],["getHighestBidder",1],["removeBid",3,1],["getHighestBidder",1],["getHighestBidder",2]]}' },
+    { label: 'One bid query', input: '{"ops":[["addBid",1,1,5],["getHighestBidder",1]]}' },
+    { label: 'Equal amounts, later bidder removed', input: '{"ops":[["addBid",1,1,6],["addBid",2,1,6],["removeBid",2,1],["getHighestBidder",1]]}' },
+    { label: 'Largest identifiers and amounts', input: '{"ops":[["addBid",30,30,30],["addBid",29,30,30],["getHighestBidder",30]]}' },
+    { label: 'Long run: 12 operations', input: '{"ops":[["addBid",1,1,4],["addBid",2,1,9],["addBid",3,1,7],["getHighestBidder",1],["updateBid",1,1,12],["getHighestBidder",1],["addBid",4,1,6],["removeBid",2,1],["getHighestBidder",1],["updateBid",3,1,30],["getHighestBidder",1],["getHighestBidder",1]]}' },
   ],
 }
 

@@ -13,9 +13,14 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-product-of-subsequences-with-an-alternating-sum-equal-to-k/',
   complexity: 'Pairs of alternating sum and product per step. The visualization caps nums at 16 values.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,3],"k":2,"limit":10}' },
-    { label: 'Example 2', input: '{"nums":[0,2,3],"k":-5,"limit":12}' },
-    { label: 'Example 3', input: '{"nums":[2,2,3,3],"k":0,"limit":9}' },
+    { label: 'Own case 1', input: '{"nums":[2,3,4],"k":3,"limit":11}' },
+    { label: 'Own case 2', input: '{"nums":[1,3,4],"k":-6,"limit":13}' },
+    { label: 'Own case 3', input: '{"nums":[3,3,4,4],"k":1,"limit":10}' },
+    { label: 'Single value', input: '{"nums":[5],"k":0,"limit":1}' },
+    { label: 'Equal values tie', input: '{"nums":[3,3,3,3],"k":3,"limit":10}' },
+    { label: 'Largest values and limit', input: '{"nums":[12,0,12,0,12,0,12,0,12,0,12,0,12,0,12,0],"k":100000,"limit":5000}' },
+    { label: 'Negative k with zeros', input: '{"nums":[0,0,0],"k":-100000,"limit":1}' },
+    { label: 'Long run: 16 values', input: '{"nums":[12,9,8,8,5,8,12,6,2,2,2,7,11,8,7,7],"k":7,"limit":5000}' },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Mixed', input: '{"hp":10,"damage":[2,3,4],"requirement":[5,4,1]}' },
     { label: 'One room', input: '{"hp":3,"damage":[5],"requirement":[1]}' },
+    { label: "One room, exact fit", input: "{\"hp\":1,\"damage\":[1],\"requirement\":[1]}" },
+    { label: "Equal rooms", input: "{\"hp\":5,\"damage\":[2,2,2],\"requirement\":[2,2,2]}" },
+    { label: "Largest values at the limit", input: "{\"hp\":100,\"damage\":[100,1,100,1,100,1,100,1,100,1],\"requirement\":[100,100,100,100,100,100,100,100,100,100]}" },
+    { label: "Long run: 10 rooms", input: "{\"hp\":100,\"damage\":[81,71,36,45,19,30,23,38,97,7],\"requirement\":[4,88,5,19,38,94,45,41,65,65]}" },
   ],
 }
 

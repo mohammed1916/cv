@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/count-unreachable-pairs-of-nodes-in-an-undirected-graph/',
   complexity: 'O(n + m * alpha(n)) time with union-find. The visualization caps n at 20 nodes.',
   examples: [
-    { label: 'Example 1', input: '{"n":7,"edges":[[0,2],[0,5],[2,4],[1,6],[5,4]]}' },
-    { label: 'Example 2', input: '{"n":3,"edges":[[0,1],[0,2],[1,2]]}' },
+    { label: 'Own case 1', input: '{"n":8,"edges":[[1,3],[1,6],[3,5],[2,7],[6,5]]}' },
+    { label: 'Own case 2', input: '{"n":4,"edges":[[1,2],[1,3],[2,3]]}' },
     { label: 'Single node, no edges', input: '{"n":1,"edges":[]}' },
     { label: 'Two isolated nodes', input: '{"n":2,"edges":[]}' },
     { label: 'One cycle joins all nodes', input: '{"n":4,"edges":[[0,1],[1,2],[2,3],[3,0]]}' },

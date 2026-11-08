@@ -13,8 +13,12 @@ const definition = {
   url: 'https://leetcode.com/problems/longest-non-decreasing-subarray-after-replacing-at-most-one-element/',
   complexity: 'O(n) time and O(n) space. The visualization caps the array at 14 values.',
   examples: [
-    { label: 'Example 1', input: '[1,2,3,1,2]' },
+    { label: 'Own case 1', input: '[2,3,4,2,3]' },
     { label: 'Example 2', input: '[1,3,2,4]' },
+    { label: 'Single value', input: '[5]' },
+    { label: 'Equal values', input: '[2,2,2]' },
+    { label: 'Extreme values', input: '[20,-20,20,-20]' },
+    { label: 'Long run: 14 values', input: '[4,20,-1,-7,-14,-6,-13,-13,1,5,-20,11,2,3]' },
   ],
 }
 

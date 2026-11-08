@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"n":987654321}' },
     { label: 'Million', input: '{"n":1000000}' },
+    { label: 'Single integer', input: '{"n":1}' },
+    { label: 'Just below a thousand', input: '{"n":999}' },
+    { label: 'Upper limit', input: '{"n":1000000000000000}' },
+    { label: 'Long run: 15 digits', input: '{"n":999999999999999}' },
   ],
 }
 

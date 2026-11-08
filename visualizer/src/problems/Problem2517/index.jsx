@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-tastiness-of-candy-basket/',
   complexity: 'O(n log n + n log(max price)) time. The visualization caps the input at 12 prices.',
   examples: [
-    { label: 'Example 1', input: '{"price":[13,5,1,8,21,2],"k":3}' },
-    { label: 'Example 2', input: '{"price":[1,3,1],"k":2}' },
+    { label: 'Own case 1', input: '{"price":[14,6,2,9,22,3],"k":4}' },
+    { label: 'Own case 2', input: '{"price":[2,4,2],"k":3}' },
     { label: 'Two candy types', input: '{"price":[1,2],"k":2}' },
     { label: 'Equal prices', input: '{"price":[5,5,5],"k":3}' },
     { label: 'Largest basket, widest range', input: '{"price":[1,50,2,49,3,48,4,47,5,46,6,45],"k":12}' },

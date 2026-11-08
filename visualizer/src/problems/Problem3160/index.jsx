@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-number-of-distinct-colors-among-the-balls/',
   complexity: 'O(1) time per query with two hash maps, and O(q) total time. The visualization caps input at 30 queries.',
   examples: [
-    { label: 'Example 1', input: '{"limit":4,"queries":[[1,4],[2,5],[1,3],[3,4]]}' },
-    { label: 'Example 2', input: '{"limit":4,"queries":[[0,1],[1,2],[2,2],[3,4],[4,5]]}' },
+    { label: 'Own case 1', input: '{"limit":5,"queries":[[2,5],[3,6],[2,4],[4,5]]}' },
+    { label: 'Own case 2', input: '{"limit":5,"queries":[[1,2],[2,3],[3,3],[4,5],[5,6]]}' },
     { label: "Smallest limit", input: "{\"limit\":1,\"queries\":[[0,1]]}" },
     { label: "Same ball repeated", input: "{\"limit\":3,\"queries\":[[1,5],[1,5],[1,5]]}" },
     { label: "Long run: 30 queries", input: "{\"limit\":20,\"queries\":[[0,3],[5,9],[12,2],[7,7],[20,1],[3,3],[18,4],[9,9],[1,8],[15,6],[4,2],[11,11],[6,10],[2,14],[17,5],[8,1],[13,13],[10,7],[19,2],[14,9],[0,20],[16,3],[5,6],[12,12],[7,4],[3,16],[20,20],[9,1],[1,19],[18,8]]}" },

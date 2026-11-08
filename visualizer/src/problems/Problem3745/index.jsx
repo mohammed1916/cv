@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[1,4,2,5]}' },
     { label: 'Ascending', input: '{"nums":[1,2,3,4]}' },
+    { label: "Three equal values", input: "{\"nums\":[0,0,0]}" },
+    { label: "Descending start", input: "{\"nums\":[-3,-1,-2]}" },
+    { label: "Extremes alternate at 16", input: "{\"nums\":[-20,20,-20,20,-20,20,-20,20,-20,20,-20,20,-20,20,-20,20]}" },
+    { label: "Long run: 16 values", input: "{\"nums\":[2,8,-20,-10,-14,-19,-15,9,-16,3,-13,11,-1,10,-19,13]}" },
   ],
 }
 

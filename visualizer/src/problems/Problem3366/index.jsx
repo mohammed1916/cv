@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Invented set', input: JSON.stringify({ nums: [9, 4, 7], k: 3, op1: 1, op2: 1 }) },
     { label: 'Two halvings', input: JSON.stringify({ nums: [12, 5], k: 4, op1: 2, op2: 0 }) },
+    { label: 'Single small value', input: '{"nums":[1],"k":1,"op1":0,"op2":0}' },
+    { label: 'Equal values', input: '{"nums":[5,5,5],"k":5,"op1":1,"op2":1}' },
+    { label: 'Largest values and limits', input: '{"nums":[30,30,30,30,30,30],"k":15,"op1":4,"op2":4}' },
+    { label: 'Long run: 6 values', input: '{"nums":[11,16,3,10,22,25],"k":9,"op1":2,"op2":3}' },
   ],
 }
 

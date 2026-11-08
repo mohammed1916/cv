@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"complexity":[1,2,3]}' },
     { label: 'Example 2', input: '{"complexity":[3,3,3,4,4,4]}' },
+    { label: 'Two entries', input: '{"complexity":[5,9]}' },
+    { label: 'All equal complexities', input: '{"complexity":[4,4,4]}' },
+    { label: 'Largest and smallest values', input: '{"complexity":[20,1,20,1,20,1,20]}' },
+    { label: 'Long run: 7 entries', input: '{"complexity":[4,7,3,13,1,6,1]}' },
   ],
 }
 

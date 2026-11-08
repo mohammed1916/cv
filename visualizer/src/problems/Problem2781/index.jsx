@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/length-of-the-longest-valid-substring/',
   complexity: 'O(n times k times L) time for n letters, k forbidden strings and maximum length L. The visualization caps input at 20 letters.',
   examples: [
-    { label: 'Example 1', input: '{"word":"cbaaaabc","forbidden":["aaa","cb"]}' },
-    { label: 'Example 2', input: '{"word":"leetcode","forbidden":["de","le","e"]}' },
+    { label: 'Own case 1', input: '{"word":"dcbbbbcd","forbidden":["bbb","dc"]}' },
+    { label: 'Own case 2', input: '{"word":"mffudpef","forbidden":["ef","mf","f"]}' },
     { label: 'Single letter', input: '{"word":"a","forbidden":["b"]}' },
     { label: 'Repeated letters', input: '{"word":"aaaa","forbidden":["aa"]}' },
     { label: 'Boundary: 20 letters, 4-letter bans', input: '{"word":"abcdefghijklmnopqrst","forbidden":["abcd","bcde","tsrq","zzzz","mnop","qrst"]}' },

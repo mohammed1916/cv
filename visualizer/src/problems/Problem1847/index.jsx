@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/closest-room/',
   complexity: 'Sorting dominates, then each room insert and query is a binary search over the usable ids. The visualization caps input at 6 rooms and 6 queries.',
   examples: [
-    { label: 'Example 1', input: '{"rooms":[[2,2],[1,2],[3,2]],"queries":[[3,1],[3,3],[5,2]]}' },
+    { label: 'Own case 1', input: '{"rooms":[[3,3],[2,3],[4,3]],"queries":[[4,2],[4,4],[6,3]]}' },
     { label: 'Example 2', input: '{"rooms":[[4,1],[6,1]],"queries":[[5,1],[5,2]]}' },
   { label: 'Single room', input: "{\"rooms\":[[1,5]],\"queries\":[[1,5]]}" },
   { label: 'Equal room sizes', input: "{\"rooms\":[[2,4],[5,4]],\"queries\":[[3,4]]}" },

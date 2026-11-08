@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/divisible-and-non-divisible-sums-difference/',
   complexity: 'O(1) time with the closed form. The visualization shows up to 1000 numbers.',
   examples: [
-    { label: 'Example 1', input: '{"n":10,"m":3}' },
+    { label: 'Own case 1', input: '{"n":11,"m":4}' },
     { label: 'No multiples', input: '{"n":5,"m":6}' },
     { label: "Single number", input: "{\"n\":1,\"m\":1}" },
     { label: "Divisor equals n", input: "{\"n\":5,\"m\":5}" },

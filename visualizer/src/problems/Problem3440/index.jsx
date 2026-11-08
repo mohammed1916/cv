@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Invented short day', input: '{"eventTime":6,"startTime":[0,2],"endTime":[1,4]}' },
     { label: 'Invented three meetings', input: '{"eventTime":10,"startTime":[0,7,9],"endTime":[1,8,10]}' },
+    { label: 'Smallest day', input: '{"eventTime":2,"startTime":[0,1],"endTime":[1,2]}' },
+    { label: 'Touching meetings tie', input: '{"eventTime":10,"startTime":[0,5],"endTime":[5,10]}' },
+    { label: 'Longest day: 30', input: '{"eventTime":30,"startTime":[0,29],"endTime":[1,30]}' },
+    { label: 'Long run: 8 meetings', input: '{"eventTime":30,"startTime":[0,4,8,12,16,20,24,28],"endTime":[3,7,11,15,19,23,27,30]}' },
   ],
 }
 

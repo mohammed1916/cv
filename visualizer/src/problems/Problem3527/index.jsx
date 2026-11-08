@@ -13,6 +13,10 @@ const definition = {
     { label: 'Three-way tie', input: '{"responses":[["mint","lime","mint"],["lime","kiwi"],["kiwi","mint","kiwi"],["plum"]]}' },
     { label: 'Repeats cannot win', input: '{"responses":[["tea","tea","tea","tea"],["milk"],["milk","soda"],["soda","milk"]]}' },
     { label: 'One answer in total', input: '{"responses":[["solo"]]}' },
+    { label: 'Single answer', input: '{"responses":[["a"]]}' },
+    { label: 'Repeated answer across days', input: '{"responses":[["x","x"],["x"],["x","y"]]}' },
+    { label: 'Longest words', input: '{"responses":[["abcdefghij","abcdefghij"]]}' },
+    { label: 'Long run: 8 days', input: '{"responses":[["pyzkubik","apeo","fgb","kvtko","roqbqpe","q","siwyn","kn","iinijuvrep","qpciwhhoqz"],["ek","dy","yyg","fyur","olmg","wryrmjaei","qmnyaau","pkvfcuatua","a","umxbmeffru"],["kfnpd","ubdejlk","scdmlosao","uo","hmtvrsxgqk","ujjhamdly","mkjfntlcn","vaz","my","jjoumf"],["yxx","hgrvfv","ifrbzix","vlee","aceakr","hffiwl","exv","jdnrracxt","ygyrzq","rqor"],["wwlzmn","apiminzuo","xithsirok","ak","jhx","n","oy","dwhtca","yzrwagrumn","pgvojue"],["y","wx","sbwxq","zsapkewqdt","ymqbtyyeen","ptqtauz","gxodwobca","suz","ekfl","qadmis"],["tvrjcnsh","sjtt","fdlkeuo","miockrbm","hhgxbwtnso","fxvce","rvdhtiwhyz","akhww","gatdwvcuz","pbjmlcm"],["rcdsmqjh","hketieali","bsvtqrnvk","mscnjf","ifkgjydl","dla","euibkbrwp","rq","rup","qxajlq"]]}' },
   ],
 }
 

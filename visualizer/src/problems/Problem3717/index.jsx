@@ -15,6 +15,10 @@ const definition = {
     { label: "Expensive middle", input: "[1,8,5,9]" },
     { label: "Small chain", input: "[4,6,9]" },
     { label: "Mixed start", input: "[3,7,2,11]" },
+    { label: 'Single value', input: '[6]' },
+    { label: 'Equal values', input: '[5,5,5]' },
+    { label: 'Alternating extremes', input: '[20,1,20,1,20,1,20,1]' },
+    { label: 'Long run: 8 values', input: '[13,16,7,14,13,16,7,2]' },
   ],
 }
 

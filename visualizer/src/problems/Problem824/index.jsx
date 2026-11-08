@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/goat-latin/',
   complexity: 'O(n^2) time and space in the worst case, because the i-th word receives i trailing a letters.',
   examples: [
-    { label: 'Official 1', input: '"I speak Goat Latin"' },
-    { label: 'Official 2', input: '"The quick brown fox jumped over the lazy dog"' },
+    { label: 'Own case 1', input: '"J tqfbl Hpbu Mbujo"' },
+    { label: 'Own case 2', input: '"Uif rvjdl cspxo gpy kvnqfe pwfs uif mbaz eph"' },
     { label: 'One word', input: '"a"' },
     { label: 'Single letter word', input: '"a"' },
     { label: 'Repeated words get more a letters', input: '"Eat eat"' },

@@ -22,7 +22,7 @@ const definition = {
   examples: [
     { label: "Example 1", input: '{"s":"100011001","k":3}' },
     { label: "Example 2", input: '{"s":"1011","k":2}' },
-    { label: "Example 3", input: '{"s":"000","k":1}' },
+    { label: "Own case 3", input: '{"s":"111","k":2}' },
     { label: "Single digit", input: "{\"s\":\"1\",\"k\":1}" },
     { label: "All ones", input: "{\"s\":\"1111\",\"k\":2}" },
     { label: "Longest string, alternating", input: "{\"s\":\"1010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010\",\"k\":100}" },

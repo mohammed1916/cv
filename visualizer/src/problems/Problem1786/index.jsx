@@ -16,7 +16,7 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-restricted-paths-from-first-to-last-node/',
   complexity: 'O((V + E) log V) time for Dijkstra plus O(V log V + E) for the count. The visualization caps input at 8 nodes.',
   examples: [
-    { label: 'Example 1', input: '{"n":5,"edges":[[1,2,3],[1,3,3],[2,3,1],[1,4,2],[5,2,2],[3,5,1],[5,4,10]]}' },
+    { label: 'Own case 1', input: '{"n":5,"edges":[[5,4,10],[3,5,1],[5,2,2],[1,4,2],[2,3,1],[1,3,3],[1,2,3]]}' },
     { label: 'Path', input: '{"n":3,"edges":[[1,2,1],[2,3,1],[1,3,5]]}' },
   { label: 'Single edge', input: "{\"n\":2,\"edges\":[[1,2,4]]}" },
   { label: 'Equal weights', input: "{\"n\":3,\"edges\":[[1,2,5],[2,3,5],[1,3,5]]}" },

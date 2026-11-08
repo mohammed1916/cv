@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/shortest-subarray-with-or-at-least-k-ii/',
   complexity: 'O(n * log V) time and O(log V) space for the bit counts. The visualization caps the input at 30 values.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,3],"k":2}' },
-    { label: 'Example 2', input: '{"nums":[2,1,8],"k":10}' },
+    { label: 'Own case 1', input: '{"nums":[2,3,4],"k":3}' },
+    { label: 'Own case 2', input: '{"nums":[3,2,9],"k":11}' },
     { label: "Single value", input: "{\"nums\":[1],\"k\":1}" },
     { label: "Equal values", input: "{\"nums\":[3,3,3],\"k\":3}" },
     { label: "Largest values and k", input: "{\"nums\":[255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255],\"k\":255}" },

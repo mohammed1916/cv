@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Two corners', input: '{"side":2,"points":[[0,0],[2,2]],"k":2}' },
     { label: 'Four corners', input: '{"side":2,"points":[[0,0],[0,2],[2,0],[2,2]],"k":4}' },
+    { label: 'Single unit square pair', input: '{"side":1,"points":[[0,0],[1,0]],"k":2}' },
+    { label: 'Collinear edge tie', input: '{"side":3,"points":[[0,0],[0,1],[0,2]],"k":2}' },
+    { label: 'Largest square, eight points', input: '{"side":10,"points":[[0,0],[10,0],[0,10],[10,10],[5,0],[0,5],[10,5],[5,10]],"k":8}' },
+    { label: 'Long run: 8 points', input: '{"side":10,"points":[[0,0],[10,0],[0,10],[10,10],[3,0],[0,7],[10,4],[6,10]],"k":4}' },
   ],
 }
 

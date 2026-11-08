@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/count-ways-to-build-good-strings/',
   complexity: 'O(high) time and O(high) space. The visualization caps high at 14.',
   examples: [
-    { label: 'Example 1', input: '{"low":3,"high":3,"zero":1,"one":1}' },
-    { label: 'Example 2', input: '{"low":2,"high":3,"zero":1,"one":2}' },
+    { label: 'Own case 1', input: '{"low":4,"high":4,"zero":2,"one":2}' },
+    { label: 'Own case 2', input: '{"low":3,"high":4,"zero":2,"one":3}' },
     { label: 'Single length', input: '{"low":1,"high":1,"zero":1,"one":1}' },
     { label: 'Equal limits', input: '{"low":2,"high":2,"zero":3,"one":3}' },
     { label: 'Largest range', input: '{"low":1,"high":14,"zero":6,"one":6}' },

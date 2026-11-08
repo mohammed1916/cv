@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[5,-3,2,-1,4],"l":2,"r":3}' },
     { label: 'No positive sum', input: '{"nums":[-2,2,-3,1],"l":2,"r":3}' },
+    { label: 'Single negative value', input: '{"nums":[-4],"l":1,"r":1}' },
+    { label: 'Equal values across the range', input: '{"nums":[3,3,3,3],"l":1,"r":4}' },
+    { label: 'Extremes alternate', input: '{"nums":[-100,100,-100,100,-100,100,-100,100,-100,100,-100,100],"l":1,"r":12}' },
+    { label: 'Long run: 12 values', input: '{"nums":[91,-90,90,-100,40,-15,-51,87,-30,-95,58,-19],"l":3,"r":11}' },
   ],
 }
 

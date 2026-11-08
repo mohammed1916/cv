@@ -14,6 +14,10 @@ const definition = {
     { label: 'Tie, then an old entry', input: '{"n":3,"calls":[["setCell",2,0,1],["setCell",1,1,1],["setCell",1,2,2],["largestMatrix"],["setCell",2,2,0],["largestMatrix"],["unsetCell",2,2,0],["largestMatrix"]]}' },
     { label: 'Repeats and an empty grid', input: '{"n":2,"calls":[["largestMatrix"],["setCell",0,1,1],["setCell",0,1,1],["largestMatrix"],["unsetCell",0,1,1],["unsetCell",0,1,1],["largestMatrix"]]}' },
     { label: 'One layer only', input: '{"n":1,"calls":[["largestMatrix"],["setCell",0,0,0],["largestMatrix"]]}' },
+    { label: 'Tie on count, then layer', input: '{"n":2,"calls":[["setCell",0,0,1],["setCell",1,1,0],["largestMatrix"]]}' },
+    { label: 'Equal cells in one layer', input: '{"n":3,"calls":[["setCell",0,0,2],["setCell",1,0,2],["setCell",2,0,2],["largestMatrix"]]}' },
+    { label: 'Largest grid, all cleared', input: '{"n":6,"calls":[["setCell",5,5,5],["unsetCell",5,5,5],["largestMatrix"]]}' },
+    { label: 'Long run: 24 calls', input: '{"n":6,"calls":[["setCell",5,2,2],["largestMatrix"],["largestMatrix"],["largestMatrix"],["unsetCell",5,0,4],["setCell",5,4,5],["largestMatrix"],["largestMatrix"],["setCell",5,3,0],["setCell",5,0,0],["largestMatrix"],["setCell",5,3,3],["setCell",1,3,2],["largestMatrix"],["setCell",4,0,1],["largestMatrix"],["largestMatrix"],["unsetCell",1,1,2],["setCell",2,5,4],["largestMatrix"],["setCell",4,0,5],["setCell",0,1,2],["setCell",0,0,5],["setCell",3,0,0]]}' },
   ],
 }
 

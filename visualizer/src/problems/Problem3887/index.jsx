@@ -13,6 +13,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"n":4,"edges":[[0,1,0],[2,1,1],[3,1,0],[0,3,1]]}' },
     { label: 'Even triangle', input: '{"n":4,"edges":[[1,0,1],[2,1,1],[3,2,0]]}' },
+    { label: 'No edges', input: '{"n":1,"edges":[]}' },
+    { label: 'Two nodes, weight one', input: '{"n":2,"edges":[[0,1,1]]}' },
+    { label: 'Parallel edges', input: '{"n":3,"edges":[[0,1,0],[0,1,1],[1,2,1]]}' },
+    { label: 'Long run: 10 nodes, 14 edges', input: '{"n":10,"edges":[[7,8,1],[4,3,0],[0,6,0],[7,1,1],[8,1,1],[0,4,1],[7,6,0],[3,8,1],[1,7,0],[2,7,1],[8,7,1],[1,3,0],[6,2,1],[4,1,0]]}' },
   ],
 }
 

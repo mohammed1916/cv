@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/find-maximum-non-decreasing-array-length/',
   complexity: 'O(n^3) time in this direct form and O(n^2) space for the table. The visualization caps input at 8 entries.',
   examples: [
-    { label: 'Example 1', input: '[5,2,2]' },
+    { label: 'Own case 1', input: '[6,3,3]' },
     { label: 'Merge the middle', input: '[4,3,2,6]' },
     { label: 'Single value', input: '[5]' },
     { label: 'Equal values', input: '[4,4,4]' },

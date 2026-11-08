@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,1,2,1,1,1]}' },
     { label: 'Example 2', input: '{"nums":[2,3,4,5,6]}' },
+    { label: 'Smallest pair', input: '{"nums":[1,2]}' },
+    { label: 'Equal values tie', input: '{"nums":[6,6,6,6]}' },
+    { label: 'Largest values: 30 twelves', input: '{"nums":[12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12]}' },
+    { label: 'Long run: 30 items', input: '{"nums":[8,12,6,1,1,4,3,6,6,11,11,12,11,5,9,11,6,2,5,10,8,10,4,4,6,5,9,11,6,1]}' },
   ],
 }
 

@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"s":"abcbc","p":"a*bc*"}' },
     { label: 'No match', input: '{"s":"xyz","p":"a*b*c"}' },
+    { label: 'Single letter match', input: '{"s":"a","p":"*a*"}' },
+    { label: 'Star tie', input: '{"s":"aaaa","p":"a*a*"}' },
+    { label: 'Longest text, star pattern', input: '{"s":"aaaaaaaaaaaaaaaaaaab","p":"*a*b"}' },
+    { label: 'Long run: 20 letters', input: '{"s":"cbcbaccacacaacccbaaa","p":"a*b*c"}' },
   ],
 }
 

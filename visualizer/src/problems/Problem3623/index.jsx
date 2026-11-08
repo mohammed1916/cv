@@ -29,8 +29,12 @@ const definition = {
   url: 'https://leetcode.com/problems/count-number-of-trapezoids-i/',
   complexity: 'O(n) time with a hash map of heights. The visualization caps the point list at 8.',
   examples: [
-    { label: 'Example', input: '[[1,0],[2,0],[3,0],[2,2],[3,2]]' },
+    { label: 'Own case 1', input: '[[2,1],[3,1],[4,1],[3,3],[4,3]]' },
     { label: 'Two heights', input: '[[0,0],[1,0],[0,1],[1,1]]' },
+    { label: 'Four points on one line', input: '[[0,0],[1,0],[2,0],[3,0]]' },
+    { label: 'Column plus one', input: '[[0,0],[0,1],[0,2],[1,0]]' },
+    { label: 'Grid corners at the limit', input: '[[-1000,-1000],[1000,1000],[-1000,1000],[1000,-1000]]' },
+    { label: 'Long run: 8 points', input: '[[-90,577],[622,-156],[434,62],[-868,-643],[307,-183],[695,241],[-207,-890],[86,-370]]' },
   ],
 }
 

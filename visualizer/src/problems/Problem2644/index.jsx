@@ -19,9 +19,9 @@ const definition = {
   url: "https://leetcode.com/problems/find-the-maximum-divisibility-score/",
   complexity: "O(|nums| * |divisors|) time and O(|divisors|) space for the score list shown. Both arrays are at most 1000 elements.",
   examples: [
-    { label: "Example 1", input: '{"nums": [2,9,15,50], "divisors": [5,3,7,2]}' },
-    { label: "Example 2", input: '{"nums": [4,7,9,3,9], "divisors": [5,2,3]}' },
-    { label: "Example 3", input: '{"nums": [20,14,21,10], "divisors": [10,16,20]}' },
+    { label: "Own case 1", input: '{"nums":[3,10,16,51],"divisors":[6,4,8,3]}' },
+    { label: "Own case 2", input: '{"nums":[5,8,10,4,10],"divisors":[6,3,4]}' },
+    { label: "Own case 3", input: '{"nums":[21,15,22,11],"divisors":[11,17,21]}' },
     { label: 'Single element', input: '{"nums":[6],"divisors":[3]}' },
     { label: 'Tie between two divisors', input: '{"nums":[6,10,15],"divisors":[5,3]}' },
     { label: 'Largest values and divisor 1', input: '{"nums":[1000000000,999999999,1],"divisors":[1,1000000000]}' },

@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/coordinate-with-maximum-network-quality/',
   complexity: 'O(X * Y * towers) time for the scan. The visualization caps coordinates and qualities at 20.',
   examples: [
-    { label: 'Example 1', input: '{"towers":[[1,2,5],[2,1,7],[3,1,9]],"radius":2}' },
+    { label: 'Own case 1', input: '{"towers":[[2,3,6],[3,2,8],[4,2,10]],"radius":3}' },
     { label: 'Single tower', input: '{"towers":[[12,11,15]],"radius":9}' },
     { label: "Single tower at zero radius", input: "{\"towers\":[[0,0,5]],\"radius\":0}" },
     { label: "Two equal towers", input: "{\"towers\":[[1,1,5],[3,1,5]],\"radius\":2}" },

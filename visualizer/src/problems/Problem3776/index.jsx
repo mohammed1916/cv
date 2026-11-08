@@ -16,6 +16,10 @@ const definition = {
     { label: 'Example 1', input: '{"balance":[5,1,-4]}' },
     { label: 'Example 2', input: '{"balance":[1,2,-5,2]}' },
     { label: 'Impossible', input: '{"balance":[-3,2]}' },
+    { label: "Single zero", input: "{\"balance\":[0]}" },
+    { label: "Equal values", input: "{\"balance\":[3,3,3]}" },
+    { label: "Largest values with one negative", input: "{\"balance\":[9,9,9,9,9,9,-9,9,9,9,9,9]}" },
+    { label: "Long run: 12 balances", input: "{\"balance\":[1,3,4,1,2,5,7,8,-9,5,1,8]}" },
   ],
 }
 

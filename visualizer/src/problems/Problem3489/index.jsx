@@ -18,6 +18,11 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[1,0,1],"queries":[[0,2,1],[2,2,2]]}' },
     { label: 'Needs three', input: '{"nums":[3,1],"queries":[[0,0,1],[0,0,2],[1,1,1]]}' },
+    { label: 'Single element', input: '{"nums":[5],"queries":[[0,0,3]]}' },
+    { label: 'Equal values in overlapping ranges', input: '{"nums":[2,2,2],"queries":[[0,2,2],[1,1,2]]}' },
+    { label: 'Largest values', input: '{"nums":[12,0,12,0,12,0],"queries":[[0,5,6],[0,0,1],[5,5,6]]}' },
+    { label: 'All zeros with one query', input: '{"nums":[0,0,0,0],"queries":[[0,3,1]]}' },
+    { label: 'Long run: 6 values, 8 queries', input: '{"nums":[7,1,4,11,5,3],"queries":[[5,5,4],[0,0,1],[5,5,4],[0,2,5],[5,5,3],[0,1,1],[3,5,3],[0,4,2]]}' },
   ],
 }
 

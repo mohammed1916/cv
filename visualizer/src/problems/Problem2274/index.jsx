@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-consecutive-floors-without-special-floors/',
   complexity: 'O(s log s) time for s special floors, O(s) space. The visualization caps the range at 61 floors.',
   examples: [
-    { label: 'Example 1', input: '{"bottom":2,"top":9,"special":[4,6]}' },
-    { label: 'Example 2', input: '{"bottom":6,"top":8,"special":[7,6,8]}' },
+    { label: 'Own case 1', input: '{"bottom":3,"top":10,"special":[5,7]}' },
+    { label: 'Own case 2', input: '{"bottom":7,"top":9,"special":[8,7,9]}' },
     { label: 'Single floor', input: '{"bottom":5,"top":5,"special":[]}' },
     { label: 'Special floors at both ends', input: '{"bottom":1,"top":4,"special":[1,4]}' },
     { label: 'Largest range, 12 special', input: '{"bottom":1,"top":61,"special":[17,45,2,12,8,41,56,16,37,39,46,26]}' },

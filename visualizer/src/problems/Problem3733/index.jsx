@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"d":[2,2],"r":[2,2]}' },
     { label: 'Mixed periods', input: '{"d":[1,1],"r":[2,3]}' },
+    { label: 'Smallest periods', input: '{"d":[1,1],"r":[2,2]}' },
+    { label: 'Equal periods tie', input: '{"d":[3,3],"r":[4,4]}' },
+    { label: 'Largest periods', input: '{"d":[20,20],"r":[10,10]}' },
+    { label: 'Long run: large periods', input: '{"d":[19,20],"r":[9,10]}' },
   ],
 }
 

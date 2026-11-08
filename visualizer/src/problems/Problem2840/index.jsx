@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/check-if-strings-can-be-made-equal-with-operations-ii/',
   complexity: 'O(n log n) time for sorting each parity class. The visualization caps strings at 12 letters.',
   examples: [
-    { label: 'Example 1', input: '{"s1":"abcdba","s2":"cabdab"}' },
-    { label: 'Example 2', input: '{"s1":"abe","s2":"bea"}' },
+    { label: 'Own case 1', input: '{"s1":"bcdecb","s2":"dbcebc"}' },
+    { label: 'Own case 2', input: '{"s1":"bcf","s2":"cfb"}' },
     { label: "Single letter", input: "{\"s1\":\"a\",\"s2\":\"a\"}" },
     { label: "Repeated letters", input: "{\"s1\":\"aaaa\",\"s2\":\"aaaa\"}" },
     { label: "Twelve letters reversed", input: "{\"s1\":\"abcdefghijkl\",\"s2\":\"lkjihgfedcba\"}" },

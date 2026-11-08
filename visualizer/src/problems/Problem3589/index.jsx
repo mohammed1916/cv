@@ -13,8 +13,12 @@ const definition = {
   url: 'https://leetcode.com/problems/count-prime-gap-balanced-subarrays/',
   complexity: 'O(n^2) time for the subarray scan. The visualization caps nums at 12 entries.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,3],"k":1}' },
-    { label: 'Example 2', input: '{"nums":[2,3,5,7],"k":3}' },
+    { label: 'Own case 1', input: '{"nums":[2,3,4],"k":2}' },
+    { label: 'Own case 2', input: '{"nums":[3,4,6,8],"k":4}' },
+    { label: 'Single one, k 0', input: '{"nums":[1],"k":0}' },
+    { label: 'Equal values', input: '{"nums":[4,4,4,4],"k":2}' },
+    { label: 'Largest values and k', input: '{"nums":[60,59,58,1],"k":60}' },
+    { label: 'Long run: 12 values', input: '{"nums":[8,11,18,52,33,23,18,35,60,11,52,20],"k":7}' },
   ],
 }
 

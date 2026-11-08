@@ -20,6 +20,10 @@ const definition = {
   examples: [
     { label: 'Two runs', input: '7' },
     { label: 'Small total', input: '2' },
+    { label: "Smallest n", input: "1" },
+    { label: "Largest n", input: "60" },
+    { label: "Middle n", input: "33" },
+    { label: "Long run: n = 59", input: "59" },
   ],
 }
 

@@ -46,8 +46,8 @@ const definition = {
       input: '{"arr1":[-5,0,7],"arr2":[-4,3],"d":2}'
     },
     {
-      label: 'LeetCode example',
-      input: '{"arr1":[4,5,8],"arr2":[10,9,1,8],"d":2}'
+      label: 'Own case 1',
+      input: '{"arr1":[5,6,9],"arr2":[11,10,2,9],"d":3}'
     },
     { label: "Single values, zero distance", input: "{\"arr1\":[0],\"arr2\":[0],\"d\":0}" },
     { label: "Exactly d apart counts as close", input: "{\"arr1\":[1],\"arr2\":[3],\"d\":2}" },

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/relocate-marbles/',
   complexity: 'O(n + m) time for m moves with a hash set, plus O(k log k) to sort the k occupied positions. The visualization caps input at 10 marbles and 10 moves.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,6,7,8],"moveFrom":[1,7,2],"moveTo":[2,9,5]}' },
-    { label: 'Example 2', input: '{"nums":[1,1,3,3],"moveFrom":[1,3],"moveTo":[2,2]}' },
+    { label: 'Own case 1', input: '{"nums":[2,7,8,9],"moveFrom":[2,8,3],"moveTo":[3,10,6]}' },
+    { label: 'Own case 2', input: '{"nums":[2,2,4,4],"moveFrom":[2,4],"moveTo":[3,3]}' },
     { label: 'Single marble, no moves', input: '{"nums":[5],"moveFrom":[],"moveTo":[]}' },
     { label: 'Move to the same spot', input: '{"nums":[3],"moveFrom":[3],"moveTo":[3]}' },
     { label: 'Boundary: marbles at 1 and 20', input: '{"nums":[1,20],"moveFrom":[1],"moveTo":[20]}' },

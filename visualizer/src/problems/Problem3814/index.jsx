@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Pairs', input: '{"costs":[6,2,9,4],"capacity":[3,7,2,5],"budget":10}' },
     { label: 'Too expensive', input: '{"costs":[5,5],"capacity":[3,4],"budget":5}' },
+    { label: 'One item', input: '{"costs":[3],"capacity":[2],"budget":3}' },
+    { label: 'Equal items', input: '{"costs":[4,4,4],"capacity":[4,4,4],"budget":8}' },
+    { label: 'Twelve items at the top limits', input: '{"costs":[30,30,30,30,30,30,30,30,30,30,30,30],"capacity":[30,30,30,30,30,30,30,30,30,30,30,30],"budget":60}' },
+    { label: 'Long run: 12 items', input: '{"costs":[5,19,24,19,28,12,7,15,21,30,18,20],"capacity":[19,28,24,30,26,12,30,29,8,23,11,9],"budget":40}' },
   ],
 }
 

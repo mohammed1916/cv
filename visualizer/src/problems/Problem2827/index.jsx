@@ -12,7 +12,7 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-beautiful-integers-in-the-range/',
   complexity: 'O(d * d * k * 10) states per bound for d digits, memoized. The visualization caps high at 10000 and k at 20.',
   examples: [
-    { label: 'Example 1', input: '{"low":10,"high":20,"k":3}' },
+    { label: 'Own case 1', input: '{"low":11,"high":21,"k":4}' },
     { label: 'Divisor 1', input: '{"low":1,"high":10,"k":1}' },
     { label: "Single number", input: "{\"low\":7,\"high\":7,\"k\":1}" },
     { label: "Full range, many divisors", input: "{\"low\":1,\"high\":10000,\"k\":20}" },

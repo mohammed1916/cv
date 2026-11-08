@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimize-or-of-remaining-elements-using-operations/',
   complexity: 'O(B * n^2) time for B bits, with an O(n^2) segment DP per bit. The visualization caps the input at 8 values.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[3,5,3,2,7],"k":2}' },
-    { label: 'Example 2', input: '{"nums":[7,3,15,14,2,8],"k":4}' },
+    { label: 'Own case 1', input: '{"nums":[4,6,4,3,8],"k":3}' },
+    { label: 'Own case 2', input: '{"nums":[8,2,14,15,3,7],"k":4}' },
     { label: "Single zero", input: '{"nums":[0],"k":0}' },
     { label: "Equal values", input: '{"nums":[5,5,5],"k":0}' },
     { label: "Largest values", input: '{"nums":[15,15,15,15,15,15,15,15],"k":7}' },

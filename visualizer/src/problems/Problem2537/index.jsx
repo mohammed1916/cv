@@ -16,7 +16,7 @@ const definition = {
   complexity: 'O(n) time with a sliding window and a frequency map. The visualization caps input at 12 values.',
   examples: [
     { label: 'Example 1', input: '{"nums":[1,1,1,1,1],"k":10}' },
-    { label: 'Example 2', input: '{"nums":[3,1,4,3,2,2,4],"k":2}' },
+    { label: 'Own case 2', input: '{"nums":[4,2,5,4,3,3,5],"k":3}' },
     { label: 'Single zero', input: '{"nums":[0],"k":1}' },
     { label: 'Equal values', input: '{"nums":[2,2,2],"k":3}' },
     { label: 'Largest values for 10 rounds', input: '{"nums":[5,5,5,5,5,5,5,5,5,5,5,5],"k":10}' },

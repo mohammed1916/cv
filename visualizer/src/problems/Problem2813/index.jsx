@@ -18,7 +18,7 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-elegance-of-a-k-length-subsequence/',
   complexity: 'O(n log n) time for sorting, then one pass. The visualization caps n at 8.',
   examples: [
-    { label: 'Example 1', input: '{"items":[[3,2],[5,1],[10,1]],"k":2}' },
+    { label: 'Own case 1', input: '{"items":[[10,1],[5,1],[3,2]],"k":2}' },
     { label: 'Swap case', input: '{"items":[[5,1],[5,1],[3,2]],"k":2}' },
     { label: "Single item", input: "{\"items\":[[4,2]],\"k\":1}" },
     { label: "Equal profits by category", input: "{\"items\":[[5,1],[5,2],[5,3],[5,4]],\"k\":4}" },

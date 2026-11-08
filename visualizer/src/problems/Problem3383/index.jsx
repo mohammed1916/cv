@@ -20,6 +20,10 @@ const definition = {
   examples: [
     { label: 'One source', input: '{"n":6,"initial":[0],"edges":[[0,1],[1,2],[3,2],[4,5],[5,4]]}' },
     { label: 'No initial rune', input: '{"n":4,"initial":[],"edges":[[0,1],[1,0],[2,3]]}' },
+    { label: 'Single rune', input: '{"n":1,"initial":[0],"edges":[]}' },
+    { label: 'Two sources share a target', input: '{"n":3,"initial":[0,1],"edges":[[0,2],[1,2]]}' },
+    { label: 'Full edge budget', input: '{"n":8,"initial":[0],"edges":[[0,1],[1,4],[2,7],[3,2],[4,5],[5,0],[6,3],[7,6],[0,1],[1,4],[2,7],[3,2],[4,5],[5,0],[6,3],[7,6]]}' },
+    { label: 'Long run: 8 runes', input: '{"n":8,"initial":[0,3],"edges":[[1,6],[5,0],[1,1],[1,3],[6,6],[3,3],[1,1],[5,3],[7,7],[5,7],[5,2],[6,3],[6,0],[4,4]]}' },
   ],
 }
 

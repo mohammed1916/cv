@@ -16,6 +16,10 @@ const definition = {
     { label: 'Keep the rare letters', input: '{"s":"aabbc","k":2}' },
     { label: 'Everything survives', input: '{"s":"abcabc","k":3}' },
     { label: 'Nothing survives', input: '{"s":"aaa","k":3}' },
+    { label: 'One letter', input: '{"s":"a","k":1}' },
+    { label: 'Repeated letters', input: '{"s":"aabb","k":2}' },
+    { label: 'Longest alphabet run', input: '{"s":"abcdefghijklmnopqrst","k":10}' },
+    { label: 'Long run: 20 letters', input: '{"s":"heehficjfihdajacebcc","k":6}' },
   ],
 }
 

@@ -24,6 +24,10 @@ const definition = {
     { label: "Spread values", input: '{"nums":[1,3,6,2,8,5],"k":3}' },
     { label: "Already equal", input: '{"nums":[4,4,4,4],"k":2}' },
     { label: "One window", input: '{"nums":[9,1,5,2],"k":4}' },
+    { label: 'Single value', input: '{"nums":[5],"k":1}' },
+    { label: 'Equal pairs tie', input: '{"nums":[2,2,7,7],"k":2}' },
+    { label: 'Alternating extremes', input: '{"nums":[0,9,0,9,0,9,0,9,0,9,0,9],"k":6}' },
+    { label: 'Long run: 12 digits', input: '{"nums":[0,2,6,1,4,3,9,4,7,2,8,4],"k":5}' },
   ],
 };
 

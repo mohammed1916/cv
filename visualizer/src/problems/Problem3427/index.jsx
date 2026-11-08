@@ -13,8 +13,12 @@ const definition = {
   url: 'https://leetcode.com/problems/sum-of-variable-length-subarrays/',
   complexity: 'O(n * maximum window) time for this visualization. A prefix-sum solution runs in O(n).',
   examples: [
-    { label: 'Example 1', input: '[2,3,1]' },
-    { label: 'Example 2', input: '[3,1,1,2]' },
+    { label: 'Own case 1', input: '[3,4,2]' },
+    { label: 'Own case 2', input: '[4,2,2,3]' },
+    { label: 'Single value', input: '[7]' },
+    { label: 'Equal values tie', input: '[2,2,2,2]' },
+    { label: 'Extremes', input: '[1000,1,1000,1,1000,1,1000,1,1000,1,1000,1000]' },
+    { label: 'Long run: 12 values', input: '[429,190,906,173,989,781,108,760,51,464,775,395]' },
   ],
 }
 

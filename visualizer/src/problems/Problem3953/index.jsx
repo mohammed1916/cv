@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[3,4,6],"maxVal":5}' },
     { label: 'Example 2', input: '{"nums":[1,2,3],"maxVal":4}' },
+    { label: 'Single value', input: '{"nums":[1],"maxVal":1}' },
+    { label: 'Equal values', input: '{"nums":[6,6],"maxVal":6}' },
+    { label: 'Largest values', input: '{"nums":[12,12,12,12],"maxVal":12}' },
+    { label: 'Long run: 4 values', input: '{"nums":[7,10,1,9],"maxVal":9}' },
   ],
 }
 

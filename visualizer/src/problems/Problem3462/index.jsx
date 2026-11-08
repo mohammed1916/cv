@@ -16,8 +16,12 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-sum-with-at-most-k-elements/',
   complexity: 'O(n^2 log n) time for sorting each row and the candidates, and O(n^2) space.',
   examples: [
-    { label: 'Example', input: '{"grid":[[1,2],[3,4]],"limits":[1,2],"k":2}' },
+    { label: 'Own case 1', input: '{"grid":[[3,4],[1,2]],"limits":[2,1],"k":2}' },
     { label: 'Tight k', input: '{"grid":[[5,3],[1,9]],"limits":[1,1],"k":1}' },
+    { label: 'Single cell', input: '{"grid":[[7]],"limits":[1],"k":1}' },
+    { label: 'Equal values tie', input: '{"grid":[[4,4],[4,4]],"limits":[2,0],"k":2}' },
+    { label: 'Extremes, full grid', input: '{"grid":[[9,0,9,0,9],[9,0,9,0,9],[9,0,9,0,9],[9,0,9,0,9],[9,0,9,0,9]],"limits":[5,5,5,5,5],"k":25}' },
+    { label: 'Long run: 5 by 5', input: '{"grid":[[2,6,6,9,3],[8,0,9,0,6],[4,6,3,8,5],[2,7,8,5,1],[6,1,3,6,1]],"limits":[2,3,1,4,0],"k":12}' },
   ],
 }
 

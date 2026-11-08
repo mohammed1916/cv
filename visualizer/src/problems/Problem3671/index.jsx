@@ -13,8 +13,12 @@ const definition = {
   url: 'https://leetcode.doocs.org/en/lc/3671/',
   complexity: 'Each index merges GCD states from earlier smaller indices. The visualization caps the input at 12 values.',
   examples: [
-    { label: 'Example 1', input: '[1,2,3]' },
-    { label: 'Example 2', input: '[4,6]' },
+    { label: 'Own case 1', input: '[2,3,4]' },
+    { label: 'Own case 2', input: '[5,7]' },
+    { label: 'Single value', input: '[1]' },
+    { label: 'Equal values', input: '[5,5,5]' },
+    { label: 'Largest values', input: '[70000,70000,70000,70000,70000,70000,70000,70000,70000,70000,70000,70000]' },
+    { label: 'Long run: 12 values', input: '[62376,29349,65766,452,20355,18458,9772,51897,17329,62825,36503,49523]' },
   ],
 }
 

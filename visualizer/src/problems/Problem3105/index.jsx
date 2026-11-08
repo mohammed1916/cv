@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/longest-strictly-increasing-or-strictly-decreasing-subarray/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps input at 12 entries.',
   examples: [
-    { label: 'Example 1', input: '[1,4,3,3,2]' },
+    { label: 'Own case 1', input: '[2,5,4,4,3]' },
     { label: 'Decreasing', input: '[3,2,1]' },
     { label: "Single value", input: "[1]" },
     { label: "Equal values", input: "[3,3,3,3]" },

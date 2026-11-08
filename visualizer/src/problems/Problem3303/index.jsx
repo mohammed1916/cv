@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-occurrence-of-first-almost-equal-substring/',
   complexity: 'O(n * m) time and O(1) space in this trace. The visualization caps s at 40 characters.',
   examples: [
-    { label: 'Example 1', input: '{"s":"abcdefg","pattern":"bcdffg"}' },
-    { label: 'Example 2', input: '{"s":"ababbababa","pattern":"bacaba"}' },
+    { label: 'Own case 1', input: '{"s":"bcdefgh","pattern":"cdeggh"}' },
+    { label: 'Own case 2', input: '{"s":"bcbccbcbcb","pattern":"cbdbcb"}' },
     { label: 'No match', input: '{"s":"abcd","pattern":"dba"}' },
     { label: 'Shortest s', input: '{"s":"ab","pattern":"a"}' },
     { label: 'Every window matches exactly', input: '{"s":"aaaaaa","pattern":"aaaaa"}' },

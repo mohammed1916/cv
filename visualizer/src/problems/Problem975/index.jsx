@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/odd-even-jump/',
   complexity: 'O(n^2) time with the scan in this visualization (O(n log n) with sorting). The visualization caps input at 20 values.',
   examples: [
-    { label: 'Example 1', input: '[10,13,12,14,15]' },
-    { label: 'Example 2', input: '[2,3,1,1,4]' },
+    { label: 'Own case 1', input: '[11,14,13,15,16]' },
+    { label: 'Own case 2', input: '[3,4,2,2,5]' },
     { label: 'Single element', input: '[7]' },
     { label: 'Equal values give tied jumps', input: '[5,5,5,5]' },
     { label: 'Extreme values at the limit', input: '[1000,-1000,1000,-1000]' },

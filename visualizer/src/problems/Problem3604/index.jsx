@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Wait', input: '{"n":3,"edges":[[0,1,0,1],[1,2,2,3]]}' },
     { label: 'Closed', input: '{"n":3,"edges":[[0,1,1,1],[1,2,0,0]]}' },
+    { label: 'Two nodes, no wait', input: '{"n":2,"edges":[[0,1,0,0]]}' },
+    { label: 'Equal open windows', input: '{"n":3,"edges":[[0,1,2,2],[1,2,2,2]]}' },
+    { label: 'Widest window', input: '{"n":2,"edges":[[0,1,0,10],[1,0,10,10]]}' },
+    { label: 'Long run: 6 nodes, 8 edges', input: '{"n":6,"edges":[[2,0,10,10],[4,0,6,8],[2,3,0,0],[4,5,10,10],[5,0,1,9],[2,3,2,8],[1,0,8,8],[0,4,5,5]]}' },
   ],
 }
 

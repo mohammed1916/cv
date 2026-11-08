@@ -17,7 +17,7 @@ export function parseInput(text) {
 export function buildTrace({ n, buildings }) {
   const frames = []
   const rowMin = new Map(), rowMax = new Map(), colMin = new Map(), colMax = new Map()
-  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('start with empty extremes'), at: -1, covered: [], message: 'No row or column has been measured yet.' })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('start with empty row and column extremes'), at: -1, covered: [], message: 'No row or column has been measured yet.' })
   for (const [x, y] of buildings) {
     rowMin.set(y, Math.min(rowMin.get(y) ?? x, x))
     rowMax.set(y, Math.max(rowMax.get(y) ?? x, x))

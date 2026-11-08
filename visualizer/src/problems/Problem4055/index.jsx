@@ -23,6 +23,10 @@ const definition = {
   examples: [
     { label: 'Middle value blocks', input: '[1, 2, 3]' },
     { label: 'Endpoint values pass', input: '[2, 4, 2, 4]' },
+    { label: "Equal ends", input: "[5,2,5]" },
+    { label: "Equal values", input: "[3,3,3]" },
+    { label: "Largest values", input: "[1000000000,1,1000000000]" },
+    { label: "Long run: 16 values", input: "[91148031,806581277,484814563,483728541,60371487,192024756,226967000,924014098,84500901,942990952,116206028,381159318,941409807,792778909,230676688,994401411]" },
   ],
 }
 

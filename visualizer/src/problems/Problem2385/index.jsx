@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/amount-of-time-for-binary-tree-to-be-infected/',
   complexity: 'O(n) time and O(n) space for n nodes. The visualization caps the tree at 15 entries.',
   examples: [
-    { label: 'Example 1', input: '{"root":[1,5,3,null,4,10,6,9,2],"start":3}' },
+    { label: 'Own case 1', input: '{"root":[2,6,4,null,5,11,7,10,3],"start":4}' },
     { label: 'Chain', input: '{"root":[1,2,null,3,null,4,null,5],"start":3}' },
     { label: 'Single node', input: '{"root":[1],"start":1}' },
     { label: 'Start at the root', input: '{"root":[1,2,3],"start":1}' },

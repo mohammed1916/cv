@@ -14,6 +14,9 @@ const definition = {
   examples: [
     { label: 'Exactly ten', input: '{"n":10}' },
     { label: 'Nine stones', input: '{"n":9}' },
+    { label: 'Single stone', input: '{"n":1}' },
+    { label: 'Largest allowed n', input: '{"n":50}' },
+    { label: 'Long run: 47 stones', input: '{"n":47}' },
   ],
 }
 

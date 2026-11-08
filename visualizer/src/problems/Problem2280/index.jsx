@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-lines-to-represent-a-line-chart/',
   complexity: 'O(n log n) time from the sort, O(1) extra space. The visualization caps input at 10 points.',
   examples: [
-    { label: 'Example 1', input: '[[1,7],[2,6],[3,5],[4,4],[5,4],[6,3],[7,2],[8,1]]' },
+    { label: 'Own case 1', input: '[[2,8],[3,7],[4,6],[5,5],[6,5],[7,4],[8,3],[9,2]]' },
     { label: 'Collinear', input: '[[3,4],[1,2],[7,8],[2,3]]' },
     { label: 'Single point', input: '[[3,9]]' },
     { label: 'Equal prices', input: '[[1,5],[2,5],[3,5]]' },

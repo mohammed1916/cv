@@ -32,8 +32,12 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-profit-from-valid-topological-order-in-dag/',
   complexity: 'O(2^n * n) time and O(2^n) space. The visualization caps n at 8.',
   examples: [
-    { label: 'Example 1', input: '{"n":2,"edges":[[0,1]],"score":[2,3]}' },
-    { label: 'Example 2', input: '{"n":3,"edges":[[0,1],[0,2]],"score":[1,6,3]}' },
+    { label: 'Own case 1', input: '{"n":2,"edges":[[0,1]],"score":[3,2]}' },
+    { label: 'Own case 2', input: '{"n":3,"edges":[[0,2],[0,1]],"score":[3,6,1]}' },
+    { label: 'One node', input: '{"n":1,"edges":[],"score":[7]}' },
+    { label: 'Equal scores', input: '{"n":3,"edges":[[0,1],[1,2]],"score":[5,5,5]}' },
+    { label: 'Largest scores', input: '{"n":4,"edges":[[0,2],[1,2],[2,3]],"score":[100000,100000,1,100000]}' },
+    { label: 'Long run: 8 nodes', input: '{"n":8,"edges":[[0,2],[1,6],[2,5],[2,6],[2,7],[3,6],[4,7],[6,7]],"score":[24704,62972,10203,80000,20175,65222,56516,41322]}' },
   ],
 }
 

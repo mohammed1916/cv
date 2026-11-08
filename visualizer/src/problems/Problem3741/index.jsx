@@ -17,6 +17,11 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[1,2,1,1,3]}' },
     { label: 'No triple', input: '{"nums":[1,2,3]}' },
+    { label: "Single element", input: "{\"nums\":[7]}" },
+    { label: "Equal values use the first triple", input: "{\"nums\":[2,2,2,2,2]}" },
+    { label: "Widest span at length 16", input: "{\"nums\":[1,2,3,4,5,6,7,1,8,9,2,3,4,5,6,1]}" },
+    { label: "Long run: 16 values", input: "{\"nums\":[3,1,9,8,8,7,8,9,5,7,7,6,2,9,4,4]}" },
+    { label: "Pairs only, no triple", input: "{\"nums\":[9,8,9,8,7,7,6,6]}" },
   ],
 }
 

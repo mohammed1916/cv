@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Whole string', input: '{"s":"abba"}' },
     { label: 'Three letters', input: '{"s":"aabcc"}' },
+    { label: 'Single letter', input: '{"s":"c"}' },
+    { label: 'Repeated triples tie', input: '{"s":"abcabc"}' },
+    { label: 'Longest string', input: '{"s":"aabbccaabbccaabbccaa"}' },
+    { label: 'Long run: 20 letters', input: '{"s":"abccbbaaababcbcbbacc"}' },
   ],
 }
 

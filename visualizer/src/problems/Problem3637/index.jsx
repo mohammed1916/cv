@@ -15,8 +15,12 @@ const definition = {
   url: 'https://leetcode.com/problems/trionic-array-i/',
   complexity: 'O(n) time and O(1) extra space.',
   examples: [
-    { label: 'Example 1', input: '[1,3,5,4,2,6]' },
+    { label: 'Own case 1', input: '[2,4,6,5,3,7]' },
     { label: 'Too short', input: '[2,1,3]' },
+    { label: 'Smallest array', input: '[0,0,0]' },
+    { label: 'Equal values', input: '[5,5,5]' },
+    { label: 'Extreme values', input: '[-1000,1000,-1000]' },
+    { label: 'Long run: 12 values', input: '[894,861,914,-891,164,241,-865,-47,303,-197,-9,925]' },
   ],
 }
 

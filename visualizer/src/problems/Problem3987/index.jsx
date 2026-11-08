@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Three demands', input: '{"demands":[3,5,2],"k":4}' },
     { label: 'Large first demand', input: '{"demands":[10,1],"k":3}' },
+    { label: "Single demand", input: '{"demands":[7],"k":1}' },
+    { label: "Equal demands", input: '{"demands":[4,4,4],"k":2}' },
+    { label: "Largest demands at the limit", input: '{"demands":[40,40,40,40,40,40,40,40,40,40],"k":10}' },
+    { label: "Long run: 10 demands", input: '{"demands":[32,37,31,11,24,30,36,14,31,26],"k":7}' },
   ],
 }
 

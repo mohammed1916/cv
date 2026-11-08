@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-time-to-repair-cars/',
   complexity: 'O(m log(min rank * cars^2)) time for m mechanics. The visualization caps input at 4 mechanics and 10 cars.',
   examples: [
-    { label: 'Example 1', input: '{"ranks":[4,2,3,1],"cars":10}' },
-    { label: 'Example 2', input: '{"ranks":[5,1,8],"cars":6}' },
+    { label: 'Own case 1', input: '{"ranks":[1,3,2,4],"cars":10}' },
+    { label: 'Own case 2', input: '{"ranks":[8,1,5],"cars":6}' },
     { label: 'Single mechanic one car', input: '{"ranks":[3],"cars":1}' },
     { label: 'Equal mechanic ranks', input: '{"ranks":[2,2,2],"cars":5}' },
     { label: 'Largest ranks and cars', input: '{"ranks":[8,8,8,8],"cars":10}' },

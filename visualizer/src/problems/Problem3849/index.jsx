@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"s":"0011","t":"1101"}' },
     { label: 'All ones', input: '{"s":"1010","t":"1111"}' },
+    { label: 'One bit', input: '{"s":"0","t":"1"}' },
+    { label: 'Equal strings', input: '{"s":"1111","t":"1111"}' },
+    { label: 'Sixteen bits, opposite', input: '{"s":"0000000000000000","t":"1111111111111111"}' },
+    { label: 'Long run: 16 bits', input: '{"s":"1100011000110110","t":"1001100010101001"}' },
   ],
 }
 

@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-maximum-length-of-a-good-subsequence-i/',
   complexity: 'O(n^2 * k) time and O(n * k) space. The visualization caps input at 10 entries.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,1,1,3],"k":2}' },
+    { label: 'Own case 1', input: '{"nums":[2,3,2,2,4],"k":3}' },
     { label: 'No changes', input: '{"nums":[1,2,3,4,1],"k":0}' },
     { label: "Single value, k zero", input: "{\"nums\": [2], \"k\": 0}" },
     { label: "Repeated value", input: "{\"nums\": [1, 1, 1, 1], \"k\": 3}" },

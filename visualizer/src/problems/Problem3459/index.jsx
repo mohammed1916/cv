@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Single 1', input: '{"grid":[[1]]}' },
     { label: 'Diagonal', input: '{"grid":[[1,0],[0,2]]}' },
+    { label: 'Single cell', input: '{"grid":[[0]]}' },
+    { label: 'Equal cells tie', input: '{"grid":[[2,2],[2,2]]}' },
+    { label: 'Extreme pattern 7 by 7', input: '{"grid":[[2,0,2,0,2,0,2],[2,0,2,0,2,0,2],[2,0,2,0,2,0,2],[2,0,2,0,2,0,2],[2,0,2,0,2,0,2],[2,0,2,0,2,0,2],[2,0,2,0,2,0,2]]}' },
+    { label: 'Long run: 7 by 7', input: '{"grid":[[1,2,1,1,2,2,1],[2,2,2,2,2,0,1],[0,2,1,0,2,0,2],[1,2,1,1,2,0,1],[0,1,0,2,1,1,0],[2,2,2,0,1,1,1],[2,0,1,1,2,1,0]]}' },
   ],
 }
 

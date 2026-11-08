@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"arrivals":[4,4,2,4,4],"w":3,"m":2}' },
     { label: 'Tight limit', input: '{"arrivals":[1,1,1,2,1],"w":4,"m":1}' },
+    { label: 'One arrival', input: '{"arrivals":[1],"w":1,"m":1}' },
+    { label: 'Equal arrivals', input: '{"arrivals":[5,5,5,5],"w":2,"m":1}' },
+    { label: 'Largest arrivals', input: '{"arrivals":[100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100],"w":20,"m":20}' },
+    { label: 'Long run: 20 arrivals', input: '{"arrivals":[93,2,75,5,46,16,19,38,55,31,65,61,42,41,60,99,50,17,24,74],"w":10,"m":4}' },
   ],
 }
 

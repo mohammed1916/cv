@@ -14,6 +14,10 @@ const definition = {
     { label: 'Parallelogram', input: '{"points":[[0,0],[3,0],[4,2],[1,2]]}' },
     { label: 'Mixed', input: '{"points":[[0,0],[4,0],[1,2],[3,2],[6,1],[2,-2]]}' },
     { label: 'All on one line', input: '{"points":[[0,0],[1,1],[2,2],[3,3]]}' },
+    { label: 'Four points, one parallelogram', input: '{"points":[[0,0],[2,0],[0,2],[2,2]]}' },
+    { label: 'Equal spacing on a line', input: '{"points":[[-3,0],[0,0],[3,0],[6,0]]}' },
+    { label: 'Corners at the limit', input: '{"points":[[-1000,-1000],[1000,-1000],[-1000,1000],[1000,1000]]}' },
+    { label: 'Long run: 10 points', input: '{"points":[[908,-262],[-695,-714],[491,875],[276,-677],[592,506],[762,-423],[-227,-814],[-371,543],[646,-750],[-363,918]]}' },
   ],
 }
 

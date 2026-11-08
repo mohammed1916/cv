@@ -13,9 +13,13 @@ const definition = {
   url: 'https://leetcode.com/problems/partition-array-for-maximum-xor-and-and/',
   complexity: 'Up to 3^n states in the worst case. Equal states merge, and the official limit is n <= 19.',
   examples: [
-    { label: 'Example 1', input: '[2,3]' },
-    { label: 'Example 2', input: '[1,3,2]' },
-    { label: 'Example 3', input: '[2,3,6,7]' },
+    { label: 'Own case 1', input: '[3,4]' },
+    { label: 'Own case 2', input: '[2,4,3]' },
+    { label: 'Own case 3', input: '[3,4,7,8]' },
+    { label: 'Single value', input: '[5]' },
+    { label: 'Equal values can share a state', input: '[4,4,4]' },
+    { label: 'Largest values', input: '[1000000000,1,1000000000]' },
+    { label: 'Long run: 8 values', input: '[10785792,8946190,5210372,625374,11015804,13627378,136787,4618548]' },
   ],
 }
 

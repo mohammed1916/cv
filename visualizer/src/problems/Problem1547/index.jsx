@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-cost-to-cut-a-stick/',
   complexity: 'O(m^3) time for m cut points including the ends. The visualization caps n at 20 and cuts at 6.',
   examples: [
-    { label: 'Example 1', input: '{"n":7,"cuts":[1,3,4,5]}' },
-    { label: 'Example 2', input: '{"n":9,"cuts":[5,6,1,4,2]}' },
+    { label: 'Own case 1', input: '{"n":8,"cuts":[2,4,5,6]}' },
+    { label: 'Own case 2', input: '{"n":10,"cuts":[6,7,2,5,3]}' },
     { label: 'Smallest stick', input: '{"n":2,"cuts":[1]}' },
     { label: 'Symmetric cuts', input: '{"n":8,"cuts":[2,6]}' },
     { label: 'Largest: 6 cuts near the end', input: '{"n":20,"cuts":[19,17,13,11,7,2]}' },

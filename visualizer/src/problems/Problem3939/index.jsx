@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"parent":[-1,0,1],"nums":[1,2,3],"k":3}' },
     { label: 'Example 2', input: '{"parent":[-1,0,0,0],"nums":[2,1,2,1],"k":3}' },
+    { label: 'Single node', input: '{"parent":[-1],"nums":[4],"k":1}' },
+    { label: 'Equal values in a star', input: '{"parent":[-1,0,0],"nums":[3,3,3],"k":2}' },
+    { label: 'Largest values, k equals 9', input: '{"parent":[-1,0,1,2,3,4,5,6],"nums":[9,9,9,9,9,9,9,9],"k":9}' },
+    { label: 'Long run: 8 nodes', input: '{"parent":[-1,0,0,2,3,2,1,4],"nums":[3,5,8,2,3,2,3,1],"k":1}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,3]}' },
     { label: 'Example 2', input: '{"nums":[1,-1,2,-2,3,-3]}' },
+    { label: 'Single value', input: '{"nums":[5]}' },
+    { label: 'Equal absolute values', input: '{"nums":[3,-3]}' },
+    { label: 'Extreme values', input: '{"nums":[40000,-40000,0]}' },
+    { label: 'Long run: 8 values', input: '{"nums":[-14930,-37548,-20640,15816,-39041,8773,37,-28919]}' },
   ],
 }
 

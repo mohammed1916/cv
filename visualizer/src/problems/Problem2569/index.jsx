@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/handling-sum-queries-after-update/',
   complexity: 'O((n + q) log n) time. The visualization caps nums1 at 10 values and queries at 8.',
   examples: [
-    { label: 'Example 1', input: '{"nums1":[1,0,1],"nums2":[0,0,0],"queries":[[1,1,1],[2,1,0],[3,0,0]]}' },
+    { label: 'Own case 1', input: '{"nums1":[1,0,1],"nums2":[0,0,0],"queries":[[3,0,0],[2,1,0],[1,1,1]]}' },
     { label: 'Two flips', input: '{"nums1":[0,0],"nums2":[1,0],"queries":[[1,0,1],[2,2,0],[3,0,0],[1,0,0],[2,1,0],[3,0,0]]}' },
     { label: 'Single sum query', input: '{"nums1":[0],"nums2":[0],"queries":[[3,0,0]]}' },
     { label: 'Flip and sum on equal lengths', input: '{"nums1":[1,1],"nums2":[2,2],"queries":[[1,0,1],[3,0,0]]}' },

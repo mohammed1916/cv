@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Two parts', input: '{"nums":[3,1,4,1,5],"k":2}' },
     { label: 'Equal values', input: '{"nums":[2,2,2,2],"k":3}' },
+    { label: 'Single digit', input: '{"nums":[4],"k":1}' },
+    { label: 'Equal digits split evenly', input: '{"nums":[1,1,1,1,1],"k":5}' },
+    { label: 'Largest digits, k equals length', input: '{"nums":[9,9,9,9,9,9,9,9,9],"k":9}' },
+    { label: 'Long run: 9 digits', input: '{"nums":[0,0,1,8,2,4,7,1,5],"k":4}' },
   ],
 }
 

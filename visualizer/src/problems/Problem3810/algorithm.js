@@ -20,11 +20,11 @@ export function buildTrace({ nums, target }) {
     const bad = mismatchedAt()
     if (bad.length === 0) break
     const x = state[bad[0]]
-    frames.push({ pythonLine: pyAt('bad = '), phase: 'pick', activeLine: codeAt('first position still wrong'), at: bad[0], value: x, state: state.slice(), ops, message: `Position ${bad[0]} is still wrong and holds ${x}; choose ${x}.` })
+    frames.push({ pythonLine: pyAt('bad = '), phase: 'pick', activeLine: codeAt('x is nums at the first index in bad'), at: bad[0], value: x, state: state.slice(), ops, message: `Position ${bad[0]} is still wrong and holds ${x}; choose ${x}.` })
     for (let i = 0; i < state.length; i++) {
       if (state[i] === x) {
         state[i] = target[i]
-        frames.push({ pythonLine: pyAt('if nums[i] == x'), phase: 'update', activeLine: codeAt('every position holding x'), at: i, value: x, state: state.slice(), ops, message: `Index ${i} held ${x}; it now takes its target ${target[i]}.` })
+        frames.push({ pythonLine: pyAt('if nums[i] == x'), phase: 'update', activeLine: codeAt('for each index holding x'), at: i, value: x, state: state.slice(), ops, message: `Index ${i} held ${x}; it now takes its target ${target[i]}.` })
       }
     }
     ops++

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 2', input: '{"numWays":[1,2,2,3,4]}' },
     { label: 'Example 3', input: '{"numWays":[1,2,3,4,15]}' },
+    { label: 'Single zero count', input: '{"numWays":[0]}' },
+    { label: 'Equal counts', input: '{"numWays":[3,3,3,3]}' },
+    { label: 'Largest counts', input: '{"numWays":[50,50,50,50,50,50,50,50,50,50]}' },
+    { label: 'Long run: 10 counts', input: '{"numWays":[22,32,50,43,19,34,20,46,18,48]}' },
   ],
 }
 

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/count-the-number-of-fair-pairs/',
   complexity: 'O(n log n) time for the sort and O(n) for each two-pointer pass.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[0,1,7,4,4,5],"lower":3,"upper":6}' },
-    { label: 'Example 2', input: '{"nums":[1,7,9,2,5],"lower":11,"upper":11}' },
+    { label: 'Own case 1', input: '{"nums":[1,2,8,5,5,6],"lower":4,"upper":7}' },
+    { label: 'Own case 2', input: '{"nums":[2,8,10,3,6],"lower":12,"upper":12}' },
     { label: 'Single zero', input: '{"nums":[0],"lower":0,"upper":0}' },
     { label: 'Equal values in a point range', input: '{"nums":[2,2,2,2],"lower":2,"upper":2}' },
     { label: 'Widest range over 30 values', input: '{"nums":[-20,20,-20,20,-20,20,-20,20,-20,20,-20,20,-20,20,-20,20,-20,20,-20,20,-20,20,-20,20,-20,20,-20,20,-20,20],"lower":-40,"upper":40}' },

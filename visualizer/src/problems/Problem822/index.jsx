@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/card-flipping-game/',
   complexity: 'O(n) time and O(n) space for the bad set.',
   examples: [
-    { label: 'Official example', input: '{"fronts": [1,2,4,4,7], "backs": [1,3,4,1,3]}' },
+    { label: 'Own case 1', input: '{"fronts":[2,3,5,5,8],"backs":[2,4,5,2,4]}' },
     { label: 'Single card', input: '{"fronts": [1], "backs": [1]}' },
     { label: 'Pair', input: '{"fronts": [1,1], "backs": [2,2]}' },
     { label: 'Single card', input: '{"fronts":[1],"backs":[2]}' },

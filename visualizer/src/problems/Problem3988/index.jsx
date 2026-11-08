@@ -13,6 +13,10 @@ const definition = {
     { label: 'Tall and narrow', input: '{"m":5,"n":2,"k":4}' },
     { label: 'One route', input: '{"m":3,"n":6,"k":1}' },
     { label: 'Impossible', input: '{"m":1,"n":6,"k":3}' },
+    { label: "Single cell", input: '{"m":1,"n":1,"k":1}' },
+    { label: "Square tie", input: '{"m":4,"n":4,"k":2}' },
+    { label: "Largest grid", input: '{"m":10,"n":10,"k":4}' },
+    { label: "Long run: 10 by 9 grid", input: '{"m":10,"n":9,"k":3}' },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
     { label: 'Invented mixed', input: '{"nums":[2,-1,7,-1,13]}' },
     { label: 'All missing', input: '{"nums":[-1,-1,-1,-1]}' },
     { label: 'Invented gap in middle', input: '{"nums":[-1,6,-1,11]}' },
+    { label: 'Two entries, one missing', input: '{"nums":[5,-1]}' },
+    { label: 'Equal known values', input: '{"nums":[7,-1,7,-1]}' },
+    { label: 'Smallest and largest values', input: '{"nums":[1,-1,20,-1,1,-1,20,-1]}' },
+    { label: 'Long run: 8 entries', input: '{"nums":[-1,11,13,14,15,4,-1,-1]}' },
   ],
 }
 

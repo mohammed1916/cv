@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/split-array-into-maximum-number-of-subarrays/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps input at 14 values.',
   examples: [
-    { label: 'Example 1', input: '[1,0,2,0,1,2]' },
-    { label: 'Example 2', input: '[5,7,1,3]' },
+    { label: 'Own case 1', input: '[2,1,3,1,2,3]' },
+    { label: 'Own case 2', input: '[6,8,2,4]' },
     { label: "Single zero", input: "[0]" },
     { label: "Equal values", input: "[5,5,5]" },
     { label: "Largest value, 14 entries", input: "[63,63,63,63,63,63,63,63,63,63,63,63,63,63]" },

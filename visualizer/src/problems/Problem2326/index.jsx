@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/spiral-matrix-iv/',
   complexity: 'Each cell is written once: O(m n) time. The visualization caps the matrix at 6 by 6.',
   examples: [
-    { label: 'Example 1', input: '{"m":3,"n":5,"head":[3,0,2,6,8,1,7,9,4,2,5,5,0]}' },
+    { label: 'Own case 1', input: '{"m":4,"n":6,"head":[4,1,3,7,9,2,8,10,5,3,6,6,1]}' },
     { label: 'Short list', input: '{"m":1,"n":4,"head":[1,2]}' },
     { label: 'One cell', input: '{"m":1,"n":1,"head":[5]}' },
     { label: 'Equal values along the spiral', input: '{"m":2,"n":2,"head":[0,0,0,0]}' },

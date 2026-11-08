@@ -4,6 +4,10 @@ export const examples = [
   { label: 'Example', input: '{"nums":[3,2,5,4],"k":3}' },
   { label: 'Remainders collapse', input: '{"nums":[2,6,3],"k":4}' },
   { label: 'Edge: k is 1', input: '{"nums":[7,9],"k":1}' },
+    { label: 'Single entry, k 1', input: '{"nums":[5],"k":1}' },
+    { label: 'Equal entries', input: '{"nums":[4,4,4,4,4],"k":3}' },
+    { label: 'Largest value', input: '{"nums":[1000000000,1,1000000000],"k":5}' },
+    { label: 'Long run: 12 entries', input: '{"nums":[170107005,405207604,357730272,81905915,162980568,2350697,663879707,248890527,33641963,296093305,216206600,748282291],"k":4}' },
 ]
 
 export const phases = [

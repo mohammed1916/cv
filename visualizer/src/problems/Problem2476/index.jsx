@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/closest-nodes-queries-in-a-binary-search-tree/',
   complexity: 'O(n) time to read the tree and O(log n) per query with binary search. The visualization caps the tree at 31 entries.',
   examples: [
-    { label: 'Example 1', input: '{"root":[6,2,13,1,4,9,15,null,null,null,null,null,null,14],"queries":[2,5,16]}' },
+    { label: 'Own case 1', input: '{"root":[7,3,14,2,5,10,16,null,null,null,null,null,null,15],"queries":[3,6,17]}' },
     { label: 'Small', input: '{"root":[4,2,6,1,3],"queries":[0,3,7]}' },
     { label: 'Single node', input: '{"root":[5],"queries":[0,9]}' },
     { label: 'Query on a node', input: '{"root":[4,2,6,1,3],"queries":[3,4,6]}' },

@@ -13,8 +13,12 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-zigzag-arrays-i/',
   complexity: 'O(n * (r - l)) time and O(r - l) space with prefix sums. The visualization caps n and r at 12.',
   examples: [
-    { label: 'Example 1', input: '{"n":3,"l":4,"r":5}' },
-    { label: 'Example 2', input: '{"n":3,"l":1,"r":3}' },
+    { label: 'Own case 1', input: '{"n":4,"l":5,"r":6}' },
+    { label: 'Own case 2', input: '{"n":4,"l":2,"r":4}' },
+    { label: 'Smallest range', input: '{"n":3,"l":1,"r":2}' },
+    { label: 'Adjacent bounds', input: '{"n":4,"l":2,"r":3}' },
+    { label: 'Full range', input: '{"n":12,"l":1,"r":12}' },
+    { label: 'Long run: n 12', input: '{"n":12,"l":6,"r":11}' },
   ],
 }
 

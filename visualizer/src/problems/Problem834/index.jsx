@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/sum-of-distances-in-tree/',
   complexity: 'O(n) time and space: two DFS passes over the n - 1 edges.',
   examples: [
-    { label: 'Official 6-node tree', input: '{"n":6,"edges":[[0,1],[0,2],[2,3],[2,4],[2,5]]}' },
+    { label: 'Own case 1', input: '{"n":6,"edges":[[2,5],[2,4],[2,3],[0,2],[0,1]]}' },
     { label: 'Single node', input: '{"n":1,"edges":[]}' },
     { label: 'Two nodes', input: '{"n":2,"edges":[[1,0]]}' },
     { label: 'Symmetric path of five', input: '{"n":5,"edges":[[0,1],[1,2],[2,3],[3,4]]}' },

@@ -23,6 +23,10 @@ const definition = {
     { label: "Mixed matches", input: '{"nums1":[2,7,1,8,2],"nums2":[8,2,7,1,2]}' },
     { label: "No matches", input: '{"nums1":[4,4,4],"nums2":[1,2,3]}' },
     { label: "Alternating", input: '{"nums1":[6,1,6,1],"nums2":[1,6,1,6]}' },
+    { label: 'Single matching zero', input: '{"nums1":[0],"nums2":[0]}' },
+    { label: 'Identical lists', input: '{"nums1":[4,4,4],"nums2":[4,4,4]}' },
+    { label: 'Largest digits, twelve values', input: '{"nums1":[9,9,9,9,9,9,9,9,9,9,9,9],"nums2":[0,9,9,0,9,9,0,9,9,0,9,9]}' },
+    { label: 'Long run: 12 values', input: '{"nums1":[0,3,5,6,8,3,5,3,0,2,1,4],"nums2":[5,2,3,7,4,0,0,4,1,1,5,0]}' },
   ],
 };
 

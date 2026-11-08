@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-operations-to-make-all-array-elements-equal/',
   complexity: 'Sorting once, then one binary search and two prefix-sum lookups per query. The visualization caps input at 8 numbers and 5 queries.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[3,1,6,8],"queries":[1,5]}' },
-    { label: 'Example 2', input: '{"nums":[2,9,6,3],"queries":[10]}' },
+    { label: 'Own case 1', input: '{"nums":[4,2,7,9],"queries":[2,6]}' },
+    { label: 'Own case 2', input: '{"nums":[3,10,7,4],"queries":[11]}' },
     { label: 'Single number and query', input: '{"nums":[1],"queries":[1]}' },
     { label: 'Equal numbers and repeated queries', input: '{"nums":[5,5,5],"queries":[5,5]}' },
     { label: 'Limit values', input: '{"nums":[20,1,20,1,20,1,20,1],"queries":[20,1,10,2,15]}' },

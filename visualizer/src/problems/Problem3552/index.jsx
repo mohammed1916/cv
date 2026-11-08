@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"matrix":["A..",".A.","..."]}' },
     { label: 'Example 2', input: '{"matrix":[".#...",".#.#.",".#.#.","...#."]}' },
+    { label: 'Single open cell', input: '{"matrix":["."]}' },
+    { label: 'Equal portal letters', input: '{"matrix":[".AA"]}' },
+    { label: 'Largest grid, six portals', input: '{"matrix":["A.B.C","D#.E.","F..A.",".#.B.","C...."]}' },
+    { label: 'Long run: 5 by 5 with repeated portals', input: '{"matrix":["..A.B","A####",".AA.B","A##AB","#B#BB"]}' },
   ],
 }
 

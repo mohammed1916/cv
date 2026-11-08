@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-size-of-a-set-after-removals/',
   complexity: 'O(n) time with hash sets. The visualization caps each array at 10 values.',
   examples: [
-    { label: 'Example 1', input: '{"nums1":[1,2,1,2],"nums2":[1,1,1,1]}' },
-    { label: 'Example 2', input: '{"nums1":[1,2,3,4,5,6],"nums2":[2,3,2,3,2,3]}' },
+    { label: 'Own case 1', input: '{"nums1":[2,3,2,3],"nums2":[2,2,2,2]}' },
+    { label: 'Own case 2', input: '{"nums1":[2,3,4,5,6,7],"nums2":[3,4,3,4,3,4]}' },
     { label: "Smallest pair", input: '{"nums1":[1,1],"nums2":[1,1]}' },
     { label: "Equal arrays", input: '{"nums1":[9,9,9,9],"nums2":[9,9,9,9]}' },
     { label: "Swapped halves tie", input: '{"nums1":[2,2,1,1],"nums2":[1,1,2,2]}' },

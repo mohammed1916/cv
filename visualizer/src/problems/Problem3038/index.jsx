@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-number-of-operations-with-the-same-score-i/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the array at 40 numbers.',
   examples: [
-    { label: 'Example 1', input: '[3,2,1,4,5]' },
+    { label: 'Own case 1', input: '[4,3,2,5,6]' },
     { label: 'Example 2', input: '[3,2,6,1,4]' },
     { label: 'Two numbers', input: '[1,1]' },
     { label: 'Equal numbers', input: '[2,2,2,2]' },

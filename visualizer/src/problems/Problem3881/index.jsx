@@ -14,6 +14,11 @@ const definition = {
   examples: [
     { label: 'Example A', input: '{"n":4,"pos":1,"k":1}' },
     { label: 'Example B', input: '{"n":4,"pos":3,"k":2}' },
+    { label: 'Single seat, k zero', input: '{"n":1,"pos":0,"k":0}' },
+    { label: 'Single seat, k one', input: '{"n":1,"pos":0,"k":1}' },
+    { label: 'Upper bound n, first position', input: '{"n":30,"pos":0,"k":30}' },
+    { label: 'Upper bound n, last position', input: '{"n":30,"pos":29,"k":15}' },
+    { label: 'Long run: n 28', input: '{"n":28,"pos":13,"k":14}' },
   ],
 }
 

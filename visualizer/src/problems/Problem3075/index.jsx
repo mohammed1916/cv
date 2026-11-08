@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximize-happiness-of-selected-children/',
   complexity: 'O(n log n) time for the sort, then O(k) for the picks. The visualization caps input at 8 children.',
   examples: [
-    { label: 'Example 1', input: '{"happiness":[1,2,3],"k":2}' },
-    { label: 'Example 2', input: '{"happiness":[2,3,4,5],"k":1}' },
+    { label: 'Own case 1', input: '{"happiness":[2,3,4],"k":3}' },
+    { label: 'Own case 2', input: '{"happiness":[3,4,5,6],"k":2}' },
     { label: 'Single child', input: '{"happiness":[5],"k":1}' },
     { label: 'Equal happiness', input: '{"happiness":[3,3,3,3],"k":2}' },
     { label: 'Largest values', input: '{"happiness":[1000,1000,1000,1000,1000,1000,1000,1000],"k":8}' },

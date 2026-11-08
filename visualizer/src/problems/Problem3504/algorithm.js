@@ -62,6 +62,10 @@ export const examples = [
   { label: 'Core in t', input: '{"s":"racxy","t":"zcar"}' },
   { label: 'No shared letter', input: '{"s":"kl","t":"mn"}' },
   { label: 'All from t', input: '{"s":"q","t":"level"}' },
+  { label: 'Single letter each', input: '{"s":"a","t":"a"}' },
+  { label: 'Equal strings tie', input: '{"s":"aaaa","t":"aaaa"}' },
+  { label: 'Longest inputs', input: '{"s":"abcdefghijkl","t":"lkjihgfedcba"}' },
+  { label: 'Long run: 12 letters each', input: '{"s":"thrytthbwosg","t":"jczsskbafadb"}' },
 ]
 
 export function parseInput(text) {

@@ -16,8 +16,8 @@ const definition = {
   url: 'https://leetcode.com/problems/advantage-shuffle/',
   complexity: 'O(n log n) for the sorts, O(n) for the single sweep.',
   examples: [
-    { label: 'Official example 1', input: '{"nums1":[2,7,11,15],"nums2":[1,10,4,11]}' },
-    { label: 'Official example 2', input: '{"nums1":[12,24,8,32],"nums2":[13,25,32,11]}' },
+    { label: 'Own case 1', input: '{"nums1":[3,8,12,16],"nums2":[2,11,5,12]}' },
+    { label: 'Own case 2', input: '{"nums1":[13,25,9,33],"nums2":[14,26,33,12]}' },
     { label: 'No advantage possible', input: '{"nums1":[1,1,1],"nums2":[5,6,7]}' },
     { label: 'Single element', input: '{"nums1":[5],"nums2":[3]}' },
     { label: 'Equal values use the smaller index', input: '{"nums1":[4,4,9],"nums2":[2,2,5]}' },

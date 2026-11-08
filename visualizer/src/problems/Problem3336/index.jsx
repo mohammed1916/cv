@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-number-of-subsequences-with-equal-gcd/',
   complexity: 'O(n * G^2) time where G is the largest gcd state (at most 40 here), and O(G^2) space. The visualization caps input at 8 numbers.',
   examples: [
-    { label: 'Example 1', input: '[1,2,3,4]' },
-    { label: 'Example 2', input: '[10,20,30]' },
+    { label: 'Own case 1', input: '[2,3,4,5]' },
+    { label: 'Own case 2', input: '[11,21,31]' },
     { label: 'Single value', input: '[7]' },
     { label: 'Equal values', input: '[5,5]' },
     { label: 'Largest values, longest list', input: '[40,1,40,1,40,1,40,1]' },

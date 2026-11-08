@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/percentage-of-letter-in-string/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps s at 30 letters.',
   examples: [
-    { label: 'Example 1', input: '{"s":"foobar","letter":"o"}' },
-    { label: 'Example 2', input: '{"s":"jjjj","letter":"k"}' },
+    { label: 'Own case 1', input: '{"s":"gppcbs","letter":"p"}' },
+    { label: 'Own case 2', input: '{"s":"kkkk","letter":"l"}' },
     { label: 'Single matching letter', input: '{"s":"a","letter":"a"}' },
     { label: 'Letter absent', input: '{"s":"abc","letter":"z"}' },
     { label: 'Thirty letters, letter repeats', input: '{"s":"abcdefghijklmnopqrstuvwxyzabcd","letter":"a"}' },

@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/substring-xor-queries/',
   complexity: 'O(n * 30) time to record substrings and O(1) per query lookup. The visualization caps s at 40 characters.',
   examples: [
-    { label: 'Example 1', input: '{"s":"101101","queries":[[0,5],[1,2]]}' },
-    { label: 'Example 2', input: '{"s":"0101","queries":[[12,8]]}' },
+    { label: 'Own case 1', input: '{"s":"101101","queries":[[1,2],[0,5]]}' },
+    { label: 'Own case 2', input: '{"s":"0101","queries":[[8,12]]}' },
     { label: 'Single bit', input: '{"s":"0","queries":[[0,0]]}' },
     { label: 'Equal query pairs', input: '{"s":"1111","queries":[[0,0],[1,1]]}' },
     { label: 'Forty bits, extreme query limits', input: '{"s":"1010101010101010101010101010101010101010","queries":[[0,1000],[1000,0]]}' },

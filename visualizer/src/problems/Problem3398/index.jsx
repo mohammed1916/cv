@@ -14,7 +14,11 @@ const definition = {
   complexity: 'O(n * L) time for each candidate length L, with binary search over L. The visualization caps the input at 10 characters.',
   examples: [
     { label: 'Example 1', input: '{"s":"000001","numOps":1}' },
-    { label: 'Example 2', input: '{"s":"0000","numOps":2}' },
+    { label: 'Own case 2', input: '{"s":"1111","numOps":3}' },
+    { label: 'Single digit, no operations', input: '{"s":"1","numOps":0}' },
+    { label: 'Equal digits', input: '{"s":"0000","numOps":2}' },
+    { label: 'Full length of operations', input: '{"s":"1111111111","numOps":10}' },
+    { label: 'Long run: 10 digits', input: '{"s":"1001100111","numOps":5}' },
   ],
 }
 

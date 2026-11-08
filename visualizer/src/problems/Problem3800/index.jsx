@@ -19,6 +19,10 @@ const definition = {
     { label: 'Example 1', input: '{"s":"0110","t":"1001","flipCost":4,"swapCost":3,"crossCost":1}' },
     { label: 'Example 2', input: '{"s":"11","t":"00","flipCost":1,"swapCost":9,"crossCost":2}' },
     { label: 'Equal', input: '{"s":"110010","t":"110010","flipCost":7,"swapCost":2,"crossCost":4}' },
+    { label: 'One bit', input: '{"s":"1","t":"0","flipCost":5,"swapCost":2,"crossCost":3}' },
+    { label: 'Equal costs', input: '{"s":"0101","t":"1010","flipCost":1,"swapCost":1,"crossCost":1}' },
+    { label: 'Costs at the maximum', input: '{"s":"1100110011001100110011001100110011001100","t":"0011001100110011001100110011001100110011","flipCost":1000000000,"swapCost":1,"crossCost":1000000000}' },
+    { label: 'Long run: 40 bits', input: '{"s":"0110000011010010111100011110011100010011","t":"1110110101111111001010010100101011001100","flipCost":27,"swapCost":46,"crossCost":44}' },
   ],
 }
 

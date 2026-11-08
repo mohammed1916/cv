@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/stamping-the-sequence/',
   complexity: 'O(n * (n - m + 1) * m) worst case time. The visualization caps the target at 30 characters.',
   examples: [
-    { label: 'Example 1', input: '{"stamp":"abc","target":"ababc"}' },
-    { label: 'Example 2', input: '{"stamp":"abca","target":"aabcaca"}' },
+    { label: 'Own case 1', input: '{"stamp":"bcd","target":"bcbcd"}' },
+    { label: 'Own case 2', input: '{"stamp":"bcdb","target":"bbcdbdb"}' },
     { label: 'Impossible', input: '{"stamp":"ab","target":"ba"}' },
     { label: 'Single letter', input: '{"stamp":"a","target":"a"}' },
     { label: 'Repeated letters', input: '{"stamp":"aa","target":"aaaa"}' },

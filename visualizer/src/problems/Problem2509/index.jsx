@@ -16,8 +16,8 @@ const definition = {
   url: 'https://leetcode.com/problems/cycle-length-queries-in-a-tree/',
   complexity: 'O(log n) per query. The visualization caps the tree at 4 levels.',
   examples: [
-    { label: 'Example 1', input: '{"n":3,"queries":[[5,3],[4,7],[2,3]]}' },
-    { label: 'Example 2', input: '{"n":2,"queries":[[1,2]]}' },
+    { label: 'Own case 1', input: '{"n":4,"queries":[[6,4],[5,8],[3,4]]}' },
+    { label: 'Own case 2', input: '{"n":3,"queries":[[2,3]]}' },
     { label: 'Same node', input: '{"n":2,"queries":[[1,1]]}' },
     { label: 'Equal labels', input: '{"n":3,"queries":[[4,4],[2,2]]}' },
     { label: 'Largest tree, leaf pairs', input: '{"n":4,"queries":[[15,8],[1,15]]}' },

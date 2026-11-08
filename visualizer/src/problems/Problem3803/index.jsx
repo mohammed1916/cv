@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Short word', input: '{"s":"xyz"}' },
     { label: 'Repeats', input: '{"s":"aabbaa"}' },
+    { label: 'One letter', input: '{"s":"a"}' },
+    { label: 'Repeated letter', input: '{"s":"aaaa"}' },
+    { label: '30 characters, all letters once and then four more', input: '{"s":"abcdefghijklmnopqrstuvwxyzabcd"}' },
+    { label: 'Long run: 30 letters', input: '{"s":"bridqclskonuvtktmkajhboopuisbv"}' },
   ],
 }
 

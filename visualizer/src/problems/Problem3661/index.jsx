@@ -30,6 +30,10 @@ const definition = {
   examples: [
     { label: 'Three robots', input: '{"robots":[6,15,20],"distance":[4,3,2],"walls":[3,5,9,18,21,22]}' },
     { label: 'Blocked shot', input: '{"robots":[2,9],"distance":[9,1],"walls":[4,5,12]}' },
+    { label: 'One robot, one wall', input: '{"robots":[1],"distance":[1],"walls":[2]}' },
+    { label: 'Equal distances', input: '{"robots":[10,20],"distance":[5,5],"walls":[15,25]}' },
+    { label: 'Extreme positions', input: '{"robots":[1,50],"distance":[10,10],"walls":[50,1]}' },
+    { label: 'Long run: 5 robots, 12 walls', input: '{"robots":[13,22,38,9,2],"distance":[1,6,9,5,9],"walls":[38,22,47,43,35,1,16,41,18,37,25,12]}' },
   ],
 }
 

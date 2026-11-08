@@ -21,6 +21,10 @@ const definition = {
   examples: [
     { label: 'Mixed blocks', input: '[1,2,2,1,3,3,3,4]' },
     { label: 'Split value', input: '[5,5,6,5]' },
+    { label: "Single value", input: "[1]" },
+    { label: "Equal run", input: "[7,7,7]" },
+    { label: "Largest values", input: "[100,100,1,100]" },
+    { label: "Long run: 20 values", input: "[1,2,2,2,4,5,3,1,4,2,3,5,1,1,1,2,5,1,3,1]" },
   ],
 }
 

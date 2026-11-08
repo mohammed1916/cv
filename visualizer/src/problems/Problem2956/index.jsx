@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-common-elements-between-two-arrays/',
   complexity: 'O(n + m) time and O(n + m) space with two sets. The visualization caps each array at 20 numbers.',
   examples: [
-    { label: 'Example 1', input: '{"nums1":[4,3,2,3,1],"nums2":[2,2,5,2,3,6]}' },
-    { label: 'Example 2', input: '{"nums1":[3,4,2,3],"nums2":[1,5]}' },
+    { label: 'Own case 1', input: '{"nums1":[5,4,3,4,2],"nums2":[3,3,6,3,4,7]}' },
+    { label: 'Own case 2', input: '{"nums1":[4,5,3,4],"nums2":[2,6]}' },
     { label: 'Nothing shared', input: '{"nums1":[4],"nums2":[9]}' },
     { label: 'Equal lists', input: '{"nums1":[7,7],"nums2":[7,7]}' },
     { label: 'Extreme values', input: '{"nums1":[50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1],"nums2":[1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50]}' },

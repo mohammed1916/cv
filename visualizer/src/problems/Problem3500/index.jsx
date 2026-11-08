@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[2,5],"cost":[3,1],"k":2}' },
     { label: 'Three items', input: '{"nums":[1,4,2],"cost":[2,2,3],"k":1}' },
+    { label: 'Single element', input: '{"nums":[3],"cost":[2],"k":1}' },
+    { label: 'Equal values tie', input: '{"nums":[4,4,4],"cost":[4,4,4],"k":4}' },
+    { label: 'Largest values and k', input: '{"nums":[9,1,9,1,9,1,9,1],"cost":[1,9,1,9,1,9,1,9],"k":9}' },
+    { label: 'Long run: 8 pairs', input: '{"nums":[1,1,1,3,1,8,7,5],"cost":[9,2,8,8,5,2,9,8],"k":5}' },
   ],
 }
 

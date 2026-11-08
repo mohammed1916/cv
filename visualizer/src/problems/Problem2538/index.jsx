@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/difference-between-maximum-and-minimum-price-sum/',
   complexity: 'O(n^2) in this walk-through, one walk per root. The visualization caps n at 15.',
   examples: [
-    { label: 'Example 1', input: '{"n":6,"edges":[[0,1],[1,2],[1,3],[3,4],[3,5]],"price":[9,8,7,6,10,5]}' },
-    { label: 'Example 2', input: '{"n":3,"edges":[[0,1],[1,2]],"price":[1,1,1]}' },
+    { label: 'Own case 1', input: '{"n":6,"edges":[[3,5],[3,4],[1,3],[1,2],[0,1]],"price":[5,10,6,7,8,9]}' },
+    { label: 'Own case 2', input: '{"n":3,"edges":[[1,2],[0,1]],"price":[1,1,1]}' },
     { label: 'Single node', input: '{"n":1,"edges":[],"price":[7]}' },
     { label: 'Equal prices', input: '{"n":3,"edges":[[0,1],[0,2]],"price":[4,4,4]}' },
     { label: 'Path of 15 with largest prices', input: '{"n":15,"edges":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11],[11,12],[12,13],[13,14]],"price":[100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000,100000]}' },

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/abbreviating-the-product-of-a-range/',
   complexity: 'O(right - left) time. The visualization caps right at 1000.',
   examples: [
-    { label: 'Example 1', input: '{"left":1,"right":4}' },
-    { label: 'Example 2', input: '{"left":2,"right":11}' }, { label: "Single number", input: "{\"left\":1,\"right\":1}" }, { label: "Equal bounds", input: "{\"left\":5,\"right\":5}" }, { label: "Largest range", input: "{\"left\":1,\"right\":1000}" }, { label: "Long run: upper half", input: "{\"left\":500,\"right\":1000}" },
+    { label: 'Own case 1', input: '{"left":2,"right":5}' },
+    { label: 'Own case 2', input: '{"left":3,"right":12}' }, { label: "Single number", input: "{\"left\":1,\"right\":1}" }, { label: "Equal bounds", input: "{\"left\":5,\"right\":5}" }, { label: "Largest range", input: "{\"left\":1,\"right\":1000}" }, { label: "Long run: upper half", input: "{\"left\":500,\"right\":1000}" },
   ],
 }
 

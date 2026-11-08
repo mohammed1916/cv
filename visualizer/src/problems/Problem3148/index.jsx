@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-difference-score-in-a-grid/',
   complexity: 'O(m * n) time and space.',
   examples: [
-    { label: 'Example 1', input: '[[9,5,7,3],[8,9,6,1],[6,7,14,3],[2,5,3,1]]' },
-    { label: 'Example 2', input: '[[4,3,2],[3,2,1]]' },
+    { label: 'Own case 1', input: '[[10,6,8,4],[9,10,7,2],[7,8,15,4],[3,6,4,2]]' },
+    { label: 'Own case 2', input: '[[5,4,3],[4,3,2]]' },
     { label: "Two cells", input: "[[5,9]]" },
     { label: "All cells equal", input: "[[7,7],[7,7]]" },
     { label: "Largest grid, alternating extremes", input: "[[100,1,100,1,100,1],[1,100,1,100,1,100],[100,1,100,1,100,1],[1,100,1,100,1,100],[100,1,100,1,100,1],[1,100,1,100,1,100]]" },

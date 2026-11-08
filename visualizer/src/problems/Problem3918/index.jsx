@@ -18,6 +18,10 @@ const definition = {
     { label: 'Example 1', input: '{"n":13}' },
     { label: 'Example 2', input: '{"n":10}' },
     { label: 'Example 3', input: '{"n":8}' },
+    { label: 'Smallest n', input: '{"n":1}' },
+    { label: 'Small n with equal split', input: '{"n":4}' },
+    { label: 'Largest allowed n', input: '{"n":1000}' },
+    { label: 'Long run: n = 720', input: '{"n":720}' },
   ],
 }
 

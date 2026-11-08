@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Official', input: '{"coins":[[0,1,-1],[1,-2,3],[2,-3,4]]}' },
     { label: 'All positive', input: '{"coins":[[10,10,10],[10,10,10]]}' },
+    { label: 'Single cell', input: '{"coins":[[-10]]}' },
+    { label: 'Zero coins tie', input: '{"coins":[[0,0],[0,0]]}' },
+    { label: 'Extreme coins', input: '{"coins":[[10,-10,10,-10,10],[10,-10,10,-10,10],[10,-10,10,-10,10],[10,-10,10,-10,10],[10,-10,10,-10,10]]}' },
+    { label: 'Long run: 5 by 5', input: '{"coins":[[8,9,8,1,-1],[2,1,0,-3,9],[-1,4,-4,3,8],[7,3,2,-10,3],[-6,-5,10,4,2]]}' },
   ],
 }
 

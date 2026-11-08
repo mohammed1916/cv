@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"lights":[0,0,0,0]}' },
     { label: 'Example 2', input: '{"lights":[0,0,0,2,0]}' },
+    { label: "Single position", input: '{"lights":[1]}' },
+    { label: "Equal lights", input: '{"lights":[2,2,2,2]}' },
+    { label: "Maximum light values", input: '{"lights":[8,8,8,8,8,8,8,8]}' },
+    { label: "Long run: 8 positions", input: '{"lights":[6,7,0,3,2,4,8,2]}' },
   ],
 }
 

@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/robot-collisions/',
   complexity: 'O(n log n) time for sorting and O(n) for the stack pass.',
   examples: [
-    { label: 'Example 1', input: '{"positions":[5,4,3,2,1],"healths":[2,17,9,15,10],"directions":"RRRRR"}' },
-    { label: 'Example 2', input: '{"positions":[3,5,2,6],"healths":[10,10,15,12],"directions":"RLRL"}' },
+    { label: 'Own case 1', input: '{"positions":[1,2,3,4,5],"healths":[10,15,9,17,2],"directions":"RRRRR"}' },
+    { label: 'Own case 2', input: '{"positions":[6,2,5,3],"healths":[12,15,10,10],"directions":"RLRL"}' },
     { label: 'Single robot', input: '{"positions":[5],"healths":[7],"directions":"R"}' },
     { label: 'Equal health collision: both removed', input: '{"positions":[1,2],"healths":[3,3],"directions":"RL"}' },
     { label: 'Boundary: health 20 at position 2 and 20', input: '{"positions":[2,20],"healths":[20,19],"directions":"RL"}' },

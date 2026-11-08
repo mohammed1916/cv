@@ -20,6 +20,10 @@ const definition = {
   examples: [
     { label: 'Three requests', input: '{"start":1,"requests":[[0,5],[3,2],[4,4]]}' },
     { label: 'Early arrival', input: '{"start":3,"requests":[[10,1],[0,4],[2,4],[12,2]]}' },
+    { label: "Request at start floor", input: "{\"start\":1,\"requests\":[[0,1]]}" },
+    { label: "Duplicate requests at one time", input: "{\"start\":5,\"requests\":[[2,8],[2,8]]}" },
+    { label: "Extreme arrivals and floors", input: "{\"start\":1,\"requests\":[[0,20],[30,1],[30,20]]}" },
+    { label: "Long run: six requests", input: "{\"start\":10,\"requests\":[[2,9],[20,11],[29,18],[25,16],[22,3],[18,14]]}" },
   ],
 }
 

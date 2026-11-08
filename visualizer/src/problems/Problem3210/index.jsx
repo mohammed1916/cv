@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-encrypted-string/',
   complexity: 'O(n) time for a string of length n. The visualization caps s at 12 characters.',
   examples: [
-    { label: 'Example 1', input: '{"s":"dart","k":3}' },
+    { label: 'Own case 1', input: '{"s":"ebsu","k":4}' },
     { label: 'Repeats', input: '{"s":"aaa","k":1}' },
     { label: 'One letter', input: '{"s":"a","k":1}' },
     { label: 'Repeated letter at the limit', input: '{"s":"zzzzzzzzzzzz","k":20}' },

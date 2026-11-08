@@ -13,8 +13,12 @@ const definition = {
   url: 'https://leetcode.com/problems/zero-array-transformation-ii/',
   complexity: 'O(q * n * m) time for this direct scan, and O(n) space. The visualization caps input at 8 values and 8 queries.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[2,0,2],"queries":[[0,2,1],[0,2,1],[1,1,3]]}' },
-    { label: 'Example 2', input: '{"nums":[4,3,2,1],"queries":[[1,3,2],[0,2,1]]}' },
+    { label: 'Own case 1', input: '{"nums":[2,0,2],"queries":[[1,1,3],[0,2,1],[0,2,1]]}' },
+    { label: 'Own case 2', input: '{"nums":[1,2,3,4],"queries":[[0,2,1],[1,3,2]]}' },
+    { label: 'Single element', input: '{"nums":[0],"queries":[[0,0,1]]}' },
+    { label: 'Equal values, equal queries', input: '{"nums":[2,2,2],"queries":[[0,2,1],[0,2,1]]}' },
+    { label: 'Largest values and steps', input: '{"nums":[6,6,6,6,6,6,6,6],"queries":[[0,7,4],[0,7,4],[0,7,4],[0,7,4],[0,7,4],[0,7,4],[0,7,4],[0,7,4]]}' },
+    { label: 'Long run: 8 items and 8 queries', input: '{"nums":[3,0,5,5,2,6,4,1],"queries":[[6,6,3],[5,6,4],[3,5,1],[0,5,1],[4,4,3],[5,5,4],[6,6,4],[6,7,4]]}' },
   ],
 }
 

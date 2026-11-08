@@ -17,6 +17,11 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"capacity":[9,4,6,4],"itemSize":5}' },
     { label: 'Tie', input: '{"capacity":[7,7,7],"itemSize":7}' },
+    { label: 'Single box', input: '{"capacity":[5],"itemSize":3}' },
+    { label: 'Equal capacities', input: '{"capacity":[4,6,4,6],"itemSize":4}' },
+    { label: 'Zero item size', input: '{"capacity":[0,0,3],"itemSize":0}' },
+    { label: 'No box fits', input: '{"capacity":[1,2,3],"itemSize":9}' },
+    { label: 'Long run: 12 boxes', input: '{"capacity":[41,48,20,99,67,27,43,17,84,56,32,82],"itemSize":37}' },
   ],
 }
 

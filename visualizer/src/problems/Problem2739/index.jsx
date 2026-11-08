@@ -12,8 +12,8 @@ const definition = {
   url: 'https://leetcode.com/problems/total-distance-traveled/',
   complexity: 'O(mainTank) time with a constant-size state. The visualization caps each tank at 100 liters.',
   examples: [
-    { label: 'Example 1', input: '{"mainTank":5,"additionalTank":10}' },
-    { label: 'Example 2', input: '{"mainTank":1,"additionalTank":2}' },
+    { label: 'Own case 1', input: '{"mainTank":6,"additionalTank":11}' },
+    { label: 'Own case 2', input: '{"mainTank":2,"additionalTank":3}' },
     { label: 'No extra fuel', input: '{"mainTank":7,"additionalTank":0}' },
     { label: 'Equal tanks', input: '{"mainTank":10,"additionalTank":10}' },
     { label: 'Largest tanks', input: '{"mainTank":100,"additionalTank":100}' },

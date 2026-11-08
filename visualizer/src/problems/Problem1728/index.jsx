@@ -12,7 +12,7 @@ const definition = {
   url: 'https://leetcode.com/problems/cat-and-mouse-ii/',
   complexity: 'O((rows * cols)^2 * moves) states. The visualization caps the board at 8 by 8.',
   examples: [
-    { label: 'Example 1', input: '{"grid":["####F","#C...","M...."],"catJump":1,"mouseJump":2}' },
+    { label: 'Own case 1', input: '{"grid":["M....","#C...","####F"],"catJump":1,"mouseJump":2}' },
     { label: 'Example 2', input: '{"grid":["M.C...F"],"catJump":1,"mouseJump":4}' },
     { label: 'Example 3', input: '{"grid":["M.C...F"],"catJump":1,"mouseJump":3}' },
   { label: 'Adjacent start', input: '{"grid":["CMF"],"catJump":1,"mouseJump":1}' },

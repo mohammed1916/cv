@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-xor-with-an-element-from-array/',
   complexity: 'O((n + q) * B) time for B = 5 bits in the visualization. The visualization caps nums at 10 and queries at 6.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[0,1,2,3,4],"queries":[[3,1],[1,3],[5,6]]}' },
-    { label: 'Example 2', input: '{"nums":[5,2,4,6,6,3],"queries":[[12,4],[8,1],[6,3]]}' },
+    { label: 'Own case 1', input: '{"nums":[1,2,3,4,5],"queries":[[4,2],[2,4],[6,7]]}' },
+    { label: 'Own case 2', input: '{"nums":[6,3,5,7,7,4],"queries":[[13,5],[9,2],[7,4]]}' },
   { label: 'Single number', input: '{"nums":[7],"queries":[[7,10]]}' },
   { label: 'No value under the limit', input: '{"nums":[8,9],"queries":[[3,2]]}' },
   { label: 'Equal numbers', input: '{"nums":[4,4,4],"queries":[[4,4]]}' },

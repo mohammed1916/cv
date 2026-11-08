@@ -12,6 +12,10 @@ const definition = {
     { label: 'Both fit', input: '{"n":7,"m":7,"k":7}' },
     { label: 'Longest possible log', input: '{"n":20,"m":1,"k":10}' },
     { label: 'Just over the limit', input: '{"n":12,"m":11,"k":11}' },
+    { label: 'Smallest k, single logs', input: '{"n":1,"m":1,"k":2}' },
+    { label: 'Longer log at 2k', input: '{"n":4,"m":2,"k":2}' },
+    { label: 'Equal logs at k', input: '{"n":3,"m":3,"k":3}' },
+    { label: 'Long run: k = 5000', input: '{"n":6000,"m":3000,"k":5000}' },
   ],
 }
 

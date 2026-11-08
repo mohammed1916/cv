@@ -22,6 +22,10 @@ const definition = {
     { label: 'Chain to zero', input: '{"n":4,"edges":[[3,2,4],[2,1,2],[1,0,3],[0,3,1]],"threshold":2}' },
     { label: 'Fan into zero', input: '{"n":5,"edges":[[1,0,5],[2,0,2],[3,0,7],[4,0,1],[2,1,3]],"threshold":1}' },
     { label: 'Detour', input: '{"n":4,"edges":[[1,2,1],[2,3,6],[3,0,2],[1,0,9]],"threshold":1}' },
+    { label: 'Smallest graph', input: '{"n":2,"edges":[[1,0,1]],"threshold":1}' },
+    { label: 'Equal weights tie', input: '{"n":3,"edges":[[1,0,2],[2,0,2]],"threshold":1}' },
+    { label: 'Longest chain', input: '{"n":8,"edges":[[7,6,9],[6,5,9],[5,4,9],[4,3,9],[3,2,9],[2,1,9],[1,0,9]],"threshold":7}' },
+    { label: 'Long run: 8 nodes', input: '{"n":8,"edges":[[1,7,6],[0,2,8],[3,1,3],[0,6,5],[2,3,9],[2,6,7],[1,6,7],[0,6,7],[1,3,2],[5,1,2],[1,4,5],[1,2,5],[6,4,9],[0,2,5],[3,7,1]],"threshold":4}' },
   ],
 }
 

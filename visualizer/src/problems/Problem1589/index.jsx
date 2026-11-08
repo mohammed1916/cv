@@ -16,8 +16,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-sum-obtained-of-any-permutation/',
   complexity: 'O(n log n + m + n) time and O(n) space. The visualization caps input at 10 values and 8 requests.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,3,4,5],"requests":[[1,3],[0,1]]}' },
-    { label: 'Example 2', input: '{"nums":[1,2,3,4,5,6],"requests":[[0,1]]}' },
+    { label: 'Own case 1', input: '{"nums":[2,3,4,5,6],"requests":[[2,4],[1,2]]}' },
+    { label: 'Own case 2', input: '{"nums":[2,3,4,5,6,7],"requests":[[1,2]]}' },
     { label: "Single number", input: "{\"nums\":[5],\"requests\":[[0,0]]}" },
     { label: "Equal values, overlapping ranges", input: "{\"nums\":[4,4,4],\"requests\":[[0,2],[1,1]]}" },
     { label: "Ten large values, full coverage", input: "{\"nums\":[99,99,99,99,99,99,99,99,99,99],\"requests\":[[0,9],[0,0],[9,9],[2,5],[1,8],[0,4],[5,9],[3,3]]}" },

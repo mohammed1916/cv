@@ -12,7 +12,7 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-profit-in-job-scheduling/',
   complexity: 'O(n^2) time for this visualization, which counts compatible jobs by scanning. The standard solution is O(n log n). The visualization caps input at 10 jobs.',
   examples: [
-    { label: 'Example 1', input: '{"startTime":[1,2,3,3],"endTime":[3,4,5,6],"profit":[50,10,40,70]}' },
+    { label: 'Own case 1', input: '{"startTime":[2,3,4,4],"endTime":[4,5,6,7],"profit":[51,11,41,71]}' },
     { label: 'Chain', input: '{"startTime":[1,1,1],"endTime":[2,3,4],"profit":[5,6,4]}' },
     { label: 'Single job', input: '{\"startTime\":[0],\"endTime\":[5],\"profit\":[10]}' },
     { label: 'Identical jobs with equal profit', input: '{\"startTime\":[1,1],\"endTime\":[4,4],\"profit\":[5,5]}' },

@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/merge-similar-items/',
   complexity: 'O((n + m) log(n + m)) time for the final sort, with O(n + m) space for the totals. The visualization caps each list at 10 items.',
   examples: [
-    { label: 'Example 1', input: '{"items1":[[1,1],[4,5],[3,8]],"items2":[[3,1],[1,5]]}' },
+    { label: 'Own case 1', input: '{"items1":[[2,2],[5,6],[4,9]],"items2":[[4,2],[2,6]]}' },
     { label: 'Example 2', input: '{"items1":[[1,1],[3,2],[2,3]],"items2":[[2,1],[3,2]]}' },
     { label: 'One item each', input: '{"items1":[[1,1]],"items2":[[1,1]]}' },
     { label: 'Same value in both lists', input: '{"items1":[[2,3],[5,3]],"items2":[[2,3],[5,3]]}' },

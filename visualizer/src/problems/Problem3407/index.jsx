@@ -15,8 +15,12 @@ const definition = {
   url: 'https://leetcode.com/problems/substring-matching-pattern/',
   complexity: 'O(n * m) time with direct string search. The visualization caps s at 20 characters.',
   examples: [
-    { label: 'Example', input: '{"s":"leetcode","p":"ee*e"}' },
+    { label: 'Own case 1', input: '{"s":"mffudpef","p":"ff*f"}' },
     { label: 'No match', input: '{"s":"xzz","p":"x*y"}' },
+    { label: 'Star alone', input: '{"s":"a","p":"*"}' },
+    { label: 'Empty suffix', input: '{"s":"abc","p":"abc*"}' },
+    { label: 'Repeated letters', input: '{"s":"aaaaaaaaaaaaaaaaaaaa","p":"a*a"}' },
+    { label: 'Long run: 20 letters', input: '{"s":"oeprycjwqlstdvkblqpl","p":"ab*c"}' },
   ],
 }
 

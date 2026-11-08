@@ -16,6 +16,11 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[4,4,1,4,1],"k":2,"m":2}' },
     { label: 'Repeats', input: '{"nums":[1,1,1],"k":1,"m":2}' },
+    { label: 'Single value', input: '{"nums":[5],"k":1,"m":1}' },
+    { label: 'Equal values', input: '{"nums":[3,3,3,3],"k":1,"m":4}' },
+    { label: 'Largest limits', input: '{"nums":[9,9,9,9,9,9,9,9,9,9,9,9],"k":9,"m":12}' },
+    { label: 'Long run: 12 values', input: '{"nums":[2,3,9,9,5,6,5,4,3,8,5,4],"k":4,"m":5}' },
+    { label: 'No window has enough kinds', input: '{"nums":[1,2],"k":9,"m":1}' },
   ],
 }
 

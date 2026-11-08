@@ -15,6 +15,10 @@ const definition = {
     { label: "Unique minimum", input: "{\"nums1\":[7,3,9,4,1],\"nums2\":[4,8,1,3,6]}" },
     { label: "Four-way tie", input: "{\"nums1\":[6,1,4,9],\"nums2\":[9,4,1,6]}" },
     { label: "No common value", input: "{\"nums1\":[1,2],\"nums2\":[3,4]}" },
+    { label: 'Single value each', input: '{"nums1":[0],"nums2":[0]}' },
+    { label: 'Equal values', input: '{"nums1":[3,3],"nums2":[3,3]}' },
+    { label: 'Largest values', input: '{"nums1":[99,99,99,99,99,99,99,99,99,99],"nums2":[99,0,99,0,99,0,99,0,99,0]}' },
+    { label: 'Long run: 10 values each', input: '{"nums1":[98,55,37,98,58,3,6,94,9,92],"nums2":[7,53,29,42,17,23,52,73,43,76]}' },
   ],
 }
 

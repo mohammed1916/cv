@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"word":"abcdeafdef"}' },
     { label: 'Example 2', input: '{"word":"bcdaaaab"}' },
+    { label: 'One letter', input: '{"word":"a"}' },
+    { label: 'Repeated letter', input: '{"word":"aaaa"}' },
+    { label: 'Longest allowed word', input: '{"word":"abcdefghijklmn"}' },
+    { label: 'Long run: 14 letters', input: '{"word":"fedcafaccdfade"}' },
   ],
 }
 

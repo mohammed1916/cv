@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-average-of-smallest-and-largest-elements/',
   complexity: 'O(n log n) time for the sort. The visualization caps the array at 40 numbers.',
   examples: [
-    { label: 'Example 1', input: '[7,8,3,4,15,13,4,1]' },
-    { label: 'Example 2', input: '[1,9,8,3,10,5]' },
+    { label: 'Own case 1', input: '[8,9,4,5,16,14,5,2]' },
+    { label: 'Own case 2', input: '[2,10,9,4,11,6]' },
     { label: 'Two values', input: '[1,50]' },
     { label: 'Equal values at every position', input: '[7,7,7,7]' },
     { label: 'Boundary values alternate', input: '[50,1,50,1,50,1]' },

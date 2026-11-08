@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/distribute-candies-among-children-i/',
   complexity: 'O(n^2) time with two nested loops. The visualization caps n and limit at 50.',
   examples: [
-    { label: 'Example 1', input: '{"n":5,"limit":2}' },
-    { label: 'Example 2', input: '{"n":3,"limit":3}' },
+    { label: 'Own case 1', input: '{"n":6,"limit":3}' },
+    { label: 'Own case 2', input: '{"n":5,"limit":5}' },
     { label: 'One candy, limit one', input: '{"n":1,"limit":1}' },
     { label: 'Equal n and limit', input: '{"n":4,"limit":4}' },
     { label: 'Upper limits', input: '{"n":50,"limit":50}' },

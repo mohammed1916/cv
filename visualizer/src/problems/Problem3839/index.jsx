@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Two groups', input: '{"words":["ant","anvil","bee","beetle","cat"],"k":2}' },
     { label: 'Short words', input: '{"words":["sun","sunny","sea","tea","sea"],"k":3}' },
+    { label: 'One word', input: '{"words":["a"],"k":1}' },
+    { label: 'Equal words', input: '{"words":["ab","ab","ab"],"k":2}' },
+    { label: 'Twelve words of six letters', input: '{"words":["abcdef","bcdefa","cdefab","defabc","efabcd","fabcde","abcdef","bcdefa","cdefab","defabc","efabcd","fabcde"],"k":6}' },
+    { label: 'Long run: 12 words', input: '{"words":["sqbgpn","wpgue","xrwym","oc","zb","ol","dhb","ck","dmh","lzc","c","eglvvg"],"k":4}' },
   ],
 }
 

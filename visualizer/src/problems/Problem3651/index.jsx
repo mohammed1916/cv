@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Teleport', input: '{"grid":[[1,9],[1,1]],"k":1}' },
     { label: 'No teleport', input: '{"grid":[[0,5,1],[2,2,2]],"k":0}' },
+    { label: 'Single cell', input: '{"grid":[[0]],"k":0}' },
+    { label: 'Equal cells', input: '{"grid":[[3,3],[3,3]],"k":1}' },
+    { label: 'Largest grid and values', input: '{"grid":[[9,9,9,9],[9,9,9,9],[9,9,9,9],[9,9,9,9]],"k":2}' },
+    { label: 'Long run: 4 by 4 grid', input: '{"grid":[[4,7,7,6],[5,2,1,2],[1,4,2,2],[8,6,2,9]],"k":2}' },
   ],
 }
 

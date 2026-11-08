@@ -15,7 +15,7 @@ const definition = {
   complexity: 'O(q * 26) for q question marks. The visualization caps the question marks at 3.',
   examples: [
     { label: 'Example 1', input: '"???"' },
-    { label: 'Example 2', input: '"a?a?"' },
+    { label: 'Own case 2', input: '"b?b?"' },
     { label: "Single letter", input: "\"a\"" },
     { label: "Equal question marks", input: "\"a??a\"" },
     { label: "Three question marks at the ends", input: "\"?abcdefghijklmnopq??\"" },

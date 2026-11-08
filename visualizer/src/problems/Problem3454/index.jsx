@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Invented two squares', input: '{"squares":[[0,0,2],[3,1,1]]}' },
     { label: 'Invented overlap', input: '{"squares":[[1,0,3],[2,2,2],[0,4,1]]}' },
+    { label: 'Single square', input: '{"squares":[[0,0,1]]}' },
+    { label: 'Same square tie', input: '{"squares":[[1,1,2],[1,1,2]]}' },
+    { label: 'Extreme corners', input: '{"squares":[[0,0,5],[10,10,5]]}' },
+    { label: 'Long run: 6 squares', input: '{"squares":[[0,10,1],[1,0,3],[5,10,4],[8,5,3],[5,4,3],[9,7,2]]}' },
   ],
 }
 

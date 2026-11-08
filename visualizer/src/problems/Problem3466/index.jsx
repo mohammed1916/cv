@@ -16,6 +16,11 @@ const definition = {
     { label: 'Out and back', input: '{"lanes":[[3,-2,4,-1],[1,5,-3,2]]}' },
     { label: 'Switch at entry', input: '{"lanes":[[-4,6,1],[2,-9,-5]]}' },
     { label: 'Two switches', input: '{"lanes":[[2,-3,4,-1,2],[-2,5,-6,3,-1]]}' },
+    { label: 'Single mile per lane', input: '{"lanes":[[5],[-3]]}' },
+    { label: 'Equal miles in both lanes', input: '{"lanes":[[4,4,4],[4,4,4]]}' },
+    { label: 'Extreme mile values', input: '{"lanes":[[9,-9,9,-9],[-9,9,-9,9]]}' },
+    { label: 'All zero miles', input: '{"lanes":[[0,0],[0,0]]}' },
+    { label: 'Long run: 8 miles per lane', input: '{"lanes":[[4,-5,2,0,-1,-1,6,-3],[-9,3,-1,5,5,3,9,7]]}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
     { label: 'Mixed windows', input: '{"nums":[1,2,2,3,3,3],"k":2}' },
     { label: 'Single window', input: '{"nums":[4,4,4],"k":3}' },
     { label: 'Tie in a window', input: '{"nums":[3,1,1,3],"k":2}' },
+    { label: 'Single value', input: '{"nums":[1],"k":1}' },
+    { label: 'Equal values', input: '{"nums":[2,2,2,2],"k":3}' },
+    { label: 'Largest length and value', input: '{"nums":[9,9,9,9,9,9,9,9,9,9,9,9],"k":12}' },
+    { label: 'Long run: 12 values', input: '{"nums":[2,7,7,2,4,9,6,7,2,2,3,6],"k":5}' },
   ],
 }
 

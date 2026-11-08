@@ -14,8 +14,12 @@ const definition = {
   url: 'https://leetcode.com/problems/unit-conversion-i/',
   complexity: 'O(n) time and O(n) space for n units. The visualization caps the input at 15 conversions.',
   examples: [
-    { label: 'Example 1', input: '[[0,1,2],[1,2,3]]' },
+    { label: 'Own case 1', input: '[[1,2,3],[0,1,2]]' },
     { label: 'Example 2', input: '[[0,1,3],[0,2,2],[2,3,4],[2,4,5]]' },
+    { label: 'One conversion', input: '[[0,1,2]]' },
+    { label: 'Equal factors from unit 0', input: '[[0,1,3],[0,2,3]]' },
+    { label: 'Largest factor chain', input: '[[0,1,10],[1,2,10],[2,3,10]]' },
+    { label: 'Long run: 15 conversions', input: '[[0,1,10],[1,2,2],[0,3,2],[0,4,3],[4,5,8],[3,6,8],[4,7,1],[0,8,8],[4,9,3],[0,10,1],[3,11,10],[1,12,6],[8,13,1],[7,14,9],[2,15,8]]' },
   ],
 }
 

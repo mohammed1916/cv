@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Spread out', input: '{"nums":[1,3,6,9],"k":2}' },
     { label: 'Tight limit', input: '{"nums":[4,4,9,10,30],"k":1}' },
+    { label: 'Single value', input: '{"nums":[5],"k":1}' },
+    { label: 'Equal values', input: '{"nums":[7,7,7,7],"k":2}' },
+    { label: 'Largest values and k', input: '{"nums":[1000,1,1000,1],"k":20}' },
+    { label: 'Long run: 20 items', input: '{"nums":[800,217,719,500,950,757,976,885,957,703,807,980,107,986,165,624,203,882,1000,482],"k":10}' },
   ],
 }
 

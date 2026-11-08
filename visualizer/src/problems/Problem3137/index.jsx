@@ -18,7 +18,7 @@ const definition = {
   inputLabel: 'JSON: {"word": "leetcodeleet", "k": 4}',
   url: "https://leetcode.com/problems/minimum-number-of-operations-to-make-word-k-periodic/",
   complexity: "O(n) time and O(n) space, where n is the word length. The visualization caps the word at 60 letters.",
-  examples: [{ label: "Example 1", input: '{"word":"leetcodeleet","k":4}' },
+  examples: [{ label: "Own case 1", input: '{"word":"nggveqfgnggv","k":6}' },
     { label: "Single block", input: "{\"word\":\"abc\",\"k\":3}" },
     { label: "Every letter its own block", input: "{\"word\":\"aab\",\"k\":1}" },
     { label: "Long run: 60 letters, blocks of 6", input: "{\"word\":\"aabbbacbcccabbcaacbcabcaabbacbcbcbcbcbcbccbcbcccbbacaaacacac\",\"k\":6}" },

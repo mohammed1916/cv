@@ -14,9 +14,9 @@ const definition = {
   url: 'https://leetcode.com/problems/array-of-doubled-pairs/',
   complexity: 'O(n log n) time, O(n) space. The visualization caps input at 30 values.',
   examples: [
-    { label: 'Example 1', input: '[3,1,3,6]' },
-    { label: 'Example 2', input: '[2,1,2,6]' },
-    { label: 'Example 3', input: '[4,-2,2,-4]' },
+    { label: 'Own case 1', input: '[4,2,4,7]' },
+    { label: 'Own case 2', input: '[3,2,3,7]' },
+    { label: 'Own case 3', input: '[5,-3,3,-5]' },
     { label: 'Two zeros', input: '[0,0]' },
     { label: 'Equal values', input: '[5,5,5,5]' },
     { label: 'Extreme values', input: '[1000,-1000,1000,-1000]' },

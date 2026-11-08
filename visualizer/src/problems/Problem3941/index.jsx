@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Mixed classes', input: 'aAbB11!!' },
     { label: 'Repeats', input: 'Zz9@9@' },
+    { label: 'One character', input: 'a' },
+    { label: 'Equal characters', input: 'AAAA' },
+    { label: 'Longest allowed password', input: 'Aa1!Aa1!Aa1!Aa1!Aa1!Aa1!Aa1!Aa1!Aa1!Aa1!Aa1!Aa1!Aa1!Aa1!Aa1!' },
+    { label: 'Long run: 60 characters', input: 'R!ozqQT5INbLaPSoqOnwmFvlmnvFVNCH3KjbvP571nxKu$cHCDhLDYyQN62p' },
   ],
 }
 

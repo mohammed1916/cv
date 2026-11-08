@@ -181,5 +181,8 @@ export const examples = [
   { label: 'Needs backtracking', input: '{"grid":[[0,0,2],[0,1,0],[0,0,0]],"k":2}' },
   { label: 'No route', input: '{"grid":[[1,2],[3,4]],"k":4}' },
   { label: 'Single cell', input: '{"grid":[[1]],"k":1}' },
-  { label: 'Long failed search', input: '{"grid":[[0,0,0,0,3],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,2],[1,0,0,0,4]],"k":4}' },
+    { label: 'Blank cells around one number', input: '{"grid":[[0,0],[0,1]],"k":1}' },
+    { label: 'Largest grid, all cells numbered', input: '{"grid":[[1,2,3,4,5],[6,7,8,9,10],[11,12,13,14,15],[16,17,18,19,20],[21,22,23,24,25]],"k":25}' },
+    { label: 'Long run: 15 numbers on 5 by 5', input: '{"grid":[[12,7,0,0,6],[10,0,13,0,15],[14,0,0,0,3],[1,0,0,11,2],[5,9,8,4,0]],"k":15}' },
+    { label: 'Long failed search', input: '{"grid":[[0,0,0,0,3],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,2],[1,0,0,0,4]],"k":4}' },
 ]

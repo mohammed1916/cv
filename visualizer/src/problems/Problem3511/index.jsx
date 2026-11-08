@@ -16,6 +16,11 @@ const definition = {
     { label: 'Two overlapping dips', input: '[2,-3,1,4,-5,2]' },
     { label: 'Already positive', input: '[3,1,2,5]' },
     { label: 'One deep dip', input: '[1,1,-7,1,1]' },
+    { label: 'Single value', input: '[-9]' },
+    { label: 'Equal values', input: '[4,4,4]' },
+    { label: 'Extremes', input: '[9,-9,9,-9,9,-9,9,-9,9,-9]' },
+    { label: 'Descending run', input: '[9,8,7,6,5,4,3,2,1,0]' },
+    { label: 'Long run: 10 values', input: '[-2,3,-2,9,-5,-6,8,-8,-5,-4]' },
   ],
 }
 

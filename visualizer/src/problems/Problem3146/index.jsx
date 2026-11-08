@@ -17,7 +17,7 @@ const definition = {
   inputLabel: 'JSON: {"s": "abc", "t": "bac"}',
   url: "https://leetcode.com/problems/permutation-difference-between-two-strings/",
   complexity: "O(n) time and O(1) extra space, since the alphabet has at most 26 letters.",
-  examples: [{ label: "Example 1", input: '{"s":"abc","t":"bac"}' },
+  examples: [{ label: "Own case 1", input: '{"s":"bcd","t":"cbd"}' },
     { label: "Single letter", input: "{\"s\":\"a\",\"t\":\"a\"}" },
     { label: "Reversed order", input: "{\"s\":\"abc\",\"t\":\"cba\"}" },
     { label: "Whole alphabet, reversed", input: "{\"s\":\"abcdefghijklmnopqrstuvwxyz\",\"t\":\"zyxwvutsrqponmlkjihgfedcba\"}" },

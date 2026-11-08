@@ -13,6 +13,10 @@ const definition = {
     { label: 'Two long runs', input: '{"nums":[12,18,24,30,5,14,21,7,9],"maxC":2}' },
     { label: 'Budget too small', input: '{"nums":[6,10,15,4,8,3,9],"maxC":1}' },
     { label: 'All ones, no edits', input: '{"nums":[1,1,1],"maxC":0}' },
+    { label: 'Single value, no edits', input: '{"nums":[1],"maxC":0}' },
+    { label: 'Equal values', input: '{"nums":[6,6,6],"maxC":1}' },
+    { label: 'Largest values allowed', input: '{"nums":[1000000000,999999999,1000000000],"maxC":3}' },
+    { label: 'Long run: 14 values', input: '{"nums":[241,706,580,801,267,598,128,113,311,187,272,291,807,172],"maxC":4}' },
   ],
 }
 

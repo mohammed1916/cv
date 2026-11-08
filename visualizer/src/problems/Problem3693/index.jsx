@@ -13,9 +13,13 @@ const definition = {
   url: 'https://leetcode.com/problems/climbing-stairs-ii/',
   complexity: 'O(n) time and O(n) space. The visualization caps n at 12.',
   examples: [
-    { label: 'Example 1', input: '{"n":4,"costs":[1,2,3,4]}' },
-    { label: 'Example 2', input: '{"n":4,"costs":[5,1,6,2]}' },
-    { label: 'Example 3', input: '{"n":3,"costs":[9,8,3]}' },
+    { label: 'Own case 1', input: '{"n":4,"costs":[4,3,2,1]}' },
+    { label: 'Own case 2', input: '{"n":4,"costs":[2,6,1,5]}' },
+    { label: 'Own case 3', input: '{"n":3,"costs":[3,8,9]}' },
+    { label: 'Single stair', input: '{"n":1,"costs":[7]}' },
+    { label: 'Equal costs tie', input: '{"n":5,"costs":[2,2,2,2,2]}' },
+    { label: 'Largest costs allowed', input: '{"n":12,"costs":[10000,1,10000,1,10000,1,10000,1,10000,1,10000,1]}' },
+    { label: 'Long run: 12 stairs', input: '{"n":12,"costs":[7753,2168,8555,8066,8525,220,7599,3878,2833,2576,1795,7530]}' },
   ],
 }
 

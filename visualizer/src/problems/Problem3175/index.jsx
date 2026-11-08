@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-first-player-to-win-k-games-in-a-row/',
   complexity: 'O(n * k) games, since the strongest player must win within n rounds. The visualization caps n at 12 and k at 20.',
   examples: [
-    { label: 'Example 1', input: '{"skills":[4,2,6,3,9],"k":2}' },
-    { label: 'Example 2', input: '{"skills":[2,5,4],"k":3}' },
+    { label: 'Own case 1', input: '{"skills":[5,3,7,4,10],"k":3}' },
+    { label: 'Own case 2', input: '{"skills":[3,6,5],"k":4}' },
     { label: "Two players", input: "{\"skills\": [5, 9], \"k\": 1}" },
     { label: "Largest k", input: "{\"skills\": [1, 50, 100], \"k\": 20}" },
     { label: "Long run: 12 players", input: "{\"skills\": [4, 88, 17, 63, 29, 91, 2, 57, 36, 74, 13, 99], \"k\": 5}" },

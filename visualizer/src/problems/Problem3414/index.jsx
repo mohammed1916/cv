@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"intervals":[[1,2,4],[2,3,1],[4,6,3],[5,7,2]]}' },
     { label: 'Tie', input: '{"intervals":[[1,1,5],[2,2,5],[3,3,1]]}' },
+    { label: 'Single interval', input: '{"intervals":[[1,1,1]]}' },
+    { label: 'Equal weights tie', input: '{"intervals":[[1,3,4],[2,4,4],[3,5,4]]}' },
+    { label: 'Wide weights', input: '{"intervals":[[1,50,99],[10,20,1],[50,60,99]]}' },
+    { label: 'Long run: 10 intervals', input: '{"intervals":[[17,18,7],[24,28,5],[11,16,5],[26,29,8],[24,30,2],[7,8,5],[5,9,1],[8,12,6],[6,10,8],[14,18,3]]}' },
   ],
 }
 

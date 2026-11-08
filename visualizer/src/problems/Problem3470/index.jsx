@@ -14,6 +14,11 @@ const definition = {
   examples: [
     { label: 'n 3, k 2', input: '{"n":3,"k":2}' },
     { label: 'n 4, k 2', input: '{"n":4,"k":2}' },
+    { label: 'Smallest n with first k', input: '{"n":1,"k":1}' },
+    { label: 'Middle k for n 3', input: '{"n":3,"k":2}' },
+    { label: 'Last alternating permutation for n 4', input: '{"n":4,"k":5}' },
+    { label: 'Largest n and k', input: '{"n":8,"k":1152}' },
+    { label: 'Long run: n 8, k 700', input: '{"n":8,"k":700}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
     { label: "Repeated pairs", input: '{"nums":[5,5,5]}' },
     { label: "Removal helps", input: '{"nums":[2,4,6]}' },
     { label: "Mixed factors", input: '{"nums":[6,3,9,12]}' },
+    { label: "Two values, smallest", input: "{\"nums\":[1,2]}" },
+    { label: "Equal values", input: "{\"nums\":[8,8,8,8]}" },
+    { label: "Largest values", input: "{\"nums\":[1000000000,999999999]}" },
+    { label: "Long run: nine values", input: "{\"nums\":[90743428,275997193,660467667,434725553,637168852,777608863,957402165,759863111,352189923]}" },
   ],
 };
 

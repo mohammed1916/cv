@@ -16,7 +16,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-pairs-whose-sum-is-less-than-target/',
   complexity: 'O(n log n) time for sorting and O(n) for the scan. The visualization caps input at 30 values.',
   examples: [
-    { label: 'Example', input: '{"nums":[-6,2,5,-2,-7,-1,3],"target":-2}' },
+    { label: 'Own case 1', input: '{"nums":[-7,3,6,-3,-8,-2,4],"target":-3}' },
     { label: 'Small', input: '{"nums":[-1,1,2,3,1],"target":3}' },
     { label: "Single number", input: "{\"nums\":[7],\"target\":7}" },
     { label: "Equal values", input: "{\"nums\":[2,2,2,2],\"target\":2}" },

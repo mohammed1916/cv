@@ -18,8 +18,8 @@ const definition = {
   url: 'https://leetcode.com/problems/bus-routes/',
   complexity: 'O(total stops across routes) time and space; each bus is boarded once and each stop enqueued once.',
   examples: [
-    { label: 'Example 1', input: '{"routes":[[1,2,7],[3,6,7]],"source":1,"target":6}' },
-    { label: 'Example 2 (unreachable)', input: '{"routes":[[7,12],[4,5,15],[6],[15,19],[9,12,13]],"source":15,"target":12}' },
+    { label: 'Own case 1', input: '{"routes":[[2,3,8],[4,7,8]],"source":2,"target":7}' },
+    { label: 'Own case 2', input: '{"routes":[[8,13],[5,6,16],[7],[16,20],[10,13,14]],"source":16,"target":13}' },
     { label: 'Three buses', input: '{"routes":[[1,2],[2,3],[3,4]],"source":1,"target":4}' },
     { label: 'One bus, direct', input: '{"routes":[[0,1]],"source":0,"target":1}' },
     { label: 'Two equal-length routes', input: '{"routes":[[1,2],[1,3],[2,4],[3,4]],"source":1,"target":4}' },

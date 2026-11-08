@@ -16,6 +16,10 @@ const definition = {
     { label: 'Example 1', input: '{"grid":[[1,2],[3,4]]}' },
     { label: 'Example 2', input: '{"grid":[[6,7],[5,8]]}' },
     { label: 'One row', input: '{"grid":[[2,7,5]]}' },
+    { label: 'Single cell zero', input: '{"grid":[[0]]}' },
+    { label: 'Equal values in a square', input: '{"grid":[[7,7],[7,7]]}' },
+    { label: 'Extreme values in 5 by 6', input: '{"grid":[[1023,0,1023,0,1023],[0,1023,0,1023,0],[1023,0,1023,0,1023],[0,1023,0,1023,0],[1023,0,1023,0,1023],[0,1023,0,1023,0]]}' },
+    { label: 'Long run: 6 by 5 grid', input: '{"grid":[[118,606,154,775,311],[926,25,931,250,284],[537,437,482,488,947],[320,773,330,377,926],[489,863,331,300,261],[92,515,522,222,483]]}' },
   ],
 }
 

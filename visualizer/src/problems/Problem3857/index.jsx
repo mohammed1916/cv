@@ -14,6 +14,11 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"n":6}' },
     { label: 'Small', input: '{"n":5}' },
+    { label: 'Single size', input: '{"n":1}' },
+    { label: 'Pair of sizes', input: '{"n":2}' },
+    { label: 'Equal split sizes', input: '{"n":4}' },
+    { label: 'Upper limit', input: '{"n":30}' },
+    { label: 'Long run: 24', input: '{"n":24}' },
   ],
 }
 

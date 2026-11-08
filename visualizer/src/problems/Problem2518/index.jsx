@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-great-partitions/',
   complexity: 'O(n * total) time and O(total) space. The visualization caps input at 10 numbers.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,3,4],"k":4}' },
+    { label: 'Own case 1', input: '{"nums":[2,3,4,5],"k":5}' },
     { label: 'Too small', input: '{"nums":[3,3,3],"k":4}' },
     { label: 'Single number', input: '{"nums":[1],"k":1}' },
     { label: 'Equal values', input: '{"nums":[5,5],"k":5}' },

@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/pancake-sorting/',
   complexity: 'O(n^2) time to find and flip. At most 2n flips are used. The visualization caps input at 12 values.',
   examples: [
-    { label: 'Example 1', input: '[3,2,4,1]' },
+    { label: 'Own case 1', input: '[1,4,2,3]' },
     { label: 'Sorted', input: '[1,2,3]' },
     { label: 'Single value', input: '[1]' },
     { label: 'Reversed permutation', input: '[12,11,10,9,8,7,6,5,4,3,2,1]' },

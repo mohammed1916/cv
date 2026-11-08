@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Digitorial', input: '{"n":40585}' },
     { label: 'Not digitorial', input: '{"n":1234}' },
+    { label: 'One', input: '{"n":1}' },
+    { label: 'Small', input: '{"n":135}' },
+    { label: 'Largest', input: '{"n":999999999}' },
+    { label: 'Long run: 987654321', input: '{"n":987654321}' },
   ],
 }
 

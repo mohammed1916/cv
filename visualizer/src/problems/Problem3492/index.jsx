@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":3,"w":2,"maxWeight":7}' },
     { label: 'Example 2', input: '{"n":3,"w":3,"maxWeight":7}' },
+    { label: 'Smallest case', input: '{"n":1,"w":1,"maxWeight":0}' },
+    { label: 'Zero capacity', input: '{"n":3,"w":5,"maxWeight":0}' },
+    { label: 'Equal items', input: '{"n":4,"w":3,"maxWeight":6}' },
+    { label: 'Largest limits', input: '{"n":10,"w":10,"maxWeight":200}' },
+    { label: 'Long run: 10 items, capacity 137', input: '{"n":10,"w":7,"maxWeight":137}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Four blocks', input: '{"n":4}' },
     { label: 'Six blocks', input: '{"n":6}' },
+    { label: "One block", input: "{\"n\":1}" },
+    { label: "Two blocks", input: "{\"n\":2}" },
+    { label: "Largest n", input: "{\"n\":8}" },
+    { label: "Long run: LCG n", input: "{\"n\":8}" },
   ],
 }
 

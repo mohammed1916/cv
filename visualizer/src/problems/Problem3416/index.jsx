@@ -13,6 +13,10 @@ const definition = {
     { label: 'Tie risk', input: '{"nums":[3,8,3,8,5,6]}' },
     { label: 'All equal', input: '{"nums":[4,4,4,4,4]}' },
     { label: 'All different: none', input: '{"nums":[10,20,30,40,50,60]}' },
+    { label: 'Smallest run: five values', input: '{"nums":[1,2,3,4,5]}' },
+    { label: 'Equal values tie', input: '{"nums":[7,7,7,7,7]}' },
+    { label: 'Boundary magnitudes', input: '{"nums":[1000000000,-1000000000,1000000000,-1000000000,1000000000]}' },
+    { label: 'Long run: 24 items', input: '{"nums":[48,-16,39,-47,8,-24,-23,-1,2,35,4,23,-3,-49,45,-5,39,17,-40,6,7,-21,-46,-14]}' },
   ],
 }
 

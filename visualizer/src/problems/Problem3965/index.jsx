@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Branching', input: '{"durations":[5,3,4,2],"edges":[[0,1],[0,2],[2,3]]}' },
     { label: 'Chain', input: '{"durations":[1,1,1,1,1],"edges":[[0,1],[1,2],[2,3],[3,4]]}' },
+    { label: "Single task", input: '{"durations":[9],"edges":[]}' },
+    { label: "Equal sibling durations", input: '{"durations":[3,3,3],"edges":[[0,1],[0,2]]}' },
+    { label: "Maximum durations on a star", input: '{"durations":[100,100,100,100,100,100,100,100,100,100,100,100],"edges":[[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[0,8],[0,9],[0,10],[0,11]]}' },
+    { label: "Long run: 12 tasks", input: '{"durations":[78,92,69,44,93,30,41,19,57,37,82,2],"edges":[[0,1],[1,2],[2,3],[1,4],[4,5],[1,6],[2,7],[1,8],[5,9],[3,10],[9,11]]}' },
   ],
 }
 

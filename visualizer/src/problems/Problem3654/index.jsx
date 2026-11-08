@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Invented example', input: '{"nums":[2,5,4,3,6],"k":3}' },
     { label: 'Nothing divisible', input: '{"nums":[1,2,4],"k":5}' },
+    { label: 'Single value', input: '{"nums":[9],"k":1}' },
+    { label: 'Equal values', input: '{"nums":[5,5,5,5],"k":2}' },
+    { label: 'Largest length and k', input: '{"nums":[100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1],"k":20}' },
+    { label: 'Long run: 20 values', input: '{"nums":[41,18,82,31,9,52,60,3,71,3,27,90,27,79,5,85,81,60,40,46],"k":7}' },
   ],
 }
 

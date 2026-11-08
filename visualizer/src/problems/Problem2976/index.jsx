@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-cost-to-convert-string-i/',
   complexity: 'O(26^3) time for the letter graph, plus O(n) to sum positions. The visualization caps the strings at 8 letters.',
   examples: [
-    { label: 'Example 1', input: '{"source":"abcd","target":"acbe","original":["a","b","c","c","e","d"],"changed":["b","c","b","e","b","e"],"cost":[2,5,5,1,2,20]}' },
+    { label: 'Own case 1', input: '{"source":"abcd","target":"acbe","original":["d","e","c","c","b","a"],"changed":["e","b","e","b","c","b"],"cost":[20,2,1,5,5,2]}' },
     { label: 'Small', input: '{"source":"aaaa","target":"bbbb","original":["a","c"],"changed":["c","b"],"cost":[1,2]}' },
     { label: "Single letter", input: '{"source":"a","target":"b","original":["a"],"changed":["b"],"cost":[3]}' },
     { label: "Equal costs on one letter", input: '{"source":"aa","target":"bb","original":["a","a"],"changed":["b","b"],"cost":[4,4]}' },

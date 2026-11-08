@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: "One value", input: "[4831]" },
     { label: "Two values", input: "[52401, 9362]" },
+    { label: "Smallest encoding", input: "[111]" },
+    { label: "Equal encodings", input: "[4831,4831]" },
+    { label: "Largest encoding", input: "[999999999999997]" },
+    { label: "Long run: eight encodings", input: "[9079446064,86317217955,57308156995,98735555885,8780046805,68344414925,62573839715,75997807005]" },
   ],
 };
 

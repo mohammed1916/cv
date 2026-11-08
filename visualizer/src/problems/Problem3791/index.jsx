@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"low":2000,"high":2019}' },
     { label: 'Example 2', input: '{"low":1100,"high":1199}' },
+    { label: "Single number", input: "{\"low\":1,\"high\":1}" },
+    { label: "Equal bounds", input: "{\"low\":2000,\"high\":2000}" },
+    { label: "Top of the range, 301 numbers", input: "{\"low\":2700,\"high\":3000}" },
+    { label: "Long run: 301 numbers", input: "{\"low\":1222,\"high\":1522}" },
   ],
 }
 

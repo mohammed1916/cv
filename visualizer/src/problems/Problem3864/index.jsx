@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"s":"1100","encCost":2,"flatCost":1}' },
     { label: 'Halves win', input: '{"s":"0110","encCost":3,"flatCost":2}' },
+    { label: 'Single zero', input: '{"s":"0","encCost":1,"flatCost":1}' },
+    { label: 'Equal costs', input: '{"s":"0101","encCost":2,"flatCost":2}' },
+    { label: 'Alternating, costliest encoding', input: '{"s":"0101010101010101","encCost":10,"flatCost":1}' },
+    { label: 'Long run: 16 bits', input: '{"s":"0011001110011011","encCost":4,"flatCost":3}' },
   ],
 }
 

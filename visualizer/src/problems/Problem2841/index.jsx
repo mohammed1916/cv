@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-sum-of-almost-unique-subarray/',
   complexity: 'O(n) time with a tally of the window. The visualization caps nums at 40 values.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[2,6,7,3,1,7],"m":3,"k":4}' },
+    { label: 'Own case 1', input: '{"nums":[3,7,8,4,2,8],"m":4,"k":5}' },
     { label: 'No window', input: '{"nums":[1,2,1,2,1,2,1],"m":3,"k":3}' },
     { label: "Single entry", input: "{\"nums\":[5],\"m\":1,\"k\":1}" },
     { label: "Equal values", input: "{\"nums\":[7,7,7,7],\"m\":2,\"k\":4}" },

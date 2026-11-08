@@ -14,9 +14,9 @@ const definition = {
   url: 'https://leetcode.com/problems/find-all-possible-stable-binary-arrays-i/',
   complexity: 'O(zero * one * limit) time and O(zero * one) space. The visualization caps each input at 8.',
   examples: [
-    { label: 'Example 1', input: '{"zero":1,"one":1,"limit":2}' },
-    { label: 'Example 2', input: '{"zero":1,"one":2,"limit":1}' },
-    { label: 'Example 3', input: '{"zero":3,"one":3,"limit":2}' },
+    { label: 'Own case 1', input: '{"zero":2,"one":2,"limit":3}' },
+    { label: 'Own case 2', input: '{"zero":2,"one":3,"limit":2}' },
+    { label: 'Own case 3', input: '{"zero":4,"one":4,"limit":3}' },
     { label: "Smallest counts", input: "{\"zero\":1,\"one\":1,\"limit\":1}" },
     { label: "Equal counts", input: "{\"zero\":2,\"one\":2,\"limit\":2}" },
     { label: "Largest counts", input: "{\"zero\":8,\"one\":8,\"limit\":8}" },

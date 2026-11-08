@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"cat and mice"}' },
     { label: 'Second word', input: '{"s":"book is nice"}' },
+    { label: "Single word", input: "{\"s\":\"hello\"}" },
+    { label: "Repeated words", input: "{\"s\":\"aa aa aa\"}" },
+    { label: "Longest run of words, 76 characters", input: "{\"s\":\"abcdefghij abcdefghij abcdefghij abcdefghij abcdefghij abcdefghij abcdefghij\"}" },
+    { label: "Long run: 12 words", input: "{\"s\":\"bokyg ke o ojt jjt ueg xg zih ueciq lbmel c s\"}" },
   ],
 }
 

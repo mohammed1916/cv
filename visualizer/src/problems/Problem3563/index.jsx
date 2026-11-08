@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"abc"}' },
     { label: 'Example 2', input: '{"s":"zb"}' },
+    { label: 'One letter', input: '{"s":"a"}' },
+    { label: 'Repeated letters', input: '{"s":"aaaa"}' },
+    { label: 'Longest allowed string', input: '{"s":"abcdefghij"}' },
+    { label: 'Long run: 10 letters', input: '{"s":"pqgxdedjtw"}' },
   ],
 }
 

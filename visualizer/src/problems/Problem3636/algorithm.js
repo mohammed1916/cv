@@ -98,6 +98,10 @@ export const examples = [
   { label: 'All three kinds of query', input: '{"nums":[4,7,4,9,7,7,4,2,2,7],"queries":[[0,5,3],[3,9,4],[2,3,1],[6,8,2],[1,2,2]]}' },
   { label: 'Tie goes to the smaller', input: '{"nums":[8,3,8,3],"queries":[[0,3,2],[0,3,3]]}' },
   { label: 'One number', input: '{"nums":[5],"queries":[[0,0,1]]}' },
+  { label: 'One number, one query', input: '{"nums":[7],"queries":[[0,0,1]]}' },
+  { label: 'Equal values in one window', input: '{"nums":[4,4,4,4],"queries":[[0,3,2]]}' },
+  { label: 'Largest value and full window', input: '{"nums":[1000000000,1],"queries":[[0,1,2]]}' },
+  { label: 'Long run: 32 numbers, 8 queries', input: '{"nums":[10824805,1299514,7026500,4351563,10995630,5008339,9971963,12955445,3288389,7793354,9113097,11989248,8074699,11643254,3398321,3975968,9671206,9730920,607607,16431689,5320568,16565109,6146848,16485488,14605096,11585458,2290351,11703496,1320663,11421042,14602600,786373],"queries":[[10,13,3],[27,31,2],[7,8,1],[13,23,8],[6,12,2],[30,31,1],[9,9,1],[22,22,1]]}' },
 ]
 
 export function buildTrace({ nums, queries }) {

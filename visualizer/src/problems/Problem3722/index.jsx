@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '"gfec"' },
     { label: 'Reverse', input: '"mkj"' },
+    { label: 'Single letter', input: '"z"' },
+    { label: 'Repeated letters', input: '"aaaa"' },
+    { label: 'Longest string', input: '"zyxwvutsrqzyxwvutsrqzyxwvutsrqzyxwvutsrqzyxwvutsrq"' },
+    { label: 'Long run: 50 letters', input: '"fstqxgpcxghujufkzkxuvkzajidstotajyrijefyjudyjqjgrq"' },
   ],
 }
 

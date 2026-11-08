@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Cheaper hop', input: '{"cost":[2,1,3,1],"edges":[[0,1,4],[0,2,1],[1,3,2],[2,3,1]],"source":0,"target":3,"power":4}' },
     { label: 'Direct shortcut', input: '{"cost":[1,1,1],"edges":[[0,1,2],[0,2,2],[1,2,1]],"source":0,"target":2,"power":3}' },
+    { label: "Same source and target", input: '{"cost":[3],"edges":[],"source":0,"target":0,"power":1}' },
+    { label: "Equal travel times tie", input: '{"cost":[2,2,2],"edges":[[0,1,5],[1,2,5],[0,2,10]],"source":0,"target":2,"power":2}' },
+    { label: "Maximum costs and times", input: '{"cost":[6,6,6,6,6,6,6,6],"edges":[[0,1,20],[1,2,20],[2,3,20],[3,4,20],[4,5,20],[5,6,20],[6,7,20]],"source":0,"target":7,"power":8}' },
+    { label: "Long run: 8 vertices", input: '{"cost":[5,1,6,6,6,2,4,2],"edges":[[6,0,19],[7,6,6],[4,1,14],[0,2,5],[4,1,2],[1,6,16],[6,2,20],[7,6,9],[7,2,11],[2,1,4],[1,7,10],[7,2,8]],"source":0,"target":7,"power":3}' },
   ],
 }
 

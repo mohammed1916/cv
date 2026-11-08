@@ -13,8 +13,12 @@ const definition = {
   url: 'https://leetcode.com/problems/maximize-spanning-tree-stability-with-upgrades/',
   complexity: 'O(c * m * alpha) for c candidate thresholds. The visualization caps n at 6 and edges at 8.',
   examples: [
-    { label: 'Example 1', input: '{"n":3,"edges":[[0,1,2,1],[1,2,3,0]],"k":1}' },
-    { label: 'Example 2', input: '{"n":3,"edges":[[0,1,4,0],[1,2,3,0],[0,2,1,0]],"k":2}' },
+    { label: 'Own case 1', input: '{"n":3,"edges":[[1,2,3,0],[0,1,2,1]],"k":1}' },
+    { label: 'Own case 2', input: '{"n":4,"edges":[[1,2,5,1],[2,3,4,1],[1,3,2,1]],"k":3}' },
+    { label: 'Two nodes, one edge', input: '{"n":2,"edges":[[0,1,5,1]],"k":0}' },
+    { label: 'Equal strengths', input: '{"n":3,"edges":[[0,1,4,0],[1,2,4,0]],"k":1}' },
+    { label: 'Largest strengths and k', input: '{"n":6,"edges":[[0,1,20,1],[1,2,20,1],[2,3,1,0],[3,4,20,0],[4,5,20,0]],"k":6}' },
+    { label: 'Long run: 6 nodes, 8 edges', input: '{"n":6,"edges":[[2,4,18,1],[1,4,11,0],[1,2,3,1],[1,5,11,0],[3,5,19,0],[0,3,20,1],[2,5,14,0],[0,5,3,1]],"k":3}' },
   ],
 }
 

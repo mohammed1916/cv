@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[4,-2,7,1],"k":3}' },
     { label: 'Flat', input: '{"nums":[5,5],"k":2}' },
+    { label: 'Single negative', input: '{"nums":[-5],"k":1}' },
+    { label: 'Equal values tie', input: '{"nums":[3,3,3],"k":2}' },
+    { label: 'Extreme values', input: '{"nums":[100,-100,100,-100],"k":10}' },
+    { label: 'Long run: 20 values', input: '{"nums":[33,68,-35,-30,-98,-1,90,68,-39,-41,-39,-82,-89,23,16,-57,-32,-96,43,46],"k":7}' },
   ],
 }
 

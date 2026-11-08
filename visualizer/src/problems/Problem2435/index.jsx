@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/paths-in-matrix-whose-sum-is-divisible-by-k/',
   complexity: 'O(m * n * k) time with one count per remainder. The visualization caps the grid at 5 by 5 and k at 10.',
   examples: [
-    { label: 'Official', input: '{"grid":[[5,2,4],[3,0,5],[0,7,2]],"k":3}' },
+    { label: 'Own case 1', input: '{"grid":[[6,3,5],[4,1,6],[1,8,3]],"k":4}' },
     { label: 'Single cell', input: '{"grid":[[0,0]],"k":5}' },
     { label: 'Smallest grid', input: '{"grid":[[9]],"k":1}' },
     { label: 'Equal values', input: '{"grid":[[4,4],[4,4]],"k":2}' },

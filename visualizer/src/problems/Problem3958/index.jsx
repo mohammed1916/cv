@@ -25,6 +25,10 @@ const definition = {
     { label: 'Six', input: '6' },
     { label: 'Nine', input: '9' },
     { label: 'One', input: '1' },
+    { label: 'Smallest n plus one', input: '2' },
+    { label: 'Small even n', input: '4' },
+    { label: 'Largest allowed n', input: '40' },
+    { label: 'Long run: n = 39', input: '39' },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Three queries', input: '{"nums":[4,1,7],"p":2,"queries":[[5,2],[3,1],[9,3]]}' },
     { label: 'Duplicates', input: '{"nums":[],"p":3,"queries":[[2,1],[2,1],[8,2]]}' },
+    { label: 'Empty list, one insert', input: '{"nums":[],"p":0,"queries":[[0,1]]}' },
+    { label: 'Equal values', input: '{"nums":[5,5],"p":5,"queries":[[5,1],[5,3]]}' },
+    { label: 'Full list and largest k', input: '{"nums":[9,9,9,9,9,9,9,9],"p":9,"queries":[[9,9]]}' },
+    { label: 'Long run: 8 values, 6 queries', input: '{"nums":[0,9,1,2,3,9,5,4],"p":8,"queries":[[5,3],[5,3],[8,3],[3,4],[0,10],[7,9]]}' },
   ],
 }
 

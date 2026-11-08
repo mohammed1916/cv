@@ -43,7 +43,7 @@ test('3639 hand-computed gains on bridge', () => {
 })
 
 test('3639 presets', () => {
-  const expected = [3, 0, -1]
+  const expected = [3, 0, -1, 0, 0, -1, 4]
   examples.forEach((example, index) => {
     const trace = buildTrace(parseInput(example.input))
     assert.equal(trace.result, expected[index])

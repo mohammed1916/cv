@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":13}' },
     { label: 'Example 2', input: '{"n":1}' },
+    { label: 'Small even value', input: '{"n":2}' },
+    { label: 'Power of two', input: '{"n":64}' },
+    { label: 'Long run: n = 999', input: '{"n":999}' },
+    { label: 'Largest allowed n', input: '{"n":1000}' },
   ],
 }
 

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Invented mix', input: '{"caption":"abc"}' },
     { label: 'Two letters', input: '{"caption":"aab"}' },
+    { label: 'Shortest caption: three letters', input: '{"caption":"qqq"}' },
+    { label: 'Repeated letter run', input: '{"caption":"aaaa"}' },
+    { label: 'Longest caption', input: '{"caption":"abcdefghijkl"}' },
+    { label: 'Long run: 12 letters', input: '{"caption":"cdzzifcduhmd"}' },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"n":10203}' },
     { label: 'Trailing zeros', input: '{"n":1000}' },
+    { label: "Zero", input: "{\"n\":0}" },
+    { label: "One", input: "{\"n\":1}" },
+    { label: "Largest n", input: "{\"n\":1000000000}" },
+    { label: "Long run: 9-digit n", input: "{\"n\":111592046}" },
   ],
 }
 

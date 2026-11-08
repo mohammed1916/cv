@@ -16,8 +16,12 @@ const definition = {
   url: 'https://leetcode.com/problems/longest-subsequence-with-non-zero-bitwise-xor/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the array at 10 entries.',
   examples: [
-    { label: 'Example 1', input: '[1,2,3]' },
-    { label: 'Example 2', input: '[2,3,4]' },
+    { label: 'Own case 1', input: '[3,4,5]' },
+    { label: 'Own case 2', input: '[4,5,6]' },
+    { label: 'Single zero', input: '[0]' },
+    { label: 'Equal values', input: '[7,7,7]' },
+    { label: 'Largest values allowed', input: '[15,0,15,0,15]' },
+    { label: 'Long run: 10 values', input: '[13,8,7,10,1,12,11,14,5,0]' },
   ],
 }
 

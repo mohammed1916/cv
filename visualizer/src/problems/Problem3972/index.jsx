@@ -25,6 +25,10 @@ const definition = {
     { label: 'Digit three', input: '{"nums":[1,2,3],"x":3}' },
     { label: 'Mixed signs', input: '{"nums":[3,-1,4,2],"x":4}' },
     { label: 'Cancelling pair', input: '{"nums":[-4,4],"x":4}' },
+    { label: "Single entry", input: '{"nums":[7],"x":7}' },
+    { label: "Equal entries", input: '{"nums":[3,3,3],"x":3}' },
+    { label: "Extreme signed values", input: '{"nums":[-9,9,-9,9,-9,9,-9,9,-9,9,-9,9],"x":0}' },
+    { label: "Long run: 12 entries", input: '{"nums":[5,1,0,4,2,1,-1,2,-7,5,9,6],"x":5}' },
   ],
 }
 

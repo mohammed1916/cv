@@ -21,6 +21,10 @@ const definition = {
   examples: [
     { label: 'Two matches', input: '[3,1,3,2,3,1,1,4,4,4]' },
     { label: 'Four occurrences', input: '[4,7,4,9,4,7,7,7,1]' },
+    { label: "Equal values", input: "[5,5,5]" },
+    { label: "Largest and smallest values", input: "[100,1,100]" },
+    { label: "Single occurrence each", input: "[9,8,7]" },
+    { label: "Long run: 20 values", input: "[10,22,28,25,29,87,63,14,25,74,49,46,87,13,9,42,62,11,71,85]" },
   ],
 }
 

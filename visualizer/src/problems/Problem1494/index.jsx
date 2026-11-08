@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/parallel-courses-ii/',
   complexity: 'O(2^n * n) states with subset enumeration per state. The visualization caps input at 8 courses.',
   examples: [
-    { label: 'Example 1', input: '{"n":4,"relations":[[2,1],[3,1],[1,4]],"k":2}' },
-    { label: 'Example 2', input: '{"n":5,"relations":[[2,1],[3,1],[4,1],[1,5]],"k":2}' },
+    { label: 'Own case 1', input: '{"n":5,"relations":[[3,2],[4,2],[2,5]],"k":3}' },
+    { label: 'Own case 2', input: '{"n":6,"relations":[[3,2],[4,2],[5,2],[2,6]],"k":3}' },
     { label: 'Single course', input: '{"n":1,"relations":[],"k":1}' },
     { label: 'No prerequisites', input: '{"n":3,"relations":[],"k":2}' },
     { label: 'Chain of eight', input: '{"n":8,"relations":[[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8]],"k":8}' },

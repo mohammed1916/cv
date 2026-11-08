@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":6,"edges":[[0,1,5],[1,2,3],[3,4,4],[4,5,1],[1,4,2]],"source":0,"target":3,"k":1}' },
     { label: 'Example 2', input: '{"n":6,"edges":[[0,1,3],[1,2,4],[3,4,5],[4,5,6]],"source":0,"target":4,"k":1}' },
+    { label: 'Single node', input: '{"n":1,"edges":[],"source":0,"target":0,"k":0}' },
+    { label: 'Equal weights', input: '{"n":3,"edges":[[0,1,2],[1,2,2],[0,2,2]],"source":0,"target":2,"k":0}' },
+    { label: 'Zero heavy edges allowed', input: '{"n":4,"edges":[[0,1,1],[1,2,1],[2,3,6]],"source":0,"target":3,"k":0}' },
+    { label: 'Long run: 8 nodes, 10 edges', input: '{"n":8,"edges":[[7,4,3],[6,5,1],[0,3,3],[7,5,4],[0,5,2],[1,2,6],[3,5,1],[5,2,2],[1,7,1],[0,4,3]],"source":0,"target":7,"k":4}' },
   ],
 }
 

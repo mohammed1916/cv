@@ -14,8 +14,12 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-number-of-distinct-elements-after-operations/',
   complexity: 'O(n log n) for the sort. The visualization caps input at 8 values.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,2,3,3,4],"k":2}' },
-    { label: 'Example 2', input: '{"nums":[4,4,4,4],"k":1}' },
+    { label: 'Own case 1', input: '{"nums":[2,3,3,4,4,5],"k":3}' },
+    { label: 'Own case 2', input: '{"nums":[5,5,5,5],"k":2}' },
+    { label: 'Single value, k zero', input: '{"nums":[7],"k":0}' },
+    { label: 'Equal values', input: '{"nums":[9,9,9,9,9],"k":2}' },
+    { label: 'Extremes alternate', input: '{"nums":[0,30,0,30,0,30,0,30],"k":5}' },
+    { label: 'Long run: 8 values', input: '{"nums":[15,5,15,18,26,14,12,20],"k":3}' },
   ],
 }
 

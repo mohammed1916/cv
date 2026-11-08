@@ -19,6 +19,10 @@ const definition = {
   examples: [
     { label: 'Queue order', input: '{"ops":[["addRider",1],["addRider",2],["addDriver",9],["matchDriverWithRider"],["addDriver",8],["matchDriverWithRider"],["matchDriverWithRider"]]}' },
     { label: 'Cancel first', input: '{"ops":[["addRider",1],["addRider",2],["cancelRider",1],["addDriver",5],["matchDriverWithRider"]]}' },
+    { label: 'Driver before rider', input: '{"ops":[["addDriver",1],["matchDriverWithRider"]]}' },
+    { label: 'Equal ids, rider first', input: '{"ops":[["addRider",1],["addDriver",1],["matchDriverWithRider"]]}' },
+    { label: 'Largest id', input: '{"ops":[["addRider",30],["addDriver",30],["matchDriverWithRider"]]}' },
+    { label: 'Long run: 12 operations', input: '{"ops":[["addRider",1],["addRider",2],["addRider",3],["addDriver",9],["matchDriverWithRider"],["cancelRider",2],["addDriver",8],["matchDriverWithRider"],["addRider",4],["addDriver",7],["matchDriverWithRider"],["matchDriverWithRider"]]}' },
   ],
 }
 

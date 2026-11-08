@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"word1":"abc","word2":"bac","target":"abc"}' },
     { label: 'Example 4', input: '{"word1":"ab","word2":"cde","target":"ace"}' },
+    { label: "Single letters", input: '{"word1":"a","word2":"b","target":"ab"}' },
+    { label: "Equal words", input: '{"word1":"ab","word2":"ab","target":"aabb"}' },
+    { label: "Longest words", input: '{"word1":"abcdef","word2":"uvwxyz","target":"fedcba"}' },
+    { label: "Long run: six letters each", input: '{"word1":"ujqapg","word2":"ulibga","target":"uoacxt"}' },
   ],
 }
 

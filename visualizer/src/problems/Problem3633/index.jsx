@@ -31,8 +31,12 @@ const definition = {
   url: 'https://leetcode.com/problems/earliest-finish-time-for-land-and-water-rides-i/',
   complexity: 'O(n * m) time for n land rides and m water rides, with constant work per pair.',
   examples: [
-    { label: 'Example 1', input: '{"landStartTime":[2,8],"landDuration":[4,1],"waterStartTime":[6],"waterDuration":[3]}' },
-    { label: 'Example 2', input: '{"landStartTime":[5],"landDuration":[3],"waterStartTime":[1],"waterDuration":[10]}' },
+    { label: 'Own case 1', input: '{"landStartTime":[3,9],"landDuration":[5,2],"waterStartTime":[7],"waterDuration":[4]}' },
+    { label: 'Own case 2', input: '{"landStartTime":[6],"landDuration":[4],"waterStartTime":[2],"waterDuration":[11]}' },
+    { label: 'One ride each', input: '{"landStartTime":[2],"landDuration":[3],"waterStartTime":[4],"waterDuration":[1]}' },
+    { label: 'Equal start times', input: '{"landStartTime":[5,5],"landDuration":[2,2],"waterStartTime":[5],"waterDuration":[2]}' },
+    { label: 'Largest values', input: '{"landStartTime":[1000],"landDuration":[1000],"waterStartTime":[1,1000],"waterDuration":[1000,1]}' },
+    { label: 'Long run: 5 rides each', input: '{"landStartTime":[298,460,436,468,717],"landDuration":[250,375,388,350,877],"waterStartTime":[553,955,311,352,479],"waterDuration":[59,702,863,588,986]}' },
   ],
 }
 

@@ -18,6 +18,11 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"edges":[[0,1,2],[1,2,3],[1,3,4]],"nums":[1,2,1,3]}' },
     { label: 'Path', input: '{"edges":[[0,1,4]],"nums":[7,7]}' },
+    { label: 'Two nodes', input: '{"edges":[[0,1,1]],"nums":[0,4]}' },
+    { label: 'Equal values on a star', input: '{"edges":[[0,1,3],[0,2,3],[0,3,3]],"nums":[2,2,2,2]}' },
+    { label: 'Largest weights and values', input: '{"edges":[[0,1,9],[1,2,9],[2,3,9],[3,4,9],[4,5,9],[5,6,9],[6,7,9],[7,8,9],[8,9,9]],"nums":[4,0,4,0,4,0,4,0,4,0]}' },
+    { label: 'All zero values', input: '{"edges":[[0,1,1],[1,2,1]],"nums":[0,0,0]}' },
+    { label: 'Long run: 10 nodes', input: '{"edges":[[0,1,4],[1,2,8],[1,3,4],[0,4,5],[0,5,5],[3,6,8],[6,7,2],[7,8,2],[7,9,3]],"nums":[3,3,3,2,2,1,2,0,2,3]}' },
   ],
 }
 

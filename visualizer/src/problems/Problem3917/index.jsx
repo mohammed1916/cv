@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Mixed values', input: '[4, 7, 2, 9, 6]' },
     { label: 'Short run', input: '[5, 2, 8]' },
+    { label: 'Single value', input: '[6]' },
+    { label: 'Equal values in two pairs', input: '[3,8,3,8]' },
+    { label: 'Smallest and largest values', input: '[1,100,100,1]' },
+    { label: 'Long run: 20 items', input: '[75,20,79,86,81,68,23,48,94,56,80,2,98,51,97,52,89,81,72,26]' },
   ],
 }
 

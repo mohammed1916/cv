@@ -13,8 +13,12 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-path-score-in-a-grid/',
   complexity: 'O(m * n * k) time. The visualization caps the grid at 4 by 4 and k at 12.',
   examples: [
-    { label: 'Example 1', input: '{"grid":[[0,1],[2,0]],"k":1}' },
+    { label: 'Own case 1', input: '{"grid":[[0,2],[1,0]],"k":1}' },
     { label: 'Example 2', input: '{"grid":[[0,1],[1,2]],"k":1}' },
+    { label: "Single cell", input: "{\"grid\":[[0]],\"k\":0}" },
+    { label: "All zero cells", input: "{\"grid\":[[0,0],[0,0]],\"k\":0}" },
+    { label: "Largest grid, full budget", input: "{\"grid\":[[0,1,2,1],[2,1,0,2],[1,2,1,0],[0,1,2,1]],\"k\":12}" },
+    { label: "Long run: 4 by 4 grid", input: "{\"grid\":[[0,0,1,2],[2,1,0,2],[1,0,1,2],[2,0,0,1]],\"k\":12}" },
   ],
 }
 

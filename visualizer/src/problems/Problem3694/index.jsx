@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"s":"RRUDL","k":2}' },
     { label: 'Repeats', input: '{"s":"UUDD","k":2}' },
+    { label: 'Single move', input: '{"s":"U","k":1}' },
+    { label: 'Repeated moves', input: '{"s":"UDUD","k":2}' },
+    { label: 'Full length removal', input: '{"s":"LRUDLRUDLRUDLRUDLRUD","k":20}' },
+    { label: 'Long run: 20 moves', input: '{"s":"DURLDURLDURLDURLDURL","k":10}' },
   ],
 }
 

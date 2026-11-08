@@ -22,6 +22,10 @@ const definition = {
     { label: 'Chain with a blocked node', input: '{"nums":[14,2,9,5,18,11,30],"maxDiff":5,"queries":[[1,4],[0,2],[1,6],[3,3]]}' },
     { label: 'Long chain', input: '{"nums":[0,3,6,9,12,15,18,21,24],"maxDiff":4,"queries":[[0,8],[5,1],[2,3]]}' },
     { label: 'Equal values, no other edges', input: '{"nums":[6,6,40],"maxDiff":0,"queries":[[0,1],[1,2],[2,2]]}' },
+    { label: 'One entry', input: '{"nums":[0],"maxDiff":0,"queries":[[0,0]]}' },
+    { label: 'Equal values', input: '{"nums":[4,4,4],"maxDiff":0,"queries":[[0,2],[1,1]]}' },
+    { label: 'Largest values', input: '{"nums":[0,100000,0,100000],"maxDiff":100000,"queries":[[0,3],[3,0]]}' },
+    { label: 'Long run: 12 entries, 6 queries', input: '{"nums":[88009,71059,73382,22616,1931,32423,63227,8927,55561,3780,36745,53502],"maxDiff":2000,"queries":[[7,7],[9,10],[4,0],[8,10],[1,7],[2,9]]}' },
   ],
 }
 

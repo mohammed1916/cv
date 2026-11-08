@@ -14,8 +14,13 @@ const definition = {
   url: 'https://leetcode.com/problems/transform-array-by-parity/',
   complexity: 'O(n log n) with a comparison sort. Counting the zeros and ones gives O(n).',
   examples: [
-    { label: 'Example 1', input: '[4,3,2,1]' },
-    { label: 'Example 2', input: '[1,5,1,4,2]' },
+    { label: 'Own case 1', input: '[5,4,3,2]' },
+    { label: 'Own case 2', input: '[2,6,2,5,3]' },
+    { label: 'Single value', input: '[7]' },
+    { label: 'Equal values', input: '[5,5,5,5]' },
+    { label: 'Largest values alternate with zero', input: '[1000,0,1000,0,1000,0,1000,0,1000,0,1000,0]' },
+    { label: 'All zeros', input: '[0,0,0]' },
+    { label: 'Long run: 12 values', input: '[582,388,915,693,996,515,794,366,809,100,479,44]' },
   ],
 }
 

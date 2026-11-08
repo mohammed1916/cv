@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-space-wasted-from-packaging/',
   complexity: 'Sort packages once, then each box is one binary search over the packages. The visualization caps input at 6 packages and 3 suppliers.',
   examples: [
-    { label: 'Example 1', input: '{"packages":[2,3,5],"boxes":[[4,8],[2,8]]}' },
-    { label: 'Example 2', input: '{"packages":[3,5,8,10,11,12],"boxes":[[12],[11,9],[10,5,14]]}' },
+    { label: 'Own case 1', input: '{"packages":[3,4,6],"boxes":[[5,9],[3,9]]}' },
+    { label: 'Own case 2', input: '{"packages":[4,6,9,11,12,13],"boxes":[[13],[12,10],[11,6,15]]}' },
   { label: 'Single package, exact box', input: "{\"packages\":[5],\"boxes\":[[5]]}" },
   { label: 'Equal sizes', input: "{\"packages\":[4,4],\"boxes\":[[4,4]]}" },
   { label: 'No box is large enough', input: "{\"packages\":[5],\"boxes\":[[4]]}" },

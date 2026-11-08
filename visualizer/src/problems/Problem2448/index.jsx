@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-cost-to-make-array-equal/',
   complexity: 'O(n log n) time with the sort; the weighted median is found in one pass.',
   examples: [
-    { label: 'Example', input: '{"nums":[1,3,5,2],"cost":[2,3,1,14]}' },
+    { label: 'Own case 1', input: '{"nums":[2,4,6,3],"cost":[3,4,2,15]}' },
     { label: 'Equal', input: '{"nums":[2,2,2],"cost":[4,1,9]}' },
     { label: 'Single item', input: '{"nums":[50],"cost":[100]}' },
     { label: 'Equal values', input: '{"nums":[3,3,3,3],"cost":[1,2,3,4]}' },

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Official', input: '{"fruits":[[1,2,3,4],[5,6,8,7],[9,10,11,12],[13,14,15,16]]}' },
     { label: 'Two by two', input: '{"fruits":[[1,2],[3,4]]}' },
+    { label: 'All zero counts', input: '{"fruits":[[0,0],[0,0]]}' },
+    { label: 'Equal counts', input: '{"fruits":[[7,7,7],[7,7,7],[7,7,7]]}' },
+    { label: 'Largest counts on a full grid', input: '{"fruits":[[0,99,0,99,0],[99,0,99,0,99],[0,99,0,99,0],[99,0,99,0,99],[0,99,0,99,0]]}' },
+    { label: 'Long run: 5 by 5 grid', input: '{"fruits":[[44,45,78,5,38],[66,69,1,48,70],[54,57,97,4,45],[6,21,20,88,35],[29,91,25,56,16]]}' },
   ],
 }
 

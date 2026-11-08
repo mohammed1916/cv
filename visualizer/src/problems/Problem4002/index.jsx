@@ -17,6 +17,10 @@ const definition = {
     { label: "Two parts", input: "{\"n\":4,\"k\":2}" },
     { label: "Three parts", input: "{\"n\":6,\"k\":3}" },
     { label: "All ones", input: "{\"n\":5,\"k\":5}" },
+    { label: "One part", input: '{"n":1,"k":1}' },
+    { label: "Equal split tie", input: '{"n":6,"k":2}' },
+    { label: "Largest n with n parts", input: '{"n":30,"k":30}' },
+    { label: "Long run: 30 into 7", input: '{"n":30,"k":7}' },
   ],
 }
 

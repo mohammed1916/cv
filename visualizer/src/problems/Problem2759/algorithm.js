@@ -1,5 +1,5 @@
 const lines = text => text.split('\n').map((t, i) => ({ line: i + 1, text: t }))
-const PY_OF = {1: 49, 2: 50, 3: 52, 4: 54, 5: 55}
+const PY_OF = {1: 2, 2: 3, 3: 5, 4: 7, 5: 8}
 const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: PY_OF[line] ?? line, activeLine: line, message, state })
 export const PHASES = [
   { id: 'setup', label: 'Setup', description: 'Read the input and prepare the model.' },
@@ -38,7 +38,7 @@ export function buildTrace(text) {
       frames.push(frame('step', 3, `Open ${ch}: depth ${depth}.`, { char: ch, depth }))
     } else if (ch === '}' || ch === ']') {
       depth--
-      frames.push(frame('step', 3, `Close ${ch}: depth ${depth}.`, { char: ch, depth }))
+      frames.push(frame('step', 4, `Close ${ch}: depth ${depth}.`, { char: ch, depth }))
     }
   }
   const result = JSON.parse(text)

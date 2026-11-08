@@ -14,6 +14,10 @@ const definition = {
     { label: 'Unfinished tail', input: '{"s":"qpqpq"}' },
     { label: 'One letter repeated', input: '{"s":"mmmmmm"}' },
     { label: 'Single character', input: '{"s":"k"}' },
+    { label: 'Two letters', input: '{"s":"ba"}' },
+    { label: 'Alternating pair', input: '{"s":"abab"}' },
+    { label: 'Longest allowed string', input: '{"s":"abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd"}' },
+    { label: 'Long run: 40 letters', input: '{"s":"olqnhxczsupjuoldshfqjkgsfqqrcqxdwvayegbk"}' },
   ],
 }
 

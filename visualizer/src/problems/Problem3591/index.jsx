@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Triple value', input: '{"nums":[1,2,2,2]}' },
     { label: 'No prime count', input: '{"nums":[1,2,3]}' },
+    { label: 'Single one', input: '{"nums":[1]}' },
+    { label: 'Equal values', input: '{"nums":[7,7,7]}' },
+    { label: 'Largest values allowed', input: '{"nums":[100,97,2,1]}' },
+    { label: 'Long run: 30 values', input: '{"nums":[12,44,59,75,34,80,4,75,91,42,23,68,63,98,26,93,59,85,99,82,62,66,89,39,64,77,52,73,89,86]}' },
   ],
 }
 

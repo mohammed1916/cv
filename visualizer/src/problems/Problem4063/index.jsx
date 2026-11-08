@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[4,1,2],"k":3}' },
     { label: 'Example 2', input: '{"nums":[5,3,4],"k":7}' },
+    { label: "One number", input: "{\"nums\":[7],\"k\":1}" },
+    { label: "Equal values", input: "{\"nums\":[2,2,2,2],\"k\":2}" },
+    { label: "Extreme values, large k", input: "{\"nums\":[-1000,1000,-1000,1000],\"k\":1000}" },
+    { label: "Long run: twelve numbers", input: "{\"nums\":[-818,-26,-409,233,608,419,-307,-784,-625,783,666,729],\"k\":6}" },
   ],
 }
 

@@ -24,6 +24,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"cd%*#","k":2}' },
     { label: 'Example 2', input: '{"s":"ab#","k":3}' },
+    { label: 'Single letter', input: '{"s":"a","k":0}' },
+    { label: 'Copy then index', input: '{"s":"xy#","k":2}' },
+    { label: 'Index past the end', input: '{"s":"ab*#%","k":200}' },
+    { label: 'Long run: 30 symbols', input: '{"s":"odjf*uqznyxgnchxbjjcwrccwvaccj","k":150}' },
   ],
 }
 

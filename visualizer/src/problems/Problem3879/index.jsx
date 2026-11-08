@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Mixed signs', input: '{"tree":[4,-2,6,1,null,5,-7]}' },
     { label: 'Repeated values', input: '{"tree":[1,1,1]}' },
+    { label: 'Single node', input: '{"tree":[0]}' },
+    { label: 'Equal values', input: '{"tree":[5,5,5]}' },
+    { label: 'Extreme values, 12 nodes', input: '{"tree":[-9,9,-9,9,-9,9,-9,9,-9,9,-9,9]}' },
+    { label: 'Long run: 12 nodes', input: '{"tree":[5,-6,-5,-7,-8,-9,0,-5,5,-8,5,-3]}' },
   ],
 }
 

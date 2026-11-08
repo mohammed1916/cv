@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,4]}' },
     { label: 'Example 2', input: '{"nums":[-5,-10,-5]}' },
+    { label: 'Smallest pair', input: '{"nums":[0,0]}' },
+    { label: 'Equal values tie', input: '{"nums":[7,7,7]}' },
+    { label: 'Extreme values', input: '{"nums":[100,-100,100,-100,100,-100,100,-100,100,-100,100,-100]}' },
+    { label: 'Long run: 12 numbers', input: '{"nums":[-78,89,31,-84,-81,-79,-70,-55,56,-40,35,-1]}' },
   ],
 }
 

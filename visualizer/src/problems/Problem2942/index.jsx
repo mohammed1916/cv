@@ -18,7 +18,7 @@ const definition = {
   url: "https://leetcode.com/problems/find-words-containing-character/",
   complexity: "O(total length of words) time and O(n) space for n words. The visualization caps input at 50 words of up to 50 letters.",
   examples: [
-    { label: "Example 1", input: '{"words": ["leet", "code"], "x": "e"}' },
+    { label: "Own case 1", input: '{"words":["mffu","dpef"],"x":"f"}' },
     { label: "Second example", input: '{"words": ["abc", "bcd", "aaaa", "cbc"], "x": "a"}' },
     { label: 'One letter word', input: '{"words":["q"],"x":"q"}' },
     { label: 'No match', input: '{"words":["abc","def"],"x":"z"}' },

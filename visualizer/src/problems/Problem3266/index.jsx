@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/final-array-state-after-k-multiplication-operations-ii/',
   complexity: 'O(n log n + n log k) time for the real limits, using a heap and one round-robin pass. The visualization simulates up to 30 operations exactly.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[2,1,3,5,6],"k":5,"multiplier":2}' },
+    { label: 'Own case 1', input: '{"nums":[3,2,4,6,7],"k":6,"multiplier":3}' },
     { label: 'Example 2', input: '{"nums":[1,2],"k":3,"multiplier":4}' },
     { label: 'Single number', input: '{"nums":[7],"k":1,"multiplier":1}' },
     { label: 'Equal values tie', input: '{"nums":[1,1,1],"k":5,"multiplier":2}' },

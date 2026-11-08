@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-subsequence-score/',
   complexity: 'O(n log n) time for sorting and heap work. The visualization caps n at 8.',
   examples: [
-    { label: 'Example 1', input: '{"nums1":[1,3,3,2],"nums2":[2,1,3,4],"k":3}' },
-    { label: 'Example 2', input: '{"nums1":[4,2,3,1,1],"nums2":[7,5,10,9,6],"k":1}' },
+    { label: 'Own case 1', input: '{"nums1":[2,4,4,3],"nums2":[3,2,4,5],"k":4}' },
+    { label: 'Own case 2', input: '{"nums1":[5,3,4,2,2],"nums2":[8,6,11,10,7],"k":2}' },
     { label: 'Single entry', input: '{"nums1":[0],"nums2":[0],"k":1}' },
     { label: 'Equal entries', input: '{"nums1":[4,4,4],"nums2":[4,4,4],"k":2}' },
     { label: 'Extremes, all eight picked', input: '{"nums1":[20,0,20,0,20,0,20,0],"nums2":[0,20,0,20,0,20,0,20],"k":8}' },

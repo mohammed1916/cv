@@ -15,6 +15,10 @@ const definition = {
     { label: "Two words", input: "\"xfourtwoy\"" },
     { label: "Overlap is not revisited", input: "\"oneight\"" },
     { label: "Two in reverse order", input: "\"stwoone\"" },
+    { label: "Single word", input: "\"one\"" },
+    { label: "Repeated word", input: "\"twotwo\"" },
+    { label: "Longest allowed string", input: "\"onetwoonetwoonetwoonetwoonetwoonetwofour\"" },
+    { label: "Long run: 40 letters", input: "\"oreniersrhhftsirgexwwifvoovwfvnrgssnvesh\"" },
   ],
 }
 

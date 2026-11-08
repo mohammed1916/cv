@@ -15,6 +15,10 @@ const definition = {
     { label: 'Two swaps', input: '{"word1":"lemonxy","word2":"melonyx"}' },
     { label: 'Already equal', input: '{"word1":"same","word2":"same"}' },
     { label: 'One letter', input: '{"word1":"q","word2":"z"}' },
+    { label: 'Single letter', input: '{"word1":"a","word2":"a"}' },
+    { label: 'Equal letters in a row', input: '{"word1":"aabb","word2":"bbaa"}' },
+    { label: 'Longest allowed words', input: '{"word1":"abcdefghijkl","word2":"lkjihgfedcba"}' },
+    { label: 'Long run: 12 letters', input: '{"word1":"mnopqrstuvwx","word2":"xwvutsrqponm"}' },
   ],
 }
 

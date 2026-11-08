@@ -23,6 +23,10 @@ const definition = {
   examples: [
     { label: 'Zig-zag', input: '{"grid":[[1,3,1],[1,5,1],[4,2,1]],"k":2}' },
     { label: 'One turn', input: '{"grid":[[1,2,3],[4,5,6]],"k":1}' },
+    { label: "One cell", input: "{\"grid\":[[5]],\"k\":0}" },
+    { label: "Equal values", input: "{\"grid\":[[2,2],[2,2]],\"k\":1}" },
+    { label: "Largest grid and values", input: "{\"grid\":[[9,0,9,0,9,0],[0,9,0,9,0,9],[9,0,9,0,9,0],[0,9,0,9,0,9],[9,0,9,0,9,0],[0,9,0,9,0,9]],\"k\":5}" },
+    { label: "Long run: six by six grid", input: "{\"grid\":[[0,0,0,4,3,4],[5,3,7,2,3,3],[7,5,9,3,8,1],[2,9,0,8,3,0],[6,3,4,4,0,6],[0,6,0,2,9,4]],\"k\":3}" },
   ],
 }
 

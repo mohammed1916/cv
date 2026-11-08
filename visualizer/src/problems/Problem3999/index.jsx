@@ -19,6 +19,10 @@ const definition = {
   examples: [
     { label: 'Two classes', input: '["abcd","cdab","abdc"]' },
     { label: 'Length one and two', input: '["a","z","ab","ba"]' },
+    { label: "Single word", input: '["abc"]' },
+    { label: "Equal words", input: '["ab","ab","ab"]' },
+    { label: "Longest words", input: '["abcdefgh","hgfedcba","abcdefgh"]' },
+    { label: "Long run: 8 words", input: '["d","dacc","dabddad","db","dbcda","dbbddbad","dca","dcddad"]' },
   ],
 }
 

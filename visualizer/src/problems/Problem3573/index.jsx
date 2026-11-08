@@ -13,8 +13,12 @@ const definition = {
   url: 'https://leetcode.com/problems/best-time-to-buy-and-sell-stock-v/',
   complexity: 'O(n * k) time and O(k) space. The visualization caps the days at 10.',
   examples: [
-    { label: 'Example 1', input: '{"prices":[1,7,9,8,2],"k":2}' },
-    { label: 'Example 2', input: '{"prices":[12,16,19,19,8,1,19,13,9],"k":3}' },
+    { label: 'Own case 1', input: '{"prices":[2,8,9,7,1],"k":2}' },
+    { label: 'Own case 2', input: '{"prices":[13,17,20,20,9,2,20,14,10],"k":4}' },
+    { label: 'Two days, one trade', input: '{"prices":[1,5],"k":1}' },
+    { label: 'Equal prices', input: '{"prices":[7,7,7,7],"k":2}' },
+    { label: 'Largest prices, k is half the days', input: '{"prices":[100,1,100,1,100,1,100,1,100,1],"k":5}' },
+    { label: 'Long run: 10 days', input: '{"prices":[84,22,23,7,68,41,74,32,11,32],"k":3}' },
   ],
 }
 

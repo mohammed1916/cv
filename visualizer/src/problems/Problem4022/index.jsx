@@ -20,6 +20,10 @@ const definition = {
     { label: "Inside block one", input: "{\"k\":15}" },
     { label: "Early block", input: "{\"k\":1000}" },
     { label: "Larger position", input: "{\"k\":123456}" },
+    { label: "First position", input: "{\"k\":1}" },
+    { label: "Two-digit start", input: "{\"k\":10}" },
+    { label: "Largest position", input: "{\"k\":1000000000000000}" },
+    { label: "Long run: 15-digit position", input: "{\"k\":734517298645103}" },
   ],
 }
 

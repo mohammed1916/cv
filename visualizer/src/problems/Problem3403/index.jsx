@@ -14,8 +14,12 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-lexicographically-largest-string-from-the-box-i/',
   complexity: 'O(n^2) time for comparing windows, O(n) space. The visualization caps input at 20 letters.',
   examples: [
-    { label: 'Example 1', input: '{"word":"dbca","numFriends":2}' },
+    { label: 'Own case 1', input: '{"word":"ecdb","numFriends":3}' },
     { label: 'Example 2', input: '{"word":"gggg","numFriends":4}' },
+    { label: 'Single letter, one friend', input: '{"word":"a","numFriends":1}' },
+    { label: 'Equal letters', input: '{"word":"zzzzz","numFriends":1}' },
+    { label: 'Longest word, every letter a friend', input: '{"word":"abcdefghijklmnopqrst","numFriends":20}' },
+    { label: 'Long run: 20 letters', input: '{"word":"ghtjtpvuxnxfvwbabzjh","numFriends":7}' },
   ],
 }
 

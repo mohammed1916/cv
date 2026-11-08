@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Equal', input: '{"s":"9999"}' },
     { label: 'Different', input: '{"s":"5678"}' },
+    { label: 'Smallest string', input: '{"s":"123"}' },
+    { label: 'Repeated digit tie', input: '{"s":"1111"}' },
+    { label: 'Longest string: 12 digits', input: '{"s":"987654321012"}' },
+    { label: 'Long run: 12 digits', input: '{"s":"361789570321"}' },
   ],
 }
 

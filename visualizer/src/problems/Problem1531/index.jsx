@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/string-compression-ii/',
   complexity: 'O(n^2 * k) states with memoization, each with two choices. The visualization caps s at 12 characters.',
   examples: [
-    { label: 'Example 1', input: '{"s":"aaabcccd","k":2}' },
-    { label: 'Example 2', input: '{"s":"aabbaa","k":2}' },
+    { label: 'Own case 1', input: '{"s":"bbbcddde","k":3}' },
+    { label: 'Own case 2', input: '{"s":"bbccbb","k":3}' },
     { label: 'Single letter, k 0', input: '{"s":"a","k":0}' },
     { label: 'Equal letters, one removal', input: '{"s":"aabb","k":1}' },
     { label: 'Largest: 12 letters, k 12', input: '{"s":"abcdefghijkl","k":12}' },

@@ -21,6 +21,10 @@ const definition = {
   examples: [
     { label: 'Merge two values', input: '[1, 2, 1, 2]' },
     { label: 'Existing equal pairs', input: '[1, 1, 2, 2, 1, 1]' },
+    { label: "Two values", input: "[1,2]" },
+    { label: "Two equal values", input: "[5,5]" },
+    { label: "Largest values", input: "[1000000000,1,1000000000,1]" },
+    { label: "Long run: 20 values", input: "[1,3,1,2,3,2,4,2,4,1,1,3,2,3,3,3,2,1,4,1]" },
   ],
 }
 

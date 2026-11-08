@@ -13,6 +13,10 @@ const definition = {
     { label: 'One move short', input: '{"nums":[-1,1,1,1,-1,1],"k":2}' },
     { label: 'Parity blocks both', input: '{"nums":[1,-1,1,1],"k":4}' },
     { label: 'Single entry', input: '{"nums":[-1],"k":1}' },
+    { label: 'Single positive entry', input: '{"nums":[1],"k":1}' },
+    { label: 'Already all equal', input: '{"nums":[1,1,1,1],"k":2}' },
+    { label: 'Window equals whole array', input: '{"nums":[-1,1,-1,1,-1],"k":5}' },
+    { label: 'Long run: 20 entries', input: '{"nums":[-1,1,-1,-1,-1,-1,1,-1,1,-1,-1,1,1,-1,1,-1,1,-1,-1,1],"k":7}' },
   ],
 }
 

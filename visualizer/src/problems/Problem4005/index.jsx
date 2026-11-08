@@ -13,6 +13,10 @@ const definition = {
     { label: 'A 1 in the array', input: '{"nums":[1,6,10]}' },
     { label: 'Already equal', input: '{"nums":[11,11]}' },
     { label: 'All ones', input: '{"nums":[1,1,1]}' },
+    { label: "Single entry", input: '{"nums":[3]}' },
+    { label: "Equal entries", input: '{"nums":[6,6,6]}' },
+    { label: "Largest values at the limit", input: '{"nums":[1000000000,500000000,1000000000]}' },
+    { label: "Long run: 12 entries", input: '{"nums":[51,36,5,59,38,14,42,54,59,43,62,27]}' },
   ],
 }
 

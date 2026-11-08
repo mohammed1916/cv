@@ -13,8 +13,12 @@ const definition = {
   url: 'https://leetcode.com/problems/count-subarrays-with-majority-element-i/',
   complexity: 'O(n^2) time for this visualization. The visualization caps input at 12 numbers.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,2,3],"target":2}' },
+    { label: 'Own case 1', input: '{"nums":[3,2,2,1],"target":2}' },
     { label: 'Example 2', input: '{"nums":[1,1,1,1],"target":2}' },
+    { label: 'Single zero', input: '{"nums":[0],"target":0}' },
+    { label: 'Equal values tie', input: '{"nums":[2,2,2],"target":2}' },
+    { label: 'Largest values allowed', input: '{"nums":[3,3,3,3,3,3,3,3,3,3,3,3],"target":3}' },
+    { label: 'Long run: 12 values', input: '{"nums":[0,3,2,1,0,3,2,1,0,3,2,1],"target":1}' },
   ],
 }
 

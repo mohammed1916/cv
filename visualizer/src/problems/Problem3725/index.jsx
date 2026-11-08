@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"mat":[[1,2],[3,4]]}' },
     { label: 'Example 2', input: '{"mat":[[2,2],[2,2]]}' },
+    { label: 'Single cell', input: '{"mat":[[7]]}' },
+    { label: 'Equal entries', input: '{"mat":[[1,1,1],[1,1,1]]}' },
+    { label: 'Extreme entries', input: '{"mat":[[150,1,150,1],[1,150,1,150],[150,1,150,1],[1,150,1,150]]}' },
+    { label: 'Long run: 4 by 4 grid', input: '{"mat":[[53,90,77,112],[28,145,18,93],[3,50,5,74],[128,105,96,55]]}' },
   ],
 }
 

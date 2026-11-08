@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[5,1,4]}' },
     { label: 'Repeats', input: '{"nums":[2,2,6]}' },
+    { label: 'Single zero', input: '{"nums":[0]}' },
+    { label: 'Single maximum', input: '{"nums":[15]}' },
+    { label: 'Equal values', input: '{"nums":[4,4,4,4]}' },
+    { label: 'Long run: 12 values', input: '{"nums":[10,5,0,15,15,1,3,13,13,13,13,7]}' },
   ],
 }
 

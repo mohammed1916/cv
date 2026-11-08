@@ -16,6 +16,11 @@ const definition = {
     { label: 'Two levels', input: '{"text":"a%bc%d","replacements":[["bc","x%y%"],["y","zz"]]}' },
     { label: 'Shared key', input: '{"text":"%q%-%q%","replacements":[["q","ab"]]}' },
     { label: 'Plain text', input: '{"text":"nothing here","replacements":[["k","v"]]}' },
+    { label: 'Single key with plain text', input: '{"text":"x","replacements":[["a","b"]]}' },
+    { label: 'Chained references', input: '{"text":"%ab%-%cd%","replacements":[["ab","%cd%"],["cd","go"]]}' },
+    { label: 'Equal values for two keys', input: '{"text":"%p% and %q%","replacements":[["p","run"],["q","run"]]}' },
+    { label: 'Largest text and six keys', input: '{"text":"%aa% %bb% %cc% %dd% %ee% %ff%","replacements":[["aa","one two"],["bb","three"],["cc","four"],["dd","five"],["ee","six"],["ff","seven eight nine"]]}' },
+    { label: 'Long run: six-step chain', input: '{"text":"%ka% then %kc%","replacements":[["ka","%kb%"],["kb","%kc%"],["kc","%kd%"],["kd","%ke%"],["ke","%kf%"],["kf","end"]]}' },
   ],
 }
 

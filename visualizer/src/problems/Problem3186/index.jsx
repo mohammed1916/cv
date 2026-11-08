@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-total-damage-with-spell-casting/',
   complexity: 'O(m^2) time for the direct scan over m distinct powers, and O(m) space. The visualization caps input at 10 spells.',
   examples: [
-    { label: 'Example 1', input: '[1,1,3,4]' },
-    { label: 'Example 2', input: '[7,1,6,6]' },
+    { label: 'Own case 1', input: '[2,2,4,5]' },
+    { label: 'Own case 2', input: '[8,2,7,7]' },
     { label: "Single spell", input: "[4]" },
     { label: "Equal powers", input: "[10, 10, 10, 10, 10]" },
     { label: "Long run: ten spells", input: "[3, 9, 1, 7, 10, 2, 8, 4, 6, 5]" },

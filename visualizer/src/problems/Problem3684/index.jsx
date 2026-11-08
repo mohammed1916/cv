@@ -14,8 +14,12 @@ const definition = {
   url: 'https://leetcode.com/problems/maximize-sum-of-at-most-k-distinct-elements/',
   complexity: 'O(n log n) time for sorting. The visualization caps input at 20 values.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[84,93,100,77,90],"k":3}' },
+    { label: 'Own case 1', input: '{"nums":[85,94,101,78,91],"k":4}' },
     { label: 'Duplicates', input: '{"nums":[84,93,100,77,93],"k":3}' },
+    { label: 'Single value', input: '{"nums":[4],"k":1}' },
+    { label: 'Equal values', input: '{"nums":[7,7,7],"k":2}' },
+    { label: 'Largest values and k', input: '{"nums":[1000000000,1000000000,1000000000,1000000000,1000000000,1000000000,1000000000,1000000000,1000000000,1000000000,1000000000,1000000000,1000000000,1000000000,1000000000,1000000000,1000000000,1000000000,1000000000,1000000000],"k":20}' },
+    { label: 'Long run: 20 values', input: '{"nums":[11136903,7234970,4778304,606646,10834240,3164885,4767294,12541755,10306741,3725344,5402499,9824721,6218122,6396110,2721874,10226668,15566756,5194612,6178351,9141569],"k":9}' },
   ],
 }
 

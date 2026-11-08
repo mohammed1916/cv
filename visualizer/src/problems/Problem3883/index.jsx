@@ -16,6 +16,10 @@ const definition = {
     { label: 'Example 1', input: '{"digit_sum":[25,1]}' },
     { label: 'Example 2', input: '{"digit_sum":[1]}' },
     { label: 'Impossible', input: '{"digit_sum":[2,49,23]}' },
+    { label: 'Single zero sum', input: '{"digit_sum":[0]}' },
+    { label: 'Equal sums', input: '{"digit_sum":[7,7,7]}' },
+    { label: 'Largest sums, six entries', input: '{"digit_sum":[50,50,50,50,50,50]}' },
+    { label: 'Long run: 6 entries', input: '{"digit_sum":[22,30,44,13,14,28]}' },
   ],
 }
 

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[-4,6,0]}' },
     { label: 'All negative', input: '{"nums":[-1,-2,-3]}' },
+    { label: 'Zeros', input: '{"nums":[0,0,0]}' },
+    { label: 'Equal values', input: '{"nums":[2,2,2]}' },
+    { label: 'Extreme values', input: '{"nums":[-100,-100,100,100,-100,100,-100,100]}' },
+    { label: 'Long run: 8 values', input: '{"nums":[-85,2,81,34,-93,-59,-56,-17]}' },
   ],
 }
 

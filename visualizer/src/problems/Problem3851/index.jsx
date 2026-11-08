@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Two users', input: '{"k":2,"span":5,"requests":[["ana",1],["ana",3],["ana",4],["ben",2],["ana",9],["ben",3],["ben",4],["ben",5]]}' },
     { label: 'Tight limit', input: '{"k":1,"span":3,"requests":[["max",0],["max",2],["max",4],["max",9],["max",10]]}' },
+    { label: 'Single request', input: '{"k":1,"span":0,"requests":[["ana",0]]}' },
+    { label: 'Equal times, one user', input: '{"k":2,"span":4,"requests":[["ana",5],["ana",5],["ana",5]]}' },
+    { label: 'Largest span and time', input: '{"k":5,"span":20,"requests":[["max",0],["max",20],["max",40]]}' },
+    { label: 'Long run: 14 requests', input: '{"k":3,"span":12,"requests":[["cy",15],["ben",7],["ben",1],["ben",1],["ana",32],["ana",18],["cy",33],["ben",12],["ben",4],["ben",24],["cy",29],["ana",34],["ana",5],["cy",12]]}' },
   ],
 }
 

@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/sort-an-array/',
   complexity: 'O(n log n) time, O(n) extra space, stable. The visualization caps the array at 64 values.',
   examples: [
-    { label: 'Example 1', input: '[5,2,3,1]' },
-    { label: 'Example 2', input: '[5,1,1,2,0,0]' },
+    { label: 'Own case 1', input: '[6,3,4,2]' },
+    { label: 'Own case 2', input: '[6,2,2,3,1,1]' },
     { label: 'Negatives', input: '[-4,7,0,-4,12,3,-9,8,1]' },
     { label: 'Single value', input: '[42]' },
     { label: 'Equal values', input: '[3,3,3,3]' },

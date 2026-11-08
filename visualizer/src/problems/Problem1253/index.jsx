@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/reconstruct-a-2-row-binary-matrix/',
   complexity: 'O(n) time and O(n) space for n columns. The visualization caps n at 20.',
   examples: [
-    { label: 'Example 1', input: '{"upper":2,"lower":1,"colsum":[1,1,1]}' },
+    { label: 'Own case 1', input: '{"upper":3,"lower":2,"colsum":[2,2,2]}' },
     { label: 'Example 2', input: '{"upper":2,"lower":3,"colsum":[2,1,1,1]}' },
     { label: 'Single empty column', input: '{"upper":0,"lower":0,"colsum":[0]}' },
     { label: 'No solution', input: '{"upper":1,"lower":0,"colsum":[2]}' },

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"l":1,"r":9,"k":3}' },
     { label: 'Example 2', input: '{"l":8,"r":30,"k":2}' },
+    { label: 'Single value', input: '{"l":0,"r":0,"k":1}' },
+    { label: 'Equal bounds', input: '{"l":5,"r":5,"k":2}' },
+    { label: 'Full range', input: '{"l":0,"r":200,"k":30}' },
+    { label: 'Long run: 100 to 200', input: '{"l":100,"r":200,"k":17}' },
   ],
 }
 

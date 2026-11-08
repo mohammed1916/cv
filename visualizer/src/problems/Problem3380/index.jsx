@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Square', input: '[[1,1],[1,3],[3,1],[3,3]]' },
     { label: 'Interior point', input: '[[1,1],[1,3],[3,1],[3,3],[2,2]]' },
+    { label: 'Single point', input: '[[4,6]]' },
+    { label: 'Collinear diagonal', input: '[[1,1],[2,2],[3,3]]' },
+    { label: 'Opposite corners', input: '[[0,0],[10,10]]' },
+    { label: 'Long run: 10 points', input: '[[7,8],[7,9],[7,0],[0,6],[2,9],[2,7],[9,7],[0,10],[2,3],[6,5]]' },
   ],
 }
 

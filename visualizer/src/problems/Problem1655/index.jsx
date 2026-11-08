@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/distribute-repeating-integers/',
   complexity: 'O(distinct * 3^m) time with m customers. The visualization caps input at 8 values and 4 customers.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,3,4],"quantity":[2]}' },
-    { label: 'Example 2', input: '{"nums":[1,2,3,3],"quantity":[2]}' },
+    { label: 'Own case 1', input: '{"nums":[2,3,4,5],"quantity":[3]}' },
+    { label: 'Own case 2', input: '{"nums":[2,3,4,4],"quantity":[3]}' },
     { label: 'One value', input: '{"nums":[3],"quantity":[1]}' },
     { label: 'Equal values', input: '{"nums":[2,2,2,2],"quantity":[2,2]}' },
     { label: 'Largest sizes', input: '{"nums":[10,10,10,10,10,10,10,10],"quantity":[10,10,10,10]}' },

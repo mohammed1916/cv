@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Short word', input: '{"s":"gnome"}' },
     { label: 'Corner keys', input: '{"s":"zpqm"}' },
+    { label: 'One letter', input: '{"s":"a"}' },
+    { label: 'Repeated letters', input: '{"s":"aaaa"}' },
+    { label: 'Forty letters, repeating block', input: '{"s":"zpqmzpqmzpqmzpqmzpqmzpqmzpqmzpqmzpqmzpqm"}' },
+    { label: 'Long run: 40 letters', input: '{"s":"wfqvypmcfnqdzxailnpduolpxatlpewsoyunibec"}' },
   ],
 }
 

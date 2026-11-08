@@ -23,6 +23,10 @@ const definition = {
   examples: [
     { label: 'Constant gaps', input: '[3,7,3,7,3,7,3]' },
     { label: 'Mixed gaps', input: '[5,9,5,9,5,9,5,9,9]' },
+    { label: "Equal values", input: "[4,4,4]" },
+    { label: "Largest values", input: "[1000000000,1,1000000000]" },
+    { label: "Three distinct values", input: "[1,2,3]" },
+    { label: "Long run: 20 values", input: "[91013163,296386582,876698931,134060878,252637275,53886125,137112055,535963769,507063909,481916243,578919410,18819748,448031642,935378989,679163973,924126094,490669291,97334452,431310920,809408699]" },
   ],
 }
 

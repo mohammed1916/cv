@@ -15,6 +15,10 @@ const definition = {
     { label: "Space lands on index three", input: "{\"words\":[\"ab\",\"c\"],\"k\":3}" },
     { label: "Three words", input: "{\"words\":[\"xyz\",\"pq\",\"r\"],\"k\":8}" },
     { label: "One word", input: "{\"words\":[\"sun\"],\"k\":5}" },
+    { label: "Single letter", input: "{\"words\":[\"a\"],\"k\":0}" },
+    { label: "Two equal words", input: "{\"words\":[\"ab\",\"ab\"],\"k\":4}" },
+    { label: "Largest k with eight six-letter words", input: "{\"words\":[\"abcdef\",\"abcdef\",\"abcdef\",\"abcdef\",\"abcdef\",\"abcdef\",\"abcdef\",\"abcdef\"],\"k\":174}" },
+    { label: "Long run: 8 words", input: "{\"words\":[\"myfjuj\",\"j\",\"alf\",\"cajji\",\"mvki\",\"xtbs\",\"c\",\"xata\"],\"k\":53}" },
   ],
 }
 

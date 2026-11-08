@@ -15,8 +15,12 @@ const definition = {
   url: 'https://leetcode.com/problems/good-subsequence-queries/',
   complexity: 'Each query costs O(n times the number of distinct gcd values). The visualization caps n at 8.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[4,8,12,16],"p":2,"queries":[[0,3],[2,6]]}' },
-    { label: 'Example 2', input: '{"nums":[4,5,7,8],"p":3,"queries":[[0,6],[1,9],[2,3]]}' },
+    { label: 'Own case 1', input: '{"nums":[5,9,13,17],"p":3,"queries":[[1,4],[3,7]]}' },
+    { label: 'Own case 2', input: '{"nums":[5,6,8,9],"p":4,"queries":[[1,7],[2,10],[3,4]]}' },
+    { label: 'Smallest pair', input: '{"nums":[1,1],"p":1,"queries":[[0,1]]}' },
+    { label: 'Equal values', input: '{"nums":[6,6,6,6],"p":2,"queries":[[1,6]]}' },
+    { label: 'Extreme values, p at limit', input: '{"nums":[60,1,60,1,60,1,60,1],"p":30,"queries":[[0,60],[7,1],[3,30]]}' },
+    { label: 'Long run: 8 values, 10 queries', input: '{"nums":[7,12,5,39,46,59,37,32],"p":7,"queries":[[3,18],[7,52],[4,11],[5,2],[0,52],[4,46],[6,44],[2,48],[0,28],[3,26]]}' },
   ],
 }
 

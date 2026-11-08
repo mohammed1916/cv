@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/divide-an-array-into-subarrays-with-minimum-cost-ii/',
   complexity: 'O(n * dist * log dist) time for this scan. A sliding window with two heaps is faster. The visualization caps input at 12 numbers.',
   examples: [
-    { label: 'Example', input: '{"nums":[1,3,2,6,4,2],"k":3,"dist":3}' },
+    { label: 'Own case 1', input: '{"nums":[2,4,3,7,5,3],"k":4,"dist":4}' },
     { label: 'Adjacent', input: '{"nums":[5,1,9,1],"k":3,"dist":1}' },
     { label: "Smallest window", input: '{"nums":[1,1,1],"k":3,"dist":1}' },
     { label: "Equal values, exact distance", input: '{"nums":[2,2,2,2],"k":4,"dist":2}' },

@@ -17,6 +17,11 @@ const definition = {
     { label: 'Example 1', input: '{"s":"z"}' },
     { label: 'Example 2', input: '{"s":"babab"}' },
     { label: 'Example 3', input: '{"s":"daccad"}' },
+    { label: 'Single letter', input: '{"s":"a"}' },
+    { label: 'Repeated letters tie', input: '{"s":"aaaa"}' },
+    { label: 'Mixed palindrome', input: '{"s":"abcdcba"}' },
+    { label: 'Largest palindrome, 60 letters', input: '{"s":"tlnualaghbyrhxmwhhgolstuwupptbbtppuwutsloghhwmxhrybhgalaunlt"}' },
+    { label: 'Long run: 59 letters, odd centre', input: '{"s":"afueghvyvozowduaejndfynzteuruquruetznyfdnjeaudwozovyvhgeufa"}' },
   ],
 }
 

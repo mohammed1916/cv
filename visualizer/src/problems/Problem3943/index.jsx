@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums1":[1,2],"nums2":[3,4],"queries":[[2,5],[1,0,0,2],[2,5]]}' },
     { label: 'Example 3', input: '{"nums1":[2,5,8,4],"nums2":[1,3,8],"queries":[[2,9],[1,1,2,1],[2,10]]}' },
+    { label: 'Single entries', input: '{"nums1":[1],"nums2":[2],"queries":[[2,1]]}' },
+    { label: 'Equal entries', input: '{"nums1":[4,4],"nums2":[4,4],"queries":[[1,0,1,4],[2,40]]}' },
+    { label: 'Largest sizes and totals', input: '{"nums1":[9,9,9,9],"nums2":[9,9,9,9,9,9,9,9],"queries":[[2,40],[1,0,7,1],[2,1]]}' },
+    { label: 'Long run: 8 queries', input: '{"nums1":[3,7,5,6],"nums2":[8,2,8,5,7,6,7,2],"queries":[[1,0,7,6],[2,9],[1,0,7,5],[2,8],[1,0,7,7],[2,14],[1,0,7,7],[2,12]]}' },
   ],
 }
 

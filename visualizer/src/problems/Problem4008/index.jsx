@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: "One boosted range", input: "{\"strengths\":[4,2,6],\"boosts\":[[0,1,3]]}" },
     { label: "Large first monster", input: "{\"strengths\":[10,1,1],\"boosts\":[[1,2,2]]}" },
+    { label: "Single monster", input: '{"strengths":[5],"boosts":[]}' },
+    { label: "Equal strengths", input: '{"strengths":[3,3,3],"boosts":[[0,2,3]]}' },
+    { label: "Maximum strengths and boosts", input: '{"strengths":[30,30,30,30,30,30,30,30],"boosts":[[0,7,20],[3,3,20],[7,7,1],[0,0,1],[2,5,20]]}' },
+    { label: "Long run: 8 monsters", input: '{"strengths":[24,25,4,1,18,14,29,18],"boosts":[[6,7,17],[6,6,10],[6,6,4],[6,6,18],[6,6,12]]}' },
   ],
 }
 

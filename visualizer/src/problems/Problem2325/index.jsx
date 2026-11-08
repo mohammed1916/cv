@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/decode-the-message/',
   complexity: 'O(k + m) time for a key of length k and message of length m. The visualization caps the message at 40 characters.',
   examples: [
-    { label: 'Example 1', input: '{"key":"the quick brown fox jumps over the lazy dog","message":"vkbs bs t suepuv"}' },
-    { label: 'Example 2', input: '{"key":"eljuxhpwnyrdgtqkviszcfmabo","message":"zwx hnfx lqantp mnoeius ycgk vcnjrdb"}' },
+    { label: 'Own case 1', input: '{"key":"uif rvjdl cspxo gpy kvnqt pwfs uif mbaz eph","message":"wlct ct u tvfqvw"}' },
+    { label: 'Own case 2', input: '{"key":"fmkvyiqxozsehurlwjtadgnbcp","message":"axy iogy mrbouq nopfjvt zdhl wdoksec"}' },
     { label: 'Identity key, one letter', input: '{"key":"abcdefghijklmnopqrstuvwxyz","message":"a"}' },
     { label: 'Spaces pass through', input: '{"key":"zyxwvutsrqponmlkjihgfedcba","message":" "}' },
     { label: 'Repeated letter reuses its entry', input: '{"key":"zyxwvutsrqponmlkjihgfedcba","message":"abc zzz"}' },

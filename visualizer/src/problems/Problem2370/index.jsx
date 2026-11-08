@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/longest-ideal-subsequence/',
   complexity: 'O(n * 26) time and O(26) space for a string of length n. The visualization caps s at 10 letters.',
   examples: [
-    { label: 'Example 1', input: '{"s":"acfgbd","k":2}' },
-    { label: 'Example 2', input: '{"s":"abcd","k":3}' },
+    { label: 'Own case 1', input: '{"s":"bdghce","k":3}' },
+    { label: 'Own case 2', input: '{"s":"bcde","k":4}' },
     { label: 'Single letter, k zero', input: '{"s":"a","k":0}' },
     { label: 'Repeated letters', input: '{"s":"aaaa","k":1}' },
     { label: 'Largest k', input: '{"s":"zyxwvutsrq","k":25}' },

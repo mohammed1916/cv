@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Odd helper works', input: '{"nums1":[3,6,9]}' },
     { label: 'Fails', input: '{"nums1":[5,4]}' },
+    { label: 'Single value', input: '{"nums1":[7]}' },
+    { label: 'Two values at the top', input: '{"nums1":[100,99]}' },
+    { label: 'Mostly even run', input: '{"nums1":[2,4,6,8,10,12,14,16,18,20,22,24]}' },
+    { label: 'Long run: 12 values', input: '{"nums1":[97,82,27,28,20,64,25,7,24,50,88,49]}' },
   ],
 }
 

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Decreasing', input: '{"nums":[6,4,3]}' },
     { label: 'Spike', input: '{"nums":[1,9,2,2]}' },
+    { label: 'One value', input: '{"nums":[4]}' },
+    { label: 'Equal values', input: '{"nums":[5,5,5]}' },
+    { label: 'Largest values alternate', input: '{"nums":[30,1,30,1,30,1,30,1,30,1,30,1]}' },
+    { label: 'Long run: 12 values', input: '{"nums":[24,18,1,3,4,1,3,1,15,21,23,3]}' },
   ],
 }
 

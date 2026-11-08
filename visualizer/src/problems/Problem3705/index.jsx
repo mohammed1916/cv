@@ -7,6 +7,10 @@ const complexity = 'O(n) time for n order rows, plus a sort of the distinct cust
 const examples = [
   { label: 'Sample', input: '{"orders":[[1,7,18],[2,3,19],[3,7,9],[4,7,19],[5,3,20],[6,7,18],[7,5,18],[8,3,18]]}' },
   { label: 'Boundary', input: '{"orders":[[1,4,19],[2,4,18],[3,4,20],[4,4,17],[5,9,18],[6,9,19],[7,9,18]]}' },
+    { label: 'Single order', input: '{"orders":[[1,1,9]]}' },
+    { label: 'Equal hours tie', input: '{"orders":[[1,2,10],[2,2,10],[3,2,10]]}' },
+    { label: 'Boundary customers and hours', input: '{"orders":[[1,50,0],[2,50,23],[3,1,23]]}' },
+    { label: 'Long run: 12 orders', input: '{"orders":[[1,3,8],[2,28,13],[3,3,18],[4,28,23],[5,3,4],[6,28,9],[7,3,14],[8,28,19],[9,3,0],[10,28,5],[11,3,10],[12,28,15]]}' },
 ]
 
 const definition = { number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, inputLabel, complexity, examples }

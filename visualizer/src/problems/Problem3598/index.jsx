@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"words":["jump","run","run","jump","run"]}' },
     { label: 'Example 2', input: '{"words":["dog","racer","car"]}' },
+    { label: 'Single short word', input: '{"words":["a"]}' },
+    { label: 'Equal words', input: '{"words":["run","run","run"]}' },
+    { label: 'Five-letter words', input: '{"words":["aaaaa","aaaab","aaaaa","aaa","aaaaa"]}' },
+    { label: 'Long run: 8 words', input: '{"words":["ab","a","bd","ccdc","dbdab","cdc","daab","ccb"]}' },
   ],
 }
 

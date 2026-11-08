@@ -20,6 +20,10 @@ const definition = {
   examples: [
     { label: 'Two rounds', input: '[4, 4, 2, 9, 2]' },
     { label: 'Single copies', input: '[7, 3, 5]' },
+    { label: "Single value", input: "[1]" },
+    { label: "Equal values", input: "[3,3,3,3]" },
+    { label: "Largest and smallest values", input: "[100,1,100,1,100]" },
+    { label: "Long run: 24 values", input: "[10,66,50,40,74,9,38,91,72,38,2,99,77,89,15,12,52,2,6,28,73,90,46,44]" },
   ],
 }
 

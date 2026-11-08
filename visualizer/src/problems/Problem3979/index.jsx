@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Gap of two', input: '{"nums":[4,1,9,2,7],"k":2}' },
     { label: 'Adjacent allowed', input: '{"nums":[3,8,1],"k":1}' },
+    { label: "Two values", input: '{"nums":[5,9],"k":1}' },
+    { label: "Equal values", input: '{"nums":[6,6,6,6],"k":3}' },
+    { label: "Largest gaps", input: '{"nums":[1,50,1,50,1,50],"k":5}' },
+    { label: "Long run: 12 values", input: '{"nums":[39,10,14,48,13,39,23,1,35,9,9,31],"k":4}' },
   ],
 }
 

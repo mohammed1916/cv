@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"intervals":[[1,2],[2,3],[3,4]]}' },
     { label: 'Example 2', input: '{"intervals":[[1,5],[2,4],[3,6]]}' },
+    { label: "Identical intervals", input: "{\"intervals\":[[7,7],[7,7]]}" },
+    { label: "Touching endpoints", input: "{\"intervals\":[[0,5],[5,9]]}" },
+    { label: "Largest endpoints", input: "{\"intervals\":[[0,1000000000],[999999999,1000000000]]}" },
+    { label: "Long run: twelve intervals", input: "{\"intervals\":[[91192986,978775881],[687519773,770936711],[996282891,998406863],[256918647,791960163],[610313232,777884720],[295301567,649017316],[105869195,474172595],[414514260,424951430],[503740507,532528934],[241004791,652607591],[344109055,664319905],[262128728,421386460]]}" },
   ],
 }
 

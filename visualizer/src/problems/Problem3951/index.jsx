@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Two blocks', input: '{"bulbs":6,"brightness":3,"intervals":[[0,2],[5,6]]}' },
     { label: 'Overlap', input: '{"bulbs":8,"brightness":5,"intervals":[[1,4],[3,6],[10,10]]}' },
+    { label: 'Single bulb', input: '{"bulbs":1,"brightness":1,"intervals":[[0,0]]}' },
+    { label: 'Repeated interval', input: '{"bulbs":4,"brightness":2,"intervals":[[0,1],[0,1]]}' },
+    { label: 'Full range and edge points', input: '{"bulbs":12,"brightness":12,"intervals":[[0,40],[40,40],[0,0],[20,20],[5,35],[1,2],[3,4],[39,40]]}' },
+    { label: 'Long run: 8 intervals', input: '{"bulbs":12,"brightness":5,"intervals":[[20,20],[5,38],[34,34],[10,39],[5,10],[38,40],[16,18],[9,27]]}' },
   ],
 }
 

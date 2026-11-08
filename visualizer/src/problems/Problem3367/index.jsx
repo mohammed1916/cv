@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Path', input: '{"n":3,"edges":[[0,1,5],[1,2,3]],"k":1}' },
     { label: 'Star', input: '{"n":4,"edges":[[0,1,4],[0,2,9],[0,3,6]],"k":2}' },
+    { label: 'Single edge', input: '{"n":2,"edges":[[0,1,1]],"k":1}' },
+    { label: 'Equal weights on a star', input: '{"n":4,"edges":[[0,1,5],[0,2,5],[0,3,5]],"k":1}' },
+    { label: 'Largest weights on a path', input: '{"n":10,"edges":[[0,1,50],[1,2,50],[2,3,50],[3,4,50],[4,5,50],[5,6,50],[6,7,50],[7,8,50],[8,9,50]],"k":4}' },
+    { label: 'Long run: 10 nodes', input: '{"n":10,"edges":[[0,1,22],[0,2,32],[1,3,46],[3,4,22],[1,5,8],[1,6,27],[0,7,40],[5,8,46],[0,9,47]],"k":3}' },
   ],
 }
 

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Shared end', input: '{"first":"cabad","second":"adbac"}' },
     { label: 'Contained', input: '{"first":"stone","second":"one"}' },
+    { label: 'One letter each', input: '{"first":"a","second":"b"}' },
+    { label: 'Equal words', input: '{"first":"abc","second":"abc"}' },
+    { label: 'Longest words', input: '{"first":"abcdefgh","second":"hgfedcba"}' },
+    { label: 'Long run: 8 letters each', input: '{"first":"fxlcfopo","second":"vceiqjcu"}' },
   ],
 }
 

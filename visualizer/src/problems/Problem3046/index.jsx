@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/split-the-array/',
   complexity: 'O(n) time and O(n) space.',
   examples: [
-    { label: 'Example 1', input: '[1,1,2,2,3,4]' },
-    { label: 'Example 2', input: '[1,1,1,1]' },
+    { label: 'Own case 1', input: '[2,2,3,3,4,5]' },
+    { label: 'Own case 2', input: '[3,3,3,3]' },
     { label: 'Two values', input: '[1,1]' },
     { label: 'Equal values', input: '[2,2,2,2]' },
     { label: 'Extreme values', input: '[6,6,1,1,6,6,1,1,6,6,1,1]' },

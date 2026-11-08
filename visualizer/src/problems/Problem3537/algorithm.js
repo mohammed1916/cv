@@ -55,6 +55,9 @@ export const url = 'https://leetcode.com/problems/fill-a-special-grid/'
 export const examples = [
   { label: 'Three levels', input: '{"n":3}' },
   { label: 'Largest shown', input: '{"n":4}' },
+    { label: 'Zero', input: '{"n":0}' },
+    { label: 'Single row and column', input: '{"n":1}' },
+    { label: 'Largest shown size, n = 4', input: '{"n":4}' },
 ]
 
 // Quadrants in the order they receive values, as offsets in half-size steps from the square's corner.

@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: "Small ratio", input: "{\"nums\":[1,2,3,4],\"a\":1,\"b\":1}" },
     { label: "Mixed values", input: "{\"nums\":[2,5,4,7,6],\"a\":2,\"b\":3}" },
+    { label: "Single value", input: '{"nums":[5],"a":1,"b":1}' },
+    { label: "Equal ratio tie", input: '{"nums":[4,8,12],"a":2,"b":4}' },
+    { label: "Largest ratio", input: '{"nums":[1000,1,1000],"a":1000,"b":1}' },
+    { label: "Long run: 12 values", input: '{"nums":[791,92,185,141,581,691,234,330,965,8,691,520],"a":37,"b":120}' },
   ],
 }
 

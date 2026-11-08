@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'True', input: '{"s":"cat","t":"chat"}' },
     { label: 'False', input: '{"s":"plane","t":"apple"}' },
+    { label: "Single letters", input: '{"s":"a","t":"a"}' },
+    { label: "Repeated letters", input: '{"s":"aa","t":"aaa"}' },
+    { label: "Longest strings", input: '{"s":"abcdefghijkl","t":"abcdefghijklmnop"}' },
+    { label: "Long run: 12 and 16 letters", input: '{"s":"uoacxterskzi","t":"uqsdpnppfllalyrl"}' },
   ],
 }
 

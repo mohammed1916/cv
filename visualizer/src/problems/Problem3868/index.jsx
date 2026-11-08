@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums1":[1,1,2],"nums2":[2,3,3]}' },
     { label: 'Impossible', input: '{"nums1":[1],"nums2":[2]}' },
+    { label: 'Single pair', input: '{"nums1":[9],"nums2":[9]}' },
+    { label: 'Equal pairs', input: '{"nums1":[5,5],"nums2":[5,5]}' },
+    { label: 'Largest values, ten items', input: '{"nums1":[9,9,9,9,9,9,9,9,9,9],"nums2":[1,1,1,1,1,1,1,1,1,1]}' },
+    { label: 'Long run: 10 items', input: '{"nums1":[2,3,3,1,5,5,1,9,1,2],"nums2":[4,8,2,8,4,2,3,4,6,7]}' },
   ],
 }
 

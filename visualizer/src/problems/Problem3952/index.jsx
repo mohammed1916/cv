@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Stay or move', input: '{"values":[4,2,7,1],"tokens":"0110"}' },
     { label: 'Crowded tokens', input: '{"values":[5,1,3,8,2],"tokens":"11011"}' },
+    { label: 'Single value', input: '{"values":[9],"tokens":"1"}' },
+    { label: 'Equal values', input: '{"values":[4,4,4],"tokens":"010"}' },
+    { label: 'Largest values alternating', input: '{"values":[100,1,100,1,100,1,100,1,100,1,100,1],"tokens":"101010101010"}' },
+    { label: 'Long run: 12 values', input: '{"values":[52,93,8,34,96,57,4,26,44,84,59,81],"tokens":"110110011110"}' },
   ],
 }
 

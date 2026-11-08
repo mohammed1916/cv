@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/cat-and-mouse/',
   complexity: 'O(n^3) time and O(n^2) space for n nodes (states times moves). Graphs are capped at 16 nodes.',
   examples: [
-    { label: 'Example 1 (draw)', input: '[[2,5],[3],[0,4,5],[1,4,5],[2,3],[0,2,3]]' },
-    { label: 'Example 2 (mouse)', input: '[[1,3],[0],[3],[0,2]]' },
+    { label: 'Own case 1', input: '[[5,2],[3],[5,4,0],[5,4,1],[3,2],[3,2,0]]' },
+    { label: 'Own case 2', input: '[[3,1],[0],[3],[2,0]]' },
     { label: 'Another mouse win', input: '[[1,2],[0,2],[0,1,3],[2]]' },
     { label: 'Smallest path', input: '[[1],[0,2],[1]]' },
     { label: 'Star with three leaves', input: '[[1,2,3],[0],[0],[0]]' },

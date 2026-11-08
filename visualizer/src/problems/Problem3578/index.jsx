@@ -14,8 +14,12 @@ const definition = {
   url: 'https://leetcode.com/problems/count-partitions-with-max-min-difference-at-most-k/',
   complexity: 'O(n^2) time for the direct scan and O(n) space. The visualization caps input at 12 numbers.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[9,4,1,3,7],"k":4}' },
+    { label: 'Own case 1', input: '{"nums":[10,5,2,4,8],"k":5}' },
     { label: 'k = 0', input: '{"nums":[1,2,3,4],"k":0}' },
+    { label: 'Single number, k 0', input: '{"nums":[7],"k":0}' },
+    { label: 'Equal numbers', input: '{"nums":[5,5,5,5],"k":5}' },
+    { label: 'Largest k and numbers', input: '{"nums":[20,1,20,1,20,1,20,1,20,1,20,1],"k":20}' },
+    { label: 'Long run: 12 numbers', input: '{"nums":[6,4,2,4,13,13,2,17,15,7,7,10],"k":10}' },
   ],
 }
 

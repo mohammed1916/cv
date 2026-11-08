@@ -16,7 +16,7 @@ const definition = {
   complexity: 'O(years + 12) time for the visualization. The closed form runs in O(1).',
   examples: [
     { label: 'Example 1', input: '{"day":31,"month":8,"year":2019}' },
-    { label: 'Example 2', input: '{"day":18,"month":7,"year":1999}' },
+    { label: 'Own case 2', input: '{"day":19,"month":8,"year":2000}' },
     { label: 'Earliest allowed date', input: '{"day":1,"month":1,"year":1971}' },
     { label: 'Latest allowed date', input: '{"day":31,"month":12,"year":2100}' },
     { label: 'Leap day', input: '{"day":29,"month":2,"year":2000}' },

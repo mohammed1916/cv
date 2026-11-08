@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/jump-game-v/',
   complexity: 'O(n * d) time and O(n) memory with memoization. The visualization caps input at 12 values.',
   examples: [
-    { label: 'Example 1', input: '{"arr":[6,4,14,6,8,13,9,7,10,6,12],"d":2}' },
+    { label: 'Own case 1', input: '{"arr":[7,5,15,7,9,14,10,8,11,7,13],"d":3}' },
     { label: 'Flat', input: '{"arr":[3,3,3,3,3],"d":3}' },
     { label: "Single value", input: "{\"arr\":[5],\"d\":1}" },
     { label: "Repeated values", input: "{\"arr\":[9,1,9,1],\"d\":2}" },

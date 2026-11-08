@@ -16,6 +16,10 @@ const definition = {
   complexity: 'O(log n) per add, edit, or execTop with a max heap and lazy deletion. The visualization caps input at 12 operations.',
   examples: [
     { label: 'Example', input: '{"operations":["add","add","add","add","edit","execTop","rmv","add","execTop"],"arguments":[[1,101,10],[2,102,20],[3,103,15],[4,104,5],[102,8],[],[101],[5,105,15],[]]}' },
+    { label: 'Single task runs', input: '{"operations":["add","execTop"],"arguments":[[1,1,0],[]]}' },
+    { label: 'Equal priority, larger id first', input: '{"operations":["add","add","execTop"],"arguments":[[1,10,5],[2,20,5],[]]}' },
+    { label: 'Priority limits and an edit', input: '{"operations":["add","add","edit","execTop"],"arguments":[[5,1000,20],[1,1,0],[1,20],[]]}' },
+    { label: 'Long run: 12 operations', input: '{"operations":["add","add","add","add","add","edit","execTop","rmv","add","execTop","execTop","execTop"],"arguments":[[1,11,4],[2,12,9],[3,13,9],[4,14,2],[5,15,20],[13,7],[],[14],[1,16,9],[],[],[]]}' },
   ],
 }
 

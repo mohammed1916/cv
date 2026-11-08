@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Six values', input: '{"nums":[5,8,2,9,4,7],"k":3}' },
     { label: 'All ones', input: '{"nums":[1,1,1,1],"k":2}' },
+    { label: 'Single value', input: '{"nums":[4],"k":2}' },
+    { label: 'Equal values', input: '{"nums":[7,7],"k":2}' },
+    { label: 'Alternating extremes', input: '{"nums":[20,0,20,0,20,0,20,0],"k":6}' },
+    { label: 'Long run: 8 values', input: '{"nums":[7,14,9,0,0,14,14,16],"k":5}' },
   ],
 }
 

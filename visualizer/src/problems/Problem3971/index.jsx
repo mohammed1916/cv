@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"value":[6,5,4],"decay":[2,1,1],"m":4}' },
     { label: 'Example 2', input: '{"value":[7,2,2],"decay":[3,2,1],"m":2}' },
+    { label: "Single item", input: '{"value":[9],"decay":[9],"m":1}' },
+    { label: "Equal items", input: '{"value":[5,5,5],"decay":[2,2,2],"m":3}' },
+    { label: "Largest values with slow decay", input: '{"value":[9,9,9,9,9,9],"decay":[1,1,1,1,1,1],"m":12}' },
+    { label: "Long run: 6 items, m 12", input: '{"value":[7,5,8,6,9,8],"decay":[7,5,5,7,6,5],"m":12}' },
   ],
 }
 

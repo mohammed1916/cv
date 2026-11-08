@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/selling-pieces-of-wood/',
   complexity: 'O(m * n * (m + n)) time and O(m * n) space. The visualization caps the board at 6 by 6 with up to 6 pieces.',
   examples: [
-    { label: 'Example 1', input: '{"m":3,"n":5,"prices":[[1,4,2],[2,2,7],[2,1,3]]}' },
-    { label: 'Example 2', input: '{"m":4,"n":6,"prices":[[3,2,10],[1,4,2],[4,1,3]]}' },
+    { label: 'Own case 1', input: '{"m":4,"n":6,"prices":[[2,5,3],[3,3,8],[3,2,4]]}' },
+    { label: 'Own case 2', input: '{"m":4,"n":6,"prices":[[4,1,3],[1,4,2],[3,2,10]]}' },
     { label: 'One cell board', input: '{"m":1,"n":1,"prices":[[1,1,4]]}' },
     { label: 'Equal cut values', input: '{"m":2,"n":2,"prices":[[1,1,3],[2,2,12]]}' },
     { label: 'Only one piece type', input: '{"m":3,"n":4,"prices":[[3,4,50]]}' },

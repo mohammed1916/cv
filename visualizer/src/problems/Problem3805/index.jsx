@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Shifted pairs', input: '{"words":["abc","bcd","xyz","xab"]}' },
     { label: 'Same letters', input: '{"words":["aa","bb","cd"]}' },
+    { label: 'One word', input: '{"words":["a"]}' },
+    { label: 'Equal words', input: '{"words":["ab","ab"]}' },
+    { label: 'Twelve shifts of one word', input: '{"words":["abcdefgh","bcdefgha","cdefghab","defghabc","efghabcd","fghabcde","ghabcdef","habcdefg","abcdefgh","bcdefgha","cdefghab","defghabc"]}' },
+    { label: 'Long run: 12 words', input: '{"words":["ffsfkqoh","zeplihdq","gsygkqmv","zsqebbln","gzikqlfr","beqhdjzy","rjesngja","nknmvigr","opufnhoq","xfspdtrf","cqpybjnl","sagglpds"]}' },
   ],
 }
 

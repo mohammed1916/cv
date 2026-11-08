@@ -15,6 +15,11 @@ const definition = {
     { label: "One book in each tier", input: "[1,4,9]" },
     { label: "Long overdue books", input: "[12,3,1,5]" },
     { label: "Boundary days", input: "[5,6,2,1]" },
+    { label: 'Single book', input: '[1]' },
+    { label: 'Equal late counts', input: '[7,7,7]' },
+    { label: 'Largest late counts', input: '[60,59,60]' },
+    { label: 'No late books', input: '[]' },
+    { label: 'Long run: 12 books', input: '[43,14,57,40,23,58,25,44,35,30,37,36]' },
   ],
 }
 

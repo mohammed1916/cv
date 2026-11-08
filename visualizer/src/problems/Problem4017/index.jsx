@@ -18,6 +18,11 @@ const definition = {
   examples: [
     { label: "Update then query", input: "{\"nums\":[1,3,2,4,1],\"queries\":[[1,0,4],[2,2,0],[1,0,4]]}" },
     { label: "Alternating", input: "{\"nums\":[5,1,5,1,5,1,5],\"queries\":[[1,0,6],[1,1,5]]}" },
+    { label: "Smallest array", input: "{\"nums\":[0,0,0],\"queries\":[[1,0,2]]}" },
+    { label: "Equal neighbours are not peaks", input: "{\"nums\":[4,4,4,4],\"queries\":[[1,0,3],[2,1,9],[1,0,3]]}" },
+    { label: "Largest value update", input: "{\"nums\":[100000,0,100000,0,100000],\"queries\":[[1,0,4],[2,1,100000],[1,0,4]]}" },
+    { label: "Monotone range has no peak", input: "{\"nums\":[1,2,3,4],\"queries\":[[1,0,3]]}" },
+    { label: "Long run: 14 values, 10 queries", input: "{\"nums\":[9029,57535,63342,60250,27805,98382,65789,79970,9406,68952,71339,8634,81668,2924],\"queries\":[[1,9,12],[1,5,8],[2,2,87785],[1,5,9],[1,3,4],[2,6,47850],[1,8,11],[1,10,11],[2,12,62727],[1,0,5]]}" },
   ],
 }
 

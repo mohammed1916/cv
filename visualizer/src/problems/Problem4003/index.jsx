@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"m":2,"n":2,"penalty":[[5,3],[1,4]]}' },
     { label: 'Example 3', input: '{"m":2,"n":3,"penalty":[[2,6,1],[3,0,5]]}' },
+    { label: "Two cells", input: '{"m":1,"n":2,"penalty":[[4,4]]}' },
+    { label: "Tied penalties", input: '{"m":2,"n":2,"penalty":[[1,1],[1,1]]}' },
+    { label: "Largest penalties in a checkerboard", input: '{"m":4,"n":4,"penalty":[[100000,0,100000,0],[0,100000,0,100000],[100000,0,100000,0],[0,100000,0,100000]]}' },
+    { label: "Long run: 4 by 4 grid", input: '{"m":4,"n":4,"penalty":[[78744,36574,70675,84438],[85647,64886,91156,97699],[92550,93198,11636,10958],[99453,21508,32117,24218]]}' },
   ],
 }
 

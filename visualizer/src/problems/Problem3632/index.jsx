@@ -16,6 +16,10 @@ const definition = {
     { label: 'Small array', input: '{"nums":[1,2,3],"k":2}' },
     { label: 'Pair of large values', input: '{"nums":[8,4],"k":12}' },
     { label: 'Nothing reaches k', input: '{"nums":[1,2],"k":4}' },
+    { label: 'One value, k of zero', input: '{"nums":[0],"k":0}' },
+    { label: 'Equal values', input: '{"nums":[3,3,3,3],"k":3}' },
+    { label: 'Largest values and k', input: '{"nums":[15,15,15,15,15,15,15,15,15,15,15,15],"k":31}' },
+    { label: 'Long run: 12 items', input: '{"nums":[11,6,8,12,12,7,5,3,5,2,3,8],"k":7}' },
   ],
 }
 

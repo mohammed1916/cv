@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[2,8,4],"lower":1,"upper":10}' },
     { label: 'Example 2', input: '{"nums":[1,1],"lower":5,"upper":7}' },
+    { label: "One number, one value", input: "{\"nums\":[5],\"lower\":5,\"upper\":5}" },
+    { label: "Repeated values", input: "{\"nums\":[3,3,3],\"lower\":3,\"upper\":3}" },
+    { label: "Range at the top limit", input: "{\"nums\":[100000,1,100000],\"lower\":99940,\"upper\":100000}" },
+    { label: "Long run: 16 numbers", input: "{\"nums\":[76581,5236,8506,82944,63948,86755,37182,77476,9870,96706,93181,96790,36318,2463,71331,71126],\"lower\":9052,\"upper\":9112}" },
   ],
 }
 

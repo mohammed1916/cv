@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/probability-of-a-two-boxes-having-the-same-number-of-distinct-balls/',
   complexity: 'O(colours * T^2 * k^2) time for the state table. The visualization caps the total at 16 balls.',
   examples: [
-    { label: 'Example 2', input: '[2,1,1]' },
+    { label: 'Own case 1', input: '[4,3,3]' },
     { label: 'Four colours', input: '[1,2,1,2]' },
     { label: 'Two colours, one ball each', input: '[1,1]' },
     { label: 'Equal counts', input: '[2,2]' },

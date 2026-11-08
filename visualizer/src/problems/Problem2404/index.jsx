@@ -15,9 +15,9 @@ const definition = {
   url: 'https://leetcode.com/problems/most-frequent-even-element/',
   complexity: 'O(n) time and O(n) space.',
   examples: [
-    { label: 'Example 1', input: '[0,1,2,2,4,4,1]' },
+    { label: 'Own case 1', input: '[1,2,3,3,5,5,2]' },
     { label: 'Example 2', input: '[1,3,5]' },
-    { label: 'Example 3', input: '[29,47,21,41,13,37,25,7]' },
+    { label: 'Own case 2', input: '[30,48,22,42,14,38,26,8]' },
     { label: 'Single zero', input: '[0]' },
     { label: 'Repeated values', input: '[7,7,7,7]' },
     { label: 'Extremes, 20 values', input: '[100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0]' },

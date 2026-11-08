@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"prices":[8,25,40],"discounts":[20,35]}' },
     { label: 'Example 2', input: '{"prices":[12,7,9,30],"discounts":[15,5,25]}' },
+    { label: "Single item", input: '{"prices":[9],"discounts":[10]}' },
+    { label: "Equal prices", input: '{"prices":[20,20,20],"discounts":[25,25]}' },
+    { label: "Maximum prices and discounts", input: '{"prices":[100000,100000,100000,100000,100000,100000,100000,100000],"discounts":[100,100,100,100,100,100,100,100]}' },
+    { label: "Long run: 8 prices, 8 discounts", input: '{"prices":[79171,36349,23854,25156,57964,93323,52638,7803],"discounts":[80,46,93,29,25,69,96,100]}' },
   ],
 }
 

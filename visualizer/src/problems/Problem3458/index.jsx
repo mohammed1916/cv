@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Three blocks', input: '{"s":"aabbcc","k":3}' },
     { label: 'Two blocks', input: '{"s":"xyzx","k":2}' },
+    { label: 'Smallest string', input: '{"s":"ab","k":0}' },
+    { label: 'Repeated letter tie', input: '{"s":"aa","k":1}' },
+    { label: 'Longest string, all letters', input: '{"s":"abcdefghijklmnop","k":16}' },
+    { label: 'Long run: 16 letters', input: '{"s":"hbfxqncflfqfhvvi","k":5}' },
   ],
 }
 

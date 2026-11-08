@@ -12,8 +12,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended-ii/',
   complexity: 'O(n * k) table cells after an O(n log n) sort. The visualization caps input at 8 events.',
   examples: [
-    { label: 'Example 1', input: '{"events":[[1,2,4],[3,4,3],[2,3,1]],"k":2}' },
-    { label: 'Example 2', input: '{"events":[[1,1,1],[2,2,2],[3,3,3],[4,4,4]],"k":3}' },
+    { label: 'Own case 1', input: '{"events":[[2,3,5],[4,5,4],[3,4,2]],"k":3}' },
+    { label: 'Own case 2', input: '{"events":[[2,2,2],[3,3,3],[4,4,4],[5,5,5]],"k":4}' },
   { label: 'Single event', input: "{\"events\":[[1,1,5]],\"k\":1}" },
   { label: 'Identical events', input: "{\"events\":[[2,4,7],[2,4,7],[2,4,7]],\"k\":2}" },
   { label: 'Full range, largest values', input: "{\"events\":[[1,20,1000000],[1,20,1000000],[1,20,1000000],[1,20,1000000]],\"k\":4}" },

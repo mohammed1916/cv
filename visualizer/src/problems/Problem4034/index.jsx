@@ -19,6 +19,10 @@ const definition = {
   examples: [
     { label: 'Two moves', input: '{"source":[3,2],"target":[6,7]}' },
     { label: 'Different colours', input: '{"source":[1,1],"target":[2,3]}' },
+    { label: "Adjacent squares", input: "{\"source\":[1,1],\"target\":[1,2]}" },
+    { label: "Symmetric corners", input: "{\"source\":[1,1],\"target\":[8,8]}" },
+    { label: "Opposite corners", input: "{\"source\":[1,8],\"target\":[8,1]}" },
+    { label: "Long run: distant squares", input: "{\"source\":[2,7],\"target\":[7,2]}" },
   ],
 }
 

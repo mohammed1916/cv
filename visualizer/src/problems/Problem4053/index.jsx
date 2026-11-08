@@ -20,6 +20,10 @@ const definition = {
   examples: [
     { label: 'Mixed parities', input: '[10, 21, 34]' },
     { label: 'Already palindromes', input: '[1, 22, 303]' },
+    { label: "Single value", input: "[1]" },
+    { label: "Equal values", input: "[5,5,5]" },
+    { label: "Largest values", input: "[1000000000,999999999]" },
+    { label: "Long run: twelve values", input: "[91103075,636516379,282109352,700505987,124460083,812645212,197015351,127997322,558688571,455966049,937110489,260379461]" },
   ],
 }
 

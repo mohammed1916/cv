@@ -23,6 +23,10 @@ const definition = {
   examples: [
     { label: 'Smaller value blocks', input: '[2, 1, 3]' },
     { label: 'Equal values pass', input: '[3, 5, 3, 7]' },
+    { label: "Three values", input: "[1,2,3]" },
+    { label: "Equal values", input: "[4,4,4]" },
+    { label: "Largest values", input: "[1000000000,1,1000000000]" },
+    { label: "Long run: 16 values", input: "[91125553,721548828,883461957,592117264,92415785,2334984,711991175,526005710,821594736,199478500,26658258,820769390,359180113,983212255,638757903,482688858]" },
   ],
 }
 

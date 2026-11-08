@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Zero and one', input: '{"s":"0110"}' },
     { label: 'Two digit index', input: '{"s":"01234567810"}' },
+    { label: 'One digit', input: '{"s":"0"}' },
+    { label: 'Equal digits', input: '{"s":"0000"}' },
+    { label: 'Thirty digits', input: '{"s":"987654321098765432109876543210"}' },
+    { label: 'Long run: 30 digits', input: '{"s":"707893226806538212426395264285"}' },
   ],
 }
 

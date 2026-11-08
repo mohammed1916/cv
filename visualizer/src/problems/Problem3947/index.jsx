@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Four types', input: '{"budget":10,"types":[[2,1],[3,2],[4,4],[5,3]]}' },
     { label: 'Tight budget', input: '{"budget":4,"types":[[3,2],[2,4],[5,6]]}' },
+    { label: 'Zero budget', input: '{"budget":0,"types":[[1,1]]}' },
+    { label: 'Equal types', input: '{"budget":6,"types":[[3,2],[3,2],[3,2]]}' },
+    { label: 'Largest budget and types', input: '{"budget":30,"types":[[9,12],[9,12],[9,12],[9,12],[9,12],[9,12]]}' },
+    { label: 'Long run: 6 types', input: '{"budget":25,"types":[[4,5],[3,4],[4,2],[1,9],[9,5],[3,12]]}' },
   ],
 }
 

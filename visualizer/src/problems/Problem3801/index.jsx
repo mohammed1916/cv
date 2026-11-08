@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"lists":[[1,3,5],[2,4],[6,7,8]]}' },
     { label: 'Example 2', input: '{"lists":[[1,1,5],[1,4,7,8]]}' },
+    { label: 'Single values', input: '{"lists":[[0],[0]]}' },
+    { label: 'Equal values in two lists', input: '{"lists":[[1,1],[1,1]]}' },
+    { label: 'Total length 12 with extremes', input: '{"lists":[[-20,-20,20,20],[-5,0,0],[1,1,1],[20,20]]}' },
+    { label: 'Long run: 4 lists, 12 values', input: '{"lists":[[-20,-16,-7],[-1,0,2],[1,3,7],[6,14,20]]}' },
   ],
 }
 

@@ -16,8 +16,8 @@ const definition = {
   url: 'https://leetcode.com/problems/longest-even-odd-subarray-with-threshold/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps input at 12 values.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[3,2,5,4],"threshold":5}' },
-    { label: 'Example 3', input: '{"nums":[2,3,4,5],"threshold":4}' },
+    { label: 'Own case 1', input: '{"nums":[4,3,6,5],"threshold":6}' },
+    { label: 'Own case 2', input: '{"nums":[3,4,5,6],"threshold":5}' },
     { label: 'Single element', input: '{"nums":[7],"threshold":7}' },
     { label: 'Equal values', input: '{"nums":[4,4,4],"threshold":4}' },
     { label: 'Boundary: alternating 10 and 1 at threshold 10', input: '{"nums":[10,1,10,1,10,1,10,1,10,1,10,1],"threshold":10}' },

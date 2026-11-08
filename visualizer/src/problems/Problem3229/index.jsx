@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-operations-to-make-array-equal-to-target/',
   complexity: 'O(n) time and O(1) space. The visualization caps input at 10 entries.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[3,5,1,2],"target":[4,6,2,4]}' },
-    { label: 'Example 2', input: '{"nums":[1,3,2],"target":[2,1,4]}' },
+    { label: 'Own case 1', input: '{"nums":[4,6,2,3],"target":[5,7,3,5]}' },
+    { label: 'Own case 2', input: '{"nums":[2,4,3],"target":[3,2,5]}' },
     { label: 'One pair', input: '{"nums":[1],"target":[1]}' },
     { label: 'Equal values tie', input: '{"nums":[5,5,5],"target":[5,5,5]}' },
     { label: 'Largest values alternating', input: '{"nums":[20,1,20,1,20,1,20,1,20,1],"target":[1,20,1,20,1,20,1,20,1,20]}' },

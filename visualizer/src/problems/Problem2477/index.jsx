@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-fuel-cost-to-report-to-the-capital/',
   complexity: 'O(n) time and O(n) space for the depth-first walk. The visualization caps input at 10 cities.',
   examples: [
-    { label: 'Example 1', input: '{"roads":[[0,1],[0,2],[0,3]],"seats":5}' },
-    { label: 'Example 2', input: '{"roads":[[3,1],[3,2],[1,0],[0,4],[0,5],[4,6]],"seats":2}' },
+    { label: 'Own case 1', input: '{"roads":[[0,3],[0,2],[0,1]],"seats":5}' },
+    { label: 'Own case 2', input: '{"roads":[[4,6],[0,5],[0,4],[1,0],[3,2],[3,1]],"seats":2}' },
     { label: 'No roads', input: '{"roads":[],"seats":1}' },
     { label: 'Two equal branches', input: '{"roads":[[0,1],[0,2]],"seats":2}' },
     { label: 'Chain with one seat', input: '{"roads":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9]],"seats":1}' },

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'One group', input: '{"n":3,"edges":[[0,1],[1,2]],"group":[1,1,1]}' },
     { label: 'Split groups', input: '{"n":4,"edges":[[0,1],[0,2],[0,3]],"group":[1,1,4,4]}' },
+    { label: "Single node", input: "{\"n\":1,\"edges\":[],\"group\":[3]}" },
+    { label: "Equal groups", input: "{\"n\":3,\"edges\":[[0,1],[1,2]],\"group\":[2,2,2]}" },
+    { label: "Alternating labels on a path of 12", input: "{\"n\":12,\"edges\":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11]],\"group\":[20,1,20,1,20,1,20,1,20,1,20,1]}" },
+    { label: "Long run: random tree of 12", input: "{\"n\":12,\"edges\":[[0,1],[0,2],[0,3],[1,4],[4,5],[2,6],[5,7],[7,8],[2,9],[7,10],[2,11]],\"group\":[2,1,3,4,2,1,4,2,2,2,3,4]}" },
   ],
 }
 

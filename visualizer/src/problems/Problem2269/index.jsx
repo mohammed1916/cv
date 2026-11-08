@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-k-beauty-of-a-number/',
   complexity: 'O(d * k) time for d digits, which is constant for a bounded number. The visualization caps num at 10 digits.',
   examples: [
-    { label: 'Example 1', input: '{"num":240,"k":2}' },
+    { label: 'Own case 1', input: '{"num":241,"k":3}' },
     { label: 'Zero window', input: '{"num":100,"k":2}' },
     { label: 'Single digit', input: '{"num":7,"k":1}' },
     { label: 'Repeated digits', input: '{"num":1111111,"k":3}' },

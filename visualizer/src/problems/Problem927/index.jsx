@@ -19,7 +19,7 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[1,0,1,0,1]' },
     { label: 'Example 2', input: '[1,1,0,1,1]' },
-    { label: 'Example 3', input: '[1,1,0,0,1]' },
+    { label: 'Own case 3', input: '[1,0,0,1,1]' },
     { label: 'Leading zeros', input: '[0,1,0,0,1,0,0,1,0,0]' },
     { label: 'Three zeros', input: '[0,0,0]' },
     { label: 'Equal values', input: '[1,1,1,1]' },

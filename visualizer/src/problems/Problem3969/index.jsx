@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Small values', input: '{"nums":[1,2,3,4],"x":3}' },
     { label: 'Repeated digit', input: '{"nums":[5,5,10,1],"x":5}' },
+    { label: "Single value", input: '{"nums":[7],"x":7}' },
+    { label: "Equal values", input: '{"nums":[4,4,4,4],"x":4}' },
+    { label: "Boundary values", input: '{"nums":[1000,1,1000,9],"x":9}' },
+    { label: "Long run: 12 values", input: '{"nums":[775,282,427,586,589,287,130,852,599,595,634,758],"x":6}' },
   ],
 }
 

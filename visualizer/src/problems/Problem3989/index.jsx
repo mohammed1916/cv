@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Chain of two', input: '{"grid":[[1,5,9,2],[2,4,8,3]],"limit":2}' },
     { label: 'Everything fits', input: '{"grid":[[3,3,3],[0,1,2]],"limit":3}' },
+    { label: "Single cell", input: '{"grid":[[4]],"limit":0}' },
+    { label: "Equal values tie", input: '{"grid":[[2,2],[2,2]],"limit":4}' },
+    { label: "Extreme values at the limits", input: '{"grid":[[-20,20,-20,20,-20,20,-20,20],[20,-20,20,-20,20,-20,20,-20],[0,0,0,0,0,0,0,0],[20,20,20,20,20,20,20,20],[-20,-20,-20,-20,-20,-20,-20,-20]],"limit":20}' },
+    { label: "Long run: 5 by 8 grid", input: '{"grid":[[12,-17,-16,-7,17,-11,10,-13],[14,-5,-7,-2,7,-6,-15,-13],[17,7,1,4,-4,-1,1,-12],[20,18,10,9,-14,4,16,-11],[-18,-11,18,15,17,9,-9,-11]],"limit":11}' },
   ],
 }
 

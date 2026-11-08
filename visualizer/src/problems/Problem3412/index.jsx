@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"aczzx"}' },
     { label: 'No pairs', input: '{"s":"abcdef"}' },
+    { label: 'Single letter', input: '{"s":"m"}' },
+    { label: 'Repeated letter', input: '{"s":"ssss"}' },
+    { label: 'Longest word: 12 letters', input: '{"s":"zyxwvutsrqpo"}' },
+    { label: 'Long run: 12 letters', input: '{"s":"nwtefpxrtoof"}' },
   ],
 }
 

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/longest-non-decreasing-subarray-from-two-arrays/',
   complexity: 'O(n) time and O(n) space for the table. The visualization caps n at 10.',
   examples: [
-    { label: 'Example 1', input: '{"nums1":[2,3,1],"nums2":[1,2,1]}' },
-    { label: 'Example 2', input: '{"nums1":[1,3,2,1],"nums2":[2,2,3,4]}' },
+    { label: 'Own case 1', input: '{"nums1":[3,4,2],"nums2":[2,3,2]}' },
+    { label: 'Own case 2', input: '{"nums1":[2,4,3,2],"nums2":[3,3,4,5]}' },
     { label: 'Single pair', input: '{"nums1":[1],"nums2":[1]}' },
     { label: 'Equal values in both arrays', input: '{"nums1":[4,4,4],"nums2":[4,4,4]}' },
     { label: 'Boundary: values 20 and 1', input: '{"nums1":[20,1,20,1,20,1,20,1,20,1],"nums2":[1,20,1,20,1,20,1,20,1,20]}' },

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Invented pair', input: '{"points":[1,5],"m":3}' },
     { label: 'Three equal cells', input: '{"points":[2,2,2],"m":3}' },
+    { label: 'Single point', input: '{"points":[4],"m":1}' },
+    { label: 'Equal cells tie', input: '{"points":[5,5],"m":1}' },
+    { label: 'Extremes, m six', input: '{"points":[9,1,9,1],"m":6}' },
+    { label: 'Long run: 4 points', input: '{"points":[1,7,5,3],"m":5}' },
   ],
 }
 

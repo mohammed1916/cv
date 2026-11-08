@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-integer-added-to-array-ii/',
   complexity: 'O(n^3 log n) time in this trace: every pair of removals is tested. The trace caps n at 10.',
   examples: [
-    { label: 'Example 1', input: '{"nums1":[4,20,16,12,8],"nums2":[14,18,10]}' },
-    { label: 'Example 2', input: '{"nums1":[3,5,5,3],"nums2":[7,7]}' },
+    { label: 'Own case 1', input: '{"nums1":[5,21,17,13,9],"nums2":[15,19,11]}' },
+    { label: 'Own case 2', input: '{"nums1":[4,6,6,4],"nums2":[8,8]}' },
     { label: "Three values", input: "{\"nums1\":[1,2,3],\"nums2\":[4]}" },
     { label: "Equal values", input: "{\"nums1\":[5,5,5],\"nums2\":[5]}" },
     { label: "Negative values", input: "{\"nums1\":[-100,100,-100],\"nums2\":[0]}" },

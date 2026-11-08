@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: "Two lights", input: "{\"period\":12,\"green\":[4,9],\"arrivals\":[3,10,14,22]}" },
     { label: "Single light", input: "{\"period\":10,\"green\":[3],\"arrivals\":[5]}" },
+    { label: "Smallest cycle", input: "{\"period\":2,\"green\":[1],\"arrivals\":[1]}" },
+    { label: "Simultaneous arrivals", input: "{\"period\":10,\"green\":[5],\"arrivals\":[4,4,4]}" },
+    { label: "Largest period and time", input: "{\"period\":1000,\"green\":[999],\"arrivals\":[1000000000]}" },
+    { label: "Long run: four lights, 12 cars", input: "{\"period\":60,\"green\":[10,25,40,55],\"arrivals\":[46,128,223,368,11,251,389,492,99,319,215,285]}" },
   ],
 }
 

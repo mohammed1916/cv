@@ -12,7 +12,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-of-integers/',
   complexity: 'O(d * 9 * S) time for d digits and digit sums up to S. The visualization caps num2 at 4 digits.',
   examples: [
-    { label: 'Example 1', input: '{"num1":"1","num2":"12","min_sum":1,"max_sum":8}' },
+    { label: 'Own case 1', input: '{"num1":"2","num2":"23","min_sum":2,"max_sum":9}' },
     { label: 'Example 2', input: '{"num1":"1","num2":"5","min_sum":2,"max_sum":3}' },
     { label: 'Single sum', input: '{"num1":"5","num2":"5","min_sum":5,"max_sum":5}' },
     { label: 'Zero-ending value', input: '{"num1":"10","num2":"10","min_sum":1,"max_sum":1}' },

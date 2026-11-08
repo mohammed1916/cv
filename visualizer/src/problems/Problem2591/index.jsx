@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/distribute-money-to-maximum-children/',
   complexity: 'O(children) time. The visualization caps children at twenty.',
   examples: [
-    { label: 'Example 1', input: '{"money":20,"children":3}' },
-    { label: 'Example 2', input: '{"money":16,"children":2}' },
+    { label: 'Own case 1', input: '{"money":21,"children":4}' },
+    { label: 'Own case 2', input: '{"money":17,"children":3}' },
     { label: 'Zero money for one child', input: '{"money":0,"children":1}' },
     { label: 'Money equals child count', input: '{"money":8,"children":8}' },
     { label: 'Largest money and children', input: '{"money":200,"children":20}' },

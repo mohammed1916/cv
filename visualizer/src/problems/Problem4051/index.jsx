@@ -21,6 +21,10 @@ const definition = {
   examples: [
     { label: 'Mixed signs', input: '{"nums":[1,-1,2,3,-2],"goal":2,"k":1}' },
     { label: 'Any sum counts', input: '{"nums":[4,1,3],"goal":3,"k":0}' },
+    { label: "One value, no changes", input: "{\"nums\":[5],\"goal\":5,\"k\":0}" },
+    { label: "Equal values", input: "{\"nums\":[2,2,2],\"goal\":2,\"k\":0}" },
+    { label: "Extremes with large k", input: "{\"nums\":[-100,100,-100,100,-100,100,-100,100,-100,100,-100,100],\"goal\":-1000,\"k\":1000}" },
+    { label: "Long run: twelve values", input: "{\"nums\":[-82,-7,-85,84,-63,-13,-67,-34,-94,94,52,-72],\"goal\":0,\"k\":12}" },
   ],
 }
 

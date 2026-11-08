@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: "Repeated letter", input: "{\"workers\":\"abb\",\"stations\":\"abacbb\"}" },
     { label: "Offset start", input: "{\"workers\":\"ab\",\"stations\":\"cabab\"}" },
+    { label: "One worker, one station", input: "{\"workers\":\"a\",\"stations\":\"a\"}" },
+    { label: "Equal letters", input: "{\"workers\":\"aa\",\"stations\":\"aaa\"}" },
+    { label: "Longest strings", input: "{\"workers\":\"abcdefgh\",\"stations\":\"abcdefghzzzzzzzz\"}" },
+    { label: "Long run: 8 workers, 16 stations", input: "{\"workers\":\"ababccab\",\"stations\":\"ababccabbbbaaaaa\"}" },
   ],
 }
 

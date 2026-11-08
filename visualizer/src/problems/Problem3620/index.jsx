@@ -14,6 +14,10 @@ const definition = {
     { label: 'Offline shortcut', input: '{"edges":[[0,1,9],[1,3,9],[0,2,3],[2,3,5]],"online":[true,false,true,true],"k":20}' },
     { label: 'Budget too small', input: '{"edges":[[0,1,6],[1,2,6]],"online":[true,true,true],"k":5}' },
     { label: 'No edges', input: '{"edges":[],"online":[true,true],"k":7}' },
+    { label: 'Two nodes, direct edge', input: '{"edges":[[0,1,4]],"online":[true,true],"k":4}' },
+    { label: 'Equal-cost routes', input: '{"edges":[[0,1,2],[1,2,2],[0,2,4]],"online":[true,true,true],"k":4}' },
+    { label: 'Largest cost and budget', input: '{"edges":[[0,1,1000000000]],"online":[true,true],"k":50000000000000}' },
+    { label: 'Long run: 10 nodes, tree of 9 edges', input: '{"edges":[[0,1,39],[1,2,24],[1,3,23],[0,4,31],[2,5,8],[1,6,7],[5,7,46],[0,8,12],[2,9,17]],"online":[true,true,true,true,true,false,true,false,true,true],"k":60}' },
   ],
 }
 

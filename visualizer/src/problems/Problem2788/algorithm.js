@@ -34,9 +34,9 @@ export function buildTrace({ words, separator }) {
         continue
       }
       result.push(part)
-      frames.push({ phase: 'keep', activeLine: 5, pythonLine: 6, word: w, part, result: [...result], message: `Keep "${part}".` })
+      frames.push({ phase: 'keep', activeLine: 4, pythonLine: 6, word: w, part, result: [...result], message: `Keep "${part}".` })
     }
   }
-  frames.push({ phase: 'done', activeLine: 6, pythonLine: 7, word: -1, part: null, result: [...result], message: `Return ${result.length} piece${result.length === 1 ? '' : 's'}.` })
+  frames.push({ phase: 'done', activeLine: 5, pythonLine: 7, word: -1, part: null, result: [...result], message: `Return ${result.length} piece${result.length === 1 ? '' : 's'}.` })
   return { input: { words, separator }, result, frames }
 }

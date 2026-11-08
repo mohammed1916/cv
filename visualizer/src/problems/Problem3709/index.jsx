@@ -14,6 +14,10 @@ const definition = {
   complexity: 'record is O(1) and totalScore is O(log n) with prefix sums and binary search. The visualization scans the list and caps the calls at 12.',
   examples: [
     { label: 'Example 1', input: '{"operations":["record","totalScore","record","totalScore","totalScore","totalScore","totalScore"],"arguments":[[1,98],[1,1],[5,99],[1,3],[1,5],[3,4],[2,5]]}' },
+    { label: 'Single record', input: '{"operations":["record","totalScore"],"arguments":[[1,5],[1,1]]}' },
+    { label: 'Largest scores', input: '{"operations":["record","record","totalScore"],"arguments":[[1,1000000000],[2,1000000000],[1,2]]}' },
+    { label: 'Largest recorded time', input: '{"operations":["record","totalScore"],"arguments":[[1000000000,7],[1,1000000000]]}' },
+    { label: 'Long run: 12 calls', input: '{"operations":["record","totalScore","totalScore","record","totalScore","totalScore","record","record","totalScore","totalScore","record","record"],"arguments":[[1,50],[1,1],[1,1],[3,41],[1,3],[3,3],[6,48],[7,81],[3,4],[6,6],[8,52],[11,73]]}' },
   ],
 }
 

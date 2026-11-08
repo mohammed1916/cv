@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"s":"idea"}' },
     { label: 'No vowels at end', input: '{"s":"bcd"}' },
+    { label: 'Single vowel', input: '{"s":"a"}' },
+    { label: 'Equal letters', input: '{"s":"bbbb"}' },
+    { label: 'Vowels only', input: '{"s":"aeiou"}' },
+    { label: 'Long run: 20 letters', input: '{"s":"ddgidbeoguaoohigcfoo"}' },
   ],
 }
 

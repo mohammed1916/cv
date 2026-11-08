@@ -20,8 +20,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-prime-difference/',
   complexity: 'O(n sqrt(V)) time and O(1) extra space. The visualization caps input at 15 values.',
   examples: [
-    { label: 'Example 1', input: '[4,2,9,5,3]' },
-    { label: 'Example 2', input: '[4,8,2,8]' },
+    { label: 'Own case 1', input: '[5,3,10,6,4]' },
+    { label: 'Own case 2', input: '[5,9,3,9]' },
     { label: "Single prime", input: "[2]" },
     { label: "Equal primes", input: "[5,5,5]" },
     { label: "Longest allowed: 15 values", input: "[1,100,1,100,1,100,1,100,1,100,1,100,1,100,97]" },

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/coloring-a-border/',
   complexity: 'O(R * C) time and space for a grid of R rows and C columns.',
   examples: [
-    { label: 'Example 1', input: '{"grid":[[1,1],[1,2]],"row":0,"col":0,"color":3}' },
-    { label: 'Example 2', input: '{"grid":[[1,2,2],[2,3,2]],"row":0,"col":1,"color":3}' },
+    { label: 'Own case 1', input: '{"grid":[[2,2],[2,3]],"row":1,"col":1,"color":4}' },
+    { label: 'Own case 2', input: '{"grid":[[2,3,2],[1,2,2]],"row":0,"col":1,"color":3}' },
     { label: 'Single cell', input: '{"grid":[[2]],"row":0,"col":0,"color":1}' },
     { label: 'Whole grid is one region', input: '{"grid":[[1,1],[1,1]],"row":0,"col":0,"color":2}' },
     { label: 'Largest grid, one region', input: '{"grid":[[3,3,3,3,3,3],[3,3,3,3,3,3],[3,3,3,3,3,3],[3,3,3,3,3,3],[3,3,3,3,3,3],[3,3,3,3,3,3]],"row":2,"col":3,"color":5}' },

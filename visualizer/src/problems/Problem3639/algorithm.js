@@ -52,6 +52,10 @@ export const examples = [
   { label: 'Active midway', input: '{"s":"bridge","order":[3,0,5,1,4,2],"k":18}' },
   { label: 'First star is enough', input: '{"s":"kite","order":[1,3,0,2],"k":6}' },
   { label: 'Never active', input: '{"s":"moon","order":[2,0,3,1],"k":11}' },
+  { label: 'One letter', input: '{"s":"a","order":[0],"k":1}' },
+  { label: 'Equal letters use the order', input: '{"s":"aaaa","order":[3,1,0,2],"k":2}' },
+  { label: 'Longest string and largest k', input: '{"s":"zyxwvutsrqponmlk","order":[15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0],"k":1000000000}' },
+  { label: 'Long run: 16 letters', input: '{"s":"wpmhwkamhbcookwq","order":[2,6,4,0,9,8,5,3,7,14,1,10,13,15,11,12],"k":100}' },
 ]
 
 export function parseInput(text) {

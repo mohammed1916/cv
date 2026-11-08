@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/block-placement-queries/',
   complexity: 'O(log M) per query with the segment tree over M cells. The visualization fixes M at 16.',
   examples: [
-    { label: 'Example 1', input: '[[1,2],[2,3,3],[2,3,1],[2,2,2]]' },
+    { label: 'Own case 1', input: '[[2,2,2],[2,3,1],[2,3,3],[1,2]]' },
     { label: 'Example 2', input: '[[2,0,1],[2,1,2]]' },
     { label: "Obstacle at the start", input: "[[1,0]]" },
     { label: "Full-width block check", input: "[[1,15],[2,15,16]]" },

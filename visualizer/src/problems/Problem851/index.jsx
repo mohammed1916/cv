@@ -18,8 +18,8 @@ const definition = {
   url: 'https://leetcode.com/problems/loud-and-rich/',
   complexity: 'O(n + r) time and O(n + r) space with memoization. The visualization caps n at 20 and r at 40.',
   examples: [
-    { label: 'Example 1', input: '{"richer":[[1,0],[2,1],[3,1],[3,7],[4,3],[5,3],[6,3]],"quiet":[3,2,5,4,6,1,7,0]}' },
-    { label: 'Example 2', input: '{"richer":[],"quiet":[0]}' },
+    { label: 'Own case 1', input: '{"richer":[[6,3],[5,3],[4,3],[3,7],[3,1],[2,1],[1,0]],"quiet":[0,7,1,6,4,5,2,3]}' },
+    { label: 'Own case 2', input: '{"richer":[],"quiet":[1]}' },
     { label: 'Chain', input: '{"richer":[[0,1],[1,2],[2,3]],"quiet":[2,3,1,0]}' },
     { label: 'Two people, no richer pairs', input: '{"richer":[],"quiet":[1,0]}' },
     { label: 'One richer pair', input: '{"richer":[[1,0]],"quiet":[0,1]}' },

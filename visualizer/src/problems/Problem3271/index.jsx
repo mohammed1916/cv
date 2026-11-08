@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/hash-divided-string/',
   complexity: 'O(n) time for a string of length n. The visualization caps s at 24 characters.',
   examples: [
-    { label: 'Example 1', input: '{"s":"abcd","k":2}' },
+    { label: 'Own case 1', input: '{"s":"cdef","k":4}' },
     { label: 'Example 2', input: '{"s":"mxz","k":3}' },
     { label: 'Single letter', input: '{"s":"a","k":1}' },
     { label: 'Equal letters', input: '{"s":"aaaa","k":2}' },

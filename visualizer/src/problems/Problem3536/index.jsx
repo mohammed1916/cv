@@ -18,6 +18,10 @@ const definition = {
     { label: 'Example 1', input: '31' },
     { label: 'Example 2', input: '22' },
     { label: 'Example 3', input: '1020' },
+    { label: 'Smallest allowed value', input: '10' },
+    { label: 'Round number', input: '100' },
+    { label: 'Largest allowed value', input: '1000000000' },
+    { label: 'Long run: large prime n', input: '999999937' },
   ],
 }
 

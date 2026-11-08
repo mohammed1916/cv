@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Three flips', input: '{"s":"0110","k":2}' },
     { label: 'Unreachable', input: '{"s":"01011","k":3}' },
+    { label: 'One digit', input: '{"s":"1","k":1}' },
+    { label: 'Equal digits', input: '{"s":"1111","k":2}' },
+    { label: 'Alternating maximum length', input: '{"s":"101010101010101010101010101010","k":30}' },
+    { label: 'Long run: 30 bits', input: '{"s":"110101000100001100110001001110","k":15}' },
   ],
 }
 

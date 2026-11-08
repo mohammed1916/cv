@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Centre mirror', input: '{"grid":[[0,0,0],[0,1,0],[0,0,0]]}' },
     { label: 'Two rows', input: '{"grid":[[0,0],[1,0]]}' },
+    { label: 'Smallest grid', input: '{"grid":[[0,0],[0,0]]}' },
+    { label: 'Equal empty cells', input: '{"grid":[[0,0,0],[0,0,0],[0,0,0]]}' },
+    { label: 'Largest empty grid', input: '{"grid":[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]}' },
+    { label: 'Long run: 6 by 6 grid', input: '{"grid":[[0,1,0,0,1,0],[0,1,0,0,0,1],[0,0,0,0,0,0],[0,0,1,0,0,0],[0,0,0,0,1,1],[0,0,0,0,0,0]]}' },
   ],
 }
 

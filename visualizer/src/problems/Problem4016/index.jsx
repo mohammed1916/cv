@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: "Corner squares", input: "{\"grid\":[[1,1,0,1],[1,1,0,1],[0,0,1,1],[1,1,1,1]]}" },
     { label: "Scattered ones", input: "{\"grid\":[[1,0,1],[0,1,0],[1,0,1]]}" },
+    { label: "Single cell", input: '{"grid":[[1]]}' },
+    { label: "All zeros", input: '{"grid":[[0,0],[0,0]]}' },
+    { label: "All ones", input: '{"grid":[[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1]]}' },
+    { label: "Long run: 6 by 6 grid", input: '{"grid":[[1,1,1,0,1,0],[1,1,1,0,1,1],[1,0,0,1,0,1],[1,0,0,1,0,1],[0,1,0,1,1,1],[0,1,1,1,1,0]]}' },
   ],
 }
 

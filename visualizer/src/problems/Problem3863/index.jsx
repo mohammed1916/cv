@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'One step', input: '{"s":"abdc"}' },
     { label: 'Reversed', input: '{"s":"cba"}' },
+    { label: 'Single letter', input: '{"s":"a"}' },
+    { label: 'Equal letters', input: '{"s":"aa"}' },
+    { label: 'Reverse of an alphabet run', input: '{"s":"hgfedcba"}' },
+    { label: 'Long run: 7 letters', input: '{"s":"bbddfdg"}' },
   ],
 }
 

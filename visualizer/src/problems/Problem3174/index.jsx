@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/clear-digits/',
   complexity: 'O(n) time and O(n) space. The visualization caps input at 40 characters.',
   examples: [
-    { label: 'Example 1', input: '"cb34"' },
+    { label: 'Own case 1', input: '"dc45"' },
     { label: 'Mixed', input: '"ab12c"' },
     { label: "Single letter", input: "\"a\"" },
     { label: "Digit removes the last letter", input: "\"ab1\"" },

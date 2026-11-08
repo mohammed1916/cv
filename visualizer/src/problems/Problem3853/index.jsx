@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"s":"mnmpnm","k":2}' },
     { label: 'Run of a', input: '{"s":"aaa","k":1}' },
+    { label: 'Single letter', input: '{"s":"a","k":1}' },
+    { label: 'Equal letters', input: '{"s":"zzzz","k":3}' },
+    { label: 'Alphabet run, k at limit', input: '{"s":"abcdefghijklmnop","k":20}' },
+    { label: 'Long run: 16 letters', input: '{"s":"ecbaffeebeedgedb","k":10}' },
   ],
 }
 

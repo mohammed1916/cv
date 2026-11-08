@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Invented example', input: '{"value":[4,6,2],"limit":[1,3,2]}' },
     { label: 'Single element', input: '{"value":[7],"limit":[1]}' },
+    { label: 'Single element', input: '{"value":[1],"limit":[1]}' },
+    { label: 'Equal elements', input: '{"value":[5,5,5],"limit":[2,2,2]}' },
+    { label: 'Largest values and limits', input: '{"value":[100,1,100,1,100,1,100,1],"limit":[10,1,10,1,10,1,10,1]}' },
+    { label: 'Long run: 8 elements', input: '{"value":[23,24,91,47,70,87,12,66],"limit":[8,6,2,7,3,8,3,6]}' },
   ],
 }
 

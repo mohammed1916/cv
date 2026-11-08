@@ -13,8 +13,12 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-weighted-k-edge-path/',
   complexity: 'O(k * m * t) time for the reachable totals. The visualization caps n at 8 and edges at 12.',
   examples: [
-    { label: 'Example 1', input: '{"n":3,"edges":[[0,1,1],[1,2,2]],"k":2,"t":4}' },
-    { label: 'Example 2', input: '{"n":3,"edges":[[0,1,2],[0,2,3]],"k":1,"t":3}' },
+    { label: 'Own case 1', input: '{"n":4,"edges":[[1,2,2],[2,3,3]],"k":3,"t":5}' },
+    { label: 'Own case 2', input: '{"n":4,"edges":[[1,2,3],[1,3,4]],"k":2,"t":4}' },
+    { label: 'One node, no edges', input: '{"n":1,"edges":[],"k":0,"t":1}' },
+    { label: 'Equal weights', input: '{"n":3,"edges":[[0,1,2],[1,2,2]],"k":1,"t":4}' },
+    { label: 'Largest weights and limits', input: '{"n":3,"edges":[[0,1,10],[0,2,10]],"k":12,"t":60}' },
+    { label: 'Long run: 8 nodes, 12 edges', input: '{"n":8,"edges":[[0,1,6],[0,2,6],[0,3,6],[0,4,6],[0,6,5],[1,3,1],[1,4,3],[1,5,6],[2,3,9],[2,4,4],[2,7,2],[3,4,1]],"k":4,"t":40}' },
   ],
 }
 

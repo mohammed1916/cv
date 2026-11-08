@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/lexicographically-smallest-string-after-a-swap/',
   complexity: 'O(n) time and O(n) space for the output. The visualization caps input at 20 digits.',
   examples: [
-    { label: 'Example 1', input: '"45320"' },
-    { label: 'Example 2', input: '"001"' },
+    { label: 'Own case 1', input: '"56431"' },
+    { label: 'Own case 2', input: '"112"' },
     { label: 'One digit', input: '"7"' },
     { label: 'All zeros', input: '"0000"' },
     { label: 'Twenty nines', input: '"99999999999999999999"' },

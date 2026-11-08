@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"aabc","x":"a","y":"c"}' },
     { label: 'Example 2', input: '{"s":"dcab","x":"d","y":"b"}' },
+    { label: "Single letter", input: '{"s":"a","x":"a","y":"b"}' },
+    { label: "Repeated letters", input: '{"s":"aaaa","x":"a","y":"b"}' },
+    { label: "Maximum length", input: '{"s":"abcdefghijklmnop","x":"p","y":"a"}' },
+    { label: "Long run: 16 letters", input: '{"s":"gcbdhdahchaebedb","x":"a","y":"h"}' },
   ],
 }
 

@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/form-smallest-number-from-two-digit-arrays/',
   complexity: 'O(1) time for at most nine digits per list, and O(n + m) to build the sets.',
   examples: [
-    { label: 'Example 1', input: '{"nums1":[4,1,3],"nums2":[5,7]}' },
-    { label: 'Example 2', input: '{"nums1":[3,5,2,6],"nums2":[3,1,7]}' },
+    { label: 'Own case 1', input: '{"nums1":[5,2,4],"nums2":[6,8]}' },
+    { label: 'Own case 2', input: '{"nums1":[4,6,3,7],"nums2":[4,2,8]}' },
     { label: 'Single digit lists', input: '{"nums1":[1],"nums2":[2]}' },
     { label: 'Equal lists', input: '{"nums1":[4,1],"nums2":[4,1]}' },
     { label: 'All nine digits in reverse order', input: '{"nums1":[1,2,3,4,5,6,7,8,9],"nums2":[9,8,7,6,5,4,3,2,1]}' },

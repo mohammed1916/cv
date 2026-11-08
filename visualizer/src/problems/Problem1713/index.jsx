@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-operations-to-make-a-subsequence/',
   complexity: 'Longest increasing subsequence over target positions with binary search: O(n log m). The visualization caps target at 8 and arr at 10.',
   examples: [
-    { label: 'Example 1', input: '{"target":[5,1,3],"arr":[9,4,2,3,4]}' },
-    { label: 'Example 2', input: '{"target":[6,4,8,1,3,2],"arr":[4,7,6,2,3,8,6,1]}' },
+    { label: 'Own case 1', input: '{"target":[6,2,4],"arr":[10,5,3,4,5]}' },
+    { label: 'Own case 2', input: '{"target":[7,5,9,2,4,3],"arr":[5,8,7,3,4,9,7,2]}' },
   { label: 'Single target value', input: '{"target":[4],"arr":[4]}' },
   { label: 'Target value absent', input: '{"target":[7],"arr":[1,2,3]}' },
   { label: 'Repeated values in arr', input: '{"target":[3,5],"arr":[5,5,3,3,10,10]}' },

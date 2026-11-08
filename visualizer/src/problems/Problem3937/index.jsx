@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Residues three', input: '{"nums":[7,4,9,2,5],"k":3}' },
     { label: 'Residues four', input: '{"nums":[10,11,20,21],"k":4}' },
+    { label: 'Single value', input: '{"nums":[1],"k":2}' },
+    { label: 'Equal values', input: '{"nums":[5,5,5],"k":4}' },
+    { label: 'Largest values', input: '{"nums":[1000000000,1,999999999,2],"k":12}' },
+    { label: 'Long run: 12 items', input: '{"nums":[183913782,322899069,808017839,128332069,172296655,324788083,118522340,632449916,932273889,429539708,817289067,320260592],"k":7}' },
   ],
 }
 

@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[2,5,2],"k":5}' },
     { label: 'Ones', input: '{"nums":[1,1,2],"k":1}' },
+    { label: 'Single element', input: '{"nums":[1],"k":1}' },
+    { label: 'Equal values, repeated count', input: '{"nums":[2,2,2],"k":2}' },
+    { label: 'Upper input bound', input: '{"nums":[6,6,6,6,6,6,6,6],"k":100000}' },
+    { label: 'No reachable target', input: '{"nums":[2,2],"k":3}' },
+    { label: 'Long run: 8 items', input: '{"nums":[5,4,2,5,5,5,1,1],"k":36}' },
   ],
 }
 

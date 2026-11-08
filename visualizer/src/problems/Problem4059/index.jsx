@@ -16,6 +16,10 @@ const definition = {
     { label: "Small mix", input: '{"nums":[1,2,3]}' },
     { label: "High bits", input: '{"nums":[24576,16384,8192,16384]}' },
     { label: "Single value", input: '{"nums":[12345]}' },
+    { label: "Single zero", input: "{\"nums\":[0]}" },
+    { label: "Equal values", input: "{\"nums\":[5,5,5]}" },
+    { label: "Largest 15-bit value", input: "{\"nums\":[32767,0,32767]}" },
+    { label: "Long run: ten values", input: "{\"nums\":[2989,4807,29170,1644,30546,31155,9400,16909,4460,30049]}" },
   ],
 };
 

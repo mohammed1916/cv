@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/replace-elements-in-an-array/',
   complexity: 'O(n + m) time for m operations, with O(n) space for the position table. The visualization caps input at 12 numbers and 10 operations.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,4,6],"operations":[[1,3],[4,7],[6,1]]}' },
-    { label: 'Example 2', input: '{"nums":[1,2],"operations":[[1,3],[2,1],[3,2]]}' },
+    { label: 'Own case 1', input: '{"nums":[2,3,5,7],"operations":[[2,4],[5,8],[7,2]]}' },
+    { label: 'Own case 2', input: '{"nums":[2,3],"operations":[[2,4],[3,2],[4,3]]}' },
     { label: 'Single number moved', input: '{"nums":[5],"operations":[[5,6]]}' },
     { label: 'Replace with an unused value', input: '{"nums":[3,8],"operations":[[3,4]]}' },
     { label: 'Largest lists, ten replacements', input: '{"nums":[1,10,20,30,40,50,60,70,80,90,100,5],"operations":[[1,2],[2,3],[10,11],[20,21],[30,31],[40,41],[50,51],[60,61],[70,71],[80,81]]}' },

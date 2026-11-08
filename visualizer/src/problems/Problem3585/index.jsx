@@ -13,8 +13,12 @@ const definition = {
   url: 'https://leetcode.com/problems/find-weighted-median-node-in-tree/',
   complexity: 'O(path length) per query with this climbing method. The visualization caps n at 8.',
   examples: [
-    { label: 'Example 2', input: '{"n":3,"edges":[[0,1,2],[2,0,4]],"queries":[[0,1],[2,0],[1,2]]}' },
-    { label: 'Example 3', input: '{"n":5,"edges":[[0,1,2],[0,2,5],[1,3,1],[2,4,3]],"queries":[[3,4],[1,2]]}' },
+    { label: 'Own case 1', input: '{"n":3,"edges":[[2,0,4],[0,1,2]],"queries":[[1,2],[2,0],[0,1]]}' },
+    { label: 'Own case 2', input: '{"n":5,"edges":[[2,4,3],[1,3,1],[0,2,5],[0,1,2]],"queries":[[1,2],[3,4]]}' },
+    { label: 'Two nodes', input: '{"n":2,"edges":[[0,1,3]],"queries":[[0,1]]}' },
+    { label: 'Equal edge weights', input: '{"n":3,"edges":[[0,1,5],[1,2,5]],"queries":[[0,2],[2,0]]}' },
+    { label: 'Largest weights', input: '{"n":4,"edges":[[0,1,20],[1,2,20],[2,3,1]],"queries":[[0,3],[3,0]]}' },
+    { label: 'Long run: 8 nodes', input: '{"n":8,"edges":[[0,1,18],[1,2,17],[0,3,7],[0,4,11],[2,5,2],[1,6,8],[4,7,19]],"queries":[[5,6],[6,2],[3,2],[7,0],[4,0],[5,7]]}' },
   ],
 }
 

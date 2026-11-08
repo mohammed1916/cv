@@ -20,6 +20,10 @@ const definition = {
   examples: [
     { label: 'Gap pays', input: '[[1, 2, 10], [3, 4, 2]]' },
     { label: 'Overlap choice', input: '[[0, 4, 6], [2, 9, 8], [9, 12, 3]]' },
+    { label: "One meeting", input: "[[0,1,1]]" },
+    { label: "Identical meetings", input: "[[0,5,4],[0,5,4]]" },
+    { label: "Largest times and revenue", input: "[[0,1000000000,1],[999999999,1000000000,1000000000]]" },
+    { label: "Long run: twelve meetings", input: "[[90,920,303],[74,671,658],[913,922,503],[603,715,667],[505,662,926],[640,693,4],[227,363,613],[173,303,399],[437,728,53],[289,321,99],[633,918,802],[579,836,844]]" },
   ],
 }
 

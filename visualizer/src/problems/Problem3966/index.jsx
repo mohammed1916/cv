@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"l":10,"r":15,"k":1}' },
     { label: 'Example 2', input: '{"l":201,"r":204,"k":2}' },
+    { label: "Single number", input: '{"l":10,"r":10,"k":0}' },
+    { label: "Equal endpoints at the top", input: '{"l":5000,"r":5000,"k":9}' },
+    { label: "Widest allowed range", input: '{"l":10,"r":5000,"k":0}' },
+    { label: "Long run: 3601 numbers", input: '{"l":1200,"r":4800,"k":5}' },
   ],
 }
 

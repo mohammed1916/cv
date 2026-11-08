@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/apply-operations-to-make-two-strings-equal/',
   complexity: 'O(n) time with two carry states per position. The visualization caps input at 12 digits.',
   examples: [
-    { label: 'Example 1', input: '{"s1": "1100011000", "s2": "0101001010", "x": 2}' },
+    { label: 'Own case 1', input: '{"s1":"1100011000","s2":"0101001010","x":2}' },
     { label: 'Impossible', input: '{"s1": "10110", "s2": "00011", "x": 4}' },
     { label: "Equal one-digit strings", input: "{\"s1\":\"0\",\"s2\":\"0\",\"x\":1}" },
     { label: "Equal strings, no change needed", input: "{\"s1\":\"1111\",\"s2\":\"1111\",\"x\":3}" },

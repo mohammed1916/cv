@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"skill":[2,3,1],"mana":[4,2]}' },
     { label: 'One potion', input: '{"skill":[3,1],"mana":[2]}' },
+    { label: 'Single pair', input: '{"skill":[4],"mana":[9]}' },
+    { label: 'Equal values tie', input: '{"skill":[5,5,5],"mana":[5,5,5]}' },
+    { label: 'Largest values', input: '{"skill":[20,1,20,1,20,1,20,1,20,1,20,1],"mana":[1,20,1,20,1,20,1,20,1,20,1,20]}' },
+    { label: 'Long run: 12 pairs', input: '{"skill":[3,16,10,4,3,8,5,18,1,13,3,5],"mana":[4,15,16,10,15,16,18,4,9,13,18,14]}' },
   ],
 }
 

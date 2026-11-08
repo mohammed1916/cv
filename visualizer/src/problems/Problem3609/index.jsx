@@ -32,6 +32,10 @@ const definition = {
     { label: 'Example 1', input: '[1,2,5,4]' },
     { label: 'Example 2', input: '[0,1,2,3]' },
     { label: 'Unreachable', input: '[1,1,2,2]' },
+    { label: 'Start equals target', input: '[3,3,3,3]' },
+    { label: 'Same column', input: '[2,2,2,6]' },
+    { label: 'Largest coordinates', input: '[0,0,1000000000,1000000000]' },
+    { label: 'Long run: distant target', input: '[649248,543731,1280389,904657]' },
   ],
 }
 

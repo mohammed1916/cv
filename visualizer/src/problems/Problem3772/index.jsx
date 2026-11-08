@@ -13,8 +13,12 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-subgraph-score-in-a-tree/',
   complexity: 'O(n^2) time, one tree walk per root. The visualization caps n at 12.',
   examples: [
-    { label: 'Example 1', input: '{"n":3,"edges":[[0,1],[1,2]],"good":[1,0,1]}' },
-    { label: 'Example 2', input: '{"n":5,"edges":[[1,0],[1,2],[1,3],[3,4]],"good":[0,1,0,1,1]}' },
+    { label: 'Own case 1', input: '{"n":3,"edges":[[1,2],[0,1]],"good":[1,0,1]}' },
+    { label: 'Own case 2', input: '{"n":5,"edges":[[3,4],[1,3],[1,2],[1,0]],"good":[1,1,0,1,0]}' },
+    { label: "Two nodes", input: "{\"n\":2,\"edges\":[[0,1]],\"good\":[1,1]}" },
+    { label: "All nodes good, star", input: "{\"n\":4,\"edges\":[[0,1],[0,2],[0,3]],\"good\":[1,1,1,1]}" },
+    { label: "Path of 12 nodes", input: "{\"n\":12,\"edges\":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11]],\"good\":[1,0,1,0,1,0,1,0,1,0,1,0]}" },
+    { label: "Long run: random tree of 12", input: "{\"n\":12,\"edges\":[[0,1],[1,2],[2,3],[3,4],[1,5],[0,6],[6,7],[5,8],[5,9],[2,10],[7,11]],\"good\":[1,0,0,1,0,1,1,1,0,1,1,0]}" },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Mixed tree', input: '[4,6,2,3,1,5,7]' },
     { label: 'Equal values', input: '[9,9,9]' },
+    { label: "Single node", input: '[5]' },
+    { label: "Equal values", input: '[2,2,2,2,2,2,2]' },
+    { label: "Alternating extremes", input: '[20,1,20,1,20,1,20,1,20,1,20,1,20,1,20]' },
+    { label: "Long run: 15 nodes", input: '[16,17,12,13,5,5,4,11,17,5,7,19,3,7,13]' },
   ],
 }
 

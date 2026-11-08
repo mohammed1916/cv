@@ -23,6 +23,10 @@ const definition = {
     { label: "Short mix", input: '{"word": "abbcc"}' },
     { label: "Repeated pair", input: '{"word": "xxyy"}' },
     { label: "Skewed counts", input: '{"word": "aaaxyz"}' },
+    { label: 'Single letter', input: '{"word":"a"}' },
+    { label: 'Repeated letter', input: '{"word":"aaaa"}' },
+    { label: 'Longest allowed word', input: '{"word":"zyxwvutsrqponmlkjihgfedc"}' },
+    { label: 'Long run: 24 letters', input: '{"word":"dkltsdwukyovfkdinqyszemu"}' },
   ],
 };
 

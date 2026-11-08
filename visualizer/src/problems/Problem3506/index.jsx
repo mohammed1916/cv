@@ -16,6 +16,10 @@ const definition = {
     { label: 'Split pays off', input: '{"splitTime":2,"strains":[3,4,9]}' },
     { label: 'Single strain', input: '{"splitTime":5,"strains":[7]}' },
     { label: 'Balanced pair', input: '{"splitTime":1,"strains":[6,6,6,6]}' },
+    { label: 'One strain, split at 1', input: '{"splitTime":1,"strains":[1]}' },
+    { label: 'Equal times tie', input: '{"splitTime":5,"strains":[5,5,5]}' },
+    { label: 'Largest limits', input: '{"splitTime":9,"strains":[9,1,9,1,9,1,9,1]}' },
+    { label: 'Long run: 8 strains', input: '{"splitTime":4,"strains":[9,7,8,5,4,5,4,5]}' },
   ],
 }
 

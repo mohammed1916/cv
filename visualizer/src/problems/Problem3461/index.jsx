@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"3902"}' },
     { label: 'Example 2', input: '{"s":"34789"}' },
+    { label: 'Smallest string', input: '{"s":"123"}' },
+    { label: 'Repeated digit tie', input: '{"s":"5555"}' },
+    { label: 'Longest string: 30 digits', input: '{"s":"987654321098765432109876543210"}' },
+    { label: 'Long run: 30 digits', input: '{"s":"470080430063867487865425307035"}' },
   ],
 }
 

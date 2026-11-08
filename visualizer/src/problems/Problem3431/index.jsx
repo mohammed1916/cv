@@ -14,6 +14,10 @@ const definition = {
     { label: 'Locks that do not matter', input: '{"nums":[1,2,2,1,3,3],"locked":[1,0,0,1,1,0]}' },
     { label: 'Impossible', input: '{"nums":[2,3,2,1],"locked":[0,0,0,0]}' },
     { label: 'Already sorted', input: '{"nums":[1,1,3],"locked":[1,1,1]}' },
+    { label: 'Single locked value', input: '{"nums":[1],"locked":[1]}' },
+    { label: 'All locked', input: '{"nums":[2,2,2,2],"locked":[1,1,1,1]}' },
+    { label: 'Longest, mixed locks', input: '{"nums":[1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1],"locked":[1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0]}' },
+    { label: 'Long run: 16 entries', input: '{"nums":[2,1,1,2,1,3,3,1,2,1,1,1,3,1,2,3],"locked":[1,0,0,0,1,0,0,1,0,1,0,0,1,1,1,1]}' },
   ],
 }
 

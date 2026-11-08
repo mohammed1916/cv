@@ -12,6 +12,10 @@ const definition = {
     { label: 'Walled off', input: '{"classroom":["S.X","..X","XXL"],"energy":9}' },
     { label: 'Runs out of energy', input: '{"classroom":["S...L"],"energy":3}' },
     { label: 'No litter', input: '{"classroom":["S.","R."],"energy":1}' },
+    { label: 'Start only', input: '{"classroom":["S"],"energy":1}' },
+    { label: 'Equal litter in a row', input: '{"classroom":["SLL."],"energy":3}' },
+    { label: 'Largest classroom, maximum litter', input: '{"classroom":["S.L.L.L.","........","........","........","........","........","........",".L...L.X"],"energy":50}' },
+    { label: 'Long run: 8 by 8 mixed grid', input: '{"classroom":["S.RXLLX.","LX.RL.LL","R..X...R","XX.R.RXR",".RR.....","R.RRX.R.","X.RX..R.","..X..X.X"],"energy":20}' },
   ],
 }
 

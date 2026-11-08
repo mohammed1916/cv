@@ -23,7 +23,13 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with stores and inventory rows',
   complexity: 'O(I + S log S) for I inventory rows and S stores.',
-  examples: [{ label: 'Sample', input: SAMPLE_TEXT }],
+  examples: [
+    { label: 'Sample', input: SAMPLE_TEXT },
+    { label: 'One product, no stock', input: '{"stores":[{"store_id":1,"store_name":"Alpha"}],"inventory":[{"store_id":1,"product_id":1,"price":10,"quantity":0}]}' },
+    { label: 'Equal totals', input: '{"stores":[{"store_id":1,"store_name":"Alpha"},{"store_id":2,"store_name":"Beta"}],"inventory":[{"store_id":1,"product_id":1,"price":10,"quantity":2},{"store_id":2,"product_id":2,"price":20,"quantity":1}]}' },
+    { label: 'Large price and stock', input: '{"stores":[{"store_id":1,"store_name":"Alpha"}],"inventory":[{"store_id":1,"product_id":1,"price":999,"quantity":1000}]}' },
+    { label: 'Long run: 6 stores, 24 products', input: '{"stores":[{"store_id":1,"store_name":"Alpha"},{"store_id":2,"store_name":"Beta"},{"store_id":3,"store_name":"Gamma"},{"store_id":4,"store_name":"Delta"},{"store_id":5,"store_name":"Epsilon"},{"store_id":6,"store_name":"Zeta"}],"inventory":[{"store_id":2,"product_id":1,"price":63,"quantity":2},{"store_id":3,"product_id":2,"price":59,"quantity":0},{"store_id":3,"product_id":3,"price":28,"quantity":8},{"store_id":5,"product_id":4,"price":29,"quantity":8},{"store_id":5,"product_id":5,"price":99,"quantity":15},{"store_id":3,"product_id":6,"price":9,"quantity":11},{"store_id":1,"product_id":7,"price":99,"quantity":16},{"store_id":6,"product_id":8,"price":73,"quantity":18},{"store_id":6,"product_id":9,"price":22,"quantity":0},{"store_id":5,"product_id":10,"price":15,"quantity":7},{"store_id":3,"product_id":11,"price":100,"quantity":20},{"store_id":4,"product_id":12,"price":56,"quantity":11},{"store_id":6,"product_id":13,"price":48,"quantity":10},{"store_id":3,"product_id":14,"price":37,"quantity":3},{"store_id":3,"product_id":15,"price":15,"quantity":2},{"store_id":4,"product_id":16,"price":13,"quantity":5},{"store_id":4,"product_id":17,"price":21,"quantity":7},{"store_id":3,"product_id":18,"price":71,"quantity":17},{"store_id":5,"product_id":19,"price":86,"quantity":19},{"store_id":1,"product_id":20,"price":84,"quantity":2},{"store_id":6,"product_id":21,"price":2,"quantity":10},{"store_id":2,"product_id":22,"price":2,"quantity":9},{"store_id":2,"product_id":23,"price":79,"quantity":10},{"store_id":3,"product_id":24,"price":65,"quantity":8}]}' },
+  ],
 }
 
 const cell = { border: '1px solid currentColor', padding: '4px 8px' }

@@ -20,6 +20,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"students":[{"student_id":1,"bench_id":"A"},{"student_id":2,"bench_id":"A"},{"student_id":1,"bench_id":"A"},{"student_id":3,"bench_id":"B"},{"student_id":4,"bench_id":"B"},{"student_id":2,"bench_id":"B"},{"student_id":5,"bench_id":"C"}]}' },
     { label: 'Empty', input: '{"students":[]}' },
+    { label: 'Single student', input: '{"students":[{"student_id":4,"bench_id":"B"}]}' },
+    { label: 'Repeated seat tie', input: '{"students":[{"student_id":1,"bench_id":"A"},{"student_id":1,"bench_id":"A"}]}' },
+    { label: 'Largest list: 15 rows', input: '{"students":[{"student_id":1,"bench_id":"A"},{"student_id":2,"bench_id":"B"},{"student_id":3,"bench_id":"C"},{"student_id":4,"bench_id":"A"},{"student_id":5,"bench_id":"B"},{"student_id":6,"bench_id":"C"},{"student_id":7,"bench_id":"A"},{"student_id":8,"bench_id":"B"},{"student_id":9,"bench_id":"C"},{"student_id":10,"bench_id":"A"},{"student_id":11,"bench_id":"B"},{"student_id":12,"bench_id":"C"},{"student_id":13,"bench_id":"A"},{"student_id":14,"bench_id":"B"},{"student_id":15,"bench_id":"C"}]}' },
+    { label: 'Long run: 15 rows', input: '{"students":[{"student_id":4,"bench_id":"D"},{"student_id":2,"bench_id":"D"},{"student_id":2,"bench_id":"D"},{"student_id":6,"bench_id":"A"},{"student_id":3,"bench_id":"D"},{"student_id":3,"bench_id":"B"},{"student_id":3,"bench_id":"D"},{"student_id":5,"bench_id":"A"},{"student_id":6,"bench_id":"D"},{"student_id":5,"bench_id":"A"},{"student_id":5,"bench_id":"C"},{"student_id":3,"bench_id":"D"},{"student_id":2,"bench_id":"A"},{"student_id":2,"bench_id":"B"},{"student_id":3,"bench_id":"C"}]}' },
   ],
 }
 

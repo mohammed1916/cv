@@ -1,6 +1,6 @@
 const lines = text => text.split('\n').map((t, i) => ({ line: i + 1, text: t }))
-const PY_OF = {1: 68, 2: 70, 3: 78, 4: 80, 5: 81, 6: 83, 7: 83}
-const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: PY_OF[line] ?? line, activeLine: line, message, state })
+const PY_OF = {1: 2, 2: 6, 3: 12, 4: 13, 5: 15, 6: 17, 7: 17}
+const frame = (phase, line, message, state = {}, py = PY_OF[line] ?? line) => ({ phase, pythonLine: py, activeLine: line, message, state })
 export const PHASES = [
   { id: 'setup', label: 'Setup', description: 'Read the two values and prepare the merge.' },
   { id: 'step', label: 'Step', description: 'Decide, for one position, which value wins or whether to recurse.' },
@@ -31,22 +31,22 @@ export function parseInput(text) {
   return input
 }
 export function buildTrace({ a, b }) {
-  const frames = [frame('setup', 1, 'Compare a and b at the top level.', { path: '(top)', origin: 'start' })]
+  const frames = [frame('setup', 1, 'Compare a and b at the top level.', { path: '(top)', origin: 'start' }, 1)]
   const merge = (x, y, path) => {
     const where = path || '(top)'
     if (isArr(x) && isArr(y)) {
-      frames.push(frame('step', 3, `${where}: both are arrays, so merge by index.`, { path: where, origin: 'arrays' }))
+      frames.push(frame('step', 1, `${where}: both are arrays, so merge by index.`, { path: where, origin: 'arrays' }))
       const out = []
       for (let i = 0; i < Math.max(x.length, y.length); i++) {
         const p = `${where}[${i}]`
-        if (i >= y.length) { frames.push(frame('step', 6, `${p}: only a has this index, so keep it.`, { path: p, origin: 'a' })); out.push(x[i]) }
-        else if (i >= x.length) { frames.push(frame('step', 6, `${p}: only b has this index, so add it.`, { path: p, origin: 'b' })); out.push(y[i]) }
+        if (i >= y.length) { frames.push(frame('step', 2, `${p}: only a has this index, so keep it.`, { path: p, origin: 'a' }, 6)); out.push(x[i]) }
+        else if (i >= x.length) { frames.push(frame('step', 2, `${p}: only b has this index, so add it.`, { path: p, origin: 'b' }, 8)); out.push(y[i]) }
         else out.push(merge(x[i], y[i], p))
       }
       return out
     }
     if (isObj(x) && isObj(y)) {
-      frames.push(frame('step', 4, `${where}: both are objects, so merge key by key.`, { path: where, origin: 'objects' }))
+      frames.push(frame('step', 3, `${where}: both are objects, so merge key by key.`, { path: where, origin: 'objects' }))
       const out = { ...x }
       for (const key of Object.keys(y)) {
         const p = where === '(top)' ? key : `${where}.${key}`
@@ -55,7 +55,7 @@ export function buildTrace({ a, b }) {
       }
       return out
     }
-    frames.push(frame('step', 7, `${where}: not the same kind, so take the value from b.`, { path: where, origin: 'b' }))
+    frames.push(frame('step', 6, `${where}: not the same kind, so take the value from b.`, { path: where, origin: 'b' }))
     return y
   }
   const result = merge(a, b, '')

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/sort-the-students-by-their-kth-score/',
   complexity: 'O(m^2) time for this selection walk over m students, O(m * n) space. The visualization caps input at 8 by 5.',
   examples: [
-    { label: 'Example 1', input: '{"score":[[10,6,9,1],[7,5,11,2],[4,8,3,15]],"k":2}' },
-    { label: 'Example 2', input: '{"score":[[3,4],[5,6]],"k":0}' },
+    { label: 'Own case 1', input: '{"score":[[11,7,10,2],[8,6,12,3],[5,9,4,16]],"k":3}' },
+    { label: 'Own case 2', input: '{"score":[[4,5],[6,7]],"k":1}' },
     { label: 'One student, one exam', input: '{"score":[[50]],"k":0}' },
     { label: 'Equal totals', input: '{"score":[[10,20],[20,10]],"k":1}' },
     { label: 'Eight students, five exams', input: '{"score":[[0,7,14,21,28],[13,20,27,34,41],[26,33,40,47,54],[39,46,53,60,67],[52,59,66,73,80],[65,72,79,86,93],[78,85,92,99,5],[91,98,4,11,18]],"k":4}' },

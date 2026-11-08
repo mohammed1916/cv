@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums1":[2,6,4,1],"nums2":[3,8,5,9],"k":2}' },
     { label: 'Ties', input: '{"nums1":[4,4,1],"nums2":[9,3,6],"k":1}' },
+    { label: 'Single pair with k 1', input: '{"nums1":[3],"nums2":[4],"k":1}' },
+    { label: 'Equal values tie', input: '{"nums1":[5,5,5],"nums2":[5,5,5],"k":2}' },
+    { label: 'Largest values swapped', input: '{"nums1":[50,1,50,1],"nums2":[1,50,1,50],"k":4}' },
+    { label: 'Long run: 12 pairs', input: '{"nums1":[14,42,18,22,33,5,42,24,36,35,33,16],"nums2":[9,17,25,12,23,11,11,38,48,8,20,19],"k":6}' },
   ],
 }
 

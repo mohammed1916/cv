@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination/',
   complexity: 'O(m * n * k) time and space for the state graph. The visualization caps the grid at 6 by 6.',
   examples: [
-    { label: 'Example 1', input: '{"grid":[[0,0,0],[1,1,0],[0,0,0],[0,1,1],[0,0,0]],"k":1}' },
-    { label: 'Example 2', input: '{"grid":[[0,1,1],[1,1,1],[1,0,0]],"k":1}' },
+    { label: 'Own case 1', input: '{"grid":[[0,0,0],[0,1,1],[0,0,0],[1,1,0],[0,0,0]],"k":1}' },
+    { label: 'Own case 2', input: '{"grid":[[0,0,1],[1,1,1],[1,1,0]],"k":1}' },
     { label: 'Single cell', input: '{"grid":[[0]],"k":0}' },
     { label: 'Clear path', input: '{"grid":[[0,0],[0,0]],"k":0}' },
     { label: 'Largest grid, k 6', input: '{"grid":[[0,0,0,1,1,1],[1,0,0,1,1,0],[1,1,1,1,0,0],[1,0,1,0,1,1],[1,1,0,1,0,0],[0,1,0,0,0,0]],"k":6}' },

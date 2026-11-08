@@ -14,8 +14,12 @@ const definition = {
   url: 'https://leetcode.com/problems/find-maximum-value-in-a-constrained-sequence/',
   complexity: 'O(n) time for two passes. The visualization caps n at 30.',
   examples: [
-    { label: 'Example 1', input: '{"n":8,"restrictions":[[3,2]],"diff":[3,5,2,4,2,3,1]}' },
-    { label: 'Example 2', input: '{"n":10,"restrictions":[[3,1],[8,1]],"diff":[2,2,3,1,4,5,1,1,2]}' },
+    { label: 'Own case 1', input: '{"n":8,"restrictions":[[3,2]],"diff":[1,3,2,4,2,5,3]}' },
+    { label: 'Own case 2', input: '{"n":10,"restrictions":[[8,1],[3,1]],"diff":[2,1,1,5,4,1,3,2,2]}' },
+    { label: 'Two values', input: '{"n":2,"restrictions":[[1,5]],"diff":[3]}' },
+    { label: 'Equal differences and limits', input: '{"n":4,"restrictions":[[1,2],[2,2]],"diff":[2,2,2]}' },
+    { label: 'Limit at the maximum', input: '{"n":5,"restrictions":[[1,1000],[4,1]],"diff":[10,10,10,10]}' },
+    { label: 'Long run: 30 values', input: '{"n":30,"restrictions":[[1,717],[6,691],[11,803],[16,605],[21,559],[26,829]],"diff":[9,1,8,3,4,4,3,4,7,1,6,6,7,8,4,2,3,7,9,6,6,9,7,1,8,2,3,7,10]}' },
   ],
 }
 

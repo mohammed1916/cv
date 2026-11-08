@@ -13,6 +13,10 @@ const definition = {
     { label: 'Two windows of three', input: '{"nums":[4,9,1,-3,7,7,2,12,5,0],"x":3,"k":2}' },
     { label: 'Even window size, exact fit', input: '{"nums":[1,5,2,8],"x":2,"k":2}' },
     { label: 'Already level', input: '{"nums":[6,6,6,6,6],"x":2,"k":2}' },
+    { label: 'Two entries', input: '{"nums":[1,2],"x":2,"k":1}' },
+    { label: 'Equal values tie', input: '{"nums":[5,5,5,5],"x":2,"k":2}' },
+    { label: 'Largest values', input: '{"nums":[1000000,-1000000,1000000,-1000000,1000000,-1000000,1000000,-1000000,1000000,-1000000,1000000,-1000000,1000000],"x":3,"k":4}' },
+    { label: 'Long run: 13 entries', input: '{"nums":[-996905,-989728,-975288,-984298,-989544,-971857,-982653,-981095,-971838,-974332,-969498,-971709,-984736],"x":3,"k":4}' },
   ],
 }
 

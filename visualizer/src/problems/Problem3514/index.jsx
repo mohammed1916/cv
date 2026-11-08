@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Three', input: '{"nums":[1,2,3]}' },
     { label: 'Repeats', input: '{"nums":[4,4,7,2]}' },
+    { label: 'Single entry', input: '{"nums":[1]}' },
+    { label: 'Equal values tie', input: '{"nums":[5,5,5]}' },
+    { label: 'Largest values', input: '{"nums":[31,1,31,1,31]}' },
+    { label: 'Long run: 12 entries', input: '{"nums":[9,23,22,21,14,13,22,18,28,26,15,18]}' },
   ],
 }
 

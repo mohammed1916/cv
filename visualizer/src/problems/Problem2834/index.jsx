@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-minimum-possible-sum-of-a-beautiful-array/',
   complexity: 'O(n * target) with the simple membership test. The visualization caps n at 20.',
   examples: [
-    { label: 'Example 1', input: '{"n":2,"target":3}' },
-    { label: 'Example 2', input: '{"n":3,"target":3}' },
+    { label: 'Own case 1', input: '{"n":3,"target":4}' },
+    { label: 'Own case 2', input: '{"n":4,"target":4}' },
     { label: "Single term", input: "{\"n\":1,\"target\":1}" },
     { label: "Target equals n", input: "{\"n\":5,\"target\":5}" },
     { label: "Largest n and target", input: "{\"n\":20,\"target\":40}" },

@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-number-of-possible-root-nodes/',
   complexity: 'O(n) time and O(n) space for one walk and one rerooting pass. The visualization caps the tree at 10 vertices.',
   examples: [
-    { label: 'Example 1', input: '{"edges":[[0,1],[1,2],[1,3],[4,2]],"guesses":[[1,3],[0,1],[1,0],[2,4]],"k":3}' },
+    { label: 'Own case 1', input: '{"edges":[[4,2],[1,3],[1,2],[0,1]],"guesses":[[2,4],[1,0],[0,1],[1,3]],"k":3}' },
     { label: 'Path', input: '{"edges":[[0,1],[1,2],[2,3],[3,4]],"guesses":[[1,0],[3,4],[2,1],[3,2]],"k":1}' },
     { label: 'Single edge', input: '{"edges":[[0,1]],"guesses":[[1,0]],"k":0}' },
     { label: 'Star tree', input: '{"edges":[[0,1],[0,2],[0,3]],"guesses":[[0,1],[2,0]],"k":1}' },

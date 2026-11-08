@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/longest-common-subpath/',
   complexity: 'O(S log m) expected time for S total cities and shortest path m, using rolling hashes. The visualization caps input at 4 paths of 8 cities.',
   examples: [
-    { label: 'Example', input: '[[0,1,2,3,4],[2,3,4],[4,0,1,2,3]]' },
+    { label: 'Own case 1', input: '[[4,0,1,2,3],[2,3,4],[0,1,2,3,4]]' },
     { label: 'Alternating', input: '[[0,1,0,1],[1,0,1,0],[0,1,0,1,0]]' },
     { label: 'Single city', input: '[[3]]' },
     { label: 'Equal paths', input: '[[1,1],[1,1]]' },

@@ -14,9 +14,13 @@ const definition = {
   url: 'https://leetcode.com/problems/majority-frequency-characters/',
   complexity: 'O(n + d log d) time for n letters and d distinct frequencies. The visualization caps the string at 40 letters.',
   examples: [
-    { label: 'Example 1', input: '"aaabbbccdddde"' },
-    { label: 'Example 2', input: '"abcd"' },
-    { label: 'Example 3', input: '"pfpfgi"' },
+    { label: 'Own case 1', input: '"bbbcccddeeeef"' },
+    { label: 'Own case 2', input: '"bcde"' },
+    { label: 'Own case 3', input: '"qgqghj"' },
+    { label: 'Single letter', input: '"q"' },
+    { label: 'Equal frequencies tie', input: '"aabbcc"' },
+    { label: 'Longest allowed', input: '"abcdefghijklmnopqrstuvwxyzabcdefghijklmn"' },
+    { label: 'Long run: 40 letters', input: '"ccdeedcdceebddaddadbcedbdbcdebeacabaacdd"' },
   ],
 }
 

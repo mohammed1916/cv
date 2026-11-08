@@ -19,6 +19,11 @@ const definition = {
     { label: 'Zero present', input: '[4,1,6,0]' },
     { label: 'Repeats', input: '[5,2,2,8]' },
     { label: 'One even digit', input: '[9,7,8]' },
+    { label: 'Minimum length all zeros', input: '[0,0,0]' },
+    { label: 'Repeated nines', input: '[9,9,9,9]' },
+    { label: 'Mixed digits', input: '[3,1,4,1,5]' },
+    { label: 'Largest length alternating', input: '[9,0,9,0,9,0,9,0,9,0,9,0]' },
+    { label: 'Long run: 12 digits', input: '[9,8,6,1,6,2,9,8,7,4,0,7]' },
   ],
 }
 

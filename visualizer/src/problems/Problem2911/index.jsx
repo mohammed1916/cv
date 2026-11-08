@@ -20,9 +20,9 @@ const definition = {
   url: "https://leetcode.com/problems/minimum-changes-to-make-k-semi-palindromes/",
   complexity: "O(n^3) time and O(n*k) space for string length n, with the semi-palindrome cost computed per substring. The visualization caps s at 12 characters.",
   examples: [
-    { label: "Example 1", input: '{"s": "abcac", "k": 2}' },
-    { label: "Example 2", input: '{"s": "abcdef", "k": 2}' },
-    { label: "Example 3", input: '{"s": "aabbaa", "k": 3}' },
+    { label: "Own case 1", input: '{"s":"abcac","k":2}' },
+    { label: "Own case 2", input: '{"s":"bcdefg","k":3}' },
+    { label: "Own case 3", input: '{"s":"aabbaa","k":3}' },
     { label: "Two letters, k = 1", input: "{\"s\":\"ab\",\"k\":1}" },
     { label: "All letters equal, k = 2", input: "{\"s\":\"aaaa\",\"k\":2}" },
     { label: "Longest string, k = 6", input: "{\"s\":\"abcabcabcabc\",\"k\":6}" },

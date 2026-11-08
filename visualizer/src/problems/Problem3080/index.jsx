@@ -16,7 +16,7 @@ const definition = {
   url: 'https://leetcode.com/problems/mark-elements-on-array-by-performing-queries/',
   complexity: 'O(q * n log n) in this trace. A heap of unmarked values gives O(n log n + q * k log n) in the contest form.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,2,1,2,3,1],"queries":[[1,2],[3,3],[4,2]]}' },
+    { label: 'Own case 1', input: '{"nums":[2,3,3,2,3,4,2],"queries":[[2,3],[4,4],[5,3]]}' },
     { label: "Single element", input: "{\"nums\":[5],\"queries\":[[0,1]]}" },
     { label: "Equal values use the smaller index", input: "{\"nums\":[2,2,2,2],\"queries\":[[1,1],[3,2]]}" },
     { label: "Zero k leaves values unmarked", input: "{\"nums\":[3,1,4],\"queries\":[[0,0],[2,0]]}" },

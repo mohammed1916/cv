@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/construct-string-with-minimum-cost/',
   complexity: 'O(n * w * L) time for n target letters, w words and word length L. The visualization caps the target at 20 letters.',
   examples: [
-    { label: 'Example 1', input: '{"target": "abcdef", "words": ["abdef", "abc", "d", "def", "ef"], "costs": [100, 1, 1, 10, 5]}' },
+    { label: 'Own case 1', input: '{"target":"abcdef","words":["ef","def","d","abc","abdef"],"costs":[5,10,1,1,100]}' },
     { label: 'Repeated word', input: '{"target": "aaaa", "words": ["a"], "costs": [2]}' },
     { label: 'One letter target', input: '{"target":"a","words":["a"],"costs":[1]}' },
     { label: 'Equal costs tie', input: '{"target":"aa","words":["a","aa"],"costs":[1,1]}' },

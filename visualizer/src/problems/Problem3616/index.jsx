@@ -17,6 +17,10 @@ const definition = {
     { label: 'Two replacements', input: '[5, 3, 4, 1, 2]' },
     { label: 'Ties keep the selection', input: '[7, 7, 7]' },
     { label: 'Steady improvement', input: '[4, 3, 2, 1]' },
+    { label: 'Single arrival', input: '[6]' },
+    { label: 'Equal ranks in pairs', input: '[9,9,4,4]' },
+    { label: 'Largest ranks', input: '[100,1,100,1]' },
+    { label: 'Long run: 16 arrivals', input: '[63,13,52,48,71,44,79,10,75,55,77,22,79,61,81,23]' },
   ],
 }
 

@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-palindromic-subsequences/',
   complexity: 'O(n^3) time here for a simple pair count, and O(1) extra space per middle position. The visualization caps input at 40 digits.',
   examples: [
-    { label: 'Example 1', input: '"103301"' },
+    { label: 'Own case 1', input: '"214412"' },
     { label: 'All zeros', input: '"0000000"' },
     { label: 'Minimum length', input: '"12321"' },
     { label: 'All equal digits', input: '"11111"' },

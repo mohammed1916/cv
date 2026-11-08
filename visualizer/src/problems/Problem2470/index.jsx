@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-subarrays-with-lcm-equal-to-k/',
   complexity: 'O(n^2 log V) time and O(1) extra space. A value that does not divide k ends the inner loop.',
   examples: [
-    { label: 'Example', input: '{"nums":[3,6,2,7,1],"k":6}' },
+    { label: 'Own case 1', input: '{"nums":[4,7,3,8,2],"k":7}' },
     { label: 'Pair', input: '{"nums":[2,4],"k":4}' },
     { label: 'Single value', input: '{"nums":[3],"k":1}' },
     { label: 'Equal values', input: '{"nums":[6,6,6,6],"k":12}' },

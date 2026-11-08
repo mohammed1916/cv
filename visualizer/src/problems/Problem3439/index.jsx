@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Invented short day', input: '{"eventTime":6,"startTime":[0,2],"endTime":[1,4],"k":1}' },
     { label: 'Invented three meetings', input: '{"eventTime":10,"startTime":[0,7,9],"endTime":[1,8,10],"k":1}' },
+    { label: 'Single meeting', input: '{"eventTime":1,"startTime":[0],"endTime":[1],"k":0}' },
+    { label: 'Equal lengths tie', input: '{"eventTime":6,"startTime":[0,3],"endTime":[2,5],"k":1}' },
+    { label: 'Largest day', input: '{"eventTime":1000,"startTime":[0,500],"endTime":[499,1000],"k":1}' },
+    { label: 'Long run: 8 meetings', input: '{"eventTime":100,"startTime":[0,12,25,38,50,63,76,88],"endTime":[10,22,33,47,60,73,85,99],"k":2}' },
   ],
 }
 

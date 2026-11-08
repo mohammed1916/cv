@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: "Tie at distance three", input: "{\"target\":[1,2],\"drones\":[[0,0,5],[4,4,1],[1,5,3]]}" },
     { label: "Nobody reaches", input: "{\"target\":[0,0],\"drones\":[[9,9,4]]}" },
+    { label: "Single drone on target", input: "{\"target\":[0,0],\"drones\":[[0,0,1]]}" },
+    { label: "Two drones at equal distance", input: "{\"target\":[0,0],\"drones\":[[3,0,5],[0,3,5]]}" },
+    { label: "Corner coordinates", input: "{\"target\":[-25,25],\"drones\":[[25,-25,100],[-25,25,1]]}" },
+    { label: "Long run: ten drones", input: "{\"target\":[-21,-17],\"drones\":[[17,18,6],[-10,-12,59],[22,20,35],[-25,20,70],[19,-19,58],[-14,-11,65],[2,-4,58],[9,14,21],[16,2,15],[-17,-3,53]]}" },
   ],
 }
 

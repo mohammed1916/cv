@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Three by four', input: '{"rows":3,"cols":4}' },
     { label: 'Single row', input: '{"rows":1,"cols":5}' },
+    { label: "Single cell", input: '{"rows":1,"cols":1}' },
+    { label: "Square grid ties rows and columns", input: '{"rows":6,"cols":6}' },
+    { label: "Tallest allowed grid", input: '{"rows":25,"cols":1}' },
+    { label: "Long run: 24 by 23 grid", input: '{"rows":24,"cols":23}' },
   ],
 }
 

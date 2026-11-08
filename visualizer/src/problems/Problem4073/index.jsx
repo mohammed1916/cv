@@ -16,6 +16,10 @@ const definition = {
     { label: "One letter", input: '{"n":1}' },
     { label: "Three letters", input: '{"n":3}' },
     { label: "Ten letters", input: '{"n":10}' },
+    { label: "Power of two: 8", input: '{"n":8}' },
+    { label: "All ones in binary: 15", input: '{"n":15}' },
+    { label: "Largest allowed n", input: '{"n":1000000000000000}' },
+    { label: "Long run: 15-digit n", input: '{"n":660694263908097}' },
   ],
 };
 

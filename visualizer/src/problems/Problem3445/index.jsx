@@ -13,9 +13,13 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-difference-between-even-and-odd-frequency-ii/',
   complexity: 'O(25 * n) time with prefix counts. The visualization caps s at 16 digits.',
   examples: [
-    { label: 'Example 1', input: '{"s":"12233","k":4}' },
-    { label: 'Example 2', input: '{"s":"1122211","k":3}' },
+    { label: 'Own case 1', input: '{"s":"23344","k":5}' },
+    { label: 'Own case 2', input: '{"s":"2233322","k":4}' },
     { label: 'Example 3', input: '{"s":"110","k":3}' },
+    { label: 'Smallest string', input: '{"s":"001","k":2}' },
+    { label: 'Equal pairs tie', input: '{"s":"1122","k":2}' },
+    { label: 'Longest string, one window', input: '{"s":"0123401234012340","k":1}' },
+    { label: 'Long run: 16 digits', input: '{"s":"0334241402340311","k":8}' },
   ],
 }
 

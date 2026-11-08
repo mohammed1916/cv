@@ -19,5 +19,21 @@ export default [
   {
     "label": "All equal",
     "input": "[11,11,11]"
+  },
+  {
+    "label": "Smallest sides",
+    "input": "[1,1,1]"
+  },
+  {
+    "label": "Isosceles triangle",
+    "input": "[5,5,8]"
+  },
+  {
+    "label": "Largest scalene",
+    "input": "[1000,999,998]"
+  },
+  {
+    "label": "Large right triangle",
+    "input": "[600,800,1000]"
   }
 ];

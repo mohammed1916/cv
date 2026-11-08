@@ -21,6 +21,10 @@ const definition = {
         ],
       }),
     },
+    { label: 'Single login', input: '{"as_of":"2026-06-30","logins":[{"customer_id":4,"login_date":"2026-06-30"}]}' },
+    { label: 'Same-day logins', input: '{"as_of":"2026-06-30","logins":[{"customer_id":1,"login_date":"2026-06-15"},{"customer_id":1,"login_date":"2026-06-15"}]}' },
+    { label: 'Login on the as-of date', input: '{"as_of":"2026-06-30","logins":[{"customer_id":2,"login_date":"2026-06-01"},{"customer_id":2,"login_date":"2026-06-30"}]}' },
+    { label: 'Long run: 30 logins', input: '{"as_of":"2026-06-30","logins":[{"customer_id":4,"login_date":"2026-04-15"},{"customer_id":6,"login_date":"2026-04-28"},{"customer_id":8,"login_date":"2026-04-12"},{"customer_id":2,"login_date":"2026-06-14"},{"customer_id":4,"login_date":"2026-05-22"},{"customer_id":6,"login_date":"2026-04-28"},{"customer_id":8,"login_date":"2026-04-08"},{"customer_id":2,"login_date":"2026-06-02"},{"customer_id":4,"login_date":"2026-06-27"},{"customer_id":6,"login_date":"2026-05-05"},{"customer_id":8,"login_date":"2026-04-12"},{"customer_id":2,"login_date":"2026-05-11"},{"customer_id":4,"login_date":"2026-04-11"},{"customer_id":6,"login_date":"2026-04-08"},{"customer_id":8,"login_date":"2026-05-08"},{"customer_id":2,"login_date":"2026-06-24"},{"customer_id":4,"login_date":"2026-04-27"},{"customer_id":6,"login_date":"2026-04-14"},{"customer_id":8,"login_date":"2026-06-22"},{"customer_id":2,"login_date":"2026-05-01"},{"customer_id":4,"login_date":"2026-05-28"},{"customer_id":6,"login_date":"2026-05-11"},{"customer_id":8,"login_date":"2026-06-28"},{"customer_id":2,"login_date":"2026-05-28"},{"customer_id":4,"login_date":"2026-06-16"},{"customer_id":6,"login_date":"2026-05-10"},{"customer_id":8,"login_date":"2026-05-09"},{"customer_id":2,"login_date":"2026-05-24"},{"customer_id":4,"login_date":"2026-05-12"},{"customer_id":6,"login_date":"2026-05-16"}]}' },
   ],
 }
 

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Gap too large', input: '3142' },
     { label: 'All close', input: '5753' },
+    { label: 'Two digits', input: '10' },
+    { label: 'Equal digits', input: '5555' },
+    { label: 'Largest allowed length', input: '9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999' },
+    { label: 'Long run: 100 digits', input: '0816443712953336368013465353788039460843572423764655570046056520552669326217349097687572472517042758' },
   ],
 }
 

@@ -14,8 +14,12 @@ const definition = {
   url: 'https://leetcode.com/problems/digit-operations-to-make-two-integers-equal/',
   complexity: 'O(10^d * d log 10^d) time for d-digit numbers. The visualization caps input at 3 digits.',
   examples: [
-    { label: 'Example', input: '{"n":10,"m":12}' },
+    { label: 'Own case 1', input: '{"n":11,"m":13}' },
     { label: 'Blocked', input: '{"n":4,"m":8}' },
+    { label: 'Equal numbers', input: '{"n":7,"m":7}' },
+    { label: 'Single digits', input: '{"n":1,"m":9}' },
+    { label: 'Largest three digit pair', input: '{"n":100,"m":999}' },
+    { label: 'Long run: three digits', input: '{"n":123,"m":456}' },
   ],
 }
 

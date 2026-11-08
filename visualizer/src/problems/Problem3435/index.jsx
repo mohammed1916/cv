@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Two swapped words', input: '{"words":["xy","yx"]}' },
     { label: 'Shared first letter', input: '{"words":["mm","mn"]}' },
+    { label: 'Single word', input: '{"words":["ab"]}' },
+    { label: 'Shared first letter tie', input: '{"words":["aa","ab"]}' },
+    { label: 'Four words, four letters', input: '{"words":["ab","cd","ad","cb"]}' },
+    { label: 'Long run: 4 words', input: '{"words":["ab","cd","bc","da"]}' },
   ],
 }
 

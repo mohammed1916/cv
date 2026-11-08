@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/total-characters-in-string-after-transformations-ii/',
   complexity: 'O(26^3 * log t) time and O(26^2) space. The visualization caps s at 12 letters and t at 1000 rounds.',
   examples: [
-    { label: 'Example 1', input: '{"s":"abcyy","t":2,"nums":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2]}' },
+    { label: 'Own case 1', input: '{"s":"bcdzz","t":3,"nums":[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3]}' },
     { label: 'Example 2', input: '{"s":"a","t":2,"nums":[2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]}' },
     { label: 'Zero transformations', input: '{"s":"a","t":0,"nums":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]}' },
     { label: 'Repeated letter, largest mapping', input: '{"s":"zz","t":1,"nums":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,25]}' },

@@ -19,6 +19,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[5,1,2,6]}' },
     { label: 'Equal ends', input: '{"nums":[2,1,2]}' },
+    { label: 'Single zero', input: '{"nums":[0]}' },
+    { label: 'Equal values', input: '{"nums":[5,5,5]}' },
+    { label: 'Extreme values', input: '{"nums":[0,1000,0,1000]}' },
+    { label: 'Long run: 30 values', input: '{"nums":[813,305,82,206,469,659,337,286,888,174,735,71,439,188,192,527,185,308,286,833,260,791,617,952,799,888,868,859,996,590]}' },
   ],
 }
 

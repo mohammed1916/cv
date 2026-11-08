@@ -20,8 +20,8 @@ const definition = {
   url: "https://leetcode.com/problems/count-beautiful-substrings-i/",
   complexity: "O(n^2) time and O(1) extra space for string length n. The visualization caps s at 50 letters.",
   examples: [
-    { label: "Example 1", input: '{"s": "abba", "k": 1}' },
-    { label: "Example 2", input: '{"s": "bcdf", "k": 1}' },
+    { label: "Own case 1", input: '{"s":"bccb","k":2}' },
+    { label: "Own case 2", input: '{"s":"cdeg","k":2}' },
     { label: 'Single letter', input: '{"s":"a","k":1}' },
     { label: 'Repeated vowel', input: '{"s":"aaaa","k":2}' },
     { label: 'Upper length', input: '{"s":"aeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiou","k":1000}' },

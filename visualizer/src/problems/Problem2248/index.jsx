@@ -8,7 +8,7 @@ const definition = {
   url: 'https://leetcode.com/problems/intersection-of-multiple-arrays/',
   complexity: 'O(total elements + V log V) time, where V is the number of distinct kept values. The visualization caps input at 6 arrays.',
   examples: [
-    { label: 'Example 1', input: '[[3,1,2,4,5],[1,2,3,4],[3,4,5,6]]' },
+    { label: 'Own case 1', input: '[[4,2,3,5,6],[2,3,4,5],[4,5,6,7]]' },
     { label: 'Empty', input: '[[1,2],[3,4]]' },
     { label: 'Single array', input: '[[9]]' },
     { label: 'Equal values across arrays', input: '[[4,8],[4,8]]' },

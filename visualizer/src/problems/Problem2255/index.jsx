@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-prefixes-of-a-given-string/',
   complexity: 'O(total length of the words) time. The visualization caps input at 10 words of 10 letters.',
   examples: [
-    { label: 'Example 1', input: '{"words":["a","b","c","ab","bc","abc"],"s":"abc"}' },
+    { label: 'Own case 1', input: '{"words":["b","c","d","bc","cd","bcd"],"s":"bcd"}' },
     { label: 'No prefix', input: '{"words":["x","abcd"],"s":"abc"}' },
     { label: 'Single word matches', input: '{"words":["a"],"s":"a"}' },
     { label: 'Duplicate words count twice', input: '{"words":["ab","ab","a"],"s":"ab"}' },

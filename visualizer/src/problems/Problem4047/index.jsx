@@ -16,6 +16,10 @@ const definition = {
     { label: "Already zero", input: '{"nums":[1,2,3]}' },
     { label: "Unreachable", input: '{"nums":[1,2]}' },
     { label: "Needs steps", input: '{"nums":[4,6,7]}' },
+    { label: "One zero", input: "{\"nums\":[0]}" },
+    { label: "Equal values", input: "{\"nums\":[5,5]}" },
+    { label: "Largest values", input: "{\"nums\":[7,7,7,7]}" },
+    { label: "Long run: four values", input: "{\"nums\":[0,1,5,2]}" },
   ],
 };
 

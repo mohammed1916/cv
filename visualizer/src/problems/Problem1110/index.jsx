@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/delete-nodes-and-return-forest/',
   complexity: 'O(n) time for n nodes, plus O(d) for the delete set. The visualization caps the tree at 15 entries.',
   examples: [
-    { label: 'Example 1', input: '{"root":[1,2,3,4,5,6,7],"to_delete":[3,5]}' },
-    { label: 'Example 2', input: '{"root":[1,2,4,null,3],"to_delete":[3]}' },
+    { label: 'Own case 1', input: '{"root":[2,3,4,5,6,7,8],"to_delete":[4,6]}' },
+    { label: 'Own case 2', input: '{"root":[2,3,5,null,4],"to_delete":[4]}' },
     { label: 'Single node deleted', input: '{"root":[5],"to_delete":[5]}' },
     { label: 'Nothing deleted', input: '{"root":[2,1,3],"to_delete":[]}' },
     { label: 'Root and both children deleted', input: '{"root":[1,2,3],"to_delete":[1,2,3]}' },

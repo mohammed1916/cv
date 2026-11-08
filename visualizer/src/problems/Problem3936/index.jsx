@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Zeros in front', input: '[0, 4, 0, 7, 1]' },
     { label: 'Mixed tail', input: '[5, 0, 3, 0]' },
+    { label: 'Single zero', input: '[0]' },
+    { label: 'Equal values', input: '[3,3,3]' },
+    { label: 'Longest alternating', input: '[9,0,9,0,9,0,9,0,9,0,9,0]' },
+    { label: 'Long run: 12 items', input: '[1,4,8,7,0,8,3,3,6,7,1,3]' },
   ],
 }
 

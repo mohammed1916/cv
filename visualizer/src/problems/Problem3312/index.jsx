@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/sorted-gcd-pair-queries/',
   complexity: 'O(n^2 log n) time for n numbers, since every pair is stored and sorted. The visualization caps n at 10.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[2,3,4],"queries":[0,2,2]}' },
+    { label: 'Own case 1', input: '{"nums":[4,3,2],"queries":[2,2,0]}' },
     { label: 'Example 2', input: '{"nums":[4,3,12,8],"queries":[0,4]}' },
     { label: 'Smallest input', input: '{"nums":[1,1],"queries":[0]}' },
     { label: 'Equal values', input: '{"nums":[6,6,6],"queries":[0,1,2]}' },

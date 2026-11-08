@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-two-non-overlapping-sub-arrays-each-with-target-sum/',
   complexity: 'O(n) time with a hash map of prefix sums. The visualization caps arr at 12 entries.',
   examples: [
-    { label: 'Example 1', input: '{"arr":[3,2,2,4,3],"target":3}' },
-    { label: 'Example 2', input: '{"arr":[7,3,4,7],"target":7}' },
+    { label: 'Own case 1', input: '{"arr":[4,3,3,5,4],"target":4}' },
+    { label: 'Own case 2', input: '{"arr":[8,4,5,8],"target":8}' },
     { label: 'Single element', input: '{"arr":[5],"target":5}' },
     { label: 'Repeated values', input: '{"arr":[4,4,4,4,4],"target":4}' },
     { label: 'No match', input: '{"arr":[1,2,3],"target":12}' },

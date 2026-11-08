@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":6,"requests":[5,0,3,3]}' },
     { label: 'Example 2', input: '{"n":4,"requests":[3,3,1]}' },
+    { label: "One floor", input: "{\"n\":1,\"requests\":[0]}" },
+    { label: "Repeated floor request", input: "{\"n\":5,\"requests\":[2,2,2]}" },
+    { label: "Lowest and highest floors", input: "{\"n\":100,\"requests\":[0,99,0,99]}" },
+    { label: "Long run: 100 requests", input: "{\"n\":100,\"requests\":[9,83,43,27,18,55,20,99,88,92,98,76,56,45,51,8,6,23,37,77,35,72,98,5,16,36,14,10,51,98,69,87,99,86,62,93,34,97,47,39,12,68,18,60,37,84,8,27,90,7,54,99,12,14,3,80,15,17,73,6,77,96,5,8,24,39,76,58,94,94,73,0,64,93,51,14,46,92,27,90,35,3,52,96,44,6,46,57,63,15,73,4,53,31,76,33,40,63,29,87]}" },
   ],
 }
 

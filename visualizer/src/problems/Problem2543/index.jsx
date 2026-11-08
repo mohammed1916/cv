@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/check-if-point-is-reachable/',
   complexity: 'O(log(max(targetX, targetY))) time and O(1) space.',
   examples: [
-    { label: 'Example 1', input: '{"targetX": 6, "targetY": 9}' },
-    { label: 'Example 2', input: '{"targetX": 4, "targetY": 7}' },
+    { label: 'Own case 1', input: '{"targetX":7,"targetY":10}' },
+    { label: 'Own case 2', input: '{"targetX":5,"targetY":8}' },
     { label: 'Smallest target', input: '{"targetX":1,"targetY":1}' },
     { label: 'Equal targets', input: '{"targetX":5,"targetY":5}' },
     { label: 'Largest target on one axis', input: '{"targetX":1000,"targetY":1}' },

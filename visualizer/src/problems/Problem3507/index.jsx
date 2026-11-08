@@ -19,6 +19,11 @@ const definition = {
     { label: 'Descending start', input: '[6,1,4,2]' },
     { label: 'Already sorted', input: '[1,2,2]' },
     { label: 'Zero at the end', input: '[8,2,7,0]' },
+    { label: 'Single value', input: '[0]' },
+    { label: 'Equal values', input: '[7,7,7]' },
+    { label: 'Extremes', input: '[1000,-1000,1000,-1000,1000,-1000,1000,-1000,1000,-1000,1000,-1000]' },
+    { label: 'All zeros', input: '[0,0,0,0]' },
+    { label: 'Long run: 12 values', input: '[-998,616,-48,-504,-973,542,262,16,573,13,473,-527]' },
   ],
 }
 

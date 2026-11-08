@@ -21,6 +21,10 @@ const definition = {
   examples: [
     { label: 'Doubling helps', input: '{"nums":[3,5,4],"target":10}' },
     { label: 'Halving helps', input: '{"nums":[5,6],"target":7}' },
+    { label: "One value", input: "{\"nums\":[1],\"target\":1}" },
+    { label: "Equal values", input: "{\"nums\":[4,4,4],\"target\":8}" },
+    { label: "Largest values and target", input: "{\"nums\":[20,20,20,20,20,20],\"target\":30}" },
+    { label: "Long run: six values", input: "{\"nums\":[2,13,2,1,11,11],\"target\":25}" },
   ],
 }
 

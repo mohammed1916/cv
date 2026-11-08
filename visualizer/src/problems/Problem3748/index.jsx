@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[2,4,1,3],"queries":[[0,2],[1,3]]}' },
     { label: 'Sorted run', input: '{"nums":[1,2,2,1],"queries":[[0,3]]}' },
+    { label: "Single element", input: "{\"nums\":[4],\"queries\":[[0,0]]}" },
+    { label: "Equal values", input: "{\"nums\":[5,5,5,5],\"queries\":[[0,3]]}" },
+    { label: "Full and split ranges", input: "{\"nums\":[9,1,9,1,9,1,9,1,9,1,9,1],\"queries\":[[0,11],[0,0],[11,11],[0,5],[6,11],[3,8]]}" },
+    { label: "Long run: 12 values, 6 queries", input: "{\"nums\":[4,5,5,4,3,7,3,5,2,9,7,9],\"queries\":[[1,11],[6,11],[2,9],[3,8],[0,1],[2,11]]}" },
   ],
 }
 

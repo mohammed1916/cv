@@ -1,6 +1,6 @@
 const lines = text => text.split('\n').map((t, i) => ({ line: i + 1, text: t }))
-const PY_OF = {1: 47, 2: 49, 3: 51, 4: 53}
-const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: PY_OF[line] ?? line, activeLine: line, message, state })
+const PY_OF = {1: 3, 2: 5, 3: 7, 4: 8}
+const frame = (phase, line, message, state = {}, py = PY_OF[line] ?? line) => ({ phase, pythonLine: py, activeLine: line, message, state })
 export const PHASES = [
   { id: 'setup', label: 'Setup', description: 'Read the input and prepare the model.' },
   { id: 'step', label: 'Step', description: 'Process one event or item.' },
@@ -25,10 +25,10 @@ export function parseInput(text) {
   return JSON.parse(text)
 }
 export function buildTrace(input) {
-  const frames = [frame('setup', 1, 'Walk the value and replace each undefined marker with null.', { value: input })]
+  const frames = [frame('setup', 1, 'Walk the value and replace each undefined marker with null.', { value: input }, 1)]
   const walk = (value, path) => {
     if (MARK(value)) {
-      frames.push(frame('step', 3, `${path || 'root'} was undefined; it becomes null.`, { path, now: null }))
+      frames.push(frame('step', 1, `${path || 'root'} was undefined; it becomes null.`, { path, now: null }))
       return null
     }
     if (Array.isArray(value)) return value.map((item, i) => walk(item, `${path}[${i}]`))

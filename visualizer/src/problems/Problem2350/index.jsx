@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/shortest-impossible-sequence-of-rolls/',
   complexity: 'O(n) time with a set of at most k faces. The visualization caps input at 10 rolls.',
   examples: [
-    { label: 'Example 1', input: '{"rolls":[4,2,1,2,3,3,2,4,1],"k":4}' },
-    { label: 'Example 2', input: '{"rolls":[1,1,2,2],"k":2}' },
+    { label: 'Own case 1', input: '{"rolls":[1,4,2,3,3,2,1,2,4],"k":4}' },
+    { label: 'Own case 2', input: '{"rolls":[2,2,3,3],"k":3}' },
     { label: 'Single roll, k one', input: '{"rolls":[1],"k":1}' },
     { label: 'Repeated faces', input: '{"rolls":[2,2,2],"k":2}' },
     { label: 'Largest input: 10 rolls', input: '{"rolls":[4,1,2,3,4,1,2,3,4,1],"k":4}' },

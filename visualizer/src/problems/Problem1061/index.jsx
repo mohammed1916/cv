@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/lexicographically-smallest-equivalent-string/',
   complexity: 'O((|s1| + |baseStr|) * alpha) time with a union-find over 26 letters.',
   examples: [
-    { label: 'Example 1', input: '{"s1":"parker","s2":"morris","baseStr":"parser"}' },
-    { label: 'Example 2', input: '{"s1":"hello","s2":"world","baseStr":"hold"}' },
+    { label: 'Own case 1', input: '{"s1":"qbslfs","s2":"npssjt","baseStr":"qbstfs"}' },
+    { label: 'Own case 2', input: '{"s1":"ifmmp","s2":"xpsme","baseStr":"ipme"}' },
     { label: 'Chain', input: '{"s1":"xyz","s2":"yzw","baseStr":"wxyzq"}' },
     { label: 'Single letter pair', input: '{"s1":"a","s2":"b","baseStr":"a"}' },
     { label: 'Identical pairs leave base unchanged', input: '{"s1":"aa","s2":"aa","baseStr":"aab"}' },

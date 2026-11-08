@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Large digits', input: '9999' },
     { label: 'Small digits', input: '123' },
+    { label: 'Single digit', input: '1' },
+    { label: 'Repeated digits', input: '1111' },
+    { label: 'Largest allowed n', input: '1000000000' },
+    { label: 'Long run: nine digits', input: '697772173' },
   ],
 }
 

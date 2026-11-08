@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-of-sub-multisets-with-bounded-sum/',
   complexity: 'O(distinct * total * maxCount) time. The visualization caps input at 8 numbers.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,2,3],"l":6,"r":6}' },
+    { label: 'Own case 1', input: '{"nums":[2,3,3,4],"l":7,"r":7}' },
     { label: 'Zeros', input: '{"nums":[0,0,2],"l":0,"r":2}' },
     { label: "Single zero, empty range check", input: "{\"nums\":[0],\"l\":0,\"r\":0}" },
     { label: "Equal values, middle range", input: "{\"nums\":[2,2,2,2],\"l\":4,\"r\":6}" },

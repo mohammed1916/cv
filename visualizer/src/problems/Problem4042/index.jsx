@@ -16,6 +16,10 @@ const definition = {
     { label: "Two pairs", input: '{"nums":[1,1,2,2],"k":2,"start":[0,3],"q":2}' },
     { label: "Odd counts", input: '{"nums":[1,2,2,3],"k":1,"start":[0,3],"q":2}' },
     { label: "Moving window", input: '{"nums":[4,4,7,7,7,7],"k":2,"start":[1,5],"q":3}' },
+    { label: "One digit", input: "{\"nums\":[7],\"k\":1,\"start\":[0,0],\"q\":1}" },
+    { label: "Equal digits", input: "{\"nums\":[5,5,5,5],\"k\":2,\"start\":[1,2],\"q\":3}" },
+    { label: "Longest with extremes", input: "{\"nums\":[0,9,0,9,0,9,0,9,0,9,0,9,0,9],\"k\":10,\"start\":[0,13],\"q\":12}" },
+    { label: "Long run: 14 digits", input: "{\"nums\":[0,7,6,8,4,7,5,7,6,2,9,0,3,2],\"k\":4,\"start\":[2,10],\"q\":10}" },
   ],
 };
 

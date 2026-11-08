@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Missing left first', input: '{"tree":[1,2,3,4,null,null,5]}' },
     { label: 'Mixed shape', input: '{"tree":[6,3,9,2,4,null,8,1,null,null,7]}' },
+    { label: 'Single root', input: '{"tree":[0]}' },
+    { label: 'Right-leaning run', input: '{"tree":[4,null,5,null,null,null,6]}' },
+    { label: 'Extreme values, 12 nodes', input: '{"tree":[-9,9,-9,9,-9,9,-9,9,-9,9,-9,9]}' },
+    { label: 'Long run: 25 slots, 12 nodes', input: '{"tree":[-9,null,null,-6,null,3,null,9,1,null,8,null,7,null,null,-6,null,null,null,null,3,6,-9,null,8]}' },
   ],
 }
 

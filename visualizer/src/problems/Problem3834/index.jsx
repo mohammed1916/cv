@@ -18,6 +18,10 @@ const definition = {
     { label: 'Example 1', input: '{"nums":[3,1,1,2]}' },
     { label: 'Cascade', input: '{"nums":[1,1,2]}' },
     { label: 'No merge', input: '{"nums":[3,7,5]}' },
+    { label: 'One value', input: '{"nums":[9]}' },
+    { label: 'Equal pair cascade', input: '{"nums":[2,2]}' },
+    { label: 'Largest values merge at the top', input: '{"nums":[100000,100000]}' },
+    { label: 'Long run: 30 values', input: '{"nums":[3,3,2,1,2,2,1,4,2,1,2,3,3,2,4,4,4,4,3,4,4,4,1,2,3,3,4,2,3,2]}' },
   ],
 }
 

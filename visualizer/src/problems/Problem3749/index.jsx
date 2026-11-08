@@ -15,6 +15,10 @@ const definition = {
     { label: "Nested product", input: "\"add(1,mul(2,-3))\"" },
     { label: "Exact division", input: "\"div(sub(10,4),3)\"" },
     { label: "Mixed operators", input: "\"sub(mul(-2,add(3,4)),div(12,-4))\"" },
+    { label: "Single number", input: "\"7\"" },
+    { label: "Negative division", input: "\"div(-9,-3)\"" },
+    { label: "Deep nesting at 78 characters", input: "\"add(add(add(add(add(add(add(add(add(add(add(1,1),1),1),1),1),1),1),1),1),1),1)\"" },
+    { label: "Long run: six operations", input: "\"mul(mul(sub(add(sub(sub(2,2),1),4),3),2),1)\"" },
   ],
 }
 

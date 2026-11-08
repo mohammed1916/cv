@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Path', input: '{"n":4,"edges":[[0,1],[1,2],[2,3]],"start":"0000","target":"0110"}' },
     { label: 'Odd mismatch', input: '{"n":3,"edges":[[1,0],[2,1]],"start":"001","target":"110"}' },
+    { label: 'Two nodes', input: '{"n":2,"edges":[[0,1]],"start":"00","target":"11"}' },
+    { label: 'Already equal', input: '{"n":3,"edges":[[0,1],[0,2]],"start":"101","target":"101"}' },
+    { label: 'Path of 12 nodes', input: '{"n":12,"edges":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11]],"start":"000000000000","target":"111111111111"}' },
+    { label: 'Long run: 12 nodes', input: '{"n":12,"edges":[[0,1],[0,2],[0,3],[2,4],[4,5],[1,6],[4,7],[1,8],[4,9],[4,10],[4,11]],"start":"010001100000","target":"101100000101"}' },
   ],
 }
 

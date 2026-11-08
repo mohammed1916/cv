@@ -14,8 +14,12 @@ const definition = {
   url: 'https://leetcode.com/problems/absolute-difference-between-maximum-and-minimum-k-elements/',
   complexity: 'O(n log n) time for sorting. The visualization caps n at 20.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[5,2,2,4],"k":2}' },
+    { label: 'Own case 1', input: '{"nums":[6,3,3,5],"k":3}' },
     { label: 'Single', input: '{"nums":[100],"k":1}' },
+    { label: "Single value", input: "{\"nums\":[50],\"k\":1}" },
+    { label: "Equal values", input: "{\"nums\":[7,7,7,7],\"k\":2}" },
+    { label: "Largest values, alternating", input: "{\"nums\":[100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1],\"k\":10}" },
+    { label: "Long run: 20 values", input: "{\"nums\":[88,41,100,39,33,18,96,79,36,85,32,81,93,20,96,19,49,97,84,52],\"k\":7}" },
   ],
 }
 

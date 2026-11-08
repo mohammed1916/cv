@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-minimum-area-to-cover-all-ones-i/',
   complexity: 'O(R * C) time over the grid, O(1) extra space.',
   examples: [
-    { label: 'Example 1', input: '[[0,1,0],[1,0,1]]' },
+    { label: 'Own case 1', input: '[[1,0,1],[0,1,0]]' },
     { label: 'Corner', input: '[[1,0],[0,0]]' },
     { label: 'One cell', input: '[[1]]' },
     { label: 'Single one in a corner', input: '[[0,0],[0,1]]' },

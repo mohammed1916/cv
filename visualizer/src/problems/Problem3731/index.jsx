@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[6,2,9,3]}' },
     { label: 'Gap at the start', input: '{"nums":[7,4]}' },
+    { label: 'Smallest pair', input: '{"nums":[1,2]}' },
+    { label: 'Extreme values', input: '{"nums":[-100,100]}' },
+    { label: 'Unsorted input', input: '{"nums":[5,3,8,1]}' },
+    { label: 'Long run: 12 values', input: '{"nums":[72,55,-13,-82,75,3,-15,27,60,-85,14,-92]}' },
   ],
 }
 

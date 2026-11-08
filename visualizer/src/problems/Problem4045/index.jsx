@@ -16,6 +16,10 @@ const definition = {
     { label: "Early merge", input: '{"positions":[1,3,6],"speeds":[2,1,1],"distance":2}' },
     { label: "Catch up later", input: '{"positions":[1,4,9],"speeds":[3,1,2],"distance":1}' },
     { label: "Tight line", input: '{"positions":[1,2,3],"speeds":[1,1,1],"distance":1}' },
+    { label: "One robot", input: "{\"positions\":[1],\"speeds\":[1],\"distance\":1}" },
+    { label: "Equal speeds", input: "{\"positions\":[2,4],\"speeds\":[3,3],\"distance\":9}" },
+    { label: "Largest positions and speeds", input: "{\"positions\":[1,1000000000],\"speeds\":[1000000000,1],\"distance\":1000000000}" },
+    { label: "Long run: eight robots", input: "{\"positions\":[9094,104720,151849,208611,246693,276206,283927,378321],\"speeds\":[46,51,23,78,12,70,32,88],\"distance\":500}" },
   ],
 };
 

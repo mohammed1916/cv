@@ -15,7 +15,7 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"5525","a":9,"b":2}' },
     { label: 'Example 2', input: '{"s":"74","a":5,"b":1}' },
-    { label: 'Example 3', input: '{"s":"0011","a":4,"b":2}' },
+    { label: 'Own case 3', input: '{"s":"1122","a":5,"b":3}' },
     { label: "Smallest string", input: "{\"s\":\"00\",\"a\":1,\"b\":1}" },
     { label: "All digits equal", input: "{\"s\":\"1111\",\"a\":5,\"b\":2}" },
     { label: "Eight digits, large steps", input: "{\"s\":\"98765432\",\"a\":9,\"b\":7}" },

@@ -16,6 +16,10 @@ const definition = {
     { label: "First ten", input: '{"l":1,"r":10}' },
     { label: "Three digits", input: '{"l":100,"r":250}' },
     { label: "Single number", input: '{"l":7,"r":7}' },
+    { label: "Smallest range", input: "{\"l\":1,\"r\":1}" },
+    { label: "Equal ends", input: "{\"l\":50,\"r\":50}" },
+    { label: "Largest range end", input: "{\"l\":1,\"r\":1000000000000}" },
+    { label: "Long run: twelve-digit range", input: "{\"l\":123456789,\"r\":987654321012}" },
   ],
 };
 

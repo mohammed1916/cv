@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"num":3,"sum":20}' },
     { label: 'Too large', input: '{"num":2,"sum":19}' },
+    { label: 'One digit exact', input: '{"num":1,"sum":9}' },
+    { label: 'Exact maximum for two digits', input: '{"num":2,"sum":18}' },
+    { label: 'Largest sum allowed', input: '{"num":50,"sum":450}' },
+    { label: 'Long run: 37 digits', input: '{"num":37,"sum":200}' },
   ],
 }
 

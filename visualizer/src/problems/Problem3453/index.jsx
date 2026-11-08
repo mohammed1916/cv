@@ -16,6 +16,10 @@ const definition = {
     { label: 'Invented two squares', input: '{"squares":[[0,0,3],[4,2,1]]}' },
     { label: 'One large square', input: '{"squares":[[0,0,2]]}' },
     { label: 'Invented three squares', input: '{"squares":[[1,0,2],[2,3,1],[0,5,3]]}' },
+    { label: 'Single square', input: '{"squares":[[0,0,1]]}' },
+    { label: 'Same corner tie', input: '{"squares":[[2,2,2],[2,2,2]]}' },
+    { label: 'Extreme corners', input: '{"squares":[[10,10,5],[0,0,5]]}' },
+    { label: 'Long run: 6 squares', input: '{"squares":[[8,5,4],[7,5,1],[2,7,1],[8,4,3],[7,7,4],[7,5,3]]}' },
   ],
 }
 

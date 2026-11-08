@@ -17,6 +17,10 @@ const definition = {
     { label: 'One repeated type allowed', input: '{"nums":[1,2,1,3,3,3,2],"k":1}' },
     { label: 'No repeats allowed', input: '{"nums":[1,2,3,1],"k":0}' },
     { label: 'One value many times', input: '{"nums":[7,7,7,7,7],"k":1}' },
+    { label: 'One value', input: '{"nums":[0],"k":0}' },
+    { label: 'Repeated pairs', input: '{"nums":[1,1,2,2],"k":0}' },
+    { label: 'Largest length and k', input: '{"nums":[9,9,9,9,9,9,9,9,9,9,9,9,9,9],"k":5}' },
+    { label: 'Long run: 14 values', input: '{"nums":[4,6,4,0,3,7,7,5,4,2,0,1,8,2],"k":3}' },
   ],
 }
 

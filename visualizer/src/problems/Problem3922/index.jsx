@@ -16,6 +16,10 @@ const definition = {
     { label: 'Example 1', input: '{"s":"1010"}' },
     { label: 'Example 2', input: '{"s":"0110"}' },
     { label: 'Example 3', input: '{"s":"1000"}' },
+    { label: 'Single bit', input: '{"s":"1"}' },
+    { label: 'Repeated pattern', input: '{"s":"011011"}' },
+    { label: 'Longest allowed string', input: '{"s":"110011011001"}' },
+    { label: 'Long run: 12 bits', input: '{"s":"111100000001"}' },
   ],
 }
 

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/reduce-array-size-to-the-half/',
   complexity: 'O(n log n) time for sorting the counts, O(n) space.',
   examples: [
-    { label: 'Example 1', input: '[3,3,3,3,5,5,5,2,2,7]' },
-    { label: 'Example 2', input: '[7,7,7,7,7,7]' },
+    { label: 'Own case 1', input: '[4,4,4,4,6,6,6,3,3,8]' },
+    { label: 'Own case 2', input: '[8,8,8,8,8,8]' },
     { label: "Single pair", input: "[1,1]" },
     { label: "Two equal pairs", input: "[2,2,9,9]" },
     { label: "Fourteen values, extremes", input: "[9,9,9,9,9,9,9,9,9,9,9,9,9,1]" },

@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-strong-pair-xor-ii/',
   complexity: 'O(n log n + n * B) time for B = 5 bits. The visualization caps the array at 12 values.',
   examples: [
-    { label: 'Example', input: '[1,2,3,4,5]' },
+    { label: 'Own case 1', input: '[2,3,4,5,6]' },
     { label: 'Pair', input: '[10,20]' },
     { label: 'Single value', input: '[9]' },
     { label: 'Equal values', input: '[6,6,6]' },

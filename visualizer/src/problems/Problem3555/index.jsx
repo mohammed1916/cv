@@ -19,6 +19,10 @@ const definition = {
   examples: [
     { label: 'Mixed window', input: '{"nums":[1,3,2,4,5],"k":3}' },
     { label: 'Reversed run', input: '{"nums":[3,2,1,6],"k":3}' },
+    { label: 'One value, window 1', input: '{"nums":[4],"k":1}' },
+    { label: 'Equal values', input: '{"nums":[6,6,6,6],"k":2}' },
+    { label: 'Window spans all values', input: '{"nums":[9,1,9,1,9,1,9,1,9,1,9,1],"k":12}' },
+    { label: 'Long run: 12 values', input: '{"nums":[1,5,6,9,7,2,7,9,3,4,7,7],"k":4}' },
   ],
 }
 

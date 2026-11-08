@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-moves-to-make-array-complementary/',
   complexity: 'O(n + limit) time and O(limit) space. The visualization caps input at 12 values and limit 10.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,4,3],"limit":4}' },
-    { label: 'Example 2', input: '{"nums":[1,2,2,1],"limit":2}' },
+    { label: 'Own case 1', input: '{"nums":[2,3,5,4],"limit":5}' },
+    { label: 'Own case 2', input: '{"nums":[2,3,3,2],"limit":3}' },
     { label: 'Pair at limit', input: '{"nums":[1,1],"limit":1}' },
     { label: 'Equal values', input: '{"nums":[2,2,2,2],"limit":2}' },
     { label: 'Longest allowed, limit 10', input: '{"nums":[10,1,10,1,10,1,10,1,10,1,10,1],"limit":10}' },

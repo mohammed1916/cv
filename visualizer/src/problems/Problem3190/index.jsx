@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-minimum-operations-to-make-all-elements-divisible-by-three/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the array at 40 numbers.',
   examples: [
-    { label: 'Example 1', input: '[1,2,3,4]' },
-    { label: 'Example 2', input: '[3,6,9]' },
+    { label: 'Own case 1', input: '[2,3,4,5]' },
+    { label: 'Own case 2', input: '[4,7,10]' },
     { label: 'Single element', input: '[5]' },
     { label: 'Equal values count separately', input: '[2,2,2,2]' },
     { label: 'Boundary values 1 and 50', input: '[1,50,50,1]' },

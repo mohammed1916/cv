@@ -19,6 +19,10 @@ const definition = {
   examples: [
     { label: 'Descending', input: '9876543210' },
     { label: 'Repeats', input: '5511225599' },
+    { label: "All zeros", input: "0000000000" },
+    { label: "Ascending digits", input: "0123456789" },
+    { label: "Repeated digit", input: "7777777777" },
+    { label: "Long run: mixed digits", input: "3141592653" },
   ],
 }
 

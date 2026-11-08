@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/count-all-possible-routes/',
   complexity: 'O(n^2 * fuel) time and O(n * fuel) memory. The visualization caps input at 8 cities and 20 fuel.',
   examples: [
-    { label: 'Example 1', input: '{"locations":[2,3,6,8,4],"start":1,"finish":3,"fuel":5}' },
-    { label: 'Example 2', input: '{"locations":[4,3,1],"start":1,"finish":0,"fuel":6}' },
+    { label: 'Own case 1', input: '{"locations":[3,4,7,9,5],"start":2,"finish":4,"fuel":6}' },
+    { label: 'Own case 2', input: '{"locations":[5,4,2],"start":2,"finish":1,"fuel":7}' },
     { label: 'Two stops, no fuel', input: '{"locations":[4,9],"start":0,"finish":1,"fuel":0}' },
     { label: 'Start is finish', input: '{"locations":[3,7,5],"start":2,"finish":2,"fuel":4}' },
     { label: 'Largest: 8 locations, fuel 20', input: '{"locations":[1000,1,999,2,998,3,997,4],"start":0,"finish":7,"fuel":20}' },

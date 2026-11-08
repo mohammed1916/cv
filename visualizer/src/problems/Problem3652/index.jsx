@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Dip then rise', input: '{"prices":[6,1,9],"strategy":[1,0,-1],"k":2}' },
     { label: 'Flat', input: '{"prices":[3,7],"strategy":[1,1],"k":2}' },
+    { label: 'Two days, one trade', input: '{"prices":[4,6],"strategy":[0,0],"k":2}' },
+    { label: 'Equal prices', input: '{"prices":[3,3,3,3],"strategy":[1,-1,0,1],"k":2}' },
+    { label: 'Longest run and largest k', input: '{"prices":[12,11,10,9,8,7,6,5,4,3,2,1],"strategy":[1,1,1,1,1,1,1,1,1,1,1,1],"k":12}' },
+    { label: 'Long run: 12 days', input: '{"prices":[37,5,1,18,28,4,24,43,39,1,36,39],"strategy":[1,0,1,1,1,0,0,-1,0,1,0,1],"k":6}' },
   ],
 }
 

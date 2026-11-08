@@ -11,6 +11,10 @@ const definition = {
     { label: 'Add and remove', input: '{"calls":[["addNumber",8],["addNumber",3],["addNumber",8],["addNumber",5],["getMean"],["getMedian"],["getMode"],["removeFirstAddedNumber"],["getMode"],["getMedian"]]}' },
     { label: 'Tied mode', input: '{"calls":[["addNumber",9],["addNumber",6],["addNumber",9],["addNumber",6],["getMode"],["removeFirstAddedNumber"],["getMode"]]}' },
     { label: 'Tracker refills after emptying', input: '{"calls":[["addNumber",7],["removeFirstAddedNumber"],["addNumber",2],["getMean"],["getMedian"],["getMode"]]}' },
+    { label: 'Single number', input: '{"calls":[["addNumber",6],["getMean"],["getMedian"],["getMode"]]}' },
+    { label: 'Equal values', input: '{"calls":[["addNumber",4],["addNumber",4],["addNumber",4],["getMode"],["getMedian"]]}' },
+    { label: 'Largest allowed value', input: '{"calls":[["addNumber",1000000000],["addNumber",1],["getMean"],["getMedian"],["removeFirstAddedNumber"],["getMean"]]}' },
+    { label: 'Long run: 30 calls', input: '{"calls":[["addNumber",6],["getMode"],["removeFirstAddedNumber"],["addNumber",8],["addNumber",7],["addNumber",6],["getMean"],["addNumber",1],["getMedian"],["getMean"],["getMean"],["addNumber",7],["getMedian"],["getMean"],["getMean"],["getMean"],["addNumber",7],["addNumber",8],["addNumber",3],["getMedian"],["getMode"],["removeFirstAddedNumber"],["addNumber",3],["addNumber",4],["addNumber",3],["addNumber",4],["getMean"],["addNumber",6],["getMode"],["removeFirstAddedNumber"]]}' },
   ],
 }
 

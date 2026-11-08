@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"s":"cab"}' },
     { label: 'Already a', input: '{"s":"aaa"}' },
+    { label: 'One letter', input: '{"s":"a"}' },
+    { label: 'Repeated letters', input: '{"s":"aaaa"}' },
+    { label: 'Longest alphabet run', input: '{"s":"abcdefghijklmnopqrst"}' },
+    { label: 'Long run: 20 letters', input: '{"s":"rrhpkwzdfzvxvhvndyix"}' },
   ],
 }
 

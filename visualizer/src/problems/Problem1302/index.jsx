@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/deepest-leaves-sum/',
   complexity: 'O(n) time and O(w) space for the widest level. The visualization caps the tree at 15 entries.',
   examples: [
-    { label: 'Example 1', input: '[1,2,3,4,5,null,6,7,null,null,null,null,8]' },
-    { label: 'Example 2', input: '[6,7,8,2,7,1,3,9,null,1,4,null,null,null,5]' },
+    { label: 'Own case 1', input: '[2,3,4,5,6,null,7,8,null,null,null,null,9]' },
+    { label: 'Own case 2', input: '[7,8,9,3,8,2,4,10,null,2,5,null,null,null,6]' },
     { label: 'Single root', input: '[7]' },
     { label: 'Equal values', input: '[5,5,5]' },
     { label: 'Long run: 15 entries', input: '[63,45,null,25,61,null,null,78,null,null,73,null,null,null,75]' },

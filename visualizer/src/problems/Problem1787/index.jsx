@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/make-the-xor-of-all-segments-equal-to-zero/',
   complexity: 'O(n * k * V) time with V = 8 xor states in this visualization; the full problem uses bits up to 2^10.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,0,3,0],"k":1}' },
-    { label: 'Example 2', input: '{"nums":[3,4,5,2,1,7,3,4,7],"k":3}' },
+    { label: 'Own case 1', input: '{"nums":[2,3,1,4,1],"k":2}' },
+    { label: 'Own case 2', input: '{"nums":[7,4,3,7,1,2,5,4,3],"k":3}' },
   { label: 'Single number', input: "{\"nums\":[5],\"k\":1}" },
   { label: 'Equal values', input: "{\"nums\":[2,2,2,2],\"k\":2}" },
   { label: 'Largest k, alternating extremes', input: "{\"nums\":[7,0,7,0,7,0,7,0,7,0,7,0],\"k\":12}" },

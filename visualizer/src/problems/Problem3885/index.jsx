@@ -15,6 +15,10 @@ const definition = {
   complexity: 'This visual scans the active map on each poll: O(n) per poll. A heap with lazy updates would make polls faster on large inputs.',
   examples: [
     { label: 'Example', input: '{"events":[[3,2],[8,5],[6,5]],"ops":[["poll"],["update",3,9],["poll"],["poll"],["poll"]]}' },
+    { label: 'Single event', input: '{"events":[[1,5]],"ops":[["poll"]]}' },
+    { label: 'Equal priorities, smaller id wins', input: '{"events":[[2,7],[1,7]],"ops":[["poll"]]}' },
+    { label: 'No active events', input: '{"events":[],"ops":[["poll"]]}' },
+    { label: 'Long run: 12 events, 20 operations', input: '{"events":[[0,1],[1,5],[2,7],[3,9],[4,4],[5,1],[6,6],[7,0],[8,9],[9,0],[10,8],[11,9]],"ops":[["update",0,8],["poll"],["poll"],["poll"],["poll"],["poll"],["poll"],["poll"],["poll"],["poll"],["poll"],["poll"],["poll"],["poll"],["update",11,8],["poll"],["poll"],["poll"],["poll"],["poll"]]}' },
   ],
 }
 

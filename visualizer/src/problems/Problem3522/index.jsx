@@ -15,8 +15,12 @@ const definition = {
   url: 'https://leetcode.com/problems/calculate-score-after-performing-instructions/',
   complexity: 'O(n) time and O(n) space, since each instruction runs at most once. The visualization caps the list at 20.',
   examples: [
-    { label: 'Example 1', input: '{"instructions":["jump","add","add","jump","add","jump"],"values":[2,1,3,1,-2,-3]}' },
+    { label: 'Own case 1', input: '{"instructions":["jump","add","jump","add","add","jump"],"values":[-3,-2,1,3,1,2]}' },
     { label: 'Example 2', input: '{"instructions":["add","jump","add","add"],"values":[3,-2,5,1]}' },
+    { label: 'Single add', input: '{"instructions":["add"],"values":[5]}' },
+    { label: 'Single jump, negative value', input: '{"instructions":["jump"],"values":[-3]}' },
+    { label: 'Equal values', input: '{"instructions":["add","add","jump"],"values":[2,2,2]}' },
+    { label: 'Long run: 20 steps', input: '{"instructions":["jump","add","add","jump","add","jump","add","add","add","jump","add","add","jump","add","jump","jump","add","jump","add","jump"],"values":[9,-4,-7,10,-8,9,-2,2,-2,-7,-1,-3,-10,10,2,-7,-7,-3,-2,9]}' },
   ],
 }
 

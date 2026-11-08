@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-performance-of-a-team/',
   complexity: 'O(n log n + n log k) time with a min heap of team speeds. The visualization caps input at 8 engineers.',
   examples: [
-    { label: 'Example 1', input: '{"n":6,"speed":[2,10,3,1,5,8],"efficiency":[5,4,3,9,7,2],"k":2}' },
-    { label: 'Example 2', input: '{"n":6,"speed":[2,10,3,1,5,8],"efficiency":[5,4,3,9,7,2],"k":3}' },
+    { label: 'Own case 1', input: '{"n":6,"speed":[8,5,1,3,10,2],"efficiency":[2,7,9,3,4,5],"k":2}' },
+    { label: 'Own case 2', input: '{"n":6,"speed":[8,5,1,3,10,2],"efficiency":[2,7,9,3,4,5],"k":3}' },
     { label: "Single engineer", input: "{\"n\":1,\"speed\":[4],\"efficiency\":[9],\"k\":1}" },
     { label: "Equal efficiency ties by speed", input: "{\"n\":3,\"speed\":[2,5,3],\"efficiency\":[4,4,4],\"k\":2}" },
     { label: "Team of all eight", input: "{\"n\":8,\"speed\":[1,2,3,4,5,6,7,8],\"efficiency\":[8,7,6,5,4,3,2,1],\"k\":8}" },

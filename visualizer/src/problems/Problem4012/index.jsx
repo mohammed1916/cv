@@ -26,6 +26,10 @@ const definition = {
     { label: 'Carry over', input: '{"tasks":[2,3],"shifts":[1,4,2]}' },
     { label: 'Early finish', input: '{"tasks":[5],"shifts":[5,5]}' },
     { label: 'Mixed', input: '{"tasks":[2,3,1],"shifts":[1,4,2,6]}' },
+    { label: "Single task", input: '{"tasks":[4],"shifts":[4]}' },
+    { label: "Equal tasks", input: '{"tasks":[3,3,3],"shifts":[3,3]}' },
+    { label: "Maximum values and list lengths", input: '{"tasks":[30,30,30,30,30,30,30,30],"shifts":[60,60,60,60,60,60,60,60,60,60,60,60]}' },
+    { label: "Long run: 8 tasks, 12 shifts", input: '{"tasks":[24,6,27,6,8,14,20,8],"shifts":[48,17,34,13,55,12,6,10,59,8,36,54]}' },
   ],
 }
 

@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/video-stitching/',
   complexity: 'O(n * k) time for n clips and k clips taken. The visualization caps clips at 12.',
   examples: [
-    { label: 'Example 1', input: '{"clips":[[0,2],[4,6],[8,10],[1,9],[1,5],[5,9]],"time":10}' },
+    { label: 'Own case 1', input: '{"clips":[[1,3],[5,7],[9,11],[2,10],[2,6],[6,10]],"time":11}' },
     { label: 'Gap', input: '{"clips":[[0,1],[1,2]],"time":5}' },
     { label: 'Short but enough', input: '{"clips":[[0,4],[2,8]],"time":6}' },
     { label: 'Single clip', input: '{"clips":[[0,1]],"time":1}' },

@@ -26,8 +26,12 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-time-for-k-connected-components/',
   complexity: 'O(m log m) for sorting plus near-linear union-find work. The visualization caps input at 12 nodes.',
   examples: [
-    { label: 'Example 1', input: '{"n":2,"edges":[[0,1,3]],"k":2}' },
-    { label: 'Example 2', input: '{"n":3,"edges":[[0,1,2],[1,2,4]],"k":3}' },
+    { label: 'Own case 1', input: '{"n":3,"edges":[[1,2,4]],"k":3}' },
+    { label: 'Own case 2', input: '{"n":4,"edges":[[1,2,3],[2,3,5]],"k":4}' },
+    { label: 'Two nodes, one edge', input: '{"n":2,"edges":[[0,1,1]],"k":1}' },
+    { label: 'Equal edge times', input: '{"n":3,"edges":[[0,1,5],[1,2,5],[0,2,5]],"k":2}' },
+    { label: 'Largest edge time', input: '{"n":2,"edges":[[0,1,1000000000]],"k":2}' },
+    { label: 'Long run: 12 nodes, 20 edges', input: '{"n":12,"edges":[[6,3,43],[10,7,86],[3,8,66],[11,10,84],[6,1,24],[0,1,90],[3,6,51],[9,5,58],[9,0,46],[1,11,72],[7,10,11],[8,9,18],[1,5,67],[5,9,42],[11,6,13],[8,3,94],[0,3,81],[8,4,90],[4,5,30],[6,10,60]],"k":6}' },
   ],
 }
 

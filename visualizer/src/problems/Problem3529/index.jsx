@@ -14,6 +14,10 @@ const definition = {
     { label: 'Wrapping', input: '{"grid":[["x","y","a"],["b","a","c"],["d","b","e"]],"pattern":"aba"}' },
     { label: 'No overlap', input: '{"grid":[["m","o"],["q","p"]],"pattern":"mo"}' },
     { label: 'Single row', input: '{"grid":[["r","u","n"]],"pattern":"run"}' },
+    { label: 'Single cell match', input: '{"grid":[["a"]],"pattern":"a"}' },
+    { label: 'Repeated letters', input: '{"grid":[["a","a"],["a","a"]],"pattern":"aaaa"}' },
+    { label: 'Pattern fills the grid', input: '{"grid":[["a","b","c"],["d","e","f"]],"pattern":"abcdef"}' },
+    { label: 'Long run: 8 by 8 grid', input: '{"grid":[["b","a","c","c","a","c","a","c"],["c","b","a","c","b","a","a","b"],["c","b","c","a","c","c","c","c"],["c","b","b","a","b","a","c","a"],["b","b","b","a","a","a","a","c"],["c","b","c","b","a","c","b","c"],["b","a","c","b","b","a","a","c"],["c","b","a","a","a","a","c","b"]],"pattern":"abcab"}' },
   ],
 }
 

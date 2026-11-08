@@ -13,8 +13,12 @@ const definition = {
   url: 'https://leetcode.com/problems/transformed-array/',
   complexity: 'O(n) time and O(n) space. Each move uses one modulo operation.',
   examples: [
-    { label: 'Example 1', input: '[3,-2,1,1]' },
-    { label: 'Example 2', input: '[-1,4,-1]' },
+    { label: 'Own case 1', input: '[4,-3,2,2]' },
+    { label: 'Own case 2', input: '[-2,5,-2]' },
+    { label: 'Single zero', input: '[0]' },
+    { label: 'Equal values', input: '[5,5,5,5]' },
+    { label: 'Largest magnitudes', input: '[100,-100]' },
+    { label: 'Long run: 12 values', input: '[-65,-51,20,29,56,62,15,15,20,18,94,-73]' },
   ],
 }
 

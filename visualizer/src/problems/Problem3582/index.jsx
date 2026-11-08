@@ -16,6 +16,10 @@ const definition = {
     { label: 'Two words', input: '{"caption":"Keep Going"}' },
     { label: 'Empty', input: '{"caption":""}' },
     { label: 'Long', input: '{"caption":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}' },
+    { label: 'Single letter', input: '{"caption":"A"}' },
+    { label: 'Repeated words', input: '{"caption":"aa aa"}' },
+    { label: 'Only spaces', input: '{"caption":"   "}' },
+    { label: 'Long run: 150 characters', input: '{"caption":"LcZPzpDf pqCPTZ bgZzngX Pzdjgu KF Nhe WglcnJ delf TW K sOZu Ta l   kPx  j Gfl  MBiW TiHXiwGy WlOK wIqElGX vtnhUlP jaTqJ ap ctBGMglaEUGeW aeocgUZSQgmA "}' },
   ],
 }
 

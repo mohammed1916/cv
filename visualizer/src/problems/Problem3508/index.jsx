@@ -17,6 +17,11 @@ const definition = {
   examples: [
     { label: 'Eviction', input: '{"memory_limit":2,"operations":[["addPacket",1,2,3],["addPacket",1,2,3],["addPacket",4,5,6],["addPacket",7,8,9],["forwardPacket"],["getCount",8,0,10],["addPacket",7,8,9]]}' },
     { label: 'Empty forward', input: '{"memory_limit":1,"operations":[["forwardPacket"],["addPacket",2,3,1],["getCount",3,0,1]]}' },
+    { label: 'Single packet and count', input: '{"memory_limit":1,"operations":[["addPacket",0,1,0],["getCount",1,0,0]]}' },
+    { label: 'Equal timestamps tie', input: '{"memory_limit":2,"operations":[["addPacket",1,2,5],["addPacket",3,2,5],["getCount",2,5,5]]}' },
+    { label: 'Largest ids and times', input: '{"memory_limit":5,"operations":[["addPacket",9,0,50],["addPacket",9,0,50],["addPacket",8,9,50],["addPacket",7,9,50],["addPacket",6,9,50],["addPacket",5,9,50],["forwardPacket"],["getCount",9,0,50]]}' },
+    { label: 'No packets for destination', input: '{"memory_limit":2,"operations":[["addPacket",0,1,3],["getCount",4,0,50]]}' },
+    { label: 'Long run: 16 operations', input: '{"memory_limit":5,"operations":[["addPacket",9,0,2],["addPacket",0,2,4],["addPacket",7,4,7],["forwardPacket"],["addPacket",6,5,8],["addPacket",7,7,9],["addPacket",5,8,9],["forwardPacket"],["addPacket",8,8,10],["addPacket",3,7,13],["addPacket",2,8,13],["forwardPacket"],["addPacket",8,3,15],["addPacket",4,4,17],["getCount",6,0,17],["getCount",8,0,50]]}' },
   ],
 }
 

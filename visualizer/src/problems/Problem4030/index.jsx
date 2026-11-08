@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'True', input: '{"s":"ff"}' },
     { label: 'False', input: '{"s":"leet"}' },
+    { label: "One letter", input: "{\"s\":\"a\"}" },
+    { label: "Two equal letters", input: "{\"s\":\"aa\"}" },
+    { label: "Every letter doubled", input: "{\"s\":\"aabbccddeeffgghh\"}" },
+    { label: "Long run: 16 letters", input: "{\"s\":\"acbadbbdcbdbbcba\"}" },
   ],
 }
 

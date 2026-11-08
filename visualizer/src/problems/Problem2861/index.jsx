@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-number-of-alloys/',
   complexity: 'O(k * n * log(max)) time. The visualization caps input at 3 metals and 3 machines.',
   examples: [
-    { label: 'Example 1', input: '{"n":3,"k":2,"budget":15,"composition":[[1,1,1],[1,1,10]],"stock":[0,0,0],"cost":[1,2,3]}' },
+    { label: 'Own case 1', input: '{"n":3,"k":2,"budget":15,"composition":[[1,1,10],[1,1,1]],"stock":[0,0,0],"cost":[3,2,1]}' },
     { label: 'Example 2', input: '{"n":3,"k":2,"budget":15,"composition":[[1,1,10],[1,1,1]],"stock":[0,0,100],"cost":[1,2,3]}' },
     { label: "One metal, one machine, no budget", input: "{\"n\":1,\"k\":1,\"budget\":0,\"composition\":[[1]],\"stock\":[0],\"cost\":[1]}" },
     { label: "Identical machines tie", input: "{\"n\":2,\"k\":2,\"budget\":10,\"composition\":[[2,2],[2,2]],\"stock\":[3,3],\"cost\":[1,1]}" },

@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"s":"3014","queries":[[0,2],[1,3]]}' },
     { label: 'Longer', input: '{"s":"907060","queries":[[0,5],[2,4]]}' },
+    { label: "Single digit", input: "{\"s\":\"5\",\"queries\":[[0,0]]}" },
+    { label: "Equal digits", input: "{\"s\":\"1111\",\"queries\":[[0,3],[1,2]]}" },
+    { label: "Longest string, 20 digits", input: "{\"s\":\"10203040506070809010\",\"queries\":[[0,19],[5,14]]}" },
+    { label: "Long run: 8 queries", input: "{\"s\":\"02763489367850013664\",\"queries\":[[13,17],[4,9],[2,13],[12,16],[9,19],[5,15],[0,0],[4,15]]}" },
   ],
 }
 

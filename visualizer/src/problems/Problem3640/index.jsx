@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[0,-2,-1,-3,0,2,-1]}' },
     { label: 'Example 2', input: '{"nums":[1,4,2,7]}' },
+    { label: 'Shortest trionic run', input: '{"nums":[1,2,1,2]}' },
+    { label: 'Longer rise after the valley', input: '{"nums":[1,2,1,2,5]}' },
+    { label: 'Extreme values', input: '{"nums":[-50,50,-50,50]}' },
+    { label: 'Long run: 30 values', input: '{"nums":[-50,-49,-50,50,29,-44,9,-42,-39,0,-24,-46,-49,-26,46,25,-41,-27,-48,-32,39,-1,-9,-40,-2,-32,45,1,-42,-29]}' },
   ],
 }
 

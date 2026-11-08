@@ -14,8 +14,12 @@ const definition = {
   url: 'https://leetcode.com/problems/total-waviness-of-numbers-in-range-ii/',
   complexity: 'O(d * 10 * 2 * 2 * 11) states for d digits. The visualization caps the bound at 10^6.',
   examples: [
-    { label: 'Example 1', input: '{"num1":120,"num2":130}' },
-    { label: 'Example 3', input: '{"num1":4848,"num2":4848}' },
+    { label: 'Own case 1', input: '{"num1":121,"num2":131}' },
+    { label: 'Own case 2', input: '{"num1":4849,"num2":4849}' },
+    { label: "Single number", input: "{\"num1\":1,\"num2\":1}" },
+    { label: "Small range", input: "{\"num1\":1,\"num2\":10}" },
+    { label: "Top of the range", input: "{\"num1\":999999,\"num2\":1000000}" },
+    { label: "Long run: 5000 numbers", input: "{\"num1\":640544,\"num2\":645543}" },
   ],
 }
 

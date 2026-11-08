@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"grid":[[1,0],[0,2]],"k":2}' },
     { label: 'Example 2', input: '{"grid":[[1,2,0],[0,3,0],[4,0,5]],"k":3}' },
+    { label: 'Single land cell', input: '{"grid":[[0]],"k":1}' },
+    { label: 'Single nonzero cell', input: '{"grid":[[5]],"k":1}' },
+    { label: 'Equal cells', input: '{"grid":[[1,1],[1,1]],"k":2}' },
+    { label: 'Long run: 8 by 8 grid', input: '{"grid":[[9,2,5,2,3,1,0,0],[9,1,9,4,6,1,2,1],[0,7,1,8,4,6,2,9],[9,9,2,2,9,0,9,2],[6,7,3,2,7,6,1,0],[7,0,2,2,0,4,4,7],[2,2,0,8,2,7,8,5],[2,0,4,6,7,5,4,0]],"k":12}' },
   ],
 }
 

@@ -14,8 +14,12 @@ const definition = {
   url: 'https://leetcode.com/problems/check-if-grid-can-be-cut-into-sections/',
   complexity: 'O(m log m) time for m rectangles, one sort per axis. The visualization caps input at 12 rectangles.',
   examples: [
-    { label: 'Example 1', input: '{"n":5,"rectangles":[[1,0,5,2],[0,2,2,4],[3,2,5,3],[0,4,4,5]]}' },
-    { label: 'Example 3', input: '{"n":4,"rectangles":[[0,2,2,4],[1,0,3,2],[2,2,3,4],[3,0,4,2],[3,2,4,4]]}' },
+    { label: 'Own case 1', input: '{"n":6,"rectangles":[[2,1,6,3],[1,3,3,5],[4,3,6,4],[1,5,5,6]]}' },
+    { label: 'Own case 2', input: '{"n":5,"rectangles":[[1,3,3,5],[2,1,4,3],[3,3,4,5],[4,1,5,3],[4,3,5,5]]}' },
+    { label: 'Single rectangle', input: '{"n":2,"rectangles":[[0,0,1,1]]}' },
+    { label: 'Duplicate rectangles', input: '{"n":4,"rectangles":[[0,0,2,2],[0,0,2,2]]}' },
+    { label: 'Whole square', input: '{"n":12,"rectangles":[[0,0,12,12]]}' },
+    { label: 'Long run: 12 rectangles', input: '{"n":12,"rectangles":[[3,9,9,11],[1,3,9,11],[2,5,3,11],[5,9,7,10],[10,11,12,12],[9,1,12,2],[3,5,9,9],[6,2,12,11],[4,4,5,8],[5,3,11,11],[3,8,12,10],[0,10,12,12]]}' },
   ],
 }
 

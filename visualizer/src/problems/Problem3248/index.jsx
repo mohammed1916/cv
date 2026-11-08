@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/snake-in-matrix/',
   complexity: 'O(commands) time. The visualization caps n at 8 and the commands at 40.',
   examples: [
-    { label: 'Example 1', input: '{"n":2,"commands":["RIGHT","DOWN"]}' },
+    { label: 'Own case 1', input: '{"n":2,"commands":["DOWN","RIGHT"]}' },
     { label: 'Example 2', input: '{"n":3,"commands":["DOWN","RIGHT","UP"]}' },
     { label: 'Smallest grid, one move', input: '{"n":2,"commands":["RIGHT"]}' },
     { label: 'Return to the start', input: '{"n":2,"commands":["RIGHT","DOWN","LEFT","UP"]}' },

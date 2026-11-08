@@ -22,6 +22,10 @@ const definition = {
     { label: 'Example 1', input: '{"nums":[4,1,7,2],"k":2}' },
     { label: 'Example 2', input: '{"nums":[0,9,3],"k":1}' },
     { label: 'Example 3', input: '{"nums":[2,2,5],"k":3}' },
+    { label: 'Single value', input: '{"nums":[42],"k":1}' },
+    { label: 'Equal values tie', input: '{"nums":[5,5,5,5],"k":2}' },
+    { label: 'Extreme digits, full window', input: '{"nums":[99,0,99,0,99,0,99,0],"k":8}' },
+    { label: 'Long run: 8 values', input: '{"nums":[66,79,31,70,73,81,5,37],"k":4}' },
   ],
 }
 

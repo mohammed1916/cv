@@ -19,6 +19,10 @@ const definition = {
   examples: [
     { label: 'One square fits', input: '{"grid":[[0,0,1],[0,0,1]],"k":2}' },
     { label: 'Impossible shape', input: '{"grid":[[0,1,0],[1,1,1]],"k":2}' },
+    { label: 'Single cell', input: '{"grid":[[1]],"k":1}' },
+    { label: 'Equal values in a row', input: '{"grid":[[2,2,2]],"k":1}' },
+    { label: 'Full grid of maximum values', input: '{"grid":[[4,4,4,4],[4,4,4,4],[4,4,4,4],[4,4,4,4]],"k":4}' },
+    { label: 'Long run: 4 by 4 grid', input: '{"grid":[[3,2,2,4],[2,0,4,1],[4,3,2,0],[0,3,2,4]],"k":2}' },
   ],
 }
 

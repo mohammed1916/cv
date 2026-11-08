@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/make-array-strictly-increasing/',
   complexity: 'O(n * m log m) time with the sorted unique arr2. The visualization caps each array at 8 values.',
   examples: [
-    { label: 'Example 1', input: '{"arr1":[1,5,3,6,7],"arr2":[1,3,2,4]}' },
-    { label: 'Example 2', input: '{"arr1":[1,5,3,6,7],"arr2":[4,3,1]}' },
+    { label: 'Own case 1', input: '{"arr1":[2,6,4,7,8],"arr2":[2,4,3,5]}' },
+    { label: 'Own case 2', input: '{"arr1":[2,6,4,7,8],"arr2":[5,4,2]}' },
     { label: 'Single element each', input: '{"arr1":[3],"arr2":[3]}' },
     { label: 'Equal arrays', input: '{"arr1":[2,4,6],"arr2":[2,4,6]}' },
     { label: 'Boundary values 0 and 20', input: '{"arr1":[0,20],"arr2":[20,0,20]}' },

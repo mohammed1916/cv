@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '"xaax"' },
     { label: 'No split', input: '"mnop"' },
+    { label: 'Smallest string', input: '"aa"' },
+    { label: 'Repeated letters', input: '"abab"' },
+    { label: 'Longest string', input: '"abcdefghijabcdefghijabcdefghijabcdefghijabcdefghij"' },
+    { label: 'Long run: 50 letters', input: '"ebebcbcfebcdabebcbcbcfebcdefefcbebcbebedadefabeded"' },
   ],
 }
 

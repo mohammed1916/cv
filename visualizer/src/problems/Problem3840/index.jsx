@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Colour break', input: '{"nums":[3,7,5,2],"colors":[1,1,3,3]}' },
     { label: 'Run of one colour', input: '{"nums":[5,8,2,7],"colors":[3,3,3,4]}' },
+    { label: 'One item', input: '{"nums":[0],"colors":[1]}' },
+    { label: 'Equal colours', input: '{"nums":[3,3,3],"colors":[2,2,2]}' },
+    { label: 'Largest amounts alternate colours', input: '{"nums":[30,0,30,0,30,0,30,0,30,0],"colors":[1,2,1,2,1,2,1,2,1,2]}' },
+    { label: 'Long run: 10 items', input: '{"nums":[15,17,10,7,0,28,6,2,26,27],"colors":[4,4,4,1,1,1,3,2,1,4]}' },
   ],
 }
 

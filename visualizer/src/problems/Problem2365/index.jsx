@@ -16,7 +16,7 @@ const definition = {
   url: 'https://leetcode.com/problems/task-scheduler-ii/',
   complexity: 'O(n) time and O(k) space for n tasks with k distinct types.',
   examples: [
-    { label: 'Example', input: '{"tasks":[1,2,1,2,3,1],"space":3}' },
+    { label: 'Own case 1', input: '{"tasks":[2,3,2,3,4,2],"space":4}' },
     { label: 'Tight', input: '{"tasks":[5,5,5],"space":1}' },
     { label: 'Single task', input: '{"tasks":[7],"space":1}' },
     { label: 'Equal task types', input: '{"tasks":[4,4,4,4],"space":4}' },

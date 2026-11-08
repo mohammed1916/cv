@@ -17,6 +17,10 @@ const definition = {
     { label: "[3,7] sum 6 gives 1", input: JSON.stringify({ nums: [3, 7], sum: 6 }) },
     { label: "[5,5] sum 10 gives 0", input: JSON.stringify({ nums: [5, 5], sum: 10 }) },
     { label: "[1,2] sum 7 gives -1", input: JSON.stringify({ nums: [1, 2], sum: 7 }) },
+    { label: "One value", input: "{\"nums\":[1],\"sum\":1}" },
+    { label: "Equal values", input: "{\"nums\":[5,5,5,5],\"sum\":10}" },
+    { label: "Largest visual sum", input: "{\"nums\":[12,12],\"sum\":24}" },
+    { label: "Long run: six values", input: "{\"nums\":[1,5,4,1,5,3],\"sum\":20}" },
   ],
 };
 

@@ -18,6 +18,11 @@ const definition = {
   examples: [
     { label: 'Mixed', input: '{"str1":"TFTF","str2":"ab"}' },
     { label: 'Impossible', input: '{"str1":"TTF","str2":"ab"}' },
+    { label: 'Single letter each', input: '{"str1":"T","str2":"a"}' },
+    { label: 'Repeated flags', input: '{"str1":"TTTT","str2":"ab"}' },
+    { label: 'Largest inputs', input: '{"str1":"TFTFTFTF","str2":"abcd"}' },
+    { label: 'Only F flags', input: '{"str1":"FFFF","str2":"q"}' },
+    { label: 'Long run: 8 flags', input: '{"str1":"FTFTFFTT","str2":"mnop"}' },
   ],
 }
 

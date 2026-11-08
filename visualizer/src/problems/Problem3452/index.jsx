@@ -14,8 +14,12 @@ const definition = {
   url: 'https://leetcode.com/problems/sum-of-good-numbers/',
   complexity: 'O(n) time and O(1) extra space.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,3,2,1,5,4],"k":2}' },
+    { label: 'Own case 1', input: '{"nums":[2,4,3,2,6,5],"k":3}' },
     { label: 'Smallest', input: '{"nums":[5,1],"k":1}' },
+    { label: 'Smallest pair', input: '{"nums":[1,2],"k":1}' },
+    { label: 'Equal values tie', input: '{"nums":[4,4,4,4],"k":2}' },
+    { label: 'Largest list, extremes', input: '{"nums":[1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1],"k":15}' },
+    { label: 'Long run: 30 values', input: '{"nums":[170,671,49,207,693,434,633,619,998,446,351,723,377,245,29,104,462,25,391,619,259,516,920,21,142,117,714,968,31,154],"k":10}' },
   ],
 }
 

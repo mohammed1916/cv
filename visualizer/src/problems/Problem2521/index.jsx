@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/distinct-prime-factors-of-product-of-array/',
   complexity: 'O(n sqrt(V)) time and O(k) space for k distinct primes. The visualization caps input at 10 values.',
   examples: [
-    { label: 'Example 1', input: '[2,4,3,7,10,6]' },
+    { label: 'Own case 1', input: '[3,5,4,8,11,7]' },
     { label: 'Example 2', input: '[21,4,7]' },
     { label: 'Single value', input: '[1000]' },
     { label: 'Equal values', input: '[6,6,6]' },

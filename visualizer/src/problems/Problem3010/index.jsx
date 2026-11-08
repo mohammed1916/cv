@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/divide-an-array-into-subarrays-with-minimum-cost-i/',
   complexity: 'O(n log n) with the sort. The visualization caps input at 12 values.',
   examples: [
-    { label: 'Example 1', input: '[1,2,3,12]' },
-    { label: 'Example 2', input: '[10,3,1,1]' },
+    { label: 'Own case 1', input: '[2,3,4,13]' },
+    { label: 'Own case 2', input: '[11,4,2,2]' },
     { label: "Equal values", input: '[7,7,7]' },
     { label: "Boundary values", input: '[1,50,1]' },
     { label: "Long run: 12 values", input: '[15,50,34,27,27,2,36,1,43,13,9,49]' },

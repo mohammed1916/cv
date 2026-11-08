@@ -13,6 +13,10 @@ const definition = {
     { label: 'Three positions', input: '{"m":3,"k":2,"nums":[2,3,5]}' },
     { label: 'Carries matter', input: '{"m":3,"k":1,"nums":[2,3]}' },
     { label: 'Single index', input: '{"m":2,"k":1,"nums":[6]}' },
+    { label: 'One number', input: '{"m":1,"k":1,"nums":[5]}' },
+    { label: 'Equal numbers', input: '{"m":2,"k":2,"nums":[3,3,3]}' },
+    { label: 'Largest value', input: '{"m":3,"k":2,"nums":[100000000,1]}' },
+    { label: 'Long run: 6 numbers', input: '{"m":6,"k":4,"nums":[70831070,96810867,1300739,85428059,78245125,70235001]}' },
   ],
 }
 

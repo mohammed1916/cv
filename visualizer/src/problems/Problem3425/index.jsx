@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Distinct', input: '{"nums":[1,2,3],"edges":[[0,1,2],[1,2,3]]}' },
     { label: 'Repeat', input: '{"nums":[1,2,1],"edges":[[0,1,2],[1,2,3]]}' },
+    { label: 'Smallest tree', input: '{"nums":[0,4],"edges":[[0,1,1]]}' },
+    { label: 'Equal values tie', input: '{"nums":[2,2,2],"edges":[[0,1,1],[1,2,1]]}' },
+    { label: 'Longest path, alternating values', input: '{"nums":[0,4,0,4,0,4,0,4],"edges":[[0,1,1],[1,2,1],[2,3,1],[3,4,1],[4,5,1],[5,6,1],[6,7,1]]}' },
+    { label: 'Long run: 8 nodes', input: '{"nums":[2,4,3,0,0,2,2,1],"edges":[[0,1,1],[1,2,2],[2,3,2],[3,4,1],[4,5,1],[5,6,1],[6,7,4]]}' },
   ],
 }
 

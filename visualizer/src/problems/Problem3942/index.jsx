@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Rotated', input: '[2, 3, 0, 1]' },
     { label: 'Impossible', input: '[0, 2, 1, 3]' },
+    { label: 'Single value', input: '[0]' },
+    { label: 'Two values swapped', input: '[1,0]' },
+    { label: 'Reversed largest', input: '[7,6,5,4,3,2,1,0]' },
+    { label: 'Long run: 8 values', input: '[1,4,7,6,0,3,5,2]' },
   ],
 }
 

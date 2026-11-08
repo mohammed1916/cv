@@ -16,8 +16,12 @@ const definition = {
   url: 'https://leetcode.com/problems/weighted-word-mapping/',
   complexity: 'O(total length of words) time and O(number of words) extra space.',
   examples: [
-    { label: 'Example', input: '{"words":["abcd","def","xyz"],"weights":[5,3,12,14,1,2,3,2,10,6,6,9,7,8,7,10,8,9,6,9,9,8,3,7,7,2]}' },
+    { label: 'Own case 1', input: '{"words":["bcde","efg","yza"],"weights":[6,4,13,15,2,3,4,3,11,7,7,10,8,9,8,11,9,10,7,10,10,9,4,8,8,3]}' },
     { label: 'Single word', input: '{"words":["a"],"weights":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]}' },
+    { label: 'One letter word', input: '{"words":["q"],"weights":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]}' },
+    { label: 'Equal weights', input: '{"words":["ab","ba"],"weights":[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5]}' },
+    { label: 'Ten words, largest weights', input: '{"words":["zzzzzzzzzz","zzzzzzzzzz","zzzzzzzzzz","zzzzzzzzzz","zzzzzzzzzz","zzzzzzzzzz","zzzzzzzzzz","zzzzzzzzzz","zzzzzzzzzz","zzzzzzzzzz"],"weights":[100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100]}' },
+    { label: 'Long run: 10 words', input: '{"words":["ylqziaxdh","kwzzrmhd","ojwkmiks","a","lziz","uqvdbpvkzu","esnu","ughp","dmwix","r"],"weights":[62,35,7,100,54,8,91,82,27,58,1,41,14,4,35,83,77,55,42,14,69,82,83,70,88,11]}' },
   ],
 }
 

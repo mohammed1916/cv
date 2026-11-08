@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/shortest-distance-after-road-addition-queries-i/',
   complexity: 'O(q * (n + q)) time and O(n + q) space. The visualization caps n at 12 and queries at 8.',
   examples: [
-    { label: 'Example 1', input: '{"n":5,"queries":[[2,4],[0,2],[0,4]]}' },
+    { label: 'Own case 1', input: '{"n":6,"queries":[[3,5],[1,3],[1,5]]}' },
     { label: 'Two roads', input: '{"n":4,"queries":[[0,3],[1,3]]}' },
     { label: 'Smallest graph', input: '{"n":3,"queries":[[0,2]]}' },
     { label: 'Full range', input: '{"n":12,"queries":[[0,11]]}' },

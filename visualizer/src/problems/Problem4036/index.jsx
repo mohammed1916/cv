@@ -16,6 +16,10 @@ const definition = {
     { label: "Three counts", input: '{"nums":[3,5,6]}' },
     { label: "Single copy", input: '{"nums":[1]}' },
     { label: "Power of two", input: '{"nums":[8,7]}' },
+    { label: "Single count of two", input: "{\"nums\":[2]}" },
+    { label: "Equal counts", input: "{\"nums\":[4,4,4,4]}" },
+    { label: "Largest count", input: "{\"nums\":[100000000,1]}" },
+    { label: "Long run: six counts", input: "{\"nums\":[9072095,19096475,5911507,54311428,66921315,58791910]}" },
   ],
 };
 

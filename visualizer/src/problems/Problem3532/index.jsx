@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n": 2, "nums": [1,3], "max_diff": 1, "queries": [[0,0],[0,1]]}' },
     { label: 'Example 2', input: '{"n": 4, "nums": [2,5,6,8], "max_diff": 2, "queries": [[0,1],[0,2],[1,3],[2,3]]}' },
+    { label: 'One node', input: '{"n":1,"nums":[4],"max_diff":0,"queries":[[0,0]]}' },
+    { label: 'Equal values', input: '{"n":4,"nums":[7,7,7,7],"max_diff":0,"queries":[[0,3],[1,2]]}' },
+    { label: 'Widest values', input: '{"n":3,"nums":[0,50,100],"max_diff":100,"queries":[[0,2],[2,0]]}' },
+    { label: 'Long run: 12 nodes, 10 queries', input: '{"n":12,"nums":[8,11,14,21,41,45,51,67,71,92,97,99],"max_diff":15,"queries":[[8,3],[10,11],[8,10],[0,6],[1,4],[5,6],[8,4],[1,6],[2,2],[6,8]]}' },
   ],
 }
 

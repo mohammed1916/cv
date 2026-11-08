@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":2,"edges":[[1,2]],"queries":[[1,1],[1,2]]}' },
     { label: 'Example 2', input: '{"n":5,"edges":[[1,2],[1,3],[3,4],[3,5]],"queries":[[1,4],[3,4],[2,5]]}' },
+    { label: 'Two nodes', input: '{"n":2,"edges":[[1,2]],"queries":[[1,2]]}' },
+    { label: 'Equal branches', input: '{"n":3,"edges":[[1,2],[1,3]],"queries":[[2,3],[1,1]]}' },
+    { label: 'Path of largest size', input: '{"n":10,"edges":[[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10]],"queries":[[1,10],[10,1]]}' },
+    { label: 'Long run: 10 nodes, 6 queries', input: '{"n":10,"edges":[[1,2],[1,3],[3,4],[1,5],[2,6],[3,7],[3,8],[8,9],[4,10]],"queries":[[8,4],[6,10],[5,6],[5,9],[10,10],[6,10]]}' },
   ],
 }
 

@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimize-the-maximum-difference-of-pairs/',
   complexity: 'O(n log(max value)) time. The visualization caps the input at 10 numbers.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[10,1,2,7,1,3],"p":2}' },
-    { label: 'Example 2', input: '{"nums":[4,2,1,2],"p":1}' },
+    { label: 'Own case 1', input: '{"nums":[11,2,3,8,2,4],"p":3}' },
+    { label: 'Own case 2', input: '{"nums":[5,3,2,3],"p":2}' },
     { label: 'Two values, p at half length', input: '{"nums":[3,9],"p":1}' },
     { label: 'Equal values', input: '{"nums":[4,4,4,4],"p":2}' },
     { label: 'Alternating limit values', input: '{"nums":[30,0,30,0,30,0,30,0,30,0],"p":5}' },

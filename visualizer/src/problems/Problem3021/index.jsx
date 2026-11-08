@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/alice-and-bob-playing-flower-game/',
   complexity: 'O(1) time. The visualization shows the fields in the first direction.',
   examples: [
-    { label: 'Example 1', input: '{"n":3,"m":2}' },
-    { label: 'Example 2', input: '{"n":1,"m":1}' },
+    { label: 'Own case 1', input: '{"n":4,"m":3}' },
+    { label: 'Own case 2', input: '{"n":3,"m":3}' },
     { label: "Smallest n and m", input: '{"n":1,"m":1}' },
     { label: "Equal n and m", input: '{"n":2,"m":2}' },
     { label: "Largest n", input: '{"n":100000,"m":1}' },

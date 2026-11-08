@@ -24,6 +24,9 @@ const definition = {
     { label: "Three values", input: '{"n":3}' },
     { label: "Four values", input: '{"n":4}' },
     { label: "Five values", input: '{"n":5}' },
+    { label: 'Two values', input: '{"n":2}' },
+    { label: 'Largest n: 6', input: '{"n":6}' },
+    { label: 'One value', input: '{"n":1}' },
   ],
 };
 

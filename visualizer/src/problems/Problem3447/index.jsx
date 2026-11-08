@@ -21,6 +21,10 @@ const definition = {
     { label: 'Example 1', input: '{"groups":[6,9,4],"elements":[3,2,7]}' },
     { label: 'Example 2', input: '{"groups":[12,5,8,1],"elements":[5,4,2,4]}' },
     { label: 'Example 3', input: '{"groups":[9,15],"elements":[7,3,6]}' },
+    { label: 'Single values', input: '{"groups":[7],"elements":[7]}' },
+    { label: 'Equal values tie', input: '{"groups":[6,6],"elements":[3,3]}' },
+    { label: 'Extremes', input: '{"groups":[50,50,50,50,50,50,50,50],"elements":[50,1,50,1,50,1,50,1]}' },
+    { label: 'Long run: 8 values', input: '{"groups":[15,14,21,47,49,14,25,44],"elements":[3,22,46,45,34,14,40,22]}' },
   ],
 }
 

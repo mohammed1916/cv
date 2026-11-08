@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Equal run', input: '{"n":3,"m":4,"k":2}' },
     { label: 'Two values', input: '{"n":3,"m":2,"k":0}' },
+    { label: 'Single value', input: '{"n":1,"m":1,"k":0}' },
+    { label: 'Largest limits', input: '{"n":10,"m":6,"k":9}' },
+    { label: 'One value only', input: '{"n":5,"m":1,"k":2}' },
+    { label: 'Long run: n 10, m 5', input: '{"n":10,"m":5,"k":4}' },
   ],
 }
 

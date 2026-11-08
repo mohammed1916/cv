@@ -16,6 +16,11 @@ const definition = {
     { label: 'Prefix-free', input: '{"numbers":["911","97625","9725","3"]}' },
     { label: 'Prefix found', input: '{"numbers":["1234","12","56"]}' },
     { label: 'Duplicate', input: '{"numbers":["77","705","77"]}' },
+    { label: 'Single digit string', input: '{"numbers":["7"]}' },
+    { label: 'Equal strings tie', input: '{"numbers":["42","42","42"]}' },
+    { label: 'Leading zeros and ten digits', input: '{"numbers":["007","7","0000000000"]}' },
+    { label: 'Largest ten-digit values', input: '{"numbers":["9999999999","1000000000"]}' },
+    { label: 'Long run: 8 ten-digit numbers', input: '{"numbers":["3727686593","8007852317","5254724675","8570837470","3110799737","9380566628","2329210046","7861771438"]}' },
   ],
 }
 

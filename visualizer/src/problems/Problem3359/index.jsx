@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Three by three', input: '{"grid":[[3,2,1],[5,2,2],[1,1,4]],"k":3}' },
     { label: 'Ragged tops', input: '{"grid":[[9,8,7,2],[3,3,1,1],[2,4,2,0]],"k":3}' },
+    { label: 'Single cell', input: '{"grid":[[4]],"k":4}' },
+    { label: 'All values equal', input: '{"grid":[[5,5],[5,5]],"k":5}' },
+    { label: 'Corners at both value limits', input: '{"grid":[[9,0],[0,9]],"k":0}' },
+    { label: 'Long run: 6 by 6 grid', input: '{"grid":[[5,4,1,8,7,7],[0,0,5,7,4,2],[3,3,7,1,6,5],[7,5,5,9,8,8],[8,0,3,1,3,0],[1,1,3,7,6,4]],"k":4}' },
   ],
 }
 

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Education', input: '{"s":"education"}' },
     { label: 'Vowels only', input: '{"s":"aeiou"}' },
+    { label: 'One letter', input: '{"s":"a"}' },
+    { label: 'Repeated letters', input: '{"s":"aaaa"}' },
+    { label: 'Thirty characters with spaces', input: '{"s":"aeiou aeiou aeiou aeiou aeiou "}' },
+    { label: 'Long run: 30 characters', input: '{"s":"m  amkbfey qbk xixpuwqsgv tpmk"}' },
   ],
 }
 

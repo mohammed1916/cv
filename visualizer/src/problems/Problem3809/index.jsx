@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Tie break', input: '{"towers":[[1,3,5],[2,2,5],[9,9,30]],"center":[0,0],"radius":5}' },
     { label: 'Nothing reachable', input: '{"towers":[[10,10,3]],"center":[0,0],"radius":4}' },
+    { label: 'One tower in range', input: '{"towers":[[0,0,1]],"center":[0,0],"radius":0}' },
+    { label: 'Equal distances', input: '{"towers":[[1,0,4],[0,1,4]],"center":[0,0],"radius":1}' },
+    { label: 'Twelve towers, maximum radius', input: '{"towers":[[1,30,30],[3,29,30],[5,28,30],[7,27,30],[9,26,30],[11,25,30],[13,24,30],[15,23,30],[17,22,30],[19,21,30],[21,20,30],[23,19,30]],"center":[15,15],"radius":60}' },
+    { label: 'Long run: 12 towers', input: '{"towers":[[15,20,29],[3,30,3],[22,14,3],[19,26,6],[29,21,4],[6,20,5],[8,9,5],[22,5,29],[0,29,29],[1,8,27],[2,25,21],[3,25,11]],"center":[0,30],"radius":20}' },
   ],
 }
 

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/sum-of-good-subsequences/',
   complexity: 'O(n) expected time with hash maps. The visualization caps the array at 12 values up to 1000.',
   examples: [
-    { label: 'Example 1', input: '[1,2,1]' },
-    { label: 'Example 2', input: '[3,4,5]' },
+    { label: 'Own case 1', input: '[2,3,2]' },
+    { label: 'Own case 2', input: '[4,5,6]' },
     { label: 'Single value', input: '[1]' },
     { label: 'Equal values', input: '[7,7,7]' },
     { label: 'Largest allowed values', input: '[1000,1,1000]' },

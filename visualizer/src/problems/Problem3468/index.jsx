@@ -13,8 +13,13 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-number-of-copy-arrays/',
   complexity: 'O(n) time and O(1) space. The visualization caps the array at 10 values.',
   examples: [
-    { label: 'Example 1', input: '{"original":[1,2,3,4],"bounds":[[1,2],[2,3],[3,4],[4,5]]}' },
-    { label: 'Example 2', input: '{"original":[1,2,3,4],"bounds":[[1,10],[2,9],[3,8],[4,7]]}' },
+    { label: 'Own case 1', input: '{"original":[2,3,4,5],"bounds":[[2,3],[3,4],[4,5],[5,6]]}' },
+    { label: 'Own case 2', input: '{"original":[2,3,4,5],"bounds":[[2,11],[3,10],[4,9],[5,8]]}' },
+    { label: 'Single element', input: '{"original":[3],"bounds":[[0,5]]}' },
+    { label: 'Equal values with equal bounds', input: '{"original":[4,4,4],"bounds":[[0,8],[0,8],[0,8]]}' },
+    { label: 'Extreme values and bounds', input: '{"original":[-40,40],"bounds":[[-40,40],[-40,40]]}' },
+    { label: 'Pinned bounds', input: '{"original":[7,-2,0],"bounds":[[7,7],[-2,-2],[0,0]]}' },
+    { label: 'Long run: 10 elements', input: '{"original":[38,35,13,-35,30,37,26,-6,5,-26],"bounds":[[-4,21],[-27,-3],[-11,10],[-37,-19],[15,30],[-27,26],[-5,33],[-11,-10],[-30,25],[-26,-18]]}' },
   ],
 }
 

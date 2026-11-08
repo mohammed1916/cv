@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/kth-smallest-amount-with-single-denomination-combination/',
   complexity: 'O(log(min coin * k) * 2^c) time for c coins. The visualization caps c at 8.',
   examples: [
-    { label: 'Example 1', input: '{"coins":[3,6,9],"k":3}' },
-    { label: 'Example 2', input: '{"coins":[5,2],"k":7}' },
+    { label: 'Own case 1', input: '{"coins":[4,7,10],"k":4}' },
+    { label: 'Own case 2', input: '{"coins":[6,3],"k":8}' },
     { label: "Single coin type", input: "{\"coins\":[1],\"k\":60}" },
     { label: "Equal coins", input: "{\"coins\":[4,4,4],\"k\":8}" },
     { label: "Largest coins and k", input: "{\"coins\":[25,24,23,22,21,20,19,18],\"k\":60}" },

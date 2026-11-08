@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-valid-words-for-each-puzzle/',
   complexity: 'O(words + puzzles * 2^6) time with one bitmask per word. The visualization caps the input at 12 words and 6 puzzles.',
   examples: [
-    { label: 'Official', input: '{"words":["aaaa","asas","able","ability","actt","actor","access"],"puzzles":["aboveyz","abrodyz","abslute","absoryz","actresz","gaswxyz"]}' },
+    { label: 'Own case 1', input: '{"words":["bbbb","btbt","bcmf","bcjmjuz","bduu","bdups","bddftt"],"puzzles":["bcpwfza","bcspeza","bctmvuf","bctpsza","bdusfta","hbtxyza"]}' },
     { label: 'Missing first letter', input: '{"words":["bcd","abc"],"puzzles":["abcdefg"]}' },
     { label: 'Word fits one puzzle', input: '{"words":["abc"],"puzzles":["abcdefg"]}' },
     { label: 'Missing first letter gives zero', input: '{"words":["bcd"],"puzzles":["abcdefg"]}' },

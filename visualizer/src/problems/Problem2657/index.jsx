@@ -16,8 +16,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-prefix-common-array-of-two-arrays/',
   complexity: 'O(n) time and O(n) space with two sets. The visualization caps input at 20 numbers.',
   examples: [
-    { label: 'Example 1', input: '{"A":[1,3,2,4],"B":[3,1,2,4]}' },
-    { label: 'Example 2', input: '{"A":[2,3,1],"B":[3,1,2]}' },
+    { label: 'Own case 1', input: '{"A":[4,2,3,1],"B":[4,2,1,3]}' },
+    { label: 'Own case 2', input: '{"A":[1,3,2],"B":[2,1,3]}' },
     { label: 'Single element', input: '{"A":[1],"B":[1]}' },
     { label: 'Identical permutations', input: '{"A":[1,2,3,4],"B":[1,2,3,4]}' },
     { label: 'Largest size: 20 reversed', input: '{"A":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"B":[20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1]}' },

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Palindrome', input: '6' },
     { label: 'Alternating', input: '13' },
+    { label: "Smallest n", input: "1" },
+    { label: "Power of two", input: "512" },
+    { label: "Largest n", input: "1023" },
+    { label: "Long run: n = LCG value", input: "1023" },
   ],
 }
 

@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"chunks":["hello wor","ld hello"],"queries":["hello","world","wor"]}' },
     { label: 'Example 2', input: '{"chunks":["a-b a--b ","a-","b"],"queries":["a-b","a","b"]}' },
+    { label: 'Single letter', input: '{"chunks":["a"],"queries":["a"]}' },
+    { label: 'Overlapping repeats', input: '{"chunks":["aa aa"],"queries":["aa"]}' },
+    { label: 'Longest joined text', input: '{"chunks":["ab-ab ab-ab ab-ab ","abab"],"queries":["ab-ab","ab","b"]}' },
+    { label: 'Long run: 4 chunks', input: '{"chunks":["cat-dog ","bird cat","-fox"," dog"],"queries":["cat","dog","cat-dog","fox"]}' },
   ],
 }
 

@@ -14,6 +14,10 @@ const definition = {
     { label: 'A later unit reroutes', input: '{"balance":[3,-2,0,0,2,-3]}' },
     { label: 'Impossible', input: '{"balance":[2,-4,1]}' },
     { label: 'Nothing to do', input: '{"balance":[0,5,0]}' },
+    { label: "Single balanced entry", input: '{"balance":[0]}' },
+    { label: "Equal and opposite pair", input: '{"balance":[3,-3]}' },
+    { label: "Largest balances", input: '{"balance":[100000,-100000,100000,-100000,100000,-100000,100000,-100000,100000,-100000,100000,-100000]}' },
+    { label: "Long run: 12 entries", input: '{"balance":[576,-87,-217,763,830,-88,-568,833,-194,211,28,-2087]}' },
   ],
 }
 

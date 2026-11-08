@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"n":4,"target":2}' },
     { label: 'Impossible', input: '{"n":2,"target":2}' },
+    { label: "Single step", input: "{\"n\":1,\"target\":1}" },
+    { label: "Largest n and target", input: "{\"n\":10,\"target\":55}" },
+    { label: "Negative target", input: "{\"n\":3,\"target\":-6}" },
+    { label: "Long run: n = 10", input: "{\"n\":10,\"target\":21}" },
   ],
 }
 

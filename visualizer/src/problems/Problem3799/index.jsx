@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Two squares', input: '{"words":["able","area","echo","also"]}' },
     { label: 'None', input: '{"words":["code","cafe","eden","edge"]}' },
+    { label: 'Four words, no pair', input: '{"words":["abcd","efgh","ijkl","mnop"]}' },
+    { label: 'Shared letters form a square', input: '{"words":["able","bale","acne","lace"]}' },
+    { label: 'Eight words, dense pairs', input: '{"words":["abab","baba","cdcd","dcdc","abcd","badc","cbad","dabc"]}' },
+    { label: 'Long run: 8 words', input: '{"words":["jfge","ahhb","dbjh","ggba","bgbb","cjbd","fifh","aefd"]}' },
   ],
 }
 

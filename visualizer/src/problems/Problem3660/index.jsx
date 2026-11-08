@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[2,7,3,5]}' },
     { label: 'Peak', input: '{"nums":[6,1,4]}' },
+    { label: 'Single value', input: '{"nums":[1]}' },
+    { label: 'Equal values', input: '{"nums":[9,9,9]}' },
+    { label: 'Largest values', input: '{"nums":[99,1,99,1,99,1,99,1,99,1]}' },
+    { label: 'Long run: 10 values', input: '{"nums":[71,45,63,46,86,90,11,73,27,65]}' },
   ],
 }
 

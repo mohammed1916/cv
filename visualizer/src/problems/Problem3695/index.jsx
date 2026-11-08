@@ -14,9 +14,13 @@ const definition = {
   url: 'https://leetcode.com/problems/maximize-alternating-sum-using-swaps/',
   complexity: 'O(n log n) time for sorting the groups. The visualization caps nums at 10 values and swaps at 12 pairs.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,3],"swaps":[[0,2],[1,2]]}' },
-    { label: 'Example 2', input: '{"nums":[1,2,3],"swaps":[[1,2]]}' },
+    { label: 'Own case 1', input: '{"nums":[3,2,1],"swaps":[[1,2],[0,2]]}' },
+    { label: 'Own case 2', input: '{"nums":[3,2,1],"swaps":[[1,2]]}' },
     { label: 'Example 3', input: '{"nums":[1,99,1,99,1,99],"swaps":[]}' },
+    { label: 'Two values no swap', input: '{"nums":[4,8],"swaps":[]}' },
+    { label: 'Equal values tie', input: '{"nums":[5,5,5],"swaps":[[0,1]]}' },
+    { label: 'Alternating extremes', input: '{"nums":[99,1,99,1,99,1,99,1,99,1],"swaps":[[0,9],[1,8],[2,7],[3,6],[4,5]]}' },
+    { label: 'Long run: 10 values, 12 swaps', input: '{"nums":[5,99,8,26,32,74,8,50,2,78],"swaps":[[0,9],[1,4],[6,8],[2,3],[0,2],[8,9],[5,6],[2,9],[0,7],[3,8],[3,4],[1,2]]}' },
   ],
 }
 

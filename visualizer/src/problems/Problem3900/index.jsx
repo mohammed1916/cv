@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: 'Example A', input: '{"s":"1001000"}' },
     { label: 'Example B', input: '{"s":"0011"}' },
+    { label: 'Single zero', input: '{"s":"0"}' },
+    { label: 'Single one', input: '{"s":"1"}' },
+    { label: 'Run of zeros', input: '{"s":"0000"}' },
+    { label: 'Twenty characters', input: '{"s":"11111111110000000000"}' },
+    { label: 'Long run: 20 bits', input: '{"s":"01111100111101010001"}' },
   ],
 }
 

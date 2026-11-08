@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 1', input: '{"nums":[20,10,30,30]}' },
     { label: 'Example 2', input: '{"nums":[20,20,10,30,30,30]}' },
     { label: 'No answer', input: '{"nums":[10,10,20,20]}' },
+    { label: 'One value', input: '{"nums":[10]}' },
+    { label: 'Equal pair', input: '{"nums":[20,20]}' },
+    { label: 'Largest values', input: '{"nums":[100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100]}' },
+    { label: 'Long run: 30 values', input: '{"nums":[54,21,29,70,71,54,11,53,44,55,86,11,83,91,82,76,72,15,60,28,70,17,9,19,84,40,87,82,31,59]}' },
   ],
 }
 

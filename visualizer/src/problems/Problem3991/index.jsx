@@ -25,6 +25,10 @@ const definition = {
     { label: 'Two swap', input: '{"nums":[1,0,2,3],"pre":[2,4]}' },
     { label: 'Two steps', input: '{"nums":[2,0,1],"pre":[2,3]}' },
     { label: 'Unreachable', input: '{"nums":[1,2,0],"pre":[2]}' },
+    { label: "Single element", input: '{"nums":[0],"pre":[1]}' },
+    { label: "Full prefix of six", input: '{"nums":[0,1,2,3,4,5],"pre":[6]}' },
+    { label: "Reversed with longest prefix", input: '{"nums":[5,4,3,2,1,0],"pre":[1,6]}' },
+    { label: "Long run: six items", input: '{"nums":[2,0,3,5,1,4],"pre":[3,5,6]}' },
   ],
 }
 

@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/form-largest-integer-with-digits-that-add-up-to-target/',
   complexity: 'O(9 * target) time and O(target) space. The visualization caps target at 15.',
   examples: [
-    { label: 'Example 1', input: '{"cost":[4,3,2,5,6,7,2,5,5],"target":9}' },
+    { label: 'Own case 1', input: '{"cost":[5,4,3,6,7,8,3,6,6],"target":10}' },
     { label: 'Impossible', input: '{"cost":[2,4,6,2,4,6,4,4,4],"target":5}' },
     { label: 'Cheapest digit, target 1', input: '{"cost":[1,1,1,1,1,1,1,1,1],"target":1}' },
     { label: 'Equal costs', input: '{"cost":[2,2,2,2,2,2,2,2,2],"target":6}' },

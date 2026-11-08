@@ -16,6 +16,10 @@ const definition = {
     { label: "Tall first", input: "[3,10,4,1]" },
     { label: "Repeated heights", input: "[0,7,7,2,5]" },
     { label: "Single block", input: "[6]" },
+    { label: 'Single zero block', input: '[0]' },
+    { label: 'Equal heights', input: '[7,7,7,7]' },
+    { label: 'Extreme heights', input: '[50,0,50,0,50,0,50,0,50,0]' },
+    { label: 'Long run: 10 blocks', input: '[8,40,14,31,33,9,36,3,29,33]' },
   ],
 }
 

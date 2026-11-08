@@ -51,6 +51,10 @@ export const examples = [
   { label: '3 by 3 grid', input: '{"m":3,"n":3,"waitCost":[[2,7,1],[4,3,8],[6,2,5]]}' },
   { label: 'Single row', input: '{"m":1,"n":3,"waitCost":[[5,0,9]]}' },
   { label: 'Big waits steer it', input: '{"m":3,"n":2,"waitCost":[[8,40],[30,2],[1,6]]}' },
+    { label: 'Two cells', input: '{"m":1,"n":2,"waitCost":[[0,0]]}' },
+    { label: 'Equal waits', input: '{"m":2,"n":2,"waitCost":[[5,5],[5,5]]}' },
+    { label: 'Largest waits', input: '{"m":2,"n":2,"waitCost":[[100000,0],[0,100000]]}' },
+    { label: 'Long run: 6 by 6 grid', input: '{"m":6,"n":6,"waitCost":[[10130,13177,14875,34730,6474,69912],[10078,45462,51810,41440,66885,43004],[8173,64857,3297,58532,63655,15282],[69146,6343,77435,45795,72482,38032],[16763,58582,18340,44095,31820,91567],[43899,66337,11956,3991,41508,67233]]}' },
 ]
 
 export function parseInput(text) {

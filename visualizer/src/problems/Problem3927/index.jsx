@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Shared divisors', input: '[6, 9, 4, 3]' },
     { label: 'Chain of multiples', input: '[10, 5, 2, 15]' },
+    { label: 'Single value', input: '[9]' },
+    { label: 'Equal values', input: '[12,12,12]' },
+    { label: 'Largest values alternating', input: '[100,1,100,1]' },
+    { label: 'Long run: 12 items', input: '[97,26,30,100,99,50,18,56,94,50,31,67]' },
   ],
 }
 

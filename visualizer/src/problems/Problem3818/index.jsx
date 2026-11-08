@@ -19,6 +19,10 @@ const definition = {
     { label: 'Already increasing', input: '[1, 2, 3]' },
     { label: 'Decreasing', input: '[5, 4, 3]' },
     { label: 'Equal at boundary', input: '[1, 2, 2, 3]' },
+    { label: 'One value', input: '[7]' },
+    { label: 'Equal values', input: '[2,2,2]' },
+    { label: 'Extremes alternate', input: '[-1000,1000,-1000,1000,-1000,1000]' },
+    { label: 'Long run: 20 values', input: '[-425,-895,-952,242,-937,-526,992,-361,770,-447,-934,12,678,-580,-910,-415,-802,-307,-186,-130]' },
   ],
 }
 

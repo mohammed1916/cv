@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"series1":[[3,2],[6,4]],"series2":[[1,1],[6,3]]}' },
     { label: 'Example 3', input: '{"series1":[[2,5],[7,1]],"series2":[[7,4]]}' },
+    { label: "Single pair each", input: '{"series1":[[1,5]],"series2":[[1,5]]}' },
+    { label: "Equal timestamps across series", input: '{"series1":[[2,3],[4,3]],"series2":[[2,3],[4,3]]}' },
+    { label: "Largest timestamp and value", input: '{"series1":[[1000000000,1000000000]],"series2":[[1,1]]}' },
+    { label: "Long run: 8 points each", input: '{"series1":[[1,708],[38,709],[75,709],[112,710],[149,710],[186,710],[223,711],[260,711]],"series2":[[2,743],[43,744],[84,744],[125,744],[166,745],[207,745],[248,745],[289,746]]}' },
   ],
 }
 

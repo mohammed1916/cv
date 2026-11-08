@@ -17,6 +17,11 @@ const definition = {
   examples: [
     { label: 'Invented example', input: '{"s":"1010001","queries":[[0,6],[1,3]]}' },
     { label: 'All ones', input: '{"s":"1111","queries":[[0,3]]}' },
+    { label: 'Single bit query', input: '{"s":"1","queries":[[0,0]]}' },
+    { label: 'Equal bits in ranges', input: '{"s":"0000","queries":[[0,3],[1,2]]}' },
+    { label: 'Largest string and ends', input: '{"s":"1010101010101010","queries":[[0,15],[0,0],[15,15]]}' },
+    { label: 'Zero string query', input: '{"s":"00","queries":[[0,1]]}' },
+    { label: 'Long run: 16 bits, 4 queries', input: '{"s":"0110101001000110","queries":[[0,15],[3,9],[7,7],[2,14]]}' },
   ],
 }
 

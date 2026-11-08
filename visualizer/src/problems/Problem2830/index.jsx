@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/maximize-the-profit-as-the-salesman/',
   complexity: 'O(n + m) time after grouping offers by end house, and O(n) space. The visualization caps input at 12 houses and 8 offers.',
   examples: [
-    { label: 'Example 1', input: '{"n":5,"offers":[[0,0,1],[0,2,2],[1,3,2]]}' },
+    { label: 'Own case 1', input: '{"n":6,"offers":[[1,1,2],[1,3,3],[2,4,3]]}' },
     { label: 'Big offer', input: '{"n":5,"offers":[[0,0,1],[0,2,10],[1,3,2]]}' },
     { label: "Single house, no offers", input: "{\"n\":1,\"offers\":[]}" },
     { label: "Single house with offer", input: "{\"n\":1,\"offers\":[[0,0,3]]}" },

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Four points', input: '{"points":[[0,0],[3,1],[1,4],[4,4]]}' },
     { label: 'Three points', input: '{"points":[[1,1],[1,4],[7,2]]}' },
+    { label: 'Two points', input: '{"points":[[0,0],[5,5]]}' },
+    { label: 'Collinear points', input: '{"points":[[0,0],[1,1],[2,2]]}' },
+    { label: 'Extreme coordinates', input: '{"points":[[100,100],[-100,-100],[100,-100]]}' },
+    { label: 'Long run: 8 points', input: '{"points":[[-48,-39],[-74,-6],[89,1],[-63,-53],[-40,-63],[38,-87],[53,66],[2,50]]}' },
   ],
 }
 

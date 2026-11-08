@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/count-of-interesting-subarrays/',
   complexity: 'O(n + m) time and O(m) space for modulo m. The visualization caps nums at 10 entries.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[3,2,4],"modulo":2,"k":1}' },
-    { label: 'Example 2', input: '{"nums":[3,1,9,6],"modulo":3,"k":0}' },
+    { label: 'Own case 1', input: '{"nums":[4,3,5],"modulo":3,"k":2}' },
+    { label: 'Own case 2', input: '{"nums":[4,2,10,7],"modulo":4,"k":1}' },
     { label: "Single number", input: "{\"nums\":[7],\"modulo\":2,\"k\":1}" },
     { label: "Equal values", input: "{\"nums\":[4,4,4,4],\"modulo\":4,\"k\":0}" },
     { label: "Largest values", input: "{\"nums\":[20,20,20,20,20,20,20,20,20,20],\"modulo\":6,\"k\":5}" },

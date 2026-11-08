@@ -16,7 +16,7 @@ const definition = {
   url: 'https://leetcode.com/problems/find-edges-in-shortest-paths/',
   complexity: 'O((V + E) log V) time for two Dijkstra runs. The visualization caps input at 6 nodes and 9 edges.',
   examples: [
-    { label: 'Example 1', input: '{"n":6,"edges":[[0,1,4],[0,2,1],[1,3,2],[1,4,3],[1,5,1],[2,3,1],[3,5,3],[4,5,2]]}' },
+    { label: 'Own case 1', input: '{"n":6,"edges":[[4,5,2],[3,5,3],[2,3,1],[1,5,1],[1,4,3],[1,3,2],[0,2,1],[0,1,4]]}' },
     { label: 'Example 2', input: '{"n":4,"edges":[[2,0,1],[0,1,1],[1,3,5],[2,3,1]]}' },
     { label: "Two nodes, one edge", input: "{\"n\":2,\"edges\":[[0,1,1]]}" },
     { label: "Equal weights", input: "{\"n\":3,\"edges\":[[0,1,2],[1,2,2],[0,2,2]]}" },

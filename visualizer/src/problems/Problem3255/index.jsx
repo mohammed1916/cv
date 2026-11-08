@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-power-of-k-size-subarrays-ii/',
   complexity: 'O(n) time with one run counter. The visualization caps nums at 40 values.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,3,4,3,2,5],"k":3}' },
-    { label: 'Example 2', input: '{"nums":[2,2,2,2,2],"k":4}' },
+    { label: 'Own case 1', input: '{"nums":[2,3,4,5,4,3,6],"k":4}' },
+    { label: 'Own case 2', input: '{"nums":[3,3,3,3,3],"k":5}' },
     { label: 'Single element', input: '{"nums":[9],"k":1}' },
     { label: 'Two values', input: '{"nums":[1,50],"k":2}' },
     { label: 'Alternating window', input: '{"nums":[50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1],"k":20}' },

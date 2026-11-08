@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/count-pairs-with-xor-in-a-range/',
   complexity: 'O(n * B) time and O(n * B) space for B = 7 bits. The visualization caps nums at 12 values.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,4,2,7],"low":2,"high":6}' },
-    { label: 'Example 2', input: '{"nums":[9,8,4,2,1],"low":5,"high":14}' },
+    { label: 'Own case 1', input: '{"nums":[2,5,3,8],"low":3,"high":7}' },
+    { label: 'Own case 2', input: '{"nums":[10,9,5,3,2],"low":6,"high":15}' },
   { label: 'Single number, exact bounds', input: "{\"nums\":[10],\"low\":10,\"high\":10}" },
   { label: 'Equal values in range', input: "{\"nums\":[4,4,4],\"low\":3,\"high\":5}" },
   { label: 'Widest range', input: "{\"nums\":[1,50,1,50,1,50,1,50,1,50,1,50],\"low\":1,\"high\":60}" },

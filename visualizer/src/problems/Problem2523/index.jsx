@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/closest-prime-numbers-in-range/',
   complexity: 'O(R sqrt(R)) time with trial division. The visualization caps the range at 1000.',
   examples: [
-    { label: 'Example 1', input: '{"left":10,"right":19}' },
-    { label: 'Example 2', input: '{"left":4,"right":6}' },
+    { label: 'Own case 1', input: '{"left":11,"right":20}' },
+    { label: 'Own case 2', input: '{"left":5,"right":7}' },
     { label: 'Single number', input: '{"left":1,"right":1}' },
     { label: 'Two adjacent primes', input: '{"left":2,"right":3}' },
     { label: 'Full range', input: '{"left":1,"right":1000}' },

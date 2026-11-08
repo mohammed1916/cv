@@ -22,7 +22,11 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with books, reviews and min_reviews',
   complexity: 'O(B * R) with a simple filter per book.',
-  examples: [{ label: 'Sample', input: SAMPLE_TEXT }],
+  examples: [{ label: 'Sample', input: SAMPLE_TEXT },
+  { label: 'One book, one review', input: '{"books":[{"book_id":1,"title":"Lone"}],"reviews":[{"book_id":1,"rating":3}],"min_reviews":1}' },
+  { label: 'Equal ratings at the minimum', input: '{"books":[{"book_id":1,"title":"Ash"},{"book_id":2,"title":"Birch"}],"reviews":[{"book_id":1,"rating":2},{"book_id":1,"rating":2},{"book_id":2,"rating":4},{"book_id":2,"rating":4}],"min_reviews":2}' },
+  { label: 'Extreme ratings', input: '{"books":[{"book_id":1,"title":"Edge"}],"reviews":[{"book_id":1,"rating":1},{"book_id":1,"rating":5},{"book_id":1,"rating":5}],"min_reviews":3}' },
+  { label: 'Long run: 6 books, 30 reviews', input: '{"books":[{"book_id":1,"title":"Book1"},{"book_id":2,"title":"Book2"},{"book_id":3,"title":"Book3"},{"book_id":4,"title":"Book4"},{"book_id":5,"title":"Book5"},{"book_id":6,"title":"Book6"}],"reviews":[{"book_id":1,"rating":4},{"book_id":1,"rating":3},{"book_id":5,"rating":5},{"book_id":2,"rating":1},{"book_id":3,"rating":4},{"book_id":4,"rating":4},{"book_id":1,"rating":2},{"book_id":1,"rating":2},{"book_id":1,"rating":3},{"book_id":6,"rating":4},{"book_id":2,"rating":1},{"book_id":4,"rating":3},{"book_id":5,"rating":5},{"book_id":3,"rating":2},{"book_id":6,"rating":4},{"book_id":1,"rating":1},{"book_id":4,"rating":4},{"book_id":1,"rating":3},{"book_id":2,"rating":4},{"book_id":6,"rating":2},{"book_id":6,"rating":5},{"book_id":4,"rating":3},{"book_id":6,"rating":1},{"book_id":3,"rating":5},{"book_id":1,"rating":1},{"book_id":6,"rating":5},{"book_id":1,"rating":2},{"book_id":2,"rating":4},{"book_id":4,"rating":1},{"book_id":1,"rating":4}],"min_reviews":4}' }],
 }
 
 const cell = { border: '1px solid currentColor', padding: '4px 8px' }

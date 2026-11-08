@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '4087' },
     { label: 'Two digits', input: '90' },
+    { label: 'Smallest n', input: '1' },
+    { label: 'Largest n', input: '1000000000' },
+    { label: 'Power of ten', input: '100000' },
+    { label: 'Long run: 9-digit n', input: '272685852' },
   ],
 }
 

@@ -19,6 +19,10 @@ const definition = {
   examples: [
     { label: 'Invented pair', input: JSON.stringify({ s: 'ccd', t: 'bba', nextCost: Array(26).fill(3), previousCost: Array(26).fill(2) }) },
     { label: 'Short mix', input: JSON.stringify({ s: 'ab', t: 'ca', nextCost: Array.from({ length: 26 }, (_, i) => i % 4), previousCost: Array(26).fill(1) }) },
+    { label: 'Single letter', input: '{"s":"a","t":"a","nextCost":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"previousCost":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}' },
+    { label: 'Identical strings', input: '{"s":"abc","t":"abc","nextCost":[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],"previousCost":[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4]}' },
+    { label: 'Largest costs, six letters', input: '{"s":"fedcba","t":"abcdef","nextCost":[100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100],"previousCost":[100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100]}' },
+    { label: 'Long run: six letters', input: '{"s":"ypjber","t":"xujvko","nextCost":[33,3,16,46,68,52,35,74,62,17,62,80,35,8,95,37,22,30,73,32,71,83,50,36,15,32],"previousCost":[39,2,2,86,47,71,42,70,73,19,73,48,75,60,88,13,73,90,98,33,42,36,0,94,79,99]}' },
   ],
 }
 

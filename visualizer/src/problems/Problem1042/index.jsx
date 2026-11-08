@@ -16,8 +16,8 @@ const definition = {
   url: 'https://leetcode.com/problems/flower-planting-with-no-adjacent/',
   complexity: 'O(n + p) time for p paths, since each garden checks at most three neighbours.',
   examples: [
-    { label: 'Example 1', input: '{"n": 3, "paths": [[1,2],[2,3],[3,1]]}' },
-    { label: 'Example 2', input: '{"n": 4, "paths": [[1,2],[3,4]]}' },
+    { label: 'Own case 1', input: '{"n":4,"paths":[[2,3],[3,4],[4,2]]}' },
+    { label: 'Own case 2', input: '{"n":5,"paths":[[2,3],[4,5]]}' },
     { label: 'Star of three', input: '{"n": 4, "paths": [[1,2],[1,3],[1,4]]}' },
     { label: 'Single garden, no paths', input: '{"n":1,"paths":[]}' },
     { label: 'Two gardens joined', input: '{"n":2,"paths":[[1,2]]}' },

@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 1', input: '{"s":"abcacbd"}' },
     { label: 'Example 2', input: '{"s":"abc"}' },
     { label: 'No match', input: '{"s":"abcdab"}' },
+    { label: 'Single letter', input: '{"s":"a"}' },
+    { label: 'Equal letters', input: '{"s":"aaaa"}' },
+    { label: 'Descending run, 26 letters', input: '{"s":"zyxwvutsrqponmlkjihgfedcbaz"}' },
+    { label: 'Long run: 30 letters', input: '{"s":"uufvlqupdbluvijdmgwabenktihqgv"}' },
   ],
 }
 

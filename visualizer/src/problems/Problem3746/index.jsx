@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Mixed', input: 'aabaa' },
     { label: 'All a', input: 'bbbab' },
+    { label: "Single letter", input: "\"a\"" },
+    { label: "Equal counts", input: "\"abba\"" },
+    { label: "Longest allowed string", input: "\"abababababababababababababababababababab\"" },
+    { label: "Long run: 40 letters", input: "\"ababaabbbbaaabbababbaababababbbbbbabbbbb\"" },
   ],
 }
 

@@ -51,6 +51,10 @@ const definition = {
       label: 'No conversion',
       input: '{"user_activity":[{"user_id":5,"activity_date":"2024-06-01","activity_type":"trial","activity_duration":6},{"user_id":5,"activity_date":"2024-06-04","activity_type":"trial","activity_duration":4}]}',
     },
+    { label: 'Single trial row', input: '{"user_activity":[{"user_id":1,"activity_date":"2026-01-05","activity_type":"trial","activity_duration":12}]}' },
+    { label: 'Equal durations tie', input: '{"user_activity":[{"user_id":4,"activity_date":"2026-02-01","activity_type":"trial","activity_duration":30},{"user_id":4,"activity_date":"2026-02-01","activity_type":"paid","activity_duration":30}]}' },
+    { label: 'Largest integers', input: '{"user_activity":[{"user_id":2147483647,"activity_date":"2026-12-31","activity_type":"paid","activity_duration":2147483647}]}' },
+    { label: 'Long run: 12 rows', input: '{"user_activity":[{"user_id":1,"activity_date":"2026-04-04","activity_type":"paid","activity_duration":67},{"user_id":2,"activity_date":"2026-03-21","activity_type":"paid","activity_duration":99},{"user_id":3,"activity_date":"2026-05-22","activity_type":"paid","activity_duration":99},{"user_id":4,"activity_date":"2026-03-05","activity_type":"trial","activity_duration":43},{"user_id":1,"activity_date":"2026-05-19","activity_type":"paid","activity_duration":91},{"user_id":2,"activity_date":"2026-06-17","activity_type":"paid","activity_duration":103},{"user_id":3,"activity_date":"2026-03-28","activity_type":"paid","activity_duration":25},{"user_id":4,"activity_date":"2026-06-05","activity_type":"paid","activity_duration":10},{"user_id":1,"activity_date":"2026-01-23","activity_type":"trial","activity_duration":54},{"user_id":2,"activity_date":"2026-01-16","activity_type":"paid","activity_duration":83},{"user_id":3,"activity_date":"2026-02-10","activity_type":"paid","activity_duration":15},{"user_id":4,"activity_date":"2026-04-22","activity_type":"trial","activity_duration":68}]}' },
   ],
 }
 

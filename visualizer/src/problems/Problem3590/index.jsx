@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"par":[-1,0,0],"vals":[1,1,1],"queries":[[0,1],[0,2],[0,3]]}' },
     { label: 'Example 2', input: '{"par":[-1,0,1],"vals":[5,2,7],"queries":[[0,1],[1,2],[1,3],[2,1]]}' },
+    { label: 'Single node, value zero', input: '{"par":[-1],"vals":[0],"queries":[[0,1]]}' },
+    { label: 'Equal values under one root', input: '{"par":[-1,0,0],"vals":[3,3,3],"queries":[[0,2],[0,3]]}' },
+    { label: 'Largest values on a chain', input: '{"par":[-1,0,1,2,3],"vals":[15,15,15,15,15],"queries":[[0,5],[4,1]]}' },
+    { label: 'Long run: 8 nodes', input: '{"par":[-1,0,1,0,2,1,4,6],"vals":[14,2,7,8,1,2,0,11],"queries":[[3,2],[1,7],[1,2],[0,6],[6,1],[0,5]]}' },
   ],
 }
 

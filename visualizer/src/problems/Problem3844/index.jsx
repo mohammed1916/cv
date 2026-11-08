@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 1', input: '{"s":"abca"}' },
     { label: 'Example 2', input: '{"s":"abba"}' },
     { label: 'Example 3', input: '{"s":"zzabba"}' },
+    { label: 'Shortest string', input: '{"s":"aa"}' },
+    { label: 'Equal letters', input: '{"s":"zzzz"}' },
+    { label: 'Thirty letters', input: '{"s":"abcdefghijklmnopqrstuvwxyzabcd"}' },
+    { label: 'Long run: 30 letters', input: '{"s":"sojtebjnqaommjhlrfrduzninclcpy"}' },
   ],
 }
 

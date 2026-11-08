@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/shortest-completing-word/',
   complexity: 'O(total letters of words) time with a 26-letter counter; the trace shows one frame set per word (capped at 40 words).',
   examples: [
-    { label: 'Example 1', input: '{"licensePlate": "1s3 PSt", "words": ["step", "steps", "stripe", "stepple"]}' },
-    { label: 'Example 2', input: '{"licensePlate": "1s3 456", "words": ["looks", "pest", "stew", "show"]}' },
+    { label: 'Own case 1', input: '{"licensePlate":"2t4 QTu","words":["tufq","tufqt","tusjqf","tufqqmf"]}' },
+    { label: 'Own case 2', input: '{"licensePlate":"2t4 567","words":["mpplt","qftu","tufx","tipx"]}' },
     { label: 'Tie', input: '{"licensePlate": "Ab", "words": ["xab", "bay", "ab"]}' },
     { label: 'Single letter plate', input: '{"licensePlate":"A","words":["a"]}' },
     { label: 'Tie in length keeps the first word', input: '{"licensePlate":"aa","words":["aab","baa"]}' },

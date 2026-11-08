@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'HERE after return', input: '{"numberOfUsers":2,"events":[["MESSAGE","10","id1 id0"],["OFFLINE","11","0"],["MESSAGE","71","HERE"]]}' },
     { label: 'Still offline', input: '{"numberOfUsers":2,"events":[["OFFLINE","10","0"],["MESSAGE","12","HERE"]]}' },
+    { label: 'Single user', input: '{"numberOfUsers":1,"events":[["MESSAGE","1","id0"]]}' },
+    { label: 'Same timestamp tie', input: '{"numberOfUsers":2,"events":[["MESSAGE","5","HERE"],["MESSAGE","5","id1"]]}' },
+    { label: 'Offline window edge', input: '{"numberOfUsers":2,"events":[["OFFLINE","1","0"],["MESSAGE","61","HERE"],["MESSAGE","62","HERE"]]}' },
+    { label: 'Long run: 20 events', input: '{"numberOfUsers":10,"events":[["MESSAGE","4","id2 id3"],["OFFLINE","7","7"],["OFFLINE","16","5"],["MESSAGE","25","ALL"],["MESSAGE","33","ALL"],["OFFLINE","34","9"],["MESSAGE","36","ALL"],["MESSAGE","43","ALL"],["MESSAGE","50","ALL"],["MESSAGE","53","ALL"],["MESSAGE","58","ALL"],["MESSAGE","64","id5 id6"],["MESSAGE","70","HERE"],["OFFLINE","77","1"],["OFFLINE","84","9"],["OFFLINE","85","8"],["OFFLINE","91","6"],["OFFLINE","93","1"],["MESSAGE","97","HERE"],["MESSAGE","98","ALL"]]}' },
   ],
 }
 

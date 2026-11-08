@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-jumps-to-reach-home/',
   complexity: 'O(limit) time and space over the position and direction states.',
   examples: [
-    { label: 'Example 1', input: '{"forbidden":[14,4,18,1,15],"a":3,"b":15,"x":9}' },
-    { label: 'Example 2', input: '{"forbidden":[8,3,16,6,12,20],"a":15,"b":13,"x":11}' },
+    { label: 'Own case 1', input: '{"forbidden":[15,5,19,2,16],"a":4,"b":16,"x":10}' },
+    { label: 'Own case 2', input: '{"forbidden":[9,4,17,7,13,21],"a":16,"b":14,"x":12}' },
     { label: 'One forbidden position', input: '{"forbidden":[1],"a":1,"b":1,"x":2}' },
     { label: 'Equal jump lengths', input: '{"forbidden":[3,5],"a":4,"b":4,"x":1}' },
     { label: 'Largest limits', input: '{"forbidden":[21,22,23,24,25,26,27,28,29,30],"a":20,"b":20,"x":1}' },

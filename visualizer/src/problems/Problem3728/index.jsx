@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[9,3,3,3,9]}' },
     { label: 'Example 3', input: '{"nums":[-4,4,0,0,-8,-4]}' },
+    { label: 'Minimum length tie', input: '{"nums":[1,1,1]}' },
+    { label: 'Zeros', input: '{"nums":[0,0,0,0]}' },
+    { label: 'Largest values allowed', input: '{"nums":[1000000000,-1000000000,1000000000]}' },
+    { label: 'Long run: 12 values', input: '{"nums":[50,45,-23,-46,30,-35,-45,-28,3,39,1,-7]}' },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Six sheets', input: '{"n":6,"limitA":4,"limitB":3}' },
     { label: 'Seven sheets', input: '{"n":7,"limitA":2,"limitB":5}' },
+    { label: 'Smallest board', input: '{"n":2,"limitA":1,"limitB":1}' },
+    { label: 'Equal limits', input: '{"n":6,"limitA":3,"limitB":3}' },
+    { label: 'Limits at the maximum', input: '{"n":14,"limitA":14,"limitB":14}' },
+    { label: 'Long run: n = 14', input: '{"n":14,"limitA":7,"limitB":9}' },
   ],
 }
 

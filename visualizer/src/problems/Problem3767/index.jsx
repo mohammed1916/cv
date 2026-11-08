@@ -14,8 +14,12 @@ const definition = {
   url: 'https://leetcode.com/problems/maximize-points-after-choosing-k-tasks/',
   complexity: 'O(n log n) time for sorting the gains. The visualization caps n at 20.',
   examples: [
-    { label: 'Example 1', input: '{"technique1":[5,2,10],"technique2":[10,3,8],"k":2}' },
-    { label: 'Example 3', input: '{"technique1":[1,2,3],"technique2":[4,5,6],"k":0}' },
+    { label: 'Own case 1', input: '{"technique1":[6,3,11],"technique2":[11,4,9],"k":3}' },
+    { label: 'Own case 2', input: '{"technique1":[2,3,4],"technique2":[5,6,7],"k":1}' },
+    { label: "Single point pair", input: "{\"technique1\":[4],\"technique2\":[9],\"k\":1}" },
+    { label: "All points equal", input: "{\"technique1\":[5,5],\"technique2\":[5,5],\"k\":1}" },
+    { label: "Largest points, full k", input: "{\"technique1\":[1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1,1,1,1,1,1,1,1,1,1],\"technique2\":[1,1,1,1,1,1,1,1,1,1,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000],\"k\":20}" },
+    { label: "Long run: 20 points", input: "{\"technique1\":[573,261,374,618,574,551,434,518,34,20,523,469,621,584,710,5,556,965,133,665],\"technique2\":[674,953,502,382,147,95,540,238,147,739,508,239,751,298,561,916,2,918,487,18],\"k\":10}" },
   ],
 }
 

@@ -14,8 +14,12 @@ const definition = {
   url: 'https://leetcode.com/problems/split-array-by-prime-indices/',
   complexity: 'O(n sqrt(n)) with trial division. A sieve gives O(n log log n).',
   examples: [
-    { label: 'Example 1', input: '[2,3,4]' },
-    { label: 'Example 2', input: '[-1,5,7,0]' },
+    { label: 'Own case 1', input: '[3,4,5]' },
+    { label: 'Own case 2', input: '[-2,6,8,1]' },
+    { label: 'Single one', input: '[1]' },
+    { label: 'Equal values', input: '[4,4]' },
+    { label: 'Largest magnitudes', input: '[1000000000,-1000000000]' },
+    { label: 'Long run: 20 values', input: '[-584,-404,328,238,-374,201,859,611,-823,-904,113,-765,-157,922,-941,763,-43,-991,942,-29]' },
   ],
 }
 

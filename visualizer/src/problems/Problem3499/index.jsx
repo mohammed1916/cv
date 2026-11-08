@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"s":"0011010"}' },
     { label: 'All ones', input: '{"s":"111"}' },
+    { label: 'Single zero', input: '{"s":"0"}' },
+    { label: 'Equal ones', input: '{"s":"1111"}' },
+    { label: 'Longest all zeros', input: '{"s":"0000000000000000000000000000000000000000"}' },
+    { label: 'Alternating bits', input: '{"s":"0101010101"}' },
+    { label: 'Long run: 40 bits', input: '{"s":"0001011000001111011010011010011100000010"}' },
   ],
 }
 

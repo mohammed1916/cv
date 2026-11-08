@@ -16,6 +16,10 @@ const definition = {
     { label: 'Example 1', input: '{"grid":[[1,4],[2,3]]}' },
     { label: 'Example 2', input: '{"grid":[[1,2],[3,4]]}' },
     { label: 'Example 3', input: '{"grid":[[1,2,4],[2,3,5]]}' },
+    { label: 'Two cells', input: '{"grid":[[1,20]]}' },
+    { label: 'Equal cells', input: '{"grid":[[4,4],[4,4]]}' },
+    { label: 'Largest values', input: '{"grid":[[20,1,20],[1,20,1]]}' },
+    { label: 'Long run: 3 by 4 grid', input: '{"grid":[[9,6,18,16],[11,14,20,17],[5,10,10,1]]}' },
   ],
 }
 

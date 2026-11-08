@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Run limit two', input: '{"labels":"abbab","k":2,"edges":[[0,1,2],[1,2,3],[2,4,1],[0,3,5],[3,4,1]]}' },
     { label: 'Run too long', input: '{"labels":"aaab","k":3,"edges":[[0,1,1],[1,2,1],[2,3,1]]}' },
+    { label: "Single vertex", input: '{"labels":"a","k":1,"edges":[]}' },
+    { label: "Equal weights tie", input: '{"labels":"ab","k":1,"edges":[[0,1,2],[1,0,2]]}' },
+    { label: "Heaviest weights and longest run limit", input: '{"labels":"aaaaaaaa","k":4,"edges":[[0,1,20],[1,2,20],[2,3,20],[3,4,20],[4,5,20],[5,6,20],[6,7,20]]}' },
+    { label: "Long run: 8 vertices", input: '{"labels":"baabaabb","k":2,"edges":[[6,2,3],[4,1,1],[4,6,3],[5,0,9],[6,4,10],[7,5,14],[6,1,3],[7,1,19],[0,2,7],[7,3,18],[1,7,15],[6,3,19]]}' },
   ],
 }
 

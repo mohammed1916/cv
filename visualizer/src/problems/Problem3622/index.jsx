@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":23}' },
     { label: 'Zero digit', input: '{"n":10}' },
+    { label: 'Single one digit', input: '{"n":1}' },
+    { label: 'Repeated digits', input: '{"n":11}' },
+    { label: 'Largest n', input: '{"n":100000}' },
+    { label: 'Long run: n = 99999', input: '{"n":99999}' },
   ],
 }
 

@@ -16,7 +16,7 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-number-of-achievable-transfer-requests/',
   complexity: 'O(2^m * (m + n)) time for m requests. The visualization caps m at 8.',
   examples: [
-    { label: 'Example 1', input: '{"n":5,"requests":[[0,1],[1,0],[0,1],[1,2],[2,0],[3,4]]}' },
+    { label: 'Own case 1', input: '{"n":6,"requests":[[1,2],[2,1],[1,2],[2,3],[3,1],[4,5]]}' },
     { label: 'Example 3', input: '{"n":4,"requests":[[0,3],[3,1],[1,0],[2,1]]}' },
     { label: "Single building", input: "{\"n\":1,\"requests\":[[0,0]]}" },
     { label: "Same pair twice", input: "{\"n\":2,\"requests\":[[0,1],[0,1]]}" },

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/rearranging-fruits/',
   complexity: 'O(n log n) time for the sort of the surplus costs. The visualization caps input at 4 fruits per basket.',
   examples: [
-    { label: 'Example 1', input: '{"basket1":[4,2,2,2],"basket2":[1,4,1,2]}' },
-    { label: 'Example 2', input: '{"basket1":[2,3,4,1],"basket2":[3,2,5,1]}' },
+    { label: 'Own case 1', input: '{"basket1":[5,3,3,3],"basket2":[2,5,2,3]}' },
+    { label: 'Own case 2', input: '{"basket1":[1,4,3,2],"basket2":[1,5,2,3]}' },
     { label: 'Single fruit each', input: '{"basket1":[1],"basket2":[1]}' },
     { label: 'Equal baskets', input: '{"basket1":[3,3],"basket2":[3,3]}' },
     { label: 'Largest costs in four positions', input: '{"basket1":[5,1,5,1],"basket2":[1,5,1,5]}' },

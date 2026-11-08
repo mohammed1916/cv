@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/total-cost-to-hire-k-workers/',
   complexity: 'O(k log c) time with two heaps of candidates, where c is the pool size. The visualization caps input at 10 workers.',
   examples: [
-    { label: 'Example 1', input: '{"costs":[17,12,10,2,7,2,11,20,8],"k":3,"candidates":4}' },
-    { label: 'Example 2', input: '{"costs":[1,2,4,1],"k":3,"candidates":3}' },
+    { label: 'Own case 1', input: '{"costs":[8,20,11,2,7,2,10,12,17],"k":3,"candidates":4}' },
+    { label: 'Own case 2', input: '{"costs":[2,3,5,2],"k":4,"candidates":4}' },
     { label: 'Single worker', input: '{"costs":[5],"k":1,"candidates":1}' },
     { label: 'Equal costs', input: '{"costs":[4,4,4,4],"k":2,"candidates":2}' },
     { label: 'Largest values', input: '{"costs":[20,1,20,1,20,1,20,1,20,1],"k":5,"candidates":3}' },

@@ -15,7 +15,7 @@ const definition = {
   complexity: 'Backtracking over the ways to assign jobs, pruned by the best peak so far. The visualization caps input at 8 jobs.',
   examples: [
     { label: 'Example 1', input: '{"jobs":[3,2,3],"k":3}' },
-    { label: 'Example 2', input: '{"jobs":[1,2,4,7,8],"k":2}' },
+    { label: 'Own case 2', input: '{"jobs":[2,3,5,8,9],"k":3}' },
   { label: 'Single job', input: '{"jobs":[5],"k":1}' },
   { label: 'Equal jobs', input: '{"jobs":[4,4,4,4],"k":2}' },
   { label: 'Longest job times', input: '{"jobs":[60,60,60,60,60,60,60,60],"k":3}' },

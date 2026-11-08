@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-maximum-length-of-a-good-subsequence-ii/',
   complexity: 'O(n * k * V) time for V distinct values here, and O(V * k) space. The visualization caps input at 12 entries.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,1,1,3],"k":2}' },
+    { label: 'Own case 1', input: '{"nums":[2,3,2,2,4],"k":3}' },
     { label: 'No changes', input: '{"nums":[1,2,3,4,1],"k":0}' },
     { label: "Single value", input: "{\"nums\": [3], \"k\": 1}" },
     { label: "Each value once, k zero", input: "{\"nums\": [1, 2, 3, 4], \"k\": 0}" },

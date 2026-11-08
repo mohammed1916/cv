@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Outlier 10', input: '{"nums":[2,3,5,10]}' },
     { label: 'Negative values', input: '{"nums":[-2,-1,-3,-6,4]}' },
+    { label: 'Three values, repeated sum', input: '{"nums":[2,2,5]}' },
+    { label: 'Equal values', input: '{"nums":[3,3,3]}' },
+    { label: 'Extreme values', input: '{"nums":[-1000,1000,-1000]}' },
+    { label: 'Long run: 30 values', input: '{"nums":[-14,2,4,-18,12,1,13,7,-20,19,8,-3,-20,-7,4,-17,10,-16,-14,-7,-1,2,4,-8,8,-1,1,17,-4,2]}' },
   ],
 }
 

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-incompatibility/',
   complexity: 'O(3^n) submask enumeration over 2^n masks. The visualization caps input at 8 numbers.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,1,4],"k":2}' },
-    { label: 'Example 2', input: '{"nums":[6,3,8,1,3,1,2,2],"k":4}' },
+    { label: 'Own case 1', input: '{"nums":[3,4,3,6],"k":4}' },
+    { label: 'Own case 2', input: '{"nums":[10,7,12,5,7,5,6,6],"k":8}' },
     { label: 'Single value', input: '{"nums":[5],"k":1}' },
     { label: 'Equal values', input: '{"nums":[2,2,2,2],"k":2}' },
     { label: 'Largest length', input: '{"nums":[16,1,16,1,16,1,16,1],"k":4}' },

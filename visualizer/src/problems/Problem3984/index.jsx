@@ -25,6 +25,10 @@ const definition = {
     { label: 'Mixed', input: '[6, 4, 9, 10]' },
     { label: 'Single', input: '[7]' },
     { label: 'Repeated', input: '[3, 3, 3, 3]' },
+    { label: "Smallest value", input: '[1]' },
+    { label: "Equal values", input: '[5,5,5,5,5]' },
+    { label: "Maximum length and value", input: '[30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30]' },
+    { label: "Long run: 30 values", input: '[24,20,21,5,18,16,18,18,7,14,14,1,13,28,20,14,27,27,29,18,25,26,19,29,22,14,22,20,28,16]' },
   ],
 }
 

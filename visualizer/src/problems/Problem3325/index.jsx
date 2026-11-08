@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/count-substrings-with-k-frequency-characters-i/',
   complexity: 'O(n^2) time in the worst case and O(1) extra space for 26 letters. The visualization caps input at 12 letters.',
   examples: [
-    { label: 'Example 1', input: '{"s":"abacb","k":2}' },
-    { label: 'Example 2', input: '{"s":"abcde","k":1}' },
+    { label: 'Own case 1', input: '{"s":"bcbdc","k":3}' },
+    { label: 'Own case 2', input: '{"s":"bcdef","k":2}' },
     { label: 'Single letter', input: '{"s":"a","k":1}' },
     { label: 'All letters distinct', input: '{"s":"abcdefghijkl","k":2}' },
     { label: 'Longest allowed string, one repeated letter', input: '{"s":"aaaaaaaaaaaa","k":5}' },

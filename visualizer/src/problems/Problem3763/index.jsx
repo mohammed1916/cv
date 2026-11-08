@@ -15,6 +15,10 @@ const definition = {
     { label: "Negative pick forced", input: "{\"nums\":[5,-2,9,4],\"threshold\":[1,3,2,1]}" },
     { label: "Two early picks", input: "{\"nums\":[3,8,1],\"threshold\":[1,1,3]}" },
     { label: "Late unlock", input: "{\"nums\":[7,14,-4,12],\"threshold\":[2,2,1,2]}" },
+    { label: "Single value", input: "{\"nums\":[4],\"threshold\":[1]}" },
+    { label: "Equal values", input: "{\"nums\":[5,5,5],\"threshold\":[1,2,3]}" },
+    { label: "Extremes with rising thresholds", input: "{\"nums\":[20,-20,20,-20,20,-20,20,-20,20,-20],\"threshold\":[1,2,3,4,5,6,7,8,9,10]}" },
+    { label: "Long run: 10 values", input: "{\"nums\":[-16,-12,-4,-10,-19,20,-4,11,-6,-12],\"threshold\":[6,1,7,8,1,6,1,9,8,2]}" },
   ],
 }
 

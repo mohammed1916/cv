@@ -20,6 +20,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"samples":[{"sample_id":3,"dna_sequence":"ATGGGCTGA","species":"cat"},{"sample_id":1,"dna_sequence":"ATGCCGTAA","species":"mouse"},{"sample_id":5,"dna_sequence":"TGAAAT","species":"owl"},{"sample_id":2,"dna_sequence":"GATTACA","species":"fly"}]}' },
     { label: 'Single', input: '{"samples":[{"sample_id":9,"dna_sequence":"CCCATAG","species":"dog"}]}' },
+    { label: 'Single sample', input: '{"samples":[{"sample_id":4,"dna_sequence":"ACGT","species":"Fox"}]}' },
+    { label: 'Equal sequences from one species', input: '{"samples":[{"sample_id":9,"dna_sequence":"AAA","species":"Owl"},{"sample_id":2,"dna_sequence":"AAA","species":"Owl"}]}' },
+    { label: 'Largest id and 30 bases', input: '{"samples":[{"sample_id":2147483647,"dna_sequence":"ACGTACGTACGTACGTACGTACGTACGTAC","species":"Wolf"}]}' },
+    { label: 'Long run: 12 samples', input: '{"samples":[{"sample_id":50,"dna_sequence":"GGATGCTCACGTGTATGTCGATTCAAAGGG","species":"Species 0"},{"sample_id":51,"dna_sequence":"ATTGGAGTTCACGGAGTTCGGTACTCCTCT","species":"Species 1"},{"sample_id":52,"dna_sequence":"TGGTGTGGCGCTTATCGGGTGTACTGATGA","species":"Species 2"},{"sample_id":53,"dna_sequence":"TCTAACACCTCCATAGTATAATTAATGATG","species":"Species 0"},{"sample_id":54,"dna_sequence":"ACAATAATCACTGTATCTAAAACGGGTGAC","species":"Species 1"},{"sample_id":55,"dna_sequence":"GGGAGTTTACATAAGCCCTTCAAGCAAGAA","species":"Species 2"},{"sample_id":56,"dna_sequence":"TTTACGATTTTGGACCTATCCGTCCGACAG","species":"Species 0"},{"sample_id":57,"dna_sequence":"TCAACTCATGGCCGTGAAGGTGATAGCATT","species":"Species 1"},{"sample_id":58,"dna_sequence":"TTAATCAAGACTCCGGTCCCGAAAAAGAAA","species":"Species 2"},{"sample_id":59,"dna_sequence":"CTCCTCTGAGTTAATTGCCACAAGGACATG","species":"Species 0"},{"sample_id":60,"dna_sequence":"AGGTCACCCTGGCCTCCGGAGCTGAACGGG","species":"Species 1"},{"sample_id":61,"dna_sequence":"CATGGTCACTCACTAGGGTACGCGGTGGCA","species":"Species 2"}]}' },
   ],
 }
 

@@ -17,6 +17,11 @@ const definition = {
   examples: [
     { label: 'Largest unique window', input: '{"nums":[3,9,2,1,7],"k":3}' },
     { label: 'Single window', input: '{"nums":[3,9,7,2,1,7],"k":4}' },
+    { label: 'Single element', input: '{"nums":[4],"k":1}' },
+    { label: 'Equal values keep k', input: '{"nums":[7,7,7,7],"k":2}' },
+    { label: 'Largest values', input: '{"nums":[50,0,50,0,50],"k":3}' },
+    { label: 'All zeros', input: '{"nums":[0,0,0],"k":1}' },
+    { label: 'Long run: 20 values', input: '{"nums":[17,9,37,0,49,41,8,42,27,9,16,15,19,44,49,26,28,43,30,26],"k":10}' },
   ],
 }
 

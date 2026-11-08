@@ -16,6 +16,10 @@ const definition = {
     { label: 'Example 1', input: '{"nums":[2,1,3,2]}' },
     { label: 'Example 2', input: '{"nums":[3,2,1,2,3,2,1]}' },
     { label: 'Equal pair', input: '{"nums":[100000,100000]}' },
+    { label: 'Two values', input: '{"nums":[1,1]}' },
+    { label: 'Equal values', input: '{"nums":[4,4,4,4]}' },
+    { label: 'Largest value between equal pair', input: '{"nums":[100000,1,100000,1,100000]}' },
+    { label: 'Long run: 30 values', input: '{"nums":[3,6,2,3,4,5,1,5,1,2,3,1,4,3,2,4,2,4,2,1,4,6,4,1,5,5,1,3,2,1]}' },
   ],
 }
 

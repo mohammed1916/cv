@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimize-the-total-price-of-the-trips/',
   complexity: 'O(n * trips) time for path counting plus O(n) tree DP. The visualization caps n at 8.',
   examples: [
-    { label: 'Example', input: '{"n":4,"edges":[[0,1],[1,2],[1,3]],"price":[2,2,10,6],"trips":[[0,3],[2,1],[2,3]]}' },
+    { label: 'Own case 1', input: '{"n":4,"edges":[[1,3],[1,2],[0,1]],"price":[6,10,2,2],"trips":[[2,3],[2,1],[0,3]]}' },
     { label: 'Pair', input: '{"n":2,"edges":[[0,1]],"price":[2,4],"trips":[[0,1]]}' },
     { label: 'Trip from a node to itself', input: '{"n":3,"edges":[[0,1],[1,2]],"price":[4,4,4],"trips":[[1,1]]}' },
     { label: 'Equal prices on a star', input: '{"n":4,"edges":[[0,1],[0,2],[0,3]],"price":[6,6,6,6],"trips":[[1,2],[2,3]]}' },

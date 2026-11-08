@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-power-of-k-size-subarrays-i/',
   complexity: 'O(n * k) time by checking every window. The visualization caps nums at 40 values.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,3,4,3,2,5],"k":3}' },
-    { label: 'Example 3', input: '{"nums":[3,2,3,2,3,2],"k":2}' },
+    { label: 'Own case 1', input: '{"nums":[2,3,4,5,4,3,6],"k":4}' },
+    { label: 'Own case 2', input: '{"nums":[4,3,4,3,4,3],"k":3}' },
     { label: 'Single element', input: '{"nums":[7],"k":1}' },
     { label: 'Equal values', input: '{"nums":[4,4,4,4],"k":2}' },
     { label: 'Largest values, full window', input: '{"nums":[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50],"k":40}' },

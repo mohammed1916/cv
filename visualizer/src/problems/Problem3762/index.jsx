@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[2,5,8,11],"k":3,"queries":[[0,3],[1,2]]}' },
     { label: 'Mismatch', input: '{"nums":[2,5,6,9],"k":3,"queries":[[0,2],[2,3]]}' },
+    { label: "Single value", input: "{\"nums\":[7],\"k\":1,\"queries\":[[0,0]]}" },
+    { label: "Equal values", input: "{\"nums\":[6,6,6,6],\"k\":2,\"queries\":[[0,3]]}" },
+    { label: "Maximum k on alternating values", input: "{\"nums\":[30,1,30,1,30,1,30,1,30,1],\"k\":10,\"queries\":[[0,9],[0,4]]}" },
+    { label: "Long run: 10 values, 6 queries", input: "{\"nums\":[13,7,25,17,10,22,25,1,8,1],\"k\":5,\"queries\":[[8,8],[0,3],[0,1],[0,4],[5,5],[3,5]]}" },
   ],
 }
 

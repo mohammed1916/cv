@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Invented row', input: JSON.stringify({ nums: [4, 8, 4, 2, 7, 4], k: 4 }) },
     { label: 'Repeated k', input: JSON.stringify({ nums: [9, 3, 9, 6, 3, 3], k: 9 }) },
+    { label: 'Single value', input: '{"nums":[5],"k":5}' },
+    { label: 'Equal values tie', input: '{"nums":[4,4,4,4],"k":4}' },
+    { label: 'Extremes, k nine', input: '{"nums":[9,1,9,1,9,1,9,1,9,1,9,1],"k":9}' },
+    { label: 'Long run: 12 values', input: '{"nums":[4,8,9,6,4,6,2,5,2,8,6,3],"k":3}' },
   ],
 }
 

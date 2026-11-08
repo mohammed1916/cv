@@ -20,6 +20,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"products":[{"product_id":1,"product_name":"Lamp","description":"Warm light, serial SN-2024-AB inside"},{"product_id":2,"product_name":"Desk","description":"Old model SN-2024-ABC"},{"product_id":3,"product_name":"Chair","description":"Spare part SN-1234-XY."},{"product_id":4,"product_name":"Shelf","description":"Reference xSN-1234-XY"}]}' },
     { label: 'No match', input: '{"products":[{"product_id":7,"product_name":"Rug","description":"No serial here"}]}' },
+    { label: 'Single product that qualifies', input: '{"products":[{"product_id":5,"product_name":"Pen","description":"Serial SN-0001-QZ here"}]}' },
+    { label: 'Equal serials keep product_id order', input: '{"products":[{"product_id":9,"product_name":"Lamp","description":"Serial SN-2024-AB"},{"product_id":3,"product_name":"Desk","description":"Serial SN-2024-AB"}]}' },
+    { label: 'Largest id and glued serial rejected', input: '{"products":[{"product_id":2147483647,"product_name":"Crate","description":"SN-9999-ZZ alone"},{"product_id":0,"product_name":"Bag","description":"xSN-9999-ZZ"}]}' },
+    { label: 'Long run: 12 products', input: '{"products":[{"product_id":100,"product_name":"Item 1","description":"No serial here"},{"product_id":107,"product_name":"Item 2","description":"Tag xSN-4377-UQ"},{"product_id":114,"product_name":"Item 3","description":"Serial SN-3006-IG inside"},{"product_id":121,"product_name":"Item 4","description":"Note SN-7405-XWx"},{"product_id":128,"product_name":"Item 5","description":"Tag xSN-1917-NL"},{"product_id":135,"product_name":"Item 6","description":"Tag xSN-7511-ZN"},{"product_id":142,"product_name":"Item 7","description":"Serial SN-4529-IK inside"},{"product_id":149,"product_name":"Item 8","description":"Serial SN-3977-LH inside"},{"product_id":156,"product_name":"Item 9","description":"No serial here"},{"product_id":163,"product_name":"Item 10","description":"Tag xSN-8582-RP"},{"product_id":170,"product_name":"Item 11","description":"Note SN-8678-GNx"},{"product_id":177,"product_name":"Item 12","description":"Tag xSN-3557-MO"}]}' },
   ],
 }
 

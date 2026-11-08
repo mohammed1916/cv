@@ -21,6 +21,10 @@ const definition = {
     { label: 'Wildcard window', input: '{"source":"abcd","target":"xyzd","rules":[{"pattern":"a*","replacement":"xy","cost":2},{"pattern":"c","replacement":"z","cost":1}]}' },
     { label: 'Two single letters', input: '{"source":"aaa","target":"xyz","rules":[{"pattern":"a","replacement":"x","cost":1},{"pattern":"a*","replacement":"yz","cost":2}]}' },
     { label: 'Impossible', input: '{"source":"ab","target":"ba","rules":[{"pattern":"a","replacement":"b","cost":1}]}' },
+    { label: "Single letter", input: '{"source":"a","target":"b","rules":[{"pattern":"a","replacement":"b","cost":3}]}' },
+    { label: "Equal costs tie", input: '{"source":"aa","target":"bb","rules":[{"pattern":"a","replacement":"b","cost":2},{"pattern":"aa","replacement":"bb","cost":2}]}' },
+    { label: "Six rules at the limit", input: '{"source":"abcdabcdabcd","target":"wxyzwxyzwxyz","rules":[{"pattern":"a","replacement":"w","cost":20},{"pattern":"b","replacement":"x","cost":20},{"pattern":"c","replacement":"y","cost":20},{"pattern":"d","replacement":"z","cost":20},{"pattern":"ab","replacement":"wx","cost":1},{"pattern":"cd","replacement":"yz","cost":1}]}' },
+    { label: "Long run: 12 letters, six rules", input: '{"source":"dcacdcbcdabc","target":"zyzyyxzyxwzw","rules":[{"pattern":"a","replacement":"w","cost":3},{"pattern":"b","replacement":"x","cost":4},{"pattern":"c","replacement":"y","cost":2},{"pattern":"d","replacement":"z","cost":5},{"pattern":"a*","replacement":"wx","cost":6},{"pattern":"*d","replacement":"yz","cost":7}]}' },
   ],
 }
 

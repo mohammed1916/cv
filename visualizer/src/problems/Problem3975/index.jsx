@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"occupiedIntervals":[[3,5],[6,9],[9,12],[13,15]],"freeStart":8,"freeEnd":14}' },
     { label: 'Example 2', input: '{"occupiedIntervals":[[1,4],[2,6],[8,8]],"freeStart":5,"freeEnd":7}' },
+    { label: "Single occupied interval", input: '{"occupiedIntervals":[[4,4]],"freeStart":4,"freeEnd":4}' },
+    { label: "Touching intervals", input: '{"occupiedIntervals":[[1,3],[4,5]],"freeStart":1,"freeEnd":16}' },
+    { label: "Whole calendar occupied", input: '{"occupiedIntervals":[[1,16]],"freeStart":1,"freeEnd":16}' },
+    { label: "Long run: 8 intervals", input: '{"occupiedIntervals":[[13,16],[9,15],[10,15],[12,13],[11,16],[6,15],[11,13],[10,11]],"freeStart":4,"freeEnd":13}' },
   ],
 }
 

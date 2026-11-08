@@ -17,6 +17,10 @@ const definition = {
     { label: 'Mixed signs', input: '[-4, -1, 0, 2, 10]' },
     { label: 'Equal magnitudes', input: '[5, -5, 5]' },
     { label: 'Single value', input: '[7]' },
+    { label: 'Single value', input: '[0]' },
+    { label: 'Equal magnitudes', input: '[5,-5,5,-5]' },
+    { label: 'Extreme values', input: '[-20,20,-20,20,-20,20,-20,20,-20,20]' },
+    { label: 'Long run: 10 values', input: '[12,-14,0,10,10,2,8,11,-17,-6]' },
   ],
 }
 

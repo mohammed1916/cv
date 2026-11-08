@@ -13,6 +13,10 @@ const definition = {
     { label: 'Second car stuck', input: '{"demand":[5,9,2],"fuel":[6,6]}' },
     { label: 'First car stuck', input: '{"demand":[9,1],"fuel":[4,7]}' },
     { label: 'Plenty of fuel', input: '{"demand":[4,4,2],"fuel":[30,30]}' },
+    { label: "Single car", input: '{"demand":[3],"fuel":[5,5]}' },
+    { label: "Equal demands", input: '{"demand":[4,4,4],"fuel":[8,8]}' },
+    { label: "Maximum fuel and demand", input: '{"demand":[20,20,20,20,20,20,20,20],"fuel":[50,50]}' },
+    { label: "Long run: 8 cars", input: '{"demand":[16,19,17,2,5,4,8,10],"fuel":[40,1]}' },
   ],
 }
 

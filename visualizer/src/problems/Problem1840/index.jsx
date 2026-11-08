@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-building-height/',
   complexity: 'O(n log n) time for n buildings. The visualization caps n at 8.',
   examples: [
-    { label: 'Example 1', input: '{"n":5,"restrictions":[[2,1],[4,1]]}' },
+    { label: 'Own case 1', input: '{"n":6,"restrictions":[[3,2],[5,2]]}' },
     { label: 'No caps', input: '{"n":6,"restrictions":[]}' },
   { label: 'Smallest n', input: "{\"n\":2,\"restrictions\":[]}" },
   { label: 'Equal caps', input: "{\"n\":4,\"restrictions\":[[2,3],[3,3]]}" },

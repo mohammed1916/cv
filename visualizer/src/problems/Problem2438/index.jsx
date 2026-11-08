@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/range-product-queries-of-powers/',
   complexity: 'O(log n + q * log n) time for q queries, since at most 30 powers exist.',
   examples: [
-    { label: 'Example 1', input: '{"n": 15, "queries": [[0,1],[2,2],[0,3]]}' },
+    { label: 'Own case 1', input: '{"n":15,"queries":[[0,3],[2,2],[0,1]]}' },
     { label: 'Single bit', input: '{"n":1,"queries":[[0,0]]}' },
     { label: 'Repeated query', input: '{"n":8,"queries":[[0,0],[0,0]]}' },
     { label: 'Largest n', input: '{"n":1000,"queries":[[0,5],[1,4]]}' },

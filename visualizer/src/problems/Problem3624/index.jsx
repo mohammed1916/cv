@@ -14,6 +14,10 @@ const definition = {
     { label: 'Update changes depth', input: '{"nums":[7,8,3,1,15,6],"queries":[[1,0,5,2],[2,3,31],[1,1,4,3],[1,2,2,0]]}' },
     { label: 'Update keeps depth', input: '{"nums":[5,9,12],"queries":[[1,0,2,2],[2,1,6],[1,1,2,2]]}' },
     { label: 'Largest value, one entry', input: '{"nums":[1000000000000000],"queries":[[1,0,0,3],[2,0,1],[1,0,0,0]]}' },
+    { label: 'Single entry, depth zero', input: '{"nums":[1],"queries":[[1,0,0,0]]}' },
+    { label: 'Equal values', input: '{"nums":[4,4,4],"queries":[[1,0,2,1],[2,1,4]]}' },
+    { label: 'Largest values in a range', input: '{"nums":[1000000000000000,1,1000000000000000],"queries":[[1,0,2,5],[2,1,1000000000000000],[1,0,2,0]]}' },
+    { label: 'Long run: 12 entries, 8 queries', input: '{"nums":[746780,592866,394245,676400,35978,469202,78826,58867,533800,4661,652138,336076],"queries":[[1,0,11,3],[2,5,999999],[1,2,9,1],[2,0,7],[1,0,6,5],[1,4,8,2],[2,11,1],[1,3,11,0]]}' },
   ],
 }
 

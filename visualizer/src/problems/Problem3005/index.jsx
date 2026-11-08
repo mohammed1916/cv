@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-elements-with-maximum-frequency/',
   complexity: 'O(n) time and O(n) space. The visualization caps input at 12 entries.',
   examples: [
-    { label: 'Example 1', input: '[1,2,2,3,1,4]' },
+    { label: 'Own case 1', input: '[2,3,3,4,2,5]' },
     { label: 'All distinct', input: '[1,2,3,4,5]' },
     { label: "Single value", input: '[5]' },
     { label: "Equal values at max length", input: '[3,3,3,3,3,3,3,3,3,3,3,3]' },

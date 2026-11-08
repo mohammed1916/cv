@@ -17,6 +17,10 @@ const definition = {
     { label: 'Unique middle', input: '[5,2,8,3,9]' },
     { label: 'Repeated middle', input: '[6,6,6]' },
     { label: 'Single value', input: '[7]' },
+    { label: "Single element", input: '[42]' },
+    { label: "Equal values around the middle", input: '[9,4,9]' },
+    { label: "Alternating extremes", input: '[100,1,100,1,100]' },
+    { label: "Long run: 15 values", input: '[78,10,59,92,59,2,1,10,18,12,72,93,57,22,30]' },
   ],
 }
 

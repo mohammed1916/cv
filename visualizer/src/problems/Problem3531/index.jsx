@@ -32,9 +32,13 @@ const definition = {
   url: 'https://leetcode.com/problems/count-covered-buildings/',
   complexity: 'O(b) time and O(b) space for b buildings, using row and column extremes. The visualization caps the grid at 12 and the buildings at 30.',
   examples: [
-    { label: 'Example 1', input: '{"n":3,"buildings":[[1,2],[2,2],[3,2],[2,1],[2,3]]}' },
-    { label: 'Example 2', input: '{"n":3,"buildings":[[1,1],[1,2],[2,1],[2,2]]}' },
-    { label: 'Example 3', input: '{"n":5,"buildings":[[1,3],[3,2],[3,3],[3,5],[5,3]]}' },
+    { label: 'Own case 1', input: '{"n":4,"buildings":[[2,3],[3,3],[4,3],[3,2],[3,4]]}' },
+    { label: 'Own case 2', input: '{"n":4,"buildings":[[2,2],[2,3],[3,2],[3,3]]}' },
+    { label: 'Own case 3', input: '{"n":6,"buildings":[[2,4],[4,3],[4,4],[4,6],[6,4]]}' },
+    { label: 'Smallest grid, no cover', input: '{"n":2,"buildings":[[1,1],[2,2]]}' },
+    { label: 'Full 3 by 3 block', input: '{"n":3,"buildings":[[1,1],[1,2],[1,3],[2,1],[2,2],[2,3],[3,1],[3,2],[3,3]]}' },
+    { label: 'Corners of a 12 by 12 grid', input: '{"n":12,"buildings":[[1,1],[12,12],[1,12],[12,1]]}' },
+    { label: 'Long run: 30 buildings on 12 by 12', input: '{"n":12,"buildings":[[10,7],[2,12],[1,7],[10,9],[6,7],[6,12],[1,2],[2,4],[11,4],[2,11],[5,3],[7,8],[8,2],[12,4],[5,1],[7,1],[9,6],[1,10],[3,5],[11,3],[3,6],[3,2],[1,12],[8,9],[5,6],[7,11],[6,8],[11,11],[4,2],[4,4]]}' },
   ],
 }
 

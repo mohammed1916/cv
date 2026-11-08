@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Mixed', input: '{"nums1":[5,8,11]}' },
     { label: 'All even', input: '{"nums1":[6,10]}' },
+    { label: 'Single value', input: '{"nums1":[42]}' },
+    { label: 'Extreme values 1 and 100', input: '{"nums1":[1,100]}' },
+    { label: 'Even run', input: '{"nums1":[2,4,6,8,10,12,14,16,18,20,22,24]}' },
+    { label: 'Long run: 12 values', input: '{"nums1":[26,88,41,38,81,11,2,80,19,64,89,94]}' },
   ],
 }
 

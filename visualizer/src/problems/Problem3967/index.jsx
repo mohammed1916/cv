@@ -25,6 +25,10 @@ const definition = {
     { label: 'Path', input: '{"baseTime":[1,1,1],"edges":[[0,1],[1,2]]}' },
     { label: 'Branch', input: '{"baseTime":[2,4,1,3],"edges":[[0,1],[1,2],[1,3]]}' },
     { label: 'Pair', input: '{"baseTime":[3,5],"edges":[[0,1]]}' },
+    { label: "Single node", input: '{"baseTime":[5],"edges":[]}' },
+    { label: "Equal branches", input: '{"baseTime":[2,2,2],"edges":[[0,1],[0,2]]}' },
+    { label: "Largest base times on a star", input: '{"baseTime":[9,9,9,9,9,9,9,9],"edges":[[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7]]}' },
+    { label: "Long run: 8 nodes", input: '{"baseTime":[7,1,1,5,3,8,3,1],"edges":[[0,1],[1,2],[1,3],[2,4],[3,5],[4,6],[5,7]]}' },
   ],
 }
 

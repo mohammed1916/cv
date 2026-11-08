@@ -20,6 +20,10 @@ const definition = {
     { label: 'Example 1', input: '{"s":"12936"}' },
     { label: 'Example 2', input: '{"s":"5701283"}' },
     { label: 'Example 3', input: '{"s":"1010101010"}' },
+    { label: 'Single digit', input: '{"s":"7"}' },
+    { label: 'Repeated digit tie', input: '{"s":"5555"}' },
+    { label: 'Longest: 20 digits', input: '{"s":"90909090909090909090"}' },
+    { label: 'Long run: 20 digits', input: '{"s":"21543391510585218476"}' },
   ],
 }
 

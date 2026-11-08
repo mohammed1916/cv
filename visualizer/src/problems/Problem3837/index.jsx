@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Repeated fours', input: '{"nums":[4,4,7,4,7,4,1,7],"k":2}' },
     { label: 'Negative values, k zero', input: '{"nums":[-3,0,-3,-3,0],"k":0}' },
+    { label: 'One value', input: '{"nums":[5],"k":0}' },
+    { label: 'Equal values', input: '{"nums":[2,2,2,2],"k":2}' },
+    { label: 'Extremes alternate, k at maximum', input: '{"nums":[50,-50,50,-50,50,-50,50,-50,50,-50,50,-50,50,-50],"k":13}' },
+    { label: 'Long run: 14 values', input: '{"nums":[-43,-17,-25,-32,43,39,-14,-7,-8,-44,-44,27,4,-2],"k":6}' },
   ],
 }
 

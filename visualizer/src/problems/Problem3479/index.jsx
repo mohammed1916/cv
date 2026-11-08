@@ -13,8 +13,13 @@ const definition = {
   url: 'https://leetcode.com/problems/fruits-into-baskets-iii/',
   complexity: 'O(n log m) time with a segment tree over the baskets; the visualization caps both lists at 12 values.',
   examples: [
-    { label: 'Example 1', input: '{"fruits":[4,2,5],"baskets":[3,5,4]}' },
-    { label: 'Example 2', input: '{"fruits":[3,6,1],"baskets":[6,4,7]}' },
+    { label: 'Own case 1', input: '{"fruits":[5,3,6],"baskets":[4,6,5]}' },
+    { label: 'Own case 2', input: '{"fruits":[4,7,2],"baskets":[7,5,8]}' },
+    { label: 'Single fruit and basket', input: '{"fruits":[7],"baskets":[9]}' },
+    { label: 'Equal values', input: '{"fruits":[4,4,4],"baskets":[4,4,4]}' },
+    { label: 'Largest values', input: '{"fruits":[10,1,10],"baskets":[1,10,1]}' },
+    { label: 'All ones', input: '{"fruits":[1,1],"baskets":[1,1]}' },
+    { label: 'Long run: 12 items', input: '{"fruits":[2,1,4,10,8,3,9,2,6,2,1,1],"baskets":[3,9,5,10,4,2,8,3,8,5,10,10]}' },
   ],
 }
 

@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/insufficient-nodes-in-root-to-leaf-paths/',
   complexity: 'O(n) time and O(h) space. The visualization caps input at 15 nodes.',
   examples: [
-    { label: 'Example 3', input: '{"root":[1,2,-3,-5,null,4,null],"limit":-1}' },
+    { label: 'Own case 1', input: '{"root":[2,3,-4,-6,null,5,null],"limit":-2}' },
     { label: 'Single node', input: '{"root":[5],"limit":-1}' },
     { label: 'Left-leaning chain with gap', input: '{"root":[1,2,null,3],"limit":-1000}' },
     { label: 'Extreme values, large limit', input: '{"root":[100,-100,100,-100,100,-100,100],"limit":1000}' },

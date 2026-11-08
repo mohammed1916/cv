@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Whole array', input: '{"nums":[1,2,3,4]}' },
     { label: 'Mixed run', input: '{"nums":[2,5,4,3,8]}' },
+    { label: 'Single value', input: '{"nums":[1]}' },
+    { label: 'Equal values', input: '{"nums":[7,7]}' },
+    { label: 'Alternating extremes', input: '{"nums":[100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1]}' },
+    { label: 'Long run: 16 values', input: '{"nums":[3,6,89,76,99,46,25,8,71,10,89,100,51,50,61,72]}' },
   ],
 }
 

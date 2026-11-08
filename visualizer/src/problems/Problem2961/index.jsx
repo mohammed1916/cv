@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/double-modular-exponentiation/',
   complexity: 'O(n log max(b, c)) time for n variables. The visualization caps n at 6.',
   examples: [
-    { label: 'Example 1', input: '{"variables":[[2,3,3,10],[3,3,3,1],[6,1,1,4]],"target":2}' },
+    { label: 'Own case 1', input: '{"variables":[[3,4,4,11],[4,4,4,2],[7,2,2,5]],"target":3}' },
     { label: 'No match', input: '{"variables":[[39,3,1000,1000]],"target":17}' },
     { label: 'Unit values', input: '{"variables":[[1,1,1,1]],"target":0}' },
     { label: 'Equal rows', input: '{"variables":[[2,2,2,5],[2,2,2,5]],"target":0}' },

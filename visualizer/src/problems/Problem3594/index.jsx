@@ -12,6 +12,10 @@ const definition = {
     { label: 'Three people', input: '{"n":3,"k":2,"m":2,"time":[3,4,9],"mul":[1.5,0.5]}' },
     { label: 'Room for one', input: '{"n":3,"k":1,"m":2,"time":[4,6,3],"mul":[1,1.5]}' },
     { label: 'One person', input: '{"n":1,"k":3,"m":2,"time":[7],"mul":[0.5,2]}' },
+    { label: 'Single person', input: '{"n":1,"k":1,"m":1,"time":[1],"mul":[1]}' },
+    { label: 'Equal times', input: '{"n":4,"k":2,"m":2,"time":[5,5,5,5],"mul":[1,1]}' },
+    { label: 'Widest allowed settings', input: '{"n":6,"k":5,"m":5,"time":[100,1,100,1,100,1],"mul":[0.5,2,0.5,2,1]}' },
+    { label: 'Long run: 6 people', input: '{"n":6,"k":3,"m":5,"time":[18,98,23,69,47,68],"mul":[0.5,1.25,2,0.75,1.5]}' },
   ],
 }
 

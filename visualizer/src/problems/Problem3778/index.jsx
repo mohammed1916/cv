@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Two routes', input: '{"n":5,"edges":[[0,1,3],[1,4,6],[0,2,2],[2,3,8],[3,4,1],[1,2,5]]}' },
     { label: 'Heavy direct edge', input: '{"n":4,"edges":[[0,1,10],[1,3,1],[0,2,2],[2,3,3]]}' },
+    { label: "Two nodes", input: "{\"n\":2,\"edges\":[[0,1,5]]}" },
+    { label: "Equal weights", input: "{\"n\":3,\"edges\":[[0,1,4],[1,2,4],[0,2,4]]}" },
+    { label: "Heaviest weights at length 8", input: "{\"n\":8,\"edges\":[[0,1,1000],[1,2,1000],[2,3,1000],[3,4,1000],[4,5,1000],[5,6,1000],[6,7,1000],[0,7,1000]]}" },
+    { label: "Long run: 8 nodes with extra edges", input: "{\"n\":8,\"edges\":[[0,1,368],[1,2,966],[2,3,397],[0,4,815],[3,5,888],[5,6,616],[0,7,772],[2,5,824],[1,6,508]]}" },
   ],
 }
 

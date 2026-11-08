@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.doocs.org/en/lc/2663/',
   complexity: 'O(n * k) time in this build, O(n) extra space.',
   examples: [
-    { label: 'Example 1', input: '{"s": "abcz", "k": 26}' },
-    { label: 'Example 2', input: '{"s": "dc", "k": 4}' },
+    { label: 'Own case 1', input: '{"s":"abcz","k":26}' },
+    { label: 'Own case 2', input: '{"s":"ed","k":5}' },
     { label: 'Single letter', input: '{"s":"a","k":4}' },
     { label: 'Two different letters', input: '{"s":"ab","k":4}' },
     { label: 'Largest k and 40 letters', input: '{"s":"abcdefghijklmnopqrstuvwxyzabcdefghijklmn","k":26}' },

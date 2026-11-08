@@ -16,6 +16,10 @@ const definition = {
     { label: 'Three primes', input: '27' },
     { label: 'Small target', input: '4' },
     { label: 'Impossible', input: '1' },
+    { label: 'Two', input: '2' },
+    { label: 'Thirty', input: '30' },
+    { label: 'Largest target', input: '60' },
+    { label: 'Long run: target 59', input: '59' },
   ],
 }
 

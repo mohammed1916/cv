@@ -14,6 +14,9 @@ const definition = {
   examples: [
     { label: 'Invented twenty', input: '{"n":20}' },
     { label: 'Invented three', input: '{"n":3}' },
+    { label: 'Smallest n', input: '{"n":1}' },
+    { label: 'Largest allowed n', input: '{"n":1000}' },
+    { label: 'Long run: 999', input: '{"n":999}' },
   ],
 }
 

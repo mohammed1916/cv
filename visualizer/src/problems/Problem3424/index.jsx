@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"arr":[4,-1,2],"brr":[0,3,-2],"k":1}' },
     { label: 'Already equal', input: '{"arr":[5,5],"brr":[5,5],"k":3}' },
+    { label: 'Single pair', input: '{"arr":[3],"brr":[-3],"k":0}' },
+    { label: 'Equal values tie', input: '{"arr":[2,2],"brr":[2,2],"k":5}' },
+    { label: 'Extremes, large budget', input: '{"arr":[100,-100,100,-100,100,-100,100,-100],"brr":[-100,100,-100,100,-100,100,-100,100],"k":1000}' },
+    { label: 'Long run: 8 pairs', input: '{"arr":[73,58,-44,-63,-70,83,61,85],"brr":[27,31,81,-41,-58,40,-8,29],"k":37}' },
   ],
 }
 

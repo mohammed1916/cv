@@ -13,8 +13,12 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-operations-to-make-array-sum-divisible-by-k/',
   complexity: 'O(n) time for the sum.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[3,9,7],"k":5}' },
+    { label: 'Own case 1', input: '{"nums":[4,10,8],"k":6}' },
     { label: 'Example 2', input: '{"nums":[4,1,6],"k":5}' },
+    { label: 'Single value', input: '{"nums":[9],"k":1}' },
+    { label: 'Equal values tie', input: '{"nums":[7,7,7,7],"k":2}' },
+    { label: 'Largest values and k', input: '{"nums":[1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1,1000,1],"k":100}' },
+    { label: 'Long run: 50 values', input: '{"nums":[661,379,593,261,722,582,569,955,26,172,455,602,468,539,953,503,490,969,57,160,263,331,597,877,551,884,958,487,419,206,17,493,337,801,64,635,390,718,582,929,371,763,420,52,480,877,254,343,155,782],"k":25}' },
   ],
 }
 

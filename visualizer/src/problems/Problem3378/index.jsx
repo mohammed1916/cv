@@ -14,7 +14,11 @@ const definition = {
   complexity: 'O(n^2 log V) time for the pair checks with union-find. The visualization caps input at 8 numbers.',
   examples: [
     { label: 'Example 1', input: '{"nums":[2,3,4,6],"threshold":8}' },
-    { label: 'Example 2', input: '{"nums":[2,4,8,3,9],"threshold":5}' },
+    { label: 'Own case 1', input: '{"nums":[3,5,9,4,10],"threshold":6}' },
+    { label: 'Single number', input: '{"nums":[5],"threshold":5}' },
+    { label: 'Threshold equals a value', input: '{"nums":[2,3,6],"threshold":6}' },
+    { label: 'Largest values, top threshold', input: '{"nums":[30,29,28,27,26,25,24,23],"threshold":60}' },
+    { label: 'Long run: 8 numbers', input: '{"nums":[5,20,8,29,25,22,10,27],"threshold":40}' },
   ],
 }
 

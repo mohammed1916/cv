@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"intervals":[[1,2],[2,3],[3,4]]}' },
     { label: 'Example 2', input: '{"intervals":[[1,5],[2,4],[3,6]]}' },
+    { label: "Identical single points", input: "{\"intervals\":[[5,5],[5,5]]}" },
+    { label: "Full-range twins", input: "{\"intervals\":[[0,100],[0,100]]}" },
+    { label: "Touching endpoints", input: "{\"intervals\":[[0,5],[5,9]]}" },
+    { label: "Long run: twelve intervals", input: "{\"intervals\":[[9,91],[8,42],[2,39],[74,82],[34,79],[20,96],[52,81],[82,91],[62,64],[51,79],[4,10],[36,72]]}" },
   ],
 }
 

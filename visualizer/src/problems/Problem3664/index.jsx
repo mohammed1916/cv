@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Mixed', input: '{"cards":["ca","bc","cc","ac","cb","bb"],"x":"c"}' },
     { label: 'No partner', input: '{"cards":["ab","cd","ef"],"x":"z"}' },
+    { label: 'Two cards', input: '{"cards":["ab","ac"],"x":"a"}' },
+    { label: 'Equal cards', input: '{"cards":["aa","aa","bb"],"x":"a"}' },
+    { label: 'Largest card count', input: '{"cards":["zz","zz","zz","zz","zz","zz","zz","zz","zz","zz","zz","zz"],"x":"z"}' },
+    { label: 'Long run: 12 cards', input: '{"cards":["fb","bg","af","gd","ca","ge","dc","ed","cf","bf","gf","gg"],"x":"c"}' },
   ],
 }
 

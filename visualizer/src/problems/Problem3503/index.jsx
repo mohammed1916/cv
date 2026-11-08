@@ -13,10 +13,14 @@ const definition = {
   url: 'https://leetcode.com/problems/longest-palindrome-after-substring-concatenation-i/',
   complexity: 'O(n^2 m^2 (n + m)) for lengths n and m. The visualization uses the statement limits of 30 letters.',
   examples: [
-    { label: 'Example 1', input: '{"s":"a","t":"a"}' },
-    { label: 'Example 2', input: '{"s":"abc","t":"def"}' },
-    { label: 'Example 3', input: '{"s":"b","t":"aaaa"}' },
-    { label: 'Example 4', input: '{"s":"abcde","t":"ecdba"}' },
+    { label: 'Own case 1', input: '{"s":"b","t":"b"}' },
+    { label: 'Own case 2', input: '{"s":"bcd","t":"efg"}' },
+    { label: 'Own case 3', input: '{"s":"c","t":"bbbb"}' },
+    { label: 'Own case 4', input: '{"s":"bcdef","t":"fdecb"}' },
+    { label: 'Single letter pair', input: '{"s":"a","t":"b"}' },
+    { label: 'Equal strings', input: '{"s":"abc","t":"abc"}' },
+    { label: 'Longest strings', input: '{"s":"abcdefghijklmnopqrstuvwxyzabcd","t":"zyxwvutsrqponmlkjihgfedcbazyxw"}' },
+    { label: 'Long run: 30 letters each', input: '{"s":"devxiiksooorropvrpjzjpqfmewnff","t":"tkaidwxtikilhxgapnguqffkfinkgo"}' },
   ],
 }
 

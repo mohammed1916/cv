@@ -19,6 +19,10 @@ const definition = {
     { label: 'Four steps', input: '{"start":5,"n":4,"m":3}' },
     { label: 'Single element', input: '{"start":20,"n":1,"m":9}' },
     { label: 'Unit steps', input: '{"start":2,"n":5,"m":1}' },
+    { label: "Single step", input: '{"start":1,"n":1,"m":1}' },
+    { label: "Equal start and step", input: '{"start":10,"n":4,"m":10}' },
+    { label: "Largest start and step", input: '{"start":50,"n":12,"m":20}' },
+    { label: "Long run: 12 steps", input: '{"start":37,"n":12,"m":13}' },
   ],
 }
 

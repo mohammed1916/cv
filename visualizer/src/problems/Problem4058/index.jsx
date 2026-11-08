@@ -21,6 +21,10 @@ const definition = {
   examples: [
     { label: 'Rotation helps', input: '[1, 2]' },
     { label: 'No rotation', input: '[5, 1]' },
+    { label: "Single value", input: "[0]" },
+    { label: "Equal values", input: "[3,3,3]" },
+    { label: "Extreme values", input: "[-1000000000,1000000000]" },
+    { label: "Long run: 16 values", input: "[-817569072,-876642752,-422255244,-682875257,928477185,522188142,543788943,-763921476,746438795,-652943389,-230301327,-875341796,376197779,-557042264,-987133910,59078137]" },
   ],
 }
 

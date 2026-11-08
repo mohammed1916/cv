@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"vals":[2,3],"par":[-1,0]}' },
     { label: 'Example 3', input: '{"vals":[34,1,2],"par":[-1,0,1]}' },
+    { label: 'Single node', input: '{"vals":[7],"par":[-1]}' },
+    { label: 'Equal values in a pair', input: '{"vals":[12,12],"par":[-1,0]}' },
+    { label: 'Every value repeats a digit', input: '{"vals":[11,22,333],"par":[-1,0,1]}' },
+    { label: 'Long run: 8 nodes', input: '{"vals":[617,798,101,93,935,921,950,171],"par":[-1,0,1,0,0,2,2,6]}' },
+    { label: 'Largest values allowed', input: '{"vals":[999,987,654,321],"par":[-1,0,1,2]}' },
   ],
 }
 

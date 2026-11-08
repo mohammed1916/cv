@@ -13,8 +13,12 @@ const definition = {
   url: 'https://leetcode.com/problems/rotate-non-negative-elements/',
   complexity: 'O(n) time and O(n) space. The visualization caps n at 12.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,-2,3,-4],"k":3}' },
-    { label: 'Example 3', input: '{"nums":[5,4,-9,6],"k":2}' },
+    { label: 'Own case 1', input: '{"nums":[2,-3,4,-5],"k":4}' },
+    { label: 'Own case 2', input: '{"nums":[6,-9,4,5],"k":2}' },
+    { label: 'One value', input: '{"nums":[-1],"k":0}' },
+    { label: 'Equal values', input: '{"nums":[2,2,2],"k":2}' },
+    { label: 'Alternating extremes', input: '{"nums":[9,-9,9,-9,9,-9,9,-9,9,-9,9,-9],"k":20}' },
+    { label: 'Long run: 12 values', input: '{"nums":[-9,8,-3,2,9,6,-8,-7,-3,-6,-7,5],"k":7}' },
   ],
 }
 

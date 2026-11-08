@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-substring-partition-of-equal-character-frequency/',
   complexity: 'O(n^3) with a direct balance check per piece. The visualization caps input at 16 characters.',
   examples: [
-    { label: 'Example 1', input: '"fabccddg"' },
-    { label: 'Example 2', input: '"abababaccddb"' },
+    { label: 'Own case 1', input: '"gbcddeeh"' },
+    { label: 'Own case 2', input: '"bcbcbcbddeec"' },
     { label: "Single letter", input: "\"a\"" },
     { label: "Repeating pair", input: "\"abab\"" },
     { label: "Longest allowed string", input: "\"aaaabbbbccccdddd\"" },

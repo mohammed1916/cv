@@ -79,6 +79,10 @@ export const examples = [
   { label: 'Dead states repay', input: '{"nums":[1,4,7,2],"k":3}' },
   { label: 'Number order, not text', input: '{"nums":[100,9,25],"k":25}' },
   { label: 'One number, no answer', input: '{"nums":[13],"k":7}' },
+    { label: 'Single number', input: '{"nums":[3],"k":1}' },
+    { label: 'Equal numbers', input: '{"nums":[5,5,5,5],"k":2}' },
+    { label: 'Largest values', input: '{"nums":[100000,1,100000,1,100000,1],"k":100}' },
+    { label: 'Long run: 6 numbers', input: '{"nums":[41444,76103,66011,22472,32761,84550],"k":3}' },
 ]
 
 export function buildTrace({ nums: given, k }) {

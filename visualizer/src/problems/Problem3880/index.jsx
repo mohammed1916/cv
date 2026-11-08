@@ -20,6 +20,11 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[0,1,2,0,1]}' },
     { label: 'No pair', input: '{"nums":[2,0,0,1]}' },
+    { label: 'Single zero', input: '{"nums":[0]}' },
+    { label: 'Single two', input: '{"nums":[2]}' },
+    { label: 'Equal ones', input: '{"nums":[1,1,1]}' },
+    { label: 'Alternating extremes, 20 entries', input: '{"nums":[0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2]}' },
+    { label: 'Long run: 20 entries', input: '{"nums":[1,1,1,1,2,2,2,0,2,1,2,0,0,0,2,1,0,0,2,0]}' },
   ],
 }
 

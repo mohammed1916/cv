@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/extra-characters-in-a-string/',
   complexity: 'O(n^2) substring checks for a string of length n, with a set lookup each. The visualization caps s at 16 characters.',
   examples: [
-    { label: 'Example 1', input: '{"s":"leetscode","dictionary":["leet","code","leetcode"]}' },
-    { label: 'Example 2', input: '{"s":"sayhelloworld","dictionary":["hello","world"]}' },
+    { label: 'Own case 1', input: '{"s":"mffutdpef","dictionary":["mffu","dpef","mffudpef"]}' },
+    { label: 'Own case 2', input: '{"s":"tbzifmmpxpsme","dictionary":["ifmmp","xpsme"]}' },
     { label: 'One letter, no match', input: '{"s":"a","dictionary":["b"]}' },
     { label: 'Repeated letters', input: '{"s":"aaaa","dictionary":["a","aa"]}' },
     { label: 'Long run: 16 letters', input: '{"s":"abababababababab","dictionary":["ab","ba","aab","bb"]}' },

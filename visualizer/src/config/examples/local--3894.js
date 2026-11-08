@@ -31,5 +31,21 @@ export default [
   {
     "label": "Upper input bound",
     "input": "1000"
+  },
+  {
+    "label": "Timer one",
+    "input": "1"
+  },
+  {
+    "label": "Mid cycle value",
+    "input": "500"
+  },
+  {
+    "label": "Near upper bound",
+    "input": "999"
+  },
+  {
+    "label": "Random-looking timer",
+    "input": "872"
   }
 ];

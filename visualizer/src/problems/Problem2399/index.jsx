@@ -17,7 +17,7 @@ const definition = {
   complexity: 'O(n) time and O(1) extra space for the 26-letter table. The visualization caps input at 52 letters.',
   examples: [
     { label: 'Example 1', input: '{"s":"abaccb","distance":[1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}' },
-    { label: 'Example 2', input: '{"s":"aa","distance":[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}' },
+    { label: 'Own case 1', input: '{"s":"bb","distance":[2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]}' },
     { label: 'Pair of z', input: '{"s":"zz","distance":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}' },
     { label: 'Equal distances', input: '{"s":"aabb","distance":[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5]}' },
     { label: 'All 26 letters, maximum distances', input: '{"s":"abcdefghijklmnopqrstuvwxyzzyxwvutsrqponmlkjihgfedcba","distance":[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50]}' },

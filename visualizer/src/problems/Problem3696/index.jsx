@@ -15,6 +15,10 @@ const definition = {
     { label: "Mid-list difference", input: "[\"cat\",\"cat\",\"dog\",\"cat\",\"cat\"]" },
     { label: "Scattered words", input: "[\"red\",\"blue\",\"blue\",\"red\",\"green\",\"red\"]" },
     { label: "All equal", input: "[\"ink\",\"ink\",\"ink\"]" },
+    { label: 'Single word', input: '["ink"]' },
+    { label: 'Repeated pairs', input: '["cat","dog","cat","dog"]' },
+    { label: 'Longest words', input: '["zzzzzzzz","abcdefgh"]' },
+    { label: 'Long run: 12 words', input: '["h","ed","bed","gfah","dgfah","ahcbed","fahcbed","cbedgfah","h","ed","bed","gfah"]' },
   ],
 }
 

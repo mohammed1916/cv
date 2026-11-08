@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Invented spread', input: '{"strength":[2,6,5],"x":2}' },
     { label: 'Invented equal locks', input: '{"strength":[1,1,1],"x":1}' },
+    { label: 'Single lock', input: '{"strength":[7],"x":1}' },
+    { label: 'Equal strengths', input: '{"strength":[6,6,6,6],"x":3}' },
+    { label: 'Largest spread, x ten', input: '{"strength":[50,1,50,1,50,1,50,1],"x":10}' },
+    { label: 'Long run: 8 locks', input: '{"strength":[21,16,16,16,24,11,43,9],"x":7}' },
   ],
 }
 

@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/sum-of-values-at-indices-with-k-set-bits/',
   complexity: 'O(n log n) time for counting bits, and O(1) extra space.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[5,10,1,5,2],"k":1}' },
-    { label: 'Example 2', input: '{"nums":[4,3,2,1],"k":2}' },
+    { label: 'Own case 1', input: '{"nums":[6,11,2,6,3],"k":2}' },
+    { label: 'Own case 2', input: '{"nums":[5,4,3,2],"k":3}' },
     { label: "Single value", input: "{\"nums\":[7],\"k\":0}" },
     { label: "Equal values", input: "{\"nums\":[5,5,5,5],\"k\":2}" },
     { label: "Largest values", input: "{\"nums\":[50,50,50,50,50,50,50,50,50,50,50,50],\"k\":4}" },

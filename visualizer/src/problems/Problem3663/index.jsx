@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Mixed digits', input: '{"n":1553322}' },
     { label: 'Tie', input: '{"n":1223}' },
+    { label: 'Smallest n', input: '{"n":1}' },
+    { label: 'Twelve', input: '{"n":12}' },
+    { label: 'Largest n', input: '{"n":1000000000}' },
+    { label: 'Long run: n = 987654321', input: '{"n":987654321}' },
   ],
 }
 

@@ -21,6 +21,10 @@ const definition = {
     { label: 'Example 2', input: '{"cost1":6,"cost2":5,"costBoth":20,"need1":3,"need2":3}' },
     { label: 'Expensive combined', input: '{"cost1":3,"cost2":2,"costBoth":10,"need1":4,"need2":5}' },
     { label: 'Zero needs', input: '{"cost1":7,"cost2":6,"costBoth":11,"need1":0,"need2":0}' },
+    { label: "Smallest values", input: "{\"cost1\":1,\"cost2\":1,\"costBoth\":1,\"need1\":0,\"need2\":0}" },
+    { label: "Equal costs", input: "{\"cost1\":5,\"cost2\":5,\"costBoth\":5,\"need1\":2,\"need2\":2}" },
+    { label: "Largest values at the limit", input: "{\"cost1\":1000000,\"cost2\":1000000,\"costBoth\":1000000,\"need1\":1000000000,\"need2\":1000000000}" },
+    { label: "Long run: LCG costs and needs", input: "{\"cost1\":819618,\"cost2\":24475,\"costBoth\":6103,\"need1\":15483312,\"need2\":10481197}" },
   ],
 }
 

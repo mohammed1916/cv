@@ -17,6 +17,10 @@ const definition = {
   complexity: 'Each query scans all orders here; a price-indexed map would narrow the scan.',
   examples: [
     { label: 'Move and cancel', input: '{"ops":[["addOrder",1,"buy",10],["addOrder",2,"buy",10],["addOrder",3,"sell",10],["getOrdersAtPrice","buy",10],["modifyOrder",2,12],["getOrdersAtPrice","buy",10],["cancelOrder",1],["getOrdersAtPrice","buy",10]]}' },
+    { label: 'One order, one query', input: '{"ops":[["addOrder",1,"sell",5],["getOrdersAtPrice","sell",5]]}' },
+    { label: 'Equal prices, cancel one', input: '{"ops":[["addOrder",1,"buy",7],["addOrder",2,"buy",7],["getOrdersAtPrice","buy",7],["cancelOrder",2],["getOrdersAtPrice","buy",7]]}' },
+    { label: 'Large price', input: '{"ops":[["addOrder",9,"buy",1000000000],["modifyOrder",9,999999999],["getOrdersAtPrice","buy",999999999]]}' },
+    { label: 'Long run: 12 operations', input: '{"ops":[["addOrder",1,"buy",10],["addOrder",2,"buy",12],["addOrder",3,"sell",15],["addOrder",4,"sell",15],["getOrdersAtPrice","sell",15],["modifyOrder",2,15],["getOrdersAtPrice","buy",12],["cancelOrder",3],["getOrdersAtPrice","sell",15],["addOrder",5,"buy",15],["modifyOrder",4,11],["getOrdersAtPrice","buy",15]]}' },
   ],
 }
 

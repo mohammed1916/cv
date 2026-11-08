@@ -16,7 +16,7 @@ const definition = {
   url: 'https://leetcode.com/problems/word-subsets/',
   complexity: 'O(total letters in words1 and words2) with a 26-letter count table. Inputs are capped at 30 words of 10 letters.',
   examples: [
-    { label: 'Example 1', input: '{"words1":["amazon","apple","facebook","google","leetcode"],"words2":["e","o"]}' },
+    { label: 'Own case 1', input: '{"words1":["bnbapo","bqqmf","gbdfcppl","hpphmf","mffudpef"],"words2":["f","p"]}' },
     { label: 'Example 2', input: '{"words1":["amazon","apple","facebook","google","leetcode"],"words2":["l","e"]}' },
     { label: 'Repeated letters', input: '{"words1":["warrior","world","tower"],"words2":["wr","or","rr"]}' },
     { label: 'Single letter', input: '{"words1":["a"],"words2":["a"]}' },

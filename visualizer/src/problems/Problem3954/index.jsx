@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":2,"k":3}' },
     { label: 'Example 2', input: '{"n":5,"k":1}' },
+    { label: 'Smallest pair', input: '{"n":1,"k":1}' },
+    { label: 'Equal n and k', input: '{"n":4,"k":4}' },
+    { label: 'Largest allowed values', input: '{"n":100,"k":100}' },
+    { label: 'Long run: n = 87, k = 42', input: '{"n":87,"k":42}' },
   ],
 }
 

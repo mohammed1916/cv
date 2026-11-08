@@ -52,6 +52,10 @@ const definition = {
       label: 'One season',
       input: '{"products":[{"product_id":1,"category":"mugs","price":7}],"sales":[{"sale_id":1,"product_id":1,"sale_date":"2023-06-01","quantity":4}]}',
     },
+    { label: 'One sale', input: '{"sales":[{"sale_id":1,"product_id":1,"sale_date":"2024-01-05","quantity":1}],"products":[{"product_id":1,"category":"tea","price":0}]}' },
+    { label: 'Equal sale dates', input: '{"sales":[{"sale_id":1,"product_id":1,"sale_date":"2024-02-10","quantity":2},{"sale_id":2,"product_id":2,"sale_date":"2024-02-10","quantity":2}],"products":[{"product_id":1,"category":"tea","price":3},{"product_id":2,"category":"coffee","price":3}]}' },
+    { label: 'Largest quantities', input: '{"sales":[{"sale_id":1,"product_id":1,"sale_date":"2024-03-31","quantity":50}],"products":[{"product_id":1,"category":"tea","price":100}]}' },
+    { label: 'Long run: 8 products, 12 sales', input: '{"sales":[{"sale_id":1,"product_id":4,"sale_date":"2024-01-02","quantity":5},{"sale_id":2,"product_id":2,"sale_date":"2024-02-26","quantity":1},{"sale_id":3,"product_id":1,"sale_date":"2024-03-19","quantity":1},{"sale_id":4,"product_id":6,"sale_date":"2024-02-03","quantity":5},{"sale_id":5,"product_id":4,"sale_date":"2024-01-15","quantity":2},{"sale_id":6,"product_id":5,"sale_date":"2024-01-20","quantity":5},{"sale_id":7,"product_id":2,"sale_date":"2024-03-20","quantity":1},{"sale_id":8,"product_id":4,"sale_date":"2024-02-20","quantity":5},{"sale_id":9,"product_id":5,"sale_date":"2024-01-25","quantity":2},{"sale_id":10,"product_id":4,"sale_date":"2024-02-19","quantity":2},{"sale_id":11,"product_id":8,"sale_date":"2024-03-02","quantity":3},{"sale_id":12,"product_id":3,"sale_date":"2024-03-13","quantity":3}],"products":[{"product_id":1,"category":"tea","price":100},{"product_id":2,"category":"coffee","price":60},{"product_id":3,"category":"tea","price":24},{"product_id":4,"category":"coffee","price":99},{"product_id":5,"category":"tea","price":33},{"product_id":6,"category":"coffee","price":7},{"product_id":7,"category":"tea","price":50},{"product_id":8,"category":"coffee","price":65}]}' },
   ],
 }
 

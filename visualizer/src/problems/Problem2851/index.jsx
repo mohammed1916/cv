@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/string-transformation/',
   complexity: 'O(n * k) time with the two-count recurrence, O(n) extra space. The visualization caps n at 6 and k at 8.',
   examples: [
-    { label: 'Example', input: '{"s":"abcd","t":"cdab","k":2}' },
+    { label: 'Own case 1', input: '{"s":"bcde","t":"debc","k":3}' },
     { label: 'Two letters', input: '{"s":"ab","t":"ba","k":1}' },
     { label: "Two letters equal", input: "{\"s\":\"aa\",\"t\":\"aa\",\"k\":1}" },
     { label: "Six letters reversed", input: "{\"s\":\"abcdef\",\"t\":\"fedcba\",\"k\":8}" },

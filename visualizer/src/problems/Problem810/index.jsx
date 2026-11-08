@@ -13,9 +13,9 @@ const definition = {
   url: 'https://leetcode.com/problems/chalkboard-xor-game/',
   complexity: 'O(n) time, O(1) extra space; the game tree is never searched.',
   examples: [
-    { label: 'Example 1 (Alice loses)', input: '[1,1,2]' },
-    { label: 'Example 2 (even count)', input: '[0,1]' },
-    { label: 'Example 3', input: '[1,2,3]' },
+    { label: 'Own case 1', input: '[2,2,3]' },
+    { label: 'Own case 2', input: '[1,2]' },
+    { label: 'Own case 3', input: '[2,3,4]' },
     { label: 'Single element', input: '[7]' },
     { label: 'Equal values', input: '[5,5,5,5]' },
     { label: 'Largest allowed values', input: '[65535,0,65535]' },

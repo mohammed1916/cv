@@ -16,6 +16,11 @@ const definition = {
   examples: [
     { label: 'Four digits', input: '4096' },
     { label: 'Mixed digits', input: '70271' },
+    { label: 'Single digit', input: '7' },
+    { label: 'Zero', input: '0' },
+    { label: 'Equal digit pairs', input: '1122' },
+    { label: 'Largest allowed number', input: '999999999' },
+    { label: 'Long run: 9 digits', input: '110467191' },
   ],
 }
 

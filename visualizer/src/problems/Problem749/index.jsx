@@ -17,9 +17,9 @@ const definition = {
   url: 'https://leetcode.com/problems/contain-virus/',
   complexity: 'O((mn)^2) worst case: each day scans the whole grid and there are at most mn days. Capped at 20 x 20.',
   examples: [
-    { label: 'Example 1', input: '[[0,1,0,0,0,0,0,1],[0,1,0,0,0,0,0,1],[0,0,0,0,0,0,0,1],[0,0,0,0,0,0,0,0]]' },
+    { label: 'Own case 1', input: '[[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,1],[0,1,0,0,0,0,0,1],[0,1,0,0,0,0,0,1]]' },
     { label: 'Example 2', input: '[[1,1,1],[1,0,1],[1,1,1]]' },
-    { label: 'Example 3', input: '[[1,1,1,0,0,0,0,0,0],[1,0,1,0,1,1,1,1,1],[1,1,1,0,0,0,0,0,0]]' },
+    { label: 'Own case 3', input: '[[0,0,0,0,0,0,1,1,1],[1,1,1,1,1,0,1,0,1],[0,0,0,0,0,0,1,1,1]]' },
     { label: 'Water only', input: '[[0]]' },
     { label: 'Single land cell', input: '[[1]]' },
     { label: 'One full block', input: '[[1,1],[1,1]]' },

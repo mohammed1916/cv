@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Two values', input: '{"nums":[2,4,2],"target":[4,2,3]}' },
     { label: 'Repeated value', input: '{"nums":[3,1,3],"target":[4,1,2]}' },
+    { label: 'One value', input: '{"nums":[1],"target":[1]}' },
+    { label: 'Equal values', input: '{"nums":[2,2,2],"target":[2,2,2]}' },
+    { label: 'Eight equal-length lists at the top value', input: '{"nums":[4,4,4,4,4,4,4,4],"target":[1,1,1,1,1,1,1,1]}' },
+    { label: 'Long run: 8 values', input: '{"nums":[3,4,4,4,2,1,1,3],"target":[4,3,4,2,1,3,2,4]}' },
   ],
 }
 

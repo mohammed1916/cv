@@ -1,6 +1,6 @@
 const lines = text => text.split('\n').map((t, i) => ({ line: i + 1, text: t }))
-const PY_OF = {1: 44, 2: 50, 3: 47, 4: 49, 5: 51}
-const frame = (phase, line, message, state = {}) => ({ phase, pythonLine: PY_OF[line] ?? line, activeLine: line, message, state })
+const PY_OF = {1: 3, 2: 9, 3: 6, 4: 8, 5: 10}
+const frame = (phase, line, message, state = {}, py = PY_OF[line] ?? line) => ({ phase, pythonLine: py, activeLine: line, message, state })
 export const PHASES = [
   { id: 'setup', label: 'Setup', description: 'Read the input and prepare the model.' },
   { id: 'step', label: 'Step', description: 'Process one event or item.' },
@@ -29,12 +29,12 @@ export function parseInput(text) {
   return input
 }
 export function buildTrace(input) {
-  const frames = [frame('setup', 1, 'Wrap the callback function in a promise.', { ms: input.ms })]
-  frames.push(frame('step', 3, `The old function runs and calls back after ${input.ms}ms.`, { time: input.ms }))
+  const frames = [frame('setup', 1, 'Wrap the callback function in a promise.', { ms: input.ms }, 3)]
+  frames.push(frame('step', 2, `The old function runs and calls back after ${input.ms}ms.`, { time: input.ms }))
   const result = input.ok
     ? { status: 'resolved', value: input.value }
     : { status: 'rejected', reason: input.error }
-  frames.push(frame('step', 4, input.ok ? 'The callback got no error, so resolve with the value.' : 'The callback got an error, so reject with it.', { callback: input.ok ? [null, input.value] : [input.error] }))
+  frames.push(frame('step', input.ok ? 4 : 3, input.ok ? 'The callback got no error, so resolve with the value.' : 'The callback got an error, so reject with it.', { callback: input.ok ? [null, input.value] : [input.error] }, input.ok ? 8 : 6))
   frames.push(frame('done', 5, `Promise ${result.status}.`, { result }))
   return { input, result, frames }
 }

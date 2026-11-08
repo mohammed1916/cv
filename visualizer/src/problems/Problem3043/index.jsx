@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-length-of-the-longest-common-prefix/',
   complexity: 'O((n + m) * d) time, where d is the number of digits. The visualization caps each array at 8 values.',
   examples: [
-    { label: 'Example 1', input: '{"arr1":[1,10,100],"arr2":[1000]}' },
+    { label: 'Own case 1', input: '{"arr1":[2,11,101],"arr2":[1001]}' },
     { label: 'No match', input: '{"arr1":[1,2,3],"arr2":[4,4,4]}' },
     { label: 'Single values', input: '{"arr1":[1],"arr2":[1]}' },
     { label: 'Equal values', input: '{"arr1":[7,7],"arr2":[7,7,7]}' },

@@ -11,6 +11,9 @@ const definition = {
     { label: 'Sorting loses', input: '{"strength":[3,7,2,4,5]}' },
     { label: 'Six locks', input: '{"strength":[8,25,5,4,9,18]}' },
     { label: 'One lock', input: '{"strength":[7]}' },
+    { label: 'Equal locks', input: '{"strength":[5,5,5]}' },
+    { label: 'Largest strength', input: '{"strength":[1000000,1,1000000]}' },
+    { label: 'Long run: 8 locks', input: '{"strength":[790,560,508,800,163,759,341,597]}' },
   ],
 }
 

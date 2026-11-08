@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Mixed digits', input: '{"s":"12121"}' },
     { label: 'No 2', input: '{"s":"111"}' },
+    { label: 'One digit', input: '{"s":"2"}' },
+    { label: 'Equal digits', input: '{"s":"2222"}' },
+    { label: 'Alternating, 20 characters', input: '{"s":"12121212121212121212"}' },
+    { label: 'Long run: 20 characters', input: '{"s":"22122211212212211121"}' },
   ],
 }
 

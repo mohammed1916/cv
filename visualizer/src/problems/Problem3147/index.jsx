@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/taking-maximum-energy-from-the-mystic-dungeon/',
   complexity: 'O(n) time and O(n) space. The visualization caps input at 12 entries.',
   examples: [
-    { label: 'Example 1', input: '{"energy":[5,2,-10,-5,1],"k":3}' },
+    { label: 'Own case 1', input: '{"energy":[1,-5,-10,2,5],"k":3}' },
     { label: 'All negative', input: '{"energy":[-2,-3,-1],"k":2}' },
     { label: "Single value", input: "{\"energy\":[4],\"k\":1}" },
     { label: "All negative energies", input: "{\"energy\":[-5,-1,-7],\"k\":1}" },

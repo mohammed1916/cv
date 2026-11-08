@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":4104}' },
     { label: 'Example 2', input: '{"n":578}' },
+    { label: 'Smallest n', input: '{"n":1}' },
+    { label: 'Cube boundary', input: '{"n":729}' },
+    { label: 'Upper limit', input: '{"n":5000}' },
+    { label: 'Long run: 4999', input: '{"n":4999}' },
   ],
 }
 

@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '[2,6,3,1]' },
     { label: 'Short', input: '[1,4,2]' },
+    { label: 'Equal pair', input: '[1,1]' },
+    { label: 'Alternating extremes', input: '[100,1,100,1]' },
+    { label: 'All equal', input: '[7,7,7,7]' },
+    { label: 'Long run: 20 values', input: '[78,93,52,71,42,41,92,43,46,85,8,11,22,89,100,91,86,97,96,47]' },
   ],
 }
 

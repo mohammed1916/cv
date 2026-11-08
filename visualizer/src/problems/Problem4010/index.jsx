@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[2,3,5]}' },
     { label: 'Example 2', input: '{"nums":[4,6,8]}' },
+    { label: "Two numbers", input: '{"nums":[7,11]}' },
+    { label: "Equal values", input: '{"nums":[9,9,9]}' },
+    { label: "Largest values at the limit", input: '{"nums":[100000,99999,100000,1]}' },
+    { label: "Long run: 8 numbers", input: '{"nums":[79016,67,49971,10350,91378,94239,80223,41342]}' },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Mixed parities', input: '{"nums":[4,3,2,7,1]}' },
     { label: 'Negatives', input: '{"nums":[-3,-2,5,0,-7,8]}' },
+    { label: 'Single element', input: '{"nums":[5]}' },
+    { label: 'Equal values count nothing', input: '{"nums":[2,2,2,2]}' },
+    { label: 'Extreme values at the limits', input: '{"nums":[9,-9,8,-8,0,1,-1,9,-9,0,5,-5]}' },
+    { label: 'Long run: 12 items', input: '{"nums":[1,-7,-4,4,2,7,-4,-2,8,2,-4,-3]}' },
   ],
 }
 

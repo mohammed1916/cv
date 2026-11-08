@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"bulbs":[10,30,20,10,20,40]}' },
     { label: 'Repeats cancel', input: '{"bulbs":[5,5]}' },
+    { label: 'One bulb', input: '{"bulbs":[1]}' },
+    { label: 'Equal values', input: '{"bulbs":[7,7,7,7]}' },
+    { label: 'Largest values alternate', input: '{"bulbs":[100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1]}' },
+    { label: 'Long run: 20 bulbs', input: '{"bulbs":[83,27,43,80,77,71,97,48,53,71,15,4,83,89,69,84,3,68,37,80]}' },
   ],
 }
 

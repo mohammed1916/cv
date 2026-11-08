@@ -11,6 +11,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"products":[{"product_id":1,"product_name":"Pen","description":"Blue ink 123 pack"},{"product_id":2,"product_name":"Mug","description":"Holds 12 oz"},{"product_id":3,"product_name":"Card","description":"Code 9876"},{"product_id":4,"product_name":"Lamp","description":"Warm light, 2 bulbs"},{"product_id":5,"product_name":"Clip","description":"Batch 007"}]}' },
     { label: 'Two digits only', input: '{"products":[{"product_id":8,"product_name":"Tag","description":"Size 12"}]}' },
+    { label: 'Single product', input: '{"products":[{"product_id":7,"product_name":"Pin","description":"No digits"}]}' },
+    { label: 'Equal descriptions tie', input: '{"products":[{"product_id":1,"product_name":"Tag","description":"Size 12"},{"product_id":2,"product_name":"Tag","description":"Size 12"}]}' },
+    { label: 'Longest description', input: '{"products":[{"product_id":3,"product_name":"Box","description":"Set 1, 2 and 3. Set 1, 2 and 3. Set 1, 2 and 3. Set 1, 2 and"}]}' },
+    { label: 'Long run: 12 products', input: '{"products":[{"product_id":1,"product_name":"Item1","description":"Lot 42, batch 52"},{"product_id":2,"product_name":"Item2","description":"Lot 10, batch 41"},{"product_id":3,"product_name":"Item3","description":"Lot 85, batch 13"},{"product_id":4,"product_name":"Item4","description":"Lot 96, batch 48"},{"product_id":5,"product_name":"Item5","description":"Lot 7, batch 40"},{"product_id":6,"product_name":"Item6","description":"Lot 73, batch 58"},{"product_id":7,"product_name":"Item7","description":"Lot 63, batch 99"},{"product_id":8,"product_name":"Item8","description":"Lot 31, batch 83"},{"product_id":9,"product_name":"Item9","description":"Lot 75, batch 8"},{"product_id":10,"product_name":"Item10","description":"Lot 63, batch 95"},{"product_id":11,"product_name":"Item11","description":"Lot 48, batch 40"},{"product_id":12,"product_name":"Item12","description":"Lot 78, batch 48"}]}' },
   ],
 }
 

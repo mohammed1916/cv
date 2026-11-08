@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-good-subarray-sum/',
   complexity: 'O(n) time with a map keyed by value. The visualization caps nums at 12 entries.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,2,3,4,5,6],"k":1}' },
-    { label: 'Example 2', input: '{"nums":[-1,3,2,4,5],"k":3}' },
+    { label: 'Own case 1', input: '{"nums":[2,3,4,5,6,7],"k":2}' },
+    { label: 'Own case 2', input: '{"nums":[-2,4,3,5,6],"k":4}' },
     { label: 'Two values', input: '{"nums":[5,-5],"k":1}' },
     { label: 'Equal values', input: '{"nums":[4,4,4,4],"k":2}' },
     { label: 'Extreme values, k = 10', input: '{"nums":[10,-10,10,-10,10,-10,10,-10,10,-10,10,-10],"k":10}' },

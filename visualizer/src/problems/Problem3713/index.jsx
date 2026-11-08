@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Whole string', input: '{"s":"abba"}' },
     { label: 'Prefix wins', input: '{"s":"abbac"}' },
+    { label: 'Single letter', input: '{"s":"a"}' },
+    { label: 'Repeated letter', input: '{"s":"aaaa"}' },
+    { label: 'Longest string', input: '{"s":"abbaabbaabbaabbaabba"}' },
+    { label: 'Long run: 20 letters', input: '{"s":"caaebeadceaacebddbac"}' },
   ],
 }
 

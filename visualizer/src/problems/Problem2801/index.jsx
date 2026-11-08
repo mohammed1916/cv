@@ -12,7 +12,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-stepping-numbers-in-range/',
   complexity: 'O(d * 10 * 2) states per bound for d digits, memoized. The visualization caps bounds at 4 digits.',
   examples: [
-    { label: 'Example 1', input: '{"low":"1","high":"11"}' },
+    { label: 'Own case 1', input: '{"low":"2","high":"22"}' },
     { label: 'Two digits', input: '{"low":"90","high":"101"}' },
     { label: 'Single digit', input: '{"low":"5","high":"5"}' },
     { label: 'Equal bounds', input: '{"low":"1000","high":"1000"}' },

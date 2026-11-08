@@ -16,6 +16,10 @@ const definition = {
     { label: 'Two thresholds', input: '{"nums":[5,1,4,2],"k":3}' },
     { label: 'Not enough pairs', input: '{"nums":[1,2,3],"k":1}' },
     { label: 'Wide gaps', input: '{"nums":[9,-6,3,0],"k":4}' },
+    { label: 'Two values', input: '{"nums":[4,-4],"k":1}' },
+    { label: 'Equal values', input: '{"nums":[3,3,3,3],"k":2}' },
+    { label: 'Extreme values, largest k', input: '{"nums":[9,-9,9,-9,9,-9,9,-9],"k":28}' },
+    { label: 'Long run: 8 items', input: '{"nums":[8,7,5,1,-8,5,5,4],"k":7}' },
   ],
 }
 

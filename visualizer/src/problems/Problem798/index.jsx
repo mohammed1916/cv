@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/smallest-rotation-with-highest-score/',
   complexity: 'O(n) time, O(n) space. Visualization limited to 30 elements.',
   examples: [
-    { label: 'Example A', input: '[2,3,1,4,0]' },
-    { label: 'Example B', input: '[1,3,0,2,4]' },
+    { label: 'Own case 1', input: '[0,4,1,3,2]' },
+    { label: 'Own case 2', input: '[4,2,0,3,1]' },
     { label: 'Single element', input: '[0]' }, { label: 'Single element', input: '[0]' }, { label: 'Two entries', input: '[1,0]' }, { label: 'Reversed thirty', input: '[29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0]' }, { label: 'Long run: 30 entries', input: '[5,15,2,9,1,2,18,25,23,24,6,29,18,8,8,5,0,17,18,20,29,11,26,24,4,10,15,21,0,10]' },
   ],
 }

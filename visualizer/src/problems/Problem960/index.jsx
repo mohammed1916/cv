@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/delete-columns-to-make-sorted-iii/',
   complexity: 'O(rows * columns^2) time. The visualization caps the grid at 6 rows and 10 columns.',
   examples: [
-    { label: 'Example 1', input: '["babca","bbazb"]' },
+    { label: 'Own case 1', input: '["cbcdb","ccbac"]' },
     { label: 'Descending', input: '["edcba"]' },
     { label: 'Single letter', input: '["a"]' },
     { label: 'Equal strings', input: '["aaaa","aaaa"]' },

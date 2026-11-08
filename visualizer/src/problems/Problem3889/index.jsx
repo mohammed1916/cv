@@ -15,6 +15,10 @@ const definition = {
     { label: 'Example A', input: '{"s":"aaz9"}' },
     { label: 'Example B', input: '{"s":"0912"}' },
     { label: 'Example C', input: '{"s":"qqqtt"}' },
+    { label: 'Single digit', input: '{"s":"7"}' },
+    { label: 'Equal characters', input: '{"s":"zzzz"}' },
+    { label: 'Sixty characters', input: '{"s":"a9a9a9a9a9a9a9a9a9a9a9a9a9a9a9a9a9a9a9a9a9a9a9a9a9a9a9a9a9a9"}' },
+    { label: 'Long run: 60 characters', input: '{"s":"5aiufy5yjs5khrsr8p54d3ckt1oyr0k28uvwarsze5og4mr0oklbhtha4rv6"}' },
   ],
 }
 

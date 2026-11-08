@@ -14,9 +14,9 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-ways-where-square-of-number-is-equal-to-product-of-two-numbers/',
   complexity: 'O(n^2 + m^2) time and O(m^2) space for the product table. The visualization caps each list at 8 values.',
   examples: [
-    { label: 'Example 1', input: '{"nums1":[7,4],"nums2":[5,2,8,9]}' },
-    { label: 'Example 2', input: '{"nums1":[1,1],"nums2":[1,1,1]}' },
-    { label: 'Example 3', input: '{"nums1":[7,7,8,3],"nums2":[1,2,9,7]}' },
+    { label: 'Own case 1', input: '{"nums1":[8,5],"nums2":[6,3,9,10]}' },
+    { label: 'Own case 2', input: '{"nums1":[2,2],"nums2":[2,2,2]}' },
+    { label: 'Own case 3', input: '{"nums1":[8,8,9,4],"nums2":[2,3,10,8]}' },
     { label: 'Single value each', input: '{"nums1":[1],"nums2":[1]}' },
     { label: 'Repeated values', input: '{"nums1":[5,5],"nums2":[5,5]}' },
     { label: 'Largest values', input: '{"nums1":[100000,1,100000,1,100000,1,100000,1],"nums2":[100000]}' },

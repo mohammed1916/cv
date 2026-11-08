@@ -14,6 +14,10 @@ const definition = {
     { label: 'Equal loops merge', input: table([[1, 2, 10], [2, 1, 30], [5, 6, 25], [6, 5, 15]]) },
     { label: 'Open line is ignored', input: table([[31, 32, 8], [32, 33, 4], [40, 41, 7], [41, 40, 2]]) },
     { label: 'No loop', input: table([[9, 4, 50]]) },
+    { label: 'Single gift', input: '{"SecretSanta":[{"giver_id":1,"receiver_id":2,"gift_value":5}]}' },
+    { label: 'Equal gift values in two loops', input: '{"SecretSanta":[{"giver_id":1,"receiver_id":2,"gift_value":10},{"giver_id":2,"receiver_id":1,"gift_value":10},{"giver_id":3,"receiver_id":4,"gift_value":10},{"giver_id":4,"receiver_id":3,"gift_value":10}]}' },
+    { label: 'Full twelve rows in one loop', input: '{"SecretSanta":[{"giver_id":1,"receiver_id":2,"gift_value":100},{"giver_id":2,"receiver_id":3,"gift_value":101},{"giver_id":3,"receiver_id":4,"gift_value":102},{"giver_id":4,"receiver_id":5,"gift_value":103},{"giver_id":5,"receiver_id":6,"gift_value":104},{"giver_id":6,"receiver_id":7,"gift_value":105},{"giver_id":7,"receiver_id":8,"gift_value":106},{"giver_id":8,"receiver_id":9,"gift_value":107},{"giver_id":9,"receiver_id":10,"gift_value":108},{"giver_id":10,"receiver_id":11,"gift_value":109},{"giver_id":11,"receiver_id":12,"gift_value":110},{"giver_id":12,"receiver_id":1,"gift_value":111}]}' },
+    { label: 'Long run: 12 rows', input: '{"SecretSanta":[{"giver_id":1,"receiver_id":2,"gift_value":3},{"giver_id":2,"receiver_id":3,"gift_value":4},{"giver_id":3,"receiver_id":4,"gift_value":5},{"giver_id":4,"receiver_id":1,"gift_value":6},{"giver_id":21,"receiver_id":22,"gift_value":21},{"giver_id":22,"receiver_id":23,"gift_value":22},{"giver_id":23,"receiver_id":24,"gift_value":23},{"giver_id":24,"receiver_id":21,"gift_value":24},{"giver_id":41,"receiver_id":42,"gift_value":29},{"giver_id":42,"receiver_id":43,"gift_value":30},{"giver_id":43,"receiver_id":44,"gift_value":31},{"giver_id":44,"receiver_id":41,"gift_value":32}]}' },
   ],
 }
 

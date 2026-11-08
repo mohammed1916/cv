@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/append-characters-to-string-to-make-subsequence/',
   complexity: 'O(|s|) time and O(1) extra space.',
   examples: [
-    { label: 'Example 1', input: '{"s":"coaching","t":"coding"}' },
-    { label: 'Example 2', input: '{"s":"abcde","t":"a"}' },
+    { label: 'Own case 1', input: '{"s":"dpbdijoh","t":"dpejoh"}' },
+    { label: 'Own case 2', input: '{"s":"bcdef","t":"b"}' },
     { label: 'Single equal letters', input: '{"s":"a","t":"a"}' },
     { label: 'Letters out of order', input: '{"s":"ab","t":"ba"}' },
     { label: 'Longest strings, no shared letters', input: '{"s":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","t":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}' },

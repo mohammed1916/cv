@@ -14,6 +14,10 @@ const definition = {
     { label: 'Start past the middle', input: '{"nums":[2,3,4,5,6,7],"k":5,"queries":[[5,9,3,4]]}' },
     { label: 'k = 1', input: '{"nums":[8,9],"k":1,"queries":[[0,3,1,0]]}' },
     { label: 'One value', input: '{"nums":[10],"k":3,"queries":[[0,7,0,1]]}' },
+    { label: 'Single entry', input: '{"nums":[8],"k":1,"queries":[[0,3,0,0]]}' },
+    { label: 'Equal values', input: '{"nums":[2,2,2],"k":2,"queries":[[1,2,0,1],[2,2,2,0]]}' },
+    { label: 'Largest value', input: '{"nums":[1000000000,1000000000],"k":5,"queries":[[0,1000000000,1,4]]}' },
+    { label: 'Long run: 12 entries, 6 queries', input: '{"nums":[170155276,587813398,649125158,996626552,94165962,409706380,622298221,103607032,598228654,892774136,408508971,804226851],"k":5,"queries":[[3,551455335,11,4],[3,445323822,6,1],[3,780622979,10,3],[6,868034018,2,2],[11,949564884,9,3],[2,142095693,5,4]]}' },
   ],
 }
 

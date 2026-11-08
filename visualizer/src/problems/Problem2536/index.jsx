@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/increment-submatrices-by-one/',
   complexity: 'O(n^2 + q) time and O(n^2) space. The visualization caps input at 8 by 8 with 8 queries.',
   examples: [
-    { label: 'Example 1', input: '{"n":3,"queries":[[1,1,2,2],[0,0,1,1]]}' },
+    { label: 'Own case 1', input: '{"n":4,"queries":[[2,2,3,3],[1,1,2,2]]}' },
     { label: 'Single cell', input: '{"n":1,"queries":[[0,0,0,0]]}' },
     { label: 'Repeated query', input: '{"n":2,"queries":[[0,0,1,1],[0,0,1,1]]}' },
     { label: 'Full grid and last cell', input: '{"n":8,"queries":[[0,0,7,7],[7,7,7,7]]}' },

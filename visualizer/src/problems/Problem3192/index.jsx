@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-operations-to-make-binary-array-elements-equal-to-one-ii/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the array at 12 entries.',
   examples: [
-    { label: 'Example 1', input: '[0,1,1,0,1]' },
-    { label: 'Example 2', input: '[1,0,0,0]' },
+    { label: 'Own case 1', input: '[1,0,1,1,0]' },
+    { label: 'Own case 2', input: '[0,0,0,1]' },
     { label: 'Single one', input: '[1]' },
     { label: 'All zeros at maximum length', input: '[0,0,0,0,0,0,0,0,0,0,0,0]' },
     { label: 'Equal neighbours', input: '[0,0,1,1,0,0,1,1]' },

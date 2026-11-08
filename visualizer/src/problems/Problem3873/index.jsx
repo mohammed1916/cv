@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"points":[[0,0],[0,5],[7,5],[9,9]]}' },
     { label: 'Two singles', input: '{"points":[[0,0],[1,1]]}' },
+    { label: 'Single point', input: '{"points":[[3,4]]}' },
+    { label: 'Points on one row', input: '{"points":[[0,2],[5,2],[9,2]]}' },
+    { label: 'Four corners', input: '{"points":[[0,0],[20,0],[0,20],[20,20]]}' },
+    { label: 'Long run: 12 points', input: '{"points":[[12,7],[5,6],[20,1],[1,4],[5,13],[8,11],[20,18],[0,8],[19,20],[2,13],[14,18],[3,9]]}' },
   ],
 }
 

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"bags":[[8,10,1],[1,3,2],[5,6,4]],"k":4}' },
     { label: 'Example 2', input: '{"bags":[[1,10,3]],"k":2}' },
+    { label: 'One bag at start', input: '{"bags":[[1,1,1]],"k":1}' },
+    { label: 'Equal coins tie', input: '{"bags":[[1,2,5],[3,4,5],[5,6,5]],"k":2}' },
+    { label: 'Whole range: one bag', input: '{"bags":[[1,60,20]],"k":60}' },
+    { label: 'Long run: 8 bags', input: '{"bags":[[4,6,5],[7,10,14],[12,14,17],[16,19,15],[22,25,10],[29,29,5],[31,33,20],[35,38,6]],"k":20}' },
   ],
 }
 

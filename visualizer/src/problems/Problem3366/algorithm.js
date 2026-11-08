@@ -43,7 +43,7 @@ export function buildTrace({ nums, k, op1, op2 }) {
       }
     }
     table = next
-    frames.push({ pythonLine: P('table = next'), phase: 'update', activeLine: L('table = next'), at: i, table: snapshot(table), message: `Kept ${table.size} usage pattern(s) after element ${nums[i]}.` })
+    frames.push({ pythonLine: P('table = nxt'), phase: 'update', activeLine: L('table = next'), at: i, table: snapshot(table), message: `Kept ${table.size} usage pattern(s) after element ${nums[i]}.` })
   }
   const result = Math.min(...table.values())
   frames.push({ pythonLine: P('return min'), phase: 'done', activeLine: L('return Math.min'), at: -1, table: snapshot(table), result, message: `Minimum possible sum is ${result}.` })

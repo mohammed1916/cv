@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-unguarded-cells-in-the-grid/',
   complexity: 'Each guard sweeps at most four rays, so the work is proportional to the grid size. The visualization caps the grid at 6 by 6.',
   examples: [
-    { label: 'Example 1', input: '{"m":4,"n":6,"guards":[[0,0],[1,1],[2,3]],"walls":[[0,1],[2,2],[1,4]]}' },
+    { label: 'Own case 1', input: '{"m":4,"n":6,"guards":[[2,3],[1,1],[0,0]],"walls":[[1,4],[2,2],[0,1]]}' },
     { label: 'Walled row', input: '{"m":1,"n":4,"guards":[[0,0]],"walls":[[0,2]]}' },
     { label: 'Single empty cell', input: '{"m":1,"n":1,"guards":[],"walls":[]}' },
     { label: 'Single guard fills the grid', input: '{"m":1,"n":1,"guards":[[0,0]],"walls":[]}' },

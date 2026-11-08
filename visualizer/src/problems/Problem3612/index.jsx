@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"a#b%*"}' },
     { label: 'Example 2', input: '{"s":"z*#"}' },
+    { label: 'Single letter', input: '{"s":"q"}' },
+    { label: 'Delete on empty', input: '{"s":"*"}' },
+    { label: 'Doubling near the cap', input: '{"s":"ab###########cdefghijklmnop"}' },
+    { label: 'Long run: 30 symbols', input: '{"s":"cbmmh%dbidplnnusvxjklpmvxox#oa"}' },
   ],
 }
 

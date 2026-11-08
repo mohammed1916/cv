@@ -13,8 +13,12 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-stable-subsequences/',
   complexity: 'O(n) time and O(1) space. The visualization caps the array at 12 values.',
   examples: [
-    { label: 'Example 1', input: '[1,3,5]' },
-    { label: 'Example 2', input: '[2,3,4,2]' },
+    { label: 'Own case 1', input: '[2,4,6]' },
+    { label: 'Own case 2', input: '[3,4,5,3]' },
+    { label: 'Single element', input: '[4]' },
+    { label: 'Equal values', input: '[2,2,2]' },
+    { label: 'Largest values allowed', input: '[100000,1,100000]' },
+    { label: 'Long run: 12 values', input: '[76078,91529,77576,69499,99538,30653,39788,48591,87990,66769,45936,52899]' },
   ],
 }
 

@@ -15,6 +15,11 @@ const definition = {
     { label: "Dip and recover", input: "[-3,5,-4,2,-6]" },
     { label: "Mixed run", input: "[4,-2,-5,3,-1,-4]" },
     { label: "All losses", input: "[-1,-1,-1]" },
+    { label: 'Single gain', input: '[5]' },
+    { label: 'Single loss', input: '[-4]' },
+    { label: 'Zero changes', input: '[0,0,0]' },
+    { label: 'Largest swings', input: '[50,-50,50,-50,50,-50,50,-50,50,-50,50,-50,50,-50]' },
+    { label: 'Long run: 14 values', input: '[-8,33,34,-26,40,0,-15,-22,-49,-17,-10,-21,-5,-9]' },
   ],
 }
 

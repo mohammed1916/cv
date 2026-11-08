@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-beauty-of-an-array-after-applying-operation/',
   complexity: 'O(n log n) time for the sort and O(n) for the window. The visualization caps input at 12 values.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[4,6,1,2],"k":2}' },
+    { label: 'Own case 1', input: '{"nums":[5,7,2,3],"k":3}' },
     { label: 'Equal values', input: '{"nums":[1,1,1,1],"k":10}' },
     { label: 'Single zero, k 0', input: '{"nums":[0],"k":0}' },
     { label: 'Equal values', input: '{"nums":[5,5,5,5],"k":2}' },

@@ -172,4 +172,8 @@ export const examples = [
   { label: 'Clearing a lone 1', input: '{"s1":"100","s2":"000"}' },
   { label: 'Already equal', input: '{"s1":"0110","s2":"0110"}' },
   { label: 'Single bit rises', input: '{"s1":"0","s2":"1"}' },
+  { label: "Two bits clear", input: '{"s1":"11","s2":"00"}' },
+  { label: "All zeros unchanged", input: '{"s1":"0000","s2":"0000"}' },
+  { label: "Maximum length alternating bits", input: '{"s1":"1010101010101010","s2":"0101010101010101"}' },
+  { label: "Long run: 16 bits", input: '{"s1":"1011111100101011","s2":"1010100110010010"}' },
 ]

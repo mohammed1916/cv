@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Gap at 2', input: '{"nums":[3,4,6,8],"k":2}' },
     { label: 'Skip to 6', input: '{"nums":[2,4,3],"k":2}' },
+    { label: 'Single value', input: '{"nums":[1],"k":1}' },
+    { label: 'Equal values', input: '{"nums":[4,4,4],"k":4}' },
+    { label: 'Largest values allowed', input: '{"nums":[100,100,100,100],"k":100}' },
+    { label: 'Long run: 20 values', input: '{"nums":[78,1,48,95,18,21,64,95,6,9,64,23,78,85,36,27,58,17,100,19],"k":7}' },
   ],
 }
 

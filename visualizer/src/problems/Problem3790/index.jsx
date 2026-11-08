@@ -17,6 +17,9 @@ const definition = {
     { label: 'k = 3', input: '{"k":3}' },
     { label: 'k = 7', input: '{"k":7}' },
     { label: 'k = 2', input: '{"k":2}' },
+    { label: "Largest k", input: "{\"k\":60}" },
+    { label: "Small odd k", input: "{\"k\":5}" },
+    { label: "Long run: LCG k", input: "{\"k\":51}" },
   ],
 }
 

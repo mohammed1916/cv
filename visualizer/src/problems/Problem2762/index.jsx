@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/continuous-subarrays/',
   complexity: 'O(n) time with two monotonic deques, O(n) space.',
   examples: [
-    { label: 'Example 1', input: '[5,4,2,4]' },
+    { label: 'Own case 1', input: '[6,5,3,5]' },
     { label: 'Ascending', input: '[1,2,3]' },
     { label: 'Single value', input: '[1]' },
     { label: 'Equal values', input: '[4,4,4,4]' },

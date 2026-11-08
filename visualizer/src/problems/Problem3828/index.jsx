@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,5,2]}' },
     { label: 'Example 2', input: '{"nums":[3,7]}' },
+    { label: 'One value', input: '{"nums":[1]}' },
+    { label: 'Equal values', input: '{"nums":[7,7,7]}' },
+    { label: 'Largest value between two smaller', input: '{"nums":[100000,1,100000]}' },
+    { label: 'Long run: 30 values', input: '{"nums":[81389,94158,51862,11226,76814,26803,4072,86760,4267,61707,68915,53582,78001,16320,14510,48867,41648,84010,51432,65761,33378,99571,91620,11184,98640,11025,69631,53093,34764,73442]}' },
   ],
 }
 

@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/successful-pairs-of-spells-and-potions/',
   complexity: 'O((n + m) log m) time and O(m) extra space for n spells and m potions.',
   examples: [
-    { label: 'Example 1', input: '{"spells":[5,1,3],"potions":[1,2,3,4,5],"success":7}' },
-    { label: 'Example 2', input: '{"spells":[3,1,2],"potions":[8,5,8],"success":16}' },
+    { label: 'Own case 1', input: '{"spells":[6,2,4],"potions":[2,3,4,5,6],"success":8}' },
+    { label: 'Own case 2', input: '{"spells":[4,2,3],"potions":[9,6,9],"success":17}' },
     { label: 'Single spell and potion', input: '{"spells":[4],"potions":[3],"success":12}' },
     { label: 'Equal spells and potions', input: '{"spells":[2,2],"potions":[4,4],"success":8}' },
     { label: 'Twelve strong spells', input: '{"spells":[20,20,20,20,20,20,20,20,20,20,20,20],"potions":[1,2,3,4,5,6,7,8,9,10,11,12],"success":100}' },

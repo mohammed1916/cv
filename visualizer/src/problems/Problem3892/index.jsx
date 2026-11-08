@@ -13,6 +13,10 @@ const definition = {
   examples: [
     { label: 'Example A', input: '{"nums":[3,1,3],"k":1}' },
     { label: 'Example B', input: '{"nums":[1,5,2,6,3],"k":2}' },
+    { label: 'Three equal values, k zero', input: '{"nums":[1,1,1],"k":0}' },
+    { label: 'Equal values, k two', input: '{"nums":[7,7,7,7],"k":2}' },
+    { label: 'Ten values, k at limit', input: '{"nums":[20,1,20,1,20,1,20,1,20,1],"k":10}' },
+    { label: 'Long run: 10 values', input: '{"nums":[13,19,13,15,4,11,5,18,12,2],"k":5}' },
   ],
 }
 

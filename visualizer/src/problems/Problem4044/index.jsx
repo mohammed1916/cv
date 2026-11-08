@@ -22,6 +22,10 @@ const definition = {
   examples: [
     { label: 'One good shift', input: '[2,5,1,4]' },
     { label: 'Six values', input: '[3,3,1,1,6,2]' },
+    { label: "Two values", input: "[4,2]" },
+    { label: "Equal values", input: "[5,5,5,5]" },
+    { label: "Largest values", input: "[1000,1,1000,1]" },
+    { label: "Long run: 20 values", input: "[91,872,870,677,413,106,563,546,193,765,132,217,537,888,720,366,108,122,801,977]" },
   ],
 }
 

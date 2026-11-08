@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"order":[5,3,1,4,2],"friends":[2,4]}' },
     { label: 'Single friend', input: '{"order":[3,1,2],"friends":[2]}' },
+    { label: 'One person', input: '{"order":[1],"friends":[1]}' },
+    { label: 'Friends in order', input: '{"order":[1,2],"friends":[1,2]}' },
+    { label: 'Reversed order', input: '{"order":[12,11,10,9,8,7,6,5,4,3,2,1],"friends":[1,4,7,10,12]}' },
+    { label: 'Long run: 12 people, 8 friends', input: '{"order":[5,3,4,6,9,8,7,12,1,11,2,10],"friends":[1,2,4,6,8,9,11,12]}' },
   ],
 }
 

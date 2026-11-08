@@ -16,6 +16,10 @@ const definition = {
     { label: 'Split across bags', input: '{"items":[4,3,2],"w1":5,"w2":4}' },
     { label: 'No room', input: '{"items":[1,2,3],"w1":0,"w2":0}' },
     { label: 'Both bags full', input: '{"items":[5,5,5],"w1":5,"w2":5}' },
+    { label: 'One item, empty bags', input: '{"items":[1],"w1":0,"w2":0}' },
+    { label: 'Equal items and capacities', input: '{"items":[3,3,3],"w1":3,"w2":3}' },
+    { label: 'Largest items and capacities', input: '{"items":[9,9,9,9,9,9,9,9],"w1":12,"w2":12}' },
+    { label: 'Long run: 8 items', input: '{"items":[9,1,4,5,5,1,3,6],"w1":5,"w2":7}' },
   ],
 }
 

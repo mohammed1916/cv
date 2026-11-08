@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/largest-time-for-given-digits/',
   complexity: 'O(4!) = O(1) time and space.',
   examples: [
-    { label: 'Example 1', input: '[1,2,3,4]' },
-    { label: 'Example 2', input: '[5,5,5,5]' },
+    { label: 'Own case 1', input: '[2,3,4,5]' },
+    { label: 'Own case 2', input: '[6,6,6,6]' },
     { label: 'With zeros', input: '[0,0,0,0]' },
     { label: 'Boundary: nines', input: '[9,9,9,9]' },
     { label: 'Mixed zeros and nines', input: '[9,0,0,1]' },

@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/walking-robot-simulation/',
   complexity: 'O(total steps + obstacles) time, O(obstacles) space. The visualization caps commands at 30 with moves of 1 to 9.',
   examples: [
-    { label: 'Example 1', input: '{"commands":[4,-1,3],"obstacles":[]}' },
-    { label: 'Example 2', input: '{"commands":[4,-1,4,-2,4],"obstacles":[[2,4]]}' },
+    { label: 'Own case 1', input: '{"commands":[5,-2,4],"obstacles":[]}' },
+    { label: 'Own case 2', input: '{"commands":[4,-2,4,-1,4],"obstacles":[[2,4]]}' },
     { label: 'Example 3', input: '{"commands":[6,-1,-1,6],"obstacles":[]}' },
     { label: 'Single move', input: '{"commands":[1],"obstacles":[]}' },
     { label: 'Repeated turns', input: '{"commands":[-1,-1,-1,-1,5],"obstacles":[]}' },

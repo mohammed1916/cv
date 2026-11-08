@@ -17,6 +17,10 @@ const definition = {
     { label: "aabb, k = 2 gives 2", input: JSON.stringify({ s: "aabb", k: 2 }) },
     { label: "abab, k = 0 gives 4", input: JSON.stringify({ s: "abab", k: 0 }) },
     { label: "aaaa, k = 3 gives 4", input: JSON.stringify({ s: "aaaa", k: 3 }) },
+    { label: "Two letters, no removal", input: "{\"s\":\"ab\",\"k\":0}" },
+    { label: "Equal letters", input: "{\"s\":\"zzzz\",\"k\":1}" },
+    { label: "Longest visual string, largest k", input: "{\"s\":\"aaaaaaaaaaaa\",\"k\":11}" },
+    { label: "Long run: 12 letters", input: "{\"s\":\"acacbcaacaab\",\"k\":5}" },
   ],
 };
 

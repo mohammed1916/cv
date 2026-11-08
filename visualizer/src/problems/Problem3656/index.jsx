@@ -17,6 +17,10 @@ const definition = {
     { label: 'Complete graph on four', input: '[3, 3, 3, 3]' },
     { label: 'Degree beyond reach', input: '[3, 1]' },
     { label: 'Two components', input: '[2, 2, 2, 0, 0]' },
+    { label: 'One vertex', input: '[0]' },
+    { label: 'Equal degrees', input: '[2,2,2]' },
+    { label: 'Largest degree', input: '[12,0,0]' },
+    { label: 'Long run: 10 degrees', input: '[5,7,7,9,12,9,12,3,1,7]' },
   ],
 }
 
