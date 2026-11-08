@@ -11,6 +11,9 @@ const definition = {
     { label: 'Mixed', input: '{"s":"sketching"}' },
     { label: 'Only vowels', input: '{"s":"aeiou"}' },
     { label: 'No vowels', input: '{"s":"rhythm"}' },
+    { label: 'Single letter', input: '{"s":"b"}' },
+    { label: 'Repeated letters', input: '{"s":"aaaaaaaa"}' },
+    { label: 'Long run: 60 letters', input: '{"s":"wjvqmsiathhyicxeesrjjfqfhcrybcigihvctjkpsikfrtroamtmyrpmerdq"}' },
   ],
 }
 

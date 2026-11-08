@@ -14,6 +14,10 @@ const definition = {
     { label: 'One misplaced letter', input: 'aabaa' },
     { label: 'All distinct', input: 'abcdef' },
     { label: 'Two runs', input: 'aaabbb' },
+    { label: 'Single letter', input: 'a' },
+    { label: 'Equal runs of two', input: 'aabbcc' },
+    { label: 'Alternating letters', input: 'abababab' },
+    { label: 'Long run: 40 letters', input: 'acbaacbaaabbacaacbbabcbababaaabaabbcbbba' },
   ],
 }
 

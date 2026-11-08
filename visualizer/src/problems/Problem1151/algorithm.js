@@ -47,6 +47,10 @@ export const examples = [
   { label: 'Sample', input: '[1,0,1,0,0,1,1,0,1]' },
   { label: 'Already grouped', input: '[0,1,1,1,0]' },
   { label: 'No ones', input: '[0,0,0]' },
+  { label: 'Single one', input: '[1]' },
+  { label: 'Ones at both ends', input: '[1,0,0,0,1]' },
+  { label: 'Alternating, 16 positions', input: '[1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0]' },
+  { label: 'Long run: 16 positions', input: '[0,1,1,1,0,0,0,1,1,1,1,1,1,0,0,1]' },
 ]
 
 export function parseInput(text) {

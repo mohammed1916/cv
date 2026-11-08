@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"length":3,"ops":[["set",0,5],["snap"],["set",0,6],["get",0,0]]}' },
     { label: 'Example 2', input: '{"length":2,"ops":[["snap"],["set",1,7],["snap"],["get",1,0],["get",1,1]]}' },
+    { label: 'Single cell snapshot', input: '{"length":1,"ops":[["set",0,4],["snap"],["set",0,9],["get",0,0]]}' },
+    { label: 'Equal values in two snapshots', input: '{"length":2,"ops":[["set",1,7],["snap"],["set",1,7],["snap"],["get",1,0],["get",1,1]]}' },
+    { label: 'Boundary values 0 and 50', input: '{"length":2,"ops":[["set",0,50],["snap"],["set",0,0],["snap"],["get",0,0],["get",0,1]]}' },
+    { label: 'Long run: 16 operations', input: '{"length":6,"ops":[["snap"],["set",1,21],["set",2,29],["set",4,27],["get",0,0],["snap"],["get",3,0],["set",5,6],["set",5,17],["snap"],["set",2,46],["get",1,0],["snap"],["snap"],["snap"],["get",2,5]]}' },
   ],
 }
 

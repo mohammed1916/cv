@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"mountain":[1,2,3,4,5,3,1],"target":3}' },
     { label: 'Absent', input: '{"mountain":[0,1,2,4,2,1],"target":3}' },
+    { label: 'Smallest mountain', input: '{"mountain":[1,2,1],"target":2}' },
+    { label: 'Target on both slopes uses the smaller index', input: '{"mountain":[1,2,3,2,1],"target":2}' },
+    { label: 'Largest peak, zero on both flanks', input: '{"mountain":[0,100,0],"target":0}' },
+    { label: 'Long run: 40 values', input: '{"mountain":[1,2,3,4,5,7,10,12,16,17,18,20,22,26,28,35,38,42,43,45,49,100,98,95,93,92,89,88,84,83,81,80,76,74,73,70,58,57,56,55],"target":7}' },
   ],
 }
 

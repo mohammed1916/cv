@@ -80,4 +80,7 @@ export const examples = [
   { label: 'Century exception', input: '{"year":1900,"month":2}' },
   { label: 'Divisible by 400', input: '{"year":2000,"month":2}' },
   { label: 'Thirty days', input: '{"year":2026,"month":4}' },
+  { label: 'Smallest year and month', input: '{"year":1,"month":1}' },
+  { label: 'Thirty-day month', input: '{"year":2023,"month":4}' },
+  { label: 'Largest year and month', input: '{"year":9999,"month":12}' },
 ]

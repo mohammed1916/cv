@@ -92,4 +92,9 @@ export const examples = [
   { label: 'Zeros in the middle', input: '[3,0,7,2,0,5]' },
   { label: 'Leading zero', input: '[0,3,9]' },
   { label: 'No zeros', input: '[8,9]' },
+  { label: 'Single zero', input: '[0]' },
+  { label: 'Adjacent zeros shift twice', input: '[1,0,0,2]' },
+  { label: 'Zero at the end', input: '[4,5,0]' },
+  { label: 'Twenty nines, no zeros', input: '[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]' },
+  { label: 'Long run: 20 digits', input: '[3,0,9,6,7,8,5,6,0,5,6,6,6,6,1,7,4,7,0,1]' },
 ]

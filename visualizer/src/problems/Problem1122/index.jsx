@@ -12,6 +12,9 @@ const definition = {
     { label: 'Mixed', input: '{"arr1":[4,2,9,2,7,4,1],"arr2":[2,4,1]}' },
     { label: 'Every value listed', input: '{"arr1":[5,5,5],"arr2":[5]}' },
     { label: 'One listed', input: '{"arr1":[8,3,6],"arr2":[3]}' },
+    { label: 'Single value', input: '{"arr1":[7],"arr2":[7]}' },
+    { label: 'Sorted subset with repeats', input: '{"arr1":[30,0,30,15],"arr2":[0,15,30]}' },
+    { label: 'Long run: 30 values, 8 listed', input: '{"arr1":[14,1,22,2,27,13,21,29,8,20,20,1,24,9,6,28,5,24,15,26,14,1,26,3,25,9,3,25,14,27],"arr2":[14,1,22,2,27,13,21,29]}' },
   ],
 }
 

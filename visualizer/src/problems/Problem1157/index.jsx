@@ -15,6 +15,10 @@ const definition = {
   complexity: 'O(q * n) time for this counting visualization. The visualization caps input at 12 values and 6 queries.',
   examples: [
     { label: 'Example', input: '{"arr":[1,1,2,2,1,1],"queries":[[0,5,4],[0,3,3],[2,3,2]]}' },
+    { label: 'Single element', input: '{"arr":[4],"queries":[[0,0,1]]}' },
+    { label: 'Threshold equals the length', input: '{"arr":[1,1,1,1,2],"queries":[[0,3,4]]}' },
+    { label: 'Boundary values 0 and 9', input: '{"arr":[9,9,0,9,0],"queries":[[0,3,3],[1,4,3]]}' },
+    { label: 'Long run: 12 values, 6 queries', input: '{"arr":[2,0,4,7,4,0,6,9,2,1,4,1],"queries":[[10,11,2],[3,11,7],[6,10,3],[10,11,2],[8,10,3],[7,9,3]]}' },
   ],
 }
 

@@ -46,6 +46,18 @@ export const complexity = 'O(n) to find first logins and O(u log u) to order the
 export const examples = [{
   label: 'Sample',
   input: '{"Traffic":[{"user_id":1,"activity":"login","activity_date":"2019-03-01"},{"user_id":1,"activity":"login","activity_date":"2019-04-05"},{"user_id":2,"activity":"login","activity_date":"2019-04-02"},{"user_id":3,"activity":"login","activity_date":"2019-06-30"},{"user_id":4,"activity":"login","activity_date":"2019-06-16"},{"user_id":4,"activity":"login","activity_date":"2019-06-15"},{"user_id":5,"activity":"logout","activity_date":"2019-06-20"},{"user_id":6,"activity":"login","activity_date":"2019-06-15"},{"user_id":6,"activity":"logout","activity_date":"2019-06-18"}]}',
+}, {
+  label: 'Single login',
+  input: '{"Traffic":[{"user_id":1,"activity":"login","activity_date":"2019-01-01"}]}',
+}, {
+  label: 'Two users share a first date',
+  input: '{"Traffic":[{"user_id":1,"activity":"login","activity_date":"2019-05-10"},{"user_id":2,"activity":"login","activity_date":"2019-05-10"},{"user_id":2,"activity":"login","activity_date":"2019-05-12"}]}',
+}, {
+  label: 'Window edge dates count',
+  input: '{"Traffic":[{"user_id":7,"activity":"login","activity_date":"2019-04-01"},{"user_id":8,"activity":"login","activity_date":"2019-06-30"},{"user_id":8,"activity":"logout","activity_date":"2019-06-30"}]}',
+}, {
+  label: 'Long run: 12 events, 4 users',
+  input: '{"Traffic":[{"user_id":3,"activity":"login","activity_date":"2019-04-08"},{"user_id":1,"activity":"login","activity_date":"2019-05-02"},{"user_id":1,"activity":"logout","activity_date":"2019-05-03"},{"user_id":4,"activity":"login","activity_date":"2019-06-11"},{"user_id":2,"activity":"login","activity_date":"2019-04-29"},{"user_id":3,"activity":"logout","activity_date":"2019-05-20"},{"user_id":2,"activity":"login","activity_date":"2019-06-05"},{"user_id":4,"activity":"logout","activity_date":"2019-06-12"},{"user_id":1,"activity":"login","activity_date":"2019-06-28"},{"user_id":3,"activity":"login","activity_date":"2019-06-02"},{"user_id":2,"activity":"logout","activity_date":"2019-06-06"},{"user_id":4,"activity":"login","activity_date":"2019-04-15"}]}',
 }]
 
 function tableRows(input, name, columns) {

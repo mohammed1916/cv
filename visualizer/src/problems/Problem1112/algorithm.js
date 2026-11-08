@@ -42,6 +42,18 @@ export const complexity = 'O(n log n) to sort the enrollments. The visualizer ca
 export const examples = [{
   label: 'Sample',
   input: '{"Enrollments":[{"student_id":1,"course_id":101,"grade":80},{"student_id":1,"course_id":102,"grade":90},{"student_id":1,"course_id":103,"grade":90},{"student_id":2,"course_id":101,"grade":70},{"student_id":2,"course_id":104,"grade":65},{"student_id":3,"course_id":102,"grade":95}]}',
+}, {
+  label: 'Single enrollment',
+  input: '{"Enrollments":[{"student_id":1,"course_id":5,"grade":80}]}',
+}, {
+  label: 'Equal grades use the smaller course id',
+  input: '{"Enrollments":[{"student_id":7,"course_id":30,"grade":90},{"student_id":7,"course_id":20,"grade":90},{"student_id":7,"course_id":25,"grade":85}]}',
+}, {
+  label: 'Full and zero grades',
+  input: '{"Enrollments":[{"student_id":8,"course_id":1,"grade":0},{"student_id":8,"course_id":2,"grade":100},{"student_id":9,"course_id":3,"grade":0}]}',
+}, {
+  label: 'Long run: 12 enrollments, 4 students',
+  input: '{"Enrollments":[{"student_id":1,"course_id":12,"grade":70},{"student_id":2,"course_id":11,"grade":99},{"student_id":2,"course_id":12,"grade":62},{"student_id":3,"course_id":11,"grade":91},{"student_id":1,"course_id":13,"grade":89},{"student_id":3,"course_id":10,"grade":93},{"student_id":2,"course_id":10,"grade":63},{"student_id":4,"course_id":11,"grade":58},{"student_id":1,"course_id":11,"grade":84},{"student_id":4,"course_id":12,"grade":73},{"student_id":4,"course_id":10,"grade":98},{"student_id":3,"course_id":13,"grade":60}]}',
 }]
 
 function tableRows(input, name, columns) {

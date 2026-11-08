@@ -65,7 +65,13 @@ const SAMPLE = { actions: [
   { user_id: 4, post_id: 13, action_date: '2019-07-04', action: 'view', extra: 'spam' },
   { user_id: 5, post_id: 14, action_date: '2019-07-04', action: 'report', extra: 'spam' },
 ] }
-export const examples = [{ label: 'Teaching sample', input: JSON.stringify(SAMPLE) }]
+export const examples = [
+  { label: 'Teaching sample', input: JSON.stringify(SAMPLE) },
+  { label: 'Single report', input: '{"actions":[{"user_id":1,"post_id":10,"action_date":"2019-07-04","action":"report","extra":"spam"}]}' },
+  { label: 'Same post and reason count once', input: '{"actions":[{"user_id":1,"post_id":20,"action_date":"2019-07-04","action":"report","extra":"spam"},{"user_id":2,"post_id":20,"action_date":"2019-07-04","action":"report","extra":"spam"},{"user_id":3,"post_id":20,"action_date":"2019-07-04","action":"report","extra":"abuse"}]}' },
+  { label: 'No report on the day', input: '{"actions":[{"user_id":1,"post_id":10,"action_date":"2019-07-04","action":"view","extra":"spam"}]}' },
+  { label: 'Long run: 12 actions', input: '{"actions":[{"user_id":4,"post_id":13,"action_date":"2019-07-03","action":"report","extra":"spam"},{"user_id":4,"post_id":13,"action_date":"2019-07-04","action":"report","extra":"spam"},{"user_id":3,"post_id":12,"action_date":"2019-07-04","action":"report","extra":"abuse"},{"user_id":4,"post_id":13,"action_date":"2019-07-03","action":"report","extra":"abuse"},{"user_id":4,"post_id":13,"action_date":"2019-07-03","action":"report","extra":"spam"},{"user_id":5,"post_id":10,"action_date":"2019-07-04","action":"report","extra":"abuse"},{"user_id":5,"post_id":10,"action_date":"2019-07-03","action":"report","extra":"abuse"},{"user_id":4,"post_id":14,"action_date":"2019-07-04","action":"report","extra":"abuse"},{"user_id":4,"post_id":13,"action_date":"2019-07-04","action":"report","extra":"abuse"},{"user_id":4,"post_id":12,"action_date":"2019-07-04","action":"report","extra":"abuse"},{"user_id":3,"post_id":10,"action_date":"2019-07-03","action":"view","extra":"abuse"},{"user_id":1,"post_id":10,"action_date":"2019-07-04","action":"report","extra":"abuse"}]}' },
+]
 
 export function parseInput(text) {
   const input = parseJsonObject(text)

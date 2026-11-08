@@ -17,6 +17,10 @@ const definition = {
     { label: 'Four sticks', input: '{"sticks":[4,2,7,3]}' },
     { label: 'One stick', input: '{"sticks":[5]}' },
     { label: 'Equal sticks', input: '{"sticks":[1,1,1,1]}' },
+    { label: 'Single stick', input: '{"sticks":[5]}' },
+    { label: 'Equal sticks tie', input: '{"sticks":[3,3,3,3]}' },
+    { label: 'Largest lengths', input: '{"sticks":[1000,1000,999,1]}' },
+    { label: 'Long run: 24 sticks', input: '{"sticks":[7,809,564,485,899,625,552,187,807,908,763,406,624,468,716,832,582,301,216,630,790,818,916,371]}' },
   ],
 }
 

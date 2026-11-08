@@ -51,6 +51,10 @@ export const examples = [
   { label: 'Sample', input: '[3,9,1,2,7,5]' },
   { label: 'Two piles', input: '[4,8]' },
   { label: 'Equal piles', input: '[6,6,6,6]' },
+  { label: 'Single pile', input: '[7]' },
+  { label: 'Mirror piles tie', input: '[2,9,2,9,2]' },
+  { label: 'Largest values', input: '[100,1,100,1,100,1,100,1,100,1]' },
+  { label: 'Long run: 10 piles', input: '[21,77,56,41,39,49,3,82,6,28]' },
 ]
 
 export function parseInput(text) {

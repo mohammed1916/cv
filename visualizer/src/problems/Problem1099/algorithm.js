@@ -65,6 +65,10 @@ export const examples = [
   { label: 'Sample', input: '{"values":[4,1,9,6,3],"limit":10}' },
   { label: 'Only one value', input: '{"values":[5],"limit":20}' },
   { label: 'Nothing fits', input: '{"values":[30,40,50],"limit":20}' },
+  { label: 'Equal values pair up', input: '{"values":[5,5],"limit":11}' },
+  { label: 'Sum equal to the limit is rejected', input: '{"values":[1000,1000],"limit":2000}' },
+  { label: 'Largest valid sum just below 2000', input: '{"values":[1000,999,1],"limit":2000}' },
+  { label: 'Long run: 12 values', input: '{"values":[147,577,956,128,15,598,735,628,433,933,764,465],"limit":700}' },
 ]
 
 export function parseInput(text) {

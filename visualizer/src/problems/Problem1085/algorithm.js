@@ -74,4 +74,8 @@ export const complexity = 'O(n) to find the minimum, then O(d) over the d digits
 export const examples = [
   { label: 'Odd digit sum', input: '[12, 40, 9]' },
   { label: 'Even digit sum', input: '[21, 30, 45]' },
+  { label: 'Single element', input: '[9]' },
+  { label: 'Equal minimums keep one value', input: '[24, 42, 24]' },
+  { label: 'Largest values only', input: '[999, 999, 999]' },
+  { label: 'Long run: 20 values', input: '[63, 120, 331, 879, 668, 897, 956, 671, 799, 542, 625, 273, 695, 197, 335, 54, 317, 593, 333, 377]' },
 ]

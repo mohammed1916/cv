@@ -6,7 +6,13 @@ export const phases = [
 
 export const inputLabel = 'A balanced string of ( and ) characters, 2 to 100 long, such as ((())())()'
 export const complexity = 'O(n) time and O(n) output space: one pass tracks the depth and assigns each bracket a group.'
-export const examples = [{ label: 'Sample', input: '((())())()' }]
+export const examples = [
+  { label: 'Sample', input: '((())())()' },
+  { label: 'Smallest pair', input: '()' },
+  { label: 'Adjacent equal pairs', input: '()()' },
+  { label: 'Deepest 50 levels', input: '(((((((((((((((((((((((((((((((((((((((((((((((((())))))))))))))))))))))))))))))))))))))))))))))))))' },
+  { label: 'Long run: 100 brackets', input: '(((())))()()()()(((()(()(()))))((((((())((()))()))()))())())()()()(())()((())()(()(()))())()((()()))' },
+]
 
 // Each line of JavaScript is paired with the Python line on the same row.
 const LINES = [

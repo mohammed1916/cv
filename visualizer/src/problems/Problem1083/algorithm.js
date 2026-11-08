@@ -45,10 +45,16 @@ export const phases = [
 
 export const inputLabel = 'Object with Product and Sales tables'
 export const complexity = 'O(n + m) with set membership for the two product names. The visualizer caps each table at 12 rows.'
-export const examples = [{
-  label: 'Sample',
-  input: '{"Product":[{"product_id":1,"product_name":"Kettle","unit_price":699},{"product_id":2,"product_name":"Toaster","unit_price":999},{"product_id":3,"product_name":"Pixel","unit_price":500}],"Sales":[{"seller_id":1,"product_id":1,"buyer_id":10,"sale_date":"2019-01-01","quantity":1,"price":699},{"seller_id":1,"product_id":2,"buyer_id":11,"sale_date":"2019-01-02","quantity":1,"price":999},{"seller_id":2,"product_id":1,"buyer_id":11,"sale_date":"2019-01-03","quantity":1,"price":699},{"seller_id":2,"product_id":3,"buyer_id":12,"sale_date":"2019-01-04","quantity":1,"price":500},{"seller_id":3,"product_id":1,"buyer_id":12,"sale_date":"2019-01-05","quantity":2,"price":699}]}',
-}]
+export const examples = [
+  {
+    label: 'Sample',
+    input: '{"Product":[{"product_id":1,"product_name":"Kettle","unit_price":699},{"product_id":2,"product_name":"Toaster","unit_price":999},{"product_id":3,"product_name":"Pixel","unit_price":500}],"Sales":[{"seller_id":1,"product_id":1,"buyer_id":10,"sale_date":"2019-01-01","quantity":1,"price":699},{"seller_id":1,"product_id":2,"buyer_id":11,"sale_date":"2019-01-02","quantity":1,"price":999},{"seller_id":2,"product_id":1,"buyer_id":11,"sale_date":"2019-01-03","quantity":1,"price":699},{"seller_id":2,"product_id":3,"buyer_id":12,"sale_date":"2019-01-04","quantity":1,"price":500},{"seller_id":3,"product_id":1,"buyer_id":12,"sale_date":"2019-01-05","quantity":2,"price":699}]}',
+  },
+  { label: 'Single product sold', input: '{"Product":[{"product_id":1,"product_name":"Bead"}],"Sales":[{"product_id":1,"buyer_id":10}]}' },
+  { label: 'Unsold product', input: '{"Product":[{"product_id":1,"product_name":"Bead"},{"product_id":2,"product_name":"Clip"}],"Sales":[{"product_id":1,"buyer_id":10}]}' },
+  { label: 'Largest tables: twelve sales', input: '{"Product":[{"product_id":1,"product_name":"Bead"},{"product_id":2,"product_name":"Clip"},{"product_id":3,"product_name":"Dart"}],"Sales":[{"product_id":2,"buyer_id":1},{"product_id":3,"buyer_id":2},{"product_id":1,"buyer_id":3},{"product_id":2,"buyer_id":4},{"product_id":3,"buyer_id":5},{"product_id":1,"buyer_id":6},{"product_id":2,"buyer_id":7},{"product_id":3,"buyer_id":8},{"product_id":1,"buyer_id":9},{"product_id":2,"buyer_id":10},{"product_id":3,"buyer_id":11},{"product_id":1,"buyer_id":12}]}' },
+  { label: 'Long run: twelve sales', input: '{"Product":[{"product_id":1,"product_name":"Item 1"},{"product_id":2,"product_name":"Item 2"},{"product_id":3,"product_name":"Item 3"},{"product_id":4,"product_name":"Item 4"}],"Sales":[{"product_id":4,"buyer_id":33},{"product_id":1,"buyer_id":19},{"product_id":1,"buyer_id":35},{"product_id":1,"buyer_id":2},{"product_id":2,"buyer_id":18},{"product_id":4,"buyer_id":7},{"product_id":4,"buyer_id":32},{"product_id":1,"buyer_id":13},{"product_id":1,"buyer_id":36},{"product_id":1,"buyer_id":8},{"product_id":3,"buyer_id":32},{"product_id":2,"buyer_id":14}]}' },
+]
 
 function tableRows(input, name, columns) {
   const rows = input[name]

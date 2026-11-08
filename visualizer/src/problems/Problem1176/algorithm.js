@@ -96,4 +96,8 @@ export const examples = [
   { label: 'Mixed days', input: '{"values":[6,1,4,4,2,7,1],"window":3,"low":10,"high":12}' },
   { label: 'Always inside', input: '{"values":[3,3,3],"window":2,"low":5,"high":9}' },
   { label: 'Single day', input: '{"values":[9,2],"window":1,"low":3,"high":8}' },
+  { label: 'Single value window', input: '{"values":[4],"window":1,"low":4,"high":4}' },
+  { label: 'Window equals length', input: '{"values":[2,7,1],"window":3,"low":0,"high":4}' },
+  { label: 'Equal low and high bounds', input: '{"values":[5,5,5,5],"window":2,"low":5,"high":5}' },
+  { label: 'Long run: 50 values', input: '{"values":[609,156,565,512,68,4,393,643,391,783,922,957,717,93,359,96,156,972,52,989,569,886,15,243,456,820,760,298,283,8,863,600,475,167,674,51,841,315,962,263,358,545,711,562,228,59,650,829,230,508],"window":7,"low":300,"high":700}' },
 ]

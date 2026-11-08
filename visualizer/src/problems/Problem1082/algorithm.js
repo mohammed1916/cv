@@ -38,10 +38,16 @@ export const phases = [
 
 export const inputLabel = 'Object with a Sales table'
 export const complexity = 'O(n) to total the sales and O(s) to compare sellers. The visualizer caps the table at 12 rows.'
-export const examples = [{
-  label: 'Sample',
-  input: '{"Sales":[{"seller_id":1,"product_id":1,"buyer_id":1,"sale_date":"2019-01-02","quantity":2,"price":100},{"seller_id":1,"product_id":2,"buyer_id":2,"sale_date":"2019-02-03","quantity":1,"price":300},{"seller_id":2,"product_id":1,"buyer_id":3,"sale_date":"2019-03-01","quantity":3,"price":250},{"seller_id":2,"product_id":3,"buyer_id":1,"sale_date":"2019-03-05","quantity":1,"price":150},{"seller_id":3,"product_id":2,"buyer_id":4,"sale_date":"2019-03-08","quantity":4,"price":100}]}',
-}]
+export const examples = [
+  {
+    label: 'Sample',
+    input: '{"Sales":[{"seller_id":1,"product_id":1,"buyer_id":1,"sale_date":"2019-01-02","quantity":2,"price":100},{"seller_id":1,"product_id":2,"buyer_id":2,"sale_date":"2019-02-03","quantity":1,"price":300},{"seller_id":2,"product_id":1,"buyer_id":3,"sale_date":"2019-03-01","quantity":3,"price":250},{"seller_id":2,"product_id":3,"buyer_id":1,"sale_date":"2019-03-05","quantity":1,"price":150},{"seller_id":3,"product_id":2,"buyer_id":4,"sale_date":"2019-03-08","quantity":4,"price":100}]}',
+  },
+  { label: 'Single sale', input: '{"Sales":[{"seller_id":1,"product_id":1,"buyer_id":1,"sale_date":"2019-01-02","quantity":2,"price":100}]}' },
+  { label: 'Tie on top total', input: '{"Sales":[{"seller_id":1,"product_id":1,"buyer_id":1,"sale_date":"2019-01-02","quantity":1,"price":100},{"seller_id":2,"product_id":2,"buyer_id":1,"sale_date":"2019-01-03","quantity":1,"price":100}]}' },
+  { label: 'Largest table: twelve sales', input: '{"Sales":[{"seller_id":2,"product_id":1,"buyer_id":1,"sale_date":"2019-01-02","quantity":1,"price":10},{"seller_id":3,"product_id":2,"buyer_id":2,"sale_date":"2019-01-03","quantity":1,"price":20},{"seller_id":1,"product_id":3,"buyer_id":3,"sale_date":"2019-01-04","quantity":1,"price":30},{"seller_id":2,"product_id":4,"buyer_id":4,"sale_date":"2019-01-05","quantity":1,"price":40},{"seller_id":3,"product_id":5,"buyer_id":5,"sale_date":"2019-01-06","quantity":1,"price":50},{"seller_id":1,"product_id":6,"buyer_id":6,"sale_date":"2019-01-07","quantity":1,"price":60},{"seller_id":2,"product_id":7,"buyer_id":7,"sale_date":"2019-01-08","quantity":1,"price":70},{"seller_id":3,"product_id":8,"buyer_id":8,"sale_date":"2019-01-09","quantity":1,"price":80},{"seller_id":1,"product_id":9,"buyer_id":9,"sale_date":"2019-01-10","quantity":1,"price":90},{"seller_id":2,"product_id":10,"buyer_id":10,"sale_date":"2019-01-11","quantity":1,"price":100},{"seller_id":3,"product_id":11,"buyer_id":11,"sale_date":"2019-01-12","quantity":1,"price":110},{"seller_id":1,"product_id":12,"buyer_id":12,"sale_date":"2019-01-13","quantity":1,"price":120}]}' },
+  { label: 'Long run: twelve sales', input: '{"Sales":[{"seller_id":4,"product_id":1,"buyer_id":1,"sale_date":"2019-02-07","quantity":1,"price":417},{"seller_id":1,"product_id":2,"buyer_id":2,"sale_date":"2019-02-12","quantity":1,"price":444},{"seller_id":4,"product_id":3,"buyer_id":3,"sale_date":"2019-02-01","quantity":1,"price":295},{"seller_id":3,"product_id":4,"buyer_id":4,"sale_date":"2019-02-15","quantity":1,"price":327},{"seller_id":2,"product_id":5,"buyer_id":5,"sale_date":"2019-02-05","quantity":1,"price":327},{"seller_id":3,"product_id":6,"buyer_id":6,"sale_date":"2019-02-11","quantity":1,"price":271},{"seller_id":3,"product_id":7,"buyer_id":7,"sale_date":"2019-02-27","quantity":1,"price":135},{"seller_id":3,"product_id":8,"buyer_id":8,"sale_date":"2019-02-15","quantity":1,"price":55},{"seller_id":3,"product_id":9,"buyer_id":9,"sale_date":"2019-02-18","quantity":1,"price":4},{"seller_id":3,"product_id":10,"buyer_id":10,"sale_date":"2019-02-12","quantity":1,"price":57},{"seller_id":3,"product_id":11,"buyer_id":11,"sale_date":"2019-02-08","quantity":1,"price":118},{"seller_id":3,"product_id":12,"buyer_id":12,"sale_date":"2019-02-23","quantity":1,"price":187}]}' },
+]
 
 function tableRows(input, name, columns) {
   const rows = input[name]

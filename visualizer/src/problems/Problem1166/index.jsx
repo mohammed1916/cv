@@ -41,6 +41,10 @@ const definition = {
   complexity: 'O(L) per operation, where L is the path length. The visualization caps the input at 20 operations.',
   examples: [
     { label: 'Example', input: '{"ops":[["create","/a",1],["create","/a/b",2],["get","/a/b"],["create","/x/y",3],["create","/a",4],["get","/q"]]}' },
+    { label: 'Get before any create', input: '{"ops":[["get","/a"]]}' },
+    { label: 'Create a top-level path', input: '{"ops":[["create","/x",5],["get","/x"]]}' },
+    { label: 'Parent must exist first', input: '{"ops":[["create","/p/q/r",1],["create","/p",2],["create","/p/q",3],["create","/p/q/r",4],["get","/p/q/r"]]}' },
+    { label: 'Long run: 20 operations', input: '{"ops":[["get","/a/b/c"],["create","/d/e",66],["create","/a/b/c",36],["get","/a"],["get","/d/e"],["get","/d"],["create","/d",52],["create","/a/b/c",4],["create","/f",79],["create","/f",2],["create","/a/b",26],["create","/d/e",89],["get","/d/e"],["create","/a",73],["create","/a/b",71],["create","/f",40],["get","/a/b/c"],["create","/d/e",52],["get","/a/b"],["create","/d/e",84]]}' },
   ],
 }
 

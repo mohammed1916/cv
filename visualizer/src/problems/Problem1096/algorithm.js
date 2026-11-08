@@ -91,6 +91,10 @@ export const examples = [
   { label: 'Sample', input: '"{x,y}z{w,{p,q}}"' },
   { label: 'Repeated words', input: '"{m,mn}o"' },
   { label: 'Simple alternatives', input: '"ab,{c,d}"' },
+  { label: 'Single letter', input: '"a"' },
+  { label: 'Repeated alternatives collapse', input: '"{a,a}{b,b}"' },
+  { label: 'Twenty characters, 16 words', input: '"{a,b}{c,d}{e,f}{g,h}"' },
+  { label: 'Long run: nested and plain mix', input: '"{p,q{r,s}}t,{u,v}"' },
 ]
 
 const LETTER = /[a-z]/

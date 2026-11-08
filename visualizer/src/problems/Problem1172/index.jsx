@@ -15,6 +15,10 @@ const definition = {
   complexity: 'O(log n) per push and popAtStack with a min heap of stacks that have room. The visualization caps input at 15 operations.',
   examples: [
     { label: 'Example', input: '{"capacity":3,"operations":["push","push","push","push","popAtStack","pop","push","popAtStack","pop","pop"],"arguments":[[4],[6],[8],[9],[1],[],[7],[0],[],[]]}' },
+    { label: 'Pop from empty stacks', input: '{"capacity":1,"operations":["pop"],"arguments":[[]]}' },
+    { label: 'Single push then pop', input: '{"capacity":2,"operations":["push","pop"],"arguments":[[7],[]]}' },
+    { label: 'Index beyond the stacks', input: '{"capacity":1,"operations":["popAtStack"],"arguments":[[5]]}' },
+    { label: 'Long run: 15 operations', input: '{"capacity":3,"operations":["popAtStack","push","push","push","pop","push","push","push","push","popAtStack","pop","pop","push","popAtStack","push"],"arguments":[[4],[25],[12],[10],[],[13],[1],[23],[28],[3],[],[],[16],[2],[10]]}' },
   ],
 }
 

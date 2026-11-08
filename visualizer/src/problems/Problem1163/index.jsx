@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"s":"leetcode"}' },
     { label: 'Repeat', input: '{"s":"abab"}' },
+    { label: 'Single letter', input: '{"s":"a"}' },
+    { label: 'Alphabet order', input: '{"s":"abcdefghijklmnopqrstuvwxyz"}' },
+    { label: 'Equal counts tie', input: '{"s":"aabb"}' },
+    { label: 'Long run: 40 letters', input: '{"s":"bbaeeaaeecbcedaebadbdbcebeaabebadcbaeacb"}' },
   ],
 }
 

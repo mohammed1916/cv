@@ -18,6 +18,10 @@ const definition = {
     { label: 'Example 1', input: '[3,5,1,6,2,0,8,null,null,7,4]' },
     { label: 'Example 2', input: '[1]' },
     { label: 'Example 3', input: '[0,1,3,null,2]' },
+    { label: 'Two levels', input: '[2,1,3]' },
+    { label: 'Chain of left children', input: '[0,1,null,2,null,3]' },
+    { label: 'Largest value as root', input: '[99]' },
+    { label: 'Long run: 15 nodes', input: '[84,34,29,40,80,78,16,30,83,3,54,38,0,75,81]' },
   ],
 }
 

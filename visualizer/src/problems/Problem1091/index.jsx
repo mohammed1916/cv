@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"grid":[[0,1],[1,0]]}' },
     { label: 'Example 2', input: '{"grid":[[0,0,0],[1,1,0],[1,1,0]]}' },
+    { label: 'Single open cell', input: '{"grid":[[0]]}' },
+    { label: 'Blocked start, no path', input: '{"grid":[[1,0],[0,0]]}' },
+    { label: 'Open 2x2 diagonal tie', input: '{"grid":[[0,0],[0,0]]}' },
+    { label: 'Long run: 8x8 with blocks', input: '{"grid":[[0,1,0,0,0,0,0,1],[0,1,0,1,0,0,0,0],[0,0,0,0,0,1,0,0],[1,1,1,0,1,0,0,0],[1,0,0,1,0,0,1,0],[0,0,0,0,1,0,0,0],[1,0,0,0,0,0,0,1],[0,0,0,1,0,0,1,0]]}' },
   ],
 }
 

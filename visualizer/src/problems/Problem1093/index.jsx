@@ -24,6 +24,11 @@ const definition = {
     { label: 'Example 1', input: countsJson([[1, 1], [2, 3], [3, 4]]) },
     { label: 'Single value', input: countsJson([[7, 1]]) },
     { label: 'Odd total', input: countsJson([[5, 2], [9, 1]]) },
+    { label: 'Extreme values 0 and 255', input: countsJson([[0, 1], [255, 2]]) },
+    { label: 'Mode at a high value', input: countsJson([[10, 3], [200, 4]]) },
+    { label: 'Largest single count', input: countsJson([[0, 1], [128, 60], [255, 2]]) },
+    { label: 'Total of 200 samples', input: countsJson([[1, 60], [2, 59], [3, 59], [4, 22]]) },
+    { label: 'Long run: 12 values, 117 samples', input: countsJson([[1, 10], [25, 4], [58, 10], [91, 5], [154, 14], [164, 30], [172, 7], [173, 12], [224, 5], [233, 1], [239, 4], [240, 15]]) },
   ],
 }
 

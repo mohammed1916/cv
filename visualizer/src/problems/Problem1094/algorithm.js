@@ -93,4 +93,8 @@ export const examples = [
   { label: 'Fits with room', input: '{"capacity":4,"trips":[[2,0,3],[2,3,6],[1,1,5]]}' },
   { label: 'Over capacity', input: '{"capacity":2,"trips":[[2,0,3],[2,3,6],[1,1,5]]}' },
   { label: 'Exact fill', input: '{"capacity":2,"trips":[[2,0,4]]}' },
+  { label: 'Single passenger trip', input: '{"capacity":1,"trips":[[1,0,1]]}' },
+  { label: 'Trips touch at a stop', input: '{"capacity":3,"trips":[[3,0,2],[3,2,4]]}' },
+  { label: 'Full capacity over the whole route', input: '{"capacity":10,"trips":[[10,0,20]]}' },
+  { label: 'Long run: 8 trips, capacity 10', input: '{"capacity":10,"trips":[[5,0,20],[3,13,18],[5,6,15],[6,14,20],[4,12,14],[10,18,19],[8,7,16],[3,6,13]]}' },
 ]

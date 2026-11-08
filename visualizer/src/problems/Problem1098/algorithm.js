@@ -45,6 +45,18 @@ export const complexity = 'O(b + o) with one pass over the orders for the window
 export const examples = [{
   label: 'Sample',
   input: '{"Books":[{"book_id":1,"name":"Atlas","available_from":"2018-01-01"},{"book_id":2,"name":"Blue Notes","available_from":"2019-05-01"},{"book_id":3,"name":"Cedar","available_from":"2019-06-20"},{"book_id":4,"name":"Dune Path","available_from":"2017-03-01"},{"book_id":5,"name":"Clay Pot","available_from":"2018-02-02"}],"Orders":[{"order_id":1,"book_id":1,"quantity":4,"dispatch_date":"2018-08-01"},{"order_id":2,"book_id":1,"quantity":5,"dispatch_date":"2019-02-14"},{"order_id":3,"book_id":2,"quantity":3,"dispatch_date":"2019-01-03"},{"order_id":4,"book_id":4,"quantity":12,"dispatch_date":"2019-05-02"},{"order_id":5,"book_id":4,"quantity":1,"dispatch_date":"2018-06-20"},{"order_id":6,"book_id":3,"quantity":2,"dispatch_date":"2019-06-01"}]}',
+}, {
+  label: 'Single book, one small order',
+  input: '{"Books":[{"book_id":1,"name":"Solo","available_from":"2019-01-01"}],"Orders":[{"order_id":1,"book_id":1,"quantity":1,"dispatch_date":"2019-01-02"}]}',
+}, {
+  label: 'Exactly ten sold is excluded',
+  input: '{"Books":[{"book_id":7,"name":"Ten Sold","available_from":"2018-01-01"},{"book_id":8,"name":"Nine Sold","available_from":"2018-01-01"}],"Orders":[{"order_id":2,"book_id":7,"quantity":10,"dispatch_date":"2019-01-01"},{"order_id":3,"book_id":8,"quantity":9,"dispatch_date":"2019-01-01"}]}',
+}, {
+  label: 'Window and availability edges are inclusive',
+  input: '{"Books":[{"book_id":9,"name":"Edge Dates","available_from":"2019-05-23"},{"book_id":10,"name":"Too Late","available_from":"2019-05-24"}],"Orders":[{"order_id":4,"book_id":9,"quantity":2,"dispatch_date":"2019-06-23"},{"order_id":5,"book_id":10,"quantity":1,"dispatch_date":"2019-06-01"}]}',
+}, {
+  label: 'Long run: 6 books, 12 orders',
+  input: '{"Books":[{"book_id":1,"name":"Book 1","available_from":"2019-04-14"},{"book_id":2,"name":"Book 2","available_from":"2019-03-16"},{"book_id":3,"name":"Book 3","available_from":"2019-04-10"},{"book_id":4,"name":"Book 4","available_from":"2019-03-16"},{"book_id":5,"name":"Book 5","available_from":"2019-02-16"},{"book_id":6,"name":"Book 6","available_from":"2019-01-16"}],"Orders":[{"order_id":1,"book_id":6,"quantity":5,"dispatch_date":"2018-02-14"},{"order_id":2,"book_id":6,"quantity":2,"dispatch_date":"2018-04-11"},{"order_id":3,"book_id":5,"quantity":3,"dispatch_date":"2017-06-17"},{"order_id":4,"book_id":2,"quantity":9,"dispatch_date":"2018-08-11"},{"order_id":5,"book_id":6,"quantity":9,"dispatch_date":"2017-05-14"},{"order_id":6,"book_id":5,"quantity":8,"dispatch_date":"2018-06-13"},{"order_id":7,"book_id":3,"quantity":8,"dispatch_date":"2018-08-15"},{"order_id":8,"book_id":4,"quantity":9,"dispatch_date":"2019-03-12"},{"order_id":9,"book_id":4,"quantity":9,"dispatch_date":"2017-09-12"},{"order_id":10,"book_id":2,"quantity":7,"dispatch_date":"2017-09-18"},{"order_id":11,"book_id":1,"quantity":5,"dispatch_date":"2018-03-10"},{"order_id":12,"book_id":3,"quantity":6,"dispatch_date":"2019-04-14"}]}',
 }]
 
 function tableRows(input, name, columns) {

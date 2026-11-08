@@ -10,6 +10,11 @@ export const complexity = 'O(n * m) time and O(n * m) space for the table. The v
 export const examples = [
   { label: 'Example 1', input: '{"str1":"ploy","str2":"lyr"}' },
   { label: 'Example 2', input: '{"str1":"aaaa","str2":"aa"}' },
+  { label: 'Single letter', input: '{"str1":"a","str2":"a"}' },
+  { label: 'Identical strings', input: '{"str1":"abc","str2":"abc"}' },
+  { label: 'No shared letters', input: '{"str1":"x","str2":"y"}' },
+  { label: 'Longest length 8, reversed', input: '{"str1":"abcdefgh","str2":"hgfedcba"}' },
+  { label: 'Long run: 8 and 7 letters', input: '{"str1":"gycdzuxf","str2":"ltfkyzm"}' },
 ]
 
 export const code = `function shortestCommonSupersequence(str1, str2) {

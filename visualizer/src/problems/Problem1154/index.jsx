@@ -16,6 +16,10 @@ const definition = {
     { label: 'Common year, mid-year', input: '2023-07-04' },
     { label: 'Leap March', input: '2024-03-01' },
     { label: 'Century, no leap day', input: '1900-12-31' },
+    { label: 'Earliest allowed date', input: '1900-01-01' },
+    { label: 'Latest allowed date', input: '2100-12-31' },
+    { label: 'Leap day in a century year', input: '2000-02-29' },
+    { label: 'Long run: day count to 2099', input: '2099-12-31' },
   ],
 }
 

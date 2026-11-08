@@ -38,6 +38,10 @@ const definition = {
     { label: 'Three land cells', input: '[[1,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,1]]' },
     { label: 'Corner land', input: '[[1,0],[0,0]]' },
     { label: 'All water', input: '[[0,0],[0,0]]' },
+    { label: 'Single land cell', input: '[[1]]' },
+    { label: 'Single water cell', input: '[[0]]' },
+    { label: 'Full land grid', input: '[[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1]]' },
+    { label: 'Long run: 6 by 6 grid', input: '[[0,1,0,0,1,1],[0,0,0,1,0,1],[0,1,1,1,0,1],[1,1,0,0,0,1],[1,0,1,1,0,1],[0,1,0,0,1,1]]' },
   ],
 }
 

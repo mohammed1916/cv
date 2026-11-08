@@ -17,6 +17,10 @@ const definition = {
     { label: 'Sample', input: '{"queries":["cbd","zzz","aaaa"],"words":["cc","ab","bbb","abcd"]}' },
     { label: 'Ties', input: '{"queries":["ab"],"words":["bb","ax","c"]}' },
     { label: 'Large query', input: '{"queries":["zzzz","a"],"words":["ccc","bb","aa"]}' },
+    { label: 'Single letter lists', input: '{"queries":["a"],"words":["a"]}' },
+    { label: 'No matching word', input: '{"queries":["zz"],"words":["ab"]}' },
+    { label: 'Largest list sizes', input: '{"queries":["yxmqcvrrnd","riypunvkbn","rynpxmqeem","ffztinhesr","asvsedziso","zbbjilhzec","hbtzszzgli","elqbxzharl","zdpxazhzxc","trcumenzkq","hitpbqxkaz","obkjxustaz","mbxhttpzdf","tidyxilvvz","msmrpzshmz","jwnmijwxdd","mxahsslvyx","lgxvtgyjvv","msjruogsni","yblxohmpwr"],"words":["yywdunsx","lszzxyt","qoxb","xhfyf","fvw","yt","u","pdjx","aq","vkndim","ycn","iiasbq","nala","qcuewz","lpbxqy","lvldgdj","qf","cubvxwq","k","p"]}' },
+    { label: 'Long run: 20 short strings', input: '{"queries":["dca","b","abca","dca","c","ba","daaa","aa","ca","a","c","c","c","dab","cbd","b","a","cd","cd","dc"],"words":["bcb","c","b","dad","dca","d","dad","cc","c","caa","b","aca","bb","a","aab","dcd","cbd","daa","bac","dc"]}' },
   ],
 }
 

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"label":14}' },
     { label: 'Example 2', input: '{"label":26}' },
+    { label: 'Root label 1', input: '{"label":1}' },
+    { label: 'Right child of the root', input: '{"label":3}' },
+    { label: 'Largest label', input: '{"label":1000000}' },
+    { label: 'Long run: label 777777', input: '{"label":777777}' },
   ],
 }
 

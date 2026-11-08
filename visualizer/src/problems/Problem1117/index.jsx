@@ -22,6 +22,10 @@ const definition = {
   examples: [
     { label: "HHOHOH", input: '{"water":"HHOHOH"}' },
     { label: "OHHHOH", input: '{"water":"OHHHOH"}' },
+    { label: "Smallest molecule", input: '{"water":"HHO"}' },
+    { label: "Oxygens together", input: '{"water":"OOHHHH"}' },
+    { label: "Largest water, 60 letters", input: '{"water":"HHOHHOHHOHHOHHOHHOHHOHHOHHOHHOHHOHHOHHOHHOHHOHHOHHOHHOHHOHHO"}' },
+    { label: "Long run: 20 oxygens shuffled", input: '{"water":"HHHHHOHHHHOHOHHOHHHHHOHHHHOHHOOHHHHHHHOHHHOOOHHOOHOHHOHOOHOO"}' },
   ],
 };
 

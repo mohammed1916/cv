@@ -7,7 +7,14 @@ export const phases = [
 
 export const inputLabel = 'JSON object with n (1 to 40 flights) and bookings as [first, last, seats] triples'
 export const complexity = 'O(bookings + n) time and O(n) space: each booking touches two difference slots, then one sweep finishes every flight.'
-export const examples = [{ label: 'Sample', input: '{"n":5,"bookings":[[2,4,10],[1,2,5],[4,5,7]]}' }]
+export const examples = [
+  { label: 'Sample', input: '{"n":5,"bookings":[[2,4,10],[1,2,5],[4,5,7]]}' },
+  { label: 'Single flight', input: '{"n":1,"bookings":[[1,1,5]]}' },
+  { label: 'Same range adds up', input: '{"n":3,"bookings":[[1,3,4],[1,3,4]]}' },
+  { label: 'Adjacent ranges do not overlap', input: '{"n":4,"bookings":[[1,2,7],[3,4,9]]}' },
+  { label: 'Largest seats and last flight', input: '{"n":40,"bookings":[[40,40,1000],[1,40,1000]]}' },
+  { label: 'Long run: 40 flights, 20 bookings', input: '{"n":40,"bookings":[[10,30,169],[28,30,947],[36,36,612],[3,5,374],[39,40,94],[7,36,359],[8,13,938],[34,40,71],[26,28,366],[16,29,53],[21,23,831],[18,37,766],[13,13,226],[31,40,895],[31,31,716],[30,40,175],[17,40,723],[11,18,313],[23,38,250],[25,34,595]]}' },
+]
 
 // Each line of JavaScript is paired with the Python line on the same row.
 const LINES = [

@@ -57,6 +57,10 @@ export const examples = [
   { label: 'Sample', input: '"10.0.0.7"' },
   { label: 'Zero octets', input: '"0.0.0.0"' },
   { label: 'Large octets', input: '"255.1.99.254"' },
+  { label: 'Single digit octets', input: '"1.1.1.1"' },
+  { label: 'Largest possible address', input: '"255.255.255.255"' },
+  { label: 'Zero then one octet', input: '"0.0.0.1"' },
+  { label: 'Long run: 15 characters', input: '"192.168.100.250"' },
 ]
 
 export function parseInput(text) {

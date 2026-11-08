@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"root":[1,2,3,4,5,6,7],"to_delete":[3,5]}' },
     { label: 'Example 2', input: '{"root":[1,2,4,null,3],"to_delete":[3]}' },
+    { label: 'Single node deleted', input: '{"root":[5],"to_delete":[5]}' },
+    { label: 'Nothing deleted', input: '{"root":[2,1,3],"to_delete":[]}' },
+    { label: 'Root and both children deleted', input: '{"root":[1,2,3],"to_delete":[1,2,3]}' },
+    { label: 'Long run: 15 nodes, 6 deletions', input: '{"root":[6,4,3,14,15,12,9,13,8,1,5,7,2,10,11],"to_delete":[4,12,7,2,11,1]}' },
   ],
 }
 

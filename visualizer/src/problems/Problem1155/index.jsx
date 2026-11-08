@@ -15,6 +15,10 @@ const definition = {
     { label: 'Three two-faced dice', input: '[3,2,4]' },
     { label: 'Single die', input: '[1,6,4]' },
     { label: 'Two three-faced dice', input: '[2,3,6]' },
+    { label: 'Single die with one face', input: '[1,1,1]' },
+    { label: 'Target above the maximum sum', input: '[2,3,7]' },
+    { label: 'Largest dice and faces', input: '[8,8,40]' },
+    { label: 'Long run: 8 dice of 6 faces', input: '[8,6,24]' },
   ],
 }
 

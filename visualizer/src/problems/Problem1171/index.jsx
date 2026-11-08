@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"head":[1,2,-3,3,1]}' },
     { label: 'Example 2', input: '{"head":[1,2,3,-3,4]}' },
+    { label: 'Single zero node', input: '{"head":[0]}' },
+    { label: 'Single extreme node', input: '{"head":[-5]}' },
+    { label: 'Equal values', input: '{"head":[2,2,2,2]}' },
+    { label: 'Long run: 12 nodes', input: '{"head":[2,-2,-5,-4,4,-3,5,0,1,-1,-2,-2]}' },
   ],
 }
 

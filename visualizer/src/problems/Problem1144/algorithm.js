@@ -46,6 +46,10 @@ export const examples = [
   { label: 'Sample', input: '[6,2,9,4,7,3]' },
   { label: 'Equal values', input: '[5,5,5,5]' },
   { label: 'Single value', input: '[4]' },
+  { label: 'Descending pair', input: '[8,3]' },
+  { label: 'Repeated values with ties', input: '[7,7,3,3,7,7]' },
+  { label: 'Boundary values 1 and 100', input: '[100,1,100,1,100,1,100,1,100,1,100,1]' },
+  { label: 'Long run: 12 values', input: '[92,26,1,9,36,10,40,14,87,78,81,67]' },
 ]
 
 export function parseInput(text) {

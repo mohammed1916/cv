@@ -95,4 +95,8 @@ export const examples = [
   { label: 'Two queries', input: '{"text":"abcdab","queries":[[0,3,0],[1,5,1]]}' },
   { label: 'Single odd letter', input: '{"text":"aabbc","queries":[[0,4,0]]}' },
   { label: 'Repeated letters', input: '{"text":"zzzz","queries":[[0,3,0],[1,2,0]]}' },
+  { label: 'Single letter, zero k', input: '{"text":"a","queries":[[0,0,0]]}' },
+  { label: 'k at the length limit', input: '{"text":"abcd","queries":[[0,3,4]]}' },
+  { label: 'Repeated letters', input: '{"text":"aabbcc","queries":[[0,5,2],[2,3,1]]}' },
+  { label: 'Long run: 30 letters, 10 queries', input: '{"text":"fbadacacbefdddcbaafbecebebcddf","queries":[[23,26,20],[5,12,4],[14,21,10],[19,19,21],[11,11,23],[10,14,1],[27,28,9],[23,23,10],[21,22,3],[20,25,12]]}' },
 ]

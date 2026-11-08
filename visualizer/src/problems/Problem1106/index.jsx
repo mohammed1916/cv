@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"expression":"!(f)"}' },
     { label: 'Nested', input: '{"expression":"|(&(t,f,t),!(t))"}' },
+    { label: 'Single true', input: '{"expression":"t"}' },
+    { label: 'Both operands false', input: '{"expression":"|(f,f)"}' },
+    { label: 'Long nested expression', input: '{"expression":"|(&(t,t,t,t,t,t,t,t,t,t,t,t,t,t,t),!(f),f)"}' },
+    { label: 'Long run: mixed operators', input: '{"expression":"&(!(&(|(t,f,t),!(|(f,f)))),t,|(f,&(t,f)))"}' },
   ],
 }
 

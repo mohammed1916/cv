@@ -38,10 +38,16 @@ export const phases = [
 
 export const inputLabel = 'Object with Product and Sales tables'
 export const complexity = 'O(n + m) to join and O(n) to check each product date range. The visualizer caps each table at 12 rows.'
-export const examples = [{
-  label: 'Sample',
-  input: '{"Product":[{"product_id":1,"product_name":"Phone X"},{"product_id":2,"product_name":"Tablet Y"},{"product_id":3,"product_name":"Cable Z"},{"product_id":4,"product_name":"Lamp"}],"Sales":[{"product_id":1,"sale_date":"2019-01-05"},{"product_id":1,"sale_date":"2019-03-20"},{"product_id":2,"sale_date":"2019-02-01"},{"product_id":2,"sale_date":"2019-04-10"},{"product_id":4,"sale_date":"2019-03-31"}]}',
-}]
+export const examples = [
+  {
+    label: 'Sample',
+    input: '{"Product":[{"product_id":1,"product_name":"Phone X"},{"product_id":2,"product_name":"Tablet Y"},{"product_id":3,"product_name":"Cable Z"},{"product_id":4,"product_name":"Lamp"}],"Sales":[{"product_id":1,"sale_date":"2019-01-05"},{"product_id":1,"sale_date":"2019-03-20"},{"product_id":2,"sale_date":"2019-02-01"},{"product_id":2,"sale_date":"2019-04-10"},{"product_id":4,"sale_date":"2019-03-31"}]}',
+  },
+  { label: 'Single sale in range', input: '{"Product":[{"product_id":1,"product_name":"Lamp"}],"Sales":[{"product_id":1,"sale_date":"2019-02-15"}]}' },
+  { label: 'Range endpoints count', input: '{"Product":[{"product_id":1,"product_name":"Lamp"},{"product_id":2,"product_name":"Desk"}],"Sales":[{"product_id":1,"sale_date":"2019-01-01"},{"product_id":1,"sale_date":"2019-03-31"},{"product_id":2,"sale_date":"2018-12-31"}]}' },
+  { label: 'Largest tables: twelve sales', input: '{"Product":[{"product_id":1,"product_name":"Lamp"},{"product_id":2,"product_name":"Desk"},{"product_id":3,"product_name":"Chair"}],"Sales":[{"product_id":2,"sale_date":"2019-01-15"},{"product_id":3,"sale_date":"2019-02-15"},{"product_id":1,"sale_date":"2019-03-15"},{"product_id":2,"sale_date":"2019-04-15"},{"product_id":3,"sale_date":"2019-05-15"},{"product_id":1,"sale_date":"2019-06-15"},{"product_id":2,"sale_date":"2019-07-15"},{"product_id":3,"sale_date":"2019-08-15"},{"product_id":1,"sale_date":"2019-09-15"},{"product_id":2,"sale_date":"2019-10-15"},{"product_id":3,"sale_date":"2019-11-15"},{"product_id":1,"sale_date":"2019-12-15"}]}' },
+  { label: 'Long run: twelve sales', input: '{"Product":[{"product_id":1,"product_name":"Item 1"},{"product_id":2,"product_name":"Item 2"},{"product_id":3,"product_name":"Item 3"},{"product_id":4,"product_name":"Item 4"}],"Sales":[{"product_id":3,"sale_date":"2019-12-11"},{"product_id":2,"sale_date":"2019-09-22"},{"product_id":2,"sale_date":"2019-02-07"},{"product_id":2,"sale_date":"2019-12-12"},{"product_id":1,"sale_date":"2019-09-16"},{"product_id":1,"sale_date":"2019-01-21"},{"product_id":1,"sale_date":"2019-03-23"},{"product_id":4,"sale_date":"2019-05-06"},{"product_id":3,"sale_date":"2019-10-07"},{"product_id":4,"sale_date":"2019-12-19"},{"product_id":1,"sale_date":"2019-08-04"},{"product_id":1,"sale_date":"2019-02-06"}]}' },
+]
 
 function tableRows(input, name, columns) {
   const rows = input[name]

@@ -72,6 +72,10 @@ export const examples = [
   { label: 'Sample', input: '{"n":4,"logs":[[30,0,1],[10,2,3],[50,1,2],[70,0,3]]}' },
   { label: 'Isolated person', input: '{"n":3,"logs":[[1,0,1],[2,0,1]]}' },
   { label: 'Two people', input: '{"n":2,"logs":[[9,1,0]]}' },
+  { label: 'Simultaneous logs', input: '{"n":3,"logs":[[5,0,1],[5,1,2]]}' },
+  { label: 'Largest time value', input: '{"n":2,"logs":[[1000000,1,0]]}' },
+  { label: 'Never joins into one group', input: '{"n":4,"logs":[[1,0,1],[2,2,3]]}' },
+  { label: 'Long run: 8 people, 12 logs', input: '{"n":8,"logs":[[25104,7,6],[10991,4,5],[10002,5,6],[5096,1,0],[10369,0,1],[28414,3,5],[23899,3,0],[28137,0,4],[1901,0,5],[3946,1,7],[31890,1,0],[11636,0,1]]}' },
 ]
 
 export function parseInput(text) {

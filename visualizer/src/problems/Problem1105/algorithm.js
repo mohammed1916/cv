@@ -69,6 +69,10 @@ export const examples = [
   { label: 'Sample', input: '{"books":[[2,6],[4,3],[3,5],[5,4],[1,2]],"shelfWidth":8}' },
   { label: 'One shelf', input: '{"books":[[1,2],[1,4],[1,3]],"shelfWidth":10}' },
   { label: 'Every book alone', input: '{"books":[[4,3],[4,5],[4,2]],"shelfWidth":4}' },
+  { label: 'Single book fills a shelf', input: '{"books":[[3,7]],"shelfWidth":3}' },
+  { label: 'Equal books need separate shelves', input: '{"books":[[2,5],[2,5]],"shelfWidth":2}' },
+  { label: 'Widest shelf and tallest book', input: '{"books":[[30,20],[1,1]],"shelfWidth":30}' },
+  { label: 'Long run: 8 books', input: '{"books":[[3,5],[8,8],[10,12],[3,3],[2,15],[9,3],[9,9],[10,15]],"shelfWidth":10}' },
 ]
 
 export function parseInput(text) {

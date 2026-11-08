@@ -23,7 +23,9 @@ const definition = {
   examples: [
     { label: "nums = [2,1,3]", input: '{"nums":[2,1,3]}' },
     { label: "nums = [3,2,1]", input: '{"nums":[3,2,1]}' },
-  ],
+    { label: "Already sorted", input: '{"nums":[1,2,3]}' },
+    { label: "Smallest value last", input: '{"nums":[2,3,1]}' },
+    { label: "Largest value first", input: '{"nums":[3,1,2]}' },  ],
 };
 
 export default function PrintInOrderVisualizer() {

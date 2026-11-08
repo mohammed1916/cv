@@ -147,6 +147,10 @@ export const examples = [
   { label: 'Two groups', input: 'p{q,r}{s,t}z' },
   { label: 'Sorted groups', input: '{x,w}yz{b,a}' },
   { label: 'No braces', input: 'kite' },
+  { label: 'Single letter', input: 'a' },
+  { label: 'Duplicate options collapse', input: '{a,a}b' },
+  { label: '64 expansions at the limit', input: '{a,b}{c,d}{e,f}{g,h}{i,j}{k,l}' },
+  { label: 'Long run: 24 expansions', input: '{m,n,o,p}{q,r,s}{t,u}z' },
 ]
 
 export const phases = [

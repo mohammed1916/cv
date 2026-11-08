@@ -72,6 +72,10 @@ export const examples = [
   { label: 'Sample', input: '{"text":"abcdab","k":3}' },
   { label: 'Repeats', input: '{"text":"aabbcc","k":2}' },
   { label: 'Wide window', input: '{"text":"xyz","k":5}' },
+  { label: 'Single letter', input: '{"text":"a","k":1}' },
+  { label: 'Repeats only, none qualify', input: '{"text":"aaa","k":2}' },
+  { label: 'Whole text as one window', input: '{"text":"abcdefghijklmnop","k":16}' },
+  { label: 'Long run: 16 letters, k = 4', input: '{"text":"hheijeiachfgaaic","k":4}' },
 ]
 
 export function parseInput(text) {

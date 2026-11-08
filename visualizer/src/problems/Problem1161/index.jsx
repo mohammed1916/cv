@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"values":[1,7,0,7,-8,null,null]}' },
     { label: 'Example 2', input: '{"values":[989,null,10250,98693,-89388,null,null,null,-32127]}' },
+    { label: 'Single root', input: '{"values":[0]}' },
+    { label: 'Right child only', input: '{"values":[5,null,-3]}' },
+    { label: 'Extreme values', input: '{"values":[100000,-100000,100000]}' },
+    { label: 'Long run: 15 entries', input: '{"values":[87743,79149,-9827,97988,null,null,98028,null,43607,-35750,null,98294,null,-12386,null]}' },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"values":[5,4,3,2,1],"labels":[1,1,2,2,3],"num_wanted":3,"use_limit":1}' },
     { label: 'Example 2', input: '{"values":[9,8,8,7,6],"labels":[0,0,0,1,1],"num_wanted":3,"use_limit":1}' },
+    { label: 'Single item', input: '{"values":[7],"labels":[0],"num_wanted":1,"use_limit":1}' },
+    { label: 'Equal values tie on label', input: '{"values":[5,5,5,5],"labels":[1,2,1,2],"num_wanted":2,"use_limit":1}' },
+    { label: 'Largest values and labels', input: '{"values":[100,100,100,0],"labels":[20,20,0,20],"num_wanted":2,"use_limit":2}' },
+    { label: 'Long run: 12 items', input: '{"values":[91,12,17,64,52,16,40,45,91,92,63,66],"labels":[2,0,0,0,2,4,2,2,1,4,4,3],"num_wanted":6,"use_limit":2}' },
   ],
 }
 

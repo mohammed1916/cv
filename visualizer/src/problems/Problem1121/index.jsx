@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Possible', input: '{"nums":[2,3,5,7,8,9,11,12],"k":2}' },
     { label: 'Impossible', input: '{"nums":[1,1,1,2,3],"k":2}' },
+    { label: 'Single value', input: '{"nums":[4],"k":1}' },
+    { label: 'Equal values form one run', input: '{"nums":[2,2,2],"k":3}' },
+    { label: 'Largest k fills the list', input: '{"nums":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],"k":16}' },
+    { label: 'Long run: 16 values, k = 3', input: '{"nums":[2,2,2,3,5,6,7,8,9,11,13,13,13,13,13,15],"k":3}' },
   ],
 }
 

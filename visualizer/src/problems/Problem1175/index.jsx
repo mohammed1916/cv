@@ -15,6 +15,10 @@ const definition = {
     { label: 'Seven', input: '7' },
     { label: 'Ten', input: '10' },
     { label: 'One', input: '1' },
+    { label: 'Smallest after one', input: '2' },
+    { label: 'Largest allowed', input: '100' },
+    { label: 'Power of two', input: '64' },
+    { label: 'Near the upper limit: 97', input: '97' },
   ],
 }
 

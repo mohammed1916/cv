@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"tree":[1,2,3,4,5,6,7,8,9,10,11],"x":3}' },
     { label: 'Small tree', input: '{"tree":[1,2,3],"x":1}' },
+    { label: 'Single node', input: '{"tree":[1],"x":1}' },
+    { label: 'Largest value is the right child', input: '{"tree":[2,1,3],"x":3}' },
+    { label: 'Left-leaning chain', input: '{"tree":[3,2,null,1],"x":1}' },
+    { label: 'Long run: 15 nodes', input: '{"tree":[11,1,12,13,14,4,6,8,5,3,7,10,15,9,2],"x":6}' },
   ],
 }
 

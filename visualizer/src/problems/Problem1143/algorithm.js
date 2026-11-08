@@ -45,6 +45,10 @@ export const examples = [
   { label: 'Sample', input: '["stream","taste"]' },
   { label: 'Shared tail', input: '["ocean","lean"]' },
   { label: 'No shared letter', input: '["abc","xyz"]' },
+  { label: 'Identical single letters', input: '["a","a"]' },
+  { label: 'Longest reversed words', input: '["abcdefgh","hgfedcba"]' },
+  { label: 'Repeated letters of different length', input: '["zz","zzz"]' },
+  { label: 'Long run: 8 letter words', input: '["twxkcyhh","xxryjmzu"]' },
 ]
 
 export function parseInput(text) {

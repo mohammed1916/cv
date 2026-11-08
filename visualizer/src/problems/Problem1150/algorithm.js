@@ -57,6 +57,10 @@ export const examples = [
   { label: 'Majority', input: '{"nums":[2,3,3,3,3,7,8],"target":3}' },
   { label: 'Exactly half', input: '{"nums":[1,4,4,6,8,8],"target":4}' },
   { label: 'Absent', input: '{"nums":[1,2,5,9],"target":3}' },
+  { label: 'Single value present', input: '{"nums":[5],"target":5}' },
+  { label: 'Target above the largest value', input: '{"nums":[2,4,6],"target":9}' },
+  { label: 'Negative and zero values', input: '{"nums":[-9,-4,-4,0,0,0,6],"target":0}' },
+  { label: 'Long run: 16 values', input: '{"nums":[1,1,1,1,1,2,2,5,5,6,6,7,8,8,9,9],"target":1}' },
 ]
 
 export function parseInput(text) {

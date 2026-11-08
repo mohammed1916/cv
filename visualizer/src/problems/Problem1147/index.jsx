@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"text":"ghiabcdefhelloadamhelloabcdefghi"}' },
     { label: 'Single letter', input: '{"text":"merchant"}' },
+    { label: 'One letter alone', input: '{"text":"a"}' },
+    { label: 'Repeated letter', input: '{"text":"aaaaaa"}' },
+    { label: 'Repeated block', input: '{"text":"abcabc"}' },
+    { label: 'Long run: 40 letters', input: '{"text":"ljicborqskewchquhvussxmlfuhqnppbcmvgvnab"}' },
   ],
 }
 

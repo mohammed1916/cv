@@ -21,6 +21,9 @@ const definition = {
     { label: 'Mixed tree', input: '[7, 2, 9, null, 4, 1]' },
     { label: 'Single node', input: '[3]' },
     { label: 'Zero-heavy tree', input: '[2, 0, 6, 0, 0, 5, 8]' },
+    { label: 'Root only, zero value', input: '[0]' },
+    { label: 'Equal values', input: '[5, 5, 5]' },
+    { label: 'Long run: 30 entries', input: '[17303,23359,2420,26434,30257,25269,null,29535,12172,24414,7822,1350,1889,null,28925,86,29143,15755,9002,12007,null,7690,663,22796,29070,4185,6756,null,29140,25391]' },
   ],
 }
 

@@ -48,6 +48,18 @@ export const complexity = 'O(n) with a set of (player, day) pairs for the next-d
 export const examples = [{
   label: 'Sample',
   input: '{"Activity":[{"player_id":11,"device_id":5,"event_date":"2018-05-10","games_played":4},{"player_id":11,"device_id":5,"event_date":"2018-05-11","games_played":2},{"player_id":12,"device_id":6,"event_date":"2018-05-11","games_played":3},{"player_id":13,"device_id":7,"event_date":"2019-02-28","games_played":1},{"player_id":14,"device_id":8,"event_date":"2018-05-12","games_played":7},{"player_id":14,"device_id":8,"event_date":"2018-05-13","games_played":2}]}',
+}, {
+  label: 'Single row, no next day',
+  input: '{"Activity":[{"player_id":1,"device_id":1,"event_date":"2020-01-01","games_played":5}]}',
+}, {
+  label: 'Same install date, one retained',
+  input: '{"Activity":[{"player_id":1,"device_id":1,"event_date":"2020-06-01","games_played":2},{"player_id":1,"device_id":1,"event_date":"2020-06-02","games_played":4},{"player_id":2,"device_id":2,"event_date":"2020-06-01","games_played":1}]}',
+}, {
+  label: 'Leap day is the next day',
+  input: '{"Activity":[{"player_id":5,"device_id":3,"event_date":"2020-02-28","games_played":6},{"player_id":5,"device_id":3,"event_date":"2020-02-29","games_played":2}]}',
+}, {
+  label: 'Long run: 12 rows, 4 players',
+  input: '{"Activity":[{"player_id":3,"device_id":1,"event_date":"2020-03-03","games_played":4},{"player_id":1,"device_id":1,"event_date":"2020-03-02","games_played":3},{"player_id":1,"device_id":2,"event_date":"2020-03-03","games_played":8},{"player_id":4,"device_id":2,"event_date":"2020-03-03","games_played":0},{"player_id":4,"device_id":3,"event_date":"2020-03-01","games_played":7},{"player_id":4,"device_id":2,"event_date":"2020-03-04","games_played":3},{"player_id":3,"device_id":3,"event_date":"2020-03-05","games_played":5},{"player_id":2,"device_id":2,"event_date":"2020-03-02","games_played":1},{"player_id":3,"device_id":1,"event_date":"2020-03-01","games_played":5},{"player_id":2,"device_id":3,"event_date":"2020-03-04","games_played":1},{"player_id":4,"device_id":1,"event_date":"2020-03-05","games_played":7},{"player_id":2,"device_id":3,"event_date":"2020-03-01","games_played":1}]}',
 }]
 
 function tableRows(input, name, columns) {

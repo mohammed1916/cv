@@ -17,6 +17,10 @@ const definition = {
     { label: 'Reversed alphabet', input: '{"keyboard":"zyxwvutsrqponmlkjihgfedcba","word":"abca"}' },
     { label: 'Repeats', input: '{"keyboard":"zyxwvutsrqponmlkjihgfedcba","word":"aaa"}' },
     { label: 'Short hop', input: '{"keyboard":"qwertyuiopasdfghjklzxcvbnm","word":"hello"}' },
+    { label: 'Single letter', input: '{"keyboard":"abcdefghijklmnopqrstuvwxyz","word":"a"}' },
+    { label: 'Walk back along reversed keyboard', input: '{"keyboard":"zyxwvutsrqponmlkjihgfedcba","word":"zyx"}' },
+    { label: 'Alternating letters', input: '{"keyboard":"abcdefghijklmnopqrstuvwxyz","word":"abab"}' },
+    { label: 'Long run: 200 letters', input: '{"keyboard":"ufvrapmlyenstwoxczkhgjdibq","word":"quwyrqidjeslgygtwouiegezolrfpnzzopasxiqlfxawwqkvnpilxymzeiagiogasdyzhdptnglwaapzgjdvhrvovvdbnzupqwpouxyjzapmcqurbtcfqlblhtzbpvtbtrwepqyrdentisbblpuqpqaryydrkkrtmphspwqjvqmrhghqffdmsmpdrcizmnnkfssradiu"}' },
   ],
 }
 

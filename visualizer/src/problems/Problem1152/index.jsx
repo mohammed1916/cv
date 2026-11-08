@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"visits":[["ann",1,"home"],["ann",2,"shop"],["ann",3,"cart"],["bo",1,"home"],["bo",2,"shop"],["bo",4,"cart"],["cy",1,"shop"],["cy",2,"home"],["cy",3,"cart"]]}' },
     { label: 'Tie', input: '{"visits":[["a",1,"x"],["a",2,"y"],["a",3,"z"],["b",1,"x"],["b",2,"y"],["b",3,"w"]]}' },
+    { label: 'Minimum visits from one user', input: '{"visits":[["ann",1,"home"],["ann",2,"shop"],["ann",3,"cart"]]}' },
+    { label: 'Equal times for one user', input: '{"visits":[["cy",2,"home"],["cy",2,"shop"],["cy",2,"cart"]]}' },
+    { label: 'Zero and large times', input: '{"visits":[["dan",0,"home"],["dan",1000,"shop"],["dan",1000000,"cart"]]}' },
+    { label: 'Long run: 30 visits', input: '{"visits":[["bo",46,"help"],["cy",57,"shop"],["ann",153,"cart"],["dan",167,"cart"],["cy",19,"news"],["ann",125,"home"],["ann",140,"cart"],["bo",17,"help"],["cy",137,"home"],["dan",7,"cart"],["ann",182,"cart"],["dan",176,"news"],["bo",1,"shop"],["bo",30,"home"],["dan",7,"home"],["eve",176,"help"],["ann",25,"shop"],["eve",24,"news"],["cy",19,"shop"],["eve",33,"home"],["bo",120,"news"],["ann",4,"news"],["cy",65,"shop"],["eve",106,"cart"],["eve",125,"home"],["cy",44,"help"],["ann",37,"cart"],["eve",41,"shop"],["cy",155,"cart"],["dan",194,"news"]]}' },
   ],
 }
 

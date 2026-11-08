@@ -15,6 +15,10 @@ const definition = {
     { label: 'Three words', input: '{"words":["ab","bc","abc"],"chars":"abcc"}' },
     { label: 'Missing copy', input: '{"words":["aa","b"],"chars":"a"}' },
     { label: 'Exact fit', input: '{"words":["xyz","xyzz"],"chars":"xyzy"}' },
+    { label: 'Single letter fits', input: '{"words":["a"],"chars":"a"}' },
+    { label: 'Missing copies give zero', input: '{"words":["aa"],"chars":"a"}' },
+    { label: 'Shared letters across two words', input: '{"words":["aab","b"],"chars":"aaabb"}' },
+    { label: 'Long run: 6 words, 20 letters', input: '{"words":["bddbc","badebe","eaada","cca","cdeec","acdaa"],"chars":"aedcebccecbecbedbacc"}' },
   ],
 }
 

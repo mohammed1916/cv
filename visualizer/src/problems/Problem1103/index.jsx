@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"candies":7,"numPeople":4}' },
     { label: 'Example 2', input: '{"candies":10,"numPeople":3}' },
+    { label: 'Single person takes all', input: '{"candies":5,"numPeople":1}' },
+    { label: 'Fewer candies than people', input: '{"candies":2,"numPeople":5}' },
+    { label: 'Exact final gift', input: '{"candies":10,"numPeople":4}' },
+    { label: 'Largest candies and people', input: '{"candies":100,"numPeople":10}' },
+    { label: 'Long run: 100 candies, 7 people', input: '{"candies":100,"numPeople":7}' },
   ],
 }
 
