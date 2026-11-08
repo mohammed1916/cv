@@ -17,6 +17,10 @@ const definition = {
     { label: 'Equilateral', input: '[6,6,6]' },
     { label: 'Scalene', input: '[5,7,9]' },
     { label: 'None', input: '[3,4,8]' },
+    { label: "Smallest equilateral", input: '[1,1,1]' },
+    { label: "Isosceles", input: '[2,2,3]' },
+    { label: "Largest equilateral", input: '[100,100,100]' },
+    { label: "Degenerate line", input: '[1,2,3]' },
   ],
 }
 

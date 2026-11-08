@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"happiness":[1,2,3],"k":2}' },
     { label: 'Example 2', input: '{"happiness":[2,3,4,5],"k":1}' },
+    { label: 'Single child', input: '{"happiness":[5],"k":1}' },
+    { label: 'Equal happiness', input: '{"happiness":[3,3,3,3],"k":2}' },
+    { label: 'Largest values', input: '{"happiness":[1000,1000,1000,1000,1000,1000,1000,1000],"k":8}' },
+    { label: 'Long run: 8 children', input: '{"happiness":[881,434,175,136,69,134,643,756],"k":4}' },
   ],
 }
 

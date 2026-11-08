@@ -13,6 +13,10 @@ const definition = {
     { label: 'Two pools', input: '{"Heights":[{"id":1,"height":4},{"id":2,"height":1},{"id":3,"height":2},{"id":4,"height":5},{"id":5,"height":0},{"id":6,"height":3},{"id":7,"height":1}]}' },
     { label: 'Shuffled rows', input: '{"Heights":[{"id":3,"height":0},{"id":1,"height":2},{"id":5,"height":3},{"id":2,"height":1},{"id":4,"height":1}]}' },
     { label: 'Nothing pools', input: '{"Heights":[{"id":1,"height":1},{"id":2,"height":3},{"id":3,"height":6},{"id":4,"height":2}]}' },
+    { label: 'Single row', input: '{"Heights":[{"id":1,"height":0}]}' },
+    { label: 'Equal heights', input: '{"Heights":[{"id":1,"height":2},{"id":2,"height":2},{"id":3,"height":2}]}' },
+    { label: 'Tallest walls', input: '{"Heights":[{"id":1,"height":9},{"id":2,"height":0},{"id":3,"height":9}]}' },
+    { label: 'Long run: 24 rows', input: '{"Heights":[{"id":1,"height":0},{"id":2,"height":3},{"id":3,"height":4},{"id":4,"height":3},{"id":5,"height":0},{"id":6,"height":3},{"id":7,"height":2},{"id":8,"height":1},{"id":9,"height":0},{"id":10,"height":5},{"id":11,"height":4},{"id":12,"height":3},{"id":13,"height":0},{"id":14,"height":1},{"id":15,"height":2},{"id":16,"height":1},{"id":17,"height":0},{"id":18,"height":1},{"id":19,"height":2},{"id":20,"height":3},{"id":21,"height":2},{"id":22,"height":5},{"id":23,"height":2},{"id":24,"height":3}]}' },
   ],
 }
 

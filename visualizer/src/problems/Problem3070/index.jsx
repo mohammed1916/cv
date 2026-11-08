@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"grid":[[1,1],[1,1]],"k":2}' },
     { label: 'All zeros', input: '{"grid":[[0,0],[0,0]],"k":0}' },
+    { label: 'Single cell', input: '{"grid":[[5]],"k":0}' },
+    { label: 'Equal values', input: '{"grid":[[3,3],[3,3]],"k":3}' },
+    { label: 'Largest values', input: '{"grid":[[9,9,9,9,9,9],[9,9,9,9,9,9],[9,9,9,9,9,9],[9,9,9,9,9,9],[9,9,9,9,9,9],[9,9,9,9,9,9]],"k":100}' },
+    { label: 'Long run: 6 by 6 grid', input: '{"grid":[[9,2,9,2,5,0],[5,4,9,0,5,8],[9,2,9,8,3,0],[7,2,3,0,3,8],[9,2,3,0,9,4],[7,6,9,8,1,2]],"k":40}' },
   ],
 }
 

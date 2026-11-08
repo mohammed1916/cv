@@ -25,6 +25,10 @@ const definition = {
     { label: 'Pattern inside a longer run', input: '{"stream":"0110101101","pattern":"1011"}' },
     { label: 'Single bit', input: '{"stream":"000001","pattern":"1"}' },
     { label: 'Five bit pattern', input: '{"stream":"1111011","pattern":"11011"}' },
+    { label: "Single bit", input: '{"stream":"1","pattern":"1"}' },
+    { label: "Pattern repeats", input: '{"stream":"10101010","pattern":"10"}' },
+    { label: "Maximum pattern length", input: '{"stream":"000000000000000000000000110100111010111111111111111111111111","pattern":"110100111010"}' },
+    { label: "Long run: 60 bits", input: '{"stream":"110101001101011010011110100011100111011011000000110001110011","pattern":"11101"}' },
   ],
 }
 

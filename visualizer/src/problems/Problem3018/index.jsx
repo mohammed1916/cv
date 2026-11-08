@@ -26,6 +26,10 @@ const definition = {
     { label: "Both ends help", input: '{"nums":[1,3,2,5,4],"queries":[2,3,1,4]}' },
     { label: "Blocked early", input: '{"nums":[2,1,3],"queries":[5,1]}' },
     { label: "Full run", input: '{"nums":[4,2,6,1,5],"queries":[1,2,4,3]}' },
+    { label: "Single pair", input: '{"nums":[1],"queries":[1]}' },
+    { label: "Equal values", input: '{"nums":[3,3,3],"queries":[3,3]}' },
+    { label: "Largest values", input: '{"nums":[9,9,9,9,9,9,9,9],"queries":[9,9,9,9,9,9,9,9]}' },
+    { label: "Long run: 8 each", input: '{"nums":[1,3,6,4,6,6,2,9],"queries":[4,6,7,5,8,2,2,7]}' },
   ],
 };
 

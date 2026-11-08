@@ -21,6 +21,10 @@ const definition = {
   examples: [
     { label: "Triplet found", input: "[5, 2, 8, 1, 6, 9]" },
     { label: "No increasing triplet", input: "[9, 8, 7]" },
+    { label: 'Three values', input: '[1,2,3]' },
+    { label: 'Equal values', input: '[4,4,4]' },
+    { label: 'Descending', input: '[100,90,80,70]' },
+    { label: 'Long run: 20 values', input: '[83,25,81,21,48,18,31,18,8,92,36,46,14,98,20,20,62,22,85,63]' },
   ],
 };
 

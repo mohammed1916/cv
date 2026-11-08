@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[1,2,2,3,1,4]' },
     { label: 'All distinct', input: '[1,2,3,4,5]' },
+    { label: "Single value", input: '[5]' },
+    { label: "Equal values at max length", input: '[3,3,3,3,3,3,3,3,3,3,3,3]' },
+    { label: "Alternating extremes", input: '[1,5,1,5,1,5,1,5,1,5,1,5]' },
+    { label: "Long run: 12 values", input: '[5,5,2,3,3,5,5,4,5,1,4,3]' },
   ],
 }
 

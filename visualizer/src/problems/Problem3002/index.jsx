@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums1":[1,2,1,2],"nums2":[1,1,1,1]}' },
     { label: 'Example 2', input: '{"nums1":[1,2,3,4,5,6],"nums2":[2,3,2,3,2,3]}' },
+    { label: "Smallest pair", input: '{"nums1":[1,1],"nums2":[1,1]}' },
+    { label: "Equal arrays", input: '{"nums1":[9,9,9,9],"nums2":[9,9,9,9]}' },
+    { label: "Swapped halves tie", input: '{"nums1":[2,2,1,1],"nums2":[1,1,2,2]}' },
+    { label: "Long run: length 10", input: '{"nums1":[9,6,7,3,3,1,9,2,9,7],"nums2":[4,9,8,5,6,6,1,8,8,2]}' },
   ],
 }
 

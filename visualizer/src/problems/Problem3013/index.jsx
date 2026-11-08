@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[1,3,2,6,4,2],"k":3,"dist":3}' },
     { label: 'Adjacent', input: '{"nums":[5,1,9,1],"k":3,"dist":1}' },
+    { label: "Smallest window", input: '{"nums":[1,1,1],"k":3,"dist":1}' },
+    { label: "Equal values, exact distance", input: '{"nums":[2,2,2,2],"k":4,"dist":2}' },
+    { label: "Largest values", input: '{"nums":[20,20,20,20,20],"k":5,"dist":3}' },
+    { label: "Long run: 12 numbers", input: '{"nums":[9,20,14,15,6,5,9,10,18,19,13,12],"k":6,"dist":4}' },
   ],
 }
 

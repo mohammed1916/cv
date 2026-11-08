@@ -15,6 +15,10 @@ const definition = {
   complexity: 'O(n * L^3) for small inputs, where n is the array size and L the string length. The visualization caps arr at 8 strings of 6 letters.',
   examples: [
     { label: 'Example 1', input: '{"arr":["cab","ad","bad","c"]}' },
+    { label: 'Single word', input: '{"arr":["a"]}' },
+    { label: 'Equal words', input: '{"arr":["ab","ab","ab"]}' },
+    { label: 'Longest words', input: '{"arr":["abcdef","fedcba","aaaaaa"]}' },
+    { label: 'Long run: 8 words', input: '{"arr":["b","cdabcd","dabcd","abcd","bcd","cd","d","abcdab"]}' },
   ],
 }
 

@@ -16,6 +16,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[2,3,-5]}' },
     { label: 'Example 2', input: '{"nums":[3,2,-3,-4]}' },
+    { label: 'Single step', input: '{"nums":[5]}' },
+    { label: 'Repeated returns', input: '{"nums":[1,-1,1,-1]}' },
+    { label: 'Largest steps: 30 steps', input: '{"nums":[10,-10,10,-10,10,-10,10,-10,10,-10,10,-10,10,-10,10,-10,10,-10,10,-10,10,-10,10,-10,10,-10,10,-10,10,-10]}' },
+    { label: 'Never returns', input: '{"nums":[1,2,3]}' },
+    { label: 'Long run: 30 steps', input: '{"nums":[6,-4,2,7,-1,5,9,-6,7,-4,-8,-8,-8,4,1,2,9,2,-3,-5,9,7,-5,0,-2,5,4,-4,3,-7]}' },
   ],
 }
 

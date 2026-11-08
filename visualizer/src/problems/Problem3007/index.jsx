@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"k":12,"x":2}' },
     { label: 'Example 2', input: '{"k":20,"x":3}' },
+    { label: "Smallest values", input: '{"k":1,"x":1}' },
+    { label: "Equal k and x", input: '{"k":8,"x":8}' },
+    { label: "Largest values", input: '{"k":200,"x":8}' },
+    { label: "Long run: k 200, x 3", input: '{"k":200,"x":3}' },
   ],
 }
 

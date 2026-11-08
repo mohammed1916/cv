@@ -25,6 +25,10 @@ const definition = {
     { label: "Root subtree is one colour", input: '{"colors":[3,3,3,3],"edges":[[0,1],[1,2],[1,3]]}' },
     { label: "Inner subtree wins", input: '{"colors":[2,2,2,1,2,2],"edges":[[0,1],[0,2],[1,3],[1,4],[2,5]]}' },
     { label: "Single node tree", input: '{"colors":[5],"edges":[]}' },
+    { label: "Two nodes, same colour", input: '{"colors":[2,2],"edges":[[0,1]]}' },
+    { label: "Path with no inner match", input: '{"colors":[1,2,3],"edges":[[0,1],[1,2]]}' },
+    { label: "Ten nodes, all colour nine", input: '{"colors":[9,9,9,9,9,9,9,9,9,9],"edges":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9]]}' },
+    { label: "Long run: 10 nodes", input: '{"colors":[7,3,9,6,8,4,2,6,6,6],"edges":[[0,1],[1,2],[2,3],[0,4],[2,5],[5,6],[2,7],[4,8],[7,9]]}' },
   ],
 };
 

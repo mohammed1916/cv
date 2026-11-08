@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"words":["x","xy","xyx","xyxy"]}' },
     { label: 'Example 2', input: '{"words":["bo","bobo","ob","bob"]}' },
+    { label: 'Single word', input: '{"words":["x"]}' },
+    { label: 'Equal words', input: '{"words":["xy","yx","xy"]}' },
+    { label: 'Six-letter words', input: '{"words":["abcdef","abcabc","ababab"]}' },
+    { label: 'Long run: 8 words', input: '{"words":["x","yxyxyx","xyxyx","yxyx","xyx","yx","x","yxyxyx"]}' },
   ],
 }
 

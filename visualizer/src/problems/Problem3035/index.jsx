@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '["xxyz","xx","yyy"]' },
     { label: 'Example 2', input: '["pq","rrs","tt"]' },
+    { label: 'Single word', input: '["a"]' },
+    { label: 'Equal counts', input: '["aa","bb","cc"]' },
+    { label: 'Six longest words', input: '["abcdef","fedcba","aabbcc","zzzzzz","qwerty","mnbvcx"]' },
+    { label: 'Long run: 6 words', input: '["c","abbbbc","acabb","bbcb","bcb","cb"]' },
   ],
 }
 

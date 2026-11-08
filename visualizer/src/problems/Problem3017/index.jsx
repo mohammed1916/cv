@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":7,"x":2,"y":6}' },
     { label: 'Example 2', input: '{"n":6,"x":1,"y":4}' },
+    { label: "Two houses", input: '{"n":2,"x":1,"y":2}' },
+    { label: "Street ends", input: '{"n":12,"x":1,"y":12}' },
+    { label: "Same house", input: '{"n":8,"x":4,"y":4}' },
+    { label: "Long run: 12 houses", input: '{"n":12,"x":5,"y":9}' },
   ],
 }
 

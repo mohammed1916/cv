@@ -16,6 +16,10 @@ const definition = {
     { label: 'Overlap', input: '[[1,1,3,3],[2,2,4,4]]' },
     { label: 'Wide strip', input: '[[0,0,10,2],[1,0,9,10]]' },
     { label: 'Disjoint', input: '[[1,1,2,2],[3,3,4,4]]' },
+    { label: 'Touching edges', input: '[[0,0,2,2],[2,0,4,2]]' },
+    { label: 'Identical rectangles', input: '[[1,1,5,5],[1,1,5,5]]' },
+    { label: 'Full canvas', input: '[[0,0,20,20],[0,0,20,20],[5,5,6,6]]' },
+    { label: 'Long run: 8 rectangles', input: '[[15,1,18,7],[13,7,16,19],[12,8,16,11],[15,12,18,19],[4,12,18,14],[9,9,16,17],[9,18,18,19],[15,5,18,9]]' },
   ],
 }
 

@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[1,2,3,12]' },
     { label: 'Example 2', input: '[10,3,1,1]' },
+    { label: "Equal values", input: '[7,7,7]' },
+    { label: "Boundary values", input: '[1,50,1]' },
+    { label: "Long run: 12 values", input: '[15,50,34,27,27,2,36,1,43,13,9,49]' },
   ],
 }
 

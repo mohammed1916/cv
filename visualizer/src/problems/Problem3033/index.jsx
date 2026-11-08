@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"matrix":[[1,2,-1],[4,-1,6],[7,8,9]]}' },
     { label: 'Example 2', input: '{"matrix":[[3,-1],[5,2]]}' },
+    { label: 'Single cell', input: '{"matrix":[[4]]}' },
+    { label: 'Tie for column maximum', input: '{"matrix":[[-1,4,9],[7,4,-1]]}' },
+    { label: 'Largest value 50', input: '{"matrix":[[50,-1,0,-1,50,-1],[-1,50,-1,-1,-1,50],[0,-1,50,50,-1,-1],[-1,-1,-1,-1,0,-1],[50,50,-1,-1,-1,-1],[-1,-1,50,0,50,-1]]}' },
+    { label: 'Long run: 6 by 6 grid', input: '{"matrix":[[33,46,31,0,37,26],[47,12,37,42,39,12],[5,6,23,36,33,34],[27,12,49,46,7,16],[1,42,27,32,25,34],[11,24,37,50,11,40]]}' },
   ],
 }
 

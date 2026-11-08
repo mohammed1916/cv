@@ -147,4 +147,8 @@ export function buildTrace(input) {
 export const sampleInputs = [
   { label: "Example 1", input: { nums: [6, 2, 2, 5, 9, 9], pattern: [-1, 0] } },
   { label: "Example 2", input: { nums: [1, 2, 1, 5, 5, 4, 8, 3], pattern: [1, -1] } },
+  { label: "Single pair", input: {"nums":[1,2],"pattern":[1]} },
+  { label: "Equal values", input: {"nums":[4,4,4,4],"pattern":[0,0]} },
+  { label: "Largest values", input: {"nums":[1000000000,1,1000000000,1000000000],"pattern":[1,-1]} },
+  { label: "Long run: 100 values", input: {"nums":[44,45,4,11,10,1,12,23,14,17,50,19,28,5,12,49,44,45,16,11,44,19,48,47,46,49,46,23,12,45,50,35,8,7,32,47,48,21,12,11,14,43,32,39,32,9,14,9,36,11,40,37,18,3,38,37,42,37,2,7,12,15,22,23,14,25,20,1,12,5,20,37,10,41,2,33,48,13,44,33,8,17,50,31,40,27,6,43,2,5,12,1,22,45,4,21,48,33,44,13],"pattern":[1,0,-1]} },
 ];

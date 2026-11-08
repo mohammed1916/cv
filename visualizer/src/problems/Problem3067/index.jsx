@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"edges":[[0,1,2],[0,2,3],[2,3,4]],"signalSpeed":2}' },
     { label: 'Example 2', input: '{"edges":[[0,1,4],[1,2,6],[1,3,5],[3,4,3]],"signalSpeed":2}' },
+    { label: 'Single edge', input: '{"edges":[[0,1,5]],"signalSpeed":1}' },
+    { label: 'Equal weights', input: '{"edges":[[0,1,2],[1,2,2],[2,3,2]],"signalSpeed":2}' },
+    { label: 'Largest weights', input: '{"edges":[[0,1,20],[1,2,20],[2,3,20],[3,4,20]],"signalSpeed":10}' },
+    { label: 'Long run: 8 edges', input: '{"edges":[[0,1,10],[0,2,12],[0,3,10],[2,4,8],[0,5,10],[0,6,20],[1,7,6],[2,8,20]],"signalSpeed":3}' },
   ],
 }
 

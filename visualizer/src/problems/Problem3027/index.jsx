@@ -18,6 +18,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[[3,1],[1,4],[5,2],[2,2]]' },
     { label: 'Example 2', input: '[[0,5],[4,4],[2,0]]' },
+    { label: 'Two points', input: '[[1,2],[3,0]]' },
+    { label: 'Shared column', input: '[[2,5],[2,1],[2,3]]' },
+    { label: 'Shared row', input: '[[0,4],[3,4],[6,4]]' },
+    { label: 'Corners and centre', input: '[[0,50],[50,0],[0,0],[50,50],[25,25]]' },
+    { label: 'Long run: 12 points', input: '[[7,14],[37,17],[21,38],[48,42],[0,13],[44,1],[20,18],[22,26],[11,49],[13,28],[0,10],[38,27]]' },
   ],
 }
 

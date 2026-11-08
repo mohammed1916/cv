@@ -21,6 +21,10 @@ const definition = {
     { label: "Mixed counts", input: "[3, 1, 3, 2, 1, 3]" },
     { label: "Single node", input: "[7]" },
     { label: "Long run", input: "[0, 0, 0, 0, 5, 5]" },
+    { label: 'Two equal values', input: '[4,4]' },
+    { label: 'All equal', input: '[9,9,9,9,9]' },
+    { label: 'Alternating 16 values', input: '[0,9,0,9,0,9,0,9,0,9,0,9,0,9,0,9]' },
+    { label: 'Long run: 16 values', input: '[6,7,6,5,6,9,0,7,6,3,2,5,4,9,4,1]' },
   ],
 };
 

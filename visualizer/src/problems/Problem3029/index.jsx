@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 1', input: '{"word":"xyxzxy","k":2}' },
     { label: 'Example 2', input: '{"word":"mnmnm","k":1}' },
     { label: 'Example 3', input: '{"word":"aabbaab","k":3}' },
+    { label: 'Single letter', input: '{"word":"a","k":1}' },
+    { label: 'Equal letters', input: '{"word":"aaaa","k":2}' },
+    { label: 'k equals word length', input: '{"word":"abcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcde","k":50}' },
+    { label: 'Long run: 50 letters', input: '{"word":"ccccabbabccbcabcacbccacaaaccabcbaaaccbcbbcbacbcbac","k":25}' },
   ],
 }
 

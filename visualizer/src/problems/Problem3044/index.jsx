@@ -16,6 +16,10 @@ const definition = {
     { label: 'Example 1', input: '[[2,3],[5,1]]' },
     { label: 'Example 2', input: '[[1,1,3],[7,9,2]]' },
     { label: 'Example 3', input: '[[7,3,9],[1,4,5]]' },
+    { label: 'Single cell', input: '[[5]]' },
+    { label: 'Equal values', input: '[[2,2],[2,2]]' },
+    { label: 'Largest digits', input: '[[9,9,9,9],[9,0,0,9],[9,0,0,9],[9,9,9,9]]' },
+    { label: 'Long run: 4 by 4 grid', input: '[[3,4,3,8],[5,2,5,4],[5,4,3,8],[9,6,9,2]]' },
   ],
 }
 

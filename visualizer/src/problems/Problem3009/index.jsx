@@ -25,6 +25,10 @@ const definition = {
     { label: "Zigzag", input: "[2,5,1,4,3]" },
     { label: "Two points", input: "[7,4]" },
     { label: "Tall peaks", input: "[1,6,2,6,1]" },
+    { label: "Two points at the extremes", input: '[0,30]' },
+    { label: "Repeated peaks", input: '[3,0,3,0,3]' },
+    { label: "Maximum zigzag, 12 points", input: '[0,30,0,30,0,30,0,30,0,30,0,30]' },
+    { label: "Long run: 12 points", input: '[21,6,17,14,3,15,20,10,24,15,20,8]' },
   ],
 };
 

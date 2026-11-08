@@ -25,6 +25,10 @@ const definition = {
     { label: 'Longer pattern', input: '{"stream":"101101110010","pattern":"110010"}' },
     { label: 'Long run of zeros', input: '{"stream":"0000000001","pattern":"0001"}' },
     { label: 'Repeated prefix', input: '{"stream":"10101010110","pattern":"101011"}' },
+    { label: 'Single bit', input: '{"stream":"1","pattern":"1"}' },
+    { label: 'Overlapping matches', input: '{"stream":"00000","pattern":"00"}' },
+    { label: 'Longest pattern', input: '{"stream":"000000000000000000000000000000000000000000000000101101101101","pattern":"101101101101"}' },
+    { label: 'Long run: 60 bits', input: '{"stream":"010101010101010101010101010101010101010101010101010101011011","pattern":"1011"}' },
   ],
 }
 

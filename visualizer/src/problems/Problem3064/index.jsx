@@ -21,6 +21,10 @@ const definition = {
     { label: "Bits 0, 2 and 5", input: "37" },
     { label: "Single bit", input: "1024" },
     { label: "All thirty bits", input: "1073741823" },
+    { label: 'Smallest value', input: '1' },
+    { label: 'Alternating bits', input: '21845' },
+    { label: 'Largest value 2^30 - 2', input: '1073741822' },
+    { label: 'Long run: 30-bit value', input: '987654321' },
   ],
 };
 

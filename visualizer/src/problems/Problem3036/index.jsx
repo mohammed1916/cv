@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"nums":[5,1,4,4,0,3,-2,1],"pattern":[-1,1]}' },
     { label: 'Run', input: '{"nums":[1,2,3,4,5],"pattern":[1,1]}' },
+    { label: 'Two values', input: '{"nums":[1,2],"pattern":[1]}' },
+    { label: 'Equal values', input: '{"nums":[3,3,3,3],"pattern":[0,0]}' },
+    { label: 'Extreme values', input: '{"nums":[5,-5,5,-5,5,-5,5,-5,5,-5,5,-5],"pattern":[-1,-1,1]}' },
+    { label: 'Long run: 12 values', input: '{"nums":[2,3,5,4,-3,5,-5,-5,1,-4,-1,-2],"pattern":[1,-1]}' },
   ],
 }
 

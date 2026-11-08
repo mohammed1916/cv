@@ -20,6 +20,10 @@ const definition = {
     { label: "Odd team wins", input: "[4, 9, 2, 7, 6, 5]" },
     { label: "Even team wins", input: "[8, 1, 4, 3, 6, 5, 2, 7]" },
     { label: "Tie", input: "[2, 5, 4, 3]" },
+    { label: 'Equal values', input: '[9,9,9,9]' },
+    { label: 'Extreme values', input: '[100,1,100,1,100,1]' },
+    { label: 'Smallest pair', input: '[7,7]' },
+    { label: 'Long run: 12 values', input: '[32,49,58,99,84,69,78,7,24,97,82,99]' },
   ],
 };
 

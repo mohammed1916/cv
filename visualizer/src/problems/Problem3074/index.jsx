@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"apple":[1,3,2],"capacity":[4,3,1,5,2]}' },
     { label: 'Example 2', input: '{"apple":[5,5,5],"capacity":[2,4,2,7]}' },
+    { label: 'Single apple', input: '{"apple":[1],"capacity":[1]}' },
+    { label: 'Equal boxes', input: '{"apple":[2,2],"capacity":[2,2,2]}' },
+    { label: 'Largest values', input: '{"apple":[10,10,10,10,10,10],"capacity":[10,10,10,10,10,10]}' },
+    { label: 'Long run: 6 apples', input: '{"apple":[4,5,6,1,6,3],"capacity":[10,10,10,10,10,10]}' },
   ],
 }
 

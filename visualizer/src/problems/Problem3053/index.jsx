@@ -7,7 +7,12 @@ const complexity = 'O(t) for t rows, with a constant number of comparisons per r
 const examples = [{
   label: 'Sample',
   input: '{"Triangles":[{"A":7,"B":7,"C":7},{"A":6,"B":8,"C":8},{"A":4,"B":9,"C":6},{"A":2,"B":3,"C":9},{"A":6,"B":6,"C":12}]}',
-}]
+},
+  { label: 'Single triangle', input: '{"Triangles":[{"A":2,"B":3,"C":4}]}' },
+  { label: 'Equal sides', input: '{"Triangles":[{"A":3,"B":3,"C":3}]}' },
+  { label: 'Degenerate sides', input: '{"Triangles":[{"A":1,"B":2,"C":3}]}' },
+  { label: 'Long run: 12 triangles', input: '{"Triangles":[{"A":17,"B":2,"C":19},{"A":8,"B":9,"C":14},{"A":3,"B":4,"C":9},{"A":10,"B":3,"C":4},{"A":17,"B":2,"C":15},{"A":8,"B":5,"C":2},{"A":7,"B":20,"C":1},{"A":18,"B":15,"C":20},{"A":1,"B":2,"C":11},{"A":12,"B":17,"C":14},{"A":3,"B":16,"C":17},{"A":14,"B":7,"C":20}]}' },
+]
 
 const definition = {
   number: meta.number,

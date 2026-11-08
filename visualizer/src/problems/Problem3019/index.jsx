@@ -19,6 +19,10 @@ const definition = {
   examples: [
     { label: "Case flips only", input: "{\"s\": \"xXyYzz\"}" },
     { label: "Alternating case", input: "{\"s\": \"MmMnNn\"}" },
+    { label: "Single letter", input: '{"s":"a"}' },
+    { label: "Edge letters in both cases", input: '{"s":"Az"}' },
+    { label: "Maximum length, mixed case", input: '{"s":"aAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaA"}' },
+    { label: "Long run: 100 letters", input: '{"s":"zVLTrJKsveGYnnNHRhWtjReEveZhZlPKhfYEksbvlNvnXbrCKulHEAxBiWPzsMTiuMMdBNSEDchnUjilZqwgHtPjhfPuHTTWZZUU"}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
     { label: 'Example 1', input: '{"nums":[1,4,3,1]}' },
     { label: 'Equal minima', input: '{"nums":[5,5,5,10,5]}' },
     { label: 'Remainder', input: '{"nums":[2,3,4]}' },
+    { label: "Single value", input: '{"nums":[1]}' },
+    { label: "Largest values", input: '{"nums":[30,30]}' },
+    { label: "Eight ones", input: '{"nums":[1,1,1,1,1,1,1,1]}' },
+    { label: "Long run: 8 values", input: '{"nums":[22,22,24,5,9,27,28,15]}' },
   ],
 }
 

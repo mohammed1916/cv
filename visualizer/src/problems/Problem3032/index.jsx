@@ -25,6 +25,10 @@ const definition = {
     { label: 'Small range', input: '{"a":1,"b":20}' },
     { label: 'Around one hundred', input: '{"a":100,"b":120}' },
     { label: 'Single digits', input: '{"a":0,"b":9}' },
+    { label: 'Single number', input: '{"a":0,"b":0}' },
+    { label: 'Equal bounds', input: '{"a":5,"b":5}' },
+    { label: 'Full range', input: '{"a":0,"b":99999}' },
+    { label: 'Long run: 12345 to 98765', input: '{"a":12345,"b":98765}' },
   ],
 }
 

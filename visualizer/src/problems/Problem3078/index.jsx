@@ -25,6 +25,10 @@ const definition = {
     { label: "Repeated pair", input: "{\"board\":[[1,2,3],[4,4,5]],\"pattern\":[\"aa\"]}" },
     { label: "Letter and literal", input: "{\"board\":[[7,1,7,2],[3,1,4,1]],\"pattern\":[\"a1a\"]}" },
     { label: "No match", input: "{\"board\":[[1,2],[3,4]],\"pattern\":[\"aa\"]}" },
+    { label: 'Single cell', input: '{"board":[[1]],"pattern":["1"]}' },
+    { label: 'Equal digits', input: '{"board":[[5,5],[5,5]],"pattern":["55"]}' },
+    { label: 'Largest board', input: '{"board":[[9,9,9,9,9,9],[9,9,9,9,9,9],[9,9,9,9,9,9],[9,9,9,9,9,9],[9,9,9,9,9,9],[9,9,9,9,9,9]],"pattern":["99"]}' },
+    { label: 'Long run: 6 by 6 board', input: '{"board":[[7,8,1,6,7,4],[1,2,5,4,7,8],[1,6,9,8,7,2],[1,8,5,2,9,8],[9,0,1,6,3,2],[7,6,5,6,5,4]],"pattern":["ab","1b"]}' },
   ],
 };
 

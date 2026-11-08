@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Rook captures', input: '{"a":5,"b":3,"c":3,"d":4,"e":5,"f":2}' },
     { label: 'Two moves', input: '{"a":1,"b":1,"c":8,"d":8,"e":2,"f":3}' },
+    { label: "Pieces in one corner", input: '{"a":1,"b":1,"c":2,"d":3,"e":1,"f":2}' },
+    { label: "Opposite corners", input: '{"a":8,"b":8,"c":1,"d":1,"e":8,"f":1}' },
+    { label: "Board edge", input: '{"a":1,"b":8,"c":8,"d":1,"e":4,"f":4}' },
+    { label: "Rook and queen on one file", input: '{"a":4,"b":4,"c":4,"d":7,"e":4,"f":1}' },
   ],
 }
 

@@ -20,6 +20,10 @@ const definition = {
   examples: [
     { label: "Example 1", input: '{"nums":[4,12,8,1,9],"k":8}' },
     { label: "Example 2", input: '{"nums":[5,6,7,2],"k":6}' },
+    { label: 'Single value', input: '{"nums":[5],"k":5}' },
+    { label: 'Equal values', input: '{"nums":[3,3,3],"k":3}' },
+    { label: 'Zero and negatives', input: '{"nums":[-4,0,9],"k":0}' },
+    { label: 'Long run: 50 values', input: '{"nums":[-15,-9,-18,14,-16,14,-9,8,4,-8,-8,1,13,11,4,-15,4,-8,16,9,13,-13,15,-15,-14,14,6,20,-7,-10,-14,18,19,1,-12,13,-19,-7,-20,12,17,-10,-10,-9,-19,6,-6,6,-15,6],"k":7}' },
   ],
 };
 

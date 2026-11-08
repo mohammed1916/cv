@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '"aabcbbca"' },
     { label: 'Example 2', input: '"abcd"' },
+    { label: 'Single letter', input: '"a"' },
+    { label: 'Equal counts', input: '"abab"' },
+    { label: 'Longest string', input: '"abcdefghijklmnopqrst"' },
+    { label: 'Long run: 20 letters', input: '"cdcbcaaacbbdaabdbdca"' },
   ],
 }
 

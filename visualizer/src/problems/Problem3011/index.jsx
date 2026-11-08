@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[8,4,2,30,15]}' },
     { label: 'Example 2', input: '{"nums":[3,16,8,4,2]}' },
+    { label: "Single value", input: '{"nums":[1]}' },
+    { label: "Largest values", input: '{"nums":[255,255]}' },
+    { label: "Powers of two", input: '{"nums":[128,64,32,16,8,4,2,1]}' },
+    { label: "Long run: 20 values", input: '{"nums":[184,55,209,120,49,30,102,143,185,196,217,127,67,184,190,223,101,221,67,31]}' },
   ],
 }
 

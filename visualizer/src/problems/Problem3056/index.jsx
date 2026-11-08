@@ -33,6 +33,9 @@ const examples = [
       Age: [{ age_bucket: 'teen', user_id: 1 }],
     }),
   },
+  { label: 'Single user', input: '{"Activities":[{"activity_id":1,"user_id":1,"activity_type":"send","time_spent":1}],"Age":[{"age_bucket":"18-24","user_id":1}]}' },
+  { label: 'No age data', input: '{"Activities":[{"activity_id":1,"user_id":2,"activity_type":"open","time_spent":4}],"Age":[]}' },
+  { label: 'Long run: 14 activities', input: '{"Activities":[{"activity_id":1,"user_id":4,"activity_type":"scroll","time_spent":9},{"activity_id":2,"user_id":5,"activity_type":"send","time_spent":12},{"activity_id":3,"user_id":5,"activity_type":"scroll","time_spent":35},{"activity_id":4,"user_id":2,"activity_type":"scroll","time_spent":38},{"activity_id":5,"user_id":3,"activity_type":"open","time_spent":25},{"activity_id":6,"user_id":2,"activity_type":"open","time_spent":52},{"activity_id":7,"user_id":5,"activity_type":"scroll","time_spent":23},{"activity_id":8,"user_id":2,"activity_type":"open","time_spent":46},{"activity_id":9,"user_id":3,"activity_type":"open","time_spent":57},{"activity_id":10,"user_id":2,"activity_type":"scroll","time_spent":40},{"activity_id":11,"user_id":4,"activity_type":"scroll","time_spent":27},{"activity_id":12,"user_id":3,"activity_type":"send","time_spent":50},{"activity_id":13,"user_id":3,"activity_type":"scroll","time_spent":1},{"activity_id":14,"user_id":3,"activity_type":"open","time_spent":52}],"Age":[{"age_bucket":"18-24","user_id":1},{"age_bucket":"25-34","user_id":2},{"age_bucket":"18-24","user_id":3},{"age_bucket":"25-34","user_id":4},{"age_bucket":"18-24","user_id":5},{"age_bucket":"25-34","user_id":1},{"age_bucket":"18-24","user_id":2},{"age_bucket":"25-34","user_id":3},{"age_bucket":"18-24","user_id":4},{"age_bucket":"25-34","user_id":5}]}' },
 ]
 
 const definition = { number: meta.number, phases, parse: parseInput, build: buildTrace, code, sql, python, inputLabel, complexity, examples }

@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: "n=6, x=2, y=5", input: "{\"n\": 6, \"x\": 2, \"y\": 5}" },
     { label: "n=4, x=1, y=4", input: "{\"n\": 4, \"x\": 1, \"y\": 4}" },
+    { label: "Two houses", input: '{"n":2,"x":1,"y":2}' },
+    { label: "Same house", input: '{"n":5,"x":3,"y":3}' },
+    { label: "Ends of the row", input: '{"n":30,"x":1,"y":30}' },
+    { label: "Long run: 30 houses", input: '{"n":30,"x":12,"y":20}' },
   ],
 }
 

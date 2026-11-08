@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"arr1":[1,10,100],"arr2":[1000]}' },
     { label: 'No match', input: '{"arr1":[1,2,3],"arr2":[4,4,4]}' },
+    { label: 'Single values', input: '{"arr1":[1],"arr2":[1]}' },
+    { label: 'Equal values', input: '{"arr1":[7,7],"arr2":[7,7,7]}' },
+    { label: 'Largest values', input: '{"arr1":[99999,99999,99999],"arr2":[99999,1]}' },
+    { label: 'Long run: 8 values each', input: '{"arr1":[75856,64932,45010,5125,4816,74672,34370,28821],"arr2":[37871,82788,41737,66682,84332,9083,84103,43319]}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[2,2,0],"changeIndices":[2,2,2,2,3,2,2,1]}' },
     { label: 'Example 2', input: '{"nums":[1,3],"changeIndices":[1,1,1,2,1,1,1]}' },
+    { label: 'Single index', input: '{"nums":[0],"changeIndices":[1]}' },
+    { label: 'Equal values', input: '{"nums":[2,2],"changeIndices":[1,2,1,2]}' },
+    { label: 'Largest values', input: '{"nums":[3,3,3,3],"changeIndices":[1,2,3,4,1,2,3,4]}' },
+    { label: 'Long run: 8 changes', input: '{"nums":[1,2,3,0],"changeIndices":[4,1,2,3,4,1,2,3]}' },
   ],
 }
 

@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[2,1,4,5]' },
     { label: 'Example 2', input: '[5,14,3,1,2]' },
+    { label: 'Three values', input: '[1,2,3]' },
+    { label: 'Spread values', input: '[50,1,49,2,48,3,47,4,46,5,45,6]' },
+    { label: 'Long run: 12 values', input: '[17,34,1,15,4,14,5,33,7,19,49,30]' },
   ],
 }
 

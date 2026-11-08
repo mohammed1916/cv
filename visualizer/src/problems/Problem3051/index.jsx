@@ -7,7 +7,11 @@ const complexity = 'O(r log r) for r skill rows, dominated by sorting the candid
 const examples = [{
   label: 'Sample',
   input: '{"Candidates":[{"candidate_id":1,"skill":"Python"},{"candidate_id":1,"skill":"Tableau"},{"candidate_id":1,"skill":"PostgreSQL"},{"candidate_id":2,"skill":"Python"},{"candidate_id":3,"skill":"PostgreSQL"},{"candidate_id":3,"skill":"Tableau"},{"candidate_id":3,"skill":"Python"},{"candidate_id":4,"skill":"Python"},{"candidate_id":4,"skill":"Tableau"},{"candidate_id":4,"skill":"PostgreSQL"},{"candidate_id":5,"skill":"Python"},{"candidate_id":5,"skill":"Python"}]}',
-}]
+},
+  { label: 'Single candidate', input: '{"Candidates":[{"candidate_id":1,"skill":"python"}]}' },
+  { label: 'Equal skills', input: '{"Candidates":[{"candidate_id":3,"skill":"sql"},{"candidate_id":1,"skill":"sql"},{"candidate_id":2,"skill":"sql"}]}' },
+  { label: 'Long run: 12 candidates', input: '{"Candidates":[{"candidate_id":1,"skill":"sql"},{"candidate_id":2,"skill":"python"},{"candidate_id":3,"skill":"python"},{"candidate_id":4,"skill":"python"},{"candidate_id":5,"skill":"sql"},{"candidate_id":6,"skill":"sql"},{"candidate_id":7,"skill":"go"},{"candidate_id":8,"skill":"go"},{"candidate_id":9,"skill":"sql"},{"candidate_id":10,"skill":"python"},{"candidate_id":11,"skill":"python"},{"candidate_id":12,"skill":"sql"}]}' },
+]
 
 const definition = {
   number: meta.number,

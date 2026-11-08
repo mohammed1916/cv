@@ -14,6 +14,9 @@ const definition = {
     { label: 'Heap must give one up', input: '{"nums":[6,2,9],"changeIndices":[2,2,1,3,3,1,3,1,2]}' },
     { label: 'Impossible', input: '{"nums":[2,3],"changeIndices":[1,1,2]}' },
     { label: 'Nothing to clear', input: '{"nums":[0],"changeIndices":[1]}' },
+    { label: 'Equal values', input: '{"nums":[3,3,3],"changeIndices":[1,2,3,1,2,3]}' },
+    { label: 'Largest values', input: '{"nums":[1000000000,1000000000],"changeIndices":[1,2,1,2,1,2]}' },
+    { label: 'Long run: 16 changes', input: '{"nums":[15,5,10,2,17,8,11,18],"changeIndices":[6,3,4,1,2,7,8,5,6,3,4,1,2,7,8,5]}' },
   ],
 }
 

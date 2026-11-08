@@ -20,6 +20,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[5,1,4,2,5,3]' },
     { label: 'Example 2', input: '[2,2,2,2]' },
+    { label: 'Two values', input: '[3,1]' },
+    { label: 'Equal values', input: '[4,4,4,4]' },
+    { label: 'Extreme values 1 and 20', input: '[20,1,20,1,20,1,20,1,20,1]' },
+    { label: 'Long run: 10 items', input: '[10,3,8,1,6,3,12,17,2,19]' },
   ],
 }
 

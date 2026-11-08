@@ -39,6 +39,10 @@ const examples = [
       ],
     }, null, 1),
   },
+  { label: 'Single prime item', input: '{"capacity":5,"inventory":[{"item_id":1,"item_type":"prime","item_category":"toy","square_footage":5}]}' },
+  { label: 'Equal footprints', input: '{"capacity":6,"inventory":[{"item_id":1,"item_type":"prime","item_category":"tool","square_footage":2},{"item_id":2,"item_type":"prime","item_category":"tool","square_footage":2},{"item_id":3,"item_type":"non_prime","item_category":"book","square_footage":2}]}' },
+  { label: 'Full capacity 1000', input: '{"capacity":1000,"inventory":[{"item_id":1,"item_type":"prime","item_category":"lamp","square_footage":1000},{"item_id":2,"item_type":"prime","item_category":"lamp","square_footage":1}]}' },
+  { label: 'Long run: 12 items', input: '{"capacity":500,"inventory":[{"item_id":1,"item_type":"non_prime","item_category":"book","square_footage":102},{"item_id":2,"item_type":"prime","item_category":"toy","square_footage":59},{"item_id":3,"item_type":"non_prime","item_category":"book","square_footage":68},{"item_id":4,"item_type":"prime","item_category":"toy","square_footage":33},{"item_id":5,"item_type":"non_prime","item_category":"book","square_footage":18},{"item_id":6,"item_type":"prime","item_category":"toy","square_footage":47},{"item_id":7,"item_type":"non_prime","item_category":"book","square_footage":64},{"item_id":8,"item_type":"prime","item_category":"toy","square_footage":53},{"item_id":9,"item_type":"non_prime","item_category":"book","square_footage":102},{"item_id":10,"item_type":"prime","item_category":"toy","square_footage":19},{"item_id":11,"item_type":"non_prime","item_category":"book","square_footage":68},{"item_id":12,"item_type":"prime","item_category":"toy","square_footage":89}]}' },
 ]
 
 const definition = {
