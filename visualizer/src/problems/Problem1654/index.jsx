@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"forbidden":[14,4,18,1,15],"a":3,"b":15,"x":9}' },
     { label: 'Example 2', input: '{"forbidden":[8,3,16,6,12,20],"a":15,"b":13,"x":11}' },
+    { label: 'One forbidden position', input: '{"forbidden":[1],"a":1,"b":1,"x":2}' },
+    { label: 'Equal jump lengths', input: '{"forbidden":[3,5],"a":4,"b":4,"x":1}' },
+    { label: 'Largest limits', input: '{"forbidden":[21,22,23,24,25,26,27,28,29,30],"a":20,"b":20,"x":1}' },
+    { label: 'Long run: 10 forbidden positions', input: '{"forbidden":[29,9,26,17,7,3,23,25,1,24],"a":7,"b":11,"x":2}' },
   ],
 }
 

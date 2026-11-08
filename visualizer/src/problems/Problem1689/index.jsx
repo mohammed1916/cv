@@ -11,6 +11,10 @@ const definition = {
     { label: 'Mixed digits', input: '2046' },
     { label: 'Single digit', input: '5' },
     { label: 'Long run', input: '90000' },
+    { label: 'One digit', input: '7' },
+    { label: 'Repeated digits', input: '1111' },
+    { label: 'Largest: 30 digits', input: '999999999999999999999999999999' },
+    { label: 'Long run: 30 digits', input: '611661079147447766174552368094' },
   ],
 }
 

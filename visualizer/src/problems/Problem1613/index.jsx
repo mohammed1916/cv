@@ -12,7 +12,11 @@ const definition = {
   phases, parse: parseInput, build: buildTrace, code, python, sql,
   inputLabel: INPUT_LABEL,
   complexity: COMPLEXITY,
-  examples: [{ label: 'Sample', input: EXAMPLE }],
+  examples: [{ label: 'Sample', input: EXAMPLE },
+    { label: "Single customer", input: "{\"customers\":[{\"customer_id\":5,\"name\":\"Ivo\"}]}" },
+    { label: "Gap at the start", input: "{\"customers\":[{\"customer_id\":2,\"name\":\"Bo\"},{\"customer_id\":3,\"name\":\"Cy\"},{\"customer_id\":4,\"name\":\"Di\"}]}" },
+    { label: "Twelve customers, ids at both ends", input: "{\"customers\":[{\"customer_id\":1,\"name\":\"C0\"},{\"customer_id\":60,\"name\":\"C1\"},{\"customer_id\":10,\"name\":\"C2\"},{\"customer_id\":11,\"name\":\"C3\"},{\"customer_id\":20,\"name\":\"C4\"},{\"customer_id\":30,\"name\":\"C5\"},{\"customer_id\":31,\"name\":\"C6\"},{\"customer_id\":40,\"name\":\"C7\"},{\"customer_id\":41,\"name\":\"C8\"},{\"customer_id\":50,\"name\":\"C9\"},{\"customer_id\":55,\"name\":\"C10\"},{\"customer_id\":59,\"name\":\"C11\"}]}" },
+    { label: "Long run: 12 customers", input: "{\"customers\":[{\"customer_id\":50,\"name\":\"N0\"},{\"customer_id\":39,\"name\":\"N1\"},{\"customer_id\":5,\"name\":\"N2\"},{\"customer_id\":51,\"name\":\"N3\"},{\"customer_id\":16,\"name\":\"N4\"},{\"customer_id\":49,\"name\":\"N5\"},{\"customer_id\":6,\"name\":\"N6\"},{\"customer_id\":55,\"name\":\"N7\"},{\"customer_id\":35,\"name\":\"N8\"},{\"customer_id\":57,\"name\":\"N9\"},{\"customer_id\":46,\"name\":\"N10\"},{\"customer_id\":3,\"name\":\"N11\"}]}" }],
 }
 
 const formatValue = value => value === undefined || value === null ? '' : typeof value === 'boolean' ? (value ? 'yes' : 'no') : String(value)

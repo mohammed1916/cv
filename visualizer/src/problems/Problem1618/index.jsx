@@ -24,6 +24,10 @@ const definition = {
     { label: 'Width limit', input: '{"text":"screen fit","sizes":[6,8,10,12,14,18,24],"w":60,"h":40}' },
     { label: 'Height limit', input: '{"text":"tall","sizes":[4,8,12,16,20],"w":200,"h":10}' },
     { label: 'Nothing fits', input: '{"text":"mmmm","sizes":[10,20,30],"w":5,"h":40}' },
+    { label: "Single letter", input: "{\"text\":\"a\",\"sizes\":[5],\"w\":10,\"h\":10}" },
+    { label: "Fits only at the smallest size", input: "{\"text\":\"big box\",\"sizes\":[3,9,20],\"w\":60,\"h\":20}" },
+    { label: "Ten sizes, widest screen", input: "{\"text\":\"a b c d e f g h i j\",\"sizes\":[1,4,8,12,16,20,24,28,32,40],\"w\":200,\"h\":200}" },
+    { label: "Long run: ten sizes", input: "{\"text\":\"himdkui zhetanhjtlfp\",\"sizes\":[2,4,6,8,10,12,14,16,18,20],\"w\":120,\"h\":60}" },
   ],
 }
 

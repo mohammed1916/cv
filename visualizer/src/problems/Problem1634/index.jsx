@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: "Merge and cancel", input: '{"poly1":[[1,3],[2,1]],"poly2":[[4,3],[-2,0]]}' },
     { label: "One side longer", input: '{"poly1":[[5,3],[1,0]],"poly2":[[2,2]]}' },
+    { label: "Single term each", input: "{\"poly1\":[[3,2]],\"poly2\":[[3,2]]}" },
+    { label: "Cancels to zero", input: "{\"poly1\":[[1,1],[-1,0]],\"poly2\":[[-1,1],[1,0]]}" },
+    { label: "Six terms each, sparse powers", input: "{\"poly1\":[[9,11],[7,9],[5,7],[3,5],[1,3],[1,1]],\"poly2\":[[-9,11],[2,10],[6,8],[-3,5],[4,4],[8,0]]}" },
+    { label: "Long run: six terms each", input: "{\"poly1\":[[4,9],[-6,7],[2,5],[8,3],[-1,2],[5,0]],\"poly2\":[[3,8],[6,6],[-2,4],[7,2],[1,1],[-9,0]]}" },
   ],
 };
 

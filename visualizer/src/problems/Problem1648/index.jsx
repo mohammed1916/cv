@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"inventory":[2,5],"orders":4}' },
     { label: 'Example 2', input: '{"inventory":[3,5],"orders":6}' },
+    { label: 'One colour', input: '{"inventory":[1],"orders":1}' },
+    { label: 'Equal colour counts', input: '{"inventory":[2,2],"orders":4}' },
+    { label: 'Full stock, 20 orders', input: '{"inventory":[8,8,8,8],"orders":20}' },
+    { label: 'Long run: four colours', input: '{"inventory":[1,7,8,6],"orders":20}' },
   ],
 }
 

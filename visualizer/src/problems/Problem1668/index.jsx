@@ -11,6 +11,10 @@ const definition = {
     { label: 'Sample A', input: '{"sequence":"abababcab","word":"ab"}' },
     { label: 'Triple run', input: '{"sequence":"xyzxyzxy","word":"xyz"}' },
     { label: 'No match', input: '{"sequence":"qwerty","word":"zz"}' },
+    { label: 'Single letter', input: '{"sequence":"a","word":"a"}' },
+    { label: 'Overlapping matches', input: '{"sequence":"aaaa","word":"aa"}' },
+    { label: 'No match', input: '{"sequence":"abc","word":"cab"}' },
+    { label: 'Long run: 100 letters', input: '{"sequence":"abcbbacaccacabaccbccaabbccbccaccacabbbbaacbcbbabccabbacabccbaccbabaacbbbcbcaccbcaaabbcabacccacaacaac","word":"bba"}' },
   ],
 }
 

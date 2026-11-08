@@ -36,6 +36,10 @@ export const examples = [
   { label: 'Four points', input: '{"points":[[2,5],[6,1],[9,3],[4,8]]}' },
   { label: 'Shared x values', input: '{"points":[[3,1],[3,7],[10,2]]}' },
   { label: 'Single x value', input: '{"points":[[5,5],[5,9]]}' },
+  { label: 'Two points', input: '{"points":[[0,0],[1,1]]}' },
+  { label: 'Shared x values', input: '{"points":[[1,2],[1,5],[3,2],[3,5]]}' },
+  { label: 'Large coordinates', input: '{"points":[[1000000000,-1000000000],[-1000000000,1000000000],[0,0]]}' },
+  { label: 'Long run: 40 points', input: '{"points":[[15,-7],[-14,15],[36,29],[-21,6],[-32,0],[-16,20],[9,34],[0,-38],[-26,-17],[-42,40],[50,-40],[-41,-17],[15,-2],[32,44],[2,47],[-42,21],[4,14],[-20,-15],[34,46],[12,3],[-40,-6],[12,36],[-18,-43],[-44,3],[-28,-21],[-8,45],[49,3],[6,-24],[11,-45],[-23,-44],[5,-48],[30,10],[20,22],[-39,-26],[24,-27],[24,19],[-30,37],[31,45],[10,47],[15,2]]}' },
 ]
 
 export const complexity = 'O(n log n) time for n points, dominated by the sort of the x values. Space is O(n).'

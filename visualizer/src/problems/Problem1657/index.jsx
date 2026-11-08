@@ -11,6 +11,10 @@ const definition = {
     { label: 'Close pair', input: '{"word1":"banana","word2":"aaabbn"}' },
     { label: 'Same letters, different counts', input: '{"word1":"aaab","word2":"aabb"}' },
     { label: 'Different letters', input: '{"word1":"cat","word2":"dog"}' },
+    { label: 'One letter each', input: '{"word1":"a","word2":"b"}' },
+    { label: 'Equal letter counts', input: '{"word1":"abc","word2":"cba"}' },
+    { label: 'Longest words', input: '{"word1":"abcdefghijklmnopqrstuvwxyzabcd","word2":"zyxwvutsrqponmlkjihgfedcbazyxw"}' },
+    { label: 'Long run: 30 letters', input: '{"word1":"tizhksjnicbvzrmbpndfyuymdnrmlv","word2":"pdeocjzcbmcmjqrfcgldkubmopkvxr"}' },
   ],
 }
 

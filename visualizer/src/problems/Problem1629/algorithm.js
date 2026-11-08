@@ -44,6 +44,10 @@ export const examples = [
   { label: 'Longest press wins', input: '{"releaseTimes":[3,8,9],"keysPressed":"pqr"}' },
   { label: 'Tie goes to larger key', input: '{"releaseTimes":[2,4,5],"keysPressed":"mxm"}' },
   { label: 'Single press', input: '{"releaseTimes":[6],"keysPressed":"z"}' },
+    { label: "Single key", input: "{\"releaseTimes\":[4],\"keysPressed\":\"d\"}" },
+    { label: "Equal durations, larger key wins", input: "{\"releaseTimes\":[2,4,6],\"keysPressed\":\"abc\"}" },
+    { label: "Late releases, large gaps", input: "{\"releaseTimes\":[1,500,1000],\"keysPressed\":\"zyx\"}" },
+    { label: "Long run: 30 presses", input: "{\"releaseTimes\":[22,46,48,74,90,122,147,152,158,174,201,211,230,258,285,291,304,317,347,372,377,388,410,428,457,461,488,505,516,526],\"keysPressed\":\"mmgisboixpaubhufbtudodrkmlxnhi\"}" },
 ]
 
 export const complexity = 'O(n) time and O(1) extra space for n key presses.'

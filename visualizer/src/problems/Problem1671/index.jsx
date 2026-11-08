@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,3,1]}' },
     { label: 'Example 2', input: '{"nums":[2,1,1,5,6,2,3,1]}' },
+    { label: 'Shortest peak', input: '{"nums":[1,3,1]}' },
+    { label: 'Equal peak values', input: '{"nums":[1,3,3,3,1]}' },
+    { label: 'Largest values', input: '{"nums":[0,1000,0,1000,0,1000,0,1000,0,1000,0,1000]}' },
+    { label: 'Long run: 12 values', input: '{"nums":[273,96,320,454,14,464,999,331,286,432,51,147]}' },
   ],
 }
 

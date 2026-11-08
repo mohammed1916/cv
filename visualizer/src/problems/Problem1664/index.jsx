@@ -11,6 +11,10 @@ const definition = {
     { label: 'One fair deletion', input: '[2,1,6,4]' },
     { label: 'Every deletion', input: '[1,1,1]' },
     { label: 'None fair', input: '[1,2,3]' },
+    { label: 'One value', input: '[1]' },
+    { label: 'Equal values', input: '[4,4,4,4]' },
+    { label: 'Largest values', input: '[100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1]' },
+    { label: 'Long run: 20 values', input: '[8,24,36,46,82,42,25,11,48,86,5,92,90,22,78,11,92,69,42,48]' },
   ],
 }
 

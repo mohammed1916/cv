@@ -12,6 +12,10 @@ const definition = {
     { label: 'Mixed calls', input: JSON.stringify({ ops: [['append', 2], ['addAll', 3], ['append', 7], ['multAll', 2], ['getIndex', 0], ['addAll', 3], ['append', 10], ['multAll', 2], ['getIndex', 2], ['getIndex', 9]] }) },
     { label: 'Empty read', input: JSON.stringify({ ops: [['getIndex', 0], ['append', 5], ['getIndex', 0]] }) },
     { label: 'Big factor', input: JSON.stringify({ ops: [['append', 4], ['multAll', 1000], ['getIndex', 0]] }) },
+    { label: "Single getIndex on an empty sequence", input: "{\"ops\":[[\"getIndex\",0]]}" },
+    { label: "Multiply then add", input: "{\"ops\":[[\"append\",2],[\"multAll\",3],[\"addAll\",1],[\"getIndex\",0]]}" },
+    { label: "Largest allowed value", input: "{\"ops\":[[\"append\",1000000006],[\"multAll\",1000],[\"getIndex\",0]]}" },
+    { label: "Long run: 40 operations", input: "{\"ops\":[[\"multAll\",201],[\"getIndex\",5],[\"multAll\",289],[\"addAll\",817396],[\"addAll\",769432],[\"append\",524696],[\"append\",225734],[\"multAll\",30],[\"addAll\",452184],[\"getIndex\",18],[\"multAll\",972],[\"getIndex\",9],[\"getIndex\",0],[\"addAll\",110952],[\"getIndex\",11],[\"addAll\",93113],[\"getIndex\",10],[\"addAll\",522589],[\"addAll\",265745],[\"getIndex\",9],[\"addAll\",24132],[\"addAll\",240959],[\"multAll\",987],[\"multAll\",326],[\"append\",579743],[\"getIndex\",16],[\"multAll\",323],[\"multAll\",398],[\"addAll\",146207],[\"append\",582013],[\"getIndex\",9],[\"getIndex\",4],[\"append\",460496],[\"append\",317201],[\"getIndex\",7],[\"addAll\",753939],[\"addAll\",107645],[\"multAll\",451],[\"getIndex\",15],[\"getIndex\",17]]}" },
   ],
 }
 

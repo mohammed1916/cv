@@ -11,6 +11,10 @@ const definition = {
     { label: 'Small budget', input: '{"n":2,"k":2}' },
     { label: 'Mixed letters', input: '{"n":4,"k":30}' },
     { label: 'Full alphabet', input: '{"n":6,"k":60}' },
+    { label: 'Single letter', input: '{"n":1,"k":1}' },
+    { label: 'Minimum sum', input: '{"n":4,"k":4}' },
+    { label: 'Largest allowed k', input: '{"n":12,"k":312}' },
+    { label: 'Long run: n = 12, k = 150', input: '{"n":12,"k":150}' },
   ],
 }
 

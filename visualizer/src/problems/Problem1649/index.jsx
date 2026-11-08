@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example A', input: '{"instructions":[1,5,6,2]}' },
     { label: 'Example B', input: '{"instructions":[1,3,3,3,2,4,2,1,2]}' },
+    { label: 'One instruction', input: '{"instructions":[1]}' },
+    { label: 'Repeated values', input: '{"instructions":[2,2,2,2]}' },
+    { label: 'Extreme values, 30 steps', input: '{"instructions":[1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10]}' },
+    { label: 'Long run: 30 values', input: '{"instructions":[9,4,10,8,5,10,10,3,8,2,5,7,2,3,8,6,10,6,9,4,5,6,1,4,1,5,7,4,4,5]}' },
   ],
 }
 

@@ -11,6 +11,11 @@ const definition = {
     { label: 'Scrambled arrivals', input: '{"n":4,"inserts":[[2,"m"],[4,"p"],[1,"k"],[3,"x"]]}' },
     { label: 'Exact order', input: '{"n":3,"inserts":[[3,"q"],[1,"o"],[2,"r"]]}' },
     { label: 'First slot late', input: '{"n":4,"inserts":[[4,"d"],[3,"c"],[1,"a"],[2,"b"]]}' },
+    { label: 'One slot', input: '{"n":1,"inserts":[[1,"a"]]}' },
+    { label: 'Equal values', input: '{"n":3,"inserts":[[2,"ab"],[1,"ab"],[3,"ab"]]}' },
+    { label: 'No inserts', input: '{"n":2,"inserts":[]}' },
+    { label: 'Largest n: 50 inserts', input: '{"n":50,"inserts":[[23,"ub"],[18,"lgqaq"],[9,"mfi"],[24,"u"],[3,"efk"],[36,"se"],[48,"sb"],[31,"sk"],[11,"eai"],[37,"ok"],[4,"ixvc"],[39,"bj"],[50,"yce"],[19,"pezr"],[35,"jb"],[13,"wsuy"],[1,"vxqil"],[30,"kqank"],[20,"cgrfv"],[33,"yjpu"],[43,"cmeo"],[29,"rxo"],[32,"grqc"],[2,"rsmkq"],[5,"xmwb"],[15,"mompq"],[41,"jtjg"],[12,"rit"],[10,"hh"],[44,"at"],[34,"ak"],[40,"vbl"],[46,"lx"],[21,"bte"],[22,"gshx"],[42,"qjh"],[17,"louup"],[25,"klw"],[6,"yf"],[47,"lhwyf"],[38,"so"],[27,"gunid"],[45,"lwx"],[49,"sfdqg"],[26,"cz"],[14,"z"],[16,"e"],[8,"enghm"],[7,"w"],[28,"b"]]}' },
+    { label: 'Long run: 30 of 50 slots', input: '{"n":50,"inserts":[[23,"v"],[18,"sqw"],[9,"mdgmj"],[24,"u"],[3,"ujsk"],[36,"xi"],[48,"ufvy"],[31,"m"],[11,"wcfp"],[37,"zoi"],[4,"ndcl"],[39,"pbwi"],[50,"wjy"],[19,"o"],[35,"l"],[13,"ztf"],[1,"px"],[30,"fzyfy"],[20,"b"],[33,"rgmv"],[43,"nz"],[29,"z"],[32,"tr"],[2,"z"],[5,"ojqg"],[15,"q"],[41,"bvr"],[12,"fqmdc"],[10,"rv"],[44,"nzlg"]]}' },
   ],
 }
 

@@ -11,6 +11,10 @@ const definition = {
     { label: 'Nine teams', input: '9' },
     { label: 'Twenty teams', input: '20' },
     { label: 'Single team', input: '1' },
+    { label: 'One team', input: '1' },
+    { label: 'Small group', input: '2' },
+    { label: 'Eight teams', input: '8' },
+    { label: 'Long run: 200 teams', input: '200' },
   ],
 }
 

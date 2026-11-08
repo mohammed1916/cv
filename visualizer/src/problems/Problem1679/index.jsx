@@ -12,6 +12,10 @@ const definition = {
     { label: 'Mixed', input: '{"nums":[1,1,2,4,5,7],"k":8}' },
     { label: 'Repeated pairs', input: '{"nums":[3,1,3,1,3,1],"k":4}' },
     { label: 'No partners', input: '{"nums":[2,2,9],"k":5}' },
+    { label: 'One number', input: '{"nums":[5],"k":2}' },
+    { label: 'Equal numbers', input: '{"nums":[3,3,3],"k":3}' },
+    { label: 'Largest values', input: '{"nums":[100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100],"k":200}' },
+    { label: 'Long run: 20 numbers', input: '{"nums":[8,28,22,78,70,53,51,24,82,5,20,34,82,74,43,56,81,82,76,91],"k":50}' },
   ],
 }
 

@@ -42,6 +42,10 @@ export const examples = [
   { label: 'Pieces in a different order', input: '{"arr":[6,2,9,4,8],"pieces":[[9,4],[6,2],[8]]}' },
   { label: 'No piece starts with 1', input: '{"arr":[1,3,5,7],"pieces":[[2,4,6,8]]}' },
   { label: 'Single piece', input: '{"arr":[3,1],"pieces":[[3,1]]}' },
+  { label: 'One piece', input: '{"arr":[5],"pieces":[[5]]}' },
+  { label: 'Reordered pieces', input: '{"arr":[15,88,42,7],"pieces":[[42,7],[15,88]]}' },
+  { label: 'No valid order', input: '{"arr":[49,18,16],"pieces":[[16,18,49]]}' },
+  { label: 'Long run: 20 values in shuffled pieces', input: '{"arr":[30,14,41,47,10,44,42,89,94,57,17,67,45,74,29,2,4,88,62,33],"pieces":[[33],[45,74],[29,2,4,88],[94,57,17],[30,14,41,47],[67],[10],[62],[44,42,89]]}' },
 ]
 
 export const complexity = 'O(n) time and O(n) space for arr of length n with all pieces together of length n.'

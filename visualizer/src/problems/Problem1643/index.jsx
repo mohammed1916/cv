@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 1', input: '{"destination":[2,3],"k":1}' },
     { label: 'Example 2', input: '{"destination":[2,3],"k":2}' },
     { label: 'Example 3', input: '{"destination":[2,3],"k":3}' },
+    { label: 'First path, 1 by 1', input: '{"destination":[1,1],"k":1}' },
+    { label: 'Last path, 2 by 3', input: '{"destination":[2,3],"k":10}' },
+    { label: 'Largest grid, last path', input: '{"destination":[6,6],"k":924}' },
+    { label: 'Long run: 6 by 5 grid', input: '{"destination":[6,5],"k":300}' },
   ],
 }
 

@@ -11,6 +11,10 @@ const definition = {
     { label: 'Sample aaabbbcc', input: '{"s":"aaabbbbcc"}' },
     { label: 'Already unique', input: '{"s":"zzzyyyxx"}' },
     { label: 'Single letters', input: '{"s":"abcdef"}' },
+    { label: 'Single letter', input: '{"s":"a"}' },
+    { label: 'Pairs of equal letters', input: '{"s":"aabbcc"}' },
+    { label: 'Longest allowed: 60 of one letter', input: '{"s":"zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"}' },
+    { label: 'Long run: 60 letters', input: '{"s":"oelxfpbpllnxbwuleesoxpxxalewzeadnrvlvgqhdyztbvivyrzaywqdyeni"}' },
   ],
 }
 

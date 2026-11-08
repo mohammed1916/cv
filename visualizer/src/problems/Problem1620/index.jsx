@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"towers":[[1,2,5],[2,1,7],[3,1,9]],"radius":2}' },
     { label: 'Single tower', input: '{"towers":[[12,11,15]],"radius":9}' },
+    { label: "Single tower at zero radius", input: "{\"towers\":[[0,0,5]],\"radius\":0}" },
+    { label: "Two equal towers", input: "{\"towers\":[[1,1,5],[3,1,5]],\"radius\":2}" },
+    { label: "Six towers in the corners, radius 20", input: "{\"towers\":[[0,0,3],[20,0,4],[0,20,5],[20,20,6],[10,10,7],[5,15,8]],\"radius\":20}" },
+    { label: "Long run: 6 towers, radius 7", input: "{\"towers\":[[3,12,19],[3,12,20],[1,20,4],[11,16,7],[5,3,16],[14,1,10]],\"radius\":7}" },
   ],
 }
 

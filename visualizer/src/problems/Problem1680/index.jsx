@@ -12,6 +12,10 @@ const definition = {
     { label: 'Four', input: '4' },
     { label: 'Nine', input: '9' },
     { label: 'Twenty', input: '20' },
+    { label: 'Smallest n', input: '1' },
+    { label: 'Small n', input: '2' },
+    { label: 'Middle n', input: '37' },
+    { label: 'Long run: n = 60', input: '60' },
   ],
 }
 

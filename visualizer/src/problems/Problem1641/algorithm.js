@@ -36,6 +36,9 @@ export const examples = [
   { label: 'Length three', input: '3' },
   { label: 'Length four', input: '4' },
   { label: 'Length one', input: '1' },
+  { label: 'Smallest n', input: '1' },
+  { label: 'Small odd n', input: '3' },
+  { label: 'Long run: n = 50', input: '50' },
 ]
 
 export const complexity = 'O(n) time and O(1) space for length n (the table has five columns).'

@@ -11,6 +11,11 @@ const definition = {
     { label: 'Forward window', input: '{"code":[6,1,3,8],"k":2}' },
     { label: 'Backward window', input: '{"code":[2,9,4],"k":-1}' },
     { label: 'Zero window', input: '{"code":[1,5,2,7],"k":0}' },
+    { label: 'One value', input: '{"code":[7],"k":0}' },
+    { label: 'Equal values', input: '{"code":[5,5,5],"k":1}' },
+    { label: 'Zero shift', input: '{"code":[4,-2,9],"k":0}' },
+    { label: 'Extreme limits', input: '{"code":[-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100],"k":-19}' },
+    { label: 'Long run: 20 values', input: '{"code":[-98,32,73,95,-58,86,100,64,-37,97,-32,100,53,33,-44,-79,46,93,84,38],"k":3}' },
   ],
 }
 

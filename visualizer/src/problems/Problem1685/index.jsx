@@ -12,6 +12,10 @@ const definition = {
     { label: 'Spread', input: '[1,4,6,9]' },
     { label: 'Negatives', input: '[-3,-3,2]' },
     { label: 'Equal', input: '[7,7,7]' },
+    { label: 'Two values', input: '[-3,5]' },
+    { label: 'Equal values', input: '[2,2,2,2]' },
+    { label: 'Full range, 12 values', input: '[-100,-100,-50,-50,0,0,25,25,50,50,100,100]' },
+    { label: 'Long run: 12 values', input: '[-93,-81,-56,-55,-46,-22,-20,-15,-6,2,42,60]' },
   ],
 }
 

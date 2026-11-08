@@ -43,6 +43,10 @@ export const examples = [
   { label: 'Mixed ages', input: '{"scores":[6,4,9,5],"ages":[2,2,3,1]}' },
   { label: 'Same age only', input: '{"scores":[3,7,5],"ages":[4,4,4]}' },
   { label: 'Strict conflict', input: '{"scores":[8,2,5],"ages":[1,3,5]}' },
+    { label: "Single player", input: "{\"scores\":[10],\"ages\":[20]}" },
+    { label: "Equal scores and ages", input: "{\"scores\":[5,5,5],\"ages\":[3,3,3]}" },
+    { label: "Twelve players, top scores", input: "{\"scores\":[100,100,100,100,100,100,100,100,100,100,100,100],\"ages\":[1,2,3,4,5,6,7,8,9,10,11,12]}" },
+    { label: "Long run: 12 players", input: "{\"scores\":[17,74,58,3,31,73,81,11,95,70,60,80],\"ages\":[98,3,37,40,70,20,84,55,47,100,14,94]}" },
 ]
 
 export const complexity = 'O(n^2) time and O(n) space for n players. Players with the same age never conflict.'

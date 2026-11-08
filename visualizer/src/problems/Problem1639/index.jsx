@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Four columns', input: '{"words":["xy","yx"],"target":"xyx"}' },
     { label: 'Repeated letters', input: '{"words":["abc","cba"],"target":"bca"}' },
+    { label: 'Single column', input: '{"words":["a","b"],"target":"a"}' },
+    { label: 'Identical words count separately', input: '{"words":["ab","ab"],"target":"ab"}' },
+    { label: 'No way to build the target', input: '{"words":["ab"],"target":"ba"}' },
+    { label: 'Long run: six words of six letters', input: '{"words":["abcbaa","ecbbce","aecccc","ceafba","dddbec","aadafd"],"target":"cfbcce"}' },
   ],
 }
 

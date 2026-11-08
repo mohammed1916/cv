@@ -19,6 +19,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"boxes":[[1,1],[2,1],[1,1]],"ports_count":2,"max_boxes":3,"max_weight":3}' },
     { label: 'Example 2', input: '{"boxes":[[1,2],[3,3],[3,1],[3,1],[2,4]],"ports_count":3,"max_boxes":3,"max_weight":6}' },
+    { label: 'One box', input: '{"boxes":[[1,1]],"ports_count":1,"max_boxes":1,"max_weight":1}' },
+    { label: 'Equal boxes', input: '{"boxes":[[2,2],[2,2],[2,2]],"ports_count":2,"max_boxes":2,"max_weight":2}' },
+    { label: 'Largest limits', input: '{"boxes":[[1,10],[2,10],[3,10],[4,10],[5,10],[1,1],[2,1],[3,1]],"ports_count":5,"max_boxes":5,"max_weight":10}' },
+    { label: 'Long run: 8 boxes', input: '{"boxes":[[2,6],[1,2],[4,1],[1,5],[1,5],[5,3],[1,2],[5,7]],"ports_count":5,"max_boxes":3,"max_weight":7}' },
   ],
 }
 

@@ -11,6 +11,10 @@ const definition = {
     { label: 'Sample n=9', input: '{"n":9}' },
     { label: 'Sample n=7', input: '{"n":7}' },
     { label: 'Single index', input: '{"n":0}' },
+    { label: 'Zero', input: '{"n":0}' },
+    { label: 'One', input: '{"n":1}' },
+    { label: 'Largest n', input: '{"n":100}' },
+    { label: 'Long run: n = 97', input: '{"n":97}' },
   ],
 }
 

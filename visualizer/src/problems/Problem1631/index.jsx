@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"heights":[[1,2,2],[3,8,2],[5,3,5]]}' },
     { label: 'Flat', input: '{"heights":[[1,2,1,1,1],[1,2,1,2,1],[1,2,1,2,1],[1,2,1,2,1],[1,1,1,2,1]]}' },
+    { label: "Single cell", input: "{\"heights\":[[5]]}" },
+    { label: "Equal heights", input: "{\"heights\":[[2,2],[2,2]]}" },
+    { label: "Five by five, extremes", input: "{\"heights\":[[1,9,1,9,1],[9,1,9,1,9],[1,9,1,9,1],[9,1,9,1,9],[1,9,1,9,1]]}" },
+    { label: "Long run: 5 by 5", input: "{\"heights\":[[4,4,3,7,5],[6,4,5,2,8],[1,5,5,2,1],[4,1,1,2,8],[4,2,8,8,2]]}" },
   ],
 }
 

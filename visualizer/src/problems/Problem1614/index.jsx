@@ -11,6 +11,10 @@ const definition = {
     { label: 'Nested product', input: '2*(3+(4-1)*(5))' },
     { label: 'Deep chain', input: '((((1))))+(2)' },
     { label: 'No groups', input: '12*3+4' },
+    { label: "Single number", input: "7" },
+    { label: "Spaces around a number", input: "  8  " },
+    { label: "Six groups of two sums", input: "(1+2)*(3+4)*(5+6)*(7+8)*(9+1)*(2+3)*(4+5)" },
+    { label: "Long run: nested groups", input: "((8+1)*(4-7)+(6*5)/(4+8))-6*((2+3)*(4-1))" },
   ],
 }
 

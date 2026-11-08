@@ -16,6 +16,10 @@ const definition = {
     { label: "Nested pairs", input: "rsttsr" },
     { label: "Centre only", input: "xx" },
     { label: "No valid pair", input: "uvw" },
+    { label: 'One letter', input: 'a' },
+    { label: 'Equal letters', input: 'aaaa' },
+    { label: 'Longest allowed', input: 'abcdefgh' },
+    { label: 'Long run: 8 letters', input: 'dadcabbc' },
   ],
 };
 

@@ -50,6 +50,10 @@ export const examples = [
   { label: 'Two short words', input: '{"s":"abcd","t":"bacd"}' },
   { label: 'Equal strings', input: '{"s":"aa","t":"aa"}' },
   { label: 'Different letters', input: '{"s":"xyz","t":"pqr"}' },
+  { label: 'One letter each', input: '{"s":"a","t":"a"}' },
+  { label: 'Repeated letters', input: '{"s":"aaa","t":"aa"}' },
+  { label: 'Longest strings', input: '{"s":"abcdefgh","t":"hgfedcba"}' },
+  { label: 'Long run: 8 letters each', input: '{"s":"edadabba","t":"bbeeeacb"}' },
 ]
 
 export const complexity = 'O(n * m * min(n, m)) time for strings of lengths n and m. The visual caps each string at 8 characters.'

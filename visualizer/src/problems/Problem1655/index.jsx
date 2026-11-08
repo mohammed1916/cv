@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,3,4],"quantity":[2]}' },
     { label: 'Example 2', input: '{"nums":[1,2,3,3],"quantity":[2]}' },
+    { label: 'One value', input: '{"nums":[3],"quantity":[1]}' },
+    { label: 'Equal values', input: '{"nums":[2,2,2,2],"quantity":[2,2]}' },
+    { label: 'Largest sizes', input: '{"nums":[10,10,10,10,10,10,10,10],"quantity":[10,10,10,10]}' },
+    { label: 'Long run: 8 values, 4 customers', input: '{"nums":[8,6,8,8,6,1,7,2],"quantity":[1,5,5,7]}' },
   ],
 }
 

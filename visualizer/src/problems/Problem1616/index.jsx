@@ -11,6 +11,10 @@ const definition = {
     { label: 'Mirror pair', input: '{"a":"abxcd","b":"dcyba"}' },
     { label: 'No split', input: '{"a":"ab","b":"cd"}' },
     { label: 'One letter', input: '{"a":"q","b":"z"}' },
+    { label: "Single equal letters", input: "{\"a\":\"m\",\"b\":\"m\"}" },
+    { label: "Identical strings", input: "{\"a\":\"abab\",\"b\":\"abab\"}" },
+    { label: "Twenty-four letters, reversed", input: "{\"a\":\"abcdefghijklmnopqrstuvwx\",\"b\":\"xwvutsrqponmlkjihgfedcba\"}" },
+    { label: "Long run: 24 letters", input: "{\"a\":\"adgtgcihxgiigssphbbtewwg\",\"b\":\"xtskjozzzvdatteojbakdaqm\"}" },
   ],
 }
 

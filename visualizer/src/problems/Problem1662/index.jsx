@@ -11,6 +11,11 @@ const definition = {
     { label: 'Same text, different chunks', input: '{"word1":["xy","z"],"word2":["x","yz"]}' },
     { label: 'Same length, different letter', input: '{"word1":["ab","c"],"word2":["ac","b"]}' },
     { label: 'Longer second array', input: '{"word1":["ab"],"word2":["abc"]}' },
+    { label: 'One chunk each', input: '{"word1":["a"],"word2":["a"]}' },
+    { label: 'Same text, different splits', input: '{"word1":["xy","z"],"word2":["x","yz"]}' },
+    { label: 'No match', input: '{"word1":["a"],"word2":["b"]}' },
+    { label: 'Longest chunks, 24 letters', input: '{"word1":["abcdefgh","abcdefgh","abcdefgh"],"word2":["abcdefgh","abcdefgh","abcdefgh"]}' },
+    { label: 'Long run: 30 letters', input: '{"word1":["jshhs","bbgmx","ihdvp","cbshi","fksml","hknek"],"word2":["jshhsbbg","mxihdvpc","bshifksm","lhknek"]}' },
   ],
 }
 

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Two by three', input: '{"m":2,"n":3,"introverts":1,"extroverts":2}' },
     { label: 'Three by one', input: '{"m":3,"n":1,"introverts":2,"extroverts":1}' },
+    { label: 'One cell', input: '{"m":1,"n":1,"introverts":1,"extroverts":0}' },
+    { label: 'Equal counts', input: '{"m":2,"n":2,"introverts":2,"extroverts":2}' },
+    { label: 'No extroverts', input: '{"m":3,"n":2,"introverts":3,"extroverts":0}' },
+    { label: 'Long run: full 3 by 3 grid', input: '{"m":3,"n":3,"introverts":5,"extroverts":4}' },
   ],
 }
 

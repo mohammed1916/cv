@@ -11,6 +11,10 @@ const definition = {
     { label: 'Mixed string', input: '{"s":"abbaabb"}' },
     { label: 'Starts with b', input: '{"s":"bbaa"}' },
     { label: 'Already balanced', input: '{"s":"aabb"}' },
+    { label: 'One letter', input: '{"s":"a"}' },
+    { label: 'Equal runs', input: '{"s":"aabb"}' },
+    { label: 'Longest allowed: alternating', input: '{"s":"abababababababababababababababababababababababababababababab"}' },
+    { label: 'Long run: 60 letters', input: '{"s":"abbabbaababbbbabababaaabbabaaaababaabbababaabbaaabbababaabbb"}' },
   ],
 }
 

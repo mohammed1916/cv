@@ -49,6 +49,11 @@ export const examples = [
   { label: 'Ladder on the big climb', input: '{"heights":[4,6,3,9,5],"bricks":3,"ladders":1}' },
   { label: 'No ladders', input: '{"heights":[1,3,6,6,9],"bricks":4,"ladders":0}' },
   { label: 'Flat ground', input: '{"heights":[2,2,2],"bricks":0,"ladders":0}' },
+  { label: 'One building', input: '{"heights":[5],"bricks":0,"ladders":0}' },
+  { label: 'Equal heights', input: '{"heights":[4,4,4],"bricks":0,"ladders":1}' },
+  { label: 'No help available', input: '{"heights":[1,20],"bricks":0,"ladders":0}' },
+  { label: 'Largest limits', input: '{"heights":[20,1,20,1,20,1,20,1,20,1,20,1],"bricks":30,"ladders":10}' },
+  { label: 'Long run: 12 buildings', input: '{"heights":[9,4,3,13,5,10,5,3,16,1,11,8],"bricks":15,"ladders":3}' },
 ]
 
 export const complexity = 'O(n log n) time for n buildings (the heap is kept sorted in this visual). Space is O(n).'

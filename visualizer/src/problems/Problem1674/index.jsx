@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,4,3],"limit":4}' },
     { label: 'Example 2', input: '{"nums":[1,2,2,1],"limit":2}' },
+    { label: 'Pair at limit', input: '{"nums":[1,1],"limit":1}' },
+    { label: 'Equal values', input: '{"nums":[2,2,2,2],"limit":2}' },
+    { label: 'Longest allowed, limit 10', input: '{"nums":[10,1,10,1,10,1,10,1,10,1,10,1],"limit":10}' },
+    { label: 'Long run: 12 values', input: '{"nums":[5,7,1,5,7,7,4,4,5,4,6,2],"limit":7}' },
   ],
 }
 

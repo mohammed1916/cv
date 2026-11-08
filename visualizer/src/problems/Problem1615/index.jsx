@@ -11,6 +11,10 @@ const definition = {
     { label: 'Hub city', input: '{"n":5,"roads":[[0,2],[1,2],[2,3],[2,4],[3,4]]}' },
     { label: 'Chain', input: '{"n":3,"roads":[[0,1],[1,2]]}' },
     { label: 'Disjoint roads', input: '{"n":4,"roads":[[0,1],[2,3]]}' },
+    { label: "Two cities, one road", input: "{\"n\":2,\"roads\":[[0,1]]}" },
+    { label: "No roads", input: "{\"n\":3,\"roads\":[]}" },
+    { label: "Hub with three roads", input: "{\"n\":4,\"roads\":[[0,1],[0,2],[0,3]]}" },
+    { label: "Long run: ten cities", input: "{\"n\":10,\"roads\":[[3,9],[4,2],[1,9],[8,1],[9,7],[2,8],[1,3],[7,0],[6,0],[9,6],[0,8],[5,8],[5,2],[4,3]]}" },
   ],
 }
 

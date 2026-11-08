@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"postfix":["6","3","+","5","*","4","-"]}' },
     { label: 'Division', input: '{"postfix":["9","2","/","1","+"]}' },
+    { label: "Single digit", input: "{\"postfix\":[\"7\"]}" },
+    { label: "Same operator twice", input: "{\"postfix\":[\"2\",\"3\",\"+\",\"4\",\"+\"]}" },
+    { label: "Fifteen tokens", input: "{\"postfix\":[\"9\",\"1\",\"+\",\"2\",\"*\",\"3\",\"-\",\"4\",\"/\",\"5\",\"+\",\"6\",\"*\",\"7\",\"-\"]}" },
+    { label: "Long run: fifteen tokens", input: "{\"postfix\":[\"7\",\"5\",\"*\",\"6\",\"*\",\"8\",\"/\",\"2\",\"+\",\"5\",\"*\",\"6\",\"/\",\"2\",\"/\"]}" },
   ],
 }
 

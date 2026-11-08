@@ -11,6 +11,10 @@ const definition = {
     { label: 'Mixed', input: '"()G(al)G"' },
     { label: 'Ends with ()', input: '"G(al)()"' },
     { label: 'Only al', input: '"(al)"' },
+    { label: 'One group', input: '"G"' },
+    { label: 'Empty pair group', input: '"()"' },
+    { label: 'Alphabet pair', input: '"(al)G"' },
+    { label: 'Long run: 100 characters', input: '"(al)(al)(al)()()()G()GG()(al)G()(al)G(al)()G()GG()()()()GGGG()G()()()G()GG(al)GG()()()()(al)()(al)G"' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
     { label: "Two targets", input: '{"root":[9,4,12,2,6,10,15],"nodes":[2,6]}' },
     { label: "Three targets", input: '{"root":[9,4,12,2,6,10,15],"nodes":[2,6,10]}' },
     { label: "One target", input: '{"root":[9,4,12,2,6,10,15],"nodes":[15]}' },
+    { label: 'One target', input: '{"root":[1],"nodes":[1]}' },
+    { label: 'Targets in order', input: '{"root":[2,1,3],"nodes":[3,1]}' },
+    { label: 'Six nodes', input: '{"root":[9,4,12,2,6,10,15],"nodes":[2,6,10,15,4,12]}' },
+    { label: 'Long run: 15 nodes', input: '{"root":[52,75,44,29,83,8,33,80,16,49,92,56,5,43,13],"nodes":[52,75,44,29,83,8]}' },
   ],
 };
 

@@ -11,6 +11,11 @@ const definition = {
     { label: 'Ends sum to x', input: '{"nums":[2,3,1,5,4],"x":6}' },
     { label: 'Middle block', input: '{"nums":[4,1,3,2,5],"x":6}' },
     { label: 'Too large', input: '{"nums":[6,2,8,3],"x":9}' },
+    { label: 'One number', input: '{"nums":[5],"x":5}' },
+    { label: 'Equal numbers', input: '{"nums":[3,3,3],"x":6}' },
+    { label: 'No solution', input: '{"nums":[100],"x":7}' },
+    { label: 'Largest limits', input: '{"nums":[100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1],"x":1000}' },
+    { label: 'Long run: 20 numbers', input: '{"nums":[48,93,88,41,10,80,38,12,78,92,5,82,16,18,16,60,17,40,43,76],"x":500}' },
   ],
 }
 

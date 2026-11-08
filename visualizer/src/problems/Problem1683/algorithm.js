@@ -35,6 +35,10 @@ export const examples = [
     label: 'Boundary',
     input: '{"Tweets":[{"tweet_id":10,"content":"abcdefghijklmno"},{"tweet_id":11,"content":"abcdefghijklmnop"},{"tweet_id":12,"content":"short"}]}',
   },
+  { label: 'One tweet', input: '{"Tweets":[{"tweet_id":1,"content":"hi"}]}' },
+  { label: 'Equal lengths', input: '{"Tweets":[{"tweet_id":4,"content":"same"},{"tweet_id":2,"content":"text"}]}' },
+  { label: 'Empty content', input: '{"Tweets":[{"tweet_id":9,"content":""}]}' },
+  { label: 'Long run: 12 tweets', input: '{"Tweets":[{"tweet_id":100,"content":"bda jjccjdfcgccbhjhbfbjhdfgh"},{"tweet_id":101,"content":"digicc jbjhdjdd efaa fijhejgejdhd"},{"tweet_id":102,"content":"jfi"},{"tweet_id":103,"content":"djfaijhhbcfibfhbebacbcadjiigfggfdha"},{"tweet_id":104,"content":"fg"},{"tweet_id":105,"content":"bcfbcg cgcjhehj a"},{"tweet_id":106,"content":"fbhijhj jgebbhccchg"},{"tweet_id":107,"content":"hfhgcfcicagabgfg"},{"tweet_id":108,"content":"bgai gj"},{"tweet_id":109,"content":"acha"},{"tweet_id":110,"content":"h  dfhjbbfdj daifhbfe higiha gbbej cff"},{"tweet_id":111,"content":"hii ijhjd aajidajb hbfeeiffj"}]}' },
 ]
 
 export function parseInput(text) {

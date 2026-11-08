@@ -11,6 +11,10 @@ const definition = {
     { label: 'Twenty values', input: JSON.stringify({ arr: [4, 9, 1, 7, 3, 8, 2, 6, 5, 0, 100, 12, 11, 10, 13, 14, 15, 16, 17, 18] }) },
     { label: 'Flat values', input: JSON.stringify({ arr: Array(20).fill(7) }) },
     { label: 'Forty values', input: JSON.stringify({ arr: Array.from({ length: 40 }, (_, i) => (i * 37) % 101) }) },
+    { label: "Twenty values, all equal", input: "{\"arr\":[7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7]}" },
+    { label: "Forty values at both extremes", input: "{\"arr\":[0,1000,0,1000,0,1000,0,1000,0,1000,0,1000,0,1000,0,1000,0,1000,0,1000,0,1000,0,1000,0,1000,0,1000,0,1000,0,1000,0,1000,0,1000,0,1000,0,1000]}" },
+    { label: "Twenty values, one outlier each end", input: "{\"arr\":[0,500,500,500,500,500,500,500,500,500,500,500,500,500,500,500,500,500,500,1000]}" },
+    { label: "Long run: 40 values", input: "{\"arr\":[673,116,502,673,857,959,338,918,934,587,963,577,746,185,688,589,725,230,492,570,861,502,280,767,518,533,909,107,446,81,96,953,299,30,869,641,50,974,843,604]}" },
   ],
 }
 

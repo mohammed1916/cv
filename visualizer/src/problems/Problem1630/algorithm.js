@@ -41,6 +41,10 @@ export const examples = [
   { label: 'Two queries', input: '{"nums":[4,9,3,1,7,5],"l":[0,1,2],"r":[2,4,5]}' },
   { label: 'Pair is always arithmetic', input: '{"nums":[10,2,8],"l":[0],"r":[1]}' },
   { label: 'Gaps differ', input: '{"nums":[1,6,2,9],"l":[0],"r":[3]}' },
+    { label: "Two numbers", input: "{\"nums\":[1,5],\"l\":[0],\"r\":[1]}" },
+    { label: "All values equal", input: "{\"nums\":[3,3,3,3],\"l\":[0,1],\"r\":[2,3]}" },
+    { label: "Sixteen numbers, large values", input: "{\"nums\":[0,6000,12000,18000,24000,30000,36000,42000,48000,54000,60000,66000,72000,78000,84000,90000],\"l\":[0],\"r\":[15]}" },
+    { label: "Long run: 16 numbers, 8 queries", input: "{\"nums\":[-76399,81559,-7111,37738,36238,-89587,39732,-7160,15680,39164,80365,-29070,39445,-23340,97977,43157],\"l\":[11,10,5,9,10,5,0,14],\"r\":[12,11,6,10,11,6,1,15]}" },
 ]
 
 export const complexity = 'O(m * k log k) time for m queries whose slices have length k at most. Space is O(k) for each sorted slice.'

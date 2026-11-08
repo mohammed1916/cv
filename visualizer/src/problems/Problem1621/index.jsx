@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Three points', input: '{"n":3,"k":1}' },
     { label: 'Four points', input: '{"n":4,"k":2}' },
+    { label: "Two points, one segment", input: "{\"n\":2,\"k\":1}" },
+    { label: "Maximum segments for four points", input: "{\"n\":4,\"k\":3}" },
+    { label: "Largest n and k", input: "{\"n\":12,\"k\":6}" },
+    { label: "Long run: 12 points, 5 segments", input: "{\"n\":12,\"k\":5}" },
   ],
 }
 

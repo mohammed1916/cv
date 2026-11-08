@@ -35,6 +35,10 @@ export const examples = [
   { label: 'Ties by value', input: '[5,5,7,9,9,9,4]' },
   { label: 'All distinct', input: '[3,1,2]' },
   { label: 'One value', input: '[8,8,8,8]' },
+  { label: 'Single value', input: '[7]' },
+  { label: 'Equal counts', input: '[3,3,1,1,2,2]' },
+  { label: 'Extreme values', input: '[-100,100,-100,100,0]' },
+  { label: 'Long run: 100 values', input: '[45,-54,63,81,80,-30,-96,-81,98,-19,40,-17,-93,40,-29,-94,64,-13,-57,98,20,51,59,17,60,67,-36,-18,-7,-69,10,-12,-22,-87,-25,-23,-22,17,-90,-35,-89,7,12,31,-20,36,74,44,-34,48,4,38,-56,81,96,-6,89,-77,-42,-16,59,54,-47,53,19,40,-2,-81,-52,57,-6,29,25,-9,46,-75,12,92,-64,-1,-90,31,0,60,-34,-90,-23,-2,-5,-77,-12,22,17,84,-21,65,-65,70,5,-49]' },
 ]
 
 export const complexity = 'O(n + k log k) time for n values with k distinct values. Space is O(n).'

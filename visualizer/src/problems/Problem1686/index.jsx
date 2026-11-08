@@ -11,6 +11,10 @@ const definition = {
     { label: 'Alice ahead', input: '{"alice":[1,5,9,2],"bob":[4,3,2,8]}' },
     { label: 'Tie', input: '{"alice":[2,2],"bob":[2,2]}' },
     { label: 'Bob ahead', input: '{"alice":[1,1,1],"bob":[9,9,9]}' },
+    { label: 'One round', input: '{"alice":[5],"bob":[5]}' },
+    { label: 'Equal rounds', input: '{"alice":[3,3],"bob":[3,3]}' },
+    { label: 'Extremes', input: '{"alice":[100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1],"bob":[1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100]}' },
+    { label: 'Long run: 16 rounds', input: '{"alice":[12,45,28,24,23,34,49,79,83,76,15,13,86,71,69,22],"bob":[20,91,42,63,7,61,73,78,33,92,11,58,73,92,10,100]}' },
   ],
 }
 

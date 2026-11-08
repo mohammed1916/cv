@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"list1":[0,1,2,3,4,5],"a":3,"b":4,"list2":[10,11,12]}' },
     { label: 'Example 2', input: '{"list1":[0,1,2,3,4,5,6],"a":2,"b":5,"list2":[10,11,12,13,14]}' },
+    { label: 'Shortest list', input: '{"list1":[1,2,3],"a":1,"b":1,"list2":[9]}' },
+    { label: 'Equal values', input: '{"list1":[4,4,4,4,4],"a":1,"b":3,"list2":[4,4]}' },
+    { label: 'Widest range', input: '{"list1":[0,99,0,99,0,99,0,99,0,99],"a":1,"b":8,"list2":[0,99,50,1,2]}' },
+    { label: 'Long run: 10 values', input: '{"list1":[7,52,25,78,72,83,99,53,53,86],"a":2,"b":5,"list2":[9,49,48,33,94]}' },
   ],
 }
 

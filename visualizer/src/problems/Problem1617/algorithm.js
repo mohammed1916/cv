@@ -70,6 +70,10 @@ export const examples = [
   { label: 'Path of four cities', input: '{"n":4,"edges":[[1,2],[2,3],[3,4]]}' },
   { label: 'Two cities', input: '{"n":2,"edges":[[2,1]]}' },
   { label: 'Branch at city one', input: '{"n":3,"edges":[[3,1],[1,2]]}' },
+    { label: "Star of four cities", input: "{\"n\":4,\"edges\":[[1,2],[1,3],[1,4]]}" },
+    { label: "Two equal branches", input: "{\"n\":5,\"edges\":[[1,2],[1,3],[2,4],[2,5]]}" },
+    { label: "Path of ten cities", input: "{\"n\":10,\"edges\":[[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10]]}" },
+    { label: "Long run: random tree of ten", input: "{\"n\":10,\"edges\":[[1,2],[1,3],[1,4],[2,5],[1,6],[4,7],[5,8],[6,9],[8,10]]}" },
 ]
 
 export const complexity = 'O(2^n * n^2) time for n cities, with n up to 15 in the statement. The visual caps n at 10 so every connected subset gets its own frame.'

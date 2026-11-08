@@ -12,6 +12,11 @@ const definition = {
     { label: 'Mixed', input: '{"allowed":"ab","words":["ab","ba","aab","abc","ca"]}' },
     { label: 'All allowed', input: '{"allowed":"xyz","words":["zyx","xyzz"]}' },
     { label: 'None allowed', input: '{"allowed":"q","words":["ab","cd"]}' },
+    { label: 'One letter', input: '{"allowed":"a","words":["a"]}' },
+    { label: 'Equal words', input: '{"allowed":"ab","words":["ab","ab"]}' },
+    { label: 'Word uses a forbidden letter', input: '{"allowed":"a","words":["b"]}' },
+    { label: 'Long run: 12 words', input: '{"allowed":"abcdefgh","words":["ahgddbcd","bh","cdbagdf","gffgeghagb","fachdegff","aeaheag","gff","daaafeee","fdhga","gd","hehaeffg","fbgfbad"]}' },
+    { label: 'Largest alphabet', input: '{"allowed":"abcdefghijklmnopqrstuvwxyz","words":["cuajaebymt","byfgomslqp","wlgjxjggfg","jrhrytuftq","ihcdylpkyr","bdkgngfmrt","eskqhnbwcv","algkdlulwp","khsoysiarw","iyeclsnmma","qtrksewmek","qssodpclnz"]}' },
   ],
 }
 

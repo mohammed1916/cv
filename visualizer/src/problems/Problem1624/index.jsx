@@ -12,6 +12,10 @@ const definition = {
     { label: 'Repeat with gap', input: '{"s":"mnopqmrs"}' },
     { label: 'No repeat', input: '{"s":"abcd"}' },
     { label: 'Nested repeats', input: '{"s":"xyxzzxq"}' },
+    { label: "Single letter", input: "{\"s\":\"a\"}" },
+    { label: "Adjacent pair", input: "{\"s\":\"aa\"}" },
+    { label: "Fifty letters, one repeat", input: "{\"s\":\"abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwx\"}" },
+    { label: "Long run: 50 letters", input: "{\"s\":\"bbacadcaddcabeadbdedebbdaacebbaeecdebdecadacaebbca\"}" },
   ],
 }
 

@@ -11,6 +11,10 @@ const definition = {
     { label: 'Sample A', input: '{"values":[4,1,5,2],"k":2}' },
     { label: 'Pops', input: '{"values":[9,8,1,7],"k":2}' },
     { label: 'Whole array', input: '{"values":[4,2,9],"k":3}' },
+    { label: 'One value', input: '{"values":[7],"k":1}' },
+    { label: 'Equal values', input: '{"values":[2,2,2],"k":2}' },
+    { label: 'Largest k', input: '{"values":[5,1,9,3,7,0,1000,2],"k":8}' },
+    { label: 'Long run: 40 values', input: '{"values":[26,419,376,850,855,625,276,158,682,707,65,151,984,322,276,340,803,642,36,501,49,337,807,377,821,16,74,661,861,140,585,284,184,7,167,710,949,261,566,781],"k":10}' },
   ],
 }
 

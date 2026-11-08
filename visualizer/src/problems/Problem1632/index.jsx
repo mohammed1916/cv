@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"matrix": [[1,2],[3,4]]}' },
     { label: 'Ties', input: '{"matrix": [[7,7],[7,7]]}' },
+    { label: "Single negative cell", input: "{\"matrix\":[[-7]]}" },
+    { label: "Equal values in rows and columns", input: "{\"matrix\":[[3,3],[3,3]]}" },
+    { label: "Five by five, extremes", input: "{\"matrix\":[[-100,100,-100,100,-100],[100,-100,100,-100,100],[-100,100,-100,100,-100],[100,-100,100,-100,100],[-100,100,-100,100,-100]]}" },
+    { label: "Long run: 5 by 5", input: "{\"matrix\":[[-19,82,-79,96,-19],[2,6,-29,26,2],[-29,-25,-28,66,100],[1,-90,82,-79,-2],[-61,97,78,4,2]]}" },
   ],
 }
 
