@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"upper":2,"lower":1,"colsum":[1,1,1]}' },
     { label: 'Example 2', input: '{"upper":2,"lower":3,"colsum":[2,1,1,1]}' },
+    { label: 'Single empty column', input: '{"upper":0,"lower":0,"colsum":[0]}' },
+    { label: 'No solution', input: '{"upper":1,"lower":0,"colsum":[2]}' },
+    { label: 'Ones split evenly', input: '{"upper":2,"lower":2,"colsum":[1,1,1,1]}' },
+    { label: 'Largest totals', input: '{"upper":20,"lower":20,"colsum":[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]}' },
+    { label: 'Long run: 20 columns', input: '{"upper":9,"lower":10,"colsum":[1,2,0,1,1,2,2,1,1,0,2,1,2,1,0,0,0,1,1,0]}' },
   ],
 }
 

@@ -11,6 +11,9 @@ const definition = {
     { label: 'Diagonal win', input: '{"moves":[[0,0],[2,0],[1,1],[2,1],[2,2]]}' },
     { label: 'Column win for B', input: '{"moves":[[0,0],[0,1],[2,2],[1,1],[2,0],[2,1]]}' },
     { label: 'Still pending', input: '{"moves":[[0,0],[1,1]]}' },
+    { label: 'Single move', input: '{"moves":[[1,1]]}' },
+    { label: 'Row win for A', input: '{"moves":[[0,0],[1,0],[0,1],[1,1],[0,2]]}' },
+    { label: 'Long run: full board, draw', input: '{"moves":[[0,0],[0,1],[0,2],[1,1],[1,0],[1,2],[2,1],[2,0],[2,2]]}' },
   ],
 }
 

@@ -14,6 +14,10 @@ const definition = {
     { label: 'Mixed runs', input: 'aaabb' },
     { label: 'Distinct', input: 'abc' },
     { label: 'Long run', input: 'zzzzz' },
+    { label: 'Single letter', input: 'a' },
+    { label: 'Two equal letters', input: 'aa' },
+    { label: 'Repeated blocks', input: 'aabbaabb' },
+    { label: 'Long run: 50 letters', input: 'aaaaaaaccccaabbbbbbbbcbbbbbbbbbbbaaaabbbaaaaaaaaaa' },
   ],
 }
 

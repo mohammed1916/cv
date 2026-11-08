@@ -11,6 +11,10 @@ export const examples = [
   { label: 'Mixed parity', input: '[1,2,3]' },
   { label: 'One odd chip', input: '[2,2,2,3]' },
   { label: 'Already together', input: '[4,4,4]' },
+  { label: 'Single chip', input: '[5]' },
+  { label: 'Equal positions', input: '[3,3,3]' },
+  { label: 'Extreme positions', input: '[0,30]' },
+  { label: 'Long run: twenty chips', input: '[21,20,3,22,14,18,28,18,19,15,30,4,14,7,27,23,2,25,23,26]' },
 ]
 
 export function parseInput(text) {

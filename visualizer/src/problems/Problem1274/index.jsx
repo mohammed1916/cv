@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"size":4,"ships":[[0,0],[2,3],[3,1]]}' },
     { label: 'Empty grid', input: '{"size":3,"ships":[]}' },
+    { label: 'Single cell grid', input: '{"size":1,"ships":[[0,0]]}' },
+    { label: 'Full row', input: '{"size":3,"ships":[[0,0],[0,1],[0,2]]}' },
+    { label: 'Largest grid', input: '{"size":8,"ships":[[7,7],[0,0],[4,4]]}' },
+    { label: 'Long run: 10 ships on 8 by 8', input: '{"size":8,"ships":[[0,5],[1,1],[2,5],[4,0],[4,5],[4,6],[6,0],[6,1],[7,0],[7,3]]}' },
   ],
 }
 

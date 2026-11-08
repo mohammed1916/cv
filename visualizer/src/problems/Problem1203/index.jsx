@@ -20,6 +20,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":8,"m":2,"group":[-1,-1,1,0,0,1,0,-1],"before_items":[[],[6],[5],[6],[3,6],[],[],[]]}' },
     { label: 'Cycle', input: '{"n":8,"m":2,"group":[-1,-1,1,0,0,1,0,-1],"before_items":[[],[6],[5],[6],[3],[],[4],[]]}' },
+    { label: 'Single item, one group', input: '{\"n\":1,\"m\":1,\"group\":[0],\"before_items\":[[]]}' },
+    { label: 'No group ids, chain of dependencies', input: '{\"n\":3,\"m\":1,\"group\":[-1,-1,-1],\"before_items\":[[],[0],[1]]}' },
+    { label: 'Long run: eight items in a chain', input: '{\"n\":8,\"m\":8,\"group\":[0,1,2,3,4,5,6,7],\"before_items\":[[],[0],[1],[2],[3],[4],[5],[6]]}' },
   ],
 }
 

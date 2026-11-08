@@ -6,7 +6,7 @@ const definition = {
   inputLabel: 'Log ids as JSON',
   url: 'https://leetcode.com/problems/find-the-start-and-end-number-of-continuous-ranges/',
   complexity: 'Walkthrough: one sort, then one pass that either extends or closes the current run.',
-  examples: [{ label: 'Sample ids', input: JSON.stringify(sample) }],
+  examples: [{ label: 'Sample ids', input: JSON.stringify(sample) }, { label: 'Single id', input: '{"logs":[7]}' }, { label: 'Consecutive run', input: '{"logs":[1,2,3]}' }, { label: 'Large and negative ids', input: '{"logs":[999999999,-5,500]}' }, { label: 'Long run: 12 ids', input: '{"logs":[33,138,151,192,215,291,331,393,420,458,480,497]}' }],
 }
 
 function RowTable({ rows }) {

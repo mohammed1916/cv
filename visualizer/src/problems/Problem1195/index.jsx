@@ -25,6 +25,9 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"n":15}' },
     { label: 'Short', input: '{"n":5}' },
+    { label: 'Single number', input: '{\"n\":1}' },
+    { label: 'Multiple of 3 only', input: '{\"n\":3}' },
+    { label: 'Long run: largest allowed n', input: '{\"n\":30}' },
   ],
 }
 

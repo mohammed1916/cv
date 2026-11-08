@@ -11,6 +11,10 @@ const definition = {
     { label: 'Mixed', input: '{"colors":[1,1,2,1,3,2,2,3,3],"queries":[[1,3],[2,2],[6,1],[4,2]]}' },
     { label: 'Missing', input: '{"colors":[1,1,1],"queries":[[0,2],[2,1]]}' },
     { label: 'Single', input: '{"colors":[3],"queries":[[0,3]]}' },
+    { label: 'Single position', input: '{"colors":[2],"queries":[[0,1]]}' },
+    { label: 'Same color already', input: '{"colors":[3,3,3],"queries":[[1,3]]}' },
+    { label: 'Equal colors at the ends', input: '{"colors":[1,2,3,1],"queries":[[0,2],[3,3]]}' },
+    { label: 'Long run: 30 positions', input: '{"colors":[3,2,1,2,2,3,3,2,1,1,3,1,3,3,3,2,2,2,1,2,1,1,3,3,3,1,3,3,1,2],"queries":[[16,1],[14,3],[3,3],[21,3],[18,3],[12,3],[20,2],[8,1],[17,3],[22,3]]}' },
   ],
 }
 

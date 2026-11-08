@@ -20,6 +20,10 @@ const definition = {
     { label: 'Cousins in the coast', input: '{"regions":[["Continent","Coast","Inland"],["Coast","Harbour","Dockyard"],["Inland","Valley","Plateau","Mesa"]],"region1":"Dockyard","region2":"Mesa"}' },
     { label: 'Siblings', input: '{"regions":[["Continent","Coast","Inland"],["Inland","Valley","Plateau","Mesa"]],"region1":"Valley","region2":"Plateau"}' },
     { label: 'Ancestor is the answer', input: '{"regions":[["Atlas","Summit","Basin"],["Summit","Ridge"]],"region1":"Ridge","region2":"Summit"}' },
+    { label: 'One level', input: '{"regions":[["Root","Child"]],"region1":"Child","region2":"Root"}' },
+    { label: 'Same region twice', input: '{"regions":[["Continent","Coast","Inland"],["Inland","Valley","Plateau","Mesa"]],"region1":"Valley","region2":"Valley"}' },
+    { label: 'Deep chain', input: '{"regions":[["A","B"],["B","C"],["C","D"],["D","E"],["E","F"],["F","G"]],"region1":"G","region2":"C"}' },
+    { label: 'Long run: 14 regions', input: '{"regions":[["Root","N1","N2","N3"],["N1","N4","N5","N6"],["N2","N7","N8"],["N3","N9"],["N4","N10"],["N5","N11"],["N6","N12","N13"]],"region1":"N10","region2":"N13"}' },
   ],
 }
 

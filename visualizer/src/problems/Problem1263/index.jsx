@@ -15,6 +15,10 @@ const definition = {
     { label: 'Example 1', input: '["######","#T...#","#.B..#","#..S.#","######"]' },
     { label: 'One push', input: '["#####","#TB.#","#S..#","#####"]' },
     { label: 'Boxed in', input: '["#####","#T#B#","#S###","#####"]' },
+    { label: 'Straight push', input: '["#####","#STB#","#####"]' },
+    { label: 'Diagonal target', input: '["#####","#S..#","#.B.#","#..T#","#####"]' },
+    { label: 'Largest grid', input: '["######","#S...#","#.B..#","#....#","#..T.#","######"]' },
+    { label: 'Long run: wall maze', input: '["######","#S...#","#.##.#","#..B.#","##.T.#","######"]' },
   ],
 }
 

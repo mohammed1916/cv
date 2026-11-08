@@ -16,6 +16,10 @@ const definition = {
   complexity: 'O(1) per call in this replay. The visualization caps the input at 20 calls.',
   examples: [
     { label: 'Full queue', input: '{"capacity":2,"ops":[["enqueue",1],["enqueue",2],["enqueue",3],["dequeue"],["enqueue",3],["dequeue"],["dequeue"],["dequeue"]]}' },
+    { label: 'Single enqueue', input: '{"capacity":1,"ops":[["enqueue",9]]}' },
+    { label: 'Dequeue on an empty queue', input: '{"capacity":3,"ops":[["dequeue"],["enqueue",4],["dequeue"],["dequeue"]]}' },
+    { label: 'Fill to capacity then refill', input: '{"capacity":5,"ops":[["enqueue",1],["enqueue",2],["enqueue",3],["enqueue",4],["enqueue",5],["enqueue",6],["dequeue"],["enqueue",6],["dequeue"],["dequeue"],["dequeue"],["dequeue"],["dequeue"]]}' },
+    { label: 'Long run: 20 operations', input: '{"capacity":4,"ops":[["dequeue"],["dequeue"],["dequeue"],["enqueue",96],["dequeue"],["enqueue",58],["dequeue"],["enqueue",47],["dequeue"],["dequeue"],["enqueue",22],["enqueue",92],["dequeue"],["enqueue",14],["dequeue"],["dequeue"],["enqueue",41],["enqueue",39],["enqueue",12],["dequeue"]]}' },
   ],
 }
 

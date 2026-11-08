@@ -12,6 +12,9 @@ const definition = {
     { label: 'Three nodes', input: '[1,2,3]' },
     { label: 'Single node', input: '[9]' },
     { label: 'Five nodes', input: '[4,7,1,8,2]' },
+    { label: 'Equal values', input: '[5,5,5]' },
+    { label: 'Extreme values', input: '[1000000000,-1000000000,0]' },
+    { label: 'Long run: 12 nodes', input: '[39,10,-2,-12,44,-48,29,23,-29,18,3,-20]' },
   ],
 }
 

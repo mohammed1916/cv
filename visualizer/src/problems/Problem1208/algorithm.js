@@ -48,6 +48,10 @@ export const examples = [
   { label: 'Zero budget keeps only equal positions', input: '{"s":"abccdef","t":"abzzdef","maxCost":0}' },
   { label: 'All positions fit', input: '{"s":"moss","t":"nptt","maxCost":20}' },
   { label: 'No position fits', input: '{"s":"aaaa","t":"zzzz","maxCost":4}' },
+  { label: 'Single letter change', input: '{\"s\":\"a\",\"t\":\"z\",\"maxCost\":25}' },
+  { label: 'Identical strings need no cost', input: '{\"s\":\"abc\",\"t\":\"abc\",\"maxCost\":0}' },
+  { label: 'Largest allowed budget', input: '{\"s\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"t\":\"zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz\",\"maxCost\":100}' },
+  { label: 'Long run: 40 letters', input: '{\"s\":\"swyjmwajazxzrrvosrbwjlbwvzzgtwekbxahjdho\",\"t\":\"ctodqcrsdglvvrrhilcvttqcpldvplvcyattzkmd\",\"maxCost\":100}' },
 ]
 
 export function parseInput(text) {

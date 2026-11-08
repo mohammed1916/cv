@@ -11,6 +11,9 @@ const definition = {
     { label: 'Mixed sizes', input: '[1,3,2,2,3,3,1]' },
     { label: 'Two full blocks', input: '[4,4,4,4,2,2]' },
     { label: 'Single person', input: '[1]' },
+    { label: 'Equal sizes', input: '[3,3,3]' },
+    { label: 'One block of thirty', input: '[30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30]' },
+    { label: 'Long run: 30 people', input: '[1,1,2,2,2,2,3,3,3,3,3,3,3,3,3,4,4,4,4,5,5,5,5,5,6,6,6,6,6,6]' },
   ],
 }
 

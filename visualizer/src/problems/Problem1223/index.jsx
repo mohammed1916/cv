@@ -11,6 +11,9 @@ const definition = {
     { label: 'One roll', input: '{"n":1,"rollMax":[1,2,3,4,5,6]}' },
     { label: 'Limit one', input: '{"n":6,"rollMax":[1,1,1,1,1,1]}' },
     { label: 'Loose limits', input: '{"n":4,"rollMax":[5,5,5,5,5,5]}' },
+    { label: 'Single roll', input: '{\"n\":1,\"rollMax\":[3,3,3,3,3,3]}' },
+    { label: 'Equal limits on every face', input: '{\"n\":3,\"rollMax\":[2,2,2,2,2,2]}' },
+    { label: 'Long run: 5000 rolls, loose limits', input: '{\"n\":5000,\"rollMax\":[15,15,15,15,15,15]}' },
   ],
 }
 

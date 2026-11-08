@@ -23,6 +23,10 @@ const definition = {
     { label: 'Cycle with a tail', input: '{"n":4,"connections":[[0,1],[1,2],[2,0],[1,3]]}' },
     { label: 'Two cycles joined by a bridge', input: '{"n":6,"connections":[[0,1],[1,2],[2,0],[1,3],[3,4],[4,5],[5,3]]}' },
     { label: 'Path (every edge is a bridge)', input: '{"n":4,"connections":[[0,1],[1,2],[2,3]]}' },
+    { label: 'Two nodes, one edge', input: '{"n":2,"connections":[[0,1]]}' },
+    { label: 'Star with four leaves', input: '{"n":5,"connections":[[0,1],[0,2],[0,3],[0,4]]}' },
+    { label: 'Complete graph on four nodes', input: '{"n":4,"connections":[[0,1],[0,2],[0,3],[1,2],[1,3],[2,3]]}' },
+    { label: 'Long run: 12 nodes', input: '{"n":12,"connections":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11],[5,1],[4,2],[11,5],[7,9],[11,7],[10,1]]}' },
   ],
 }
 

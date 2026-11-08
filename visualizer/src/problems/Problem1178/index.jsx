@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Official', input: '{"words":["aaaa","asas","able","ability","actt","actor","access"],"puzzles":["aboveyz","abrodyz","abslute","absoryz","actresz","gaswxyz"]}' },
     { label: 'Missing first letter', input: '{"words":["bcd","abc"],"puzzles":["abcdefg"]}' },
+    { label: 'Word fits one puzzle', input: '{"words":["abc"],"puzzles":["abcdefg"]}' },
+    { label: 'Missing first letter gives zero', input: '{"words":["bcd"],"puzzles":["abcdefg"]}' },
+    { label: 'Repeated letters in one word', input: '{"words":["a","aa","aaa"],"puzzles":["abcdefg"]}' },
+    { label: 'Long run: 12 words, 6 puzzles', input: '{"words":["xuwoiphh","ekbae","hdueb","glypmc","uctvbmrm","nejrj","okqmt","pkimlwpd","x","g","g","retnusju"],"puzzles":["wxtdckn","vunotzk","xhwvain","tsdrcny","bcwuozv","hvzncft"]}' },
   ],
 }
 

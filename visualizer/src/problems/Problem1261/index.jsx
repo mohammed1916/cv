@@ -17,6 +17,9 @@ const definition = {
   examples: [
     { label: 'Right child only', input: '{"tree":[-1,null,-1],"targets":[1,2]}' },
     { label: 'Full five', input: '{"tree":[-1,-1,-1,-1,-1],"targets":[1,3,5]}' },
+    { label: 'Single root, target zero', input: '{"tree":[-1],"targets":[0]}' },
+    { label: 'Repeated targets', input: '{"tree":[-1,-1,-1],"targets":[2,2,2]}' },
+    { label: 'Long run: 15 nodes, 15 targets', input: '{"tree":[-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],"targets":[138,444,685,593,892,292,328,422,947,134,762,606,58,967,343]}' },
   ],
 }
 

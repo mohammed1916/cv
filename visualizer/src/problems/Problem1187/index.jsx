@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"arr1":[1,5,3,6,7],"arr2":[1,3,2,4]}' },
     { label: 'Example 2', input: '{"arr1":[1,5,3,6,7],"arr2":[4,3,1]}' },
+    { label: 'Single element each', input: '{"arr1":[3],"arr2":[3]}' },
+    { label: 'Equal arrays', input: '{"arr1":[2,4,6],"arr2":[2,4,6]}' },
+    { label: 'Boundary values 0 and 20', input: '{"arr1":[0,20],"arr2":[20,0,20]}' },
+    { label: 'Long run: 8 values each', input: '{"arr1":[11,5,16,18,15,14,8,15],"arr2":[18,8,7,20,3,13,17,18]}' },
   ],
 }
 

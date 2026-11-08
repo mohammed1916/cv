@@ -6,7 +6,12 @@ const definition = {
   inputLabel: 'Transactions and chargebacks as JSON',
   url: 'https://leetcode.com/problems/monthly-transactions-ii/',
   complexity: 'One pass per stream, then a keyed merge of the month and country groups.',
-  examples: [{ label: 'Sample tables', input: JSON.stringify(sample) }],
+  examples: [
+    { label: 'Sample tables', input: JSON.stringify(sample) },
+    { label: 'Single approved sale, no chargebacks', input: '{\"transactions\":[{\"id\":1,\"country\":\"US\",\"state\":\"approved\",\"amount\":100,\"trans_date\":\"2020-01-01\"}],\"chargebacks\":[]}' },
+    { label: 'Two chargebacks in the same month', input: '{\"transactions\":[{\"id\":1,\"country\":\"US\",\"state\":\"approved\",\"amount\":300,\"trans_date\":\"2019-03-05\"},{\"id\":2,\"country\":\"US\",\"state\":\"approved\",\"amount\":400,\"trans_date\":\"2019-03-09\"}],\"chargebacks\":[{\"trans_id\":1,\"trans_date\":\"2019-04-02\"},{\"trans_id\":2,\"trans_date\":\"2019-04-02\"}]}' },
+    { label: 'Long run: twelve transactions over six months', input: '{\"transactions\":[{\"id\":1,\"country\":\"IN\",\"state\":\"approved\",\"amount\":1004,\"trans_date\":\"2019-05-16\"},{\"id\":2,\"country\":\"DE\",\"state\":\"approved\",\"amount\":1634,\"trans_date\":\"2019-04-21\"},{\"id\":3,\"country\":\"IN\",\"state\":\"declined\",\"amount\":366,\"trans_date\":\"2019-04-26\"},{\"id\":4,\"country\":\"DE\",\"state\":\"approved\",\"amount\":509,\"trans_date\":\"2019-01-07\"},{\"id\":5,\"country\":\"US\",\"state\":\"approved\",\"amount\":1006,\"trans_date\":\"2019-02-21\"},{\"id\":6,\"country\":\"IN\",\"state\":\"approved\",\"amount\":1991,\"trans_date\":\"2019-04-05\"},{\"id\":7,\"country\":\"US\",\"state\":\"approved\",\"amount\":1671,\"trans_date\":\"2019-03-26\"},{\"id\":8,\"country\":\"IN\",\"state\":\"approved\",\"amount\":324,\"trans_date\":\"2019-04-22\"},{\"id\":9,\"country\":\"IN\",\"state\":\"approved\",\"amount\":1659,\"trans_date\":\"2019-06-03\"},{\"id\":10,\"country\":\"DE\",\"state\":\"approved\",\"amount\":466,\"trans_date\":\"2019-01-13\"},{\"id\":11,\"country\":\"IN\",\"state\":\"approved\",\"amount\":657,\"trans_date\":\"2019-06-07\"},{\"id\":12,\"country\":\"IN\",\"state\":\"approved\",\"amount\":1797,\"trans_date\":\"2019-01-13\"}],\"chargebacks\":[{\"trans_id\":1,\"trans_date\":\"2019-06-02\"},{\"trans_id\":4,\"trans_date\":\"2019-02-02\"},{\"trans_id\":7,\"trans_date\":\"2019-04-02\"},{\"trans_id\":10,\"trans_date\":\"2019-02-02\"}]}' },
+  ],
 }
 
 function RowTable({ rows }) {

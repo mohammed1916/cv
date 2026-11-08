@@ -13,6 +13,9 @@ export const examples = [
   { label: 'Three shared values', input: '{"a":[2,5,8,12,20],"b":[1,5,8,9,20,30],"c":[5,8,20,40]}' },
   { label: 'Disjoint arrays', input: '{"a":[1,3,5],"b":[2,4,6],"c":[7,8]}' },
   { label: 'Only the last value', input: '{"a":[1,2,9],"b":[3,4,9],"c":[5,9]}' },
+  { label: 'Single shared value', input: '{\"a\":[4],\"b\":[4],\"c\":[4]}' },
+  { label: 'Equal arrays, every value shared', input: '{\"a\":[1,2,3],\"b\":[1,2,3],\"c\":[1,2,3]}' },
+  { label: 'Long run: three sorted arrays', input: '{"a":[10,12,17,19,23,25,33,35,36,43],"b":[14,16,19,24,25,27,30,35,45,49],"c":[1,5,7,11,12,16,39,48,49,53]}' },
 ]
 
 function strictlyIncreasingArray(value, name) {

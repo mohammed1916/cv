@@ -11,6 +11,9 @@ const definition = {
     { label: 'One letter', input: '{"n":1}' },
     { label: 'Two letters', input: '{"n":2}' },
     { label: 'Long length', input: '{"n":60}' },
+    { label: 'Three letters', input: '{\"n\":3}' },
+    { label: 'Five letters', input: '{\"n\":5}' },
+    { label: 'Long run: largest allowed length', input: '{\"n\":200}' },
   ],
 }
 

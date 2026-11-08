@@ -12,6 +12,9 @@ const definition = {
     { label: 'Zero to 21', input: '{"low":0,"high":21}' },
     { label: 'Hundreds', input: '{"low":100,"high":150}' },
     { label: 'None', input: '{"low":11,"high":11}' },
+    { label: 'Zero alone', input: '{\"low\":0,\"high\":0}' },
+    { label: 'Largest allowed range', input: '{\"low\":999,\"high\":1000}' },
+    { label: 'Long run: full range up to 1000', input: '{\"low\":0,\"high\":1000}' },
   ],
 }
 

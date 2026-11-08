@@ -12,6 +12,9 @@ const definition = {
     { label: 'Four digits', input: '{"n":3945}' },
     { label: 'Contains a zero', input: '{"n":1002}' },
     { label: 'Single digit', input: '{"n":7}' },
+    { label: 'Largest n', input: '{"n":100000}' },
+    { label: 'Repeated digits', input: '{"n":1111}' },
+    { label: 'Long run: five digits', input: '{"n":87654}' },
   ],
 }
 

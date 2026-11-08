@@ -11,6 +11,10 @@ const definition = {
     { label: 'Small block', input: '{"matrix":[[0,1],[1,1]]}' },
     { label: 'Two by three', input: '{"matrix":[[1,1,1],[1,1,1]]}' },
     { label: 'Single one', input: '{"matrix":[[1]]}' },
+    { label: 'Single zero', input: '{"matrix":[[0]]}' },
+    { label: 'All zeros', input: '{"matrix":[[0,0],[0,0]]}' },
+    { label: 'Largest grid, all ones', input: '{"matrix":[[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1]]}' },
+    { label: 'Long run: 8 by 8 random', input: '{"matrix":[[1,0,0,1,1,1,0,0],[1,0,1,1,0,1,1,1],[1,0,1,1,1,0,1,1],[0,0,1,0,0,0,1,1],[1,0,1,0,0,1,1,1],[0,0,0,0,1,1,1,0],[1,0,0,0,1,0,1,0],[0,0,1,1,0,0,0,0]]}' },
   ],
 }
 

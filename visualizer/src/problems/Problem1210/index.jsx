@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"grid":[[0,0,0,0,0,1],[1,1,0,0,1,0],[0,0,1,0,1,0],[1,1,0,0,0,1],[1,1,1,0,0,1],[1,1,1,0,0,0]]}' },
     { label: 'Open board', input: '{"grid":[[0,0],[0,0]]}' },
+    { label: 'Smallest open board', input: '{\"grid\":[[0,0],[0,0]]}' },
+    { label: 'Blocked middle row forces a detour', input: '{\"grid\":[[0,0,0],[1,1,0],[0,0,0]]}' },
+    { label: 'Largest open board', input: '{\"grid\":[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]}' },
+    { label: 'Long run: six by six with scattered blocks', input: '{\"grid\":[[0,0,0,1,0,0],[0,0,0,1,1,1],[0,0,0,0,0,0],[1,0,0,0,0,0],[0,1,1,0,1,0],[0,1,0,0,0,0]]}' },
   ],
 }
 

@@ -12,6 +12,10 @@ const definition = {
     { label: 'Pair found', input: '{"root1":[5,3,8],"root2":[2,1,6],"target":11}' },
     { label: 'No pair', input: '{"root1":[5,3,8],"root2":[2,1,6],"target":20}' },
     { label: 'Single nodes', input: '{"root1":[4],"root2":[4],"target":8}' },
+    { label: 'Single node each', input: '{\"root1\":[1],\"root2\":[2],\"target\":3}' },
+    { label: 'Equal values pair across trees', input: '{\"root1\":[4],\"root2\":[4],\"target\":8}' },
+    { label: 'No pair reaches the target', input: '{\"root1\":[5,3,8],\"root2\":[2,1,6],\"target\":100}' },
+    { label: 'Long run: two full trees of fifteen nodes', input: '{\"root1\":[8,4,12,2,6,10,14,1,3,5,7,9,11,13,15],\"root2\":[16,8,24,4,12,20,28,2,6,10,14,18,22,26,30],\"target\":31}' },
   ],
 }
 

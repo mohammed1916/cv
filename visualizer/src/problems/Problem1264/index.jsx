@@ -23,6 +23,10 @@ const definition = {
   examples: [
     { label: 'Friends of user 1', input: '{"friendship":[{"user1_id":1,"user2_id":2},{"user1_id":3,"user2_id":1},{"user1_id":2,"user2_id":4},{"user1_id":5,"user2_id":6}],"likes":[{"user_id":1,"page_id":10},{"user_id":2,"page_id":20},{"user_id":3,"page_id":20},{"user_id":3,"page_id":30},{"user_id":4,"page_id":40},{"user_id":4,"page_id":10},{"user_id":5,"page_id":50}]}' },
     { label: 'No friends', input: '{"friendship":[{"user1_id":7,"user2_id":8}],"likes":[{"user_id":8,"page_id":70}]}' },
+    { label: 'Equal counts', input: '{"friendship":[{"user1_id":1,"user2_id":2},{"user1_id":1,"user2_id":3}],"likes":[{"user_id":2,"page_id":60},{"user_id":3,"page_id":50}]}' },
+    { label: 'No friendships', input: '{"friendship":[],"likes":[{"user_id":4,"page_id":9}]}' },
+    { label: 'Largest ids', input: '{"friendship":[{"user1_id":99,"user2_id":100}],"likes":[{"user_id":100,"page_id":999},{"user_id":99,"page_id":999}]}' },
+    { label: 'Long run: 12 friendships', input: '{"friendship":[{"user1_id":3,"user2_id":5},{"user1_id":6,"user2_id":1},{"user1_id":5,"user2_id":2},{"user1_id":4,"user2_id":3},{"user1_id":6,"user2_id":4},{"user1_id":8,"user2_id":7},{"user1_id":3,"user2_id":7},{"user1_id":6,"user2_id":3},{"user1_id":8,"user2_id":6},{"user1_id":1,"user2_id":6},{"user1_id":2,"user2_id":3},{"user1_id":1,"user2_id":5}],"likes":[{"user_id":6,"page_id":1},{"user_id":6,"page_id":4},{"user_id":2,"page_id":3},{"user_id":8,"page_id":5},{"user_id":2,"page_id":6},{"user_id":4,"page_id":5},{"user_id":1,"page_id":6},{"user_id":6,"page_id":8},{"user_id":4,"page_id":6},{"user_id":2,"page_id":1},{"user_id":7,"page_id":3},{"user_id":3,"page_id":5}]}' },
   ],
 }
 

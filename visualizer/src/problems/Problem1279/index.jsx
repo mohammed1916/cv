@@ -15,6 +15,10 @@ const definition = {
   complexity: 'O(1) per car. The concurrent version uses a lock so only one road holds the light at a time.',
   examples: [
     { label: 'Two roads', input: '{"arrivals":[[1,1,1],[2,1,2],[3,2,3],[4,2,4],[5,1,1]]}' },
+    { label: 'Single car', input: '{"arrivals":[[7,1,1]]}' },
+    { label: 'Same car, both roads', input: '{"arrivals":[[1,1,1],[1,2,3]]}' },
+    { label: 'Large car ids', input: '{"arrivals":[[1000000,2,4],[999999,1,2]]}' },
+    { label: 'Long run: 20 arrivals', input: '{"arrivals":[[7,2,3],[3,2,4],[5,1,2],[6,1,2],[2,2,3],[12,1,2],[4,1,1],[2,2,4],[10,1,1],[2,2,4],[10,1,2],[10,2,4],[11,1,1],[7,2,3],[6,2,3],[1,1,2],[12,1,2],[8,2,4],[6,2,4],[6,2,4]]}' },
   ],
 }
 

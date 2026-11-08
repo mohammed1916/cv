@@ -12,6 +12,10 @@ const definition = {
     { label: 'Tiled 7 by 5', input: '{"width":7,"height":5,"sideLength":3,"maxOnes":4}' },
     { label: 'Square board', input: '{"width":6,"height":6,"sideLength":4,"maxOnes":5}' },
     { label: 'Window too large', input: '{"width":3,"height":8,"sideLength":5,"maxOnes":1}' },
+    { label: 'Smallest board', input: '{"width":1,"height":1,"sideLength":1,"maxOnes":0}' },
+    { label: 'Largest window, no ones allowed', input: '{"width":12,"height":12,"sideLength":6,"maxOnes":0}' },
+    { label: 'Full allowance', input: '{"width":4,"height":4,"sideLength":2,"maxOnes":4}' },
+    { label: 'Long run: 12 by 12 board', input: '{"width":12,"height":12,"sideLength":5,"maxOnes":10}' },
   ],
 }
 

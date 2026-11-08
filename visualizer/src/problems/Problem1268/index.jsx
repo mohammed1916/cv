@@ -11,6 +11,10 @@ const definition = {
     { label: 'Shared start', input: '{"products":["bear","bell","beach","bead"],"searchWord":"be"}' },
     { label: 'Dead end', input: '{"products":["cat","car"],"searchWord":"cow"}' },
     { label: 'Cut at three', input: '{"products":["a","ab","abc","abd","abe"],"searchWord":"ab"}' },
+    { label: 'Single product', input: '{"products":["a"],"searchWord":"a"}' },
+    { label: 'Duplicate words', input: '{"products":["bat","bat","bag"],"searchWord":"ba"}' },
+    { label: 'Long search word', input: '{"products":["abcdef","abcdeg"],"searchWord":"abcdefgh"}' },
+    { label: 'Long run: 12 products', input: '{"products":["caabb","cbba","cc","dcaabc","c","c","ccbbab","bacdd","cc","abba","dd","adbdad"],"searchWord":"ab"}' },
   ],
 }
 

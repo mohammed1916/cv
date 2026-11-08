@@ -11,6 +11,9 @@ const definition = {
     { label: 'Mixed', input: '{"m":3,"n":4,"indices":[[0,1],[2,3],[2,0]]}' },
     { label: 'Same cell twice', input: '{"m":2,"n":2,"indices":[[1,1],[1,1]]}' },
     { label: 'Single cell', input: '{"m":1,"n":1,"indices":[[0,0]]}' },
+    { label: 'Largest grid', input: '{"m":8,"n":8,"indices":[[0,0],[7,7],[0,7],[7,0],[3,4]]}' },
+    { label: 'Full row', input: '{"m":1,"n":4,"indices":[[0,0],[0,1],[0,2],[0,3]]}' },
+    { label: 'Long run: 12 cells on 8 by 8', input: '{"m":8,"n":8,"indices":[[5,0],[5,3],[1,2],[7,4],[1,5],[3,4],[0,5],[5,7],[3,5],[1,0],[6,2],[2,4]]}' },
   ],
 }
 

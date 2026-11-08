@@ -11,6 +11,10 @@ const definition = {
     { label: 'Corner king', input: '{"queens":[[0,5],[6,0],[4,4]],"king":[0,0]}' },
     { label: 'No attack', input: '{"queens":[[1,2],[2,5],[5,6]],"king":[3,3]}' },
     { label: 'Row', input: '{"queens":[[4,2],[4,0]],"king":[4,6]}' },
+    { label: 'No queens on the board', input: '{\"queens\":[],\"king\":[7,7]}' },
+    { label: 'Adjacent queen blocks the ray', input: '{\"queens\":[[7,6]],\"king\":[7,7]}' },
+    { label: 'Queens on the four corners', input: '{\"queens\":[[0,0],[0,7],[7,0]],\"king\":[3,3]}' },
+    { label: 'Long run: twenty queens', input: '{\"queens\":[[5,0],[4,7],[6,2],[0,1],[1,6],[1,4],[2,0],[0,0],[6,7],[2,2],[0,2],[3,7],[3,1],[2,7],[0,3],[3,4],[4,3],[4,1],[2,5],[7,4]],\"king\":[4,4]}' },
   ],
 }
 

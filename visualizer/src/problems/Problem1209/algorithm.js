@@ -12,6 +12,10 @@ export const examples = [
   { label: 'Cascade', input: '{"s":"pqqqrrrpz","k":3}' },
   { label: 'Complete removal', input: '{"s":"aaabbb","k":3}' },
   { label: 'No long run', input: '{"s":"cedar","k":2}' },
+  { label: 'Single letter stays', input: '{\"s\":\"a\",\"k\":2}' },
+  { label: 'Runs of exactly k letters are removed', input: '{\"s\":\"aabbcc\",\"k\":2}' },
+  { label: 'Largest allowed string', input: '{\"s\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"k\":5}' },
+  { label: 'Long run: 30 letters, k 3', input: '{\"s\":\"bbbaabaabaabbbaabbabaabbbababa\",\"k\":3}' },
 ]
 
 export function parseInput(text) {

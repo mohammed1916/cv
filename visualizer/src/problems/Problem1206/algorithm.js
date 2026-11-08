@@ -128,6 +128,10 @@ export const examples = [
       args: [1, 2, 3, 0, 4, 1, 0, 1, 1],
     }),
   },
+  { label: 'Single search on an empty list', input: '{\"operations\":[\"search\"],\"args\":[5]}' },
+  { label: 'Repeated value added three times', input: '{\"operations\":[\"add\",\"add\",\"add\"],\"args\":[7,7,7]}' },
+  { label: 'Largest allowed argument', input: '{\"operations\":[\"add\",\"search\",\"erase\",\"search\"],\"args\":[20000,20000,20000,20000]}' },
+  { label: 'Long run: 40 mixed calls', input: '{\"operations\":[\"erase\",\"search\",\"add\",\"add\",\"add\",\"erase\",\"erase\",\"search\",\"search\",\"search\",\"erase\",\"erase\",\"search\",\"erase\",\"add\",\"erase\",\"add\",\"add\",\"search\",\"search\",\"search\",\"search\",\"search\",\"erase\",\"search\",\"add\",\"erase\",\"add\",\"search\",\"search\",\"search\",\"search\",\"erase\",\"erase\",\"add\",\"search\",\"add\",\"add\",\"add\",\"search\"],\"args\":[134,62,72,104,173,124,156,125,129,20,62,146,18,141,123,20,137,92,101,53,196,7,17,44,109,22,20,91,62,108,127,160,24,73,24,9,136,124,135,93]}' },
 ]
 
 const LINE = { start: 2, add: 20, search: 23, erase: 27, done: 32 }

@@ -23,6 +23,10 @@ const definition = {
       label: 'Example 2',
       input: JSON.stringify({ words: ['xxxz', 'ax', 'bx', 'cx'], letters: ['z', 'a', 'b', 'c', 'x', 'x', 'x'], score: [4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 10] }),
     },
+    { label: 'Single word', input: '{"words":["a"],"letters":["a"],"score":[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}' },
+    { label: 'Equal scores', input: '{"words":["ab","ba"],"letters":["a","b"],"score":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]}' },
+    { label: 'Largest limits', input: '{"words":["aaaaaaaa","zzzzzzzz"],"letters":["a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a"],"score":[10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10]}' },
+    { label: 'Long run: 8 words, 20 letters', input: '{"words":["nfko","cu","u","scmke","v","fontid","slx","usz"],"letters":["u","x","f","g","o","q","m","d","w","e","w","m","j","h","p","v","q","b","q","s"],"score":[4,3,9,1,4,0,0,1,7,6,7,10,0,6,4,9,7,10,1,6,3,8,9,2,3,0]}' },
   ],
 }
 

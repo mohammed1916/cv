@@ -15,6 +15,9 @@ const definition = {
     { label: 'Example 1', input: '[[0,0],[0,1]]' },
     { label: 'Already zero', input: '[[0]]' },
     { label: 'Example 3', input: '[[1,0,0],[1,0,1],[1,0,0]]' },
+    { label: 'Single one', input: '[[1]]' },
+    { label: 'Full ones', input: '[[1,1,1],[1,1,1],[1,1,1]]' },
+    { label: 'Long run: 3 by 3 pattern', input: '[[1,0,1],[0,1,0],[1,1,1]]' },
   ],
 }
 

@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[2,2,1,1,5,3,3,5]' },
     { label: 'Three equal groups', input: '[1,1,1,2,2,2]' },
+    { label: 'Single value', input: '[1]' },
+    { label: 'All values equal', input: '[4,4,4,4]' },
+    { label: 'Long run: twelve values', input: '[4,2,5,5,1,5,5,1,1,5,1,5]' },
   ],
 }
 

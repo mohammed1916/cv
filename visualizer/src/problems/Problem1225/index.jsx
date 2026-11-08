@@ -23,6 +23,9 @@ const definition = {
   examples: [
     { label: 'Mixed runs', input: '{"failed":[{"fail_date":"2018-12-31"},{"fail_date":"2019-01-01"},{"fail_date":"2019-01-02"},{"fail_date":"2019-01-05"}],"succeeded":[{"success_date":"2019-01-03"},{"success_date":"2019-01-04"},{"success_date":"2019-01-06"},{"success_date":"2019-02-01"}]}' },
     { label: 'One gap', input: '{"failed":[{"fail_date":"2019-03-10"}],"succeeded":[{"success_date":"2019-03-12"}]}' },
+    { label: 'Only successes', input: '{\"failed\":[],\"succeeded\":[{\"success_date\":\"2019-02-01\"}]}' },
+    { label: 'Adjacent days swap outcome', input: '{\"failed\":[{\"fail_date\":\"2019-01-01\"}],\"succeeded\":[{\"success_date\":\"2019-01-02\"}]}' },
+    { label: 'Long run: twenty-four shuffled days', input: '{\"failed\":[{\"fail_date\":\"2019-01-02\"},{\"fail_date\":\"2019-01-20\"},{\"fail_date\":\"2019-01-12\"},{\"fail_date\":\"2019-01-06\"},{\"fail_date\":\"2019-01-22\"},{\"fail_date\":\"2019-01-21\"},{\"fail_date\":\"2019-01-24\"},{\"fail_date\":\"2019-01-03\"},{\"fail_date\":\"2019-01-05\"},{\"fail_date\":\"2019-01-08\"},{\"fail_date\":\"2019-01-10\"},{\"fail_date\":\"2019-01-04\"}],\"succeeded\":[{\"success_date\":\"2019-01-14\"},{\"success_date\":\"2019-01-23\"},{\"success_date\":\"2019-01-15\"},{\"success_date\":\"2019-01-19\"},{\"success_date\":\"2019-01-16\"},{\"success_date\":\"2019-01-07\"},{\"success_date\":\"2019-01-11\"},{\"success_date\":\"2019-01-17\"},{\"success_date\":\"2019-01-01\"},{\"success_date\":\"2019-01-13\"},{\"success_date\":\"2019-01-09\"},{\"success_date\":\"2019-01-18\"}]}' },
   ],
 }
 

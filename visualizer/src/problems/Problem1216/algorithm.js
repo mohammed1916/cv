@@ -12,6 +12,10 @@ export const examples = [
   { label: 'Two deletions needed', input: '{"s":"abcabca","k":2}' },
   { label: 'One short', input: '{"s":"abcabca","k":1}' },
   { label: 'Already a palindrome', input: '{"s":"racecar","k":0}' },
+  { label: 'Single letter, no deletions', input: '{\"s\":\"a\",\"k\":0}' },
+  { label: 'Equal letters are already palindromes', input: '{\"s\":\"aaaa\",\"k\":0}' },
+  { label: 'Largest allowed string and budget', input: '{\"s\":\"abcdefghijkl\",\"k\":12}' },
+  { label: 'Long run: twelve letters, budget three', input: '{\"s\":\"solruvmrclnm\",\"k\":3}' },
 ]
 
 export function parseInput(text) {

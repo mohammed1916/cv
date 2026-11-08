@@ -11,6 +11,10 @@ const definition = {
     { label: 'Exact mix', input: '{"tomatoSlices":14,"cheeseSlices":5}' },
     { label: 'Odd tomato', input: '{"tomatoSlices":3,"cheeseSlices":1}' },
     { label: 'Too much cheese', input: '{"tomatoSlices":2,"cheeseSlices":5}' },
+    { label: 'No slices', input: '{"tomatoSlices":0,"cheeseSlices":0}' },
+    { label: 'Only tomatoes', input: '{"tomatoSlices":4,"cheeseSlices":0}' },
+    { label: 'Largest counts', input: '{"tomatoSlices":1000000,"cheeseSlices":1000000}' },
+    { label: 'Long run: large exact mix', input: '{"tomatoSlices":999998,"cheeseSlices":499999}' },
   ],
 }
 

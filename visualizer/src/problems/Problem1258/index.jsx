@@ -12,6 +12,9 @@ const definition = {
     { label: 'Two groups', input: '{"synonyms":[["happy","joy"],["sad","sorrow"],["joy","cheerful"]],"text":"I am happy today but was sad"}' },
     { label: 'One pair', input: '{"synonyms":[["big","large"]],"text":"big house"}' },
     { label: 'No synonyms', input: '{"synonyms":[],"text":"plain text"}' },
+    { label: 'Single word', input: '{"synonyms":[],"text":"hello"}' },
+    { label: 'Equal synonym words', input: '{"synonyms":[["fast","quick"],["quick","rapid"]],"text":"fast fast"}' },
+    { label: 'Largest sentence', input: '{"synonyms":[["big","large"],["large","huge"]],"text":"big big big"}' },
   ],
 }
 

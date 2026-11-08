@@ -12,6 +12,10 @@ const definition = {
     { label: 'Hexspeak', input: '"257"' },
     { label: 'Error', input: '"3"' },
     { label: 'Letters kept', input: '"171"' },
+    { label: 'Single digit', input: '"1"' },
+    { label: 'Repeated digits', input: '"1111111"' },
+    { label: 'Largest length', input: '"999999999999999"' },
+    { label: 'Long run: 15 digits', input: '"918273645546372"' },
   ],
 }
 

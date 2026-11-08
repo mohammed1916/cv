@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,5,9],"threshold":6}' },
     { label: 'Example 2', input: '{"nums":[44,22,33,11,1],"threshold":5}' },
+    { label: 'Single number', input: '{"nums":[5],"threshold":1}' },
+    { label: 'Equal values', input: '{"nums":[4,4,4],"threshold":3}' },
+    { label: 'Largest limits', input: '{"nums":[50,50,50,50,50,50,50,50],"threshold":50}' },
+    { label: 'Long run: 8 numbers', input: '{"nums":[21,29,39,1,41,46,20,30],"threshold":20}' },
   ],
 }
 

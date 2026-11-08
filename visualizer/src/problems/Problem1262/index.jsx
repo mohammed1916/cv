@@ -12,6 +12,9 @@ const definition = {
     { label: 'Mixed', input: '[3,6,5,1,8]' },
     { label: 'Single', input: '[4]' },
     { label: 'Equal', input: '[2,2,2]' },
+    { label: 'Boundary values', input: '[1,99,50,99]' },
+    { label: 'Descending run', input: '[9,7,5,3,1]' },
+    { label: 'Long run: 12 values', input: '[68,30,62,82,27,75,77,54,33,83,22,48]' },
   ],
 }
 

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"steps":3,"arr_len":2}' },
     { label: 'Example 2', input: '{"steps":4,"arr_len":2}' },
+    { label: 'Single position', input: '{"steps":1,"arr_len":1}' },
+    { label: 'Steps equal length', input: '{"steps":2,"arr_len":2}' },
+    { label: 'Largest arr_len', input: '{"steps":5,"arr_len":12}' },
+    { label: 'Long run: 12 steps, 12 cells', input: '{"steps":12,"arr_len":12}' },
   ],
 }
 

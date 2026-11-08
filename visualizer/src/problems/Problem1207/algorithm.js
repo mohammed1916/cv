@@ -41,6 +41,10 @@ export const examples = [
   { label: 'Two values share a count', input: '{"arr":[1,2]}' },
   { label: 'One distinct value', input: '{"arr":[5]}' },
   { label: 'Negative and zero values', input: '{"arr":[0,0,-1,-1,-1,2]}' },
+  { label: 'Single value', input: '{\"arr\":[7]}' },
+  { label: 'Two values share the same count', input: '{\"arr\":[4,4,9,9,1]}' },
+  { label: 'Extreme values, each count once', input: '{\"arr\":[-1000,1000,0]}' },
+  { label: 'Long run: 40 values', input: '{\"arr\":[8,11,-10,-6,13,-16,4,-3,1,17,-2,-8,8,9,4,-17,3,6,11,20,7,15,-5,12,9,1,-5,-1,18,-11,3,-10,-17,-9,5,-5,0,-7,-4,-4]}' },
 ]
 
 export function parseInput(text) {

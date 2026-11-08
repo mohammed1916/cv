@@ -12,6 +12,10 @@ const definition = {
     { label: 'Three points', input: '[[0,0],[3,1],[1,5]]' },
     { label: 'Diagonal', input: '[[-2,2],[2,-2]]' },
     { label: 'Four points', input: '[[1,1],[4,1],[4,7],[0,0]]' },
+    { label: 'Single point', input: '[[0,0]]' },
+    { label: 'Collinear points', input: '[[0,0],[1,1],[2,2]]' },
+    { label: 'Corners of the square', input: '[[-100,-100],[100,100],[100,-100],[-100,100]]' },
+    { label: 'Long run: 10 points', input: '[[36,-82],[-60,39],[75,0],[5,2],[42,41],[-86,-65],[-70,-25],[93,34],[-16,64],[66,99]]' },
   ],
 }
 

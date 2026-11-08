@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":3,"a":2,"b":3,"c":5}' },
     { label: 'Example 2', input: '{"n":4,"a":2,"b":3,"c":4}' },
+    { label: 'Every number divisible by one', input: '{\"n\":1,\"a\":1,\"b\":1,\"c\":1}' },
+    { label: 'Equal divisors, no overlap to remove', input: '{\"n\":10,\"a\":4,\"b\":4,\"c\":4}' },
+    { label: 'Largest allowed values', input: '{\"n\":20,\"a\":20,\"b\":20,\"c\":20}' },
+    { label: 'Long run: largest n with small divisors', input: '{\"n\":20,\"a\":2,\"b\":3,\"c\":5}' },
   ],
 }
 

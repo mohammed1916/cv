@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Three parts', input: '{"s":"abc","k":2}' },
     { label: 'Already split', input: '{"s":"aabbc","k":3}' },
+    { label: 'Single letter', input: '{"s":"a","k":1}' },
+    { label: 'Repeated letters', input: '{"s":"aaaa","k":2}' },
+    { label: 'Largest length', input: '{"s":"abcdefgh","k":8}' },
+    { label: 'Long run: 8 letters, k 5', input: '{"s":"aabbccdd","k":5}' },
   ],
 }
 

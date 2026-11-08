@@ -12,6 +12,10 @@ export const examples = [
   { label: 'Two-cell pocket', input: '[[1,0,4],[2,0,3],[0,5,0]]' },
   { label: 'Straight corridor', input: '[[2,3,4],[0,0,0]]' },
   { label: 'Bend around a corner', input: '[[1,2],[9,3]]' },
+  { label: 'Single cell', input: '[[7]]' },
+  { label: 'Equal gold in every cell', input: '[[5,5],[5,5]]' },
+  { label: 'Largest allowed values in a square', input: '[[100,100,100],[100,100,100],[100,100,100]]' },
+  { label: 'Long run: three by four grid', input: '[[80,12,37,65],[97,17,8,50],[11,70,89,38]]' },
 ]
 
 export function parseInput(text) {

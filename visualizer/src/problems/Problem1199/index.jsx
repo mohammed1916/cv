@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Three blocks', input: '{"blocks":[1,2,3],"split":1}' },
     { label: 'Four equal blocks', input: '{"blocks":[1,1,1,1],"split":0}' },
+    { label: 'Single block', input: '{\"blocks\":[5],\"split\":0}' },
+    { label: 'Equal times, split on the tie', input: '{\"blocks\":[4,4],\"split\":4}' },
+    { label: 'Zero build times', input: '{\"blocks\":[0,0,0],\"split\":0}' },
+    { label: 'Long run: eight blocks at the limit', input: '{\"blocks\":[701,32,785,50,477,127,157,107],\"split\":1000}' },
   ],
 }
 

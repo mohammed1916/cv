@@ -42,6 +42,10 @@ export const examples = [
   { label: 'One apple exactly fills capacity', input: '{"weight":[5000]}' },
   { label: 'Every apple is too heavy', input: '{"weight":[5001,7000]}' },
   { label: 'All apples fit', input: '{"weight":[400,700,900,600]}' },
+  { label: 'Single apple fits', input: '{\"weight\":[7]}' },
+  { label: 'Equal weights stop at the first overflow', input: '{\"weight\":[2500,2500,2500]}' },
+  { label: 'Heaviest allowed apples', input: '{\"weight\":[10000,1,10000]}' },
+  { label: 'Long run: 30 apples', input: '{\"weight\":[2099,2281,2192,2819,1434,2653,2593,1077,2794,871,1358,2319,2820,777,257,2894,2641,1474,1473,704,195,2055,2996,35,1261,2015,2336,103,112,1317]}' },
 ]
 
 export function parseInput(text) {

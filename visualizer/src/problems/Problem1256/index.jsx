@@ -12,6 +12,9 @@ const definition = {
     { label: 'Five', input: '5' },
     { label: 'Three', input: '3' },
     { label: 'Zero', input: '0' },
+    { label: 'One', input: '1' },
+    { label: 'Largest value', input: '1023' },
+    { label: 'Long run: 1000', input: '1000' },
   ],
 }
 

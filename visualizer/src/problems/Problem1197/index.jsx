@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'One move', input: '{"x":-1,"y":2}' },
     { label: 'Four moves', input: '{"x":6,"y":-4}' },
+    { label: 'Already at the origin', input: '{\"x\":0,\"y\":0}' },
+    { label: 'Equal coordinates', input: '{\"x\":4,\"y\":4}' },
+    { label: 'Far corner of the range', input: '{\"x\":12,\"y\":12}' },
+    { label: 'Long run: opposite far corner', input: '{\"x\":-12,\"y\":11}' },
   ],
 }
 

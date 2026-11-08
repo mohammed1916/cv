@@ -12,6 +12,9 @@ const definition = {
     { label: 'Four people', input: '4' },
     { label: 'Six people', input: '6' },
     { label: 'Two people', input: '2' },
+    { label: 'Largest even group', input: '20' },
+    { label: 'Eight people', input: '8' },
+    { label: 'Long run: 18 people', input: '18' },
   ],
 }
 

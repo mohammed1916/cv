@@ -23,6 +23,10 @@ const definition = {
   examples: [
     { label: 'Two branches', input: '{"employees":[{"employee_id":1,"manager_id":null},{"employee_id":2,"manager_id":1},{"employee_id":3,"manager_id":2},{"employee_id":4,"manager_id":1},{"employee_id":5,"manager_id":3},{"employee_id":6,"manager_id":4},{"employee_id":7,"manager_id":null},{"employee_id":8,"manager_id":7}]}' },
     { label: 'Only the boss', input: '{"employees":[{"employee_id":1,"manager_id":null},{"employee_id":2,"manager_id":null}]}' },
+    { label: 'Single employee', input: '{"employees":[{"employee_id":1,"manager_id":null}]}' },
+    { label: 'Equal depth branches', input: '{"employees":[{"employee_id":1,"manager_id":null},{"employee_id":2,"manager_id":null},{"employee_id":3,"manager_id":1},{"employee_id":4,"manager_id":2}]}' },
+    { label: 'Largest ids', input: '{"employees":[{"employee_id":999,"manager_id":null},{"employee_id":500,"manager_id":999},{"employee_id":1,"manager_id":500}]}' },
+    { label: 'Long run: 12 employees', input: '{"employees":[{"employee_id":1,"manager_id":null},{"employee_id":2,"manager_id":null},{"employee_id":3,"manager_id":2},{"employee_id":4,"manager_id":1},{"employee_id":5,"manager_id":2},{"employee_id":6,"manager_id":null},{"employee_id":7,"manager_id":5},{"employee_id":8,"manager_id":1},{"employee_id":9,"manager_id":null},{"employee_id":10,"manager_id":8},{"employee_id":11,"manager_id":6},{"employee_id":12,"manager_id":11}]}' },
   ],
 }
 

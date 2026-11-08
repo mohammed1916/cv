@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"day":31,"month":8,"year":2019}' },
     { label: 'Example 2', input: '{"day":18,"month":7,"year":1999}' },
+    { label: 'Earliest allowed date', input: '{"day":1,"month":1,"year":1971}' },
+    { label: 'Latest allowed date', input: '{"day":31,"month":12,"year":2100}' },
+    { label: 'Leap day', input: '{"day":29,"month":2,"year":2000}' },
+    { label: 'Long run: nearly 130 years of counting', input: '{"day":31,"month":12,"year":2099}' },
   ],
 }
 

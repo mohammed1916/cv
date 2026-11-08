@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'One join', input: '["red blue","blue green","green sea"]' },
     { label: 'Repeated phrase', input: '["ink pen","pen cap","ink pen","cap"]' },
+    { label: 'Single phrase', input: '["solo"]' },
+    { label: 'Matching words in reverse order', input: '["red sea","sea red"]' },
+    { label: 'Largest phrase list', input: '["ink pen","pen cap","cap top","top ink","red sea","sea red","ink cap","pen top","cap red","top sea","red ink","sea pen"]' },
+    { label: 'Long run: 12 phrases', input: '["ink ink sea","red sea","ink ink top top ink","cap cap cap cap cap sea","cap top red","red top pen red sea","cap red cap","top cap red pen top","sea sea cap ink sea ink","sea ink cap","pen ink pen red","top cap"]' },
   ],
 }
 

@@ -50,6 +50,9 @@ export const examples = [
   { label: 'One pair', input: '{"arr":[-8,15]}' },
   { label: 'All neighboring gaps tie', input: '{"arr":[14,2,10,6]}' },
   { label: 'Unique smallest gap crosses zero', input: '{"arr":[-9,-1,1,8,17]}' },
+  { label: 'Smallest valid array', input: '{\"arr\":[3,-3]}' },
+  { label: 'Extreme values give the widest gap', input: '{\"arr\":[-10000,10000]}' },
+  { label: 'Long run: 30 distinct values', input: '{\"arr\":[4023,-7539,-611,-8250,-7129,7497,1763,-9529,9319,400,-4650,243,6947,-8675,9976,6581,-144,1041,3702,5631,6585,8727,3591,-4031,7794,-1225,-6481,-7951,-4466,8165]}' },
 ]
 
 export function parseInput(text) {

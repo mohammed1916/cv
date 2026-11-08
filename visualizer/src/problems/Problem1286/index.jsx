@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"characters":"abc","combination_length":2}' },
     { label: 'Four letters', input: '{"characters":"abcd","combination_length":3}' },
+    { label: 'Single letter', input: '{"characters":"a","combination_length":1}' },
+    { label: 'Full length', input: '{"characters":"abcdef","combination_length":6}' },
+    { label: 'Long run: six letters, k 3', input: '{"characters":"abcdef","combination_length":3}' },
   ],
 }
 

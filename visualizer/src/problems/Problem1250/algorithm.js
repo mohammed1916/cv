@@ -12,6 +12,10 @@ export const examples = [
   { label: 'Coprime', input: '[6,10,15]' },
   { label: 'Shared factor', input: '[4,8,12]' },
   { label: 'Single', input: '[7]' },
+  { label: 'Smallest value', input: '[1]' },
+  { label: 'Equal values', input: '[5,5,5]' },
+  { label: 'Largest values, coprime', input: '[1000000000,999999999]' },
+  { label: 'Long run: 12 values', input: '[2771745,3265036,849812,1187214,1518929,3933355,1641666,4618575,3299371,2711569,4361487,7577109]' },
 ]
 
 export const code = `function isGoodArray(nums) {

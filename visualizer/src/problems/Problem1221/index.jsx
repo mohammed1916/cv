@@ -11,6 +11,9 @@ const definition = {
     { label: 'One section', input: '{"s":"LLLLRRRR"}' },
     { label: 'Pairs', input: '{"s":"LRLRLRLR"}' },
     { label: 'Reversed start', input: '{"s":"RRLLRLRL"}' },
+    { label: 'Shortest balanced string', input: '{\"s\":\"LR\"}' },
+    { label: 'Starts with R, balances in one step', input: '{\"s\":\"RL\"}' },
+    { label: 'Long run: 200 shuffled letters', input: '{\"s\":\"RRRLLRLLLLLRRLRRLLLLRLRRRLLRRLLRRRRRRLLRLLRLLLRRRRLRLRRLLLRLRLRRRRRRLLRLLLLRLLRRLRLRLLRLLRLRLRLRLLLLLRLLRLLLRLRRLRRRLLRLRLRRLLLLRLLRRLRRLLLLRLRRLRRRLRRRLRLLLRLLLRRLLLRLLRRLLRRLRRRLLRRRRRLLRRRRLRRLRRLR\"}' },
   ],
 }
 

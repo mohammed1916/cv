@@ -12,6 +12,10 @@ export const examples = [
   { label: 'Step of two', input: '{"arr":[7,1,5,3,9,-1,4,-2],"difference":2}' },
   { label: 'Repeated values', input: '{"arr":[2,2,2,5],"difference":0}' },
   { label: 'No predecessor', input: '{"arr":[1,4,9],"difference":2}' },
+  { label: 'Single value', input: '{\"arr\":[4],\"difference\":1}' },
+  { label: 'All equal with zero difference', input: '{\"arr\":[3,3,3],\"difference\":0}' },
+  { label: 'Extreme values, step five', input: '{\"arr\":[-10,-5,0,5,10],\"difference\":5}' },
+  { label: 'Long run: twelve values', input: '{\"arr\":[4,5,6,5,-8,-3,-3,0,-8,1,-1,7],\"difference\":2}' },
 ]
 
 export function parseInput(text) {
