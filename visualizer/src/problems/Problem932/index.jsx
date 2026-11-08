@@ -12,7 +12,11 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'n (JSON integer)',
   url: 'https://leetcode.com/problems/beautiful-array/',
   complexity: 'O(n) time and space (the array doubles each round). The visualization caps n at 200.',
-  examples: [{ label: 'Example 1', input: '4' }, { label: 'Example 2', input: '5' }, { label: 'n = 11', input: '11' }],
+  examples: [{ label: 'Example 1', input: '4' }, { label: 'Example 2', input: '5' }, { label: 'n = 11', input: '11' },
+    { label: 'Smallest n = 1', input: '1' },
+    { label: 'Largest n = 200', input: '200' },
+    { label: 'Long run: n = 150', input: '150' },
+  ],
 }
 
 export default function BeautifulArray() {

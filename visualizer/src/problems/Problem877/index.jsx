@@ -18,6 +18,10 @@ const definition = {
     { label: 'Official', input: '[5,3,4,5]' },
     { label: 'Six piles', input: '[3,7,2,3,8,1]' },
     { label: 'Two piles', input: '[1,2]' },
+    { label: 'Minimum piles', input: '[2,3]' },
+    { label: 'Equal piles', input: '[4,4,4,4,5,4]' },
+    { label: 'Largest piles', input: '[500,500,500,499]' },
+    { label: 'Long run: 20 piles', input: '[42,214,182,3,332,194,308,325,103,352,239,453,101,218,182,330,218,348,139,226]' },
   ],
 }
 

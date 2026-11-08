@@ -18,6 +18,10 @@ const definition = {
     { label: 'Example 1', input: '{"commands":[4,-1,3],"obstacles":[]}' },
     { label: 'Example 2', input: '{"commands":[4,-1,4,-2,4],"obstacles":[[2,4]]}' },
     { label: 'Example 3', input: '{"commands":[6,-1,-1,6],"obstacles":[]}' },
+    { label: 'Single move', input: '{"commands":[1],"obstacles":[]}' },
+    { label: 'Repeated turns', input: '{"commands":[-1,-1,-1,-1,5],"obstacles":[]}' },
+    { label: 'Largest moves at far obstacles', input: '{"commands":[9,-1,9,-2,9,-1,9],"obstacles":[[30000,30000],[-30000,-30000]]}' },
+    { label: 'Long run: 30 commands', input: '{"commands":[9,-2,9,4,-2,6,2,9,-1,8,6,8,2,4,9,-2,3,3,9,7,1,6,9,8,-1,-1,8,6,2,8],"obstacles":[[5,9],[-3,3],[-5,-6],[-10,4],[2,0],[6,9],[5,5],[2,-6],[-5,2],[7,-2],[4,-7],[5,3],[-6,-10],[8,2],[-9,-1],[6,5],[-6,6],[2,2],[8,-1],[2,-5],[2,5],[2,7],[7,-5],[-9,-7],[1,-6],[-5,10],[6,0],[-3,-9],[1,0],[-6,-1]]}' },
   ],
 }
 

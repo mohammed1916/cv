@@ -13,6 +13,11 @@ const definition = {
     { label: 'Mixed signs', input: JSON.stringify({ nums: [2, 3, 5, -4, 1], k: 5 }) },
     { label: 'Single value', input: JSON.stringify({ nums: [7], k: 9 }) },
     { label: 'Repeated remainders', input: JSON.stringify({ nums: [-1, -1, 2, 2, 2], k: 3 }) },
+    { label: 'Single zero value', input: '{"nums":[0],"k":2}' },
+    { label: 'Equal values share one remainder', input: '{"nums":[4,4,4,4],"k":4}' },
+    { label: 'Largest magnitudes at the limit', input: '{"nums":[50,-50,50,-50,50,-50,50,-50,50,-50,50,-50],"k":12}' },
+    { label: 'No divisible subarray', input: '{"nums":[1,1,1],"k":5}' },
+    { label: 'Long run: 12 items', input: '{"nums":[-6,48,-4,-34,-25,46,-17,-6,-6,-29,23,-7],"k":7}' },
   ],
 }
 

@@ -13,6 +13,10 @@ const definition = {
     { label: 'Negatives on the left', input: JSON.stringify({ nums: [-6, -4, 1, 2, 5] }) },
     { label: 'All positive', input: JSON.stringify({ nums: [2, 3, 7] }) },
     { label: 'Zero in the middle', input: JSON.stringify({ nums: [-3, -1, 0, 4, 6] }) },
+    { label: 'Single negative value', input: '{"nums":[-7]}' },
+    { label: 'Equal negatives tie', input: '{"nums":[-3,-3,-3,2]}' },
+    { label: 'Extremes at the limit', input: '{"nums":[-100,-100,0,100]}' },
+    { label: 'Long run: 12 items', input: '{"nums":[-82,-74,-71,-60,-55,-38,-27,-25,-21,-6,58,93]}' },
   ],
 }
 

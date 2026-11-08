@@ -12,6 +12,10 @@ const definition = {
     { label: 'Scattered trips', input: JSON.stringify({ days: [2, 5, 9, 18, 19, 30], costs: [3, 10, 25] }) },
     { label: 'A short burst', input: JSON.stringify({ days: [1, 2, 3, 4, 5, 6, 7, 8], costs: [2, 7, 15] }) },
     { label: 'One long trip', input: JSON.stringify({ days: [4, 11, 25], costs: [4, 9, 20] }) },
+    { label: 'Single travel day', input: '{"days":[1],"costs":[2,7,15]}' },
+    { label: 'Equal pass prices', input: '{"days":[1,8],"costs":[7,7,7]}' },
+    { label: 'Last day with high prices', input: '{"days":[60],"costs":[100,100,100]}' },
+    { label: 'Long run: 20 travel days', input: '{"days":[4,5,7,9,12,13,15,16,19,23,27,29,31,33,34,48,55,56,57,58],"costs":[3,11,25]}' },
   ],
 }
 

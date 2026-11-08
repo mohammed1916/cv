@@ -21,6 +21,10 @@ const definition = {
     { label: 'Official', input: '[["FreqStack","push","push","push","push","push","push","pop","pop","pop","pop"],[[],[5],[7],[5],[7],[4],[5],[],[],[],[]]]' },
     { label: 'Tie by recency', input: '[["FreqStack","push","push","push","pop","pop","pop"],[[],[1],[2],[3],[],[],[]]]' },
     { label: 'Repeated value', input: '[["FreqStack","push","push","push","pop","push","pop"],[[],[9],[9],[3],[],[3],[]]]' },
+    { label: 'Single push and pop', input: '[["FreqStack","push","pop"],[[],[4],[]]]' },
+    { label: 'Largest value', input: '[["FreqStack","push","pop"],[[],[1000000000],[]]]' },
+    { label: 'Equal counts, push then pop all', input: '[["FreqStack","push","push","push","pop","pop","pop"],[[],[2],[2],[2],[],[],[]]]' },
+    { label: 'Long run: 58 operations', input: '[["FreqStack","push","pop","push","push","pop","push","push","pop","push","push","push","push","push","push","pop","pop","push","push","push","pop","push","push","pop","push","push","push","push","push","push","push","push","push","pop","pop","push","pop","pop","push","push","pop","pop","push","push","push","pop","push","push","pop","push","push","pop","push","push","pop","push","push","push","push"],[[],[2],[],[7],[5],[],[3],[9],[],[0],[6],[6],[2],[2],[2],[],[],[9],[0],[8],[],[8],[8],[],[2],[5],[9],[0],[7],[1],[9],[1],[5],[],[],[6],[],[],[0],[0],[],[],[2],[0],[1],[],[7],[5],[],[1],[9],[],[4],[9],[],[0],[9],[5],[1]]]' },
   ],
 }
 

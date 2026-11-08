@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[0,1,2,3,4,3,4]' },
     { label: 'Prefix', input: '[1,0,null,1]' },
+    { label: 'Single node', input: '[0]' },
+    { label: 'Equal letters', input: '[2,2,2,2,2,2,2]' },
+    { label: 'Largest letter at the limit', input: '[25,0,25,0,25,25,0,0,0,25,25,0,25,0,0]' },
+    { label: 'Long run: 15 nodes', input: '[7,3,7,2,25,24,5,5,16,0,4,6,25,0,18]' },
   ],
 }
 

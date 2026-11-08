@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[0,0,null,0,0]' },
     { label: 'Example 2', input: '[0,0,null,0,null,0,null,null,0]' },
+    { label: 'Single root', input: '[0]' },
+    { label: 'Equal values', input: '[0,0,0]' },
+    { label: 'Null gaps', input: '[1,null,1,null,null,null,1]' },
+    { label: 'Long run: 15 entries', input: '[0,8,8,7,1,null,null,9,5,4,4,3,7,6,0]' },
   ],
 }
 

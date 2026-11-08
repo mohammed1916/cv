@@ -20,6 +20,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"tree":[1,2],"ops":[["insert",3],["insert",4],["get_root"]]}' },
     { label: 'Fill a level', input: '{"tree":[1,2,3,4,5],"ops":[["insert",6],["insert",7],["insert",8],["get_root"]]}' },
+    { label: 'Single root', input: '{"tree":[1],"ops":[["get_root"]]}' },
+    { label: 'Equal values', input: '{"tree":[7,7,7],"ops":[["insert",7],["get_root"]]}' },
+    { label: 'Largest value', input: '{"tree":[5000],"ops":[["insert",0],["get_root"]]}' },
+    { label: 'Long run: 29 inserts', input: '{"tree":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],"ops":[["insert",1558],["insert",3894],["insert",230],["insert",544],["insert",1518],["insert",636],["insert",4868],["insert",463],["insert",4007],["insert",3429],["insert",4386],["insert",2861],["insert",4419],["insert",414],["insert",4550],["insert",3712],["insert",3333],["insert",963],["insert",4470],["insert",4990],["insert",1309],["insert",335],["insert",3269],["insert",1419],["insert",1053],["insert",28],["insert",917],["insert",2248],["insert",2919],["get_root"]]}' },
   ],
 }
 

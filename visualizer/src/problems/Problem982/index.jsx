@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[2,1,3]' },
     { label: 'All zero', input: '[0,0,0]' },
+    { label: 'Single value', input: '[7]' },
+    { label: 'Equal values pair up', input: '[5,5]' },
+    { label: 'Largest 16-bit values', input: '[65535,0,65535,32768,1]' },
+    { label: 'Long run: 12 numbers', input: '[56425,33689,64398,38809,39929,46728,16741,24542,59376,2088,62908,7718]' },
   ],
 }
 

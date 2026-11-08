@@ -13,6 +13,10 @@ const definition = {
     { label: 'Ramp across the middle', input: JSON.stringify({ nums: [5, 1, 7, 2, 0, 6, 3] }) },
     { label: 'Two dips', input: JSON.stringify({ nums: [4, 9, 2, 7, 1, 8, 3, 6] }) },
     { label: 'No ramp', input: JSON.stringify({ nums: [5, 4, 3, 2] }) },
+    { label: 'Two values', input: '{"nums":[0,1]}' },
+    { label: 'Equal values', input: '{"nums":[7,7,7,7]}' },
+    { label: 'Largest values', input: '{"nums":[99,0,99,0,99,0,99,0]}' },
+    { label: 'Long run: 16 values', input: '{"nums":[1,31,11,78,84,37,83,64,65,73,31,28,29,95,13,40]}' },
   ],
 }
 

@@ -18,6 +18,10 @@ const definition = {
     { label: 'Example 1', input: '{"root1":[1,2,3,4,5,6,null,null,null,7,8],"root2":[1,3,2,null,6,4,5,null,null,null,null,8,7]}' },
     { label: 'Both empty', input: '{"root1":[],"root2":[]}' },
     { label: 'Not equivalent', input: '{"root1":[1,2,3],"root2":[1,2,4]}' },
+    { label: 'Single node', input: '{"root1":[1],"root2":[1]}' },
+    { label: 'Missing children', input: '{"root1":[1,null,2],"root2":[1,null,2]}' },
+    { label: 'Null only on one side', input: '{"root1":[1,2,null,3],"root2":[1,2,null,3]}' },
+    { label: 'Long run: 15 nodes', input: '{"root1":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],"root2":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]}' },
   ],
 }
 

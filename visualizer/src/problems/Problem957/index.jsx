@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 1', input: '{"cells":[0,1,0,1,1,0,0,1],"n":7}' },
     { label: 'Example 2', input: '{"cells":[1,0,0,1,0,0,1,0],"n":1000000000}' },
     { label: 'Zero days', input: '{"cells":[1,1,1,1,1,1,1,1],"n":0}' },
+    { label: 'Zero steps', input: '{"cells":[0,0,0,0,0,0,0,0],"n":0}' },
+    { label: 'All ones, one step', input: '{"cells":[1,1,1,1,1,1,1,1],"n":1}' },
+    { label: 'Largest n', input: '{"cells":[1,0,0,1,0,0,1,0],"n":1000000000}' },
+    { label: 'Long run: n = 123456789', input: '{"cells":[1,0,0,1,0,1,0,0],"n":123456789}' },
   ],
 }
 

@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[3,0,0]' },
     { label: 'Example 2', input: '[0,3,0]' },
+    { label: 'Single node with one coin', input: '[1]' },
+    { label: 'Coins moved to a leaf', input: '[0,0,3]' },
+    { label: 'Equal coins everywhere', input: '[1,1,1]' },
+    { label: 'Fifteen nodes, all coins at the root', input: '[15,0,0,0,0,0,0,0,0,0,0,0,0,0,0]' },
+    { label: 'Long run: 15 nodes', input: '[2,1,2,1,2,1,0,0,2,1,0,1,1,1,0]' },
   ],
 }
 

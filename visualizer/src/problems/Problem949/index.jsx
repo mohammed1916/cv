@@ -18,6 +18,9 @@ const definition = {
     { label: 'Example 1', input: '[1,2,3,4]' },
     { label: 'Example 2', input: '[5,5,5,5]' },
     { label: 'With zeros', input: '[0,0,0,0]' },
+    { label: 'Boundary: nines', input: '[9,9,9,9]' },
+    { label: 'Mixed zeros and nines', input: '[9,0,0,1]' },
+    { label: 'Mixed digits', input: '[8,1,9,2]' },
   ],
 }
 

@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":3,"k":7}' },
     { label: 'Zero difference', input: '{"n":2,"k":0}' },
+    { label: 'Largest n and k', input: '{"n":5,"k":9}' },
+    { label: 'Smallest n, largest k', input: '{"n":2,"k":9}' },
+    { label: 'n = 5, zero difference', input: '{"n":5,"k":0}' },
   ],
 }
 

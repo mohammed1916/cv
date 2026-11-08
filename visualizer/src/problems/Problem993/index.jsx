@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"arr":[1,2,3,4],"x":4,"y":3}' },
     { label: 'Example 2', input: '{"arr":[1,2,3,null,4,null,5],"x":5,"y":4}' },
+    { label: 'Smallest: root and one child', input: '{"arr":[1,2],"x":1,"y":2}' },
+    { label: 'Siblings are not cousins', input: '{"arr":[1,2,3],"x":2,"y":3}' },
+    { label: 'Cousins at the deepest level', input: '{"arr":[99,0,98,null,1,2,97,null,null,null,null,3,4,96,95],"x":3,"y":95}' },
+    { label: 'Long run: full tree of 15 nodes', input: '{"arr":[21,51,56,82,66,42,76,43,85,9,59,7,39,81,93],"x":43,"y":93}' },
   ],
 }
 

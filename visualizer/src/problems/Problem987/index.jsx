@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[3,9,20,null,null,15,7]' },
     { label: 'Ties', input: '[1,2,3,4,6,5,7]' },
+    { label: 'Single node', input: '[0]' },
+    { label: 'Equal values in every row', input: '[7,7,7,7,7,7,7]' },
+    { label: 'Largest tree with extreme values', input: '[100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100]' },
+    { label: 'Long run: 15 nodes', input: '[-45,36,-22,66,-93,-94,-38,27,55,-79,4,-89,89,-28,-47]' },
   ],
 }
 

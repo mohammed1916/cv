@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 1', input: '{"left":"4","right":"1000"}' },
     { label: 'Example 2', input: '{"left":"1","right":"2"}' },
     { label: 'Wide range', input: '{"left":"1","right":"1000000000000"}' },
+    { label: 'Single number', input: '{"left":"1","right":"1"}' },
+    { label: 'Equal bounds', input: '{"left":"99","right":"99"}' },
+    { label: 'Largest bound', input: '{"left":"1000000000000","right":"1000000000000"}' },
+    { label: 'Long run: wide range', input: '{"left":"9876543210","right":"999999999999"}' },
   ],
 }
 

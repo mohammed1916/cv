@@ -19,6 +19,10 @@ const definition = {
     { label: 'Example 1', input: '[1,2,3,4,5,6,7,8]' },
     { label: 'Example 2', input: '[1,3,7,11,12,14,18]' },
     { label: 'No chain', input: '[1,4,9,16]' },
+    { label: 'Smallest chain', input: '[1,2,3]' },
+    { label: 'Equal gaps', input: '[10,20,30,40,50]' },
+    { label: 'Largest values', input: '[1,999999999,1000000000]' },
+    { label: 'Long run: 16 values', input: '[11311493,68756481,88209783,105916895,132134178,182274987,242229970,285963644,332040347,365426087,393064922,425697340,480846090,491237252,491989996,518290385]' },
   ],
 }
 

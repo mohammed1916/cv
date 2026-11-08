@@ -20,6 +20,10 @@ const definition = {
     { label: 'Single node, k=0', input: '{"tree":[1],"target":1,"k":0}' },
     { label: 'Distance beyond tree', input: '{"tree":[1,2,3,4],"target":4,"k":5}' },
     { label: 'Climb through parent', input: '{"tree":[0,1,null,3,2],"target":2,"k":1}' },
+    { label: 'Single node, distance beyond', input: '{"tree":[1],"target":1,"k":3}' },
+    { label: 'Symmetric branches', input: '{"tree":[5,3,4,1,null,2,6],"target":3,"k":1}' },
+    { label: 'Largest tree, thirty nodes', input: '{"tree":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,null],"target":30,"k":5}' },
+    { label: 'Long run: random tree', input: '{"tree":[1,null,29,34,null,12,7,15,10,9,27,40,null,21,5,14,null,17,38,32,8,24,null,35,28,13,25,36,39,4],"target":14,"k":4}' },
   ],
 }
 

@@ -17,6 +17,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[["set","foo","bar",1],["get","foo",1],["get","foo",3],["set","foo","baz",4],["get","foo",4],["get","foo",5]]' },
     { label: 'Before first', input: '[["set","a","x",5],["get","a",4]]' },
+    { label: 'Smallest: one set and one get', input: '[["set","a","b",1],["get","a",1]]' },
+    { label: 'Query time matches a stored time exactly', input: '[["set","x","one",2],["get","x",2],["set","x","two",9],["get","x",9]]' },
+    { label: 'Limits: five letters and time 100', input: '[["set","zzzzz","zzzzz",1],["get","zzzzz",100],["set","zzzzz","aaaaa",100],["get","zzzzz",99]]' },
+    { label: 'Unknown key returns empty', input: '[["get","nokey",5]]' },
+    { label: 'Long run: 30 operations', input: '[["set","ijklm","bfe",2],["get","fgh",2],["get","ijklm",31],["get","ijklm",26],["get","ijklm",56],["get","ab",7],["get","fgh",53],["set","ab","c",3],["get","fgh",84],["set","ab","ddb",5],["set","cde","afgaa",1],["set","ab","afade",8],["set","ab","ccef",9],["get","ijklm",2],["get","cde",45],["get","fgh",22],["get","fgh",74],["get","cde",41],["get","cde",91],["get","ijklm",83],["set","ijklm","hc",4],["get","fgh",90],["set","cde","f",2],["get","ijklm",27],["get","fgh",89],["get","ab",22],["set","cde","b",3],["set","ijklm","hfede",6],["get","ab",31],["get","ab",54]]' },
   ],
 }
 

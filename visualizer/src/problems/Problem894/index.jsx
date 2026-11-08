@@ -20,6 +20,9 @@ const definition = {
     { label: 'n = 7', input: '7' },
     { label: 'n = 3', input: '3' },
     { label: 'n = 11', input: '11' },
+    { label: 'n = 1', input: '1' },
+    { label: 'n = 2', input: '2' },
+    { label: 'Long run: n = 10', input: '10' },
   ],
 }
 

@@ -12,6 +12,10 @@ const definition = {
     { label: 'Carry across zeros', input: JSON.stringify({ num: [3, 0, 0, 7], k: 95 }) },
     { label: 'Long carry chain', input: JSON.stringify({ num: [9, 9, 8], k: 13 }) },
     { label: 'Longer addend', input: JSON.stringify({ num: [4, 1], k: 2046 }) },
+    { label: 'No change when k is zero', input: '{"num":[1,2,0,0],"k":0}' },
+    { label: 'Single digit with zero', input: '{"num":[0],"k":0}' },
+    { label: 'Twelve nines with the largest k', input: '{"num":[9,9,9,9,9,9,9,9,9,9,9,9],"k":99999}' },
+    { label: 'Long run: twelve digits', input: '{"num":[7,0,0,4,6,7,7,1,0,2,3,2],"k":12345}' },
   ],
 }
 

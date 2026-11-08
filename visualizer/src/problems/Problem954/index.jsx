@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 1', input: '[3,1,3,6]' },
     { label: 'Example 2', input: '[2,1,2,6]' },
     { label: 'Example 3', input: '[4,-2,2,-4]' },
+    { label: 'Two zeros', input: '[0,0]' },
+    { label: 'Equal values', input: '[5,5,5,5]' },
+    { label: 'Extreme values', input: '[1000,-1000,1000,-1000]' },
+    { label: 'Long run: 30 values', input: '[-881,299,-161,-69,225,-615,360,-203,733,-433,639,-791,227,372,441,-628,-850,-936,-201,-214,49,-376,-492,-819,415,41,-877,414,191,816]' },
   ],
 }
 

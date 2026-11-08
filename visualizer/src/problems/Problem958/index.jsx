@@ -18,6 +18,10 @@ const definition = {
     { label: 'Example 1', input: '[1,2,3,4,5,6]' },
     { label: 'Example 2', input: '[1,2,3,4,5,null,7]' },
     { label: 'Single node', input: '[1]' },
+    { label: 'Single root', input: '[1]' },
+    { label: 'Equal values', input: '[2,2,2]' },
+    { label: 'Largest values with gaps', input: '[1000,null,1000,null,null,null,1000]' },
+    { label: 'Long run: 30 nodes', input: '[953,959,179,788,736,453,712,214,166,215,928,294,179,293,176,400,980,372,749,197,306,147,864,205,628,785,695,269,262,295]' },
   ],
 }
 

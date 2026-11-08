@@ -15,6 +15,10 @@ const definition = {
   complexity: 'O(total length) time with hash lookups. The visualization caps input at 10 words and 10 queries.',
   examples: [
     { label: 'Example 1', input: '{"wordlist":["Mouse","mouse","rat"],"queries":["MOUSE","rat","Rot","RAT"]}' },
+    { label: 'Single letter', input: '{"wordlist":["a"],"queries":["a"]}' },
+    { label: 'Case tie uses the first match', input: '{"wordlist":["Yellow","yellow"],"queries":["YELLOW","yElLoW"]}' },
+    { label: 'Longest words', input: '{"wordlist":["abcdefghij","ABCDEFGHIJ"],"queries":["abcdefghij","zzzzzzzzzz"]}' },
+    { label: 'Long run: 10 words and queries', input: '{"wordlist":["jfvktmompd","wdplvhforb","loyzjhjkzd","ptwoazcvin","dzqdvldnlz","cwogegkstk","domctufsqh","hgygntksjf","rzufoyuxzv","qxirgawamq"],"queries":["izfkekguhf","fclljpenqv","tepyejoiza","hlkewirvka","wvfkzgzunn","zniienrhhc","reqptvyglj","zfmmieihmp","mchjjzipem","xmskvtxccs"]}' },
   ],
 }
 

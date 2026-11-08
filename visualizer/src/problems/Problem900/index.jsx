@@ -20,6 +20,10 @@ const definition = {
     { label: 'Official', input: '[["RLEIterator","next","next","next","next"],[[[3,8,0,9,2,5]],[2],[1],[1],[2]]]' },
     { label: 'Single run', input: '[["RLEIterator","next","next","next"],[[[5,1]],[2],[2],[2]]]' },
     { label: 'Zero counts', input: '[["RLEIterator","next","next"],[[[0,3,2,4,0,7,1,6]],[2],[1]]]' },
+    { label: 'Single run', input: '[["RLEIterator","next"],[[[2,9]],[1]]]' },
+    { label: 'Largest count', input: '[["RLEIterator","next","next"],[[[1000000000,7]],[1000000000],[1]]]' },
+    { label: 'Equal runs', input: '[["RLEIterator","next","next","next"],[[[3,4,3,4]],[2],[2],[2]]]' },
+    { label: 'Long run: 39 next calls', input: '[["RLEIterator","next","next","next","next","next","next","next","next","next","next","next","next","next","next","next","next","next","next","next","next","next","next","next","next","next","next","next","next","next","next","next","next","next","next","next","next","next","next","next"],[[[1,2,1,6,2,1,3,5,5,1,1,5,3,6,3,8,2,1,5,5,2,8,3,1,1,6,1,3,4,9,4,9,4,9,2,9,3,8,4,7]],[3],[2],[1],[1],[2],[3],[1],[1],[3],[1],[2],[2],[2],[3],[2],[1],[3],[2],[1],[1],[3],[3],[2],[2],[3],[3],[2],[3],[3],[3],[2],[1],[2],[3],[2],[2],[2],[1],[1]]]' },
   ],
 }
 

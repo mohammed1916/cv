@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[10,13,12,14,15]' },
     { label: 'Example 2', input: '[2,3,1,1,4]' },
+    { label: 'Single element', input: '[7]' },
+    { label: 'Equal values give tied jumps', input: '[5,5,5,5]' },
+    { label: 'Extreme values at the limit', input: '[1000,-1000,1000,-1000]' },
+    { label: 'Long run: 20 items', input: '[-85,320,-114,-414,922,-576,-668,-602,-184,-994,522,58,733,-671,-92,739,-122,133,219,-56]' },
   ],
 }
 

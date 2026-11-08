@@ -14,6 +14,10 @@ const definition = {
     { label: 'Two distinct values', input: JSON.stringify({ nums: [2, 1, 2, 3, 1], k: 2 }) },
     { label: 'Three distinct values', input: JSON.stringify({ nums: [4, 5, 4, 6, 5], k: 3 }) },
     { label: 'Repeats only', input: JSON.stringify({ nums: [3, 3, 3, 3], k: 1 }) },
+    { label: 'Smallest: one value', input: '{"nums":[1],"k":1}' },
+    { label: 'Repeated values with equal counts', input: '{"nums":[1,2,1,2],"k":2}' },
+    { label: 'k above the distinct count', input: '{"nums":[1,9,1,9,1,9,1,9,1,9,1,9],"k":9}' },
+    { label: 'Long run: 12 values', input: '{"nums":[1,2,6,4,9,4,1,8,7,7,6,3],"k":3}' },
   ],
 }
 

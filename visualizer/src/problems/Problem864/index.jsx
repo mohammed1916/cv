@@ -20,6 +20,10 @@ const definition = {
     { label: 'Official example 2', input: '["@..aA","..B#.","....b"]' },
     { label: 'Unreachable', input: '["@Aa"]' },
     { label: 'Two keys, no locks', input: '["@.a",".#.","b.."]' },
+    { label: 'Start beside one key', input: '["@a"]' },
+    { label: 'Two keys in one row', input: '["@ab"]' },
+    { label: 'Largest grid, six keys', input: '["@.a..b..","#.#.#.#.","c.d.e.f.","........","##.##.##","........",".A.B.C..","....D.E."]' },
+    { label: 'Long run: 8 by 8 grid', input: '["@....#.b",".....##.","..#.....",".##....#","#....#..","..#.##.#",".##.#...",".#..#..a"]' },
   ],
 }
 

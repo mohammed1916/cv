@@ -20,6 +20,10 @@ const definition = {
     { label: '1x4 from (0,0)', input: '[1,4,0,0]' },
     { label: '5x6 from (1,4)', input: '[5,6,1,4]' },
     { label: '3x3 centre', input: '[3,3,1,1]' },
+    { label: 'Single cell', input: '[1,1,0,0]' },
+    { label: 'Symmetric start', input: '[6,6,2,3]' },
+    { label: 'Corner start', input: '[12,12,0,11]' },
+    { label: 'Long run: 12 by 11 grid', input: '[12,11,6,5]' },
   ],
 }
 

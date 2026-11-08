@@ -19,6 +19,10 @@ const definition = {
     { label: 'Example 1', input: '{"arr":[1,1,2,2,3,3,4,4,5,5],"target":8}' },
     { label: 'Example 2', input: '{"arr":[1,1,2,2,2,2],"target":5}' },
     { label: 'Example 3', input: '{"arr":[2,1,3],"target":6}' },
+    { label: 'Zero target', input: '{"arr":[0,0,0],"target":0}' },
+    { label: 'Equal values', input: '{"arr":[5,5,5,5],"target":10}' },
+    { label: 'Largest values and target', input: '{"arr":[100,100,100],"target":300}' },
+    { label: 'Long run: 40 values', input: '{"arr":[64,39,70,61,78,71,100,99,85,51,42,39,37,0,74,26,41,86,55,21,25,51,43,24,26,34,51,43,96,86,16,2,64,26,55,43,57,47,42,1],"target":150}' },
   ],
 }
 

@@ -17,6 +17,9 @@ const definition = {
     { label: 'Example 1', input: '["ca","bb","ac"]' },
     { label: 'Example 2', input: '["xc","yb","za"]' },
     { label: 'Example 3', input: '["zyx","wvu","tsr"]' },
+    { label: 'Single string', input: '["a"]' },
+    { label: 'Equal lengths', input: '["zz","aa","mm"]' },
+    { label: 'Long run: 10 strings of 12 letters', input: '["yqyailanmhkf","xqcbrbiphsjm","uhldiwwnpksf","jqxwrvdhwkin","ksvehentrixu","olxuhqmbqksu","phxzhicdatoo","iaajupwigglm","kikffbxhxemm","axkqazyztsam"]' },
   ],
 }
 

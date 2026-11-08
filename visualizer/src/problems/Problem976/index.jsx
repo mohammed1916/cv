@@ -12,6 +12,11 @@ const definition = {
     { label: 'First triple works', input: JSON.stringify({ sides: [5, 2, 4] }) },
     { label: 'Long side too big', input: JSON.stringify({ sides: [1, 3, 2, 12] }) },
     { label: 'Several candidates', input: JSON.stringify({ sides: [9, 4, 7, 2, 6] }) },
+    { label: 'Smallest input: three ones', input: '{"sides":[1,1,1]}' },
+    { label: 'Repeated lengths', input: '{"sides":[2,2,3,3]}' },
+    { label: 'Maximum lengths', input: '{"sides":[1000,1000,1000,1,1]}' },
+    { label: 'No triangle is possible', input: '{"sides":[1,2,3]}' },
+    { label: 'Long run: 12 sides', input: '{"sides":[565,70,607,981,952,80,790,134,659,814,278,685]}' },
   ],
 }
 

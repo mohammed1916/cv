@@ -13,6 +13,10 @@ const definition = {
   examples: [
     { label: 'Equal', input: '{"s":"0.(52)","t":"0.5(25)"}' },
     { label: 'Not equal', input: '{"s":"0.(6)","t":"0.(9)"}' },
+    { label: 'Zeros', input: '{"s":"0","t":"0.(0)"}' },
+    { label: 'Repeating nines', input: '{"s":"0.(9)","t":"1"}' },
+    { label: 'Long repeat', input: '{"s":"12.3(456789)","t":"12.3456789(456789)"}' },
+    { label: 'Long run: 18-digit period', input: '{"s":"0.(123456789012345678)","t":"0.(123456789012345678)"}' },
   ],
 }
 

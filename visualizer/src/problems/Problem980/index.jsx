@@ -12,6 +12,11 @@ const definition = {
     { label: 'Ring around the middle', input: JSON.stringify({ grid: [[1, 0, 0], [0, 0, 0], [0, 0, 2]] }) },
     { label: 'Open two-row board', input: JSON.stringify({ grid: [[1, 0, 0], [0, 0, 2]] }) },
     { label: 'Obstacle beside start', input: JSON.stringify({ grid: [[1, -1], [0, 2]] }) },
+    { label: 'Start beside the end', input: '{"grid":[[1,2]]}' },
+    { label: 'Two equal routes', input: '{"grid":[[1,0],[0,2]]}' },
+    { label: 'No route through the walls', input: '{"grid":[[1,-1],[-1,2]]}' },
+    { label: 'Largest board: twelve squares', input: '{"grid":[[1,-1,0,0],[0,0,-1,0],[0,0,0,2]]}' },
+    { label: 'Long run: twelve squares', input: '{"grid":[[1,0,-1],[0,0,0],[0,0,0],[0,-1,2]]}' },
   ],
 }
 

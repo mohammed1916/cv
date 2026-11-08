@@ -12,6 +12,10 @@ const definition = {
     { label: 'Bases 2 and 3', input: JSON.stringify({ x: 2, y: 3, bound: 12 }) },
     { label: 'Base 1 on one side', input: JSON.stringify({ x: 1, y: 4, bound: 20 }) },
     { label: 'Bases 3 and 4', input: JSON.stringify({ x: 3, y: 4, bound: 30 }) },
+    { label: 'Smallest bases', input: '{"x":1,"y":1,"bound":0}' },
+    { label: 'Equal bases', input: '{"x":3,"y":3,"bound":30}' },
+    { label: 'Largest values', input: '{"x":20,"y":19,"bound":500}' },
+    { label: 'Long run: bases 7 and 11', input: '{"x":7,"y":11,"bound":500}' },
   ],
 }
 

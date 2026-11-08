@@ -14,6 +14,10 @@ const definition = {
     { label: 'Repeat at the end', input: JSON.stringify({ nums: [7, 3, 9, 7, 2, 7, 1, 7] }) },
     { label: 'Adjacent repeats', input: JSON.stringify({ nums: [4, 4, 1, 6, 4, 5] }) },
     { label: 'Spread out', input: JSON.stringify({ nums: [8, 2, 5, 8, 6, 8, 3, 8] }) },
+    { label: 'Smallest list', input: '{"nums":[1,2,1,3]}' },
+    { label: 'Repeated value at the front', input: '{"nums":[5,5,5,1,2,3]}' },
+    { label: 'Largest values', input: '{"nums":[10000,10000,0,7]}' },
+    { label: 'Long run: 20 values', input: '{"nums":[8426,2701,8426,7667,8426,5684,8426,4882,8426,7825,8426,5277,8426,5250,8426,8239,8426,6044,8426,4272]}' },
   ],
 }
 

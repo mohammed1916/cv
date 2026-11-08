@@ -20,6 +20,9 @@ const definition = {
     { label: 'Example 1', input: '["alex","loves","leetcode"]' },
     { label: 'Example 2', input: '["catg","ctaagt","gcta","ttca","atgcatc"]' },
     { label: 'Overlaps', input: '["abc","bcd","cde"]' },
+    { label: 'Single word', input: '["a"]' },
+    { label: 'Equal lengths', input: '["ab","cd","ef"]' },
+    { label: 'Eight long words', input: '["wtiolblxhhre","helafgisqpir","vytssdtgthnh","nhxtpytjaaaz","bwdfdfucimdu","lqsenpowpjak","yyawjerfmksv","bczxyvcgtfik"]' },
   ],
 }
 

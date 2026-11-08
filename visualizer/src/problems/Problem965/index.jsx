@@ -12,6 +12,10 @@ const definition = {
     { label: 'Every node matches', input: JSON.stringify({ tree: [3, 3, 3, 3, null, 3, 3] }) },
     { label: 'One outlier deep down', input: JSON.stringify({ tree: [7, 7, 7, 7, 7, 7, 8] }) },
     { label: 'Mismatch on the left', input: JSON.stringify({ tree: [4, 4, 4, 2, 4] }) },
+    { label: 'Single node', input: '{"tree":[5]}' },
+    { label: 'Equal values', input: '{"tree":[4,4,4,4,4,4,4]}' },
+    { label: 'Largest values', input: '{"tree":[99,99,99,99,null,99,0]}' },
+    { label: 'Long run: 31 slots', input: '{"tree":[48,49,71,33,56,86,15,17,90,32,62,16,4,37,40,31,null,53,null,null,38,null,36,69,23,61,null,41,null,92,62]}' },
   ],
 }
 

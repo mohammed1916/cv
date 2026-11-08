@@ -12,6 +12,10 @@ const definition = {
     { label: 'Double, then drop one', input: JSON.stringify({ startValue: 3, target: 7 }) },
     { label: 'Small target', input: JSON.stringify({ startValue: 6, target: 2 }) },
     { label: 'Several halvings', input: JSON.stringify({ startValue: 2, target: 50 }) },
+    { label: 'Start equals target', input: '{"startValue":1,"target":1}' },
+    { label: 'Doubling matches exactly', input: '{"startValue":3,"target":6}' },
+    { label: 'Largest target from one', input: '{"startValue":1,"target":1000000000}' },
+    { label: 'Long run: large target', input: '{"startValue":12345,"target":987654321}' },
   ],
 }
 

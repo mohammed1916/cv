@@ -12,6 +12,10 @@ const definition = {
     { label: 'Nearest of two', input: JSON.stringify({ points: [[4, 1], [-2, -2]], k: 1 }) },
     { label: 'Three points, keep two', input: JSON.stringify({ points: [[2, 6], [-5, 1], [4, -4]], k: 2 }) },
     { label: 'Scattered points', input: JSON.stringify({ points: [[8, 2], [1, 0], [-4, 5], [0, -6], [3, 3]], k: 3 }) },
+    { label: 'Single point', input: '{"points":[[0,0]],"k":1}' },
+    { label: 'Equal distances', input: '{"points":[[1,0],[0,1],[-1,0]],"k":2}' },
+    { label: 'Extreme points', input: '{"points":[[100,100],[-100,-100]],"k":2}' },
+    { label: 'Long run: 12 points, keep 5', input: '{"points":[[-100,9],[1,-60],[28,59],[46,-54],[-66,0],[55,90],[53,-29],[40,89],[-83,-83],[-12,-59],[-40,48],[-98,-57]],"k":5}' },
   ],
 }
 

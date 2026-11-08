@@ -19,6 +19,10 @@ const definition = {
     { label: 'Official example 1', input: '{"nums1":[2,7,11,15],"nums2":[1,10,4,11]}' },
     { label: 'Official example 2', input: '{"nums1":[12,24,8,32],"nums2":[13,25,32,11]}' },
     { label: 'No advantage possible', input: '{"nums1":[1,1,1],"nums2":[5,6,7]}' },
+    { label: 'Single element', input: '{"nums1":[5],"nums2":[3]}' },
+    { label: 'Equal values use the smaller index', input: '{"nums1":[4,4,9],"nums2":[2,2,5]}' },
+    { label: 'Largest values', input: '{"nums1":[1000000000,0],"nums2":[0,1000000000]}' },
+    { label: 'Long run: 30 cards', input: '{"nums1":[51,92,44,60,65,83,65,72,48,58,71,95,41,52,96,18,47,40,56,24,73,35,17,39,4,66,34,81,58,30],"nums2":[60,13,90,54,5,64,69,71,4,24,3,64,27,33,66,90,49,58,27,42,9,26,24,33,77,44,17,18,60,95]}' },
   ],
 }
 

@@ -19,6 +19,11 @@ const definition = {
     { label: 'Example 1', input: '{"nums":[0,1,0],"k":1}' },
     { label: 'Example 2', input: '{"nums":[1,1,0],"k":2}' },
     { label: 'Example 3', input: '{"nums":[0,0,0,1,0,1,1,0],"k":3}' },
+    { label: 'Smallest: one value', input: '{"nums":[1],"k":1}' },
+    { label: 'Whole array in one flip', input: '{"nums":[0,0,0,0],"k":4}' },
+    { label: 'Window equals the whole array', input: '{"nums":[1,0,1,0,1,0,1,0,1,0,1,0],"k":12}' },
+    { label: 'No window fixes every zero', input: '{"nums":[1,0,1,0,1,0],"k":6}' },
+    { label: 'Long run: 12 bits', input: '{"nums":[1,0,0,1,0,1,1,1,0,1,0,0],"k":4}' },
   ],
 }
 

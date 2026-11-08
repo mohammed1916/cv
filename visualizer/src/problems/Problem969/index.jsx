@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[3,2,4,1]' },
     { label: 'Sorted', input: '[1,2,3]' },
+    { label: 'Single value', input: '[1]' },
+    { label: 'Reversed permutation', input: '[12,11,10,9,8,7,6,5,4,3,2,1]' },
+    { label: 'Two swapped', input: '[2,1,3]' },
+    { label: 'Long run: shuffled 12', input: '[9,1,11,3,12,4,8,10,7,2,5,6]' },
   ],
 }
 

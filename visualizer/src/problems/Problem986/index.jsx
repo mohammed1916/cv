@@ -15,6 +15,10 @@ const definition = {
   complexity: 'O(m + n) time for lists of m and n intervals. The visualization caps each list at 12 intervals.',
   examples: [
     { label: 'Example 1', input: '{"a":[[0,2],[5,10],[13,23],[24,25]],"b":[[1,5],[8,12],[15,24],[25,26]]}' },
+    { label: 'Smallest: one point each', input: '{"a":[[0,0]],"b":[[0,0]]}' },
+    { label: 'Touching at one point', input: '{"a":[[0,5]],"b":[[5,9]]}' },
+    { label: 'Full range in both lists', input: '{"a":[[0,100]],"b":[[0,100]]}' },
+    { label: 'Long run: 12 intervals each', input: '{"a":[[2,2],[3,7],[11,11],[15,15],[19,19],[21,21],[23,26],[27,31],[34,36],[40,44],[45,47],[51,54]],"b":[[2,2],[5,8],[10,14],[17,21],[24,24],[27,29],[32,36],[40,43],[44,47],[51,53],[54,57],[58,62]]}' },
   ],
 }
 

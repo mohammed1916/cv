@@ -19,6 +19,10 @@ const definition = {
     { label: 'Example 2', input: '"D"' },
     { label: 'All increasing', input: '"IIII"' },
     { label: 'Mixed', input: '"DIDDIID"' },
+    { label: 'Single I', input: '"I"' },
+    { label: 'All decreasing', input: '"DDDDDDDDDD"' },
+    { label: 'Alternating', input: '"IDIDIDIDID"' },
+    { label: 'Long run: 100 characters', input: '"DIIDDDDIDIIDIIDIIDDIIDDDDDIIIDDIIDDDDDDDDIIIDDDDDDIDIDIIIDDDIIIIDIDIIIDIDIDDIIDIIDIIDIIDIDIDDDDDIDDI"' },
   ],
 }
 

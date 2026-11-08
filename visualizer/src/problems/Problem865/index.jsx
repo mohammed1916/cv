@@ -18,6 +18,10 @@ const definition = {
     { label: 'Single node', input: '[1]' },
     { label: 'Deepest only on one side', input: '[0,1,3,null,2]' },
     { label: 'Skewed', input: '[1,2,null,3,null,4]' },
+    { label: 'Left child only', input: '[1,2]' },
+    { label: 'Full thirty nodes', input: '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]' },
+    { label: 'Largest level-order values', input: '[40,39,38,null,null,37,36]' },
+    { label: 'Long run: random tree', input: '[36,null,19,null,38,null,null]' },
   ],
 }
 

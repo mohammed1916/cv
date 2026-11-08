@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '["dig1 8 1 5 1","let1 art can","dig2 3 6","let2 own kit dig","let3 art zero"]' },
     { label: 'Example 2', input: '["a1 9 2 3 1","g1 act car","zo4 4 7","ab1 off key dog","a8 act zoo"]' },
+    { label: 'Single letter log', input: '["a1 x"]' },
+    { label: 'Equal words sort by identifier', input: '["b2 x y","a1 x y"]' },
+    { label: 'Long log line', input: '["z1 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]' },
+    { label: 'Long run: 30 logs', input: '["jqi0 owc cd","gpz1 yry wh","d2 038 52","d3 682 53","d4 116 57","d5 304 06","d6 519 73","vkh7 buw sf","grl8 urw an","iax9 rfr sn","kck10 jph xa","nxr11 ayf sl","d12 776 09","jab13 sqt iv","d14 003 84","d15 594 95","zwt16 coy po","d17 539 29","d18 738 72","d19 186 35","d20 335 41","mlb21 dpn bz","d22 649 18","wvi23 zij ud","d24 248 11","zru25 leo gj","d26 093 93","d27 635 93","kbr28 kpu zr","yfc29 twu cn"]' },
   ],
 }
 

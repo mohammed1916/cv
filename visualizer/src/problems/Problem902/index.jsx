@@ -21,6 +21,10 @@ const definition = {
     { label: 'Example 2', input: '{"digits":["1","4","9"],"n":1000000000}' },
     { label: 'Example 3', input: '{"digits":["7"],"n":8}' },
     { label: 'Prefix stops', input: '{"digits":["1","3"],"n":5231}' },
+    { label: 'Single digit', input: '{"digits":["5"],"n":1}' },
+    { label: 'All nine digits, largest n', input: '{"digits":["1","2","3","4","5","6","7","8","9"],"n":1000000000}' },
+    { label: 'Zero result', input: '{"digits":["5","9"],"n":4}' },
+    { label: 'Long run: 5 digits', input: '{"digits":["1","2","4","9"],"n":987654321}' },
   ],
 }
 

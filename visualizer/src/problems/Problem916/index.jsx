@@ -19,6 +19,10 @@ const definition = {
     { label: 'Example 1', input: '{"words1":["amazon","apple","facebook","google","leetcode"],"words2":["e","o"]}' },
     { label: 'Example 2', input: '{"words1":["amazon","apple","facebook","google","leetcode"],"words2":["l","e"]}' },
     { label: 'Repeated letters', input: '{"words1":["warrior","world","tower"],"words2":["wr","or","rr"]}' },
+    { label: 'Single letter', input: '{"words1":["a"],"words2":["a"]}' },
+    { label: 'Repeated words', input: '{"words1":["ab","ab","ba"],"words2":["a","b"]}' },
+    { label: 'Longest words', input: '{"words1":["abcdefghij","jihgfedcba"],"words2":["abcdefghij","zzzzzzzzzz"]}' },
+    { label: 'Long run: 30 words each', input: '{"words1":["kjne","bsfjvwktg","ysx","vrhatovh","qxmcyji","uqx","zl","ocd","ozbv","qwzgn","bvpguez","fee","fbnoyzfd","hyexbutt","auvphkfcvp","exdony","ubgiw","izygqv","wnts","tckif","mh","mlvgntm","xnownuw","zeyyv","eqzi","syzvlhj","jafut","zr","igsnwtxbd","mshwgoesd"],"words2":["zqx","try","ztjvxthgr","jwcjaz","mgi","cxfz","bycabbnki","uxsagfw","jyvoq","y","avjs","rohsvktw","zv","hridd","snzyvsqzw","ztipmm","zboecmgcl","jjokcqkkh","hsj","psfrz","pcscpetv","wjmnop","xw","wrduxlgyr","qknkiz","mrqtnia","phut","vprglq","jnkjkgvrv","ji"]}' },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 1', input: '{"x":3,"target":19}' },
     { label: 'Example 2', input: '{"x":5,"target":501}' },
     { label: 'Power of x', input: '{"x":2,"target":12}' },
+    { label: 'Smallest x and target', input: '{"x":2,"target":1}' },
+    { label: 'Equal x and target', input: '{"x":10,"target":10}' },
+    { label: 'Largest values', input: '{"x":100,"target":200000000}' },
+    { label: 'Long run: x = 7', input: '{"x":7,"target":199999999}' },
   ],
 }
 

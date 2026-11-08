@@ -18,6 +18,10 @@ const definition = {
     { label: 'Official', input: '{"preorder":[1,2,4,5,3,6,7],"postorder":[4,5,2,6,7,3,1]}' },
     { label: 'Single node', input: '{"preorder":[1],"postorder":[1]}' },
     { label: 'Skewed', input: '{"preorder":[1,2,3],"postorder":[3,2,1]}' },
+    { label: 'Single node 7', input: '{"preorder":[7],"postorder":[7]}' },
+    { label: 'Three nodes', input: '{"preorder":[457,377,602],"postorder":[377,602,457]}' },
+    { label: 'Extreme values', input: '{"preorder":[1000,1,999],"postorder":[1,999,1000]}' },
+    { label: 'Long run: 30 nodes', input: '{"preorder":[175,712,113,201,479,700,186,662,153,801,607,283,790,558,394,336,697,566,323,33,65,396,303,482,631,157,577,996,301,51],"postorder":[700,479,201,113,801,607,153,558,394,790,65,33,323,566,697,631,482,303,396,336,283,662,301,996,577,51,157,186,712,175]}' },
   ],
 }
 

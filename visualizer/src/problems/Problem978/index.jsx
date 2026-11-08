@@ -12,6 +12,10 @@ const definition = {
     { label: 'Zigzag run', input: JSON.stringify({ arr: [3, 7, 2, 9, 4, 4, 1] }) },
     { label: 'Straight climb', input: JSON.stringify({ arr: [4, 8, 12, 16] }) },
     { label: 'Equal values', input: JSON.stringify({ arr: [5, 5, 1, 6, 2] }) },
+    { label: 'Single value', input: '{"arr":[9]}' },
+    { label: 'Equal values, no rise or fall', input: '{"arr":[4,4,4,4]}' },
+    { label: 'Extremes alternate', input: '{"arr":[0,99,0,99,0,99]}' },
+    { label: 'Long run: 16 items', input: '{"arr":[69,82,88,43,16,77,92,93,89,64,68,51,85,37,92,76]}' },
   ],
 }
 

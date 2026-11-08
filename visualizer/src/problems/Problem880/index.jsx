@@ -17,6 +17,10 @@ const definition = {
     { label: 'leet2code3', input: '["leet2code3", 10]' },
     { label: 'ha22', input: '["ha22", 5]' },
     { label: 'a2345678999999999999999', input: '["a2345678999999999999999", 1]' },
+    { label: 'Smallest encoding', input: '["a2",2]' },
+    { label: 'Repeated groups', input: '["a2b2c2",6]' },
+    { label: 'Digits stack up', input: '["a9b9c9d9e9f9g9h9i9j9",90]' },
+    { label: 'Long run: 100 characters', input: '["azd2z2w33hrip3d3r2rqi3qy3f3",22625]' },
   ],
 }
 

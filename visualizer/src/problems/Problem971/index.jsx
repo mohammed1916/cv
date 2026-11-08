@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Impossible', input: '{"arr":[1,2],"voyage":[2,1]}' },
     { label: 'One flip', input: '{"arr":[1,2,3],"voyage":[1,3,2]}' },
+    { label: 'Single node', input: '{"arr":[1],"voyage":[1]}' },
+    { label: 'Three nodes, one flip', input: '{"arr":[1,2,3],"voyage":[1,3,2]}' },
+    { label: 'Full tree, no flips', input: '{"arr":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],"voyage":[1,2,4,8,9,5,10,11,3,6,12,13,7,14,15]}' },
+    { label: 'Long run: 15 nodes, shuffled voyage', input: '{"arr":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],"voyage":[6,5,3,11,2,12,9,7,14,8,10,4,15,13,1]}' },
   ],
 }
 

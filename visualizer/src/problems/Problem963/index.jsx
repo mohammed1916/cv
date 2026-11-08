@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Tilted square', input: '[[1,2],[2,1],[1,0],[0,1]]' },
     { label: 'Axis aligned', input: '[[0,1],[2,1],[1,1],[1,0],[2,0]]' },
+    { label: 'Single point', input: '[[0,0]]' },
+    { label: 'Diamond around the origin', input: '[[1,0],[0,1],[-1,0],[0,-1]]' },
+    { label: 'Corners of the range', input: '[[10,10],[-10,-10],[10,-10],[-10,10]]' },
+    { label: 'Long run: 12 points', input: '[[-7,-8],[6,6],[4,2],[-4,0],[-1,6],[7,10],[5,-2],[3,-6],[-8,-9],[1,2],[-6,0],[-10,5]]' },
   ],
 }
 

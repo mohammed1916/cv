@@ -12,6 +12,10 @@ const definition = {
     { label: 'Diagonal slashes', input: JSON.stringify({ grid: ['  /', ' / ', '/  '] }) },
     { label: 'Open board', input: JSON.stringify({ grid: ['   ', '   ', '   '] }) },
     { label: 'Backslashes', input: JSON.stringify({ grid: ['\\ ', ' \\'] }) },
+    { label: 'Single space', input: '{"grid":[" "]}' },
+    { label: 'Two by two mirror', input: '{"grid":["/\\\\","\\\\/"]}' },
+    { label: 'Full slash band', input: '{"grid":["/   /"," / / ","  /  "," / / ","/   /"]}' },
+    { label: 'Long run: 5 by 5 mixed', input: '{"grid":["  / \\\\","\\\\\\\\\\\\ \\\\"," /\\\\\\\\/","\\\\\\\\ /\\\\","\\\\ / /"]}' },
   ],
 }
 

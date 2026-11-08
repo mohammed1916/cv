@@ -16,6 +16,10 @@ const definition = {
     { label: 'Example 1', input: '{"stamp":"abc","target":"ababc"}' },
     { label: 'Example 2', input: '{"stamp":"abca","target":"aabcaca"}' },
     { label: 'Impossible', input: '{"stamp":"ab","target":"ba"}' },
+    { label: 'Single letter', input: '{"stamp":"a","target":"a"}' },
+    { label: 'Repeated letters', input: '{"stamp":"aa","target":"aaaa"}' },
+    { label: 'Largest target', input: '{"stamp":"abc","target":"abcabcabcabcabcabcabcabcabcabc"}' },
+    { label: 'Long run: 30 letters', input: '{"stamp":"cecb","target":"eceddcbcceccededebbbccbaedebcb"}' },
   ],
 }
 

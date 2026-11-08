@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Mixed', input: '{"a":1,"b":1,"c":7}' },
     { label: 'Impossible', input: '{"a":0,"b":0,"c":3}' },
+    { label: 'Single letter', input: '{"a":1,"b":0,"c":0}' },
+    { label: 'Equal counts', input: '{"a":2,"b":2,"c":2}' },
+    { label: 'Largest counts', input: '{"a":100,"b":100,"c":100}' },
+    { label: 'Long run: 137 letters', input: '{"a":61,"b":29,"c":47}' },
   ],
 }
 

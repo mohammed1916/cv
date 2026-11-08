@@ -12,6 +12,10 @@ const definition = {
     { label: 'Chain of equalities', input: JSON.stringify({ equations: ['p==q', 'q==r', 'p!=s'] }) },
     { label: 'Conflict through a chain', input: JSON.stringify({ equations: ['m==n', 'n==o', 'm!=o'] }) },
     { label: 'Two separate groups', input: JSON.stringify({ equations: ['a==b', 'c!=d', 'd==e'] }) },
+    { label: 'Smallest: one self inequality', input: '{"equations":["a!=a"]}' },
+    { label: 'Repeated equal equations', input: '{"equations":["a==b","b==a","a==b"]}' },
+    { label: 'Twelve equations in one chain', input: '{"equations":["a==b","b==c","c==d","d==e","e==f","f==g","g==h","h==i","i==j","j==k","k==l","a!=l"]}' },
+    { label: 'Long run: 12 equations', input: '{"equations":["b!=d","f!=f","a==f","g!=d","b!=a","h==d","d!=h","h==f","b!=a","g!=h","d==a","d==d"]}' },
   ],
 }
 

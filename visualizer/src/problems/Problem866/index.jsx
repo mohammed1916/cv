@@ -21,6 +21,10 @@ const definition = {
     { label: 'n = 13', input: '13' },
     { label: 'n = 9989900', input: '9989900' },
     { label: 'n = 100000000', input: '100000000' },
+    { label: 'Smallest n', input: '1' },
+    { label: 'Power of two', input: '2' },
+    { label: 'Odd composite', input: '15' },
+    { label: 'Long run: n = 99999989', input: '99999989' },
   ],
 }
 

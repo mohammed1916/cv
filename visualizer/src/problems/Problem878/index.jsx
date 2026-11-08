@@ -17,6 +17,10 @@ const definition = {
     { label: 'n=3, a=2, b=3', input: '[3,2,3]' },
     { label: 'n=4, a=2, b=3', input: '[4,2,3]' },
     { label: 'Large', input: '[1000000000,40000,39999]' },
+    { label: 'One element', input: '[1,2,2]' },
+    { label: 'Equal limits', input: '[10,3,3]' },
+    { label: 'Largest n', input: '[1000000000,2,2]' },
+    { label: 'Long run: large n, 1009 and 37', input: '[123456789,37,1009]' },
   ],
 }
 
