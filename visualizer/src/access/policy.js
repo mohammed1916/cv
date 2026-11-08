@@ -1,8 +1,7 @@
 // While the site is in beta, Pro and the code playground are free for everyone.
 // The cloud-function access checks are skipped while this is true. Set it to
-// false to bring back Pro, playground limits and the sign-in gate.
+// false to require an active Pro account for the playground.
 export const BETA_FREE_ACCESS = false;
-export const FREE_SECONDS = 30 * 60;
 // Beta prices are charged now. Regular prices apply once the website leaves beta.
 const BETA = { monthly: 99, annual: 799 };
 const REGULAR = { monthly: 199, annual: 1499 };

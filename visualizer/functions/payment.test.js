@@ -63,13 +63,18 @@ test('trial handler is authenticated, idempotent and grants unlimited playground
   assert.equal(first.trialEndsAt, now + TRIAL_MS);
   assert.equal((await startProTrial.run(request())).trialEndsAt, first.trialEndsAt);
   const leaseRequest = { ...request(), data: { sessionId: 'session-trial-test-123' } };
-  assert.equal((await playgroundLease.run(leaseRequest)).pro, true);
+  const activeLease = await playgroundLease.run(leaseRequest);
+  assert.equal(activeLease.pro, true);
+  assert.equal(activeLease.validUntil, now + 6 * 60 * 60 * 1000);
+  assert.equal((await playgroundLease.run({ ...request(), data: {} })).pro, true);
   assert.equal(records.has('usage/owner'), false);
   t.mock.method(Date, 'now', () => now + TRIAL_MS);
   assert.equal((await startProTrial.run(request())).pro, false);
   const expiredLease = await playgroundLease.run(leaseRequest);
   assert.equal(expiredLease.pro, false);
-  assert.equal(expiredLease.remainingSeconds, 1770);
+  assert.equal(expiredLease.remainingSeconds, 0);
+  assert.equal(expiredLease.validUntil, 0);
+  assert.equal(records.has('usage/owner'), false);
 });
 
 test('checkout sends the trusted new monthly and annual prices, ignoring client amounts', async t => {

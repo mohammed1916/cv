@@ -87,7 +87,7 @@ export function Plans({ access, reason, onHideForever }) {
     <p>{reason || 'Learn the foundations free. Go further with Pro.'}</p>
     <div className="plan-grid">
       <section className="plan-card"><span className="access-eyebrow">FREE</span><h3>₹0</h3>
-        <ul><li>All Basics and Easy visualizers</li><li>{FREE_MEDIUM.size} selected Medium problems</li><li>Beginner tutorial</li><li>30 minutes of playground every day</li></ul>
+        <ul><li>All Basics and Easy visualizers</li><li>{FREE_MEDIUM.size} selected Medium problems</li><li>Beginner tutorial</li><li>Free visualizer practice without a daily timer</li></ul>
         <small>Sign in for playground access. Resets at midnight India time.</small>
       </section>
       <section className="plan-card plan-pro"><span className="access-eyebrow">VISUALIZER PRO</span><h3>Every problem. More practice.</h3>
@@ -109,7 +109,7 @@ export function Plans({ access, reason, onHideForever }) {
         {!BETA_FREE_ACCESS && (!access.user || access.account?.trialAvailable) && <button className="access-primary" disabled={pending || access.busy || !backendEnabled} onClick={access.startTrial}>
           {access.user ? 'Start 3-day free trial' : 'Sign in to start your free trial'}
         </button>}
-        {access.account?.trialEndsAt && !access.pro ? <p>Your free trial has ended. Subscribe to continue with Pro, or keep using the free problems and daily playground allowance.</p> : null}
+        {access.account?.trialEndsAt && !access.pro ? <p>Your free trial has ended. Subscribe to continue with Pro, or keep using the free problem visualizers.</p> : null}
         {!BETA_FREE_ACCESS && <button className="access-primary" disabled={pending || access.busy || !checkoutEnabled || (access.pro && access.account?.paid)} onClick={(event) => purchase(cycle, event.currentTarget.closest('dialog'))}>
           {access.pro && access.account?.paid ? 'Paid Pro active' : `${selected.display} / ${selected.label}`}
         </button>}
@@ -127,45 +127,22 @@ export function Plans({ access, reason, onHideForever }) {
   </>;
 }
 
-// The server reserves 30-second slices in a transaction. Reservations survive
-// reloads and cannot be replayed by another tab or account. Never trust localStorage.
+// Playground uses the same account-level Pro entitlement as the catalogue.
+// No timers, session leases, daily quotas or per-run network checks.
 export function PlaygroundGate({ access, onPlans, children }) {
-  const [lease, setLease] = useState(null);
-  const [error, setError] = useState('');
-  const [now, setNow] = useState(() => Date.now());
-  const [retry, setRetry] = useState(0);
-  const [sessionId] = useState(() => crypto.randomUUID());
-  useEffect(() => {
-    if (BETA_FREE_ACCESS || !access.user || !backendEnabled) return;
-    let stopped = false, busy = false, nextAttempt = 0;
-    let currentLease = null;
-    async function tick() {
-      setNow(Date.now());
-      if (document.hidden || busy || Date.now() < nextAttempt || (currentLease && currentLease.validUntil > Date.now() + 4000)) return;
-      busy = true;
-      try {
-        const next = await accessCall('playgroundLease', { sessionId });
-        currentLease = { ...next, validUntil: Date.now() + Math.max(0, next.validUntil - next.serverNow) };
-        if (!stopped) { setLease(currentLease); setError(''); }
-        if (!next.validUntil) nextAttempt = Date.now() + 30000;
-      } catch { nextAttempt = Date.now() + 30000; if (!stopped) setError('Could not verify playground time. Check your connection and retry.'); }
-      finally { busy = false; }
-    }
-    tick();
-    const timer = setInterval(tick, 1000);
-    return () => { stopped = true; clearInterval(timer); };
-  }, [access.user, retry, sessionId]);
+  const previouslyAllowed = useRef(false);
+  if (access.pro) previouslyAllowed.current = true;
   if (BETA_FREE_ACCESS) return children;
-  const allowed = lease && lease.validUntil > now;
-  if (!access.ready) return <div className="access-gate">Checking sign-in…</div>;
-  if (!access.user) return <div className="access-gate"><h2>Your daily coding practice</h2><p>Sign in with Google for 30 minutes of free playground use every day.</p><GoogleSignIn access={access} /><p role="alert">{access.error}</p></div>;
-  if (!backendEnabled) return <div className="access-gate"><h2>Playground account access is being set up</h2><p>Daily usage tracking is not available yet. Free problem visualizers and the tutorial are available now.</p></div>;
+  const checking = !access.ready || (access.user && !access.accountReady && backendEnabled);
   return <div className="playground-access-wrap">
-    {allowed && <div className="playground-allowance" role="status">{lease.pro ? (lease.trialActive ? 'Free trial · Unlimited playground' : 'Pro · Unlimited playground') : `${Math.ceil((lease.remainingSeconds + Math.max(0, (lease.validUntil - now) / 1000)) / 60)} min left today · Resets midnight IST`}{!lease.pro && <button onClick={onPlans}>Get Pro</button>}</div>}
-    {/* Keep the editor mounted after expiry so code can be recovered after renewal. */}
-    {lease && <div className="playground-access-body" inert={!allowed ? true : undefined} style={!allowed ? { visibility: 'hidden' } : undefined}>{children}</div>}
-    {!allowed && <div className="access-gate"><h2>{lease?.remainingSeconds === 0 ? 'You’ve used today’s 30 free minutes' : 'Checking playground access'}</h2>
-      <p>{error || (lease?.remainingSeconds === 0 ? 'Come back after midnight India time, or unlock unlimited practice with Pro. Your code is saved in this browser.' : lease?.inUse ? 'Playground is open in another tab or device. Close it and retry in 30 seconds.' : 'Connecting to your account…')}</p>
-      <button className="access-primary" onClick={onPlans}>See Pro plans</button><button onClick={() => { setError(''); setRetry(retry + 1); }}>Retry</button></div>}
+    {previouslyAllowed.current && <div className="playground-access-body" inert={!access.pro ? true : undefined} style={!access.pro ? { visibility: 'hidden' } : undefined}>{children}</div>}
+    {!access.pro && <div className="access-gate">
+      <h2>{checking ? 'Checking your account…' : 'Playground is included with Pro'}</h2>
+      <p>{checking ? 'Loading your saved access.' : 'Your Pro account unlocks the full playground, with no daily timer or device restrictions. An active Pro trial also includes full access.'}</p>
+      {!checking && !access.user && <GoogleSignIn access={access} />}
+      {!checking && <button className="access-primary" onClick={onPlans}>See Pro plans</button>}
+      {!checking && access.user && <button onClick={access.refresh}>Refresh access</button>}
+      {access.error && <p role="alert">{access.error}</p>}
+    </div>}
   </div>;
 }

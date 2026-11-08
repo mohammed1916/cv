@@ -2,7 +2,18 @@ import { trackEvent } from '../analytics/client';
 import { useCallback, useEffect, useState } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth, googleSignIn, accessCall, backendEnabled } from "./firebase";
+import { createAccountCache } from './accountCache';
 import { BETA_FREE_ACCESS } from "./policy";
+
+const accountCache = createAccountCache({
+  load: async uid => {
+    if (auth.currentUser?.uid !== uid) throw new Error('Account changed');
+    const account = await accessCall('accountStatus');
+    if (auth.currentUser?.uid !== uid) throw new Error('Account changed');
+    return account;
+  },
+  storage: () => window.localStorage,
+});
 
 export function useAccess() {
   const [user, setUser] = useState(null);
@@ -10,35 +21,37 @@ export function useAccess() {
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const [ready, setReady] = useState(false);
+  const [accountReady, setAccountReady] = useState(false);
   const [now, setNow] = useState(() => Date.now());
   useEffect(
     () =>
       onAuthStateChanged(auth, (next) => {
         setUser(next);
         setAccount(null);
+        setAccountReady(!next);
         setReady(true);
       }),
     [],
   );
-  const refresh = useCallback(async () => {
+  const refresh = useCallback(async (force = true) => {
     if (BETA_FREE_ACCESS || !user || !backendEnabled) return;
     try {
-      const next = await accessCall("accountStatus");
+      const next = await accountCache.get(user.uid, { force: force !== false });
       if (auth.currentUser?.uid === user.uid) {
         setAccount(next);
         setError("");
       }
     } catch {
-      setError("Could not verify account access. Please retry.");
+      if (auth.currentUser?.uid === user.uid) setError("Could not verify account access. Please retry.");
+    } finally {
+      if (auth.currentUser?.uid === user.uid) setAccountReady(true);
     }
   }, [user]);
   useEffect(() => {
-    const first = setTimeout(refresh, 0);
-    const id = setInterval(refresh, 60000);
+    const first = setTimeout(() => refresh(false), 0);
     const clock = setInterval(() => setNow(Date.now()), 1000);
     return () => {
       clearTimeout(first);
-      clearInterval(id);
       clearInterval(clock);
     };
   }, [refresh]);
@@ -67,7 +80,9 @@ export function useAccess() {
   };
   const logout = async () => {
     try {
+      const uid = auth.currentUser?.uid;
       await signOut(auth);
+      if (uid) accountCache.clear(uid);
       setAccount(null);
     } catch {
       setError("Could not sign out. Please retry.");
@@ -79,7 +94,7 @@ export function useAccess() {
     setError('');
     try {
       const next = await accessCall('startProTrial');
-      if (auth.currentUser?.uid === user.uid) setAccount(next);
+      if (auth.currentUser?.uid === user.uid) { accountCache.put(user.uid, next); setAccount(next); }
     } catch {
       setError('Could not start your free trial. Please retry.');
     } finally {
@@ -90,7 +105,7 @@ export function useAccess() {
     import.meta.env.DEV && import.meta.env.VITE_DEBUG_PRO === "true";
 
   const realPro = Boolean(
-    account?.pro && (!account.expiresAt || account.expiresAt > now),
+    account?.pro && (account.complimentary || !account.expiresAt || account.expiresAt > now),
   );
   const pro = debugPro || realPro || BETA_FREE_ACCESS;
 
@@ -100,6 +115,7 @@ export function useAccess() {
     pro,
     debugPro,
     ready,
+    accountReady: accountReady || BETA_FREE_ACCESS || debugPro,
     error,
     setError,
     busy,

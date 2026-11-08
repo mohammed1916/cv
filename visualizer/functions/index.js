@@ -4,7 +4,7 @@ import { getFirestore } from 'firebase-admin/firestore';
 import { onCall, onRequest, HttpsError } from 'firebase-functions/v2/https';
 import { defineSecret } from 'firebase-functions/params';
 import { createHmac, timingSafeEqual } from 'node:crypto';
-import { PLANS, reserve, status, entitlementEnd, trialStart } from './policy.js';
+import { PLANS, status, entitlementEnd, trialStart } from './policy.js';
 initializeApp();
 const db = getFirestore();
 const keyId = defineSecret('RAZORPAY_KEY_ID');
@@ -40,21 +40,15 @@ export const startProTrial = onCall(options, async request => {
     return status({ ...data, ...trial }, now);
   });
 });
+// Compatibility for already-open older clients. New clients never call this.
+// Paid/trial/complimentary access uses the same account entitlement, without
+// usage records, time-slice reservations or single-device restrictions.
 export const playgroundLease = onCall(options, async (request) => {
   const user = uid(request);
-  const sessionId = request.data?.sessionId;
-  if (typeof sessionId !== 'string' || !/^[a-zA-Z0-9-]{16,80}$/.test(sessionId)) throw new HttpsError('invalid-argument', 'Invalid session.');
-  return db.runTransaction(async tx => {
-    const account = await tx.get(db.doc(`accounts/${user}`));
-    const ref = db.doc(`usage/${user}`);
-    const usage = await tx.get(ref);
-    const now = Date.now();
-    const pro = accountPro(request, account.data(), now);
-    if (pro.pro) return { pro: true, trialActive: pro.trialActive, validUntil: Math.min(now + 30000, pro.expiresAt || Infinity), serverNow: now };
-    const result = reserve(usage.data(), sessionId, now);
-    if (result.record) tx.set(ref, result.record);
-    return { ...result.response, pro: false };
-  });
+  const now = Date.now();
+  const pro = accountPro(request, (await db.doc(`accounts/${user}`).get()).data(), now);
+  return { ...pro, serverNow: now, remainingSeconds: 0,
+    validUntil: pro.pro ? Math.min(now + 6 * 60 * 60 * 1000, pro.complimentary ? Infinity : pro.expiresAt || Infinity) : 0 };
 });
 async function razorpay(path, body) {
   const response = await fetch(`https://api.razorpay.com/v1/${path}`, {

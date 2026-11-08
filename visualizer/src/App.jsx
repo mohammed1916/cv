@@ -1248,7 +1248,7 @@ export default function App() {
                   ) : (
                     <>
                       <p>
-                        Use Google to keep your daily playground allowance and
+                        Use Google to access your Pro subscription and
                         Pro access linked to your account.
                       </p>
                       <div className="access-signin">
