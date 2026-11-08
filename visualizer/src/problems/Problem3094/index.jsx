@@ -21,6 +21,10 @@ const definition = {
     { label: "Some bits set", input: "1024" },
     { label: "Every bit set", input: "1073741823" },
     { label: "Zero", input: "0" },
+    { label: "Single bit", input: "1" },
+    { label: "All bits except the lowest", input: "1073741822" },
+    { label: "Alternating bits", input: "715827882" },
+    { label: "Long run: 30-bit value", input: "987654321" },
   ],
 };
 

@@ -17,6 +17,11 @@ const definition = {
   complexity: 'O(q * n log n) in this trace. A heap of unmarked values gives O(n log n + q * k log n) in the contest form.',
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,2,1,2,3,1],"queries":[[1,2],[3,3],[4,2]]}' },
+    { label: "Single element", input: "{\"nums\":[5],\"queries\":[[0,1]]}" },
+    { label: "Equal values use the smaller index", input: "{\"nums\":[2,2,2,2],\"queries\":[[1,1],[3,2]]}" },
+    { label: "Zero k leaves values unmarked", input: "{\"nums\":[3,1,4],\"queries\":[[0,0],[2,0]]}" },
+    { label: "Largest values and 12 queries", input: "{\"nums\":[20,1,20,1,20,1,20,1,20,1,20,1],\"queries\":[[0,12],[1,11],[2,10],[3,9],[4,8],[5,7],[6,6],[7,5],[8,4],[9,3],[10,2],[11,1]]}" },
+    { label: "Long run: 12 items and 12 queries", input: "{\"nums\":[8,19,14,1,20,15,18,17,12,3,10,1],\"queries\":[[3,10],[9,8],[11,10],[9,8],[3,6],[1,4],[7,10],[5,0],[11,2],[1,0],[11,6],[9,4]]}" },
   ],
 }
 

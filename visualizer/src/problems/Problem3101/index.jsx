@@ -22,6 +22,11 @@ const definition = {
   examples: [
     { label: "Example 1", input: "{\"nums\": [0, 1, 0, 0, 1]}" },
     { label: "Example 2", input: "{\"nums\": [1, 1, 0, 1, 0, 1]}" },
+    { label: "Single zero", input: "{\"nums\":[0]}" },
+    { label: "Single one", input: "{\"nums\":[1]}" },
+    { label: "Equal values", input: "{\"nums\":[1,1,1,1]}" },
+    { label: "Longest allowed: 50 values", input: "{\"nums\":[1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0]}" },
+    { label: "Long run: 50 random values", input: "{\"nums\":[0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1]}" },
   ],
 };
 

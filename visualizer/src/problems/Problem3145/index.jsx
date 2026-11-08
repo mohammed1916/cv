@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"queries":[[1,3,7]]}' },
     { label: 'Example 2', input: '{"queries":[[2,5,3],[7,7,4]]}' },
+    { label: "Same start and end", input: "{\"queries\":[[5,5,7]]}" },
+    { label: "Single index, mod one", input: "{\"queries\":[[0,0,1]]}" },
+    { label: "Full range, largest mod", input: "{\"queries\":[[0,300,1000]]}" },
+    { label: "Long run: six queries", input: "{\"queries\":[[258,282,217],[263,291,897],[124,225,297],[14,33,209],[187,195,777],[16,88,617]]}" },
   ],
 }
 

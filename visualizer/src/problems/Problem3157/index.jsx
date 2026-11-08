@@ -25,6 +25,9 @@ const definition = {
     { label: "Dip at depth three", input: "[4,1,9,-6,2,null,3]" },
     { label: "Tie at the top", input: "[0,1,-1]" },
     { label: "Single node", input: "[7]" },
+    { label: "Right child only", input: "[2,null,3]" },
+    { label: "All negative values", input: "[-4,-2,-6,-8,-3,-5,-7]" },
+    { label: "Long run: full tree of 31 nodes", input: "[15,7,23,3,11,19,27,1,5,9,13,17,21,25,29,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30]" },
   ],
 };
 

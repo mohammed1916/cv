@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[[0,1,0],[0,1,1],[0,1,0]]' },
     { label: 'Example 2', input: '[[1,0,1],[1,0,0],[1,0,0]]' },
+    { label: "Single zero cell", input: "[[0]]" },
+    { label: "Single one cell", input: "[[1]]" },
+    { label: "Equal rows", input: "[[1,1,1],[1,1,1]]" },
+    { label: "Longest allowed: 6 by 6", input: "[[1,0,0,1,0,0],[0,0,1,0,0,1],[0,1,0,0,1,0],[1,0,0,1,0,0],[0,0,1,0,0,1],[0,1,0,0,1,0]]" },
+    { label: "Long run: 6 by 6 random grid", input: "[[1,0,1,0,1,0],[1,0,1,0,1,0],[1,0,1,0,1,0],[1,0,1,0,1,0],[1,0,1,0,1,0],[1,0,1,0,1,0]]" },
   ],
 }
 

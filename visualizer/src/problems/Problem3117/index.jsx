@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[3,5,6,2,7],"and_values":[1,2]}' },
     { label: 'Example 2', input: '{"nums":[4,6,4,5,6,7],"and_values":[4,4,6]}' },
+    { label: "Single value", input: "{\"nums\":[5],\"and_values\":[5]}" },
+    { label: "Equal values", input: "{\"nums\":[6,6,6],\"and_values\":[6]}" },
+    { label: "Largest values, 10 entries", input: "{\"nums\":[63,63,63,63,63,63,63,63,63,63],\"and_values\":[63,63,63,63,63,63,63,63,63,63]}" },
+    { label: "Long run: 10 values", input: "{\"nums\":[40,39,26,49,28,11,46,53,16,47],\"and_values\":[2,57,4]}" },
   ],
 }
 

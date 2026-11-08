@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Invented cluster', input: '{"points":[[3,2],[7,0],[7,5],[11,9],[12,4],[20,6]],"w":4}' },
     { label: 'Wide reach', input: '{"points":[[1,3],[2,2],[5,9],[6,1],[9,4]],"w":2}' },
+    { label: "Single point", input: "{\"points\":[[5,5]],\"w\":0}" },
+    { label: "Points on one column", input: "{\"points\":[[3,1],[3,5],[3,9]],\"w\":0}" },
+    { label: "Largest coordinates and reach", input: "{\"points\":[[0,0],[40,40],[40,0],[0,40],[20,20],[10,30],[30,10],[5,35],[35,5],[40,20],[20,40],[0,20]],\"w\":40}" },
+    { label: "Long run: 12 points", input: "{\"points\":[[22,39],[22,34],[36,5],[33,35],[0,2],[37,11],[25,7],[1,15],[27,31],[38,10],[17,10],[20,40]],\"w\":10}" },
   ],
 }
 

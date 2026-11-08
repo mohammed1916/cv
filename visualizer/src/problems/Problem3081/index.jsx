@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '"???"' },
     { label: 'Example 2', input: '"a?a?"' },
+    { label: "Single letter", input: "\"a\"" },
+    { label: "Equal question marks", input: "\"a??a\"" },
+    { label: "Three question marks at the ends", input: "\"?abcdefghijklmnopq??\"" },
+    { label: "Long run: 20 characters", input: "\"ynibmpczkfgrwbsfy?vs\"" },
   ],
 }
 

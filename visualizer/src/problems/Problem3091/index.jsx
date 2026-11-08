@@ -16,6 +16,10 @@ const definition = {
     { label: 'Example 1', input: '7' },
     { label: 'Example 2', input: '2' },
     { label: 'Example 3', input: '20' },
+    { label: "Single", input: "1" },
+    { label: "Power of two", input: "64" },
+    { label: "Largest allowed", input: "200" },
+    { label: "Long run: 173", input: "173" },
   ],
 }
 

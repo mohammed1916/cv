@@ -16,6 +16,10 @@ const definition = {
     { label: 'Example 1', input: '{"s":"azb","k":1}' },
     { label: 'Example 2', input: '{"s":"mnop","k":3}' },
     { label: 'Example 3', input: '{"s":"zzz","k":0}' },
+    { label: "Single letter, no operations", input: "{\"s\":\"a\",\"k\":0}" },
+    { label: "Two letters, large budget", input: "{\"s\":\"ab\",\"k\":100}" },
+    { label: "Equal letters", input: "{\"s\":\"zzzzzz\",\"k\":4}" },
+    { label: "Long run: 30 letters", input: "{\"s\":\"tupwhkxyloxadktqlkfalatetqzezq\",\"k\":57}" },
   ],
 }
 

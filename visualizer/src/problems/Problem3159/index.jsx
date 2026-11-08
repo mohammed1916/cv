@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[4,2,4,9,4],"queries":[2,1,5],"x":4}' },
     { label: 'Example 2', input: '{"nums":[5,6,7],"queries":[1,4],"x":6}' },
+    { label: "Single number", input: "{\"nums\":[3],\"queries\":[3],\"x\":1}" },
+    { label: "Values equal to x", input: "{\"nums\":[5,5,5],\"queries\":[5,1],\"x\":5}" },
+    { label: "Long run: 20 numbers and 20 queries", input: "{\"nums\":[20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1],\"queries\":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],\"x\":10}" },
   ],
 }
 

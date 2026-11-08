@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,3]}' },
     { label: 'Example 2', input: '{"nums":[3,4,3,4,5]}' },
+    { label: "Single value", input: "{\"nums\":[7]}" },
+    { label: "Equal values", input: "{\"nums\":[2,2,2,2]}" },
+    { label: "Longest allowed: 12 values", input: "{\"nums\":[8,1,8,1,8,1,8,1,8,1,8,1]}" },
+    { label: "Long run: 12 values", input: "{\"nums\":[6,1,8,3,2,5,4,7,6,1,8,3]}" },
   ],
 }
 

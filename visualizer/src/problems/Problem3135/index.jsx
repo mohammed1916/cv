@@ -24,6 +24,10 @@ const definition = {
     { label: "Shared core", input: '{"s":"xxhelloyy","t":"hello"}' },
     { label: "Nothing shared", input: '{"s":"abc","t":"xyz"}' },
     { label: "Shifted middle", input: '{"s":"stone","t":"tones"}' },
+    { label: "Single equal letters", input: "{\"s\": \"a\", \"t\": \"a\"}" },
+    { label: "Single different letters", input: "{\"s\": \"a\", \"t\": \"b\"}" },
+    { label: "Identical strings", input: "{\"s\": \"abcabc\", \"t\": \"abcabc\"}" },
+    { label: "Long run: 12 letters each", input: "{\"s\": \"aabbccddeeff\", \"t\": \"ffeeddccbbaa\"}" },
   ],
 };
 

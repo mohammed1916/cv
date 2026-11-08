@@ -24,6 +24,10 @@ const definition = {
     { label: "Pairs can differ", input: "aabb" },
     { label: "Smallest arrangement", input: "bcaa" },
     { label: "Impossible", input: "zzzz" },
+    { label: "Single letter", input: "a" },
+    { label: "Two equal pairs", input: "abab" },
+    { label: "Longest allowed: 12 letters", input: "dcbadcbadcba" },
+    { label: "Long run: 12 letters", input: "hcbedgfahcbe" },
   ],
 };
 

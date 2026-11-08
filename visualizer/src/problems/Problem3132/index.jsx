@@ -16,6 +16,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums1":[4,20,16,12,8],"nums2":[14,18,10]}' },
     { label: 'Example 2', input: '{"nums1":[3,5,5,3],"nums2":[7,7]}' },
+    { label: "Three values", input: "{\"nums1\":[1,2,3],\"nums2\":[4]}" },
+    { label: "Equal values", input: "{\"nums1\":[5,5,5],\"nums2\":[5]}" },
+    { label: "Negative values", input: "{\"nums1\":[-100,100,-100],\"nums2\":[0]}" },
+    { label: "Extreme values, 10 entries", input: "{\"nums1\":[-100,100,-100,100,-100,100,-100,100,-100,100],\"nums2\":[100,-100,100,-100,100,-100,100,-100]}" },
+    { label: "Long run: 10 entries", input: "{\"nums1\":[47,17,-45,-31,-95,-69,94,-23,-41,66],\"nums2\":[-70,-60,-91,26,-31,13,5,77]}" },
   ],
 }
 

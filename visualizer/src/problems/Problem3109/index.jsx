@@ -21,6 +21,10 @@ const definition = {
     { label: "Middle of three", input: "[2, 1, 3]" },
     { label: "Five values", input: "[4, 2, 5, 1, 3]" },
     { label: "Identity", input: "[1, 2, 3, 4]" },
+    { label: "Single value", input: "[1]" },
+    { label: "Sorted permutation", input: "[1,2,3,4,5,6,7,8]" },
+    { label: "Reversed permutation", input: "[8,7,6,5,4,3,2,1]" },
+    { label: "Long run: 8 values", input: "[5,3,8,1,7,2,6,4]" },
   ],
 };
 

@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '"abba"' },
     { label: 'Example 2', input: '"cdef"' },
+    { label: "Smallest valid string", input: "\"aa\"" },
+    { label: "Anagram blocks at length two", input: "\"ababba\"" },
+    { label: "Longest allowed, one letter", input: "\"zzzzzzzzzzzzzzzz\"" },
+    { label: "Long run: 16 letters", input: "\"bbbcaaabacaaaaab\"" },
   ],
 }
 

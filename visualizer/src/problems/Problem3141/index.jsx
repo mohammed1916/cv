@@ -25,6 +25,10 @@ const definition = {
     { label: "Three numbers", input: '{"nums":[2,5,9,12],"m":4}' },
     { label: "Repeated values", input: '{"nums":[7,0,7],"m":3}' },
     { label: "Single number", input: '{"nums":[4],"m":3}' },
+    { label: "Single number", input: "{\"nums\":[5],\"m\":3}" },
+    { label: "One bit values", input: "{\"nums\":[0,1,1],\"m\":1}" },
+    { label: "Largest m, ten bits", input: "{\"nums\":[1023,0,512,1023,0],\"m\":10}" },
+    { label: "Long run: 10 numbers", input: "{\"nums\":[512,512,512,512,512,512,512,512,512,512],\"m\":10}" },
   ],
 };
 

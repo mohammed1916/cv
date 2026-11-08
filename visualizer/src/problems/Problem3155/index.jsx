@@ -25,6 +25,10 @@ const definition = {
     { label: "Sell to fund", input: "[[6,4,3,4]]" },
     { label: "Empty purse", input: "[[4,0,2,3]]" },
     { label: "Mixed centers", input: "[[5,10,0,5],[3,0,0,0],[2,1,5,100]]" },
+    { label: "No servers", input: "[[0,50,10,5]]" },
+    { label: "Largest servers and values", input: "[[20,200,200,200]]" },
+    { label: "Equal sell and cost", input: "[[3,40,10,10],[2,40,10,10]]" },
+    { label: "Long run: six centers", input: "[[7,120,35,14],[11,88,60,9],[4,200,5,199],[15,63,40,22],[9,150,77,31],[18,25,12,6]]" },
   ],
 };
 

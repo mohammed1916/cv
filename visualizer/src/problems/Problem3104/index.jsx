@@ -23,6 +23,10 @@ const definition = {
     { label: "Repeated block", input: "abcabc" },
     { label: "Two sections", input: "abacaba" },
     { label: "Single letters", input: "abcd" },
+    { label: "Single letter", input: "z" },
+    { label: "Two equal letters", input: "aa" },
+    { label: "Longest allowed: 24 letters", input: "abcdefghijklmnopqrstuvwx" },
+    { label: "Long run: 24 letters", input: "dcbadcbadcbadcbadcbadcba" },
   ],
 };
 

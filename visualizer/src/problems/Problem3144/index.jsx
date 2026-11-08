@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '"fabccddg"' },
     { label: 'Example 2', input: '"abababaccddb"' },
+    { label: "Single letter", input: "\"a\"" },
+    { label: "Repeating pair", input: "\"abab\"" },
+    { label: "Longest allowed string", input: "\"aaaabbbbccccdddd\"" },
+    { label: "Long run: 16 letters", input: "\"bbbcaaabacaaaaab\"" },
   ],
 }
 

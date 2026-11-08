@@ -14,6 +14,9 @@ const definition = {
   examples: [
     { label: 'k = 0', input: '{"k":0}' },
     { label: 'k = 1', input: '{"k":1}' },
+    { label: "k = 2", input: "{\"k\":2}" },
+    { label: "k = 3", input: "{\"k\":3}" },
+    { label: "Long run: k = 30", input: "{\"k\":30}" },
   ],
 }
 

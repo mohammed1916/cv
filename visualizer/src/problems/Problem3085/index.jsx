@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 1', input: '{"word":"aabcaba","k":0}' },
     { label: 'Example 2', input: '{"word":"dabdcbdcdcd","k":2}' },
     { label: 'Example 3', input: '{"word":"aaabaaa","k":2}' },
+    { label: "Single letter", input: "{\"word\":\"a\",\"k\":0}" },
+    { label: "Repeated pattern", input: "{\"word\":\"abab\",\"k\":2}" },
+    { label: "Largest k with 20 letters", input: "{\"word\":\"aaaaaaaaaaaaaaaaaaaa\",\"k\":5}" },
+    { label: "Long run: 20 letters", input: "{\"word\":\"cczabazczccbddbbacbz\",\"k\":3}" },
   ],
 }
 

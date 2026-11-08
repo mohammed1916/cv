@@ -17,6 +17,9 @@ const definition = {
   examples: [
     { label: 'Three numbers', input: '{"nums":[13,23,12]}' },
     { label: 'All equal', input: '{"nums":[10,10,10,10]}' },
+    { label: "Smallest pair, one digit", input: "{\"nums\":[3,9]}" },
+    { label: "Largest allowed values", input: "{\"nums\":[999999999,999999998]}" },
+    { label: "Long run: 30 numbers", input: "{\"nums\": [970, 591, 276, 909, 578, 767, 928, 649, 658, 439, 660, 877, 562, 631, 216, 205, 578, 543, 112, 249, 530, 503, 572, 673, 150, 383, 396, 353, 238, 199]}" },
   ],
 }
 

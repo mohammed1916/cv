@@ -22,6 +22,10 @@ const definition = {
     { label: "Example 1", input: '{"s":"1?:3?"}' },
     { label: "Example 2", input: '{"s":"?0:5?"}' },
     { label: "Example 3", input: '{"s":"?2:??"}' },
+    { label: "Latest valid time", input: "{\"s\":\"11:59\"}" },
+    { label: "Every digit hidden", input: "{\"s\":\"??:??\"}" },
+    { label: "Earliest hours", input: "{\"s\":\"0?:0?\"}" },
+    { label: "Hour tens hidden", input: "{\"s\":\"?0:?0\"}" },
   ],
 };
 

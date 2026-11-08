@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 1', input: '{"zero":1,"one":1,"limit":2}' },
     { label: 'Example 2', input: '{"zero":1,"one":2,"limit":1}' },
     { label: 'Example 3', input: '{"zero":3,"one":3,"limit":2}' },
+    { label: "Smallest counts", input: "{\"zero\":1,\"one\":1,\"limit\":1}" },
+    { label: "Equal counts", input: "{\"zero\":2,\"one\":2,\"limit\":2}" },
+    { label: "Largest counts", input: "{\"zero\":8,\"one\":8,\"limit\":8}" },
+    { label: "Long run: 8 zeros, 7 ones", input: "{\"zero\":8,\"one\":7,\"limit\":3}" },
   ],
 }
 

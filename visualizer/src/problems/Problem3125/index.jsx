@@ -23,6 +23,10 @@ const definition = {
     { label: "Mixed bits", input: "22" },
     { label: "Power of two", input: "8" },
     { label: "Smallest", input: "1" },
+    { label: "Power of two", input: "2" },
+    { label: "Odd number", input: "3" },
+    { label: "Largest allowed", input: "1000000000" },
+    { label: "Long run: 987654321", input: "987654321" },
   ],
 };
 

@@ -23,6 +23,10 @@ const definition = {
     { label: 'Two values', input: '{"nums":[9,4],"cost1":4,"cost2":3}' },
     { label: 'Pairs pay off', input: '{"nums":[2,7,7,5],"cost1":3,"cost2":2}' },
     { label: 'Already level', input: '{"nums":[6,6,6],"cost1":2,"cost2":1}' },
+    { label: "Single value", input: "{\"nums\":[5],\"cost1\":3,\"cost2\":2}" },
+    { label: "All values equal", input: "{\"nums\":[7,7,7],\"cost1\":2,\"cost2\":5}" },
+    { label: "Largest values and costs", input: "{\"nums\":[60,1,1,1,1,1,1,1,1,1,1,1],\"cost1\":60,\"cost2\":60}" },
+    { label: "Long run: 12 values", input: "{\"nums\":[37,1,41,57,57,13,25,9,57,21,9,1],\"cost1\":17,\"cost2\":23}" },
   ],
 }
 

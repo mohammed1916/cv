@@ -21,6 +21,9 @@ const definition = {
     { label: 'Four values', input: '{"nums":[2,0,3,1]}' },
     { label: 'Reversed', input: '{"nums":[3,2,1,0]}' },
     { label: 'Pair', input: '{"nums":[1,0]}' },
+    { label: "Smallest pair, sorted", input: "{\"nums\":[0,1]}" },
+    { label: "Already sorted", input: "{\"nums\":[0,1,2,3]}" },
+    { label: "Largest allowed, shuffled", input: "{\"nums\":[7,3,0,5,1,6,2,4]}" },
   ],
 }
 

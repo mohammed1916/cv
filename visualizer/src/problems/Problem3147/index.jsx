@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"energy":[5,2,-10,-5,1],"k":3}' },
     { label: 'All negative', input: '{"energy":[-2,-3,-1],"k":2}' },
+    { label: "Single value", input: "{\"energy\":[4],\"k\":1}" },
+    { label: "All negative energies", input: "{\"energy\":[-5,-1,-7],\"k\":1}" },
+    { label: "Repeated values, step two", input: "{\"energy\":[3,-3,3,-3,3],\"k\":2}" },
+    { label: "Long run: 12 values", input: "{\"energy\":[6,-4,9,0,-10,3,8,-2,5,-7,1,4],\"k\":3}" },
   ],
 }
 

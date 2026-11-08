@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"hello"}' },
     { label: 'Example 2', input: '{"s":"zaz"}' },
+    { label: "Two letters", input: "{\"s\":\"ab\"}" },
+    { label: "Equal letters", input: "{\"s\":\"aaaa\"}" },
+    { label: "Longest allowed: 30 letters", input: "{\"s\":\"abcdefghijklmnopqrstuvwxyzab\"}" },
+    { label: "Long run: 30 letters", input: "{\"s\":\"yyzzxxzxzzxyyzzxxyyzyzzzxxzyyz\"}" },
   ],
 }
 

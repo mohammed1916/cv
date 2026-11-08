@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Satisfies', input: '{"grid":[[1,0,2],[1,0,2],[1,0,2]]}' },
     { label: 'Fails below', input: '{"grid":[[1,1,1],[0,0,0],[0,0,0]]}' },
+    { label: "Single cell", input: "{\"grid\":[[4]]}" },
+    { label: "Top row breaks at once", input: "{\"grid\":[[1,2],[3,4]]}" },
+    { label: "Largest grid, 6 by 6", input: "{\"grid\":[[0,1,2,3,4,5],[0,1,2,3,4,5],[0,1,2,3,4,5],[0,1,2,3,4,5],[0,1,2,3,4,5],[0,1,2,3,4,5]]}" },
   ],
 }
 

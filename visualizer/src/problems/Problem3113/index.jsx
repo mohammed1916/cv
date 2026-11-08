@@ -18,6 +18,10 @@ const definition = {
     { label: 'Repeated peak', input: '[2,5,2,5,1]' },
     { label: 'All equal', input: '[3,3,3]' },
     { label: 'Two peaks', input: '[4,1,4,2]' },
+    { label: "Single value", input: "[7]" },
+    { label: "Strictly rising", input: "[1,2,3,4,5,6,7,8,9,10,11,12]" },
+    { label: "Largest values, many peaks", input: "[1,20,1,20,1,20,1,20,1,20,1,20]" },
+    { label: "Long run: 12 values", input: "[13,16,7,18,1,8,19,14,13,4,3,2]" },
   ],
 }
 

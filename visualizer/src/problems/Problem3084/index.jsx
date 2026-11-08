@@ -21,6 +21,11 @@ const definition = {
     { label: "Example", input: '{"s":"banana","c":"n"}' },
     { label: "Example", input: '{"s":"kkkk","c":"k"}' },
     { label: "Example 3", input: '{"s":"xbxxbx","c":"x"}' },
+    { label: "Single character", input: "{\"s\":\"a\",\"c\":\"a\"}" },
+    { label: "Only the target letter", input: "{\"s\":\"aaaa\",\"c\":\"a\"}" },
+    { label: "Target absent", input: "{\"s\":\"abc\",\"c\":\"z\"}" },
+    { label: "Longest allowed: 50 characters", input: "{\"s\":\"ababababababababababababababababababababababababab\",\"c\":\"b\"}" },
+    { label: "Long run: 50 characters", input: "{\"s\":\"dcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadcbadc\",\"c\":\"c\"}" },
   ],
 };
 

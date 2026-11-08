@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 1', input: '{"s":"leetcode"}' },
     { label: 'Example 2', input: '{"s":"abcba"}' },
     { label: 'No match', input: '{"s":"abcd"}' },
+    { label: "Single letter", input: "{\"s\":\"a\"}" },
+    { label: "Repeated letter", input: "{\"s\":\"aa\"}" },
+    { label: "Longest allowed: 20 letters", input: "{\"s\":\"abcdefghijklmnopqrst\"}" },
+    { label: "Long run: 20 letters with repeats", input: "{\"s\":\"cdcdaabadabbcdacaaeb\"}" },
   ],
 }
 

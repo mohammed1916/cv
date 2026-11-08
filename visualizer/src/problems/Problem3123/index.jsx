@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":6,"edges":[[0,1,4],[0,2,1],[1,3,2],[1,4,3],[1,5,1],[2,3,1],[3,5,3],[4,5,2]]}' },
     { label: 'Example 2', input: '{"n":4,"edges":[[2,0,1],[0,1,1],[1,3,5],[2,3,1]]}' },
+    { label: "Two nodes, one edge", input: "{\"n\":2,\"edges\":[[0,1,1]]}" },
+    { label: "Equal weights", input: "{\"n\":3,\"edges\":[[0,1,2],[1,2,2],[0,2,2]]}" },
+    { label: "Largest weights, 6 nodes", input: "{\"n\":6,\"edges\":[[0,1,6],[1,2,6],[2,3,6],[3,4,6],[4,5,6],[0,5,6],[0,2,6],[1,4,6],[2,5,6]]}" },
+    { label: "Long run: 6 nodes and 9 edges", input: "{\"n\":6,\"edges\":[[0,1,5],[3,2,6],[0,5,1],[5,4,2],[0,5,3],[3,4,4],[2,1,1],[5,4,6],[0,5,5]]}" },
   ],
 }
 

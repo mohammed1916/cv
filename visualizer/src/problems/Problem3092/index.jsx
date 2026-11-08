@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[2,3,2,1],"freq":[3,2,-3,1]}' },
     { label: 'Example 2', input: '{"nums":[5,5,3],"freq":[2,-2,1]}' },
+    { label: "Single insert", input: "{\"nums\":[3],\"freq\":[2]}" },
+    { label: "Equal IDs cancel out", input: "{\"nums\":[1,1,2,2],\"freq\":[2,-2,1,1]}" },
+    { label: "Largest changes on one ID", input: "{\"nums\":[6,6,6,6,6,6,6,6,6,6],\"freq\":[5,5,5,-5,-5,-5,5,-5,5,-5]}" },
+    { label: "Long run: 10 steps", input: "{\"nums\":[3,1,1,1,1,3,1,1,5,3],\"freq\":[3,3,5,5,3,5,3,3,3,4]}" },
   ],
 }
 

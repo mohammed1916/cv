@@ -17,6 +17,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[[9,5,7,3],[8,9,6,1],[6,7,14,3],[2,5,3,1]]' },
     { label: 'Example 2', input: '[[4,3,2],[3,2,1]]' },
+    { label: "Two cells", input: "[[5,9]]" },
+    { label: "All cells equal", input: "[[7,7],[7,7]]" },
+    { label: "Largest grid, alternating extremes", input: "[[100,1,100,1,100,1],[1,100,1,100,1,100],[100,1,100,1,100,1],[1,100,1,100,1,100],[100,1,100,1,100,1],[1,100,1,100,1,100]]" },
   ],
 }
 

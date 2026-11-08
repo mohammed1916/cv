@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Invented example', input: '{"nums":[0,1,1,0,1],"k":3,"maxChanges":0}' },
     { label: 'Created ones', input: '{"nums":[0,0,0,0,0],"k":3,"maxChanges":3}' },
+    { label: "Two values", input: "{\"nums\":[1,0],\"k\":1,\"maxChanges\":0}" },
+    { label: "Equal neighbours with no changes", input: "{\"nums\":[1,1,1],\"k\":3,\"maxChanges\":0}" },
+    { label: "All zeros with the largest budget", input: "{\"nums\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"k\":16,\"maxChanges\":16}" },
+    { label: "Long run: 16 values", input: "{\"nums\":[1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0],\"k\":13,\"maxChanges\":5}" },
   ],
 }
 

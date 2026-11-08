@@ -17,6 +17,11 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"n":3,"edges":[[0,1,2],[1,2,2],[0,2,5]],"disappear":[10,3,10]}' },
     { label: 'Deadline', input: '{"n":3,"edges":[[0,1,2],[1,2,2],[0,2,5]],"disappear":[10,2,10]}' },
+    { label: "Two nodes, one edge", input: "{\"n\":2,\"edges\":[[0,1,1]],\"disappear\":[1,1]}" },
+    { label: "Equal deadlines", input: "{\"n\":3,\"edges\":[[0,1,2],[1,2,2],[0,2,5]],\"disappear\":[4,4,4]}" },
+    { label: "No edges", input: "{\"n\":3,\"edges\":[],\"disappear\":[3,3,3]}" },
+    { label: "Largest deadlines, 7 nodes", input: "{\"n\":7,\"edges\":[[0,1,6],[1,2,6],[2,3,6],[3,4,6],[4,5,6],[5,6,6],[0,6,6],[0,3,6],[1,4,6],[2,5,6],[3,6,6],[1,6,6]],\"disappear\":[20,20,20,20,20,20,20]}" },
+    { label: "Long run: 7 nodes and 12 edges", input: "{\"n\":7,\"edges\":[[0,3,6],[6,1,1],[2,4,6],[5,6,5],[1,3,4],[6,1,5],[5,4,2],[3,2,1],[2,5,2],[2,1,3],[3,0,2],[0,2,5]],\"disappear\":[6,9,8,15,6,5,12]}" },
   ],
 }
 

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Harshad', input: '{"x":18}' },
     { label: 'Not Harshad', input: '{"x":23}' },
+    { label: "Smallest value", input: "{\"x\":1}" },
+    { label: "Largest value", input: "{\"x\":100}" },
+    { label: "Digit sum divides x", input: "{\"x\":81}" },
+    { label: "Digit sum does not divide x", input: "{\"x\":99}" },
   ],
 }
 

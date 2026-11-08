@@ -16,6 +16,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"possible":[1,0,1,0]}' },
     { label: 'Example 2', input: '{"possible":[1,1,1,1,1]}' },
+    { label: "Two entries", input: "{\"possible\":[0,1]}" },
+    { label: "Equal passing entries", input: "{\"possible\":[1,1]}" },
+    { label: "No passing entries", input: "{\"possible\":[0,0,0,0,0,0,0,0,0,0,0,0]}" },
+    { label: "Longest allowed: 12 entries", input: "{\"possible\":[1,0,1,0,1,0,1,0,1,0,1,0]}" },
+    { label: "Long run: 12 random entries", input: "{\"possible\":[1,0,1,0,1,0,1,0,1,0,1,0]}" },
   ],
 }
 

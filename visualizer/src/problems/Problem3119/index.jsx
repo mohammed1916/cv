@@ -22,6 +22,10 @@ const definition = {
     { label: "Two runs fixed", input: "{\"road\":\"xx.xxxx.x\",\"budget\":5}" },
     { label: "Partial last run", input: "{\"road\":\"xxxxx.xxxx\",\"budget\":8}" },
     { label: "Nothing affordable", input: "{\"road\":\"xxx\",\"budget\":3}" },
+    { label: "Single empty spot", input: "{\"road\":\".\",\"budget\":5}" },
+    { label: "Single house, no budget", input: "{\"road\":\"x\",\"budget\":0}" },
+    { label: "Longest road, largest budget", input: "{\"road\":\"x.x.x.x.x.x.x.x.x.x.x.x.\",\"budget\":60}" },
+    { label: "Long run: 24 cells", input: "{\"road\":\"x.xx..x..xxxx..xxxx..xxx\",\"budget\":20}" },
   ],
 };
 

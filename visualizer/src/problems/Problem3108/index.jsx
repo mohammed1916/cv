@@ -19,6 +19,11 @@ const definition = {
     { label: 'One component', input: '{"n":5,"edges":[[0,1,14],[1,2,7],[2,3,6],[1,3,13]],"queries":[[0,3],[0,2]]}' },
     { label: 'Two components', input: '{"n":5,"edges":[[0,1,9],[1,2,11],[3,4,12]],"queries":[[0,2],[2,3]]}' },
     { label: 'Small chain', input: '{"n":3,"edges":[[0,1,3],[1,2,2]],"queries":[[0,2]]}' },
+    { label: "Two nodes, zero weight", input: "{\"n\":2,\"edges\":[[0,1,0]],\"queries\":[[0,1]]}" },
+    { label: "Unreachable pair", input: "{\"n\":3,\"edges\":[[0,1,5]],\"queries\":[[0,2]]}" },
+    { label: "Equal weights", input: "{\"n\":4,\"edges\":[[0,1,7],[1,2,7],[2,3,7],[0,3,7]],\"queries\":[[0,2]]}" },
+    { label: "Largest weights, 8 nodes", input: "{\"n\":8,\"edges\":[[0,1,31],[1,2,31],[2,3,31],[3,4,31],[4,5,31],[5,6,31],[6,7,31],[0,7,31],[0,4,31],[2,6,31],[1,5,31],[3,7,31]],\"queries\":[[0,7],[1,6]]}" },
+    { label: "Long run: 8 nodes and 12 edges", input: "{\"n\":8,\"edges\":[[3,6,29],[0,7,10],[1,4,27],[6,5,0],[7,2,9],[4,3,6],[5,0,7],[2,1,28],[3,6,21],[0,7,2],[1,4,19],[6,5,24]],\"queries\":[[7,2],[1,4],[3,6],[5,0],[7,2],[1,4]]}" },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
     { label: 'Valid', input: '{"word":"234Adas"}' },
     { label: 'Missing vowel', input: '{"word":"b3"}' },
     { label: 'Symbol', input: '{"word":"a3$e"}' },
+    { label: "Single letter", input: "{\"word\":\"a\"}" },
+    { label: "Longest allowed word", input: "{\"word\":\"AeiBCDFGHJKLMNPQRSTU\"}" },
+    { label: "Digits and letters", input: "{\"word\":\"7e9Q\"}" },
+    { label: "Symbols at both ends", input: "{\"word\":\"$ab#\"}" },
   ],
 }
 

@@ -17,7 +17,13 @@ const definition = {
   inputLabel: 'JSON: {"grid": [["B","W","B"],["B","W","W"],["B","W","B"]]}',
   url: "https://leetcode.com/problems/make-a-square-with-the-same-color/",
   complexity: "O(1) time and O(1) space for the fixed 3 by 3 grid.",
-  examples: [{ label: "Example 1", input: '{"grid":[["B","W","B"],["B","W","W"],["B","W","B"]]}' }],
+  examples: [
+    { label: "Example 1", input: '{"grid":[["B","W","B"],["B","W","W"],["B","W","B"]]}' },
+    { label: "All white", input: "{\"grid\":[[\"W\",\"W\",\"W\"],[\"W\",\"W\",\"W\"],[\"W\",\"W\",\"W\"]]}" },
+    { label: "All black", input: "{\"grid\":[[\"B\",\"B\",\"B\"],[\"B\",\"B\",\"B\"],[\"B\",\"B\",\"B\"]]}" },
+    { label: "Checkerboard", input: "{\"grid\":[[\"B\",\"W\",\"B\"],[\"W\",\"B\",\"W\"],[\"B\",\"W\",\"B\"]]}" },
+    { label: "Single black centre", input: "{\"grid\":[[\"W\",\"W\",\"W\"],[\"W\",\"B\",\"W\"],[\"W\",\"W\",\"W\"]]}" },
+  ],
 };
 
 export default function SquareSameColorVisualizer() {

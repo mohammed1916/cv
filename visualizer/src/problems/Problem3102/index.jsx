@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"points":[[3,10],[5,15],[10,2],[4,4]]}' },
     { label: 'Three points', input: '{"points":[[0,0],[1,0],[5,0]]}' },
+    { label: "Three points on one line", input: "{\"points\":[[0,0],[0,1],[0,2]]}" },
+    { label: "Equal coordinates on one axis", input: "{\"points\":[[1,1],[1,2],[2,1]]}" },
+    { label: "Extreme corners, 8 points", input: "{\"points\":[[-20,-20],[20,20],[-20,20],[20,-20],[0,0],[20,0],[-20,0],[0,20]]}" },
+    { label: "Long run: 8 points", input: "{\"points\":[[-20,11],[-11,-11],[18,-2],[-14,7],[-11,-3],[-11,9],[-4,12],[13,20]]}" },
   ],
 }
 

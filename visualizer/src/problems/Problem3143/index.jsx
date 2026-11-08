@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"points":[[-2,-2],[0,0]],"s":"ab"}' },
     { label: 'Example 2', input: '{"points":[[1,1],[-1,-1],[2,-2]],"s":"ccd"}' },
+    { label: "Single point at the origin", input: "{\"points\":[[0,0]],\"s\":\"q\"}" },
+    { label: "Equal distance pairs", input: "{\"points\":[[2,-2],[-2,2],[1,0]],\"s\":\"xyz\"}" },
+    { label: "Corners of the coordinate range", input: "{\"points\":[[-10,-10],[10,10],[0,10],[-10,0]],\"s\":\"abcd\"}" },
+    { label: "Long run: 8 points", input: "{\"points\":[[3,-5],[-7,9],[-5,-9],[0,8],[-10,-6],[2,0],[9,8],[-2,5]],\"s\":\"abcdefgh\"}" },
   ],
 }
 

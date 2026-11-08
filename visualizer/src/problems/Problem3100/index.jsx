@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"numBottles":7,"numExchange":4}' },
     { label: 'Example 2', input: '{"numBottles":5,"numExchange":2}' },
+    { label: "Single bottle, no exchange", input: "{\"numBottles\":1,\"numExchange\":2}" },
+    { label: "Too few to exchange", input: "{\"numBottles\":3,\"numExchange\":5}" },
+    { label: "Largest bottles, one per exchange", input: "{\"numBottles\":100,\"numExchange\":1}" },
+    { label: "Long run: 97 bottles", input: "{\"numBottles\":97,\"numExchange\":3}" },
   ],
 }
 

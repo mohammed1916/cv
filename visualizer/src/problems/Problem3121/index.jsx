@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"word":"aaAbcBC"}' },
     { label: 'Example 2', input: '{"word":"AbCabc"}' },
+    { label: "Single letter", input: "{\"word\":\"a\"}" },
+    { label: "Case pair", input: "{\"word\":\"Aa\"}" },
+    { label: "Longest allowed: 30 letters", input: "{\"word\":\"AbCabcAbCabcAbCabcAbCabcAbCabc\"}" },
+    { label: "Long run: 30 letters", input: "{\"word\":\"cBdCaDbAcBdCaDbAcBdCaDbAcBdCaD\"}" },
   ],
 }
 

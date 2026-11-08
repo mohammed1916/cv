@@ -14,6 +14,11 @@ const definition = {
   complexity: 'O(total length) time and space for the trie. The visualization caps input at 6 words each.',
   examples: [
     { label: 'Example 1', input: '{"words_container":["apple","pale","ple"],"words_query":["le","ale","zz"]}' },
+    { label: "Single letter words", input: "{\"words_container\":[\"a\"],\"words_query\":[\"a\"]}" },
+    { label: "Equal reversed suffixes", input: "{\"words_container\":[\"abc\",\"xbc\"],\"words_query\":[\"bc\"]}" },
+    { label: "Longest allowed: 6 words of 6 letters", input: "{\"words_container\":[\"abcdef\",\"fedcba\",\"zzzzzz\",\"abcabc\",\"aaaaaa\",\"qwerty\"],\"words_query\":[\"bcdef\",\"zz\",\"abcdef\",\"a\",\"xyz\",\"ccc\"]}" },
+    { label: "No shared suffix", input: "{\"words_container\":[\"abc\"],\"words_query\":[\"xyz\"]}" },
+    { label: "Long run: 6 words", input: "{\"words_container\":[\"b\",\"bbabc\",\"acbcb\",\"c\",\"a\",\"bcb\"],\"words_query\":[\"b\",\"b\",\"acbba\",\"c\",\"cacac\",\"bca\"]}" },
   ],
 }
 

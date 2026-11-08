@@ -8,7 +8,10 @@ const complexity = 'O(n log n) for the sort, then one pass over the seats. The v
 const examples = [
   { label: 'Sample', input: '{"Cinema":[{"seat_id":1,"free":1},{"seat_id":2,"free":1},{"seat_id":3,"free":0},{"seat_id":4,"free":1},{"seat_id":5,"free":1},{"seat_id":6,"free":1},{"seat_id":7,"free":0},{"seat_id":8,"free":1}]}' },
   { label: 'Tie', input: '{"Cinema":[{"seat_id":1,"free":1},{"seat_id":2,"free":1},{"seat_id":3,"free":0},{"seat_id":4,"free":1},{"seat_id":5,"free":1}]}' },
-]
+    { label: "Single free seat", input: "{\"Cinema\": [{\"seat_id\": 1, \"free\": 1}]}" },
+    { label: "No free seats", input: "{\"Cinema\": [{\"seat_id\": 1, \"free\": 0}, {\"seat_id\": 2, \"free\": 0}]}" },
+    { label: "Long run: 12 seats, three gaps", input: "{\"Cinema\": [{\"seat_id\": 1, \"free\": 1}, {\"seat_id\": 2, \"free\": 1}, {\"seat_id\": 3, \"free\": 0}, {\"seat_id\": 4, \"free\": 1}, {\"seat_id\": 5, \"free\": 1}, {\"seat_id\": 6, \"free\": 1}, {\"seat_id\": 7, \"free\": 1}, {\"seat_id\": 8, \"free\": 0}, {\"seat_id\": 9, \"free\": 1}, {\"seat_id\": 10, \"free\": 1}, {\"seat_id\": 11, \"free\": 1}, {\"seat_id\": 12, \"free\": 0}]}" },
+  ]
 
 const definition = {
   number: meta.number,

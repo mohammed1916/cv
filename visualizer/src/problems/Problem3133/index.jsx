@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":3,"x":4}' },
     { label: 'Example 2', input: '{"n":2,"x":7}' },
+    { label: "Single item, single x", input: "{\"n\":1,\"x\":1}" },
+    { label: "Equal n and x", input: "{\"n\":2,\"x\":2}" },
+    { label: "Largest n and x", input: "{\"n\":200,\"x\":200}" },
+    { label: "Long run: 173 and 149", input: "{\"n\":173,\"x\":149}" },
   ],
 }
 

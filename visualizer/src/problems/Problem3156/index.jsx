@@ -7,7 +7,11 @@ const inputLabel = 'Object with a Tasks table (task_id, employee_id, start_time,
 const complexity = 'O(n log n) to sort the events per employee. The visualizer caps the table at 12 rows.'
 const examples = [
   { label: 'Sample', input: '{"Tasks":[{"task_id":1,"employee_id":1,"start_time":3600,"end_time":18000},{"task_id":2,"employee_id":1,"start_time":10800,"end_time":28800},{"task_id":3,"employee_id":1,"start_time":28800,"end_time":36000},{"task_id":4,"employee_id":2,"start_time":7200,"end_time":14400},{"task_id":5,"employee_id":2,"start_time":14400,"end_time":21600}]}' },
-]
+    { label: "Single one-second task", input: "{\"Tasks\":[{\"task_id\":1,\"employee_id\":4,\"start_time\":0,\"end_time\":1}]}" },
+    { label: "Touching tasks, no overlap", input: "{\"Tasks\":[{\"task_id\":1,\"employee_id\":1,\"start_time\":0,\"end_time\":3600},{\"task_id\":2,\"employee_id\":1,\"start_time\":3600,\"end_time\":7200}]}" },
+    { label: "Largest allowed times", input: "{\"Tasks\":[{\"task_id\":1,\"employee_id\":9,\"start_time\":0,\"end_time\":3600000},{\"task_id\":2,\"employee_id\":9,\"start_time\":1800000,\"end_time\":3600000}]}" },
+    { label: "Long run: 12 tasks, three employees", input: "{\"Tasks\":[{\"task_id\":1,\"employee_id\":1,\"start_time\":1000,\"end_time\":5000},{\"task_id\":2,\"employee_id\":1,\"start_time\":4000,\"end_time\":9000},{\"task_id\":3,\"employee_id\":1,\"start_time\":9000,\"end_time\":9500},{\"task_id\":4,\"employee_id\":2,\"start_time\":0,\"end_time\":7200},{\"task_id\":5,\"employee_id\":2,\"start_time\":3600,\"end_time\":10800},{\"task_id\":6,\"employee_id\":2,\"start_time\":20000,\"end_time\":30000},{\"task_id\":7,\"employee_id\":3,\"start_time\":100,\"end_time\":200},{\"task_id\":8,\"employee_id\":3,\"start_time\":150,\"end_time\":400},{\"task_id\":9,\"employee_id\":3,\"start_time\":500,\"end_time\":900},{\"task_id\":10,\"employee_id\":1,\"start_time\":60000,\"end_time\":70000},{\"task_id\":11,\"employee_id\":2,\"start_time\":15000,\"end_time\":15500},{\"task_id\":12,\"employee_id\":3,\"start_time\":1000000,\"end_time\":1003600}]}" },
+  ]
 
 const definition = {
   number: meta.number,

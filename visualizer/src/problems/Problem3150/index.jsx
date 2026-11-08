@@ -7,7 +7,10 @@ const complexity = 'O(n * L) for n tweets of length L, one count per mark. The v
 const examples = [
   { label: 'Sample', input: '{"Tweets":[{"tweet_id":1,"content":"Let us meet at noon"},{"tweet_id":2,"content":"#a #b #c #d are too many tags"},{"tweet_id":3,"content":"@ana hi @ben and @cy and @dee"},{"tweet_id":4,"content":"Short note #one"}]}' },
   { label: 'Long text', input: '{"Tweets":[{"tweet_id":5,"content":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},{"tweet_id":6,"content":"Fine"}]}' },
-]
+    { label: "Single short tweet", input: "{\"Tweets\": [{\"tweet_id\": 1, \"content\": \"Hi\"}]}" },
+    { label: "Three hashtags", input: "{\"Tweets\": [{\"tweet_id\": 1, \"content\": \"#a #b #c\"}]}" },
+    { label: "Long run: 12 tweets", input: "{\"Tweets\": [{\"tweet_id\": 1, \"content\": \"Hello team\"}, {\"tweet_id\": 2, \"content\": \"#one #two\"}, {\"tweet_id\": 3, \"content\": \"@amy @bo\"}, {\"tweet_id\": 4, \"content\": \"Meeting at 5 pm\"}, {\"tweet_id\": 5, \"content\": \"#a #b #c #d\"}, {\"tweet_id\": 6, \"content\": \"@x @y @z @w\"}, {\"tweet_id\": 7, \"content\": \"Plain text with no marks\"}, {\"tweet_id\": 8, \"content\": \"#launch day\"}, {\"tweet_id\": 9, \"content\": \"@dev thanks #done\"}, {\"tweet_id\": 10, \"content\": \"Lunch?\"}, {\"tweet_id\": 11, \"content\": \"#x\"}, {\"tweet_id\": 12, \"content\": \"@ops status #ok #fine\"}]}" },
+  ]
 
 const definition = {
   number: meta.number,

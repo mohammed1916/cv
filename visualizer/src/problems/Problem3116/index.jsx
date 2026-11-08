@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"coins":[3,6,9],"k":3}' },
     { label: 'Example 2', input: '{"coins":[5,2],"k":7}' },
+    { label: "Single coin type", input: "{\"coins\":[1],\"k\":60}" },
+    { label: "Equal coins", input: "{\"coins\":[4,4,4],\"k\":8}" },
+    { label: "Largest coins and k", input: "{\"coins\":[25,24,23,22,21,20,19,18],\"k\":60}" },
+    { label: "Unreachable target", input: "{\"coins\":[5,10],\"k\":7}" },
+    { label: "Long run: 8 coin types", input: "{\"coins\":[3,21,1,20,2,4,14,23],\"k\":45}" },
   ],
 }
 

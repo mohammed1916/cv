@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[4,3,1,6],"queries":[[0,2],[2,3],[0,3]]}' },
     { label: 'Single', input: '{"nums":[2,2],"queries":[[1,1]]}' },
+    { label: "Single element", input: "{\"nums\":[7],\"queries\":[[0,0]]}" },
+    { label: "Whole range and inner block", input: "{\"nums\":[1,10,1,10,5,5,2,2,9,3,7,8],\"queries\":[[0,11],[4,7]]}" },
+    { label: "Long run: 12 numbers, six queries", input: "{\"nums\":[4,9,2,7,1,8,3,10,5,6,2,9],\"queries\":[[0,11],[3,5],[6,6],[2,9],[1,4],[0,3]]}" },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"bcbbbcba"}' },
     { label: 'Repeat', input: '{"s":"aaaa"}' },
+    { label: "Single letter", input: "{\"s\":\"a\"}" },
+    { label: "Two equal letters", input: "{\"s\":\"bb\"}" },
+    { label: "Longest allowed: 30 letters", input: "{\"s\":\"aaaaaaaaaaaaaaabbbbbbbbbbbbbbb\"}" },
+    { label: "Long run: 30 letters", input: "{\"s\":\"ababaccccabacabbbacbcaccbcaaca\"}" },
   ],
 }
 

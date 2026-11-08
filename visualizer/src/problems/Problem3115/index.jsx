@@ -22,6 +22,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[4,2,9,5,3]' },
     { label: 'Example 2', input: '[4,8,2,8]' },
+    { label: "Single prime", input: "[2]" },
+    { label: "Equal primes", input: "[5,5,5]" },
+    { label: "Longest allowed: 15 values", input: "[1,100,1,100,1,100,1,100,1,100,1,100,1,100,97]" },
+    { label: "Long run: 15 values", input: "[89,66,85,60,67,54,57,60,99,66,9,52,15,6,25]" },
   ],
 }
 
