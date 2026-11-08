@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-distinct-difference-array/',
   complexity: 'O(n) time and O(n) space with hash sets. The visualization caps input at 20 values.',
   examples: [
-    { label: 'Own case 1', input: '[2,3,4,5,6]' },
-    { label: 'Own case 2', input: '[4,3,4,5,3]' },
+    { label: 'Six distinct values', input: '[10,4,15,2,8,6]' },
+    { label: 'Repeated values', input: '[7,7,1,9]' },
     { label: 'Single value', input: '[7]' },
     { label: 'Equal values', input: '[3,3,3,3]' },
     { label: 'Largest: 20 values of 50', input: '[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50]' },

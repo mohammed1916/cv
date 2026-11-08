@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/calculate-score-after-performing-instructions/',
   complexity: 'O(n) time and O(n) space, since each instruction runs at most once. The visualization caps the list at 20.',
   examples: [
-    { label: 'Own case 1', input: '{"instructions":["jump","add","jump","add","add","jump"],"values":[-3,-2,1,3,1,2]}' },
+    { label: 'Three steps, mixed', input: '{"instructions":["jump","add","jump"],"values":[2,-3,4]}' },
     { label: 'Example 2', input: '{"instructions":["add","jump","add","add"],"values":[3,-2,5,1]}' },
     { label: 'Single add', input: '{"instructions":["add"],"values":[5]}' },
     { label: 'Single jump, negative value', input: '{"instructions":["jump"],"values":[-3]}' },

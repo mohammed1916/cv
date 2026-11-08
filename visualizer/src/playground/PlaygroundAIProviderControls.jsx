@@ -194,6 +194,25 @@ export default function PlaygroundAIProviderControls() {
         )}
 
         {config.provider === "ollama-cloud" && (
+          <div className="chat-key-steps">
+            <strong>Get an Ollama Cloud key</strong>
+            <ol>
+              <li>Go to <a href="https://ollama.com" target="_blank" rel="noopener noreferrer">ollama.com</a> and sign in.</li>
+              <li>Open the API keys page in your account settings.</li>
+              <li>Create a key and paste it below. It is stored only in this browser tab and cleared when the tab closes.</li>
+            </ol>
+          </div>
+        )}
+        {config.provider === "gemini" && (
+          <div className="chat-key-steps">
+            <strong>Get a Gemini key</strong>
+            <ol>
+              <li>Go to <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer">aistudio.google.com/app/apikey</a>.</li>
+              <li>Create an API key and paste it below. It is stored only in this browser tab and cleared when the tab closes.</li>
+            </ol>
+          </div>
+        )}
+        {config.provider === "ollama-cloud" && (
           <label htmlFor="runtime-playground-ollama-key">
             API key
             <input

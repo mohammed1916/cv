@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/even-odd-tree/',
   complexity: 'O(n) time and O(w) space for the widest level. The visualization caps the tree at 15 entries.',
   examples: [
-    { label: 'Own case 1', input: '[2,11,5,4,null,8,10,13,9,7,null,null,3]' },
+    { label: 'Mixed depths', input: '[5,3,8,1,4,null,9,null,null,6,2]' },
     { label: 'Root even', input: '[2]' },
     { label: 'Not increasing', input: '[1,4,10]' },
     { label: "Single even root", input: "[2]" },

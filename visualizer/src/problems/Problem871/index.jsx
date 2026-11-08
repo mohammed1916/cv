@@ -16,7 +16,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-number-of-refueling-stops/',
   complexity: 'O(n log n) with a max-heap of passed stations.',
   examples: [
-    { label: 'Own case 1', input: '{"target":101,"startFuel":11,"stations":[[11,61],[21,31],[31,31],[61,41]]}' },
+    { label: 'Three stations, fueled', input: '{"target":500,"startFuel":100,"stations":[[100,120],[250,80],[400,60]]}' },
     { label: 'No stations needed', input: '{"target":1,"startFuel":1,"stations":[]}' },
     { label: 'Impossible', input: '{"target":100,"startFuel":1,"stations":[[10,100]]}' },
     { label: 'Several stops', input: '{"target":200,"startFuel":50,"stations":[[30,20],[60,40],[90,30],[120,60],[150,20]]}' },

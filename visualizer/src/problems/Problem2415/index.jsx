@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/reverse-odd-levels-of-binary-tree/',
   complexity: 'O(n) time and O(n) space for the level-order copy. The visualization caps input at 15 nodes.',
   examples: [
-    { label: 'Example 1', input: '{"root":[2,3,5,8,13,21,34]}' },
-    { label: 'Example 2', input: '{"root":[7,13,11]}' },
+    { label: 'Own: seven node tree', input: '{"root":[9,4,6,1,2,8,3]}' },
+    { label: 'Own: three node tree', input: '{"root":[5,0,1]}' },
     { label: 'Four levels', input: '{"root":[0,1,2,0,0,0,0,1,1,1,1,2,2,2,2]}' },
     { label: 'Single node', input: '{"root":[9]}' },
     { label: 'Equal values', input: '{"root":[5,5,5]}' },

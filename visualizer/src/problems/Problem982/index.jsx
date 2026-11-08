@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/triples-with-bitwise-and-equal-to-zero/',
   complexity: 'O(n^2 + n * distinct pair values) time. The visualization caps input at 12 numbers.',
   examples: [
-    { label: 'Own case 1', input: '[3,2,4]' },
+    { label: 'Five small values', input: '[7,3,5,6,2]' },
     { label: 'All zero', input: '[0,0,0]' },
     { label: 'Single value', input: '[7]' },
     { label: 'Equal values pair up', input: '[5,5]' },

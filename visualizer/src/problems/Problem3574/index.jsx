@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximize-subarray-gcd-score/',
   complexity: 'O(n^2 * k * states) time for the reachable (doublings, gcd) pairs. The visualization caps n at 8.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[3,5],"k":2}' },
-    { label: 'Own case 2', input: '{"nums":[4,6,8],"k":3}' },
+    { label: 'Four values, pick three', input: '{"nums":[12,4,9,30],"k":3}' },
+    { label: 'Single value', input: '{"nums":[42],"k":1}' },
     { label: 'One value', input: '{"nums":[7],"k":1}' },
     { label: 'Equal values', input: '{"nums":[5,5,5],"k":2}' },
     { label: 'Largest values', input: '{"nums":[60,1,60,1,60,1,60,1],"k":8}' },

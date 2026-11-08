@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-ways-to-split-array/',
   complexity: 'O(n) time and O(1) extra space with a running prefix sum. The visualization caps nums at 12 entries.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[10,4,-8,7]}' },
-    { label: 'Example 2', input: '{"nums":[2,3,1,0]}' },
+    { label: 'Own: five signed values', input: '{"nums":[-3,6,-9,2,5]}' },
+    { label: 'Own: three values with a zero', input: '{"nums":[0,-4,11]}' },
     { label: 'Two values', input: '{"nums":[5,-5]}' },
     { label: 'All zeros', input: '{"nums":[0,0,0,0]}' },
     { label: 'Twelve extreme values', input: '{"nums":[100,-100,100,-100,100,-100,100,-100,100,-100,100,-100]}' },

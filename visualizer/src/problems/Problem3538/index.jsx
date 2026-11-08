@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/merge-operations-for-minimum-travel-time/',
   complexity: 'O(n^3 * k) time for the state table. The visualization caps n at 12.',
   examples: [
-    { label: 'Example 1', input: '{"l":10,"n":4,"k":1,"position":[0,3,8,10],"time":[5,8,3,6]}' },
-    { label: 'Example 2', input: '{"l":5,"n":5,"k":1,"position":[0,1,2,3,5],"time":[8,3,9,3,3]}' },
+    { label: 'Own: four stops', input: '{"l":12,"n":4,"k":1,"position":[0,4,7,12],"time":[6,2,9,4]}' },
+    { label: 'Own: three stops, k 0', input: '{"l":9,"n":3,"k":0,"position":[0,2,9],"time":[3,5,4]}' },
     { label: 'Two positions', input: '{"l":1,"n":2,"k":0,"position":[0,1],"time":[1,1]}' },
     { label: 'Equal gaps', input: '{"l":6,"n":4,"k":1,"position":[0,2,4,6],"time":[3,3,3,3]}' },
     { label: 'Largest length and times', input: '{"l":100,"n":12,"k":10,"position":[0,9,18,27,36,45,54,63,72,81,90,100],"time":[8,8,8,8,8,8,8,8,8,8,8,8]}' },

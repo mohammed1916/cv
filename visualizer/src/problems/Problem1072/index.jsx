@@ -13,9 +13,9 @@ const definition = {
   url: 'https://leetcode.com/problems/flip-columns-for-maximum-number-of-equal-rows/',
   complexity: 'O(m^2 * n) time for an m by n matrix. The visualization caps the matrix at 6 by 6.',
   examples: [
-    { label: 'Own case 1', input: '[[1,1],[0,1]]' },
-    { label: 'Own case 2', input: '[[1,0],[0,1]]' },
-    { label: 'Own case 3', input: '[[1,1,0],[0,0,1],[0,0,0]]' },
+    { label: 'Two rows, complement pair', input: '[[0,1,1,0],[1,0,0,1]]' },
+    { label: 'Three rows, shared pattern', input: '[[1,1,0],[1,1,0],[0,0,1]]' },
+    { label: 'Single flip needed', input: '[[0,0,0],[0,1,1],[1,0,1]]' },
     { label: 'Single cell', input: '[[1]]' },
     { label: 'All zeros', input: '[[0,0],[0,0]]' },
     { label: 'Largest grid, all ones', input: '[[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1]]' },

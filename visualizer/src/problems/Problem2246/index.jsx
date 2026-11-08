@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/longest-path-with-different-adjacent-characters/',
   complexity: 'O(n) time and O(n) space for the child lists and recursion. The visualization caps input at 12 nodes.',
   examples: [
-    { label: 'Example 1', input: '{"parent":[-1,0,0,1,1,2],"s":"abacbe"}' },
-    { label: 'Example 2', input: '{"parent":[-1,0,0,0],"s":"aabc"}' },
+    { label: 'Own: chain with two branches', input: '{"parent":[-1,0,1,1,3],"s":"zyxwq"}' },
+    { label: 'Own: six nodes, repeated letters', input: '{"parent":[-1,0,1,2,2,3],"s":"qpqrsq"}' },
     { label: 'Single node', input: '{"parent":[-1],"s":"a"}' },
     { label: 'Equal letters', input: '{"parent":[-1,0,0,0],"s":"aaaa"}' },
     { label: 'Long run: twelve nodes', input: '{"parent":[-1,0,0,1,1,2,3,3,4,6,6,8],"s":"abcabcabcaba"}' },

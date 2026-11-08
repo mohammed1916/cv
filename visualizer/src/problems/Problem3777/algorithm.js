@@ -23,7 +23,7 @@ export function buildTrace({ s, queries }) {
     const [type, a, b] = queries[q]
     if (type === 1) {
       chars[a] = chars[a] === 'A' ? 'B' : 'A'
-      frames.push({ pythonLine: pyAt('chars[j] = '), phase: 'flip', activeLine: codeAt('flip index'), at: a, lo: -1, hi: -1, count: null, text: chars.join(''), message: `Flip index ${a} to ${chars[a]}.` })
+      frames.push({ pythonLine: pyAt('chars[j] = '), phase: 'flip', activeLine: codeAt('if it flips index'), at: a, lo: -1, hi: -1, count: null, text: chars.join(''), message: `Flip index ${a} to ${chars[a]}.` })
       continue
     }
     let count = 0
@@ -31,15 +31,15 @@ export function buildTrace({ s, queries }) {
     for (let i = a; i < b; i++) {
       if (chars[i] === chars[i + 1]) {
         count++
-        frames.push({ pythonLine: pyAt('count += 1'), phase: 'pair', activeLine: codeAt('if neighbours match'), at: i, lo: a, hi: b, count, text: chars.join(''), message: `Positions ${i} and ${i + 1} are both ${chars[i]}: one deletion.` })
+        frames.push({ pythonLine: pyAt('count += 1'), phase: 'pair', activeLine: codeAt('count equal neighbours'), at: i, lo: a, hi: b, count, text: chars.join(''), message: `Positions ${i} and ${i + 1} are both ${chars[i]}: one deletion.` })
       } else {
-        frames.push({ pythonLine: pyAt('if chars[i]'), phase: 'skip', activeLine: codeAt('if neighbours match'), at: i, lo: a, hi: b, count, text: chars.join(''), message: `Positions ${i} and ${i + 1} differ.` })
+        frames.push({ pythonLine: pyAt('if chars[i]'), phase: 'skip', activeLine: codeAt('count equal neighbours'), at: i, lo: a, hi: b, count, text: chars.join(''), message: `Positions ${i} and ${i + 1} differ.` })
       }
     }
     answers.push(count)
     frames.push({ pythonLine: pyAt('answers.append'), phase: 'answer', activeLine: codeAt('record the count'), at: -1, lo: a, hi: b, count, text: chars.join(''), message: `Answer for this query: ${count}.` })
   }
-  frames.push({ pythonLine: pyAt('return answers'), phase: 'done', activeLine: codeAt('return answers'), at: -1, lo: -1, hi: -1, count: null, text: chars.join(''), message: `Answers: [${answers.join(', ')}].` })
+  frames.push({ pythonLine: pyAt('return answers'), phase: 'done', activeLine: codeAt('return the recorded answers'), at: -1, lo: -1, hi: -1, count: null, text: chars.join(''), message: `Answers: [${answers.join(', ')}].` })
   return { input: { s, queries }, result: answers, frames }
 }
 

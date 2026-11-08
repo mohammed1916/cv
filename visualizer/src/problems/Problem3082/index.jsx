@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-sum-of-the-power-of-all-subsequences/',
   complexity: 'O(n * k * n) time and O(k * n) space. The visualization caps nums at 6 values.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,3,4],"k":4}' },
+    { label: 'Four values, k six', input: '{"nums":[1,5,2,5],"k":6}' },
     { label: 'Example 2', input: '{"nums":[2,3,5],"k":5}' },
     { label: "Single value", input: "{\"nums\":[4],\"k\":1}" },
     { label: "Equal values", input: "{\"nums\":[2,2,2],\"k\":2}" },

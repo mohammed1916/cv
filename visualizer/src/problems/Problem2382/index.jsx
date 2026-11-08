@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-segment-sum-after-removals/',
   complexity: 'O(n α(n)) time with union-find. The visualization caps nums at 8 values.',
   examples: [
-    { label: 'Example 1', input: '{"nums": [1,2,5,6,1], "remove_queries": [0,3,2,4,1]}' },
+    { label: 'Own: four values, reverse order', input: '{"nums":[4,9,2,7],"remove_queries":[2,0,3,1]}' },
     { label: 'Single element', input: '{"nums":[5],"remove_queries":[0]}' },
     { label: 'Equal values', input: '{"nums":[3,3,3],"remove_queries":[1,0,2]}' },
     { label: 'Extreme values, 8 items', input: '{"nums":[100,1,100,1,100,1,100,1],"remove_queries":[7,0,6,1,5,2,4,3]}' },

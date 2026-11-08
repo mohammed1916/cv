@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/matrix-similarity-after-cyclic-shifts/',
   complexity: 'O(mn) time to shift and compare each row once. The visualization caps the matrix at 6 by 6.',
   examples: [
-    { label: 'Own case 1', input: '{"mat":[[2,3,2,3],[6,6,6,6],[7,4,7,4]],"k":3}' },
+    { label: 'Three by three grid, k of four', input: '{"mat":[[9,4,7],[1,8,3],[6,2,5]],"k":4}' },
     { label: 'Example 2', input: '{"mat":[[2,2],[1,3]],"k":3}' },
     { label: 'Single cell', input: '{"mat":[[7]],"k":1}' },
     { label: 'Equal cells', input: '{"mat":[[4,4],[4,4]],"k":3}' },

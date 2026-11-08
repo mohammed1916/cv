@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/least-operators-to-express-number/',
   complexity: 'O(log target) time and O(1) extra space: one step per base-x digit.',
   examples: [
-    { label: 'Own case 1', input: '{"x":4,"target":20}' },
-    { label: 'Own case 2', input: '{"x":6,"target":502}' },
+    { label: 'Base five, target thirty-seven', input: '{"x":5,"target":37}' },
+    { label: 'Base seven, round target', input: '{"x":7,"target":100}' },
     { label: 'Power of x', input: '{"x":2,"target":12}' },
     { label: 'Smallest x and target', input: '{"x":2,"target":1}' },
     { label: 'Equal x and target', input: '{"x":10,"target":10}' },

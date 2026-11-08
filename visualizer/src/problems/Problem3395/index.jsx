@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/subsequences-with-a-unique-middle-mode-i/',
   complexity: 'O(n^5) time in this visualization, which caps the array at 12 values. The known solution is faster.',
   examples: [
-    { label: 'Own case 1', input: '[2,2,2,2,2,2]' },
-    { label: 'Own case 2', input: '[2,3,3,4,4,5]' },
+    { label: 'Six values, two repeats', input: '[3,8,3,1,8,2]' },
+    { label: 'Seven distinct values', input: '[6,1,9,4,2,7,5]' },
     { label: 'Five equal values', input: '[2,2,2,2,2]' },
     { label: 'Five distinct values', input: '[1,2,3,4,5]' },
     { label: 'Largest length and values', input: '[1,100,1,100,1,100,1,100,1,100,1,100]' },

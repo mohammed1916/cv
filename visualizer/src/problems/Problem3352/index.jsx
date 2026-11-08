@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-k-reducible-numbers-less-than-n/',
   complexity: 'O(L^2) time for L binary digits of N, plus a constant number of popcount steps. The visualization caps s at 12 bits.',
   examples: [
-    { label: 'Example', input: '{"s":"111","k":1}' },
+    { label: 'Own: 1011001, k 2', input: '{"s":"1011001","k":2}' },
     { label: 'Four bits', input: '{"s":"1000","k":2}' },
     { label: 'Single bit', input: '{"s":"1","k":1}' },
     { label: 'All ones', input: '{"s":"111111111111","k":6}' },

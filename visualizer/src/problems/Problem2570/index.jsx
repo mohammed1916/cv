@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/merge-two-2d-arrays-by-summing-values/',
   complexity: 'O(n + m) time and O(n + m) space.',
   examples: [
-    { label: 'Own case 1', input: '{"nums1":[[2,3],[3,4],[5,6]],"nums2":[[2,5],[4,3],[5,2]]}' },
-    { label: 'Own case 2', input: '{"nums1":[[3,5],[4,7],[6,6]],"nums2":[[2,4],[5,4]]}' },
+    { label: 'Sparse ids', input: '{"nums1":[[1,8],[4,2],[7,9],[10,5]],"nums2":[[1,3],[7,4],[9,6]]}' },
+    { label: 'Single shared id', input: '{"nums1":[[2,10]],"nums2":[[2,12],[3,1],[8,30]]}' },
     { label: 'Single pair', input: '{"nums1":[[1,1]],"nums2":[[2,2]]}' },
     { label: 'Ids at the limits', input: '{"nums1":[[1,100],[10,1]],"nums2":[[1,1],[10,100]]}' },
     { label: 'Eight pairs sorted by id', input: '{"nums1":[[1,100],[2,100],[3,100],[4,100],[5,100],[6,100],[7,100],[8,100]],"nums2":[[1,1],[2,1],[3,1],[4,1],[5,1],[6,1],[7,1],[8,1]]}' },

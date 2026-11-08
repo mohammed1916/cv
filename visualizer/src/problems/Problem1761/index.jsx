@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-degree-of-a-connected-trio-in-a-graph/',
   complexity: 'O(n^3 + m) time and O(n^2) space for the adjacency table. The visualization caps n at 10.',
   examples: [
-    { label: 'Own case 1', input: '{"n":7,"edges":[[2,3],[2,4],[4,3],[5,2],[6,3],[4,7]]}' },
-    { label: 'Own case 2', input: '{"n":8,"edges":[[2,4],[5,2],[5,4],[3,6],[6,7],[7,8],[8,6],[3,7]]}' },
+    { label: 'Five nodes, one path', input: '{"n":5,"edges":[[1,5],[2,4],[4,5],[3,1]]}' },
+    { label: 'Two cycles and a pendant', input: '{"n":9,"edges":[[1,2],[2,3],[3,4],[4,1],[5,6],[6,7],[7,8],[8,5],[9,1]]}' },
   { label: 'Smallest graph, no edges', input: "{\"n\":3,\"edges\":[]}" },
   { label: 'Complete graph on four nodes', input: "{\"n\":4,\"edges\":[[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]}" },
   { label: 'Largest graph, first 25 pairs', input: "{\"n\":10,\"edges\":[[1,2],[1,3],[1,4],[1,5],[1,6],[1,7],[1,8],[1,9],[1,10],[2,3],[2,4],[2,5],[2,6],[2,7],[2,8],[2,9],[2,10],[3,4],[3,5],[3,6],[3,7],[3,8],[3,9],[3,10],[4,5]]}" },

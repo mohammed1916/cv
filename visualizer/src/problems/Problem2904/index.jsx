@@ -20,9 +20,9 @@ const definition = {
   url: "https://leetcode.com/problems/shortest-and-lexicographically-smallest-beautiful-string/",
   complexity: "O(n) time and O(n) space for the best substring. The visualization caps s at 100 characters.",
   examples: [
-    { label: "Example 1", input: '{"s":"100011001","k":3}' },
-    { label: "Example 2", input: '{"s":"1011","k":2}' },
-    { label: "Own case 3", input: '{"s":"111","k":2}' },
+    { label: "Own: seven bits, k 2", input: '{"s":"0110101","k":2}' },
+    { label: "Own: 1100 with k 1", input: '{"s":"1100","k":1}' },
+    { label: 'Five bits, k of one', input: '{"s":"01011","k":1}' },
     { label: "Single digit", input: "{\"s\":\"1\",\"k\":1}" },
     { label: "All ones", input: "{\"s\":\"1111\",\"k\":2}" },
     { label: "Longest string, alternating", input: "{\"s\":\"1010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010\",\"k\":100}" },

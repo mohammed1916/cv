@@ -26,8 +26,8 @@ const definition = {
   url: 'https://leetcode.doocs.org/en/lc/3648/',
   complexity: 'O(1) time: two ceiling divisions.',
   examples: [
-    { label: 'Own case 1', input: '{"n":6,"m":6,"k":2}' },
-    { label: 'Own case 2', input: '{"n":3,"m":3,"k":3}' },
+    { label: 'Seven by four, three steps', input: '{"n":7,"m":4,"k":3}' },
+    { label: 'Single cell, no steps', input: '{"n":1,"m":1,"k":0}' },
     { label: 'Smallest sizes', input: '{"n":1,"m":1,"k":0}' },
     { label: 'Equal sides', input: '{"n":2,"m":2,"k":2}' },
     { label: 'Largest sizes', input: '{"n":1000,"m":1000,"k":1000}' },

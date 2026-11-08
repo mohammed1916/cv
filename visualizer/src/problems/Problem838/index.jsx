@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/push-dominoes/',
   complexity: 'O(n) time and O(n) space: two linear sweeps and one pass to build the answer.',
   examples: [
-    { label: 'Example 1', input: '"RR.L"' },
-    { label: 'Example 2', input: '".L.R...LR..L.."' },
+    { label: 'Own: eight cells', input: '"R.L.RL.R"' },
+    { label: 'Own: two pushers', input: '"..RR.L.LR."' },
     { label: 'Balanced', input: '"R...L"' },
     { label: 'Single dot', input: '"."' },
     { label: 'Equal forces meet in the middle', input: '"R.L"' },

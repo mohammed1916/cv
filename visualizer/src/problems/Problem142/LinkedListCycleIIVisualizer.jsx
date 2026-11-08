@@ -7,19 +7,19 @@ import "./LinkedListCycleIIVisualizer.css";
 
 const DEFAULT_EXAMPLES = [
   {
-    label: "Example 1: [3,2,0,-4], pos=1",
-    values: { nodes: "[3, 2, 0, -4]", pos: 1 },
-    input: { nodes: "[3, 2, 0, -4]", pos: 1 },
+    label: "Own: five nodes, pos=2",
+    values: { nodes: "[7, -1, 4, 9, 0]", pos: 2 },
+    input: { nodes: "[7, -1, 4, 9, 0]", pos: 2 },
   },
   {
-    label: "Example 2: [1,2], pos=0",
-    values: { nodes: "[1, 2]", pos: 0 },
-    input: { nodes: "[1, 2]", pos: 0 },
+    label: "Own: two nodes, pos=1",
+    values: { nodes: "[6, 5]", pos: 1 },
+    input: { nodes: "[6, 5]", pos: 1 },
   },
   {
-    label: "Example 3: [1], pos=-1",
-    values: { nodes: "[1]", pos: -1 },
-    input: { nodes: "[1]", pos: -1 },
+    label: "Own: two nodes, no cycle",
+    values: { nodes: "[4, 6]", pos: -1 },
+    input: { nodes: "[4, 6]", pos: -1 },
   },
   {
     label: "Self Loop: [42], pos=0",

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-weighted-median-node-in-tree/',
   complexity: 'O(path length) per query with this climbing method. The visualization caps n at 8.',
   examples: [
-    { label: 'Own case 1', input: '{"n":3,"edges":[[2,0,4],[0,1,2]],"queries":[[1,2],[2,0],[0,1]]}' },
-    { label: 'Own case 2', input: '{"n":5,"edges":[[2,4,3],[1,3,1],[0,2,5],[0,1,2]],"queries":[[1,2],[3,4]]}' },
+    { label: 'Star around node one', input: '{"n":4,"edges":[[0,1,5],[1,2,3],[1,3,8]],"queries":[[2,3],[0,3]]}' },
+    { label: 'Path through node zero', input: '{"n":3,"edges":[[2,0,4],[0,1,6]],"queries":[[1,2]]}' },
     { label: 'Two nodes', input: '{"n":2,"edges":[[0,1,3]],"queries":[[0,1]]}' },
     { label: 'Equal edge weights', input: '{"n":3,"edges":[[0,1,5],[1,2,5]],"queries":[[0,2],[2,0]]}' },
     { label: 'Largest weights', input: '{"n":4,"edges":[[0,1,20],[1,2,20],[2,3,1]],"queries":[[0,3],[3,0]]}' },

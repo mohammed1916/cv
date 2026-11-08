@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/xor-after-range-multiplication-queries-i/',
   complexity: 'O(total indices touched) time. The visualization caps nums at 12 values and queries at 8.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,1,1],"queries":[[0,2,1,4]]}' },
-    { label: 'Own case 2', input: '{"nums":[4,5,1,3,2],"queries":[[0,2,1,2],[1,4,2,3]]}' },
+    { label: 'Own: four values, two queries', input: '{"nums":[2,5,3,7],"queries":[[0,3,2,3],[1,2,1,2]]}' },
+    { label: 'Full window, one step', input: '{"nums":[1,4,6,2],"queries":[[0,3,1,10]]}' },
     { label: 'One value, one query', input: '{"nums":[7],"queries":[[0,0,1,2]]}' },
     { label: 'Equal values', input: '{"nums":[4,4,4],"queries":[[0,2,2,4]]}' },
     { label: 'Largest values and bounds', input: '{"nums":[100,1,100,1,100,1,100,1,100,1,100,1],"queries":[[0,11,12,100],[3,3,1,1]]}' },

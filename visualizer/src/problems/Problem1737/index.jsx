@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/change-minimum-characters-to-satisfy-one-of-three-conditions/',
   complexity: 'O(26 * (n + m)) time with letter counts. The visualization caps each string at 20 letters.',
   examples: [
-    { label: 'Own case 1', input: '{"a":"bcb","b":"dbb"}' },
-    { label: 'Own case 2', input: '{"a":"ebcbee","b":"deb"}' },
+    { label: 'Mirror letters', input: '{"a":"mqk","b":"kqm"}' },
+    { label: 'Repeated runs', input: '{"a":"ooppoo","b":"pq"}' },
   { label: 'Single letters', input: '{"a":"a","b":"b"}' },
   { label: 'Equal strings', input: '{"a":"abc","b":"abc"}' },
   { label: 'Longest strings', input: '{"a":"abcdefghijklmnopqrst","b":"tsrqponmlkjihgfedcba"}' },

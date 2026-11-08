@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-integers-in-intervals/',
   complexity: 'O(log M) per operation with a lazy segment tree over M values; the visualization caps M at 32.',
   examples: [
-    { label: 'Example', input: '[["add",2,3],["add",7,10],["count"],["add",5,8],["count"]]' },
+    { label: 'Own: three ranges', input: '[["add",1,4],["count"],["add",3,9],["add",2,2],["count"]]' },
     { label: 'Count on empty set', input: '[["count"]]' },
     { label: 'Full span then one point', input: '[["add",1,32],["count"],["add",32,32],["count"]]' },
     { label: 'Repeated range', input: '[["add",4,4],["add",4,4],["count"]]' },

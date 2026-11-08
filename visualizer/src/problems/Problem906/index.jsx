@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/super-palindromes/',
   complexity: 'About 2000 candidate roots, each checked in O(digits). The visualization caps right at 10^12 (LeetCode allows 10^18) and shows the latest 60 candidates.',
   examples: [
-    { label: 'Own case 1', input: '{"left":"5","right":"2111"}' },
-    { label: 'Own case 2', input: '{"left":"2","right":"3"}' },
+    { label: 'Two-digit lower bound', input: '{"left":"12","right":"500"}' },
+    { label: 'Ninety to a thousand', input: '{"left":"90","right":"1000"}' },
     { label: 'Wide range', input: '{"left":"1","right":"1000000000000"}' },
     { label: 'Single number', input: '{"left":"1","right":"1"}' },
     { label: 'Equal bounds', input: '{"left":"99","right":"99"}' },

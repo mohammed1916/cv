@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/take-k-of-each-character-from-left-and-right/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps s at 40 characters.',
   examples: [
-    { label: 'Example 1', input: '{"s":"aabaaaacaabc","k":2}' },
+    { label: 'Own: seven letters, k 3', input: '{"s":"abcabca","k":3}' },
     { label: 'Impossible', input: '{"s":"a","k":1}' },
     { label: 'Zero needed', input: '{"s":"abc","k":0}' },
     { label: 'Equal letter counts', input: '{"s":"abcabc","k":2}' },

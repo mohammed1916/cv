@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/length-of-longest-subarray-with-at-most-k-frequency/',
   complexity: 'O(n) time and O(n) space for the tally. The visualization caps input at 30 values.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,3,4,2,3,4,2,3],"k":3}' },
+    { label: 'Eight values, k of three', input: '{"nums":[5,1,5,2,3,5,1,4],"k":3}' },
     { label: 'Repeats', input: '{"nums":[1,2,1,2,1,2,1,2],"k":1}' },
     { label: 'One value', input: '{"nums":[4],"k":1}' },
     { label: 'Equal values', input: '{"nums":[3,3,3,3],"k":2}' },

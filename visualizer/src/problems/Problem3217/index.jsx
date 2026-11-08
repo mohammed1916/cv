@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/delete-nodes-from-linked-list-present-in-array/',
   complexity: 'O(m + n) time and O(m) space for m values in nums and n list nodes.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,3,4],"head":[2,3,4,5,6]}' },
-    { label: 'Own case 2', input: '{"nums":[2],"head":[2,3,2,3,2,3]}' },
+    { label: 'Three nums, five nodes', input: '{"nums":[5,1,9],"head":[7,2,8,4,6]}' },
+    { label: 'One num, six nodes', input: '{"nums":[6],"head":[1,6,1,6,1,6]}' },
     { label: 'One node each', input: '{"nums":[1],"head":[1]}' },
     { label: 'Equal values', input: '{"nums":[10,10],"head":[10,10,10]}' },
     { label: 'Largest lists', input: '{"nums":[1,2,3,4,5,6,7,8],"head":[4,6,2,6,10,10,4,3,3,8,7,3]}' },

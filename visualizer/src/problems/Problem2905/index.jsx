@@ -19,9 +19,9 @@ const definition = {
   url: "https://leetcode.com/problems/find-indices-with-index-and-value-difference-ii/",
   complexity: "O(n) time and O(1) space. The visualization caps nums at 100 values and values at 1000.",
   examples: [
-    { label: "Own case 1", input: '{"nums":[6,2,5,2],"indexDifference":3,"valueDifference":5}' },
-    { label: "Own case 2", input: '{"nums":[3,2],"indexDifference":1,"valueDifference":1}' },
-    { label: "Own case 3", input: '{"nums":[2,3,4],"indexDifference":3,"valueDifference":5}' },
+    { label: 'Five values, index gap two', input: '{"nums":[8,3,1,10,6],"indexDifference":2,"valueDifference":4}' },
+    { label: 'Two values, gap exactly five', input: '{"nums":[5,0],"indexDifference":1,"valueDifference":5}' },
+    { label: 'Index gap four', input: '{"nums":[1,9,2,8,3],"indexDifference":4,"valueDifference":6}' },
     { label: "Two values, smallest difference", input: "{\"nums\":[1,2],\"indexDifference\":0,\"valueDifference\":1}" },
     { label: "Equal values", input: "{\"nums\":[7,7],\"indexDifference\":1,\"valueDifference\":0}" },
     { label: "Largest gap at the far ends", input: "{\"nums\":[50,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,0],\"indexDifference\":99,\"valueDifference\":50}" },

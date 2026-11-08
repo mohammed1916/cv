@@ -15,9 +15,9 @@ const definition = {
   url: 'https://leetcode.com/problems/binary-tree-pruning/',
   complexity: 'O(n) time and O(h) recursion space.',
   examples: [
-    { label: 'Own case 1', input: '[1,0,0,null,1]' },
-    { label: 'Own case 2', input: '[1,0,0,0,1,0,1]' },
-    { label: 'Own case 3', input: '[0,1,0,1,1,0,1,1]' },
+    { label: 'Two levels below the root', input: '[1,0,1,null,1,0,null]' },
+    { label: 'Left empty, right leaf', input: '[1,null,0]' },
+    { label: 'Balanced seven nodes', input: '[0,1,1,null,null,1,0]' },
     { label: 'All zeros', input: '[0,0,0]' },
     { label: 'Single node', input: '[0]' },
     { label: 'Equal values', input: '[1,1,1]' },

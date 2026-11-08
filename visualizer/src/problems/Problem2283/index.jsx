@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/check-if-number-has-equal-digit-count-and-digit-value/',
   complexity: 'O(n^2) time for n digits; the visualization caps input at 10 digits.',
   examples: [
-    { label: 'Own case 1', input: '"2321"' },
-    { label: 'Own case 2', input: '"141"' },
+    { label: 'Four digit string', input: '"5902"' },
+    { label: 'Digits with a repeat', input: '"7717"' },
     { label: 'Single zero digit', input: '"0"' },
     { label: 'Repeated digits', input: '"11111"' },
     { label: 'Ten digits, descending', input: '"9876543210"' },

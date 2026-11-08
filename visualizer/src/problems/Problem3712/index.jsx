@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/sum-of-elements-with-frequency-divisible-by-k/',
   complexity: 'O(n) time and O(n) space. The visualization caps the array at 12 values.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,3,3,4,4,4,4,5],"k":3}' },
-    { label: 'Own case 2', input: '{"nums":[5,5,5,2,3,4],"k":4}' },
+    { label: 'Four values, k four', input: '{"nums":[3,8,1,6],"k":4}' },
+    { label: 'Single value at limit', input: '{"nums":[10],"k":10}' },
     { label: 'Single value', input: '{"nums":[7],"k":1}' },
     { label: 'Equal values tie', input: '{"nums":[3,3,3,3],"k":3}' },
     { label: 'Largest values allowed', input: '{"nums":[100,100,100],"k":100}' },

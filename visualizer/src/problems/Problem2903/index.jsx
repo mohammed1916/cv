@@ -18,9 +18,9 @@ const definition = {
   url: "https://leetcode.com/problems/find-indices-with-index-and-value-difference-i/",
   complexity: "O(n^2) time and O(1) space. The visualization caps nums at 100 values.",
   examples: [
-    { label: "Own case 1", input: '{"nums":[6,2,5,2],"indexDifference":3,"valueDifference":5}' },
-    { label: "Own case 2", input: '{"nums":[3,2],"indexDifference":1,"valueDifference":1}' },
-    { label: "Own case 3", input: '{"nums":[2,3,4],"indexDifference":3,"valueDifference":5}' },
+    { label: 'Five values, index gap two', input: '{"nums":[9,2,4,11,7],"indexDifference":2,"valueDifference":3}' },
+    { label: 'Equal values, zero value gap', input: '{"nums":[7,7,7],"indexDifference":2,"valueDifference":0}' },
+    { label: 'Large jumps, index gap one', input: '{"nums":[10,30,20,40],"indexDifference":1,"valueDifference":15}' },
     { label: "Single value", input: "{\"nums\":[3],\"indexDifference\":0,\"valueDifference\":0}" },
     { label: "Equal values with zero difference", input: "{\"nums\":[4,4,4],\"indexDifference\":1,\"valueDifference\":0}" },
     { label: "Longest input, largest limits", input: "{\"nums\":[50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0,50,0],\"indexDifference\":100,\"valueDifference\":50}" },

@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-number-of-coins-to-be-added/',
   complexity: 'O(n log n) time for the sort, plus one step per coin or added coin. The visualization caps input at 8 coins and target 60.',
   examples: [
-    { label: 'Own case 1', input: '{"coins":[2,5,11],"target":20}' },
-    { label: 'Own case 2', input: '{"coins":[2,2,2],"target":21}' },
+    { label: 'Three coin values, target 25', input: '{"coins":[3,7,12],"target":25}' },
+    { label: 'Repeated coin value four', input: '{"coins":[4,4,9,15],"target":30}' },
     { label: 'Single coin', input: '{"coins":[1],"target":1}' },
     { label: 'Equal coins', input: '{"coins":[2,2],"target":4}' },
     { label: 'Largest coins', input: '{"coins":[60,60,60,60,60,60,60,60],"target":60}' },

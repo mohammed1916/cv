@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/binary-string-with-substrings-representing-1-to-n/',
   complexity: 'O(n * s) time with simple substring checks. The visualization caps s at 40 characters and n at 40.',
   examples: [
-    { label: 'Example 1', input: '{"s":"0110","n":3}' },
-    { label: 'Example 2', input: '{"s":"0110","n":4}' },
+    { label: 'Own: 1101001 covers 1 to 5', input: '{"s":"1101001","n":5}' },
+    { label: 'Own: 6 missing from 1010', input: '{"s":"1010","n":6}' },
     { label: 'Example 3', input: '{"s":"1011","n":3}' },
     { label: 'Single zero', input: '{"s":"0","n":1}' },
     { label: 'Equal bits', input: '{"s":"1111","n":4}' },

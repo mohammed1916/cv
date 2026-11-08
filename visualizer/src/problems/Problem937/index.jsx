@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/reorder-data-in-log-files/',
   complexity: 'O(n log n * m) time for n logs of length m. The visualization caps input at 30 logs.',
   examples: [
-    { label: 'Own case 1', input: '["ejh2 9 2 6 2","mfu2 bsu dbo","ejh3 4 7","mfu3 pxo lju ejh","mfu4 bsu afsp"]' },
-    { label: 'Own case 2', input: '["b2 0 3 4 2","h2 bdu dbs","ap5 5 8","bc2 pgg lfz eph","b9 bdu app"]' },
+    { label: 'Mixed digit and letter logs', input: '["dig1 8 1 5 1","let1 art can","let2 own kit dig","let3 art zero"]' },
+    { label: 'Same words, different ids', input: '["a1 9 2 3 1","g1 act car","zo4 4 7","ab1 off key dog","a8 act zoo"]' },
     { label: 'Single letter log', input: '["a1 x"]' },
     { label: 'Equal words sort by identifier', input: '["b2 x y","a1 x y"]' },
     { label: 'Long log line', input: '["z1 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]' },

@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-average-difference/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps nums at 12 entries.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[2,5,3,9,5,3]}' },
+    { label: 'Own: four values with zero', input: '{"nums":[7,0,12,4]}' },
     { label: 'Single', input: '{"nums":[0]}' },
     { label: 'All equal values', input: '{"nums":[7,7,7,7]}' },
     { label: 'All zeros', input: '{"nums":[0,0,0]}' },

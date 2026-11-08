@@ -14,9 +14,9 @@ const definition = {
   url: 'https://leetcode.com/problems/smallest-range-ii/',
   complexity: 'O(n log n) time for the sort, then O(n) for the splits. nums is capped at 100 values.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2],"k":1}' },
-    { label: 'Own case 2', input: '{"nums":[1,11],"k":3}' },
-    { label: 'Own case 3', input: '{"nums":[2,4,7],"k":4}' },
+    { label: 'Three numbers, small k', input: '{"nums":[2,8,5],"k":2}' },
+    { label: 'Almost equal values', input: '{"nums":[10,10,10,11],"k":1}' },
+    { label: 'Evenly spaced values', input: '{"nums":[0,6,12,18],"k":4}' },
     { label: 'Larger', input: '{"nums":[7,8,8,5,2],"k":4}' },
     { label: 'Single zero', input: '{"nums":[0],"k":0}' },
     { label: 'Equal values', input: '{"nums":[4,4,4,4],"k":4}' },

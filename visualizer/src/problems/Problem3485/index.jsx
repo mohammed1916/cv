@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/longest-common-prefix-of-k-strings-after-removal/',
   complexity: 'O(n * L^2) time for n words of length L, using prefix counts. The visualization caps the input at 8 words.',
   examples: [
-    { label: 'Own case 1', input: '{"words":["kvnq","svo","svo","kvnq","svo"],"k":3}' },
+    { label: 'Four short words, k two', input: '{"words":["ab","cde","fg","hi"],"k":2}' },
     { label: 'Single word', input: '{"words":["ab","abc","a"],"k":1}' },
     { label: 'Two words with k 1', input: '{"words":["ab","cd"],"k":1}' },
     { label: 'Equal words tie', input: '{"words":["ab","ab","ab"],"k":2}' },

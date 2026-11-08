@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/sort-integers-by-the-power-value/',
   complexity: 'Each power is memoized, so the work is close to linear in the number of values computed, plus a sort of the range.',
   examples: [
-    { label: 'Own case 1', input: '{"lo":13,"hi":16,"k":3}' },
-    { label: 'Own case 2', input: '{"lo":8,"hi":12,"k":5}' },
+    { label: 'Eight integers, rank five', input: '{"lo":40,"hi":47,"k":5}' },
+    { label: 'Six integers from 200', input: '{"lo":200,"hi":205,"k":2}' },
     { label: "Single integer", input: "{\"lo\":1,\"hi\":1,\"k\":1}" },
     { label: "Equal powers use the smaller number", input: "{\"lo\":3,\"hi\":20,\"k\":2}" },
     { label: "Largest range, k at the top", input: "{\"lo\":941,\"hi\":1000,\"k\":60}" },

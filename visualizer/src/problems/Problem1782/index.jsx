@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-pairs-of-nodes/',
   complexity: 'O(E log E + Q(n + E)) time in this version. The visualization caps n at 8.',
   examples: [
-    { label: 'Own case 1', input: '{"n":5,"edges":[[2,3],[3,5],[2,4],[3,4],[3,2]],"queries":[3,4]}' },
+    { label: 'Two queries on six nodes', input: '{"n":6,"edges":[[1,2],[2,3],[4,5],[5,6],[1,6],[2,6]],"queries":[2,5,0]}' },
     { label: 'Parallel edges', input: '{"n":2,"edges":[[1,2],[1,2]],"queries":[1,2]}' },
   { label: 'Single edge', input: "{\"n\":2,\"edges\":[[1,2]],\"queries\":[0,1]}" },
   { label: 'Repeated query values', input: "{\"n\":3,\"edges\":[[1,2],[2,3]],\"queries\":[2,2,0]}" },

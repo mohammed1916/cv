@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/first-letter-to-appear-twice/',
   complexity: 'O(n) time and O(1) extra space for the 26-letter set. The visualization caps input at 50 letters.',
   examples: [
-    { label: 'Example 1', input: '{"s":"abccbaacz"}' },
-    { label: 'Example 2', input: '{"s":"abcdd"}' },
+    { label: 'Own: hello and tea', input: '{"s":"hellotea"}' },
+    { label: 'Own: xyzyq', input: '{"s":"xyzyq"}' },
     { label: 'Smallest input', input: '{"s":"aa"}' },
     { label: 'Earliest repeat wins', input: '{"s":"abab"}' },
     { label: 'Longest string, 50 letters', input: '{"s":"abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwx"}' },

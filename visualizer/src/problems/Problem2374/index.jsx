@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/node-with-highest-edge-score/',
   complexity: 'O(n) time and O(n) space.',
   examples: [
-    { label: 'Example 1', input: '{"edges": [1,0,0,0,0,7,7,5]}' },
-    { label: 'Example 2', input: '{"edges": [2,0,0,2]}' },
+    { label: 'Own: four-node loop', input: '{"edges": [1,2,3,0]}' },
+    { label: 'Own: five nodes', input: '{"edges": [1,2,2,4,3]}' },
     { label: 'Two-node cycle', input: '{"edges":[1,0]}' },
     { label: 'Self loops', input: '{"edges":[0,1,2,3]}' },
     { label: 'Cycle of 12', input: '{"edges":[1,2,3,4,5,6,7,8,9,10,11,0]}' },

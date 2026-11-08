@@ -27,7 +27,7 @@ export function buildTrace({ nums, queries }) {
     answers.push(lo)
     frames.push({ phase: 'query', activeLine: L('return lo'), pythonLine: P('answers.append(lo)'), query: index, limit, lo, hi, mid: null, count: lo, sorted, prefix, message: `Limit ${limit}: the largest count is ${lo}, with sum ${prefix[lo]}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return answers'), pythonLine: P('return answers'), query: null, lo: null, hi: null, mid: null, count: null, sorted, prefix, message: `Answers: ${answers.join(', ')}.` })
+  frames.push({ phase: 'done', activeLine: L('return queries.map'), pythonLine: P('return answers'), query: null, lo: null, hi: null, mid: null, count: null, sorted, prefix, message: `Answers: ${answers.join(', ')}.` })
   return { input: { nums, queries }, prefix, result: answers, frames }
 }
 

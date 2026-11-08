@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-length-of-anagram-concatenation/',
   complexity: 'O(n * d * log k) time for d divisors of n, with sorting per block. The visualization caps input at 16 characters.',
   examples: [
-    { label: 'Own case 1', input: '"bccb"' },
-    { label: 'Own case 2', input: '"defg"' },
+    { label: 'Six letters, one repeat', input: '"xyzyxz"' },
+    { label: 'Eight distinct letters', input: '"hijklmno"' },
     { label: "Smallest valid string", input: "\"aa\"" },
     { label: "Anagram blocks at length two", input: "\"ababba\"" },
     { label: "Longest allowed, one letter", input: "\"zzzzzzzzzzzzzzzz\"" },

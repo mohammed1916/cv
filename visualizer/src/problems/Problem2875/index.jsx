@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-size-subarray-in-infinite-array/',
   complexity: 'O(n) time on the two-copy array. The visualization caps nums at 30 values.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,3,4],"target":6}' },
+    { label: 'Five values, target eleven', input: '{"nums":[4,9,2,6,5],"target":11}' },
     { label: 'Whole copies', input: '{"nums":[3,1],"target":8}' },
     { label: "Target smaller than the only entry", input: "{\"nums\":[7],\"target\":1}" },
     { label: "Equal values sum exactly to target", input: "{\"nums\":[4,4,4],\"target\":12}" },

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximal-score-after-applying-k-operations/',
   complexity: 'O((n + k) log n) time with a max heap. The visualization caps input at 10 numbers and 12 operations.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[11,11,11,11,11],"k":6}' },
-    { label: 'Own case 2', input: '{"nums":[2,11,4,4,4],"k":4}' },
+    { label: 'Six values, k four', input: '{"nums":[8,24,3,17,5,12],"k":4}' },
+    { label: 'Three values, k one', input: '{"nums":[30,30,9],"k":1}' },
     { label: 'Single number', input: '{"nums":[7],"k":1}' },
     { label: 'Equal values use the first one', input: '{"nums":[4,4,4],"k":2}' },
     { label: 'Largest values for 12 rounds', input: '{"nums":[50,50,50,50,50,50,50,50,50,50],"k":12}' },

@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-minimum-time-to-finish-all-jobs/',
   complexity: 'Backtracking over the ways to assign jobs, pruned by the best peak so far. The visualization caps input at 8 jobs.',
   examples: [
-    { label: 'Example 1', input: '{"jobs":[3,2,3],"k":3}' },
-    { label: 'Own case 2', input: '{"jobs":[2,3,5,8,9],"k":3}' },
+    { label: 'Own: five jobs, two workers', input: '{"jobs":[5,5,4,4,8],"k":2}' },
+    { label: 'Five jobs, three workers', input: '{"jobs":[10,4,7,12,6],"k":3}' },
   { label: 'Single job', input: '{"jobs":[5],"k":1}' },
   { label: 'Equal jobs', input: '{"jobs":[4,4,4,4],"k":2}' },
   { label: 'Longest job times', input: '{"jobs":[60,60,60,60,60,60,60,60],"k":3}' },

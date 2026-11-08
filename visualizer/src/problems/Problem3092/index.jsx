@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/most-frequent-ids/',
   complexity: 'O(n * log n) with a heap, or O(n) expected with a count map and a count-of-counts table.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[3,4,3,2],"freq":[4,3,-4,2]}' },
-    { label: 'Own case 2', input: '{"nums":[6,6,4],"freq":[3,-3,2]}' },
+    { label: 'Add then remove one ID', input: '{"nums":[2,5,5,2],"freq":[3,2,-2,-1]}' },
+    { label: 'Interleaved IDs', input: '{"nums":[1,3,1,3],"freq":[2,4,-1,-4]}' },
     { label: "Single insert", input: "{\"nums\":[3],\"freq\":[2]}" },
     { label: "Equal IDs cancel out", input: "{\"nums\":[1,1,2,2],\"freq\":[2,-2,1,1]}" },
     { label: "Largest changes on one ID", input: "{\"nums\":[6,6,6,6,6,6,6,6,6,6],\"freq\":[5,5,5,-5,-5,-5,5,-5,5,-5]}" },

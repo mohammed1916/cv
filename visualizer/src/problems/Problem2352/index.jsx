@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/equal-row-and-column-pairs/',
   complexity: 'O(n^2) time to read the grid and hash each column, plus O(n^2) for the lookups. The visualization caps the grid at 6 by 6.',
   examples: [
-    { label: 'Example 1', input: '{"grid":[[3,2,1],[1,7,6],[2,7,7]]}' },
-    { label: 'Example 2', input: '{"grid":[[3,1,2,2],[1,4,4,5],[2,4,2,2],[2,4,2,2]]}' },
+    { label: 'Own: two by two grid', input: '{"grid":[[5,3],[2,8]]}' },
+    { label: 'Own: three by three grid', input: '{"grid":[[9,1,4],[2,2,7],[6,3,8]]}' },
     { label: 'One cell', input: '{"grid":[[7]]}' },
     { label: 'Uniform grid', input: '{"grid":[[2,2],[2,2]]}' },
     { label: 'Largest grid, 6 by 6', input: '{"grid":[[1,12,23,34,45,56],[8,19,30,41,52,63],[15,26,37,48,59,70],[22,33,44,55,66,77],[29,40,51,62,73,84],[36,47,58,69,80,91]]}' },

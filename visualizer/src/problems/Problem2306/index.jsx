@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/naming-a-company/',
   complexity: 'O(n * L + k^2 * n) time for n names of length L and k distinct first letters. The visualization caps input at 30 names.',
   examples: [
-    { label: 'Example 1', input: '{"ideas":["coffee","donuts","time","toffee"]}' },
-    { label: 'Example 2', input: '{"ideas":["lack","back"]}' },
+    { label: 'Own: three drinks', input: '{"ideas":["tea","latte","mocha"]}' },
+    { label: 'Own: four short names', input: '{"ideas":["ox","box","fox","cox"]}' },
     { label: 'Two names, anagram', input: '{"ideas":["ab","ba"]}' },
     { label: 'Three names, repeated letters', input: '{"ideas":["aa","ab","ba"]}' },
     { label: 'Thirty names, length 8', input: '{"ideas":["mbbyoeif","pzzucegg","jfykmoyi","cvkpwyyc","prgpnmxz","szvmcfds","rtkmgzbb","hpvssvna","prgvtrbs","qwpddwgt","ayvsmctx","qgpvcsns","bgljftti","cpatroxu","dyjtaira","qlaodetn","eadgexsx","vcjdamsu","hjbmcecs","xvvkwmcm","vzrwhojm","vemyiolg","idaghkbi","eyiqbptd","kpjungxd","copmpgdf","usinmwkf","gefglcdn","asnahqfa","uxjbuuci"]}' },

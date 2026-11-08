@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-length-of-string-after-operations/',
   complexity: 'O(n) time and O(26) space.',
   examples: [
-    { label: 'Own case 1', input: '"bcbbdcdcc"' },
-    { label: 'Own case 2', input: '"bb"' },
+    { label: 'Nine letters, mixed', input: '"qwqwertyu"' },
+    { label: 'Two letters, distinct', input: '"xz"' },
     { label: 'One letter', input: '"a"' },
     { label: 'Twenty repeats', input: '"aaaaaaaaaaaaaaaaaaaa"' },
     { label: 'Alternating pair', input: '"abababababababababab"' },

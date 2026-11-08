@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-possible-number-by-binary-concatenation/',
   complexity: 'O(1) for three numbers. The sort compares strings of at most 21 bits.',
   examples: [
-    { label: 'Own case 1', input: '[2,3,4]' },
+    { label: 'Three distinct values', input: '[100,27,6]' },
     { label: 'Example 2', input: '[1,1,1]' },
     { label: 'Largest allowed values', input: '[127,127,127]' },
     { label: 'Mixed digit counts', input: '[9,90,12]' },

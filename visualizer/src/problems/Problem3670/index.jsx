@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-product-of-two-integers-with-no-common-bits/',
   complexity: 'O(n^2) time in this visualization. The official limit is 10^5 values, so an efficient solution uses bit DP.',
   examples: [
-    { label: 'Own case 1', input: '[2,3,4,5,6,7,8]' },
-    { label: 'Own case 2', input: '[65,9,33]' },
+    { label: 'Scrambled five values', input: '[4,1,9,2,7]' },
+    { label: 'Large start, short tail', input: '[1000000,2,500]' },
     { label: 'Two values', input: '[1,1]' },
     { label: 'Equal values', input: '[6,6,6]' },
     { label: 'Largest values', input: '[1000000,1,1000000,1,1000000,1,1000000,1,1000000,1,1000000,1]' },

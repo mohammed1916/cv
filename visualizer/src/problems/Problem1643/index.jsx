@@ -14,9 +14,9 @@ const definition = {
   url: 'https://leetcode.com/problems/kth-smallest-instructions/',
   complexity: 'O(rows + columns) binomial evaluations. The visualization caps each dimension at 6.',
   examples: [
-    { label: 'Own case 1', input: '{"destination":[3,4],"k":2}' },
-    { label: 'Own case 2', input: '{"destination":[3,4],"k":3}' },
-    { label: 'Own case 3', input: '{"destination":[3,4],"k":4}' },
+    { label: 'Two by five, option four', input: '{"destination":[2,5],"k":4}' },
+    { label: 'Four by two, option five', input: '{"destination":[4,2],"k":5}' },
+    { label: 'Single row, option six', input: '{"destination":[1,6],"k":6}' },
     { label: 'First path, 1 by 1', input: '{"destination":[1,1],"k":1}' },
     { label: 'Last path, 2 by 3', input: '{"destination":[2,3],"k":10}' },
     { label: 'Largest grid, last path', input: '{"destination":[6,6],"k":924}' },

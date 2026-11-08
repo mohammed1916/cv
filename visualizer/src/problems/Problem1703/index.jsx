@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-adjacent-swaps-for-k-consecutive-ones/',
   complexity: 'O(n log n) time for the sorting-free scan with prefix idea; the visualization is O(n * k) and caps n at 20.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[1,0,1,0,0,1],"k":2}' },
-    { label: 'Own case 2', input: '{"nums":[1,1,0,0,0,0,0,1],"k":3}' },
+    { label: 'Eight bits, k three', input: '{"nums":[0,1,1,1,0,0,1,0],"k":3}' },
+    { label: 'Scattered ones, k two', input: '{"nums":[1,0,0,1,0,1,1],"k":2}' },
   { label: 'Single one', input: '{"nums":[1],"k":1}' },
   { label: 'Every one needed', input: '{"nums":[1,1,1],"k":3}' },
   { label: 'Ones at both ends', input: '{"nums":[1,0,0,1],"k":2}' },

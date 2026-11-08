@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-k-sum-of-an-array/',
   complexity: 'O(n log n + k log k) time with a min heap. The visualization caps input at 8 numbers.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[3,5,-3],"k":6}' },
-    { label: 'Own case 2', input: '{"nums":[2,-3,4,5,-11,13],"k":17}' },
+    { label: 'Three numbers, k 5', input: '{"nums":[4,-1,2],"k":5}' },
+    { label: 'Five numbers, k 9', input: '{"nums":[-2,3,6,-4,1],"k":9}' },
     { label: 'Single number', input: '{"nums":[3],"k":2}' },
     { label: 'Equal numbers', input: '{"nums":[2,2,2,2],"k":4}' },
     { label: 'Largest total', input: '{"nums":[20,20,20,20,20,20,20,20],"k":160}' },

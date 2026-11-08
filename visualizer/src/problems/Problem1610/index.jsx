@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-number-of-visible-points/',
   complexity: 'O(n log n) time for n points, from the sort. The visualization caps input at 12 points.',
   examples: [
-    { label: 'Own case 1', input: '{"points":[[3,2],[3,3],[4,4]],"angle":91,"location":[2,2]}' },
+    { label: 'Angle of forty-five', input: '{"points":[[1,4],[-2,3],[5,-1]],"angle":45,"location":[0,2]}' },
     { label: 'On the viewer', input: '{"points":[[1,1],[2,2],[1,1]],"angle":0,"location":[1,1]}' },
     { label: "Single point", input: "{\"points\":[[1,0]],\"angle\":0,\"location\":[0,0]}" },
     { label: "Point at the viewer", input: "{\"points\":[[0,0],[1,1]],\"angle\":90,\"location\":[0,0]}" },

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-sum-of-subsequence-powers/',
   complexity: 'O(D * k * n^2) time, where D is the number of distinct gaps. The visualization caps n at 10.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,3,4,5],"k":4}' },
-    { label: 'Own case 2', input: '{"nums":[5,4,-2],"k":3}' },
+    { label: 'Mixed signs, k three', input: '{"nums":[-7,12,3,-9,20],"k":3}' },
+    { label: 'Eight values, k two', input: '{"nums":[8,-8,8,-1,0,6,-6,4],"k":2}' },
     { label: "Two values", input: "{\"nums\":[1,2],\"k\":2}" },
     { label: "Equal values", input: "{\"nums\":[3,3,3,3],\"k\":2}" },
     { label: "Negative values", input: "{\"nums\":[-1,-2,-3],\"k\":2}" },

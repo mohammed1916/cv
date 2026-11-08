@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-closest-node-to-given-two-nodes/',
   complexity: 'O(n) time and O(n) space, since each node has one outgoing edge.',
   examples: [
-    { label: 'Example 1', input: '{"edges": [2,2,3,-1], "first": 0, "second": 1}' },
-    { label: 'Example 2', input: '{"edges": [1,2,-1], "first": 0, "second": 2}' },
+    { label: 'Own: four nodes, starts 2 and 3', input: '{"edges": [1,3,0,-1], "first": 2, "second": 3}' },
+    { label: 'Own: four nodes, starts 1 and 3', input: '{"edges": [3,-1,1,2], "first": 1, "second": 3}' },
     { label: 'Two nodes in a chain', input: '{"edges":[1,-1],"first":0,"second":1}' },
     { label: 'No shared node', input: '{"edges":[1,0,-1,-1],"first":2,"second":3}' },
     { label: 'Same start node', input: '{"edges":[1,2,0],"first":0,"second":0}' },

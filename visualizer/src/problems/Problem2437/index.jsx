@@ -16,8 +16,8 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-valid-clock-times/',
   complexity: 'O(1) time, since the search covers 24 hours and 60 minutes.',
   examples: [
-    { label: 'Example 1', input: '{"time":"?5:00"}' },
-    { label: 'Example 2', input: '{"time":"0?:0?"}' },
+    { label: 'Own: 1?:4?', input: '{"time":"1?:4?"}' },
+    { label: 'Own: ??:3?', input: '{"time":"??:3?"}' },
     { label: 'All unknown', input: '{"time":"??:??"}' },
     { label: 'Equal digits', input: '{"time":"11:11"}' },
     { label: 'Largest time', input: '{"time":"23:59"}' },

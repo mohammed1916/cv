@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-operations-to-make-array-equal-ii/',
   complexity: 'O(n) time and O(n) space. The visualization caps the arrays at ten entries.',
   examples: [
-    { label: 'Own case 1', input: '{"nums1":[5,4,2,5],"nums2":[2,4,8,2],"k":4}' },
-    { label: 'Own case 2', input: '{"nums1":[4,9,6,3],"nums2":[3,5,2,7],"k":2}' },
+    { label: 'Five pairs, k three', input: '{"nums1":[7,1,3,8,2],"nums2":[4,6,2,9,5],"k":3}' },
+    { label: 'Repeated values in one list', input: '{"nums1":[12,12,12],"nums2":[1,30,2],"k":1}' },
     { label: 'Single pair', input: '{"nums1":[1],"nums2":[30],"k":1}' },
     { label: 'Equal values', input: '{"nums1":[2,2],"nums2":[2,2],"k":2}' },
     { label: 'Alternating extremes, five picks', input: '{"nums1":[30,1,30,1,30,1,30,1,30,1],"nums2":[1,30,1,30,1,30,1,30,1,30],"k":5}' },

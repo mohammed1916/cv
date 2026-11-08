@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-xor-after-operations/',
   complexity: 'O(n) time and O(1) extra space.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[3,2,4,6]}' },
-    { label: 'Example 2', input: '{"nums":[1,2,3,9,2]}' },
+    { label: 'Own: three values with zero', input: '{"nums":[0,15,7]}' },
+    { label: 'Own: six values with repeats', input: '{"nums":[4,4,12,0,1,8]}' },
     { label: 'Single value', input: '{"nums":[7]}' },
     { label: 'Single zero', input: '{"nums":[0]}' },
     { label: 'Equal values', input: '{"nums":[5,5,5]}' },

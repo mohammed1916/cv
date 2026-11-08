@@ -15,9 +15,9 @@ const definition = {
   url: 'https://leetcode.com/problems/smallest-palindromic-rearrangement-ii/',
   complexity: 'O(n * 26) block counts with big integers. The visualization caps s at 60 letters.',
   examples: [
-    { label: 'Own case 1', input: '{"s":"bccb","k":3}' },
-    { label: 'Own case 2', input: '{"s":"bb","k":3}' },
-    { label: 'Own case 3', input: '{"s":"cbdbc","k":2}' },
+    { label: 'Five letters, k three', input: '{"s":"lovol","k":3}' },
+    { label: 'Four letters, k five', input: '{"s":"mnnm","k":5}' },
+    { label: 'Seven letters, k two', input: '{"s":"ppqqqpp","k":2}' },
     { label: 'Single letter with k 1', input: '{"s":"a","k":1}' },
     { label: 'Equal letters tie', input: '{"s":"aaaa","k":2}' },
     { label: 'Largest k with 60 letters', input: '{"s":"zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz","k":1000000}' },

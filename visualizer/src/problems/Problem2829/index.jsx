@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/determine-the-minimum-sum-of-a-k-avoiding-array/',
   complexity: 'O(n * k) with the simple membership test. The visualization caps n at 20.',
   examples: [
-    { label: 'Own case 1', input: '{"n":6,"k":5}' },
-    { label: 'Own case 2', input: '{"n":3,"k":7}' },
+    { label: 'Eight, k of three', input: '{"n":8,"k":3}' },
+    { label: 'Single position', input: '{"n":1,"k":1}' },
     { label: "Single item", input: "{\"n\":1,\"k\":1}" },
     { label: "Equal split", input: "{\"n\":4,\"k\":4}" },
     { label: "Largest n and k", input: "{\"n\":20,\"k\":40}" },

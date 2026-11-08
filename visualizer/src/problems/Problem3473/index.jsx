@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/sum-of-k-subarrays-with-length-at-least-m/',
   complexity: 'O(k * n^2) time with this direct DP. The visualization caps nums at 12 elements.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[4,3,3,-1,2,1],"k":2,"m":2}' },
-    { label: 'Own case 2', input: '{"nums":[-2,-1,3,-10],"k":4,"m":1}' },
+    { label: 'Five values, m two', input: '{"nums":[120,-40,75,-9,300],"k":2,"m":2}' },
+    { label: 'Six values, m three', input: '{"nums":[-500,-250,1000,40,-7,88],"k":2,"m":3}' },
     { label: 'Single element with m 1', input: '{"nums":[5],"k":1,"m":1}' },
     { label: 'Equal values with m 2', input: '{"nums":[2,2,2,2],"k":2,"m":2}' },
     { label: 'Extreme values with m 3', input: '{"nums":[10000,-10000,10000,-10000,10000,-10000],"k":2,"m":3}' },

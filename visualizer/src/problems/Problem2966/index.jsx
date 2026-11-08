@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/divide-array-into-arrays-with-max-difference/',
   complexity: 'O(n log n) for the sort and one linear pass over the sorted values.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,4,5,9,8,10,4,6,2],"k":3}' },
+    { label: 'Nine values, k of four', input: '{"nums":[6,1,9,3,8,2,4,7,5],"k":4}' },
     { label: 'Example 2', input: '{"nums":[1,3,3,2,7,3],"k":3}' },
     { label: 'Smallest three', input: '{"nums":[1,1,1],"k":0}' },
     { label: 'Equal values', input: '{"nums":[4,4,4,4,4,4],"k":0}' },

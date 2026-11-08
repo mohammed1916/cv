@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-removals-to-achieve-target-xor/',
   complexity: 'O(n * X) time where X is the number of distinct XOR values reached. The visualization caps input at 14 values.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,3,4],"target":3}' },
+    { label: 'Five values, target thirteen', input: '{"nums":[7,2,9,4,6],"target":13}' },
     { label: 'Unreachable', input: '{"nums":[2,4],"target":1}' },
     { label: 'Already equal', input: '{"nums":[7],"target":7}' },
     { label: 'Single zero', input: '{"nums":[0],"target":0}' },

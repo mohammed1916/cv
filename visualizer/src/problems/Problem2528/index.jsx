@@ -16,8 +16,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximize-the-minimum-powered-city/',
   complexity: 'O(n log(sum + k)) time. The visualization caps input at 6 cities.',
   examples: [
-    { label: 'Own case 1', input: '{"stations":[0,5,4,2,1],"r":1,"k":2}' },
-    { label: 'Own case 2', input: '{"stations":[5,5,5,5],"r":1,"k":4}' },
+    { label: 'Six cities, one range step', input: '{"stations":[3,0,2,4,1,5],"r":1,"k":3}' },
+    { label: 'No range (r = 0)', input: '{"stations":[1,2,0,3],"r":0,"k":2}' },
     { label: 'Single city, no extra', input: '{"stations":[3],"r":0,"k":0}' },
     { label: 'Equal stations', input: '{"stations":[2,2,2],"r":1,"k":1}' },
     { label: 'Largest values', input: '{"stations":[5,0,5,0,5,0],"r":2,"k":4}' },

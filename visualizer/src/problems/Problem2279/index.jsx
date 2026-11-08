@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-bags-with-full-capacity-of-rocks/',
   complexity: 'O(n log n) time for n bags. The visualization caps bags at 12.',
   examples: [
-    { label: 'Example 1', input: '{"capacity":[2,3,4,5],"rocks":[1,2,4,4],"additional_rocks":2}' },
-    { label: 'Example 2', input: '{"capacity":[10,2,2],"rocks":[2,2,0],"additional_rocks":100}' },
+    { label: 'Own: three bags, two extra rocks', input: '{"capacity":[6,4,9],"rocks":[2,4,1],"additional_rocks":5}' },
+    { label: 'Own: two bags, ample rocks', input: '{"capacity":[7,3],"rocks":[0,1],"additional_rocks":3}' },
     { label: 'Single bag', input: '{"capacity":[3],"rocks":[0],"additional_rocks":3}' },
     { label: 'No extra rocks, equal bags', input: '{"capacity":[2,2],"rocks":[1,1],"additional_rocks":0}' },
     { label: 'Twelve large bags', input: '{"capacity":[100,100,100,100,100,100,100,100,100,100,100,100],"rocks":[0,0,0,0,0,0,0,0,0,0,0,0],"additional_rocks":100}' },

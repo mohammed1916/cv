@@ -18,8 +18,8 @@ const definition = {
   url: "https://leetcode.com/problems/find-champion-ii/",
   complexity: "O(n + m) time and O(n) space for n teams and m edges. The visualization caps n at 24 teams.",
   examples: [
-    { label: "Own case 1", input: '{"n":4,"edges":[[1,2],[2,3]]}' },
-    { label: "Own case 2", input: '{"n":5,"edges":[[1,3],[2,4],[2,3]]}' },
+    { label: 'Five teams, two rivalries', input: '{"n":5,"edges":[[0,3],[3,4]]}' },
+    { label: 'Six teams, four rivalries', input: '{"n":6,"edges":[[1,4],[2,5],[0,1],[3,5]]}' },
     { label: 'One team, no edges', input: '{"n":1,"edges":[]}' },
     { label: 'Two separate pairs', input: '{"n":4,"edges":[[0,1],[2,3]]}' },
     { label: 'Path across 24 teams', input: '{"n":24,"edges":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11],[11,12],[12,13],[13,14],[14,15],[15,16],[16,17],[17,18],[18,19],[19,20],[20,21],[21,22],[22,23]]}' },

@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-operations-to-make-array-values-equal-to-k/',
   complexity: 'O(n) time for the checks and the distinct count. The visualization caps the array at 12 numbers.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[6,3,6,5,6],"k":3}' },
+    { label: 'Five values, k five', input: '{"nums":[4,9,2,7,3],"k":5}' },
     { label: 'Example 2', input: '{"nums":[3,1],"k":2}' },
     { label: 'Single number', input: '{"nums":[1],"k":1}' },
     { label: 'Equal values equal k', input: '{"nums":[4,4,4,4],"k":4}' },

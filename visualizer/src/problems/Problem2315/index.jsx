@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-asterisks/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps s at 30 characters.',
   examples: [
-    { label: 'Example 1', input: '{"s":"yo|uar|e**|b|e***au|tifu|l"}' },
+    { label: 'Own: short starred string', input: '{"s":"ab*c|d*|e"}' },
     { label: 'No bars', input: '{"s":"iamprogrammer"}' },
     { label: 'Unpaired bar', input: '{"s":"a*|b*c"}' },
     { label: 'Single letter', input: '{"s":"a"}' },

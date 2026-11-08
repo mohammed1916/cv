@@ -12,7 +12,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-number-of-flips-to-convert-binary-matrix-to-zero-matrix/',
   complexity: 'O(2^(m*n) * m*n) time and space in the worst case. The visualization caps the matrix at 3 by 3.',
   examples: [
-    { label: 'Own case 1', input: '[[0,1],[0,0]]' },
+    { label: 'Three by three board', input: '[[1,1,0],[0,1,1],[1,0,0]]' },
     { label: 'Already zero', input: '[[0]]' },
     { label: 'Example 3', input: '[[1,0,0],[1,0,1],[1,0,0]]' },
     { label: 'Single one', input: '[[1]]' },

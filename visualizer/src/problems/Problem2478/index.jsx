@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-beautiful-partitions/',
   complexity: 'O(n^2 * k) time and O(n * k) space. The visualization caps n at 12, k at 6 and min_length at 6.',
   examples: [
-    { label: 'Example 1', input: '{"s":"23542185131","k":3,"min_length":2}' },
+    { label: 'Own: six digits', input: '{"s":"784963","k":2,"min_length":3}' },
     { label: 'Example 2', input: '{"s":"2468","k":1,"min_length":4}' },
     { label: 'One digit', input: '{"s":"2","k":1,"min_length":1}' },
     { label: 'Equal digits, no prime start', input: '{"s":"1111","k":2,"min_length":1}' },

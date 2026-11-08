@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/move-pieces-to-obtain-a-string/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps strings at 12 characters.',
   examples: [
-    { label: 'Own case 1', input: '{"start":"_L__R__R_","target":"L______RR"}' },
-    { label: 'Own case 2', input: '{"start":"R_L_","target":"__LR"}' },
+    { label: 'Five cells, mixed moves', input: '{"start":"LR__R","target":"_RL__"}' },
+    { label: 'Five cells, two Rs', input: '{"start":"L_RRL","target":"_L_RR"}' },
     { label: 'Single piece in place', input: '{"start":"L","target":"L"}' },
     { label: 'Right piece cannot move left', input: '{"start":"_R","target":"R_"}' },
     { label: 'Blanks only', input: '{"start":"____","target":"____"}' },

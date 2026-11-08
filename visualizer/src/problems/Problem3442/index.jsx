@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-difference-between-even-and-odd-frequency-i/',
   complexity: 'O(n + 26) time and O(1) extra space. The visualization caps input at 30 letters.',
   examples: [
-    { label: 'Own case 1', input: '"bbbbbccd"' },
-    { label: 'Own case 2', input: '"bcdbcdbc"' },
+    { label: 'Odd and even counts', input: '"xxxyzz"' },
+    { label: 'Ten letters, mixed counts', input: '"pqqqqrrsss"' },
     { label: 'Smallest odd and even', input: '"aab"' },
     { label: 'Counts 3 and 2 tie', input: '"aaabb"' },
     { label: 'Longest: 30 letters', input: '"aaaaaaaaaaaaaaaaaaaaaaaaaaabbc"' },

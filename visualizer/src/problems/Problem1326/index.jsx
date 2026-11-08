@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/',
   complexity: 'O(n log n) time for the sort of tap spans. The visualization caps n at 20.',
   examples: [
-    { label: 'Own case 1', input: '{"n":5,"ranges":[0,0,1,1,4,3]}' },
-    { label: 'Example 2', input: '{"n":3,"ranges":[0,0,0,0]}' },
+    { label: 'Six taps', input: '{"n":6,"ranges":[1,0,2,0,3,1,0]}' },
+    { label: 'Own: 2 cells, first is one', input: '{"n":2,"ranges":[1,0,2]}' },
     { label: "Impossible: zero reach", input: "{\"n\":1,\"ranges\":[0,0]}" },
     { label: "Equal ranges", input: "{\"n\":3,\"ranges\":[1,1,1,1]}" },
     { label: "Twenty taps, all reach ten", input: "{\"n\":20,\"ranges\":[10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]}" },

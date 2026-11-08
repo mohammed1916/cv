@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/longest-subarray-with-maximum-bitwise-and/',
   complexity: 'O(n) time and O(1) extra space after finding the maximum.',
   examples: [
-    { label: 'Example', input: '{"nums":[1,2,3,3,2,2]}' },
+    { label: 'Own: five values', input: '{"nums":[6,1,4,4,2]}' },
     { label: 'Ties', input: '{"nums":[5,5,5]}' },
     { label: 'Single value', input: '{"nums":[3]}' },
     { label: 'Alternating values', input: '{"nums":[7,1,7,1,7,1,7]}' },

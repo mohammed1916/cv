@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-array-end/',
   complexity: 'O(log n) time and O(1) space. The visualization caps n and x at 200.',
   examples: [
-    { label: 'Own case 1', input: '{"n":4,"x":5}' },
-    { label: 'Own case 2', input: '{"n":3,"x":8}' },
+    { label: 'Seven items, x three', input: '{"n":7,"x":3}' },
+    { label: 'Twelve items, x twenty', input: '{"n":12,"x":20}' },
     { label: "Single item, single x", input: "{\"n\":1,\"x\":1}" },
     { label: "Equal n and x", input: "{\"n\":2,\"x\":2}" },
     { label: "Largest n and x", input: "{\"n\":200,\"x\":200}" },

@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/count-number-of-distinct-integers-after-reverse-operations/',
   complexity: 'O(n * d) time for n numbers of d digits, and O(n) space. The visualization caps input at 30 numbers.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,13,10,12,31]}' },
-    { label: 'Example 2', input: '{"nums":[2,2,2]}' },
+    { label: 'Own: four values', input: '{"nums":[17,3,22,8]}' },
+    { label: 'Own: two values', input: '{"nums":[5,9]}' },
     { label: 'Single number', input: '{"nums":[1]}' },
     { label: 'Equal values', input: '{"nums":[7,7,7]}' },
     { label: 'Largest values', input: '{"nums":[1000000,1,1000000]}' },

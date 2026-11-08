@@ -18,7 +18,7 @@ const definition = {
   inputLabel: 'Special binary string (JSON)',
   url: 'https://leetcode.com/problems/special-binary-string/',
   complexity: 'O(n^2) worst case time from nested recursion and sorting; the visualization caps n at 60.',
-  examples: [{ label: 'Example 1', input: '"11011000"' }, { label: 'Example 2', input: '"10"' }, { label: 'Several pieces', input: '"1010110100"' }, { label: 'Nested pair', input: '"1100"' }, { label: 'Three deep', input: '"111000"' }, { label: 'Long run: 58 characters', input: '"1101010101010101010101010101010101010101010101010101010100"' }],
+  examples: [{ label: 'Own: 10 then 1100', input: '"101100"' }, { label: 'Own: three ones, three zeros', input: '"111000"' }, { label: 'Several pieces', input: '"1010110100"' }, { label: 'Nested pair', input: '"1100"' }, { label: 'Three deep', input: '"111000"' }, { label: 'Long run: 58 characters', input: '"1101010101010101010101010101010101010101010101010101010100"' }],
 }
 
 export default function SpecialBinaryString() {

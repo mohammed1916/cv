@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-increasing-paths-in-a-grid/',
   complexity: 'O(m * n) cells with memoization, each checking four neighbours. The visualization caps the grid at 5 by 5.',
   examples: [
-    { label: 'Example 1', input: '{"grid":[[1,1],[3,4]]}' },
+    { label: 'Own: two by three grid', input: '{"grid":[[2,5,1],[4,3,9]]}' },
     { label: 'Column', input: '{"grid":[[1],[2]]}' },
     { label: 'One cell', input: '{"grid":[[5]]}' },
     { label: 'Equal neighbours are not increasing', input: '{"grid":[[2,2],[2,2]]}' },

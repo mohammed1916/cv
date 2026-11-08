@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/steps-to-make-array-non-decreasing/',
   complexity: 'O(n) time and O(n) space with a monotonic stack. The visualization caps the input at 30 values.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[5,3,4,4,7,3,6,11,8,5,11]}' },
-    { label: 'Example 2', input: '{"nums":[4,5,7,7,13]}' },
+    { label: 'Own: six values', input: '{"nums":[9,12,2,15,2,8]}' },
+    { label: 'Own: three values', input: '{"nums":[20,1,6]}' },
     { label: 'Single value', input: '{"nums":[9]}' },
     { label: 'Equal values', input: '{"nums":[4,4,4,4]}' },
     { label: 'Thirty values, extremes', input: '{"nums":[100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1]}' },

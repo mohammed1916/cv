@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/longest-cycle-in-a-graph/',
   complexity: 'O(n) time and O(n) space, since each node is marked once.',
   examples: [
-    { label: 'Example 1', input: '{"edges":[3,3,4,2,3]}' },
-    { label: 'Example 2', input: '{"edges":[2,-1,3,1]}' },
+    { label: 'Own: five nodes, one sink', input: '{"edges":[1,2,-1,4,0]}' },
+    { label: 'Own: five nodes, two sinks', input: '{"edges":[4,0,-1,2,1]}' },
     { label: 'One node, no edge', input: '{"edges":[-1]}' },
     { label: 'Self loop', input: '{"edges":[0]}' },
     { label: 'Two-node cycle', input: '{"edges":[1,0]}' },

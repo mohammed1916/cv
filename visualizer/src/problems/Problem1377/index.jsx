@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.doocs.org/en/lc/1377/',
   complexity: 'O(n) time and O(n) space for the breadth-first search.',
   examples: [
-    { label: 'Own case 1', input: '{"n":7,"edges":[[3,5],[2,6],[2,4],[1,7],[1,3],[1,2]],"t":2,"target":4}' },
-    { label: 'Own case 2', input: '{"n":7,"edges":[[3,5],[2,6],[2,4],[1,7],[1,3],[1,2]],"t":1,"target":7}' },
+    { label: 'Five-vertex tree, three seconds', input: '{"n":5,"edges":[[1,2],[1,3],[3,4],[3,5]],"t":3,"target":5}' },
+    { label: 'Branch below vertex two', input: '{"n":6,"edges":[[1,2],[2,3],[2,4],[4,5],[4,6]],"t":1,"target":5}' },
     { label: "Single vertex", input: "{\"n\":1,\"edges\":[],\"t\":1,\"target\":1}" },
     { label: "Equal branches share the frog", input: "{\"n\":3,\"edges\":[[1,2],[1,3]],\"t\":1,\"target\":2}" },
     { label: "Chain of twenty at the limit", input: "{\"n\":20,\"edges\":[[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11],[11,12],[12,13],[13,14],[14,15],[15,16],[16,17],[17,18],[18,19],[19,20]],\"t\":20,\"target\":20}" },

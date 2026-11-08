@@ -16,8 +16,8 @@ const definition = {
   url: 'https://leetcode.com/problems/shortest-path-to-get-all-keys/',
   complexity: 'O(m * n * 2^k) states, each with 4 moves; k up to 6 keys.',
   examples: [
-    { label: 'Own case 1', input: '["b.A.B","###.#","@.a.."]' },
-    { label: 'Own case 2', input: '["....b","..B#.","@..aA"]' },
+    { label: 'Two keys, two locks', input: '["@.a.#","###.#","b.A.B"]' },
+    { label: 'Single key behind lock', input: '["@..a","#.#.","..A."]' },
     { label: 'Unreachable', input: '["@Aa"]' },
     { label: 'Two keys, no locks', input: '["@.a",".#.","b.."]' },
     { label: 'Start beside one key', input: '["@a"]' },

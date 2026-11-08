@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximize-palindrome-length-from-subsequences/',
   complexity: 'O(L^2) time and space for L = |word1| + |word2|. The visualization caps each word at 6 letters.',
   examples: [
-    { label: 'Own case 1', input: '{"word1":"dbdc","word2":"dccb"}' },
-    { label: 'Own case 2', input: '{"word1":"bc","word2":"bc"}' },
+    { label: 'Different lengths', input: '{"word1":"tiger","word2":"owl"}' },
+    { label: 'Identical words', input: '{"word1":"ray","word2":"ray"}' },
     { label: 'No pair', input: '{"word1":"aa","word2":"bb"}' },
   { label: 'Single letters', input: "{\"word1\":\"a\",\"word2\":\"a\"}" },
   { label: 'Single letter mismatch', input: "{\"word1\":\"a\",\"word2\":\"b\"}" },

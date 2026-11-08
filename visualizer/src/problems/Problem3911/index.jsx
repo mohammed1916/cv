@@ -16,8 +16,8 @@ const definition = {
   url: 'https://leetcode.com/problems/k-th-smallest-remaining-even-integer-in-subarray-queries/',
   complexity: 'O(length of each subarray) per query after the sorted input. The visualization caps nums at 8 entries.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,4,7],"queries":[[0,2,1],[1,1,2],[0,0,3]]}' },
-    { label: 'Example 2', input: '{"nums":[2,5,8],"queries":[[0,1,2],[1,2,1],[0,2,4]]}' },
+    { label: 'Own: four increasing values', input: '{"nums":[2,5,9,14],"queries":[[0,3,2],[1,2,1]]}' },
+    { label: 'Own: three values, k 3 and 5', input: '{"nums":[3,6,20],"queries":[[0,2,3],[1,1,5]]}' },
     { label: 'Single value', input: '{"nums":[5],"queries":[[0,0,1]]}' },
     { label: 'Repeated query', input: '{"nums":[1,3,7],"queries":[[0,2,2],[0,2,2]]}' },
     { label: 'Largest values and k', input: '{"nums":[1,20,40,60],"queries":[[0,3,20],[3,3,1]]}' },

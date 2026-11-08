@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-arithmetic-triplets/',
   complexity: 'O(n) time and O(n) space with a hash set. The visualization caps input at 20 numbers.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[1,2,5,7,8,11],"diff":4}' },
-    { label: 'Own case 2', input: '{"nums":[5,6,7,8,9,10],"diff":3}' },
+    { label: 'Six numbers, diff 5', input: '{"nums":[0,3,4,9,15,22],"diff":5}' },
+    { label: 'Seven numbers, diff 2', input: '{"nums":[2,5,8,11,14,17,20],"diff":2}' },
     { label: 'Shortest sequence', input: '{"nums":[0,5,10],"diff":5}' },
     { label: 'Every gap equals diff', input: '{"nums":[1,3,5,7,9,11],"diff":2}' },
     { label: 'Largest value and diff', input: '{"nums":[0,20,200],"diff":20}' },

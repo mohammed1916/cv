@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-xor-product/',
   complexity: 'O(n) time. The product is computed with exact integers before the modulus.',
   examples: [
-    { label: 'Own case 1', input: '{"a":13,"b":6,"n":5}' },
-    { label: 'Own case 2', input: '{"a":7,"b":8,"n":6}' },
+    { label: 'Three steps from 11 and 4', input: '{"a":11,"b":4,"n":3}' },
+    { label: 'Six steps, larger second value', input: '{"a":9,"b":15,"n":6}' },
     { label: 'Single bit', input: '{"a":0,"b":0,"n":1}' },
     { label: 'Equal inputs', input: '{"a":5,"b":5,"n":3}' },
     { label: 'Upper limits', input: '{"a":255,"b":255,"n":8}' },

@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-replacements-to-sort-the-array/',
   complexity: 'O(n) time for n values. The visualization caps values at 12.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[3,9,3]}' },
+    { label: 'Own: five values', input: '{"nums":[7,2,8,2,5]}' },
     { label: 'Sorted', input: '{"nums":[1,2,3,4,5]}' },
     { label: 'Single value', input: '{"nums":[42]}' },
     { label: 'Repeated values', input: '{"nums":[7,3,7,3,7]}' },

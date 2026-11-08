@@ -16,9 +16,9 @@ const definition = {
   url: 'https://leetcode.com/problems/shortest-bridge/',
   complexity: 'O(n^2) time and space. The visualization caps the grid at 12x12.',
   examples: [
-    { label: 'Example 1', input: '[[0,1],[1,0]]' },
-    { label: 'Own case 2', input: '[[0,0,1],[0,0,0],[0,1,0]]' },
-    { label: 'Example 3', input: '[[1,1,1,1,1],[1,0,0,0,1],[1,0,1,0,1],[1,0,0,0,1],[1,1,1,1,1]]' },
+    { label: 'Own: two single cells', input: '[[1,0,0],[0,0,1]]' },
+    { label: 'Two domino islands', input: '[[1,1,0],[0,0,0],[0,1,1]]' },
+    { label: 'Own: two L shapes', input: '[[1,1,0,0],[1,0,0,1],[0,0,1,1]]' },
     { label: 'Two diagonal cells', input: '[[1,0],[0,1]]' },
     { label: 'Two equal squares', input: '[[1,1,0,0],[1,1,0,0],[0,0,1,1],[0,0,1,1]]' },
     { label: 'Two corner cells', input: '[[1,0,0],[0,0,0],[0,0,1]]' },

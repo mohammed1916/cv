@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/final-array-state-after-k-multiplication-operations-i/',
   complexity: 'O(k * n) time with a linear scan per operation. The visualization caps input at 8 numbers and 10 operations.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[3,2,4,6,7],"k":6,"multiplier":3}' },
-    { label: 'Own case 2', input: '{"nums":[2,3],"k":4,"multiplier":5}' },
+    { label: 'Mixed values, small k', input: '{"nums":[5,1,9,4],"k":2,"multiplier":4}' },
+    { label: 'Pair with large step', input: '{"nums":[12,7],"k":3,"multiplier":2}' },
     { label: 'Single number', input: '{"nums":[1],"k":1,"multiplier":1}' },
     { label: 'Equal values tie', input: '{"nums":[3,3,3],"k":2,"multiplier":2}' },
     { label: 'Largest values and multiplier', input: '{"nums":[20,20,20,20,20,20,20,20],"k":10,"multiplier":5}' },

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/check-if-dfs-strings-are-palindromes/',
   complexity: 'O(n^2) time in this trace, since each node string is rebuilt. The visualization caps input at 10 nodes.',
   examples: [
-    { label: 'Example 1', input: '{"parent":[-1,0,0,1,1,2],"s":"aababa"}' },
-    { label: 'Example 2', input: '{"parent":[-1,0,0,0,0],"s":"aabcb"}' },
+    { label: 'Own: tree of six nodes', input: '{"parent":[-1,0,1,1,2,4],"s":"bacdeb"}' },
+    { label: 'Own: four nodes, two levels', input: '{"parent":[-1,0,0,2],"s":"zzyx"}' },
     { label: 'Single node', input: '{"parent":[-1],"s":"a"}' },
     { label: 'Equal letters', input: '{"parent":[-1,0,0],"s":"aaa"}' },
     { label: 'Longest chain, 10 nodes', input: '{"parent":[-1,0,1,2,3,4,5,6,7,8],"s":"abcdeabcde"}' },

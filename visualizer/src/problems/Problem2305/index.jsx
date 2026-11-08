@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/fair-distribution-of-cookies/',
   complexity: 'O(k^n) worst case for n bags and k children, pruned by the best answer so far. The visualization caps n at 8 and k at 4.',
   examples: [
-    { label: 'Own case 1', input: '{"cookies":[9,16,11,21,9],"k":3}' },
-    { label: 'Own case 2', input: '{"cookies":[7,2,4,3,3,5,2,3],"k":4}' },
+    { label: 'Five bags, k 3', input: '{"cookies":[6,12,4,9,5],"k":3}' },
+    { label: 'Eight bags, k 4', input: '{"cookies":[8,3,7,2,6,1,5,4],"k":4}' },
     { label: 'Two bags, equal sizes', input: '{"cookies":[3,3],"k":2}' },
     { label: 'All bags equal', input: '{"cookies":[5,5,5,5],"k":4}' },
     { label: 'Eight bags, extreme sizes', input: '{"cookies":[50,1,50,1,50,1,50,1],"k":4}' },

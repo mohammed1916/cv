@@ -19,8 +19,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-eventual-safe-states/',
   complexity: 'O(V + E) time and space with the reversed-graph topological peel.',
   examples: [
-    { label: 'Own case 1', input: '[[2,3],[3,4],[6],[1],[6],[],[]]' },
-    { label: 'Own case 2', input: '[[],[0,4],[3,4],[1,2],[1,2,3,4]]' },
+    { label: 'Cycle among four nodes', input: '[[1],[2,3],[],[0,2]]' },
+    { label: 'Two acyclic chains', input: '[[1,2],[2],[],[4],[5],[]]' },
     { label: 'Self loop', input: '[[0],[0,2],[]]' }, { label: 'Single node', input: '[[]]' }, { label: 'Two-node cycle', input: '[[1],[0]]' }, { label: 'Long run: 24 nodes', input: '[[11],[7,6],[16,12],[],[],[6,8],[23],[],[0],[],[],[],[5,16],[19],[],[],[9,10,21],[21],[],[10,5,15],[],[5,15],[5],[]]' },
   ],
 }

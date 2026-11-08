@@ -69,7 +69,15 @@ export async function* streamProviderChat(messages, config = getChatProvider()) 
     return
   }
 
-  yield* streamHostedProxy(messages, config)
+  if (config.provider === 'ollama-cloud') {
+    yield* streamOllamaCloud(messages, config)
+    return
+  }
+  if (config.provider === 'gemini') {
+    yield* streamGemini(messages, config)
+    return
+  }
+  throw new Error(`Unknown AI provider: ${config.provider}`)
 }
 
 export function canUseLocalOllama() {
@@ -119,6 +127,7 @@ async function* streamLocalOllama(messages, config) {
     const detail = (await response.text()).trim()
     throw new Error(detail || `Ollama Local returned ${response.status}`)
   }
+  assertNotHtmlResponse(response)
   if (!response.body) throw new Error('Ollama Local did not return a streaming response.')
 
   const reader = response.body.getReader()
@@ -148,33 +157,66 @@ async function* streamLocalOllama(messages, config) {
   }
 }
 
-async function* streamHostedProxy(messages, config) {
-  const body = {
-    provider: config.provider,
-    model: config.model || defaultChatModel(config.provider),
-    ollamaApiKey: config.ollamaApiKey || '',
-    geminiApiKey: config.geminiApiKey || '',
-    messages,
-  }
-  const response = await fetch('/api/chat', {
-    signal: config.signal,
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: assertSmallRequest(body),
-  })
-  if (!response.ok) {
-    const detail = (await response.text()).trim()
-    throw new Error(detail || `AI proxy returned ${response.status}`)
-  }
-  if (!response.body) throw new Error('AI proxy did not return a streaming response.')
+export const OLLAMA_CLOUD_URL = 'https://ollama.com'
+export const GEMINI_API_URL = 'https://generativelanguage.googleapis.com'
 
+const HTML_ENDPOINT_MESSAGE =
+  'The hosted AI endpoint is not configured: the site answered with a web page instead of a chat response. '
+  + 'Use Ollama Local on this computer, or choose Ollama Cloud or Gemini and enter your own API key.'
+
+export function isHtmlResponseText(text) {
+  return /^\s*(<!doctype\s+html|<html[\s>])/i.test(String(text || ''))
+}
+
+export function isHtmlContentType(contentType) {
+  return /text\/html/i.test(String(contentType || ''))
+}
+
+function assertNotHtmlResponse(response) {
+  if (isHtmlContentType(response.headers?.get?.('content-type'))) {
+    throw new Error(HTML_ENDPOINT_MESSAGE)
+  }
+}
+
+function networkError(providerLabel, error) {
+  return new Error(
+    `Could not reach ${providerLabel} from this browser. The request was blocked or the network failed. `
+    + 'Use Ollama Local on this computer, or try a key from a provider that allows browser requests. '
+    + `Original error: ${error?.message || 'fetch failed'}`,
+    { cause: error },
+  )
+}
+
+async function readErrorDetail(response, fallback) {
+  const raw = (await response.text().catch(() => '')).trim()
+  if (!raw) return fallback
+  if (isHtmlContentType(response.headers?.get?.('content-type')) || isHtmlResponseText(raw)) {
+    throw new Error(HTML_ENDPOINT_MESSAGE)
+  }
+  try {
+    const json = JSON.parse(raw)
+    return String(json?.error?.message || json?.error || fallback)
+  } catch {
+    return raw.slice(0, 500)
+  }
+}
+
+// Reads a newline-delimited or SSE ("data:") stream and yields text deltas.
+// `extractDelta` maps one parsed JSON event to its text.
+async function* readEventStream(response, extractDelta) {
+  if (!response.body) throw new Error('The AI service did not return a streaming response.')
   const reader = response.body.getReader()
   const decoder = new TextDecoder()
   let buffer = ''
+  let checkedHead = false
   while (true) {
     const { done, value } = await reader.read()
     if (done) buffer += decoder.decode() + '\n'
     else buffer += decoder.decode(value, { stream: true })
+    if (!checkedHead && buffer.trim()) {
+      checkedHead = true
+      if (isHtmlResponseText(buffer)) throw new Error(HTML_ENDPOINT_MESSAGE)
+    }
     const lines = buffer.split('\n')
     buffer = lines.pop()
     for (const line of lines) {
@@ -184,16 +226,110 @@ async function* streamHostedProxy(messages, config) {
       try {
         json = JSON.parse(text)
       } catch {
-        yield text
+        // Wait for a complete event.
         continue
       }
-      if (json?.error) throw new Error(String(json.error))
-      const delta = json?.message?.content
-        || json?.response
-        || json?.candidates?.[0]?.content?.parts?.[0]?.text
-        || ''
+      if (json?.error) throw new Error(String(json.error?.message || json.error))
+      const delta = extractDelta(json)
       if (delta) yield delta
     }
     if (done) break
   }
+}
+
+function requireApiKey(config, label) {
+  const key = String(config.ollamaApiKey || config.geminiApiKey || '').trim()
+  if (!key) {
+    throw new Error(`Enter your ${label} API key in the AI connection settings before sending a message.`)
+  }
+  return key
+}
+
+export function buildOllamaCloudRequest(messages, config) {
+  const key = requireApiKey(
+    { ollamaApiKey: config.ollamaApiKey },
+    'Ollama Cloud',
+  )
+  const body = {
+    model: config.model || defaultChatModel('ollama-cloud'),
+    stream: true,
+    messages: messages.map((message) => ({
+      role: message.role,
+      content: message.text,
+    })),
+  }
+  return {
+    url: `${OLLAMA_CLOUD_URL}/api/chat`,
+    init: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${key}`,
+      },
+      body: assertSmallRequest(body),
+    },
+  }
+}
+
+export function buildGeminiRequest(messages, config) {
+  const key = requireApiKey({ geminiApiKey: config.geminiApiKey }, 'Gemini')
+  const model = config.model || defaultChatModel('gemini')
+  const systemText = messages
+    .filter((message) => message.role === 'system')
+    .map((message) => message.text)
+    .join('\n\n')
+  const body = {
+    contents: messages
+      .filter((message) => message.role !== 'system')
+      .map((message) => ({
+        role: message.role === 'assistant' || message.role === 'model' ? 'model' : 'user',
+        parts: [{ text: String(message.text ?? '') }],
+      })),
+    ...(systemText ? { systemInstruction: { parts: [{ text: systemText }] } } : {}),
+  }
+  return {
+    url: `${GEMINI_API_URL}/v1beta/models/${encodeURIComponent(model)}:streamGenerateContent?alt=sse`,
+    init: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-goog-api-key': key,
+      },
+      body: assertSmallRequest(body),
+    },
+  }
+}
+
+async function* streamOllamaCloud(messages, config) {
+  const request = buildOllamaCloudRequest(messages, config)
+  let response
+  try {
+    response = await fetch(request.url, { ...request.init, signal: config.signal })
+  } catch (error) {
+    if (error?.name === 'AbortError') throw error
+    throw networkError('Ollama Cloud', error)
+  }
+  if (!response.ok) {
+    throw new Error(await readErrorDetail(response, `Ollama Cloud returned ${response.status}. Check the API key.`))
+  }
+  assertNotHtmlResponse(response)
+  yield* readEventStream(response, (json) => json?.message?.content || json?.response || '')
+}
+
+async function* streamGemini(messages, config) {
+  const request = buildGeminiRequest(messages, config)
+  let response
+  try {
+    response = await fetch(request.url, { ...request.init, signal: config.signal })
+  } catch (error) {
+    if (error?.name === 'AbortError') throw error
+    throw networkError('Gemini', error)
+  }
+  if (!response.ok) {
+    throw new Error(await readErrorDetail(response, `Gemini returned ${response.status}. Check the API key and model name.`))
+  }
+  assertNotHtmlResponse(response)
+  yield* readEventStream(response, (json) => (json?.candidates?.[0]?.content?.parts || [])
+    .map((part) => part?.text || '')
+    .join(''))
 }

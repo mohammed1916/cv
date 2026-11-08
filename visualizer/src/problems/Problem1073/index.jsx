@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/adding-two-negabinary-numbers/',
   complexity: 'O(max(m, n)) time and space. The visualization caps each array at 30 digits.',
   examples: [
-    { label: 'Example 1', input: '{"arr1":[1,1,1,1,1],"arr2":[1,0,1]}' },
+    { label: 'Own: 1001 plus 11', input: '{"arr1":[1,0,0,1],"arr2":[1,1]}' },
     { label: 'Zero', input: '{"arr1":[0],"arr2":[0]}' },
     { label: 'Single digit', input: '{"arr1":[1],"arr2":[0]}' },
     { label: 'Zero value', input: '{"arr1":[0],"arr2":[0]}' },

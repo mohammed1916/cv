@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-beautiful-numbers/',
   complexity: 'O(d * S * P) states per bound for d digits, digit sum S and digit product P, memoized. The visualization caps r at 10000.',
   examples: [
-    { label: 'Own case 1', input: '{"l":11,"r":21}' },
+    { label: 'Fourteen to twenty-nine', input: '{"l":14,"r":29}' },
     { label: 'Single digits', input: '{"l":1,"r":15}' },
     { label: 'Single position', input: '{"l":7,"r":7}' },
     { label: 'Shortest range at the top', input: '{"l":10000,"r":10000}' },

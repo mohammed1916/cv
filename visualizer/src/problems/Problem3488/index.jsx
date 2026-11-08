@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/closest-equal-element-queries/',
   complexity: 'O(n + q times k) time for n values, q queries and k equal values. The visualization caps input at 10 values and 10 queries.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,4,2,5,2,4,3],"queries":[1,4,6]}' },
+    { label: 'Five values, three queries', input: '{"nums":[4,1,7,7,2],"queries":[0,3,4]}' },
     { label: 'Example 2', input: '{"nums":[1,2,1,2],"queries":[0,1,2,3]}' },
     { label: 'Single element, one query', input: '{"nums":[4],"queries":[0]}' },
     { label: 'Equal values, repeated query', input: '{"nums":[3,3,3],"queries":[2,2,0]}' },

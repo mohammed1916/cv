@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/apply-operations-to-make-string-empty/',
   complexity: 'O(n + 26) time and O(26) space for the scan.',
   examples: [
-    { label: 'Own case 1', input: '"bbcdccdb"' },
-    { label: 'Own case 2', input: '"bcde"' },
+    { label: 'Repeated letters', input: '"ddcbbaad"' },
+    { label: 'Four distinct letters', input: '"mnop"' },
     { label: 'Single letter', input: '"a"' },
     { label: 'Equal counts', input: '"abab"' },
     { label: 'Longest string', input: '"abcdefghijklmnopqrst"' },

@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/count-vowel-strings-in-ranges/',
   complexity: 'O(total length + q) time with prefix counts. The visualization caps words at 12 and queries at 8.',
   examples: [
-    { label: 'Own case 1', input: '{"words":["e","aa","ece","bcb","aba"],"queries":[[1,1],[1,4],[0,2]]}' },
-    { label: 'Own case 2', input: '{"words":["i","e","a"],"queries":[[2,2],[0,1],[0,2]]}' },
+    { label: 'Six words, three ranges', input: '{"words":["sun","moon","star","sea","tide","dune"],"queries":[[0,2],[3,5],[2,4]]}' },
+    { label: 'Two words, two queries', input: '{"words":["oak","pine"],"queries":[[0,1],[1,1]]}' },
     { label: 'Single word', input: '{"words":["a"],"queries":[[0,0]]}' },
     { label: 'Equal words', input: '{"words":["aa","aa","aa"],"queries":[[0,2],[1,1]]}' },
     { label: 'Twelve longest words', input: '{"words":["abcdefghij","abcdefghij","abcdefghij","abcdefghij","abcdefghij","abcdefghij","abcdefghij","abcdefghij","abcdefghij","abcdefghij","abcdefghij","abcdefghij"],"queries":[[0,11],[11,11]]}' },

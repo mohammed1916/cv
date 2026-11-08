@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/split-array-with-same-average/',
   complexity: 'Roughly O(n * n/2 * S) set work where S is the number of distinct sums; the early divisibility filter prunes most sizes.',
   examples: [
-    { label: 'Own case 1', input: '[2,3,4,5,6,7,8,9]' },
-    { label: 'Own case 2', input: '[4,2]' },
+    { label: 'Six mixed values', input: '[7,1,5,3,9,11]' },
+    { label: 'Two values', input: '[6,10]' },
     { label: 'No split (sizes pruned)', input: '[1,2,3,4,5,6,7,8,9]' }, { label: 'Single number', input: '[1]' }, { label: 'All equal values', input: '[2,2,2,2]' }, { label: 'Long run: 24 values', input: '[579,919,754,521,654,457,617,455,807,377,4,405,679,152,315,486,289,167,284,250,685,561,868,439]' },
   ],
 }

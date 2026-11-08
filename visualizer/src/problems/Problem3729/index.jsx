@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/count-distinct-subarrays-divisible-by-k-in-sorted-array/',
   complexity: 'O(d^2 * c^2) time for d runs of counts up to c. The visualization caps the array at 12 values.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,3,4],"k":4}' },
-    { label: 'Own case 2', input: '{"nums":[3,3,3,3,3,3],"k":7}' },
+    { label: 'Five sorted values, k two', input: '{"nums":[1,4,4,9,12],"k":2}' },
+    { label: 'Equal values, k six', input: '{"nums":[6,6,6],"k":6}' },
     { label: 'Single value', input: '{"nums":[5],"k":1}' },
     { label: 'Equal values tie', input: '{"nums":[4,4,4],"k":4}' },
     { label: 'Largest values allowed', input: '{"nums":[1,1000000000],"k":1000000000}' },

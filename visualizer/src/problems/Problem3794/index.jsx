@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/reverse-string-prefix/',
   complexity: 'O(k) time and O(n) space.',
   examples: [
-    { label: 'Own case 1', input: '{"s":"bcde","k":3}' },
-    { label: 'Example 2', input: '{"s":"xyz","k":3}' },
+    { label: 'Seven letters, k three', input: '{"s":"lattice","k":3}' },
+    { label: 'Own: banana, k 2', input: '{"s":"banana","k":2}' },
     { label: "Single letter", input: "{\"s\":\"a\",\"k\":1}" },
     { label: "Equal letters", input: "{\"s\":\"aaaa\",\"k\":2}" },
     { label: "Full length k at 30", input: "{\"s\":\"abcdefghijklmnopqrstuvwxyzabcd\",\"k\":30}" },

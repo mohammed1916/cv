@@ -58,7 +58,7 @@ export function buildTrace({ value, limit }) {
     const killed = [...active, i].filter(j => limit[j] <= newMax)
     maxX = newMax
     const remaining = [...active, i].filter(j => limit[j] > newMax)
-    frames.push({ pythonLine: lineOf(PY_LINES, 'result = max'), phase: 'activate', activeLine: L('activate the element'), index: i, activeSet: remaining, dead: killed, total,
+    frames.push({ pythonLine: lineOf(PY_LINES, 'result = max'), phase: 'activate', activeLine: L('activate it, count'), index: i, activeSet: remaining, dead: killed, total,
       message: `Activate ${i} (value ${value[i]}, limit ${limit[i]}). Active count becomes ${count}; ${killed.length ? `indices ${killed.join(', ')} become inactive for good` : 'nothing is killed'}.` })
     if (activated === (1 << n) - 1) break
   }

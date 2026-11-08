@@ -16,8 +16,8 @@ const definition = {
   url: 'https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/',
   complexity: 'O(n) time and space, one visit per city.',
   examples: [
-    { label: 'Own case 1', input: '{"n":6,"connections":[[4,5],[4,0],[2,3],[1,3],[0,1]]}' },
-    { label: 'Own case 2', input: '{"n":5,"connections":[[3,4],[3,2],[1,2],[1,0]]}' },
+    { label: 'Single path of seven', input: '{"n":7,"connections":[[6,2],[2,4],[4,1],[1,5],[5,0],[0,3]]}' },
+    { label: 'Path with a detour', input: '{"n":4,"connections":[[0,2],[2,3],[3,1]]}' },
     { label: 'Two cities, one road', input: '{"n":2,"connections":[[0,1]]}' },
     { label: 'Star from one city', input: '{"n":4,"connections":[[0,1],[0,2],[0,3]]}' },
     { label: 'Largest: path of 12 cities', input: '{"n":12,"connections":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11]]}' },

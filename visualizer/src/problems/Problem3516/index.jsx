@@ -12,9 +12,9 @@ const definition = {
   url: 'https://leetcode.com/problems/find-closest-person/',
   complexity: 'O(1) time and O(1) space.',
   examples: [
-    { label: 'Own case 1', input: '{"x":3,"y":8,"z":5}' },
-    { label: 'Own case 2', input: '{"x":3,"y":6,"z":7}' },
-    { label: 'Own case 3', input: '{"x":2,"y":6,"z":4}' },
+    { label: 'Three different sizes', input: '{"x":7,"y":42,"z":19}' },
+    { label: 'Extremes and ones', input: '{"x":100,"y":1,"z":1}' },
+    { label: 'Two equal sides', input: '{"x":36,"y":36,"z":12}' },
     { label: 'Smallest values', input: '{"x":1,"y":1,"z":1}' },
     { label: 'Equal values tie', input: '{"x":5,"y":5,"z":5}' },
     { label: 'Largest values', input: '{"x":100,"y":1,"z":100}' },

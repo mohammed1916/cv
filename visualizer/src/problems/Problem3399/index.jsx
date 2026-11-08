@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/smallest-substring-with-identical-characters-ii/',
   complexity: "O(n * L) time for each candidate length L, with binary search over L. This dynamic program is exact but not fast enough for the full 10^5 limit; the visualization caps the input at 10 characters.",
   examples: [
-    { label: 'Example 1', input: '{"s":"000001","numOps":1}' },
-    { label: 'Own case 2', input: '{"s":"1111","numOps":3}' },
+    { label: 'Own: seven bits, three ops', input: '{"s":"0110100","numOps":3}' },
+    { label: 'Five digits, three ops', input: '{"s":"01101","numOps":3}' },
     { label: 'Single digit, no operations', input: '{"s":"1","numOps":0}' },
     { label: 'Equal digits', input: '{"s":"0000","numOps":2}' },
     { label: 'Full length of operations', input: '{"s":"1111111111","numOps":10}' },

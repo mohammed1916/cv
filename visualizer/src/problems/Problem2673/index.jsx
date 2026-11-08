@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/make-costs-of-paths-equal-in-a-binary-tree/',
   complexity: 'O(n) time and O(n) space. The visualization caps the tree at 15 nodes.',
   examples: [
-    { label: 'Own case 1', input: '{"n":7,"cost":[1,3,3,2,2,5,1]}' },
-    { label: 'Own case 2', input: '{"n":3,"cost":[3,3,5]}' },
+    { label: 'Five nodes', input: '{"n":5,"cost":[2,9,4,4,1]}' },
+    { label: 'Nine costs', input: '{"n":9,"cost":[6,1,1,6,3,8,2,2,5]}' },
     { label: 'Smallest odd n, equal costs', input: '{"n":3,"cost":[1,1,1]}' },
     { label: 'Largest cost 9', input: '{"n":5,"cost":[9,9,9,9,9]}' },
     { label: 'Long run: n = 15', input: '{"n":15,"cost":[6,3,9,9,8,9,9,4,9,6,8,6,6,8,1]}' },

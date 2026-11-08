@@ -16,8 +16,8 @@ const definition = {
   url: 'https://leetcode.com/problems/zero-array-transformation-iii/',
   complexity: 'O((n + q) log q) time with a heap. The visualization caps n at 6 and q at 7.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,0,2],"queries":[[1,1],[0,2],[0,2]]}' },
-    { label: 'Own case 2', input: '{"nums":[1,1,1,1],"queries":[[1,2],[1,3],[0,2],[1,3]]}' },
+    { label: 'Four values, three ranges', input: '{"nums":[3,0,4,1],"queries":[[0,1],[2,3],[1,3]]}' },
+    { label: 'Six values, whole range', input: '{"nums":[2,2,0,4,1,3],"queries":[[0,5]]}' },
     { label: 'Single element', input: '{"nums":[0],"queries":[[0,0]]}' },
     { label: 'Equal values, equal ranges', input: '{"nums":[2,2,2],"queries":[[0,2],[0,2],[0,2]]}' },
     { label: 'Largest values, seven queries', input: '{"nums":[4,4,4,4,4,4],"queries":[[0,5],[0,5],[0,5],[0,5],[0,5],[0,5],[0,5]]}' },

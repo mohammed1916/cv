@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/smallest-subarrays-with-maximum-bitwise-or/',
   complexity: 'O(n * b) time and O(b) extra space for b bits. The visualization uses four bits.',
   examples: [
-    { label: 'Example', input: '{"nums":[1,0,2,1,3]}' },
+    { label: 'Own: six values', input: '{"nums":[0,0,5,3,6,1]}' },
     { label: 'Two', input: '{"nums":[1,2]}' },
     { label: 'Single zero', input: '{"nums":[0]}' },
     { label: 'Repeated values', input: '{"nums":[2,2,2,2]}' },

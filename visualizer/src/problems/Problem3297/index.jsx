@@ -14,9 +14,9 @@ const definition = {
   url: 'https://leetcode.com/problems/count-substrings-that-can-be-rearranged-to-contain-a-string-i/',
   complexity: 'O(n^2 * 26) time in the worst case. The visualization caps word1 at 12 letters and word2 at 5.',
   examples: [
-    { label: 'Own case 1', input: '{"word1":"cddb","word2":"bcd"}' },
-    { label: 'Own case 2', input: '{"word1":"bcdbcd","word2":"bcd"}' },
-    { label: 'Own case 3', input: '{"word1":"bcdbcd","word2":"bbbcd"}' },
+    { label: 'Pattern at the end', input: '{"word1":"zpqz","word2":"qz"}' },
+    { label: 'Second word is a prefix', input: '{"word1":"mnopq","word2":"mnop"}' },
+    { label: 'Reverse-order letters', input: '{"word1":"hgfedcba","word2":"hgfe"}' },
     { label: 'Single letter', input: '{"word1":"a","word2":"a"}' },
     { label: 'Repeated letters', input: '{"word1":"aaaaaa","word2":"aa"}' },
     { label: 'Longest word1', input: '{"word1":"abcabcabcabc","word2":"abc"}' },

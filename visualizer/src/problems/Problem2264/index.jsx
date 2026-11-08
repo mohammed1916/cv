@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/largest-3-same-digit-number-in-string/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps input at 30 digits.',
   examples: [
-    { label: 'Example 1', input: '{"num":"6777133339"}' },
+    { label: 'Own: seven digits, no nines', input: '{"num":"5084120"}' },
     { label: 'Zeros', input: '{"num":"2300019"}' },
     { label: 'None', input: '{"num":"42352338"}' },
     { label: 'Shortest input', input: '{"num":"333"}' },

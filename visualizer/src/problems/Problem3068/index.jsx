@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-maximum-sum-of-node-values/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps input at 10 values.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,3,2],"k":4}' },
-    { label: 'Own case 2', input: '{"nums":[3,4],"k":8}' },
+    { label: 'Zero among values', input: '{"nums":[6,0,6,1],"k":3}' },
+    { label: 'Three values, k five', input: '{"nums":[11,7,2],"k":5}' },
     { label: 'Two zeros', input: '{"nums":[0,0],"k":1}' },
     { label: 'Equal values', input: '{"nums":[5,5,5],"k":5}' },
     { label: 'Largest values', input: '{"nums":[50,50,50,50,50,50,50,50,50,50],"k":10}' },

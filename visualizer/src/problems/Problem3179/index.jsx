@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-n-th-value-after-k-seconds/',
   complexity: 'O(n * k) time and O(n) space. The visualization caps n and k at 30.',
   examples: [
-    { label: 'Own case 1', input: '{"n":5,"k":6}' },
-    { label: 'Own case 2', input: '{"n":6,"k":4}' },
+    { label: 'Seven items, twelve steps', input: '{"n":7,"k":12}' },
+    { label: 'Nine items, five steps', input: '{"n":9,"k":5}' },
     { label: "Single item", input: "{\"n\": 1, \"k\": 1}" },
     { label: "Largest n and k", input: "{\"n\": 30, \"k\": 30}" },
     { label: "Long run: 30 with step 7", input: "{\"n\": 30, \"k\": 7}" },

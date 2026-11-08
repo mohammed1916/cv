@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/time-needed-to-inform-all-employees/',
   complexity: 'O(n) time and O(n) space for the manager lists. The visualization caps employees at 12.',
   examples: [
-    { label: 'Example 2', input: '{"n":6,"headID":2,"manager":[2,2,-1,2,2,2],"informTime":[0,0,1,0,0,0]}' },
+    { label: 'Own: chain with a branch', input: '{"n":4,"headID":0,"manager":[-1,0,1,1],"informTime":[2,1,0,3]}' },
     { label: 'Chain', input: '{"n":7,"headID":6,"manager":[1,2,3,4,5,6,-1],"informTime":[0,6,5,4,3,2,1]}' },
     { label: "Single employee", input: "{\"n\":1,\"headID\":0,\"manager\":[-1],\"informTime\":[0]}" },
     { label: "Equal branches tie", input: "{\"n\":3,\"headID\":0,\"manager\":[-1,0,0],\"informTime\":[5,0,0]}" },

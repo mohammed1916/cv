@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares/',
   complexity: 'Backtracking over square sizes at the first empty cell, pruned by the best count. The visualization caps the rectangle at 8 by 8.',
   examples: [
-    { label: 'Own case 1', input: '{"n":3,"m":4}' },
-    { label: 'Example 2', input: '{"n":5,"m":8}' },
+    { label: 'Four by six board', input: '{"n":4,"m":6}' },
+    { label: 'Own: 3 by 7 board', input: '{"n":3,"m":7}' },
     { label: 'Single cell', input: '{\"n\":1,\"m\":1}' },
     { label: 'Square board', input: '{\"n\":3,\"m\":3}' },
     { label: 'Long run: largest board', input: '{\"n\":8,\"m\":8}' },

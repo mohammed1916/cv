@@ -17,8 +17,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-cost-to-hire-k-workers/',
   complexity: 'O(n log n) for the sort plus O(n log k) heap work.',
   examples: [
-    { label: 'Own case 1', input: '{"quality":[11,21,6],"wage":[71,51,31],"k":3}' },
-    { label: 'Own case 2', input: '{"quality":[4,2,11,11,2],"wage":[5,9,3,3,8],"k":4}' },
+    { label: 'Four workers, pick two', input: '{"quality":[10,20,5,8],"wage":[70,40,30,50],"k":2}' },
+    { label: 'Hire all three', input: '{"quality":[3,6,9],"wage":[15,30,45],"k":3}' },
     { label: 'Hire one', input: '{"quality":[4,5,6],"wage":[8,5,18],"k":1}' },
     { label: 'Single worker', input: '{"quality":[1],"wage":[1],"k":1}' },
     { label: 'Equal wage per quality', input: '{"quality":[2,4],"wage":[2,4],"k":2}' },

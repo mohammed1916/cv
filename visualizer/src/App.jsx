@@ -30,7 +30,6 @@ import { useVisualizationContext } from "./context/VisualizationContext";
 import { useChatContext } from "./context/ChatContext";
 import "./components/Chatbot/chatbot.css";
 import VirtualCardGrid from "./components/VirtualCardGrid";
-import { plansHiddenByVisitor, hidePlansForever } from "./access/visitorPrefs";
 
 const ChatDrawer = React.lazy(() => import("./components/Chatbot/ChatDrawer"));
 import "./App.css";
@@ -852,27 +851,33 @@ function HomePage({
             placeholder="Search by number, title, slug, or tag"
           />
 
-          <select
-            className="filter-select"
-            value={difficulty}
-            onChange={(event) => setDifficulty(event.target.value)}
-          >
-            <option>All</option>
-            <option>Easy</option>
-            <option>Medium</option>
-            <option>Hard</option>
-          </select>
-
-          {isLeetCodeTrack || isNeetCode150Track ? (
+          <label className="filter-field">
+            <span className="filter-label">Difficulty</span>
             <select
               className="filter-select"
-              value={status}
-              onChange={(event) => setStatus(event.target.value)}
+              value={difficulty}
+              onChange={(event) => setDifficulty(event.target.value)}
             >
-              <option>All</option>
-              <option>Implemented</option>
-              <option>Catalog Only</option>
+              <option value="All">Any difficulty</option>
+              <option value="Easy">Easy</option>
+              <option value="Medium">Medium</option>
+              <option value="Hard">Hard</option>
             </select>
+          </label>
+
+          {isLeetCodeTrack || isNeetCode150Track ? (
+            <label className="filter-field">
+              <span className="filter-label">Implementation</span>
+              <select
+                className="filter-select"
+                value={status}
+                onChange={(event) => setStatus(event.target.value)}
+              >
+                <option value="All">All problems</option>
+                <option value="Implemented">Visualized</option>
+                <option value="Catalog Only">Catalogue only</option>
+              </select>
+            </label>
           ) : (
             <div className="track-note">
               {isCodeforcesTrack
@@ -937,9 +942,9 @@ export default function App() {
     [navCatalog],
   );
   const [dialog, setDialog] = useState(null);
-  // Pricing opens on each visit until the visitor chooses not to see it again.
+  // Pricing opens on each visit; closing it is enough.
   useEffect(() => {
-    if (!BETA_FREE_ACCESS && !plansHiddenByVisitor()) setDialog("plans");
+    if (!BETA_FREE_ACCESS) setDialog("plans");
   }, []);
   const [tourStep, setTourStep] = useState(null);
   const [lockedTitle, setLockedTitle] = useState("");
@@ -1266,7 +1271,6 @@ export default function App() {
               ) : (
                 <Plans
                   access={access}
-                  onHideForever={() => { hidePlansForever(); setDialog(null); }}
                   reason={
                     lockedTitle
                       ? `${lockedTitle} is included in Pro. Unlock it and every other implemented visualizer.`

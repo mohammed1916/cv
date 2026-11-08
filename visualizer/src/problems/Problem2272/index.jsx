@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/substring-with-largest-variance/',
   complexity: 'O(26 * 26 * n) time. The visualization caps input at 20 letters.',
   examples: [
-    { label: 'Example 1', input: '{"s": "aababbb"}' },
+    { label: 'Own: banana', input: '{"s": "banana"}' },
     { label: 'No variance', input: '{"s": "abcde"}' },
     { label: 'Single letter', input: '{"s":"a"}' },
     { label: 'One letter only', input: '{"s":"aaaa"}' },

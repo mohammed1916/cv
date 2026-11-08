@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/longest-non-decreasing-subarray-after-replacing-at-most-one-element/',
   complexity: 'O(n) time and O(n) space. The visualization caps the array at 14 values.',
   examples: [
-    { label: 'Own case 1', input: '[2,3,4,2,3]' },
+    { label: 'Mixed sign values', input: '[-20,15,0,7]' },
     { label: 'Example 2', input: '[1,3,2,4]' },
     { label: 'Single value', input: '[5]' },
     { label: 'Equal values', input: '[2,2,2]' },

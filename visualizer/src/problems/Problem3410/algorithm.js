@@ -24,7 +24,7 @@ export function buildTrace({ nums }) {
   const candidates = [...new Set(nums)].sort((a, b) => a - b)
   let best = bestSubarray(nums, null)
   let bestRemoved = null
-  frames.push({ pythonLine: P('best = kadane'), phase: 'keep', activeLine: L('let best = kadane'), at: -1, removed: null, window: best, best, message: `Without removing anything, the best subarray sum is ${best.sum}.` })
+  frames.push({ pythonLine: P('best = kadane'), phase: 'keep', activeLine: L('let best = bestSubarray'), at: -1, removed: null, window: best, best, message: `Without removing anything, the best subarray sum is ${best.sum}.` })
   for (const x of candidates) {
     if (nums.every(v => v === x)) continue
     const candidate = bestSubarray(nums, x)

@@ -53,7 +53,7 @@ export function buildTrace({ grid }) {
         const message = res.status === 'ok'
           ? (res.cells.length > 1 ? `${name(dir)} from (${i}, ${j}) meets a mirror and reflects to ${end}.` : `${name(dir)} from (${i}, ${j}) lands on ${end}.`)
           : res.status === 'out' ? `The reflection leaves the grid, so this move is invalid.` : `${name(dir)} from (${i}, ${j}) leaves the grid.`
-        frames.push({ phase, ways: snap(), at: [i, j], dir, path: res.cells, dest: res.dest, status: res.status, result: null, pythonLine: P('if ways'), activeLine: L('try a move right'), message })
+        frames.push({ phase, ways: snap(), at: [i, j], dir, path: res.cells, dest: res.dest, status: res.status, result: null, pythonLine: phase === 'reflect' ? P('while r < m') : phase === 'blocked' ? P('for d in') : P('if r < m and c < n'), activeLine: L('try a move right'), message })
       }
     }
   }

@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-cost-to-split-an-array/',
   complexity: 'O(n^3) time for the direct pricing of each piece, O(n) space. The visualization caps n at 10.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,3,2,3,2,4,4],"k":3}' },
+    { label: 'Eight digits, k four', input: '{"nums":[6,1,8,8,2,6,3,6],"k":4}' },
     { label: 'Example 2', input: '{"nums":[1,1],"k":1}' },
     { label: 'Single zero', input: '{"nums":[0],"k":1}' },
     { label: 'Equal values', input: '{"nums":[3,3,3,3],"k":2}' },

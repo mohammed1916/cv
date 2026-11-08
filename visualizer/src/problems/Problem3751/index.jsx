@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/total-waviness-of-numbers-in-range-i/',
   complexity: 'O((num2 - num1 + 1) * d) time for d digits. The visualization caps the range at 301 numbers.',
   examples: [
-    { label: 'Own case 1', input: '{"num1":121,"num2":131}' },
-    { label: 'Own case 2', input: '{"num1":199,"num2":203}' },
+    { label: 'Small range from four to twelve', input: '{"num1":4,"num2":12}' },
+    { label: 'Range near the top limit', input: '{"num1":99990,"num2":100000}' },
     { label: "Single number", input: "{\"num1\":1,\"num2\":1}" },
     { label: "Two numbers across a digit boundary", input: "{\"num1\":9,\"num2\":10}" },
     { label: "Top of the range", input: "{\"num1\":99999,\"num2\":100000}" },

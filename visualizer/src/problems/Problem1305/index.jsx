@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/all-elements-in-two-binary-search-trees/',
   complexity: 'O(n + m) time and O(n + m) space. The visualization caps each tree at 10 nodes.',
   examples: [
-    { label: 'Own case 1', input: '{"root1":[3,2,5],"root2":[2,1,4]}' },
-    { label: 'Own case 2', input: '{"root1":[2,null,9],"root2":[9,2]}' },
+    { label: 'Two small trees', input: '{"root1":[7,3,null,1],"root2":[4,null,10]}' },
+    { label: 'Single root against branch', input: '{"root1":[6],"root2":[2,null,8]}' },
     { label: "Single node per tree", input: "{\"root1\":[7],\"root2\":[-3]}" },
     { label: "Equal values in both trees", input: "{\"root1\":[4,2,6],\"root2\":[4,1]}" },
     { label: "Extreme values -50 and 50", input: "{\"root1\":[-50,null,50],\"root2\":[0]}" },

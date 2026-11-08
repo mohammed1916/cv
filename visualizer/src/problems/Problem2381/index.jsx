@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/shifting-letters-ii/',
   complexity: 'O(n + m) time and O(n) space. The visualization caps input at 20 letters and 8 shifts.',
   examples: [
-    { label: 'Own case 1', input: '{"s":"abc","shifts":[[0,2,1],[1,2,1],[0,1,0]]}' },
-    { label: 'Own case 2', input: '{"s":"dztz","shifts":[[1,1,1],[0,0,0]]}' },
+    { label: 'Three shifts on five letters', input: '{"s":"mnopq","shifts":[[0,1,1],[2,4,0],[1,3,1]]}' },
+    { label: 'Backward full shift', input: '{"s":"lkjh","shifts":[[0,3,0],[2,2,1]]}' },
     { label: 'Single letter', input: '{"s":"a","shifts":[[0,0,1]]}' },
     { label: 'Forward and backward on same range', input: '{"s":"aaaa","shifts":[[0,3,1],[0,3,0]]}' },
     { label: 'Longest string, 8 shifts', input: '{"s":"zzzzzzzzzzzzzzzzzzzz","shifts":[[0,19,0],[0,19,1],[0,19,0],[0,19,1],[0,19,0],[0,19,1],[0,19,0],[0,19,1]]}' },

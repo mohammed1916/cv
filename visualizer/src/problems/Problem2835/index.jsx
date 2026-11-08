@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-operations-to-form-subsequence-with-target-sum/',
   complexity: 'O(log target * log max) time after counting. The visualization caps values at 1024.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[8,2,1],"target":7}' },
-    { label: 'Own case 2', input: '{"nums":[2,1,32,1],"target":12}' },
+    { label: 'Six powers, target nineteen', input: '{"nums":[4,16,2,2,8,1],"target":19}' },
+    { label: 'Equal large powers', input: '{"nums":[64,64,1],"target":128}' },
     { label: "Single power", input: "{\"nums\":[1],\"target\":1}" },
     { label: "Equal powers", input: "{\"nums\":[8,8,8],\"target\":16}" },
     { label: "Largest powers", input: "{\"nums\":[1024,512,1024],\"target\":1024}" },

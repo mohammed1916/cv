@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-subarrays-with-and-value-of-k/',
   complexity: 'O(n * log V) time and O(log V) space for the AND groups. The visualization caps the input at 20 values.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,2,2],"k":2}' },
-    { label: 'Own case 2', input: '{"nums":[2,2,3],"k":2}' },
+    { label: 'Four values, k three', input: '{"nums":[7,3,12,5],"k":3}' },
+    { label: 'Three values, k eight', input: '{"nums":[9,18,4],"k":8}' },
     { label: 'One zero', input: '{"nums":[0],"k":0}' },
     { label: 'Equal values with k zero', input: '{"nums":[5,5,5,5],"k":0}' },
     { label: 'Largest values', input: '{"nums":[63,63],"k":63}' },

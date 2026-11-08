@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/evaluate-boolean-binary-tree/',
   complexity: 'O(n) time and O(h) stack space for n nodes. The visualization caps the tree at 15 entries.',
   examples: [
-    { label: 'Example 1', input: '{"root":[2,1,3,null,null,0,1]}' },
-    { label: 'Example 2', input: '{"root":[0]}' },
+    { label: 'Own: AND over OR', input: '{"root":[3,2,1,1,0]}' },
+    { label: 'Own: single true leaf', input: '{"root":[1]}' },
     { label: 'Single true leaf', input: '{"root":[1]}' },
     { label: 'AND of two equal leaves', input: '{"root":[3,1,1]}' },
     { label: 'Largest tree, 15 entries', input: '{"root":[2,3,2,3,2,3,2,1,0,1,1,0,1,0,0]}' },

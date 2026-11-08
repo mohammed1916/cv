@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/largest-triangle-area/',
   complexity: 'O(n^3) time and O(1) extra space; fine for n up to 50.',
   examples: [
-    { label: 'Own case 1', input: '[[1,1],[1,2],[2,1],[1,3],[3,1]]' },
-    { label: 'Own case 2', input: '[[2,1],[1,1],[1,2]]' },
+    { label: 'Rectangle corners', input: '[[0,0],[4,0],[0,3],[4,3]]' },
+    { label: 'Four irregular points', input: '[[1,1],[5,2],[2,6],[-3,4]]' },
     { label: 'Mixed signs', input: '[[-3,4],[5,-2],[0,0],[2,7],[-6,-5],[4,4]]' },
     { label: 'Smallest triangle', input: '[[0,0],[1,0],[0,1]]' },
     { label: 'Collinear points', input: '[[0,0],[1,1],[2,2]]' },

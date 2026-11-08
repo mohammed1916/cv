@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/day-of-the-week/',
   complexity: 'O(years + 12) time for the visualization. The closed form runs in O(1).',
   examples: [
-    { label: 'Example 1', input: '{"day":31,"month":8,"year":2019}' },
-    { label: 'Own case 2', input: '{"day":19,"month":8,"year":2000}' },
+    { label: 'Own: 14 Feb 2024', input: '{"day":14,"month":2,"year":2024}' },
+    { label: 'Spring date in 1999', input: '{"day":12,"month":3,"year":1999}' },
     { label: 'Earliest allowed date', input: '{"day":1,"month":1,"year":1971}' },
     { label: 'Latest allowed date', input: '{"day":31,"month":12,"year":2100}' },
     { label: 'Leap day', input: '{"day":29,"month":2,"year":2000}' },

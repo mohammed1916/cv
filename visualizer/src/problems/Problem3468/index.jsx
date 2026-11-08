@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-number-of-copy-arrays/',
   complexity: 'O(n) time and O(1) space. The visualization caps the array at 10 values.',
   examples: [
-    { label: 'Own case 1', input: '{"original":[2,3,4,5],"bounds":[[2,3],[3,4],[4,5],[5,6]]}' },
-    { label: 'Own case 2', input: '{"original":[2,3,4,5],"bounds":[[2,11],[3,10],[4,9],[5,8]]}' },
+    { label: 'Three elements, mixed bounds', input: '{"original":[4,-2,7],"bounds":[[1,6],[-3,0],[5,9]]}' },
+    { label: 'Two equal elements', input: '{"original":[10,10],"bounds":[[0,20],[9,11]]}' },
     { label: 'Single element', input: '{"original":[3],"bounds":[[0,5]]}' },
     { label: 'Equal values with equal bounds', input: '{"original":[4,4,4],"bounds":[[0,8],[0,8],[0,8]]}' },
     { label: 'Extreme values and bounds', input: '{"original":[-40,40],"bounds":[[-40,40],[-40,40]]}' },

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/sell-diminishing-valued-colored-balls/',
   complexity: 'O(orders * colours) time for the visualization. A heap gives O(orders log colours) for large inputs.',
   examples: [
-    { label: 'Own case 1', input: '{"inventory":[3,6],"orders":5}' },
-    { label: 'Own case 2', input: '{"inventory":[4,6],"orders":7}' },
+    { label: 'Three colours, six orders', input: '{"inventory":[2,7,4],"orders":6}' },
+    { label: 'Two colours, four orders', input: '{"inventory":[1,8],"orders":4}' },
     { label: 'One colour', input: '{"inventory":[1],"orders":1}' },
     { label: 'Equal colour counts', input: '{"inventory":[2,2],"orders":4}' },
     { label: 'Full stock, 20 orders', input: '{"inventory":[8,8,8,8],"orders":20}' },

@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/smallest-string-starting-from-leaf/',
   complexity: 'O(n * h) time for string building. The visualization caps input at 15 nodes.',
   examples: [
-    { label: 'Own case 1', input: '[1,2,3,4,5,4,5]' },
+    { label: 'Seven letters, two columns', input: '[4,6,15,null,1,20,9]' },
     { label: 'Prefix', input: '[1,0,null,1]' },
     { label: 'Single node', input: '[0]' },
     { label: 'Equal letters', input: '[2,2,2,2,2,2,2]' },

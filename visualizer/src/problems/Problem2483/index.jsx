@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-penalty-for-a-shop/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps input at 12 characters.',
   examples: [
-    { label: 'Example 1', input: '{"customers":"YYNY"}' },
-    { label: 'Example 2', input: '{"customers":"NNNNN"}' },
+    { label: 'Own: six customers', input: '{"customers":"YNNYYN"}' },
+    { label: 'Own: five customers', input: '{"customers":"YYYNY"}' },
     { label: 'Single customer', input: '{"customers":"Y"}' },
     { label: 'Tie between two closing hours', input: '{"customers":"YN"}' },
     { label: 'All customers come', input: '{"customers":"YYYYYYYYYYYY"}' },

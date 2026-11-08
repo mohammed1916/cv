@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/right-triangles/',
   complexity: 'O(rows times cols) time and space. The visualization caps the grid at 6 by 6.',
   examples: [
-    { label: 'Own case 1', input: '[[0,1,0],[1,1,0],[0,1,0]]' },
-    { label: 'Own case 2', input: '[[1,0,0],[1,0,0],[1,0,1]]' },
+    { label: 'Three rows, four columns', input: '[[1,1,0,1],[0,1,1,1],[1,0,1,0]]' },
+    { label: 'Two columns', input: '[[0,1],[1,1],[1,0]]' },
     { label: "Single zero cell", input: "[[0]]" },
     { label: "Single one cell", input: "[[1]]" },
     { label: "Equal rows", input: "[[1,1,1],[1,1,1]]" },

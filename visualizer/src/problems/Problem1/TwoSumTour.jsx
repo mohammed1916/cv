@@ -32,7 +32,7 @@ const lessons = [
   [
     "code",
     "Try dragging a panel",
-    "Grab the Code tab above this panel. Hold and drag it to another panel’s edge, then release when the docking preview appears. Drop in the center to group tabs. The workspace stays interactive during this guide.",
+    "Press and hold the Code tab above this panel, then drag it onto the edge of another panel. Release when the docking preview appears, or drop in the center to group it as a tab. The other panels stay usable. Playback is dimmed during this step so it cannot block the drop targets.",
     2,
   ],
   [
@@ -62,10 +62,15 @@ export default function TwoSumTour({ panels, playbackRef }) {
     if (!open || panel === "playback") return;
     const floating = playbackRef.current?.closest(".floating-panel");
     if (!floating) return;
+    // Dim and disable the Playback panel only: it would otherwise sit above
+    // some dock drop zones and swallow the drop.
     const opacity = floating.style.opacity;
+    const pointerEvents = floating.style.pointerEvents;
     floating.style.opacity = "0.15";
+    floating.style.pointerEvents = "none";
     return () => {
       floating.style.opacity = opacity;
+      floating.style.pointerEvents = pointerEvents;
     };
   }, [open, panel, playbackRef]);
   useEffect(() => {
@@ -155,6 +160,9 @@ export default function TwoSumTour({ panels, playbackRef }) {
   }
   const cardOnLeft =
     rect && rect.left + rect.width / 2 > rect.viewportWidth / 2;
+  // On phones the card normally sits at the bottom; move it to the top when the highlighted panel is low, so it never covers the tab to drag.
+  const cardOnTop =
+    rect && rect.top + rect.height / 2 > rect.viewportHeight / 2;
   return (
     <>
       <div className="two-sum-tour-launch">
@@ -206,7 +214,7 @@ export default function TwoSumTour({ panels, playbackRef }) {
               />
             )}
             <motion.section
-              className={`two-sum-tour-card ${cardOnLeft ? "is-left" : ""} ${panel === "playback" ? "for-playback" : ""}`}
+              className={`two-sum-tour-card ${cardOnLeft ? "is-left" : ""} ${cardOnTop ? "is-top" : ""} ${panel === "playback" ? "for-playback" : ""}`}
               role="dialog"
               aria-modal="false"
               aria-labelledby="two-sum-tour-title"

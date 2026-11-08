@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/subdomain-visit-count/',
   complexity: 'O(total characters) time with a hash map of at most (entries * labels) keys.',
   examples: [
-    { label: 'Own case 1', input: '["1223 fkuewuu.nggveqfg.eqo"]' },
-    { label: 'Own case 2', input: '["122 iqqing.ockn.eqo","72 acjqq.eqo","3 kpvgn.ockn.eqo","7 ykmk.qti"]' },
+    { label: 'Count with three labels', input: '["301 gmail.com.uk"]' },
+    { label: 'Overlapping domains', input: '["42 mail.zed.net","17 zed.net","6 ops.mail.zed.net"]' },
     { label: 'Single label', input: '["7 com","3 a.com"]' },
     { label: 'Single count', input: '["1 x"]' },
     { label: 'Equal counts for different domains', input: '["5 a.com","5 b.com"]' },

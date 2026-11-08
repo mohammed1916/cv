@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/divide-nodes-into-the-maximum-number-of-groups/',
   complexity: 'O(n * (n + E)) time with O(n + E) space. The visualization caps nodes at 6.',
   examples: [
-    { label: 'Own case 1', input: '{"n":6,"edges":[[4,6],[2,3],[2,6],[1,5],[1,4],[1,2]]}' },
+    { label: 'Path of five nodes', input: '{"n":5,"edges":[[5,1],[1,3],[3,2],[2,4]]}' },
     { label: 'Triangle', input: '{"n":3,"edges":[[1,2],[2,3],[3,1]]}' },
     { label: 'Single node', input: '{"n":1,"edges":[]}' },
     { label: 'Single edge', input: '{"n":2,"edges":[[1,2]]}' },

@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/using-a-robot-to-print-the-lexicographically-smallest-string/',
   complexity: 'O(n) time and O(n) space with a letter count. The visualization caps input at 10 letters.',
   examples: [
-    { label: 'Own case 1', input: '"ceeb"' },
+    { label: 'Eight letters', input: '"daybreak"' },
     { label: 'Descending', input: '"zza"' },
     { label: 'Single letter', input: '"a"' },
     { label: 'Equal letters', input: '"aaaa"' },

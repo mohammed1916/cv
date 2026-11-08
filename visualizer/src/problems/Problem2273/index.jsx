@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/find-resultant-array-after-removing-anagrams/',
   complexity: 'O(n * m log m) time for sorting letters of each word. The visualization caps input at 20 words.',
   examples: [
-    { label: 'Example 1', input: '{"words":["abba","baba","bbaa","cd","cd"]}' },
+    { label: 'Own: three short words', input: '{"words":["xy","yx","zz"]}' },
     { label: 'No anagrams', input: '{"words":["a","b","c","d","e"]}' },
     { label: 'Single word', input: '{"words":["abc"]}' },
     { label: 'Three anagrams', input: '{"words":["abc","cab","bca"]}' },

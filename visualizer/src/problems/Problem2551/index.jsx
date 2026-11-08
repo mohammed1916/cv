@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/put-marbles-in-bags/',
   complexity: 'O(n log n) time for the sort, O(n) space for the cut costs.',
   examples: [
-    { label: 'Own case 1', input: '{"weights":[2,4,6,2],"k":3}' },
-    { label: 'Own case 2', input: '{"weights":[3,1],"k":2}' },
+    { label: 'Five marbles, two bags', input: '{"weights":[5,9,2,14,7],"k":2}' },
+    { label: 'Single bag', input: '{"weights":[40,10,30,20],"k":1}' },
     { label: 'Single marble', input: '{"weights":[7],"k":1}' },
     { label: 'Equal weights', input: '{"weights":[4,4,4,4],"k":2}' },
     { label: 'Largest weights, ten picks', input: '{"weights":[100,100,100,100,100,100,100,100,100,100],"k":10}' },

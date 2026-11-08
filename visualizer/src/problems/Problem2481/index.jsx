@@ -9,8 +9,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-cuts-to-divide-a-circle/',
   complexity: 'O(1) time and O(1) space.',
   examples: [
-    { label: 'Example 1', input: '{"n":4}' },
-    { label: 'Example 2', input: '{"n":3}' },
+    { label: 'Own: n equals 9', input: '{"n":9}' },
+    { label: 'Own: n equals 7', input: '{"n":7}' },
     { label: 'Smallest n', input: '{"n":1}' },
     { label: 'Even n', input: '{"n":2}' },
     { label: 'Largest n', input: '{"n":100}' },

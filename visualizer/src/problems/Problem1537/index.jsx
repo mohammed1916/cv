@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/get-the-maximum-score/',
   complexity: 'O(m + n) time and O(1) extra space for the two pointers.',
   examples: [
-    { label: 'Own case 1', input: '{"nums1":[3,5,6,9,11],"nums2":[5,7,9,10]}' },
-    { label: 'Own case 2', input: '{"nums1":[1,3,5,7,9],"nums2":[3,5,100]}' },
+    { label: 'Shared values at 4 and 8', input: '{"nums1":[2,4,8,13],"nums2":[4,8,20,21]}' },
+    { label: 'Matching pair at 20', input: '{"nums1":[10,20,30],"nums2":[15,20,40,50]}' },
     { label: 'Single value each', input: '{"nums1":[1],"nums2":[1]}' },
     { label: 'Identical lists', input: '{"nums1":[3,6],"nums2":[3,6]}' },
     { label: 'No shared value', input: '{"nums1":[1],"nums2":[100]}' },

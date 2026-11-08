@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/sliding-subarray-beauty/',
   complexity: 'O(n * (k + 50)) time with a fixed-size tally of negative values. The visualization caps nums at 40 values.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,-2,-4,-3,4],"k":4,"x":3}' },
-    { label: 'Own case 2', input: '{"nums":[-4,2,3,-4,1,-4],"k":3,"x":2}' },
+    { label: 'Window of four, x two', input: '{"nums":[7,-1,3,-5,8,2],"k":4,"x":2}' },
+    { label: 'Ones and negatives, x one', input: '{"nums":[1,1,-3,6,2,-4,5],"k":3,"x":1}' },
     { label: 'Single entry', input: '{"nums":[7],"k":1,"x":1}' },
     { label: 'Equal values tie', input: '{"nums":[2,2,2,2],"k":2,"x":1}' },
     { label: 'Boundary values -50 and 50', input: '{"nums":[-50,50,-50,50,0],"k":3,"x":3}' },

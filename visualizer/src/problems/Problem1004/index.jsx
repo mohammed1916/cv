@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/max-consecutive-ones-iii/',
   complexity: 'O(n) time and O(1) space. The visualization caps input at 30 values.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[0,1,1,1,1,0,0,0,1,1,1],"k":2}' },
-    { label: 'Own case 2', input: '{"nums":[1,1,1,1,0,0,0,1,1,0,1,1,1,0,0,1,1,0,0],"k":3}' },
+    { label: 'One flip across a gap', input: '{"nums":[1,0,0,1,1,0,1,0,0,1],"k":1}' },
+    { label: 'Long run: 19 values, k three', input: '{"nums":[0,1,0,0,1,1,1,0,1,0,0,0,1,1,0,1,0,1,1],"k":3}' },
     { label: 'Single one, no flips', input: '{"nums":[1],"k":0}' },
     { label: 'Zeros fit exactly', input: '{"nums":[0,0,0],"k":3}' },
     { label: 'Longest allowed with k at its limit', input: '{"nums":[1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0],"k":30}' },

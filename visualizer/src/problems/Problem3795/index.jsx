@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-subarray-length-with-distinct-sum-at-least-k/',
   complexity: 'O(n) time with a hash map of counts. The visualization caps n at 30.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[3,3,4,2],"k":5}' },
-    { label: 'Own case 2', input: '{"nums":[6,6,5],"k":6}' },
+    { label: 'Five values, k two', input: '{"nums":[3,1,4,1,5],"k":2}' },
+    { label: 'Single value, large k', input: '{"nums":[20],"k":60}' },
     { label: 'Single value', input: '{"nums":[4],"k":4}' },
     { label: 'Equal values never reach k', input: '{"nums":[3,3,3,3],"k":6}' },
     { label: 'Largest values, k at maximum', input: '{"nums":[20,19,18,20,17],"k":60}' },

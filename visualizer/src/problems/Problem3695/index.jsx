@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximize-alternating-sum-using-swaps/',
   complexity: 'O(n log n) time for sorting the groups. The visualization caps nums at 10 values and swaps at 12 pairs.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[3,2,1],"swaps":[[1,2],[0,2]]}' },
-    { label: 'Own case 2', input: '{"nums":[3,2,1],"swaps":[[1,2]]}' },
+    { label: 'Two disjoint swaps', input: '{"nums":[5,3,8,1],"swaps":[[0,2],[1,3]]}' },
+    { label: 'No swaps allowed', input: '{"nums":[7,7,2],"swaps":[]}' },
     { label: 'Example 3', input: '{"nums":[1,99,1,99,1,99],"swaps":[]}' },
     { label: 'Two values no swap', input: '{"nums":[4,8],"swaps":[]}' },
     { label: 'Equal values tie', input: '{"nums":[5,5,5],"swaps":[[0,1]]}' },

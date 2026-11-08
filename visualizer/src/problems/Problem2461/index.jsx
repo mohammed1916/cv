@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-sum-of-distinct-subarrays-with-length-k/',
   complexity: 'O(n) time and O(k) extra space for the window counts.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[9,9,9,2,4,5,1],"k":3}' },
+    { label: 'Six digits, window 4', input: '{"nums":[2,7,7,3,9,1],"k":4}' },
     { label: 'Repeats', input: '{"nums":[4,4,4],"k":3}' },
     { label: 'Single value', input: '{"nums":[9],"k":1}' },
     { label: 'Equal values', input: '{"nums":[5,5,5,5],"k":4}' },

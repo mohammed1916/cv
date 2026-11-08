@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/rectangle-area-ii/',
   complexity: 'O(n^2 log n) time (n slabs, each sorting up to n intervals) and O(n) space. Exact BigInt arithmetic avoids overflow before the final modulo.',
   examples: [
-    { label: 'Own case 1', input: '[[1,1,3,3],[2,1,3,4],[2,1,4,2]]' },
-    { label: 'Example 2', input: '[[0,0,1000000000,1000000000]]' },
+    { label: 'Two overlapping rectangles', input: '[[0,0,2,2],[1,1,4,3]]' },
+    { label: 'Own: two overlapping rectangles', input: '[[0,0,4,3],[2,1,6,5]]' },
     { label: 'Staircase', input: '[[0,0,4,2],[2,1,6,4],[5,3,8,5],[1,3,3,6]]' },
     { label: 'Single rectangle, unit square', input: '[[0,0,1,1]]' },
     { label: 'Identical rectangles', input: '[[0,0,2,2],[0,0,2,2]]' },

@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/design-a-text-editor/',
   complexity: 'O(k) per operation for k letters moved, with a cap of 10 letters per answer.',
   examples: [
-    { label: 'Example 1', input: '{"operations":[["addText","leetcode"],["deleteText",4],["addText","practice"],["cursorRight",3],["cursorLeft",8],["deleteText",10],["cursorLeft",2],["cursorRight",6]]}' },
+    { label: 'Own: short edit script', input: '{"operations":[["addText","hello"],["cursorLeft",2],["deleteText",1],["addText","xy"],["cursorRight",1]]}' },
     { label: 'Single letter typed', input: '{"operations":[["addText","a"]]}' },
     { label: 'Cursor and delete on empty text', input: '{"operations":[["cursorLeft",1],["deleteText",1]]}' },
     { label: 'Sixteen operations, maximum sizes', input: '{"operations":[["addText","abcdefghij"],["deleteText",10],["addText","klmnopqrst"],["cursorLeft",10],["cursorRight",10],["addText","uvwxyzabcd"],["cursorLeft",4],["deleteText",5],["addText","efghijklmn"],["cursorRight",8],["deleteText",7],["addText","opqrstuvwx"],["cursorLeft",1],["addText","yz"],["deleteText",3],["cursorRight",2]]}' },

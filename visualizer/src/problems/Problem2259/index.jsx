@@ -13,9 +13,9 @@ const definition = {
   url: 'https://leetcode.com/problems/remove-digit-from-number-to-maximize-result/',
   complexity: 'O(n^2) time for building candidates. The visualization caps number at 30 digits.',
   examples: [
-    { label: 'Own case 1', input: '{"number":"234","digit":"4"}' },
-    { label: 'Own case 2', input: '{"number":"2342","digit":"2"}' },
-    { label: 'Own case 3', input: '{"number":"662","digit":"6"}' },
+    { label: 'Middle digit', input: '{"number":"51730","digit":"3"}' },
+    { label: 'Digit repeated', input: '{"number":"9987","digit":"8"}' },
+    { label: 'Last digit', input: '{"number":"10203","digit":"3"}' },
     { label: 'Two digits, zero', input: '{"number":"10","digit":"0"}' },
     { label: 'Every digit matches', input: '{"number":"7777","digit":"7"}' },
     { label: 'Thirty nines', input: '{"number":"999999999999999999999999999999","digit":"9"}' },

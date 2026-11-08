@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-maximum-value-in-a-constrained-sequence/',
   complexity: 'O(n) time for two passes. The visualization caps n at 30.',
   examples: [
-    { label: 'Own case 1', input: '{"n":8,"restrictions":[[3,2]],"diff":[1,3,2,4,2,5,3]}' },
-    { label: 'Own case 2', input: '{"n":10,"restrictions":[[8,1],[3,1]],"diff":[2,1,1,5,4,1,3,2,2]}' },
+    { label: 'Four values, two caps', input: '{"n":4,"restrictions":[[1,5],[3,2]],"diff":[2,3,1]}' },
+    { label: 'Three values, one cap', input: '{"n":3,"restrictions":[[2,7]],"diff":[1,4]}' },
     { label: 'Two values', input: '{"n":2,"restrictions":[[1,5]],"diff":[3]}' },
     { label: 'Equal differences and limits', input: '{"n":4,"restrictions":[[1,2],[2,2]],"diff":[2,2,2]}' },
     { label: 'Limit at the maximum', input: '{"n":5,"restrictions":[[1,1000],[4,1]],"diff":[10,10,10,10]}' },

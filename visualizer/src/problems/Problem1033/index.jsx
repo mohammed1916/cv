@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/moving-stones-until-consecutive/',
   complexity: 'O(1) time and space: a few comparisons on three sorted positions.',
   examples: [
-    { label: 'Own case 1', input: '{"a":2,"b":3,"c":6}' },
-    { label: 'Own case 2', input: '{"a":5,"b":4,"c":3}' },
+    { label: 'Stones at 1, 9 and 14', input: '{"a":9,"b":1,"c":14}' },
+    { label: 'Stones at 4, 12 and 21', input: '{"a":12,"b":4,"c":21}' },
     { label: 'Already consecutive', input: '{"a":1,"b":2,"c":3}' },
     { label: 'Unsorted input, same answer', input: '{"a":30,"b":1,"c":15}' },
     { label: 'Stone at the far end', input: '{"a":1,"b":2,"c":30}' },

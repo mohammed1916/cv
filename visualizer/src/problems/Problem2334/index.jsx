@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/subarray-with-elements-greater-than-varying-threshold/',
   complexity: 'O(n) time and O(n) space with the monotonic stack. Each element is pushed and popped once.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,4,5,4,2],"threshold":7}' },
+    { label: 'Six values, threshold 15', input: '{"nums":[3,8,2,9,5,1],"threshold":15}' },
     { label: 'Single peak', input: '{"nums":[6,5,6,5,8],"threshold":7}' },
     { label: 'None', input: '{"nums":[1,1,1],"threshold":9}' },
     { label: 'Single value', input: '{"nums":[5],"threshold":5}' },

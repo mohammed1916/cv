@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/unit-conversion-i/',
   complexity: 'O(n) time and O(n) space for n units. The visualization caps the input at 15 conversions.',
   examples: [
-    { label: 'Own case 1', input: '[[1,2,3],[0,1,2]]' },
+    { label: 'Branch from unit zero', input: '[[0,2,3],[2,1,4],[0,3,2]]' },
     { label: 'Example 2', input: '[[0,1,3],[0,2,2],[2,3,4],[2,4,5]]' },
     { label: 'One conversion', input: '[[0,1,2]]' },
     { label: 'Equal factors from unit 0', input: '[[0,1,3],[0,2,3]]' },

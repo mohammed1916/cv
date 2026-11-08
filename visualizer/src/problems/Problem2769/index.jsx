@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-maximum-achievable-number/',
   complexity: 'O(1) time with the closed form num + 2t. The visualization runs t steps.',
   examples: [
-    { label: 'Own case 1', input: '{"num":5,"t":2}' },
-    { label: 'Own case 2', input: '{"num":4,"t":3}' },
+    { label: 'Target above the start', input: '{"num":7,"t":9}' },
+    { label: 'Large start, small target', input: '{"num":30,"t":2}' },
     { label: 'Smallest values', input: '{"num":1,"t":1}' },
     { label: 'Largest values', input: '{"num":50,"t":50}' },
     { label: 'Equal values', input: '{"num":7,"t":7}' },

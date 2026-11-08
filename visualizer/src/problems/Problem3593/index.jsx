@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-increments-to-equalize-leaf-paths/',
   complexity: 'O(n) time. The visualization caps n at 8.',
   examples: [
-    { label: 'Own case 1', input: '{"n":3,"edges":[[0,2],[0,1]],"cost":[3,1,2]}' },
-    { label: 'Own case 2', input: '{"n":5,"edges":[[1,3],[1,2],[0,1],[0,4]],"cost":[7,1,1,4,3]}' },
+    { label: 'Star-shaped costs', input: '{"n":4,"edges":[[0,1],[1,2],[1,3]],"cost":[6,2,5,1]}' },
+    { label: 'Two nodes, reversed edge', input: '{"n":2,"edges":[[1,0]],"cost":[9,3]}' },
     { label: 'Two nodes', input: '{"n":2,"edges":[[0,1]],"cost":[1,9]}' },
     { label: 'Equal costs', input: '{"n":3,"edges":[[0,1],[0,2]],"cost":[4,4,4]}' },
     { label: 'Chain with extreme costs', input: '{"n":4,"edges":[[0,1],[1,2],[2,3]],"cost":[9,1,9,1]}' },

@@ -574,9 +574,9 @@ When asked about code or data structures, be precise and educational.`,
 
         const guidance =
           providerConfig.provider === "ollama-cloud"
-            ? `Set \`OLLAMA_API_KEY\` for the Vite server and confirm \`${selectedModel}\` is available through Ollama Cloud.`
+            ? `Paste your Ollama API key in AI connection settings, then check that \`${selectedModel}\` is available on Ollama Cloud.`
             : providerConfig.provider === "gemini"
-              ? `Enter a Gemini API key above or set \`GEMINI_API_KEY\` for the Vite server, then verify \`${selectedModel}\`.`
+              ? `Paste your Gemini API key in AI connection settings, then check that \`${selectedModel}\` is supported.`
               : `Make sure Ollama is running with \`ollama serve\` and the model \`${selectedModel}\` is available.`;
 
         updateLastMessage({
@@ -777,6 +777,25 @@ When asked about code or data structures, be precise and educational.`,
                   />
                 </label>
                 {providerConfig.provider === "ollama-cloud" && (
+                  <div className="chat-key-steps" data-chat-ignore>
+                    <strong>Get an Ollama Cloud key</strong>
+                    <ol>
+                      <li>Go to <a href="https://ollama.com" target="_blank" rel="noopener noreferrer">ollama.com</a> and sign in.</li>
+                      <li>Open the API keys page in your account settings.</li>
+                      <li>Create a key and paste it below.</li>
+                    </ol>
+                  </div>
+                )}
+                {providerConfig.provider === "gemini" && (
+                  <div className="chat-key-steps" data-chat-ignore>
+                    <strong>Get a Gemini key</strong>
+                    <ol>
+                      <li>Go to <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer">aistudio.google.com/app/apikey</a>.</li>
+                      <li>Create an API key and paste it below.</li>
+                    </ol>
+                  </div>
+                )}
+                {providerConfig.provider === "ollama-cloud" && (
                   <label className="chat-cloud-key">
                     Ollama API key
                     <input
@@ -835,14 +854,16 @@ When asked about code or data structures, be precise and educational.`,
               </form>
               {providerConfig.provider === "ollama-cloud" && (
                 <p className="chat-cloud-key-note">
-                  Kept only for this browser session; sent to the chat proxy and
-                  Ollama Cloud for your request, never saved by this app.
+                  Stored only in this browser tab (session storage), cleared when
+                  the tab closes. Sent directly to ollama.com with each request;
+                  this site does not keep it. Local Ollama needs no key.
                 </p>
               )}
               {providerConfig.provider === "gemini" && (
                 <p className="chat-cloud-key-note">
-                  Kept only for this browser session; sent to the chat proxy and
-                  Google for your request, never saved by this app.
+                  Stored only in this browser tab (session storage), cleared when
+                  the tab closes. Sent directly to Google with each request; this
+                  site does not keep it. Local Ollama needs no key.
                 </p>
               )}
               </details>

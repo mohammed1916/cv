@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-x-sum-of-all-k-long-subarrays-ii/',
   complexity: 'O((n - k + 1) * k log k) time for the per-window sort. The statement allows far larger arrays; the visualization caps nums at 40 values.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,2,3,3,4,5,3,4],"k":7,"x":3}' },
-    { label: 'Own case 2', input: '{"nums":[4,9,8,9,8,6],"k":3,"x":3}' },
+    { label: 'Six entries, k four', input: '{"nums":[8,8,3,12,5,1],"k":4,"x":2}' },
+    { label: 'Largest allowed x', input: '{"nums":[20,30,10],"k":3,"x":3}' },
     { label: 'Single entry', input: '{"nums":[5],"k":1,"x":1}' },
     { label: 'Equal values', input: '{"nums":[4,4,4],"k":3,"x":1}' },
     { label: 'Largest allowed size, equal values', input: '{"nums":[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50],"k":40,"x":40}' },

@@ -26,8 +26,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-time-for-k-connected-components/',
   complexity: 'O(m log m) for sorting plus near-linear union-find work. The visualization caps input at 12 nodes.',
   examples: [
-    { label: 'Own case 1', input: '{"n":3,"edges":[[1,2,4]],"k":3}' },
-    { label: 'Own case 2', input: '{"n":4,"edges":[[1,2,3],[2,3,5]],"k":4}' },
+    { label: 'Four-node cycle, two picks', input: '{"n":4,"edges":[[0,1,5],[1,2,3],[2,3,8],[0,3,6]],"k":2}' },
+    { label: 'One road, one pick', input: '{"n":3,"edges":[[0,1,7]],"k":1}' },
     { label: 'Two nodes, one edge', input: '{"n":2,"edges":[[0,1,1]],"k":1}' },
     { label: 'Equal edge times', input: '{"n":3,"edges":[[0,1,5],[1,2,5],[0,2,5]],"k":2}' },
     { label: 'Largest edge time', input: '{"n":2,"edges":[[0,1,1000000000]],"k":2}' },

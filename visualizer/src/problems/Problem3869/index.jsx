@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-fancy-numbers-in-a-range/',
   complexity: 'O((r - l) * digits) for this teaching version. The Python solution uses digit DP for the full range up to 10^15.',
   examples: [
-    { label: 'Own case 1', input: '{"l":9,"r":11}' },
+    { label: 'Range of fifty-five numbers', input: '{"l":40,"r":95}' },
     { label: 'Digit sum', input: '{"l":12340,"r":12341}' },
     { label: 'Neither', input: '{"l":123456788,"r":123456788}' },
     { label: 'Single integer', input: '{"l":1,"r":1}' },

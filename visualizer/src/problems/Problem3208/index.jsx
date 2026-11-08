@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/alternating-groups-ii/',
   complexity: 'O(n + k) time by reading the circle once around, with the run kept as a single number. The visualization caps colors at 40 entries.',
   examples: [
-    { label: 'Example 1', input: '{"colors":[0,1,0,1,0],"k":3}' },
-    { label: 'Own case 2', input: '{"colors":[1,0,1,0,0,1,0],"k":6}' },
+    { label: 'Own: seven tiles, k 4', input: '{"colors":[1,1,0,1,1,0,0],"k":4}' },
+    { label: 'Eight colors, k four', input: '{"colors":[1,0,1,1,0,1,0,0],"k":4}' },
     { label: 'Smallest array', input: '{"colors":[0,0,0],"k":3}' },
     { label: 'All ones with k four', input: '{"colors":[1,1,1,1],"k":4}' },
     { label: 'Largest k equals length', input: '{"colors":[0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1],"k":40}' },

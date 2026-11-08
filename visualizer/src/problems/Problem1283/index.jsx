@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/',
   complexity: 'O(n log max) time. The visualization caps input at 8 values.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,3,6,10],"threshold":7}' },
-    { label: 'Own case 2', input: '{"nums":[45,23,34,12,2],"threshold":6}' },
+    { label: 'Four values, limit eight', input: '{"nums":[4,9,15,22],"threshold":8}' },
+    { label: 'Five values, limit nine', input: '{"nums":[17,40,8,33,26],"threshold":9}' },
     { label: 'Single number', input: '{"nums":[5],"threshold":1}' },
     { label: 'Equal values', input: '{"nums":[4,4,4],"threshold":3}' },
     { label: 'Largest limits', input: '{"nums":[50,50,50,50,50,50,50,50],"threshold":50}' },

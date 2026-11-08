@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximize-score-of-numbers-in-ranges/',
   complexity: 'O(n log(range)) time for n ranges. The visualization caps the input at 8 ranges.',
   examples: [
-    { label: 'Own case 1', input: '{"start":[7,1,4],"d":3}' },
-    { label: 'Own case 2', input: '{"start":[3,7,14,14],"d":6}' },
+    { label: 'Five starts, spread five', input: '{"start":[12,4,9,20,1],"d":5}' },
+    { label: 'Widest pair, zero step', input: '{"start":[0,30],"d":0}' },
     { label: 'Two starts, zero spread', input: '{"start":[0,0],"d":0}' },
     { label: 'Equal starts tie', input: '{"start":[4,4,4],"d":1}' },
     { label: 'Largest range and gap', input: '{"start":[0,30],"d":10}' },

@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/find-all-good-strings/',
   complexity: 'O(n * m * 26) time with m the length of evil. The visualization caps n at 4.',
   examples: [
-    { label: 'Example', input: '{"n":2,"s1":"aa","s2":"da","evil":"b"}' },
+    { label: 'Own: three letters, evil ca', input: '{"n":3,"s1":"abc","s2":"bcd","evil":"ca"}' },
     { label: 'Zero', input: '{"n":2,"s1":"ab","s2":"ab","evil":"a"}' },
     { label: "Single letter, one string", input: "{\"n\":1,\"s1\":\"a\",\"s2\":\"a\",\"evil\":\"b\"}" },
     { label: "Equal bounds count once", input: "{\"n\":2,\"s1\":\"ab\",\"s2\":\"ab\",\"evil\":\"a\"}" },

@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/convert-an-array-into-a-2d-array-with-conditions/',
   complexity: 'O(n) time and O(n) space.',
   examples: [
-    { label: 'Own case 1', input: '[2,4,5,2,3,4,2]' },
-    { label: 'Own case 2', input: '[2,3,4,5]' },
+    { label: 'Eight values with repeats', input: '[6,1,8,8,3,1,6,2]' },
+    { label: 'Three equal values', input: '[5,5,5]' },
     { label: 'Single value', input: '[1]' },
     { label: 'Equal values', input: '[4,4,4,4]' },
     { label: 'Sixteen values at the limits', input: '[8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1]' },

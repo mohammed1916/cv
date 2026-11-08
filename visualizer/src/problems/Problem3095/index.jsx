@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/shortest-subarray-with-or-at-least-k-i/',
   complexity: 'O(n^2) time and O(1) space. The visualization caps the input at 30 values.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,3,4],"k":3}' },
-    { label: 'Own case 2', input: '{"nums":[3,2,9],"k":11}' },
+    { label: 'Four values, k seven', input: '{"nums":[10,6,12,1],"k":7}' },
+    { label: 'Three values, k 21', input: '{"nums":[16,5,8],"k":21}' },
     { label: "Single value", input: "{\"nums\":[7],\"k\":7}" },
     { label: "Equal values", input: "{\"nums\":[4,4,4],\"k\":4}" },
     { label: "Largest values and k", input: "{\"nums\":[255,0,255,0,255,0,255,0,255,0,255,0,255,0,255,0,255,0,255,0,255,0,255,0,255,0,255,0,255,0],\"k\":255}" },

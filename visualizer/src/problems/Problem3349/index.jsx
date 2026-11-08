@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/adjacent-increasing-subarrays-detection-i/',
   complexity: 'O(n * k) time and O(1) extra space. Checking each run once gives O(n) with prefix run lengths.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[3,6,8,9,10,3,4,5,4,2],"k":4}' },
-    { label: 'Own case 2', input: '{"nums":[7,6,5,4,4,4,4,3,2,1],"k":5}' },
+    { label: 'Six values, k two', input: '{"nums":[4,-2,9,-7,3,1],"k":2}' },
+    { label: 'Zeros and mirrored pair', input: '{"nums":[0,0,-5,5],"k":2}' },
     { label: 'Smallest input', input: '{"nums":[1,2],"k":1}' },
     { label: 'Equal values, no run', input: '{"nums":[5,5,5,5],"k":2}' },
     { label: 'Largest input, k = half', input: '{"nums":[-15,-22,-1,42,-4,10,33,-3,-2,7,-48,20,15,-49,-35,9,38,-19,-21,25,42,-35,38,-12,-6,21,-8,-47,25,-49,-26,-35,14,34,48,19,0,-27,42,-17],"k":20}' },

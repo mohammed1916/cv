@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-equal-frequency/',
   complexity: 'O(n) time and O(n) space. The visualization caps input at 12 entries.',
   examples: [
-    { label: 'Own case 1', input: '[5,3,3,5,1,1,2,2]' },
+    { label: 'Balanced three counts', input: '[2,2,3,3,1,1,1]' },
     { label: 'Three equal groups', input: '[1,1,1,2,2,2]' },
     { label: 'Single value', input: '[1]' },
     { label: 'All values equal', input: '[4,4,4,4]' },

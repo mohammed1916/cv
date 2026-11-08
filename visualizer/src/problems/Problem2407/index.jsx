@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/longest-increasing-subsequence-ii/',
   complexity: 'O(n log M) time with a segment tree over the values, O(M) space. The visualization caps values at 32.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[5,3,2,5,4,5,6,9,16],"k":4}' },
+    { label: 'Nine values, k 3', input: '{"nums":[7,2,9,4,4,11,6,1,10],"k":3}' },
     { label: 'Gap of 2', input: '{"nums":[1,3],"k":2}' },
     { label: 'Single value', input: '{"nums":[7],"k":1}' },
     { label: 'Equal values', input: '{"nums":[5,5,5,5],"k":1}' },

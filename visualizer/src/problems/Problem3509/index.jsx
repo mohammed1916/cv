@@ -13,9 +13,9 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-product-of-subsequences-with-an-alternating-sum-equal-to-k/',
   complexity: 'Pairs of alternating sum and product per step. The visualization caps nums at 16 values.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,3,4],"k":3,"limit":11}' },
-    { label: 'Own case 2', input: '{"nums":[1,3,4],"k":-6,"limit":13}' },
-    { label: 'Own case 3', input: '{"nums":[3,3,4,4],"k":1,"limit":10}' },
+    { label: 'Five values, limit twelve', input: '{"nums":[5,0,3,9,2],"k":4,"limit":12}' },
+    { label: 'Negative k with repeats', input: '{"nums":[1,1,2,8,0,6],"k":-2,"limit":7}' },
+    { label: 'Sixteen values, limit sixty', input: '{"nums":[11,4,4,10,3,12,7,2,0,6,9,8,5,1,10,3],"k":3,"limit":60}' },
     { label: 'Single value', input: '{"nums":[5],"k":0,"limit":1}' },
     { label: 'Equal values tie', input: '{"nums":[3,3,3,3],"k":3,"limit":10}' },
     { label: 'Largest values and limit', input: '{"nums":[12,0,12,0,12,0,12,0,12,0,12,0,12,0,12,0],"k":100000,"limit":5000}' },

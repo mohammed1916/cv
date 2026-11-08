@@ -14,9 +14,9 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-bit-changes-to-make-two-integers-equal/',
   complexity: 'O(log max(n, k)) time and O(1) extra space.',
   examples: [
-    { label: 'Own case 1', input: '{"n":14,"k":5}' },
-    { label: 'Own case 2', input: '{"n":22,"k":22}' },
-    { label: 'Own case 3', input: '{"n":15,"k":14}' },
+    { label: 'Ten and six', input: '{"n":10,"k":6}' },
+    { label: 'Thirty-seven and twelve', input: '{"n":37,"k":12}' },
+    { label: 'Nine and one', input: '{"n":9,"k":1}' },
     { label: 'Both zero', input: '{"n":0,"k":0}' },
     { label: 'Maximum values', input: '{"n":255,"k":255}' },
     { label: 'Zero choices', input: '{"n":255,"k":0}' },

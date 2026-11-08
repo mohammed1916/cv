@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-zigzag-arrays-ii/',
   complexity: 'O(m^3 log n) time for m = r - l + 1 values, using matrix exponentiation. The visualization runs the step recurrence and caps n and r at 12.',
   examples: [
-    { label: 'Own case 1', input: '{"n":4,"l":5,"r":6}' },
-    { label: 'Own case 2', input: '{"n":4,"l":2,"r":4}' },
+    { label: 'Six nodes, window three to five', input: '{"n":6,"l":3,"r":5}' },
+    { label: 'Four nodes, tight window', input: '{"n":4,"l":1,"r":2}' },
     { label: 'Smallest range', input: '{"n":3,"l":1,"r":2}' },
     { label: 'Full range', input: '{"n":12,"l":1,"r":12}' },
     { label: 'Odd length', input: '{"n":7,"l":2,"r":3}' },

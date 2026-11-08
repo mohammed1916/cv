@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-common-value/',
   complexity: 'O(m + n) time and O(1) extra space.',
   examples: [
-    { label: 'Own case 1', input: '{"nums1":[2,3,4],"nums2":[3,5]}' },
-    { label: 'Own case 2', input: '{"nums1":[2,3,4,7],"nums2":[3,4,5,6]}' },
+    { label: 'Merge with a repeat', input: '{"nums1":[1,4,9,9],"nums2":[2,6,6]}' },
+    { label: 'Interleaved lists', input: '{"nums1":[10,20,30],"nums2":[5,25,35,45,55]}' },
     { label: 'Single value each', input: '{"nums1":[1],"nums2":[1]}' },
     { label: 'Equal values', input: '{"nums1":[3,3,3],"nums2":[3,3]}' },
     { label: 'Largest and smallest values', input: '{"nums1":[100,100,100,100,100,100,100,100,100,100],"nums2":[1,1,1,1,1,1,1,1,1,1]}' },

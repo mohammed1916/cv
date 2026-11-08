@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-maximum-length-of-valid-subsequence-ii/',
   complexity: 'O(n^2) time and O(n * k) space. The visualization caps input at 10 entries.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,3,4,5,6],"k":3}' },
+    { label: 'Four values, k two', input: '{"nums":[2,5,7,4],"k":2}' },
     { label: 'Modulo 3', input: '{"nums":[1,2,3],"k":3}' },
     { label: 'Single value with k one', input: '{"nums":[4],"k":1}' },
     { label: 'Equal values with k five', input: '{"nums":[9,9,9,9],"k":5}' },

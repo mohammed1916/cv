@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-operations-to-make-median-of-array-equal-to-k/',
   complexity: 'O(n log n) time for the sort. The visualization caps the array at 40 numbers.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[3,6,7,9,6],"k":5}' },
-    { label: 'Own case 2', input: '{"nums":[3,6,7,9,6],"k":8}' },
+    { label: 'Four values, k 13', input: '{"nums":[14,8,21,8],"k":13}' },
+    { label: 'Three multiples', input: '{"nums":[10,20,30],"k":20}' },
     { label: "Single value", input: "{\"nums\":[5],\"k\":5}" },
     { label: "Equal values", input: "{\"nums\":[3,3,3],\"k\":3}" },
     { label: "Largest values and k", input: "{\"nums\":[60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60],\"k\":60}" },

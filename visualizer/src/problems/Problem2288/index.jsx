@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/apply-discount-to-prices/',
   complexity: 'O(n) time for the sentence. The visualization caps the sentence at 80 characters.',
   examples: [
-    { label: 'Own case 1', input: '{"sentence":"uifsf bsf $2 $3 boe 6$ dboejft jo uif tipq","discount":51}' },
-    { label: 'Example 2', input: '{"sentence":"1 2 $3 4 $5 $6 7 8$ $9 $10$","discount":100}' },
+    { label: 'Three prices, 20 percent', input: '{"sentence":"pen $30 mug $7 cap 9","discount":20}' },
+    { label: 'Own: mixed prices, 50 percent', input: '{"sentence":"$12 3 apples $4 $0$","discount":50}' },
     { label: 'Single price', input: '{"sentence":"$5","discount":10}' },
     { label: 'No prices, no change', input: '{"sentence":"apple pear","discount":30}' },
     { label: 'Zero discount', input: '{"sentence":"$7 $8","discount":0}' },

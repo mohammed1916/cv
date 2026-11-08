@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-profit-from-trading-stocks-with-discounts/',
   complexity: 'O(n * budget^2) time for the tree knapsack merges. The visualization caps the company at 10 employees.',
   examples: [
-    { label: 'Own case 1', input: '{"n":2,"present":[2,1],"future":[3,4],"hierarchy":[[1,2]],"budget":3}' },
-    { label: 'Own case 2', input: '{"n":2,"present":[4,3],"future":[8,5],"hierarchy":[[1,2]],"budget":4}' },
+    { label: 'Chain of three bosses', input: '{"n":3,"present":[4,6,2],"future":[9,3,5],"hierarchy":[[1,2],[2,3]],"budget":7}' },
+    { label: 'Branching hierarchy', input: '{"n":4,"present":[5,1,3,8],"future":[6,12,4,2],"hierarchy":[[1,4],[1,2],[4,3]],"budget":9}' },
     { label: 'One employee', input: '{"n":1,"present":[5],"future":[9],"hierarchy":[],"budget":0}' },
     { label: 'Equal prices', input: '{"n":3,"present":[4,4,4],"future":[6,6,6],"hierarchy":[[1,2],[1,3]],"budget":5}' },
     { label: 'Largest values', input: '{"n":2,"present":[20,20],"future":[40,40],"hierarchy":[[1,2]],"budget":40}' },

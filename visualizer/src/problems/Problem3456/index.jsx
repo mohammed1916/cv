@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/find-special-substring-of-length-k/',
   complexity: 'O(n * k) time and O(1) extra space. The visualization caps input at 40 letters.',
   examples: [
-    { label: 'Own case 1', input: '{"s":"bbbcbbb","k":4}' },
+    { label: 'Eight letters, k three', input: '{"s":"abcabcdd","k":3}' },
     { label: 'No block', input: '{"s":"abc","k":2}' },
     { label: 'Too long', input: '{"s":"aaaab","k":2}' },
     { label: 'Smallest string', input: '{"k":1,"s":"a"}' },

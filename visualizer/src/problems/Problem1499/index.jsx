@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/max-value-of-equation/',
   complexity: 'O(n) time with a deque of candidate indices, O(n) space. The visualization caps input at 12 points.',
   examples: [
-    { label: 'Example 1', input: '{"points":[[1,3],[2,0],[5,10],[6,-10]],"k":1}' },
-    { label: 'Own case 2', input: '{"points":[[1,1],[4,1],[10,3]],"k":4}' },
+    { label: 'Own: four points, k 2', input: '{"points":[[0,4],[3,-2],[4,7],[9,1]],"k":2}' },
+    { label: 'Five points, reach five', input: '{"points":[[0,5],[2,-3],[7,4],[8,0],[9,9]],"k":5}' },
     { label: 'Two points', input: '{"points":[[0,0],[1,5]],"k":1}' },
     { label: 'Even spacing', input: '{"points":[[0,0],[2,1],[4,2],[6,3]],"k":2}' },
     { label: 'Coordinate limits', input: '{"points":[[-10,10],[-9,-10],[0,10],[10,-10]],"k":10}' },

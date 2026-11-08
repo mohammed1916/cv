@@ -16,7 +16,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-substrings-that-satisfy-k-constraint-ii/',
   complexity: 'O(n) per query with a sliding window. The visualization caps input at 12 characters.',
   examples: [
-    { label: 'Example 1', input: '{"s":"0001111","k":2,"queries":[[0,6]]}' },
+    { label: 'Own: two windows', input: '{"s":"101100","k":1,"queries":[[1,4],[0,5]]}' },
     { label: 'Two queries', input: '{"s":"010101","k":1,"queries":[[0,2],[2,5]]}' },
     { label: 'Single zero', input: '{"s":"0","k":0,"queries":[[0,0]]}' },
     { label: 'Equal bits, two queries', input: '{"s":"1111","k":0,"queries":[[0,3],[1,2]]}' },

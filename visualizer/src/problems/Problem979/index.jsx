@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/distribute-coins-in-binary-tree/',
   complexity: 'O(n) time and O(h) stack space. The visualization caps input at 15 nodes.',
   examples: [
-    { label: 'Example 1', input: '[3,0,0]' },
-    { label: 'Example 2', input: '[0,3,0]' },
+    { label: 'Own: root with two children', input: '[1,0,2]' },
+    { label: 'Own: root with one empty child', input: '[2,null,0]' },
     { label: 'Single node with one coin', input: '[1]' },
     { label: 'Coins moved to a leaf', input: '[0,0,3]' },
     { label: 'Equal coins everywhere', input: '[1,1,1]' },

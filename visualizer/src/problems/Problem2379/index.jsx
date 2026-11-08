@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-recolors-to-get-k-consecutive-black-blocks/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps blocks at 40 characters.',
   examples: [
-    { label: 'Example 1', input: '{"blocks":"WBBWWBBWBW","k":7}' },
+    { label: 'Own: eight blocks, k 4', input: '{"blocks":"WBBWBBWW","k":4}' },
     { label: 'Already black', input: '{"blocks":"WBWBBBW","k":2}' },
     { label: 'Single white block', input: '{"blocks":"W","k":1}' },
     { label: 'All white window', input: '{"blocks":"WWWW","k":4}' },

@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/construct-smallest-number-from-di-string/',
   complexity: 'O(n) time and O(n) space. The visualization caps the pattern at 8 characters.',
   examples: [
-    { label: 'Example 1', input: '"IIIDIDDD"' },
+    { label: 'Own: six-step zigzag', input: '"DDIIDI"' },
     { label: 'All decreasing', input: '"DDD"' },
     { label: 'Single increase', input: '"I"' },
     { label: 'All increasing', input: '"IIII"' },

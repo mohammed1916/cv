@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/take-gifts-from-the-richest-pile/',
   complexity: 'O(k log n) time with a max heap. The visualization caps input at 6 piles and 8 seconds.',
   examples: [
-    { label: 'Own case 1', input: '{"gifts":[100,4,9,64,25],"k":4}' },
-    { label: 'Own case 2', input: '{"gifts":[2,2,2,2],"k":5}' },
+    { label: 'Four piles, two rounds', input: '{"gifts":[36,81,16,49],"k":2}' },
+    { label: 'Two piles, six rounds', input: '{"gifts":[1,9],"k":6}' },
     { label: 'Single pile', input: '{"gifts":[1],"k":1}' },
     { label: 'Equal piles', input: '{"gifts":[16,16,16],"k":2}' },
     { label: 'Six largest piles, eight picks', input: '{"gifts":[100,100,100,100,100,100],"k":8}' },

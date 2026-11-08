@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/greatest-english-letter-in-upper-and-lower-case/',
   complexity: 'O(n + 26) time and O(1) extra space. The visualization caps s at 30 letters.',
   examples: [
-    { label: 'Example 1', input: '{"s":"lEeTcOdE"}' },
-    { label: 'Example 2', input: '{"s":"arRAzFif"}' },
+    { label: 'Own: mixed case word', input: '{"s":"HeLLoWorld"}' },
+    { label: 'Own: capitals then lower', input: '{"s":"ABCdef"}' },
     { label: 'None', input: '{"s":"AbCdEfGhIjK"}' },
     { label: 'Single letter', input: '{"s":"q"}' },
     { label: 'Two letters, both cases', input: '{"s":"aA"}' },

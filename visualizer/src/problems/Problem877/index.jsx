@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/stone-game/',
   complexity: 'O(n^2) time and space for interval DP. (Alex in fact always wins, but the DP proves it.)',
   examples: [
-    { label: 'Own case 1', input: '[6,4,5,6]' },
+    { label: 'Six piles, odd total', input: '[4,9,2,7,5,6]' },
     { label: 'Six piles', input: '[3,7,2,3,8,1]' },
     { label: 'Two piles', input: '[1,2]' },
     { label: 'Minimum piles', input: '[2,3]' },

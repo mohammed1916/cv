@@ -16,9 +16,9 @@ const definition = {
   url: 'https://leetcode.com/problems/3sum-with-multiplicity/',
   complexity: 'O(n^2) time after sorting, O(1) extra space. arr is capped at 40 values here.',
   examples: [
-    { label: 'Own case 1', input: '{"arr":[2,2,3,3,4,4,5,5,6,6],"target":9}' },
-    { label: 'Own case 2', input: '{"arr":[2,2,3,3,3,3],"target":6}' },
-    { label: 'Own case 3', input: '{"arr":[3,2,4],"target":7}' },
+    { label: 'Even numbers to twelve', input: '{"arr":[2,4,6,8,10],"target":12}' },
+    { label: 'Repeated middle values', input: '{"arr":[1,3,3,5,7,9],"target":10}' },
+    { label: 'Many equal values', input: '{"arr":[5,5,5,5,1],"target":15}' },
     { label: 'Zero target', input: '{"arr":[0,0,0],"target":0}' },
     { label: 'Equal values', input: '{"arr":[5,5,5,5],"target":10}' },
     { label: 'Largest values and target', input: '{"arr":[100,100,100],"target":300}' },

@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/prison-cells-after-n-days/',
   complexity: 'O(min(n, 2^6)) simulated days, since states repeat within at most 64 steps.',
   examples: [
-    { label: 'Own case 1', input: '{"cells":[1,0,0,1,1,0,1,0],"n":7}' },
-    { label: 'Own case 2', input: '{"cells":[0,1,0,0,1,0,0,1],"n":1000000000}' },
+    { label: 'Three days', input: '{"cells":[1,1,0,0,1,0,1,0],"n":3}' },
+    { label: 'Large day count', input: '{"cells":[0,1,1,1,0,1,0,0],"n":1000}' },
     { label: 'Zero days', input: '{"cells":[1,1,1,1,1,1,1,1],"n":0}' },
     { label: 'Zero steps', input: '{"cells":[0,0,0,0,0,0,0,0],"n":0}' },
     { label: 'All ones, one step', input: '{"cells":[1,1,1,1,1,1,1,1],"n":1}' },

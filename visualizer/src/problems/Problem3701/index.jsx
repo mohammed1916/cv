@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/compute-alternating-sum/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the array at 100 entries.',
   examples: [
-    { label: 'Own case 1', input: '[2,4,6,8]' },
-    { label: 'Example 2', input: '[100]' },
+    { label: 'Repeats with extremes', input: '[88,1,42,42,99]' },
+    { label: 'Own: five values with a repeat', input: '[4,9,2,7,7]' },
     { label: 'Single value', input: '[1]' },
     { label: 'Equal values', input: '[5,5,5,5]' },
     { label: 'Extreme values', input: '[100,1,100,1]' },

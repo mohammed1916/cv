@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-child-who-has-the-ball-after-k-seconds/',
   complexity: 'O(k) time for the simulation. The visualization caps k at 200.',
   examples: [
-    { label: 'Own case 1', input: '{"n":4,"k":6}' },
-    { label: 'Own case 2', input: '{"n":6,"k":7}' },
+    { label: 'Five children, nine seconds', input: '{"n":5,"k":9}' },
+    { label: 'Three children, twelve seconds', input: '{"n":3,"k":12}' },
     { label: "Two children, one second", input: "{\"n\": 2, \"k\": 1}" },
     { label: "Largest group and time", input: "{\"n\": 100, \"k\": 200}" },
     { label: "Long run: 100 children", input: "{\"n\": 100, \"k\": 137}" },

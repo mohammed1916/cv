@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-the-number-of-infection-sequences/',
   complexity: 'O(n log MOD) time for the modular inverses. The visualization caps n at 10.',
   examples: [
-    { label: 'Own case 1', input: '{"n":5,"sick":[2]}' },
+    { label: 'Six positions, sick at ends', input: '{"n":6,"sick":[0,4]}' },
     { label: 'Two ends', input: '{"n":5,"sick":[0,4]}' },
     { label: 'Two children, one sick', input: '{"n":2,"sick":[0]}' },
     { label: 'Sick at alternating spots', input: '{"n":4,"sick":[0,2]}' },

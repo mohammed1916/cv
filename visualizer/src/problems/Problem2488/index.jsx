@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-subarrays-with-median-k/',
   complexity: 'O(n^2 log n) time for this sorted check. The visualization caps n at 12.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[5,4,1,2,3],"k":4}' },
+    { label: 'Permutation of five, k two', input: '{"nums":[3,1,5,2,4],"k":2}' },
     { label: 'Example 2', input: '{"nums":[1,2,3],"k":2}' },
     { label: 'Single element', input: '{"nums":[1],"k":1}' },
     { label: 'Median in the middle', input: '{"nums":[2,4,1,3],"k":3}' },

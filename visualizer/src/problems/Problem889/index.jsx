@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/',
   complexity: 'O(n) time and space with a postorder index map (a node with one child is attached as the left child, so any valid tree is accepted).',
   examples: [
-    { label: 'Own case 1', input: '{"preorder":[2,3,5,6,4,7,8],"postorder":[5,6,3,7,8,4,2]}' },
+    { label: 'Five-node tree', input: '{"preorder":[4,2,1,3,6],"postorder":[1,3,2,6,4]}' },
     { label: 'Single node', input: '{"preorder":[1],"postorder":[1]}' },
     { label: 'Skewed', input: '{"preorder":[1,2,3],"postorder":[3,2,1]}' },
     { label: 'Single node 7', input: '{"preorder":[7],"postorder":[7]}' },

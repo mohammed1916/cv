@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-star-sum-of-a-graph/',
   complexity: 'O(m log m) time for m edges. The visualization caps the graph at ten nodes.',
   examples: [
-    { label: 'Own case 1', input: '{"vals":[-20,-10,10,4,3,2,1],"edges":[[3,6],[3,5],[3,4],[1,3],[1,2],[0,1]],"k":2}' },
-    { label: 'Own case 2', input: '{"vals":[-6],"edges":[],"k":1}' },
+    { label: 'Chain with one cut', input: '{"vals":[5,-2,7,1],"edges":[[0,1],[1,2],[2,3]],"k":1}' },
+    { label: 'Branching tree with two cuts', input: '{"vals":[-30,15,-7,4,9,-11],"edges":[[0,1],[0,2],[2,3],[2,4],[4,5]],"k":2}' },
     { label: 'Single node, k = 1', input: '{"vals":[7],"edges":[],"k":1}' },
     { label: 'Equal values', input: '{"vals":[5,5,5],"edges":[[0,1],[0,2]],"k":1}' },
     { label: 'Extreme values, k = 10', input: '{"vals":[100,-100,100,-100,100,-100,100,-100,100,-100],"edges":[[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[0,8],[0,9]],"k":10}' },

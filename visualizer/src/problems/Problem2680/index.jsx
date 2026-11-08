@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-or/',
   complexity: 'O(n) time and O(n) space for the prefix and suffix tables. The visualization caps the input at 12 values.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[13,10],"k":2}' },
-    { label: 'Own case 2', input: '{"nums":[9,2,3],"k":3}' },
+    { label: 'Five values, k four', input: '{"nums":[8,30,14,21,5],"k":4}' },
+    { label: 'Equal values, k zero', input: '{"nums":[50,50,50],"k":0}' },
     { label: 'Zero operations', input: '{"nums":[5,9],"k":0}' },
     { label: 'Equal values tie', input: '{"nums":[7,7,7],"k":2}' },
     { label: 'Largest values, k = 6', input: '{"nums":[100,99,98,97,96,95,94,93,92,91,90,89],"k":6}' },

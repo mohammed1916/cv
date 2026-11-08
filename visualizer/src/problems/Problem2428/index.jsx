@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-sum-of-an-hourglass/',
   complexity: 'O(mn) hourglasses with 7 additions each. The visualization caps the grid at 7 by 7.',
   examples: [
-    { label: 'Example 1', input: '{"grid":[[6,2,1,3],[4,2,1,5],[9,2,8,7],[4,1,2,9]]}' },
-    { label: 'Example 2', input: '{"grid":[[1,2,3],[4,5,6],[7,8,9]]}' },
+    { label: 'Own: three by four grid', input: '{"grid":[[5,1,0,3],[2,8,6,1],[4,4,0,9]]}' },
+    { label: 'Own: shuffled three by three', input: '{"grid":[[0,9,4],[2,7,1],[6,3,5]]}' },
     { label: 'Smallest grid', input: '{"grid":[[0,0,0],[0,0,0],[0,0,0]]}' },
     { label: 'Equal values', input: '{"grid":[[5,5,5],[5,5,5],[5,5,5]]}' },
     { label: 'Largest values', input: '{"grid":[[100,0,100],[0,100,0],[100,0,100]]}' },

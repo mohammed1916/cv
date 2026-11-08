@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-difference-between-node-and-ancestor/',
   complexity: 'O(n) time and O(h) space. The visualization caps input at 15 nodes.',
   examples: [
-    { label: 'Own case 1', input: '[9,4,11,2,7,null,15,null,null,5,8,14]' },
-    { label: 'Own case 2', input: '[2,null,3,null,1,4]' },
+    { label: 'Sparse right spine', input: '[20,8,25,null,12,null,30,4]' },
+    { label: 'Left-leaning chain', input: '[50,10,40,6,null,null,null,1]' },
     { label: 'Single node', input: '[5]' },
     { label: 'Repeated values', input: '[5,5,5,5,5]' },
     { label: 'Extremes at the limit', input: '[99,0,99,0,99,0,99,0,99,0,99,0,99,0,99]' },

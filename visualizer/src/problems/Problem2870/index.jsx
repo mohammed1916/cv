@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-number-of-operations-to-make-array-empty/',
   complexity: 'O(n) time and O(n) space.',
   examples: [
-    { label: 'Own case 1', input: '[3,4,4,3,3,5,3,4,5]' },
-    { label: 'Own case 2', input: '[3,2,3,3,4,4]' },
+    { label: 'Six values, repeated four', input: '[4,1,4,2,7,1]' },
+    { label: 'Two equal values', input: '[5,5]' },
     { label: "Smallest pair", input: "[1,1]" },
     { label: "Equal values", input: "[5,5,5,5,5]" },
     { label: "Maximum values, length 20", input: "[10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1]" },

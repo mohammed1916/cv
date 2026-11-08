@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-consecutive-cards-to-pick-up/',
   complexity: 'O(n) time and O(n) space for the last-seen table. The visualization caps input at 20 cards.',
   examples: [
-    { label: 'Example 1', input: '{"cards":[3,4,2,3,4,7]}' },
-    { label: 'Example 2', input: '{"cards":[1,0,5,3]}' },
+    { label: 'Own: seven cards with repeats', input: '{"cards":[8,2,8,5,1,9,0]}' },
+    { label: 'Own: three cards with a zero', input: '{"cards":[99,0,42]}' },
     { label: 'Single card', input: '{"cards":[5]}' },
     { label: 'Repeated value', input: '{"cards":[4,4,4,4]}' },
     { label: 'Twenty cards, extreme values', input: '{"cards":[99,0,99,0,99,0,99,0,99,0,99,0,99,0,99,0,99,0,99,0]}' },

@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-white-tiles-covered-by-a-carpet/',
   complexity: 'O(m log m) time for the sort and O(m) for the sweep. The visualization caps input at 6 ranges.',
   examples: [
-    { label: 'Example 1', input: '{"tiles":[[1,5],[10,11],[12,18],[20,25],[30,32]],"carpet_length":10}' },
+    { label: 'Own: three tiles, short carpet', input: '{"tiles":[[2,4],[9,9],[15,20]],"carpet_length":6}' },
     { label: 'Unsorted input', input: '{"tiles":[[10,11],[1,1]],"carpet_length":2}' },
     { label: 'Single tile covers carpet', input: '{"tiles":[[1,40]],"carpet_length":40}' },
     { label: 'Carpet shorter than tile', input: '{"tiles":[[3,9]],"carpet_length":1}' },

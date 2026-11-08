@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-k-or-of-an-array/',
   complexity: 'O(n * 31) time. The visualization checks bits 0 to 5 for values up to 31.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[8,13,10,9,10,16],"k":5}' },
-    { label: 'Own case 2', input: '{"nums":[11,9,6,10,12,7,9],"k":2}' },
+    { label: 'Seven values, k of three', input: '{"nums":[14,3,22,9,6,17,0],"k":3}' },
+    { label: 'Repeated 25, k of five', input: '{"nums":[25,12,25,3,19,8],"k":5}' },
     { label: 'Single number, k = 1', input: '{"nums":[5],"k":1}' },
     { label: 'Equal numbers', input: '{"nums":[6,6,6],"k":3}' },
     { label: 'All five bits set in every number', input: '{"nums":[31,31,31,31,31,31,31,31],"k":8}' },

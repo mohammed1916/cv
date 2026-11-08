@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-ways-to-earn-points/',
   complexity: 'O(types * target * count) time and O(target) space. The visualization caps target at 30, counts at 8, and types at 4.',
   examples: [
-    { label: 'Own case 1', input: '{"target":7,"types":[[7,2],[4,3],[3,4]]}' },
+    { label: 'Three kinds, target 13', input: '{"target":13,"types":[[5,3],[2,6],[4,2]]}' },
     { label: 'Example 2', input: '{"target":5,"types":[[8,1],[8,2],[8,5]]}' },
     { label: 'Single way', input: '{"target":18,"types":[[6,1],[3,2],[2,3]]}' },
     { label: 'Single point type', input: '{"target":1,"types":[[1,1]]}' },

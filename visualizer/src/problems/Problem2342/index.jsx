@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/max-sum-of-a-pair-with-equal-sum-of-digits/',
   complexity: 'O(n * d) time for n numbers of at most d digits, and O(n) space. The visualization caps input at 20 numbers.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[18,43,36,13,7]}' },
-    { label: 'Example 2', input: '{"nums":[10,12,19,14]}' },
+    { label: 'Own: four squares-like values', input: '{"nums":[9,4,25,16]}' },
+    { label: 'Own: three values', input: '{"nums":[6,30,2]}' },
     { label: 'No equal digit sums', input: '{"nums":[1,2]}' },
     { label: 'Equal digit sums, largest pair', input: '{"nums":[9,18,27]}' },
     { label: 'Largest values near one billion', input: '{"nums":[1000000000,999999999,999999998,999999997,999999996,999999995,999999994,999999993,999999992,999999991,999999990,999999989,999999988,999999987,999999986,999999985,999999984,999999983,999999982,999999981]}' },

@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.doocs.org/en/lc/3855',
   complexity: 'O(log k) time with modular exponentiation. The visualization caps k at 60.',
   examples: [
-    { label: 'Own case 1', input: '{"l":2,"r":3,"k":3}' },
+    { label: 'Digits two to six, k three', input: '{"l":2,"r":6,"k":3}' },
     { label: 'Leading zeros', input: '{"l":0,"r":1,"k":3}' },
     { label: 'Modulo', input: '{"l":5,"r":5,"k":10}' },
     { label: 'Single digit', input: '{"l":0,"r":0,"k":1}' },

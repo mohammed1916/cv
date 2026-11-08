@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-kth-smallest-sum-of-a-matrix-with-sorted-rows/',
   complexity: 'O(m * k * log k) time for m rows and k kept sums. The visualization caps the matrix at 4 by 4.',
   examples: [
-    { label: 'Own case 1', input: '{"mat":[[2,4,12],[3,5,7]],"k":6}' },
-    { label: 'Own case 2', input: '{"mat":[[2,11,11],[2,5,6],[3,4,7]],"k":8}' },
+    { label: 'Two rows, fifth smallest', input: '{"mat":[[1,6,9],[2,4,8]],"k":5}' },
+    { label: 'Three rows of two', input: '{"mat":[[3,5],[1,9],[4,4]],"k":6}' },
     { label: 'One cell', input: '{"mat":[[1]],"k":1}' },
     { label: 'Equal values', input: '{"mat":[[2,2],[2,2]],"k":3}' },
     { label: 'Largest values in a 4 by 4 grid', input: '{"mat":[[17,18,19,20],[17,18,19,20],[17,18,19,20],[17,18,19,20]],"k":16}' },

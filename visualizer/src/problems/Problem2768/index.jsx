@@ -12,8 +12,8 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-black-blocks/',
   complexity: 'O(k) time for k black cells, plus O(m times n) to count the blocks. The visualization caps the grid at 8 by 8.',
   examples: [
-    { label: 'Own case 1', input: '{"m":4,"n":4,"coordinates":[[1,1]]}' },
-    { label: 'Own case 2', input: '{"m":4,"n":4,"coordinates":[[1,1],[2,2],[1,3]]}' },
+    { label: 'One black cell, 2 by 5 grid', input: '{"m":2,"n":5,"coordinates":[[1,4]]}' },
+    { label: 'Scattered cells, 5 by 3 grid', input: '{"m":5,"n":3,"coordinates":[[0,1],[3,0],[4,2],[2,2]]}' },
     { label: 'Smallest grid, one black cell', input: '{"m":2,"n":2,"coordinates":[[0,0]]}' },
     { label: 'Two black cells in one row', input: '{"m":3,"n":3,"coordinates":[[1,0],[1,2]]}' },
     { label: 'Boundary: four corners of 8 by 8', input: '{"m":8,"n":8,"coordinates":[[0,0],[7,7],[0,7],[7,0]]}' },

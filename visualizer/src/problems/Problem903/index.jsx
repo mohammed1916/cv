@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/valid-permutations-for-di-sequence/',
   complexity: 'O(n^2) time and O(n) space (the visualization keeps each row; s is capped at 100 characters).',
   examples: [
-    { label: 'Example 1', input: '"DID"' },
-    { label: 'Example 2', input: '"D"' },
+    { label: 'Own: six steps', input: '"IDIIDD"' },
+    { label: 'Own: two downs then up', input: '"DDI"' },
     { label: 'All increasing', input: '"IIII"' },
     { label: 'Mixed', input: '"DIDDIID"' },
     { label: 'Single I', input: '"I"' },

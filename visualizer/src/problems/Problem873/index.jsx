@@ -16,8 +16,8 @@ const definition = {
   url: 'https://leetcode.com/problems/length-of-longest-fibonacci-subsequence/',
   complexity: 'O(n^2) time and space. The visualization caps n at 16.',
   examples: [
-    { label: 'Own case 1', input: '[2,3,4,5,6,7,8,9]' },
-    { label: 'Own case 2', input: '[2,4,8,12,13,15,19]' },
+    { label: 'Mixed with one Fibonacci run', input: '[1,2,4,7,11,13]' },
+    { label: 'No Fibonacci triple', input: '[2,4,6,8,10,12,14]' },
     { label: 'No chain', input: '[1,4,9,16]' },
     { label: 'Smallest chain', input: '[1,2,3]' },
     { label: 'Equal gaps', input: '[10,20,30,40,50]' },

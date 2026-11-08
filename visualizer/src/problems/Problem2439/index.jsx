@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimize-maximum-of-array/',
   complexity: 'O(n log(max value)) time. The visualization caps the input at 8 values.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[3,7,1,6]}' },
-    { label: 'Example 2', input: '{"nums":[10,1]}' },
+    { label: 'Own: five values', input: '{"nums":[2,0,9,4,4]}' },
+    { label: 'Own: two values', input: '{"nums":[5,8]}' },
     { label: 'Single number', input: '{"nums":[0]}' },
     { label: 'Equal values', input: '{"nums":[4,4,4]}' },
     { label: 'Largest values', input: '{"nums":[10,0,10,0,10,0,10,0]}' },

@@ -11,18 +11,18 @@ export function buildTrace(nums) {
   let ops = 0
   for (;;) {
     const start = 3 * ops
-    frames.push({ pythonLine: pyAt('rest = '), phase: 'window', activeLine: codeAt('take the rest'), start, at: -1, ops, message: start >= n ? 'Nothing is left, so the array is empty.' : `After ${ops} operation${ops === 1 ? '' : 's'}, the rest starts at index ${start}.` })
+    frames.push({ pythonLine: pyAt('rest = '), phase: 'window', activeLine: codeAt('rest is the array'), start, at: -1, ops, message: start >= n ? 'Nothing is left, so the array is empty.' : `After ${ops} operation${ops === 1 ? '' : 's'}, the rest starts at index ${start}.` })
     if (start >= n) break
     const seen = new Set()
     let dup = false
     for (let i = start; i < n; i++) {
       if (seen.has(nums[i])) {
         dup = true
-        frames.push({ pythonLine: pyAt('return ops'), phase: 'dup', activeLine: codeAt('if a value repeats'), start, at: i, ops, message: `Value ${nums[i]} repeats at index ${i}; remove three more.` })
+        frames.push({ pythonLine: pyAt('if len(rest)'), phase: 'dup', activeLine: codeAt('if rest has no repeated value'), start, at: i, ops, message: `Value ${nums[i]} repeats at index ${i}; remove three more.` })
         break
       }
       seen.add(nums[i])
-      frames.push({ pythonLine: pyAt('if len(rest)'), phase: 'scan', activeLine: codeAt('if a value repeats'), start, at: i, ops, message: `Value ${nums[i]} is new so far.` })
+      frames.push({ pythonLine: pyAt('if len(rest)'), phase: 'scan', activeLine: codeAt('if rest has no repeated value'), start, at: i, ops, message: `Value ${nums[i]} is new so far.` })
     }
     if (!dup) break
     ops++

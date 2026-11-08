@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-distinct-averages/',
   complexity: 'O(n log n) time for sorting and O(n) for the pairing. The visualization caps input at 30 values.',
   examples: [
-    { label: 'Example', input: '{"nums":[4,1,4,0,3,5]}' },
+    { label: 'Own: eight values', input: '{"nums":[9,2,7,7,0,1,3,3]}' },
     { label: 'Repeated', input: '{"nums":[1,100,1,100]}' },
     { label: 'Smallest pair', input: '{"nums":[0,0]}' },
     { label: 'Equal values', input: '{"nums":[7,7,7,7]}' },

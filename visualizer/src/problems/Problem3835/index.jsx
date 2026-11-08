@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-subarrays-with-cost-less-than-or-equal-to-k/',
   complexity: 'O(n^2) time for this teaching version. The visualization caps input at 20 values.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,4,3],"k":5}' },
+    { label: 'Four values, k six', input: '{"nums":[12,5,20,8],"k":6}' },
     { label: 'Equal values', input: '{"nums":[5,5,5,5],"k":0}' },
     { label: 'One value, k zero', input: '{"nums":[1],"k":0}' },
     { label: 'Equal pair, k zero', input: '{"nums":[7,7],"k":0}' },

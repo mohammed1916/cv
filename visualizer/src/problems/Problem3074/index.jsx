@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/apple-redistribution-into-boxes/',
   complexity: 'O(m log m) for the sort, where m is the number of boxes.',
   examples: [
-    { label: 'Own case 1', input: '{"apple":[2,4,3],"capacity":[5,4,2,6,3]}' },
-    { label: 'Own case 2', input: '{"apple":[6,6,6],"capacity":[3,5,3,8]}' },
+    { label: 'Two apple packs', input: '{"apple":[3,1],"capacity":[2,4,1]}' },
+    { label: 'Four packs, three boxes', input: '{"apple":[7,2,5,1],"capacity":[9,6,4]}' },
     { label: 'Single apple', input: '{"apple":[1],"capacity":[1]}' },
     { label: 'Equal boxes', input: '{"apple":[2,2],"capacity":[2,2,2]}' },
     { label: 'Largest values', input: '{"apple":[10,10,10,10,10,10],"capacity":[10,10,10,10,10,10]}' },

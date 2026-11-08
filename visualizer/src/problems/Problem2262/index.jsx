@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/total-appeal-of-a-string/',
   complexity: 'O(n) time and O(1) extra space for the 26 letters. The visualization caps input at 20 letters.',
   examples: [
-    { label: 'Example 1', input: '{"s": "abbca"}' },
-    { label: 'Example 2', input: '{"s": "code"}' },
+    { label: 'Own: tatoo', input: '{"s": "tatoo"}' },
+    { label: 'Own: quiz', input: '{"s": "quiz"}' },
     { label: 'Single letter', input: '{"s":"a"}' },
     { label: 'One repeated letter', input: '{"s":"aaaaa"}' },
     { label: 'Twenty distinct letters', input: '{"s":"abcdefghijklmnopqrst"}' },

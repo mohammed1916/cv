@@ -18,25 +18,27 @@ export function parseInput(text) {
 export function buildTrace(points) {
   const frames = []
   const byY = new Map()
-  frames.push({ pythonLine: 3, phase: 'start', activeLine: L('create counts by height'), level: null, pairs: 0, seen: 0, total: 0, message: 'Start with no horizontal levels counted.' })
+  frames.push({ pythonLine: P('total = 0'), phase: 'start', activeLine: L('set total and seen to zero'), level: null, pairs: 0, seen: 0, total: 0, message: 'Start with no horizontal levels counted.' })
   for (const [x, y] of points) {
     byY.set(y, (byY.get(y) ?? 0) + 1)
-    frames.push({ pythonLine: 5, phase: 'count', activeLine: L('count points at each height'), level: y, pairs: 0, seen: 0, total: 0, message: `Point (${x}, ${y}) joins height ${y}.` })
+    frames.push({ pythonLine: P('by_y[y] = '), phase: 'count', activeLine: L('count points at each height'), level: y, pairs: 0, seen: 0, total: 0, message: `Point (${x}, ${y}) joins height ${y}.` })
   }
   let total = 0
   let seen = 0
   for (const [y, count] of byY) {
     const pairs = count * (count - 1) / 2
-    frames.push({ pythonLine: 9, phase: 'pairs', activeLine: L('pairs on this height'), level: y, pairs, seen, total, message: `Height ${y} has ${count} point${count === 1 ? '' : 's'}, giving ${pairs} segment${pairs === 1 ? '' : 's'}.` })
+    frames.push({ pythonLine: P('pairs = count'), phase: 'pairs', activeLine: L('pairs = c times'), level: y, pairs, seen, total, message: `Height ${y} has ${count} point${count === 1 ? '' : 's'}, giving ${pairs} segment${pairs === 1 ? '' : 's'}.` })
     total += seen * pairs
-    frames.push({ pythonLine: 10, phase: 'add', activeLine: L('add segments from earlier heights'), level: y, pairs, seen, total, message: `Pair with ${seen} earlier segment${seen === 1 ? '' : 's'}; total ${total}.` })
+    frames.push({ pythonLine: P('total += seen'), phase: 'add', activeLine: L('add seen times pairs'), level: y, pairs, seen, total, message: `Pair with ${seen} earlier segment${seen === 1 ? '' : 's'}; total ${total}.` })
     seen += pairs
-    frames.push({ pythonLine: 11, phase: 'extend', activeLine: L('count this height as seen'), level: y, pairs, seen, total, message: `${seen} segment${seen === 1 ? '' : 's'} seen so far.` })
+    frames.push({ pythonLine: P('seen += pairs'), phase: 'extend', activeLine: L('add pairs to seen'), level: y, pairs, seen, total, message: `${seen} segment${seen === 1 ? '' : 's'} seen so far.` })
   }
   const result = total % MOD
-  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return the total'), level: null, pairs: 0, seen, total: result, message: `Trapezoid count is ${result}.` })
+  frames.push({ pythonLine: P('return total % MOD'), phase: 'done', activeLine: L('return total modulo'), level: null, pairs: 0, seen, total: result, message: `Trapezoid count is ${result}.` })
   return { input: points, result, frames }
 }
+
+const P = s => python.split('\n').findIndex(line => line.includes(s)) + 1
 
 export const code = `count horizontal trapezoids
   set total and seen to zero

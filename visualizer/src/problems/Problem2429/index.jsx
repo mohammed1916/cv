@@ -9,8 +9,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimize-xor/',
   complexity: 'O(log M) time and O(1) space, where M bounds the bit width. The visualization caps values at 1023.',
   examples: [
-    { label: 'Own case 1', input: '{"num1":4,"num2":6}' },
-    { label: 'Own case 2', input: '{"num1":2,"num2":13}' },
+    { label: 'Twelve and ten', input: '{"num1":12,"num2":10}' },
+    { label: 'Seven and two', input: '{"num1":7,"num2":2}' },
     { label: 'Smallest values', input: '{"num1":1,"num2":1}' },
     { label: 'Equal values', input: '{"num1":10,"num2":10}' },
     { label: 'Largest values', input: '{"num1":1023,"num2":1023}' },

@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/longest-binary-subsequence-less-than-or-equal-to-k/',
   complexity: 'O(n) time for the scan plus O(n) to count zeros. The visualization caps input at 20 bits.',
   examples: [
-    { label: 'Own case 1', input: '{"s":"1001010","k":5}' },
-    { label: 'Own case 2', input: '{"s":"00101001","k":1}' },
+    { label: 'Seven bits, k 3', input: '{"s":"0110100","k":3}' },
+    { label: 'Four bits, k 2', input: '{"s":"1100","k":2}' },
     { label: 'Single bit fits', input: '{"s":"1","k":1}' },
     { label: 'Leading zeros are free', input: '{"s":"0000","k":1}' },
     { label: 'Twenty ones, k at the limit', input: '{"s":"11111111111111111111","k":1000000}' },

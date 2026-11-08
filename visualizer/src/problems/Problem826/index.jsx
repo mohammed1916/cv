@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/most-profit-assigning-work/',
   complexity: 'O(n log n + m log m) time for sorting; the two-pointer sweep is O(n + m).',
   examples: [
-    { label: 'Own case 1', input: '{"difficulty":[3,5,7,9,11],"profit":[11,21,31,41,51],"worker":[5,6,7,8]}' },
+    { label: 'Three jobs, three workers', input: '{"difficulty":[3,6,8],"profit":[5,9,4],"worker":[7,2,9]}' },
     { label: 'Too hard', input: '{"difficulty":[85,47,57],"profit":[24,66,99],"worker":[40,25,25]}' },
     { label: 'Profit not monotone', input: '{"difficulty":[1,2,3],"profit":[50,10,5],"worker":[1,2,3]}' },
     { label: 'One job, one worker', input: '{"difficulty":[1],"profit":[1],"worker":[1]}' },

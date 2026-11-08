@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/shifting-letters/',
   complexity: 'O(n) time and O(n) space, instead of the O(n^2) cost of applying every shift to its prefix.',
   examples: [
-    { label: 'Own case 1', input: '{"s":"bcd","shifts":[4,6,10]}' },
-    { label: 'Own case 2', input: '{"s":"bbb","shifts":[2,3,4]}' },
+    { label: 'Five letters, varied shifts', input: '{"s":"hello","shifts":[1,0,4,1,2]}' },
+    { label: 'Wrap-around letters', input: '{"s":"zzz","shifts":[1,1,1000000000]}' },
     { label: 'Large shifts', input: '{"s":"zebra","shifts":[1000000000,25,26,27,1]}' },
     { label: 'Single letter, no shift', input: '{"s":"a","shifts":[0]}' },
     { label: 'Zero shifts leave text unchanged', input: '{"s":"abc","shifts":[0,0,0]}' },

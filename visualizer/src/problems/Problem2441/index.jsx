@@ -16,9 +16,9 @@ const definition = {
   url: 'https://leetcode.com/problems/largest-positive-integer-that-exists-with-its-negative/',
   complexity: 'O(n) time and O(n) space for the set. The visualization caps input at 30 numbers.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[-1,2,-3,3]}' },
-    { label: 'Example 2', input: '{"nums":[-1,10,6,7,-7,1]}' },
-    { label: 'Example 3', input: '{"nums":[-10,8,6,7,-2,-3]}' },
+    { label: 'Own: three signed values', input: '{"nums":[4,-2,7]}' },
+    { label: 'Own: four signed values', input: '{"nums":[9,-9,2,-4]}' },
+    { label: 'Own: four mixed values', input: '{"nums":[3,-5,11,-8]}' },
     { label: 'Single number', input: '{"nums":[-5]}' },
     { label: 'Opposite values', input: '{"nums":[-3,3]}' },
     { label: 'Largest values', input: '{"nums":[1000,-1000,999,-999,998,-998,997,-997,996,-996,995,-995,994,-994,993,-993,992,-992,991,-991,990,-990,989,-989,988,-988,987,-987,986,-986]}' },

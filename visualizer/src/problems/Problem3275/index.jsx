@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/k-th-nearest-obstacle-queries/',
   complexity: 'O(q log k) time for q queries. The visualization caps the input at 8 queries.',
   examples: [
-    { label: 'Own case 1', input: '{"queries":[[2,3],[4,5],[3,4],[-4,1]],"k":3}' },
-    { label: 'Own case 2', input: '{"queries":[[6,6],[5,5],[4,4]],"k":2}' },
+    { label: 'Points spread both ways', input: '{"queries":[[-6,9],[0,0],[10,-3]],"k":4}' },
+    { label: 'Two points, k one', input: '{"queries":[[7,-7],[-2,8]],"k":1}' },
     { label: 'Single point', input: '{"queries":[[0,0]],"k":1}' },
     { label: 'Equal distances tie', input: '{"queries":[[1,1],[-1,-1],[1,-1]],"k":2}' },
     { label: 'Corners of the range', input: '{"queries":[[10,10],[-10,-10],[10,-10],[-10,10]],"k":4}' },

@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/make-array-zero-by-subtracting-equal-amounts/',
   complexity: 'O(n) time and O(n) space with a set of positive values.',
   examples: [
-    { label: 'Example', input: '{"nums":[1,5,0,3,5]}' },
+    { label: 'Own: four values with zero', input: '{"nums":[2,8,0,6]}' },
     { label: 'All zero', input: '{"nums":[0,0,0]}' },
     { label: 'Single positive value', input: '{"nums":[7]}' },
     { label: 'Repeated value counts once', input: '{"nums":[2,2,2,2]}' },

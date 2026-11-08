@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/time-needed-to-rearrange-a-binary-string/',
   complexity: 'O(n * seconds) for the simulation; a running pass gives O(n). The visualization caps s at 30 characters.',
   examples: [
-    { label: 'Example 1', input: '{"s":"0110101"}' },
-    { label: 'Example 2', input: '{"s":"11100"}' },
+    { label: 'Own: 1010110', input: '{"s":"1010110"}' },
+    { label: 'Own: 0001101', input: '{"s":"0001101"}' },
     { label: 'Single zero', input: '{"s":"0"}' },
     { label: 'All ones', input: '{"s":"1111"}' },
     { label: 'Longest string of 30', input: '{"s":"101010101010101010101010101010"}' },

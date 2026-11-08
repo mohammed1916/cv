@@ -12,8 +12,8 @@ const definition = {
   url: 'https://leetcode.com/problems/count-the-number-of-inversions/',
   complexity: 'O(n^3) time for this table-based DP with n up to 7 in the visualization; the prefix-sum version is O(n^2 * max inversions).',
   examples: [
-    { label: 'Own case 1', input: '{"n":4,"requirements":[[3,3],[1,1]]}' },
-    { label: 'Own case 2', input: '{"n":4,"requirements":[[3,3],[2,2],[1,1]]}' },
+    { label: 'Five elements, one end', input: '{"n":5,"requirements":[[4,2]]}' },
+    { label: 'Six elements, two ends', input: '{"n":6,"requirements":[[5,4],[2,1]]}' },
     { label: 'Smallest array', input: '{"n":2,"requirements":[[0,0]]}' },
     { label: 'Largest array with a full requirement', input: '{"n":7,"requirements":[[6,21]]}' },
     { label: 'Zero counts on every end', input: '{"n":5,"requirements":[[1,0],[2,0],[3,0],[4,0]]}' },

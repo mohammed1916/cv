@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/min-max-game/',
   complexity: 'O(n) time, since each pass halves the list. The visualization caps the list at 32 values.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,3,5,2,4,8,2,2]}' },
-    { label: 'Example 2', input: '{"nums":[3]}' },
+    { label: 'Own: eight values', input: '{"nums":[6,1,9,3,3,2,7,4]}' },
+    { label: 'Own: two values', input: '{"nums":[42,7]}' },
     { label: 'Two equal values', input: '{"nums":[4,4]}' },
     { label: 'Equal values, length four', input: '{"nums":[5,5,5,5]}' },
     { label: 'Thirty-two values, extremes', input: '{"nums":[100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1]}' },

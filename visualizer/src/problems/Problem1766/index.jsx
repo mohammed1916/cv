@@ -16,8 +16,8 @@ const definition = {
   url: 'https://leetcode.com/problems/tree-of-coprimes/',
   complexity: 'O(n * h) time for ancestor scans with a stack, O(n) space. The visualization caps n at 12.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,3,3,2],"edges":[[1,3],[1,2],[0,1]]}' },
-    { label: 'Own case 2', input: '{"nums":[15,6,3,2,10,6,5],"edges":[[2,6],[2,5],[1,4],[1,3],[0,2],[0,1]]}' },
+    { label: 'Path of four', input: '{"nums":[7,5,11,5],"edges":[[0,1],[1,2],[2,3]]}' },
+    { label: 'Branching seven-node tree', input: '{"nums":[9,4,6,12,3,8,10],"edges":[[0,3],[3,5],[1,4],[2,6],[4,6],[2,0]]}' },
   { label: 'Single node', input: "{\"nums\":[7],\"edges\":[]}" },
   { label: 'Equal values on a path', input: "{\"nums\":[6,6,6],\"edges\":[[0,1],[1,2]]}" },
   { label: 'Largest values on a path', input: "{\"nums\":[50,1,50,1,50,1,50,1,50,1,50,1],\"edges\":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11]]}" },

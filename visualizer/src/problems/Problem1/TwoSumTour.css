@@ -14,5 +14,5 @@
 .two-sum-tour-card .two-sum-tour-next { background: color-mix(in srgb, var(--primary) 22%, var(--surface2)); color: var(--text); }
 .two-sum-tour-card button:focus-visible, .two-sum-tour-launch button:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
 @media (max-width: 600px) { .two-sum-tour-card, .two-sum-tour-card.is-left { top: auto; bottom: 12px; left: 12px; right: 12px; width: auto; max-height: 42dvh; } }
-@media (max-width: 600px) { .two-sum-tour-card.for-playback { top: 12px; bottom: auto; } }
+@media (max-width: 600px) { .two-sum-tour-card.for-playback, .two-sum-tour-card.is-top { top: 12px; bottom: auto; } }
 .two-sum-tour-workspace { position: relative; flex: 1; min-height: 0; }

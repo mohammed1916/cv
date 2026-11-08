@@ -13,9 +13,9 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-jumps-to-reach-end-via-prime-teleportation/',
   complexity: 'O(n * sqrt(max value)) with trial-division primality, plus each prime bucket scanned once.',
   examples: [
-    { label: 'Own case 1', input: '[2,3,5,7]' },
-    { label: 'Own case 2', input: '[3,4,5,8,10]' },
-    { label: 'Own case 3', input: '[5,7,6,9]' },
+    { label: 'Five values, one small', input: '[7,1,5,3,9]' },
+    { label: 'Large value first', input: '[1000000,1]' },
+    { label: 'Six equal values', input: '[4,4,4,4,4,4]' },
     { label: 'Single one', input: '[1]' },
     { label: 'Equal values', input: '[6,6,6]' },
     { label: 'Largest values allowed', input: '[1000000,999983,2]' },

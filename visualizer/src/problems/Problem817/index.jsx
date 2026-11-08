@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/linked-list-components/',
   complexity: 'O(n + m) time and O(m) space for the set.',
   examples: [
-    { label: 'Own case 1', input: '{"head":[1,2,3,4],"nums":[1,2,4]}' },
-    { label: 'Own case 2', input: '{"head":[1,2,3,4,5],"nums":[1,4,2,5]}' },
+    { label: 'Two separate blocks', input: '{"head":[4,7,2,9,5],"nums":[7,5]}' },
+    { label: 'Whole list selected', input: '{"head":[1,6,3,8],"nums":[1,3,6,8]}' },
     { label: 'Alternating', input: '{"head":[5,6,7,8,9,10],"nums":[5,7,9]}' },
     { label: 'Single node removed', input: '{"head":[7],"nums":[7]}' },
     { label: 'Remove the whole list', input: '{"head":[1,2,3],"nums":[1,2,3]}' },

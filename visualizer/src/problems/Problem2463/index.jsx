@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-total-distance-traveled/',
   complexity: 'O(F * R * limit) time and O(F * R) space for F factories and R robots. The visualization caps input at 5 robots and 3 factories.',
   examples: [
-    { label: 'Own case 1', input: '{"robot":[1,5,7],"factory":[[3,3],[7,3]]}' },
-    { label: 'Own case 2', input: '{"robot":[2,-2],"factory":[[-3,2],[3,2]]}' },
+    { label: 'Three robots, two factories', input: '{"robot":[-3,4,10],"factory":[[-5,2],[8,2]]}' },
+    { label: 'Two robots, tight limits', input: '{"robot":[0,6],"factory":[[-1,1],[7,1]]}' },
     { label: 'Single robot', input: '{"robot":[0],"factory":[[0,1]]}' },
     { label: 'Equal positions', input: '{"robot":[3,3],"factory":[[3,1],[3,1]]}' },
     { label: 'Largest values', input: '{"robot":[-20,-10,0,10,20],"factory":[[-20,4],[0,4],[20,4]]}' },

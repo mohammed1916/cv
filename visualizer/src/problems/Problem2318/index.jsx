@@ -14,8 +14,8 @@ const definition = {
   complexity: 'O(n * 6 * 49) time and O(49) space in this trace; the answer is kept modulo 1000000007. The visualization caps n at 10.',
   examples: [
     { label: 'Example 1', input: '{"n":1}' },
-    { label: 'Example 2', input: '{"n":2}' },
-    { label: 'Example 3', input: '{"n":4}' },
+    { label: 'Own: six positions', input: '{"n":6}' },
+    { label: 'Own: seven positions', input: '{"n":7}' },
     { label: 'Three rolls', input: '{"n":3}' },
     { label: 'Five rolls', input: '{"n":5}' },
     { label: 'Long run: 10 rolls', input: '{"n":10}' },

@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/smallest-number-in-infinite-set/',
   complexity: 'O(log n) per operation with a min heap of added-back numbers. The visualization caps input at 12 operations.',
   examples: [
-    { label: 'Example', input: '{"operations":["addBack","popSmallest","popSmallest","popSmallest","addBack","popSmallest","popSmallest","popSmallest"],"arguments":[[2],[],[],[],[1],[],[],[]]}' },
+    { label: 'Own: two adds and pops', input: '{"operations":["addBack","addBack","popSmallest","popSmallest","addBack","popSmallest"],"arguments":[[5],[3],[],[],[9],[]]}' },
     { label: 'Single pop', input: '{"operations":["popSmallest"],"arguments":[[]]}' },
     { label: 'Duplicate add-back is ignored', input: '{"operations":["popSmallest","addBack","addBack","popSmallest","popSmallest"],"arguments":[[],[1],[1],[],[]]}' },
     { label: 'Largest value added back', input: '{"operations":["addBack","popSmallest","popSmallest","addBack","popSmallest","popSmallest","popSmallest","popSmallest","popSmallest","popSmallest","popSmallest","popSmallest"],"arguments":[[30],[],[],[29],[],[],[],[],[],[],[],[]]}' },

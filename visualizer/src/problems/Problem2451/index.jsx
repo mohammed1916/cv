@@ -17,8 +17,8 @@ const definition = {
   url: 'https://leetcode.com/problems/odd-string-difference/',
   complexity: 'O(n * L) time and O(n * L) space for n words of length L. The visualization caps input at 10 words of up to 8 letters.',
   examples: [
-    { label: 'Example 1', input: '{"words":["adc","wzy","abc"]}' },
-    { label: 'Example 2', input: '{"words":["aaa","bob","ccc","ddd"]}' },
+    { label: 'Own: four-letter words', input: '{"words":["mnop","nopq","qwer","ghij"]}' },
+    { label: 'Own: three letter words', input: '{"words":["abc","bcd","ace","bdf","axz"]}' },
     { label: 'Length two words', input: '{"words":["ab","ba","ba"]}' },
     { label: 'Shared difference pattern', input: '{"words":["abc","bcd","zzz"]}' },
     { label: 'Largest size', input: '{"words":["bcdefghi","bcdefghi","bcdefghi","bcdefghi","bcdefghi","bcdefghi","bcdefghi","bcdefghi","bcdefghi","zyxwvuts"]}' },

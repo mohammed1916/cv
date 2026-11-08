@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-number-of-people-to-teach/',
   complexity: 'O(F * L + n * U) time for F friendships, L languages per user and U needy users. The visualization caps the input size.',
   examples: [
-    { label: 'Own case 1', input: '{"n":2,"languages":[[1,2],[2],[1]],"friendships":[[2,3],[1,3],[1,2]]}' },
+    { label: 'Three languages, four users', input: '{"n":3,"languages":[[2],[3],[1,3],[2]],"friendships":[[1,4],[2,3],[1,3]]}' },
     { label: 'Already shared', input: '{"n":3,"languages":[[1,3],[2],[1,2],[3]],"friendships":[[1,3],[2,3]]}' },
   { label: 'Smallest network', input: '{"n":1,"languages":[[1],[1]],"friendships":[[1,2]]}' },
   { label: 'No friendships', input: '{"n":2,"languages":[[1],[2]],"friendships":[]}' },

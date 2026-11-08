@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-maximum-number-of-string-pairs/',
   complexity: 'O(n) time with a hash set of two-letter words. The visualization caps input at 12 words.',
   examples: [
-    { label: 'Own case 1', input: '["de","bd","ed","db","aa"]' },
-    { label: 'Own case 2', input: '["bc","cb","dd"]' },
+    { label: 'Five distinct pairs', input: '["ax","yz","mm","pq","ka"]' },
+    { label: 'One word only', input: '["zq"]' },
     { label: 'No pairs', input: '["aa","ab"]' },
     { label: 'Single word', input: '["ab"]' },
     { label: 'Two reverse pairs', input: '["xy","yx","xz","zx"]' },

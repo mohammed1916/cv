@@ -39,8 +39,8 @@ const EXAMPLES =
   REGISTRY_EXAMPLES.every((e) => typeof e.s === 'string' && Array.isArray(e.dictionary))
     ? REGISTRY_EXAMPLES
     : [
-        { label: 'Example 1', s: 'abpcplea', dictionary: ['ale', 'apple', 'monkey', 'plea'] },
-        { label: 'Example 2', s: 'abpcplea', dictionary: ['a', 'b', 'c'] },
+        { label: 'Own: mango chain', s: 'mangoesteam', dictionary: ['man', 'mango', 'mangoes', 'tea', 'steam'] },
+        { label: 'Own: letters out of order', s: 'bcaxa', dictionary: ['ab', 'ca', 'xa', 'bca'] },
       ]
 
 function generateSteps(s, dictionary) {

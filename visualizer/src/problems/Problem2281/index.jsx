@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/sum-of-total-strength-of-wizards/',
   complexity: 'O(n) time with a monotonic stack and prefix sums of prefix sums, and O(n) space.',
   examples: [
-    { label: 'Example', input: '{"strength":[1,3,1,2]}' },
+    { label: 'Own: five wizards', input: '{"strength":[5,2,9,4,7]}' },
     { label: 'Three', input: '{"strength":[5,4,6]}' },
     { label: 'Single wizard', input: '{"strength":[4]}' },
     { label: 'Equal strengths', input: '{"strength":[2,2,2]}' },

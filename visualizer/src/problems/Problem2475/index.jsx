@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-unequal-triplets-in-array/',
   complexity: 'O(n) time for the grouped form. The visualization caps input at 12 entries.',
   examples: [
-    { label: 'Own case 1', input: '[5,5,3,5,4]' },
-    { label: 'Own case 2', input: '[2,2,2,2,2]' },
+    { label: 'Mixed values', input: '[7,1,9,4,4,6]' },
+    { label: 'Descending run of nine', input: '[9,8,7,6,5,4,3,2,10]' },
     { label: 'Minimum length', input: '[1,2,3]' },
     { label: 'Equal values have no triplet', input: '[6,6,6,6]' },
     { label: 'Edge values 1 and 10', input: '[1,10,1,10,5,5,5,10,1,2,3,10]' },

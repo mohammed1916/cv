@@ -50,7 +50,7 @@ export function buildTrace({ rows, ops }) {
       frames.push({ ...snap({ at: left, right, op: index }), pythonLine: P('def get'), phase: 'get', activeLine: L('return this.term(left) + this.term(right)'), ok: null, message: `Operation ${index + 1}: ${left} + ${right} = ${sum}.` })
     }
   }
-  frames.push({ ...snap({ at: '' }), pythonLine: P('return results'), phase: 'done', activeLine: L('getValue(formula)'), ok: true, message: `Recorded ${results.length} formula results.` })
+  frames.push({ ...snap({ at: '' }), pythonLine: P('return self.term'), phase: 'done', activeLine: L('getValue(formula)'), ok: true, message: `Recorded ${results.length} formula results.` })
   return { input: { rows, ops }, result: results, frames }
 }
 

@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/count-the-number-of-ideal-arrays/',
   complexity: 'O(maxValue^2) time for the chain table plus a log factor per binomial. The visualization caps n at 12 and max_value at 40.',
   examples: [
-    { label: 'Example 1', input: '{"n":2,"max_value":5}' },
-    { label: 'Example 2', input: '{"n":5,"max_value":3}' },
+    { label: 'Own: three values up to four', input: '{"n":3,"max_value":4}' },
+    { label: 'Own: four values up to six', input: '{"n":4,"max_value":6}' },
     { label: 'Smallest case', input: '{"n":1,"max_value":1}' },
     { label: 'Only the value one', input: '{"n":3,"max_value":1}' },
     { label: 'Largest input', input: '{"n":12,"max_value":40}' },

@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-hours-of-training-to-win-a-competition/',
   complexity: 'O(n) time for n opponents. The visualization caps opponents at 8.',
   examples: [
-    { label: 'Example 1', input: '{"initial_energy":5,"initial_experience":3,"energy":[1,4,3,2],"experience":[2,6,3,1]}' },
+    { label: 'Own: three opponents', input: '{"initial_energy":4,"initial_experience":6,"energy":[2,5,1],"experience":[3,1,4]}' },
     { label: 'Already strong', input: '{"initial_energy":2,"initial_experience":4,"energy":[1],"experience":[3]}' },
     { label: 'Single opponent', input: '{"initial_energy":10,"initial_experience":10,"energy":[3],"experience":[2]}' },
     { label: 'Equal opponents', input: '{"initial_energy":4,"initial_experience":4,"energy":[4,4],"experience":[4,4]}' },

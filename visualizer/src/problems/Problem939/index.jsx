@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-area-rectangle/',
   complexity: 'O(n^2) time and O(n) space. The visualization caps input at 30 points.',
   examples: [
-    { label: 'Own case 1', input: '[[2,2],[2,4],[4,2],[4,4],[3,3]]' },
-    { label: 'Own case 2', input: '[[2,2],[2,4],[4,2],[4,4],[5,2],[5,4]]' },
+    { label: 'Square plus interior point', input: '[[1,1],[1,3],[3,1],[3,3],[2,2]]' },
+    { label: 'Two rectangles', input: '[[0,0],[0,2],[4,0],[4,2],[1,5]]' },
     { label: 'No rectangle', input: '[[0,0],[1,1],[2,0]]' },
     { label: 'Single point', input: '[[0,0]]' },
     { label: 'Square with a centre', input: '[[0,0],[0,2],[2,0],[2,2],[1,1]]' },

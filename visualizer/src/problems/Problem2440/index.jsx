@@ -17,7 +17,7 @@ const definition = {
   url: 'https://leetcode.com/problems/create-components-with-same-value/',
   complexity: 'O(n * d(S)) time for the splits tried, where S is the total value. The visualization caps input at 10 vertices.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[6,2,2,2,6],"edges":[[3,4],[1,3],[1,2],[0,1]]}' },
+    { label: 'Five vertices', input: '{"nums":[4,1,7,2,7],"edges":[[0,2],[2,1],[2,3],[3,4]]}' },
     { label: 'Two parts', input: '{"nums":[3,3,3],"edges":[[0,1],[1,2]]}' },
     { label: 'Single vertex', input: '{"nums":[9],"edges":[]}' },
     { label: 'Equal values', input: '{"nums":[2,2,2,2],"edges":[[0,1],[0,2],[0,3]]}' },

@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-subarrays-where-max-element-appears-at-least-k-times/',
   complexity: 'O(n) time with a sliding window. The visualization caps input at 12 values.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,4,3,4,4],"k":3}' },
+    { label: 'Seven values, k of two', input: '{"nums":[1,5,2,5,3,5,1],"k":2}' },
     { label: 'No match', input: '{"nums":[1,4,2,1],"k":3}' },
     { label: 'Single value', input: '{"nums":[3],"k":1}' },
     { label: 'Equal values', input: '{"nums":[5,5,5],"k":3}' },

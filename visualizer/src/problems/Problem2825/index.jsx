@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/make-string-a-subsequence-using-cyclic-increments/',
   complexity: 'O(|str1|) time and O(1) extra space.',
   examples: [
-    { label: 'Own case 1', input: '{"str1":"bcd","str2":"be"}' },
-    { label: 'Own case 2', input: '{"str1":"bc","str2":"e"}' },
+    { label: 'Four letters, shared start', input: '{"str1":"adxz","str2":"ayzb"}' },
+    { label: 'Repeated letters, one-letter target', input: '{"str1":"zz","str2":"z"}' },
     { label: "Single letters", input: "{\"str1\":\"a\",\"str2\":\"a\"}" },
     { label: "Equal strings", input: "{\"str1\":\"same\",\"str2\":\"same\"}" },
     { label: "Longest 20 letters", input: "{\"str1\":\"abcdefghijklmnopqrst\",\"str2\":\"tsrqponmlkjihgfedcba\"}" },

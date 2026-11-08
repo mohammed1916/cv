@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-cost-for-cutting-cake-i/',
   complexity: 'O(m log m + n log n) time after sorting the costs. The visualization caps the cake at 30 by 30.',
   examples: [
-    { label: 'Own case 1', input: '{"m":3,"n":2,"horizontalCut":[3,1],"verticalCut":[5]}' },
-    { label: 'Example 2', input: '{"m":2,"n":2,"horizontalCut":[7],"verticalCut":[4]}' },
+    { label: 'Four rows, three columns', input: '{"m":4,"n":3,"horizontalCut":[2,9,4],"verticalCut":[6,1]}' },
+    { label: 'Own: 3 by 2 grid', input: '{"m":3,"n":2,"horizontalCut":[5,2],"verticalCut":[3]}' },
     { label: 'Single cell', input: '{"m":1,"n":1,"horizontalCut":[],"verticalCut":[]}' },
     { label: 'Equal costs tie', input: '{"m":2,"n":2,"horizontalCut":[1],"verticalCut":[1]}' },
     { label: 'Largest column of cuts at 100', input: '{"m":30,"n":1,"horizontalCut":[100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100],"verticalCut":[]}' },

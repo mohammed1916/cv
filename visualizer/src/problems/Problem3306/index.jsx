@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/count-of-substrings-containing-every-vowel-and-k-consonants-ii/',
   complexity: 'O(n) time for each of the two sliding windows. The visualization caps input at 16 letters.',
   examples: [
-    { label: 'Own case 1', input: '{"word":"bfjprr","k":2}' },
-    { label: 'Own case 2', input: '{"word":"jfbpvrrjfbpvrr","k":2}' },
+    { label: 'Six letters, k two', input: '{"word":"rhythm","k":2}' },
+    { label: 'Nine letters, k one', input: '{"word":"pqrsnopqr","k":1}' },
     { label: 'Single letter', input: '{"word":"a","k":0}' },
     { label: 'Longest word, no consonants', input: '{"word":"aeiouaeiouaeioua","k":0}' },
     { label: 'Longest word, k = 4', input: '{"word":"aeioubcdfghjklmn","k":4}' },

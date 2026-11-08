@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/paint-house-iii/',
   complexity: 'O(m * target * n^2) time and O(target * n) space. The visualization caps m at 6 and n at 3.',
   examples: [
-    { label: 'Own case 1', input: '{"houses":[0,0,0,0,0],"cost":[[5,1],[1,10],[10,1],[10,1],[1,10]],"m":5,"n":2,"target":3}' },
+    { label: 'Two pre-painted houses', input: '{"houses":[1,0,0,0,2],"cost":[[3,6],[8,2],[5,4],[1,9],[7,3]],"m":5,"n":2,"target":3}' },
     { label: 'Example 2', input: '{"houses":[1,0,0],"cost":[[1,1],[1,1],[1,1]],"m":3,"n":2,"target":1}' },
     { label: 'Single house', input: '{"houses":[0],"cost":[[4,9,2]],"m":1,"n":3,"target":1}' },
     { label: 'Repeated costs', input: '{"houses":[0,0,0,0],"cost":[[3,3],[3,3],[3,3],[3,3]],"m":4,"n":2,"target":2}' },

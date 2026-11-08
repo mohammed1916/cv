@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/flip-equivalent-binary-trees/',
   complexity: 'O(min(n1, n2)) for unique values; the visualization caps each tree at 30 nodes.',
   examples: [
-    { label: 'Own case 1', input: '{"root1":[2,3,4,5,6,7,null,null,null,8,9],"root2":[2,4,3,null,7,5,6,null,null,null,null,9,8]}' },
+    { label: 'Flip at two levels', input: '{"root1":[4,2,null,1],"root2":[4,null,2,null,1]}' },
     { label: 'Both empty', input: '{"root1":[],"root2":[]}' },
     { label: 'Not equivalent', input: '{"root1":[1,2,3],"root2":[1,2,4]}' },
     { label: 'Single node', input: '{"root1":[1],"root2":[1]}' },

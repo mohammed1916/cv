@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/longest-palindromic-subsequence-after-at-most-k-operations/',
   complexity: 'O(n^2 * k) time and space for the interval table. The visualization caps s at 12 letters and k at 30.',
   examples: [
-    { label: 'Own case 1', input: '{"s":"bcdfe","k":3}' },
-    { label: 'Own case 2', input: '{"s":"bbbaaa","k":5}' },
+    { label: 'Five letters, budget seven', input: '{"s":"bcdbe","k":7}' },
+    { label: 'Mixed letters, budget one', input: '{"s":"zzxyq","k":1}' },
     { label: 'Single letter, no operations', input: '{"s":"a","k":0}' },
     { label: 'Repeated letters', input: '{"s":"aaaa","k":2}' },
     { label: 'Largest budget', input: '{"s":"zyxwvutsrqpo","k":30}' },

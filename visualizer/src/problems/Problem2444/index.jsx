@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-subarrays-with-fixed-bounds/',
   complexity: 'O(n) time and O(1) extra space. Three last-seen positions are enough.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,4,6,3,8,6],"minK":2,"maxK":6}' },
+    { label: 'Seven values, range 2 to 4', input: '{"nums":[5,1,4,4,2,3,9],"minK":2,"maxK":4}' },
     { label: 'Repeats', input: '{"nums":[2,2,2],"minK":2,"maxK":2}' },
     { label: 'Single value', input: '{"nums":[4],"minK":4,"maxK":4}' },
     { label: 'Equal values', input: '{"nums":[5,5,5,5],"minK":1,"maxK":4}' },

@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/mice-and-cheese/',
   complexity: 'O(n log n) time for the sort and O(n) for the assignment. The visualization caps input at 12 cheese types.',
   examples: [
-    { label: 'Own case 1', input: '{"reward1":[2,2,4,5],"reward2":[5,5,2,2],"k":3}' },
+    { label: 'Five cheeses, k two', input: '{"reward1":[9,4,12,7,3],"reward2":[6,10,1,8,11],"k":2}' },
     { label: 'Example 2', input: '{"reward1":[1,1],"reward2":[3,4],"k":1}' },
     { label: 'Single cheese type, none chosen', input: '{"reward1":[7],"reward2":[2],"k":0}' },
     { label: 'Equal rewards tie', input: '{"reward1":[5,5],"reward2":[5,5],"k":1}' },

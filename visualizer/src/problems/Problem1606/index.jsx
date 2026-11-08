@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-servers-that-handled-most-number-of-requests/',
   complexity: 'O(m log k) time with a min heap of busy servers and a sorted free list. The visualization caps input at 6 servers and 12 requests.',
   examples: [
-    { label: 'Own case 1', input: '{"k":4,"arrival":[2,3,4,5,6],"load":[6,3,4,4,4]}' },
-    { label: 'Own case 2', input: '{"k":4,"arrival":[2,3,4],"load":[11,13,12]}' },
+    { label: 'Three servers, four requests', input: '{"k":3,"arrival":[1,7,12,20],"load":[5,9,2,6]}' },
+    { label: 'Two servers, two bursts', input: '{"k":2,"arrival":[10,11,30,31],"load":[7,8,4,6]}' },
     { label: "Single request", input: "{\"k\":1,\"arrival\":[1],\"load\":[2]}" },
     { label: "Equal loads, three requests", input: "{\"k\":2,\"arrival\":[1,2,3],\"load\":[5,5,5]}" },
     { label: "Twelve requests, six servers", input: "{\"k\":6,\"arrival\":[1,6,11,16,21,26,31,36,41,46,51,56],\"load\":[20,20,20,20,20,20,20,20,20,20,20,20]}" },

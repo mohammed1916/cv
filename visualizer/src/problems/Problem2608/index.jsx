@@ -16,8 +16,8 @@ const definition = {
   url: 'https://leetcode.com/problems/shortest-cycle-in-a-graph/',
   complexity: 'O(n * (n + e)) time for a search from every node. The visualization caps the graph at 10 nodes.',
   examples: [
-    { label: 'Own case 1', input: '{"n":8,"edges":[[1,2],[2,3],[3,1],[4,5],[5,6],[6,7],[7,4]]}' },
-    { label: 'Own case 2', input: '{"n":5,"edges":[[1,2],[1,3]]}' },
+    { label: 'Triangle and a pair', input: '{"n":6,"edges":[[0,1],[1,2],[2,0],[3,4]]}' },
+    { label: 'Four-cycle', input: '{"n":4,"edges":[[0,1],[1,2],[2,3],[3,0]]}' },
     { label: 'Two isolated nodes', input: '{"n":2,"edges":[]}' },
     { label: 'Two equal pairs', input: '{"n":4,"edges":[[0,1],[2,3]]}' },
     { label: 'Path of ten nodes', input: '{"n":10,"edges":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9]]}' },

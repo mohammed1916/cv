@@ -18,8 +18,8 @@ const definition = {
   url: 'https://leetcode.com/problems/reachable-nodes-in-subdivided-graph/',
   complexity: 'O((V + E) log V) time with a heap; subdivision nodes are never materialised.',
   examples: [
-    { label: 'Own case 1', input: '{"edges":[[1,2,11],[1,3,2],[2,3,3]],"maxMoves":7,"n":4}' },
-    { label: 'Own case 2', input: '{"edges":[[1,2,5],[2,3,7],[1,3,9],[2,4,2]],"maxMoves":11,"n":5}' },
+    { label: 'Three edges, four moves', input: '{"edges":[[0,2,4],[1,3,2],[0,3,1]],"maxMoves":4,"n":4}' },
+    { label: 'Chain, longer budget', input: '{"edges":[[0,1,2],[1,2,3]],"maxMoves":7,"n":3}' },
     { label: 'Disconnected', input: '{"edges":[[1,2,4],[1,4,5],[1,3,1],[2,3,4],[3,4,5]],"maxMoves":17,"n":5}' },
     { label: 'Single node', input: '{"edges":[],"maxMoves":0,"n":1}' },
     { label: 'Equal weights', input: '{"edges":[[0,1,3],[1,2,3]],"maxMoves":6,"n":3}' },

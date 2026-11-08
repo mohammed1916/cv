@@ -12,7 +12,7 @@ const definition = {
   url: 'https://leetcode.com/problems/smallest-index-with-digit-sum-equal-to-index/',
   complexity: 'O(n * d) time, where d is the number of digits per value. O(1) extra space.',
   examples: [
-    { label: 'Own case 1', input: '[2,4,3]' },
+    { label: 'Five values with a zero', input: '[9,0,14,6,6]' },
     { label: 'Example 2', input: '[1,10,11,12]' },
     { label: 'One value', input: '[0]' },
     { label: 'Equal values', input: '[5,5,5]' },

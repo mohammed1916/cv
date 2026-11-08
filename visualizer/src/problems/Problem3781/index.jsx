@@ -12,7 +12,7 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-score-after-binary-swaps/',
   complexity: 'O(n^2) time in this visualization. The visualization caps n at 12.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[3,2,5,1,2],"s":"01010"}' },
+    { label: 'Four weights, mixed bits', input: '{"nums":[4,1,7,2],"s":"0110"}' },
     { label: 'No ones', input: '{"nums":[4,7,2,9],"s":"0000"}' },
     { label: "Single value", input: "{\"nums\":[5],\"s\":\"1\"}" },
     { label: "Equal values", input: "{\"nums\":[3,3,3,3],\"s\":\"0101\"}" },

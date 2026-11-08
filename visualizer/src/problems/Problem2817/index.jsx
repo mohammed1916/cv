@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-absolute-difference-between-elements-with-constraint/',
   complexity: 'Sorted-set insertions and binary searches: O(n log n). The visualization caps input at 8 numbers.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[5,4,3,5],"x":3}' },
-    { label: 'Own case 2', input: '{"nums":[6,4,3,11,16],"x":2}' },
+    { label: 'Five values, x of two', input: '{"nums":[7,2,9,4,8],"x":2}' },
+    { label: 'Repeated maximum 20', input: '{"nums":[1,20,3,20,5,20,7],"x":5}' },
     { label: "Smallest pair", input: "{\"nums\":[1,1],\"x\":0}" },
     { label: "Equal values", input: "{\"nums\":[6,6,6,6],\"x\":3}" },
     { label: "Largest values", input: "{\"nums\":[20,20,20,20,20,20,20,20],\"x\":7}" },

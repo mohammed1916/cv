@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/most-profitable-path-in-a-tree/',
   complexity: 'O(n) time and O(n) space. The visualization caps input at 12 nodes.',
   examples: [
-    { label: 'Own case 1', input: '{"edges":[[3,4],[1,3],[1,2],[0,1]],"bob":3,"amount":[6,-4,2,4,-2]}' },
-    { label: 'Own case 2', input: '{"edges":[[0,1]],"bob":1,"amount":[2350,-7280]}' },
+    { label: 'Bob starts at a leaf', input: '{"edges":[[0,2],[2,4],[2,5],[5,1],[1,3]],"bob":4,"amount":[-8,6,10,-4,12,2]}' },
+    { label: 'Bob at the end of a chain', input: '{"edges":[[1,0],[0,2]],"bob":2,"amount":[-6,-12,8]}' },
     { label: 'Two nodes', input: '{"edges":[[0,1]],"bob":0,"amount":[2,-4]}' },
     { label: 'Equal amounts', input: '{"edges":[[0,1],[0,2]],"bob":2,"amount":[4,4,4]}' },
     { label: 'Largest values', input: '{"edges":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11]],"bob":11,"amount":[10000,-10000,10000,-10000,10000,-10000,10000,-10000,10000,-10000,10000,-10000]}' },

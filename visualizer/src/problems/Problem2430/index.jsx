@@ -9,8 +9,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-deletions-on-a-string/',
   complexity: 'O(n^2) letter comparisons in this build (O(n^3) if each comparison is a substring check).',
   examples: [
-    { label: 'Example 1', input: '{"s": "abcabcdabc"}' },
-    { label: 'Example 2', input: '{"s": "aaabaab"}' },
+    { label: 'Own: zxyzxw', input: '{"s": "zxyzxw"}' },
+    { label: 'Own: abba', input: '{"s": "abba"}' },
     { label: 'Single letter', input: '{"s":"a"}' },
     { label: 'Equal letters', input: '{"s":"aaaaaa"}' },
     { label: 'Longest string', input: '{"s":"abcdefghijklmnopqrstuvwxyzabcdefghijklmn"}' },

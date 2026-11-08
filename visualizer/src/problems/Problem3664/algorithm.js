@@ -40,7 +40,7 @@ export function buildTrace({ cards, x }) {
     best = Math.max(best, sum)
     frames.push({ phase: 'option', summary, p, q, valA, valB, total: sum, best, result: null, pythonLine: P('for p in range'), activeLine: L('for each p from 0'), message: `Use ${p} only-x cards with x-first cards and ${q} with x-second cards: ${sum} pairs.` })
   }
-  frames.push({ phase: 'done', summary, p: -1, q: -1, valA: 0, valB: 0, total: best, best, result: best, pythonLine: P('return best'), activeLine: L('return the best total'), message: `Maximum points: ${best}.` })
+  frames.push({ phase: 'done', summary, p: -1, q: -1, valA: 0, valB: 0, total: best, best, result: best, pythonLine: P('return best'), activeLine: L('keep the best total and return it'), message: `Maximum points: ${best}.` })
   return { input: { cards, x }, result: best, frames }
 }
 

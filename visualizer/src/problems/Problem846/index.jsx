@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/hand-of-straights/',
   complexity: 'O(n log n + n) time for sorting the distinct cards then at most n * groupSize card removals bounded by the hand; O(n) space for the counts.',
   examples: [
-    { label: 'Own case 1', input: '{"hand":[2,3,4,7,3,4,5,8,9],"groupSize":4}' },
-    { label: 'Own case 2', input: '{"hand":[2,3,4,5,6],"groupSize":5}' },
+    { label: 'Two consecutive groups', input: '{"hand":[9,4,2,8,5,3,7,6],"groupSize":4}' },
+    { label: 'Gap breaks a group', input: '{"hand":[2,8,4,6,10,3],"groupSize":3}' },
     { label: 'Missing card', input: '{"hand":[1,1,2,2,3,4],"groupSize":3}' },
     { label: 'Single card, group of one', input: '{"hand":[5],"groupSize":1}' },
     { label: 'Equal cards form one group', input: '{"hand":[2,2,2,2],"groupSize":2}' },

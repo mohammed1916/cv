@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-total-reward-using-operations-i/',
   complexity: 'O(n * S) time for total S, which is at most 2 times the largest value in the official problem. The visualization caps the input at 8 values.',
   examples: [
-    { label: 'Own case 1', input: '[2,2,4,4]' },
-    { label: 'Own case 2', input: '[2,7,5,4,3]' },
+    { label: 'Four rewards, two values', input: '[3,9,3,9]' },
+    { label: 'Five rewards, mixed', input: '[11,2,8,5,1]' },
     { label: "Single reward", input: "[5]" },
     { label: "Largest rewards, all equal", input: "[12, 12, 12, 12, 12, 12, 12, 12]" },
     { label: "Long run: 8 rewards", input: "[12, 1, 11, 2, 10, 3, 9, 4]" },

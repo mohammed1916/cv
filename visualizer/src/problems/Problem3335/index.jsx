@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/total-characters-in-string-after-transformations-i/',
   complexity: 'O(t * 26) time and O(26) space. The visualization caps s at 20 letters and t at 20 rounds.',
   examples: [
-    { label: 'Own case 1', input: '{"s":"bcdzz","t":3}' },
-    { label: 'Own case 2', input: '{"s":"bacl","t":2}' },
+    { label: 'Three letters, two rounds', input: '{"s":"qzk","t":2}' },
+    { label: 'Two pairs, five rounds', input: '{"s":"yyzz","t":5}' },
     { label: 'Zero transformations', input: '{"s":"a","t":0}' },
     { label: 'Repeated letter, one round', input: '{"s":"zzzz","t":1}' },
     { label: 'Longest allowed s, most rounds', input: '{"s":"bpeduvsehwxegeullmfy","t":20}' },

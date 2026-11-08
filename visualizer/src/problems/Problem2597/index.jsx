@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/the-number-of-beautiful-subsets/',
   complexity: 'O(2^n) subsets in the worst case, with each check done by a map lookup. The visualization caps n at 12.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[3,5,7],"k":3}' },
-    { label: 'Own case 2', input: '{"nums":[2],"k":2}' },
+    { label: 'Five numbers, k two', input: '{"nums":[6,10,15,21,4],"k":2}' },
+    { label: 'Repeated values, k five', input: '{"nums":[9,9,9,9,9,9],"k":5}' },
     { label: 'Single value at the limit', input: '{"nums":[30],"k":1}' },
     { label: 'Equal values', input: '{"nums":[6,6,6,6],"k":2}' },
     { label: 'Alternating limits with largest k', input: '{"nums":[1,30,1,30,1,30,1,30,1,30,1,30],"k":10}' },

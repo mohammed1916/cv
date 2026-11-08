@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/reachable-nodes-with-restrictions/',
   complexity: 'O(n) time and O(n) space. The visualization caps the tree at 12 nodes.',
   examples: [
-    { label: 'Own case 1', input: '{"n":7,"edges":[[5,6],[0,5],[4,0],[3,1],[1,2],[0,1]],"restricted":[5,4]}' },
-    { label: 'Own case 2', input: '{"n":7,"edges":[[6,5],[3,2],[0,4],[0,5],[0,2],[0,1]],"restricted":[1,2,4]}' },
+    { label: 'Restricted leaves', input: '{"n":6,"edges":[[0,1],[1,2],[1,3],[3,4],[0,5]],"restricted":[2,4]}' },
+    { label: 'Path with one restriction', input: '{"n":5,"edges":[[4,0],[0,1],[1,2],[2,3]],"restricted":[3]}' },
     { label: 'Two nodes, one restricted', input: '{"n":2,"edges":[[0,1]],"restricted":[1]}' },
     { label: 'No restricted nodes', input: '{"n":4,"edges":[[0,1],[0,2],[0,3]],"restricted":[]}' },
     { label: 'Path of 12 nodes', input: '{"n":12,"edges":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11]],"restricted":[1]}' },

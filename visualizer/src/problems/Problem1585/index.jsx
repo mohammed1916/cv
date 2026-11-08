@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/check-if-string-is-transformable-with-substring-sort-operations/',
   complexity: 'O(n * 10) time with one queue of positions per digit. The visualization caps the strings at 8 digits.',
   examples: [
-    { label: 'Own case 1', input: '{"s":"95643","t":"45963"}' },
+    { label: 'Four digits, swap needed', input: '{"s":"7128","t":"8217"}' },
     { label: 'Blocked', input: '{"s":"12345","t":"12435"}' },
     { label: "Single digit, equal", input: "{\"s\":\"5\",\"t\":\"5\"}" },
     { label: "Already equal", input: "{\"s\":\"2024\",\"t\":\"2024\"}" },

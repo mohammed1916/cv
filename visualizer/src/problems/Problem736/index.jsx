@@ -18,9 +18,9 @@ const definition = {
   url: 'https://leetcode.com/problems/parse-lisp-expression/',
   complexity: 'O(n * d) time for n tokens and scope depth d. The visualization caps the expression at 300 characters.',
   examples: [
-    { label: 'Example 1', input: '"(let x 2 (mult x (let x 3 y 4 (add x y))))"' },
-    { label: 'Example 2', input: '"(let x 3 x 2 x)"' },
-    { label: 'Example 3', input: '"(let x 1 y 2 x (add x y) (add x y))"' },
+    { label: 'Own: a plus b times a', input: '"(let a 5 b 3 (add a (mult b a)))"' },
+    { label: 'Own: nested add and mult', input: '"(let p -2 q 4 (add (mult p p) q))"' },
+    { label: 'Own: shadowed z', input: '"(let z 7 (add z (let z 1 z)))"' },
     { label: 'Shadowing', input: '"(add (let x 5 (mult x x)) (let x 2 (add x -7)))"' },
     { label: 'Single number', input: '"5"' },
     { label: 'Nested shadowing', input: '"(let x 2 (let x (add x 3) (mult x x)))"' },

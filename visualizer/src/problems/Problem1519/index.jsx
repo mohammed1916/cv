@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-nodes-in-the-sub-tree-with-the-same-label/',
   complexity: 'O(n * 26) time and O(n * 26) space. The visualization caps the tree at 12 nodes.',
   examples: [
-    { label: 'Own case 1', input: '{"n":7,"edges":[[2,6],[2,3],[1,5],[1,4],[0,2],[0,1]],"labels":"abaedcd"}' },
+    { label: 'Path with repeated letters', input: '{"n":6,"edges":[[0,3],[3,1],[1,4],[4,2],[2,5]],"labels":"xyzxyz"}' },
     { label: 'Star', input: '{"n":4,"edges":[[0,1],[0,2],[0,3]],"labels":"aaaa"}' },
     { label: 'Two nodes', input: '{"n":2,"edges":[[0,1]],"labels":"aa"}' },
     { label: 'Same letters', input: '{"n":4,"edges":[[0,1],[1,2],[2,3]],"labels":"zzzz"}' },

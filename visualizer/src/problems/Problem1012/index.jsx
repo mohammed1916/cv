@@ -14,8 +14,8 @@ const definition = {
   complexity: 'O(d * 10) time for d digits of n. The visualization caps n at 100000.',
   examples: [
     { label: 'Example 1', input: '20' },
-    { label: 'Own case 1', input: '101' },
-    { label: 'Own case 2', input: '1001' },
+    { label: 'Two digits: 27', input: '27' },
+    { label: 'Four digits: 4096', input: '4096' },
     { label: 'Smallest: one', input: '1' },
     { label: 'Round ten thousand', input: '10000' },
     { label: 'Largest n allowed', input: '100000' },

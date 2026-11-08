@@ -19,15 +19,15 @@ export function buildTrace({ s, t }) {
   for (let l = 1; l <= m; l++) {
     while (k < n && s[k] !== t[l - 1]) k++
     if (k === n) {
-      frames.push({ pythonLine: P('if k == len(s):'), phase: 'prefix', activeLine: L('stop the prefix'), l, j: -1, message: `t[0..${l}) cannot be matched in s, so longer prefixes fail too.` })
+      frames.push({ pythonLine: P('if k == len(s):'), phase: 'prefix', activeLine: L('prefix[l] is the place'), l, j: -1, message: `t[0..${l}) cannot be matched in s, so longer prefixes fail too.` })
       break
     }
     k++
     prefix[l] = k
-    frames.push({ pythonLine: P('prefix[l] = k'), phase: 'prefix', activeLine: L('record the prefix'), l, j: -1, message: `t[0..${l}) matches s up to index ${k - 1}.` })
+    frames.push({ pythonLine: P('prefix[l] = k'), phase: 'prefix', activeLine: L('prefix[l] is the place'), l, j: -1, message: `t[0..${l}) matches s up to index ${k - 1}.` })
   }
   if (prefix[m] !== null) {
-    frames.push({ pythonLine: P('return 0'), phase: 'done', activeLine: L('whole t matches'), l: m, j: -1, message: 't is already a subsequence of s, so the score is 0.' })
+    frames.push({ pythonLine: P('return 0'), phase: 'done', activeLine: L('if all of t matches'), l: m, j: -1, message: 't is already a subsequence of s, so the score is 0.' })
     return { input: { s, t }, result: 0, frames }
   }
   suffix[m] = n
@@ -36,12 +36,12 @@ export function buildTrace({ s, t }) {
   for (let j = m - 1; j >= 0; j--) {
     while (k > 0 && s[k - 1] !== t[j]) k--
     if (k === 0) {
-      frames.push({ pythonLine: P('if k == 0:'), phase: 'suffix', activeLine: L('stop the suffix'), l: -1, j, message: `t[${j}..] cannot be matched from the right, so shorter suffixes fail too.` })
+      frames.push({ pythonLine: P('if k == 0:'), phase: 'suffix', activeLine: L('suffix[j] is the latest'), l: -1, j, message: `t[${j}..] cannot be matched from the right, so shorter suffixes fail too.` })
       break
     }
     k--
     suffix[j] = k
-    frames.push({ pythonLine: P('suffix[j] = k'), phase: 'suffix', activeLine: L('record the suffix'), l: -1, j, message: `t[${j}..] can start at index ${k} of s.` })
+    frames.push({ pythonLine: P('suffix[j] = k'), phase: 'suffix', activeLine: L('suffix[j] is the latest'), l: -1, j, message: `t[${j}..] can start at index ${k} of s.` })
   }
   let best = m
   for (let l = 0; l <= m; l++) {
@@ -50,12 +50,12 @@ export function buildTrace({ s, t }) {
       if (suffix[j] !== null && prefix[l] <= suffix[j]) {
         const score = j - l
         if (score < best) best = score
-        frames.push({ pythonLine: P('best = min(best, j - l)'), phase: 'pair', activeLine: L('keep the shortest'), l, j, message: `Remove t[${l}..${j}) for score ${score}; best is ${best}.` })
+        frames.push({ pythonLine: P('best = min(best, j - l)'), phase: 'pair', activeLine: L('best is the smaller of best'), l, j, message: `Remove t[${l}..${j}) for score ${score}; best is ${best}.` })
         break
       }
     }
   }
-  frames.push({ pythonLine: P('return best'), phase: 'done', activeLine: L('return the smallest'), l: -1, j: -1, message: `The minimum score is ${best}.` })
+  frames.push({ pythonLine: P('return best'), phase: 'done', activeLine: L('return best'), l: -1, j: -1, message: `The minimum score is ${best}.` })
   return { input: { s, t }, result: best, frames }
 }
 

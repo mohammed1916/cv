@@ -24,7 +24,7 @@ const definition = {
   inputLabel: 'JSON {"message": "short message", "limit": 15}',
   url: "https://leetcode.com/problems/split-message-based-on-limit/",
   complexity: "O(n) time and O(n) space for message length n, using the closed-form capacity check for each part count. The visualization caps the message at 50 characters and the limit at 50.",
-  examples: [{ label: "Own case 1", input: '{"message":"tipsu nfttbhf","limit":16}' }, { label: 'Single letter', input: '{"message":"a","limit":1}' }, { label: 'Only spaces', input: '{"message":"   ","limit":2}' }, { label: 'Largest limit', input: '{"message":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","limit":50}' }, { label: 'Long run: 50 characters', input: '{"message":" lar  msd wqraayyojf zjb lfd onwjomakirrxixjqod   ","limit":12}' }],
+  examples: [{ label: "Words split across parts", input: '{"message":"quiet harbor lights","limit":12}' }, { label: 'Single letter', input: '{"message":"a","limit":1}' }, { label: 'Only spaces', input: '{"message":"   ","limit":2}' }, { label: 'Largest limit', input: '{"message":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","limit":50}' }, { label: 'Long run: 50 characters', input: '{"message":" lar  msd wqraayyojf zjb lfd onwjomakirrxixjqod   ","limit":12}' }],
 };
 
 // Feasible for the current part count, or not, once the trace has decided it.

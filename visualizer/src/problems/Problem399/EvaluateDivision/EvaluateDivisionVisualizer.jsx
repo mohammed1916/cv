@@ -178,10 +178,10 @@ function generateSteps(equations, values, queries) {
 
 const EXAMPLES = [
   {
-    label: 'Example 1',
-    equations: [['a', 'b'], ['b', 'c']],
-    values: [2, 3],
-    queries: [['a', 'c'], ['b', 'a'], ['a', 'e'], ['a', 'b']],
+    label: 'Own: ratio chain of three',
+    equations: [['m', 'n'], ['n', 'p']],
+    values: [4, 0.5],
+    queries: [['m', 'p'], ['p', 'm'], ['m', 'q']],
   },
   {
     label: 'Example 2',

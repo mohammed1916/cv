@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/longest-unequal-adjacent-groups-subsequence-i/',
   complexity: 'O(n) time and O(n) space for the chain. The visualization caps input at 10 words.',
   examples: [
-    { label: 'Own case 1', input: '{"words":["b","a","e"],"groups":[1,0,0]}' },
+    { label: 'Three words, groups 0 1 1', input: '{"words":["ab","cde","f"],"groups":[0,1,1]}' },
     { label: 'Alternating', input: '{"words":["a","b","c","d"],"groups":[1,0,1,1]}' },
     { label: "Single word", input: "{\"words\":[\"a\"],\"groups\":[1]}" },
     { label: "All words in one group", input: "{\"words\":[\"a\",\"b\",\"c\"],\"groups\":[0,0,0]}" },

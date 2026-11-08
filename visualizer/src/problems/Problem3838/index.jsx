@@ -16,7 +16,7 @@ const definition = {
   url: 'https://leetcode.com/problems/weighted-word-mapping/',
   complexity: 'O(total length of words) time and O(number of words) extra space.',
   examples: [
-    { label: 'Own case 1', input: '{"words":["bcde","efg","yza"],"weights":[6,4,13,15,2,3,4,3,11,7,7,10,8,9,8,11,9,10,7,10,10,9,4,8,8,3]}' },
+    { label: 'Two short words, varied weights', input: '{"words":["mno","pqr"],"weights":[3,1,4,1,5,9,2,6,5,3,5,8,9,7,9,3,2,3,8,4,6,2,6,4,3,3]}' },
     { label: 'Single word', input: '{"words":["a"],"weights":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]}' },
     { label: 'One letter word', input: '{"words":["q"],"weights":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]}' },
     { label: 'Equal weights', input: '{"words":["ab","ba"],"weights":[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5]}' },

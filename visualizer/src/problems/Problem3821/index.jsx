@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-nth-smallest-integer-with-k-one-bits/',
   complexity: 'O(k * positions) time using binomial coefficients. The visualization caps n at 20 and k at 6.',
   examples: [
-    { label: 'Own case 1', input: '{"n":5,"k":3}' },
-    { label: 'Own case 2', input: '{"n":6,"k":4}' },
+    { label: 'Twelve, three rounds', input: '{"n":12,"k":3}' },
+    { label: 'Seven, one round', input: '{"n":7,"k":1}' },
     { label: 'One item', input: '{"n":1,"k":1}' },
     { label: 'Small n, largest k', input: '{"n":2,"k":6}' },
     { label: 'Largest n and k', input: '{"n":20,"k":6}' },

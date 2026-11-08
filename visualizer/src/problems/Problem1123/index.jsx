@@ -15,9 +15,9 @@ const definition = {
   url: 'https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/',
   complexity: 'O(n) time and O(h) space. The visualization caps input at 15 nodes.',
   examples: [
-    { label: 'Own case 1', input: '[4,6,2,7,3,1,9,null,null,8,5]' },
-    { label: 'Own case 2', input: '[2]' },
-    { label: 'Own case 3', input: '[1,2,4,null,3]' },
+    { label: 'Deepest leaves on two sides', input: '[14,8,21,3,11,null,30,null,null,6,17]' },
+    { label: 'Single node', input: '[42]' },
+    { label: 'Deep chain with a branch', input: '[5,15,25,null,35]' },
     { label: 'Two levels', input: '[2,1,3]' },
     { label: 'Chain of left children', input: '[0,1,null,2,null,3]' },
     { label: 'Largest value as root', input: '[99]' },

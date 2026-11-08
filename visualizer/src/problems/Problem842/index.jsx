@@ -14,9 +14,9 @@ const definition = {
   url: 'https://leetcode.com/problems/split-array-into-fibonacci-sequence/',
   complexity: 'Only the first two numbers branch (at most 10 digits each); the rest are forced by the sum, so about O(n^2 * n) time. The recursion stack is O(n).',
   examples: [
-    { label: 'Own case 1', input: '"2212222"' },
-    { label: 'Own case 2', input: '"223469241"' },
-    { label: 'Own case 3', input: '"1234"' },
+    { label: 'Three-piece Fibonacci', input: '"5813"' },
+    { label: 'Repeating pattern', input: '"1212"' },
+    { label: 'Short digits', input: '"123"' },
     { label: 'Long sequence', input: '"123456579"' },
     { label: 'Single digit', input: '"1"' },
     { label: 'Equal digits', input: '"111"' },

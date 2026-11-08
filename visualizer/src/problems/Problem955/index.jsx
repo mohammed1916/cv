@@ -14,9 +14,9 @@ const definition = {
   url: 'https://leetcode.com/problems/delete-columns-to-make-sorted-ii/',
   complexity: 'O(n * m) time, O(n) space. The visualization caps input at 10 strings of length 12.',
   examples: [
-    { label: 'Own case 1', input: '["db","cc","bd"]' },
-    { label: 'Own case 2', input: '["yd","zc","ab"]' },
-    { label: 'Own case 3', input: '["azy","xwv","uts"]' },
+    { label: 'Three rows, unsorted columns', input: '["dab","ffb","cdd"]' },
+    { label: 'Descending columns', input: '["zzz","yyy","xxa"]' },
+    { label: 'Two columns', input: '["aa","ba","ab"]' },
     { label: 'Single string', input: '["a"]' },
     { label: 'Equal lengths', input: '["zz","aa","mm"]' },
     { label: 'Long run: 10 strings of 12 letters', input: '["yqyailanmhkf","xqcbrbiphsjm","uhldiwwnpksf","jqxwrvdhwkin","ksvehentrixu","olxuhqmbqksu","phxzhicdatoo","iaajupwigglm","kikffbxhxemm","axkqazyztsam"]' },

@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/count-substrings-that-satisfy-k-constraint-i/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps s at 40 characters.',
   examples: [
-    { label: 'Example 1', input: '{"s":"10101","k":1}' },
-    { label: 'Example 2', input: '{"s":"1010101","k":2}' },
+    { label: 'Own: six bits, k 2', input: '{"s":"110010","k":2}' },
+    { label: 'Own: seven bits, k 3', input: '{"s":"0110111","k":3}' },
     { label: 'Single zero', input: '{"s":"0","k":0}' },
     { label: 'Zero limit', input: '{"s":"1111","k":0}' },
     { label: 'Largest string, k at its length', input: '{"s":"1010101010101010101010101010101010101010","k":40}' },

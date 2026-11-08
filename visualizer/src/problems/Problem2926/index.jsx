@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-balanced-subsequence-sum/',
   complexity: 'O(n^2) time and O(n) space for this direct version. The visualization caps input at 10 numbers.',
   examples: [
-    { label: 'Own case 1', input: '[4,4,6,7]' },
-    { label: 'Own case 2', input: '[6,-2,-4,9]' },
+    { label: 'Mixed signs, six values', input: '[8,-3,5,-5,0,-9]' },
+    { label: 'All negative values', input: '[-7,-2,-6,-1]' },
     { label: 'Single positive', input: '[7]' },
     { label: 'Equal values', input: '[4,4,4,4]' },
     { label: 'Alternating extremes', input: '[10,-10,10,-10,10,-10,10,-10,10,-10]' },

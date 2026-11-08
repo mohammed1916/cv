@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/distribute-candies-among-children-ii/',
   complexity: 'O(1) time with the closed form. The visualization caps n and limit at 300.',
   examples: [
-    { label: 'Own case 1', input: '{"n":6,"limit":3}' },
-    { label: 'Own case 2', input: '{"n":4,"limit":4}' },
+    { label: 'Eight items, limit three', input: '{"n":8,"limit":3}' },
+    { label: 'Twelve items, limit ten', input: '{"n":12,"limit":10}' },
     { label: 'One candy', input: '{"n":1,"limit":1}' },
     { label: 'Equal n and limit', input: '{"n":6,"limit":6}' },
     { label: 'Upper limits', input: '{"n":300,"limit":300}' },

@@ -13,7 +13,7 @@ export function buildTrace({ nums, cost }) {
   const pairs = nums.map((x, i) => ({ x, c: cost[i] })).sort((a, b) => a.x - b.x || a.c - b.c)
   const total = cost.reduce((s, c) => s + c, 0)
   const sorted = pairs.map(p => `${p.x}/${p.c}`)
-  frames.push({ pythonLine: 2, phase: 'sort', activeLine: L('sort by value'), at: -1, sorted, running: 0, total, target: null, result: null, message: `Sort ${nums.length} pairs by value; total cost weight ${total}.` })
+  frames.push({ pythonLine: 2, phase: 'sort', activeLine: L('sort the pairs'), at: -1, sorted, running: 0, total, target: null, result: null, message: `Sort ${nums.length} pairs by value; total cost weight ${total}.` })
   let running = 0
   let target = pairs[0].x
   for (let i = 0; i < pairs.length; i++) {
@@ -26,7 +26,7 @@ export function buildTrace({ nums, cost }) {
     }
   }
   const result = pairs.reduce((s, p) => s + p.c * Math.abs(p.x - target), 0)
-  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return sum'), at: -1, sorted, running, total, target, result, message: `Cost to move every value to ${target} is ${result}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return the sum of cost'), at: -1, sorted, running, total, target, result, message: `Cost to move every value to ${target} is ${result}.` })
   return { input: { nums, cost }, result, frames }
 }
 

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/sender-with-largest-word-count/',
   complexity: 'O(total characters) time and O(senders) space.',
   examples: [
-    { label: 'Own case 1', input: '{"messages":["Ifmmp vtfsUxppp","Ij vtfsUisff","Xpoefsgvm ebz Bmjdf","Ojdf ebz vtfsUisff"],"senders":["Bmjdf","vtfsUxp","vtfsUisff","Bmjdf"]}' },
-    { label: 'Own case 2', input: '{"messages":["Ipx jt mffudpef gps fwfszpof","Mffudpef jt vtfgvm gps qsbdujdf"],"senders":["Cpc","Dibsmjf"]}' },
+    { label: 'Three senders', input: '{"messages":["Hello team","Ready now","See you soon"],"senders":["Ana","Ben","Cruz"]}' },
+    { label: 'Two senders', input: '{"messages":["Quiet room","Lunch soon"],"senders":["Dev","Eli"]}' },
     { label: 'Single message', input: '{"messages":["Hi"],"senders":["Ann"]}' },
     { label: 'Same sender twice', input: '{"messages":["Hi there","Hi there"],"senders":["Ann","Ann"]}' },
     { label: 'Eight messages, one sender', input: '{"messages":["Good day team","Good day team","Good day team","Good day team","Good day team","Good day team","Good day team","Good day team"],"senders":["Zed","Zed","Zed","Zed","Zed","Zed","Zed","Zed"]}' },

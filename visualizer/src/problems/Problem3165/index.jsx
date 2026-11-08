@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-sum-of-subsequence-with-non-adjacent-elements/',
   complexity: 'O(n * q) time for the scans in this trace, with the total kept modulo 1000000007. The visualization caps nums at 8 values and queries at 5.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[4,6,10],"queries":[[2,-3],[1,-4]]}' },
-    { label: 'Own case 2', input: '{"nums":[1,-2],"queries":[[1,-6]]}' },
+    { label: 'Four numbers, two updates', input: '{"nums":[-5,9,2,0],"queries":[[0,7],[3,-11]]}' },
+    { label: 'Three numbers, three updates', input: '{"nums":[12,-12,3],"queries":[[2,-1],[0,-8],[1,4]]}' },
     { label: "Single number", input: "{\"nums\":[5],\"queries\":[[0,-3]]}" },
     { label: "All zeros, one update", input: "{\"nums\":[0,0,0],\"queries\":[[1,20]]}" },
     { label: "Long run: eight numbers, five queries", input: "{\"nums\":[-20,15,0,7,-9,20,3,-4],\"queries\":[[0,20],[3,-20],[7,0],[5,11],[2,-1]]}" },

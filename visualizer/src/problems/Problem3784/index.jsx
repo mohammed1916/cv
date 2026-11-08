@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-deletion-cost-to-make-all-characters-equal/',
   complexity: 'O(n) time and O(1) extra space for 26 letters. The visualization caps n at 20.',
   examples: [
-    { label: 'Own case 1', input: '{"s":"bbcbbd","cost":[2,3,4,5,2,11]}' },
-    { label: 'Own case 2', input: '{"s":"bcd","cost":[11,6,9]}' },
+    { label: 'Descending letters', input: '{"s":"dcba","cost":[2,9,4,1]}' },
+    { label: 'Alternating letters', input: '{"s":"abab","cost":[5,5,1,1]}' },
     { label: "Single letter", input: "{\"s\":\"a\",\"cost\":[5]}" },
     { label: "Equal letters", input: "{\"s\":\"aaaa\",\"cost\":[3,3,3,3]}" },
     { label: "Largest costs, alternating", input: "{\"s\":\"abababababababababab\",\"cost\":[100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1,100,1]}" },

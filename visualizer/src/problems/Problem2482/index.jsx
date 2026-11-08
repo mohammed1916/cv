@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/difference-between-ones-and-zeros-in-row-and-column/',
   complexity: 'O(mn) time: one pass to tally and one pass to fill. The visualization caps the grid at 6 by 6.',
   examples: [
-    { label: 'Example 1', input: '{"grid":[[0,1,1],[1,0,1],[0,0,1]]}' },
+    { label: 'Own: three by two grid', input: '{"grid":[[1,0],[0,0],[1,1]]}' },
     { label: 'All ones', input: '{"grid":[[1,1,1],[1,1,1]]}' },
     { label: 'Single cell', input: '{"grid":[[1]]}' },
     { label: 'Equal counts', input: '{"grid":[[1,0],[0,1]]}' },

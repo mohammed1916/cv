@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/zero-array-transformation-i/',
   complexity: 'O(n + q) time and O(n) space. The visualization caps input at 8 values and 6 queries.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[1,0,1],"queries":[[0,2]]}' },
-    { label: 'Own case 2', input: '{"nums":[1,2,3,4],"queries":[[0,2],[1,3]]}' },
+    { label: 'Own: five values, two ranges', input: '{"nums":[3,1,4,1,5],"queries":[[0,4],[1,3]]}' },
+    { label: 'Long range over seven values', input: '{"nums":[3,3,0,1,5,2,4],"queries":[[2,6]]}' },
     { label: 'Single element', input: '{"nums":[0],"queries":[[0,0]]}' },
     { label: 'Equal values, equal ranges', input: '{"nums":[2,2,2],"queries":[[0,1],[1,2],[0,2]]}' },
     { label: 'Largest values need six full queries', input: '{"nums":[5,5,5,5,5,5,5,5],"queries":[[0,7],[0,7],[0,7],[0,7],[0,7],[0,7]]}' },

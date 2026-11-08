@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/restore-the-array/',
   complexity: 'O(n^2) time and O(n) space. The visualization caps s at 12 digits and k at 10000.',
   examples: [
-    { label: 'Example 1', input: '{"s":"1000","k":10000}' },
-    { label: 'Own case 2', input: '{"s":"2428","k":2001}' },
+    { label: 'Own: digits 2468, k 5', input: '{"s":"2468","k":5}' },
+    { label: 'Five digits, cap 300', input: '{"s":"90817","k":300}' },
     { label: 'Single digit', input: '{"s":"1","k":1}' },
     { label: 'Repeated digit', input: '{"s":"1111","k":3}' },
     { label: 'Largest allowed', input: '{"s":"999999999999","k":10000}' },

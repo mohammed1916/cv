@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/house-robber-iv/',
   complexity: 'O(n log(max value)) time. The visualization caps the input at 10 houses.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[9,5,3,2],"k":2}' },
-    { label: 'Own case 2', input: '{"nums":[3,8,10,4,2],"k":3}' },
+    { label: 'Six houses, k three', input: '{"nums":[15,4,11,6,2,9],"k":3}' },
+    { label: 'Equal houses, k two', input: '{"nums":[7,7,7,7],"k":2}' },
     { label: 'Single house', input: '{"nums":[5],"k":1}' },
     { label: 'Equal houses', input: '{"nums":[4,4,4,4],"k":2}' },
     { label: 'Alternating largest values', input: '{"nums":[20,1,20,1,20,1,20,1,20,1],"k":5}' },

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximize-the-number-of-partitions-after-operations/',
   complexity: 'O(26 * n^2) time in this trace, which tries every single change and rescans; the Python version does the same. The visualization caps s at 8 letters.',
   examples: [
-    { label: 'Own case 1', input: '{"s":"bdddb","k":3}' },
-    { label: 'Own case 2', input: '{"s":"yyza","k":2}' },
+    { label: 'Six letters, k of four', input: '{"s":"qwerty","k":4}' },
+    { label: 'Four letters, k at maximum', input: '{"s":"zxcv","k":26}' },
     { label: "Single letter", input: '{"s":"a","k":1}' },
     { label: "Largest k", input: '{"s":"zyxwvuts","k":26}' },
     { label: "Repeated letters", input: '{"s":"abab","k":2}' },

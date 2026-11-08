@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-inversion-count-in-subarrays-of-fixed-length/',
   complexity: 'O(n * k^2) time in this visualization, which compares every pair in each window. The visualization caps n at 20.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[4,2,3,6,5],"k":4}' },
+    { label: 'Five values, k three', input: '{"nums":[5,1,4,2,3],"k":3}' },
     { label: 'Reversed', input: '{"nums":[5,3,2,1],"k":4}' },
     { label: "Single value", input: "{\"nums\":[4],\"k\":1}" },
     { label: "Equal values", input: "{\"nums\":[2,2,2],\"k\":2}" },

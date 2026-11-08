@@ -16,8 +16,8 @@ const definition = {
   url: 'https://leetcode.com/problems/expressive-words/',
   complexity: 'O(total length of s and all words) time and space for the encodings.',
   examples: [
-    { label: 'Own case 1', input: '{"s":"ifffmmppp","words":["ifmmp","ij","ifmp"]}' },
-    { label: 'Own case 2', input: '{"s":"aaaaazzzzz","words":["aazz","az","azz"]}' },
+    { label: 'Stretch triple run', input: '{"s":"xxxyyz","words":["xyz","xxyyz","xxxxyz"]}' },
+    { label: 'Three runs, three words', input: '{"s":"qqqrrrssss","words":["qrs","qqrs","qqqqrrss"]}' },
     { label: 'Length 2 cannot stretch', input: '{"s":"aaaabbcc","words":["abbc","aabcc","aaaabbc","aabbcc"]}' },
     { label: 'Single letter', input: '{"s":"a","words":["a"]}' },
     { label: 'Duplicate words are each checked', input: '{"s":"aabbcc","words":["abc","abc"]}' },

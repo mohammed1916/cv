@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-number-of-texts/',
   complexity: 'O(n) time and O(n) space for n presses, with the total kept modulo 1000000007. The visualization caps input at 12 presses.',
   examples: [
-    { label: 'Example 1', input: '{"pressed_keys":"22233"}' },
+    { label: 'Own: four keys, sevens and a nine', input: '{"pressed_keys":"7779"}' },
     { label: 'Example 2', input: '{"pressed_keys":"7777"}' },
     { label: 'Single key press', input: '{"pressed_keys":"2"}' },
     { label: 'Run of four twos', input: '{"pressed_keys":"2222"}' },

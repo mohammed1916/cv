@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/apply-bitwise-operations-to-make-strings-equal/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the length at 12 characters.',
   examples: [
-    { label: 'Example 1', input: '{"s":"1010","target":"0110"}' },
-    { label: 'Example 2', input: '{"s":"11","target":"00"}' },
+    { label: 'Own: six bits', input: '{"s":"110010","target":"001101"}' },
+    { label: 'Own: four bits', input: '{"s":"0101","target":"1100"}' },
     { label: 'Single bit', input: '{"s":"0","target":"1"}' },
     { label: 'Equal strings', input: '{"s":"0000","target":"0000"}' },
     { label: 'Twelve bits all flipped', input: '{"s":"111111111111","target":"000000000000"}' },

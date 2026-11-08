@@ -9,7 +9,7 @@ const definition = {
   url: 'https://leetcode.com/problems/convert-the-temperature/',
   complexity: 'O(1) time and O(1) space.',
   examples: [
-    { label: 'Example 1', input: '{"celsius":36.5}' },
+    { label: 'Own: 12.25 Celsius', input: '{"celsius":12.25}' },
     { label: 'Freezing', input: '{"celsius":0}' },
     { label: 'Just above zero', input: '{"celsius":0.01}' },
     { label: 'Upper limit', input: '{"celsius":1000}' },

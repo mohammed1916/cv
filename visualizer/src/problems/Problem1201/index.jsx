@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/ugly-number-iii/',
   complexity: 'O(log(n * min)) probes, each with constant-time inclusion-exclusion. The visualization caps each value at 20.',
   examples: [
-    { label: 'Own case 1', input: '{"n":4,"a":3,"b":4,"c":6}' },
-    { label: 'Own case 2', input: '{"n":5,"a":3,"b":4,"c":5}' },
+    { label: 'Seven with steps 2, 5 and 9', input: '{"n":7,"a":2,"b":5,"c":9}' },
+    { label: 'Twelve with shared factors', input: '{"n":12,"a":6,"b":8,"c":10}' },
     { label: 'Every number divisible by one', input: '{\"n\":1,\"a\":1,\"b\":1,\"c\":1}' },
     { label: 'Equal divisors, no overlap to remove', input: '{\"n\":10,\"a\":4,\"b\":4,\"c\":4}' },
     { label: 'Largest allowed values', input: '{\"n\":20,\"a\":20,\"b\":20,\"c\":20}' },

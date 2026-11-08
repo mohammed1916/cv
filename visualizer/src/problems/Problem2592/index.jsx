@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximize-greatness-of-an-array/',
   complexity: 'O(n log n) for the sort and one linear scan. The visualization caps input at 12 values.',
   examples: [
-    { label: 'Own case 1', input: '[2,4,6,3,2,4,2]' },
-    { label: 'Own case 2', input: '[2,3,4,5]' },
+    { label: 'Six values with ties', input: '[12,8,20,5,5,30]' },
+    { label: 'Include zero and max', input: '[0,99,7]' },
     { label: 'Single value', input: '[7]' },
     { label: 'Repeated values tie', input: '[4,4,4]' },
     { label: 'Largest value alternating with zero', input: '[99,0,99,0,99,0,99,0,99,0,99,0]' },

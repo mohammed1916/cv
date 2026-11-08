@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/calculate-amount-paid-in-taxes/',
   complexity: 'O(b) time and O(1) extra space for b brackets.',
   examples: [
-    { label: 'Own case 1', input: '{"brackets":[[4,51],[8,11],[13,26]],"income":11}' },
-    { label: 'Own case 2', input: '{"brackets":[[2,1],[5,26],[6,51]],"income":3}' },
+    { label: 'Three brackets', input: '{"brackets":[[7,10],[30,25],[60,40]],"income":45}' },
+    { label: 'Two brackets, low income', input: '{"brackets":[[3,5],[9,15]],"income":3}' },
     { label: 'Single bracket, full income', input: '{"brackets":[[10,20]],"income":10}' },
     { label: 'Zero income', input: '{"brackets":[[5,10],[9,20]],"income":0}' },
     { label: 'Ten brackets up to 100', input: '{"brackets":[[10,0],[20,10],[30,20],[40,30],[50,40],[60,50],[70,60],[80,70],[90,80],[100,90]],"income":100}' },

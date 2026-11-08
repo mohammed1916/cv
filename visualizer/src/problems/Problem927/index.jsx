@@ -17,9 +17,9 @@ const definition = {
   url: 'https://leetcode.com/problems/three-equal-parts/',
   complexity: 'O(n) time and O(n) space for the index list. arr is capped at 100 values here.',
   examples: [
-    { label: 'Example 1', input: '[1,0,1,0,1]' },
-    { label: 'Example 2', input: '[1,1,0,1,1]' },
-    { label: 'Own case 3', input: '[1,0,0,1,1]' },
+    { label: 'Own: seven values, three ones', input: '[1,0,0,1,0,0,1]' },
+    { label: 'Own: alternating eight', input: '[0,1,0,1,0,1,0,1]' },
+    { label: 'Three ones, uneven gaps', input: '[0,1,0,0,1,0,1]' },
     { label: 'Leading zeros', input: '[0,1,0,0,1,0,0,1,0,0]' },
     { label: 'Three zeros', input: '[0,0,0]' },
     { label: 'Equal values', input: '[1,1,1,1]' },

@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/count-nodes-equal-to-average-of-subtree/',
   complexity: 'O(n) time and O(h) stack space. The visualization caps input at 15 nodes.',
   examples: [
-    { label: 'Example 1', input: '{"tree":[4,8,5,0,1,null,6]}' },
+    { label: 'Own: lopsided tree', input: '{"tree":[9,3,null,7,2]}' },
     { label: 'Single node', input: '{"tree":[1]}' },
     { label: 'Root with one child', input: '{"tree":[3,1]}' },
     { label: 'Equal values in full tree', input: '{"tree":[5,5,5,5,5,5,5]}' },

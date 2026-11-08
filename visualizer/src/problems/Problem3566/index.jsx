@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/partition-array-into-two-equal-product-subsets/',
   complexity: 'O(2^n * n) time for n elements. The visualization caps n at 8.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[4,2,7,9,5],"target":25}' },
-    { label: 'Own case 2', input: '{"nums":[3,6,4,8],"target":16}' },
+    { label: 'Three values, target thirty', input: '{"nums":[5,9,2],"target":30}' },
+    { label: 'Six values, round target', input: '{"nums":[12,7,20,3,15,4],"target":100}' },
     { label: 'Three numbers', input: '{"nums":[1,2,3],"target":6}' },
     { label: 'Smallest target', input: '{"nums":[5,9,12],"target":1}' },
     { label: 'Largest target', input: '{"nums":[100,99,98],"target":10000000000}' },

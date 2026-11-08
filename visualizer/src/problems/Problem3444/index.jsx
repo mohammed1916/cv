@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-increments-for-target-multiples-in-an-array/',
   complexity: 'O(n * 3^t) time for n numbers and t targets. The visualization caps nums at 5 and target at 4.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,3,4],"target":[5]}' },
+    { label: 'Three numbers, two targets', input: '{"nums":[3,7,2],"target":[9,4]}' },
     { label: 'Two targets', input: '{"nums":[8,4],"target":[6]}' },
     { label: 'Smallest case', input: '{"nums":[1],"target":[1]}' },
     { label: 'Equal values tie', input: '{"nums":[4,4],"target":[4]}' },

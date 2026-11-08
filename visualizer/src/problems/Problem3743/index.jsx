@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximize-cyclic-partition-score/',
   complexity: 'O(n^4) time for the dynamic programme over n starts. The visualization caps the array at 8 values.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,3,4,4],"k":3}' },
-    { label: 'Own case 2', input: '{"nums":[2,3,4,4],"k":2}' },
+    { label: 'Four values, k two', input: '{"nums":[2,7,1,8],"k":2}' },
+    { label: 'Largest value alone', input: '{"nums":[1000000000],"k":1}' },
     { label: "Single value", input: "{\"nums\":[7],\"k\":1}" },
     { label: "Equal values", input: "{\"nums\":[5,5,5,5],\"k\":2}" },
     { label: "Largest values at the limit", input: "{\"nums\":[1000000000,999999999,1000000000,1,1000000000,1000000000,1,1000000000],\"k\":5}" },

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-equal-sum-of-two-arrays-after-replacing-zeros/',
   complexity: 'O(n + m) time. The visualization caps each array at eight entries.',
   examples: [
-    { label: 'Own case 1', input: '{"nums1":[0,1,0,2,3],"nums2":[0,5,6]}' },
-    { label: 'Own case 2', input: '{"nums1":[3,1,3,1],"nums2":[2,5]}' },
+    { label: 'Lists of different lengths', input: '{"nums1":[5,0,5,2],"nums2":[3,3,0,6,1]}' },
+    { label: 'Equal values in first list', input: '{"nums1":[6,6,2],"nums2":[0,4,1,4]}' },
     { label: 'Single zero on each side', input: '{"nums1":[0],"nums2":[0]}' },
     { label: 'Equal sums already', input: '{"nums1":[2,2],"nums2":[2,2]}' },
     { label: 'Zeros only in one array', input: '{"nums1":[6,6,6,6,6,6,6,6],"nums2":[0,0,0,0,0,0,0,0]}' },

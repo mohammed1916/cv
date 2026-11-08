@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/check-if-grid-can-be-cut-into-sections/',
   complexity: 'O(m log m) time for m rectangles, one sort per axis. The visualization caps input at 12 rectangles.',
   examples: [
-    { label: 'Own case 1', input: '{"n":6,"rectangles":[[2,1,6,3],[1,3,3,5],[4,3,6,4],[1,5,5,6]]}' },
-    { label: 'Own case 2', input: '{"n":5,"rectangles":[[1,3,3,5],[2,1,4,3],[3,3,4,5],[4,1,5,3],[4,3,5,5]]}' },
+    { label: 'Two overlapping rectangles', input: '{"n":5,"rectangles":[[0,0,3,2],[2,1,5,4]]}' },
+    { label: 'Single strip', input: '{"n":3,"rectangles":[[0,1,1,3]]}' },
     { label: 'Single rectangle', input: '{"n":2,"rectangles":[[0,0,1,1]]}' },
     { label: 'Duplicate rectangles', input: '{"n":4,"rectangles":[[0,0,2,2],[0,0,2,2]]}' },
     { label: 'Whole square', input: '{"n":12,"rectangles":[[0,0,12,12]]}' },

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-possible-integer-after-at-most-k-adjacent-swaps-on-digits/',
   complexity: 'O(n * k) time for the visualization, where the window of each position is at most k digits.',
   examples: [
-    { label: 'Own case 1', input: '{"num":"5432","k":5}' },
-    { label: 'Own case 2', input: '{"num":"211","k":2}' },
+    { label: 'Four digits, four moves', input: '{"num":"8136","k":4}' },
+    { label: 'Three digits, one move', input: '{"num":"907","k":1}' },
     { label: 'Single digit', input: '{"num":"7","k":3}' },
     { label: 'Repeated digits', input: '{"num":"1111","k":2}' },
     { label: 'Largest digits', input: '{"num":"98765432","k":20}' },

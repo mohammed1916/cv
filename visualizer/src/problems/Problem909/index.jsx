@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/snakes-and-ladders/',
   complexity: 'O(n^2) time and space: each square is enqueued once and tries 6 rolls. Boards are capped at 20 x 20.',
   examples: [
-    { label: 'Own case 1', input: '[[-1,15,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1],[-1,35,-1,-1,13,-1],[-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1]]' },
-    { label: 'Own case 2', input: '[[-1,3],[-1,-1]]' },
+    { label: 'Ladder in 3 by 3', input: '[[-1,-1,9],[-1,4,-1],[-1,-1,-1]]' },
+    { label: 'Single ladder top-left', input: '[[16,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1]]' },
     { label: 'Unreachable end', input: '[[1,1,-1],[1,1,1],[-1,1,1]]' },
     { label: 'Smallest board', input: '[[-1,-1],[-1,-1]]' },
     { label: 'Label n*n in a corner', input: '[[4,-1],[-1,-1]]' },

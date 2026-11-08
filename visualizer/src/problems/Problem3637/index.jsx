@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/trionic-array-i/',
   complexity: 'O(n) time and O(1) extra space.',
   examples: [
-    { label: 'Own case 1', input: '[2,4,6,5,3,7]' },
+    { label: 'Negatives and repeats', input: '[-3,8,8,-1,2]' },
     { label: 'Too short', input: '[2,1,3]' },
     { label: 'Smallest array', input: '[0,0,0]' },
     { label: 'Equal values', input: '[5,5,5]' },

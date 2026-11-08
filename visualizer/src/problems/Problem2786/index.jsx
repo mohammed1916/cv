@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/visit-array-positions-to-maximize-score/',
   complexity: 'O(n^2) time and O(n) space. The visualization caps n at 10.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[3,4,7,2,10,3],"x":6}' },
+    { label: 'Six values, x of seven', input: '{"nums":[4,8,1,6,2,9],"x":7}' },
     { label: 'Example 2', input: '{"nums":[2,4,6],"x":1}' },
     { label: 'Single value equal to x', input: '{"nums":[4],"x":4}' },
     { label: 'Equal values', input: '{"nums":[5,5,5],"x":5}' },

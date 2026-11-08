@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/design-a-number-container-system/',
   complexity: 'O(1) time for change and O(k) time for find, where k is the number of indices holding that number. The visualization caps input at 30 operations.',
   examples: [
-    { label: 'Example 1', input: '{"operations":[["find",10],["change",2,10],["change",1,10],["change",3,10],["change",5,10],["find",10],["change",1,20],["find",10]]}' },
+    { label: 'Own: short number container', input: '{"operations":[["change",4,7],["find",7],["change",4,9],["find",9],["find",7]]}' },
     { label: 'Find on an empty table', input: '{"operations":[["find",5]]}' },
     { label: 'One index', input: '{"operations":[["change",0,5],["find",5]]}' },
     { label: 'Equal numbers keep smallest index', input: '{"operations":[["change",3,7],["change",1,7],["find",7]]}' },

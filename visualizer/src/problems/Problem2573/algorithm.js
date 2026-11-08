@@ -13,12 +13,12 @@ export function buildTrace({ lcp }) {
   const frames = []
   const word = Array(n).fill('')
   let letters = 0
-  frames.push({ pythonLine: P('word = [\'\'] * n'), phase: 'start', activeLine: L('give every index'), at: -1, word: [...word], message: 'Start with no letters assigned.' })
+  frames.push({ pythonLine: P('word = [\'\'] * n'), phase: 'start', activeLine: L('word is n empty slots'), at: -1, word: [...word], message: 'Start with no letters assigned.' })
   for (let i = 0; i < n; i++) {
     if (word[i] !== '') continue
     if (letters === 26) {
-      frames.push({ pythonLine: P('if letters == 26:'), phase: 'done', activeLine: L('more than 26 letters'), at: i, word: [...word], message: 'More than 26 letters would be needed.' })
-      frames.push({ pythonLine: P("return ''"), phase: 'done', activeLine: L('return empty'), at: -1, word: [...word], message: 'No string has this LCP matrix.' })
+      frames.push({ pythonLine: P('if letters == 26:'), phase: 'done', activeLine: L('if 26 letters are used'), at: i, word: [...word], message: 'More than 26 letters would be needed.' })
+      frames.push({ pythonLine: P("return ''"), phase: 'done', activeLine: L('if 26 letters are used'), at: -1, word: [...word], message: 'No string has this LCP matrix.' })
       return { input: { lcp }, result: '', frames }
     }
     const c = String.fromCharCode(97 + letters)
@@ -26,7 +26,7 @@ export function buildTrace({ lcp }) {
     for (let j = i; j < n; j++) {
       if (lcp[i][j] > 0 && word[j] === '') word[j] = c
     }
-    frames.push({ pythonLine: P('for j in range(i, n):'), phase: 'assign', activeLine: L('give every index'), at: i, word: [...word], message: `Index ${i} starts letter ${c}; every index with a positive LCP gets it too.` })
+    frames.push({ pythonLine: P('for j in range(i, n):'), phase: 'assign', activeLine: L('give i a new letter'), at: i, word: [...word], message: `Index ${i} starts letter ${c}; every index with a positive LCP gets it too.` })
   }
   const check = Array.from({ length: n + 1 }, () => Array(n + 1).fill(0))
   for (let i = n - 1; i >= 0; i--) {
@@ -34,12 +34,12 @@ export function buildTrace({ lcp }) {
       if (word[i] === word[j]) check[i][j] = check[i + 1][j + 1] + 1
     }
   }
-  frames.push({ pythonLine: P('check = [[0]'), phase: 'verify', activeLine: L('compute the LCP of the word'), at: -1, word: [...word], message: 'Compute the LCP table of the candidate word.' })
+  frames.push({ pythonLine: P('check = [[0]'), phase: 'verify', activeLine: L('compute the LCP table'), at: -1, word: [...word], message: 'Compute the LCP table of the candidate word.' })
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < n; j++) {
       if (check[i][j] !== lcp[i][j]) {
-        frames.push({ pythonLine: P('if check[i][j] != lcp[i][j]:'), phase: 'done', activeLine: L('a cell disagrees'), at: i, word: [...word], message: `Cell (${i}, ${j}) is ${check[i][j]} but should be ${lcp[i][j]}.` })
-        frames.push({ pythonLine: PLAST("return ''"), phase: 'done', activeLine: L('return empty'), at: -1, word: [...word], message: 'The candidate does not match, so no string works.' })
+        frames.push({ pythonLine: P('if check[i][j] != lcp[i][j]:'), phase: 'done', activeLine: L('if any cell differs'), at: i, word: [...word], message: `Cell (${i}, ${j}) is ${check[i][j]} but should be ${lcp[i][j]}.` })
+        frames.push({ pythonLine: PLAST("return ''"), phase: 'done', activeLine: L('if any cell differs'), at: -1, word: [...word], message: 'The candidate does not match, so no string works.' })
         return { input: { lcp }, result: '', frames }
       }
     }

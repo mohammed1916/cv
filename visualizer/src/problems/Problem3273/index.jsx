@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-amount-of-damage-dealt-to-bob/',
   complexity: 'O(n log n) time for the sort. The visualization caps input at 6 enemies.',
   examples: [
-    { label: 'Own case 1', input: '{"power":5,"damage":[2,3,4,5],"health":[5,6,7,9]}' },
-    { label: 'Own case 2', input: '{"power":2,"damage":[2,2,2,2],"health":[2,3,4,5]}' },
+    { label: 'Three monsters, mixed damage', input: '{"power":3,"damage":[4,1,6],"health":[9,5,12]}' },
+    { label: 'One tough monster', input: '{"power":7,"damage":[10],"health":[30]}' },
     { label: 'Single monster', input: '{"power":1,"damage":[1],"health":[1]}' },
     { label: 'Equal monsters', input: '{"power":3,"damage":[3,3,3],"health":[6,6,6]}' },
     { label: 'Largest values', input: '{"power":20,"damage":[20,20,20,20,20,20],"health":[50,50,50,50,50,50]}' },

@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/sum-of-subsequence-widths/',
   complexity: 'O(n log n) time for sorting plus O(n) for the sum; O(n) space for powers of two.',
   examples: [
-    { label: 'Own case 1', input: '[3,2,4]' },
+    { label: 'Four values, unsorted', input: '[7,2,11,4]' },
     { label: 'Single', input: '[2]' },
     { label: 'Duplicates', input: '[5,69,89,92,31,16,25,45,63,40,16,56,24,40,75,82,40,12,50,62,92,44,67,38,92,22,91,24,26,21,100,42,23,56,64,43,95,76,84,79,89,4,16,94,16,77,92,9,30,13]' },
     { label: 'Minimum value 1', input: '[1]' },

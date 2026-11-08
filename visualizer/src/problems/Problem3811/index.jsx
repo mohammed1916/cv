@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-alternating-xor-partitions/',
   complexity: 'O(n^2) time in this visualization, with prefix XOR values. The visualization caps n at 10.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[3,4,2,5],"target1":2,"target2":6}' },
-    { label: 'Own case 2', input: '{"nums":[2,1,1],"target1":2,"target2":1}' },
+    { label: 'Five values, two targets', input: '{"nums":[0,3,5,3,9],"target1":3,"target2":9}' },
+    { label: 'Two equal values', input: '{"nums":[7,7],"target1":7,"target2":0}' },
     { label: 'One value', input: '{"nums":[0],"target1":0,"target2":1}' },
     { label: 'Equal values', input: '{"nums":[5,5,5],"target1":5,"target2":0}' },
     { label: 'Alternating extremes', input: '{"nums":[15,0,15,0,15,0,15,0,15,0],"target1":15,"target2":0}' },

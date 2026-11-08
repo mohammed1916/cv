@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/first-completely-painted-row-or-column/',
   complexity: 'O(mn) time and O(m + n) extra space for the counts. The visualization caps the grid at 6 by 6.',
   examples: [
-    { label: 'Own case 1', input: '{"arr":[2,4,3,1],"mat":[[2,3],[1,4]]}' },
-    { label: 'Own case 2', input: '{"arr":[9,6,5,3,1,4,7,8,2],"mat":[[8,7,9],[1,4,6],[3,2,5]]}' },
+    { label: 'Two-row grid', input: '{"arr":[2,6,5,1,4,3],"mat":[[6,1,4],[3,2,5]]}' },
+    { label: 'Three-row grid', input: '{"arr":[4,1,6,2,5,3],"mat":[[1,2],[4,3],[5,6]]}' },
     { label: 'Single cell', input: '{"arr":[1],"mat":[[1]]}' },
     { label: 'Row-shaped 1 by 6', input: '{"arr":[6,5,4,3,2,1],"mat":[[1,2,3,4,5,6]]}' },
     { label: 'Largest grid: 6 by 6', input: '{"arr":[36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1],"mat":[[1,2,3,4,5,6],[7,8,9,10,11,12],[13,14,15,16,17,18],[19,20,21,22,23,24],[25,26,27,28,29,30],[31,32,33,34,35,36]]}' },

@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-number-of-pushes-to-type-word-ii/',
   complexity: 'O(n + k log k) where k is the number of distinct letters. The visualization caps input at 30 letters.',
   examples: [
-    { label: 'Own case 1', input: '"bcdef"' },
-    { label: 'Own case 2', input: '"yzayzayzayza"' },
+    { label: 'Descending letters', input: '"gfedcb"' },
+    { label: 'Doubled letters, 14 characters', input: '"qqrsttuvwxyzaa"' },
     { label: "Single letter", input: '"a"' },
     { label: "Repeated letters", input: '"aaaaaaaaaa"' },
     { label: "Thirty letters", input: '"abcabcabcabcabcabcabcabcabcabc"' },

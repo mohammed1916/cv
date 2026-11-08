@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-pivot-integer/',
   complexity: 'O(n) time for this scan. The visualization caps n at 1000.',
   examples: [
-    { label: 'Example 1', input: '{"n":8}' },
+    { label: 'Own: n equals 11', input: '{"n":11}' },
     { label: 'No pivot', input: '{"n":4}' },
     { label: 'Smallest n', input: '{"n":1}' },
     { label: 'Perfect square total', input: '{"n":49}' },

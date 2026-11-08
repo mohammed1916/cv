@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/open-the-lock/',
   complexity: 'O(10^4 * 8) at worst; one dequeue frame and one expand frame per state (up to ~20,000 frames).',
   examples: [
-    { label: 'Own case 1', input: '{"deadends":["1312","1212","1213","2323","3113"],"target":"1313"}' },
-    { label: 'Own case 2', input: '{"deadends":["9999"],"target":"1110"}' },
+    { label: 'Two scattered dead ends', input: '{"deadends":["2468","1357"],"target":"3579"}' },
+    { label: 'Two dead ends near target', input: '{"deadends":["5555","6666"],"target":"5565"}' },
     { label: 'Walled off', input: '{"deadends": ["8887","8889","8878","8898","8788","8988","7888","9888"], "target": "8888"}' },
     { label: 'Start blocked', input: '{"deadends":["0000"],"target":"0001"}' },
     { label: 'One turn', input: '{"deadends":[],"target":"0001"}' },

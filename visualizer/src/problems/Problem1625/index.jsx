@@ -13,9 +13,9 @@ const definition = {
   url: 'https://leetcode.com/problems/lexicographically-smallest-string-after-applying-operations/',
   complexity: 'Number of reachable strings times n. The visualization caps s at 8 digits.',
   examples: [
-    { label: 'Example 1', input: '{"s":"5525","a":9,"b":2}' },
-    { label: 'Example 2', input: '{"s":"74","a":5,"b":1}' },
-    { label: 'Own case 3', input: '{"s":"1122","a":5,"b":3}' },
+    { label: 'Own: 3814, a 4, b 2', input: '{"s":"3814","a":4,"b":2}' },
+    { label: 'Own: 9001, a 7, b 3', input: '{"s":"9001","a":7,"b":3}' },
+    { label: 'Eight digits, rotate six', input: '{"s":"00998877","a":2,"b":6}' },
     { label: "Smallest string", input: "{\"s\":\"00\",\"a\":1,\"b\":1}" },
     { label: "All digits equal", input: "{\"s\":\"1111\",\"a\":5,\"b\":2}" },
     { label: "Eight digits, large steps", input: "{\"s\":\"98765432\",\"a\":9,\"b\":7}" },

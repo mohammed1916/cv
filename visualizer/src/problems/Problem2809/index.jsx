@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-time-to-make-array-sum-at-most-x/',
   complexity: 'O(n^2) time for the reduction table. The visualization caps input at 8 indexes.',
   examples: [
-    { label: 'Own case 1', input: '{"nums1":[2,3,4],"nums2":[2,3,4],"x":5}' },
+    { label: 'Four pairs, target nine', input: '{"nums1":[1,5,4,7],"nums2":[3,2,6,1],"x":9}' },
     { label: 'Impossible', input: '{"nums1": [1, 2, 3], "nums2": [3, 3, 3], "x": 4}' },
     { label: "Single pair", input: "{\"nums1\":[0],\"nums2\":[0],\"x\":0}" },
     { label: "Equal arrays", input: "{\"nums1\":[2,2,2],\"nums2\":[2,2,2],\"x\":6}" },

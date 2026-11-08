@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-number-of-winning-players/',
   complexity: 'O(p) time for p picks with a hash map. The visualization caps input at 20 picks.',
   examples: [
-    { label: 'Own case 1', input: '{"n":5,"pick":[[1,1],[2,1],[2,1],[3,2],[3,2],[3,1]]}' },
-    { label: 'Own case 2', input: '{"n":6,"pick":[[2,2],[3,5],[3,5],[3,5]]}' },
+    { label: 'Four players, five picks', input: '{"n":4,"pick":[[0,3],[1,3],[2,1],[3,3],[0,2]]}' },
+    { label: 'Three players, same color', input: '{"n":3,"pick":[[1,4],[1,4],[0,4],[2,9]]}' },
     { label: 'Smallest game', input: '{"n":2,"pick":[[0,0]]}' },
     { label: 'Tie between two players', input: '{"n":3,"pick":[[0,1],[1,1],[2,1]]}' },
     { label: 'Largest player count', input: '{"n":6,"pick":[[5,10]]}' },

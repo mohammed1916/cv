@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-cost-to-make-all-characters-equal/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps input at 30 characters.',
   examples: [
-    { label: 'Example 1', input: '"0011"' },
-    { label: 'Example 2', input: '"010101"' },
+    { label: 'Own: seven bits mixed', input: '"1100101"' },
+    { label: 'Own: three ones in a run', input: '"0001110"' },
     { label: 'Single zero', input: '"0"' },
     { label: 'Single one', input: '"1"' },
     { label: 'All ones', input: '"1111111111"' },

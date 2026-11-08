@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.doocs.org/en/lc/3519/',
   complexity: 'O(d * b) digit steps with binomial lookups, for d base-b digits. The visualization caps input at 30 decimal digits.',
   examples: [
-    { label: 'Own case 1', input: '{"l":"34","r":"39","b":9}' },
-    { label: 'Own case 2', input: '{"l":"3","r":"8","b":3}' },
+    { label: 'Two-digit to three-digit, base three', input: '{"l":"47","r":"113","b":3}' },
+    { label: 'Single value in base seven', input: '{"l":"5","r":"5","b":7}' },
     { label: 'Single digit, base two', input: '{"l":"0","r":"0","b":2}' },
     { label: 'Equal bounds tie', input: '{"l":"5","r":"5","b":10}' },
     { label: 'Largest 30-digit range', input: '{"l":"1","r":"999999999999999999999999999999","b":2}' },

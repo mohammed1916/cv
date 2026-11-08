@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/count-number-of-rectangles-containing-each-point/',
   complexity: 'O(R log R + P * H log R) time with H = 101 height buckets. The visualization caps input at 12 rectangles and 12 points.',
   examples: [
-    { label: 'Own case 1', input: '{"rectangles":[[2,3],[3,4],[3,6]],"points":[[3,2],[2,5]]}' },
-    { label: 'Own case 2', input: '{"rectangles":[[2,2],[3,3],[4,4]],"points":[[2,4],[2,2]]}' },
+    { label: 'Three rectangles, two points', input: '{"rectangles":[[5,2],[7,9],[4,4]],"points":[[6,3],[1,10]]}' },
+    { label: 'Tiny rectangles, three points', input: '{"rectangles":[[3,8],[1,1]],"points":[[2,2],[9,5],[1,1]]}' },
     { label: 'Single rectangle', input: '{"rectangles":[[1,1]],"points":[[1,0]]}' },
     { label: 'Equal rectangles', input: '{"rectangles":[[5,5],[5,5]],"points":[[5,5],[5,4]]}' },
     { label: 'Long run: twelve rectangles', input: '{"rectangles":[[10,3],[7,9],[2,12],[15,4],[9,9],[3,20],[12,1],[8,6],[1,50],[6,6],[20,2],[4,30]],"points":[[5,2],[9,40],[2,9],[13,1],[11,100],[1,50],[7,7],[20,20],[3,3],[16,8],[8,25],[4,0]]}' },

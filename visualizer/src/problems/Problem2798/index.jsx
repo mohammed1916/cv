@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-employees-who-met-the-target/',
   complexity: 'O(n) time and O(1) space for n employees. The visualization caps input at 50 employees, the official limit.',
   examples: [
-    { label: 'Own case 1', input: '{"hours":[1,2,3,4,5],"target":3}' },
-    { label: 'Own case 2', input: '{"hours":[6,2,5,3,3],"target":7}' },
+    { label: 'Hours with a zero', input: '{"hours":[7,0,7,1,8],"target":4}' },
+    { label: 'Six hours, larger target', input: '{"hours":[9,9,1,2,12,3],"target":10}' },
     { label: 'Single hour', input: '{"hours":[5],"target":5}' },
     { label: 'Equal hours', input: '{"hours":[7,7,7,7],"target":7}' },
     { label: 'Boundary: largest hour value', input: '{"hours":[100000,0,100000],"target":100000}' },

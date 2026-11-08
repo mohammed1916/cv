@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-total-cost-to-make-arrays-unequal/',
   complexity: 'O(n) time after counting the clashes. The visualization caps input at 6 entries.',
   examples: [
-    { label: 'Own case 1', input: '{"nums1":[2,3,4,5,6],"nums2":[2,3,4,5,6]}' },
+    { label: 'Four pairs, no equal start', input: '{"nums1":[1,7,4,9],"nums2":[8,3,6,2]}' },
     { label: 'Example 2', input: '{"nums1":[1,1],"nums2":[1,1]}' },
     { label: 'Single pair', input: '{"nums1":[1],"nums2":[2]}' },
     { label: 'Equal values', input: '{"nums1":[2,2],"nums2":[3,3]}' },

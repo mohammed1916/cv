@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/largest-local-values-in-a-matrix/',
   complexity: 'O(n^2) windows with 9 comparisons each, so O(9 n^2) time. The visualization caps the grid at 7 by 7.',
   examples: [
-    { label: 'Example 1', input: '{"grid":[[9,9,8,1],[5,6,2,6],[8,2,6,4],[6,2,2,2]]}' },
-    { label: 'Example 2', input: '{"grid":[[1,1,1,1,1],[1,1,1,1,1],[1,1,2,1,1],[1,1,1,1,1],[1,1,1,1,1]]}' },
+    { label: 'Own: three by three grid', input: '{"grid":[[4,7,2],[9,1,5],[3,8,6]]}' },
+    { label: 'Own: ring with a centre value', input: '{"grid":[[2,2,2],[2,5,2],[2,2,2]]}' },
     { label: 'Smallest 3 by 3 grid', input: '{"grid":[[1,2,3],[4,5,6],[7,8,9]]}' },
     { label: 'All values equal', input: '{"grid":[[5,5,5],[5,5,5],[5,5,5]]}' },
     { label: 'Largest values, 7 by 7', input: '{"grid":[[100,1,100,1,100,1,100],[1,100,1,100,1,100,1],[100,1,100,1,100,1,100],[1,100,1,100,1,100,1],[100,1,100,1,100,1,100],[1,100,1,100,1,100,1],[100,1,100,1,100,1,100]]}' },

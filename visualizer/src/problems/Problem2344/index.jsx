@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-deletions-to-make-array-divisible/',
   complexity: 'O(n log n) time for n values in nums, dominated by the sort. The visualization caps the sizes.',
   examples: [
-    { label: 'Example 1', input: '{"nums":[2,3,2,4,3],"nums_divide":[9,6,9,3,15]}' },
+    { label: 'Own: three and two divisors', input: '{"nums":[4,8,5],"nums_divide":[12,20]}' },
     { label: 'Impossible', input: '{"nums":[4,3,6],"nums_divide":[8,2,6,10]}' },
     { label: 'Single values', input: '{"nums":[1],"nums_divide":[1]}' },
     { label: 'Equal values', input: '{"nums":[6,6,6],"nums_divide":[6,12]}' },

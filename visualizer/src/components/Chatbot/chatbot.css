@@ -1876,3 +1876,23 @@ body.chat-select-mode .selectable.selected {
 .chat-selection-status:empty { display:none; }
 .chat-selection-status { flex:0 0 auto; max-height:130px; overflow:auto; padding:10px 14px; border-bottom:1px solid var(--border); background:var(--surface2); color:var(--text); font-size:12px; line-height:1.5; overflow-wrap:anywhere; }
 .chat-selection-status small { display:block; color:var(--text-muted); margin-top:4px; }
+
+/* Provider key onboarding (used by the chat drawer and the playground controls). */
+.chat-key-steps {
+  flex: 1 1 100%;
+  margin: 8px 0 2px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.45;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  box-sizing: border-box;
+}
+.chat-key-steps ol { margin: 4px 0 0; padding-left: 18px; }
+.chat-key-steps li + li { margin-top: 2px; }
+.chat-key-steps a { color: var(--primary); text-decoration: underline; }
+.chat-key-steps a:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }

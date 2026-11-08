@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/smallest-missing-non-negative-integer-after-operations/',
   complexity: 'O(n + answer) time with a table of at most value entries. The visualization caps input at 20 numbers.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,-11,8,14,7,9],"value":6}' },
-    { label: 'Own case 2', input: '{"nums":[2,-11,8,14,7,9],"value":8}' },
+    { label: 'Mixed signs, value 4', input: '{"nums":[-4,12,-7,3,9,-1,5],"value":4}' },
+    { label: 'Equal numbers, value 10', input: '{"nums":[10,10,10,10],"value":10}' },
     { label: 'Single negative value', input: '{"nums":[-100],"value":1}' },
     { label: 'Equal values tie', input: '{"nums":[4,4,4,4],"value":4}' },
     { label: 'Alternating extreme values', input: '{"nums":[100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100],"value":10}' },

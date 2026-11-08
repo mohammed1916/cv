@@ -12,6 +12,7 @@ export function parseInput(text) {
 }
 
 // Two intervals overlap when they share any point, including a shared endpoint.
+const P = s => python.split('\n').findIndex(line => line.includes(s)) + 1
 const overlaps = (a, b) => !(a[1] < b[0] || b[1] < a[0])
 
 // Lexicographic order on index lists; a shorter list that is a prefix sorts first.
@@ -28,27 +29,27 @@ export function buildTrace({ intervals }) {
   const frame = (fields) => frames.push({ chosen: chosen.slice(), best: snapshot(), bestScore: best ? best.score : 0, ...fields })
   const score = () => chosen.reduce((sum, i) => sum + intervals[i][2], 0)
 
-  frame({ pythonLine: 3, phase: 'start', activeLine: L('try every set'), at: -1, message: `Consider every group of at most four intervals that share no point, out of ${intervals.length}.` })
+  frame({ pythonLine: P('best_score = 0'), phase: 'start', activeLine: L('for each set of indices'), at: -1, message: `Consider every group of at most four intervals that share no point, out of ${intervals.length}.` })
 
   const dfs = (start) => {
     for (let i = start; i < intervals.length; i++) {
       if (chosen.length === 4) return
       if (chosen.some(j => overlaps(intervals[i], intervals[j]))) {
-        frame({ pythonLine: 6, phase: 'reject', activeLine: L('skip any interval'), at: i, message: `Interval ${i} overlaps the chosen set, so it cannot be added.` })
+        frame({ pythonLine: P('continue'), phase: 'reject', activeLine: L('if the set has no overlapping pair'), at: i, message: `Interval ${i} overlaps the chosen set, so it cannot be added.` })
         continue
       }
       chosen.push(i)
       const total = score()
       const beats = best === null || total > best.score || (total === best.score && lexLess(chosen, best.chosen))
       if (beats) best = { score: total, chosen: chosen.slice() }
-      frame({ pythonLine: 9, phase: 'pick', activeLine: L('add interval'), at: i, message: `Set [${chosen.join(', ')}] has score ${total}.${beats ? ' It becomes the best so far.' : ''}` })
+      frame({ pythonLine: P('chosen.append(i)'), phase: 'pick', activeLine: L('if its score beats the best'), at: i, message: `Set [${chosen.join(', ')}] has score ${total}.${beats ? ' It becomes the best so far.' : ''}` })
       dfs(i + 1)
       chosen.pop()
     }
   }
   dfs(0)
 
-  frame({ pythonLine: 12, phase: 'done', activeLine: L('return the best set'), at: -1, message: `Best set is [${best.chosen.join(', ')}] with score ${best.score}.` })
+  frame({ pythonLine: P('return best'), phase: 'done', activeLine: L('return the best index list'), at: -1, message: `Best set is [${best.chosen.join(', ')}] with score ${best.score}.` })
   return { input: { intervals }, result: best.chosen, score: best.score, frames }
 }
 

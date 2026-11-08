@@ -159,27 +159,33 @@ export default function HomePage({
             placeholder="Search by number, title, slug, or tag"
           />
 
-          <select
-            className="filter-select"
-            value={difficulty}
-            onChange={(event) => setDifficulty(event.target.value)}
-          >
-            <option>All</option>
-            <option>Easy</option>
-            <option>Medium</option>
-            <option>Hard</option>
-          </select>
-
-          {isLeetCodeTrack ? (
+          <label className="filter-field">
+            <span className="filter-label">Difficulty</span>
             <select
               className="filter-select"
-              value={status}
-              onChange={(event) => setStatus(event.target.value)}
+              value={difficulty}
+              onChange={(event) => setDifficulty(event.target.value)}
             >
-              <option>All</option>
-              <option>Implemented</option>
-              <option>Catalog Only</option>
+              <option value="All">Any difficulty</option>
+              <option value="Easy">Easy</option>
+              <option value="Medium">Medium</option>
+              <option value="Hard">Hard</option>
             </select>
+          </label>
+
+          {isLeetCodeTrack ? (
+            <label className="filter-field">
+              <span className="filter-label">Implementation</span>
+              <select
+                className="filter-select"
+                value={status}
+                onChange={(event) => setStatus(event.target.value)}
+              >
+                <option value="All">All problems</option>
+                <option value="Implemented">Visualized</option>
+                <option value="Catalog Only">Catalogue only</option>
+              </select>
+            </label>
           ) : (
             <div className="track-note">
               Basics track includes foundational loop visualizations.

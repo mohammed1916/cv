@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/longest-happy-prefix/',
   complexity: 'O(n) time and O(n) space for the prefix function.',
   examples: [
-    { label: 'Own case 1', input: '"mfwfm"' },
-    { label: 'Own case 2', input: '"bcbcbc"' },
+    { label: 'Prefix border chain', input: '"bdbdabd"' },
+    { label: 'Two blocks of aab', input: '"aabaab"' },
     { label: 'Repeated letters', input: '"aaaa"' },
     { label: "Single letter", input: "\"a\"" },
     { label: "Two letters, no border", input: "\"ab\"" },

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-minimum-area-to-cover-all-ones-ii/',
   complexity: 'O(R * C) work per split, O(R^2 * C^2) splits with the direct method. The visualization caps the grid at 6 by 6.',
   examples: [
-    { label: 'Own case 1', input: '[[1,1,1],[1,0,1]]' },
-    { label: 'Own case 2', input: '[[0,1,0,1],[1,0,1,0]]' },
+    { label: 'Four ones in two rows', input: '[[1,0,0,1],[0,1,1,0]]' },
+    { label: 'Three rows of mixed cells', input: '[[1,0,1],[0,1,0],[1,0,0]]' },
     { label: 'Exactly three ones', input: '[[1,0,0],[0,0,1],[1,0,0]]' },
     { label: 'Single row of ones', input: '[[1,1,1,1,1,1]]' },
     { label: 'Full 6 by 6 grid', input: '[[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1]]' },

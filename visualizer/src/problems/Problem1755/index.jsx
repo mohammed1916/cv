@@ -17,8 +17,8 @@ const definition = {
   url: 'https://leetcode.com/problems/closest-subsequence-sum/',
   complexity: 'O(2^(n/2) log 2^(n/2)) time by meet in the middle. The visualization caps n at 8.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[6,-8,4,6],"goal":7}' },
-    { label: 'Own case 2', input: '{"nums":[8,-10,16,-3],"goal":-6}' },
+    { label: 'Mixed signs', input: '{"nums":[4,-2,9,-5,1],"goal":6}' },
+    { label: 'Negative total', input: '{"nums":[-3,-3,11],"goal":-9}' },
   { label: 'Single number', input: "{\"nums\":[5],\"goal\":5}" },
   { label: 'Equal numbers', input: "{\"nums\":[3,3,3,3],\"goal\":6}" },
   { label: 'Extreme values', input: "{\"nums\":[20,20,20,20,20,20,20,20],\"goal\":40}" },

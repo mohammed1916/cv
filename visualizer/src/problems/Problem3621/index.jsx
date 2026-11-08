@@ -23,8 +23,8 @@ const definition = {
   url: 'https://leetcode.com/problems/number-of-integers-with-popcount-depth-equal-to-k-i/',
   complexity: 'O(log^2 n) time with binomial coefficients, independent of the size of n.',
   examples: [
-    { label: 'Own case 1', input: '{"n":5,"k":2}' },
-    { label: 'Own case 2', input: '{"n":8,"k":3}' },
+    { label: 'Twenty, two rounds', input: '{"n":20,"k":2}' },
+    { label: 'Smallest n, no rounds', input: '{"n":1,"k":0}' },
     { label: 'Single one', input: '{"n":1,"k":0}' },
     { label: 'Two, depth one', input: '{"n":2,"k":1}' },
     { label: 'Largest n and k', input: '{"n":1000000000000000,"k":5}' },

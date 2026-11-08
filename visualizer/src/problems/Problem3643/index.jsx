@@ -14,7 +14,7 @@ const definition = {
   complexity: 'O(k^2) time for the swaps and O(mn) space for the copy. The visualization caps the grid at 8 by 8.',
   examples: [
     { label: 'Example 1', input: '{"grid":[[1,2,3],[4,5,6],[7,8,9]],"x":0,"y":0,"k":3}' },
-    { label: 'Own case 1', input: '{"grid":[[2,3,4,2],[3,4,2,3]],"x":0,"y":2,"k":2}' },
+    { label: 'Corner-offset window', input: '{"grid":[[4,9,1],[2,7,6],[8,3,5]],"x":1,"y":0,"k":2}' },
     { label: 'Single cell', input: '{"grid":[[5]],"x":0,"y":0,"k":1}' },
     { label: 'Equal cells', input: '{"grid":[[2,2],[2,2]],"x":0,"y":1,"k":1}' },
     { label: 'Largest grid and values', input: '{"grid":[[100,100,100,100,100,100,100,100],[100,100,100,100,100,100,100,100],[100,100,100,100,100,100,100,100],[100,100,100,100,100,100,100,100],[100,100,100,100,100,100,100,100],[100,100,100,100,100,100,100,100],[100,100,100,100,100,100,100,100],[100,100,100,100,100,100,100,100]],"x":0,"y":0,"k":8}' },

@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/partition-array-such-that-maximum-difference-is-k/',
   complexity: 'O(n log n) time for n values. The visualization caps values at 12.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[4,7,2,3,6],"k":3}' },
+    { label: 'Six values, k 5', input: '{"nums":[8,3,14,1,9,6],"k":5}' },
     { label: 'Equal values', input: '{"nums":[2,2,4,5],"k":0}' },
     { label: 'Single value', input: '{"nums":[5],"k":0}' },
     { label: 'Largest k, mixed values', input: '{"nums":[0,100,50],"k":100}' },

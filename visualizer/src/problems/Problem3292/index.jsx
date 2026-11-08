@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-number-of-valid-strings-to-form-target-ii/',
   complexity: 'O(total word length + m * L) time, where m is the target length and L is the longest word. The visualization caps sizes.',
   examples: [
-    { label: 'Own case 1', input: '{"words":["bcd","bbbbb","cdefg"],"target":"bbcdebcd"}' },
+    { label: 'Three words, shared letters', input: '{"words":["xy","yz","zx"],"target":"xyzzx"}' },
     { label: 'Overlapping', input: '{"words":["abababab","ab"],"target":"ababaababa"}' },
     { label: 'Single letter', input: '{"words":["a"],"target":"a"}' },
     { label: 'Equal words tie', input: '{"words":["aa","aa"],"target":"aaaa"}' },

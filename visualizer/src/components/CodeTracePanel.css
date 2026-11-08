@@ -23,12 +23,27 @@
 
 .ctp-head {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
   padding: 12px 14px;
   border-bottom: 1px solid var(--code-line);
   background: var(--code-surface);
+}
+
+/* Copy and Edit in Code Playground share one row; they wrap together on phones. */
+.ctp-head-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.ctp-head-actions button {
+  white-space: nowrap;
 }
 
 .ctp-title {

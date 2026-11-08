@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/distinct-echo-substrings/',
   complexity: 'O(n^3) time in this direct form, with O(1) hash comparisons. The visualization caps input at 20 letters.',
   examples: [
-    { label: 'Own case 1', input: '"bcdbcdbcd"' },
+    { label: 'Interleaved repeats', input: '"mnmnopmn"' },
     { label: 'Repeated letter', input: '"aaaa"' },
     { label: "Single letter", input: "\"a\"" },
     { label: "Repeated pair", input: "\"abab\"" },

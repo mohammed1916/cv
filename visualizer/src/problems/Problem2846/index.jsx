@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-edge-weight-equilibrium-queries-in-a-tree/',
   complexity: 'O(n + q * path length) time in this direct climb. The visualization caps the tree at 10 nodes.',
   examples: [
-    { label: 'Own case 1', input: '{"n":7,"edges":[[5,6,2],[4,5,2],[3,4,2],[2,3,1],[1,2,1],[0,1,1]],"queries":[[0,6],[2,6],[3,6],[0,3]]}' },
+    { label: 'Five-node tree, three queries', input: '{"n":5,"edges":[[0,2,4],[2,1,6],[1,3,2],[1,4,9]],"queries":[[0,4],[3,4],[2,2]]}' },
     { label: "Two nodes", input: "{\"n\":2,\"edges\":[[0,1,5]],\"queries\":[[0,1]]}" },
     { label: "Star with equal weights", input: "{\"n\":4,\"edges\":[[0,1,3],[0,2,3],[0,3,3]],\"queries\":[[1,2],[2,3]]}" },
     { label: "Chain with heaviest weight", input: "{\"n\":10,\"edges\":[[0,1,26],[1,2,26],[2,3,26],[3,4,26],[4,5,26],[5,6,26],[6,7,26],[7,8,26],[8,9,26]],\"queries\":[[0,9],[4,5]]}" },

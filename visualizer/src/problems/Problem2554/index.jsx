@@ -15,7 +15,7 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-number-of-integers-to-choose-from-a-range-i/',
   complexity: 'O(n + banned) time. The visualization caps n at 15.',
   examples: [
-    { label: 'Own case 1', input: '{"banned":[2,7,6],"n":6,"maxSum":7}' },
+    { label: 'Eight numbers, maxSum 20', input: '{"banned":[4,9,13],"n":8,"maxSum":20}' },
     { label: 'Example 2', input: '{"banned":[1,2,3,4,5,7],"n":8,"maxSum":1}' },
     { label: 'Smallest case', input: '{"banned":[],"n":1,"maxSum":1}' },
     { label: 'Repeated banned values', input: '{"banned":[2,2,2],"n":3,"maxSum":5}' },

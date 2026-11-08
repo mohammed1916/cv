@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/most-popular-video-creator/',
   complexity: 'O(n log n) time for the final sort of creator names, with O(n) space for the maps. The visualization caps input at 20 videos.',
   examples: [
-    { label: 'Example 1', input: '{"creators":["alice","bob","alice","charlie"],"ids":["one","two","three","four"],"views":[5,10,5,4]}' },
-    { label: 'Own case 1', input: '{"creators":["bmjdf","bmjdf","bmjdf"],"ids":["b","c","d"],"views":[2,3,3]}' },
+    { label: 'Own: four videos, three creators', input: '{"creators":["mia","raj","mia","tom"],"ids":["v1","v2","v3","v4"],"views":[7,3,2,8]}' },
+    { label: 'Four videos, two creators', input: '{"creators":["ana","ben","ana","cy"],"ids":["v1","a2","x9","q"],"views":[4,7,1,9]}' },
     { label: 'Single video', input: '{"creators":["ada"],"ids":["v1"],"views":[0]}' },
     { label: 'Equal views', input: '{"creators":["ann","ben","ann"],"ids":["x1","x2","x3"],"views":[4,4,4]}' },
     { label: 'Largest set', input: '{"creators":["zeta","echo","omega","kilo","zeta","echo","omega","kilo","zeta","echo","omega","kilo","zeta","echo","omega","kilo","zeta","echo","omega","kilo"],"ids":["v0","v1","v2","v3","v4","v5","v6","v7","v8","v9","v10","v11","v12","v13","v14","v15","v16","v17","v18","v19"],"views":[10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]}' },

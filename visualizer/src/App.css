@@ -276,6 +276,24 @@ body.chat-select-mode .trie-state svg g:hover {
   padding: 0 0.7rem;
 }
 
+.filter-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.filter-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  padding-left: 0.2rem;
+}
+
+.filter-field .filter-select {
+  width: 100%;
+}
+
 .track-note {
   min-height: 38px;
   border-radius: 10px;

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/find-the-divisibility-array-of-a-string/',
   complexity: 'O(n) time and O(n) space. The visualization caps the string at 30 digits.',
   examples: [
-    { label: 'Own case 1', input: '{"word":"009355464","m":4}' },
-    { label: 'Own case 2', input: '{"word":"2121","m":11}' },
+    { label: 'Seven digits, m nine', input: '{"word":"7710045","m":9}' },
+    { label: 'Largest modulus', input: '{"word":"3141592","m":1000}' },
     { label: 'Single digit', input: '{"word":"7","m":1}' },
     { label: 'Repeated digits', input: '{"word":"1111","m":1}' },
     { label: 'Thirty nines, largest m', input: '{"word":"999999999999999999999999999999","m":1000}' },

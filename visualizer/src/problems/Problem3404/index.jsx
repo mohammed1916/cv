@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/count-special-subsequences/',
   complexity: 'O(n^3) time with map lookups, and O(n) extra space per middle pair. The visualization caps input at 14 numbers.',
   examples: [
-    { label: 'Own case 1', input: '[2,3,4,5,4,7,2]' },
-    { label: 'Own case 2', input: '[4,5,4,5,4,5,4,5]' },
+    { label: 'Six values with repeats', input: '[3,8,3,5,1,9]' },
+    { label: 'Thirteen values', input: '[2,2,7,9,4,6,1,6,3,9,8,2,5]' },
     { label: 'Single value', input: '[9]' },
     { label: 'Equal values', input: '[5,5,5,5,5]' },
     { label: 'Largest length and limits', input: '[9,1,9,1,9,1,9,1,9,1,9,1,9,1]' },

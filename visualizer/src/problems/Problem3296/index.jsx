@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-number-of-seconds-to-make-mountain-height-zero/',
   complexity: 'O(log(time bound) * workers * sqrt(time bound)) time. The visualization caps the input at 4 workers.',
   examples: [
-    { label: 'Own case 1', input: '{"mountainHeight":5,"workerTimes":[3,2,2]}' },
-    { label: 'Own case 2', input: '{"mountainHeight":11,"workerTimes":[4,3,3,5]}' },
+    { label: 'Two workers, height seven', input: '{"mountainHeight":7,"workerTimes":[1,4]}' },
+    { label: 'Three workers, height three', input: '{"mountainHeight":3,"workerTimes":[6,6,2]}' },
     { label: 'Single layer, one worker', input: '{"mountainHeight":1,"workerTimes":[1]}' },
     { label: 'Equal workers', input: '{"mountainHeight":6,"workerTimes":[2,2,2,2]}' },
     { label: 'Largest height, slow workers', input: '{"mountainHeight":12,"workerTimes":[8,8,8,8]}' },

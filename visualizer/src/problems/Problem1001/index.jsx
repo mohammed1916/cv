@@ -14,7 +14,7 @@ const definition = {
   url: 'https://leetcode.com/problems/grid-illumination/',
   complexity: 'O(L + Q) expected time with hash maps, where L is the number of lamps and Q the queries. Each lamp goes off at most once. The visualization caps n at 8.',
   examples: [
-    { label: 'Own case 1', input: '{"n":6,"lamps":[[1,1],[5,5]],"queries":[[2,2],[2,1]]}' },
+    { label: 'Three lamps, three queries', input: '{"n":4,"lamps":[[0,3],[2,1],[3,3]],"queries":[[3,0],[1,2],[0,0]]}' },
     { label: 'Shared diagonal', input: '{"n":5,"lamps":[[0,0],[4,4]],"queries":[[1,1],[1,1]]}' },
     { label: 'Single cell', input: '{"n":1,"lamps":[[0,0]],"queries":[[0,0],[0,0]]}' },
     { label: 'No lamps lit', input: '{"n":1,"lamps":[],"queries":[[0,0]]}' },

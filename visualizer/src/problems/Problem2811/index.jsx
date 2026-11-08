@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/check-if-it-is-possible-to-split-array/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the array at eight values.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[3,3,2],"m":5}' },
-    { label: 'Own case 2', input: '{"nums":[3,2,4],"m":6}' },
+    { label: 'Four values, m of nine', input: '{"nums":[4,1,7,2],"m":9}' },
+    { label: 'Eight equal values, small m', input: '{"nums":[5,5,5,5,5,5,5,5],"m":3}' },
     { label: "Single number", input: "{\"nums\":[7],\"m\":1}" },
     { label: "Equal values", input: "{\"nums\":[3,3,3],\"m\":9}" },
     { label: "Largest m", input: "{\"nums\":[10,10,10,10,10,10,10,10],\"m\":30}" },

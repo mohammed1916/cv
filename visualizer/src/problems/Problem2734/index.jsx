@@ -16,8 +16,8 @@ const definition = {
   url: 'https://leetcode.com/problems/lexicographically-smallest-string-after-substring-operation/',
   complexity: 'O(n) time and O(n) space for the output. The visualization caps input at 20 letters.',
   examples: [
-    { label: 'Own case 1', input: '"dcbcd"' },
-    { label: 'Own case 2', input: '"bdccd"' },
+    { label: 'Six distinct letters', input: '"hqvaxr"' },
+    { label: 'Repeated pairs', input: '"ffkkbb"' },
     { label: 'Single letter', input: '"a"' },
     { label: 'Equal run of 20', input: '"aaaaaaaaaaaaaaaaaaaa"' },
     { label: 'Reverse pair', input: '"ba"' },

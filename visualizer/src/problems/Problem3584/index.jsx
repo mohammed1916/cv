@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-product-of-first-and-last-elements-of-a-subsequence/',
   complexity: 'O(n^2) time and O(1) space. The visualization caps nums at 10 entries.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[-2,-10,3,4,-3,-4,2],"m":2}' },
-    { label: 'Own case 2', input: '{"nums":[2,4,-6,6,7,-5],"m":4}' },
+    { label: 'Mixed signs, m four', input: '{"nums":[4,-2,8,-6,3,1],"m":4}' },
+    { label: 'All negative values', input: '{"nums":[-4,-9,-1,-6],"m":2}' },
     { label: 'Single negative value', input: '{"nums":[-4],"m":1}' },
     { label: 'Equal values', input: '{"nums":[2,2,2],"m":2}' },
     { label: 'Extreme values', input: '{"nums":[100,-100,100,-100],"m":4}' },

@@ -29,8 +29,18 @@ export default function CodePatternAnnotations({ linePatterns, currentPhase, act
     // Position relative to code panel, accounting for scroll and line offset
     const baselineTop = activeRect.top - panelRect.top + panelScrollTop
     const lineOffset = (targetLine - activeLine) * LINE_HEIGHT
+    const top = baselineTop + lineOffset
 
-    return baselineTop + lineOffset
+    // Hide badges for lines scrolled out of the code area so they never land on the header or toolbar.
+    const scroller = codePanel.querySelector('.ctp-scroll')
+    if (scroller) {
+      const scrollRect = scroller.getBoundingClientRect()
+      const visibleTop = scrollRect.top - panelRect.top
+      const visibleBottom = visibleTop + scroller.clientHeight
+      if (top < visibleTop || top + LINE_HEIGHT > visibleBottom) return undefined
+    }
+
+    return top
   }
 
   return (
@@ -38,6 +48,8 @@ export default function CodePatternAnnotations({ linePatterns, currentPhase, act
       {annotations.map(({ line, phase, icon, label, color }) => {
         const isActive = currentPhase === phase
         const top = getTopPosition(line)
+        // Without a measured position, an annotation would fall back to the overlay's top edge (over the header).
+        if (top === undefined) return null
 
         return (
           <div

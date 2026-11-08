@@ -34,7 +34,7 @@ export function buildTrace({ caption }) {
   }
   const result = n < 3 ? '' : memo[0][26][0].text
   if (n < 3) {
-    frames.push({ pythonLine: 2, phase: 'done', activeLine: L('too short'), at: -1, text: '', message: 'Fewer than 3 letters can never form runs of 3, so there is no good caption.' })
+    frames.push({ pythonLine: 2, phase: 'done', activeLine: L('shorter than 3 letters'), at: -1, text: '', message: 'Fewer than 3 letters can never form runs of 3, so there is no good caption.' })
     return { input: { caption }, frames, result }
   }
   let c = 26, k = 0, built = ''

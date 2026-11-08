@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimize-the-maximum-of-two-arrays/',
   complexity: 'O(log(uniqueCnt1 + uniqueCnt2)) time with constant counting work per probe.',
   examples: [
-    { label: 'Own case 1', input: '{"divisor1":3,"divisor2":8,"uniqueCnt1":2,"uniqueCnt2":4}' },
-    { label: 'Own case 2', input: '{"divisor1":4,"divisor2":6,"uniqueCnt1":3,"uniqueCnt2":2}' },
+    { label: 'Coprime divisors 5 and 7', input: '{"divisor1":5,"divisor2":7,"uniqueCnt1":4,"uniqueCnt2":3}' },
+    { label: 'Divisor 4 is a multiple of 2', input: '{"divisor1":2,"divisor2":4,"uniqueCnt1":1,"uniqueCnt2":6}' },
     { label: 'Equal divisors, one each', input: '{"divisor1":2,"divisor2":2,"uniqueCnt1":1,"uniqueCnt2":1}' },
     { label: 'Largest counts, equal divisors', input: '{"divisor1":10,"divisor2":10,"uniqueCnt1":8,"uniqueCnt2":8}' },
     { label: 'Largest counts, distinct divisors', input: '{"divisor1":10,"divisor2":9,"uniqueCnt1":8,"uniqueCnt2":8}' },

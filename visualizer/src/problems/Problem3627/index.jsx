@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-median-sum-of-subsequences-of-size-3/',
   complexity: 'O(n log n) time for the sort. The visualization caps the array at 12 numbers.',
   examples: [
-    { label: 'Own case 1', input: '[3,2,4,3,2,4]' },
+    { label: 'Six values, two blocks', input: '[6,3,8,12,2,7]' },
     { label: 'Example 2', input: '[1,2,3]' },
     { label: 'Smallest length, equal values', input: '[1,1,1]' },
     { label: 'Nine equal values', input: '[7,7,7,7,7,7,7,7,7]' },

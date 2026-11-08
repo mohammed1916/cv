@@ -9,7 +9,7 @@ const definition = {
   url: 'https://leetcode.com/problems/sum-of-prefix-scores-of-strings/',
   complexity: 'O(total length) time and space for the trie. The visualization caps input at 6 words of up to 6 letters.',
   examples: [
-    { label: 'Example 1', input: '{"words":["abc","ab","bc","b"]}' },
+    { label: 'Own: three words and one letter', input: '{"words":["xyz","yz","q"]}' },
     { label: 'Single word', input: '{"words":["abcd"]}' },
     { label: 'Single letter', input: '{"words":["a"]}' },
     { label: 'Duplicate words', input: '{"words":["ab","ab","ab"]}' },

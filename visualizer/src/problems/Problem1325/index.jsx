@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/delete-leaves-with-a-given-value/',
   complexity: 'O(n) time and O(h) stack space for n nodes. The visualization caps the tree at 15 entries.',
   examples: [
-    { label: 'Own case 1', input: '{"root":[4,2,null,2,3,2,1],"target":2}' },
-    { label: 'Own case 2', input: '{"root":[2,4,4,4,3],"target":4}' },
+    { label: 'Target three path', input: '{"root":[3,1,4,null,2,3,null],"target":3}' },
+    { label: 'Root equals target', input: '{"root":[1,3,2,1,null,4],"target":1}' },
     { label: "Single node equal to target", input: "{\"root\":[2],\"target\":2}" },
     { label: "Every node equal to target", input: "{\"root\":[3,3,3,3,3,3,3],\"target\":3}" },
     { label: "Fifteen nodes, target four", input: "{\"root\":[1,2,3,4,1,2,3,4,1,2,3,4,1,2,3],\"target\":4}" },

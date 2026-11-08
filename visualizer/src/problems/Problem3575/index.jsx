@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-good-subtree-score/',
   complexity: 'O(n * 2^10 * merges) with digit masks. The visualization caps the tree at 8 nodes.',
   examples: [
-    { label: 'Example 1', input: '{"vals":[2,3],"par":[-1,0]}' },
-    { label: 'Example 3', input: '{"vals":[34,1,2],"par":[-1,0,1]}' },
+    { label: 'Own: four node tree', input: '{"vals":[5,2,7,1],"par":[-1,0,0,2]}' },
+    { label: 'Own: star of three', input: '{"vals":[9,4,6],"par":[-1,0,0]}' },
     { label: 'Single node', input: '{"vals":[7],"par":[-1]}' },
     { label: 'Equal values in a pair', input: '{"vals":[12,12],"par":[-1,0]}' },
     { label: 'Every value repeats a digit', input: '{"vals":[11,22,333],"par":[-1,0,1]}' },

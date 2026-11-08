@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-xor-of-subsequences/',
   complexity: 'O(n * bits) for the basis. Every subsequence XOR lies in the span, and the best pair XOR is the largest span element.',
   examples: [
-    { label: 'Own case 1', input: '[2,3,4]' },
-    { label: 'Own case 2', input: '[6,3]' },
+    { label: 'Zeros around a peak', input: '[0,5,0,1000000000]' },
+    { label: 'Two values, descending', input: '[7,3]' },
     { label: 'Two zeros', input: '[0,0]' },
     { label: 'Equal values', input: '[5,5,5]' },
     { label: 'Largest values', input: '[1000000000,0,1000000000,0]' },

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-and-minimum-sums-of-at-most-size-k-subarrays/',
   complexity: 'O(n * k) time and O(1) space in this trace. The visualization caps n at 12.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,3,4],"k":3}' },
-    { label: 'Own case 2', input: '{"nums":[2,-4,2],"k":3}' },
+    { label: 'Six mixed values, k three', input: '{"nums":[4,-3,9,0,-8,2],"k":3}' },
+    { label: 'Negatives and a peak', input: '{"nums":[-20,-5,30],"k":2}' },
     { label: 'Single value', input: '{"nums":[5],"k":1}' },
     { label: 'Equal values tie', input: '{"nums":[3,3,3,3],"k":2}' },
     { label: 'Extremes, full window', input: '{"nums":[50,-50,50,-50,50,-50,50,-50,50,-50,50,-50],"k":6}' },

@@ -15,9 +15,9 @@ const definition = {
   url: 'https://leetcode.com/problems/car-fleet/',
   complexity: 'O(n log n) time for sorting, O(n) space. The visualization caps n at 30.',
   examples: [
-    { label: 'Own case 1', input: '{"target":13,"position":[11,9,1,6,4],"speed":[3,5,2,2,4]}' },
-    { label: 'Own case 2', input: '{"target":11,"position":[4],"speed":[4]}' },
-    { label: 'Own case 3', input: '{"target":101,"position":[1,3,5],"speed":[5,3,2]}' },
+    { label: 'Three cars, one fleet', input: '{"target":12,"position":[0,3,7],"speed":[4,2,1]}' },
+    { label: 'Slow car first', input: '{"target":20,"position":[5,11,2],"speed":[1,3,2]}' },
+    { label: 'Two cars at the goal', input: '{"target":9,"position":[1,6],"speed":[2,5]}' },
     { label: 'Single car', input: '{"target":10,"position":[3],"speed":[2]}' },
     { label: 'Equal speeds never catch up', input: '{"target":12,"position":[0,4],"speed":[2,2]}' },
     { label: 'Largest target and speeds', input: '{"target":1000000,"position":[0,999999],"speed":[1000000,1]}' },

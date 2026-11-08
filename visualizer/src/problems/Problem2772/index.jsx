@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/apply-operations-to-make-all-array-elements-equal-to-zero/',
   complexity: 'O(n) time and O(n) space. The visualization caps input at 12 values.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[3,3,4,2,2,1],"k":4}' },
-    { label: 'Own case 2', input: '{"nums":[2,4,2,2],"k":3}' },
+    { label: 'Zeros among five values', input: '{"nums":[5,0,1,5,1],"k":2}' },
+    { label: 'Eight values, larger k', input: '{"nums":[0,7,7,3,10,0,6,2],"k":5}' },
     { label: 'Single value, k 1', input: '{"nums":[0],"k":1}' },
     { label: 'Equal values', input: '{"nums":[5,5,5,5],"k":2}' },
     { label: 'Boundary: k equals length 12', input: '{"nums":[10,0,10,0,10,0,10,0,10,0,10,0],"k":12}' },

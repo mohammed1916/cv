@@ -15,8 +15,8 @@ const definition = {
   url: 'https://leetcode.com/problems/check-completeness-of-a-binary-tree/',
   complexity: 'O(n) time and space. The visualization caps input at 30 nodes.',
   examples: [
-    { label: 'Own case 1', input: '[2,3,4,5,6,7]' },
-    { label: 'Own case 2', input: '[2,3,4,5,6,null,8]' },
+    { label: 'Gap on left side', input: '[8,4,10,null,2,9]' },
+    { label: 'Last leaf missing', input: '[5,3,8,1,4,6,null]' },
     { label: 'Single node', input: '[1]' },
     { label: 'Single root', input: '[1]' },
     { label: 'Equal values', input: '[2,2,2]' },

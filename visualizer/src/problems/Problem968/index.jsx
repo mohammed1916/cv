@@ -16,8 +16,8 @@ const definition = {
   url: 'https://leetcode.com/problems/binary-tree-cameras/',
   complexity: 'O(n) time and O(h) stack space. The visualization caps input at 15 nodes.',
   examples: [
-    { label: 'Own case 1', input: '[1,1,null,1,1]' },
-    { label: 'Own case 2', input: '[1,1,null,1,null,1,null,null,1]' },
+    { label: 'Seven-node tree', input: '[1,2,3,4,null,null,5]' },
+    { label: 'Left-leaning chain', input: '[2,1,null,3]' },
     { label: 'Single root', input: '[0]' },
     { label: 'Equal values', input: '[0,0,0]' },
     { label: 'Null gaps', input: '[1,null,1,null,null,null,1]' },

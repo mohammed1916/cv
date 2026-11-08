@@ -47,7 +47,7 @@ function loadCheckout() {
   });
   return checkoutScript;
 }
-export function Plans({ access, reason, onHideForever }) {
+export function Plans({ access, reason }) {
   const [pending, setPending] = useState(false);
   const [message, setMessage] = useState('');
   const [cycle, setCycle] = useState('monthly');
@@ -120,7 +120,6 @@ export function Plans({ access, reason, onHideForever }) {
         {!BETA_FREE_ACCESS && !checkoutEnabled && <p className="access-notice">Pro purchases are coming soon. Checkout is not open yet.</p>}
       </section>
     </div>
-    {onHideForever && <p><button onClick={onHideForever}>Don't show this again</button></p>}
     {!BETA_FREE_ACCESS && !access.user && <>
       <GoogleSignIn access={access} />
     </>}

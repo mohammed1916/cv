@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximize-points-after-choosing-k-tasks/',
   complexity: 'O(n log n) time for sorting the gains. The visualization caps n at 20.',
   examples: [
-    { label: 'Own case 1', input: '{"technique1":[6,3,11],"technique2":[11,4,9],"k":3}' },
-    { label: 'Own case 2', input: '{"technique1":[2,3,4],"technique2":[5,6,7],"k":1}' },
+    { label: 'Three points, one swap', input: '{"technique1":[4,9,2],"technique2":[3,7,8],"k":1}' },
+    { label: 'Six reversed pairs, k three', input: '{"technique1":[10,20,30,40,50,60],"technique2":[60,50,40,30,20,10],"k":3}' },
     { label: "Single point pair", input: "{\"technique1\":[4],\"technique2\":[9],\"k\":1}" },
     { label: "All points equal", input: "{\"technique1\":[5,5],\"technique2\":[5,5],\"k\":1}" },
     { label: "Largest points, full k", input: "{\"technique1\":[1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1,1,1,1,1,1,1,1,1,1],\"technique2\":[1,1,1,1,1,1,1,1,1,1,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000],\"k\":20}" },

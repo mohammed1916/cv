@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/kth-smallest-path-xor-sum/',
   complexity: 'O(q * n log n) with this direct form. The visualization caps n at 8 and q at 6.',
   examples: [
-    { label: 'Example 1', input: '{"par":[-1,0,0],"vals":[1,1,1],"queries":[[0,1],[0,2],[0,3]]}' },
-    { label: 'Example 2', input: '{"par":[-1,0,1],"vals":[5,2,7],"queries":[[0,1],[1,2],[1,3],[2,1]]}' },
+    { label: 'Own: four nodes, two queries', input: '{"par":[-1,0,1,1],"vals":[3,0,5,2],"queries":[[3,1],[2,2]]}' },
+    { label: 'Own: four nodes, k up to n', input: '{"par":[-1,0,0,2],"vals":[4,9,1,6],"queries":[[3,2],[0,4]]}' },
     { label: 'Single node, value zero', input: '{"par":[-1],"vals":[0],"queries":[[0,1]]}' },
     { label: 'Equal values under one root', input: '{"par":[-1,0,0],"vals":[3,3,3],"queries":[[0,2],[0,3]]}' },
     { label: 'Largest values on a chain', input: '{"par":[-1,0,1,2,3],"vals":[15,15,15,15,15],"queries":[[0,5],[4,1]]}' },

@@ -13,7 +13,7 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-number-of-operations-to-make-arrays-similar/',
   complexity: 'O(n log n) time for the sorts. The visualization caps input at 6 values.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[9,13,7],"target":[3,15,11]}' },
+    { label: 'Three values, equal sums', input: '{"nums":[5,2,8],"target":[7,4,4]}' },
     { label: 'Example 2', input: '{"nums":[1,2,5],"target":[2,5,1]}' },
     { label: 'Single pair', input: '{"nums":[7],"target":[7]}' },
     { label: 'Equal values', input: '{"nums":[5,5],"target":[5,5]}' },

@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/minimum-amount-of-time-to-fill-cups/',
   complexity: 'O(t) time for t seconds, which is at most the total water. The visualization caps each cup at 12.',
   examples: [
-    { label: 'Example 1', input: '{"amount":[1,4,2]}' },
-    { label: 'Example 2', input: '{"amount":[5,4,4]}' },
+    { label: 'Own: cups with an empty one', input: '{"amount":[3,0,7]}' },
+    { label: 'Own: two large cups', input: '{"amount":[6,6,1]}' },
     { label: 'All cups empty', input: '{"amount":[0,0,0]}' },
     { label: 'Equal cups', input: '{"amount":[4,4,4]}' },
     { label: 'Largest cups', input: '{"amount":[12,12,12]}' },

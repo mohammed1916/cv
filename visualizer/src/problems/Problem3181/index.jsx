@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-total-reward-using-operations-ii/',
   complexity: 'O(n * S) time, where S is the sum of the rewards. The visualization caps the input at 10 values.',
   examples: [
-    { label: 'Own case 1', input: '[2,2,4,4]' },
-    { label: 'Own case 2', input: '[2,7,5,4,3]' },
+    { label: 'Four rewards, two pairs', input: '[7,7,3,30]' },
+    { label: 'Six rewards, mixed', input: '[50,12,9,1,40,2]' },
     { label: "Single reward", input: "[50]" },
     { label: "Ten equal rewards", input: "[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]" },
     { label: "Long run: 10 rewards", input: "[50, 1, 49, 2, 48, 3, 47, 4, 46, 5]" },

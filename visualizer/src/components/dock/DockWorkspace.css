@@ -138,8 +138,8 @@
 }
 
 .local-dock-header-actions select {
-  width: 58px;
-  min-width: 58px;
+  width: 66px;
+  min-width: 66px;
 }
 
 .local-dock-header-actions select:disabled {
@@ -658,8 +658,8 @@
   }
 
   .local-dock-header-actions select {
-    width: 52px;
-    min-width: 52px;
+    width: 60px;
+    min-width: 60px;
     font-size: 11px;
     padding-left: 4px;
     padding-right: 4px;

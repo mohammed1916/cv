@@ -14,8 +14,8 @@ const definition = {
   url: 'https://leetcode.com/problems/remove-letter-to-equalize-frequency/',
   complexity: 'O(n * 26) time and O(26) space.',
   examples: [
-    { label: 'Own case 1', input: '"bcdd"' },
-    { label: 'Own case 2', input: '"bbaa"' },
+    { label: 'Seven letters', input: '"moonlit"' },
+    { label: 'Five letters', input: '"ziggy"' },
     { label: 'Shortest word', input: '"ab"' },
     { label: 'Equal letters', input: '"aabb"' },
     { label: 'Longest word', input: '"zyxwvutsrqpo"' },

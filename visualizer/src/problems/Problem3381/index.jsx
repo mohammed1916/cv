@@ -13,8 +13,8 @@ const definition = {
   url: 'https://leetcode.com/problems/maximum-subarray-sum-with-length-divisible-by-k/',
   complexity: 'O(n + k) time and O(k) space. The visualization caps nums at 12 entries.',
   examples: [
-    { label: 'Own case 1', input: '{"nums":[2,3],"k":2}' },
-    { label: 'Own case 2', input: '{"nums":[-6,2,3,-4,5],"k":3}' },
+    { label: 'Six values, k three', input: '{"nums":[4,-6,9,-1,0,2],"k":3}' },
+    { label: 'Extremes, k two', input: '{"nums":[-10,10,-3],"k":2}' },
     { label: 'Single value', input: '{"nums":[-3],"k":1}' },
     { label: 'Equal values', input: '{"nums":[2,2,2],"k":3}' },
     { label: 'Alternating extremes', input: '{"nums":[10,-10,10,-10,10,-10,10,-10,10,-10,10,-10],"k":12}' },
