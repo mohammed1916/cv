@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"values":[2,3,1,3,1,null,1]}' },
     { label: 'Example 2', input: '{"values":[2,1,1,1,3,null,null,null,null,null,1]}' },
+    { label: 'Single node', input: '{"values":[1]}' },
+    { label: 'Equal values', input: '{"values":[2,2,2]}' },
+    { label: 'Largest: 15 nodes', input: '{"values":[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]}' },
+    { label: 'Long run: 15 nodes with gaps', input: '{"values":[3,1,null,3,8,7,6,6,8,4,2,null,null,2,4]}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Four darts', input: '{"points":[[-2,0],[2,0],[0,2],[0,-2]],"r":2}' },
     { label: 'Six darts', input: '{"points":[[-3,0],[3,0],[2,6],[5,4],[0,9],[7,8]],"r":5}' },
+    { label: 'One dart at the centre', input: '{"points":[[0,0]],"r":1}' },
+    { label: 'Equal distances', input: '{"points":[[2,0],[0,2],[-2,0]],"r":2}' },
+    { label: 'Largest: 8 darts, radius 5', input: '{"points":[[5,0],[0,5],[-5,0],[0,-5],[3,4],[-3,4],[4,-3],[-4,-3]],"r":5}' },
+    { label: 'Long run: 8 darts', input: '{"points":[[-2,-5],[-1,-2],[1,0],[5,3],[-5,0],[4,-2],[4,0],[-3,-4]],"r":4}' },
   ],
 }
 

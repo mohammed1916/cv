@@ -16,6 +16,10 @@ const definition = {
     { label: 'false, true', input: '{"n":2,"prerequisites":[[1,0]],"queries":[[0,1],[1,0]]}' },
     { label: 'true, true', input: '{"n":3,"prerequisites":[[1,2],[1,0],[2,0]],"queries":[[1,0],[1,2]]}' },
     { label: 'true, false, true', input: '{"n":5,"prerequisites":[[0,1],[1,2],[2,3],[3,4]],"queries":[[0,4],[4,0],[1,3]]}' },
+    { label: 'Two courses, no prerequisites', input: '{"n":2,"prerequisites":[],"queries":[[0,1]]}' },
+    { label: 'Repeated query', input: '{"n":2,"prerequisites":[[0,1]],"queries":[[0,1],[0,1]]}' },
+    { label: 'Largest: chain of 8 courses', input: '{"n":8,"prerequisites":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7]],"queries":[[0,7],[7,0],[3,5],[5,3],[1,6],[6,1]]}' },
+    { label: 'Long run: 8 courses, 12 prerequisites', input: '{"n":8,"prerequisites":[[2,1],[2,5],[0,2],[6,7],[0,4],[3,5],[3,0],[2,0],[5,6],[4,5],[1,0],[4,7]],"queries":[[0,7],[2,4],[6,1],[3,4]]}' },
   ],
 }
 

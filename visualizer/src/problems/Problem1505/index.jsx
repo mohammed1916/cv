@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"num":"4321","k":4}' },
     { label: 'Example 2', input: '{"num":"100","k":1}' },
+    { label: 'Single digit', input: '{"num":"7","k":3}' },
+    { label: 'Repeated digits', input: '{"num":"1111","k":2}' },
+    { label: 'Largest digits', input: '{"num":"98765432","k":20}' },
+    { label: 'Long run: 8 digits', input: '{"num":"09087400","k":12}' },
   ],
 }
 

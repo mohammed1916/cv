@@ -11,6 +11,10 @@ const definition = {
     { label: 'Sample A', input: '{"numBottles":9,"numExchange":3}' },
     { label: 'Larger trade', input: '{"numBottles":15,"numExchange":4}' },
     { label: 'Smallest trade', input: '{"numBottles":1,"numExchange":2}' },
+    { label: 'One bottle', input: '{"numBottles":1,"numExchange":5}' },
+    { label: 'Equal bottles and exchange', input: '{"numBottles":4,"numExchange":4}' },
+    { label: 'Maximum bottles', input: '{"numBottles":100,"numExchange":2}' },
+    { label: 'Long run: 97 bottles', input: '{"numBottles":97,"numExchange":7}' },
   ],
 }
 

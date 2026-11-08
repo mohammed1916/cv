@@ -11,6 +11,11 @@ const definition = {
     { label: 'Sample A', input: '[1,20,3,22,2,21]' },
     { label: 'Spread out', input: '[9,4,1,7,15,8]' },
     { label: 'Short', input: '[5,1,9]' },
+    { label: 'Single value', input: '[7]' },
+    { label: 'Two values', input: '[4,2]' },
+    { label: 'Repeated values', input: '[3,3,3,3]' },
+    { label: 'Value limits', input: '[-1000,1000,-999,999,0]' },
+    { label: 'Long run: 20 values', input: '[-933,-372,-118,-117,290,-517,-803,189,451,921,-745,257,169,272,-589,-652,681,165,707,233]' },
   ],
 }
 

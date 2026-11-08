@@ -11,6 +11,10 @@ const definition = {
     { label: 'Vowel run', input: '{"text":"aeiouxyz","k":3}' },
     { label: 'Mixed', input: '{"text":"bcdfgaeb","k":2}' },
     { label: 'Whole text', input: '{"text":"aei","k":3}' },
+    { label: 'Single letter', input: '{"text":"a","k":1}' },
+    { label: 'Repeated vowels', input: '{"text":"aaaa","k":2}' },
+    { label: 'Longest text: 200 letters', input: '{"text":"aeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiouaeiou","k":200}' },
+    { label: 'Long run: 200 letters', input: '{"text":"xlsnntseeapfrzzgqmfymplhayskrayuhkoaeeykknnrctkqgqhmregxvyzfhzmgjaxdbmvwzcwkwnabiafjopdepcfvcduzgtwuvahbwhjqpmkvuzeiizbminnizumuqohvnuiduwhhuvzgyjjrlbqaxbapnlpkhevsrhdezpghbjgpcaldxaueicjbxxpfzadryexs","k":25}' },
   ],
 }
 

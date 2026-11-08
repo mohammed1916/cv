@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Five houses', input: '{"houses":[1,4,8,10,20],"k":3}' },
     { label: 'Five houses, two boxes', input: '{"houses":[2,3,5,12,18],"k":2}' },
+    { label: 'Single house', input: '{"houses":[7],"k":1}' },
+    { label: 'One box per house', input: '{"houses":[3,9,15,21],"k":4}' },
+    { label: 'Edge positions', input: '{"houses":[1,100],"k":1}' },
+    { label: 'Long run: 8 houses', input: '{"houses":[12,71,17,7,70,100,21,51],"k":3}' },
   ],
 }
 

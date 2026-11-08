@@ -9,6 +9,10 @@ export const phases = [
 export const examples = [
   { label: 'Loops back', input: '{"path":"NESWNE"}' },
   { label: 'Straight line', input: '{"path":"EENNW"}' },
+  { label: 'Single step', input: '{"path":"N"}' },
+  { label: 'Immediate return', input: '{"path":"NS"}' },
+  { label: 'Longest straight path', input: '{"path":"EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"}' },
+  { label: 'Long run: 60 steps', input: '{"path":"NNEWNWSSSSWSNNEESESNSSEWESSEEWESSSEEWNNNWEWNENNNESESESNWESES"}' },
 ]
 
 const MOVE = { N: [0, 1], S: [0, -1], E: [1, 0], W: [-1, 0] }

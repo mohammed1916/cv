@@ -11,6 +11,11 @@ const definition = {
     { label: 'Sample A', input: '{"nums":[2,6,4,1,9],"target":8}' },
     { label: 'Equal values', input: '{"nums":[1,1,1],"target":2}' },
     { label: 'Wide spread', input: '{"nums":[5,10,20,40],"target":30}' },
+    { label: 'Single value', input: '{"nums":[5],"target":10}' },
+    { label: 'No pair fits', input: '{"nums":[50,60],"target":10}' },
+    { label: 'Repeated values', input: '{"nums":[3,3,3,3],"target":6}' },
+    { label: 'Mixed range', input: '{"nums":[100,1,100,1,50,100,2,1,1,1,1,1],"target":200}' },
+    { label: 'Long run: 12 values', input: '{"nums":[4,38,83,64,100,16,44,22,84,79,15,47],"target":100}' },
   ],
 }
 

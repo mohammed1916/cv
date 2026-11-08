@@ -20,6 +20,10 @@ const definition = {
       label: 'LeetCode example',
       input: '{"homepage":"leetcode.com","methods":["visit","visit","visit","back","back","forward","visit","forward","back","back"],"args":[["google.com"],["facebook.com"],["youtube.com"],[1],[1],[1],["linkedin.com"],[2],[2],[7]]}',
     },
+    { label: 'Single call', input: '{"homepage":"a.io","methods":["visit"],"args":[["b.io"]]}' },
+    { label: 'Steps past history', input: '{"homepage":"home","methods":["back","forward"],"args":[[5],[3]]}' },
+    { label: 'Longest names', input: '{"homepage":"abcdefghijklmnopqrst","methods":["visit","back","forward"],"args":[["abcdefghijklmnopqrst"],[100],[100]]}' },
+    { label: 'Long run: 50 calls', input: '{"homepage":"home.io","methods":["visit","visit","visit","forward","visit","forward","forward","visit","visit","back","forward","back","visit","visit","back","forward","visit","visit","visit","back","visit","visit","back","forward","back","visit","back","forward","visit","forward","forward","back","visit","forward","back","visit","visit","visit","back","forward","forward","forward","visit","forward","forward","visit","visit","forward","back","back"],"args":[["home.io"],["beta.io"],["gamma.io"],[1],["sigma.io"],[2],[3],["omega.io"],["beta.io"],[3],[3],[1],["beta.io"],["gamma.io"],[3],[3],["gamma.io"],["sigma.io"],["delta.io"],[1],["omega.io"],["beta.io"],[3],[2],[2],["omega.io"],[3],[2],["gamma.io"],[2],[3],[1],["sigma.io"],[1],[3],["sigma.io"],["alpha.io"],["beta.io"],[1],[3],[2],[2],["delta.io"],[1],[1],["gamma.io"],["sigma.io"],[3],[1],[1]]}' },
   ],
 }
 

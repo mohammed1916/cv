@@ -27,6 +27,10 @@ const definition = {
   complexity: 'O(total length of the condition text) to scan every code once.',
   examples: [
     { label: 'Example', input: '{"Patients":[{"patient_id":1,"patient_name":"Daniel","conditions":"YFEV COUGH"},{"patient_id":2,"patient_name":"Alice","conditions":"DIAB100 MYOP"},{"patient_id":3,"patient_name":"Bob","conditions":"ACNE DIAB100"},{"patient_id":4,"patient_name":"Carol","conditions":"MYOP DIAB1"},{"patient_id":5,"patient_name":"Dan","conditions":"XDIAB1 DIAB2"}]}' },
+    { label: 'Single patient', input: '{"Patients":[{"patient_id":9,"patient_name":"Eve","conditions":"DIAB1"}]}' },
+    { label: 'No diabetic code', input: '{"Patients":[{"patient_id":3,"patient_name":"Finn","conditions":"ACNE COUGH"}]}' },
+    { label: 'Word must start with DIAB1', input: '{"Patients":[{"patient_id":4,"patient_name":"Gwen","conditions":"XDIAB1 DIAB2 DIAB1Z"}]}' },
+    { label: 'Long run: 12 patients', input: '{"Patients":[{"patient_id":1,"patient_name":"Ann","conditions":"MYOP MYOP"},{"patient_id":2,"patient_name":"Ben","conditions":"DIAB1 COUGH"},{"patient_id":3,"patient_name":"Cy","conditions":"ACNE DIAB100"},{"patient_id":4,"patient_name":"Dee","conditions":"MYOP DIAB100"},{"patient_id":5,"patient_name":"Eli","conditions":"COUGH DIAB100"},{"patient_id":6,"patient_name":"Fay","conditions":"YFEV DIAB1"},{"patient_id":7,"patient_name":"Gus","conditions":"DIAB100 MYOP"},{"patient_id":8,"patient_name":"Hal","conditions":"DIAB1 DIAB100"},{"patient_id":9,"patient_name":"Ivy","conditions":"MYOP YFEV"},{"patient_id":10,"patient_name":"Jo","conditions":"YFEV MYOP"},{"patient_id":11,"patient_name":"Kit","conditions":"MYOP ACNE"},{"patient_id":12,"patient_name":"Lu","conditions":"ACNE DIAB100"}]}' },
   ],
 }
 

@@ -10,6 +10,10 @@ export const examples = [
   { label: 'Mixed prices', input: '[8,4,6,2,7]' },
   { label: 'Equal prices', input: '[6,6,6]' },
   { label: 'Rising prices', input: '[1,2,3,4]' },
+  { label: 'Single price', input: '[5]' },
+  { label: 'Repeated prices', input: '[2,2,5,5,2]' },
+  { label: 'Price limits', input: '[1,1000,1,1000]' },
+  { label: 'Long run: 40 prices', input: '[34,423,996,127,735,793,590,63,787,681,83,576,789,111,81,777,36,750,163,752,226,425,760,174,764,262,952,532,596,689,960,601,974,468,259,933,484,803,801,105]' },
 ]
 
 export function parseInput(text) {

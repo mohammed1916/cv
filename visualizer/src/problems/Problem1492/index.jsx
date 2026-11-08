@@ -11,6 +11,10 @@ const definition = {
     { label: 'Twelve, third', input: '{"n":12,"k":3}' },
     { label: 'Seven, second', input: '{"n":7,"k":2}' },
     { label: 'Too few factors', input: '{"n":7,"k":3}' },
+    { label: 'Single factor', input: '{"n":1,"k":1}' },
+    { label: 'Prime number', input: '{"n":13,"k":2}' },
+    { label: 'Last factor', input: '{"n":1000,"k":16}' },
+    { label: 'Long run: 720 has 30 factors', input: '{"n":720,"k":30}' },
   ],
 }
 

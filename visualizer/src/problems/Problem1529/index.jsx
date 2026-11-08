@@ -11,6 +11,11 @@ const definition = {
     { label: 'Mixed', input: '"011001"' },
     { label: 'Two changes', input: '"10"' },
     { label: 'Already zero', input: '"000"' },
+    { label: 'Single bulb on', input: '"1"' },
+    { label: 'Single bulb off', input: '"0"' },
+    { label: 'Alternating start', input: '"0101"' },
+    { label: 'Largest: 12 bulbs', input: '"101010101010"' },
+    { label: 'Long run: 12 bulbs', input: '"101011010111"' },
   ],
 }
 

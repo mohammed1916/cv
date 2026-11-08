@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":3,"edges":[[0,1,0.5],[1,2,0.5],[0,2,0.2]],"start":0,"end":2}' },
     { label: 'Chain', input: '{"n":4,"edges":[[0,1,0.9],[1,3,0.9],[0,3,0.5]],"start":0,"end":3}' },
+    { label: 'Direct edge', input: '{"n":2,"edges":[[0,1,0.4]],"start":0,"end":1}' },
+    { label: 'Unreachable end', input: '{"n":3,"edges":[[0,1,0.9]],"start":0,"end":2}' },
+    { label: 'Certain and impossible links', input: '{"n":4,"edges":[[0,1,1],[1,2,0],[2,3,1],[0,3,0]],"start":0,"end":3}' },
+    { label: 'Long run: 6 nodes', input: '{"n":6,"edges":[[0,1,0.52],[1,2,0.87],[2,3,0.72],[3,4,0.95],[4,5,0.74],[0,5,0.6],[2,4,0.84]],"start":0,"end":5}' },
   ],
 }
 

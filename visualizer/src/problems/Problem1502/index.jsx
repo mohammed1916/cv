@@ -11,6 +11,10 @@ const definition = {
     { label: 'Shuffled', input: '{"arr":[7,1,5,9,3]}' },
     { label: 'Uneven gap', input: '{"arr":[4,1,9,2]}' },
     { label: 'Negatives', input: '{"arr":[-6,0,-3,3]}' },
+    { label: 'Two values', input: '{"arr":[3,8]}' },
+    { label: 'Repeated values', input: '{"arr":[5,5,5]}' },
+    { label: 'Value limits', input: '{"arr":[-100,100,-100,100,0,0]}' },
+    { label: 'Long run: 12 values', input: '{"arr":[-94,44,-54,-60,74,83,-1,62,77,51,0,41]}' },
   ],
 }
 

@@ -11,6 +11,10 @@ const definition = {
     { label: 'Sample A', input: '{"nums":[1,2,3,4],"left":1,"right":10}' },
     { label: 'Middle ranks', input: '{"nums":[5,9,2],"left":2,"right":4}' },
     { label: 'Single value', input: '{"nums":[7],"left":1,"right":1}' },
+    { label: 'Full range', input: '{"nums":[1,2,3],"left":1,"right":6}' },
+    { label: 'Repeated values', input: '{"nums":[3,3,3],"left":2,"right":5}' },
+    { label: 'Last rank', input: '{"nums":[100,100,100,100,100,100,100,100,100,100],"left":55,"right":55}' },
+    { label: 'Long run: 10 values', input: '{"nums":[4,23,84,55,68,6,59,20,47,22],"left":10,"right":40}' },
   ],
 }
 

@@ -56,6 +56,10 @@ const definition = {
   complexity: 'O(u * m) for u users and mails of length m.',
   examples: [
     { label: 'Example', input: '{"Users":[{"user_id":1,"name":"Ana","mail":"ana_01@leetcode.com"},{"user_id":2,"name":"Bo","mail":"1bo@leetcode.com"},{"user_id":3,"name":"Cy","mail":"cy.dev@example.com"},{"user_id":4,"name":"Di","mail":"di-x@LEETCODE.com"},{"user_id":5,"name":"Ed","mail":"ed@leetcode.com"}]}' },
+    { label: 'Single valid mail', input: '{"Users":[{"user_id":1,"name":"Lee","mail":"lee@leetcode.com"}]}' },
+    { label: 'No valid mail', input: '{"Users":[{"user_id":2,"name":"Mo","mail":"mo@gmail.com"}]}' },
+    { label: 'Edge characters', input: '{"Users":[{"user_id":3,"name":"Zed","mail":"a.b-c_9@leetcode.com"},{"user_id":4,"name":"Qi","mail":"-x@leetcode.com"}]}' },
+    { label: 'Long run: 12 users', input: '{"Users":[{"user_id":1,"name":"User 1","mail":"ana@leetcode.com"},{"user_id":2,"name":"User 2","mail":"me@LEETCODE.com"},{"user_id":3,"name":"User 3","mail":"9lives@leetcode.com"},{"user_id":4,"name":"User 4","mail":"1st@leetcode.com"},{"user_id":5,"name":"User 5","mail":"x.y@example.com"},{"user_id":6,"name":"User 6","mail":"qq@leetcode.co"},{"user_id":7,"name":"User 7","mail":"9lives@leetcode.com"},{"user_id":8,"name":"User 8","mail":"qq@leetcode.co"},{"user_id":9,"name":"User 9","mail":"qq@leetcode.co"},{"user_id":10,"name":"User 10","mail":"me@LEETCODE.com"},{"user_id":11,"name":"User 11","mail":"qq@leetcode.co"},{"user_id":12,"name":"User 12","mail":"ana@leetcode.com"}]}' },
   ],
 }
 

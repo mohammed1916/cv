@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":7,"edges":[[0,1],[0,2],[1,4],[1,5],[2,3],[2,6]],"labels":"abaedcd"}' },
     { label: 'Star', input: '{"n":4,"edges":[[0,1],[0,2],[0,3]],"labels":"aaaa"}' },
+    { label: 'Two nodes', input: '{"n":2,"edges":[[0,1]],"labels":"aa"}' },
+    { label: 'Same letters', input: '{"n":4,"edges":[[0,1],[1,2],[2,3]],"labels":"zzzz"}' },
+    { label: 'Alphabet chain', input: '{"n":12,"edges":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11]],"labels":"abcdefghijkl"}' },
+    { label: 'Long run: 12 nodes', input: '{"n":12,"edges":[[0,1],[0,2],[1,3],[1,4],[1,5],[0,6],[1,7],[4,8],[3,9],[3,10],[0,11]],"labels":"abcaabbaaaab"}' },
   ],
 }
 

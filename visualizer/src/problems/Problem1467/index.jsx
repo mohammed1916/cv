@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 2', input: '[2,1,1]' },
     { label: 'Four colours', input: '[1,2,1,2]' },
+    { label: 'Two colours, one ball each', input: '[1,1]' },
+    { label: 'Equal counts', input: '[2,2]' },
+    { label: 'Largest: 8 colours, total 16', input: '[2,2,2,2,2,2,2,2]' },
+    { label: 'Long run: 6 colours', input: '[1,1,2,2,2,2]' },
   ],
 }
 

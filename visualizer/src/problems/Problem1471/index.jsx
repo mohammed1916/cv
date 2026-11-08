@@ -11,6 +11,10 @@ const definition = {
     { label: 'Spread out', input: '{"arr":[1,2,3,4,5],"k":2}' },
     { label: 'Negative tie', input: '{"arr":[-7,4,4,10,0],"k":3}' },
     { label: 'Even length', input: '{"arr":[1,2,3,4],"k":2}' },
+    { label: 'Single element', input: '{"arr":[4],"k":1}' },
+    { label: 'Repeated values', input: '{"arr":[3,3,3,3],"k":2}' },
+    { label: 'Value limits', input: '{"arr":[-1000,1000,-1000,1000],"k":3}' },
+    { label: 'Long run: 40 values', input: '{"arr":[-934,-835,179,120,726,-933,59,-59,470,414,450,-333,-80,745,425,459,57,539,-485,771,-925,442,-678,122,-686,-170,-415,-802,937,25,-572,885,480,-185,355,546,454,251,-138,459],"k":15}' },
   ],
 }
 

@@ -8,6 +8,10 @@ export const phases = [
 export const examples = [
   { label: 'Mixed signs', input: '[3,-1,4,1,-5,9]' },
   { label: 'Increasing', input: '[1,2,3,4,5]' },
+  { label: 'Single value', input: '[-7]' },
+  { label: 'Repeated values', input: '[5,5,5,5]' },
+  { label: 'Value limits', input: '[-1000,1000,-1000,1000]' },
+  { label: 'Long run: 60 values', input: '[-934,696,-997,169,149,482,-672,-896,-798,-203,61,-246,400,-683,-921,-331,-164,450,587,170,423,111,-487,-124,-459,-862,551,643,-740,-683,281,348,32,-917,-528,763,859,48,526,145,-926,488,-334,-15,451,626,-881,903,880,886,-457,-224,423,-742,-638,829,-23,475,-688,224]' },
 ]
 
 export function parseInput(text) {

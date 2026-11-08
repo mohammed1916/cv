@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"aaabcccd","k":2}' },
     { label: 'Example 2', input: '{"s":"aabbaa","k":2}' },
+    { label: 'Single letter, k 0', input: '{"s":"a","k":0}' },
+    { label: 'Equal letters, one removal', input: '{"s":"aabb","k":1}' },
+    { label: 'Largest: 12 letters, k 12', input: '{"s":"abcdefghijkl","k":12}' },
+    { label: 'Long run: 12 letters', input: '{"s":"bcbbcaaccbca","k":5}' },
   ],
 }
 

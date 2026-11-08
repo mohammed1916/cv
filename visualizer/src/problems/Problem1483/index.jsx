@@ -17,6 +17,10 @@ const definition = {
   complexity: 'O(n log n) preprocessing and O(log k) per query. The visualization caps input at 12 nodes.',
   examples: [
     { label: 'Example', input: '{"parent":[-1,0,0,1,1,2,2],"queries":[[3,1],[5,2],[6,3]]}' },
+    { label: 'Single node', input: '{"parent":[-1],"queries":[[0,1]]}' },
+    { label: 'Chain', input: '{"parent":[-1,0,1,2,3],"queries":[[4,4],[4,5],[2,1]]}' },
+    { label: 'Star', input: '{"parent":[-1,0,0,0,0,0],"queries":[[5,1],[3,2]]}' },
+    { label: 'Long run: 12 nodes', input: '{"parent":[-1,0,0,2,1,2,1,4,1,8,6,8],"queries":[[0,6],[7,10],[10,1],[8,12],[5,8],[10,12],[4,12],[11,4]]}' },
   ],
 }
 

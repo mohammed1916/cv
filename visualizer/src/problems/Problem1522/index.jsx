@@ -16,6 +16,10 @@ const definition = {
     { label: 'Diameter 5', input: '{"children":[[1,2,3],[4,5],[],[6],[],[],[7],[]]}' },
     { label: 'Single node', input: '{"children":[[]]}' },
     { label: 'Path of three', input: '{"children":[[1],[2],[]]}' },
+    { label: 'Two nodes', input: '{"children":[[1],[]]}' },
+    { label: 'Two equal branches', input: '{"children":[[1,2],[],[]]}' },
+    { label: 'Wide star', input: '{"children":[[1,2,3,4,5,6,7,8,9,10,11],[],[],[],[],[],[],[],[],[],[],[]]}' },
+    { label: 'Long run: 12 nodes', input: '{"children":[[1,2,3,4],[5,9],[],[11],[6],[7],[8,10],[],[],[],[],[]]}' },
   ],
 }
 

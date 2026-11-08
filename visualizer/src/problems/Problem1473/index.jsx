@@ -15,6 +15,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"houses":[0,0,0,0,0],"cost":[[1,10],[10,1],[10,1],[1,10],[5,1]],"m":5,"n":2,"target":3}' },
     { label: 'Example 2', input: '{"houses":[1,0,0],"cost":[[1,1],[1,1],[1,1]],"m":3,"n":2,"target":1}' },
+    { label: 'Single house', input: '{"houses":[0],"cost":[[4,9,2]],"m":1,"n":3,"target":1}' },
+    { label: 'Repeated costs', input: '{"houses":[0,0,0,0],"cost":[[3,3],[3,3],[3,3],[3,3]],"m":4,"n":2,"target":2}' },
+    { label: 'No valid painting', input: '{"houses":[1,2,0],"cost":[[1,1],[1,1],[1,1]],"m":3,"n":2,"target":1}' },
+    { label: 'Every house its own group', input: '{"houses":[0,0,0,0,0,0],"cost":[[20,1,20],[1,20,1],[20,1,20],[1,20,1],[20,1,20],[1,20,1]],"m":6,"n":3,"target":6}' },
+    { label: 'Long run: 6 houses', input: '{"houses":[0,1,3,1,3,1],"cost":[[12,6,6],[4,19,10],[13,10,18],[16,6,16],[15,17,13],[12,20,18]],"m":6,"n":3,"target":3}' },
   ],
 }
 

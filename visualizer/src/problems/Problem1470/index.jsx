@@ -13,6 +13,9 @@ const definition = {
     { label: 'Sample', input: '{"nums":[10,20,30,40],"n":2}' },
     { label: 'Six values', input: '{"nums":[9,1,8,2,7,3],"n":3}' },
     { label: 'One pair', input: '{"nums":[5,6],"n":1}' },
+    { label: 'Repeated values', input: '{"nums":[7,7,7,7],"n":2}' },
+    { label: 'Value limits', input: '{"nums":[1000,1,1,1000],"n":2}' },
+    { label: 'Long run: 12 pairs', input: '{"nums":[34,998,989,669,895,844,15,73,473,964,636,774,878,63,121,218,652,775,532,919,741,295,262,909],"n":12}' },
   ],
 }
 

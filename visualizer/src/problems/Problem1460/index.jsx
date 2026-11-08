@@ -12,6 +12,10 @@ const definition = {
     { label: 'Reordered', input: '{"target":[1,2,3,4],"arr":[2,4,1,3]}' },
     { label: 'Repeated value', input: '{"target":[5,1,5,2],"arr":[2,5,1,1]}' },
     { label: 'Equal', input: '{"target":[3],"arr":[3]}' },
+    { label: 'One element', input: '{"target":[1],"arr":[1]}' },
+    { label: 'Already in order', input: '{"target":[2,5],"arr":[2,5]}' },
+    { label: 'Largest: 30 values reversed', input: '{"target":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"arr":[20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1]}' },
+    { label: 'Long run: 20 values shuffled', input: '{"target":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"arr":[7,14,17,15,9,2,20,16,6,12,19,13,18,3,10,1,4,5,11,8]}' },
   ],
 }
 

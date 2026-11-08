@@ -11,6 +11,10 @@ const definition = {
     { label: 'Third word', input: '{"sentence":"keep the lantern lit tonight","searchWord":"lan"}' },
     { label: 'Late match', input: '{"sentence":"plain cake and tea","searchWord":"te"}' },
     { label: 'Inside a word', input: '{"sentence":"catalog cat","searchWord":"log"}' },
+    { label: 'Single word match', input: '{"sentence":"lamp","searchWord":"la"}' },
+    { label: 'Word appears twice', input: '{"sentence":"cat cat dog","searchWord":"ca"}' },
+    { label: 'Longest sentence: 100 characters', input: '{"sentence":"abcdefghi abcdefghi abcdefghi abcdefghi abcdefghi abcdefghi abcdefghi abcdefghi abcdefghi abcdefghi","searchWord":"ghi"}' },
+    { label: 'Long run: 30 words', input: '{"sentence":"ab ababab abab abab abab ababab ababab abab ababab ababab ababab ab ab abab ababab ab abab ab ab aba","searchWord":"abab"}' },
   ],
 }
 

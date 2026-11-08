@@ -11,6 +11,10 @@ const definition = {
     { label: 'Pair across lists', input: '{"nums1":[3,-1,4],"nums2":[2,6,-5]}' },
     { label: 'All negative', input: '{"nums1":[-1,-2],"nums2":[1,2]}' },
     { label: 'Single pair', input: '{"nums1":[1,2],"nums2":[3]}' },
+    { label: 'One value each', input: '{"nums1":[1],"nums2":[1]}' },
+    { label: 'Equal values', input: '{"nums1":[3,3],"nums2":[3,3]}' },
+    { label: 'Extreme values, 12 each', input: '{"nums1":[10,10,10,10,10,10,10,10,10,10,10,10],"nums2":[-10,-10,-10,-10,-10,-10,-10,-10,-10,-10,-10,-10]}' },
+    { label: 'Long run: 12 each', input: '{"nums1":[7,6,5,-5,-7,4,7,-5,-2,5,10,3],"nums2":[9,3,0,-1,2,2,-4,-8,2,-9,7,8]}' },
   ],
 }
 

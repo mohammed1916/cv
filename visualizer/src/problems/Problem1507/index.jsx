@@ -18,6 +18,10 @@ const definition = {
     { label: 'Mar 11 (teen ordinal)', input: '{"date":"11th Mar 1987"}' },
     { label: 'Sep 23 (rd ordinal)', input: '{"date":"23rd Sep 2041"}' },
     { label: 'Dec 1 (st ordinal)', input: '{"date":"1st Dec 1999"}' },
+    { label: 'First day of 1900', input: '{"date":"1st Jan 1900"}' },
+    { label: 'Leap day', input: '{"date":"29th Feb 2000"}' },
+    { label: 'Teen ordinal late', input: '{"date":"21st Jun 2024"}' },
+    { label: 'Last year allowed', input: '{"date":"31st Dec 2100"}' },
   ],
 }
 

@@ -11,6 +11,11 @@ const definition = {
     { label: 'Mixed', input: 'abcabc' },
     { label: 'Repeated', input: 'aaaa' },
     { label: 'Short', input: 'xyzxzy' },
+    { label: 'Single letter', input: 'q' },
+    { label: 'Equal counts both sides', input: 'aabb' },
+    { label: 'No good split', input: 'abc' },
+    { label: 'Boundary: 200 equal letters', input: 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz' },
+    { label: 'Long run: 200 letters', input: 'acbcdcadaedcbcbadbbcecdacddebebbaaecaaebccceaecbdaedaebccedeacaaadddedebbebdccdbdaebeaddaeecbcdbcdecaaabccedecdccdadccbeecbdcbceddebaabebdadbcebaabedecbaebaecdbcacbaadbeabcbabaeedcedcdbcbadebbcbdeecac' },
   ],
 }
 

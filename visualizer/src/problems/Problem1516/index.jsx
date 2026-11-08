@@ -25,6 +25,10 @@ const definition = {
     { label: 'Lift the target first', input: '{"root":{"val":1,"children":[{"val":2,"children":[{"val":3,"children":[{"val":4,"children":[]}]}]},{"val":5,"children":[]}]},"p":2,"q":3}' },
     { label: 'Target outside the subtree', input: '{"root":{"val":1,"children":[{"val":2,"children":[{"val":4,"children":[]}]},{"val":3,"children":[]}]},"p":4,"q":3}' },
     { label: 'Already a child', input: '{"root":{"val":1,"children":[{"val":2,"children":[]},{"val":3,"children":[]}]},"p":2,"q":1}' },
+    { label: 'Two nodes', input: '{"root":{"val":1,"children":[{"val":2,"children":[]}]},"p":1,"q":2}' },
+    { label: 'Siblings', input: '{"root":{"val":5,"children":[{"val":6,"children":[]},{"val":7,"children":[]}]},"p":6,"q":7}' },
+    { label: 'Target is the root', input: '{"root":{"val":1,"children":[{"val":2,"children":[{"val":4,"children":[]}]},{"val":3,"children":[]}]},"p":1,"q":4}' },
+    { label: 'Long run: 20-node chain', input: '{"root":{"val":1,"children":[{"val":2,"children":[{"val":3,"children":[{"val":4,"children":[{"val":5,"children":[{"val":6,"children":[{"val":7,"children":[{"val":8,"children":[{"val":9,"children":[{"val":10,"children":[{"val":11,"children":[{"val":12,"children":[{"val":13,"children":[{"val":14,"children":[{"val":15,"children":[{"val":16,"children":[{"val":17,"children":[{"val":18,"children":[{"val":19,"children":[{"val":20,"children":[]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]},"p":20,"q":10}' },
   ],
 }
 

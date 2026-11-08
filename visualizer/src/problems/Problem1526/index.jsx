@@ -11,6 +11,11 @@ const definition = {
     { label: 'Mixed rises', input: '[3,1,2,5,1]' },
     { label: 'Plateau', input: '[0,4,4,0,2]' },
     { label: 'Rising', input: '[1,2,3]' },
+    { label: 'Single bar', input: '[7]' },
+    { label: 'Equal heights', input: '[4,4,4]' },
+    { label: 'Largest: 12 bars', input: '[50,0,50,0,50,0,50,0,50,0,50,0]' },
+    { label: 'All zero heights', input: '[0,0,0]' },
+    { label: 'Long run: 12 bars', input: '[2,36,4,37,1,0,41,42,17,1,22,43]' },
   ],
 }
 

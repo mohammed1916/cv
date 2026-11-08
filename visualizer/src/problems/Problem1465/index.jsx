@@ -11,6 +11,10 @@ const definition = {
     { label: 'Sample', input: '{"h":10,"w":6,"horizontalCuts":[3,7],"verticalCuts":[2]}' },
     { label: 'No cuts', input: '{"h":8,"w":8,"horizontalCuts":[],"verticalCuts":[]}' },
     { label: 'Dense', input: '{"h":12,"w":9,"horizontalCuts":[1,2,9],"verticalCuts":[4,5]}' },
+    { label: 'No cuts', input: '{"h":2,"w":2,"horizontalCuts":[],"verticalCuts":[]}' },
+    { label: 'Equal gaps', input: '{"h":4,"w":4,"horizontalCuts":[1,2,3],"verticalCuts":[1,2,3]}' },
+    { label: 'Largest sheet', input: '{"h":1000000000,"w":1000000000,"horizontalCuts":[1,999999999],"verticalCuts":[500000000]}' },
+    { label: 'Long run: 40 cuts per side', input: '{"h":1000,"w":600,"horizontalCuts":[66,74,154,173,213,231,269,271,291,293,307,325,330,360,393,425,471,497,523,524,571,602,610,683,684,734,761,777,803,863,865,872,891,892,940,952,973,977,978,990],"verticalCuts":[8,35,53,59,67,75,81,99,103,110,125,158,188,196,250,268,272,291,302,322,338,344,362,386,389,411,415,418,424,439,440,446,450,451,461,493,518,567,570,594]}' },
   ],
 }
 

@@ -8,6 +8,10 @@ export const phases = [
 export const examples = [
   { label: 'Four values', input: '{"n":4,"start":2}' },
   { label: 'Odd start', input: '{"n":5,"start":7}' },
+  { label: 'Single value', input: '{"n":1,"start":0}' },
+  { label: 'Start at a multiple', input: '{"n":3,"start":9}' },
+  { label: 'Largest n', input: '{"n":60,"start":1000}' },
+  { label: 'Long run: 40 values', input: '{"n":40,"start":123}' },
 ]
 
 export function parseInput(text) {

@@ -12,6 +12,10 @@ const definition = {
     { label: 'Small', input: '2' },
     { label: 'Four stones', input: '4' },
     { label: 'Nine stones', input: '9' },
+    { label: 'One stone', input: '1' },
+    { label: 'Three stones', input: '3' },
+    { label: 'Sixteen stones', input: '16' },
+    { label: 'Long run: 60 stones', input: '60' },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"adefaddaccc"}' },
     { label: 'Example 2', input: '{"s":"abab"}' },
+    { label: 'Single letter', input: '{"s":"a"}' },
+    { label: 'Repeated letter', input: '{"s":"aaaaaa"}' },
+    { label: 'Alphabet run', input: '{"s":"abcdefghijkl"}' },
+    { label: 'Long run: 12 letters', input: '{"s":"aaaabbddcaad"}' },
   ],
 }
 

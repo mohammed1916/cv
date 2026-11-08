@@ -19,6 +19,10 @@ const definition = {
   examples: [
     { label: 'Example', input: '{"Points":[{"id":1,"x_value":1,"y_value":1},{"id":2,"x_value":3,"y_value":4},{"id":3,"x_value":1,"y_value":4},{"id":4,"x_value":3,"y_value":1},{"id":5,"x_value":2,"y_value":2}]}' },
     { label: 'Corner pair', input: '{"Points":[{"id":1,"x_value":0,"y_value":0},{"id":2,"x_value":0,"y_value":5},{"id":3,"x_value":4,"y_value":0}]}' },
+    { label: 'One point', input: '{"Points":[{"id":1,"x_value":0,"y_value":0}]}' },
+    { label: 'Shared x value', input: '{"Points":[{"id":1,"x_value":3,"y_value":1},{"id":2,"x_value":3,"y_value":9}]}' },
+    { label: 'Largest: 12 points', input: '{"Points":[{"id":1,"x_value":100,"y_value":50},{"id":2,"x_value":92,"y_value":51},{"id":3,"x_value":84,"y_value":52},{"id":4,"x_value":76,"y_value":53},{"id":5,"x_value":68,"y_value":54},{"id":6,"x_value":60,"y_value":55},{"id":7,"x_value":52,"y_value":56},{"id":8,"x_value":44,"y_value":57},{"id":9,"x_value":36,"y_value":58},{"id":10,"x_value":28,"y_value":59},{"id":11,"x_value":20,"y_value":60},{"id":12,"x_value":12,"y_value":61}]}' },
+    { label: 'Long run: 12 points', input: '{"Points":[{"id":1,"x_value":18,"y_value":71},{"id":2,"x_value":66,"y_value":78},{"id":3,"x_value":19,"y_value":16},{"id":4,"x_value":95,"y_value":6},{"id":5,"x_value":21,"y_value":28},{"id":6,"x_value":45,"y_value":79},{"id":7,"x_value":68,"y_value":93},{"id":8,"x_value":92,"y_value":74},{"id":9,"x_value":12,"y_value":58},{"id":10,"x_value":43,"y_value":57},{"id":11,"x_value":63,"y_value":27},{"id":12,"x_value":35,"y_value":17}]}' },
   ],
 }
 

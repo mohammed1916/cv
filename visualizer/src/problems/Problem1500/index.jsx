@@ -17,6 +17,10 @@ const definition = {
   complexity: 'O(U) per join for U users in this scan version, and O(U) per request. A heap of free ids would make join faster.',
   examples: [
     { label: 'Example', input: '{"ops":[["join",[5,6]],["join",[6]],["request",2,5],["leave",1],["join",[8]],["request",2,6]]}' },
+    { label: 'Single join', input: '{"ops":[["join",[7]]]}' },
+    { label: 'Leave and request', input: '{"ops":[["join",[3]],["join",[4]],["leave",1],["request",2,4]]}' },
+    { label: 'Chunk limits', input: '{"ops":[["join",[1,2,3,4,5]],["request",1,20],["join",[20,20]],["leave",1]]}' },
+    { label: 'Long run: 20 operations', input: '{"ops":[["join",[1,9,19]],["leave",1],["join",[6,7]],["leave",1],["join",[12,20,13,7,19]],["leave",1],["join",[7,6,2]],["request",1,1],["leave",1],["join",[3,14]],["request",1,13],["leave",1],["join",[8,12]],["join",[16,9,12]],["request",1,1],["request",2,4],["join",[7,10,12,18,16]],["join",[7,4,16,14]],["request",1,3],["leave",1]]}' },
   ],
 }
 

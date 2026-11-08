@@ -16,6 +16,10 @@ const definition = {
     { label: 'Ordered children', input: '{"val":[8,4,6,2,7],"children":[[1,2],[3],[],[4],[]]}' },
     { label: 'Single node', input: '{"val":[5],"children":[[]]}' },
     { label: 'Null root', input: '{"val":[],"children":[]}' },
+    { label: 'Repeated values', input: '{"val":[3,3,3],"children":[[1,2],[],[]]}' },
+    { label: 'Wide root', input: '{"val":[9,0,9,0,9,0,9,0,9,0],"children":[[1,2,3,4,5,6,7,8,9],[],[],[],[],[],[],[],[],[]]}' },
+    { label: 'Zero values chain', input: '{"val":[0,0,0],"children":[[1],[2],[]]}' },
+    { label: 'Long run: 10 nodes', input: '{"val":[8,4,9,5,2,9,4,1,6,0],"children":[[1,3,8],[2,5],[4,7],[6],[],[],[9],[],[],[]]}' },
   ],
 }
 

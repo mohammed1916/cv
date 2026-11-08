@@ -12,6 +12,10 @@ export const examples = [
   { label: 'Feasible in the middle', input: '{"bloomDay":[7,3,9,2,8,4,6,5],"m":2,"k":3}' },
   { label: 'Too few flowers', input: '{"bloomDay":[4,9,2],"m":2,"k":2}' },
   { label: 'Single bouquet', input: '{"bloomDay":[5,1,4],"m":1,"k":2}' },
+  { label: 'Single flower', input: '{"bloomDay":[3],"m":1,"k":1}' },
+  { label: 'Repeated bloom days', input: '{"bloomDay":[4,4,4,4],"m":2,"k":2}' },
+  { label: 'Late bloom', input: '{"bloomDay":[1000000000,1,1000000000],"m":1,"k":1}' },
+  { label: 'Long run: 60 flowers', input: '{"bloomDay":[4,2,21,37,52,13,20,85,63,89,71,50,87,78,23,36,18,72,25,52,31,41,6,75,8,100,11,54,95,75,52,51,14,8,3,47,31,62,95,76,26,61,54,19,72,36,21,34,39,51,44,76,95,29,66,55,37,57,98,60],"m":6,"k":4}' },
 ]
 
 export function parseInput(text) {

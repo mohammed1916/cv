@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n":4,"relations":[[2,1],[3,1],[1,4]],"k":2}' },
     { label: 'Example 2', input: '{"n":5,"relations":[[2,1],[3,1],[4,1],[1,5]],"k":2}' },
+    { label: 'Single course', input: '{"n":1,"relations":[],"k":1}' },
+    { label: 'No prerequisites', input: '{"n":3,"relations":[],"k":2}' },
+    { label: 'Chain of eight', input: '{"n":8,"relations":[[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8]],"k":8}' },
+    { label: 'Long run: 8 courses', input: '{"n":8,"relations":[[1,2],[1,3],[1,5],[1,6],[1,7],[1,8],[2,7],[3,5],[4,6],[6,8]],"k":3}' },
   ],
 }
 

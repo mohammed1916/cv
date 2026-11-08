@@ -14,6 +14,10 @@ const definition = {
   examples: [
     { label: 'Square', input: '{"positions":[[0,0],[0,2],[2,0],[2,2]]}' },
     { label: 'Two points', input: '{"positions":[[0,0],[10,0]]}' },
+    { label: 'Single point', input: '{"positions":[[50,50]]}' },
+    { label: 'Collinear points', input: '{"positions":[[0,0],[0,5],[0,10]]}' },
+    { label: 'Corner points', input: '{"positions":[[0,0],[100,100],[0,100],[100,0]]}' },
+    { label: 'Long run: 8 points', input: '{"positions":[[3,83],[4,79],[45,38],[19,99],[30,42],[67,100],[7,49],[76,24]]}' },
   ],
 }
 

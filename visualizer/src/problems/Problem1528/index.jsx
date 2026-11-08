@@ -11,6 +11,10 @@ const definition = {
     { label: 'Scrambled word', input: '{"s":"harvest","indices":[2,0,5,6,1,3,4]}' },
     { label: 'Already in order', input: '{"s":"abc","indices":[0,1,2]}' },
     { label: 'Reversed', input: '{"s":"zyxw","indices":[3,2,1,0]}' },
+    { label: 'Single letter', input: '{"s":"a","indices":[0]}' },
+    { label: 'Repeated letters', input: '{"s":"aaaa","indices":[3,1,0,2]}' },
+    { label: 'Largest: 12 letters reversed', input: '{"s":"abcdefghijkl","indices":[11,10,9,8,7,6,5,4,3,2,1,0]}' },
+    { label: 'Long run: 12 letters', input: '{"s":"mqzxvtkbhfdl","indices":[3,10,0,1,11,9,5,8,7,2,6,4]}' },
   ],
 }
 

@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"n": 6, "connections": [[0,1],[1,3],[2,3],[4,0],[4,5]]}' },
     { label: 'Example 2', input: '{"n": 5, "connections": [[1,0],[1,2],[3,2],[3,4]]}' },
+    { label: 'Two cities, one road', input: '{"n":2,"connections":[[0,1]]}' },
+    { label: 'Star from one city', input: '{"n":4,"connections":[[0,1],[0,2],[0,3]]}' },
+    { label: 'Largest: path of 12 cities', input: '{"n":12,"connections":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11]]}' },
+    { label: 'Long run: random tree on 12 cities', input: '{"n":12,"connections":[[0,1],[1,2],[0,3],[3,4],[3,5],[2,6],[5,7],[2,8],[4,9],[6,10],[4,11]]}' },
   ],
 }
 

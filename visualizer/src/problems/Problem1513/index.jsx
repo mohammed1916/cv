@@ -11,6 +11,9 @@ const definition = {
     { label: 'Two blocks', input: '0110111' },
     { label: 'Single block', input: '111' },
     { label: 'No ones', input: '0000' },
+    { label: 'One character', input: '1' },
+    { label: 'Alternating', input: '010101' },
+    { label: 'Long run: 120 characters', input: '011010001101111001101111010001101001100100001000010000101000001110100010010111100010010001101000101001011000001111010001' },
   ],
 }
 

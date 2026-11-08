@@ -11,6 +11,10 @@ const definition = {
     { label: 'Repeated doc', input: '{"names":["doc","doc","doc","doc"]}' },
     { label: 'Mixed names', input: '{"names":["notes","todo","notes","notes","todo"]}' },
     { label: 'All distinct', input: '{"names":["one","two","three"]}' },
+    { label: 'Single name', input: '{"names":["code"]}' },
+    { label: 'Six-letter names', input: '{"names":["abcdef","abcdef","abcde"]}' },
+    { label: 'Short repeats', input: '{"names":["a","a","a","b","b","a"]}' },
+    { label: 'Long run: 20 names', input: '{"names":["doc","notes","todo","file","notes","doc","file","misc","misc","draft","doc","todo","file","file","todo","misc","draft","file","misc","notes"]}' },
   ],
 }
 

@@ -11,6 +11,10 @@ const definition = {
     { label: 'Sample A', input: '[4,2,4,4,2,9]' },
     { label: 'All equal', input: '[7,7,7,7]' },
     { label: 'No repeats', input: '[1,2,3,4]' },
+    { label: 'Single value', input: '[9]' },
+    { label: 'Equal pair', input: '[5,5]' },
+    { label: 'Value limits', input: '[100,100,1,100]' },
+    { label: 'Long run: 60 values', input: '[1,6,3,2,6,9,7,8,6,2,4,4,4,1,10,8,5,6,1,6,3,2,1,4,2,9,1,3,2,6,7,10,4,6,9,2,10,10,8,6,6,6,6,6,5,6,4,1,1,10,10,2,5,7,9,10,6,10,3,4]' },
   ],
 }
 

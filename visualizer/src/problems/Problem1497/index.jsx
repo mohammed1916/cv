@@ -11,6 +11,10 @@ const definition = {
     { label: 'Sample A', input: '{"arr":[2,4,1,5,3,9],"k":6}' },
     { label: 'Odd self-pair', input: '{"arr":[1,2,3,4],"k":4}' },
     { label: 'Negatives', input: '{"arr":[-1,1,4,-4],"k":3}' },
+    { label: 'Minimum pairs', input: '{"arr":[1,1],"k":1}' },
+    { label: 'Repeated values', input: '{"arr":[2,2,2,2],"k":2}' },
+    { label: 'Value limits', input: '{"arr":[-1000,1000,-1000,1000],"k":3}' },
+    { label: 'Long run: 12 values', input: '{"arr":[-47,-21,-28,24,-48,47,42,32,7,-47,-45,41],"k":10}' },
   ],
 }
 

@@ -16,6 +16,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"tree":[1,2,3,null,4],"distance":3}' },
     { label: 'Example 2', input: '{"tree":[1,2,3,4,5,6,7],"distance":3}' },
+    { label: 'Single node', input: '{"tree":[5],"distance":1}' },
+    { label: 'Equal values', input: '{"tree":[7,7,7],"distance":2}' },
+    { label: 'Distance too long for tree', input: '{"tree":[1,2],"distance":10}' },
+    { label: 'Largest: 15 nodes, distance 10', input: '{"tree":[99,1,99,1,99,1,99,null,1,99,null,1,99,1,99],"distance":10}' },
+    { label: 'Long run: 15 nodes', input: '{"tree":[37,17,15,null,14,null,26,65,null,92,9,98,7,null,71],"distance":4}' },
   ],
 }
 

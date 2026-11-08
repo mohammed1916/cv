@@ -8,6 +8,10 @@ export const phases = [
 export const examples = [
   { label: 'Ants both ways', input: '{"length":9,"left":[2,6],"right":[3,8]}' },
   { label: 'Only rightward', input: '{"length":6,"left":[],"right":[1,4]}' },
+  { label: 'Single rightward ant', input: '{"length":4,"left":[],"right":[2]}' },
+  { label: 'Ants meet', input: '{"length":5,"left":[4],"right":[1]}' },
+  { label: 'Ants at both ends', input: '{"length":20,"left":[0],"right":[20]}' },
+  { label: 'Long run: 12 ants', input: '{"length":20,"left":[11,3,12,7,9,8],"right":[4,10,19,13,6,5]}' },
 ]
 
 export function parseInput(text) {

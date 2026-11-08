@@ -8,6 +8,10 @@ export const phases = [
 export const examples = [
   { label: 'Read, update, read', input: '{"rectangle":[[2,4],[6,8],[1,3]],"ops":[["getValue",1,0],["updateSubrectangle",0,0,2,1,7],["getValue",2,1],["getValue",0,1]]}' },
   { label: 'Overlapping blocks', input: '{"rectangle":[[1,1],[1,1]],"ops":[["updateSubrectangle",0,0,1,1,2],["updateSubrectangle",0,0,0,0,3],["getValue",0,0],["getValue",1,1]]}' },
+  { label: 'Single cell', input: '{"rectangle":[[5]],"ops":[["getValue",0,0],["updateSubrectangle",0,0,0,0,9],["getValue",0,0]]}' },
+  { label: 'Whole grid update', input: '{"rectangle":[[1,2,3],[4,5,6]],"ops":[["updateSubrectangle",0,0,1,2,8],["getValue",1,2],["getValue",0,0]]}' },
+  { label: 'Large and negative values', input: '{"rectangle":[[1000000000,-1000000000]],"ops":[["updateSubrectangle",0,0,0,1,-7],["getValue",0,1]]}' },
+  { label: 'Long run: 8 by 8 grid, 30 ops', input: '{"rectangle":[[88,75,99,18,7,70,46,32],[51,75,34,12,25,19,7,3],[31,98,20,62,57,69,56,27],[91,77,4,88,78,95,91,79],[89,64,50,36,88,70,83,66],[29,73,44,35,15,29,58,17],[28,93,53,98,7,95,98,15],[96,36,63,5,10,97,36,21]],"ops":[["updateSubrectangle",0,4,4,4,20],["getValue",7,0],["updateSubrectangle",3,0,5,1,-37],["getValue",2,7],["updateSubrectangle",5,2,7,6,39],["getValue",5,4],["updateSubrectangle",6,5,7,6,-28],["getValue",0,3],["updateSubrectangle",4,7,7,7,-22],["getValue",7,5],["updateSubrectangle",5,1,6,3,-31],["getValue",4,0],["updateSubrectangle",7,0,7,5,28],["getValue",1,0],["updateSubrectangle",6,7,7,7,32],["getValue",1,5],["updateSubrectangle",5,0,6,5,24],["getValue",7,0],["updateSubrectangle",1,5,4,5,10],["getValue",0,0],["updateSubrectangle",1,7,5,7,38],["getValue",3,0],["updateSubrectangle",2,5,2,7,-7],["getValue",4,0],["updateSubrectangle",3,6,4,6,24],["getValue",3,1],["updateSubrectangle",2,3,2,3,-27],["getValue",0,4],["updateSubrectangle",4,5,6,5,-36],["getValue",4,7]]}' },
 ]
 
 export function parseInput(text) {

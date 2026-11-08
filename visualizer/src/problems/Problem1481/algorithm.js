@@ -11,6 +11,10 @@ export const examples = [
   { label: 'Remove the rare values', input: '{"arr":[5,5,4,3,3,3],"k":2}' },
   { label: 'Plenty of removals', input: '{"arr":[7,7,8,9,9,9,10,10],"k":4}' },
   { label: 'No removals', input: '{"arr":[1,2,3],"k":0}' },
+  { label: 'Single value', input: '{"arr":[4],"k":1}' },
+  { label: 'Frequency ties', input: '{"arr":[1,1,2,2,3,3],"k":3}' },
+  { label: 'Remove everything', input: '{"arr":[6,6,6],"k":3}' },
+  { label: 'Long run: 60 values', input: '{"arr":[1,8,5,4,5,8,6,4,3,2,5,8,3,8,6,7,3,6,5,5,1,8,2,1,2,1,8,6,1,4,5,1,7,5,6,6,5,1,3,6,6,2,8,3,2,5,2,2,2,6,3,5,3,6,8,2,8,2,1,5],"k":20}' },
 ]
 
 export function parseInput(text) {

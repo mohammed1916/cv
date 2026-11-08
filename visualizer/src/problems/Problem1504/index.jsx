@@ -11,6 +11,10 @@ const definition = {
     { label: 'Sample', input: '[[1,1,0,1],[1,1,1,1],[0,1,1,1]]' },
     { label: '2 by 2 block', input: '[[1,1],[1,1]]' },
     { label: 'Single zero', input: '[[0]]' },
+    { label: 'Single cell', input: '[[1]]' },
+    { label: 'All zeros', input: '[[0,0],[0,0]]' },
+    { label: 'Full row of ones', input: '[[1,1,1,1,1,1]]' },
+    { label: 'Long run: 6 by 6', input: '[[0,1,0,1,1,0],[1,1,0,0,1,1],[1,1,0,1,0,1],[0,1,1,1,1,0],[1,0,1,0,1,0],[0,1,1,0,1,1]]' },
   ],
 }
 

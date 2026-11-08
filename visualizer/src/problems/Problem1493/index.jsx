@@ -11,6 +11,10 @@ const definition = {
     { label: 'One zero inside', input: '{"nums":[1,1,0,1]}' },
     { label: 'Two zero blocks', input: '{"nums":[0,1,1,1,0,1,1]}' },
     { label: 'All ones', input: '{"nums":[1,1,1]}' },
+    { label: 'Single zero', input: '{"nums":[0]}' },
+    { label: 'Single one', input: '{"nums":[1]}' },
+    { label: 'Equal zero gaps', input: '{"nums":[1,0,1,0,1]}' },
+    { label: 'Long run: 20 values', input: '{"nums":[0,1,1,0,0,0,1,0,1,0,1,1,0,1,1,1,1,1,0,0]}' },
   ],
 }
 

@@ -20,6 +20,10 @@ const definition = {
     { label: 'Example 1', input: '{"rains":[1,2,3,4]}' },
     { label: 'Example 2', input: '{"rains":[1,2,0,0,2,1]}' },
     { label: 'Flood', input: '{"rains":[1,2,0,1,2]}' },
+    { label: 'Single dry day', input: '{"rains":[0]}' },
+    { label: 'Single rain', input: '{"rains":[3]}' },
+    { label: 'Top lake number', input: '{"rains":[5,0,5,0,5]}' },
+    { label: 'Long run: 12 days', input: '{"rains":[0,3,4,4,1,1,1,1,1,2,1,5]}' },
   ],
 }
 

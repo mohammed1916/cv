@@ -18,6 +18,10 @@ const definition = {
     { label: 'Example 1', input: '{"arr":[9,12,3,7,1],"target":5}' },
     { label: 'Powers of two', input: '{"arr":[1,2,4,8,16],"target":0}' },
     { label: 'Single value', input: '{"arr":[7],"target":2}' },
+    { label: 'Repeated values', input: '{"arr":[6,6,6],"target":6}' },
+    { label: 'Zero target', input: '{"arr":[0,0,0],"target":0}' },
+    { label: 'Maximum values', input: '{"arr":[1023,512,1023],"target":1023}' },
+    { label: 'Long run: 12 values', input: '{"arr":[35,342,673,144,266,530,284,379,901,903,207,361],"target":300}' },
   ],
 }
 

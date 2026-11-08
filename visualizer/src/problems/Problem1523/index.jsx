@@ -11,6 +11,10 @@ const definition = {
     { label: 'Mixed bounds', input: '{"low":3,"high":7}' },
     { label: 'Even low', input: '{"low":8,"high":10}' },
     { label: 'Wide range', input: '{"low":21,"high":40}' },
+    { label: 'Single odd', input: '{"low":5,"high":5}' },
+    { label: 'Single even', input: '{"low":4,"high":4}' },
+    { label: 'Full bound', input: '{"low":0,"high":1000000000}' },
+    { label: 'Long run: large range', input: '{"low":18082714,"high":269408728}' },
   ],
 }
 

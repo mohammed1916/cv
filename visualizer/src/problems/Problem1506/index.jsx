@@ -16,6 +16,10 @@ const definition = {
     { label: 'Shuffled list', input: '{"vals":[7,3,9,5],"children":[[],[7],[],[3,9]]}' },
     { label: 'Root in the middle', input: '{"vals":[2,8,4],"children":[[],[2,4],[]]}' },
     { label: 'Single node', input: '{"vals":[9],"children":[[]]}' },
+    { label: 'Two nodes', input: '{"vals":[4,6],"children":[[6],[]]}' },
+    { label: 'Value limits', input: '{"vals":[0,99,50],"children":[[99,50],[],[]]}' },
+    { label: 'Chain of four', input: '{"vals":[1,2,3,4],"children":[[2],[3],[4],[]]}' },
+    { label: 'Long run: 12 nodes', input: '{"vals":[7,90,87,97,6,13,81,21,12,45,47,40],"children":[[90,87,45,40],[81,21],[97,12],[6],[13],[],[],[47],[],[],[],[]]}' },
   ],
 }
 
