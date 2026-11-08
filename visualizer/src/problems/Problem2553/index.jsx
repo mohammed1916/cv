@@ -18,7 +18,13 @@ const definition = {
   inputLabel: 'JSON object with nums (e.g. {"nums": [13, 25, 83, 77]})',
   url: "https://leetcode.com/problems/separate-the-digits-in-an-array/",
   complexity: "O(n * d) time and O(n * d) space for n numbers with at most d digits each. The visualization caps nums at 20 values.",
-  examples: [{ label: "[13,25,83,77]", input: '{"nums": [13, 25, 83, 77]}' }],
+  examples: [
+    { label: "[13,25,83,77]", input: '{"nums": [13, 25, 83, 77]}' },
+    { label: 'Single value', input: '{"nums":[1]}' },
+    { label: 'Equal values', input: '{"nums":[7,7,7]}' },
+    { label: 'Largest value', input: '{"nums":[100000,99999,1]}' },
+    { label: 'Long run: 20 values', input: '{"nums":[1774,81560,48657,76717,75008,3183,6544,57376,68999,15900,42930,38974,89230,9467,64354,34660,78402,64007,50446,14446]}' },
+  ],
 };
 
 export default function SeparateDigitsVisualizer() {

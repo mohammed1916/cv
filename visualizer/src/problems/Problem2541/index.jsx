@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums1":[4,3,1,4],"nums2":[1,3,7,1],"k":3}' },
     { label: 'Example 2', input: '{"nums1":[3,8,5,2],"nums2":[2,4,1,6],"k":1}' },
+    { label: 'Single pair', input: '{"nums1":[1],"nums2":[30],"k":1}' },
+    { label: 'Equal values', input: '{"nums1":[2,2],"nums2":[2,2],"k":2}' },
+    { label: 'Alternating extremes, five picks', input: '{"nums1":[30,1,30,1,30,1,30,1,30,1],"nums2":[1,30,1,30,1,30,1,30,1,30],"k":5}' },
+    { label: 'Long run: ten pairs, five picks', input: '{"nums1":[5,29,3,30,15,26,20,16,4,8],"nums2":[2,18,10,4,25,5,2,25,6,12],"k":5}' },
   ],
 }
 

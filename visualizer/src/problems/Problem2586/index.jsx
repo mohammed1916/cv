@@ -16,6 +16,11 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"words":["aba","bcb","ece","aa","e"],"queries":[[0,2],[1,4],[1,1]]}' },
     { label: 'Example 2', input: '{"words":["a","e","i"],"queries":[[0,2],[0,1],[2,2]]}' },
+    { label: 'Single word', input: '{"words":["a"],"queries":[[0,0]]}' },
+    { label: 'Repeated qualifying words', input: '{"words":["ae","ae","ea"],"queries":[[0,1],[1,2],[2,2]]}' },
+    { label: 'Six-letter boundary words', input: '{"words":["aaaaaa","bbbbbb","uuuuuu","zzzzzz"],"queries":[[0,3],[1,1],[2,2]]}' },
+    { label: 'No qualifying word in range', input: '{"words":["bcd","xyz","fgh"],"queries":[[0,2],[1,1]]}' },
+    { label: 'Long run: 10 words and 10 queries', input: '{"words":["tkvyxo","lovypg","zglgde","jcbcbm","jgzufg","fcjapu","dutcbu","xyrcby","hqpgju","vmnsrs"],"queries":[[0,3],[1,4],[2,5],[3,6],[4,7],[5,8],[6,9],[7,9],[8,9],[9,9]]}' },
   ],
 }
 

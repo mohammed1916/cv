@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[10,10,10,10,10],"k":5}' },
     { label: 'Example 2', input: '{"nums":[1,10,3,3,3],"k":3}' },
+    { label: 'Single number', input: '{"nums":[7],"k":1}' },
+    { label: 'Equal values use the first one', input: '{"nums":[4,4,4],"k":2}' },
+    { label: 'Largest values for 12 rounds', input: '{"nums":[50,50,50,50,50,50,50,50,50,50],"k":12}' },
+    { label: 'Long run: 10 numbers, 12 rounds', input: '{"nums":[6,43,25,39,34,46,5,38,14,6],"k":12}' },
   ],
 }
 

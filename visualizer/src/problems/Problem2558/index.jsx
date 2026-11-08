@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"gifts":[25,64,9,4,100],"k":4}' },
     { label: 'Example 2', input: '{"gifts":[1,1,1,1],"k":4}' },
+    { label: 'Single pile', input: '{"gifts":[1],"k":1}' },
+    { label: 'Equal piles', input: '{"gifts":[16,16,16],"k":2}' },
+    { label: 'Six largest piles, eight picks', input: '{"gifts":[100,100,100,100,100,100],"k":8}' },
+    { label: 'Long run: six piles, eight picks', input: '{"gifts":[74,48,9,93,69,39],"k":8}' },
   ],
 }
 

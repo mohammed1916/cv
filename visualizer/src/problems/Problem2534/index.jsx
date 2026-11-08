@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: "Example", input: '{"arrival":[0,1,1],"state":[0,1,0]}' },
     { label: "Idle gap", input: '{"arrival":[0,3,3],"state":[1,0,1]}' },
+    { label: 'Single person', input: '{"arrival":[5],"state":[0]}' },
+    { label: 'Same arrival time', input: '{"arrival":[2,2,2],"state":[0,1,0]}' },
+    { label: 'Ten people, earliest and latest', input: '{"arrival":[0,0,0,0,0,20,20,20,20,20],"state":[1,1,1,1,1,0,0,0,0,0]}' },
+    { label: 'Long run: ten people', input: '{"arrival":[0,9,13,16,3,19,2,2,0,3],"state":[1,1,1,0,1,0,0,0,1,0]}' },
   ],
 };
 

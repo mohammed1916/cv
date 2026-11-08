@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"root":[5,8,9,2,1,3,7,4,6],"k":2}' },
     { label: 'Too few levels', input: '{"root":[1,2,null,3],"k":4}' },
+    { label: 'Single node', input: '{"root":[1],"k":1}' },
+    { label: 'Equal values', input: '{"root":[3,3,3],"k":2}' },
+    { label: 'Largest values, full tree', input: '{"root":[20,-20,20,-20,20,-20,20,-20,20,-20,20,-20,20,-20,20],"k":15}' },
+    { label: 'Long run: fifteen entries with gaps', input: '{"root":[5,8,9,null,1,3,null,4,null,null,null,7,null,null,6],"k":6}' },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
     { label: 'Word aba', input: '{"lcp":[[3,0,1],[0,2,0],[1,0,1]]}' },
     { label: 'Two pairs', input: '{"lcp":[[4,1,0,0],[1,3,0,0],[0,0,2,1],[0,0,1,1]]}' },
     { label: 'Impossible', input: '{"lcp":[[2,2],[2,2]]}' },
+    { label: 'Single cell', input: '{"lcp":[[1]]}' },
+    { label: 'Equal zeros', input: '{"lcp":[[0,0],[0,0]]}' },
+    { label: 'Largest entries, size 6', input: '{"lcp":[[6,6,6,6,6,6],[6,6,6,6,6,6],[6,6,6,6,6,6],[6,6,6,6,6,6],[6,6,6,6,6,6],[6,6,6,6,6,6]]}' },
+    { label: 'Long run: size 6', input: '{"lcp":[[2,2,3,5,3,1],[5,4,0,0,2,6],[2,1,1,0,1,2],[4,5,1,6,4,5],[4,1,6,5,0,2],[5,6,0,0,6,0]]}' },
   ],
 }
 

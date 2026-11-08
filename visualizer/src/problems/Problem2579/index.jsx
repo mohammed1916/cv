@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'One minute', input: '{"minutes":1}' },
     { label: 'Three minutes', input: '{"minutes":3}' },
+    { label: 'Two minutes', input: '{"minutes":2}' },
+    { label: 'Largest allowed minutes', input: '{"minutes":200}' },
+    { label: 'Long run: 137 minutes', input: '{"minutes":137}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"money":20,"children":3}' },
     { label: 'Example 2', input: '{"money":16,"children":2}' },
+    { label: 'Zero money for one child', input: '{"money":0,"children":1}' },
+    { label: 'Money equals child count', input: '{"money":8,"children":8}' },
+    { label: 'Largest money and children', input: '{"money":200,"children":20}' },
+    { label: 'Long run: 19 children', input: '{"money":173,"children":19}' },
   ],
 }
 

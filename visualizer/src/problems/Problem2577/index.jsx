@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"grid":[[0,1,3,2],[5,1,2,5],[4,3,8,6]]}' },
     { label: 'Blocked', input: '{"grid":[[0,2,4],[3,2,1],[1,0,4]]}' },
+    { label: 'Two by two zeros', input: '{"grid":[[0,0],[0,0]]}' },
+    { label: 'Equal values', input: '{"grid":[[0,3],[3,0]]}' },
+    { label: 'Largest values, five by five', input: '{"grid":[[0,12,12,12,12],[12,12,12,12,12],[12,12,12,12,12],[12,12,12,12,12],[12,12,12,12,12]]}' },
+    { label: 'Long run: five by five', input: '{"grid":[[0,5,7,7,11],[10,3,12,8,10],[9,10,11,10,7],[12,8,6,6,0],[11,8,6,1,7]]}' },
   ],
 }
 

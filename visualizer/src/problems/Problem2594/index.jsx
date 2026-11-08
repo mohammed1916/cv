@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"ranks":[4,2,3,1],"cars":10}' },
     { label: 'Example 2', input: '{"ranks":[5,1,8],"cars":6}' },
+    { label: 'Single mechanic one car', input: '{"ranks":[3],"cars":1}' },
+    { label: 'Equal mechanic ranks', input: '{"ranks":[2,2,2],"cars":5}' },
+    { label: 'Largest ranks and cars', input: '{"ranks":[8,8,8,8],"cars":10}' },
+    { label: 'Long run: four mechanics ten cars', input: '{"ranks":[7,2,6,1],"cars":10}' },
   ],
 }
 

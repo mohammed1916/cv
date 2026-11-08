@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums1": [1,2,3], "nums2": [2,4]}' },
     { label: 'Example 2', input: '{"nums1": [1,2,3,6], "nums2": [2,3,4,5]}' },
+    { label: 'Single value each', input: '{"nums1":[1],"nums2":[1]}' },
+    { label: 'Equal values', input: '{"nums1":[3,3,3],"nums2":[3,3]}' },
+    { label: 'Largest and smallest values', input: '{"nums1":[100,100,100,100,100,100,100,100,100,100],"nums2":[1,1,1,1,1,1,1,1,1,1]}' },
+    { label: 'Long run: ten sorted values each', input: '{"nums1":[5,8,12,27,38,69,71,73,85,99],"nums2":[11,11,32,39,40,48,50,73,77,79]}' },
   ],
 }
 

@@ -21,6 +21,10 @@ const definition = {
     { label: 'Single digit', input: '{"num": 7}' },
     { label: 'Repeated digit', input: '{"num": 363}' },
     { label: 'All digits divide', input: '{"num": 1224}' },
+    { label: 'Smallest value', input: '{"num":1}' },
+    { label: 'Two equal digits', input: '{"num":11}' },
+    { label: 'Largest allowed value', input: '{"num":999999999}' },
+    { label: 'Long run: nine digits', input: '{"num":987654321}' },
   ],
 }
 

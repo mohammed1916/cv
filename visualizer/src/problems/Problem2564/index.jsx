@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"101101","queries":[[0,5],[1,2]]}' },
     { label: 'Example 2', input: '{"s":"0101","queries":[[12,8]]}' },
+    { label: 'Single bit', input: '{"s":"0","queries":[[0,0]]}' },
+    { label: 'Equal query pairs', input: '{"s":"1111","queries":[[0,0],[1,1]]}' },
+    { label: 'Forty bits, extreme query limits', input: '{"s":"1010101010101010101010101010101010101010","queries":[[0,1000],[1000,0]]}' },
+    { label: 'Long run: forty bits, eight queries', input: '{"s":"1000101111111110010111110110011001000101","queries":[[21,44],[346,380],[500,725],[894,754],[717,522],[317,847],[359,676],[460,526]]}' },
   ],
 }
 

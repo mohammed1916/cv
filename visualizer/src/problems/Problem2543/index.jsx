@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"targetX": 6, "targetY": 9}' },
     { label: 'Example 2', input: '{"targetX": 4, "targetY": 7}' },
+    { label: 'Smallest target', input: '{"targetX":1,"targetY":1}' },
+    { label: 'Equal targets', input: '{"targetX":5,"targetY":5}' },
+    { label: 'Largest target on one axis', input: '{"targetX":1000,"targetY":1}' },
+    { label: 'Long run: 987 by 610', input: '{"targetX":987,"targetY":610}' },
   ],
 }
 

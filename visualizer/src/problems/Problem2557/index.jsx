@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: "Example", input: '{"banned":[1,4,6],"n":6,"maxSum":4}' },
     { label: "Budget limits", input: '{"banned":[4,3,5,7],"n":7,"maxSum":18}' },
+    { label: 'Smallest case', input: '{"banned":[],"n":1,"maxSum":1}' },
+    { label: 'Repeated banned value', input: '{"banned":[3,3],"n":4,"maxSum":6}' },
+    { label: 'Twenty banned, largest limits', input: '{"banned":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"n":100,"maxSum":1000}' },
+    { label: 'Long run: fifteen banned, n 100', input: '{"banned":[83,54,12,77,37,51,36,16,19,2,35,27,66,63,25],"n":100,"maxSum":500}' },
   ],
 };
 

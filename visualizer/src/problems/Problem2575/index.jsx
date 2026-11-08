@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"word":"998244353","m":3}' },
     { label: 'Example 2', input: '{"word":"1010","m":10}' },
+    { label: 'Single digit', input: '{"word":"7","m":1}' },
+    { label: 'Repeated digits', input: '{"word":"1111","m":1}' },
+    { label: 'Thirty nines, largest m', input: '{"word":"999999999999999999999999999999","m":1000}' },
+    { label: 'Long run: thirty random digits', input: '{"word":"868422823767804841805104332797","m":997}' },
   ],
 }
 

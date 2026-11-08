@@ -14,6 +14,10 @@ const definition = {
   complexity: 'O(n^2 + q) time and O(n^2) space. The visualization caps input at 8 by 8 with 8 queries.',
   examples: [
     { label: 'Example 1', input: '{"n":3,"queries":[[1,1,2,2],[0,0,1,1]]}' },
+    { label: 'Single cell', input: '{"n":1,"queries":[[0,0,0,0]]}' },
+    { label: 'Repeated query', input: '{"n":2,"queries":[[0,0,1,1],[0,0,1,1]]}' },
+    { label: 'Full grid and last cell', input: '{"n":8,"queries":[[0,0,7,7],[7,7,7,7]]}' },
+    { label: 'Long run: eight queries on 8 by 8', input: '{"n":8,"queries":[[0,0,6,4],[3,4,7,6],[6,5,6,6],[4,0,6,5],[3,1,4,5],[5,4,6,7],[7,4,7,6],[5,6,5,6]]}' },
   ],
 }
 

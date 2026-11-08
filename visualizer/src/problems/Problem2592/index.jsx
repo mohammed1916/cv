@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[1,3,5,2,1,3,1]' },
     { label: 'Example 2', input: '[1,2,3,4]' },
+    { label: 'Single value', input: '[7]' },
+    { label: 'Repeated values tie', input: '[4,4,4]' },
+    { label: 'Largest value alternating with zero', input: '[99,0,99,0,99,0,99,0,99,0,99,0]' },
+    { label: 'Long run: 12 values', input: '[27,62,1,20,7,6,41,36,31,22,73,40]' },
   ],
 }
 

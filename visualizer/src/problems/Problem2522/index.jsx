@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"s":"165462","k":60}' },
     { label: 'Example 2', input: '{"s":"238182","k":5}' },
+    { label: 'Single digit', input: '{"s":"7","k":7}' },
+    { label: 'Equal digits', input: '{"s":"5555","k":5}' },
+    { label: 'Twelve nines, largest k', input: '{"s":"999999999999","k":1000}' },
+    { label: 'Long run: 12 digits', input: '{"s":"258845663963","k":500}' },
   ],
 }
 

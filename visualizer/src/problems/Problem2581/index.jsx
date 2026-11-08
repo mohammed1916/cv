@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"edges":[[0,1],[1,2],[1,3],[4,2]],"guesses":[[1,3],[0,1],[1,0],[2,4]],"k":3}' },
     { label: 'Path', input: '{"edges":[[0,1],[1,2],[2,3],[3,4]],"guesses":[[1,0],[3,4],[2,1],[3,2]],"k":1}' },
+    { label: 'Single edge', input: '{"edges":[[0,1]],"guesses":[[1,0]],"k":0}' },
+    { label: 'Star tree', input: '{"edges":[[0,1],[0,2],[0,3]],"guesses":[[0,1],[2,0]],"k":1}' },
+    { label: 'Largest tree, all guesses correct', input: '{"edges":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9]],"guesses":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8]],"k":8}' },
+    { label: 'Long run: ten nodes, eight guesses', input: '{"edges":[[0,1],[1,2],[1,3],[2,4],[1,5],[5,6],[3,7],[6,8],[1,9]],"guesses":[[6,0],[8,1],[4,3],[4,2],[9,7],[8,0],[3,9],[0,8]],"k":5}' },
   ],
 }
 

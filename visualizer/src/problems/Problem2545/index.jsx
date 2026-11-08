@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"score":[[10,6,9,1],[7,5,11,2],[4,8,3,15]],"k":2}' },
     { label: 'Example 2', input: '{"score":[[3,4],[5,6]],"k":0}' },
+    { label: 'One student, one exam', input: '{"score":[[50]],"k":0}' },
+    { label: 'Equal totals', input: '{"score":[[10,20],[20,10]],"k":1}' },
+    { label: 'Eight students, five exams', input: '{"score":[[0,7,14,21,28],[13,20,27,34,41],[26,33,40,47,54],[39,46,53,60,67],[52,59,66,73,80],[65,72,79,86,93],[78,85,92,99,5],[91,98,4,11,18]],"k":4}' },
+    { label: 'Long run: eight students, five exams', input: '{"score":[[22,20,45,8,17],[60,71,48,79,71],[95,70,20,55,70],[87,15,61,90,92],[67,17,63,67,99],[76,81,15,57,27],[55,11,84,23,45],[34,23,26,25,49]],"k":2}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Single route', input: '{"grid":[[1,1,1]]}' },
     { label: 'Two routes', input: '{"grid":[[1,1],[1,1]]}' },
+    { label: 'Two cells', input: '{"grid":[[0,1]]}' },
+    { label: 'Equal open cells', input: '{"grid":[[1,1,1],[1,1,1],[1,1,1]]}' },
+    { label: 'Largest grid 7 by 7', input: '{"grid":[[1,1,1,1,1,1,1],[1,1,1,1,1,1,1],[1,1,1,1,1,1,1],[1,1,1,1,1,1,1],[1,1,1,1,1,1,1],[1,1,1,1,1,1,1],[1,1,1,1,1,1,1]]}' },
+    { label: 'Long run: random 7 by 7', input: '{"grid":[[0,0,1,1,0,0,0],[0,1,1,0,0,0,0],[1,0,0,0,0,1,1],[1,1,0,1,0,0,1],[1,1,0,0,1,0,0],[0,0,0,0,0,0,0],[0,0,1,1,1,0,1]]}' },
   ],
 }
 

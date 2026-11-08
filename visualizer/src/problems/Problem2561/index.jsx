@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"basket1":[4,2,2,2],"basket2":[1,4,1,2]}' },
     { label: 'Example 2', input: '{"basket1":[2,3,4,1],"basket2":[3,2,5,1]}' },
+    { label: 'Single fruit each', input: '{"basket1":[1],"basket2":[1]}' },
+    { label: 'Equal baskets', input: '{"basket1":[3,3],"basket2":[3,3]}' },
+    { label: 'Largest costs in four positions', input: '{"basket1":[5,1,5,1],"basket2":[1,5,1,5]}' },
+    { label: 'Long run: four fruits per basket', input: '{"basket1":[2,2,2,3],"basket2":[1,3,4,3]}' },
   ],
 }
 

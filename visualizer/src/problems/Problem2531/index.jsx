@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Swap works', input: '{"word1":"abcc","word2":"aab"}' },
     { label: 'No swap works', input: '{"word1":"ab","word2":"abcc"}' },
+    { label: 'Single letters', input: '{"word1":"a","word2":"a"}' },
+    { label: 'Equal words', input: '{"word1":"abc","word2":"abc"}' },
+    { label: 'Twenty letters each', input: '{"word1":"abcdefghijklmnopqrst","word2":"zyxwvutsrqponmlkjihg"}' },
+    { label: 'Long run: two 20 letter words', input: '{"word1":"dsbzilbimjylqcdfxyqy","word2":"orhekveekirzsluvyuma"}' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[3,4,4,5]}' },
     { label: 'Ones', input: '{"nums":[1,1,1]}' },
+    { label: 'Single value', input: '{"nums":[4]}' },
+    { label: 'Equal values', input: '{"nums":[5,5,5]}' },
+    { label: 'Eight largest values', input: '{"nums":[30,30,30,30,30,30,30,30]}' },
+    { label: 'Long run: eight values', input: '{"nums":[6,18,1,29,26,23,8,1]}' },
   ],
 }
 

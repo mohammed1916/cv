@@ -21,6 +21,10 @@ const definition = {
     { label: 'Early dip', input: '{"nums":[-3,2,-1,4,-2]}' },
     { label: 'Two dips', input: '{"nums":[-4,-2,5,-1,3]}' },
     { label: 'Already fine', input: '{"nums":[1,2,3]}' },
+    { label: 'Single zero value', input: '{"nums":[0]}' },
+    { label: 'Equal opposite pairs total zero', input: '{"nums":[2,-2,2,-2]}' },
+    { label: 'Extreme values with zero total', input: '{"nums":[9,-9,9,-9,9,-9,9,-9,9,-9]}' },
+    { label: 'Long run: ten values', input: '{"nums":[3,-7,-1,-6,-1,-1,4,-6,7,8]}' },
   ],
 }
 

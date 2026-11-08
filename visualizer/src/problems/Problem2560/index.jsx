@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[2,3,5,9],"k":2}' },
     { label: 'Example 2', input: '{"nums":[2,7,9,3,1],"k":2}' },
+    { label: 'Single house', input: '{"nums":[5],"k":1}' },
+    { label: 'Equal houses', input: '{"nums":[4,4,4,4],"k":2}' },
+    { label: 'Alternating largest values', input: '{"nums":[20,1,20,1,20,1,20,1,20,1],"k":5}' },
+    { label: 'Long run: ten houses', input: '{"nums":[7,17,6,3,13,15,17,18,4,14],"k":3}' },
   ],
 }
 

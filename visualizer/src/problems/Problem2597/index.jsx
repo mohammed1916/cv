@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[2,4,6],"k":2}' },
     { label: 'Example 2', input: '{"nums":[1],"k":1}' },
+    { label: 'Single value at the limit', input: '{"nums":[30],"k":1}' },
+    { label: 'Equal values', input: '{"nums":[6,6,6,6],"k":2}' },
+    { label: 'Alternating limits with largest k', input: '{"nums":[1,30,1,30,1,30,1,30,1,30,1,30],"k":10}' },
+    { label: 'Long run: 12 values', input: '{"nums":[23,28,3,16,19,28,5,18,15,18,11,2],"k":5}' },
   ],
 }
 

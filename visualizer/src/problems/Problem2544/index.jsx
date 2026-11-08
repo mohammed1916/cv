@@ -20,6 +20,10 @@ const definition = {
     { label: 'Mixed signs', input: '{"n": 521}' },
     { label: 'Repeated digit', input: '{"n": 111}' },
     { label: 'Cancels to zero', input: '{"n": 886996}' },
+    { label: 'Smallest n', input: '{"n":1}' },
+    { label: 'Repeated digits 22222', input: '{"n":22222}' },
+    { label: 'Largest allowed n', input: '{"n":1000000000}' },
+    { label: 'Long run: nine digit n', input: '{"n":110660747}' },
   ],
 }
 

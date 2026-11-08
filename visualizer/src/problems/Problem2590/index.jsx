@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Tags and completion', input: '{"ops":[["add",2,"Plan",40,["work"]],["add",2,"Shop",15,[]],["add",2,"Review",40,["work"]],["tag",2,"work"],["complete",2,1],["list",2]]}' },
     { label: 'Other user', input: '{"ops":[["add",1,"Call",9,[]],["complete",2,1],["list",1]]}' },
+    { label: 'Single task', input: '{"ops":[["add",1,"Ship",5,[]],["list",1]]}' },
+    { label: 'Equal due dates', input: '{"ops":[["add",3,"A",10,[]],["add",3,"B",10,[]],["list",3]]}' },
+    { label: 'Tag then complete every item', input: '{"ops":[["add",4,"X",2,["t"]],["tag",4,"t"],["complete",4,1],["list",4]]}' },
+    { label: 'Long run: 19 operations', input: '{"ops":[["add",5,"Task",1,["w"]],["add",5,"Task",2,[]],["add",5,"Task",3,["w"]],["add",5,"Task",4,[]],["add",5,"Task",5,["w"]],["add",5,"Task",6,[]],["add",5,"Task",7,["w"]],["add",5,"Task",8,[]],["add",5,"Task",9,["w"]],["add",5,"Task",10,[]],["add",5,"Task",11,["w"]],["add",5,"Task",12,[]],["add",5,"Task",13,["w"]],["add",5,"Task",14,[]],["tag",5,"w"],["complete",5,3],["complete",5,8],["list",5],["list",6]]}' },
   ],
 }
 

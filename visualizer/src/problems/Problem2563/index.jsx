@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[0,1,7,4,4,5],"lower":3,"upper":6}' },
     { label: 'Example 2', input: '{"nums":[1,7,9,2,5],"lower":11,"upper":11}' },
+    { label: 'Single zero', input: '{"nums":[0],"lower":0,"upper":0}' },
+    { label: 'Equal values in a point range', input: '{"nums":[2,2,2,2],"lower":2,"upper":2}' },
+    { label: 'Widest range over 30 values', input: '{"nums":[-20,20,-20,20,-20,20,-20,20,-20,20,-20,20,-20,20,-20,20,-20,20,-20,20,-20,20,-20,20,-20,20,-20,20,-20,20],"lower":-40,"upper":40}' },
+    { label: 'Long run: 30 values', input: '{"nums":[-5,-16,14,0,-10,-11,5,8,-12,-6,6,-1,-14,-19,0,17,-9,-17,-20,13,-1,-14,-4,-7,-19,-9,6,13,2,1],"lower":-10,"upper":10}' },
   ],
 }
 

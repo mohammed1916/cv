@@ -22,6 +22,10 @@ const definition = {
   examples: [
     { label: "n=4, time=5", input: '{"n": 4, "time": 5}' },
     { label: "n=8, time=9", input: '{"n": 8, "time": 9}' },
+    { label: 'Smallest n and time', input: '{"n":2,"time":1}' },
+    { label: 'Equal n and time', input: '{"n":5,"time":5}' },
+    { label: 'Largest n and time', input: '{"n":1000,"time":1000}' },
+    { label: 'Long run: n 500, time 777', input: '{"n":500,"time":777}' },
   ],
 };
 

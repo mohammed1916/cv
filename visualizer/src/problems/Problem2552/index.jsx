@@ -21,6 +21,9 @@ const definition = {
   examples: [
     { label: "Example 1", input: "{\"nums\": [1, 3, 2, 4, 5]}" },
     { label: "Example 2", input: "{\"nums\": [1, 2, 3, 4]}" },
+    { label: 'Reverse of four', input: '{"nums":[4,3,2,1]}' },
+    { label: 'Reverse of twelve', input: '{"nums":[12,11,10,9,8,7,6,5,4,3,2,1]}' },
+    { label: 'Long run: random twelve', input: '{"nums":[5,2,3,4,10,9,6,8,1,11,12,7]}' },
   ],
 };
 

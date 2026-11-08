@@ -18,7 +18,13 @@ const definition = {
   inputLabel: 'JSON object with num (e.g. {"num": 11891})',
   url: "https://leetcode.com/problems/maximum-difference-by-remapping-a-digit/",
   complexity: "O(d) time and O(d) space for d digits. The visualization caps num at 8 digits.",
-  examples: [{ label: "11891", input: '{"num": 11891}' }],
+  examples: [
+    { label: "11891", input: '{"num": 11891}' },
+    { label: 'Single digit', input: '{"num":1}' },
+    { label: 'All ones, eight digits', input: '{"num":11111111}' },
+    { label: 'Largest eight digit number', input: '{"num":99999999}' },
+    { label: 'Long run: eight digits', input: '{"num":14830792}' },
+  ],
 };
 
 export default function RemapDigitVisualizer() {

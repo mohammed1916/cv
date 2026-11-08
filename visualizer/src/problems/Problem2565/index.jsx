@@ -18,6 +18,10 @@ const definition = {
     { label: 'Example', input: '{"s":"mississippi","t":"mpsx"}' },
     { label: 'No overlap', input: '{"s":"cde","t":"xyz"}' },
     { label: 'Already there', input: '{"s":"ace","t":"ae"}' },
+    { label: 'Single letters', input: '{"s":"a","t":"a"}' },
+    { label: 'Repeated letters', input: '{"s":"aaaa","t":"aa"}' },
+    { label: 'Longest allowed strings', input: '{"s":"abcdefghijklmn","t":"abcdefghijkl"}' },
+    { label: 'Long run: 14 and 12 letters', input: '{"s":"ewztwkecgmntpn","t":"taumyqwhkrgt"}' },
   ],
 }
 

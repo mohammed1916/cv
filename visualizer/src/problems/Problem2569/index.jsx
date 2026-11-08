@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums1":[1,0,1],"nums2":[0,0,0],"queries":[[1,1,1],[2,1,0],[3,0,0]]}' },
     { label: 'Two flips', input: '{"nums1":[0,0],"nums2":[1,0],"queries":[[1,0,1],[2,2,0],[3,0,0],[1,0,0],[2,1,0],[3,0,0]]}' },
+    { label: 'Single sum query', input: '{"nums1":[0],"nums2":[0],"queries":[[3,0,0]]}' },
+    { label: 'Flip and sum on equal lengths', input: '{"nums1":[1,1],"nums2":[2,2],"queries":[[1,0,1],[3,0,0]]}' },
+    { label: 'Ten entries, every query type', input: '{"nums1":[1,0,1,0,1,0,1,0,1,0],"nums2":[5,5,5,5,5,5,5,5,5,5],"queries":[[1,0,9],[2,5,0],[3,0,0],[1,3,3],[2,0,0],[3,0,0]]}' },
+    { label: 'Long run: ten entries, eight queries', input: '{"nums1":[0,0,0,1,1,0,0,1,0,0],"nums2":[4,2,5,1,0,5,2,5,2,2],"queries":[[3,0,0],[3,0,0],[1,6,7],[1,1,1],[2,1,0],[1,6,7],[3,0,0],[1,2,8]]}' },
   ],
 }
 

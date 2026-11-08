@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums1":[1,3,3,2],"nums2":[2,1,3,4],"k":3}' },
     { label: 'Example 2', input: '{"nums1":[4,2,3,1,1],"nums2":[7,5,10,9,6],"k":1}' },
+    { label: 'Single entry', input: '{"nums1":[0],"nums2":[0],"k":1}' },
+    { label: 'Equal entries', input: '{"nums1":[4,4,4],"nums2":[4,4,4],"k":2}' },
+    { label: 'Extremes, all eight picked', input: '{"nums1":[20,0,20,0,20,0,20,0],"nums2":[0,20,0,20,0,20,0,20],"k":8}' },
+    { label: 'Long run: eight entries, five picks', input: '{"nums1":[14,7,0,12,1,9,0,6],"nums2":[1,4,5,0,12,4,16,17],"k":5}' },
   ],
 }
 

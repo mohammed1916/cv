@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,2,1,2,1,3,3],"k":2}' },
     { label: 'Example 2', input: '{"nums":[1,1],"k":1}' },
+    { label: 'Single zero', input: '{"nums":[0],"k":1}' },
+    { label: 'Equal values', input: '{"nums":[3,3,3,3],"k":2}' },
+    { label: 'Largest values for ten picks', input: '{"nums":[9,9,9,9,9,9,9,9,9,9],"k":10}' },
+    { label: 'Long run: ten digits, ten picks', input: '{"nums":[0,1,4,0,7,8,1,8,3,0],"k":10}' },
   ],
 }
 

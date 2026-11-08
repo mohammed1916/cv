@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Two ranges', input: '[[6,10],[5,15]]' },
     { label: 'Touching', input: '[[1,3],[3,5]]' },
+    { label: 'Single point range', input: '[[0,0]]' },
+    { label: 'Equal ranges', input: '[[5,5],[5,5]]' },
+    { label: 'Full span and edges', input: '[[0,20],[0,0],[20,20],[10,10]]' },
+    { label: 'Long run: ten ranges', input: '[[4,12],[5,8],[5,10],[8,11],[0,19],[15,17],[11,19],[19,19],[4,17],[9,17]]' },
   ],
 }
 

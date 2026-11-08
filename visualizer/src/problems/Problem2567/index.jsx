@@ -18,7 +18,13 @@ const definition = {
   inputLabel: 'JSON object with nums (e.g. {"nums": [1, 4, 7, 8, 5]})',
   url: "https://leetcode.com/problems/minimum-score-by-changing-two-elements/",
   complexity: "O(n log n) time and O(n) space for n = nums.length. The visualization caps nums at 40 values.",
-  examples: [{ label: "[1,4,7,8,5]", input: '{"nums": [1, 4, 7, 8, 5]}' }],
+  examples: [
+    { label: "[1,4,7,8,5]", input: '{"nums": [1, 4, 7, 8, 5]}' },
+    { label: 'Three values', input: '{"nums":[1,2,3]}' },
+    { label: 'Equal values', input: '{"nums":[5,5,5]}' },
+    { label: 'Largest magnitudes', input: '{"nums":[1000000000,-1000000000,0]}' },
+    { label: 'Long run: 40 values', input: '{"nums":[141395,-589275,299298,-937862,362668,-340355,593046,-450703,-72239,-2783,-793675,-126151,685236,860697,928714,329022,-54162,943907,-933408,-308844,-794623,-157655,929089,202258,-166776,629247,895869,-573982,-786568,-80760,-900647,-273201,704121,-959336,347117,51080,617213,-525667,368894,-974761]}' },
+  ],
 };
 
 export default function MinimumScoreVisualizer() {

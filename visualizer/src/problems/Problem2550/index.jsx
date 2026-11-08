@@ -16,6 +16,9 @@ const definition = {
   examples: [
     { label: 'Triangle', input: '{"n":3}' },
     { label: 'Square', input: '{"n":4}' },
+    { label: 'Largest allowed: 12 sides', input: '{"n":12}' },
+    { label: 'Long run: 9 sides', input: '{"n":9}' },
+    { label: 'Six sides', input: '{"n":6}' },
   ],
 }
 

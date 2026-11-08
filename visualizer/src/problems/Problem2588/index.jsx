@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums": [4,3,1,2,4]}' },
     { label: 'Example 2', input: '{"nums": [1,10,4]}' },
+    { label: 'Single value', input: '{"nums":[7]}' },
+    { label: 'Repeated values tie', input: '{"nums":[5,9,5,9,5]}' },
+    { label: 'Byte limits 0 and 255', input: '{"nums":[255,0,255,0,255,128]}' },
+    { label: 'Long run: 20 values', input: '{"nums":[203,174,53,16,47,194,57,68,211,22,125,184,183,170,1,108,219,126,197,96]}' },
   ],
 }
 

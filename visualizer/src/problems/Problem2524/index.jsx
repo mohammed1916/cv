@@ -22,6 +22,10 @@ const definition = {
     { label: 'Repeated run', input: '{"nums":[2,2,1,2,3],"k":3}' },
     { label: 'Two values', input: '{"nums":[5,1,5,1,5,2],"k":4}' },
     { label: 'All equal', input: '{"nums":[3,3,3,3],"k":2}' },
+    { label: 'Single number', input: '{"nums":[4],"k":1}' },
+    { label: 'Equal frequencies', input: '{"nums":[1,2,1,2],"k":2}' },
+    { label: 'Longest array, k = length', input: '{"nums":[20,1,20,1,20,1,20,1,20,1,20,1],"k":12}' },
+    { label: 'Long run: 12 numbers', input: '{"nums":[7,8,15,14,13,11,4,6,19,7,19,6],"k":6}' },
   ],
 }
 

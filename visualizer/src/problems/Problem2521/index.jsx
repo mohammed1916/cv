@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '[2,4,3,7,10,6]' },
     { label: 'Example 2', input: '[21,4,7]' },
+    { label: 'Single value', input: '[1000]' },
+    { label: 'Equal values', input: '[6,6,6]' },
+    { label: 'Largest values', input: '[1000,999,997,991,983,977,971,967,953,947]' },
+    { label: 'Long run: 10 values', input: '[273,664,868,430,286,70,809,363,17,241]' },
   ],
 }
 

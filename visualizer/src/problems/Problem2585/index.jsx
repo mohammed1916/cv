@@ -17,6 +17,11 @@ const definition = {
     { label: 'Example 1', input: '{"target":6,"types":[[6,1],[3,2],[2,3]]}' },
     { label: 'Example 2', input: '{"target":5,"types":[[8,1],[8,2],[8,5]]}' },
     { label: 'Single way', input: '{"target":18,"types":[[6,1],[3,2],[2,3]]}' },
+    { label: 'Single point type', input: '{"target":1,"types":[[1,1]]}' },
+    { label: 'Two identical types', input: '{"target":4,"types":[[2,2],[2,2]]}' },
+    { label: 'Largest target with four types', input: '{"target":30,"types":[[8,12],[8,12],[8,12],[8,12]]}' },
+    { label: 'No way to reach an odd target', input: '{"target":29,"types":[[2,4]]}' },
+    { label: 'Long run: four types up to target 30', input: '{"target":30,"types":[[8,1],[7,3],[5,4],[6,7]]}' },
   ],
 }
 

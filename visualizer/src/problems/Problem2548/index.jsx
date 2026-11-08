@@ -22,6 +22,10 @@ const definition = {
     { label: 'Mixed ratios', input: '{"items":[[30,4],[50,10],[10,2],[24,6]],"capacity":9}' },
     { label: 'Exact pair', input: '{"items":[[7,2],[6,3]],"capacity":5}' },
     { label: 'Too heavy', input: '{"items":[[5,2],[4,1]],"capacity":4}' },
+    { label: 'Single item fits', input: '{"items":[[1,1]],"capacity":1}' },
+    { label: 'Equal items', input: '{"items":[[10,5],[10,5]],"capacity":5}' },
+    { label: 'Eight largest items', input: '{"items":[[100,50],[100,50],[100,50],[100,50],[100,50],[100,50],[100,50],[100,50]],"capacity":200}' },
+    { label: 'Long run: eight items', input: '{"items":[[58,6],[22,42],[31,27],[37,34],[39,31],[90,1],[44,4],[57,11]],"capacity":120}' },
   ],
 }
 

@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'One box, two workers', input: '{"n":1,"k":2,"time":[[1,2,3,1],[2,1,1,2]]}' },
     { label: 'Two boxes, two workers', input: '{"n":2,"k":2,"time":[[2,1,3,2],[1,2,1,1]]}' },
+    { label: 'One box, one worker', input: '{"n":1,"k":1,"time":[[1,1,1,1]]}' },
+    { label: 'Equal times use the first worker', input: '{"n":3,"k":2,"time":[[2,2,2,2],[2,2,2,2]]}' },
+    { label: 'Largest times, six boxes', input: '{"n":6,"k":4,"time":[[9,9,9,9],[9,9,9,9],[9,9,9,9],[9,9,9,9]]}' },
+    { label: 'Long run: six boxes, four workers', input: '{"n":6,"k":4,"time":[[6,9,8,2],[6,3,1,2],[5,2,5,5],[7,4,9,9]]}' },
   ],
 }
 

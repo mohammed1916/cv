@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"words":["aba","bcb","ece","aa","e"],"queries":[[0,2],[1,4],[1,1]]}' },
     { label: 'Example 2', input: '{"words":["a","e","i"],"queries":[[0,2],[0,1],[2,2]]}' },
+    { label: 'Single word', input: '{"words":["a"],"queries":[[0,0]]}' },
+    { label: 'Equal words', input: '{"words":["aa","aa","aa"],"queries":[[0,2],[1,1]]}' },
+    { label: 'Twelve longest words', input: '{"words":["abcdefghij","abcdefghij","abcdefghij","abcdefghij","abcdefghij","abcdefghij","abcdefghij","abcdefghij","abcdefghij","abcdefghij","abcdefghij","abcdefghij"],"queries":[[0,11],[11,11]]}' },
+    { label: 'Long run: twelve words, eight queries', input: '{"words":["qvxuutzesb","gcdibwehx","aculxmg","a","quoornjf","xswfrvqat","yiskguo","wohtpaf","mlgghjay","tyoai","f","krngj"],"queries":[[6,11],[2,2],[9,11],[11,11],[4,11],[6,7],[7,7],[7,8]]}' },
   ],
 }
 

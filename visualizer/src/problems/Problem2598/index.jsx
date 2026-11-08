@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[1,-10,7,13,6,8],"value":5}' },
     { label: 'Example 2', input: '{"nums":[1,-10,7,13,6,8],"value":7}' },
+    { label: 'Single negative value', input: '{"nums":[-100],"value":1}' },
+    { label: 'Equal values tie', input: '{"nums":[4,4,4,4],"value":4}' },
+    { label: 'Alternating extreme values', input: '{"nums":[100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100,100,-100],"value":10}' },
+    { label: 'Long run: 20 numbers', input: '{"nums":[68,54,93,-77,60,42,-36,-22,-67,34,-98,-24,53,24,-17,37,33,88,79,79],"value":6}' },
   ],
 }
 

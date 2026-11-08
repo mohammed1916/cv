@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"weights":[1,3,5,1],"k":2}' },
     { label: 'Example 2', input: '{"weights":[1,3],"k":2}' },
+    { label: 'Single marble', input: '{"weights":[7],"k":1}' },
+    { label: 'Equal weights', input: '{"weights":[4,4,4,4],"k":2}' },
+    { label: 'Largest weights, ten picks', input: '{"weights":[100,100,100,100,100,100,100,100,100,100],"k":10}' },
+    { label: 'Long run: ten marbles', input: '{"weights":[61,55,80,87,27,7,14,89,4,99],"k":6}' },
   ],
 }
 

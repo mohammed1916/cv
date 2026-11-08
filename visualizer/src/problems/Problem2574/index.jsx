@@ -15,6 +15,9 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"nums":[10,4,8,3]}' },
     { label: 'Single', input: '{"nums":[1]}' },
+    { label: 'Equal values', input: '{"nums":[5,5,5]}' },
+    { label: 'Alternating largest values', input: '{"nums":[20,1,20,1,20,1,20,1,20,1,20,1]}' },
+    { label: 'Long run: twelve values', input: '{"nums":[13,3,8,10,1,15,4,17,19,17,3,10]}' },
   ],
 }
 

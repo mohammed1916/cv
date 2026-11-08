@@ -16,6 +16,10 @@ const definition = {
     { label: "Example", input: '"aabb"' },
     { label: "Single letter", input: '"aaa"' },
     { label: "Mixed", input: '"abcabc"' },
+    { label: 'Single letter', input: '"z"' },
+    { label: 'Repeated letter', input: '"zzzzzzzzzz"' },
+    { label: 'Twenty letters in order', input: '"abcdefghijklmnopqrst"' },
+    { label: 'Long run: 20 random letters', input: '"nrhpzhthtwawvyupmtdy"' },
   ],
 };
 

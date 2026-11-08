@@ -20,6 +20,10 @@ const definition = {
   examples: [
     { label: 'Heavy only', input: '{"length": 400, "width": 90, "height": 60, "mass": 120}' },
     { label: 'Neither', input: '{"length": 300, "width": 20, "height": 40, "mass": 12}' },
+    { label: 'Smallest box', input: '{"length":1,"width":1,"height":1,"mass":1}' },
+    { label: 'Equal dimensions and mass', input: '{"length":100,"width":100,"height":100,"mass":100}' },
+    { label: 'Largest values', input: '{"length":100000,"width":100000,"height":100000,"mass":1000}' },
+    { label: 'Long run: mid-range values', input: '{"length":12345,"width":6789,"height":4321,"mass":777}' },
   ],
 }
 

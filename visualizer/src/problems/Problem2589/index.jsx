@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"tasks":[[2,3,1],[4,5,1],[1,5,2]]}' },
     { label: 'Example 2', input: '{"tasks":[[1,3,2],[2,5,3],[5,6,2]]}' },
+    { label: 'Single one-slot task', input: '{"tasks":[[4,4,1]]}' },
+    { label: 'Identical tasks tie', input: '{"tasks":[[1,3,2],[1,3,2]]}' },
+    { label: 'Full-range task and tight task', input: '{"tasks":[[1,10,10],[1,10,1],[5,10,6]]}' },
+    { label: 'Long run: three overlapping tasks', input: '{"tasks":[[1,10,4],[3,9,5],[2,8,2]]}' },
   ],
 }
 

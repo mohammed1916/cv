@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"left":10,"right":19}' },
     { label: 'Example 2', input: '{"left":4,"right":6}' },
+    { label: 'Single number', input: '{"left":1,"right":1}' },
+    { label: 'Two adjacent primes', input: '{"left":2,"right":3}' },
+    { label: 'Full range', input: '{"left":1,"right":1000}' },
+    { label: 'Long run: 498 numbers', input: '{"left":500,"right":997}' },
   ],
 }
 

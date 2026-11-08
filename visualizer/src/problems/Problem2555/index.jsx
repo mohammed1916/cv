@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"prize_positions":[1,1,2,2,3,3,5],"k":2}' },
     { label: 'Example 2', input: '{"prize_positions":[1,2,3,4],"k":0}' },
+    { label: 'Single prize at zero', input: '{"prize_positions":[0],"k":0}' },
+    { label: 'Equal positions', input: '{"prize_positions":[5,5,5,5],"k":2}' },
+    { label: 'Forty prizes at the top position', input: '{"prize_positions":[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50],"k":50}' },
+    { label: 'Long run: 40 sorted prizes', input: '{"prize_positions":[0,0,3,4,5,8,12,12,13,13,13,15,17,17,18,19,21,23,24,26,27,30,32,33,33,33,34,34,37,38,39,40,42,43,43,44,46,46,47,50],"k":12}' },
   ],
 }
 

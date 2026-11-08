@@ -23,6 +23,10 @@ const definition = {
     { label: 'Short range', input: '{"min_length":3,"max_length":5,"zero_group":1,"one_group":2}' },
     { label: 'Longer blocks', input: '{"min_length":4,"max_length":6,"zero_group":2,"one_group":3}' },
     { label: 'Equal blocks', input: '{"min_length":2,"max_length":4,"zero_group":2,"one_group":2}' },
+    { label: 'Single length', input: '{"min_length":1,"max_length":1,"zero_group":1,"one_group":1}' },
+    { label: 'Fixed length three', input: '{"min_length":3,"max_length":3,"zero_group":2,"one_group":2}' },
+    { label: 'Full range with largest groups', input: '{"min_length":1,"max_length":30,"zero_group":10,"one_group":10}' },
+    { label: 'Long run: lengths 20 to 30', input: '{"min_length":20,"max_length":30,"zero_group":5,"one_group":2}' },
   ],
 }
 
