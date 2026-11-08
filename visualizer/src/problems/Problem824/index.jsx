@@ -17,6 +17,10 @@ const definition = {
     { label: 'Official 1', input: '"I speak Goat Latin"' },
     { label: 'Official 2', input: '"The quick brown fox jumped over the lazy dog"' },
     { label: 'One word', input: '"a"' },
+    { label: 'Single letter word', input: '"a"' },
+    { label: 'Repeated words get more a letters', input: '"Eat eat"' },
+    { label: 'Longest allowed (150 characters)', input: '"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC"' },
+    { label: 'Long run: 30 words', input: '"apple sky Ice tree Ice dog tree apple Ice dog Ice sky sky dog dog apple apple tree Goat tree apple tree dog tree Ice sky tree tree sky"' },
   ],
 }
 export default function GoatLatin() {

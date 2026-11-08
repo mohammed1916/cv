@@ -18,6 +18,10 @@ const definition = {
     { label: 'Nested', input: '"(()(()))"' },
     { label: 'Pairs', input: '"()()()"' },
     { label: 'Deep', input: '"((()))"' },
+    { label: 'Single pair', input: '"()"' },
+    { label: 'Equal pairs side by side', input: '"()()"' },
+    { label: 'Longest allowed (50 characters)', input: '"((((((((((((((((((((((((()))))))))))))))))))))))))"' },
+    { label: 'Long run: random 50 characters', input: '"((())()())(())()((((())(()()(((())((((()))))))))))"' },
   ],
 }
 

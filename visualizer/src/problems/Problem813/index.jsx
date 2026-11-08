@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Three groups', input: '{"nums":[9,1,2,3,9],"k":3}' },
     { label: 'Two groups', input: '{"nums":[4,1,7,2],"k":2}' },
+    { label: 'Single element', input: '{"nums":[5],"k":1}' },
+    { label: 'Equal values', input: '{"nums":[4,4,4,4],"k":2}' },
+    { label: 'Full length with extreme values', input: '{"nums":[100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0],"k":30}' },
+    { label: 'Long run: 30 values, k = 10', input: '{"nums":[81,2,14,25,38,37,92,17,98,23,26,40,56,70,39,100,11,42,84,42,65,58,100,23,88,23,84,72,25,2],"k":10}' },
   ],
 }
 

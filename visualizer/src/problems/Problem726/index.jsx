@@ -18,6 +18,10 @@ const definition = {
     { label: 'Ethanol', input: '"C2H5OH"' },
     { label: 'Iron cyclo', input: '"Fe(C5H5)2"' },
     { label: 'Alum', input: '"Al2(SO4)3"' },
+    { label: 'Single atom', input: '"N"' },
+    { label: 'Equal repeated groups', input: '"H(OH)(OH)"' },
+    { label: 'Large count', input: '"H99999999"' },
+    { label: 'Long run: 100 repeated groups', input: '"Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2Ca(OH)2"' },
   ],
 }
 

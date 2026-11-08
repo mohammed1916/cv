@@ -16,6 +16,10 @@ const definition = {
     { label: 'Official example', input: '{"fronts": [1,2,4,4,7], "backs": [1,3,4,1,3]}' },
     { label: 'Single card', input: '{"fronts": [1], "backs": [1]}' },
     { label: 'Pair', input: '{"fronts": [1,1], "backs": [2,2]}' },
+    { label: 'Single card', input: '{"fronts":[1],"backs":[2]}' },
+    { label: 'Equal faces', input: '{"fronts":[3,3],"backs":[3,3]}' },
+    { label: 'Largest faces', input: '{"fronts":[2000,1999],"backs":[1999,2000]}' },
+    { label: 'Long run: 50 cards', input: '{"fronts":[3,2,5,4,5,4,4,5,6,1,2,6,3,3,1,2,4,4,6,3,6,3,2,2,5,3,6,3,1,2,4,6,5,3,4,3,4,4,5,3,1,4,6,3,3,3,5,3,1,5],"backs":[1,2,4,1,2,4,3,3,4,5,1,2,3,5,1,2,5,3,5,2,3,5,3,4,3,6,2,4,3,1,1,4,6,3,6,6,3,5,1,6,4,1,2,4,1,3,1,2,3,2]}' },
   ],
 }
 export default function CardFlippingGame() {

@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"arr":[1,3,2],"k":1}' },
     { label: 'Deeper leaf', input: '{"arr":[1,2,3,4,null,null,null,5],"k":2}' },
+    { label: 'Root only', input: '{"arr":[5],"k":5}' },
+    { label: 'Two children', input: '{"arr":[2,1,3],"k":3}' },
+    { label: 'Largest value at root', input: '{"arr":[100,1,null],"k":1}' },
+    { label: 'Long run: 15 positions', input: '{"arr":[62,88,null,84,68,54,null,69,34],"k":34}' },
   ],
 }
 

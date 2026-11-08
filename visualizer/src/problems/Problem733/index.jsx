@@ -17,6 +17,10 @@ const definition = {
     { label: 'Corner fill', input: '{"image":[[3,3,0],[3,0,0],[0,3,3]],"sr":0,"sc":0,"color":7}' },
     { label: 'Ring', input: '{"image":[[5,5,5],[5,1,5],[5,5,5]],"sr":0,"sc":1,"color":9}' },
     { label: 'Same colour', input: '{"image":[[4,4],[4,2]],"sr":0,"sc":0,"color":4}' },
+    { label: 'Start colour already set', input: '{"image":[[1]],"sr":0,"sc":0,"color":1}' },
+    { label: 'Single pixel', input: '{"image":[[0]],"sr":0,"sc":0,"color":5}' },
+    { label: 'Largest colour value', input: '{"image":[[0,0],[0,0]],"sr":1,"sc":1,"color":65535}' },
+    { label: 'Long run: 8 by 8 image', input: '{"image":[[1,2,2,2,2,2,0,0],[1,2,1,2,1,1,1,0],[2,1,0,1,0,0,2,2],[0,0,0,2,0,1,0,2],[1,2,0,0,1,2,1,2],[0,0,2,2,2,1,0,0],[1,0,0,1,2,1,0,2],[2,0,2,1,1,1,2,0]],"sr":3,"sc":4,"color":9}' },
   ],
 }
 

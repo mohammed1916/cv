@@ -19,6 +19,10 @@ const definition = {
     { label: 'p=3, q=2', input: '[3,2]' },
     { label: 'p=6, q=4', input: '[6,4]' },
     { label: 'p=1000, q=250', input: '[1000,250]' },
+    { label: 'Smallest pair', input: '[1,1]' },
+    { label: 'Equal p and q', input: '[4,4]' },
+    { label: 'Largest p', input: '[1000,1]' },
+    { label: 'Long run: p=997, q=499', input: '[997,499]' },
   ],
 }
 

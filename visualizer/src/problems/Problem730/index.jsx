@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Four letters', input: '"bccb"' },
     { label: 'Repeats', input: '"abcdabcdabcdabcdabcd"' },
+    { label: 'Single letter', input: '"a"' },
+    { label: 'Repeated letters', input: '"aaaa"' },
+    { label: 'Longest allowed', input: '"abcdabcdabcd"' },
+    { label: 'Long run: 12 letters', input: '"cbccdbabdcac"' },
   ],
 }
 

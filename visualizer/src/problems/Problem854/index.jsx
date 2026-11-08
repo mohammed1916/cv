@@ -22,6 +22,10 @@ const definition = {
     { label: 'abccab to abccab', input: '["abccab","abccab"]' },
     { label: 'aabc to abca', input: '["aabc","abca"]' },
     { label: 'abcdefab to bcdefaab', input: '["abcdefab","bcdefaab"]' },
+    { label: 'Single letter', input: '["a","a"]' },
+    { label: 'Repeated letters, no swaps', input: '["aaaa","aaaa"]' },
+    { label: 'Longest allowed (8 letters)', input: '["aaaabbbb","bbbbaaaa"]' },
+    { label: 'Long run: 8 shuffled letters', input: '["bdbabece","aedbbceb"]' },
   ],
 }
 

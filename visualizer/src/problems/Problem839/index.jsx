@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'One group', input: '["abc","acb","bac","cba"]' },
     { label: 'Swap chain', input: '["abcd","bacd","bcad","dbca"]' },
+    { label: 'Single string', input: '["a"]' },
+    { label: 'Equal strings share a group', input: '["ab","ba","ab"]' },
+    { label: 'Twelve anagrams of six letters', input: '["abcdef","bcdefa","cdefab","defabc","efabcd","fabcde","abcdef","bcdefa","cdefab","defabc","efabcd","fabcde"]' },
+    { label: 'Long run: 12 shuffled anagrams', input: '["caefdb","ecdabf","cfeadb","dbfeac","edcfab","ebcadf","cbafed","cafedb","edfbac","feacdb","deafcb","acfedb"]' },
   ],
 }
 

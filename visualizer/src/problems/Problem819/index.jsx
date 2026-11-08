@@ -16,6 +16,10 @@ const definition = {
     { label: 'Ball example', input: '{"paragraph": "Bob hit a ball, the hit BALL flew far after it was hit.", "banned": ["hit"]}' },
     { label: 'Single word', input: '{"paragraph": "a.", "banned": []}' },
     { label: 'Punctuation', input: '{"paragraph": "Bob. hIt, baLl", "banned": ["bob", "hit"]}' },
+    { label: 'Single word, no bans', input: '{"paragraph":"a","banned":[]}' },
+    { label: 'Equal counts keep the first', input: '{"paragraph":"red blue red blue","banned":[]}' },
+    { label: 'Twenty banned words', input: '{"paragraph":"ba bb bc bd be bf bg bh bi bj bk bl bm bn bo bp bq br bs bt zebra zebra.","banned":["ba","bb","bc","bd","be","bf","bg","bh","bi","bj","bk","bl","bm","bn","bo","bp","bq","br","bs","bt"]}' },
+    { label: 'Long run: 40 words with bans', input: '{"paragraph":"tea sun sky red sun sky cat cat blue red sky sky red cat dog tea tea blue sky sky blue cat dog cat sky cat cat tea red cat tea sun dog red cat sky blue blue blue cat, the end.","banned":["cat","sun","tea"]}' },
   ],
 }
 export default function MostCommonWord() {

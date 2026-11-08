@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Line and block', input: '["/*Test program */", "int main()", "{ ", "  // variable declaration ", "int a, b, c;", "/* This is a test", "   multiline  ", "   comment for ", "   testing */", "a = b + c;", "}"]' },
     { label: 'Mixed on one line', input: '["a/*comment", "line", "more_comment*/b"]' },
+    { label: 'Single code line', input: '["int x = 1;"]' },
+    { label: 'Comment only', input: '["/* only */"]' },
+    { label: 'Overlapping markers', input: '["/*/*","*/"]' },
+    { label: 'Maximum 100 lines', input: '["/* open","}","// note","int z;","/* open","int z;","/* open","x = y;","}","x = y;","int z;","// note","a /* b */ c","x = y;","}","x = y;","/* a */","/* a */","a /* b */ c","a /* b */ c","int z;","a /* b */ c","/* a */","x = y;","}","/* a */","close */","int z;","// note","}","/* open","x = y;","a /* b */ c","// note","a /* b */ c","}","x = y;","close */","close */","/* a */","x = y;","int z;","/* open","close */","x = y;","/* open","close */","x = y;","/* a */","// note","a /* b */ c","a /* b */ c","/* a */","}","int z;","int z;","/* a */","x = y;","/* open","/* a */","/* a */","// note","}","/* open","}","/* open","a /* b */ c","/* a */","close */","int z;","a /* b */ c","}","close */","close */","a /* b */ c","close */","}","}","/* open","close */","x = y;","/* open","// note","/* open","int z;","// note","/* a */","int z;","// note","close */","int z;","close */","// note","a /* b */ c","a /* b */ c","int z;","// note","close */","x = y;","a /* b */ c"]' },
   ],
 }
 

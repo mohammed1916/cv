@@ -12,7 +12,7 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'String of uppercase letters (JSON)',
   url: 'https://leetcode.com/problems/count-unique-characters-of-all-substrings-of-a-given-string/',
   complexity: 'O(n) time with precomputed neighbours (the shown code uses rfind/find, O(n * 26) in practice); O(1) extra space.',
-  examples: [{ label: 'ABC', input: '"ABC"' }, { label: 'ABA', input: '"ABA"' }, { label: 'LEETCODE', input: '"LEETCODE"' }],
+  examples: [{ label: 'ABC', input: '"ABC"' }, { label: 'ABA', input: '"ABA"' }, { label: 'LEETCODE', input: '"LEETCODE"' }, { label: 'Single letter', input: '"A"' }, { label: 'Repeated letter', input: '"AAAA"' }, { label: 'Longest allowed, alphabet repeated', input: '"ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUV"' }, { label: 'Long run: 100 letters', input: '"ADEDDCACCECEDBCACECAAAEDEEDCEACEAAAEBECDABCAEECADECABBBDECCECDCBDBACAAEAAEEBCAECCDBDDACBAEDBDBEBDBCD"' }],
 }
 export default function UniqueCharacterSubstrings() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>

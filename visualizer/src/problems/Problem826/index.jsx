@@ -16,6 +16,10 @@ const definition = {
     { label: 'Official example', input: '{"difficulty":[2,4,6,8,10],"profit":[10,20,30,40,50],"worker":[4,5,6,7]}' },
     { label: 'Too hard', input: '{"difficulty":[85,47,57],"profit":[24,66,99],"worker":[40,25,25]}' },
     { label: 'Profit not monotone', input: '{"difficulty":[1,2,3],"profit":[50,10,5],"worker":[1,2,3]}' },
+    { label: 'One job, one worker', input: '{"difficulty":[1],"profit":[1],"worker":[1]}' },
+    { label: 'Equal difficulties, keep best profit', input: '{"difficulty":[3,3],"profit":[5,9],"worker":[3,3]}' },
+    { label: 'Largest values', input: '{"difficulty":[100000],"profit":[100000],"worker":[100000]}' },
+    { label: 'Long run: 30 jobs, 30 workers', input: '{"difficulty":[14810,54403,15544,55132,21518,22291,2236,32512,15408,41572,52432,24279,48975,10868,46083,25344,49445,16904,53889,59042,23796,8282,63444,32628,14363,38273,26845,62984,25210,39328],"profit":[15760,30426,57484,41679,56947,51228,47933,28105,56788,4159,12688,42330,10445,31041,26610,38022,19449,48313,45403,53113,18419,25764,20010,32563,12690,19693,15549,48112,39399,45502],"worker":[30675,8792,31219,54921,48803,36715,7720,4565,49848,44842,19878,51657,22419,51718,43314,44409,65535,64778,65014,14068,62770,51399,2043,16906,33704,41731,57447,17373,22975,63264]}' },
   ],
 }
 export default function MostProfitAssigningWork() {

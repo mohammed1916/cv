@@ -15,6 +15,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"ip":"255.0.0.7","n":10}' },
     { label: 'One block', input: '{"ip":"10.0.0.0","n":256}' },
+    { label: 'Single address', input: '{"ip":"0.0.0.0","n":1}' },
+    { label: 'Last address', input: '{"ip":"255.255.255.255","n":1}' },
+    { label: 'Crossing a byte boundary', input: '{"ip":"192.168.0.250","n":20}' },
+    { label: 'Long run: 1000 addresses', input: '{"ip":"172.16.5.3","n":1000}' },
   ],
 }
 

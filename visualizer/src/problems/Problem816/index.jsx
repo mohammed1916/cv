@@ -18,6 +18,10 @@ const definition = {
     { label: 'Example 2', input: '"(0123)"' },
     { label: 'Example 3', input: '"(00011)"' },
     { label: 'Trailing zeros', input: '"(100)"' },
+    { label: 'Two digits, equal', input: '"(11)"' },
+    { label: 'Leading zero', input: '"(01)"' },
+    { label: 'Longest allowed (7 digits)', input: '"(9999999)"' },
+    { label: 'Long run: 7 digits', input: '"(4850854)"' },
   ],
 }
 export default function AmbiguousCoordinates() {

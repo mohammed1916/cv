@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Example 1', input: '{"words": ["apple"], "queries": [["a", "e"], ["b", ""]]}' },
     { label: 'Later index wins', input: '{"words": ["apple", "ape", "apple"], "queries": [["ap", "e"], ["ap", "pe"], ["", "le"], ["x", "x"]]}' },
+    { label: 'Single word, empty suffix', input: '{"words":["a"],"queries":[["a",""]]}' },
+    { label: 'No matching word', input: '{"words":["cat"],"queries":[["d",""]]}' },
+    { label: 'Longest allowed words', input: '{"words":["abcdefg","abcdefg","abcdefg","abcdefg","abcdefg","abcdefg","abcdefg","abcdefg","abcdefg","abcdefg","abcdefg","abcdefg"],"queries":[["","g"],["a","g"],["ab","g"],["abc","g"],["abcd","g"],["abcde","g"],["abcdef","g"],["abcdefg","g"],["","g"],["a","g"],["ab","g"],["abc","g"],["abcd","g"],["abcde","g"],["abcdef","g"],["abcdefg","g"],["","g"],["a","g"],["ab","g"],["abc","g"]]}' },
+    { label: 'Long run: 12 words, 20 queries', input: '{"words":["bccacbb","abbccbc","accbcab","cccbbba","caabaaa","acbaccc","bbabcaa","abcbcbc","babaaac","aaccbbc","bbcccbb","bccbbac"],"queries":[["ccb","a"],["ccac","a"],["b","aa"],["cbab","bbbb"],["caabc","ccbacc"],["bbbbca","acbaccb"],["ccaabba","acacbba"],["c","caab"],["cca","ac"],["ba","ccbbaa"],["acb","aaabab"],["bac","bbacb"],["baa","ab"],["a","ababa"],["acac",""],["","babccc"],["aababa","b"],["b","cc"],["","baca"],["bcabbb","bb"]]}' },
   ],
 }
 

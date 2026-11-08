@@ -16,6 +16,10 @@ const definition = {
     { label: 'Both match', input: '{"s":"abcd","indices":[0,2],"sources":["a","cd"],"targets":["eee","ffff"]}' },
     { label: 'One mismatch', input: '{"s":"abcd","indices":[0,2],"sources":["ab","ec"],"targets":["eee","ffff"]}' },
     { label: 'Unordered', input: '{"s":"vmokgggqzp","indices":[3,5,1],"sources":["kg","ggq","mo"],"targets":["s","so","bfr"]}' },
+    { label: 'Single replacement', input: '{"s":"a","indices":[0],"sources":["a"],"targets":["b"]}' },
+    { label: 'Equal length replacements side by side', input: '{"s":"abc","indices":[0,1],"sources":["a","b"],"targets":["x","y"]}' },
+    { label: 'Fifteen replacements in 60 letters', input: '{"s":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","indices":[0,4,8,12,16,20,24,28,32,36,40,44,48,52,56],"sources":["a","a","a","a","a","a","a","a","a","a","a","a","a","a","a"],"targets":["bb","bb","bb","bb","bb","bb","bb","bb","bb","bb","bb","bb","bb","bb","bb"]}' },
+    { label: 'Long run: 15 replacements', input: '{"s":"aaaaacccacaabcacbcbbcbbbaabcacabaaacbcacbabababacbbcbbcbcaab","indices":[0,4,8,12,16,20,24,28,32,36,40,44,48,52,56],"sources":["a","a","a","b","b","c","a","a","a","b","b","b","c","b","c"],"targets":["xy","xy","xy","xy","xy","xy","xy","xy","xy","xy","xy","xy","xy","xy","xy"]}' },
   ],
 }
 export default function FindAndReplaceInString() {

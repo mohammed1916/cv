@@ -22,6 +22,10 @@ const definition = {
     { label: 'Example 2', input: '"(let x 3 x 2 x)"' },
     { label: 'Example 3', input: '"(let x 1 y 2 x (add x y) (add x y))"' },
     { label: 'Shadowing', input: '"(add (let x 5 (mult x x)) (let x 2 (add x -7)))"' },
+    { label: 'Single number', input: '"5"' },
+    { label: 'Nested shadowing', input: '"(let x 2 (let x (add x 3) (mult x x)))"' },
+    { label: 'Negative arithmetic', input: '"(mult (add -4 1) (let y -2 y))"' },
+    { label: 'Long run: 12 nested lets', input: '"(let a11 11 (add a11 (let a10 10 (add a10 (let a9 9 (add a9 (let a8 8 (add a8 (let a7 7 (add a7 (let a6 6 (add a6 (let a5 5 (add a5 (let a4 4 (add a4 (let a3 3 (add a3 (let a2 2 (add a2 (let a1 1 (add a1 (let a0 0 (add a0 0))))))))))))))))))))))))"' },
   ],
 }
 

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Similar', input: '{"s1":["great","acting","skills"],"s2":["fine","drama","talent"],"pairs":[["great","fine"],["acting","drama"],["skills","talent"]]}' },
     { label: 'Not similar', input: '{"s1":["an","unusual","meal"],"s2":["one","good","dinner"],"pairs":[["great","good"],["any","one"],["some","one"]]}' },
+    { label: 'Single matching word', input: '{"s1":["a"],"s2":["a"],"pairs":[]}' },
+    { label: 'Unpaired words differ', input: '{"s1":["hi"],"s2":["hey"],"pairs":[]}' },
+    { label: 'Twenty words each', input: '{"s1":["wkvols","xtv","qnpqd","oourj","eoxqxgqw","mryin","cwbii","nmayk","hyex","wwhab","vmslrdyn","yyq","lla","rgmtcdm","imtif","npu","shpylbi","gxwzrlqs","xvhkpso","flqqq"],"s2":["wecld","depyz","brit","klk","wkxgimg","odzulm","usxqadp","pvnmmbxo","xsii","wvqcs","gapor","xbbqmf","mtbul","bznjte","krdspl","eit","jwzfmmf","pfkg","nogxgzxs","vpint"],"pairs":[["wkvols","wecld"],["xtv","depyz"],["qnpqd","brit"],["oourj","klk"],["eoxqxgqw","wkxgimg"],["mryin","odzulm"],["cwbii","usxqadp"],["nmayk","pvnmmbxo"],["hyex","xsii"],["wwhab","wvqcs"],["vmslrdyn","gapor"],["yyq","xbbqmf"],["lla","mtbul"],["rgmtcdm","bznjte"],["imtif","krdspl"],["npu","eit"],["shpylbi","jwzfmmf"],["gxwzrlqs","pfkg"],["xvhkpso","nogxgzxs"],["flqqq","vpint"]]}' },
+    { label: 'Long run: chained pairs', input: '{"s1":["wkvols","xtv","qnpqd","oourj","eoxqxgqw","mryin","cwbii","nmayk","hyex","wwhab","vmslrdyn","yyq","lla","rgmtcdm","imtif","npu","shpylbi","gxwzrlqs","xvhkpso","flqqq"],"s2":["wkvols","xtv","qnpqd","oourj","eoxqxgqw","mryin","cwbii","nmayk","hyex","wwhab","vmslrdyn","yyq","lla","rgmtcdm","imtif","npu","shpylbi","gxwzrlqs","xvhkpso","flqqq"],"pairs":[["xtv","wkvols"],["qnpqd","xtv"],["oourj","qnpqd"],["eoxqxgqw","oourj"],["mryin","eoxqxgqw"],["cwbii","mryin"],["nmayk","cwbii"],["hyex","nmayk"],["wwhab","hyex"],["vmslrdyn","wwhab"],["yyq","vmslrdyn"],["lla","yyq"],["rgmtcdm","lla"],["imtif","rgmtcdm"],["npu","imtif"],["shpylbi","npu"],["gxwzrlqs","shpylbi"],["xvhkpso","gxwzrlqs"],["flqqq","xvhkpso"]]}' },
   ],
 }
 

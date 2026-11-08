@@ -16,6 +16,10 @@ const definition = {
     { label: 'Example 1 (Alice loses)', input: '[1,1,2]' },
     { label: 'Example 2 (even count)', input: '[0,1]' },
     { label: 'Example 3', input: '[1,2,3]' },
+    { label: 'Single element', input: '[7]' },
+    { label: 'Equal values', input: '[5,5,5,5]' },
+    { label: 'Largest allowed values', input: '[65535,0,65535]' },
+    { label: 'Long run: 24 values', input: '[7540,43608,13531,63219,39417,6477,21862,33057,15502,45213,8015,56227,59719,39567,64481,27575,34832,32159,26163,63635,51341,59693,39017,46572]' },
   ],
 }
 export default function ChalkboardXorGame() {

@@ -18,6 +18,10 @@ const definition = {
     { label: 'Example 1', input: '{"hand":[1,2,3,6,2,3,4,7,8],"groupSize":3}' },
     { label: 'Example 2', input: '{"hand":[1,2,3,4,5],"groupSize":4}' },
     { label: 'Missing card', input: '{"hand":[1,1,2,2,3,4],"groupSize":3}' },
+    { label: 'Single card, group of one', input: '{"hand":[5],"groupSize":1}' },
+    { label: 'Equal cards form one group', input: '{"hand":[2,2,2,2],"groupSize":2}' },
+    { label: 'Largest hand, one long run', input: '{"hand":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60],"groupSize":60}' },
+    { label: 'Long run: 60 cards, groups of 6', input: '{"hand":[872,356,39,609,247,383,459,165,641,614,741,726,876,855,693,266,908,940,722,511,107,544,44,548,464,498,994,175,490,553,99,109,531,636,205,356,881,700,794,165,255,168,465,709,343,591,250,110,206,572,4,179,94,716,250,205,699,295,936,669],"groupSize":6}' },
   ],
 }
 export default function HandOfStraights() {

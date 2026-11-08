@@ -19,6 +19,10 @@ const definition = {
     { label: 'Example 1', input: '{"s":"heeellooo","words":["hello","hi","helo"]}' },
     { label: 'Example 2', input: '{"s":"zzzzzyyyyy","words":["zzyy","zy","zyy"]}' },
     { label: 'Length 2 cannot stretch', input: '{"s":"aaaabbcc","words":["abbc","aabcc","aaaabbc","aabbcc"]}' },
+    { label: 'Single letter', input: '{"s":"a","words":["a"]}' },
+    { label: 'Duplicate words are each checked', input: '{"s":"aabbcc","words":["abc","abc"]}' },
+    { label: 'Longest allowed string (30 letters)', input: '{"s":"aaaabbbbccccddddeeeeffffgggghh","words":["abbbcc","aaaabbbbccc","gghh"]}' },
+    { label: 'Long run: 8 words, 30 letters', input: '{"s":"aaadddaaaaaadaddddbcccdddbbbbf","words":["bcaaa","cbcab","a","bbbc","cab","cb","ccbbc","caabca"]}' },
   ],
 }
 export default function ExpressiveWords() {

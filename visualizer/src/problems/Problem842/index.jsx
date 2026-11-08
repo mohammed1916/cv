@@ -18,6 +18,10 @@ const definition = {
     { label: 'Example 2', input: '"112358130"' },
     { label: 'Example 3', input: '"0123"' },
     { label: 'Long sequence', input: '"123456579"' },
+    { label: 'Single digit', input: '"1"' },
+    { label: 'Equal digits', input: '"111"' },
+    { label: 'Longest allowed (30 nines)', input: '"999999999999999999999999999999"' },
+    { label: 'Long run: 30 digits', input: '"854384452915923178784631904948"' },
   ],
 }
 export default function SplitFibonacci() {

@@ -15,6 +15,10 @@ const definition = {
     { label: 'Corner', input: '{"rec1":[0,0,4,3],"rec2":[2,1,6,5]}' },
     { label: 'Touching', input: '{"rec1":[0,0,2,2],"rec2":[2,0,4,2]}' },
     { label: 'Apart', input: '{"rec1":[-3,-3,-1,-1],"rec2":[1,1,3,3]}' },
+    { label: 'Identical rectangles', input: '{"rec1":[0,0,1,1],"rec2":[0,0,1,1]}' },
+    { label: 'Extreme coordinates overlap', input: '{"rec1":[-1000,-1000,1000,1000],"rec2":[999,999,1000,1000]}' },
+    { label: 'Extreme corners apart', input: '{"rec1":[-1000,-1000,-999,-999],"rec2":[999,999,1000,1000]}' },
+    { label: 'Long run: random rectangles', input: '{"rec1":[-120,-800,787,-433],"rec2":[-352,307,496,810]}' },
   ],
 }
 

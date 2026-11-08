@@ -16,6 +16,10 @@ const definition = {
     { label: 'Example 1', input: '{"words":["acckzz","ccbazz","eiowzz","abcczz"],"secret":"acckzz","allowedGuesses":10}' },
     { label: 'Larger list', input: '{"words":["gaxckt","trlccr","jxwtrh","xzsxuw","xjzcrf","pzvnqn","brnrbz","ydcmxe","wyqwck","edfrch"],"secret":"xjzcrf","allowedGuesses":10}' },
     { label: 'Tight budget', input: '{"words":["abcdef","abcdez","abcdzz","abczzz","abzzzz","azzzzz"],"secret":"azzzzz","allowedGuesses":2}' },
+    { label: 'Single word', input: '{"words":["a"],"secret":"a","allowedGuesses":1}' },
+    { label: 'Equal match counts', input: '{"words":["ab","cd","ef"],"secret":"ef","allowedGuesses":3}' },
+    { label: 'Thirty words, full budget', input: '{"words":["uiijfy","hngnte","tzdumu","cxofek","dpdvtd","dhxifw","xayqfa","qtiual","smvpzf","zmmuwe","udubxg","hkfwwv","zrskah","gpqfby","dcrxfp","rngrel","cahgss","hdpsza","akqkcf","cfdcfh","zapwqb","julgfa","reduau","dwizhj","mkdxvi","ymfxxg","nhljxc","vjaaoh","cvvhow","haigbz"],"secret":"uiijfy","allowedGuesses":30}' },
+    { label: 'Long run: ten words', input: '{"words":["bech","hgdh","adfh","bedc","cfff","bcdc","hdcg","ehab","cbha","efde"],"secret":"cfff","allowedGuesses":10}' },
   ],
 }
 export default function GuessTheWord() {

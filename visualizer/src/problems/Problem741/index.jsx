@@ -17,6 +17,10 @@ const definition = {
     { label: 'Corridor', input: '[[0,1,0],[1,-1,1],[1,1,1]]' },
     { label: 'Blocked', input: '[[1,-1],[-1,1]]' },
     { label: 'Diagonal', input: '[[1,1,0],[0,-1,1],[0,1,1]]' },
+    { label: 'Single empty cell', input: '[[0]]' },
+    { label: 'Blocked start', input: '[[-1]]' },
+    { label: 'Single cherry', input: '[[1]]' },
+    { label: 'Long run: 8 by 8 grid', input: '[[0,0,-1,-1,0,1,1,0],[0,-1,-1,-1,0,-1,-1,1],[-1,0,1,1,1,0,-1,0],[-1,1,-1,-1,0,0,1,1],[-1,1,0,0,0,0,1,-1],[-1,0,0,0,0,0,0,0],[-1,1,1,0,0,1,0,0],[1,1,0,0,0,1,1,0]]' },
   ],
 }
 

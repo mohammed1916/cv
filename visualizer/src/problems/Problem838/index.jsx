@@ -16,6 +16,10 @@ const definition = {
     { label: 'Example 1', input: '"RR.L"' },
     { label: 'Example 2', input: '".L.R...LR..L.."' },
     { label: 'Balanced', input: '"R...L"' },
+    { label: 'Single dot', input: '"."' },
+    { label: 'Equal forces meet in the middle', input: '"R.L"' },
+    { label: 'Longest allowed (60 characters)', input: '"R..........................................................L"' },
+    { label: 'Long run: 60 characters', input: '"RR.RLRLR..RRLLRRL.RRRLRLRRLLLRRLRR.LRLL.L.RRRL.R.LL.LLLRR.R."' },
   ],
 }
 export default function PushDominoes() {

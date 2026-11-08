@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 1', input: '{"head":[0,1,2,3],"nums":[0,1,3]}' },
     { label: 'Example 2', input: '{"head":[0,1,2,3,4],"nums":[0,3,1,4]}' },
     { label: 'Alternating', input: '{"head":[5,6,7,8,9,10],"nums":[5,7,9]}' },
+    { label: 'Single node removed', input: '{"head":[7],"nums":[7]}' },
+    { label: 'Remove the whole list', input: '{"head":[1,2,3],"nums":[1,2,3]}' },
+    { label: 'Largest list (20 nodes)', input: '{"head":[0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95],"nums":[5,15,25,35,45,55,65,75,85,95]}' },
+    { label: 'Long run: 20 nodes, 10 removed', input: '{"head":[72,14,79,8,51,38,32,48,35,69,22,75,23,49,1,65,98,0,91,20],"nums":[72,79,51,32,35,22,23,1,98,91]}' },
   ],
 }
 const roleOf = mark => (mark === 'start' || mark === 'inside' ? 'match' : mark === 'gap' ? 'removed' : '')

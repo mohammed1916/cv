@@ -16,6 +16,10 @@ const definition = {
     { label: 'Example 1', input: '[[0,0],[0,1],[1,0],[0,2],[2,0]]' },
     { label: 'Example 2', input: '[[1,0],[0,0],[0,1]]' },
     { label: 'Mixed signs', input: '[[-3,4],[5,-2],[0,0],[2,7],[-6,-5],[4,4]]' },
+    { label: 'Smallest triangle', input: '[[0,0],[1,0],[0,1]]' },
+    { label: 'Collinear points', input: '[[0,0],[1,1],[2,2]]' },
+    { label: 'Corners of the coordinate box', input: '[[-50,-50],[50,50],[50,-50],[-50,50]]' },
+    { label: 'Long run: 10 points', input: '[[-42,19],[-4,32],[-50,-25],[-12,-20],[-2,-46],[38,34],[-28,-16],[-39,-46],[25,-8],[8,22]]' },
   ],
 }
 const S = 4, OFF = 54

@@ -18,6 +18,10 @@ const definition = {
     { label: 'Dominant', input: '[4,12,3,1]' },
     { label: 'Close', input: '[9,5,8]' },
     { label: 'Zeros', input: '[0,0,3]' },
+    { label: 'Single value', input: '[0]' },
+    { label: 'Equal maxima', input: '[9,9,3]' },
+    { label: 'Exactly twice the next', input: '[6,3,1]' },
+    { label: 'Long run: 50 values', input: '[53,3,29,32,23,16,33,0,52,50,73,29,33,90,57,69,11,67,43,7,77,98,6,82,71,30,68,62,41,26,28,90,97,35,83,92,47,20,11,1,40,64,61,57,22,50,65,67,80,2]' },
   ],
 }
 

@@ -21,6 +21,10 @@ const definition = {
     { label: 'Example 1', input: '[[1,2,3],[0],[0],[0]]' },
     { label: 'Example 2', input: '[[1],[0,2,4],[1,3,4],[2],[1,2]]' },
     { label: 'Cycle', input: '[[1,4],[0,2],[1,3],[2,4],[3,0]]' },
+    { label: 'Single node', input: '[[]]' },
+    { label: 'Symmetric pair', input: '[[1],[0]]' },
+    { label: 'Longest path, seven nodes', input: '[[1],[0,2],[1,3],[2,4],[3,5],[4,6],[5]]' },
+    { label: 'Long run: random connected graph', input: '[[1,2,5,6],[0,6],[0,3,6],[2,4],[3],[0],[0,1,2]]' },
   ],
 }
 export default function ShortestPathAllNodes() {

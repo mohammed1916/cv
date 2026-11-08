@@ -19,6 +19,10 @@ const definition = {
     { label: 'Example 2', input: '[1,0,1,0,0,0,1]' },
     { label: 'Example 3', input: '[1,1,0,1,1,0,1,0]' },
     { label: 'All zeros', input: '[0,0,0]' },
+    { label: 'Single node', input: '[0]' },
+    { label: 'Equal values', input: '[1,1,1]' },
+    { label: 'Full tree with 31 nodes', input: '[1,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0]' },
+    { label: 'Long run: random tree with nulls', input: '[0,null,0,0,null,1,1,0,0,null,1,null,1,0,null,1,1,null,1,null,0,1,0,null,null,1,0,null,0,0,null]' },
   ],
 }
 export default function BinaryTreePruning() {

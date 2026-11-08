@@ -19,6 +19,10 @@ const definition = {
     { label: 'Official example', input: '{"n":10,"ops":[["seat"],["seat"],["seat"],["seat"],["leave",4],["seat"]]}' },
     { label: 'Fill a small room', input: '{"n":5,"ops":[["seat"],["seat"],["seat"],["seat"],["seat"]]}' },
     { label: 'Leaving merges gaps', input: '{"n":12,"ops":[["seat"],["seat"],["seat"],["leave",11],["leave",0],["seat"],["seat"]]}' },
+    { label: 'Single seat', input: '{"n":1,"ops":[["seat"]]}' },
+    { label: 'Leave, then the freed seat is reused', input: '{"n":3,"ops":[["seat"],["seat"],["leave",0],["seat"]]}' },
+    { label: 'Fill every seat of a 40 seat room', input: '{"n":40,"ops":[["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"],["seat"]]}' },
+    { label: 'Long run: mixed seats and leaves', input: '{"n":40,"ops":[["seat"],["seat"],["seat"],["leave",39],["leave",0],["leave",19],["seat"],["leave",0],["seat"],["seat"],["leave",39],["seat"],["leave",0],["seat"],["seat"],["leave",19],["leave",39],["seat"],["seat"],["seat"],["seat"],["leave",29],["leave",19],["leave",39],["leave",0],["leave",9],["seat"],["leave",0],["seat"],["seat"],["seat"],["seat"],["seat"],["leave",9],["seat"],["seat"],["leave",14],["leave",9],["leave",29],["seat"]]}' },
   ],
 }
 

@@ -18,6 +18,10 @@ const definition = {
     { label: 'Official 6-node tree', input: '{"n":6,"edges":[[0,1],[0,2],[2,3],[2,4],[2,5]]}' },
     { label: 'Single node', input: '{"n":1,"edges":[]}' },
     { label: 'Two nodes', input: '{"n":2,"edges":[[1,0]]}' },
+    { label: 'Symmetric path of five', input: '{"n":5,"edges":[[0,1],[1,2],[2,3],[3,4]]}' },
+    { label: 'Star with three leaves', input: '{"n":4,"edges":[[0,1],[0,2],[0,3]]}' },
+    { label: 'Longest path, 12 nodes', input: '{"n":12,"edges":[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11]]}' },
+    { label: 'Long run: random tree of 12 nodes', input: '{"n":12,"edges":[[0,1],[1,2],[0,3],[3,4],[0,5],[1,6],[4,7],[6,8],[4,9],[2,10],[5,11]]}' },
   ],
 }
 export default function SumOfDistancesInTree() {

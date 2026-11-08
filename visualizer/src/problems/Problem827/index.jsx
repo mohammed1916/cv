@@ -16,6 +16,10 @@ const definition = {
     { label: 'Bridge', input: '[[1,0,1],[0,0,0],[1,0,1]]' },
     { label: 'Solid', input: '[[1,1],[1,1]]' },
     { label: 'Corner', input: '[[1,1,0],[1,0,0],[0,0,1]]' },
+    { label: 'Single cell, empty', input: '[[0]]' },
+    { label: 'Single cell, full', input: '[[1]]' },
+    { label: 'Two equal islands', input: '[[1,0],[0,1]]' },
+    { label: 'Long run: 8 by 8 grid', input: '[[1,0,0,1,0,1,0,1],[1,1,1,1,0,1,0,0],[0,0,1,0,1,0,0,1],[0,0,1,1,1,1,1,1],[1,0,0,0,0,0,0,0],[1,1,0,1,0,0,0,1],[1,1,0,1,0,1,1,1],[1,1,1,1,0,0,0,0]]' },
   ],
 }
 

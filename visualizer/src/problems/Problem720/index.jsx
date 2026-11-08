@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Chain', input: '{"words":["m","ma","mat","mate","matter","mad"]}' },
     { label: 'Gap', input: '{"words":["k","kn","knot","kno","knight"]}' },
+    { label: 'Single word', input: '{"words":["a"]}' },
+    { label: 'No chain', input: '{"words":["ab","ba"]}' },
+    { label: 'Equal lengths never chain', input: '{"words":["ab","ac","ad"]}' },
+    { label: 'Long run: 200 words', input: '{"words":["bcaa","caccbc","abacab","a","ccbbb","bbbccc","a","aca","bbbc","cbcb","aaac","bcac","a","aaabc","a","ccab","caba","bcab","ca","aababc","cbbc","aaac","bbca","ccbcba","ababc","b","a","babacb","a","bcc","b","ab","c","c","bbbb","a","bcaba","caa","baabab","babc","baa","abaa","cbcc","bab","bcb","ccbcb","babca","bb","c","bacaac","ba","cc","ca","bbbcba","cccc","ca","aab","cb","bca","bcbba","baabbc","ca","abcaca","cacabc","ccbc","abacac","abbcaa","caa","accb","bcb","ababca","abaab","cccaaa","a","acba","cbbaac","baacb","acc","ba","abca","c","cbb","baac","ccacb","cabcab","aa","b","abbcb","aabb","acccaa","c","aba","aaab","b","cabbcc","cbaaba","cc","ca","baaacc","ac","abca","b","cbabac","caab","cbcacb","bbaa","cacc","caabb","bbcca","caab","baaccb","accab","b","baab","bab","cbaaa","bba","acabbb","accc","cbbbc","bc","b","caaca","baccb","accbc","ba","aba","cab","bc","ba","accaba","c","aaaba","ab","bab","cbaaa","caba","c","acbabc","c","cbabbb","caccca","bcb","ba","ba","acaa","aac","cbbcac","bc","babbb","c","bcbbb","cbccac","babaaa","aabaa","bba","bbcaab","cbcbaa","ca","acc","ccbcb","babbbb","b","ccca","ca","aa","b","cabacb","aba","ba","bbaa","ca","abb","aca","aacaac","cb","bbbbca","accbb","baaaab","aaaac","ccc","bcaa","bcbaa","bcb","bca","cb","acc","cbbb","c","aaccc","a","bcc","acbaac","ab","a","abaacb","ccab","ccabbc","bc","ba"]}' },
   ],
 }
 

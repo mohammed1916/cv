@@ -18,6 +18,10 @@ const definition = {
     { label: 'Email', input: '"LeetCode@LeetCode.com"' },
     { label: 'Phone, 10 digits', input: '"1(234)567-890"' },
     { label: 'Phone, country code', input: '"86-(10)12345678"' },
+    { label: 'Shortest email', input: '"ab@cd.ef"' },
+    { label: 'Ten digit phone', input: '"1234567890"' },
+    { label: 'Thirteen digit phone with plus', input: '"+1234567890123"' },
+    { label: 'Long run: longest email', input: '"czhnkydldl@riwaswhsqc.mfaveokhqv"' },
   ],
 }
 export default function MaskingPersonalInformation() {

@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Suffix', input: '["time","me","bell"]' },
     { label: 'Repeat', input: '["pot","top","pot","opt"]' },
+    { label: 'Single word', input: '["a"]' },
+    { label: 'Duplicate word', input: '["pot","pot"]' },
+    { label: 'Longest words and suffixes', input: '["abcdefg","defg","g"]' },
+    { label: 'Long run: 200 words', input: '["cee","adecb","d","f","efade","bdadh","g","agfcba","dfecdhf","cfgeccc","a","debdd","ehe","eeab","a","bege","hch","g","agafa","cda","chg","hcdgbc","d","gffeca","hdg","fce","abc","dh","cedbbcb","ffhh","hhbcgd","dhchbbe","chghgd","dddh","cfcc","cadb","bhff","h","hehh","g","gf","a","fdfaggh","dfghgh","cbhhe","cbfa","cbaabdb","eag","fedgbgh","hc","ffb","ebdehc","fgfb","fgcgbfe","eedg","ceagb","hehc","ag","e","e","cddfga","a","ga","dee","cadgebc","gbh","edhcaac","gbbbfde","gggbcf","ffdcceb","dhcg","hddbg","fgbgbdh","hegeeb","cad","dhbeea","hehbg","c","eegagbh","afced","deaef","dcfeadf","gcbag","decbhb","ag","abeggga","d","gcba","hghbdhf","afb","ebfbbbh","bh","haghche","afgfde","aadfhgb","fcffeff","bdfcgbd","fg","gfgbf","ghefe","hhcfg","gcddd","baefffg","f","ddd","g","accdbda","dd","hfgh","bfdg","da","fabbh","fedghba","fbdhae","a","ae","f","bh","dfd","edfg","dbeb","bad","abd","dfda","ceace","eaceffg","b","ae","e","ca","acfghcg","dbad","bd","eahb","dffdbcb","a","becc","ffgdhfc","ccdeabh","behgg","fahd","bgcdea","ab","a","g","f","efh","fdf","g","efbeebh","d","hhfebc","hcbc","fece","fgffcb","ehcbcbf","dddcf","bddf","bheb","cagb","ebdcbg","cdahh","ecedh","ddaadg","gddhdb","e","bb","ghcde","hbeg","eg","d","habgba","gdgecf","aacbhhd","acaebaf","gfgg","dc","dgbcec","h","fcb","efdf","fefd","hdcff","fdh","fefdfd","aagfb","dahgfaf","gh","bdfced","eegab","fgca","hghd","fchha","affbchd","cgcdgb","deach","gbgg","accbhcc","bebbfhh","h"]' },
   ],
 }
 

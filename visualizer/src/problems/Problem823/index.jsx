@@ -17,6 +17,10 @@ const definition = {
   examples: [
     { label: 'Three roots', input: '{"arr":[3,6,9,18]}' },
     { label: 'Chain', input: '{"arr":[2,3,6,12,36]}' },
+    { label: 'Single value', input: '{"arr":[7]}' },
+    { label: 'No value divides another', input: '{"arr":[2,3,5,7]}' },
+    { label: 'Smallest and largest allowed', input: '{"arr":[2,1000000000]}' },
+    { label: 'Long run: 40 values', input: '{"arr":[890,68,31,407,237,303,137,950,145,652,297,600,944,802,694,606,591,118,164,565,394,957,627,583,39,248,414,706,375,730,85,717,138,336,393,991,604,281,167,10]}' },
   ],
 }
 

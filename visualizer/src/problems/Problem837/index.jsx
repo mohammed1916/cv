@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Wide draws', input: '{"n":12,"k":7,"maxPts":8}' },
     { label: 'Early stop', input: '{"n":6,"k":3,"maxPts":5}' },
+    { label: 'Target zero', input: '{"n":0,"k":0,"maxPts":1}' },
+    { label: 'Every draw stays below n', input: '{"n":10,"k":1,"maxPts":1}' },
+    { label: 'Largest values', input: '{"n":10000,"k":10000,"maxPts":10000}' },
+    { label: 'Long run: n 9000, k 8000', input: '{"n":9000,"k":8000,"maxPts":9999}' },
   ],
 }
 

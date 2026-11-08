@@ -13,7 +13,7 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'Target (JSON integer)',
   url: 'https://leetcode.com/problems/race-car/',
   complexity: 'O(target log target) time, O(target) space. Each target tries O(log target) turn-around points.',
-  examples: [{ label: 'Target 3', input: '3' }, { label: 'Target 6', input: '6' }, { label: 'Target 100', input: '100' }],
+  examples: [{ label: 'Target 3', input: '3' }, { label: 'Target 6', input: '6' }, { label: 'Target 100', input: '100' }, { label: 'Smallest target', input: '1' }, { label: 'Power of two', input: '16' }, { label: 'Largest target', input: '2000' }, { label: 'Long run: target 1999', input: '1999' }],
 }
 export default function RaceCar() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>

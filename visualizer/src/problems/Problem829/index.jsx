@@ -13,7 +13,7 @@ const definition = {
   parse: parseInput, build: buildTrace, code, python, inputLabel: 'n (JSON integer)',
   url: 'https://leetcode.com/problems/consecutive-numbers-sum/',
   complexity: 'O(sqrt(n)) time since k(k+1)/2 <= n; O(1) extra space (this view stores the valid runs).',
-  examples: [{ label: 'n = 5', input: '5' }, { label: 'n = 9', input: '9' }, { label: 'n = 15', input: '15' }],
+  examples: [{ label: 'n = 5', input: '5' }, { label: 'n = 9', input: '9' }, { label: 'n = 15', input: '15' }, { label: 'Smallest n', input: '1' }, { label: 'Power of two', input: '8' }, { label: 'Largest allowed n', input: '10000000' }, { label: 'Long run: n = 9999991', input: '9999991' }],
 }
 export default function ConsecutiveNumbersSum() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {

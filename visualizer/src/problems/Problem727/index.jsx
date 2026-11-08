@@ -19,6 +19,10 @@ const definition = {
     { label: 'Scattered', input: '{"s1":"xaybzcx","s2":"abc"}' },
     { label: 'Order matters', input: '{"s1":"cbaxbca","s2":"ba"}' },
     { label: 'No match', input: '{"s1":"qwerty","s2":"yq"}' },
+    { label: 'Single letter', input: '{"s1":"a","s2":"a"}' },
+    { label: 'Repeated letters', input: '{"s1":"aaaa","s2":"aa"}' },
+    { label: 'Longest allowed, 40 letters', input: '{"s1":"abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd","s2":"dcbadcbadcbadcbadcbadcbadcbadcbadcbadcba"}' },
+    { label: 'Long run: 40 letters', input: '{"s1":"babbcaccbbbbccababbbccbbbbcaacbccacbbcaa","s2":"ccbbabcccccabcbbacabbacbbcbbbcaabcabaabc"}' },
   ],
 }
 

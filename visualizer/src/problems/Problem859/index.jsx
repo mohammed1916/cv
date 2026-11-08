@@ -18,6 +18,10 @@ const definition = {
     { label: 'Cross swap', input: '{"s":"tenor","goal":"notre"}' },
     { label: 'Repeat', input: '{"s":"lemon","goal":"lemon"}' },
     { label: 'Unique', input: '{"s":"fizz","goal":"fizz"}' },
+    { label: 'Single letter, no swap possible', input: '{"s":"a","goal":"a"}' },
+    { label: 'Equal letters, swap identical', input: '{"s":"aa","goal":"aa"}' },
+    { label: 'Longest strings', input: '{"s":"abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab","goal":"baababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab"}' },
+    { label: 'Long run: 200 letters, one swap', input: '{"s":"jmshteknplljdtmymalfrlqqouubrofysejsildqqopdeyusitabaupusrlrlwzyhnptzikpnwwluvwbbpnezlwsvcvfcjldbbkhzrrfkwsqzibovjhlvmyhaayuntdxowybayujsubraztpbdmubjjzwdodidxvqiwuzgnmkoayamhkihbglxudrpnlyvwhuthxglaf","goal":"jmshteknplljdtmymalfrlqqouubrofysejsildqqopdeyusitabaupusrlrlwzyhnptzikpnwwluvwbbpnezlwsvcvfcjldbbkhzrrfkwsqzibovjhlvmyhaayuntdxowybayujsubraztpbdmubjjzwdodidxvqiwuzgnmkoayamhkihbglxudrpnlyvwhuthxlgaf"}' },
   ],
 }
 

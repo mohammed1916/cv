@@ -17,6 +17,10 @@ const definition = {
     { label: 'Example 1', input: '["9001 discuss.leetcode.com"]' },
     { label: 'Example 2', input: '["900 google.mail.com","50 yahoo.com","1 intel.mail.com","5 wiki.org"]' },
     { label: 'Single label', input: '["7 com","3 a.com"]' },
+    { label: 'Single count', input: '["1 x"]' },
+    { label: 'Equal counts for different domains', input: '["5 a.com","5 b.com"]' },
+    { label: 'Largest count and deepest domain', input: '["999999 a.b.c.d"]' },
+    { label: 'Long run: 10 domains', input: '["4381 b.c.d.org","6429 x.y.z","4206 b.c.d.org","1602 b.c.d.org","9594 b.c.d.org","1275 a.com","379 b.c.d.org","85 mail.google.com","328 org","6092 com"]' },
   ],
 }
 export default function SubdomainVisitCount() {

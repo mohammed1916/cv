@@ -18,6 +18,10 @@ const definition = {
   examples: [
     { label: 'Pairs', input: '[3,3,5,6,9]' },
     { label: 'Neighbours', input: '[2,4,4,5,7]' },
+    { label: 'Single value', input: '[1]' },
+    { label: 'Equal values', input: '[7,7,7,7]' },
+    { label: 'Alternating extremes', input: '[20,1,20,1,20,1,20,1,20,1,20,1]' },
+    { label: 'Long run: 12 values', input: '[11,8,11,2,12,19,7,12,20,2,12,10]' },
   ],
 }
 

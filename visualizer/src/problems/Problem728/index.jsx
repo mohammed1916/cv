@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Small range', input: '{"left":8,"right":16}' },
     { label: 'Two digits', input: '{"left":30,"right":40}' },
+    { label: 'Single number', input: '{"left":1,"right":1}' },
+    { label: 'Excluded because of a zero digit', input: '{"left":10,"right":10}' },
+    { label: 'Upper bound', input: '{"left":9990,"right":10000}' },
+    { label: 'Long run: 1 to 10000', input: '{"left":1,"right":10000}' },
   ],
 }
 

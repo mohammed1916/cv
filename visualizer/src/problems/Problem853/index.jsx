@@ -18,6 +18,10 @@ const definition = {
     { label: 'Example 1', input: '{"target":12,"position":[10,8,0,5,3],"speed":[2,4,1,1,3]}' },
     { label: 'Example 2', input: '{"target":10,"position":[3],"speed":[3]}' },
     { label: 'Example 3', input: '{"target":100,"position":[0,2,4],"speed":[4,2,1]}' },
+    { label: 'Single car', input: '{"target":10,"position":[3],"speed":[2]}' },
+    { label: 'Equal speeds never catch up', input: '{"target":12,"position":[0,4],"speed":[2,2]}' },
+    { label: 'Largest target and speeds', input: '{"target":1000000,"position":[0,999999],"speed":[1000000,1]}' },
+    { label: 'Long run: 30 cars', input: '{"target":1000,"position":[701,487,756,24,803,924,485,521,362,960,8,835,173,299,149,798,775,650,774,140,886,648,665,3,531,604,873,347,529,106],"speed":[17,18,8,17,13,1,6,5,17,17,12,19,11,15,9,15,12,1,14,18,1,13,14,7,17,1,5,18,1,9]}' },
   ],
 }
 

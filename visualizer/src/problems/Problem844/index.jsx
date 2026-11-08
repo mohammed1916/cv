@@ -18,6 +18,10 @@ const definition = {
     { label: 'Erased', input: '{"s":"ab#zz","t":"ab#czz"}' },
     { label: 'Differs', input: '{"s":"xy##","t":"x#y"}' },
     { label: 'Empty result', input: '{"s":"p##q","t":"#q#"}' },
+    { label: 'Single letters match', input: '{"s":"a","t":"a"}' },
+    { label: 'Both erase to empty', input: '{"s":"a#","t":"b#"}' },
+    { label: 'Longest strings, both empty', input: '{"s":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa####################################################################################################","t":"b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#b#"}' },
+    { label: 'Long run: 200 characters', input: '{"s":"#abb#b#b###aa#ab#b###bbb#ba###babb####a#baababbaaaaab#ab###ba##abaa#bab#babbaa#baaa##aba##baa##bab#bb#b#ab#bb#ab#bbbabbabaab#ab#bb##bbabaa####aa####aa#b##aba###a#aaaa#bbaabbbb#aaaa#b#a#bbaa##b###aaa#b","t":"b#####a#abbaaab##aba#bb#b#ba#baaa#a##b#abbb##babbbbb#abaa##baa#ba##abaaa###aabbba#babbaba#bbbaaaabb#ba#####aaabaaabbab#baa##bbabb#####bbbaababaab#ab#b#a#b##abbbaa#ab#a##b#baa#ab##a#baa#b#bbab#aa##aa##"}' },
   ],
 }
 

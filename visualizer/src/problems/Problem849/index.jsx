@@ -16,6 +16,10 @@ const definition = {
   examples: [
     { label: 'Middle gap', input: '[1,0,0,0,1,0,0,0,0]' },
     { label: 'Edge gap', input: '[0,0,1,0,0,0]' },
+    { label: 'Two seats, one each', input: '[0,1]' },
+    { label: 'Equal gaps on both sides', input: '[1,0,0,1]' },
+    { label: 'Largest room, one long gap', input: '[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]' },
+    { label: 'Long run: 60 seats', input: '[0,0,0,0,1,0,1,0,0,1,1,1,0,0,1,1,0,1,1,0,0,1,1,0,0,1,1,1,1,0,0,1,1,0,1,0,0,1,1,0,0,0,1,0,1,1,0,1,0,1,0,0,0,1,0,0,0,0,1,1]' },
   ],
 }
 

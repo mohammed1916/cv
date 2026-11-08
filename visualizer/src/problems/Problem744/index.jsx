@@ -17,6 +17,10 @@ const definition = {
     { label: 'Middle', input: '{"letters":["c","f","j","m","q"],"target":"k"}' },
     { label: 'Wrap', input: '{"letters":["b","d","e"],"target":"f"}' },
     { label: 'Repeat', input: '{"letters":["a","a","c","c"],"target":"a"}' },
+    { label: 'Target equals a letter', input: '{"letters":["a","c","c","f"],"target":"c"}' },
+    { label: 'Wraps around', input: '{"letters":["a","z"],"target":"z"}' },
+    { label: 'Two letters', input: '{"letters":["x","y"],"target":"a"}' },
+    { label: 'Long run: 40 letters', input: '{"letters":["a","a","b","b","d","f","g","g","g","g","h","h","i","i","j","j","k","k","k","k","l","n","n","n","n","o","p","q","q","r","s","t","t","w","w","x","x","z","z","z"],"target":"m"}' },
   ],
 }
 

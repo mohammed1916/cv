@@ -19,6 +19,10 @@ const definition = {
     { label: 'Descent', input: '5423' },
     { label: 'Cascade', input: '1332' },
     { label: 'Ones', input: '1000' },
+    { label: 'Zero', input: '0' },
+    { label: 'Single digit', input: '9' },
+    { label: 'Largest value allowed', input: '1000000000' },
+    { label: 'Long run: nine digits', input: '987654321' },
   ],
 }
 

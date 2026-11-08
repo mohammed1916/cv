@@ -18,6 +18,10 @@ const definition = {
     { label: 'Example 1', input: '{"licensePlate": "1s3 PSt", "words": ["step", "steps", "stripe", "stepple"]}' },
     { label: 'Example 2', input: '{"licensePlate": "1s3 456", "words": ["looks", "pest", "stew", "show"]}' },
     { label: 'Tie', input: '{"licensePlate": "Ab", "words": ["xab", "bay", "ab"]}' },
+    { label: 'Single letter plate', input: '{"licensePlate":"A","words":["a"]}' },
+    { label: 'Tie in length keeps the first word', input: '{"licensePlate":"aa","words":["aab","baa"]}' },
+    { label: 'Digits and spaces ignored', input: '{"licensePlate":"7 b","words":["bb","b","zb"]}' },
+    { label: 'Long run: 40 words', input: '{"licensePlate":"a1b2c3d","words":["dcbaxyzz","zz","dzjxxtxa","ezhvuegrs","lntxvthjfwwbyyf","iaaednedvmbkc","ziqcad","tobdtv","hqwiuxmdwz","jyzvgxpnwoqa","zfivbqjany","ffr","pdwlhdbzlrexf","byuvlp","wgbzeinsgmdf","kdzavhjxsxste","fczw","osjyf","ovklwxyanqpzjx","ljokuwnzql","oro","dqzmwoypjhyzc","tpgjjtqsek","ieikexezzpi","uogdaixzfu","ycbfppurm","ofzt","eiikxlck","efguauwjectpcev","orun","iimfono","knxodyegvehb","wkwauz","gpi","ihjf","gmanhh","egby","tfe","aahsnyqsnyx","eskfzrdgnm"]}' },
   ],
 }
 
