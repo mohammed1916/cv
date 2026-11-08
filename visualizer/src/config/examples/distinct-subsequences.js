@@ -24,5 +24,20 @@ export default [
     "label": "Target longer",
     "s": "oak",
     "t": "oaks"
+  },
+  {
+    "label": "Smallest pair, target absent",
+    "s": "a",
+    "t": "b"
+  },
+  {
+    "label": "Repeated letter choices",
+    "s": "aaaaa",
+    "t": "aa"
+  },
+  {
+    "label": "Long run: 30 letters",
+    "s": "bbaaaabaaabbaaabababaaaabababb",
+    "t": "ab"
   }
 ];

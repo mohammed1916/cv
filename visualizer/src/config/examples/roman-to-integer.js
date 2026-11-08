@@ -19,5 +19,17 @@ export default [
   {
     "label": "Subtractive hundreds and tens",
     "s": "CMXLIV"
+  },
+  {
+    "label": "Subtractive in each place",
+    "s": "CDXCIX"
+  },
+  {
+    "label": "Repeated additive digits",
+    "s": "MMDCCLXXVIII"
+  },
+  {
+    "label": "Long run: 15 characters",
+    "s": "MMMDCCCLXXXVIII"
   }
 ];

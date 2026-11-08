@@ -19,5 +19,17 @@ export default [
   {
     "label": "One-sided path",
     "input": "[2,null,4,null,6]"
+  },
+  {
+    "label": "Single zero digit",
+    "input": "[0]"
+  },
+  {
+    "label": "Boundary digits",
+    "input": "[9,9,9,9,9]"
+  },
+  {
+    "label": "Long run: 15 digits",
+    "input": "[0,2,5,0,6,8,8,3,2,0,7,2,6,9,4]"
   }
 ];

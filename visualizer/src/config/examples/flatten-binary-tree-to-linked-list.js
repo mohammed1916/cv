@@ -56,5 +56,47 @@ export default [
   {
     "label": "Empty tree",
     "arr": []
+  },
+  {
+    "label": "Equal values flatten in order",
+    "arr": [
+      3,
+      3,
+      3,
+      3,
+      3
+    ]
+  },
+  {
+    "label": "Boundary values at the limit",
+    "arr": [
+      100,
+      -100,
+      100,
+      null,
+      null,
+      -100,
+      100
+    ]
+  },
+  {
+    "label": "Long run: 15 values",
+    "arr": [
+      45,
+      25,
+      -48,
+      65,
+      80,
+      26,
+      89,
+      53,
+      44,
+      31,
+      -98,
+      58,
+      -76,
+      16,
+      -99
+    ]
   }
 ];

@@ -15,5 +15,17 @@ export default [
   {
     "label": "Only the highest bit is set",
     "input": "{\"n\":128}"
-  }
+  },
+  {
+    "label": "Smallest positive value",
+    "input": "{\"n\":1}"
+  },
+  {
+    "label": "Largest n allowed",
+    "input": "{\"n\":1000000000}"
+  },
+  {
+    "label": "Long run: n near the limit",
+    "input": "{\"n\":987654321}"
+  },
 ];

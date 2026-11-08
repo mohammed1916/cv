@@ -24,5 +24,20 @@ export default [
     "label": "Single letter",
     "s": "Q",
     "input": "Q"
+  },
+  {
+    "label": "Equal characters",
+    "s": "aaaa",
+    "input": "{\"s\":\"aaaa\"}"
+  },
+  {
+    "label": "Boundary length with punctuation",
+    "s": "Ab,Ab,Ab,Ab,Ab,Ab,Ab,Ab,Ab,Ab,Ab,Ab,Ab,Ab,Ab,Ab,Ab,Ab,Ab,Ab,",
+    "input": "{\"s\":\"Ab,Ab,Ab,Ab,Ab,Ab,Ab,Ab,Ab,Ab,Ab,Ab,Ab,Ab,Ab,Ab,Ab,Ab,Ab,Ab,\"}"
+  },
+  {
+    "label": "Long run: 60 letters",
+    "s": "zpsjfyrdahekfybmreelrgmavmqzizyxjzdrxosivghvyeoypfnfqjeyjfft",
+    "input": "{\"s\":\"zpsjfyrdahekfybmreelrgmavmqzizyxjzdrxosivghvyeoypfnfqjeyjfft\"}"
   }
 ];

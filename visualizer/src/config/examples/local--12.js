@@ -19,5 +19,17 @@ export default [
   {
     "label": "Only additive groups",
     "num": 2778
+  },
+  {
+    "label": "Repeated thousands and hundreds",
+    "num": 3333
+  },
+  {
+    "label": "Every place subtractive",
+    "num": 3949
+  },
+  {
+    "label": "Long run: many additive symbols",
+    "num": 2888
   }
 ];

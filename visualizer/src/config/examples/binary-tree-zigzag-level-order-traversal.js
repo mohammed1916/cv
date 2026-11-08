@@ -56,5 +56,47 @@ export default [
   {
     "label": "Empty tree",
     "root": []
+  },
+  {
+    "label": "Equal values on every level",
+    "root": [
+      4,
+      4,
+      4,
+      4,
+      4
+    ]
+  },
+  {
+    "label": "Boundary values with gaps",
+    "root": [
+      100,
+      -100,
+      100,
+      null,
+      null,
+      -100,
+      100
+    ]
+  },
+  {
+    "label": "Long run: 15 values",
+    "root": [
+      -3,
+      31,
+      60,
+      -46,
+      19,
+      -36,
+      -61,
+      -25,
+      -17,
+      -95,
+      70,
+      -67,
+      -98,
+      -59,
+      90
+    ]
   }
 ];

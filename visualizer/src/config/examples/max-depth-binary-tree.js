@@ -56,5 +56,46 @@ export default [
   {
     "label": "Empty tree",
     "arr": []
+  },
+  {
+    "label": "Equal values on a chain",
+    "arr": [
+      1,
+      1,
+      null,
+      1,
+      null,
+      1
+    ]
+  },
+  {
+    "label": "Negative limit values",
+    "arr": [
+      -100,
+      null,
+      -100,
+      null,
+      -100
+    ]
+  },
+  {
+    "label": "Long run: 15 values",
+    "arr": [
+      1,
+      12,
+      50,
+      37,
+      43,
+      61,
+      99,
+      37,
+      43,
+      44,
+      0,
+      -74,
+      -78,
+      39,
+      -92
+    ]
   }
 ];

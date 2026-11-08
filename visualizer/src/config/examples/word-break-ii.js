@@ -27,5 +27,26 @@ export default [
       "s": "meadow",
       "wordDict": "[\"meadow\"]"
     }
+  },
+  {
+    "label": "Smallest single word",
+    "values": {
+      "s": "a",
+      "wordDict": "[\"a\"]"
+    }
+  },
+  {
+    "label": "Equal word choices",
+    "values": {
+      "s": "aaaa",
+      "wordDict": "[\"a\",\"aa\"]"
+    }
+  },
+  {
+    "label": "Long run: 20 letters",
+    "values": {
+      "s": "cabcaabccaababccaabc",
+      "wordDict": "[\"ab\",\"c\",\"abc\",\"ca\"]"
+    }
   }
 ];

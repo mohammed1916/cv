@@ -15,5 +15,21 @@ export default [
   {
     "label": "Single indivisible package",
     "input": "{\"weights\":[23],\"days\":1}"
-  }
+  },
+  {
+    "label": "Single package",
+    "input": "{\"weights\":[5],\"days\":1}"
+  },
+  {
+    "label": "Equal weights split evenly",
+    "input": "{\"weights\":[3,3,3,3],\"days\":2}"
+  },
+  {
+    "label": "Twelve heavy packages, one day each",
+    "input": "{\"weights\":[100,100,100,100,100,100,100,100,100,100,100,100],\"days\":12}"
+  },
+  {
+    "label": "Long run: 12 packages",
+    "input": "{\"weights\":[37,5,74,53,61,100,99,86,16,84,85,60],\"days\":5}"
+  },
 ];

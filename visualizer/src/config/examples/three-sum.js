@@ -52,5 +52,49 @@ export default [
       2,
       5
     ]
+  },
+  {
+    "label": "Equal values yield one triple",
+    "nums": [
+      -2,
+      -2,
+      4,
+      4,
+      -2
+    ]
+  },
+  {
+    "label": "Extreme values at the limit",
+    "nums": [
+      -10,
+      10,
+      -10,
+      10,
+      0,
+      -10,
+      10,
+      0,
+      5,
+      -5,
+      10,
+      -10
+    ]
+  },
+  {
+    "label": "Long run: 12 values",
+    "nums": [
+      1,
+      8,
+      -9,
+      8,
+      -7,
+      8,
+      -5,
+      -5,
+      -10,
+      10,
+      1,
+      -6
+    ]
   }
 ];

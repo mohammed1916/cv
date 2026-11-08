@@ -15,5 +15,9 @@ export default [
   {
     "label": "No valid distinct-digit solution",
     "equation": "A + B = AA"
-  }
+  },
+  { "label": "Single letter", "equation": "A = A" },
+  { "label": "Doubling with equal digits", "equation": "AA + AA = BB" },
+  { "label": "Four words, five letters", "equation": "ABCD + DCBA + BDCA + CABD = EEEEE" },
+  { "label": "Long run: random five-letter puzzle", "equation": "DAEB + AAED + CDCB = ADADD" }
 ];

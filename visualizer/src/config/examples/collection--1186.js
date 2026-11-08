@@ -15,5 +15,21 @@ export default [
   {
     "label": "Single negative cannot be deleted to empty",
     "input": "{\"arr\":[-11]}"
+  },
+  {
+    "label": "Single value",
+    "input": "{\"arr\":[7]}"
+  },
+  {
+    "label": "Single extreme negative",
+    "input": "{\"arr\":[-10000]}"
+  },
+  {
+    "label": "Largest magnitudes",
+    "input": "{\"arr\":[10000,-10000,10000]}"
+  },
+  {
+    "label": "Long run: 40 values",
+    "input": "{\"arr\":[-2224,7516,3556,-5817,-381,754,-3426,8537,8615,683,-5803,-5307,-281,3524,-1848,2278,5910,4341,5190,8841,-7971,7014,-5249,-5758,9126,2528,-2469,-3697,-3909,8791,9861,-3928,-6725,724,5134,-8235,8961,-4428,3935,6314]}"
   }
 ];

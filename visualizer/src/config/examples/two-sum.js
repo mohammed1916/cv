@@ -44,5 +44,49 @@ export default [
       -4
     ],
     "target": 9
+  },
+  {
+    "label": "Smallest pair",
+    "nums": [
+      1,
+      2
+    ],
+    "target": 3
+  },
+  {
+    "label": "Boundary values at the limit",
+    "nums": [
+      1000,
+      -1000,
+      1000,
+      -1000
+    ],
+    "target": 2000
+  },
+  {
+    "label": "Long run: 20 values",
+    "nums": [
+      -484,
+      -630,
+      542,
+      -837,
+      5,
+      -792,
+      -723,
+      897,
+      616,
+      -449,
+      -105,
+      406,
+      430,
+      -253,
+      -794,
+      621,
+      479,
+      742,
+      -76,
+      830
+    ],
+    "target": -95
   }
 ];

@@ -48,5 +48,42 @@ export default [
       "stream"
     ],
     "input": "river | lake, stream"
+  },
+  {
+    "label": "Smallest segmentable",
+    "s": "a",
+    "dict": [
+      "a"
+    ],
+    "input": "a | a"
+  },
+  {
+    "label": "Repeated short word",
+    "s": "aaaa",
+    "dict": [
+      "a",
+      "aa"
+    ],
+    "input": "aaaa | a, aa"
+  },
+  {
+    "label": "Boundary length 50",
+    "s": "ababababababababababababababababababababababababab",
+    "dict": [
+      "ab",
+      "a"
+    ],
+    "input": "ababababababababababababababababababababababababab | ab, a"
+  },
+  {
+    "label": "Long run: 50 letters",
+    "s": "abcabcababbcababcabbabcbcababccaabababcababcabcaba",
+    "dict": [
+      "ab",
+      "abc",
+      "ca",
+      "b"
+    ],
+    "input": "abcabcababbcababcabbabcbcababccaabababcababcabcaba | ab, abc, ca, b"
   }
 ];

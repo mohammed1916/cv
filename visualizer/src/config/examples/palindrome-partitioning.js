@@ -23,5 +23,17 @@ export default [
   {
     "label": "Single letter",
     "s": "v"
+  },
+  {
+    "label": "Repeated letters, many cuts",
+    "s": "aaaa"
+  },
+  {
+    "label": "Maximum length, no long palindrome",
+    "s": "abcdefghijklmnop"
+  },
+  {
+    "label": "Long run: 16 letters",
+    "s": "aaabbbaabaaabbba"
   }
 ];

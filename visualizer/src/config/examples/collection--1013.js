@@ -15,5 +15,21 @@ export default [
   {
     "label": "Divisible total but no valid pair of cuts",
     "input": "{\"arr\":[2,2,2,3]}"
-  }
+  },
+  {
+    "label": "Three zeros",
+    "input": "{\"arr\":[0,0,0]}"
+  },
+  {
+    "label": "Equal values",
+    "input": "{\"arr\":[4,4,4,4,4]}"
+  },
+  {
+    "label": "Twelve values at the extremes",
+    "input": "{\"arr\":[10,-10,10,-10,10,-10,10,-10,10,-10,10,-10]}"
+  },
+  {
+    "label": "Long run: 12 values",
+    "input": "{\"arr\":[6,2,-1,9,-8,-5,7,-10,-3,-9,-5,-8]}"
+  },
 ];

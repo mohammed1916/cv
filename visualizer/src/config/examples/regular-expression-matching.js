@@ -24,5 +24,25 @@ export default [
     "label": "Empty through stars",
     "s": "",
     "p": "a*b*"
+  },
+  {
+    "label": "Empty text",
+    "s": "",
+    "p": "a*"
+  },
+  {
+    "label": "Repeated starred letter",
+    "s": "aaaa",
+    "p": "a*"
+  },
+  {
+    "label": "Maximum pattern length",
+    "s": "aaaaaaaaaa",
+    "p": "a*a*a*a*a*"
+  },
+  {
+    "label": "Long run: ten characters",
+    "s": "aaaaaaaaaa",
+    "p": ".*a*b*.*"
   }
 ];

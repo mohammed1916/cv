@@ -57,5 +57,44 @@ export default [
   {
     "label": "Empty",
     "arr": []
+  },
+  {
+    "label": "Boundary values at the limit",
+    "arr": [
+      1000,
+      -1000
+    ]
+  },
+  {
+    "label": "Equal leaves at the same depth",
+    "arr": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "label": "Long run: 15 values",
+    "arr": [
+      319,
+      809,
+      -188,
+      162,
+      90,
+      -636,
+      113,
+      679,
+      634,
+      151,
+      -883,
+      783,
+      636,
+      -774,
+      435
+    ]
   }
 ];

@@ -59,5 +59,49 @@ export default [
   {
     "label": "Empty tree",
     "arr": []
+  },
+  {
+    "label": "Equal values stay balanced",
+    "arr": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "label": "Boundary values with a far leaf",
+    "arr": [
+      100,
+      -100,
+      100,
+      null,
+      null,
+      null,
+      -100
+    ]
+  },
+  {
+    "label": "Long run: 15 values",
+    "arr": [
+      28,
+      100,
+      -9,
+      -67,
+      -15,
+      40,
+      53,
+      6,
+      3,
+      77,
+      -19,
+      86,
+      44,
+      25,
+      24
+    ]
   }
 ];

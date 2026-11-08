@@ -15,5 +15,21 @@ export default [
   {
     "label": "Unrelated characters",
     "input": "{\"text\":\"cedar\"}"
+  },
+  {
+    "label": "Single letter",
+    "input": "{\"text\":\"b\"}"
+  },
+  {
+    "label": "One complete target word",
+    "input": "{\"text\":\"balloon\"}"
+  },
+  {
+    "label": "Two complete copies",
+    "input": "{\"text\":\"balloonballoon\"}"
+  },
+  {
+    "label": "Long run: 200 letters",
+    "input": "{\"text\":\"zzbaaznoyanonnnlzzlxlnnnxyonablbayzzznnazlnlolbabzzbazanyxoxblnnxznllzzolxbxnoxooozaybnlbxlyblyazxonxlynbozaoynynyzaxzxlblbxxaxloaxazxonlbbzbxoxoxyzznaalyylbylnzzxboylynnynzzonznnazlallbaboylxyxyxbxla\"}"
   }
 ];

@@ -44,5 +44,47 @@ export default [
       "line",
       "fine"
     ]
+  },
+  {
+    "label": "Single letter words",
+    "beginWord": "a",
+    "endWord": "b",
+    "wordList": [
+      "b"
+    ]
+  },
+  {
+    "label": "Equal shortest routes",
+    "beginWord": "cab",
+    "endWord": "dab",
+    "wordList": [
+      "cob",
+      "dob",
+      "cat",
+      "dat",
+      "dab"
+    ]
+  },
+  {
+    "label": "Five letter boundary",
+    "beginWord": "zzzzz",
+    "endWord": "zzzza",
+    "wordList": [
+      "zzzzy",
+      "zzzza"
+    ]
+  },
+  {
+    "label": "Long run: chain of six words",
+    "beginWord": "aaaaa",
+    "endWord": "bbbbb",
+    "wordList": [
+      "aaaab",
+      "aaabb",
+      "aabbb",
+      "abbbb",
+      "bbbbb",
+      "aaaba"
+    ]
   }
 ];

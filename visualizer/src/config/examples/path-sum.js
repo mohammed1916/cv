@@ -73,5 +73,52 @@ export default [
     "label": "Empty",
     "root": [],
     "targetSum": 0
+  },
+  {
+    "label": "Equal values on one route",
+    "root": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "targetSum": 3
+  },
+  {
+    "label": "Boundary values at the limit",
+    "root": [
+      1000,
+      -1000,
+      1000,
+      null,
+      null,
+      null,
+      -1000
+    ],
+    "targetSum": 1000
+  },
+  {
+    "label": "Long run: 15 values",
+    "root": [
+      36,
+      62,
+      -29,
+      99,
+      33,
+      33,
+      -30,
+      -71,
+      -77,
+      -46,
+      42,
+      72,
+      84,
+      20,
+      63
+    ],
+    "targetSum": 37
   }
 ];

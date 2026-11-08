@@ -19,5 +19,17 @@ export default [
   {
     "label": "Six rows",
     "n": 6
+  },
+  {
+    "label": "Four rows",
+    "n": 4
+  },
+  {
+    "label": "Five rows",
+    "n": 5
+  },
+  {
+    "label": "Maximum size run",
+    "n": 6
   }
 ];

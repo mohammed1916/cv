@@ -15,5 +15,21 @@ export default [
   {
     "label": "One song cannot pair with itself",
     "input": "{\"time\":[180]}"
-  }
+  },
+  {
+    "label": "Shortest song",
+    "input": "{\"time\":[1]}"
+  },
+  {
+    "label": "Five equal songs pair up",
+    "input": "{\"time\":[30,30,30,30,30]}"
+  },
+  {
+    "label": "Twenty-four songs at the limit",
+    "input": "{\"time\":[500,500,500,500,500,500,500,500,500,500,500,500,500,500,500,500,500,500,500,500,500,500,500,500]}"
+  },
+  {
+    "label": "Long run: 24 songs",
+    "input": "{\"time\":[135,148,91,122,228,409,213,306,492,459,431,434,258,338,434,405,122,402,196,308,108,103,427,17]}"
+  },
 ];

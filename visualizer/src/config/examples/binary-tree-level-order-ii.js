@@ -98,5 +98,46 @@ export default [
     "label": "Empty tree",
     "root": [],
     "arr": []
+  },
+  {
+    "label": "Equal values on every level",
+    "arr": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "label": "Boundary values at the limit",
+    "arr": [
+      1000,
+      -1000,
+      null,
+      -1000
+    ]
+  },
+  {
+    "label": "Long run: 15 values",
+    "arr": [
+      144,
+      -444,
+      202,
+      853,
+      -859,
+      -496,
+      -245,
+      214,
+      233,
+      602,
+      -91,
+      -940,
+      -172,
+      -682,
+      -338
+    ]
   }
 ];
