@@ -1,3 +1,4 @@
+import { trackEvent } from '../analytics/client';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { accessCall, backendEnabled, checkoutEnabled } from './firebase';
@@ -60,6 +61,7 @@ export function Plans({ access, reason, onHideForever }) {
     try {
       await loadCheckout();
       const order = await accessCall('createProOrder', { plan });
+      trackEvent('begin_checkout', { plan, currency: 'INR', value: order.amount / 100 });
       const checkout = new window.Razorpay({
         key: order.key, order_id: order.id, amount: order.amount, currency: 'INR',
         name: 'Visualizer Pro', description: `Pro · ${PLANS[plan].label}`,
@@ -68,6 +70,7 @@ export function Plans({ access, reason, onHideForever }) {
         handler: async (payment) => {
           try {
             await accessCall('verifyProPayment', payment);
+            trackEvent('purchase', { plan, currency: 'INR', value: order.amount / 100, transaction_id: payment.razorpay_payment_id });
             await access.refresh(); setMessage('Payment verified. Your Pro access is ready.');
           } catch { setMessage('We could not confirm access yet. Use Refresh access below; do not pay again.'); }
           finally { setPending(false); restoreDialog(); }

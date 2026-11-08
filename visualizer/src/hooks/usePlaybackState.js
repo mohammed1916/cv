@@ -1,3 +1,4 @@
+import { trackEvent } from '../analytics/client';
 import { useState, useRef, useCallback, useEffect } from 'react'
 import { useNarrativePlayback } from '../components/shared/NarrativeTraceContext'
 
@@ -39,6 +40,18 @@ export function usePlaybackState(stepsLength, initialSpeed = 500, legacySetCurre
   const canNext = stepIndex < resolvedStepsLength - 1
   const canPrev = stepIndex > 0
 
+  const trackedRun = useRef(false)
+  useEffect(() => {
+    if (isPlaying && !isDone && !trackedRun.current && resolvedStepsLength > 0) {
+      trackedRun.current = true
+      trackEvent('visualization_start')
+    }
+    if (trackedRun.current && isDone && resolvedStepsLength > 1) {
+      trackedRun.current = false
+      trackEvent('visualization_complete')
+    }
+  }, [isPlaying, isDone, resolvedStepsLength])
+
   // Step forward
   const stepForward = useCallback(() => {
     setStepIndex((prev) => {
@@ -66,6 +79,7 @@ export function usePlaybackState(stepsLength, initialSpeed = 500, legacySetCurre
 
   // Reset to beginning
   const handleReset = useCallback(() => {
+    trackedRun.current = false
     setStepIndex(-1)
     setIsPlaying(false)
   }, [setStepIndex])

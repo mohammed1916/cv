@@ -1,3 +1,4 @@
+import { trackEvent } from '../analytics/client';
 import { useCallback, useEffect, useState } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth, googleSignIn, accessCall, backendEnabled } from "./firebase";
@@ -46,6 +47,7 @@ export function useAccess() {
     setBusy(true);
     try {
       await googleSignIn();
+      trackEvent('login', { method: 'google' });
     } catch (err) {
       if (err.code !== "auth/popup-closed-by-user")
         setError(

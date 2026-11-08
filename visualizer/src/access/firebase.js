@@ -1,7 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { getFunctions, httpsCallable } from 'firebase/functions';
-import { getAnalytics, isSupported } from 'firebase/analytics';
 
 // Public web configuration; credentials and payment secrets never go here.
 const app = initializeApp({
@@ -13,8 +12,8 @@ const app = initializeApp({
   appId: '1:209065055325:web:b29889d959eb39a48ca9b4',
   measurementId: 'G-N7TMKW7YXH',
 });
-// Unique users are counted from Google Analytics page views (measurementId above).
-isSupported().then(ok => { if (ok) getAnalytics(app); }).catch(() => {});
+export const firebaseApp = app;
+// Analytics is initialized only after opt-in by analytics/client.js.
 export const auth = getAuth(app);
 const functions = getFunctions(app, 'asia-south1');
 export const backendEnabled = import.meta.env.VITE_ACCESS_BACKEND_ENABLED === 'true';

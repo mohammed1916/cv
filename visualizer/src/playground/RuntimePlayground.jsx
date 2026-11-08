@@ -1,3 +1,4 @@
+import { trackEvent } from '../analytics/client';
 import WebMCPHelp from "./WebMCPHelp";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -396,6 +397,7 @@ export default function RuntimePlayground({
   const executeSource = useCallback(
     async (runSource, { play = false } = {}) => {
       const runEntry = isPython ? pythonEntry : null;
+      if (runSource.trim()) trackEvent('playground_run', { language: isPython ? 'python' : 'javascript' });
       if (!runSource.trim()) {
         setPhase("idle");
         setExecutionError(null);

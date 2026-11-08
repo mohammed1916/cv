@@ -17,7 +17,8 @@ import React, {
   Suspense,
 } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Analytics } from "@vercel/analytics/react";
+import PrivacyPreferences from './analytics/PrivacyPreferences';
+import { trackPage, trackEvent, openPrivacyPreferences } from './analytics/client';
 
 import ProblemScaffold from "./components/panels/ProblemScaffold";
 import ProblemNavigation from "./components/ProblemNavigation";
@@ -341,6 +342,7 @@ class ErrorBoundary extends Component {
 
   componentDidCatch(error, info) {
     console.error("Visualizer error:", error, info);
+    trackEvent("app_error", { error_type: "render" });
   }
 
   render() {
@@ -461,6 +463,7 @@ function SettingsMenu({
             <a href="https://visualizer.pro">visualizer.pro</a>
           </p>
           <a href="/privacy.html">Privacy Policy</a>
+          <button type="button" onClick={openPrivacyPreferences}>Analytics preferences</button>
           <p
             className="trademark-disclaimer"
             style={{
@@ -953,6 +956,11 @@ export default function App() {
   });
   const [track, setTrack] = useState(TRACKS.LEETCODE);
   const [showPrerequisites, setShowPrerequisites] = useState(() => window.location.hash === '#prerequisites');
+  useEffect(() => {
+    const path = showPrerequisites ? '/prerequisites' : showPlayground ? '/playground' : active ? `/problems/${active.slug}` : '/';
+    const title = showPrerequisites ? 'Learning prerequisites' : showPlayground ? 'Code playground' : active ? `${active.number || ''} ${active.title}`.trim() : 'Algorithm catalogue';
+    trackPage({ path, title: `${title} | Visualizer Pro`, problem_id: active && !showPlayground && !showPrerequisites ? String(active.number || active.slug) : undefined });
+  }, [active, showPlayground, showPrerequisites]);
   const [layoutWidth, setLayoutWidth] = useState("full");
   const [navigationTransitionsEnabled, setNavigationTransitionsEnabled] =
     useState(() => {
@@ -1161,9 +1169,7 @@ export default function App() {
         {(active || showPlayground) && <ZoomControls />}
         <PrerequisiteDrawer open={showPrerequisites} onOpen={openPrerequisites} onClose={closePrerequisites} onSelect={selectProblem} pro={access.pro} />
         <div className={`app layout-${layoutWidth}`}>
-          {import.meta.env.VITE_ENABLE_VERCEL_ANALYTICS !== "false" && (
-            <Analytics />
-          )}
+          <PrivacyPreferences />
           {!active && !showPlayground && !showPrerequisites && (
             <nav
               className="app-toolbar marketing-nav"

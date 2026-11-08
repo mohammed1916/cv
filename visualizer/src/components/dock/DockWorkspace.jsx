@@ -1,3 +1,4 @@
+import { trackEvent } from '../../analytics/client';
 import {
   useCallback,
   useEffect,
@@ -279,7 +280,8 @@ export default function DockWorkspace({ panels, onPanelReady }) {
 
   const collapse = useCallback(
     (id, collapsed = true) => {
-      const commit = () =>
+      const commit = () => {
+        trackEvent('panel_toggle', { panel_type: ['visual', 'code', 'reasoning', 'story'].includes(id) ? id : 'other', visible: !collapsed });
         setHidden((current) => {
           const next = new Set(current);
 
@@ -291,6 +293,7 @@ export default function DockWorkspace({ panels, onPanelReady }) {
 
           return next;
         });
+      };
 
       if (flights.current.has(id)) {
         if (collapsed) return;
