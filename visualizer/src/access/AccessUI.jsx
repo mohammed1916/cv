@@ -13,14 +13,14 @@ const CYCLES = {
   annual: { period: 'per year', key: 'annual' },
 };
 
-export function AccessDialog({ title, onClose, children }) {
+export function AccessDialog({ title, onClose, children, glass = false }) {
   const ref = useRef(null);
   useEffect(() => {
     const dialog = ref.current;
     dialog.showModal();
     return () => dialog.close();
   }, []);
-  return createPortal(<dialog className="access-dialog" ref={ref} onCancel={onClose} aria-labelledby="access-title">
+  return createPortal(<dialog className={`access-dialog${glass ? " access-dialog-glass" : ""}`} ref={ref} onCancel={onClose} aria-labelledby="access-title">
     <div className="access-dialog-head">
       <h2 id="access-title">{title}</h2>
       <button className="access-close" onClick={onClose} aria-label="Close">×</button>
@@ -42,10 +42,10 @@ export function GoogleSignIn({ access }) {
 export function BetaSignIn({ access, title }) {
   return <section className="beta-signin-card" aria-label="Sign in for free beta access">
     <span className="beta-signin-eyebrow">FREE BETA ACCESS</span>
-    <h2>{title || 'See the idea. Understand the code.'}</h2>
+    <h2>{title || 'Sign in. Explore everything.'}</h2>
     <p>Sign in to unlock every Pro problem for free during beta.</p>
     <GoogleSignIn access={access} />
-    <small>No payment. No trial timer. Free problems stay open to everyone.</small>
+    <small>Free during beta. No payment needed.</small>
     {access.error && <p role="alert">{access.error}</p>}
     <a href="/privacy.html">Privacy policy</a>
   </section>;

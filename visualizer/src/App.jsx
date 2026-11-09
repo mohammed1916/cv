@@ -1226,6 +1226,7 @@ export default function App() {
           </div>
           {dialog && (
             <AccessDialog
+              glass={dialog === "account" && !access.user && BETA_FREE_ACCESS}
               title={
                 dialog === "account"
                   ? "Your Visualizer Pro account"
