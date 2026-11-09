@@ -40,6 +40,8 @@ import { useAccess } from "./access/useAccess";
 import { isFreeProblem, accessLabel, PLANS, BETA_FREE_ACCESS } from "./access/policy";
 import {
   AccessDialog,
+  BetaSignIn,
+  GoogleSignIn,
   Plans,
   PlaygroundGate,
 } from "./access/AccessUI";
@@ -1026,7 +1028,7 @@ export default function App() {
   };
 
   const selectProblem = (problem) => {
-    if (!isFreeProblem(problem) && !access.pro) {
+    if (!BETA_FREE_ACCESS && !isFreeProblem(problem) && !access.pro) {
       setLockedTitle(problem.title);
       setDialog("plans");
       return;
@@ -1072,7 +1074,7 @@ export default function App() {
           setDialog("plans");
         }}
       >
-        {BETA_FREE_ACCESS ? "Free beta · All features" : access.debugPro
+        {BETA_FREE_ACCESS ? "Free beta · Pro access" : access.debugPro
           ? "Pro · DEV"
           : access.pro
             ? (access.account?.trialActive ? "Free trial · Pro" : "Pro account")
@@ -1135,10 +1137,12 @@ export default function App() {
     </div>
   ) : active && !isFreeProblem(active) && !access.pro ? (
     <div key="locked-problem" className="access-gate">
-      <h2>{active.title} · Pro</h2>
-      <p>Sign in with a Pro account to open this visualizer.</p>
+      {BETA_FREE_ACCESS ? <BetaSignIn access={access} title={active.title} /> : <>
+        <h2>{active.title} · Pro</h2>
+        <p>Sign in with a Pro account to open this visualizer.</p>
+        <button onClick={() => setDialog("plans")}>View plans</button>
+      </>}
       <button onClick={goBack}>Back to problems</button>
-      <button onClick={() => setDialog("plans")}>View plans</button>
     </div>
   ) : active ? (
     <ProblemPage
@@ -1252,18 +1256,10 @@ export default function App() {
                     </>
                   ) : (
                     <>
-                      <p>
-                        {BETA_FREE_ACCESS ? 'Sign-in is optional. Every visualizer and the playground are free during beta.' : 'Use Google to access the Pro subscription linked to your account.'}
-                      </p>
-                      <div className="access-signin">
-                        <button
-                          className="access-primary"
-                          disabled={access.busy}
-                          onClick={access.login}
-                        >
-                          Continue with Google
-                        </button>
-                      </div>
+                      {BETA_FREE_ACCESS ? <BetaSignIn access={access} /> : <>
+                        <p>Use Google to access the Pro subscription linked to your account.</p>
+                        <GoogleSignIn access={access} />
+                      </>}
                     </>
                   )}
                   <p role="alert">{access.error}</p>

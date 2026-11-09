@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth, googleSignIn, accessCall, backendEnabled } from "./firebase";
 import { createAccountCache } from './accountCache';
-import { BETA_FREE_ACCESS } from "./policy";
+import { BETA_FREE_ACCESS, hasProAccess } from "./policy";
 
 const accountCache = createAccountCache({
   load: async uid => {
@@ -109,7 +109,7 @@ export function useAccess() {
   const realPro = Boolean(
     account?.pro && (account.complimentary || !account.expiresAt || account.expiresAt > now),
   );
-  const pro = debugPro || realPro || BETA_FREE_ACCESS;
+  const pro = hasProAccess({ user, realPro, debugPro });
 
   return {
     user,

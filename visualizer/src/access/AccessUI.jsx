@@ -31,8 +31,24 @@ export function AccessDialog({ title, onClose, children }) {
 
 export function GoogleSignIn({ access }) {
   return <div className="access-signin">
-    <button className="access-primary" disabled={access.busy} onClick={access.login}>Continue with Google</button>
+    <button className="glass-signin-button" disabled={access.busy || !access.ready} onClick={access.login}>
+      <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.6 12.2c0-.7-.1-1.4-.2-2.1H12v4h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.4ZM12 22c2.7 0 5- .9 6.6-2.4l-3.2-2.5c-.9.6-2 .9-3.4.9-2.6 0-4.8-1.7-5.6-4H3.1v2.6A10 10 0 0 0 12 22ZM6.4 14a6 6 0 0 1 0-4V7.4H3.1a10 10 0 0 0 0 9.2L6.4 14ZM12 6c1.5 0 2.8.5 3.8 1.5l2.8-2.8A9.5 9.5 0 0 0 12 2a10 10 0 0 0-8.9 5.4L6.4 10C7.2 7.7 9.4 6 12 6Z"/></svg>
+      <span>{access.busy ? 'Signing in…' : !access.ready ? 'Checking sign-in…' : 'Continue with Google'}</span>
+      <span aria-hidden="true">↗</span>
+    </button>
   </div>;
+}
+
+export function BetaSignIn({ access, title }) {
+  return <section className="beta-signin-card" aria-label="Sign in for free beta access">
+    <span className="beta-signin-eyebrow">FREE BETA ACCESS</span>
+    <h2>{title || 'See the idea. Understand the code.'}</h2>
+    <p>Sign in to unlock every Pro problem for free during beta.</p>
+    <GoogleSignIn access={access} />
+    <small>No payment. No trial timer. Free problems stay open to everyone.</small>
+    {access.error && <p role="alert">{access.error}</p>}
+    <a href="/privacy.html">Privacy policy</a>
+  </section>;
 }
 
 let checkoutScript;
@@ -85,7 +101,7 @@ export function Plans({ access, reason }) {
     } catch (err) { setMessage(err.message || 'Checkout could not start. Please retry.'); setPending(false); restoreDialog(); }
   }
   return <>
-    <p>{BETA_FREE_ACCESS ? 'Everything is free during beta. No account or payment required.' : reason || 'Learn the foundations free. Go further with Pro.'}</p>
+    <p>{BETA_FREE_ACCESS ? 'Everything is free during beta. Sign in to unlock Pro problems; no payment required.' : reason || 'Learn the foundations free. Go further with Pro.'}</p>
     <div className="plan-grid">
       <section className="plan-card"><span className="access-eyebrow">FREE</span><h3>₹0</h3>
         <ul><li>All Basics and Easy visualizers</li><li>{FREE_MEDIUM.size} selected Medium problems</li><li>Beginner tutorial</li><li>Free visualizer practice without a daily timer</li></ul>
@@ -106,7 +122,7 @@ export function Plans({ access, reason }) {
         </div>
         {!BETA_FREE_ACCESS && cycle === 'annual' && <p className="plans-saving">Save ₹{YEARLY_SAVING_RUPEES.toLocaleString('en-IN')} a year</p>}
         <ul><li>All implemented problem visualizers unlocked</li><li>Unlimited code playground time</li><li>New visualizers included during beta</li></ul>
-        {BETA_FREE_ACCESS ? <p role="status"><strong>Beta / alpha stage: everything is unlocked.</strong> Every problem and the code playground are free for everyone until the website goes into production.</p> : <p>Try Pro free for 3 days. No card required and no automatic charge.</p>}
+        {BETA_FREE_ACCESS ? <p role="status"><strong>Beta stage: no payment required.</strong> Sign in for free access to every Pro problem during beta. Free problems and the code playground remain open without sign-in.</p> : <p>Try Pro free for 3 days. No card required and no automatic charge.</p>}
         {access.account?.trialActive && access.pro && <p role="status">Free trial active until {new Date(access.account.trialEndsAt).toLocaleString()}.</p>}
         {!BETA_FREE_ACCESS && (!access.user || access.account?.trialAvailable) && <button className="access-primary" disabled={pending || access.busy || !backendEnabled} onClick={access.startTrial}>
           {access.user ? 'Start 3-day free trial' : 'Sign in to start your free trial'}

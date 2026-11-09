@@ -8,3 +8,18 @@
 .workspace-demo { display: grid; grid-template-columns: 1.4fr 1fr; gap: 6px; margin: 16px 0; padding: 10px; border: 1px solid var(--border); border-radius: 10px; }
 .workspace-demo > div { padding: 18px 10px; background: var(--surface2); color: var(--text); border: 1px solid var(--border); border-radius: 6px; }
 .workspace-demo .demo-playback { grid-column: 1 / -1; padding: 10px; border-style: dashed; border-color: var(--accent, #a78bfa); }
+
+/* Blue/teal glass, with a quiet animated light around the sign-in control. */
+.beta-signin-card { position:relative; isolation:isolate; overflow:hidden; box-sizing:border-box; width:min(100%, 520px); margin:20px auto; padding:clamp(24px,5vw,44px); border:1px solid #b6dcff35; border-radius:26px; text-align:left; color:#f1f7ff; background:linear-gradient(125deg,#101b53ed,#102848ed 65%,#124e55e8); backdrop-filter:blur(22px); box-shadow:inset 0 1px 0 #ffffff20,0 24px 70px #06133235; }
+.beta-signin-card::before { content:''; position:absolute; z-index:-1; inset:-50%; pointer-events:none; background:radial-gradient(ellipse at 75% 25%,#29d4ca26,transparent 48%),radial-gradient(ellipse at 20% 70%,#7275ff26,transparent 45%); }
+.beta-signin-eyebrow { color:#9ddde8; font-size:10px; letter-spacing:.16em; font-weight:700; }
+.beta-signin-card h2 { color:#f5f8ff; font-size:clamp(23px,4vw,30px); line-height:1.2; margin:16px 0; }
+.beta-signin-card p { color:#c6d5e9; font-size:14px; line-height:1.6; }
+.beta-signin-card small { display:block; color:#b6c8de; font-size:12px; line-height:1.6; }
+.beta-signin-card a { display:inline-block; margin-top:18px; color:#a5e6eb; font-size:12px; text-underline-offset:4px; }
+.access-signin .glass-signin-button { position:relative; isolation:isolate; overflow:hidden; display:flex; justify-content:center; align-items:center; gap:12px; width:100%; max-width:390px; min-height:54px; padding:14px 20px; border:1px solid #acdfff70; border-radius:16px; color:#fff; background:linear-gradient(115deg,#253471,#163d60,#1a6167,#253471); background-size:300% 100%; box-shadow:inset 0 1px 0 #ffffff30,0 4px 20px #0a204938; font-size:14px; font-weight:600; cursor:pointer; animation:signin-light 8s ease-in-out infinite; transition:box-shadow 200ms ease,transform 200ms ease; }
+.access-signin .glass-signin-button:hover:not(:disabled) { box-shadow:inset 0 1px 0 #ffffff50,0 0 24px #57cfdc40; transform:translateY(-1px); }
+.access-signin .glass-signin-button:focus-visible { outline:3px solid #64dbe9; outline-offset:4px; }
+.access-signin .glass-signin-button:disabled { opacity:.65; cursor:wait; animation:none; }
+@keyframes signin-light { 0%,100% { background-position:0% 50%; } 50% { background-position:100% 50%; } }
+@media(prefers-reduced-motion:reduce) { .access-signin .glass-signin-button { animation:none; transition:none; } .access-signin .glass-signin-button:hover:not(:disabled) { transform:none; } }

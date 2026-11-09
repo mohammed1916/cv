@@ -1,4 +1,4 @@
-// While the site is in beta, Pro and the code playground are free for everyone.
+// While the site is in beta, Pro problems are free after sign-in; the playground remains free for everyone.
 // The cloud-function access checks are skipped while this is true. Set it to
 // false to require an active Pro account for the playground.
 export const BETA_FREE_ACCESS = true;
@@ -19,6 +19,10 @@ export function isFreeProblem(problem) {
 }
 export function accessLabel(problem, pro = false) {
   if (!problem.implemented) return 'Coming soon';
-  if (BETA_FREE_ACCESS) return 'Free in beta';
+  if (BETA_FREE_ACCESS) return isFreeProblem(problem) ? 'Free' : pro ? 'Beta · Unlocked' : 'Free beta · Sign in';
   return isFreeProblem(problem) ? 'Free' : pro ? 'Pro · Unlocked' : '🔒 Pro';
+}
+
+export function hasProAccess({ user, realPro = false, debugPro = false }, beta = BETA_FREE_ACCESS) {
+  return beta ? Boolean(user) : Boolean(realPro || debugPro);
 }
