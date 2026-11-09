@@ -143,6 +143,26 @@
   cursor: default;
 }
 
+.collapsed-bar {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+}
+
+.compact-playback {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.compact-timeline {
+  flex: 1;
+  min-width: 60px;
+  accent-color: var(--primary);
+}
+
 .floating-panel-collapse {
   border:
     1px solid var(--border);

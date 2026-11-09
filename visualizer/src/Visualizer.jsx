@@ -1,6 +1,7 @@
 import { useState, useCallback, useMemo } from "react";
 import DockableWorkspace from "./components/shared/DockableWorkspace";
 import FloatingPanel from "./components/shared/FloatingPanel";
+import CompactPlayback from "./components/shared/CompactPlayback";
 import CodeTracePanel from "./components/CodeTracePanel";
 import PlaybackControls from "./components/PlaybackControls";
 import PatternOverlay from "./components/PatternOverlay";
@@ -542,7 +543,23 @@ export default function Visualizer({ problem }) {
         panels={dockPanels}
         initialLayout={{ rows: [["code", "viz"], ["vars"]], minimized: [] }}
       />
-      <FloatingPanel title="Playback Controls">
+      <FloatingPanel
+        title="Playback Controls"
+        collapsedBar={
+          <CompactPlayback
+            isPlaying={isPlaying}
+            isDone={isDone}
+            onPlayToggle={togglePlay}
+            onPrev={stepBack}
+            onNext={stepForward}
+            prevDisabled={stepIndex < 0}
+            nextDisabled={isDone}
+            stepIndex={stepIndex}
+            total={steps.length}
+            onSeek={setStepIndex}
+          />
+        }
+      >
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}

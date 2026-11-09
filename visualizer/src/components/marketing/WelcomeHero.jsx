@@ -23,7 +23,11 @@ export default function WelcomeHero({ onTutorial, onPlayground, onStart }) {
       <span className="welcome-eyebrow">Visualizer Pro / LEARN BY SEEING</span>
       <h1 id="welcome-title">Make algorithms<br /><em>click.</em></h1>
       <p>See the code. Follow the data. Build the intuition.<br />Explore problems step by step in a workspace that moves with you.</p>
-      <div className="welcome-actions"><button className="welcome-primary" onClick={onStart}>Explore Two Sum <span>↗</span></button><button onClick={onTutorial}>▶ Take the guided tour</button></div>
+      <div className="welcome-actions"><button className="welcome-primary" onClick={onStart}>Explore Two Sum <span>↗</span></button><button className="welcome-tour-light" onClick={onTutorial}>
+        <span className="tour-light-beam" aria-hidden="true" />
+        <span className="tour-light-play" aria-hidden="true">▶</span>
+        <span className="tour-light-label">Take the guided tour<span className="tour-light-illuminated" aria-hidden="true">Take the guided tour</span></span>
+      </button></div>
       <div className="welcome-meta">Free Basics &amp; Easy problems <span>·</span> Python &amp; JavaScript playground</div>
     </div>
     <div className={`welcome-visual ${paused ? 'is-paused' : ''}`}>

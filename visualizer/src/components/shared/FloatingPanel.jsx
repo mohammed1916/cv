@@ -12,6 +12,7 @@ import PanelScaleControl from "./PanelScaleControl";
 export default function FloatingPanel({
   title = "Panel",
   children,
+  collapsedBar = null,
   defaultPosition = null,
   defaultSize = { width: 460, height: 180 },
   storageKey = "floating-playback-size.v2",
@@ -386,7 +387,13 @@ export default function FloatingPanel({
         </button>
       </div>
 
-      {!collapsed && (
+      {collapsed ? (
+        collapsedBar && (
+          <div className="floating-panel-body collapsed-bar">
+            {collapsedBar}
+          </div>
+        )
+      ) : (
         <div className="floating-panel-body">
           {children}
         </div>
