@@ -1,0 +1,11 @@
+.rlt { display: grid; gap: 8px; }
+.rlt__svg { width: 100%; max-width: 480px; height: auto; }
+.rlt__node circle, .rlt__none rect { fill: var(--surface, #fff); stroke: currentColor; stroke-width: 2; }
+.rlt__node text, .rlt__none text { fill: currentColor; font-size: 13px; }
+.rlt__link { fill: none; stroke: currentColor; stroke-width: 2; opacity: .55; }
+.rlt__link.is-active, .rlt__link--transfer { opacity: 1; stroke-dasharray: 6 4; }
+.rlt__vars { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
+.rlt__vars dt { font-size: 11px; opacity: .7; }
+.rlt__vars dd { margin: 0; font-family: ui-monospace, monospace; }
+.rlt__note { font-size: 12px; opacity: .75; margin: 0; }
+@media (prefers-reduced-motion: reduce) { .rlt__link--transfer { transition: none; } }

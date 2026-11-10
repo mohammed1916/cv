@@ -132,3 +132,13 @@ Exact ID: 1207 (`src/problems/Problem1207`: `algorithm.js`, `tutorial.js`, `inde
 - View: the focused scene renders only the scanned element, its map entry and the transfer between them (or the claimed-set entry in the second pass); full mode is unchanged.
 - Evidence: `algorithm.test.mjs` 5/5 pass (`PYTHON=/usr/local/bin/python3`, Node v24.22.1); a scratch sequence check over six inputs confirmed tutorial fields, line mapping and every frame kind; `node node_modules/vite/bin/vite.js build` passes.
 - Not verified in a browser: live dock layout, backward stepping in the UI, and reduced motion.
+
+### Problem 206 — reverse linked list, pointer rewiring (directed)
+
+Exact ID: 206 (`src/problems/Problem206`: `algorithm.js`, `tutorial.js`, `ReverseTutorial.jsx`, `ReverseTutorial.css`, `index.jsx`). It was a legacy self-contained visualizer (`ReverseLinkedListVisualizer.jsx`, now unrouted and left in place) with no algorithm contract; it now uses `AlgorithmWorkspace`.
+
+- Trace: `init` (prev, then curr), a condition-only `check` per loop test (including the final curr = None test), `save` (nxt = curr.next), `rewire` (curr.next = prev, the only pointer write), `move_prev`, `move_curr`, and `result`. Input is a JSON array of 0 to 12 integers. Frame lines 3 to 10 match the 10-line displayed listing, which the test runs as Python.
+- Tutorial: `tutorial.js` authors reasons per kind; the save reason explains why nxt is saved before the pointer is overwritten.
+- View: `ReverseTutorial.jsx` consumes `useTutorialScene()` and shows only the focused slots (prev, curr, nxt, None as a box). The rewire scene animates one pointer path from the old link (curr to nxt) to the new link (curr to prev) via a `d` transfer.
+- Evidence: `algorithm.test.mjs` 7/7 pass with `PYTHON=/usr/local/bin/python3` and the nvm Node 24.22.1 runner (including the displayed Python run on 44 generated lists, the empty and single-node cases, and per-frame tutorial fields). `node node_modules/vite/bin/vite.js build` passes.
+- Not verified in a browser: the live transfer animation, reduced motion, backward stepping in the UI, and the dock layout.
