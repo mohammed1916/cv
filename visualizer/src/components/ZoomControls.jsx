@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef, useState } from 'react'
 import { useZoomControl } from '../context/ZoomContext'
 import './ZoomControls.css'
 
-export default function ZoomControls() {
+export default function ZoomControls({ embedded = false }) {
   const { zoom, setZoom } = useZoomControl()
   const panelRef = useRef(null)
   const dragRef = useRef(null)
@@ -43,9 +43,9 @@ export default function ZoomControls() {
     <div
       ref={panelRef}
       className="zoom-controls-panel"
-      style={position ? position : undefined}
+      style={!embedded && position ? position : undefined}
     >
-      <div className="zoom-controls-handle" onPointerDown={startDrag} title="Drag to move zoom controls" aria-label="Drag to move zoom controls">⠿</div>
+      {!embedded && <div className="zoom-controls-handle" onPointerDown={startDrag} title="Drag to move zoom controls" aria-label="Drag to move zoom controls">⠿</div>}
       <div className="zoom-controls-inner">
         <button
           type="button"

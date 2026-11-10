@@ -1,3 +1,4 @@
+import {serverStatus} from './serverStatus';
 import { motion, useReducedMotion } from 'framer-motion';
 import { useTutorialScene } from '../../components/shared/TutorialScene';
 
@@ -346,7 +347,7 @@ function Servers({ input, step }) {
                         <div className="bs-server-name">S{s}</div>
                         <div className="bs-server-info">
                             <strong>Server {s}</strong>
-                            <small>{isBusy ? `Busy until ${end}` : 'Available'}</small>
+                            <small>{serverStatus(step, s, input.k)}</small>
                         </div>
                         <div className="bs-server-count">
                             <strong>{step.handled[s]}</strong>
@@ -412,6 +413,7 @@ function Timeline({ input, step }) {
                         </g>
                     );
                 })}
+                {tutorial && currentJob && <text x={x(currentJob.end)} y={height - 7} textAnchor="end" className="bs-svg-label">finish={currentJob.end}</text>}
                 {step.request >= 0 && (
                     <g>
                         <line x1={x(step.clock)} x2={x(step.clock)}

@@ -1,3 +1,5 @@
+import {useTutorialScene} from '../../components/shared/TutorialScene';
+import SameTreeTutorial from './SameTreeTutorial';
 import authoredExamples0 from '../../config/examples/same-tree.js';
 import StoryPanel from "../../components/shared/StoryPanel";
 import { generateSteps } from "./algorithm";
@@ -133,6 +135,8 @@ export function TreeCanvas({
 
 // Scene for the workspace: the two trees side by side with the comparison verdict.
 export function SameTreeScene({ step }) {
+  const tutorial = useTutorialScene();
+  if (tutorial) return <SameTreeTutorial step={step} />;
   return (
     <div className="st-panel main">
       <div className="st-body">

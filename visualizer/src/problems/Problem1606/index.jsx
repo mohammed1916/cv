@@ -64,7 +64,7 @@ const phases = [
   { id: 'bisect-compare', label: 'Binary search', description: 'Compare midpoint and shrink the search interval.' },
   { id: 'bisect-result', label: 'Select', description: 'Choose the lower-bound server or wrap around.' },
   { id: 'key-select', label: 'Heap minimum', description: 'Choose the minimum virtual key.' },
-  { id: 'free-pop', label: 'Free heap pop', description: 'Remove the selected free-server key.' },
+  { id: 'free-pop', label: 'Reserve server', description: 'Remove the selected server from the free structure.' },
   { id: 'timeline-create', label: 'Execution interval', description: 'Create the request rectangle on its server timeline.' },
   { id: 'assign', label: 'Count request', description: 'Increment the selected server count.' },
   { id: 'busy-push', label: 'Schedule finish', description: 'Push finish time into the busy heap.' },

@@ -745,7 +745,7 @@
     }
 }
 .bs-tutorial .bs-heading, .bs-tutorial .bs-explanation, .bs-tutorial .bs-loop { display:none; }
-.bs-tutorial .bs-flow-grid { grid-template-areas:none; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:56px; padding:28px 0; }
+.bs-tutorial .bs-flow-grid { grid-template-areas:none; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:48px; padding:12px 0; }
 .bs-tutorial .bs-panel { grid-area:auto!important; min-width:0; }
 .bs-tutorial .bs-panel-header span { display:none; }
 .bs-tutorial .bs-formula { font-size:12px; }
@@ -755,3 +755,7 @@
 .bs-page { display:flex; flex-direction:column; height:100%; min-height:0; overflow:hidden; }
 .bs-page > .bs-solution-switch { flex:0 0 auto; }
 .bs-page > .algorithm-workspace { flex:1; height:auto; min-height:0; }
+
+.bs-tutorial .bs-timeline-scroll svg { display:block; width:100%; height:auto; }
+.bs-tutorial .tutorial-heap h3, .bs-tutorial .bs-formula > span { display:none; }
+.bs-tutorial .tutorial-heap svg { height:170px; }

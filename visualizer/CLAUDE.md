@@ -1,3 +1,7 @@
+# Latest user direction: directed tutorial stories — 2026-11-10
+
+Read [the directed tutorial implementation and handoff](docs/tutorials/DIRECTED-TUTORIAL-HANDOFF.md). The user wants one relevant scene at a time: code, its visual effect, then the next operation; reason-first adds a separate causal explanation. Problems 1606 and 100 are the reference integrations. Input and Story must be movable dock panels with footer restore controls. Home/problem View menus combine zoom and layout width. Preserve concurrent workspace edits and verify actual code-to-state correspondence before expanding this pattern.
+
 # Latest user direction: problem-specific teaching visuals — 2026-11-07
 
 Read [the 1882 reference repair and concrete continuation instructions](docs/reviews/2026-11-07-unique-teaching-visuals.md). Improve visuals that hide the unique problem mechanics. Reuse, compose, or introduce shared components as appropriate. Start with 1834, 1871, and 1879; preserve their different selection rules. This instruction supersedes older requirements-only restrictions for this task.

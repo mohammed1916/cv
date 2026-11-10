@@ -137,7 +137,7 @@ export function parseInput(text) {
 
 // generateSteps owns the tree snapshots and comparisons. Each frame gets a phase and the pseudocode line it performs.
 const PHASE_FOR_LEGACY = { 2: 'start', 3: 'check', 4: 'both-empty', 5: 'one-empty', 6: 'mismatch', 7: 'match', 8: 'mismatch', 9: 'left', 10: 'right', 11: 'return' }
-const PSEUDO_LINE_FOR_LEGACY = { 2: 2, 3: 2, 4: 2, 5: 3, 6: 3, 7: 4, 8: 4, 9: 5, 10: 6, 11: 7 }
+const PSEUDO_LINE_FOR_LEGACY = { 2: 1, 3: 2, 4: 2, 5: 3, 6: 3, 7: 4, 8: 4, 9: 5, 10: 6, 11: 7 }
 
 export function buildTrace(input) {
   const { p, q } = parseInput(input)
@@ -188,16 +188,21 @@ def is_same_tree(p, q):
             return True
         if a is None or b is None:
             return False
-        return a.val == b.val and same(a.left, b.left) and same(a.right, b.right)
+        if a.val != b.val:
+            return False
+        left_ok = same(a.left, b.left)
+        right_ok = same(a.right, b.right)
+        return left_ok and right_ok
     return same(build(p), build(q))
 `
 
 // Maps each pseudocode activeLine to the Python line that performs the same action.
-export const pythonLineMap = {
-  2: 26,
-  3: 28,
-  4: 30,
-  5: 30,
-  6: 30,
-  7: 30,
-}
+export const pythonLineMap = Object.fromEntries([
+  [1, 'def is_same_tree'],
+  [2, 'if a is None and b is None'],
+  [3, 'if a is None or b is None'],
+  [4, 'if a.val != b.val'],
+  [5, 'left_ok ='],
+  [6, 'right_ok ='],
+  [7, 'return left_ok and right_ok'],
+].map(([line, text]) => [line, python.split('\n').findIndex(source => source.includes(text)) + 1]))

@@ -1,3 +1,4 @@
+import {sameTreeTutorial} from './tutorial';
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
 import { getExamples } from "../../config/examplesRegistry";
 import { SameTreeScene } from "./SameTreeVisualizer";
@@ -9,9 +10,9 @@ const definition = {
     { id: "start", label: "Start", description: "Begin the simultaneous walk from both roots." },
     { id: "check", label: "Position", description: "Look at the same position in both trees." },
     { id: "both-empty", label: "Both empty", description: "Both positions are empty, so they match." },
-    { id: "one-empty", label: "One empty", description: "Exactly one position is empty, so the trees differ." },
+    { id: "one-empty", label: "Check structure", description: "Check whether exactly one position is empty." },
     { id: "mismatch", label: "Mismatch", description: "The values differ, so the answer is false." },
-    { id: "match", label: "Values match", description: "The values match; check the children next." },
+    { id: "match", label: "Compare values", description: "Check whether the current node values match." },
     { id: "left", label: "Left", description: "Compare the left children." },
     { id: "right", label: "Right", description: "Compare the right children." },
     { id: "return", label: "Return", description: "Combine the child results." },
@@ -32,6 +33,7 @@ export default function SameTreeWorkspace() {
   return (
     <AlgorithmWorkspace
       definition={definition}
+      tutorial={sameTreeTutorial}
       renderVisual={({ step }) => <SameTreeScene step={step} />}
       renderReasoning={({ step }) => <p>{step.explanation ?? step.message}</p>}
     />

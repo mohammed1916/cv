@@ -1,3 +1,4 @@
+import ViewMenu from './components/ViewMenu';
 import { ALL_PROBLEMS } from './data/problemRoutes.js';
 import { createPortal } from 'react-dom';
 import { resolveVisualSelection } from './components/shared/visualSelection.js';
@@ -22,7 +23,7 @@ import { trackPage, trackEvent, openPrivacyPreferences } from './analytics/clien
 
 import ProblemScaffold from "./components/panels/ProblemScaffold";
 import ProblemNavigation from "./components/ProblemNavigation";
-import ZoomControls from "./components/ZoomControls";
+
 import { ZoomProvider } from "./context/ZoomContext";
 import ThemeToggle from "./components/ThemeToggle";
 import { ThemeProvider } from "./context/ThemeContext";
@@ -391,34 +392,6 @@ class ErrorBoundary extends Component {
 
 /* ── Sub-components ──────────────────────────────────────────────────── */
 
-function LayoutControls({ layoutWidth, onChange, compact = false }) {
-  return (
-    <div className={`layout-controls ${compact ? "compact" : ""}`}>
-      <span className="layout-label">Layout</span>
-      <div className="layout-pill">
-        <button
-          className={`layout-btn ${layoutWidth === "normal" ? "active" : ""}`}
-          onClick={() => onChange("normal")}
-        >
-          Normal
-        </button>
-        <button
-          className={`layout-btn ${layoutWidth === "wide" ? "active" : ""}`}
-          onClick={() => onChange("wide")}
-        >
-          Wide
-        </button>
-        <button
-          className={`layout-btn ${layoutWidth === "full" ? "active" : ""}`}
-          onClick={() => onChange("full")}
-        >
-          Full
-        </button>
-      </div>
-    </div>
-  );
-}
-
 function SettingsMenu({
   navigationTransitionsEnabled,
   onToggleNavigationTransitions,
@@ -538,11 +511,7 @@ function ProblemPage({
         >
           {problem.difficulty}
         </span>
-        <LayoutControls
-          layoutWidth={layoutWidth}
-          onChange={onLayoutChange}
-          compact
-        />
+        <ViewMenu layoutWidth={layoutWidth} onLayoutChange={onLayoutChange} />
         <div className="problem-utilities">{utilityControls}</div>
       </header>
       <ProblemNavigation
@@ -635,8 +604,6 @@ function HomePage({
   onTrackChange,
   onSelect,
   onOpenPlayground,
-  layoutWidth,
-  onLayoutChange,
   enableTransitions,
 }) {
   const [catalogProblems, setCatalogProblems] = useState([]);
@@ -818,7 +785,7 @@ function HomePage({
           <CreateVisualizerButton onClick={onOpenPlayground} />
 
 
-          <LayoutControls layoutWidth={layoutWidth} onChange={onLayoutChange} />
+
         </div>
 
         <div className="catalog-meta">
@@ -1175,7 +1142,7 @@ export default function App() {
   return (
     <ThemeProvider>
       <ZoomProvider>
-        {(active || showPlayground) && <ZoomControls />}
+        {showPlayground && <div className="playground-view-menu"><ViewMenu layoutWidth={layoutWidth} onLayoutChange={setLayoutWidth} /></div>}
         <PrerequisiteDrawer open={showPrerequisites} onOpen={openPrerequisites} onClose={closePrerequisites} onSelect={selectProblem} pro={access.pro} />
         <div className={`app layout-${layoutWidth}`}>
           <PrivacyPreferences />
@@ -1192,10 +1159,7 @@ export default function App() {
                 <small>VISUALIZER Pro</small>
               </a>
               <div className="marketing-nav-actions">
-                <details className="marketing-view">
-                  <summary>View</summary>
-                  <ZoomControls />
-                </details>
+                <ViewMenu layoutWidth={layoutWidth} onLayoutChange={setLayoutWidth} />
                 <button className="access-toolbar-btn" onClick={openPlayground}>
                   Playground ↗
                 </button>

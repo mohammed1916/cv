@@ -344,9 +344,11 @@ export default function FloatingPanel({
           :::
         </span>
 
-        <span className="floating-panel-title">
-          {title}
-        </span>
+        {collapsed && collapsedBar ? collapsedBar : (
+          <span className="floating-panel-title">
+            {title}
+          </span>
+        )}
 
         {canDock && <button type="button" className="floating-panel-pin" onClick={() => docked ? floatPanel() : dockPanel()} title={docked ? 'Float panel over workspace' : 'Dock panel below workspace'}>{docked ? 'Float' : 'Dock'}</button>}
         {!docked && <button type="button" className="floating-panel-pin" title="Reset to compact size" aria-label="Reset playback to compact size" onClick={() => { setSize(defaultSize); setControlScale(100); }}>↺</button>}
@@ -387,13 +389,7 @@ export default function FloatingPanel({
         </button>
       </div>
 
-      {collapsed ? (
-        collapsedBar && (
-          <div className="floating-panel-body collapsed-bar">
-            {collapsedBar}
-          </div>
-        )
-      ) : (
+      {!collapsed && (
         <div className="floating-panel-body">
           {children}
         </div>

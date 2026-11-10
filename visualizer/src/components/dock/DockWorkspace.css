@@ -689,3 +689,6 @@
   .local-dock-shelf button, .local-dock-shelf-open { transition: none; }
   .local-dock-shelf button:hover, .local-dock-shelf button:active { transform: none; }
 }
+
+.local-dock-restore.is-drop-target { outline:2px dashed var(--primary); outline-offset:-3px; background:color-mix(in srgb,var(--primary) 12%,var(--surface)); }
+.local-dock-drop-label { font-size:12px; color:var(--primary); }

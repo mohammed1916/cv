@@ -269,3 +269,18 @@
 }
 
 .st-tree-wrap { max-width: 100%; overflow: auto; align-items: flex-start; }
+
+.same-tree-tutorial { display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); align-items:center; gap:14px; max-width:800px; margin:auto; }
+.same-tree-tutorial section { min-width:0; }
+.same-tree-tutorial svg { display:block; width:100%; height:240px; }
+.same-tree-tutorial circle { fill:var(--surface2); stroke:var(--border); stroke-width:2; }
+.same-tree-tutorial [data-active="true"] circle { stroke:var(--primary); fill:color-mix(in srgb,var(--primary) 20%,var(--surface)); }
+.same-tree-tutorial line { stroke:var(--border); stroke-width:2; }
+.same-tree-tutorial text { fill:var(--text); }
+.same-tree-tutorial small { color:var(--text-muted); }
+.same-tree-tutorial__empty { display:grid; gap:24px; justify-items:center; padding:24px 0; }
+.same-tree-tutorial__empty > span { font:24px monospace; }
+.same-tree-tutorial__result { text-align:center; font-size:48px; }
+
+.same-tree-tutorial [data-state="mismatch"] circle { stroke:var(--error,#ef4444); fill:color-mix(in srgb,var(--error,#ef4444) 16%,var(--surface)); }
+.same-tree-tutorial [data-state="match"] circle { stroke:var(--success,#22c55e); }

@@ -190,7 +190,7 @@ function RestoreSizeIcon() {
   );
 }
 
-export default function DockWorkspace({ panels, onPanelReady }) {
+export default function DockWorkspace({ panels, onPanelReady, initialCollapsed = [] }) {
   const container = useRef(null);
   const parking = useRef(null);
 
@@ -213,7 +213,7 @@ export default function DockWorkspace({ panels, onPanelReady }) {
     treeRef.current = tree;
   }, [tree]);
 
-  const [hidden, setHidden] = useState(new Set());
+  const [hidden, setHidden] = useState(() => new Set(initialCollapsed));
 
   useLayoutEffect(() => {
     for (const [id, from] of opening.current) {
@@ -235,6 +235,21 @@ export default function DockWorkspace({ panels, onPanelReady }) {
   }, [hidden]);
 
   const [dragged, setDragged] = useState(null);
+
+  // The source tab can disappear when dropped into the shelf; do not depend
+  // on that tab surviving long enough to receive dragend.
+  useEffect(() => {
+    const finish = () => setDragged(null);
+    const cancel = event => { if (event.key === 'Escape') finish(); };
+    window.addEventListener('dragend', finish);
+    window.addEventListener('drop', finish);
+    window.addEventListener('keydown', cancel);
+    return () => {
+      window.removeEventListener('dragend', finish);
+      window.removeEventListener('drop', finish);
+      window.removeEventListener('keydown', cancel);
+    };
+  }, []);
 
   const [entries, setEntries] = useState(new Map());
 
@@ -835,7 +850,10 @@ export default function DockWorkspace({ panels, onPanelReady }) {
         )}
       </div>
 
-      <footer className="local-dock-restore" aria-label="Panel visibility">
+      <footer className={`local-dock-restore ${dragged ? 'is-drop-target' : ''}`} aria-label="Panel visibility"
+        onDragOver={event => { if (dragged) { event.preventDefault(); event.dataTransfer.dropEffect = 'move'; } }}
+        onDrop={event => { if (dragged) { event.preventDefault(); collapse(dragged); setDragged(null); } }}>
+        {dragged && <span className="local-dock-drop-label">Drop here to minimize</span>}
         <div className="local-dock-shelf" aria-label="Toggle workspace panels">
         <span className="local-dock-shelf-label"><PanelShelfIcon /> Panels</span>
         {[...entries.keys()]

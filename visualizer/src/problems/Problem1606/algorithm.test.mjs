@@ -1,3 +1,5 @@
+import {serverStatus} from './serverStatus.js';
+import {code,alternativeCode} from './algorithm.js';
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -163,4 +165,29 @@ test('input validation', () => {
   assert.throws(() => parseInput(
     '{"k":2,"arrival":[1],"load":[0]}'
   ));
+});
+
+
+test('teaching frames connect finish calculation, reservation, and counting to their actual code', () => {
+  for (const [build, source] of [[buildTrace, code], [buildAlternativeTrace, alternativeCode]]) {
+    const run = build({k:2,arrival:[1,3,8],load:[4,2,1]});
+    for (let i=1;i<run.frames.length;i++) {
+      const frame=run.frames[i], previous=run.frames[i-1];
+      const text=source.find(line=>line.line===frame.activeLine)?.text;
+      assert.ok(text, `missing line for ${frame.phase}`);
+      if (frame.phase==='timeline-create') {
+        assert.match(text,/const end = t \+ load/);
+        assert.deepEqual(frame.handled,previous.handled,'timeline calculation must not increment handled counts');
+      }
+      if (frame.phase==='assign') {
+        assert.match(text,/handled\[server\]\+\+/);
+        assert.equal(frame.handled[frame.server],previous.handled[frame.server]+1);
+      }
+      if (frame.phase==='free-pop') {
+        assert.match(text,/free\.(pop|splice)/);
+        assert.equal(frame.free.length,previous.free.length-1);
+        assert.equal(serverStatus(frame,frame.server,run.input.k),'Reserved');
+      }
+    }
+  }
 });

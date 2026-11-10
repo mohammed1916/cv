@@ -25,20 +25,31 @@ export function serverTutorial({run,step}) {
     : step.loop?.id?.startsWith('bisect')
       ? ['Check the remaining search interval', 'Continue while an undecided interval remains; its boundary becomes the insertion or selection position.']
       : ['Check whether another request remains', 'Process each request once in arrival order, then compare the final handled counts.'];
-  const focus = step.phase === 'start' ? ['free']
-    : ['frequency','multimode','done'].includes(step.phase) ? ['result']
-    : step.transfer ? [...new Set([step.transfer.from,step.transfer.to])] : ['request'];
+  // Author the camera for the operation, rather than inherit every dashboard panel.
+  const focusByPhase = {
+    start:['free'], arrival:['request'], 'busy-pop':['busy'],
+    'key-calc':['free'], 'free-insert':['busy','free'], preferred:['request','free'],
+    'bisect-compare':['free'], 'bisect-result':['free','servers'],
+    'key-select':['free'], 'free-pop':['free','servers'],
+    'timeline-create':['timeline'], assign:['servers'], 'busy-push':['timeline','busy'],
+    drop:['request'], frequency:['result'], multimode:['result'], done:['result'],
+  };
+  const focus = step.phase === 'loop-check'
+    ? [step.loop?.id === 'release' ? 'busy' : step.loop?.id?.startsWith('bisect') ? 'free' : step.loop?.condition === false ? 'result' : 'request']
+    : focusByPhase[step.phase] || ['request'];
+  if (step.phase === 'free-pop' && step.approach !== 'virtual') entry = ['Reserve the selected server', 'Remove the selected ID from the sorted free list so this server cannot accept a second request while busy.'];
+  if (step.phase === 'preferred' && step.approach === 'virtual') entry = ['Check available capacity', 'If the free-key heap is empty, every server is occupied and this request must be dropped. Otherwise its minimum key will determine the server.'];
   const variables = {};
-  if (!['start','frequency','multimode','done'].includes(step.phase)) {
+  if (step.request >= 0 && !['start','frequency','multimode','done'].includes(step.phase)) {
     variables.request = `R${step.request}`;
     variables.time = step.clock;
   }
-  if (focus.includes('request') && step.request >= 0 && step.request < run.input.load.length) variables.duration = run.input.load[step.request];
+  if ((focus.includes('request') || focus.includes('timeline')) && step.request >= 0 && step.request < run.input.load.length) variables.duration = run.input.load[step.request];
   if (step.search) { variables.target=step.search.target; variables.bounds=`[${step.search.left}, ${step.search.right})`; }
   if (['key-calc','key-select','free-pop'].includes(step.phase) && step.key !== null) variables.key=step.key;
   if (['assign','timeline-create','busy-push'].includes(step.phase) && step.server !== null) variables.server=`S${step.server}`;
   if (step.phase==='busy-pop' && step.released!==null) variables.released=`S${step.released}`;
-  if (step.phase==='preferred') variables.preferred=`S${step.target}`;
+  if (step.phase==='preferred' && step.approach !== 'virtual') variables.preferred=`S${step.target}`;
   if (['frequency','multimode','done'].includes(step.phase) && step.best !== null) variables.maximum=step.best;
   const instruction = (step.approach === 'virtual' ? alternativeCode : code).find(line => line.line === step.activeLine)?.text;
   return {code:instruction,title:entry?.[0] || step.phase,reason:entry?.[1] || step.message,action:step.message,focus,variables};

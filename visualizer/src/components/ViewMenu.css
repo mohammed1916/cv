@@ -1,0 +1,10 @@
+.view-menu { position:relative; color:var(--text); font-size:13px; flex:0 0 auto; z-index:2000; }
+.view-menu > summary { cursor:pointer; padding:8px 12px; border:1px solid var(--border); border-radius:8px; list-style:none; background:var(--surface); }
+.view-menu[open] > summary { border-color:var(--primary); }
+.view-menu__popover { position:absolute; right:0; top:calc(100% + 8px); min-width:240px; max-width:calc(100vw - 24px); display:grid; gap:12px; padding:16px; border:1px solid var(--border); border-radius:12px; background:var(--surface); box-shadow:0 12px 40px #0003; }
+.view-menu__popover .zoom-controls-panel { position:static; transform:none; }
+.view-menu__popover .layout-controls { display:grid; gap:8px; margin:0; }
+.view-menu__popover .layout-pill { display:flex; }
+.playground-view-menu { position:fixed; right:16px; top:16px; z-index:2000; }
+
+.problem-header .view-menu .layout-label { display:block; }

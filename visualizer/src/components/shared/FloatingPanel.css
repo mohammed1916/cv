@@ -304,3 +304,13 @@ body.resizing-playback * {
 .floating-panel .pattern-legend-title { cursor: pointer; margin: 0; }
 
 .floating-panel-body > div > .pattern-legend { order: 2; }
+
+.compact-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  flex-shrink: 0;
+}

@@ -44,8 +44,9 @@ const BASE_CODE = [
   '    }',
   '    const pos = left === free.length ? 0 : left;',
   '    const server = free.splice(pos, 1)[0];',
+  '    const end = t + load[i];',
   '    handled[server]++;',
-  '    busy.push({end:t + load[i], server});',
+  '    busy.push({end, server});',
   '  }',
   '  const best = Math.max(...handled);',
   '  return handled.flatMap((v,s)=>v===best?[s]:[]);',
@@ -65,10 +66,12 @@ const VIRTUAL_CODE = [
   '      free.push(key);',
   '    }',
   '    if (!free.size) continue;',
-  '    const key = free.pop();',
+  '    const key = free.peek();',
+  '    free.pop();',
   '    const server = key % k;',
+  '    const end = t + load[i];',
   '    handled[server]++;',
-  '    busy.push({end:t + load[i], server});',
+  '    busy.push({end, server});',
   '  }',
   '  const best = Math.max(...handled);',
   '  return handled.flatMap((v,s)=>v===best?[s]:[]);',
@@ -105,8 +108,9 @@ def busiest_servers(k, arrival, load):
 
         pos = 0 if left == len(free) else left
         server = free.pop(pos)
+        end = t + d
         handled[server] += 1
-        heapq.heappush(busy, (t + d, server))
+        heapq.heappush(busy, (end, server))
 
     best = max(handled)
     return [s for s in range(k) if handled[s] == best]
@@ -128,10 +132,12 @@ def busiest_servers(k, arrival, load):
         if not free:
             continue
 
-        key = heapq.heappop(free)
+        key = free[0]
+        heapq.heappop(free)
         server = key % k
+        end = t + d
         handled[server] += 1
-        heapq.heappush(busy, (t + d, server))
+        heapq.heappush(busy, (end, server))
 
     best = max(handled)
     return [s for s in range(k) if handled[s] == best]
@@ -244,7 +250,7 @@ function createTrace(input, approach) {
   }
 
   emit('start', `${k} servers begin free.`,
-    'const handled', 'handled =');
+    'const free', 'free =');
 
   for (let i = 0; i < arrival.length; i++) {
     request = i;
@@ -345,9 +351,9 @@ function createTrace(input, approach) {
 
     loop = null;
     search = null;
-    flow('request', 'free', `${i} mod ${k}=${target}`);
+    flow('request', 'free', virtual ? `${freeHeap.size} free keys` : `${i} mod ${k}=${target}`);
     emit('preferred',
-      `R${i} prefers S${target}.`,
+      virtual ? `Check capacity for R${i}: ${freeHeap.size} free keys remain.` : `R${i} prefers S${target}.`,
       virtual ? 'if (!free.size)' : 'const target =',
       virtual ? 'if not free:' : 'target = i % k');
 
@@ -366,12 +372,12 @@ function createTrace(input, approach) {
       flow('free', 'servers', `${key} mod ${k}=S${key % k}`);
       emit('key-select',
         `The smallest virtual key is ${key}; select S${key % k}.`,
-        'const key = free.pop()', 'key = heapq.heappop(free)');
+        'const key = free.peek()', 'key = free[0]');
       const popped = freeHeap.pop();
       server = popped % k;
       heapFrame('free-pop',
         `Pop key ${popped} and recover server ${server}.`,
-        'const server = key % k', 'server = key % k', freeHeap);
+        'free.pop();', 'heapq.heappop(free)', freeHeap);
     } else {
       let left = 0, right = freeList.length, iteration = 0;
       while (true) {
@@ -427,10 +433,11 @@ function createTrace(input, approach) {
           : `Select free[${position}] = S${server}.`,
         'const pos =', 'pos = 0 if');
       freeList.splice(position, 1);
+      flow('free', 'servers', `reserve S${server}`);
+      emit('free-pop', `Remove S${server} from free[${position}] to reserve it.`,
+        'const server = free.splice', 'server = free.pop(pos)');
     }
 
-    handled[server]++;
-    assignments.push(server);
     const end = clock + load[i];
     const job = { request: i, server, start: clock, end };
     jobs.push(job);
@@ -440,9 +447,11 @@ function createTrace(input, approach) {
     flow('servers', 'timeline', `R${i}: ${clock} → ${end}`);
     emit('timeline-create',
       `Create R${i}'s execution rectangle on S${server}: [${clock}, ${end}).`,
-      'handled[server]++', 'handled[server] += 1',
+      'const end =', 'end = t + d',
       { timelineJob: i });
 
+    handled[server]++;
+    assignments.push(server);
     flow('servers', 'result', `S${server}: +1`);
     emit('assign',
       `S${server} has now handled ${handled[server]} requests.`,
@@ -452,7 +461,7 @@ function createTrace(input, approach) {
     flow('timeline', 'busy', `(${end}, S${server})`);
     heapFrame('busy-push',
       `Push finish time ${end} and S${server} into the busy heap.`,
-      'busy.push({end:', 'heapq.heappush(busy', busy);
+      'busy.push({end,', 'heapq.heappush(busy', busy);
     key = null;
   }
 
