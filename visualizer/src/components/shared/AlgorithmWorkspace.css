@@ -45,3 +45,9 @@
 .algorithm-sequence__cell[data-role="l"], .algorithm-sequence__cell[data-role="r"] { border: 2px solid var(--primary); font-weight: 700; }
 .algorithm-sequence nav { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 8px; }
 @container (max-width: 300px) { .algorithm-sequence__cell { min-width: 42px; } }
+
+.bs-page .algorithm-workspace__input { max-height: 28%; overflow: auto; }
+.bs-page .algorithm-workspace { overflow:hidden; }
+.bs-page .algorithm-workspace__dock { min-height:0; }
+.algorithm-workspace__dock > .local-dock-workspace { position: absolute; inset: 0; }
+.algorithm-workspace__dock .local-dock-restore { flex-shrink: 0; }

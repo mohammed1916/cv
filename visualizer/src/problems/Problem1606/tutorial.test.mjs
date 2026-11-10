@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {buildTrace,buildAlternativeTrace} from './algorithm.js';
+import {buildTrace,buildAlternativeTrace,code,alternativeCode} from './algorithm.js';
 import {serverTutorial} from './tutorial.js';
 import {tutorialHeapModel} from '../../components/shared/tutorialHeapModel.js';
 test('both approaches provide meaningful focus and reasons for arbitrary valid traces',()=>{
@@ -11,6 +11,9 @@ test('both approaches provide meaningful focus and reasons for arbitrary valid t
       for (const step of [...run.frames,...run.frames.toReversed()]) {
         const scene=serverTutorial({run,step});
         assert.ok(scene.reason.length>20);assert.ok(scene.action);
+        const source = build === buildAlternativeTrace ? alternativeCode : code;
+        assert.equal(scene.code, source.find(line => line.line === step.activeLine)?.text);
+        assert.ok(scene.code, 'every tutorial frame must map to an actual code line');
         assert.ok(scene.focus.length>=1 && scene.focus.length<=2);
         assert.ok(scene.focus.every(id=>['request','free','busy','servers','timeline','result'].includes(id)));
         assert.ok(Object.values(scene.variables).every(v=>v!==undefined && !String(v).includes('undefined')));

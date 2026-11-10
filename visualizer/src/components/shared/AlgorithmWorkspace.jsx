@@ -90,7 +90,8 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
       <span>Tutorial</span>{[['off','Off · Full view'],['steps','Step-by-step'],['why','Reason-first']].map(([value,label]) =>
         <button key={value} type="button" aria-pressed={tutorialMode===value} onClick={()=>{ playback.setIsPlaying(false); setTutorialMode(value); }}>{label}</button>)}
     </div>}
-    {tutorial && tutorialMode !== 'off' && run && <TutorialScene scene={tutorial({run,step})} mode={tutorialMode}>
+    {tutorial && tutorialMode !== 'off' && run && <TutorialScene scene={tutorial({run,step})} mode={tutorialMode} definition={definition} step={step}
+      previousStep={run.frames[Math.max(0, playback.stepIndex) - 1]}>
       {renderVisual({run,step})}
     </TutorialScene>}
     <div className="algorithm-workspace__dock" style={tutorial && tutorialMode !== 'off' ? {display:'none'} : undefined}>

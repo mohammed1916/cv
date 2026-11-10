@@ -750,3 +750,8 @@
 .bs-tutorial .bs-panel-header span { display:none; }
 .bs-tutorial .bs-formula { font-size:12px; }
 .bs-tutorial .bs-overlay { overflow:visible; }
+
+/* Keep the panel shelf inside the available viewport, below the solution switch. */
+.bs-page { display:flex; flex-direction:column; height:100%; min-height:0; overflow:hidden; }
+.bs-page > .bs-solution-switch { flex:0 0 auto; }
+.bs-page > .algorithm-workspace { flex:1; height:auto; min-height:0; }
