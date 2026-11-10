@@ -1,6 +1,8 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import { useTutorialScene } from '../../components/shared/TutorialScene'
 import { meta } from './meta'
 import { buildTrace, parseInput, code, python, pythonLineMap, phases, inputLabel, complexity, examples } from './algorithm'
+import { uniqueOccurrencesTutorial } from './tutorial'
 
 const definition = {
   number: meta.number, phases, parse: parseInput, build: buildTrace, code, python, pythonLineMap, inputLabel,
@@ -15,8 +17,41 @@ const chip = (active, extra = {}) => ({
   ...extra,
 })
 
-export default function UniqueOccurrencesVisual() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => {
+// Focused view: only the scanned list element, its map entry (or claimed-set entry) and the transfer between them.
+// The full list, map and set stay in the non-tutorial view.
+function FocusedScene({ run, focus }) {
+  const { kind, position, value, count, old, clash, result, counts, claimed } = focus
+  const entry = counts.find(row => row.value === value)
+  const claim = claimed.find(row => row.count === count)
+  const transfer = ['read', 'write'].includes(kind) || kind === 'claim'
+  if (kind === 'done') return <output aria-label="Result">{`Answer: ${result ? 'true' : 'false'}`}</output>
+  return <section aria-label="Unique occurrences focus" style={{ display: 'grid', gap: 12 }}>
+    {['select', 'read', 'write'].includes(kind) && <div aria-label="Value being scanned" style={{ display: 'grid', gap: 4, justifyItems: 'start' }}>
+      <small>position {position}</small>
+      <span style={chip(true)} data-value={value}>{value}</span>
+    </div>}
+    {['read', 'write', 'select-count', 'check-free', 'clash', 'claim'].includes(kind) && kind !== 'claim' && <div aria-label="Map entry being updated" style={{ display: 'grid', gap: 4 }}>
+      <strong>Map entry</strong>
+      <span style={chip(true)} data-value={value}>
+        {value} → {kind === 'write' ? count : (kind === 'read' ? old : (entry ? entry.count : count))}×
+      </span>
+    </div>}
+    {transfer && kind !== 'read' && <output aria-label="Transfer">
+      {kind === 'write' ? `Element ${value} at position ${position} → map entry ${value}` : `Map entry ${value} → claimed count ${count}`}
+    </output>}
+    {kind === 'read' && <output aria-label="Transfer">{`Element ${value} at position ${position} reads map entry ${value}`}</output>}
+    {['select-count', 'check-free', 'clash', 'claim'].includes(kind) && <div aria-label="Claimed set entry" style={{ display: 'grid', gap: 4 }}>
+      <strong>Claimed count</strong>
+      {claim ? <span style={chip(true)} data-count={claim.count}>{claim.count} claimed by {claim.value}</span> : <em>none for {count}</em>}
+      {clash !== null && <output aria-label="Clash">{`Count ${count} is already claimed by value ${clash}.`}</output>}
+    </div>}
+  </section>
+}
+
+function UniqueOccurrencesBody({ run, step }) {
+  const scene = useTutorialScene()
+  if (scene) return <FocusedScene run={run} focus={scene.focus} />
+  {
     const { counts, claimed, value, count, clash } = step.snapshot
     const maxCount = Math.max(1, ...counts.map(row => row.count))
     return <>
@@ -47,5 +82,11 @@ export default function UniqueOccurrencesVisual() {
       {clash !== undefined && <output aria-label="Clash">{`Count ${count} is already claimed by value ${clash}, so the answer is false.`}</output>}
       {clash === undefined && count !== undefined && <output aria-label="Count being checked">{`Checking count ${count} for value ${value}.`}</output>}
     </>
-  }} renderReasoning={() => <p><strong>Two structures:</strong> a map counts each value, then a set records each occurrence count. A second value with a count already in the set is the only way to return false.</p>} />
+  }
+}
+
+export default function UniqueOccurrencesVisual() {
+  return <AlgorithmWorkspace definition={definition} tutorial={uniqueOccurrencesTutorial}
+    renderVisual={({ run, step }) => <UniqueOccurrencesBody run={run} step={step} />}
+    renderReasoning={() => <p><strong>Two structures:</strong> a map counts each value, then a set records each occurrence count. A second value with a count already in the set is the only way to return false.</p>} />
 }

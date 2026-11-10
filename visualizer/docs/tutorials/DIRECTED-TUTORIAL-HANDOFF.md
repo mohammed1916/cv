@@ -122,3 +122,13 @@ Exact ID: 1019 (`src/problems/Problem1019`: `algorithm.js`, `tutorial.js`, `Next
 ### Problem 100 — recursive tree comparison, call and return transfers (directed)
 
 Exact ID: 100 (`src/problems/Problem100`: `algorithm.js`, `tutorial.js`, `SameTreeTutorial.jsx`). Trace events were added as real frames: `call` (line 5 left, line 6 right, showing the parent pair and the child pair entered, with null children explicit), `receive` (the child's returned boolean stored as `left_ok` or `right_ok` on the parent pair), and `return` (base case, one-sided, value mismatch and the combined result, each carrying the returned boolean). Condition-only `check` frames never carry a transfer. Answers, example inputs and the displayed Python (left and right evaluated separately) are unchanged. Evidence: `algorithm.test.mjs` 11/11 passed with `PYTHON=/usr/local/bin/python3` and the nvm Node 24.22.1 runner (four new tests covering call child ids, receive booleans, return values and base-case returns); Vite SSR render of every code and reason beat for five custom inputs (including empty versus one-node and sparse trees) with forward and backward sequences equal and call, receive and return content present; `node node_modules/vite/bin/vite.js build` passed in 26.35 seconds. Not verified in a browser: the live transfer animation, reduced motion, and backward stepping in the UI.
+
+### Problem 1207 — unique occurrences, hash-map frequency scan (directed)
+
+Exact ID: 1207 (`src/problems/Problem1207`: `algorithm.js`, `tutorial.js`, `index.jsx`). Chosen because it is a two-pass hash-map frequency count with an existing solver test and no tutorial; Two Sum was excluded.
+
+- Trace: separate frames for each selection, map read, map write, the set initialisation, each count selection, a condition-only `check-free` frame when a count is unclaimed, the claim, the clash return and the result. Each frame has a `kind` and a displayed JS line; the displayed Python agrees with the trace on six inputs including single-element and clash cases.
+- Tutorial: `tutorial.js` explains why the first pass must finish before counts are compared, and why reads precede writes.
+- View: the focused scene renders only the scanned element, its map entry and the transfer between them (or the claimed-set entry in the second pass); full mode is unchanged.
+- Evidence: `algorithm.test.mjs` 5/5 pass (`PYTHON=/usr/local/bin/python3`, Node v24.22.1); a scratch sequence check over six inputs confirmed tutorial fields, line mapping and every frame kind; `node node_modules/vite/bin/vite.js build` passes.
+- Not verified in a browser: live dock layout, backward stepping in the UI, and reduced motion.
