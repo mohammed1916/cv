@@ -73,3 +73,46 @@ test('100 displayed Python returns the same answers', () => {
   assert.equal(result.status, 0, result.stderr || result.error?.message)
   assert.deepEqual(JSON.parse(result.stdout), cases.map(c => solve(c.p, c.q)))
 })
+
+import { buildTrace as buildSameTreeTrace } from './algorithm.js'
+
+test('100 call frames name the child pair entered, including null children', () => {
+  const { frames } = buildSameTreeTrace({ p: [1, 2], q: [1, null, 3] })
+  const calls = frames.filter(frame => frame.kind === 'call')
+  assert.deepEqual(calls.map(frame => [frame.side, frame.activeLine]), [['left', 5], ['right', 6]])
+  const leftCall = calls[0]
+  assert.notEqual(leftCall.childP, null)
+  assert.equal(leftCall.childQ, null)
+  // The call frame keeps the parent pair; the child's own check frame follows immediately.
+  assert.equal(frames[frames.indexOf(leftCall) + 1].kind, 'check')
+})
+
+test('100 receive frames carry the child boolean that the parent stores', () => {
+  const { frames, result } = buildSameTreeTrace({ p: [1, 2, 3], q: [1, 2, 4] })
+  const receives = frames.filter(frame => frame.kind === 'receive')
+  // Leaf pairs 2/2 and 3/4 receive their children first; the root's own two receipts come last.
+  assert.deepEqual(receives.map(frame => [frame.side, frame.returned]).slice(-2), [['left', true], ['right', false]])
+  assert.equal(receives.length, 4)
+  assert.equal(result, false)
+})
+
+test('100 returns carry the returned value; condition-only frames never transfer', () => {
+  const { frames, result } = buildSameTreeTrace({ p: [1, 2, 1], q: [1, 1, 2] })
+  for (const frame of frames) {
+    if (frame.kind === 'check') {
+      assert.equal(frame.returned, null)
+      assert.equal(frame.childP, null)
+      assert.equal(frame.childQ, null)
+    }
+    if (frame.kind === 'call') assert.equal(frame.returned, null)
+    if (frame.kind === 'return') assert.equal(typeof frame.returned, 'boolean')
+  }
+  assert.equal(frames.filter(frame => frame.kind === 'return' && frame.activeLine === 7).at(-1).returned, result)
+})
+
+test('100 base-case return of true on two empty children is its own frame', () => {
+  const { frames } = buildSameTreeTrace({ p: [1], q: [1] })
+  const baseReturns = frames.filter(frame => frame.kind === 'return' && frame.activeLine === 2)
+  assert.equal(baseReturns.length, 2)
+  assert.ok(baseReturns.every(frame => frame.returned === true && frame.activePId === null && frame.activeQId === null))
+})

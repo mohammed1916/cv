@@ -14,11 +14,18 @@ export function generateSteps(pArr, qArr) {
   // Tracks node state: 'match' | 'mismatch' | 'null-match' | 'null-mismatch'
   const nodeStates = {}; // id -> 'match'|'mismatch'
 
-  function push(activeLine, activePId, activeQId, message, finalResult = null) {
+  // meta carries the recursive event: kind ('check' | 'return' | 'call' | 'receive' | 'combine' | 'done'),
+  // the child pair entered or received from (childP/childQ are node ids or null), and the boolean returned.
+  function push(activeLine, activePId, activeQId, message, finalResult = null, meta = {}) {
     steps.push({
       activeLine,
       activePId,
       activeQId,
+      kind: meta.kind ?? 'check',
+      side: meta.side ?? null,
+      childP: meta.childP ?? null,
+      childQ: meta.childQ ?? null,
+      returned: meta.returned ?? null,
       nodeStates: { ...nodeStates },
       pPositions: pSnap.positions,
       pEdges: pSnap.edges,
@@ -31,7 +38,7 @@ export function generateSteps(pArr, qArr) {
     });
   }
 
-  push(2, null, null, "Call isSameTree(p, q). Begin recursive DFS.");
+  push(2, null, null, "Call isSameTree(p, q). Begin recursive DFS.", null, { kind: 'start' });
 
   // Returns boolean
   function dfs(p, q) {
@@ -46,7 +53,7 @@ export function generateSteps(pArr, qArr) {
       `Check: p=${p ? p.val : "null"}, q=${q ? q.val : "null"} — both null?`,
     );
     if (!p && !q) {
-      push(4, pId, qId, "Both nodes are null → return True (base case)");
+      push(4, pId, qId, "Both nodes are null → return True (base case)", null, { kind: 'return', returned: true });
       return true;
     }
 
@@ -60,6 +67,8 @@ export function generateSteps(pArr, qArr) {
         pId,
         qId,
         `One node is null, other is ${p ? p.val : q.val} → return False`,
+        null,
+        { kind: 'return', returned: false },
       );
       return false;
     }
@@ -69,30 +78,52 @@ export function generateSteps(pArr, qArr) {
     if (p.val !== q.val) {
       nodeStates[pId] = "mismatch";
       nodeStates[qId] = "mismatch";
-      push(8, pId, qId, `p.val (${p.val}) ≠ q.val (${q.val}) → return False`);
+      push(8, pId, qId, `p.val (${p.val}) ≠ q.val (${q.val}) → return False`, null, { kind: 'return', returned: false });
       return false;
     }
 
     // Values match — mark tentatively; will confirm after children
     nodeStates[pId] = "match";
     nodeStates[qId] = "match";
+    // Recursive call into the left children. The child's own check frame follows this call frame.
     push(
       9,
       pId,
       qId,
-      `Values match (${p.val}=${q.val}) — recurse into left subtrees`,
+      `Values match (${p.val}) — call the left children`,
+      null,
+      { kind: 'call', side: 'left', childP: p.left?.id ?? null, childQ: q.left?.id ?? null },
     );
-
     const leftOk = dfs(p.left, q.left);
+
+    // Receipt: the left call has returned, so left_ok now holds this boolean.
+    push(
+      9,
+      pId,
+      qId,
+      `Left child returned ${leftOk} → left_ok = ${leftOk}`,
+      null,
+      { kind: 'receive', side: 'left', childP: p.left?.id ?? null, childQ: q.left?.id ?? null, returned: leftOk },
+    );
 
     push(
       10,
       pId,
       qId,
-      `Left subtrees ${leftOk ? "match" : "differ"} — recurse into right subtrees`,
+      `Call the right children`,
+      null,
+      { kind: 'call', side: 'right', childP: p.right?.id ?? null, childQ: q.right?.id ?? null },
     );
-
     const rightOk = dfs(p.right, q.right);
+
+    push(
+      10,
+      pId,
+      qId,
+      `Right child returned ${rightOk} → right_ok = ${rightOk}`,
+      null,
+      { kind: 'receive', side: 'right', childP: p.right?.id ?? null, childQ: q.right?.id ?? null, returned: rightOk },
+    );
 
     if (!leftOk || !rightOk) {
       nodeStates[pId] = "mismatch";
@@ -100,7 +131,8 @@ export function generateSteps(pArr, qArr) {
     }
 
     const result = leftOk && rightOk;
-    push(11, pId, qId, `Return ${result} for node ${p.val}`);
+    push(11, pId, qId, `Return ${result} for node ${p.val}`, null, { kind: 'return', returned: result });
+    return result;
     return result;
   }
 
@@ -145,6 +177,7 @@ export function buildTrace(input) {
   const frames = legacy.map((frame, index) => ({
     ...frame,
     phase: index === legacy.length - 1 ? 'done' : PHASE_FOR_LEGACY[frame.activeLine],
+    kind: index === legacy.length - 1 ? 'done' : frame.kind,
     activeLine: PSEUDO_LINE_FOR_LEGACY[frame.activeLine],
     explanation: frame.message,
   }))

@@ -284,3 +284,9 @@
 
 .same-tree-tutorial [data-state="mismatch"] circle { stroke:var(--error,#ef4444); fill:color-mix(in srgb,var(--error,#ef4444) 16%,var(--surface)); }
 .same-tree-tutorial [data-state="match"] circle { stroke:var(--success,#22c55e); }
+
+/* Call and return transfers: only the parent pair, the child pair, and the returned boolean. */
+.same-tree-tutorial--transfer .same-tree-tutorial__transfer { display:flex; flex-direction:column; align-items:center; gap:10px; text-align:center; }
+.same-tree-tutorial__chip { display:inline-block; min-width:56px; padding:8px 12px; border-radius:999px; border:2px solid var(--code-line, currentColor); font-weight:600; }
+.same-tree-tutorial__chip.is-null { opacity:.6; border-style:dashed; }
+.same-tree-tutorial__arrow { font-size:.9rem; font-weight:600; }
