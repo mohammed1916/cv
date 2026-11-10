@@ -6,12 +6,14 @@ export const HEAP_TREE_LIMIT = 31
 const defaultFormat = value => (Array.isArray(value) ? value.join(',') : String(value))
 
 export class TracedHeap {
-  constructor(compare = (a, b) => (Array.isArray(a) ? a[0] - b[0] : a - b), { order = 'min', format = defaultFormat } = {}) {
+  constructor(compare = (a, b) => (Array.isArray(a) ? a[0] - b[0] : a - b), { order = 'min', format = defaultFormat, onStep = null } = {}) {
     this.data = []
     this.compare = compare
     this.order = order
     this.format = format
     this.ops = []
+    // Optional observer called after each real array change or comparison: { type, kind, index, other, chosen?, swapped, data }.
+    this.onStep = onStep
   }
 
   get size() { return this.data.length }
@@ -24,12 +26,14 @@ export class TracedHeap {
     let i = a.length - 1
     const steps = []
     const start = i
+    if (this.onStep) this.onStep({ type: 'push', kind: 'place', index: i, data: a.slice() })
     while (i > 0) {
       const p = (i - 1) >> 1
       const swap = this.compare(a[i], a[p]) < 0
       steps.push({ index: i, parent: p, value: f(a[i]), parentValue: f(a[p]), swap })
+      if (swap) [a[p], a[i]] = [a[i], a[p]]
+      if (this.onStep) this.onStep({ type: 'push', kind: 'compare', index: i, other: p, swapped: swap, data: a.slice() })
       if (!swap) break;
-      [a[p], a[i]] = [a[i], a[p]]
       i = p
     }
     this.ops.push({ type: 'push', value: f(value), start, end: i, steps })
@@ -46,14 +50,17 @@ export class TracedHeap {
     a[0] = last
     const steps = []
     let i = 0
+    if (this.onStep) this.onStep({ type: 'pop', kind: 'place', index: 0, data: a.slice() })
     for (;;) {
       const kids = [2 * i + 1, 2 * i + 2].filter(c => c < a.length)
       if (!kids.length) { steps.push({ index: i, value: f(a[i]), leaf: true }); break }
       const best = kids.length === 2 && this.compare(a[kids[1]], a[kids[0]]) < 0 ? kids[1] : kids[0]
+      if (kids.length === 2 && this.onStep) this.onStep({ type: 'pop', kind: 'child', index: kids[0], other: kids[1], chosen: best, swapped: false, data: a.slice() })
       const swap = this.compare(a[best], a[i]) < 0
       steps.push({ index: i, value: f(a[i]), child: best, childValue: f(a[best]), both: kids.length === 2, swap })
+      if (swap) [a[i], a[best]] = [a[best], a[i]]
+      if (this.onStep) this.onStep({ type: 'pop', kind: 'compare', index: best, other: i, swapped: swap, data: a.slice() })
       if (!swap) break;
-      [a[i], a[best]] = [a[best], a[i]]
       i = best
     }
     this.ops.push({ type: 'pop', value: f(top), moved: f(last), end: i, steps })

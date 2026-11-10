@@ -187,17 +187,19 @@ function createTrace(input, approach) {
   const line = term => lookup(source, term);
   const pythonLine = term => lookup(py, term);
 
-  const heapState = (heap, title, ops = []) => ({
+  const heapState = (heap, title, ops = [], compare = []) => ({
     title,
     order: 'min',
     items: heap.data.map(heap.format),
     ops,
+    compare,
   });
 
   function emit(phase, message, jsTerm, pyTerm, options = {}) {
     const {
       busyOps = [],
       freeOps = [],
+      sift = null,
       ...extra
     } = options;
 
@@ -223,9 +225,10 @@ function createTrace(input, approach) {
       free: virtual
         ? [...freeHeap.data].sort((a, b) => a - b)
         : [...freeList],
-      busyHeap: heapState(busy, 'Busy heap', busyOps),
+      sift: sift ? { ...sift } : null,
+      busyHeap: heapState(busy, 'Busy heap', busyOps, sift?.heap === 'busy' ? sift.compare : []),
       freeHeap: virtual
-        ? heapState(freeHeap, 'Free virtual-key heap', freeOps)
+        ? heapState(freeHeap, 'Free virtual-key heap', freeOps, sift?.heap === 'free' ? sift.compare : [])
         : null,
       best,
       message,
@@ -242,11 +245,51 @@ function createTrace(input, approach) {
     emit('loop-check', message, js, py);
   }
 
-  function heapFrame(phase, message, js, py, heap) {
+  // Run one heap operation. Its real array states become frames: the first change (append or root
+  // replacement) is the operation frame, then one frame per sift comparison. The grouped operation log
+  // is attached to the last frame of the operation so the existing ops summaries still work.
+  function operate(heap, meta, run) {
+    const name = heap === busy ? 'busy' : 'free';
+    let placed = false;
+    heap.onStep = event => {
+      if (event.kind === 'place') {
+        placed = true;
+        emit(meta.phase, meta.message, meta.js, meta.py,
+          { sift: { heap: name, kind: 'place', index: event.index, compare: [] } });
+      } else {
+        emitCompare(heap, name, meta, event);
+      }
+    };
+    let result;
+    try {
+      result = run();
+    } finally {
+      heap.onStep = null;
+    }
+    if (!placed) emit(meta.phase, meta.message, meta.js, meta.py);
     const ops = heap.takeOps();
-    emit(phase, message, js, py,
-      heap === busy ? { busyOps: ops } : { freeOps: ops }
-    );
+    const last = frames.at(-1);
+    (name === 'busy' ? last.busyHeap : last.freeHeap).ops = ops;
+    return result;
+  }
+
+  function emitCompare(heap, name, meta, event) {
+    const { index, other, swapped, data, chosen = null } = event;
+    const f = heap.format;
+    let message;
+    if (event.kind === 'child') {
+      message = `Compare the children at index ${index} (${f(data[index])}) and ${other} (${f(data[other])}); index ${chosen} is the smaller child.`;
+    } else {
+      // After a swap, the compared child sits at `other` and the parent at `index`.
+      const child = swapped ? data[other] : data[index];
+      const parent = swapped ? data[index] : data[other];
+      message = swapped
+        ? `Compare ${f(child)} at index ${index} with its parent ${f(parent)} at index ${other}: it is smaller, so swap them.`
+        : `Compare ${f(child)} at index ${index} with its parent ${f(parent)} at index ${other}: it is not smaller, so the sift stops.`;
+    }
+    emit('sift-compare', message, meta.js, meta.py, {
+      sift: { heap: name, kind: event.kind, index, other, chosen, swapped: Boolean(swapped), compare: [index, other] },
+    });
   }
 
   emit('start', `${k} servers begin free.`,
@@ -287,12 +330,14 @@ function createTrace(input, approach) {
       if (!canRelease) break;
       loop = null;
 
-      const job = busy.pop();
-      released = job.server;
-      flow('busy', 'free', `S${job.server}`);
-      heapFrame('busy-pop',
-        `Pop (${job.end}, S${job.server}) from the busy heap.`,
-        'const job = busy.pop()', 'heapq.heappop(busy)', busy);
+      const top = busy.peek();
+      released = top.server;
+      flow('busy', 'free', `S${top.server}`);
+      const job = operate(busy, {
+        phase: 'busy-pop',
+        message: `Pop (${top.end}, S${top.server}) from the busy heap; the last item moves to the root.`,
+        js: 'const job = busy.pop()', py: 'heapq.heappop(busy)',
+      }, () => busy.pop());
 
       if (virtual) {
         key = i + ((job.server - i) % k + k) % k;
@@ -301,11 +346,12 @@ function createTrace(input, approach) {
           `S${job.server} gets virtual key ${key}, its next circular turn.`,
           'const key =', 'key = i +');
 
-        freeHeap.push(key);
         flow('busy', 'free', `key ${key}`);
-        heapFrame('free-insert',
-          `Insert key ${key} into the free heap.`,
-          'free.push(key)', 'heapq.heappush(free, key)', freeHeap);
+        operate(freeHeap, {
+          phase: 'free-insert',
+          message: `Insert key ${key} into the free heap.`,
+          js: 'free.push(key)', py: 'heapq.heappush(free, key)',
+        }, () => freeHeap.push(key));
       } else {
         // Trace bisect.insort on release, including comparisons.
         let left = 0, right = freeList.length, iteration = 0;
@@ -373,11 +419,12 @@ function createTrace(input, approach) {
       emit('key-select',
         `The smallest virtual key is ${key}; select S${key % k}.`,
         'const key = free.peek()', 'key = free[0]');
-      const popped = freeHeap.pop();
-      server = popped % k;
-      heapFrame('free-pop',
-        `Pop key ${popped} and recover server ${server}.`,
-        'free.pop();', 'heapq.heappop(free)', freeHeap);
+      server = key % k;
+      operate(freeHeap, {
+        phase: 'free-pop',
+        message: `Pop key ${key} and recover server ${server}.`,
+        js: 'free.pop();', py: 'heapq.heappop(free)',
+      }, () => freeHeap.pop());
     } else {
       let left = 0, right = freeList.length, iteration = 0;
       while (true) {
@@ -457,11 +504,12 @@ function createTrace(input, approach) {
       `S${server} has now handled ${handled[server]} requests.`,
       'handled[server]++', 'handled[server] += 1');
 
-    busy.push({ end, server });
     flow('timeline', 'busy', `(${end}, S${server})`);
-    heapFrame('busy-push',
-      `Push finish time ${end} and S${server} into the busy heap.`,
-      'busy.push({end,', 'heapq.heappush(busy', busy);
+    operate(busy, {
+      phase: 'busy-push',
+      message: `Push finish time ${end} and S${server} into the busy heap.`,
+      js: 'busy.push({end,', py: 'heapq.heappush(busy',
+    }, () => busy.push({ end, server }));
     key = null;
   }
 

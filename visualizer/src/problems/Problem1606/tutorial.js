@@ -16,10 +16,16 @@ const reasons = {
   drop: ['Drop this request', 'There is no queue in this problem. When no server is available at arrival, the request must be dropped rather than delayed.'],
   frequency: ['Find the largest count', 'Busiest means the most accepted requests, not the longest running time. Compare the per-server handled counts.'],
   multimode: ['Keep every tied winner', 'Several servers can share the maximum count. Include every matching server, not just the first one.'],
+  'sift-compare': ['Compare one heap pair', 'Each comparison decides whether an item belongs above its parent. Only this pair is highlighted; a swap changes exactly these two cells.'],
   done: ['Return the busiest servers', 'The answer includes all servers whose handled count equals the maximum.'],
 };
 export function serverTutorial({run,step}) {
   let entry = reasons[step.phase];
+  if (step.phase === 'sift-compare') entry = step.sift?.kind === 'child'
+    ? ['Choose the child that can rise', 'A sift-down swaps with the better child, so compare the two children before comparing the moving item.']
+    : step.sift?.heap === 'free'
+      ? ['Compare virtual keys on the sift path', 'Keys are ordered circularly. This comparison decides whether the moved key rises above its parent.']
+      : ['Compare finish times on the sift path', 'The earliest finish belongs nearest the root. This comparison decides whether the moved entry rises above its parent.'];
   if (step.phase === 'loop-check') entry = step.loop?.id === 'release'
     ? ['Check the earliest completion', 'Only finished jobs may rejoin the free pool. If even the minimum finish time is later than arrival, every remaining job is still busy.']
     : step.loop?.id?.startsWith('bisect')
@@ -34,7 +40,9 @@ export function serverTutorial({run,step}) {
     'timeline-create':['timeline'], assign:['servers'], 'busy-push':['timeline','busy'],
     drop:['request'], frequency:['result'], multimode:['result'], done:['result'],
   };
-  const focus = step.phase === 'loop-check'
+  const focus = step.phase === 'sift-compare'
+    ? [step.sift?.heap === 'free' ? 'free' : 'busy']
+    : step.phase === 'loop-check'
     ? [step.loop?.id === 'release' ? 'busy' : step.loop?.id?.startsWith('bisect') ? 'free' : step.loop?.condition === false ? 'result' : 'request']
     : focusByPhase[step.phase] || ['request'];
   if (step.phase === 'free-pop' && step.approach !== 'virtual') entry = ['Reserve the selected server', 'Remove the selected ID from the sorted free list so this server cannot accept a second request while busy.'];
@@ -49,6 +57,7 @@ export function serverTutorial({run,step}) {
   if (['key-calc','key-select','free-pop'].includes(step.phase) && step.key !== null) variables.key=step.key;
   if (['assign','timeline-create','busy-push'].includes(step.phase) && step.server !== null) variables.server=`S${step.server}`;
   if (step.phase==='busy-pop' && step.released!==null) variables.released=`S${step.released}`;
+  if (step.phase==='sift-compare' && step.sift) variables.indices=`${step.sift.index} and ${step.sift.other}`;
   if (step.phase==='preferred' && step.approach !== 'virtual') variables.preferred=`S${step.target}`;
   if (['frequency','multimode','done'].includes(step.phase) && step.best !== null) variables.maximum=step.best;
   const instruction = (step.approach === 'virtual' ? alternativeCode : code).find(line => line.line === step.activeLine)?.text;

@@ -69,6 +69,7 @@ const phases = [
   { id: 'timeline-create', label: 'Execution interval', description: 'Create the request rectangle on its server timeline.' },
   { id: 'assign', label: 'Count request', description: 'Increment the selected server count.' },
   { id: 'busy-push', label: 'Schedule finish', description: 'Push finish time into the busy heap.' },
+  { id: 'sift-compare', label: 'Sift comparison', description: 'Compare one heap pair; swap only when the item belongs above its parent.' },
   { id: 'drop', label: 'Drop', description: 'No free server is available.' },
   { id: 'frequency', label: 'Frequencies', description: 'Find the highest handled count.' },
   { id: 'multimode', label: 'Multimode', description: 'Identify every server tied for the maximum.' },

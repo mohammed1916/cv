@@ -1,10 +1,10 @@
 import {heapLayout} from './heapModel.js';
 // Retain original indices and true parent edges. Never re-heapify a cropped view.
-export function tutorialHeapModel(items, ops = []) {
+export function tutorialHeapModel(items, ops = [], compare = []) {
   const nodes = heapLayout(items.length);
   const active = new Set();
   const op = ops.at(-1);
-  for (const index of [op?.end, ...(op?.steps || []).flatMap(s => [s.index,s.parent,s.child])]) {
+  for (const index of [op?.end, ...(op?.steps || []).flatMap(s => [s.index,s.parent,s.child]), ...compare]) {
     if (Number.isInteger(index) && index >= 0 && index < items.length) active.add(index);
   }
   if (!active.size && items.length) active.add(0);

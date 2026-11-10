@@ -8,6 +8,7 @@
 .heap-view__node circle { fill: var(--surface2); stroke: var(--border); stroke-width: 2; transition: fill .3s, stroke .3s; }
 .heap-view__node text { fill: var(--text); font-size: 11px; font-weight: 700; }
 .heap-view__node.is-root circle { stroke: var(--primary); }
+.heap-view__node.is-compare circle { stroke: var(--accent, #2563eb); stroke-width: 3; }
 .heap-view__node.is-path circle { stroke: var(--warning, #d97706); stroke-width: 3; }
 .heap-view__node.is-new circle { fill: var(--success, #16a34a); stroke: var(--success, #16a34a); }
 .heap-view__node.is-moved circle { fill: var(--primary); stroke: var(--primary); }
@@ -15,6 +16,7 @@
 .heap-view__legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 8px 0 0; font-size: .72rem; color: var(--text-muted); }
 .heap-view__legend span::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; border: 2px solid var(--border); vertical-align: -1px; }
 .heap-view__legend .is-root::before { border-color: var(--primary); }
+.heap-view__legend .is-compare::before { border-color: var(--accent, #2563eb); }
 .heap-view__legend .is-path::before { border-color: var(--warning, #d97706); }
 .heap-view__legend .is-new::before { background: var(--success, #16a34a); border-color: var(--success, #16a34a); }
 .heap-view__legend .is-moved::before { background: var(--primary); border-color: var(--primary); }

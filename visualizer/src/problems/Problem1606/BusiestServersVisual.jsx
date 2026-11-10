@@ -308,6 +308,7 @@ function VirtualPanel({ step, k }) {
                 title="Free virtual-key min-heap"
                 items={step.freeHeap?.items ?? []}
                 ops={step.freeHeap?.ops ?? []}
+                compare={step.freeHeap?.compare ?? []}
                 order="min"
             />
         </div>
@@ -325,6 +326,7 @@ function BusyPanel({ step }) {
                 title="Busy finish-time min-heap"
                 items={step.busyHeap?.items ?? []}
                 ops={step.busyHeap?.ops ?? []}
+                compare={step.busyHeap?.compare ?? []}
                 order="min"
             />
         </div>

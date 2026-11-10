@@ -12,10 +12,11 @@ const MAX_LINES = 6
  * A binary heap as a tree and as its array, with each push/pop and its sift-up/sift-down in words.
  * `items` are the formatted heap cells in array order; `ops` come from TracedHeap.
  */
-export default function HeapView({ items, ops = [], order = 'min', title = 'Heap' }) {
+export default function HeapView({ items, ops = [], order = 'min', title = 'Heap', compare = [] }) {
   const tutorial = useTutorialScene();
-  if (tutorial) return <TutorialHeap items={items} ops={ops} title={title} />;
-  const roles = heapHighlights(ops)
+  if (tutorial) return <TutorialHeap items={items} ops={ops} title={title} compare={compare} />;
+  const roles = { ...heapHighlights(ops) }
+  for (const index of compare) roles[index] = 'compare'
   const shown = ops.slice(-MAX_LINES)
   const lines = describeHeapOps(shown, order)
   const nodes = heapLayout(items.length)
@@ -57,6 +58,7 @@ export default function HeapView({ items, ops = [], order = 'min', title = 'Heap
       <span className="is-new">pushed item landed here</span>
       <span className="is-moved">item moved from the end settled here</span>
       <span className="is-path">swapped during sift</span>
+      <span className="is-compare">compared in this step</span>
       <span className="is-root">root: next out</span>
     </p>
   </section>

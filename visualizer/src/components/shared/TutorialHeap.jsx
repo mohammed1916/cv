@@ -1,8 +1,8 @@
 import {motion,useReducedMotion} from 'framer-motion';
 import {tutorialHeapModel} from './tutorialHeapModel.js';
-export default function TutorialHeap({items,ops,title}) {
+export default function TutorialHeap({items,ops,title,compare=[]}) {
   const reduced=useReducedMotion();
-  const model=tutorialHeapModel(items,ops);
+  const model=tutorialHeapModel(items,ops,compare);
   const byId=new Map(model.nodes.map(n=>[n.index,n]));
   return <section className="tutorial-heap" aria-label={title}>
     <h3>{title}</h3>
