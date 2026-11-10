@@ -2,6 +2,7 @@ import { serverTutorial } from './tutorial';
 
 import { useMemo, useState } from 'react';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace';
+import TabSwitch from '../../components/shared/TabSwitch';
 import BusiestServersVisual from './BusiestServersVisual';
 import {
   parseInput,
@@ -168,24 +169,8 @@ export default function BusiestServers() {
 
   return (
     <div className="bs-page">
-      <div className="bs-solution-switch"
-        role="group" aria-label="Choose solution">
-        <button type="button"
-          className={approach === 'bisect' ? 'is-selected' : ''}
-          aria-pressed={approach === 'bisect'}
-          onClick={() => setApproach('bisect')}>
-          <strong>Solution 1</strong>
-          <span>Binary search + busy heap</span>
-        </button>
-        <button type="button"
-          className={approach === 'virtual' ? 'is-selected' : ''}
-          aria-pressed={approach === 'virtual'}
-          onClick={() => setApproach('virtual')}>
-          <strong>Solution 2</strong>
-          <span>Virtual-key heap + busy heap</span>
-        </button>
-      </div>
-
+      <TabSwitch label="Choose solution" value={approach} onChange={setApproach}
+        options={[{value:'bisect',label:'Solution 1 · Binary search'},{value:'virtual',label:'Solution 2 · Virtual keys'}]} />
       <AlgorithmWorkspace
         key={approach}
         definition={definition}

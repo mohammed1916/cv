@@ -1,0 +1,33 @@
+.tab-switch {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--border);
+}
+
+.tab-switch button {
+  flex-shrink: 0;
+  padding: 8px 12px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--text-muted);
+  font: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.tab-switch button:hover {
+  color: var(--text);
+}
+
+.tab-switch button[aria-selected="true"] {
+  color: var(--text);
+  font-weight: 600;
+  border-bottom-color: var(--primary);
+}
+
+.tab-switch button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}

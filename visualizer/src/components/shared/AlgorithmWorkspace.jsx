@@ -7,6 +7,8 @@ import PlaybackControls from '../PlaybackControls'
 import AlgorithmCodePanel from './AlgorithmCodePanel'
 import FloatingPanel from './FloatingPanel'
 import CompactPlayback from './CompactPlayback'
+import TabSwitch from './TabSwitch'
+import './TabSwitch.css'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import './AlgorithmWorkspace.css'
 
@@ -110,10 +112,8 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
     <span>{run ? `${position + 1} / ${total} ${directed ? 'scenes' : 'frames'}` : 'No valid input'}</span>
   </div>
   return <div className={`algorithm-workspace ${directed ? 'algorithm-workspace--tutorial' : ''}`}>
-    {tutorial && <div className="tutorial-mode-switch" role="group" aria-label="Tutorial mode">
-      <span>Tutorial</span>{[['off','Off · Full view'],['steps','Step-by-step'],['why','Reason-first']].map(([value,label]) =>
-        <button key={value} type="button" aria-pressed={tutorialMode===value} onClick={()=>changeMode(value)}>{label}</button>)}
-    </div>}
+    {tutorial && <TabSwitch label="Tutorial mode" className="tutorial-mode-switch" value={tutorialMode} onChange={changeMode}
+      options={[{value:'off',label:'Full view'},{value:'steps',label:'Step-by-step'},{value:'why',label:'Reason-first'}]} />}
     {tutorial && <div className="algorithm-workspace__dock" style={!directed ? {display:'none'} : undefined}>
       <LuminoDockPanel panels={TUTORIAL_PANELS} initialCollapsed={['input']} onPanelReady={setTutorialDivs} />
       {Object.entries(tutorialViews).map(([id, content]) => tutorialDivs?.[id]
