@@ -1,3 +1,5 @@
+import { useTutorialScene } from './TutorialScene';
+import TutorialHeap from './TutorialHeap';
 import IndexedSequence from './IndexedSequence'
 import SvgViewport from './SvgViewport'
 import { HEAP_TREE_LIMIT, describeHeapOps, heapHighlights, heapLayout } from './heapModel.js'
@@ -11,6 +13,8 @@ const MAX_LINES = 6
  * `items` are the formatted heap cells in array order; `ops` come from TracedHeap.
  */
 export default function HeapView({ items, ops = [], order = 'min', title = 'Heap' }) {
+  const tutorial = useTutorialScene();
+  if (tutorial) return <TutorialHeap items={items} ops={ops} title={title} />;
   const roles = heapHighlights(ops)
   const shown = ops.slice(-MAX_LINES)
   const lines = describeHeapOps(shown, order)

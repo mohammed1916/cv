@@ -1,3 +1,4 @@
+import { COACHING_MODE_KEY, readCoachingMode, coachingInstructions } from './coachingMode';
 import { useEffect, useRef, useCallback, useState } from "react";
 import { useChatContext } from "../../context/ChatContext";
 import { useVisualizationContext } from "../../context/VisualizationContext";
@@ -143,6 +144,13 @@ export default function ChatDrawer() {
     floatingMode,
     toggleFloatingMode,
   } = useChatContext();
+  const [coachingMode, setCoachingMode] = useState(() => {
+    try { return readCoachingMode(window.localStorage); } catch { return false; }
+  });
+  function changeCoachingMode(enabled) {
+    setCoachingMode(enabled);
+    try { window.localStorage.setItem(COACHING_MODE_KEY, enabled ? 'on' : 'off'); } catch { /* Keep the choice for this session. */ }
+  }
   const [historyOpen, setHistoryOpen] = useState(false);
   const [hoveredZone, setHoveredZone] = useState(null);
   const [providerConfig, setProviderConfig] = useState(getChatProvider);
@@ -506,6 +514,8 @@ Put headings and ordered-list items on their own lines, leave a blank line befor
               `${problemStateText}` +
               `${assistantInstructions}
 
+${coachingInstructions(coachingMode)}
+
 Answer questions only about the selected algorithm, its implementation, complexity, debugging, or visualization.
 
 If a request is unrelated (for example email writing, personal messages, interview follow-ups, or general life advice), briefly state that you are the algorithm tutor and redirect the user to ask about the current problem.
@@ -608,6 +618,7 @@ When asked about code or data structures, be precise and educational.`,
       ollamaApiKey,
       geminiApiKey,
       selectedModel,
+      coachingMode,
     ],
   );
 
@@ -737,6 +748,12 @@ When asked about code or data structures, be precise and educational.`,
                   Alt+C
                 </span>
               </div>
+              <label className="chat-coaching-toggle" data-chat-ignore
+                onMouseDown={event => event.stopPropagation()} onTouchStart={event => event.stopPropagation()}
+                title="Coach through requirements, invariants, edge cases and code review. Applies to your next message.">
+                <input type="checkbox" role="switch" checked={coachingMode} onChange={event => changeCoachingMode(event.target.checked)} />
+                <span>Interview coaching <strong>{coachingMode ? 'On' : 'Off'}</strong></span>
+              </label>
               <details className="chat-provider-settings" data-chat-ignore>
               <summary>AI connection · {selectedProviderLabel}</summary>
               <form

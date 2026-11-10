@@ -1,3 +1,4 @@
+import { serverTutorial } from './tutorial';
 
 import { useMemo, useState } from 'react';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace';
@@ -188,6 +189,7 @@ export default function BusiestServers() {
       <AlgorithmWorkspace
         key={approach}
         definition={definition}
+        tutorial={serverTutorial}
         renderVisual={({ run, step }) => (
           <BusiestServersVisual
             input={run.input}

@@ -1,3 +1,4 @@
+import TutorialScene from './TutorialScene';
 import { useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
 import LuminoDockPanel from '../LuminoDockPanel'
@@ -14,11 +15,12 @@ const PANELS = [
 ]
 
 // Problems own validation, execution states, and views. This owns only the shell.
-export default function AlgorithmWorkspace({ definition, renderVisual, renderReasoning }) {
+export default function AlgorithmWorkspace({ definition, renderVisual, renderReasoning, tutorial }) {
   const [draft, setDraft] = useState(definition.examples[0].input)
   const [run, setRun] = useState(() => definition.build(definition.parse(definition.examples[0].input)))
   const [error, setError] = useState('')
   const [panelDivs, setPanelDivs] = useState(null)
+  const [tutorialMode, setTutorialMode] = useState('off')
   const [floating, setFloating] = useState(true)
   const playback = usePlaybackState(run?.frames.length || 0)
   const step = run?.frames[Math.max(0, playback.stepIndex)]
@@ -84,7 +86,14 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
         <button type="button" key={example.label} onClick={() => execute(example.input)}>{example.label}</button>)}</div>
       {error && <p role="alert">{error}</p>}
     </form>
-    <div className="algorithm-workspace__dock">
+    {tutorial && <div className="tutorial-mode-switch" role="group" aria-label="Tutorial mode">
+      <span>Tutorial</span>{[['off','Off · Full view'],['steps','Step-by-step'],['why','Reason-first']].map(([value,label]) =>
+        <button key={value} type="button" aria-pressed={tutorialMode===value} onClick={()=>{ playback.setIsPlaying(false); setTutorialMode(value); }}>{label}</button>)}
+    </div>}
+    {tutorial && tutorialMode !== 'off' && run && <TutorialScene scene={tutorial({run,step})} mode={tutorialMode}>
+      {renderVisual({run,step})}
+    </TutorialScene>}
+    <div className="algorithm-workspace__dock" style={tutorial && tutorialMode !== 'off' ? {display:'none'} : undefined}>
       <LuminoDockPanel panels={PANELS} onPanelReady={setPanelDivs} />
       {Object.entries(views).map(([id, content]) => panelDivs?.[id]
         ? createPortal(<div className="algorithm-workspace__panel">{content}</div>, panelDivs[id], id) : null)}

@@ -1,3 +1,5 @@
+import { motion, useReducedMotion } from 'framer-motion';
+import { useTutorialScene } from '../../components/shared/TutorialScene';
 
 import { useEffect, useId, useRef, useState } from 'react';
 import HeapView from '../../components/shared/HeapView';
@@ -5,7 +7,7 @@ import './BusiestServersVisual.css';
 
 const NODES = ['request', 'free', 'busy', 'servers', 'timeline', 'result'];
 
-function useGeometry(ref, step) {
+function useGeometry(ref, step, focused) {
     const [geometry, setGeometry] = useState({ positions: {}, width: 0, height: 0 });
 
     useEffect(() => {
@@ -19,7 +21,8 @@ function useGeometry(ref, step) {
             for (const id of NODES) {
                 const element = root.querySelector(`[data-flow-node="${id}"]`);
                 if (!element) continue;
-                const r = element.getBoundingClientRect();
+                const endpoint = focused ? element.querySelector('[data-flow-anchor]') || element : element;
+                const r = endpoint.getBoundingClientRect();
                 positions[id] = {
                     x: r.left - outer.left,
                     y: r.top - outer.top,
@@ -35,6 +38,11 @@ function useGeometry(ref, step) {
         }
 
         measure();
+        // Follow the SVG camera while it zooms; arrows stay attached to nodes.
+        let frame;
+        const until = performance.now() + 450;
+        function follow() { measure(); if (performance.now() < until) frame = requestAnimationFrame(follow); }
+        if (focused) frame = requestAnimationFrame(follow);
         if (typeof ResizeObserver !== 'undefined') {
             observer = new ResizeObserver(measure);
             observer.observe(root);
@@ -45,10 +53,11 @@ function useGeometry(ref, step) {
         }
         window.addEventListener('resize', measure);
         return () => {
+            cancelAnimationFrame(frame);
             observer?.disconnect();
             window.removeEventListener('resize', measure);
         };
-    }, [ref, step.approach]);
+    }, [ref, step, focused]);
 
     return geometry;
 }
@@ -104,6 +113,8 @@ function route(a, b) {
 
 function FlowOverlay({ geometry, transfer, phase }) {
     const markerId = useId().replace(/:/g, '');
+    const reduced = useReducedMotion();
+    const tutorial = useTutorialScene();
     const { positions, width, height } = geometry;
     if (!transfer || !width || !height) return null;
 
@@ -149,29 +160,34 @@ function FlowOverlay({ geometry, transfer, phase }) {
                 textAnchor="middle" className="bs-arrow-label">{short}</text>
             <circle key={`${phase}-${transfer.from}-${transfer.to}-${label}`}
                 r="5" className="bs-moving-token">
-                <animateMotion dur="1.4s" repeatCount="indefinite" path={path} />
+                {!reduced && <animateMotion dur={tutorial ? '0.8s' : '1.4s'} repeatCount={tutorial ? '1' : 'indefinite'} fill="freeze" path={path} />}
+                {reduced && <set attributeName="opacity" to="0" />}
             </circle>
         </svg>
     );
 }
 
 function Panel({ id, title, subtitle, active, children }) {
+    const tutorial = useTutorialScene();
+    const reduced = useReducedMotion();
+    if (tutorial && !tutorial.focus.includes(id)) return null;
     return (
-        <section data-flow-node={id}
+        <motion.section layout={!!tutorial && !reduced} initial={false} transition={{duration:reduced?0:.35}} data-flow-node={id}
             className={`bs-panel ${active ? 'is-active' : ''}`}>
             <header className="bs-panel-header">
                 <strong>{title}</strong>
                 <span>{subtitle}</span>
             </header>
             {children}
-        </section>
+        </motion.section>
     );
 }
 
 function Requests({ input, step }) {
+    const tutorial = useTutorialScene();
     return (
         <div className="bs-requests">
-            {input.arrival.map((t, i) => (
+            {input.arrival.map((t, i) => (!tutorial || i === step.request) && (
                 <div key={i}
                     className={`bs-request ${i === step.request ? 'is-current' : ''} ${i < step.request ? 'is-complete' : ''}`}>
                     <strong>R{i}</strong>
@@ -315,10 +331,12 @@ function BusyPanel({ step }) {
 }
 
 function Servers({ input, step }) {
+    const tutorial = useTutorialScene();
     const busy = new Map(step.busy.map(j => [j.server, j.end]));
     return (
         <div className="bs-server-list">
             {Array.from({ length: input.k }, (_, s) => {
+                if (tutorial && step.server !== s && step.released !== s) return null;
                 const end = busy.get(s);
                 const isBusy = end !== undefined && end > step.clock;
                 const active = step.server === s || step.released === s;
@@ -342,48 +360,52 @@ function Servers({ input, step }) {
 }
 
 function Timeline({ input, step }) {
-    const start = Math.min(...input.arrival);
-    const end = Math.max(...input.arrival.map((t, i) => t + input.load[i]));
+    const tutorial = useTutorialScene();
+    const currentJob = step.jobs.find(job => job.request === step.request);
+    const visibleServers = tutorial && currentJob ? [currentJob.server] : Array.from({length:input.k},(_,s)=>s);
+    const rowIndex = s => visibleServers.indexOf(s);
+    const start = tutorial && currentJob ? currentJob.start : Math.min(...input.arrival);
+    const end = tutorial && currentJob ? currentJob.end : Math.max(...input.arrival.map((t, i) => t + input.load[i]));
     const span = Math.max(1, end - start);
     const width = 760;
     const left = 66;
     const plot = width - left - 25;
     const row = 43;
-    const height = input.k * row + 40;
+    const height = visibleServers.length * row + 40;
     const x = t => left + (t - start) / span * plot;
-    const activeJob = step.timelineJob;
+    const activeJob = step.timelineJob ?? (tutorial ? step.request : undefined);
 
     return (
         <div className="bs-timeline-scroll">
             <svg viewBox={`0 0 ${width} ${height}`}
                 width={width} height={height}
                 role="img" aria-label="Request execution intervals by server">
-                {Array.from({ length: input.k }, (_, s) => (
+                {visibleServers.map((s) => (
                     <g key={s}>
-                        <text x="8" y={s * row + 27} className="bs-svg-label">S{s}</text>
+                        <text x="8" y={rowIndex(s) * row + 27} className="bs-svg-label">S{s}</text>
                         <line x1={left} x2={left + plot}
-                            y1={s * row + 22} y2={s * row + 22}
+                            y1={rowIndex(s) * row + 22} y2={rowIndex(s) * row + 22}
                             className="bs-timeline-grid" />
                     </g>
                 ))}
-                {step.jobs.map(job => {
+                {step.jobs.filter(job => !tutorial || job.request === activeJob).map(job => {
                     const isActive = job.request === activeJob;
                     const w = Math.max(3, x(job.end) - x(job.start));
                     return (
                         <g key={job.request}>
                             <rect
-                                x={x(job.start)} y={job.server * row + 8}
+                                x={x(job.start)} y={rowIndex(job.server) * row + 8}
                                 width={w} height="28" rx="5"
                                 className={`bs-job ${isActive ? 'is-new' : ''}`}
                             />
                             {w > 22 && (
                                 <text x={x(job.start) + w / 2}
-                                    y={job.server * row + 26}
+                                    y={rowIndex(job.server) * row + 26}
                                     textAnchor="middle"
                                     className="bs-job-label">R{job.request}</text>
                             )}
                             {isActive && (
-                                <rect x={x(job.start)} y={job.server * row + 6}
+                                <rect x={x(job.start)} y={rowIndex(job.server) * row + 6}
                                     width={w} height="32" rx="6"
                                     className="bs-job-outline" />
                             )}
@@ -393,7 +415,7 @@ function Timeline({ input, step }) {
                 {step.request >= 0 && (
                     <g>
                         <line x1={x(step.clock)} x2={x(step.clock)}
-                            y1="0" y2={input.k * row + 3}
+                            y1="0" y2={visibleServers.length * row + 3}
                             className="bs-clock-line" />
                         <text x={x(step.clock)}
                             y={height - 7} textAnchor="middle"
@@ -440,12 +462,13 @@ function Results({ step }) {
 
 export default function BusiestServersVisual({ input, step }) {
     const ref = useRef(null);
-    const geometry = useGeometry(ref, step);
+    const tutorial = useTutorialScene();
+    const geometry = useGeometry(ref, step, !!tutorial);
     const transfer = step.transfer;
     const active = id => transfer?.from === id || transfer?.to === id;
 
     return (
-        <div className="bs-visual">
+        <div className={`bs-visual ${tutorial ? 'bs-tutorial' : ''}`}>
             <div className="bs-heading">
                 <div>
                     <strong>Server scheduling simulator</strong>
