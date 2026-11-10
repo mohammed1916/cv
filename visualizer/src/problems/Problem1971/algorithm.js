@@ -59,33 +59,41 @@ export function parseInput(text) {
   return { n, edges, source, destination }
 }
 
+// Every frame records the real visited marks (set when a vertex is enqueued), the queue after the
+// operation, and the vertices already finished. `kind` names the operation for the tutorial.
 export function buildTrace({ n, edges, source, destination }) {
   const adj = Array.from({ length: n }, () => [])
   for (const [u, v] of edges) { adj[u].push(v); adj[v].push(u) }
   const visited = new Array(n).fill(false)
   visited[source] = true
   const queue = [source]
-  const order = []
+  const marked = [source]
+  const finished = []
   const frames = []
   let found = false
   let head = 0
+  const frame = fields => frames.push({ phase: 'expand', visited: [...marked], frontier: queue.slice(head), done: [...finished], neighbour: null, ...fields })
+  frame({ kind: 'init', activeLine: L('const queue = [source]'), pythonLine: P('queue = deque'), message: `Mark source ${source} visited and enqueue it.`, current: null })
   while (head < queue.length) {
     const u = queue[head++]
-    order.push(u)
+    frame({ kind: 'dequeue', activeLine: L('const u = queue[head++]'), pythonLine: P('u = queue.popleft'), message: `Dequeue ${u}; look at its neighbours.`, current: u })
     if (u === destination) {
       found = true
-      frames.push({ phase: 'expand', activeLine: L('if (u === destination)'), pythonLine: P('if u == destination'), message: `Reached destination ${destination}.`, current: u, neighbour: null, visited: [...order], frontier: queue.slice(head), done: order.slice(0, -1) })
+      frame({ kind: 'found', phase: 'done', activeLine: L('if (u === destination)'), pythonLine: P('return True'), message: `Dequeued ${u}, the destination: return true.`, current: u, result: true })
       break
     }
-    frames.push({ phase: 'expand', activeLine: L('const u = queue[head++]'), pythonLine: P('u = queue.popleft'), message: `Dequeue ${u}; look at its neighbours.`, current: u, neighbour: null, visited: [...order], frontier: queue.slice(head), done: order.slice(0, -1) })
     for (const v of adj[u]) {
-      if (!visited[v]) {
+      if (visited[v]) {
+        frame({ kind: 'skip', activeLine: L('if (!visited[v])'), pythonLine: P('if not visited[v]'), message: `Neighbour ${v} is already visited: skip it.`, current: u, neighbour: v })
+      } else {
         visited[v] = true
+        marked.push(v)
         queue.push(v)
-        frames.push({ phase: 'expand', activeLine: L('queue.push(v)'), pythonLine: P('queue.append(v)'), message: `Vertex ${v} is new: enqueue it.`, current: u, neighbour: v, visited: [...order], frontier: queue.slice(head), done: order.slice(0, -1) })
+        frame({ kind: 'enqueue', activeLine: L('queue.push(v)'), pythonLine: P('queue.append(v)'), message: `Vertex ${v} is new: mark it visited and enqueue it.`, current: u, neighbour: v })
       }
     }
+    finished.push(u)
   }
-  frames.push({ phase: 'done', activeLine: L('return true'), pythonLine: P(found ? 'return True' : 'return False'), message: found ? 'A valid path exists.' : 'The queue emptied before the destination was reached.', current: null, neighbour: null, visited: [...order], frontier: [], done: [...order], result: found })
+  if (!found) frame({ kind: 'not-found', phase: 'done', activeLine: L('return false'), pythonLine: P('return False'), message: 'The queue emptied before the destination was reached.', current: null, result: false })
   return { input: { n, edges, source, destination }, result: found, frames }
 }

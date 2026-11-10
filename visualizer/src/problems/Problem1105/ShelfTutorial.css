@@ -1,0 +1,17 @@
+.shelf-tv { display: grid; gap: 14px; }
+.shelf-tv__cells { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.shelf-tv__cell { min-width: 120px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface2); display: grid; gap: 4px; text-align: center; }
+.shelf-tv__cell span { color: var(--text-muted); font-size: 12px; }
+.shelf-tv__cell strong { font-family: var(--mono, monospace); font-size: 20px; color: var(--text); }
+.shelf-tv__cell.is-target { border-color: var(--accent, #0891b2); box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent, #0891b2) 35%, transparent); }
+.shelf-tv__cell.is-source { border-style: dashed; border-color: var(--accent, #0891b2); }
+.shelf-tv__shelf { display: grid; gap: 10px; }
+.shelf-tv__books { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.shelf-tv__book { display: inline-grid; gap: 2px; padding: 8px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); font-size: 12px; color: var(--text); }
+.shelf-tv__book b { font-family: var(--mono, monospace); color: var(--text-muted); }
+.shelf-tv__book.is-over { border-color: #dc2626; }
+.shelf-tv__gauge { position: relative; height: 22px; border-radius: 6px; background: var(--surface2); border: 1px solid var(--border); overflow: hidden; }
+.shelf-tv__gauge span { position: absolute; inset: 0 auto 0 0; background: var(--accent, #0891b2); opacity: .45; }
+.shelf-tv__gauge span.is-over { background: #dc2626; opacity: .6; }
+.shelf-tv__gauge em { position: relative; font-style: normal; font-size: 12px; padding: 0 8px; line-height: 20px; color: var(--text); }
+.shelf-tv__note { margin: 0; color: var(--text-muted); font-size: 12px; }

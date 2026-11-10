@@ -2,9 +2,43 @@ import {intervalView} from '../../../components/shared/intervalModel.js';
 import {TracedHeap,heapView} from '../../../components/shared/heapModel.js';
 const total=a=>a.reduce((x,y)=>x+y,0);
 const byPair=(x,y)=>x[0]-y[0]||x[1]-y[1];
+function solveJumpWindow({s,minJump,maxJump},emit){
+  const n=s.length,reachable=Array(n).fill(false);
+  // Displayed Python line for each trace stage; the done frame is mapped to the return line by Problem1871/trace.js.
+  const LINE={init:3,loop:5,enter_check:6,enter:7,leave_check:8,leave:9,update:10};
+  reachable[0]=true;
+  let predecessors=0;
+  const windowFor=i=>{const earliest=Math.max(0,i-maxJump),latest=i-minJump;return latest<earliest?{earliest:null,latest:null}:{earliest,latest};};
+  const contributorsIn=({earliest,latest})=>earliest===null?[]:reachable.flatMap((v,j)=>v&&j>=earliest&&j<=latest?[j]:[]);
+  const view=(i,window,fields)=>({destination:i,earliest:window.earliest,latest:window.latest,entering:null,leaving:null,enterValue:false,leaveValue:false,count:predecessors,contributors:contributorsIn(window),blocked:s[i]==='1',decided:null,reachable:[...reachable],...fields});
+  emit('Position 0 is the start and is reachable. Every later position is decided left to right using only its legal predecessor window [i-maxJump, i-minJump].',{sequence:s,index:0,output:[...reachable],codeStage:'init',activeLine:LINE.init,metrics:{predecessors:0},jumpWindow:view(0,{earliest:null,latest:null},{decided:true,reason:'Position 0 is the start, so it is reachable.'})},'start');
+  for(let i=1;i<n;i++){
+    const window=windowFor(i),range=window.earliest===null?'empty':`[${window.earliest}..${window.latest}]`;
+    const at=(codeStage,phase,message,fields={})=>emit(message,{sequence:s,index:i,output:[...reachable],codeStage,activeLine:LINE[codeStage],metrics:{predecessors,earliest:window.earliest,latest:window.latest},jumpWindow:view(i,window,{reason:message,...fields})},phase);
+    at('loop','inspect',window.earliest===null?`Destination ${i} has no legal predecessor yet, because ${i} is closer than minJump ${minJump}.`:`Destination ${i} can only be entered from the window ${range}.`,{count:null});
+    const entering=i-minJump>=0?i-minJump:null;
+    at('enter_check','inspect',entering===null?`${i} is smaller than minJump ${minJump}, so no position enters the window. The count stays ${predecessors}.`:`Position ${entering} is the new right edge of the window.`,{entering,enterValue:entering!==null&&reachable[entering]});
+    if(entering!==null){
+      const enterValue=reachable[entering];
+      predecessors+=Number(enterValue);
+      at('enter','inspect',enterValue?`Position ${entering} is reachable, so the count rises to ${predecessors}.`:`Position ${entering} is unreachable, so the count holds at ${predecessors}.`,{entering,enterValue,count:predecessors});
+    }
+    const leaving=i-maxJump-1>=0?i-maxJump-1:null;
+    at('leave_check','inspect',leaving===null?`No position has fallen off the left edge yet, so nothing leaves the window.`:`Position ${leaving} is now beyond maxJump and leaves the window.`,{leaving,leaveValue:leaving!==null&&reachable[leaving]});
+    if(leaving!==null){
+      const leaveValue=reachable[leaving];
+      predecessors-=Number(leaveValue);
+      at('leave','inspect',leaveValue?`Position ${leaving} was reachable, so it leaves and the count falls to ${predecessors}.`:`Position ${leaving} was unreachable, so the count holds at ${predecessors}.`,{leaving,leaveValue,count:predecessors});
+    }
+    const blocked=s[i]==='1',decided=!blocked&&predecessors>0;
+    reachable[i]=decided;
+    at('update','update',blocked?`Destination ${i} is '1', so it is blocked. The count ${predecessors} is ignored.`:decided?`Destination ${i} is '0' and ${predecessors} reachable predecessor(s) lie in ${range}, so it becomes reachable.`:`Destination ${i} is '0', but no reachable predecessor lies in ${range}, so it stays unreachable.`,{count:predecessors,decided});
+  }
+  return reachable.at(-1);
+}
 export const broadSolvers={
 1870({dist,hour},emit){if(hour<=dist.length-1){emit('Every nonfinal train consumes at least one rounded hour, leaving no positive time for the final ride.',{codeStage:'impossible'});return -1;}const units=Math.round(hour*100);let low=1,high=10000000;while(low<high){const speed=Math.floor((low+high)/2);let whole=0;for(let i=0;i<dist.length-1;i++)whole+=Math.ceil(dist[i]/speed);const feasible=100*(whole*speed+dist.at(-1))<=units*speed;emit('Round each nonfinal ride up to a whole hour. Keep the final ride fractional and compare in hundredths without repeated floating-point division.',{sequence:dist,codeStage:'search',metrics:{low,high,speed,wholeHours:whole,feasible,hour}},'update');if(feasible)high=speed;else low=speed+1;}return low;},
-1871({s,minJump,maxJump},emit){const n=s.length,reachable=Array(n).fill(false);reachable[0]=true;let predecessors=0;const legal=i=>({earliest:Math.max(0,i-maxJump),latest:i-minJump});const contributors=i=>{const {earliest,latest}=legal(i),out=[];for(let j=earliest;j<=latest;j++)if(j<i&&reachable[j])out.push(j);return out;};emit('Position 0 is the start and is reachable. Each later position is decided left to right, using only the legal predecessor window [i-maxJump, i-minJump].',{sequence:s,index:0,output:[...reachable],codeStage:'update',metrics:{predecessors:0},jumpWindow:{destination:0,earliest:null,latest:null,entering:null,leaving:null,enterValue:false,leaveValue:false,count:0,contributors:[],blocked:false,decided:true,reachable:[...reachable],reason:'Position 0 is the start, so it is reachable.'}},'start');for(let i=1;i<n;i++){const entering=i-minJump>=0?i-minJump:null,leaving=i-maxJump-1>=0?i-maxJump-1:null,enterValue=entering!==null&&reachable[entering],leaveValue=leaving!==null&&reachable[leaving];predecessors+=Number(enterValue);predecessors-=Number(leaveValue);const {earliest,latest}=legal(i),empty=latest<earliest,blocked=s[i]==='1',contrib=contributors(i),range=empty?'empty (no legal predecessor exists yet)':`[${earliest}..${latest}]`;const base={destination:i,earliest:empty?null:earliest,latest:empty?null:latest,entering,leaving,enterValue:Boolean(enterValue),leaveValue:Boolean(leaveValue),count:predecessors,contributors:contrib,blocked,reachable:[...reachable]};emit(`Destination ${i}: the legal predecessor window is ${range}. ${entering===null?'No position enters yet.':`Position ${entering} enters${enterValue?' and is reachable, so the count rises':' and is unreachable, so the count holds'}.`} ${leaving===null?'No position leaves yet.':`Position ${leaving} leaves${leaveValue?' after being reachable, so the count falls':' and was unreachable, so the count holds'}.`} ${predecessors} reachable predecessor(s) are in the window.`,{sequence:s,index:i,output:[...reachable],codeStage:'update',metrics:{predecessors,earliest,latest},jumpWindow:{...base,decided:null,reason:'The window is updated. The destination is not decided yet.'}},'inspect');const decided=!blocked&&predecessors>0;reachable[i]=decided;const reason=blocked?`Destination ${i} is '1', so it stays unreachable whatever the window count (${predecessors}).`:decided?`Destination ${i} is '0', and reachable predecessor(s) ${contrib.join(', ')} lie in ${range}, so it becomes reachable.`:`Destination ${i} is '0', but no reachable predecessor lies in ${range}, so it stays unreachable.`;emit(reason,{sequence:s,index:i,output:[...reachable],codeStage:'update',metrics:{predecessors,earliest,latest},jumpWindow:{...base,reachable:[...reachable],decided,reason}},'update');}return reachable.at(-1);},
+1871:solveJumpWindow,
 1872({stones},emit){const prefix=[];let running=0;for(const value of stones){running+=value;prefix.push(running);}let best=prefix.at(-1);for(let i=stones.length-2;i>=1;i--){const take=prefix[i]-best;best=Math.max(best,take);emit('At this prefix boundary, either preserve the later best move or take this prefix sum and subtract the opponent best continuation.',{sequence:stones,index:i,output:prefix,codeStage:'update',metrics:{prefixSum:prefix[i],take,best}},'update');}return best;},
 1874({nums1,nums2},emit){const a=[...nums1].sort((x,y)=>x-y),b=[...nums2].sort((x,y)=>y-x);let answer=0;for(let i=0;i<a.length;i++){answer+=a[i]*b[i];emit('Pair small first-array values with large second-array values. Swapping crossed pairings into this order never increases the product sum.',{sequence:a,index:i,output:b,codeStage:'update',metrics:{product:a[i]*b[i],answer}},'update');}return answer;},
 1876({s},emit){let answer=0;for(let i=2;i<s.length;i++){const window=s.slice(i-2,i+1),good=new Set(window).size===3;if(good)answer++;emit('Only three characters belong to this window. Count it when all three are distinct, then slide one position.',{sequence:s,window:[i-2,i],codeStage:'update',metrics:{good,answer}},'update');}return answer;},
@@ -51,30 +85,43 @@ export const broadSolvers={
       output: smallInput ? answer.slice() : answer, outputCount: answer.length,
     } }, phase);
   };
+  // Pseudocode lines: 1 setup, 2 arrival clock, 3 release, 4 wait-or-check, 5 choose and record, 6 schedule finish, 7 return.
   show('Ready', 0, 'Task i arrives at time i. Keep tasks in arrival order; server weight decides which idle server takes the head task.', {phase:'start', activeLine:1, pythonLine:4, codeStage:'start'});
   for (let i=0;i<tasks.length;i++) {
+    const previousClock = ts;
     ts = Math.max(ts, i);
+    show('Arrive', i, previousClock === ts
+      ? `T${i} arrives at time ${i}, which does not move the clock past ${ts}.`
+      : `T${i} arrives at time ${i}. The clock advances from ${previousClock} to ${ts}, skipping the idle gap.`,
+      {activeLine:2, pythonLine:13, codeStage:'arrive'});
     const released = release();
-    if (released) show('Release', i, `At time ${ts}, ${released} server(s) with finish time at most ${ts} return to the idle pool.`, {activeLine:2, pythonLine:14, codeStage:'release'});
+    show('Release', i, released
+      ? `${released} server(s) with finish time at most ${ts} return to the idle pool.`
+      : `No busy server finishes by time ${ts}, so the idle pool is unchanged.`,
+      {activeLine:3, pythonLine:14, codeStage:'release'});
     if (!idle.size) {
       const next = busy.peek()[0];
-      show('Wait', i, `T${i} is waiting and every server is busy. Advance the clock from ${ts} to ${next}, the earliest completion.`, {jumpTo:next, activeLine:3, pythonLine:16, codeStage:'wait'});
+      show('Wait', i, `T${i} is waiting and every server is busy. Advance the clock from ${ts} to ${next}, the earliest completion.`, {jumpTo:next, activeLine:4, pythonLine:16, codeStage:'wait'});
       ts = next;
-      release();
+      const again = release();
+      show('Release', i, `At time ${ts}, ${again} server(s) finishing now return to the idle pool.`, {activeLine:4, pythonLine:17, codeStage:'release'});
+    } else {
+      show('Check', i, `${idle.size} idle server(s) are available at time ${ts}, so T${i} starts now without waiting.`, {activeLine:4, pythonLine:15, codeStage:'check'});
     }
     const [weight, server] = idle.peek();
     const tied = idle.size <= 50 ? idle.data.filter(p=>p[0]===weight).map(p=>p[1]).sort((a,b)=>a-b) : [];
     const tieNote = tied.length > 1 ? `; among equal weights (${tied.map(s=>'S'+s).join(', ')}), index ${server} is smallest` : '';
-    show('Choose', i, `At time ${ts}, T${i} is first in the queue. Choose S${server}: weight ${weight} is smallest${tieNote}.`, {selected:server, activeLine:4, pythonLine:18, codeStage:'choose'});
+    show('Choose', i, `At time ${ts}, T${i} is first in the queue. Choose S${server}: weight ${weight} is smallest${tieNote}.`, {selected:server, activeLine:5, pythonLine:18, codeStage:'choose'});
     idle.pop();
     answer.push(server);
+    show('Record', i, `S${server} leaves the idle pool and is recorded as the server for T${i}.`, {selected:server, activeLine:5, pythonLine:19, codeStage:'record'});
     const end = ts + tasks[i];
     serverView[server].freeAt = end;
     assignments.push({task:i, server, start:ts, end});
     busy.push([end, server]);
-    show('Assign', i+1, `T${i} → S${server}, running from ${ts} to ${end}. Duration ${tasks[i]} sets the finish time; weight ${weight} only sets selection priority.`, {selected:server, phase:'update', activeLine:5, pythonLine:20, codeStage:'assign'});
+    show('Assign', i+1, `T${i} → S${server}, running from ${ts} to ${end}. Duration ${tasks[i]} sets the finish time; weight ${weight} only sets selection priority.`, {selected:server, phase:'update', activeLine:6, pythonLine:20, codeStage:'assign'});
   }
-  show('Return', tasks.length, 'Every task is assigned. Return the server index chosen for each task.', {phase:'update', activeLine:5, pythonLine:21, codeStage:'return'});
+  show('Return', tasks.length, 'Every task is assigned. Return the server index chosen for each task.', {phase:'update', activeLine:7, pythonLine:21, codeStage:'return'});
   return answer;
 },
 1884({n},emit){let moves=0,covered=0;while(covered<n){moves++;covered+=moves;emit('With two eggs and this many moves, choose decreasing test gaps. The newly added gap equals the move budget, growing coverage by a triangular number.',{codeStage:'update',metrics:{moves,covered,requiredFloors:n}},'update');}return moves;},

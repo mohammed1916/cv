@@ -48,7 +48,7 @@ function verify(id,input){
 }
 
 for(const key of Object.keys(nextSolvers))test(`${key}: original examples match independent references and invariants`,()=>{
-  const id=Number(key),d=definitions[id];assert.equal(d.examples.length,4);assert.equal(d.code.length,5);
+  const id=Number(key),d=definitions[id];assert.ok(d.examples.length>=4);assert.equal(d.code.length,5);
   for(const e of d.examples)verify(id,JSON.parse(e.input));
   assert.throws(()=>d.parse('{}'));assert.throws(()=>d.parse('null'));assert.throws(()=>d.parse('[]'));
 });

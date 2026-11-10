@@ -1,0 +1,15 @@
+.ngv { display: grid; gap: 0.75rem; justify-items: start; }
+.ngv__cell { display: grid; gap: 0.25rem; padding: 0.75rem 1rem; border: 1px solid currentColor; border-radius: 0.5rem; min-width: 7rem; }
+.ngv__cell small { opacity: 0.75; }
+.ngv__cell strong { font-size: 1.6rem; }
+.ngv__cell.is-popped { border-style: dashed; }
+.ngv__cell.is-answered { box-shadow: 0 0 0 2px currentColor inset; }
+.ngv__compare { margin: 0; }
+.ngv__stack { display: grid; gap: 0.35rem; }
+.ngv__chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.ngv__chip { padding: 0.25rem 0.5rem; border: 1px solid currentColor; border-radius: 999px; }
+.ngv__chip.is-top { font-weight: 700; box-shadow: 0 0 0 2px currentColor; }
+.ngv__answers { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; padding: 0; margin: 0; }
+.ngv__answers li { padding: 0.35rem 0.6rem; border: 1px solid currentColor; border-radius: 0.4rem; }
+.ngv__answers li.is-answered { font-weight: 700; }
+@media (prefers-reduced-motion: reduce) { .ngv * { transition: none !important; animation: none !important; } }

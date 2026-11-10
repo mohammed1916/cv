@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import GraphTraversalView from '../../components/shared/GraphTraversalView'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import { bfsTutorial } from './tutorial'
+import BfsVisual from './BfsTutorial'
 
 const definition = {
   number: '1971',
@@ -21,12 +22,8 @@ const definition = {
 export default function Problem1971Visualizer() {
   return <AlgorithmWorkspace
     definition={definition}
-    renderVisual={({ run, step }) => <>
-      <GraphTraversalView title="Breadth-first search" n={run.input.n} edges={run.input.edges}
-        current={step.current} neighbour={step.neighbour} visited={step.visited} frontier={step.frontier} done={step.done}
-        frontierKind="queue" />
-      {step.result !== undefined && <output aria-label="Path found">Path exists: {step.result ? 'yes' : 'no'}</output>}
-    </>}
+    tutorial={bfsTutorial}
+    renderVisual={({ run, step }) => <BfsVisual run={run} step={step} />}
     renderReasoning={({ step }) => <p>{step.message}</p>}
   />
 }

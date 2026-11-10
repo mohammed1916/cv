@@ -35,3 +35,17 @@ test('1019 random lists match a forward-scan oracle', () => {
     assert.deepEqual(solve(values), oracle(values), JSON.stringify(values))
   }
 })
+
+import { buildTrace as trace } from './algorithm.js'
+
+test('1019 frames separate pop, answer assignment and condition-only checks', () => {
+  const run = trace(parseInput('{"values":[2,7,4,3,5]}'))
+  const kinds = run.frames.map(f => f.kind)
+  // Position 0 (value 2) is resolved by 7 once; the 4 and 3 frames show failed comparisons with no pops.
+  assert.equal(kinds.filter(k => k === 'pop').length, kinds.filter(k => k === 'assign').length)
+  assert.equal(kinds.filter(k => k === 'pop').length, 3)
+  assert.ok(run.frames.some(f => f.kind === 'check' && f.compare === false && f.top !== null))
+  assert.ok(run.frames.some(f => f.kind === 'check' && f.top === null))
+  // Every frame names a real displayed code row.
+  assert.ok(run.frames.every(f => f.activeLine >= 1 && f.activeLine <= 12))
+})

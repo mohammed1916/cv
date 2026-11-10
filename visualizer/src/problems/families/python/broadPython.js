@@ -15,13 +15,13 @@ export const broadPython={
     return low  # step: return`,
 1871:`def solve(s, minJump, maxJump):
     reachable = [False] * len(s)
-    reachable[0] = True
+    reachable[0] = True  # step: init
     predecessors = 0
-    for index in range(1, len(s)):
-        if index >= minJump:
-            predecessors += reachable[index - minJump]
-        if index > maxJump:
-            predecessors -= reachable[index - maxJump - 1]
+    for index in range(1, len(s)):  # step: loop
+        if index >= minJump:  # step: enter_check
+            predecessors += reachable[index - minJump]  # step: enter
+        if index > maxJump:  # step: leave_check
+            predecessors -= reachable[index - maxJump - 1]  # step: leave
         reachable[index] = s[index] == '0' and predecessors > 0  # step: update
     return reachable[-1]  # step: return`,
 1872:`def solve(stones):

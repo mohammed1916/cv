@@ -1,288 +1,95 @@
-import authoredExamples0 from '../../config/examples/two-sum-ii.js';
-
-const AUTHORED_INITIAL = authoredExamples0[0];
-import { useState, useMemo, useCallback } from 'react'
-import { createPortal } from 'react-dom'
-import { motion, AnimatePresence } from 'framer-motion'
-import CodeTracePanel from '../../components/CodeTracePanel'
-import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
-import { usePlaybackState } from '../../hooks/usePlaybackState'
-import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import { useTutorialScene } from '../../components/shared/TutorialScene'
+import { buildTrace, parseInput, code, python, phases } from './algorithm'
+import { twoSumTutorial } from './tutorial'
+import authoredExamples from '../../config/examples/two-sum-ii.js'
 import './TwoSumIIVisualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-import CodePatternAnnotations from '../../components/CodePatternAnnotations'
-import PatternLegend from '../../components/PatternLegend'
-import LuminoDockPanel from '../../components/LuminoDockPanel'
 
-
-// ─── Pattern annotations ───────────────────────────────────────────────────
-const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
-const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const SOLUTION_CODE = [
-    { line: 1, text: 'class Solution:' },
-    { line: 2, text: '    def twoSum(self, numbers: List[int], target: int) -> List[int]:' },
-    { line: 3, text: '        lo, hi = 0, len(numbers) - 1' },
-    { line: 4, text: '' },
-    { line: 5, text: '        while lo < hi:' },
-    { line: 6, text: '            s = numbers[lo] + numbers[hi]' },
-    { line: 7, text: '' },
-    { line: 8, text: '            if s == target:' },
-    { line: 9, text: '                return [lo + 1, hi + 1]' },
-    { line: 10, text: '            elif s < target:' },
-    { line: 11, text: '                lo += 1' },
-    { line: 12, text: '            else:' },
-    { line: 13, text: '                hi -= 1' },
-    { line: 14, text: '' },
-    { line: 15, text: '        return []' },
-]
-
-function generateSteps(numbers, target) {
-    const steps = []
-    let lo = 0
-    let hi = numbers.length - 1
-
-    steps.push({
-        phase: 'init', activeLine: 3,
-        lo, hi, sum: null, result: null,
-        message: `Initialize lo=0, hi=${hi}. Target=${target}. Array is sorted.`,
-    })
-
-    while (lo < hi) {
-        steps.push({
-            phase: 'loop', activeLine: 5,
-            lo, hi, sum: null, result: null,
-            message: `lo=${lo} < hi=${hi}. Continue.`,
-        })
-
-        const s = numbers[lo] + numbers[hi]
-
-        steps.push({
-            phase: 'calc', activeLine: 6,
-            lo, hi, sum: s, result: null,
-            message: `sum = numbers[${lo}](${numbers[lo]}) + numbers[${hi}](${numbers[hi]}) = ${s}. Target = ${target}.`,
-        })
-
-        if (s === target) {
-            steps.push({
-                phase: 'found', activeLine: 9,
-                lo, hi, sum: s, result: [lo + 1, hi + 1],
-                message: `sum(${s}) == target(${target})! Return [${lo + 1}, ${hi + 1}] (1-indexed).`,
-            })
-            return steps
-        } else if (s < target) {
-            steps.push({
-                phase: 'move_lo', activeLine: 11,
-                lo: lo + 1, hi, sum: s, result: null,
-                message: `sum(${s}) < target(${target}). Need larger sum → lo++ (${lo} → ${lo + 1}).`,
-            })
-            lo++
-        } else {
-            steps.push({
-                phase: 'move_hi', activeLine: 13,
-                lo, hi: hi - 1, sum: s, result: null,
-                message: `sum(${s}) > target(${target}). Need smaller sum → hi-- (${hi} → ${hi - 1}).`,
-            })
-            hi--
-        }
-    }
-
-    steps.push({
-        phase: 'done', activeLine: 15,
-        lo, hi, sum: null, result: [],
-        message: 'lo >= hi. No pair found.',
-    })
-    return steps
+const definition = {
+  number: '167',
+  phases,
+  parse: parseInput,
+  build: buildTrace,
+  code,
+  python,
+  inputLabel: 'JSON object with a sorted numbers list and target (e.g. {"numbers":[2,7,11,15],"target":9})',
+  url: 'https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/',
+  complexity: 'O(n) time and O(1) extra space: each pointer moves at most n times.',
+  examples: authoredExamples.map(example => ({
+    label: example.label,
+    input: JSON.stringify({ numbers: example.numbers, target: example.target }),
+  })),
 }
 
-const EXAMPLES = authoredExamples0
+// Roles name the pointer on each real index; the window is rendered with its real indices as offsets.
+function roleFor(index, s) {
+  if (index === s.left && index === s.right) return 'both'
+  if (index === s.left) return 'left'
+  if (index === s.right) return 'right'
+  return ''
+}
+
+// Two pointed cells with their real positions: the only cells the comparison reads.
+function PairCells({ numbers, s, found }) {
+  const cells = [s.left, s.right]
+  return <div className="ts2-pair" role="group" aria-label="Pointed values">
+    {cells.map((index, slot) => <div key={slot} className={`ts2-pair__cell ${found ? 'is-found' : ''}`} data-role={slot === 0 ? 'left' : 'right'}>
+      <small>{slot === 0 ? 'left' : 'right'} · [{index + 1}]</small>
+      <strong>{numbers[index]}</strong>
+    </div>)}
+    <div className="ts2-pair__sum">
+      <span>{numbers[s.left]} + {numbers[s.right]}</span>
+      <strong>{s.total === null ? '' : `= ${s.total}`}</strong>
+      <span>target {s.target}</span>
+    </div>
+  </div>
+}
+
+// Scene focus: window shows only the live range [left..right]; pair shows only the two ends.
+export function FocusedTwoSum({ step, focus, numbers }) {
+  const s = step.snapshot
+  if (focus.includes('empty')) {
+    return <p className="ts2-note" role="status">The pointers met at positions {s.left + 1} and {s.right + 1}. No pair is left in the window.</p>
+  }
+  if (focus.includes('pair')) {
+    return <PairCells numbers={numbers} s={s} found={focus.includes('result')} />
+  }
+  const length = s.right - s.left + 1
+  return <IndexedSequence label="Live window (left to right)" length={length} active={-1} indexOffset={s.left}
+    valueAt={k => numbers[s.left + k]} roleAt={k => roleFor(s.left + k, s)} />
+}
+
+export function FullTwoSum({ step, numbers }) {
+  const s = step.snapshot
+  return <div className="ts2-full">
+    <IndexedSequence label="Sorted numbers" length={numbers.length} active={s.left}
+      valueAt={k => numbers[k]} roleAt={k => roleFor(k, s)} />
+    <dl className="ts2-facts" aria-label="Pointer state">
+      <dt>left</dt><dd>{s.left + 1}</dd>
+      <dt>right</dt><dd>{s.right + 1}</dd>
+      <dt>sum</dt><dd>{s.total ?? 'not computed'}</dd>
+      <dt>target</dt><dd>{s.target}</dd>
+    </dl>
+  </div>
+}
+
+function TwoSumView({ run, step }) {
+  const scene = useTutorialScene()
+  const numbers = run.input.numbers
+  return scene
+    ? <FocusedTwoSum step={step} focus={scene.focus || []} numbers={numbers} />
+    : <FullTwoSum step={step} numbers={numbers} />
+}
 
 export default function TwoSumIIVisualizer() {
-    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.numbers))
-    const [targetInput, setTargetInput] = useState(String(AUTHORED_INITIAL.target))
-
-    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
-
-    const { numbers, target, inputError } = useMemo(() => {
-        try {
-            const n = JSON.parse(numsInput)
-            const t = parseInt(targetInput, 10)
-            if (!Array.isArray(n) || n.length < 2) throw new Error('Need at least 2 elements')
-            if (n.length > 14) throw new Error('Max 14 elements for clarity')
-            if (isNaN(t)) throw new Error('Target must be a number')
-            return { numbers: n, target: t, inputError: '' }
-        } catch (e) {
-            return { numbers: [2, 7, 11, 15], target: 9, inputError: e.message }
-        }
-    }, [numsInput, targetInput])
-
-    const steps = useMemo(() => generateSteps(numbers, target), [numbers, target])
-    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
-
-    const step = stepIndex >= 0 ? steps[stepIndex] : null
-    const applyExample = useCallback((ex) => {
-        setNumsInput(JSON.stringify(ex.numbers))
-        setTargetInput(String(ex.target))
-        handleReset()
-    }, [handleReset])
-
-    const lo = step?.lo ?? 0
-    const hi = step?.hi ?? numbers.length - 1
-    const sum = step?.sum ?? null
-    const result = step?.result
-
-    // ─── Extract panels into consts ───
-    const primaryPanel = (
-    <>
-
-      <ManualInputPanel
-        fields={[{"key":"nums","label":"nums","type":"array"},{"key":"target","label":"target","type":"string"}]}
-        values={{ nums: numsInput, target: targetInput }}
-        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'target') setTargetInput(v); handleReset() }}
-        examples={EXAMPLES}
-        applyExample={applyExample}
-        inputError={inputError}
-      />
-
-        <div className="ts2-panel">
-            <header className="ts2-head">
-                <span>Two Sum II · Two Pointers</span>
-                {inputError && <span className="ts2-error">{inputError}</span>}
-            </header>
-            <div className="ts2-body">
-                <div className="ts2-top-row">
-                    <div className="ts2-examples">
-                        {EXAMPLES.map(ex => (
-                            <button key={ex.label} className="ts2-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                        ))}
-                    </div>
-                    
-                </div>
-
-                {/* Array */}
-                <div className="ts2-array">
-                    {numbers.map((val, idx) => {
-                        const isLo = idx === lo
-                        const isHi = idx === hi
-                        const isBoth = isLo && isHi
-                        const isFound = Array.isArray(result) && result.length === 2 && (idx === result[0] - 1 || idx === result[1] - 1)
-                        const isElim = !isLo && !isHi && !isFound
-                        return (
-                            <div key={idx} className="ts2-col">
-                                <motion.div
-                                    className={['ts2-cell',
-                                        isFound ? 'found' : '',
-                                        isLo && !isBoth && !isFound ? 'lo' : '',
-                                        isHi && !isBoth && !isFound ? 'hi' : '',
-                                        isBoth && !isFound ? 'both' : '',
-                                        isElim && result !== null ? 'dim' : '',
-                                    ].filter(Boolean).join(' ')}
-                                    animate={{ y: isLo || isHi || isFound ? -8 : 0, scale: isFound ? 1.15 : (isLo || isHi ? 1.08 : 1) }}
-                                    transition={{ type: 'spring', stiffness: 400, damping: 26 }}
-                                >
-                                    {val}
-                                </motion.div>
-                                <span className="ts2-idx">{idx + 1}</span>
-                                <div className="ts2-ptrs">
-                                    {isLo && <span className="ts2-ptr lo-ptr">lo</span>}
-                                    {isHi && !isLo && <span className="ts2-ptr hi-ptr">hi</span>}
-                                </div>
-                            </div>
-                        )
-                    })}
-                </div>
-
-                {/* Sum verdict */}
-                {sum !== null && (
-                    <motion.div
-                        className={['ts2-verdict',
-                            sum === target ? 'match' : sum < target ? 'low' : 'high'
-                        ].join(' ')}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                    >
-                        {numbers[lo] !== undefined && numbers[hi] !== undefined
-                            ? `${numbers[step?.phase === 'move_lo' ? lo - 1 : lo]} + ${numbers[step?.phase === 'move_hi' ? hi + 1 : hi]} = ${sum} `
-                            : `sum = ${sum} `}
-                        {sum === target ? '= target ✓' : sum < target ? `< ${target} → move lo right` : `> ${target} → move hi left`}
-                    </motion.div>
-                )}
-
-                <AnimatePresence>
-                    {Array.isArray(result) && result.length === 2 && (
-                        <motion.div className="ts2-result"
-                            initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-                            Answer: [{result[0]}, {result[1]}] (1-indexed)
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </div>
-        </div>
-    
-    </>)
-
-    const codePanel = (
-        <div style={{ position: 'relative', height: '100%' }}>
-            <CodeTracePanel
-                step={step}
-                codeLines={SOLUTION_CODE}
-                onActiveLineDomChange={setActiveLineDom}
-                disableResizer
-            />
-        </div>
-    )
-
-    const statusPanel = (
-        <div className={`ts2-status${Array.isArray(result) && result.length === 2 ? ' ok' : ''}`}>
-            {step?.message ?? 'Press Play or Step to begin.'}
-        </div>
-    )
-
-    const playbackPanel = (
-      <>
-            <PlaybackControls
-                isPlaying={isPlaying} isDone={isDone} speed={speed}
-                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward}
-                onReset={handleReset} prevDisabled={stepIndex < 0}
-                nextDisabled={isDone} resetDisabled={stepIndex < 0}
-                onSpeedChange={e => setSpeed(Number(e.target.value))}
-                showPatternOverlay={showPatternOverlay}
-                onShowPatternOverlayChange={setShowPatternOverlay}
-                patternOverlayLabel="Show pattern overlay"
-                showPatternOverlayToggle
-            />
-        </>
-    )
-
-    // ─── Lumino setup ───
-    const [panelDivs, setPanelDivs] = useState(null)
-    const panelConfigs = useMemo(
-        () => [
-            { id: 'primary', title: 'Two Sum II · Two Pointers', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-right' },
-            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
-        ],
-        []
-    )
-    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
-
-    return (
-        <div className="ts2-shell">
-            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
-            {panelDivs && (
-              <>
-                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
-                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
-                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
-                </>
-            )}
-            {createPortal(
-                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
-                document.body
-            )}
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
-        </div>
-    )
+  return <AlgorithmWorkspace
+    definition={definition}
+    tutorial={twoSumTutorial}
+    renderVisual={({ run, step }) => <TwoSumView run={run} step={step} />}
+    renderReasoning={({ step }) => <>
+      <p>The array is sorted. Starting from both ends, the sum tells which pointer can be safely discarded: a small sum drops left, a large sum drops right.</p>
+      <p>{step.message}</p>
+    </>}
+  />
 }

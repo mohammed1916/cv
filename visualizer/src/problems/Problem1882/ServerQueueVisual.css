@@ -1,0 +1,14 @@
+.sq-scene { display: grid; gap: 12px; }
+.sq-clock { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; }
+.sq-pool, .sq-timeline, .sq-answer { padding: 8px 0; }
+.sq-pool h3, .sq-timeline h3, .sq-answer h3 { margin: 0 0 6px; font-size: 1rem; }
+.sq-row { display: grid; grid-template-columns: 3rem 1fr; gap: 8px; align-items: center; margin: 4px 0; }
+.sq-track { position: relative; height: 26px; background: color-mix(in srgb, currentColor 8%, transparent); border-radius: 6px; }
+.sq-track i { position: absolute; top: 2px; bottom: 2px; min-width: 2px; border-radius: 5px; background: #0891b2; color: #fff; font-style: normal; font-size: 12px; line-height: 22px; text-align: center; overflow: hidden; }
+.sq-track i.is-current { background: #f59e0b; color: #111; outline: 2px solid #f59e0b; outline-offset: 1px; }
+.sq-answer ol { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
+.sq-answer li.is-current { font-weight: 700; }
+.sq-answer li.sq-more { opacity: .7; }
+@media (prefers-reduced-motion: no-preference) {
+  .sq-track i { transition: left .3s ease, width .3s ease; }
+}

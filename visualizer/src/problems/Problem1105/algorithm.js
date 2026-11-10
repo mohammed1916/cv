@@ -34,11 +34,14 @@ export const python = `def min_shelf_height(books, shelf_width):
 const PY = python.split('\n')
 export const code = CODE_TEXT.split('\n').map((text, index) => ({ line: index + 1, text }))
 
+// Each trace kind names the displayed JavaScript line and the Python line that it highlights.
 const STEP = {
   start: ['const dp = [0', 'dp = [0]'],
   prefix: ['for (let end = 1', 'for end in range'],
-  extend: ['width += thickness', 'width += thickness'],
+  grow: ['width += thickness', 'width += thickness'],
+  fit: ['if (width > shelfWidth)', 'if width > shelf_width'],
   stop: ['if (width > shelfWidth)', 'if width > shelf_width'],
+  candidate: ['dp[end] = Math.min', 'dp[end] = min'],
   improve: ['dp[end] = Math.min', 'dp[end] = min'],
   done: ['return dp[count]', 'return dp[count]'],
 }
@@ -47,10 +50,11 @@ function lineOf(lines, key) {
   if (index < 0) throw new Error(`Missing line: ${key}`)
   return index + 1
 }
-const frame = (phase, step, message, snapshot) => ({
+const frame = (phase, kind, message, snapshot) => ({
   phase,
-  activeLine: lineOf(CODE_TEXT.split('\n'), STEP[step][0]),
-  pythonLine: lineOf(PY, STEP[step][1]),
+  kind,
+  activeLine: lineOf(CODE_TEXT.split('\n'), STEP[kind][0]),
+  pythonLine: lineOf(PY, STEP[kind][1]),
   message,
   snapshot,
 })
@@ -59,6 +63,7 @@ export const phases = [
   { id: 'start', label: 'Start', description: 'Set the cost of an empty prefix to zero.' },
   { id: 'inspect', label: 'Prefix', description: 'Choose the books for the next prefix end.' },
   { id: 'update', label: 'Shelf', description: 'Grow the last shelf backward while it fits.' },
+  { id: 'compare', label: 'Compare', description: 'Price the shelf starting at this book against the best so far.' },
   { id: 'improve', label: 'Improve', description: 'Keep the cheaper total height for this prefix.' },
   { id: 'done', label: 'Result', description: 'Return the cost for every book.' },
 ]
@@ -106,14 +111,17 @@ export function buildTrace(input) {
       width += thickness
       tallest = Math.max(tallest, height)
       if (width > shelfWidth) {
-        frames.push(frame('update', 'stop', `Books ${start}..${end} need width ${width}, which is over ${shelfWidth}; stop extending.`, snap({ end, start, width, tallest })))
+        frames.push(frame('update', 'stop', `Books ${start}..${end} need width ${width}, which is over ${shelfWidth}; stop extending.`, snap({ end, start, width, tallest, overflow: true })))
         break
       }
-      frames.push(frame('update', 'extend', `Last shelf holds books ${start}..${end}: width ${width}, tallest ${tallest}.`, snap({ end, start, width, tallest })))
+      frames.push(frame('update', 'grow', `Add book ${start} to the last shelf: width ${width}, tallest ${tallest}.`, snap({ end, start, width, tallest })))
+      frames.push(frame('update', 'fit', `Width ${width} is within ${shelfWidth}, so books ${start}..${end} can share a shelf.`, snap({ end, start, width, tallest })))
+      const best = dp[end]
       const candidate = dp[start - 1] + tallest
+      frames.push(frame('compare', 'candidate', `Candidate ${dp[start - 1]} + ${tallest} = ${candidate}; best so far for ${end} is ${show(best) ?? 'unsolved'}.`, snap({ end, start, width, tallest, candidate })))
       if (candidate < dp[end]) {
         dp[end] = candidate
-        frames.push(frame('improve', 'improve', `Cost ${dp[start - 1]} + ${tallest} = ${candidate} is the best so far for ${end} books.`, snap({ end, start, width, tallest })))
+        frames.push(frame('improve', 'improve', `${candidate} is cheaper, so prefix ${end} now costs ${candidate}.`, snap({ end, start, width, tallest, candidate })))
       }
     }
   }

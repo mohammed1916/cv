@@ -17,8 +17,8 @@ export default [
     "input": "{\"tops\":[3,5],\"bottoms\":[5,3]}"
   },
   {
-    "label": "Single matching domino",
-    "input": "{\"tops\":[1],\"bottoms\":[1]}"
+    "label": "Two dominoes sharing one face",
+    "input": "{\"tops\":[1,2],\"bottoms\":[1,2]}"
   },
   {
     "label": "Equal values everywhere",
