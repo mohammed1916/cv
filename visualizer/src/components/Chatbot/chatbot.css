@@ -1990,3 +1990,9 @@ body.chat-select-mode .selectable.selected {
 }
 .chat-tip-layer.is-visible { opacity:1; transform:none; }
 :root[data-theme="dark"] .chat-tip-layer { background:#f4f4f5; color:#18181b; }
+
+/* Status line for screenshot and other input actions. */
+.chat-input-notice { font-size:12px; line-height:1.4; padding:6px 10px; border-radius:8px; border:1px solid var(--border); background:var(--surface2); color:var(--text-muted); }
+.chat-input-notice.is-info { color:var(--text); }
+.chat-input-notice.is-ok { border-color:var(--success); color:var(--success); background:color-mix(in srgb, var(--success) 10%, var(--surface2)); }
+.chat-input-notice.is-error { border-color:var(--error); color:var(--error); background:color-mix(in srgb, var(--error) 8%, var(--surface2)); }

@@ -43,6 +43,14 @@ export default function ChatInput({
   const [images, setImages] = useState([]);
   const [isListening, setIsListening] = useState(false);
   const [isCapturing, setIsCapturing] = useState(false);
+  const [notice, setNotice] = useState(null);
+
+  // Success and error notices clear themselves; progress stays until replaced.
+  useEffect(() => {
+    if (!notice || notice.type === "info") return undefined;
+    const timer = setTimeout(() => setNotice(null), 3500);
+    return () => clearTimeout(timer);
+  }, [notice]);
 
   const textareaRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -130,15 +138,20 @@ export default function ChatInput({
     if (disabled || isCapturing) return;
 
     setIsCapturing(true);
+    setNotice({ type: "info", text: "Capturing the visualizer…" });
 
     try {
       const dataUrl = await captureVisualizer();
 
       if (dataUrl) {
         setImages((prev) => [...prev, dataUrl]);
+        setNotice({ type: "ok", text: "Screenshot added below your message. Remove it with ✕ if you change your mind." });
+      } else {
+        setNotice({ type: "error", text: "The screenshot came out empty. Try again." });
       }
     } catch (err) {
       console.warn("Screenshot failed:", err?.message || err);
+      setNotice({ type: "error", text: err?.message || "Screenshot failed. Try again." });
     } finally {
       setIsCapturing(false);
     }
@@ -246,6 +259,12 @@ export default function ChatInput({
             <summary>Review selected code · lines {attachedContext.data.lines}</summary>
             <pre>{attachedContext.data.code}</pre>
           </details>}
+        </div>
+      )}
+
+      {notice && (
+        <div className={`chat-input-notice is-${notice.type}`} role="status" aria-live="polite">
+          {notice.text}
         </div>
       )}
 

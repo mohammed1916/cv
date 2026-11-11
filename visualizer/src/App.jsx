@@ -523,7 +523,7 @@ function ProblemPage({
         pro={pro}
         onSelect={onSelect}
       />
-      <div className="problem-content">
+      <div className="problem-content" data-visualizer-root>
         <ErrorBoundary key={problem.id}>
           {Component ? (
             <Suspense
