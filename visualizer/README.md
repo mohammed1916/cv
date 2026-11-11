@@ -101,3 +101,29 @@ Font note: only Problem51 (N-Queens) renders a Unicode chess glyph (♛) with a 
 The Functions `postdeploy` hook runs `scripts/prune-old-secret-versions.py` using authenticated `gcloud` and Python 3. It is scoped to the existing named credentials in `teemavenue-e5fb6` and `teemtreat-visualizer`. After a successful deployment it preserves the newest enabled version and destroys older retained versions only when deployed Functions and serving/tagged Cloud Run revisions no longer reference them. Missing permissions, an ongoing deployment, unfamiliar secret volumes/jobs, aliases, or an older referenced version block cleanup rather than risk an outage. Deploy all credential consumers before retiring their old version. Do not rotate credentials concurrently with cleanup. New secret names must be reviewed and added to the script's allowlist.
 
 This is a local Firebase CLI deployment hook, not a scheduled cloud policy; console rotations or deployments from another checkout do not run it. It needs gcloud metadata-read and secret-version-destroy permissions. Destroyed payloads cannot be recovered for rollback; redeploy older code with the retained credential if necessary. Disabled versions remain billable, while destroyed versions do not. Version metadata and audit history may remain visible. Normal application deployments should reuse current secrets instead of running `secrets:set` for unchanged values.
+
+## User feedback (Firestore `feedback` collection)
+
+The feedback button (right edge of the app) lets signed-in Google users send
+a rating, optional topic chips and an optional message. Submissions go through
+the `submitFeedback` callable in `functions/index.js`, which writes one
+document per submission to the Firestore `feedback` collection.
+
+Each document has these fields:
+
+| Field           | Type    | Meaning                                                        |
+| --------------- | ------- | -------------------------------------------------------------- |
+| `uid`           | string  | Firebase Auth user id of the sender                            |
+| `email`         | string  | Google account email, for follow-up contact                    |
+| `emailVerified` | boolean | Whether Google verified that email address                     |
+| `name`          | string  | Google display name                                            |
+| `rating`        | string  | One of `terrible`, `bad`, `okay`, `good`, `amazing`            |
+| `categories`    | array   | Zero or more of `bug`, `ui`, `ux`, `pricing`, `loading`, `animation`, `support`, `payment` |
+| `message`       | string  | Optional free text, up to 2000 characters                      |
+| `page`          | string  | Where the user was: e.g. `Problem 1: Two Sum` or `Home page`   |
+| `createdAt`     | number  | Submission time, milliseconds since the Unix epoch             |
+
+Access rules: `firestore.rules` denies all direct client reads and writes, so
+only the Cloud Function (Admin SDK) writes these documents. To read them, use
+the Firebase console or an Admin SDK script. Contact users by `email`, and
+only when `emailVerified` is true if you need a verified address.

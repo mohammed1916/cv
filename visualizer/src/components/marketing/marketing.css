@@ -88,3 +88,19 @@
   .welcome-actions .welcome-tour-light { animation:none; transition:none; }
   .welcome-tour-light .tour-light-beam,.welcome-tour-light .tour-light-illuminated { display:none; }
 }
+
+/* Light theme: the dark button above would put pale lime text on a light page.
+   Use a white surface with dark green lettering and a deeper light sweep. */
+:root:not([data-theme="dark"]) .welcome-actions .welcome-tour-light {
+  background:#ffffff; color:#1f3a0a; border:1px solid #4d7c0f80;
+  box-shadow:0 4px 14px #1f2a0f1f, inset 0 1px 0 #ffffff;
+}
+:root:not([data-theme="dark"]) .welcome-tour-light .tour-light-play { color:#3f6212; }
+:root:not([data-theme="dark"]) .welcome-tour-light .tour-light-illuminated {
+  background:linear-gradient(105deg,transparent calc(var(--tour-light-position) - 22%),#4d7c0f var(--tour-light-position),#65a30d calc(var(--tour-light-position) + 7%),transparent calc(var(--tour-light-position) + 24%));
+  background-clip:text; -webkit-background-clip:text;
+  filter:none;
+}
+:root:not([data-theme="dark"]) .welcome-tour-light .tour-light-beam { opacity:.35; }
+:root:not([data-theme="dark"]) .welcome-actions .welcome-tour-light:hover { border-color:#4d7c0fcc; box-shadow:0 6px 18px #4d7c0f33, inset 0 1px 0 #ffffff; }
+:root:not([data-theme="dark"]) .welcome-actions .welcome-tour-light:focus-visible { outline:2px solid #4d7c0f; }

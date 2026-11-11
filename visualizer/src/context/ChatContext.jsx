@@ -85,21 +85,6 @@ export function ChatProvider({ children }) {
   const closeChat = useCallback(() => setIsOpen(false), []);
   const toggleChat = useCallback(() => setIsOpen((v) => !v), []);
 
-  // Global keyboard shortcut: Alt+C toggles the chat drawer
-  useEffect(() => {
-    const onKey = (e) => {
-      // Ignore if the user is typing in an input or textarea
-      const tag = (e.target && e.target.tagName) || '';
-      if (tag === 'INPUT' || tag === 'TEXTAREA' || (e.target && e.target.isContentEditable)) return;
-      if (e.altKey && (e.key === 'c' || e.key === 'C')) {
-        e.preventDefault();
-        setIsOpen((v) => !v);
-      }
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, []);
-
   const enableSelectMode = useCallback(() => setSelectMode(true), []);
   const disableSelectMode = useCallback(() => setSelectMode(false), []);
   const toggleSelectMode = useCallback(() => setSelectMode((v) => !v), []);
@@ -156,6 +141,10 @@ export function ChatProvider({ children }) {
     setAttachedContext(null);
   }, []);
 
+  const togglePinChat = useCallback((id) => {
+    setConversations((prev) => prev.map((c) => (c.id === id ? { ...c, pinned: !c.pinned } : c)));
+  }, []);
+
   const deleteChat = useCallback((id) => {
     setConversations((prev) => {
       const next = prev.filter((c) => c.id !== id);
@@ -210,6 +199,7 @@ export function ChatProvider({ children }) {
       value={{
         messages,
         conversations,
+        togglePinChat,
         activeConversationId,
         attachedContext,
         selectMode,

@@ -190,7 +190,7 @@ function RestoreSizeIcon() {
   );
 }
 
-export default function DockWorkspace({ panels, onPanelReady, initialCollapsed = [] }) {
+export default function DockWorkspace({ panels, onPanelReady, initialCollapsed = [], focusPanel = null }) {
   const container = useRef(null);
   const parking = useRef(null);
 
@@ -262,6 +262,19 @@ export default function DockWorkspace({ panels, onPanelReady, initialCollapsed =
   const [maximizedGroupKey, setMaximizedGroupKey] = useState(null);
 
   const signature = JSON.stringify(panels);
+  const savedVisibility = useRef(null);
+  useEffect(() => {
+    if (focusPanel) {
+      setHidden(current => {
+        if (savedVisibility.current === null) savedVisibility.current = new Set(current);
+        return new Set(JSON.parse(signature).map(panel=>panel.id).filter(id=>id!==focusPanel));
+      });
+    } else if (savedVisibility.current !== null) {
+      setHidden(savedVisibility.current);
+      savedVisibility.current = null;
+    }
+  }, [focusPanel, signature]);
+
 
   useLayoutEffect(() => {
     ready.current = onPanelReady;

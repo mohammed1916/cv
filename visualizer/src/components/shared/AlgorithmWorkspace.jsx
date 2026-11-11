@@ -1,3 +1,5 @@
+import AdaptiveStage from './adaptive/AdaptiveStage';
+import {buildAdaptiveSequence} from './adaptive/planner.js';
 import TutorialScene from './TutorialScene';
 import { buildTutorialSequence, tutorialPosition } from './tutorialSequence.js';
 import { useEffect, useMemo, useState } from 'react'
@@ -22,7 +24,7 @@ const PANELS = [
 const TUTORIAL_PANELS = [{ id: 'story', title: 'Tutorial story' }, { id: 'input', title: 'Input & examples', dockMode: 'split-right', ratio: .3 }];
 
 // Problems own validation, execution states, and views. This owns only the shell.
-export default function AlgorithmWorkspace({ definition, renderVisual, renderReasoning, tutorial }) {
+export default function AlgorithmWorkspace({ definition, renderVisual, renderReasoning, tutorial, visuals }) {
   const [draft, setDraft] = useState(definition.examples[0].input)
   const [run, setRun] = useState(() => definition.build(definition.parse(definition.examples[0].input)))
   const [error, setError] = useState('')
@@ -30,8 +32,10 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
   const [tutorialDivs, setTutorialDivs] = useState(null)
   const [tutorialMode, setTutorialMode] = useState('off')
   const [floating, setFloating] = useState(true)
-  const sequence = useMemo(() => buildTutorialSequence(run, tutorial, tutorialMode), [run, tutorial, tutorialMode])
-  const directed = !!tutorial && tutorialMode !== 'off'
+  const adaptive = !!visuals
+  const supportsTutorial = adaptive || !!tutorial
+  const sequence = useMemo(() => adaptive ? buildAdaptiveSequence(run, tutorial, tutorialMode) : buildTutorialSequence(run, tutorial, tutorialMode), [run, tutorial, tutorialMode, adaptive])
+  const directed = supportsTutorial && tutorialMode !== 'off'
   const total = directed ? sequence.length : run?.frames.length || 0
   const playback = usePlaybackState(total)
   const position = Math.min(Math.max(0, playback.stepIndex), Math.max(0, total - 1))
@@ -40,7 +44,7 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
   const step = run?.frames[frameIndex]
   function changeMode(mode) {
     playback.setIsPlaying(false)
-    const next = buildTutorialSequence(run, tutorial, mode)
+    const next = adaptive ? buildAdaptiveSequence(run, tutorial, mode) : buildTutorialSequence(run, tutorial, mode)
     playback.setStepIndex(mode === 'off' ? frameIndex : tutorialPosition(next, frameIndex))
     if (mode !== 'off' && !directed) { playback.setSpeed(2400); setFloating(false) }
     if (mode === 'off') playback.setSpeed(500)
@@ -66,7 +70,8 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
     }
   }
   const views = run ? {
-    visual: renderVisual({ run, step }),
+    visual: adaptive ? <AdaptiveStage visuals={visuals} definition={definition} run={run} step={step}
+      previousStep={run.frames[frameIndex-1]} mode={tutorialMode} beat={beat} /> : renderVisual({ run, step }),
     story: <>
       <p className="algorithm-workspace__event" role="status">{step.message}</p>
       {renderReasoning({ run, step })}
@@ -82,7 +87,7 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
       <button type="button" key={example.label} onClick={() => execute(example.input)}>{example.label}</button>)}</div>
     {error && <p role="alert">{error}</p>}
   </form>
-  const tutorialViews = { input: inputPanel, story: run && beat
+  const tutorialViews = adaptive ? {} : { input: inputPanel, story: run && beat
     ? <TutorialScene beat={beat} definition={definition} step={step}>{renderVisual({run,step})}</TutorialScene>
     : <p role="status">Open Input & examples below to enter valid input.</p> }
   const controls = <div className="algorithm-workspace__playback">
@@ -112,15 +117,15 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
     <span>{run ? `${position + 1} / ${total} ${directed ? 'scenes' : 'frames'}` : 'No valid input'}</span>
   </div>
   return <div className={`algorithm-workspace ${directed ? 'algorithm-workspace--tutorial' : ''}`}>
-    {tutorial && <TabSwitch label="Tutorial mode" className="tutorial-mode-switch" value={tutorialMode} onChange={changeMode}
+    {supportsTutorial && <TabSwitch label="Tutorial mode" className="tutorial-mode-switch" value={tutorialMode} onChange={changeMode}
       options={[{value:'off',label:'Full view'},{value:'steps',label:'Step-by-step'},{value:'why',label:'Reason-first'}]} />}
-    {tutorial && <div className="algorithm-workspace__dock" style={!directed ? {display:'none'} : undefined}>
+    {tutorial && !adaptive && <div className="algorithm-workspace__dock" style={!directed ? {display:'none'} : undefined}>
       <LuminoDockPanel panels={TUTORIAL_PANELS} initialCollapsed={['input']} onPanelReady={setTutorialDivs} />
       {Object.entries(tutorialViews).map(([id, content]) => tutorialDivs?.[id]
         ? createPortal(<div className="algorithm-workspace__panel">{content}</div>, tutorialDivs[id], id) : null)}
     </div>}
-    <div className="algorithm-workspace__dock" style={directed ? {display:'none'} : undefined}>
-      <LuminoDockPanel panels={PANELS} onPanelReady={setPanelDivs} />
+    <div className="algorithm-workspace__dock" style={directed && !adaptive ? {display:'none'} : undefined}>
+      <LuminoDockPanel panels={PANELS} focusPanel={adaptive && directed ? "visual" : null} onPanelReady={setPanelDivs} />
       {Object.entries({...views, input: inputPanel}).map(([id, content]) => panelDivs?.[id]
         ? createPortal(<div className="algorithm-workspace__panel">{content}</div>, panelDivs[id], id) : null)}
     </div>

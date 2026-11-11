@@ -6,7 +6,8 @@ import './DPDependencyView.css'
  * (marked chosen), the recurrence and why that transition applies. Covers linear, grid, interval,
  * bitmask and knapsack tables; large tables show a window around the active cell.
  */
-export default function DPDependencyView({ title = 'DP transition', labels = {}, ...spec }) {
+export default function DPDependencyView({ title = 'DP transition', labels = {}, focusCells = null, ...spec }) {
+  const focused = focusCells && new Set(focusCells.map(cell=>cell.join(",")))
   const n = normalizeDpSpec(spec)
   const roles = dpCellRoles(spec)
   const win = dpWindow(spec)
@@ -20,7 +21,7 @@ export default function DPDependencyView({ title = 'DP transition', labels = {},
   const rowLabel = r => labels.rows?.[r] ?? r
   return <section className="dp-deps" aria-label="DP transition">
     <h3>{title}</h3>
-    <ol className="dp-deps__lines">{lines.map((line, i) => <li key={i}>{line}</li>)}</ol>
+    <ol hidden={!!focused} className="dp-deps__lines">{lines.map((line, i) => <li key={i}>{line}</li>)}</ol>
     {n.sources.length > 0 && <ul className="dp-deps__arrows" aria-label="Cells read">
       {n.sources.map((s, i) => <li key={i} className={s.chosen ? 'is-chosen' : ''}>
         <code>{dpCellName(n.shape, s.cell)} = {dpFormatValue(n.values[s.cell[0]]?.[s.cell[1]])}</code>
@@ -32,12 +33,12 @@ export default function DPDependencyView({ title = 'DP transition', labels = {},
     </p>}
     {!win.hidden && <div className="dp-deps__scroll"><table className="dp-deps__table">
       <caption>{n.oneD ? 'Table' : 'Rows'}{win.rowEnd - win.rowStart < n.values.length || win.columnEnd - win.columnStart < (n.values[0]?.length ?? 0) ? ' (window around the active cell)' : ''}</caption>
-      <thead><tr>{!n.oneD && <th scope="col" />}{columns.map(c => <th scope="col" key={c}>{columnLabel(c)}</th>)}</tr></thead>
+      <thead><tr>{!n.oneD && <th scope="col" />}{columns.map(c => <th hidden={!!focused && !rows.some(r=>focused.has(`${r},${c}`))} scope="col" key={c}>{columnLabel(c)}</th>)}</tr></thead>
       <tbody>{rows.map(r => <tr key={r}>
         {!n.oneD && <th scope="row">{rowLabel(r)}</th>}
         {columns.map(c => {
           const role = roles[`${r},${c}`]
-          return <td key={c} data-role={role}>{dpFormatValue(n.values[r][c])}</td>
+          return <td hidden={!!focused && !focused.has(`${r},${c}`)} key={c} data-role={role}>{dpFormatValue(n.values[r][c])}</td>
         })}
       </tr>)}</tbody>
     </table></div>}

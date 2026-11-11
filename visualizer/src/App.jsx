@@ -26,6 +26,7 @@ import ProblemNavigation from "./components/ProblemNavigation";
 
 import { ZoomProvider } from "./context/ZoomContext";
 import ThemeToggle from "./components/ThemeToggle";
+import FeedbackWidget from "./components/feedback/FeedbackWidget";
 import { ThemeProvider } from "./context/ThemeContext";
 import { useVisualizationContext } from "./context/VisualizationContext";
 import { useChatContext } from "./context/ChatContext";
@@ -436,8 +437,10 @@ function SettingsMenu({
             &copy; {new Date().getFullYear()}{" "}
             <a href="https://visualizer.pro">visualizer.pro</a>
           </p>
-          <a href="/privacy.html">Privacy Policy</a>
-          <button type="button" onClick={openPrivacyPreferences}>Analytics preferences</button>
+          <div className="about-links">
+            <a href="/privacy.html">Privacy Policy</a>
+            <button type="button" className="about-link-button" onClick={openPrivacyPreferences}>Analytics preferences</button>
+          </div>
           <p
             className="trademark-disclaimer"
             style={{
@@ -505,12 +508,12 @@ function ProblemPage({
         <div className="problem-title-group">
           <span className="problem-num">#{problem.number}</span>
           <h1 className="problem-title">{problem.title}</h1>
+          <span
+            className={`difficulty badge difficulty-${problem.difficulty.toLowerCase()}`}
+          >
+            {problem.difficulty}
+          </span>
         </div>
-        <span
-          className={`difficulty badge difficulty-${problem.difficulty.toLowerCase()}`}
-        >
-          {problem.difficulty}
-        </span>
         <ViewMenu layoutWidth={layoutWidth} onLayoutChange={onLayoutChange} />
         <div className="problem-utilities">{utilityControls}</div>
       </header>
@@ -935,6 +938,13 @@ export default function App() {
     const title = showPrerequisites ? 'Learning prerequisites' : showPlayground ? 'Code playground' : active ? `${active.number || ''} ${active.title}`.trim() : 'Algorithm catalogue';
     trackPage({ path, title: `${title} | Visualizer Pro`, problem_id: active && !showPlayground && !showPrerequisites ? String(active.number || active.slug) : undefined });
   }, [active, showPlayground, showPrerequisites]);
+  const feedbackContext = showPrerequisites
+    ? "Prerequisites page"
+    : showPlayground
+      ? "Playground"
+      : active
+        ? `Problem ${active.number || ""}: ${active.title}`.replace("Problem :", "Problem")
+        : "Home page";
   const [layoutWidth, setLayoutWidth] = useState("full");
   const [navigationTransitionsEnabled, setNavigationTransitionsEnabled] =
     useState(() => {
@@ -1026,7 +1036,7 @@ export default function App() {
     }
   };
 
-  const utilityControls = (
+  const renderUtilityControls = ({ settings = true } = {}) => (
     <>
       <button
         className="access-toolbar-btn"
@@ -1047,22 +1057,38 @@ export default function App() {
             ? (access.account?.trialActive ? "Free trial · Pro" : "Pro account")
             : `Get Pro · ${PLANS.monthly.display}/month`}
       </button>
-      <button
-        className="access-toolbar-btn"
-        disabled={access.busy}
-        onClick={() => setDialog("account")}
-      >
-        {access.user
-          ? access.user.displayName?.split(" ")[0] || "Account"
-          : "Sign in"}
-      </button>
+      {access.user ? (
+        <details className="account-menu">
+          <summary className="access-toolbar-btn account-avatar-btn" aria-label={`Account: ${access.user.displayName || access.user.email || "signed in"}`}>
+            <span className="account-initial" aria-hidden="true">
+              {String(access.user.displayName || access.user.email || "?").trim().charAt(0).toUpperCase() || "?"}
+            </span>
+          </summary>
+          <div className="account-menu-popover">
+            <p className="account-menu-name">{access.user.displayName || "Signed in"}</p>
+            {access.user.email && <p className="account-menu-email">{access.user.email}</p>}
+            <button type="button" onClick={access.logout} disabled={access.busy}>Sign out</button>
+          </div>
+        </details>
+      ) : (
+        <button
+          className="access-toolbar-btn"
+          disabled={access.busy}
+          onClick={() => setDialog("account")}
+        >
+          Sign in
+        </button>
+      )}
       <ThemeToggle />
-      <SettingsMenu
-        navigationTransitionsEnabled={navigationTransitionsEnabled}
-        onToggleNavigationTransitions={setNavigationTransitionsEnabled}
-      />
+      {settings && (
+        <SettingsMenu
+          navigationTransitionsEnabled={navigationTransitionsEnabled}
+          onToggleNavigationTransitions={setNavigationTransitionsEnabled}
+        />
+      )}
     </>
   );
+  const utilityControls = renderUtilityControls();
 
   const pageContent = showPlayground ? (
     <div
@@ -1122,7 +1148,7 @@ export default function App() {
       layoutWidth={layoutWidth}
       onLayoutChange={setLayoutWidth}
       enableTransitions={navigationTransitionsEnabled}
-      utilityControls={utilityControls}
+      utilityControls={renderUtilityControls({ settings: false })}
     />
   ) : (
     <HomePage
@@ -1256,6 +1282,9 @@ export default function App() {
               }
             }} />
           </Suspense>}
+          {feedbackContext !== "Home page" && (
+            <FeedbackWidget user={access.user} context={feedbackContext} onSignIn={() => setDialog("account")} />
+          )}
           <ChatAssistant />
         </div>
       </ZoomProvider>

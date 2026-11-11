@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { buildTrace, parseInput, code, python, phases } from './algorithm'
 import { bfsTutorial } from './tutorial'
-import BfsVisual from './BfsTutorial'
+import {bfsVisuals} from './visuals'
 
 const definition = {
   number: '1971',
@@ -23,7 +23,7 @@ export default function Problem1971Visualizer() {
   return <AlgorithmWorkspace
     definition={definition}
     tutorial={bfsTutorial}
-    renderVisual={({ run, step }) => <BfsVisual run={run} step={step} />}
+    visuals={bfsVisuals}
     renderReasoning={({ step }) => <p>{step.message}</p>}
   />
 }

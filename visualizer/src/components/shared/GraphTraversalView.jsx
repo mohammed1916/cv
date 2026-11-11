@@ -1,3 +1,4 @@
+import {motion,useReducedMotion} from 'framer-motion'
 import { graphCircleLayout, graphNodeRole, isActiveEdge, describeFrontier, frontierOps, gridCellRole, cellName } from './graphTraversalModel.js'
 import './GraphTraversalView.css'
 
@@ -14,8 +15,9 @@ export const GRID_VIEW_MAX_SIDE = 12
 export default function GraphTraversalView({
   title = 'Traversal', n = 0, edges = [], directed = false, reversed = false, labels = null, labelOf = labels ? (i => labels[i]) : String,
   current = null, neighbour = null, visited = [], frontier = [], prevFrontier, frontierKind = 'queue', frontierTitle,
-  done = [], tags = {}, groups = {}, grid = null, notes = [], showFrontier = true, legend = {},
+  focusNodes = null, done = [], tags = {}, groups = {}, grid = null, notes = [], showFrontier = true, legend = {},
 }) {
+  const reduced = useReducedMotion()
   const isGrid = Boolean(grid)
   if (isGrid ? Math.max(grid.rows, grid.cols) > GRID_VIEW_MAX_SIDE : n > GRAPH_VIEW_MAX_NODES) {
     return <section className="gtv" aria-label={title}><h3>{title}</h3><p className="gtv__note">Too large to draw readably; the frontier is listed instead.</p>
@@ -28,6 +30,9 @@ export default function GraphTraversalView({
   const L = { current: 'processing now', neighbour: 'edge being examined', frontier: frontierKind === 'stack' ? 'on the stack' : 'in the queue', visited: 'visited', done: 'finished', ...legend }
   const W = 420, H = 300
   const points = isGrid ? [] : graphCircleLayout(n, W, H)
+  const focus = focusNodes?.length ? new Set(focusNodes) : null
+  const selected = focus ? points.filter((_,id)=>focus.has(id)) : []
+  const box = selected.length ? `${Math.min(...selected.map(p=>p.x))-45} ${Math.min(...selected.map(p=>p.y))-45} ${Math.max(120,Math.max(...selected.map(p=>p.x))-Math.min(...selected.map(p=>p.x))+90)} ${Math.max(100,Math.max(...selected.map(p=>p.y))-Math.min(...selected.map(p=>p.y))+90)}` : `0 0 ${W} ${H}`
   return <section className="gtv" aria-label={title}>
     <h3>{title}</h3>
     {lines.length > 0 && <ol className="gtv__ops" aria-label="What just happened">{lines.map((line, i) => <li key={i}>{line}</li>)}</ol>}
@@ -41,26 +46,26 @@ export default function GraphTraversalView({
             <small>{r},{c}</small><b>{grid.text ? grid.text(r, c) : grid.cells ? grid.cells[r][c] : ''}</b></div>
         })}
       </div>
-      : <svg className="gtv__svg" viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Graph state">
+      : <motion.svg className="gtv__svg" initial={false} animate={{viewBox:box}} transition={{duration:reduced?0:.4}} role="img" aria-label="Graph state">
         <defs><marker id="gtv-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="currentColor" /></marker></defs>
         {edges.map(([u, v]) => {
           if (!points[u] || !points[v]) return null
           const active = isActiveEdge(u, v, { current, neighbour, directed, reversed })
           const dx = points[v].x - points[u].x, dy = points[v].y - points[u].y, len = Math.hypot(dx, dy) || 1
           const pad = directed ? 22 : 0
-          return <line key={`${u}-${v}`} className={`gtv__edge ${active ? 'is-active' : ''}`} data-edge={`${u},${v}`}
+          return <line opacity={focus && (!focus.has(u)||!focus.has(v)) ? 0 : 1} key={`${u}-${v}`} className={`gtv__edge ${active ? 'is-active' : ''}`} data-edge={`${u},${v}`}
             x1={points[u].x} y1={points[u].y} x2={points[v].x - dx / len * pad} y2={points[v].y - dy / len * pad}
             markerEnd={directed ? 'url(#gtv-arrow)' : undefined} />
         })}
         {points.map((p, id) => {
           const role = graphNodeRole(id, state)
-          return <g key={id} className="gtv__node" data-role={role} data-group={groups[id] ?? ''} data-node={id}>
+          return <motion.g initial={false} animate={{opacity:!focus || focus.has(id) ? 1 : 0}} transition={{duration:reduced?0:.25}} aria-hidden={!!focus && !focus.has(id)} key={id} className="gtv__node" data-role={role} data-group={groups[id] ?? ''} data-node={id}>
             <circle cx={p.x} cy={p.y} r={19} />
             <text x={p.x} y={p.y + 4} textAnchor="middle">{labelOf(id)}</text>
             {tags[id] !== undefined && <text className="gtv__tag" x={p.x} y={p.y + 33} textAnchor="middle">{tags[id]}</text>}
-          </g>
+          </motion.g>
         })}
-      </svg>}
+      </motion.svg>}
     {showFrontier && <div className="gtv__frontier" aria-label={frontierTitle ?? (frontierKind === 'stack' ? 'Stack' : 'Queue')}>
       <strong>{frontierTitle ?? (frontierKind === 'stack' ? 'Stack (top is last)' : 'Queue (front first)')}</strong>
       <div className="gtv__chips">{frontier.length ? frontier.map((x, i) => <span key={i} className="gtv__chip">{name(x)}</span>) : <em>empty</em>}</div>

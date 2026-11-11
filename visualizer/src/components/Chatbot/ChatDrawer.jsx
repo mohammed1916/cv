@@ -1,5 +1,6 @@
 import { COACHING_MODE_KEY, readCoachingMode, coachingInstructions } from './coachingMode';
 import { useEffect, useRef, useCallback, useState } from "react";
+import { createPortal } from "react-dom";
 import { useChatContext } from "../../context/ChatContext";
 import { useVisualizationContext } from "../../context/VisualizationContext";
 import {
@@ -22,9 +23,11 @@ const Icon = ({ name }) => {
     clear: "M4 5h8m-7 0 .7 8h4.6l.7-8M7 5V3h2v2",
     send: "M3 3l10 5-10 5 2-5-2-5zm2 5h5",
     plus: "M8 3v10M3 8h10",
-    history: "M3 8a5 5 0 1 0 1.5-3.5M3 3v3h3",
+    sidebar: "M2.5 3h11v10h-11zM6 3v10",
+    newChat: "M8 3H4a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V8M11.5 2.5l2 2L9 9H7V7z",
     select: "M4 3l7 5-4 1-1 4-2-10z",
     pin: "M5 3h6l-1 3 2 2H4l2-2-1-3zM8 8v5",
+    trash: "M4 5h8m-7 0 .7 8h4.6l.7-8M7 5V3h2v2",
     float: "M3 3h4M3 3v4M13 3H9m4 0v4M3 13h4m-4 0V9m10 4H9m4 0V9",
   };
   return (
@@ -33,6 +36,12 @@ const Icon = ({ name }) => {
     </svg>
   );
 };
+
+const CHAT_PROVIDER_OPTIONS = [
+  { value: "ollama-local", label: "Ollama Local" },
+  { value: "ollama-cloud", label: "Ollama Cloud" },
+  { value: "gemini", label: "Gemini" },
+];
 
 const LAYOUT_ZONES = {
   topLeft: { name: "Code Panel", label: "CODE", row: 0, col: 0 },
@@ -126,7 +135,7 @@ export default function ChatDrawer() {
     messages,
     addMessage,
     updateLastMessage,
-    clearMessages,
+    togglePinChat,
     conversations,
     activeConversationId,
     newChat,
@@ -144,6 +153,24 @@ export default function ChatDrawer() {
     floatingMode,
     toggleFloatingMode,
   } = useChatContext();
+  const [showCoachingInfo, setShowCoachingInfo] = useState(false);
+  const [coachingAnchor, setCoachingAnchor] = useState(null);
+
+  // Close the coaching info popup on Escape or any press outside it.
+  useEffect(() => {
+    if (!showCoachingInfo) return undefined;
+    const onKey = (event) => { if (event.key === "Escape") setShowCoachingInfo(false); };
+    const onDown = (event) => {
+      if (!event.target.closest?.(".chat-coaching-popover, .chat-coaching-info")) setShowCoachingInfo(false);
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", onDown, true);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("pointerdown", onDown, true);
+    };
+  }, [showCoachingInfo]);
+  const [providerMenuOpen, setProviderMenuOpen] = useState(false);
   const [coachingMode, setCoachingMode] = useState(() => {
     try { return readCoachingMode(window.localStorage); } catch { return false; }
   });
@@ -736,24 +763,70 @@ When asked about code or data structures, be precise and educational.`,
           onTouchStart={floatingMode ? startDrag : undefined}
           style={floatingMode ? { cursor: "move" } : {}}
         >
+          <div className="chat-header-nav">
+            <button
+              type="button"
+              className={`chat-sidebar-toggle ${historyOpen ? "active" : ""}`}
+              onClick={() => setHistoryOpen((v) => !v)}
+              title="Toggle chat history"
+              aria-label="Toggle chat history"
+              aria-expanded={historyOpen}
+            >
+              <Icon name="sidebar" />
+            </button>
+            <button
+              type="button"
+              className="chat-new-toggle"
+              onClick={() => {
+                newChat();
+                setHistoryOpen(false);
+              }}
+              title="Start new chat"
+              aria-label="Start new chat"
+            >
+              <Icon name="newChat" />
+            </button>
+          </div>
           <div className="chat-header-left">
             <span className="chat-header-icon">AI</span>
             <div>
               <div className="chat-header-title">
-                Algorithm Assistant{" "}
-                <span
-                  className="chat-shortcut"
-                  title="Open or close chat with Alt+C"
-                >
-                  Alt+C
-                </span>
+                Algorithm Assistant
               </div>
-              <label className="chat-coaching-toggle" data-chat-ignore
-                onMouseDown={event => event.stopPropagation()} onTouchStart={event => event.stopPropagation()}
-                title="Coach through requirements, invariants, edge cases and code review. Applies to your next message.">
-                <input type="checkbox" role="switch" checked={coachingMode} onChange={event => changeCoachingMode(event.target.checked)} />
-                <span>Interview coaching <strong>{coachingMode ? 'On' : 'Off'}</strong></span>
-              </label>
+              <div className="chat-coaching-row" data-chat-ignore
+                onMouseDown={event => event.stopPropagation()} onTouchStart={event => event.stopPropagation()}>
+                <label className="chat-coaching-toggle">
+                  <input type="checkbox" role="switch" checked={coachingMode} onChange={event => changeCoachingMode(event.target.checked)} />
+                  <span className="chat-coaching-track" aria-hidden="true"><span className="chat-coaching-thumb" /></span>
+                  <span>Interview coaching <strong>{coachingMode ? 'On' : 'Off'}</strong></span>
+                </label>
+                <button type="button" className="chat-coaching-info" aria-label="What is interview coaching?" aria-expanded={showCoachingInfo}
+                  onClick={(event) => {
+                    if (showCoachingInfo) { setShowCoachingInfo(false); return; }
+                    const rect = event.currentTarget.getBoundingClientRect();
+                    setCoachingAnchor({ top: rect.bottom, left: rect.left });
+                    setShowCoachingInfo(true);
+                  }}>i</button>
+              </div>
+              {showCoachingInfo && coachingAnchor && createPortal(
+                <div
+                  className="chat-coaching-popover"
+                  role="dialog"
+                  aria-label="Interview coaching"
+                  style={{
+                    top: coachingAnchor.top + 8,
+                    left: Math.max(8, Math.min(coachingAnchor.left, window.innerWidth - 316)),
+                  }}
+                >
+                  <div className="chat-coaching-popover-head">
+                    <strong>Interview coaching</strong>
+                    <button type="button" className="chat-coaching-x" aria-label="Close" onClick={() => setShowCoachingInfo(false)}>×</button>
+                  </div>
+                  <p>When on, the assistant coaches instead of handing you the answer first: it restates the requirements, asks one question about the key idea, gives progressive hints, suggests edge cases and common mistakes, and ends with a next step.</p>
+                  <p>If you ask for the full solution, it still provides it. Reviews of code you paste focus on correctness, edge cases and complexity. The setting applies to your next message and is saved on this device.</p>
+                </div>,
+                document.body,
+              )}
               <details className="chat-provider-settings" data-chat-ignore>
               <summary>AI connection · {selectedProviderLabel}</summary>
               <form
@@ -761,24 +834,46 @@ When asked about code or data structures, be precise and educational.`,
                 data-chat-ignore
                 onSubmit={(event) => event.preventDefault()}
               >
-                <label>
-                  Provider
-                  <select
-                    value={providerConfig.provider}
-                    onChange={(e) => {
-                      const provider = e.target.value;
-                      const next = setChatProvider({
-                        provider,
-                        model: defaultChatModel(provider),
-                      });
-                      setProviderConfig(next);
-                    }}
+                <div className="chat-provider-dropdown">
+                  <span className="chat-field-caption" id="chat-provider-caption">Provider</span>
+                  <button
+                    type="button"
+                    className="chat-provider-trigger"
+                    aria-haspopup="listbox"
+                    aria-labelledby="chat-provider-caption"
+                    aria-expanded={providerMenuOpen}
+                    onClick={() => setProviderMenuOpen((open) => !open)}
                   >
-                    <option value="ollama-local">Ollama Local</option>
-                    <option value="ollama-cloud">Ollama Cloud</option>
-                    <option value="gemini">Gemini</option>
-                  </select>
-                </label>
+                    <span className="chat-provider-chip">{selectedProviderLabel}</span>
+                    <svg className="chat-provider-chevron" width="12" height="8" viewBox="0 0 12 8" aria-hidden="true">
+                      <path d={providerMenuOpen ? "M1 6.5l5-5 5 5" : "M1 1.5l5 5 5-5"} />
+                    </svg>
+                  </button>
+                  {providerMenuOpen && (
+                    <ul className="chat-provider-menu" role="listbox" aria-labelledby="chat-provider-caption">
+                      {CHAT_PROVIDER_OPTIONS.map((option) => (
+                        <li key={option.value} role="presentation">
+                          <button
+                            type="button"
+                            role="option"
+                            aria-selected={providerConfig.provider === option.value}
+                            className={`chat-provider-option ${providerConfig.provider === option.value ? "is-selected" : ""}`}
+                            onClick={() => {
+                              const next = setChatProvider({
+                                provider: option.value,
+                                model: defaultChatModel(option.value),
+                              });
+                              setProviderConfig(next);
+                              setProviderMenuOpen(false);
+                            }}
+                          >
+                            {option.label}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
                 <label>
                   Model
                   <input
@@ -887,49 +982,9 @@ When asked about code or data structures, be precise and educational.`,
             </div>
           </div>
           <div className="chat-header-actions">
-            <button
-              className="chat-history-toggle"
-              onClick={() => setHistoryOpen((v) => !v)}
-              title="Toggle chat history"
-            >
-              <Icon name="history" />
-            </button>
-
-            <button
-              className="chat-new-toggle"
-              onClick={() => {
-                newChat();
-                setHistoryOpen(false);
-              }}
-              title="Start new chat"
-            >
-              <Icon name="plus" />
-            </button>
-
             <div className="visually-hidden" aria-live="polite">
               {selectMode ? "Select mode enabled" : "Select mode disabled"}
             </div>
-
-            <button
-              className="chat-attach-step-btn"
-              onClick={handleAttachStep}
-              disabled={!currentStep}
-              title={
-                currentStep
-                  ? `Attach current step from ${problemTitle || "visualizer"}`
-                  : "No active visualizer step"
-              }
-            >
-              <Icon name="pin" />
-            </button>
-
-            <button
-              className="chat-clear-btn"
-              onClick={clearMessages}
-              title="Clear chat"
-            >
-              <Icon name="clear" />
-            </button>
 
             <button
               className={`chat-float-toggle ${floatingMode ? "active" : ""}`}
@@ -952,6 +1007,15 @@ When asked about code or data structures, be precise and educational.`,
         <div className="chat-context-tools" data-chat-ignore>
           <SelectModeToggle enabled={selectMode} onChange={handleToggleSelectMode} />
           {selectMode && <button type="button" className="chat-exit-selection" onClick={disableSelectMode}>Exit select mode · Esc</button>}
+          <button
+            type="button"
+            className="chat-attach-step-btn"
+            onClick={handleAttachStep}
+            disabled={!currentStep}
+            title={currentStep ? `Attach current step from ${problemTitle || "visualizer"}` : "No active visualizer step"}
+          >
+            Attach step
+          </button>
           <span>{selectMode ? 'Choose lines in a code panel, then Attach to chat. Esc exits.' : 'Select code or a visual element to give your question context.'}</span>
         </div>
         <div className="chat-selection-status" role="status" aria-live="polite" data-chat-ignore>
@@ -970,7 +1034,9 @@ When asked about code or data structures, be precise and educational.`,
 
         {historyOpen && (
           <div className="chat-history-panel">
-            {conversations.map((c) => (
+            {[...conversations]
+              .sort((a, b) => Number(Boolean(b.pinned)) - Number(Boolean(a.pinned)))
+              .map((c) => (
               <div
                 key={c.id}
                 className={`chat-history-item ${c.id === activeConversationId ? "active" : ""}`}
@@ -996,16 +1062,33 @@ When asked about code or data structures, be precise and educational.`,
                     {(c.messages || []).length} msgs
                   </div>
                 </div>
-                <button
-                  className="chat-history-delete"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    deleteChat(c.id);
-                  }}
-                  title="Delete chat"
-                >
-                  ✕
-                </button>
+                <div className="chat-history-actions">
+                  <button
+                    type="button"
+                    className={`chat-history-pin ${c.pinned ? "is-pinned" : ""}`}
+                    aria-pressed={Boolean(c.pinned)}
+                    aria-label={c.pinned ? "Unpin chat" : "Pin chat"}
+                    title={c.pinned ? "Unpin chat" : "Pin chat to top"}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      togglePinChat(c.id);
+                    }}
+                  >
+                    <Icon name="pin" />
+                  </button>
+                  <button
+                    type="button"
+                    className="chat-history-delete"
+                    aria-label="Delete chat"
+                    title="Delete chat"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (window.confirm(`Delete "${c.title || "New Chat"}"? This cannot be undone.`)) deleteChat(c.id);
+                    }}
+                  >
+                    <Icon name="trash" />
+                  </button>
+                </div>
               </div>
             ))}
           </div>

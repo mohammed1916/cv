@@ -148,3 +148,31 @@ export const paymentWebhook = onRequest({ ...options, secrets: [webhookSecret, k
     res.sendStatus(500);
   }
 });
+
+// User feedback: only signed-in Google accounts may submit. Stored in the
+// `feedback` collection, which clients cannot read or write directly.
+const FEEDBACK_RATINGS = new Set(['terrible', 'bad', 'okay', 'good', 'amazing']);
+const FEEDBACK_CATEGORIES = new Set(['bug', 'ui', 'ux', 'pricing', 'loading', 'animation', 'support', 'payment']);
+export const submitFeedback = onCall(options, async request => {
+  const user = uid(request);
+  const data = request.data || {};
+  const rating = String(data.rating || '');
+  const message = typeof data.message === 'string' ? data.message.trim() : '';
+  const categories = Array.isArray(data.categories) ? data.categories.map(String) : [];
+  if (!FEEDBACK_RATINGS.has(rating)) throw new HttpsError('invalid-argument', 'Choose a rating.');
+  if (message.length > 2000) throw new HttpsError('invalid-argument', 'Feedback must be 2000 characters or fewer.');
+  if (categories.some(c => !FEEDBACK_CATEGORIES.has(c)) || categories.length > 5) throw new HttpsError('invalid-argument', 'Unknown feedback category.');
+  const token = request.auth.token || {};
+  await db.collection('feedback').add({
+    uid: user,
+    email: String(token.email || '').slice(0, 320),
+    emailVerified: token.email_verified === true,
+    name: String(token.name || '').slice(0, 200),
+    rating,
+    categories: [...new Set(categories)],
+    message,
+    page: String(data.page || '').slice(0, 200),
+    createdAt: Date.now(),
+  });
+  return { ok: true };
+});

@@ -1,0 +1,104 @@
+/* Vertical tab attached to the right edge. Shows a single "F"; on hover it
+   slides open to reveal "Feedback" written vertically. Yellow with white text,
+   lifted by a shadow that stays visible in light and dark themes. */
+.feedback-fab {
+  position: fixed;
+  right: 0;
+  bottom: 16px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 7px;
+  border: none;
+  border-radius: 10px 0 0 10px;
+  background: #facc15;
+  color: #ffffff;
+  font: 700 12px/1 system-ui, sans-serif;
+  letter-spacing: 0.04em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  box-shadow: -6px 6px 18px rgba(0, 0, 0, 0.28), -2px 2px 6px rgba(0, 0, 0, 0.18);
+  transition: padding 0.2s ease, box-shadow 0.2s ease;
+}
+.feedback-fab-icon { color: #ffffff; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3)); width: 16px; height: 16px; }
+.feedback-fab-word {
+  writing-mode: vertical-rl;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.25s ease, opacity 0.2s ease;
+}
+.feedback-fab:hover, .feedback-fab:focus-visible { padding-bottom: 16px; box-shadow: -10px 8px 26px rgba(0, 0, 0, 0.34), -3px 3px 10px rgba(0, 0, 0, 0.2); }
+.feedback-fab:hover .feedback-fab-word, .feedback-fab:focus-visible .feedback-fab-word { max-height: 200px; opacity: 1; }
+.feedback-fab:active { filter: brightness(0.95); }
+.feedback-fab:focus-visible { outline: 3px solid #facc15; outline-offset: 2px; }
+:root[data-theme="dark"] .feedback-fab { box-shadow: -6px 6px 22px rgba(250, 204, 21, 0.25), -2px 2px 8px rgba(0, 0, 0, 0.5); }
+
+.feedback-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.45);
+}
+.feedback-card {
+  width: min(440px, 100%);
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+.feedback-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.feedback-head h2 { margin: 0; font-size: 18px; }
+.feedback-close { border: none; background: none; color: var(--text); font-size: 22px; cursor: pointer; }
+.feedback-hint {
+  display: block; margin-top: 2px; font-size: 12px; font-weight: 400; color: var(--text-muted, var(--text));
+}
+.feedback-context {
+  margin: 4px 0 0; padding: 8px 10px; border-radius: 8px;
+  background: var(--surface2); font-size: 13px; color: var(--text-muted, var(--text));
+}
+.feedback-question, .feedback-label { margin: 14px 0 8px; font-size: 14px; font-weight: 600; }
+.feedback-optional { font-weight: 400; color: var(--text-dim, var(--text)); }
+.feedback-ratings { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.feedback-rating {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 10px 4px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--surface2); color: var(--text); font-size: 12px; cursor: pointer;
+}
+.feedback-rating.is-selected { border-color: #facc15; box-shadow: 0 0 0 2px #facc15; }
+.feedback-rating-dot { width: 22px; height: 22px; border-radius: 50%; background: var(--surface3); }
+.feedback-rating-dot[data-rating="terrible"] { background: #ef4444; }
+.feedback-rating-dot[data-rating="bad"] { background: #f97316; }
+.feedback-rating-dot[data-rating="okay"] { background: #eab308; }
+.feedback-rating-dot[data-rating="good"] { background: #84cc16; }
+.feedback-rating-dot[data-rating="amazing"] { background: #22c55e; }
+.feedback-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.feedback-chip {
+  padding: 6px 10px; border: 1px solid var(--border); border-radius: 999px;
+  background: var(--surface2); color: var(--text); font-size: 12px; cursor: pointer;
+}
+.feedback-chip.is-selected { background: #facc15; color: #1f2937; border-color: #facc15; }
+.feedback-card textarea {
+  width: 100%; box-sizing: border-box; padding: 10px; border-radius: 10px;
+  border: 1px solid var(--border); background: var(--surface2); color: var(--text);
+  font: inherit; resize: vertical;
+}
+.feedback-error { color: var(--error); font-size: 13px; margin: 10px 0 0; }
+.feedback-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
+.feedback-actions button, .feedback-thanks button {
+  padding: 9px 16px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--surface2); color: var(--text); font-weight: 600; cursor: pointer;
+}
+.feedback-submit { background: #facc15 !important; color: #ffffff !important; border-color: #facc15 !important; text-shadow: 0 1px 2px rgba(0,0,0,0.35); }
+.feedback-submit:disabled { opacity: 0.6; cursor: wait; }
+.feedback-thanks { text-align: center; padding: 12px 0; }
+

@@ -53,12 +53,12 @@ export default function ProblemPage({
         <div className="problem-title-group">
           <span className="problem-num">#{problem.number}</span>
           <h1 className="problem-title">{problem.title}</h1>
+          <span
+            className={`difficulty badge difficulty-${problem.difficulty.toLowerCase()}`}
+          >
+            {problem.difficulty}
+          </span>
         </div>
-        <span
-          className={`difficulty badge difficulty-${problem.difficulty.toLowerCase()}`}
-        >
-          {problem.difficulty}
-        </span>
         <LayoutControls
           layoutWidth={layoutWidth}
           onChange={onLayoutChange}

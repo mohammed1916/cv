@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import ContextBadge from "./ContextBadge";
 import { captureVisualizer } from "../../services/screenshot";
+import { installChatTooltips } from "./chatTooltip";
 
 const InputIcon = ({ name }) => {
   const paths = {
@@ -37,6 +38,7 @@ export default function ChatInput({
   disabled = false,
   isStreaming = false,
 }) {
+  useEffect(() => installChatTooltips(), []);
   const [text, setText] = useState("");
   const [images, setImages] = useState([]);
   const [isListening, setIsListening] = useState(false);
@@ -286,7 +288,7 @@ export default function ChatInput({
         <button
           type="button"
           className="chat-icon-btn"
-          title="Attach image"
+          data-tip="Attach image"
           aria-label="Attach image"
           onClick={() => fileInputRef.current?.click()}
           disabled={disabled}
@@ -297,7 +299,7 @@ export default function ChatInput({
         <button
           type="button"
           className={`chat-icon-btn${isCapturing ? " active" : ""}`}
-          title="Screenshot visualizer"
+          data-tip="Screenshot visualizer"
           aria-label="Screenshot visualizer"
           onClick={handleScreenshot}
           disabled={disabled || isCapturing}
@@ -308,7 +310,7 @@ export default function ChatInput({
         <button
           type="button"
           className={`chat-icon-btn${isListening ? " active mic-pulse" : ""}`}
-          title={isListening ? "Stop listening" : "Voice input"}
+          data-tip={isListening ? "Stop listening" : "Voice input"}
           aria-label={isListening ? "Stop listening" : "Voice input"}
           onClick={handleMic}
           disabled={disabled}

@@ -45,7 +45,7 @@
 
 .chat-launcher {
   position: fixed;
-  right: 1rem;
+  right: 3.25rem; /* leaves room for the feedback tab on the right edge */
   bottom: 1rem;
   z-index: 2100;
   border: 1px solid var(--border);
@@ -923,6 +923,80 @@ body.chat-select-mode .trie-state svg g:hover {
   stroke: var(--info);
   transform: translateX(-4px);
   filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.45));
+}
+
+.about-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+  margin: 0.5rem 0;
+}
+.about-links a,
+.about-link-button {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--primary);
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.about-link-button:focus-visible,
+.about-links a:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.account-menu { position: relative; display: inline-block; }
+.account-menu > summary { list-style: none; cursor: pointer; }
+.account-menu > summary::-webkit-details-marker { display: none; }
+.account-avatar-btn { display: inline-flex; align-items: center; justify-content: center; }
+.account-menu-popover {
+  position: absolute; right: 0; top: calc(100% + 8px); z-index: 2000;
+  min-width: 220px; padding: 14px; display: grid; gap: 8px;
+  border: 1px solid var(--border); border-radius: 12px;
+  background: var(--surface); color: var(--text); box-shadow: 0 12px 40px #0003;
+}
+.account-menu-popover p { margin: 0; }
+.account-menu-name { font-weight: 700; }
+.account-menu-email { font-size: 12px; color: var(--text-muted, var(--text)); word-break: break-all; }
+.account-menu-popover button {
+  padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px;
+  background: var(--surface2); color: var(--text); font-weight: 600; cursor: pointer;
+}
+
+/* Signed-in account avatar: first initial in the theme's primary colour pair,
+   so it adapts to light and dark mode. */
+.account-initial {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--primary-contrast);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.problem-header > .view-menu {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .problem-title-group {
