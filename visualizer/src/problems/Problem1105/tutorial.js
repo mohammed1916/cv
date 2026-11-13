@@ -2,7 +2,8 @@
 const reasons = {
   start: ['Price the empty prefix at zero', 'dp[end] is the cheapest total height for the first end books. With no books there is no shelf to pay for, so dp[0] = 0. Every longer prefix is built from a shorter one, so this base case is what the recurrence starts from.'],
   prefix: ['Solve the prefix ending at this book', 'Books keep their order, so the last shelf is always a run of consecutive books that ends at this one. dp[end] starts unsolved and will take the cheapest choice of where that last run begins.'],
-  grow: ['Extend the last shelf one book backward', 'Moving the start back adds this book to the last shelf. Its thickness uses up width, and the shelf is only as tall as its tallest book, so the height is the running maximum, not a sum.'],
+  grow: ['Extend the last shelf one book backward', 'Moving the start back adds this book to the last shelf, so its thickness uses up more of the available width.'],
+  tallest: ['Update the shelf height', 'A shelf must fit its tallest book, so compare this book with the previous maximum instead of adding the heights.'],
   fit: ['Check that the shelf still fits', 'A book cannot be split or tilted, so the shelf is valid only while its total thickness is at most shelfWidth. This check decides whether books start..end can share one shelf. Nothing is priced yet.'],
   stop: ['Stop once the shelf overflows', 'Thicknesses are positive, so any earlier start adds more width. Once the run is too wide, no shorter prefix of this shelf can fit, and the inner loop can end here.'],
   candidate: ['Price the shelf that starts at this book', 'If the last shelf is books start..end, the books before it must be solved already, which is dp[start - 1]. The shelf adds its tallest book to that cost. This is the only way to finish prefix end with this shelf.'],

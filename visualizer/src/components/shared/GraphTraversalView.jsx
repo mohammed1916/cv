@@ -59,7 +59,7 @@ export default function GraphTraversalView({
         })}
         {points.map((p, id) => {
           const role = graphNodeRole(id, state)
-          return <motion.g initial={false} animate={{opacity:!focus || focus.has(id) ? 1 : 0}} transition={{duration:reduced?0:.25}} aria-hidden={!!focus && !focus.has(id)} key={id} className="gtv__node" data-role={role} data-group={groups[id] ?? ''} data-node={id}>
+          return <motion.g initial={false} animate={{opacity:!focus || focus.has(id) ? 1 : 0}} transition={{duration:reduced?0:.25}} aria-hidden={!!focus && !focus.has(id)} key={id} className="gtv__node" data-role={role} data-group={groups[id] ?? ''} data-node={id} data-adaptive-item={id}>
             <circle cx={p.x} cy={p.y} r={19} />
             <text x={p.x} y={p.y + 4} textAnchor="middle">{labelOf(id)}</text>
             {tags[id] !== undefined && <text className="gtv__tag" x={p.x} y={p.y + 33} textAnchor="middle">{tags[id]}</text>}

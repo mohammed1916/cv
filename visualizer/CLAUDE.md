@@ -1,3 +1,7 @@
+# Latest user direction: adaptive tutorials — 2026-11-13
+
+Read [the adaptive scene planner contract](docs/tutorials/ADAPTIVE-SCENE-PLANNER.md). Reuse registered normal-view components across tutorial modes; new state visuals can join through a stable ID and selector. Explicitly declare reads and explanations where snapshots cannot provide them. Problems 1105 and 1971 are the first integrations; do not claim unregistered visualizers are automatically migrated. Preserve unrelated working-tree changes.
+
 # Latest user direction: directed tutorial stories — 2026-11-10
 
 Read [the directed tutorial implementation and handoff](docs/tutorials/DIRECTED-TUTORIAL-HANDOFF.md). The user wants one relevant scene at a time: code, its visual effect, then the next operation; reason-first adds a separate causal explanation. Problems 1606 and 100 are the reference integrations. Input and Story must be movable dock panels with footer restore controls. Home/problem View menus combine zoom and layout width. Preserve concurrent workspace edits and verify actual code-to-state correspondence before expanding this pattern.

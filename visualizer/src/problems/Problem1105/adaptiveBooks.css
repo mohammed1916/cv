@@ -1,0 +1,5 @@
+.adaptive-books { display:flex; gap:8px; align-items:flex-end; min-height:132px; padding:12px 8px 0; border-bottom:2px solid var(--border); overflow-x:auto; }
+.adaptive-book { flex:0 0 var(--book-width); height:var(--book-height); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:4px; padding:7px 2px; color:var(--text); background:color-mix(in srgb,var(--primary) 17%,var(--surface2)); border:1px solid color-mix(in srgb,var(--primary) 40%,var(--border)); border-radius:6px 6px 0 0; box-sizing:border-box; }
+.adaptive-book[hidden] { display:none; }
+.adaptive-book[data-read="true"] { background:color-mix(in srgb,var(--primary) 30%,var(--surface2)); border-color:var(--primary); }
+.adaptive-book span { color:var(--text-muted); font-size:10px; white-space:nowrap; }

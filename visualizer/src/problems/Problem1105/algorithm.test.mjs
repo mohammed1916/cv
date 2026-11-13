@@ -47,6 +47,17 @@ test('one shelf takes the tallest book; separate shelves add heights', () => {
   assert.equal(run(examples[2].input).result, 10)
 })
 
+test('width and shelf-height updates have separate truthful code frames', () => {
+  const trace = buildTrace({ books: [[2, 6]], shelfWidth: 3 })
+  const grow = trace.frames.find(frame => frame.kind === 'grow')
+  const tallest = trace.frames.find(frame => frame.kind === 'tallest')
+  assert.equal(grow.snapshot.width, 2)
+  assert.equal(grow.snapshot.tallest, 0)
+  assert.equal(tallest.snapshot.width, 2)
+  assert.equal(tallest.snapshot.tallest, 6)
+  assert.notEqual(grow.activeLine, tallest.activeLine)
+})
+
 test('matches the oracle on seeded books', () => {
   let seed = 1105
   const rnd = n => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return (seed >> 16) % n }

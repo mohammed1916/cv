@@ -39,6 +39,7 @@ const STEP = {
   start: ['const dp = [0', 'dp = [0]'],
   prefix: ['for (let end = 1', 'for end in range'],
   grow: ['width += thickness', 'width += thickness'],
+  tallest: ['tallest = Math.max', 'tallest = max'],
   fit: ['if (width > shelfWidth)', 'if width > shelf_width'],
   stop: ['if (width > shelfWidth)', 'if width > shelf_width'],
   candidate: ['dp[end] = Math.min', 'dp[end] = min'],
@@ -109,12 +110,13 @@ export function buildTrace(input) {
     for (let start = end; start >= 1; start--) {
       const [thickness, height] = books[start - 1]
       width += thickness
+      frames.push(frame('update', 'grow', `Add book ${start}'s thickness: the shelf now needs width ${width}.`, snap({ end, start, width, tallest })))
       tallest = Math.max(tallest, height)
+      frames.push(frame('update', 'tallest', `The tallest book on this shelf is now ${tallest}.`, snap({ end, start, width, tallest })))
       if (width > shelfWidth) {
         frames.push(frame('update', 'stop', `Books ${start}..${end} need width ${width}, which is over ${shelfWidth}; stop extending.`, snap({ end, start, width, tallest, overflow: true })))
         break
       }
-      frames.push(frame('update', 'grow', `Add book ${start} to the last shelf: width ${width}, tallest ${tallest}.`, snap({ end, start, width, tallest })))
       frames.push(frame('update', 'fit', `Width ${width} is within ${shelfWidth}, so books ${start}..${end} can share a shelf.`, snap({ end, start, width, tallest })))
       const best = dp[end]
       const candidate = dp[start - 1] + tallest

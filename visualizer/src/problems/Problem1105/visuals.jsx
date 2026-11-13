@@ -1,5 +1,19 @@
 import DPDependencyView from '../../components/shared/DPDependencyView';
-import {TrackedValues} from '../../components/shared/adaptive/AdaptiveStage';
+import {motion, useReducedMotion} from 'framer-motion';
+import './adaptiveBooks.css';
+
+function BookStrip({data, focusKeys, reads, focused}) {
+  const reduced = useReducedMotion();
+  return <div className="adaptive-books" aria-label="Ordered books">
+    {Object.entries(data).map(([id, [width, height]]) => {
+      const visible = !focused || !focusKeys.length || focusKeys.includes(id);
+      return <motion.div layout={!reduced} key={id} hidden={!visible} className="adaptive-book"
+        data-read={focused && reads.includes(id)} style={{'--book-height': `${44 + height * 4}px`, '--book-width': `${Math.min(76, 42 + width * 2)}px`}}>
+        <strong>{id}</strong><span>{width} wide</span><span>{height} tall</span>
+      </motion.div>;
+    })}
+  </div>;
+}
 
 export const shelfVisuals = [
   {
@@ -16,7 +30,7 @@ export const shelfVisuals = [
     id:'books',title:'Books in their original order',
     select:({run})=>Object.fromEntries(run.input.books.map((book,i)=>[String(i+1),book])),
     reads:({step})=>step.snapshot.start ? Array.from({length:step.snapshot.end-step.snapshot.start+1},(_,i)=>step.snapshot.start+i) : [],
-    render:props=><TrackedValues {...props} format={book=>`${book[0]} wide × ${book[1]} tall`} />,
+    render:props=><BookStrip {...props} />,
   },
   // Adding this registration is sufficient for ALL three modes. No tutorial renderer or scene edit.
   {

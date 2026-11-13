@@ -15,6 +15,11 @@ export const bfsVisuals = [
     select:({step})=>Object.fromEntries(step.frontier.map((id,index)=>[String(id),`position ${index+1}`])),
     active:({step})=>['dequeue','enqueue','init','not-found'].includes(step.kind),
     dependsOn:['graph'],
+    transfer:({step})=>step.kind==='enqueue'
+      ? {from:'graph',to:'queue',item:step.neighbour,changedVisual:'queue',operation:'insert'}
+      : step.kind==='dequeue'
+        ? {from:'queue',to:'graph',item:step.current,changedVisual:'queue',operation:'remove'}
+        : null,
   },
   {
     id:'result',title:'Reachability',
