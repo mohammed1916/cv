@@ -100,7 +100,6 @@ export default function ValidParenthesesVisualizer() {
   // Extract panels into consts
   const primaryPanel = (
     <div className="validparen-panel">
-      <div className="validparen-panel-head">Bracket Dance</div>
       <div className="validparen-panel-body">
         <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>{EXAMPLES.map((ex) => (<button key={ex.label} onClick={() => applyExample(ex)} className="validparen-example-btn">{ex.label}</button>))}</div>
         <input value={input} onChange={(e) => { setInput(e.target.value); handleReset() }} placeholder="Enter" className="validparen-input" style={{ width: '100%', marginBottom: 24 }} />
@@ -112,7 +111,6 @@ export default function ValidParenthesesVisualizer() {
 
   const statePanel = (
     <div className="validparen-panel">
-      <div className="validparen-panel-head">Stack</div>
       <div className="validparen-panel-body">
         <div className="validparen-stack-container">
           <AnimatePresence>{step?.stack?.length > 0 ? step.stack.map((bracket, idx) => (<motion.div key={idx} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="validparen-stack-item"><span className="validparen-stack-bracket">{bracket}</span></motion.div>)) : (<div className="validparen-stack-empty">Empty</div>)}</AnimatePresence>

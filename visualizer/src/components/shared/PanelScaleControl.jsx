@@ -4,8 +4,8 @@ import './PanelScaleControl.css'
 export default function PanelScaleControl({
   value,
   onChange,
-  label = 'Control scale',
-  ariaLabel = 'Panel content scale',
+  label = 'Panel zoom',
+  ariaLabel = 'Panel zoom',
   min = 65,
   max = 120,
 }) {

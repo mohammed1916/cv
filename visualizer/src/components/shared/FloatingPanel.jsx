@@ -401,7 +401,8 @@ export default function FloatingPanel({
             <PanelScaleControl
               value={controlScale}
               onChange={setControlScale}
-              ariaLabel="Playback controls scale"
+              label="Panel zoom"
+              ariaLabel="Playback controls panel zoom"
             />
           </div>
         )}

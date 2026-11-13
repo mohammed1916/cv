@@ -185,7 +185,6 @@ export default function ReverseIntegerVisualizer() {
           inputError={inputError}
         />
       <div className="revin-panel-head">
-        Pop & Push Digits
         {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
       </div>
       <div className="revin-panel-body">
@@ -243,7 +242,6 @@ export default function ReverseIntegerVisualizer() {
 
   const boundsPanel = (
     <div className="revin-panel">
-      <div className="revin-panel-head">32-Bit Integer Bounds</div>
       <div className="revin-panel-body" style={{ gap: 16 }}>
 
         <div className="revin-bounds-box">

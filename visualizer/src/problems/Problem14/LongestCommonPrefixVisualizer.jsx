@@ -221,7 +221,6 @@ function StringsVisualizationPanel({ step, strs }) {
   return (
     <div className="lcp-panel-body">
       <div className="lcp-viz-section">
-        <h3 className="lcp-section-title">Strings Grid</h3>
         <div className="lcp-strings-grid">
           {strs.map((str, rowIdx) => (
             <div
@@ -280,7 +279,6 @@ function PrefixPanel({ step, strs }) {
   return (
     <div className="lcp-panel-body">
       <div className="lcp-viz-section">
-        <h3 className="lcp-section-title">Common Prefix</h3>
         <div className="lcp-prefix-display">
           {step && step.prefix ? (
             <motion.div

@@ -715,7 +715,6 @@ export default function MedianOfTwoSortedArraysVisualizer() {
 
       <div className="median-panel median-input-panel">
         <div className="median-panel-head">
-          <span>Inputs & Examples</span>
           {prepared.inputError && (
             <span className="median-error-pill">{prepared.inputError}</span>
           )}
@@ -773,7 +772,6 @@ export default function MedianOfTwoSortedArraysVisualizer() {
   const statePanel = (
     <div className="median-panel median-array-panel">
       <div className="median-panel-head">
-        <span>Partition Visualization</span>
         <span className="median-badge neutral">
           {step?.phase === "found"
             ? "Valid partition found"
@@ -798,7 +796,6 @@ export default function MedianOfTwoSortedArraysVisualizer() {
   const secondaryPanel = (
     <div className="median-panel median-math-panel">
       <div className="median-panel-head">
-        <span>Partition Math & Verdict</span>
         <span className="median-badge neutral">LeetCode 4</span>
       </div>
 

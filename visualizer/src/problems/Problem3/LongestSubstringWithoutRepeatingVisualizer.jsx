@@ -166,7 +166,6 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
 
     <div className="lswrc-panel" style={{ flex: 2 }}>
       <div className="lswrc-panel-head">
-        String View
         {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
       </div>
       <div className="lswrc-panel-body">
@@ -229,7 +228,7 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
   const statePanel = (
     <div className="lswrc-panel">
       <div className="lswrc-panel-head">
-        Hash Map <code>char_map = {'{}'}</code>
+        <code>char_map = {'{}'}</code>
       </div>
       <div className="lswrc-panel-body">
         <AnimatePresence mode="sync">
@@ -292,7 +291,6 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
 
   const variablesPanel = (
     <div className="lswrc-panel">
-      <div className="lswrc-panel-head">Variables</div>
       <div className="lswrc-panel-body">
         <div className="lswrc-vars">
           <div className="lswrc-var-row">

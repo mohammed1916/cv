@@ -1128,8 +1128,8 @@ When asked about code or data structures, be precise and educational.`,
       <PanelScaleControl
         value={contentScale}
         onChange={handleContentScale}
-        label="AI scale"
-        ariaLabel="AI assistant content scale"
+        label="Panel zoom"
+        ariaLabel="AI assistant panel zoom"
         max={240}
       />
     </div>

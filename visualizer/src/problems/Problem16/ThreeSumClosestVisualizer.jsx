@@ -243,7 +243,6 @@ export default function ThreeSumClosestVisualizer() {
 
     const statePanel = (
       <div className="tsc3-panel results">
-        <header className="tsc3-head"><span>Tracking Closest</span></header>
         <div className="tsc3-body">
           <div className="tsc3-closest-display">
             <div className="tsc3-closest-label">Target</div>

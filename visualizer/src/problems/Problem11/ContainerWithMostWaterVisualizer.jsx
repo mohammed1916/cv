@@ -136,7 +136,6 @@ export default function ContainerWithMostWaterVisualizer() {
 
       <div className="vis-panel cw-panel">
         <div className="vis-panel-head cw-panel-head">
-          Input Array (Heights)
           {inputError && (
             <span style={{ color: "#ea0c0c", marginLeft: 8 }}>
               {inputError}
@@ -203,7 +202,6 @@ export default function ContainerWithMostWaterVisualizer() {
 
   const statePanel = (
     <div className="vis-panel cw-panel">
-      <div className="vis-panel-head cw-panel-head">Variables</div>
       <div className="vis-panel-body cw-panel-body">
         <div className="cw-vars">
           <div className="cw-var-row">

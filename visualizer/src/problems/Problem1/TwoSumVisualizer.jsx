@@ -232,7 +232,7 @@ export default function TwoSumVisualizer() {
 
   const hashMapPanel = (
     <div className="vis-panel twosum-panel">
-      <div className="vis-panel-head twosum-panel-head">Hash Map (prevMap)</div>
+      <div className="vis-panel-head twosum-panel-head">prevMap</div>
       <div className="vis-panel-body twosum-panel-body">
         <div className="twosum-map-container">
           <div className="twosum-map-headers">

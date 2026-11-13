@@ -138,7 +138,6 @@ export default function ValidParentheses() {
             </div>
           </div>),
     right: (<div className="vis-panel valid-parentheses-panel">
-            <div className="vis-panel-head valid-parentheses-panel-head">Details</div>
             <div className="vis-panel-body valid-parentheses-panel-body">
               <div className="valid-parentheses-info">
                 <h3>Problem 20</h3>

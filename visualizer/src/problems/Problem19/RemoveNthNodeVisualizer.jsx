@@ -352,7 +352,6 @@ function RemoveNthNodeViz({
 function RemoveNthNodeState({ step }) {
   return (
     <section className="vis-panel rnn-panel side">
-      <header className="rnn-head"><span>State</span></header>
       <div className="rnn-body">
         <div className="rnn-state-row">
           <span className="rnn-state-label fast">fast</span>

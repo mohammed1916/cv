@@ -260,7 +260,6 @@ export default function AddTwoNumbersVisualizer({ problem }) {
 
   const statePanel = (
     <div className="atn-panel">
-      <div className="vis-panel-head atn-panel-head">State Variables</div>
       <div className="atn-panel-body" style={{ gap: 16 }}>
 
         <div className="atn-var-card carry">

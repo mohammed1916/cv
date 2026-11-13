@@ -283,7 +283,6 @@ export default function FourSumVisualizer() {
 
     const statePanel = (
         <section className="fs4-panel results">
-            <header className="fs4-head"><span>Quadruplets Found</span></header>
             <div className="fs4-body">
                 <AnimatePresence>
                     {(step?.result ?? []).map((quad) => (
