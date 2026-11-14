@@ -17,6 +17,7 @@ import './MaxProductSubarrayVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -132,22 +133,13 @@ export default function MaxProductSubarrayVisualizer() {
             <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
 
 
-                <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>Array</div>
-                <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', alignItems: 'center' }}>
-                    {nums.map((val, i) => {
-                        const isActive = step?.i === i
-                        return (
-                            <motion.div key={i} animate={isActive ? { y: -8, scale: 1.2 } : { y: 0, scale: 1 }} style={{
-                                width: 50, height: 50, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                                backgroundColor: isActive ? "var(--recovered-surface-fbbf24, #fbbf24)" : val < 0 ? "var(--recovered-surface-fee2e2, #fee2e2)" : val === 0 ? "var(--recovered-surface-f3f4f6, #f3f4f6)" : "var(--recovered-surface-dbeafe, #dbeafe)",
-                                border: isActive ? '2px solid #f59e0b' : '1px solid var(--border)', borderRadius: 4
-                            }}>
-                                <span style={{ fontSize: 10, color: 'var(--text-muted)' }}>{i}</span>
-                                <span style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--text-on-light)' }}>{val}</span>
-                            </motion.div>
-                        )
-                    })}
-                </div>
+                <IndexedSequence
+                    label="Array"
+                    length={nums.length}
+                    valueAt={(i) => nums[i]}
+                    active={step?.i ?? -1}
+                    roleAt={(i) => (nums[i] < 0 ? 'negative' : nums[i] === 0 ? 'zero' : '')}
+                />
 
                 {step?.candidates?.length > 0 && (
                     <div style={{ padding: 8, backgroundColor: "var(--recovered-surface-fef3c7, #fef3c7)", borderRadius: 6, border: '1px solid #fcd34d' }}>

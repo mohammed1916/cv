@@ -16,6 +16,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 
 import './ThreeSumVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
+import PointerRail from '../../components/shared/PointerRail'
 import PatternOverlay from "../../components/PatternOverlay";
 
 const THREESUM_PATTERNS = ['sort', 'fix_i', 'skip_i', 'calc', 'found', 'move_l', 'skip_l', 'move_r', 'done']
@@ -326,58 +327,16 @@ export default function ThreeSumVisualizer() {
       <div style={{ display: 'flex', gap: 8, flexDirection: 'column' }}>
         
 
-        <div>
-          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Sorted Array · Pointers</div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-            {sorted.map((val, idx) => {
-              const isI = step?.i === idx
-              const isL = step?.l === idx
-              const isR = step?.r === idx
-              const isFound = step?.phase === 'found' && (isI || isL || isR)
-              const lifted = isI || isL || isR
-              return (
-                <div key={idx} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
-                        <motion.div
-                          className={`ts3-cell${isFound ? ' found' : isI ? ' fix' : isL ? ' left' : isR ? ' right' : ''}`}
-                          style={{
-                            width: 48,
-                            height: 48,
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            borderRadius: 8,
-                            fontWeight: 600,
-                            fontSize: 14,
-                            fontFamily: 'monospace',
-                          }}
-                          animate={{ y: lifted ? -12 : 0, scale: lifted ? 1.15 : 1 }}
-                          transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-                        >
-                          {val}
-                        </motion.div>
-                        <div style={{ fontSize: 10, color: 'var(--text-muted)' }}>{idx}</div>
-                        <div style={{ display: 'flex', gap: 2, minHeight: 18 }}>
-                          {isI && (
-                            <span className="ts3-ptr-i" style={{ fontSize: 9, fontWeight: 700, padding: '1px 5px', borderRadius: 4 }}>
-                              i
-                            </span>
-                          )}
-                          {isL && (
-                            <span className="ts3-ptr-l" style={{ fontSize: 9, fontWeight: 700, padding: '1px 5px', borderRadius: 4 }}>
-                              l
-                            </span>
-                          )}
-                          {isR && (
-                            <span className="ts3-ptr-r" style={{ fontSize: 9, fontWeight: 700, padding: '1px 5px', borderRadius: 4 }}>
-                              r
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
+        <PointerRail
+          title="Sorted array · pointers"
+          values={sorted}
+          highlight={step?.phase === 'found' ? [step.i, step.l, step.r].filter(v => v != null) : []}
+          pointers={[
+            ...(step?.i != null ? [{ id: 'i', label: 'i', index: step.i, tone: 'primary' }] : []),
+            ...(step?.l != null ? [{ id: 'l', label: 'l', index: step.l, tone: 'info' }] : []),
+            ...(step?.r != null ? [{ id: 'r', label: 'r', index: step.r, tone: 'warning' }] : []),
+          ]}
+        />
 
               {step?.sum != null && (
                 <div style={{ padding: 10, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 12, border: '1px solid var(--text)' }}>

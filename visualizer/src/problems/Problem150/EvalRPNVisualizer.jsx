@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
+import IndexedSequence from "../../components/shared/IndexedSequence";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
@@ -115,23 +116,13 @@ export default function EvalRPNVisualizer() {
             <input style={{ padding: '8px', borderRadius: 4, border: '1px solid var(--border)', fontSize: 12, fontFamily: 'monospace' }} value={input} onChange={(e) => { setInput(e.target.value); handleReset(); }} placeholder='["2","1","+","3","*"]' />
             {err && <div style={{ padding: 8, backgroundColor: "var(--surface2, var(--surface2))", color: 'var(--text)', borderRadius: 4, fontSize: 12 }}>{err}</div>}
 
-            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 4 }}>Tokens</div>
-            <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', minHeight: 40 }}>
-                {tokens.map((t, i) => {
-                    const isOp = ['+', '-', '*', '/'].includes(t);
-                    const isCurrent = step?.ti === i;
-                    return (
-                        <motion.div key={i} animate={{ scale: isCurrent ? 1.3 : 1 }} style={{
-                            padding: '6px 10px',
-                            backgroundColor: isOp ? "var(--surface2, var(--surface2))" : "var(--surface2, var(--surface2))",
-                            border: isCurrent ? '3px solid var(--primary)' : '1px solid var(--border)',
-                            borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: isOp ? 'var(--text)' : 'var(--text)'
-                        }}>
-                            {t}
-                        </motion.div>
-                    );
-                })}
-            </div>
+            <IndexedSequence
+                label="Tokens"
+                length={tokens.length}
+                valueAt={(i) => tokens[i]}
+                active={step?.ti ?? -1}
+                roleAt={(i) => (['+', '-', '*', '/'].includes(tokens[i]) ? 'operator' : '')}
+            />
 
             <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 4 }}>Stack</div>
             <div style={{ display: 'flex', gap: 6, alignItems: 'flex-end', minHeight: 60, paddingBottom: 8, borderBottom: '1px solid var(--text)' }}>

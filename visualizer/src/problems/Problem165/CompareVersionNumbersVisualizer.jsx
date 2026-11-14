@@ -14,6 +14,7 @@ import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -174,37 +175,6 @@ function generateSteps(version1, version2) {
   return steps
 }
 
-function VersionParts({ parts, label }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-      <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)' }}>
-        {label}
-      </div>
-      <div style={{ display: 'flex', gap: 4 }}>
-        {parts.map((part, idx) => (
-          <motion.div
-            key={idx}
-            style={{
-              padding: '6px 8px',
-              borderRadius: 3,
-              backgroundColor: "var(--recovered-surface-a5b4fc, #a5b4fc)",
-              border: '2px solid #4f46e5',
-              fontSize: 12,
-              fontWeight: 600,
-              color: '#1e1b4b',
-              fontFamily: 'monospace',
-            }}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-          >
-            {part}
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
 function VisualizationPanel({ step }) {
   if (!step) return <div style={{ padding: 16, color: "var(--recovered-ink-627794, #627794)" }}>Press play</div>
 
@@ -231,8 +201,20 @@ function VisualizationPanel({ step }) {
       {step.parts1 && step.parts2 && (
         <motion.div style={{ padding: 12, backgroundColor: "var(--recovered-surface-f3e8ff, #f3e8ff)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ display: 'flex', gap: 16 }}>
-            <VersionParts parts={step.parts1} label="Version 1 Parts" />
-            <VersionParts parts={step.parts2} label="Version 2 Parts" />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, flex: 1, minWidth: 0 }}>
+              <IndexedSequence
+                label="Version 1 Parts"
+                length={step.parts1.length}
+                valueAt={(idx) => step.parts1[idx]}
+                active={step.i ?? -1}
+              />
+              <IndexedSequence
+                label="Version 2 Parts"
+                length={step.parts2.length}
+                valueAt={(idx) => step.parts2[idx]}
+                active={step.i ?? -1}
+              />
+            </div>
           </div>
         </motion.div>
       )}

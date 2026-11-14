@@ -166,37 +166,13 @@ function VisualizationPanel({ step }) {
       </div>
 
       {step.chunk && step.chunk.length > 0 && (
-        <motion.div style={{ padding: 12, backgroundColor: "color-mix(in srgb, var(--warning) 22%, var(--surface))", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--warning)', marginBottom: 8 }}>
-            Current Chunk (read4)
-          </div>
-          <div style={{ display: 'flex', gap: 6 }}>
-            {step.chunk.map((char, idx) => (
-              <CharacterBox key={idx} char={char} />
-            ))}
-          </div>
-        </motion.div>
+        <IndexedSequence label="Current chunk (read4)" length={step.chunk.length} active={-1}
+          valueAt={i => step.chunk[i]} roleAt={() => 'chunk'} />
       )}
 
       {step.buf && step.buf.length > 0 && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--primary)', marginBottom: 8 }}>
-            Buffer (accumulated)
-          </div>
-          <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-            {step.buf.map((char, idx) => (
-              <CharacterBox
-                key={idx}
-                char={char}
-                style={{
-                  backgroundColor: "color-mix(in srgb, var(--success) 22%, var(--surface))",
-                  border: '2px solid var(--success)',
-                  color: 'var(--success)',
-                }}
-              />
-            ))}
-          </div>
-        </motion.div>
+        <IndexedSequence label="Buffer (accumulated)" length={step.buf.length} active={-1}
+          valueAt={i => step.buf[i]} roleAt={() => 'buffered'} />
       )}
 
       {step.readChunks && step.readChunks.length > 0 && (

@@ -1,7 +1,6 @@
 import authoredExamples0 from '../../config/examples/next-permutation.js';
-﻿import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
-import { motion, AnimatePresence } from "framer-motion";
 
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -10,6 +9,8 @@ import PatternLegend from "../../components/PatternLegend";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import ManualInputPanel from "../../components/shared/ManualInputPanel";
+import PointerRail from "../../components/shared/PointerRail";
+import IndexedSequence from "../../components/shared/IndexedSequence";
 
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
@@ -254,29 +255,22 @@ function ArrayVisualizationPanel({ step, exampleNums }) {
     <div className="np-array-visualization">
       <div className="np-panel-label">Array</div>
 
-      <div className="np-array-row">
-        <AnimatePresence mode="popLayout">
-          {displayedNums.map((val, idx) => (
-            <motion.div
-              key={idx}
-              layout
-              className={`np-cell ${cellClass(idx, step)}`}
-              animate={{
-                y: 0,
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 350,
-                damping: 22,
-              }}
-            >
-              {val}
+      <PointerRail
+        title="Pointers"
+        values={displayedNums}
+        pointers={[
+          { id: "pivot", label: "i (pivot)", index: step?.pivotI ?? -1, tone: "pivot" },
+          { id: "swap", label: "j (swap)", index: step?.swapJ ?? -1, tone: "swap" },
+        ]}
+      />
 
-              <div className="np-idx">{idx}</div>
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </div>
+      <IndexedSequence
+        label="Array"
+        length={displayedNums.length}
+        valueAt={(idx) => displayedNums[idx]}
+        active={step?.pivotI ?? -1}
+        roleAt={(idx) => cellClass(idx, step)}
+      />
 
       <div className="np-legend">
         <span className="np-leg pivot">■ pivot (i)</span>

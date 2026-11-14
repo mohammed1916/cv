@@ -14,6 +14,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 
 import './ThreeSumClosestVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
+import PointerRail from '../../components/shared/PointerRail'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
@@ -197,32 +198,16 @@ export default function ThreeSumClosestVisualizer() {
           </div>
           
 
-          <div className="tsc3-array">
-            {sorted.map((val, idx) => {
-              const isI = step?.i === idx
-              const isL = step?.l === idx
-              const isR = step?.r === idx
-              const isActive = step?.phase === 'calc' && (isI || isL || isR)
-              const lifted = isI || isL || isR
-              return (
-                <div key={idx} className="tsc3-cell-wrap">
-                  <motion.div
-                    className={`tsc3-cell${isI ? ' i' : ''}${isL ? ' left' : ''}${isR ? ' right' : ''}${isActive ? ' active' : ''}`}
-                    animate={{ y: lifted ? -12 : 0, scale: lifted ? 1.15 : 1 }}
-                    transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-                  >
-                    {val}
-                  </motion.div>
-                  <span className="tsc3-idx">{idx}</span>
-                  <div className="tsc3-ptrs">
-                    {isI && <span className="tsc3-ptr tsc3-ptr-i">i</span>}
-                    {isL && <span className="tsc3-ptr tsc3-ptr-l">l</span>}
-                    {isR && <span className="tsc3-ptr tsc3-ptr-r">r</span>}
-                  </div>
-                </div>
-              )
-            })}
-          </div>
+          <PointerRail
+            title="Sorted array · pointers"
+            values={sorted}
+            highlight={step?.phase === 'found' ? [step.i, step.l, step.r].filter(v => v != null) : []}
+          pointers={[
+              ...(step?.i != null ? [{ id: 'i', label: 'i', index: step.i, tone: 'primary' }] : []),
+              ...(step?.l != null ? [{ id: 'l', label: 'l', index: step.l, tone: 'info' }] : []),
+              ...(step?.r != null ? [{ id: 'r', label: 'r', index: step.r, tone: 'warning' }] : []),
+            ]}
+          />
 
           {step?.sum != null && (
             <div className="tsc3-sum-box">

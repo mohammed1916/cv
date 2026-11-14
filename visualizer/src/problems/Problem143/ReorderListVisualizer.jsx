@@ -1,7 +1,6 @@
 import authoredExamples0 from '../../config/examples/reorder-list.js';
 ﻿import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
-import { motion } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -13,6 +12,7 @@ import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity
 
 import "./ReorderListVisualizer.css";
 import ManualInputPanel from "../../components/shared/ManualInputPanel";
+import PointerRail from "../../components/shared/PointerRail";
 import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 
@@ -233,52 +233,14 @@ export default function ReorderListVisualizer() {
           overflow: "auto",
         }}
       >
-        <div
-          style={{
-            padding: 8,
-            backgroundColor: "var(--surface)",
-            borderRadius: 6,
-            display: "flex",
-            gap: 2,
-            flexWrap: "wrap",
-          }}
-        >
-          {displayList.map((v, i) => (
-            <div
-              key={i}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 2,
-              }}
-            >
-              <motion.div
-                animate={{
-                  scale: i === slow || i === fast ? 1.15 : 1,
-                }}
-                style={{
-                  width: 32,
-                  height: 32,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  backgroundColor: "var(--surface2, var(--surface2))",
-                  border: "1px solid var(--primary)",
-                  borderRadius: 4,
-                  fontSize: 12,
-                  fontWeight: "bold",
-                  color: "var(--text)",
-                }}
-              >
-                {v}
-              </motion.div>
-
-              {i < displayList.length - 1 && (
-                <span style={{ color: "var(--text, var(--text))" }}>→</span>
-              )}
-            </div>
-          ))}
-        </div>
+        <PointerRail
+          title="List · slow / fast pointers"
+          values={displayList}
+          pointers={[
+            ...(slow >= 0 ? [{ id: "slow", label: "slow", index: slow, tone: "primary" }] : []),
+            ...(fast >= 0 ? [{ id: "fast", label: "fast", index: fast, tone: "warning" }] : []),
+          ]}
+        />
 
         {step?.firstHalf && (
           <div

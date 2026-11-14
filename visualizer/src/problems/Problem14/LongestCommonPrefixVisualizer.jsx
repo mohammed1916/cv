@@ -9,6 +9,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
+import PointerRail from "../../components/shared/PointerRail";
 import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
@@ -222,50 +223,33 @@ function StringsVisualizationPanel({ step, strs }) {
     <div className="lcp-panel-body">
       <div className="lcp-viz-section">
         <div className="lcp-strings-grid">
-          {strs.map((str, rowIdx) => (
-            <div
-              key={rowIdx}
-              className={`lcp-string-row ${rowIdx === 0 ? "base" : ""}`}
-            >
-              <div className="lcp-row-label">strs[{rowIdx}]:</div>
-              <div className="lcp-chars-container">
-                {str.split("").map((char, colIdx) => {
-                  const isActive = step?.col === colIdx && step?.row === rowIdx;
-                  const isBaseActive =
-                    step?.col === colIdx &&
-                    rowIdx === 0 &&
-                    step?.phase !== "done";
-                  const isInPrefix = colIdx < (step?.prefix?.length ?? 0);
-                  const isBoundaryViolation =
-                    step?.phase === "out_of_bounds" &&
-                    colIdx === step?.col &&
-                    rowIdx === step?.row;
-
-                  return (
-                    <div key={colIdx} className="lcp-char-wrapper">
-                      <div className="lcp-col-index">{colIdx}</div>
-                      <motion.div
-                        className={`lcp-char-cell ${isActive ? "active" : ""} ${isBaseActive ? "base-active" : ""} ${isInPrefix ? "in-prefix" : ""} ${isBoundaryViolation ? "boundary" : ""}`}
-                        animate={
-                          isActive ? { y: -6, scale: 1.08 } : { y: 0, scale: 1 }
-                        }
-                        transition={{
-                          type: "spring",
-                          stiffness: 200,
-                          damping: 20,
-                        }}
-                      >
-                        {char}
-                      </motion.div>
-                    </div>
-                  );
-                })}
-                {str.length === 0 && (
-                  <div className="lcp-empty-string">empty</div>
-                )}
+          {strs.map((str, rowIdx) => {
+            const isRowActive = step?.row === rowIdx;
+            const pointers = [];
+            if (step?.col != null && (isRowActive || (rowIdx === 0 && step?.phase !== "done"))) {
+              pointers.push({ id: "col", label: "col", index: step.col, tone: isRowActive ? "primary" : "info" });
+            }
+            return (
+              <div
+                key={rowIdx}
+                className={`lcp-string-row ${rowIdx === 0 ? "base" : ""}`}
+              >
+                <div className="lcp-row-label">strs[{rowIdx}]:</div>
+                <div className="lcp-chars-container">
+                  {str.length === 0 ? (
+                    <div className="lcp-empty-string">empty</div>
+                  ) : (
+                    <PointerRail
+                      title={`strs[${rowIdx}] · column`}
+                      values={str.split("")}
+                      pointers={pointers}
+                      range={step?.prefix != null ? { start: 0, end: Math.max(0, step.prefix.length - 1) } : null}
+                    />
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
           {strs.length === 0 && (
             <div className="lcp-empty-array">Empty array</div>
           )}

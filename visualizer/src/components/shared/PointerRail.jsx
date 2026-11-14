@@ -8,6 +8,8 @@ export default function PointerRail({
   pointers = [],
   range = null,
   partition = null,
+  highlight = [],
+  scrollable = true,
   note,
 }) {
   return (
@@ -16,7 +18,7 @@ export default function PointerRail({
         <strong>{title}</strong>
         {range && <span>search window: {range.start}–{range.end}</span>}
       </header>
-      <div className="pointer-rail-track">
+      <div className="pointer-rail-track" style={scrollable ? undefined : { overflowX: 'visible' }}>
         <div
           className="pointer-rail-canvas"
           style={{ gridTemplateColumns: `repeat(${Math.max(values.length, 1)}, minmax(38px, 1fr))` }}
@@ -29,7 +31,7 @@ export default function PointerRail({
               <div className="pointer-rail-tags">
                 {at.map((pointer) => <motion.span layout key={pointer.id} className={`pointer-rail-tag ${pointer.tone || 'primary'}`}>{pointer.label}</motion.span>)}
               </div>
-              <div className={`pointer-rail-cell ${at.length ? 'pointed' : ''} ${partition !== null && index < partition ? 'left-partition' : ''} ${partition !== null && index >= partition ? 'right-partition' : ''}`}>{value}</div>
+              <div className={`pointer-rail-cell ${at.length ? 'pointed' : ''} ${highlight.includes(index) ? 'highlighted' : ''} ${partition !== null && index < partition ? 'left-partition' : ''} ${partition !== null && index >= partition ? 'right-partition' : ''}`}>{value}</div>
               <span className="pointer-rail-index">{index}</span>
             </div>
           )

@@ -22,3 +22,6 @@
 .pointer-rail-boundary { position: absolute; top: 22px; bottom: 0; width: 2px; background: currentColor; transform: translateX(-1px); color: var(--success); }
 .pointer-rail-boundary span { position: absolute; top: -21px; left: 50%; transform: translateX(-50%); white-space: nowrap; padding: 2px 5px; border: 1px solid currentColor; background: var(--surface); font-size: 10px; font-weight: 800; }
 .pointer-rail-boundary.primary { color: var(--primary); }.pointer-rail-boundary.info { color: var(--info); }.pointer-rail-boundary.success { color: var(--success); }.pointer-rail-boundary.warning { color: var(--warning); }
+
+/* Cells that satisfy a condition (for example a found 3Sum triplet). */
+.pointer-rail-cell.highlighted { background: color-mix(in srgb, #22c55e 28%, var(--surface2)); box-shadow: 0 0 0 2px #22c55e; font-weight: 700; }

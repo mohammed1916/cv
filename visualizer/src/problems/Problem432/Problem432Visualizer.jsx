@@ -3,7 +3,6 @@ import authoredExamples0 from '../../config/examples/all-o1-data-structure.js';
 const AUTHORED_INITIAL = authoredExamples0[0];
 import { generateSteps, CODE as SOLUTION_CODE_INLINE } from './algorithm';
 import { useState, useMemo, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -17,6 +16,7 @@ import './Problem432Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import { createPortal } from 'react-dom'
 
 // Pattern annotations
@@ -69,35 +69,13 @@ function VisualizationPanel({ step, applyEx }) {
       </div>
 
       {step?.array && step.array.length > 0 && (
-        <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Active keys</div>
-          <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-            {step.array.map((val, i) => (
-              <motion.div
-                key={i}
-                style={{
-                  width: 45,
-                  height: 45,
-                  borderRadius: 6,
-                  backgroundColor: step.val === val ? "var(--recovered-surface-dbeafe, #dbeafe)" : step.randomVal === val ? "var(--recovered-surface-fef08a, #fef08a)" : 'var(--surface2)',
-                  border: step.val === val ? '3px solid #0284c7' : step.randomVal === val ? '3px solid #eab308' : '1px solid var(--border)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: 13,
-                  fontWeight: 700,
-                  color: step.val === val ? '#0c4a6e' : step.randomVal === val ? '#713f12' : 'var(--text-muted)',
-                  flexDirection: 'column',
-                  gap: 2,
-                }}
-                animate={{ scale: step.val === val || step.randomVal === val ? 1.15 : 1 }}
-              >
-                <div>{val}</div>
-                <div style={{ fontSize: 9, opacity: 0.7 }}>idx:{i}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+        <IndexedSequence
+          label="Active keys"
+          length={step.array.length}
+          valueAt={(i) => step.array[i]}
+          active={step.array.indexOf(step.val)}
+          roleAt={(i) => (step.array[i] === step.randomVal ? 'random' : '')}
+        />
       )}
 
       {step?.map && step.map.size > 0 && (

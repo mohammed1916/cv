@@ -17,6 +17,7 @@ import './ReverseWordsInAStringVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -118,28 +119,6 @@ function generateSteps(s) {
   return steps
 }
 
-function WordBox({ word, isReversed }) {
-  return (
-    <motion.div
-      style={{
-        padding: '8px 12px',
-        backgroundColor: isReversed ? "var(--surface2, var(--surface2))" : "var(--surface2, var(--surface2))",
-        borderRadius: 4,
-        border: `2px solid ${isReversed ? 'var(--success)' : 'var(--border)'}`,
-        fontSize: 13,
-        fontWeight: 600,
-        color: isReversed ? 'var(--text)' : 'var(--text)',
-        fontFamily: 'monospace',
-      }}
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.3 }}
-    >
-      "{word}"
-    </motion.div>
-  )
-}
-
 function VisualizationPanel({ step }) {
   if (!step) return <div style={{ padding: 16, color: "var(--text, var(--text))" }}>Press play</div>
 
@@ -167,11 +146,12 @@ function VisualizationPanel({ step }) {
           <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
             Words (Original Order)
           </div>
-          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-            {step.words.map((word, idx) => (
-              <WordBox key={idx} word={word} isReversed={false} />
-            ))}
-          </div>
+          <IndexedSequence
+            label="Words (Original Order)"
+            length={step.words.length}
+            valueAt={(i) => `"${step.words[i]}"`}
+            active={-1}
+          />
         </motion.div>
       )}
 
@@ -180,11 +160,12 @@ function VisualizationPanel({ step }) {
           <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
             Words (Reversed Order)
           </div>
-          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-            {step.reversed.map((word, idx) => (
-              <WordBox key={idx} word={word} isReversed={true} />
-            ))}
-          </div>
+          <IndexedSequence
+            label="Words (Reversed Order)"
+            length={step.reversed.length}
+            valueAt={(i) => `"${step.reversed[i]}"`}
+            active={step.reversed.length - 1}
+          />
         </motion.div>
       )}
 
@@ -209,7 +190,6 @@ function VisualizationPanel({ step }) {
 }
 
 export default function ReverseWordsInAStringVisualizer() {
-  const [input, setInput] = useState({"label":"Example 1","s":"  Hello World  "});
   const [sInput, setSInput] = useState(String(AUTHORED_INITIAL.s));
   const { s, inputError } = useMemo(() => {
     try {

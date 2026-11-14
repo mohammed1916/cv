@@ -218,41 +218,13 @@ function VisualizationPanel({ step }) {
       )}
 
       {step.chunk && (
-        <motion.div style={{ padding: 12, backgroundColor: "color-mix(in srgb, var(--warning) 22%, var(--surface))", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--warning)', marginBottom: 8 }}>
-            Read4 Chunk
-          </div>
-          <div style={{ display: 'flex', gap: 6 }}>
-            {step.chunk.map((char, idx) => (
-              <CharacterBox key={idx} char={char} />
-            ))}
-          </div>
-        </motion.div>
+        <IndexedSequence label="Read4 chunk" length={step.chunk.length} active={-1}
+          valueAt={i => step.chunk[i]} roleAt={() => 'chunk'} />
       )}
 
-      {step.globalQueue && (
-        <motion.div style={{ padding: 12, backgroundColor: "var(--surface2)", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--primary)', marginBottom: 8 }}>
-            Queue (cache)
-          </div>
-          <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-            {step.globalQueue.length > 0 ? (
-              step.globalQueue.map((char, idx) => (
-                <CharacterBox
-                  key={idx}
-                  char={char}
-                  style={{
-                    backgroundColor: "color-mix(in srgb, var(--success) 22%, var(--surface))",
-                    border: '2px solid var(--success)',
-                    color: 'var(--success)',
-                  }}
-                />
-              ))
-            ) : (
-              <div style={{ fontSize: 11, color: 'var(--primary)' }}>empty</div>
-            )}
-          </div>
-        </motion.div>
+      {step.globalQueue && step.globalQueue.length > 0 && (
+        <IndexedSequence label="Queue (cache)" length={step.globalQueue.length} active={-1}
+          valueAt={i => step.globalQueue[i]} roleAt={() => 'cached'} />
       )}
 
       {step.result && step.result.length > 0 && (

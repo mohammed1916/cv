@@ -12,6 +12,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 
 import "./FindPeakElementVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
+import PointerRail from '../../components/shared/PointerRail'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -91,11 +92,32 @@ export default function FindPeakElementVisualizer() {
       />
     <div className="fp-panel">
       <div className="fp-panel-label">Array (bars)</div>
-      <div className="fp-bars">
+      {/* One scroll container for the rail and the bars, so their columns stay aligned. */}
+      <div className="fp-scroll" style={{ overflowX: 'auto' }}>
+      <PointerRail
+        scrollable={false}
+        title="Search window"
+        values={nums}
+        range={step ? { start: step.lo ?? 0, end: step.hi ?? nums.length - 1 } : null}
+        pointers={step ? [
+          { id: 'lo', label: 'lo', index: step.lo, tone: 'info' },
+          ...(step.mid >= 0 ? [{ id: 'mid', label: 'mid', index: step.mid, tone: 'primary' }] : []),
+          { id: 'hi', label: 'hi', index: step.hi, tone: 'warning' },
+        ] : []}
+      />
+      <div
+        className="fp-bars"
+        style={{
+          // Same column template as PointerRail, so each bar sits under its index and pointers.
+          display: 'grid',
+          gridTemplateColumns: `repeat(${Math.max(nums.length, 1)}, minmax(38px, 1fr))`,
+          gap: 0,
+          width: 'max-content',
+          minWidth: '100%',
+        }}
+      >
         {nums.map((v, i) => {
           const h = Math.round((v / maxVal) * BAR_MAX_H);
-          const isLo = step?.lo === i;
-          const isHi = step?.hi === i;
           const isMid = step?.mid === i;
           const isResult = step?.result === i;
           const inRange = step != null && i >= (step.lo ?? 0) && i <= (step.hi ?? nums.length - 1);
@@ -110,14 +132,10 @@ export default function FindPeakElementVisualizer() {
                 transition={{ duration: 0.3 }} />
               <div className="fp-bar-val">{v}</div>
               <div className="fp-bar-idx">{i}</div>
-              <div className="fp-bar-ptrs">
-                {isLo && <span className="fp-ptr lo">lo</span>}
-                {isMid && <span className="fp-ptr mid">mid</span>}
-                {isHi && <span className="fp-ptr hi">hi</span>}
-              </div>
             </div>
           );
         })}
+      </div>
       </div>
     </div>
   

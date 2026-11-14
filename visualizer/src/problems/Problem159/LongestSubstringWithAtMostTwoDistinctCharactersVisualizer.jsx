@@ -1,4 +1,5 @@
-import authoredExamples0 from '../../config/examples/longest-substring-with-at-most-two-distinct-characters.js';
+import authoredExamples0 from '../../config/examples/longest-substring-with-at-most-two-distinct-characters.js';import PointerRail from '../../components/shared/PointerRail'
+
 
 const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
@@ -198,37 +199,15 @@ function StringVisualization({ s, left, right }) {
   if (!s) return null
 
   return (
-    <div role="img" aria-label="Input string with window pointers l and r" style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-      {s.split('').map((char, idx) => {
-        const inWindow = idx >= left && idx <= right
-        const tag = idx === left && idx === right ? 'l, r' : idx === left ? 'l' : idx === right ? 'r' : ''
-
-        return (
-          <div key={idx} style={{ display: 'grid', justifyItems: 'center', gap: 2 }}>
-            <small style={{ minHeight: 16, fontWeight: 700, color: 'var(--primary)' }}>{tag}</small>
-            <motion.div
-              style={{
-                width: 36,
-                height: 36,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: 4,
-                backgroundColor: inWindow ? 'color-mix(in srgb, var(--primary) 22%, var(--surface))' : 'var(--surface2)',
-                border: idx === left || idx === right ? '3px solid var(--primary)' : '1px solid var(--border)',
-                fontSize: 13,
-                fontWeight: 600,
-                color: inWindow ? 'var(--text)' : 'var(--text-muted)',
-                fontFamily: 'monospace',
-              }}
-              animate={{ scale: inWindow ? 1.1 : 1 }}
-            >
-              {char}
-            </motion.div>
-          </div>
-        )
-      })}
-    </div>
+    <PointerRail
+      title="Input string"
+      values={s.split('')}
+      pointers={[
+        { id: 'l', index: left, label: 'l', tone: 'primary' },
+        { id: 'r', index: right, label: 'r', tone: 'primary' },
+      ]}
+      range={{ start: left, end: right }}
+    />
   )
 }
 

@@ -1,9 +1,9 @@
-import authoredExamples0 from '../../config/examples/intersection-two-linked-lists.js';
+import authoredExamples0 from '../../config/examples/intersection-two-linked-lists.js';import PointerRail from '../../components/shared/PointerRail'
+
 
 const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom';
-import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
@@ -127,27 +127,19 @@ function generateSteps({ listA, listB, shared, intersectVal }) {
 }
 
 function renderList(nodes, label, ptrIdx, ptrList, intersectStart, accent) {
+  const listKey = label === "List A" ? "A" : "B";
+  const pointers = ptrList === listKey && ptrIdx >= 0
+    ? [{ id: `p${listKey}`, index: ptrIdx, label: `p${listKey}`, tone: listKey === "A" ? "info" : "success" }]
+    : [];
   return (
-    <div className="itll-list-block">
-      <div className="itll-list-label" style={{ color: accent }}>{label}</div>
-      <div className="itll-list-row">
-        {nodes.map((v, i) => {
-          const isPtr = ptrList === (label === "List A" ? "A" : "B") && ptrIdx === i;
-          const isShared = i >= intersectStart && intersectStart >= 0;
-          return (
-            <div key={i} className="itll-node-wrap">
-              <motion.div className={`itll-node ${isShared ? "shared" : ""} ${isPtr ? "ptr" : ""}`}
-                animate={{ scale: isPtr ? 1.15 : 1, y: isPtr ? -4 : 0 }}
-                transition={{ type: "spring", stiffness: 400, damping: 22 }}>
-                {v}
-              </motion.div>
-              {i < nodes.length - 1 && <span className="itll-arrow">→</span>}
-              {isPtr && <div className="itll-ptr-label">p{label.includes("A") ? "A" : "B"}</div>}
-            </div>
-          );
-        })}
-        <span className="itll-null">→ null</span>
-      </div>
+    <div className="itll-list-block" style={{ color: accent }}>
+      <PointerRail
+        title={label}
+        values={nodes}
+        pointers={pointers}
+        partition={intersectStart >= 0 ? intersectStart : null}
+        note={intersectStart >= 0 ? "Blue nodes are before the shared tail; green nodes are the shared tail." : undefined}
+      />
     </div>
   );
 }

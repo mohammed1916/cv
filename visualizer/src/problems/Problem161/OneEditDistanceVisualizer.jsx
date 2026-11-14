@@ -11,6 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 
 import './OneEditDistanceVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
+import IndexedSequence from '../../components/shared/IndexedSequence'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -174,79 +175,23 @@ function generateSteps(s1, s2) {
 }
 
 function StringComparison({ s1, s2, highlightIdx, mismatchPos }) {
-  const maxLen = Math.max(s1.length, s2.length)
-
+  const roleAt = (idx) => (idx === mismatchPos ? 'mismatch' : idx === highlightIdx ? 'compare' : '')
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div>
-        <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>
-          String 1
-        </div>
-        <div style={{ display: 'flex', gap: 2 }}>
-          {s1.split('').map((char, idx) => {
-            const isMismatch = mismatchPos !== undefined && idx === mismatchPos
-            const isHighlight = highlightIdx !== undefined && idx === highlightIdx
-
-            return (
-              <motion.div
-                key={idx}
-                style={{
-                  width: 32,
-                  height: 32,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: 4,
-                  backgroundColor: isMismatch ? "color-mix(in srgb, var(--error) 22%, var(--surface))" : isHighlight ? "color-mix(in srgb, var(--warning) 22%, var(--surface))" : 'var(--surface2)',
-                  border: isMismatch ? '2px solid var(--error)' : isHighlight ? '2px solid var(--warning)' : '1px solid var(--border)',
-                  fontSize: 12,
-                  fontWeight: 600,
-                  color: (isMismatch ? 'var(--text)' : (isHighlight ? 'var(--text)' : 'var(--text)')),
-                  fontFamily: 'monospace',
-                }}
-                animate={{ scale: isHighlight ? 1.15 : 1 }}
-              >
-                {char}{isHighlight && <small> i</small>}
-              </motion.div>
-            )
-          })}
-        </div>
-      </div>
-
-      <div>
-        <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>
-          String 2
-        </div>
-        <div style={{ display: 'flex', gap: 2 }}>
-          {s2.split('').map((char, idx) => {
-            const isMismatch = mismatchPos !== undefined && idx === mismatchPos
-            const isHighlight = highlightIdx !== undefined && idx === highlightIdx
-
-            return (
-              <motion.div
-                key={idx}
-                style={{
-                  width: 32,
-                  height: 32,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: 4,
-                  backgroundColor: isMismatch ? "color-mix(in srgb, var(--error) 22%, var(--surface))" : isHighlight ? "color-mix(in srgb, var(--warning) 22%, var(--surface))" : 'var(--surface2)',
-                  border: isMismatch ? '2px solid var(--error)' : isHighlight ? '2px solid var(--warning)' : '1px solid var(--border)',
-                  fontSize: 12,
-                  fontWeight: 600,
-                  color: (isMismatch ? 'var(--text)' : (isHighlight ? 'var(--text)' : 'var(--text)')),
-                  fontFamily: 'monospace',
-                }}
-                animate={{ scale: isHighlight ? 1.15 : 1 }}
-              >
-                {char}{isHighlight && <small> i</small>}
-              </motion.div>
-            )
-          })}
-        </div>
-      </div>
+      <IndexedSequence
+        label="String 1"
+        length={s1.length}
+        valueAt={(idx) => s1[idx]}
+        active={highlightIdx ?? -1}
+        roleAt={roleAt}
+      />
+      <IndexedSequence
+        label="String 2"
+        length={s2.length}
+        valueAt={(idx) => s2[idx]}
+        active={highlightIdx ?? -1}
+        roleAt={roleAt}
+      />
     </div>
   )
 }
