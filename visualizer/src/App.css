@@ -262,6 +262,29 @@ body.chat-select-mode .trie-state svg g:hover {
   outline-offset: 6px;
 }
 
+.home-explore-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  min-height: 96px;
+  margin-top: 16px;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--surface2);
+  color: var(--text);
+  text-align: center;
+  text-decoration: none;
+}
+
+.home-explore-bar strong { font-size: clamp(1.1rem, 3vw, 1.5rem); }
+.home-explore-bar span { color: var(--text-muted); font-size: 14px; }
+.home-explore-bar:hover { border-color: var(--primary); }
+.home-explore-bar:focus-visible { outline: 3px solid var(--primary); outline-offset: 6px; }
+
 .home-catalog-heading {
   margin: 0 0 0.75rem;
   font-size: clamp(1.1rem, 2.6vw, 1.5rem);

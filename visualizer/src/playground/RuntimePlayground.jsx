@@ -246,6 +246,7 @@ function executionErrorKind(error) {
 export default function RuntimePlayground({
   onBack,
   utilityControls = null,
+  viewMenu = null,
   layoutWidth = "full",
   onLayoutChange,
 }) {
@@ -1368,6 +1369,7 @@ export default function RuntimePlayground({
         </div>
 
         <div className="runtime-playground__header-actions">
+          {viewMenu}
           <WebMCPHelp />
           <div
             className={`runtime-playground__webmcp-status is-${webMcpState.phase}`}
@@ -1378,7 +1380,7 @@ export default function RuntimePlayground({
             <strong>WebMCP</strong>
             <small>{webMcpStatusLabel}</small>
           </div>
-          {onLayoutChange && (
+          {onLayoutChange && !viewMenu && (
             <div className="runtime-playground__layout" aria-label="Workspace width">
               {["normal", "wide", "full"].map((width) => (
                 <button

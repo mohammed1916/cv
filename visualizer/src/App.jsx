@@ -708,6 +708,10 @@ function HomePage({
     <Shell className="home-page" {...shellProps}>
       <section className="home-create-hero" aria-label="Create a visualizer">
         <CreateVisualizerButton onClick={onOpenPlayground} />
+        <a className="home-explore-bar" href="#catalogue">
+          <strong>Explore predefined LeetCode problems</strong>
+          <span>4000+ problems</span>
+        </a>
       </section>
       <WelcomeHero
         onTutorial={onTutorial}
@@ -720,7 +724,7 @@ function HomePage({
           )
         }
       />
-      <header className="home-header">
+      <header className="home-header" id="catalogue">
         <h2 className="home-catalog-heading">Try any LeetCode problem</h2>
         <div className="home-header-row">
           <Brand
@@ -1104,12 +1108,6 @@ export default function App() {
         minHeight: 0,
       }}
     >
-      <div className="access-actions">
-        <button className="access-toolbar-btn" onClick={goBack}>
-          ← Problems
-        </button>
-        {utilityControls}
-      </div>
       <PlaygroundGate
         key={access.user?.uid || "guest"}
         access={access}
@@ -1126,6 +1124,8 @@ export default function App() {
           <RuntimePlayground
             key="runtime-playground"
             onBack={goBack}
+            viewMenu={<ViewMenu layoutWidth={layoutWidth} onLayoutChange={setLayoutWidth} />}
+            utilityControls={utilityControls}
             layoutWidth={layoutWidth}
             onLayoutChange={setLayoutWidth}
           />
@@ -1172,7 +1172,6 @@ export default function App() {
   return (
     <ThemeProvider>
       <ZoomProvider>
-        {showPlayground && <div className="playground-view-menu"><ViewMenu layoutWidth={layoutWidth} onLayoutChange={setLayoutWidth} /></div>}
         <PrerequisiteDrawer open={showPrerequisites} onOpen={openPrerequisites} onClose={closePrerequisites} onSelect={selectProblem} pro={access.pro} />
         <div className={`app layout-${layoutWidth}`}>
           <PrivacyPreferences />
