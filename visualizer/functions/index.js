@@ -4,7 +4,7 @@ import { getFirestore } from 'firebase-admin/firestore';
 import { onCall, onRequest, HttpsError } from 'firebase-functions/v2/https';
 import { defineSecret } from 'firebase-functions/params';
 import { createHmac, timingSafeEqual } from 'node:crypto';
-import { PLANS, status, entitlementEnd, trialStart } from './policy.js';
+import { PLANS, status, entitlementEnd, trialStart, refundable } from './policy.js';
 initializeApp();
 const db = getFirestore();
 const keyId = defineSecret('RAZORPAY_KEY_ID');
@@ -114,6 +114,32 @@ export const verifyProPayment = onCall(paymentOptions, async request => {
   if (payment.order_id !== orderId) throw new HttpsError('permission-denied', 'Order mismatch.');
   return activate(payment, user);
 });
+// Account holder asks for a full refund of a recent Pro purchase. Razorpay
+// confirms the refund later through the signed webhook, which removes access.
+export const requestRefund = onCall(paymentOptions, async request => {
+  const user = uid(request);
+  const now = Date.now();
+  const snapshot = await db.collection('orders').where('uid', '==', user).where('status', '==', 'paid').get();
+  const order = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+    .filter(item => refundable(item, now))
+    .sort((a, b) => b.paidAt - a.paidAt)[0];
+  if (!order) throw new HttpsError('failed-precondition', 'No purchase in the last 7 days can be refunded.');
+  const orderRef = db.doc(`orders/${order.id}`);
+  const claimed = await db.runTransaction(async tx => {
+    const current = (await tx.get(orderRef)).data();
+    if (!refundable(current, now)) return false;
+    tx.update(orderRef, { status: 'refund_requested', refundRequestedAt: now });
+    return true;
+  });
+  if (!claimed) throw new HttpsError('failed-precondition', 'This purchase is already being refunded.');
+  try {
+    await razorpay(`payments/${order.paymentId}/refund`, { amount: order.amount, speed: 'normal', notes: { policy: 'visualizer-pro-7-day' } });
+  } catch (error) {
+    await orderRef.update({ status: 'paid' });
+    throw error;
+  }
+  return { status: 'refund_requested' };
+});
 export const paymentWebhook = onRequest({ ...options, secrets: [webhookSecret, keyId, keySecret] }, async (req, res) => {
   if (req.method !== 'POST') { res.sendStatus(405); return; }
   if (!validSignature(req.rawBody, req.get('x-razorpay-signature'), webhookSecret.value())) { res.sendStatus(401); return; }
@@ -136,7 +162,7 @@ export const paymentWebhook = onRequest({ ...options, secrets: [webhookSecret, k
             const accountRef = db.doc(`accounts/${order.uid}`);
             const account = (await tx.get(accountRef)).data();
             // Any refund revokes this access period. Other purchased time stays.
-            if (order.status === 'paid') tx.set(accountRef, { expiresAt: Math.max(Date.now(), (account?.expiresAt || 0) - PLANS[order.plan].days * 86400000) }, { merge: true });
+            if (order.status === 'paid' || order.status === 'refund_requested') tx.set(accountRef, { expiresAt: Math.max(Date.now(), (account?.expiresAt || 0) - PLANS[order.plan].days * 86400000) }, { merge: true });
             tx.update(orderRef, { status: 'refunded', paymentId: refund.payment_id, refundedAt: Date.now() });
           });
         }

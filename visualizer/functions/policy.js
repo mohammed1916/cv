@@ -22,3 +22,8 @@ export function trialStart(data = {}, now = Date.now()) {
   return status(data, now).trialAvailable ? { trialStartedAt: now, trialEndsAt: now + TRIAL_MS } : null;
 }
 export function entitlementEnd(current, days, now) { return Math.max(current || 0, now) + days * 86400000; }
+// Refunds: a paid order can be refunded in full within 7 days of payment.
+export const REFUND_WINDOW_MS = 7 * 86400000;
+export function refundable(order = {}, now = Date.now()) {
+  return order.status === 'paid' && Boolean(order.paymentId) && Number(order.paidAt || 0) > now - REFUND_WINDOW_MS;
+}

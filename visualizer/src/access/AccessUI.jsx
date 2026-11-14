@@ -163,3 +163,34 @@ export function PlaygroundGate({ access, onPlans, children }) {
     </div>}
   </div>;
 }
+
+// Refund request for a recent paid purchase. The server enforces the 7-day rule
+// and the single pending refund; this component only explains and asks.
+export function RefundRequest({ access }) {
+  const [phase, setPhase] = useState('idle');
+  const [message, setMessage] = useState('');
+  const [confirming, setConfirming] = useState(false);
+  if (!access.user || !access.account?.paid) return null;
+  async function request() {
+    setPhase('busy');
+    setMessage('');
+    try {
+      await accessCall('requestRefund');
+      setPhase('done');
+      setMessage('Refund requested. Razorpay usually processes it within 7 working days, then your bank may take 5 to 10 business days. Pro access ends when the refund is confirmed.');
+    } catch (error) {
+      setPhase('error');
+      setMessage(error?.message || 'The refund could not be requested. Please try again.');
+    }
+  }
+  return <section className="refund-request" aria-labelledby="refund-title">
+    <h3 id="refund-title">Refund</h3>
+    <p>A full refund is available for a Pro purchase made within the last 7 days, sent to your original payment method. <a href="/terms.html" target="_blank" rel="noreferrer">Terms and refunds</a></p>
+    {!confirming ? <button type="button" onClick={() => setConfirming(true)} disabled={phase === 'busy' || phase === 'done'}>Request refund</button> : <div role="group" aria-label="Confirm refund">
+      <p>Request a refund for your most recent Pro purchase?</p>
+      <button type="button" className="access-primary" onClick={request} disabled={phase === 'busy'}>Yes, request refund</button>
+      <button type="button" onClick={() => setConfirming(false)} disabled={phase === 'busy'}>Cancel</button>
+    </div>}
+    {message && <p role={phase === 'error' ? 'alert' : 'status'}>{message}</p>}
+  </section>;
+}

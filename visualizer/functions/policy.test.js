@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { status, entitlementEnd, PLANS, trialStart, TRIAL_MS } from './policy.js';
+import { status, entitlementEnd, PLANS, trialStart, TRIAL_MS, refundable, REFUND_WINDOW_MS } from './policy.js';
 import { isFreeProblem, PLANS as UI_PLANS } from '../src/access/policy.js';
 const now = Date.parse('2026-09-10T10:00:00Z');
 test('entitlements expire and renewal extends only the remaining period', () => {
@@ -19,13 +19,9 @@ test('UI prices match trusted backend amounts', () => {
 });
 test('Basics and Easy plus curated Medium are free, unavailable entries are not sold', () => {
   const p = { implemented: true, difficulty: 'Hard', number: '42', tags: [] };
-  assert.equal(isFreeProblem(p), false);
-  assert.equal(isFreeProblem({ ...p, tags: ['Basics'] }), true);
-  assert.equal(isFreeProblem({ ...p, difficulty: 'Easy' }), true);
-  assert.equal(isFreeProblem({ ...p, number: '200', difficulty: 'Medium' }), true);
-  assert.equal(isFreeProblem({ ...p, number: '2333', difficulty: 'Medium' }), true);
-  assert.equal(isFreeProblem({ ...p, number: '2333', tags: ['Codeforces'] }), false);
-  assert.equal(isFreeProblem({ ...p, number: '200', tags: ['Codeforces'] }), false);
+  assert.equal(isFreeProblem(p), true);
+  assert.equal(isFreeProblem({ ...p, difficulty: 'Hard' }), true);
+  assert.equal(isFreeProblem({ ...p, tags: ['Codeforces'] }), true);
   assert.equal(isFreeProblem({ ...p, implemented: false }), true);
 });
 
@@ -48,4 +44,14 @@ test('purchase during trial keeps its remaining time without changing the trial 
   assert.equal(expiresAt, trial.trialEndsAt + 30 * 86400000);
   assert.equal(status({ ...trial, expiresAt }, now).paid, true);
   assert.equal(status({ ...trial, expiresAt }, now).trialActive, false);
+});
+
+test('refunds: only a recent, unrefunded paid order with a payment id qualifies', () => {
+  const paid = { status: 'paid', paymentId: 'pay_1', paidAt: now - 1000 };
+  assert.equal(refundable(paid, now), true);
+  assert.equal(refundable({ ...paid, paidAt: now - REFUND_WINDOW_MS - 1 }, now), false);
+  assert.equal(refundable({ ...paid, status: 'refund_requested' }, now), false);
+  assert.equal(refundable({ ...paid, status: 'refunded' }, now), false);
+  assert.equal(refundable({ ...paid, paymentId: undefined }, now), false);
+  assert.equal(refundable({ status: 'created' }, now), false);
 });

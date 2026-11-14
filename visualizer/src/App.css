@@ -237,54 +237,6 @@ body.chat-select-mode .trie-state svg g:hover {
 }
 
 /* Home: prominent Create Visualizer entry above the catalogue. */
-.home-create-hero {
-  padding: 2rem 0 1.5rem;
-}
-
-.home-create-hero .create-visualizer-launch-btn {
-  display: flex;
-  width: 100%;
-  min-height: 120px;
-  justify-content: center;
-  padding: 1.25rem 1rem;
-  border-style: dashed;
-  border-width: 2px;
-  border-radius: 18px;
-  font-size: clamp(1.25rem, 4vw, 2rem);
-  font-weight: 800;
-  text-align: center;
-  color: var(--text);
-  box-sizing: border-box;
-}
-
-.home-create-hero .create-visualizer-launch-btn:focus-visible {
-  outline: 3px solid var(--primary);
-  outline-offset: 6px;
-}
-
-.home-explore-bar {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  width: 100%;
-  min-height: 96px;
-  margin-top: 16px;
-  padding: 1rem;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  background: var(--surface2);
-  color: var(--text);
-  text-align: center;
-  text-decoration: none;
-}
-
-.home-explore-bar strong { font-size: clamp(1.1rem, 3vw, 1.5rem); }
-.home-explore-bar span { color: var(--text-muted); font-size: 14px; }
-.home-explore-bar:hover { border-color: var(--primary); }
-.home-explore-bar:focus-visible { outline: 3px solid var(--primary); outline-offset: 6px; }
-
 .home-catalog-heading {
   margin: 0 0 0.75rem;
   font-size: clamp(1.1rem, 2.6vw, 1.5rem);

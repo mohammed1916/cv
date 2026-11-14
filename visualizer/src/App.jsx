@@ -46,6 +46,7 @@ import {
   GoogleSignIn,
   Plans,
   PlaygroundGate,
+  RefundRequest,
 } from "./access/AccessUI";
 
 const RuntimePlayground = React.lazy(
@@ -706,13 +707,6 @@ function HomePage({
 
   return (
     <Shell className="home-page" {...shellProps}>
-      <section className="home-create-hero" aria-label="Create a visualizer">
-        <CreateVisualizerButton onClick={onOpenPlayground} />
-        <a className="home-explore-bar" href="#catalogue">
-          <strong>Explore predefined LeetCode problems</strong>
-          <span>4000+ problems</span>
-        </a>
-      </section>
       <WelcomeHero
         onTutorial={onTutorial}
         onPlayground={onOpenPlayground}
@@ -724,7 +718,7 @@ function HomePage({
           )
         }
       />
-      <header className="home-header" id="catalogue">
+      <header className="home-header">
         <h2 className="home-catalog-heading">Try any LeetCode problem</h2>
         <div className="home-header-row">
           <Brand
@@ -1246,6 +1240,7 @@ export default function App() {
                               : "Free account"}
                       </p>
                       <button onClick={access.logout}>Sign out</button>
+                      <RefundRequest access={access} />
                       {!BETA_FREE_ACCESS && <button onClick={access.refresh}>Refresh access</button>}
                     </>
                   ) : (
