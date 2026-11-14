@@ -1,3 +1,5 @@
+import { StackqLog, stackqView } from '../../components/shared/stackqModel.js'
+
 export const phases = [
   { id: 'start', label: 'Empty stack', description: 'Start with an empty stack. Numbers wait on it until an operator needs them.' },
   { id: 'push', label: 'Push a number', description: 'A number token goes on top of the stack.' },
@@ -19,40 +21,42 @@ export function parseInput(text) {
 }
 
 export function buildTrace(tokens) {
-  const stack = []
-  const snap = (token, operands = null, value = null, index = -1) => ({ stack: [...stack], token, operands, value, index })
+  const log = new StackqLog()
+  const lane = log.lane('stack', 'stack', String)
+  const view = () => stackqView(log)
+  const snap = (token, operands = null, value = null, index = -1) => ({ stack: lane.items, token, operands, value, index })
   const frames = [{
-    phase: 'start', activeLine: L('stack = empty list'), pythonLine: P('stack = []'), snapshot: snap(null),
+    phase: 'start', activeLine: L('stack = empty list'), pythonLine: P('stack = []'), snapshot: snap(null), stackq: view(),
     message: 'The stack is empty. Read the tokens from left to right.',
   }]
   tokens.forEach((token, i) => {
     if (OPERATORS.includes(token)) {
-      if (stack.length < 2) throw new Error(`Token ${i + 1}: ${token} needs two values on the stack.`)
-      const right = stack.pop()
-      const left = stack.pop()
+      if (lane.length < 2) throw new Error(`Token ${i + 1}: ${token} needs two values on the stack.`)
+      const right = lane.pop(`right operand for ${token}`)
+      const left = lane.pop(`left operand for ${token}`)
       if (token === '/' && right === 0) throw new Error(`Token ${i + 1}: division by zero.`)
       const value = token === '+' ? left + right
         : token === '-' ? left - right
           : token === '*' ? left * right
             : (Math.trunc(left / right) || 0)
       if (Math.abs(value) > 1e9) throw new Error('An intermediate value is too large for this visual.')
-      stack.push(value)
+      lane.push(value, `result of ${left} ${token} ${right}`)
       frames.push({
-        phase: 'apply', activeLine: L('result = left op right'), pythonLine: P('stack.append(result)'), snapshot: snap(token, [left, right], value, i),
+        phase: 'apply', activeLine: L('result = left op right'), pythonLine: P('stack.append(result)'), snapshot: snap(token, [left, right], value, i), stackq: view(),
         message: `${token} takes ${left} (left) and ${right} (right). ${token === '/' ? 'Division truncates toward zero. ' : ''}The result ${value} goes back on the stack.`,
       })
     } else {
-      stack.push(Number(token))
+      lane.push(Number(token), `token ${token} is a number`)
       frames.push({
-        phase: 'push', activeLine: L('push the integer t'), pythonLine: P('stack.append(int(token))'), snapshot: snap(token, null, null, i),
+        phase: 'push', activeLine: L('push the integer t'), pythonLine: P('stack.append(int(token))'), snapshot: snap(token, null, null, i), stackq: view(),
         message: `${token} is a number, so it goes on the stack.`,
       })
     }
   })
-  if (stack.length !== 1) throw new Error(`The tokens leave ${stack.length} values on the stack; exactly one must remain.`)
-  const result = stack[0]
+  if (lane.length !== 1) throw new Error(`The tokens leave ${lane.length} values on the stack; exactly one must remain.`)
+  const result = lane.peek()
   frames.push({
-    phase: 'done', activeLine: L('return the only value'), pythonLine: P('return stack[-1]'), snapshot: snap(null, null, result),
+    phase: 'done', activeLine: L('return the only value'), pythonLine: P('return stack[-1]'), snapshot: snap(null, null, result), stackq: view(),
     message: `Only ${result} is left on the stack, so that is the value of the expression.`,
   })
   return { input: tokens, result, frames }

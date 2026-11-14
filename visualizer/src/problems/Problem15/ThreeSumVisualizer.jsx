@@ -327,7 +327,7 @@ export default function ThreeSumVisualizer() {
       <div style={{ display: 'flex', gap: 8, flexDirection: 'column' }}>
         
 
-        <PointerRail
+        <PointerRail lift={{ scale: 1.15, y: -12 }}
           title="Sorted array · pointers"
           values={sorted}
           highlight={step?.phase === 'found' ? [step.i, step.l, step.r].filter(v => v != null) : []}

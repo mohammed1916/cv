@@ -1,10 +1,12 @@
 import authoredExamples0 from '../../config/examples/eval-rpn.js';
 ﻿import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom';
-import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import IndexedSequence from "../../components/shared/IndexedSequence";
+import StackqView from "../../components/shared/StackqView";
+import Stack3D from "../../components/viz3d/Stack3D";
+import { StackqLog, stackqView } from "../../components/shared/stackqModel.js";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
@@ -35,30 +37,32 @@ const SOLUTION_CODE = [
 ];
 
 function generateSteps(tokens) {
+    const log = new StackqLog();
+    const lane = log.lane("stack", "stack", String);
+    const view = () => stackqView(log);
     const steps = [];
-    const stack = [];
-    steps.push({ activeLine: 2, ti: -1, stack: [], message: "Initialize empty stack." });
+    steps.push({ activeLine: 2, ti: -1, stack: [], stackq: view(), message: "Initialize empty stack." });
 
     for (let ti = 0; ti < tokens.length; ti++) {
         const t = tokens[ti];
         if (["+", "-", "*", "/"].includes(t)) {
-            steps.push({ activeLine: 4, ti, stack: [...stack], message: `Token "${t}" is an operator.` });
-            const b = stack.pop(), a = stack.pop();
-            steps.push({ activeLine: 5, ti, stack: [...stack], a, b, op: t, message: `Pop b=${b}, a=${a}` });
+            steps.push({ activeLine: 4, ti, stack: lane.items, stackq: view(), message: `Token "${t}" is an operator.` });
+            const b = lane.pop(`right operand for ${t}`), a = lane.pop(`left operand for ${t}`);
+            steps.push({ activeLine: 5, ti, stack: lane.items, stackq: view(), a, b, op: t, message: `Pop b=${b}, a=${a}` });
             let result;
-            if (t === "+") { result = a + b; steps.push({ activeLine: 6, ti, stack: [...stack], a, b, op: t, message: `${a} + ${b} = ${result}` }); }
-            else if (t === "-") { result = a - b; steps.push({ activeLine: 7, ti, stack: [...stack], a, b, op: t, message: `${a} - ${b} = ${result}` }); }
-            else if (t === "*") { result = a * b; steps.push({ activeLine: 8, ti, stack: [...stack], a, b, op: t, message: `${a} * ${b} = ${result}` }); }
-            else { result = Math.trunc(a / b); steps.push({ activeLine: 9, ti, stack: [...stack], a, b, op: t, message: `trunc(${a} / ${b}) = ${result}` }); }
-            stack.push(result);
-            steps.push({ activeLine: t === "+" ? 6 : t === "-" ? 7 : t === "*" ? 8 : 9, ti, stack: [...stack], message: `Push ${result}. Stack: [${stack.join(",")}]` });
+            if (t === "+") { result = a + b; steps.push({ activeLine: 6, ti, stack: lane.items, stackq: view(), a, b, op: t, message: `${a} + ${b} = ${result}` }); }
+            else if (t === "-") { result = a - b; steps.push({ activeLine: 7, ti, stack: lane.items, stackq: view(), a, b, op: t, message: `${a} - ${b} = ${result}` }); }
+            else if (t === "*") { result = a * b; steps.push({ activeLine: 8, ti, stack: lane.items, stackq: view(), a, b, op: t, message: `${a} * ${b} = ${result}` }); }
+            else { result = Math.trunc(a / b); steps.push({ activeLine: 9, ti, stack: lane.items, stackq: view(), a, b, op: t, message: `trunc(${a} / ${b}) = ${result}` }); }
+            lane.push(result, `result of ${a} ${t} ${b}`);
+            steps.push({ activeLine: t === "+" ? 6 : t === "-" ? 7 : t === "*" ? 8 : 9, ti, stack: lane.items, stackq: view(), message: `Push ${result}. Stack: [${lane.items.join(",")}]` });
         } else {
-            steps.push({ activeLine: 11, ti, stack: [...stack], message: `Token "${t}" is a number — push ${parseInt(t, 10)}` });
-            stack.push(parseInt(t, 10));
-            steps.push({ activeLine: 11, ti, stack: [...stack], message: `Stack: [${stack.join(",")}]` });
+            steps.push({ activeLine: 11, ti, stack: lane.items, stackq: view(), message: `Token "${t}" is a number — push ${parseInt(t, 10)}` });
+            lane.push(parseInt(t, 10), `token ${t} is a number`);
+            steps.push({ activeLine: 11, ti, stack: lane.items, stackq: view(), message: `Stack: [${lane.items.join(",")}]` });
         }
     }
-    steps.push({ activeLine: 12, ti: tokens.length, stack: [...stack], message: `Result = ${stack[0]}` });
+    steps.push({ activeLine: 12, ti: tokens.length, stack: lane.items, stackq: view(), message: `Result = ${lane.items[0]}` });
     return steps;
 }
 
@@ -116,7 +120,7 @@ export default function EvalRPNVisualizer() {
             <input style={{ padding: '8px', borderRadius: 4, border: '1px solid var(--border)', fontSize: 12, fontFamily: 'monospace' }} value={input} onChange={(e) => { setInput(e.target.value); handleReset(); }} placeholder='["2","1","+","3","*"]' />
             {err && <div style={{ padding: 8, backgroundColor: "var(--surface2, var(--surface2))", color: 'var(--text)', borderRadius: 4, fontSize: 12 }}>{err}</div>}
 
-            <IndexedSequence
+            <IndexedSequence lift={{ scale: 1.3 }}
                 label="Tokens"
                 length={tokens.length}
                 valueAt={(i) => tokens[i]}
@@ -124,22 +128,21 @@ export default function EvalRPNVisualizer() {
                 roleAt={(i) => (['+', '-', '*', '/'].includes(tokens[i]) ? 'operator' : '')}
             />
 
-            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 4 }}>Stack</div>
-            <div style={{ display: 'flex', gap: 6, alignItems: 'flex-end', minHeight: 60, paddingBottom: 8, borderBottom: '1px solid var(--text)' }}>
-                <AnimatePresence mode="popLayout">
-                    {(step?.stack ?? []).map((v, i) => (
-                        <motion.div key={`${i}-${v}`} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} style={{
-                            padding: '8px 12px',
-                            backgroundColor: i === (step?.stack?.length ?? 0) - 1 ? "var(--surface2, var(--surface2))" : "var(--surface2, var(--surface2))",
-                            border: i === (step?.stack?.length ?? 0) - 1 ? '2px solid var(--primary)' : '1px solid var(--border)',
-                            borderRadius: 4, fontSize: 14, fontWeight: 'bold', color: 'var(--text)'
-                        }}>
-                            {v}
-                        </motion.div>
-                    ))}
-                </AnimatePresence>
-                {(step?.stack?.length ?? 0) === 0 && <span style={{ color: 'var(--text-muted)', fontSize: 12 }}>empty</span>}
+            <div style={{ display: 'flex', gap: 16, alignItems: 'flex-end', flexWrap: 'wrap' }}>
+              <Stack3D
+                label="Stack"
+                items={step?.stack ?? []}
+                highlightIndex={(step?.stack?.length ?? 1) - 1}
+                emptyText="empty"
+                topBadge="top"
+              />
+              <div style={{ display: 'grid', gap: 6, fontSize: 12, minWidth: 140 }}>
+                <strong>Popped into variables</strong>
+                <span style={{ fontFamily: 'monospace' }}>{step?.a != null ? `b = ${step.b}` : 'nothing popped'}</span>
+                <span style={{ fontFamily: 'monospace' }}>{step?.a != null ? `a = ${step.a}` : ''}</span>
+              </div>
             </div>
+            {step?.stackq && <StackqView {...step.stackq} />}
 
             {step?.a != null && (
                 <div style={{ padding: 12, backgroundColor: "var(--surface2, var(--surface2))", borderRadius: 6, border: '1px solid var(--error)', display: 'flex', gap: 8, alignItems: 'center', justifyContent: 'center', fontSize: 16, fontWeight: 'bold' }}>

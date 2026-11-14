@@ -199,7 +199,7 @@ function StringVisualization({ s, left, right }) {
   if (!s) return null
 
   return (
-    <PointerRail
+    <PointerRail lift={{ scale: 1.1, within: true }}
       title="Input string"
       values={s.split('')}
       pointers={[

@@ -133,7 +133,7 @@ function renderList(nodes, label, ptrIdx, ptrList, intersectStart, accent) {
     : [];
   return (
     <div className="itll-list-block" style={{ color: accent }}>
-      <PointerRail
+      <PointerRail lift={{ scale: 1.15, y: -4 }}
         title={label}
         values={nodes}
         pointers={pointers}

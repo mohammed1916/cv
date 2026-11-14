@@ -72,7 +72,7 @@ function VisualizationPanel({ step, applyEx }) {
         // The steps carry the operated key inside currentOp (e.g. "inc(a)"), and the returned key in result.
         const operatedKey = step.val ?? step.currentOp?.match(/^(?:inc|dec)\((\w+)\)$/)?.[1];
         return (
-          <IndexedSequence
+          <IndexedSequence lift={{ scale: 1.15 }}
             label="Active keys"
             length={step.array.length}
             valueAt={(i) => step.array[i]}

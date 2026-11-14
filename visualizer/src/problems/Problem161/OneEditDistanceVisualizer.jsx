@@ -178,14 +178,14 @@ function StringComparison({ s1, s2, highlightIdx, mismatchPos }) {
   const roleAt = (idx) => (idx === mismatchPos ? 'mismatch' : idx === highlightIdx ? 'compare' : '')
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <IndexedSequence
+      <IndexedSequence lift={{ scale: 1.15 }}
         label="String 1"
         length={s1.length}
         valueAt={(idx) => s1[idx]}
         active={highlightIdx ?? -1}
         roleAt={roleAt}
       />
-      <IndexedSequence
+      <IndexedSequence lift={{ scale: 1.15 }}
         label="String 2"
         length={s2.length}
         valueAt={(idx) => s2[idx]}

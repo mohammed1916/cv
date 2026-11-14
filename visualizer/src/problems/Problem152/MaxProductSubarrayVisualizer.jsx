@@ -133,7 +133,7 @@ export default function MaxProductSubarrayVisualizer() {
             <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
 
 
-                <IndexedSequence
+                <IndexedSequence lift={{ scale: 1.2, y: -8 }}
                     label="Array"
                     length={nums.length}
                     valueAt={(i) => nums[i]}

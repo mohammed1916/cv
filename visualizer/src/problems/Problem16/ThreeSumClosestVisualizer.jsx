@@ -198,7 +198,7 @@ export default function ThreeSumClosestVisualizer() {
           </div>
           
 
-          <PointerRail
+          <PointerRail lift={{ scale: 1.15, y: -12 }}
             title="Sorted array · pointers"
             values={sorted}
             highlight={step?.phase === 'calc' ? [step.i, step.l, step.r].filter(v => v != null) : []}

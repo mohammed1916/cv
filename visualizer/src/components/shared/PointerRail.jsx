@@ -1,5 +1,15 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import './PointerRail.css'
+
+// `lift` is off by default. `true` uses the default lift; an object such as { scale: 1.15, y: -8 } tunes it.
+// Only pointed (active) cells lift. Under reduced motion the change is applied without animating.
+const DEFAULT_LIFT = { scale: 1.15, y: -6 }
+
+function normaliseLift(lift) {
+  if (!lift) return null
+  if (lift === true) return DEFAULT_LIFT
+  return { scale: lift.scale ?? 1, y: lift.y ?? 0, within: Boolean(lift.within) }
+}
 
 /** A compact, reusable reading aid for index-based algorithms. */
 export default function PointerRail({
@@ -14,8 +24,12 @@ export default function PointerRail({
   cellWidth = null,
   scrollable = true,
   terminator = null,
+  lift = false,
   note,
 }) {
+  const liftSpec = normaliseLift(lift)
+  const reduceMotion = useReducedMotion()
+  const CellTag = liftSpec ? motion.div : 'div'
   return (
     <section className="pointer-rail" aria-label={title}>
       <header className="pointer-rail-head">
@@ -33,12 +47,19 @@ export default function PointerRail({
           const lastPointer = at[at.length - 1]
           const markTone = marks.find((mark) => mark.index === index)?.tone
           const role = roleAt ? roleAt(index) : ''
+          const isLifted = Boolean(liftSpec) && (at.length > 0 || (liftSpec.within && Boolean(range) && inRange))
+          const liftProps = liftSpec
+            ? {
+                animate: isLifted ? { scale: liftSpec.scale, y: liftSpec.y } : { scale: 1, y: 0 },
+                transition: reduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 380, damping: 28 },
+              }
+            : {}
           return (
             <div key={`${index}-${value}`} className={`pointer-rail-slot ${inRange ? 'in-range' : 'outside-range'}`}>
               <div className="pointer-rail-tags">
                 {at.map((pointer) => <motion.span layout key={pointer.id} className={`pointer-rail-tag ${pointer.tone || 'primary'}`}>{pointer.label}</motion.span>)}
               </div>
-              <div className={`pointer-rail-cell ${at.length ? `pointed pointed-${lastPointer.tone || 'primary'}` : ''} ${markTone ? `mark-${markTone}` : ''} ${highlight.includes(index) ? 'highlighted' : ''} ${partition !== null && index < partition ? 'left-partition' : ''} ${partition !== null && index >= partition ? 'right-partition' : ''} ${role ? `role-${role}` : ''}`}>{value}</div>
+              <CellTag {...liftProps} className={`pointer-rail-cell ${isLifted ? 'is-lifted' : ''} ${at.length ? `pointed pointed-${lastPointer.tone || 'primary'}` : ''} ${markTone ? `mark-${markTone}` : ''} ${highlight.includes(index) ? 'highlighted' : ''} ${partition !== null && index < partition ? 'left-partition' : ''} ${partition !== null && index >= partition ? 'right-partition' : ''} ${role ? `role-${role}` : ''}`}>{value}</CellTag>
               <span className="pointer-rail-index">{index}</span>
             </div>
           )

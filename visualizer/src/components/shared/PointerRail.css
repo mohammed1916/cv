@@ -26,6 +26,9 @@
 /* Cells that satisfy a condition (for example a found 3Sum triplet). */
 .pointer-rail-cell.highlighted { background: color-mix(in srgb, #22c55e 28%, var(--surface2)); box-shadow: 0 0 0 2px #22c55e; font-weight: 700; }
 
+/* Optional active-cell lift (PointerRail lift prop). Scale and offset come from the motion animate values; the cell is raised above its neighbours. */
+.pointer-rail-cell.is-lifted { position: relative; z-index: 1; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18); }
+
 /* Optional end-of-list marker, for example a null terminator. */
 .pointer-rail-terminator .pointer-rail-cell { border-style: dashed; color: var(--text-muted); font-size: 11px; padding: 0 6px; }
 

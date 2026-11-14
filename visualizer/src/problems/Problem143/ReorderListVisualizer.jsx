@@ -233,7 +233,7 @@ export default function ReorderListVisualizer() {
           overflow: "auto",
         }}
       >
-        <PointerRail
+        <PointerRail lift={{ scale: 1.15 }}
           title="List · slow / fast pointers"
           values={displayList}
           pointers={[

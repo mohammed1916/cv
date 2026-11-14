@@ -239,7 +239,7 @@ function StringsVisualizationPanel({ step, strs }) {
                   {str.length === 0 ? (
                     <div className="lcp-empty-string">empty</div>
                   ) : (
-                    <PointerRail
+                    <PointerRail lift={{ scale: 1.08, y: -6 }}
                       title={`strs[${rowIdx}] · column`}
                       values={str.split("")}
                       pointers={pointers}
