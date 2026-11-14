@@ -125,6 +125,11 @@ async function* streamLocalOllama(messages, config) {
   }
   if (!response.ok) {
     const detail = (await response.text()).trim()
+    if (/not found/i.test(detail)) {
+      const error = new Error(`Ollama Local does not have the model "${config.model}". Run \`ollama pull ${config.model}\` in a terminal, or choose Ollama Cloud in the AI connection settings.`)
+      error.code = 'MISSING_AI_SETUP'
+      throw error
+    }
     throw new Error(detail || `Ollama Local returned ${response.status}`)
   }
   assertNotHtmlResponse(response)
@@ -240,7 +245,9 @@ async function* readEventStream(response, extractDelta) {
 function requireApiKey(config, label) {
   const key = String(config.ollamaApiKey || config.geminiApiKey || '').trim()
   if (!key) {
-    throw new Error(`Enter your ${label} API key in the AI connection settings before sending a message.`)
+    const error = new Error(`Enter your ${label} API key in the AI connection settings before sending a message.`)
+    error.code = 'MISSING_AI_SETUP'
+    throw error
   }
   return key
 }

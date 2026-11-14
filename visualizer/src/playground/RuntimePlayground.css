@@ -1268,3 +1268,22 @@
 .runtime-playground__input-assistant-launch { display: grid; gap: 12px; padding: 16px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface2); }
 .runtime-playground__input-assistant-launch p { color: var(--text-muted); margin: 6px 0 0; font-size: 13px; line-height: 1.5; }
 .runtime-playground__input-assistant-launch button { justify-self: start; }
+
+/* Iterative Fix with AI */
+.runtime-playground__ai-loop { display: grid; gap: 12px; margin-top: 12px; padding: 14px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface2); }
+.runtime-playground__ai-loop-controls { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; }
+.runtime-playground__ai-loop-controls label { display: grid; gap: 6px; font-size: 12px; font-weight: 600; color: var(--text-muted); }
+.runtime-playground__ai-loop-controls select { min-height: 38px; padding: 0 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); font: inherit; }
+.runtime-playground__ai-stop { min-height: 40px; padding: 9px 16px; border: 1px solid #ef4444; border-radius: 8px; background: transparent; color: #ef4444; font: inherit; font-weight: 600; cursor: pointer; }
+.runtime-playground__ai-nodes { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.runtime-playground__ai-nodes button { width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--border); background: var(--surface); color: var(--text); font: inherit; font-weight: 700; cursor: pointer; }
+.runtime-playground__ai-nodes button.is-fixed { border-color: #22c55e; color: #22c55e; }
+.runtime-playground__ai-nodes button.is-failed { border-color: #ef4444; color: #ef4444; }
+.runtime-playground__ai-nodes button.is-running { border-color: var(--primary); color: var(--primary); animation: ai-node-pulse 1s ease-in-out infinite; }
+.runtime-playground__ai-nodes button.is-selected { box-shadow: 0 0 0 3px var(--primary); }
+@keyframes ai-node-pulse { 50% { opacity: .45; } }
+.runtime-playground__ai-ask { display: grid; gap: 10px; padding: 12px; border-radius: 10px; background: var(--surface); }
+.runtime-playground__ai-ask > div { display: flex; flex-wrap: wrap; gap: 8px; }
+.runtime-playground__ai-ask button { min-height: 38px; padding: 8px 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface2); color: var(--text); font: inherit; cursor: pointer; }
+.runtime-playground__ai-detail { display: grid; gap: 8px; padding: 12px; border-radius: 10px; background: var(--surface); font-size: 13px; }
+.runtime-playground__ai-detail pre { margin: 0; padding: 10px; white-space: pre-wrap; word-break: break-word; border-radius: 8px; background: var(--code-bg); color: var(--text); font: 12px/1.6 monospace; }

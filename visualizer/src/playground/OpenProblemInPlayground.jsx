@@ -22,12 +22,14 @@ export default function OpenProblemInPlayground({ source, input, disabled, gener
   return <>
     <button type="button" className="ctp-copy-btn" disabled={disabled} onClick={() => { setError(''); setOpen(true); }}>Edit in Code Playground</button>
     {open && createPortal(<dialog ref={dialog} className="access-dialog" onCancel={() => setOpen(false)} aria-labelledby="problem-playground-title">
-      <h2 id="problem-playground-title">Edit {title} in Code Playground?</h2>
-      <p>Copy this solution {input ? 'and the current input' : 'with suggested sample inputs'} into a separate saved workspace. Your existing playground draft stays intact.</p>
-      <p>Edit and run Python there to inspect its execution. Custom edits use general execution visuals; AI suggestions still require your acceptance.</p>
-      <p>Normal playground sign-in and usage limits still apply.</p>
-      {error && <p role="alert">{error}</p>}
-      <div className="access-actions"><button type="button" onClick={() => setOpen(false)}>Cancel</button><button type="button" className="access-primary" onClick={launch}>Open playground</button></div>
+      <div className="access-dialog-body">
+        <h2 id="problem-playground-title">Edit {title} in Code Playground?</h2>
+        <p>Copy this solution {input ? 'and the current input' : 'with suggested sample inputs'} into a separate saved workspace. Your existing playground draft stays intact.</p>
+        <p>Edit and run Python there to inspect its execution. Custom edits use general execution visuals; AI suggestions still require your acceptance.</p>
+        <p>Normal playground sign-in and usage limits still apply.</p>
+        {error && <p role="alert">{error}</p>}
+        <div className="access-actions"><button type="button" onClick={() => setOpen(false)}>Cancel</button><button type="button" className="access-primary" onClick={launch}>Open playground</button></div>
+      </div>
     </dialog>, document.body)}
   </>;
 }

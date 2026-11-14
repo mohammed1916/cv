@@ -472,6 +472,12 @@
   width: 106px;
 }
 
+.chat-connection-popover { position: fixed; z-index: 10001; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(440px, calc(100vw - 32px)); display: grid; gap: 10px; padding: 14px 16px 16px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); color: var(--text); box-shadow: 0 16px 48px #0006; font-size: 12px; line-height: 1.5; }
+.chat-connection-head { cursor: move; user-select: none; }
+.chat-connection-popover.chat-key-highlight { box-shadow: 0 0 0 2px var(--primary), 0 0 24px var(--primary); animation: chat-key-pulse 1s ease-in-out 3; }
+@keyframes chat-key-pulse { 50% { box-shadow: 0 0 0 4px var(--primary), 0 0 36px var(--primary); } }
+.chat-provider-settings-toggle { cursor: pointer; display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface2); color: var(--text); font: inherit; font-size: 12px; font-weight: 600; }
+.chat-provider-settings-toggle[aria-expanded="true"], .chat-provider-settings-toggle:hover { border-color: var(--primary); color: var(--primary); }
 .chat-model-controls .chat-cloud-key input {
   width: 150px;
 }
@@ -1858,7 +1864,7 @@ body.chat-select-mode .selectable.selected {
 .chat-drawer .chat-header-icon { border-radius:9px; width:34px; height:34px; flex-shrink:0; }
 .chat-drawer .chat-header-actions { gap:6px; }
 .chat-drawer .chat-header-actions button { width:34px; height:34px; padding:7px; border-radius:8px; color:var(--text); background:var(--surface); border:1px solid var(--border); }
-.chat-drawer .chat-provider-settings { margin-top:8px; font-size:12px; color:var(--text-muted); }
+.chat-drawer .chat-provider-settings { margin-top:8px; font-size:12px; color:var(--text-muted); position:relative; z-index:60; }
 .chat-drawer .chat-provider-settings summary {
   cursor:pointer; display:inline-flex; align-items:center; gap:8px; list-style:none;
   padding:5px 10px 5px 12px; border:1px solid var(--border); border-radius:999px;

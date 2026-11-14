@@ -29,6 +29,8 @@ import PythonTraceControls from "./PythonTraceControls";
 import RuntimeCodeEditor from "./RuntimeCodeEditor";
 import AIFixReview from "./AIFixReview";
 import { suggestPythonFix } from "./ai/suggestPythonFix";
+import { runAiFixLoop, ROUND_SIZES } from "./ai/aiFixLoop";
+import { useOptionalChatContext } from "../context/ChatContext";
 import {
   PLAYGROUND_WEBMCP_TOOL_COUNT,
   createPlaygroundWebMCPTools,
@@ -901,22 +903,75 @@ export default function RuntimePlayground({
   ]);
 
   const currentErrorMessage = currentError?.message ?? "";
+  const requestAiKey = useOptionalChatContext()?.requestAiKey;
+  const [aiRoundSize, setAiRoundSize] = useState(1);
+  const [aiLoop, setAiLoop] = useState({ status: "idle", attempts: [], message: "", awaiting: 0 });
+  const [selectedAttemptNumber, setSelectedAttemptNumber] = useState(null);
+  const aiControllerRef = useRef(null);
+  const aiContinueRef = useRef(null);
+  const aiLoopActive = aiLoop.status === "running" || aiLoop.status === "asking";
   const requestAiFix = useCallback(async () => {
-    if (!isPython || !currentErrorMessage || aiFixState.phase === "running") return;
-    setAiFixState({ phase: "running", proposal: null, message: "Asking the selected AI provider for a minimal repair..." });
-    try {
-      const proposal = await suggestPythonFix({
+    if (!isPython || !currentErrorMessage || aiLoopActive) return;
+    const controller = new AbortController();
+    aiControllerRef.current = controller;
+    setSelectedAttemptNumber(null);
+    setAiFixState({ phase: "idle", proposal: null, message: "" });
+    setAiLoop({ status: "running", attempts: [], message: "", awaiting: 0 });
+    const verify = async (proposal) => {
+      const parsedInput = parsePythonInput(proposal.inputSource);
+      if (parsedInput.error) throw new Error("The proposed input is not valid JSON.");
+      await runPythonTrace(proposal.source, {
+        timeoutMs: 20_000,
+        maxFrames: PYTHON_RUN_LIMITS.maxFrames,
+        input: parsedInput.value,
+        entry: pythonEntry,
+        signal: controller.signal,
+      });
+    };
+    const result = await runAiFixLoop({
+      base: {
         source: pythonSource,
         inputSource: pythonInputSource,
         entry: pythonEntry,
         error: { message: currentErrorMessage },
-        onProgress: (message) => setAiFixState({ phase: "running", proposal: null, message }),
-      });
-      setAiFixState({ phase: "review", proposal, message: "" });
-    } catch (error) {
-      setAiFixState({ phase: "error", proposal: null, message: errorMessage(error) });
+      },
+      roundSize: aiRoundSize,
+      suggest: (options) => suggestPythonFix(options),
+      verify,
+      onUpdate: (attempts) => setAiLoop((previous) => ({ ...previous, attempts })),
+      askToContinue: (count) => new Promise((resolve) => {
+        aiContinueRef.current = resolve;
+        setAiLoop((previous) => ({ ...previous, status: "asking", awaiting: count }));
+      }),
+      signal: controller.signal,
+    });
+    aiControllerRef.current = null;
+    aiContinueRef.current = null;
+    if (result.status === "fixed") {
+      setAiFixState({ phase: "review", proposal: result.proposal, message: "" });
+      setAiLoop({ status: "fixed", attempts: result.attempts, message: "A fix ran without errors. Review it before accepting.", awaiting: 0 });
+      return;
     }
-  }, [aiFixState.phase, currentErrorMessage, isPython, pythonEntry, pythonInputSource, pythonSource]);
+    if (result.status === "setup") {
+      requestAiKey?.();
+      setAiLoop({ status: "setup", attempts: result.attempts, message: `${result.message} The AI connection panel is highlighted in the chat.`, awaiting: 0 });
+      return;
+    }
+    const messages = {
+      stopped: "Stopped. You can start again with Fix with AI.",
+      limit: `${result.attempts.length} attempts did not produce a working fix. Press Fix with AI to try again.`,
+    };
+    setAiLoop({ status: result.status, attempts: result.attempts, message: messages[result.status] || "", awaiting: 0 });
+  }, [aiLoopActive, aiRoundSize, currentErrorMessage, isPython, pythonEntry, pythonInputSource, pythonSource, requestAiKey]);
+  const stopAiFix = useCallback(() => {
+    aiControllerRef.current?.abort();
+    aiContinueRef.current?.("stop");
+  }, []);
+  const continueAiFix = useCallback(() => {
+    setAiLoop((previous) => ({ ...previous, status: "running" }));
+    aiContinueRef.current?.("continue");
+    aiContinueRef.current = null;
+  }, []);
 
   const requestAiWorkspaceChange = useCallback(async (instruction) => {
     if (!isPython || !instruction.trim() || aiFixState.phase === "running") return;
@@ -932,9 +987,14 @@ export default function RuntimePlayground({
       });
       setAiFixState({ phase: "review", proposal, message: "" });
     } catch (error) {
+      if (error?.code === "MISSING_AI_SETUP") {
+        requestAiKey?.();
+        setAiFixState({ phase: "idle", proposal: null, message: `${errorMessage(error)} The AI connection panel is highlighted in the chat.` });
+        return;
+      }
       setAiFixState({ phase: "error", proposal: null, message: errorMessage(error) });
     }
-  }, [aiFixState.phase, isPython, pythonEntry, pythonInputSource, pythonSource]);
+  }, [aiFixState.phase, isPython, pythonEntry, pythonInputSource, pythonSource, requestAiKey]);
 
   const acceptAiFix = useCallback(() => {
     const proposal = aiFixState.proposal;
@@ -1566,9 +1626,70 @@ export default function RuntimePlayground({
                   <strong>{currentError.kind} error</strong>
                   <span>{currentError.message}</span>
                   {isPython && aiFixState.phase !== "review" && (
-                    <button type="button" onClick={requestAiFix} disabled={aiFixState.phase === "running"}>
-                      {aiFixState.phase === "running" ? "Preparing fix..." : "Fix with AI"}
-                    </button>
+                    <div className="runtime-playground__ai-loop">
+                      <div className="runtime-playground__ai-loop-controls">
+                        <label>
+                          Attempts before asking
+                          <select
+                            value={aiRoundSize}
+                            onChange={(event) => setAiRoundSize(Number(event.target.value))}
+                            disabled={aiLoopActive}
+                          >
+                            {ROUND_SIZES.map((size) => (
+                              <option key={size} value={size}>{size} {size === 1 ? "attempt" : "attempts"}</option>
+                            ))}
+                          </select>
+                        </label>
+                        {aiLoopActive ? (
+                          <button type="button" className="runtime-playground__ai-stop" onClick={stopAiFix}>Stop</button>
+                        ) : (
+                          <button type="button" className="runtime-playground__button--primary" onClick={requestAiFix}>
+                            {aiLoop.attempts.length > 0 ? "Fix with AI again" : "Fix with AI"}
+                          </button>
+                        )}
+                      </div>
+                      {aiLoop.attempts.length > 0 && (
+                        <ol className="runtime-playground__ai-nodes" aria-label="AI attempts">
+                          {aiLoop.attempts.map((attempt) => (
+                            <li key={attempt.n}>
+                              <button
+                                type="button"
+                                className={`is-${attempt.status}${selectedAttemptNumber === attempt.n ? " is-selected" : ""}`}
+                                aria-pressed={selectedAttemptNumber === attempt.n}
+                                aria-label={`Attempt ${attempt.n}: ${attempt.status}`}
+                                onClick={() => setSelectedAttemptNumber(attempt.n)}
+                              >
+                                {attempt.n}
+                              </button>
+                            </li>
+                          ))}
+                        </ol>
+                      )}
+                      {aiLoop.status === "asking" && (
+                        <div className="runtime-playground__ai-ask" role="status">
+                          <span>{aiLoop.awaiting} {aiLoop.awaiting === 1 ? "attempt" : "attempts"} did not fix it. Try {Math.min(aiRoundSize, 5 - aiLoop.awaiting)} more?</span>
+                          <div>
+                            <button type="button" className="runtime-playground__button--primary" onClick={continueAiFix}>Yes, keep trying</button>
+                            <button type="button" onClick={stopAiFix}>Stop</button>
+                          </div>
+                        </div>
+                      )}
+                      {aiLoop.status === "running" && (
+                        <small role="status">Attempt {aiLoop.attempts.length} is running. Each result is checked by running it.</small>
+                      )}
+                      {selectedAttemptNumber && aiLoop.attempts.find((attempt) => attempt.n === selectedAttemptNumber) && (() => {
+                        const attempt = aiLoop.attempts.find((item) => item.n === selectedAttemptNumber);
+                        return (
+                          <div className="runtime-playground__ai-detail">
+                            <strong>Attempt {attempt.n}: {attempt.status === "fixed" ? "worked" : attempt.status === "failed" ? "did not work" : "running"}</strong>
+                            {attempt.reason && <p>{attempt.reason}</p>}
+                            {attempt.summary && <p>{attempt.summary}</p>}
+                            <pre aria-label={`Response from attempt ${attempt.n}`}>{attempt.raw || "No response text was returned."}</pre>
+                          </div>
+                        );
+                      })()}
+                      {aiLoop.message && <small role="status">{aiLoop.message}</small>}
+                    </div>
                   )}
                   {aiFixState.message && <small>{aiFixState.message}</small>}
                 </div>

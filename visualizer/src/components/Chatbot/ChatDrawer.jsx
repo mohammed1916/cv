@@ -171,6 +171,48 @@ export default function ChatDrawer() {
     };
   }, [showCoachingInfo]);
   const [providerMenuOpen, setProviderMenuOpen] = useState(false);
+  const connectionRef = useRef(null);
+  // Set when the playground needs an AI key; ChatContext opens the drawer and bumps this.
+  const { aiKeyRequest: keyRequest, aiConnectionOpen: connectionOpen, setAiConnectionOpen: setConnectionOpen } = useChatContext();
+  useEffect(() => {
+    const popover = connectionRef.current;
+    if (!connectionOpen || !popover) return undefined;
+    popover.querySelector('input[type="password"]')?.focus();
+    if (!keyRequest) return undefined;
+    popover.classList.add("chat-key-highlight");
+    const timer = setTimeout(() => popover.classList.remove("chat-key-highlight"), 3000);
+    return () => clearTimeout(timer);
+  }, [connectionOpen, keyRequest]);
+  useEffect(() => {
+    if (!connectionOpen) return undefined;
+    const onKey = (event) => { if (event.key === "Escape") setConnectionOpen(false); };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [connectionOpen, setConnectionOpen]);
+  // Dragging the AI connection popup by its header; null means the default centred position.
+  const [connectionPos, setConnectionPos] = useState(null);
+  const connectionDragRef = useRef(null);
+  const startConnectionDrag = (event) => {
+    if (event.button !== 0 || event.target.closest("button")) return;
+    const rect = connectionRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    connectionDragRef.current = { dx: event.clientX - rect.left, dy: event.clientY - rect.top, width: rect.width };
+    const move = (moveEvent) => {
+      const drag = connectionDragRef.current;
+      if (!drag) return;
+      const x = Math.max(0, Math.min(window.innerWidth - drag.width, moveEvent.clientX - drag.dx));
+      const y = Math.max(0, Math.min(window.innerHeight - 40, moveEvent.clientY - drag.dy));
+      setConnectionPos({ x, y });
+    };
+    const stop = () => {
+      connectionDragRef.current = null;
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerup", stop);
+    };
+    window.addEventListener("pointermove", move);
+    window.addEventListener("pointerup", stop);
+    event.preventDefault();
+  };
   const [coachingMode, setCoachingMode] = useState(() => {
     try { return readCoachingMode(window.localStorage); } catch { return false; }
   });
@@ -827,8 +869,31 @@ When asked about code or data structures, be precise and educational.`,
                 </div>,
                 document.body,
               )}
-              <details className="chat-provider-settings" data-chat-ignore>
-              <summary>AI connection · {selectedProviderLabel}</summary>
+              <button
+                type="button"
+                className="chat-provider-settings-toggle"
+                data-chat-ignore
+                aria-haspopup="dialog"
+                aria-expanded={connectionOpen}
+                onClick={() => setConnectionOpen((open) => !open)}
+              >
+                AI connection · {selectedProviderLabel}
+              </button>
+              {connectionOpen && (
+              <div
+                className="chat-connection-popover"
+                data-chat-ignore
+                role="dialog"
+                aria-modal="false"
+                aria-label="AI connection"
+                ref={connectionRef}
+                onMouseDown={(event) => event.stopPropagation()}
+                style={connectionPos ? { left: connectionPos.x, top: connectionPos.y, transform: "none" } : undefined}
+              >
+              <div className="chat-coaching-popover-head chat-connection-head" title="Drag to move" onPointerDown={startConnectionDrag}>
+                <strong>AI connection</strong>
+                <button type="button" className="chat-coaching-x" aria-label="Close AI connection" onClick={() => setConnectionOpen(false)}>×</button>
+              </div>
               <form
                 className="chat-model-controls"
                 data-chat-ignore
@@ -978,7 +1043,8 @@ When asked about code or data structures, be precise and educational.`,
                   site does not keep it. Local Ollama needs no key.
                 </p>
               )}
-              </details>
+              </div>
+              )}
             </div>
           </div>
           <div className="chat-header-actions">

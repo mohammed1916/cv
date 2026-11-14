@@ -82,6 +82,14 @@ export function ChatProvider({ children }) {
   const messages = useMemo(() => activeConversation?.messages || [], [activeConversation]);
 
   const openChat = useCallback(() => setIsOpen(true), []);
+  // Opens the assistant and asks it to highlight the AI connection panel.
+  const [aiKeyRequest, setAiKeyRequest] = useState(0);
+  const [aiConnectionOpen, setAiConnectionOpen] = useState(false);
+  const requestAiKey = useCallback(() => {
+    setIsOpen(true);
+    setAiConnectionOpen(true);
+    setAiKeyRequest((count) => count + 1);
+  }, []);
   const closeChat = useCallback(() => setIsOpen(false), []);
   const toggleChat = useCallback(() => setIsOpen((v) => !v), []);
 
@@ -208,6 +216,10 @@ export function ChatProvider({ children }) {
         floatingMode,
         isOpen,
         openChat,
+        aiKeyRequest,
+        aiConnectionOpen,
+        setAiConnectionOpen,
+        requestAiKey,
         closeChat,
         toggleChat,
         enableSelectMode,

@@ -78,21 +78,28 @@ Preserve the algorithm. You may repair input shape, add conventional ListNode or
     },
   ]
   const response = await runWorkspaceAgent(messages, options, { ...dependencies, stream, config })
-  const parsed = parseJson(response)
-  if (typeof parsed.source !== 'string' || !parsed.source.trim()) {
-    throw new Error('The AI fix is missing the complete repaired source.')
+  const fail = (message) => Object.assign(new Error(message), { raw: response })
+  let parsed
+  try {
+    parsed = parseJson(response)
+  } catch (failure) {
+    throw fail(failure.message)
   }
-  if (!Object.hasOwn(parsed, 'inputs')) throw new Error('The AI fix is missing its input proposal.')
+  if (typeof parsed.source !== 'string' || !parsed.source.trim()) {
+    throw fail('The AI fix is missing the complete repaired source.')
+  }
+  if (!Object.hasOwn(parsed, 'inputs')) throw fail('The AI fix is missing its input proposal.')
   const proposal = {
     source: parsed.source,
     inputSource: JSON.stringify(parsed.inputs, null, 2),
     summary: typeof parsed.summary === 'string' ? parsed.summary : 'AI repair proposal',
     changes: Array.isArray(parsed.changes) ? parsed.changes.map(String).slice(0, 12) : [],
+    raw: response,
   }
   if (sameText(proposal.source, source) && sameJson(proposal.inputSource, inputSource)) {
     const fallback = nodeInputFallback({ source, inputSource, error })
-    if (fallback) return fallback
-    throw new Error('The AI described a fix but returned no code or input changes. Try again or choose a stronger model.')
+    if (fallback) return { ...fallback, raw: response }
+    throw fail('The AI described a fix but returned no code or input changes. Try again or choose a stronger model.')
   }
   return proposal
 }
