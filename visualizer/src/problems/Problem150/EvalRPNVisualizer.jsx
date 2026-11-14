@@ -1,11 +1,10 @@
 import authoredExamples0 from '../../config/examples/eval-rpn.js';
-﻿import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom';
 import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import IndexedSequence from "../../components/shared/IndexedSequence";
-import StackqView from "../../components/shared/StackqView";
-import Stack3D from "../../components/viz3d/Stack3D";
+import StackOperationView from "../../components/shared/StackOperationView";
 import { StackqLog, stackqView } from "../../components/shared/stackqModel.js";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -47,8 +46,11 @@ function generateSteps(tokens) {
         const t = tokens[ti];
         if (["+", "-", "*", "/"].includes(t)) {
             steps.push({ activeLine: 4, ti, stack: lane.items, stackq: view(), message: `Token "${t}" is an operator.` });
-            const b = lane.pop(`right operand for ${t}`), a = lane.pop(`left operand for ${t}`);
-            steps.push({ activeLine: 5, ti, stack: lane.items, stackq: view(), a, b, op: t, message: `Pop b=${b}, a=${a}` });
+            // One pop per step, so each value visibly leaves the stack in turn (top first).
+            const b = lane.pop(`right operand for ${t}`);
+            steps.push({ activeLine: 5, ti, stack: lane.items, stackq: view(), b, op: t, message: `Pop b=${b} from the top of the stack.` });
+            const a = lane.pop(`left operand for ${t}`);
+            steps.push({ activeLine: 5, ti, stack: lane.items, stackq: view(), a, b, op: t, message: `Pop a=${a}. Both operands are now in variables.` });
             let result;
             if (t === "+") { result = a + b; steps.push({ activeLine: 6, ti, stack: lane.items, stackq: view(), a, b, op: t, message: `${a} + ${b} = ${result}` }); }
             else if (t === "-") { result = a - b; steps.push({ activeLine: 7, ti, stack: lane.items, stackq: view(), a, b, op: t, message: `${a} - ${b} = ${result}` }); }
@@ -128,21 +130,11 @@ export default function EvalRPNVisualizer() {
                 roleAt={(i) => (['+', '-', '*', '/'].includes(tokens[i]) ? 'operator' : '')}
             />
 
-            <div style={{ display: 'flex', gap: 16, alignItems: 'flex-end', flexWrap: 'wrap' }}>
-              <Stack3D
-                label="Stack"
-                items={step?.stack ?? []}
-                highlightIndex={(step?.stack?.length ?? 1) - 1}
-                emptyText="empty"
-                topBadge="top"
-              />
-              <div style={{ display: 'grid', gap: 6, fontSize: 12, minWidth: 140 }}>
-                <strong>Popped into variables</strong>
-                <span style={{ fontFamily: 'monospace' }}>{step?.a != null ? `b = ${step.b}` : 'nothing popped'}</span>
-                <span style={{ fontFamily: 'monospace' }}>{step?.a != null ? `a = ${step.a}` : ''}</span>
-              </div>
-            </div>
-            {step?.stackq && <StackqView {...step.stackq} />}
+            <StackOperationView
+              items={step?.stack ?? []}
+              popped={[...(step?.b != null ? [{ name: "b", value: step.b }] : []), ...(step?.a != null ? [{ name: "a", value: step.a }] : [])]}
+              stackq={step?.stackq ?? null}
+            />
 
             {step?.a != null && (
                 <div style={{ padding: 12, backgroundColor: "var(--surface2, var(--surface2))", borderRadius: 6, border: '1px solid var(--error)', display: 'flex', gap: 8, alignItems: 'center', justifyContent: 'center', fontSize: 16, fontWeight: 'bold' }}>
@@ -161,7 +153,7 @@ export default function EvalRPNVisualizer() {
     );
 
     const playbackPanel = (
-      <>
+        <>
             <PlaybackControls
                 isPlaying={isPlaying}
                 isDone={isDone}
@@ -199,7 +191,7 @@ export default function EvalRPNVisualizer() {
         <div className="rpn-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-              <>
+                <>
                     {panelDivs.primary && createPortal(vizPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

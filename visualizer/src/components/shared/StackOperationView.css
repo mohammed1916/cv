@@ -1,0 +1,6 @@
+.stack-op-view { display: grid; gap: 12px; }
+.stack-op-view__row { display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap; }
+.stack-op-view__stack { width: 200px; min-width: 200px; }
+.stack-op-view__popped { display: grid; gap: 6px; min-width: 140px; font-size: 12px; }
+.stack-op-view__var, .stack-op-view__none { font-family: monospace; }
+.stack-op-view__none { color: var(--text-muted); }

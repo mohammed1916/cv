@@ -15,15 +15,16 @@
   border: 1px solid var(--border);
   border-radius: 10px;
   background: var(--surface2);
-  padding: 8px;
+  padding: 22px 12px;
   min-height: 56px;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: visible;
 }
 
 .s3d-box {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 6px 0;
   gap: 8px;
   transform-style: preserve-3d;
 }
